@@ -1,0 +1,113 @@
+{
+ "card": "Relentless Rats",
+ "family": "conditional-static",
+ "author": "cli-20261014T032241Z-e03848a5 (Oracle + CR only)",
+ "oracle_sha": "7f58c2dcc528",
+ "scenarios": [
+  {
+   "name": "pumps-per-named-creature-any-controller",
+   "cr": [
+    "604.3",
+    "613.1f",
+    "613.4c"
+   ],
+   "why": "Relentless Rats counts each OTHER creature on the battlefield named Relentless Rats regardless of controller: with two on the opponent's side, p0's sees two and is 4/4, and each of p1's sees two and is 4/4.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Relentless Rats"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Relentless Rats",
+      "Relentless Rats"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "C"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Relentless Rats",
+     "pt": "4/4"
+    },
+    {
+     "card": "p1:Relentless Rats",
+     "pt": "4/4"
+    },
+    {
+     "card": "p1:Relentless Rats#2",
+     "pt": "4/4"
+    }
+   ]
+  },
+  {
+   "name": "base-with-no-other-named-creature",
+   "cr": [
+    "604.3",
+    "613.1f"
+   ],
+   "why": "A lone Relentless Rats has no other creature named Relentless Rats, so it stays its printed 2/2.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Relentless Rats"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "C"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Relentless Rats",
+     "pt": "2/2"
+    }
+   ]
+  },
+  {
+   "name": "differently-named-rat-does-not-count",
+   "cr": [
+    "604.3",
+    "201.2",
+    "613.1f"
+   ],
+   "why": "The pump keys on the exact name Relentless Rats, not the Rat subtype: a Rat Colony beside it does not pump it (2/2), while Rat Colony does count the Relentless Rats as an other Rat (2/1 + 1/+0 = 3/1).",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Relentless Rats",
+      "Rat Colony"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "C"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Relentless Rats",
+     "pt": "2/2"
+    },
+    {
+     "card": "p0:Rat Colony",
+     "pt": "3/1"
+    }
+   ]
+  }
+ ]
+}

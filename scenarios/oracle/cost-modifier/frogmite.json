@@ -1,0 +1,210 @@
+{
+ "card": "Frogmite",
+ "family": "cost-modifier",
+ "author": "cli-20261014T032241Z-e03848a5 (Oracle + CR only)",
+ "oracle_sha": "c04f9ed78560",
+ "scenarios": [
+  {
+   "name": "no-artifacts-full-price",
+   "cr": [
+    "702.41a",
+    "601.2f"
+   ],
+   "why": "With no artifacts Affinity for artifacts removes nothing, so it costs the full {4}: three mana is not enough, four casts a 2/2.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Frogmite"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "CCC",
+     "expect": [
+      {
+       "offered": {
+        "seat": 0,
+        "kind": "cast",
+        "card": "p0:Frogmite"
+       },
+       "want": false
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Frogmite",
+     "mana": "C"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Frogmite",
+     "zone": "battlefield",
+     "pt": "2/2"
+    },
+    {
+     "pool": {
+      "p0": ""
+     }
+    }
+   ]
+  },
+  {
+   "name": "one-artifact-costs-three",
+   "cr": [
+    "702.41a",
+    "601.2f"
+   ],
+   "why": "One artifact removes one generic mana: {3}. Two mana is not enough, three casts it.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Frogmite"
+     ],
+     "battlefield": [
+      "Ornithopter"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "CC",
+     "expect": [
+      {
+       "offered": {
+        "seat": 0,
+        "kind": "cast",
+        "card": "p0:Frogmite"
+       },
+       "want": false
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Frogmite",
+     "mana": "C"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Frogmite",
+     "zone": "battlefield",
+     "pt": "2/2"
+    },
+    {
+     "pool": {
+      "p0": ""
+     }
+    }
+   ]
+  },
+  {
+   "name": "four-artifacts-cast-for-free",
+   "cr": [
+    "702.41a",
+    "601.2f"
+   ],
+   "why": "Four artifacts remove all four generic mana, so it costs {0} and can be cast with an empty pool.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Frogmite"
+     ],
+     "battlefield": [
+      "Ornithopter",
+      "Ornithopter",
+      "Ornithopter",
+      "Ornithopter"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Frogmite"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Frogmite",
+     "zone": "battlefield",
+     "pt": "2/2"
+    }
+   ]
+  },
+  {
+   "name": "opponents-artifacts-do-not-count",
+   "cr": [
+    "702.41a",
+    "109.5"
+   ],
+   "why": "Affinity counts only artifacts its caster controls: four on the opponent's battlefield give no reduction, so three mana still is not enough.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Frogmite"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Ornithopter",
+      "Ornithopter",
+      "Ornithopter",
+      "Ornithopter"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "CCC",
+     "expect": [
+      {
+       "offered": {
+        "seat": 0,
+        "kind": "cast",
+        "card": "p0:Frogmite"
+       },
+       "want": false
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Frogmite",
+     "mana": "C"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Frogmite",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,188 @@
+package oraclegen
+
+import (
+	"regexp"
+	"strings"
+
+	"github.com/adams-shaun/gorge/engine/cards"
+)
+
+// CompareNoLibraryOrder opts a generated item out of comparing the shuffled
+// order of a library. Library counts and all other snapshot fields remain
+// compared.
+const CompareNoLibraryOrder = "no_library_order"
+
+// CompareHandCount compares only the number of cards in hand when a
+// shuffle-then-draw fixture cannot make the draw uniform.
+const CompareHandCount = "hand_count"
+
+// CompareGraveyardCount compares only the number of cards in each graveyard
+// when a shuffle-then-read fixture (shuffle a card into a library, then
+// manifest dread or mill) sends a randomly chosen card off the library top
+// to the graveyard.
+const CompareGraveyardCount = "graveyard_count"
+
+// intoLibraryText matches prose that moves a card into a library ("shuffle it
+// into its owner's library", "puts it into their library").
+var intoLibraryText = regexp.MustCompile(`\binto (?:\S+ ){0,3}?library`)
+
+// CanShuffleLibrary reports whether a face's effect graph can shuffle a card
+// that is not the library's filler into a library. XMage shuffles at random
+// and gorge deterministically, so only then does the library order after the
+// shuffle differ by luck. A search-and-shuffle only removes a card from a
+// uniform library, so it is not marked. It inspects linked APIs, SVar bodies
+// and the prose fallback so every level-B template for a face gets the same
+// structural opt-in (templates.GenerateB). Level-A items stay unmarked so their
+// scenario shas, and the verdicts frozen against them, do not move.
+func CanShuffleLibrary(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	var w shuffleWalk
+	// Some owner-directed trigger bodies are represented in the corpus as a
+	// prose trigger while their effect is carried by an unlinked SVar. Keep
+	// the oracle text covered as a fallback to the API graph.
+	oracle := strings.ToLower(f.Oracle)
+	w.shuffles = strings.Contains(oracle, "shuffle")
+	w.inserts = intoLibraryText.MatchString(oracle)
+	seen := map[*cards.SA]bool{}
+	var visit func(*cards.SA)
+	visit = func(sa *cards.SA) {
+		if sa == nil || seen[sa] {
+			return
+		}
+		seen[sa] = true
+		w.api(sa.API, sa.ParamStr(cards.PKOrigin), sa.ParamStr(cards.PKDestination), sa.ParamStr(cards.PKShuffle))
+		visit(sa.Sub)
+	}
+	for _, sa := range f.Abilities {
+		visit(sa)
+	}
+	for i := range f.Triggers {
+		visit(f.Triggers[i].Effect)
+	}
+	for i := range f.Repls {
+		visit(f.Repls[i].With)
+	}
+	for _, body := range f.SVars {
+		p := svarParams(body)
+		w.api(p["DB"], p["Origin"], p["Destination"], p["Shuffle"])
+	}
+	return w.shuffles && w.inserts
+}
+
+// shuffleWalk accumulates the two facts CanShuffleLibrary needs: some effect
+// shuffles a library, and some effect puts a card into a library from outside
+// it.
+type shuffleWalk struct{ shuffles, inserts bool }
+
+func (w *shuffleWalk) api(api, origin, destination, shuffle string) {
+	api = strings.ToLower(api)
+	if api == "shuffle" {
+		w.shuffles = true
+	}
+	if api != "changezone" && api != "changezoneall" {
+		if api == "diguntil" && strings.EqualFold(shuffle, "True") {
+			w.shuffles = true
+		}
+		return
+	}
+	if !strings.EqualFold(destination, "Library") {
+		return
+	}
+	if !strings.EqualFold(origin, "Library") {
+		w.inserts = true
+		if strings.EqualFold(shuffle, "True") {
+			w.shuffles = true
+		}
+	}
+}
+
+// ShufflesSearchedLibrary reports whether an ability's effect chain can
+// shuffle a library it searched or randomises in place: a library-origin
+// ChangeZone (a search, which CR 701.23 follows with a shuffle), a Shuffle
+// effect, or a Shuffle$ True dig. Unlike CanShuffleLibrary it does not need a
+// card put INTO the library: when the fixture's library holds distinct names
+// (NamedLibrary), the order such a shuffle leaves is luck in XMage.
+func ShufflesSearchedLibrary(sa *cards.SA) bool {
+	seen := map[*cards.SA]bool{}
+	for ; sa != nil && !seen[sa]; sa = sa.Sub {
+		seen[sa] = true
+		switch strings.ToLower(sa.API) {
+		case "shuffle":
+			return true
+		case "changezone", "changezoneall":
+			for _, o := range strings.Split(sa.ParamStr(cards.PKOrigin), ",") {
+				if strings.EqualFold(strings.TrimSpace(o), "Library") {
+					return true
+				}
+			}
+		case "diguntil", "dig":
+			if strings.EqualFold(sa.ParamStr(cards.PKShuffle), "True") {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// FaceShufflesSearched reports whether anything on a face -- an activated
+// ability, a trigger, a replacement or an SVar body the script links in by
+// name -- can search-and-shuffle or otherwise shuffle a library. A level-B
+// item exercises one requirement, but the scenario runs the whole card: a
+// static or combat item still casts it (an enters-the-battlefield tutor) or
+// deals damage (a combat-damage search), so the exercised ability alone
+// misses the shuffle (Prismatic Undercurrents, Tempest Hawk, Heaped Harvest).
+func FaceShufflesSearched(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	for _, sa := range f.Abilities {
+		if ShufflesSearchedLibrary(sa) {
+			return true
+		}
+	}
+	for i := range f.Triggers {
+		if ShufflesSearchedLibrary(f.Triggers[i].Effect) {
+			return true
+		}
+	}
+	for i := range f.Repls {
+		if ShufflesSearchedLibrary(f.Repls[i].With) {
+			return true
+		}
+	}
+	for _, body := range f.SVars {
+		p := svarParams(body)
+		switch strings.ToLower(p["DB"]) {
+		case "shuffle":
+			return true
+		case "changezone", "changezoneall":
+			for _, o := range strings.Split(p["Origin"], ",") {
+				if strings.EqualFold(strings.TrimSpace(o), "Library") {
+					return true
+				}
+			}
+		case "dig", "diguntil":
+			if strings.EqualFold(p["Shuffle"], "True") {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// NamedLibrary reports whether any seat's setup library holds a card other
+// than the runner's Wastes filler, so a shuffle of it is not order-neutral.
+func NamedLibrary(sc *Scenario) bool {
+	for _, s := range sc.Setup {
+		for _, zone := range [][]string{s.Library, s.LibraryTop} {
+			for _, n := range zone {
+				if n != "Wastes" {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}

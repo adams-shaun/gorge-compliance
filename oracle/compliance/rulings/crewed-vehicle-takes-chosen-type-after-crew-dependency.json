@@ -1,0 +1,13 @@
+{
+  "id": "crewed-vehicle-takes-chosen-type-after-crew-dependency",
+  "status": "xmage_wrong",
+  "match": {
+    "template": "activate",
+    "op": "resolve",
+    "field": "permanents",
+    "diff": "$CARD types gorge+[dinosaur] xmage+[]"
+  },
+  "ruling": "Lifecraft Engine's 'Vehicle creatures you control are the chosen creature type' is a layer-4 type-adding effect that depends (CR 613.8a) on the Crew effect that makes the Vehicle an artifact creature: the crew effect applies first, so the crewed Vehicle is a creature when the chosen-type effect is applied and gains the chosen type. gorge orders the two by that dependency; XMage orders them by timestamp (the static's is older than the crew effect's), so the crewed Vehicle never gains the chosen type. XMage's layer-ordering artifact, not a gorge defect.",
+  "cr": ["613.8", "702.122"],
+  "source": "Lifecraft Engine (activate#0.0), regressed by merge f8487e5c5 (fix-layers613), triaged 2026-10-13"
+}

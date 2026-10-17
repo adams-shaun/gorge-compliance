@@ -1,0 +1,509 @@
+// Package gate is the compliance claim's check (spec section 8): for a
+// declared set, every manifest card must be fully supported and covered by
+// a passing verdict whose frozen expectation gorge still meets at this head
+// -- or by a hand-authored oracle scenario. The CI test
+// (TestDeclaredSetsCompliantChunkNN) and `oraclediff status` share it.
+package gate
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+	"sort"
+	"strings"
+
+	"github.com/adams-shaun/gorge-compliance/internal/gorgedir"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen/templates"
+	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/effects"
+	"github.com/adams-shaun/gorge/engine/rules"
+)
+
+// LevelMeaning says what a claim at level certifies and what it does not
+// (spec 2026-10-03 section 11.3 C6: level A is shallow and must say so).
+// Every gate report prints it next to the claim.
+func LevelMeaning(level string) string {
+	switch level {
+	case "A":
+		return "level A: every card is fully supported and its generated cast-and-resolve, play-land or counter-spell scenario agrees with XMage (or a ruled divergence, or a hand oracle scenario passes); activated abilities, trigger modes, attacks/blocks and statics are NOT exercised (level B)"
+	case "B":
+		return "level B: level A plus one generated scenario per activated ability, trigger mode, static and attack/block, each compared with XMage; a requirement that no v1 template serves (an unusual activation zone, a trigger mode outside the recipe table, a cost or legality static, a face after 0) is a template gap and waits for its template"
+	}
+	return "level " + level + ": undefined"
+}
+
+// Problem is one card that keeps a set from its declared level.
+type Problem struct {
+	Card   string `json:"card"`
+	Reason string `json:"reason"`
+}
+
+// StaleVerdictReason is the reason prefix rowOK reports for a verdict recorded
+// for a different scenario (a moved scenario sha). Only a host XMage replay
+// (scripts/compliance-pass.sh) clears it, so it is not a defect a ticket can
+// fix; adopt.Bucket classifies it as BucketStale and the per-ticket gate
+// (ops/scripts/gate_affected.sh) treats a stale-only certification failure as a
+// non-charging requeue instead of a fix round.
+const StaleVerdictReason = "verdict is for an older scenario"
+
+// Stale reports whether p is a stale-verdict problem: a verdict recorded for
+// an older scenario, which a host XMage replay clears.
+func Stale(p Problem) bool { return strings.HasPrefix(p.Reason, StaleVerdictReason) }
+
+// CertVerdict classifies a certification check's problems for the per-ticket
+// gate's stale-only classifier (ops/scripts/gate_affected.sh, which reads the
+// GORGE-CERT-RESULT line the chunk tests log): "clean" (no problems),
+// "stale-only" (every problem is a stale verdict, so the failure is a host
+// replay's to clear, not a defect), or "mixed" (at least one non-stale
+// problem, a real regression the gate must still fail).
+func CertVerdict(probs []Problem) string {
+	for _, p := range probs {
+		if !Stale(p) {
+			return "mixed"
+		}
+	}
+	if len(probs) == 0 {
+		return "clean"
+	}
+	return "stale-only"
+}
+
+// Hash is the sha256 hex of b.
+func Hash(b []byte) string {
+	h := sha256.Sum256(b)
+	return hex.EncodeToString(h[:])
+}
+
+// ItemSHA is the hash a verdict row records for a generated scenario.
+func ItemSHA(it oraclegen.Item) string {
+	b, _ := json.Marshal(it)
+	return Hash(b)
+}
+
+// GorgeCanon replays a generated scenario in gorge and returns the hash of
+// its canonical snapshots: the legacy whole-snapshot expectation
+// (VerdictRow.CanonSHA), superseded by Freeze.
+func GorgeCanon(reg *cards.Registry, it oraclegen.Item) (string, error) {
+	res, err := rules.RunOracleScenarioJSON(reg, it.Raw())
+	if err != nil {
+		return "", err
+	}
+	return Hash([]byte(oraclediff.CanonicalOpts(res.Snapshots, it.Compare, it.Ignore...))), nil
+}
+
+// HandOracleRel is where gorge-compliance's hand-authored oracle scenarios
+// live, relative to the repository root (TestOracleAudit in audit/ runs them).
+var HandOracleRel = filepath.Join("scenarios", "oracle")
+
+// GorgeHandOracleRel is the residual hand-scenario directory inside the gorge
+// module: the few scenario files gorge's own card tests load, kept there as
+// the runner's contract check. A scenario file lives in exactly one of the
+// two directories; the gate and the audit read their union.
+var GorgeHandOracleRel = filepath.Join("engine", "rules", "testdata", "oracle")
+
+// HandOracleDirs is the union the gate reads: root's own scenarios
+// (HandOracleRel) and gorge's residual directory, located through gorgedir
+// (`go list -m github.com/adams-shaun/gorge`, so a go.work member, a replace
+// or the module cache). It is an error, not an empty table, when either
+// directory cannot be found: an empty table would silently report every
+// hand-covered card as uncovered.
+func HandOracleDirs(root string) ([]string, error) {
+	own := filepath.Join(root, HandOracleRel)
+	g, err := gorgedir.Join(GorgeHandOracleRel)
+	if err != nil {
+		return nil, fmt.Errorf("gate: locating gorge's residual hand oracle scenarios: %w", err)
+	}
+	for _, d := range []string{own, g} {
+		if fi, err := os.Stat(d); err != nil || !fi.IsDir() {
+			return nil, fmt.Errorf("gate: hand oracle scenario directory %s is missing", d)
+		}
+	}
+	return []string{own, g}, nil
+}
+
+// HandScenarios lists the cards that have a hand-authored oracle scenario
+// under any of oracleDirs (HandOracleDirs) and no known-divergent row in any
+// of them. The audit (audit.TestOracleAudit) holds every such scenario green.
+func HandScenarios(oracleDirs ...string) (map[string]bool, error) {
+	out := map[string]bool{}
+	var paths, agg, per []string
+	for _, d := range oracleDirs {
+		p, err := filepath.Glob(filepath.Join(d, "*", "*.json"))
+		if err != nil {
+			return nil, err
+		}
+		paths = append(paths, p...)
+		a, _ := filepath.Glob(filepath.Join(d, "*", "known-divergent.json"))
+		agg = append(agg, a...)
+		k, _ := filepath.Glob(filepath.Join(d, "*", "known-divergent", "*.json"))
+		per = append(per, k...)
+	}
+	divergent := map[string]bool{}
+	for _, p := range agg {
+		raw, err := os.ReadFile(p)
+		if err != nil {
+			return nil, err
+		}
+		var rows map[string]string
+		if json.Unmarshal(raw, &rows) == nil {
+			for k := range rows {
+				divergent[strings.SplitN(k, "/", 2)[0]] = true
+			}
+		}
+	}
+	for _, p := range per {
+		raw, err := os.ReadFile(p)
+		if err != nil {
+			return nil, err
+		}
+		var pc struct {
+			Card string `json:"card"`
+		}
+		if json.Unmarshal(raw, &pc) == nil && pc.Card != "" {
+			divergent[pc.Card] = true
+		}
+	}
+	for _, p := range paths {
+		if filepath.Base(p) == "known-divergent.json" {
+			continue
+		}
+		raw, err := os.ReadFile(p)
+		if err != nil {
+			return nil, err
+		}
+		var f struct {
+			Card string `json:"card"`
+		}
+		if json.Unmarshal(raw, &f) == nil && f.Card != "" && !divergent[f.Card] {
+			out[f.Card] = true
+		}
+	}
+	return out, nil
+}
+
+// Check returns every card of set that keeps it from level, sorted. root is
+// the gorge-compliance repo root (manifests, verdicts and printed tables are read
+// under it), and so are its hand oracle scenarios, read together with
+// gorge's residual ones (HandOracleDirs).
+// Level A is the cast-and-resolve claim (spec 2026-10-03 section 11.3 C6);
+// level B is level A plus one scenario per activated ability, trigger mode,
+// static and attack/block (spec 2026-10-05 section 4). Any other level is
+// not built and reports the one stub problem it always has.
+func Check(reg *cards.Registry, root, set, level string) ([]Problem, error) {
+	return checkLevel(reg, root, set, level, nil)
+}
+
+// SetProblems is one declared set's piece of a CheckDeclared result.
+type SetProblems struct {
+	Set      string
+	Level    string
+	Problems []Problem
+}
+
+// CheckDeclared runs Check over every set in declared, loading the shared
+// tables once for the whole claim instead of once per set. A per-set Check
+// reloads the verdicts (16 MB), XMage's 589 manifests, the hand scenarios
+// and the corpus fold table every time, which was ~90% of a 20-set claim's
+// wall; the checks themselves are byte-identical, set by set (asserted by
+// TestCheckDeclaredMatchesCheckPerSet). Sets come back in set-code order (a
+// map's iteration order never reaches them), each with its own problems in
+// Check's order.
+func CheckDeclared(reg *cards.Registry, root string, declared map[string]string) ([]SetProblems, error) {
+	sh, err := loadShared(reg, root)
+	if err != nil {
+		return nil, err
+	}
+	codes := make([]string, 0, len(declared))
+	for set := range declared {
+		codes = append(codes, set)
+	}
+	sort.Strings(codes)
+	out := make([]SetProblems, 0, len(codes))
+	for _, set := range codes {
+		probs, err := checkLevel(reg, root, set, declared[set], sh)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, SetProblems{Set: set, Level: declared[set], Problems: probs})
+	}
+	return out, nil
+}
+
+func checkLevel(reg *cards.Registry, root, set, level string, sh *sharedTables) ([]Problem, error) {
+	switch level {
+	case "A":
+		probs, _, _, err := checkA(reg, root, set, sh)
+		return probs, err
+	case "B":
+		return checkB(reg, root, set, sh)
+	default:
+		return []Problem{{Card: "*", Reason: "level " + level + " has no templates yet"}}, nil
+	}
+}
+
+// sharedTables is the root-wide data every set's scan reads: the verdict
+// rows, the hand-authored oracle scenarios, XMage's name universe (and the
+// oraclegen knowledge of it, installed once), the corpus fold table and the
+// supported-primitive set. loadSet re-reads all of it per set; a bulk run
+// over many sets (CheckDeclared) loads it once and passes it down.
+type sharedTables struct {
+	verdicts map[string]map[string]compliance.VerdictRow
+	hand     map[string]bool
+	sup      map[string]bool
+	folded   map[string]string
+}
+
+func loadShared(reg *cards.Registry, root string) (*sharedTables, error) {
+	xmageNames, err := compliance.LoadXMageNames(filepath.Join(root, "oracle", "compliance", "manifests"))
+	if err != nil {
+		return nil, err
+	}
+	oraclegen.SetXMageKnown(xmageNames)
+	verdicts, err := compliance.LoadVerdicts(filepath.Join(root, compliance.VerdictDir))
+	if err != nil {
+		return nil, err
+	}
+	handDirs, err := HandOracleDirs(root)
+	if err != nil {
+		return nil, err
+	}
+	hand, err := HandScenarios(handDirs...)
+	if err != nil {
+		return nil, err
+	}
+	return &sharedTables{
+		verdicts: verdicts,
+		hand:     hand,
+		sup:      effects.Supported(),
+		folded:   compliance.FoldedNames(reg),
+	}, nil
+}
+
+// setScan is what a level's card walk needs: the set's printed names, which
+// of them XMage can check, the hand-authored scenarios, every verdict row,
+// and name resolution. checkA builds it once and both levels share it.
+type setScan struct {
+	verdicts map[string]map[string]compliance.VerdictRow
+	hand     map[string]bool
+	names    []string // printed names, in the set's order
+	inXMage  map[string]bool
+	sup      map[string]bool
+	has      func(string) bool
+	folded   map[string]string
+	// xmageSpelling maps a folded name to XMage's spelling of the card.
+	xmageSpelling map[string]string
+}
+
+// loadSet reads and resolves everything a card walk needs. sh carries the
+// root-wide tables (nil loads them, the single-set path); the per-set data
+// is the manifest, the printed list and the spelling map. The returned
+// problems are the set-level ones (no printed list); loadSet does not walk
+// cards.
+func loadSet(reg *cards.Registry, root, set string, sh *sharedTables) (*setScan, []Problem, error) {
+	if sh == nil {
+		var err error
+		if sh, err = loadShared(reg, root); err != nil {
+			return nil, nil, err
+		}
+	}
+	m, err := compliance.LoadManifest(filepath.Join(root, "oracle", "compliance", "manifests"), set)
+	if err != nil {
+		return nil, nil, err
+	}
+	// The claim covers every printed card. XMage's manifest says which of
+	// them the oracle can check; the rest need a hand-authored scenario.
+	// Names are matched by fold (case, diacritics, punctuation): Forge prints
+	// "Dáin Ironfoot" where the XMage set class writes "Dain Ironfoot", and
+	// "With Great Power . . ." where XMage writes "With Great Power...".
+	// A card the set marks unfinished is in SetCardInfo but removed from
+	// XMage's card database, so it is no-XMage too.
+	inXMage := map[string]bool{}
+	unfinished := map[string]bool{}
+	for _, u := range m.Unfinished {
+		unfinished[compliance.FoldName(u)] = true
+	}
+	names := make([]string, 0, len(m.Cards))
+	// xmageSpelling maps a folded name to XMage's own spelling, which the
+	// pass (oraclediff gen) stamps on the scenario as XMageName whenever it
+	// differs from the corpus face name. The gate must build the very same
+	// Item, or ItemSHA never matches the pass's row (Dáin, Bespoke Bō,
+	// "With Great Power . . .").
+	xmageSpelling := map[string]string{}
+	for _, mc := range m.Cards {
+		xmageSpelling[compliance.FoldName(mc.Name)] = mc.Name
+		if unfinished[compliance.FoldName(mc.Name)] {
+			continue
+		}
+		inXMage[compliance.FoldName(mc.Name)] = true
+		names = append(names, mc.Name)
+	}
+	var lead []Problem
+	if pr, err := compliance.LoadPrinted(filepath.Join(root, "oracle", "compliance", "printed"), set); err == nil {
+		names = pr.Cards
+	} else if os.IsNotExist(err) {
+		// The XMage manifest omits the cards XMage lacks, so a claim over it
+		// would drop them silently (section 11.3 C7): the cards are still
+		// reported, but the set cannot be declared until it has a list.
+		lead = append(lead, Problem{"*", fmt.Sprintf("no printed list (oracle/compliance/printed/%s.json): the XMage manifest omits cards XMage lacks, so the set cannot be declared", set)})
+	} else {
+		return nil, nil, err
+	}
+	return &setScan{
+		verdicts: sh.verdicts,
+		hand:     sh.hand,
+		names:    names,
+		inXMage:  inXMage,
+		sup:      sh.sup,
+		has:      func(n string) bool { _, ok := reg.Lookup(n); return ok },
+		folded:   sh.folded,
+
+		xmageSpelling: xmageSpelling,
+	}, lead, nil
+}
+
+// rowCountsAtLevel reports whether a verdict row belongs to the claim level.
+// Level A has one row for whichever level-A template generated the card.
+func rowCountsAtLevel(r compliance.VerdictRow, level string) bool {
+	if level == "A" {
+		for _, tmpl := range templates.All {
+			if r.Template == tmpl.ID {
+				return true
+			}
+		}
+		return false
+	}
+	return true
+}
+
+// rowOK applies the level-A verdict-row checks to one generated scenario
+// (the block at gate.go's old lines 214-242), reporting any problem through
+// bad and returning false. Level A and level B share it so their wording
+// cannot drift; the item's template is the requirement key at level B.
+func rowOK(reg *cards.Registry, it oraclegen.Item, rows map[string]compliance.VerdictRow, bad func(string, string, ...any)) bool {
+	r, ok := rows[it.Template]
+	switch {
+	case !ok:
+		bad(it.Card, "no verdict for %s", it.ID)
+		return false
+	case r.Status != compliance.StatusAgree && r.Status != compliance.StatusXMageWrong:
+		if r.RulingID != "" {
+			bad(it.Card, "verdict %s (%s) [ruling %s]: %s", r.Status, it.Template, r.RulingID, r.Detail)
+		} else {
+			bad(it.Card, "verdict %s (%s): %s", r.Status, it.Template, r.Detail)
+		}
+		return false
+	case r.RulingID != "" && r.Review == "pending":
+		// One automatic classification in ten waits for a human check
+		// before it counts (shape.Sampled).
+		bad(it.Card, "automatic ruling %s sampled for review; check it, then oraclediff rule -card %q -confirm", r.RulingID, it.Card)
+		return false
+	case r.ScenarioSHA != ItemSHA(it):
+		bad(it.Card, "verdict is for an older scenario (%s); re-run the XMage pass", it.ID)
+		return false
+	}
+	if ok, why := StillMeets(reg, it, r); !ok {
+		bad(it.Card, "%s (%s)", why, it.ID)
+		return false
+	}
+	return true
+}
+
+// checkA runs the level-A checks over set and returns the problems, the
+// scan both levels share, and the set of cards that had NO level-A problem
+// (so level B skips them wholesale).
+func checkA(reg *cards.Registry, root, set string, sh *sharedTables) ([]Problem, *setScan, map[string]bool, error) {
+	scan, out, err := loadSet(reg, root, set, sh)
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	okA := map[string]bool{}
+	bad := func(card, format string, a ...any) {
+		out = append(out, Problem{card, fmt.Sprintf(format, a...)})
+	}
+	for _, printed := range scan.names {
+		name, ok := compliance.CorpusNameFold(scan.has, scan.folded, printed)
+		if !ok {
+			bad(printed, "not in the corpus")
+			continue
+		}
+		c, _ := reg.Lookup(name)
+		if isBasicLand(c) {
+			continue
+		}
+		if u := reg.Unsupported(c, scan.sup); len(u) > 0 {
+			bad(name, "unsupported %v", u)
+			continue
+		}
+		// The pass names a scenario by the card's first face (a split or
+		// Room half, "Cease" for "Cease // Desist"), and its verdict rows
+		// carry that name; generate and look up the same way.
+		face := name
+		if c != nil && len(c.Faces) > 0 && c.Faces[0].Name != "" {
+			face = c.Faces[0].Name
+		}
+		rows := scan.verdicts[name]
+		if len(rows) == 0 && face != name {
+			rows = scan.verdicts[face]
+		}
+		wrong := false
+		lacks := false
+		for _, r := range rows {
+			switch r.Status {
+			case compliance.StatusGorgeWrong:
+				bad(name, "gorge_wrong verdict (%s): %s", r.Template, r.Ruling)
+				wrong = true
+			case compliance.StatusXMageLacks:
+				if rowCountsAtLevel(r, "A") {
+					lacks = true
+				}
+			}
+		}
+		if wrong {
+			continue
+		}
+		if scan.hand[name] || scan.hand[face] {
+			continue
+		}
+		if !scan.inXMage[compliance.FoldName(printed)] || lacks {
+			bad(name, "XMage does not implement it; needs a hand-authored oracle scenario")
+			continue
+		}
+		it, skip := templates.Generate(reg, face)
+		if skip == nil {
+			if xm, ok := scan.xmageSpelling[compliance.FoldName(printed)]; ok && xm != face {
+				it.XMageName = xm
+			}
+		}
+		if skip != nil {
+			bad(name, "no generated scenario (%s) and no hand oracle scenario", skip.Reason)
+			continue
+		}
+		// Report under the printed card's corpus name, not the face the
+		// scenario is named by.
+		badName := func(_ string, format string, a ...any) { bad(name, format, a...) }
+		if !rowOK(reg, it, rows, badName) {
+			continue
+		}
+		okA[name] = true
+	}
+	sort.Slice(out, func(i, j int) bool { return out[i].Card < out[j].Card })
+	return out, scan, okA, nil
+}
+
+func isBasicLand(c *cards.Card) bool {
+	if len(c.Faces) == 0 {
+		return false
+	}
+	basic, land := false, false
+	for _, t := range c.Faces[0].Types {
+		basic = basic || strings.EqualFold(t, "Basic")
+		land = land || strings.EqualFold(t, "Land")
+	}
+	return basic && land
+}

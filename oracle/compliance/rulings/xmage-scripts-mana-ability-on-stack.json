@@ -1,0 +1,13 @@
+{
+  "id": "xmage-scripts-mana-ability-on-stack",
+  "status": "xmage_wrong",
+  "match": {
+    "template": "activate",
+    "op": "activate",
+    "field": "p0.pool",
+    "diff": "gorge=BR xmage="
+  },
+  "ruling": "Bolg's Company's \"{T}, Sacrifice another Goblin: Add {B}{R}.\" has no target, is not a loyalty ability and produces mana, so it is a mana ability: it resolves immediately without using the stack, and the pool holds {B}{R} as gorge shows. XMage's BolgsCompany.java builds it as a SimpleActivatedAbility(BasicManaEffect) rather than an ActivatedManaAbilityImpl, so XMage taps, sacrifices, and leaves the ability on the stack with an empty pool. XMage's card script defect, not a gorge defect.",
+  "cr": ["605.1a", "605.3b"],
+  "source": "Bolg's Company (activate#0.0), lb-xharness 2026-10-12"
+}

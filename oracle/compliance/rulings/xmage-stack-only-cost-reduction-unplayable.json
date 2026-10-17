@@ -1,0 +1,19 @@
+{
+  "id": "xmage-stack-only-cost-reduction-unplayable",
+  "status": "harness",
+  "match": {
+    "template": "static",
+    "op": "harness",
+    "field": "xmage",
+    "diff": "AssertionError: Can't find ability to activate command: Cast $CARD",
+    "api": [
+      "ChangeZone",
+      "-"
+    ]
+  },
+  "ruling": "XMage's Swat Away (and Lashwhip Predator, whose static is the same SpellCostReductionSourceEffect) reduces its cost with SpellCostReductionSourceEffect.setCanWorksOnStackOnly(true), so TestPlayer's playable check (before the spell is on the stack) prices the cast at the full {2}{U}{U} and refuses a cast paid from the {U}{U} the scenario adds; gorge applies the reduction when the total cost is determined, so {U}{U} is correct. A driver gap, not a gorge defect.",
+  "cr": [
+    "601.2f"
+  ],
+  "source": "Swat Away (static#0.0), reported by lb-xharness 2026-10-12 after the active-player driver fix; XMage side not reproducible in a seat; widened to Lashwhip Predator (static#0.0, API signature \"-\") by the operator 2026-10-13"
+}

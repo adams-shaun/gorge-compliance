@@ -1,0 +1,288 @@
+# CI for gorge-compliance: the compliance oracles and scenario audits that
+# back gorge's rules engine, measured against a PINNED gorge (docs/PINNING.md).
+#
+# Every job checks gorge out as a SIBLING directory, because go.mod's replace
+# (bootstrap) wants ../gorge and because the Forge corpus is fetched by gorge's
+# own `make fetch-cards compile-cards` at gorge's FORGE_REF:
+#
+#   $GITHUB_WORKSPACE/gorge-compliance   this repository
+#   $GITHUB_WORKSPACE/gorge              adams-shaun/gorge at the pin (or main)
+#
+# The pin is GORGE_PIN. While it reads PENDING (bootstrap), the gorge ref is
+# vars.GORGE_REF, else wt/restructure. A workflow_dispatch can override it.
+#
+# The corpus (GPL-3.0, never committed in either repository) is cached by its
+# pin and symlinked as gorge-compliance/.cards. A run with no corpus would SKIP
+# every corpus test and read green, so the job fails instead.
+#
+# Jobs:
+#   lint, test   push/PR/nightly, against the PIN. Required (ci-ok).
+#   compliance   nightly/dispatch: `make compliance-status` against the pin.
+#   drift        nightly/dispatch: the tests against gorge MAIN. Reports what a
+#                pin bump would change; never fails the workflow.
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: '41 9 * * *'
+  workflow_dispatch:
+    inputs:
+      gorge_ref:
+        description: gorge ref to use instead of GORGE_PIN (default the pin)
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  GOFLAGS: -p=4
+  GOWORK: 'off'
+
+jobs:
+  pin:
+    runs-on: ubuntu-24.04
+    outputs:
+      ref: ${{ steps.pin.outputs.ref }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: pin
+        run: |
+          pin=$(head -n1 GORGE_PIN | awk '{print $1}')
+          ref='${{ inputs.gorge_ref }}'
+          if [ -z "$ref" ]; then
+            if [ "$pin" = PENDING ]; then ref='${{ vars.GORGE_REF || 'wt/restructure' }}'; else ref=$pin; fi
+          fi
+          echo "gorge ref: $ref (GORGE_PIN: $(head -n1 GORGE_PIN))"
+          echo "ref=$ref" >> "$GITHUB_OUTPUT"
+
+  lint:
+    needs: pin
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: gorge-compliance
+      - uses: actions/checkout@v4
+        with:
+          repository: adams-shaun/gorge
+          ref: ${{ needs.pin.outputs.ref }}
+          path: gorge
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: gorge-compliance/go.mod
+          cache: false
+      - name: gofmt
+        working-directory: gorge-compliance
+        run: |
+          out=$(gofmt -l $(find . -name .git -prune -o -type f -name '*.go' -print))
+          if [ -n "$out" ]; then echo "gofmt: files need formatting:"; echo "$out"; exit 1; fi
+      - name: go vet
+        working-directory: gorge-compliance
+        run: go vet ./...
+      - name: shell syntax
+        working-directory: gorge-compliance
+        run: for f in $(git ls-files '*.sh'); do bash -n "$f" || exit 1; done
+
+  test:
+    needs: pin
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: gorge-compliance
+      - uses: actions/checkout@v4
+        with:
+          repository: adams-shaun/gorge
+          ref: ${{ needs.pin.outputs.ref }}
+          path: gorge
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: gorge-compliance/go.mod
+          cache: false
+      - name: Read the corpus pin
+        id: cpin
+        run: echo "forge_ref=$(awk '/^FORGE_REF/ {print $3}' gorge/Makefile)" >> "$GITHUB_OUTPUT"
+      - name: Restore the corpus
+        id: corpus
+        uses: actions/cache/restore@v4
+        with:
+          path: gorge/.cards
+          key: cards-${{ steps.cpin.outputs.forge_ref }}-${{ hashFiles('gorge/engine/cards/**/*.go') }}
+          restore-keys: cards-${{ steps.cpin.outputs.forge_ref }}-
+      - name: Fetch and compile the corpus
+        if: steps.corpus.outputs.cache-hit != 'true'
+        working-directory: gorge
+        run: make fetch-cards compile-cards
+      - name: Refuse to run without the corpus, then link it
+        run: |
+          test -s gorge/.cards/cards.lock || { echo "no .cards corpus: every corpus test would skip"; exit 1; }
+          grep -q "${{ steps.cpin.outputs.forge_ref }}" gorge/.cards/cards.lock || { echo ".cards is not at FORGE_REF"; cat gorge/.cards/cards.lock; exit 1; }
+          ln -sfn ../gorge/.cards gorge-compliance/.cards
+      - name: Save the corpus
+        if: github.event_name != 'pull_request' && steps.corpus.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: gorge/.cards
+          key: cards-${{ steps.cpin.outputs.forge_ref }}-${{ hashFiles('gorge/engine/cards/**/*.go') }}
+      - name: Licence guards (no Forge content is committed)
+        working-directory: gorge-compliance
+        run: go test -count=1 -timeout 5m ./internal/boundary/
+      - name: Scenario audits (hand Oracle-text audit + XMage ports)
+        working-directory: gorge-compliance
+        run: go test -count=1 -timeout 15m ./audit/
+      - name: go test
+        working-directory: gorge-compliance
+        run: |
+          count=
+          if [ "${{ github.event_name }}" = schedule ]; then count=-count=1; fi
+          go test $count -timeout 30m ./...
+      - name: Script smokes (stubs only)
+        working-directory: gorge-compliance
+        run: make smoke
+
+  compliance:
+    needs: pin
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: gorge-compliance
+      - uses: actions/checkout@v4
+        with:
+          repository: adams-shaun/gorge
+          ref: ${{ needs.pin.outputs.ref }}
+          path: gorge
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: gorge-compliance/go.mod
+          cache: false
+      - name: Read the corpus pin
+        id: cpin
+        run: echo "forge_ref=$(awk '/^FORGE_REF/ {print $3}' gorge/Makefile)" >> "$GITHUB_OUTPUT"
+      - name: Restore the corpus
+        id: corpus
+        uses: actions/cache/restore@v4
+        with:
+          path: gorge/.cards
+          key: cards-${{ steps.cpin.outputs.forge_ref }}-${{ hashFiles('gorge/engine/cards/**/*.go') }}
+          restore-keys: cards-${{ steps.cpin.outputs.forge_ref }}-
+      - name: Fetch and compile the corpus
+        if: steps.corpus.outputs.cache-hit != 'true'
+        working-directory: gorge
+        run: make fetch-cards compile-cards
+      - name: Refuse to run without the corpus, then link it
+        run: |
+          test -s gorge/.cards/cards.lock || { echo "no .cards corpus: every corpus test would skip"; exit 1; }
+          grep -q "${{ steps.cpin.outputs.forge_ref }}" gorge/.cards/cards.lock || { echo ".cards is not at FORGE_REF"; cat gorge/.cards/cards.lock; exit 1; }
+          ln -sfn ../gorge/.cards gorge-compliance/.cards
+      - name: Compliance status and ratchet
+        working-directory: gorge-compliance
+        run: make compliance-status
+      - name: Upload the status page
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-status
+          path: gorge-compliance/oracle/compliance/status.md
+          if-no-files-found: ignore
+
+  # Against gorge MAIN, not the pin: what a pin bump would change. Every
+  # check is continue-on-error and lands in the job summary; the job itself
+  # never fails the workflow (docs/PINNING.md, "Drift reporting").
+  drift:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    continue-on-error: true
+    env:
+      GOWORK: ''
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: gorge-compliance
+      - uses: actions/checkout@v4
+        with:
+          repository: adams-shaun/gorge
+          ref: main
+          path: gorge
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: gorge-compliance/go.mod
+          cache: false
+      - name: Read the corpus pin
+        id: cpin
+        run: echo "forge_ref=$(awk '/^FORGE_REF/ {print $3}' gorge/Makefile)" >> "$GITHUB_OUTPUT"
+      - name: Restore the corpus
+        id: corpus
+        uses: actions/cache/restore@v4
+        with:
+          path: gorge/.cards
+          key: cards-${{ steps.cpin.outputs.forge_ref }}-${{ hashFiles('gorge/engine/cards/**/*.go') }}
+          restore-keys: cards-${{ steps.cpin.outputs.forge_ref }}-
+      - name: Fetch and compile the corpus
+        if: steps.corpus.outputs.cache-hit != 'true'
+        working-directory: gorge
+        run: make fetch-cards compile-cards
+      - name: Refuse to run without the corpus, then link it
+        run: |
+          test -s gorge/.cards/cards.lock || { echo "no .cards corpus: every corpus test would skip"; exit 1; }
+          grep -q "${{ steps.cpin.outputs.forge_ref }}" gorge/.cards/cards.lock || { echo ".cards is not at FORGE_REF"; cat gorge/.cards/cards.lock; exit 1; }
+          ln -sfn ../gorge/.cards gorge-compliance/.cards
+      - name: Build against gorge main (a go.work overrides the pin)
+        working-directory: gorge-compliance
+        run: go work init . ../gorge && go build ./... && go vet ./...
+      - name: Tests against gorge main
+        id: tests
+        continue-on-error: true
+        working-directory: gorge-compliance
+        run: go test -count=1 -timeout 40m ./... 2>&1 | tee ../drift-test.log
+      - name: Compliance status against gorge main
+        id: status
+        continue-on-error: true
+        working-directory: gorge-compliance
+        run: make compliance-status 2>&1 | tee ../drift-status.log
+      - name: Report
+        if: always()
+        run: |
+          {
+            echo "## Drift vs gorge main ($(git -C gorge rev-parse --short=12 HEAD); pin: $(head -n1 gorge-compliance/GORGE_PIN))"
+            echo "- tests: ${{ steps.tests.outcome }}"
+            echo "- compliance-status: ${{ steps.status.outcome }}"
+            echo
+            echo '### Failing tests'
+            echo '```'
+            grep -E '^(--- FAIL|FAIL|ok )' drift-test.log | grep -v '^ok ' | head -200 || true
+            echo '```'
+            echo '### Stale ratchet rows'
+            echo '```'
+            grep -E 'stale (known|unconsumed)|known_bug row is stale' drift-test.log | head -200 || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload drift logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drift
+          path: |
+            drift-test.log
+            drift-status.log
+            gorge-compliance/oracle/compliance/status.md
+          if-no-files-found: ignore
+
+  # One required check to name in branch protection.
+  ci-ok:
+    if: always()
+    needs: [lint, test]
+    runs-on: ubuntu-24.04
+    steps:
+      - run: |
+          [ "${{ needs.lint.result }}" = success ] && [ "${{ needs.test.result }}" = success ] || { echo "lint=${{ needs.lint.result }} test=${{ needs.test.result }}"; exit 1; }

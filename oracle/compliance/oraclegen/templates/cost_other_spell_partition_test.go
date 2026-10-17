@@ -1,0 +1,142 @@
+package templates
+
+import (
+	"testing"
+)
+
+// TestCostStaticOtherSpellAppendixPartition pins the exact disposition of the
+// brief's 45 "cost static probe not supported" rows: all 45 produce a
+// generated scenario (no row is a named skip). Artist's Talent
+// moved from the named-skip column to served when the shared Class level-up
+// prelude landed (its ReduceCost static is live from level 2 on), and Samut,
+// the Driving Force when the probe learned to set p0's speed. Bilbo, Doc
+// Aurlock's static#0.0 and Beluna moved when the probe learned the
+// cast-provenance shapes (levelb-cost-cast-provenance): a Flashback cast from
+// the probe's own graveyard for the wasCast rows, and an Adventure card's
+// front face for `Permanent.AdventureCard`. Inquisitive Glimmer's Unlock
+// static and Geyser Drake's NotPlayerTurn gate moved when the special-action
+// probes learned the Room unlock and the opponent-turn cast, and Doc Aurlock's
+// static#0.1 plotting row moved when the driver learned cast_mode plot.
+// Mutagen Man's token-ability row moved when the token-ability probe
+// (cost_other_spell_token.go) learned to make the token and activate its own
+// face. The sibling
+// TestCostStaticOtherSpellAppendixRows asserts only the aggregate (>= 30); a
+// regression that turned a served row back into a skip, or changed a named
+// skip's reason to the bare form, would still satisfy that aggregate, so this
+// test pins each row.
+func TestCostStaticOtherSpellAppendixPartition(t *testing.T) {
+	reg := loadGenRegistry(t)
+
+	// served rows (produce a scenario) and skipped rows (named skip reason).
+	served := map[string]bool{
+		"Eluge, the Shoreless Sea":       true,
+		"Stormcatch Mentor":              true,
+		"Boom Scholar":                   true,
+		"Voyager Quickwelder":            true,
+		"Inquisitive Glimmer":            true, // static#0.0 and static#0.1 (the Room unlock probe)
+		"Doran, Besieged by Time":        true,
+		"Uthros Psionicist":              true,
+		"Ballyrush Banneret":             true,
+		"Cloud, Planet's Champion":       true,
+		"Serah Farron":                   true,
+		"The Darkness Crystal":           true,
+		"The Earth Crystal":              true,
+		"The Fire Crystal":               true,
+		"The Water Crystal":              true,
+		"The Wind Crystal":               true,
+		"Dwarven Mauler":                 true,
+		"Glamdring, Foe-hammer":          true,
+		"Radagast of Rhosgobel":          true,
+		"Case of the Ransacked Lab":      true,
+		"Forensic Gadgeteer":             true,
+		"Melek, Reforged Researcher":     true,
+		"Baron Strucker, HYDRA Overlord": true,
+		"Hulk, Gamma Goliath":            true,
+		"Shuri, Wakandan Inventor":       true,
+		"The Scarlet Witch":              true,
+		"Honest Rutstein":                true,
+		"Tombstone, Career Criminal":     true,
+		"Highspire Bell-Ringer":          true,
+		"Temur Battlecrier":              true,
+		"The Sibsig Ceremony":            true,
+		"Gran-Gran":                      true,
+		"Momo, Friendly Flier":           true,
+		"Uncle Iroh":                     true,
+		"Agatha of the Vile Cauldron":    true,
+		"Blossoming Tortoise":            true,
+		"Raging Battle Mouse":            true,
+		"Artist's Talent":                true, // ClassBand$ 2 ReduceCost, served by the Class-level prelude
+		"Samut, the Driving Force":       true, // Amount$ Count$YourSpeed, served by a setup speed of 2
+		"Geyser Drake":                   true, // Condition$ NotPlayerTurn, served by the opponent-turn cast
+		"Bilbo, Thief in the Night":      true, // Card.!wasCastFromYourHand, served by a Flashback cast from the graveyard
+		"Doc Aurlock, Grizzled Genius":   true, // static#0.0 by the wasCast arm's cast; static#0.1 is the id entry below
+		"Beluna Grandsquall":             true, // Permanent.AdventureCard, served by an Adventure card's front face
+		"Mutagen Man, Living Ooze":       true, // Artifact.token+YouCtrl Type$ Ability, served by the token-ability probe (cost_other_spell_token.go)
+	}
+	// served is keyed by card name; a card with one served and one skipped
+	// face needs the skipped face listed under skipped, and a second served
+	// row of an already-listed card is keyed by its "<name>/<key>" id.
+	served["Doc Aurlock, Grizzled Genius/static#0.1"] = true // a cast_mode "plot" action at the reduced Plot cost
+	// skipped is keyed by "<name>/<key>". No row of the 45 remains a named
+	// skip: Mutagen Man's token-ability static is served by the token probe
+	// (cost_other_spell_token.go).
+	skipped := map[string]string{}
+	// Inquisitive Glimmer holds two of the 45 rows (static#0.0 and
+	// static#0.1, both served) and Doc Aurlock adds a served "<name>/<key>"
+	// id beside its served name, so the map arithmetic is one short: 43
+	// served names + 1 served id + 0 skipped keys = 44.
+	if len(served)+len(skipped) != 44 {
+		t.Fatalf("precondition: %d served + %d skipped = %d, want 44 (Inquisitive Glimmer carries two served rows and Doc Aurlock a served id of the 45)", len(served), len(skipped), len(served)+len(skipped))
+	}
+
+	rows := []struct{ name, key string }{
+		{"Artist's Talent", "static#0.0"}, {"Eluge, the Shoreless Sea", "static#0.1"}, {"Stormcatch Mentor", "static#0.0"},
+		{"Boom Scholar", "static#0.0"}, {"Samut, the Driving Force", "static#0.1"}, {"Voyager Quickwelder", "static#0.0"},
+		{"Inquisitive Glimmer", "static#0.0"}, {"Inquisitive Glimmer", "static#0.1"}, {"Doran, Besieged by Time", "static#0.0"},
+		{"Uthros Psionicist", "static#0.0"}, {"Ballyrush Banneret", "static#0.0"}, {"Cloud, Planet's Champion", "static#0.1"},
+		{"Serah Farron", "static#0.0"}, {"The Darkness Crystal", "static#0.0"}, {"The Earth Crystal", "static#0.0"},
+		{"The Fire Crystal", "static#0.0"}, {"The Water Crystal", "static#0.0"}, {"The Wind Crystal", "static#0.0"},
+		{"Bilbo, Thief in the Night", "static#0.0"}, {"Dwarven Mauler", "static#0.0"}, {"Glamdring, Foe-hammer", "static#0.0"},
+		{"Radagast of Rhosgobel", "static#0.0"}, {"Case of the Ransacked Lab", "static#0.0"}, {"Forensic Gadgeteer", "static#0.0"},
+		{"Melek, Reforged Researcher", "static#0.1"}, {"Baron Strucker, HYDRA Overlord", "static#0.0"}, {"Hulk, Gamma Goliath", "static#0.0"},
+		{"Shuri, Wakandan Inventor", "static#0.0"}, {"The Scarlet Witch", "static#0.0"}, {"Doc Aurlock, Grizzled Genius", "static#0.0"},
+		{"Doc Aurlock, Grizzled Genius", "static#0.1"}, {"Geyser Drake", "static#0.0"}, {"Honest Rutstein", "static#0.0"},
+		{"Tombstone, Career Criminal", "static#0.0"}, {"Highspire Bell-Ringer", "static#0.0"}, {"Temur Battlecrier", "static#0.0"},
+		{"The Sibsig Ceremony", "static#0.0"}, {"Gran-Gran", "static#0.0"}, {"Momo, Friendly Flier", "static#0.0"},
+		{"Uncle Iroh", "static#0.0"}, {"Mutagen Man, Living Ooze", "static#0.0"}, {"Agatha of the Vile Cauldron", "static#0.0"},
+		{"Beluna Grandsquall", "static#0.0"}, {"Blossoming Tortoise", "static#0.0"}, {"Raging Battle Mouse", "static#0.0"},
+	}
+
+	scenarios, named := 0, 0
+	for _, row := range rows {
+		req := costRequirement(t, reg, row.name, row.key)
+		it, skip := GenerateB(reg, row.name, req)
+		id := row.name + "/" + row.key
+		if want, wantSkipped := skipped[id]; wantSkipped {
+			if skip == nil {
+				t.Errorf("%s: produced a scenario, want the named skip %q", id, want)
+				continue
+			}
+			if skip.Reason != "cost static probe not supported: "+want {
+				t.Errorf("%s: skip = %q, want %q", id, skip.Reason, "cost static probe not supported: "+want)
+			}
+			named++
+			continue
+		}
+		if !served[row.name] && !served[id] {
+			t.Errorf("precondition: %s is neither in served nor skipped", id)
+			continue
+		}
+		if skip != nil {
+			t.Errorf("%s: skip = %q, want a scenario", id, skip.Reason)
+			continue
+		}
+		if probeStep(t, it).Op == "" {
+			t.Errorf("%s: scenario has no probe step", id)
+		}
+		scenarios++
+	}
+	if scenarios != 45 || named != 0 {
+		t.Errorf("partition = %d scenarios + %d named skips, want 45 + 0", scenarios, named)
+	}
+}

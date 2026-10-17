@@ -1,0 +1,547 @@
+package templates
+
+import (
+	"encoding/json"
+	"sort"
+	"strings"
+	"testing"
+
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/levelb"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/testkit/testutil"
+)
+
+// sameNameCensus is, per declared set, the generated items (level A plus
+// every non-gap level-B requirement) whose gorge run picks an object that
+// shares its name with a DIFFERENT offered object (same-name options that
+// resolve to one ref are the same object, not an ambiguity).
+//
+// It reads the EMITTED xmage_answers and re-runs the driver's own matching
+// over the offered refs, so a bare name that could match more than one object
+// counts as unresolved even if some other helper would call it resolved. The
+// three buckets are:
+//
+//   - Alias: the emitted value is the pick's exact scenario ref ("p0:Forest#2",
+//     carried to XMage as its "@ref" alias), which names that one object.
+//   - Copy: the emitted value is "name[only copy]"/"name[no copy]", and the
+//     isCopy() filter leaves exactly one same-name candidate.
+//   - Unresolved: the emitted value matches zero or more than one distinct
+//     same-name candidate. This is the Joo Dee defect and must stay 0.
+//   - Unproven: the pick's ref is a rank-derived library/hand ref XMage's
+//     alias binding cannot reproduce, so no exact answer exists (the class
+//     the driver cannot rank-align). Out of the fix's reach; pinned so a
+//     regression that makes more picks unproven still fails.
+//
+// Buckets count items, not individual picks. If an item uses both forms,
+// Alias wins; any unresolved pick makes the whole item Unresolved, and an
+// unproven pick only counts when the item has no resolved pick. Their sum
+// is the number of items ambiguous before discrimination; Unresolved is the
+// number remaining afterward. Pins fail on increases AND decreases.
+type sameNameCensus struct {
+	Alias      int      `json:"alias"`
+	Copy       int      `json:"copy"`
+	Unresolved int      `json:"unresolved"`
+	Unproven   int      `json:"unproven"`
+	Items      []string `json:"items"`
+}
+
+// sameNameBucketRank orders the item buckets by strength: a real defect wins
+// over a resolved pick, and a resolved pick wins over an out-of-scope one.
+func sameNameBucketRank(bucket string) int {
+	switch bucket {
+	case "unresolved":
+		return 3
+	case "alias":
+		return 2
+	case "copy":
+		return 1
+	case "unproven":
+		return 0
+	}
+	return -1
+}
+
+// wantSameNameCensus pins the per-set census as JSON. Measured 2026-10-06 on
+// the fix that emits an exact ref for same-kind and cross-seat duplicates and
+// a copy marker for a unique token-or-card pick, and re-measured once alias
+// emission was restricted to refs XMage's alias binding reconstructs exactly
+// (setup battlefield permanents and tokens by creation order). An ambiguous
+// pick whose ref is rank-derived (an anonymous library/hand card) has no
+// sound answer and is counted Unproven, never Alias: the driver would bind a
+// different physical card. Re-measured as ITEMS rather than picks (multi-pick
+// decisions previously inflated these counts). Re-measured once more at the
+// 2026-10-06 merge with main: main's cost-static generator now serves Focus
+// the Mind's ReduceCost static, adding one TDM unproven item (its pick ref is
+// a rank-derived library card, so no exact answer exists); TDM's unproven pin
+// moved 5 to 6, unresolved stayed 0.
+//
+// Re-measured again on the 2026-10-06 reland onto current main, whose tickets
+// landed after the old branch tip and generate new scenarios over the same
+// fixed corpus. Three pin moves, all attributable to that main, none to the
+// fix's own code:
+//
+//   - DSK unproven 27 -> 32. Main's Room work generates new DSK Room
+//     scenarios whose same-name picks are rank-derived basics (ref
+//     "p0:Wastes#N"), so no exact answer exists -- Unproven, not Unresolved.
+//     e35bede6d (oracle cast step binds a Room's other door via room_alt)
+//     accounts for four -- Greenhouse // Rickety Gazebo, Meat Locker //
+//     Drowned Diner, Moldering Gym // Weight Room, Underwater Tunnel // Slimy
+//     Aquarium, proven by reverting that hunk (DSK 32 -> 28) -- and ad441cced
+//     (levelb Room triggers cast the door) for the fifth (Ticket Booth //
+//     Tunnel of Hate).
+//   - TLA alias 1 -> 2. Main's 35664572f (preserve probes for self-removing
+//     statics) adds a self-removing-static scenario whose same-name pick is
+//     exactly resolved by an alias, so the resolved bucket grows.
+//
+// Re-measured once more on the level-B phase-other land: DSK unproven 32 ->
+// 33. Serving Defiant Survivor's "at the beginning of your second main phase"
+// trigger (Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You) generates one new
+// scenario, Defiant Survivor/trigger#0.0, whose same-name pick is a
+// rank-derived library card (ref "p0:Wastes#N"), so no exact answer exists --
+// Unproven, not Unresolved. The item tracks the new scenario one-for-one and
+// disappears if the phase-other recipe hook is reverted.
+//
+// Re-measured once more on the gated combat-legality static land
+// (cli-20261009T031407Z-6fac1771, merged here from main): MKM unproven 0 -> 1.
+// Serving Furtive Courier's gated cant-block-by static (CantBlockBy |
+// ValidAttacker$ Card.Self+attacking | CheckSVar$ SaccedThisTurn) generates
+// Furtive Courier/static#0.0, whose gate setup sacrifices an artifact; the
+// card's own attacks trigger then draws and discards, and that discard-mode
+// pick is a rank-derived library card (ref "p0:Wastes#N") offered beside an
+// identical Wastes, so no exact answer exists -- Unproven, not Unresolved.
+// The item tracks the new scenario one-for-one and disappears if the gated
+// static hook in levelb.classifyStatic is reverted.
+//
+// Re-measured on the level-B trigger-condition/activation land (this branch):
+// MKM unproven 0 -> 1. Serving Case of the Burning Masks' solved activation
+// (IsPresent$ Card.Self+IsSolved, activate_restriction.go solvedCasePreludes)
+// generates one new scenario, Case of the Burning Masks/activate#0.0, whose
+// Dig-then-ChooseCard pick is a rank-derived library ref with two or more
+// same-name candidates, so no exact answer exists -- Unproven, not Unresolved.
+// The item tracks the new scenario one-for-one and disappears if the
+// solved-Case prelude is reverted.
+//
+// The two MKM moves each landed on its own side of a merge from the same
+// base, so the merged pins carry both new scenarios: MKM unproven 1 -> 2,
+// alongside the cb26eec8 SPM/TDM alias 2 moves.
+//
+// Re-measured for cli-20261009T031407Z-cb26eec8 (Level B: observe statics
+// that grant an activated ability): two Aura grants add one Alias item each.
+// Ringing Strike Mastery (TDM) and Friendly Neighborhood (SPM) are cast by the
+// fixture onto an OPPOSING permanent (p1:Grizzly Bears / p1:Forest) while p0's
+// own same-named probe (Grizzly Bears / Forest) is the grant recipient, so the
+// emitted cast-target answer is an exact ref that resolves the same-name pick
+// -- Alias 1 -> 2 in each set, Unresolved stayed 0. The item tracks each new
+// scenario one-for-one and disappears if the granted-activated-ability
+// observation is reverted.
+//
+// Re-measured at the merge of cli-20261009T031407Z-6fac1771's level-B
+// granted-trigger observation (the AddTrigger grant fired by its cause steps)
+// into current main: EOE alias 2 -> 3, unproven 1 -> 2. The observation
+// generates two new EOE scenarios -- Dawnsire, Sunstar Dreadnought static#0.0
+// (its same-name pick is resolved exactly via an alias) and Entropic
+// Battlecruiser static#0.0 (its same-name pick ref is rank-derived, so
+// Unproven). Measured per side: main alone reproduces the old 2/1; the
+// granted-trigger side alone reproduces 3/2 with exactly these five items, so
+// the move is the granted-trigger serving, not the merge.
+//
+// Re-measured for cli-20261009T031408Z-5823e7de (Level B activate fixtures):
+// DSK unproven 33 -> 34. Serving Say Its Name's activate#0.1 (a level-B
+// activate row) generates the new scenario DSK Say Its Name/activate#0.1/v1,
+// whose two same-name picks are rank-derived library refs ("p0:Say Its
+// Name#2"/"#3", the cards the ability exiles by name), so no exact answer
+// exists -- Unproven, not Unresolved. The item tracks the new scenario
+// one-for-one and disappears if that activate serving is reverted.
+//
+// Re-measured for the declined-object-pick routing (c5ccc3049, main's ticket
+// agent-20261009T041343Z-30c2d145 round 2): BLB unproven 4 -> 5.
+// That change routes Fireglass Mentor/trigger#0.0's declined two-option exile
+// look ask onto XMage's mandatory TargetCardInExile 1..1 pose: the serving
+// trigger template forces the rerun so gorge picks the first exiled card too,
+// and the step's answer becomes the name "Wastes" (RetargetForcedLookPicks)
+// where it was the skip token "[choice_skip]" before. A skip token is not a
+// name selection, so the census never counted the item; the named answer
+// does. The pick is one of TWO same-name Wastes in the exile look
+// (p0:Wastes#27 / p0:Wastes#39), and an exile-look ref is rank-derived, so
+// ClassifySameName marks it Unanswerable: Unproven, not Unresolved -- no
+// exact answer exists, which is why the mandatory-target script names the
+// card rather than an alias. One-for-one: reverting c5ccc3049 and re-running
+// the BLB scan lists exactly the old four items (Cache Grab, Calamitous
+// Tide, Feed the Cycle, Ral Crackling Wit -- untouched by that commit, whose
+// answers are name picks over rank-derived library/hidden Wastes from before
+// it); restoring it adds Fireglass Mentor/trigger#0.0 and nothing else
+// (.ds4/scratch/probe1.log / probe2.log). Unresolved stayed 0.
+//
+// Re-measured on the level-B Card.Self-sacrifice-without-own-ability land
+// (this branch): DSK unproven 33 -> 34. Serving Disturbing Mirth's
+// Mode$ Sacrificed | ValidCard$ Card.Self trigger (its only sacrifice cause is
+// an external spell, so externalSelfSacrificeCause casts Angelic Purge and
+// answers the Sac<1/Permanent> cost with the card) generates one new scenario,
+// Disturbing Mirth/trigger#0.1, whose ManifestDread chooser pick is a
+// rank-derived library card (ref "p0:Wastes#N"), so no exact answer exists --
+// Unproven, not Unresolved. The item tracks the new scenario one-for-one:
+// measured DSK 34 -> 33 with the external-self-sacrifice cause reverted.
+// Both paragraphs are from either side of the same merge base: the branch's
+// Say Its Name activate serving and main's Disturbing Mirth sacrifice cause
+// each add one DSK item, and the merged tree carries both (pins re-measured
+// on the merged tree below). Merged DSK unproven is therefore 34 -> 35, not
+// the 34 either side alone measured.
+//
+// Unresolved stayed 0 in every set through all moves; that is the
+// defect measure.
+//
+// Re-measured on the level-B keyword-action-trigger land
+// (agent-20261009T160937Z-c135e2b0): DSK unproven 34 -> 35. Serving
+// Paranormal Analyst's Mode$ ManifestDread trigger (cast Manifest Dread,
+// which manifests dread and puts a card into the graveyard) generates one
+// new scenario, Paranormal Analyst/trigger#0.0, whose "put a card you put
+// into your graveyard this way into your hand" chooser pick is a
+// rank-derived library card (ref "p0:Wastes#N"), so no exact answer exists --
+// Unproven, not Unresolved. The item tracks the new scenario one-for-one and
+// disappears if the trigger.manifest-dread recipe is reverted. No other set
+// moved: the other keyword-action causes (explore, plot, saddle, collect
+// evidence, discover, gift, forage, elemental bend) generate items whose
+// picks are exact aliases or need no same-name discrimination.
+//
+// Re-measured on the level-B indirect SVar attack gate (review of
+// agent-20261009T035714Z-15384ed6, commit ae737b73c): DFT unproven 3 -> 4.
+// Serving Fearless Swashbuckler trigger#0.0 ("if a Pirate and a Vehicle
+// attacked this combat", CheckSVar$ X = SVar$Y/Plus.Z) generates one new
+// scenario: the Kitesail Corsair and the crewed Veloheart Bike attack, the
+// trigger draws three then discards two, and the deterministic discard mode
+// answers name the two hand Wastes (refs "p0:Wastes#24"/"p0:Wastes#36",
+// rank-derived hand cards over three same-name options). No exact answer
+// exists, so ClassifySameName marks them Unanswerable: Unproven, not
+// Unresolved. The item tracks the new scenario one-for-one and disappears if
+// trigger_condition_indirect.go is reverted (verified: the six changed files
+// reverted to main's versions re-run the DFT chunk at unproven 3, probe at
+// .ds4/scratch/vr3-census-rev.log). MKM (Tunnel Tipster) and SPM (Spider-Man
+// 2099) stayed at their pins. Unresolved stayed 0.
+//
+// Re-measured on the merge of this branch with that keyword-action land: the
+// merged tree carries the branch's Say Its Name item AND both main items
+// (Disturbing Mirth, Paranormal Analyst), so merged DSK unproven is 36. The
+// auto-merged pin read 35 because both sides pinned 35 before the merge (each
+// held two of the three items); re-pinned to 36 here. Unresolved stayed 0.
+//
+// Re-measured on the G7 static-fixture slice (agent-20261009T085728Z-96fc1b7a):
+// DSK alias 2 -> 3. Serving Chainsaw's rev-counter static redirects its
+// optional ETB target to p1's Grizzly Bears (staticPreserveETBProbe) while p0
+// holds a Grizzly Bears of its own, so the emitted answer is the exact ref
+// "p1:Grizzly Bears" (an Alias, which names that one object). The item tracks
+// the redirect one-for-one: reverting the optional-target redirect in
+// static_observe_self_removal.go re-runs the DSK chunk at alias 2 (verified).
+// Unresolved stayed 0 and no other set moved.
+//
+// Re-measured on the bookkeeping-trigger template (wave-4 lb4w2-bookkeep):
+// DSK unproven 35 -> 36. Serving Oblivious Bookworm trigger#0.2 (its upkeep
+// reset of the turned-face-up imprint, observed on turn 3) makes the turn-3
+// end-step consumer draw and then discard, and the discard mode answer names
+// one of three hand Wastes by a rank-derived ref: no exact answer exists, so
+// it is Unproven, not Unresolved. Unresolved stayed 0.
+//
+// Re-measured on lb4-harness (wave-4 Level B harness rows): DSK alias 3 -> 2,
+// SPM 2 -> 1, TDM 2 -> 1, TLA 2 -> 1. Each lost alias was the SECOND copy of
+// a cast step's own target (Undead Sprinter, Friendly Neighborhood, Ringing
+// Strike Mastery, Lo and Li): a caller that rewrote no step targets now has
+// the steps carrying Targets excluded from re-scripting (gen_composite.go
+// stepsWithOwnTargets), so the target the driver already queues from the step
+// is no longer also an xmage_answers alias. All four replay AGREE in XMage
+// without the duplicate, which XMage had left unconsumed ("Count are not
+// equal"). Unresolved and unproven did not move.
+//
+// Re-measured on lb5-driver: ECL alias 0 -> 1, SOS 0 -> 1. Each gained alias
+// is a NEW row's copy-cost election (Raiding Schemes' conspire tap of two of
+// three Grizzly Bears, Silverquill's casualty sacrifice of one), whose gorge
+// choose names the exact same-name Bears by ref; both replay AGREE in XMage.
+var wantSameNameCensus = map[string]string{
+	"BIG": `{"alias":0,"copy":0,"unresolved":0,"unproven":1,"items":null}`,
+	"BLB": `{"alias":3,"copy":0,"unresolved":0,"unproven":5,"items":null}`,
+	"DFT": `{"alias":0,"copy":0,"unresolved":0,"unproven":4,"items":null}`,
+	"DSK": `{"alias":2,"copy":0,"unresolved":0,"unproven":36,"items":null}`,
+	"ECL": `{"alias":1,"copy":0,"unresolved":0,"unproven":5,"items":null}`,
+	"EOE": `{"alias":3,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
+	"FDN": `{"alias":0,"copy":1,"unresolved":0,"unproven":2,"items":null}`,
+	"FIN": `{"alias":0,"copy":0,"unresolved":0,"unproven":4,"items":null}`,
+	"FRA": `{"alias":0,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
+	"HOB": `{"alias":0,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
+	"LCI": `{"alias":0,"copy":0,"unresolved":0,"unproven":5,"items":null}`,
+	"MKM": `{"alias":3,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
+	"MSH": `{"alias":1,"copy":0,"unresolved":0,"unproven":3,"items":null}`,
+	"OTJ": `{"alias":2,"copy":1,"unresolved":0,"unproven":1,"items":null}`,
+	"SOS": `{"alias":1,"copy":0,"unresolved":0,"unproven":5,"items":null}`,
+	"SPM": `{"alias":1,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
+	"TDM": `{"alias":1,"copy":0,"unresolved":0,"unproven":6,"items":null}`,
+	"TLA": `{"alias":1,"copy":1,"unresolved":0,"unproven":2,"items":null}`,
+	"TMT": `{"alias":3,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
+	"WOE": `{"alias":0,"copy":0,"unresolved":0,"unproven":3,"items":null}`,
+}
+
+// refName strips a scenario ref to the object name.
+func refName(ref string) string {
+	n := ref
+	if i := strings.IndexByte(n, ':'); i >= 0 && strings.HasPrefix(n, "p") {
+		n = n[i+1:]
+	}
+	n = strings.TrimPrefix(n, "token:")
+	if j := strings.LastIndexByte(n, '#'); j >= 0 && j+1 < len(n) && strings.Trim(n[j+1:], "0123456789") == "" {
+		n = n[:j]
+	}
+	return n
+}
+
+func isTokenRef(ref string) bool { return strings.Contains(ref, ":token:") }
+
+// isRefSpelling reports whether s is a full scenario ref ("p0:Name#2",
+// "p1:token:Name"). The generator emits one for an alias pick on the target
+// queue, which the driver's targetName maps to the object's "@" alias.
+func isRefSpelling(s string) bool {
+	if len(s) < 3 || s[0] != 'p' || s[1] < '0' || s[1] > '9' {
+		return false
+	}
+	return strings.Contains(s, ":")
+}
+
+// answerMatchesRef mirrors the XMage driver when it checks one emitted answer
+// against one offered object: an exact-ref alias equals the ref; a bare or
+// copy-marked name matches by name, with "[only copy]"/"[no copy]" filtering
+// on the token-vs-card distinction (TestPlayer.hasObjectTargetNameOrAlias +
+// the isCopy() filter).
+func answerMatchesRef(answer, ref string) bool {
+	if strings.HasPrefix(answer, "@") {
+		return answer == "@"+ref
+	}
+	if isRefSpelling(answer) {
+		return answer == ref
+	}
+	base := answer
+	copyFilter := ""
+	switch {
+	case strings.HasSuffix(base, "[no copy]"):
+		copyFilter = "origin"
+		base = strings.TrimSuffix(base, "[no copy]")
+	case strings.HasSuffix(base, "[only copy]"):
+		copyFilter = "copy"
+		base = strings.TrimSuffix(base, "[only copy]")
+	}
+	if !strings.EqualFold(base, refName(ref)) {
+		return false
+	}
+	switch copyFilter {
+	case "origin":
+		return !isTokenRef(ref)
+	case "copy":
+		return isTokenRef(ref)
+	}
+	return true
+}
+
+// classifyAnswer returns the census bucket for one emitted answer over the
+// offered refs, and the number of DISTINCT same-name candidates it matches.
+// Zero or more than one match is unresolved.
+func classifyAnswer(answer string, ref string, options []string) (bucket string, matches int) {
+	name := refName(ref)
+	seen := map[string]bool{}
+	for _, o := range options {
+		if !strings.EqualFold(refName(o), name) {
+			continue
+		}
+		if answerMatchesRef(answer, o) {
+			seen[o] = true
+		}
+	}
+	// The answer must select the pick itself, not merely one object: an
+	// alias naming a same-name sibling is a wrong answer, and a pick whose
+	// own option is missing from options cannot be proven resolved.
+	if len(seen) == 1 && seen[ref] {
+		if strings.HasPrefix(answer, "@") {
+			return "alias", 1
+		}
+		if isRefSpelling(answer) {
+			return "alias", 1
+		}
+		return "copy", 1
+	}
+	return "unresolved", len(seen)
+}
+
+// segmentFor finds the emitted answer segment (answers may be '^'-joined)
+// that NAMES the pick's ref, across every answer value of the step: first an
+// exact "@ref"/ref alias, then a bare/copy-marked name equal to the pick's
+// name, then an alias of a same-name SIBLING (a wrong answer, which
+// classifyAnswer then counts as unresolved rather than letting it go
+// uncounted). Finally a different-name alias is retained as a wrong answer,
+// not silently skipped. Returns "" when no segment names any object, the
+// ordinary case for a pick XMage answers with a number, a yes/no, or a skip
+// token rather than a name selection.
+func segmentFor(values []string, ref string) string {
+	var segs []string
+	for _, v := range values {
+		segs = append(segs, strings.Split(v, "^")...)
+	}
+	for _, seg := range segs {
+		if seg == "@"+ref || seg == ref {
+			return seg
+		}
+	}
+	for _, seg := range segs {
+		if strings.HasPrefix(seg, "@") || isRefSpelling(seg) {
+			continue
+		}
+		base := strings.TrimSuffix(strings.TrimSuffix(seg, "[no copy]"), "[only copy]")
+		if strings.EqualFold(base, refName(ref)) {
+			return seg
+		}
+	}
+	for _, seg := range segs {
+		alias := strings.TrimPrefix(seg, "@")
+		if isRefSpelling(alias) && strings.EqualFold(refName(alias), refName(ref)) {
+			return seg
+		}
+	}
+	for _, seg := range segs {
+		if isRefSpelling(strings.TrimPrefix(seg, "@")) {
+			return seg
+		}
+	}
+	return ""
+}
+
+// Count siblings independently of the production discriminator, so a bug in
+// ClassifySameName cannot make both the generator and its census go green.
+func sameNameCandidates(ref string, options []string) int {
+	seen := map[string]bool{}
+	for _, candidate := range options {
+		if strings.EqualFold(refName(candidate), refName(ref)) {
+			seen[candidate] = true
+		}
+	}
+	return len(seen)
+}
+
+func runSameNameAnswerCensus(t *testing.T, start, end int) {
+	reg := testutil.CorpusRegistry(t)
+	has := func(n string) bool { _, ok := reg.Lookup(n); return ok }
+	folded := compliance.FoldedNames(reg)
+
+	declared, err := compliance.EmbeddedDeclared()
+	if err != nil {
+		t.Fatal(err)
+	}
+	var sets []string
+	for set := range declared {
+		sets = append(sets, set)
+	}
+	sort.Strings(sets)
+	if len(sets) != 20 || len(wantSameNameCensus) != len(sets) {
+		t.Fatalf("census chunks/pins must cover every declared set: sets=%v pins=%d", sets, len(wantSameNameCensus))
+	}
+	sets = sets[start:end]
+
+	got := map[string]string{}
+	for _, set := range sets {
+		printed, err := compliance.EmbeddedPrinted(set)
+		if err != nil {
+			t.Fatalf("%s: %v", set, err)
+		}
+		var c sameNameCensus
+		scan := func(it oraclegen.Item, id string) {
+			res, err := rules.RunOracleScenarioJSON(reg, it.Raw())
+			if err != nil {
+				return
+			}
+			itemBucket := ""
+			setBucket := func(bucket string) {
+				if sameNameBucketRank(bucket) > sameNameBucketRank(itemBucket) {
+					itemBucket = bucket
+				}
+			}
+			for _, d := range res.Decisions {
+				for k := range d.Picks {
+					if k >= len(d.PickRefs) || sameNameCandidates(d.PickRefs[k], d.OptionRefs) < 2 {
+						continue
+					}
+					// The pre-existing mechanism exclusions (arrange, library search)
+					// stay out of scope, exactly as before.
+					if !oraclegen.InNameMatchMechanism(d, k) {
+						continue
+					}
+					ref := d.PickRefs[k]
+					// Find the emitted answer that NAMES this pick. A step can carry
+					// several answers; a multi-pick definition joins them with
+					// '^'. A pick XMage answers with a number, a yes/no or a
+					// skip token is not a name selection and is skipped (its
+					// object identity never reaches XMage's name match).
+					answer := ""
+					if d.Step >= 0 && d.Step < len(it.XAnswers) {
+						var values []string
+						for _, a := range it.XAnswers[d.Step] {
+							values = append(values, a.Value)
+						}
+						answer = segmentFor(values, ref)
+					}
+					if answer == "" {
+						continue
+					}
+					// An unanswerable same-name pick (a rank-derived library/hand
+					// ref XMage cannot bind) is out of the fix's reach, but it must
+					// stay visible: count it as unproven, never silently drop it
+					// and never call it resolved.
+					if oraclegen.ClassifySameName(d, k).Unanswerable {
+						setBucket("unproven")
+						continue
+					}
+					bucket, matches := classifyAnswer(answer, ref, d.OptionRefs)
+					if bucket == "unresolved" {
+						// The answer named something, but not exactly the
+						// pick: report both the defect and the pick.
+						t.Errorf("%s: ambiguous pick %q emitted %q, which matches %d distinct offered objects, not exactly the pick (kind=%s resume=%s via=%s pk=%v)", id, ref, answer, matches, d.Kind, d.Resume, d.Via, d.PickKinds)
+					}
+					// Count ITEMS, not picks: multi-pick dialogs or several
+					// decisions in one item must not inflate the pre-fix census.
+					setBucket(bucket)
+				}
+			}
+			switch itemBucket {
+			case "alias":
+				c.Alias++
+			case "copy":
+				c.Copy++
+			case "unresolved":
+				c.Unresolved++
+				c.Items = append(c.Items, id)
+			case "unproven":
+				c.Unproven++
+			}
+		}
+		for _, name := range printed.Cards {
+			card, ok := compliance.CorpusNameFold(has, folded, name)
+			if !ok {
+				continue
+			}
+			if it, skip := Generate(reg, card); skip == nil {
+				scan(it, it.ID)
+			}
+			cd, _ := reg.Lookup(card)
+			for _, r := range levelb.Requirements(cd) {
+				if r.Gap != "" {
+					continue
+				}
+				if it, skip := GenerateB(reg, card, r); skip == nil {
+					scan(it, it.ID)
+				}
+			}
+		}
+		sort.Strings(c.Items)
+		b, _ := json.Marshal(c)
+		got[set] = string(b)
+		t.Logf("%s before=%d after=%d %s", set, c.Alias+c.Copy+c.Unresolved+c.Unproven, c.Unresolved, got[set])
+	}
+	for _, set := range sets {
+		if got[set] != wantSameNameCensus[set] {
+			t.Errorf("%s same-name census: got %s want %s", set, got[set], wantSameNameCensus[set])
+		}
+	}
+}

@@ -1,0 +1,246 @@
+{
+ "card": "Kindred Charge",
+ "family": "choose-type",
+ "author": "cli-20261014T032241Z-e03848a5 (Oracle + CR only)",
+ "oracle_sha": "4b7d5f0f6040",
+ "scenarios": [
+  {
+   "name": "copies-each-chosen-type-creature-with-haste",
+   "cr": [
+    "707.2",
+    "111.10",
+    "702.10a"
+   ],
+   "why": "Choosing Bear creates one token copy of each Bear its caster controls: two Grizzly Bears make two 2/2 Bear tokens, each with haste, and the originals stay.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Kindred Charge"
+     ],
+     "battlefield": [
+      "Grizzly Bears",
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Kindred Charge",
+     "mana": "RRCCCC"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Bear"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Grizzly Bears",
+      "token": true
+     },
+     "eq": 2
+    },
+    {
+     "card": "p0:token:Grizzly Bears",
+     "pt": "2/2",
+     "keywords": [
+      "Haste"
+     ]
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "battlefield"
+    },
+    {
+     "card": "p0:Grizzly Bears#2",
+     "zone": "battlefield"
+    }
+   ]
+  },
+  {
+   "name": "only-chosen-type-is-copied",
+   "cr": [
+    "707.2"
+   ],
+   "why": "Choosing Bear copies only the Bear, not the Cat: one Grizzly Bears token is made and Savannah Lions is untouched.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Kindred Charge"
+     ],
+     "battlefield": [
+      "Grizzly Bears",
+      "Savannah Lions"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Kindred Charge",
+     "mana": "RRCCCC"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Bear"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Grizzly Bears",
+      "token": true
+     },
+     "eq": 1
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Savannah Lions",
+      "token": true
+     },
+     "eq": 0
+    },
+    {
+     "card": "p0:Savannah Lions",
+     "pt": "2/1"
+    }
+   ]
+  },
+  {
+   "name": "no-creatures-of-chosen-type-nothing",
+   "cr": [
+    "707.2",
+    "608.2d"
+   ],
+   "why": "Choosing a creature type with no creature of that type makes no tokens.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Kindred Charge"
+     ],
+     "battlefield": [
+      "Savannah Lions"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Kindred Charge",
+     "mana": "RRCCCC"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Goblin"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Savannah Lions",
+      "token": true
+     },
+     "eq": 0
+    },
+    {
+     "card": "p0:Kindred Charge",
+     "zone": "graveyard"
+    }
+   ]
+  },
+  {
+   "name": "tokens-exiled-at-next-end-step",
+   "cr": [
+    "603.7",
+    "513.1"
+   ],
+   "why": "The copies are exiled at the beginning of the next end step, so after this turn's end step only the original remains.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Kindred Charge"
+     ],
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Kindred Charge",
+     "mana": "RRCCCC"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Bear"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "end",
+     "active": "p0"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Grizzly Bears",
+      "token": true
+     },
+     "eq": 0
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

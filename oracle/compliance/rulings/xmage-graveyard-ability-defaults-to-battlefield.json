@@ -1,0 +1,16 @@
+{
+  "id": "xmage-graveyard-ability-defaults-to-battlefield",
+  "status": "xmage_wrong",
+  "match": {
+    "template": "activate",
+    "op": "harness",
+    "field": "xmage",
+    "diff": "AssertionError: Can't find ability to activate command: @actN {N}, Exile this card from your graveyard"
+  },
+  "ruling": "Oracle: '{6}, Exile this card from your graveyard: Create two tapped 1/1 colorless Robot artifact creature tokens with flying.' The ability functions only from the graveyard (CR 113.6k, 602.1). XMage builds it as a SimpleActivatedAbility without Zone.GRAVEYARD, so it exists only on the battlefield and can never be activated; gorge offers it from the graveyard. Forge AGREES with gorge. Filed magefree/mage#16480. Operator-approved xmage_wrong 2026-10-13.",
+  "source": "Spider-Slayer, Hatred Honed (activate#0.0); operator approved xmage_wrong 2026-10-13 (Forge AGREE); a shape ruling because a per-row ruling on a harness row is dropped by every replay (MergeVerdicts carries only diverge signatures). Scoped by its diff to an activation costing {N} plus exiling the card from the graveyard that XMage can't find so a real driver gap for other graveyard activations (e.g. Say Its Name) stays visible.",
+  "cr": [
+    "113.6k",
+    "602.1"
+  ]
+}

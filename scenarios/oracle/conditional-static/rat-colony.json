@@ -1,0 +1,114 @@
+{
+ "card": "Rat Colony",
+ "family": "conditional-static",
+ "author": "cli-20261014T032241Z-e03848a5 (Oracle + CR only)",
+ "oracle_sha": "05f4c156e4b0",
+ "scenarios": [
+  {
+   "name": "pumps-per-other-rat",
+   "cr": [
+    "604.3",
+    "613.1f",
+    "613.4c"
+   ],
+   "why": "Two Rat Colonies each see one other Rat, so each is 2/1 + 1/+0 = 3/1; the non-Rat Grizzly Bears is unaffected.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Rat Colony",
+      "Rat Colony",
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "C"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Rat Colony",
+     "pt": "3/1"
+    },
+    {
+     "card": "p0:Rat Colony#2",
+     "pt": "3/1"
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "pt": "2/2"
+    }
+   ]
+  },
+  {
+   "name": "base-with-no-other-rat",
+   "cr": [
+    "604.3",
+    "613.1f"
+   ],
+   "why": "A lone Rat Colony has no other Rat to count, so it stays its printed 2/1.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Rat Colony"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "C"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Rat Colony",
+     "pt": "2/1"
+    }
+   ]
+  },
+  {
+   "name": "opponents-rats-do-not-count",
+   "cr": [
+    "604.3",
+    "109.3",
+    "613.1f"
+   ],
+   "why": "Rat Colony counts only Rats YOU control: two Rats on the opponent's battlefield leave p0's Rat Colony at 2/1.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Rat Colony"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Rat Colony",
+      "Rat Colony"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "C"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Rat Colony",
+     "pt": "2/1"
+    },
+    {
+     "card": "p1:Rat Colony",
+     "pt": "3/1"
+    }
+   ]
+  }
+ ]
+}

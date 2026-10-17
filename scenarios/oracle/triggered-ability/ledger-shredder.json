@@ -1,0 +1,235 @@
+{
+ "card": "Ledger Shredder",
+ "family": "triggered-ability",
+ "author": "cli-20261014T032241Z-e03848a5 (Oracle + CR only)",
+ "oracle_sha": "d6c51ddc553d",
+ "scenarios": [
+  {
+   "name": "second-spell-connives-nonland-discard-counters",
+   "cr": [
+    "702.59a",
+    "603.2",
+    "702.10a"
+   ],
+   "why": "Ledger Shredder has flying, and its controller's second spell each turn makes it connive: after casting it (first spell) and a Lightning Bolt (second spell), it draws one and discards the chosen nonland, so it gains a +1/+1 counter and is 2/4.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Ledger Shredder",
+      "Lightning Bolt",
+      "Lightning Bolt"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Ledger Shredder",
+     "mana": "UC"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Lightning Bolt",
+     "mana": "R",
+     "targets": [
+      "p0"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "modes",
+       "pick": [
+        "Discard Lightning Bolt"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Ledger Shredder",
+     "zone": "battlefield",
+     "pt": "2/4",
+     "counters": {
+      "P1P1": 1
+     },
+     "keywords": [
+      "Flying"
+     ]
+    },
+    {
+     "hand_size": {
+      "p0": 1
+     }
+    },
+    {
+     "graveyard_size": {
+      "p0": 2
+     }
+    }
+   ]
+  },
+  {
+   "name": "discarding-a-land-no-counter",
+   "cr": [
+    "702.59a",
+    "205.4"
+   ],
+   "why": "The +1/+1 counter is per NONLAND card discarded: choosing to discard a Forest leaves Ledger Shredder at its printed 1/3.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Ledger Shredder",
+      "Lightning Bolt",
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Ledger Shredder",
+     "mana": "UC"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Lightning Bolt",
+     "mana": "R",
+     "targets": [
+      "p0"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "modes",
+       "pick": [
+        "p0:Forest"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Ledger Shredder",
+     "pt": "1/3",
+     "counters": {
+      "P1P1": 0
+     }
+    },
+    {
+     "card": "p0:Forest",
+     "zone": "graveyard"
+    },
+    {
+     "hand_size": {
+      "p0": 1
+     }
+    }
+   ]
+  },
+  {
+   "name": "each-players-second-spell-triggers",
+   "cr": [
+    "603.2",
+    "702.59a"
+   ],
+   "why": "The trigger watches each player: the opponent's second spell of their turn makes Ledger Shredder connive, and its controller discards.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Ledger Shredder"
+     ],
+     "hand": [
+      "Lightning Bolt"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Lightning Bolt",
+      "Shock"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p1"
+    },
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "mana",
+     "seat": 1,
+     "mana": "RR"
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Lightning Bolt",
+     "targets": [
+      "p0"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Shock",
+     "targets": [
+      "p0"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "modes",
+       "pick": [
+        "Discard Lightning Bolt"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Ledger Shredder",
+     "counters": {
+      "P1P1": 1
+     }
+    },
+    {
+     "hand_size": {
+      "p0": 1
+     }
+    },
+    {
+     "life": {
+      "p0": 15
+     }
+    }
+   ]
+  }
+ ]
+}

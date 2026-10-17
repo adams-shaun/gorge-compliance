@@ -1,0 +1,410 @@
+package org.mage.test.oracle;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.LinkedHashMap;
+import java.util.UUID;
+import mage.cards.CardSetInfo;
+import mage.cards.t.TheEaglesAreComing;
+import mage.constants.PhaseStep;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
+import org.mage.test.player.TestPlayer;
+import sun.misc.Unsafe;
+
+/** Executable regression check of the real driver helpers, without H2 or a game.
+ * Run scripts/xmage-oracle-test-split-room.sh. Full XMage replay is still needed
+ * to validate resolution and compare verdicts on the host. */
+public final class ScenarioReplaySplitRoomTest {
+    public static final class RecordingDriver extends ScenarioReplay {
+        String dealt;
+        Zone dealtZone;
+        int dealtCount;
+        // Unsafe allocation skips initialisers; driver() fills these.
+        java.util.List<String> queued;
+        java.util.List<String> casts;
+        // The XMage card names this double treats as Rooms (cardIsRoom asks
+        // the card repository, which needs H2).
+        java.util.Set<String> rooms;
+
+        @Override
+        boolean cardIsRoom(String xmageCardName) {
+            return rooms != null && rooms.contains(xmageCardName);
+        }
+
+        @Override
+        public void addTarget(TestPlayer player, String target) {
+            queued.add(target);
+        }
+
+        @Override
+        public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName) {
+            casts.add(cardName);
+        }
+
+        @Override
+        public void addCard(Zone zone, TestPlayer player, String name, int count, boolean tapped) {
+            dealt = name;
+            dealtZone = zone;
+            dealtCount += count;
+        }
+    }
+
+    private static void set(ScenarioReplay driver, String name, Object value) throws Exception {
+        Field f = ScenarioReplay.class.getDeclaredField(name);
+        f.setAccessible(true);
+        f.set(driver, value);
+    }
+
+    private static Object call(ScenarioReplay driver, String name, Class<?>[] types, Object... args) throws Exception {
+        Method m = ScenarioReplay.class.getDeclaredMethod(name, types);
+        m.setAccessible(true);
+        return m.invoke(driver, args);
+    }
+
+    private static final Class<?>[] ROUTE_TYPES = {int.class, PhaseStep.class, TestPlayer.class, String.class,
+            java.util.List.class, mage.abilities.Ability.class};
+
+    private static Object field(ScenarioReplay driver, String name) throws Exception {
+        Field f = ScenarioReplay.class.getDeclaredField(name);
+        f.setAccessible(true);
+        return f.get(driver);
+    }
+
+    private static RecordingDriver routeDriver() throws Exception {
+        RecordingDriver d = driver("", "");
+        set(d, "cast", new java.util.ArrayList<String>());
+        set(d, "adjustedCasts", new java.util.HashSet<String>());
+        return d;
+    }
+
+    private static void equal(Object want, Object got) {
+        if (!want.equals(got)) {
+            throw new AssertionError("expected " + want + ", got " + got);
+        }
+    }
+
+    private static RecordingDriver driver(String half, String whole) throws Exception {
+        // The superclass constructor scans CardRepository (H2), even when only
+        // testing names. Bypass it for this test double, then initialise only
+        // the fields used by add/name conversion. Never execute a game here.
+        Field f = Unsafe.class.getDeclaredField("theUnsafe");
+        f.setAccessible(true);
+        RecordingDriver d = (RecordingDriver) ((Unsafe) f.get(null)).allocateInstance(RecordingDriver.class);
+        d.queued = new java.util.ArrayList<>();
+        d.casts = new java.util.ArrayList<>();
+        set(d, "gorgeName", half);
+        set(d, "xmageName", whole);
+        set(d, "buildCounts", new LinkedHashMap<String, Integer>());
+        set(d, "refAlias", new LinkedHashMap<String, String>());
+        return d;
+    }
+
+    private static void checkHalf(String half, String whole, String zoneName, String observed) throws Exception {
+        if (half.equals(whole) || !whole.startsWith(half + " // ")) {
+            throw new AssertionError("fixture must have distinct half and whole names");
+        }
+        RecordingDriver d = driver(half, whole);
+        JsonObject setup = new JsonObject();
+        JsonArray hand = new JsonArray();
+        hand.add(half);
+        setup.add("hand", hand);
+        // Exercise the setup path itself, recording what add sends to XMage.
+        equal(1, call(d, "add", new Class<?>[]{JsonObject.class, String.class, Zone.class, TestPlayer.class},
+                setup, "hand", Zone.HAND, null));
+        equal(1, d.dealtCount);
+        equal(Zone.HAND, d.dealtZone);
+        equal(whole, d.dealt);
+        String ref = "p0:" + half;
+        String stripped = (String) call(d, "refName", new Class<?>[]{String.class}, ref);
+        // Execute the production cast conversion, not a copy or a source-text assertion.
+        equal(half, call(d, "castSpelling", new Class<?>[]{String.class}, stripped));
+        equal("Grizzly Bears", call(d, "castSpelling", new Class<?>[]{String.class}, "Grizzly Bears"));
+        equal(whole, call(d, "xmageSpelling", new Class<?>[]{String.class}, half));
+        // XMage reports split cards whole in the graveyard, Rooms by half on
+        // the battlefield. Both must match gorge's scenario face spelling.
+        JsonObject snapshot = new JsonObject();
+        JsonArray zone = new JsonArray();
+        zone.add(observed);
+        snapshot.add(zoneName, zone);
+        JsonObject normalised = (JsonObject) call(d, "gorgeSpellings", new Class<?>[]{JsonElement.class}, snapshot);
+        equal(half, normalised.getAsJsonArray(zoneName).get(0).getAsString());
+        equal(new JsonPrimitive(half), call(d, "gorgeSpellings", new Class<?>[]{JsonElement.class}, new JsonPrimitive(whole)));
+        System.out.println("PASS " + ref + ": hand=" + d.dealt + ", cast=" + half + ", " + zoneName + "=" + observed);
+    }
+
+    public static void main(String[] args) throws Exception {
+        checkHalf("Cease", "Cease // Desist", "graveyard", "Cease // Desist");
+        checkHalf("Walk-In Closet", "Walk-In Closet // Forgotten Cellar", "battlefield", "Walk-In Closet");
+        // CR 709.5: a Room permanent with only the back door unlocked IS named
+        // for the back half, and gorge reports it so. A Room spell cast as its
+        // back door is named for that door too (CR 709.3b), so it keeps the
+        // name; ScenarioReplayRoomSpellingTest pins the non-Room face-1 alias.
+        String front = "Dazzling Theater", whole = "Dazzling Theater // Prop Room", back = "Prop Room";
+        RecordingDriver room = driver(front, whole);
+        room.rooms = java.util.Set.of(whole);
+        JsonObject perm = new JsonObject();
+        perm.addProperty("name", back);
+        JsonArray perms = new JsonArray();
+        perms.add(perm);
+        JsonObject spell = new JsonObject();
+        spell.addProperty("kind", "spell");
+        spell.addProperty("source", back);
+        JsonObject ability = new JsonObject();
+        ability.addProperty("kind", "ability");
+        ability.addProperty("source", back);
+        JsonArray stack = new JsonArray();
+        stack.add(spell);
+        stack.add(ability);
+        JsonObject snap = new JsonObject();
+        snap.add("permanents", perms);
+        snap.add("stack", stack);
+        JsonObject norm = (JsonObject) call(room, "gorgeSpellings", new Class<?>[]{JsonElement.class}, snap);
+        equal(back, norm.getAsJsonArray("permanents").get(0).getAsJsonObject().get("name").getAsString());
+        equal(back, norm.getAsJsonArray("stack").get(0).getAsJsonObject().get("source").getAsString());
+        equal(back, norm.getAsJsonArray("stack").get(1).getAsJsonObject().get("source").getAsString());
+        System.out.println("PASS unlocked back door keeps its name; a Room's back-door spell keeps the door name");
+        RecordingDriver alias = driver("Dáin Ironfoot", "Dain Ironfoot");
+        equal("Dain Ironfoot", call(alias, "castSpelling", new Class<?>[]{String.class}, "Dáin Ironfoot"));
+        RecordingDriver plain = driver("Shock", "");
+        equal("Shock", call(plain, "castSpelling", new Class<?>[]{String.class}, "Shock"));
+        // Crew/Saddle abilities include HTML reminder text in getRule(). The
+        // driver must issue the ability-class prefix accepted by TestPlayer.
+        String crewRule = "Crew 1 <i>(Tap any number of untapped creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)</i>";
+        equal("Crew 1", ScenarioReplay.activationCommandText(crewRule));
+        RecordingDriver activation = driver("", "");
+        JsonArray abilityTexts = new JsonArray();
+        abilityTexts.add(crewRule);
+        set(activation, "xabilities", abilityTexts);
+        equal("Crew 1", call(activation, "xabilityAt", new Class<?>[]{int.class}, 0));
+        equal("Crew 2", ScenarioReplay.activationCommandText("Crew 2"));
+        equal("Saddle 3", ScenarioReplay.activationCommandText(
+                "Saddle 3 <i>(Tap any number of other creatures you control with total power 3 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)</i>"));
+        equal("Equip {2}", ScenarioReplay.activationCommandText("Equip {2}"));
+        equal(true, ScenarioReplay.queueAdjustedCastTargets(true, false, 1));
+        equal(false, ScenarioReplay.queueAdjustedCastTargets(false, false, 1));
+        equal(false, ScenarioReplay.queueAdjustedCastTargets(true, true, 1));
+        equal(false, ScenarioReplay.queueAdjustedCastTargets(true, false, 0));
+        TheEaglesAreComing eagles = new TheEaglesAreComing(UUID.randomUUID(),
+                new CardSetInfo("The Eagles Are Coming!", "HOB", "1", Rarity.RARE));
+        // Precondition the production predicate depends on: the motivating card's
+        // spell ability is targetless until its adjuster runs. If a future edit
+        // adds a base target, this fails loudly instead of silently rerouting.
+        equal(true, ScenarioReplay.hasTargetAdjuster(eagles.getSpellAbility()));
+        equal(true, eagles.getSpellAbility().getAllSelectedTargets().isEmpty());
+        equal(true, ScenarioReplay.needsQueuedCastTargets(eagles.getSpellAbility()));
+        // An adjuster card that already declares a base target (Dominate,
+        // Distorting Wake) is NOT targetless: it keeps the inline $target path and
+        // must not be rerouted through the queue+skip branch.
+        mage.cards.d.Dominate withBaseTarget = new mage.cards.d.Dominate(UUID.randomUUID(),
+                new CardSetInfo("Dominate", "DTK", "1", Rarity.UNCOMMON));
+        equal(true, ScenarioReplay.hasTargetAdjuster(withBaseTarget.getSpellAbility()));
+        equal(false, withBaseTarget.getSpellAbility().getAllSelectedTargets().isEmpty());
+        equal(false, ScenarioReplay.needsQueuedCastTargets(withBaseTarget.getSpellAbility()));
+        // A modal spell whose only target is in a later mode (Cosmium Confluence:
+        // modes 1 and 2 targetless, mode 3 destroys target enchantment) fails the
+        // inline $target= check against the first mode, so it is queued instead.
+        mage.cards.c.CosmiumConfluence confluence = new mage.cards.c.CosmiumConfluence(UUID.randomUUID(),
+                new CardSetInfo("Cosmium Confluence", "LCI", "1", Rarity.RARE));
+        equal(true, confluence.getSpellAbility().getModes().getMode().getTargets().isEmpty());
+        equal(true, confluence.getSpellAbility().getModes().size() > 1);
+        equal(true, ScenarioReplay.firstTargetInLaterMode(confluence.getSpellAbility()));
+        // Unaffected shapes: a modal spell whose first mode already has a target
+        // (Cryptic Command's first mode, Abrade) keeps the inline path, as does a
+        // single-mode targeted spell and a single-mode targetless one.
+        mage.cards.a.Abrade abrade = new mage.cards.a.Abrade(UUID.randomUUID(),
+                new CardSetInfo("Abrade", "LCI", "1", Rarity.COMMON));
+        equal(true, abrade.getSpellAbility().getModes().size() > 1);
+        equal(false, abrade.getSpellAbility().getModes().getMode().getTargets().isEmpty());
+        equal(false, ScenarioReplay.firstTargetInLaterMode(abrade.getSpellAbility()));
+        equal(false, ScenarioReplay.firstTargetInLaterMode(eagles.getSpellAbility()));
+        equal(false, ScenarioReplay.firstTargetInLaterMode(null));
+        // The production cast routing (castQueuedTargets, the cast step's first
+        // branch), driven through the SAME method the cast step calls, with the
+        // real spell ability each card produces. The routing decision derives
+        // every flag from that ability inside castQueuedTargets, so dropping the
+        // modal term anywhere in it fails this test instead of passing silently.
+        // Cosmium: the target is queued and the cast carries no inline target.
+        java.util.List<String> tgt = java.util.List.of("p1:Glorious Anthem");
+        RecordingDriver route = routeDriver();
+        equal(true, call(route, "castQueuedTargets", ROUTE_TYPES, 1, PhaseStep.PRECOMBAT_MAIN, null,
+                "Cosmium Confluence", tgt, confluence.getSpellAbility()));
+        equal(java.util.List.of("Glorious Anthem"), route.queued);
+        equal(java.util.List.of("Cosmium Confluence"), route.casts);
+        equal(false, ((java.util.Set<?>) field(route, "adjustedCasts")).contains("Cosmium Confluence"));
+        // An adjuster card is queued AND registered as adjusted.
+        RecordingDriver adj = routeDriver();
+        equal(true, call(adj, "castQueuedTargets", ROUTE_TYPES, 1, PhaseStep.PRECOMBAT_MAIN, null,
+                "The Eagles Are Coming!", tgt, eagles.getSpellAbility()));
+        equal(java.util.List.of("Glorious Anthem"), adj.queued);
+        equal(true, ((java.util.Set<?>) field(adj, "adjustedCasts")).contains("The Eagles Are Coming!"));
+        // Ordinary (Abrade), divided (Biogenic Upgrade's TargetAmount), and
+        // targetless casts keep their own routes: nothing queued, nothing cast.
+        mage.cards.b.BiogenicUpgrade biogenic = new mage.cards.b.BiogenicUpgrade(UUID.randomUUID(),
+                new CardSetInfo("Biogenic Upgrade", "RNA", "1", Rarity.UNCOMMON));
+        equal(true, ScenarioReplay.targetsDivided(biogenic.getSpellAbility()));
+        for (Object[] c : new Object[][]{
+                {abrade.getSpellAbility(), tgt}, {biogenic.getSpellAbility(), tgt},
+                {confluence.getSpellAbility(), java.util.List.<String>of()}}) {
+            RecordingDriver other = routeDriver();
+            equal(false, call(other, "castQueuedTargets", ROUTE_TYPES, 1, PhaseStep.PRECOMBAT_MAIN, null,
+                    "Abrade", c[1], c[0]));
+            equal(java.util.List.of(), other.queued);
+            equal(java.util.List.of(), other.casts);
+        }
+        equal(true, ScenarioReplay.targetSlotNeedsSkip(
+                java.util.List.of(new TargetPermanent(0, Integer.MAX_VALUE, new FilterPermanent())), 1));
+        equal(false, ScenarioReplay.targetSlotNeedsSkip(java.util.List.of(new TargetPermanent()), 1));
+        // The skip is added only when XMage asks again with no answer left, so
+        // a pool the supplied target exhausted never asks, so nothing calls
+        // this and no skip is left behind; an ask with candidates left gets it.
+        java.util.List<String> askedAgain = new java.util.ArrayList<>();
+        ScenarioReplay.closeAskedAgain(askedAgain, true);
+        equal(java.util.List.of(TestPlayer.TARGET_SKIP), askedAgain);
+        java.util.List<String> answered = new java.util.ArrayList<>(java.util.List.of("Grizzly Bears"));
+        ScenarioReplay.closeAskedAgain(answered, true);
+        equal(java.util.List.of("Grizzly Bears"), answered);
+        java.util.List<String> otherSpell = new java.util.ArrayList<>();
+        ScenarioReplay.closeAskedAgain(otherSpell, false);
+        equal(java.util.List.of(), otherSpell);
+        System.out.println("PASS target-adjuster detection and closing an unfilled adjusted target slot");
+        System.out.println("PASS adjusted spell targets are queued without changing divided, ordinary, or targetless casts");
+        System.out.println("PASS ordinary alias and unchanged spelling");
+        checkFrontHalfAliasBinding();
+        System.out.println("PASS front-half alias binding of a split/Room fixture");
+        checkEmptyNamedRoomBinding();
+        System.out.println("PASS a setup-placed Room whose XMage name is empty is bound by its scenario refs");
+    }
+
+    /** registerObjectAliases (registerAliases' per-object body, extracted so
+     * this no-H2 harness can run it: the live loop walks zones only a real
+     * game has) binds a split/Room object by its whole name AND its front
+     * half. Gorge spells every card object by its front face, so a scenario
+     * that targets or sacrifices a Room fixture queues "p0:Bottomless Pool"
+     * and its "@p0:Bottomless Pool" alias must resolve to the same object id
+     * the whole-name alias does. */
+    private static void checkFrontHalfAliasBinding() throws Exception {
+        java.util.Map<String, String> refAlias = new LinkedHashMap<>();
+        java.util.List<String> bound = new java.util.ArrayList<>();
+        UUID id = UUID.randomUUID();
+        ScenarioReplay.registerObjectAliases(0, "Bottomless Pool // Locker Room",
+                "p0:Bottomless Pool // Locker Room",
+                "p0:Bottomless Pool // Locker Room", 1, id, refAlias,
+                (ref, objId) -> bound.add(ref));
+        // Precondition of the production wiring: the helper receives the
+        // whole-name refs registerAliases computed.
+        if (!refAlias.containsKey("p0:Bottomless Pool // Locker Room")
+                || !refAlias.get("p0:Bottomless Pool // Locker Room").equals("@p0:Bottomless Pool // Locker Room")) {
+            throw new AssertionError("whole-name scenario ref not bound: " + refAlias);
+        }
+        // The front half is bound too, to the same object.
+        if (!refAlias.containsKey("p0:Bottomless Pool")
+                || !refAlias.get("p0:Bottomless Pool").equals("@p0:Bottomless Pool")) {
+            throw new AssertionError("front-half scenario ref not bound: " + refAlias);
+        }
+        if (!bound.contains("p0:Bottomless Pool")) {
+            throw new AssertionError("front-half ref was not learned by the seats: " + bound);
+        }
+        // A non-split object binds nothing front-half.
+        java.util.Map<String, String> plain = new LinkedHashMap<>();
+        ScenarioReplay.registerObjectAliases(0, "Grizzly Bears", "p0:Grizzly Bears",
+                "p0:Grizzly Bears", 0, UUID.randomUUID(), plain, (ref, objId) -> {
+                });
+        for (String ref : plain.keySet()) {
+            if (ref.contains(" // ")) {
+                throw new AssertionError("non-split object carries a split ref: " + ref);
+            }
+        }
+        // A second front-half occurrence spells the #k suffix, the same
+        // counting rule gorge's setup refs use.
+        equal("p1:Bottomless Pool#2", ScenarioReplay.frontHalfScenarioRef(1, "Bottomless Pool // Locker Room", 2));
+        equal("p0:Bottomless Pool", ScenarioReplay.frontHalfScenarioRef(0, "Bottomless Pool // Locker Room", 1));
+        if (ScenarioReplay.frontHalfScenarioRef(0, "Grizzly Bears", 1) != null) {
+            throw new AssertionError("non-split name produced a front-half ref");
+        }
+        // A front-half ref already bound (the under-test card whose gorge
+        // spelling IS its front half) is not rebound to a second object.
+        java.util.Map<String, String> taken = new LinkedHashMap<>();
+        taken.put("p0:Bottomless Pool", "@p0:Bottomless Pool");
+        java.util.List<String> rebound = new java.util.ArrayList<>();
+        ScenarioReplay.registerObjectAliases(0, "Bottomless Pool // Locker Room",
+                "p0:Bottomless Pool // Locker Room",
+                "p0:Bottomless Pool // Locker Room", 1, UUID.randomUUID(), taken,
+                (ref, objId) -> rebound.add(ref));
+        if (rebound.contains("p0:Bottomless Pool")
+                || !taken.get("p0:Bottomless Pool").equals("@p0:Bottomless Pool")) {
+            throw new AssertionError("front-half ref rebound to a second object: " + rebound + " " + taken);
+        }
+        // The front-half occurrence count is keyed per seat inside the
+        // helper: registerAliases shares ONE counter across both seats, so
+        // p0 and p1 each holding the same split card must both spell
+        // "p<N>:<Front>" with no #k suffix. A seat-agnostic key would spell
+        // p1's copy "p1:Bottomless Pool#2" and leave the queued
+        // "p1:Bottomless Pool" alias unbound.
+        java.util.Map<String, Integer> shared = new java.util.HashMap<>();
+        equal(1, ScenarioReplay.registerFrontOccurrence(shared, 0, "Bottomless Pool // Locker Room"));
+        equal(1, ScenarioReplay.registerFrontOccurrence(shared, 1, "Bottomless Pool // Locker Room"));
+        equal("p0:Bottomless Pool", ScenarioReplay.frontHalfScenarioRef(0, "Bottomless Pool // Locker Room",
+                1));
+        equal("p1:Bottomless Pool", ScenarioReplay.frontHalfScenarioRef(1, "Bottomless Pool // Locker Room",
+                1));
+        // Within one seat the counting still applies: p0's second copy is #2.
+        equal(2, ScenarioReplay.registerFrontOccurrence(shared, 0, "Bottomless Pool // Locker Room"));
+        equal("p0:Bottomless Pool#2", ScenarioReplay.frontHalfScenarioRef(0, "Bottomless Pool // Locker Room", 2));
+        equal(0, ScenarioReplay.registerFrontOccurrence(shared, 1, "Grizzly Bears"));
+    }
+
+    /** A both-doors-locked Room permanent has the name "" in XMage
+     * (RoomCharacteristicsEffect strips both half names), and a setup-placed
+     * Room is always both-locked. The ref a scenario queues for it
+     * ("@p0:Bottomless Pool") must still be bound, to the permanent's id. */
+    private static void checkEmptyNamedRoomBinding() throws Exception {
+        mage.cards.b.BottomlessPoolLockerRoom room = new mage.cards.b.BottomlessPoolLockerRoom(
+                UUID.randomUUID(), new CardSetInfo("Bottomless Pool // Locker Room", "DSK", "1", Rarity.UNCOMMON));
+        // Precondition: the card setup deals is the whole Room object and its
+        // main card is itself, so the placement's id is the permanent's id.
+        equal("Bottomless Pool // Locker Room", room.getName());
+        equal(room.getId(), room.getMainCard().getId());
+
+        java.util.Map<UUID, String> placed = new java.util.HashMap<>();
+        java.util.List<mage.game.PutToBattlefieldInfo> placements = new java.util.ArrayList<>();
+        placements.add(new mage.game.PutToBattlefieldInfo(room, false));
+        ScenarioReplay.recordPlacedName(placed, placements, "Bottomless Pool");
+        equal("Bottomless Pool", placed.get(room.getId()));
+
+        // XMage's live name is "": without the placed name the object has no
+        // name to spell a ref by (the failing state), with it the fixture's
+        // dealt name.
+        java.util.Map<UUID, String> staged = new java.util.HashMap<>();
+        equal("", ScenarioReplay.setupObjectName(staged, new java.util.HashMap<>(), room.getId(), ""));
+        String name = ScenarioReplay.setupObjectName(staged, placed, room.getId(), "");
+        equal("Bottomless Pool", name);
+
+        // Drive the same ref computation registerAliases runs.
+        java.util.Map<String, String> refAlias = new LinkedHashMap<>();
+        java.util.Map<String, UUID> bound = new LinkedHashMap<>();
+        ScenarioReplay.bindSetupObject(0, name, "Keys to the House", "", new java.util.HashMap<>(),
+                new java.util.HashMap<>(), new java.util.HashMap<>(), room.getId(), refAlias,
+                (ref, id) -> bound.put(ref, id));
+        equal(room.getId(), bound.get("p0:Bottomless Pool"));
+        equal("@p0:Bottomless Pool", refAlias.get("p0:Bottomless Pool"));
+        if (bound.containsKey("p0:")) {
+            throw new AssertionError("the empty name still produced the ref \"p0:\": " + bound);
+        }
+
+        // A name XMage still reports wins over the placed name, and a staged
+        // back face wins over both.
+        equal("Dazzling Theater // Prop Room", ScenarioReplay.setupObjectName(staged, placed, room.getId(),
+                "Dazzling Theater // Prop Room"));
+        staged.put(room.getId(), "Front");
+        equal("Front", ScenarioReplay.setupObjectName(staged, placed, room.getId(), ""));
+        // An object setup never placed on the battlefield stays unnamed.
+        equal("", ScenarioReplay.setupObjectName(new java.util.HashMap<>(), placed, UUID.randomUUID(), ""));
+    }
+}

@@ -1,0 +1,163 @@
+// Level-B dispatch. GenerateB is the one entry point for a level-B
+// requirement's scenario, dispatched by the requirement's sub-family. It is
+// deliberately a stub in L2: every requirement is a template gap until a
+// template family lands (L5 activate, L7 trigger, L11 static, L13 combat),
+// each adding one dispatch line here. Level-A Generate is untouched, so no
+// level-A byte or verdict moves.
+package templates
+
+import (
+	"strings"
+
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/levelb"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge/engine/cards"
+)
+
+// GenerateB builds the level-B scenario serving one requirement, or says why
+// none does. A requirement the classifier already marked as a gap
+// (req.Gap != "") reports that gap; every other requirement reports that no
+// template serves its sub-family yet. Both reasons carry the "level B: "
+// prefix so the gate's level-A wording ("no generated scenario (...)") reads
+// as a template gap and adopt.Bucket classifies it unchanged.
+func GenerateB(reg *cards.Registry, name string, req levelb.Requirement) (item oraclegen.Item, skip *oraclegen.Skip) {
+	// Level-B builders all converge here, unlike level-A's Template.item.
+	// Apply the face-level structural opt-in centrally so trigger, activate,
+	// combat and static items cannot silently omit it. Preserve any options
+	// the family builder already attached.
+	defer func() {
+		if item.ID == "" {
+			return
+		}
+		// Every served activate step names its ability for XMage's replay
+		// driver; a slot a family builder left empty is filled here from the
+		// step's own card (activate_xability_fill.go, cluster C5).
+		fillActivateXAbility(reg, &item)
+		// A pass_to the driver would place in the wrong step names where
+		// gorge stopped (passto_pin.go).
+		pinPassToSteps(reg, &item)
+		c, ok := reg.Lookup(name)
+		if !ok || req.Face < 0 || req.Face >= len(c.Faces) {
+			return
+		}
+		if !oraclegen.CanShuffleLibrary(c.Faces[req.Face]) {
+			// A search-and-shuffle of a fixture library holding distinct
+			// names (the search pool) leaves an order XMage randomises:
+			// compare the counts, not the order. Any search on the face
+			// counts, not only the exercised one: the scenario runs the
+			// whole card (an ETB tutor under a static item, a combat-damage
+			// search under a combat item). A PROBE a cause casts can search
+			// too (the p1 tutor a searched-library trigger watches), and the
+			// same randomised order follows it.
+			if (oraclegen.FaceShufflesSearched(c.Faces[req.Face]) && oraclegen.NamedLibrary(&item.Scenario)) ||
+				probeCastsASearch(&item.Scenario, reg) {
+				if !hasCompareOption(item.Compare, oraclegen.CompareNoLibraryOrder) {
+					item.Compare = append(item.Compare, oraclegen.CompareNoLibraryOrder)
+				}
+			}
+			return
+		}
+		if !hasCompareOption(item.Compare, oraclegen.CompareNoLibraryOrder) {
+			item.Compare = append(item.Compare, oraclegen.CompareNoLibraryOrder)
+		}
+		// A shuffle-then-draw draws random cards in XMage. Make the shuffled
+		// zones uniform so the drawn hand is the same whatever the order; only
+		// a setup holding several distinct shuffled names compares the hand by
+		// size instead.
+		// A shuffle-then-manifest/mill sends cards off the top of the
+		// shuffled library to the graveyard, and which ones is the order
+		// XMage randomises: compare the graveyard's size, not its names.
+		if oraclegen.ShufflesThenReadsLibrary(c.Faces[req.Face]) && !hasCompareOption(item.Compare, oraclegen.CompareGraveyardCount) {
+			item.Compare = append(item.Compare, oraclegen.CompareGraveyardCount)
+		}
+		if oraclegen.ShufflesThenDraws(c.Faces[req.Face]) {
+			if !oraclegen.UniformShuffledZones(&item.Scenario, name) && !hasCompareOption(item.Compare, oraclegen.CompareHandCount) {
+				item.Compare = append(item.Compare, oraclegen.CompareHandCount)
+			}
+		}
+		// A permanent shuffled back from the battlefield before a draw can be
+		// drawn again in XMage's random order: compare the hand's size.
+		if oraclegen.ShufflesPermanentThenDraws(c.Faces[req.Face]) && !hasCompareOption(item.Compare, oraclegen.CompareHandCount) {
+			item.Compare = append(item.Compare, oraclegen.CompareHandCount)
+		}
+	}()
+	if req.Gap != "" {
+		return oraclegen.Item{}, &oraclegen.Skip{Card: name, Reason: "level B: " + req.Gap}
+	}
+	if activateSubs(req.Sub) {
+		c, ok := reg.Lookup(name)
+		if !ok || req.Face < 0 || req.Face >= len(c.Faces) {
+			return oraclegen.Item{}, &oraclegen.Skip{Card: name, Reason: "not in corpus"}
+		}
+		return activateAbility(reg, c.Faces[req.Face], name, req)
+	}
+	if req.Sub == "static.cost" {
+		c, ok := reg.Lookup(name)
+		if !ok || req.Face < 0 || req.Face >= len(c.Faces) {
+			return oraclegen.Item{}, &oraclegen.Skip{Card: name, Reason: "not in corpus"}
+		}
+		return costStatic(reg, c.Faces[req.Face], name, req)
+	}
+	if triggerSubs(req.Sub) {
+		c, ok := reg.Lookup(name)
+		if !ok || req.Face < 0 || req.Face >= len(c.Faces) {
+			return oraclegen.Item{}, &oraclegen.Skip{Card: name, Reason: "not in corpus"}
+		}
+		return triggerFires(reg, c.Faces[req.Face], name, req)
+	}
+	if combatSubs(req.Sub) {
+		c, ok := reg.Lookup(name)
+		if !ok || req.Face < 0 || req.Face >= len(c.Faces) {
+			return oraclegen.Item{}, &oraclegen.Skip{Card: name, Reason: "not in corpus"}
+		}
+		return combatRequirement(reg, c.Faces[req.Face], name, req)
+	}
+	if staticSubs(req.Sub) {
+		c, ok := reg.Lookup(name)
+		if !ok || req.Face < 0 || req.Face >= len(c.Faces) {
+			return oraclegen.Item{}, &oraclegen.Skip{Card: name, Reason: "not in corpus"}
+		}
+		return staticRequirement(reg, c.Faces[req.Face], name, req)
+	}
+	if req.Sub == "static.continuous" {
+		c, ok := reg.Lookup(name)
+		if !ok || req.Face < 0 || req.Face >= len(c.Faces) {
+			return oraclegen.Item{}, &oraclegen.Skip{Card: name, Reason: "not in corpus"}
+		}
+		return staticContinuous(reg, c.Faces[req.Face], name, req)
+	}
+	return oraclegen.Item{}, &oraclegen.Skip{Card: name, Reason: "level B: no template for " + req.Sub}
+}
+
+func hasCompareOption(options []string, want string) bool {
+	for _, option := range options {
+		if option == want {
+			return true
+		}
+	}
+	return false
+}
+
+// probeCastsASearch reports whether any cast step's card searches a library
+// (the p1 tutor an opponent-searched trigger's cause casts): XMage randomises
+// the searched-and-shuffled library, so the compare must ignore its order
+// even when the requirement's own face never searches.
+func probeCastsASearch(sc *oraclegen.Scenario, reg *cards.Registry) bool {
+	for _, st := range sc.Steps {
+		if st.Op != "cast" {
+			continue
+		}
+		probe := st.Card
+		if i := strings.IndexByte(probe, ':'); i >= 0 {
+			probe = probe[i+1:]
+		}
+		card, ok := reg.Lookup(probe)
+		if !ok || len(card.Faces) == 0 || card.Faces[0] == nil {
+			continue
+		}
+		if oraclegen.SearchesLibrary(card.Faces[0]) {
+			return true
+		}
+	}
+	return false
+}

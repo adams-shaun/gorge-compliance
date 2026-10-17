@@ -1,0 +1,103 @@
+{
+ "card": "Sylvan Tutor",
+ "family": "spell-conditional",
+ "author": "cli-20261014T032241Z-e03848a5 (Oracle + CR only)",
+ "oracle_sha": "8e01a5ccc944",
+ "scenarios": [
+  {
+   "name": "creature-card-goes-on-top",
+   "cr": [
+    "701.19a",
+    "701.19b",
+    "701.19d"
+   ],
+   "why": "Search for a creature card, reveal it, shuffle, put it on top: the creature ends the resolution on top of the shuffled library, so it is in the library and drawn first on the next draw step.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Sylvan Tutor"
+     ],
+     "library_top": [
+      "Lightning Bolt",
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "G"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Sylvan Tutor"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Grizzly Bears"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Sylvan Tutor",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "library"
+    }
+   ]
+  },
+  {
+   "name": "no-creature-card-reveals-nothing",
+   "cr": [
+    "701.19a",
+    "701.19d",
+    "305.5"
+   ],
+   "why": "When the library has no creature card (filler wastes only) the search finds nothing: the spell still resolves to the graveyard and the library stays as it was.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Sylvan Tutor"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "G"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Sylvan Tutor"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Sylvan Tutor",
+     "zone": "graveyard"
+    },
+    {
+     "hand_size": {
+      "p0": 0
+     }
+    }
+   ]
+  }
+ ]
+}

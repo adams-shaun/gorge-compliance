@@ -1,0 +1,13 @@
+# The Forge corpus (GPL-3.0) is never committed: symlink gorge's (see README).
+.cards
+.cards/
+# Local workspace pointing at a gorge checkout other than ../gorge.
+go.work
+go.work.sum
+bin/
+.coverage/
+__pycache__/
+# Generated, never committed.
+oracle/compliance/status.md
+# Printed-card text from cmd/oraclepacket (Oracle text is Wizards' copyright).
+.oracle-packets/
