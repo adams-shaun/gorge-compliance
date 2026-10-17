@@ -25,12 +25,9 @@ from the pinned gorge's Makefile, so pinning gorge pins the card corpus too.
 - `go.mod` requires `github.com/adams-shaun/gorge` at the pseudo-version of
   that commit, so `go build` and CI resolve exactly the pinned code.
 
-**Bootstrap state.** The first pin is gorge's `wt/restructure` branch (PR
-#10), which is not yet merged, so it has no pushed commit to require.
-Until it lands, `GORGE_PIN` reads `PENDING (wt/restructure)`, `go.mod`
-carries a placeholder require plus `replace github.com/adams-shaun/gorge =>
-../gorge`, and a local, gitignored `go.work` points at the gorge worktree.
-The first pin bump below replaces all three.
+The first pin is gorge's PR #10 merge commit (`87d079670`, 2026-10-17),
+whose tree is identical to the `wt/restructure` tip the targets were first
+measured against.
 
 ## Bumping the pin
 

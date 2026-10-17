@@ -1,15 +1,14 @@
 # CI for gorge-compliance: the compliance oracles and scenario audits that
 # back gorge's rules engine, measured against a PINNED gorge (docs/PINNING.md).
 #
-# Every job checks gorge out as a SIBLING directory, because go.mod's replace
-# (bootstrap) wants ../gorge and because the Forge corpus is fetched by gorge's
-# own `make fetch-cards compile-cards` at gorge's FORGE_REF:
+# Every job checks gorge out as a SIBLING directory at the pin, because the
+# Forge corpus is fetched by gorge's own `make fetch-cards compile-cards` at
+# gorge's FORGE_REF (the Go code itself resolves from go.mod's pinned require):
 #
 #   $GITHUB_WORKSPACE/gorge-compliance   this repository
 #   $GITHUB_WORKSPACE/gorge              adams-shaun/gorge at the pin (or main)
 #
-# The pin is GORGE_PIN. While it reads PENDING (bootstrap), the gorge ref is
-# vars.GORGE_REF, else wt/restructure. A workflow_dispatch can override it.
+# The pin is GORGE_PIN. A workflow_dispatch can override the gorge ref.
 #
 # The corpus (GPL-3.0, never committed in either repository) is cached by its
 # pin and symlinked as gorge-compliance/.cards. A run with no corpus would SKIP
