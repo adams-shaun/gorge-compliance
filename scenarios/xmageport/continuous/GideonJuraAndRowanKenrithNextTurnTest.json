@@ -117,8 +117,7 @@
     }
    ],
    "expect": [],
-   "xmage": "GideonJuraAndRowanKenrithNextTurnTest#test_SingleOpponentMustAttackGideonJura",
-   "known_bug": "XP[mustattack-effectsource-planeswalker]: at the pinned gorge Gideon Jura's +2 Effect (RememberObjects$ DelayTriggerRemembered) captures no player (engine/effects/staticline.go effectRememberedPlayers has no DelayTriggerRemembered arm), so ValidCreature$ Creature.RememberedPlayerCtrl selects no creature, and MustAttack$ EffectSource is no reference engine/rules/combat/attack.go requirementDefender resolves, so Balduvian Bears is never required to attack Gideon Jura and Gideon keeps 8 loyalty (want 6). CR 508.1d, 506.3. Fixed on gorge wt/kernel-gorgebug3 c7d3f38ba (with d1bc316af's harness forcing); retire at the next pin bump."
+   "xmage": "GideonJuraAndRowanKenrithNextTurnTest#test_SingleOpponentMustAttackGideonJura"
   },
   {
    "name": "test-single-opponent-must-attack-rowan-kenrith",
