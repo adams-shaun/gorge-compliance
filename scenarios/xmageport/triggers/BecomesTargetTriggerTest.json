@@ -648,8 +648,7 @@
      "tapped": true
     }
    ],
-   "xmage": "BecomesTargetTriggerTest#testCloudCover",
-   "known_bug": "XP[triggeredtargetlkicopy-ignores-becomestarget-target]: Defined$ TriggeredTargetLKICopy resolves to TriggerBearer or else c.Remembered (the targeting spell/ability), never the targeted permanent (TriggerTarget) for Mode$ BecomesTarget (engine/effects/context.go:841-852). Cloud Cover's 'return that permanent' bounces nothing, though Yes was answered. CR 603.2/608.2c (Oracle 'that permanent')."
+   "xmage": "BecomesTargetTriggerTest#testCloudCover"
   },
   {
    "name": "test-illusionary-armor",
@@ -844,8 +843,7 @@
      "damage": 3
     }
    ],
-   "xmage": "BecomesTargetTriggerTest#testFracturedLoyalty",
-   "known_bug": "XP[triggeredtargetlkicopy-ignores-becomestarget-target]: Fractured Loyalty's GainControl Defined$ TriggeredTargetLKICopy resolves to Remembered (the targeting Bolt), not the enchanted creature (engine/effects/context.go:841-852), so control never changes. CR 608.2c (Oracle 'gains control of that creature')."
+   "xmage": "BecomesTargetTriggerTest#testFracturedLoyalty"
   },
   {
    "name": "test-battle-mammoth-repeat-ability",
