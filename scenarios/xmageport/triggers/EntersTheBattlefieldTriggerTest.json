@@ -249,8 +249,7 @@
      }
     }
    ],
-   "xmage": "EntersTheBattlefieldTriggerTest#testScionOfVituGhaziConditionNotTrue",
-   "known_bug": "XP[cast-provenance-survives-zone-change]: WasCastFromHandByYou returns the obj's latest PutOnStack ever (engine/rules/host_cast_ledger.go:203-211). Object ids survive zone changes, so the reanimated Scion (a new object) still reads 'cast from hand' and triggers again (4 Birds, want 2). CR 400.7 / 603.4."
+   "xmage": "EntersTheBattlefieldTriggerTest#testScionOfVituGhaziConditionNotTrue"
   },
   {
    "name": "test-dread-cacodemon-condition-true",
