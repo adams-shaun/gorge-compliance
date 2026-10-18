@@ -64,8 +64,7 @@
      }
     }
    ],
-   "xmage": "FathomMageTest#testDrawCardsAddedCounters",
-   "known_bug": "XP[counteradded-fires-once-per-batch]: Mode$ CounterAdded shares counterAddedMatches with CounterAddedOnce and fires once per CounterChange batch (engine/rules/trigmatch/counters.go:20-44), so 4 counters from Blessings of Nature trigger Fathom Mage once (hand 1, want 4). CR 603.2c (one event with multiple occurrences triggers that many times)."
+   "xmage": "FathomMageTest#testDrawCardsAddedCounters"
   }
  ]
 }

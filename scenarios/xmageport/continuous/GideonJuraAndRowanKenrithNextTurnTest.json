@@ -118,7 +118,7 @@
    ],
    "expect": [],
    "xmage": "GideonJuraAndRowanKenrithNextTurnTest#test_SingleOpponentMustAttackGideonJura",
-   "known_bug": "XP[mustattack-rememberedplayerctrl-unbound]: the MustAttack requirement collector matches ValidCreature$ Creature.RememberedPlayerCtrl with rememberedPlayers=nil (engine/rules/combat/attack.go:248, called from :203), and RememberedPlayerCtrl fails closed without a remembered player (engine/effects/filter.go:2041), so Balduvian Bears is never Required and p1's empty attack is accepted. CR 508.1d."
+   "known_bug": "XP[mustattack-effectsource-planeswalker]: at the pinned gorge Gideon Jura's +2 Effect (RememberObjects$ DelayTriggerRemembered) captures no player (engine/effects/staticline.go effectRememberedPlayers has no DelayTriggerRemembered arm), so ValidCreature$ Creature.RememberedPlayerCtrl selects no creature, and MustAttack$ EffectSource is no reference engine/rules/combat/attack.go requirementDefender resolves, so Balduvian Bears is never required to attack Gideon Jura and Gideon keeps 8 loyalty (want 6). CR 508.1d, 506.3. Fixed on gorge wt/kernel-gorgebug3 c7d3f38ba (with d1bc316af's harness forcing); retire at the next pin bump."
   },
   {
    "name": "test-single-opponent-must-attack-rowan-kenrith",
@@ -233,7 +233,7 @@
    ],
    "expect": [],
    "xmage": "GideonJuraAndRowanKenrithNextTurnTest#test_SingleOpponentMustAttackRowanKenrith",
-   "known_bug": "XP[mustattack-rememberedplayerctrl-unbound]: same as Gideon: Rowan's Effect MustAttack ValidCreature$ Creature.RememberedPlayerCtrl gets no RememberedPlayers in combat.AttackRequirements -\u003e mustAttackLineSelects (engine/rules/combat/attack.go:203,248), so p1 declares no attackers and p0 stays at 20. CR 508.1d."
+   "known_bug": "XP[oracle-harness-required-attacker+rowan-effect-cleanup]: at the pinned gorge the Bears are Required (gorge 296c38b1a) but the oracle harness submits the scripted empty declaration, which validateAttackDeclaration refuses ('harness: submit attackers []'); XMage's game forces the attacker (CR 508.1d). Fixed on gorge wt/kernel-gorgebug3 d1bc316af. Past that, Rowan Kenrith's Effect is not exiled at p1's cleanup (its RemoveEffect trigger, registered 'Cleanup|DU=permanent|SB|VP=Player.IsRemembered', never fires), so the Bears attack again on p1's next turn: p0 16, want 18. CR 611.2a."
   }
  ]
 }
