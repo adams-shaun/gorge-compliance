@@ -156,8 +156,7 @@
      }
     }
    ],
-   "xmage": "CantAttackOrBlockAloneTest#testCantBlockAlone",
-   "known_bug": "XP[oracle-declaration-no-733-reversal]: gorge now refuses Mogg Flunkies' lone block (CR 506.5, engine/rules/combat.go validateAloneDeclaration), but the pinned oracle harness reports the refused scripted declaration as a scenario failure ('harness: submit blockers [0]: creature 1 can't block alone') instead of reversing it to the empty declaration and playing on as XMage's harness does (CR 733.1). Fixed on gorge wt/kernel-gorgebug2 d6521fd75 (oracle_run.go submitDeclaration); retire at the next pin bump."
+   "xmage": "CantAttackOrBlockAloneTest#testCantBlockAlone"
   },
   {
    "name": "test-cant-block-alone2",
