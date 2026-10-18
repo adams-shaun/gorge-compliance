@@ -45,8 +45,7 @@
     }
    ],
    "expect": [],
-   "xmage": "FelixFiveBootsTest#testBasicFelixFunctionality",
-   "known_bug": "XP[no-priority-in-combat-damage-step]: after the regular damage pass, completeCombatPass goes straight to setStep(StepEndCombat) without a priority round in the combat damage step (engine/rules/combat.go:1773). pass_to combat-damage can never stop, runs on to decking and reports 'game stopped'. A probe with a plain Silvercoat Lion attack fails the same way. CR 510.3 (players get priority in the combat damage step)."
+   "xmage": "FelixFiveBootsTest#testBasicFelixFunctionality"
   },
   {
    "name": "test-no-bonus-trigger-for-enemy",
@@ -96,8 +95,7 @@
     }
    ],
    "expect": [],
-   "xmage": "FelixFiveBootsTest#testNoBonusTriggerForEnemy",
-   "known_bug": "XP[no-priority-in-combat-damage-step]: Same: engine/rules/combat.go:1773 moves to end of combat with no combat-damage-step priority, so pass_to combat-damage runs until the game ends. CR 510.3."
+   "xmage": "FelixFiveBootsTest#testNoBonusTriggerForEnemy"
   },
   {
    "name": "test-no-trigger-on-non-combat-damage",
@@ -226,8 +224,7 @@
      "eq": 12
     }
    ],
-   "xmage": "FelixFiveBootsTest#testBatchEvent",
-   "known_bug": "XP[no-priority-in-combat-damage-step]: Same as testBasicFelixFunctionality: no priority round in the combat damage step (engine/rules/combat.go:1773), so pass_to combat-damage (from checkStackSize at COMBAT_DAMAGE) never stops. CR 510.3."
+   "xmage": "FelixFiveBootsTest#testBatchEvent"
   },
   {
    "name": "test-select-right-part-of-batch",
@@ -314,8 +311,7 @@
      }
     }
    ],
-   "xmage": "FelixFiveBootsTest#testSelectRightPartOfBatch",
-   "known_bug": "XP[no-priority-in-combat-damage-step]: Same: step 4 pass_to combat-damage never stops because of no combat-damage-step priority round (engine/rules/combat.go:1773). CR 510.3."
+   "xmage": "FelixFiveBootsTest#testSelectRightPartOfBatch"
   }
  ]
 }

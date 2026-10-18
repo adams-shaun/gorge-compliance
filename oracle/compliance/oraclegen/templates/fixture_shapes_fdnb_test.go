@@ -122,7 +122,8 @@ func TestActivateAttackingTargetCombatPrelude(t *testing.T) {
 // TestDiesOtherDamagedByCombat: Predator Ooze's "whenever a creature dealt
 // damage by this creature this turn dies" is caused by combat: the Ooze
 // attacks, p1's 1/1 blocks and dies to its damage. The trigger is on the
-// stack at end of combat, and without the block it never fires.
+// stack in the combat damage step's priority round (CR 510.3), and without
+// the block it never fires.
 func TestDiesOtherDamagedByCombat(t *testing.T) {
 	reg := loadGenRegistry(t)
 	it := triggerRequirement(t, reg, "Predator Ooze", "trigger#0.0", "trigger.dies-other")
@@ -139,7 +140,7 @@ func TestDiesOtherDamagedByCombat(t *testing.T) {
 				continue
 			}
 			if st.Op == "pass_to" {
-				steps = append(steps, oraclegen.Step{Op: "pass_to", Step: "end-combat"})
+				steps = append(steps, oraclegen.Step{Op: "pass_to", Step: "combat-damage"})
 				break
 			}
 			steps = append(steps, st)
@@ -149,7 +150,7 @@ func TestDiesOtherDamagedByCombat(t *testing.T) {
 		return ok && abilityOnStack(res.Snapshots, []string{"predator ooze"}, "0")
 	}
 	if !atEndCombat(it.Scenario, true) {
-		t.Fatalf("the dies trigger is not on the stack at end of combat")
+		t.Fatalf("the dies trigger is not on the stack in the combat damage step")
 	}
 	if atEndCombat(it.Scenario, false) {
 		t.Fatalf("control: the dies trigger fired with no creature damaged by the Ooze")

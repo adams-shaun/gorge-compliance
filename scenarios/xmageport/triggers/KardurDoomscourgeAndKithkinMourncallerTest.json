@@ -104,8 +104,7 @@
      }
     }
    ],
-   "xmage": "KardurDoomscourgeAndKithkinMourncallerTest#testKDRemovedFromCombatViaRegenerateAbility",
-   "known_bug": "XP[end-combat-priority-not-reset-after-first-strike]: after a combat with a first striker, the regular damage pass calls setStep(StepEndCombat) directly from completeCombatPass without finishEnteredStep's Priority reset, so G.Priority/Passes stay at the last passer (p1, passes=1) and the active player never gets priority in end of combat (probe: a plain first-striker attack, no regen/block, also gives \"pending priority for p1\" at end-combat; a non-first-strike attack does not) (engine/rules/combat.go:1772-1773; reset only at engine/rules/turn.go:190). CR 117.3a."
+   "xmage": "KardurDoomscourgeAndKithkinMourncallerTest#testKDRemovedFromCombatViaRegenerateAbility"
   },
   {
    "name": "test-successful-kdtrigger",

@@ -102,19 +102,25 @@ func TestTriggerRecipes(t *testing.T) {
 }
 
 // triggerShownOnStack replays the item up to its cause (no resolve), stopping
-// combat damage in end-combat where its trigger is still on the stack, and
+// combat damage in the combat damage step's priority round (CR 510.3) where
+// its trigger is on the stack (end-combat when nothing attacked), and
 // with both players passing once for a cast cause, and reports whether a
 // snapshot shows an ability sourced by name.
 func triggerShownOnStack(t *testing.T, reg *cards.Registry, sc oraclegen.Scenario, name string) bool {
 	t.Helper()
 	var cause []oraclegen.Step
+	attacked := false
 	for _, st := range sc.Steps {
 		if st.Op == "resolve" {
 			continue
 		}
 		if st.Op == "pass_to" {
 			st.Step = "end-combat"
+			if attacked {
+				st.Step = "combat-damage"
+			}
 		}
+		attacked = attacked || st.Op == "attack"
 		cause = append(cause, st)
 	}
 	passes := []oraclegen.Step{{Op: "pass", Seat: 0}, {Op: "pass", Seat: 1}}

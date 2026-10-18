@@ -700,8 +700,7 @@
      "eq": 1
     }
    ],
-   "xmage": "ZoneChangeReplacementTest#testPermanentNewInstanceAndKumano",
-   "known_bug": "XP[no-priority-in-combat-damage-step]: after the regular combat-damage pass gorge goes straight to end of combat without a priority round in the combat damage step (engine/rules/combat.go:1760-1773 completeCombatPass -\u003e setStep(StepEndCombat); priorityRound only for the first-strike pass at :1757), so pass_to combat-damage never stops and runs until decking (\"game stopped\"). Minimal probe (attack, then castSpell at COMBAT_DAMAGE) fails identically while END_COMBAT works; FelixFiveBootsTest fails the same way. CR 510.3."
+   "xmage": "ZoneChangeReplacementTest#testPermanentNewInstanceAndKumano"
   },
   {
    "name": "test-whip-of-erebos",

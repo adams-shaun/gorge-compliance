@@ -105,12 +105,18 @@ func TestG12TriggerFilterRows(t *testing.T) {
 			slot := tc.key[strings.LastIndexByte(tc.key, '.')+1:]
 			probe := it.Scenario
 			probe.Steps = append([]oraclegen.Step(nil), it.Scenario.Steps...)
+			attacked := false
 			for i := range probe.Steps {
+				attacked = attacked || probe.Steps[i].Op == "attack"
 				// A combat-damage trigger resolves inside the pass to main2;
-				// the recipe's own probe stops in end-combat, where it is
-				// still on the stack.
+				// the recipe's own probe stops at the combat damage step's
+				// priority round (CR 510.3), where it is on the stack. With
+				// no attack there is no combat damage step to stop in.
 				if probe.Steps[i].Op == "pass_to" && probe.Steps[i].Step == "main2" {
 					probe.Steps[i].Step = "end-combat"
+					if attacked {
+						probe.Steps[i].Step = "combat-damage"
+					}
 				}
 			}
 			if !g17SlotOnStack(t, reg, probe, tc.name, slot) {

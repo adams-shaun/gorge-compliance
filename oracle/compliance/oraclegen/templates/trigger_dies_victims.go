@@ -195,7 +195,7 @@ func damagedByVictim(filter string) bool {
 // damagedByCauses builds the combat that makes the card damage its victim:
 // the card attacks, p1's 1/1 blocks it and dies to its combat damage. The
 // trigger is put on the stack in the combat-damage step, so the probe stops
-// in end-combat (as the combat-damage recipe's does) and the emitted item
+// there (as the combat-damage recipe's does) and the emitted item
 // passes to main2. A card with no power to kill the blocker has no cause.
 func damagedByCauses(f *cards.Face, name, filter string) ([]triggerCause, string) {
 	if !f.IsCreature() || strings.Contains(f.PT, "*") || f.Power() < 1 {
@@ -206,6 +206,6 @@ func damagedByCauses(f *cards.Face, name, filter string) ([]triggerCause, string
 	return []triggerCause{{
 		opponentBattlefield: []string{damagedByBlocker},
 		steps:               []oraclegen.Step{attack, block, {Op: "pass_to", Step: "main2"}},
-		probeSteps:          []oraclegen.Step{attack, block, {Op: "pass_to", Step: "end-combat"}},
+		probeSteps:          []oraclegen.Step{attack, block, {Op: "pass_to", Step: "combat-damage"}},
 	}}, ""
 }

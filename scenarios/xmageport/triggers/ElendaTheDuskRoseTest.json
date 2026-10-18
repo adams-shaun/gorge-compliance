@@ -416,8 +416,7 @@
      "pt": "1/1"
     }
    ],
-   "xmage": "ElendaTheDuskRoseTest#testKillMultipleAndReanimate",
-   "known_bug": "XP[self-ref-follows-new-object]: the dead Elenda's 'another creature dies' trigger resolves Defined$ Self to raw c.Source (engine/effects/context.go:508). Object ids are stable across zone changes, so after Angelic Renewal returns Elenda the old trigger puts its +1/+1 counter on the NEW Elenda (2/2, expected 1/1). CR 400.7 (a new object; the ability cannot find it). Translation side-issue: setChoice(true) is not mapped to the 'Sacrifice 1 permanent' optional-cost choose."
+   "xmage": "ElendaTheDuskRoseTest#testKillMultipleAndReanimate"
   }
  ]
 }

@@ -239,8 +239,7 @@
      "eq": 0
     }
    ],
-   "xmage": "MasterOfThePearlTridentTest#testTurnToFrog",
-   "known_bug": "XP[layer6-static-ignores-dependency-on-ability-loss]: pruneLostSourceAbilities keeps a static whose ability starts in layer 6 if the remover's timestamp is later (engine/rules/abilityloss.go:190-192), so after Turn to Frog makes Master of the Pearl Trident lose all abilities, Merfolk of the Pearl Trident still has +1/+1 and islandwalk (probe: 2/2 not 1/1), hence no blockers decision. The grant depends on the removal (removal changes its existence) so the removal applies first. CR 613.8a/613.8b."
+   "xmage": "MasterOfThePearlTridentTest#testTurnToFrog"
   },
   {
    "name": "test-turn-to-frog-and-murder",

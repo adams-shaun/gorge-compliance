@@ -68,8 +68,7 @@
      "pt": "2/3"
     }
    ],
-   "xmage": "BecomesBlockedTest#testCantBeBlockedBecomesBlocked",
-   "known_bug": "XP[activation-after-blockers-excludes-declare-blockers]: ActivationAfterBlockers$ True is gated with e.G.Step \u003c= state.StepDeclareBlockers (engine/rules/activation_phases.go:81), so Trap Runner is not offered at priority in the declare blockers step after blockers are declared. CR 509.4 (priority after declaring blockers)."
+   "xmage": "BecomesBlockedTest#testCantBeBlockedBecomesBlocked"
   },
   {
    "name": "test-forestwalker-becomes-blocked-no-forest",
@@ -136,8 +135,7 @@
      "pt": "3/3"
     }
    ],
-   "xmage": "BecomesBlockedTest#testForestwalkerBecomesBlockedNoForest",
-   "known_bug": "XP[activation-after-blockers-excludes-declare-blockers]: ActivationAfterBlockers$ True gate rejects the whole declare-blockers step (e.G.Step \u003c= state.StepDeclareBlockers), so Trap Runner's {T} ability is never offered in declare-blockers after blockers are declared (only pass/concede offered in the transcript) (engine/rules/activation_phases.go:81). Players only get priority in the declare-blockers step AFTER blockers are declared, so the gate should be \u003c. CR 509.2."
+   "xmage": "BecomesBlockedTest#testForestwalkerBecomesBlockedNoForest"
   },
   {
    "name": "test-forestwalker-becomes-blocked-with-forest",
@@ -207,8 +205,7 @@
      "pt": "3/3"
     }
    ],
-   "xmage": "BecomesBlockedTest#testForestwalkerBecomesBlockedWithForest",
-   "known_bug": "XP[activation-after-blockers-excludes-declare-blockers]: ActivationAfterBlockers$ True is gated with e.G.Step \u003c= state.StepDeclareBlockers (engine/rules/activation_phases.go:81), so Trap Runner is not offered at priority in the declare blockers step after blockers are declared. CR 509.4 (priority after declaring blockers)."
+   "xmage": "BecomesBlockedTest#testForestwalkerBecomesBlockedWithForest"
   },
   {
    "name": "test-trample-blocked",
@@ -276,8 +273,7 @@
      "pt": "7/5"
     }
    ],
-   "xmage": "BecomesBlockedTest#testTrampleBlocked",
-   "known_bug": "XP[activation-after-blockers-excludes-declare-blockers]: Trap Runner's ActivationAfterBlockers$ ability not offered during declare-blockers step (only Forest mana/pass/concede offered) because the gate uses Step \u003c= StepDeclareBlockers (engine/rules/activation_phases.go:81). CR 509.2."
+   "xmage": "BecomesBlockedTest#testTrampleBlocked"
   }
  ]
 }

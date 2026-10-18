@@ -30,11 +30,7 @@
      "op": "pass_to",
      "seat": 0,
      "step": "end-combat",
-     "active": "p0"
-    },
-    {
-     "op": "resolve",
-     "seat": 0,
+     "active": "p0",
      "answers": [
       {
        "kind": "any",
@@ -44,6 +40,10 @@
        "seat": 0
       }
      ]
+    },
+    {
+     "op": "resolve",
+     "seat": 0
     }
    ],
    "expect": [

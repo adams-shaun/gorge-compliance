@@ -31,7 +31,7 @@ type damageSubject struct {
 
 // combatCause builds the attack that makes the subject deal combat damage to
 // p1. The trigger is put on the stack in the combat-damage step, so the probe
-// stops in end-combat (as the combat-damage recipe's does) and the emitted item
+// stops there (as the combat-damage recipe's does) and the emitted item
 // passes to main2.
 func (s damageSubject) combatCause() triggerCause {
 	attack := oraclegen.Step{Op: "attack", Seat: 0, Defender: "p1", Attackers: []string{"p0:" + s.name}}
@@ -39,7 +39,7 @@ func (s damageSubject) combatCause() triggerCause {
 		battlefield: append([]string(nil), s.battlefield...),
 		prelude:     append([]oraclegen.Step(nil), s.prelude...),
 		steps:       []oraclegen.Step{attack, {Op: "pass_to", Step: "main2"}},
-		probeSteps:  []oraclegen.Step{attack, {Op: "pass_to", Step: "end-combat"}},
+		probeSteps:  []oraclegen.Step{attack, {Op: "pass_to", Step: "combat-damage"}},
 	}
 	if s.selfInHand {
 		c.selfInHand = true
@@ -61,14 +61,14 @@ func controllerDamagedTarget(target string) bool {
 
 // controllerDamageCause builds the combat that makes the subject deal combat
 // damage to the card's controller: the subject sits on p1's side and p1
-// attacks p0. The probe stops in end-combat and the emitted item passes to
+// attacks p0. The probe stops in the combat-damage step and the emitted item passes to
 // main2, exactly as combatCause's does.
 func (s damageSubject) controllerDamageCause() triggerCause {
 	attack := oraclegen.Step{Op: "attack", Seat: 1, Defender: "p0", Attackers: []string{"p1:" + s.name}}
 	c := triggerCause{
 		opponentBattlefield: append([]string(nil), s.battlefield...),
 		steps:               []oraclegen.Step{attack, {Op: "pass_to", Step: "main2"}},
-		probeSteps:          []oraclegen.Step{attack, {Op: "pass_to", Step: "end-combat"}},
+		probeSteps:          []oraclegen.Step{attack, {Op: "pass_to", Step: "combat-damage"}},
 	}
 	if s.counter {
 		c.opponentCounters = map[string]map[string]int{s.name: {"P1P1": 1}}
@@ -100,7 +100,7 @@ func damageBlockCauses(reg *cards.Registry, f *cards.Face, name, target string) 
 		causes = append(causes, triggerCause{
 			opponentBattlefield: []string{b},
 			steps:               []oraclegen.Step{attack, block, {Op: "pass_to", Step: "main2"}},
-			probeSteps:          []oraclegen.Step{attack, block, {Op: "pass_to", Step: "end-combat"}},
+			probeSteps:          []oraclegen.Step{attack, block, {Op: "pass_to", Step: "combat-damage"}},
 		})
 		if len(causes) == 3 {
 			break
@@ -133,7 +133,7 @@ func faceDownDamageCauses(reg *cards.Registry, name string) []triggerCause {
 			hand:       []string{cand},
 			prelude:    prelude,
 			steps:      []oraclegen.Step{attack, {Op: "pass_to", Step: "main2"}},
-			probeSteps: []oraclegen.Step{attack, {Op: "pass_to", Step: "end-combat"}},
+			probeSteps: []oraclegen.Step{attack, {Op: "pass_to", Step: "combat-damage"}},
 		})
 		if len(causes) == 3 {
 			break
