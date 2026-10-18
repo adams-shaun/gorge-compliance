@@ -69,7 +69,7 @@
     }
    ],
    "xmage": "BecomesBlockedTest#testCantBeBlockedBecomesBlocked",
-   "known_bug": "XP[activation-after-blockers-excludes-declare-blockers]: ActivationAfterBlockers$ True is gated with e.G.Step \u003c= state.StepDeclareBlockers (engine/rules/activation_phases.go:81), so Trap Runner is not offered at priority in the declare blockers step after blockers are declared. CR 509.4 (priority after declaring blockers)."
+   "known_bug": "XP[setup-nonstarting-seat-sick+becomesblocked-unimplemented]: the ActivationAfterBlockers$ window is fixed (gorge 4f185c212), but at the pinned gorge (1) the oracle harness leaves a non-starting seat's setup permanents summoning sick (CR 302.6; XMage's addCard places them unsick), so p1's Trap Runner {T} is not offered on p0's turn 1, and (2) api:BecomesBlocked has no effect handler, so the target never becomes blocked (CR 509.1h) and Somberwald Alpha's 'becomes blocked' trigger never fires (CR 509.3c). Both fixed on gorge wt/kernel-gorgebug2 (01c637741 SetupSettled, c622a88de BlockedByEffect); retire at the next pin bump."
   },
   {
    "name": "test-forestwalker-becomes-blocked-no-forest",
@@ -137,7 +137,7 @@
     }
    ],
    "xmage": "BecomesBlockedTest#testForestwalkerBecomesBlockedNoForest",
-   "known_bug": "XP[activation-after-blockers-excludes-declare-blockers]: ActivationAfterBlockers$ True gate rejects the whole declare-blockers step (e.G.Step \u003c= state.StepDeclareBlockers), so Trap Runner's {T} ability is never offered in declare-blockers after blockers are declared (only pass/concede offered in the transcript) (engine/rules/activation_phases.go:81). Players only get priority in the declare-blockers step AFTER blockers are declared, so the gate should be \u003c. CR 509.2."
+   "known_bug": "XP[setup-nonstarting-seat-sick+becomesblocked-unimplemented]: the ActivationAfterBlockers$ window is fixed (gorge 4f185c212), but at the pinned gorge (1) the oracle harness leaves a non-starting seat's setup permanents summoning sick (CR 302.6; XMage's addCard places them unsick), so p1's Trap Runner {T} is not offered on p0's turn 1, and (2) api:BecomesBlocked has no effect handler, so the target never becomes blocked (CR 509.1h) and Somberwald Alpha's 'becomes blocked' trigger never fires (CR 509.3c). Both fixed on gorge wt/kernel-gorgebug2 (01c637741 SetupSettled, c622a88de BlockedByEffect); retire at the next pin bump."
   },
   {
    "name": "test-forestwalker-becomes-blocked-with-forest",
@@ -208,7 +208,7 @@
     }
    ],
    "xmage": "BecomesBlockedTest#testForestwalkerBecomesBlockedWithForest",
-   "known_bug": "XP[activation-after-blockers-excludes-declare-blockers]: ActivationAfterBlockers$ True is gated with e.G.Step \u003c= state.StepDeclareBlockers (engine/rules/activation_phases.go:81), so Trap Runner is not offered at priority in the declare blockers step after blockers are declared. CR 509.4 (priority after declaring blockers)."
+   "known_bug": "XP[setup-nonstarting-seat-sick+becomesblocked-unimplemented]: the ActivationAfterBlockers$ window is fixed (gorge 4f185c212), but at the pinned gorge (1) the oracle harness leaves a non-starting seat's setup permanents summoning sick (CR 302.6; XMage's addCard places them unsick), so p1's Trap Runner {T} is not offered on p0's turn 1, and (2) api:BecomesBlocked has no effect handler, so the target never becomes blocked (CR 509.1h) and Somberwald Alpha's 'becomes blocked' trigger never fires (CR 509.3c). Both fixed on gorge wt/kernel-gorgebug2 (01c637741 SetupSettled, c622a88de BlockedByEffect); retire at the next pin bump."
   },
   {
    "name": "test-trample-blocked",
@@ -277,7 +277,7 @@
     }
    ],
    "xmage": "BecomesBlockedTest#testTrampleBlocked",
-   "known_bug": "XP[activation-after-blockers-excludes-declare-blockers]: Trap Runner's ActivationAfterBlockers$ ability not offered during declare-blockers step (only Forest mana/pass/concede offered) because the gate uses Step \u003c= StepDeclareBlockers (engine/rules/activation_phases.go:81). CR 509.2."
+   "known_bug": "XP[setup-nonstarting-seat-sick+becomesblocked-unimplemented]: the ActivationAfterBlockers$ window is fixed (gorge 4f185c212), but at the pinned gorge (1) the oracle harness leaves a non-starting seat's setup permanents summoning sick (CR 302.6; XMage's addCard places them unsick), so p1's Trap Runner {T} is not offered on p0's turn 1, and (2) api:BecomesBlocked has no effect handler, so the target never becomes blocked (CR 509.1h) and Somberwald Alpha's 'becomes blocked' trigger never fires (CR 509.3c). Both fixed on gorge wt/kernel-gorgebug2 (01c637741 SetupSettled, c622a88de BlockedByEffect); retire at the next pin bump."
   }
  ]
 }
