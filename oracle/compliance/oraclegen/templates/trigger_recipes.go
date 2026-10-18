@@ -166,10 +166,12 @@ func baseTriggerRecipe(reg *cards.Registry, f *cards.Face, name string, t *cards
 		}
 		if combatDamage {
 			// The trigger resolves inside the pass to main2, so the emitted
-			// item shows no stack; the probe stops in end-combat, where the
-			// trigger is still on it.
+			// item shows no stack; the probe stops at the combat damage
+			// step's priority round (CR 510.3), where the trigger is on the
+			// stack (gorge used to give no priority there, and the probe
+			// stopped in end-combat with the trigger still waiting).
 			c.steps = append(c.steps, oraclegen.Step{Op: "pass_to", Step: "main2"})
-			c.probeSteps = []oraclegen.Step{attack, {Op: "pass_to", Step: "end-combat"}}
+			c.probeSteps = []oraclegen.Step{attack, {Op: "pass_to", Step: "combat-damage"}}
 		}
 		out = append(out, c)
 	case "trigger.spell-cast":

@@ -150,13 +150,14 @@ func mappedGranted(t *cards.Trigger) bool {
 // grantedCombatDamageCause is the combat-damage cause for a granted trigger:
 // the probe bear attacks unblocked and deals combat damage to p1. The trigger
 // resolves inside the pass to main2, so the emitted item shows no stack; the
-// probe stops in end-combat, where the trigger is still on it.
+// probe stops at the combat damage step's priority round (CR 510.3), where
+// the trigger is on the stack.
 func grantedCombatDamageCause() []triggerCause {
 	attack := oraclegen.Step{Op: "attack", Seat: 0, Defender: "p1", Attackers: []string{"p0:" + bearsProbe}}
 	return []triggerCause{{
 		battlefield: []string{bearsProbe},
 		steps:       []oraclegen.Step{attack, {Op: "pass_to", Step: "main2"}},
-		probeSteps:  []oraclegen.Step{attack, {Op: "pass_to", Step: "end-combat"}},
+		probeSteps:  []oraclegen.Step{attack, {Op: "pass_to", Step: "combat-damage"}},
 	}}
 }
 

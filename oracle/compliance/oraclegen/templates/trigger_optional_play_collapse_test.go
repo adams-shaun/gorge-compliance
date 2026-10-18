@@ -49,12 +49,17 @@ func TestTriggerOptionalPlayIsOneXMageAsk(t *testing.T) {
 		if card == "Seifer Almasy" {
 			it = levelBItem(t, card, "trigger#0.1")
 		}
-		// Double strike: two combat damage steps, two triggers.
+		// Double strike: two combat damage steps, two triggers. The
+		// first-strike damage's trigger is targeted and resolves in the
+		// priority round between the two damage steps (CR 510.4), before the
+		// regular damage's trigger exists, so each target is followed by its
+		// own trigger's choice. (gorge used to end that round on the first
+		// pass, so both targets came before both choices.)
 		if got := pairedOptionalPlays(t, it); got != 2 {
 			t.Fatalf("%s: precondition: %d optional+play pairs recorded, want 2", card, got)
 		}
 		as := answerAt(it, 1)
-		if got, want := answerKinds(as), "target Shock, target Shock, choice no, choice no"; got != want {
+		if got, want := answerKinds(as), "target Shock, choice no, target Shock, choice no"; got != want {
 			t.Errorf("%s: step-1 answers = %q, want %q", card, got, want)
 		}
 	}
