@@ -68,8 +68,7 @@
      "pt": "2/3"
     }
    ],
-   "xmage": "BecomesBlockedTest#testCantBeBlockedBecomesBlocked",
-   "known_bug": "XP[setup-nonstarting-seat-sick+becomesblocked-unimplemented]: the ActivationAfterBlockers$ window is fixed (gorge 4f185c212), but at the pinned gorge (1) the oracle harness leaves a non-starting seat's setup permanents summoning sick (CR 302.6; XMage's addCard places them unsick), so p1's Trap Runner {T} is not offered on p0's turn 1, and (2) api:BecomesBlocked has no effect handler, so the target never becomes blocked (CR 509.1h) and Somberwald Alpha's 'becomes blocked' trigger never fires (CR 509.3c). Both fixed on gorge wt/kernel-gorgebug2 (01c637741 SetupSettled, c622a88de BlockedByEffect); retire at the next pin bump."
+   "xmage": "BecomesBlockedTest#testCantBeBlockedBecomesBlocked"
   },
   {
    "name": "test-forestwalker-becomes-blocked-no-forest",
@@ -136,8 +135,7 @@
      "pt": "3/3"
     }
    ],
-   "xmage": "BecomesBlockedTest#testForestwalkerBecomesBlockedNoForest",
-   "known_bug": "XP[setup-nonstarting-seat-sick+becomesblocked-unimplemented]: the ActivationAfterBlockers$ window is fixed (gorge 4f185c212), but at the pinned gorge (1) the oracle harness leaves a non-starting seat's setup permanents summoning sick (CR 302.6; XMage's addCard places them unsick), so p1's Trap Runner {T} is not offered on p0's turn 1, and (2) api:BecomesBlocked has no effect handler, so the target never becomes blocked (CR 509.1h) and Somberwald Alpha's 'becomes blocked' trigger never fires (CR 509.3c). Both fixed on gorge wt/kernel-gorgebug2 (01c637741 SetupSettled, c622a88de BlockedByEffect); retire at the next pin bump."
+   "xmage": "BecomesBlockedTest#testForestwalkerBecomesBlockedNoForest"
   },
   {
    "name": "test-forestwalker-becomes-blocked-with-forest",
@@ -207,8 +205,7 @@
      "pt": "3/3"
     }
    ],
-   "xmage": "BecomesBlockedTest#testForestwalkerBecomesBlockedWithForest",
-   "known_bug": "XP[setup-nonstarting-seat-sick+becomesblocked-unimplemented]: the ActivationAfterBlockers$ window is fixed (gorge 4f185c212), but at the pinned gorge (1) the oracle harness leaves a non-starting seat's setup permanents summoning sick (CR 302.6; XMage's addCard places them unsick), so p1's Trap Runner {T} is not offered on p0's turn 1, and (2) api:BecomesBlocked has no effect handler, so the target never becomes blocked (CR 509.1h) and Somberwald Alpha's 'becomes blocked' trigger never fires (CR 509.3c). Both fixed on gorge wt/kernel-gorgebug2 (01c637741 SetupSettled, c622a88de BlockedByEffect); retire at the next pin bump."
+   "xmage": "BecomesBlockedTest#testForestwalkerBecomesBlockedWithForest"
   },
   {
    "name": "test-trample-blocked",
@@ -276,8 +273,7 @@
      "pt": "7/5"
     }
    ],
-   "xmage": "BecomesBlockedTest#testTrampleBlocked",
-   "known_bug": "XP[setup-nonstarting-seat-sick+becomesblocked-unimplemented]: the ActivationAfterBlockers$ window is fixed (gorge 4f185c212), but at the pinned gorge (1) the oracle harness leaves a non-starting seat's setup permanents summoning sick (CR 302.6; XMage's addCard places them unsick), so p1's Trap Runner {T} is not offered on p0's turn 1, and (2) api:BecomesBlocked has no effect handler, so the target never becomes blocked (CR 509.1h) and Somberwald Alpha's 'becomes blocked' trigger never fires (CR 509.3c). Both fixed on gorge wt/kernel-gorgebug2 (01c637741 SetupSettled, c622a88de BlockedByEffect); retire at the next pin bump."
+   "xmage": "BecomesBlockedTest#testTrampleBlocked"
   }
  ]
 }
