@@ -28,6 +28,7 @@ help:
 	@echo "gorge-compliance targets:"
 	@echo "  make cards          — link gorge's .cards corpus here (run gorge's make fetch-cards compile-cards first)"
 	@echo "  make test           — go test ./... (capped like gorge's)"
+	@echo "  make pr [PR_BASE=main] [DRY=1] — open/refresh a GitHub PR with a generated change overview"
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
 	@echo "  make oracle-audit   — the hand Oracle-text audit + XMage ports (audit/; ORACLE_RUN=<Card> to filter)"
 	@echo "  make compliance-status — per-set/per-format compliance status (oracle/compliance/status.md, never committed) + ratchet check"
@@ -103,3 +104,20 @@ compliance-status:
 compliance-sets:
 	@mkdir -p .coverage
 	go run ./cmd/oraclediff sets -out .coverage/compliance-sets.md
+
+# ---- pull requests ------------------------------------------------------------
+# make pr                 open (or refresh) a GitHub PR: current branch -> origin's default branch
+#   PR_HEAD=<branch>      branch to propose (default: the checked-out branch)
+#   PR_BASE=<branch>      target branch (default: origin's default branch)
+#   TITLE="..."           PR title (default: the commit subject, or "<head> → <base>: N commits")
+#   SUMMARY="..."         a paragraph placed under the overview table
+#   DRAFT=1               open as a draft      DRY=1   print the title and body only
+.PHONY: pr
+pr: export HEAD = $(PR_HEAD)
+pr: export BASE = $(PR_BASE)
+pr: export TITLE := $(TITLE)
+pr: export SUMMARY := $(SUMMARY)
+pr: export DRAFT := $(DRAFT)
+pr: export DRY := $(DRY)
+pr:
+	@bash scripts/open-pr.sh
