@@ -102,6 +102,19 @@ func triggerSubject(v string) bool {
 // form, "when this enters or the creature it haunts dies", as dies too)
 // together with the haunt spell's own effect.
 func (g *gorgeNorm) keywordAbilities(head, param string) {
+	switch head {
+	case "Tribute":
+		// "When this enters, if tribute wasn't paid, ...": Forge's Tribute
+		// runs the TrigNotTribute SVar; mtgish writes the printed trigger.
+		a := cards.ResolveSVar(g.svars(), "TrigNotTribute")
+		if a == nil {
+			return
+		}
+		e := &effects{}
+		g.chain(e, a, 1)
+		g.ability(Ability{Kind: "triggered", Event: "etb", Targets: e.targets, Effects: e.effects})
+		return
+	}
 	if param == "" {
 		return
 	}
@@ -642,4 +655,28 @@ func sameEffects(a, b any) bool {
 		}
 	}
 	return true
+}
+
+// secondaryHalf reports a Secondary$ True trigger that is the second half
+// of another trigger's printed ability: the same Execute$ and the same
+// event class ("whenever you cast or copy" as SpellCast + SpellCopy,
+// "from the command zone or the battlefield" as one trigger per zone).
+// mtgish writes such an ability once (an Or event, a zone wrapper). A
+// Secondary$ half of another class ("blocks or becomes blocked") stays: it
+// is a second event, as mtgish's second rule.
+func secondaryHalf(f *cards.Face, t *cards.Trigger) bool {
+	if t.Params["Secondary"] != "True" || t.Params["Execute"] == "" {
+		return false
+	}
+	cls := gorgeTriggerClass(t.Mode, t.Params)
+	for i := range f.Triggers {
+		u := &f.Triggers[i]
+		if u == t || u.Params["Secondary"] == "True" || u.Params["Execute"] != t.Params["Execute"] {
+			continue
+		}
+		if gorgeTriggerClass(u.Mode, u.Params) == cls {
+			return true
+		}
+	}
+	return false
 }

@@ -70,7 +70,7 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if head, _, ok := kwTag(t.Params); ok && !printedExpansion(head) {
 			continue
 		}
-		if g.gorgeStaticTrigger(t, &enter) {
+		if g.gorgeStaticTrigger(t, &enter) || secondaryHalf(f, t) {
 			continue
 		}
 		g.trigger(t)
@@ -315,6 +315,7 @@ func (g *gorgeNorm) keyword(k string) {
 			n = "*"
 		}
 		g.kw(keywordWord(head) + ":" + n)
+		g.keywordAbilities(head, param)
 		return
 	}
 	if f, ok := extKeyword[head]; ok {
@@ -438,6 +439,10 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 	case "Attacks", "AttackersDeclared", "AttackersDeclaredOneTarget":
 		return "attacks"
 	case "Blocks":
+		if triggerSubject(p["ValidBlocked"]) && !triggerSubject(p["ValidCard"]) {
+			// "Whenever a creature blocks this": this becomes blocked.
+			return "blocked"
+		}
 		return "blocks"
 	case "AttackerBlocked", "AttackerBlockedByCreature":
 		if selfBlocker(p) {
