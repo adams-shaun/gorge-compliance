@@ -235,6 +235,9 @@ func (e *effects) action(n node, v string) {
 		if strings.Contains(v, "PutCounters") {
 			e.add("counters:*")
 		}
+		if t, ok := reflexiveB[strings.TrimSuffix(strings.TrimPrefix(v, "Reflexive_"), "_WhenYouDo")]; ok {
+			e.add(t)
+		}
 		return
 	}
 	switch v {
@@ -468,6 +471,10 @@ func (e *effects) action(n node, v string) {
 // lookMove maps a look-at/reveal-the-top sub-action to the move it makes.
 func lookMove(v string) string {
 	switch {
+	case strings.Contains(v, "Cloak"):
+		return "cloak"
+	case strings.Contains(v, "Manifest"):
+		return "manifest"
 	case strings.Contains(v, "IntoHand"), strings.Contains(v, "InHand"):
 		return "move:library>hand"
 	case strings.Contains(v, "OntoTheBattlefield"), strings.Contains(v, "OntoBattlefield"):

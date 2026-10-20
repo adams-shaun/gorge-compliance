@@ -146,6 +146,9 @@ func svarRefs(a *cards.SA) []string {
 	case "DelayedTrigger", "ImmediateTrigger":
 		out = append(out, a.Params["Execute"])
 	}
+	if f, ok := extSVarRefs[a.API]; ok {
+		out = append(out, f(a)...)
+	}
 	var keep []string
 	for _, r := range out {
 		if r != "" {
@@ -295,7 +298,14 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		if p["CounterType"] == "EachFromSource" {
 			return []string{"counters:*"}
 		}
-		return []string{"counters:" + gorgeCounterType(p["CounterType"]) + ":" + literalOr(p["CounterNum"], "1")}
+		ct := p["CounterType"]
+		if ct == "" && p["CounterTypes"] != "" {
+			// CounterTypes$: one of each listed type; ChosenFromList is
+			// one chosen from TypeList$ (each listed, as alternatives
+			// merge).
+			ct = "EACH " + strings.Replace(p["CounterTypes"], "ChosenFromList", p["TypeList"], 1)
+		}
+		return gorgeCounterTokens(ct, literalOr(p["CounterNum"], "1"))
 	case "MultiplyCounter":
 		return []string{"counters:double"}
 	case "RemoveCounter", "RemoveCounterAll":

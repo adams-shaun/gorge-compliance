@@ -365,6 +365,10 @@ func (g *gorgeNorm) sa(a *cards.SA) {
 			return
 		}
 	case "AB":
+	case "ST":
+		// A static ability that grants a special action (discard this
+		// any time you could cast an instant).
+		kind = "static"
 	default:
 		kind = unmapped("SA." + a.Kind)
 	}
@@ -394,6 +398,9 @@ func (g *gorgeNorm) trigger(t *cards.Trigger) {
 		eff = cards.ResolveSVar(g.svars(), t.Params["Execute"])
 	}
 	g.chain(e, eff, 1)
+	if skipTriggerB(t, e) {
+		return
+	}
 	g.ability(Ability{Kind: "triggered", Event: gorgeTriggerClass(t.Mode, t.Params), Targets: e.targets, Effects: e.effects})
 }
 
@@ -427,6 +434,9 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 		}
 		if strings.HasPrefix(p["Phase"], "Main") {
 			return "main"
+		}
+		if c := phaseClassB(p); c != "" {
+			return c
 		}
 		return unmapped("Phase." + p["Phase"])
 	case "Attacks", "AttackersDeclared", "AttackersDeclaredOneTarget":
@@ -614,6 +624,9 @@ func hiddenKeywordToken(k string) string {
 	case strings.Contains(k, "doesn't untap"):
 		return "rule:doesntuntapduringcontrollersuntap"
 	}
+	if t := hiddenB(k); t != "" {
+		return t
+	}
 	return unmapped("hidden:" + k)
 }
 
@@ -663,6 +676,12 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 		g.ability(Ability{Kind: "static", Effects: []string{"spell:cantbecountered"}})
 		return
 	}
+	if f, ok := extReplStatic[r.Event]; ok {
+		if eff := f(r); eff != nil {
+			g.ability(Ability{Kind: "static", Effects: eff})
+			return
+		}
+	}
 	// Replacements other than "as this enters" are compared by the event
 	// they replace (mtgish's Replace<Event> rule), not by what they do.
 	a := Ability{Kind: "replacement"}
@@ -707,14 +726,14 @@ func (g *gorgeNorm) enterEffects(r *cards.Repl) []string {
 	}
 	if head, kw, ok := kwTag(p); ok && head == "etbCounter" {
 		parts := strings.Split(kw, ":")
-		ct, n := "*", "1"
+		ct, n := "", "1"
 		if len(parts) > 1 {
-			ct = gorgeCounterType(parts[1])
+			ct = parts[1]
 		}
 		if len(parts) > 2 {
 			n = literalOr(parts[2], "*")
 		}
-		return []string{"counters:" + ct + ":" + n}
+		return gorgeCounterTokens(ct, n)
 	}
 	var out []string
 	for a := with; a != nil; a = a.Sub {
@@ -728,7 +747,7 @@ func (g *gorgeNorm) enterEffects(r *cards.Repl) []string {
 		case a.API == "Clone":
 			out = append(out, "copy")
 		case a.API == "PutCounter":
-			out = append(out, "counters:"+gorgeCounterType(a.Params["CounterType"])+":"+literalOr(a.Params["CounterNum"], "1"))
+			out = append(out, gorgeCounterTokens(a.Params["CounterType"], literalOr(a.Params["CounterNum"], "1"))...)
 		case a.API == "InternalEtbReplacement" || a.API == "Cleanup":
 		default:
 			if f, ok := extEnterAPI[a.API]; ok {
@@ -755,18 +774,30 @@ func literalOr(v, def string) string {
 
 // gorgeCounterType canonicalises a Forge counter type.
 func gorgeCounterType(t string) string {
-	if t == "" {
+	if strings.HasPrefix(t, "EachType") {
+		// One of each type among some permanents' counters.
 		return "*"
 	}
-	// P1P1, M1M1, P1P0, M0M1 ...
-	if len(t) == 4 && (t[0] == 'P' || t[0] == 'M') && (t[2] == 'P' || t[2] == 'M') {
-		sign := func(c byte) string {
-			if c == 'M' {
+	switch t {
+	case "", "Any", "All", "EachFromSource", "ExistingCounter", "EachNotOn":
+		// Any counter type, or each type already there.
+		return "*"
+	case "REPR":
+		// Forge's enum name for the reprieve counter.
+		return "reprieve"
+	}
+	// P1P1, M1M1, P1P0, M0M1 ... (not PUPA): a zero is "+0", as mtgish's
+	// PTCounter(0, -1) is "+0/-1".
+	if len(t) == 4 && (t[0] == 'P' || t[0] == 'M') && (t[2] == 'P' || t[2] == 'M') && digitB(t[1]) && digitB(t[3]) {
+		sign := func(c, d byte) string {
+			if c == 'M' && d != '0' {
 				return "-"
 			}
 			return "+"
 		}
-		return sign(t[0]) + t[1:2] + "/" + sign(t[2]) + t[3:4]
+		return sign(t[0], t[1]) + t[1:2] + "/" + sign(t[2], t[3]) + t[3:4]
 	}
-	return counterName(t)
+	// "First Strike", "FIRST_STRIKE" -> "firststrike", as mtgish's
+	// FirstStrikeCounter.
+	return counterName(strings.NewReplacer(" ", "", "_", "").Replace(t))
 }
