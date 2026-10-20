@@ -153,7 +153,10 @@ func cleave(f *cards.Face, s *Summary) {
 	if !has {
 		return
 	}
-	s.Keywords = append(s.Keywords, "cleave")
+	// Idempotent: another pass may already have read the cleave SP.
+	if !hasToken(s.Keywords, "cleave") {
+		s.Keywords = append(s.Keywords, "cleave")
+	}
 	var subs []*effects
 	first := -1
 	kept := s.Abilities[:0]
