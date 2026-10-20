@@ -352,7 +352,7 @@ func d2ContinuousEffects(p map[string]string) []string {
 		out = append(out, "manaconvert")
 	}
 	if p["Goad"] != "" {
-		out = append(out, "rule:isgoadedbyplayer")
+		out = append(out, "goad")
 	}
 	if p["RemoveNonManaAbilities"] != "" {
 		out = append(out, "loseabilities")
@@ -865,4 +865,42 @@ func (g *gorgeNorm) d2InsteadEnter(r *cards.Repl) bool {
 		}
 	}
 	return false
+}
+
+// ruleToken is the token of a PermanentRule variant: "rule:<variant>",
+// except for the variants that are one Forge static mode written several
+// ways by mtgish (which player or permanent a creature can't attack, which
+// creatures a creature can't block), whose Forge mode cannot tell the
+// variants apart: those take the family's token, the one the gorge side
+// emits for the mode.
+func ruleToken(v string) string {
+	if t, ok := d2RuleSynonyms[v]; ok {
+		return t
+	}
+	return "rule:" + ruleWord(v)
+}
+
+var d2RuleSynonyms = map[string]string{
+	// S:Mode$ CantAttack (with ValidDefender$/UnlessDefender$ ...).
+	"CantAttackPlayer": "rule:cantattack", "CantAttackAPlayer": "rule:cantattack",
+	"CantAttackAPermanent": "rule:cantattack", "CantAttackPlayerOrPlaneswalkerControlledBy": "rule:cantattack",
+	"CantAttackAnyPlayerOrPlaneswalkerControlledBy": "rule:cantattack",
+	"CantAttackIfDefendingPlayer":                   "rule:cantattack", "CantAttackUnlessDefendingPlayer": "rule:cantattack",
+	// S:Mode$ MustAttack (with MustAttack$ <defender>).
+	"MustAttackPlayer": "rule:mustattack", "MustAttackAPlayer": "rule:mustattack", "MustAttackPlaneswalker": "rule:mustattack",
+	// S:Mode$ CantBeActivated (with ValidSA$ ...).
+	"AbilitiesCantBeActivated": "rule:cantbeactivated", "AbilitiesOfTypeCantBeActivated": "rule:cantbeactivated",
+	// S:Mode$ CantBlockBy with ValidBlocker$: which creatures can block
+	// which, from either side.
+	"CantBeBlockedExceptByDefenders": "rule:cantbeblockedbydefenders", "CanBlockOnly": "rule:cantbeblockedbydefenders",
+	"CantBlockAttacker": "rule:cantbeblockedbydefenders", "CantBlockAttackers": "rule:cantbeblockedbydefenders",
+	// "Is goaded": the goad action's result, written as a rule.
+	"IsGoadedByPlayer": "goad",
+}
+
+// d2PlayerSynonyms are PlayerEffect variants that are a gorge static of
+// another family: "creatures can't attack you" is S:Mode$ CantAttack.
+var d2PlayerSynonyms = map[string]string{
+	"CantAttackPlayer": "rule:cantattack", "CantAttackPlayerOrPlaneswalkerControlledBy": "rule:cantattack",
+	"CantAttackAPermanent": "rule:cantattack", "CantAttackWithCreatures": "rule:cantattack",
 }

@@ -331,7 +331,7 @@ func (e *effects) action(n node, v string) {
 		e.add(layerEffects(list(arg(1)))...)
 	case "CreatePermanentRuleEffectUntil", "CreateEachPermanentRuleEffectUntil":
 		for _, r := range list(arg(1)) {
-			e.add("rule:" + ruleWord(variantOf(r)))
+			e.add(ruleToken(variantOf(r)))
 		}
 	case "CreatePlayerEffectUntil":
 		for _, x := range list(arg(1)) {
@@ -715,7 +715,7 @@ func staticEffects(r any) []string {
 	case "PermanentRuleEffect", "EachPermanentRuleEffect", "PermanentRuleEffect_PlayerMayPayToIgnoreEffectUntil":
 		var out []string
 		for _, x := range list(a[1]) {
-			out = append(out, "rule:"+ruleWord(variantOf(x)))
+			out = append(out, ruleToken(variantOf(x)))
 		}
 		return out
 	case "PlayerEffect", "EachPlayerEffect", "PlayerEffect_PlayerMayPayToIgnoreEffectUntil":
@@ -727,7 +727,7 @@ func staticEffects(r any) []string {
 	case "CastEffect":
 		return []string{castEffectToken(variantOf(rawArgs(r)))}
 	case "ActivatedAbilityEffect":
-		return []string{"rule:" + ruleWord(variantOf(argN(r, 1)))}
+		return []string{ruleToken(variantOf(argN(r, 1)))}
 	case "ThisSpellEffect":
 		var out []string
 		for _, x := range list(rawArgs(r)) {
@@ -746,6 +746,9 @@ func staticEffects(r any) []string {
 
 // playerEffectToken maps a PlayerEffect variant.
 func playerEffectToken(v string) string {
+	if t, ok := d2PlayerSynonyms[v]; ok {
+		return t
+	}
 	switch {
 	case strings.Contains(v, "Flash"):
 		return "flash"
