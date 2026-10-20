@@ -426,6 +426,14 @@ func (m *mtgishNorm) spell(r any) {
 	case "SpellActions_Overload", "SpellActions_Cleave", "SpellActions_Teamwork":
 		m.kw(strings.ToLower(strings.TrimPrefix(v, "SpellActions_")))
 		e.alternatives(argsOf(r)[1:]...)
+	case "SpellActions_MadnessX":
+		// Cast for its madness cost (argument 0) or not: the keyword, and
+		// the two versions of the spell as alternatives.
+		m.kw("madness:" + mtgishCost(argN(r, 0)))
+		e.alternatives(argsOf(r)[1:]...)
+	case "SpellActions_AdditionalCostOptions":
+		// Which additional cost was paid: alternatives.
+		e.alternatives(list(rawArgs(r))...)
 	case "SpellActions_Tiered", "SpellActions_Spree":
 		m.kw(strings.ToLower(strings.TrimPrefix(v, "SpellActions_")))
 		var alts []any
