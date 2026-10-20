@@ -1,20 +1,19 @@
 package mtgish
 
 import (
-	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
 // Unit E: the T1 (characteristics) normaliser classes. Each block names the
-// class it closes; the census behind it is in the commit message.
+// class it closes; the census behind it is in the commit messages.
 
 func init() {
 	// mtgish writes these keyword abilities of an instant or sorcery as an
 	// action inside the spell's actions; Forge (and the printed card) list
-	// them as keywords. mtgishKeywordActions adds the keyword on the mtgish
-	// side; the action itself is no effect verb on either side.
+	// them as keywords. mtgishFaceE adds the keyword on the mtgish side; the
+	// action itself is no effect verb on either side.
 	for v := range mtgishKeywordActions {
 		extAction[v] = func(*effects, node) {}
 	}
@@ -56,61 +55,48 @@ var gorgeRestrictionKeywords = map[string][]string{
 	"CantBlockAlone":         {"cantblockalone"},
 }
 
-// mtgishFaceE runs after a face's rules are mapped: the keyword actions
-// inside its spells, and a Spacecraft's P/T.
+// mtgishFaceE runs after a face's rules are mapped and its P/T read.
 func mtgishFaceE(m *mtgishNorm, f node) {
-	oneCDA(m.s)
+	defer oneCDA(m.s)
+	riders := 0
+	for _, r := range list(f["Rules"]) {
+		switch {
+		case variantOf(r) == "SpecializeFromGraveyard":
+			riders++
+		case variantOf(r) == "CDA_Color" && variantOf(rawArgs(r)) == "Colorless":
+			// "This is colorless" is a colour CDA (Forge: SetColor$
+			// Colorless), not the devoid keyword the CDA_Color case
+			// reads it as.
+			m.s.Keywords = dropOne(m.s.Keywords, "devoid")
+			m.ability(Ability{Kind: "static", Effects: []string{"cda"}})
+		}
+	}
 	walk(f["Rules"], func(n node, enum, variant string) bool {
 		if tok, ok := mtgishKeywordActions[variant]; ok && enum == "_Action" {
 			m.kw(tok)
 		}
 		return true
 	})
-	if m.s.PT != "" {
-		return
-	}
-	// A Spacecraft prints its P/T box beside the station threshold that
-	// makes it a creature; mtgish nests it in StationChargedAnimate.
-	for _, r := range list(f["Rules"]) {
-		if variantOf(r) != "StationChargedAnimate" {
-			continue
-		}
-		if pt := argN(r, 2); variantOf(pt) == "PT" {
-			p, t := argN(pt, 0), argN(pt, 1)
-			if pn, ok := intOf(p); ok {
-				if tn, ok := intOf(t); ok {
-					m.s.PT = strconv.Itoa(pn) + "/" + strconv.Itoa(tn)
-				}
-			}
-		}
+	// "You may also activate this card's specialize ability while it's in
+	// your graveyard" is a rider of the Specialize keyword (Forge writes it
+	// as a parameter of the one K:Specialize line), not a second keyword.
+	for ; riders > 0; riders-- {
+		m.s.Keywords = dropOne(m.s.Keywords, "specialize")
 	}
 }
 
-// stationLevel maps one STATION N+ level. The printed level is a static
-// ability that applies while the permanent has N charge counters, granting
-// the abilities listed under it (and, on a Spacecraft, making it an artifact
-// creature): Forge writes it as one Continuous static (AddKeyword,
-// AddAbility/AddTrigger, AddType), so it is one static here, with a grant
-// per keyword, one grant:ability per other ability and "type" for the
-// animation. The Station keyword itself is its own Rule.
-func (m *mtgishNorm) stationLevel(r any) {
-	n := &mtgishNorm{s: &Summary{}}
-	n.rules(list(argN(r, 1)))
-	var eff []string
-	for _, k := range n.s.Keywords {
-		eff = append(eff, "grant:"+keywordHeadToken(k))
+func dropOne(ts []string, t string) []string {
+	for i, x := range ts {
+		if x == t {
+			return append(ts[:i:i], ts[i+1:]...)
+		}
 	}
-	for range n.s.Abilities {
-		eff = append(eff, "grant:ability")
-	}
-	if variantOf(r) == "StationChargedAnimate" {
-		eff = append(eff, "type")
-	}
-	m.ability(Ability{Kind: "static", Effects: eff})
+	return ts
 }
 
-// gorgeCardE runs after every face of a gorge card is summarised.
-func gorgeCardE(c *cards.Card, out []*Summary) {
+// gorgeCardE runs after every face of a gorge card is summarised; out holds
+// the summaries of c's non-nil faces, in order.
+func gorgeCardE(c *cards.Card, out []*Summary, idx TypeIndex) {
 	// Forge writes "Loyalty:0" on the back face of a planeswalker that
 	// transforms into a planeswalker (Arlinn Kord, Garruk Relentless): the
 	// back face prints no loyalty (a front face may print 0: Dakkon,
@@ -132,6 +118,16 @@ func gorgeCardE(c *cards.Card, out []*Summary) {
 			}
 		}
 	}
+	i := 0
+	for _, f := range c.Faces {
+		if f == nil {
+			continue
+		}
+		if i < len(out) {
+			cleave(f, out[i])
+		}
+		i++
+	}
 }
 
 func hasToken(ts []string, t string) bool {
@@ -143,49 +139,47 @@ func hasToken(ts []string, t string) bool {
 	return false
 }
 
-// cleaveSP reports whether a is the cleave half of a Cleave spell: Forge
-// writes Cleave as a second SP with "PrecostDesc$ Cleave" and no keyword.
-func cleaveSP(a *cards.SA) bool {
-	return a.Kind == "SP" && strings.TrimSpace(a.Params["PrecostDesc"]) == "Cleave"
-}
-
-// cleave folds a face's cleave SP into its spell ability as an alternative
-// (cast for the cleave cost or not: one spell, branch-max), the way mtgish's
-// SpellActions_Cleave reads, and prints the keyword.
-func (g *gorgeNorm) cleave(f *cards.Face) {
+// cleave prints a Cleave face's keyword and folds its spell abilities into
+// one, as mtgish's SpellActions_Cleave reads (cast for the cleave cost or
+// not: one spell, branch-max). Forge writes Cleave as a second SP with
+// "PrecostDesc$ Cleave" and no keyword line.
+func cleave(f *cards.Face, s *Summary) {
+	has := false
 	for _, a := range f.Abilities {
-		if !cleaveSP(a) {
-			continue
+		if a.Kind == "SP" && strings.TrimSpace(a.Params["PrecostDesc"]) == "Cleave" {
+			has = true
 		}
-		g.kw("cleave")
-		alt := &gorgeNorm{s: &Summary{}, f: g.f, idx: g.idx}
-		alt.sa(a)
-		for i := range g.s.Abilities {
-			base := &g.s.Abilities[i]
-			if base.Kind != "spell" {
+	}
+	if !has {
+		return
+	}
+	s.Keywords = append(s.Keywords, "cleave")
+	var subs []*effects
+	first := -1
+	kept := s.Abilities[:0]
+	for _, a := range s.Abilities {
+		if a.Kind == "spell" {
+			subs = append(subs, &effects{targets: a.Targets, effects: a.Effects})
+			if first >= 0 {
 				continue
 			}
-			e := &effects{}
-			e.merge([]*effects{
-				{targets: base.Targets, effects: base.Effects},
-				{targets: alt.s.Abilities[0].Targets, effects: alt.s.Abilities[0].Effects},
-			})
-			base.Targets, base.Effects = e.targets, e.effects
-			alt = nil
-			break
+			first = len(kept)
 		}
-		if alt != nil {
-			g.s.Abilities = append(g.s.Abilities, alt.s.Abilities...)
-		}
+		kept = append(kept, a)
+	}
+	s.Abilities = kept
+	if first >= 0 && len(subs) > 1 {
+		e := &effects{}
+		e.merge(subs)
+		s.Abilities[first].Targets, s.Abilities[first].Effects = e.targets, e.effects
 	}
 }
 
 // gorgePT renders a face's printed P/T the way mtgish's CardPT reads. A
 // "*" half is "*" only where a characteristic-defining ability sets it
-// (mtgish's CDA_Power/CDA_Toughness); otherwise the star is set by an
-// "as this enters" choice or a conditional static that mtgish writes as an
-// ordinary rule, and CardPT holds the printed base: 0 for "*", N for "N+*"
-// or "N-*".
+// (mtgish's CDA_Power/CDA_Toughness, or the self P/T layer effect selfPT
+// reads as one); otherwise the star is set by an "as this enters" choice,
+// and CardPT holds the printed base: 0 for "*", N for "N+*" or "N-*".
 func gorgePT(f *cards.Face) string {
 	pt := f.PT
 	if !strings.Contains(pt, "*") {
@@ -318,15 +312,6 @@ func colorQuality(w string) string {
 	return w
 }
 
-// enchantZone is the zone an Enchant keyword's filter names: "Enchant
-// creature card in a graveyard" is Creature.inZoneGraveyard.
-func enchantZone(cls string) string {
-	if strings.Contains(cls, "inZoneGraveyard") {
-		return "Graveyard"
-	}
-	return ""
-}
-
 // gorgeAffinity renders an Affinity filter ("Artifact", "Land.Snow",
 // "Creature.Artifact") as its type words, sorted, the way affinityWord
 // renders mtgish's.
@@ -337,69 +322,4 @@ func gorgeAffinity(param string) string {
 		words = append(words, typeWord(w))
 	}
 	return strings.Join(sorted(dedup(words)), "|")
-}
-
-// intersectionOrder ranks card types for an intersection of them
-// ("artifact creature", "enchantment creature"): its target class is the
-// first. Forge spells the intersection either way round
-// (Creature.Artifact, Artifact.Creature), mtgish as an And of IsCardtype.
-var intersectionOrder = []string{"creature", "planeswalker", "battle", "land", "enchantment", "artifact"}
-
-func pickIntersection(ws []string) string {
-	for _, c := range intersectionOrder {
-		if hasToken(ws, c) {
-			return c
-		}
-	}
-	return ws[0]
-}
-
-// intersectionClass is a Forge filter alternative's class: its head type,
-// or, when type properties follow it ("Creature.Artifact+nonToken"), the
-// intersection's class.
-func intersectionClass(head, alt string) string {
-	if !permanentTypes[head] {
-		return head
-	}
-	ws := []string{head}
-	for _, w := range strings.FieldsFunc(alt, func(r rune) bool { return r == '.' || r == '+' })[1:] {
-		if w := typeWord(w); permanentTypes[w] {
-			ws = append(ws, w)
-		}
-	}
-	return pickIntersection(ws)
-}
-
-// directClass is the card-type class of one mtgish permanent filter that
-// names a type outright (IsCardtype, or a subtype implying its card type),
-// "" for any other filter.
-func directClass(x any) string {
-	switch variantOf(x) {
-	case "IsCardtype":
-		if s, ok := rawArgs(x).(string); ok {
-			if w := typeWord(s); permanentTypes[w] {
-				return w
-			}
-		}
-	case "IsCreatureType", "IsCreatureTypeVariable":
-		return "creature"
-	case "IsArtifactType":
-		return "artifact"
-	case "IsLandType":
-		return "land"
-	case "IsEnchantmentType":
-		return "enchantment"
-	}
-	return ""
-}
-
-func init() {
-	// "You may also activate this card's specialize ability while it's in
-	// your graveyard" is a rider of the Specialize keyword: Forge writes it
-	// as a parameter of the one K:Specialize line.
-	extRule["SpecializeFromGraveyard"] = func(*mtgishNorm, any) {}
-	// "Enchant creature card in a graveyard": the Enchant keyword with a
-	// graveyard-card class, as gorge renders Forge's
-	// Enchant:<Type>.inZoneGraveyard.
-	extRule["EnchantGraveyardCard"] = func(m *mtgishNorm, _ any) { m.kw("enchant:" + clsGraveyard) }
 }

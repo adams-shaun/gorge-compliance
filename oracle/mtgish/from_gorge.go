@@ -17,7 +17,7 @@ func FromGorge(name string, c *cards.Card, idx TypeIndex) []*Summary {
 		}
 		out = append(out, gorgeFace(name, f, idx))
 	}
-	gorgeCardE(c, out)
+	gorgeCardE(c, out, idx)
 	return out
 }
 
@@ -43,12 +43,11 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 			// A keyword's activated ability (equip, crew, a Class level-up).
 			continue
 		}
-		if intrinsicMana(f, a) || cleaveSP(a) {
+		if intrinsicMana(f, a) {
 			continue
 		}
 		g.sa(a)
 	}
-	g.cleave(f)
 	for i := range f.Triggers {
 		t := &f.Triggers[i]
 		if head, _, ok := kwTag(t.Params); ok && !printedExpansion(head) {
@@ -266,7 +265,7 @@ func (g *gorgeNorm) keyword(k string) {
 		return
 	case head == "Enchant":
 		cls := strings.SplitN(param, ":", 2)[0]
-		g.kw("enchant:" + targetToken(g.idx.validClasses(cls, enchantZone(cls)), "1"))
+		g.kw("enchant:" + targetToken(g.idx.validClasses(cls, ""), "1"))
 		return
 	case head == "Affinity":
 		g.kw("affinity:" + gorgeAffinity(param))

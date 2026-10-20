@@ -212,7 +212,7 @@ func (idx TypeIndex) validClasses(vt, zone string) []string {
 		if i := strings.IndexAny(head, ".+"); i >= 0 {
 			head = head[:i]
 		}
-		w := intersectionClass(typeWord(head), alt)
+		w := typeWord(head)
 		switch {
 		case w == "any":
 			out = append(out, clsAny)

@@ -73,19 +73,15 @@ func TestFacePairingAliasFoldAndSeparateCards(t *testing.T) {
 }
 
 func TestMtgishCharacteristicClasses(t *testing.T) {
-	line := `{"_OracleCard":"Card","Name":"Test Ship","Typeline":{"Supertypes":[],"Cardtypes":["Artifact"],"Subtypes":["Spacecraft"]},"Rules":[` +
+	line := `{"_OracleCard":"Card","Name":"Test Spell","Typeline":{"Supertypes":[],"Cardtypes":["Sorcery"],"Subtypes":[]},"Rules":[` +
 		`{"_Rule":"CDA_Color","args":{"_SettableColor":"Devoid"}},` +
-		`{"_Rule":"Backup","args":[1,[{"_Rule":"Flying"}]]},{"_Rule":"Flying"},` +
-		`{"_Rule":"Station"},{"_Rule":"StationChargedAnimate","args":[{"_GameRange":"ValueOrBigger","args":8},[{"_Rule":"Trample"},{"_Rule":"Activated","args":[{"_Cost":"TapPermanent"},{"_Actions":"ActionList","args":[]}]}],{"_PT":"PT","args":[4,5]}]},` +
+		`{"_Rule":"Specialize"},{"_Rule":"SpecializeFromGraveyard"},` +
 		`{"_Rule":"SpellActions","args":{"_Actions":"ActionList","args":[{"_Action":"Cipher"}]}}]}`
 	s := FromMtgish(mtgishCard(t, line))[0]
-	if got := fieldOf(s, "keywords"); got != "backup:1 cipher devoid flying station" {
+	if got := fieldOf(s, "keywords"); got != "cipher devoid specialize" {
 		t.Errorf("keywords %q", got)
 	}
-	if s.PT != "4/5" {
-		t.Errorf("pt %q", s.PT)
-	}
-	if got := fieldOf(s, "effects"); got != "grant:ability grant:trample type" {
+	if got := fieldOf(s, "effects"); got != "-" {
 		t.Errorf("effects %q", got)
 	}
 	// "This is colorless" is a colour CDA, not devoid.
@@ -151,27 +147,7 @@ func TestGorgeCharacteristicClasses(t *testing.T) {
 	}
 }
 
-func TestIntersectionsAndQualities(t *testing.T) {
-	idx := TypeIndex{}
-	for vt, want := range map[string]string{
-		"Creature.Artifact": "creature", "Artifact.Creature": "creature", "Artifact": "artifact",
-		"Creature.nonArtifact": "creature", "Land.Artifact+YouCtrl": "land",
-	} {
-		if got := joinTokens(idx.validClasses(vt, "")); got != want {
-			t.Errorf("validClasses(%q) = %q, want %q", vt, got, want)
-		}
-	}
-	and := map[string]any{"_Permanents": "And", "args": []any{
-		map[string]any{"_Permanents": "IsCardtype", "args": "Artifact"},
-		map[string]any{"_Permanents": "IsCardtype", "args": "Creature"},
-	}}
-	if got := joinTokens(permanentsClasses(and)); got != "creature" {
-		t.Errorf("And classes %q", got)
-	}
-	or := map[string]any{"_Permanents": "Or", "args": and["args"]}
-	if got := joinTokens(sorted(permanentsClasses(or))); got != "artifact creature" {
-		t.Errorf("Or classes %q", got)
-	}
+func TestColourQualitiesAndAffinity(t *testing.T) {
 	for in, want := range map[string]string{"eachcolor": "anycolor", "noncolorless": "anycolor", "multicolored": "multicolor", "red": "red"} {
 		if got := colorQuality(in); got != want {
 			t.Errorf("colorQuality(%q) = %q", in, got)
@@ -180,11 +156,14 @@ func TestIntersectionsAndQualities(t *testing.T) {
 	if got := gorgeAffinity("Land.Snow:snow land"); got != "land|snow" {
 		t.Errorf("gorgeAffinity %q", got)
 	}
+	aff := map[string]any{"_Permanents": "And", "args": []any{
+		map[string]any{"_Permanents": "IsSupertype", "args": "Snow"},
+		map[string]any{"_Permanents": "IsCardtype", "args": "Land"},
+	}}
+	if got := affinityWord(aff); got != "land|snow" {
+		t.Errorf("affinityWord %q", got)
+	}
 	if got := protectable(map[string]any{"_Protectable": "FromActivatedAndTriggeredAbilities"}); got != "activated|triggered" {
 		t.Errorf("protectable %q", got)
-	}
-	g := FromGorge("Test Aura", gorgeCard(t, "Name:Test Aura\nManaCost:1 B\nTypes:Enchantment Aura\nK:Enchant:Creature.inZoneGraveyard:creature card in a graveyard\nOracle:x\n"), idx)[0]
-	if got := fieldOf(g, "keywords"); got != "enchant:card-graveyard" {
-		t.Errorf("enchant %q", got)
 	}
 }

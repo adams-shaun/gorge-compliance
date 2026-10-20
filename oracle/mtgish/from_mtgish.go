@@ -186,8 +186,8 @@ var bareKeywords = map[string]string{
 	"Champion": "champion", "Reinforce": "reinforce", "ReinforceX": "reinforce",
 	"WebSlinging": "webslinging", "Recover": "recover", "Offering": "offering",
 	"Impending": "impending", "Ripple": "ripple", "Specialize": "specialize",
-	"SpecializeWithModifiers": "specialize",
-	"MoreThanMeetsTheEye":     "morethanmeetstheeye", "StartingIntensity": "startingintensity",
+	"SpecializeWithModifiers": "specialize", "SpecializeFromGraveyard": "specialize",
+	"MoreThanMeetsTheEye": "morethanmeetstheeye", "StartingIntensity": "startingintensity",
 	"Haunt": "haunt", "Firebending": "firebending", "Devour": "devour", "Mobilize": "mobilize",
 	"CraftWithCraftables": "craft", "CraftWithACraftable": "craft", "CraftWithANumberOfCraftables": "craft",
 	"CraftWithANumberOfGroupCraftables": "craft", "Visit": "visit", "VisitAndPrize": "visit",
@@ -244,13 +244,10 @@ func (m *mtgishNorm) rule(r any) {
 		return
 	}
 	if tok, ok := bareKeywords[v]; ok {
-		if v == "StationCharged" || v == "StationChargedAnimate" {
-			// A level of the Station keyword, which is its own Rule.
-			m.stationLevel(r)
-			return
-		}
 		m.kw(tok)
 		switch v {
+		case "StationCharged", "StationChargedAnimate":
+			m.rules(list(argN(r, 1)))
 		case "Visit", "VisitAndPrize":
 			e := &effects{}
 			e.walk(argsOf(r))
@@ -259,10 +256,9 @@ func (m *mtgishNorm) rule(r any) {
 		return
 	}
 	if tok, ok := numberKeywords[v]; ok {
-		// Backup's argument 1 lists the abilities it grants, which the
-		// card also prints as its own (every Backup line in the corpus):
-		// they are summarised once, where printed.
 		m.kw(tok + ":" + gameNumber(argN(r, 0)))
+		// Backup's nested rules are the abilities the backup target gains:
+		// the card's own abilities, which the face also lists at top level.
 		return
 	}
 	switch {
@@ -354,8 +350,7 @@ func (m *mtgishNorm) rule(r any) {
 			}
 		}
 	case "CDA_Color", "CDA_ColorButNotColorIdentity":
-		// Devoid is the keyword; "this is colorless" is a color CDA.
-		if variantOf(rawArgs(r)) == "Devoid" {
+		if cv := variantOf(rawArgs(r)); strings.Contains(cv, "Colorless") || cv == "Devoid" {
 			m.kw("devoid")
 		} else {
 			m.ability(Ability{Kind: "static", Effects: []string{"cda"}})
@@ -680,22 +675,9 @@ func permanentsClasses(p any) []string {
 					out = append(out, w)
 				}
 			}
-		case "Or":
+		case "And", "Or":
 			for _, e := range list(rawArgs(x)) {
 				visit(e)
-			}
-		case "And":
-			// An intersection ("artifact creature") is one class.
-			var direct []string
-			for _, e := range list(rawArgs(x)) {
-				if w := directClass(e); w != "" {
-					direct = append(direct, w)
-				} else {
-					visit(e)
-				}
-			}
-			if len(direct) > 0 {
-				out = append(out, pickIntersection(direct))
 			}
 		case "IsCreatureType", "IsCreatureTypeVariable":
 			out = append(out, "creature")
