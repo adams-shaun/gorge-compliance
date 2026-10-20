@@ -76,12 +76,24 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 				}
 			}
 		}
-		if a.Params["ReplaceDyingDefined"] != "" {
-			// "If that creature would die this turn, exile it instead."
+		if a.Params["ReplaceDyingDefined"] != "" || a.Params["LeaveBattlefield"] != "" {
+			// "If that creature would die this turn (would leave the
+			// battlefield), exile it instead."
 			e.add("effect")
 		}
 		for _, ref := range svarRefs(a) {
 			g.chain(e, cards.ResolveSVar(g.svars(), ref), depth+1)
+		}
+		if alts := gorgeAltRefs(a); len(alts) > 0 {
+			var subs []*effects
+			for _, n := range alts {
+				sub := &effects{}
+				if n != "" {
+					g.chain(sub, cards.ResolveSVar(g.svars(), n), depth+1)
+				}
+				subs = append(subs, sub)
+			}
+			e.merge(subs)
 		}
 	}
 }
@@ -295,6 +307,10 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		if p["CounterType"] == "EachFromSource" {
 			return []string{"counters:*"}
 		}
+		if n := p["Adapt"] + p["Bolster"]; n != "" {
+			// Adapt N / bolster N put N +1/+1 counters.
+			return []string{"counters:+1/+1:" + literalOr(n, "*")}
+		}
 		return []string{"counters:" + gorgeCounterType(p["CounterType"]) + ":" + literalOr(p["CounterNum"], "1")}
 	case "MultiplyCounter":
 		return []string{"counters:double"}
@@ -407,6 +423,9 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		}
 		if p["Types"] != "" {
 			out = append(out, "type")
+		}
+		if p["Colors"] != "" {
+			out = append(out, "color")
 		}
 		for _, k := range cards.SplitKeywordList(p["Keywords"]) {
 			out = append(out, "grant:"+grantKeyword(k))
