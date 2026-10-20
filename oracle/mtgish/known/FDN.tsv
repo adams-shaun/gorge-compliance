@@ -3,7 +3,6 @@
 # directions. Columns hold summary tokens only, never card text.
 # class: forge-bug | gorge-compile | mtgish-bug | normalizer | equivalent
 card	tier	field	gorge	mtgish	class	note
-Chandra, Flameshaper	T3	targets	creature|planeswalkerx0..8	creature|planeswalkerx0..*	equivalent	divided damage: script caps the targets at the damage amount (TargetMax$ 8), mtgish allows any number; the same legal choices in play
 Deadly Riposte	T4	effects	gainlife:2	gainlife:3	mtgish-bug	printed life gain is 2; mtgish GainLife(3) repeats the damage amount (i5jb/mtgish#1)
 Desecration Demon	T4	effects	sacrifice	-	equivalent	an opponent's optional sacrifice: script an effect, mtgish a cost (AnyPlayerMayCost)
 Fishing Pole	T4	effects	countersremove	-	equivalent	the counter removal gating the token: script a RemoveCounter effect, mtgish a cost
