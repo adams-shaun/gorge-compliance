@@ -459,17 +459,31 @@ func anyTargetClasses(cs []string) []string {
 // more) as N one-target slots: "two target creatures" and "target creature
 // and another target creature" choose the same targets, and scripts and
 // mtgish pick either spelling.
+//
+// A slot of M..N targets with a literal minimum M of 1 or more is likewise
+// M one-target slots and one slot of 0..N-M: "target artifact and up to one
+// other target artifact" and "one or two target artifacts" choose the same.
 func expandExactCounts(ts []string) []string {
 	var out []string
 	for _, t := range ts {
 		cls, count := splitTargetToken(t)
-		n, err := strconv.Atoi(count)
-		if err != nil || n < 2 || n > 20 {
+		lo, hi, ranged := strings.Cut(count, "..")
+		n, err := strconv.Atoi(lo)
+		if err != nil || n > 20 || (!ranged && n < 2) || (ranged && n < 1) {
 			out = append(out, t)
 			continue
 		}
 		for i := 0; i < n; i++ {
 			out = append(out, cls)
+		}
+		if ranged {
+			rest := "*"
+			if h, err := strconv.Atoi(hi); err == nil {
+				rest = strconv.Itoa(h - n)
+			}
+			if rest != "0" {
+				out = append(out, targetToken([]string{cls}, "0.."+rest))
+			}
 		}
 	}
 	return out
