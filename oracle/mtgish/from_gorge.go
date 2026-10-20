@@ -233,7 +233,7 @@ var gorgeBareKeywords = map[string]bool{
 	"Prototype": true, "Splice": true, "Champion": true, "Reinforce": true, "Web-slinging": true,
 	"Recover": true, "Offering": true, "Impending": true, "Ripple": true, "Specialize": true,
 	"More Than Meets the Eye": true, "Starting intensity": true, "Haunt": true, "Firebending": true,
-	"Devour": true, "Craft": true, "Visit": true, "Level up": true, "Overload": true, "Awaken": true,
+	"Devour": true, "Craft": true, "Level up": true, "Overload": true, "Awaken": true,
 	"Entwine": true, "Escalate": true, "Teamwork": true, "Cleave": true, "Mobilize": true,
 	"Bloodthirst": true,
 }
@@ -396,7 +396,9 @@ func (g *gorgeNorm) trigger(t *cards.Trigger) {
 		eff = cards.ResolveSVar(g.svars(), t.Params["Execute"])
 	}
 	g.chain(e, eff, 1)
-	g.ability(Ability{Kind: "triggered", Event: gorgeTriggerClass(t.Mode, t.Params), Targets: e.targets, Effects: e.effects})
+	for _, ev := range gorgeTriggerEvents(t.Mode, t.Params) {
+		g.ability(Ability{Kind: "triggered", Event: ev, Targets: append([]string(nil), e.targets...), Effects: append([]string(nil), e.effects...)})
+	}
 }
 
 // gorgeTriggerClass maps a trigger mode and its parameters to the event
@@ -429,6 +431,9 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 		}
 		if strings.HasPrefix(p["Phase"], "Main") {
 			return "main"
+		}
+		if c := d1Phase(p); c != "" {
+			return c
 		}
 		return unmapped("Phase." + p["Phase"])
 	case "Attacks", "AttackersDeclared", "AttackersDeclaredOneTarget":
