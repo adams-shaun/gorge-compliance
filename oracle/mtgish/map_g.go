@@ -33,6 +33,24 @@ func init() {
 			[]string{"rule:mayassigncombatdamagedividedasyouchooseamongplayerorcreaturesandplaneswalkers"}},
 		{"If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.",
 			[]string{"rule:mayassigncombatdamagetoapermanent"}},
+		{"CARDNAME must be blocked by two or more creatures if able.", []string{"rule:mustbeblockedbyatleastnumberdefenders"}},
+		{"CARDNAME must be blocked by exactly one creature if able.", []string{"rule:mustbeblockedbyexactlyonedefender"}},
+		{"CARDNAME can only attack alone.", []string{"rule:canonlyattackalone"}},
+		{"CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.",
+			[]string{"rule:canonlybedestroyedbylethaldamagefromasinglesource"}},
+		{"CARDNAME can't attack unless a creature with greater power also attacks.", []string{"rule:cantattackunlessanothercreatureattacks"}},
+		{"CARDNAME can't attack unless a black or green creature also attacks.", []string{"rule:cantattackunlessanothercreatureattacks"}},
+		{"CARDNAME can't block unless a creature with greater power also blocks.", []string{"rule:cantblockunlessanotherdefender"}},
+		{"CARDNAME can't attack unless at least two other creatures attack.", []string{"rule:cantattackunlessanumberofothercreatureattacks"}},
+		{"CARDNAME can't block unless at least two other creatures block.", []string{"rule:cantblockunlessotherdefenders"}},
+		{"While you're searching your library, you may cast CARDNAME from your library.", []string{"mayplay"}},
+		{"Once each turn, you may pay {1} to reroll one or more dice you rolled.", []string{"player:onceeachturnmaypaytorerollanynumberofdicerolled"}},
+		{"After you roll a die, you may pay 1 life. If you do, increase or decrease the result by 1. Do this only once each turn.",
+			[]string{"player:maypaytoincrementordecrementadiceroll"}},
+		{"After you roll a die, you may remove a +1/+1 counter from Xenosquirrels. If you do, increase or decrease the result by 1.",
+			[]string{"player:maypaytoincrementordecrementadiceroll"}},
+		{"As an additional cost to cast creature spells, you may pay any amount of mana. If you do, that creature enters with that many additional +1/+1 counters on it.",
+			[]string{"player:maypayadditionalcosttocastspellsforeffect"}},
 	} {
 		toks := ks.toks
 		extKeyword[ks.head] = func(g *gorgeNorm, _ string) {
@@ -41,6 +59,14 @@ func init() {
 			}
 		}
 	}
+	// "Before drawing your opening hand, choose ...": a pregame action
+	// (mtgish's BeforeDrawingOpeningHand).
+	extKeyword["Before drawing your opening hand, choose 1, 2, or 3."] = func(g *gorgeNorm, _ string) {
+		g.ability(Ability{Kind: "pregame"})
+	}
+	// "Spend only colored mana on X": a restriction on casting the card
+	// itself, castRestriction's twin.
+	extKeyword["Spend only colored mana on X. No more than one mana of each color may be spent this way."] = func(*gorgeNorm, string) {}
 }
 
 // ---- gorge side ----

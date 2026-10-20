@@ -660,6 +660,8 @@ func hiddenKeywordToken(k string) string {
 		return "rule:mustattack"
 	case strings.Contains(k, "can't be blocked"):
 		return "rule:cantbeblocked"
+	case strings.Contains(k, "can only attack alone"):
+		return "rule:canonlyattackalone"
 	case strings.Contains(k, "able to block CARDNAME do so"):
 		return "rule:allcreaturesmustblockit"
 	case strings.Contains(k, "must be blocked"):
