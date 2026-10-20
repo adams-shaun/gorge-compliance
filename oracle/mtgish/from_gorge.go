@@ -115,7 +115,8 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 // "enters with counters" replacement. printedExpansion adds the "Prevent
 // all ... damage" shields. (A Class's level-up activated abilities are
 // dropped with every keyword AB in gorgeFace: mtgish carries them as the
-// level structure, not as abilities.)
+// level structure, not as abilities; their costs are compared as
+// class:<level>:<cost> keywords, map_a.go.)
 var printedKeywordExpansion = map[string]bool{
 	"Class": true, "ETBReplacement": true, "etbCounter": true,
 }
@@ -217,7 +218,7 @@ var gorgeNumberKeywords = map[string]bool{
 // printed card: their meaning is summarised elsewhere (an expansion kept by
 // printedKeywordExpansion) or is not an ability in play.
 var gorgeSkippedKeywords = map[string]bool{
-	"Class": true, "ETBReplacement": true, "etbCounter": true,
+	"ETBReplacement": true, "etbCounter": true,
 	"A deck can have any number of cards named CARDNAME.": true,
 	// Deck-building and commander rules: not abilities in play, and mtgish
 	// carries no Rule for them.
@@ -234,7 +235,7 @@ var gorgeBareKeywords = map[string]bool{
 	"More Than Meets the Eye": true, "Starting intensity": true, "Haunt": true, "Firebending": true,
 	"Devour": true, "Craft": true, "Visit": true, "Level up": true, "Overload": true, "Awaken": true,
 	"Entwine": true, "Escalate": true, "Teamwork": true, "Cleave": true, "Mobilize": true,
-	"Bloodthirst": true, "Spree": true, "Tiered": true,
+	"Bloodthirst": true,
 }
 
 func (g *gorgeNorm) keyword(k string) {
@@ -346,7 +347,8 @@ func manaToken(t string) bool {
 	if _, err := strconv.Atoi(t); err == nil {
 		return true
 	}
-	for _, part := range strings.Split(t, "/") {
+	// gorgeManaSymbol first: Forge writes hybrids without a slash ("BG").
+	for _, part := range strings.Split(gorgeManaSymbol(t), "/") {
 		if len(part) != 1 || !strings.Contains("WUBRGCXSP2", strings.ToUpper(part)) {
 			return false
 		}
@@ -484,6 +486,9 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 
 // static summarises an S: line.
 func (g *gorgeNorm) static(st *cards.Static) {
+	if gorgeStation(g, st) {
+		return
+	}
 	eff := gorgeStaticEffects(st.Mode, st.Params)
 	if eff == nil {
 		return

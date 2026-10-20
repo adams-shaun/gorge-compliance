@@ -4,12 +4,22 @@
 # class: forge-bug | gorge-compile | mtgish-bug | normalizer | equivalent
 card	tier	field	gorge	mtgish	class	note
 Alania, Divergent Storm	T4	effects	draw:1	-	equivalent	the opponent's optional draw: script an effect, mtgish a cost (HavePlayerTakeAction)
+Artist's Talent	T1	keywords	class:2:{2}{R}	class:2:{1}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
+Bandit's Talent	T1	keywords	class:2:{B} class:3:{3}{B}	class:2:{1}{B} class:3:{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
+Blacksmith's Talent	T1	keywords	class:2:{2}{R} class:3:{3}{R}	class:2:{R} class:3:{2}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
+Builder's Talent	T1	keywords	class:2:{W} class:3:{4}{W}	class:2:{1}{W} class:3:{W}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
+Caretaker's Talent	T1	keywords	class:2:{W} class:3:{3}{W}	class:2:{2}{W} class:3:{W}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Dawn's Truce	T4	effects	-	player:hexproof	equivalent	player hexproof: script grants it by Pump on You and your permanents, mtgish a player effect
 Dreamdew Entrancer	T4	effects	draw:2	draw:3	mtgish-bug	printed draw count is 2; mtgish DrawNumberCards(3) repeats the stun-counter count (i5jb/mtgish#1)
 Fecund Greenshell	T4	effects	move:library>battlefield	move:library>hand	equivalent	land to the battlefield, else to hand: script one Dig with two destinations, mtgish a may-cost then the hand move
+Gossip's Talent	T1	keywords	class:3:{3}{U}	class:3:{1}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
+Hunter's Talent	T1	keywords	class:3:{3}{G}	class:3:{1}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
+Innkeeper's Talent	T1	keywords	class:2:{G} class:3:{3}{G}	class:2:{1}{G} class:3:{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Long River Lurker	T4	effects	move:battlefield>exile	-	equivalent	the exile-and-return of the delayed trigger: script an effect, mtgish a may-cost
 Mistbreath Elder	T3	targets	-	creature	mtgish-bug	printed return is untargeted; mtgish adds a TargetPermanent (gorge: a hidden ChangeType choice) (i5jb/mtgish#4)
 Mistbreath Elder	T4	effects	move:battlefield>hand	-	equivalent	the return is a cost in mtgish (MustCost), an effect in the script
 Osteomancer Adept	T4	effects	delayed effect	-	equivalent	the finality-counter rider: script an Effect with a cast trigger, mtgish folded into the player effect
+Scavenger's Talent	T1	keywords	class:2:{1}{B} class:3:{2}{B}	class:2:{B} class:3:{1}{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Season of the Bold	T3	targets	creaturex0..1	creature	mtgish-bug	printed damage target is up to one; mtgish TargetPermanent requires exactly one (gorge: TargetMin$ 0) (i5jb/mtgish#3)
 Sonar Strike	T4	effects	gainlife:3	gainlife:4	mtgish-bug	printed conditional life gain is 3; mtgish GainLife(4) repeats the damage amount (i5jb/mtgish#1)
+Stormchaser's Talent	T1	keywords	class:2:{3}{U} class:3:{5}{U}	class:2:{U} class:3:{3}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
