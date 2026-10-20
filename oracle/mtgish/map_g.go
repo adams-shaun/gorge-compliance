@@ -553,3 +553,70 @@ func zoneDuplicate(r any, rs []any) bool {
 	}
 	return false
 }
+
+// zoneStatics are the static Rule variants that apply one effect list to
+// one zone's objects: permanents, spells, cards elsewhere.
+var zoneStatics = map[string]bool{
+	"EachPermanentLayerEffect": true, "StackSpellsEffect": true, "CardEffect": true,
+	"EachPermanentAndSpellEffect": true,
+}
+
+// mergeZoneStatics drops a zone static whose effect list repeats an earlier
+// one's: "all cards that aren't on the battlefield, spells, and permanents
+// are the chosen color" is one printed static that mtgish writes once per
+// zone (CardEffect, StackSpellsEffect, EachPermanentLayerEffect) and Forge
+// writes once, with AffectedZone$ listing the zones.
+func mergeZoneStatics(rs []any) []any {
+	rank := func(v string) int {
+		if v == "EachPermanentLayerEffect" || v == "EachPermanentAndSpellEffect" {
+			return 0 // the layer effect on permanents carries the verbs
+		}
+		return 1
+	}
+	var drop map[int]bool
+	for j, b := range rs {
+		if !zoneStatics[variantOf(b)] {
+			continue
+		}
+		for i, a := range rs {
+			if i == j || drop[i] || !zoneStatics[variantOf(a)] || variantOf(a) == variantOf(b) ||
+				!sameEffects(argN(a, 1), argN(b, 1)) {
+				continue
+			}
+			// b repeats a: drop b unless it outranks a (then a goes).
+			if rank(variantOf(a)) < rank(variantOf(b)) || rank(variantOf(a)) == rank(variantOf(b)) && i < j {
+				if drop == nil {
+					drop = map[int]bool{}
+				}
+				drop[j] = true
+				break
+			}
+		}
+	}
+	if drop == nil {
+		return rs
+	}
+	out := make([]any, 0, len(rs)-len(drop))
+	for i, r := range rs {
+		if !drop[i] {
+			out = append(out, r)
+		}
+	}
+	return out
+}
+
+// sameEffects compares two zone statics' effect lists by variant and
+// arguments: each zone's enum (LayerEffect, SpellEffect, CardEffect) names
+// the same change differently.
+func sameEffects(a, b any) bool {
+	la, lb := list(a), list(b)
+	if len(la) == 0 || len(la) != len(lb) {
+		return false
+	}
+	for i := range la {
+		if variantOf(la[i]) != variantOf(lb[i]) || !reflect.DeepEqual(rawArgs(la[i]), rawArgs(lb[i])) {
+			return false
+		}
+	}
+	return true
+}

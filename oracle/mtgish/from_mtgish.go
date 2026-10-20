@@ -124,7 +124,7 @@ func (m *mtgishNorm) sub(r any, conditional bool) {
 
 // rules maps a Vec<Rule>.
 func (m *mtgishNorm) rules(rs []any) {
-	for _, r := range mergeSelfOrOther(rs) {
+	for _, r := range mergeZoneStatics(mergeSelfOrOther(rs)) {
 		if zoneDuplicate(r, rs) {
 			continue
 		}
@@ -519,7 +519,9 @@ func triggerClass(v string) string {
 		return "end-step"
 	case has("BeginningOfCombat"):
 		return "combat"
-	case has("DrawStep"):
+	case has("DrawStep") && !has("Draws"):
+		// "Whenever a player draws a card except the first one they draw
+		// in their draw step" is a draw trigger (below), not the step's.
 		return "draw-step"
 	case has("MainPhase"):
 		return "main"

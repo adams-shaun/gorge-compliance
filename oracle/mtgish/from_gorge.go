@@ -496,7 +496,7 @@ func (g *gorgeNorm) static(st *cards.Static) {
 	if eff == nil {
 		return
 	}
-	if st.Mode == "Continuous" && st.Params["AddAbility"] != "" {
+	if st.Mode == "Continuous" {
 		if eff = g.selfGrantAbilities(st.Params, eff); len(eff) == 0 {
 			return
 		}
