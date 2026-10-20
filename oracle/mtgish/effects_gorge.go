@@ -190,6 +190,11 @@ func (idx TypeIndex) gorgeTargets(a *cards.SA) string {
 	if p["TargetMin"] == "" && p["TargetMax"] != "" {
 		min = "1"
 	}
+	if min == "0" && p["DividedAsYouChoose"] != "" && p["TargetMax"] == p["DividedAsYouChoose"] {
+		// "N damage divided as you choose among any number of targets":
+		// the count is bounded by the amount (distributedCount).
+		max = "*"
+	}
 	return targetToken(cls, countRange(min, max))
 }
 

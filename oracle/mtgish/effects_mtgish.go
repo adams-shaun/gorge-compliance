@@ -49,6 +49,9 @@ func (e *effects) walk(x any) {
 				// "Target spell or permanent": one slot (map_f.go).
 				e.targetedModal(list(rawArgs(n)))
 				return false
+			case "TargetedDistributed":
+				e.targetedDistributed(n)
+				return false
 			case "AdditionalCost_Modal":
 				// Paid or not: alternatives, as Modal_IfElse.
 				e.alternatives(list(rawArgs(n))...)
@@ -65,7 +68,7 @@ func (e *effects) walk(x any) {
 				// Modes are alternatives (scripts' Charm choices, merged
 				// the same way). The mode list is the args itself for a
 				// one-field variant, else the one list-valued argument.
-				if l := list(rawArgs(n)); l != nil && enumOf(l[0]) != "" {
+				if l := list(rawArgs(n)); l != nil && enumOf(l[0]) == "Actions" {
 					e.alternatives(l...)
 					return false
 				}
@@ -118,7 +121,7 @@ func (e *effects) merge(subs []*effects) {
 	}
 	var tl, el [][]string
 	for _, s := range subs {
-		tl = append(tl, s.targets)
+		tl = append(tl, expandExactCounts(s.targets))
 		el = append(el, s.effects)
 	}
 	torder, tmax := maxCount(tl)

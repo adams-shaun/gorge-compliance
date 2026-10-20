@@ -542,3 +542,33 @@ func (g *gorgeNorm) selfGrantStatic(st *cards.Static) bool {
 	}
 	return true
 }
+
+// targetedDistributed summarises TargetedDistributed (targets, the
+// amount distributed, the actions): a slot of up to as many targets as the
+// amount ("divide 4 damage among any number of targets", written
+// AnyNumberOf or UptoNumber(4) by mtgish) reads "0..*", as scripts' divided
+// slots do (gorgeTargets).
+func (e *effects) targetedDistributed(n node) {
+	a := argsOf(n)
+	if len(a) < 3 {
+		e.walk(a)
+		return
+	}
+	amount := gameNumber(rawArgs(a[1]))
+	for _, t := range list(a[0]) {
+		if tn, ok := t.(node); ok {
+			e.targets = append(e.targets, distributedCount(mtgishTarget(tn), amount))
+		}
+	}
+	e.walk(a[2:])
+}
+
+// distributedCount opens a divided slot's maximum when it is the amount
+// divided (or any number) and its minimum is 0.
+func distributedCount(t, amount string) string {
+	cls, count := splitTargetToken(t)
+	if count == "0..*" || (count == "0.."+amount && amount != "*") {
+		return cls + "x0..*"
+	}
+	return t
+}
