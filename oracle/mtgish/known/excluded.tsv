@@ -10,3 +10,5 @@
 # Exclude only what really cannot be compared, never what is merely tedious.
 # TestMtgishLedger fails on a malformed line, an empty reason, a duplicate, or
 # an exclusion that matches nothing live (stale: delete it). Never card text.
+token	unmapped:Action.AcceptARandomOffer	Alchemy random offer (Davriel, Soul Broker): mtgish names only the offering card, the offer list is not encoded, so there is nothing to compare
+token	unmapped:Action.AcceptARandomCondition	Alchemy random condition (Davriel, Soul Broker): as AcceptARandomOffer, the condition list is not encoded
