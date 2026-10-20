@@ -83,6 +83,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 		for _, ref := range svarRefs(a) {
 			g.chain(e, cards.ResolveSVar(g.svars(), ref), depth+1)
 		}
+		g.c2Chase(e, a, depth)
 	}
 }
 
@@ -292,6 +293,14 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		}
 		return out
 	case "PutCounter", "PutCounterAll":
+		if n := p["Monstrosity"]; n != "" {
+			// Monstrosity N: N +1/+1 counters, the type left implicit.
+			return []string{"counters:+1/+1:" + literalOr(n, "*")}
+		}
+		if p["Support"] != "" {
+			// Support N: one +1/+1 counter on each of up to N others.
+			return []string{"counters:+1/+1:1"}
+		}
 		if p["CounterType"] == "EachFromSource" {
 			return []string{"counters:*"}
 		}
@@ -355,6 +364,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			out := []string{"move:library>" + strings.ToLower(p["DestinationZone"])}
 			if p["Reveal"] == "True" {
 				out = append(out, "dig:"+literalOr(p["DigNum"], "1"))
+			}
+			if p["ChangeValid"] != "" && p["DestinationZone2"] != "" {
+				// "If it's a creature card, put it onto the battlefield;
+				// otherwise put it into your graveyard": the rest moves too.
+				out = append(out, "move:library>"+strings.ToLower(p["DestinationZone2"]))
 			}
 			return out
 		}
@@ -461,6 +475,9 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "Clone":
 		return []string{"copy"}
 	case "Goad":
+		if p["NoLonger"] == "True" {
+			return []string{"ungoad"}
+		}
 		return []string{"goad"}
 	case "BecomeMonarch":
 		return []string{"monarch"}
@@ -497,7 +514,12 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 func changeZoneToken(api string, p map[string]string) string {
 	o := strings.ToLower(strings.TrimSpace(strings.SplitN(p["Origin"], ",", 2)[0]))
 	d := strings.ToLower(strings.TrimSpace(p["Destination"]))
-	if api == "ChangeZone" && o == "library" && p["Defined"] == "" && p["ValidTgts"] == "" {
+	if api == "ChangeZone" && p["Defined"] == "" && c2HiddenSearch(p["Origin"]) {
+		// "Search your library and graveyard": one pool, read as a search
+		// whichever origin is listed first.
+		o = "library"
+	}
+	if api == "ChangeZone" && o == "library" && p["Defined"] == "" && (p["ValidTgts"] == "" || c2PlayerTargets(p["ValidTgts"])) {
 		return "search:" + d
 	}
 	if o == "" || o == "any" || o == "all" {
