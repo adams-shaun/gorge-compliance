@@ -1,0 +1,8 @@
+# mtgish (https://github.com/i5jb/mtgish, MIT) data pin for the card-definition
+# cross-check (docs/design/2026-10-20-mtgish-crosscheck.md). `make mtgish-fetch`
+# downloads each file below at REF into .mtgish/<ref>/ (gitignored: the data
+# carries Oracle text, which is never committed) and verifies its sha256.
+# The REF here must equal the Makefile's MTGISH_REF.
+ref 153451e44d88baabfeb9902092032c328f4d5416
+sha256 f2513283c1ffd32ab954bdc10a4bd78a495f297f532c68b8c69d6f05f1e95d06 data/mtgish.lines.json
+sha256 529d8c04b1a74b127edcc37e14e6ee99a3a9068ace45f5623a3422ff22bb4c2d LICENSE

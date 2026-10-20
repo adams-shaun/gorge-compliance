@@ -9,7 +9,9 @@
 //     (cardsfolder/, tokenscripts/) and by byte identity with the live
 //     corpus when one is present;
 //   - boundary_forge_test.go: the four Forge-artifact shapes from the Forge
-//     oracle design (section 11, decision P1-7).
+//     oracle design (section 11, decision P1-7);
+//   - boundary_mtgish_test.go: mtgish's card data (it carries Oracle text),
+//     fetched into the gitignored .mtgish/ for the definition cross-check.
 //
 // They are ports of gorge's engine/cards/boundary_test.go and
 // engine/cards/boundary_forge_test.go. The package has no non-test code.
