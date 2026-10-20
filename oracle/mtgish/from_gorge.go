@@ -81,7 +81,9 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if head, _, ok := kwTag(st.Params); ok && !printedExpansion(head) {
 			continue
 		}
-		if st.Params["CharacteristicDefining"] == "True" {
+		if st.Params["CharacteristicDefining"] == "True" && st.Params["AddAbility"] == "" && st.Params["MayPlay"] == "" {
+			// (A script may flag an ability-granting or casting static
+			// CharacteristicDefining$ for its zone reach; that is no CDA.)
 			// One CDA ability however many statics carry it (a script may
 			// split power and toughness).
 			if !cda {

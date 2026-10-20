@@ -88,6 +88,13 @@ func (g *gorgeNorm) gorgeStaticTrigger(t *cards.Trigger, enter **Ability) bool {
 	case "TapsForMana", "ManaAdded":
 		// A triggered mana ability: printed, and resolves at once.
 		return false
+	case "NewGame":
+		// "At the beginning of the game": a pregame action (a Vanguard's),
+		// mtgish's AsGameBegins; a StoreSVar one is bookkeeping.
+		if a := cards.ResolveSVar(g.svars(), p["Execute"]); a != nil && a.API != "StoreSVar" && a.API != "Cleanup" {
+			g.ability(Ability{Kind: "pregame"})
+		}
+		return true
 	}
 	if t.Mode == "ChangesZone" && p["Destination"] == "Battlefield" && strings.HasPrefix(p["ValidCard"], "Card.Self") {
 		e := &effects{}
