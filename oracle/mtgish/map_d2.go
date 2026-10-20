@@ -124,18 +124,9 @@ var d2Statics = map[string]func(p map[string]string) []string{
 		}
 		return []string{"rule:cantbethetargetofspellsorabilities"}
 	},
-	"CantAttackUnless": func(p map[string]string) []string {
-		t := p["Target"]
-		switch {
-		case t == "":
-			return []string{"rule:cantattackunlesscost"}
-		case strings.Contains(t, "You") && strings.Contains(t, "Planeswalker"):
-			return []string{"rule:cantattackplayerorplaneswalkercontrolledbyunlesscost"}
-		case strings.Contains(t, "Planeswalker"):
-			return []string{"rule:cantattackapermanentunlesscost"}
-		}
-		return []string{"rule:cantattackplayerunlesscost"}
-	},
+	// S:Mode$ CantAttackUnless: one mode whatever it names as the defender
+	// (mtgish's per-defender variants fold into it, d2RuleSynonyms).
+	"CantAttackUnless": fixed("rule:cantattackunlesscost"),
 	"CantBlockUnless": func(p map[string]string) []string {
 		switch {
 		case p["Attacker"] != "" && p["ValidCard"] == "":
@@ -238,7 +229,10 @@ var d2Statics = map[string]func(p map[string]string) []string{
 		switch {
 		case strings.HasPrefix(p["ValidCard"], "Card.Equipment") || strings.HasPrefix(p["ValidCard"], "Equipment"):
 			return []string{"rule:cantbeequipped"}
-		case strings.HasPrefix(p["ValidCard"], "Aura") || strings.HasPrefix(p["ValidCardToTarget"], "Aura"):
+		case strings.HasPrefix(p["ValidCardToTarget"], "Aura"):
+			// "Can't be enchanted by other Auras" (new attachments only).
+			return []string{"rule:cantbeenchantedanddoesntremove"}
+		case strings.HasPrefix(p["ValidCard"], "Aura"):
 			return []string{"rule:cantbeenchantedbyanenchantment"}
 		}
 		// "Can be attached only to a creature with ...".
@@ -415,6 +409,15 @@ func staticAbility(tok ...string) func(g *gorgeNorm, param string) {
 	return func(g *gorgeNorm, _ string) { g.ability(Ability{Kind: "static", Effects: tok}) }
 }
 
+// staticAbilities is one static per token.
+func staticAbilities(tok ...string) func(g *gorgeNorm, param string) {
+	return func(g *gorgeNorm, _ string) {
+		for _, t := range tok {
+			g.ability(Ability{Kind: "static", Effects: []string{t}})
+		}
+	}
+}
+
 func pregameAbility(g *gorgeNorm, _ string) { g.ability(Ability{Kind: "pregame"}) }
 
 // nothing maps a keyword line that is no ability of the card in play
@@ -451,7 +454,15 @@ var d2Keywords = map[string]func(g *gorgeNorm, param string){
 	// "You may cast this from your library while searching it": a rule
 	// about the card itself, mtgish's SelfEffect.
 	"While you're searching your library, you may cast CARDNAME from your library.": staticAbility("static:selfeffect"),
-	"MayEffectFromOpeningDeck":                             pregameAbility,
+	// Sentence keywords gorge's compiler canonicalises (cards.KeywordHead's
+	// canonicalKeywordHeads): restrictions, one static per rule as mtgish
+	// writes them.
+	"MustBlock":                staticAbility("rule:mustbeblocked"),
+	"CantAttackOrBlock":        staticAbilities("rule:cantattack", "rule:cantblock"),
+	"CantAttackOrBlockAlone":   staticAbilities("rule:cantattackalone", "rule:cantblockalone"),
+	"CantAttackAlone":          staticAbility("rule:cantattackalone"),
+	"CantBlockAlone":           staticAbility("rule:cantblockalone"),
+	"MayEffectFromOpeningDeck": pregameAbility,
 	"Before drawing your opening hand, choose 1, 2, or 3.": pregameAbility,
 	"Your starting hand size is five.":                     pregameAbility,
 	// Strive ("this spell costs more for each target beyond the first") is
@@ -914,6 +925,8 @@ var d2RuleSynonyms = map[string]string{
 	"CantAttackAPermanent": "rule:cantattack", "CantAttackPlayerOrPlaneswalkerControlledBy": "rule:cantattack",
 	"CantAttackAnyPlayerOrPlaneswalkerControlledBy": "rule:cantattack",
 	"CantAttackIfDefendingPlayer":                   "rule:cantattack", "CantAttackUnlessDefendingPlayer": "rule:cantattack",
+	"CantAttackPlayerUnlessCost": "rule:cantattackunlesscost", "CantAttackAPermanentUnlessCost": "rule:cantattackunlesscost",
+	"CantAttackPlayerOrPlaneswalkerControlledByUnlessCost": "rule:cantattackunlesscost",
 	// S:Mode$ MustAttack (with MustAttack$ <defender>).
 	"MustAttackPlayer": "rule:mustattack", "MustAttackAPlayer": "rule:mustattack", "MustAttackPlaneswalker": "rule:mustattack",
 	// S:Mode$ CantBeActivated (with ValidSA$ ...).
@@ -925,6 +938,8 @@ var d2RuleSynonyms = map[string]string{
 	// S:Mode$ CanBlockIfShadow / IgnoreLandWalk: one rule, two spellings.
 	"CanBlockCreaturesWithShadowAsThoughTheyDidntHaveShadow":          "rule:canblockcreatureswithshadowasthoughithadshadow",
 	"CanBlockCreaturesWithLandwalkAbilitiesAsThoughTheyDidntHaveThem": "rule:canbeblockedasthoughitdidnthave",
+	// "Its activated abilities cost {N} more": S:Mode$ RaiseCost.
+	"IncreaseManaCost": "costincrease",
 	// "Is goaded": the goad action's result, written as a rule.
 	"IsGoadedByPlayer": "goad",
 }
@@ -973,6 +988,9 @@ var d2PlayerSynonyms = map[string]string{
 	"CantCastSpellsFromTheirHand": "player:cantcastspells", "CantCastSpellsFromGraveyards": "player:cantcastspells",
 	"CantCastSpellsFromLibraries": "player:cantcastspells", "CantCastSpellsFromExile": "player:cantcastspells",
 	"MayLookAtFaceDownExiledCard": "player:maylookatfacedownexiledcards",
+	// "You don't lose the game for having 0 or less life": an R:GameLoss
+	// replacement in Forge, the same token as "can't lose the game".
+	"DoesntLoseTheGameForHaving": "player:cantlosethegame",
 	// Unit B's spelling for the gorge side.
 	"CantSearchLibraries": "player:cantsearchlibrary",
 	// Not a permission to cast (playerEffectToken's May...Cast rule).

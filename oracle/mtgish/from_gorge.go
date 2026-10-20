@@ -658,6 +658,11 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 	p := r.Params
 	switch r.Event {
 	case "Untap":
+		if p["ValidStepTurnToController"] == "" {
+			// No untap-step restriction: "can't become untapped".
+			g.ability(Ability{Kind: "static", Effects: []string{"rule:cantbecomeuntapped"}})
+			return
+		}
 		g.ability(Ability{Kind: "static", Effects: []string{"rule:doesntuntapduringcontrollersuntap"}})
 		return
 	case "GameLoss":
