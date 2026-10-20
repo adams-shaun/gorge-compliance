@@ -446,6 +446,9 @@ var d1MtgishOverrides = map[string]string{
 	"WhenDamageThatWouldBeDealtToAPlayerIsPrevented": "damageprevented",
 	// "Dies" matched the die's ("a die's highest natural result").
 	"WhenAPlayerRollsADiesHighestNaturalResult": "rolleddie",
+	// "Attack" matched, but the event is an ability triggering (Forge:
+	// AbilityTriggered ValidMode$ Attacks).
+	"WhenAPermanentAttackingCausesItsAbilityToTrigger": "abilitytriggered",
 	// "Sacrifices" matched, but the trigger is the activation; Forge:
 	// AbilityCast Condition$ Sacrificed.
 	"WhenAPlayerSacrificesAnyNumberOfPermanentsToActivateAnAbility": "abilitycast",
