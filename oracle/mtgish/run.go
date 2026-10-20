@@ -54,7 +54,7 @@ func Run(names []string, reg *cards.Registry, ms map[string]*Card) Result {
 			res.NoMtgish = append(res.NoMtgish, n)
 			continue
 		}
-		p, rows := compareCard(n, gc, mc, idx, func(face string) bool { _, ok := ms[face]; return ok })
+		p, rows := Compare(n, gc, mc, idx)
 		res.Pairs = append(res.Pairs, p)
 		res.Rows = append(res.Rows, rows...)
 	}
