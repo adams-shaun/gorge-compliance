@@ -14,7 +14,7 @@ const unitBScript = `Name:Test Bureaucrat
 ManaCost:2 W
 Types:Creature Human
 PT:2/2
-T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigVote
+T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigVote | TriggerDescription$ At end of combat, vote.
 SVar:TrigVote:DB$ Vote | Defined$ Player | Choices$ DBDraw,DBGain | VoteTiedAbility$ DBGain
 SVar:DBDraw:DB$ Draw | NumCards$ 2
 SVar:DBGain:DB$ GainLife | LifeAmount$ 3
