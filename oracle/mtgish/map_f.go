@@ -62,35 +62,67 @@ func perGroupCount(count string) string {
 }
 
 // targetedModal summarises Targeted_Modal, "target spell or permanent"
-// written as alternative Targeted actions of which one runs: one target
-// slot whose class is the union of the alternatives' classes (scripts write
-// one ValidTgts$ list), and the alternatives' effects merged as modes are.
+// written as alternative Targeted actions of which one runs: the slots
+// every alternative shares stay as they are, and the one slot left in each
+// alternative becomes one slot whose class is the union of theirs (scripts
+// write one ValidTgts$ list). The alternatives' effects merge as modes do.
 func (e *effects) targetedModal(alts []any) {
 	var subs []*effects
-	single := true
 	for _, b := range alts {
 		sub := &effects{}
 		sub.walk(b)
 		subs = append(subs, sub)
-		if len(sub.targets) != 1 {
-			single = false
-		}
 	}
-	if !single || len(subs) == 0 {
-		e.merge(subs)
+	if len(subs) == 0 {
 		return
+	}
+	// The multiset of slots common to every alternative.
+	common := append([]string(nil), subs[0].targets...)
+	for _, s := range subs[1:] {
+		left := append([]string(nil), s.targets...)
+		var keep []string
+		for _, t := range common {
+			for k, u := range left {
+				if u == t {
+					keep = append(keep, t)
+					left = append(left[:k], left[k+1:]...)
+					break
+				}
+			}
+		}
+		common = keep
+	}
+	var residual [][]string
+	for _, s := range subs {
+		left := append([]string(nil), s.targets...)
+		for _, t := range common {
+			for k, u := range left {
+				if u == t {
+					left = append(left[:k], left[k+1:]...)
+					break
+				}
+			}
+		}
+		if len(left) != 1 {
+			e.merge(subs)
+			return
+		}
+		residual = append(residual, left)
 	}
 	var cls []string
 	count := ""
-	for _, s := range subs {
-		c, n := splitTargetToken(s.targets[0])
+	for _, r := range residual {
+		c, n := splitTargetToken(r[0])
 		cls = append(cls, strings.Split(c, "|")...)
 		if count == "" || count == "1" {
 			count = n
 		}
+	}
+	for _, s := range subs {
 		s.targets = nil
 	}
 	e.merge(subs)
+	e.targets = append(e.targets, common...)
 	e.targets = append(e.targets, targetToken(narrowPermanent(cls), count))
 }
 

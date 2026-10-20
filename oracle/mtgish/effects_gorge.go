@@ -67,13 +67,23 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 		e.add(gorgeAPIEffects(a, g.svars())...)
 		if a.API == "Effect" {
 			// The triggers an effect creates run their own effects, as
-			// mtgish's CreateTriggerUntil actions do.
+			// mtgish's CreateTriggerUntil actions do. An emblem's triggers
+			// choose their own targets when they trigger: like mtgish's
+			// GetAnEmblem, only their verbs are this ability's.
+			sub := e
+			emblem := strings.HasPrefix(a.Params["Name"], "Emblem")
+			if emblem {
+				sub = &effects{}
+			}
 			for _, name := range strings.Split(a.Params["Triggers"], ",") {
 				if body, ok := g.svars()[strings.TrimSpace(name)]; ok {
 					if t, ok := cards.ParseTriggerLine(body); ok {
-						g.chain(e, cards.ResolveSVar(g.svars(), t.Params["Execute"]), depth+1)
+						g.chain(sub, cards.ResolveSVar(g.svars(), t.Params["Execute"]), depth+1)
 					}
 				}
+			}
+			if emblem {
+				e.add(sub.effects...)
 			}
 		}
 		if a.Params["ReplaceDyingDefined"] != "" {
