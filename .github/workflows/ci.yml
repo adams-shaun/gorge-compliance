@@ -152,6 +152,9 @@ jobs:
     needs: pin
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
+    # Writes the docs-data branch (below); everything else here only reads.
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -194,6 +197,32 @@ jobs:
           name: compliance-status
           path: gorge-compliance/oracle/compliance/status.md
           if-no-files-found: ignore
+      # gorge's docs site renders its per-set support table from these files
+      # (gorge docs.yml fetches the docs-data branch, scripts/docs_sets.py
+      # renders it). Level A covers every committed set; Level B only the
+      # sets with a printed card list, which are the ones it is defined for.
+      - name: Per-set status for the docs site
+        working-directory: gorge-compliance
+        run: |
+          mkdir -p ../docs-data
+          go run ./cmd/oraclediff status -all -json -level A -procs 4 > ../docs-data/status-A.jsonl
+          sets=$(python3 -c 'import json,sys; print(",".join(r["set"] for r in map(json.loads, open(sys.argv[1])) if r.get("printed")))' ../docs-data/status-A.jsonl)
+          go run ./cmd/oraclediff status -all -json -level B -procs 4 -sets "$sets" > ../docs-data/status-B.jsonl
+          cat > ../docs-data/meta.json <<EOF
+          {"commit": "$(git rev-parse --short=9 HEAD)", "gorge_pin": "$(cat GORGE_PIN)", "forge_ref": "${{ steps.cpin.outputs.forge_ref }}", "date": "$(date -u +%F)"}
+          EOF
+      # One force-pushed commit on an orphan branch, like gorge's perf-data:
+      # the data's history is not worth keeping, only its latest state.
+      - name: Publish the docs-data branch
+        if: github.ref == 'refs/heads/main'
+        working-directory: docs-data
+        run: |
+          git init -q -b docs-data
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add status-A.jsonl status-B.jsonl meta.json
+          git commit -q -m "docs-data: compliance status $(date -u +%F)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" docs-data:docs-data
 
   # Against gorge MAIN, not the pin: what a pin bump would change. Every
   # check is continue-on-error and lands in the job summary; the job itself
