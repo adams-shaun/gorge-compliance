@@ -346,6 +346,10 @@ func d2ContinuousEffects(p map[string]string) []string {
 		// named on the card.
 		out = append(out, "grant:*")
 	}
+	if p["AddNames"] != "" {
+		// "Has all names of nonlegendary creature cards".
+		out = append(out, "name")
+	}
 	if p["GainTextOf"] != "" {
 		out = append(out, "copy")
 	}
@@ -956,6 +960,10 @@ func d2PlayerToken(v string) (string, bool) {
 		return "costreduction", true
 	case strings.HasPrefix(v, "Increase") && strings.Contains(v, "Cost"):
 		return "costincrease", true
+	case strings.HasPrefix(v, "MaySpendColoredMana"):
+		// "Spend coloured mana as though it were any colour": a
+		// ManaConvert static, as MaySpendMana* already is.
+		return "manaconvert", true
 	}
 	return "", false
 }
@@ -990,7 +998,7 @@ var d2PlayerSynonyms = map[string]string{
 	"MayLookAtFaceDownExiledCard": "player:maylookatfacedownexiledcards",
 	// "You don't lose the game for having 0 or less life": an R:GameLoss
 	// replacement in Forge, the same token as "can't lose the game".
-	"DoesntLoseTheGameForHaving": "player:cantlosethegame",
+	"DoesntLoseTheGameForHaving0OrLessLife": "player:cantlosethegame",
 	// Unit B's spelling for the gorge side.
 	"CantSearchLibraries": "player:cantsearchlibrary",
 	// Not a permission to cast (playerEffectToken's May...Cast rule).
