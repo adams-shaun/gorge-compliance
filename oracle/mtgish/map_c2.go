@@ -302,6 +302,9 @@ var c2Fixed = map[string][]string{
 	"MillCardsUntilACardOfTypeIsMilledOrUntilNumberCardsHaveBeenPutIntoGraveyardThisWay":    {"mill:*"},
 
 	// Sacrifice, tap, untap.
+	// "Sacrifice an artifact, a creature and a land": one sacrifice of
+	// several permanents, as scripts write one Sacrifice over a list.
+	"SacrificePermanents":                                                      {"sacrifice"},
 	"SacrificeAnyNumberOfPermanents":                                           {"sacrifice"},
 	"SacrificeAllPermanentsExceptForNum":                                       {"sacrifice"},
 	"SacrificeHalfOfThePermanentsRoundedUp":                                    {"sacrifice"},
@@ -631,23 +634,35 @@ func costAction(c any) []string {
 // c2Chase follows the SVars an SA runs that svarRefs does not name. Some
 // are alternatives of which exactly one runs (merged, like modes): a die
 // roll's result table (ResultSubAbilities$ "1-9:A,10-20:B"), which mtgish
-// writes as ValueActions, and a coin flip's win/lose (heads/tails)
-// branches, which mtgish writes as conditioned actions. Others run after
-// it: a regeneration's "when it regenerates this way" ability and an
-// added phase's delayed trigger, which mtgish writes as nested actions.
+// writes as ValueActions, and a vote's options. Others are summed, as
+// mtgish's walk sums them: a coin flip's win and lose (heads and tails)
+// branches, which mtgish writes as separate conditioned actions, a
+// regeneration's "when it regenerates this way" ability and an added
+// phase's delayed trigger.
 func (g *gorgeNorm) c2Chase(e *effects, a *cards.SA, depth int) {
 	p := a.Params
 	var alts []string
 	switch a.API {
 	case "FlipCoin":
+		// mtgish writes "if you win ... if you lose ..." as two separate
+		// conditioned actions, which its walk counts both of.
 		for _, k := range []string{"WinSubAbility", "LoseSubAbility", "HeadsSubAbility", "TailsSubAbility"} {
 			if name := p[k]; name != "" {
-				alts = append(alts, name)
+				g.chain(e, cards.ResolveSVar(g.svars(), name), depth+1)
 			}
 		}
 	case "RollDice":
 		for _, r := range strings.Split(p["ResultSubAbilities"], ",") {
 			if _, name, ok := strings.Cut(strings.TrimSpace(r), ":"); ok && name != "" {
+				alts = append(alts, name)
+			}
+		}
+	case "Vote":
+		// The options voted for (Choices$ names one SVar per option), which
+		// mtgish walks as the vote's outcomes. Unit B maps the Vote API
+		// itself; this only follows its options.
+		for _, name := range strings.Split(p["Choices"], ",") {
+			if name = strings.TrimSpace(name); name != "" {
 				alts = append(alts, name)
 			}
 		}

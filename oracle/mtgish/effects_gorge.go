@@ -365,10 +365,10 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			if p["Reveal"] == "True" {
 				out = append(out, "dig:"+literalOr(p["DigNum"], "1"))
 			}
-			if p["ChangeValid"] != "" && p["DestinationZone2"] != "" {
+			if d2 := p["DestinationZone2"]; p["ChangeValid"] != "" && d2 != "" && d2 != "Library" {
 				// "If it's a creature card, put it onto the battlefield;
 				// otherwise put it into your graveyard": the rest moves too.
-				out = append(out, "move:library>"+strings.ToLower(p["DestinationZone2"]))
+				out = append(out, "move:library>"+strings.ToLower(d2))
 			}
 			return out
 		}
