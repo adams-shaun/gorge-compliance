@@ -172,24 +172,45 @@ func selfCastRestriction(mode string, p map[string]string) bool {
 	return false
 }
 
-// splitRuleStatics splits one gorge static's effect tokens into the
-// statics mtgish writes for them: a rule (can't block, must be blocked,
-// goaded) is its own static (PermanentRuleEffect, one per rule), separate
-// from the layer effects (pump, grant) of the same sentence.
-func splitRuleStatics(eff []string) [][]string {
-	var rest []string
-	var out [][]string
-	for _, t := range eff {
-		if strings.HasPrefix(t, "rule:") {
-			out = append(out, []string{t})
-		} else {
-			rest = append(rest, t)
+// splitStatics splits every static ability's rule and player tokens into
+// statics of their own, on both sides. A restriction (can't block, must be
+// blocked, goaded; can't cast spells, has no maximum hand size) is one
+// static per restriction in a script (one S: line per static mode) and in
+// mtgish's PermanentRuleEffect, but one sentence can carry several in
+// mtgish's PlayerEffect list or beside a layer effect in a script's
+// Continuous (AddHiddenKeyword$, Goad$, CantHaveKeyword$). The remaining
+// (layer) tokens stay one static.
+func splitStatics(s *Summary) {
+	var out []Ability
+	split := false
+	for _, a := range s.Abilities {
+		if a.Kind != "static" {
+			out = append(out, a)
+			continue
+		}
+		var rest, own []string
+		for _, t := range a.Effects {
+			if strings.HasPrefix(t, "rule:") || strings.HasPrefix(t, "player:") {
+				own = append(own, t)
+			} else {
+				rest = append(rest, t)
+			}
+		}
+		if len(own) == 0 || len(own) == 1 && len(rest) == 0 {
+			out = append(out, a)
+			continue
+		}
+		split = true
+		if len(rest) > 0 {
+			out = append(out, Ability{Kind: "static", Targets: a.Targets, Effects: rest})
+		}
+		for _, t := range dedup(own) {
+			out = append(out, Ability{Kind: "static", Effects: []string{t}})
 		}
 	}
-	if len(rest) > 0 || len(out) == 0 {
-		out = append([][]string{rest}, out...)
+	if split {
+		s.Abilities = out
 	}
-	return out
 }
 
 // selfGrantAbilities expands a Continuous static that grants its own card
@@ -270,7 +291,9 @@ func replStatic(r *cards.Repl, svars map[string]string) (eff []string, ok bool) 
 		if p["Layer"] == "CantHappen" {
 			return []string{"player:damagedoesntcauselifeloss"}, true
 		}
-		if w := cards.ResolveSVar(svars, p["ReplaceWith"]); w != nil && w.API == "ReplaceDamage" && p["ValidPlayer"] != "Opponent" {
+		if p["IsDamage"] == "True" && strings.HasPrefix(p["Result"], "LT") {
+			// "Damage that would reduce your life total to less than N
+			// reduces it to N instead."
 			return []string{"player:damagethatwouldreducelifetotaltolessthannumberreducesittothatnumberinstead"}, true
 		}
 	case "LoseMana":

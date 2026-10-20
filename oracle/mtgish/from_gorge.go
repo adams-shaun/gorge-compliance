@@ -110,6 +110,7 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		g.ability(*enter)
 	}
 	mergeSpells(s, true)
+	splitStatics(s)
 	return s
 }
 
@@ -501,9 +502,7 @@ func (g *gorgeNorm) static(st *cards.Static) {
 			return
 		}
 	}
-	for _, e := range splitRuleStatics(eff) {
-		g.ability(Ability{Kind: "static", Effects: e})
-	}
+	g.ability(Ability{Kind: "static", Effects: eff})
 }
 
 func gorgeStaticEffects(mode string, p map[string]string) []string {
