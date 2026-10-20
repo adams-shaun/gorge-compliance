@@ -768,5 +768,5 @@ func gorgeCounterType(t string) string {
 		}
 		return sign(t[0]) + t[1:2] + "/" + sign(t[2]) + t[3:4]
 	}
-	return counterName(t)
+	return counterName(strings.ReplaceAll(t, " ", ""))
 }

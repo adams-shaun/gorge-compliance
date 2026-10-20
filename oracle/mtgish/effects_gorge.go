@@ -65,10 +65,14 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			e.targets = append(e.targets, t)
 		}
 		e.add(gorgeAPIEffects(a, g.svars())...)
+		e.add(atEOTTokens(a.Params["AtEOT"])...)
 		if a.API == "Effect" {
 			// The triggers an effect creates run their own effects, as
 			// mtgish's CreateTriggerUntil actions do.
 			for _, name := range strings.Split(a.Params["Triggers"], ",") {
+				if effectCleanupTrigger(g.svars(), name) {
+					continue
+				}
 				if body, ok := g.svars()[strings.TrimSpace(name)]; ok {
 					if t, ok := cards.ParseTriggerLine(body); ok {
 						g.chain(e, cards.ResolveSVar(g.svars(), t.Params["Execute"]), depth+1)
@@ -271,6 +275,10 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "Destroy", "DestroyAll":
 		return []string{"destroy"}
 	case "ChangeZone", "ChangeZoneAll":
+		if effectSelfExile(a) {
+			// An effect ending itself: bookkeeping, not a move.
+			return nil
+		}
 		return []string{changeZoneToken(a.API, p)}
 	case "Draw":
 		return []string{"draw:" + literalOr(p["NumCards"], "1")}
@@ -295,14 +303,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		}
 		return out
 	case "CopyPermanent":
-		out := []string{"tokencopy:" + literalOr(p["NumCopies"], "1")}
-		switch p["AtEOT"] {
-		case "Exile":
-			out = append(out, "delayed", "move:battlefield>exile")
-		case "Sacrifice":
-			out = append(out, "delayed", "sacrifice")
-		}
-		return out
+		return []string{"tokencopy:" + literalOr(p["NumCopies"], "1")}
 	case "PutCounter", "PutCounterAll":
 		if p["CounterType"] == "EachFromSource" {
 			return []string{"counters:*"}
@@ -311,7 +312,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			// Adapt N / bolster N put N +1/+1 counters.
 			return []string{"counters:+1/+1:" + literalOr(n, "*")}
 		}
-		return []string{"counters:" + gorgeCounterType(p["CounterType"]) + ":" + literalOr(p["CounterNum"], "1")}
+		var out []string
+		for _, ct := range strings.Split(p["CounterType"], ",") {
+			out = append(out, "counters:"+gorgeCounterType(strings.TrimSpace(ct))+":"+literalOr(p["CounterNum"], "1"))
+		}
+		return out
 	case "MultiplyCounter":
 		return []string{"counters:double"}
 	case "RemoveCounter", "RemoveCounterAll":
@@ -555,8 +560,11 @@ func effectAPI(a *cards.SA, svars map[string]string) []string {
 		}
 		out = append(out, eff...)
 	}
-	if a.Params["Triggers"] != "" {
-		out = append(out, "delayed")
+	for _, name := range strings.Split(a.Params["Triggers"], ",") {
+		if strings.TrimSpace(name) != "" && !effectCleanupTrigger(svars, name) {
+			out = append(out, "delayed")
+			break
+		}
 	}
 	if len(out) == 0 {
 		out = append(out, "effect")

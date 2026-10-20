@@ -706,3 +706,51 @@ func gorgeAltRefs(a *cards.SA) []string {
 	}
 	return nil
 }
+
+// effectCleanupTrigger reports whether the named trigger of an Effect only
+// exiles the effect itself from the command zone (Forge's bookkeeping for
+// "until <event>": Execute$ ChangeZone | Defined$ Self | Origin$ Command |
+// Destination$ Exile). It ends the effect; it is not a delayed trigger of
+// the card.
+func effectCleanupTrigger(svars map[string]string, name string) bool {
+	body, ok := svars[strings.TrimSpace(name)]
+	if !ok {
+		return false
+	}
+	t, ok := cards.ParseTriggerLine(body)
+	if !ok {
+		return false
+	}
+	sa := cards.ResolveSVar(svars, t.Params["Execute"])
+	if sa == nil || sa.Sub != nil && sa.Sub.API != "Cleanup" {
+		return false
+	}
+	return effectSelfExile(sa)
+}
+
+// effectSelfExile reports whether sa is an Effect exiling itself from the
+// command zone (Defined$ Self, or no Defined$, which means the same).
+func effectSelfExile(sa *cards.SA) bool {
+	p := sa.Params
+	return sa.API == "ChangeZone" && (p["Defined"] == "" || p["Defined"] == "Self") &&
+		p["Origin"] == "Command" && p["Destination"] == "Exile"
+}
+
+// atEOTTokens maps a script's AtEOT$ (what happens to the object at the
+// next end step): a delayed trigger plus its action, as mtgish writes the
+// "at the beginning of the next end step, exile/sacrifice it" sentence.
+func atEOTTokens(v string) []string {
+	switch {
+	case v == "":
+		return nil
+	case strings.Contains(v, "Exile"):
+		return []string{"delayed", "move:battlefield>exile"}
+	case strings.Contains(v, "Sacrifice"):
+		return []string{"delayed", "sacrifice"}
+	case strings.Contains(v, "Destroy"):
+		return []string{"delayed", "destroy"}
+	case strings.Contains(v, "Hand"):
+		return []string{"delayed", "move:battlefield>hand"}
+	}
+	return []string{"delayed"}
+}
