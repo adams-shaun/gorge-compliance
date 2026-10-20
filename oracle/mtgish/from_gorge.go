@@ -394,7 +394,9 @@ func (g *gorgeNorm) trigger(t *cards.Trigger) {
 		eff = cards.ResolveSVar(g.svars(), t.Params["Execute"])
 	}
 	g.chain(e, eff, 1)
-	g.ability(Ability{Kind: "triggered", Event: gorgeTriggerClass(t.Mode, t.Params), Targets: e.targets, Effects: e.effects})
+	for _, ev := range gorgeTriggerEvents(t.Mode, t.Params) {
+		g.ability(Ability{Kind: "triggered", Event: ev, Targets: append([]string(nil), e.targets...), Effects: append([]string(nil), e.effects...)})
+	}
 }
 
 // gorgeTriggerClass maps a trigger mode and its parameters to the event
@@ -427,6 +429,9 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 		}
 		if strings.HasPrefix(p["Phase"], "Main") {
 			return "main"
+		}
+		if c := d1Phase(p); c != "" {
+			return c
 		}
 		return unmapped("Phase." + p["Phase"])
 	case "Attacks", "AttackersDeclared", "AttackersDeclaredOneTarget":

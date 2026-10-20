@@ -454,9 +454,14 @@ func (m *mtgishNorm) trigger(r any) {
 	args := argsOf(r)
 	if v == "TriggerModalA" {
 		for _, ta := range list(rawArgs(r)) {
+			// Each mode is a plain [trigger, actions] pair, not a tagged node.
+			trig, acts := argN(ta, 0), argN(ta, 1)
+			if pair := list(ta); len(pair) == 2 {
+				trig, acts = pair[0], pair[1]
+			}
 			e := &effects{}
-			e.walk(argN(ta, 1))
-			for _, ev := range dedup(triggerEvents(argN(ta, 0))) {
+			e.walk(acts)
+			for _, ev := range dedup(triggerEvents(trig)) {
 				m.ability(Ability{Kind: "triggered", Event: ev, Targets: e.targets, Effects: e.effects})
 			}
 		}
@@ -491,6 +496,9 @@ func triggerEvents(t any) []string {
 			}
 		}
 	}
+	if evs, ok := d1MtgishEvents[v]; ok {
+		return evs
+	}
 	return []string{triggerClass(v)}
 }
 
@@ -504,6 +512,9 @@ func triggerClass(v string) string {
 			}
 		}
 		return false
+	}
+	if c, ok := d1MtgishOverrides[v]; ok {
+		return c
 	}
 	switch {
 	case has("Upkeep"):
