@@ -15,6 +15,14 @@ text below):
 oracle/xmageoracle/ (the Java replay driver) is gorge's own code, compiled
 against an out-of-tree XMage build; no XMage source is committed here.
 
+The mtgish card-definition cross-check (oracle/mtgish, cmd/mtgishxc) reads
+the card data of mtgish (https://github.com/i5jb/mtgish), distributed under
+the MIT License (full text below), at the commit pinned in
+oracle/mtgish/MTGISH.lock. The data is downloaded at run time into the
+gitignored .mtgish/ directory and is never committed (it is derived from
+Oracle text); the normalizer's variant names follow mtgish's type
+definitions (rust_syntax/src/mtg_types.rs).
+
 Forge (https://github.com/Card-Forge/forge) card scripts, token scripts and
 every Forge artifact are GPL-3.0 and are NEVER committed to this repository.
 The corpus is read at run time from a gitignored .cards link to gorge's
@@ -27,6 +35,30 @@ committed: tools that print it (cmd/oraclepacket) write to gitignored paths.
   MIT License
 
   Copyright (c) 2010 betasteward@gmail.com
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+mtgish (https://github.com/i5jb/mtgish):
+
+  MIT License
+
+  Copyright (c) 2018 - 2026 mtgish team
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal

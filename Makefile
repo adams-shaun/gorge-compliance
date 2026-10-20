@@ -15,6 +15,11 @@ GO_TEST_FLAGS ?= -p=2
 # docs/design/2026-10-02-xmage-compliance-oracle-design.md
 XMAGE_REF  ?= 6b602a1c85e8ed738a4b40b1ef44c54845b57f68
 XMAGE_ORACLE_DIR ?= /mnt/sata/gorge-training/xmageoracle
+# The mtgish commit the card-definition cross-check reads its data at
+# (oracle/mtgish/MTGISH.lock holds the same ref and the files' sha256).
+# mtgish is MIT; its data carries Oracle text and is never committed.
+# docs/design/2026-10-20-mtgish-crosscheck.md
+MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_ROOT)/Makefile)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_ROOT)/Makefile)
@@ -28,6 +33,7 @@ help:
 	@echo "gorge-compliance targets:"
 	@echo "  make cards          — link gorge's .cards corpus here (run gorge's make fetch-cards compile-cards first)"
 	@echo "  make test           — go test ./... (capped like gorge's)"
+	@echo "  make pr [PR_BASE=main] [DRY=1] — open/refresh a GitHub PR with a generated change overview"
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
 	@echo "  make oracle-audit   — the hand Oracle-text audit + XMage ports (audit/; ORACLE_RUN=<Card> to filter)"
 	@echo "  make compliance-status — per-set/per-format compliance status (oracle/compliance/status.md, never committed) + ratchet check"
@@ -37,6 +43,8 @@ help:
 	@echo "  make forge-oracle-setup — build the Forge oracle driver at FORGE_ORACLE_REF out of tree (heavy)"
 	@echo "  make compliance-pass SETS='FRA BLB' — XMage compliance pass over the sets; reruns only stale verdicts"
 	@echo "  make smoke          — the script smokes (stubs only; no Java, no network)"
+	@echo "  make mtgish-fetch   — download the pinned mtgish data into .mtgish/<ref>/ (gitignored) and verify its sha256"
+	@echo "  make mtgish-xc      — the mtgish card-definition cross-check: FDN+BLB report + the known-row ratchet"
 	@echo "  make xmage-driver-tests — the Java driver's unit tests (needs xmage-oracle-setup)"
 
 .PHONY: cards test boundary oracle-audit smoke
@@ -61,6 +69,17 @@ oracle-audit:
 smoke:
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
+
+# mtgish-fetch downloads mtgish.lines.json and LICENSE at MTGISH_REF into
+# .mtgish/<ref>/ and verifies them against oracle/mtgish/MTGISH.lock.
+# mtgish-xc writes the FDN+BLB cross-check report to .coverage/mtgish/ and
+# runs the ledger ratchet (oracle/mtgish/known/<SET>.tsv).
+.PHONY: mtgish-fetch mtgish-xc
+mtgish-fetch:
+	MTGISH_REF=$(MTGISH_REF) scripts/mtgish-fetch.sh
+mtgish-xc:
+	go run ./cmd/mtgishxc -set FDN -set BLB
+	go test -count=1 ./oracle/mtgish -run TestMtgishLedger -v
 
 # xmage-driver-tests compiles the Java replay driver and runs its unit tests
 # (oracle/xmageoracle/test) against the xmage-oracle-setup build. Needs Java
@@ -103,3 +122,20 @@ compliance-status:
 compliance-sets:
 	@mkdir -p .coverage
 	go run ./cmd/oraclediff sets -out .coverage/compliance-sets.md
+
+# ---- pull requests ------------------------------------------------------------
+# make pr                 open (or refresh) a GitHub PR: current branch -> origin's default branch
+#   PR_HEAD=<branch>      branch to propose (default: the checked-out branch)
+#   PR_BASE=<branch>      target branch (default: origin's default branch)
+#   TITLE="..."           PR title (default: the commit subject, or "<head> → <base>: N commits")
+#   SUMMARY="..."         a paragraph placed under the overview table
+#   DRAFT=1               open as a draft      DRY=1   print the title and body only
+.PHONY: pr
+pr: export HEAD = $(PR_HEAD)
+pr: export BASE = $(PR_BASE)
+pr: export TITLE := $(TITLE)
+pr: export SUMMARY := $(SUMMARY)
+pr: export DRAFT := $(DRAFT)
+pr: export DRY := $(DRY)
+pr:
+	@bash scripts/open-pr.sh
