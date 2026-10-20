@@ -186,8 +186,8 @@ var bareKeywords = map[string]string{
 	"Champion": "champion", "Reinforce": "reinforce", "ReinforceX": "reinforce",
 	"WebSlinging": "webslinging", "Recover": "recover", "Offering": "offering",
 	"Impending": "impending", "Ripple": "ripple", "Specialize": "specialize",
-	"SpecializeWithModifiers": "specialize", "SpecializeFromGraveyard": "specialize",
-	"MoreThanMeetsTheEye": "morethanmeetstheeye", "StartingIntensity": "startingintensity",
+	"SpecializeWithModifiers": "specialize",
+	"MoreThanMeetsTheEye":     "morethanmeetstheeye", "StartingIntensity": "startingintensity",
 	"Haunt": "haunt", "Firebending": "firebending", "Devour": "devour", "Mobilize": "mobilize",
 	"CraftWithCraftables": "craft", "CraftWithACraftable": "craft", "CraftWithANumberOfCraftables": "craft",
 	"CraftWithANumberOfGroupCraftables": "craft", "Visit": "visit", "VisitAndPrize": "visit",
@@ -270,7 +270,7 @@ func (m *mtgishNorm) rule(r any) {
 		// Every Rule or Vec<Rule> argument; conditions are skipped by shape.
 		// Under a condition ("as long as ..., it has flying") a keyword is
 		// a static granting it, as scripts write it.
-		cond := v == "If" || v == "Unless" || v == "IfElse" || v == "MaxSpeed"
+		cond := v == "If" || v == "Unless" || v == "IfElse" || v == "MaxSpeed" || strings.HasSuffix(v, "If")
 		for _, a := range argsOf(r) {
 			if enumOf(a) == "Rule" {
 				m.sub(a, cond)
@@ -616,6 +616,8 @@ func mtgishCost(c any) string {
 // protectable renders a Protection/HexproofFrom quality.
 func protectable(p any) string {
 	switch variantOf(p) {
+	case "FromActivatedAndTriggeredAbilities":
+		return "activated|triggered"
 	case "FromEverything":
 		return "everything"
 	case "FromColor":
@@ -627,7 +629,7 @@ func protectable(p any) string {
 			}
 			return strings.Join(dedup(cs), "|")
 		}
-		return strings.ToLower(strings.TrimPrefix(variantOf(pc), "Protection"))
+		return colorQuality(strings.ToLower(strings.TrimPrefix(variantOf(pc), "Protection")))
 	case "FromTypes", "FromSpells", "FromPermanents":
 		var words []string
 		walk(rawArgs(p), func(n node, enum, variant string) bool {
@@ -651,7 +653,7 @@ func affinityWord(p any) string {
 	var words []string
 	walk(p, func(n node, enum, variant string) bool {
 		switch variant {
-		case "IsCreatureType", "IsArtifactType", "IsLandType", "IsCardtype", "IsEnchantmentType":
+		case "IsCreatureType", "IsArtifactType", "IsLandType", "IsCardtype", "IsEnchantmentType", "IsSupertype":
 			if s, ok := n["args"].(string); ok {
 				words = append(words, typeWord(s))
 			}
@@ -661,7 +663,7 @@ func affinityWord(p any) string {
 	if len(words) == 0 {
 		return "*"
 	}
-	return strings.Join(dedup(words), "|")
+	return strings.Join(sorted(dedup(words)), "|")
 }
 
 // permanentsClasses extracts the target classes a Permanents filter
@@ -678,9 +680,22 @@ func permanentsClasses(p any) []string {
 					out = append(out, w)
 				}
 			}
-		case "And", "Or":
+		case "Or":
 			for _, e := range list(rawArgs(x)) {
 				visit(e)
+			}
+		case "And":
+			// An intersection ("artifact creature") is one class.
+			var direct []string
+			for _, e := range list(rawArgs(x)) {
+				if w := directClass(e); w != "" {
+					direct = append(direct, w)
+				} else {
+					visit(e)
+				}
+			}
+			if len(direct) > 0 {
+				out = append(out, pickIntersection(direct))
 			}
 		case "IsCreatureType", "IsCreatureTypeVariable":
 			out = append(out, "creature")

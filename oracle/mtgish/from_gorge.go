@@ -252,7 +252,7 @@ func (g *gorgeNorm) keyword(k string) {
 		if q == "" || strings.Contains(q, ":") || param != "" {
 			g.kw("protection:*")
 		} else {
-			g.kw("protection:" + typeWord(q))
+			g.kw("protection:" + colorQuality(typeWord(q)))
 		}
 		return
 	case head == "Hexproof" && param != "":
@@ -261,15 +261,15 @@ func (g *gorgeNorm) keyword(k string) {
 			q = q[:i]
 		}
 		for _, alt := range strings.Split(q, ",") {
-			g.kw("hexprooffrom:" + typeWord(strings.TrimPrefix(alt, "Card.")))
+			g.kw("hexprooffrom:" + colorQuality(typeWord(strings.TrimPrefix(alt, "Card."))))
 		}
 		return
 	case head == "Enchant":
 		cls := strings.SplitN(param, ":", 2)[0]
-		g.kw("enchant:" + targetToken(g.idx.validClasses(cls, ""), "1"))
+		g.kw("enchant:" + targetToken(g.idx.validClasses(cls, enchantZone(cls)), "1"))
 		return
 	case head == "Affinity":
-		g.kw("affinity:" + typeWord(param))
+		g.kw("affinity:" + gorgeAffinity(param))
 		return
 	case head == "Gift":
 		g.kw("gift")
@@ -286,6 +286,10 @@ func (g *gorgeNorm) keyword(k string) {
 		}
 		return
 	case gorgeBareKeywords[head]:
+		g.kw(keywordWord(head))
+		return
+	case gorgeCostKeywords[head] && param == "":
+		// A cost keyword printed without a cost (a land's Mayhem).
 		g.kw(keywordWord(head))
 		return
 	case gorgeCostKeywords[head]:

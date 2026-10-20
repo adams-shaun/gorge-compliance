@@ -111,6 +111,17 @@ func (m *mtgishNorm) stationLevel(r any) {
 
 // gorgeCardE runs after every face of a gorge card is summarised.
 func gorgeCardE(c *cards.Card, out []*Summary) {
+	// Forge writes "Loyalty:0" on the back face of a planeswalker that
+	// transforms into a planeswalker (Arlinn Kord, Garruk Relentless): the
+	// back face prints no loyalty (a front face may print 0: Dakkon,
+	// Jeska, B.O.B.).
+	if c.AlternateMode == cards.AlternateDoubleFaced && len(out) > 1 {
+		for _, s := range out[1:] {
+			if s.Loyalty == "0" {
+				s.Loyalty = ""
+			}
+		}
+	}
 	// Fuse is printed across both halves of a split card (each half's text
 	// box ends in it, and mtgish lists it on each); Forge writes K:Fuse on
 	// the first half only.
@@ -290,4 +301,105 @@ func oneCDA(s *Summary) {
 		out = append(out, a)
 	}
 	s.Abilities = out
+}
+
+// colorQualities canonicalises a protection/hexproof colour quality: Forge
+// writes "each color" and "Card.nonColorless", mtgish AnyColor; Forge
+// MonoColor/MultiColor, mtgish Monocolored/Multicolored.
+var colorQualities = map[string]string{
+	"eachcolor": "anycolor", "allcolors": "anycolor", "noncolorless": "anycolor",
+	"monocolored": "monocolor", "multicolored": "multicolor",
+}
+
+func colorQuality(w string) string {
+	if c, ok := colorQualities[w]; ok {
+		return c
+	}
+	return w
+}
+
+// enchantZone is the zone an Enchant keyword's filter names: "Enchant
+// creature card in a graveyard" is Creature.inZoneGraveyard.
+func enchantZone(cls string) string {
+	if strings.Contains(cls, "inZoneGraveyard") {
+		return "Graveyard"
+	}
+	return ""
+}
+
+// gorgeAffinity renders an Affinity filter ("Artifact", "Land.Snow",
+// "Creature.Artifact") as its type words, sorted, the way affinityWord
+// renders mtgish's.
+func gorgeAffinity(param string) string {
+	f := strings.SplitN(param, ":", 2)[0]
+	var words []string
+	for _, w := range strings.FieldsFunc(f, func(r rune) bool { return r == '.' || r == '+' }) {
+		words = append(words, typeWord(w))
+	}
+	return strings.Join(sorted(dedup(words)), "|")
+}
+
+// intersectionOrder ranks card types for an intersection of them
+// ("artifact creature", "enchantment creature"): its target class is the
+// first. Forge spells the intersection either way round
+// (Creature.Artifact, Artifact.Creature), mtgish as an And of IsCardtype.
+var intersectionOrder = []string{"creature", "planeswalker", "battle", "land", "enchantment", "artifact"}
+
+func pickIntersection(ws []string) string {
+	for _, c := range intersectionOrder {
+		if hasToken(ws, c) {
+			return c
+		}
+	}
+	return ws[0]
+}
+
+// intersectionClass is a Forge filter alternative's class: its head type,
+// or, when type properties follow it ("Creature.Artifact+nonToken"), the
+// intersection's class.
+func intersectionClass(head, alt string) string {
+	if !permanentTypes[head] {
+		return head
+	}
+	ws := []string{head}
+	for _, w := range strings.FieldsFunc(alt, func(r rune) bool { return r == '.' || r == '+' })[1:] {
+		if w := typeWord(w); permanentTypes[w] {
+			ws = append(ws, w)
+		}
+	}
+	return pickIntersection(ws)
+}
+
+// directClass is the card-type class of one mtgish permanent filter that
+// names a type outright (IsCardtype, or a subtype implying its card type),
+// "" for any other filter.
+func directClass(x any) string {
+	switch variantOf(x) {
+	case "IsCardtype":
+		if s, ok := rawArgs(x).(string); ok {
+			if w := typeWord(s); permanentTypes[w] {
+				return w
+			}
+		}
+	case "IsCreatureType", "IsCreatureTypeVariable":
+		return "creature"
+	case "IsArtifactType":
+		return "artifact"
+	case "IsLandType":
+		return "land"
+	case "IsEnchantmentType":
+		return "enchantment"
+	}
+	return ""
+}
+
+func init() {
+	// "You may also activate this card's specialize ability while it's in
+	// your graveyard" is a rider of the Specialize keyword: Forge writes it
+	// as a parameter of the one K:Specialize line.
+	extRule["SpecializeFromGraveyard"] = func(*mtgishNorm, any) {}
+	// "Enchant creature card in a graveyard": the Enchant keyword with a
+	// graveyard-card class, as gorge renders Forge's
+	// Enchant:<Type>.inZoneGraveyard.
+	extRule["EnchantGraveyardCard"] = func(m *mtgishNorm, _ any) { m.kw("enchant:" + clsGraveyard) }
 }
