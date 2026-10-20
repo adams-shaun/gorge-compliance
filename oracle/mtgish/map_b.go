@@ -52,7 +52,6 @@ var simpleAPIB = []apiTokenB{
 	{"TakeInitiative", "takeinitiative"},
 	{"Vote", "vote"},
 	{"VillainousChoice", "villainouschoice"},
-	{"AssignGroup", "assigngroup"},
 	{"BidLife", "bidlife"},
 	{"DayTime", "daytime"},
 	{"UnlockDoor", "unlockdoor"},
@@ -64,9 +63,9 @@ var simpleAPIB = []apiTokenB{
 	// Life, control and ownership.
 	{"SetLife", "setlife"},
 	{"ExchangeLife", "exchangelife"},
-	{"ExchangeLifeVariant", "exchangelifevariant"},
+	{"ExchangeLifeVariant", "exchangelife"}, // the same exchange, with a P/T
 	{"ExchangeControl", "exchangecontrol"},
-	{"ExchangeControlVariant", "exchangecontrolvariant"},
+	{"ExchangeControlVariant", "exchangecontrol"}, // the same exchange, of several
 	{"GainControlVariant", "gaincontrol"},
 	{"ControlPlayer", "controlplayer"},
 	{"ControlSpell", "controlspell"},
@@ -91,9 +90,7 @@ var simpleAPIB = []apiTokenB{
 	// Permanents, counters, cards.
 	{"MoveCounter", "movecounter"},
 	{"Unattach", "unattach"},
-	{"LookAt", "lookat"},
 	{"ReorderZone", "reorderzone"},
-	{"MultiplePiles", "multiplepiles"},
 	{"ActivateAbility", "activateability"},
 	{"DrainMana", "drainmana"},
 	{"TaporUntapAll", "tapuntap"}, // as TapOrUntapAll
@@ -126,9 +123,17 @@ var reflexiveB = map[string]string{
 
 // noEffectAPIB are APIs that are not game effects: a choice whose result a
 // later effect reads, or a layout spacer. They map to nothing; the mtgish
-// side's matching choices (ChooseLeftOrRight, ChooseEvenOrOdd, ChooseASector)
-// must map to nothing too.
-var noEffectAPIB = []string{"ChooseDirection", "ChooseEvenOdd", "ChooseSector", "BlankLine"}
+// side's matching choices (ChooseLeftOrRight, ChooseEvenOrOdd, ChooseASector,
+// the pile and look-at actions) map to nothing too (unit C1).
+var noEffectAPIB = []string{
+	"ChooseDirection", "ChooseEvenOdd", "ChooseSector", "BlankLine",
+	// Separating piles is a choice (what happens to a pile is its own
+	// effect); looking at a hidden card is information, not an effect.
+	"MultiplePiles", "LookAt",
+	// "For each player, choose friend or foe": the choice; each group's
+	// sub-ability is followed (extSVarRefs).
+	"AssignGroup",
+}
 
 // replTokenB maps replacement events compared by the event they replace,
 // spelled as mtgish's Replace<Event> rule.
@@ -199,12 +204,8 @@ func init() {
 		// The tie outcome is usually one of the choices: once.
 		return dedup(append(choices(a), a.Params["VoteSubAbility"], a.Params["VoteTiedAbility"]))
 	}
-	extSVarRefs["VillainousChoice"] = choices
 	extSVarRefs["AssignGroup"] = choices
 	extSVarRefs["BidLife"] = func(a *cards.SA) []string { return []string{a.Params["BidSubAbility"]} }
-	extSVarRefs["Clash"] = func(a *cards.SA) []string {
-		return []string{a.Params["WinSubAbility"], a.Params["OtherwiseSubAbility"]}
-	}
 
 	for _, m := range replTokenB {
 		tok := m.tok
@@ -299,11 +300,17 @@ func digMultipleB(a *cards.SA, _ map[string]string) []string {
 	if rest == "" {
 		rest = "Library"
 	}
-	return []string{
+	out := []string{
 		"dig:" + literalOr(p["DigNum"], "1"),
 		"move:library>" + strings.ToLower(dest),
 		"move:library>" + strings.ToLower(rest),
 	}
+	if z := p["ChosenZone"]; z != "" {
+		// "Put one of the chosen cards onto the battlefield, the others
+		// into your hand."
+		out = append(out, "move:library>"+strings.ToLower(z))
+	}
+	return out
 }
 
 // replWithB summarises a replacement by the effects of its ReplaceWith$
@@ -384,3 +391,29 @@ func gorgeCounterTokens(ct, n string) []string {
 }
 
 func digitB(c byte) bool { return c >= '0' && c <= '9' }
+
+// effectReplB maps the replacement effects an Effect creates that mtgish
+// writes as their own action: a prevention shield ("prevent all combat
+// damage this turn", mtgish's CreatePreventDamageUntil) and "doesn't untap
+// during its controller's next untap step". Any other replacement stays the
+// generic "effect", as mtgish's CreateReplace*Until actions are.
+func effectReplB(a *cards.SA, svars map[string]string) []string {
+	var out []string
+	for _, name := range strings.Split(a.Params["ReplacementEffects"], ",") {
+		body, ok := svars[strings.TrimSpace(name)]
+		if !ok {
+			continue
+		}
+		r, ok := cards.ParseReplacementLine(body)
+		if !ok {
+			continue
+		}
+		switch {
+		case r.Event == "DamageDone" && r.Params["Prevent"] == "True":
+			out = append(out, "prevent")
+		case r.Event == "Untap":
+			out = append(out, "rule:doesntuntapduringcontrollersuntap")
+		}
+	}
+	return out
+}

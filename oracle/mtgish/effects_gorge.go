@@ -552,6 +552,7 @@ func effectAPI(a *cards.SA, svars map[string]string) []string {
 	if a.Params["Triggers"] != "" {
 		out = append(out, "delayed")
 	}
+	out = append(out, effectReplB(a, svars)...)
 	if len(out) == 0 {
 		out = append(out, "effect")
 	}
