@@ -252,6 +252,11 @@ func (idx TypeIndex) validClasses(vt, zone string) []string {
 // gorgeAPIEffects maps one SA's API to its effect verbs.
 func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	p := a.Params
+	if p["Duration"] == "Perpetual" {
+		// A perpetual change (Alchemy), whatever it changes: mtgish's
+		// CreatePerpetual* actions are one "perpetual" each.
+		return []string{"perpetual"}
+	}
 	switch a.API {
 	case "DealDamage", "DamageAll":
 		return []string{"damage:" + literalOr(p["NumDmg"], "*")}
