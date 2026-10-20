@@ -1,6 +1,10 @@
 package mtgish
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/adams-shaun/gorge/engine/cards"
+)
 
 // Unit D1: trigger event classes that had no mapping on either side, the
 // gorge Forge trigger modes (T:Mode$) and the mtgish Trigger variants, mapped
@@ -20,7 +24,7 @@ var d1GorgeModes = map[string]string{
 	"PlaneswalkedFrom": "planeswalkedfrom",
 	"PlanarDice":       "planardice",
 	"SetInMotion":      "setinmotion",
-	"VisitAttraction":  "visitattraction",
+	"VisitAttraction":  "visit",
 	"ClaimPrize":       "claimprize",
 	"StickerPlaced":    "stickerplaced",
 
@@ -238,7 +242,7 @@ var d1MtgishClasses = map[string]string{
 	"WhenAPlayerRollsThePlanarDie":                "planardice",
 	"WhenAPlayerRollsABlankOnThePlanarDie":        "planardice",
 	"WhenAPlayerSetsASchemeInMotion":              "setinmotion",
-	"WhenAPlayerVisitsAnAttraction":               "visitattraction",
+	"WhenAPlayerVisitsAnAttraction":               "visit", // the event an Attraction's own Visit ability triggers on
 	"WhenAPlayerClaimsThePrizeOfAnAttraction":     "claimprize",
 	"WhenAPlayerOpensAnAttraction":                "etb", // an Attraction put onto the battlefield; Forge: ChangesZone AttractionDeck>Battlefield
 	"WhenAPlayerPutsAStickerOnAPermanent":         "stickerplaced",
@@ -466,7 +470,18 @@ func init() {
 		extTrigger[mode] = func(map[string]string) string { return class }
 	}
 	extTrigger["Exiled"] = d1Exiled
+	extKeyword["Visit"] = d1Visit
 	for v, class := range d1MtgishClasses {
 		extTriggerClass[v] = class
 	}
+}
+
+// d1Visit summarises K:Visit:<SVar>: the keyword plus the Attraction's
+// "Visit —" ability, a triggered ability on visiting it (the Chapter
+// precedent), as mtgish's Visit rule gives both.
+func d1Visit(g *gorgeNorm, param string) {
+	g.kw("visit")
+	e := &effects{}
+	g.chain(e, cards.ResolveSVar(g.svars(), strings.SplitN(param, ":", 2)[0]), 1)
+	g.ability(Ability{Kind: "triggered", Event: "visit", Targets: e.targets, Effects: e.effects})
 }

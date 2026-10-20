@@ -4,6 +4,8 @@ import (
 	"reflect"
 	"strings"
 	"testing"
+
+	"github.com/adams-shaun/gorge/engine/cards"
 )
 
 func TestD1TriggerClassesMeet(t *testing.T) {
@@ -113,5 +115,36 @@ func TestD1TriggerModalPairs(t *testing.T) {
 	}
 	if got = sorted(got); !reflect.DeepEqual(got, []string{"triggered:discard", "triggered:sacrifice"}) {
 		t.Errorf("abilities %v", got)
+	}
+}
+
+// A synthetic script (a made-up Attraction, not a corpus card): a Visit
+// ability, an undescribed bookkeeping trigger and a "dies or is exiled"
+// trigger.
+const d1Script = "Name:Test Ride\nManaCost:no cost\nTypes:Artifact Attraction\n" +
+	"K:Visit:TrigDraw\n" +
+	"SVar:TrigDraw:DB$ Draw | NumCards$ 1\n" +
+	"T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True\n" +
+	"SVar:TrigReset:DB$ Cleanup | ClearRemembered$ True\n" +
+	"T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard,Exile | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ x\n"
+
+func TestD1GorgeFace(t *testing.T) {
+	c, diags := cards.ParseBytes("test_ride.txt", []byte(d1Script))
+	if c == nil {
+		t.Fatalf("parse: %v", diags)
+	}
+	s := FromGorge("Test Ride", c, nil)[0]
+	var got []string
+	for _, a := range s.Abilities {
+		got = append(got, a.Shape())
+	}
+	if got = sorted(got); !reflect.DeepEqual(got, []string{"triggered:dies", "triggered:ltb", "triggered:visit"}) {
+		t.Errorf("abilities %v", got)
+	}
+	if !reflect.DeepEqual(s.Keywords, []string{"visit"}) {
+		t.Errorf("keywords %v", s.Keywords)
+	}
+	if got := sorted(s.Fields()[len(s.Fields())-1].Tokens); !reflect.DeepEqual(got, []string{"draw:1", "draw:1", "draw:1"}) {
+		t.Errorf("effects %v", got)
 	}
 }

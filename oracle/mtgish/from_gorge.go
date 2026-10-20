@@ -232,7 +232,7 @@ var gorgeBareKeywords = map[string]bool{
 	"Prototype": true, "Splice": true, "Champion": true, "Reinforce": true, "Web-slinging": true,
 	"Recover": true, "Offering": true, "Impending": true, "Ripple": true, "Specialize": true,
 	"More Than Meets the Eye": true, "Starting intensity": true, "Haunt": true, "Firebending": true,
-	"Devour": true, "Craft": true, "Visit": true, "Level up": true, "Overload": true, "Awaken": true,
+	"Devour": true, "Craft": true, "Level up": true, "Overload": true, "Awaken": true,
 	"Entwine": true, "Escalate": true, "Teamwork": true, "Cleave": true, "Mobilize": true,
 	"Bloodthirst": true, "Spree": true, "Tiered": true,
 }
