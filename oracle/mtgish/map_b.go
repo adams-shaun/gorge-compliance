@@ -165,7 +165,8 @@ func init() {
 	}
 	extAPI["DigMultiple"] = digMultipleB
 	extAPI["MustBlock"] = func(a *cards.SA, _ map[string]string) []string {
-		if a.Params["BlockAllDefined"] == "True" {
+		if a.Params["BlockAllDefined"] == "True" && strings.HasPrefix(a.Params["DefinedAttacker"], "Valid ") {
+			// "It blocks each attacking creature if able."
 			return []string{"rule:mustblockeachattacker"}
 		}
 		return []string{"rule:mustblockattacker"}

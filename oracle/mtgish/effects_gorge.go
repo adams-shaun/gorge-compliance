@@ -318,6 +318,9 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		if p["KWChoice"] != "" {
 			out = append(out, "grant:*")
 		}
+		if p["CanBlockAny"] == "True" {
+			out = append(out, "rule:canblockanynumberofcreatures")
+		}
 		for _, k := range cards.SplitKeywordList(p["KW"]) {
 			if strings.HasPrefix(k, "Prevent ") {
 				// A prevention shield granted until end of turn.
@@ -404,7 +407,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		if p["Power"] != "" || p["Toughness"] != "" {
 			out = append(out, "setpt")
 		}
-		if p["RemoveAllAbilities"] == "True" {
+		if p["RemoveAllAbilities"] == "True" || p["RemoveThisAbility"] == "True" {
 			out = append(out, "loseabilities")
 		}
 		for _, k := range []string{"Triggers", "Abilities", "staticAbilities", "StaticAbilities", "Replacements"} {
