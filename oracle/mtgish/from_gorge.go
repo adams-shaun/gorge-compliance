@@ -311,6 +311,10 @@ func (g *gorgeNorm) keyword(k string) {
 		g.kw(keywordWord(head) + ":" + n)
 		return
 	}
+	if f, ok := extKeyword[head]; ok {
+		f(g, param)
+		return
+	}
 	if param != "" || strings.ContainsAny(head, ".$") {
 		g.kw(unmapped("kw:" + head))
 		return
@@ -472,6 +476,9 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 	case "ClassLevelGained":
 		return "class-level"
 	}
+	if f, ok := extTrigger[mode]; ok {
+		return f(p)
+	}
 	return unmapped("Trigger." + mode)
 }
 
@@ -584,6 +591,9 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 	case "ManaConvert":
 		return []string{"manaconvert"}
 	}
+	if f, ok := extStatic[mode]; ok {
+		return f(p)
+	}
 	return []string{unmapped("Static." + mode)}
 }
 
@@ -678,7 +688,11 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 	case r.Event == "Discard":
 		a.Effects = []string{"replace:woulddiscard"}
 	default:
-		a.Effects = []string{unmapped("Repl." + r.Event)}
+		if f, ok := extRepl[r.Event]; ok {
+			a.Effects = f(r)
+		} else {
+			a.Effects = []string{unmapped("Repl." + r.Event)}
+		}
 	}
 	g.ability(a)
 }
@@ -717,7 +731,11 @@ func (g *gorgeNorm) enterEffects(r *cards.Repl) []string {
 			out = append(out, "counters:"+gorgeCounterType(a.Params["CounterType"])+":"+literalOr(a.Params["CounterNum"], "1"))
 		case a.API == "InternalEtbReplacement" || a.API == "Cleanup":
 		default:
-			out = append(out, unmapped("Enter."+a.API))
+			if f, ok := extEnterAPI[a.API]; ok {
+				out = append(out, f(a)...)
+			} else {
+				out = append(out, unmapped("Enter."+a.API))
+			}
 		}
 	}
 	return out

@@ -456,7 +456,11 @@ func (e *effects) action(n node, v string) {
 		case strings.HasPrefix(v, "PhaseOut"), strings.HasPrefix(v, "Phase") && strings.Contains(v, "Out"):
 			e.add("phaseout")
 		default:
-			e.add(unmapped("Action." + v))
+			if f, ok := extAction[v]; ok {
+				f(e, n)
+			} else {
+				e.add(unmapped("Action." + v))
+			}
 		}
 	}
 }
@@ -612,6 +616,8 @@ func layerEffects(ls []any) []string {
 				out = append(out, "type")
 			} else if strings.Contains(v, "Copy") {
 				out = append(out, "copy")
+			} else if f, ok := extLayer[v]; ok {
+				out = append(out, f(l)...)
 			} else {
 				out = append(out, unmapped("LayerEffect."+v))
 			}
@@ -810,7 +816,11 @@ func enterEffects(as []any) []string {
 				}
 			}
 		default:
-			out = append(out, unmapped("ReplacementActionWouldEnter."+v))
+			if f, ok := extEnter[v]; ok {
+				out = append(out, f(x)...)
+			} else {
+				out = append(out, unmapped("ReplacementActionWouldEnter."+v))
+			}
 		}
 	}
 	return out

@@ -398,6 +398,10 @@ func (m *mtgishNorm) rule(r any) {
 	case "IfCardIsInOpeningHand", "AsGameBegins", "BeforeDrawingOpeningHand":
 		m.ability(Ability{Kind: "pregame"})
 	default:
+		if f, ok := extRule[v]; ok {
+			f(m, r)
+			return
+		}
 		m.ability(Ability{Kind: unmapped("Rule." + v)})
 	}
 }
@@ -565,6 +569,9 @@ func triggerClass(v string) string {
 		return "untap"
 	case has("BecomesTapped", "TapsAPermanentForMana", "TappedForMana"):
 		return "tap"
+	}
+	if c, ok := extTriggerClass[v]; ok {
+		return c
 	}
 	return unmapped("Trigger." + v)
 }

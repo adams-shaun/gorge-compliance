@@ -486,6 +486,9 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		"DamageResolve", "Reveal", "RevealHand", "Shuffle", "Pump0":
 		return nil
 	}
+	if f, ok := extAPI[a.API]; ok {
+		return f(a, svars)
+	}
 	return []string{unmapped("API." + a.API)}
 }
 
