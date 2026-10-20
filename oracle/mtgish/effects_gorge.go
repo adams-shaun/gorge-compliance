@@ -225,7 +225,7 @@ func (idx TypeIndex) validClasses(vt, zone string) []string {
 			switch {
 			case w == "any":
 				out = append(out, clsAny)
-			case w == "player" || w == "opponent":
+			case w == "player" || w == "opponent" || w == "you":
 				out = append(out, clsPlayer)
 			case strings.Contains(z, "Graveyard"):
 				out = append(out, clsGraveyard)
