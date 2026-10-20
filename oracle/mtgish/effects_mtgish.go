@@ -31,6 +31,11 @@ func (e *effects) walk(x any) {
 			}
 			return variant == "If" || variant == "Unless"
 		case "_Target", "_DistributedTarget":
+			if strings.HasSuffix(variant, "TargetPlayerControls") {
+				// "Up to five target permanents target player controls":
+				// the player is a target too.
+				e.targets = append(e.targets, clsPlayer)
+			}
 			e.targets = append(e.targets, mtgishTarget(n))
 			return false
 		case "_Action":

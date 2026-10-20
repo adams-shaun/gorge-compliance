@@ -25,7 +25,9 @@ var targetGroupSuffixes = []string{
 
 // targetChooserSuffixes name who picks the target ("target creature of an
 // opponent's choice", "chosen at random"): not a player target.
+// "TargetPlayerControls" names a player target walk adds as its own slot.
 var targetChooserSuffixes = []string{
+	"TargetPlayerControls",
 	"OfAPlayersChoiceTheyControl", "OfAPlayersChoice", "OfPlayersChoice",
 	"ChosenAtRandom", "AtRandom",
 }
