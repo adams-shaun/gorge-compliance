@@ -59,6 +59,11 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if intrinsicMana(f, a) {
 			continue
 		}
+		if cleaveAlternative(a) {
+			// The cleave cost's version of the spell (map_f.go).
+			g.kw("cleave")
+			continue
+		}
 		g.sa(a)
 	}
 	for i := range f.Triggers {

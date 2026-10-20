@@ -624,3 +624,12 @@ func distributedCount(t, amount string) string {
 	}
 	return t
 }
+
+// cleaveAlternative reports the spell ability a script writes for a Cleave
+// cost: the same spell without the bracketed words, cast for the cleave
+// cost (NonBasicSpell$ True, PrecostDesc$ Cleave). The card prints one
+// spell ability and the keyword, as mtgish's SpellActions_Cleave merges
+// the two versions; the alternative is summarised as the keyword only.
+func cleaveAlternative(a *cards.SA) bool {
+	return a.Kind == "SP" && a.Params["NonBasicSpell"] == "True" && strings.TrimSpace(a.Params["PrecostDesc"]) == "Cleave"
+}

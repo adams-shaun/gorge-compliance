@@ -90,6 +90,12 @@ func (e *effects) walk(x any) {
 				}
 			}
 		}
+		if enum == "_Cost" && strings.HasPrefix(variant, "Reflexive_") {
+			// "Sacrifice it unless you discard a card. When you discard a
+			// card this way, ...": the reflexive trigger's actions ride on
+			// the cost node.
+			return true
+		}
 		return descendEnums[enum]
 	})
 }
