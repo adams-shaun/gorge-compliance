@@ -93,6 +93,7 @@ type mtgishNorm struct {
 	s                      *Summary
 	cdaPower, cdaToughness bool
 	cdaSeen                bool
+	enter                  int // 1 + the index of the face's "as this enters" replacement, 0 for none
 }
 
 func (m *mtgishNorm) kw(tok string) { m.s.Keywords = append(m.s.Keywords, tok) }
@@ -122,7 +123,7 @@ func (m *mtgishNorm) sub(r any, conditional bool) {
 
 // rules maps a Vec<Rule>.
 func (m *mtgishNorm) rules(rs []any) {
-	for _, r := range rs {
+	for _, r := range mergeSelfOrOther(rs) {
 		m.rule(r)
 	}
 }
@@ -245,8 +246,13 @@ func (m *mtgishNorm) rule(r any) {
 	if tok, ok := bareKeywords[v]; ok {
 		m.kw(tok)
 		switch v {
-		case "StationCharged", "StationChargedAnimate":
-			m.rules(list(argN(r, 1)))
+		case "StationCharged":
+			// "STATION N+: ..." holds only once charged: conditional.
+			for _, x := range list(argN(r, 1)) {
+				m.sub(x, true)
+			}
+		case "StationChargedAnimate":
+			m.stationAnimate(list(argN(r, 1)))
 		case "Visit", "VisitAndPrize":
 			e := &effects{}
 			e.walk(argsOf(r))
@@ -286,7 +292,7 @@ func (m *mtgishNorm) rule(r any) {
 			m.ability(Ability{Kind: "static", Effects: []string{"rule:" + ruleWord(variantOf(x))}})
 		}
 		return
-	case v == "CastEffect" && strings.HasPrefix(variantOf(rawArgs(r)), "AdditionalCastingCost"):
+	case v == "CastEffect" && (strings.HasPrefix(variantOf(rawArgs(r)), "AdditionalCastingCost") || castRestriction(variantOf(rawArgs(r)))):
 		// An additional casting cost is a cost, not an ability (scripts put
 		// it in the spell's Cost$).
 		return
@@ -326,7 +332,7 @@ func (m *mtgishNorm) rule(r any) {
 		a.Targets, a.Effects = e.targets, e.effects
 		m.ability(a)
 	case "AsPermanentEnters", "AsPermanentEntersOrIsTurnedFaceUp", "AsPermanentEscapes":
-		m.ability(Ability{Kind: "replacement", Effects: enterEffects(list(argN(r, 1)))})
+		m.enterReplacement(enterEffects(list(argN(r, 1))))
 	case "ClassAbilities":
 		for _, ca := range list(rawArgs(r)) {
 			m.rules(list(argN(ca, 1)))
@@ -343,12 +349,10 @@ func (m *mtgishNorm) rule(r any) {
 	case "LevelUp":
 		m.kw("levelup")
 		for _, l := range list(argN(r, 1)) {
-			for _, x := range list(argN(l, 2)) {
-				m.sub(x, true)
-			}
+			m.levelStatic(list(argN(l, 2)))
 		}
 	case "CDA_Color", "CDA_ColorButNotColorIdentity":
-		if strings.Contains(variantOf(rawArgs(r)), "Colorless") {
+		if cv := variantOf(rawArgs(r)); strings.Contains(cv, "Colorless") || cv == "Devoid" {
 			m.kw("devoid")
 		} else {
 			m.ability(Ability{Kind: "static", Effects: []string{"cda"}})
@@ -468,7 +472,7 @@ func (m *mtgishNorm) trigger(r any) {
 	}
 	e := &effects{}
 	e.walk(args[len(args)-1])
-	for _, ev := range dedup(triggerEvents(args[0])) {
+	for _, ev := range mergeDamageOr(dedup(triggerEvents(args[0]))) {
 		m.ability(Ability{Kind: "triggered", Event: ev, Targets: append([]string(nil), e.targets...), Effects: append([]string(nil), e.effects...)})
 	}
 }
@@ -520,7 +524,8 @@ func triggerClass(v string) string {
 		return "class-level"
 	case has("BecomesTheTarget"):
 		return "becomes-target"
-	case has("CombatDamageToAPlayer", "CombatDamageToAnyNumberOfPlayers"), v == "WhenAnyNumberOfPlayersAreDealtCombatDamage":
+	case has("CombatDamageToAPlayer", "CombatDamageToAnyNumberOfPlayers"), v == "WhenAnyNumberOfPlayersAreDealtCombatDamage",
+		v == "WhenAPlayerIsDealtCombatDamage":
 		return "combat-damage-player"
 	case has("CombatDamage") && !has("Noncombat"):
 		return "combat-damage"

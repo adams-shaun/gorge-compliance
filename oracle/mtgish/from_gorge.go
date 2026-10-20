@@ -61,9 +61,16 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		}
 		g.sa(a)
 	}
+	// Every "as this enters" replacement of the face (tapped, with
+	// counters, a choice) is one ability, the way the printed text and
+	// mtgish's AsPermanentEnters group them; scripts write one R: line each.
+	var enter *Ability
 	for i := range f.Triggers {
 		t := &f.Triggers[i]
 		if head, _, ok := kwTag(t.Params); ok && !printedExpansion(head) {
+			continue
+		}
+		if g.gorgeStaticTrigger(t, &enter) {
 			continue
 		}
 		g.trigger(t)
@@ -85,10 +92,6 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		}
 		g.static(st)
 	}
-	// Every "as this enters" replacement of the face (tapped, with
-	// counters, a choice) is one ability, the way the printed text and
-	// mtgish's AsPermanentEnters group them; scripts write one R: line each.
-	var enter *Ability
 	for i := range f.Repls {
 		r := &f.Repls[i]
 		if head, _, ok := kwTag(r.Params); ok && !printedExpansion(head) {
@@ -299,6 +302,12 @@ func (g *gorgeNorm) keyword(k string) {
 		return
 	case gorgeBareKeywords[head]:
 		g.kw(keywordWord(head))
+		if head == "Visit" {
+			// An Attraction's visit ability, as mtgish's Visit rule.
+			e := &effects{}
+			g.chain(e, cards.ResolveSVar(g.svars(), param), 1)
+			g.ability(Ability{Kind: "triggered", Event: "visit", Targets: e.targets, Effects: e.effects})
+		}
 		return
 	case gorgeCostKeywords[head]:
 		g.kw(keywordWord(head) + ":" + gorgeCost(param))
@@ -434,12 +443,15 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 	case "Blocks":
 		return "blocks"
 	case "AttackerBlocked", "AttackerBlockedByCreature":
+		if selfBlocker(p) {
+			return "blocks"
+		}
 		return "blocked"
 	case "SpellCast", "SpellCastOrCopy", "SpellCopy":
 		return "cast"
 	case "DamageDone", "DamageDoneOnce", "DamageDealtOnce", "DamageAll", "DamageDoneOnceByController":
 		combat := p["CombatDamage"] == "True"
-		player := strings.HasPrefix(p["ValidTarget"], "Player") || strings.HasPrefix(p["ValidTarget"], "Opponent")
+		player := damagesPlayer(p["ValidTarget"])
 		switch {
 		case combat && player:
 			return "combat-damage-player"
@@ -488,10 +500,20 @@ func (g *gorgeNorm) static(st *cards.Static) {
 	if eff == nil {
 		return
 	}
-	g.ability(Ability{Kind: "static", Effects: eff})
+	if st.Mode == "Continuous" && st.Params["AddAbility"] != "" {
+		if eff = g.selfGrantAbilities(st.Params, eff); len(eff) == 0 {
+			return
+		}
+	}
+	for _, e := range splitRuleStatics(eff) {
+		g.ability(Ability{Kind: "static", Effects: e})
+	}
 }
 
 func gorgeStaticEffects(mode string, p map[string]string) []string {
+	if selfCastRestriction(mode, p) {
+		return nil
+	}
 	switch mode {
 	case "Continuous":
 		var out []string
@@ -549,6 +571,9 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		if p["MayPlay"] != "" {
 			out = append(out, "mayplay")
 		}
+		if p["Goad"] == "True" {
+			out = append(out, "rule:isgoadedbyplayer")
+		}
 		for _, k := range cards.SplitKeywordList(p["AddHiddenKeyword"]) {
 			out = append(out, hiddenKeywordToken(k))
 		}
@@ -564,6 +589,9 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 	case "ReduceCost":
 		return []string{"costreduction"}
 	case "RaiseCost":
+		if selfSpellCost(p) {
+			return nil
+		}
 		return []string{"costincrease"}
 	case "CantBlockBy":
 		if p["ValidBlocker"] != "" {
@@ -609,6 +637,8 @@ func hiddenKeywordToken(k string) string {
 		return "rule:mustattack"
 	case strings.Contains(k, "can't be blocked"):
 		return "rule:cantbeblocked"
+	case strings.Contains(k, "able to block CARDNAME do so"):
+		return "rule:allcreaturesmustblockit"
 	case strings.Contains(k, "must be blocked"):
 		return "rule:mustbeblocked"
 	case strings.Contains(k, "doesn't untap"):
@@ -647,11 +677,20 @@ func signedParam(v string) string {
 // repl summarises an R: line.
 func (g *gorgeNorm) repl(r *cards.Repl) {
 	p := r.Params
+	if eff, ok := replStatic(r, g.svars()); ok {
+		g.ability(Ability{Kind: "static", Effects: eff})
+		return
+	}
 	switch r.Event {
 	case "Untap":
 		g.ability(Ability{Kind: "static", Effects: []string{"rule:doesntuntapduringcontrollersuntap"}})
 		return
 	case "GameLoss":
+		if p["ReplaceWith"] != "" {
+			// "If you would lose the game, instead ...": a replacement.
+			g.ability(Ability{Kind: "replacement", Effects: []string{"replace:wouldlosethegame"}})
+			return
+		}
 		g.ability(Ability{Kind: "static", Effects: []string{"player:cantlosethegame"}})
 		return
 	case "GameWin":

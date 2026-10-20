@@ -770,7 +770,9 @@ func castEffectToken(v string) string {
 		return "costreduction"
 	case strings.HasPrefix(v, "AdditionalCastingCost"):
 		return "additionalcost"
-	case strings.HasPrefix(v, "AlternateCastingCost"):
+	case strings.HasPrefix(v, "AlternateCastingCost"), strings.HasPrefix(v, "MayCastWithoutPaying"):
+		// "If <condition>, you may cast this spell without paying its mana
+		// cost" is an alternative cost (Forge: S:Mode$ AlternativeCost).
 		return "alternativecost"
 	case strings.Contains(v, "Flash"):
 		return "flash"
