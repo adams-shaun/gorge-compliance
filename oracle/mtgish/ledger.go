@@ -12,11 +12,55 @@ import (
 // LockFile is the committed data pin, relative to the repository root.
 const LockFile = "oracle/mtgish/MTGISH.lock"
 
-// KnownDir holds the per-set ledgers, relative to the repository root.
+// KnownDir holds the ledgers (one per tier, corpus-wide: T1.tsv .. T4.tsv)
+// and the exclusion list, relative to the repository root.
 const KnownDir = "oracle/mtgish/known"
 
-// LedgerSets are the sets whose disagreements are held to a ledger.
-var LedgerSets = []string{"FDN", "BLB"}
+// KernelSets are the sets the dirty-dirac kernel plays. The ledger covers
+// the whole corpus; these keep their own per-tier agreement lines in the
+// ratchet's log and their own headline tables in the -all report.
+var KernelSets = []string{"FDN", "BLB"}
+
+// LedgerPath is a tier's ledger file under root.
+func LedgerPath(root string, t Tier) string {
+	return filepath.Join(root, KnownDir, t.String()+".tsv")
+}
+
+// ReadLedgers reads the four tier ledgers under root. A row filed under
+// the wrong tier's file is an error.
+func ReadLedgers(root string) ([]Row, error) {
+	var out []Row
+	for _, t := range Tiers {
+		path := LedgerPath(root, t)
+		rows, err := ReadLedger(path)
+		if err != nil {
+			return nil, err
+		}
+		for _, r := range rows {
+			if r.Tier != t {
+				return nil, fmt.Errorf("%s: %s: a %s row in the %s ledger", path, r.Card, r.Tier, t)
+			}
+		}
+		out = append(out, rows...)
+	}
+	return out, nil
+}
+
+// WriteLedgers writes rows into the four tier ledgers under root.
+func WriteLedgers(root string, rows []Row) (map[Tier]int, error) {
+	by := map[Tier][]Row{}
+	for _, r := range rows {
+		by[r.Tier] = append(by[r.Tier], r)
+	}
+	n := map[Tier]int{}
+	for _, t := range Tiers {
+		if err := WriteLedger(LedgerPath(root, t), t.String(), by[t]); err != nil {
+			return nil, err
+		}
+		n[t] = len(by[t])
+	}
+	return n, nil
+}
 
 // ReadLockRef reads the pinned mtgish ref from a lock file.
 func ReadLockRef(path string) (string, error) {
@@ -81,14 +125,19 @@ func parseTier(s string) (Tier, bool) {
 	return 0, false
 }
 
-// WriteLedger writes rows sorted by key, with a header comment.
-func WriteLedger(path, set string, rows []Row) error {
+// WriteLedger writes rows sorted by key, with a header comment naming what
+// the file covers (a tier).
+func WriteLedger(path, name string, rows []Row) error {
 	SortRows(rows)
 	var b strings.Builder
-	fmt.Fprintf(&b, "# mtgish cross-check ledger for %s: every live disagreement and normalizer gap,\n", set)
-	b.WriteString("# triaged. TestMtgishLedger holds the live diff equal to this file in both\n")
-	b.WriteString("# directions. Columns hold summary tokens only, never card text.\n")
-	b.WriteString("# class: forge-bug | gorge-compile | mtgish-bug | normalizer | equivalent\n")
+	fmt.Fprintf(&b, "# mtgish cross-check ledger, %s, whole corpus: every live disagreement and\n", name)
+	b.WriteString("# normalizer gap, triaged. TestMtgishLedger holds the live diff equal to the\n")
+	b.WriteString("# four tier files in both directions. Columns hold summary tokens only, never\n")
+	b.WriteString("# card text. Rebuild with `go run ./cmd/mtgishxc -all -write-ledger` (keeps triage).\n")
+	b.WriteString("# class: forge-bug | gorge-compile | mtgish-bug | equivalent | digital-variant\n")
+	b.WriteString("#   | normalizer (a mapping debt; at most maxNormalizerRows, which only shrinks)\n")
+	b.WriteString("#   | pending (not yet triaged; at most maxPendingRows, which only shrinks)\n")
+	b.WriteString("# Rows whose unmapped tokens are all in excluded.tsv are class excluded, automatic, never here.\n")
 	b.WriteString(ledgerHeader + "\n")
 	for _, r := range rows {
 		b.WriteString(strings.Join([]string{r.Card, r.Tier.String(), r.Field, r.Gorge, r.Mtgish, r.Class, r.Note}, "\t") + "\n")
@@ -131,23 +180,73 @@ func LedgerDiff(live, ledger []Row) (added, stale []Row) {
 
 // Merge carries ledger triage (class, note) onto live rows by key; rows
 // without triage get class "untriaged" (a gap row defaults to
-// "normalizer"), which the ratchet test refuses.
+// "normalizer"), which the ratchet test refuses. See MergeTriage.
 func Merge(live, ledger []Row) []Row {
-	tri := map[string][]Row{}
-	for _, r := range ledger {
-		tri[r.Key()] = append(tri[r.Key()], r)
+	out, _ := MergeTriage(live, false, ledger)
+	return out
+}
+
+// MergeTriage carries triage onto live rows by key from several sources in
+// priority order (the -triage files first, then the ledger): each live row
+// takes its class and note from the first source holding its key, and
+// consumes that key once from every later source too (superseded, not
+// stale). A row no source triages gets "normalizer" when it is a gap, else
+// "pending" when pending is set, else "untriaged" (refused by the ratchet).
+// unused holds, per source, the rows that matched nothing live.
+func MergeTriage(live []Row, pending bool, sources ...[]Row) (out []Row, unused [][]Row) {
+	type queue struct{ rows []Row }
+	tri := make([]map[string]*queue, len(sources))
+	for i, src := range sources {
+		tri[i] = map[string]*queue{}
+		for _, r := range src {
+			q := tri[i][r.Key()]
+			if q == nil {
+				q = &queue{}
+				tri[i][r.Key()] = q
+			}
+			q.rows = append(q.rows, r)
+		}
 	}
-	out := make([]Row, 0, len(live))
+	out = make([]Row, 0, len(live))
 	for _, r := range live {
-		if l := tri[r.Key()]; len(l) > 0 {
-			r.Class, r.Note = l[0].Class, l[0].Note
-			tri[r.Key()] = l[1:]
-		} else if r.Gap() {
-			r.Class, r.Note = "normalizer", "unmapped token"
-		} else {
-			r.Class = "untriaged"
+		k := r.Key()
+		found := false
+		for i := range sources {
+			q := tri[i][k]
+			if q == nil || len(q.rows) == 0 {
+				continue
+			}
+			if !found {
+				r.Class, r.Note = q.rows[0].Class, q.rows[0].Note
+				found = true
+			}
+			q.rows = q.rows[1:]
+		}
+		if !found {
+			switch {
+			case r.Gap():
+				r.Class, r.Note = "normalizer", "unmapped token"
+			case pending:
+				r.Class, r.Note = "pending", "not yet triaged"
+			default:
+				r.Class = "untriaged"
+			}
 		}
 		out = append(out, r)
 	}
-	return out
+	unused = make([][]Row, len(sources))
+	for i, src := range sources {
+		// Walk the source in its own order so the report is stable.
+		left := map[string]int{}
+		for k, q := range tri[i] {
+			left[k] = len(q.rows)
+		}
+		for _, r := range src {
+			if left[r.Key()] > 0 {
+				left[r.Key()]--
+				unused[i] = append(unused[i], r)
+			}
+		}
+	}
+	return out, unused
 }

@@ -44,7 +44,7 @@ help:
 	@echo "  make compliance-pass SETS='FRA BLB' — XMage compliance pass over the sets; reruns only stale verdicts"
 	@echo "  make smoke          — the script smokes (stubs only; no Java, no network)"
 	@echo "  make mtgish-fetch   — download the pinned mtgish data into .mtgish/<ref>/ (gitignored) and verify its sha256"
-	@echo "  make mtgish-xc      — the mtgish card-definition cross-check: FDN+BLB report + the known-row ratchet"
+	@echo "  make mtgish-xc      — the mtgish card-definition cross-check: corpus report + the corpus ledger ratchet"
 	@echo "  make xmage-driver-tests — the Java driver's unit tests (needs xmage-oracle-setup)"
 
 .PHONY: cards test boundary oracle-audit smoke
@@ -72,13 +72,15 @@ smoke:
 
 # mtgish-fetch downloads mtgish.lines.json and LICENSE at MTGISH_REF into
 # .mtgish/<ref>/ and verifies them against oracle/mtgish/MTGISH.lock.
-# mtgish-xc writes the FDN+BLB cross-check report to .coverage/mtgish/ and
-# runs the ledger ratchet (oracle/mtgish/known/<SET>.tsv).
+# mtgish-xc writes the whole-corpus cross-check report (with the FDN and BLB
+# kernel-set tables) to .coverage/mtgish/ and runs the ledger ratchet: the
+# corpus ledger oracle/mtgish/known/T1..T4.tsv, the exclusions in
+# known/excluded.tsv, and the shrink-only maxNormalizerRows/maxPendingRows.
 .PHONY: mtgish-fetch mtgish-xc
 mtgish-fetch:
 	MTGISH_REF=$(MTGISH_REF) scripts/mtgish-fetch.sh
 mtgish-xc:
-	go run ./cmd/mtgishxc -set FDN -set BLB
+	go run ./cmd/mtgishxc -all
 	go test -count=1 ./oracle/mtgish -run TestMtgishLedger -v
 
 # xmage-driver-tests compiles the Java replay driver and runs its unit tests

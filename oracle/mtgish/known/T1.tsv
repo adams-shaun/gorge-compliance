@@ -1,0 +1,1237 @@
+# mtgish cross-check ledger, T1, whole corpus: every live disagreement and
+# normalizer gap, triaged. TestMtgishLedger holds the live diff equal to the
+# four tier files in both directions. Columns hold summary tokens only, never
+# card text. Rebuild with `go run ./cmd/mtgishxc -all -write-ledger` (keeps triage).
+# class: forge-bug | gorge-compile | mtgish-bug | equivalent | digital-variant
+#   | normalizer (a mapping debt; at most maxNormalizerRows, which only shrinks)
+#   | pending (not yet triaged; at most maxPendingRows, which only shrinks)
+# Rows whose unmapped tokens are all in excluded.tsv are class excluded, automatic, never here.
+card	tier	field	gorge	mtgish	class	note
+Abstruse Appropriation	T1	keywords	devoid	-	pending	not yet triaged
+Abstruse Interference	T1	keywords	devoid	-	pending	not yet triaged
+Acid-Spewer Dragon	T1	keywords	-	deathtouch flying	pending	not yet triaged
+Adagia, Windswept Bastion	T1	keywords	-	station	pending	not yet triaged
+Advantageous Proclamation	T1	keywords	unmapped:kw:Your minimum deck size is reduced by five.	-	normalizer	unmapped token
+Adverse Conditions	T1	keywords	devoid	-	pending	not yet triaged
+Aerial Formation	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Aisha of Sparks and Smoke [Aisha of Sparks and Smoke]	T1	face	-	face	pending	not yet triaged
+Aisha of Sparks and Smoke [Ken, Burning Brawler]	T1	face	face	-	pending	not yet triaged
+Ajani's Presence	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Alchemist's Gambit	T1	keywords	-	cleave	pending	not yet triaged
+Alchemist's Retrieval	T1	keywords	-	cleave	pending	not yet triaged
+Alive [Well]	T1	keywords	-	fuse	pending	not yet triaged
+Alora, Cheerful Assassin [Alora, Cheerful Mastermind]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Assassin [Alora, Cheerful Scout]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Assassin [Alora, Cheerful Swashbuckler]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Assassin [Alora, Cheerful Thief]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Assassin [Alora, Rogue Companion]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Mastermind [Alora, Cheerful Assassin]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Mastermind [Alora, Cheerful Scout]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Mastermind [Alora, Cheerful Swashbuckler]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Mastermind [Alora, Cheerful Thief]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Mastermind [Alora, Rogue Companion]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Scout [Alora, Cheerful Assassin]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Scout [Alora, Cheerful Mastermind]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Scout [Alora, Cheerful Swashbuckler]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Scout [Alora, Cheerful Thief]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Scout [Alora, Rogue Companion]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Swashbuckler [Alora, Cheerful Assassin]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Swashbuckler [Alora, Cheerful Mastermind]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Swashbuckler [Alora, Cheerful Scout]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Swashbuckler [Alora, Cheerful Thief]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Swashbuckler [Alora, Rogue Companion]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Thief [Alora, Cheerful Assassin]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Thief [Alora, Cheerful Mastermind]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Thief [Alora, Cheerful Scout]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Thief [Alora, Cheerful Swashbuckler]	T1	face	face	-	pending	not yet triaged
+Alora, Cheerful Thief [Alora, Rogue Companion]	T1	face	face	-	pending	not yet triaged
+Alora, Rogue Companion [Alora, Cheerful Assassin]	T1	face	face	-	pending	not yet triaged
+Alora, Rogue Companion [Alora, Cheerful Mastermind]	T1	face	face	-	pending	not yet triaged
+Alora, Rogue Companion [Alora, Cheerful Scout]	T1	face	face	-	pending	not yet triaged
+Alora, Rogue Companion [Alora, Cheerful Swashbuckler]	T1	face	face	-	pending	not yet triaged
+Alora, Rogue Companion [Alora, Cheerful Thief]	T1	face	face	-	pending	not yet triaged
+Amber Prison	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Ambergris, Agent of Balance [Ambergris, Agent of Destruction]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Balance [Ambergris, Agent of Law]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Balance [Ambergris, Agent of Progress]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Balance [Ambergris, Agent of Tyranny]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Balance [Ambergris, Citadel Agent]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Destruction [Ambergris, Agent of Balance]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Destruction [Ambergris, Agent of Law]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Destruction [Ambergris, Agent of Progress]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Destruction [Ambergris, Agent of Tyranny]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Destruction [Ambergris, Citadel Agent]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Law [Ambergris, Agent of Balance]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Law [Ambergris, Agent of Destruction]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Law [Ambergris, Agent of Progress]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Law [Ambergris, Agent of Tyranny]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Law [Ambergris, Citadel Agent]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Progress [Ambergris, Agent of Balance]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Progress [Ambergris, Agent of Destruction]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Progress [Ambergris, Agent of Law]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Progress [Ambergris, Agent of Tyranny]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Progress [Ambergris, Citadel Agent]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Tyranny [Ambergris, Agent of Balance]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Tyranny [Ambergris, Agent of Destruction]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Tyranny [Ambergris, Agent of Law]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Tyranny [Ambergris, Agent of Progress]	T1	face	face	-	pending	not yet triaged
+Ambergris, Agent of Tyranny [Ambergris, Citadel Agent]	T1	face	face	-	pending	not yet triaged
+Ambergris, Citadel Agent [Ambergris, Agent of Balance]	T1	face	face	-	pending	not yet triaged
+Ambergris, Citadel Agent [Ambergris, Agent of Destruction]	T1	face	face	-	pending	not yet triaged
+Ambergris, Citadel Agent [Ambergris, Agent of Law]	T1	face	face	-	pending	not yet triaged
+Ambergris, Citadel Agent [Ambergris, Agent of Progress]	T1	face	face	-	pending	not yet triaged
+Ambergris, Citadel Agent [Ambergris, Agent of Tyranny]	T1	face	face	-	pending	not yet triaged
+Angelic Aberration	T1	keywords	devoid	-	pending	not yet triaged
+Angry Mob	T1	pt	*/*	2/2	pending	not yet triaged
+Animate Dead	T1	keywords	enchant:creature	-	pending	not yet triaged
+Aplan Mortarium	T1	types	alfava metraxis	alfavametraxis	pending	not yet triaged
+Aquamorph Entity	T1	pt	*/*	0/0	pending	not yet triaged
+Arcane Heist	T1	keywords	cipher	-	pending	not yet triaged
+Arcane Savant	T1	keywords	unmapped:kw:MayEffectFromOpeningDeck	-	normalizer	unmapped token
+Arcanum Wings	T1	keywords	unmapped:kw:Aura swap	-	normalizer	unmapped token
+Archpriest of Shadows	T1	keywords	-	deathtouch	pending	not yet triaged
+Arek, False Goldwarden	T1	keywords	startingintensity	-	pending	not yet triaged
+Arlinn Kord [Arlinn, Embraced by the Moon]	T1	loyalty	0	-	pending	not yet triaged
+Armed [Dangerous]	T1	keywords	-	fuse	pending	not yet triaged
+Armor of Thorns	T1	keywords	mayflashsac	-	pending	not yet triaged
+Arvinox, the Mind Flail [Arvinox, the Mind Flail]	T1	face	-	face	pending	not yet triaged
+Arvinox, the Mind Flail [Mind Flayer, the Shadow]	T1	face	face	-	pending	not yet triaged
+Ashnod's Battle Gear	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Atmospheric Greenhouse	T1	keywords	-	flying station trample	pending	not yet triaged
+Atmospheric Greenhouse	T1	pt	5/4	-	pending	not yet triaged
+Aurelia's Vindicator	T1	keywords	disguise:{X}{3}{W}	-	pending	not yet triaged
+Avacyn's Judgment	T1	keywords	madness:{X}{R}	-	pending	not yet triaged
+Aven Liberator	T1	keywords	-	flying	pending	not yet triaged
+Awestruck Cygnet	T1	keywords	startingintensity	-	pending	not yet triaged
+Baldin, Century Herdmaster [Baldin, Century Herdmaster]	T1	face	-	face	pending	not yet triaged
+Baldin, Century Herdmaster [E. Honda, Sumo Champion]	T1	face	face	-	pending	not yet triaged
+Bane of the Living	T1	keywords	morph:{X}{B}{B}	-	pending	not yet triaged
+Barrage Tyrant	T1	keywords	devoid	-	pending	not yet triaged
+Basking Broodscale	T1	keywords	devoid	-	pending	not yet triaged
+Bearer of Silence	T1	keywords	devoid	-	pending	not yet triaged
+Beck [Call]	T1	keywords	-	fuse	pending	not yet triaged
+Belltoll Dragon	T1	keywords	-	flying hexproof	pending	not yet triaged
+Benthic Anomaly	T1	keywords	devoid	-	pending	not yet triaged
+Benthic Infiltrator	T1	keywords	devoid	-	pending	not yet triaged
+Birthing Hulk	T1	keywords	devoid	-	pending	not yet triaged
+Bismuth Mindrender	T1	keywords	devoid	-	pending	not yet triaged
+Bjorna, Nightfall Alchemist [Bjorna, Nightfall Alchemist]	T1	face	-	face	pending	not yet triaged
+Bjorna, Nightfall Alchemist [Lucas, the Sharpshooter]	T1	face	face	-	pending	not yet triaged
+Blinding Drone	T1	keywords	devoid	-	pending	not yet triaged
+Blinding Flare	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Blisterpod	T1	keywords	devoid	-	pending	not yet triaged
+Bohn, Beguiling Balladeer [Bohn, Beguiling Balladeer]	T1	face	-	face	pending	not yet triaged
+Bohn, Beguiling Balladeer [Edgin, Larcenous Lutenist]	T1	face	face	-	pending	not yet triaged
+Bonded Construct	T1	keywords	cantattackalone	-	pending	not yet triaged
+Bonded Horncrest	T1	keywords	cantattackorblockalone	-	pending	not yet triaged
+Bonfire of the Damned	T1	keywords	miracle:{X}{R}	-	pending	not yet triaged
+Boon-Bringer Valkyrie	T1	keywords	-	firststrike flying lifelink	pending	not yet triaged
+Bottomless Vault	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Breaker of Armies	T1	keywords	unmapped:kw:All creatures able to block CARDNAME do so.	-	normalizer	unmapped token
+Breaker of Creation	T1	keywords	hexprooffrom:noncolorless	hexprooffrom:anycolor	pending	not yet triaged
+Breaking [Entering]	T1	keywords	-	fuse	pending	not yet triaged
+Brisela, Voice of Nightmares [Gisela, the Broken Blade]	T1	face	face	-	pending	not yet triaged
+Brood Butcher	T1	keywords	devoid	-	pending	not yet triaged
+Brood Monitor	T1	keywords	devoid	-	pending	not yet triaged
+Broodguard Elite	T1	keywords	warp:{X}{G}	-	pending	not yet triaged
+Brutal Expulsion	T1	keywords	devoid	-	pending	not yet triaged
+Butcher Orgg	T1	keywords	unmapped:kw:You may assign CARDNAME's combat damage divided as you choose among defending player and/or any number of creatures they control.	-	normalizer	unmapped token
+Call of the Nightwing	T1	keywords	cipher	-	pending	not yet triaged
+Call the Coppercoats	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Call the Scions	T1	keywords	devoid	-	pending	not yet triaged
+Caller of the Untamed	T1	keywords	unmapped:kw:MayEffectFromOpeningDeck	-	normalizer	unmapped token
+Callous Oppressor	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Candela, Aegis of Adagia	T1	keywords	-	flying station	pending	not yet triaged
+Candela, Aegis of Adagia	T1	pt	3/3	-	pending	not yet triaged
+Canopy Stalker	T1	keywords	mustblock	-	pending	not yet triaged
+Casal, Lurkwood Pathfinder [Casal, Lurkwood Pathfinder]	T1	face	-	face	pending	not yet triaged
+Casal, Lurkwood Pathfinder [Casal, Pathbreaker Owlbear]	T1	face	-	face	pending	not yet triaged
+Casal, Lurkwood Pathfinder [Doric, Nature's Warden]	T1	face	face	-	pending	not yet triaged
+Casal, Lurkwood Pathfinder [Doric, Owlbear Avenger]	T1	face	face	-	pending	not yet triaged
+Catacomb Sifter	T1	keywords	devoid	-	pending	not yet triaged
+Catch [Release]	T1	keywords	-	fuse	pending	not yet triaged
+Cecily, Haunted Mage [Cecily, Haunted Mage]	T1	face	-	face	pending	not yet triaged
+Cecily, Haunted Mage [Eleven, the Mage]	T1	face	face	-	pending	not yet triaged
+Chameleon Spirit	T1	pt	*/*	0/0	pending	not yet triaged
+Chittering Dispatcher	T1	keywords	devoid	-	pending	not yet triaged
+Chittering Host [Graf Rats]	T1	face	face	-	pending	not yet triaged
+Chittering Skullspeaker	T1	keywords	startingintensity	-	pending	not yet triaged
+Chorus of the Conclave	T1	keywords	unmapped:kw:As an additional cost to cast creature spells, you may pay any amount of mana. If you do, that creature enters with that many additional +1/+1 counters on it.	-	normalizer	unmapped token
+Coffin Queen	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Colossal Heroics	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Complete Disregard	T1	keywords	devoid	-	pending	not yet triaged
+Conclave Sledge-Captain	T1	keywords	-	trample trample trample	pending	not yet triaged
+Consign to Dust	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Consuming Aetherborn	T1	keywords	-	lifelink	pending	not yet triaged
+Consuming Sinkhole	T1	keywords	devoid	-	pending	not yet triaged
+Corrupted Shapeshifter	T1	keywords	devoid	-	pending	not yet triaged
+Corrupted Shapeshifter	T1	pt	*/*	0/0	pending	not yet triaged
+Cosima, God of the Voyage [The Omenkeel]	T1	mana_cost	{1}{U}	{2}{U}	pending	not yet triaged
+Cosima, God of the Voyage [The Omenkeel]	T1	pt	3/3	2/4	pending	not yet triaged
+Crabomination	T1	keywords	emerge:{5}{B}{B}	-	pending	not yet triaged
+Cragsmasher Yeti	T1	keywords	-	trample	pending	not yet triaged
+Craven Hulk	T1	keywords	cantblockalone	-	pending	not yet triaged
+Cruel Feeding	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Crumble to Dust	T1	keywords	devoid	-	pending	not yet triaged
+Cryptic Cruiser	T1	keywords	devoid	-	pending	not yet triaged
+Culling Drone	T1	keywords	devoid	-	pending	not yet triaged
+Cultivator Drone	T1	keywords	devoid	-	pending	not yet triaged
+Cunning Giant	T1	keywords	unmapped:kw:If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.	-	normalizer	unmapped token
+Dalek Intensive Care	T1	types	asylum dalek the	thedalekasylum	pending	not yet triaged
+Dance of the Dead	T1	keywords	enchant:creature	-	pending	not yet triaged
+Dawnsire, Sunstar Dreadnought	T1	keywords	-	flying station station	pending	not yet triaged
+Dawnsire, Sunstar Dreadnought	T1	pt	20/20	-	pending	not yet triaged
+Death-Greeter's Champion	T1	keywords	-	doublestrike	pending	not yet triaged
+Debris Field Crusher	T1	keywords	-	flying station	pending	not yet triaged
+Debris Field Crusher	T1	pt	1/5	-	pending	not yet triaged
+Decorum Dissertation	T1	keywords	paradigm	-	pending	not yet triaged
+Deepfathom Skulker	T1	keywords	devoid	-	pending	not yet triaged
+Depth Defiler	T1	keywords	devoid	-	pending	not yet triaged
+Dermoplasm	T1	keywords	-	flying	pending	not yet triaged
+Deserter's Quarters	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Desperate Stand	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Dig Up	T1	keywords	-	cleave	pending	not yet triaged
+Dimensional Infiltrator	T1	keywords	devoid	-	pending	not yet triaged
+Dominator Drone	T1	keywords	devoid	-	pending	not yet triaged
+Domineer	T1	keywords	enchant:creature	enchant:artifact|creature	pending	not yet triaged
+Doomskar Warrior	T1	keywords	-	trample	pending	not yet triaged
+Double Jump [Flying Kick]	T1	keywords	-	fuse	pending	not yet triaged
+Down [Dirty]	T1	keywords	-	fuse	pending	not yet triaged
+Dread Defiler	T1	keywords	devoid	-	pending	not yet triaged
+Dread Fugue	T1	keywords	-	cleave	pending	not yet triaged
+Drix Interlacer	T1	keywords	startingintensity	-	pending	not yet triaged
+Drowner of Hope	T1	keywords	devoid	-	pending	not yet triaged
+Drowner of Truth	T1	keywords	devoid	-	pending	not yet triaged
+Dust Stalker	T1	keywords	devoid	-	pending	not yet triaged
+Dwarven Hold	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Echocasting Symposium	T1	keywords	paradigm	-	pending	not yet triaged
+Eldrazi Aggressor	T1	keywords	devoid	-	pending	not yet triaged
+Eldrazi Displacer	T1	keywords	devoid	-	pending	not yet triaged
+Eldrazi Linebreaker	T1	keywords	devoid	-	pending	not yet triaged
+Eldrazi Obligator	T1	keywords	devoid	-	pending	not yet triaged
+Eldrazi Repurposer	T1	keywords	devoid	-	pending	not yet triaged
+Eldrazi Skyspawner	T1	keywords	devoid	-	pending	not yet triaged
+Elmar, Ulvenwald Informant [Elmar, Ulvenwald Informant]	T1	face	-	face	pending	not yet triaged
+Elmar, Ulvenwald Informant [Max, the Daredevil]	T1	face	face	-	pending	not yet triaged
+Elvish Bard	T1	keywords	unmapped:kw:All creatures able to block CARDNAME do so.	-	normalizer	unmapped token
+Ember Beast	T1	keywords	cantattackorblockalone	-	pending	not yet triaged
+Emblazoned Golem	T1	keywords	unmapped:kw:Spend only colored mana on X. No more than one mana of each color may be spent this way.	-	normalizer	unmapped token
+Emissary's Ploy	T1	keywords	unmapped:kw:Before drawing your opening hand, choose 1, 2, or 3.	-	normalizer	unmapped token
+Emrakul's Messenger	T1	keywords	devoid	-	pending	not yet triaged
+Endless Swarm	T1	keywords	epic	-	pending	not yet triaged
+Endoskeleton	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Enduring Ideal	T1	keywords	epic	-	pending	not yet triaged
+Enkira, Hostile Scavenger [Enkira, Hostile Scavenger]	T1	face	-	face	pending	not yet triaged
+Enkira, Hostile Scavenger [Michonne, Ruthless Survivor]	T1	face	face	-	pending	not yet triaged
+Entrancing Lyre	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Entreat the Angels	T1	keywords	miracle:{X}{W}{W}	-	pending	not yet triaged
+Entreat the Dead	T1	keywords	miracle:{X}{B}{B}	-	pending	not yet triaged
+Entropic Battlecruiser	T1	keywords	-	deathtouch flying station station	pending	not yet triaged
+Entropic Battlecruiser	T1	pt	3/10	-	pending	not yet triaged
+Entropic Specter	T1	pt	*/*	0/0	pending	not yet triaged
+Esika, God of the Tree [The Prismatic Bridge]	T1	mana_cost	{W}{U}{B}{R}{G}	{1}{G}{G}	pending	not yet triaged
+Esper Origins	T1	keywords	flashback:{3}{G}	-	pending	not yet triaged
+Essence Depleter	T1	keywords	devoid	-	pending	not yet triaged
+Eternal Dominion	T1	keywords	epic	-	pending	not yet triaged
+Evendo, Waking Haven	T1	keywords	-	station	pending	not yet triaged
+Everglove Courier	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Evin, Waterdeep Opportunist [Evin, Waterdeep Opportunist]	T1	face	-	face	pending	not yet triaged
+Evin, Waterdeep Opportunist [Forge, Neverwinter Charlatan]	T1	face	face	-	pending	not yet triaged
+Expel from Orazca	T1	keywords	ascend	-	pending	not yet triaged
+Exploration Broodship	T1	keywords	-	flying station station	pending	not yet triaged
+Exploration Broodship	T1	pt	4/4	-	pending	not yet triaged
+Extinguisher Battleship	T1	keywords	-	flying station trample	pending	not yet triaged
+Extinguisher Battleship	T1	pt	10/10	-	pending	not yet triaged
+Extus, Oriq Overlord [Awaken the Blood Avatar]	T1	mana_cost	{6}{B}{R}	{1}{W}{B}{B}	pending	not yet triaged
+Eyeless Watcher	T1	keywords	devoid	-	pending	not yet triaged
+Fall of the Titans	T1	keywords	surge:{X}{R}	-	pending	not yet triaged
+Fanged Flames	T1	keywords	devoid	-	pending	not yet triaged
+Far [Away]	T1	keywords	-	fuse	pending	not yet triaged
+Fathom Feeder	T1	keywords	devoid	-	pending	not yet triaged
+Fear of Being Hunted	T1	keywords	mustblock	-	pending	not yet triaged
+Fearless Skald	T1	keywords	-	doublestrike	pending	not yet triaged
+Fearsome Whelp	T1	keywords	-	haste	pending	not yet triaged
+Fell Gravship	T1	keywords	-	flying lifelink station	pending	not yet triaged
+Fell Gravship	T1	pt	3/2	-	pending	not yet triaged
+Fierce Retribution	T1	keywords	-	cleave	pending	not yet triaged
+Flamescroll Celebrant [Revel in Silence]	T1	mana_cost	{W}{W}	{1}{R}	pending	not yet triaged
+Flamestick Courier	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Flayer Drone	T1	keywords	devoid	-	pending	not yet triaged
+Flaying Tendrils	T1	keywords	devoid	-	pending	not yet triaged
+Flesh [Blood]	T1	keywords	-	fuse	pending	not yet triaged
+Fleshwrither	T1	keywords	unmapped:kw:Transfigure	-	normalizer	unmapped token
+Flowstone Armor	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Forerunner of Slaughter	T1	keywords	devoid	-	pending	not yet triaged
+Frightshroud Courier	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+From Beyond	T1	keywords	devoid	-	pending	not yet triaged
+From Under the Floorboards	T1	keywords	madness:{X}{B}{B}	-	pending	not yet triaged
+Furnace Layer	T1	types	new phyrexia	newphyrexia	pending	not yet triaged
+Gaea's Liege	T1	pt	*/*	0/0	pending	not yet triaged
+Gaea's Protector	T1	keywords	mustblock	-	pending	not yet triaged
+Gale, Abyssal Conduit [Gale, Conduit of the Arcane]	T1	face	face	-	pending	not yet triaged
+Gale, Abyssal Conduit [Gale, Holy Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Abyssal Conduit [Gale, Primeval Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Abyssal Conduit [Gale, Storm Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Abyssal Conduit [Gale, Temporal Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Conduit of the Arcane [Gale, Abyssal Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Conduit of the Arcane [Gale, Holy Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Conduit of the Arcane [Gale, Primeval Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Conduit of the Arcane [Gale, Storm Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Conduit of the Arcane [Gale, Temporal Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Holy Conduit [Gale, Abyssal Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Holy Conduit [Gale, Conduit of the Arcane]	T1	face	face	-	pending	not yet triaged
+Gale, Holy Conduit [Gale, Primeval Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Holy Conduit [Gale, Storm Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Holy Conduit [Gale, Temporal Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Primeval Conduit [Gale, Abyssal Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Primeval Conduit [Gale, Conduit of the Arcane]	T1	face	face	-	pending	not yet triaged
+Gale, Primeval Conduit [Gale, Holy Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Primeval Conduit [Gale, Storm Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Primeval Conduit [Gale, Temporal Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Storm Conduit [Gale, Abyssal Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Storm Conduit [Gale, Conduit of the Arcane]	T1	face	face	-	pending	not yet triaged
+Gale, Storm Conduit [Gale, Holy Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Storm Conduit [Gale, Primeval Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Storm Conduit [Gale, Temporal Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Temporal Conduit [Gale, Abyssal Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Temporal Conduit [Gale, Conduit of the Arcane]	T1	face	face	-	pending	not yet triaged
+Gale, Temporal Conduit [Gale, Holy Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Temporal Conduit [Gale, Primeval Conduit]	T1	face	face	-	pending	not yet triaged
+Gale, Temporal Conduit [Gale, Storm Conduit]	T1	face	face	-	pending	not yet triaged
+Gallifrey Falls [No More]	T1	keywords	-	fuse	pending	not yet triaged
+Galvanizing Sawship	T1	keywords	-	flying haste station	pending	not yet triaged
+Galvanizing Sawship	T1	pt	6/5	-	pending	not yet triaged
+Garruk Relentless [Garruk, the Veil-Cursed]	T1	loyalty	0	-	pending	not yet triaged
+General Ferrous Rokiric	T1	keywords	hexprooffrom:monocolor	hexprooffrom:monocolored	pending	not yet triaged
+Germination Practicum	T1	keywords	paradigm	-	pending	not yet triaged
+Ghostfire	T1	keywords	-	devoid	pending	not yet triaged
+Ghostfire Slice	T1	keywords	devoid	-	pending	not yet triaged
+Ghosthelm Courier	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Giant Oyster	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Gisa's Favorite Shovel [Gisa's Favorite Shovel]	T1	face	-	face	pending	not yet triaged
+Gisa's Favorite Shovel [Lucille]	T1	face	face	-	pending	not yet triaged
+Gisela, the Broken Blade [Brisela, Voice of Nightmares]	T1	face	face	-	pending	not yet triaged
+Give [Take]	T1	keywords	-	fuse	pending	not yet triaged
+Gleemox	T1	keywords	unmapped:kw:DeckLimit	-	normalizer	unmapped token
+Gloomfang Mauler	T1	keywords	-	menace	pending	not yet triaged
+Goblin Fire Fiend	T1	keywords	mustblock	-	pending	not yet triaged
+Golden Demise	T1	keywords	ascend	-	pending	not yet triaged
+Golden-Scale Aeronaut	T1	keywords	-	flying	pending	not yet triaged
+Golgari Decoy	T1	keywords	unmapped:kw:All creatures able to block CARDNAME do so.	-	normalizer	unmapped token
+Gorm the Great	T1	keywords	mustblock unmapped:kw:CARDNAME must be blocked by two or more creatures if able.	-	normalizer	unmapped token
+Graf Rats [Chittering Host]	T1	face	face	-	pending	not yet triaged
+Grakk the Pacifist	T1	keywords	cantattackorblock	-	pending	not yet triaged
+Grave Birthing	T1	keywords	devoid	-	pending	not yet triaged
+Grave Servitude	T1	keywords	mayflashsac	-	pending	not yet triaged
+Gravity Negator	T1	keywords	devoid	-	pending	not yet triaged
+Gregor, Shrewd Magistrate [Glenn, the Voice of Calm]	T1	face	face	-	pending	not yet triaged
+Gregor, Shrewd Magistrate [Gregor, Shrewd Magistrate]	T1	face	-	face	pending	not yet triaged
+Greymond, Avacyn's Stalwart [Greymond, Avacyn's Stalwart]	T1	face	-	face	pending	not yet triaged
+Greymond, Avacyn's Stalwart [Rick, Steadfast Leader]	T1	face	face	-	pending	not yet triaged
+Grip of Desolation	T1	keywords	devoid	-	pending	not yet triaged
+Guardian Scalelord	T1	keywords	-	flying	pending	not yet triaged
+Gut, Bestial Fanatic [Gut, Brutal Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Bestial Fanatic [Gut, Devious Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Bestial Fanatic [Gut, Fanatical Priestess]	T1	face	face	-	pending	not yet triaged
+Gut, Bestial Fanatic [Gut, Furious Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Bestial Fanatic [Gut, Zealous Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Brutal Fanatic [Gut, Bestial Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Brutal Fanatic [Gut, Devious Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Brutal Fanatic [Gut, Fanatical Priestess]	T1	face	face	-	pending	not yet triaged
+Gut, Brutal Fanatic [Gut, Furious Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Brutal Fanatic [Gut, Zealous Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Devious Fanatic [Gut, Bestial Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Devious Fanatic [Gut, Brutal Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Devious Fanatic [Gut, Fanatical Priestess]	T1	face	face	-	pending	not yet triaged
+Gut, Devious Fanatic [Gut, Furious Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Devious Fanatic [Gut, Zealous Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Fanatical Priestess [Gut, Bestial Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Fanatical Priestess [Gut, Brutal Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Fanatical Priestess [Gut, Devious Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Fanatical Priestess [Gut, Furious Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Fanatical Priestess [Gut, Zealous Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Furious Fanatic [Gut, Bestial Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Furious Fanatic [Gut, Brutal Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Furious Fanatic [Gut, Devious Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Furious Fanatic [Gut, Fanatical Priestess]	T1	face	face	-	pending	not yet triaged
+Gut, Furious Fanatic [Gut, Zealous Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Zealous Fanatic [Gut, Bestial Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Zealous Fanatic [Gut, Brutal Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Zealous Fanatic [Gut, Devious Fanatic]	T1	face	face	-	pending	not yet triaged
+Gut, Zealous Fanatic [Gut, Fanatical Priestess]	T1	face	face	-	pending	not yet triaged
+Gut, Zealous Fanatic [Gut, Furious Fanatic]	T1	face	face	-	pending	not yet triaged
+Hands of Binding	T1	keywords	cipher	-	pending	not yet triaged
+Hansk, Slayer Zealot [Daryl, Hunter of Walkers]	T1	face	face	-	pending	not yet triaged
+Hansk, Slayer Zealot [Hansk, Slayer Zealot]	T1	face	-	face	pending	not yet triaged
+Hanweir Battlements [Hanweir, the Writhing Township]	T1	face	face	-	pending	not yet triaged
+Hanweir, the Writhing Township [Hanweir Battlements]	T1	face	face	-	pending	not yet triaged
+Hargilde, Kindly Runechanter [Dustin, Gadget Genius]	T1	face	face	-	pending	not yet triaged
+Hargilde, Kindly Runechanter [Hargilde, Kindly Runechanter]	T1	face	-	face	pending	not yet triaged
+Harness by Force	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Haunting Apparition	T1	pt	*/2	1/2	pending	not yet triaged
+Havengul Laboratory [Havengul Laboratory]	T1	face	-	face	pending	not yet triaged
+Havengul Laboratory [Havengul Mystery]	T1	face	-	face	pending	not yet triaged
+Havengul Laboratory [Hawkins National Laboratory]	T1	face	face	-	pending	not yet triaged
+Havengul Laboratory [The Upside Down]	T1	face	face	-	pending	not yet triaged
+Havoc Sower	T1	keywords	devoid	-	pending	not yet triaged
+Hearthhull, the Worldseed	T1	keywords	-	flying haste station station vigilance	pending	not yet triaged
+Hearthhull, the Worldseed	T1	pt	6/7	-	pending	not yet triaged
+Hedge Whisperer	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Helm of Possession	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Herald of Kozilek	T1	keywords	devoid	-	pending	not yet triaged
+Herdchaser Dragon	T1	keywords	-	flying trample	pending	not yet triaged
+Hidden Dragonslayer	T1	keywords	-	lifelink	pending	not yet triaged
+Hidden Strings	T1	keywords	cipher	-	pending	not yet triaged
+Hideous Taskmaster	T1	keywords	devoid	-	pending	not yet triaged
+Hinterland Hermit [Hinterland Scourge]	T1	keywords	mustblock	-	pending	not yet triaged
+Hisoka's Guard	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Hivis of the Scale	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Hollow Trees	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Hope-Ender Coatl	T1	keywords	devoid	-	pending	not yet triaged
+Horribly Awry	T1	keywords	devoid	-	pending	not yet triaged
+Hotel of Fears	T1	types	spacecraft	spaceship	pending	not yet triaged
+Hour of Need	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Icatian Store	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Ice Floe	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Icebreaker Kraken	T1	keywords	affinity:landsnowsnowland	affinity:land	pending	not yet triaged
+Icefeather Aven	T1	keywords	-	flying	pending	not yet triaged
+Idris, Soul of the TARDIS	T1	keywords	vanishing	-	pending	not yet triaged
+Immard, the Stormcleaver [Guile, Sonic Soldier]	T1	face	face	-	pending	not yet triaged
+Immard, the Stormcleaver [Immard, the Stormcleaver]	T1	face	-	face	pending	not yet triaged
+Immobilizer Eldrazi	T1	keywords	devoid	-	pending	not yet triaged
+Immovable Rod	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Imoen, Chaotic Trickster [Imoen, Honorable Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Chaotic Trickster [Imoen, Occult Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Chaotic Trickster [Imoen, Trickster Friend]	T1	face	face	-	pending	not yet triaged
+Imoen, Chaotic Trickster [Imoen, Wily Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Chaotic Trickster [Imoen, Wise Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Honorable Trickster [Imoen, Chaotic Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Honorable Trickster [Imoen, Occult Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Honorable Trickster [Imoen, Trickster Friend]	T1	face	face	-	pending	not yet triaged
+Imoen, Honorable Trickster [Imoen, Wily Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Honorable Trickster [Imoen, Wise Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Occult Trickster [Imoen, Chaotic Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Occult Trickster [Imoen, Honorable Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Occult Trickster [Imoen, Trickster Friend]	T1	face	face	-	pending	not yet triaged
+Imoen, Occult Trickster [Imoen, Wily Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Occult Trickster [Imoen, Wise Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Trickster Friend [Imoen, Chaotic Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Trickster Friend [Imoen, Honorable Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Trickster Friend [Imoen, Occult Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Trickster Friend [Imoen, Wily Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Trickster Friend [Imoen, Wise Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Wily Trickster [Imoen, Chaotic Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Wily Trickster [Imoen, Honorable Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Wily Trickster [Imoen, Occult Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Wily Trickster [Imoen, Trickster Friend]	T1	face	face	-	pending	not yet triaged
+Imoen, Wily Trickster [Imoen, Wise Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Wise Trickster [Imoen, Chaotic Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Wise Trickster [Imoen, Honorable Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Wise Trickster [Imoen, Occult Trickster]	T1	face	face	-	pending	not yet triaged
+Imoen, Wise Trickster [Imoen, Trickster Friend]	T1	face	face	-	pending	not yet triaged
+Imoen, Wise Trickster [Imoen, Wily Trickster]	T1	face	face	-	pending	not yet triaged
+Imperial Hellkite	T1	keywords	-	flying	pending	not yet triaged
+Improvisation Capstone	T1	keywords	paradigm	-	pending	not yet triaged
+Incubator Drone	T1	keywords	devoid	-	pending	not yet triaged
+Inescapable Brute	T1	keywords	mustblock	-	pending	not yet triaged
+Infinite Guideline Station	T1	keywords	-	flying station	pending	not yet triaged
+Infinite Guideline Station	T1	pt	7/15	-	pending	not yet triaged
+Inspired Idea	T1	keywords	-	cleave	pending	not yet triaged
+Inspirit, Flagship Vessel	T1	keywords	-	flying station station	pending	not yet triaged
+Inspirit, Flagship Vessel	T1	pt	5/5	-	pending	not yet triaged
+Inverter of Truth	T1	keywords	devoid	-	pending	not yet triaged
+Ire Shaman	T1	keywords	-	menace	pending	not yet triaged
+Iridescent Angel	T1	keywords	protection:eachcolor	protection:anycolor	pending	not yet triaged
+Jackal Familiar	T1	keywords	cantattackorblockalone	-	pending	not yet triaged
+Jadzi, Oracle of Arcavios [Journey to the Oracle]	T1	mana_cost	{2}{G}{G}	{6}{U}{U}	pending	not yet triaged
+Jaheira, Harper Emissary [Jaheira, Heroic Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Harper Emissary [Jaheira, Insightful Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Harper Emissary [Jaheira, Merciful Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Harper Emissary [Jaheira, Ruthless Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Harper Emissary [Jaheira, Stirring Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Heroic Harper [Jaheira, Harper Emissary]	T1	face	face	-	pending	not yet triaged
+Jaheira, Heroic Harper [Jaheira, Insightful Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Heroic Harper [Jaheira, Merciful Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Heroic Harper [Jaheira, Ruthless Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Heroic Harper [Jaheira, Stirring Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Insightful Harper [Jaheira, Harper Emissary]	T1	face	face	-	pending	not yet triaged
+Jaheira, Insightful Harper [Jaheira, Heroic Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Insightful Harper [Jaheira, Merciful Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Insightful Harper [Jaheira, Ruthless Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Insightful Harper [Jaheira, Stirring Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Merciful Harper [Jaheira, Harper Emissary]	T1	face	face	-	pending	not yet triaged
+Jaheira, Merciful Harper [Jaheira, Heroic Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Merciful Harper [Jaheira, Insightful Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Merciful Harper [Jaheira, Ruthless Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Merciful Harper [Jaheira, Stirring Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Ruthless Harper [Jaheira, Harper Emissary]	T1	face	face	-	pending	not yet triaged
+Jaheira, Ruthless Harper [Jaheira, Heroic Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Ruthless Harper [Jaheira, Insightful Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Ruthless Harper [Jaheira, Merciful Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Ruthless Harper [Jaheira, Stirring Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Stirring Harper [Jaheira, Harper Emissary]	T1	face	face	-	pending	not yet triaged
+Jaheira, Stirring Harper [Jaheira, Heroic Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Stirring Harper [Jaheira, Insightful Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Stirring Harper [Jaheira, Merciful Harper]	T1	face	face	-	pending	not yet triaged
+Jaheira, Stirring Harper [Jaheira, Ruthless Harper]	T1	face	face	-	pending	not yet triaged
+Jenny, Generated Anomaly	T1	types	lord time	timelord	pending	not yet triaged
+Jurin, Leading the Charge [Holga, Relentless Rager]	T1	face	face	-	pending	not yet triaged
+Jurin, Leading the Charge [Jurin, Leading the Charge]	T1	face	-	face	pending	not yet triaged
+Karlach, Raging Tiefling	T1	keywords	-	specialize	pending	not yet triaged
+Karlach, Raging Tiefling [Karlach, Tiefling Berserker]	T1	face	face	-	pending	not yet triaged
+Karlach, Raging Tiefling [Karlach, Tiefling Guardian]	T1	face	face	-	pending	not yet triaged
+Karlach, Raging Tiefling [Karlach, Tiefling Punisher]	T1	face	face	-	pending	not yet triaged
+Karlach, Raging Tiefling [Karlach, Tiefling Spellrager]	T1	face	face	-	pending	not yet triaged
+Karlach, Raging Tiefling [Karlach, Tiefling Zealot]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Berserker [Karlach, Raging Tiefling]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Berserker [Karlach, Tiefling Guardian]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Berserker [Karlach, Tiefling Punisher]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Berserker [Karlach, Tiefling Spellrager]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Berserker [Karlach, Tiefling Zealot]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Guardian [Karlach, Raging Tiefling]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Guardian [Karlach, Tiefling Berserker]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Guardian [Karlach, Tiefling Punisher]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Guardian [Karlach, Tiefling Spellrager]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Guardian [Karlach, Tiefling Zealot]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Punisher [Karlach, Raging Tiefling]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Punisher [Karlach, Tiefling Berserker]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Punisher [Karlach, Tiefling Guardian]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Punisher [Karlach, Tiefling Spellrager]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Punisher [Karlach, Tiefling Zealot]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Spellrager [Karlach, Raging Tiefling]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Spellrager [Karlach, Tiefling Berserker]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Spellrager [Karlach, Tiefling Guardian]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Spellrager [Karlach, Tiefling Punisher]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Spellrager [Karlach, Tiefling Zealot]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Zealot [Karlach, Raging Tiefling]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Zealot [Karlach, Tiefling Berserker]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Zealot [Karlach, Tiefling Guardian]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Zealot [Karlach, Tiefling Punisher]	T1	face	face	-	pending	not yet triaged
+Karlach, Tiefling Zealot [Karlach, Tiefling Spellrager]	T1	face	face	-	pending	not yet triaged
+Kavaron, Memorial World	T1	keywords	-	station	pending	not yet triaged
+Kiora's Dismissal	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Klement, Death Acolyte [Klement, Knowledge Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Death Acolyte [Klement, Life Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Death Acolyte [Klement, Nature Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Death Acolyte [Klement, Novice Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Death Acolyte [Klement, Tempest Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Knowledge Acolyte [Klement, Death Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Knowledge Acolyte [Klement, Life Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Knowledge Acolyte [Klement, Nature Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Knowledge Acolyte [Klement, Novice Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Knowledge Acolyte [Klement, Tempest Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Life Acolyte [Klement, Death Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Life Acolyte [Klement, Knowledge Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Life Acolyte [Klement, Nature Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Life Acolyte [Klement, Novice Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Life Acolyte [Klement, Tempest Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Nature Acolyte [Klement, Death Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Nature Acolyte [Klement, Knowledge Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Nature Acolyte [Klement, Life Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Nature Acolyte [Klement, Novice Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Nature Acolyte [Klement, Tempest Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Novice Acolyte [Klement, Death Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Novice Acolyte [Klement, Knowledge Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Novice Acolyte [Klement, Life Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Novice Acolyte [Klement, Nature Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Novice Acolyte [Klement, Tempest Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Tempest Acolyte [Klement, Death Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Tempest Acolyte [Klement, Knowledge Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Tempest Acolyte [Klement, Life Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Tempest Acolyte [Klement, Nature Acolyte]	T1	face	face	-	pending	not yet triaged
+Klement, Tempest Acolyte [Klement, Novice Acolyte]	T1	face	face	-	pending	not yet triaged
+Kolaghan Stormsinger	T1	keywords	-	haste	pending	not yet triaged
+Kolvori, God of Kinship [The Ringhart Crest]	T1	mana_cost	{1}{G}	{2}{G}{G}	pending	not yet triaged
+Kozilek's Return	T1	keywords	devoid	-	pending	not yet triaged
+Kozilek's Sentinel	T1	keywords	devoid	-	pending	not yet triaged
+Kozilek's Shrieker	T1	keywords	devoid	-	pending	not yet triaged
+Kozilek's Translator	T1	keywords	devoid	-	pending	not yet triaged
+Kozilek's Unsealing	T1	keywords	devoid	-	pending	not yet triaged
+Lae'zel, Blessed Warrior [Lae'zel, Callous Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Blessed Warrior [Lae'zel, Githyanki Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Blessed Warrior [Lae'zel, Illithid Thrall]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Blessed Warrior [Lae'zel, Primal Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Blessed Warrior [Lae'zel, Wrathful Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Callous Warrior [Lae'zel, Blessed Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Callous Warrior [Lae'zel, Githyanki Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Callous Warrior [Lae'zel, Illithid Thrall]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Callous Warrior [Lae'zel, Primal Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Callous Warrior [Lae'zel, Wrathful Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Githyanki Warrior [Lae'zel, Blessed Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Githyanki Warrior [Lae'zel, Callous Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Githyanki Warrior [Lae'zel, Illithid Thrall]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Githyanki Warrior [Lae'zel, Primal Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Githyanki Warrior [Lae'zel, Wrathful Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Illithid Thrall [Lae'zel, Blessed Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Illithid Thrall [Lae'zel, Callous Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Illithid Thrall [Lae'zel, Githyanki Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Illithid Thrall [Lae'zel, Primal Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Illithid Thrall [Lae'zel, Wrathful Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Primal Warrior [Lae'zel, Blessed Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Primal Warrior [Lae'zel, Callous Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Primal Warrior [Lae'zel, Githyanki Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Primal Warrior [Lae'zel, Illithid Thrall]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Primal Warrior [Lae'zel, Wrathful Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Wrathful Warrior [Lae'zel, Blessed Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Wrathful Warrior [Lae'zel, Callous Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Wrathful Warrior [Lae'zel, Githyanki Warrior]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Wrathful Warrior [Lae'zel, Illithid Thrall]	T1	face	face	-	pending	not yet triaged
+Lae'zel, Wrathful Warrior [Lae'zel, Primal Warrior]	T1	face	face	-	pending	not yet triaged
+Lantern Flare	T1	keywords	-	cleave	pending	not yet triaged
+Larval Scoutlander	T1	keywords	-	flying station	pending	not yet triaged
+Larval Scoutlander	T1	pt	3/3	-	pending	not yet triaged
+Last Thoughts	T1	keywords	cipher	-	pending	not yet triaged
+Launch the Fleet	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Liege of the Axe	T1	keywords	-	vigilance	pending	not yet triaged
+Lightning Reflexes	T1	keywords	mayflashsac	-	pending	not yet triaged
+Living Lore	T1	pt	*/*	0/0	pending	not yet triaged
+Loyal Pegasus	T1	keywords	cantattackorblockalone	-	pending	not yet triaged
+Lukamina, Bear Form [Lukamina, Crocodile Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Bear Form [Lukamina, Hawk Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Bear Form [Lukamina, Moon Druid]	T1	face	face	-	pending	not yet triaged
+Lukamina, Bear Form [Lukamina, Scorpion Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Bear Form [Lukamina, Wolf Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Crocodile Form [Lukamina, Bear Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Crocodile Form [Lukamina, Hawk Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Crocodile Form [Lukamina, Moon Druid]	T1	face	face	-	pending	not yet triaged
+Lukamina, Crocodile Form [Lukamina, Scorpion Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Crocodile Form [Lukamina, Wolf Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Hawk Form [Lukamina, Bear Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Hawk Form [Lukamina, Crocodile Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Hawk Form [Lukamina, Moon Druid]	T1	face	face	-	pending	not yet triaged
+Lukamina, Hawk Form [Lukamina, Scorpion Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Hawk Form [Lukamina, Wolf Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Moon Druid [Lukamina, Bear Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Moon Druid [Lukamina, Crocodile Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Moon Druid [Lukamina, Hawk Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Moon Druid [Lukamina, Scorpion Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Moon Druid [Lukamina, Wolf Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Scorpion Form	T1	keywords	mustblock	-	pending	not yet triaged
+Lukamina, Scorpion Form [Lukamina, Bear Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Scorpion Form [Lukamina, Crocodile Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Scorpion Form [Lukamina, Hawk Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Scorpion Form [Lukamina, Moon Druid]	T1	face	face	-	pending	not yet triaged
+Lukamina, Scorpion Form [Lukamina, Wolf Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Wolf Form [Lukamina, Bear Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Wolf Form [Lukamina, Crocodile Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Wolf Form [Lukamina, Hawk Form]	T1	face	face	-	pending	not yet triaged
+Lukamina, Wolf Form [Lukamina, Moon Druid]	T1	face	face	-	pending	not yet triaged
+Lukamina, Wolf Form [Lukamina, Scorpion Form]	T1	face	face	-	pending	not yet triaged
+Lulu, Curious Hollyphant [Lulu, Forgetful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Curious Hollyphant [Lulu, Helpful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Curious Hollyphant [Lulu, Inspiring Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Curious Hollyphant [Lulu, Vengeful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Curious Hollyphant [Lulu, Wild Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Forgetful Hollyphant [Lulu, Curious Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Forgetful Hollyphant [Lulu, Helpful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Forgetful Hollyphant [Lulu, Inspiring Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Forgetful Hollyphant [Lulu, Vengeful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Forgetful Hollyphant [Lulu, Wild Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Helpful Hollyphant [Lulu, Curious Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Helpful Hollyphant [Lulu, Forgetful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Helpful Hollyphant [Lulu, Inspiring Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Helpful Hollyphant [Lulu, Vengeful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Helpful Hollyphant [Lulu, Wild Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Inspiring Hollyphant [Lulu, Curious Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Inspiring Hollyphant [Lulu, Forgetful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Inspiring Hollyphant [Lulu, Helpful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Inspiring Hollyphant [Lulu, Vengeful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Inspiring Hollyphant [Lulu, Wild Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Vengeful Hollyphant [Lulu, Curious Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Vengeful Hollyphant [Lulu, Forgetful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Vengeful Hollyphant [Lulu, Helpful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Vengeful Hollyphant [Lulu, Inspiring Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Vengeful Hollyphant [Lulu, Wild Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Wild Hollyphant [Lulu, Curious Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Wild Hollyphant [Lulu, Forgetful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Wild Hollyphant [Lulu, Helpful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Wild Hollyphant [Lulu, Inspiring Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lulu, Wild Hollyphant [Lulu, Vengeful Hollyphant]	T1	face	face	-	pending	not yet triaged
+Lumen-Class Frigate	T1	keywords	-	flying lifelink station station	pending	not yet triaged
+Lumen-Class Frigate	T1	pt	3/5	-	pending	not yet triaged
+Lunar Rejection	T1	keywords	-	cleave	pending	not yet triaged
+Lurker in the Deep	T1	keywords	impending	impending:*	pending	not yet triaged
+Luxurious Locomotive	T1	keywords	crew:1	-	pending	not yet triaged
+Maarika, Brutal Gladiator [Maarika, Brutal Gladiator]	T1	face	-	face	pending	not yet triaged
+Maarika, Brutal Gladiator [Zangief, the Red Cyclone]	T1	face	face	-	pending	not yet triaged
+Madame Vastra	T1	keywords	mustblock	-	pending	not yet triaged
+Maelstrom Djinn	T1	keywords	-	flying	pending	not yet triaged
+Malik, Grim Manipulator [Malik, Grim Manipulator]	T1	face	-	face	pending	not yet triaged
+Malik, Grim Manipulator [Negan, the Cold-Blooded]	T1	face	face	-	pending	not yet triaged
+Mana Leech	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Marble Priest	T1	keywords	unmapped:kw:MustBeBlockedByAll	-	normalizer	unmapped token
+Master of Cruelties	T1	keywords	unmapped:kw:CARDNAME can only attack alone.	-	normalizer	unmapped token
+Mathise, Surge Channeler [Mathise, Surge Channeler]	T1	face	-	face	pending	not yet triaged
+Mathise, Surge Channeler [Simon, Wild Magic Sorcerer]	T1	face	face	-	pending	not yet triaged
+Maw of Kozilek	T1	keywords	devoid	-	pending	not yet triaged
+Mental Vapors	T1	keywords	cipher	-	pending	not yet triaged
+Midnight Recovery	T1	keywords	cipher	-	pending	not yet triaged
+Mila, Crafty Companion [Lukka, Wayward Bonder]	T1	mana_cost	{4}{R}{R}	{1}{W}{W}	pending	not yet triaged
+Militia Rallier	T1	keywords	cantattackalone	-	pending	not yet triaged
+Mind Raker	T1	keywords	devoid	-	pending	not yet triaged
+Mindmelter	T1	keywords	devoid	-	pending	not yet triaged
+Minion of the Wastes	T1	pt	*/*	0/0	pending	not yet triaged
+Minthara of the Absolute	T1	keywords	startingintensity	-	pending	not yet triaged
+Minthara, Merciless Soul	T1	keywords	-	ward:*	pending	not yet triaged
+Mishra, Claimed by Gix [Mishra, Lost to Phyrexia]	T1	face	face	-	pending	not yet triaged
+Mishra, Lost to Phyrexia [Mishra, Claimed by Gix]	T1	face	face	-	pending	not yet triaged
+Missy	T1	types	lord time	timelord	pending	not yet triaged
+Mist Intruder	T1	keywords	devoid	-	pending	not yet triaged
+Mistfire Weaver	T1	keywords	-	flying	pending	not yet triaged
+Mistform Ultimus	T1	keywords	-	changeling	pending	not yet triaged
+Mogg Flunkies	T1	keywords	cantattackorblockalone	-	pending	not yet triaged
+Mole Worms	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Molten Disaster	T1	keywords	kicker:{R}	-	pending	not yet triaged
+Molten Nursery	T1	keywords	devoid	-	pending	not yet triaged
+Molten Sentry	T1	pt	*/*	0/0	pending	not yet triaged
+Monastery Raid	T1	keywords	freerunning:{X}{R}	-	pending	not yet triaged
+Mondassian Colony Ship	T1	types	spacecraft	spaceship	pending	not yet triaged
+Monitor Monitor	T1	keywords	unmapped:kw:Once each turn, you may pay {1} to reroll one or more dice you rolled.	-	normalizer	unmapped token
+Monoist Gravliner	T1	keywords	-	deathtouch flying lifelink station	pending	not yet triaged
+Monoist Gravliner	T1	pt	2/3	-	pending	not yet triaged
+Murk Strider	T1	keywords	devoid	-	pending	not yet triaged
+Mutated Cultist	T1	keywords	devoid	-	pending	not yet triaged
+Mystic Veil	T1	keywords	mayflashsac	-	pending	not yet triaged
+Nacatl War-Pride	T1	keywords	unmapped:kw:CARDNAME must be blocked by exactly one creature if able.	-	normalizer	unmapped token
+Nameless Race	T1	pt	*/*	0/0	pending	not yet triaged
+Nath's Elite	T1	keywords	unmapped:kw:All creatures able to block CARDNAME do so.	-	normalizer	unmapped token
+Nature's Panoply	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Nature's Rhythm	T1	keywords	harmonize:{X}{G}{G}{G}{G}	-	pending	not yet triaged
+Nazgûl	T1	keywords	unmapped:kw:DeckLimit	-	normalizer	unmapped token
+Necromancy	T1	keywords	mayflashsac	-	pending	not yet triaged
+Nessian Boar	T1	keywords	unmapped:kw:All creatures able to block CARDNAME do so.	-	normalizer	unmapped token
+Nettle Drone	T1	keywords	devoid	-	pending	not yet triaged
+Nettling Host	T1	types	rat	horror	pending	not yet triaged
+Neverending Torment	T1	keywords	epic	-	pending	not yet triaged
+New New York	T1	types	earth new	newearth	pending	not yet triaged
+Night Shift of the Living Dead	T1	keywords	unmapped:kw:After you roll a die, you may pay 1 life. If you do, increase or decrease the result by 1. Do this only once each turn.	-	normalizer	unmapped token
+Niv-Mizzet, Guildpact	T1	keywords	hexprooffrom:multicolor	hexprooffrom:multicolored	pending	not yet triaged
+Niv-Mizzet, Supreme	T1	keywords	hexprooffrom:monocolor	hexprooffrom:monocolored	pending	not yet triaged
+Noble Quarry	T1	keywords	unmapped:kw:All creatures able to block CARDNAME do so.	-	normalizer	unmapped token
+Norn's Dominion	T1	types	new phyrexia	newphyrexia	pending	not yet triaged
+Norn's Seedcore	T1	types	new phyrexia	newphyrexia	pending	not yet triaged
+Nyxborn Hydra	T1	keywords	bestow:{X}{G}{G}	-	pending	not yet triaged
+Ob Nixilis, the Adversary	T1	keywords	casualty:*	-	pending	not yet triaged
+Oblivion Strike	T1	keywords	devoid	-	pending	not yet triaged
+Ochran Assassin	T1	keywords	unmapped:kw:All creatures able to block CARDNAME do so.	-	normalizer	unmapped token
+Ogre Enforcer	T1	keywords	unmapped:kw:CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.	-	normalizer	unmapped token
+Okk	T1	keywords	unmapped:kw:CARDNAME can't attack unless a creature with greater power also attacks. unmapped:kw:CARDNAME can't block unless a creature with greater power also blocks.	-	normalizer	unmapped token
+Old Man of the Sea	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Ood Sphere	T1	types	horsehead nebula	horseheadnebula	pending	not yet triaged
+Open Communications	T1	keywords	unmapped:kw:Beam me up	-	normalizer	unmapped token
+Oracle of Dust	T1	keywords	devoid	-	pending	not yet triaged
+Orcish Conscripts	T1	keywords	unmapped:kw:CARDNAME can't attack unless at least two other creatures attack. unmapped:kw:CARDNAME can't block unless at least two other creatures block.	-	normalizer	unmapped token
+Oscorp Industries	T1	keywords	mayhem:*	mayhem	pending	not yet triaged
+Othelm, Sigardian Outcast [Mike, the Dungeon Master]	T1	face	face	-	pending	not yet triaged
+Othelm, Sigardian Outcast [Othelm, Sigardian Outcast]	T1	face	-	face	pending	not yet triaged
+Outfitted Jouster	T1	types	-	human	pending	not yet triaged
+Overlord of the Balemurk	T1	keywords	impending	impending:*	pending	not yet triaged
+Overlord of the Boilerbilges	T1	keywords	impending	impending:*	pending	not yet triaged
+Overlord of the Floodpits	T1	keywords	impending	impending:*	pending	not yet triaged
+Overlord of the Hauntwoods	T1	keywords	impending	impending:*	pending	not yet triaged
+Overlord of the Mistmoors	T1	keywords	impending	impending:*	pending	not yet triaged
+Pallimud	T1	pt	*/3	0/3	pending	not yet triaged
+Panglacial Wurm	T1	keywords	unmapped:kw:While you're searching your library, you may cast CARDNAME from your library.	-	normalizer	unmapped token
+Paranoid Delusions	T1	keywords	cipher	-	pending	not yet triaged
+Parapet	T1	keywords	mayflashsac	-	pending	not yet triaged
+Parasitic Grasp	T1	keywords	-	cleave	pending	not yet triaged
+Path of Annihilation	T1	keywords	devoid	-	pending	not yet triaged
+Path of Peril	T1	keywords	-	cleave	pending	not yet triaged
+Pearlspear Courier	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Pestilent Cauldron	T1	mana_cost	{2}{B}	{3}{G}{G}	pending	not yet triaged
+Pestilent Cauldron [Restorative Burst]	T1	mana_cost	{3}{G}{G}	{2}{B}	pending	not yet triaged
+Petrifying Meddler	T1	keywords	devoid	-	pending	not yet triaged
+Phalanx Formation	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Phyrexian Gremlins	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Pick-a-Beeble	T1	keywords	unmapped:kw:Prize	-	normalizer	unmapped token
+Pinnacle Kill-Ship	T1	keywords	-	flying station	pending	not yet triaged
+Pinnacle Kill-Ship	T1	pt	7/7	-	pending	not yet triaged
+Polymorphous Rush	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Pools of Becoming	T1	types	bolass meditation realm	bolassmeditationrealm	pending	not yet triaged
+Preacher	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Pride of Conquerors	T1	keywords	ascend	-	pending	not yet triaged
+Primal Clay	T1	pt	*/*	0/0	pending	not yet triaged
+Primal Plasma	T1	pt	*/*	0/0	pending	not yet triaged
+Prized Unicorn	T1	keywords	unmapped:kw:All creatures able to block CARDNAME do so.	-	normalizer	unmapped token
+Processor Assault	T1	keywords	devoid	-	pending	not yet triaged
+Profit [Loss]	T1	keywords	-	fuse	pending	not yet triaged
+Propagator Drone	T1	keywords	devoid	-	pending	not yet triaged
+Prophet of Distortion	T1	keywords	devoid	-	pending	not yet triaged
+Protect [Serve]	T1	keywords	-	fuse	pending	not yet triaged
+Quantum Reduction	T1	keywords	teamwork	-	pending	not yet triaged
+Quickbeast Amulet	T1	keywords	startingintensity	-	pending	not yet triaged
+Raging Kronch	T1	keywords	cantattackalone	-	pending	not yet triaged
+Ragnarok, Divine Deliverance [Vanille, Cheerful l'Cie]	T1	face	face	-	pending	not yet triaged
+Rampaging War Mammoth	T1	keywords	cycling:{X}{2}{R}	-	pending	not yet triaged
+Raphael, Ninja Destroyer	T1	keywords	mustblock	-	pending	not yet triaged
+Rasaad, Dragon Monk [Rasaad, Monk of Selûne]	T1	face	face	-	pending	not yet triaged
+Rasaad, Dragon Monk [Rasaad, Radiant Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Dragon Monk [Rasaad, Shadow Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Dragon Monk [Rasaad, Sylvan Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Dragon Monk [Rasaad, Warrior Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Monk of Selûne [Rasaad, Dragon Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Monk of Selûne [Rasaad, Radiant Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Monk of Selûne [Rasaad, Shadow Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Monk of Selûne [Rasaad, Sylvan Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Monk of Selûne [Rasaad, Warrior Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Radiant Monk [Rasaad, Dragon Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Radiant Monk [Rasaad, Monk of Selûne]	T1	face	face	-	pending	not yet triaged
+Rasaad, Radiant Monk [Rasaad, Shadow Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Radiant Monk [Rasaad, Sylvan Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Radiant Monk [Rasaad, Warrior Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Shadow Monk [Rasaad, Dragon Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Shadow Monk [Rasaad, Monk of Selûne]	T1	face	face	-	pending	not yet triaged
+Rasaad, Shadow Monk [Rasaad, Radiant Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Shadow Monk [Rasaad, Sylvan Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Shadow Monk [Rasaad, Warrior Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Sylvan Monk [Rasaad, Dragon Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Sylvan Monk [Rasaad, Monk of Selûne]	T1	face	face	-	pending	not yet triaged
+Rasaad, Sylvan Monk [Rasaad, Radiant Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Sylvan Monk [Rasaad, Shadow Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Sylvan Monk [Rasaad, Warrior Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Warrior Monk [Rasaad, Dragon Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Warrior Monk [Rasaad, Monk of Selûne]	T1	face	face	-	pending	not yet triaged
+Rasaad, Warrior Monk [Rasaad, Radiant Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Warrior Monk [Rasaad, Shadow Monk]	T1	face	face	-	pending	not yet triaged
+Rasaad, Warrior Monk [Rasaad, Sylvan Monk]	T1	face	face	-	pending	not yet triaged
+Rashel, Fist of Torm [Rashel, Fist of Torm]	T1	face	-	face	pending	not yet triaged
+Rashel, Fist of Torm [Xenk, Paladin Unbroken]	T1	face	face	-	pending	not yet triaged
+Rassilon, the War President	T1	types	lord time	timelord	pending	not yet triaged
+Ratonhnhaké꞉ton [Ratonhnhaké:ton]	T1	face	face	-	pending	not yet triaged
+Ratonhnhaké꞉ton [Ratonhnhaké꞉ton]	T1	face	-	face	pending	not yet triaged
+Ready [Willing]	T1	keywords	-	fuse	pending	not yet triaged
+Reality Hemorrhage	T1	keywords	devoid	-	pending	not yet triaged
+Reaver Drone	T1	keywords	devoid	-	pending	not yet triaged
+Redcap Heelslasher	T1	keywords	-	firststrike	pending	not yet triaged
+Relic Ward	T1	keywords	mayflashsac	-	pending	not yet triaged
+Rescue Skiff	T1	keywords	-	flying station	pending	not yet triaged
+Rescue Skiff	T1	pt	5/6	-	pending	not yet triaged
+Restoration Seminar	T1	keywords	paradigm	-	pending	not yet triaged
+River Song	T1	types	lord time	timelord	pending	not yet triaged
+Riveteers Decoy	T1	keywords	mustblock	-	pending	not yet triaged
+Romana II	T1	types	lord time	timelord	pending	not yet triaged
+Rouse the Mob	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Rubinia Soulsinger	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Ruin in Their Wake	T1	keywords	devoid	-	pending	not yet triaged
+Ruination Guide	T1	keywords	devoid	-	pending	not yet triaged
+Rust Tick	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Saiba Cryptomancer	T1	keywords	-	hexproof	pending	not yet triaged
+Salvage Drone	T1	keywords	devoid	-	pending	not yet triaged
+Sanctum of Serra	T1	types	realm serras	serrasrealm	pending	not yet triaged
+Sand Silos	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Sand Squid	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Sarevok the Usurper [Sarevok, Deadly Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok the Usurper [Sarevok, Deceitful Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok the Usurper [Sarevok, Divine Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok the Usurper [Sarevok, Ferocious Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok the Usurper [Sarevok, Mighty Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Deadly Usurper [Sarevok the Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Deadly Usurper [Sarevok, Deceitful Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Deadly Usurper [Sarevok, Divine Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Deadly Usurper [Sarevok, Ferocious Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Deadly Usurper [Sarevok, Mighty Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Deceitful Usurper [Sarevok the Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Deceitful Usurper [Sarevok, Deadly Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Deceitful Usurper [Sarevok, Divine Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Deceitful Usurper [Sarevok, Ferocious Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Deceitful Usurper [Sarevok, Mighty Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Divine Usurper [Sarevok the Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Divine Usurper [Sarevok, Deadly Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Divine Usurper [Sarevok, Deceitful Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Divine Usurper [Sarevok, Ferocious Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Divine Usurper [Sarevok, Mighty Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Ferocious Usurper [Sarevok the Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Ferocious Usurper [Sarevok, Deadly Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Ferocious Usurper [Sarevok, Deceitful Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Ferocious Usurper [Sarevok, Divine Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Ferocious Usurper [Sarevok, Mighty Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Mighty Usurper [Sarevok the Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Mighty Usurper [Sarevok, Deadly Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Mighty Usurper [Sarevok, Deceitful Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Mighty Usurper [Sarevok, Divine Usurper]	T1	face	face	-	pending	not yet triaged
+Sarevok, Mighty Usurper [Sarevok, Ferocious Usurper]	T1	face	face	-	pending	not yet triaged
+Scarred Puma	T1	keywords	unmapped:kw:CARDNAME can't attack unless a black or green creature also attacks.	-	normalizer	unmapped token
+Scion Summoner	T1	keywords	devoid	-	pending	not yet triaged
+Seasinger	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Secrets of the Golden City	T1	keywords	ascend	-	pending	not yet triaged
+Serpent-Blade Assailant	T1	keywords	-	deathtouch	pending	not yet triaged
+Serpentine Spike	T1	keywords	devoid	-	pending	not yet triaged
+Setessan Tactics	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Seven Dwarves	T1	keywords	unmapped:kw:DeckLimit	-	normalizer	unmapped token
+Sewer Nemesis	T1	pt	*/*	0/0	pending	not yet triaged
+Shadow Slice	T1	keywords	cipher	-	pending	not yet triaged
+Shadowheart, Cleric of Graves [Shadowheart, Cleric of Order]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Graves [Shadowheart, Cleric of Trickery]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Graves [Shadowheart, Cleric of Twilight]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Graves [Shadowheart, Cleric of War]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Graves [Shadowheart, Sharran Cleric]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Order [Shadowheart, Cleric of Graves]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Order [Shadowheart, Cleric of Trickery]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Order [Shadowheart, Cleric of Twilight]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Order [Shadowheart, Cleric of War]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Order [Shadowheart, Sharran Cleric]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Trickery [Shadowheart, Cleric of Graves]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Trickery [Shadowheart, Cleric of Order]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Trickery [Shadowheart, Cleric of Twilight]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Trickery [Shadowheart, Cleric of War]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Trickery [Shadowheart, Sharran Cleric]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Twilight [Shadowheart, Cleric of Graves]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Twilight [Shadowheart, Cleric of Order]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Twilight [Shadowheart, Cleric of Trickery]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Twilight [Shadowheart, Cleric of War]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of Twilight [Shadowheart, Sharran Cleric]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of War [Shadowheart, Cleric of Graves]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of War [Shadowheart, Cleric of Order]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of War [Shadowheart, Cleric of Trickery]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of War [Shadowheart, Cleric of Twilight]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Cleric of War [Shadowheart, Sharran Cleric]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Sharran Cleric [Shadowheart, Cleric of Graves]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Sharran Cleric [Shadowheart, Cleric of Order]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Sharran Cleric [Shadowheart, Cleric of Trickery]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Sharran Cleric [Shadowheart, Cleric of Twilight]	T1	face	face	-	pending	not yet triaged
+Shadowheart, Sharran Cleric [Shadowheart, Cleric of War]	T1	face	face	-	pending	not yet triaged
+Shapeshifter	T1	pt	*/*	0/7	pending	not yet triaged
+Shark Typhoon	T1	keywords	cycling:{X}{1}{U}	-	pending	not yet triaged
+Shieldhide Dragon	T1	keywords	-	flying lifelink	pending	not yet triaged
+Shinen of Life's Roar	T1	keywords	unmapped:kw:All creatures able to block CARDNAME do so.	-	normalizer	unmapped token
+Sifter of Skulls	T1	keywords	devoid	-	pending	not yet triaged
+Sightless Brawler	T1	keywords	cantattackalone	-	pending	not yet triaged
+Sigiled Sentinel	T1	keywords	-	vigilance	pending	not yet triaged
+Silence the Believers	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Silent Skimmer	T1	keywords	devoid	-	pending	not yet triaged
+Sire of Stagnation	T1	keywords	devoid	-	pending	not yet triaged
+Skanos, Black Dragon Vassal [Skanos, Blue Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Black Dragon Vassal [Skanos, Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Black Dragon Vassal [Skanos, Green Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Black Dragon Vassal [Skanos, Red Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Black Dragon Vassal [Skanos, White Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Blue Dragon Vassal [Skanos, Black Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Blue Dragon Vassal [Skanos, Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Blue Dragon Vassal [Skanos, Green Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Blue Dragon Vassal [Skanos, Red Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Blue Dragon Vassal [Skanos, White Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Dragon Vassal [Skanos, Black Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Dragon Vassal [Skanos, Blue Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Dragon Vassal [Skanos, Green Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Dragon Vassal [Skanos, Red Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Dragon Vassal [Skanos, White Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Green Dragon Vassal [Skanos, Black Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Green Dragon Vassal [Skanos, Blue Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Green Dragon Vassal [Skanos, Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Green Dragon Vassal [Skanos, Red Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Green Dragon Vassal [Skanos, White Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Red Dragon Vassal [Skanos, Black Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Red Dragon Vassal [Skanos, Blue Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Red Dragon Vassal [Skanos, Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Red Dragon Vassal [Skanos, Green Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, Red Dragon Vassal [Skanos, White Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, White Dragon Vassal [Skanos, Black Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, White Dragon Vassal [Skanos, Blue Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, White Dragon Vassal [Skanos, Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, White Dragon Vassal [Skanos, Green Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skanos, White Dragon Vassal [Skanos, Red Dragon Vassal]	T1	face	face	-	pending	not yet triaged
+Skittering Precursor	T1	keywords	devoid	-	pending	not yet triaged
+Skitterskin	T1	keywords	devoid	-	pending	not yet triaged
+Sky Scourer	T1	keywords	devoid	-	pending	not yet triaged
+Skyclave Relic	T1	keywords	-	indestructible	pending	not yet triaged
+Skyshroud War Beast	T1	pt	*/*	0/0	pending	not yet triaged
+Slaughter Drone	T1	keywords	devoid	-	pending	not yet triaged
+Sledge-Class Seedship	T1	keywords	-	flying station	pending	not yet triaged
+Sledge-Class Seedship	T1	pt	4/5	-	pending	not yet triaged
+Slip Through Space	T1	keywords	devoid	-	pending	not yet triaged
+Sludge Crawler	T1	keywords	devoid	-	pending	not yet triaged
+Smothering Abomination	T1	keywords	devoid	-	pending	not yet triaged
+Snapping Voidcraw	T1	keywords	devoid	-	pending	not yet triaged
+Soar	T1	keywords	mayflashsac	-	pending	not yet triaged
+Solidarity of Heroes	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+Sophina, Spearsage Deserter [Chief Jim Hopper]	T1	face	face	-	pending	not yet triaged
+Sophina, Spearsage Deserter [Sophina, Spearsage Deserter]	T1	face	-	face	pending	not yet triaged
+Sovereign's Realm	T1	keywords	unmapped:kw:Your deck can't have basic land cards. unmapped:kw:Your starting hand size is five.	-	normalizer	unmapped token
+Sowing Mycospawn	T1	keywords	devoid	-	pending	not yet triaged
+Space Beleren	T1	keywords	spacesculptor	-	pending	not yet triaged
+Spawn-Gang Commander	T1	keywords	devoid	-	pending	not yet triaged
+Specimen Freighter	T1	keywords	-	flying station	pending	not yet triaged
+Specimen Freighter	T1	pt	4/7	-	pending	not yet triaged
+Spectrox Mines	T1	types	androzani minor	androzaniminor	pending	not yet triaged
+Spell Shrivel	T1	keywords	devoid	-	pending	not yet triaged
+Spellweaver Volute	T1	keywords	enchant:permanent	-	pending	not yet triaged
+Sphinx of the Guildpact	T1	keywords	hexprooffrom:monocolor	hexprooffrom:monocolored	pending	not yet triaged
+Spider Climb	T1	keywords	mayflashsac	-	pending	not yet triaged
+Spirit Shield	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Sproutwatch Dryad	T1	pt	2/3	3/3	pending	not yet triaged
+Squadron Carrier	T1	keywords	-	station	pending	not yet triaged
+Squadron Carrier	T1	pt	4/4	-	pending	not yet triaged
+Stalking Drone	T1	keywords	devoid	-	pending	not yet triaged
+Starnheim Unleashed	T1	keywords	foretell:{X}{X}{W}	-	pending	not yet triaged
+Stolen Identity	T1	keywords	cipher	-	pending	not yet triaged
+Stormcage Containment Facility	T1	types	planet unknown	unknownplanet	pending	not yet triaged
+Stormwing Dragon	T1	keywords	-	firststrike flying	pending	not yet triaged
+Stratus Dancer	T1	keywords	-	flying	pending	not yet triaged
+Susan Foreman	T1	types	lord time	timelord	pending	not yet triaged
+Susur Secundi, Void Altar	T1	keywords	-	station	pending	not yet triaged
+Susurian Dirgecraft	T1	keywords	-	flying station	pending	not yet triaged
+Susurian Dirgecraft	T1	pt	4/3	-	pending	not yet triaged
+Swarm Surge	T1	keywords	devoid	-	pending	not yet triaged
+Synthesizer Labship	T1	keywords	-	flying station station vigilance	pending	not yet triaged
+Synthesizer Labship	T1	pt	4/4	-	pending	not yet triaged
+Tadeas, Juniper Ascendant [Dhalsim, Pliable Pacifist]	T1	face	face	-	pending	not yet triaged
+Tadeas, Juniper Ascendant [Tadeas, Juniper Ascendant]	T1	face	-	face	pending	not yet triaged
+Talruum Piper	T1	keywords	unmapped:kw:MustBeBlockedByAll	-	normalizer	unmapped token
+Tangleclaw Werewolf [Fibrous Entangler]	T1	keywords	mustblock	-	pending	not yet triaged
+Taunting Elf	T1	keywords	unmapped:kw:All creatures able to block CARDNAME do so.	-	normalizer	unmapped token
+Tawnos's Coffin	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Tawnos's Weaponry	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Territory Culler	T1	keywords	devoid	-	pending	not yet triaged
+Teysa of the Ghost Council	T1	keywords	startingintensity	-	pending	not yet triaged
+Thalakos Dreamsower	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+The Blackstaff of Waterdeep	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+The Cheetah Planet	T1	types	mutters outside spiral	outsidemuttersspiral	pending	not yet triaged
+The Dining Car	T1	types	spacecraft	spaceship	pending	not yet triaged
+The Eighth Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Eleventh Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Eternity Elevator	T1	keywords	-	station	pending	not yet triaged
+The Fifteenth Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Fifth Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The First Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Foretold Soldier	T1	keywords	mustblock	-	pending	not yet triaged
+The Fourteenth Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Fourth Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Fugitive Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Howling Abomination [Blanka, Ferocious Friend]	T1	face	face	-	pending	not yet triaged
+The Howling Abomination [The Howling Abomination]	T1	face	-	face	pending	not yet triaged
+The Lux Foundation Library	T1	types	library the	thelibrary	pending	not yet triaged
+The Master, Formed Anew	T1	types	lord time	timelord	pending	not yet triaged
+The Master, Gallifrey's End	T1	types	lord time	timelord	pending	not yet triaged
+The Master, Mesmerist	T1	types	lord time	timelord	pending	not yet triaged
+The Master, Multiplied	T1	types	lord time	timelord	pending	not yet triaged
+The Ninth Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Pandorica	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+The Pit	T1	types	abyss the	theabyss	pending	not yet triaged
+The Rani	T1	types	lord time	timelord	pending	not yet triaged
+The Second Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Seriema	T1	keywords	-	flying station	pending	not yet triaged
+The Seriema	T1	pt	5/5	-	pending	not yet triaged
+The Seventh Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Sixth Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Tenth Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Third Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Thirteenth Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Twelfth Doctor	T1	types	lord time	timelord	pending	not yet triaged
+The Valeyard	T1	types	lord time	timelord	pending	not yet triaged
+The War Doctor	T1	types	lord time	timelord	pending	not yet triaged
+Thief of Existence	T1	keywords	devoid	-	pending	not yet triaged
+Thought Harvester	T1	keywords	devoid	-	pending	not yet triaged
+Thousand Winds	T1	keywords	-	flying	pending	not yet triaged
+Thran Weaponry	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Thrasta, Tempest's Roar	T1	keywords	unmapped:kw:Trample	-	normalizer	unmapped token
+Tide Drifter	T1	keywords	devoid	-	pending	not yet triaged
+Titania, Gaea Incarnate [Titania, Voice of Gaea]	T1	face	face	-	pending	not yet triaged
+Titania, Voice of Gaea [Titania, Gaea Incarnate]	T1	face	face	-	pending	not yet triaged
+Titans' Vanguard	T1	keywords	devoid	-	pending	not yet triaged
+Toil [Trouble]	T1	keywords	-	fuse	pending	not yet triaged
+Torrent Sculptor [Flamethrower Sonata]	T1	mana_cost	{1}{R}	{2}{U}{U}	pending	not yet triaged
+Touch of the Void	T1	keywords	devoid	-	pending	not yet triaged
+Trait Doctoring	T1	keywords	cipher	-	pending	not yet triaged
+Transgress the Mind	T1	keywords	devoid	-	pending	not yet triaged
+Treeshaker Chimera	T1	keywords	unmapped:kw:All creatures able to block CARDNAME do so.	-	normalizer	unmapped token
+Trusty Companion	T1	keywords	cantattackalone	-	pending	not yet triaged
+Turn Against	T1	keywords	devoid	-	pending	not yet triaged
+Turn [Burn]	T1	keywords	-	fuse	pending	not yet triaged
+Twinflame	T1	keywords	unmapped:kw:Strive	-	normalizer	unmapped token
+U.S.S. Enterprise-D, Galaxy-Class	T1	keywords	-	flying station vigilance	pending	not yet triaged
+U.S.S. Enterprise-D, Galaxy-Class	T1	pt	4/5	-	pending	not yet triaged
+Ugin's Binding	T1	keywords	devoid	-	pending	not yet triaged
+Ulalek, Fused Atrocity	T1	keywords	devoid	-	pending	not yet triaged
+Ulamog's Nullifier	T1	keywords	devoid	-	pending	not yet triaged
+Ulamog's Reclaimer	T1	keywords	devoid	-	pending	not yet triaged
+Undercity Plague	T1	keywords	cipher	-	pending	not yet triaged
+Undying Flames	T1	keywords	epic	-	pending	not yet triaged
+Unfathomable Truths	T1	keywords	devoid	-	pending	not yet triaged
+Unnatural Aggression	T1	keywords	devoid	-	pending	not yet triaged
+Unnatural Endurance	T1	keywords	devoid	-	pending	not yet triaged
+Urza, Chief Artificer	T1	keywords	affinity:creatureartifactartifactcreature	affinity:artifact|creature	pending	not yet triaged
+Urza, Lord Protector [Urza, Planeswalker]	T1	face	face	-	pending	not yet triaged
+Urza, Planeswalker [Urza, Lord Protector]	T1	face	face	-	pending	not yet triaged
+Uthros Research Craft	T1	keywords	-	flying station station	pending	not yet triaged
+Uthros Research Craft	T1	pt	0/8	-	pending	not yet triaged
+Uthros Scanship	T1	keywords	-	flying station	pending	not yet triaged
+Uthros Scanship	T1	pt	4/4	-	pending	not yet triaged
+Uthros, Titanic Godcore	T1	keywords	-	station	pending	not yet triaged
+Val, Marooned Surveyor	T1	pt	2/3	3/3	pending	not yet triaged
+Valki, God of Lies [Tibalt, Cosmic Impostor]	T1	mana_cost	{5}{B}{R}	{1}{B}	pending	not yet triaged
+Valor's Flagship	T1	keywords	cycling:{X}{2}{W}	-	pending	not yet triaged
+Vanille, Cheerful l'Cie [Ragnarok, Divine Deliverance]	T1	face	face	-	pending	not yet triaged
+Varchild's War-Riders	T1	keywords	-	cumulativeupkeep:*	pending	not yet triaged
+Vedalken Shackles	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Vedalken Squirrel-Whacker	T1	pt	*/*	0/0	pending	not yet triaged
+Vestige of Emrakul	T1	keywords	devoid	-	pending	not yet triaged
+Vhal, Eager Scholar [Vhal, Scholar of Creation]	T1	face	face	-	pending	not yet triaged
+Vhal, Eager Scholar [Vhal, Scholar of Elements]	T1	face	face	-	pending	not yet triaged
+Vhal, Eager Scholar [Vhal, Scholar of Mortality]	T1	face	face	-	pending	not yet triaged
+Vhal, Eager Scholar [Vhal, Scholar of Prophecy]	T1	face	face	-	pending	not yet triaged
+Vhal, Eager Scholar [Vhal, Scholar of Tactics]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Creation [Vhal, Eager Scholar]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Creation [Vhal, Scholar of Elements]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Creation [Vhal, Scholar of Mortality]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Creation [Vhal, Scholar of Prophecy]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Creation [Vhal, Scholar of Tactics]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Elements [Vhal, Eager Scholar]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Elements [Vhal, Scholar of Creation]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Elements [Vhal, Scholar of Mortality]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Elements [Vhal, Scholar of Prophecy]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Elements [Vhal, Scholar of Tactics]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Mortality [Vhal, Eager Scholar]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Mortality [Vhal, Scholar of Creation]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Mortality [Vhal, Scholar of Elements]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Mortality [Vhal, Scholar of Prophecy]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Mortality [Vhal, Scholar of Tactics]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Prophecy [Vhal, Eager Scholar]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Prophecy [Vhal, Scholar of Creation]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Prophecy [Vhal, Scholar of Elements]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Prophecy [Vhal, Scholar of Mortality]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Prophecy [Vhal, Scholar of Tactics]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Tactics [Vhal, Eager Scholar]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Tactics [Vhal, Scholar of Creation]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Tactics [Vhal, Scholar of Elements]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Tactics [Vhal, Scholar of Mortality]	T1	face	face	-	pending	not yet triaged
+Vhal, Scholar of Tactics [Vhal, Scholar of Prophecy]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Arcana [Viconia, Disciple of Blood]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Arcana [Viconia, Disciple of Rebirth]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Arcana [Viconia, Disciple of Strength]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Arcana [Viconia, Disciple of Violence]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Arcana [Viconia, Nightsinger's Disciple]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Blood [Viconia, Disciple of Arcana]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Blood [Viconia, Disciple of Rebirth]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Blood [Viconia, Disciple of Strength]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Blood [Viconia, Disciple of Violence]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Blood [Viconia, Nightsinger's Disciple]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Rebirth [Viconia, Disciple of Arcana]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Rebirth [Viconia, Disciple of Blood]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Rebirth [Viconia, Disciple of Strength]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Rebirth [Viconia, Disciple of Violence]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Rebirth [Viconia, Nightsinger's Disciple]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Strength [Viconia, Disciple of Arcana]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Strength [Viconia, Disciple of Blood]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Strength [Viconia, Disciple of Rebirth]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Strength [Viconia, Disciple of Violence]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Strength [Viconia, Nightsinger's Disciple]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Violence [Viconia, Disciple of Arcana]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Violence [Viconia, Disciple of Blood]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Violence [Viconia, Disciple of Rebirth]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Violence [Viconia, Disciple of Strength]	T1	face	face	-	pending	not yet triaged
+Viconia, Disciple of Violence [Viconia, Nightsinger's Disciple]	T1	face	face	-	pending	not yet triaged
+Viconia, Nightsinger's Disciple [Viconia, Disciple of Arcana]	T1	face	face	-	pending	not yet triaged
+Viconia, Nightsinger's Disciple [Viconia, Disciple of Blood]	T1	face	face	-	pending	not yet triaged
+Viconia, Nightsinger's Disciple [Viconia, Disciple of Rebirth]	T1	face	face	-	pending	not yet triaged
+Viconia, Nightsinger's Disciple [Viconia, Disciple of Strength]	T1	face	face	-	pending	not yet triaged
+Viconia, Nightsinger's Disciple [Viconia, Disciple of Violence]	T1	face	face	-	pending	not yet triaged
+Vigean Hydropon	T1	keywords	cantattackorblock	-	pending	not yet triaged
+Vikya, Scorching Stalwart [Ryu, World Warrior]	T1	face	face	-	pending	not yet triaged
+Vikya, Scorching Stalwart [Vikya, Scorching Stalwart]	T1	face	-	face	pending	not yet triaged
+Vile Aggregate	T1	keywords	devoid	-	pending	not yet triaged
+Vile Redeemer	T1	keywords	devoid	-	pending	not yet triaged
+Vinebred Brawler	T1	keywords	mustblock	-	pending	not yet triaged
+Viral Spawning	T1	keywords	-	flashback:{2}{G}	pending	not yet triaged
+Visions of Brutality	T1	keywords	devoid	-	pending	not yet triaged
+Void Attendant	T1	keywords	devoid	-	pending	not yet triaged
+Void Grafter	T1	keywords	devoid	-	pending	not yet triaged
+Void Shatter	T1	keywords	devoid	-	pending	not yet triaged
+Voidpouncer	T1	keywords	devoid	-	pending	not yet triaged
+Voidwalk	T1	keywords	cipher	-	pending	not yet triaged
+Volatile Chimera	T1	keywords	unmapped:kw:MayEffectFromOpeningDeck	-	normalizer	unmapped token
+Volatile Stormdrake	T1	keywords	hexprooffrom:triggered	-	pending	not yet triaged
+Volcano Hellion	T1	keywords	echo:{X}	-	pending	not yet triaged
+Vona's Hunger	T1	keywords	ascend	-	pending	not yet triaged
+Warbreak Trumpeter	T1	keywords	morph:{X}{X}{R}	-	pending	not yet triaged
+Ward of Lights	T1	keywords	mayflashsac	-	pending	not yet triaged
+Warmaker Gunship	T1	keywords	-	flying station	pending	not yet triaged
+Warmaker Gunship	T1	pt	4/3	-	pending	not yet triaged
+Wash Away	T1	keywords	-	cleave	pending	not yet triaged
+Wasteland Strangler	T1	keywords	devoid	-	pending	not yet triaged
+Wear [Tear]	T1	keywords	-	fuse	pending	not yet triaged
+Webstrike Elite	T1	keywords	cycling:{X}{G}{G}	-	pending	not yet triaged
+Wedgelight Rammer	T1	keywords	-	firststrike flying station	pending	not yet triaged
+Wedgelight Rammer	T1	pt	3/4	-	pending	not yet triaged
+Welcome to the Fold	T1	keywords	madness:{X}{U}{U}	-	pending	not yet triaged
+Wernog, Rider's Chaplain [Wernog, Rider's Chaplain]	T1	face	-	face	pending	not yet triaged
+Wernog, Rider's Chaplain [Will the Wise]	T1	face	face	-	pending	not yet triaged
+Whip Vine	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Whispering Madness	T1	keywords	cipher	-	pending	not yet triaged
+Willow Satyr	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Wilson, Ardent Bear [Wilson, Bear Comrade]	T1	face	face	-	pending	not yet triaged
+Wilson, Ardent Bear [Wilson, Fearsome Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Ardent Bear [Wilson, Majestic Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Ardent Bear [Wilson, Subtle Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Ardent Bear [Wilson, Urbane Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Bear Comrade [Wilson, Ardent Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Bear Comrade [Wilson, Fearsome Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Bear Comrade [Wilson, Majestic Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Bear Comrade [Wilson, Subtle Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Bear Comrade [Wilson, Urbane Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Fearsome Bear [Wilson, Ardent Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Fearsome Bear [Wilson, Bear Comrade]	T1	face	face	-	pending	not yet triaged
+Wilson, Fearsome Bear [Wilson, Majestic Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Fearsome Bear [Wilson, Subtle Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Fearsome Bear [Wilson, Urbane Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Majestic Bear [Wilson, Ardent Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Majestic Bear [Wilson, Bear Comrade]	T1	face	face	-	pending	not yet triaged
+Wilson, Majestic Bear [Wilson, Fearsome Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Majestic Bear [Wilson, Subtle Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Majestic Bear [Wilson, Urbane Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Subtle Bear	T1	pt	3/4	3/3	pending	not yet triaged
+Wilson, Subtle Bear [Wilson, Ardent Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Subtle Bear [Wilson, Bear Comrade]	T1	face	face	-	pending	not yet triaged
+Wilson, Subtle Bear [Wilson, Fearsome Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Subtle Bear [Wilson, Majestic Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Subtle Bear [Wilson, Urbane Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Urbane Bear [Wilson, Ardent Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Urbane Bear [Wilson, Bear Comrade]	T1	face	face	-	pending	not yet triaged
+Wilson, Urbane Bear [Wilson, Fearsome Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Urbane Bear [Wilson, Majestic Bear]	T1	face	face	-	pending	not yet triaged
+Wilson, Urbane Bear [Wilson, Subtle Bear]	T1	face	face	-	pending	not yet triaged
+Wingbeat Warrior	T1	keywords	-	flying	pending	not yet triaged
+Winged Portent	T1	keywords	-	cleave	pending	not yet triaged
+Witness the End	T1	keywords	devoid	-	pending	not yet triaged
+Wojek Bodyguard	T1	keywords	cantattackorblockalone	-	pending	not yet triaged
+World Breaker	T1	keywords	devoid	-	pending	not yet triaged
+Writ of Return	T1	keywords	cipher	-	pending	not yet triaged
+Writhing Chrysalis	T1	keywords	devoid	-	pending	not yet triaged
+Wumpus Aberration	T1	keywords	devoid	-	pending	not yet triaged
+Wurmwall Sweeper	T1	keywords	-	flying station	pending	not yet triaged
+Wurmwall Sweeper	T1	pt	2/2	-	pending	not yet triaged
+Wyll of the Blade Pact [Wyll of the Celestial Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Blade Pact [Wyll of the Elder Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Blade Pact [Wyll of the Fey Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Blade Pact [Wyll of the Fiend Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Blade Pact [Wyll, Pact-Bound Duelist]	T1	face	face	-	pending	not yet triaged
+Wyll of the Celestial Pact [Wyll of the Blade Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Celestial Pact [Wyll of the Elder Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Celestial Pact [Wyll of the Fey Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Celestial Pact [Wyll of the Fiend Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Celestial Pact [Wyll, Pact-Bound Duelist]	T1	face	face	-	pending	not yet triaged
+Wyll of the Elder Pact [Wyll of the Blade Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Elder Pact [Wyll of the Celestial Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Elder Pact [Wyll of the Fey Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Elder Pact [Wyll of the Fiend Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Elder Pact [Wyll, Pact-Bound Duelist]	T1	face	face	-	pending	not yet triaged
+Wyll of the Fey Pact [Wyll of the Blade Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Fey Pact [Wyll of the Celestial Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Fey Pact [Wyll of the Elder Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Fey Pact [Wyll of the Fiend Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Fey Pact [Wyll, Pact-Bound Duelist]	T1	face	face	-	pending	not yet triaged
+Wyll of the Fiend Pact [Wyll of the Blade Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Fiend Pact [Wyll of the Celestial Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Fiend Pact [Wyll of the Elder Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Fiend Pact [Wyll of the Fey Pact]	T1	face	face	-	pending	not yet triaged
+Wyll of the Fiend Pact [Wyll, Pact-Bound Duelist]	T1	face	face	-	pending	not yet triaged
+Wyll, Pact-Bound Duelist [Wyll of the Blade Pact]	T1	face	face	-	pending	not yet triaged
+Wyll, Pact-Bound Duelist [Wyll of the Celestial Pact]	T1	face	face	-	pending	not yet triaged
+Wyll, Pact-Bound Duelist [Wyll of the Elder Pact]	T1	face	face	-	pending	not yet triaged
+Wyll, Pact-Bound Duelist [Wyll of the Fey Pact]	T1	face	face	-	pending	not yet triaged
+Wyll, Pact-Bound Duelist [Wyll of the Fiend Pact]	T1	face	face	-	pending	not yet triaged
+Xenosquirrels	T1	keywords	unmapped:kw:After you roll a die, you may remove a +1/+1 counter from Xenosquirrels. If you do, increase or decrease the result by 1.	-	normalizer	unmapped token
+Yuriko, the Tiger's Shadow	T1	keywords	ninjutsu:{U}{B}	-	pending	not yet triaged
+Zelyon Sword	T1	keywords	unmapped:kw:You may choose not to untap CARDNAME during your untap step.	-	normalizer	unmapped token
+Zenith Festival	T1	keywords	harmonize:{X}{R}{R}	-	pending	not yet triaged
+Zethi, Arcane Blademaster [Chun-Li, Countless Kicks]	T1	face	face	-	pending	not yet triaged
+Zethi, Arcane Blademaster [Zethi, Arcane Blademaster]	T1	face	-	face	pending	not yet triaged
