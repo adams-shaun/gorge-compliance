@@ -725,6 +725,10 @@ func mtgishTarget(n node) string {
 		if strings.Contains(base, "OrExiledCard") {
 			cls = append(cls, clsExile)
 		}
+		if strings.Contains(base, "CardsInGraveyards") {
+			// "target creatures and/or creature cards in graveyards".
+			cls = append(cls, clsGraveyard)
+		}
 	}
 	if len(cls) == 0 {
 		return unmapped("Target." + v)

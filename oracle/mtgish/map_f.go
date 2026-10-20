@@ -346,8 +346,9 @@ var gorgePermanentTypeProps = map[string]string{
 // altZones picks the zones one ValidTgts$ alternative targets in when the
 // SA targets in several ("Permanent.Red,Card.inZoneStack+Red" with
 // TgtZone$ Battlefield,Stack): its inZone property; else the battlefield
-// for a permanent head ("Permanent", a type); else, for a bare "Card",
-// every zone listed ("" is the battlefield).
+// for a "Permanent" head; else every zone listed ("" is the battlefield):
+// "Creature" with TgtZone$ Battlefield,Graveyard is a creature or a
+// creature card in a graveyard.
 func altZones(alt string, zones []string) []string {
 	if len(zones) == 1 {
 		return zones
@@ -369,7 +370,7 @@ func altZones(alt string, zones []string) []string {
 		if z == "Battlefield" {
 			z = ""
 		}
-		if head != "Card" && z != "" {
+		if head == "Permanent" && z != "" {
 			continue
 		}
 		out = append(out, z)
@@ -400,6 +401,9 @@ func (idx TypeIndex) altTypes(alt string) (types []string, generic bool) {
 	for _, p := range strings.FieldsFunc(props, func(r rune) bool { return r == '+' || r == '.' }) {
 		if t, ok := gorgePermanentTypeProps[p]; ok {
 			types = append(types, t)
+		} else if p[0] >= 'A' && p[0] <= 'Z' && idx[typeWord(p)] != "" {
+			// A subtype property ("Permanent.Goblin", "Card.Wizard").
+			types = append(types, idx[typeWord(p)])
 		}
 	}
 	return types, generic
@@ -427,17 +431,19 @@ func stackTargetTypes(tt string) []string {
 }
 
 // anyTargetClasses folds a class list naming every kind "any target"
-// covers (creature, planeswalker, battle, player: CR 115.4) into "any"; a
-// script spells "any other target" out as that list.
+// covers (creature, planeswalker, battle, player: CR 115.4) into "any" (a
+// script spells "any other target" out as that list), and drops those
+// kinds next to "any", which already covers them.
 func anyTargetClasses(cs []string) []string {
 	need := map[string]bool{"creature": true, "planeswalker": true, "battle": true, clsPlayer: true}
-	n := 0
+	n, hasAny := 0, false
 	for _, c := range cs {
 		if need[c] {
 			n++
 		}
+		hasAny = hasAny || c == clsAny
 	}
-	if n < len(need) {
+	if n < len(need) && !hasAny {
 		return cs
 	}
 	out := []string{clsAny}
