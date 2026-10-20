@@ -109,6 +109,7 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 	if enter != nil {
 		g.ability(*enter)
 	}
+	mergeSpells(s, true)
 	return s
 }
 
@@ -302,12 +303,7 @@ func (g *gorgeNorm) keyword(k string) {
 		return
 	case gorgeBareKeywords[head]:
 		g.kw(keywordWord(head))
-		if head == "Visit" {
-			// An Attraction's visit ability, as mtgish's Visit rule.
-			e := &effects{}
-			g.chain(e, cards.ResolveSVar(g.svars(), param), 1)
-			g.ability(Ability{Kind: "triggered", Event: "visit", Targets: e.targets, Effects: e.effects})
-		}
+		g.keywordAbilities(head, param)
 		return
 	case gorgeCostKeywords[head]:
 		g.kw(keywordWord(head) + ":" + gorgeCost(param))
@@ -570,6 +566,11 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		}
 		if p["MayPlay"] != "" {
 			out = append(out, "mayplay")
+		}
+		if p["CantHaveKeyword"] != "" {
+			// "... and can't have or gain <keyword>": a rule beside the
+			// layer effect, as mtgish's CantGainAbility.
+			out = append(out, "rule:cantgainability")
 		}
 		if p["Goad"] == "True" {
 			out = append(out, "rule:isgoadedbyplayer")

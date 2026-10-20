@@ -81,10 +81,49 @@ func (g *gorgeNorm) gorgeStaticTrigger(t *cards.Trigger, enter **Ability) bool {
 }
 
 // selfBlocker reports an AttackerBlocked(ByCreature) trigger whose blocker
-// is this card: "whenever this blocks a creature", Forge's spelling of a
-// blocks trigger that names the blocked attacker.
+// is this card or the creature it is attached to: "whenever this (or
+// enchanted creature) blocks a creature", Forge's spelling of a blocks
+// trigger that names the blocked attacker.
 func selfBlocker(p map[string]string) bool {
-	return strings.HasPrefix(p["ValidBlocker"], "Card.Self") && !strings.HasPrefix(p["ValidCard"], "Card.Self")
+	return triggerSubject(p["ValidBlocker"]) && !triggerSubject(p["ValidCard"])
+}
+
+// triggerSubject: a Valid* filter naming the source itself or the object
+// it is attached to.
+func triggerSubject(v string) bool {
+	return strings.HasPrefix(v, "Card.Self") || strings.Contains(v, ".EnchantedBy") ||
+		strings.Contains(v, ".EquippedBy") || strings.Contains(v, ".AttachedBy")
+}
+
+// keywordAbilities emits the printed abilities a bare keyword line carries
+// in its parameter, as mtgish carries them beside the keyword: an
+// Attraction's visit ability (Visit:<SVar>), and haunt's "when the creature
+// this haunts dies" ability (Haunt:<SVar>; mtgish classes the creature
+// form, "when this enters or the creature it haunts dies", as dies too)
+// together with the haunt spell's own effect.
+func (g *gorgeNorm) keywordAbilities(head, param string) {
+	if param == "" {
+		return
+	}
+	switch head {
+	case "Visit":
+		e := &effects{}
+		g.chain(e, cards.ResolveSVar(g.svars(), param), 1)
+		g.ability(Ability{Kind: "triggered", Event: "visit", Targets: e.targets, Effects: e.effects})
+	case "Haunt":
+		a := cards.ResolveSVar(g.svars(), param)
+		if a == nil {
+			return
+		}
+		if !hasType(g.f, "Creature") {
+			s := &effects{}
+			g.chain(s, a, 0)
+			g.ability(Ability{Kind: "spell", Targets: s.targets, Effects: s.effects})
+		}
+		e := &effects{}
+		g.chain(e, a, 1)
+		g.ability(Ability{Kind: "triggered", Event: "dies", Targets: e.targets, Effects: e.effects})
+	}
 }
 
 // damagesPlayer reports a damage trigger's ValidTarget naming a player
@@ -154,11 +193,12 @@ func splitRuleStatics(eff []string) [][]string {
 }
 
 // selfGrantAbilities expands a Continuous static that grants its own card
-// activated abilities ("as long as ..., this has '{T}: ...'": max speed,
-// station, level up) into those abilities, the way the printed card and
-// mtgish (an If/MaxSpeed/Level wrapper around the Activated rule) carry
-// them. It returns the static's remaining effect tokens, one "grant:ability"
-// fewer per expanded grant.
+// activated, triggered or replacement abilities ("as long as ..., this has
+// '{T}: ...'": max speed, station, level up) into those abilities, the way
+// the printed card and mtgish (a MaxSpeed/Station/Level wrapper around the
+// rule itself) carry them. It returns the static's remaining effect tokens,
+// one "grant:ability" fewer per expanded grant. A granted static ability
+// stays a grant in the band's static, where mtgish folds it too.
 func (g *gorgeNorm) selfGrantAbilities(p map[string]string, eff []string) []string {
 	if p["Affected"] != "Card.Self" && !strings.HasPrefix(p["Affected"], "Card.Self+") {
 		return eff
@@ -171,9 +211,6 @@ func (g *gorgeNorm) selfGrantAbilities(p map[string]string, eff []string) []stri
 	if p["Condition"] != "MaxSpeed" && !strings.Contains(gate, "_LEVEL") && !strings.Contains(gate, "_CHARGE") {
 		return eff
 	}
-	if p["AffectedZone"] != "" && p["AffectedZone"] != "Battlefield" {
-		return eff
-	}
 	n := 0
 	for _, name := range strings.Split(p["AddAbility"], "&") {
 		a := cards.ResolveSVar(g.svars(), strings.TrimSpace(name))
@@ -184,6 +221,24 @@ func (g *gorgeNorm) selfGrantAbilities(p map[string]string, eff []string) []stri
 		g.chain(e, a, 1)
 		g.ability(Ability{Kind: "activated", Targets: e.targets, Effects: e.effects})
 		n++
+	}
+	for _, name := range strings.Split(p["AddTrigger"], "&") {
+		tp := svarParams(g.svars()[strings.TrimSpace(name)])
+		if tp["Mode"] == "" {
+			continue
+		}
+		g.trigger(&cards.Trigger{Mode: tp["Mode"], Params: tp})
+		n++
+	}
+	for _, k := range []string{"AddReplacementEffects", "AddReplacementEffect"} {
+		for _, name := range strings.Split(p[k], "&") {
+			rp := svarParams(g.svars()[strings.TrimSpace(name)])
+			if rp["Event"] == "" {
+				continue
+			}
+			g.repl(&cards.Repl{Event: rp["Event"], Params: rp})
+			n++
+		}
 	}
 	if n == 0 {
 		return eff
@@ -279,9 +334,10 @@ func mergeDamageOr(evs []string) []string {
 
 // mergeSelfOrOther drops the second of two trigger rules mtgish writes for
 // one printed "whenever this or another <type> enters/leaves/is turned face
-// up" ability: same rule and event variant, identical actions, one event
-// on the permanent itself and the other on Other(...) permanents. Forge
-// writes one trigger (ValidCard$ Card.Self,<Type>.Other).
+// up" (or "this or enchanted creature attacks") ability: same rule and
+// event variant, identical actions, one event on the permanent itself and
+// the other on Other(...) permanents or the host. Forge writes one trigger
+// (ValidCard$ Card.Self,<Type>.Other / Card.Self,Creature.EnchantedBy).
 func mergeSelfOrOther(rs []any) []any {
 	var drop map[int]bool
 	for i, a := range rs {
@@ -293,7 +349,8 @@ func mergeSelfOrOther(rs []any) []any {
 				continue
 			}
 			aa, bb := argsOf(a), argsOf(b)
-			if len(aa) < 2 || len(aa) != len(bb) || variantOf(aa[0]) != variantOf(bb[0]) || !otherEvent(bb[0]) {
+			// "... enters" and "... enters under your control" are one event.
+			if len(aa) < 2 || len(aa) != len(bb) || !strings.HasPrefix(variantOf(bb[0]), variantOf(aa[0])) || !otherEvent(bb[0]) && !hostEvent(bb[0]) {
 				continue
 			}
 			if !reflect.DeepEqual(aa[len(aa)-1], bb[len(bb)-1]) || !reflect.DeepEqual(aa[1:len(aa)-1], bb[1:len(bb)-1]) {
@@ -315,6 +372,14 @@ func mergeSelfOrOther(rs []any) []any {
 		}
 	}
 	return out
+}
+
+// hostEvent: the event's subject is SinglePermanent(HostPermanent()), the
+// permanent an Aura or Equipment is attached to ("whenever this creature
+// or enchanted creature attacks", a bestow card).
+func hostEvent(ev any) bool {
+	sub := firstArg(ev)
+	return variantOf(sub) == "SinglePermanent" && variantOf(rawArgs(sub)) == "HostPermanent"
 }
 
 // selfEvent: the event's subject is SinglePermanent(ThisPermanent()).
@@ -403,4 +468,88 @@ func (m *mtgishNorm) enterReplacement(eff []string) {
 	}
 	m.ability(Ability{Kind: "replacement", Effects: eff})
 	m.enter = len(m.s.Abilities)
+}
+
+func hasType(f *cards.Face, t string) bool {
+	for _, x := range f.Types {
+		if x == t {
+			return true
+		}
+	}
+	return false
+}
+
+// svarParams parses a granted trigger or replacement SVar's
+// "Key$ Value | Key$ Value" line into its parameters (nil for anything
+// else).
+func svarParams(line string) map[string]string {
+	if !strings.Contains(line, "$") {
+		return nil
+	}
+	p := map[string]string{}
+	for _, part := range strings.Split(line, "|") {
+		k, v, ok := strings.Cut(strings.TrimSpace(part), "$")
+		if !ok {
+			continue
+		}
+		p[strings.TrimSpace(k)] = strings.TrimSpace(v)
+	}
+	return p
+}
+
+// mergeSpells folds a face's spell abilities into the one spell ability a
+// printed instant or sorcery has. Forge writes an alternative way of
+// casting (cleave, a second mode set) as a second SP, whose effects are
+// alternatives (alt=true: branch-max merge); mtgish writes a trailing
+// sentence ("If ..., ...") as a second SpellActions rule, whose effects
+// add up (alt=false).
+func mergeSpells(s *Summary, alt bool) {
+	first := -1
+	var subs []*effects
+	var out []Ability
+	for _, a := range s.Abilities {
+		if a.Kind != "spell" {
+			out = append(out, a)
+			continue
+		}
+		subs = append(subs, &effects{targets: a.Targets, effects: a.Effects})
+		if first < 0 {
+			first = len(out)
+			out = append(out, a)
+		}
+	}
+	if len(subs) < 2 {
+		return
+	}
+	e := &effects{}
+	if alt {
+		e.merge(subs)
+	} else {
+		for _, x := range subs {
+			e.targets = append(e.targets, x.targets...)
+			e.effects = append(e.effects, x.effects...)
+		}
+	}
+	out[first] = Ability{Kind: "spell", Targets: e.targets, Effects: e.effects}
+	s.Abilities = out
+}
+
+// zoneDuplicate reports a zone-gate wrapper (FromGraveyard, FromExile)
+// whose rule repeats one of the face's top-level rules: an ability that
+// also functions from that zone ("this ability triggers from your
+// graveyard too"), which Forge writes once with TriggerZones$
+// Battlefield,Graveyard.
+func zoneDuplicate(r any, rs []any) bool {
+	switch variantOf(r) {
+	case "FromGraveyard", "FromExile", "FromHand":
+	default:
+		return false
+	}
+	inner := rawArgs(r)
+	for _, x := range rs {
+		if reflect.DeepEqual(x, inner) {
+			return true
+		}
+	}
+	return false
 }

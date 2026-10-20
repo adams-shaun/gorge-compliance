@@ -42,6 +42,7 @@ func mtgishFace(c *Card, f node) *Summary {
 
 	m := &mtgishNorm{s: s}
 	m.rules(list(f["Rules"]))
+	mergeSpells(s, false)
 
 	if pt, ok := f["CardPT"].(map[string]any); ok {
 		p, t := strconv.Itoa(intOr(pt["Power"])), strconv.Itoa(intOr(pt["Toughness"]))
@@ -124,6 +125,9 @@ func (m *mtgishNorm) sub(r any, conditional bool) {
 // rules maps a Vec<Rule>.
 func (m *mtgishNorm) rules(rs []any) {
 	for _, r := range mergeSelfOrOther(rs) {
+		if zoneDuplicate(r, rs) {
+			continue
+		}
 		m.rule(r)
 	}
 }
@@ -262,9 +266,8 @@ func (m *mtgishNorm) rule(r any) {
 	}
 	if tok, ok := numberKeywords[v]; ok {
 		m.kw(tok + ":" + gameNumber(argN(r, 0)))
-		if v == "Backup" {
-			m.rules(list(argN(r, 1)))
-		}
+		// Backup's nested rules are the abilities the backup target gains:
+		// the card's own abilities, which the face also lists at top level.
 		return
 	}
 	switch {
