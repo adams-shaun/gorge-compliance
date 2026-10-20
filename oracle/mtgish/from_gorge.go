@@ -484,6 +484,9 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 
 // static summarises an S: line.
 func (g *gorgeNorm) static(st *cards.Static) {
+	if g.selfGrantStatic(st) {
+		return
+	}
 	eff := gorgeStaticEffects(st.Mode, st.Params)
 	if eff == nil {
 		return

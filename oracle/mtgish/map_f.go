@@ -2,8 +2,10 @@ package mtgish
 
 import (
 	"encoding/json"
-	"sort"
+	"strconv"
 	"strings"
+
+	"github.com/adams-shaun/gorge/engine/cards"
 )
 
 // Unit F: T3 (targets). The fixes here make the two sides render the same
@@ -424,11 +426,119 @@ func stackTargetTypes(tt string) []string {
 	return cls
 }
 
-func sortedKeys(m map[string]bool) []string {
-	out := make([]string, 0, len(m))
-	for k := range m {
-		out = append(out, k)
+// anyTargetClasses folds a class list naming every kind "any target"
+// covers (creature, planeswalker, battle, player: CR 115.4) into "any"; a
+// script spells "any other target" out as that list.
+func anyTargetClasses(cs []string) []string {
+	need := map[string]bool{"creature": true, "planeswalker": true, "battle": true, clsPlayer: true}
+	n := 0
+	for _, c := range cs {
+		if need[c] {
+			n++
+		}
 	}
-	sort.Strings(out)
+	if n < len(need) {
+		return cs
+	}
+	out := []string{clsAny}
+	for _, c := range cs {
+		if !need[c] && c != clsAny {
+			out = append(out, c)
+		}
+	}
 	return out
+}
+
+// expandExactCounts renders a slot of exactly N targets (N a literal, 2 or
+// more) as N one-target slots: "two target creatures" and "target creature
+// and another target creature" choose the same targets, and scripts and
+// mtgish pick either spelling.
+func expandExactCounts(ts []string) []string {
+	var out []string
+	for _, t := range ts {
+		cls, count := splitTargetToken(t)
+		n, err := strconv.Atoi(count)
+		if err != nil || n < 2 || n > 20 {
+			out = append(out, t)
+			continue
+		}
+		for i := 0; i < n; i++ {
+			out = append(out, cls)
+		}
+	}
+	return out
+}
+
+// selfGrantStatic summarises a static through which a script writes a
+// printed ability that is live only at a threshold: a Station threshold
+// ("STATION 8+": Affected$ Card.Self+counters_GE8_CHARGE), Max speed
+// (Condition$ MaxSpeed) and a Level up level (IsPresent$ ... LEVEL
+// counters). The card prints the abilities themselves, and mtgish encodes
+// them as abilities under the threshold, so the granted abilities are
+// summarised as abilities (with their targets), not as "grant:ability".
+// Granted keywords follow mtgish's shape: under Station they are keywords
+// (StationCharged nests plain rules), otherwise a static granting them.
+// Whatever else the static does stays a static. It reports false for any
+// other static.
+func (g *gorgeNorm) selfGrantStatic(st *cards.Static) bool {
+	p := st.Params
+	if st.Mode != "Continuous" || !(p["Affected"] == "Card.Self" || strings.HasPrefix(p["Affected"], "Card.Self+")) {
+		return false
+	}
+	station := strings.Contains(p["Affected"], "_CHARGE") && g.f.HasKeyword("Station")
+	speed := p["Condition"] == "MaxSpeed"
+	level := strings.Contains(p["IsPresent"], "_LEVEL") && g.f.HasKeyword("Level up")
+	if !station && !speed && !level {
+		return false
+	}
+	rest := make(map[string]string, len(p))
+	for k, v := range p {
+		rest[k] = v
+	}
+	for _, name := range strings.Split(p["AddAbility"], "&") {
+		if a := cards.ResolveSVar(g.svars(), strings.TrimSpace(name)); a != nil {
+			g.sa(a)
+		}
+	}
+	for _, name := range strings.Split(p["AddTrigger"], "&") {
+		if body, ok := g.svars()[strings.TrimSpace(name)]; ok {
+			if t, ok := cards.ParseTriggerLine(body); ok {
+				g.trigger(&t)
+			}
+		}
+	}
+	for _, name := range strings.Split(p["AddStaticAbility"], "&") {
+		if body, ok := g.svars()[strings.TrimSpace(name)]; ok {
+			if s, ok := cards.ParseStaticLine(body); ok {
+				g.static(&s)
+			}
+		}
+	}
+	delete(rest, "AddAbility")
+	delete(rest, "AddTrigger")
+	delete(rest, "AddStaticAbility")
+	if station {
+		for _, k := range cards.SplitKeywordList(p["AddKeyword"]) {
+			g.keyword(k)
+		}
+		delete(rest, "AddKeyword")
+	}
+	if station || level {
+		// A level's P/T box and a Spacecraft's "becomes an artifact
+		// creature" at its threshold are the card's level/station
+		// structure (mtgish keeps them in LevelUp/StationChargedAnimate),
+		// not a printed ability.
+		for _, k := range []string{"SetPower", "SetToughness", "AddType", "AddTypes"} {
+			delete(rest, k)
+		}
+	}
+	eff := gorgeStaticEffects(st.Mode, rest)
+	if len(eff) == 1 && eff[0] == unmapped("Static.Continuous") {
+		// Nothing but the granted abilities.
+		return true
+	}
+	if eff != nil {
+		g.ability(Ability{Kind: "static", Effects: eff})
+	}
+	return true
 }
