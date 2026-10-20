@@ -239,6 +239,10 @@ public final class XEngineBench {
         for (int i = 0; i < 2; i++) {
             Player p = newPlayer(policy, "P" + i, skill);
             Deck d = Deck.load(lists[i], false, false);
+            if (d.getMaindeckCards().size() < 40) {
+                // An unresolved card name drops silently; never measure a short deck.
+                throw new IllegalArgumentException("deck " + i + " loaded " + d.getMaindeckCards().size() + " cards");
+            }
             game.loadCards(d.getCards(), p.getId());
             game.addPlayer(p, d);
             match.addPlayer(p, d);
