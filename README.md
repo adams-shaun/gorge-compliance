@@ -29,6 +29,19 @@ Plus `scenarios/xmageport/`: XMage's own Mage.Tests interaction tests,
 translated by `cmd/xmageport` into gorge's scenario schema and run through
 gorge's runner.
 
+### A fourth source: mtgish, at the definition level
+
+| Source | What it is | Where |
+|---|---|---|
+| **mtgish** | An independent typed encoding of every card, parsed from Oracle text (MIT). Its card definitions and gorge's compiled IR are both normalised to one token summary per face (T1 characteristics, T2 ability shape, T3 targets, T4 effect verbs) and diffed; no game is played. Each difference is triaged `forge-bug`, `gorge-compile`, `mtgish-bug`, `normalizer` or `equivalent` | `oracle/mtgish/` (normalisers, differ, the FDN/BLB ledgers in `known/`), `cmd/mtgishxc` |
+
+It finds a wrong card script that no scenario has exercised yet. The data is
+pinned (`MTGISH_REF`, `oracle/mtgish/MTGISH.lock`) and fetched by `make
+mtgish-fetch` into the gitignored `.mtgish/`; it carries Oracle text and is
+never committed. `TestMtgishLedger` holds FDN and BLB to their ledgers in both
+directions. Design:
+[mtgish cross-check](docs/design/2026-10-20-mtgish-crosscheck.md).
+
 Where the sources disagree, the triage step classifies the row (gorge wrong,
 XMage wrong, a ruled divergence) and the result is recorded, never silently
 accepted. See `docs/design/` for the designs:
@@ -57,10 +70,11 @@ CI job runs against gorge `main` and **reports** drift without failing.
 | `oracle/compliance/` | per-set manifests (XMage-derived), verdicts, declared levels, the gate (`gate`), certification (`adopt`), level B (`levelb`), scenario generation (`oraclegen`), shape rulings (`shape`, `rulings/`), triage |
 | `oracle/xmageoracle/` | the Java XMage replay driver and its unit tests |
 | `oracle/validation/oracle/` | the verdict-refresh runbook and scripts |
-| `cmd/` | `oraclediff` (the pipeline's gorge side: gen, diff, triage, status, Forge export/adjudicate), `compliance` (manifest maintenance), `xmageport`, `oraclepacket` (printed-card view for audit authors) |
+| `oracle/mtgish/` | the mtgish definition cross-check: loader, the two normalisers, the differ, the data lock and the FDN/BLB ledgers (`known/`) |
+| `cmd/` | `oraclediff` (the pipeline's gorge side: gen, diff, triage, status, Forge export/adjudicate), `compliance` (manifest maintenance), `xmageport`, `oraclepacket` (printed-card view for audit authors), `mtgishxc` (the mtgish cross-check's report and `-card` triage view) |
 | `scripts/` | XMage and Forge oracle drivers, the compliance pass, the driver unit-test runners (`xmage-oracle-test-*.sh`) |
 | `ops/scripts/` | `driver_replay_batch.sh` (parked: written for the maintainers' agent pipeline) and the script smokes |
-| `internal/` | `gorgedir` (locates the gorge module) and `boundary` (the licence guards) |
+| `internal/` | `gorgedir` (locates the gorge module) and `boundary` (the licence guards, including the never-commit rule for mtgish's data) |
 
 ## Setup
 
@@ -101,6 +115,8 @@ make xmage-oracle-setup    # build XMage at XMAGE_REF out of tree (heavy)
 make xmage-driver-tests    # the Java driver's unit tests (needs the XMage build)
 make compliance-pass SETS='FRA BLB'   # XMage pass over the sets; reruns only stale verdicts
 make forge-oracle-setup    # build the Forge driver at FORGE_ORACLE_REF out of tree (heavy)
+make mtgish-fetch          # the pinned mtgish data into .mtgish/<ref>/ (gitignored), sha256-verified
+make mtgish-xc             # mtgish cross-check: FDN+BLB report (.coverage/mtgish/) + the ledger ratchet
 ```
 
 The XMage and Forge passes are heavy (a JVM per batch). On a shared box set
@@ -143,4 +159,6 @@ or is one `git add` away from it. Card rules (Oracle) text is not committed
 either; scenarios name cards only.
 
 `NOTICE` credits XMage (MIT): the set manifests are derived from XMage's set
-classes, and `scenarios/xmageport/` translates XMage's tests.
+classes, and `scenarios/xmageport/` translates XMage's tests. It also credits
+mtgish (MIT), whose card data the mtgish cross-check reads at run time from the
+gitignored `.mtgish/`.
