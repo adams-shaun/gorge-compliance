@@ -51,7 +51,6 @@ const (
 	tokCantPhaseIn     = "cantphasein"       // permanents can't phase in
 	tokVillainous      = "additionalvillainouschoice"
 	tokPrepared        = "alterattribute:prepared"
-	tokSolved          = "alterattribute:solved"
 	tokDay             = "daytime:day"
 	tokChangeText      = "changetext" // a colour or type word in a text box is changed
 )
@@ -85,7 +84,12 @@ var d2Statics = map[string]func(p map[string]string) []string{
 			// "You may pay 2 life rather than {R} for red permanent spells."
 			return []string{"player:maypaytoreducecoloredmanacostofspells"}
 		}
-		return []string{"cast:optionaladditionalcastingcost"}
+		// "As an additional cost to cast this spell, you may ...": a cost,
+		// not an ability, like AlternateAdditionalCost (mtgish's
+		// OptionalAdditionalCastingCost is skipped the same way; it also
+		// writes the choice as AdditionalCost_Modal actions or a cost
+		// reduction, never consistently as a static).
+		return nil
 	},
 	"CanAttackDefender": func(p map[string]string) []string {
 		if strings.HasPrefix(p["ValidAttacked"], "Player") {
@@ -151,7 +155,9 @@ var d2Statics = map[string]func(p map[string]string) []string{
 			return []string{"player:cantplaylandsfromgraveyards"}
 		case p["Origin"] == "Hand":
 			return []string{"player:cantplaylandsfromtheirhand"}
-		case p["ValidCard"] != "":
+		case p["ValidCard"] != "" && !strings.Contains(p["ValidCard"], ","):
+			// A list is the shared filter of a multi-mode static (lands
+			// and spells alike), not a land type.
 			return []string{"player:cantplaylandsoftype"}
 		}
 		return []string{"player:cantplaylands"}
@@ -314,6 +320,7 @@ var d2Statics = map[string]func(p map[string]string) []string{
 	// "Counters remain on it as it changes zones": a rule about the card
 	// itself, mtgish's SelfEffect.
 	"CountersRemain": fixed("static:selfeffect"),
+	"CantRegenerate": fixed("rule:cantberegenerated"),
 }
 
 // d2ContinuousEffects maps the Continuous parameters gorgeStaticEffects'
@@ -523,7 +530,7 @@ var d2Rules = map[string]func(m *mtgishNorm, r any){
 	"APlayerFacingAVillainousChoiceFacesItAnAdditionalTime": staticRule(tokVillainous),
 	"DamageFromPermanentCantBePrevented":                    staticRule("static:damagecantbeprevented"),
 	"CombatDamageOfCreaturesCantBePrevented":                staticRule("static:damagecantbeprevented"),
-	"CountsAsACardWithNameForSpellsNamed":                   staticRule("static:countsasacardwithnameforspellsnamed"),
+	"CountsAsACardWithNameForSpellsNamed":                   staticRule("rule:countsasacardwithnameforspellsnamed"),
 	"FlashForCasters":                                       staticRule("grant:flash"),
 	"NoMoreThanNumberCreaturesCanAttack":                    attackLimit("attackrestrict"),
 	"NoMoreThanNumberCreaturesCanAttackPlayer":              attackLimit("attackrestrict"),
@@ -536,13 +543,18 @@ var d2Rules = map[string]func(m *mtgishNorm, r any){
 	"CardsCantEnterTheBattlefield":                        replacementRule("replace:wouldenter"),
 	"CardsInEachPlayersGraveyardsCantEnterTheBattlefield": replacementRule("replace:wouldenter"),
 	"CardsInEachPlayersLibrariesCantEnterTheBattlefield":  replacementRule("replace:wouldenter"),
-	// Replacements of an event other than entering, compared by the event
-	// (the R: line's Event$, lower-cased) like every other replacement.
-	"AsPermanentTransforms":                  replacementRule("replace:transform"),
-	"AsPermanentIsTurnedFaceUp":              replacementRule("replace:turnfaceup"),
-	"AsPermanentBecomesAttachedToAPermanent": replacementRule("replace:attached"),
-	"WhilePlayersAreSearchingTheirLibraryTheyExileEachCardTheyFindAndPlayerMayPlayThoseCardsWhileTheyRemainExiledAndMaySpendManaAsThoughItWereAnyColor": replacementRule(
-		"replace:wouldsearchlibrary"),
+	// "As this transforms / is turned face up / becomes attached, ...":
+	// a replacement compared by what it does, as unit B maps the R: line's
+	// ReplaceWith chain.
+	"AsPermanentTransforms":                  replacementActions(1),
+	"AsPermanentIsTurnedFaceUp":              replacementActions(1),
+	"AsPermanentBecomesAttachedToAPermanent": replacementActions(2),
+	// "While an opponent searches their library, they exile each card they
+	// find; you may play those cards": the R: line's exile and its MayPlay
+	// effect.
+	"WhilePlayersAreSearchingTheirLibraryTheyExileEachCardTheyFindAndPlayerMayPlayThoseCardsWhileTheyRemainExiledAndMaySpendManaAsThoughItWereAnyColor": func(m *mtgishNorm, _ any) {
+		m.ability(Ability{Kind: "replacement", Effects: []string{"move:library>exile", "mayplay"}})
+	},
 	// Not abilities in play: the companion condition and the deck rules
 	// (gorge skips the Companion keyword and the deck-building lines).
 	"Companion":                         skipRule,
@@ -586,7 +598,9 @@ var d2Rules = map[string]func(m *mtgishNorm, r any){
 	"Mystery": func(m *mtgishNorm, r any) {
 		// A Case: "To solve — <condition>" is checked at the beginning of
 		// its controller's end step; "Solved — <rules>" are its rules.
-		m.ability(Ability{Kind: "triggered", Event: "end-step", Effects: []string{tokSolved}})
+		// Solving itself is the rule's structure, not an effect (unit B maps
+		// the script's AlterAttribute Solved to nothing).
+		m.ability(Ability{Kind: "triggered", Event: "end-step"})
 		m.rules(list(argN(r, 1)))
 	},
 	"AsSchemeIsSetInMotion": func(m *mtgishNorm, r any) {
@@ -614,6 +628,20 @@ var d2Rules = map[string]func(m *mtgishNorm, r any){
 		e.alternatives(alts...)
 		m.ability(Ability{Kind: "spell", Targets: e.targets, Effects: e.effects})
 	},
+}
+
+// replacementActions maps a rule whose argument i is its action list
+// (FaceUpAction, TransformAction, AttachAction): each action by its verb.
+func replacementActions(i int) func(m *mtgishNorm, r any) {
+	return func(m *mtgishNorm, r any) {
+		e := &effects{}
+		for _, a := range list(argN(r, i)) {
+			if n, ok := a.(node); ok {
+				e.action(n, variantOf(n))
+			}
+		}
+		m.ability(Ability{Kind: "replacement", Targets: e.targets, Effects: e.effects})
+	}
 }
 
 func attackLimit(tok string) func(m *mtgishNorm, r any) {
@@ -894,8 +922,46 @@ var d2RuleSynonyms = map[string]string{
 	// which, from either side.
 	"CantBeBlockedExceptByDefenders": "rule:cantbeblockedbydefenders", "CanBlockOnly": "rule:cantbeblockedbydefenders",
 	"CantBlockAttacker": "rule:cantbeblockedbydefenders", "CantBlockAttackers": "rule:cantbeblockedbydefenders",
+	// S:Mode$ CanBlockIfShadow / IgnoreLandWalk: one rule, two spellings.
+	"CanBlockCreaturesWithShadowAsThoughTheyDidntHaveShadow":          "rule:canblockcreatureswithshadowasthoughithadshadow",
+	"CanBlockCreaturesWithLandwalkAbilitiesAsThoughTheyDidntHaveThem": "rule:canbeblockedasthoughitdidnthave",
 	// "Is goaded": the goad action's result, written as a rule.
 	"IsGoadedByPlayer": "goad",
+}
+
+// d2PlayerToken maps the PlayerEffect variants this unit folds or names
+// exactly; ok is false for the rest (playerEffectToken's own rules).
+func d2PlayerToken(v string) (string, bool) {
+	if t, ok := d2PlayerSynonyms[v]; ok {
+		return t, true
+	}
+	switch {
+	case (strings.HasPrefix(v, "Decrease") || strings.HasPrefix(v, "Reduce")) && strings.Contains(v, "Cost"):
+		// Every "<abilities> cost {N} less" is S:Mode$ ReduceCost.
+		return "costreduction", true
+	case strings.HasPrefix(v, "Increase") && strings.Contains(v, "Cost"):
+		return "costincrease", true
+	}
+	return "", false
+}
+
+// d2MayLookAt maps a Continuous MayLookAt$ by the zone it opens and to whom:
+// "you may look at the top card of your library", "play with the top card
+// revealed" (every player may look), a revealed hand, face-down exiled
+// cards or permanents.
+func d2MayLookAt(p map[string]string) string {
+	switch p["AffectedZone"] {
+	case "Hand":
+		return "player:playswithhandrevealed"
+	case "Exile":
+		return "player:maylookatfacedownexiledcards"
+	case "Battlefield":
+		return "player:maylookatfacedownpermanents"
+	}
+	if p["MayLookAt"] == "Player" {
+		return "player:playswithtopoflibraryrevealed"
+	}
+	return "player:maylookattopcardoflibraryanytime"
 }
 
 // d2PlayerSynonyms are PlayerEffect variants that are a gorge static of
@@ -903,4 +969,12 @@ var d2RuleSynonyms = map[string]string{
 var d2PlayerSynonyms = map[string]string{
 	"CantAttackPlayer": "rule:cantattack", "CantAttackPlayerOrPlaneswalkerControlledBy": "rule:cantattack",
 	"CantAttackAPermanent": "rule:cantattack", "CantAttackWithCreatures": "rule:cantattack",
+	// S:Mode$ CantBeCast with Origin$ <zone>: one mode, the zone a filter.
+	"CantCastSpellsFromTheirHand": "player:cantcastspells", "CantCastSpellsFromGraveyards": "player:cantcastspells",
+	"CantCastSpellsFromLibraries": "player:cantcastspells", "CantCastSpellsFromExile": "player:cantcastspells",
+	"MayLookAtFaceDownExiledCard": "player:maylookatfacedownexiledcards",
+	// Unit B's spelling for the gorge side.
+	"CantSearchLibraries": "player:cantsearchlibrary",
+	// Not a permission to cast (playerEffectToken's May...Cast rule).
+	"MayDiscardCardAnyTimeTheyCouldCastAnInstant": "player:maydiscardcardanytimetheycouldcastaninstant",
 }

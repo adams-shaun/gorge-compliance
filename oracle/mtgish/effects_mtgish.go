@@ -51,7 +51,7 @@ func (e *effects) walk(x any) {
 					return false
 				}
 			}
-			if strings.HasPrefix(variant, "Modal_") {
+			if strings.HasPrefix(variant, "Modal_") || variant == "AdditionalCost_Modal" {
 				// Modes are alternatives (scripts' Charm choices, merged
 				// the same way). The mode list is the args itself for a
 				// one-field variant, else the one list-valued argument.
@@ -746,7 +746,7 @@ func staticEffects(r any) []string {
 
 // playerEffectToken maps a PlayerEffect variant.
 func playerEffectToken(v string) string {
-	if t, ok := d2PlayerSynonyms[v]; ok {
+	if t, ok := d2PlayerToken(v); ok {
 		return t
 	}
 	switch {

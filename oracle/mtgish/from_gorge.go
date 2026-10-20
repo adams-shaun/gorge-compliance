@@ -523,7 +523,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "player:mayplayanadditionalland")
 		}
 		if p["MayLookAt"] != "" {
-			out = append(out, "player:maylookattopcardoflibraryanytime")
+			out = append(out, d2MayLookAt(p))
 		}
 		if p["SetName"] != "" {
 			out = append(out, "name")
@@ -585,6 +585,9 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 	case "CantGainLife":
 		return []string{"player:cantgainlife"}
 	case "CantBeCast":
+		if p["NumLimitEachTurn"] != "" {
+			return []string{"player:cantcastmorethannumberspellseachturn"}
+		}
 		return []string{"player:cantcastspells"}
 	case "CastWithFlash":
 		return []string{"flash"}
@@ -763,6 +766,10 @@ func literalOr(v, def string) string {
 
 // gorgeCounterType canonicalises a Forge counter type.
 func gorgeCounterType(t string) string {
+	if strings.Contains(t, ",") {
+		// A choice among counter types ("P1P1,Flying"): not a literal.
+		return "*"
+	}
 	if t == "" {
 		return "*"
 	}

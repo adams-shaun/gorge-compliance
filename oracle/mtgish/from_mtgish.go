@@ -286,7 +286,8 @@ func (m *mtgishNorm) rule(r any) {
 			m.ability(Ability{Kind: "static", Effects: []string{ruleToken(variantOf(x))}})
 		}
 		return
-	case v == "CastEffect" && strings.HasPrefix(variantOf(rawArgs(r)), "AdditionalCastingCost"):
+	case v == "CastEffect" && (strings.HasPrefix(variantOf(rawArgs(r)), "AdditionalCastingCost") ||
+		variantOf(rawArgs(r)) == "OptionalAdditionalCastingCost"):
 		// An additional casting cost is a cost, not an ability (scripts put
 		// it in the spell's Cost$).
 		return
