@@ -34,6 +34,16 @@ func (e *effects) walk(x any) {
 			e.targets = append(e.targets, mtgishTarget(n))
 			return false
 		case "_Action":
+			if variant == "ChooseAnAction" {
+				// "You may A or B. When you do, ...": one of the actions
+				// runs, so they are alternatives.
+				for _, a := range argsOf(n) {
+					if l := list(a); l != nil {
+						e.alternatives(l...)
+						return false
+					}
+				}
+			}
 			if variant == "IfElse" {
 				a := argsOf(n)
 				if len(a) == 3 {
