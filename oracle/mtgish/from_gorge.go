@@ -74,7 +74,7 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if head, _, ok := kwTag(st.Params); ok && !printedExpansion(head) {
 			continue
 		}
-		if st.Params["CharacteristicDefining"] == "True" {
+		if st.Params["CharacteristicDefining"] == "True" && !d2KeywordOnlyCDA(st.Params) {
 			// One CDA ability however many statics carry it (a script may
 			// split power and toughness).
 			if !cda {
@@ -94,7 +94,7 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if head, _, ok := kwTag(r.Params); ok && !printedExpansion(head) {
 			continue
 		}
-		if selfEnter(r) {
+		if selfEnter(r) && !g.d2InsteadEnter(r) {
 			if enter == nil {
 				enter = &Ability{Kind: "replacement"}
 			}
@@ -278,6 +278,11 @@ func (g *gorgeNorm) keyword(k string) {
 		return
 	case head == "Enchant":
 		cls := strings.SplitN(param, ":", 2)[0]
+		if strings.Contains(cls, "inZoneGraveyard") {
+			// "Enchant creature card in a graveyard".
+			g.kw("enchant:" + clsGraveyard)
+			return
+		}
 		g.kw("enchant:" + targetToken(g.idx.validClasses(cls, ""), "1"))
 		return
 	case head == "Affinity":
@@ -552,8 +557,9 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		for _, k := range cards.SplitKeywordList(p["AddHiddenKeyword"]) {
 			out = append(out, hiddenKeywordToken(k))
 		}
+		out = append(out, d2ContinuousEffects(p)...)
 		if len(out) == 0 {
-			if p["AddSVar"] != "" {
+			if p["AddSVar"] != "" || d2IgnoreEffectCostOnly(p) {
 				// An AI hint carried as a static (AddSVar$ only): no
 				// printed ability.
 				return nil
@@ -731,7 +737,9 @@ func (g *gorgeNorm) enterEffects(r *cards.Repl) []string {
 			out = append(out, "counters:"+gorgeCounterType(a.Params["CounterType"])+":"+literalOr(a.Params["CounterNum"], "1"))
 		case a.API == "InternalEtbReplacement" || a.API == "Cleanup":
 		default:
-			if f, ok := extEnterAPI[a.API]; ok {
+			if t, ok := g.d2EnterEffects(a); ok {
+				out = append(out, t...)
+			} else if f, ok := extEnterAPI[a.API]; ok {
 				out = append(out, f(a)...)
 			} else {
 				out = append(out, unmapped("Enter."+a.API))

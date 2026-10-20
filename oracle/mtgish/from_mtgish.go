@@ -431,6 +431,10 @@ func (m *mtgishNorm) spell(r any) {
 		}
 		e.alternatives(alts...)
 	default:
+		if f, ok := extRule[v]; ok {
+			f(m, r)
+			return
+		}
 		e.walk(argsOf(r))
 		e.effects = append(e.effects, unmapped("Rule."+v))
 	}

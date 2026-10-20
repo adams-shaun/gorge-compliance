@@ -757,6 +757,9 @@ func playerEffectToken(v string) string {
 		return "costreduction"
 	case strings.HasPrefix(v, "IncreaseSpellCost"):
 		return "costincrease"
+	case v == "MayPayAdditionalCostToCastSpellsForEffect":
+		// An optional additional cost, not a permission to play.
+		return "player:maypayadditionalcosttocastspellsforeffect"
 	case strings.HasPrefix(v, "May") && (strings.Contains(v, "Play") || strings.Contains(v, "Cast")):
 		return "mayplay"
 	}
