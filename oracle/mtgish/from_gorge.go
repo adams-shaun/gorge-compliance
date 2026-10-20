@@ -522,13 +522,22 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		}
 		player := strings.HasPrefix(p["Affected"], "You") || strings.HasPrefix(p["Affected"], "Player") || strings.HasPrefix(p["Affected"], "Opponent")
 		stack := p["AffectedZone"] == "Stack"
+		alsoPermanents := player && affectsPermanents(p["Affected"])
 		for _, k := range cards.SplitKeywordList(p["AddKeyword"]) {
+			if t, ok := grantedRule(k); ok {
+				out = append(out, t)
+				continue
+			}
 			if stack {
 				// "Spells you cast have storm": a spell effect.
 				out = append(out, "spell:"+grantKeyword(k))
 			} else if player {
 				// "You have hexproof": a player effect.
 				out = append(out, "player:"+grantKeyword(k))
+				if alsoPermanents {
+					// "You and Humans you control have hexproof".
+					out = append(out, "grant:"+grantKeyword(k))
+				}
 			} else {
 				out = append(out, "grant:"+grantKeyword(k))
 			}
@@ -814,3 +823,30 @@ func gorgeCounterType(t string) string {
 	}
 	return counterName(t)
 }
+
+// affectsPermanents reports an Affected$ list naming a permanent beside a
+// player ("You,Human.YouCtrl"): the static gives the keyword to both, as
+// mtgish's PlayerEffect plus its EachPermanentLayerEffect.
+func affectsPermanents(affected string) bool {
+	for _, alt := range strings.Split(affected, ",") {
+		if !strings.HasPrefix(alt, "You") && !strings.HasPrefix(alt, "Player") && !strings.HasPrefix(alt, "Opponent") {
+			return true
+		}
+	}
+	return false
+}
+
+// grantedRule maps a granted Forge pseudo-keyword that is a blocking rule
+// ("MustBeBlockedBy Creature.Eldrazi": "must be blocked by an Eldrazi if
+// able") to the rule token mtgish's PermanentRuleEffect carries.
+func grantedRule(k string) (string, bool) {
+	rest, ok := strings.CutPrefix(k, "MustBeBlockedBy ")
+	if !ok {
+		return "", false
+	}
+	if rest == "Creature" {
+		return "rule:mustbeblocked", true
+	}
+	return "rule:mustbeblockedbyadefender", true
+}
+
