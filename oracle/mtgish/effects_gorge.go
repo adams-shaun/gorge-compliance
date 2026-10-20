@@ -500,6 +500,9 @@ func changeZoneToken(api string, p map[string]string) string {
 	if api == "ChangeZone" && o == "library" && p["Defined"] == "" && p["ValidTgts"] == "" {
 		return "search:" + d
 	}
+	if t, ok := gorgeHandToLibrary(api, o, d, p); ok {
+		return t
+	}
 	if o == "" || o == "any" || o == "all" {
 		// Any origin: matched against any origin (wildMatch).
 		o = "*"

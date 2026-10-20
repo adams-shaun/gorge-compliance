@@ -180,8 +180,7 @@ var costKeywords = map[string]string{
 // cheaply, so both sides drop them.
 var bareKeywords = map[string]string{
 	"Landwalk": "landwalk", "TypeCycling": "typecycling", "Suspend": "suspend", "SuspendX": "suspend",
-	"Vanishing": "vanishing", "VanishingEnters": "vanishing", "StationCharged": "station",
-	"StationChargedAnimate": "station", "Prototype": "prototype", "SpliceOnto": "splice",
+	"Vanishing": "vanishing", "VanishingEnters": "vanishing", "Prototype": "prototype", "SpliceOnto": "splice",
 	"Champion": "champion", "Reinforce": "reinforce", "ReinforceX": "reinforce",
 	"WebSlinging": "webslinging", "Recover": "recover", "Offering": "offering",
 	"Impending": "impending", "Ripple": "ripple", "Specialize": "specialize",
@@ -245,8 +244,6 @@ func (m *mtgishNorm) rule(r any) {
 	if tok, ok := bareKeywords[v]; ok {
 		m.kw(tok)
 		switch v {
-		case "StationCharged", "StationChargedAnimate":
-			m.rules(list(argN(r, 1)))
 		case "Visit", "VisitAndPrize":
 			e := &effects{}
 			e.walk(argsOf(r))
@@ -327,10 +324,6 @@ func (m *mtgishNorm) rule(r any) {
 		m.ability(a)
 	case "AsPermanentEnters", "AsPermanentEntersOrIsTurnedFaceUp", "AsPermanentEscapes":
 		m.ability(Ability{Kind: "replacement", Effects: enterEffects(list(argN(r, 1)))})
-	case "ClassAbilities":
-		for _, ca := range list(rawArgs(r)) {
-			m.rules(list(argN(ca, 1)))
-		}
 	case "SagaChapters":
 		// One chapter ability per chapter number, as scripts list them.
 		for _, ch := range list(rawArgs(r)) {
@@ -424,7 +417,7 @@ func (m *mtgishNorm) spell(r any) {
 		m.kw(strings.ToLower(strings.TrimPrefix(v, "SpellActions_")))
 		e.alternatives(argsOf(r)[1:]...)
 	case "SpellActions_Tiered", "SpellActions_Spree":
-		m.kw(strings.ToLower(strings.TrimPrefix(v, "SpellActions_")))
+		mtgishModeCosts(m, strings.ToLower(strings.TrimPrefix(v, "SpellActions_")), r)
 		var alts []any
 		for _, x := range list(rawArgs(r)) {
 			alts = append(alts, argN(x, 1))
