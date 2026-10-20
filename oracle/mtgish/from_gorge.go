@@ -849,4 +849,3 @@ func grantedRule(k string) (string, bool) {
 	}
 	return "rule:mustbeblockedbyadefender", true
 }
-
