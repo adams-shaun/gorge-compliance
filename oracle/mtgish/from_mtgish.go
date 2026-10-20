@@ -357,7 +357,7 @@ func (m *mtgishNorm) rule(r any) {
 			m.levelStatic(argN(l, 1), list(argN(l, 2)))
 		}
 	case "CDA_Color", "CDA_ColorButNotColorIdentity":
-		if cv := variantOf(rawArgs(r)); strings.Contains(cv, "Colorless") || cv == "Devoid" {
+		if cv := variantOf(rawArgs(r)); cv == "Devoid" {
 			m.kw("devoid")
 		} else {
 			m.ability(Ability{Kind: "static", Effects: []string{"cda"}})
@@ -373,7 +373,7 @@ func (m *mtgishNorm) rule(r any) {
 			m.ability(Ability{Kind: "static", Effects: []string{"cda"}})
 		}
 	case "CDA_Types":
-		if cv := variantOf(rawArgs(r)); cv == "Changeling" || strings.Contains(cv, "AllCreatureTypes") {
+		if cv := variantOf(rawArgs(r)); cv == "Changeling" {
 			m.kw("changeling")
 		} else {
 			// "Is the chosen type in addition to its other types": a
