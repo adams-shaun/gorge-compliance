@@ -168,6 +168,9 @@ func svarRefs(a *cards.SA) []string {
 	case "DelayedTrigger", "ImmediateTrigger":
 		out = append(out, a.Params["Execute"])
 	}
+	if f, ok := extSVarRefs[a.API]; ok {
+		out = append(out, f(a)...)
+	}
 	var keep []string
 	for _, r := range out {
 		if r != "" {
@@ -318,11 +321,14 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			// Adapt N / bolster N put N +1/+1 counters.
 			return []string{"counters:+1/+1:" + literalOr(n, "*")}
 		}
-		var out []string
-		for _, ct := range strings.Split(p["CounterType"], ",") {
-			out = append(out, "counters:"+gorgeCounterType(strings.TrimSpace(ct))+":"+literalOr(p["CounterNum"], "1"))
+		ct := p["CounterType"]
+		if ct == "" && p["CounterTypes"] != "" {
+			// CounterTypes$: one of each listed type; ChosenFromList is
+			// one chosen from TypeList$ (each listed, as alternatives
+			// merge).
+			ct = "EACH " + strings.Replace(p["CounterTypes"], "ChosenFromList", p["TypeList"], 1)
 		}
-		return out
+		return gorgeCounterTokens(ct, literalOr(p["CounterNum"], "1"))
 	case "MultiplyCounter":
 		return []string{"counters:double"}
 	case "RemoveCounter", "RemoveCounterAll":
@@ -334,6 +340,9 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		}
 		if p["KWChoice"] != "" {
 			out = append(out, "grant:*")
+		}
+		if p["CanBlockAny"] == "True" {
+			out = append(out, "rule:canblockanynumberofcreatures")
 		}
 		for _, k := range cards.SplitKeywordList(p["KW"]) {
 			if strings.HasPrefix(k, "Prevent ") {
@@ -421,7 +430,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		if p["Power"] != "" || p["Toughness"] != "" {
 			out = append(out, "setpt")
 		}
-		if p["RemoveAllAbilities"] == "True" {
+		if p["RemoveAllAbilities"] == "True" || p["RemoveThisAbility"] == "True" {
 			out = append(out, "loseabilities")
 		}
 		for _, k := range []string{"Triggers", "Abilities", "staticAbilities", "StaticAbilities", "Replacements"} {
@@ -575,6 +584,7 @@ func effectAPI(a *cards.SA, svars map[string]string) []string {
 			break
 		}
 	}
+	out = append(out, effectReplB(a, svars)...)
 	if len(out) == 0 {
 		out = append(out, "effect")
 	}
