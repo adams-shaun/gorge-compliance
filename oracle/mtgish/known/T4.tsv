@@ -226,13 +226,12 @@ Apocalypse Hydra	T4	effects	-	counters:+1/+1:*	pending	not yet triaged
 Appa, Loyal Sky Bison	T4	effects	unmapped:API.Airbend unmapped:API.Airbend	airbend airbend	normalizer	unmapped token
 Appa, Steadfast Guardian	T4	effects	unmapped:API.Airbend	airbend	normalizer	unmapped token
 Apple of Eden, Isu Relic	T4	effects	delayed draw:1 draw:1 move:exile>hand	unmapped:Action.ReturnEachExiledCardToOwnersHand	normalizer	unmapped token
-Approach of the Second Sun	T4	effects	effect move:stack>library	unmapped:Action.PutSpellInOwnersLibraryNthFromTheTop	normalizer	unmapped token
+Approach of the Second Sun	T4	effects	move:stack>library	unmapped:Action.PutSpellInOwnersLibraryNthFromTheTop	normalizer	unmapped token
 Aquamoeba	T4	effects	unmapped:hidden:CARDNAME's power and toughness are switched	switchpt	normalizer	unmapped token
 Aquamorph Entity	T4	effects	unmapped:Enter.GenericChoice unmapped:Repl.TurnFaceUp	unmapped:ReplacementActionWouldEnter.EntersWithPTOfChoice	normalizer	unmapped token
 Arachne, Psionic Weaver	T4	effects	choose	-	pending	not yet triaged
 Arachnogenesis	T4	effects	effect	prevent	pending	not yet triaged
 Arachnus Web	T4	effects	rule:cantbeactivated	rule:abilitiescantbeactivated	pending	not yet triaged
-Arahbo, Roar of the World	T4	effects	pump:+3/+3	-	pending	not yet triaged
 Arashin Sovereign	T4	effects	move:graveyard>library	unmapped:Action.PutDeadPermanentOnTopOfLibraryOrOnBottomOfLibrary	normalizer	unmapped token
 Arashin War Beast	T4	effects	unmapped:API.Manifest	unmapped:Action.ManifestTheTopCardOfPlayersLibrary	normalizer	unmapped token
 Arbaaz Mir	T4	effects	-	damage:1 gainlife:1	pending	not yet triaged
@@ -324,7 +323,7 @@ Astral Drift	T4	effects	move:battlefield>exile move:battlefield>exile	-	pending	
 Astral Slide	T4	effects	move:battlefield>exile	-	pending	not yet triaged
 Astrid Peth	T4	effects	unmapped:API.Explore	explore	normalizer	unmapped token
 Athreos, God of Passage	T4	effects	move:graveyard>hand	unmapped:Action.ReturnDeadGraveyardCardToHand	normalizer	unmapped token
-Athreos, Shroud-Veiled	T4	effects	-	move:exile>battlefield	pending	not yet triaged
+Athreos, Shroud-Veiled	T4	effects	move:graveyard>battlefield	move:exile>battlefield	pending	not yet triaged
 Attack-in-the-Box	T4	effects	pump:+4/+0	-	pending	not yet triaged
 Attentive Skywarden	T4	effects	-	transform	pending	not yet triaged
 Audacious Knuckleblade	T4	effects	move:hand>battlefield	unmapped:Action.PutCardFromHandOnBattlefield	normalizer	unmapped token
@@ -396,7 +395,6 @@ Balduvian Shaman	T4	effects	unmapped:API.ChangeText	unmapped:LayerEffect.Replace
 Balduvian Trading Post	T4	effects	unmapped:Enter.ChangeZone unmapped:Enter.ChangeZone unmapped:Enter.Sacrifice	replace:wouldenter	normalizer	unmapped token
 Balduvian Warlord	T4	effects	unmapped:API.Block unmapped:API.RemoveFromCombat	block unmapped:Action.RemoveCreatureFromCombatAndUnblockBlockers	normalizer	unmapped token
 Balefang the Unslayable	T4	effects	tokencopy:1	token:1	pending	not yet triaged
-Balloon Stand	T4	effects	-	grant:flying token:1	pending	not yet triaged
 Ballot Broker	T4	effects	unmapped:Static.Continuous	player:getsanoptionaladditionalvote	normalizer	unmapped token
 Balor	T4	effects	damage:* damage:*	unmapped:Action.PermanentOrDeadPermanentDealsDamage unmapped:Action.PermanentOrDeadPermanentDealsDamage	normalizer	unmapped token
 Bane Alley Broker	T4	effects	move:exile>hand player:maylookattopcardoflibraryanytime	player:maylookatfacedownexiledcards unmapped:Action.ReturnAnExiledCardToOwnersHand	normalizer	unmapped token
@@ -607,7 +605,6 @@ Boseiju Pathlighter	T4	effects	unmapped:API.Draft	draft	normalizer	unmapped toke
 Bosh, Iron Golem Avatar	T4	effects	damage:*	unmapped:Action.VanguardDealsDamage	normalizer	unmapped token
 Bottle of Suleiman	T4	effects	-	damage:5 token:1	pending	not yet triaged
 Bottomless Vault	T4	effects	-	rule:maychoosenottountapduringuntap	pending	not yet triaged
-Bounce Chamber	T4	effects	-	move:battlefield>hand	pending	not yet triaged
 Bound	T4	effects	move:graveyard>hand	unmapped:Action.PutUptoNumberCardsFromGraveyardToHand	normalizer	unmapped token
 Bound [Determined]	T4	effects	effect	spell:cantbecountered	pending	not yet triaged
 Bound by Moonsilver	T4	effects	unmapped:Static.CantTransform	rule:canttransform	normalizer	unmapped token
@@ -689,7 +686,6 @@ Bumi's Feast Lecture	T4	effects	unmapped:API.Earthbend	earthbend	normalizer	unma
 Bumi, Eclectic Earthbender	T4	effects	unmapped:API.Earthbend	earthbend	normalizer	unmapped token
 Bumi, King of Three Trials	T4	effects	unmapped:API.Earthbend	earthbend	normalizer	unmapped token
 Bumi, Unleashed	T4	effects	unmapped:API.Earthbend	earthbend unmapped:Action.OnlyAllowedAttackersDuringTheAdditionalCombatStepAddedThisWay	normalizer	unmapped token
-Bumper Cars	T4	effects	-	rule:mustbeblocked	pending	not yet triaged
 Burakos, Party Leader	T4	effects	cda	type	pending	not yet triaged
 Burden of Proof	T4	effects	rule:cantbeblockedbydefenders	rule:cantblockattackers	pending	not yet triaged
 Bureau Headmaster	T4	effects	costreduction	player:decreaseequipabilitycost	pending	not yet triaged
@@ -963,7 +959,6 @@ Cloudcrest Lake	T4	effects	effect	rule:doesntuntapduringcontrollersuntap	pending
 Cloudform	T4	effects	unmapped:API.Manifest	unmapped:Action.ManifestTheTopCardOfPlayersLibrary	normalizer	unmapped token
 Cloudhoof Kirin	T4	effects	-	unmapped:Action.MayHavePlayerAction	normalizer	unmapped token
 Cloudspire Captain	T4	effects	unmapped:Static.TapPowerValue	rule:crewsvehiclesasthoughpowerweregreater rule:saddlesmountsasthoughpowerweregreater	normalizer	unmapped token
-Clown Extruder	T4	effects	-	token:1	pending	not yet triaged
 Clowning Around	T4	effects	-	token:1	pending	not yet triaged
 Coalition Construct	T4	effects	cda	perpetual type	pending	not yet triaged
 Coalition Flag	T4	effects	unmapped:Static.MustTarget	player:whilechoosingtargetsmustchooseatleastonepermanentifable	normalizer	unmapped token
@@ -1017,7 +1012,6 @@ Component Collector	T4	effects	unmapped:Enter.DayTime	unmapped:ReplacementAction
 Component Pouch	T4	effects	-	unmapped:Action.ValueActions	normalizer	unmapped token
 Concealing Curtains [Revealing Eye]	T4	effects	draw:1	-	pending	not yet triaged
 Concerted Effort	T4	effects	grant:doublestrike grant:fear grant:firststrike grant:flying grant:landwalk grant:protection grant:trample grant:vigilance	unmapped:LayerEffect.AddAbilityFromEachPermanentHasable	normalizer	unmapped token
-Concession Stand	T4	effects	-	token:1	pending	not yet triaged
 Conch Horn	T4	effects	move:hand>library:1	unmapped:Action.PutACardFromHandOnTopOfLibrary	normalizer	unmapped token
 Conclave Sledge-Captain	T4	effects	-	counters:+1/+1:* counters:+1/+1:* counters:+1/+1:*	pending	not yet triaged
 Conductive Machete	T4	effects	unmapped:API.ManifestDread	unmapped:Action.ManifestDread	normalizer	unmapped token
@@ -1063,7 +1057,7 @@ Cosmic Cube	T4	effects	play	-	pending	not yet triaged
 Cosmic Horror	T4	effects	destroy	-	pending	not yet triaged
 Cosmos Charger	T4	effects	costreduction player:foretellonanyplayersturn	player:canforetellcardsduringeachplayersturn player:decreasecostofforetellingcardsfromhand	pending	not yet triaged
 Costume Closet	T4	effects	unmapped:API.MoveCounter	unmapped:Action.MoveCounters	normalizer	unmapped token
-Costume Shop	T4	effects	-	unmapped:Action.PutAStickerOnAPermanent	normalizer	unmapped token
+Costume Shop	T4	effects	unmapped:API.PutSticker	unmapped:Action.PutAStickerOnAPermanent	normalizer	unmapped token
 Council Guardian	T4	effects	unmapped:API.Vote	grant:protection unmapped:Action.VoteForColor	normalizer	unmapped token
 Council of Reeds	T4	effects	unmapped:Static.IgnoreLegendRule	-	normalizer	unmapped token
 Council of the Absolute	T4	effects	costreduction	spell:decreasemanacost	pending	not yet triaged
@@ -1487,7 +1481,6 @@ Drivnod, Carnage Dominus	T4	effects	unmapped:Static.Panharmonicon	-	normalizer	u
 Drix Interlacer	T4	effects	unmapped:API.Intensify	intensify	normalizer	unmapped token
 Dromoka's Command	T4	effects	spell:preventalldamagethatwouldbedealtbycardname	prevent	pending	not yet triaged
 Droning Bureaucrats	T4	effects	-	rule:cantblock	pending	not yet triaged
-Drop Tower	T4	effects	-	grant:flying	pending	not yet triaged
 Drought	T4	effects	costincrease costincrease	rule:additionalcostforeachcolormanasymbolincosts spell:additionalcostforeachcolormanasymbolincosts	pending	not yet triaged
 Drowner of Hope	T4	effects	-	cda	pending	not yet triaged
 Drowner of Truth	T4	effects	-	cda	pending	not yet triaged
@@ -1507,7 +1500,7 @@ Dungeon Descent	T4	effects	unmapped:API.Venture	unmapped:Action.VentureIntoTheDu
 Dungeon Geists	T4	effects	effect	rule:doesntuntapduringcontrollersuntap	pending	not yet triaged
 Dungeon Map	T4	effects	unmapped:API.Venture	unmapped:Action.VentureIntoTheDungeon	normalizer	unmapped token
 Dungeoneer's Pack	T4	effects	unmapped:API.TakeInitiative	unmapped:Action.TakeTheInitiative	normalizer	unmapped token
-Duplicity	T4	effects	move:exile>graveyard move:exile>graveyard move:hand>exile	unmapped:Action.PutExiledCardsIntoOwnersGraveyards	normalizer	unmapped token
+Duplicity	T4	effects	move:exile>graveyard move:exile>graveyard move:hand>exile	unmapped:Action.PutExiledCardsIntoOwnersGraveyards unmapped:Action.PutExiledCardsIntoOwnersGraveyards	normalizer	unmapped token
 Durnan of the Yawning Portal	T4	effects	grant:undaunted	-	pending	not yet triaged
 Dusk [Dawn]	T4	effects	move:graveyard>hand	unmapped:Action.ReturnEachCardFromGraveyardToHand	normalizer	unmapped token
 Duskwalker	T4	effects	unmapped:Enter.Animate	unmapped:ReplacementActionWouldEnter.EntersWithLayerEffect	normalizer	unmapped token
@@ -1556,7 +1549,6 @@ Ecstatic Beauty	T4	effects	counters:time:4	counters:time:3	pending	not yet triag
 Eden, Seat of the Sanctum	T4	effects	sacrifice	-	pending	not yet triaged
 Edgar Markov	T4	effects	token:1	-	pending	not yet triaged
 Edgar, King of Figaro	T4	effects	unmapped:Static.FlipCoinMod	player:firsttwocoinflipseachturnareheadsandyouwin	normalizer	unmapped token
-Edgar, Master Machinist	T4	effects	effect	-	pending	not yet triaged
 Edge of Malacol	T4	effects	rule:doesntuntapduringcontrollersuntap	replace:woulduntap	pending	not yet triaged
 Edifice of Authority	T4	effects	effect	rule:abilitiescantbeactivated rule:cantattack rule:cantblock	pending	not yet triaged
 Edward Kenway	T4	effects	-	dig:1	pending	not yet triaged
@@ -1872,7 +1864,7 @@ Feral Encounter	T4	effects	-	dig:5 move:library>library	pending	not yet triaged
 Feral Ghoul	T4	effects	unmapped:API.Radiation	counters:rad:*	normalizer	unmapped token
 Ferocious Tigorilla	T4	effects	counters:trample,menace:1	unmapped:ReplacementActionWouldEnter.EntersWithACounterOfChoice	normalizer	unmapped token
 Feroz, Ulgrotha's Warden	T4	effects	tokencopy:1	token:1	pending	not yet triaged
-Ferris Wheel	T4	effects	-	phaseout	pending	not yet triaged
+Ferris Wheel	T4	effects	delayed phaseout	-	pending	not yet triaged
 Fertilid	T4	effects	move:library>battlefield	search:*	pending	not yet triaged
 Fertilid's Favor	T4	effects	move:library>battlefield	search:*	pending	not yet triaged
 Fervent Champion	T4	effects	costreduction	player:decreaseequipabilitycostwhentargetingpermanent	pending	not yet triaged
@@ -1963,7 +1955,6 @@ Flowstone Sculpture	T4	effects	grant:flying grant:trample	-	pending	not yet tria
 Fluctuator	T4	effects	costreduction	player:decreasecyclingcosts	pending	not yet triaged
 Fluxcharger	T4	effects	unmapped:hidden:CARDNAME's power and toughness are switched	switchpt	normalizer	unmapped token
 Flycatcher Giraffid	T4	effects	counters:vigilance,reach:1	unmapped:ReplacementActionWouldEnter.EntersWithACounterOfChoice	normalizer	unmapped token
-Foam Weapons Kiosk	T4	effects	-	counters:+1/+1:1 grant:vigilance	pending	not yet triaged
 Fog	T4	effects	unmapped:API.Fog	prevent	normalizer	unmapped token
 Fog Patch	T4	effects	unmapped:API.BecomesBlocked	cast:cantbecastunless unmapped:Action.SetEachCreatureAsBlocked	normalizer	unmapped token
 Fog of War	T4	effects	effect	prevent	pending	not yet triaged
@@ -1998,7 +1989,6 @@ Formless Nurturing	T4	effects	unmapped:API.Manifest	unmapped:Action.ManifestTheT
 Forsaken Crossroads	T4	effects	untap	-	pending	not yet triaged
 Fortified Beachhead	T4	effects	unmapped:Enter.Reveal	-	normalizer	unmapped token
 Fortress Kin-Guard	T4	effects	unmapped:API.Endure	endure	normalizer	unmapped token
-Fortune Teller	T4	effects	-	scry:1	pending	not yet triaged
 Fortune Thief	T4	effects	unmapped:Repl.LifeReduced	player:damagethatwouldreducelifetotaltolessthannumberreducesittothatnumberinstead	normalizer	unmapped token
 Fortune, Loyal Steed	T4	effects	-	move:battlefield>exile	pending	not yet triaged
 Fossil Find	T4	effects	move:graveyard>hand unmapped:API.ReorderZone	unmapped:Action.PutACardFromGraveyardIntoHandAtRandom unmapped:Action.ReorderPlayersGraveyard	normalizer	unmapped token
@@ -2176,7 +2166,7 @@ Glamdring, Foe-hammer [Gleam of Death]	T4	effects	move:graveyard>hand	unmapped:A
 Glamer Gifter	T4	effects	-	type	pending	not yet triaged
 Glamerdye	T4	effects	unmapped:API.ChangeText	effect unmapped:LayerEffect.ReplaceColorWordVariableWithNewColorWordVariable	normalizer	unmapped token
 Glaring Spotlight	T4	effects	unmapped:Static.IgnoreHexproof	rule:canbethetargetofspellsandabilitiesasthoughtheydidnthavehexproof	normalizer	unmapped token
-Glava, Five-Advents Mage	T4	effects	unmapped:API.ChangeX	unmapped:Action.MayActionOnceEachTurn unmapped:Action.SetValueXOfSpellOrAbility	normalizer	unmapped token
+Glava, Five-Advents Mage	T4	effects	unmapped:API.ChangeX unmapped:API.ChangeX	unmapped:Action.MayActionOnceEachTurn unmapped:Action.MayActionOnceEachTurn unmapped:Action.SetValueXOfSpellOrAbility unmapped:Action.SetValueXOfSpellOrAbility	normalizer	unmapped token
 Gleancrawler	T4	effects	move:graveyard>hand	unmapped:Action.ReturnEachCardFromGraveyardToHandThatWasPutThereFromBattlefieldThisTurn	normalizer	unmapped token
 Glen Elendra	T4	effects	unmapped:API.ExchangeControl	exchangecontrol	normalizer	unmapped token
 Glider Staff	T4	effects	unmapped:API.Airbend	airbend	normalizer	unmapped token
@@ -2239,10 +2229,10 @@ Goblin Surveyor	T4	effects	grant:ability	draw:1	pending	not yet triaged
 Goblin Traprunner	T4	effects	-	token:*	pending	not yet triaged
 Goblin Vandal	T4	effects	effect	rule:assignsnocombatdamage	pending	not yet triaged
 Goblin Welder	T4	effects	move:graveyard>battlefield sacrifice	unmapped:Action.SimultaneouslySacrificePermanentAndPutGraveyardCardOntoBattlefield	normalizer	unmapped token
-God-Eternal Bontu	T4	effects	move:*>library sacrifice	unmapped:Action.PutExiledCardInOwnersLibraryNthFromTheTop unmapped:Action.PutGraveyardCardInOwnersLibraryNthFromTheTop unmapped:Action.SacrificeAnyNumberOfPermanents	normalizer	unmapped token
-God-Eternal Kefnet	T4	effects	move:*>library	mayplay unmapped:Action.PutExiledCardInOwnersLibraryNthFromTheTop unmapped:Action.PutGraveyardCardInOwnersLibraryNthFromTheTop	normalizer	unmapped token
-God-Eternal Oketra	T4	effects	move:*>library	unmapped:Action.PutExiledCardInOwnersLibraryNthFromTheTop unmapped:Action.PutGraveyardCardInOwnersLibraryNthFromTheTop	normalizer	unmapped token
-God-Eternal Rhonas	T4	effects	move:*>library	unmapped:Action.PutExiledCardInOwnersLibraryNthFromTheTop unmapped:Action.PutGraveyardCardInOwnersLibraryNthFromTheTop	normalizer	unmapped token
+God-Eternal Bontu	T4	effects	move:*>library move:*>library sacrifice	unmapped:Action.PutExiledCardInOwnersLibraryNthFromTheTop unmapped:Action.PutGraveyardCardInOwnersLibraryNthFromTheTop unmapped:Action.SacrificeAnyNumberOfPermanents	normalizer	unmapped token
+God-Eternal Kefnet	T4	effects	move:*>library move:*>library	mayplay unmapped:Action.PutExiledCardInOwnersLibraryNthFromTheTop unmapped:Action.PutGraveyardCardInOwnersLibraryNthFromTheTop	normalizer	unmapped token
+God-Eternal Oketra	T4	effects	move:*>library move:*>library	unmapped:Action.PutExiledCardInOwnersLibraryNthFromTheTop unmapped:Action.PutGraveyardCardInOwnersLibraryNthFromTheTop	normalizer	unmapped token
+God-Eternal Rhonas	T4	effects	move:*>library move:*>library	unmapped:Action.PutExiledCardInOwnersLibraryNthFromTheTop unmapped:Action.PutGraveyardCardInOwnersLibraryNthFromTheTop	normalizer	unmapped token
 God-Pharaoh's Gift	T4	effects	move:graveyard>exile	grant:haste	pending	not yet triaged
 Godhunter Octopus	T4	effects	rule:cantattack	rule:cantattackunlessdefendingplayer	pending	not yet triaged
 Godtoucher	T4	effects	effect	prevent	pending	not yet triaged
@@ -2252,7 +2242,6 @@ Golden Demise	T4	effects	pump:-2/-2	-	pending	not yet triaged
 Golden Wish	T4	effects	move:sideboard>hand	unmapped:Action.RevealCardFromOutsideGameAndPutInHand	normalizer	unmapped token
 Golgari Decoy	T4	effects	-	rule:allcreaturesmustblockit	pending	not yet triaged
 Goliath Paladin	T4	effects	unmapped:API.TakeInitiative	unmapped:Action.TakeTheInitiative	normalizer	unmapped token
-Gollum, Obsessed Stalker	T4	effects	effect	-	pending	not yet triaged
 Gollum, Scheming Guide	T4	effects	unmapped:API.RearrangeTopOfLibrary unmapped:API.RemoveFromCombat	dig:1 dig:2 move:library>library unmapped:Action.RemoveCreatureFromCombat	normalizer	unmapped token
 Gomazoa	T4	effects	move:battlefield>library	unmapped:Action.PutEachPermanentOnTopOfOwnersLibrariesThenShuffleThoseLibraries	normalizer	unmapped token
 Gonti's Aether Heart	T4	effects	counters:energy:2	-	pending	not yet triaged
@@ -2325,7 +2314,7 @@ Grimoire Thief	T4	effects	player:maylookattopcardoflibraryanytime setstate:turnf
 Grimoire of the Dead	T4	effects	-	color type	pending	not yet triaged
 Grindstone	T4	effects	-	unmapped:Action.RepeatThisProcess unmapped:Action.RepeatableActions	normalizer	unmapped token
 Grinning Totem	T4	effects	move:exile>graveyard move:library>exile	unmapped:Action.PutExiledCardIntoOwnersGraveyard unmapped:Action.SearchPlayersLibrary	normalizer	unmapped token
-Grip of Chaos	T4	effects	changetargets changetargets	unmapped:Action.ReselectTargetOfSpellOrAbilityAtRandom	normalizer	unmapped token
+Grip of Chaos	T4	effects	changetargets changetargets changetargets changetargets	unmapped:Action.ReselectTargetOfSpellOrAbilityAtRandom unmapped:Action.ReselectTargetOfSpellOrAbilityAtRandom	normalizer	unmapped token
 Grip of Desolation	T4	effects	-	cda	pending	not yet triaged
 Grishnákh, Brash Instigator	T4	effects	amass	-	pending	not yet triaged
 Grist, Voracious Larva	T4	effects	move:battlefield>exile move:exile>battlefield	-	pending	not yet triaged
@@ -2374,7 +2363,7 @@ Gustcloak Runner	T4	effects	unmapped:API.RemoveFromCombat	unmapped:Action.Remove
 Gustcloak Savior	T4	effects	unmapped:API.RemoveFromCombat	unmapped:Action.RemoveCreatureFromCombat	normalizer	unmapped token
 Gustcloak Sentinel	T4	effects	unmapped:API.RemoveFromCombat	unmapped:Action.RemoveCreatureFromCombat	normalizer	unmapped token
 Gustcloak Skirmisher	T4	effects	unmapped:API.RemoveFromCombat	unmapped:Action.RemoveCreatureFromCombat	normalizer	unmapped token
-Gustha's Scepter	T4	effects	move:exile>graveyard move:exile>graveyard move:exile>hand player:maylookattopcardoflibraryanytime	player:maylookatfacedownexiledcard unmapped:Action.PutExiledCardsIntoOwnersGraveyards unmapped:Action.ReturnAnExiledCardToOwnersHand	normalizer	unmapped token
+Gustha's Scepter	T4	effects	move:exile>graveyard move:exile>graveyard move:exile>hand player:maylookattopcardoflibraryanytime	player:maylookatfacedownexiledcard unmapped:Action.PutExiledCardsIntoOwnersGraveyards unmapped:Action.PutExiledCardsIntoOwnersGraveyards unmapped:Action.ReturnAnExiledCardToOwnersHand	normalizer	unmapped token
 Gut, Bestial Fanatic	T4	effects	-	delayed sacrifice	pending	not yet triaged
 Gut, Brutal Fanatic	T4	effects	-	delayed sacrifice	pending	not yet triaged
 Gut, Devious Fanatic	T4	effects	-	delayed sacrifice	pending	not yet triaged
@@ -2393,7 +2382,6 @@ Hail Storm	T4	effects	damage:1	-	pending	not yet triaged
 Hakbal of the Surging Soul	T4	effects	move:hand>battlefield unmapped:API.Explore	explore	normalizer	unmapped token
 Halimar Depths	T4	effects	unmapped:API.RearrangeTopOfLibrary	dig:3 move:library>library	normalizer	unmapped token
 Halimar Wavewatch	T4	effects	setpt setpt	-	pending	not yet triaged
-Hall of Mirrors	T4	effects	-	copy	pending	not yet triaged
 Hallow	T4	effects	effect	prevent	pending	not yet triaged
 Hallowed Burial	T4	effects	move:battlefield>library	unmapped:Action.PutEachPermanentOnBottomOfOwnersLibraryInOrderOfOwnersChoice	normalizer	unmapped token
 Hallway Heckler	T4	effects	unmapped:Enter.AlterAttribute	unmapped:ReplacementActionWouldEnter.EntersPrepared	normalizer	unmapped token
@@ -2427,7 +2415,6 @@ Harvestguard Alseids	T4	effects	effect	prevent	pending	not yet triaged
 Hatchery Sliver	T4	effects	spell:replicate	player:spellscasthaveability	pending	not yet triaged
 Hate Mirage	T4	effects	-	grant:haste	pending	not yet triaged
 Haunted Fengraf	T4	effects	move:graveyard>hand	unmapped:Action.PutACardFromGraveyardIntoHandAtRandom	normalizer	unmapped token
-Haunted House	T4	effects	-	delayed grant:haste move:battlefield>exile move:graveyard>battlefield	pending	not yet triaged
 Haunting Apparition	T4	effects	cda	setpt	pending	not yet triaged
 Haunting Echoes	T4	effects	search:exile	unmapped:Action.SearchPlayersLibrary	normalizer	unmapped token
 Haunting Imitation	T4	effects	move:stack>hand	unmapped:Action.ReturnSpellToOwnersHand	normalizer	unmapped token
@@ -2563,7 +2550,6 @@ Hulk, Gamma Goliath	T4	effects	costreduction	player:reduceactivatedcost	pending	
 Hullbreaker Horror	T4	effects	move:stack>hand	unmapped:Action.ReturnSpellToOwnersHand	normalizer	unmapped token
 Hum of the Radix	T4	effects	costincrease	spell:increasemanacostforeach	pending	not yet triaged
 Human-Time Lord Meta-Crisis	T4	effects	tokencopy:1 unmapped:API.Planeswalk	token:*	normalizer	unmapped token
-Hundred-Battle Veteran	T4	effects	effect	-	pending	not yet triaged
 Hundred-Handed One	T4	effects	counters:*:1	rule:canblockanadditionalnumbercreatures unmapped:Action.Monstrosity	normalizer	unmapped token
 Hungering Hydra	T4	effects	unmapped:Static.MinMaxBlocker	rule:cantbeblockedbymorethanone	normalizer	unmapped token
 Hunt Down	T4	effects	unmapped:API.MustBlock	rule:mustblockattacker	normalizer	unmapped token
@@ -2613,7 +2599,7 @@ Ignite Memories	T4	effects	-	unmapped:Action.PlayerMustCost	normalizer	unmapped 
 Ignoble Soldier	T4	effects	effect	prevent	pending	not yet triaged
 Ignorant Bliss	T4	effects	move:exile>hand	unmapped:Action.ReturnEachExiledCardToOwnersHand	normalizer	unmapped token
 Ikiral Outrider	T4	effects	setpt setpt	-	pending	not yet triaged
-Ilharg, the Raze-Boar	T4	effects	move:*>library move:hand>battlefield	unmapped:Action.PutExiledCardInOwnersLibraryNthFromTheTop unmapped:Action.PutGraveyardCardInOwnersLibraryNthFromTheTop	normalizer	unmapped token
+Ilharg, the Raze-Boar	T4	effects	move:*>library move:*>library move:hand>battlefield	unmapped:Action.PutExiledCardInOwnersLibraryNthFromTheTop unmapped:Action.PutGraveyardCardInOwnersLibraryNthFromTheTop	normalizer	unmapped token
 Ill-Gotten Gains	T4	effects	move:graveyard>hand	unmapped:Action.PutUptoNumberCardsFromGraveyardIntoHand	normalizer	unmapped token
 Ill-Tempered Cyclops	T4	effects	counters:*:1	unmapped:Action.Monstrosity	normalizer	unmapped token
 Illicit Auction	T4	effects	unmapped:API.BidLife	gaincontrol loselife:* unmapped:Action.StartBiddingWarAmongPlayersAtNumber	normalizer	unmapped token
@@ -2684,7 +2670,6 @@ Infinite Authority	T4	effects	destroy destroy	-	pending	not yet triaged
 Infinite Coursework	T4	effects	unmapped:API.AlterAttribute	unmapped:Action.UnpreparePermanent	normalizer	unmapped token
 Infinite Obliteration	T4	effects	move:graveyard>exile move:hand>exile search:exile	unmapped:Action.SearchPlayersLibraryAndGraveyardAndHand	normalizer	unmapped token
 Infirmary Healer	T4	effects	unmapped:Enter.AlterAttribute	unmapped:ReplacementActionWouldEnter.EntersPrepared	normalizer	unmapped token
-Information Booth	T4	effects	-	draw:1	pending	not yet triaged
 Information Dealer	T4	effects	unmapped:API.RearrangeTopOfLibrary	dig:* move:library>library	normalizer	unmapped token
 Ingenious Mastery	T4	effects	token:2	token:3	pending	not yet triaged
 Injector Crocodile	T4	effects	unmapped:API.Incubate	incubate	normalizer	unmapped token
@@ -2720,7 +2705,6 @@ Into the Fire	T4	effects	move:hand>library:*	unmapped:Action.PutAnyNumberOfCards
 Into the Night	T4	effects	unmapped:API.DayTime	daytime	normalizer	unmapped token
 Into the Wilds	T4	effects	move:library>battlefield	unmapped:Action.PutTopCardOfLibraryOfTypeOnBattlefield	normalizer	unmapped token
 Intrepid Outlander	T4	effects	unmapped:API.Venture	unmapped:Action.VentureIntoTheDungeon	normalizer	unmapped token
-Intrepid Paleontologist	T4	effects	effect	-	pending	not yet triaged
 Intuition	T4	effects	move:library>graveyard move:library>hand	-	pending	not yet triaged
 Invasion Plans	T4	effects	unmapped:Static.Continuous unmapped:Static.MustBlock	player:chooseshowcreaturesblock rule:mustblock	normalizer	unmapped token
 Invasion of Alara	T4	effects	move:exile>hand move:exile>library	unmapped:Action.PutAnExiledCardIntoOwnersHand unmapped:Action.PutEachExiledCardOnTheBottomOfTheirOwnersLibraryInARandomOrder	normalizer	unmapped token
@@ -2846,7 +2830,6 @@ Judgment of Alexander	T4	effects	effect	prevent	pending	not yet triaged
 Judith, Carnage Connoisseur	T4	effects	grant:deathtouch grant:lifelink	effect	pending	not yet triaged
 Judoon Enforcers	T4	effects	unmapped:Static.AttackRestrict	-	normalizer	unmapped token
 Juggernaut Peddler	T4	effects	-	unmapped:Action.RevealAllCardsOfTypeFromHand	normalizer	unmapped token
-Juju Bubble	T4	effects	sacrifice	-	pending	not yet triaged
 Jund	T4	effects	grant:devour	effect	pending	not yet triaged
 Juniper Order Ranger	T4	effects	-	counters:+1/+1:1	pending	not yet triaged
 Junkyard Scrapper	T4	effects	search:exile	move:library>exile	pending	not yet triaged
@@ -2895,7 +2878,6 @@ Katara, Waterbending Master	T4	effects	discard:1	draw:1	pending	not yet triaged
 Katara, the Fearless	T4	effects	unmapped:Static.Panharmonicon	-	normalizer	unmapped token
 Kaust, Eyes of the Glade	T4	effects	setstate:turnfaceup	unmapped:Action.TurnPermanentFaceUp	normalizer	unmapped token
 Kavu Titan	T4	effects	unmapped:Enter.Animate	unmapped:ReplacementActionWouldEnter.EntersWithLayerEffect	normalizer	unmapped token
-Kaya's Ghostform	T4	effects	-	move:graveyard>battlefield	pending	not yet triaged
 Kaya, Bane of the Dead	T4	effects	unmapped:Static.IgnoreHexproof	player:canbethetargetofspellsandabilitiesasthoughtheydidnthavehexproof rule:canbethetargetofspellsandabilitiesasthoughtheydidnthavehexproof	normalizer	unmapped token
 Kaya, Ghost Assassin	T4	effects	-	move:battlefield>exile	pending	not yet triaged
 Kayla's Kindling	T4	effects	unmapped:API.Draft	draft	normalizer	unmapped token
@@ -2930,11 +2912,10 @@ Kheru Goldkeeper	T4	effects	-	counters:flying:1	pending	not yet triaged
 Kheru Lich Lord	T4	effects	move:graveyard>battlefield	unmapped:Action.ReturnACardFromGraveyardToBattlefieldAtRandom	normalizer	unmapped token
 Kheru Mind-Eater	T4	effects	player:maylookattopcardoflibraryanytime	player:maylookatfacedownexiledcards	pending	not yet triaged
 Khorvath's Fury	T4	effects	unmapped:API.AssignGroup	damage:* discard:* draw:*	normalizer	unmapped token
-Khârn the Betrayer	T4	effects	draw:2 replace:woulddealdamage unmapped:Static.MustBlock	replace:preventdamage rule:mustblock	normalizer	unmapped token
+Khârn the Betrayer	T4	effects	replace:woulddealdamage unmapped:Static.MustBlock	replace:preventdamage rule:mustblock	normalizer	unmapped token
 Kianne, Dean of Substance [Imbraham, Dean of Theory]	T4	effects	move:exile>hand	unmapped:Action.PutAnExiledCardIntoOwnersHand	normalizer	unmapped token
 Kick in the Door	T4	effects	unmapped:API.Venture	unmapped:Action.VentureIntoTheDungeon	normalizer	unmapped token
 Kickoff Celebrations	T4	effects	grant:ability	grant:haste	pending	not yet triaged
-Kiddie Coaster	T4	effects	-	pump:+1/+0	pending	not yet triaged
 Kill Switch	T4	effects	effect	rule:doesntuntapduringcontrollersuntap	pending	not yet triaged
 Killer Instinct	T4	effects	move:library>battlefield	unmapped:Action.PutTopOfLibraryOnBattlefield	normalizer	unmapped token
 Killer's Mask	T4	effects	unmapped:API.ManifestDread	unmapped:Action.ManifestDread	normalizer	unmapped token
@@ -2955,7 +2936,7 @@ Kithkin Armor	T4	effects	effect	prevent	pending	not yet triaged
 Kitsune, Dragon's Daughter	T4	effects	unmapped:API.ExchangeControl unmapped:API.ExchangeControl	exchangecontrol exchangecontrol	normalizer	unmapped token
 Kjeldoran Home Guard	T4	effects	counters:-0/-1:1	counters:+0/-1:1	pending	not yet triaged
 Kjeldoran Outpost	T4	effects	unmapped:Enter.ChangeZone unmapped:Enter.ChangeZone unmapped:Enter.Sacrifice	replace:wouldenter	normalizer	unmapped token
-Klaw, Master of Sound	T4	effects	grant:indestructible	dig:1	pending	not yet triaged
+Klaw, Master of Sound	T4	effects	-	dig:1	pending	not yet triaged
 Klaw, Sonic Subjugator	T4	effects	discard:*	unmapped:Action.RevealANumberOfCardsFromHandAndPlayerChoosesACardToDiscard	normalizer	unmapped token
 Klement, Knowledge Acolyte	T4	effects	move:hand>library:*	unmapped:Action.ShuffleCardsFromHandIntoLibrary	normalizer	unmapped token
 Knight Rampager	T4	effects	rule:mustattack	rule:mustattackplayer	pending	not yet triaged
@@ -3077,7 +3058,6 @@ Legolas's Quick Reflexes	T4	effects	untap	-	pending	not yet triaged
 Lembas	T4	effects	move:graveyard>library	unmapped:Action.ShuffleGraveyardCardIntoLibrary	normalizer	unmapped token
 Lens of Clarity	T4	effects	-	player:maylookatfacedownpermanents	pending	not yet triaged
 Leonardo da Vinci	T4	effects	move:graveyard>exile	-	pending	not yet triaged
-Leonardo, Sewer Samurai	T4	effects	effect	-	pending	not yet triaged
 Leonin Arbiter	T4	effects	player:cantsearchlibrary	player:cantsearchlibraries	pending	not yet triaged
 Leonin Lightscribe	T4	effects	pump:+1/+1	-	pending	not yet triaged
 Leonin Shikari	T4	effects	flash	mayplay	pending	not yet triaged
@@ -3360,7 +3340,6 @@ Merfolk Spy	T4	effects	-	unmapped:Action.RevealACardFromHandAtRandom	normalizer	
 Merfolk Thaumaturgist	T4	effects	unmapped:hidden:CARDNAME's power and toughness are switched	switchpt	normalizer	unmapped token
 Merfolk Tunnel-Guide	T4	effects	unmapped:API.Explore	explore	normalizer	unmapped token
 Merieke Ri Berit	T4	effects	destroy	-	pending	not yet triaged
-Merry-Go-Round	T4	effects	-	grant:horsemanship	pending	not yet triaged
 Messenger Jays	T4	effects	unmapped:API.Vote	counters:+1/+1:* discard:* draw:* unmapped:Action.VoteForAWord	normalizer	unmapped token
 Metallurgic Summonings	T4	effects	move:graveyard>hand	unmapped:Action.ReturnEachCardFromGraveyardToHand	normalizer	unmapped token
 Metalworker	T4	effects	-	unmapped:Action.RevealAnyNumberOfCardsOfTypeFromHand	normalizer	unmapped token
@@ -3374,7 +3353,6 @@ Midnight Crusader Shuttle	T4	effects	unmapped:API.ChangeCombatants unmapped:API.
 Midnight Oil	T4	effects	unmapped:Static.Continuous	player:setmaximumhandsize	normalizer	unmapped token
 Midnight Pathlighter	T4	effects	rule:cantbeblockedbydefenders unmapped:API.Venture	rule:cantbeblockedexceptbydefenders unmapped:Action.VentureIntoTheDungeon	normalizer	unmapped token
 Mijae Djinn	T4	effects	-	tap unmapped:Action.RemoveCreatureFromCombat	normalizer	unmapped token
-Mikey & Don, Party Planners	T4	effects	effect	-	pending	not yet triaged
 Mila, Crafty Companion [Lukka, Wayward Bonder]	T4	effects	discard:1 draw:2	-	pending	not yet triaged
 Militia Rallier	T4	effects	-	rule:cantattackalone	pending	not yet triaged
 Mimeofacture	T4	effects	search:battlefield	unmapped:Action.SearchPlayersLibrary	normalizer	unmapped token
@@ -3704,7 +3682,6 @@ No Admittance	T4	effects	unmapped:API.Empower	empower	normalizer	unmapped token
 No Rest for the Wicked	T4	effects	move:graveyard>hand	unmapped:Action.ReturnEachCardFromGraveyardToHandThatWasPutThereFromBattlefieldThisTurn	normalizer	unmapped token
 No Secret Is Hidden from Me	T4	effects	move:library>exile play	unmapped:Action.RepeatThisProcess unmapped:Action.RepeatableActionsNumTimes	normalizer	unmapped token
 Noble Quarry	T4	effects	unmapped:hidden:All creatures able to block CARDNAME do so.	rule:allcreaturesmustblockit	normalizer	unmapped token
-Noctis, Prince of Lucis	T4	effects	effect	-	pending	not yet triaged
 Noggin Whack	T4	effects	-	unmapped:Action.RevealNumberCardsFromHand	normalizer	unmapped token
 Noggle Bandit	T4	effects	rule:cantbeblockedbydefenders	rule:cantbeblockedexceptbydefenders	pending	not yet triaged
 Non-Human Cannonball	T4	effects	-	damage:*	pending	not yet triaged
@@ -3731,7 +3708,7 @@ Nuclear Fallout	T4	effects	unmapped:API.Radiation	counters:rad:*	normalizer	unma
 Nuka-Nuke Launcher	T4	effects	unmapped:API.Radiation	counters:rad:2	normalizer	unmapped token
 Null Chamber	T4	effects	choose choose player:cantcastspells unmapped:Static.CantPlayLand	spell:cantbecast static:cardeffect unmapped:ReplacementActionWouldEnter.EachPlayerAction	normalizer	unmapped token
 Null Champion	T4	effects	grant:ability setpt setpt	regenerate	pending	not yet triaged
-Null Profusion	T4	effects	draw:1 unmapped:Repl.BeginPhase unmapped:Static.Continuous	player:setmaximumhandsize player:skipsdrawstep	normalizer	unmapped token
+Null Profusion	T4	effects	unmapped:Repl.BeginPhase unmapped:Static.Continuous	player:setmaximumhandsize player:skipsdrawstep	normalizer	unmapped token
 Nulltread Gargantuan	T4	effects	move:battlefield>library	unmapped:Action.ReturnAPermanentToTopOfLibrary	normalizer	unmapped token
 Nurgle's Rot	T4	effects	move:graveyard>hand	unmapped:Action.ReturnDeadGuestGraveyardCardToHand	normalizer	unmapped token
 Nurturing Licid	T4	effects	-	loseabilities	pending	not yet triaged
@@ -3987,7 +3964,7 @@ Phyrexian Splicer	T4	effects	grant:flying grant:shadow grant:trample loseabiliti
 Phyrexian Unlife	T4	effects	player:cantlosethegame unmapped:Static.InfectDamage	player:doesntlosethegameforhaving0orlesslife replace:woulddealdamage	normalizer	unmapped token
 Phyrexian Vindicator	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Pick the Brain	T4	effects	move:graveyard>exile move:hand>exile search:exile	unmapped:Action.SearchPlayersLibraryAndGraveyardAndHand	normalizer	unmapped token
-Pick-a-Beeble	T4	effects	-	claimtheprize counters:luck:* dice sacrifice token:2 unmapped:Action.OpenAnAttraction	normalizer	unmapped token
+Pick-a-Beeble	T4	effects	token:1	sacrifice token:2 unmapped:Action.OpenAnAttraction	normalizer	unmapped token
 Piece It Together	T4	effects	unmapped:API.Intensify	intensify	normalizer	unmapped token
 Piercing Exhale	T4	effects	unmapped:Static.OptionalCost	damage:*	normalizer	unmapped token
 Pigment Storm	T4	effects	damage:5	unmapped:Action.SpellDealsDamageExcessReplacable unmapped:Action.WouldDealExcessDamage_DealExcessToPlayerInstead	normalizer	unmapped token
@@ -4137,7 +4114,6 @@ Propagator Drone	T4	effects	-	cda	pending	not yet triaged
 Prophecy	T4	effects	dig:1	unmapped:Action.RevealTheTopCardOfPlayersLibrary unmapped:Action.Shuffle	normalizer	unmapped token
 Prophet of Distortion	T4	effects	-	cda	pending	not yet triaged
 Prophet of Kruphix	T4	effects	unmapped:Static.UntapOtherPlayer	rule:untapsduringotherplayersuntapsteps	normalizer	unmapped token
-Prosper, Tome-Bound	T4	effects	token:1	-	pending	not yet triaged
 Protean Hydra	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Protean War Engine	T4	effects	unmapped:Enter.ChangeZone unmapped:Enter.Draft	unmapped:ReplacementActionWouldEnter.DraftACardFromSpellBook unmapped:ReplacementActionWouldEnter.Exile	normalizer	unmapped token
 Protection of the Hekma	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
@@ -4148,7 +4124,6 @@ Proteus Staff	T4	effects	move:battlefield>library	unmapped:Action.PutPermanentOn
 Prototype X-8	T4	effects	sacrifice	-	pending	not yet triaged
 Providence	T4	effects	unmapped:API.SetLife	unmapped:Action.SetLifeTotal	normalizer	unmapped token
 Provoke	T4	effects	effect	rule:mustblock	pending	not yet triaged
-Prowl, Stoic Strategist	T4	effects	draw:1 transform	-	pending	not yet triaged
 Prowler's Helm	T4	effects	rule:cantbeblockedbydefenders	rule:cantbeblockedexceptbydefenders	pending	not yet triaged
 Prowling Nightstalker	T4	effects	rule:cantbeblockedbydefenders	rule:cantbeblockedexceptbydefenders	pending	not yet triaged
 Prudent Fateseer	T4	effects	unmapped:Enter.AlterAttribute	unmapped:ReplacementActionWouldEnter.EntersPrepared	normalizer	unmapped token
@@ -4162,7 +4137,6 @@ Psychic Paper	T4	effects	unmapped:Repl.Attached	-	normalizer	unmapped token
 Psychic Pickpocket	T4	effects	connive	-	pending	not yet triaged
 Psychic Possession	T4	effects	unmapped:Repl.BeginPhase	player:skipsdrawstep	normalizer	unmapped token
 Psychic Transfer	T4	effects	unmapped:API.ExchangeLife	exchangelife	normalizer	unmapped token
-Psychomancer	T4	effects	-	gainlife:1 loselife:1	pending	not yet triaged
 Psychotic Episode	T4	effects	dig:1 move:hand>library:1 move:library>library	unmapped:Action.PutCardFromHandOnBottomOfLibrary unmapped:Action.PutTopOfLibraryOnBottomOfLibrary	normalizer	unmapped token
 Public Enemy	T4	effects	rule:mustattack	rule:mustattackplayer	pending	not yet triaged
 Puca's Covenant	T4	effects	-	unmapped:Action.MayActionOnceEachTurn	normalizer	unmapped token
@@ -4318,7 +4292,7 @@ Reconstruct History	T4	effects	move:graveyard>hand move:graveyard>hand move:grav
 Recross the Paths	T4	effects	move:stack>hand unmapped:API.Clash	clash unmapped:Action.ReturnSpellToOwnersHand	normalizer	unmapped token
 Recruit Instructor	T4	effects	unmapped:API.Draft	draft	normalizer	unmapped token
 Recruitment Drive	T4	effects	-	unmapped:Action.ValueActions	normalizer	unmapped token
-Recycle	T4	effects	draw:1 unmapped:Repl.BeginPhase unmapped:Static.Continuous	player:setmaximumhandsize player:skipsdrawstep	normalizer	unmapped token
+Recycle	T4	effects	unmapped:Repl.BeginPhase unmapped:Static.Continuous	player:setmaximumhandsize player:skipsdrawstep	normalizer	unmapped token
 Red Cliffs Armada	T4	effects	rule:cantattack	rule:cantattackunlessdefendingplayer	pending	not yet triaged
 Red Sun's Twilight	T4	effects	-	grant:haste	pending	not yet triaged
 Red Sun's Zenith	T4	effects	move:stack>library	unmapped:Action.ShuffleSpellIntoLibrary	normalizer	unmapped token
@@ -4348,7 +4322,6 @@ Relics of the Rubblebelt	T4	effects	unmapped:API.Draft	draft	normalizer	unmapped
 Relief Captain	T4	effects	counters:*:1	unmapped:Action.Support	normalizer	unmapped token
 Remorseless Punishment	T4	effects	-	unmapped:Action.RepeatThisProcess unmapped:Action.RepeatableActionsNumTimes	normalizer	unmapped token
 Remove	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
-Rendmaw, Creaking Nest	T4	effects	goad token:1	-	pending	not yet triaged
 Renewing Touch	T4	effects	move:graveyard>library	unmapped:Action.ShuffleEachGraveyardCardIntoLibrary	normalizer	unmapped token
 Reno and Rude	T4	effects	sacrifice	-	pending	not yet triaged
 Renounce	T4	effects	sacrifice	unmapped:Action.SacrificeAnyNumberOfPermanents	normalizer	unmapped token
@@ -4405,7 +4378,6 @@ Reweave	T4	effects	move:library>library sacrifice	unmapped:Action.PlayerMustCost
 Rewrite History	T4	effects	sacrifice	-	pending	not yet triaged
 Rewrite Regrets	T4	effects	unmapped:API.Empower	empower	normalizer	unmapped token
 Rex, Cyber-Hound	T4	effects	unmapped:Static.Continuous	unmapped:LayerEffect.AddAbilityFromAnExiledHasable	normalizer	unmapped token
-Reyhan, Last of the Abzan	T4	effects	-	counters:+1/+1:*	pending	not yet triaged
 Rhet-Crop Spearmaster	T4	effects	unmapped:Static.OptionalAttackCost	rule:maybeexertedasitattackswithtrigger	normalizer	unmapped token
 Rhet-Tomb Mystic	T4	effects	grant:cycling	static:eachcardinplayershandeffect	pending	not yet triaged
 Rhino's Rampage	T4	effects	fight	-	pending	not yet triaged
@@ -4476,7 +4448,6 @@ Rogues' Gallery	T4	effects	move:graveyard>hand move:graveyard>hand move:graveyar
 Rohirrim Chargers	T4	effects	unmapped:Static.OptionalAttackCost	rule:maybeexertedasitattacks	normalizer	unmapped token
 Role Reversal	T4	effects	unmapped:API.ExchangeControl	exchangecontrol	normalizer	unmapped token
 Roll-Roll-Roll-Roll	T4	effects	move:battlefield>exile move:battlefield>exile move:battlefield>exile move:battlefield>exile	-	pending	not yet triaged
-Roller Coaster	T4	effects	-	pump:+2/+0	pending	not yet triaged
 Rolling Stones	T4	effects	unmapped:Static.CanAttackDefender	rule:canattackasthoughitdidnthavedefender	normalizer	unmapped token
 Rona's Vortex	T4	effects	move:battlefield>library	unmapped:Action.PutPermanentOnBottomOfOwnersLibrary	normalizer	unmapped token
 Ronom Serpent	T4	effects	rule:cantattack	rule:cantattackunlessdefendingplayer	pending	not yet triaged
@@ -4600,7 +4571,7 @@ Savior of Ollenbock	T4	effects	-	move:graveyard>exile	pending	not yet triaged
 Savor the Moment	T4	effects	extraturn	unmapped:Action.TakeAnExtraTurnAndSkipUntapStepOfThatTurn	normalizer	unmapped token
 Sawtooth Loon	T4	effects	move:hand>library:2	unmapped:Action.PutNumCardsFromHandOnBottomOfLibraryAnyOrder	normalizer	unmapped token
 Scaleguard Sentinels	T4	effects	unmapped:Static.OptionalCost	cast:optionaladditionalcastingcost	normalizer	unmapped token
-Scalesoul Gnome	T4	effects	conjure unmapped:API.Discover	discover	normalizer	unmapped token
+Scalesoul Gnome	T4	effects	unmapped:API.Discover	discover	normalizer	unmapped token
 Scalespeaker Shepherd	T4	effects	unmapped:API.Draft	draft	normalizer	unmapped token
 Scalpelexis	T4	effects	-	unmapped:Action.RepeatThisProcess unmapped:Action.RepeatableActions	normalizer	unmapped token
 Scampire	T4	effects	unmapped:API.PutSticker	unmapped:Action.PutAStickerOnACardInPlayersGraveyard	normalizer	unmapped token
@@ -4653,7 +4624,7 @@ Sea of Sand	T4	effects	replace:woulddraw	player:revealseachcarddrawn	pending	not
 Seafarer's Quay	T4	effects	grant:bandswithother	grant:ability	pending	not yet triaged
 Sealock Monster	T4	effects	counters:*:1 rule:cantattack	rule:cantattackunlessdefendingplayer unmapped:Action.Monstrosity	normalizer	unmapped token
 Search for Survivors	T4	effects	unmapped:API.ReorderZone	unmapped:Action.ShuffleGraveyard	normalizer	unmapped token
-Search the City	T4	effects	extraturn move:exile>hand move:exile>hand sacrifice sacrifice	unmapped:Action.PutAnExiledCardIntoOwnersHand	normalizer	unmapped token
+Search the City	T4	effects	move:exile>hand move:exile>hand sacrifice sacrifice	unmapped:Action.PutAnExiledCardIntoOwnersHand unmapped:Action.PutAnExiledCardIntoOwnersHand	normalizer	unmapped token
 Searing Barb	T4	effects	unmapped:API.Incubate	incubate	normalizer	unmapped token
 Searing Blood	T4	effects	damage:3	damage:2	pending	not yet triaged
 Seasinger	T4	effects	-	rule:maychoosenottountapduringuntap	pending	not yet triaged
@@ -4715,7 +4686,6 @@ Serpentine Spike	T4	effects	-	cda	pending	not yet triaged
 Serra Avatar	T4	effects	move:graveyard>library	unmapped:Action.ShuffleGraveyardCardIntoLibrary	normalizer	unmapped token
 Serra Avenger	T4	effects	player:cantcastspells	cast:cantbecastif	pending	not yet triaged
 Serra Bestiary	T4	effects	rule:cantbeactivated	rule:abilitiesoftypecantbeactivated	pending	not yet triaged
-Serra Paragon	T4	effects	grant:ability grant:ability	-	pending	not yet triaged
 Serra the Benevolent	T4	effects	effect	player:damagethatwouldreducelifetotaltolessthannumberreducesittothatnumberinstead	pending	not yet triaged
 Serra's Emissary	T4	effects	-	grant:protection	pending	not yet triaged
 Serrated Biskelion	T4	effects	-	counters:-1/-1:1	pending	not yet triaged
@@ -4750,7 +4720,6 @@ Shape Anew	T4	effects	move:library>library	-	pending	not yet triaged
 Shape of the Wiitigo	T4	effects	unmapped:API.AddOrRemoveCounter	counters:+1/+1:1 countersremove	normalizer	unmapped token
 Shapeshifter	T4	effects	cda	setpt	pending	not yet triaged
 Shapeshifter's Marrow	T4	effects	move:library>graveyard	unmapped:Action.PutTopOfLibraryInGraveyard	normalizer	unmapped token
-Shard of the Void Dragon	T4	effects	-	counters:+1/+1:2	pending	not yet triaged
 Share the Spoils	T4	effects	move:library>exile move:library>exile	-	pending	not yet triaged
 Shared Fate	T4	effects	player:maylookattopcardoflibraryanytime	-	pending	not yet triaged
 Shared Trauma	T4	effects	-	unmapped:Action.PayAnyAmountOfMana	normalizer	unmapped token
@@ -4892,7 +4861,6 @@ Skywatcher Adept	T4	effects	setpt setpt	-	pending	not yet triaged
 Skyway Robber	T4	effects	unmapped:Enter.Animate	unmapped:ReplacementActionWouldEnter.EntersWithLayerEffect	normalizer	unmapped token
 Skywinder Drake	T4	effects	rule:cantbeblockedbydefenders	rule:canblockonly	pending	not yet triaged
 Skywriter Djinn	T4	effects	conjure	unmapped:Action.RepeatThisProcess unmapped:Action.RepeatableActions	normalizer	unmapped token
-Slagstone Refinery	T4	effects	-	token:1	pending	not yet triaged
 Slaughter Drone	T4	effects	-	cda	pending	not yet triaged
 Slaughter Games	T4	effects	move:graveyard>exile move:hand>exile search:exile	unmapped:Action.SearchPlayersLibraryAndGraveyardAndHand	normalizer	unmapped token
 Slayer's Bounty	T4	effects	unmapped:API.Draft	draft	normalizer	unmapped token
@@ -5053,7 +5021,6 @@ Spinebiter	T4	effects	unmapped:Static.AssignCombatDamageAsUnblocked	rule:mayassi
 Spinerock Knoll	T4	effects	play	unmapped:Action.PlayExiledCardWithoutPaying	normalizer	unmapped token
 Spinerock Tyrant	T4	effects	copyspell grant:wither	spell:wither	pending	not yet triaged
 Spinnerette, Arachnobat	T4	effects	unmapped:API.OpenAttraction	unmapped:Action.OpenAnAttraction	normalizer	unmapped token
-Spinny Ride	T4	effects	-	tap	pending	not yet triaged
 Spire Owl	T4	effects	unmapped:API.RearrangeTopOfLibrary	dig:4 move:library>library	normalizer	unmapped token
 Spire Serpent	T4	effects	unmapped:Static.CanAttackDefender	rule:canattackasthoughitdidnthavedefender	normalizer	unmapped token
 Spire Tracer	T4	effects	rule:cantbeblockedbydefenders	rule:cantbeblockedexceptbydefenders	pending	not yet triaged
@@ -5158,7 +5125,7 @@ Stormwild Capridor	T4	effects	replace:woulddealdamage	replace:preventdamage	pend
 Stormwing Dragon	T4	effects	counters:+1/+1:1	-	pending	not yet triaged
 Storrev, Devkarin Lich	T4	effects	-	move:graveyard>hand	pending	not yet triaged
 Story Circle	T4	effects	effect	prevent	pending	not yet triaged
-Storybook Ride	T4	effects	-	delayed mayplay move:library>exile unmapped:Action.PutEachExiledCardOnTheBottomOfTheirOwnersLibraryInAnyOrder	normalizer	unmapped token
+Storybook Ride	T4	effects	move:exile>library	unmapped:Action.PutEachExiledCardOnTheBottomOfTheirOwnersLibraryInAnyOrder	normalizer	unmapped token
 Strago and Relm	T4	effects	grant:ability grant:haste	effect	pending	not yet triaged
 Strange Inversion	T4	effects	unmapped:hidden:CARDNAME's power and toughness are switched	switchpt	normalizer	unmapped token
 Stranglehold	T4	effects	player:cantsearchlibrary unmapped:Repl.BeginTurn	player:cantsearchlibraries replace:wouldbeginaturn	normalizer	unmapped token
@@ -5273,7 +5240,7 @@ Swiftspear's Teachings	T4	effects	grant:*	effect effect	pending	not yet triaged
 Swiftwing Assailant	T4	effects	grant:ability	grant:vigilance pump:+0/+1	pending	not yet triaged
 Swindler's Scheme	T4	effects	dig:1	-	pending	not yet triaged
 Swine Rebellion	T4	effects	-	conjure	pending	not yet triaged
-Swinging Ship	T4	effects	-	unmapped:Action.ThereIsAnAdditionalCombatPhaseWithTrigger untap	normalizer	unmapped token
+Swinging Ship	T4	effects	addphase delayed	unmapped:Action.ThereIsAnAdditionalCombatPhaseWithTrigger	normalizer	unmapped token
 Swirl the Mists	T4	effects	unmapped:Static.Continuous	static:eachpermanentandspelleffect	normalizer	unmapped token
 Switcheroo	T4	effects	unmapped:API.ExchangeControl	exchangecontrol	normalizer	unmapped token
 Sword of Body and Mind	T4	effects	grant:protection	grant:ability	pending	not yet triaged
@@ -5300,7 +5267,6 @@ Synthesis Pod	T4	effects	-	diguntil	pending	not yet triaged
 Synthetic Destiny	T4	effects	diguntil move:library>library	unmapped:Action.RevealCardsFromTheTopOfLibraryUntilANumberOfCardsOfTypeAreRevealed	normalizer	unmapped token
 Syr Carah, the Bold	T4	effects	-	mayplay move:library>exile	pending	not yet triaged
 Syr Joshua and Syr Saxon	T4	effects	unmapped:Static.IgnoreLegendRule	-	normalizer	unmapped token
-Syr Vondam, Sunstar Exemplar	T4	effects	-	counters:+1/+1:1 destroy gainlife:1	pending	not yet triaged
 Séance	T4	effects	move:graveyard>exile	-	pending	not yet triaged
 TARDIS	T4	effects	unmapped:API.Planeswalk	unmapped:Action.Planeswalk	normalizer	unmapped token
 TARDIS Bay	T4	effects	spell:cascade unmapped:API.Planeswalk	player:thenthspellcasteachturnhasability unmapped:Action.Planeswalk	normalizer	unmapped token
@@ -5408,7 +5374,6 @@ Tenacious Tosk	T4	effects	unmapped:Static.MinMaxBlocker	rule:cantbeblockedbymore
 Tentative Connection	T4	effects	grant:haste	-	pending	not yet triaged
 Tenuous Truce	T4	effects	sacrifice	-	pending	not yet triaged
 Teo, Spirited Glider	T4	effects	discard:1	-	pending	not yet triaged
-Tergrid, God of Fright	T4	effects	move:graveyard>battlefield move:graveyard>battlefield	-	pending	not yet triaged
 Terminus	T4	effects	move:battlefield>library	unmapped:Action.PutEachPermanentOnBottomOfOwnersLibraryInOrderOfOwnersChoice	normalizer	unmapped token
 Terra, Magical Adept	T4	effects	move:graveyard>hand	unmapped:Action.PutUptoNumberCardsOfTypeMilledThisWayIntoHand	normalizer	unmapped token
 Terra, Magical Adept [Esper Terra]	T4	effects	-	grant:haste grant:haste grant:haste	pending	not yet triaged
@@ -5471,7 +5436,6 @@ The Deck of Many Things	T4	effects	-	unmapped:Action.ValueActions	normalizer	unm
 The Dining Car	T4	effects	costreduction	player:reduceactivatedcost	pending	not yet triaged
 The Doctor's Childhood Barn	T4	effects	phaseout	unmapped:Action.PhaseInEachPermanent	normalizer	unmapped token
 The Doctor's Tomb	T4	effects	unmapped:API.SetLife	unmapped:Action.RedistributeLifeTotalsOfPlayers	normalizer	unmapped token
-The Eighth Doctor	T4	effects	grant:ability grant:ability	-	pending	not yet triaged
 The Eleventh Hour	T4	effects	-	token:1	pending	not yet triaged
 The End	T4	effects	move:graveyard>exile move:hand>exile search:exile	unmapped:Action.SearchPlayersLibraryAndGraveyardAndHand	normalizer	unmapped token
 The Endstone	T4	effects	unmapped:API.SetLife	unmapped:Action.SetLifeTotal	normalizer	unmapped token
@@ -5634,7 +5598,6 @@ Thrun, Breaker of Silence	T4	effects	unmapped:Static.CantTarget	rule:cantbetheta
 Thryx, the Sudden Storm	T4	effects	spell:cantbecountered	player:spellscasthaveability	pending	not yet triaged
 Thunder Brute	T4	effects	-	grant:haste	pending	not yet triaged
 Thundercloud Elemental	T4	effects	animate	loseabilities	pending	not yet triaged
-Thundermane Dragon	T4	effects	grant:haste	-	pending	not yet triaged
 Thunderous Orator	T4	effects	grant:deathtouch grant:doublestrike grant:firststrike grant:flying grant:indestructible grant:lifelink grant:menace grant:trample	unmapped:LayerEffect.AddAbilityFromEachPermanentHasable	normalizer	unmapped token
 Thundersong Trumpeter	T4	effects	-	rule:cantblock	pending	not yet triaged
 Thunderstaff	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
@@ -5738,7 +5701,7 @@ Transmute Artifact	T4	effects	move:library>battlefield move:library>battlefield 
 Trap Runner	T4	effects	unmapped:API.BecomesBlocked	unmapped:Action.SetCreatureAsBlocked	normalizer	unmapped token
 Trap the Trespassers	T4	effects	unmapped:API.Vote	unmapped:Action.RevealVotesForPermanent unmapped:Action.SecretlyVoteForAPermanent	normalizer	unmapped token
 Trapped in the Tower	T4	effects	rule:cantbeactivated	rule:abilitiescantbeactivated	pending	not yet triaged
-Trash Bin	T4	effects	-	mill:2 unmapped:Action.PutACardFromGraveyardIntoHandAtRandom	normalizer	unmapped token
+Trash Bin	T4	effects	move:graveyard>hand	unmapped:Action.PutACardFromGraveyardIntoHandAtRandom	normalizer	unmapped token
 Traumatic Revelation	T4	effects	unmapped:API.Incubate	incubate	normalizer	unmapped token
 Travel Through Caradhras	T4	effects	unmapped:API.Vote	search:* unmapped:Action.ReturnNumberCardsFromPlayersGraveyardToHand unmapped:Action.VoteForAWord	normalizer	unmapped token
 Traveling Botanist	T4	effects	move:library>graveyard move:library>hand	unmapped:Action.PutTopOfLibraryInGraveyard	normalizer	unmapped token
@@ -5795,7 +5758,7 @@ Tsagan, Raider Warlord	T4	effects	grant:ability	grant:deathtouch grant:firststri
 Tuktuk Grunts	T4	effects	-	counters:+1/+1:1	pending	not yet triaged
 Tuktuk Scrapper	T4	effects	destroy	damage:*	pending	not yet triaged
 Tunnel Vision	T4	effects	move:library>graveyard move:library>library	-	pending	not yet triaged
-Tunnel of Love	T4	effects	-	delayed fight move:exile>battlefield	pending	not yet triaged
+Tunnel of Love	T4	effects	move:battlefield>exile	-	pending	not yet triaged
 Turf Wound	T4	effects	effect	player:cantplaylands	pending	not yet triaged
 Turn Against	T4	effects	grant:haste	cda	pending	not yet triaged
 Turn Inside Out	T4	effects	unmapped:API.ManifestDread	unmapped:Action.ManifestDread	normalizer	unmapped token
@@ -5849,10 +5812,9 @@ Ultimate Nullification	T4	effects	move:stack>library	unmapped:Action.PutSpellOnB
 Ultra Magnus, Tactician	T4	effects	move:hand>battlefield	-	pending	not yet triaged
 Umara Raptor	T4	effects	-	counters:+1/+1:1	pending	not yet triaged
 Unable to Scream	T4	effects	unmapped:Repl.TurnFaceUp	rule:cantbeturnedfaceup	normalizer	unmapped token
-Unbound Flourishing	T4	effects	unmapped:API.ChangeX	changex copyspell	normalizer	unmapped token
+Unbound Flourishing	T4	effects	unmapped:API.ChangeX	changex	normalizer	unmapped token
 Unbreathing Horde	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Uncle's Musings	T4	effects	move:graveyard>hand	unmapped:Action.PutUptoNumberCardsFromGraveyardToHand	normalizer	unmapped token
-Undead Sprinter	T4	effects	effect	-	pending	not yet triaged
 Under the Skin	T4	effects	unmapped:API.ManifestDread	unmapped:Action.ManifestDread	normalizer	unmapped token
 Undercellar Sweep	T4	effects	unmapped:API.TakeInitiative	unmapped:Action.TakeTheInitiative	normalizer	unmapped token
 Underdark Explorer	T4	effects	unmapped:API.TakeInitiative	unmapped:Action.TakeTheInitiative	normalizer	unmapped token
@@ -5955,7 +5917,6 @@ Vault 11: Voter's Dilemma	T4	effects	unmapped:API.Vote unmapped:API.Vote	destroy
 Vault 12: The Necropolis	T4	effects	unmapped:API.Radiation	counters:rad:3	normalizer	unmapped token
 Vault 13: Dweller's Journey	T4	effects	move:exile>battlefield move:exile>library	unmapped:Action.PutEachExiledCardOnTheBottomOfTheirOwnersLibraryInAnyOrder unmapped:Action.PutNumberCardsFromExileOntoBattlefield	normalizer	unmapped token
 Vault 21: House Gambit	T4	effects	-	unmapped:Action.RevealUptoNumberCardsOfTypeFromHand	normalizer	unmapped token
-Vazi, Keen Negotiator	T4	effects	-	counters:+1/+1:1 draw:1	pending	not yet triaged
 Vec Townships	T4	effects	effect	rule:doesntuntapduringcontrollersuntap	pending	not yet triaged
 Vedalken Plotter	T4	effects	unmapped:API.ExchangeControl	exchangecontrol	normalizer	unmapped token
 Vedalken Shackles	T4	effects	-	rule:maychoosenottountapduringuntap	pending	not yet triaged
@@ -6068,7 +6029,6 @@ Volrath's Curse	T4	effects	rule:cantbeactivated unmapped:Static.Continuous	rule:
 Volrath's Dungeon	T4	effects	move:hand>library:1	unmapped:Action.PutACardFromHandOnTopOfLibrary	normalizer	unmapped token
 Volrath's Shapeshifter	T4	effects	unmapped:Static.Continuous	unmapped:LayerEffect.HasTextOfGraveyardCardAndTheText	normalizer	unmapped token
 Voltage Surge	T4	effects	unmapped:Static.OptionalCost	cast:optionaladditionalcastingcost	normalizer	unmapped token
-Voltaic Visionary	T4	effects	transform	-	pending	not yet triaged
 Vona's Hunger	T4	effects	sacrifice	-	pending	not yet triaged
 Vorinclex [The Grand Evolution]	T4	effects	move:graveyard>battlefield	unmapped:Action.PutUptoNumberGraveyardCardsOntoTheBattlefield	normalizer	unmapped token
 Vorpal Sword	T4	effects	animate	-	pending	not yet triaged
@@ -6269,7 +6229,7 @@ Workshop Elders	T4	effects	setpt type	-	pending	not yet triaged
 World Breaker	T4	effects	-	cda	pending	not yet triaged
 World at War	T4	effects	-	untap	pending	not yet triaged
 Worldfire	T4	effects	unmapped:API.SetLife	unmapped:Action.SetLifeTotal	normalizer	unmapped token
-Worldheart Phoenix	T4	effects	alternativecost effect	mayplay	pending	not yet triaged
+Worldheart Phoenix	T4	effects	alternativecost	mayplay	pending	not yet triaged
 Worldpurge	T4	effects	move:hand>library:* unmapped:API.DrainMana	drainmana unmapped:Action.ShuffleAllButNumberCardsInHandIntoLibrary	normalizer	unmapped token
 Worlds Within Worlds	T4	effects	move:exile>hand move:hand>battlefield	unmapped:Action.PutAnyNumberOfCardsFromHandOntoBattlefield unmapped:Action.ReturnEachExiledCardToOwnersHand	normalizer	unmapped token
 Worldsoul's Rage	T4	effects	move:hand>battlefield	unmapped:Action.PutUptoNumberCardsFromHandAndOrGraveyardOnBattlefield	normalizer	unmapped token
