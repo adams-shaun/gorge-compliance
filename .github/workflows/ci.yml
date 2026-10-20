@@ -126,6 +126,9 @@ jobs:
           test -s gorge/.cards/cards.lock || { echo "no .cards corpus: every corpus test would skip"; exit 1; }
           grep -q "${{ steps.cpin.outputs.forge_ref }}" gorge/.cards/cards.lock || { echo ".cards is not at FORGE_REF"; cat gorge/.cards/cards.lock; exit 1; }
           ln -sfn ../gorge/.cards gorge-compliance/.cards
+      - name: Fetch the mtgish data (sha256-checked; TestMtgishLedger skips without it)
+        working-directory: gorge-compliance
+        run: make mtgish-fetch
       - name: Save the corpus
         if: github.event_name != 'pull_request' && steps.corpus.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
