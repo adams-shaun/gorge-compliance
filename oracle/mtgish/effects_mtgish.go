@@ -215,6 +215,11 @@ func (e *effects) action(n node, v string) {
 		// Foraging is a keyword action whichever way it is written.
 		e.add("forage")
 		return
+	case (v == "MayCost" || v == "MustCost") && strings.HasPrefix(variantOf(arg(0)), "Cast"):
+		// "You may cast that card" written as a cost the player may pay:
+		// casting is the effect, as the Cast* actions.
+		e.add("play")
+		return
 	case wrapperActions[v]:
 		return
 	case strings.HasPrefix(v, "Reflexive_"):

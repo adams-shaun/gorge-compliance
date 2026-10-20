@@ -64,7 +64,13 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 		if t := g.idx.gorgeTargets(a); t != "" {
 			e.targets = append(e.targets, t)
 		}
-		e.add(gorgeAPIEffects(a, g.svars())...)
+		if a.Params["Duration"] == "Perpetual" {
+			// A perpetual change (digital): one verb, as mtgish's
+			// CreatePerpetual* actions.
+			e.add("perpetual")
+		} else {
+			e.add(gorgeAPIEffects(a, g.svars())...)
+		}
 		e.add(atEOTTokens(a.Params["AtEOT"])...)
 		if a.API == "Effect" {
 			// The triggers an effect creates run their own effects, as

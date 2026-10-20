@@ -149,10 +149,25 @@ func spellEffectTokens(xs []any) []string {
 			v == "Bloodthirst":
 			out = append(out, "spell:"+strings.ToLower(v))
 		default:
-			out = append(out, "effect")
+			if tok := keywordRuleToken(v); tok != "" {
+				out = append(out, "spell:"+tok)
+			} else {
+				out = append(out, "effect")
+			}
 		}
 	}
 	return out
+}
+
+// keywordRuleToken is the canonical keyword a keyword-named variant
+// (Cascade, Storm, Convoke, ...) stands for, "" for anything else.
+func keywordRuleToken(v string) string {
+	for _, m := range []map[string]string{simpleKeywords, costKeywords, numberKeywords, bareKeywords} {
+		if tok, ok := m[v]; ok {
+			return tok
+		}
+	}
+	return ""
 }
 
 // c1CopyWithEffects maps a spell copy with modifiers: the copy, plus any
