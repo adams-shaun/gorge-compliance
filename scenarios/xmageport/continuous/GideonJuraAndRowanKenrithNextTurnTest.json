@@ -231,8 +231,7 @@
     }
    ],
    "expect": [],
-   "xmage": "GideonJuraAndRowanKenrithNextTurnTest#test_SingleOpponentMustAttackRowanKenrith",
-   "known_bug": "XP[oracle-harness-required-attacker+rowan-effect-cleanup]: at the pinned gorge the Bears are Required (gorge 296c38b1a) but the oracle harness submits the scripted empty declaration, which validateAttackDeclaration refuses ('harness: submit attackers []'); XMage's game forces the attacker (CR 508.1d). Fixed on gorge wt/kernel-gorgebug3 d1bc316af. Past that, Rowan Kenrith's Effect is not exiled at p1's cleanup (its RemoveEffect trigger, registered 'Cleanup|DU=permanent|SB|VP=Player.IsRemembered', never fires), so the Bears attack again on p1's next turn: p0 16, want 18. CR 611.2a."
+   "xmage": "GideonJuraAndRowanKenrithNextTurnTest#test_SingleOpponentMustAttackRowanKenrith"
   }
  ]
 }

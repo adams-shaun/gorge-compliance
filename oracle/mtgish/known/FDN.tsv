@@ -11,6 +11,5 @@ Joust Through	T4	effects	gainlife:1	gainlife:3	mtgish-bug	printed life gain is 1
 Mazemind Tome	T4	effects	move:battlefield>exile	-	mtgish-bug	the self-exile gating the life gain is mandatory ("exile it. If you do"); mtgish encodes a MayCost, should be MustCost as Fishing Pole (i5jb/mtgish#4)
 Muldrotha, the Gravetide	T2	abilities	static static static static static	-	equivalent	script writes one MayPlay static per permanent type; mtgish one player effect
 Muldrotha, the Gravetide	T4	effects	mayplay mayplay mayplay mayplay mayplay	-	equivalent	the same five per-type MayPlay statics as its T2 row
-Prayer of Binding	T3	targets	permanent	permanentx0..1	forge-bug	printed target count is up to one; the script's exile (ValidTgts$, no TargetMin$ 0) requires exactly one (Card-Forge/forge#12316; fixed on the fork's gorge branch, retires with the next FORGE_REF and GORGE_PIN bump)
 Primal Might	T3	targets	creature+creaturex0..1	creature+creature	mtgish-bug	printed fight target is up to one; mtgish TargetPermanent requires exactly one (gorge: TargetMin$ 0) (i5jb/mtgish#3)
 Sorcerous Spyglass	T4	effects	choose	-	equivalent	script chooses the opponent (ChoosePlayer) and then the name; mtgish one name choice

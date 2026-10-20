@@ -209,13 +209,21 @@ func TestOptionalCostCastNoShapes(t *testing.T) {
 // ticket routes: how many card faces carry each. It is a ratchet -- a corpus
 // pin that adds or removes a carrier changes a count here and fails loudly.
 // Measured 2026-10-05 at FORGE_REF 95f04e8a04c8925fa97cb226fc3341cabcc90a53.
+//
+// TargetMinZeroUpTo 405 -> 403 at FORGE_REF 76fd7691a (2026-10-20):
+// Card-Forge/forge#12321 corrected Twigwalker and Resounding Wave from "up to
+// two" (TargetMin$ 0 | TargetMax$ 2) to exactly two (TargetMin$ 2), so both
+// left the family. Nothing entered: #12316's new TargetMin$ 0 lines (Prayer of
+// Binding, Aurelia, Plan for All Outcomes, Struggle for Skemfar, Yotia Declares
+// War, Bilbo, Burrog Barrage) are all TargetMax$ 1, and the TargetMin$ 0 that
+// #12321 dropped from Storm the Citadel was TargetMax$ 1 too.
 var mechanismFamilies = map[string]int{
 	"Kicker":            239,
 	"Offspring":         21,
 	"OptionalCost":      40,
 	"Spree":             21,
 	"MinCharmNum":       153,
-	"TargetMinZeroUpTo": 405,
+	"TargetMinZeroUpTo": 403,
 }
 
 // TestMechanismFamilyCensus pins the per-family carrier counts over the whole
