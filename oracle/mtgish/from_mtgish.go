@@ -60,6 +60,7 @@ func mtgishFace(c *Card, f node) *Summary {
 			s.Loyalty = gameNumber(l)
 		}
 	}
+	mtgishFaceE(m, f)
 	return s
 }
 
@@ -170,7 +171,7 @@ var costKeywords = map[string]string{
 	"Plot": "plot", "Prowl": "prowl", "Reconfigure": "reconfigure", "Scavenge": "scavenge",
 	"Spectacle": "spectacle", "Squad": "squad", "Surge": "surge", "Transmute": "transmute",
 	"Outlast": "outlast", "Fortify": "fortify", "Disturb": "disturb", "Freerunning": "freerunning",
-	"Impending": "impending", "Warp": "warp", "Sneak": "sneak", "Harmonize": "harmonize",
+	"Warp": "warp", "Sneak": "sneak", "Harmonize": "harmonize",
 	"Mayhem": "mayhem", "Craft": "craft", "Saddle": "saddle", "CumulativeUpkeep": "cumulativeupkeep",
 	"Replicate": "replicate",
 }
@@ -243,10 +244,13 @@ func (m *mtgishNorm) rule(r any) {
 		return
 	}
 	if tok, ok := bareKeywords[v]; ok {
+		if v == "StationCharged" || v == "StationChargedAnimate" {
+			// A level of the Station keyword, which is its own Rule.
+			m.stationLevel(r)
+			return
+		}
 		m.kw(tok)
 		switch v {
-		case "StationCharged", "StationChargedAnimate":
-			m.rules(list(argN(r, 1)))
 		case "Visit", "VisitAndPrize":
 			e := &effects{}
 			e.walk(argsOf(r))
@@ -255,10 +259,10 @@ func (m *mtgishNorm) rule(r any) {
 		return
 	}
 	if tok, ok := numberKeywords[v]; ok {
+		// Backup's argument 1 lists the abilities it grants, which the
+		// card also prints as its own (every Backup line in the corpus):
+		// they are summarised once, where printed.
 		m.kw(tok + ":" + gameNumber(argN(r, 0)))
-		if v == "Backup" {
-			m.rules(list(argN(r, 1)))
-		}
 		return
 	}
 	switch {
@@ -289,6 +293,8 @@ func (m *mtgishNorm) rule(r any) {
 	case v == "CastEffect" && strings.HasPrefix(variantOf(rawArgs(r)), "AdditionalCastingCost"):
 		// An additional casting cost is a cost, not an ability (scripts put
 		// it in the spell's Cost$).
+		return
+	case m.selfPT(r):
 		return
 	case staticRules[v]:
 		m.ability(Ability{Kind: "static", Effects: staticEffects(r)})
@@ -348,7 +354,8 @@ func (m *mtgishNorm) rule(r any) {
 			}
 		}
 	case "CDA_Color", "CDA_ColorButNotColorIdentity":
-		if strings.Contains(variantOf(rawArgs(r)), "Colorless") {
+		// Devoid is the keyword; "this is colorless" is a color CDA.
+		if variantOf(rawArgs(r)) == "Devoid" {
 			m.kw("devoid")
 		} else {
 			m.ability(Ability{Kind: "static", Effects: []string{"cda"}})

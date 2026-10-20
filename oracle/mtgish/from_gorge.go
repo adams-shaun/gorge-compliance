@@ -17,6 +17,7 @@ func FromGorge(name string, c *cards.Card, idx TypeIndex) []*Summary {
 		}
 		out = append(out, gorgeFace(name, f, idx))
 	}
+	gorgeCardE(c, out)
 	return out
 }
 
@@ -29,22 +30,8 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		}
 	}
 	s.ManaCost = mc.String()
-	for _, t := range f.Types {
-		s.Types = append(s.Types, typeWord(t))
-	}
-	s.PT = f.PT
-	if strings.Contains(s.PT, "*") {
-		// "1+*/1+*": a characteristic-defining P/T is "*" whatever its
-		// printed base; mtgish prints every CDA half as "*".
-		p, t, _ := strings.Cut(s.PT, "/")
-		if strings.Contains(p, "*") {
-			p = "*"
-		}
-		if strings.Contains(t, "*") {
-			t = "*"
-		}
-		s.PT = p + "/" + t
-	}
+	s.Types = gorgeTypes(f.Types)
+	s.PT = gorgePT(f)
 	s.Loyalty = f.Loyalty
 
 	g := &gorgeNorm{s: s, f: f, idx: idx}
@@ -56,11 +43,12 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 			// A keyword's activated ability (equip, crew, a Class level-up).
 			continue
 		}
-		if intrinsicMana(f, a) {
+		if intrinsicMana(f, a) || cleaveSP(a) {
 			continue
 		}
 		g.sa(a)
 	}
+	g.cleave(f)
 	for i := range f.Triggers {
 		t := &f.Triggers[i]
 		if head, _, ok := kwTag(t.Params); ok && !printedExpansion(head) {
@@ -601,6 +589,12 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 func hiddenKeywordToken(k string) string {
 	k = strings.TrimPrefix(k, "HIDDEN ")
 	switch {
+	case strings.Contains(k, "can't attack alone"):
+		return "rule:cantattackalone"
+	case strings.Contains(k, "can't block alone"):
+		return "rule:cantblockalone"
+	case strings.Contains(k, "can only attack alone"):
+		return "rule:canonlyattackalone"
 	case strings.Contains(k, "can't block"):
 		return "rule:cantblock"
 	case strings.Contains(k, "can't attack"):
