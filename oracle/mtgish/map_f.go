@@ -2,6 +2,7 @@ package mtgish
 
 import (
 	"encoding/json"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -183,13 +184,19 @@ func mergeThisOrAnother(rs []any) []any {
 			continue
 		}
 		rest := canonicalJSON(a[1:])
+		// In the "this" rule, "that permanent" is this one: Pashalik Mons'
+		// first rule says "that permanent deals damage", its second "this".
+		restThis := thatPermanentRef.ReplaceAllString(rest, `"_Permanent":"ThisPermanent"`)
 		ev := strings.Join(dedup(triggerEvents(a[0])), " ")
 		for j := i + 1; j < len(rs); j++ {
 			if drop[j] || variantOf(rs[j]) != v {
 				continue
 			}
 			b := argsOf(rs[j])
-			if len(b) != len(a) || canonicalJSON(b[1:]) != rest {
+			if len(b) != len(a) {
+				continue
+			}
+			if br := canonicalJSON(b[1:]); br != rest && br != restThis {
 				continue
 			}
 			if strings.Join(dedup(triggerEvents(b[0])), " ") != ev || !otherSubject(b[0]) {
@@ -228,6 +235,9 @@ func otherSubject(t any) bool {
 	})
 	return found
 }
+
+// thatPermanentRef matches a reference to the triggering permanent.
+var thatPermanentRef = regexp.MustCompile(`"_Permanent":"(Trigger_ThatPermanent|ThatEnteringPermanent|ThatDyingPermanent|ThatPermanent)"`)
 
 func canonicalJSON(x any) string {
 	b, _ := json.Marshal(x) // map keys are marshalled sorted

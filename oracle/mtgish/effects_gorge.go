@@ -155,6 +155,12 @@ func svarRefs(a *cards.SA) []string {
 		out = append(out, a.Params["ChosenPile"], a.Params["UnchosenPile"])
 	case "DelayedTrigger", "ImmediateTrigger":
 		out = append(out, a.Params["Execute"])
+	case "FlipCoin", "Clash":
+		// What winning or losing does (mtgish writes "When you win the
+		// flip, ... When you lose, ..." as reflexive actions).
+		for _, k := range []string{"WinSubAbility", "LoseSubAbility", "HeadsSubAbility", "TailsSubAbility", "OtherwiseSubAbility"} {
+			out = append(out, a.Params[k])
+		}
 	}
 	var keep []string
 	for _, r := range out {
