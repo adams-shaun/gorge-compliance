@@ -40,7 +40,7 @@ func mtgishFace(c *Card, f node) *Summary {
 		}
 	}
 
-	m := &mtgishNorm{s: s}
+	m := &mtgishNorm{s: s, basePT: f["CardPT"]}
 	m.rules(list(f["Rules"]))
 	mergeSpells(s, false)
 	splitStatics(s)
@@ -96,6 +96,7 @@ type mtgishNorm struct {
 	cdaPower, cdaToughness bool
 	cdaSeen                bool
 	enter                  int // 1 + the index of the face's "as this enters" replacement, 0 for none
+	basePT                 any // the face's printed CardPT, which a level may keep
 }
 
 func (m *mtgishNorm) kw(tok string) { m.s.Keywords = append(m.s.Keywords, tok) }
@@ -353,7 +354,7 @@ func (m *mtgishNorm) rule(r any) {
 	case "LevelUp":
 		m.kw("levelup")
 		for _, l := range list(argN(r, 1)) {
-			m.levelStatic(list(argN(l, 2)))
+			m.levelStatic(argN(l, 1), list(argN(l, 2)))
 		}
 	case "CDA_Color", "CDA_ColorButNotColorIdentity":
 		if cv := variantOf(rawArgs(r)); strings.Contains(cv, "Colorless") || cv == "Devoid" {

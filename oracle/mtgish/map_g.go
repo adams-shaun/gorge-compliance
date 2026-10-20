@@ -157,7 +157,7 @@ func damagesPlayer(vt string) bool {
 // normaliser skips as a cost, not an ability; the gorge side skips them the
 // same way.
 func selfSpellCost(p map[string]string) bool {
-	return p["ValidCard"] == "Card.Self" && p["Type"] == "Spell"
+	return (p["ValidCard"] == "Card.Self" || p["Affected"] == "Card.Self") && p["Type"] == "Spell"
 }
 
 func init() {
@@ -450,12 +450,17 @@ func firstArg(x any) any {
 // levelStatic summarises one LevelUp level the way the script writes it:
 // one static carrying the level's P/T and the keywords it grants, with the
 // level's other abilities alongside.
-func (m *mtgishNorm) levelStatic(rules []any) {
+func (m *mtgishNorm) levelStatic(pt any, rules []any) {
 	n := &mtgishNorm{s: &Summary{}}
 	n.rules(rules)
 	m.cdaPower = m.cdaPower || n.cdaPower
 	m.cdaToughness = m.cdaToughness || n.cdaToughness
-	eff := []string{"setpt"}
+	var eff []string
+	if !reflect.DeepEqual(pt, m.basePT) {
+		// A level that keeps the printed P/T sets none (the script's
+		// level static then has no SetPower$ either).
+		eff = append(eff, "setpt")
+	}
 	for _, a := range n.s.Abilities {
 		if a.Kind == "static" {
 			eff = append(eff, a.Effects...)
@@ -466,7 +471,9 @@ func (m *mtgishNorm) levelStatic(rules []any) {
 	for _, k := range n.s.Keywords {
 		eff = append(eff, "grant:"+keywordHeadToken(k))
 	}
-	m.ability(Ability{Kind: "static", Effects: eff})
+	if len(eff) > 0 {
+		m.ability(Ability{Kind: "static", Effects: eff})
+	}
 }
 
 // stationAnimate summarises StationChargedAnimate: "STATION N+: <keywords>,

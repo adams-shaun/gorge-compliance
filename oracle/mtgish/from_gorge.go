@@ -585,6 +585,15 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			// layer effect, as mtgish's CantGainAbility.
 			out = append(out, "rule:cantgainability")
 		}
+		switch n := p["CanBlockAmount"]; n {
+		case "":
+		case "1":
+			out = append(out, "rule:canblockanadditionalcreature")
+		case "99":
+			out = append(out, "rule:canblockanynumberofcreatures")
+		default:
+			out = append(out, "rule:canblockanadditionalnumbercreatures")
+		}
 		if p["Goad"] == "True" {
 			out = append(out, "rule:isgoadedbyplayer")
 		}
