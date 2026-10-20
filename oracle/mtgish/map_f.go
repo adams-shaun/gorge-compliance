@@ -461,7 +461,7 @@ func stackTargetTypes(tt string) []string {
 			t = t[:i]
 		}
 		switch t {
-		case "Spell":
+		case "Spell", "Instant", "Sorcery":
 			cls = append(cls, clsSpell)
 		case "Activated", "Triggered":
 			cls = append(cls, clsAbility)
