@@ -161,7 +161,9 @@ func (idx TypeIndex) gorgeTargets(a *cards.SA) string {
 	p := a.Params
 	vt := p["ValidTgts"]
 	tt := p["TargetType"]
-	if vt == "" && tt == "" {
+	if vt == "" {
+		// A TargetType$ alone restricts a Defined$ stack object (a
+		// ChangeTargets of the triggering spell): no target.
 		return ""
 	}
 	zone := p["TgtZone"]
@@ -178,22 +180,10 @@ func (idx TypeIndex) gorgeTargets(a *cards.SA) string {
 		zone = ""
 	}
 	cls := idx.validClasses(vt, zone)
-	if tt != "" && (vt == "" || strings.Contains(zone, "Stack")) {
-		cls = nil
-		for _, t := range strings.Split(tt, ",") {
-			t = strings.TrimSpace(t)
-			if i := strings.IndexByte(t, '.'); i >= 0 {
-				t = t[:i]
-			}
-			switch t {
-			case "Spell":
-				cls = append(cls, clsSpell)
-			case "Activated", "Triggered":
-				cls = append(cls, clsAbility)
-			case "SpellAbility":
-				cls = append(cls, clsSpell, clsAbility)
-			}
-		}
+	if sc := stackTargetTypes(tt); sc != nil {
+		// TargetType$ makes the target a stack object whatever TgtZone$
+		// says (ValidTgts$ then filters its card).
+		cls = sc
 	}
 	min := literalOr(p["TargetMin"], "1")
 	max := literalOr(p["TargetMax"], "1")
@@ -203,9 +193,12 @@ func (idx TypeIndex) gorgeTargets(a *cards.SA) string {
 	return targetToken(cls, countRange(min, max))
 }
 
-// validClasses maps a ValidTgts$ (or Enchant) list to target classes.
+// validClasses maps a ValidTgts$ (or Enchant) list to target classes. An
+// alternative naming several card types ("Creature.Artifact") is their
+// intersection ("artifact&creature"), as permanentsClasses renders it.
 func (idx TypeIndex) validClasses(vt, zone string) []string {
 	var out []string
+	zones := strings.Split(zone, ",")
 	for _, alt := range strings.Split(vt, ",") {
 		alt = strings.TrimSpace(alt)
 		head := alt
@@ -213,39 +206,30 @@ func (idx TypeIndex) validClasses(vt, zone string) []string {
 			head = head[:i]
 		}
 		w := typeWord(head)
-		switch {
-		case w == "any":
-			out = append(out, clsAny)
-		case w == "player" || w == "opponent":
-			out = append(out, clsPlayer)
-		case strings.Contains(zone, "Graveyard"):
-			out = append(out, clsGraveyard)
-		case strings.Contains(zone, "Exile"):
-			out = append(out, clsExile)
-		case strings.Contains(zone, "Stack"):
-			out = append(out, clsSpell)
-		case permanentTypes[w]:
-			out = append(out, w)
-		case idx[w] != "":
-			out = append(out, idx[w])
-		case w == "":
-		default:
-			out = append(out, clsPermanent)
-		}
-	}
-	// "permanent" alongside a narrower class adds nothing a target-kind
-	// comparison can use; mtgish's filter extraction drops it the same way.
-	ds := dedup(out)
-	if len(ds) > 1 {
-		var narrowed []string
-		for _, c := range ds {
-			if c != clsPermanent {
-				narrowed = append(narrowed, c)
+		for _, z := range altZones(alt, zones) {
+			switch {
+			case w == "any":
+				out = append(out, clsAny)
+			case w == "player" || w == "opponent":
+				out = append(out, clsPlayer)
+			case strings.Contains(z, "Graveyard"):
+				out = append(out, clsGraveyard)
+			case strings.Contains(z, "Exile"):
+				out = append(out, clsExile)
+			case strings.Contains(z, "Stack"):
+				out = append(out, clsSpell)
+			default:
+				types, generic := idx.altTypes(alt)
+				switch {
+				case len(types) > 0:
+					out = append(out, intersectionClass(types))
+				case generic:
+					out = append(out, clsPermanent)
+				}
 			}
 		}
-		ds = narrowed
 	}
-	return ds
+	return narrowPermanent(out)
 }
 
 // gorgeAPIEffects maps one SA's API to its effect verbs.
