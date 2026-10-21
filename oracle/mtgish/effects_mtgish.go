@@ -45,6 +45,10 @@ func (e *effects) walk(x any) {
 		case "_SearchLibraryAction":
 			// "..., then each opponent who cast a spell with that name
 			// loses 8 life": actions among a search's steps.
+			if variant == "PutFoundCardsOntoBattlefield" {
+				// "...onto the battlefield with N counters": the flags are walked.
+				return true
+			}
 			if descend, ok := e.p2cLookAction(n, variant); ok {
 				return descend
 			}

@@ -335,7 +335,7 @@ var c2Fixed = map[string][]string{
 	"ThereIsAnAdditionalEndStep":                             {"addphase"},
 	"TakeANumberOfExtraTurns":                                {"extraturn"},
 	"TakeAnExtraTurnAfterNextTurn":                           {"extraturn"},
-	"TakeAnExtraTurnAndSkipUntapStepOfThatTurn":              {"extraturn"},
+	"TakeAnExtraTurnAndSkipUntapStepOfThatTurn":              {"extraturn", "player:skipsuntapstep"},
 	"SkipNextTurn":                     {"skipturn"},
 	"SkipNextNumberTurns":              {"skipturn"},
 	"SkipNextUntapStep":                {"skipphase"},
