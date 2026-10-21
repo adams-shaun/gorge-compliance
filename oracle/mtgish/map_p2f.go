@@ -179,3 +179,17 @@ var p2fLookStays = map[string]bool{
 func p2fShuffledAfter(a *cards.SA, dest string) bool {
 	return dest == "Library" && a.Sub != nil && a.Sub.API == "Shuffle"
 }
+
+func init() {
+	// A reflexive exile ("exile it. When you do, ...") is mapped by both
+	// reflexiveHeadP2B (every zone but a graveyard) and unit p2d's
+	// extReflexive (every zone), so a battlefield exile counted twice.
+	// Each zone once: p2d's table adds only what p2b's skips.
+	extReflexive["Exile"] = func(e *effects, n node) {
+		for _, x := range list(argN(n, 0)) {
+			if z := exilableZone(x); z == "graveyard" {
+				e.add("move:graveyard>exile")
+			}
+		}
+	}
+}
