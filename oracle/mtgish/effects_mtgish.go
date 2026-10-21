@@ -882,7 +882,7 @@ func staticEffects(r any) []string {
 	case "StackSpellsEffect":
 		var out []string
 		for _, x := range list(argN(r, 1)) {
-			out = append(out, "spell:"+strings.ToLower(variantOf(x)))
+			out = append(out, p2fStackSpellToken(x))
 		}
 		return out
 	}

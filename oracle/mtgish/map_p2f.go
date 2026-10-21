@@ -397,3 +397,13 @@ func init() {
 		e.add(gameEffectToken(argN(n, 1)))
 	}
 }
+
+// p2fStackSpellToken maps one effect a static gives spells. "<Spells> can't
+// be cast" is Forge's CantBeCast static, a restriction on the players
+// casting them (the gorge side's player:cantcastspells).
+func p2fStackSpellToken(x any) string {
+	if variantOf(x) == "CantBeCast" {
+		return "player:cantcastspells"
+	}
+	return "spell:" + strings.ToLower(variantOf(x))
+}
