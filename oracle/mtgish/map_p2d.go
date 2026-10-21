@@ -106,6 +106,8 @@ func init() {
 		extAction[v] = func(e *effects, n node) { e.add("move:hand>battlefield", "move:graveyard>battlefield") }
 	}
 	extReflexive["Sacrifice"] = func(e *effects, n node) { e.add("sacrifice") }
+	// "You may convert it. When you do, ...": the convert is a transform.
+	extReflexive["ConvertPermanent"] = func(e *effects, n node) { e.add("transform") }
 	extReflexive["PlayerSacrifices"] = func(e *effects, n node) { e.add("sacrifice") }
 	// "You may pay {2} and sacrifice an Aura": the mana is paid, the
 	// sacrifice done.

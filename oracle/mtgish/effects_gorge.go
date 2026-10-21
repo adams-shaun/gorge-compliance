@@ -326,6 +326,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		return out
 	case "CopyPermanent":
 		out := []string{"tokencopy:" + literalOr(p["NumCopies"], "1")}
+		if p["DefinedName"] != "" {
+			// "Create a Spellgorger Weird token": a named predefined
+			// token, not a copy of an object (mtgish OracleToken).
+			out[0] = "token:" + literalOr(p["NumCopies"], "1")
+		}
 		// "It gains haste": a grant, as Token's PumpKeywords$.
 		for _, k := range cards.SplitKeywordList(p["PumpKeywords"]) {
 			out = append(out, "grant:"+grantKeyword(k))
