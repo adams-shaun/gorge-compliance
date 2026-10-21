@@ -1,5 +1,7 @@
 package mtgish
 
+import "github.com/adams-shaun/gorge/engine/cards"
+
 // Phase 2, unit b: residual T4 effect classes found triaging the
 // alphabetical second third of the corpus.
 
@@ -61,4 +63,41 @@ var replCanonP2B = map[string]string{
 	"replace:anynumberoftokenswouldbecreated": "replace:aneffectwouldcreateanynumberoftokens",
 	"replace:aplayerwouldcreatetokens":        "replace:aneffectwouldcreateanynumberoftokens",
 	"replace:aplayerwouldcreateatoken":        "replace:aneffectwouldcreateanynumberoftokens",
+}
+
+// paramTokensP2B maps the second action some APIs carry in their own
+// parameters: PutCounter(All)'s CounterType2$ ("a +1/+1 counter on each
+// creature and a loyalty counter on each planeswalker") and a zone
+// change's WithCountersType$ ("exile it with N time counters on it").
+func paramTokensP2B(a *cards.SA) []string {
+	p := a.Params
+	var out []string
+	switch a.API {
+	case "PutCounter", "PutCounterAll":
+		if ct := p["CounterType2"]; ct != "" {
+			n := p["CounterNum2"]
+			if n == "" {
+				n = p["CounterNum"]
+			}
+			out = append(out, gorgeCounterTokens(ct, literalOr(n, "1"))...)
+		}
+	case "ChangeZone", "ChangeZoneAll":
+		if ct := p["WithCountersType"]; ct != "" {
+			out = append(out, gorgeCounterTokens(ct, literalOr(p["WithCountersAmount"], "1"))...)
+		}
+	}
+	return out
+}
+
+// enterFlagP2B maps the counters a permanent is put onto the battlefield
+// with or exiled with (EntersWith*/ExilesWith* flags), as the gorge side
+// maps a zone change's WithCountersType$ (paramTokensP2B).
+func enterFlagP2B(n node, v string) []string {
+	switch v {
+	case "EntersWithACounter", "ExilesWithACounter":
+		return []string{"counters:" + counterType(rawArgs(n)) + ":1"}
+	case "EntersWithNumberCounters", "ExilesWithNumberCounters":
+		return []string{"counters:" + counterType(argN(n, 1)) + ":" + gameNumber(argN(n, 0))}
+	}
+	return nil
 }

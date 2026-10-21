@@ -35,6 +35,14 @@ func (e *effects) walk(x any) {
 				return false
 			}
 			return variant == "If" || variant == "Unless" || variant == "MayAction" || variant == "MayActions"
+		case "_SearchLibraryAction":
+			// Steps of a search: only their enter flags carry an effect
+			// (the found card enters with a counter).
+			return true
+		case "_EnterFlag", "_ExileFlag":
+			// "Return it with a finality counter on it" (EnterFlags).
+			e.add(enterFlagP2B(n, variant)...)
+			return variant == "If" || variant == "IfPassesFilter"
 		case "_Target", "_DistributedTarget":
 			if strings.HasSuffix(variant, "TargetPlayerControls") {
 				// "Up to five target permanents target player controls":
