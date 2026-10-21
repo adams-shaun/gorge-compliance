@@ -116,6 +116,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			e.merge(subs)
 		}
 		g.c2Chase(e, a, depth)
+		g.p2cCost(e, a, depth)
 	}
 }
 

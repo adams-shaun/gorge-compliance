@@ -254,6 +254,12 @@ func (e *effects) action(n node, v string) {
 		// casting is the effect, as the Cast* actions.
 		e.add("play")
 		return
+	case v == "MustCost":
+		// "Sacrifice two Swamps. If you can't, ...": a cost the player
+		// must pay is done, as EachPlayerMustCost and PlayerMustCost
+		// (a mana payment stays nothing, costAsAction).
+		e.p2cMustCost(arg(0))
+		return
 	case wrapperActions[v]:
 		return
 	case strings.HasPrefix(v, "Reflexive_"):
