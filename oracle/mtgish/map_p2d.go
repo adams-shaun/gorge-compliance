@@ -464,6 +464,14 @@ func init() {
 	extAction["UnspecializeGraveyardCard"] = func(e *effects, n node) { e.add("setstate:unspecialize") }
 	extAction["AnteAPermanent"] = func(e *effects, n node) { e.add("move:battlefield>ante") }
 	extAction["ShuffleACardFromHandIntoLibrary"] = func(e *effects, n node) { e.add("move:hand>library:1") }
+	// "Return each card put into a graveyard from the battlefield this
+	// turn to its owner's hand".
+	extAction["ReturnEachCardFromPlayersGraveyardToHandThatWasPutThereFromBattlefieldThisTurn"] = func(e *effects, n node) {
+		e.add("move:graveyard>hand")
+	}
+	// "Copy that card. You may cast the copy by paying {1}": a cast, as
+	// the other CastCopiedCard actions (Forge: Play with CopyCard$).
+	extAction["CastCopiedCardForAlternateCost"] = func(e *effects, n node) { e.add("play") }
 }
 
 // p2dPlayerSpellEffects maps "<spells you cast (from your hand, from exile,
