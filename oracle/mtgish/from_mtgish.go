@@ -40,8 +40,10 @@ func mtgishFace(c *Card, f node) *Summary {
 		}
 	}
 
-	m := &mtgishNorm{s: s}
+	m := &mtgishNorm{s: s, basePT: f["CardPT"]}
 	m.rules(list(f["Rules"]))
+	mergeSpells(s, false)
+	splitStatics(s)
 
 	if pt, ok := f["CardPT"].(map[string]any); ok {
 		p, t := strconv.Itoa(intOr(pt["Power"])), strconv.Itoa(intOr(pt["Toughness"]))
@@ -94,6 +96,8 @@ type mtgishNorm struct {
 	s                      *Summary
 	cdaPower, cdaToughness bool
 	cdaSeen                bool
+	enter                  int // 1 + the index of the face's "as this enters" replacement, 0 for none
+	basePT                 any // the face's printed CardPT, which a level may keep
 }
 
 func (m *mtgishNorm) kw(tok string) { m.s.Keywords = append(m.s.Keywords, tok) }
@@ -123,7 +127,10 @@ func (m *mtgishNorm) sub(r any, conditional bool) {
 
 // rules maps a Vec<Rule>.
 func (m *mtgishNorm) rules(rs []any) {
-	for _, r := range mergeThisOrAnother(rs) {
+	for _, r := range mergeZoneStatics(mergeSelfOrOther(mergeThisOrAnother(rs))) {
+		if zoneDuplicate(r, rs) {
+			continue
+		}
 		m.rule(r)
 	}
 }
@@ -285,7 +292,7 @@ func (m *mtgishNorm) rule(r any) {
 		}
 		return
 	case v == "CastEffect" && (strings.HasPrefix(variantOf(rawArgs(r)), "AdditionalCastingCost") ||
-		variantOf(rawArgs(r)) == "OptionalAdditionalCastingCost"):
+		variantOf(rawArgs(r)) == "OptionalAdditionalCastingCost" || castRestriction(variantOf(rawArgs(r)))):
 		// An additional casting cost is a cost, not an ability (scripts put
 		// it in the spell's Cost$).
 		return
@@ -327,7 +334,7 @@ func (m *mtgishNorm) rule(r any) {
 		a.Targets, a.Effects = e.targets, e.effects
 		m.ability(a)
 	case "AsPermanentEnters", "AsPermanentEntersOrIsTurnedFaceUp", "AsPermanentEscapes":
-		m.ability(Ability{Kind: "replacement", Effects: enterEffects(list(argN(r, 1)))})
+		m.enterReplacement(enterEffects(list(argN(r, 1))))
 	case "SagaChapters":
 		// One chapter ability per chapter number, as scripts list them.
 		for _, ch := range list(rawArgs(r)) {
@@ -340,12 +347,10 @@ func (m *mtgishNorm) rule(r any) {
 	case "LevelUp":
 		m.kw("levelup")
 		for _, l := range list(argN(r, 1)) {
-			for _, x := range list(argN(l, 2)) {
-				m.sub(x, true)
-			}
+			m.levelStatic(argN(l, 1), list(argN(l, 2)))
 		}
 	case "CDA_Color", "CDA_ColorButNotColorIdentity":
-		if cv := variantOf(rawArgs(r)); strings.Contains(cv, "Colorless") || cv == "Devoid" {
+		if cv := variantOf(rawArgs(r)); cv == "Devoid" {
 			m.kw("devoid")
 		} else {
 			m.ability(Ability{Kind: "static", Effects: []string{"cda"}})
@@ -361,7 +366,7 @@ func (m *mtgishNorm) rule(r any) {
 			m.ability(Ability{Kind: "static", Effects: []string{"cda"}})
 		}
 	case "CDA_Types":
-		if cv := variantOf(rawArgs(r)); cv == "Changeling" || strings.Contains(cv, "AllCreatureTypes") {
+		if cv := variantOf(rawArgs(r)); cv == "Changeling" {
 			m.kw("changeling")
 		} else {
 			// "Is the chosen type in addition to its other types": a
@@ -485,7 +490,7 @@ func (m *mtgishNorm) trigger(r any) {
 	}
 	e := &effects{}
 	e.walk(args[len(args)-1])
-	for _, ev := range dedup(triggerEvents(args[0])) {
+	for _, ev := range mergeDamageOr(dedup(triggerEvents(args[0]))) {
 		m.ability(Ability{Kind: "triggered", Event: ev, Targets: append([]string(nil), e.targets...), Effects: append([]string(nil), e.effects...)})
 	}
 }
@@ -538,7 +543,9 @@ func triggerClass(v string) string {
 		return "end-step"
 	case has("BeginningOfCombat"):
 		return "combat"
-	case has("DrawStep"):
+	case has("DrawStep") && !has("Draws"):
+		// "Whenever a player draws a card except the first one they draw
+		// in their draw step" is a draw trigger (below), not the step's.
 		return "draw-step"
 	case has("MainPhase"):
 		return "main"
@@ -546,7 +553,8 @@ func triggerClass(v string) string {
 		return "class-level"
 	case has("BecomesTheTarget"):
 		return "becomes-target"
-	case has("CombatDamageToAPlayer", "CombatDamageToAnyNumberOfPlayers"), v == "WhenAnyNumberOfPlayersAreDealtCombatDamage":
+	case has("CombatDamageToAPlayer", "CombatDamageToAnyNumberOfPlayers"), v == "WhenAnyNumberOfPlayersAreDealtCombatDamage",
+		v == "WhenAPlayerIsDealtCombatDamage":
 		return "combat-damage-player"
 	case has("CombatDamage") && !has("Noncombat"):
 		return "combat-damage"
