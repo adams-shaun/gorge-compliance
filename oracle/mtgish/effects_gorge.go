@@ -105,6 +105,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			}
 			e.merge(subs)
 		}
+		g.c2Chase(e, a, depth)
 	}
 }
 
@@ -276,6 +277,11 @@ func (idx TypeIndex) validClasses(vt, zone string) []string {
 // gorgeAPIEffects maps one SA's API to its effect verbs.
 func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	p := a.Params
+	if p["Duration"] == "Perpetual" {
+		// A perpetual change (Alchemy), whatever it changes: mtgish's
+		// CreatePerpetual* actions are one "perpetual" each.
+		return []string{"perpetual"}
+	}
 	switch a.API {
 	case "DealDamage", "DamageAll":
 		return []string{"damage:" + literalOr(p["NumDmg"], "*")}
@@ -314,6 +320,14 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "CopyPermanent":
 		return []string{"tokencopy:" + literalOr(p["NumCopies"], "1")}
 	case "PutCounter", "PutCounterAll":
+		if n := p["Monstrosity"]; n != "" {
+			// Monstrosity N: N +1/+1 counters, the type left implicit.
+			return []string{"counters:+1/+1:" + literalOr(n, "*")}
+		}
+		if p["Support"] != "" {
+			// Support N: one +1/+1 counter on each of up to N others.
+			return []string{"counters:+1/+1:1"}
+		}
 		if p["CounterType"] == "EachFromSource" {
 			return []string{"counters:*"}
 		}
@@ -391,6 +405,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			out := []string{"move:library>" + strings.ToLower(p["DestinationZone"])}
 			if p["Reveal"] == "True" {
 				out = append(out, "dig:"+literalOr(p["DigNum"], "1"))
+			}
+			if d2 := p["DestinationZone2"]; p["ChangeValid"] != "" && d2 != "" && d2 != "Library" {
+				// "If it's a creature card, put it onto the battlefield;
+				// otherwise put it into your graveyard": the rest moves too.
+				out = append(out, "move:library>"+strings.ToLower(d2))
 			}
 			return out
 		}
@@ -500,6 +519,9 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "Clone":
 		return []string{"copy"}
 	case "Goad":
+		if p["NoLonger"] == "True" {
+			return []string{"ungoad"}
+		}
 		return []string{"goad"}
 	case "BecomeMonarch":
 		return []string{"monarch"}
@@ -536,7 +558,12 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 func changeZoneToken(api string, p map[string]string) string {
 	o := strings.ToLower(strings.TrimSpace(strings.SplitN(p["Origin"], ",", 2)[0]))
 	d := strings.ToLower(strings.TrimSpace(p["Destination"]))
-	if api == "ChangeZone" && o == "library" && p["Defined"] == "" && p["ValidTgts"] == "" {
+	if api == "ChangeZone" && p["Defined"] == "" && c2HiddenSearch(p["Origin"]) {
+		// "Search your library and graveyard": one pool, read as a search
+		// whichever origin is listed first.
+		o = "library"
+	}
+	if api == "ChangeZone" && o == "library" && p["Defined"] == "" && (p["ValidTgts"] == "" || c2PlayerTargets(p["ValidTgts"])) {
 		return "search:" + d
 	}
 	if t, ok := gorgeHandToLibrary(api, o, d, p); ok {
