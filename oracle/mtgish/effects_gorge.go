@@ -359,7 +359,16 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			// merge).
 			ct = "EACH " + strings.Replace(p["CounterTypes"], "ChosenFromList", p["TypeList"], 1)
 		}
-		return gorgeCounterTokens(ct, literalOr(p["CounterNum"], "1"))
+		out := gorgeCounterTokens(ct, literalOr(p["CounterNum"], "1"))
+		if ct2 := p["CounterType2"]; ct2 != "" {
+			// "Two +1/+1 counters and a reach counter": a second type.
+			n2 := p["CounterNum2"]
+			if n2 == "" {
+				n2 = p["CounterNum"]
+			}
+			out = append(out, gorgeCounterTokens(ct2, literalOr(n2, "1"))...)
+		}
+		return out
 	case "MultiplyCounter":
 		return []string{"counters:double"}
 	case "RemoveCounter", "RemoveCounterAll":

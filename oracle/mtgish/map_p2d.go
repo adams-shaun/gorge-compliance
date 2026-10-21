@@ -87,6 +87,11 @@ func costActions(cost string) []string {
 }
 
 func init() {
+	// "<It> assigns no combat damage this turn": mtgish's
+	// AssignsNoCombatDamage permanent rule.
+	extStatic["AssignNoCombatDamage"] = func(p map[string]string) []string {
+		return []string{"rule:assignsnocombatdamage"}
+	}
 	// "Protection from red. This effect doesn't remove <this Aura>": the
 	// protection keyword (Forge: Protection:Card.Red:red:<exception>).
 	extRule["ProtectionAndDoesntRemovePermanents"] = func(m *mtgishNorm, r any) {
