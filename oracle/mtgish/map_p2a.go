@@ -235,3 +235,20 @@ func p2aPlaceholderSpell(a *cards.SA) bool {
 	}
 	return true
 }
+
+// p2aReflexiveAlternative reports a ChooseAnAction whose later action
+// lists hold a reflexive "when you do" action ("put a charge counter on
+// it or remove one from it. When you remove one this way, ..."). Each list
+// is one alternative there; walking only the first list drops the
+// reflexive trigger's actions and targets. (Other multi-list
+// ChooseAnAction shapes keep the first-list reading.)
+func p2aReflexiveAlternative(alts []any) bool {
+	for _, a := range alts[1:] {
+		for _, x := range list(a) {
+			if strings.HasPrefix(variantOf(x), "Reflexive_") {
+				return true
+			}
+		}
+	}
+	return false
+}
