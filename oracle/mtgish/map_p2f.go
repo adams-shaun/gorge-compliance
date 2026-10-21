@@ -316,3 +316,18 @@ func p2fDamageEach(recipient any, tok string) []string {
 	}
 	return out
 }
+
+func init() {
+	// "Enters with your choice of a flying counter or a hexproof counter":
+	// the listed counters as alternatives, as a script's PutCounter over
+	// CounterType$ Flying,Hexproof lists each (map_d2.go had counters:*).
+	extEnter["EntersWithACounterOfChoice"] = func(x any) []string {
+		var subs []*effects
+		for _, c := range argsOf(x) {
+			subs = append(subs, &effects{effects: []string{"counters:" + counterType(c) + ":1"}})
+		}
+		e := &effects{}
+		e.merge(subs)
+		return e.effects
+	}
+}

@@ -92,13 +92,8 @@ func paramTokensP2B(a *cards.SA) []string {
 	var out []string
 	switch a.API {
 	case "PutCounter", "PutCounterAll":
-		if ct := p["CounterType2"]; ct != "" {
-			n := p["CounterNum2"]
-			if n == "" {
-				n = p["CounterNum"]
-			}
-			out = append(out, gorgeCounterTokens(ct, literalOr(n, "1"))...)
-		}
+		// CounterType2$ is mapped by gorgeAPIEffects' PutCounter case
+		// (both units added it; one copy, map_p2f.go).
 	case "Dig":
 		// "Look at the top card. If it's a land, you may put it onto the
 		// battlefield. Otherwise put it into your hand": the card not
