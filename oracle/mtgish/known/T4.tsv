@@ -14,8 +14,7 @@ Aang's Journey	T4	effects	search:hand	-	pending	not yet triaged
 Aang, Swift Savior	T4	effects	-	airbend	pending	not yet triaged
 Abeyance	T4	effects	rule:cantbeactivated	player:cantactivatenonmanaabilities	pending	not yet triaged
 Absolver Thrull	T4	effects	-	destroy	pending	not yet triaged
-Abstruse Appropriation	T4	effects	manaconvert	cda	pending	not yet triaged
-Abstruse Interference	T4	effects	-	cda	pending	not yet triaged
+Abstruse Appropriation	T4	effects	manaconvert	-	pending	not yet triaged
 Academic Probation	T4	effects	effect	rule:cantattack rule:cantbeactivated rule:cantblock	pending	not yet triaged
 Academy Manufactor	T4	effects	replace:aneffectwouldcreateanynumberoftokens	replace:aplayerwouldcreateatoken	pending	not yet triaged
 Accident-Prone Apprentice	T4	effects	-	perpetual	equivalent	TriggerZones$ Battlefield,Exile one trigger vs mtgish FromExile copy
@@ -32,7 +31,6 @@ Adrix and Nev, Twincasters	T4	effects	replace:aneffectwouldcreateanynumberoftoke
 Advanced Floral Invocations	T4	effects	effect	-	equivalent	finality rider written as Static$ cast trigger+Effect vs mtgish SpellEffect rider
 Advancing the Spirit	T4	effects	alternativecost	player:maypayalternatecostforfirstpowerupcosteachturn	pending	not yet triaged
 Adventurers' Guildhouse	T4	effects	grant:bandswithother	grant:ability	pending	not yet triaged
-Adverse Conditions	T4	effects	-	cda	pending	not yet triaged
 Advice from the Fae	T4	effects	dig:5 move:library>hand move:library>library	-	pending	not yet triaged
 Aether Gust	T4	effects	-	move:stack>library	equivalent	Origin$ Battlefield,Stack read as one move
 Aether Refinery	T4	effects	replace:wouldputcounters	replace:wouldgetenergy	pending	not yet triaged
@@ -69,8 +67,7 @@ Akroma, Vision of Ixidor	T4	effects	pump:+1/+1 pump:+1/+1 pump:+1/+1 pump:+1/+1 
 Alania, Divergent Storm	T4	effects	draw:1	-	equivalent	the opponent's optional draw: script an effect, mtgish a cost (HavePlayerTakeAction)
 Alaundo the Seer	T4	effects	-	counters:time:*	pending	not yet triaged
 Albiorix, Goose Tyrant	T4	effects	-	perpetual	equivalent	TriggerZones$ Battlefield,Exile one trigger vs mtgish FromExile copy
-Alchemist's Gambit	T4	effects	extraturn move:stack>exile	delayed losegame static:damagecantbeprevented	pending	not yet triaged
-Alchemist's Retrieval	T4	effects	move:battlefield>hand	-	pending	not yet triaged
+Alchemist's Gambit	T4	effects	-	delayed losegame static:damagecantbeprevented	pending	not yet triaged
 Alchemist's Vial	T4	effects	-	rule:cantblock	pending	not yet triaged
 Aleatory	T4	effects	delayed draw:1	cast:cantbecastunless	mtgish-bug	mtgish puts the slowtrip inside FlipACoin_OnWin; also gorge lacks ActivationPhases->cast:cantbecastunless
 All Hallow's Eve	T4	effects	counters:scream:2	-	pending	not yet triaged
@@ -108,10 +105,8 @@ Angel of Grace	T4	effects	effect	player:damagethatwouldreducelifetotaltolessthan
 Angel of Serenity	T4	effects	-	move:graveyard>exile	pending	not yet triaged
 Angel of Suffering	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Angel's Grace	T4	effects	effect	player:cantlosethegame player:cantwinthegame player:damagethatwouldreducelifetotaltolessthannumberreducesittothatnumberinstead	pending	not yet triaged
-Angelic Aberration	T4	effects	-	cda	pending	not yet triaged
 Angelic Favor	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Angrath, Minotaur Pirate	T4	effects	damage:1	-	pending	not yet triaged
-Angry Mob	T4	effects	cda	setpt setpt	pending	not yet triaged
 Anguished Recollection	T4	effects	discard:1	-	pending	not yet triaged
 Anhelo, the Painter	T4	effects	spell:casualty	player:thenthspellcasteachturnhasability	pending	not yet triaged
 Animate Dead	T4	effects	-	loseabilities	pending	not yet triaged
@@ -140,7 +135,7 @@ Archetype of Imagination	T4	effects	-	rule:cantgainability	pending	not yet triag
 Archfiend's Vessel	T4	effects	move:battlefield>exile move:battlefield>exile token:1	-	pending	not yet triaged
 Archghoul of Thraben	T4	effects	move:library>hand	-	equivalent	mtgish MayCost(RevealTopCardOfLibraryAndPutIntoHand): cost on one side, move on the other
 Archon of Redemption	T4	effects	-	gainlife:*	pending	not yet triaged
-Archpriest of Shadows	T4	effects	-	move:graveyard>battlefield move:graveyard>battlefield move:graveyard>battlefield	pending	not yet triaged
+Archpriest of Shadows	T4	effects	-	move:graveyard>battlefield	pending	not yet triaged
 Arcum's Weathervane	T4	effects	animate	type	pending	not yet triaged
 Arcum's Whistle	T4	effects	grant:ability	rule:mustattack	pending	not yet triaged
 Ardoz, Cobbler of War	T4	effects	-	pump:+2/+0	pending	not yet triaged
@@ -151,7 +146,6 @@ Arm the Cathars	T4	effects	grant:vigilance grant:vigilance grant:vigilance	-	pen
 Armed [Dangerous]	T4	effects	rule:allcreaturesmustblockit	rule:mustblockattacker	equivalent	mtgish writes a granted Lure as each creature MustBlockAttacker
 Arming Gala	T4	effects	-	perpetual perpetual perpetual	equivalent	one PumpAll over 4 zones vs one perpetual action per zone
 Armix, Filigree Thrasher	T4	effects	discard:1	-	pending	not yet triaged
-Armor of Thorns	T4	effects	-	flash	pending	not yet triaged
 Armored Skyhunter	T4	effects	attach	-	pending	not yet triaged
 Arrow Storm	T4	effects	damage:5	-	equivalent	raid written as two condition SAs vs IfElse (merged to damage:*)
 Artifact Ward	T4	effects	rule:cantbethetargetofspellsorabilities	rule:cantbethetargetofabilities	pending	not yet triaged
@@ -202,13 +196,10 @@ Bant	T4	effects	grant:ability	grant:indestructible	pending	not yet triaged
 Barbed Lightning	T4	effects	-	damage:3	pending	not yet triaged
 Barbed Wire	T4	effects	effect	prevent	pending	not yet triaged
 Bard, King of Dale	T4	effects	replace:aneffectwouldcreateanynumberoftokens	replace:anynumberoftokenswouldbecreated	pending	not yet triaged
-Barrage Tyrant	T4	effects	-	cda	pending	not yet triaged
 Barrowgoyf	T4	effects	mill:*	-	pending	not yet triaged
-Basking Broodscale	T4	effects	-	cda	pending	not yet triaged
 Battletide Alchemist	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Bazaar of Wonders	T4	effects	counter	-	pending	not yet triaged
 Beamtown Beatstick	T4	effects	-	token:1	pending	not yet triaged
-Bearer of Silence	T4	effects	-	cda	pending	not yet triaged
 Beastbreaker of Bala Ged	T4	effects	setpt setpt	-	pending	not yet triaged
 Become Anonymous	T4	effects	dig:2 move:library>hand move:library>library	move:library>exile	pending	not yet triaged
 Become the Pilot	T4	effects	rule:cantbeblockedbydefenders	rule:cantbeblocked	pending	not yet triaged
@@ -218,8 +209,6 @@ Belltoll Dragon	T4	effects	counters:+1/+1:1	-	pending	not yet triaged
 Benediction of Moons	T4	effects	-	gainlife:* gainlife:*	pending	not yet triaged
 Benevolent Blessing	T4	effects	grant:protection	grant:ability	pending	not yet triaged
 Benevolent River Spirit	T4	effects	costincrease	-	pending	not yet triaged
-Benthic Anomaly	T4	effects	-	cda	pending	not yet triaged
-Benthic Infiltrator	T4	effects	-	cda	pending	not yet triaged
 Beorn the Fierce	T4	effects	draw:2	draw:1	pending	not yet triaged
 Berserk	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Berserker's Frenzy	T4	effects	player:chooseswhichcreaturesblockandhowtheyblock	cast:cantbecastunless player:chooseshowcreaturesblock	pending	not yet triaged
@@ -230,9 +219,7 @@ Bilbo, Unexpected Adventurer	T4	effects	-	move:graveyard>battlefield	pending	not
 Bile Blight	T4	effects	pump:-3/-3	-	pending	not yet triaged
 Bind to Secrecy	T4	effects	draft	-	pending	not yet triaged
 Biotransference	T4	effects	-	spell:addcardtype static:cardeffect	pending	not yet triaged
-Birthing Hulk	T4	effects	-	cda	pending	not yet triaged
 Birthing Ritual	T4	effects	dig:7 dig:7 move:library>library move:library>library sacrifice	-	pending	not yet triaged
-Bismuth Mindrender	T4	effects	-	cda	pending	not yet triaged
 Bison Whistle	T4	effects	dig:1 dig:1	-	pending	not yet triaged
 Bitter Feud	T4	effects	choose replace:woulddealdamage	-	pending	not yet triaged
 Black Ward	T4	effects	grant:protection	grant:ability	pending	not yet triaged
@@ -249,8 +236,6 @@ Blightning	T4	effects	discard:2	-	pending	not yet triaged
 Blightwing Bandit	T4	effects	-	dig:1	pending	not yet triaged
 Blind Fury	T4	effects	animate	loseabilities	pending	not yet triaged
 Blind Hunter	T4	effects	-	gainlife:2 loselife:2	pending	not yet triaged
-Blinding Drone	T4	effects	-	cda	pending	not yet triaged
-Blisterpod	T4	effects	-	cda	pending	not yet triaged
 Blitzwing, Cruel Tormentor [Blitzwing, Adaptive Assailant]	T4	effects	grant:indestructible	-	pending	not yet triaged
 Blizzard	T4	effects	player:cantcastspells	cast:cantbecastunless	pending	not yet triaged
 Bloatfly Swarm	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
@@ -267,8 +252,8 @@ Bludgeon Brawl	T4	effects	type	-	pending	not yet triaged
 Blue Dragon	T4	effects	pump:-1/+0 pump:-2/+0	pump:-3/+0 pump:-3/+0	pending	not yet triaged
 Blue Ward	T4	effects	grant:protection	grant:ability	pending	not yet triaged
 Bob, Reluctant HYDRA Agent	T4	effects	move:battlefield>hand	-	pending	not yet triaged
+Bohn, Beguiling Balladeer [Edgin, Larcenous Lutenist]	T4	effects	grant:foretell	static:eachcardinplayershandeffect	pending	not yet triaged
 Bojuka Brigand	T4	effects	-	counters:+1/+1:1	pending	not yet triaged
-Bola Slinger	T4	effects	-	tap	pending	not yet triaged
 Bonds of Mortality	T4	effects	animate	loseabilities	pending	not yet triaged
 Bone Dancer	T4	effects	effect move:graveyard>battlefield	rule:assignsnocombatdamage	pending	not yet triaged
 Bone Mask	T4	effects	effect	prevent	pending	not yet triaged
@@ -301,7 +286,6 @@ Breeches, the Blastmaker	T4	effects	coin	-	pending	not yet triaged
 Brenard, Ginger Sculptor	T4	effects	move:graveyard>exile	-	pending	not yet triaged
 Bribe Taker	T4	effects	counters:*:1	counters:+1/+1:1	equivalent	counter of each kind present: counters:* vs mtgish +1/+1 alternative
 Briber's Purse	T4	effects	-	rule:cantblock	pending	not yet triaged
-Bright-Palm, Soul Awakener	T4	effects	-	counters:double rule:cantbeblockedbydefenders	pending	not yet triaged
 Brigid, Clachan's Heart [Brigid, Doun's Mind]	T4	effects	-	mana	pending	not yet triaged
 Brilliance Unleashed	T4	effects	move:graveyard>battlefield	-	pending	not yet triaged
 Brimstone Mage	T4	effects	grant:ability grant:ability setpt setpt	damage:1 damage:3	pending	not yet triaged
@@ -309,10 +293,7 @@ Brokers Ascendancy	T4	effects	-	counters:loyalty:1	pending	not yet triaged
 Brokers Hideout	T4	effects	sacrifice	-	pending	not yet triaged
 Bronze Tablet	T4	effects	gainownership gainownership gainownership losegame losegame loselife:10 move:*>exile move:*>exile	-	pending	not yet triaged
 Bronzehide Lion	T4	effects	-	grant:ability grant:enchant loseabilities	pending	not yet triaged
-Brood Butcher	T4	effects	-	cda	pending	not yet triaged
-Brood Monitor	T4	effects	-	cda	pending	not yet triaged
 Bruenor Battlehammer	T4	effects	alternativecost	player:maypayalternatecostforfirstequipcosteachturn	pending	not yet triaged
-Brutal Expulsion	T4	effects	-	cda	pending	not yet triaged
 Brutal Hordechief	T4	effects	player:chooseswhichcreaturesblockandhowtheyblock	player:chooseshowcreaturesblock	pending	not yet triaged
 Brutal Suppression	T4	effects	costincrease	rule:additionalcost	pending	not yet triaged
 Bucolic Ranch	T4	effects	move:library>hand	-	equivalent	mtgish MayCost(RevealTopCardOfLibraryAndPutIntoHand): cost on one side, move on the other
@@ -339,7 +320,6 @@ Calibrated Blast	T4	effects	diguntil	-	pending	not yet triaged
 Calim, Djinn Emperor	T4	effects	move:graveyard>exile move:library>library	-	pending	not yet triaged
 Calix, Destiny's Hand	T4	effects	delayed move:exile>battlefield	-	pending	not yet triaged
 Call for Aid	T4	effects	rule:cantbesacrificed	player:cantsacrificepermanents	pending	not yet triaged
-Call the Scions	T4	effects	-	cda	pending	not yet triaged
 Callidus Assassin	T4	effects	-	etbtapped	pending	not yet triaged
 Callous Oppressor	T4	effects	choose	-	pending	not yet triaged
 Camouflage	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
@@ -356,7 +336,6 @@ Carrionette	T4	effects	-	move:graveyard>exile	pending	not yet triaged
 Cartographer's Hawk	T4	effects	move:battlefield>hand	-	pending	not yet triaged
 Case of the Locked Hothouse	T4	effects	player:maylookattopcardoflibraryanytime	-	pending	not yet triaged
 Case of the Pilfered Proof	T4	effects	replace:aneffectwouldcreateanynumberoftokens	replace:anynumberoftokenswouldbecreated	pending	not yet triaged
-Catacomb Sifter	T4	effects	-	cda	pending	not yet triaged
 Caterwauling Boggart	T4	effects	grant:menace	-	pending	not yet triaged
 Cathedral of Serra	T4	effects	grant:bandswithother	grant:ability	pending	not yet triaged
 Caught Red-Handed	T4	effects	grant:haste	-	pending	not yet triaged
@@ -373,7 +352,6 @@ Cemetery Desecrator	T4	effects	move:graveyard>exile move:graveyard>exile	-	pendi
 Cephalid Illusionist	T4	effects	prevent	-	pending	not yet triaged
 Certain Death	T4	effects	gainlife:2	-	pending	not yet triaged
 Chainer, Dementia Master	T4	effects	-	color type	pending	not yet triaged
-Chameleon Spirit	T4	effects	cda	setpt	pending	not yet triaged
 Champion of the Clachan	T4	effects	costincrease	-	pending	not yet triaged
 Champion of the Path	T4	effects	costincrease	-	pending	not yet triaged
 Champion of the Weird	T4	effects	costincrease	-	pending	not yet triaged
@@ -402,7 +380,6 @@ Check for Traps	T4	effects	loselife:1	-	pending	not yet triaged
 Cherished Hatchling	T4	effects	grant:ability	effect	pending	not yet triaged
 Chimeric Sphere	T4	effects	-	loseabilities	pending	not yet triaged
 Chiss-Goria, Forge Tyrant	T4	effects	mayplay spell:affinity	player:mayactiononce	pending	not yet triaged
-Chittering Dispatcher	T4	effects	-	cda	pending	not yet triaged
 Cho-Arrim Alchemist	T4	effects	effect	prevent	pending	not yet triaged
 Cho-Arrim Legate	T4	effects	alternativecost	cast:maycastwithoutpayingif	pending	not yet triaged
 Cho-Manno's Blessing	T4	effects	grant:protection	grant:ability	pending	not yet triaged
@@ -410,7 +387,6 @@ Choco, Seeker of Paradise	T4	effects	dig:* move:library>library	-	pending	not ye
 Choice of Damnations	T4	effects	loselife:*	-	pending	not yet triaged
 Choice of Fortunes	T4	effects	move:hand>library:*	-	equivalent	the hand-to-library move: an effect in the script, a MayCost/MustCost cost in mtgish
 Choking Vines	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
-Chomping Kavu	T4	effects	-	rule:cantbeblockedbydefenders	pending	not yet triaged
 Chomping Mastasaur	T4	effects	discard:1 discard:1	-	pending	not yet triaged
 Chrome Dome	T4	effects	-	grant:haste	pending	not yet triaged
 Churning Eddy	T4	effects	move:battlefield>hand	-	pending	not yet triaged
@@ -454,22 +430,18 @@ Comet, Stellar Pup	T4	effects	counters:loyalty:* countersremove player:mayactiva
 Comeuppance	T4	effects	effect	prevent	pending	not yet triaged
 Command of Unsummoning	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Commit	T4	effects	-	move:stack>library	equivalent	Origin$ Battlefield,Stack read as one move
-Complete Disregard	T4	effects	-	cda	pending	not yet triaged
 Concealing Curtains [Revealing Eye]	T4	effects	draw:1	-	pending	not yet triaged
-Conclave Sledge-Captain	T4	effects	-	counters:+1/+1:* counters:+1/+1:* counters:+1/+1:*	pending	not yet triaged
 Confront the Assault	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Conjurer's Closet	T4	effects	move:battlefield>exile	-	pending	not yet triaged
 Conspiracy	T4	effects	-	spell:setcreaturetypevariable static:cardeffect	pending	not yet triaged
 Conspiracy Unraveler	T4	effects	mayplay	player:maypayalternatecostforspells	pending	not yet triaged
 Construct a Cosmic Cube	T4	effects	sacrifice	-	pending	not yet triaged
 Consume Spirit	T4	effects	-	cast:spendonlycolormanaonx	pending	not yet triaged
-Consuming Sinkhole	T4	effects	-	cda	pending	not yet triaged
 Containment Construct	T4	effects	move:graveyard>exile	-	pending	not yet triaged
 Convergence of Dominion	T4	effects	costreduction	rule:reducemanacostnotlessthanone	pending	not yet triaged
 Coral Fighters	T4	effects	move:library>library	-	pending	not yet triaged
 Coralhelm Commander	T4	effects	grant:ability setpt setpt	pump:+1/+1	pending	not yet triaged
 Coram, the Undertaker	T4	effects	mayplay	-	pending	not yet triaged
-Corrupted Shapeshifter	T4	effects	-	cda	pending	not yet triaged
 Cosima, God of the Voyage	T4	effects	move:battlefield>exile	-	pending	not yet triaged
 Cosmic Cube	T4	effects	play	-	pending	not yet triaged
 Cosmic Horror	T4	effects	destroy	-	pending	not yet triaged
@@ -495,15 +467,11 @@ Crown of Awe	T4	effects	grant:protection grant:protection grant:protection	grant
 Crown of Convergence	T4	effects	dig:1	-	pending	not yet triaged
 Crucias, Titan of the Waves	T4	effects	-	seek	pending	not yet triaged
 Cruel Alliance	T4	effects	move:battlefield>exile	-	pending	not yet triaged
-Crumble to Dust	T4	effects	-	cda	pending	not yet triaged
 Cry of Contrition	T4	effects	-	discard:1 discard:1	pending	not yet triaged
-Cryptic Cruiser	T4	effects	-	cda	pending	not yet triaged
 Crystal Spray	T4	effects	-	changetext draw:1 effect type	pending	not yet triaged
 Crystalline Giant	T4	effects	counters:deathtouch:1 counters:firststrike:1 counters:flying:1 counters:hexproof:1 counters:lifelink:1 counters:menace:1 counters:reach:1 counters:trample:1 counters:vigilance:1	-	equivalent	random counter kind: per-type alternatives vs mtgish counters:*
-Culling Drone	T4	effects	-	cda	pending	not yet triaged
 Cultivate	T4	effects	search:hand search:library	-	pending	not yet triaged
 Cultivator Colossus	T4	effects	move:hand>battlefield	-	equivalent	mtgish MayCost(PutACardFromHandOnBattlefield): cost on one side, move on the other
-Cultivator Drone	T4	effects	-	cda	pending	not yet triaged
 Cunning Nightbonder	T4	effects	spell:cantbecountered	player:spellscasthaveability	pending	not yet triaged
 Curse Artifact	T4	effects	sacrifice	-	pending	not yet triaged
 Curse of Leeches	T4	effects	attach	unmapped:Action.AttachPermanentToAPlayer	normalizer	unmapped token
@@ -557,7 +525,6 @@ Decode Transmissions	T4	effects	loselife:2	-	pending	not yet triaged
 Decoy Gambit	T4	effects	draw:*	-	pending	not yet triaged
 Deep Wood	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Deep-Cavern Bat	T4	effects	move:hand>exile	-	pending	not yet triaged
-Deepfathom Skulker	T4	effects	-	cda	pending	not yet triaged
 Deeproot Historian	T4	effects	grant:retrace	static:eachcardingraveyardeffect	pending	not yet triaged
 Deeproot Wayfinder	T4	effects	-	move:graveyard>battlefield surveil:1	equivalent	one trigger ValidTarget$ Player,Battle vs mtgish Or-trigger split per event
 Deepwood Legate	T4	effects	alternativecost	cast:maycastwithoutpayingif	pending	not yet triaged
@@ -576,7 +543,6 @@ Demonic Counsel	T4	effects	search:hand	-	pending	not yet triaged
 Den Protector	T4	effects	move:graveyard>hand	rule:cantbeblockedbydefenders	pending	not yet triaged
 Denry Klin, Editor in Chief	T4	effects	counters:firststrike:1 counters:vigilance:1	-	pending	not yet triaged
 Depala, Pilot Exemplar	T4	effects	-	move:library>library	pending	not yet triaged
-Depth Defiler	T4	effects	-	cda	pending	not yet triaged
 Deputy of Detention	T4	effects	-	move:battlefield>exile	pending	not yet triaged
 Dermoplasm	T4	effects	move:battlefield>hand move:hand>battlefield	-	pending	not yet triaged
 Descent into Madness	T4	effects	move:battlefield>exile	move:hand>exile	pending	not yet triaged
@@ -599,8 +565,6 @@ Devouring Sugarmaw [Have for Dinner]	T4	effects	-	token:1	pending	not yet triage
 Dewdrop Spy	T4	effects	move:library>library	-	pending	not yet triaged
 Diabolic Vision	T4	effects	move:library>hand	move:library>library	pending	not yet triaged
 Dichotomancy	T4	effects	move:library>battlefield	search:battlefield	pending	not yet triaged
-Dig Up	T4	effects	search:hand	-	pending	not yet triaged
-Dimensional Infiltrator	T4	effects	-	cda	pending	not yet triaged
 Diminishing Returns	T4	effects	draw:7	draw:10	mtgish-bug	mtgish#1 reuses 10 for the draw (printed up to seven)
 Dire Fleet Daredevil	T4	effects	effect	-	pending	not yet triaged
 Disa the Restless	T4	effects	tokencopy:1	token:1	pending	not yet triaged
@@ -620,7 +584,6 @@ Djeru, With Eyes Open	T4	effects	replace:woulddealdamage	replace:preventdamage	p
 Djinn Illuminatus	T4	effects	spell:replicate	player:spellscasthaveability	pending	not yet triaged
 Djinn of Wishes	T4	effects	play	-	pending	not yet triaged
 Dollhouse of Horrors	T4	effects	-	grant:haste	pending	not yet triaged
-Dominator Drone	T4	effects	-	cda	pending	not yet triaged
 Dominus of Fealty	T4	effects	gaincontrol	-	pending	not yet triaged
 Domri Rade	T4	effects	-	dig:1	pending	not yet triaged
 Domri, Anarch of Bolas	T4	effects	effect	spell:cantbecountered	pending	not yet triaged
@@ -630,7 +593,7 @@ Donatello, the Brains	T4	effects	replace:aneffectwouldcreateanynumberoftokens	re
 Doom Reigns Supreme	T4	effects	sacrifice	-	pending	not yet triaged
 Doom's Time Platform	T4	effects	counters:time:2	-	pending	not yet triaged
 Doomsday	T4	effects	dig:* move:graveyard>exile move:library>library	-	pending	not yet triaged
-Doomskar Warrior	T4	effects	-	dig:* dig:* dig:* move:library>hand move:library>hand move:library>hand move:library>library move:library>library move:library>library	pending	not yet triaged
+Doomskar Warrior	T4	effects	-	dig:* move:library>hand move:library>library	pending	not yet triaged
 Dosan the Falling Leaf	T4	effects	player:cantcastspells	player:cancastspellsonlyduringtheirturn	pending	not yet triaged
 Doubling Chant	T4	effects	move:library>battlefield	search:*	pending	not yet triaged
 Dovin Baan	T4	effects	player:untapadjust	player:cantuntapmorethannumberpermanentsduringtheiruntapstep	pending	not yet triaged
@@ -648,8 +611,6 @@ Dralnu's Crusade	T4	effects	type	-	pending	not yet triaged
 Dramatist's Puppet	T4	effects	counters:*:1 countersremove	addorremovecounter	pending	not yet triaged
 Drannith Magistrate	T4	effects	player:cantcastspells	player:canonlycastspellsfromthierhand	pending	not yet triaged
 Draugr Thought-Thief	T4	effects	move:library>library	-	pending	not yet triaged
-Dread Defiler	T4	effects	-	cda	pending	not yet triaged
-Dread Fugue	T4	effects	discard:*	-	pending	not yet triaged
 Dread Linnorm [Scale Deflection]	T4	effects	untap	-	pending	not yet triaged
 Dreadfeast Demon	T4	effects	sacrifice	-	pending	not yet triaged
 Dreadhorde Butcher	T4	effects	-	counters:+1/+1:1	pending	not yet triaged
@@ -666,8 +627,6 @@ Drillworks Mole	T4	effects	-	counters:+1/+1:1	pending	not yet triaged
 Dromoka's Command	T4	effects	spell:preventalldamagethatwouldbedealtbycardname	prevent	pending	not yet triaged
 Droning Bureaucrats	T4	effects	-	rule:cantblock	pending	not yet triaged
 Drought	T4	effects	costincrease costincrease	rule:additionalcostforeachcolormanasymbolincosts spell:additionalcostforeachcolormanasymbolincosts	pending	not yet triaged
-Drowner of Hope	T4	effects	-	cda	pending	not yet triaged
-Drowner of Truth	T4	effects	-	cda	pending	not yet triaged
 Druid of the Emerald Grove	T4	effects	dice search:hand search:library	-	pending	not yet triaged
 Druidic Ritual	T4	effects	-	move:graveyard>hand	pending	not yet triaged
 Dryad Greenseeker	T4	effects	-	dig:1	pending	not yet triaged
@@ -675,7 +634,6 @@ Dubious Challenge	T4	effects	move:library>library	-	pending	not yet triaged
 Dune Chanter	T4	effects	-	static:cardeffect	pending	not yet triaged
 Duplicity	T4	effects	move:hand>exile	-	pending	not yet triaged
 Durnan of the Yawning Portal	T4	effects	grant:undaunted	-	pending	not yet triaged
-Dust Stalker	T4	effects	-	cda	pending	not yet triaged
 Dust of Moments	T4	effects	countersremove	-	pending	not yet triaged
 Dwarven Vigilantes	T4	effects	damage:* effect	rule:assignsnocombatdamage	pending	not yet triaged
 Dyadrine, Synthesis Amalgam	T4	effects	countersremove	-	pending	not yet triaged
@@ -702,13 +660,7 @@ Eladamri, Korvecdal	T4	effects	-	dig:1 move:hand>battlefield	equivalent	one Chan
 Elbrus, the Binding Blade	T4	effects	-	unattach	equivalent	script omits explicit unattach; SBA 704.5p unattaches the transformed creature, same result
 Elder Brain	T4	effects	-	mayplay	pending	not yet triaged
 Elder Spawn	T4	effects	sacrifice	-	pending	not yet triaged
-Eldrazi Aggressor	T4	effects	-	cda	pending	not yet triaged
-Eldrazi Displacer	T4	effects	-	cda	pending	not yet triaged
-Eldrazi Linebreaker	T4	effects	-	cda	pending	not yet triaged
 Eldrazi Monument	T4	effects	sacrifice	-	pending	not yet triaged
-Eldrazi Obligator	T4	effects	-	cda	pending	not yet triaged
-Eldrazi Repurposer	T4	effects	-	cda	pending	not yet triaged
-Eldrazi Skyspawner	T4	effects	-	cda	pending	not yet triaged
 Electrostatic Bolt	T4	effects	damage:4	-	pending	not yet triaged
 Elektra, Femme Fatale	T4	effects	damage:2	-	pending	not yet triaged
 Elemental Expressionist	T4	effects	grant:ability	-	pending	not yet triaged
@@ -728,10 +680,8 @@ Embermouth Sentinel	T4	effects	search:library	-	pending	not yet triaged
 Emergency Eject	T4	effects	destroy	move:battlefield>exile	pending	not yet triaged
 Emergent Sequence	T4	effects	color setpt type	-	pending	not yet triaged
 Emergent Ultimatum	T4	effects	move:exile>library	-	pending	not yet triaged
-Emergent Woodwurm	T4	effects	-	dig:* move:library>battlefield move:library>library	pending	not yet triaged
 Emeria Shepherd	T4	effects	-	move:graveyard>battlefield	pending	not yet triaged
 Emeria's Call	T4	effects	grant:indestructible	grant:flying	pending	not yet triaged
-Emrakul's Messenger	T4	effects	-	cda	pending	not yet triaged
 Emrakul, the Promised End	T4	effects	delayed	-	pending	not yet triaged
 Enchanter's Bane	T4	effects	sacrifice	-	pending	not yet triaged
 Enclave Cryptologist	T4	effects	grant:ability grant:ability	discard:1 draw:1 draw:1	pending	not yet triaged
@@ -740,7 +690,6 @@ Endbringer	T4	effects	-	rule:cantblock	pending	not yet triaged
 Endless Detour	T4	effects	-	move:graveyard>library move:stack>library	equivalent	one ChangeZone Origin Battlefield,Stack,Graveyard vs per-kind modal branches; aside: mtgish limits graveyard target to your graveyard
 Endrider Catalyzer	T4	effects	grant:ability	mana	pending	not yet triaged
 Endrider Spikespitter	T4	effects	grant:ability	mayplay move:library>exile	pending	not yet triaged
-Enduring Bondwarden	T4	effects	-	counters:*	pending	not yet triaged
 Energy Arc	T4	effects	prevent	-	pending	not yet triaged
 Energy Tap	T4	effects	tap	-	pending	not yet triaged
 Energy Vortex	T4	effects	counters:vortex:*	countersremove	pending	not yet triaged
@@ -748,7 +697,6 @@ Enigma Sphinx Avatar	T4	effects	play	-	pending	not yet triaged
 Entangling Trap	T4	effects	tap	-	pending	not yet triaged
 Enter the Avatar State	T4	effects	-	player:mayplayanadditionalland	pending	not yet triaged
 Entrails Feaster	T4	effects	move:graveyard>exile	-	pending	not yet triaged
-Entropic Specter	T4	effects	cda	setpt	pending	not yet triaged
 Eon Frolicker	T4	effects	grant:protection	player:protection	pending	not yet triaged
 Epochrasite	T4	effects	counters:time:3 grant:suspend	-	pending	not yet triaged
 Equipoise	T4	effects	phaseout phaseout	-	pending	not yet triaged
@@ -761,7 +709,6 @@ Escaped Shapeshifter	T4	effects	grant:protection	grant:protectionfromcolor	pendi
 Esika, God of the Tree	T4	effects	grant:ability grant:vigilance	-	pending	not yet triaged
 Esix, Fractal Bloom	T4	effects	replace:aneffectwouldcreateanynumberoftokens	replace:aplayerwouldcreatetokens	pending	not yet triaged
 Espers to Magicite	T4	effects	move:graveyard>exile	-	pending	not yet triaged
-Essence Depleter	T4	effects	-	cda	pending	not yet triaged
 Estinien Varlineau	T4	effects	loselife:*	gainlife:*	pending	not yet triaged
 Etched Oracle Avatar	T4	effects	alternativecost	player:maypayalternatecostforspells	pending	not yet triaged
 Etched Slith	T4	effects	-	countersremove	pending	not yet triaged
@@ -800,7 +747,6 @@ Extrapolate the Impossible	T4	effects	move:sideboard>	move:sideboard>hand	pendin
 Eye Spy	T4	effects	move:library>library	-	pending	not yet triaged
 Eye of Jace	T4	effects	damage:2	damage:1	pending	not yet triaged
 Eye of Nidhogg	T4	effects	color	-	pending	not yet triaged
-Eyeless Watcher	T4	effects	-	cda	pending	not yet triaged
 Fable of the Mirror-Breaker	T4	effects	discard:2	-	pending	not yet triaged
 Faceless One	T4	effects	cda	static:selfeffect	pending	not yet triaged
 Faces of the Past	T4	effects	tapuntap	tap untap	equivalent	tap-all-or-untap-all: one choice API vs two alternatives
@@ -815,7 +761,6 @@ False Dawn	T4	effects	-	effect	pending	not yet triaged
 False Orders	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Famished Worldsire	T4	effects	move:library>library	-	pending	not yet triaged
 Fanatic of Xenagos	T4	effects	-	grant:haste pump:+1/+1	pending	not yet triaged
-Fanged Flames	T4	effects	-	cda	pending	not yet triaged
 Far Fortune, End Boss	T4	effects	grant:ability	replace:woulddealdamage	pending	not yet triaged
 Farmer Cotton	T4	effects	-	token:*	pending	not yet triaged
 Farrel's Mantle	T4	effects	damage:* effect	rule:assignsnocombatdamage	pending	not yet triaged
@@ -825,7 +770,6 @@ Fatal Lore	T4	effects	-	draw:3	pending	not yet triaged
 Fated Clash	T4	effects	grant:indestructible	-	pending	not yet triaged
 Fated Conflagration	T4	effects	scry:2	scry:5	pending	not yet triaged
 Fatespinner	T4	effects	skipphase	player:skipscombatphase player:skipsdrawstep player:skipsmainphase	equivalent	script SkipPhase choices vs mtgish per-turn skip player effects
-Fathom Feeder	T4	effects	-	cda	pending	not yet triaged
 Favored Enemy	T4	effects	choose fight	-	pending	not yet triaged
 Fblthp, Lost on the Range	T4	effects	grant:plot	static:topcardofplayerslibraryeffect	pending	not yet triaged
 Fear of Change	T4	effects	move:battlefield>exile move:battlefield>exile	-	pending	not yet triaged
@@ -844,7 +788,6 @@ Ferris Wheel	T4	effects	delayed phaseout	-	pending	not yet triaged
 Festering Newt	T4	effects	pump:-4/-4	-	pending	not yet triaged
 Festival	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Fierce Guardianship	T4	effects	alternativecost	cast:maycastwithoutpayingif	pending	not yet triaged
-Fierce Retribution	T4	effects	destroy	-	pending	not yet triaged
 Fiery Confluence	T4	effects	-	damage:*	pending	not yet triaged
 Fiery Encore	T4	effects	discard:1	-	pending	not yet triaged
 Fiery Impulse	T4	effects	damage:3	-	pending	not yet triaged
@@ -878,9 +821,7 @@ Flare of Faith	T4	effects	pump:+2/+2	-	pending	not yet triaged
 Flash	T4	effects	move:hand>battlefield	-	pending	not yet triaged
 Flash Foliage	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Flawless Maneuver	T4	effects	alternativecost	cast:maycastwithoutpayingif	pending	not yet triaged
-Flayer Drone	T4	effects	-	cda	pending	not yet triaged
 Flayer of the Hatebound	T4	effects	-	damage:*	pending	not yet triaged
-Flaying Tendrils	T4	effects	-	cda	pending	not yet triaged
 Flickerform	T4	effects	move:exile>battlefield	move:battlefield>exile	pending	not yet triaged
 Flickering Ward	T4	effects	grant:protection	grant:ability	pending	not yet triaged
 Flitterstep Eidolon	T4	effects	-	rule:cantbeblocked	pending	not yet triaged
@@ -899,7 +840,6 @@ For Each of You, a Gift	T4	effects	rule:mustattack	rule:mustattackplayer	pending
 Foray of Orcs	T4	effects	amass	-	pending	not yet triaged
 Forbidden Friendship	T4	effects	-	token:1	pending	not yet triaged
 Forcefield	T4	effects	effect	prevent	pending	not yet triaged
-Forerunner of Slaughter	T4	effects	-	cda	pending	not yet triaged
 Forge Anew	T4	effects	alternativecost flash	mayplay player:maypayalternatecostforfirstequipcosteachturn	pending	not yet triaged
 Forgeborn Oreads	T4	effects	-	damage:1	pending	not yet triaged
 Forging the Anchor	T4	effects	move:library>hand	move:library>library	pending	not yet triaged
@@ -915,7 +855,6 @@ Frenzied Baloth	T4	effects	static:damagecantbeprevented	static:combatdamagecantb
 Frenzy Sliver	T4	effects	grant:ability	grant:frenzy	pending	not yet triaged
 Freyalise's Winds	T4	effects	rule:doesntuntapduringcontrollersuntap	replace:woulduntap	pending	not yet triaged
 Freyalise, Skyshroud Partisan	T4	effects	-	perpetual	pending	not yet triaged
-From Beyond	T4	effects	-	cda	pending	not yet triaged
 Frost Augur	T4	effects	-	dig:1	pending	not yet triaged
 Fugitive of the Judoon	T4	effects	move:battlefield>exile	token:1	pending	not yet triaged
 Furious Rise	T4	effects	move:command>exile	-	pending	not yet triaged
@@ -923,7 +862,6 @@ Fury Charm	T4	effects	-	countersremove	pending	not yet triaged
 Furygale Flocking	T4	effects	rule:mustattack	-	pending	not yet triaged
 Gaddock Teeg	T4	effects	player:cantcastspells player:cantcastspells	spell:cantbecast spell:cantbecast	pending	not yet triaged
 Gaea's Balance	T4	effects	search:battlefield search:battlefield search:battlefield search:battlefield	-	pending	not yet triaged
-Gaea's Liege	T4	effects	cda	setpt setpt	pending	not yet triaged
 Gaea's Revenge	T4	effects	rule:cantbethetargetofspellsorabilities	rule:cantbethetargetofabilities rule:cantbethetargetofspells	pending	not yet triaged
 Gaea's Will	T4	effects	-	effect mayplay	pending	not yet triaged
 Gale, Storm Conduit	T4	effects	grant:ability	perpetual	pending	not yet triaged
@@ -951,9 +889,7 @@ Genesis Hydra	T4	effects	move:library>library	-	pending	not yet triaged
 Genesis Ultimatum	T4	effects	move:stack>exile	-	pending	not yet triaged
 Geothermal Kami	T4	effects	move:battlefield>hand	-	pending	not yet triaged
 Getaway Barrel	T4	effects	move:library>battlefield	search:battlefield	pending	not yet triaged
-Ghostfire	T4	effects	cda	-	pending	not yet triaged
 Ghostfire Blade	T4	effects	costreduction	rule:decreaseequipabilitycostwhentargetingapermanent	pending	not yet triaged
-Ghostfire Slice	T4	effects	-	cda	pending	not yet triaged
 Ghostly Flame	T4	effects	-	spell:isacolorlesssourceofdamage	pending	not yet triaged
 Ghostly Possession	T4	effects	grant:preventallcombatdamagethatwouldbedealttoanddealtbycardname	replace:preventdamage replace:preventdamage	pending	not yet triaged
 Giant Opportunity	T4	effects	sacrifice token:3	-	pending	not yet triaged
@@ -1015,12 +951,9 @@ Grand Abolisher	T4	effects	rule:cantbeactivated	player:cantactivateabilities	pen
 Grand Master of Flowers	T4	effects	cda rule:cantbeblockedbydefenders	grant:flying grant:indestructible rule:cantblock setpt type	pending	not yet triaged
 Grateful Apparition	T4	effects	-	proliferate	pending	not yet triaged
 Grave Betrayal	T4	effects	-	color type	pending	not yet triaged
-Grave Birthing	T4	effects	-	cda	pending	not yet triaged
 Grave Endeavor	T4	effects	counters:+1/+1:*	-	pending	not yet triaged
-Grave Servitude	T4	effects	-	flash	pending	not yet triaged
 Graven Dominator	T4	effects	-	setpt	pending	not yet triaged
 Gravestorm	T4	effects	move:graveyard>exile	-	pending	not yet triaged
-Gravity Negator	T4	effects	-	cda	pending	not yet triaged
 Graxiplon	T4	effects	rule:cantbeblocked	rule:cantbeblockedunlessdefendingplayer	pending	not yet triaged
 Graypelt Hunter	T4	effects	-	counters:+1/+1:1	pending	not yet triaged
 Graywater's Fixer	T4	effects	grant:encore	static:eachcardingraveyardeffect	pending	not yet triaged
@@ -1031,6 +964,7 @@ Green Ward	T4	effects	grant:protection	grant:ability	pending	not yet triaged
 Greensleeves	T4	effects	tokencopy:1	token:1	pending	not yet triaged
 Grenzo, Crooked Jailer	T4	effects	mayplay	player:maypayalternatecostforaspellonceeachturn	pending	not yet triaged
 Grenzo, Havoc Raiser	T4	effects	mayplay	play	pending	not yet triaged
+Greymond, Avacyn's Stalwart [Rick, Steadfast Leader]	T4	effects	grant:firststrike grant:lifelink grant:lifelink grant:vigilance grant:vigilance	-	pending	not yet triaged
 Grief	T4	effects	discard:*	move:hand>exile	pending	not yet triaged
 Grim Contest	T4	effects	-	damage:*	pending	not yet triaged
 Grim Reminder	T4	effects	loselife:6	-	pending	not yet triaged
@@ -1038,7 +972,6 @@ Grim Wanderer	T4	effects	player:cantcastspells	cast:cantbecastunless	pending	not
 Grimdancer	T4	effects	counters:lifelink:1 counters:menace:1	-	pending	not yet triaged
 Grimoire of the Dead	T4	effects	-	color type	pending	not yet triaged
 Grip of Chaos	T4	effects	changetargets changetargets	-	pending	not yet triaged
-Grip of Desolation	T4	effects	-	cda	pending	not yet triaged
 Grishnákh, Brash Instigator	T4	effects	amass	-	pending	not yet triaged
 Grist, Voracious Larva	T4	effects	move:battlefield>exile move:exile>battlefield	-	pending	not yet triaged
 Grist, the Hunger Tide	T4	effects	cda	static:selfeffect_nonbattlefield	pending	not yet triaged
@@ -1051,7 +984,6 @@ Gruul Ragebeast	T4	effects	-	fight	pending	not yet triaged
 Gruul Spellbreaker	T4	effects	-	grant:hexproof	pending	not yet triaged
 Guardian Angel	T4	effects	effect	mayplay	pending	not yet triaged
 Guardian Archon	T4	effects	grant:protection	player:protection	pending	not yet triaged
-Guardian Scalelord	T4	effects	-	move:graveyard>battlefield	pending	not yet triaged
 Guardian Seraph	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Guardian of the Ages	T4	effects	-	loseabilities	pending	not yet triaged
 Guide of Souls	T4	effects	-	counters:flying:1	pending	not yet triaged
@@ -1080,7 +1012,6 @@ Halimar Wavewatch	T4	effects	setpt setpt	-	pending	not yet triaged
 Hall of Echoes	T4	effects	static:thelegendsruledoesntapply	effect	pending	not yet triaged
 Hallow	T4	effects	effect	prevent	pending	not yet triaged
 Hand to Hand	T4	effects	rule:cantbeactivated	player:cantactivatenonmanaabilities	pending	not yet triaged
-Hangar Scrounger	T4	effects	-	draw:1	pending	not yet triaged
 Hangarback Assembler	T4	effects	grant:ability	counters:+1/+1:1	pending	not yet triaged
 Hans Eriksson	T4	effects	move:library>battlefield	-	pending	not yet triaged
 Harmonious Emergence	T4	effects	grant:haste	-	mtgish-bug	mtgish#1 haste read as a second vigilance
@@ -1091,9 +1022,7 @@ Harsh Justice	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Harvest Wurm	T4	effects	move:graveyard>hand	-	pending	not yet triaged
 Hatchery Sliver	T4	effects	spell:replicate	player:spellscasthaveability	pending	not yet triaged
 Hate Mirage	T4	effects	-	grant:haste	pending	not yet triaged
-Haunting Apparition	T4	effects	cda	setpt	pending	not yet triaged
 Havengul Lich	T4	effects	delayed grant:*	-	pending	not yet triaged
-Havoc Sower	T4	effects	-	cda	pending	not yet triaged
 Hazoret's Favor	T4	effects	grant:haste pump:+2/+0	-	pending	not yet triaged
 Healing Grace	T4	effects	effect gainlife:3	prevent	pending	not yet triaged
 Heart of Bogardan	T4	effects	damage:*	-	pending	not yet triaged
@@ -1108,7 +1037,6 @@ Helica Glider	T4	effects	counters:flying:1	-	pending	not yet triaged
 Heliod's Emissary	T4	effects	-	tap	pending	not yet triaged
 Helm of the Host	T4	effects	-	grant:haste	pending	not yet triaged
 Henzie "Toolbox" Torre	T4	effects	spell:blitz	player:spellscasthaveability	pending	not yet triaged
-Herald of Kozilek	T4	effects	-	cda	pending	not yet triaged
 Herald's Horn	T4	effects	-	dig:1	pending	not yet triaged
 Herdchaser Dragon	T4	effects	counters:+1/+1:1	-	pending	not yet triaged
 Heroic Return	T4	effects	effect	-	pending	not yet triaged
@@ -1118,7 +1046,6 @@ Hidden Dragonslayer	T4	effects	destroy	-	pending	not yet triaged
 Hidden Retreat	T4	effects	spell:preventalldamagethatwouldbedealtbycardname	prevent	pending	not yet triaged
 Hide [Seek]	T4	effects	gainlife:*	-	pending	not yet triaged
 Hide in Plain Sight	T4	effects	move:library>library	-	equivalent	script Dig puts the cloaked cards on library top first
-Hideous Taskmaster	T4	effects	-	cda	pending	not yet triaged
 Hidetsugu, Devouring Chaos	T4	effects	move:library>exile	-	pending	not yet triaged
 High Fae Prankster	T4	effects	-	exchangepower	pending	not yet triaged
 High Seas	T4	effects	costincrease	spell:increasemanacost	pending	not yet triaged
@@ -1132,8 +1059,6 @@ Homing Lightning	T4	effects	damage:4	-	pending	not yet triaged
 Homing Sliver	T4	effects	grant:typecycling	static:eachcardineachplayershandeffect	pending	not yet triaged
 Homura, Human Ascendant	T4	effects	setstate:flip	-	pending	not yet triaged
 Honorable Passage	T4	effects	effect	prevent	pending	not yet triaged
-Hope-Ender Coatl	T4	effects	-	cda	pending	not yet triaged
-Horribly Awry	T4	effects	-	cda	pending	not yet triaged
 Hostility	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Hour of Devastation	T4	effects	animate	loseabilities	pending	not yet triaged
 Hour of Victory	T4	effects	grant:ability	search:*	pending	not yet triaged
@@ -1166,7 +1091,7 @@ Illusionary Terrain	T4	effects	choose	-	pending	not yet triaged
 Illusionist's Gambit	T4	effects	delayed	cast:cantbecastunless	pending	not yet triaged
 Illusory Angel	T4	effects	player:cantcastspells	cast:cantbecastunless	pending	not yet triaged
 Imi Statue	T4	effects	player:untapadjust	player:cantuntapmorethannumberpermanentsduringtheiruntapstep	pending	not yet triaged
-Immobilizer Eldrazi	T4	effects	-	cda	pending	not yet triaged
+Immard, the Stormcleaver [Guile, Sonic Soldier]	T4	effects	countersremove countersremove	-	pending	not yet triaged
 Immortal Coil	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Immortal Obligation	T4	effects	-	rule:cantattack	pending	not yet triaged
 Immovable Rod	T4	effects	-	rule:cantblock	pending	not yet triaged
@@ -1181,7 +1106,6 @@ Inalla, Archmage Ritualist	T4	effects	delayed move:battlefield>exile tokencopy:1
 Iname, Life Aspect	T4	effects	move:graveyard>exile	-	pending	not yet triaged
 Incendiary Command	T4	effects	draw:*	-	pending	not yet triaged
 Incite Hysteria	T4	effects	grant:cardnamecantblock	grant:ability	pending	not yet triaged
-Incubator Drone	T4	effects	-	cda	pending	not yet triaged
 Indomitable Creativity	T4	effects	-	diguntil move:library>library	pending	not yet triaged
 Infernal Denizen	T4	effects	sacrifice	-	pending	not yet triaged
 Infernal Offering	T4	effects	draw:2	draw:1	pending	not yet triaged
@@ -1194,7 +1118,6 @@ Inquisitor Eisenhorn	T4	effects	-	mayplay	pending	not yet triaged
 Insatiable Appetite	T4	effects	sacrifice	-	pending	not yet triaged
 Insatiable Frugivore	T4	effects	token:1	-	equivalent	script writes the first Token then the repeat body (Token again)
 Insist	T4	effects	delayed effect	spell:cantbecountered	pending	not yet triaged
-Inspired Idea	T4	effects	draw:3	-	pending	not yet triaged
 Inspired Skypainter [Maestro's Gift]	T4	effects	-	grant:haste	pending	not yet triaged
 Instrument of the Bards	T4	effects	token:1	-	pending	not yet triaged
 Insult	T4	effects	-	effect	pending	not yet triaged
@@ -1209,7 +1132,6 @@ Invasion of New Phyrexia [Teferi Akosa of Zhalfir]	T4	effects	tap	-	pending	not 
 Invasion of Pyrulea	T4	effects	move:library>library	-	pending	not yet triaged
 Inventive Iteration	T4	effects	move:graveyard>hand	-	pending	not yet triaged
 Invert the Skies	T4	effects	animate	loseabilities	pending	not yet triaged
-Inverter of Truth	T4	effects	-	cda	pending	not yet triaged
 Invoke Despair	T4	effects	draw:1 draw:1 draw:1	-	mtgish-bug	mtgish Unless branches lose 2 life only; printed + script also draw a card (x3)
 Invoke the Ancients	T4	effects	counters:trample:1 counters:vigilance:1	-	equivalent	counter of choice: per-type alternatives vs mtgish counters:*
 Invulnerability	T4	effects	effect	prevent	pending	not yet triaged
@@ -1319,11 +1241,6 @@ Knowledge Pool	T4	effects	move:stack>exile	-	pending	not yet triaged
 Knowledge Vault	T4	effects	sacrifice	-	equivalent	sacrifice is a MustCost in mtgish (cost vs effect)
 Kodama's Reach	T4	effects	search:hand search:library	-	pending	not yet triaged
 Kolaghan Stormsinger	T4	effects	grant:haste	-	pending	not yet triaged
-Kozilek's Return	T4	effects	-	cda	pending	not yet triaged
-Kozilek's Sentinel	T4	effects	-	cda	pending	not yet triaged
-Kozilek's Shrieker	T4	effects	-	cda	pending	not yet triaged
-Kozilek's Translator	T4	effects	-	cda	pending	not yet triaged
-Kozilek's Unsealing	T4	effects	-	cda	pending	not yet triaged
 Krovikan Vampire	T4	effects	delayed sacrifice	-	equivalent	lose control written as two DelayedTriggers (ChangesZone+ChangesController)
 Kukemssa Pirates	T4	effects	effect gaincontrol	rule:assignsnocombatdamage	pending	not yet triaged
 Kumena's Awakening	T4	effects	draw:1	-	pending	not yet triaged
@@ -1342,7 +1259,7 @@ Lae'zel, Primal Warrior	T4	effects	-	perpetual perpetual	equivalent	one PumpAll 
 Lagonna-Band Storyteller	T4	effects	move:graveyard>library	-	pending	not yet triaged
 Lair of the Ashen Idol	T4	effects	sacrifice	-	pending	not yet triaged
 Land Equilibrium	T4	effects	replace:wouldenter	replace:wouldputapermanentonthebattlefield	pending	not yet triaged
-Lantern Flare	T4	effects	damage:* gainlife:* gainlife:*	-	pending	not yet triaged
+Lantern Flare	T4	effects	gainlife:*	-	pending	not yet triaged
 Lantern of Revealing	T4	effects	move:library>battlefield	-	pending	not yet triaged
 Lara Croft, Tomb Raider	T4	effects	counters:discovery:1	-	pending	not yet triaged
 Last Chance	T4	effects	-	delayed losegame	pending	not yet triaged
@@ -1383,7 +1300,6 @@ Life of the Party	T4	effects	goad tokencopy:1	rule:isgoadedbyplayer token:*	pend
 Lifelace	T4	effects	-	effect	pending	not yet triaged
 Lighthouse Chronologist	T4	effects	grant:ability setpt setpt	extraturn	pending	not yet triaged
 Lightning Coils	T4	effects	delayed move:battlefield>exile	-	pending	not yet triaged
-Lightning Reflexes	T4	effects	-	flash	pending	not yet triaged
 Lightning Surge	T4	effects	damage:6	-	equivalent	condition written as two SAs vs IfElse (mtgish damage:* merges 4/6)
 Lightstall Inquisitor	T4	effects	costincrease	mayplay	pending	not yet triaged
 Lightwheel Enhancements	T4	effects	grant:ability	mayplay	pending	not yet triaged
@@ -1396,7 +1312,6 @@ Lim-Dûl's Vault	T4	effects	dig:5 search:library	-	pending	not yet triaged
 Limits of Solidarity	T4	effects	grant:haste	-	pending	not yet triaged
 Linvala, Shield of Sea Gate	T4	effects	effect	rule:cantattack rule:cantbeactivated rule:cantblock	pending	not yet triaged
 Lithoform Blight	T4	effects	-	type	pending	not yet triaged
-Living Lore	T4	effects	cda	setpt	pending	not yet triaged
 Llanowar Empath	T4	effects	move:library>library	-	pending	not yet triaged
 Loamcrafter Faun	T4	effects	discard:1	-	pending	not yet triaged
 Lobelia, Defender of Bag End	T4	effects	-	dig:1	pending	not yet triaged
@@ -1406,7 +1321,6 @@ Lord Windgrace	T4	effects	move:graveyard>battlefield	move:graveyard>hand	pending
 Lord of Shatterskull Pass	T4	effects	grant:ability setpt setpt	damage:6	pending	not yet triaged
 Lord of the Pit	T4	effects	sacrifice	-	pending	not yet triaged
 Lorehold, the Historian	T4	effects	grant:miracle	static:eachcardinplayershandeffect	pending	not yet triaged
-Lost Order of Jarkeld	T4	effects	cda	setpt	pending	not yet triaged
 Loxodon Surveyor	T4	effects	grant:ability	draw:1	pending	not yet triaged
 Loyal Inventor	T4	effects	move:library>hand move:library>library	-	pending	not yet triaged
 Lucy MacLean, Positively Armed	T4	effects	tokencopy:1	-	pending	not yet triaged
@@ -1417,7 +1331,6 @@ Lukamina, Hawk Form	T4	effects	setstate:unspecialize	-	pending	not yet triaged
 Lukamina, Scorpion Form	T4	effects	setstate:unspecialize	-	pending	not yet triaged
 Lukamina, Wolf Form	T4	effects	setstate:unspecialize	-	pending	not yet triaged
 Luminous Guardian	T4	effects	-	rule:canblockanadditionalcreature	pending	not yet triaged
-Lunar Rejection	T4	effects	draw:1 move:battlefield>hand	-	pending	not yet triaged
 Lure of Prey	T4	effects	player:cantcastspells	cast:cantbecastunless	pending	not yet triaged
 Lurking Informant	T4	effects	move:library>library	-	pending	not yet triaged
 Lurking Predators	T4	effects	dig:1	-	equivalent	script splits one reveal into two Dig SAs on the same top card
@@ -1478,7 +1391,6 @@ Masterpiece Vault	T4	effects	move:hand>battlefield	-	pending	not yet triaged
 Matter Reshaper	T4	effects	move:library>battlefield	move:library>hand	pending	not yet triaged
 Maulfist Revolutionary	T4	effects	-	counters:* counters:*	pending	not yet triaged
 Mavinda, Students' Advocate	T4	effects	costincrease	mayplay	pending	not yet triaged
-Maw of Kozilek	T4	effects	-	cda	pending	not yet triaged
 Mayael the Anima Avatar	T4	effects	dig:1 move:library>library	-	equivalent	script splits one reveal into two Dig SAs (second is the put-on-bottom)
 Maze of Ith	T4	effects	prevent	-	pending	not yet triaged
 Maze of Shadows	T4	effects	prevent	-	pending	not yet triaged
@@ -1507,13 +1419,10 @@ Mila, Crafty Companion [Lukka, Wayward Bonder]	T4	effects	discard:1 draw:2	-	pen
 Mimic Vat	T4	effects	move:graveyard>exile	grant:haste	pending	not yet triaged
 Mind Bend	T4	effects	-	type	pending	not yet triaged
 Mind Carver	T4	effects	-	pump:+3/+1	pending	not yet triaged
-Mind Raker	T4	effects	-	cda	pending	not yet triaged
 Mind Spike	T4	effects	loselife:2	-	pending	not yet triaged
 Mindbender Spores	T4	effects	grant:ability	-	pending	not yet triaged
 Mindblaze	T4	effects	damage:8	-	pending	not yet triaged
 Mindleecher	T4	effects	-	player:maylookatfacedownexiledcards	pending	not yet triaged
-Mindmelter	T4	effects	-	cda	pending	not yet triaged
-Minion of the Wastes	T4	effects	cda	setpt	pending	not yet triaged
 Minsc & Boo, Timeless Heroes	T4	effects	sacrifice	-	pending	not yet triaged
 Minthara, Merciless Soul	T4	effects	grant:ward	-	pending	not yet triaged
 Mirage Mockery	T4	effects	-	tokencopy:1	pending	not yet triaged
@@ -1526,13 +1435,11 @@ Mirror Golem	T4	effects	grant:protection grant:protection grant:protection grant
 Mirror March	T4	effects	-	grant:haste	pending	not yet triaged
 Mirror Match	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Mirror Mockery	T4	effects	tokencopy:1	-	pending	not yet triaged
-Mirror-Style Master	T4	effects	-	delayed move:battlefield>exile tokencopy:1	pending	not yet triaged
 Mirrormind Crown	T4	effects	replace:aneffectwouldcreateanynumberoftokens	replace:aplayerwouldcreatetokens	pending	not yet triaged
 Mischievous Lookout	T4	effects	mayplay perpetual	player:onceeachturnmaycastaspellfromamongcardsingraveyardswitheffect	pending	not yet triaged
 Mischievous Quanar	T4	effects	copyspell	setstate:turnfacedown	mtgish-bug	mtgish#1 morph capture reuse: face-down ability duplicated, turned-face-up copy trigger lost
 Mishra, Eminent One	T4	effects	-	grant:haste	pending	not yet triaged
 Mishra, Tamer of Mak Fawa	T4	effects	grant:unearth	static:eachcardingraveyardeffect	pending	not yet triaged
-Mist Intruder	T4	effects	-	cda	pending	not yet triaged
 Mistbreath Elder	T4	effects	move:battlefield>hand	-	equivalent	the return is a cost in mtgish (MustCost), an effect in the script
 Mister Hyde, Monster Within	T4	effects	countersremove	-	pending	not yet triaged
 Mister Immortal	T4	effects	-	move:exile>battlefield	pending	not yet triaged
@@ -1547,7 +1454,6 @@ Molecule Man	T4	effects	grant:miracle	static:eachcardinplayershandeffect	pending
 Molten Collapse	T4	effects	-	destroy	pending	not yet triaged
 Molten Duplication	T4	effects	-	grant:haste	pending	not yet triaged
 Molten Echoes	T4	effects	-	grant:haste	pending	not yet triaged
-Molten Nursery	T4	effects	-	cda	pending	not yet triaged
 Moment of Truth	T4	effects	dig:2 move:library>library	-	pending	not yet triaged
 Momir Vig, Simic Visionary	T4	effects	move:library>library	-	pending	not yet triaged
 Mondo Gecko	T4	effects	grant:toxic	-	pending	not yet triaged
@@ -1574,11 +1480,10 @@ Multiple Choice	T4	effects	-	draw:1 move:battlefield>hand scry:1 token:1	pending
 Mungha Wurm	T4	effects	player:untapadjust	player:cantuntapmorethannumberpermanentsduringtheiruntapstep	pending	not yet triaged
 Muraganda Raceway	T4	effects	grant:ability	mana	pending	not yet triaged
 Murasa Pyromancer	T4	effects	-	damage:*	pending	not yet triaged
-Murk Strider	T4	effects	-	cda	pending	not yet triaged
 Musician	T4	effects	grant:atthebeginningofyourupkeepdestroythiscreatureunlessyoupayforeachmusiccounteronit	-	pending	not yet triaged
 Mutable Explorer	T4	effects	tokencopy:1	token:1	pending	not yet triaged
 Mutant Surveyor	T4	effects	grant:ability	draw:1	pending	not yet triaged
-Mutated Cultist	T4	effects	-	cda costreduction countersremove	pending	not yet triaged
+Mutated Cultist	T4	effects	-	costreduction countersremove	pending	not yet triaged
 Mutual Epiphany	T4	effects	planeswalk	-	pending	not yet triaged
 Muxus, Goblin Grandee	T4	effects	-	move:library>library	pending	not yet triaged
 My Crushing Masterstroke	T4	effects	grant:ability	rule:mustattack	pending	not yet triaged
@@ -1589,7 +1494,6 @@ Myrel, Shield of Argive	T4	effects	rule:cantbeactivated	player:cantactivateabili
 Myrkul, Lord of Bones	T4	effects	move:graveyard>exile	-	pending	not yet triaged
 Mysterious Limousine	T4	effects	move:battlefield>exile move:battlefield>exile	-	pending	not yet triaged
 Mystic Barrier	T4	effects	rule:cantattack	mayplay	pending	not yet triaged
-Mystic Veil	T4	effects	-	flash	pending	not yet triaged
 Myth Unbound	T4	effects	costreduction	spell:decreasemanacostforeach	pending	not yet triaged
 Mythos of Illuna	T4	effects	tokencopy:1	-	pending	not yet triaged
 Mythos of Nethroi	T4	effects	destroy	-	pending	not yet triaged
@@ -1601,7 +1505,6 @@ Nahiri's Lithoforming	T4	effects	player:mayplayanadditionalland	effect mayplay	p
 Nahiri, the Unforgiving	T4	effects	-	grant:haste	pending	not yet triaged
 Naktamun	T4	effects	grant:embalm	static:eachcardingraveyardeffect	pending	not yet triaged
 Nalfeshnee	T4	effects	grant:ability grant:haste	-	pending	not yet triaged
-Nameless Race	T4	effects	cda	setpt	pending	not yet triaged
 Nantuko Cultivator	T4	effects	discard:*	-	pending	not yet triaged
 Narset Transcendent	T4	effects	grant:rebound	dig:1 effect	pending	not yet triaged
 Narset of the Ancient Way	T4	effects	discard:1	-	pending	not yet triaged
@@ -1612,14 +1515,12 @@ Naya	T4	effects	player:mayplayanadditionalland	mayplay	pending	not yet triaged
 Naya Soulbeast	T4	effects	counters:+1/+1:*	effect	pending	not yet triaged
 Nazahn, Revered Bladesmith	T4	effects	move:library>battlefield move:library>hand	-	pending	not yet triaged
 Necrologia	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
-Necromancy	T4	effects	-	flash	pending	not yet triaged
 Neera, Wild Mage	T4	effects	move:stack>library play	-	pending	not yet triaged
 Neheb, Dreadhorde Champion	T4	effects	discard:1	draw:* mana	pending	not yet triaged
 Nemesis Mask	T4	effects	rule:allcreaturesmustblockit	rule:mustblockattacker	equivalent	mtgish writes a granted Lure as each creature MustBlockAttacker
 Nessian Demolok	T4	effects	-	destroy	pending	not yet triaged
 Nessian Wilds Ravager	T4	effects	-	fight	pending	not yet triaged
 Nesting Bot	T4	effects	grant:ability	pump:+1/+0	pending	not yet triaged
-Nettle Drone	T4	effects	-	cda	pending	not yet triaged
 Nettling Imp	T4	effects	grant:ability	rule:mustattack	pending	not yet triaged
 Nettling Nuisance	T4	effects	goad	rule:isgoadedbyplayer	pending	not yet triaged
 Neurok Transmuter	T4	effects	-	type	pending	not yet triaged
@@ -1673,7 +1574,6 @@ Nyla, Shirshu Sleuth	T4	effects	move:graveyard>exile	-	pending	not yet triaged
 Oathsworn Knight	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Ob Nixilis of the Black Oath	T4	effects	effect	draw:* gainlife:*	pending	not yet triaged
 Ob Nixilis, the Fallen	T4	effects	loselife:3	-	pending	not yet triaged
-Oblivion Strike	T4	effects	-	cda	pending	not yet triaged
 Oblivious Bookworm	T4	effects	draw:1	-	pending	not yet triaged
 Obscura Interceptor	T4	effects	connive	-	pending	not yet triaged
 Obscura Storefront	T4	effects	sacrifice	-	pending	not yet triaged
@@ -1704,7 +1604,6 @@ Opportunistic Dragon	T4	effects	-	rule:cantattack rule:cantblock	pending	not yet
 Opposition Agent	T4	effects	effect	mayplay	pending	not yet triaged
 Oracle en-Vec	T4	effects	rule:mustattack	player:mustattackwitheachcreature	pending	not yet triaged
 Oracle of Bones	T4	effects	-	play	pending	not yet triaged
-Oracle of Dust	T4	effects	-	cda	pending	not yet triaged
 Oracle's Vault	T4	effects	mayplay	player:onceeachturnmayaction	pending	not yet triaged
 Oran-Rief Survivalist	T4	effects	-	counters:+1/+1:1	pending	not yet triaged
 Orbs of Warding	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
@@ -1737,12 +1636,9 @@ Pako, Arcane Retriever	T4	effects	-	counters:fetch:1	pending	not yet triaged
 Palace Jailer	T4	effects	delayed move:exile>battlefield	-	pending	not yet triaged
 Palantír of Orthanc	T4	effects	draw:1	-	pending	not yet triaged
 Paleontologist's Pick-Axe [Dinosaur Headdress]	T4	effects	-	unmapped:Action.ChooseAnExiledCardToCopy	normalizer	unmapped token
-Pallimud	T4	effects	cda	setpt	pending	not yet triaged
 Panic	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Panther Habit	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Parallel Evolution	T4	effects	tokencopy:1	token:*	pending	not yet triaged
-Parapet	T4	effects	-	flash	pending	not yet triaged
-Parasitic Grasp	T4	effects	damage:3 gainlife:3	-	pending	not yet triaged
 Parcelbeast	T4	effects	move:library>battlefield	move:library>hand	pending	not yet triaged
 Pardic Dragon	T4	effects	counters:time:1	countersremove	pending	not yet triaged
 Parnesse, the Subtle Brush	T4	effects	-	counter	pending	not yet triaged
@@ -1750,8 +1646,6 @@ Part in Friendship	T4	effects	move:library>battlefield move:library>hand move:li
 Party Dude	T4	effects	grant:trample	-	pending	not yet triaged
 Party Thrasher	T4	effects	spell:convoke	player:spellscasthaveability	pending	not yet triaged
 Pashalik Mons	T4	effects	-	damage:1	pending	not yet triaged
-Path of Annihilation	T4	effects	-	cda	pending	not yet triaged
-Path of Peril	T4	effects	destroy	-	pending	not yet triaged
 Patient Naturalist	T4	effects	move:graveyard>hand	-	pending	not yet triaged
 Patriarch's Desire	T4	effects	-	pump:+2/-2	pending	not yet triaged
 Patrician's Scorn	T4	effects	alternativecost	cast:maycastwithoutpayingif	pending	not yet triaged
@@ -1769,7 +1663,6 @@ Perilous Iteration	T4	effects	-	seek	pending	not yet triaged
 Perilous Snare	T4	effects	grant:ability	counters:+1/+1:1	pending	not yet triaged
 Perplexing Chimera	T4	effects	controlspell	-	pending	not yet triaged
 Pestilent Cauldron	T4	effects	draw:1	-	pending	not yet triaged
-Petrifying Meddler	T4	effects	-	cda	pending	not yet triaged
 Petty Larceny	T4	effects	-	dig:2	pending	not yet triaged
 Phalanx Tactics	T4	effects	pump:+1/+1	pump:+2/+1	pending	not yet triaged
 Phantasmal Extraction	T4	effects	-	move:graveyard>exile	equivalent	one ChangeZone Origin$ Hand,Graveyard vs ChooseAnAction one exile per zone
@@ -1797,7 +1690,6 @@ Pillar Tombs of Aku	T4	effects	sacrifice	-	pending	not yet triaged
 Pin Collection	T4	effects	-	grant:*	pending	not yet triaged
 Pine Walker	T4	effects	-	untap	pending	not yet triaged
 Pippin's Bravery	T4	effects	sacrifice	-	pending	not yet triaged
-Pipsqueak, Rebel Strongarm	T4	effects	rule:cantattack	rule:cantattackalone	pending	not yet triaged
 Piracy	T4	effects	player:piracy	player:maytappermanentstheydontcontrolformanawithmodifiers	pending	not yet triaged
 Planar Genesis	T4	effects	move:library>battlefield	-	pending	not yet triaged
 Planar Nexus	T4	effects	cda	type	pending	not yet triaged
@@ -1840,13 +1732,10 @@ Prishe's Wanderings	T4	effects	search:battlefield	-	pending	not yet triaged
 Prismatic Circle	T4	effects	effect	prevent	pending	not yet triaged
 Prisoner's Dilemma	T4	effects	-	damage:4 damage:8 vote	pending	not yet triaged
 Prized Amalgam	T4	effects	delayed move:graveyard>battlefield	-	pending	not yet triaged
-Processor Assault	T4	effects	-	cda	pending	not yet triaged
 Proclamation of Rebirth	T4	effects	move:graveyard>battlefield	move:graveyard>hand	pending	not yet triaged
 Professor Onyx	T4	effects	discard:1	-	pending	not yet triaged
 Proft, Sinister Mastermind	T4	effects	player:cantcastspells	cast:cantbecastunless	pending	not yet triaged
 Promise of Aclazotz [Foul Rebirth]	T4	effects	sacrifice	-	pending	not yet triaged
-Propagator Drone	T4	effects	-	cda	pending	not yet triaged
-Prophet of Distortion	T4	effects	-	cda	pending	not yet triaged
 Protean Hydra	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Protection of the Hekma	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Prototype X-8	T4	effects	sacrifice	-	pending	not yet triaged
@@ -1905,13 +1794,11 @@ Ravenous Gigamole	T4	effects	move:graveyard>hand	-	pending	not yet triaged
 Ravenous Rotbelly	T4	effects	sacrifice	-	pending	not yet triaged
 Ravenous Vampire	T4	effects	counters:+1/+1:1 sacrifice	-	pending	not yet triaged
 Razor Hippogriff	T4	effects	gainlife:*	loselife:*	pending	not yet triaged
-Reality Hemorrhage	T4	effects	-	cda	pending	not yet triaged
 Reality Is Mine to Control	T4	effects	abandon	-	equivalent	mtgish MayCost(AbandonScheme): the abandon is a cost there
 Reality Shaping	T4	effects	planeswalk	-	pending	not yet triaged
 Reality Strobe	T4	effects	move:battlefield>hand	move:graveyard>hand	pending	not yet triaged
 Realms Uncharted	T4	effects	search:hand search:library	-	pending	not yet triaged
 Reason [Believe]	T4	effects	move:library>battlefield	move:library>hand	pending	not yet triaged
-Reaver Drone	T4	effects	-	cda	pending	not yet triaged
 Rebel Informer	T4	effects	rule:cantbethetargetofspellsorabilities	rule:cantbethetargetofabilities rule:cantbethetargetofspells	pending	not yet triaged
 Rebellion of the Flamekin	T4	effects	token:1	-	pending	not yet triaged
 Rebirth	T4	effects	move:library>ante	-	pending	not yet triaged
@@ -1927,7 +1814,6 @@ Reidane, God of the Worthy [Valkmira, Protector's Shield]	T4	effects	replace:wou
 Reign of Terror	T4	effects	-	destroy	pending	not yet triaged
 Reins of Power	T4	effects	gaincontrol gaincontrol grant:haste	exchangecontrol	pending	not yet triaged
 Relic Axe	T4	effects	-	pump:+2/+1	pending	not yet triaged
-Relic Ward	T4	effects	-	flash	pending	not yet triaged
 Remove	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Reno and Rude	T4	effects	sacrifice	-	pending	not yet triaged
 Reset	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
@@ -1983,8 +1869,7 @@ Rowdy Crew	T4	effects	counters:+1/+1:2	counters:+1/+1:3	pending	not yet triaged
 Rowen	T4	effects	-	player:revealfirstcarddrawnduringeachplayersturn	pending	not yet triaged
 Roxi, Publicist to the Stars	T4	effects	putsticker	-	pending	not yet triaged
 Rubble Rouser	T4	effects	mana	-	pending	not yet triaged
-Ruin in Their Wake	T4	effects	move:library>battlefield move:library>hand	cda	pending	not yet triaged
-Ruination Guide	T4	effects	-	cda	pending	not yet triaged
+Ruin in Their Wake	T4	effects	move:library>battlefield move:library>hand	-	pending	not yet triaged
 Rukarumel, Biologist	T4	effects	-	spell:addcreaturetypevariable static:cardeffect	pending	not yet triaged
 Rulik Mons, Warren Chief	T4	effects	move:library>battlefield	-	pending	not yet triaged
 Rune of Protection: Artifacts	T4	effects	effect	prevent	pending	not yet triaged
@@ -2008,7 +1893,6 @@ Saheeli, Filigree Master	T4	effects	costreduction	spell:decreasemanacost	pending
 Saheeli, the Gifted	T4	effects	-	grant:haste	pending	not yet triaged
 Saheeli, the Sun's Brilliance	T4	effects	-	grant:haste	pending	not yet triaged
 Sahir, Visitor in Darkness	T4	effects	-	damage:1	pending	not yet triaged
-Salvage Drone	T4	effects	-	cda	pending	not yet triaged
 Samite Ministration	T4	effects	effect	prevent	pending	not yet triaged
 Sanar, Innovative First-Year	T4	effects	move:library>library search:exile search:exile search:exile search:exile search:exile	move:library>exile	pending	not yet triaged
 Sanctum Guardian	T4	effects	effect	prevent	pending	not yet triaged
@@ -2030,10 +1914,8 @@ Savior of Ollenbock	T4	effects	-	move:graveyard>exile	pending	not yet triaged
 Scarlet Witch, Chaotic Avenger	T4	effects	-	dig:2	pending	not yet triaged
 Scavenged Brawler	T4	effects	counters:+1/+1:1 counters:+1/+1:1 counters:+1/+1:1 counters:+1/+1:1	counters:+1/+1:4	pending	not yet triaged
 Scholar of New Horizons	T4	effects	move:library>battlefield move:library>hand	-	pending	not yet triaged
-Scion Summoner	T4	effects	-	cda	pending	not yet triaged
 Scion of the Ur-Dragon	T4	effects	copy	-	pending	not yet triaged
 Scorching Winds	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
-Scorn-Blade Berserker	T4	effects	-	draw:1	pending	not yet triaged
 Scour the Scene	T4	effects	-	perpetual	pending	not yet triaged
 Scourge of Nel Toth	T4	effects	alternativecost	mayplay	pending	not yet triaged
 Scrap Trawler	T4	effects	move:graveyard>hand	-	pending	not yet triaged
@@ -2064,7 +1946,6 @@ Sentinel of the Pearl Trident	T4	effects	move:battlefield>exile	-	pending	not ye
 Sephiroth, Fabled SOLDIER [Sephiroth, One-Winged Angel]	T4	effects	-	gainlife:1 loselife:1	pending	not yet triaged
 Seraph	T4	effects	delayed sacrifice	-	pending	not yet triaged
 Serpent's Soul-Jar	T4	effects	mayplay	player:onceeachturnmayaction	pending	not yet triaged
-Serpentine Spike	T4	effects	-	cda	pending	not yet triaged
 Serra Avenger	T4	effects	player:cantcastspells	cast:cantbecastif	pending	not yet triaged
 Serra the Benevolent	T4	effects	effect	player:damagethatwouldreducelifetotaltolessthannumberreducesittothatnumberinstead	pending	not yet triaged
 Serra's Emissary	T4	effects	-	grant:protection	pending	not yet triaged
@@ -2073,7 +1954,6 @@ Serum Tank	T4	effects	-	counters:charge:1	pending	not yet triaged
 Serum-Core Chimera	T4	effects	discard:1	-	pending	not yet triaged
 Seshiro the Anointed Avatar	T4	effects	-	spell:addcreaturetypevariable static:cardeffect	pending	not yet triaged
 Sever the Bloodline	T4	effects	-	move:battlefield>exile	pending	not yet triaged
-Sewer Nemesis	T4	effects	cda	setpt	pending	not yet triaged
 Sewer Plague	T4	effects	perpetual	-	equivalent	script writes one perpetual change as Pump + Animate SAs
 Shadow Kin	T4	effects	move:graveyard>exile	-	pending	not yet triaged
 Shadow of the Goblin	T4	effects	damage:1 discard:1	-	pending	not yet triaged
@@ -2084,7 +1964,6 @@ Shalai, Voice of Plenty	T4	effects	-	grant:hexproof grant:hexproof	pending	not y
 Shaman's Trance	T4	effects	player:shamanstrance	mayplay mayplay	pending	not yet triaged
 Shambling Swarm	T4	effects	-	countersremove delayed	pending	not yet triaged
 Shape Anew	T4	effects	move:library>library	-	pending	not yet triaged
-Shapeshifter	T4	effects	cda	setpt	pending	not yet triaged
 Share the Spoils	T4	effects	move:library>exile move:library>exile	-	pending	not yet triaged
 Shared Fate	T4	effects	player:maylookatfacedownexiledcards	-	pending	not yet triaged
 Shaun & Rebecca, Agents	T4	effects	mana	-	pending	not yet triaged
@@ -2110,13 +1989,10 @@ Sidequest: Catch a Fish	T4	effects	move:library>hand	-	pending	not yet triaged
 Siege Striker	T4	effects	tap	-	pending	not yet triaged
 Siegebreaker Giant	T4	effects	grant:cardnamecantblock	rule:cantblock	pending	not yet triaged
 Sifter Wurm	T4	effects	move:library>library	-	pending	not yet triaged
-Sifter of Skulls	T4	effects	-	cda	pending	not yet triaged
 Sigarda, Heron's Grace	T4	effects	-	grant:hexproof	pending	not yet triaged
-Sightless Brawler	T4	effects	rule:cantattack	rule:cantattackalone	pending	not yet triaged
 Signal the Clans	T4	effects	move:library>hand	-	pending	not yet triaged
 Silence the Believers	T4	effects	-	move:battlefield>exile	pending	not yet triaged
 Silent Gravestone	T4	effects	draw:1	-	pending	not yet triaged
-Silent Skimmer	T4	effects	-	cda	pending	not yet triaged
 Silent Submersible	T4	effects	-	draw:1	pending	not yet triaged
 Silumgar Assassin	T4	effects	destroy	rule:cantbeblockedbydefenders	pending	not yet triaged
 Silumgar's Scorn	T4	effects	counter	-	pending	not yet triaged
@@ -2127,18 +2003,14 @@ Singing Towers of Darillium	T4	effects	grant:foretell mayplay	player:mayactionon
 Sinister Concierge	T4	effects	move:graveyard>exile	-	pending	not yet triaged
 Sink into Stupor	T4	effects	-	move:stack>hand	equivalent	Origin$ Battlefield,Stack read as one move vs mtgish modal per zone
 Sins of the Past	T4	effects	effect	-	pending	not yet triaged
-Sire of Stagnation	T4	effects	-	cda	pending	not yet triaged
 Siren of the Fanged Coast	T4	effects	-	gaincontrol	pending	not yet triaged
 Siren's Call	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
 Sivvi's Ruse	T4	effects	alternativecost	cast:maycastwithoutpayingif	pending	not yet triaged
 Six	T4	effects	grant:retrace	static:eachcardingraveyardeffect	pending	not yet triaged
 Sizzling Soloist	T4	effects	delayed grant:ability	rule:mustattack	pending	not yet triaged
-Skittering Precursor	T4	effects	-	cda	pending	not yet triaged
-Skitterskin	T4	effects	-	cda	pending	not yet triaged
 Skittish Valesk	T4	effects	transform	setstate:turnfacedown	pending	not yet triaged
 Skrelv, Defector Mite	T4	effects	grant:hexprooffrom	grant:protection	pending	not yet triaged
 Skullcage	T4	effects	damage:2	-	pending	not yet triaged
-Sky Scourer	T4	effects	-	cda	pending	not yet triaged
 Skybreen	T4	effects	player:cantcastspells	spell:cantbecast	pending	not yet triaged
 Skyclave Aerialist [Skyclave Invader]	T4	effects	move:library>battlefield	-	pending	not yet triaged
 Skyclave Relic	T4	effects	mana	-	pending	not yet triaged
@@ -2146,10 +2018,8 @@ Skyfisher Spider	T4	effects	gainlife:*	-	pending	not yet triaged
 Skyline Savior	T4	effects	perpetual	-	equivalent	script writes one perpetual change as Pump + Animate SAs
 Skyship Plunderer	T4	effects	-	counters:*	pending	not yet triaged
 Skyshroud Condor	T4	effects	player:cantcastspells	cast:cantbecastunless	pending	not yet triaged
-Skyshroud War Beast	T4	effects	cda	setpt	pending	not yet triaged
 Skywatcher Adept	T4	effects	setpt setpt	-	pending	not yet triaged
 Skywriter Djinn	T4	effects	conjure	-	equivalent	script repeats conjure body as a copy (MakeCard + Repeat of same MakeCard)
-Slaughter Drone	T4	effects	-	cda	pending	not yet triaged
 Slayer's Cleaver	T4	effects	grant:mustbeblockedbycreatureeldrazi	rule:mustbeblockedbyadefender	pending	not yet triaged
 Sleight of Mind	T4	effects	-	effect	pending	not yet triaged
 Sleuth Instructor	T4	effects	-	cloak seek	pending	not yet triaged
@@ -2157,21 +2027,16 @@ Slicer, Hired Muscle	T4	effects	gaincontrol	-	pending	not yet triaged
 Slick Imitator	T4	effects	grant:ability	copyspell	pending	not yet triaged
 Slight Malfunction	T4	effects	dice	-	pending	not yet triaged
 Slinza, the Spiked Stampede	T4	effects	-	fight	pending	not yet triaged
-Slip Through Space	T4	effects	-	cda	pending	not yet triaged
 Sliver Gravemother	T4	effects	grant:encore	static:eachcardingraveyardeffect	pending	not yet triaged
 Sliver Queen Avatar	T4	effects	move:stack>exile	-	pending	not yet triaged
 Sliver Weftwinder	T4	effects	grant:warp	static:eachcardinplayershandeffect	pending	not yet triaged
-Sludge Crawler	T4	effects	-	cda	pending	not yet triaged
 Sludge Titan	T4	effects	-	move:graveyard>hand move:graveyard>hand	pending	not yet triaged
 Smog Smasher	T4	effects	grant:ability	delayed grant:haste move:exile>battlefield sacrifice	pending	not yet triaged
 Smoke	T4	effects	player:untapadjust	player:cantuntapmorethannumberpermanentsduringtheiruntapstep	pending	not yet triaged
 Smoke Bomb	T4	effects	sacrifice	-	pending	not yet triaged
-Smothering Abomination	T4	effects	-	cda	pending	not yet triaged
 Snake of the Golden Grove	T4	effects	-	gainlife:4	pending	not yet triaged
-Snapping Voidcraw	T4	effects	-	cda	pending	not yet triaged
 Snowfall	T4	effects	mana	-	pending	not yet triaged
 So Tiny	T4	effects	-	pump:-6/+0	pending	not yet triaged
-Soar	T4	effects	-	flash	pending	not yet triaged
 Solar Array	T4	effects	grant:sunburst	effect	pending	not yet triaged
 Solar Tide	T4	effects	-	destroy	pending	not yet triaged
 Soldevi Golem	T4	effects	untap	-	pending	not yet triaged
@@ -2199,7 +2064,6 @@ Soulfire Grand Master	T4	effects	delayed	-	pending	not yet triaged
 Soulherder	T4	effects	move:battlefield>exile	-	pending	not yet triaged
 Soundwave, Sonic Spy [Soundwave, Superior Captain]	T4	effects	transform transform	-	pending	not yet triaged
 Sower of Discord	T4	effects	choose loselife:*	-	pending	not yet triaged
-Sowing Mycospawn	T4	effects	-	cda	pending	not yet triaged
 Space Beleren	T4	effects	rule:cantbeblocked	rule:cantbeblockedbydefenders	pending	not yet triaged
 Spara's Adjudicators	T4	effects	-	rule:cantblock	pending	not yet triaged
 Spark Double	T4	effects	effect	counters:+1/+1:1 counters:+1/+1:1	pending	not yet triaged
@@ -2207,7 +2071,6 @@ Spark of Creativity	T4	effects	damage:*	-	pending	not yet triaged
 Sparkshaper Visionary	T4	effects	grant:ability	-	pending	not yet triaged
 Sparksmith	T4	effects	damage:*	-	pending	not yet triaged
 Spatial Binding	T4	effects	effect	rule:cantphaseout	pending	not yet triaged
-Spawn-Gang Commander	T4	effects	-	cda	pending	not yet triaged
 Specimen Collector	T4	effects	-	token:1	pending	not yet triaged
 Spectacular Pileup	T4	effects	animate	loseabilities	pending	not yet triaged
 Spectacular Skywhale	T4	effects	counters:+1/+1:3	counters:+1/+1:5	pending	not yet triaged
@@ -2215,7 +2078,6 @@ Specter of Mortality	T4	effects	move:graveyard>exile	-	pending	not yet triaged
 Spectra Ward	T4	effects	grant:protection	grant:ability	pending	not yet triaged
 Spectral Shift	T4	effects	-	effect effect type	pending	not yet triaged
 Spectrox Mines	T4	effects	-	token:1	pending	not yet triaged
-Spell Shrivel	T4	effects	-	cda	pending	not yet triaged
 Spellbane Centaur	T4	effects	rule:cantbethetargetofspellsorabilities	rule:cantbethetargetofabilities rule:cantbethetargetofspells	pending	not yet triaged
 Spellshift	T4	effects	play	-	pending	not yet triaged
 Spellweaver Helix	T4	effects	play	-	pending	not yet triaged
@@ -2227,7 +2089,6 @@ Sphere of Reason	T4	effects	replace:woulddealdamage	replace:preventdamage	pendin
 Sphere of Truth	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Sphinx Ambassador	T4	effects	move:library>battlefield	-	equivalent	script searches to library then a conditional ChangeZone to battlefield; mtgish PutFoundCardsOntoBattlefield nested in If
 Sphinx-Bone Wand	T4	effects	counters:charge:1	-	pending	not yet triaged
-Spider Climb	T4	effects	-	flash	pending	not yet triaged
 Spider-Man 2099	T4	effects	player:cantcastspells	cast:cantbecastif	pending	not yet triaged
 Spider-Punk	T4	effects	spell:cantbecountered	static:stackeffect	pending	not yet triaged
 Spider-Verse	T4	effects	grant:haste	-	pending	not yet triaged
@@ -2249,7 +2110,6 @@ Spy Network	T4	effects	-	dig:1	pending	not yet triaged
 Squee, Dubious Monarch	T4	effects	alternativecost	mayplay	pending	not yet triaged
 Squee, the Immortal	T4	effects	-	mayplay	pending	not yet triaged
 Stabilizer	T4	effects	rule:cantbeactivated	player:cantcyclecards	pending	not yet triaged
-Stalking Drone	T4	effects	-	cda	pending	not yet triaged
 Stalwart Speartail	T4	effects	-	perpetual perpetual	equivalent	one PumpAll PumpZone$ Battlefield,Hand,Library vs one CreatePerpetual* per zone
 Stangg	T4	effects	-	delayed	pending	not yet triaged
 Starke	T4	effects	draw:1	-	pending	not yet triaged
@@ -2275,7 +2135,6 @@ Strago and Relm	T4	effects	grant:ability grant:haste	effect	pending	not yet tria
 Strategic Betrayal	T4	effects	-	move:graveyard>exile	pending	not yet triaged
 Stratus Dancer	T4	effects	counter	-	pending	not yet triaged
 Streaking Oilgorger	T4	effects	grant:ability	grant:lifelink	pending	not yet triaged
-Streetwise Negotiator	T4	effects	-	rule:assignstoughnesscombatdamage	pending	not yet triaged
 Strefan, Maurer Progenitor	T4	effects	move:hand>battlefield	-	pending	not yet triaged
 Strength of the Tajuru	T4	effects	-	counters:+1/+1:*	pending	not yet triaged
 Stridehangar Automaton	T4	effects	replace:aneffectwouldcreateanynumberoftokens	replace:anynumberoftokenswouldbecreated	pending	not yet triaged
@@ -2319,7 +2178,6 @@ Suspicious Detonation	T4	effects	spell:cantbecountered	costreduction	pending	not
 Sutured Ghoul	T4	effects	choose setpt	cda	pending	not yet triaged
 Svella, Ice Shaper	T4	effects	play	-	pending	not yet triaged
 Swans of Bryn Argoll	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
-Swarm Surge	T4	effects	-	cda	pending	not yet triaged
 Swashbuckler Extraordinaire	T4	effects	sacrifice	-	pending	not yet triaged
 Swat Away	T4	effects	-	move:stack>library	equivalent	Origin$ Battlefield,Stack read as one move; mtgish one move per target kind
 Sweep Away	T4	effects	move:battlefield>hand move:battlefield>library	-	pending	not yet triaged
@@ -2406,7 +2264,7 @@ Terra, Magical Adept [Esper Terra]	T4	effects	-	grant:haste grant:haste grant:ha
 Terrapact Intimidator	T4	effects	token:2	-	pending	not yet triaged
 Territorial Hellkite	T4	effects	-	rule:mustattack tap	pending	not yet triaged
 Territorial Kavu	T4	effects	discard:1	-	pending	not yet triaged
-Territory Culler	T4	effects	move:library>hand	cda	pending	not yet triaged
+Territory Culler	T4	effects	move:library>hand	-	pending	not yet triaged
 Teval, Arbiter of Virtue	T4	effects	spell:delve	player:spellscasthaveability	pending	not yet triaged
 Tevesh Szat, Doom of Fools	T4	effects	sacrifice	-	pending	not yet triaged
 Teyo, Geometric Tactician	T4	effects	rule:cantattack	mayplay	pending	not yet triaged
@@ -2477,7 +2335,7 @@ Thermal Flux	T4	effects	animate	-	pending	not yet triaged
 They Came from the Pipes	T4	effects	-	manifestdread	pending	not yet triaged
 Thick-Skinned Goblin	T4	effects	player:youmaypayratherthanpaytheechocostforpermanentsyoucontrol	player:maypayalternateechocosts	pending	not yet triaged
 Thicket Elemental	T4	effects	move:library>library	-	pending	not yet triaged
-Thief of Existence	T4	effects	grant:ability move:battlefield>exile	cda effect	pending	not yet triaged
+Thief of Existence	T4	effects	grant:ability move:battlefield>exile	effect	pending	not yet triaged
 Thief of Sanity	T4	effects	-	dig:3 move:library>graveyard	pending	not yet triaged
 Third Little Pig	T4	effects	-	perpetual	equivalent	one trigger TriggerZones$ Battlefield,Graveyard vs mtgish FromGraveyard copy
 Thomil, the Destroyer	T4	effects	tokencopy:1	token:1	pending	not yet triaged
@@ -2487,7 +2345,6 @@ Thorn Mammoth	T4	effects	-	fight	pending	not yet triaged
 Thought Dissector	T4	effects	sacrifice	-	pending	not yet triaged
 Thought Distortion	T4	effects	-	move:graveyard>exile	pending	not yet triaged
 Thought Gorger	T4	effects	counters:+1/+1:*	-	pending	not yet triaged
-Thought Harvester	T4	effects	-	cda	pending	not yet triaged
 Thought-String Analyst	T4	effects	-	player:maylookatfacedownexiledcards	pending	not yet triaged
 Thoughtlace	T4	effects	-	effect	pending	not yet triaged
 Thoughtpicker Witch	T4	effects	-	dig:2 move:library>library	pending	not yet triaged
@@ -2512,7 +2369,6 @@ Thunderstaff	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	no
 Thwart the Grave	T4	effects	move:graveyard>battlefield	-	equivalent	one ChangeZone per target slot vs one return of both targets
 Tidal Control	T4	effects	counter	-	pending	not yet triaged
 Tidal Influence	T4	effects	player:cantcastspells	cast:cantbecastunless	pending	not yet triaged
-Tide Drifter	T4	effects	-	cda	pending	not yet triaged
 Time Bends to My Will	T4	effects	-	player:skipsuntapstep	pending	not yet triaged
 Time Distortion	T4	effects	planeswalk	-	pending	not yet triaged
 Time Reaper	T4	effects	move:exile>library	-	pending	not yet triaged
@@ -2525,7 +2381,6 @@ Tippy-Toe, Terrific Partner	T4	effects	replace:aneffectwouldcreateanynumberoftok
 Tireless Provisioner	T4	effects	-	token:1	pending	not yet triaged
 Titan of Littjara	T4	effects	discard:1 discard:1	draw:1 draw:1	pending	not yet triaged
 Titania's Song	T4	effects	loseabilities setpt type	-	pending	not yet triaged
-Titans' Vanguard	T4	effects	-	cda	pending	not yet triaged
 Tithe	T4	effects	search:hand	-	pending	not yet triaged
 Tizerus Charger	T4	effects	counters:flying:1	-	pending	not yet triaged
 Tlincalli Hunter	T4	effects	mayplay	player:maypayalternatecostforaspellonceeachturn	pending	not yet triaged
@@ -2537,7 +2392,6 @@ Tony Stark [The Invincible Iron Man]	T4	effects	move:hand>battlefield	-	pending	
 Torrent Sculptor [Flamethrower Sonata]	T4	effects	discard:1	-	pending	not yet triaged
 Torrent of Souls	T4	effects	pump:+2/+0	-	pending	not yet triaged
 Touch of Moonglove	T4	effects	grant:deathtouch	-	pending	not yet triaged
-Touch of the Void	T4	effects	-	cda	pending	not yet triaged
 Tovolar, Dire Overlord [Tovolar, the Midnight Scourge]	T4	effects	grant:trample	-	pending	not yet triaged
 Tower Above	T4	effects	grant:wither	-	pending	not yet triaged
 Town-Razer Tyrant	T4	effects	-	loseabilities	pending	not yet triaged
@@ -2545,7 +2399,6 @@ Track Down	T4	effects	move:library>library	-	pending	not yet triaged
 Trade Secrets	T4	effects	draw:2 draw:4	-	equivalent	script repeats the draw pair as a copy (aside: mtgish reads the up-to draw as exact)
 Trait Doctoring	T4	effects	-	type	pending	not yet triaged
 Transcendent Master	T4	effects	setpt setpt	-	pending	not yet triaged
-Transgress the Mind	T4	effects	-	cda	pending	not yet triaged
 Transmogrify	T4	effects	move:library>library	-	pending	not yet triaged
 Transmutation Font	T4	effects	-	token:1 token:1	pending	not yet triaged
 Transmute Artifact	T4	effects	move:library>battlefield move:library>battlefield move:library>graveyard sacrifice	-	pending	not yet triaged
@@ -2571,7 +2424,7 @@ Tuktuk Grunts	T4	effects	-	counters:+1/+1:1	pending	not yet triaged
 Tuktuk Scrapper	T4	effects	destroy	damage:*	pending	not yet triaged
 Tunnel Vision	T4	effects	move:library>graveyard move:library>library	-	pending	not yet triaged
 Tunnel of Love	T4	effects	move:battlefield>exile	-	pending	not yet triaged
-Turn Against	T4	effects	grant:haste	cda	pending	not yet triaged
+Turn Against	T4	effects	grant:haste	-	pending	not yet triaged
 Turnabout	T4	effects	tapuntap	tap untap	pending	not yet triaged
 Turncoat Kunoichi	T4	effects	move:battlefield>exile	-	pending	not yet triaged
 Turntimber Ranger	T4	effects	token:1	counters:+1/+1:1	pending	not yet triaged
@@ -2583,12 +2436,8 @@ Twist Allegiance	T4	effects	gaincontrol gaincontrol	exchangecontrol	pending	not 
 Two-Headed Giant	T4	effects	grant:menace	grant:doublestrike	mtgish-bug	mtgish#1 reuses keyword [0]: tails branch grants double strike, printed menace
 Tyvar Kell	T4	effects	untap	tap	pending	not yet triaged
 Uchuulon	T4	effects	move:graveyard>exile	-	pending	not yet triaged
-Ugin's Binding	T4	effects	-	cda	pending	not yet triaged
 Ugin's Conjurant	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Ugin, the Ineffable	T4	effects	dig:1	-	pending	not yet triaged
-Ulalek, Fused Atrocity	T4	effects	-	cda	pending	not yet triaged
-Ulamog's Nullifier	T4	effects	-	cda	pending	not yet triaged
-Ulamog's Reclaimer	T4	effects	-	cda	pending	not yet triaged
 Ulamog, the Defiler	T4	effects	grant:annihilator	grant:ability	pending	not yet triaged
 Ulasht, the Hate Seed	T4	effects	-	counters:+1/+1:*	pending	not yet triaged
 Ultima, Origin of Oblivion	T4	effects	-	type	pending	not yet triaged
@@ -2602,13 +2451,10 @@ Undiscovered Paradise	T4	effects	-	delayed	pending	not yet triaged
 Unearthly Blizzard	T4	effects	grant:cardnamecantblock	rule:cantblock	pending	not yet triaged
 Unexpected Conversion	T4	effects	move:hand>exile move:hand>exile	-	equivalent	mtgish MayCost(Exile from hand) cost vs ChangeZone; hand and library exiled by two ChangeZones vs one SearchHandAndLibrary
 Unexpected Request	T4	effects	attach grant:haste	-	pending	not yet triaged
-Unfathomable Truths	T4	effects	-	cda	pending	not yet triaged
 Unholy Citadel	T4	effects	grant:bandswithother	grant:ability	pending	not yet triaged
 Unleash the Flux	T4	effects	planeswalk	-	pending	not yet triaged
 Unleash the Inferno	T4	effects	damage:7	-	pending	not yet triaged
 Unlicensed Hearse	T4	effects	setpt	cda	pending	not yet triaged
-Unnatural Aggression	T4	effects	-	cda	pending	not yet triaged
-Unnatural Endurance	T4	effects	-	cda	pending	not yet triaged
 Unscythe, Killer of Kings	T4	effects	move:graveyard>exile	-	pending	not yet triaged
 Unsettled Mariner	T4	effects	-	counter	pending	not yet triaged
 Unstable Amulet	T4	effects	move:command>exile	-	pending	not yet triaged
@@ -2639,7 +2485,6 @@ Venser, Fervent Forger	T4	effects	-	grant:haste	pending	not yet triaged
 Verdant Mastery	T4	effects	move:library>hand search:battlefield search:library	-	pending	not yet triaged
 Verdant Rejuvenation	T4	effects	search:battlefield	move:hand>battlefield seek	pending	not yet triaged
 Verdant Sun's Avatar	T4	effects	-	gainlife:*	pending	not yet triaged
-Vestige of Emrakul	T4	effects	-	cda	pending	not yet triaged
 Vesuva	T4	effects	-	etbtapped	pending	not yet triaged
 Vesuvan Shapeshifter	T4	effects	copy copy	-	equivalent	mtgish one enters-or-turned-face-up rule; script ETB + TurnFaceUp replacements
 Veteran Adventurer	T4	effects	cda	type	pending	not yet triaged
@@ -2655,13 +2500,9 @@ Victimize	T4	effects	sacrifice	-	equivalent	mtgish MustCost(SacrificeAPermanent)
 Viewpoint Synchronization	T4	effects	search:hand search:library	-	pending	not yet triaged
 Vigor	T4	effects	replace:woulddealdamage	replace:preventdamage	pending	not yet triaged
 Vigor Mortis	T4	effects	move:graveyard>battlefield	-	pending	not yet triaged
-Vile Aggregate	T4	effects	-	cda	pending	not yet triaged
-Vile Redeemer	T4	effects	-	cda	pending	not yet triaged
 Villainous Syndication	T4	effects	sacrifice	-	pending	not yet triaged
-Viral Spawning	T4	effects	grant:flashback	-	pending	not yet triaged
 Visage of Dread	T4	effects	discard:*	move:hand>exile	pending	not yet triaged
 Visions	T4	effects	-	move:library>library	pending	not yet triaged
-Visions of Brutality	T4	effects	-	cda	pending	not yet triaged
 Vislor Turlough	T4	effects	gaincontrol	-	pending	not yet triaged
 Vivien on the Hunt	T4	effects	sacrifice	-	equivalent	mtgish MayCost(SacrificeAPermanent): cost on one side, Sacrifice SA on the other
 Vivien's Grizzly	T4	effects	move:library>hand	-	equivalent	mtgish MayCost(RevealTopCardOfLibraryAndPutIntoHand): cost on one side, ChangeZone on the other
@@ -2671,11 +2512,7 @@ Vizier of Deferment	T4	effects	move:battlefield>exile	-	pending	not yet triaged
 Vnwxt, Verbose Host	T4	effects	grant:ability	replace:woulddraw	pending	not yet triaged
 Voda Sea Scavenger	T4	effects	move:library>library	move:library>hand	pending	not yet triaged
 Vodalian Mystic	T4	effects	color	effect	pending	not yet triaged
-Void Attendant	T4	effects	-	cda	pending	not yet triaged
-Void Grafter	T4	effects	-	cda	pending	not yet triaged
-Void Shatter	T4	effects	-	cda	pending	not yet triaged
 Void Winnower	T4	effects	rule:cantbeblockedbydefenders	player:cantblockwithcreatures	pending	not yet triaged
-Voidpouncer	T4	effects	-	cda	pending	not yet triaged
 Voidstone Gargoyle	T4	effects	player:cantcastspells	spell:cantbecast	pending	not yet triaged
 Volatile Arsonist	T4	effects	damage:1 damage:1	-	pending	not yet triaged
 Volatile Arsonist [Dire-Strain Anarchist]	T4	effects	damage:2 damage:2	-	pending	not yet triaged
@@ -2683,7 +2520,6 @@ Volatile Claws	T4	effects	animate	type	pending	not yet triaged
 Volatile Stormdrake	T4	effects	exchangecontrol	-	equivalent	mtgish MustCost(ExchangeControl): the exchange is a cost there
 Volcanic Spite	T4	effects	move:hand>library:1	-	equivalent	the hand-to-library move: an effect in the script, a MayCost/MustCost cost in mtgish
 Volcano Hellion	T4	effects	damage:*	grant:echo	pending	not yet triaged
-Voldaren Thrillseeker	T4	effects	-	damage:*	pending	not yet triaged
 Vona's Hunger	T4	effects	sacrifice	-	pending	not yet triaged
 Vorpal Sword	T4	effects	animate	-	pending	not yet triaged
 Vraska the Unseen	T4	effects	grant:ability	delayed destroy	pending	not yet triaged
@@ -2702,11 +2538,9 @@ Wand of Orcus	T4	effects	grant:deathtouch grant:deathtouch	-	pending	not yet tri
 Wandering Archaic [Explore the Vastlands]	T4	effects	move:library>library	-	pending	not yet triaged
 Wandering Graybeard	T4	effects	dig:1	-	pending	not yet triaged
 Wanderwine Prophets	T4	effects	sacrifice	-	pending	not yet triaged
-Ward of Lights	T4	effects	grant:protection	flash grant:ability	pending	not yet triaged
+Ward of Lights	T4	effects	grant:protection	grant:ability	pending	not yet triaged
 Warrior's Oath	T4	effects	-	delayed losegame	pending	not yet triaged
 Warrior's Stand	T4	effects	-	cast:cantbecastunless	pending	not yet triaged
-Wash Away	T4	effects	counter	-	pending	not yet triaged
-Wasteland Strangler	T4	effects	-	cda	pending	not yet triaged
 Water Weird	T4	effects	dig:1	-	pending	not yet triaged
 Water Whip	T4	effects	costincrease	-	pending	not yet triaged
 Waterbender's Restoration	T4	effects	costincrease	-	pending	not yet triaged
@@ -2740,7 +2574,6 @@ Wilson, Urbane Bear	T4	effects	grant:lifelink	perpetual	pending	not yet triaged
 Wind Shear	T4	effects	animate	loseabilities	pending	not yet triaged
 Winds of Qal Sisma	T4	effects	prevent	-	pending	not yet triaged
 Wingbeat Warrior	T4	effects	grant:firststrike	-	pending	not yet triaged
-Winged Portent	T4	effects	draw:*	-	pending	not yet triaged
 Wingfold Pteron	T4	effects	counters:hexproof:1	-	pending	not yet triaged
 Wings of Velis Vel	T4	effects	-	type	pending	not yet triaged
 Winota, Joiner of Forces	T4	effects	grant:indestructible	-	pending	not yet triaged
@@ -2753,14 +2586,12 @@ Wire Surgeons	T4	effects	grant:encore	static:eachcardingraveyardeffect	pending	n
 Wish	T4	effects	mayplay	player:onceeachturnmayaction	pending	not yet triaged
 Wispweaver Angel	T4	effects	move:battlefield>exile	-	pending	not yet triaged
 Witch Engine	T4	effects	removefromcombat	-	equivalent	script makes the rule-implied removal from combat explicit
-Witness the End	T4	effects	-	cda	pending	not yet triaged
 Wizard's Spellbook	T4	effects	-	unmapped:Action.CastCopiedCardForAlternateCost	normalizer	unmapped token
 Woeleecher	T4	effects	countersremove	-	pending	not yet triaged
 Wondrous Revival	T4	effects	move:graveyard>battlefield	move:graveyard>hand	pending	not yet triaged
 Word of Command	T4	effects	move:command>exile rule:cantbeactivated	-	pending	not yet triaged
 Word of Undoing	T4	effects	move:battlefield>hand	-	pending	not yet triaged
 Workshop Elders	T4	effects	setpt type	-	pending	not yet triaged
-World Breaker	T4	effects	-	cda	pending	not yet triaged
 Worldheart Phoenix	T4	effects	alternativecost	mayplay	pending	not yet triaged
 Worldwalker Helm	T4	effects	replace:aneffectwouldcreateanynumberoftokens	replace:aplayerwouldcreatetokens	pending	not yet triaged
 Wormfang Drake	T4	effects	move:battlefield>exile	-	pending	not yet triaged
@@ -2768,8 +2599,6 @@ Worzel, the Protector	T4	effects	tokencopy:10	token:10	pending	not yet triaged
 Wrangle	T4	effects	grant:haste	-	pending	not yet triaged
 Wrenn and Six	T4	effects	grant:retrace	static:eachcardingraveyardeffect	pending	not yet triaged
 Write into Being	T4	effects	dig:1 move:library>library move:library>library	-	equivalent	script digs twice (manifest pick then the other card)
-Writhing Chrysalis	T4	effects	-	cda	pending	not yet triaged
-Wumpus Aberration	T4	effects	-	cda	pending	not yet triaged
 Wurmcoil Engine	T4	effects	-	token:1	pending	not yet triaged
 Wurmcoil Larva	T4	effects	-	token:1	pending	not yet triaged
 Wyll of the Celestial Pact	T4	effects	animate	-	pending	not yet triaged
@@ -2797,6 +2626,7 @@ Yuriko, Blade of the Mighty	T4	effects	rule:cantbeactivated	player:cantactivaten
 Zaffai, Thunder Conductor	T4	effects	damage:10	damage:1	pending	not yet triaged
 Zahur, Glory's Past	T4	effects	grant:ability	token:1	pending	not yet triaged
 Zealot il-Vec	T4	effects	damage:1	-	pending	not yet triaged
+Zethi, Arcane Blademaster [Chun-Li, Countless Kicks]	T4	effects	-	counters:kick:1	pending	not yet triaged
 Zevlor, Elturel Exile	T4	effects	-	copyspell	pending	not yet triaged
 Zhulodok, Void Gorger	T4	effects	spell:cascade	player:spellscastfromhandhaveability	pending	not yet triaged
 Ziatora's Envoy	T4	effects	play	-	pending	not yet triaged
