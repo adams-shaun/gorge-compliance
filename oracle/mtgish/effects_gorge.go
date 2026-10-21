@@ -476,7 +476,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		}
 		return out
 	case "DigUntil":
-		if p["FoundDestination"] == "Exile" {
+		if p["FoundDestination"] == "Exile" && p["RevealedDestination"] != "Library" {
 			// (Only an exiled find is the exile move alone; exiling the
 			// other revealed cards is one of the moves below, map_p2d.)
 			return []string{"move:library>exile"}
