@@ -220,3 +220,14 @@ func otherOriginsP2B(a *cards.SA) []string {
 	}
 	return dedup(out)
 }
+
+// lookActionP2B are look/reveal steps (_LookAtTopOfLibraryAction,
+// _RevealTheTopNumberCardsOfLibraryAction) that are ordinary actions with
+// the _Action's shape: a continuous or perpetual effect on the card put
+// onto the battlefield, damage from the spell.
+var lookActionP2B = map[string]bool{
+	"CreatePermanentLayerEffect":      true,
+	"CreatePermanentLayerEffectUntil": true,
+	"CreatePerpetualPermanentEffect":  true,
+	"SpellDealsDamage":                true,
+}

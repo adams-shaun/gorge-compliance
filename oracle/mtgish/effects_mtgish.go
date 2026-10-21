@@ -29,6 +29,12 @@ func (e *effects) walk(x any) {
 			if t := lookMove(variant); t != "" {
 				e.add(t)
 			}
+			if lookActionP2B[variant] {
+				// An action inside the look ("it gains haste"), shaped as
+				// the _Action of the same name.
+				e.action(n, variant)
+				return false
+			}
 			if a := argsOf(n); variant == "IfElse" && len(a) == 3 {
 				// "Instead put two of them into your hand": one branch runs.
 				e.alternatives(a[1], a[2])
