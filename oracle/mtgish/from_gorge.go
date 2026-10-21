@@ -781,7 +781,9 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 		a.Effects = []string{"replace:wouldputintograveyard"}
 	case r.Event == "Moved" && p["Destination"] == "Battlefield":
 		a.Effects = []string{"replace:wouldenter"}
-	case r.Event == "DamageDone" && p["Prevent"] == "True":
+	case r.Event == "DamageDone" && (p["Prevent"] == "True" || p["PreventionEffect"] != ""):
+		// PreventionEffect$: a partial prevention ("prevent X of that
+		// damage") written as a ReplaceDamage, still a prevention shield.
 		a.Effects = []string{"replace:preventdamage"}
 	case r.Event == "DamageDone":
 		a.Effects = []string{"replace:woulddealdamage"}
