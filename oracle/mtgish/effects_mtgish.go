@@ -574,6 +574,8 @@ func (e *effects) action(n node, v string) {
 // lookMove maps a look-at/reveal-the-top sub-action to the move it makes.
 func lookMove(v string) string {
 	switch {
+	case p2fLookStays[v]:
+		return ""
 	case strings.Contains(v, "Cloak"):
 		return "cloak"
 	case strings.Contains(v, "Manifest"):

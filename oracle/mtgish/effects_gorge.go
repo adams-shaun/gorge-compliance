@@ -482,7 +482,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 				// Left on top (a later sub-ability moves it): no move.
 				continue
 			}
-			if d := p[k]; d != "" && !p2dDigUntilShuffledBack(p, k) {
+			if d := p[k]; d != "" && !p2dDigUntilShuffledBack(p, k) && !p2fShuffledAfter(a, p[k]) {
 				out = append(out, "move:library>"+strings.ToLower(d))
 			}
 		}

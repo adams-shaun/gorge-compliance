@@ -160,3 +160,22 @@ func init() {
 	// PutACardFromHandOnBattlefield: a script writes it as a ChangeZone.
 	mayCostActionsP2B["PutACardFromPlayersGraveyardOnBattlefield"] = true
 }
+
+// p2fLookStays are the look/reveal steps that leave the cards in the
+// library: shuffled back in ("then shuffle the rest into your library") or
+// left on top in the same order. Neither is a move, as the gorge side reads
+// a DigUntil shuffled back (p2dDigUntilShuffledBack), a Dig whose rest a
+// following Shuffle shuffles (p2dDigRestStays), and a PeekAndReveal.
+var p2fLookStays = map[string]bool{
+	"PutTheRemainingCardsBackIntoLibraryAndShuffle":      true,
+	"LeaveTheRemainingCardsOnTopOfLibraryInTheSameOrder": true,
+	"LeaveRemainingCardsOnTopOfLibraryInSameOrder":       true,
+}
+
+// p2fShuffledAfter reports a DigUntil whose revealed cards go back into
+// the library that its next sub-ability shuffles ("then shuffle the rest
+// into your library", the Shuffle written as its own SA): a shuffle, not a
+// move, as p2dDigUntilShuffledBack reads Shuffle$ True.
+func p2fShuffledAfter(a *cards.SA, dest string) bool {
+	return dest == "Library" && a.Sub != nil && a.Sub.API == "Shuffle"
+}
