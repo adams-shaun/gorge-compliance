@@ -304,3 +304,15 @@ func canonGrantP2B(t string) string {
 	}
 	return t
 }
+
+// searchFollowUpP2B reports a library ChangeZone that only distributes
+// cards an earlier search of the same ability found and remembered
+// ("search for two basic lands, put one onto the battlefield and the other
+// into your hand", scripted as a search to the library, then one hidden
+// ChangeZone per destination among the remembered cards): mtgish writes
+// it as one SearchLibrary, so these are no further search.
+func searchFollowUpP2B(a *cards.SA) bool {
+	p := a.Params
+	return a.API == "ChangeZone" && p["Origin"] == "Library" && p["Defined"] == "" &&
+		strings.Contains(p["ChangeType"], "IsRemembered") && p["ValidTgts"] == ""
+}

@@ -296,7 +296,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "Destroy", "DestroyAll":
 		return []string{"destroy"}
 	case "ChangeZone", "ChangeZoneAll":
-		if effectSelfExile(a) {
+		if effectSelfExile(a) || searchFollowUpP2B(a) {
 			// An effect ending itself: bookkeeping, not a move.
 			return nil
 		}
