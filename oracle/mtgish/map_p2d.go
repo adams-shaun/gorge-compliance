@@ -357,3 +357,37 @@ func p2dEachCardEffects(v string, r any) ([]string, bool) {
 	}
 	return dedup(out), len(out) > 0
 }
+
+// p2dFoldTargetStatics folds a face's two one-rule statics "can't be the
+// target of <spells>" and "can't be the target of <abilities>" (mtgish
+// writes "white spells or abilities from white sources" as two rules) into
+// the one static a script's CantTarget over both is.
+func p2dFoldTargetStatics(s *Summary) {
+	const sp, ab, both = "rule:cantbethetargetofspells", "rule:cantbethetargetofabilities", "rule:cantbethetargetofspellsorabilities"
+	one := func(a Ability, t string) bool {
+		return a.Kind == "static" && len(a.Effects) == 1 && a.Effects[0] == t
+	}
+	is, ia := -1, -1
+	for i, a := range s.Abilities {
+		if is < 0 && one(a, sp) {
+			is = i
+		}
+		if ia < 0 && one(a, ab) {
+			ia = i
+		}
+	}
+	if is < 0 || ia < 0 {
+		return
+	}
+	var out []Ability
+	for i, a := range s.Abilities {
+		switch i {
+		case is:
+			a.Effects = []string{both}
+		case ia:
+			continue
+		}
+		out = append(out, a)
+	}
+	s.Abilities = out
+}
