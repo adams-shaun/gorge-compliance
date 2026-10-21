@@ -1,6 +1,10 @@
 package mtgish
 
-import "github.com/adams-shaun/gorge/engine/cards"
+import (
+	"strings"
+
+	"github.com/adams-shaun/gorge/engine/cards"
+)
 
 // Phase 2, unit b: residual T4 effect classes found triaging the
 // alphabetical second third of the corpus.
@@ -34,10 +38,17 @@ var mayCostActionsP2B = map[string]bool{
 	"AbandonScheme":                          true,
 }
 
-// mayCostEffectP2B maps a MayCost/MustCost cost listed in
-// mayCostActionsP2B as the action it names, and reports whether it did.
-func mayCostEffectP2B(e *effects, c any) bool {
-	if !mayCostActionsP2B[variantOf(c)] {
+// mayCostEffectP2B maps a MayCost cost listed in mayCostActionsP2B as the
+// action it names, and reports whether it did. A MustCost ("exile it. If
+// you do, ...": the action is mandatory, its "if you do" makes it a cost)
+// is mapped for every action except a sacrifice, a discard or a life
+// payment, which scripts write as a Cost$ or UnlessCost$ (measured).
+func mayCostEffectP2B(e *effects, must bool, c any) bool {
+	v := variantOf(c)
+	switch {
+	case must && (strings.HasPrefix(v, "Sacrifice") || v == "DiscardACard" || v == "PayLife"):
+		return false
+	case !must && !mayCostActionsP2B[v]:
 		return false
 	}
 	sub := &effects{}

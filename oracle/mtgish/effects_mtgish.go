@@ -267,7 +267,7 @@ func (e *effects) action(n node, v string) {
 		// casting is the effect, as the Cast* actions.
 		e.add("play")
 		return
-	case (v == "MayCost" || v == "MustCost") && mayCostEffectP2B(e, arg(0)):
+	case (v == "MayCost" || v == "MustCost") && mayCostEffectP2B(e, v == "MustCost", arg(0)):
 		return
 	case wrapperActions[v]:
 		return
