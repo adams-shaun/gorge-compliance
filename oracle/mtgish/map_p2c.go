@@ -490,8 +490,16 @@ func (e *effects) p2cEachPlayerTokens(ts any) {
 // as" effect) creates that mtgish writes as player rules: "you can't lose
 // the game", "your opponents can't win the game" (the same tokens as the
 // printed R:Event$ GameLoss/GameWin, gorgeNorm.repl).
-func p2cEffectRepl(r cards.Repl, _ map[string]string) []string {
+func p2cEffectRepl(r cards.Repl, svars map[string]string) []string {
+	if eff, ok := replStatic(&r, svars); ok {
+		// "Damage that would reduce your life total to less than 1
+		// reduces it to 1 instead" and the other printed-static shapes.
+		return eff
+	}
 	switch {
+	case r.Event == "Counter" && r.Params["ReplaceWith"] == "":
+		// "Spells you cast this turn can't be countered" (unit e).
+		return []string{"spell:cantbecountered"}
 	case r.Event == "GameLoss" && r.Params["ReplaceWith"] == "":
 		return []string{"player:cantlosethegame"}
 	case r.Event == "GameWin":

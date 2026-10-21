@@ -390,6 +390,8 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 				out = append(out, "prevent")
 			} else if strings.HasPrefix(k, "HIDDEN ") {
 				out = append(out, p2cHiddenTokens(k)...)
+			} else if playerPumpP2E(a.API, p) {
+				out = append(out, "player:"+grantKeyword(k))
 			} else {
 				out = append(out, "grant:"+grantKeyword(k))
 			}
@@ -651,7 +653,7 @@ func effectAPI(a *cards.SA, svars map[string]string) []string {
 			out = append(out, "effect")
 			continue
 		}
-		eff := gorgeStaticEffects(st.Mode, st.Params)
+		eff := effectStaticP2E(st)
 		for _, t := range eff {
 			if IsUnmapped(t) {
 				eff = []string{"effect"}

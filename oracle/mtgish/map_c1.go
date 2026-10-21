@@ -66,7 +66,7 @@ func c1Tokens(i int) func(*effects, node) {
 func c1PlayerEffects(i int) func(*effects, node) {
 	return func(e *effects, n node) {
 		for _, x := range list(argN(n, i)) {
-			e.add(playerEffectToken(variantOf(x)))
+			e.add(playerEffectTokensP2E(x)...)
 		}
 	}
 }
@@ -120,6 +120,9 @@ func spellEffectTokens(xs []any) []string {
 					out = append(out, "spell:"+strings.TrimPrefix(g, "grant:"))
 				}
 			}
+		case v == "CantBeCounteredBySpells":
+			// "can't be countered by <colour> spells": the same rule.
+			out = append(out, "spell:cantbecountered")
 		case v == "AdjustPT":
 			out = append(out, pump(signed(intOr(argN(x, 0))), signed(intOr(argN(x, 1)))))
 		case v == "SetPT":
