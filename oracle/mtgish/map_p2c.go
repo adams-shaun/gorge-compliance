@@ -464,7 +464,7 @@ func p2cStaticEffects(v string, a []any) ([]string, bool) {
 // as" effect) creates that mtgish writes as player rules: "you can't lose
 // the game", "your opponents can't win the game" (the same tokens as the
 // printed R:Event$ GameLoss/GameWin, gorgeNorm.repl).
-func p2cEffectRepl(r cards.Repl) []string {
+func p2cEffectRepl(r cards.Repl, _ map[string]string) []string {
 	switch {
 	case r.Event == "GameLoss" && r.Params["ReplaceWith"] == "":
 		return []string{"player:cantlosethegame"}
@@ -506,6 +506,9 @@ func p2cSpellToken(v string) string {
 // p2cEnterFlag maps an enter flag that puts counters on the entering
 // permanent (gorge: WithCountersType$ on the move).
 func p2cEnterFlag(n node, v string) []string {
+	if v == "EntersFlipped" {
+		return []string{"setstate:flip"}
+	}
 	if v == "EntersWithLayerEffect" || v == "EntersWithLayerEffectUntil" {
 		// "It's an Enchantment in addition to its other types": the
 		// moved card's layer effect (gorge: the move's StaticEffect$).

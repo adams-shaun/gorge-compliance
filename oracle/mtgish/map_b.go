@@ -402,7 +402,7 @@ func effectReplB(a *cards.SA, svars map[string]string) []string {
 		case r.Event == "Untap":
 			out = append(out, "rule:doesntuntapduringcontrollersuntap")
 		default:
-			out = append(out, p2cEffectRepl(r)...)
+			out = append(out, p2cEffectRepl(r, svars)...)
 		}
 	}
 	return out

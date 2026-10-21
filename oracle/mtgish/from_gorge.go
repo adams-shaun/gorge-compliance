@@ -767,6 +767,12 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 		g.ability(Ability{Kind: "static", Effects: []string{"player:cantwinthegame"}})
 		return
 	case "Counter":
+		if p["ReplaceWith"] != "" {
+			// "If a spell or ability you control would counter a spell,
+			// instead ...": a real replacement.
+			g.ability(Ability{Kind: "replacement", Effects: []string{"replace:wouldcounteraspell"}})
+			return
+		}
 		// "This spell can't be countered" / "spells you control can't be
 		// countered": a static rule printed, a replacement in Forge.
 		g.ability(Ability{Kind: "static", Effects: []string{"spell:cantbecountered"}})

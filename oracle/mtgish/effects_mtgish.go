@@ -40,9 +40,10 @@ func (e *effects) walk(x any) {
 			}
 			return false
 		case "_EnterFlag":
-			// "Return it with N +1/+1 counters on it".
+			// "Return it with N +1/+1 counters on it"; a conditional
+			// flag's flags are walked.
 			e.add(p2cEnterFlag(n, variant)...)
-			return false
+			return strings.HasPrefix(variant, "If")
 		case "_Target", "_DistributedTarget":
 			if strings.HasSuffix(variant, "TargetPlayerControls") {
 				// "Up to five target permanents target player controls":
