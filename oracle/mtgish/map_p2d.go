@@ -45,11 +45,13 @@ func discardableCount(x any) string {
 // ImmediateTrigger conditioned on it; mtgish writes both as
 // Reflexive_Sacrifice/Reflexive_Discard actions (extReflexive).
 func p2dNestedCost(a *cards.SA) []string {
-	if a.API != "ImmediateTrigger" {
-		return nil
+	var out []string
+	if a.API == "ImmediateTrigger" || strings.HasPrefix(a.Params["Cost"], "Mandatory ") {
+		// "Mandatory": a trigger's "sacrifice it. If you do, ..." (mtgish
+		// MustCost).
+		out = costActions(a.Params["Cost"])
 	}
-	out := costActions(a.Params["Cost"])
-	if a.Params["UnlessSwitched"] == "True" {
+	if a.Params["UnlessSwitched"] == "True" && a.API == "ImmediateTrigger" {
 		// "UnlessCost$ X | UnlessSwitched$ True": the trigger happens only
 		// if X is paid, the same reflexive cost.
 		out = append(out, costActions(a.Params["UnlessCost"])...)
@@ -411,4 +413,23 @@ func p2dAnimateExtra(p map[string]string) []string {
 // "effect" by the chain) or an AI hint (sVars$).
 func p2dAnimateCarrier(p map[string]string) bool {
 	return p["LeaveBattlefield"] != "" || p["sVars"] != ""
+}
+
+// A cost a player must pay ("sacrifice it. If you do, ...", "discard a
+// card. If you do, ...") is the action paying it does, as a script's
+// Sacrifice/Discard sub-ability or its "Cost$ Mandatory ..." (p2dNestedCost).
+// A cost the player may pay (MayCost) stays a cost: scripts write it as an
+// UnlessCost as often as an optional action. A mana or energy payment is
+// never an effect.
+func init() {
+	delete(wrapperActions, "MustCost")
+	extAction["MustCost"] = func(e *effects, n node) {
+		if !strings.HasPrefix(variantOf(rawArgs(n)), "Pay") {
+			e.costAsAction(rawArgs(n))
+		}
+	}
+	// Cost variants met as must-costs, mapped as the action they are.
+	extAction["UnspecializeGraveyardCard"] = func(e *effects, n node) { e.add("setstate:unspecialize") }
+	extAction["AnteAPermanent"] = func(e *effects, n node) { e.add("move:battlefield>ante") }
+	extAction["ShuffleACardFromHandIntoLibrary"] = func(e *effects, n node) { e.add("move:hand>library:1") }
 }
