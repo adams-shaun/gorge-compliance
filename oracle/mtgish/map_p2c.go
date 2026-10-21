@@ -169,6 +169,8 @@ func (e *effects) p2cReflexive(v string, a []any) {
 		e.add("draw:*")
 	case "Amass":
 		e.add("amass")
+	case "HavePlayerGainControlOfPermanent":
+		e.add("gaincontrol")
 	case "PutOnBattlefield":
 		// "You may put any number of Equipment cards from among them
 		// onto the battlefield. When you do, ...".
@@ -471,6 +473,12 @@ func p2cEffectRepl(r cards.Repl, _ map[string]string) []string {
 	case r.Event == "GameWin":
 		return []string{"player:cantwinthegame"}
 	}
+	if r.Event == "DamageDone" {
+		// "If a source you control would deal damage this turn, it deals
+		// double that damage instead": mtgish's generic
+		// CreateReplaceWouldDealDamageUntil effect.
+		return []string{"effect"}
+	}
 	return nil
 }
 
@@ -559,4 +567,13 @@ func p2cCardZone(v string) string {
 		return "exile"
 	}
 	return ""
+}
+
+// p2cHiddenTokens maps a hidden keyword; "can't attack or block" is both
+// restrictions (mtgish's CantAttack and CantBlock rules).
+func p2cHiddenTokens(k string) []string {
+	if strings.Contains(k, "can't attack or block") {
+		return []string{"rule:cantattack", "rule:cantblock"}
+	}
+	return []string{hiddenKeywordToken(k)}
 }

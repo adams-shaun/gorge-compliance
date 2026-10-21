@@ -369,7 +369,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 				// A prevention shield granted until end of turn.
 				out = append(out, "prevent")
 			} else if strings.HasPrefix(k, "HIDDEN ") {
-				out = append(out, hiddenKeywordToken(k))
+				out = append(out, p2cHiddenTokens(k)...)
 			} else if t, ok := p2cPlayerKeyword(p, k); ok {
 				out = append(out, t)
 			} else {
@@ -386,6 +386,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "Untap", "UntapAll":
 		return []string{"untap"}
 	case "Sacrifice", "SacrificeAll":
+		if p["Destroy"] == "True" {
+			// "Target opponent chooses a creature they control. Destroy
+			// it": Forge's sacrifice-choice with Destroy$.
+			return []string{"destroy"}
+		}
 		return []string{"sacrifice"}
 	case "Mana", "ManaReflected":
 		return []string{"mana"}

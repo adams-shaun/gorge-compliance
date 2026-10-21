@@ -620,7 +620,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "rule:isgoadedbyplayer")
 		}
 		for _, k := range cards.SplitKeywordList(p["AddHiddenKeyword"]) {
-			out = append(out, hiddenKeywordToken(k))
+			out = append(out, p2cHiddenTokens(k)...)
 		}
 		out = append(out, d2ContinuousEffects(p)...)
 		if len(out) == 0 {
