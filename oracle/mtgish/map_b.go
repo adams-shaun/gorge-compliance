@@ -398,6 +398,11 @@ func effectReplB(a *cards.SA, svars map[string]string) []string {
 		if !ok {
 			continue
 		}
+		if r.Event == "DamageDone" && r.Params["Prevent"] == "True" && r.Params["Secondary"] == "True" {
+			// "Dealt to and dealt by": Forge's second shield, marked
+			// Secondary$ True, is the printed prevention's other half.
+			continue
+		}
 		switch {
 		case r.Event == "DamageDone" && (r.Params["Prevent"] == "True" || r.Params["PreventionEffect"] != ""):
 			// PreventionEffect$: a prevention shield that also does

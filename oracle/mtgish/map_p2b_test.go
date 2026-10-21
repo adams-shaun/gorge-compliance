@@ -22,7 +22,7 @@ func TestP2BMtgishActions(t *testing.T) {
 		{"choose an action", `[{"_Action":"ChooseAnAction","args":[[{"_Action":"DrawACard"}],[{"_Action":"MillACard"}]]}]`, "draw:1 mill:1"},
 		// Counters a card enters or is exiled with.
 		{"enters with counter", `[{"_Action":"PutGraveyardCardOntoBattlefield","args":[{"_CardInGraveyard":"X"},[{"_EnterFlag":"EntersWithACounter","args":{"_CounterType":"FinalityCounter"}}]]}]`, "counters:finality:1 move:graveyard>battlefield"},
-		{"exiled with counters", `[{"_Action":"Exile","args":[[{"_Exilable":"Spell","args":{"_Spell":"ThisSpell"}}],[{"_ExileFlag":"ExilesWithNumberCounters","args":[{"_GameNumber":"Integer","args":3},{"_CounterType":"TimeCounter"}]}]]}]`, "move:stack>exile"}, // time counters are suspend's (p2cEnterFlag)
+		{"exiled with counters", `[{"_Action":"Exile","args":[[{"_Exilable":"Spell","args":{"_Spell":"ThisSpell"}}],[{"_ExileFlag":"ExilesWithNumberCounters","args":[{"_GameNumber":"Integer","args":3},{"_CounterType":"TimeCounter"}]}]]}]`, "counters:time:3 move:stack>exile"}, // time counters count like any other
 		// A reflexive "put it onto the battlefield. When you do".
 		{"reflexive put", `[{"_Action":"Reflexive_PutOnBattlefield_WhenYouDo","args":[[{"_PuttableOnBattlefield":"CardInGraveyard","args":{"_CardInGraveyards":"X"}}],[{"_EnterFlag":"EntersNormally"}],{"_Actions":"ActionList","args":[{"_Action":"DrawACard"}]}]}]`, "draw:1 move:graveyard>battlefield"},
 		// An exile from permanents and/or hand.

@@ -29,6 +29,7 @@ func (e *effects) walk(x any) {
 			if t := lookMove(variant); t != "" {
 				e.add(t)
 				e.p2iLookCost(n, variant)
+				e.add(p2hLookCounters(n, variant)...)
 			} else if descend, ok := e.p2cLookAction(n, variant); ok {
 				return descend
 			}
@@ -62,7 +63,9 @@ func (e *effects) walk(x any) {
 			if descend, ok := e.p2cLookAction(n, variant); ok {
 				return descend
 			}
-			return false
+			// "Put it onto the battlefield tapped with a stun counter":
+			// its enter flags are walked.
+			return variant == "PutFoundCardsOntoBattlefield"
 		case "_EnterFlag", "_ExileFlag", "_TokenFlag":
 			// "Return it with N +1/+1 counters on it"; a conditional
 			// flag's flags are walked.
@@ -539,7 +542,11 @@ func (e *effects) action(n node, v string) {
 	case "Connive", "PermanentConnives":
 		e.add("connive")
 	case "CreateSpellEffect":
-		e.add("effect")
+		if p2hSpellColor(n) {
+			e.add("color")
+		} else {
+			e.add("effect")
+		}
 	case "ChangeTargetsOfSpellOrAbility":
 		e.add("changetargets")
 	case "CastGraveyardCardWithoutPayingIntoExile", "CastASpellFromExileWithoutPaying",
@@ -877,6 +884,12 @@ func staticEffects(r any) []string {
 			out = append(out, ruleToken(variantOf(x)))
 		}
 		return out
+	case "CardEffect":
+		// "Each Vampire card you own has madness": the abilities it
+		// grants, as a layer effect's.
+		if len(a) >= 2 && p2hAllAddAbility(list(a[1])) {
+			return layerEffects(list(a[1]))
+		}
 	case "PlayerEffect", "EachPlayerEffect", "PlayerEffect_PlayerMayPayToIgnoreEffectUntil":
 		var out []string
 		for _, x := range list(a[1]) {

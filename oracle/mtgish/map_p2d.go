@@ -403,7 +403,7 @@ func p2dAnimateCarrier(p map[string]string) bool {
 func init() {
 	delete(wrapperActions, "MustCost")
 	extAction["MustCost"] = func(e *effects, n node) {
-		if !strings.HasPrefix(variantOf(rawArgs(n)), "Pay") {
+		if v := variantOf(rawArgs(n)); !strings.HasPrefix(v, "Pay") || strings.HasPrefix(v, "PayLife") {
 			e.costAsAction(rawArgs(n))
 		}
 	}

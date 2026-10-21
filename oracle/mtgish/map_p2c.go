@@ -54,7 +54,8 @@ func init() {
 	// chosen-number sub-abilities run (Goblin Game's shape).
 	if extSVarRefs["ChooseNumber"] == nil {
 		extSVarRefs["ChooseNumber"] = func(a *cards.SA) []string {
-			return []string{a.Params["ChooseNumberSubAbility"], a.Params["Lowest"], a.Params["Highest"]}
+			return []string{a.Params["ChooseNumberSubAbility"], a.Params["Lowest"], a.Params["Highest"],
+				a.Params["MatchedAbility"], a.Params["UnmatchedAbility"]}
 		}
 	}
 	// "Players can't activate abilities that aren't mana abilities":
@@ -258,7 +259,7 @@ func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
 	if v := a.Params["AtEOTTrig"]; strings.HasPrefix(v, "You_") {
 		e.add(atEOTTokens(v)...)
 	}
-	if ct := a.Params["WithCountersType"]; ct != "" && ct != "TIME" {
+	if ct := a.Params["WithCountersType"]; ct != "" {
 		// "Return it to the battlefield with a finality counter on it"
 		// (mtgish's EntersWith*Counter* flag, p2cEnterFlag). Time
 		// counters are suspend's, which both sides name by the
@@ -551,7 +552,7 @@ func p2cSpellToken(v string) string {
 	case v == "CantBeCast":
 		// "Spells with the chosen name can't be cast": S:Mode$ CantBeCast.
 		return "player:cantcastspells"
-	case strings.HasPrefix(v, "IncreaseManaCost"):
+	case strings.HasPrefix(v, "IncreaseManaCost"), strings.HasPrefix(v, "AdditionalCostForEach"):
 		return "costincrease"
 	case strings.HasPrefix(v, "DecreaseManaCost") || strings.HasPrefix(v, "ReduceManaCost"):
 		return "costreduction"
@@ -564,6 +565,15 @@ func p2cSpellToken(v string) string {
 func p2cEnterFlag(n node, v string) []string {
 	if v == "EntersFlipped" {
 		return []string{"setstate:flip"}
+	}
+	if v == "EntersWithRuleEffectUntil" {
+		// "Tokens that attack that player this turn if able": the rules
+		// they enter with.
+		var out []string
+		for _, r := range list(argN(n, 0)) {
+			out = append(out, ruleToken(variantOf(r)))
+		}
+		return out
 	}
 	if v == "EntersWithLayerEffect" || v == "EntersWithLayerEffectUntil" {
 		// "It's an Enchantment in addition to its other types": the
@@ -592,9 +602,6 @@ func p2cEnterFlag(n node, v string) []string {
 	}
 	if ct == "" {
 		return []string{"counters:*"}
-	}
-	if ct == "time" {
-		return nil
 	}
 	if strings.Contains(v, "ACounter") || strings.Contains(v, "AnAdditional") {
 		num = "1"

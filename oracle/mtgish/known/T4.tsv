@@ -27,7 +27,6 @@ Ajani, Sleeper Agent	T4	effects	dig:1	-	equivalent	reveal top card then branch: 
 Ajani, Strength of the Pride	T4	effects	-	move:battlefield>exile	equivalent	one action over several targets or objects vs one sub-ability each
 Akroma, Angel of Wrath Avatar	T4	effects	grant:flying grant:haste grant:protection grant:protection grant:trample grant:vigilance	-	equivalent	random keyword choice: script lists every keyword, mtgish one variable grant
 Akroma, Vision of Ixidor	T4	effects	pump:+1/+1 pump:+1/+1 pump:+1/+1 pump:+1/+1 pump:+1/+1 pump:+1/+1 pump:+1/+1 pump:+1/+1 pump:+1/+1 pump:+1/+1 pump:+1/+1 pump:+1/+1 pump:+1/+1	-	equivalent	script 13 chained PumpAll (one per listed keyword), mtgish one pump over a per-keyword count
-Alaundo the Seer	T4	effects	-	counters:time:*	equivalent	script ChangeZone WithCountersType$ TIME not summarised as counters; mtgish counters:time:*
 Albiorix, Goose Tyrant	T4	effects	-	perpetual	equivalent	TriggerZones$ Battlefield,Exile one trigger vs mtgish FromExile copy
 Alchemist's Gambit	T4	effects	delayed	-	equivalent	cleave: script two spell abilities (normal and cleave cost), mtgish one with the bracketed words conditional
 Aleatory	T4	effects	delayed draw:1	-	equivalent	script repeats the same DelayedTrigger in the win and lose branches of the flip; mtgish one
@@ -42,6 +41,7 @@ Aluren	T4	effects	mayplay	flash	equivalent	script MayPlay static carrying cast-w
 Amareth, the Lustrous	T4	effects	-	dig:1	equivalent	look at the top card then reveal it: mtgish LookAt plus RevealTop (two digs), script one Dig
 Aminatou's Augury	T4	effects	mayplay mayplay mayplay mayplay mayplay mayplay mayplay	-	equivalent	script one MayPlay static per nonland card type (7), mtgish one player effect
 Amulet of Quoz	T4	effects	move:library>ante	-	equivalent	ante is a gorge Dig, a mtgish PlayerMayCost(AnteTopCardOfLibrary)
+Amy's Home	T4	effects	counters:time:* counters:time:*	-	equivalent	exile with time counters is a MayCost(Exile ExilesWithNumberCounters) in mtgish, costs not compared; two script triggers (Secondary$ half) (new since time counters are read)
 Analyze the Pollen	T4	effects	search:hand	-	equivalent	alternatives: mtgish if/else merged, script runs one sub-ability per branch
 Angrath, Minotaur Pirate	T4	effects	damage:1	-	equivalent	damage to a target and to each creature its controller controls: script DealDamage plus DamageAll, mtgish one action
 Annie Flash, the Veteran	T4	effects	mayplay	-	mtgish-bug	printed "You may play those cards this turn" after exiling the top two; mtgish exiles the cards and drops the play permission (a resolving action dropped)
@@ -65,7 +65,6 @@ Artifact Ward	T4	effects	rule:cantbethetargetofspellsorabilities	rule:cantbethet
 Artificial Evolution	T4	effects	-	effect	equivalent	mtgish adds an unnamed effect for the type change's duration
 Arvad, Weatherlight Smuggler	T4	effects	-	perpetual	equivalent	TriggerZones$ Battlefield,Graveyard one trigger vs mtgish FromGraveyard copy
 Arwen, Mortal Queen	T4	effects	-	counters:+1/+1:1 counters:lifelink:1	equivalent	Defined$ Self & Targeted: one SA on two objects vs per-object
-Ashiok, Nightmare Weaver	T4	effects	-	move:hand>exile	pending	not yet triaged
 Ashling, the Limitless	T4	effects	grant:evoke	spell:evoke	equivalent	evoke granted to spells in hand: script a static AddKeyword$ Evoke:4 (grant), mtgish a spell-effect grant (spell:evoke)
 Astral Drift	T4	effects	-	delayed move:battlefield>exile move:exile>battlefield	equivalent	one printed trigger over two events: script T: plus a Secondary$ T: sharing an Execute (kept as one), mtgish two triggers
 Athreos, Shroud-Veiled	T4	effects	move:graveyard>battlefield	move:exile>battlefield	equivalent	multi-origin ChangeZone Origin$ Graveyard,Exile: one move token per origin on the mtgish side, the script lists the graveyard
@@ -138,7 +137,6 @@ Cauldron's Gift	T4	effects	mill:4	mill:3	mtgish-bug	printed mill four cards; mtg
 Caustic Bronco	T4	effects	loselife:*	gainlife:*	mtgish-bug	printed "you lose life equal to that card's mana value" if not saddled; mtgish GainLife of the mana value (wrong action)
 Caves of Chaos Adventurer	T4	effects	-	play	equivalent	completed-dungeon branch: script Branch of free or normal play, mtgish a Play action (mayplay on both)
 Celestial Gatekeeper	T4	effects	move:graveyard>battlefield	move:graveyard>hand	mtgish-bug	printed return up to two permanent cards to the battlefield; mtgish returns them to hand (wrong destination)
-Cephalid Illusionist	T4	effects	prevent	-	equivalent	prevent combat damage dealt to and by: two shields vs one
 Certain Death	T4	effects	gainlife:2	-	mtgish-bug	printed destroy, its controller loses 2 life and you gain 2 life; mtgish drops the gain-life action
 Chandra Nalaar	T4	effects	damage:10	-	equivalent	damage to a player and to each creature that player controls: script DealDamage plus DamageAll, mtgish one action
 Chandra, Hope's Beacon	T4	effects	mayplay	player:mayactiononce	equivalent	cast the exiled spells until your next turn: script MayPlay static, mtgish a once-per-turn player effect
@@ -146,7 +144,6 @@ Chandra, Pyrogenius	T4	effects	damage:6	-	equivalent	damage to a player and to e
 Channel	T4	effects	effect	player:maypaylifetoproducemanaasmanaability	equivalent	script Effect granting a mana ability (pay 1 life: add C); mtgish a pay-life-for-mana player effect
 Chaos Harlequin	T4	effects	pump:-4/+0	-	equivalent	land or not: mtgish if/else with different amounts merges to pump:*, script two conditional Pumps (-4/-0 and +2/-0)
 Chaos Moon	T4	effects	pump:-1/-1	effect pump:+1/+1	mtgish-bug	printed even number: red creatures get -1/-1; mtgish encodes the even branch as +1/+1 (wrong sign)
-Chaoslace	T4	effects	-	effect	equivalent	mtgish adds an unnamed effect for the colour change's duration
 Chaotic Aether	T4	effects	planeswalk	-	equivalent	"planeswalk away" is the phenomenon's reminder text; script Planeswalk effect, mtgish does not encode it
 Chaotic Strike	T4	effects	draw:1	-	equivalent	script wires the same Draw into both flip branches; mtgish one
 Chaotic Transformation	T4	effects	-	move:battlefield>exile move:battlefield>exile move:battlefield>exile move:battlefield>exile	equivalent	one ChangeZone over several targets vs one exile per card type in mtgish
@@ -157,7 +154,7 @@ Choco, Seeker of Paradise	T4	effects	dig:* move:library>library	-	equivalent	loo
 Churning Eddy	T4	effects	move:battlefield>hand	-	equivalent	one action over several targets or objects vs one sub-ability each
 Circadian Struggle	T4	effects	perpetual perpetual perpetual perpetual	-	equivalent	script writes one AnimateAll per colour vs ActionNumberTimes
 Circling Vultures	T4	effects	discard:1	player:maydiscardcardanytimetheycouldcastaninstant	equivalent	discard this card any time you could cast an instant: script an ST$ Discard static, mtgish a player effect
-City of the Daleks	T4	effects	grant:haste rule:mustattack	grant:menace	mtgish-bug	printed "those tokens gain haste"; mtgish CreateEachPermanentLayerEffect AddAbility Menace (haste encoded as menace; the token already has menace)
+City of the Daleks	T4	effects	grant:haste	grant:menace	mtgish-bug	'Those tokens gain haste' encoded as CreateEachPermanentLayerEffect AddAbility Menace (old row: grant:haste rule:mustattack; the rule is now read from the token's enter flag)
 Claim Jumper	T4	effects	search:battlefield	-	equivalent	script repeats body as a copy vs RepeatableActions
 Claim the Firstborn	T4	effects	grant:haste	-	mtgish-bug	mtgish#2 haste dropped
 Clara Oswald	T4	effects	cda	static:selfeffect	equivalent	chosen-colour CDA: script a CharacteristicDefining SetColor static, mtgish a self-effect static
@@ -201,180 +198,161 @@ Dawnglow Infusion	T4	effects	-	gainlife:*	equivalent	X life per colour spent: sc
 Dead-Iron Sledge	T4	effects	destroy destroy	-	equivalent	destroy both creatures: script Destroy plus a Destroy sub-ability per trigger, mtgish one action
 Deadly Riposte	T4	effects	gainlife:2	gainlife:3	mtgish-bug	printed life gain is 2; mtgish GainLife(3) repeats the damage amount (i5jb/mtgish#1)
 Death Bomb	T4	effects	loselife:2	gainlife:2	mtgish-bug	printed "its controller loses 2 life"; mtgish GainLife 2 (lose encoded as gain)
-Death Tyrant	T4	effects	-	token:1	pending	not yet triaged
-Death or Glory	T4	effects	move:library>battlefield move:library>exile	move:graveyard>battlefield move:graveyard>exile	pending	not yet triaged
-Deathlace	T4	effects	-	effect	equivalent	mtgish adds an unnamed effect for the colour change's duration
-Decadent Dragon [Expensive Taste]	T4	effects	-	player:maylookatfacedownexiledcards	pending	not yet triaged
-Deceit	T4	effects	discard:*	move:hand>exile	pending	not yet triaged
-Deceiver of Form	T4	effects	dig:1	-	pending	not yet triaged
+Death Tyrant	T4	effects	-	token:1	equivalent	'attacking creature you control or blocking creature an opponent controls dies' is one script trigger (ValidCard list), two mtgish triggers
+Death or Glory	T4	effects	move:library>battlefield move:library>exile	move:graveyard>battlefield move:graveyard>exile	forge-bug	DBReturn/DBExile use Origin$ Library for cards TwoPiles took from the graveyard (copied from Fact or Fiction); should be Origin$ Graveyard; only TwoPiles script with Zone$ Graveyard
+Decadent Dragon [Expensive Taste]	T4	effects	-	player:maylookatfacedownexiledcards	equivalent	Rogue Class look at the face-down cards: WithMayLook$ on the Dig, mtgish a player effect (same signature, 14 corpus rows)
+Deceit	T4	effects	discard:*	move:hand>exile	mtgish-bug	'That player discards that card' encoded as RevealHandAndPlayerChoosesACardToExile (Grief pattern)
+Deceiver of Form	T4	effects	dig:1	-	equivalent	script PeekAndReveal plus a FakeScry Dig looks twice, mtgish once (same signature as Powerbalance)
 Declaration in Stone	T4	effects	-	move:battlefield>exile	equivalent	one action over several targets or objects vs one sub-ability each
-Decode Transmissions	T4	effects	loselife:2	-	pending	not yet triaged
-Decoy Gambit	T4	effects	draw:*	-	pending	not yet triaged
-Defossilize	T4	effects	-	explore	pending	not yet triaged
-Deftblade Elite	T4	effects	prevent	-	pending	not yet triaged
-Delirium	T4	effects	prevent	-	pending	not yet triaged
+Decode Transmissions	T4	effects	loselife:2	-	equivalent	Void alternative: two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+Decoy Gambit	T4	effects	draw:*	-	equivalent	the unless-you-draw choice is a MayCost(HavePlayerTakeAction DrawACard) in mtgish, costs not compared
 Demon of Fate's Design	T4	effects	alternativecost	mayplay	equivalent	once each turn pay life rather than mana cost for an enchantment: script MayPlay static with MayPlayAltManaCost$, mtgish a may-play player effect (row surfaced by unit g's mayplay wiring)
-Demonfire	T4	effects	static:damagecantbeprevented	-	pending	not yet triaged
+Demonfire	T4	effects	static:damagecantbeprevented	-	equivalent	'damage can't be prevented': CantPreventDamage static in the script, the SpellDealsDamageCantBePrevented action variant in mtgish
 Demonic Counsel	T4	effects	search:hand	-	equivalent	alternatives: mtgish if/else merged, script runs one sub-ability per branch
-Den Protector	T4	effects	move:graveyard>hand	rule:cantbeblockedbydefenders	pending	not yet triaged
+Den Protector	T4	effects	move:graveyard>hand	rule:cantbeblockedbydefenders	mtgish-bug	megamorph 'turned face up' trigger lost (i5jb/mtgish#1 class, bugs-p2c M1)
 Deputy of Detention	T4	effects	-	move:battlefield>exile	equivalent	one action over several targets or objects vs one sub-ability each
 Dermoplasm	T4	effects	move:battlefield>hand move:hand>battlefield	-	mtgish-bug	mtgish#1 morph turned-face-up trigger lost
 Desecration Demon	T4	effects	sacrifice	-	equivalent	an opponent's optional sacrifice: script an effect, mtgish a cost (AnyPlayerMayCost)
 Desert Warfare	T4	effects	grant:haste	-	mtgish-bug	mtgish#2 haste dropped
-Desert's Due	T4	effects	-	pump:-2/-2	pending	not yet triaged
-Desertion	T4	effects	counter	-	pending	not yet triaged
-Desolation Angel	T4	effects	destroy	-	pending	not yet triaged
-Desolation Giant	T4	effects	destroy	-	pending	not yet triaged
+Desert's Due	T4	effects	-	pump:-2/-2	equivalent	base amount and per-X addition: one computed pump in the script, two pumps in mtgish (Lethal Exploit pattern)
+Desertion	T4	effects	counter	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+Desolation Angel	T4	effects	destroy	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+Desolation Giant	T4	effects	destroy	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
 Destined [Lead]	T4	effects	rule:allcreaturesmustblockit	rule:mustblockattacker	equivalent	mtgish writes a granted Lure as each creature MustBlockAttacker
 Destiny Spinner	T4	effects	grant:haste	-	mtgish-bug	mtgish#1 keywords: haste encoded as a second trample
 Detention Sphere	T4	effects	-	move:battlefield>exile	equivalent	one action over several targets or objects vs one sub-ability each
-Devouring Rage	T4	effects	-	pump:+3/+0	pending	not yet triaged
-Diabolic Vision	T4	effects	move:library>hand	move:library>library	pending	not yet triaged
+Devouring Rage	T4	effects	-	pump:+3/+0	equivalent	base amount and per-X addition: one computed pump in the script, two pumps in mtgish (Lethal Exploit pattern)
+Diabolic Vision	T4	effects	move:library>hand	move:library>library	mtgish-bug	'put into your hand' encoded as PutOnTopOfLibrary (Lead the Stampede pattern, bugs-p2f/d)
 Dichotomancy	T4	effects	move:library>battlefield	search:battlefield	equivalent	search written as ChooseCard plus a Defined library ChangeZone (read as a move)
 Diminishing Returns	T4	effects	draw:7	draw:10	mtgish-bug	mtgish#1 reuses 10 for the draw (printed up to seven)
-Dire Fleet Daredevil	T4	effects	effect	-	pending	not yet triaged
+Dire Fleet Daredevil	T4	effects	effect	-	equivalent	exile-instead rider: Effect replacement in the script, part of mtgish's cast permission (Recommission pattern)
 Disorienting Choice	T4	effects	move:battlefield>exile	-	equivalent	you may X, if you do: script effect, mtgish MayCost cost (costs not compared)
 Distant Memories	T4	effects	move:exile>hand	-	equivalent	punisher choice: mtgish AnyPlayerMayCost (costs not compared)
-Domri Rade	T4	effects	-	dig:1	pending	not yet triaged
+Domri Rade	T4	effects	-	dig:1	equivalent	look-then-put is one Dig/PeekAndReveal in the script; mtgish a separate LookAtTopOfLibrary (same signature as Raiders' Karve, p2c)
 Don & Leo, Problem Solvers	T4	effects	-	move:battlefield>exile	equivalent	one action over several targets or objects vs one sub-ability each
-Doom's Time Platform	T4	effects	counters:time:2	-	pending	not yet triaged
-Doomsday	T4	effects	dig:* move:graveyard>exile move:library>exile move:library>library	-	pending	not yet triaged
+Doomsday	T4	effects	dig:* move:graveyard>exile move:library>exile move:library>library	-	equivalent	one mtgish SearchLibraryAndGraveyard (set aside, exile the rest, put on top) vs the script's ChangeZone, ChangeZoneAll, RearrangeTopOfLibrary chain
 Doubling Chant	T4	effects	move:library>battlefield	search:*	equivalent	search written as ChooseCard plus a Defined library ChangeZone (read as a move)
-Dragon Turtle	T4	effects	tap	-	pending	not yet triaged
-Drain Power	T4	effects	-	mana	pending	not yet triaged
-Dralnu's Crusade	T4	effects	type	-	pending	not yet triaged
-Dramatist's Puppet	T4	effects	counters:*:1 countersremove	addorremovecounter	pending	not yet triaged
-Dread Linnorm [Scale Deflection]	T4	effects	untap	-	pending	not yet triaged
-Dream Fighter	T4	effects	phaseout phaseout	-	pending	not yet triaged
-Dream-Thief's Bandana	T4	effects	-	dig:1	pending	not yet triaged
+Dragon Turtle	T4	effects	tap	-	equivalent	two Tap SAs (or a Secondary$ trigger half) vs one mtgish action over a set (Magus of the Arena pattern)
+Drain Power	T4	effects	-	mana	equivalent	script DrainMana moves the mana; mtgish splits it into lose-all-mana and AddMana (four other DrainMana cards map to nothing)
+Dralnu's Crusade	T4	effects	type	-	mtgish-bug	'are Zombies in addition to their other creature types' dropped; 'black' encoded as SetColor TheChosenColor
+Dramatist's Puppet	T4	effects	counters:*:1 countersremove	addorremovecounter	equivalent	add or remove a counter: two counter verbs vs one choice (Quarry Hauler pattern)
+Dread Linnorm [Scale Deflection]	T4	effects	untap	-	mtgish-bug	adventure: 'and untap it' dropped (untap-dropped class, In the Darkness Bind Them)
+Dream Fighter	T4	effects	phaseout phaseout	-	equivalent	several SAs in the script vs one mtgish action over a set of permanents
+Dream-Thief's Bandana	T4	effects	-	dig:1	equivalent	look-then-put is one Dig/PeekAndReveal in the script; mtgish a separate LookAtTopOfLibrary (same signature as Raiders' Karve, p2c)
 Dreamdew Entrancer	T4	effects	draw:2	draw:3	mtgish-bug	printed draw count is 2; mtgish DrawNumberCards(3) repeats the stun-counter count (i5jb/mtgish#1)
-Drillworks Mole	T4	effects	-	counters:+1/+1:1	pending	not yet triaged
-Drought	T4	effects	costincrease costincrease	rule:additionalcostforeachcolormanasymbolincosts spell:additionalcostforeachcolormanasymbolincosts	pending	not yet triaged
+Drillworks Mole	T4	effects	-	counters:+1/+1:1	equivalent	counters on this and on a target: Defined$ Self & Targeted is one SA, two put-counters in mtgish (Ich-Tekik pattern)
 Druidic Ritual	T4	effects	-	move:graveyard>hand	equivalent	one action over several targets or objects vs one sub-ability each
-Dryad Greenseeker	T4	effects	-	dig:1	pending	not yet triaged
+Dryad Greenseeker	T4	effects	-	dig:1	equivalent	look-then-put is one Dig/PeekAndReveal in the script; mtgish a separate LookAtTopOfLibrary (same signature as Raiders' Karve, p2c)
 Durnan of the Yawning Portal	T4	effects	grant:undaunted	-	equivalent	keyword on a spell cast from exile, inside a may-cast permission (not compared)
-Dust of Moments	T4	effects	countersremove	-	pending	not yet triaged
-Eater of Days	T4	effects	-	skipturn	pending	not yet triaged
-Ebony Horse	T4	effects	prevent	-	pending	not yet triaged
+Dust of Moments	T4	effects	countersremove	-	equivalent	several SAs in the script vs one mtgish action over a set of permanents
 Echo Mage	T4	effects	-	copyspell	equivalent	copy twice: script one CopySpellAbility with Amount$ 2; mtgish two copy actions
-Echoing Courage	T4	effects	pump:+2/+2	-	pending	not yet triaged
-Echoing Decay	T4	effects	pump:-2/-2	-	pending	not yet triaged
-Ecstatic Beauty	T4	effects	counters:time:4	counters:time:3	pending	not yet triaged
-Edward Kenway	T4	effects	-	dig:1	pending	not yet triaged
-Eelectrocute	T4	effects	replace:wouldputintograveyard	-	pending	not yet triaged
+Echoing Courage	T4	effects	pump:+2/+2	-	equivalent	several SAs in the script vs one mtgish action over a set of permanents
+Echoing Decay	T4	effects	pump:-2/-2	-	equivalent	several SAs in the script vs one mtgish action over a set of permanents
+Ecstatic Beauty	T4	effects	counters:time:4	counters:time:3	mtgish-bug	'Put four time counters' encoded as Integer 3 (printed four, script 4)
+Edward Kenway	T4	effects	-	dig:1	equivalent	look-then-put is one Dig/PeekAndReveal in the script; mtgish a separate LookAtTopOfLibrary (same signature as Raiders' Karve, p2c)
+Eelectrocute	T4	effects	replace:wouldputintograveyard	-	equivalent	exile-instead of the graveyard cast: a replacement in the script, part of mtgish's permission (Glimpse the Cosmos pattern)
 Eight-and-a-Half-Tails Avatar	T4	effects	grant:protection grant:protection grant:protection grant:protection	-	equivalent	random color protection: script one sub-ability per color
-Eladamri, Korvecdal	T4	effects	-	dig:1 move:hand>battlefield	pending	not yet triaged
+Eladamri, Korvecdal	T4	effects	-	dig:1 move:hand>battlefield	equivalent	one ChangeZone Origin$ Library,Hand after ChooseCard vs per-zone reveal branches (existing ledger class)
 Elbrus, the Binding Blade	T4	effects	-	unattach	equivalent	script omits explicit unattach; SBA 704.5p unattaches the transformed creature, same result
-Elder Brain	T4	effects	-	mayplay	pending	not yet triaged
-Electrostatic Bolt	T4	effects	damage:4	-	pending	not yet triaged
-Elesh Norn [The Argent Etchings]	T4	effects	transform	-	pending	not yet triaged
-Elite Spellbinder	T4	effects	costincrease	-	pending	not yet triaged
-Elvish Scout	T4	effects	prevent	-	pending	not yet triaged
+Elder Brain	T4	effects	-	mayplay	equivalent	play lands and cast spells: one permission in the script, two in mtgish (Magus of the Mind pattern)
+Electrostatic Bolt	T4	effects	damage:4	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+Elesh Norn [The Argent Etchings]	T4	effects	transform	-	mtgish-bug	chapter I 'Incubate 2 five times, then transform all Incubator tokens you control': the transform is dropped (IncubateNumberTimes only)
+Elite Spellbinder	T4	effects	costincrease	-	equivalent	the exiled card's {2} cost increase is part of the cast permission in mtgish (Invasion of Gobakhan pattern)
 Embermouth Sentinel	T4	effects	search:library	-	equivalent	one search with several destinations or kinds: script one ChangeZone each, mtgish one SearchLibrary
-Emergency Eject	T4	effects	destroy	move:battlefield>exile	pending	not yet triaged
+Emergency Eject	T4	effects	destroy	move:battlefield>exile	mtgish-bug	'Destroy target nonland permanent' encoded as Exile (printed destroy, script Destroy)
 Emergent Sequence	T4	effects	-	color setpt type	pending	not yet triaged
 Emergent Ultimatum	T4	effects	move:exile>library	-	equivalent	exiled card shuffled back: mtgish search step, script ChangeZone
 Emeria's Call	T4	effects	grant:indestructible	grant:flying	mtgish-bug	mtgish#1 keywords: indestructible encoded as flying
 Emperor of Bones	T4	effects	counters:finality:1	counters:+1/+1:1	mtgish-bug	mtgish#1 counter types: finality counter encoded as +1/+1
-Emrakul, the Promised End	T4	effects	delayed	-	pending	not yet triaged
+Emrakul, the Promised End	T4	effects	delayed	-	equivalent	script DelayedTrigger for 'during that turn / next turn'; mtgish expresses the duration without a delayed trigger (Illusionist's Gambit pattern)
 Enchanter's Bane	T4	effects	sacrifice	-	mtgish-bug	unless-that-player-sacrifices-it clause dropped
 Endless Detour	T4	effects	-	move:graveyard>library move:stack>library	equivalent	one ChangeZone Origin Battlefield,Stack,Graveyard vs per-kind modal branches; aside: mtgish limits graveyard target to your graveyard
-Energy Arc	T4	effects	prevent	-	pending	not yet triaged
-Energy Vortex	T4	effects	counters:vortex:*	countersremove	pending	not yet triaged
-Entangling Trap	T4	effects	tap	-	pending	not yet triaged
-Enter the Avatar State	T4	effects	-	player:mayplayanadditionalland	pending	not yet triaged
-Epochrasite	T4	effects	counters:time:3 grant:suspend	-	pending	not yet triaged
-Equipoise	T4	effects	phaseout phaseout	-	pending	not yet triaged
-Erebos's Emissary	T4	effects	pump:+2/+2	-	pending	not yet triaged
+Energy Vortex	T4	effects	counters:vortex:*	countersremove	mtgish-bug	the '{X}: Put X vortex counters' ability is missing; mtgish has a second copy of the upkeep remove-all-counters trigger in its place
+Entangling Trap	T4	effects	tap	-	equivalent	two Tap SAs (or a Secondary$ trigger half) vs one mtgish action over a set (Magus of the Arena pattern)
+Enter the Avatar State	T4	effects	-	player:mayplayanadditionalland	mtgish-bug	spurious CreatePlayerEffectUntil MayPlayAnAdditionalLand (no such text)
+Epochrasite	T4	effects	grant:suspend	-	mtgish-bug	'and it gains suspend' dropped from the dies trigger (the time counters are read)
+Equipoise	T4	effects	phaseout phaseout	-	equivalent	several SAs in the script vs one mtgish action over a set of permanents
+Erebos's Emissary	T4	effects	pump:+2/+2	-	equivalent	self or enchanted creature pump: two conditional SAs vs one mtgish pump
 Errant Minion	T4	effects	replace:preventdamage	prevent	equivalent	script writes partial prevention of the trigger damage as a prevention replacement; mtgish prevent in the trigger
-Ersatz Gnomes	T4	effects	color	effect	pending	not yet triaged
-Ertai's Meddling	T4	effects	copyspell countersremove	-	pending	not yet triaged
+Ertai's Meddling	T4	effects	copyspell countersremove	-	equivalent	the delay trigger is both a T: line and an Effect Triggers$ SVar in the script (counted twice), once in mtgish
 Esika, God of the Tree	T4	effects	grant:ability grant:vigilance	-	mtgish-bug	mtgish#1 MDFC front-face static lost
-Estinien Varlineau	T4	effects	loselife:*	gainlife:*	pending	not yet triaged
+Estinien Varlineau	T4	effects	loselife:*	gainlife:*	mtgish-bug	'you draw X cards and lose X life' encoded as DrawNumberCards then GainLife
 Ether Well	T4	effects	move:battlefield>library	-	equivalent	alternatives: mtgish if/else merged, script runs one sub-ability per branch
-Ethersworn Canonist	T4	effects	player:cantcastmorethannumberspellseachturn	player:cantcastspells	pending	not yet triaged
-Evelyn, the Covetous	T4	effects	mayplay	player:onceeachturnmayaction	pending	not yet triaged
-Everflame Eidolon	T4	effects	pump:+1/+0	-	pending	not yet triaged
-Evil Comes to Fruition	T4	effects	token:7	-	pending	not yet triaged
-Evil's Thrall	T4	effects	gaincontrol grant:haste untap	-	pending	not yet triaged
-Excavator	T4	effects	-	grant:landwalk	pending	not yet triaged
-Expel from Orazca	T4	effects	move:battlefield>hand	-	pending	not yet triaged
-Experimental Frenzy	T4	effects	player:playswithtopoflibraryrevealed	player:maylookattopcardoflibraryanytime	pending	not yet triaged
+Ethersworn Canonist	T4	effects	player:cantcastmorethannumberspellseachturn	player:cantcastspells	equivalent	S:Mode$ CantBeCast with NumLimitEachTurn$ vs mtgish's can't-cast player effect
+Evelyn, the Covetous	T4	effects	mayplay	player:onceeachturnmayaction	equivalent	once-each-turn cast permission: MayPlayLimit$ in the script, OnceEachTurnMayAction in mtgish (Idol of Endurance pattern)
+Everflame Eidolon	T4	effects	pump:+1/+0	-	equivalent	self or enchanted creature pump: two conditional SAs vs one mtgish pump
+Evil Comes to Fruition	T4	effects	token:7	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+Evil's Thrall	T4	effects	gaincontrol grant:haste untap	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+Expel from Orazca	T4	effects	move:battlefield>hand	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+Experimental Frenzy	T4	effects	player:playswithtopoflibraryrevealed	player:maylookattopcardoflibraryanytime	forge-bug	S:Mode$ Continuous MayLookAt$ Player reveals the top card to every player; printed 'You may look at the top card of your library any time' needs MayLookAt$ You (census: Experimental Frenzy, The Belligerent)
 Expert-Level Safe	T4	effects	-	move:exile>hand move:library>exile sacrifice	pending	not yet triaged
-Explorer's Scope	T4	effects	-	dig:1	pending	not yet triaged
-Explosion of Riches	T4	effects	draw:1	-	pending	not yet triaged
-Expressive Iteration	T4	effects	dig:2 move:library>library move:library>library	-	pending	not yet triaged
+Explorer's Scope	T4	effects	-	dig:1	equivalent	look-then-put is one Dig/PeekAndReveal in the script; mtgish a separate LookAtTopOfLibrary (same signature as Raiders' Karve, p2c)
+Explosion of Riches	T4	effects	draw:1	-	equivalent	Reflexive_Draw_EachPlayerMayDraw is one mtgish action; two Draw SAs in the script
+Expressive Iteration	T4	effects	dig:2 move:library>library move:library>library	-	equivalent	three-way split written as three chained Digs vs one mtgish look with steps
 Extirpate	T4	effects	move:graveyard>exile	-	equivalent	script exiles the target with its own ChangeZone before the same-name sweep; aside: mtgish names TheCardExiledThisWay though nothing was exiled
-Extract Power	T4	effects	-	dig:1 player:maylookatfacedownexiledcards	pending	not yet triaged
+Extract Power	T4	effects	-	dig:1 player:maylookatfacedownexiledcards	equivalent	look-then-put is one Dig/PeekAndReveal in the script; mtgish a separate LookAtTopOfLibrary (same signature as Raiders' Karve, p2c)
 Extract a Confession	T4	effects	sacrifice	-	equivalent	alternatives: mtgish if/else merged, script runs one sub-ability per branch
-Extraction Specialist	T4	effects	animate	-	pending	not yet triaged
-Extrapolate the Impossible	T4	effects	move:sideboard>	move:sideboard>hand	pending	not yet triaged
-Eye of Jace	T4	effects	damage:2	damage:1	pending	not yet triaged
-Eye of Nidhogg	T4	effects	color	-	pending	not yet triaged
-Faceless One	T4	effects	cda	static:selfeffect	pending	not yet triaged
-Faces of the Past	T4	effects	tapuntap	tap untap	pending	not yet triaged
-Faerie Fencing	T4	effects	-	pump:*	pending	not yet triaged
+Extrapolate the Impossible	T4	effects	move:sideboard>	move:sideboard>hand	equivalent	first ChangeZone (no Destination$) only chooses the two cards; mtgish counts both choices as moves to hand
+Eye of Jace	T4	effects	damage:2	damage:1	mtgish-bug	'deals 2 damage to each opponent' encoded as Integer 1
+Eye of Nidhogg	T4	effects	color	-	mtgish-bug	'black Dragon': SetColor Black dropped from the layer effect
+Faceless One	T4	effects	cda	static:selfeffect	equivalent	colour-defining static: CharacteristicDefining/SetColor All in the script, SelfEffect SetColor or cda in mtgish
+Faerie Fencing	T4	effects	-	pump:*	equivalent	base amount and per-X addition: one computed pump in the script, two pumps in mtgish (Lethal Exploit pattern)
 Faith's Shield	T4	effects	grant:protection	-	equivalent	alternatives: mtgish if/else merged, script runs one sub-ability per branch
-Faithbound Judge [Sinner's Judgment]	T4	effects	losegame	wingame	pending	not yet triaged
-Falkenrath Gorger	T4	effects	grant:madness	static:cardeffect	pending	not yet triaged
-Fallaji Wayfarer	T4	effects	color	cda	pending	not yet triaged
-False Dawn	T4	effects	-	effect	pending	not yet triaged
-Farrel's Mantle	T4	effects	damage:*	-	pending	not yet triaged
-Fastbond	T4	effects	player:mayplayanadditionalland	mayplay	pending	not yet triaged
+Faithbound Judge [Sinner's Judgment]	T4	effects	losegame	wingame	mtgish-bug	'enchanted player loses the game' encoded as PlayerAction(HostPlayer, WinTheGame)
+Fallaji Wayfarer	T4	effects	color	cda	equivalent	colour-defining static: CharacteristicDefining/SetColor All in the script, SelfEffect SetColor or cda in mtgish
+False Dawn	T4	effects	-	effect	equivalent	mtgish CreateSpellEffect (effect) beside the replacement/text change (Crystal Spray pattern)
+Farrel's Mantle	T4	effects	damage:*	-	equivalent	'its controller may have it deal damage' is a PlayerMayCost(HavePermanentDealDamage) in mtgish, costs not compared
+Fastbond	T4	effects	player:mayplayanadditionalland	mayplay	equivalent	play any number of lands: AdjustLandPlays$ Unlimited in the script, mapped as a play permission by mtgish's normaliser rule (Naya pattern)
 Fated Clash	T4	effects	grant:indestructible	-	equivalent	one action over several targets or objects vs one sub-ability each
-Fated Conflagration	T4	effects	scry:2	scry:5	pending	not yet triaged
-Fatespinner	T4	effects	skipphase	player:skipscombatphase player:skipsdrawstep player:skipsmainphase	pending	not yet triaged
-Favored Enemy	T4	effects	choose fight	-	pending	not yet triaged
-Fblthp, Lost on the Range	T4	effects	grant:plot	static:topcardofplayerslibraryeffect	pending	not yet triaged
-Feint	T4	effects	prevent	-	pending	not yet triaged
+Fated Conflagration	T4	effects	scry:2	scry:5	mtgish-bug	'If it's your turn, scry 2' encoded as Scry 5 (the damage amount)
+Fatespinner	T4	effects	skipphase	player:skipscombatphase player:skipsdrawstep player:skipsmainphase	equivalent	choice of skip draw/main/combat: script SkipPhase alternatives merged to one token, three named player effects in mtgish
+Favored Enemy	T4	effects	choose fight	-	mtgish-bug	ETB trigger 'target creature you control fights up to one target creature you don't control' dropped
+Fblthp, Lost on the Range	T4	effects	grant:plot	static:topcardofplayerslibraryeffect	equivalent	'the top card of your library has plot': AddKeyword$ Plot in the script, a top-card-of-library effect in mtgish
+Feint	T4	effects	prevent	-	equivalent	prevention written as a granted pseudo-keyword/shield in the script, replacement rules in mtgish (Ith, High Arcanist pattern)
 Felonious Rage	T4	effects	grant:haste	-	mtgish-bug	mtgish#2 haste dropped
-Ferris Wheel	T4	effects	delayed phaseout	-	pending	not yet triaged
-Festering Newt	T4	effects	pump:-4/-4	-	pending	not yet triaged
-Fiery Impulse	T4	effects	damage:3	-	pending	not yet triaged
-Firecannon Blast	T4	effects	damage:6	-	pending	not yet triaged
+Ferris Wheel	T4	effects	delayed phaseout	-	equivalent	several SAs in the script vs one mtgish action over a set of permanents
+Festering Newt	T4	effects	pump:-4/-4	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+Fiery Impulse	T4	effects	damage:3	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+Firecannon Blast	T4	effects	damage:6	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
 Firemind's Foresight	T4	effects	search:hand search:hand	-	equivalent	one search with several destinations or kinds: script one ChangeZone each, mtgish one SearchLibrary
-Fires of Mount Doom	T4	effects	damage:2 damage:2 delayed	-	pending	not yet triaged
-Fixed Point in Time	T4	effects	planeswalk	-	pending	not yet triaged
-Flame Wave	T4	effects	damage:4	-	pending	not yet triaged
-Flaming Gambit	T4	effects	damage:*	-	pending	not yet triaged
-Flare of Faith	T4	effects	pump:+2/+2	-	pending	not yet triaged
+Fires of Mount Doom	T4	effects	damage:2	-	equivalent	'when you play a card this way' written as cast and land-played triggers (Secondary$ half) vs one mtgish trigger
+Fixed Point in Time	T4	effects	planeswalk	-	equivalent	the phenomenon's planeswalk-away reminder is explicit in the script (Reality Shaping pattern)
+Flame Wave	T4	effects	damage:4	-	equivalent	several SAs in the script vs one mtgish action over a set of permanents
+Flaming Gambit	T4	effects	damage:*	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+Flare of Faith	T4	effects	pump:+2/+2	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
 Flickerform	T4	effects	-	move:battlefield>exile	equivalent	one action over several targets or objects vs one sub-ability each
-Flitterstep Eidolon	T4	effects	-	rule:cantbeblocked	pending	not yet triaged
-Flow State	T4	effects	-	move:library>hand	pending	not yet triaged
+Flitterstep Eidolon	T4	effects	-	rule:cantbeblocked	equivalent	one script static covers 'this creature' and 'enchanted creature can't be blocked'; mtgish two rules (Hada Spy Patrol pattern)
+Flow State	T4	effects	-	move:library>hand	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
 Flowstone Sculpture	T4	effects	grant:flying grant:trample	-	equivalent	keyword choice: script one sub-ability per keyword, mtgish one variable grant
-Follow the Lumarets	T4	effects	-	move:library>hand	pending	not yet triaged
-Forge Anew	T4	effects	flash	mayplay	pending	not yet triaged
-Forging the Anchor	T4	effects	move:library>hand	move:library>library	pending	not yet triaged
+Follow the Lumarets	T4	effects	-	move:library>hand	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+Forge Anew	T4	effects	flash	mayplay	equivalent	cast as though it had flash: static vs flash permission (Primal Prayers / Jace's Machinations pattern)
+Forging the Anchor	T4	effects	move:library>hand	move:library>library	mtgish-bug	'put into your hand' encoded as PutOnTopOfLibrary (Lead the Stampede pattern, bugs-p2f/d)
 Fortune, Loyal Steed	T4	effects	-	move:battlefield>exile	equivalent	one action over several targets or objects vs one sub-ability each
-Foxfire	T4	effects	prevent	-	pending	not yet triaged
-Frankenstein's Monster	T4	effects	choose move:graveyard>exile	-	pending	not yet triaged
+Frankenstein's Monster	T4	effects	choose move:graveyard>exile	-	equivalent	'As this enters, exile X creature cards': a MustCost(Exile) in mtgish, costs not compared (Rysorian Badger pattern)
 Fraying Line	T4	effects	-	move:battlefield>exile	equivalent	one action over several targets or objects vs one sub-ability each
-Frenzied Baloth	T4	effects	static:damagecantbeprevented	static:combatdamagecantbeprevented	pending	not yet triaged
 Frenzy Sliver	T4	effects	grant:ability	grant:frenzy	equivalent	frenzy granted as its trigger in the script
-Freyalise, Skyshroud Partisan	T4	effects	-	perpetual	pending	not yet triaged
+Freyalise, Skyshroud Partisan	T4	effects	-	perpetual	equivalent	'that Elf and a random Elf in hand perpetually get': two perpetual changes in mtgish, one in the script
 Friendly Fire	T4	effects	-	damage:*	equivalent	script one DealDamage over the creature and its controller vs mtgish one damage per recipient
-Frost Augur	T4	effects	-	dig:1	pending	not yet triaged
-Fugitive of the Judoon	T4	effects	-	move:battlefield>exile	pending	not yet triaged
-Furygale Flocking	T4	effects	rule:mustattack	-	pending	not yet triaged
-G'raha Tia, Scion Reborn	T4	effects	loselife:*	-	pending	not yet triaged
+Frost Augur	T4	effects	-	dig:1	equivalent	look-then-put is one Dig/PeekAndReveal in the script; mtgish a separate LookAtTopOfLibrary (same signature as Raiders' Karve, p2c)
+Fugitive of the Judoon	T4	effects	-	move:battlefield>exile	equivalent	'exile a Human and an artifact' is one script ChangeZone (EACH ...), two exilables in mtgish
 Gaea's Balance	T4	effects	search:battlefield search:battlefield search:battlefield search:battlefield	-	equivalent	one search with several destinations or kinds: script one ChangeZone each, mtgish one SearchLibrary
 Gaea's Will	T4	effects	-	mayplay	equivalent	one MayPlay static covers lands and spells in the script; mtgish two permissions
-Gale, Storm Conduit	T4	effects	grant:ability	perpetual	pending	not yet triaged
-Gale, Waterdeep Prodigy	T4	effects	play	-	pending	not yet triaged
+Gale, Storm Conduit	T4	effects	grant:ability	perpetual	equivalent	perpetual gain written as a permanent Effect with AddStaticAbility (grant:ability), not Duration$ Perpetual (Viconia pattern)
+Gale, Waterdeep Prodigy	T4	effects	play	-	equivalent	instant/sorcery halves: two script triggers (Secondary$) vs one mtgish trigger
 Galea, Kindler of Hope	T4	effects	grant:ability	-	equivalent	trigger granted to a spell cast from library, inside a may-cast permission (not compared)
-Galvanic Relay	T4	effects	delayed	-	pending	not yet triaged
-Gandalf, Goblins' Bane [Flameshape]	T4	effects	-	dig:2	pending	not yet triaged
-Gandalf, Westward Voyager	T4	effects	draw:1	-	pending	not yet triaged
-Garruk, Wrath of the Wilds	T4	effects	perpetual	-	pending	not yet triaged
-Gastal Raider	T4	effects	discard:*	move:hand>exile	pending	not yet triaged
+Galvanic Relay	T4	effects	delayed	-	equivalent	script DelayedTrigger for 'during that turn / next turn'; mtgish expresses the duration without a delayed trigger (Illusionist's Gambit pattern)
+Gandalf, Goblins' Bane [Flameshape]	T4	effects	-	dig:2	equivalent	look then exile face down: mtgish one more look (Petty Larceny pattern)
+Gandalf, Westward Voyager	T4	effects	draw:1	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+Garruk, Wrath of the Wilds	T4	effects	perpetual	-	equivalent	several SAs in the script vs one mtgish action over a set of permanents
+Gastal Raider	T4	effects	discard:*	move:hand>exile	mtgish-bug	'That player discards that card' encoded as RevealHandAndPlayerChoosesACardToExile (Grief pattern)
 Gathering Stone	T4	effects	move:library>hand move:library>hand	-	equivalent	ETB+upkeep as two triggers; mtgish reveal-and-put-in-hand is a MayCost (cost vs effect)
-Gemstone Caverns	T4	effects	mana	-	pending	not yet triaged
-General's Kabuto	T4	effects	grant:preventallcombatdamagethatwouldbedealttocardname	replace:preventdamage replace:preventdamage	pending	not yet triaged
+Gemstone Caverns	T4	effects	mana	-	equivalent	two conditional SAs (summed) in the script vs one IfElse (merged) in mtgish
+General's Kabuto	T4	effects	grant:preventallcombatdamagethatwouldbedealttocardname	replace:preventdamage replace:preventdamage	equivalent	prevention written as a granted pseudo-keyword/shield in the script, replacement rules in mtgish (Ith, High Arcanist pattern)
 Genesis Ultimatum	T4	effects	move:stack>exile	-	mtgish-bug	self-exile sentence dropped
 Getaway Barrel	T4	effects	move:library>battlefield	search:battlefield	equivalent	search written as ChooseCard plus a Defined library ChangeZone (read as a move)
-Ghostfire Blade	T4	effects	costreduction	rule:decreaseequipabilitycostwhentargetingapermanent	pending	not yet triaged
-Ghostly Flame	T4	effects	-	spell:isacolorlesssourceofdamage	pending	not yet triaged
-Ghostly Possession	T4	effects	prevent	replace:preventdamage replace:preventdamage	pending	not yet triaged
+Ghostfire Blade	T4	effects	costreduction	rule:decreaseequipabilitycostwhentargetingapermanent	equivalent	equip cost reduction: RaiseCost-style static in the script, a named rule in mtgish
+Ghostly Flame	T4	effects	-	spell:isacolorlesssourceofdamage	equivalent	permanents and spells: one script static, two mtgish rules (permanent and stack)
+Ghostly Possession	T4	effects	prevent	replace:preventdamage replace:preventdamage	equivalent	prevention written as a granted pseudo-keyword/shield in the script, replacement rules in mtgish (Ith, High Arcanist pattern)
 Giant Opportunity	T4	effects	token:3	-	equivalent	if/else written as two conditional sub-abilities; mtgish merges the branches
 Giant Oyster	T4	effects	countersremove	delayed	equivalent	tracking triggers and cleanup structured differently
 Giant Trap Door Spider	T4	effects	-	move:battlefield>exile	equivalent	one ChangeZone moves both objects; mtgish one exile per object
@@ -408,10 +386,10 @@ Grim Contest	T4	effects	-	damage:*	equivalent	each creature deals damage to the 
 Grimdancer	T4	effects	counters:lifelink:1 counters:menace:1	-	equivalent	a choice of counter types: one token per offered type vs mtgish one non-literal counter
 Grip of Chaos	T4	effects	changetargets changetargets	-	equivalent	the retarget triggers are split per spell/ability and per single-target check; mtgish one per event
 Grist, the Hunger Tide	T4	effects	cda	static:selfeffect_nonbattlefield	equivalent	non-battlefield characteristics: a CDA static vs mtgish SelfEffect_NonBattlefield
-Grizzled Huntmaster	T4	effects	move:hand>exile	-	pending	not yet triaged
+Grizzled Huntmaster	T4	effects	move:hand>exile	-	equivalent	choose-origin exile written as MayCost/search in mtgish; script ChangeZone per zone (Deep-Cavern Bat pattern)
 Gruesome Discovery	T4	effects	discard:2	-	equivalent	morbid condition written as two Discard SAs vs IfElse
 Guardian Angel	T4	effects	effect	mayplay	equivalent	the pay-to-prevent permission is an Effect; mtgish a play permission
-Guided Passage	T4	effects	search:hand	move:library>hand	pending	not yet triaged
+Guided Passage	T4	effects	search:hand	move:library>hand	equivalent	opponent separates, you pick: hidden ChangeZone (search) vs mtgish's move (Phyrexian Portal pattern)
 Guildpact Greenwalker	T4	effects	perpetual	-	equivalent	one perpetual change written as Animate+Pump SAs vs one CreatePerpetualCardInHandEffect
 Haakon, Stromgald Scourge Avatar	T4	effects	color type	effect	equivalent	Vanguard: cast-from-graveyard permission written as a perpetual effect
 Hada Spy Patrol	T4	effects	-	rule:cantbeblocked	equivalent	script one level-1+ static covers the can't-be-blocked printed at both levels; mtgish one per level
@@ -440,7 +418,6 @@ I Am Duskmourn	T4	effects	-	abandon	forge-bug	TrigPlay lacks SubAbility$ Abandon
 Ian the Reckless	T4	effects	damage:*	-	equivalent	the conditional extra damage is a second DealDamage
 Icefeather Aven	T4	effects	move:battlefield>hand	-	mtgish-bug	turned-face-up trigger dropped (morph line lost, mtgish#1)
 Ich-Tekik, Salvage Splicer	T4	effects	-	counters:+1/+1:1	equivalent	one PutCounterAll on itself and each Golem vs two put-counters
-Identity Crisis	T4	effects	-	move:graveyard>exile	pending	not yet triaged
 Idol of Endurance	T4	effects	mayplay	player:onceeachturnmayaction	equivalent	once-each-turn cast permission: Effect MayPlay vs mtgish OnceEachTurnMayAction rule
 Illusionary Mask	T4	effects	-	effect	equivalent	mtgish adds an unnamed effect for the face-down cast; one Play in the script
 Illusionary Terrain	T4	effects	choose	-	equivalent	two land-type choices vs one choose
@@ -456,7 +433,8 @@ Infernal Offering	T4	effects	draw:2	draw:1	mtgish-bug	draw of two encoded as Dra
 Infernal Tutor	T4	effects	search:hand	-	equivalent	hellbent condition written as two ChangeZone SAs vs IfElse
 Ingenious Mastery	T4	effects	token:2	token:3	mtgish-bug	the opponent creates three Treasures (the draw count reused); printed two, mtgish#1 class
 Insatiable Frugivore	T4	effects	token:1	-	equivalent	script writes the first Token then the repeat body (Token again)
-Insist	T4	effects	delayed	-	pending	not yet triaged
+Insist	T4	effects	delayed	-	equivalent	script DelayedTrigger for 'during that turn / next turn'; mtgish expresses the duration without a delayed trigger (Illusionist's Gambit pattern)
+Inspiring Refrain	T4	effects	counters:time:3	counters:time:2	mtgish-bug	'Exile with three time counters' encoded as Integer 2 (script 3; new since time counters are read)
 Interplanar Tunnel	T4	effects	move:planardeck>planardeck move:planardeck>planardeck planeswalk	-	equivalent	planar-deck reorder steps written as separate moves
 Invasion of Gobakhan	T4	effects	costincrease	-	equivalent	the exiled card's cost increase is part of the cast permission in mtgish
 Invasion of New Capenna [Holy Frazzle-Cannon]	T4	effects	-	counters:+1/+1:1	equivalent	one PutCounterAll on the attacker and creatures sharing a type vs two put-counters
@@ -466,13 +444,11 @@ Ion Storm	T4	effects	damage:2	-	equivalent	the two alternative costs are two act
 Ire Shaman	T4	effects	mayplay move:library>exile	-	mtgish-bug	turned-face-up trigger dropped (megamorph line lost, mtgish#1)
 Irencrag Feat	T4	effects	delayed	-	equivalent	the one-more-spell restriction is a delayed Effect in the script
 Isle of Vesuva	T4	effects	destroy	-	equivalent	destroy the target and each creature with its name: two SAs vs one action
-Ith, High Arcanist	T4	effects	prevent	-	equivalent	prevent combat damage dealt to and by: two shields vs one
 Ixhel, Scion of Atraxa	T4	effects	-	player:maylookatfacedownexiledcards	equivalent	the look-at permission of face-down exiled cards is part of the script's exile (WithMayLook$), a player rule in mtgish
 Izzet Staticaster	T4	effects	damage:1	-	equivalent	damage to the target and each creature with its name: two SAs vs one action
 Jace, Vryn's Prodigy [Jace, Telepath Unbound]	T4	effects	effect	-	equivalent	the exile-instead of the spell cast from the graveyard is a replacement in an Effect; part of mtgish's permission
 Jacob Hauken, Inspector	T4	effects	-	player:maylookatfacedownexiledcards	equivalent	the look-at permission of face-down exiled cards is part of the script's exile (WithMayLook$), a player rule in mtgish
 Jacob Hauken, Inspector [Hauken's Insight]	T4	effects	mayplay	player:maylookatfacedownexiledcards player:onceduringeachplayersturnmayaction	equivalent	the look-at permission of face-down exiled cards is part of the script's exile (WithMayLook$), a player rule in mtgish
-Jadelight Ranger	T4	effects	-	explore	equivalent	explore twice: one Explore with a count vs two actions
 Jailbreak	T4	effects	delayed	-	equivalent	the follow-up return is a delayed trigger in the script, a reflexive one in mtgish
 Jester's Scepter	T4	effects	-	player:maylookatfacedownexiledcards	equivalent	the look-at permission of face-down exiled cards is part of the script's exile (WithMayLook$), a player rule in mtgish
 Jet's Brainwashing	T4	effects	untap	-	mtgish-bug	kicked branch drops the untap
@@ -494,7 +470,6 @@ Karlach, Tiefling Punisher	T4	effects	grant:cardnamecantblock	perpetual	equivale
 Karlach, Tiefling Spellrager	T4	effects	effect effect	mayplay perpetual	equivalent	perpetual grant written as a permanent Effect static over the card in all zones
 Karlach, Tiefling Zealot	T4	effects	grant:cardnamecantblock	perpetual	equivalent	perpetual grant written as a permanent Effect static over the card in all zones
 Karn, Living Legacy	T4	effects	effect	damage:1	equivalent	the emblem's activated ability is summarised as an effect in the script
-Karn, Scion of Urza	T4	effects	counters:silver:1	-	pending	not yet triaged
 Katara, Waterbending Master	T4	effects	discard:1	draw:1	mtgish-bug	the follow-up discard encoded as DrawACard
 Kayla's Music Box	T4	effects	-	dig:1	equivalent	look at the top card then exile it face down: mtgish one more look
 Keen Duelist	T4	effects	-	dig:1 loselife:* move:library>hand	equivalent	each player's reveal: one Dig per player in mtgish
@@ -510,14 +485,14 @@ Kylox's Voltstrider	T4	effects	effect	-	equivalent	the cast spell's exile-instea
 Kytheon, Hero of Akros [Gideon, Battle-Forged]	T4	effects	delayed	-	equivalent	the planeswalker face's prevention-until is a delayed Effect
 Lae'zel, Githyanki Warrior	T4	effects	grant:ability	effect	equivalent	the granted ability on the cast spell: a grant vs mtgish's spell effect
 Lae'zel, Primal Warrior	T4	effects	-	perpetual perpetual	equivalent	one PumpAll over Battlefield,Hand vs two CreatePerpetual actions per trigger
-Land Equilibrium	T4	effects	replace:wouldenter	replace:wouldputapermanentonthebattlefield	pending	not yet triaged
+Land Equilibrium	T4	effects	replace:wouldenter	replace:wouldputapermanentonthebattlefield	equivalent	R:Event$ Moved to the battlefield vs mtgish's 'would put a permanent onto the battlefield' replacement (same event, other name)
 Lantern Flare	T4	effects	gainlife:*	-	mtgish-bug	the X life gain dropped (both cleave branches)
 Last Night Together	T4	effects	grant:haste rule:cantattack	-	mtgish-bug	mtgish#1: Indestructible granted twice, haste lost; rule:cantattack side is unmapped OnlyAllowedAttackersDuringTheAdditionalCombat... (normalizer)
 Last Voyage of the _____	T4	effects	delayed	-	equivalent	return-as-Aura structure written with a delayed trigger
 Lava Burst	T4	effects	damage:*	effect	equivalent	damage that can't be prevented when it's a creature: a second conditional DealDamage vs mtgish's damage plus effect
 Lavalanche	T4	effects	damage:*	-	equivalent	damage to the player and each creature they control: two SAs vs one action
 Lead the Stampede	T4	effects	move:library>hand	move:library>library	mtgish-bug	revealed creatures to hand encoded as PutOnTopOfLibrary
-Legion's End	T4	effects	-	move:battlefield>exile move:hand>exile	pending	not yet triaged
+Legion's End	T4	effects	-	move:battlefield>exile	pending	not yet triaged
 Legions to Ashes	T4	effects	-	move:battlefield>exile	equivalent	one ChangeZone moves several objects; mtgish one exile per object
 Legolas's Quick Reflexes	T4	effects	untap	-	mtgish-bug	untap of the target dropped
 Leonin Shikari	T4	effects	flash	mayplay	equivalent	flash permission: a flash static vs mtgish play permission
@@ -525,11 +500,10 @@ Leovold, Emissary of Trest	T4	effects	-	draw:1	equivalent	becomes-target trigger
 Lethal Exploit	T4	effects	-	pump:-2/-2	equivalent	the base and per-modified-creature shrink are one Pump with a computed amount
 Liege of the Axe	T4	effects	untap	-	mtgish-bug	turned-face-up trigger dropped (morph line lost, mtgish#1)
 Liesa, Shroud of Dusk	T4	effects	costincrease costreduction	cast:paylifeforeachpreviouscastratherthanmanaforeachpreviouscast	equivalent	pay life for each previous cast: two cost statics vs one cast rule
-Lifelace	T4	effects	-	effect	equivalent	mtgish adds an unnamed effect for the colour change's duration
 Lightning Coils	T4	effects	delayed move:battlefield>exile	-	mtgish-bug	the delayed exile of the tokens dropped
 Lightning Surge	T4	effects	damage:6	-	equivalent	condition written as two SAs vs IfElse (mtgish damage:* merges 4/6)
 Lightstall Inquisitor	T4	effects	costincrease	mayplay	equivalent	the exiled card's cost increase is part of the cast permission in mtgish
-Lim-Dûl's Vault	T4	effects	dig:5	move:library>library move:library>library	pending	not yet triaged
+Lim-Dûl's Vault	T4	effects	dig:5	move:library>library move:library>library	equivalent	repeat-until loop: Repeat of Dig/PeekAndReveal in the script, RepeatableActions with three bottom/top moves in mtgish
 Limits of Solidarity	T4	effects	grant:haste	-	mtgish-bug	haste grant dropped
 Lobelia, Defender of Bag End	T4	effects	-	dig:1	equivalent	look then exile face down: mtgish one more look
 Lord Windgrace	T4	effects	move:graveyard>battlefield	move:graveyard>hand	mtgish-bug	-3 returns the lands to hand; printed onto the battlefield
@@ -538,7 +512,7 @@ Lux Artillery	T4	effects	grant:sunburst	effect	equivalent	sunburst granted to th
 Maddening Cacophony	T4	effects	mill:*	-	equivalent	kicked mill-half-library: two conditional Mills vs alternatives merged
 Maelstrom Djinn	T4	effects	counters:time:2 grant:vanishing	-	mtgish-bug	turned-face-up trigger dropped, Flying duplicated (morph line lost, mtgish#1)
 Magar of the Magic Strings	T4	effects	animate grant:ability	-	equivalent	the face-down 3/3 with granted abilities is an Animate in the script, an enter flag in mtgish
-Magical Hack	T4	effects	-	effect	pending	not yet triaged
+Magical Hack	T4	effects	-	effect	equivalent	mtgish CreateSpellEffect (effect) beside the replacement/text change (Crystal Spray pattern)
 Magma Burst	T4	effects	-	damage:3	equivalent	kicked second target: one DealDamage with a target count vs two damage actions
 Magma Opus	T4	effects	draw:2	draw:1	mtgish-bug	draw of two encoded as DrawACard
 Magmatic Hellkite	T4	effects	-	counters:stun:1	pending	not yet triaged
@@ -557,8 +531,6 @@ Master of Ceremonies	T4	effects	-	draw:* token:* token:*	equivalent	per-choice t
 Master of the Wild Hunt	T4	effects	damage:0	-	equivalent	the wolves' damage split written as three DealDamage SAs
 Mavinda, Students' Advocate	T4	effects	costincrease	mayplay	equivalent	the cast spell's cost increase is part of the permission in mtgish
 Mayael the Anima Avatar	T4	effects	dig:1	-	equivalent	alternatives: script two Digs (keep a big creature, else bottom), mtgish one reveal with if/else
-Maze of Ith	T4	effects	prevent	-	equivalent	prevent combat damage dealt to and by: two shields vs one
-Maze of Shadows	T4	effects	prevent	-	equivalent	prevent combat damage dealt to and by: two shields vs one
 Memories Returning	T4	effects	dig:2 dig:3 dig:4 move:library>library move:library>library move:library>library	-	equivalent	the repeated look-and-choose loop is unrolled per repeat in the script
 Memory Crystal	T4	effects	costreduction	costincrease	mtgish-bug	buyback cost reduction encoded as IncreaseBuybackCosts
 Memory Vessel	T4	effects	player:cantcastspells player:cantplaylandsfromtheirhand	player:cantplaycardsfromhand	equivalent	can't-play-from-hand: two statics (spells, lands) vs one player rule
@@ -580,7 +552,6 @@ Mogis's Warhound	T4	effects	-	rule:mustattack	equivalent	the enchanted creature 
 Moment of Truth	T4	effects	dig:2 move:library>library	-	equivalent	look and distribute: Dig with a rest move vs one look
 Mondo Gecko	T4	effects	grant:toxic	-	forge-bug	DBPump grants Toxic:1 the printed card lacks (also on upstream master); KW$ should be Hexproof:ChosenColor only
 Moogles' Valor	T4	effects	grant:indestructible	grant:lifelink	mtgish-bug	indestructible grant encoded as lifelink (the token keyword reused, mtgish#1 class)
-Moonlace	T4	effects	-	effect	equivalent	mtgish adds an unnamed effect for the colour change's duration
 Moonlight Geist	T4	effects	prevent	-	equivalent	prevent combat damage dealt to and by: two shields vs one
 Moritte of the Frost	T4	effects	-	grant:changeling	pending	not yet triaged
 Morphic Tide	T4	effects	planeswalk	-	equivalent	phenomenon: the planeswalk away after the encounter is part of Forge's phenomenon script
@@ -636,7 +607,6 @@ Otaria	T4	effects	spell:flashback	-	equivalent	flashback granted to graveyard ca
 Oubliette	T4	effects	delayed phaseout	-	equivalent	phase out until this leaves: two PhaseOuts (out and back) and a delayed trigger
 Out of Time	T4	effects	delayed phaseout	-	equivalent	phase out until counters are gone: two PhaseOuts and a delayed trigger
 Outrageous Robbery	T4	effects	-	player:maylookatfacedownexiledcards	equivalent	the look-at permission of face-down exiled cards is part of the script's exile (WithMayLook$)
-Over the Edge	T4	effects	-	explore	equivalent	explore twice: one Explore with a count vs two actions
 Overmaster	T4	effects	delayed	-	equivalent	next-spell-cant-be-countered: script a DelayedTrigger plus an Effect replacement (delayed), mtgish one spell effect
 Pack's Betrayal	T4	effects	grant:haste	-	mtgish-bug	haste grant dropped
 Palace Jailer	T4	effects	delayed move:exile>battlefield	-	equivalent	exile until an opponent becomes the monarch: a delayed return in the script
@@ -685,7 +655,6 @@ Prying Questions	T4	effects	move:hand>library:1	move:hand>graveyard	mtgish-bug	h
 Psychotic Episode	T4	effects	dig:1	-	equivalent	reveal hand and top card: two looks vs one
 Pull from the Deep	T4	effects	move:graveyard>hand	-	equivalent	return an instant and a sorcery: two ChangeZones vs one action
 Puppeteer Clique	T4	effects	grant:haste	-	mtgish-bug	haste grant dropped
-Purelace	T4	effects	-	effect	equivalent	mtgish adds an unnamed effect for the colour change's duration
 Puresight Merrow	T4	effects	-	dig:1	equivalent	look then exile: mtgish one more look
 Purphoros, Bronze-Blooded	T4	effects	-	move:graveyard>battlefield	mtgish-bug	printed: put from your HAND; mtgish PutACardFromHandOrGraveyardOnBattlefield adds a graveyard option
 Qasali Ambusher	T4	effects	mayplay	alternativecost flash	equivalent	cast without paying as though it had flash: one MayPlay vs flash plus alternative cost
@@ -776,6 +745,7 @@ Silumgar's Scorn	T4	effects	counter	-	equivalent	counter unless pay / counter in
 Silver Surfer, Cosmic Voyager	T4	effects	effect	-	equivalent	returned-tapped rider: script an Effect with a replacement (effect), mtgish an enter flag on the return
 Sin Prodder	T4	effects	move:library>graveyard	-	equivalent	mtgish AnyPlayerMayCost: the move to the graveyard is the opponent's cost there, a ChangeZone in the script
 Singing Towers of Darillium	T4	effects	mayplay	player:mayactiononce	equivalent	may-play permission: script a Continuous MayPlay static, mtgish a player permission per action (cast spells, play lands, once each turn)
+Sinister Concierge	T4	effects	counters:time:3	-	equivalent	exile with time counters is a MayCost(Exile ExilesWithNumberCounters) in mtgish, costs not compared (new since time counters are read)
 Sins of the Past	T4	effects	effect	-	equivalent	exile-instead rider: script an Effect with a replacement, mtgish part of the cast permission
 Sizzling Soloist	T4	effects	delayed grant:ability	rule:mustattack	equivalent	must-attack granted as an ability in the script, a rule in mtgish
 Skrelv, Defector Mite	T4	effects	grant:hexprooffrom	grant:protection	mtgish-bug	printed 'hexproof from that color'; mtgish grants protection / plain hexproof
@@ -793,7 +763,6 @@ Solitary Study [Endless Corridor]	T4	effects	conjure	-	equivalent	conjure writte
 Somnophore	T4	effects	tap	-	mtgish-bug	'tap target creature' missing from the encoding; only the doesn't-untap rule is encoded
 Sonar Strike	T4	effects	gainlife:3	gainlife:4	mtgish-bug	printed conditional life gain is 3; mtgish GainLife(4) repeats the damage amount (i5jb/mtgish#1)
 Song-Mad Treachery	T4	effects	grant:haste	-	mtgish-bug	mtgish#2 haste dropped
-Soratami Cloud Chariot	T4	effects	prevent	-	equivalent	prevent combat damage dealt to and by: two shields vs one
 Sorceress's Schemes	T4	effects	-	move:exile>hand	equivalent	Origin$ Graveyard,Exile read as its first zone; the printed card returns from either (mtgish moves from exile)
 Sorcerous Spyglass	T4	effects	choose	-	equivalent	script chooses the opponent (ChoosePlayer) and then the name; mtgish one name choice
 Soul Nova	T4	effects	-	move:battlefield>exile	equivalent	script one ChangeZoneAll over the creature and its Equipment vs mtgish one exile per exilable
@@ -841,7 +810,6 @@ Suntail Squadron	T4	effects	conjure	-	equivalent	script repeats conjure body as 
 Super-Adaptoid	T4	effects	counters:doublestrike:1 counters:doublestrike:1 counters:firststrike:1 counters:firststrike:1 counters:flying:1 counters:flying:1 counters:haste:1 counters:haste:1 counters:indestructible:1 counters:indestructible:1 counters:lifelink:1 counters:lifelink:1 counters:menace:1 counters:menace:1 counters:reach:1 counters:reach:1 counters:trample:1 counters:trample:1 counters:vigilance:1 counters:vigilance:1	-	equivalent	script one PutCounter per keyword in each of two triggers (etb, attacks) vs one trigger with one per-ability PutCounters
 Supper for Spiders	T4	effects	-	grant:ability	equivalent	the returned cards' Food ability: a StaticEffect$ of the move in the script, a layer grant in mtgish
 Surtland Flinger	T4	effects	damage:*	-	equivalent	script one DealDamage per branch (Giant or not, summed) vs IfElse (merged)
-Suspend	T4	effects	-	counters:time:2	equivalent	suspend's time counters: script a PutCounter or WithCountersType$ TIME, mtgish the exile's counter flag (not compared)
 Suspend Aggression	T4	effects	-	move:library>exile	equivalent	script one ChangeZone over the target and the top card (any origin) vs mtgish one exile per exilable
 Suspicious Detonation	T4	effects	spell:cantbecountered	costreduction	mtgish-bug	'This spell can't be countered.' missing; the cost-reduction rule is written twice
 Sutured Ghoul	T4	effects	choose setpt	cda	forge-bug	P/T CDA static lacks CharacteristicDefining$ True (same as the T1 row)
@@ -856,7 +824,6 @@ Sword of Sinew and Steel	T4	effects	destroy	-	equivalent	one action over several
 Sylvan Hierophant	T4	effects	move:graveyard>hand	move:graveyard>battlefield	mtgish-bug	printed 'return ... to your hand'; mtgish puts the card onto the battlefield
 Sylvan Library	T4	effects	move:hand>library:1	discard:*	mtgish-bug	printed 'pay 4 life or put the card on top of your library'; mtgish discards the unpaid cards
 Syr Carah, the Bold	T4	effects	-	mayplay move:library>exile	equivalent	mtgish one trigger per damage source (Syr Carah, a spell) vs one script trigger
-Taigam, Master Opportunist	T4	effects	counters:time:4	-	equivalent	suspend's time counters: script a PutCounter or WithCountersType$ TIME, mtgish the exile's counter flag (not compared)
 Taigam, Ojutai Master	T4	effects	grant:rebound	effect	equivalent	keyword granted to a spell or card: script Pump/Animate keyword grant, mtgish a generic spell effect or spell keyword
 Tajic, Legion's Valor	T4	effects	grant:ability	rule:mustattack	equivalent	must-attack granted as an ability in the script, a rule in mtgish
 Take for a Ride	T4	effects	grant:haste	-	mtgish-bug	mtgish#2 haste dropped
@@ -870,7 +837,7 @@ Taunting Challenge	T4	effects	rule:allcreaturesmustblockit	rule:mustblockattacke
 Tawnos's Coffin	T4	effects	move:exile>battlefield move:exile>battlefield	move:battlefield>exile	equivalent	Forge splits the leaves-or-untaps trigger into two (Secondary) and exiles the creature and its Auras in one ChangeZoneAll; mtgish one trigger and one exile each
 Teferi's Contingency	T4	effects	-	perpetual perpetual	equivalent	one AnimateAll Zone$ Graveyard,Hand,Library vs one CreatePerpetual* per zone
 Teferi's Reproach	T4	effects	player:lifetotalcantchange	-	mtgish-bug	'their life total can't change' missing from the encoding
-Teferi, Mage of Zhalfir	T4	effects	grant:flash player:cantcastspells	player:cancastspellsonlyanytimetheycouldcastasorcery static:cardeffect	equivalent	opponents cast only at sorcery speed: script CantBeCast OnlySorcerySpeed (player:cantcastspells), mtgish a named player rule; Mage's flash grant is a card effect there
+Teferi, Mage of Zhalfir	T4	effects	player:cantcastspells	player:cancastspellsonlyanytimetheycouldcastasorcery	equivalent	CantBeCast OnlySorcerySpeed$ static in the script, a named player effect in mtgish (old row also had grant:flash vs static:cardeffect, now read)
 Teferi, Time Raveler	T4	effects	player:cantcastspells	player:cancastspellsonlyanytimetheycouldcastasorcery	equivalent	opponents cast only at sorcery speed: script CantBeCast OnlySorcerySpeed (player:cantcastspells), mtgish a named player rule; Mage's flash grant is a card effect there
 Teferi, Who Slows the Sunset	T4	effects	delayed draw:1 rule:untapsduringotherplayersuntapsteps	player:drawsacardduringeachplayersuntapstep player:untapspermanentsduringeachplayersuntapsteps	equivalent	emblem: script an Effect with a trigger and an UntapOtherPlayer static, mtgish two player rules
 Telling Time	T4	effects	dig:2 move:library>library	-	equivalent	script two Digs (three, then two) vs one look with three destinations
@@ -914,9 +881,7 @@ They Came from the Pipes	T4	effects	-	manifestdread	equivalent	verb twice: scrip
 Thick-Skinned Goblin	T4	effects	player:youmaypayratherthanpaytheechocostforpermanentsyoucontrol	player:maypayalternateechocosts	equivalent	pay {0} rather than the echo cost: one static, two token spellings (script text, mtgish PlayerEffect)
 Thief of Existence	T4	effects	grant:ability	effect	equivalent	granted triggered ability: Animate Triggers$ in the script, CreateSpellEffect(AddAbility) (effect) in mtgish
 Third Little Pig	T4	effects	-	perpetual	equivalent	one trigger TriggerZones$ Battlefield,Graveyard vs mtgish FromGraveyard copy
-Thought Distortion	T4	effects	-	move:graveyard>exile	pending	not yet triaged
 Thought-String Analyst	T4	effects	-	player:maylookatfacedownexiledcards	equivalent	the look-at permission of face-down exiled cards is part of the script's exile (WithMayLook$), a player rule in mtgish
-Thoughtlace	T4	effects	-	effect	equivalent	mtgish adds an unnamed effect for the colour change's duration
 Thousand Winds	T4	effects	move:battlefield>hand	-	mtgish-bug	mtgish#1 morph: the turned-face-up trigger is lost
 Thran Portal	T4	effects	costincrease	rule:additionalcost	equivalent	additional life cost on its mana abilities: script RaiseCost static, mtgish additional-cost rule
 Thranduil's Decree	T4	effects	counter	-	equivalent	alternatives: mtgish if/else merged, script runs one sub-ability per branch
@@ -998,7 +963,6 @@ Vision Quest	T4	effects	-	counters:+1/+1:*	pending	not yet triaged
 Vivien's Grizzly	T4	effects	move:library>hand	-	equivalent	mtgish MayCost(RevealTopCardOfLibraryAndPutIntoHand): cost on one side, ChangeZone on the other
 Vivien, Champion of the Wilds	T4	effects	-	player:maylookatfacedownexiledcards	equivalent	script WithMayLook$ on the Dig vs mtgish a MayLookAtFaceDownExiledCard player effect
 Voda Sea Scavenger	T4	effects	move:library>library	move:library>hand	mtgish-bug	put one on top of your library encoded as MayPutAGenericCardIntoHand
-Vodalian Mystic	T4	effects	color	effect	equivalent	target spell becomes the chosen colour: CreateSpellEffect(SetColor) is an unnamed effect in mtgish
 Volcano Hellion	T4	effects	-	grant:echo	equivalent	echo X written as K:Echo in the script, as a granting static in mtgish
 Vona's Hunger	T4	effects	sacrifice	-	equivalent	script one Sacrifice per branch (city's blessing or not, summed) vs IfElse (merged)
 Vraska the Unseen	T4	effects	grant:ability	delayed destroy	equivalent	until-your-next-turn trigger: Animate Triggers$ in the script, CreateTriggerUntil in mtgish

@@ -59,6 +59,11 @@ func c1Tokens(i int) func(*effects, node) {
 		for _, t := range list(argN(n, i)) {
 			e.add(tokenToken(t))
 		}
+		for _, f := range list(argN(n, i+1)) {
+			if v := variantOf(f); v == "EntersWithRuleEffectUntil" {
+				e.add(p2cEnterFlag(f.(node), v)...)
+			}
+		}
 	}
 }
 

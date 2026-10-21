@@ -55,6 +55,9 @@ func effectStaticP2E(st cards.Static) []string {
 // list appears (static, CreatePlayerEffectUntil, emblem): "spells you cast
 // have <ability>" is the granted spell ability (p2dPlayerSpellEffects).
 func playerEffectTokensP2E(x any) []string {
+	if t, ok := p2hPlayerEffect(x); ok {
+		return t
+	}
 	if t, ok := p2dPlayerSpellEffects(x); ok {
 		return t
 	}

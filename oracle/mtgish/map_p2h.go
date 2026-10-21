@@ -1,0 +1,117 @@
+package mtgish
+
+import (
+	"strconv"
+	"strings"
+
+	"github.com/adams-shaun/gorge/engine/cards"
+)
+
+// Phase-2 unit h: normaliser fixes found triaging shard r3-01 (Death or
+// Glory .. Maralen of the Mornsong Avatar). Each family is general.
+
+// p2hCount reads a literal repeat count ("2"); 1 for anything else.
+func p2hCount(v string) int {
+	n, err := strconv.Atoi(strings.TrimSpace(v))
+	if err != nil || n < 1 {
+		return 1
+	}
+	return n
+}
+
+// p2hParamTokens adds the tokens of parameters gorgeAPIEffects does not
+// read: a repeated verb written as a count.
+func p2hParamTokens(a *cards.SA) []string {
+	p := a.Params
+	var out []string
+	switch a.API {
+	case "Explore":
+		// "Explores, then explores again": Num$ 2 is two explores, as
+		// mtgish's two actions.
+		for i := 1; i < p2hCount(p["Num"]); i++ {
+			out = append(out, "explore")
+		}
+	case "SkipTurn":
+		for i := 1; i < p2hCount(p["NumTurns"]); i++ {
+			out = append(out, "skipturn")
+		}
+	case "Pump":
+		if p["DefinedLandwalk"] != "" {
+			out = append(out, "grant:landwalk")
+		}
+	}
+	return out
+}
+
+// p2hPlayerEffect maps the PlayerEffect variants that carry actions: "you
+// may play the exiled card; when you do, <actions>" is a play permission
+// and a delayed trigger running them, as the gorge side's Effect with a
+// StaticAbilities$ MayPlay and a Triggers$.
+func p2hPlayerEffect(x any) ([]string, bool) {
+	if variantOf(x) != "MayPlayExiledCardWithTrigger" {
+		return nil, false
+	}
+	sub := &effects{}
+	sub.walk(argN(x, 1))
+	return append([]string{"mayplay", "delayed"}, sub.effects...), true
+}
+
+// p2hAllAddAbility reports a layer-effect list made only of granted
+// abilities.
+func p2hAllAddAbility(ls []any) bool {
+	for _, l := range ls {
+		if variantOf(l) != "AddAbility" {
+			return false
+		}
+	}
+	return len(ls) > 0
+}
+
+// p2hLookCounters maps the counter a look step's exile puts on the cards
+// ("exile the other with a silver counter on it"), gorge's
+// ExileWithCounters$.
+func p2hLookCounters(n node, v string) []string {
+	if v != "ExileTheRemainingCardsWithACounterOfType" {
+		return nil
+	}
+	return []string{"counters:" + counterType(rawArgs(n)) + ":1"}
+}
+
+// p2hAdjust respells the tokens of an SA whose verb the gorge side names
+// differently from mtgish.
+func p2hAdjust(a *cards.SA, toks []string) []string {
+	if a.API == "TaporUntapAll" {
+		// "Tap all ... or untap all ...": mtgish's two alternatives.
+		var out []string
+		for _, t := range toks {
+			if t == "tapuntap" {
+				out = append(out, "tap", "untap")
+				continue
+			}
+			out = append(out, t)
+		}
+		return out
+	}
+	return toks
+}
+
+func init() {
+	// "Spells/activated abilities cost an additional <cost> for each <X>
+	// symbol": S:Mode$ RaiseCost with ForEachShard$ (a cost increase).
+	d2RuleSynonyms["AdditionalCostForEachColorManaSymbolInCosts"] = "costincrease"
+}
+
+// p2hSpellColor reports a CreateSpellEffect that only changes the spell's
+// colour ("target spell becomes colorless"): gorge's Animate Colors$.
+func p2hSpellColor(n node) bool {
+	ls := list(argN(n, 1))
+	if len(ls) == 0 {
+		return false
+	}
+	for _, l := range ls {
+		if v := variantOf(l); v != "SetColor" && v != "AddColor" {
+			return false
+		}
+	}
+	return true
+}

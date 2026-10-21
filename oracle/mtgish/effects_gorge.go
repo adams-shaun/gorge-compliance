@@ -72,13 +72,14 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			// CreatePerpetual* actions.
 			e.add("perpetual")
 		} else {
-			e.add(p2dPlayerGrants(a, g.p2fSearchDelivery(a, gorgeAPIEffects(a, g.svars())))...)
+			e.add(p2hAdjust(a, p2dPlayerGrants(a, g.p2fSearchDelivery(a, gorgeAPIEffects(a, g.svars()))))...)
 		}
 		e.add(atEOTTokens(a.Params["AtEOT"])...)
 		e.add(paramTokensP2B(a)...)
 		e.add(p2fParamTokens(a)...)
 		e.add(p2iParamTokens(a)...)
 		e.add(p2jParamTokens(a)...)
+		e.add(p2hParamTokens(a)...)
 		if a.API == "Effect" {
 			// The triggers an effect creates run their own effects, as
 			// mtgish's CreateTriggerUntil actions do. An emblem's triggers
@@ -524,7 +525,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			out = append(out, "grant:"+grantKeyword(k))
 		}
 		out = append(out, p2dAnimateExtra(p)...)
-		if len(out) == 0 && !p2dAnimateCarrier(p) {
+		if len(out) == 0 && !p2dAnimateCarrier(p) && p["HiddenKeywords"] == "" {
 			out = append(out, "animate")
 		}
 		return dedup(out)
