@@ -130,6 +130,9 @@ func init() {
 func (e *effects) p2cMustCost(c any) {
 	v := variantOf(c)
 	switch {
+	case v == "RevealHandAndPutEachCardOnBattlefield":
+		e.add("move:hand>battlefield")
+		return
 	case strings.HasPrefix(v, "Reveal"), v == "BeholdA":
 		// "Look at the top card. You may reveal it": the reveal of a
 		// card already seen is not an effect (gorge: RevealOptional$).
@@ -147,6 +150,9 @@ func (e *effects) p2cMustCost(c any) {
 		e.add("move:battlefield>ante")
 	case "ShuffleACardFromHandIntoLibrary":
 		e.add("move:hand>library:1")
+	case "HavePlayerTakeAction":
+		// "You may have target player create a token copy": the action.
+		e.walk([]any{argN(c, 1)})
 	case "PutAGraveyardCardOnTheBottomOfItsOwnersLibrary":
 		e.add("move:graveyard>library")
 	case "PutANumberOfExiledCardsIntoOwnersGraveyard":
