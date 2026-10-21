@@ -45,6 +45,7 @@ func mtgishFace(c *Card, f node) *Summary {
 	mergeSpells(s, false)
 	splitStatics(s)
 	p2aMergeCantTarget(s)
+	p2dFoldTargetStatics(s)
 
 	if pt, ok := f["CardPT"].(map[string]any); ok {
 		p, t := strconv.Itoa(intOr(pt["Power"])), strconv.Itoa(intOr(pt["Toughness"]))
@@ -103,7 +104,7 @@ type mtgishNorm struct {
 
 func (m *mtgishNorm) kw(tok string) { m.s.Keywords = append(m.s.Keywords, tok) }
 
-func (m *mtgishNorm) ability(a Ability) { m.s.Abilities = append(m.s.Abilities, a) }
+func (m *mtgishNorm) ability(a Ability) { m.s.Abilities = append(m.s.Abilities, p2dMtgishAbility(a)) }
 
 // sub maps a nested rule; conditional (under If/Unless or a level) turns
 // its keywords into a static granting them.
@@ -372,7 +373,7 @@ func (m *mtgishNorm) rule(r any) {
 		} else {
 			// "Is the chosen type in addition to its other types": a
 			// type-changing static.
-			m.ability(Ability{Kind: "static", Effects: []string{"type"}})
+			m.ability(Ability{Kind: "static", Effects: []string{p2fCDATypes(rawArgs(r))}})
 		}
 	case "EnchantPermanent":
 		m.kw("enchant:" + targetToken(permanentsClasses(rawArgs(r)), "1"))

@@ -120,6 +120,9 @@ func spellEffectTokens(xs []any) []string {
 					out = append(out, "spell:"+strings.TrimPrefix(g, "grant:"))
 				}
 			}
+		case v == "CantBeCounteredBySpells":
+			// "can't be countered by <colour> spells": the same rule.
+			out = append(out, "spell:cantbecountered")
 		case v == "AdjustPT":
 			out = append(out, pump(signed(intOr(argN(x, 0))), signed(intOr(argN(x, 1)))))
 		case v == "SetPT":

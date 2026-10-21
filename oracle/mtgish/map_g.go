@@ -224,7 +224,8 @@ func selfCastRestriction(mode string, p map[string]string) bool {
 // static per restriction in a script (one S: line per static mode) and in
 // mtgish's PermanentRuleEffect, but one sentence can carry several in
 // mtgish's PlayerEffect list or beside a layer effect in a script's
-// Continuous (AddHiddenKeyword$, Goad$, CantHaveKeyword$). The remaining
+// Continuous (AddHiddenKeyword$, Goad$, CantHaveKeyword$). A spell effect
+// ("spells you cast have ...", one S: line each) splits the same way. The remaining
 // (layer) tokens stay one static.
 func splitStatics(s *Summary) {
 	var out []Ability
@@ -236,7 +237,7 @@ func splitStatics(s *Summary) {
 		}
 		var rest, own []string
 		for _, t := range a.Effects {
-			if strings.HasPrefix(t, "rule:") || strings.HasPrefix(t, "player:") || t == "goad" || splitSpellP2E(t) {
+			if strings.HasPrefix(t, "rule:") || strings.HasPrefix(t, "player:") || t == "goad" || strings.HasPrefix(t, "spell:") {
 				// ("Is goaded" is a rule too: mtgish's IsGoadedByPlayer.)
 				own = append(own, t)
 			} else {

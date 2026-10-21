@@ -184,10 +184,12 @@ type gorgeNorm struct {
 	f    *cards.Face
 	idx  TypeIndex
 	mode int // gift/kicker branch being summarised (modeSA)
+
+	parked bool // a search parked its cards in the library (map_p2f.go)
 }
 
 func (g *gorgeNorm) kw(tok string)            { g.s.Keywords = append(g.s.Keywords, tok) }
-func (g *gorgeNorm) ability(a Ability)        { g.s.Abilities = append(g.s.Abilities, a) }
+func (g *gorgeNorm) ability(a Ability)        { g.s.Abilities = append(g.s.Abilities, p2dGorgeAbility(a)) }
 func (g *gorgeNorm) svars() map[string]string { return g.f.SVars }
 
 // gorgeCostKeywords are the keyword heads whose parameter is a cost
@@ -532,6 +534,14 @@ func (g *gorgeNorm) static(st *cards.Static) {
 }
 
 func gorgeStaticEffects(mode string, p map[string]string) []string {
+	if strings.Contains(mode, ",") {
+		// "Mode$ CantAttack,CantBlock": one static line, several modes.
+		var out []string
+		for _, m := range strings.Split(mode, ",") {
+			out = append(out, gorgeStaticEffects(strings.TrimSpace(m), p)...)
+		}
+		return out
+	}
 	if selfCastRestriction(mode, p) {
 		return nil
 	}
@@ -586,7 +596,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "setpt")
 		}
 		if p["AddType"] != "" || p["AddTypes"] != "" || p["RemoveType"] != "" || p["AddAllCreatureTypes"] != "" ||
-			p["RemoveCreatureTypes"] != "" || p["RemoveCardTypes"] != "" || p["SetCreatureTypes"] != "" {
+			p["RemoveCreatureTypes"] != "" || p["RemoveCardTypes"] != "" || p["SetCreatureTypes"] != "" || p2cTypeChange(p) {
 			out = append(out, "type")
 		}
 		if p["SetColor"] != "" || p["AddColor"] != "" {
@@ -609,7 +619,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		// (CanBlockAmount$ is read once, by d2ContinuousEffects.)
 		// (Goad$ True is "goad", d2ContinuousEffects.)
 		for _, k := range cards.SplitKeywordList(p["AddHiddenKeyword"]) {
-			out = append(out, hiddenKeywordToken(k))
+			out = append(out, p2cHiddenTokens(k)...)
 		}
 		out = append(out, d2ContinuousEffects(p)...)
 		if len(out) == 0 {
@@ -629,6 +639,11 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		}
 		return []string{"costincrease"}
 	case "CantBlockBy":
+		if p["ValidBlocker"] != "" && p["ValidAttacker"] == "" && p["ValidAttackerRelative"] == "" {
+			// "Creatures with power 7 or greater can't block": the
+			// blockers named, no attacker.
+			return []string{"rule:cantblock"}
+		}
 		if p["ValidBlocker"] != "" {
 			return []string{"rule:cantbeblockedbydefenders"}
 		}
@@ -784,9 +799,9 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 		a.Effects = []string{"replace:wouldputintograveyard"}
 	case r.Event == "Moved" && p["Destination"] == "Battlefield":
 		a.Effects = []string{"replace:wouldenter"}
-	case r.Event == "DamageDone" && (p["Prevent"] == "True" || p["PreventionEffect"] == "True"):
-		// (PreventionEffect$ marks a partial shield, "prevent N of that
-		// damage": a prevention too.)
+	case r.Event == "DamageDone" && (p["Prevent"] == "True" || p["PreventionEffect"] != ""):
+		// PreventionEffect$: a partial prevention ("prevent X of that
+		// damage") written as a ReplaceDamage, still a prevention shield.
 		a.Effects = []string{"replace:preventdamage"}
 	case r.Event == "DamageDone":
 		a.Effects = []string{"replace:woulddealdamage"}
@@ -921,6 +936,10 @@ func affectsPermanents(affected string) bool {
 // ("MustBeBlockedBy Creature.Eldrazi": "must be blocked by an Eldrazi if
 // able") to the rule token mtgish's PermanentRuleEffect carries.
 func grantedRule(k string) (string, bool) {
+	if strings.HasPrefix(k, "Prevent all") && strings.Contains(k, "dealt by CARDNAME") {
+		// A prevention shield on the object (mtgish's prevention).
+		return "prevent", true
+	}
 	rest, ok := strings.CutPrefix(k, "MustBeBlockedBy ")
 	if !ok {
 		return "", false

@@ -28,6 +28,8 @@ func (e *effects) walk(x any) {
 		case "_LookAtTopOfLibraryAction", "_RevealTheTopNumberCardsOfLibraryAction":
 			if t := lookMove(variant); t != "" {
 				e.add(t)
+			} else if descend, ok := e.p2cLookAction(n, variant); ok {
+				return descend
 			}
 			if lookActionP2B[variant] {
 				// An action inside the look ("it gains haste"), shaped as
@@ -35,20 +37,23 @@ func (e *effects) walk(x any) {
 				e.action(n, variant)
 				return false
 			}
-			if a := argsOf(n); variant == "IfElse" && len(a) == 3 {
-				// "Instead put two of them into your hand": one branch runs.
-				e.alternatives(a[1], a[2])
-				return false
+			if variant == "PlayerMillsNumberCards" {
+				// "Target opponent mills a card for each ..." (map_p2d.go).
+				e.add("mill:" + gameNumber(rawArgs(n)))
 			}
 			return variant == "If" || variant == "Unless" || variant == "MayAction" || variant == "MayActions"
 		case "_SearchLibraryAction":
-			// Steps of a search: only their enter flags carry an effect
-			// (the found card enters with a counter).
-			return true
-		case "_EnterFlag", "_ExileFlag":
-			// "Return it with a finality counter on it" (EnterFlags).
-			e.add(enterFlagP2B(n, variant)...)
-			return variant == "If" || variant == "IfPassesFilter"
+			// "..., then each opponent who cast a spell with that name
+			// loses 8 life": actions among a search's steps.
+			if descend, ok := e.p2cLookAction(n, variant); ok {
+				return descend
+			}
+			return false
+		case "_EnterFlag", "_ExileFlag", "_TokenFlag":
+			// "Return it with N +1/+1 counters on it"; a conditional
+			// flag's flags are walked.
+			e.add(p2cEnterFlag(n, variant)...)
+			return strings.HasPrefix(variant, "If")
 		case "_Target", "_DistributedTarget":
 			if strings.HasSuffix(variant, "TargetPlayerControls") {
 				// "Up to five target permanents target player controls":
@@ -62,6 +67,11 @@ func (e *effects) walk(x any) {
 				// "You may A or B. When you do, ...": one of the actions
 				// runs, so they are alternatives.
 				var alts []any
+				// (A single field holding a list of branches, each an action list.)
+				if bs := list(rawArgs(n)); len(bs) > 0 && list(bs[0]) != nil {
+					e.alternatives(bs...)
+					return false
+				}
 				if bs := argsOf(n); len(bs) > 1 && allListsP2B(bs) {
 					// One action list per branch.
 					e.alternatives(bs...)
@@ -290,7 +300,14 @@ func (e *effects) action(n node, v string) {
 		// casting is the effect, as the Cast* actions.
 		e.add("play")
 		return
-	case (v == "MayCost" || v == "MustCost") && mayCostEffectP2B(e, v == "MustCost", arg(0)):
+	case v == "MayCost":
+		// "You may sacrifice a creature. If you do, ...": a cost paid while
+		// the ability resolves is done, as the gorge side's sub-ability
+		// Cost$ and UnlessCost$ are (p2cCost; a mana payment stays
+		// nothing).
+		e.p2cMayCost(arg(0))
+		return
+	case v == "MustCost" && mustCostEffectP2B(e, arg(0)):
 		return
 	case wrapperActions[v]:
 		return
@@ -315,7 +332,7 @@ func (e *effects) action(n node, v string) {
 		if t, ok := reflexiveB[strings.TrimSuffix(strings.TrimPrefix(v, "Reflexive_"), "_WhenYouDo")]; ok {
 			e.add(t)
 		}
-		e.add(reflexiveP2B(n, v)...)
+		e.p2cReflexive(n, v)
 		return
 	}
 	switch v {
@@ -330,11 +347,11 @@ func (e *effects) action(n node, v string) {
 	case "LoseLife":
 		e.add("loselife:" + gameNumber(arg(0)))
 	case "PermanentDealsDamage":
-		e.add("damage:" + gameNumber(arg(1)))
+		e.add(p2fDamageEach(arg(2), "damage:"+gameNumber(arg(1)))...)
 	case "SpellDealsDamage":
-		e.add("damage:" + gameNumber(arg(1)))
+		e.add(p2fDamageEach(arg(2), "damage:"+gameNumber(arg(1)))...)
 	case "DeadPermanentDealsDamage":
-		e.add("damage:" + gameNumber(arg(0)))
+		e.add(p2fDamageEach(arg(1), "damage:"+gameNumber(arg(0)))...)
 	case "SpellDealsMultipleDamage", "PermanentDealsMultipleDamage":
 		for _, d := range list(arg(1)) {
 			e.add("damage:" + gameNumber(argN(d, 0)))
@@ -371,7 +388,8 @@ func (e *effects) action(n node, v string) {
 	case "CreatePermanentsList":
 		// Names a set of permanents for the following actions.
 	case "PutACardFromHandOrGraveyardOnBattlefield":
-		e.add("move:hand>battlefield")
+		// From one of the two zones: both moves, as alternatives (map_p2d.go).
+		e.add("move:hand>battlefield", "move:graveyard>battlefield")
 	case "SearchLibrary":
 		e.add(searchToken(arg(0)))
 	case "CounterSpell":
@@ -490,7 +508,7 @@ func (e *effects) action(n node, v string) {
 	case "BecomeTheMonarch":
 		e.add("monarch")
 	case "EachPlayerCreatesTokens":
-		e.add("token:*")
+		e.p2cEachPlayerTokens(arg(1))
 	case "PutEachExiledCardOntoTheBattlefield":
 		e.add("move:exile>battlefield")
 	case "PutPermanentOnTopOfOwnersLibrary":
@@ -551,6 +569,8 @@ func (e *effects) action(n node, v string) {
 // lookMove maps a look-at/reveal-the-top sub-action to the move it makes.
 func lookMove(v string) string {
 	switch {
+	case p2fLookStays[v]:
+		return ""
 	case strings.Contains(v, "Cloak"):
 		return "cloak"
 	case strings.Contains(v, "Manifest"):
@@ -563,7 +583,9 @@ func lookMove(v string) string {
 		return "move:library>graveyard"
 	case strings.Contains(v, "Exile"):
 		return "move:library>exile"
-	case strings.Contains(v, "OfLibrary"), strings.Contains(v, "IntoLibrary"):
+	case strings.Contains(v, "OfLibrary"):
+		// (The rest shuffled back into the library is no move, as the
+		// gorge side's p2dDigRestStays.)
 		return "move:library>library"
 	}
 	return ""
@@ -624,7 +646,9 @@ func tokenToken(t any) string {
 		}
 	}
 	v := variantOf(t)
-	if strings.HasPrefix(v, "TokenCopy") || v == "TokenFromCopy" {
+	// OracleToken: "create a Mutavault token", a token of a named card
+	// (Forge: CopyPermanent DefinedName$).
+	if strings.HasPrefix(v, "TokenCopy") || v == "TokenFromCopy" || v == "OracleToken" {
 		return "tokencopy:" + count
 	}
 	if v == "ThoseTokens" {
@@ -698,6 +722,10 @@ func layerEffects(ls []any) []string {
 			out = append(out, "color")
 		case "SetName", "SetNameToTheChosenName":
 			out = append(out, "name")
+		case "ReplaceLandTypeVariableWithNewLandTypeVariable", "ReplaceCreatureTypeVariableWithNewCreatureType":
+			// A type word in the text box is changed (text-changing), as
+			// its colour-word sibling (map_d2.go), not a type change.
+			out = append(out, tokChangeText)
 		default:
 			if strings.Contains(v, "type") || strings.Contains(v, "Type") || v == "HasAllCreatureTypes" {
 				out = append(out, "type")
@@ -725,6 +753,9 @@ func grantToken(r any) string {
 		return "grant:" + keywordHeadToken(m.s.Keywords[0])
 	}
 	if t := grantTokenP2B(r, m.s); t != "" {
+		return t
+	}
+	if t, ok := p2dSameHeadGrant(m.s); ok {
 		return t
 	}
 	return "grant:ability"
@@ -839,15 +870,18 @@ func staticEffects(r any) []string {
 	case "ThisSpellEffect":
 		var out []string
 		for _, x := range list(rawArgs(r)) {
-			out = append(out, "spell:"+strings.ToLower(variantOf(x)))
+			out = append(out, p2cSpellToken(variantOf(x)))
 		}
 		return out
 	case "StackSpellsEffect":
 		var out []string
 		for _, x := range list(argN(r, 1)) {
-			out = append(out, stackSpellToken(variantOf(x)))
+			out = append(out, p2cSpellToken(variantOf(x)))
 		}
 		return out
+	}
+	if t, ok := p2dEachCardEffects(v, r); ok {
+		return t
 	}
 	return []string{"static:" + strings.ToLower(v)}
 }
@@ -929,6 +963,7 @@ func enterEffects(as []any) []string {
 			// not an effect; its consequence is mapped where it appears.
 		case strings.Contains(v, "Copy"):
 			out = append(out, "copy")
+			out = append(out, p2fReflexiveEnter(x)...)
 		case v == "If" || v == "Unless" || v == "IfPassesFilter" || v == "MayAction" || v == "MayActions":
 			for _, sub := range argsOf(x) {
 				if l := list(sub); l != nil {
