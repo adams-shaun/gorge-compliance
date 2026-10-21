@@ -571,10 +571,17 @@ func (g *gorgeNorm) selfGrantStatic(st *cards.Static) bool {
 			}
 		}
 	}
+	var folded []string
 	for _, name := range strings.Split(p["AddStaticAbility"], "&") {
 		if body, ok := g.svars()[strings.TrimSpace(name)]; ok {
 			if s, ok := cards.ParseStaticLine(body); ok {
-				g.static(&s)
+				if level {
+					// mtgish's levelStatic folds a level's static
+					// abilities into the level's one static.
+					folded = append(folded, p2cStaticEffects(g, &s)...)
+				} else {
+					g.static(&s)
+				}
 			}
 		}
 	}
@@ -587,11 +594,12 @@ func (g *gorgeNorm) selfGrantStatic(st *cards.Static) bool {
 		}
 		delete(rest, "AddKeyword")
 	}
-	if station || level {
-		// A level's P/T box and a Spacecraft's "becomes an artifact
-		// creature" at its threshold are the card's level/station
-		// structure (mtgish keeps them in LevelUp/StationChargedAnimate),
-		// not a printed ability.
+	if station {
+		// A Spacecraft's "becomes an artifact creature" at its threshold
+		// is the card's station structure (mtgish keeps it in
+		// StationChargedAnimate), not a printed ability. A level's P/T box
+		// stays: mtgish's levelStatic writes each level as one static
+		// with its setpt.
 		for _, k := range []string{"SetPower", "SetToughness", "AddType", "AddTypes"} {
 			delete(rest, k)
 		}
@@ -599,8 +607,9 @@ func (g *gorgeNorm) selfGrantStatic(st *cards.Static) bool {
 	eff := gorgeStaticEffects(st.Mode, rest)
 	if len(eff) == 1 && eff[0] == unmapped("Static.Continuous") {
 		// Nothing but the granted abilities.
-		return true
+		eff = nil
 	}
+	eff = append(eff, folded...)
 	if eff != nil {
 		g.ability(Ability{Kind: "static", Effects: eff})
 	}

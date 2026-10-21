@@ -204,3 +204,17 @@ func p2cCostActions(c string) []string {
 	}
 	return out
 }
+
+// p2cStaticEffects is the effect list g.static would give st as one
+// static ability (nil when it adds none), without adding it.
+func p2cStaticEffects(g *gorgeNorm, st *cards.Static) []string {
+	saved := g.s.Abilities
+	g.s.Abilities = nil
+	g.static(st)
+	var out []string
+	for _, a := range g.s.Abilities {
+		out = append(out, a.Effects...)
+	}
+	g.s.Abilities = saved
+	return out
+}
