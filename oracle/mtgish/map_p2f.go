@@ -215,3 +215,19 @@ func p2fParamTokens(a *cards.SA) []string {
 	}
 	return out
 }
+
+func init() {
+	// A one-card ChangeZone whose target is a spell or a permanent
+	// ("return target spell or nonland permanent"): both origins, as
+	// mtgish writes one return per zone (p2dOriginChoice). Graveyard,Exile
+	// is not one: scripts list Exile beside the graveyard for cards a
+	// replacement exiled (measured: 64 rows more).
+	for _, o := range []string{"Battlefield,Stack", "Stack,Battlefield"} {
+		p2dOriginChoice[o] = true
+	}
+	// mtgish's one action for the same choice: the card comes from the
+	// stack or the battlefield, one of the two (map_c2.go had move:*>hand).
+	extAction["ReturnSpellOrPermanentToOwnersHand"] = func(e *effects, _ node) {
+		e.merge([]*effects{{effects: []string{"move:battlefield>hand"}}, {effects: []string{"move:stack>hand"}}})
+	}
+}
