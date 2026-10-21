@@ -448,7 +448,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		if dest == "" {
 			dest = "Hand"
 		}
-		out = append(out, "move:library>"+strings.ToLower(dest))
+		if p["ChangeNum"] != "0" {
+			// ChangeNum$ 0: a reveal that puts none of them anywhere but
+			// back (map_p2d.go).
+			out = append(out, "move:library>"+strings.ToLower(dest))
+		}
 		n, m := literalOr(p["DigNum"], "1"), literalOr(p["ChangeNum"], "1")
 		if n == "*" || m == "*" || n != m {
 			rest := p["DestinationZone2"]

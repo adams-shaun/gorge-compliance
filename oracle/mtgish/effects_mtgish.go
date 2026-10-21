@@ -29,6 +29,10 @@ func (e *effects) walk(x any) {
 			if t := lookMove(variant); t != "" {
 				e.add(t)
 			}
+			if variant == "PlayerMillsNumberCards" {
+				// "Target opponent mills a card for each ..." (map_p2d.go).
+				e.add("mill:" + gameNumber(rawArgs(n)))
+			}
 			if strings.Contains(variant, "MayCast") {
 				// "You may cast a spell from among them without paying
 				// its mana cost": a cast (Forge: Play), map_p2d.go.
