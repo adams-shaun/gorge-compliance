@@ -59,7 +59,8 @@ func TestP2BGorgeSide(t *testing.T) {
 		sa   cards.SA
 		want string
 	}{
-		{"exile from two origins", cards.SA{API: "ChangeZone", Params: map[string]string{"Origin": "Hand,Graveyard", "Destination": "Exile"}}, "move:graveyard>exile"},
+		{"exile from two origins", cards.SA{API: "ChangeZone", Params: map[string]string{"Origin": "Hand,Graveyard,Exile", "Destination": "Exile"}}, "move:exile>exile move:graveyard>exile"},
+		{"exile from an origin choice (p2dChangeZone maps each)", cards.SA{API: "ChangeZone", Params: map[string]string{"Origin": "Hand,Graveyard", "Destination": "Exile"}}, "-"},
 		{"look at one card, else hand", cards.SA{API: "Dig", Params: map[string]string{"DigNum": "1", "ChangeNum": "1", "Optional": "True", "DestinationZone": "Battlefield", "DestinationZone2": "Hand"}}, "move:library>hand"},
 		{"alternative destination", cards.SA{API: "ChangeZone", Params: map[string]string{"Origin": "Graveyard", "Destination": "Hand", "DestinationAlternative": "Battlefield"}}, "move:graveyard>battlefield"},
 	} {
