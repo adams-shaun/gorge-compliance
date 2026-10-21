@@ -160,6 +160,13 @@ func init() {
 	// Choosing the exiled card a craft-copy equipment copies is a choice
 	// feeding the copy effect, as the gorge side's ChooseCard (no token).
 	extAction["ChooseAnExiledCardToCopy"] = func(*effects, node) {}
+	// A conspiracy's start-of-game rule (Backup Plan's extra opening
+	// hand, Power Play's "you are the starting player") acts before the
+	// game, as mtgish's AsGameBegins: a pregame ability. (Its draft-matters
+	// siblings, AsSelfDraft and FaceUpDraftEffect, act in the draft only
+	// and are excluded instead.)
+	extRule["DrawAnAdditionalHandBeforeMulligans"] = pregameRule
+	extRule["YouAreTheStartingPlayer"] = pregameRule
 }
 
 // p2aRevealedDraw maps "<players> reveal each card they draw", which
