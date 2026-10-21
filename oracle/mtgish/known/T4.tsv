@@ -357,7 +357,7 @@ Giant Trap Door Spider	T4	effects	-	move:battlefield>exile	equivalent	one Change
 Gideon Jura	T4	effects	delayed rule:mustattack	player:mustattackplaneswalkerwitheachcreature	equivalent	must-attack written as an Effect with a static; mtgish one player rule
 Gideon's Phalanx	T4	effects	grant:indestructible	grant:vigilance	mtgish-bug	spell-mastery grant encoded as vigilance (the token keyword reused) for indestructible; #1 class
 Gideon, the Oathsworn	T4	effects	-	color move:battlefield>exile	equivalent	Gideon is already white (no color change scripted); one ChangeZoneAll exiles Gideon and the creatures
-Gift of Doom	T4	effects	attach	-	mtgish-bug	turned-face-up attach clause dropped (morph line lost, mtgish#1)
+Gift of Doom	T4	effects	attach	-	equivalent	mtgish models it as Morph + AsPermanentIsTurnedFaceUp with a may-attach (checked 2026-10-21); the attach sits in a nested may-action
 Gitrog, Horror of Zhava	T4	effects	sacrifice	-	equivalent	opponent sacrifice is AnyPlayerMayCost in mtgish (cost vs effect)
 Gix, Yawgmoth Praetor	T4	effects	play	mayplay mayplay	equivalent	free cast from exile: Play action vs mtgish permission
 Glamerdye	T4	effects	-	effect	equivalent	mtgish adds an unnamed effect for the colour-word replacement; one changetext in the script
