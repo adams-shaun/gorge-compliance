@@ -29,7 +29,12 @@ func (e *effects) walk(x any) {
 			if t := lookMove(variant); t != "" {
 				e.add(t)
 			}
-			return variant == "If" || variant == "Unless"
+			if a := argsOf(n); variant == "IfElse" && len(a) == 3 {
+				// "Instead put two of them into your hand": one branch runs.
+				e.alternatives(a[1], a[2])
+				return false
+			}
+			return variant == "If" || variant == "Unless" || variant == "MayAction" || variant == "MayActions"
 		case "_Target", "_DistributedTarget":
 			if strings.HasSuffix(variant, "TargetPlayerControls") {
 				// "Up to five target permanents target player controls":
@@ -253,6 +258,8 @@ func (e *effects) action(n node, v string) {
 		// "You may cast that card" written as a cost the player may pay:
 		// casting is the effect, as the Cast* actions.
 		e.add("play")
+		return
+	case (v == "MayCost" || v == "MustCost") && mayCostEffectP2B(e, arg(0)):
 		return
 	case wrapperActions[v]:
 		return
@@ -522,7 +529,7 @@ func lookMove(v string) string {
 		return "move:library>graveyard"
 	case strings.Contains(v, "Exile"):
 		return "move:library>exile"
-	case strings.Contains(v, "OfLibrary"):
+	case strings.Contains(v, "OfLibrary"), strings.Contains(v, "IntoLibrary"):
 		return "move:library>library"
 	}
 	return ""
@@ -855,7 +862,11 @@ func castEffectToken(v string) string {
 // replacementEffects maps a Replace*/PreventDamage rule to verbs.
 func replacementEffects(r any) []string {
 	v := variantOf(r)
-	return []string{"replace:" + strings.ToLower(strings.TrimPrefix(v, "Replace"))}
+	t := "replace:" + strings.ToLower(strings.TrimPrefix(v, "Replace"))
+	if c, ok := replCanonP2B[t]; ok {
+		t = c
+	}
+	return []string{t}
 }
 
 // enterEffects maps the actions of an "As this enters" replacement.
