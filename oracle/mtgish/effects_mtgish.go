@@ -44,6 +44,11 @@ func (e *effects) walk(x any) {
 			}
 			return variant == "If" || variant == "Unless" || variant == "MayAction" || variant == "MayActions"
 		case "_SearchLibraryAction":
+			if variant == "CastFoundCardsWithoutPaying" {
+				// "Search ... and cast that card without paying its mana
+				// cost": the cast is the effect (gorge: Play).
+				e.add("play")
+			}
 			if strings.HasPrefix(variant, "PutFoundCards") {
 				// "Put it onto the battlefield with an additional +1/+1 counter".
 				e.p2iTokenFlags(rawArgs(n))

@@ -94,3 +94,13 @@ func init() {
 	// done (gorge: LoseLife / the sub-ability's PayLife).
 	extAction["PayAnyAmountOfLife"] = func(e *effects, n node) { e.add("loselife:*") }
 }
+
+// p2iParamTokens maps parameters of a move that mtgish writes as an action
+// of their own: AttachAfter$ ("put it onto the battlefield, attach it to a
+// creature you control") is an Attach.
+func p2iParamTokens(a *cards.SA) []string {
+	if a.Params["AttachAfter"] != "" && (a.API == "ChangeZone" || a.API == "CopyPermanent") {
+		return []string{"attach"}
+	}
+	return nil
+}
