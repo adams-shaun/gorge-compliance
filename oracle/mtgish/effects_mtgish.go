@@ -32,6 +32,17 @@ func (e *effects) walk(x any) {
 				return descend
 			}
 			return variant == "If" || variant == "Unless"
+		case "_SearchLibraryAction":
+			// "..., then each opponent who cast a spell with that name
+			// loses 8 life": actions among a search's steps.
+			if descend, ok := e.p2cLookAction(n, variant); ok {
+				return descend
+			}
+			return false
+		case "_EnterFlag":
+			// "Return it with N +1/+1 counters on it".
+			e.add(p2cEnterFlag(n, variant)...)
+			return false
 		case "_Target", "_DistributedTarget":
 			if strings.HasSuffix(variant, "TargetPlayerControls") {
 				// "Up to five target permanents target player controls":

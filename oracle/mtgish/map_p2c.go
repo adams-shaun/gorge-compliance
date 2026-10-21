@@ -153,6 +153,12 @@ func (e *effects) p2cReflexive(v string, a []any) {
 		e.add("loselife:*")
 	case "Draw":
 		e.add("draw:*")
+	case "Amass":
+		e.add("amass")
+	case "CreatureConnives":
+		e.add("connive")
+	case "Surveil":
+		e.add("surveil:*")
 	}
 }
 
@@ -178,6 +184,13 @@ func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
 	// keeps inside the token.
 	if v := a.Params["AtEOTTrig"]; strings.HasPrefix(v, "You_") {
 		e.add(atEOTTokens(v)...)
+	}
+	if ct := a.Params["WithCountersType"]; ct != "" && ct != "TIME" && (a.Params["Destination"] == "Battlefield" || a.Params["DestinationZone"] == "Battlefield") {
+		// "Return it to the battlefield with a finality counter on it"
+		// (mtgish's EntersWith*Counter* flag, p2cEnterFlag). Time
+		// counters are suspend's, which both sides name by the
+		// suspend/exile action.
+		e.add(gorgeCounterTokens(ct, literalOr(a.Params["WithCountersAmount"], "1"))...)
 	}
 	if a.API == "CopyPermanent" {
 		for _, k := range strings.Split(a.Params["PumpKeywords"], "&") {
@@ -443,4 +456,32 @@ func p2cSpellToken(v string) string {
 		return "costreduction"
 	}
 	return "spell:" + strings.ToLower(v)
+}
+
+// p2cEnterFlag maps an enter flag that puts counters on the entering
+// permanent (gorge: WithCountersType$ on the move).
+func p2cEnterFlag(n node, v string) []string {
+	if !strings.HasPrefix(v, "EntersWith") || !strings.Contains(v, "Counter") {
+		return nil
+	}
+	a := argsOf(n)
+	ct, num := "", "*"
+	for _, x := range a {
+		switch enumOf(x) {
+		case "CounterType":
+			ct = counterType(x)
+		case "GameNumber":
+			num = gameNumber(x)
+		}
+	}
+	if ct == "" {
+		return []string{"counters:*"}
+	}
+	if ct == "time" {
+		return nil
+	}
+	if strings.Contains(v, "ACounter") || strings.Contains(v, "AnAdditional") {
+		num = "1"
+	}
+	return []string{"counters:" + ct + ":" + num}
 }
