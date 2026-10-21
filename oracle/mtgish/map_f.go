@@ -585,6 +585,18 @@ func (g *gorgeNorm) selfGrantStatic(st *cards.Static) bool {
 			}
 		}
 	}
+	if level {
+		// A level's replacement ("if a source would deal damage to it,
+		// prevent 1 of it"): a printed replacement, as mtgish's level.
+		for _, k := range []string{"AddReplacementEffects", "AddReplacementEffect"} {
+			for _, name := range strings.Split(p[k], "&") {
+				if rp := svarParams(g.svars()[strings.TrimSpace(name)]); rp["Event"] != "" {
+					g.repl(&cards.Repl{Event: rp["Event"], Params: rp})
+				}
+			}
+			delete(rest, k)
+		}
+	}
 	delete(rest, "AddAbility")
 	delete(rest, "AddTrigger")
 	delete(rest, "AddStaticAbility")

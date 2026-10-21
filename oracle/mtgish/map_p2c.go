@@ -20,6 +20,13 @@ var p2cReplSynonyms = map[string]string{
 }
 
 func init() {
+	d2PlayerSynonyms["CantUntapMoreThanNumberPermanentsDuringTheirUntapStep"] = "player:untapadjust"
+	d2PlayerSynonyms["ChoosesHowCreaturesBlock"] = "player:chooseswhichcreaturesblockandhowtheyblock"
+	d2PlayerSynonyms["MayPayAlternateCostForFirstUnearthCostEachTurn"] = "alternativecost"
+	// A search step "each opponent who ... loses N life".
+	if extAction["EachPlayerLosesLife"] == nil {
+		extAction["EachPlayerLosesLife"] = func(e *effects, n node) { e.add("loselife:" + gameNumber(argN(n, 1))) }
+	}
 	// "Each player secretly chooses a number; the lowest ...": the
 	// chosen-number sub-abilities run (Goblin Game's shape).
 	if extSVarRefs["ChooseNumber"] == nil {

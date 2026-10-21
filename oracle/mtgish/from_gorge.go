@@ -922,7 +922,7 @@ func affectsPermanents(affected string) bool {
 // ("MustBeBlockedBy Creature.Eldrazi": "must be blocked by an Eldrazi if
 // able") to the rule token mtgish's PermanentRuleEffect carries.
 func grantedRule(k string) (string, bool) {
-	if strings.HasPrefix(k, "Prevent all damage that would be dealt by CARDNAME") {
+	if strings.HasPrefix(k, "Prevent all") && strings.Contains(k, "dealt by CARDNAME") {
 		// A prevention shield on the object (mtgish's prevention).
 		return "prevent", true
 	}
