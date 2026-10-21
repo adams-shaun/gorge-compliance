@@ -59,13 +59,26 @@ func p2iReplCounters(a *cards.SA, r cards.Repl, svars map[string]string) []strin
 	return out
 }
 
-func init() {
-	// "For each of them, pay N life or ...": the look's per-card payment, a
-	// cost done while the spell resolves (gorge: the sub-ability's
-	// UnlessCost$, p2cCost).
-	extAction["ForEachCardPutIntoGraveyardUnlessCost"] = func(e *effects, n node) {
+// p2iLookCost adds the payment of a look step whose move is conditional on
+// a cost ("for each card, put it into your graveyard unless you pay 2
+// life"): the cost is done while the spell resolves (gorge: the
+// sub-ability's UnlessCost$, p2cCost).
+func (e *effects) p2iLookCost(n node, variant string) {
+	if variant == "ForEachCardPutIntoGraveyardUnlessCost" {
 		e.p2cMayCost(rawArgs(n))
 	}
+}
+
+// p2iTokenFlags maps the counters a token enters with (the flags of
+// CreateTokens: "The token enters with X +1/+1 counters on it"; gorge: the
+// Token's WithCountersType$).
+func (e *effects) p2iTokenFlags(flags any) {
+	for _, f := range list(flags) {
+		e.add(p2cEnterFlag(node{"_TokenFlag": variantOf(f), "args": rawArgs(f)}, variantOf(f))...)
+	}
+}
+
+func init() {
 	// "Discard a card for each card drawn unless you sacrifice a permanent":
 	// the repeated cost is paid, so its action counts (a MayCost).
 	extAction["RepeatedMayCost"] = func(e *effects, n node) {
