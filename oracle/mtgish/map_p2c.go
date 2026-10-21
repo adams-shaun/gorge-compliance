@@ -20,6 +20,13 @@ var p2cReplSynonyms = map[string]string{
 }
 
 func init() {
+	// "Each player secretly chooses a number; the lowest ...": the
+	// chosen-number sub-abilities run (Goblin Game's shape).
+	if extSVarRefs["ChooseNumber"] == nil {
+		extSVarRefs["ChooseNumber"] = func(a *cards.SA) []string {
+			return []string{a.Params["ChooseNumberSubAbility"], a.Params["Lowest"], a.Params["Highest"]}
+		}
+	}
 	// "Players can't activate abilities that aren't mana abilities":
 	// S:Mode$ CantBeActivated with a non-mana filter.
 	d2PlayerSynonyms["CantActivateNonManaAbilities"] = "rule:cantbeactivated"
@@ -155,6 +162,16 @@ func (e *effects) p2cReflexive(v string, a []any) {
 		e.add("draw:*")
 	case "Amass":
 		e.add("amass")
+	case "PutOnBattlefield":
+		// "You may put any number of Equipment cards from among them
+		// onto the battlefield. When you do, ...".
+		if len(a) > 0 {
+			for _, x := range list(a[0]) {
+				if z := p2cCardZone(variantOf(x)); z != "" {
+					e.add("move:" + z + ">battlefield")
+				}
+			}
+		}
 	case "CreatureConnives":
 		e.add("connive")
 	case "Surveil":
@@ -191,6 +208,10 @@ func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
 		// counters are suspend's, which both sides name by the
 		// suspend/exile action.
 		e.add(gorgeCounterTokens(ct, literalOr(a.Params["WithCountersAmount"], "1"))...)
+	}
+	if ct := a.Params["CounterType2"]; ct != "" {
+		// PutCounterAll's second group ("and a plan counter on this").
+		e.add(gorgeCounterTokens(ct, literalOr(a.Params["CounterNum2"], "1"))...)
 	}
 	if a.API == "CopyPermanent" {
 		for _, k := range strings.Split(a.Params["PumpKeywords"], "&") {
@@ -484,4 +505,19 @@ func p2cEnterFlag(n node, v string) []string {
 		num = "1"
 	}
 	return []string{"counters:" + ct + ":" + num}
+}
+
+// p2cCardZone is the zone a card-selection variant names.
+func p2cCardZone(v string) string {
+	switch {
+	case strings.Contains(v, "Library"):
+		return "library"
+	case strings.Contains(v, "Hand"):
+		return "hand"
+	case strings.Contains(v, "Graveyard"):
+		return "graveyard"
+	case strings.Contains(v, "Exile"):
+		return "exile"
+	}
+	return ""
 }
