@@ -112,3 +112,70 @@ func enterFlagP2B(n node, v string) []string {
 	}
 	return nil
 }
+
+// reflexiveHeadP2B maps the action half of mtgish's
+// "Reflexive_<Action>_When..." ("return it to the battlefield. When you
+// do, ...") for actions a script writes as an effect, keyed by <Action>.
+// A cost-shaped half (sacrifice, discard, pay, tap, remove counters,
+// collect evidence) stays a cost, as the core case keeps it.
+var reflexiveHeadP2B = map[string]func(n node) []string{
+	"PutOnBattlefield": func(n node) []string {
+		return []string{"move:" + reflexiveZoneP2B(argN(n, 0)) + ">battlefield"}
+	},
+	"Exile": func(n node) []string {
+		var out []string
+		for _, x := range list(argN(n, 0)) {
+			if z := exilableZone(x); z != "graveyard" {
+				// Exiling from a graveyard "when you do" is a cost in
+				// scripts (Cost$ ExileFromGrave), as in mtgish.
+				out = append(out, "move:"+z+">exile")
+			}
+		}
+		return dedup(out)
+	},
+	"DealDamage":                       fixedP2B("damage:*"),
+	"Fight":                            fixedP2B("fight"),
+	"Surveil":                          fixedP2B("surveil:*"),
+	"Amass":                            fixedP2B("amass"),
+	"Attach":                           fixedP2B("attach"),
+	"HavePlayerGainControlOfPermanent": fixedP2B("gaincontrol"),
+	"RollDice":                         fixedP2B("dice"),
+	"FlipACoin":                        fixedP2B("coin"),
+	"CreatureConnives":                 fixedP2B("connive"),
+	"AddMana":                          fixedP2B("mana"),
+	"PutAPermanentInOwnersHand":        fixedP2B("move:battlefield>hand"),
+	"SearchLibrary":                    fixedP2B("search:*"),
+	"RevealTheTopNumberCardsOfLibrary": fixedP2B("dig:*"),
+	"RevealCardsFromTheTopOfLibraryUntilACardOfTypeIsRevealed": fixedP2B("diguntil"),
+}
+
+func fixedP2B(t ...string) func(node) []string { return func(node) []string { return t } }
+
+func reflexiveP2B(n node, v string) []string {
+	head, _, _ := strings.Cut(strings.TrimPrefix(v, "Reflexive_"), "_When")
+	if f, ok := reflexiveHeadP2B[head]; ok {
+		return f(n)
+	}
+	return nil
+}
+
+// reflexiveZoneP2B is the zone of the first card a reflexive put moves
+// (CardInHand, CardInGraveyard, CardInExile, ...).
+func reflexiveZoneP2B(objs any) string {
+	l := list(objs)
+	if len(l) == 0 {
+		return "*"
+	}
+	v := variantOf(l[0])
+	switch {
+	case strings.Contains(v, "Hand"):
+		return "hand"
+	case strings.Contains(v, "Graveyard"):
+		return "graveyard"
+	case strings.Contains(v, "Exile"):
+		return "exile"
+	case strings.Contains(v, "Librar"):
+		return "library"
+	}
+	return "*"
+}

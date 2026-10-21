@@ -292,6 +292,7 @@ func (e *effects) action(n node, v string) {
 		if t, ok := reflexiveB[strings.TrimSuffix(strings.TrimPrefix(v, "Reflexive_"), "_WhenYouDo")]; ok {
 			e.add(t)
 		}
+		e.add(reflexiveP2B(n, v)...)
 		return
 	}
 	switch v {
