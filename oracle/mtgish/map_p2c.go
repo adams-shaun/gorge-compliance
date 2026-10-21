@@ -20,6 +20,13 @@ var p2cReplSynonyms = map[string]string{
 }
 
 func init() {
+	// "This creature assigns no combat damage this turn": S:Mode$
+	// AssignNoCombatDamage (usually inside an Effect), mtgish's rule.
+	if extStatic["AssignNoCombatDamage"] == nil {
+		extStatic["AssignNoCombatDamage"] = func(p map[string]string) []string {
+			return []string{"rule:assignsnocombatdamage"}
+		}
+	}
 	// "Can't block unless ... attacking player": S:Mode$ CantBlockBy /
 	// CantBlock with a condition, as CantAttackUnlessDefendingPlayer is
 	// rule:cantattack.
