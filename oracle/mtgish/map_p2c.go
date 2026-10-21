@@ -11,13 +11,32 @@ import (
 // Quintorius, Loremaster). Each fix is a place where both encodings say the
 // same thing and the two normalisers rendered it differently.
 
+func init() {
+	// Cost variants a MustCost/MayCost carries (costAsAction falls back
+	// to the action of the same name): tapping permanents.
+	for _, v := range []string{"TapAPermanent", "TapNumberPermanents", "TapAnyNumberOfPermanents", "TapAnyNumberOfGroupPermanents", "TapNumberGroupPermanents"} {
+		if extAction[v] == nil {
+			extAction[v] = func(e *effects, n node) { e.add("tap") }
+		}
+	}
+}
+
 // p2cMustCost summarises a cost the player must pay ("sacrifice two
 // Swamps. If you can't, ..."; mtgish's MustCost). Paying it is done, so it
 // is the action, as EachPlayerMustCost and PlayerMustCost are; a payment of
 // mana or energy is a payment and maps to nothing on both sides.
 func (e *effects) p2cMustCost(c any) {
-	switch variantOf(c) {
-	case "PayEnergy":
+	v := variantOf(c)
+	switch {
+	case strings.HasPrefix(v, "Reveal"), v == "BeholdA":
+		// "Look at the top card. You may reveal it": the reveal of a
+		// card already seen is not an effect (gorge: RevealOptional$).
+		return
+	}
+	switch v {
+	case "PayEnergy", "PayOneOrMoreEnergy":
+	case "PayAnyAmountOfLife":
+		e.add("loselife:*")
 	case "UnspecializeGraveyardCard":
 		// Alchemy specialize, undone from the graveyard: gorge's
 		// SetState Mode$ Unspecialize.
@@ -26,16 +45,67 @@ func (e *effects) p2cMustCost(c any) {
 		e.add("move:battlefield>ante")
 	case "ShuffleACardFromHandIntoLibrary":
 		e.add("move:hand>library:1")
+	case "PutAGraveyardCardOnTheBottomOfItsOwnersLibrary":
+		e.add("move:graveyard>library")
+	case "PutANumberOfExiledCardsIntoOwnersGraveyard":
+		e.add("move:exile>graveyard")
+	case "PutTopCardOfEachPlayersLibraryInGraveyard":
+		e.add("move:library>graveyard")
+	case "LookAtPlayersHandAndChooseACardToExile", "LookAtPlayersHandAndChooseACardToExileUntil":
+		e.add("move:hand>exile")
+	case "UnattachAPermanentFromAPermanent":
+		e.add("unattach")
+	case "SuspectAPermanent":
+		e.add("alterattribute")
 	default:
 		e.costAsAction(c)
 	}
 }
 
-// p2cCost is the gorge side of p2cMustCost: a resolving sub-ability's
-// Cost$ (or UnlessCost$) written "Mandatory <cost>" is a cost its controller
-// must pay when it resolves ("sacrifice it. If you do, ..."), so the parts
-// that are actions count as actions. An optional cost ("you may sacrifice
-// ...") stays a cost, as mtgish's MayCost.
+// p2cReflexive maps the cost half of mtgish's "Reflexive_<Cost>_<When>"
+// ("you may sacrifice a creature. When you do, ..."): an optional cost paid
+// while the ability resolves is done, as a MayCost is (p2cMustCost). The
+// core Reflexive_ case keeps the keyword-action halves; a mana or energy
+// payment stays nothing.
+func (e *effects) p2cReflexive(v string, a []any) {
+	half := strings.TrimPrefix(v, "Reflexive_")
+	if i := strings.IndexByte(half, '_'); i >= 0 {
+		half = half[:i]
+	}
+	switch half {
+	case "Sacrifice", "PlayerSacrifices":
+		e.add("sacrifice")
+	case "Discard":
+		e.add("discard:*")
+	case "Exile":
+		if len(a) > 0 {
+			for _, x := range list(a[0]) {
+				e.add("move:" + exilableZone(x) + ">exile")
+			}
+		}
+	case "RemoveCounters":
+		e.add("countersremove")
+	case "Tap":
+		e.add("tap")
+	case "PutAPermanentInOwnersHand":
+		e.add("move:battlefield>hand")
+	case "PayLife":
+		e.add("loselife:*")
+	case "Draw":
+		e.add("draw:*")
+	}
+}
+
+// p2cCost is the gorge side of p2cMustCost and p2cReflexive: a cost paid
+// while an ability resolves -- a sub-ability's or reflexive trigger's
+// Cost$ ("you may sacrifice it. If you do, ..."; "Mandatory" when it must
+// be paid), or an UnlessCost$ its controller pays ("tap it unless you
+// sacrifice a creature", "you may discard a card. If you do", written
+// UnlessSwitched$) -- is done, so the parts that are actions count as
+// actions, as mtgish's MayCost/MustCost/Reflexive_ halves do. An activated
+// ability's own Cost$ (depth 0) stays a cost on both sides. An UnlessCost$
+// another player pays is mtgish's PlayerMayCost family, which stays a
+// cost.
 func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
 	// "Create a token that's a copy of ... It gains haste": the keywords
 	// a CopyPermanent grants its copies, as mtgish's separate layer effect
@@ -48,38 +118,88 @@ func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
 			}
 		}
 	}
-	if depth == 0 {
-		return
+	if d := a.Params["Defined"]; a.API == "Discard" && a.Params["UnlessType"] != "" && (d == "" || d == "You") {
+		// "Discard two cards unless you discard an artifact card": the
+		// other discard, as mtgish's MayCost before its Unless.
+		e.add("discard:1")
 	}
-	for _, k := range []string{"Cost", "UnlessCost"} {
-		c, ok := strings.CutPrefix(a.Params[k], "Mandatory ")
-		if !ok {
-			continue
+	if c := a.Params["Cost"]; c != "" && depth > 0 {
+		e.add(p2cCostActions(strings.TrimPrefix(c, "Mandatory "))...)
+	}
+	if c := a.Params["UnlessCost"]; c != "" {
+		if payer := a.Params["UnlessPayer"]; payer == "" || payer == "You" {
+			e.add(p2cCostActions(strings.TrimPrefix(c, "Mandatory "))...)
 		}
-		e.add(p2cCostActions(c)...)
 	}
 }
 
-// p2cCostActions maps the action parts of a Forge cost string.
+// p2cCostParts splits a Forge cost string on spaces outside <...>.
+func p2cCostParts(c string) []string {
+	var out []string
+	depth, start := 0, 0
+	for i := 0; i <= len(c); i++ {
+		switch {
+		case i == len(c) || (c[i] == ' ' && depth == 0):
+			if i > start {
+				out = append(out, c[start:i])
+			}
+			start = i + 1
+		case c[i] == '<':
+			depth++
+		case c[i] == '>' && depth > 0:
+			depth--
+		}
+	}
+	return out
+}
+
+// p2cCostActions maps the action parts of a Forge cost string; mana,
+// energy, reveals and the like are payments and map to nothing.
 func p2cCostActions(c string) []string {
 	var out []string
-	for _, part := range strings.Fields(c) {
-		head, _, _ := strings.Cut(part, "<")
+	for _, part := range p2cCostParts(c) {
+		head, rest, _ := strings.Cut(part, "<")
+		rest = strings.TrimSuffix(rest, ">")
+		args := strings.Split(rest, "/")
+		n := literalOr(args[0], "*")
+		kind := ""
+		if len(args) > 1 {
+			kind = args[1]
+		}
 		switch head {
 		case "Sac":
 			out = append(out, "sacrifice")
 		case "PayLife":
-			n := "*"
-			if _, rest, ok := strings.Cut(part, "<"); ok {
-				n = literalOr(strings.TrimSuffix(rest, ">"), "*")
-			}
 			out = append(out, "loselife:"+n)
 		case "Exile":
 			out = append(out, "move:battlefield>exile")
-		case "ExileFromGrave":
+		case "ExileFromGrave", "ExileAnyGrave":
 			out = append(out, "move:graveyard>exile")
+		case "ExileFromHand":
+			out = append(out, "move:hand>exile")
+		case "ExileFromTop":
+			out = append(out, "move:library>exile")
+		case "ExiledMoveToGrave":
+			out = append(out, "move:exile>graveyard")
 		case "Discard":
-			out = append(out, "discard:*")
+			if kind == "Hand" {
+				n = "*"
+			}
+			out = append(out, "discard:"+n)
+		case "Draw":
+			out = append(out, "draw:"+n)
+		case "Return":
+			out = append(out, "move:battlefield>hand")
+		case "tapXType":
+			out = append(out, "tap")
+		case "SubCounter", "RemoveAnyCounter":
+			out = append(out, "countersremove")
+		case "Mill":
+			out = append(out, "mill:"+n)
+		case "PutCardToLibFromGrave":
+			out = append(out, "move:graveyard>library")
+		case "Blight":
+			out = append(out, "blight")
 		}
 	}
 	return out

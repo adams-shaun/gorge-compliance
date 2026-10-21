@@ -254,7 +254,7 @@ func (e *effects) action(n node, v string) {
 		// casting is the effect, as the Cast* actions.
 		e.add("play")
 		return
-	case v == "MustCost":
+	case v == "MustCost" || v == "MayCost":
 		// "Sacrifice two Swamps. If you can't, ...": a cost the player
 		// must pay is done, as EachPlayerMustCost and PlayerMustCost
 		// (a mana payment stays nothing, costAsAction).
@@ -283,6 +283,7 @@ func (e *effects) action(n node, v string) {
 		if t, ok := reflexiveB[strings.TrimSuffix(strings.TrimPrefix(v, "Reflexive_"), "_WhenYouDo")]; ok {
 			e.add(t)
 		}
+		e.p2cReflexive(v, a)
 		return
 	}
 	switch v {

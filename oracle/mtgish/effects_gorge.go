@@ -427,7 +427,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		}
 		out = append(out, "move:library>"+strings.ToLower(dest))
 		n, m := literalOr(p["DigNum"], "1"), literalOr(p["ChangeNum"], "1")
-		if n == "*" || m == "*" || n != m {
+		// A filtered or optional pick can leave the card for the rest's
+		// zone even when all are picked ("if it's a land, you may put it
+		// onto the battlefield; otherwise put it into your hand").
+		picky := (p["ChangeValid"] != "" || p["Optional"] == "True") && p["DestinationZone2"] != ""
+		if n == "*" || m == "*" || n != m || picky {
 			rest := p["DestinationZone2"]
 			if rest == "" {
 				rest = "Library"
