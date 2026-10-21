@@ -76,7 +76,7 @@ func c1PlayerEffects(i int) func(*effects, node) {
 func c1Rules(i int) func(*effects, node) {
 	return func(e *effects, n node) {
 		for _, r := range list(argN(n, i)) {
-			e.add("rule:" + ruleWord(variantOf(r)))
+			e.add(ruleToken(variantOf(r)))
 		}
 	}
 }

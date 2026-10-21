@@ -78,6 +78,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 		e.add(paramTokensP2B(a)...)
 		e.add(p2fParamTokens(a)...)
 		e.add(p2iParamTokens(a)...)
+		e.add(p2jParamTokens(a)...)
 		if a.API == "Effect" {
 			// The triggers an effect creates run their own effects, as
 			// mtgish's CreateTriggerUntil actions do. An emblem's triggers

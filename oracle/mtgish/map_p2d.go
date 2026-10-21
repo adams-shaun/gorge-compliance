@@ -391,7 +391,7 @@ func p2dAnimateExtra(p map[string]string) []string {
 // object: it only carries a leave-the-battlefield replacement (mapped as
 // "effect" by the chain) or an AI hint (sVars$).
 func p2dAnimateCarrier(p map[string]string) bool {
-	return p["LeaveBattlefield"] != "" || p["sVars"] != ""
+	return p["LeaveBattlefield"] != "" || p["sVars"] != "" || p["AtEOT"] != ""
 }
 
 // A cost a player must pay ("sacrifice it. If you do, ...", "discard a

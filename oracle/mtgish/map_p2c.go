@@ -519,7 +519,10 @@ func p2cEffectRepl(a *cards.SA, r cards.Repl, svars map[string]string) []string 
 		// CreateReplaceWouldDealDamageUntil effect.
 		return []string{"effect"}
 	}
-	return p2iReplCounters(a, r, svars)
+	if out := p2iReplCounters(a, r, svars); out != nil {
+		return out
+	}
+	return p2jEffectRepl(r)
 }
 
 // p2cPlayerKeyword maps a keyword a Pump gives a player ("you gain shroud

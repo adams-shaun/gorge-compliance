@@ -55,6 +55,10 @@ func (e *effects) walk(x any) {
 			}
 			// "..., then each opponent who cast a spell with that name
 			// loses 8 life": actions among a search's steps.
+			if variant == "PutFoundCardsOntoBattlefield" {
+				// "...onto the battlefield with N counters": the flags are walked.
+				return true
+			}
 			if descend, ok := e.p2cLookAction(n, variant); ok {
 				return descend
 			}
@@ -582,6 +586,10 @@ func lookMove(v string) string {
 	switch {
 	case p2fLookStays[v]:
 		return ""
+	case strings.HasPrefix(v, "Conjure"):
+		// "Conjure a duplicate of it onto the battlefield": a conjure, not a
+		// move out of the library.
+		return "conjure"
 	case strings.Contains(v, "Cloak"):
 		return "cloak"
 	case strings.Contains(v, "Manifest"):

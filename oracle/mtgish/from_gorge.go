@@ -643,7 +643,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		}
 		return []string{"costincrease"}
 	case "CantBlockBy":
-		if p["ValidBlocker"] != "" && p["ValidAttacker"] == "" && p["ValidAttackerRelative"] == "" {
+		if p["ValidBlocker"] != "" && (p["ValidAttacker"] == "" || p["ValidAttacker"] == "Creature") && p["ValidAttackerRelative"] == "" {
 			// "Creatures with power 7 or greater can't block": the
 			// blockers named, no attacker.
 			return []string{"rule:cantblock"}
@@ -862,6 +862,7 @@ func (g *gorgeNorm) enterEffects(r *cards.Repl) []string {
 			out = append(out, "reveal")
 		case a.API == "Clone":
 			out = append(out, "copy")
+			out = append(out, p2jCloneExtras(a)...)
 		case a.API == "PutCounter":
 			out = append(out, gorgeCounterTokens(a.Params["CounterType"], literalOr(a.Params["CounterNum"], "1"))...)
 		case a.API == "InternalEtbReplacement" || a.API == "Cleanup":
