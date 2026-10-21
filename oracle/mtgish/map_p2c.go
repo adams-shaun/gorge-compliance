@@ -25,6 +25,10 @@ var p2cReplSynonyms = map[string]string{
 }
 
 func init() {
+	// A choice whose result the next action reads (the copy).
+	if extAction["ChooseAnExiledCardToCopy"] == nil {
+		extAction["ChooseAnExiledCardToCopy"] = func(e *effects, n node) {}
+	}
 	d2PlayerSynonyms["CantBlockWithMoreThanOneCreature"] = "blockrestrict:1"
 	// "Each player may attack only the nearest opponent": an attack
 	// restriction (S:Mode$ CantAttack), not a play permission.
@@ -36,8 +40,9 @@ func init() {
 		"AttachAPermanentToAPlayer": "attach",
 		// "As this transforms, it becomes a copy of an exiled card ...
 		// with N +1/+1 counters".
-		"BecomeACopyOfAnExiledCard":    "copy",
-		"TransformsWithNumberCounters": "counters:*",
+		"BecomeACopyOfAnExiledCard":           "copy",
+		"TransformsWithNumberCounters":        "counters:*",
+		"SacrificeAnyNumberOfGroupPermanents": "sacrifice",
 	} {
 		t := t
 		if extAction[v] == nil {

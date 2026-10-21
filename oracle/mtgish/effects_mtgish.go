@@ -816,7 +816,7 @@ func staticEffects(r any) []string {
 	case "PlayerEffect", "EachPlayerEffect", "PlayerEffect_PlayerMayPayToIgnoreEffectUntil":
 		var out []string
 		for _, x := range list(a[1]) {
-			if variantOf(x) == "SpellsCastHaveAbility" {
+			if v := variantOf(x); v == "SpellsCastHaveAbility" || v == "SpellsCastFromHandHaveAbility" {
 				// "Sliver spells you cast have replicate": spell
 				// effects (gorge: Continuous AffectedZone$ Stack).
 				out = append(out, spellEffectTokens(list(argN(x, 1)))...)
