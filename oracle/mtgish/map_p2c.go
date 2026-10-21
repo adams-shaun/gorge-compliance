@@ -20,6 +20,15 @@ var p2cReplSynonyms = map[string]string{
 }
 
 func init() {
+	// "Protection from green. This effect doesn't remove <this Aura>":
+	// protection (Forge: Protection keyword with the aura exempted).
+	if extRule["ProtectionAndDoesntRemovePermanents"] == nil {
+		extRule["ProtectionAndDoesntRemovePermanents"] = func(m *mtgishNorm, r any) {
+			for _, q := range strings.Split(protectable(argN(r, 0)), "|") {
+				m.kw("protection:" + q)
+			}
+		}
+	}
 	// A rule an action gives permanents for a while ("the tokens are
 	// goaded"): goading is the goad action (gorge: Goad), not the static
 	// rule a card prints.
