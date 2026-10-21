@@ -319,6 +319,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		return []string{"counter"}
 	case "Token":
 		out := []string{"token:" + literalOr(p["TokenAmount"], "1")}
+		out = append(out, p2dExtraTokenScripts(p)...)
 		for _, k := range cards.SplitKeywordList(p["PumpKeywords"]) {
 			out = append(out, "grant:"+grantKeyword(k))
 		}

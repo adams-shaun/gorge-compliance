@@ -492,3 +492,16 @@ func p2dPlayerSpellEffects(x any) ([]string, bool) {
 	t := spellEffectTokens(list(a[len(a)-1]))
 	return t, len(t) > 0
 }
+
+// p2dExtraTokenScripts: a Token whose TokenScript$ lists several scripts
+// ("create a Treasure token and a 2/2 Bird") creates one token of each, as
+// mtgish's CreateTokens lists one CreatableToken each; the first is the
+// core case's token.
+func p2dExtraTokenScripts(p map[string]string) []string {
+	n := strings.Count(p["TokenScript"], ",")
+	out := make([]string, 0, n)
+	for i := 0; i < n; i++ {
+		out = append(out, "token:"+literalOr(p["TokenAmount"], "1"))
+	}
+	return out
+}
