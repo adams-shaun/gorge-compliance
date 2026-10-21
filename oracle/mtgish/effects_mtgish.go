@@ -347,11 +347,11 @@ func (e *effects) action(n node, v string) {
 	case "LoseLife":
 		e.add("loselife:" + gameNumber(arg(0)))
 	case "PermanentDealsDamage":
-		e.add("damage:" + gameNumber(arg(1)))
+		e.add(p2fDamageEach(arg(2), "damage:"+gameNumber(arg(1)))...)
 	case "SpellDealsDamage":
-		e.add("damage:" + gameNumber(arg(1)))
+		e.add(p2fDamageEach(arg(2), "damage:"+gameNumber(arg(1)))...)
 	case "DeadPermanentDealsDamage":
-		e.add("damage:" + gameNumber(arg(0)))
+		e.add(p2fDamageEach(arg(1), "damage:"+gameNumber(arg(0)))...)
 	case "SpellDealsMultipleDamage", "PermanentDealsMultipleDamage":
 		for _, d := range list(arg(1)) {
 			e.add("damage:" + gameNumber(argN(d, 0)))
@@ -569,6 +569,8 @@ func (e *effects) action(n node, v string) {
 // lookMove maps a look-at/reveal-the-top sub-action to the move it makes.
 func lookMove(v string) string {
 	switch {
+	case p2fLookStays[v]:
+		return ""
 	case strings.Contains(v, "Cloak"):
 		return "cloak"
 	case strings.Contains(v, "Manifest"):
@@ -965,6 +967,7 @@ func enterEffects(as []any) []string {
 			// not an effect; its consequence is mapped where it appears.
 		case strings.Contains(v, "Copy"):
 			out = append(out, "copy")
+			out = append(out, p2fReflexiveEnter(x)...)
 		case v == "If" || v == "Unless" || v == "IfPassesFilter" || v == "MayAction" || v == "MayActions":
 			for _, sub := range argsOf(x) {
 				if l := list(sub); l != nil {

@@ -373,7 +373,7 @@ func (m *mtgishNorm) rule(r any) {
 		} else {
 			// "Is the chosen type in addition to its other types": a
 			// type-changing static.
-			m.ability(Ability{Kind: "static", Effects: []string{"type"}})
+			m.ability(Ability{Kind: "static", Effects: []string{p2fCDATypes(rawArgs(r))}})
 		}
 	case "EnchantPermanent":
 		m.kw("enchant:" + targetToken(permanentsClasses(rawArgs(r)), "1"))

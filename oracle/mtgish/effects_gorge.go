@@ -17,6 +17,9 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 	if depth > maxChainDepth {
 		return
 	}
+	if depth == 0 {
+		g.parked = false
+	}
 	for ; a != nil; a = a.Sub {
 		if a.API == "Branch" {
 			// An if/else: the two branches are alternatives.
@@ -69,10 +72,11 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			// CreatePerpetual* actions.
 			e.add("perpetual")
 		} else {
-			e.add(p2dPlayerGrants(a, gorgeAPIEffects(a, g.svars()))...)
+			e.add(p2dPlayerGrants(a, g.p2fSearchDelivery(a, gorgeAPIEffects(a, g.svars())))...)
 		}
 		e.add(atEOTTokens(a.Params["AtEOT"])...)
 		e.add(paramTokensP2B(a)...)
+		e.add(p2fParamTokens(a)...)
 		if a.API == "Effect" {
 			// The triggers an effect creates run their own effects, as
 			// mtgish's CreateTriggerUntil actions do. An emblem's triggers
@@ -422,7 +426,9 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "Attach":
 		return []string{"attach"}
 	case "Dig":
-		if p["DestinationZone"] == "Exile" && (p["ChangeNum"] == "All" || p["ChangeNum"] == "") {
+		if p["DestinationZone"] == "Exile" && (p["ChangeNum"] == "All" || p["ChangeNum"] == "" && literalOr(p["DigNum"], "1") == "1") {
+			// (ChangeNum$ defaults to 1: "look at the top three, exile one
+			// of them" is a look, below.)
 			// "Exile the top N cards" is a move, not a look.
 			return []string{"move:library>exile"}
 		}
@@ -479,7 +485,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 				// Left on top (a later sub-ability moves it): no move.
 				continue
 			}
-			if d := p[k]; d != "" && !p2dDigUntilShuffledBack(p, k) {
+			if d := p[k]; d != "" && !p2dDigUntilShuffledBack(p, k) && !p2fShuffledAfter(a, p[k]) {
 				out = append(out, "move:library>"+strings.ToLower(d))
 			}
 		}
