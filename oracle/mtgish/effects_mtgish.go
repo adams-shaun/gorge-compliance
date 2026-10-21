@@ -28,6 +28,7 @@ func (e *effects) walk(x any) {
 		case "_LookAtTopOfLibraryAction", "_RevealTheTopNumberCardsOfLibraryAction":
 			if t := lookMove(variant); t != "" {
 				e.add(t)
+				e.p2iLookCost(n, variant)
 			} else if descend, ok := e.p2cLookAction(n, variant); ok {
 				return descend
 			}
@@ -43,6 +44,15 @@ func (e *effects) walk(x any) {
 			}
 			return variant == "If" || variant == "Unless" || variant == "MayAction" || variant == "MayActions"
 		case "_SearchLibraryAction":
+			if variant == "CastFoundCardsWithoutPaying" {
+				// "Search ... and cast that card without paying its mana
+				// cost": the cast is the effect (gorge: Play).
+				e.add("play")
+			}
+			if strings.HasPrefix(variant, "PutFoundCards") {
+				// "Put it onto the battlefield with an additional +1/+1 counter".
+				e.p2iTokenFlags(rawArgs(n))
+			}
 			// "..., then each opponent who cast a spell with that name
 			// loses 8 life": actions among a search's steps.
 			if descend, ok := e.p2cLookAction(n, variant); ok {
@@ -422,6 +432,7 @@ func (e *effects) action(n node, v string) {
 		for _, t := range list(arg(0)) {
 			e.add(tokenToken(t))
 		}
+		e.p2iTokenFlags(arg(1))
 	case "PutCounters":
 		for _, pc := range list(rawArgs(n)) {
 			e.add(putCounters(pc))
@@ -595,7 +606,8 @@ func lookMove(v string) string {
 func exilableZone(x any) string {
 	v := variantOf(x)
 	switch {
-	case strings.Contains(v, "Graveyard"):
+	case strings.Contains(v, "Graveyard"), strings.Contains(v, "Milled"):
+		// (A card milled this way is in the graveyard.)
 		return "graveyard"
 	case strings.Contains(v, "Librar"):
 		return "library"

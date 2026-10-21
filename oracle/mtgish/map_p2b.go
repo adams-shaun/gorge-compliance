@@ -108,6 +108,10 @@ func otherOriginsP2B(a *cards.SA) []string {
 	if len(origins) < 2 || effectSelfExile(a) || a.Params["Destination"] != "Exile" {
 		return nil
 	}
+	if p2dOriginChoice[strings.ReplaceAll(a.Params["Origin"], " ", "")] {
+		// p2dChangeZone already maps one move per origin of these.
+		return nil
+	}
 	first := changeZoneToken(a.API, a.Params)
 	if !strings.HasPrefix(first, "move:") {
 		// A search ("library and/or graveyard") is one action.

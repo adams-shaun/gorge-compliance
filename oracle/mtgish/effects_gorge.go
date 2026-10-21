@@ -77,6 +77,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 		e.add(atEOTTokens(a.Params["AtEOT"])...)
 		e.add(paramTokensP2B(a)...)
 		e.add(p2fParamTokens(a)...)
+		e.add(p2iParamTokens(a)...)
 		if a.API == "Effect" {
 			// The triggers an effect creates run their own effects, as
 			// mtgish's CreateTriggerUntil actions do. An emblem's triggers
@@ -475,7 +476,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		}
 		return out
 	case "DigUntil":
-		if p["FoundDestination"] == "Exile" {
+		if p["FoundDestination"] == "Exile" && p["RevealedDestination"] != "Library" {
 			// (Only an exiled find is the exile move alone; exiling the
 			// other revealed cards is one of the moves below, map_p2d.)
 			return []string{"move:library>exile"}
@@ -553,6 +554,10 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "Regenerate", "RegenerateAll":
 		return []string{"regenerate"}
 	case "SetState":
+		if p["Mode"] == "" && p["NewState"] == "FaceDown" {
+			// "Turn it face down": mtgish's TurnPermanentFaceDown.
+			return []string{"setstate:turnfacedown"}
+		}
 		if p["Mode"] == "Transform" || p["Mode"] == "" {
 			return []string{"transform"}
 		}
@@ -620,7 +625,7 @@ func changeZoneToken(api string, p map[string]string) string {
 		// whichever origin is listed first.
 		o = "library"
 	}
-	if api == "ChangeZone" && o == "library" && p["Defined"] == "" && (p["ValidTgts"] == "" || c2PlayerTargets(p["ValidTgts"])) {
+	if api == "ChangeZone" && o == "library" && p["Defined"] == "" && !(p["AtRandom"] == "True" && d == "exile") && (p["ValidTgts"] == "" || c2PlayerTargets(p["ValidTgts"])) {
 		return "search:" + d
 	}
 	if t, ok := gorgeHandToLibrary(api, o, d, p); ok {

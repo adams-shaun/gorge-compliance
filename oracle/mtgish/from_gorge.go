@@ -186,6 +186,8 @@ type gorgeNorm struct {
 	mode int // gift/kicker branch being summarised (modeSA)
 
 	parked bool // a search parked its cards in the library (map_p2f.go)
+
+	trigYou bool // the trigger being summarised is its controller's own (map_p2i.go)
 }
 
 func (g *gorgeNorm) kw(tok string)            { g.s.Keywords = append(g.s.Keywords, tok) }
@@ -412,7 +414,9 @@ func (g *gorgeNorm) trigger(t *cards.Trigger) {
 	if eff == nil {
 		eff = cards.ResolveSVar(g.svars(), t.Params["Execute"])
 	}
+	g.trigYou = t.Params["ValidPlayer"] == "You"
 	g.chain(e, eff, 1)
+	g.trigYou = false
 	if skipTriggerB(t, e) {
 		return
 	}

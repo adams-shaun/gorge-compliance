@@ -326,7 +326,7 @@ func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
 		e.add(p2cCostActions(strings.TrimPrefix(c, "Mandatory "))...)
 	}
 	if c := a.Params["UnlessCost"]; c != "" {
-		if payer := a.Params["UnlessPayer"]; payer == "" || payer == "You" {
+		if payer := a.Params["UnlessPayer"]; p2iUnlessPaidByYou(g, a, payer) {
 			e.add(p2cCostActions(strings.TrimPrefix(c, "Mandatory "))...)
 		}
 	}
@@ -374,6 +374,8 @@ func p2cCostActions(c string) []string {
 			out = append(out, "move:battlefield>exile")
 		case "ExileFromGrave", "ExileAnyGrave":
 			out = append(out, "move:graveyard>exile")
+		case "ExileFromStack":
+			out = append(out, "move:stack>exile")
 		case "ExileFromHand":
 			out = append(out, "move:hand>exile")
 		case "ExileFromTop":
@@ -399,6 +401,12 @@ func p2cCostActions(c string) []string {
 			out = append(out, "move:graveyard>library")
 		case "Blight":
 			out = append(out, "blight")
+		case "AddCounter":
+			// "Put a stun counter on the targeted creature" paid as an
+			// unless-cost: mtgish's PutCounters cost.
+			if kind != "" {
+				out = append(out, gorgeCounterTokens(kind, n)...)
+			}
 		}
 	}
 	return out
@@ -490,7 +498,7 @@ func (e *effects) p2cEachPlayerTokens(ts any) {
 // as" effect) creates that mtgish writes as player rules: "you can't lose
 // the game", "your opponents can't win the game" (the same tokens as the
 // printed R:Event$ GameLoss/GameWin, gorgeNorm.repl).
-func p2cEffectRepl(r cards.Repl, svars map[string]string) []string {
+func p2cEffectRepl(a *cards.SA, r cards.Repl, svars map[string]string) []string {
 	if eff, ok := replStatic(&r, svars); ok {
 		// "Damage that would reduce your life total to less than 1
 		// reduces it to 1 instead" and the other printed-static shapes.
@@ -511,7 +519,7 @@ func p2cEffectRepl(r cards.Repl, svars map[string]string) []string {
 		// CreateReplaceWouldDealDamageUntil effect.
 		return []string{"effect"}
 	}
-	return nil
+	return p2iReplCounters(a, r, svars)
 }
 
 // p2cPlayerKeyword maps a keyword a Pump gives a player ("you gain shroud
