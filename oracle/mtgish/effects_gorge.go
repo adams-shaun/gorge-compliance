@@ -432,7 +432,10 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			if rest == "" {
 				rest = "Library"
 			}
-			out = append(out, "move:library>"+strings.ToLower(rest))
+			// One card looked at and left on top is no move.
+			if !(n == "1" && rest == "Library" && p["LibraryPosition2"] == "0") {
+				out = append(out, "move:library>"+strings.ToLower(rest))
+			}
 		}
 		return out
 	case "DigUntil":
