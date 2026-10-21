@@ -333,7 +333,9 @@ func (e *effects) action(n node, v string) {
 		e.add("destroy")
 	case "Exile":
 		for _, x := range list(arg(0)) {
-			e.add("move:" + exilableZone(x) + ">exile")
+			for _, z := range exilableZonesP2B(x) {
+				e.add("move:" + z + ">exile")
+			}
 		}
 	case "PutPermanentIntoItsOwnersHand", "PutEachPermanentIntoItsOwnersHand":
 		e.add("move:battlefield>hand")

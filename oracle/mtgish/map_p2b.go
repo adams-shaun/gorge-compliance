@@ -231,3 +231,16 @@ var lookActionP2B = map[string]bool{
 	"CreatePerpetualPermanentEffect":  true,
 	"SpellDealsDamage":                true,
 }
+
+// exilableZonesP2B is the zones an Exilable takes cards from: one, except
+// "permanents and/or cards from hand (or graveyard)", which a script
+// writes as one ChangeZone with several origins.
+func exilableZonesP2B(x any) []string {
+	switch variantOf(x) {
+	case "NumberPermanentsOrCardsInHand":
+		return []string{"battlefield", "hand"}
+	case "NumberPermanentsCardsInHandOrCardsInGraveyards":
+		return []string{"battlefield", "hand", "graveyard"}
+	}
+	return []string{exilableZone(x)}
+}
