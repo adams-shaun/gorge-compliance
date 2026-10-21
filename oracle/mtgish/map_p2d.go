@@ -139,3 +139,20 @@ func p2dChangeZone(api string, p map[string]string) []string {
 	}
 	return out
 }
+
+// p2dDigRevealOnly reports a Dig that reveals the top cards and leaves
+// them where they are ("reveal the top card of your library": every card
+// back on top, LibraryPosition$ 0): a look, not a move, as mtgish's
+// RevealTopCardOfLibrary.
+func p2dDigRevealOnly(p map[string]string) bool {
+	return p["ChangeNum"] == "All" && p["DestinationZone"] == "Library" && p["LibraryPosition"] == "0" &&
+		p["DestinationZone2"] == ""
+}
+
+// p2dDigUntilShuffledBack reports a DigUntil whose revealed (or found)
+// cards go back into the library that is then shuffled ("then shuffle"):
+// a shuffle, not a move, as mtgish's PutTheRemainingCardsBackIntoLibrary
+// AndShuffle. Without Shuffle$ they go to the bottom, a move.
+func p2dDigUntilShuffledBack(p map[string]string, key string) bool {
+	return p[key] == "Library" && p["Shuffle"] == "True"
+}

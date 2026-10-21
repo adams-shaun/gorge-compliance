@@ -405,6 +405,9 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			// "Exile the top N cards" is a move, not a look.
 			return []string{"move:library>exile"}
 		}
+		if p2dDigRevealOnly(p) {
+			return []string{"dig:" + literalOr(p["DigNum"], "1")}
+		}
 		if p["ChangeNum"] == "All" && p["DestinationZone"] != "" {
 			// "Put the top card into your hand": a move (revealed first,
 			// a look as well).
@@ -441,7 +444,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		}
 		out := []string{"diguntil"}
 		for _, k := range []string{"FoundDestination", "RevealedDestination"} {
-			if d := p[k]; d != "" {
+			if d := p[k]; d != "" && !p2dDigUntilShuffledBack(p, k) {
 				out = append(out, "move:library>"+strings.ToLower(d))
 			}
 		}
