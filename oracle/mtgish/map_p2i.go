@@ -85,3 +85,9 @@ func init() {
 		e.p2cMayCost(argN(n, 1))
 	}
 }
+
+func init() {
+	// "Pay any amount of life, then look at that many cards": the payment is
+	// done (gorge: LoseLife / the sub-ability's PayLife).
+	extAction["PayAnyAmountOfLife"] = func(e *effects, n node) { e.add("loselife:*") }
+}
