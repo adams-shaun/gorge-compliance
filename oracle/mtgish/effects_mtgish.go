@@ -109,6 +109,11 @@ func (e *effects) walk(x any) {
 			e.action(n, variant)
 			return !leafActions[variant]
 		case "_Actions":
+			if variant == "ActionList" {
+				for _, h := range extActionList {
+					h(e, list(rawArgs(n)))
+				}
+			}
 			switch variant {
 			case "Targeted_Modal":
 				// "Target spell or permanent": one slot (map_f.go).

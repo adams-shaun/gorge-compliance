@@ -1,0 +1,66 @@
+package mtgish
+
+import "strings"
+
+// Phase-2 unit f: normaliser fixes found triaging the residual rows of the
+// corpus from "Raffine's Guidance" to the end of the alphabet. Each family
+// is general (corpus-wide), not per card.
+
+// extActionList holds hooks the walker runs over every mtgish action list
+// (Actions.ActionList) before descending into it: patterns that read one
+// action together with its later siblings.
+var extActionList []func(e *effects, l []any)
+
+// p2fHasVariant reports whether variant v occurs anywhere under x.
+func p2fHasVariant(x any, v string) bool {
+	found := false
+	walk(x, func(n node, enum, variant string) bool {
+		if variant == v {
+			found = true
+		}
+		return !found
+	})
+	return found
+}
+
+func init() {
+	// "You may exile <permanent>. If you do, return it to the battlefield"
+	// (a flicker): mtgish writes the exile as a MayCost, which stays a
+	// cost elsewhere (map_p2d.go), but a flicker's exile is the first half
+	// of the effect, and every script writes it as an optional ChangeZone
+	// (measured: no flicker script pays it as a Cost$/UnlessCost$). So a
+	// MayCost exile whose later sibling puts the exiled card back onto
+	// the battlefield is the exile.
+	extActionList = append(extActionList, p2fFlicker)
+}
+
+// p2fFlicker is the flicker hook over one action list, and over the
+// action lists an If/Unless in it carries (they are bare arrays, not
+// ActionList nodes, so the walker never hooks them itself).
+func p2fFlicker(e *effects, l []any) {
+	for i, a := range l {
+		if enumOf(a) == "Action" && (variantOf(a) == "If" || variantOf(a) == "Unless") {
+			for _, x := range argsOf(a) {
+				if sub := list(x); sub != nil && enumOf(sub[0]) == "Action" {
+					p2fFlicker(e, sub)
+				}
+			}
+		}
+		if enumOf(a) != "Action" || variantOf(a) != "MayCost" {
+			continue
+		}
+		c := rawArgs(a)
+		if !strings.HasPrefix(variantOf(c), "Exile") {
+			continue
+		}
+		back := false
+		for _, b := range l[i+1:] {
+			if p2fHasVariant(b, "PutExiledCardOntoBattlefield") {
+				back = true
+			}
+		}
+		if back {
+			e.costAsAction(c)
+		}
+	}
+}
