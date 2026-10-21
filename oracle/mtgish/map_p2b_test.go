@@ -28,7 +28,7 @@ func TestP2BMtgishActions(t *testing.T) {
 		// An exile from permanents and/or hand.
 		{"exile two zones", `[{"_Action":"Exile","args":[[{"_Exilable":"NumberPermanentsOrCardsInHand","args":[]}],[]]}]`, "move:battlefield>exile move:hand>exile"},
 		// Look steps: shuffle the rest back, if/else, a granted ability.
-		{"look rest shuffled", `[{"_Action":"LookAtTheTopNumberCardsOfLibrary","args":[{"_GameNumber":"Integer","args":3},[{"_LookAtTopOfLibraryAction":"PutTheRemainingCardsBackIntoLibraryAndShuffle"}]]}]`, "dig:3 move:library>library"},
+		{"look rest shuffled", `[{"_Action":"LookAtTheTopNumberCardsOfLibrary","args":[{"_GameNumber":"Integer","args":3},[{"_LookAtTopOfLibraryAction":"PutTheRemainingCardsBackIntoLibraryAndShuffle"}]]}]`, "dig:3"}, // a shuffle, no move (map_p2f.go)
 		{"look if else", `[{"_Action":"LookAtTheTopNumberCardsOfLibrary","args":[{"_GameNumber":"Integer","args":3},[{"_LookAtTopOfLibraryAction":"IfElse","args":[{"_Condition":"X"},[{"_LookAtTopOfLibraryAction":"PutAGenericCardIntoHand"}],[{"_LookAtTopOfLibraryAction":"PutAGenericCardIntoGraveyard"}]]}]]}]`, "dig:3 move:library>graveyard move:library>hand"},
 		{"look grants", `[{"_Action":"RevealTheTopNumberCardsOfLibrary","args":[{"_GameNumber":"Integer","args":4},[{"_RevealTheTopNumberCardsOfLibraryAction":"CreatePermanentLayerEffect","args":[` + perm + `,[{"_LayerEffect":"AddAbility","args":[{"_Rule":"Haste"}]}]]}]]}]`, "dig:4 grant:haste"},
 	} {
@@ -59,7 +59,8 @@ func TestP2BGorgeSide(t *testing.T) {
 		sa   cards.SA
 		want string
 	}{
-		{"second counter type", cards.SA{API: "PutCounterAll", Params: map[string]string{"CounterType": "P1P1", "CounterNum": "1", "CounterType2": "LOYALTY"}}, "counters:loyalty:1"},
+		// (CounterType2$ is mapped once, by gorgeAPIEffects: map_p2f_test.go.)
+		{"second counter type", cards.SA{API: "PutCounterAll", Params: map[string]string{"CounterType": "P1P1", "CounterNum": "1", "CounterType2": "LOYALTY"}}, "-"},
 		{"exiled with counters", cards.SA{API: "ChangeZone", Params: map[string]string{"Origin": "Stack", "Destination": "Exile", "WithCountersType": "TIME", "WithCountersAmount": "3"}}, "counters:time:3"},
 		{"exile from two origins", cards.SA{API: "ChangeZone", Params: map[string]string{"Origin": "Hand,Graveyard", "Destination": "Exile"}}, "move:graveyard>exile"},
 		{"look at one card, else hand", cards.SA{API: "Dig", Params: map[string]string{"DigNum": "1", "ChangeNum": "1", "Optional": "True", "DestinationZone": "Battlefield", "DestinationZone2": "Hand"}}, "move:library>hand"},
