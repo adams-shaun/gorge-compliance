@@ -267,6 +267,19 @@ var p2dMtgishAlias = map[string]string{
 	"replace:aplayerwouldcreatetokens":        "replace:aneffectwouldcreateanynumberoftokens",
 	"replace:aplayerwouldcreateatoken":        "replace:aneffectwouldcreateanynumberoftokens",
 	"replace:anynumberoftokenswouldbecreated": "replace:aneffectwouldcreateanynumberoftokens",
+	// "You may cast spells by paying <cost> rather than their mana cost"
+	// (Forge: S:Mode$ AlternativeCost).
+	"player:maypayalternatecostforspells": "alternativecost",
+	// A spell-cost change written as a stack-spell effect (Forge:
+	// ReduceCost/RaiseCost statics), as spellEffectTokens maps it.
+	"spell:decreasemanacost":        "costreduction",
+	"spell:decreasemanacostforeach": "costreduction",
+	"spell:increasemanacost":        "costincrease",
+	// "<creatures> attack <that player> each combat if able" / "target
+	// player's creatures attack each combat if able": the attack
+	// requirement Forge writes as MustAttack.
+	"rule:mustattackplayer":             "rule:mustattack",
+	"player:mustattackwitheachcreature": "rule:mustattack",
 }
 
 // p2dGorgeAlias respells gorge-side effect tokens onto mtgish's spelling.
