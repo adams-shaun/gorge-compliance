@@ -50,7 +50,7 @@ func (e *effects) walk(x any) {
 				// cost": the cast is the effect (gorge: Play).
 				e.add("play")
 			}
-			if strings.HasPrefix(variant, "PutFoundCards") {
+			if strings.HasPrefix(variant, "PutFoundCards") && variant != "PutFoundCardsOntoBattlefield" {
 				// "Put it onto the battlefield with an additional +1/+1 counter".
 				e.p2iTokenFlags(rawArgs(n))
 			}

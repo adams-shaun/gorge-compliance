@@ -18,7 +18,7 @@ func init() {
 	extSVarRefs["ChooseNumber"] = func(a *cards.SA) []string {
 		p := a.Params
 		return []string{p["ChooseNumberSubAbility"], p["Lowest"], p["Highest"], p["NotLowest"], p["NotHighest"],
-			p["GuessWrong"], p["GuessCorrect"]}
+			p["GuessWrong"], p["GuessCorrect"], p["MatchedAbility"], p["UnmatchedAbility"]}
 	}
 	// MultiplePiles: the chosen (and unchosen) pile's sub-ability (Whims of
 	// the Fates sacrifices the chosen piles).
