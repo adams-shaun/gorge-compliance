@@ -513,6 +513,10 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "ChangeTargets":
 		return []string{"changetargets"}
 	case "Poison":
+		if strings.HasPrefix(p["Num"], "-") {
+			// "Target player loses all poison counters": a removal.
+			return []string{"countersremove"}
+		}
 		return []string{"counters:poison:" + literalOr(p["Num"], "*")}
 	case "Forage":
 		return []string{"forage"}

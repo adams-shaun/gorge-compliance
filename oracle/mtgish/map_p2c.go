@@ -223,7 +223,7 @@ func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
 	if v := a.Params["AtEOTTrig"]; strings.HasPrefix(v, "You_") {
 		e.add(atEOTTokens(v)...)
 	}
-	if ct := a.Params["WithCountersType"]; ct != "" && ct != "TIME" && (a.Params["Destination"] == "Battlefield" || a.Params["DestinationZone"] == "Battlefield") {
+	if ct := a.Params["WithCountersType"]; ct != "" && ct != "TIME" {
 		// "Return it to the battlefield with a finality counter on it"
 		// (mtgish's EntersWith*Counter* flag, p2cEnterFlag). Time
 		// counters are suspend's, which both sides name by the
@@ -250,6 +250,20 @@ func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
 		// "If a permanent's ability is countered this way, destroy that
 		// permanent."
 		e.add("destroy")
+	}
+	if a.API == "AddTurn" && a.Params["ExtraTurnDelayedTriggerExecute"] != "" {
+		// "At the beginning of that turn's end step, you lose the game":
+		// the extra turn's delayed trigger.
+		e.add("delayed")
+		g.chain(e, cards.ResolveSVar(g.svars(), a.Params["ExtraTurnDelayedTriggerExecute"]), depth+1)
+	}
+	if d := a.Params["Defined"]; a.API == "Pump" && strings.HasPrefix(d, "You & ") {
+		// "You and permanents you control gain hexproof": the player half.
+		for _, k := range cards.SplitKeywordList(a.Params["KW"]) {
+			if t, ok := p2cPlayerKeyword(map[string]string{"Defined": "You"}, k); ok {
+				e.add(t)
+			}
+		}
 	}
 	if a.API == "CopyPermanent" {
 		for _, k := range strings.Split(a.Params["PumpKeywords"], "&") {
@@ -502,6 +516,8 @@ func p2cPlayerKeyword(p map[string]string, k string) (string, bool) {
 		return "", false
 	}
 	switch h := cards.KeywordHead(k); {
+	case strings.Contains(k, ":"):
+		// "Hexproof from blue": a quality, kept as the grant.
 	case h == "Shroud", h == "Hexproof":
 		return "player:" + strings.ToLower(h), true
 	case strings.HasPrefix(h, "Protection"):
@@ -541,7 +557,7 @@ func p2cEnterFlag(n node, v string) []string {
 		}
 		return nil
 	}
-	if !strings.HasPrefix(v, "EntersWith") || !strings.Contains(v, "Counter") {
+	if !(strings.HasPrefix(v, "EntersWith") || strings.HasPrefix(v, "ExilesWith")) || !strings.Contains(v, "Counter") {
 		return nil
 	}
 	a := argsOf(n)

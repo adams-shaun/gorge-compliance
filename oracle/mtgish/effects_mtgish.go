@@ -39,7 +39,7 @@ func (e *effects) walk(x any) {
 				return descend
 			}
 			return false
-		case "_EnterFlag":
+		case "_EnterFlag", "_ExileFlag", "_TokenFlag":
 			// "Return it with N +1/+1 counters on it"; a conditional
 			// flag's flags are walked.
 			e.add(p2cEnterFlag(n, variant)...)
