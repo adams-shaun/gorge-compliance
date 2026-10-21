@@ -140,8 +140,8 @@ func TestP2aMtgish(t *testing.T) {
 	// A level whose box only changes P/T is no static; a level granting a
 	// keyword is one static granting it.
 	lv := mtgishOne(t, `{"_Rule":"LevelUp","args":[{"_Cost":"PayMana","args":[{"_ManaSymbol":"ManaCostGeneric","args":2}]},[`+
-		`{"_Level":"LevelRange","args":[1,3,{"Power":4,"Toughness":4},[]]},`+
-		`{"_Level":"LevelPlus","args":[4,{"Power":6,"Toughness":6},[{"_Rule":"Trample"}]]}]]}`)
+		`{"_Level":"Level","args":[{"_GameRange":"Range","args":[1,3]},{"Power":4,"Toughness":4},[]]},`+
+		`{"_Level":"Level","args":[{"_GameRange":"ValueOrBigger","args":4},{"Power":6,"Toughness":6},[{"_Rule":"Trample"}]]}]]}`)
 	if got, want := abilityLine(lv), "static[](grant:trample)"; got != want {
 		t.Errorf("level up: got %q, want %q", got, want)
 	}

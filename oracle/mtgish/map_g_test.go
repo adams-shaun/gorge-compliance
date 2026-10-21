@@ -76,7 +76,8 @@ func TestMtgishShapeNormalisations(t *testing.T) {
 	}
 	s = mtgishOne(t, `{"_Rule":"LevelUp","args":[{"_Cost":"PayMana","args":[]},[{"_Level":"Level","args":[{"_GameRange":"ValueOrBigger","args":1},`+
 		`{"Power":2,"Toughness":2},[{"_Rule":"Flying"}]]}]]}`)
-	if got := strings.Join(sorted(s.Abilities[0].Effects), " "); got != "grant:flying setpt" {
+	// (A level's P/T box is level structure, not a setpt: map_p2a.go.)
+	if got := strings.Join(sorted(s.Abilities[0].Effects), " "); got != "grant:flying" {
 		t.Errorf("level static effects %q", got)
 	}
 }
