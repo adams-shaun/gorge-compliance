@@ -480,10 +480,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		for _, k := range cards.SplitKeywordList(p["Keywords"]) {
 			out = append(out, "grant:"+grantKeyword(k))
 		}
-		if len(out) == 0 {
+		out = append(out, p2dAnimateExtra(p)...)
+		if len(out) == 0 && !p2dAnimateCarrier(p) {
 			out = append(out, "animate")
 		}
-		return out
+		return dedup(out)
 	case "Effect":
 		return effectAPI(a, svars)
 	case "DelayedTrigger":

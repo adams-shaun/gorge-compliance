@@ -391,3 +391,24 @@ func p2dFoldTargetStatics(s *Summary) {
 	}
 	s.Abilities = out
 }
+
+// p2dAnimateExtra maps the Animate parameters the core case does not:
+// losing keywords is losing abilities, gaining every creature type or
+// losing a type is a type change (mtgish's layer effects).
+func p2dAnimateExtra(p map[string]string) []string {
+	var out []string
+	if p["RemoveKeywords"] != "" {
+		out = append(out, "loseabilities")
+	}
+	if p["AddAllCreatureTypes"] == "True" || p["RemoveTypes"] != "" || p["RemoveCreatureTypes"] == "True" {
+		out = append(out, "type")
+	}
+	return out
+}
+
+// p2dAnimateCarrier reports an Animate that changes nothing about the
+// object: it only carries a leave-the-battlefield replacement (mapped as
+// "effect" by the chain) or an AI hint (sVars$).
+func p2dAnimateCarrier(p map[string]string) bool {
+	return p["LeaveBattlefield"] != "" || p["sVars"] != ""
+}
