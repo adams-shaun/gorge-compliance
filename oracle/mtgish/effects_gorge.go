@@ -444,6 +444,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		}
 		out := []string{"diguntil"}
 		for _, k := range []string{"FoundDestination", "RevealedDestination"} {
+			if k == "FoundDestination" && p[k] == "Library" && p["FoundLibraryPosition"] == "0" ||
+				k == "RevealedDestination" && p["NoMoveRevealed"] == "True" {
+				// Left on top (a later sub-ability moves it): no move.
+				continue
+			}
 			if d := p[k]; d != "" {
 				out = append(out, "move:library>"+strings.ToLower(d))
 			}
