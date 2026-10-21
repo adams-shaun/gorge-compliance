@@ -53,6 +53,7 @@ func (e *effects) walk(x any) {
 		case "_SearchLibraryAction":
 			// Steps of a search: only their enter flags carry an effect
 			// (the found card enters with a counter).
+			e.add(p2fSearchStep(variant)...)
 			return true
 		case "_EnterFlag", "_ExileFlag":
 			// "Return it with a finality counter on it" (EnterFlags).

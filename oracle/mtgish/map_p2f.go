@@ -139,13 +139,25 @@ func p2fMayCostOr(e *effects, c any) bool {
 	if len(alts) == 0 {
 		return false
 	}
+	sub := &effects{}
+	var rest []any
 	for _, a := range alts {
-		if !mayCostActionsP2B[variantOf(a)] {
+		v := variantOf(a)
+		switch {
+		case strings.HasPrefix(v, "Cast") || strings.HasPrefix(v, "Play"):
+			// "Play a land or cast a spell from the top of your
+			// library": a cast, as a MayCost Cast* (effects_mtgish.go).
+			sub.add("play")
+		case mayCostActionsP2B[v]:
+			rest = append(rest, a)
+		default:
 			return false
 		}
 	}
-	sub := &effects{}
-	sub.alternativeCosts(alts)
+	if sub.effects != nil {
+		sub.effects = dedup(sub.effects)
+	}
+	sub.alternativeCosts(rest)
 	for _, t := range sub.effects {
 		if IsUnmapped(t) {
 			return false
@@ -339,4 +351,27 @@ func init() {
 	for _, v := range []string{"SacrificePermanent", "LoseLife", "GainLife", "TransformPermanent"} {
 		lookActionP2B[v] = true
 	}
+}
+
+// p2fCDATypes maps a CDA_Types rule other than changeling. A fixed type
+// list ("is also a Cleric, Rogue, Warrior, and Wizard", "is every creature
+// type") is a characteristic-defining ability, which scripts flag
+// CharacteristicDefining$ (the gorge side's "cda"); a chosen type ("is
+// the chosen type in addition", a type variable) stays a type-changing
+// static.
+func p2fCDATypes(x any) string {
+	if strings.Contains(variantOf(x), "Variable") {
+		return "type"
+	}
+	return "cda"
+}
+
+// p2fSearchStep maps a search step that is an effect of its own: casting
+// the found card ("search for an instant and cast it without paying its
+// mana cost"), as scripts' Play over the found card.
+func p2fSearchStep(v string) []string {
+	if strings.Contains(v, "CastFoundCards") || strings.Contains(v, "PlayFoundCards") {
+		return []string{"play"}
+	}
+	return nil
 }
