@@ -105,6 +105,7 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 	}
 	mergeSpells(s, true)
 	splitStatics(s)
+	p2aReplacementStatics(s)
 	return s
 }
 
@@ -515,7 +516,7 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 
 // static summarises an S: line.
 func (g *gorgeNorm) static(st *cards.Static) {
-	if gorgeStation(g, st) || g.selfGrantStatic(st) {
+	if p2aShadowHelper(st) || gorgeStation(g, st) || g.selfGrantStatic(st) {
 		return
 	}
 	eff := gorgeStaticEffects(st.Mode, st.Params)
@@ -614,9 +615,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		default:
 			out = append(out, "rule:canblockanadditionalnumbercreatures")
 		}
-		if p["Goad"] == "True" {
-			out = append(out, "rule:isgoadedbyplayer")
-		}
+		// (Goad$ True is "goad", d2ContinuousEffects.)
 		for _, k := range cards.SplitKeywordList(p["AddHiddenKeyword"]) {
 			out = append(out, hiddenKeywordToken(k))
 		}
@@ -741,6 +740,12 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 	}
 	switch r.Event {
 	case "Untap":
+		if p["ReplaceWith"] != "" {
+			// "If it would untap during your untap step, <do something>
+			// instead": a replacement (Edge of Malacol, Freyalise's Winds).
+			g.ability(Ability{Kind: "replacement", Effects: []string{"replace:woulduntap"}})
+			return
+		}
 		if p["ValidStepTurnToController"] == "" {
 			// No untap-step restriction: "can't become untapped".
 			g.ability(Ability{Kind: "static", Effects: []string{"rule:cantbecomeuntapped"}})
@@ -760,6 +765,12 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 		g.ability(Ability{Kind: "static", Effects: []string{"player:cantwinthegame"}})
 		return
 	case "Counter":
+		if p["ReplaceWith"] != "" {
+			// "If a spell or ability would counter a spell, instead ..."
+			// (Guile): a replacement.
+			g.ability(Ability{Kind: "replacement", Effects: []string{"replace:wouldcounteraspell"}})
+			return
+		}
 		// "This spell can't be countered" / "spells you control can't be
 		// countered": a static rule printed, a replacement in Forge.
 		g.ability(Ability{Kind: "static", Effects: []string{"spell:cantbecountered"}})

@@ -236,7 +236,8 @@ func splitStatics(s *Summary) {
 		}
 		var rest, own []string
 		for _, t := range a.Effects {
-			if strings.HasPrefix(t, "rule:") || strings.HasPrefix(t, "player:") {
+			if strings.HasPrefix(t, "rule:") || strings.HasPrefix(t, "player:") || t == "goad" {
+				// ("Is goaded" is a rule too: mtgish's IsGoadedByPlayer.)
 				own = append(own, t)
 			} else {
 				rest = append(rest, t)

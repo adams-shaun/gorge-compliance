@@ -122,3 +122,35 @@ func p2aMergeCantTarget(s *Summary) {
 	}
 	s.Abilities = out
 }
+
+// p2aShadowHelper reports the unprinted helper static a script pairs with
+// "can block creatures with shadow as though they didn't have shadow"
+// (S:Mode$ CanBlockIfShadow): a Secondary$ CantBlock of the blocker when it
+// has shadow itself. The printed ability is the CanBlockIfShadow static.
+func p2aShadowHelper(st *cards.Static) bool {
+	p := st.Params
+	return st.Mode == "CantBlock" && p["Secondary"] == "True" && strings.Contains(p["ValidCard"], "withShadow")
+}
+
+// p2aReplacementStatics makes a gorge static whose every effect is a
+// replacement token ("replace:wouldflipacoin" from S:Mode$ FlipCoinDoubler,
+// "replace:woulddealdamage" from S:Mode$ InfectDamage) the replacement
+// ability the printed "if ... would ..., instead" text and mtgish's
+// Replace* rule are.
+func p2aReplacementStatics(s *Summary) {
+	for i, a := range s.Abilities {
+		if a.Kind != "static" || len(a.Effects) == 0 {
+			continue
+		}
+		all := true
+		for _, t := range a.Effects {
+			if !strings.HasPrefix(t, "replace:") {
+				all = false
+				break
+			}
+		}
+		if all {
+			s.Abilities[i].Kind = "replacement"
+		}
+	}
+}
