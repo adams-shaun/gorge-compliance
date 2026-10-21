@@ -206,6 +206,16 @@ func p2fParamTokens(a *cards.SA) []string {
 			// CreateFutureTrigger(RemoveCounters).
 			out = append(out, "delayed", "countersremove")
 		}
+	case "ChangeZone":
+		if p2fThreeZoneSearch(p["Origin"]) && p["Defined"] == "" {
+			// "Search its owner's graveyard, hand and library for ... and
+			// exile them" written as one hidden ChangeZone over the three
+			// zones (read as the search): the graveyard and the hand are
+			// moves too, as mtgish's SearchPlayersLibraryAndGraveyardAndHand
+			// (map_c2.go) and the scripts that split it per zone.
+			d := strings.ToLower(p["Destination"])
+			out = append(out, "move:graveyard>"+d, "move:hand>"+d)
+		}
 	case "DigUntil":
 		if d := p["OptionalNoDestination"]; d != "" && p["OptionalFoundMove"] == "True" {
 			// "You may put that card onto the battlefield. If you don't,
@@ -230,4 +240,14 @@ func init() {
 	extAction["ReturnSpellOrPermanentToOwnersHand"] = func(e *effects, _ node) {
 		e.merge([]*effects{{effects: []string{"move:battlefield>hand"}}, {effects: []string{"move:stack>hand"}}})
 	}
+}
+
+// p2fThreeZoneSearch reports an Origin$ of exactly the graveyard, the hand
+// and the library, in any order.
+func p2fThreeZoneSearch(o string) bool {
+	zs := map[string]bool{}
+	for _, z := range strings.Split(o, ",") {
+		zs[strings.TrimSpace(z)] = true
+	}
+	return len(zs) == 3 && zs["Graveyard"] && zs["Hand"] && zs["Library"]
 }
