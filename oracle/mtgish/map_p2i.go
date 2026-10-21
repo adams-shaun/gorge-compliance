@@ -20,7 +20,10 @@ import (
 func p2iUnlessPaidByYou(g *gorgeNorm, a *cards.SA, payer string) bool {
 	switch payer {
 	case "":
-		return a.API != "Counter"
+		// The default payer is the player the effect is on: a Defined$ of
+		// another player (the permanent's controller) pays, not you.
+		d := a.Params["Defined"]
+		return a.API != "Counter" && (d == "" || d == "You")
 	case "You":
 		return true
 	case "TriggeredPlayer":
