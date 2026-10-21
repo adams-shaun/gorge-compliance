@@ -290,3 +290,29 @@ func p2fPreventGrants(toks []string) []string {
 	}
 	return toks
 }
+
+// p2fDamageEach repeats a damage token once per recipient of a
+// MultipleRecipients ("deals X damage to any other target and X damage to
+// itself"): scripts deal each recipient's damage with its own DealDamage.
+// A group recipient ("each creature and each player") is one DamageAll.
+func p2fDamageEach(recipient any, tok string) []string {
+	n := 1
+	if variantOf(recipient) == "MultipleRecipients" {
+		rs := argsOf(recipient)
+		single := len(rs) > 1
+		for _, r := range rs {
+			if strings.HasPrefix(variantOf(r), "Each") {
+				// "Each creature and each player": one DamageAll.
+				single = false
+			}
+		}
+		if single {
+			n = len(rs)
+		}
+	}
+	out := make([]string, n)
+	for i := range out {
+		out[i] = tok
+	}
+	return out
+}

@@ -352,11 +352,11 @@ func (e *effects) action(n node, v string) {
 	case "LoseLife":
 		e.add("loselife:" + gameNumber(arg(0)))
 	case "PermanentDealsDamage":
-		e.add("damage:" + gameNumber(arg(1)))
+		e.add(p2fDamageEach(arg(2), "damage:"+gameNumber(arg(1)))...)
 	case "SpellDealsDamage":
-		e.add("damage:" + gameNumber(arg(1)))
+		e.add(p2fDamageEach(arg(2), "damage:"+gameNumber(arg(1)))...)
 	case "DeadPermanentDealsDamage":
-		e.add("damage:" + gameNumber(arg(0)))
+		e.add(p2fDamageEach(arg(1), "damage:"+gameNumber(arg(0)))...)
 	case "SpellDealsMultipleDamage", "PermanentDealsMultipleDamage":
 		for _, d := range list(arg(1)) {
 			e.add("damage:" + gameNumber(argN(d, 0)))
