@@ -356,9 +356,8 @@ func d2ContinuousEffects(p map[string]string) []string {
 	if p["ManaConversion"] != "" {
 		out = append(out, "manaconvert")
 	}
-	if p["Goad"] != "" {
-		out = append(out, "goad")
-	}
+	// Goad$ is the rule:isgoadedbyplayer static (from_gorge.go), as
+	// mtgish's IsGoadedByPlayer rule; mapping it here too counted it twice.
 	if p["RemoveNonManaAbilities"] != "" {
 		out = append(out, "loseabilities")
 	}
@@ -944,8 +943,9 @@ var d2RuleSynonyms = map[string]string{
 	"CanBlockCreaturesWithLandwalkAbilitiesAsThoughTheyDidntHaveThem": "rule:canbeblockedasthoughitdidnthave",
 	// "Its activated abilities cost {N} more": S:Mode$ RaiseCost.
 	"IncreaseManaCost": "costincrease",
-	// "Is goaded": the goad action's result, written as a rule.
-	"IsGoadedByPlayer": "goad",
+	// "Is goaded": a rule, as the script's Goad$ static (its own static,
+	// split like every rule).
+	"IsGoadedByPlayer": "rule:isgoadedbyplayer",
 }
 
 // d2PlayerToken maps the PlayerEffect variants this unit folds or names

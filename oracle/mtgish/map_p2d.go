@@ -305,13 +305,25 @@ func p2dAlias(toks []string, alias map[string]string) []string {
 	return out
 }
 
+// p2dGoadAlias: making a creature goaded from a resolving ability is the
+// goad action, whether written as the action (Forge Goad, mtgish Goad*) or
+// as an "is goaded" rule effect (Forge Goad$ in an Effect's static, mtgish
+// CreatePermanentRuleEffectUntil). A static keeps the rule.
+var p2dGoadAlias = map[string]string{"rule:isgoadedbyplayer": "goad"}
+
 func p2dMtgishAbility(a Ability) Ability {
+	if a.Kind != "static" {
+		a.Effects = p2dAlias(a.Effects, p2dGoadAlias)
+	}
 	a.Effects = p2dAlias(a.Effects, p2dMtgishAlias)
 	a.Effects = p2dPairTargetRules(a.Effects)
 	return a
 }
 
 func p2dGorgeAbility(a Ability) Ability {
+	if a.Kind != "static" {
+		a.Effects = p2dAlias(a.Effects, p2dGoadAlias)
+	}
 	a.Effects = p2dAlias(a.Effects, p2dGorgeAlias)
 	return a
 }
