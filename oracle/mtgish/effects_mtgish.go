@@ -28,6 +28,8 @@ func (e *effects) walk(x any) {
 		case "_LookAtTopOfLibraryAction", "_RevealTheTopNumberCardsOfLibraryAction":
 			if t := lookMove(variant); t != "" {
 				e.add(t)
+			} else if descend, ok := e.p2cLookAction(n, variant); ok {
+				return descend
 			}
 			if lookActionP2B[variant] {
 				// An action inside the look ("it gains haste"), shaped as
@@ -35,30 +37,23 @@ func (e *effects) walk(x any) {
 				e.action(n, variant)
 				return false
 			}
-			if a := argsOf(n); variant == "IfElse" && len(a) == 3 {
-				// "Instead put two of them into your hand": one branch runs.
-				e.alternatives(a[1], a[2])
-				return false
-			}
 			if variant == "PlayerMillsNumberCards" {
 				// "Target opponent mills a card for each ..." (map_p2d.go).
 				e.add("mill:" + gameNumber(rawArgs(n)))
 			}
-			if strings.Contains(variant, "MayCast") {
-				// "You may cast a spell from among them without paying
-				// its mana cost": a cast (Forge: Play), map_p2d.go.
-				e.add("play")
-			}
 			return variant == "If" || variant == "Unless" || variant == "MayAction" || variant == "MayActions"
 		case "_SearchLibraryAction":
-			// Steps of a search: only their enter flags carry an effect
-			// (the found card enters with a counter).
-			e.add(p2fSearchStep(variant)...)
-			return true
-		case "_EnterFlag", "_ExileFlag":
-			// "Return it with a finality counter on it" (EnterFlags).
-			e.add(enterFlagP2B(n, variant)...)
-			return variant == "If" || variant == "IfPassesFilter"
+			// "..., then each opponent who cast a spell with that name
+			// loses 8 life": actions among a search's steps.
+			if descend, ok := e.p2cLookAction(n, variant); ok {
+				return descend
+			}
+			return false
+		case "_EnterFlag", "_ExileFlag", "_TokenFlag":
+			// "Return it with N +1/+1 counters on it"; a conditional
+			// flag's flags are walked.
+			e.add(p2cEnterFlag(n, variant)...)
+			return strings.HasPrefix(variant, "If")
 		case "_Target", "_DistributedTarget":
 			if strings.HasSuffix(variant, "TargetPlayerControls") {
 				// "Up to five target permanents target player controls":
@@ -110,11 +105,6 @@ func (e *effects) walk(x any) {
 			e.action(n, variant)
 			return !leafActions[variant]
 		case "_Actions":
-			if variant == "ActionList" {
-				for _, h := range extActionList {
-					h(e, list(rawArgs(n)))
-				}
-			}
 			switch variant {
 			case "Targeted_Modal":
 				// "Target spell or permanent": one slot (map_f.go).
@@ -310,7 +300,14 @@ func (e *effects) action(n node, v string) {
 		// casting is the effect, as the Cast* actions.
 		e.add("play")
 		return
-	case (v == "MayCost" || v == "MustCost") && mayCostEffectP2B(e, v == "MustCost", arg(0)):
+	case v == "MayCost":
+		// "You may sacrifice a creature. If you do, ...": a cost paid while
+		// the ability resolves is done, as the gorge side's sub-ability
+		// Cost$ and UnlessCost$ are (p2cCost; a mana payment stays
+		// nothing).
+		e.p2cMayCost(arg(0))
+		return
+	case v == "MustCost" && mustCostEffectP2B(e, arg(0)):
 		return
 	case wrapperActions[v]:
 		return
@@ -335,10 +332,7 @@ func (e *effects) action(n node, v string) {
 		if t, ok := reflexiveB[strings.TrimSuffix(strings.TrimPrefix(v, "Reflexive_"), "_WhenYouDo")]; ok {
 			e.add(t)
 		}
-		e.add(reflexiveP2B(n, v)...)
-		if f, ok := extReflexive[reflexiveHalf(v)]; ok {
-			f(e, n)
-		}
+		e.p2cReflexive(n, v)
 		return
 	}
 	switch v {
@@ -514,7 +508,7 @@ func (e *effects) action(n node, v string) {
 	case "BecomeTheMonarch":
 		e.add("monarch")
 	case "EachPlayerCreatesTokens":
-		e.add("token:*")
+		e.p2cEachPlayerTokens(arg(1))
 	case "PutEachExiledCardOntoTheBattlefield":
 		e.add("move:exile>battlefield")
 	case "PutPermanentOnTopOfOwnersLibrary":
@@ -589,7 +583,9 @@ func lookMove(v string) string {
 		return "move:library>graveyard"
 	case strings.Contains(v, "Exile"):
 		return "move:library>exile"
-	case strings.Contains(v, "OfLibrary"), strings.Contains(v, "IntoLibrary"):
+	case strings.Contains(v, "OfLibrary"):
+		// (The rest shuffled back into the library is no move, as the
+		// gorge side's p2dDigRestStays.)
 		return "move:library>library"
 	}
 	return ""
@@ -650,7 +646,9 @@ func tokenToken(t any) string {
 		}
 	}
 	v := variantOf(t)
-	if strings.HasPrefix(v, "TokenCopy") || v == "TokenFromCopy" {
+	// OracleToken: "create a Mutavault token", a token of a named card
+	// (Forge: CopyPermanent DefinedName$).
+	if strings.HasPrefix(v, "TokenCopy") || v == "TokenFromCopy" || v == "OracleToken" {
 		return "tokencopy:" + count
 	}
 	if v == "ThoseTokens" {
@@ -876,13 +874,13 @@ func staticEffects(r any) []string {
 	case "ThisSpellEffect":
 		var out []string
 		for _, x := range list(rawArgs(r)) {
-			out = append(out, "spell:"+strings.ToLower(variantOf(x)))
+			out = append(out, p2cSpellToken(variantOf(x)))
 		}
 		return out
 	case "StackSpellsEffect":
 		var out []string
 		for _, x := range list(argN(r, 1)) {
-			out = append(out, p2fStackSpellToken(x))
+			out = append(out, p2cSpellToken(variantOf(x)))
 		}
 		return out
 	}

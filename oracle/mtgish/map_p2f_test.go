@@ -10,15 +10,12 @@ import (
 func TestP2FMtgishActions(t *testing.T) {
 	exileTarget := `{"_Action":"MayCost","args":{"_Cost":"Exile","args":[[{"_ExilableCost":"Permanent","args":{"_Permanent":"Ref_TargetPermanent"}}],[]]}}`
 	for _, tc := range []struct{ name, js, want string }{
-		{"a flicker's may-cost exile is the exile",
+		{"a flicker (the may-cost exile is p2cMayCost's)",
 			`{"_Actions":"ActionList","args":[` + exileTarget + `,{"_Action":"If","args":[{"_Condition":"CostWasPaid"},[{"_Action":"PutExiledCardOntoBattlefield","args":[{"_CardInExile":"TheCardExiledThisWay"},[]]}]]}]}`,
 			"move:battlefield>exile move:exile>battlefield"},
 		{"a flicker inside an If",
 			`{"_Actions":"ActionList","args":[{"_Action":"If","args":[{"_Condition":"X"},[` + exileTarget + `,{"_Action":"If","args":[{"_Condition":"CostWasPaid"},[{"_Action":"PutExiledCardOntoBattlefield","args":[{"_CardInExile":"TheCardExiledThisWay"},[]]}]]}]]}]}`,
 			"move:battlefield>exile move:exile>battlefield"},
-		{"a may-cost exile with no return stays a cost",
-			`{"_Actions":"ActionList","args":[` + exileTarget + `,{"_Action":"If","args":[{"_Condition":"CostWasPaid"},[{"_Action":"DrawACard"}]]}]}`,
-			"draw:1"},
 		{"may put from hand or graveyard is both moves",
 			`[{"_Action":"MayCost","args":{"_Cost":"Or","args":[{"_Cost":"PutACardFromHandOnBattlefield","args":[]},{"_Cost":"PutACardFromPlayersGraveyardOnBattlefield","args":[]}]}}]`,
 			"move:graveyard>battlefield move:hand>battlefield"},
@@ -31,9 +28,6 @@ func TestP2FMtgishActions(t *testing.T) {
 		{"a sacrifice inside a reveal is the sacrifice",
 			`{"_Action":"RevealTheTopNumberCardsOfLibrary","args":[{"_GameNumber":"Integer","args":2},[{"_RevealTheTopNumberCardsOfLibraryAction":"SacrificePermanent","args":{"_Permanent":"ThisPermanent"}}]]}`,
 			"dig:2 sacrifice"},
-		{"a found card cast is a play",
-			`{"_Action":"SearchLibrary","args":[{"_SearchLibraryAction":"CastFoundCardsWithoutPaying"}]}`,
-			"play search:*"},
 		{"spell or permanent is one of the two",
 			`{"_Action":"ReturnSpellOrPermanentToOwnersHand","args":{}}`,
 			"move:battlefield>hand move:stack>hand"},
@@ -66,9 +60,6 @@ func TestP2FMtgishActions(t *testing.T) {
 	}
 	if got := p2fCDATypes(map[string]any{"_CDA_Types": "AddCreatureTypeVariable", "args": map[string]any{}}); got != "type" {
 		t.Errorf("chosen CDA type: %q", got)
-	}
-	if got := p2fStackSpellToken(map[string]any{"_SpellEffect": "CantBeCast"}); got != "player:cantcastspells" {
-		t.Errorf("can't be cast: %q", got)
 	}
 }
 

@@ -571,10 +571,17 @@ func (g *gorgeNorm) selfGrantStatic(st *cards.Static) bool {
 			}
 		}
 	}
+	var folded []string
 	for _, name := range strings.Split(p["AddStaticAbility"], "&") {
 		if body, ok := g.svars()[strings.TrimSpace(name)]; ok {
 			if s, ok := cards.ParseStaticLine(body); ok {
-				g.static(&s)
+				if level {
+					// mtgish's levelStatic folds a level's static
+					// abilities into the level's one static.
+					folded = append(folded, p2cGorgeStaticEffects(g, &s)...)
+				} else {
+					g.static(&s)
+				}
 			}
 		}
 	}
@@ -609,8 +616,9 @@ func (g *gorgeNorm) selfGrantStatic(st *cards.Static) bool {
 	eff := gorgeStaticEffects(st.Mode, rest)
 	if len(eff) == 1 && eff[0] == unmapped("Static.Continuous") {
 		// Nothing but the granted abilities.
-		return true
+		eff = nil
 	}
+	eff = append(eff, folded...)
 	if eff != nil {
 		g.ability(Ability{Kind: "static", Effects: eff})
 	}

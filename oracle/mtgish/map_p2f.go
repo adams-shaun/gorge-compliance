@@ -10,65 +10,6 @@ import (
 // corpus from "Raffine's Guidance" to the end of the alphabet. Each family
 // is general (corpus-wide), not per card.
 
-// extActionList holds hooks the walker runs over every mtgish action list
-// (Actions.ActionList) before descending into it: patterns that read one
-// action together with its later siblings.
-var extActionList []func(e *effects, l []any)
-
-// p2fHasVariant reports whether variant v occurs anywhere under x.
-func p2fHasVariant(x any, v string) bool {
-	found := false
-	walk(x, func(n node, enum, variant string) bool {
-		if variant == v {
-			found = true
-		}
-		return !found
-	})
-	return found
-}
-
-func init() {
-	// "You may exile <permanent>. If you do, return it to the battlefield"
-	// (a flicker): mtgish writes the exile as a MayCost, which stays a
-	// cost elsewhere (map_p2d.go), but a flicker's exile is the first half
-	// of the effect, and every script writes it as an optional ChangeZone
-	// (measured: no flicker script pays it as a Cost$/UnlessCost$). So a
-	// MayCost exile whose later sibling puts the exiled card back onto
-	// the battlefield is the exile.
-	extActionList = append(extActionList, p2fFlicker)
-}
-
-// p2fFlicker is the flicker hook over one action list, and over the
-// action lists an If/Unless in it carries (they are bare arrays, not
-// ActionList nodes, so the walker never hooks them itself).
-func p2fFlicker(e *effects, l []any) {
-	for i, a := range l {
-		if enumOf(a) == "Action" && (variantOf(a) == "If" || variantOf(a) == "Unless") {
-			for _, x := range argsOf(a) {
-				if sub := list(x); sub != nil && enumOf(sub[0]) == "Action" {
-					p2fFlicker(e, sub)
-				}
-			}
-		}
-		if enumOf(a) != "Action" || variantOf(a) != "MayCost" {
-			continue
-		}
-		c := rawArgs(a)
-		if !strings.HasPrefix(variantOf(c), "Exile") {
-			continue
-		}
-		back := false
-		for _, b := range l[i+1:] {
-			if p2fHasVariant(b, "PutExiledCardOntoBattlefield") {
-				back = true
-			}
-		}
-		if back {
-			e.costAsAction(c)
-		}
-	}
-}
-
 // p2fSearchDelivery folds the delivery of a search that parks its cards in
 // the library: "search your library for a card, reveal it, then put it
 // into your hand or onto the battlefield (by a condition, an opponent's
@@ -131,48 +72,6 @@ func p2fReflexiveEnter(x any) []string {
 	return sub.effects
 }
 
-// p2fMayCostOr maps "you may <A> or <B>. If you do, ..." as the
-// alternatives when every alternative is an action a script writes as an
-// effect (mayCostActionsP2B), as one MayCost of either would be.
-func p2fMayCostOr(e *effects, c any) bool {
-	alts := argsOf(c)
-	if len(alts) == 0 {
-		return false
-	}
-	sub := &effects{}
-	var rest []any
-	for _, a := range alts {
-		v := variantOf(a)
-		switch {
-		case strings.HasPrefix(v, "Cast") || strings.HasPrefix(v, "Play"):
-			// "Play a land or cast a spell from the top of your
-			// library": a cast, as a MayCost Cast* (effects_mtgish.go).
-			sub.add("play")
-		case mayCostActionsP2B[v]:
-			rest = append(rest, a)
-		default:
-			return false
-		}
-	}
-	if sub.effects != nil {
-		sub.effects = dedup(sub.effects)
-	}
-	sub.alternativeCosts(rest)
-	for _, t := range sub.effects {
-		if IsUnmapped(t) {
-			return false
-		}
-	}
-	e.add(sub.effects...)
-	return len(sub.effects) > 0
-}
-
-func init() {
-	// "From your graveyard onto the battlefield", the graveyard twin of
-	// PutACardFromHandOnBattlefield: a script writes it as a ChangeZone.
-	mayCostActionsP2B["PutACardFromPlayersGraveyardOnBattlefield"] = true
-}
-
 // p2fLookStays are the look/reveal steps that leave the cards in the
 // library: shuffled back in ("then shuffle the rest into your library") or
 // left on top in the same order. Neither is a move, as the gorge side reads
@@ -190,20 +89,6 @@ var p2fLookStays = map[string]bool{
 // move, as p2dDigUntilShuffledBack reads Shuffle$ True.
 func p2fShuffledAfter(a *cards.SA, dest string) bool {
 	return dest == "Library" && a.Sub != nil && a.Sub.API == "Shuffle"
-}
-
-func init() {
-	// A reflexive exile ("exile it. When you do, ...") is mapped by both
-	// reflexiveHeadP2B (every zone but a graveyard) and unit p2d's
-	// extReflexive (every zone), so a battlefield exile counted twice.
-	// Each zone once: p2d's table adds only what p2b's skips.
-	extReflexive["Exile"] = func(e *effects, n node) {
-		for _, x := range list(argN(n, 0)) {
-			if z := exilableZone(x); z == "graveyard" {
-				e.add("move:graveyard>exile")
-			}
-		}
-	}
 }
 
 // p2fParamTokens maps parameters that carry an effect of their own.
@@ -288,21 +173,6 @@ func init() {
 	}
 }
 
-// p2fPreventGrants reads a resolving ability's grant of Forge's prevention
-// keyword ("Prevent all [combat] damage that would be dealt by/to
-// CARDNAME.", given by a Pump or an Effect's static until end of turn) as
-// the prevention it is, as mtgish's CreatePreventDamageUntil ("prevent").
-// A printed static granting it stays a grant (mtgish: a prevention rule).
-func p2fPreventGrants(toks []string) []string {
-	for i, t := range toks {
-		h := strings.TrimPrefix(strings.TrimPrefix(t, "grant:"), "spell:")
-		if h != t && strings.HasPrefix(h, "prevent") && strings.Contains(h, "damagethatwouldbedealt") && strings.HasSuffix(h, "cardname") {
-			toks[i] = "prevent"
-		}
-	}
-	return toks
-}
-
 // p2fDamageEach repeats a damage token once per recipient of a
 // MultipleRecipients ("deals X damage to any other target and X damage to
 // itself"): scripts deal each recipient's damage with its own DealDamage.
@@ -366,16 +236,6 @@ func p2fCDATypes(x any) string {
 	return "cda"
 }
 
-// p2fSearchStep maps a search step that is an effect of its own: casting
-// the found card ("search for an instant and cast it without paying its
-// mana cost"), as scripts' Play over the found card.
-func p2fSearchStep(v string) []string {
-	if strings.Contains(v, "CastFoundCards") || strings.Contains(v, "PlayFoundCards") {
-		return []string{"play"}
-	}
-	return nil
-}
-
 func init() {
 	// "You may activate loyalty abilities of it any time you could cast an
 	// instant": a timing permission, which scripts write as the
@@ -396,14 +256,4 @@ func init() {
 		}
 		e.add(gameEffectToken(argN(n, 1)))
 	}
-}
-
-// p2fStackSpellToken maps one effect a static gives spells. "<Spells> can't
-// be cast" is Forge's CantBeCast static, a restriction on the players
-// casting them (the gorge side's player:cantcastspells).
-func p2fStackSpellToken(x any) string {
-	if variantOf(x) == "CantBeCast" {
-		return "player:cantcastspells"
-	}
-	return "spell:" + strings.ToLower(variantOf(x))
 }

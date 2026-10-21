@@ -10,13 +10,6 @@ import (
 // corpus from "Raffine's Guidance" to "Zulaport Enforcer". Each family is
 // general (corpus-wide), not per card.
 
-// extReflexive maps the action half of a mtgish "Reflexive_<X>_<When...>"
-// action, keyed by the variant with its "Reflexive_" prefix and the
-// trigger-condition suffix cut ("Reflexive_Sacrifice_WhenYouDo" is
-// "Sacrifice"), for the halves that are an action the player does while
-// the ability resolves. Consulted by the core Reflexive_ case.
-var extReflexive = map[string]func(e *effects, n node){}
-
 // reflexiveHalf cuts a Reflexive_ variant down to its action half.
 func reflexiveHalf(v string) string {
 	v = strings.TrimPrefix(v, "Reflexive_")
@@ -35,55 +28,6 @@ func discardableCount(x any) string {
 		return gameNumber(rawArgs(x))
 	}
 	return "*"
-}
-
-// p2dNestedCost maps the cost of a reflexive trigger ("you may sacrifice a
-// creature. When you do, ...", Forge: an ImmediateTrigger whose Cost$ is
-// the sacrifice) to the action paying it does. The player sacrifices or
-// discards while the ability resolves, exactly as when a script writes the
-// same sentence as a Sacrifice/Discard sub-ability followed by an
-// ImmediateTrigger conditioned on it; mtgish writes both as
-// Reflexive_Sacrifice/Reflexive_Discard actions (extReflexive).
-func p2dNestedCost(a *cards.SA) []string {
-	var out []string
-	if a.API == "ImmediateTrigger" || strings.HasPrefix(a.Params["Cost"], "Mandatory ") {
-		// "Mandatory": a trigger's "sacrifice it. If you do, ..." (mtgish
-		// MustCost).
-		out = costActions(a.Params["Cost"])
-	}
-	if a.Params["UnlessSwitched"] == "True" && a.API == "ImmediateTrigger" {
-		// "UnlessCost$ X | UnlessSwitched$ True": the trigger happens only
-		// if X is paid, the same reflexive cost.
-		out = append(out, costActions(a.Params["UnlessCost"])...)
-	}
-	return out
-}
-
-// p2dExileCostZone is the zone each Forge exile cost exiles from.
-var p2dExileCostZone = map[string]string{
-	"Exile": "battlefield", "ExileFromGrave": "graveyard", "ExileAnyGrave": "graveyard",
-	"ExileSameGrave": "graveyard", "ExileFromHand": "hand", "ExileFromTop": "library",
-	"ExileFromStack": "stack",
-}
-
-// costActions maps the sacrifice, exile and discard parts of a Forge cost
-// string.
-func costActions(cost string) []string {
-	var out []string
-	for _, part := range strings.Fields(cost) {
-		switch {
-		case strings.HasPrefix(part, "Sac<"):
-			out = append(out, "sacrifice")
-		case strings.HasPrefix(part, "Exile"):
-			if z, ok := p2dExileCostZone[strings.SplitN(part, "<", 2)[0]]; ok {
-				out = append(out, "move:"+z+">exile")
-			}
-		case strings.HasPrefix(part, "Discard<"):
-			n := strings.SplitN(strings.TrimPrefix(part, "Discard<"), "/", 2)[0]
-			out = append(out, "discard:"+literalOr(n, "*"))
-		}
-	}
-	return out
 }
 
 func init() {
@@ -109,29 +53,6 @@ func init() {
 		"PutUptoNumberCardsFromHandAndOrGraveyardOnBattlefield",
 	} {
 		extAction[v] = func(e *effects, n node) { e.add("move:hand>battlefield", "move:graveyard>battlefield") }
-	}
-	extReflexive["Sacrifice"] = func(e *effects, n node) { e.add("sacrifice") }
-	// "{T}, exile a card: Add {R}. When you do, ...": the mana, as the
-	// script's Mana ability; "it fights ... When excess damage is dealt
-	// this way, ...": the fight.
-	extReflexive["AddMana"] = func(e *effects, n node) { e.add("mana") }
-	extReflexive["Fight"] = func(e *effects, n node) { e.add("fight") }
-	// "You may convert it. When you do, ...": the convert is a transform.
-	extReflexive["ConvertPermanent"] = func(e *effects, n node) { e.add("transform") }
-	extReflexive["PlayerSacrifices"] = func(e *effects, n node) { e.add("sacrifice") }
-	// "You may pay {2} and sacrifice an Aura": the mana is paid, the
-	// sacrifice done.
-	extReflexive["PayMana_Sacrifice"] = func(e *effects, n node) { e.add("sacrifice") }
-	extReflexive["Discard_Draw"] = func(e *effects, n node) {
-		e.add("discard:"+discardableCount(argN(n, 0)), "draw:"+drawableCount(argN(n, 1)))
-	}
-	extReflexive["Discard"] = func(e *effects, n node) { e.add("discard:" + discardableCount(argN(n, 0))) }
-	// "You may exile a creature card from your graveyard. When you do":
-	// the exile, as the Exile action.
-	extReflexive["Exile"] = func(e *effects, n node) {
-		for _, x := range list(argN(n, 0)) {
-			e.add("move:" + exilableZone(x) + ">exile")
-		}
 	}
 }
 
@@ -205,7 +126,8 @@ func p2dDigUntilShuffledBack(p map[string]string, key string) bool {
 // p2dDigRestStays reports a Dig whose unchosen cards need no move of
 // their own: they go back into the library that a following Shuffle
 // shuffles ("put any number onto the battlefield, then shuffle", mtgish's
-// PutTheRemainingCardsBackIntoLibraryAndShuffle).
+// PutTheRemainingCardsBackIntoLibraryAndShuffle, which lookMove reads as
+// no move either).
 func p2dDigRestStays(a *cards.SA, dest, rest string) bool {
 	return rest == "Library" && dest != "Library" && a.Sub != nil && a.Sub.API == "Shuffle"
 }
@@ -474,7 +396,7 @@ func p2dAnimateCarrier(p map[string]string) bool {
 
 // A cost a player must pay ("sacrifice it. If you do, ...", "discard a
 // card. If you do, ...") is the action paying it does, as a script's
-// Sacrifice/Discard sub-ability or its "Cost$ Mandatory ..." (p2dNestedCost).
+// Sacrifice/Discard sub-ability or its "Cost$ Mandatory ..." (p2cCost).
 // A cost the player may pay (MayCost) stays a cost: scripts write it as an
 // UnlessCost as often as an optional action. A mana or energy payment is
 // never an effect.

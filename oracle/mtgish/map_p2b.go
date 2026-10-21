@@ -10,52 +10,14 @@ import (
 // Phase 2, unit b: residual T4 effect classes found triaging the
 // alphabetical second third of the corpus.
 
-// mayCostActionsP2B are the costs of a "you may <X>. If you do, ..."
-// (mtgish MayCost/MustCost) that Forge's cost grammar has no cost for, so
-// a script always writes X as an effect: putting a card from hand, a
-// graveyard, exile or the library onto the battlefield or into a hand,
-// looking, searching, destroying, transforming, untapping another
-// permanent, creating tokens or a continuous effect. Those are mapped as
-// the action. A cost Forge can write as a cost (sacrifice, exile, discard,
-// pay life or energy, tap, return to hand, counters, reveal, mill, draw)
-// stays unmapped on both sides: scripts write it as a Cost$ or UnlessCost$,
-// which the gorge side does not compare either (measured: mapping those
-// adds more rows than it removes).
-var mayCostActionsP2B = map[string]bool{
-	"PutACardFromHandOnBattlefield":               true,
-	"PutACardFromGraveyardIntoHand":               true,
-	"PutGraveyardCardOntoBattlefield":             true,
-	"PutACardOfTypeMilledThisWayIntoHand":         true,
-	"PutExiledCardOntoBattlefield":                true,
-	"PutGraveyardCardOnTopOfLibrary":              true,
-	"PutTopCardOfLibraryOfTypeOnBattlefield":      true,
-	"LookAtTheTopCardOfPlayersLibrary":            true,
-	"LookAtTopOfLibrary":                          true,
-	"SearchLibrary":                               true,
-	"DestroyPermanent":                            true,
-	"TransformPermanent":                          true,
-	"UntapPermanent":                              true,
-	"CreateTokens":                                true,
-	"CreatePermanentLayerEffectUntil":             true,
-	"AbandonScheme":                               true,
-	"PutTopCardOfEachPlayersLibraryInGraveyard":   true,
-	"LookAtPlayersHandAndChooseACardToExileUntil": true,
-}
-
-// mayCostEffectP2B maps a MayCost cost listed in mayCostActionsP2B as the
-// action it names, and reports whether it did. A MustCost ("exile it. If
-// you do, ...": the action is mandatory, its "if you do" makes it a cost)
-// is mapped for every action except a sacrifice, a discard or a life
-// payment, which scripts write as a Cost$ or UnlessCost$ (measured).
-func mayCostEffectP2B(e *effects, must bool, c any) bool {
+// mustCostEffectP2B maps a MustCost ("exile it. If you do, ...": the
+// action is mandatory, its "if you do" makes it a cost) as the action it
+// names, and reports whether it did, for every action except a sacrifice,
+// a discard or a life payment, which map_p2d.go's MustCost action maps.
+// (A MayCost is p2cMayCost's.)
+func mustCostEffectP2B(e *effects, c any) bool {
 	v := variantOf(c)
-	if !must && v == "Or" {
-		return p2fMayCostOr(e, c)
-	}
-	switch {
-	case must && (strings.HasPrefix(v, "Sacrifice") || v == "DiscardACard" || v == "PayLife"):
-		return false
-	case !must && !mayCostActionsP2B[v]:
+	if strings.HasPrefix(v, "Sacrifice") || v == "DiscardACard" || v == "PayLife" {
 		return false
 	}
 	sub := &effects{}
@@ -84,16 +46,13 @@ var replCanonP2B = map[string]string{
 }
 
 // paramTokensP2B maps the second action some APIs carry in their own
-// parameters: PutCounter(All)'s CounterType2$ ("a +1/+1 counter on each
-// creature and a loyalty counter on each planeswalker") and a zone
-// change's WithCountersType$ ("exile it with N time counters on it").
+// parameters: a Dig's other destination and a zone change's further
+// origins or alternative destination. (PutCounter's CounterType2$ is the
+// core case's; a zone change's WithCountersType$ is p2cCost's.)
 func paramTokensP2B(a *cards.SA) []string {
 	p := a.Params
 	var out []string
 	switch a.API {
-	case "PutCounter", "PutCounterAll":
-		// CounterType2$ is mapped by gorgeAPIEffects' PutCounter case
-		// (both units added it; one copy, map_p2f.go).
 	case "Dig":
 		// "Look at the top card. If it's a land, you may put it onto the
 		// battlefield. Otherwise put it into your hand": the card not
@@ -123,91 +82,8 @@ func paramTokensP2B(a *cards.SA) []string {
 			o := strings.ToLower(strings.TrimSpace(strings.SplitN(p["Origin"], ",", 2)[0]))
 			out = append(out, "move:"+o+">"+strings.ToLower(alt))
 		}
-		if ct := p["WithCountersType"]; ct != "" {
-			out = append(out, gorgeCounterTokens(ct, literalOr(p["WithCountersAmount"], "1"))...)
-		}
 	}
 	return out
-}
-
-// enterFlagP2B maps the counters a permanent is put onto the battlefield
-// with or exiled with (EntersWith*/ExilesWith* flags), as the gorge side
-// maps a zone change's WithCountersType$ (paramTokensP2B).
-func enterFlagP2B(n node, v string) []string {
-	switch v {
-	case "EntersWithACounter", "ExilesWithACounter":
-		return []string{"counters:" + counterType(rawArgs(n)) + ":1"}
-	case "EntersWithNumberCounters", "ExilesWithNumberCounters":
-		return []string{"counters:" + counterType(argN(n, 1)) + ":" + gameNumber(argN(n, 0))}
-	}
-	return nil
-}
-
-// reflexiveHeadP2B maps the action half of mtgish's
-// "Reflexive_<Action>_When..." ("return it to the battlefield. When you
-// do, ...") for actions a script writes as an effect, keyed by <Action>.
-// A cost-shaped half (sacrifice, discard, pay, tap, remove counters,
-// collect evidence) stays a cost, as the core case keeps it.
-var reflexiveHeadP2B = map[string]func(n node) []string{
-	"PutOnBattlefield": func(n node) []string {
-		return []string{"move:" + reflexiveZoneP2B(argN(n, 0)) + ">battlefield"}
-	},
-	"Exile": func(n node) []string {
-		var out []string
-		for _, x := range list(argN(n, 0)) {
-			if z := exilableZone(x); z != "graveyard" {
-				// Exiling from a graveyard "when you do" is a cost in
-				// scripts (Cost$ ExileFromGrave), as in mtgish.
-				out = append(out, "move:"+z+">exile")
-			}
-		}
-		return dedup(out)
-	},
-	"DealDamage":                       fixedP2B("damage:*"),
-	"Fight":                            fixedP2B("fight"),
-	"Surveil":                          fixedP2B("surveil:*"),
-	"Amass":                            fixedP2B("amass"),
-	"Attach":                           fixedP2B("attach"),
-	"HavePlayerGainControlOfPermanent": fixedP2B("gaincontrol"),
-	"RollDice":                         fixedP2B("dice"),
-	"FlipACoin":                        fixedP2B("coin"),
-	"CreatureConnives":                 fixedP2B("connive"),
-	"AddMana":                          fixedP2B("mana"),
-	"PutAPermanentInOwnersHand":        fixedP2B("move:battlefield>hand"),
-	"SearchLibrary":                    fixedP2B("search:*"),
-	"RevealTheTopNumberCardsOfLibrary": fixedP2B("dig:*"),
-	"RevealCardsFromTheTopOfLibraryUntilACardOfTypeIsRevealed": fixedP2B("diguntil"),
-}
-
-func fixedP2B(t ...string) func(node) []string { return func(node) []string { return t } }
-
-func reflexiveP2B(n node, v string) []string {
-	head, _, _ := strings.Cut(strings.TrimPrefix(v, "Reflexive_"), "_When")
-	if f, ok := reflexiveHeadP2B[head]; ok {
-		return f(n)
-	}
-	return nil
-}
-
-// reflexiveZoneP2B is the zone of the first card a reflexive put moves
-// (CardInHand, CardInGraveyard, CardInExile, ...).
-func reflexiveZoneP2B(objs any) string {
-	l := list(objs)
-	if len(l) == 0 {
-		return "*"
-	}
-	v := variantOf(l[0])
-	switch {
-	case strings.Contains(v, "Hand"):
-		return "hand"
-	case strings.Contains(v, "Graveyard"):
-		return "graveyard"
-	case strings.Contains(v, "Exile"):
-		return "exile"
-	case strings.Contains(v, "Librar"):
-		return "library"
-	}
-	return "*"
 }
 
 // allListsP2B reports whether every element is a list (ChooseAnAction's
