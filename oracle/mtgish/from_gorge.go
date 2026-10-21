@@ -532,6 +532,14 @@ func (g *gorgeNorm) static(st *cards.Static) {
 }
 
 func gorgeStaticEffects(mode string, p map[string]string) []string {
+	if strings.Contains(mode, ",") {
+		// "Mode$ CantAttack,CantBlock": one static line, several modes.
+		var out []string
+		for _, m := range strings.Split(mode, ",") {
+			out = append(out, gorgeStaticEffects(strings.TrimSpace(m), p)...)
+		}
+		return out
+	}
 	if selfCastRestriction(mode, p) {
 		return nil
 	}
@@ -586,7 +594,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "setpt")
 		}
 		if p["AddType"] != "" || p["AddTypes"] != "" || p["RemoveType"] != "" || p["AddAllCreatureTypes"] != "" ||
-			p["RemoveCreatureTypes"] != "" || p["RemoveCardTypes"] != "" || p["SetCreatureTypes"] != "" {
+			p["RemoveCreatureTypes"] != "" || p["RemoveCardTypes"] != "" || p["SetCreatureTypes"] != "" || p2cTypeChange(p) {
 			out = append(out, "type")
 		}
 		if p["SetColor"] != "" || p["AddColor"] != "" {
@@ -609,7 +617,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		// (CanBlockAmount$ is read once, by d2ContinuousEffects.)
 		// (Goad$ True is "goad", d2ContinuousEffects.)
 		for _, k := range cards.SplitKeywordList(p["AddHiddenKeyword"]) {
-			out = append(out, hiddenKeywordToken(k))
+			out = append(out, p2cHiddenTokens(k)...)
 		}
 		out = append(out, d2ContinuousEffects(p)...)
 		if len(out) == 0 {
@@ -629,6 +637,11 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		}
 		return []string{"costincrease"}
 	case "CantBlockBy":
+		if p["ValidBlocker"] != "" && p["ValidAttacker"] == "" && p["ValidAttackerRelative"] == "" {
+			// "Creatures with power 7 or greater can't block": the
+			// blockers named, no attacker.
+			return []string{"rule:cantblock"}
+		}
 		if p["ValidBlocker"] != "" {
 			return []string{"rule:cantbeblockedbydefenders"}
 		}
@@ -921,6 +934,10 @@ func affectsPermanents(affected string) bool {
 // ("MustBeBlockedBy Creature.Eldrazi": "must be blocked by an Eldrazi if
 // able") to the rule token mtgish's PermanentRuleEffect carries.
 func grantedRule(k string) (string, bool) {
+	if strings.HasPrefix(k, "Prevent all") && strings.Contains(k, "dealt by CARDNAME") {
+		// A prevention shield on the object (mtgish's prevention).
+		return "prevent", true
+	}
 	rest, ok := strings.CutPrefix(k, "MustBeBlockedBy ")
 	if !ok {
 		return "", false

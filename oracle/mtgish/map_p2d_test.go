@@ -22,9 +22,9 @@ func TestP2DMtgishActions(t *testing.T) {
 		{"must cost is the action",
 			`{"_Action":"MustCost","args":{"_Cost":"SacrificeAPermanent","args":{"_Permanents":"IsPermanent"}}}`,
 			"sacrifice"},
-		{"may cost stays a cost",
+		{"may cost paid while resolving is the action",
 			`{"_Action":"MayCost","args":{"_Cost":"SacrificeAPermanent","args":{"_Permanents":"IsPermanent"}}}`,
-			"-"},
+			"sacrifice"},
 		{"must pay mana is no effect",
 			`{"_Action":"MustCost","args":{"_Cost":"PayMana","args":[]}}`,
 			"-"},
@@ -61,7 +61,8 @@ func TestP2DGorgeSide(t *testing.T) {
 			[]string{"dig:10", "move:library>library"}},
 		{"Token", map[string]string{"TokenScript": "a,b"}, []string{"token:1", "token:1"}},
 		{"CopyPermanent", map[string]string{"PumpKeywords": "Haste"}, []string{"tokencopy:1", "grant:haste"}},
-		{"CopyPermanent", map[string]string{"DefinedName": "X"}, []string{"token:1"}},
+		// A named-card token is a token copy, as mtgish's OracleToken.
+		{"CopyPermanent", map[string]string{"DefinedName": "X"}, []string{"tokencopy:1"}},
 		{"Animate", map[string]string{"RemoveKeywords": "Flying"}, []string{"loseabilities"}},
 		{"Animate", map[string]string{"sVars": "X"}, nil},
 		{"PutCounter", map[string]string{"CounterType": "P1P1", "CounterNum": "2", "CounterType2": "Reach", "CounterNum2": "1"},
@@ -73,14 +74,12 @@ func TestP2DGorgeSide(t *testing.T) {
 		}
 	}
 	// Reflexive costs, must-pay costs, and player recipients.
-	if got := p2dNestedCost(&cards.SA{API: "ImmediateTrigger", Params: map[string]string{"Cost": "Sac<1/Creature> ExileFromGrave<1/Card>"}}); !reflect.DeepEqual(got, []string{"sacrifice", "move:graveyard>exile"}) {
+	// (A reflexive trigger's or must-pay Cost$ is p2cCost's, map_p2c_test.go.)
+	if got := p2cCostActions("Sac<1/Creature> ExileFromGrave<1/Card>"); !reflect.DeepEqual(got, []string{"sacrifice", "move:graveyard>exile"}) {
 		t.Errorf("reflexive cost: %v", got)
 	}
-	if got := p2dNestedCost(&cards.SA{API: "Token", Params: map[string]string{"Cost": "Mandatory Discard<2/Card>"}}); !reflect.DeepEqual(got, []string{"discard:2"}) {
+	if got := p2cCostActions("Discard<2/Card>"); !reflect.DeepEqual(got, []string{"discard:2"}) {
 		t.Errorf("mandatory cost: %v", got)
-	}
-	if got := p2dNestedCost(&cards.SA{API: "Draw", Params: map[string]string{"Cost": "Sac<1/Creature>"}}); got != nil {
-		t.Errorf("an activated ability's own cost is a cost: %v", got)
 	}
 	if got := p2dPlayerGrants(&cards.SA{API: "Pump", Params: map[string]string{"Defined": "You"}}, []string{"grant:protection"}); !reflect.DeepEqual(got, []string{"player:protection"}) {
 		t.Errorf("player grant: %v", got)

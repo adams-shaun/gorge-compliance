@@ -27,11 +27,9 @@ Cadaverous Bloom	T2	abilities	activated	-	equivalent	script writes one mana abil
 Case of the Locked Hothouse	T2	abilities	static	-	equivalent	script writes look-at-top twice (a Secondary MayLookAt static and inside the MayPlay static)
 Caterwauling Boggart	T2	abilities	static	-	equivalent	script writes one static per creature type; mtgish one
 Coffin Queen	T2	abilities	triggered:changescontroller triggered:ltb triggered:untap	-	equivalent	script writes the linked exile as three static-zone triggers; mtgish a delayed trigger in the ability
-Coralhelm Commander	T2	abilities	static	-	equivalent	script one level-4 static per grant (the Merfolk lord static is a granted SVar static)
 Coram, the Undertaker	T2	abilities	static	-	equivalent	script one MayPlay static per permission (land, spell); mtgish one
 Crowd-Control Warden	T2	abilities	replacement	-	equivalent	script writes as-enters and as-turned-face-up as two replacements; mtgish one
 Cryptic Spires	T2	abilities	-	pregame	equivalent	deck-construction circling is Forge engine marked colors (AbilityManaPart ColorID), no script ability; mtgish pregame
-Cunning Nightbonder	T2	abilities	static	-	equivalent	script one static per effect (cost reduction, can't be countered) vs one mtgish static
 Death Tyrant	T2	abilities	-	triggered:dies	equivalent	mtgish splits attacking-or-blocking dies into two triggers; script one
 Demonfire	T2	abilities	static	-	equivalent	mtgish folds damage-cant-be-prevented into the spell action (IfElse); script a static
 Den Protector	T2	abilities	triggered:turnfaceup	static	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
@@ -135,7 +133,6 @@ The Muckslinger Gang	T2	abilities	static	-	pending	mtgish 3 zone rules for 2 sen
 Thelonite Hermit	T2	abilities	triggered:turnfaceup	static	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Third Little Pig	T2	abilities	-	triggered:conjure	equivalent	mtgish writes also-triggers-from-graveyard as a second trigger
 Thousand Winds	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Thryx, the Sudden Storm	T2	abilities	static	-	pending	not yet triaged
 Tidal Control	T2	abilities	activated	-	equivalent	script writes one ability per alternative cost (2 life or {2}); mtgish one
 Tomik, Distinguished Advokist	T2	abilities	-	static	equivalent	script one static over battlefield and library; mtgish one per zone
 True Identity	T2	abilities	-	triggered:turnfaceup	equivalent	mtgish splits this-or-another into two triggers; script has one

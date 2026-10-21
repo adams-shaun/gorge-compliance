@@ -61,7 +61,6 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			// cost (depth 0) is a cost.
 			e.add("forage")
 		}
-		e.add(p2dNestedCost(a)...)
 		if t := g.p2aTargets(a, g.idx.gorgeTargets(a)); t != "" {
 			e.targets = append(e.targets, t)
 		}
@@ -118,6 +117,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			e.merge(subs)
 		}
 		g.c2Chase(e, a, depth)
+		g.p2cCost(e, a, depth)
 	}
 }
 
@@ -327,11 +327,6 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		return out
 	case "CopyPermanent":
 		out := []string{"tokencopy:" + literalOr(p["NumCopies"], "1")}
-		if p["DefinedName"] != "" {
-			// "Create a Spellgorger Weird token": a named predefined
-			// token, not a copy of an object (mtgish OracleToken).
-			out[0] = "token:" + literalOr(p["NumCopies"], "1")
-		}
 		// "It gains haste": a grant, as Token's PumpKeywords$.
 		for _, k := range cards.SplitKeywordList(p["PumpKeywords"]) {
 			out = append(out, "grant:"+grantKeyword(k))
@@ -386,11 +381,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			out = append(out, "rule:canblockanynumberofcreatures")
 		}
 		for _, k := range cards.SplitKeywordList(p["KW"]) {
-			if strings.HasPrefix(k, "Prevent ") {
+			if strings.HasPrefix(k, "Prevent ") || (strings.HasPrefix(k, "HIDDEN Prevent all") && strings.Contains(k, "dealt by CARDNAME")) {
 				// A prevention shield granted until end of turn.
 				out = append(out, "prevent")
 			} else if strings.HasPrefix(k, "HIDDEN ") {
-				out = append(out, hiddenKeywordToken(k))
+				out = append(out, p2cHiddenTokens(k)...)
 			} else {
 				out = append(out, "grant:"+grantKeyword(k))
 			}
@@ -405,6 +400,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "Untap", "UntapAll":
 		return []string{"untap"}
 	case "Sacrifice", "SacrificeAll":
+		if p["Destroy"] == "True" {
+			// "Target opponent chooses a creature they control. Destroy
+			// it": Forge's sacrifice-choice with Destroy$.
+			return []string{"destroy"}
+		}
 		return []string{"sacrifice"}
 	case "Mana", "ManaReflected":
 		return []string{"mana"}
@@ -535,6 +535,10 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "ChangeTargets":
 		return []string{"changetargets"}
 	case "Poison":
+		if strings.HasPrefix(p["Num"], "-") {
+			// "Target player loses all poison counters": a removal.
+			return []string{"countersremove"}
+		}
 		return []string{"counters:poison:" + literalOr(p["Num"], "*")}
 	case "Forage":
 		return []string{"forage"}
