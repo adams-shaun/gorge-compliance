@@ -324,7 +324,12 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		}
 		return out
 	case "CopyPermanent":
-		return []string{"tokencopy:" + literalOr(p["NumCopies"], "1")}
+		out := []string{"tokencopy:" + literalOr(p["NumCopies"], "1")}
+		// "It gains haste": a grant, as Token's PumpKeywords$.
+		for _, k := range cards.SplitKeywordList(p["PumpKeywords"]) {
+			out = append(out, "grant:"+grantKeyword(k))
+		}
+		return out
 	case "PutCounter", "PutCounterAll":
 		if n := p["Monstrosity"]; n != "" {
 			// Monstrosity N: N +1/+1 counters, the type left implicit.
