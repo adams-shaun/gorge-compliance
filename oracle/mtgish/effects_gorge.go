@@ -370,6 +370,8 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 				out = append(out, "prevent")
 			} else if strings.HasPrefix(k, "HIDDEN ") {
 				out = append(out, hiddenKeywordToken(k))
+			} else if t, ok := p2cPlayerKeyword(p, k); ok {
+				out = append(out, t)
 			} else {
 				out = append(out, "grant:"+grantKeyword(k))
 			}

@@ -578,7 +578,7 @@ func (g *gorgeNorm) selfGrantStatic(st *cards.Static) bool {
 				if level {
 					// mtgish's levelStatic folds a level's static
 					// abilities into the level's one static.
-					folded = append(folded, p2cStaticEffects(g, &s)...)
+					folded = append(folded, p2cGorgeStaticEffects(g, &s)...)
 				} else {
 					g.static(&s)
 				}

@@ -20,6 +20,9 @@ var p2cReplSynonyms = map[string]string{
 }
 
 func init() {
+	// "Can't be blocked unless defending player controls ...": S:Mode$
+	// CantBlockBy with a condition, rule:cantbeblocked.
+	d2RuleSynonyms["CantBeBlockedUnlessDefendingPlayer"] = "rule:cantbeblocked"
 	// "Protection from green. This effect doesn't remove <this Aura>":
 	// protection (Forge: Protection keyword with the aura exempted).
 	if extRule["ProtectionAndDoesntRemovePermanents"] == nil {
@@ -261,9 +264,9 @@ func p2cCostActions(c string) []string {
 	return out
 }
 
-// p2cStaticEffects is the effect list g.static would give st as one
+// p2cGorgeStaticEffects is the effect list g.static would give st as one
 // static ability (nil when it adds none), without adding it.
-func p2cStaticEffects(g *gorgeNorm, st *cards.Static) []string {
+func p2cGorgeStaticEffects(g *gorgeNorm, st *cards.Static) []string {
 	saved := g.s.Abilities
 	g.s.Abilities = nil
 	g.static(st)
@@ -367,4 +370,53 @@ func p2cOneKeywordGrant(s *Summary) (string, bool) {
 		}
 	}
 	return "grant:" + head, true
+}
+
+// p2cStaticEffects maps mtgish static rules the core leaves as
+// "static:<variant>". "Each creature card in your graveyard has encore"
+// (EachCardIn<zone>Effect) is a Continuous with AffectedZone$ granting the
+// ability: its card effects are layer effects.
+func p2cStaticEffects(v string, a []any) ([]string, bool) {
+	if strings.HasPrefix(v, "EachCardIn") && strings.HasSuffix(v, "Effect") && len(a) > 0 {
+		if l := list(a[len(a)-1]); l != nil {
+			out := layerEffects(l)
+			for _, t := range out {
+				if IsUnmapped(t) {
+					// "Can't be the target of ...": the gorge side keeps
+					// the static's own spelling (unit B).
+					return nil, false
+				}
+			}
+			return out, true
+		}
+	}
+	return nil, false
+}
+
+// p2cEffectRepl maps the replacements an Effect (an emblem, a "for as long
+// as" effect) creates that mtgish writes as player rules: "you can't lose
+// the game", "your opponents can't win the game" (the same tokens as the
+// printed R:Event$ GameLoss/GameWin, gorgeNorm.repl).
+func p2cEffectRepl(r cards.Repl) []string {
+	switch {
+	case r.Event == "GameLoss" && r.Params["ReplaceWith"] == "":
+		return []string{"player:cantlosethegame"}
+	case r.Event == "GameWin":
+		return []string{"player:cantwinthegame"}
+	}
+	return nil
+}
+
+// p2cPlayerKeyword maps a keyword a Pump gives a player ("you gain shroud
+// until end of turn"), mtgish's player effect of that name.
+func p2cPlayerKeyword(p map[string]string, k string) (string, bool) {
+	d := p["Defined"]
+	if d != "You" && d != "Player" && d != "Opponent" && !strings.HasPrefix(d, "Player.") {
+		return "", false
+	}
+	switch h := cards.KeywordHead(k); h {
+	case "Shroud", "Hexproof":
+		return "player:" + strings.ToLower(h), true
+	}
+	return "", false
 }

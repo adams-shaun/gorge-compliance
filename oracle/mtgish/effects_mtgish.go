@@ -819,6 +819,9 @@ func staticEffects(r any) []string {
 		}
 		return out
 	}
+	if t, ok := p2cStaticEffects(v, a); ok {
+		return t
+	}
 	return []string{"static:" + strings.ToLower(v)}
 }
 
