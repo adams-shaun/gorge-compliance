@@ -55,6 +55,11 @@ func (e *effects) walk(x any) {
 			if variant == "ChooseAnAction" {
 				// "You may A or B. When you do, ...": one of the actions
 				// runs, so they are alternatives.
+				if bs := argsOf(n); len(bs) > 1 && allListsP2B(bs) {
+					// One action list per branch.
+					e.alternatives(bs...)
+					return false
+				}
 				for _, a := range argsOf(n) {
 					if l := list(a); l != nil {
 						e.alternatives(l...)

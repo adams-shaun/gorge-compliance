@@ -96,6 +96,7 @@ func paramTokensP2B(a *cards.SA) []string {
 			out = append(out, gorgeCounterTokens(ct, literalOr(n, "1"))...)
 		}
 	case "ChangeZone", "ChangeZoneAll":
+		out = append(out, otherOriginsP2B(a)...)
 		if ct := p["WithCountersType"]; ct != "" {
 			out = append(out, gorgeCounterTokens(ct, literalOr(p["WithCountersAmount"], "1"))...)
 		}
@@ -181,4 +182,41 @@ func reflexiveZoneP2B(objs any) string {
 		return "library"
 	}
 	return "*"
+}
+
+// allListsP2B reports whether every element is a list (ChooseAnAction's
+// branches, one action list each).
+func allListsP2B(xs []any) bool {
+	for _, x := range xs {
+		if list(x) == nil {
+			return false
+		}
+	}
+	return true
+}
+
+// otherOriginsP2B maps the further origins of an exile that lists several
+// (Origin$ Hand,Graveyard: "exile a card from their hand or graveyard"):
+// one move per origin, as mtgish writes one Exile per zone in a choice of
+// actions (merged as alternatives). The first origin is the core token.
+// Other destinations are not split: mtgish writes most "from your hand or
+// graveyard" puts as one action of one zone (measured).
+func otherOriginsP2B(a *cards.SA) []string {
+	origins := strings.Split(a.Params["Origin"], ",")
+	if len(origins) < 2 || effectSelfExile(a) || a.Params["Destination"] != "Exile" {
+		return nil
+	}
+	first := changeZoneToken(a.API, a.Params)
+	if !strings.HasPrefix(first, "move:") {
+		// A search ("library and/or graveyard") is one action.
+		return nil
+	}
+	d := strings.ToLower(strings.TrimSpace(a.Params["Destination"]))
+	var out []string
+	for _, o := range origins[1:] {
+		if t := "move:" + strings.ToLower(strings.TrimSpace(o)) + ">" + d; t != first {
+			out = append(out, t)
+		}
+	}
+	return dedup(out)
 }
