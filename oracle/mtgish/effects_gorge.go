@@ -625,7 +625,7 @@ func changeZoneToken(api string, p map[string]string) string {
 		// whichever origin is listed first.
 		o = "library"
 	}
-	if api == "ChangeZone" && o == "library" && p["Defined"] == "" && (p["ValidTgts"] == "" || c2PlayerTargets(p["ValidTgts"])) {
+	if api == "ChangeZone" && o == "library" && p["Defined"] == "" && !(p["AtRandom"] == "True" && d == "exile") && (p["ValidTgts"] == "" || c2PlayerTargets(p["ValidTgts"])) {
 		return "search:" + d
 	}
 	if t, ok := gorgeHandToLibrary(api, o, d, p); ok {
