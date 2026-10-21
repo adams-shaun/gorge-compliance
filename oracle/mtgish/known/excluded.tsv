@@ -12,3 +12,6 @@
 # an exclusion that matches nothing live (stale: delete it). Never card text.
 token	unmapped:Action.AcceptARandomOffer	Alchemy random offer (Davriel, Soul Broker): mtgish names only the offering card, the offer list is not encoded, so there is nothing to compare
 token	unmapped:Action.AcceptARandomCondition	Alchemy random condition (Davriel, Soul Broker): as AcceptARandomOffer, the condition list is not encoded
+token	unmapped:Rule.AsSelfDraft	Conspiracy draft-matters ability (reveal or note as you draft it): acts during the draft, which neither side models in a game; Forge keeps it in Draft: lines that the card IR does not compile
+token	unmapped:Rule.FaceUpDraftEffect	Conspiracy draft-matters ability (an effect while face up during the draft): draft-time only, nothing in a game to compare; Forge Draft: lines are not compiled
+token	unmapped:Target.TargetAnteCard	Ante (target card in the ante, Darkpact): the ante zone is outside the comparison and mtgish has no target class for it

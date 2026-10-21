@@ -80,7 +80,6 @@ Paladin Class	T1	keywords	class:2:{2}{W} class:3:{4}{W}	class:2:{W} class:3:{2}{
 Party Dude	T1	keywords	class:2:{1}{G} class:3:{4}{G}	class:2:{G} class:3:{1}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Pestilent Cauldron	T1	mana_cost	{2}{B}	{3}{G}{G}	mtgish-bug	ModalDFC artifact//spell rule (english_grammar.json5:8159) swaps ManaCost[0] and [1] between faces; not in #1-#4
 Pestilent Cauldron [Restorative Burst]	T1	mana_cost	{3}{G}{G}	{2}{B}	mtgish-bug	ModalDFC artifact//spell rule (english_grammar.json5:8159) swaps ManaCost[0] and [1] between faces; not in #1-#4
-Pick-a-Beeble	T1	keywords	unmapped:kw:Prize	-	normalizer	unmapped token
 Quantum Reduction	T1	keywords	teamwork	-	mtgish-bug	Teamwork 2 keyword dropped
 Quickbeast Amulet	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
 Ranger Class	T1	keywords	class:3:{3}{G}	class:3:{1}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)

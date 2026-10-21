@@ -7,213 +7,141 @@
 #   | pending (not yet triaged; at most maxPendingRows, which only shrinks)
 # Rows whose unmapped tokens are all in excluded.tsv are class excluded, automatic, never here.
 card	tier	field	gorge	mtgish	class	note
-Accident-Prone Apprentice	T2	abilities	-	triggered:cast	pending	not yet triaged
+Accident-Prone Apprentice	T2	abilities	-	triggered:cast	equivalent	mtgish writes also-triggers-from-another-zone as a second trigger; script one trigger with TriggerZones$
 Acid-Spewer Dragon	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Adarkar Unicorn	T2	abilities	activated	-	pending	not yet triaged
-Aether Searcher	T2	abilities	-	unmapped:Rule.AsSelfDraft	normalizer	unmapped token
-Aether Web	T2	abilities	static	-	pending	not yet triaged
-Aetherflame Wall	T2	abilities	static	-	pending	not yet triaged
-Agent of Acquisitions	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
-Albiorix, Goose Tyrant	T2	abilities	-	triggered:sacrifice	pending	not yet triaged
-Animus of Predation	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
-Aquamorph Entity	T2	abilities	replacement	-	pending	not yet triaged
-Archdemon of Paliano	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
-Arvad, Weatherlight Smuggler	T2	abilities	-	triggered:end-step	pending	not yet triaged
-Astral Drift	T2	abilities	-	triggered:cycled	pending	not yet triaged
+Adarkar Unicorn	T2	abilities	activated	-	equivalent	script writes one mana ability per color choice; mtgish one ability
+Albiorix, Goose Tyrant	T2	abilities	-	triggered:sacrifice	equivalent	mtgish writes also-triggers-from-another-zone as a second trigger; script one trigger with TriggerZones$
+Aquamorph Entity	T2	abilities	replacement	-	equivalent	script writes as-enters and as-turned-face-up as two replacements; mtgish one
+Arvad, Weatherlight Smuggler	T2	abilities	-	triggered:end-step	equivalent	mtgish writes also-triggers-from-another-zone as a second trigger; script one trigger with TriggerZones$
+Astral Drift	T2	abilities	-	triggered:cycled	equivalent	mtgish splits this-or-another into two triggers; script has one
 Aven Liberator	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Aven Mindcensor	T2	abilities	static	replacement	pending	not yet triaged
-Backup Plan	T2	abilities	-	unmapped:Rule.DrawAnAdditionalHandBeforeMulligans	normalizer	unmapped token
-Baeloth Barrityl, Entertainer	T2	abilities	static	-	pending	not yet triaged
-Banefire	T2	abilities	static	-	pending	not yet triaged
-Beastbreaker of Bala Ged	T2	abilities	-	static	pending	not yet triaged
-Bell Borca, Spectral Sergeant	T2	abilities	-	static	pending	not yet triaged
+Aven Mindcensor	T2	abilities	static	replacement	equivalent	script writes the replacement as a static (S: LimitSearchLibrary keyword); mtgish a ReplaceWouldSearch rule
+Backup Plan	T2	abilities	-	pregame	forge-bug	conspiracy unimplemented: script carries only a Text: line
+Banefire	T2	abilities	static	-	equivalent	mtgish folds damage-cant-be-prevented into the spell action (IfElse); script a static
+Bell Borca, Spectral Sergeant	T2	abilities	-	static	equivalent	note-mana-value is script bookkeeping (a remember trigger); script P/T static vs mtgish note + CDA
 Belltoll Dragon	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Bitter Feud	T2	abilities	replacement	-	pending	not yet triaged
-Bogardan Phoenix	T2	abilities	triggered:dies	-	pending	not yet triaged
-Booby Trap	T2	abilities	replacement	static	pending	not yet triaged
-Bow to My Command	T2	abilities	-	static	pending	not yet triaged
-Brimstone Mage	T2	abilities	-	static static	pending	not yet triaged
-Cadaverous Bloom	T2	abilities	activated	-	pending	not yet triaged
-Canal Dredger	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
-Caravan Escort	T2	abilities	-	static	pending	not yet triaged
-Case of the Locked Hothouse	T2	abilities	static	-	pending	not yet triaged
-Caterwauling Boggart	T2	abilities	static	-	pending	not yet triaged
-Coffin Queen	T2	abilities	triggered:changescontroller triggered:ltb triggered:untap	-	pending	not yet triaged
-Cogwork Grinder	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
-Cogwork Librarian	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
-Cogwork Spy	T2	abilities	-	unmapped:Rule.AsSelfDraft	normalizer	unmapped token
-Cogwork Tracker	T2	abilities	-	unmapped:Rule.AsSelfDraft	normalizer	unmapped token
-Coralhelm Commander	T2	abilities	static	-	pending	not yet triaged
-Coram, the Undertaker	T2	abilities	static	-	pending	not yet triaged
-Crowd-Control Warden	T2	abilities	replacement	-	pending	not yet triaged
-Cryptic Spires	T2	abilities	-	pregame	pending	not yet triaged
-Custodi Peacekeeper	T2	abilities	-	unmapped:Rule.AsSelfDraft	normalizer	unmapped token
-Deal Broker	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
-Death Tyrant	T2	abilities	-	triggered:dies	pending	not yet triaged
-Demonfire	T2	abilities	static	-	pending	not yet triaged
+Bitter Feud	T2	abilities	replacement	-	equivalent	script writes the doubling once per damage direction (two replacements); mtgish one
+Bogardan Phoenix	T2	abilities	triggered:dies	-	equivalent	script splits exile-if/otherwise-return into two dies triggers; mtgish one
+Bow to My Command	T2	abilities	-	static	equivalent	script makes the chosen-player rule an effect of the set-in-motion trigger; mtgish a static
+Cadaverous Bloom	T2	abilities	activated	-	equivalent	script writes one mana ability per color choice; mtgish one ability
+Case of the Locked Hothouse	T2	abilities	static	-	equivalent	script writes look-at-top twice (a Secondary MayLookAt static and inside the MayPlay static)
+Caterwauling Boggart	T2	abilities	static	-	equivalent	script writes one static per creature type; mtgish one
+Coffin Queen	T2	abilities	triggered:changescontroller triggered:ltb triggered:untap	-	equivalent	script writes the linked exile as three static-zone triggers; mtgish a delayed trigger in the ability
+Coralhelm Commander	T2	abilities	static	-	equivalent	script one level-4 static per grant (the Merfolk lord static is a granted SVar static)
+Coram, the Undertaker	T2	abilities	static	-	equivalent	script one MayPlay static per permission (land, spell); mtgish one
+Crowd-Control Warden	T2	abilities	replacement	-	equivalent	script writes as-enters and as-turned-face-up as two replacements; mtgish one
+Cryptic Spires	T2	abilities	-	pregame	equivalent	deck-construction circling is Forge engine marked colors (AbilityManaPart ColorID), no script ability; mtgish pregame
+Death Tyrant	T2	abilities	-	triggered:dies	equivalent	mtgish splits attacking-or-blocking dies into two triggers; script one
+Demonfire	T2	abilities	static	-	equivalent	mtgish folds damage-cant-be-prevented into the spell action (IfElse); script a static
 Den Protector	T2	abilities	triggered:turnfaceup	static	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Dermoplasm	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Divine Intervention	T2	abilities	-	triggered:counterremoved	equivalent	Forge folds the last-counter trigger into the upkeep trigger's chain
-Dwarven Armorer	T2	abilities	activated	-	pending	not yet triaged
-Echo Mage	T2	abilities	-	static static	pending	not yet triaged
-Edge of Malacol	T2	abilities	static	replacement	pending	not yet triaged
-Eelectrocute	T2	abilities	replacement	-	pending	not yet triaged
-Enclave Cryptologist	T2	abilities	-	static static	pending	not yet triaged
-Energy Vortex	T2	abilities	activated	triggered:upkeep	pending	not yet triaged
+Dwarven Armorer	T2	abilities	activated	-	equivalent	script writes one ability per counter choice; mtgish one ability with a choice
+Eelectrocute	T2	abilities	replacement	-	equivalent	script writes the exile-instead clause of a cast-from-graveyard permission as a replacement; mtgish folds it into the permission
+Energy Vortex	T2	abilities	activated	triggered:upkeep	mtgish-bug	mtgish#1 capture reuse: upkeep counter-removal line duplicated, the {X} activated ability lost
 Entangling Trap	T2	abilities	triggered:clashed	-	equivalent	Forge splits one clash trigger into won/lost lines (Secondary)
-Errant Minion	T2	abilities	replacement	-	pending	not yet triaged
-Ertai's Meddling	T2	abilities	triggered:upkeep	-	pending	not yet triaged
-Esika, God of the Tree	T2	abilities	static	-	pending	not yet triaged
-Far Fortune, End Boss	T2	abilities	static	replacement	pending	not yet triaged
-Favored Enemy	T2	abilities	triggered:etb	-	pending	not yet triaged
-Fear of Change	T2	abilities	triggered:to-graveyard	triggered:dies	pending	not yet triaged
-Fiend of the Shadows	T2	abilities	static	-	pending	not yet triaged
-Flitterstep Eidolon	T2	abilities	-	static	pending	not yet triaged
-Freyalise's Winds	T2	abilities	static	replacement	pending	not yet triaged
-Gaea's Revenge	T2	abilities	-	static	pending	not yet triaged
-Gale, Waterdeep Prodigy	T2	abilities	triggered:cast	-	pending	not yet triaged
-Galea, Kindler of Hope	T2	abilities	triggered:cast	-	pending	not yet triaged
-Garbage Fire	T2	abilities	-	unmapped:Rule.AsSelfDraft	normalizer	unmapped token
-General's Kabuto	T2	abilities	-	replacement replacement	pending	not yet triaged
-Ghostly Flame	T2	abilities	-	static	pending	not yet triaged
-Ghostly Possession	T2	abilities	-	replacement replacement	pending	not yet triaged
-Gleam of Authority	T2	abilities	-	static	pending	not yet triaged
-Glimpse the Cosmos	T2	abilities	replacement	-	pending	not yet triaged
+Errant Minion	T2	abilities	replacement	-	equivalent	script writes partial prevention of the trigger damage as a prevention replacement; mtgish prevent in the trigger
+Ertai's Meddling	T2	abilities	triggered:upkeep	-	equivalent	script writes the delayed per-upkeep countdown as a trigger; mtgish a delayed trigger in the spell
+Esika, God of the Tree	T2	abilities	static	-	mtgish-bug	mtgish#1: front face lacks the other-legendary-creatures grant static (MDFC capture reuse)
+Favored Enemy	T2	abilities	triggered:etb	-	mtgish-bug	mtgish#2 dropped capture: the ETB fight trigger is never emitted
+Fear of Change	T2	abilities	triggered:to-graveyard	triggered:dies	forge-bug	dies half has Destination$ Graveyard without Origin$ Battlefield: triggers on discard/mill too
+Fiend of the Shadows	T2	abilities	static	-	equivalent	script writes the may-play of the exiled card as a static on the card; mtgish inside the trigger
+Flitterstep Eidolon	T2	abilities	-	static	equivalent	bestow: script one static covers this creature and the enchanted creature; mtgish one per subject
+Gale, Waterdeep Prodigy	T2	abilities	triggered:cast	-	equivalent	script writes one trigger per spell type cast (instant -> sorcery, sorcery -> instant); mtgish one
+Galea, Kindler of Hope	T2	abilities	triggered:cast	-	equivalent	script writes the equipment-gains-ETB grant as a cast trigger; mtgish inside the cast permission
+General's Kabuto	T2	abilities	-	replacement replacement	mtgish-bug	printed prevents combat damage dealt to the equipped creature only; mtgish adds dealt-by (Or); script a granted prevention keyword
+Ghostly Flame	T2	abilities	-	static	equivalent	mtgish writes permanents and spells as two zone statics; script one
+Ghostly Possession	T2	abilities	-	replacement replacement	equivalent	script grants a prevention keyword (to and by) in the aura static; mtgish one PreventDamage replacement per direction
+Gleam of Authority	T2	abilities	-	static	equivalent	mtgish one static per sentence (pump; vigilance and ability); script one static
+Glimpse the Cosmos	T2	abilities	replacement	-	equivalent	script writes the exile-instead clause of a cast-from-graveyard permission as a replacement; mtgish folds it into the permission
 Goblin Airbrusher	T2	abilities	triggered:stickerplaced	-	equivalent	Forge splits one sticker trigger by sticker kind (Secondary)
-God-Eternal Kefnet	T2	abilities	-	static triggered:draw	pending	not yet triaged
-Grafdigger's Cage	T2	abilities	-	replacement	pending	not yet triaged
-Greatbow Doyen	T2	abilities	triggered:damage	triggered:combat-damage	pending	not yet triaged
-Greymond, Avacyn's Stalwart [Rick, Steadfast Leader]	T2	abilities	static static	-	pending	not yet triaged
+Grafdigger's Cage	T2	abilities	-	replacement	equivalent	mtgish one replacement per origin zone (graveyards, libraries); script one
+Greatbow Doyen	T2	abilities	triggered:damage	triggered:combat-damage	mtgish-bug	printed whenever an Archer deals damage (any); mtgish WhenACreatureDealsCombatDamageToAPermanent
+Greymond, Avacyn's Stalwart [Rick, Steadfast Leader]	T2	abilities	static static	-	equivalent	script writes one static per pair of chosen abilities; mtgish one static granting the chosen
 Grip of Chaos	T2	abilities	triggered:abilitycast triggered:cast	-	equivalent	Forge writes put-onto-stack as SpellAbilityCast plus Secondary SpellAbilityCopy
-Guile	T2	abilities	static	replacement	pending	not yet triaged
-Guul Draz Assassin	T2	abilities	-	static static	pending	not yet triaged
-Hada Spy Patrol	T2	abilities	-	static static	pending	not yet triaged
-Halimar Wavewatch	T2	abilities	-	static	pending	not yet triaged
-Hedron-Field Purists	T2	abilities	-	replacement replacement	pending	not yet triaged
+Hada Spy Patrol	T2	abilities	-	static	equivalent	script one level-1+ static covers the can't-be-blocked printed at both levels; mtgish one per level
 Herdchaser Dragon	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Hidden Dragonslayer	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Hundred-Handed One	T2	abilities	static	-	pending	not yet triaged
 Icefeather Aven	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Illusionary Informant	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
 Imperial Hellkite	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Inquisitor Eisenhorn	T2	abilities	-	static triggered:draw	pending	not yet triaged
-Into the Time Vortex	T2	abilities	spell	-	pending	not yet triaged
-Ion Storm	T2	abilities	activated	-	pending	not yet triaged
+Ion Storm	T2	abilities	activated	-	equivalent	script writes one ability per removable counter type in the cost; mtgish one
 Ire Shaman	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Jinxed Choker	T2	abilities	activated	-	pending	not yet triaged
-Jocasta, Automaton Avenger	T2	abilities	-	triggered:attacks	pending	not yet triaged
-Joraga Treespeaker	T2	abilities	-	static	pending	not yet triaged
-Justice	T2	abilities	-	triggered:damage	pending	not yet triaged
-Kazandu Tuskcaller	T2	abilities	-	static static	pending	not yet triaged
-Keranos, God of Storms	T2	abilities	-	static triggered:draw triggered:draw	pending	not yet triaged
+Jinxed Choker	T2	abilities	activated	-	equivalent	script writes one activated ability per mode (put / remove a counter); mtgish one
+Jocasta, Automaton Avenger	T2	abilities	-	triggered:attacks	mtgish-bug	mtgish adds an unprinted attacks-with-commander counter trigger beside the combat-damage one
+Justice	T2	abilities	-	triggered:damage	equivalent	mtgish splits creature-or-spell / source-or-spell damage into two triggers; script one
 Kolaghan Stormsinger	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Krark's Thumb	T2	abilities	static	replacement	pending	not yet triaged
 Last Voyage of the _____	T2	abilities	-	triggered:ltb	equivalent	Forge makes the leaves-battlefield trigger a delayed trigger from the ETB
-Lens of Clarity	T2	abilities	-	static	pending	not yet triaged
-Leovold's Operative	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
-Leovold, Emissary of Trest	T2	abilities	-	triggered:becomes-target	pending	not yet triaged
+Leovold, Emissary of Trest	T2	abilities	-	triggered:becomes-target	equivalent	mtgish splits you-or-a-permanent-you-control into two becomes-target triggers; script one
 Liege of the Axe	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Liesa, Shroud of Dusk	T2	abilities	static	-	pending	not yet triaged
-Lighthouse Chronologist	T2	abilities	-	static static	pending	not yet triaged
-Lord of Shatterskull Pass	T2	abilities	-	static static	pending	not yet triaged
-Lore Seeker	T2	abilities	-	unmapped:Rule.AsSelfDraft	normalizer	unmapped token
-Lurking Automaton	T2	abilities	-	unmapped:Rule.AsSelfDraft	normalizer	unmapped token
+Liesa, Shroud of Dusk	T2	abilities	static	-	equivalent	script writes the commander-tax rule as a cost reduction plus a cost increase static; mtgish one cast rule
 Maelstrom Djinn	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Malfegor Avatar	T2	abilities	triggered:zone	triggered:ltb	equivalent	script exile trigger is Origin$ Any; only unearthed cards match, all from the battlefield
-Mercenary Informer	T2	abilities	-	static	pending	not yet triaged
-Metamorphic Alteration	T2	abilities	-	static	pending	not yet triaged
-Mind Carver	T2	abilities	-	static	pending	not yet triaged
-Minthara, Merciless Soul	T2	abilities	static	-	pending	not yet triaged
-Mirror Golem	T2	abilities	static static static static static static static static	-	pending	not yet triaged
+Mind Carver	T2	abilities	-	static	equivalent	script one static with a conditional amount; mtgish a static per amount (base, instead)
+Minthara, Merciless Soul	T2	abilities	static	-	equivalent	script grants ward X through a static; mtgish a ward:* keyword
+Mirror Golem	T2	abilities	static static static static static static static static	-	equivalent	script writes one protection static per card type
 Mischievous Quanar	T2	abilities	triggered:turnfaceup	activated	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Mister Immortal	T2	abilities	-	activated	pending	not yet triaged
+Mister Immortal	T2	abilities	-	activated	equivalent	mtgish splits from-graveyard-or-exile into two abilities; script one with two zones
 Mistfire Weaver	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Mogis's Warhound	T2	abilities	-	static	pending	not yet triaged
-Mole Module	T2	abilities	triggered:damage	triggered:combat-damage-player	pending	not yet triaged
+Mogis's Warhound	T2	abilities	-	static	equivalent	bestow: script one static covers this creature and the enchanted creature; mtgish one per subject
+Mole Module	T2	abilities	triggered:damage	triggered:combat-damage-player	forge-bug	DamageDone trigger lacks CombatDamage$ True; printed combat damage
 Muldrotha, the Gravetide	T2	abilities	static static static static static	-	equivalent	script writes one MayPlay static per permanent type; mtgish one player effect
-My Champion Stands Supreme	T2	abilities	triggered:dies	triggered:ltb	pending	not yet triaged
-Naya Soulbeast	T2	abilities	replacement	-	pending	not yet triaged
-No Quarter	T2	abilities	triggered:blocked	triggered:blocks	pending	not yet triaged
-Noble Banneret	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
-Noble Quarry	T2	abilities	static	-	pending	not yet triaged
-Null Champion	T2	abilities	-	static static	pending	not yet triaged
-Otaria	T2	abilities	static	-	pending	not yet triaged
-Overclocked Electromancer	T2	abilities	triggered:damage	triggered:combat-damage	pending	not yet triaged
-Paleontologist's Pick-Axe [Dinosaur Headdress]	T2	abilities	-	static	pending	not yet triaged
-Paliano Vanguard	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
-Paliano, the High City	T2	abilities	-	unmapped:Rule.AsSelfDraft	normalizer	unmapped token
-Parnesse, the Subtle Brush	T2	abilities	-	triggered:becomes-target	pending	not yet triaged
-Patriarch's Desire	T2	abilities	-	static	pending	not yet triaged
-Phoenix of Iteration	T2	abilities	-	triggered:cast	pending	not yet triaged
-Phyrexian Splicer	T2	abilities	activated activated activated	-	pending	not yet triaged
-Phyrexian Unlife	T2	abilities	static	replacement	pending	not yet triaged
-Plumb the Forbidden	T2	abilities	triggered:cast	-	pending	not yet triaged
-Power Leak	T2	abilities	replacement	-	pending	not yet triaged
-Power Play	T2	abilities	-	unmapped:Rule.YouAreTheStartingPlayer	normalizer	unmapped token
-Precipitous Drop	T2	abilities	-	static	pending	not yet triaged
-Primitive Etchings	T2	abilities	-	static triggered:draw	pending	not yet triaged
-Pyretic Hunter	T2	abilities	-	unmapped:Rule.AsSelfDraft	normalizer	unmapped token
-Qasali Ambusher	T2	abilities	-	static	pending	not yet triaged
-Quakebringer	T2	abilities	-	triggered:upkeep	pending	not yet triaged
-Radagast of Rhosgobel	T2	abilities	static	-	pending	not yet triaged
-Raiding Party	T2	abilities	-	static	pending	not yet triaged
-Raphael, Tag Team Tough	T2	abilities	triggered:damage	triggered:combat-damage-player	pending	not yet triaged
+My Champion Stands Supreme	T2	abilities	triggered:dies	triggered:ltb	forge-bug	leaves-the-battlefield trigger has Destination$ Graveyard; exile/hand/library never abandon
+Naya Soulbeast	T2	abilities	replacement	-	equivalent	script writes enters-with-X-counters as an etb counter replacement; mtgish inside the cast trigger
+No Quarter	T2	abilities	triggered:blocked	triggered:blocks	equivalent	blocks-a-creature-with-lesser-power written AttackerBlockedByCreature (one per pair), the same event
+Noble Quarry	T2	abilities	static	-	equivalent	bestow: script one static covers this creature and the enchanted creature; mtgish one per subject
+Otaria	T2	abilities	static	-	equivalent	script writes one flashback static per spell type (grant + cast); mtgish one graveyard static
+Overclocked Electromancer	T2	abilities	triggered:damage	triggered:combat-damage	forge-bug	DamageDone trigger lacks CombatDamage$ True; printed combat damage
+Parnesse, the Subtle Brush	T2	abilities	-	triggered:becomes-target	equivalent	mtgish splits you-or-a-permanent-you-control into two becomes-target triggers; script one
+Patriarch's Desire	T2	abilities	-	static	equivalent	script one static with a conditional amount; mtgish a static per amount (base, instead)
+Phoenix of Iteration	T2	abilities	-	triggered:cast	equivalent	mtgish writes also-triggers-from-another-zone as a second trigger; script one trigger with TriggerZones$
+Phyrexian Splicer	T2	abilities	activated activated activated	-	equivalent	script writes one ability per keyword choice; mtgish one with a choice
+Plumb the Forbidden	T2	abilities	triggered:cast	-	equivalent	script writes when-you-do copy as a cast trigger; mtgish inside the additional cost
+Power Leak	T2	abilities	replacement	-	equivalent	script writes partial prevention of the trigger damage as a prevention replacement; mtgish prevent in the trigger
+Power Play	T2	abilities	-	pregame	forge-bug	conspiracy unimplemented: script carries only a Text: line
+Precipitous Drop	T2	abilities	-	static	equivalent	script one static with a conditional amount; mtgish a static per amount (base, instead)
+Qasali Ambusher	T2	abilities	-	static	equivalent	script one MayPlay static (free, flash); mtgish flash and alternative cost statics
+Quakebringer	T2	abilities	-	triggered:upkeep	equivalent	mtgish writes also-triggers-from-another-zone as a second trigger; script one trigger with TriggerZones$
+Radagast of Rhosgobel	T2	abilities	static	-	equivalent	script one static per clause (reduction, flash); mtgish one
+Raphael, Tag Team Tough	T2	abilities	triggered:damage	triggered:combat-damage-player	forge-bug	DamageDone trigger lacks CombatDamage$ True; printed combat damage
 Rattleclaw Mystic	T2	abilities	triggered:turnfaceup	activated	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Rayne, Academy Chancellor	T2	abilities	-	triggered:becomes-target	pending	not yet triaged
-Rebel Informer	T2	abilities	-	static	pending	not yet triaged
+Rayne, Academy Chancellor	T2	abilities	-	triggered:becomes-target	equivalent	mtgish splits you-or-a-permanent-you-control into two becomes-target triggers; script one
 Rebellion of the Flamekin	T2	abilities	triggered:clashed	-	equivalent	Forge splits one clash trigger into won/lost lines (Secondary)
-Regicide	T2	abilities	-	unmapped:Rule.AsSelfDraft	normalizer	unmapped token
-Reidane, God of the Worthy [Valkmira, Protector's Shield]	T2	abilities	-	triggered:becomes-target	pending	not yet triaged
-Relic Axe	T2	abilities	-	static	pending	not yet triaged
-Righteous Indignation	T2	abilities	triggered:blocked	triggered:blocks	pending	not yet triaged
-Rootpath Purifier	T2	abilities	-	static	pending	not yet triaged
-Rowen	T2	abilities	-	static triggered:draw	pending	not yet triaged
-Sacred Ground	T2	abilities	triggered:dies	triggered:to-graveyard	pending	not yet triaged
-Sahir, Visitor in Darkness	T2	abilities	-	triggered:upkeep	pending	not yet triaged
-Sea of Sand	T2	abilities	replacement	static	pending	not yet triaged
-Seer of Stolen Sight	T2	abilities	triggered:dies	triggered:to-graveyard	pending	not yet triaged
-Serum Powder	T2	abilities	-	pregame	pending	not yet triaged
-Shalai, Voice of Plenty	T2	abilities	-	static	pending	not yet triaged
+Reidane, God of the Worthy [Valkmira, Protector's Shield]	T2	abilities	-	triggered:becomes-target	equivalent	mtgish splits you-or-a-permanent-you-control into two becomes-target triggers; script one
+Relic Axe	T2	abilities	-	static	equivalent	script one static with a conditional amount; mtgish a static per amount (base, instead)
+Righteous Indignation	T2	abilities	triggered:blocked	triggered:blocks	forge-bug	AttackerBlocked sets no Blocker: Defined$ TriggeredBlockerLKICopy pumps nothing, once per attacker
+Rootpath Purifier	T2	abilities	-	static	equivalent	script one static over battlefield and library; mtgish one per zone
+Sahir, Visitor in Darkness	T2	abilities	-	triggered:upkeep	equivalent	mtgish writes also-triggers-from-another-zone as a second trigger; script one trigger with TriggerZones$
+Serum Powder	T2	abilities	-	pregame	forge-bug	mulligan ability unimplemented: script carries only a Text: line
+Shalai, Voice of Plenty	T2	abilities	-	static	equivalent	mtgish one static per subject (you, planeswalkers, creatures); script two
 Share the Spoils	T2	abilities	triggered:cast triggered:landplayed	-	equivalent	mtgish nests the when-they-do trigger in the play permission (WithTrigger); Forge: Secondary SpellCast/LandPlayed
-Shared Fate	T2	abilities	static	-	pending	not yet triaged
+Shared Fate	T2	abilities	static	-	mtgish-bug	mtgish drops the may-look-at-exiled-cards permission; script a static
 Shieldhide Dragon	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Silumgar Assassin	T2	abilities	triggered:turnfaceup	static	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Skyclave Relic	T2	abilities	activated	-	pending	not yet triaged
+Skyclave Relic	T2	abilities	activated	-	mtgish-bug	mtgish#1 capture reuse: mana ability and indestructible lost
 Sleuth Instructor	T2	abilities	-	triggered:turnfaceup	equivalent	mtgish splits this-or-another into two triggers; script has one
-Smuggler Captain	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
-So Tiny	T2	abilities	-	static	pending	not yet triaged
+So Tiny	T2	abilities	-	static	equivalent	script one static with a conditional amount; mtgish a static per amount (base, instead)
 Sower of Discord	T2	abilities	triggered:damage	-	equivalent	Forge splits one trigger into a line per chosen player (Secondary)
-Spellbane Centaur	T2	abilities	-	static	pending	not yet triaged
-Spire Phantasm	T2	abilities	-	unmapped:Rule.AsSelfDraft	normalizer	unmapped token
-Spirespine	T2	abilities	-	static	pending	not yet triaged
-Squee, the Immortal	T2	abilities	-	static	pending	not yet triaged
-Steady Tortoise	T2	abilities	-	triggered:attacks	pending	not yet triaged
+Spirespine	T2	abilities	-	static	equivalent	bestow: script one static covers this creature and the enchanted creature; mtgish one per subject
+Squee, the Immortal	T2	abilities	-	static	equivalent	mtgish splits from-graveyard-or-exile into two abilities; script one with two zones
+Steady Tortoise	T2	abilities	-	triggered:attacks	equivalent	mtgish writes also-triggers-from-another-zone as a second trigger; script one trigger with TriggerZones$
 Stormwing Dragon	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Stratus Dancer	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Suq'Ata Firewalker	T2	abilities	-	static	pending	not yet triaged
-Syr Carah, the Bold	T2	abilities	-	triggered:damage	pending	not yet triaged
-Talon Gates	T2	abilities	activated	static	pending	not yet triaged
-Temporal Isolation	T2	abilities	-	replacement	pending	not yet triaged
+Syr Carah, the Bold	T2	abilities	-	triggered:damage	equivalent	mtgish splits creature-or-spell / source-or-spell damage into two triggers; script one
+Talon Gates	T2	abilities	activated	static	equivalent	plane special action written as an activated ability; mtgish a player permission
+Temporal Isolation	T2	abilities	-	replacement	equivalent	script grants a prevention keyword in the aura static; mtgish a PreventDamage replacement
 The Fourth Doctor	T2	abilities	triggered:cast triggered:landplayed	-	equivalent	mtgish nests the when-you-do trigger in the play permission (WithTrigger); Forge: Secondary SpellCast/LandPlayed
-The Muckslinger Gang	T2	abilities	static	-	pending	not yet triaged
-The Sound of Drums	T2	abilities	static	-	pending	not yet triaged
+The Muckslinger Gang	T2	abilities	static	-	pending	mtgish 3 zone rules for 2 sentences; the zone merge folds them to 1 static (normaliser, open)
 Thelonite Hermit	T2	abilities	triggered:turnfaceup	static	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Third Little Pig	T2	abilities	-	triggered:conjure	equivalent	mtgish writes also-triggers-from-graveyard as a second trigger
 Thousand Winds	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Throes of Chaos	T2	abilities	spell	-	pending	not yet triaged
-Thrun, Breaker of Silence	T2	abilities	-	static	pending	not yet triaged
-Tidal Control	T2	abilities	activated	-	pending	not yet triaged
-Tomik, Distinguished Advokist	T2	abilities	-	static	pending	not yet triaged
+Tidal Control	T2	abilities	activated	-	equivalent	script writes one ability per alternative cost (2 life or {2}); mtgish one
+Tomik, Distinguished Advokist	T2	abilities	-	static	equivalent	script one static over battlefield and library; mtgish one per zone
 True Identity	T2	abilities	-	triggered:turnfaceup	equivalent	mtgish splits this-or-another into two triggers; script has one
-Unsettled Mariner	T2	abilities	-	triggered:becomes-target	pending	not yet triaged
-Vampiric Embrace	T2	abilities	-	triggered:dies	pending	not yet triaged
-Varchild's War-Riders	T2	abilities	triggered:upkeep	-	pending	not yet triaged
-Venom, Eddie Brock	T2	abilities	triggered:dies	triggered:attacks	pending	not yet triaged
-Vesuvan Shapeshifter	T2	abilities	replacement	-	pending	not yet triaged
-Vnwxt, Verbose Host	T2	abilities	static	replacement	pending	not yet triaged
-Volcano Hellion	T2	abilities	-	static	pending	not yet triaged
-Wall of Shadows	T2	abilities	-	static	pending	not yet triaged
-Weathered Runestone	T2	abilities	-	replacement	pending	not yet triaged
-Whispergear Sneak	T2	abilities	-	unmapped:Rule.AsSelfDraft unmapped:Rule.FaceUpDraftEffect	normalizer	unmapped token
+Unsettled Mariner	T2	abilities	-	triggered:becomes-target	equivalent	mtgish splits you-or-a-permanent-you-control into two becomes-target triggers; script one
+Vampiric Embrace	T2	abilities	-	triggered:dies	equivalent	script grants the counter trigger to the enchanted creature; mtgish a trigger on the aura
+Varchild's War-Riders	T2	abilities	triggered:upkeep	-	equivalent	non-mana cumulative upkeep written as an explicit upkeep trigger; mtgish a keyword
+Venom, Eddie Brock	T2	abilities	triggered:dies	triggered:attacks	mtgish-bug	printed whenever another creature dies; mtgish WhenACreatureAttacks
+Vesuvan Shapeshifter	T2	abilities	replacement	-	equivalent	script writes as-enters and as-turned-face-up as two replacements; mtgish one
+Volcano Hellion	T2	abilities	-	static	equivalent	echo {X} as a keyword; mtgish a static granting echo
+Weathered Runestone	T2	abilities	-	replacement	equivalent	mtgish one replacement per origin zone (graveyards, libraries); script one
 Wingbeat Warrior	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
-Zulaport Enforcer	T2	abilities	-	static static	pending	not yet triaged

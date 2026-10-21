@@ -34,12 +34,12 @@ func repoRoot(t *testing.T) string {
 // carried as mapping debt. It may only shrink. The program drives it to 0,
 // after which any normalizer row fails (and the class is deleted). When the
 // test logs fewer rows than this, lower it to the logged count.
-const maxNormalizerRows = 34
+const maxNormalizerRows = 5
 
 // maxPendingRows caps the ledger's `pending` rows: disagreements the
 // program has not triaged yet (the initial corpus-wide generation). It may
 // only shrink, to 0, like maxNormalizerRows.
-const maxPendingRows = 2469
+const maxPendingRows = 2030
 
 // maxListed caps the NEW/STALE lines printed per kind; the counts are
 // always given in full.

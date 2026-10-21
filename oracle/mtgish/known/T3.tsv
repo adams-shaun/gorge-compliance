@@ -7,177 +7,152 @@
 #   | pending (not yet triaged; at most maxPendingRows, which only shrinks)
 # Rows whose unmapped tokens are all in excluded.tsv are class excluded, automatic, never here.
 card	tier	field	gorge	mtgish	class	note
-Aang, Swift Savior	T3	targets	creature|spellx0..1	creature|spell	pending	not yet triaged
-Abandon Reason	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
-Abandon the Post	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
-Abigale, Eloquent First-Year	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Abomination, Terrifying Titan	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Abzan Charm	T3	targets	creature+creaturex0..1	creature+creaturex0..*	pending	not yet triaged
-Ace, Fearless Rebel	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Aerie Auxiliary	T3	targets	-	creaturex0..2	pending	not yet triaged
-Ajani Steadfast	T3	targets	creaturex0..1	creature	pending	not yet triaged
-All Suns' Dawn	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..*	pending	not yet triaged
-Anafenza, Unyielding Lineage	T3	targets	-	any	pending	not yet triaged
-Arni Slays the Troll	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Astral Drift	T3	targets	-	creature	pending	not yet triaged
-Aven Liberator	T3	targets	creature	-	pending	not yet triaged
-Azusa's Many Journeys [Likeness of the Seeker]	T3	targets	-	landx0..3	pending	not yet triaged
-Back for More	T3	targets	card-graveyard+creaturex0..1	card-graveyard+creature	pending	not yet triaged
-Bellowing Bruiser [Beat a Path]	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
-Blinding Beam	T3	targets	creature+creature+player	creature+creature	pending	not yet triaged
-Blitzball Stadium	T3	targets	-	creaturex0..*	pending	not yet triaged
-Boros Battleshaper	T3	targets	creaturex0..1+creaturex0..1	creature+creature	pending	not yet triaged
-Break Ties	T3	targets	artifact+card-graveyard+enchantment	artifact+enchantment	pending	not yet triaged
-Builder's Bane	T3	targets	artifactx0..*	artifact	pending	not yet triaged
-Bumi's Feast Lecture	T3	targets	land	creature	pending	not yet triaged
-Burning Sun's Fury	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
-Burrog Barrage	T3	targets	creature+creaturex0..1	creature+creature	pending	not yet triaged
-Call Damage Control	T3	targets	card-graveyard	card-graveyardx0..2	pending	not yet triaged
-Captain's Maneuver	T3	targets	creature|planeswalker|player+creature|planeswalker|player	any+any	pending	not yet triaged
-Captured by Lagacs	T3	targets	-	creaturex0..2	pending	not yet triaged
-Chandra, Hope's Beacon	T3	targets	anyx0..2	any+any	pending	not yet triaged
-Chandra, the Firebrand	T3	targets	anyx0..6	any+any+any+any+any+any	pending	not yet triaged
-Chaos Is My Plaything	T3	targets	permanentx0..*	permanent	pending	not yet triaged
-Choking Vines	T3	targets	creaturex0..*	creature	pending	not yet triaged
-Cinderheart Giant	T3	targets	creature	-	pending	not yet triaged
-Cloud of Faeries	T3	targets	-	landx0..2	pending	not yet triaged
-Cloudspire Skycycle	T3	targets	artifact|creature+artifact|creaturex0..1	artifact|creaturex0..*	pending	not yet triaged
-Contagion	T3	targets	creature+creaturex0..1	creaturex0..*	pending	not yet triaged
-Coordinated Assault	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
-Cost of Brilliance	T3	targets	creaturex0..1+player	creature+player	pending	not yet triaged
-Craig Boone, Novac Guard	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Cruel Alliance	T3	targets	creature+creature	creature	pending	not yet triaged
-Cutthroat Maneuver	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
-Daring Discovery	T3	targets	creaturex0..3	creature+creature+creature	pending	not yet triaged
-Darkpact	T3	targets	permanent	unmapped:Target.TargetAnteCard	normalizer	unmapped token
-Dauntless Onslaught	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
-Deepwood Elder	T3	targets	landx0..*	land	pending	not yet triaged
-Demonic Junker	T3	targets	creaturex0..*	creature	pending	not yet triaged
-Den Protector	T3	targets	card-graveyard	-	pending	not yet triaged
-Disorienting Choice	T3	targets	artifact|enchantmentx0..*	artifact|enchantment	pending	not yet triaged
-Dragonspark Reactor	T3	targets	creaturex0..1+player	creature+player	pending	not yet triaged
-Dwarven Armorer	T3	targets	creature	-	pending	not yet triaged
-Earth Rumble	T3	targets	creature+creaturex0..1+land	creature+creature+land	pending	not yet triaged
-Elven Rite	T3	targets	creature+creaturex0..1	creaturex0..*	pending	not yet triaged
-Entangling Trap	T3	targets	creature	-	pending	not yet triaged
-Everything Pizza	T3	targets	any+creaturex0..1+player	any+creature+player	pending	not yet triaged
-Expedition Raptor	T3	targets	-	creaturex0..2	pending	not yet triaged
-Favored Enemy	T3	targets	creature+creaturex0..1	-	pending	not yet triaged
-Fear of Immobility	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Filigree Vector	T3	targets	artifactx0..*+creaturex0..*	creaturex0..*+creaturex0..*	pending	not yet triaged
-Firestorm	T3	targets	anyx0..*	any	pending	not yet triaged
-Fracture	T3	targets	artifact|enchantment|planeswalker	artifact|enchantment|land	pending	not yet triaged
-Frenzied Gorespawn	T3	targets	creaturex0..*	creature	pending	not yet triaged
-Froghemoth	T3	targets	-	card-graveyardx0..*	pending	not yet triaged
-Gale, Waterdeep Prodigy	T3	targets	card-graveyardx0..1	-	pending	not yet triaged
-Gargos, Vicious Watcher	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Generous Patron	T3	targets	-	creaturex0..2	pending	not yet triaged
-Ghost of Ramirez DePietro	T3	targets	card-graveyardx0..1	card-graveyard	pending	not yet triaged
-Ghostform	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
-Ghostly Keybearer	T3	targets	enchantmentx0..1	enchantment	pending	not yet triaged
-Gladehart Cavalry	T3	targets	-	creaturex0..6	pending	not yet triaged
-Gold Rush	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Grand Ossuary	T3	targets	creature+creaturex0..*	creaturex0..*	pending	not yet triaged
-Great Whale	T3	targets	-	landx0..7	pending	not yet triaged
-Grist, the Hunger Tide	T3	targets	creature|planeswalker	creature	pending	not yet triaged
-Hidden Dragonslayer	T3	targets	creature	-	pending	not yet triaged
-Huntmaster of the Fells [Ravager of the Fells]	T3	targets	creaturex0..1+planeswalker|player	creature+planeswalker|player	pending	not yet triaged
-Icefeather Aven	T3	targets	creature	-	pending	not yet triaged
-Immard, the Stormcleaver [Guile, Sonic Soldier]	T3	targets	any any	-	pending	not yet triaged
-Ion Storm	T3	targets	any	-	pending	not yet triaged
-Jeska, Thrice Reborn	T3	targets	anyx0..3	any+any+any	pending	not yet triaged
-Jon Irenicus, Shattered One	T3	targets	creaturex0..1+player	creature+player	pending	not yet triaged
-Joraga Auxiliary	T3	targets	-	creaturex0..2	pending	not yet triaged
-Jubilant Mascot	T3	targets	-	creaturex0..2	pending	not yet triaged
-Keranos, God of Storms	T3	targets	-	any	pending	not yet triaged
-Kiora, Master of the Depths	T3	targets	creaturex0..1+landx0..1	creaturex0..1+creaturex0..1	pending	not yet triaged
-Knight Rampager	T3	targets	-	player	pending	not yet triaged
-Kolaghan Stormsinger	T3	targets	creature	-	pending	not yet triaged
-Lead by Example	T3	targets	-	creaturex0..2	pending	not yet triaged
-Lethal Protection	T3	targets	card-graveyardx0..1+creature	card-graveyard+creature	pending	not yet triaged
-Lively Dirge	T3	targets	-	card-graveyardx0..2	pending	not yet triaged
-Lizard, Connors's Curse	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Markov Enforcer	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Meltstrider's Resolve	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Mischief and Mayhem	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
-Mischievous Quanar	T3	targets	spell	-	pending	not yet triaged
+Aang, Swift Savior	T3	targets	creature|spellx0..1	creature|spell	mtgish-bug	mtgish#3 up-to as exact
+Abandon Reason	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Abandon the Post	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Abigale, Eloquent First-Year	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Abomination, Terrifying Titan	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Abzan Charm	T3	targets	creature+creaturex0..1	creature+creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
+Ace, Fearless Rebel	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Ajani Steadfast	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+All Suns' Dawn	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..*	equivalent	one target per color/type: script one up-to-one slot each; mtgish one per-group slot
+Anafenza, Unyielding Lineage	T3	targets	-	any	mtgish-bug	mtgish#4: target added where the text has none
+Arni Slays the Troll	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Astral Drift	T3	targets	-	creature	equivalent	mtgish splits this-or-another into two triggers; script has one
+Aven Liberator	T3	targets	creature	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
+Azusa's Many Journeys [Likeness of the Seeker]	T3	targets	-	landx0..3	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
+Back for More	T3	targets	card-graveyard+creaturex0..1	card-graveyard+creature	mtgish-bug	mtgish#3 up-to as exact
+Bellowing Bruiser [Beat a Path]	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Blinding Beam	T3	targets	creature+creature+player	creature+creature	mtgish-bug	mtgish drops target player: creatures don't untap during target player's next untap step is encoded for all creatures
+Boros Battleshaper	T3	targets	creaturex0..1+creaturex0..1	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Break Ties	T3	targets	artifact+card-graveyard+enchantment	artifact+enchantment	mtgish-bug	mtgish#1: exile-from-graveyard mode lost (capture reuse)
+Bumi's Feast Lecture	T3	targets	land	creature	mtgish-bug	mtgish#4: earthbend targets a creature (printed target land you control)
+Burning Sun's Fury	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Burrog Barrage	T3	targets	creature+creaturex0..1	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Call Damage Control	T3	targets	card-graveyard	card-graveyardx0..2	equivalent	choose up to two modes, one target each: script one slot per mode; mtgish one up-to-two slot
+Captain's Maneuver	T3	targets	creature|planeswalker|player+creature|planeswalker|player	any+any	mtgish-bug	printed creature, planeswalker, or player (no battle); mtgish NumberAnyTargets
+Chandra, Hope's Beacon	T3	targets	anyx0..2	any+any	mtgish-bug	mtgish#3 up-to as exact
+Chandra, the Firebrand	T3	targets	anyx0..6	any+any+any+any+any+any	mtgish-bug	mtgish#3 up-to as exact
+Chaos Is My Plaything	T3	targets	permanentx0..*	permanent	forge-bug	per-opponent target is TargetMin$ 0 (choose none); printed one per opponent: TargetMin$ OneEach
+Cinderheart Giant	T3	targets	creature	-	forge-bug	Forge#12324: targeting modelled differently from the Oracle text
+Cloud of Faeries	T3	targets	-	landx0..2	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
+Cloudspire Skycycle	T3	targets	artifact|creature+artifact|creaturex0..1	artifact|creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
+Contagion	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
+Coordinated Assault	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Cost of Brilliance	T3	targets	creaturex0..1+player	creature+player	mtgish-bug	mtgish#3 up-to as exact
+Craig Boone, Novac Guard	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Cruel Alliance	T3	targets	creature+creature	creature	equivalent	teamwork instead: script two exclusive slots (X/Y 0 or 1); mtgish one
+Cutthroat Maneuver	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Daring Discovery	T3	targets	creaturex0..3	creature+creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Dauntless Onslaught	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Demonic Junker	T3	targets	creaturex0..*	creature	mtgish-bug	mtgish#3 up-to as exact
+Den Protector	T3	targets	card-graveyard	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
+Disorienting Choice	T3	targets	artifact|enchantmentx0..*	artifact|enchantment	mtgish-bug	mtgish#3 up-to as exact
+Dragonspark Reactor	T3	targets	creaturex0..1+player	creature+player	mtgish-bug	mtgish#3 up-to as exact
+Dwarven Armorer	T3	targets	creature	-	equivalent	script writes one ability per counter choice; mtgish one ability with a choice
+Earth Rumble	T3	targets	creature+creaturex0..1+land	creature+creature+land	mtgish-bug	mtgish#3 up-to as exact
+Elven Rite	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
+Entangling Trap	T3	targets	creature	-	equivalent	Forge splits one clash trigger into won/lost lines (Secondary)
+Everything Pizza	T3	targets	any+creaturex0..1+player	any+creature+player	mtgish-bug	mtgish#3 up-to as exact
+Favored Enemy	T3	targets	creature+creaturex0..1	-	mtgish-bug	mtgish#2 dropped capture: the ETB fight trigger is never emitted
+Fear of Immobility	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Filigree Vector	T3	targets	artifactx0..*+creaturex0..*	creaturex0..*+creaturex0..*	mtgish-bug	mtgish#4: artifact slot encoded as creature
+Fracture	T3	targets	artifact|enchantment|planeswalker	artifact|enchantment|land	mtgish-bug	mtgish#4: Fracture targets a land instead of a planeswalker
+Frenzied Gorespawn	T3	targets	creaturex0..*	creature	forge-bug	per-opponent target is TargetMin$ 0 (choose none); printed one per opponent: TargetMin$ OneEach
+Froghemoth	T3	targets	-	card-graveyardx0..*	forge-bug	Forge#12324: targeting modelled differently from the Oracle text
+Gale, Waterdeep Prodigy	T3	targets	card-graveyardx0..1	-	equivalent	script writes one trigger per spell type cast (instant -> sorcery, sorcery -> instant); mtgish one
+Gargos, Vicious Watcher	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Ghost of Ramirez DePietro	T3	targets	card-graveyardx0..1	card-graveyard	mtgish-bug	mtgish#3 up-to as exact
+Ghostform	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Ghostly Keybearer	T3	targets	enchantmentx0..1	enchantment	mtgish-bug	mtgish#3 up-to as exact
+Gold Rush	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Grand Ossuary	T3	targets	creature+creaturex0..*	creaturex0..*	equivalent	distribute among any number: script min 1 (a 0-target distribution does nothing); mtgish 0..*
+Great Whale	T3	targets	-	landx0..7	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
+Grist, the Hunger Tide	T3	targets	creature|planeswalker	creature	mtgish-bug	mtgish#4: Grist -2 missing planeswalker
+Hidden Dragonslayer	T3	targets	creature	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
+Huntmaster of the Fells [Ravager of the Fells]	T3	targets	creaturex0..1+planeswalker|player	creature+planeswalker|player	mtgish-bug	mtgish#3 up-to as exact
+Icefeather Aven	T3	targets	creature	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
+Ion Storm	T3	targets	any	-	equivalent	script writes one ability per removable counter type in the cost; mtgish one
+Jeska, Thrice Reborn	T3	targets	anyx0..3	any+any+any	mtgish-bug	mtgish#3 up-to as exact
+Jon Irenicus, Shattered One	T3	targets	creaturex0..1+player	creature+player	mtgish-bug	mtgish#3 up-to as exact
+Kiora, Master of the Depths	T3	targets	creaturex0..1+landx0..1	creaturex0..1+creaturex0..1	mtgish-bug	mtgish#1: the land target encoded as a second creature (capture reuse)
+Knight Rampager	T3	targets	-	player	forge-bug	Forge#12324: targeting modelled differently from the Oracle text
+Kolaghan Stormsinger	T3	targets	creature	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
+Lethal Protection	T3	targets	card-graveyardx0..1+creature	card-graveyard+creature	mtgish-bug	mtgish#3 up-to as exact
+Lively Dirge	T3	targets	-	card-graveyardx0..2	mtgish-bug	mtgish#4: target added where the text has none
+Lizard, Connors's Curse	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Markov Enforcer	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Meltstrider's Resolve	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Mischief and Mayhem	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Mischievous Quanar	T3	targets	spell	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Mistbreath Elder	T3	targets	-	creature	mtgish-bug	printed return is untargeted; mtgish adds a TargetPermanent (gorge: a hidden ChangeType choice) (i5jb/mtgish#4)
-Mistfire Weaver	T3	targets	creature	-	pending	not yet triaged
-Mythos of Brokkos	T3	targets	-	card-graveyardx0..2	pending	not yet triaged
-Nahiri's Stoneblades	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
-Nightbird's Clutches	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
-Nissa's Judgment	T3	targets	creaturex0..1	creature+creaturex0..2	pending	not yet triaged
-Novel Nunchaku	T3	targets	creature+creaturex0..1	creature+creature	pending	not yet triaged
-Obuun, Mul Daya Ancestor	T3	targets	landx0..1	land	pending	not yet triaged
-Oglor, Devoted Assistant	T3	targets	player	-	pending	not yet triaged
-Oko, Lorwyn Liege	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Ondu Knotmaster [Throw a Line]	T3	targets	creature+creaturex0..1	creaturex0..*	pending	not yet triaged
-Palinchron	T3	targets	-	landx0..7	pending	not yet triaged
-Panic Attack	T3	targets	creaturex0..3	creature+creature+creature	pending	not yet triaged
-Peregrine Drake	T3	targets	-	landx0..5	pending	not yet triaged
-Phyrexian Splicer	T3	targets	creature+creature creature+creature creature+creature	-	pending	not yet triaged
-Pitiless Fists	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Press into Service	T3	targets	creature	creature+creaturex0..2	pending	not yet triaged
-Press the Advantage	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
+Mistfire Weaver	T3	targets	creature	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
+Mythos of Brokkos	T3	targets	-	card-graveyardx0..2	mtgish-bug	mtgish#4: target added where the text has none
+Nahiri's Stoneblades	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Nightbird's Clutches	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Nissa's Judgment	T3	targets	creaturex0..1+creaturex0..2	creature+creaturex0..2	mtgish-bug	mtgish#3 pattern (not in the issue list): choose up to one target encoded exact
+Novel Nunchaku	T3	targets	creature+creaturex0..1	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Obuun, Mul Daya Ancestor	T3	targets	landx0..1	land	mtgish-bug	mtgish#3 up-to as exact
+Oglor, Devoted Assistant	T3	targets	player	-	forge-bug	upkeep dig has ValidTgts$ You; printed look-at-top is untargeted
+Oko, Lorwyn Liege	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Ondu Knotmaster [Throw a Line]	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
+Palinchron	T3	targets	-	landx0..7	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
+Panic Attack	T3	targets	creaturex0..3	creature+creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Peregrine Drake	T3	targets	-	landx0..5	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
+Phyrexian Splicer	T3	targets	creature+creature creature+creature creature+creature	-	equivalent	script writes one ability per keyword choice; mtgish one with a choice
+Pitiless Fists	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Press the Advantage	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Primal Might	T3	targets	creature+creaturex0..1	creature+creature	mtgish-bug	printed fight target is up to one; mtgish TargetPermanent requires exactly one (gorge: TargetMin$ 0) (i5jb/mtgish#3)
-Quandrix Command	T3	targets	card-graveyardx0..3+creature+creature|planeswalkerx0..1+player+spell	card-graveyardx0..3+creature+creature|planeswalker+player+spell	pending	not yet triaged
-Rally the Monastery	T3	targets	creature+creaturex0..2	creature+creature	pending	not yet triaged
-Reasonable Doubt	T3	targets	creaturex0..1+spell	creature+spell	pending	not yet triaged
-Relief Captain	T3	targets	-	creaturex0..3	pending	not yet triaged
-Return to Dust	T3	targets	artifact|enchantment+artifact|enchantmentx0..*	artifact|enchantment+artifact|enchantmentx0..1	pending	not yet triaged
-River's Grasp	T3	targets	creaturex0..1+player	creature+player	pending	not yet triaged
-Rogues' Gallery	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..*	pending	not yet triaged
-Running Is Useless	T3	targets	creaturex0..*	-	pending	not yet triaged
-Saddleback Lagac	T3	targets	-	creaturex0..2	pending	not yet triaged
+Quandrix Command	T3	targets	card-graveyardx0..3+creature+creature|planeswalkerx0..1+player+spell	card-graveyardx0..3+creature+creature|planeswalker+player+spell	forge-bug	bounce mode has TargetMin$ 0 | TargetMax$ 1; printed target is required
+Rally the Monastery	T3	targets	creature+creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Reasonable Doubt	T3	targets	creaturex0..1+spell	creature+spell	mtgish-bug	mtgish#3 up-to as exact
+Return to Dust	T3	targets	artifact|enchantment+artifact|enchantmentx0..*	artifact|enchantment+artifact|enchantmentx0..1	equivalent	conditional second target: script one 1..X slot; mtgish a required and an up-to-one slot
+River's Grasp	T3	targets	creaturex0..1+player	creature+player	mtgish-bug	mtgish#3 up-to as exact
+Rogues' Gallery	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..*	equivalent	one target per color/type: script one up-to-one slot each; mtgish one per-group slot
+Running Is Useless	T3	targets	creaturex0..*	-	forge-bug	Forge#12324: targeting modelled differently from the Oracle text
 Season of the Bold	T3	targets	creaturex0..1	creature	mtgish-bug	printed damage target is up to one; mtgish TargetPermanent requires exactly one (gorge: TargetMin$ 0) (i5jb/mtgish#3)
-Seize Opportunity	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
-Shoulder to Shoulder	T3	targets	-	creaturex0..2	pending	not yet triaged
-Silumgar Assassin	T3	targets	creature	-	pending	not yet triaged
-Skyboon Evangelist	T3	targets	-	creaturex0..6	pending	not yet triaged
-Smogbelcher Chariot	T3	targets	permanent	creature	pending	not yet triaged
-Soulblade Renewer	T3	targets	-	creaturex0..2	pending	not yet triaged
-Sparkshaper Visionary	T3	targets	-	planeswalkerx0..*	pending	not yet triaged
-Splendid Agony	T3	targets	creature+creaturex0..1	creaturex0..*	pending	not yet triaged
-Spry and Mighty	T3	targets	-	creature+creature	pending	not yet triaged
-Stockpiling Celebrant	T3	targets	-	permanent	pending	not yet triaged
-Stratus Dancer	T3	targets	spell	-	pending	not yet triaged
-Strength of the Tajuru	T3	targets	creature	creature+creature	pending	not yet triaged
-Stunning Shot	T3	targets	creaturex0..1+creaturex0..1	creature+creature	pending	not yet triaged
-Subtlety	T3	targets	spellx0..1	spell	pending	not yet triaged
-Summon: Kujata	T3	targets	creaturex0..3	creature+creature+creature	pending	not yet triaged
-Summon: Magus Sisters	T3	targets	creature+creaturex0..1 creature+creaturex0..1 creature+creaturex0..1	creature creature creature	pending	not yet triaged
-Surly Badgersaur	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Sylvan Primordial	T3	targets	permanentx0..*	permanent	pending	not yet triaged
-Synchronized Charge	T3	targets	creature+creaturex0..1	creaturex0..*	pending	not yet triaged
-Talion's Throneguard	T3	targets	permanent|spellx0..1	permanent|spell	pending	not yet triaged
-Teferi, Hero of Dominaria	T3	targets	-	landx0..2	pending	not yet triaged
-Temporal Firestorm	T3	targets	-	creature|planeswalker	pending	not yet triaged
-Terastodon	T3	targets	permanentx0..3	-	pending	not yet triaged
-The Balrog of Moria	T3	targets	creaturex0..*	creature	pending	not yet triaged
-The Boulder, Ready to Rumble	T3	targets	land	creature	pending	not yet triaged
-The Crowd Goes Wild	T3	targets	-	creaturex0..*	pending	not yet triaged
-The Doctor's Childhood Barn	T3	targets	permanentx0..*	permanent	pending	not yet triaged
-The Eagles Are Coming!	T3	targets	creature+creaturex0..*	creaturex0..*	pending	not yet triaged
-The Earth Crystal	T3	targets	creature+creaturex0..1	creaturex0..*	pending	not yet triaged
-The Legend of Kyoshi	T3	targets	land	creature	pending	not yet triaged
-There Is No Refuge	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Thorn Mammoth	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Tidal Control	T3	targets	spell	-	pending	not yet triaged
-Time Lord Regeneration	T3	targets	permanent	creature	pending	not yet triaged
-Together Forever	T3	targets	-	creaturex0..2	pending	not yet triaged
-Tokka & Rahzar, Terrible Twos	T3	targets	-	player	pending	not yet triaged
-Too Evil to Stay Dead	T3	targets	card-graveyard+card-graveyard	card-graveyard	pending	not yet triaged
-Toph, Earthbending Master	T3	targets	land	creature	pending	not yet triaged
-Toph, Greatest Earthbender	T3	targets	land	creature	pending	not yet triaged
-Topple	T3	targets	creature	permanent	pending	not yet triaged
-Treachery	T3	targets	-	landx0..5	pending	not yet triaged
-Triassic Egg	T3	targets	card-graveyard	-	pending	not yet triaged
-Uldaros Theorix	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..*	pending	not yet triaged
-Unearthly Blizzard	T3	targets	creaturex0..3	creature+creature+creature	pending	not yet triaged
-Unity of Purpose	T3	targets	-	creaturex0..2	pending	not yet triaged
-Venom Blast	T3	targets	creature+creaturex0..1	creature+creature	pending	not yet triaged
-Vhal, Scholar of Tactics	T3	targets	creature+creaturex0..*	creaturex0..*	pending	not yet triaged
-Voldaren Ambusher	T3	targets	creature|planeswalkerx0..1	creature|planeswalker	pending	not yet triaged
-Warbriar Blessing	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Wingbeat Warrior	T3	targets	creature	-	pending	not yet triaged
-You Come to the Gnoll Camp	T3	targets	creature+creaturex0..2	creature+creature	pending	not yet triaged
+Seize Opportunity	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Silumgar Assassin	T3	targets	creature	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
+Smogbelcher Chariot	T3	targets	permanent	creature	forge-bug	ValidTgts$ Card.CrewedThisTurn admits a noncreature crewer; printed target creature
+Sparkshaper Visionary	T3	targets	-	planeswalkerx0..*	forge-bug	Forge#12324: targeting modelled differently from the Oracle text
+Splendid Agony	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
+Spry and Mighty	T3	targets	-	creature+creature	mtgish-bug	mtgish#4: target added where the text has none
+Stockpiling Celebrant	T3	targets	-	permanent	forge-bug	Forge#12324: targeting modelled differently from the Oracle text
+Stratus Dancer	T3	targets	spell	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
+Strength of the Tajuru	T3	targets	creature	creature+creature	equivalent	multikicker targets: script one slot of 1+kicks; mtgish one plus one per kick
+Stunning Shot	T3	targets	creaturex0..1+creaturex0..1	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Subtlety	T3	targets	spellx0..1	spell	mtgish-bug	mtgish#3 up-to as exact
+Summon: Kujata	T3	targets	creaturex0..3	creature+creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Summon: Magus Sisters	T3	targets	creature+creaturex0..1 creature+creaturex0..1 creature+creaturex0..1	creature creature creature	mtgish-bug	mtgish#3 up-to as exact
+Surly Badgersaur	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Sylvan Primordial	T3	targets	permanentx0..*	permanent	forge-bug	per-opponent target is TargetMin$ 0 (choose none); printed one per opponent: TargetMin$ OneEach
+Synchronized Charge	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
+Talion's Throneguard	T3	targets	permanent|spellx0..1	permanent|spell	mtgish-bug	mtgish#3 up-to as exact
+Teferi, Hero of Dominaria	T3	targets	-	landx0..2	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
+Temporal Firestorm	T3	targets	-	creature|planeswalker	mtgish-bug	mtgish#4: target added where the text has none
+Terastodon	T3	targets	permanentx0..3	-	mtgish-bug	mtgish#3 up-to as exact
+The Balrog of Moria	T3	targets	creaturex0..*	creature	mtgish-bug	mtgish#3 up-to as exact
+The Boulder, Ready to Rumble	T3	targets	land	creature	mtgish-bug	mtgish#4: earthbend targets a creature (printed target land you control)
+The Doctor's Childhood Barn	T3	targets	permanentx0..*	permanent	mtgish-bug	mtgish#3 up-to as exact
+The Eagles Are Coming!	T3	targets	creature+creaturex0..*	creaturex0..*	equivalent	kicker instead: script slot per branch (one; any number); mtgish the kicked any-number slot
+The Earth Crystal	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
+The Legend of Kyoshi	T3	targets	land	creature	mtgish-bug	mtgish#4: earthbend targets a creature (printed target land you control)
+There Is No Refuge	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Thorn Mammoth	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Tidal Control	T3	targets	spell	-	equivalent	script writes one ability per alternative cost (2 life or {2}); mtgish one
+Time Lord Regeneration	T3	targets	permanent	creature	equivalent	Time Lord is a creature type: a Time Lord permanent is a creature
+Tokka & Rahzar, Terrible Twos	T3	targets	-	player	mtgish-bug	mtgish#4: target added where the text has none
+Too Evil to Stay Dead	T3	targets	card-graveyard+card-graveyard	card-graveyard	equivalent	teamwork instead: script two exclusive slots (X/Y 0 or 1); mtgish one
+Toph, Earthbending Master	T3	targets	land	creature	mtgish-bug	mtgish#4: earthbend targets a creature (printed target land you control)
+Toph, Greatest Earthbender	T3	targets	land	creature	mtgish-bug	mtgish#4: earthbend targets a creature (printed target land you control)
+Topple	T3	targets	creature	permanent	mtgish-bug	mtgish#4: Topple targets a permanent instead of a creature
+Treachery	T3	targets	-	landx0..5	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
+Triassic Egg	T3	targets	card-graveyard	-	mtgish-bug	mtgish#1: return-from-graveyard mode lost (capture reuse)
+Uldaros Theorix	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..*	equivalent	one target per color/type: script one up-to-one slot each; mtgish one per-group slot
+Unearthly Blizzard	T3	targets	creaturex0..3	creature+creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Venom Blast	T3	targets	creature+creaturex0..1	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Vhal, Scholar of Tactics	T3	targets	creature+creaturex0..*	creaturex0..*	equivalent	distribute among any number: script min 1 (a 0-target distribution does nothing); mtgish 0..*
+Voldaren Ambusher	T3	targets	creature|planeswalkerx0..1	creature|planeswalker	mtgish-bug	mtgish#3 up-to as exact
+Warbriar Blessing	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Wingbeat Warrior	T3	targets	creature	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
+You Come to the Gnoll Camp	T3	targets	creature+creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
