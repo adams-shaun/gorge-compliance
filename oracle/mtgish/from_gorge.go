@@ -17,6 +17,7 @@ func FromGorge(name string, c *cards.Card, idx TypeIndex) []*Summary {
 		}
 		out = append(out, gorgeFace(name, f, idx))
 	}
+	gorgeCardE(c, out, idx)
 	return out
 }
 
@@ -29,22 +30,8 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		}
 	}
 	s.ManaCost = mc.String()
-	for _, t := range f.Types {
-		s.Types = append(s.Types, typeWord(t))
-	}
-	s.PT = f.PT
-	if strings.Contains(s.PT, "*") {
-		// "1+*/1+*": a characteristic-defining P/T is "*" whatever its
-		// printed base; mtgish prints every CDA half as "*".
-		p, t, _ := strings.Cut(s.PT, "/")
-		if strings.Contains(p, "*") {
-			p = "*"
-		}
-		if strings.Contains(t, "*") {
-			t = "*"
-		}
-		s.PT = p + "/" + t
-	}
+	s.Types = gorgeTypes(f.Types)
+	s.PT = gorgePT(f)
 	s.Loyalty = f.Loyalty
 
 	g := &gorgeNorm{s: s, f: f, idx: idx}
@@ -265,7 +252,7 @@ func (g *gorgeNorm) keyword(k string) {
 		if q == "" || strings.Contains(q, ":") || param != "" {
 			g.kw("protection:*")
 		} else {
-			g.kw("protection:" + typeWord(q))
+			g.kw("protection:" + colorQuality(typeWord(q)))
 		}
 		return
 	case head == "Hexproof" && param != "":
@@ -274,7 +261,7 @@ func (g *gorgeNorm) keyword(k string) {
 			q = q[:i]
 		}
 		for _, alt := range strings.Split(q, ",") {
-			g.kw("hexprooffrom:" + typeWord(strings.TrimPrefix(alt, "Card.")))
+			g.kw("hexprooffrom:" + colorQuality(typeWord(strings.TrimPrefix(alt, "Card."))))
 		}
 		return
 	case head == "Enchant":
@@ -287,7 +274,7 @@ func (g *gorgeNorm) keyword(k string) {
 		g.kw("enchant:" + targetToken(g.idx.validClasses(cls, ""), "1"))
 		return
 	case head == "Affinity":
-		g.kw("affinity:" + typeWord(param))
+		g.kw("affinity:" + gorgeAffinity(param))
 		return
 	case head == "Gift":
 		g.kw("gift")
@@ -304,6 +291,10 @@ func (g *gorgeNorm) keyword(k string) {
 		}
 		return
 	case gorgeBareKeywords[head]:
+		g.kw(keywordWord(head))
+		return
+	case gorgeCostKeywords[head] && param == "":
+		// A cost keyword printed without a cost (a land's Mayhem).
 		g.kw(keywordWord(head))
 		return
 	case gorgeCostKeywords[head]:
@@ -627,6 +618,12 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 func hiddenKeywordToken(k string) string {
 	k = strings.TrimPrefix(k, "HIDDEN ")
 	switch {
+	case strings.Contains(k, "can't attack alone"):
+		return "rule:cantattackalone"
+	case strings.Contains(k, "can't block alone"):
+		return "rule:cantblockalone"
+	case strings.Contains(k, "can only attack alone"):
+		return "rule:canonlyattackalone"
 	case strings.Contains(k, "can't block"):
 		return "rule:cantblock"
 	case strings.Contains(k, "can't attack"):
