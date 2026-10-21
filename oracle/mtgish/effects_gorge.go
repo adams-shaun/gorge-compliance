@@ -432,7 +432,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			if rest == "" {
 				rest = "Library"
 			}
-			out = append(out, "move:library>"+strings.ToLower(rest))
+			// One card looked at and left on top (LibraryPosition2$ 0)
+			// does not move.
+			if rest != "Library" || n != "1" || p["LibraryPosition2"] != "0" {
+				out = append(out, "move:library>"+strings.ToLower(rest))
+			}
 		}
 		return out
 	case "DigUntil":
@@ -441,7 +445,9 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		}
 		out := []string{"diguntil"}
 		for _, k := range []string{"FoundDestination", "RevealedDestination"} {
-			if d := p[k]; d != "" {
+			if d := p[k]; d != "" && !(k == "RevealedDestination" && d == "Library" && p["Shuffle"] == "True") {
+				// The revealed cards shuffled back are not a move (mtgish's
+				// PutTheRemainingCardsBackIntoLibraryAndShuffle).
 				out = append(out, "move:library>"+strings.ToLower(d))
 			}
 		}
