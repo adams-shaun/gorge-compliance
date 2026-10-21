@@ -73,7 +73,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			// CreatePerpetual* actions.
 			e.add("perpetual")
 		} else {
-			e.add(p2dPlayerGrants(a, g.p2fSearchDelivery(a, gorgeAPIEffects(a, g.svars())))...)
+			e.add(p2fPreventGrants(p2dPlayerGrants(a, g.p2fSearchDelivery(a, gorgeAPIEffects(a, g.svars()))))...)
 		}
 		e.add(atEOTTokens(a.Params["AtEOT"])...)
 		e.add(paramTokensP2B(a)...)

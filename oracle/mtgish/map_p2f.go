@@ -275,3 +275,18 @@ func init() {
 		}
 	}
 }
+
+// p2fPreventGrants reads a resolving ability's grant of Forge's prevention
+// keyword ("Prevent all [combat] damage that would be dealt by/to
+// CARDNAME.", given by a Pump or an Effect's static until end of turn) as
+// the prevention it is, as mtgish's CreatePreventDamageUntil ("prevent").
+// A printed static granting it stays a grant (mtgish: a prevention rule).
+func p2fPreventGrants(toks []string) []string {
+	for i, t := range toks {
+		h := strings.TrimPrefix(strings.TrimPrefix(t, "grant:"), "spell:")
+		if h != t && strings.HasPrefix(h, "prevent") && strings.Contains(h, "damagethatwouldbedealt") && strings.HasSuffix(h, "cardname") {
+			toks[i] = "prevent"
+		}
+	}
+	return toks
+}
