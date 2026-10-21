@@ -112,3 +112,50 @@ func p2fDelivers(p map[string]string) bool {
 	}
 	return strings.Contains(p["ChangeType"], "IsRemembered")
 }
+
+// p2fReflexiveEnter maps the reflexive half of an "as it enters" copy
+// choice ("you may have it enter as a copy of X. When you do, exile X"):
+// the actions the reflexive trigger runs, which a script writes as a
+// sub-ability of its Clone replacement.
+func p2fReflexiveEnter(x any) []string {
+	if !strings.HasPrefix(variantOf(x), "Reflexive_") {
+		return nil
+	}
+	sub := &effects{}
+	for _, a := range argsOf(x) {
+		if enumOf(a) == "Actions" {
+			sub.walk(a)
+		}
+	}
+	return sub.effects
+}
+
+// p2fMayCostOr maps "you may <A> or <B>. If you do, ..." as the
+// alternatives when every alternative is an action a script writes as an
+// effect (mayCostActionsP2B), as one MayCost of either would be.
+func p2fMayCostOr(e *effects, c any) bool {
+	alts := argsOf(c)
+	if len(alts) == 0 {
+		return false
+	}
+	for _, a := range alts {
+		if !mayCostActionsP2B[variantOf(a)] {
+			return false
+		}
+	}
+	sub := &effects{}
+	sub.alternativeCosts(alts)
+	for _, t := range sub.effects {
+		if IsUnmapped(t) {
+			return false
+		}
+	}
+	e.add(sub.effects...)
+	return len(sub.effects) > 0
+}
+
+func init() {
+	// "From your graveyard onto the battlefield", the graveyard twin of
+	// PutACardFromHandOnBattlefield: a script writes it as a ChangeZone.
+	mayCostActionsP2B["PutACardFromPlayersGraveyardOnBattlefield"] = true
+}

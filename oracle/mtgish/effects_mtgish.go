@@ -966,6 +966,7 @@ func enterEffects(as []any) []string {
 			// not an effect; its consequence is mapped where it appears.
 		case strings.Contains(v, "Copy"):
 			out = append(out, "copy")
+			out = append(out, p2fReflexiveEnter(x)...)
 		case v == "If" || v == "Unless" || v == "IfPassesFilter" || v == "MayAction" || v == "MayActions":
 			for _, sub := range argsOf(x) {
 				if l := list(sub); l != nil {

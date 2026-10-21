@@ -49,6 +49,9 @@ var mayCostActionsP2B = map[string]bool{
 // payment, which scripts write as a Cost$ or UnlessCost$ (measured).
 func mayCostEffectP2B(e *effects, must bool, c any) bool {
 	v := variantOf(c)
+	if !must && v == "Or" {
+		return p2fMayCostOr(e, c)
+	}
 	switch {
 	case must && (strings.HasPrefix(v, "Sacrifice") || v == "DiscardACard" || v == "PayLife"):
 		return false
