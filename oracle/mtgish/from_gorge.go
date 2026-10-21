@@ -570,7 +570,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "player:mayplayanadditionalland")
 		}
 		if p["MayLookAt"] != "" {
-			out = append(out, d2MayLookAt(p))
+			out = append(out, p2aMayLookAt(p)...)
 		}
 		if p["SetName"] != "" {
 			out = append(out, "name")
@@ -606,15 +606,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			// layer effect, as mtgish's CantGainAbility.
 			out = append(out, "rule:cantgainability")
 		}
-		switch n := p["CanBlockAmount"]; n {
-		case "":
-		case "1":
-			out = append(out, "rule:canblockanadditionalcreature")
-		case "99":
-			out = append(out, "rule:canblockanynumberofcreatures")
-		default:
-			out = append(out, "rule:canblockanadditionalnumbercreatures")
-		}
+		// (CanBlockAmount$ is read once, by d2ContinuousEffects.)
 		// (Goad$ True is "goad", d2ContinuousEffects.)
 		for _, k := range cards.SplitKeywordList(p["AddHiddenKeyword"]) {
 			out = append(out, hiddenKeywordToken(k))

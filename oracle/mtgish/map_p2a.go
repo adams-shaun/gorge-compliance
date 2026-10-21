@@ -154,3 +154,43 @@ func p2aReplacementStatics(s *Summary) {
 		}
 	}
 }
+
+func init() {
+	extReplStatic["Draw"] = p2aRevealedDraw
+}
+
+// p2aRevealedDraw maps "<players> reveal each card they draw", which
+// scripts write as a Draw replacement that draws the card and reveals it
+// (then only cleans up), to the player rule the printed card and mtgish
+// (RevealsEachCardDrawn) carry. Any other Draw replacement stays one.
+func p2aRevealedDraw(r *cards.Repl) []string {
+	a := r.With
+	if a == nil || a.API != "Draw" || a.Sub == nil || a.Sub.API != "Reveal" {
+		return nil
+	}
+	if s := a.Sub.Sub; s != nil && (s.API != "Cleanup" || s.Sub != nil) {
+		return nil
+	}
+	return []string{"player:revealseachcarddrawn"}
+}
+
+// p2aMayLookAt maps a Continuous MayLookAt$ zone by zone: one static may
+// open several ("the top card of your library and face-down creatures you
+// don't control", AffectedZone$ Library,Battlefield), which mtgish writes
+// as one player effect each.
+func p2aMayLookAt(p map[string]string) []string {
+	zones := strings.Split(p["AffectedZone"], ",")
+	if len(zones) < 2 {
+		return []string{d2MayLookAt(p)}
+	}
+	var out []string
+	for _, z := range zones {
+		q := make(map[string]string, len(p))
+		for k, v := range p {
+			q[k] = v
+		}
+		q["AffectedZone"] = strings.TrimSpace(z)
+		out = append(out, d2MayLookAt(q))
+	}
+	return dedup(out)
+}
