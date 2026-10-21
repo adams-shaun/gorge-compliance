@@ -213,6 +213,23 @@ func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
 		// PutCounterAll's second group ("and a plan counter on this").
 		e.add(gorgeCounterTokens(ct, literalOr(a.Params["CounterNum2"], "1"))...)
 	}
+	if name := a.Params["StaticEffect"]; name != "" && (a.API == "ChangeZone" || a.API == "ChangeZoneAll") {
+		// "Return it ... That creature is a black Zombie in addition
+		// to its other colors and types": the static the move gives the
+		// moved card (mtgish's CreatePermanentLayerEffect).
+		if st, ok := cards.ParseStaticLine(g.svars()[name]); ok {
+			for _, t := range gorgeStaticEffects(st.Mode, st.Params) {
+				if !IsUnmapped(t) {
+					e.add(t)
+				}
+			}
+		}
+	}
+	if a.API == "Counter" && a.Params["DestroyPermanent"] == "True" {
+		// "If a permanent's ability is countered this way, destroy that
+		// permanent."
+		e.add("destroy")
+	}
 	if a.API == "CopyPermanent" {
 		for _, k := range strings.Split(a.Params["PumpKeywords"], "&") {
 			if k = strings.TrimSpace(k); k != "" {
@@ -482,6 +499,18 @@ func p2cSpellToken(v string) string {
 // p2cEnterFlag maps an enter flag that puts counters on the entering
 // permanent (gorge: WithCountersType$ on the move).
 func p2cEnterFlag(n node, v string) []string {
+	if v == "EntersWithLayerEffect" || v == "EntersWithLayerEffectUntil" {
+		// "It's an Enchantment in addition to its other types": the
+		// moved card's layer effect (gorge: the move's StaticEffect$).
+		if l := list(rawArgs(n)); l != nil {
+			if len(l) > 0 && enumOf(l[0]) != "LayerEffect" {
+				// EntersWithLayerEffectUntil: (effects, expiration).
+				l = list(l[0])
+			}
+			return layerEffects(l)
+		}
+		return nil
+	}
 	if !strings.HasPrefix(v, "EntersWith") || !strings.Contains(v, "Counter") {
 		return nil
 	}

@@ -467,7 +467,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		if p["Power"] != "" || p["Toughness"] != "" {
 			out = append(out, "setpt")
 		}
-		if p["RemoveAllAbilities"] == "True" || p["RemoveThisAbility"] == "True" {
+		if p["RemoveAllAbilities"] == "True" || p["RemoveThisAbility"] == "True" || p["RemoveKeywords"] != "" || p["RemoveKeyword"] != "" {
 			out = append(out, "loseabilities")
 		}
 		for _, k := range []string{"Triggers", "Abilities", "staticAbilities", "StaticAbilities", "Replacements"} {
