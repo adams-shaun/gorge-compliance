@@ -56,6 +56,11 @@ func (e *effects) walk(x any) {
 			if variant == "ChooseAnAction" {
 				// "You may A or B. When you do, ...": one of the actions
 				// runs, so they are alternatives.
+				if l := list(rawArgs(n)); len(l) > 1 && list(l[0]) != nil {
+					// The options themselves: [[A...], [B...]].
+					e.alternatives(l...)
+					return false
+				}
 				for _, a := range argsOf(n) {
 					if l := list(a); l != nil {
 						e.alternatives(l...)
