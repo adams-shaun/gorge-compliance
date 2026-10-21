@@ -72,7 +72,8 @@ func p2fFlicker(e *effects, l []any) {
 // p2fSearchDelivery folds the delivery of a search that parks its cards in
 // the library: "search your library for a card, reveal it, then put it
 // into your hand or onto the battlefield (by a condition, an opponent's
-// pick, a payment)". Scripts search with Destination$ Library, remember
+// pick, a payment)". Scripts search with Destination$ Library (or with
+// no Destination$, leaving the cards where they are), remember
 // the found cards, then move them out with later ChangeZones over the
 // remembered or chosen cards; mtgish writes one SearchLibrary whose steps
 // say where the cards go (search:*, or its destination). The later moves
@@ -93,7 +94,7 @@ func (g *gorgeNorm) p2fSearchDelivery(a *cards.SA, toks []string) []string {
 		return out
 	}
 	for _, t := range toks {
-		if t == "search:library" {
+		if t == "search:library" || t == "search:" {
 			g.parked = true
 		}
 	}
