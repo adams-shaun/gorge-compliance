@@ -795,6 +795,10 @@ func staticEffects(r any) []string {
 	case "PlayerEffect", "EachPlayerEffect", "PlayerEffect_PlayerMayPayToIgnoreEffectUntil":
 		var out []string
 		for _, x := range list(a[1]) {
+			if t, ok := p2dPlayerSpellEffects(x); ok {
+				out = append(out, t...)
+				continue
+			}
 			out = append(out, playerEffectToken(variantOf(x)))
 		}
 		return dedup(out)

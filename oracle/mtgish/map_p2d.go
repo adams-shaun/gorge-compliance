@@ -452,3 +452,22 @@ func init() {
 	extAction["AnteAPermanent"] = func(e *effects, n node) { e.add("move:battlefield>ante") }
 	extAction["ShuffleACardFromHandIntoLibrary"] = func(e *effects, n node) { e.add("move:hand>library:1") }
 }
+
+// p2dPlayerSpellEffects maps "<spells you cast (from your hand, from exile,
+// the Nth each turn)> have <ability>" player effects by what the spells
+// get, as the gorge side's Continuous static over the stack does
+// ("spell:cascade"). The SpellEffect list is the variant's last argument.
+func p2dPlayerSpellEffects(x any) ([]string, bool) {
+	switch variantOf(x) {
+	case "SpellsCastFromHandHaveAbility", "SpellsCastFromExileHaveAbility", "SpellsCastHaveAbility",
+		"SpellsControlledHaveAbility", "TheNthSpellCastEachTurnHasAbility":
+	default:
+		return nil, false
+	}
+	a := argsOf(x)
+	if len(a) == 0 {
+		return nil, false
+	}
+	t := spellEffectTokens(list(a[len(a)-1]))
+	return t, len(t) > 0
+}
