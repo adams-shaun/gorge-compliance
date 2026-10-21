@@ -613,11 +613,14 @@ func effectAPI(a *cards.SA, svars map[string]string) []string {
 			continue
 		}
 		eff := gorgeStaticEffects(st.Mode, st.Params)
-		for _, t := range eff {
+		for i, t := range eff {
 			if IsUnmapped(t) {
 				eff = []string{"effect"}
 				break
 			}
+			// "That creature is goaded for as long as ...": an effect's
+			// goad is the goad action, as mtgish's GoadCreatureUntil.
+			eff[i] = p2cGoadAction(t)
 		}
 		out = append(out, eff...)
 	}

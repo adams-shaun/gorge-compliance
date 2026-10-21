@@ -20,6 +20,21 @@ var p2cReplSynonyms = map[string]string{
 }
 
 func init() {
+	// A rule an action gives permanents for a while ("the tokens are
+	// goaded"): goading is the goad action (gorge: Goad), not the static
+	// rule a card prints.
+	for _, k := range []string{"CreateEachPermanentRuleEffect", "CreatePermanentRuleEffect"} {
+		if f := extAction[k]; f != nil {
+			extAction[k] = func(e *effects, n node) {
+				sub := &effects{}
+				f(sub, n)
+				for _, t := range sub.effects {
+					e.add(p2cGoadAction(t))
+				}
+				e.targets = append(e.targets, sub.targets...)
+			}
+		}
+	}
 	// "This creature assigns no combat damage this turn": S:Mode$
 	// AssignNoCombatDamage (usually inside an Effect), mtgish's rule.
 	if extStatic["AssignNoCombatDamage"] == nil {
@@ -309,4 +324,13 @@ func (e *effects) p2cEachPlayerTokens(ts any) {
 		head, _ := splitLast(tokenToken(t))
 		e.add(head + ":*")
 	}
+}
+
+// p2cGoadAction maps the is-goaded rule, given by an action, to the goad
+// action.
+func p2cGoadAction(t string) string {
+	if t == "rule:isgoadedbyplayer" {
+		return "goad"
+	}
+	return t
 }

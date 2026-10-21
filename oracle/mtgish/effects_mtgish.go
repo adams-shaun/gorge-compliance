@@ -382,7 +382,7 @@ func (e *effects) action(n node, v string) {
 		e.add(layerEffects(list(arg(1)))...)
 	case "CreatePermanentRuleEffectUntil", "CreateEachPermanentRuleEffectUntil":
 		for _, r := range list(arg(1)) {
-			e.add(ruleToken(variantOf(r)))
+			e.add(p2cGoadAction(ruleToken(variantOf(r))))
 		}
 	case "CreatePlayerEffectUntil":
 		for _, x := range list(arg(1)) {
