@@ -134,7 +134,7 @@ var permanentTypes = map[string]bool{
 // "|", sorted) and, unless it is exactly one, the count ("x0..1", "x2",
 // "x0..*").
 func targetToken(classes []string, count string) string {
-	cs := dedup(classes)
+	cs := anyTargetClasses(dedup(classes))
 	if len(cs) == 0 {
 		cs = []string{clsPermanent}
 	}

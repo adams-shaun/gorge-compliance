@@ -7,39 +7,38 @@
 #   | pending (not yet triaged; at most maxPendingRows, which only shrinks)
 # Rows whose unmapped tokens are all in excluded.tsv are class excluded, automatic, never here.
 card	tier	field	gorge	mtgish	class	note
-Acid-Spewer Dragon	T1	keywords	-	deathtouch flying	pending	not yet triaged
+Acid-Spewer Dragon	T1	keywords	-	deathtouch flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Advanced Floral Invocations	T1	keywords	class:3:{4}{B/G}{B/G}	class:3:{B/G}	mtgish-bug	digital-only card; level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Advanced Reconstruction	T1	keywords	class:2:{1}{R}	class:2:{3}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Alchemist's Talent	T1	keywords	class:2:{1}{R} class:3:{4}{R}	class:2:{3}{R} class:3:{1}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Arek, False Goldwarden	T1	keywords	startingintensity	-	pending	not yet triaged
+Arek, False Goldwarden	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
 Artificer Class	T1	keywords	class:3:{5}{U}	class:3:{1}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Artist's Talent	T1	keywords	class:2:{2}{R}	class:2:{1}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Aven Liberator	T1	keywords	-	flying	pending	not yet triaged
-Awestruck Cygnet	T1	keywords	startingintensity	-	pending	not yet triaged
+Aven Liberator	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
+Awestruck Cygnet	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
 Bandit's Talent	T1	keywords	class:2:{B} class:3:{3}{B}	class:2:{1}{B} class:3:{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Barbarian Class	T1	keywords	class:2:{1}{R} class:3:{2}{R}	class:2:{R} class:3:{1}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Bard Class	T1	keywords	class:3:{3}{R}{G}	class:3:{R}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Bell Borca, Spectral Sergeant	T1	pt	0/5	*/5	pending	not yet triaged
-Belltoll Dragon	T1	keywords	-	flying hexproof	pending	not yet triaged
+Bell Borca, Spectral Sergeant	T1	pt	0/5	*/5	forge-bug	P/T CDA static lacks CharacteristicDefining$ True
+Belltoll Dragon	T1	keywords	-	flying hexproof	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Blacksmith's Talent	T1	keywords	class:2:{2}{R} class:3:{3}{R}	class:2:{R} class:3:{2}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Builder's Talent	T1	keywords	class:2:{W} class:3:{4}{W}	class:2:{1}{W} class:3:{W}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Caretaker's Talent	T1	keywords	class:2:{W} class:3:{3}{W}	class:2:{2}{W} class:3:{W}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Chittering Skullspeaker	T1	keywords	startingintensity	-	pending	not yet triaged
+Chittering Skullspeaker	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
 Cleric Class	T1	keywords	class:2:{3}{W} class:3:{4}{W}	class:2:{W} class:3:{3}{W}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Cosima, God of the Voyage [The Omenkeel]	T1	mana_cost	{1}{U}	{2}{U}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
 Cosima, God of the Voyage [The Omenkeel]	T1	pt	3/3	2/4	mtgish-bug	MDFC back face takes the front face's CardPT[0] (i5jb/mtgish#1)
 Dawnsire, Sunstar Dreadnought	T1	keywords	station:20+	station:10+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
-Dermoplasm	T1	keywords	-	flying	pending	not yet triaged
+Dermoplasm	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Does Machines	T1	keywords	class:3:{4}{U}	class:3:{1}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Domineer	T1	keywords	enchant:creature	enchant:artifact|creature	pending	not yet triaged
-Drix Interlacer	T1	keywords	startingintensity	-	pending	not yet triaged
+Drix Interlacer	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
 Druid Class	T1	keywords	class:2:{2}{G} class:3:{4}{G}	class:2:{1}{G} class:3:{2}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Entropic Battlecruiser	T1	keywords	station:8+	station:1+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
 Esika, God of the Tree [The Prismatic Bridge]	T1	mana_cost	{W}{U}{B}{R}{G}	{1}{G}{G}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
-Esper Origins	T1	keywords	flashback:{3}{G}	-	pending	not yet triaged
+Esper Origins	T1	keywords	flashback:{3}{G}	-	mtgish-bug	Flashback {3}{G} dropped
 Exploration Broodship	T1	keywords	station:8+	station:3+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
 Extus, Oriq Overlord [Awaken the Blood Avatar]	T1	mana_cost	{6}{B}{R}	{1}{W}{B}{B}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
-Fearsome Whelp	T1	keywords	-	haste	pending	not yet triaged
+Fearsome Whelp	T1	keywords	-	haste	digital-variant	Arena-only card; mtgish adds haste absent from current Arena text
 Fighter Class	T1	keywords	class:2:{1}{W}{R} class:3:{3}{W}{R}	class:2:{W}{R} class:3:{1}{W}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Final Showdown	T1	keywords	spree:{3}{W}{W}	spree:{1}	mtgish-bug	mode costs: a later SpreeAction repeats an earlier ManaCost capture; script ModeCost$ matches the printed costs (i5jb/mtgish#1)
 Fisher's Talent	T1	keywords	class:2:{U}{G} class:3:{2}{U}{G}	class:2:{2}{U}{G} class:3:{U}{G}	mtgish-bug	level costs shifted one capture back (L2 takes the card cost, L3 the L2 cost), the #1 pattern; card not in the #1 list
@@ -49,67 +48,67 @@ Gossip's Talent	T1	keywords	class:3:{3}{U}	class:3:{1}{U}	mtgish-bug	level costs
 Gourmand's Talent	T1	keywords	class:2:{2}{G} class:3:{3}{G}	class:2:{G} class:3:{2}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Great Train Heist	T1	keywords	spree:{R}	spree:{2}	mtgish-bug	mode costs: a later SpreeAction repeats an earlier ManaCost capture; script ModeCost$ matches the printed costs (i5jb/mtgish#1)
 Hearthhull, the Worldseed	T1	keywords	station:8+	station:2+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
-Herdchaser Dragon	T1	keywords	-	flying trample	pending	not yet triaged
-Hidden Dragonslayer	T1	keywords	-	lifelink	pending	not yet triaged
-Hotel of Fears	T1	types	spacecraft	spaceship	pending	not yet triaged
+Herdchaser Dragon	T1	keywords	-	flying trample	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
+Hidden Dragonslayer	T1	keywords	-	lifelink	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
+Hotel of Fears	T1	types	spacecraft	spaceship	mtgish-bug	mtgish#4 stale plane subtype Spaceship
 Hunter's Talent	T1	keywords	class:3:{3}{G}	class:3:{1}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Icefeather Aven	T1	keywords	-	flying	pending	not yet triaged
-Idris, Soul of the TARDIS	T1	keywords	vanishing	-	pending	not yet triaged
-Imperial Hellkite	T1	keywords	-	flying	pending	not yet triaged
+Icefeather Aven	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
+Idris, Soul of the TARDIS	T1	keywords	vanishing	-	mtgish-bug	mtgish#2 Vanishing 3 dropped
+Imperial Hellkite	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Innkeeper's Talent	T1	keywords	class:2:{G} class:3:{3}{G}	class:2:{1}{G} class:3:{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Inspirit, Flagship Vessel	T1	keywords	station:8+	station:1+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
 Intermediate Chirography	T1	keywords	class:3:{2}{B}	class:3:{1}{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Ire Shaman	T1	keywords	-	menace	pending	not yet triaged
+Ire Shaman	T1	keywords	-	menace	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Jadzi, Oracle of Arcavios [Journey to the Oracle]	T1	mana_cost	{2}{G}{G}	{6}{U}{U}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
-Kolaghan Stormsinger	T1	keywords	-	haste	pending	not yet triaged
+Kolaghan Stormsinger	T1	keywords	-	haste	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Kolvori, God of Kinship [The Ringhart Crest]	T1	mana_cost	{1}{G}	{2}{G}{G}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
 Leader's Talent	T1	keywords	class:2:{2}{W} class:3:{3}{W}	class:2:{1}{W} class:3:{2}{W}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Liege of the Axe	T1	keywords	-	vigilance	pending	not yet triaged
-Lost Order of Jarkeld	T1	pt	1/1	*/*	pending	not yet triaged
+Liege of the Axe	T1	keywords	-	vigilance	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
+Lost Order of Jarkeld	T1	pt	1/1	*/*	forge-bug	PT:1/1, printed 1+*/1+*
 Lumen-Class Frigate	T1	keywords	station:12+	station:2+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
-Maelstrom Djinn	T1	keywords	-	flying	pending	not yet triaged
+Maelstrom Djinn	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Mila, Crafty Companion [Lukka, Wayward Bonder]	T1	mana_cost	{4}{R}{R}	{1}{W}{W}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
-Minthara of the Absolute	T1	keywords	startingintensity	-	pending	not yet triaged
-Minthara, Merciless Soul	T1	keywords	-	ward:*	pending	not yet triaged
-Mistfire Weaver	T1	keywords	-	flying	pending	not yet triaged
-Mistform Ultimus	T1	keywords	-	changeling	pending	not yet triaged
-Mondassian Colony Ship	T1	types	spacecraft	spaceship	pending	not yet triaged
+Minthara of the Absolute	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
+Minthara, Merciless Soul	T1	keywords	-	ward:*	equivalent	ward {X}: Forge self static, mtgish keyword
+Mistfire Weaver	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
+Mistform Ultimus	T1	keywords	-	changeling	equivalent	every-creature-type CDA; mtgish CDA_Types Changeling
+Mondassian Colony Ship	T1	types	spacecraft	spaceship	mtgish-bug	mtgish#4 stale plane subtype Spaceship
 Monk Class	T1	keywords	class:3:{1}{W}{U}	class:3:{W}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Nettling Host	T1	types	rat	horror	pending	not yet triaged
+Nettling Host	T1	types	rat	horror	digital-variant	Arena-only card; script differs from current Arena text
 Ninja Teen	T1	keywords	class:2:{1}{B} class:3:{B}	class:2:{2}{B} class:3:{1}{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Outfitted Jouster	T1	types	-	human	pending	not yet triaged
+Outfitted Jouster	T1	types	-	human	digital-variant	Arena-only card; script differs from current Arena text
 Paladin Class	T1	keywords	class:2:{2}{W} class:3:{4}{W}	class:2:{W} class:3:{2}{W}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Party Dude	T1	keywords	class:2:{1}{G} class:3:{4}{G}	class:2:{G} class:3:{1}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Pestilent Cauldron	T1	mana_cost	{2}{B}	{3}{G}{G}	mtgish-bug	ModalDFC artifact//spell rule (english_grammar.json5:8159) swaps ManaCost[0] and [1] between faces; not in #1-#4
 Pestilent Cauldron [Restorative Burst]	T1	mana_cost	{3}{G}{G}	{2}{B}	mtgish-bug	ModalDFC artifact//spell rule (english_grammar.json5:8159) swaps ManaCost[0] and [1] between faces; not in #1-#4
 Pick-a-Beeble	T1	keywords	unmapped:kw:Prize	-	normalizer	unmapped token
-Quantum Reduction	T1	keywords	teamwork	-	pending	not yet triaged
-Quickbeast Amulet	T1	keywords	startingintensity	-	pending	not yet triaged
+Quantum Reduction	T1	keywords	teamwork	-	mtgish-bug	Teamwork 2 keyword dropped
+Quickbeast Amulet	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
 Ranger Class	T1	keywords	class:3:{3}{G}	class:3:{1}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Rogue Class	T1	keywords	class:2:{1}{U}{B} class:3:{2}{U}{B}	class:2:{U}{B} class:3:{1}{U}{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Scavenger's Talent	T1	keywords	class:2:{1}{B} class:3:{2}{B}	class:2:{B} class:3:{1}{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Shieldhide Dragon	T1	keywords	-	flying lifelink	pending	not yet triaged
-Skyclave Relic	T1	keywords	-	indestructible	pending	not yet triaged
+Shieldhide Dragon	T1	keywords	-	flying lifelink	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
+Skyclave Relic	T1	keywords	-	indestructible	mtgish-bug	mtgish#1 line repeated; mana ability lost
 Smuggler's Surprise	T1	keywords	spree:{1}	spree:{4}{G}	mtgish-bug	mode costs: a later SpreeAction repeats an earlier ManaCost capture; script ModeCost$ matches the printed costs (i5jb/mtgish#1)
 Sorcerer Class	T1	keywords	class:3:{3}{U}{R}	class:3:{U}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Sproutwatch Dryad	T1	pt	2/3	3/3	pending	not yet triaged
+Sproutwatch Dryad	T1	pt	2/3	3/3	digital-variant	Arena-only card; script differs from current Arena text
 Stormchaser's Talent	T1	keywords	class:2:{3}{U} class:3:{5}{U}	class:2:{U} class:3:{3}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Stormwing Dragon	T1	keywords	-	firststrike flying	pending	not yet triaged
-Stratus Dancer	T1	keywords	-	flying	pending	not yet triaged
-Sutured Ghoul	T1	pt	0/0	*/*	pending	not yet triaged
+Stormwing Dragon	T1	keywords	-	firststrike flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
+Stratus Dancer	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
+Sutured Ghoul	T1	pt	0/0	*/*	forge-bug	P/T CDA static lacks CharacteristicDefining$ True
 Synthesizer Labship	T1	keywords	station:9+	station:2+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
-Teysa of the Ghost Council	T1	keywords	startingintensity	-	pending	not yet triaged
-The Dining Car	T1	types	spacecraft	spaceship	pending	not yet triaged
-Thousand Winds	T1	keywords	-	flying	pending	not yet triaged
+Teysa of the Ghost Council	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
+The Dining Car	T1	types	spacecraft	spaceship	mtgish-bug	mtgish#4 stale plane subtype Spaceship
+Thousand Winds	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Three Steps Ahead	T1	keywords	spree:{2}	spree:{3}	mtgish-bug	mode costs: a later SpreeAction repeats an earlier ManaCost capture; script ModeCost$ matches the printed costs (i5jb/mtgish#1)
 Torrent Sculptor [Flamethrower Sonata]	T1	mana_cost	{1}{R}	{2}{U}{U}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
-Unlicensed Hearse	T1	pt	0/0	*/*	pending	not yet triaged
+Unlicensed Hearse	T1	pt	0/0	*/*	forge-bug	P/T CDA static lacks CharacteristicDefining$ True
 Uthros Research Craft	T1	keywords	station:12+	station:3+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
-Val, Marooned Surveyor	T1	pt	2/3	3/3	pending	not yet triaged
+Val, Marooned Surveyor	T1	pt	2/3	3/3	digital-variant	Arena-only card; script differs from current Arena text
 Valki, God of Lies [Tibalt, Cosmic Impostor]	T1	mana_cost	{5}{B}{R}	{1}{B}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
-Varchild's War-Riders	T1	keywords	-	cumulativeupkeep:*	pending	not yet triaged
-Volcano Hellion	T1	keywords	echo:{X}	-	pending	not yet triaged
+Varchild's War-Riders	T1	keywords	-	cumulativeupkeep:*	equivalent	cumulative upkeep (non-mana cost) scripted as its upkeep trigger
+Volcano Hellion	T1	keywords	echo:{X}	-	equivalent	echo {X}: Forge keyword, mtgish self layer effect
 Warlock Class	T1	keywords	class:2:{1}{B} class:3:{6}{B}	class:2:{B} class:3:{1}{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Wilson, Subtle Bear	T1	pt	3/4	3/3	pending	not yet triaged
-Wingbeat Warrior	T1	keywords	-	flying	pending	not yet triaged
+Wilson, Subtle Bear	T1	pt	3/4	3/3	digital-variant	Arena-only card; script differs from current Arena text
+Wingbeat Warrior	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Wizard Class	T1	keywords	class:2:{2}{U} class:3:{4}{U}	class:2:{U} class:3:{2}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)

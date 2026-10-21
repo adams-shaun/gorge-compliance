@@ -31,9 +31,24 @@ func (e *effects) walk(x any) {
 			}
 			return variant == "If" || variant == "Unless"
 		case "_Target", "_DistributedTarget":
+			if strings.HasSuffix(variant, "TargetPlayerControls") {
+				// "Up to five target permanents target player controls":
+				// the player is a target too.
+				e.targets = append(e.targets, clsPlayer)
+			}
 			e.targets = append(e.targets, mtgishTarget(n))
 			return false
 		case "_Action":
+			if variant == "ChooseAnAction" {
+				// "You may A or B. When you do, ...": one of the actions
+				// runs, so they are alternatives.
+				for _, a := range argsOf(n) {
+					if l := list(a); l != nil {
+						e.alternatives(l...)
+						return false
+					}
+				}
+			}
 			if variant == "IfElse" {
 				a := argsOf(n)
 				if len(a) == 3 {
@@ -44,6 +59,19 @@ func (e *effects) walk(x any) {
 			e.action(n, variant)
 			return !leafActions[variant]
 		case "_Actions":
+			switch variant {
+			case "Targeted_Modal":
+				// "Target spell or permanent": one slot (map_f.go).
+				e.targetedModal(list(rawArgs(n)))
+				return false
+			case "TargetedDistributed":
+				e.targetedDistributed(n)
+				return false
+			case "AdditionalCost_Modal":
+				// Paid or not: alternatives, as Modal_IfElse.
+				e.alternatives(list(rawArgs(n))...)
+				return false
+			}
 			if variant == "Modal_IfElse" {
 				a := argsOf(n)
 				if len(a) == 3 {
@@ -55,7 +83,7 @@ func (e *effects) walk(x any) {
 				// Modes are alternatives (scripts' Charm choices, merged
 				// the same way). The mode list is the args itself for a
 				// one-field variant, else the one list-valued argument.
-				if l := list(rawArgs(n)); l != nil && enumOf(l[0]) != "" {
+				if l := list(rawArgs(n)); l != nil && enumOf(l[0]) == "Actions" {
 					e.alternatives(l...)
 					return false
 				}
@@ -66,6 +94,12 @@ func (e *effects) walk(x any) {
 					}
 				}
 			}
+		}
+		if enum == "_Cost" && strings.HasPrefix(variant, "Reflexive_") {
+			// "Sacrifice it unless you discard a card. When you discard a
+			// card this way, ...": the reflexive trigger's actions ride on
+			// the cost node.
+			return true
 		}
 		return descendEnums[enum]
 	})
@@ -108,7 +142,7 @@ func (e *effects) merge(subs []*effects) {
 	}
 	var tl, el [][]string
 	for _, s := range subs {
-		tl = append(tl, s.targets)
+		tl = append(tl, expandExactCounts(s.targets))
 		el = append(el, s.effects)
 	}
 	torder, tmax := maxCount(tl)
@@ -667,6 +701,7 @@ func ruleWord(v string) string { return strings.ToLower(v) }
 func mtgishTarget(n node) string {
 	v := variantOf(n)
 	a := argsOf(n)
+	base, perGroup := targetVariantBase(v)
 	count := "1"
 	switch {
 	case strings.HasPrefix(v, "UptoOne"):
@@ -684,37 +719,54 @@ func mtgishTarget(n node) string {
 	case strings.HasPrefix(v, "Number"):
 		count = gameNumber(a[0])
 	}
+	if perGroup {
+		count = perGroupCount(count)
+	}
 	var cls []string
 	switch {
-	case strings.Contains(v, "AnyTarget"), strings.HasSuffix(v, "AnyTargets"), v == "AnyOtherTarget":
+	case strings.Contains(base, "AnyTarget"), strings.HasSuffix(base, "AnyTargets"), base == "AnyOtherTarget":
 		cls = []string{clsAny}
-	case strings.Contains(v, "GraveyardCard"):
+	case strings.Contains(base, "GraveyardCard"):
 		cls = []string{clsGraveyard}
-	case strings.Contains(v, "ExiledCard"):
+	case strings.Contains(base, "ExiledCard") && !strings.Contains(base, "Permanent"):
 		cls = []string{clsExile}
-	case strings.Contains(v, "SpellOrAbility") || strings.Contains(v, "SpellsOrAbilities"):
+	case strings.Contains(base, "SpellOrAbility") || strings.Contains(base, "SpellsOrAbilities"):
 		cls = []string{clsSpell, clsAbility}
-	case strings.Contains(v, "Ability"):
+	case strings.Contains(base, "Ability"):
 		cls = []string{clsAbility}
 	default:
-		if strings.Contains(v, "Player") {
+		if strings.Contains(base, "Player") {
 			cls = append(cls, clsPlayer)
 		}
-		if strings.Contains(v, "Spell") {
+		if strings.Contains(base, "Spell") {
 			cls = append(cls, clsSpell)
 		}
-		if strings.Contains(v, "Permanent") {
+		if strings.Contains(base, "Permanent") {
+			found := false
 			for _, x := range a {
 				if enumOf(x) == "Permanents" {
 					cls = append(cls, permanentsClasses(x)...)
+					found = true
 				}
 			}
+			if !found {
+				// "target spell or permanent" (one SpellsAndPermanents
+				// filter).
+				cls = append(cls, clsPermanent)
+			}
+		}
+		if strings.Contains(base, "OrExiledCard") {
+			cls = append(cls, clsExile)
+		}
+		if strings.Contains(base, "CardsInGraveyards") {
+			// "target creatures and/or creature cards in graveyards".
+			cls = append(cls, clsGraveyard)
 		}
 	}
 	if len(cls) == 0 {
 		return unmapped("Target." + v)
 	}
-	return targetToken(cls, count)
+	return targetToken(narrowPermanent(cls), count)
 }
 
 // staticEffects maps a static Rule to verbs.

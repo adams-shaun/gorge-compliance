@@ -643,14 +643,6 @@ func (g *gorgeNorm) c2Chase(e *effects, a *cards.SA, depth int) {
 	p := a.Params
 	var alts []string
 	switch a.API {
-	case "FlipCoin":
-		// mtgish writes "if you win ... if you lose ..." as two separate
-		// conditioned actions, which its walk counts both of.
-		for _, k := range []string{"WinSubAbility", "LoseSubAbility", "HeadsSubAbility", "TailsSubAbility"} {
-			if name := p[k]; name != "" {
-				g.chain(e, cards.ResolveSVar(g.svars(), name), depth+1)
-			}
-		}
 	case "RollDice":
 		for _, r := range strings.Split(p["ResultSubAbilities"], ",") {
 			if _, name, ok := strings.Cut(strings.TrimSpace(r), ":"); ok && name != "" {

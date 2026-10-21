@@ -123,7 +123,7 @@ func (m *mtgishNorm) sub(r any, conditional bool) {
 
 // rules maps a Vec<Rule>.
 func (m *mtgishNorm) rules(rs []any) {
-	for _, r := range rs {
+	for _, r := range mergeThisOrAnother(rs) {
 		m.rule(r)
 	}
 }
@@ -253,9 +253,10 @@ func (m *mtgishNorm) rule(r any) {
 		return
 	}
 	if tok, ok := numberKeywords[v]; ok {
+		// Backup's nested rules are the abilities it grants, which the
+		// card also prints (and mtgish also encodes) at top level: they are
+		// not summarised twice.
 		m.kw(tok + ":" + gameNumber(argN(r, 0)))
-		// Backup's nested rules are the abilities the backup target gains:
-		// the card's own abilities, which the face also lists at top level.
 		return
 	}
 	switch {
@@ -416,9 +417,20 @@ func (m *mtgishNorm) spell(r any) {
 	case "SpellActions_Gift":
 		m.kw("gift")
 		e.alternatives(argsOf(r)[1:]...)
-	case "SpellActions_Overload", "SpellActions_Awaken", "SpellActions_Cleave", "SpellActions_Teamwork":
+	case "SpellActions_Awaken":
+		m.kw("awaken")
+		e.alternatives(awakenPlainBranch(argsOf(r)[1:])...)
+	case "SpellActions_Overload", "SpellActions_Cleave", "SpellActions_Teamwork":
 		m.kw(strings.ToLower(strings.TrimPrefix(v, "SpellActions_")))
 		e.alternatives(argsOf(r)[1:]...)
+	case "SpellActions_MadnessX":
+		// Cast for its madness cost (argument 0) or not: the keyword, and
+		// the two versions of the spell as alternatives.
+		m.kw("madness:" + mtgishCost(argN(r, 0)))
+		e.alternatives(argsOf(r)[1:]...)
+	case "SpellActions_AdditionalCostOptions":
+		// Which additional cost was paid: alternatives.
+		e.alternatives(list(rawArgs(r))...)
 	case "SpellActions_Tiered", "SpellActions_Spree":
 		mtgishModeCosts(m, strings.ToLower(strings.TrimPrefix(v, "SpellActions_")), r)
 		var alts []any
@@ -484,6 +496,9 @@ func triggerEvents(t any) []string {
 	v := variantOf(t)
 	switch v {
 	case "Or":
+		if ev, ok := playerOrBattleEvents(list(rawArgs(t))); ok {
+			return []string{ev}
+		}
 		var out []string
 		for _, sub := range list(rawArgs(t)) {
 			out = append(out, triggerEvents(sub)...)
@@ -671,36 +686,12 @@ func affinityWord(p any) string {
 }
 
 // permanentsClasses extracts the target classes a Permanents filter
-// selects: the card types named positively at its top level (through And
-// and Or), or "permanent" when none is.
+// selects: the card types it names positively, Or as alternatives and And
+// as an intersection ("artifact&creature"), or "permanent" when none is.
 func permanentsClasses(p any) []string {
-	var out []string
-	var visit func(x any)
-	visit = func(x any) {
-		switch variantOf(x) {
-		case "IsCardtype":
-			if s, ok := rawArgs(x).(string); ok {
-				if w := typeWord(s); permanentTypes[w] {
-					out = append(out, w)
-				}
-			}
-		case "And", "Or":
-			for _, e := range list(rawArgs(x)) {
-				visit(e)
-			}
-		case "IsCreatureType", "IsCreatureTypeVariable":
-			out = append(out, "creature")
-		case "IsArtifactType":
-			out = append(out, "artifact")
-		case "IsLandType":
-			out = append(out, "land")
-		case "IsEnchantmentType":
-			out = append(out, "enchantment")
-		}
-	}
-	visit(p)
+	out := classesOfAlts(typeAlts(p))
 	if len(out) == 0 {
 		return []string{clsPermanent}
 	}
-	return dedup(out)
+	return out
 }

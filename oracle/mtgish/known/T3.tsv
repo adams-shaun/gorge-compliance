@@ -7,493 +7,187 @@
 #   | pending (not yet triaged; at most maxPendingRows, which only shrinks)
 # Rows whose unmapped tokens are all in excluded.tsv are class excluded, automatic, never here.
 card	tier	field	gorge	mtgish	class	note
-Aang, Swift Savior	T3	targets	spellx0..1	creature+spell	pending	not yet triaged
-Abandon Reason	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
-Abandon the Post	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
+Aang, Swift Savior	T3	targets	creature|spellx0..1	creature|spell	pending	not yet triaged
+Abandon Reason	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
+Abandon the Post	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
 Abigale, Eloquent First-Year	T3	targets	creaturex0..1	creature	pending	not yet triaged
 Abomination, Terrifying Titan	T3	targets	creaturex0..1	creature	pending	not yet triaged
 Absolver Thrull	T3	targets	-	enchantment	pending	not yet triaged
-Abuna Acolyte	T3	targets	creature	artifact|creature	pending	not yet triaged
-Abzan Charm	T3	targets	creature+creaturex1..2	creature+creaturex0..2	pending	not yet triaged
+Abzan Charm	T3	targets	creature+creaturex0..1	creature+creaturex0..*	pending	not yet triaged
 Ace, Fearless Rebel	T3	targets	creaturex0..1	creature	pending	not yet triaged
 Aerie Auxiliary	T3	targets	-	creaturex0..2	pending	not yet triaged
-Aether Gust	T3	targets	spell	permanent+spell	pending	not yet triaged
-Aethershield Artificer	T3	targets	creature	artifact|creature	pending	not yet triaged
-Aethersnatch	T3	targets	permanent	spell	pending	not yet triaged
-Afterlife from the Loam	T3	targets	card-graveyardx0..*	card-graveyardx0..1	pending	not yet triaged
-Age of Ultron	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
 Ajani Steadfast	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Ajani, Sleeper Agent	T3	targets	player	-	pending	not yet triaged
-All Suns' Dawn	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..1	pending	not yet triaged
-Alter Reality	T3	targets	spell	permanent+spell	pending	not yet triaged
-Amethyst Dragon [Explosive Crystal]	T3	targets	anyx0..4	anyx0..*	pending	not yet triaged
-Amonkhet Raceway	T3	targets	-	creature	pending	not yet triaged
+All Suns' Dawn	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..*	pending	not yet triaged
 Anafenza, Unyielding Lineage	T3	targets	-	any	pending	not yet triaged
-Angel of Salvation	T3	targets	anyx0..5	anyx0..*	pending	not yet triaged
-Angel of Serenity	T3	targets	card-graveyardx0..3	creaturex0..3	pending	not yet triaged
-Animation Module	T3	targets	player	permanent+player	pending	not yet triaged
-Anthropede	T3	targets	enchantment	enchantment+enchantment	pending	not yet triaged
-Archpriest of Shadows	T3	targets	-	card-graveyard	pending	not yet triaged
-Arcum Dagsson	T3	targets	creature	artifact|creature	pending	not yet triaged
-Ardenn, Intrepid Archaeologist	T3	targets	player	permanent|player	pending	not yet triaged
-Arena	T3	targets	creature+creature	creature+creature|player	pending	not yet triaged
-Argentum Masticore	T3	targets	permanent	-	pending	not yet triaged
-Argivian Blacksmith	T3	targets	creature	artifact|creature	pending	not yet triaged
 Arni Slays the Troll	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Artificial Evolution	T3	targets	spell	permanent+spell	pending	not yet triaged
-Arzakon	T3	targets	battle|creature|planeswalker|player	any	pending	not yet triaged
-Ashling's Command	T3	targets	permanent+player	creature+player	pending	not yet triaged
-Attentive Skywarden	T3	targets	-	artifactx0..1	pending	not yet triaged
-Aurelia's Vindicator	T3	targets	card-graveyardx0..*	creaturex0..*	pending	not yet triaged
-Auriok Siege Sled	T3	targets	creature creature	artifact|creature artifact|creature	pending	not yet triaged
 Aven Liberator	T3	targets	creature	-	pending	not yet triaged
 Azusa's Many Journeys [Likeness of the Seeker]	T3	targets	-	landx0..3	pending	not yet triaged
 Back for More	T3	targets	card-graveyard+creaturex0..1	card-graveyard+creature	pending	not yet triaged
-Battle at the Helvault	T3	targets	permanentx0..* permanentx0..*	permanent|playerx0..1 permanent|playerx0..1	pending	not yet triaged
-Baxter Stockman	T3	targets	creature	artifact|creature	pending	not yet triaged
-Bearer of Memory	T3	targets	enchantment	creature|enchantment	pending	not yet triaged
-Bedeck [Bedazzle]	T3	targets	land+player	land+planeswalker|player	pending	not yet triaged
-Bellowing Bruiser [Beat a Path]	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
-Bilbo's Burglaring	T3	targets	artifactx0..*	artifact|playerx0..1	pending	not yet triaged
-Bilbo, Luckwearer [Burglar's Plot]	T3	targets	permanentx2	permanent+permanent	pending	not yet triaged
-Bilbo, Unexpected Adventurer	T3	targets	-	card-graveyardx0..1	pending	not yet triaged
-Bioshift	T3	targets	creaturex2	creature+creature	pending	not yet triaged
-Black Hole	T3	targets	creaturex1..*	creature+creaturex0..*	pending	not yet triaged
-Black Panther, Most Dangerous	T3	targets	battle|creature|planeswalker|player	any	pending	not yet triaged
-Bladegriff Prototype	T3	targets	permanent	permanent|player	pending	not yet triaged
-Blatant Thievery	T3	targets	permanent	permanent|player	pending	not yet triaged
-Blessed Alliance	T3	targets	creaturex0..2+player	creaturex0..2+player+player	pending	not yet triaged
+Bellowing Bruiser [Beat a Path]	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
 Blind Hunter	T3	targets	-	player	pending	not yet triaged
-Blinding Beam	T3	targets	creaturex2+player	creaturex2	pending	not yet triaged
+Blinding Beam	T3	targets	creature+creature+player	creature+creature	pending	not yet triaged
 Blitzball Stadium	T3	targets	-	creaturex0..*	pending	not yet triaged
-Blood Feud	T3	targets	creaturex2	creature+creature	pending	not yet triaged
-Bogardan Hellkite	T3	targets	anyx0..5	anyx0..*	pending	not yet triaged
-Boiling Earth	T3	targets	-	land	pending	not yet triaged
 Boros Battleshaper	T3	targets	creaturex0..1+creaturex0..1	creature+creature	pending	not yet triaged
-Borrowed Hostility	T3	targets	creature	creature+creature	pending	not yet triaged
-Borrowed Malevolence	T3	targets	creature	creature+creature	pending	not yet triaged
-Boulderfall	T3	targets	anyx0..5	anyx0..*	pending	not yet triaged
 Break Ties	T3	targets	artifact+card-graveyard+enchantment	artifact+enchantment	pending	not yet triaged
-Brimstone Mage	T3	targets	-	any any	pending	not yet triaged
-Bronzebeak Foragers	T3	targets	permanentx0..*	permanent|playerx0..1	pending	not yet triaged
-Brutal Expulsion	T3	targets	creature|planeswalker+spell	creature|planeswalker+creature|spell	pending	not yet triaged
 Builder's Bane	T3	targets	artifactx0..*	artifact	pending	not yet triaged
-Bullseye, Death Dealer	T3	targets	any	any+any	pending	not yet triaged
 Bumi's Feast Lecture	T3	targets	land	creature	pending	not yet triaged
-Burning Sun's Fury	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
+Burning Sun's Fury	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
 Burrog Barrage	T3	targets	creature+creaturex0..1	creature+creature	pending	not yet triaged
 Call Damage Control	T3	targets	card-graveyard	card-graveyardx0..2	pending	not yet triaged
-Captain's Maneuver	T3	targets	creature|planeswalker|player+creature|planeswalker|player	anyx2	pending	not yet triaged
+Captain's Maneuver	T3	targets	creature|planeswalker|player+creature|planeswalker|player	any+any	pending	not yet triaged
 Captured by Lagacs	T3	targets	-	creaturex0..2	pending	not yet triaged
-Captured by the Consulate	T3	targets	spell	-	pending	not yet triaged
-Carrionette	T3	targets	card-graveyard	creature	pending	not yet triaged
-Celebrate the Mountain-king	T3	targets	permanentx0..*	permanent|playerx0..1	pending	not yet triaged
-Chandler	T3	targets	creature	artifact|creature	pending	not yet triaged
-Chandra, Dressed to Kill	T3	targets	any	-	pending	not yet triaged
-Chandra, Flameshaper	T3	targets	creature|planeswalkerx0..8	creature|planeswalkerx0..*	equivalent	divided damage: script caps the targets at the damage amount (TargetMax$ 8), mtgish allows any number; the same legal choices in play
-Chandra, Hope's Beacon	T3	targets	anyx0..2	anyx2	pending	not yet triaged
-Chandra, Spark Hunter	T3	targets	any	-	pending	not yet triaged
-Chandra, Torch of Defiance	T3	targets	any	-	pending	not yet triaged
-Chandra, the Firebrand	T3	targets	anyx0..6	anyx6	pending	not yet triaged
-Chaos Is My Plaything	T3	targets	permanentx0..*	permanent|player	pending	not yet triaged
-Chaos Mutation	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Chaoslace	T3	targets	spell	permanent+spell	pending	not yet triaged
-Chef's Kiss	T3	targets	permanent	spell	pending	not yet triaged
+Chandra, Hope's Beacon	T3	targets	anyx0..2	any+any	pending	not yet triaged
+Chandra, the Firebrand	T3	targets	anyx0..6	any+any+any+any+any+any	pending	not yet triaged
+Chaos Is My Plaything	T3	targets	permanentx0..*	permanent	pending	not yet triaged
 Choking Vines	T3	targets	creaturex0..*	creature	pending	not yet triaged
 Cinderheart Giant	T3	targets	creature	-	pending	not yet triaged
-Clash of Titans	T3	targets	creaturex2	creature+creature	pending	not yet triaged
-Clockspinning	T3	targets	card-exile	card-exile+permanent	pending	not yet triaged
-Clockwork Gnomes	T3	targets	creature	artifact|creature	pending	not yet triaged
 Cloud of Faeries	T3	targets	-	landx0..2	pending	not yet triaged
-Cloudspire Skycycle	T3	targets	artifact|creaturex1..2	artifact|creaturex0..2	pending	not yet triaged
-Clutch of Currents	T3	targets	creature	creature+land	pending	not yet triaged
-Coastal Discovery	T3	targets	-	land	pending	not yet triaged
-Collective Brutality	T3	targets	creature+player	creature+player+player	pending	not yet triaged
-Combine Guildmage	T3	targets	creaturex2	creature+creature	pending	not yet triaged
-Commandeer	T3	targets	permanent	spell	pending	not yet triaged
-Commit	T3	targets	spell	permanent+spell	pending	not yet triaged
-Cone of Flame	T3	targets	any+any+any	anyx3	pending	not yet triaged
-Confusion in the Ranks	T3	targets	permanent	permanent|player	pending	not yet triaged
-Consuming Sinkhole	T3	targets	creature+planeswalker|player	creature|land+planeswalker|player	pending	not yet triaged
-Contagion	T3	targets	creaturex1..2	creaturex0..2	pending	not yet triaged
-Coordinated Assault	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
+Cloudspire Skycycle	T3	targets	artifact|creature+artifact|creaturex0..1	artifact|creaturex0..*	pending	not yet triaged
+Contagion	T3	targets	creature+creaturex0..1	creaturex0..*	pending	not yet triaged
+Coordinated Assault	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
 Cost of Brilliance	T3	targets	creaturex0..1+player	creature+player	pending	not yet triaged
 Craig Boone, Novac Guard	T3	targets	creaturex0..1	creature	pending	not yet triaged
 Cruel Alliance	T3	targets	creature+creature	creature	pending	not yet triaged
 Cry of Contrition	T3	targets	-	player player	pending	not yet triaged
-Cryptek	T3	targets	artifact	artifact|creature	pending	not yet triaged
-Crystal Spray	T3	targets	spell	permanent+spell	pending	not yet triaged
-Cultural Exchange	T3	targets	playerx2	player+player	pending	not yet triaged
-Curse of Inertia	T3	targets	permanent	permanent|player	pending	not yet triaged
-Cutthroat Maneuver	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
-Daghatar the Adamant	T3	targets	creaturex2	creature+creature	pending	not yet triaged
-Daretti, Ingenious Iconoclast	T3	targets	card-graveyard	artifact+card-graveyard	pending	not yet triaged
-Daring Discovery	T3	targets	creaturex0..3	creaturex3	pending	not yet triaged
+Cutthroat Maneuver	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
+Daring Discovery	T3	targets	creaturex0..3	creature+creature+creature	pending	not yet triaged
 Darkpact	T3	targets	permanent	unmapped:Target.TargetAnteCard	normalizer	unmapped token
-Dauntless Onslaught	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
-Death Match	T3	targets	creature	creature|player	pending	not yet triaged
-Deathlace	T3	targets	spell	permanent+spell	pending	not yet triaged
-Decoy Gambit	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
+Dauntless Onslaught	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
 Deepwood Elder	T3	targets	landx0..*	land	pending	not yet triaged
-Demonic Junker	T3	targets	creaturex0..*	creature|player	pending	not yet triaged
+Demonic Junker	T3	targets	creaturex0..*	creature	pending	not yet triaged
 Den Protector	T3	targets	card-graveyard	-	pending	not yet triaged
-Desecrate Reality	T3	targets	permanentx0..*	permanent|playerx0..1	pending	not yet triaged
-Diaochan, Artful Beauty	T3	targets	creature+creature	creature+creature|player	pending	not yet triaged
-Diluvian Primordial	T3	targets	card-graveyardx0..*	card-graveyardx0..1	pending	not yet triaged
-Dismantling Wave	T3	targets	artifact|enchantmentx0..*	artifact|enchantment|playerx0..1	pending	not yet triaged
-Disorienting Choice	T3	targets	artifact|enchantmentx0..*	artifact|enchantment|player	pending	not yet triaged
-Dissension in the Ranks	T3	targets	creaturex2	creature+creature	pending	not yet triaged
-Divide by Zero	T3	targets	spell	permanent+spell	pending	not yet triaged
-Dowsing Device	T3	targets	-	creaturex0..1	pending	not yet triaged
-Draconian Gate-Bot	T3	targets	permanent	artifact	pending	not yet triaged
+Disorienting Choice	T3	targets	artifact|enchantmentx0..*	artifact|enchantment	pending	not yet triaged
 Dragonspark Reactor	T3	targets	creaturex0..1+player	creature+player	pending	not yet triaged
-Dream's Grip	T3	targets	permanent	permanent+permanent	pending	not yet triaged
-Drown in Dreams	T3	targets	player	player+player	pending	not yet triaged
 Dwarven Armorer	T3	targets	creature	-	pending	not yet triaged
 Earth Rumble	T3	targets	creature+creaturex0..1+land	creature+creature+land	pending	not yet triaged
-Earthen Arms	T3	targets	permanent	land+permanent	pending	not yet triaged
-Echo Chamber	T3	targets	creature	creature|player	pending	not yet triaged
-Echo Mage	T3	targets	-	spell spell	pending	not yet triaged
-Elminster's Simulacrum	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Elven Rite	T3	targets	creaturex1..2	creaturex0..2	pending	not yet triaged
-Encircling Fissure	T3	targets	player	land+player	pending	not yet triaged
-Endless Detour	T3	targets	card-graveyard	card-graveyard+permanent+spell	pending	not yet triaged
-Energy Chamber	T3	targets	artifact+creature	artifact+artifact|creature	pending	not yet triaged
-Enigma Thief	T3	targets	permanentx0..*	permanent|playerx0..1	pending	not yet triaged
+Elven Rite	T3	targets	creature+creaturex0..1	creaturex0..*	pending	not yet triaged
 Entangling Trap	T3	targets	creature	-	pending	not yet triaged
-Erithizon	T3	targets	creature	creature|player	pending	not yet triaged
-Etched Slith	T3	targets	player	permanent+player	pending	not yet triaged
-Evangelize	T3	targets	creature	creature|player	pending	not yet triaged
 Everything Pizza	T3	targets	any+creaturex0..1+player	any+creature+player	pending	not yet triaged
 Exhumer Thrull	T3	targets	-	card-graveyard	pending	not yet triaged
 Expedition Raptor	T3	targets	-	creaturex0..2	pending	not yet triaged
-Fate Transfer	T3	targets	creaturex2	creature+creature	pending	not yet triaged
-Fatehold Charm	T3	targets	spell	creature|spell	pending	not yet triaged
 Favored Enemy	T3	targets	creature+creaturex0..1	-	pending	not yet triaged
 Fear of Immobility	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Feast of Dreams	T3	targets	creature	creature|enchantment	pending	not yet triaged
-Feed the Serpent	T3	targets	permanent	creature|planeswalker	pending	not yet triaged
-Fight with Fire	T3	targets	anyx0..10+creature	anyx0..*+creature	pending	not yet triaged
 Filigree Vector	T3	targets	artifactx0..*+creaturex0..*	creaturex0..*+creaturex0..*	pending	not yet triaged
 Firestorm	T3	targets	anyx0..*	any	pending	not yet triaged
-Flayer of the Hatebound	T3	targets	-	any	pending	not yet triaged
-Flourishing Strike	T3	targets	creature	creature+creature	pending	not yet triaged
-Forgeborn Oreads	T3	targets	-	any	pending	not yet triaged
 Fracture	T3	targets	artifact|enchantment|planeswalker	artifact|enchantment|land	pending	not yet triaged
-Frenzied Gorespawn	T3	targets	creaturex0..*	creature|player	pending	not yet triaged
+Frenzied Gorespawn	T3	targets	creaturex0..*	creature	pending	not yet triaged
 Froghemoth	T3	targets	-	card-graveyardx0..*	pending	not yet triaged
-Fury Charm	T3	targets	artifact+card-exile+creature	artifact+card-exile+creature+permanent	pending	not yet triaged
 Gale, Waterdeep Prodigy	T3	targets	card-graveyardx0..1	-	pending	not yet triaged
 Gargos, Vicious Watcher	T3	targets	creaturex0..1	creature	pending	not yet triaged
 Generous Patron	T3	targets	-	creaturex0..2	pending	not yet triaged
-Geth's Summons	T3	targets	card-graveyardx0..*+card-graveyardx0..1	card-graveyardx0..1+card-graveyardx0..1	pending	not yet triaged
 Ghost of Ramirez DePietro	T3	targets	card-graveyardx0..1	card-graveyard	pending	not yet triaged
-Ghostform	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
+Ghostform	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
 Ghostly Keybearer	T3	targets	enchantmentx0..1	enchantment	pending	not yet triaged
 Gladehart Cavalry	T3	targets	-	creaturex0..6	pending	not yet triaged
-Glamerdye	T3	targets	spell	permanent+spell	pending	not yet triaged
-Goblin Wizard	T3	targets	permanent	creature	pending	not yet triaged
 Gold Rush	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Golem Artisan	T3	targets	creature creature	artifact|creature artifact|creature	pending	not yet triaged
-Grand Architect	T3	targets	creature	artifact|creature	pending	not yet triaged
-Grand Ossuary	T3	targets	creaturex1..*	creaturex0..*	pending	not yet triaged
-Grasp of Fate	T3	targets	permanentx0..*	permanent|playerx0..1	pending	not yet triaged
+Grand Ossuary	T3	targets	creature+creaturex0..*	creaturex0..*	pending	not yet triaged
 Great Whale	T3	targets	-	landx0..7	pending	not yet triaged
-Grell Philosopher	T3	targets	permanent permanent	artifact artifact	pending	not yet triaged
-Gremlin Mine	T3	targets	creature	artifact|creature	pending	not yet triaged
 Grist, the Hunger Tide	T3	targets	creature|planeswalker	creature	pending	not yet triaged
-Gruul Ragebeast	T3	targets	-	creature	pending	not yet triaged
-Guff Rewrites History	T3	targets	permanent	permanent|player	pending	not yet triaged
-Guul Draz Assassin	T3	targets	-	creature creature	pending	not yet triaged
-Hammers of Moradin	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Hapatra, the Desert Fang	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Hapatra, the Desert Frost	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Havoc Eater	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Haytham Kenway	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Hearth Charm	T3	targets	creature	artifact|creature+creature	pending	not yet triaged
-Heliod's Emissary	T3	targets	-	creature	pending	not yet triaged
 Hidden Dragonslayer	T3	targets	creature	-	pending	not yet triaged
-Hideous Taskmaster	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-High Fae Prankster	T3	targets	creaturex2	creature+creature	pending	not yet triaged
 Huntmaster of the Fells [Ravager of the Fells]	T3	targets	creaturex0..1+planeswalker|player	creature+planeswalker|player	pending	not yet triaged
-Hydroelectric Specimen	T3	targets	permanent	spell	pending	not yet triaged
-I Will Savor Your Agony	T3	targets	creature+player	creature+player+player	pending	not yet triaged
 Icefeather Aven	T3	targets	creature	-	pending	not yet triaged
-Illusion	T3	targets	spell	permanent+spell	pending	not yet triaged
-Imotekh the Stormlord	T3	targets	creature	artifact|creature	pending	not yet triaged
-In the Darkness Bind Them	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Invasion of Tarkir	T3	targets	battle|creature|planeswalker|player	any	pending	not yet triaged
-Invasion of Ulgrotha	T3	targets	battle|creature|planeswalker|player	any	pending	not yet triaged
+Immard, the Stormcleaver [Guile, Sonic Soldier]	T3	targets	any any	-	pending	not yet triaged
 Ion Storm	T3	targets	any	-	pending	not yet triaged
-Jace, Vryn's Prodigy [Jace, Telepath Unbound]	T3	targets	player	-	pending	not yet triaged
-Jeska, Thrice Reborn	T3	targets	anyx0..3	anyx3	pending	not yet triaged
-Jeskai Revelation	T3	targets	any+spell	any+any+permanent+spell	pending	not yet triaged
-Jhoira's Timebug	T3	targets	card-exile	card-exile+permanent	pending	not yet triaged
-Jhoira's Toolbox	T3	targets	creature	artifact|creature	pending	not yet triaged
+Jeska, Thrice Reborn	T3	targets	anyx0..3	any+any+any	pending	not yet triaged
 Jon Irenicus, Shattered One	T3	targets	creaturex0..1+player	creature+player	pending	not yet triaged
 Joraga Auxiliary	T3	targets	-	creaturex0..2	pending	not yet triaged
 Jubilant Mascot	T3	targets	-	creaturex0..2	pending	not yet triaged
-Juvenile Mist Dragon	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Kami of Mourning	T3	targets	card-graveyard	card-graveyard+creature	pending	not yet triaged
-Kang Dynasty	T3	targets	creaturex0..* creaturex0..*	creature|playerx0..1 creature|playerx0..1	pending	not yet triaged
-Kaya, Spirits' Justice	T3	targets	creature+creaturex0..*	creature+creature|playerx0..1	pending	not yet triaged
-King Solomon's Frogs	T3	targets	permanentx0..*	permanent|playerx0..1	pending	not yet triaged
-Kiora, Master of the Depths	T3	targets	creature creaturex0..1+landx0..1	creaturex0..1+creaturex0..1	pending	not yet triaged
-Kitesail Larcenist	T3	targets	artifact|creaturex0..*	artifact|creature|playerx0..1	pending	not yet triaged
+Kiora, Master of the Depths	T3	targets	creaturex0..1+landx0..1	creaturex0..1+creaturex0..1	pending	not yet triaged
 Knight Rampager	T3	targets	-	player	pending	not yet triaged
 Kolaghan Stormsinger	T3	targets	creature	-	pending	not yet triaged
-Koth, Fire of Resistance	T3	targets	any	-	pending	not yet triaged
-Kotori, Pilot Prodigy	T3	targets	creature	artifact|creature	pending	not yet triaged
-Kuldotha Flamefiend	T3	targets	anyx0..4	anyx0..*	pending	not yet triaged
 Lead by Example	T3	targets	-	creaturex0..2	pending	not yet triaged
-Leech Bonder	T3	targets	creaturex2	creature+creature	pending	not yet triaged
-Leonin Iconoclast	T3	targets	creature	creature|enchantment	pending	not yet triaged
 Lethal Protection	T3	targets	card-graveyardx0..1+creature	card-graveyard+creature	pending	not yet triaged
-Ley Line	T3	targets	creature	creature|player	pending	not yet triaged
-Lich's Relic	T3	targets	creature|planeswalkerx0..*	creature|planeswalker|playerx0..1	pending	not yet triaged
-Lifelace	T3	targets	spell	permanent+spell	pending	not yet triaged
-Liliana, Waker of the Dead	T3	targets	card-graveyard	-	pending	not yet triaged
 Lively Dirge	T3	targets	-	card-graveyardx0..2	pending	not yet triaged
 Lizard, Connors's Curse	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Luminate Primordial	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Magical Hack	T3	targets	spell	permanent+spell	pending	not yet triaged
-Magma Opus	T3	targets	anyx0..4+permanentx2	anyx0..*+permanentx2	pending	not yet triaged
-Magus of the Abyss	T3	targets	creature	creature|player	pending	not yet triaged
-Magus of the Arena	T3	targets	creature+creature	creature+creature|player	pending	not yet triaged
-Majestic Heliopterus	T3	targets	permanent	creature	pending	not yet triaged
-March of Progress	T3	targets	artifact	artifact|creature	pending	not yet triaged
-Markov Enforcer	T3	targets	creaturex0..1	creature creature	pending	not yet triaged
-Mass Mutiny	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Matoc, Lavamancer	T3	targets	battle|creature|planeswalker|player	any	pending	not yet triaged
-Maulfist Revolutionary	T3	targets	player player	permanent+player permanent+player	pending	not yet triaged
-Mega Flare	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
+Markov Enforcer	T3	targets	creaturex0..1	creature	pending	not yet triaged
 Meltstrider's Resolve	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Merchant Raiders	T3	targets	-	creaturex0..1	pending	not yet triaged
-Mila, Crafty Companion [Lukka, Wayward Bonder]	T3	targets	any	-	pending	not yet triaged
-Mirage Mockery	T3	targets	artifact+creature	artifact|creature+creature	pending	not yet triaged
-Mire's Malice	T3	targets	player	land+player	pending	not yet triaged
-Mischief and Mayhem	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
+Mischief and Mayhem	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
 Mischievous Quanar	T3	targets	spell	-	pending	not yet triaged
 Mistbreath Elder	T3	targets	-	creature	mtgish-bug	printed return is untargeted; mtgish adds a TargetPermanent (gorge: a hidden ChangeType choice) (i5jb/mtgish#4)
 Mistfire Weaver	T3	targets	creature	-	pending	not yet triaged
-Mogg Assassin	T3	targets	creature+creature	creature+creature|player	pending	not yet triaged
-Molten Frame	T3	targets	creature	artifact|creature	pending	not yet triaged
-Molten Primordial	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Moonlace	T3	targets	spell	permanent+spell	pending	not yet triaged
-Murasa Pyromancer	T3	targets	-	creature	pending	not yet triaged
-Mutated Cultist	T3	targets	playerx0..1	permanentx0..1+playerx0..1	pending	not yet triaged
 Mythos of Brokkos	T3	targets	-	card-graveyardx0..2	pending	not yet triaged
-Nahiri's Stoneblades	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
-Narset of the Ancient Way	T3	targets	any	-	pending	not yet triaged
-Necrotic Plague	T3	targets	creature	creature|player	pending	not yet triaged
-Needle Drop	T3	targets	battle|creature|planeswalker|player	any	pending	not yet triaged
+Nahiri's Stoneblades	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
 Nessian Demolok	T3	targets	-	permanent	pending	not yet triaged
 Nessian Wilds Ravager	T3	targets	-	creature	pending	not yet triaged
-Neurok Transmuter	T3	targets	creature	artifact|creature	pending	not yet triaged
-Nexus Mentality	T3	targets	permanent+permanentx2	permanent+permanent+permanent	pending	not yet triaged
-Nightbird's Clutches	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
-Nils, Discipline Enforcer	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Nimble Hobbit	T3	targets	creature	creature+creature	pending	not yet triaged
+Nightbird's Clutches	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
 Nissa's Judgment	T3	targets	creaturex0..1	creature+creaturex0..2	pending	not yet triaged
-Nova Pentacle	T3	targets	creature	creature|player	pending	not yet triaged
 Novel Nunchaku	T3	targets	creature+creaturex0..1	creature+creature	pending	not yet triaged
-Nyx Herald	T3	targets	creature	creature|enchantment	pending	not yet triaged
-Obscura Confluence	T3	targets	creature+player	creature+creature+player	pending	not yet triaged
 Obuun, Mul Daya Ancestor	T3	targets	landx0..1	land	pending	not yet triaged
-Octomancer	T3	targets	permanent	creature	pending	not yet triaged
-Oglor, Devoted Assistant	T3	targets	planeswalker	-	pending	not yet triaged
+Oglor, Devoted Assistant	T3	targets	player	-	pending	not yet triaged
 Oko, Lorwyn Liege	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Old Man Willow	T3	targets	creature	creature+creature	pending	not yet triaged
-Olinda the Oblivious	T3	targets	creaturex0..* creaturex0..*	creature|playerx0..1 creature|playerx0..1	pending	not yet triaged
-Omega, Heartless Evolution	T3	targets	permanentx0..*	permanent|playerx0..1	pending	not yet triaged
-Omnath, Locus of Rage	T3	targets	-	any	pending	not yet triaged
-Ondu Knotmaster [Throw a Line]	T3	targets	creaturex1..2	creaturex0..2	pending	not yet triaged
-Ondu Rising	T3	targets	-	land	pending	not yet triaged
-Ood Sphere	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
+Ondu Knotmaster [Throw a Line]	T3	targets	creature+creaturex0..1	creaturex0..*	pending	not yet triaged
 Orzhov Euthanist	T3	targets	-	creature	pending	not yet triaged
-Orzhova	T3	targets	card-graveyardx0..*	card-graveyardx0..1	pending	not yet triaged
 Palinchron	T3	targets	-	landx0..7	pending	not yet triaged
-Panic Attack	T3	targets	creaturex0..3	creaturex3	pending	not yet triaged
-Part the Waterveil	T3	targets	-	land	pending	not yet triaged
-Pashalik Mons	T3	targets	-	any	pending	not yet triaged
+Panic Attack	T3	targets	creaturex0..3	creature+creature+creature	pending	not yet triaged
 Peregrine Drake	T3	targets	-	landx0..5	pending	not yet triaged
-Perilous Snare	T3	targets	-	artifact|creature	pending	not yet triaged
 Phyrexian Splicer	T3	targets	creature+creature creature+creature creature+creature	-	pending	not yet triaged
-Pia Nalaar	T3	targets	creature	artifact|creature	pending	not yet triaged
 Pitiless Fists	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Planar Outburst	T3	targets	-	land	pending	not yet triaged
-Pollen Remedy	T3	targets	anyx0..3+anyx0..6	anyx0..*	pending	not yet triaged
-Powerful Broker	T3	targets	player	permanent+player	pending	not yet triaged
-Preacher	T3	targets	creature	creature|player	pending	not yet triaged
 Press into Service	T3	targets	creature	creature+creaturex0..2	pending	not yet triaged
-Press the Advantage	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
-Press the Enemy	T3	targets	spell	permanent+spell	pending	not yet triaged
-Price of Betrayal	T3	targets	artifact|creature|planeswalker|player	artifact|creature|planeswalker+player	pending	not yet triaged
-Pride of the Road	T3	targets	-	artifact|creature	pending	not yet triaged
+Press the Advantage	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
 Primal Might	T3	targets	creature+creaturex0..1	creature+creature	mtgish-bug	printed fight target is up to one; mtgish TargetPermanent requires exactly one (gorge: TargetMin$ 0) (i5jb/mtgish#3)
-Private Eye	T3	targets	permanent	creature	pending	not yet triaged
-Profane Transfusion	T3	targets	playerx2	player+player	pending	not yet triaged
-Professor Dellian Fel	T3	targets	player	-	pending	not yet triaged
-Purelace	T3	targets	spell	permanent+spell	pending	not yet triaged
-Purge	T3	targets	creature	artifact|creature	pending	not yet triaged
-Pyrogoyf	T3	targets	-	any	pending	not yet triaged
-Pyrotechnics	T3	targets	anyx0..4	anyx0..*	pending	not yet triaged
 Quandrix Command	T3	targets	card-graveyardx0..3+creature+creature|planeswalkerx0..1+player+spell	card-graveyardx0..3+creature+creature|planeswalker+player+spell	pending	not yet triaged
-Quicksilver Fountain	T3	targets	land	land|player	pending	not yet triaged
-Ral, Izzet Viceroy	T3	targets	any	-	pending	not yet triaged
-Rally the Monastery	T3	targets	creature+creaturex0..2	creature+creaturex2	pending	not yet triaged
+Rally the Monastery	T3	targets	creature+creaturex0..2	creature+creature	pending	not yet triaged
 Reasonable Doubt	T3	targets	creaturex0..1+spell	creature+spell	pending	not yet triaged
-Red Hulk	T3	targets	battle|creature|planeswalker|player	any	pending	not yet triaged
-Relic Crush	T3	targets	artifact|enchantmentx1..2	artifact|enchantment+artifact|enchantmentx0..1	pending	not yet triaged
 Relief Captain	T3	targets	-	creaturex0..3	pending	not yet triaged
-Resourceful Defense	T3	targets	permanentx2	permanent+permanent	pending	not yet triaged
-Return the Favor	T3	targets	ability+ability|spell	ability|spell	pending	not yet triaged
-Return to Dust	T3	targets	artifact|enchantmentx1..*	artifact|enchantment+artifact|enchantmentx0..1	pending	not yet triaged
-Riptide Gearhulk	T3	targets	permanentx0..*	permanent|playerx0..1	pending	not yet triaged
-Riptide Laboratory	T3	targets	permanent	creature	pending	not yet triaged
-Rising Miasma	T3	targets	-	land	pending	not yet triaged
+Return to Dust	T3	targets	artifact|enchantment+artifact|enchantmentx0..*	artifact|enchantment+artifact|enchantmentx0..1	pending	not yet triaged
 River's Grasp	T3	targets	creaturex0..1+player	creature+player	pending	not yet triaged
-Rogues' Gallery	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..1	pending	not yet triaged
-Roil Spout	T3	targets	creature	creature+land	pending	not yet triaged
-Role Reversal	T3	targets	permanentx2	permanent+permanent	pending	not yet triaged
-Rootcast Apprenticeship	T3	targets	creature+permanent+player	creature+permanent+player+player	pending	not yet triaged
-Ruinous Path	T3	targets	creature|planeswalker	creature|planeswalker+land	pending	not yet triaged
+Rogues' Gallery	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..*	pending	not yet triaged
 Running Is Useless	T3	targets	creaturex0..*	-	pending	not yet triaged
-Rush of Ice	T3	targets	creature	creature+land	pending	not yet triaged
-Rushing River	T3	targets	permanent+permanentx2	permanent+permanent	pending	not yet triaged
 Saddleback Lagac	T3	targets	-	creaturex0..2	pending	not yet triaged
-Sanguine Glorifier	T3	targets	permanent	creature	pending	not yet triaged
-Savage Alliance	T3	targets	creature+player	creature+player+player	pending	not yet triaged
-Savior of Ollenbock	T3	targets	card-graveyardx0..1	card-graveyardx0..1+creaturex0..1	pending	not yet triaged
-Scatter to the Winds	T3	targets	spell	land+spell	pending	not yet triaged
 Scrap Trawler	T3	targets	card-graveyard	-	pending	not yet triaged
-Screaming Nemesis	T3	targets	battle|creature|planeswalker|player	any	pending	not yet triaged
 Season of the Bold	T3	targets	creaturex0..1	creature	mtgish-bug	printed damage target is up to one; mtgish TargetPermanent requires exactly one (gorge: TargetMin$ 0) (i5jb/mtgish#3)
-Seize Opportunity	T3	targets	creaturex0..2	creaturex2	pending	not yet triaged
+Seize Opportunity	T3	targets	creaturex0..2	creature+creature	pending	not yet triaged
 Seize the Soul	T3	targets	-	creature creature	pending	not yet triaged
-Sepulchral Primordial	T3	targets	card-graveyardx0..*	card-graveyardx0..1	pending	not yet triaged
-Sheer Drop	T3	targets	creature	creature+land	pending	not yet triaged
-Shellshock	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Sheoldred [The True Scriptures]	T3	targets	creature|planeswalkerx0..*	creature|planeswalker|playerx0..1	pending	not yet triaged
-Shifting Borders	T3	targets	landx2	land+land	pending	not yet triaged
-Shifting Grift	T3	targets	artifactx2+creaturex2+enchantmentx2	artifact+artifact+creature+creature+enchantment+enchantment	pending	not yet triaged
-Shifting Loyalties	T3	targets	permanentx2	permanent+permanent	pending	not yet triaged
-Shivan Sand-Mage	T3	targets	card-exile	card-exile+permanent	pending	not yet triaged
 Shoulder to Shoulder	T3	targets	-	creaturex0..2	pending	not yet triaged
 Shrike Harpy	T3	targets	-	player	pending	not yet triaged
-Shuri, Wakandan Inventor	T3	targets	artifact+artifact	artifactx2	pending	not yet triaged
 Silumgar Assassin	T3	targets	creature	-	pending	not yet triaged
-Silver Wyvern	T3	targets	ability|spell	ability+spell	pending	not yet triaged
-Simic Guildmage	T3	targets	creaturex2	creature+creature	pending	not yet triaged
-Sink into Stupor	T3	targets	spell	permanent+spell	pending	not yet triaged
 Siren of the Fanged Coast	T3	targets	-	creature	pending	not yet triaged
 Skyboon Evangelist	T3	targets	-	creaturex0..6	pending	not yet triaged
-Skyship Plunderer	T3	targets	player	permanent+player	pending	not yet triaged
-Sleight of Mind	T3	targets	spell	permanent+spell	pending	not yet triaged
-Slick Imitator	T3	targets	-	spell	pending	not yet triaged
-Slinza, the Spiked Stampede	T3	targets	-	creature	pending	not yet triaged
 Smogbelcher Chariot	T3	targets	permanent	creature	pending	not yet triaged
-Sontaran General	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-Sorceress's Schemes	T3	targets	card-graveyard	card-exile+card-graveyard	pending	not yet triaged
 Soulblade Renewer	T3	targets	-	creaturex0..2	pending	not yet triaged
 Sparkshaper Visionary	T3	targets	-	planeswalkerx0..*	pending	not yet triaged
-Special Move	T3	targets	any|player+artifact+creature	any+artifact+creature	pending	not yet triaged
-Spectral Shift	T3	targets	spell	permanent+permanent+spell+spell	pending	not yet triaged
-Spider-Sense	T3	targets	ability	ability|spell	pending	not yet triaged
-Splendid Agony	T3	targets	creaturex1..2	creaturex0..2	pending	not yet triaged
-Spry and Mighty	T3	targets	-	creaturex2	pending	not yet triaged
+Splendid Agony	T3	targets	creature+creaturex0..1	creaturex0..*	pending	not yet triaged
+Spry and Mighty	T3	targets	-	creature+creature	pending	not yet triaged
 Stockpiling Celebrant	T3	targets	-	permanent	pending	not yet triaged
 Storrev, Devkarin Lich	T3	targets	-	card-graveyard	pending	not yet triaged
 Stratus Dancer	T3	targets	spell	-	pending	not yet triaged
 Strength of the Tajuru	T3	targets	creature	creature+creature	pending	not yet triaged
 Stunning Shot	T3	targets	creaturex0..1+creaturex0..1	creature+creature	pending	not yet triaged
 Subtlety	T3	targets	spellx0..1	spell	pending	not yet triaged
-Sudden Setback	T3	targets	spell	permanent+spell	pending	not yet triaged
-Summon: Kujata	T3	targets	creaturex0..3	creaturex3	pending	not yet triaged
+Summon: Kujata	T3	targets	creaturex0..3	creature+creature+creature	pending	not yet triaged
 Summon: Magus Sisters	T3	targets	creature+creaturex0..1 creature+creaturex0..1 creature+creaturex0..1	creature creature creature	pending	not yet triaged
 Surly Badgersaur	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Swat Away	T3	targets	spell	creature+spell	pending	not yet triaged
-Switcheroo	T3	targets	creaturex2	creature+creature	pending	not yet triaged
-Sydri, Galvanic Genius	T3	targets	creature	artifact|creature	pending	not yet triaged
-Sylvan Primordial	T3	targets	permanentx0..*	permanent|player	pending	not yet triaged
-Synchronized Charge	T3	targets	creaturex1..2	creaturex0..2	pending	not yet triaged
-Tajuru Archer	T3	targets	-	creature	pending	not yet triaged
-Talion's Throneguard	T3	targets	spellx0..1	permanent+spell	pending	not yet triaged
-Tasha, the Witch Queen	T3	targets	card-graveyardx0..*	card-graveyardx0..1	pending	not yet triaged
-Taskmaster, Mercenary Mimic	T3	targets	card-graveyardx0..1	card-graveyardx0..1+creaturex0..1	pending	not yet triaged
-Teferi's Response	T3	targets	ability|spell	ability+spell	pending	not yet triaged
-Teferi, Hero of Dominaria	T3	targets	permanent	landx0..2	pending	not yet triaged
+Sylvan Primordial	T3	targets	permanentx0..*	permanent	pending	not yet triaged
+Synchronized Charge	T3	targets	creature+creaturex0..1	creaturex0..*	pending	not yet triaged
+Talion's Throneguard	T3	targets	permanent|spellx0..1	permanent|spell	pending	not yet triaged
+Teferi, Hero of Dominaria	T3	targets	-	landx0..2	pending	not yet triaged
 Temporal Firestorm	T3	targets	-	creature|planeswalker	pending	not yet triaged
-Tempted by the Oriq	T3	targets	creature|planeswalkerx0..*	creature|planeswalker|playerx0..1	pending	not yet triaged
 Terastodon	T3	targets	permanentx0..3	-	pending	not yet triaged
-Teyo, Aegis Adept	T3	targets	card-graveyard	-	pending	not yet triaged
-Tezzeret the Schemer	T3	targets	artifact	-	pending	not yet triaged
-Tezzeret, Cruel Captain	T3	targets	artifact	-	pending	not yet triaged
-The Abyss	T3	targets	creature	creature|player	pending	not yet triaged
-The Balrog of Moria	T3	targets	creaturex0..*	creature|player	pending	not yet triaged
+The Balrog of Moria	T3	targets	creaturex0..*	creature	pending	not yet triaged
 The Boulder, Ready to Rumble	T3	targets	land	creature	pending	not yet triaged
 The Crowd Goes Wild	T3	targets	-	creaturex0..*	pending	not yet triaged
-The Curse of Fenric	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
-The Dead Shall Serve	T3	targets	card-graveyardx0..*	card-graveyardx0..1	pending	not yet triaged
-The Doctor's Childhood Barn	T3	targets	permanentx0..*	permanent|player	pending	not yet triaged
+The Doctor's Childhood Barn	T3	targets	permanentx0..*	permanent	pending	not yet triaged
 The Eagles Are Coming!	T3	targets	creature+creaturex0..*	creaturex0..*	pending	not yet triaged
-The Earth Crystal	T3	targets	creaturex1..2	creaturex0..2	pending	not yet triaged
-The Horus Heresy	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
+The Earth Crystal	T3	targets	creature+creaturex0..1	creaturex0..*	pending	not yet triaged
 The Legend of Kyoshi	T3	targets	land	creature	pending	not yet triaged
-The Moonbase	T3	targets	card-graveyardx0..*	card-graveyardx0..1	pending	not yet triaged
-The Parting of the Ways	T3	targets	artifactx0..*	artifact|playerx0..1	pending	not yet triaged
-The Theorist, Jace Beleren	T3	targets	artifact|creaturex0..*	artifact|creature|playerx0..1	pending	not yet triaged
 There Is No Refuge	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Thorn Mammoth	T3	targets	creaturex0..1	creature creature	pending	not yet triaged
-Thoughtlace	T3	targets	spell	permanent+spell	pending	not yet triaged
+Thorn Mammoth	T3	targets	creaturex0..1	creature	pending	not yet triaged
 Tidal Control	T3	targets	spell	-	pending	not yet triaged
-Tidus, Yuna's Guardian	T3	targets	creaturex2	creature+creature	pending	not yet triaged
 Time Lord Regeneration	T3	targets	permanent	creature	pending	not yet triaged
-Timebender	T3	targets	card-exile	card-exile+permanent	pending	not yet triaged
-Timecrafting	T3	targets	card-exile	card-exile+permanent	pending	not yet triaged
 Together Forever	T3	targets	-	creaturex0..2	pending	not yet triaged
 Tokka & Rahzar, Terrible Twos	T3	targets	-	player	pending	not yet triaged
-Tolarian Contempt	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
 Too Evil to Stay Dead	T3	targets	card-graveyard+card-graveyard	card-graveyard	pending	not yet triaged
 Toph, Earthbending Master	T3	targets	land	creature	pending	not yet triaged
 Toph, Greatest Earthbender	T3	targets	land	creature	pending	not yet triaged
 Topple	T3	targets	creature	permanent	pending	not yet triaged
-Toralf, God of Fury	T3	targets	battle|creature|planeswalker|player	any	pending	not yet triaged
 Treachery	T3	targets	-	landx0..5	pending	not yet triaged
-Tri-Sentinel, Act of Vengeance	T3	targets	creaturex0..*	creature|playerx0..1	pending	not yet triaged
 Triassic Egg	T3	targets	card-graveyard	-	pending	not yet triaged
-Tuktuk Scrapper	T3	targets	-	artifact	pending	not yet triaged
-Turf War	T3	targets	land	land|player	pending	not yet triaged
-Twisted Reflection	T3	targets	creature	creature+creature	pending	not yet triaged
-Uldaros Theorix	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..1	pending	not yet triaged
-Undead Slayer	T3	targets	permanent	creature	pending	not yet triaged
-Unearthly Blizzard	T3	targets	creaturex0..3	creaturex3	pending	not yet triaged
-Unexplained Absence	T3	targets	permanentx0..*	permanent|playerx0..1	pending	not yet triaged
-Unite the Coalition	T3	targets	any+artifact|enchantment+permanent+player	any+artifact|enchantment+permanent+player+player	pending	not yet triaged
+Uldaros Theorix	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..*	pending	not yet triaged
+Unearthly Blizzard	T3	targets	creaturex0..3	creature+creature+creature	pending	not yet triaged
 Unity of Purpose	T3	targets	-	creaturex0..2	pending	not yet triaged
-Unsubstantiate	T3	targets	spell	creature|spell	pending	not yet triaged
-Vaevictis Asmadi, the Dire	T3	targets	permanent	permanent|player	pending	not yet triaged
-Vault 13: Dweller's Journey	T3	targets	creature|enchantmentx0..*	creature|enchantment|playerx0..1	pending	not yet triaged
-Vengeant Vampire	T3	targets	permanent	creature	pending	not yet triaged
 Venom Blast	T3	targets	creature+creaturex0..1	creature+creature	pending	not yet triaged
-Venser, Corpse Puppet	T3	targets	creature	artifact|creature	pending	not yet triaged
-Venser, Visionary Traveler	T3	targets	permanentx0..*	permanent|playerx0..1	pending	not yet triaged
-Venser, the Sojourner	T3	targets	permanent	-	pending	not yet triaged
-Vhal, Scholar of Tactics	T3	targets	creaturex1..*	creaturex0..*	pending	not yet triaged
-Violent Eruption	T3	targets	anyx0..4	anyx0..*	pending	not yet triaged
-Visions of Duplicity	T3	targets	creaturex2	creature+creature	pending	not yet triaged
-Volcanic Offering	T3	targets	creature+creature+land+land	creature+creature|player+land+land|player	pending	not yet triaged
+Vhal, Scholar of Tactics	T3	targets	creature+creaturex0..*	creaturex0..*	pending	not yet triaged
 Voldaren Ambusher	T3	targets	creature|planeswalkerx0..1	creature|planeswalker	pending	not yet triaged
-Volley of Boulders	T3	targets	anyx0..6	anyx0..*	pending	not yet triaged
-Voltaic Construct	T3	targets	creature	artifact|creature	pending	not yet triaged
-Vraska's Contempt	T3	targets	permanent	creature|planeswalker	pending	not yet triaged
-Vronos, Masked Inquisitor	T3	targets	permanentx0..*	permanent|playerx0..1	pending	not yet triaged
 Warbriar Blessing	T3	targets	creaturex0..1	creature	pending	not yet triaged
-Waxing Moon	T3	targets	permanentx0..1	creaturex0..1	pending	not yet triaged
-Welcome to . . .	T3	targets	artifactx0..*	artifact|playerx0..1	pending	not yet triaged
-Weldfast Engineer	T3	targets	artifact	artifact|creature	pending	not yet triaged
-Windgrace's Judgment	T3	targets	permanentx0..*	permanent|playerx0..1	pending	not yet triaged
 Wingbeat Warrior	T3	targets	creature	-	pending	not yet triaged
-Yosei, the Morning Star	T3	targets	permanentx0..5+player	permanent|playerx0..5	pending	not yet triaged
-You Come to the Gnoll Camp	T3	targets	creature+creaturex0..2	creature+creaturex2	pending	not yet triaged
-Zariel, Archduke of Avernus	T3	targets	creature	-	pending	not yet triaged
+You Come to the Gnoll Camp	T3	targets	creature+creaturex0..2	creature+creature	pending	not yet triaged

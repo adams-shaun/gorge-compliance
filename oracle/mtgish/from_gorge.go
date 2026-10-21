@@ -46,6 +46,11 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if intrinsicMana(f, a) {
 			continue
 		}
+		if cleaveAlternative(a) {
+			// The cleave cost's version of the spell (map_f.go).
+			g.kw("cleave")
+			continue
+		}
 		g.sa(a)
 	}
 	for i := range f.Triggers {
@@ -494,7 +499,7 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 
 // static summarises an S: line.
 func (g *gorgeNorm) static(st *cards.Static) {
-	if gorgeStation(g, st) {
+	if gorgeStation(g, st) || g.selfGrantStatic(st) {
 		return
 	}
 	eff := gorgeStaticEffects(st.Mode, st.Params)
