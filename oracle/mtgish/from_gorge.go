@@ -585,7 +585,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "setpt")
 		}
 		if p["AddType"] != "" || p["AddTypes"] != "" || p["RemoveType"] != "" || p["AddAllCreatureTypes"] != "" ||
-			p["RemoveCreatureTypes"] != "" || p["RemoveCardTypes"] != "" || p["SetCreatureTypes"] != "" {
+			p["RemoveCreatureTypes"] != "" || p["RemoveCardTypes"] != "" || p["SetCreatureTypes"] != "" || p2cTypeChange(p) {
 			out = append(out, "type")
 		}
 		if p["SetColor"] != "" || p["AddColor"] != "" {

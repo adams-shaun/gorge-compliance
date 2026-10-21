@@ -476,7 +476,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		if p["Name"] != "" {
 			out = append(out, "name")
 		}
-		if p["Types"] != "" {
+		if p["Types"] != "" || p2cTypeChange(p) {
 			out = append(out, "type")
 		}
 		if p["Colors"] != "" {

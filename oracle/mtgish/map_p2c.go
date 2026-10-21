@@ -281,3 +281,18 @@ func (e *effects) p2cLookAction(n node, v string) (descend, ok bool) {
 	e.targets = append(e.targets, sub.targets...)
 	return !leafActions[v], true
 }
+
+// p2cTypeChange reports a type-changing parameter beyond the ones the
+// core checks: "gains all creature types", "loses all land types", and
+// the other Remove*Types$ forms (mtgish's HasAllCreatureTypes and
+// RemoveAll*Types layer effects).
+func p2cTypeChange(p map[string]string) bool {
+	for _, k := range []string{"AddAllCreatureTypes", "RemoveLandTypes", "RemoveEnchantmentTypes",
+		"RemoveArtifactTypes", "RemoveTypes", "RemoveSubTypes", "RemoveCreatureTypes", "RemoveCardTypes",
+		"RemoveType", "AddType", "AddTypes", "SetCreatureTypes"} {
+		if p[k] != "" {
+			return true
+		}
+	}
+	return false
+}
