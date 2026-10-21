@@ -58,6 +58,9 @@ func playerEffectTokensP2E(x any) []string {
 	if t, ok := p2dPlayerSpellEffects(x); ok {
 		return t
 	}
+	if t, ok := p2gPlayerEffect(x); ok {
+		return t
+	}
 	return []string{playerEffectToken(variantOf(x))}
 }
 

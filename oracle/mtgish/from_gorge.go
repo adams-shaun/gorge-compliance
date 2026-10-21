@@ -609,7 +609,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "gaincontrol")
 		}
 		if p["MayPlay"] != "" {
-			out = append(out, "mayplay")
+			out = append(out, p2gMayPlay(p))
 		}
 		if p["CantHaveKeyword"] != "" {
 			// "... and can't have or gain <keyword>": a rule beside the
