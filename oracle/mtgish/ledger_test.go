@@ -39,7 +39,7 @@ const maxNormalizerRows = 0
 // maxPendingRows caps the ledger's `pending` rows: disagreements the
 // program has not triaged yet (the initial corpus-wide generation). It may
 // only shrink, to 0, like maxNormalizerRows.
-const maxPendingRows = 573
+const maxPendingRows = 556
 
 // maxListed caps the NEW/STALE lines printed per kind; the counts are
 // always given in full.
