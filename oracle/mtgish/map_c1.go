@@ -768,6 +768,8 @@ func atEOTTokens(v string) []string {
 		return []string{"delayed", "destroy"}
 	case strings.Contains(v, "Hand"):
 		return []string{"delayed", "move:battlefield>hand"}
+	case strings.Contains(v, "Library"):
+		return []string{"delayed", "move:battlefield>library"}
 	}
 	return []string{"delayed"}
 }

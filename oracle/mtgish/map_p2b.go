@@ -102,7 +102,7 @@ func paramTokensP2B(a *cards.SA) []string {
 		// as may be chosen (the core case adds it only when fewer may be).
 		n, m := literalOr(p["DigNum"], "1"), literalOr(p["ChangeNum"], "1")
 		d2 := p["DestinationZone2"]
-		if p["ChangeNum"] != "All" && n == m && n != "*" && (d2 == "Hand" || d2 == "Graveyard" || d2 == "Exile") &&
+		if p["ChangeNum"] != "All" && n == m && n != "*" && (d2 == "Hand" || d2 == "Graveyard" || d2 == "Exile" || d2 == "Library" && p["LibraryPosition2"] == "-1") &&
 			(p["Optional"] == "True" || p["ChangeValid"] != "") {
 			out = append(out, "move:library>"+strings.ToLower(d2))
 		}
@@ -111,8 +111,19 @@ func paramTokensP2B(a *cards.SA) []string {
 			// on the bottom in a random order": the rest moves too.
 			out = append(out, "move:library>library")
 		}
+		if p["ChangeNum"] == "All" && p["ChangeValid"] != "" && p["DestinationZone2"] == "Library" && p["LibraryPosition2"] == "-1" {
+			// "If it's a creature card, put it into your hand. Otherwise,
+			// put it on the bottom": the other card moves too.
+			out = append(out, "move:library>library")
+		}
 	case "ChangeZone", "ChangeZoneAll":
 		out = append(out, otherOriginsP2B(a)...)
+		if alt := p["DestinationAlternative"]; alt != "" && alt != p["Destination"] && !strings.Contains(p["Origin"], "Library") {
+			// "Return it to your hand. If <condition>, put it onto the
+			// battlefield instead": either destination.
+			o := strings.ToLower(strings.TrimSpace(strings.SplitN(p["Origin"], ",", 2)[0]))
+			out = append(out, "move:"+o+">"+strings.ToLower(alt))
+		}
 		if ct := p["WithCountersType"]; ct != "" {
 			out = append(out, gorgeCounterTokens(ct, literalOr(p["WithCountersAmount"], "1"))...)
 		}
