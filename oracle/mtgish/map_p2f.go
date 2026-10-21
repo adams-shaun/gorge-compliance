@@ -1,6 +1,10 @@
 package mtgish
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/adams-shaun/gorge/engine/cards"
+)
 
 // Phase-2 unit f: normaliser fixes found triaging the residual rows of the
 // corpus from "Raffine's Guidance" to the end of the alphabet. Each family
@@ -63,4 +67,48 @@ func p2fFlicker(e *effects, l []any) {
 			e.costAsAction(c)
 		}
 	}
+}
+
+// p2fSearchDelivery folds the delivery of a search that parks its cards in
+// the library: "search your library for a card, reveal it, then put it
+// into your hand or onto the battlefield (by a condition, an opponent's
+// pick, a payment)". Scripts search with Destination$ Library, remember
+// the found cards, then move them out with later ChangeZones over the
+// remembered or chosen cards; mtgish writes one SearchLibrary whose steps
+// say where the cards go (search:*, or its destination). The later moves
+// from the library are the search's own delivery, not new moves (nor new
+// searches: a ChangeZone an opponent picks for reads as one).
+func (g *gorgeNorm) p2fSearchDelivery(a *cards.SA, toks []string) []string {
+	if a.API != "ChangeZone" && a.API != "ChangeZoneAll" {
+		return toks
+	}
+	p := a.Params
+	if g.parked && p2fDelivers(p) {
+		var out []string
+		for _, t := range toks {
+			if !strings.HasPrefix(t, "move:library>") && !strings.HasPrefix(t, "search:") {
+				out = append(out, t)
+			}
+		}
+		return out
+	}
+	for _, t := range toks {
+		if t == "search:library" {
+			g.parked = true
+		}
+	}
+	return toks
+}
+
+// p2fDelivers reports whether a ChangeZone moves the cards an earlier
+// search parked: from the library, by the remembered or chosen cards.
+func p2fDelivers(p map[string]string) bool {
+	if !strings.EqualFold(strings.TrimSpace(strings.SplitN(p["Origin"], ",", 2)[0]), "Library") {
+		return false
+	}
+	switch p["Defined"] {
+	case "Remembered", "ChosenCard", "ChosenCards", "Imprinted":
+		return true
+	}
+	return strings.Contains(p["ChangeType"], "IsRemembered")
 }

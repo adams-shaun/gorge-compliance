@@ -184,6 +184,8 @@ type gorgeNorm struct {
 	f    *cards.Face
 	idx  TypeIndex
 	mode int // gift/kicker branch being summarised (modeSA)
+
+	parked bool // a search parked its cards in the library (map_p2f.go)
 }
 
 func (g *gorgeNorm) kw(tok string)            { g.s.Keywords = append(g.s.Keywords, tok) }

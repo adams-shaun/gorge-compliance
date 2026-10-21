@@ -17,6 +17,9 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 	if depth > maxChainDepth {
 		return
 	}
+	if depth == 0 {
+		g.parked = false
+	}
 	for ; a != nil; a = a.Sub {
 		if a.API == "Branch" {
 			// An if/else: the two branches are alternatives.
@@ -70,7 +73,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			// CreatePerpetual* actions.
 			e.add("perpetual")
 		} else {
-			e.add(p2dPlayerGrants(a, gorgeAPIEffects(a, g.svars()))...)
+			e.add(p2dPlayerGrants(a, g.p2fSearchDelivery(a, gorgeAPIEffects(a, g.svars())))...)
 		}
 		e.add(atEOTTokens(a.Params["AtEOT"])...)
 		e.add(paramTokensP2B(a)...)
