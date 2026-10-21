@@ -281,6 +281,21 @@ func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
 			}
 		}
 	}
+	if n := a.Params["CanBlockAmount"]; a.API == "Pump" && n != "" {
+		// "It can block an additional creature this turn".
+		if n == "1" {
+			e.add("rule:canblockanadditionalcreature")
+		} else {
+			e.add("rule:canblockanadditionalnumbercreatures")
+		}
+	}
+	if ts := a.Params["TokenScript"]; a.API == "Token" && strings.Contains(ts, ",") {
+		// "Create a Cat, a Bird and an Ox": one token verb per script
+		// (the core reads TokenAmount$ once).
+		for range strings.Split(ts, ",")[1:] {
+			e.add("token:" + literalOr(a.Params["TokenAmount"], "1"))
+		}
+	}
 	if a.API == "CopyPermanent" {
 		for _, k := range strings.Split(a.Params["PumpKeywords"], "&") {
 			if k = strings.TrimSpace(k); k != "" {
