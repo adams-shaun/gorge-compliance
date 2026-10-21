@@ -74,7 +74,7 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if head, _, ok := kwTag(st.Params); ok && !printedExpansion(head) {
 			continue
 		}
-		if st.Params["CharacteristicDefining"] == "True" {
+		if st.Params["CharacteristicDefining"] == "True" && !d2KeywordOnlyCDA(st.Params) {
 			// One CDA ability however many statics carry it (a script may
 			// split power and toughness).
 			if !cda {
@@ -94,7 +94,7 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if head, _, ok := kwTag(r.Params); ok && !printedExpansion(head) {
 			continue
 		}
-		if selfEnter(r) {
+		if selfEnter(r) && !g.d2InsteadEnter(r) {
 			if enter == nil {
 				enter = &Ability{Kind: "replacement"}
 			}
@@ -279,6 +279,11 @@ func (g *gorgeNorm) keyword(k string) {
 		return
 	case head == "Enchant":
 		cls := strings.SplitN(param, ":", 2)[0]
+		if strings.Contains(cls, "inZoneGraveyard") {
+			// "Enchant creature card in a graveyard".
+			g.kw("enchant:" + clsGraveyard)
+			return
+		}
 		g.kw("enchant:" + targetToken(g.idx.validClasses(cls, ""), "1"))
 		return
 	case head == "Affinity":
@@ -535,7 +540,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "player:mayplayanadditionalland")
 		}
 		if p["MayLookAt"] != "" {
-			out = append(out, "player:maylookattopcardoflibraryanytime")
+			out = append(out, d2MayLookAt(p))
 		}
 		if p["SetName"] != "" {
 			out = append(out, "name")
@@ -569,8 +574,9 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		for _, k := range cards.SplitKeywordList(p["AddHiddenKeyword"]) {
 			out = append(out, hiddenKeywordToken(k))
 		}
+		out = append(out, d2ContinuousEffects(p)...)
 		if len(out) == 0 {
-			if p["AddSVar"] != "" {
+			if p["AddSVar"] != "" || d2IgnoreEffectCostOnly(p) {
 				// An AI hint carried as a static (AddSVar$ only): no
 				// printed ability.
 				return nil
@@ -596,6 +602,9 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 	case "CantGainLife":
 		return []string{"player:cantgainlife"}
 	case "CantBeCast":
+		if p["NumLimitEachTurn"] != "" {
+			return []string{"player:cantcastmorethannumberspellseachturn"}
+		}
 		return []string{"player:cantcastspells"}
 	case "CastWithFlash":
 		return []string{"flash"}
@@ -669,6 +678,11 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 	p := r.Params
 	switch r.Event {
 	case "Untap":
+		if p["ValidStepTurnToController"] == "" {
+			// No untap-step restriction: "can't become untapped".
+			g.ability(Ability{Kind: "static", Effects: []string{"rule:cantbecomeuntapped"}})
+			return
+		}
 		g.ability(Ability{Kind: "static", Effects: []string{"rule:doesntuntapduringcontrollersuntap"}})
 		return
 	case "GameLoss":
@@ -757,7 +771,9 @@ func (g *gorgeNorm) enterEffects(r *cards.Repl) []string {
 			out = append(out, gorgeCounterTokens(a.Params["CounterType"], literalOr(a.Params["CounterNum"], "1"))...)
 		case a.API == "InternalEtbReplacement" || a.API == "Cleanup":
 		default:
-			if f, ok := extEnterAPI[a.API]; ok {
+			if t, ok := g.d2EnterEffects(a); ok {
+				out = append(out, t...)
+			} else if f, ok := extEnterAPI[a.API]; ok {
 				out = append(out, f(a)...)
 			} else {
 				out = append(out, unmapped("Enter."+a.API))
@@ -783,6 +799,10 @@ func literalOr(v, def string) string {
 func gorgeCounterType(t string) string {
 	if strings.HasPrefix(t, "EachType") {
 		// One of each type among some permanents' counters.
+		return "*"
+	}
+	if strings.Contains(t, ",") {
+		// A choice among counter types ("P1P1,Flying"): not a literal.
 		return "*"
 	}
 	switch t {

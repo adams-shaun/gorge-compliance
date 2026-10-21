@@ -280,10 +280,11 @@ func (m *mtgishNorm) rule(r any) {
 		// One static per rule: scripts write "can't attack or block" as
 		// two statics, one per restriction mode.
 		for _, x := range list(argN(r, 1)) {
-			m.ability(Ability{Kind: "static", Effects: []string{"rule:" + ruleWord(variantOf(x))}})
+			m.ability(Ability{Kind: "static", Effects: []string{ruleToken(variantOf(x))}})
 		}
 		return
-	case v == "CastEffect" && strings.HasPrefix(variantOf(rawArgs(r)), "AdditionalCastingCost"):
+	case v == "CastEffect" && (strings.HasPrefix(variantOf(rawArgs(r)), "AdditionalCastingCost") ||
+		variantOf(rawArgs(r)) == "OptionalAdditionalCastingCost"):
 		// An additional casting cost is a cost, not an ability (scripts put
 		// it in the spell's Cost$).
 		return
@@ -424,6 +425,10 @@ func (m *mtgishNorm) spell(r any) {
 		}
 		e.alternatives(alts...)
 	default:
+		if f, ok := extRule[v]; ok {
+			f(m, r)
+			return
+		}
 		e.walk(argsOf(r))
 		e.effects = append(e.effects, unmapped("Rule."+v))
 	}
