@@ -73,6 +73,13 @@ func costActions(cost string) []string {
 }
 
 func init() {
+	// "Protection from red. This effect doesn't remove <this Aura>": the
+	// protection keyword (Forge: Protection:Card.Red:red:<exception>).
+	extRule["ProtectionAndDoesntRemovePermanents"] = func(m *mtgishNorm, r any) {
+		for _, q := range strings.Split(protectable(argN(r, 0)), "|") {
+			m.kw("protection:" + q)
+		}
+	}
 	// "A card from your hand or graveyard": one card from one of the two
 	// zones, both moves as alternatives (each once), as the gorge side's
 	// Origin$ Hand,Graveyard (p2dChangeZone). These override map_c2.go's
@@ -167,4 +174,63 @@ func p2dDigUntilShuffledBack(p map[string]string, key string) bool {
 // PutTheRemainingCardsBackIntoLibraryAndShuffle).
 func p2dDigRestStays(a *cards.SA, dest, rest string) bool {
 	return rest == "Library" && dest != "Library" && a.Sub != nil && a.Sub.API == "Shuffle"
+}
+
+// p2dSameHeadGrant reads a granted rule that summarises to several
+// keywords of one head ("protection from red and from blue" is one
+// Protection rule over two colours, two protection keywords) as a grant of
+// that keyword, as the gorge side's AddKeyword$ of each.
+func p2dSameHeadGrant(s *Summary) (string, bool) {
+	if len(s.Keywords) < 2 || len(s.Abilities) != 0 {
+		return "", false
+	}
+	h := keywordHeadToken(s.Keywords[0])
+	for _, k := range s.Keywords[1:] {
+		if keywordHeadToken(k) != h {
+			return "", false
+		}
+	}
+	return "grant:" + h, true
+}
+
+// p2dPlayerGrants respells the keyword grants of a Pump or Protection
+// whose recipient is a player ("you gain protection from everything",
+// "you gain hexproof") as player rules, as mtgish writes them
+// (player:protection, player:hexproof).
+func p2dPlayerGrants(a *cards.SA, toks []string) []string {
+	switch a.API {
+	case "Pump", "PumpAll", "Protection", "ProtectionAll":
+	default:
+		return toks
+	}
+	if !p2dPlayerRecipient(a.Params) {
+		return toks
+	}
+	out := make([]string, len(toks))
+	for i, t := range toks {
+		if k, ok := strings.CutPrefix(t, "grant:"); ok {
+			t = "player:" + k
+		}
+		out[i] = t
+	}
+	return out
+}
+
+// p2dPlayerRecipient reports an SA that affects players only.
+func p2dPlayerRecipient(p map[string]string) bool {
+	if p["ValidCards"] != "" {
+		// PumpAll over the creatures a player controls.
+		return false
+	}
+	if p["ValidPlayers"] != "" {
+		return true
+	}
+	if vt := p["ValidTgts"]; vt != "" {
+		return c2PlayerTargets(vt)
+	}
+	switch p["Defined"] {
+	case "You", "Player", "Opponent", "Player.Opponent", "TargetedPlayer":
+		return true
+	}
+	return false
 }
