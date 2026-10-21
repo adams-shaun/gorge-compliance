@@ -523,7 +523,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			out = append(out, "grant:"+grantKeyword(k))
 		}
 		out = append(out, p2dAnimateExtra(p)...)
-		if len(out) == 0 && !p2dAnimateCarrier(p) {
+		if len(out) == 0 && !p2dAnimateCarrier(p) && p["HiddenKeywords"] == "" {
 			out = append(out, "animate")
 		}
 		return dedup(out)

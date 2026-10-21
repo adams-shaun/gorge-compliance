@@ -66,3 +66,13 @@ func p2hAllAddAbility(ls []any) bool {
 	}
 	return len(ls) > 0
 }
+
+// p2hLookCounters maps the counter a look step's exile puts on the cards
+// ("exile the other with a silver counter on it"), gorge's
+// ExileWithCounters$.
+func p2hLookCounters(n node, v string) []string {
+	if v != "ExileTheRemainingCardsWithACounterOfType" {
+		return nil
+	}
+	return []string{"counters:" + counterType(rawArgs(n)) + ":1"}
+}

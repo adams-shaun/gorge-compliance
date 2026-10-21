@@ -28,6 +28,7 @@ func (e *effects) walk(x any) {
 		case "_LookAtTopOfLibraryAction", "_RevealTheTopNumberCardsOfLibraryAction":
 			if t := lookMove(variant); t != "" {
 				e.add(t)
+				e.add(p2hLookCounters(n, variant)...)
 			} else if descend, ok := e.p2cLookAction(n, variant); ok {
 				return descend
 			}

@@ -861,6 +861,10 @@ func (g *gorgeNorm) enterEffects(r *cards.Repl) []string {
 			out = append(out, "reveal")
 		case a.API == "Clone":
 			out = append(out, "copy")
+			if a.Params["IntoPlayTapped"] == "True" {
+				// "Enter tapped as a copy of ...": mtgish's EntersTapped too.
+				out = append(out, "etbtapped")
+			}
 		case a.API == "PutCounter":
 			out = append(out, gorgeCounterTokens(a.Params["CounterType"], literalOr(a.Params["CounterNum"], "1"))...)
 		case a.API == "InternalEtbReplacement" || a.API == "Cleanup":
