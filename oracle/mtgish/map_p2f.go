@@ -375,3 +375,25 @@ func p2fSearchStep(v string) []string {
 	}
 	return nil
 }
+
+func init() {
+	// "You may activate loyalty abilities of it any time you could cast an
+	// instant": a timing permission, which scripts write as the
+	// planeswalker's flash-speed activation static (the gorge side's
+	// "flash"), not a permission to play a card.
+	for _, v := range []string{
+		"MayActivateLoyaltyAbilityOfPlaneswalkerAnyTimeTheyCouldCastAnInstant",
+		"MayActivateLoyaltyAbilityOfPlaneswalkerDuringEachPlayersTurnAndAnyTimeTheyCouldCastAnInstant",
+		"MayActivateLoyaltyAbilityOfPlaneswalkersDuringEachPlayersTurnAndAnyTimeTheyCouldCastAnInstant",
+	} {
+		d2PlayerSynonyms[v] = "flash"
+	}
+	// "They can't phase in until ...": the game effect, as the static.
+	extAction["CreateGameEffect"] = func(e *effects, n node) {
+		if v := variantOf(argN(n, 1)); v == "PermanentsCantPhaseIn" || v == "PermanentCantPhaseIn" {
+			e.add(tokCantPhaseIn)
+			return
+		}
+		e.add(gameEffectToken(argN(n, 1)))
+	}
+}
