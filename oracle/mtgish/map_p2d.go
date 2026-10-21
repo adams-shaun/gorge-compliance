@@ -106,6 +106,11 @@ func init() {
 		extAction[v] = func(e *effects, n node) { e.add("move:hand>battlefield", "move:graveyard>battlefield") }
 	}
 	extReflexive["Sacrifice"] = func(e *effects, n node) { e.add("sacrifice") }
+	// "{T}, exile a card: Add {R}. When you do, ...": the mana, as the
+	// script's Mana ability; "it fights ... When excess damage is dealt
+	// this way, ...": the fight.
+	extReflexive["AddMana"] = func(e *effects, n node) { e.add("mana") }
+	extReflexive["Fight"] = func(e *effects, n node) { e.add("fight") }
 	// "You may convert it. When you do, ...": the convert is a transform.
 	extReflexive["ConvertPermanent"] = func(e *effects, n node) { e.add("transform") }
 	extReflexive["PlayerSacrifices"] = func(e *effects, n node) { e.add("sacrifice") }
