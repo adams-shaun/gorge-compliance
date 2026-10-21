@@ -187,7 +187,7 @@ type gorgeNorm struct {
 }
 
 func (g *gorgeNorm) kw(tok string)            { g.s.Keywords = append(g.s.Keywords, tok) }
-func (g *gorgeNorm) ability(a Ability)        { g.s.Abilities = append(g.s.Abilities, a) }
+func (g *gorgeNorm) ability(a Ability)        { g.s.Abilities = append(g.s.Abilities, p2dGorgeAbility(a)) }
 func (g *gorgeNorm) svars() map[string]string { return g.f.SVars }
 
 // gorgeCostKeywords are the keyword heads whose parameter is a cost
@@ -784,9 +784,9 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 		a.Effects = []string{"replace:wouldputintograveyard"}
 	case r.Event == "Moved" && p["Destination"] == "Battlefield":
 		a.Effects = []string{"replace:wouldenter"}
-	case r.Event == "DamageDone" && (p["Prevent"] == "True" || p["PreventionEffect"] == "True"):
-		// (PreventionEffect$ marks a partial shield, "prevent N of that
-		// damage": a prevention too.)
+	case r.Event == "DamageDone" && (p["Prevent"] == "True" || p["PreventionEffect"] != ""):
+		// PreventionEffect$: a partial prevention ("prevent X of that
+		// damage") written as a ReplaceDamage, still a prevention shield.
 		a.Effects = []string{"replace:preventdamage"}
 	case r.Event == "DamageDone":
 		a.Effects = []string{"replace:woulddealdamage"}

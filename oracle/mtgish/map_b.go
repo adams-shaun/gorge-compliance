@@ -166,6 +166,10 @@ func init() {
 	extAPI["AlterAttribute"] = alterAttributeB
 	extAPI["RearrangeTopOfLibrary"] = func(a *cards.SA, _ map[string]string) []string {
 		// "Look at the top N cards and put them back in any order."
+		if literalOr(a.Params["NumCards"], "1") == "1" {
+			// One card ("look at the top card"): nothing to reorder.
+			return []string{"dig:1"}
+		}
 		return []string{"dig:" + literalOr(a.Params["NumCards"], "1"), "move:library>library"}
 	}
 	extAPI["DigMultiple"] = digMultipleB
@@ -395,7 +399,7 @@ func effectReplB(a *cards.SA, svars map[string]string) []string {
 			continue
 		}
 		switch {
-		case r.Event == "DamageDone" && (r.Params["Prevent"] == "True" || r.Params["PreventionEffect"] == "True"):
+		case r.Event == "DamageDone" && (r.Params["Prevent"] == "True" || r.Params["PreventionEffect"] != ""):
 			// PreventionEffect$: a prevention shield that also does
 			// something (ReplaceWith$), as mtgish's CreateFuturePreventDamage.
 			out = append(out, "prevent")

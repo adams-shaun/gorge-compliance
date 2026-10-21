@@ -61,6 +61,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			// cost (depth 0) is a cost.
 			e.add("forage")
 		}
+		e.add(p2dNestedCost(a)...)
 		if t := g.p2aTargets(a, g.idx.gorgeTargets(a)); t != "" {
 			e.targets = append(e.targets, t)
 		}
@@ -69,7 +70,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			// CreatePerpetual* actions.
 			e.add("perpetual")
 		} else {
-			e.add(gorgeAPIEffects(a, g.svars())...)
+			e.add(p2dPlayerGrants(a, gorgeAPIEffects(a, g.svars()))...)
 		}
 		e.add(atEOTTokens(a.Params["AtEOT"])...)
 		e.add(paramTokensP2B(a)...)
@@ -300,7 +301,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			// An effect ending itself: bookkeeping, not a move.
 			return nil
 		}
-		return []string{changeZoneToken(a.API, p)}
+		return p2dChangeZone(a.API, p)
 	case "Draw":
 		return []string{"draw:" + literalOr(p["NumCards"], "1")}
 	case "Discard":
@@ -319,12 +320,23 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		return []string{"counter"}
 	case "Token":
 		out := []string{"token:" + literalOr(p["TokenAmount"], "1")}
+		out = append(out, p2dExtraTokenScripts(p)...)
 		for _, k := range cards.SplitKeywordList(p["PumpKeywords"]) {
 			out = append(out, "grant:"+grantKeyword(k))
 		}
 		return out
 	case "CopyPermanent":
-		return []string{"tokencopy:" + literalOr(p["NumCopies"], "1")}
+		out := []string{"tokencopy:" + literalOr(p["NumCopies"], "1")}
+		if p["DefinedName"] != "" {
+			// "Create a Spellgorger Weird token": a named predefined
+			// token, not a copy of an object (mtgish OracleToken).
+			out[0] = "token:" + literalOr(p["NumCopies"], "1")
+		}
+		// "It gains haste": a grant, as Token's PumpKeywords$.
+		for _, k := range cards.SplitKeywordList(p["PumpKeywords"]) {
+			out = append(out, "grant:"+grantKeyword(k))
+		}
+		return out
 	case "PutCounter", "PutCounterAll":
 		if n := p["Monstrosity"]; n != "" {
 			// Monstrosity N: N +1/+1 counters, the type left implicit.
@@ -348,7 +360,16 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			// merge).
 			ct = "EACH " + strings.Replace(p["CounterTypes"], "ChosenFromList", p["TypeList"], 1)
 		}
-		return gorgeCounterTokens(ct, literalOr(p["CounterNum"], "1"))
+		out := gorgeCounterTokens(ct, literalOr(p["CounterNum"], "1"))
+		if ct2 := p["CounterType2"]; ct2 != "" {
+			// "Two +1/+1 counters and a reach counter": a second type.
+			n2 := p["CounterNum2"]
+			if n2 == "" {
+				n2 = p["CounterNum"]
+			}
+			out = append(out, gorgeCounterTokens(ct2, literalOr(n2, "1"))...)
+		}
+		return out
 	case "MultiplyCounter":
 		return []string{"counters:double"}
 	case "RemoveCounter", "RemoveCounterAll":
@@ -405,6 +426,9 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			// "Exile the top N cards" is a move, not a look.
 			return []string{"move:library>exile"}
 		}
+		if p2dDigRevealOnly(p) {
+			return []string{"dig:" + literalOr(p["DigNum"], "1")}
+		}
 		if p["ChangeNum"] == "All" && p["DestinationZone"] != "" {
 			// "Put the top card into your hand": a move (revealed first,
 			// a look as well).
@@ -425,7 +449,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		if dest == "" {
 			dest = "Hand"
 		}
-		out = append(out, "move:library>"+strings.ToLower(dest))
+		if p["ChangeNum"] != "0" {
+			// ChangeNum$ 0: a reveal that puts none of them anywhere but
+			// back (map_p2d.go).
+			out = append(out, "move:library>"+strings.ToLower(dest))
+		}
 		n, m := literalOr(p["DigNum"], "1"), literalOr(p["ChangeNum"], "1")
 		if n == "*" || m == "*" || n != m {
 			rest := p["DestinationZone2"]
@@ -433,13 +461,15 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 				rest = "Library"
 			}
 			// One card looked at and left on top is no move.
-			if !(n == "1" && rest == "Library" && p["LibraryPosition2"] == "0") {
+			if !(n == "1" && rest == "Library" && p["LibraryPosition2"] == "0") && !p2dDigRestStays(a, dest, rest) {
 				out = append(out, "move:library>"+strings.ToLower(rest))
 			}
 		}
 		return out
 	case "DigUntil":
-		if p["FoundDestination"] == "Exile" || p["RevealedDestination"] == "Exile" {
+		if p["FoundDestination"] == "Exile" {
+			// (Only an exiled find is the exile move alone; exiling the
+			// other revealed cards is one of the moves below, map_p2d.)
 			return []string{"move:library>exile"}
 		}
 		out := []string{"diguntil"}
@@ -449,7 +479,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 				// Left on top (a later sub-ability moves it): no move.
 				continue
 			}
-			if d := p[k]; d != "" {
+			if d := p[k]; d != "" && !p2dDigUntilShuffledBack(p, k) {
 				out = append(out, "move:library>"+strings.ToLower(d))
 			}
 		}
@@ -483,10 +513,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		for _, k := range cards.SplitKeywordList(p["Keywords"]) {
 			out = append(out, "grant:"+grantKeyword(k))
 		}
-		if len(out) == 0 {
+		out = append(out, p2dAnimateExtra(p)...)
+		if len(out) == 0 && !p2dAnimateCarrier(p) {
 			out = append(out, "animate")
 		}
-		return out
+		return dedup(out)
 	case "Effect":
 		return effectAPI(a, svars)
 	case "DelayedTrigger":

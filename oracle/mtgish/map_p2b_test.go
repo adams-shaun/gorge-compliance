@@ -17,7 +17,7 @@ func TestP2BMtgishActions(t *testing.T) {
 		{"may cost sacrifice", `[{"_Action":"MayCost","args":{"_Cost":"SacrificeAPermanent","args":{"_Permanents":"X"}}},{"_Action":"If","args":[{"_Condition":"CostWasPaid"},[{"_Action":"DrawACard"}]]}]`, "draw:1"},
 		// A MustCost is a mandatory action, except a sacrifice.
 		{"must cost bounce", `[{"_Action":"MustCost","args":{"_Cost":"PutPermanentIntoItsOwnersHand","args":` + perm + `}}]`, "move:battlefield>hand"},
-		{"must cost sacrifice", `[{"_Action":"MustCost","args":{"_Cost":"SacrificePermanent","args":` + perm + `}}]`, "-"},
+		{"must cost sacrifice", `[{"_Action":"MustCost","args":{"_Cost":"SacrificePermanent","args":` + perm + `}}]`, "sacrifice"},
 		// Every ChooseAnAction branch counts (merged), not the first only.
 		{"choose an action", `[{"_Action":"ChooseAnAction","args":[[{"_Action":"DrawACard"}],[{"_Action":"MillACard"}]]}]`, "draw:1 mill:1"},
 		// Counters a card enters or is exiled with.
