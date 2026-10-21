@@ -42,11 +42,23 @@ func (e *effects) walk(x any) {
 			if variant == "ChooseAnAction" {
 				// "You may A or B. When you do, ...": one of the actions
 				// runs, so they are alternatives.
+				var alts []any
 				for _, a := range argsOf(n) {
 					if l := list(a); l != nil {
-						e.alternatives(l...)
-						return false
+						alts = append(alts, l)
 					}
+				}
+				switch {
+				case len(alts) > 1 && p2aReflexiveAlternative(alts):
+					// One action list per alternative ("put a charge
+					// counter on it or remove one from it. When you
+					// remove one, ...").
+					e.alternatives(alts...)
+					return false
+				case len(alts) > 0:
+					// One list of alternative actions (the first).
+					e.alternatives(list(alts[0])...)
+					return false
 				}
 			}
 			if variant == "IfElse" {
@@ -827,7 +839,9 @@ func playerEffectToken(v string) string {
 	case v == "MayPayAdditionalCostToCastSpellsForEffect":
 		// An optional additional cost, not a permission to play.
 		return "player:maypayadditionalcosttocastspellsforeffect"
-	case strings.HasPrefix(v, "May") && (strings.Contains(v, "Play") || strings.Contains(v, "Cast")):
+	case strings.HasPrefix(v, "May") && !strings.HasPrefix(v, "MayReveal") && (strings.Contains(v, "Play") || strings.Contains(v, "Cast")):
+		// (MayRevealFirstCardDrawnDuringEachPlayersTurn is no permission
+		// to play: its "Play" is the one in "Players".)
 		return "mayplay"
 	}
 	return "player:" + strings.ToLower(v)

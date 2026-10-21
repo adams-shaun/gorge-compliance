@@ -44,6 +44,7 @@ func mtgishFace(c *Card, f node) *Summary {
 	m.rules(list(f["Rules"]))
 	mergeSpells(s, false)
 	splitStatics(s)
+	p2aMergeCantTarget(s)
 
 	if pt, ok := f["CardPT"].(map[string]any); ok {
 		p, t := strconv.Itoa(intOr(pt["Power"])), strconv.Itoa(intOr(pt["Toughness"]))
@@ -566,8 +567,12 @@ func triggerClass(v string) string {
 		return "ltb"
 	case has("EntersTheBattlefield", "EnterTheBattlefield"):
 		return "etb"
-	case v == "WhenAPermanentIsPutIntoAPlayersGraveyard":
-		// A permanent put into a graveyard is a permanent dying.
+	case strings.Contains(v, "Permanent") && strings.Contains(v, "PutIntoAPlayersGraveyard"):
+		// A permanent put into a graveyard is a permanent dying (also
+		// WhenAnyNumberOfPermanentsArePutIntoAPlayersGraveyards and
+		// WhenASpellOrAbilityCausesAPermanentToBePutIntoAPlayersGraveyard):
+		// scripts write all of them Origin$ Battlefield, Destination$
+		// Graveyard.
 		return "dies"
 	case has("PutIntoAPlayersGraveyard", "PutIntoAGraveyard"):
 		return "to-graveyard"

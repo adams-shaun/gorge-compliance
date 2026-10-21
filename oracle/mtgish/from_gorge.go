@@ -62,7 +62,7 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if head, _, ok := kwTag(t.Params); ok && !printedExpansion(head) {
 			continue
 		}
-		if g.gorgeStaticTrigger(t, &enter) || secondaryHalf(f, t) {
+		if g.p2aRevealTrigger(t) || g.p2aAttachedCopy(t) || g.gorgeStaticTrigger(t, &enter) || secondaryHalf(f, t) {
 			continue
 		}
 		g.trigger(t)
@@ -105,6 +105,7 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 	}
 	mergeSpells(s, true)
 	splitStatics(s)
+	p2aReplacementStatics(s)
 	return s
 }
 
@@ -372,7 +373,7 @@ func (g *gorgeNorm) sa(a *cards.SA) {
 	switch a.Kind {
 	case "SP":
 		kind = "spell"
-		if a.API == "PermanentCreature" || a.API == "PermanentNoncreature" {
+		if a.API == "PermanentCreature" || a.API == "PermanentNoncreature" || p2aPlaceholderSpell(a) {
 			// The cast-a-permanent ability every permanent card has.
 			return
 		}
@@ -515,7 +516,7 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 
 // static summarises an S: line.
 func (g *gorgeNorm) static(st *cards.Static) {
-	if gorgeStation(g, st) || g.selfGrantStatic(st) {
+	if p2aShadowHelper(st) || gorgeStation(g, st) || g.selfGrantStatic(st) {
 		return
 	}
 	eff := gorgeStaticEffects(st.Mode, st.Params)
@@ -569,7 +570,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "player:mayplayanadditionalland")
 		}
 		if p["MayLookAt"] != "" {
-			out = append(out, d2MayLookAt(p))
+			out = append(out, p2aMayLookAt(p)...)
 		}
 		if p["SetName"] != "" {
 			out = append(out, "name")
@@ -605,18 +606,8 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			// layer effect, as mtgish's CantGainAbility.
 			out = append(out, "rule:cantgainability")
 		}
-		switch n := p["CanBlockAmount"]; n {
-		case "":
-		case "1":
-			out = append(out, "rule:canblockanadditionalcreature")
-		case "99":
-			out = append(out, "rule:canblockanynumberofcreatures")
-		default:
-			out = append(out, "rule:canblockanadditionalnumbercreatures")
-		}
-		if p["Goad"] == "True" {
-			out = append(out, "rule:isgoadedbyplayer")
-		}
+		// (CanBlockAmount$ is read once, by d2ContinuousEffects.)
+		// (Goad$ True is "goad", d2ContinuousEffects.)
 		for _, k := range cards.SplitKeywordList(p["AddHiddenKeyword"]) {
 			out = append(out, hiddenKeywordToken(k))
 		}
@@ -741,6 +732,12 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 	}
 	switch r.Event {
 	case "Untap":
+		if p["ReplaceWith"] != "" {
+			// "If it would untap during your untap step, <do something>
+			// instead": a replacement (Edge of Malacol, Freyalise's Winds).
+			g.ability(Ability{Kind: "replacement", Effects: []string{"replace:woulduntap"}})
+			return
+		}
 		if p["ValidStepTurnToController"] == "" {
 			// No untap-step restriction: "can't become untapped".
 			g.ability(Ability{Kind: "static", Effects: []string{"rule:cantbecomeuntapped"}})
@@ -760,6 +757,12 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 		g.ability(Ability{Kind: "static", Effects: []string{"player:cantwinthegame"}})
 		return
 	case "Counter":
+		if p["ReplaceWith"] != "" {
+			// "If a spell or ability would counter a spell, instead ..."
+			// (Guile): a replacement.
+			g.ability(Ability{Kind: "replacement", Effects: []string{"replace:wouldcounteraspell"}})
+			return
+		}
 		// "This spell can't be countered" / "spells you control can't be
 		// countered": a static rule printed, a replacement in Forge.
 		g.ability(Ability{Kind: "static", Effects: []string{"spell:cantbecountered"}})
@@ -781,7 +784,9 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 		a.Effects = []string{"replace:wouldputintograveyard"}
 	case r.Event == "Moved" && p["Destination"] == "Battlefield":
 		a.Effects = []string{"replace:wouldenter"}
-	case r.Event == "DamageDone" && p["Prevent"] == "True":
+	case r.Event == "DamageDone" && (p["Prevent"] == "True" || p["PreventionEffect"] == "True"):
+		// (PreventionEffect$ marks a partial shield, "prevent N of that
+		// damage": a prevention too.)
 		a.Effects = []string{"replace:preventdamage"}
 	case r.Event == "DamageDone":
 		a.Effects = []string{"replace:woulddealdamage"}
