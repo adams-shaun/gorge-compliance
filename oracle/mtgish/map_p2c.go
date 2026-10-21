@@ -19,9 +19,19 @@ var p2cReplSynonyms = map[string]string{
 	"ReplaceAPlayerWouldCreateAToken":        "replace:aneffectwouldcreateanynumberoftokens",
 	// Energy is a player counter in Forge (R:Event$ AddCounter).
 	"ReplaceWouldGetEnergy": "replace:wouldputcounters",
+	// "If a player would put a permanent onto the battlefield": the
+	// Moved-to-battlefield replacement.
+	"ReplaceWouldPutAPermanentOnTheBattlefield": "replace:wouldenter",
 }
 
 func init() {
+	d2PlayerSynonyms["MayPayLifeRatherThanMana"] = "player:paylifeinsteadof"
+	d2PlayerSynonyms["MayActivateLoyaltyAbilitiesOfPlanewalkerTwice"] = "player:mayactivateloyaltyabilitiestwiceeachturn"
+	d2PlayerSynonyms["MayPayAlternateCostForFirstEquipCostEachTurn"] = "alternativecost"
+	d2PlayerSynonyms["MayPlayAdditionalLands"] = "player:mayplayanadditionalland"
+	if extStatic["CantBecomeMonarch"] == nil {
+		extStatic["CantBecomeMonarch"] = func(p map[string]string) []string { return []string{"player:cantbecomethemonarch"} }
+	}
 	d2PlayerSynonyms["CantUntapMoreThanNumberPermanentsDuringTheirUntapStep"] = "player:untapadjust"
 	d2PlayerSynonyms["ChoosesHowCreaturesBlock"] = "player:chooseswhichcreaturesblockandhowtheyblock"
 	d2PlayerSynonyms["MayPayAlternateCostForFirstUnearthCostEachTurn"] = "alternativecost"

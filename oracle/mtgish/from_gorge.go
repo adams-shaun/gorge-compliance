@@ -531,6 +531,14 @@ func (g *gorgeNorm) static(st *cards.Static) {
 }
 
 func gorgeStaticEffects(mode string, p map[string]string) []string {
+	if strings.Contains(mode, ",") {
+		// "Mode$ CantAttack,CantBlock": one static line, several modes.
+		var out []string
+		for _, m := range strings.Split(mode, ",") {
+			out = append(out, gorgeStaticEffects(strings.TrimSpace(m), p)...)
+		}
+		return out
+	}
 	if selfCastRestriction(mode, p) {
 		return nil
 	}
