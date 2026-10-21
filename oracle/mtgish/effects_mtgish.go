@@ -425,6 +425,11 @@ func (e *effects) action(n node, v string) {
 		for _, t := range list(arg(0)) {
 			e.add(tokenToken(t))
 		}
+		for _, f := range list(arg(1)) {
+			if v := variantOf(f); strings.HasPrefix(v, "EntersWith") && strings.Contains(v, "Counter") {
+				e.add(p2cEnterFlag(f.(node), v)...)
+			}
+		}
 	case "PutCounters":
 		for _, pc := range list(rawArgs(n)) {
 			e.add(putCounters(pc))
@@ -527,7 +532,11 @@ func (e *effects) action(n node, v string) {
 	case "Connive", "PermanentConnives":
 		e.add("connive")
 	case "CreateSpellEffect":
-		e.add("effect")
+		if p2hSpellColor(n) {
+			e.add("color")
+		} else {
+			e.add("effect")
+		}
 	case "ChangeTargetsOfSpellOrAbility":
 		e.add("changetargets")
 	case "CastGraveyardCardWithoutPayingIntoExile", "CastASpellFromExileWithoutPaying",

@@ -100,3 +100,18 @@ func init() {
 	// symbol": S:Mode$ RaiseCost with ForEachShard$ (a cost increase).
 	d2RuleSynonyms["AdditionalCostForEachColorManaSymbolInCosts"] = "costincrease"
 }
+
+// p2hSpellColor reports a CreateSpellEffect that only changes the spell's
+// colour ("target spell becomes colorless"): gorge's Animate Colors$.
+func p2hSpellColor(n node) bool {
+	ls := list(argN(n, 1))
+	if len(ls) == 0 {
+		return false
+	}
+	for _, l := range ls {
+		if v := variantOf(l); v != "SetColor" && v != "AddColor" {
+			return false
+		}
+	}
+	return true
+}
