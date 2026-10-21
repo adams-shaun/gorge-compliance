@@ -601,7 +601,8 @@ func lookMove(v string) string {
 func exilableZone(x any) string {
 	v := variantOf(x)
 	switch {
-	case strings.Contains(v, "Graveyard"):
+	case strings.Contains(v, "Graveyard"), strings.Contains(v, "Milled"):
+		// (A card milled this way is in the graveyard.)
 		return "graveyard"
 	case strings.Contains(v, "Librar"):
 		return "library"

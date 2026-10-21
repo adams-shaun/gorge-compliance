@@ -399,6 +399,12 @@ func p2cCostActions(c string) []string {
 			out = append(out, "move:graveyard>library")
 		case "Blight":
 			out = append(out, "blight")
+		case "AddCounter":
+			// "Put a stun counter on the targeted creature" paid as an
+			// unless-cost: mtgish's PutCounters cost.
+			if kind != "" {
+				out = append(out, gorgeCounterTokens(kind, n)...)
+			}
 		}
 	}
 	return out
