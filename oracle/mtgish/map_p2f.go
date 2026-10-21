@@ -193,3 +193,25 @@ func init() {
 		}
 	}
 }
+
+// p2fParamTokens maps parameters that carry an effect of their own.
+func p2fParamTokens(a *cards.SA) []string {
+	p := a.Params
+	var out []string
+	switch a.API {
+	case "PutCounter", "PutCounterAll":
+		if p["RemovePhase"] != "" {
+			// "Remove those counters at the beginning of the next end
+			// step": a delayed trigger removing them, as mtgish's
+			// CreateFutureTrigger(RemoveCounters).
+			out = append(out, "delayed", "countersremove")
+		}
+	case "DigUntil":
+		if d := p["OptionalNoDestination"]; d != "" && p["OptionalFoundMove"] == "True" {
+			// "You may put that card onto the battlefield. If you don't,
+			// put it into your hand": the declined card moves too.
+			out = append(out, "move:library>"+strings.ToLower(d))
+		}
+	}
+	return out
+}
