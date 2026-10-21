@@ -213,6 +213,12 @@ func (e *effects) p2cReflexive(v string, a []any) {
 		e.add("gaincontrol")
 	case "Attach":
 		e.add("attach")
+	default:
+		if strings.HasPrefix(half, "Cast") {
+			// "You may cast target card from your graveyard ... When you
+			// cast that spell, ...": the cast is the effect (gorge: Play).
+			e.add("play")
+		}
 	case "PutOnBattlefield":
 		// "You may put any number of Equipment cards from among them
 		// onto the battlefield. When you do, ...".
@@ -308,6 +314,19 @@ func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
 		// (the core reads TokenAmount$ once).
 		for range strings.Split(ts, ",")[1:] {
 			e.add("token:" + literalOr(a.Params["TokenAmount"], "1"))
+		}
+	}
+	if ct := a.Params["ExileWithCounters"]; ct != "" {
+		// "Exile the top card ... and put a fetch counter on it"
+		// (mtgish's ExilesWith*Counter* flag or a put-counters action).
+		e.add(gorgeCounterTokens(ct, "1")...)
+	}
+	if hk := a.Params["HiddenKeywords"]; (a.API == "Animate" || a.API == "AnimateAll") && hk != "" {
+		// "... and it can't attack or block": restrictions an Animate gives.
+		for _, k := range strings.Split(hk, "&") {
+			if k = strings.TrimSpace(k); k != "" {
+				e.add(p2cHiddenTokens(k)...)
+			}
 		}
 	}
 	if a.API == "CopyPermanent" {
