@@ -25,6 +25,22 @@ var p2cReplSynonyms = map[string]string{
 }
 
 func init() {
+	d2PlayerSynonyms["CantBlockWithMoreThanOneCreature"] = "blockrestrict:1"
+	d2PlayerSynonyms["OnceEachTurnMayCastASpellFromAmongCardsInGraveyardsWithEffect"] = "mayplay"
+	d2RuleSynonyms["MustBeBlockedByEachDefender"] = "rule:mustblockattacker"
+	for v, t := range map[string]string{
+		// "Attach it to target player" (a Curse moved onto a player).
+		"AttachAPermanentToAPlayer": "attach",
+		// "As this transforms, it becomes a copy of an exiled card ...
+		// with N +1/+1 counters".
+		"BecomeACopyOfAnExiledCard":    "copy",
+		"TransformsWithNumberCounters": "counters:*",
+	} {
+		t := t
+		if extAction[v] == nil {
+			extAction[v] = func(e *effects, n node) { e.add(t) }
+		}
+	}
 	d2PlayerSynonyms["MayPayLifeRatherThanMana"] = "player:paylifeinsteadof"
 	d2PlayerSynonyms["MayActivateLoyaltyAbilitiesOfPlanewalkerTwice"] = "player:mayactivateloyaltyabilitiestwiceeachturn"
 	d2PlayerSynonyms["MayPayAlternateCostForFirstEquipCostEachTurn"] = "alternativecost"
@@ -531,6 +547,9 @@ func p2cPlayerKeyword(p map[string]string, k string) (string, bool) {
 // the PlayerEffect cost variants are (d2PlayerToken).
 func p2cSpellToken(v string) string {
 	switch {
+	case v == "CantBeCast":
+		// "Spells with the chosen name can't be cast": S:Mode$ CantBeCast.
+		return "player:cantcastspells"
 	case strings.HasPrefix(v, "IncreaseManaCost"):
 		return "costincrease"
 	case strings.HasPrefix(v, "DecreaseManaCost") || strings.HasPrefix(v, "ReduceManaCost"):
