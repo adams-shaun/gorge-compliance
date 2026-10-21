@@ -102,7 +102,7 @@ type mtgishNorm struct {
 
 func (m *mtgishNorm) kw(tok string) { m.s.Keywords = append(m.s.Keywords, tok) }
 
-func (m *mtgishNorm) ability(a Ability) { m.s.Abilities = append(m.s.Abilities, a) }
+func (m *mtgishNorm) ability(a Ability) { m.s.Abilities = append(m.s.Abilities, p2dMtgishAbility(a)) }
 
 // sub maps a nested rule; conditional (under If/Unless or a level) turns
 // its keywords into a static granting them.

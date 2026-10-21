@@ -234,3 +234,85 @@ func p2dPlayerRecipient(p map[string]string) bool {
 	}
 	return false
 }
+
+// Ability post-passes: spelling differences of one effect token, resolved
+// once per ability as both normalisers emit it.
+
+// p2dMtgishAlias respells mtgish-side effect tokens onto the gorge side's
+// spelling of the same thing.
+var p2dMtgishAlias = map[string]string{
+	// One replacement event, whatever creates the tokens (Forge:
+	// R:Event$ CreateToken).
+	"replace:aplayerwouldcreatetokens":        "replace:aneffectwouldcreateanynumberoftokens",
+	"replace:aplayerwouldcreateatoken":        "replace:aneffectwouldcreateanynumberoftokens",
+	"replace:anynumberoftokenswouldbecreated": "replace:aneffectwouldcreateanynumberoftokens",
+}
+
+// p2dGorgeAlias respells gorge-side effect tokens onto mtgish's spelling.
+var p2dGorgeAlias = map[string]string{
+	// Forge's player keyword UntapAdjust ("players can't untap more than
+	// one land during their untap steps").
+	"player:untapadjust": "player:cantuntapmorethannumberpermanentsduringtheiruntapstep",
+}
+
+func p2dAlias(toks []string, alias map[string]string) []string {
+	var out []string
+	for i, t := range toks {
+		if a, ok := alias[t]; ok {
+			if out == nil {
+				out = append([]string(nil), toks...)
+			}
+			out[i] = a
+		}
+	}
+	if out == nil {
+		return toks
+	}
+	return out
+}
+
+func p2dMtgishAbility(a Ability) Ability {
+	a.Effects = p2dAlias(a.Effects, p2dMtgishAlias)
+	a.Effects = p2dPairTargetRules(a.Effects)
+	return a
+}
+
+func p2dGorgeAbility(a Ability) Ability {
+	a.Effects = p2dAlias(a.Effects, p2dGorgeAlias)
+	return a
+}
+
+// p2dPairTargetRules folds "can't be the target of <spells>" and "can't be
+// the target of <abilities>" in one ability ("white spells or abilities
+// from white sources", two mtgish rules) into the one rule a script's
+// CantTarget static over both is.
+func p2dPairTargetRules(toks []string) []string {
+	const sp, ab, both = "rule:cantbethetargetofspells", "rule:cantbethetargetofabilities", "rule:cantbethetargetofspellsorabilities"
+	ns, na := 0, 0
+	for _, t := range toks {
+		switch t {
+		case sp:
+			ns++
+		case ab:
+			na++
+		}
+	}
+	pairs := min(ns, na)
+	if pairs == 0 {
+		return toks
+	}
+	var out []string
+	ds, da := pairs, pairs
+	for _, t := range toks {
+		switch {
+		case t == sp && ds > 0:
+			ds--
+			out = append(out, both)
+		case t == ab && da > 0:
+			da--
+		default:
+			out = append(out, t)
+		}
+	}
+	return out
+}

@@ -186,7 +186,7 @@ type gorgeNorm struct {
 }
 
 func (g *gorgeNorm) kw(tok string)            { g.s.Keywords = append(g.s.Keywords, tok) }
-func (g *gorgeNorm) ability(a Ability)        { g.s.Abilities = append(g.s.Abilities, a) }
+func (g *gorgeNorm) ability(a Ability)        { g.s.Abilities = append(g.s.Abilities, p2dGorgeAbility(a)) }
 func (g *gorgeNorm) svars() map[string]string { return g.f.SVars }
 
 // gorgeCostKeywords are the keyword heads whose parameter is a cost
