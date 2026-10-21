@@ -26,6 +26,9 @@ var p2cReplSynonyms = map[string]string{
 
 func init() {
 	d2PlayerSynonyms["CantBlockWithMoreThanOneCreature"] = "blockrestrict:1"
+	// "Each player may attack only the nearest opponent": an attack
+	// restriction (S:Mode$ CantAttack), not a play permission.
+	d2PlayerSynonyms["MayAttackOnlyPlayerOrPlaneswalkersControlledBy"] = "rule:cantattack"
 	d2PlayerSynonyms["OnceEachTurnMayCastASpellFromAmongCardsInGraveyardsWithEffect"] = "mayplay"
 	d2RuleSynonyms["MustBeBlockedByEachDefender"] = "rule:mustblockattacker"
 	for v, t := range map[string]string{
@@ -152,7 +155,10 @@ func (e *effects) p2cMustCost(c any) {
 		e.add("move:hand>library:1")
 	case "HavePlayerTakeAction":
 		// "You may have target player create a token copy": the action.
-		e.walk([]any{argN(c, 1)})
+		// The action is a CostPlayerAction node named like an Action.
+		inner := argN(c, 1)
+		iv := variantOf(inner)
+		e.action(node{"_Action": iv, "args": rawArgs(inner)}, iv)
 	case "PutAGraveyardCardOnTheBottomOfItsOwnersLibrary":
 		e.add("move:graveyard>library")
 	case "PutANumberOfExiledCardsIntoOwnersGraveyard":
@@ -205,6 +211,8 @@ func (e *effects) p2cReflexive(v string, a []any) {
 		e.add("amass")
 	case "HavePlayerGainControlOfPermanent":
 		e.add("gaincontrol")
+	case "Attach":
+		e.add("attach")
 	case "PutOnBattlefield":
 		// "You may put any number of Equipment cards from among them
 		// onto the battlefield. When you do, ...".
