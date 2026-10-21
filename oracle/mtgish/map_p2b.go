@@ -95,6 +95,17 @@ func paramTokensP2B(a *cards.SA) []string {
 			}
 			out = append(out, gorgeCounterTokens(ct, literalOr(n, "1"))...)
 		}
+	case "Dig":
+		// "Look at the top card. If it's a land, you may put it onto the
+		// battlefield. Otherwise put it into your hand": the card not
+		// chosen goes to DestinationZone2$ even when as many are looked at
+		// as may be chosen (the core case adds it only when fewer may be).
+		n, m := literalOr(p["DigNum"], "1"), literalOr(p["ChangeNum"], "1")
+		d2 := p["DestinationZone2"]
+		if p["ChangeNum"] != "All" && n == m && n != "*" && (d2 == "Hand" || d2 == "Graveyard" || d2 == "Exile") &&
+			(p["Optional"] == "True" || p["ChangeValid"] != "") {
+			out = append(out, "move:library>"+strings.ToLower(d2))
+		}
 	case "ChangeZone", "ChangeZoneAll":
 		out = append(out, otherOriginsP2B(a)...)
 		if ct := p["WithCountersType"]; ct != "" {
