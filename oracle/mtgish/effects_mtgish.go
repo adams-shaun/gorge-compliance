@@ -29,6 +29,11 @@ func (e *effects) walk(x any) {
 			if t := lookMove(variant); t != "" {
 				e.add(t)
 			}
+			if strings.Contains(variant, "MayCast") {
+				// "You may cast a spell from among them without paying
+				// its mana cost": a cast (Forge: Play), map_p2d.go.
+				e.add("play")
+			}
 			return variant == "If" || variant == "Unless"
 		case "_Target", "_DistributedTarget":
 			if strings.HasSuffix(variant, "TargetPlayerControls") {
