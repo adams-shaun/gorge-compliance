@@ -62,7 +62,7 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if head, _, ok := kwTag(t.Params); ok && !printedExpansion(head) {
 			continue
 		}
-		if g.gorgeStaticTrigger(t, &enter) || secondaryHalf(f, t) {
+		if g.p2aRevealTrigger(t) || g.gorgeStaticTrigger(t, &enter) || secondaryHalf(f, t) {
 			continue
 		}
 		g.trigger(t)
@@ -781,7 +781,9 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 		a.Effects = []string{"replace:wouldputintograveyard"}
 	case r.Event == "Moved" && p["Destination"] == "Battlefield":
 		a.Effects = []string{"replace:wouldenter"}
-	case r.Event == "DamageDone" && p["Prevent"] == "True":
+	case r.Event == "DamageDone" && (p["Prevent"] == "True" || p["PreventionEffect"] == "True"):
+		// (PreventionEffect$ marks a partial shield, "prevent N of that
+		// damage": a prevention too.)
 		a.Effects = []string{"replace:preventdamage"}
 	case r.Event == "DamageDone":
 		a.Effects = []string{"replace:woulddealdamage"}

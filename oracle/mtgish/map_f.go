@@ -578,6 +578,16 @@ func (g *gorgeNorm) selfGrantStatic(st *cards.Static) bool {
 			}
 		}
 	}
+	for _, k := range []string{"AddReplacementEffects", "AddReplacementEffect"} {
+		// A level's prevention shield (Hedron-Field Purists), as
+		// selfGrantAbilities expands it.
+		for _, name := range strings.Split(p[k], "&") {
+			if rp := svarParams(g.svars()[strings.TrimSpace(name)]); rp["Event"] != "" {
+				g.repl(&cards.Repl{Event: rp["Event"], Params: rp})
+			}
+		}
+		delete(rest, k)
+	}
 	delete(rest, "AddAbility")
 	delete(rest, "AddTrigger")
 	delete(rest, "AddStaticAbility")

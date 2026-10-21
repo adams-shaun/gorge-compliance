@@ -827,7 +827,9 @@ func playerEffectToken(v string) string {
 	case v == "MayPayAdditionalCostToCastSpellsForEffect":
 		// An optional additional cost, not a permission to play.
 		return "player:maypayadditionalcosttocastspellsforeffect"
-	case strings.HasPrefix(v, "May") && (strings.Contains(v, "Play") || strings.Contains(v, "Cast")):
+	case strings.HasPrefix(v, "May") && !strings.HasPrefix(v, "MayReveal") && (strings.Contains(v, "Play") || strings.Contains(v, "Cast")):
+		// (MayRevealFirstCardDrawnDuringEachPlayersTurn is no permission
+		// to play: its "Play" is the one in "Players".)
 		return "mayplay"
 	}
 	return "player:" + strings.ToLower(v)

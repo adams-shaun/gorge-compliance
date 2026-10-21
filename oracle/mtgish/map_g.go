@@ -488,12 +488,10 @@ func (m *mtgishNorm) levelStatic(pt any, rules []any) {
 	n.rules(rules)
 	m.cdaPower = m.cdaPower || n.cdaPower
 	m.cdaToughness = m.cdaToughness || n.cdaToughness
+	// A level's P/T box is the card's level structure, not a printed
+	// ability: the gorge side drops a level static's SetPower$ and
+	// SetToughness$ (selfGrantStatic), so no "setpt" here either.
 	var eff []string
-	if !reflect.DeepEqual(pt, m.basePT) {
-		// A level that keeps the printed P/T sets none (the script's
-		// level static then has no SetPower$ either).
-		eff = append(eff, "setpt")
-	}
 	for _, a := range n.s.Abilities {
 		if a.Kind == "static" {
 			eff = append(eff, a.Effects...)

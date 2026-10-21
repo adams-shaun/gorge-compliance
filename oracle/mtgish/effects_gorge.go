@@ -61,7 +61,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			// cost (depth 0) is a cost.
 			e.add("forage")
 		}
-		if t := g.idx.gorgeTargets(a); t != "" {
+		if t := g.p2aTargets(a, g.idx.gorgeTargets(a)); t != "" {
 			e.targets = append(e.targets, t)
 		}
 		if a.Params["Duration"] == "Perpetual" {
