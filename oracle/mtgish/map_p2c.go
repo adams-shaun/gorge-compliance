@@ -516,7 +516,7 @@ func p2cPlayerKeyword(p map[string]string, k string) (string, bool) {
 		return "", false
 	}
 	switch h := cards.KeywordHead(k); {
-	case strings.Contains(k, ":"):
+	case h == "Hexproof" && strings.Contains(k, ":"):
 		// "Hexproof from blue": a quality, kept as the grant.
 	case h == "Shroud", h == "Hexproof":
 		return "player:" + strings.ToLower(h), true
