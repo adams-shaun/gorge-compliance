@@ -864,6 +864,9 @@ func castEffectToken(v string) string {
 // replacementEffects maps a Replace*/PreventDamage rule to verbs.
 func replacementEffects(r any) []string {
 	v := variantOf(r)
+	if t, ok := p2cReplSynonyms[v]; ok {
+		return []string{t}
+	}
 	return []string{"replace:" + strings.ToLower(strings.TrimPrefix(v, "Replace"))}
 }
 

@@ -615,6 +615,8 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "rule:canblockanadditionalnumbercreatures")
 		}
 		if p["Goad"] == "True" {
+			// "Is goaded": a restriction rule, as mtgish's
+			// IsGoadedByPlayer.
 			out = append(out, "rule:isgoadedbyplayer")
 		}
 		for _, k := range cards.SplitKeywordList(p["AddHiddenKeyword"]) {

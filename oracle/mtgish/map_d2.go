@@ -356,9 +356,6 @@ func d2ContinuousEffects(p map[string]string) []string {
 	if p["ManaConversion"] != "" {
 		out = append(out, "manaconvert")
 	}
-	if p["Goad"] != "" {
-		out = append(out, "goad")
-	}
 	if p["RemoveNonManaAbilities"] != "" {
 		out = append(out, "loseabilities")
 	}
@@ -944,8 +941,9 @@ var d2RuleSynonyms = map[string]string{
 	"CanBlockCreaturesWithLandwalkAbilitiesAsThoughTheyDidntHaveThem": "rule:canbeblockedasthoughitdidnthave",
 	// "Its activated abilities cost {N} more": S:Mode$ RaiseCost.
 	"IncreaseManaCost": "costincrease",
-	// "Is goaded": the goad action's result, written as a rule.
-	"IsGoadedByPlayer": "goad",
+	// "Is goaded": a Continuous Goad$ True, one restriction rule (the
+	// goad action stays "goad").
+	"IsGoadedByPlayer": "rule:isgoadedbyplayer",
 }
 
 // d2PlayerToken maps the PlayerEffect variants this unit folds or names

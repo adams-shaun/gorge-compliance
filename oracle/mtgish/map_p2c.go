@@ -11,7 +11,24 @@ import (
 // Quintorius, Loremaster). Each fix is a place where both encodings say the
 // same thing and the two normalisers rendered it differently.
 
+// p2cReplSynonyms are mtgish Replace* rules that are one Forge
+// replacement event: every "create tokens" wording is R:Event$ CreateToken.
+var p2cReplSynonyms = map[string]string{
+	"ReplaceAnyNumberOfTokensWouldBeCreated": "replace:aneffectwouldcreateanynumberoftokens",
+	"ReplaceAPlayerWouldCreateTokens":        "replace:aneffectwouldcreateanynumberoftokens",
+	"ReplaceAPlayerWouldCreateAToken":        "replace:aneffectwouldcreateanynumberoftokens",
+}
+
 func init() {
+	// "Can't block unless ... attacking player": S:Mode$ CantBlockBy /
+	// CantBlock with a condition, as CantAttackUnlessDefendingPlayer is
+	// rule:cantattack.
+	d2RuleSynonyms["CantBlockUnlessAttackingPlayer"] = "rule:cantblock"
+	// "Players can't activate abilities ...": S:Mode$ CantBeActivated.
+	d2PlayerSynonyms["CantActivateAbilities"] = "rule:cantbeactivated"
+	// "You may pay ... rather than pay the mana cost": an alternative
+	// cost static (S:Mode$ AlternativeCost), as castEffectToken's.
+	d2PlayerSynonyms["MayPayAlternateCostForSpells"] = "alternativecost"
 	// Cost variants a MustCost/MayCost carries (costAsAction falls back
 	// to the action of the same name): tapping permanents.
 	for _, v := range []string{"TapAPermanent", "TapNumberPermanents", "TapAnyNumberOfPermanents", "TapAnyNumberOfGroupPermanents", "TapNumberGroupPermanents"} {
