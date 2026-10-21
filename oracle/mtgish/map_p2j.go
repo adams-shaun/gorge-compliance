@@ -1,6 +1,10 @@
 package mtgish
 
-import "github.com/adams-shaun/gorge/engine/cards"
+import (
+	"strings"
+
+	"github.com/adams-shaun/gorge/engine/cards"
+)
 
 // Phase 2, unit j: normaliser fixes found triaging shard r3-03 (the
 // leftover pending rows of units a-f, "The Celestial Toymaker" ..
@@ -66,4 +70,20 @@ func p2jCloneExtras(a *cards.SA) []string {
 		out = append(out, "grant:"+grantKeyword(k))
 	}
 	return out
+}
+
+// p2jEffectRepl maps an Effect's "if a card would be put into a graveyard
+// from anywhere this turn, exile it instead" (Yawgmoth's Will, Forgotten
+// Cellar): mtgish's CreateReplaceWouldPutIntoGraveyardUntil, one unnamed
+// effect. A replacement bound to the cards the Effect lets you cast
+// (Origin$ Stack, or ValidCard$ the remembered cards) is part of that
+// permission in mtgish, not an action of its own.
+func p2jEffectRepl(r cards.Repl) []string {
+	p := r.Params
+	if r.Event == "Moved" && p["Destination"] == "Graveyard" && p["Origin"] == "" && p["ReplaceWith"] != "" &&
+		!strings.Contains(p["ValidCard"], "IsRemembered") && !strings.Contains(p["ValidLKI"], "IsRemembered") &&
+		!strings.Contains(p["ValidLKI"], "MayPlaySource") {
+		return []string{"effect"}
+	}
+	return nil
 }

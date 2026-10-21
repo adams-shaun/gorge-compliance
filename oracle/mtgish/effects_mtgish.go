@@ -575,6 +575,10 @@ func lookMove(v string) string {
 	switch {
 	case p2fLookStays[v]:
 		return ""
+	case strings.HasPrefix(v, "Conjure"):
+		// "Conjure a duplicate of it onto the battlefield": a conjure, not a
+		// move out of the library.
+		return "conjure"
 	case strings.Contains(v, "Cloak"):
 		return "cloak"
 	case strings.Contains(v, "Manifest"):
