@@ -815,6 +815,9 @@ func staticEffects(r any) []string {
 		}
 		return out
 	}
+	if t, ok := p2dEachCardEffects(v, r); ok {
+		return t
+	}
 	return []string{"static:" + strings.ToLower(v)}
 }
 

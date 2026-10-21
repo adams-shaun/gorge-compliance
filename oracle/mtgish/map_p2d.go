@@ -316,3 +316,44 @@ func p2dPairTargetRules(toks []string) []string {
 	}
 	return out
 }
+
+// p2dEachCardEffects maps "each card in your graveyard (hand, library) has
+// <ability>" statics by what they give the cards, as the gorge side maps
+// the Continuous static over that zone: a granted ability is its grant
+// token ("grant:escape"), losing abilities and gaining a creature type as
+// in a layer effect. The other card effects keep the static token.
+func p2dEachCardEffects(v string, r any) ([]string, bool) {
+	switch v {
+	case "EachCardInPlayersLibraryEffect", "EachCardInPlayersHandEffect", "EachCardInEachPlayersHandEffect",
+		"EachCardInGraveyardEffect", "EachCardInAGraveyardEffect":
+	default:
+		return nil, false
+	}
+	var effs []any
+	for _, a := range argsOf(r) {
+		if l := list(a); l != nil {
+			effs = l
+		}
+	}
+	if len(effs) == 0 {
+		return nil, false
+	}
+	var out []string
+	for _, x := range effs {
+		switch variantOf(x) {
+		case "AddAbility":
+			for _, rr := range argsOf(x) {
+				if enumOf(rr) == "Rule" {
+					out = append(out, grantToken(rr))
+				}
+			}
+		case "LosesAllAbilities":
+			out = append(out, "loseabilities")
+		case "AddCreatureTypeVariable":
+			out = append(out, "type")
+		default:
+			return nil, false
+		}
+	}
+	return dedup(out), len(out) > 0
+}
