@@ -799,6 +799,12 @@ func staticEffects(r any) []string {
 	case "PlayerEffect", "EachPlayerEffect", "PlayerEffect_PlayerMayPayToIgnoreEffectUntil":
 		var out []string
 		for _, x := range list(a[1]) {
+			if variantOf(x) == "SpellsCastHaveAbility" {
+				// "Sliver spells you cast have replicate": spell
+				// effects (gorge: Continuous AffectedZone$ Stack).
+				out = append(out, spellEffectTokens(list(argN(x, 1)))...)
+				continue
+			}
 			out = append(out, playerEffectToken(variantOf(x)))
 		}
 		return dedup(out)
@@ -809,13 +815,13 @@ func staticEffects(r any) []string {
 	case "ThisSpellEffect":
 		var out []string
 		for _, x := range list(rawArgs(r)) {
-			out = append(out, "spell:"+strings.ToLower(variantOf(x)))
+			out = append(out, p2cSpellToken(variantOf(x)))
 		}
 		return out
 	case "StackSpellsEffect":
 		var out []string
 		for _, x := range list(argN(r, 1)) {
-			out = append(out, "spell:"+strings.ToLower(variantOf(x)))
+			out = append(out, p2cSpellToken(variantOf(x)))
 		}
 		return out
 	}

@@ -640,6 +640,11 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		}
 		return []string{"costincrease"}
 	case "CantBlockBy":
+		if p["ValidBlocker"] != "" && p["ValidAttacker"] == "" && p["ValidAttackerRelative"] == "" {
+			// "Creatures with power 7 or greater can't block": the
+			// blockers named, no attacker.
+			return []string{"rule:cantblock"}
+		}
 		if p["ValidBlocker"] != "" {
 			return []string{"rule:cantbeblockedbydefenders"}
 		}
@@ -917,6 +922,10 @@ func affectsPermanents(affected string) bool {
 // ("MustBeBlockedBy Creature.Eldrazi": "must be blocked by an Eldrazi if
 // able") to the rule token mtgish's PermanentRuleEffect carries.
 func grantedRule(k string) (string, bool) {
+	if strings.HasPrefix(k, "Prevent all damage that would be dealt by CARDNAME") {
+		// A prevention shield on the object (mtgish's prevention).
+		return "prevent", true
+	}
 	rest, ok := strings.CutPrefix(k, "MustBeBlockedBy ")
 	if !ok {
 		return "", false

@@ -20,6 +20,15 @@ var p2cReplSynonyms = map[string]string{
 }
 
 func init() {
+	// "Players can't activate abilities that aren't mana abilities":
+	// S:Mode$ CantBeActivated with a non-mana filter.
+	d2PlayerSynonyms["CantActivateNonManaAbilities"] = "rule:cantbeactivated"
+	// "You may have it assign its combat damage as though it weren't
+	// blocked" (the "may" is printed; mtgish's variant drops it).
+	d2RuleSynonyms["AssignsCombatDamageAsThoughNotBlocked"] = "rule:mayassigncombatdamageasthoughnotblocked"
+	if extAction["PutNumberCardsFromPlayersGraveyardOnBottomOfLibrary"] == nil {
+		extAction["PutNumberCardsFromPlayersGraveyardOnBottomOfLibrary"] = func(e *effects, n node) { e.add("move:graveyard>library") }
+	}
 	// "Can't be blocked unless defending player controls ...": S:Mode$
 	// CantBlockBy with a condition, rule:cantbeblocked.
 	d2RuleSynonyms["CantBeBlockedUnlessDefendingPlayer"] = "rule:cantbeblocked"
@@ -414,9 +423,24 @@ func p2cPlayerKeyword(p map[string]string, k string) (string, bool) {
 	if d != "You" && d != "Player" && d != "Opponent" && !strings.HasPrefix(d, "Player.") {
 		return "", false
 	}
-	switch h := cards.KeywordHead(k); h {
-	case "Shroud", "Hexproof":
+	switch h := cards.KeywordHead(k); {
+	case h == "Shroud", h == "Hexproof":
 		return "player:" + strings.ToLower(h), true
+	case strings.HasPrefix(h, "Protection"):
+		return "player:protection", true
 	}
 	return "", false
+}
+
+// p2cSpellToken maps a spell effect variant ("this spell costs {2} more",
+// "spells cost {1} less"): a cost change is the cost static's token, as
+// the PlayerEffect cost variants are (d2PlayerToken).
+func p2cSpellToken(v string) string {
+	switch {
+	case strings.HasPrefix(v, "IncreaseManaCost"):
+		return "costincrease"
+	case strings.HasPrefix(v, "DecreaseManaCost") || strings.HasPrefix(v, "ReduceManaCost"):
+		return "costreduction"
+	}
+	return "spell:" + strings.ToLower(v)
 }

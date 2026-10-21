@@ -365,7 +365,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			out = append(out, "rule:canblockanynumberofcreatures")
 		}
 		for _, k := range cards.SplitKeywordList(p["KW"]) {
-			if strings.HasPrefix(k, "Prevent ") {
+			if strings.HasPrefix(k, "Prevent ") || strings.HasPrefix(k, "HIDDEN Prevent all damage that would be dealt by") {
 				// A prevention shield granted until end of turn.
 				out = append(out, "prevent")
 			} else if strings.HasPrefix(k, "HIDDEN ") {
