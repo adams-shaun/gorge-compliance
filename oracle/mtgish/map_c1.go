@@ -66,7 +66,7 @@ func c1Tokens(i int) func(*effects, node) {
 func c1PlayerEffects(i int) func(*effects, node) {
 	return func(e *effects, n node) {
 		for _, x := range list(argN(n, i)) {
-			e.add(playerEffectToken(variantOf(x)))
+			e.add(playerEffectTokensP2E(x)...)
 		}
 	}
 }

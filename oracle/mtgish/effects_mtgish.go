@@ -418,7 +418,7 @@ func (e *effects) action(n node, v string) {
 		}
 	case "CreatePlayerEffectUntil":
 		for _, x := range list(arg(1)) {
-			e.add(playerEffectToken(variantOf(x)))
+			e.add(playerEffectTokensP2E(x)...)
 		}
 	case "GetAnEmblem":
 		// An emblem's abilities, summarised like printed statics.
@@ -829,7 +829,7 @@ func staticEffects(r any) []string {
 	case "PlayerEffect", "EachPlayerEffect", "PlayerEffect_PlayerMayPayToIgnoreEffectUntil":
 		var out []string
 		for _, x := range list(a[1]) {
-			out = append(out, playerEffectToken(variantOf(x)))
+			out = append(out, playerEffectTokensP2E(x)...)
 		}
 		return dedup(out)
 	case "CastEffect":
@@ -845,7 +845,7 @@ func staticEffects(r any) []string {
 	case "StackSpellsEffect":
 		var out []string
 		for _, x := range list(argN(r, 1)) {
-			out = append(out, "spell:"+strings.ToLower(variantOf(x)))
+			out = append(out, stackSpellToken(variantOf(x)))
 		}
 		return out
 	}
