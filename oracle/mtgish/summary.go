@@ -80,7 +80,7 @@ func (s *Summary) Fields() []Field {
 	for _, a := range s.Abilities {
 		shapes = append(shapes, a.Shape())
 		if len(a.Targets) > 0 {
-			t := append([]string(nil), a.Targets...)
+			t := expandExactCounts(a.Targets)
 			sort.Strings(t)
 			targets = append(targets, strings.Join(t, "+"))
 		}

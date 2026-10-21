@@ -40,8 +40,12 @@ func mtgishFace(c *Card, f node) *Summary {
 		}
 	}
 
-	m := &mtgishNorm{s: s}
+	m := &mtgishNorm{s: s, basePT: f["CardPT"]}
 	m.rules(list(f["Rules"]))
+	mergeSpells(s, false)
+	splitStatics(s)
+	p2aMergeCantTarget(s)
+	p2dFoldTargetStatics(s)
 
 	if pt, ok := f["CardPT"].(map[string]any); ok {
 		p, t := strconv.Itoa(intOr(pt["Power"])), strconv.Itoa(intOr(pt["Toughness"]))
@@ -60,6 +64,7 @@ func mtgishFace(c *Card, f node) *Summary {
 			s.Loyalty = gameNumber(l)
 		}
 	}
+	mtgishFaceE(m, f)
 	return s
 }
 
@@ -93,11 +98,13 @@ type mtgishNorm struct {
 	s                      *Summary
 	cdaPower, cdaToughness bool
 	cdaSeen                bool
+	enter                  int // 1 + the index of the face's "as this enters" replacement, 0 for none
+	basePT                 any // the face's printed CardPT, which a level may keep
 }
 
 func (m *mtgishNorm) kw(tok string) { m.s.Keywords = append(m.s.Keywords, tok) }
 
-func (m *mtgishNorm) ability(a Ability) { m.s.Abilities = append(m.s.Abilities, a) }
+func (m *mtgishNorm) ability(a Ability) { m.s.Abilities = append(m.s.Abilities, p2dMtgishAbility(a)) }
 
 // sub maps a nested rule; conditional (under If/Unless or a level) turns
 // its keywords into a static granting them.
@@ -122,7 +129,10 @@ func (m *mtgishNorm) sub(r any, conditional bool) {
 
 // rules maps a Vec<Rule>.
 func (m *mtgishNorm) rules(rs []any) {
-	for _, r := range rs {
+	for _, r := range mergeZoneStatics(mergeSelfOrOther(mergeThisOrAnother(rs))) {
+		if zoneDuplicate(r, rs) {
+			continue
+		}
 		m.rule(r)
 	}
 }
@@ -170,7 +180,7 @@ var costKeywords = map[string]string{
 	"Plot": "plot", "Prowl": "prowl", "Reconfigure": "reconfigure", "Scavenge": "scavenge",
 	"Spectacle": "spectacle", "Squad": "squad", "Surge": "surge", "Transmute": "transmute",
 	"Outlast": "outlast", "Fortify": "fortify", "Disturb": "disturb", "Freerunning": "freerunning",
-	"Impending": "impending", "Warp": "warp", "Sneak": "sneak", "Harmonize": "harmonize",
+	"Warp": "warp", "Sneak": "sneak", "Harmonize": "harmonize",
 	"Mayhem": "mayhem", "Craft": "craft", "Saddle": "saddle", "CumulativeUpkeep": "cumulativeupkeep",
 	"Replicate": "replicate",
 }
@@ -180,8 +190,7 @@ var costKeywords = map[string]string{
 // cheaply, so both sides drop them.
 var bareKeywords = map[string]string{
 	"Landwalk": "landwalk", "TypeCycling": "typecycling", "Suspend": "suspend", "SuspendX": "suspend",
-	"Vanishing": "vanishing", "VanishingEnters": "vanishing", "StationCharged": "station",
-	"StationChargedAnimate": "station", "Prototype": "prototype", "SpliceOnto": "splice",
+	"Vanishing": "vanishing", "VanishingEnters": "vanishing", "Prototype": "prototype", "SpliceOnto": "splice",
 	"Champion": "champion", "Reinforce": "reinforce", "ReinforceX": "reinforce",
 	"WebSlinging": "webslinging", "Recover": "recover", "Offering": "offering",
 	"Impending": "impending", "Ripple": "ripple", "Specialize": "specialize",
@@ -245,8 +254,6 @@ func (m *mtgishNorm) rule(r any) {
 	if tok, ok := bareKeywords[v]; ok {
 		m.kw(tok)
 		switch v {
-		case "StationCharged", "StationChargedAnimate":
-			m.rules(list(argN(r, 1)))
 		case "Visit", "VisitAndPrize":
 			e := &effects{}
 			e.walk(argsOf(r))
@@ -255,10 +262,10 @@ func (m *mtgishNorm) rule(r any) {
 		return
 	}
 	if tok, ok := numberKeywords[v]; ok {
+		// Backup's nested rules are the abilities it grants, which the
+		// card also prints (and mtgish also encodes) at top level: they are
+		// not summarised twice.
 		m.kw(tok + ":" + gameNumber(argN(r, 0)))
-		if v == "Backup" {
-			m.rules(list(argN(r, 1)))
-		}
 		return
 	}
 	switch {
@@ -266,7 +273,7 @@ func (m *mtgishNorm) rule(r any) {
 		// Every Rule or Vec<Rule> argument; conditions are skipped by shape.
 		// Under a condition ("as long as ..., it has flying") a keyword is
 		// a static granting it, as scripts write it.
-		cond := v == "If" || v == "Unless" || v == "IfElse" || v == "MaxSpeed"
+		cond := v == "If" || v == "Unless" || v == "IfElse" || v == "MaxSpeed" || strings.HasSuffix(v, "If")
 		for _, a := range argsOf(r) {
 			if enumOf(a) == "Rule" {
 				m.sub(a, cond)
@@ -283,12 +290,15 @@ func (m *mtgishNorm) rule(r any) {
 		// One static per rule: scripts write "can't attack or block" as
 		// two statics, one per restriction mode.
 		for _, x := range list(argN(r, 1)) {
-			m.ability(Ability{Kind: "static", Effects: []string{"rule:" + ruleWord(variantOf(x))}})
+			m.ability(Ability{Kind: "static", Effects: []string{ruleToken(variantOf(x))}})
 		}
 		return
-	case v == "CastEffect" && strings.HasPrefix(variantOf(rawArgs(r)), "AdditionalCastingCost"):
+	case v == "CastEffect" && (strings.HasPrefix(variantOf(rawArgs(r)), "AdditionalCastingCost") ||
+		variantOf(rawArgs(r)) == "OptionalAdditionalCastingCost" || castRestriction(variantOf(rawArgs(r)))):
 		// An additional casting cost is a cost, not an ability (scripts put
 		// it in the spell's Cost$).
+		return
+	case m.selfPT(r):
 		return
 	case staticRules[v]:
 		m.ability(Ability{Kind: "static", Effects: staticEffects(r)})
@@ -326,11 +336,7 @@ func (m *mtgishNorm) rule(r any) {
 		a.Targets, a.Effects = e.targets, e.effects
 		m.ability(a)
 	case "AsPermanentEnters", "AsPermanentEntersOrIsTurnedFaceUp", "AsPermanentEscapes":
-		m.ability(Ability{Kind: "replacement", Effects: enterEffects(list(argN(r, 1)))})
-	case "ClassAbilities":
-		for _, ca := range list(rawArgs(r)) {
-			m.rules(list(argN(ca, 1)))
-		}
+		m.enterReplacement(enterEffects(list(argN(r, 1))))
 	case "SagaChapters":
 		// One chapter ability per chapter number, as scripts list them.
 		for _, ch := range list(rawArgs(r)) {
@@ -343,12 +349,10 @@ func (m *mtgishNorm) rule(r any) {
 	case "LevelUp":
 		m.kw("levelup")
 		for _, l := range list(argN(r, 1)) {
-			for _, x := range list(argN(l, 2)) {
-				m.sub(x, true)
-			}
+			m.levelStatic(argN(l, 1), list(argN(l, 2)))
 		}
 	case "CDA_Color", "CDA_ColorButNotColorIdentity":
-		if strings.Contains(variantOf(rawArgs(r)), "Colorless") {
+		if cv := variantOf(rawArgs(r)); cv == "Devoid" {
 			m.kw("devoid")
 		} else {
 			m.ability(Ability{Kind: "static", Effects: []string{"cda"}})
@@ -364,12 +368,12 @@ func (m *mtgishNorm) rule(r any) {
 			m.ability(Ability{Kind: "static", Effects: []string{"cda"}})
 		}
 	case "CDA_Types":
-		if cv := variantOf(rawArgs(r)); cv == "Changeling" || strings.Contains(cv, "AllCreatureTypes") {
+		if cv := variantOf(rawArgs(r)); cv == "Changeling" {
 			m.kw("changeling")
 		} else {
 			// "Is the chosen type in addition to its other types": a
 			// type-changing static.
-			m.ability(Ability{Kind: "static", Effects: []string{"type"}})
+			m.ability(Ability{Kind: "static", Effects: []string{p2fCDATypes(rawArgs(r))}})
 		}
 	case "EnchantPermanent":
 		m.kw("enchant:" + targetToken(permanentsClasses(rawArgs(r)), "1"))
@@ -398,6 +402,10 @@ func (m *mtgishNorm) rule(r any) {
 	case "IfCardIsInOpeningHand", "AsGameBegins", "BeforeDrawingOpeningHand":
 		m.ability(Ability{Kind: "pregame"})
 	default:
+		if f, ok := extRule[v]; ok {
+			f(m, r)
+			return
+		}
 		m.ability(Ability{Kind: unmapped("Rule." + v)})
 	}
 }
@@ -416,17 +424,32 @@ func (m *mtgishNorm) spell(r any) {
 	case "SpellActions_Gift":
 		m.kw("gift")
 		e.alternatives(argsOf(r)[1:]...)
-	case "SpellActions_Overload", "SpellActions_Awaken", "SpellActions_Cleave", "SpellActions_Teamwork":
+	case "SpellActions_Awaken":
+		m.kw("awaken")
+		e.alternatives(awakenPlainBranch(argsOf(r)[1:])...)
+	case "SpellActions_Overload", "SpellActions_Cleave", "SpellActions_Teamwork":
 		m.kw(strings.ToLower(strings.TrimPrefix(v, "SpellActions_")))
 		e.alternatives(argsOf(r)[1:]...)
+	case "SpellActions_MadnessX":
+		// Cast for its madness cost (argument 0) or not: the keyword, and
+		// the two versions of the spell as alternatives.
+		m.kw("madness:" + mtgishCost(argN(r, 0)))
+		e.alternatives(argsOf(r)[1:]...)
+	case "SpellActions_AdditionalCostOptions":
+		// Which additional cost was paid: alternatives.
+		e.alternatives(list(rawArgs(r))...)
 	case "SpellActions_Tiered", "SpellActions_Spree":
-		m.kw(strings.ToLower(strings.TrimPrefix(v, "SpellActions_")))
+		mtgishModeCosts(m, strings.ToLower(strings.TrimPrefix(v, "SpellActions_")), r)
 		var alts []any
 		for _, x := range list(rawArgs(r)) {
 			alts = append(alts, argN(x, 1))
 		}
 		e.alternatives(alts...)
 	default:
+		if f, ok := extRule[v]; ok {
+			f(m, r)
+			return
+		}
 		e.walk(argsOf(r))
 		e.effects = append(e.effects, unmapped("Rule."+v))
 	}
@@ -450,9 +473,14 @@ func (m *mtgishNorm) trigger(r any) {
 	args := argsOf(r)
 	if v == "TriggerModalA" {
 		for _, ta := range list(rawArgs(r)) {
+			// Each mode is a plain [trigger, actions] pair, not a tagged node.
+			trig, acts := argN(ta, 0), argN(ta, 1)
+			if pair := list(ta); len(pair) == 2 {
+				trig, acts = pair[0], pair[1]
+			}
 			e := &effects{}
-			e.walk(argN(ta, 1))
-			for _, ev := range dedup(triggerEvents(argN(ta, 0))) {
+			e.walk(acts)
+			for _, ev := range dedup(triggerEvents(trig)) {
 				m.ability(Ability{Kind: "triggered", Event: ev, Targets: e.targets, Effects: e.effects})
 			}
 		}
@@ -464,7 +492,7 @@ func (m *mtgishNorm) trigger(r any) {
 	}
 	e := &effects{}
 	e.walk(args[len(args)-1])
-	for _, ev := range dedup(triggerEvents(args[0])) {
+	for _, ev := range mergeDamageOr(dedup(triggerEvents(args[0]))) {
 		m.ability(Ability{Kind: "triggered", Event: ev, Targets: append([]string(nil), e.targets...), Effects: append([]string(nil), e.effects...)})
 	}
 }
@@ -475,6 +503,9 @@ func triggerEvents(t any) []string {
 	v := variantOf(t)
 	switch v {
 	case "Or":
+		if ev, ok := playerOrBattleEvents(list(rawArgs(t))); ok {
+			return []string{ev}
+		}
 		var out []string
 		for _, sub := range list(rawArgs(t)) {
 			out = append(out, triggerEvents(sub)...)
@@ -486,6 +517,9 @@ func triggerEvents(t any) []string {
 				return triggerEvents(a)
 			}
 		}
+	}
+	if evs, ok := d1MtgishEvents[v]; ok {
+		return evs
 	}
 	return []string{triggerClass(v)}
 }
@@ -501,6 +535,9 @@ func triggerClass(v string) string {
 		}
 		return false
 	}
+	if c, ok := d1MtgishOverrides[v]; ok {
+		return c
+	}
 	switch {
 	case has("Upkeep"):
 		return "upkeep"
@@ -508,7 +545,9 @@ func triggerClass(v string) string {
 		return "end-step"
 	case has("BeginningOfCombat"):
 		return "combat"
-	case has("DrawStep"):
+	case has("DrawStep") && !has("Draws"):
+		// "Whenever a player draws a card except the first one they draw
+		// in their draw step" is a draw trigger (below), not the step's.
 		return "draw-step"
 	case has("MainPhase"):
 		return "main"
@@ -516,7 +555,8 @@ func triggerClass(v string) string {
 		return "class-level"
 	case has("BecomesTheTarget"):
 		return "becomes-target"
-	case has("CombatDamageToAPlayer", "CombatDamageToAnyNumberOfPlayers"), v == "WhenAnyNumberOfPlayersAreDealtCombatDamage":
+	case has("CombatDamageToAPlayer", "CombatDamageToAnyNumberOfPlayers"), v == "WhenAnyNumberOfPlayersAreDealtCombatDamage",
+		v == "WhenAPlayerIsDealtCombatDamage":
 		return "combat-damage-player"
 	case has("CombatDamage") && !has("Noncombat"):
 		return "combat-damage"
@@ -528,8 +568,12 @@ func triggerClass(v string) string {
 		return "ltb"
 	case has("EntersTheBattlefield", "EnterTheBattlefield"):
 		return "etb"
-	case v == "WhenAPermanentIsPutIntoAPlayersGraveyard":
-		// A permanent put into a graveyard is a permanent dying.
+	case strings.Contains(v, "Permanent") && strings.Contains(v, "PutIntoAPlayersGraveyard"):
+		// A permanent put into a graveyard is a permanent dying (also
+		// WhenAnyNumberOfPermanentsArePutIntoAPlayersGraveyards and
+		// WhenASpellOrAbilityCausesAPermanentToBePutIntoAPlayersGraveyard):
+		// scripts write all of them Origin$ Battlefield, Destination$
+		// Graveyard.
 		return "dies"
 	case has("PutIntoAPlayersGraveyard", "PutIntoAGraveyard"):
 		return "to-graveyard"
@@ -565,6 +609,9 @@ func triggerClass(v string) string {
 		return "untap"
 	case has("BecomesTapped", "TapsAPermanentForMana", "TappedForMana"):
 		return "tap"
+	}
+	if c, ok := extTriggerClass[v]; ok {
+		return c
 	}
 	return unmapped("Trigger." + v)
 }
@@ -602,6 +649,8 @@ func mtgishCost(c any) string {
 // protectable renders a Protection/HexproofFrom quality.
 func protectable(p any) string {
 	switch variantOf(p) {
+	case "FromActivatedAndTriggeredAbilities":
+		return "activated|triggered"
 	case "FromEverything":
 		return "everything"
 	case "FromColor":
@@ -613,7 +662,7 @@ func protectable(p any) string {
 			}
 			return strings.Join(dedup(cs), "|")
 		}
-		return strings.ToLower(strings.TrimPrefix(variantOf(pc), "Protection"))
+		return colorQuality(strings.ToLower(strings.TrimPrefix(variantOf(pc), "Protection")))
 	case "FromTypes", "FromSpells", "FromPermanents":
 		var words []string
 		walk(rawArgs(p), func(n node, enum, variant string) bool {
@@ -637,7 +686,7 @@ func affinityWord(p any) string {
 	var words []string
 	walk(p, func(n node, enum, variant string) bool {
 		switch variant {
-		case "IsCreatureType", "IsArtifactType", "IsLandType", "IsCardtype", "IsEnchantmentType":
+		case "IsCreatureType", "IsArtifactType", "IsLandType", "IsCardtype", "IsEnchantmentType", "IsSupertype":
 			if s, ok := n["args"].(string); ok {
 				words = append(words, typeWord(s))
 			}
@@ -647,40 +696,16 @@ func affinityWord(p any) string {
 	if len(words) == 0 {
 		return "*"
 	}
-	return strings.Join(dedup(words), "|")
+	return strings.Join(sorted(dedup(words)), "|")
 }
 
 // permanentsClasses extracts the target classes a Permanents filter
-// selects: the card types named positively at its top level (through And
-// and Or), or "permanent" when none is.
+// selects: the card types it names positively, Or as alternatives and And
+// as an intersection ("artifact&creature"), or "permanent" when none is.
 func permanentsClasses(p any) []string {
-	var out []string
-	var visit func(x any)
-	visit = func(x any) {
-		switch variantOf(x) {
-		case "IsCardtype":
-			if s, ok := rawArgs(x).(string); ok {
-				if w := typeWord(s); permanentTypes[w] {
-					out = append(out, w)
-				}
-			}
-		case "And", "Or":
-			for _, e := range list(rawArgs(x)) {
-				visit(e)
-			}
-		case "IsCreatureType", "IsCreatureTypeVariable":
-			out = append(out, "creature")
-		case "IsArtifactType":
-			out = append(out, "artifact")
-		case "IsLandType":
-			out = append(out, "land")
-		case "IsEnchantmentType":
-			out = append(out, "enchantment")
-		}
-	}
-	visit(p)
+	out := classesOfAlts(typeAlts(p))
 	if len(out) == 0 {
 		return []string{clsPermanent}
 	}
-	return dedup(out)
+	return out
 }

@@ -17,6 +17,7 @@ func FromGorge(name string, c *cards.Card, idx TypeIndex) []*Summary {
 		}
 		out = append(out, gorgeFace(name, f, idx))
 	}
+	gorgeCardE(c, out, idx)
 	return out
 }
 
@@ -29,22 +30,8 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		}
 	}
 	s.ManaCost = mc.String()
-	for _, t := range f.Types {
-		s.Types = append(s.Types, typeWord(t))
-	}
-	s.PT = f.PT
-	if strings.Contains(s.PT, "*") {
-		// "1+*/1+*": a characteristic-defining P/T is "*" whatever its
-		// printed base; mtgish prints every CDA half as "*".
-		p, t, _ := strings.Cut(s.PT, "/")
-		if strings.Contains(p, "*") {
-			p = "*"
-		}
-		if strings.Contains(t, "*") {
-			t = "*"
-		}
-		s.PT = p + "/" + t
-	}
+	s.Types = gorgeTypes(f.Types)
+	s.PT = gorgePT(f)
 	s.Loyalty = f.Loyalty
 
 	g := &gorgeNorm{s: s, f: f, idx: idx}
@@ -59,11 +46,23 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if intrinsicMana(f, a) {
 			continue
 		}
+		if cleaveAlternative(a) {
+			// The cleave cost's version of the spell (map_f.go).
+			g.kw("cleave")
+			continue
+		}
 		g.sa(a)
 	}
+	// Every "as this enters" replacement of the face (tapped, with
+	// counters, a choice) is one ability, the way the printed text and
+	// mtgish's AsPermanentEnters group them; scripts write one R: line each.
+	var enter *Ability
 	for i := range f.Triggers {
 		t := &f.Triggers[i]
 		if head, _, ok := kwTag(t.Params); ok && !printedExpansion(head) {
+			continue
+		}
+		if g.p2aRevealTrigger(t) || g.p2aAttachedCopy(t) || g.gorgeStaticTrigger(t, &enter) || secondaryHalf(f, t) {
 			continue
 		}
 		g.trigger(t)
@@ -74,7 +73,9 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if head, _, ok := kwTag(st.Params); ok && !printedExpansion(head) {
 			continue
 		}
-		if st.Params["CharacteristicDefining"] == "True" {
+		if st.Params["CharacteristicDefining"] == "True" && !d2KeywordOnlyCDA(st.Params) && st.Params["AddAbility"] == "" && st.Params["MayPlay"] == "" {
+			// (A script may flag an ability-granting or casting static
+			// CharacteristicDefining$ for its zone reach; that is no CDA.)
 			// One CDA ability however many statics carry it (a script may
 			// split power and toughness).
 			if !cda {
@@ -85,16 +86,12 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		}
 		g.static(st)
 	}
-	// Every "as this enters" replacement of the face (tapped, with
-	// counters, a choice) is one ability, the way the printed text and
-	// mtgish's AsPermanentEnters group them; scripts write one R: line each.
-	var enter *Ability
 	for i := range f.Repls {
 		r := &f.Repls[i]
 		if head, _, ok := kwTag(r.Params); ok && !printedExpansion(head) {
 			continue
 		}
-		if selfEnter(r) {
+		if selfEnter(r) && !g.d2InsteadEnter(r) {
 			if enter == nil {
 				enter = &Ability{Kind: "replacement"}
 			}
@@ -106,6 +103,9 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 	if enter != nil {
 		g.ability(*enter)
 	}
+	mergeSpells(s, true)
+	splitStatics(s)
+	p2aReplacementStatics(s)
 	return s
 }
 
@@ -115,7 +115,8 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 // "enters with counters" replacement. printedExpansion adds the "Prevent
 // all ... damage" shields. (A Class's level-up activated abilities are
 // dropped with every keyword AB in gorgeFace: mtgish carries them as the
-// level structure, not as abilities.)
+// level structure, not as abilities; their costs are compared as
+// class:<level>:<cost> keywords, map_a.go.)
 var printedKeywordExpansion = map[string]bool{
 	"Class": true, "ETBReplacement": true, "etbCounter": true,
 }
@@ -183,10 +184,14 @@ type gorgeNorm struct {
 	f    *cards.Face
 	idx  TypeIndex
 	mode int // gift/kicker branch being summarised (modeSA)
+
+	parked bool // a search parked its cards in the library (map_p2f.go)
+
+	trigYou bool // the trigger being summarised is its controller's own (map_p2i.go)
 }
 
 func (g *gorgeNorm) kw(tok string)            { g.s.Keywords = append(g.s.Keywords, tok) }
-func (g *gorgeNorm) ability(a Ability)        { g.s.Abilities = append(g.s.Abilities, a) }
+func (g *gorgeNorm) ability(a Ability)        { g.s.Abilities = append(g.s.Abilities, p2dGorgeAbility(a)) }
 func (g *gorgeNorm) svars() map[string]string { return g.f.SVars }
 
 // gorgeCostKeywords are the keyword heads whose parameter is a cost
@@ -217,7 +222,7 @@ var gorgeNumberKeywords = map[string]bool{
 // printed card: their meaning is summarised elsewhere (an expansion kept by
 // printedKeywordExpansion) or is not an ability in play.
 var gorgeSkippedKeywords = map[string]bool{
-	"Class": true, "ETBReplacement": true, "etbCounter": true,
+	"ETBReplacement": true, "etbCounter": true,
 	"A deck can have any number of cards named CARDNAME.": true,
 	// Deck-building and commander rules: not abilities in play, and mtgish
 	// carries no Rule for them.
@@ -232,9 +237,9 @@ var gorgeBareKeywords = map[string]bool{
 	"Prototype": true, "Splice": true, "Champion": true, "Reinforce": true, "Web-slinging": true,
 	"Recover": true, "Offering": true, "Impending": true, "Ripple": true, "Specialize": true,
 	"More Than Meets the Eye": true, "Starting intensity": true, "Haunt": true, "Firebending": true,
-	"Devour": true, "Craft": true, "Visit": true, "Level up": true, "Overload": true, "Awaken": true,
+	"Devour": true, "Craft": true, "Level up": true, "Overload": true, "Awaken": true,
 	"Entwine": true, "Escalate": true, "Teamwork": true, "Cleave": true, "Mobilize": true,
-	"Bloodthirst": true, "Spree": true, "Tiered": true,
+	"Bloodthirst": true,
 }
 
 func (g *gorgeNorm) keyword(k string) {
@@ -264,7 +269,7 @@ func (g *gorgeNorm) keyword(k string) {
 		if q == "" || strings.Contains(q, ":") || param != "" {
 			g.kw("protection:*")
 		} else {
-			g.kw("protection:" + typeWord(q))
+			g.kw("protection:" + colorQuality(typeWord(q)))
 		}
 		return
 	case head == "Hexproof" && param != "":
@@ -273,15 +278,20 @@ func (g *gorgeNorm) keyword(k string) {
 			q = q[:i]
 		}
 		for _, alt := range strings.Split(q, ",") {
-			g.kw("hexprooffrom:" + typeWord(strings.TrimPrefix(alt, "Card.")))
+			g.kw("hexprooffrom:" + colorQuality(typeWord(strings.TrimPrefix(alt, "Card."))))
 		}
 		return
 	case head == "Enchant":
 		cls := strings.SplitN(param, ":", 2)[0]
+		if strings.Contains(cls, "inZoneGraveyard") {
+			// "Enchant creature card in a graveyard".
+			g.kw("enchant:" + clsGraveyard)
+			return
+		}
 		g.kw("enchant:" + targetToken(g.idx.validClasses(cls, ""), "1"))
 		return
 	case head == "Affinity":
-		g.kw("affinity:" + typeWord(param))
+		g.kw("affinity:" + gorgeAffinity(param))
 		return
 	case head == "Gift":
 		g.kw("gift")
@@ -299,6 +309,11 @@ func (g *gorgeNorm) keyword(k string) {
 		return
 	case gorgeBareKeywords[head]:
 		g.kw(keywordWord(head))
+		g.keywordAbilities(head, param)
+		return
+	case gorgeCostKeywords[head] && param == "":
+		// A cost keyword printed without a cost (a land's Mayhem).
+		g.kw(keywordWord(head))
 		return
 	case gorgeCostKeywords[head]:
 		g.kw(keywordWord(head) + ":" + gorgeCost(param))
@@ -309,6 +324,11 @@ func (g *gorgeNorm) keyword(k string) {
 			n = "*"
 		}
 		g.kw(keywordWord(head) + ":" + n)
+		g.keywordAbilities(head, param)
+		return
+	}
+	if f, ok := extKeyword[head]; ok {
+		f(g, param)
 		return
 	}
 	if param != "" || strings.ContainsAny(head, ".$") {
@@ -342,7 +362,8 @@ func manaToken(t string) bool {
 	if _, err := strconv.Atoi(t); err == nil {
 		return true
 	}
-	for _, part := range strings.Split(t, "/") {
+	// gorgeManaSymbol first: Forge writes hybrids without a slash ("BG").
+	for _, part := range strings.Split(gorgeManaSymbol(t), "/") {
 		if len(part) != 1 || !strings.Contains("WUBRGCXSP2", strings.ToUpper(part)) {
 			return false
 		}
@@ -356,11 +377,15 @@ func (g *gorgeNorm) sa(a *cards.SA) {
 	switch a.Kind {
 	case "SP":
 		kind = "spell"
-		if a.API == "PermanentCreature" || a.API == "PermanentNoncreature" {
+		if a.API == "PermanentCreature" || a.API == "PermanentNoncreature" || p2aPlaceholderSpell(a) {
 			// The cast-a-permanent ability every permanent card has.
 			return
 		}
 	case "AB":
+	case "ST":
+		// A static ability that grants a special action (discard this
+		// any time you could cast an instant).
+		kind = "static"
 	default:
 		kind = unmapped("SA." + a.Kind)
 	}
@@ -389,8 +414,15 @@ func (g *gorgeNorm) trigger(t *cards.Trigger) {
 	if eff == nil {
 		eff = cards.ResolveSVar(g.svars(), t.Params["Execute"])
 	}
+	g.trigYou = t.Params["ValidPlayer"] == "You"
 	g.chain(e, eff, 1)
-	g.ability(Ability{Kind: "triggered", Event: gorgeTriggerClass(t.Mode, t.Params), Targets: e.targets, Effects: e.effects})
+	g.trigYou = false
+	if skipTriggerB(t, e) {
+		return
+	}
+	for _, ev := range gorgeTriggerEvents(t.Mode, t.Params) {
+		g.ability(Ability{Kind: "triggered", Event: ev, Targets: append([]string(nil), e.targets...), Effects: append([]string(nil), e.effects...)})
+	}
 }
 
 // gorgeTriggerClass maps a trigger mode and its parameters to the event
@@ -424,18 +456,28 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 		if strings.HasPrefix(p["Phase"], "Main") {
 			return "main"
 		}
+		if c := d1Phase(p); c != "" {
+			return c
+		}
 		return unmapped("Phase." + p["Phase"])
 	case "Attacks", "AttackersDeclared", "AttackersDeclaredOneTarget":
 		return "attacks"
 	case "Blocks":
+		if triggerSubject(p["ValidBlocked"]) && !triggerSubject(p["ValidCard"]) {
+			// "Whenever a creature blocks this": this becomes blocked.
+			return "blocked"
+		}
 		return "blocks"
 	case "AttackerBlocked", "AttackerBlockedByCreature":
+		if selfBlocker(p) {
+			return "blocks"
+		}
 		return "blocked"
 	case "SpellCast", "SpellCastOrCopy", "SpellCopy":
 		return "cast"
 	case "DamageDone", "DamageDoneOnce", "DamageDealtOnce", "DamageAll", "DamageDoneOnceByController":
 		combat := p["CombatDamage"] == "True"
-		player := strings.HasPrefix(p["ValidTarget"], "Player") || strings.HasPrefix(p["ValidTarget"], "Opponent")
+		player := damagesPlayer(p["ValidTarget"])
 		switch {
 		case combat && player:
 			return "combat-damage-player"
@@ -472,19 +514,41 @@ func gorgeTriggerClass(mode string, p map[string]string) string {
 	case "ClassLevelGained":
 		return "class-level"
 	}
+	if f, ok := extTrigger[mode]; ok {
+		return f(p)
+	}
 	return unmapped("Trigger." + mode)
 }
 
 // static summarises an S: line.
 func (g *gorgeNorm) static(st *cards.Static) {
+	if p2aShadowHelper(st) || gorgeStation(g, st) || g.selfGrantStatic(st) {
+		return
+	}
 	eff := gorgeStaticEffects(st.Mode, st.Params)
 	if eff == nil {
 		return
+	}
+	if st.Mode == "Continuous" {
+		if eff = g.selfGrantAbilities(st.Params, eff); len(eff) == 0 {
+			return
+		}
 	}
 	g.ability(Ability{Kind: "static", Effects: eff})
 }
 
 func gorgeStaticEffects(mode string, p map[string]string) []string {
+	if strings.Contains(mode, ",") {
+		// "Mode$ CantAttack,CantBlock": one static line, several modes.
+		var out []string
+		for _, m := range strings.Split(mode, ",") {
+			out = append(out, gorgeStaticEffects(strings.TrimSpace(m), p)...)
+		}
+		return out
+	}
+	if selfCastRestriction(mode, p) {
+		return nil
+	}
 	switch mode {
 	case "Continuous":
 		var out []string
@@ -493,13 +557,22 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 		}
 		player := strings.HasPrefix(p["Affected"], "You") || strings.HasPrefix(p["Affected"], "Player") || strings.HasPrefix(p["Affected"], "Opponent")
 		stack := p["AffectedZone"] == "Stack"
+		alsoPermanents := player && affectsPermanents(p["Affected"])
 		for _, k := range cards.SplitKeywordList(p["AddKeyword"]) {
+			if t, ok := grantedRule(k); ok {
+				out = append(out, t)
+				continue
+			}
 			if stack {
 				// "Spells you cast have storm": a spell effect.
 				out = append(out, "spell:"+grantKeyword(k))
 			} else if player {
 				// "You have hexproof": a player effect.
 				out = append(out, "player:"+grantKeyword(k))
+				if alsoPermanents {
+					// "You and Humans you control have hexproof".
+					out = append(out, "grant:"+grantKeyword(k))
+				}
 			} else {
 				out = append(out, "grant:"+grantKeyword(k))
 			}
@@ -511,7 +584,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "player:mayplayanadditionalland")
 		}
 		if p["MayLookAt"] != "" {
-			out = append(out, "player:maylookattopcardoflibraryanytime")
+			out = append(out, p2aMayLookAt(p)...)
 		}
 		if p["SetName"] != "" {
 			out = append(out, "name")
@@ -527,7 +600,7 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "setpt")
 		}
 		if p["AddType"] != "" || p["AddTypes"] != "" || p["RemoveType"] != "" || p["AddAllCreatureTypes"] != "" ||
-			p["RemoveCreatureTypes"] != "" || p["RemoveCardTypes"] != "" || p["SetCreatureTypes"] != "" {
+			p["RemoveCreatureTypes"] != "" || p["RemoveCardTypes"] != "" || p["SetCreatureTypes"] != "" || p2cTypeChange(p) {
 			out = append(out, "type")
 		}
 		if p["SetColor"] != "" || p["AddColor"] != "" {
@@ -540,13 +613,21 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 			out = append(out, "gaincontrol")
 		}
 		if p["MayPlay"] != "" {
-			out = append(out, "mayplay")
+			out = append(out, p2gMayPlay(p))
 		}
+		if p["CantHaveKeyword"] != "" {
+			// "... and can't have or gain <keyword>": a rule beside the
+			// layer effect, as mtgish's CantGainAbility.
+			out = append(out, "rule:cantgainability")
+		}
+		// (CanBlockAmount$ is read once, by d2ContinuousEffects.)
+		// (Goad$ True is "goad", d2ContinuousEffects.)
 		for _, k := range cards.SplitKeywordList(p["AddHiddenKeyword"]) {
-			out = append(out, hiddenKeywordToken(k))
+			out = append(out, p2cHiddenTokens(k)...)
 		}
+		out = append(out, d2ContinuousEffects(p)...)
 		if len(out) == 0 {
-			if p["AddSVar"] != "" {
+			if p["AddSVar"] != "" || d2IgnoreEffectCostOnly(p) {
 				// An AI hint carried as a static (AddSVar$ only): no
 				// printed ability.
 				return nil
@@ -557,8 +638,16 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 	case "ReduceCost":
 		return []string{"costreduction"}
 	case "RaiseCost":
+		if selfSpellCost(p) {
+			return nil
+		}
 		return []string{"costincrease"}
 	case "CantBlockBy":
+		if p["ValidBlocker"] != "" && (p["ValidAttacker"] == "" || p["ValidAttacker"] == "Creature") && p["ValidAttackerRelative"] == "" {
+			// "Creatures with power 7 or greater can't block": the
+			// blockers named, no attacker.
+			return []string{"rule:cantblock"}
+		}
 		if p["ValidBlocker"] != "" {
 			return []string{"rule:cantbeblockedbydefenders"}
 		}
@@ -572,6 +661,9 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 	case "CantGainLife":
 		return []string{"player:cantgainlife"}
 	case "CantBeCast":
+		if p["NumLimitEachTurn"] != "" {
+			return []string{"player:cantcastmorethannumberspellseachturn"}
+		}
 		return []string{"player:cantcastspells"}
 	case "CastWithFlash":
 		return []string{"flash"}
@@ -580,9 +672,15 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 	case "CantBeActivated":
 		return []string{"rule:cantbeactivated"}
 	case "CantPreventDamage":
+		if p["IsCombat"] == "True" && p["ValidSource"] == "" {
+			return []string{"static:combatdamagecantbeprevented"}
+		}
 		return []string{"static:damagecantbeprevented"}
 	case "ManaConvert":
 		return []string{"manaconvert"}
+	}
+	if f, ok := extStatic[mode]; ok {
+		return f(p)
 	}
 	return []string{unmapped("Static." + mode)}
 }
@@ -591,6 +689,12 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 func hiddenKeywordToken(k string) string {
 	k = strings.TrimPrefix(k, "HIDDEN ")
 	switch {
+	case strings.Contains(k, "can't attack alone"):
+		return "rule:cantattackalone"
+	case strings.Contains(k, "can't block alone"):
+		return "rule:cantblockalone"
+	case strings.Contains(k, "can only attack alone"):
+		return "rule:canonlyattackalone"
 	case strings.Contains(k, "can't block"):
 		return "rule:cantblock"
 	case strings.Contains(k, "can't attack"):
@@ -599,10 +703,17 @@ func hiddenKeywordToken(k string) string {
 		return "rule:mustattack"
 	case strings.Contains(k, "can't be blocked"):
 		return "rule:cantbeblocked"
+	case strings.Contains(k, "can only attack alone"):
+		return "rule:canonlyattackalone"
+	case strings.Contains(k, "able to block CARDNAME do so"):
+		return "rule:allcreaturesmustblockit"
 	case strings.Contains(k, "must be blocked"):
 		return "rule:mustbeblocked"
 	case strings.Contains(k, "doesn't untap"):
 		return "rule:doesntuntapduringcontrollersuntap"
+	}
+	if t := hiddenB(k); t != "" {
+		return t
 	}
 	return unmapped("hidden:" + k)
 }
@@ -637,21 +748,53 @@ func signedParam(v string) string {
 // repl summarises an R: line.
 func (g *gorgeNorm) repl(r *cards.Repl) {
 	p := r.Params
+	if eff, ok := replStatic(r, g.svars()); ok {
+		g.ability(Ability{Kind: "static", Effects: eff})
+		return
+	}
 	switch r.Event {
 	case "Untap":
+		if p["ReplaceWith"] != "" {
+			// "If it would untap during your untap step, <do something>
+			// instead": a replacement (Edge of Malacol, Freyalise's Winds).
+			g.ability(Ability{Kind: "replacement", Effects: []string{"replace:woulduntap"}})
+			return
+		}
+		if p["ValidStepTurnToController"] == "" {
+			// No untap-step restriction: "can't become untapped".
+			g.ability(Ability{Kind: "static", Effects: []string{"rule:cantbecomeuntapped"}})
+			return
+		}
 		g.ability(Ability{Kind: "static", Effects: []string{"rule:doesntuntapduringcontrollersuntap"}})
 		return
 	case "GameLoss":
+		if p["ReplaceWith"] != "" {
+			// "If you would lose the game, instead ...": a replacement.
+			g.ability(Ability{Kind: "replacement", Effects: []string{"replace:wouldlosethegame"}})
+			return
+		}
 		g.ability(Ability{Kind: "static", Effects: []string{"player:cantlosethegame"}})
 		return
 	case "GameWin":
 		g.ability(Ability{Kind: "static", Effects: []string{"player:cantwinthegame"}})
 		return
 	case "Counter":
+		if p["ReplaceWith"] != "" {
+			// "If a spell or ability would counter a spell, instead ..."
+			// (Guile): a replacement.
+			g.ability(Ability{Kind: "replacement", Effects: []string{"replace:wouldcounteraspell"}})
+			return
+		}
 		// "This spell can't be countered" / "spells you control can't be
 		// countered": a static rule printed, a replacement in Forge.
 		g.ability(Ability{Kind: "static", Effects: []string{"spell:cantbecountered"}})
 		return
+	}
+	if f, ok := extReplStatic[r.Event]; ok {
+		if eff := f(r); eff != nil {
+			g.ability(Ability{Kind: "static", Effects: eff})
+			return
+		}
 	}
 	// Replacements other than "as this enters" are compared by the event
 	// they replace (mtgish's Replace<Event> rule), not by what they do.
@@ -663,10 +806,15 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 		a.Effects = []string{"replace:wouldputintograveyard"}
 	case r.Event == "Moved" && p["Destination"] == "Battlefield":
 		a.Effects = []string{"replace:wouldenter"}
-	case r.Event == "DamageDone" && p["Prevent"] == "True":
+	case r.Event == "DamageDone" && (p["Prevent"] == "True" || p["PreventionEffect"] != ""):
+		// PreventionEffect$: a partial prevention ("prevent X of that
+		// damage") written as a ReplaceDamage, still a prevention shield.
 		a.Effects = []string{"replace:preventdamage"}
 	case r.Event == "DamageDone":
 		a.Effects = []string{"replace:woulddealdamage"}
+	case r.Event == "AddCounter" && strings.EqualFold(p["ValidCounterType"], "ENERGY"):
+		// Energy is a player counter; mtgish names its own event.
+		a.Effects = []string{"replace:wouldgetenergy"}
 	case r.Event == "AddCounter":
 		a.Effects = []string{"replace:wouldputcounters"}
 	case r.Event == "CreateToken":
@@ -678,7 +826,11 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 	case r.Event == "Discard":
 		a.Effects = []string{"replace:woulddiscard"}
 	default:
-		a.Effects = []string{unmapped("Repl." + r.Event)}
+		if f, ok := extRepl[r.Event]; ok {
+			a.Effects = f(r)
+		} else {
+			a.Effects = []string{unmapped("Repl." + r.Event)}
+		}
 	}
 	g.ability(a)
 }
@@ -693,14 +845,14 @@ func (g *gorgeNorm) enterEffects(r *cards.Repl) []string {
 	}
 	if head, kw, ok := kwTag(p); ok && head == "etbCounter" {
 		parts := strings.Split(kw, ":")
-		ct, n := "*", "1"
+		ct, n := "", "1"
 		if len(parts) > 1 {
-			ct = gorgeCounterType(parts[1])
+			ct = parts[1]
 		}
 		if len(parts) > 2 {
 			n = literalOr(parts[2], "*")
 		}
-		return []string{"counters:" + ct + ":" + n}
+		return gorgeCounterTokens(ct, n)
 	}
 	var out []string
 	for a := with; a != nil; a = a.Sub {
@@ -713,11 +865,18 @@ func (g *gorgeNorm) enterEffects(r *cards.Repl) []string {
 			out = append(out, "reveal")
 		case a.API == "Clone":
 			out = append(out, "copy")
+			out = append(out, p2jCloneExtras(a)...)
 		case a.API == "PutCounter":
-			out = append(out, "counters:"+gorgeCounterType(a.Params["CounterType"])+":"+literalOr(a.Params["CounterNum"], "1"))
+			out = append(out, gorgeCounterTokens(a.Params["CounterType"], literalOr(a.Params["CounterNum"], "1"))...)
 		case a.API == "InternalEtbReplacement" || a.API == "Cleanup":
 		default:
-			out = append(out, unmapped("Enter."+a.API))
+			if t, ok := g.d2EnterEffects(a); ok {
+				out = append(out, t...)
+			} else if f, ok := extEnterAPI[a.API]; ok {
+				out = append(out, f(a)...)
+			} else {
+				out = append(out, unmapped("Enter."+a.API))
+			}
 		}
 	}
 	return out
@@ -737,18 +896,64 @@ func literalOr(v, def string) string {
 
 // gorgeCounterType canonicalises a Forge counter type.
 func gorgeCounterType(t string) string {
-	if t == "" {
+	if strings.HasPrefix(t, "EachType") {
+		// One of each type among some permanents' counters.
 		return "*"
 	}
-	// P1P1, M1M1, P1P0, M0M1 ...
-	if len(t) == 4 && (t[0] == 'P' || t[0] == 'M') && (t[2] == 'P' || t[2] == 'M') {
-		sign := func(c byte) string {
-			if c == 'M' {
+	if strings.Contains(t, ",") {
+		// A choice among counter types ("P1P1,Flying"): not a literal.
+		return "*"
+	}
+	switch t {
+	case "", "Any", "All", "EachFromSource", "ExistingCounter", "EachNotOn":
+		// Any counter type, or each type already there.
+		return "*"
+	case "REPR":
+		// Forge's enum name for the reprieve counter.
+		return "reprieve"
+	}
+	// P1P1, M1M1, P1P0, M0M1 ... (not PUPA): a zero is "+0", as mtgish's
+	// PTCounter(0, -1) is "+0/-1".
+	if len(t) == 4 && (t[0] == 'P' || t[0] == 'M') && (t[2] == 'P' || t[2] == 'M') && digitB(t[1]) && digitB(t[3]) {
+		sign := func(c, d byte) string {
+			if c == 'M' && d != '0' {
 				return "-"
 			}
 			return "+"
 		}
-		return sign(t[0]) + t[1:2] + "/" + sign(t[2]) + t[3:4]
+		return sign(t[0], t[1]) + t[1:2] + "/" + sign(t[2], t[3]) + t[3:4]
 	}
-	return counterName(t)
+	// "First Strike", "FIRST_STRIKE" -> "firststrike", as mtgish's
+	// FirstStrikeCounter.
+	return counterName(strings.NewReplacer(" ", "", "_", "").Replace(t))
+}
+
+// affectsPermanents reports an Affected$ list naming a permanent beside a
+// player ("You,Human.YouCtrl"): the static gives the keyword to both, as
+// mtgish's PlayerEffect plus its EachPermanentLayerEffect.
+func affectsPermanents(affected string) bool {
+	for _, alt := range strings.Split(affected, ",") {
+		if !strings.HasPrefix(alt, "You") && !strings.HasPrefix(alt, "Player") && !strings.HasPrefix(alt, "Opponent") {
+			return true
+		}
+	}
+	return false
+}
+
+// grantedRule maps a granted Forge pseudo-keyword that is a blocking rule
+// ("MustBeBlockedBy Creature.Eldrazi": "must be blocked by an Eldrazi if
+// able") to the rule token mtgish's PermanentRuleEffect carries.
+func grantedRule(k string) (string, bool) {
+	if strings.HasPrefix(k, "Prevent all") && strings.Contains(k, "dealt by CARDNAME") {
+		// A prevention shield on the object (mtgish's prevention).
+		return "prevent", true
+	}
+	rest, ok := strings.CutPrefix(k, "MustBeBlockedBy ")
+	if !ok {
+		return "", false
+	}
+	if rest == "Creature" {
+		return "rule:mustbeblocked", true
+	}
+	return "rule:mustbeblockedbyadefender", true
 }

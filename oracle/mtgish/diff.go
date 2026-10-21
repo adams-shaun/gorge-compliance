@@ -36,8 +36,23 @@ func (r Row) Gap() bool {
 	return false
 }
 
-// Classes are the triage classes a ledger row may carry.
-var Classes = []string{"forge-bug", "gorge-compile", "mtgish-bug", "normalizer", "equivalent"}
+// Classes are the triage classes a ledger row may carry:
+//
+//   - forge-bug: the Forge script does not do what the printed card says;
+//   - gorge-compile: the script is right, gorge's compile of it is wrong;
+//   - mtgish-bug: mtgish's encoding does not match the printed card;
+//   - equivalent: both are right and the normalisers cannot see it;
+//   - digital-variant: an Alchemy/Arena version mix-up;
+//   - normalizer: a mapping debt (an unmapped token), held under the
+//     shrink-only maxNormalizerRows;
+//   - pending: not yet triaged by the program, held under the shrink-only
+//     maxPendingRows.
+//
+// normalizer and pending end at zero, and then leave this list. Two more
+// classes are never written in a ledger: "untriaged" (Merge's default for
+// a new disagreement, which the ratchet refuses) and ClassExcluded
+// (assigned automatically to rows of excluded tokens).
+var Classes = []string{"forge-bug", "gorge-compile", "mtgish-bug", "equivalent", "digital-variant", "normalizer", "pending"}
 
 // ValidClass reports whether c is one of Classes.
 func ValidClass(c string) bool {

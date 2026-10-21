@@ -1,7 +1,8 @@
 # mtgish card-definition cross-check
 
 Status: implemented on branch `wt/mtgish-xc`, 2026-10-20. Code: `oracle/mtgish/`,
-`cmd/mtgishxc/`. Ledgers: `oracle/mtgish/known/`.
+`cmd/mtgishxc/`. Ledgers: `oracle/mtgish/known/`. The ledger went corpus-wide
+on 2026-10-20 (branch `wt/mx-h`, the cross-check program's unit H).
 
 ## What it is
 
@@ -15,8 +16,10 @@ disagree, one of them, or the comparison, is wrong. That makes it a fourth
 independent source, and a cheap one: the whole corpus compares in about two
 seconds.
 
-The first consumers are the sets the dirty-dirac kernel plays, FDN and BLB; they
-carry a ledger. The other sets are reported with `-all` but not ratcheted.
+The ledger covers the whole corpus (every card both sides know). The sets the
+dirty-dirac kernel plays, FDN and BLB, stay named as the kernel sets: the ratchet
+logs their per-tier agreement and the `-all` report keeps a headline table for
+each.
 
 ## How
 
@@ -53,15 +56,22 @@ gap**, counted apart from disagreements and never dropped.
 
 ## Classes
 
-Every difference in a ledgered set is triaged into one class:
+Every live difference is triaged into one class:
 
 | Class | Meaning |
 |---|---|
 | `forge-bug` | the Forge script does not do what the printed card says |
 | `gorge-compile` | the script is right and gorge's compile of it is wrong |
 | `mtgish-bug` | mtgish's encoding does not match the printed card |
-| `normalizer` | a mapping debt in this check (fix it rather than ledger it) |
 | `equivalent` | both encodings are right and the normalisers cannot see it (a cost on one side is an effect on the other, one static per type against one per sentence, ...) |
+| `digital-variant` | an Alchemy/Arena version mix-up (an `A-` card against its paper text, or the reverse) |
+| `normalizer` | a mapping debt in this check (an unmapped token): fix it rather than ledger it. Capped by `maxNormalizerRows` |
+| `pending` | not yet triaged by the program (the initial corpus-wide generation). Capped by `maxPendingRows` |
+
+Two more classes never appear in a ledger: `untriaged` (what a refresh writes
+for a new disagreement; the ratchet refuses it) and `excluded` (assigned
+automatically, below). `normalizer` and `pending` are temporary: both caps end
+at 0, and then the two classes are deleted.
 
 ## The pin
 
@@ -78,21 +88,61 @@ The gorge side is the `GORGE_PIN` revision like every other target here.
 
 ## The ratchet
 
-`oracle/mtgish/known/<SET>.tsv` (FDN, BLB) lists each live difference: card,
-tier, field, the gorge-only and the mtgish-only tokens, class, note.
-`TestMtgishLedger` holds the live diff equal to the ledger in both directions:
-a new difference fails (fix the normaliser or triage it), a ledger row that no
-longer differs fails as stale (delete it). It is the shape of gorge's
-`TestEveryRepoDeckIsFullySupported`. Without `.cards` or the fetched data it
-skips with a message saying the ratchet did not run.
+The ledger is one file per tier, corpus-wide: `oracle/mtgish/known/T1.tsv` ..
+`T4.tsv`, each row card, tier, field, the gorge-only and the mtgish-only tokens,
+class, note (tab-separated, a header line, `#` comments). A row filed under
+another tier's file is an error. `TestMtgishLedger` runs every card both sides
+know and holds the live diff equal to the four files in both directions: a new
+difference fails (fix the normaliser or triage it), a ledger row that no longer
+differs fails as stale (delete it). It is the shape of gorge's
+`TestEveryRepoDeckIsFullySupported`. It also fails on a class outside the list
+above (so `untriaged` and `excluded` are refused) or an empty note. Without
+`.cards` or the fetched data it skips with a message saying the ratchet did not
+run. The corpus run takes about 1.7 s and 1.0 GB peak RSS.
+
+**Exclusions.** `oracle/mtgish/known/excluded.tsv` holds the deliberate holes,
+one per line, `kind<TAB>key<TAB>reason`:
+
+- `card<TAB>Name<TAB>reason`: the card is not compared at all. Excluded cards
+  are counted and listed in the report header.
+- `token<TAB>unmapped:X<TAB>reason`: an unmapped spelling that is deliberately
+  not mapped (Un-card mechanics, Attractions, Schemes, Planechase,
+  Alchemy-only mechanics). A row all of whose unmapped tokens are excluded gets
+  class `excluded` automatically: it needs no ledger line, is reported in its
+  own section and is not counted as a gap (the tier tables count such faces as
+  "excluded only"). A row with an excluded token and another, unexcluded one
+  is still a gap.
+
+A malformed line, an unknown kind, an empty reason, a duplicate, or an
+exclusion that matches nothing live (a card not on both sides, a token no row
+carries) fails the test, like a stale ledger row. Exclude only what really
+cannot be compared, never what is merely tedious.
+
+**The two debt caps.** `ledger_test.go` holds two shrink-only constants:
+`maxNormalizerRows` (the ledger's `normalizer` rows) and `maxPendingRows` (its
+`pending` rows). The test fails when a count exceeds its constant and logs the
+constant against the count, so a lower count prompts lowering the constant in
+the same change. The program drives both to 0, at which point any such row
+fails. At the initial generation (base `d44a1b7`) they were 5,336 and 7,048.
+
+**Refreshing.** `go run ./cmd/mtgishxc -all -write-ledger` rewrites the four
+tier files from the live diff, keeping each row's triage by key. A new gap is
+written as `normalizer`, a new disagreement as `untriaged` (or as `pending`
+with `-pending`, used once for the initial generation). The repeatable
+`-triage <file.tsv>` merges extra triaged rows (the same 7 columns) by key,
+over the ledger's own triage; a `-triage` row that matches nothing live is
+reported on stderr, never silently dropped. `-write-ledger` needs `-all`: with
+`-set` it is an error, since the ledger is corpus-wide. A `-set` run still
+reports its rows with the ledger's triage.
 
 ```sh
 make mtgish-fetch                               # once per pin
-make mtgish-xc                                  # FDN+BLB report + the ratchet
+make mtgish-xc                                  # corpus report + the ratchet
 go run ./cmd/mtgishxc -card "Prayer of Binding" # both summaries, side by side
-go run ./cmd/mtgishxc -set BLB -tier T3         # one tier's rows
-go run ./cmd/mtgishxc -set FDN -write-ledger    # refresh a ledger, keeping triage
-go run ./cmd/mtgishxc -all                      # the whole corpus, report only
+go run ./cmd/mtgishxc -set BLB -tier T3         # one set's, one tier's rows
+go run ./cmd/mtgishxc -all -tier T4             # the corpus, one tier
+go run ./cmd/mtgishxc -all -write-ledger        # refresh the ledger, keeping triage
+go run ./cmd/mtgishxc -all -write-ledger -triage a.tsv -triage b.tsv
 ```
 
 Reports go to the gitignored `.coverage/mtgish/`.
