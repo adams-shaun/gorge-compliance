@@ -331,3 +331,12 @@ func init() {
 		return e.effects
 	}
 }
+
+func init() {
+	// Actions inside a look or reveal that are shaped as the _Action of the
+	// same name ("if an artifact is revealed, put it onto the battlefield
+	// and sacrifice this artifact"; "you lose life equal to ...").
+	for _, v := range []string{"SacrificePermanent", "LoseLife", "GainLife", "TransformPermanent"} {
+		lookActionP2B[v] = true
+	}
+}
