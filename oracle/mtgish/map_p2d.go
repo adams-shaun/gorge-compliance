@@ -157,6 +157,7 @@ func drawableCount(x any) string {
 // zone").
 var p2dOriginChoice = map[string]bool{
 	"Hand,Graveyard": true, "Graveyard,Hand": true, "Hand,Command": true, "Command,Hand": true,
+	"Hand,Battlefield": true, "Battlefield,Hand": true,
 }
 
 func p2dChangeZone(api string, p map[string]string) []string {
