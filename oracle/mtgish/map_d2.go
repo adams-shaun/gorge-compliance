@@ -814,7 +814,7 @@ func hasableGrants(l any) []string {
 				out = append(out, "grant:*")
 				continue
 			}
-			out = append(out, "grant:"+keywordWord(strings.TrimPrefix(v, "Any")))
+			out = append(out, canonGrantP2B("grant:"+keywordWord(strings.TrimPrefix(v, "Any"))))
 		}
 	}
 	if len(out) == 0 {

@@ -747,7 +747,9 @@ func effectCleanupTrigger(svars map[string]string, name string) bool {
 // command zone (Defined$ Self, or no Defined$, which means the same).
 func effectSelfExile(sa *cards.SA) bool {
 	p := sa.Params
-	return sa.API == "ChangeZone" && (p["Defined"] == "" || p["Defined"] == "Self") &&
+	d := p["Defined"]
+	// Imprinted/OriginalHost: an effect the host imprinted, exiling itself.
+	return sa.API == "ChangeZone" && (d == "" || d == "Self" || d == "Imprinted" || d == "OriginalHost") &&
 		p["Origin"] == "Command" && p["Destination"] == "Exile"
 }
 
@@ -766,6 +768,8 @@ func atEOTTokens(v string) []string {
 		return []string{"delayed", "destroy"}
 	case strings.Contains(v, "Hand"):
 		return []string{"delayed", "move:battlefield>hand"}
+	case strings.Contains(v, "Library"):
+		return []string{"delayed", "move:battlefield>library"}
 	}
 	return []string{"delayed"}
 }

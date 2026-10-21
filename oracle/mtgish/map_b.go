@@ -395,7 +395,9 @@ func effectReplB(a *cards.SA, svars map[string]string) []string {
 			continue
 		}
 		switch {
-		case r.Event == "DamageDone" && r.Params["Prevent"] == "True":
+		case r.Event == "DamageDone" && (r.Params["Prevent"] == "True" || r.Params["PreventionEffect"] == "True"):
+			// PreventionEffect$: a prevention shield that also does
+			// something (ReplaceWith$), as mtgish's CreateFuturePreventDamage.
 			out = append(out, "prevent")
 		case r.Event == "Untap":
 			out = append(out, "rule:doesntuntapduringcontrollersuntap")

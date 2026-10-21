@@ -72,6 +72,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			e.add(gorgeAPIEffects(a, g.svars())...)
 		}
 		e.add(atEOTTokens(a.Params["AtEOT"])...)
+		e.add(paramTokensP2B(a)...)
 		if a.API == "Effect" {
 			// The triggers an effect creates run their own effects, as
 			// mtgish's CreateTriggerUntil actions do. An emblem's triggers
@@ -295,7 +296,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "Destroy", "DestroyAll":
 		return []string{"destroy"}
 	case "ChangeZone", "ChangeZoneAll":
-		if effectSelfExile(a) {
+		if effectSelfExile(a) || searchFollowUpP2B(a) {
 			// An effect ending itself: bookkeeping, not a move.
 			return nil
 		}
@@ -431,7 +432,10 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			if rest == "" {
 				rest = "Library"
 			}
-			out = append(out, "move:library>"+strings.ToLower(rest))
+			// One card looked at and left on top is no move.
+			if !(n == "1" && rest == "Library" && p["LibraryPosition2"] == "0") {
+				out = append(out, "move:library>"+strings.ToLower(rest))
+			}
 		}
 		return out
 	case "DigUntil":
@@ -440,6 +444,11 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 		}
 		out := []string{"diguntil"}
 		for _, k := range []string{"FoundDestination", "RevealedDestination"} {
+			if k == "FoundDestination" && p[k] == "Library" && p["FoundLibraryPosition"] == "0" ||
+				k == "RevealedDestination" && p["NoMoveRevealed"] == "True" {
+				// Left on top (a later sub-ability moves it): no move.
+				continue
+			}
 			if d := p[k]; d != "" {
 				out = append(out, "move:library>"+strings.ToLower(d))
 			}

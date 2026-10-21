@@ -29,7 +29,26 @@ func (e *effects) walk(x any) {
 			if t := lookMove(variant); t != "" {
 				e.add(t)
 			}
-			return variant == "If" || variant == "Unless"
+			if lookActionP2B[variant] {
+				// An action inside the look ("it gains haste"), shaped as
+				// the _Action of the same name.
+				e.action(n, variant)
+				return false
+			}
+			if a := argsOf(n); variant == "IfElse" && len(a) == 3 {
+				// "Instead put two of them into your hand": one branch runs.
+				e.alternatives(a[1], a[2])
+				return false
+			}
+			return variant == "If" || variant == "Unless" || variant == "MayAction" || variant == "MayActions"
+		case "_SearchLibraryAction":
+			// Steps of a search: only their enter flags carry an effect
+			// (the found card enters with a counter).
+			return true
+		case "_EnterFlag", "_ExileFlag":
+			// "Return it with a finality counter on it" (EnterFlags).
+			e.add(enterFlagP2B(n, variant)...)
+			return variant == "If" || variant == "IfPassesFilter"
 		case "_Target", "_DistributedTarget":
 			if strings.HasSuffix(variant, "TargetPlayerControls") {
 				// "Up to five target permanents target player controls":
@@ -43,6 +62,11 @@ func (e *effects) walk(x any) {
 				// "You may A or B. When you do, ...": one of the actions
 				// runs, so they are alternatives.
 				var alts []any
+				if bs := argsOf(n); len(bs) > 1 && allListsP2B(bs) {
+					// One action list per branch.
+					e.alternatives(bs...)
+					return false
+				}
 				for _, a := range argsOf(n) {
 					if l := list(a); l != nil {
 						alts = append(alts, l)
@@ -266,6 +290,8 @@ func (e *effects) action(n node, v string) {
 		// casting is the effect, as the Cast* actions.
 		e.add("play")
 		return
+	case (v == "MayCost" || v == "MustCost") && mayCostEffectP2B(e, v == "MustCost", arg(0)):
+		return
 	case wrapperActions[v]:
 		return
 	case strings.HasPrefix(v, "Reflexive_"):
@@ -289,6 +315,7 @@ func (e *effects) action(n node, v string) {
 		if t, ok := reflexiveB[strings.TrimSuffix(strings.TrimPrefix(v, "Reflexive_"), "_WhenYouDo")]; ok {
 			e.add(t)
 		}
+		e.add(reflexiveP2B(n, v)...)
 		return
 	}
 	switch v {
@@ -318,7 +345,9 @@ func (e *effects) action(n node, v string) {
 		e.add("destroy")
 	case "Exile":
 		for _, x := range list(arg(0)) {
-			e.add("move:" + exilableZone(x) + ">exile")
+			for _, z := range exilableZonesP2B(x) {
+				e.add("move:" + z + ">exile")
+			}
 		}
 	case "PutPermanentIntoItsOwnersHand", "PutEachPermanentIntoItsOwnersHand":
 		e.add("move:battlefield>hand")
@@ -534,7 +563,7 @@ func lookMove(v string) string {
 		return "move:library>graveyard"
 	case strings.Contains(v, "Exile"):
 		return "move:library>exile"
-	case strings.Contains(v, "OfLibrary"):
+	case strings.Contains(v, "OfLibrary"), strings.Contains(v, "IntoLibrary"):
 		return "move:library>library"
 	}
 	return ""
@@ -694,6 +723,9 @@ func grantToken(r any) string {
 	m.rule(r)
 	if len(m.s.Keywords) == 1 && len(m.s.Abilities) == 0 {
 		return "grant:" + keywordHeadToken(m.s.Keywords[0])
+	}
+	if t := grantTokenP2B(r, m.s); t != "" {
+		return t
 	}
 	return "grant:ability"
 }
@@ -869,7 +901,11 @@ func castEffectToken(v string) string {
 // replacementEffects maps a Replace*/PreventDamage rule to verbs.
 func replacementEffects(r any) []string {
 	v := variantOf(r)
-	return []string{"replace:" + strings.ToLower(strings.TrimPrefix(v, "Replace"))}
+	t := "replace:" + strings.ToLower(strings.TrimPrefix(v, "Replace"))
+	if c, ok := replCanonP2B[t]; ok {
+		t = c
+	}
+	return []string{t}
 }
 
 // enterEffects maps the actions of an "As this enters" replacement.

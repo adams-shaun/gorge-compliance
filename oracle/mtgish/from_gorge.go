@@ -790,6 +790,9 @@ func (g *gorgeNorm) repl(r *cards.Repl) {
 		a.Effects = []string{"replace:preventdamage"}
 	case r.Event == "DamageDone":
 		a.Effects = []string{"replace:woulddealdamage"}
+	case r.Event == "AddCounter" && strings.EqualFold(p["ValidCounterType"], "ENERGY"):
+		// Energy is a player counter; mtgish names its own event.
+		a.Effects = []string{"replace:wouldgetenergy"}
 	case r.Event == "AddCounter":
 		a.Effects = []string{"replace:wouldputcounters"}
 	case r.Event == "CreateToken":
