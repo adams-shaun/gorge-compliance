@@ -159,6 +159,14 @@ func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
 	// a CopyPermanent grants its copies, as mtgish's separate layer effect
 	// on the created token. (A Token's PumpKeywords$ is part of mtgish's
 	// token action, which is a leaf.)
+	// "Sacrifice them at the beginning of your next end step" written as
+	// AtEOTTrig$ You_<action> (a delayed trigger its controller has): as
+	// AtEOT$. A plain AtEOTTrig$ <action> is the copy's own printed
+	// trigger ("except it has '... sacrifice this token'"), which mtgish
+	// keeps inside the token.
+	if v := a.Params["AtEOTTrig"]; strings.HasPrefix(v, "You_") {
+		e.add(atEOTTokens(v)...)
+	}
 	if a.API == "CopyPermanent" {
 		for _, k := range strings.Split(a.Params["PumpKeywords"], "&") {
 			if k = strings.TrimSpace(k); k != "" {
