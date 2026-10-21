@@ -48,7 +48,9 @@ func (e *effects) walk(x any) {
 			if descend, ok := e.p2cLookAction(n, variant); ok {
 				return descend
 			}
-			return false
+			// "Put it onto the battlefield tapped with a stun counter":
+			// its enter flags are walked.
+			return variant == "PutFoundCardsOntoBattlefield"
 		case "_EnterFlag", "_ExileFlag", "_TokenFlag":
 			// "Return it with N +1/+1 counters on it"; a conditional
 			// flag's flags are walked.
@@ -857,6 +859,12 @@ func staticEffects(r any) []string {
 			out = append(out, ruleToken(variantOf(x)))
 		}
 		return out
+	case "CardEffect":
+		// "Each Vampire card you own has madness": the abilities it
+		// grants, as a layer effect's.
+		if len(a) >= 2 && p2hAllAddAbility(list(a[1])) {
+			return layerEffects(list(a[1]))
+		}
 	case "PlayerEffect", "EachPlayerEffect", "PlayerEffect_PlayerMayPayToIgnoreEffectUntil":
 		var out []string
 		for _, x := range list(a[1]) {

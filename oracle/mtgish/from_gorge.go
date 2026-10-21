@@ -668,6 +668,9 @@ func gorgeStaticEffects(mode string, p map[string]string) []string {
 	case "CantBeActivated":
 		return []string{"rule:cantbeactivated"}
 	case "CantPreventDamage":
+		if p["IsCombat"] == "True" && p["ValidSource"] == "" {
+			return []string{"static:combatdamagecantbeprevented"}
+		}
 		return []string{"static:damagecantbeprevented"}
 	case "ManaConvert":
 		return []string{"manaconvert"}
