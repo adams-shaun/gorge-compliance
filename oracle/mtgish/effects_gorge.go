@@ -554,6 +554,10 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "Regenerate", "RegenerateAll":
 		return []string{"regenerate"}
 	case "SetState":
+		if p["Mode"] == "" && p["NewState"] == "FaceDown" {
+			// "Turn it face down": mtgish's TurnPermanentFaceDown.
+			return []string{"setstate:turnfacedown"}
+		}
 		if p["Mode"] == "Transform" || p["Mode"] == "" {
 			return []string{"transform"}
 		}
