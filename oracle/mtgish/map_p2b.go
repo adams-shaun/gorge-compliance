@@ -271,3 +271,36 @@ func exilableZonesP2B(x any) []string {
 	}
 	return []string{exilableZone(x)}
 }
+
+// grantTokenP2B names a granted rule the keyword path cannot: a keyword
+// written with a rider ("protection from the chosen color; this effect
+// doesn't remove <this>", "bands with other legendary creatures"), or
+// one keyword with several parameters ("protection from black and from
+// red", which the keyword path reads as several keywords). "" if none.
+func grantTokenP2B(r any, s *Summary) string {
+	switch variantOf(r) {
+	case "ProtectionAndDoesntRemovePermanents", "Protection":
+		return "grant:protection"
+	case "BandsWithOthers":
+		return "grant:bandswithother"
+	}
+	if len(s.Abilities) == 0 && len(s.Keywords) > 1 {
+		head := keywordHeadToken(s.Keywords[0])
+		for _, k := range s.Keywords[1:] {
+			if keywordHeadToken(k) != head {
+				return ""
+			}
+		}
+		return "grant:" + head
+	}
+	return ""
+}
+
+// canonGrantP2B folds a granted keyword's mtgish spelling into the gorge
+// side's (grantKeyword: every Protection* is "protection").
+func canonGrantP2B(t string) string {
+	if strings.HasPrefix(t, "grant:protection") {
+		return "grant:protection"
+	}
+	return t
+}
