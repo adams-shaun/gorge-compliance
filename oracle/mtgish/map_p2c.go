@@ -543,7 +543,7 @@ func p2cSpellToken(v string) string {
 	case v == "CantBeCast":
 		// "Spells with the chosen name can't be cast": S:Mode$ CantBeCast.
 		return "player:cantcastspells"
-	case strings.HasPrefix(v, "IncreaseManaCost"):
+	case strings.HasPrefix(v, "IncreaseManaCost"), strings.HasPrefix(v, "AdditionalCostForEach"):
 		return "costincrease"
 	case strings.HasPrefix(v, "DecreaseManaCost") || strings.HasPrefix(v, "ReduceManaCost"):
 		return "costreduction"

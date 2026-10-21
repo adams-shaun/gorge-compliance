@@ -76,3 +76,27 @@ func p2hLookCounters(n node, v string) []string {
 	}
 	return []string{"counters:" + counterType(rawArgs(n)) + ":1"}
 }
+
+// p2hAdjust respells the tokens of an SA whose verb the gorge side names
+// differently from mtgish.
+func p2hAdjust(a *cards.SA, toks []string) []string {
+	if a.API == "TaporUntapAll" {
+		// "Tap all ... or untap all ...": mtgish's two alternatives.
+		var out []string
+		for _, t := range toks {
+			if t == "tapuntap" {
+				out = append(out, "tap", "untap")
+				continue
+			}
+			out = append(out, t)
+		}
+		return out
+	}
+	return toks
+}
+
+func init() {
+	// "Spells/activated abilities cost an additional <cost> for each <X>
+	// symbol": S:Mode$ RaiseCost with ForEachShard$ (a cost increase).
+	d2RuleSynonyms["AdditionalCostForEachColorManaSymbolInCosts"] = "costincrease"
+}
