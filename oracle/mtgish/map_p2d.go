@@ -59,13 +59,25 @@ func p2dNestedCost(a *cards.SA) []string {
 	return out
 }
 
-// costActions maps the sacrifice and discard parts of a Forge cost string.
+// p2dExileCostZone is the zone each Forge exile cost exiles from.
+var p2dExileCostZone = map[string]string{
+	"Exile": "battlefield", "ExileFromGrave": "graveyard", "ExileAnyGrave": "graveyard",
+	"ExileSameGrave": "graveyard", "ExileFromHand": "hand", "ExileFromTop": "library",
+	"ExileFromStack": "stack",
+}
+
+// costActions maps the sacrifice, exile and discard parts of a Forge cost
+// string.
 func costActions(cost string) []string {
 	var out []string
 	for _, part := range strings.Fields(cost) {
 		switch {
 		case strings.HasPrefix(part, "Sac<"):
 			out = append(out, "sacrifice")
+		case strings.HasPrefix(part, "Exile"):
+			if z, ok := p2dExileCostZone[strings.SplitN(part, "<", 2)[0]]; ok {
+				out = append(out, "move:"+z+">exile")
+			}
 		case strings.HasPrefix(part, "Discard<"):
 			n := strings.SplitN(strings.TrimPrefix(part, "Discard<"), "/", 2)[0]
 			out = append(out, "discard:"+literalOr(n, "*"))
@@ -102,6 +114,13 @@ func init() {
 		e.add("discard:"+discardableCount(argN(n, 0)), "draw:"+drawableCount(argN(n, 1)))
 	}
 	extReflexive["Discard"] = func(e *effects, n node) { e.add("discard:" + discardableCount(argN(n, 0))) }
+	// "You may exile a creature card from your graveyard. When you do":
+	// the exile, as the Exile action.
+	extReflexive["Exile"] = func(e *effects, n node) {
+		for _, x := range list(argN(n, 0)) {
+			e.add("move:" + exilableZone(x) + ">exile")
+		}
+	}
 }
 
 // drawableCount is the number of cards a mtgish Drawable draws.
