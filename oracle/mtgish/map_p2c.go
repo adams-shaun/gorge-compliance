@@ -17,6 +17,8 @@ var p2cReplSynonyms = map[string]string{
 	"ReplaceAnyNumberOfTokensWouldBeCreated": "replace:aneffectwouldcreateanynumberoftokens",
 	"ReplaceAPlayerWouldCreateTokens":        "replace:aneffectwouldcreateanynumberoftokens",
 	"ReplaceAPlayerWouldCreateAToken":        "replace:aneffectwouldcreateanynumberoftokens",
+	// Energy is a player counter in Forge (R:Event$ AddCounter).
+	"ReplaceWouldGetEnergy": "replace:wouldputcounters",
 }
 
 func init() {
