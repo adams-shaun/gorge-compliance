@@ -37,6 +37,17 @@ func (e *effects) p2cMustCost(c any) {
 // that are actions count as actions. An optional cost ("you may sacrifice
 // ...") stays a cost, as mtgish's MayCost.
 func (g *gorgeNorm) p2cCost(e *effects, a *cards.SA, depth int) {
+	// "Create a token that's a copy of ... It gains haste": the keywords
+	// a CopyPermanent grants its copies, as mtgish's separate layer effect
+	// on the created token. (A Token's PumpKeywords$ is part of mtgish's
+	// token action, which is a leaf.)
+	if a.API == "CopyPermanent" {
+		for _, k := range strings.Split(a.Params["PumpKeywords"], "&") {
+			if k = strings.TrimSpace(k); k != "" {
+				e.add("grant:" + grantKeyword(k))
+			}
+		}
+	}
 	if depth == 0 {
 		return
 	}
