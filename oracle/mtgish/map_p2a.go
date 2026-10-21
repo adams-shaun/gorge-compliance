@@ -167,6 +167,24 @@ func init() {
 	// and are excluded instead.)
 	extRule["DrawAnAdditionalHandBeforeMulligans"] = pregameRule
 	extRule["YouAreTheStartingPlayer"] = pregameRule
+	extKeyword["Prize"] = p2aPrize
+}
+
+// p2aPrize summarises K:Prize:<SVar>, an Attraction's "Prize —" ability
+// (claimed from its Visit ability): mtgish's VisitAndPrize rule walks the
+// visit and the prize actions into the one visit trigger and no keyword
+// of its own, so the prize's effects join the face's visit ability.
+func p2aPrize(g *gorgeNorm, param string) {
+	e := &effects{}
+	g.chain(e, cards.ResolveSVar(g.svars(), strings.SplitN(param, ":", 2)[0]), 1)
+	for i := range g.s.Abilities {
+		if a := &g.s.Abilities[i]; a.Kind == "triggered" && a.Event == "visit" {
+			a.Targets = append(a.Targets, e.targets...)
+			a.Effects = append(a.Effects, e.effects...)
+			return
+		}
+	}
+	g.ability(Ability{Kind: "triggered", Event: "visit", Targets: e.targets, Effects: e.effects})
 }
 
 // p2aRevealedDraw maps "<players> reveal each card they draw", which
