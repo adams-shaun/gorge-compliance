@@ -106,6 +106,11 @@ func paramTokensP2B(a *cards.SA) []string {
 			(p["Optional"] == "True" || p["ChangeValid"] != "") {
 			out = append(out, "move:library>"+strings.ToLower(d2))
 		}
+		if p["ChangeNum"] == "All" && p["DestinationZone"] != "" && p["ChangeValid"] != "" && p["RestRandomOrder"] == "True" {
+			// "Put all lands among them onto the battlefield and the rest
+			// on the bottom in a random order": the rest moves too.
+			out = append(out, "move:library>library")
+		}
 	case "ChangeZone", "ChangeZoneAll":
 		out = append(out, otherOriginsP2B(a)...)
 		if ct := p["WithCountersType"]; ct != "" {
