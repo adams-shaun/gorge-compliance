@@ -374,6 +374,8 @@ func p2cCostActions(c string) []string {
 			out = append(out, "move:battlefield>exile")
 		case "ExileFromGrave", "ExileAnyGrave":
 			out = append(out, "move:graveyard>exile")
+		case "ExileFromStack":
+			out = append(out, "move:stack>exile")
 		case "ExileFromHand":
 			out = append(out, "move:hand>exile")
 		case "ExileFromTop":
