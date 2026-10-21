@@ -166,6 +166,10 @@ func init() {
 	extAPI["AlterAttribute"] = alterAttributeB
 	extAPI["RearrangeTopOfLibrary"] = func(a *cards.SA, _ map[string]string) []string {
 		// "Look at the top N cards and put them back in any order."
+		if literalOr(a.Params["NumCards"], "1") == "1" {
+			// One card ("look at the top card"): nothing to reorder.
+			return []string{"dig:1"}
+		}
 		return []string{"dig:" + literalOr(a.Params["NumCards"], "1"), "move:library>library"}
 	}
 	extAPI["DigMultiple"] = digMultipleB

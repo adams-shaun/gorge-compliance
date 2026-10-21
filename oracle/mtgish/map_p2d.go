@@ -145,8 +145,12 @@ func p2dChangeZone(api string, p map[string]string) []string {
 // back on top, LibraryPosition$ 0): a look, not a move, as mtgish's
 // RevealTopCardOfLibrary.
 func p2dDigRevealOnly(p map[string]string) bool {
-	return p["ChangeNum"] == "All" && p["DestinationZone"] == "Library" && p["LibraryPosition"] == "0" &&
-		p["DestinationZone2"] == ""
+	if p["Optional"] == "True" {
+		// "Put it on top or bottom": the bottom is a move.
+		return false
+	}
+	all := p["ChangeNum"] == "All" || literalOr(p["ChangeNum"], "1") == literalOr(p["DigNum"], "1")
+	return all && p["DestinationZone"] == "Library" && p["LibraryPosition"] == "0" && p["DestinationZone2"] == ""
 }
 
 // p2dDigUntilShuffledBack reports a DigUntil whose revealed (or found)
@@ -155,4 +159,12 @@ func p2dDigRevealOnly(p map[string]string) bool {
 // AndShuffle. Without Shuffle$ they go to the bottom, a move.
 func p2dDigUntilShuffledBack(p map[string]string, key string) bool {
 	return p[key] == "Library" && p["Shuffle"] == "True"
+}
+
+// p2dDigRestStays reports a Dig whose unchosen cards need no move of
+// their own: they go back into the library that a following Shuffle
+// shuffles ("put any number onto the battlefield, then shuffle", mtgish's
+// PutTheRemainingCardsBackIntoLibraryAndShuffle).
+func p2dDigRestStays(a *cards.SA, dest, rest string) bool {
+	return rest == "Library" && dest != "Library" && a.Sub != nil && a.Sub.API == "Shuffle"
 }
