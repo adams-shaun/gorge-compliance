@@ -296,3 +296,17 @@ func p2cTypeChange(p map[string]string) bool {
 	}
 	return false
 }
+
+// p2cEachPlayerTokens summarises "each player creates ...": one token verb
+// per kind with a non-literal count, a copy as a copy.
+func (e *effects) p2cEachPlayerTokens(ts any) {
+	l := list(ts)
+	if len(l) == 0 {
+		e.add("token:*")
+		return
+	}
+	for _, t := range l {
+		head, _ := splitLast(tokenToken(t))
+		e.add(head + ":*")
+	}
+}

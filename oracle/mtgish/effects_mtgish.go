@@ -458,7 +458,7 @@ func (e *effects) action(n node, v string) {
 	case "BecomeTheMonarch":
 		e.add("monarch")
 	case "EachPlayerCreatesTokens":
-		e.add("token:*")
+		e.p2cEachPlayerTokens(arg(1))
 	case "PutEachExiledCardOntoTheBattlefield":
 		e.add("move:exile>battlefield")
 	case "PutPermanentOnTopOfOwnersLibrary":
@@ -592,7 +592,9 @@ func tokenToken(t any) string {
 		}
 	}
 	v := variantOf(t)
-	if strings.HasPrefix(v, "TokenCopy") || v == "TokenFromCopy" {
+	// OracleToken: "create a Mutavault token", a token of a named card
+	// (Forge: CopyPermanent DefinedName$).
+	if strings.HasPrefix(v, "TokenCopy") || v == "TokenFromCopy" || v == "OracleToken" {
 		return "tokencopy:" + count
 	}
 	if v == "ThoseTokens" {
