@@ -157,6 +157,9 @@ func p2aReplacementStatics(s *Summary) {
 
 func init() {
 	extReplStatic["Draw"] = p2aRevealedDraw
+	// Choosing the exiled card a craft-copy equipment copies is a choice
+	// feeding the copy effect, as the gorge side's ChooseCard (no token).
+	extAction["ChooseAnExiledCardToCopy"] = func(*effects, node) {}
 }
 
 // p2aRevealedDraw maps "<players> reveal each card they draw", which
@@ -193,4 +196,42 @@ func p2aMayLookAt(p map[string]string) []string {
 		out = append(out, d2MayLookAt(q))
 	}
 	return dedup(out)
+}
+
+// p2aAttachedCopy summarises "enchanted (equipped) creature is a copy of
+// the chosen card", which scripts write as a Static$ Attached trigger that
+// clones onto the attached creature until unattached (Metamorphic
+// Alteration, Dinosaur Headdress): the printed static, mtgish's copy layer
+// effect. It reports false for any other trigger.
+func (g *gorgeNorm) p2aAttachedCopy(t *cards.Trigger) bool {
+	if t.Mode != "Attached" || t.Params["Static"] != "True" {
+		return false
+	}
+	a := t.Effect
+	if a == nil {
+		a = cards.ResolveSVar(g.svars(), t.Params["Execute"])
+	}
+	if a == nil || a.API != "Clone" || a.Params["CloneTarget"] == "" {
+		return false
+	}
+	g.ability(Ability{Kind: "static", Effects: []string{"copy"}})
+	return true
+}
+
+// p2aPlaceholderSpell reports the effectless spell ability a script gives
+// a card whose only printed abilities are keywords (cascade and rebound or
+// retrace): "SP$ Pump" with nothing to pump, so that the card can be cast.
+// It is no printed ability.
+func p2aPlaceholderSpell(a *cards.SA) bool {
+	if a.Kind != "SP" || a.API != "Pump" || a.Sub != nil {
+		return false
+	}
+	for k := range a.Params {
+		switch k {
+		case "StackDescription", "SpellDescription", "AILogic":
+		default:
+			return false
+		}
+	}
+	return true
 }

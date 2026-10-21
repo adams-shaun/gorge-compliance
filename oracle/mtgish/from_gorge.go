@@ -62,7 +62,7 @@ func gorgeFace(card string, f *cards.Face, idx TypeIndex) *Summary {
 		if head, _, ok := kwTag(t.Params); ok && !printedExpansion(head) {
 			continue
 		}
-		if g.p2aRevealTrigger(t) || g.gorgeStaticTrigger(t, &enter) || secondaryHalf(f, t) {
+		if g.p2aRevealTrigger(t) || g.p2aAttachedCopy(t) || g.gorgeStaticTrigger(t, &enter) || secondaryHalf(f, t) {
 			continue
 		}
 		g.trigger(t)
@@ -373,7 +373,7 @@ func (g *gorgeNorm) sa(a *cards.SA) {
 	switch a.Kind {
 	case "SP":
 		kind = "spell"
-		if a.API == "PermanentCreature" || a.API == "PermanentNoncreature" {
+		if a.API == "PermanentCreature" || a.API == "PermanentNoncreature" || p2aPlaceholderSpell(a) {
 			// The cast-a-permanent ability every permanent card has.
 			return
 		}
