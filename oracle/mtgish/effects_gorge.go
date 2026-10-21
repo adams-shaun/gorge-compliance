@@ -426,7 +426,9 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 	case "Attach":
 		return []string{"attach"}
 	case "Dig":
-		if p["DestinationZone"] == "Exile" && (p["ChangeNum"] == "All" || p["ChangeNum"] == "") {
+		if p["DestinationZone"] == "Exile" && (p["ChangeNum"] == "All" || p["ChangeNum"] == "" && literalOr(p["DigNum"], "1") == "1") {
+			// (ChangeNum$ defaults to 1: "look at the top three, exile one
+			// of them" is a look, below.)
 			// "Exile the top N cards" is a move, not a look.
 			return []string{"move:library>exile"}
 		}
