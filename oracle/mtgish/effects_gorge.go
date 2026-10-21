@@ -61,6 +61,7 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 			// cost (depth 0) is a cost.
 			e.add("forage")
 		}
+		e.add(p2dNestedCost(a)...)
 		if t := g.idx.gorgeTargets(a); t != "" {
 			e.targets = append(e.targets, t)
 		}
@@ -299,7 +300,7 @@ func gorgeAPIEffects(a *cards.SA, svars map[string]string) []string {
 			// An effect ending itself: bookkeeping, not a move.
 			return nil
 		}
-		return []string{changeZoneToken(a.API, p)}
+		return p2dChangeZone(a.API, p)
 	case "Draw":
 		return []string{"draw:" + literalOr(p["NumCards"], "1")}
 	case "Discard":

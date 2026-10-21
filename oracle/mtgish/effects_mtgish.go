@@ -41,12 +41,11 @@ func (e *effects) walk(x any) {
 		case "_Action":
 			if variant == "ChooseAnAction" {
 				// "You may A or B. When you do, ...": one of the actions
-				// runs, so they are alternatives.
-				for _, a := range argsOf(n) {
-					if l := list(a); l != nil {
-						e.alternatives(l...)
-						return false
-					}
+				// runs, so they are alternatives. Its one field is a list of
+				// branches, each an action list.
+				if bs := list(rawArgs(n)); len(bs) > 0 && list(bs[0]) != nil {
+					e.alternatives(bs...)
+					return false
 				}
 			}
 			if variant == "IfElse" {
@@ -277,6 +276,9 @@ func (e *effects) action(n node, v string) {
 		if t, ok := reflexiveB[strings.TrimSuffix(strings.TrimPrefix(v, "Reflexive_"), "_WhenYouDo")]; ok {
 			e.add(t)
 		}
+		if f, ok := extReflexive[reflexiveHalf(v)]; ok {
+			f(e, n)
+		}
 		return
 	}
 	switch v {
@@ -330,7 +332,8 @@ func (e *effects) action(n node, v string) {
 	case "CreatePermanentsList":
 		// Names a set of permanents for the following actions.
 	case "PutACardFromHandOrGraveyardOnBattlefield":
-		e.add("move:hand>battlefield")
+		// From one of the two zones: both moves, as alternatives (map_p2d.go).
+		e.add("move:hand>battlefield", "move:graveyard>battlefield")
 	case "SearchLibrary":
 		e.add(searchToken(arg(0)))
 	case "CounterSpell":
@@ -657,6 +660,10 @@ func layerEffects(ls []any) []string {
 			out = append(out, "color")
 		case "SetName", "SetNameToTheChosenName":
 			out = append(out, "name")
+		case "ReplaceLandTypeVariableWithNewLandTypeVariable", "ReplaceCreatureTypeVariableWithNewCreatureType":
+			// A type word in the text box is changed (text-changing), as
+			// its colour-word sibling (map_d2.go), not a type change.
+			out = append(out, tokChangeText)
 		default:
 			if strings.Contains(v, "type") || strings.Contains(v, "Type") || v == "HasAllCreatureTypes" {
 				out = append(out, "type")
