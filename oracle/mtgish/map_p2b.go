@@ -1,6 +1,7 @@
 package mtgish
 
 import (
+	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge/engine/cards"
@@ -316,3 +317,19 @@ func searchFollowUpP2B(a *cards.SA) bool {
 	return a.API == "ChangeZone" && p["Origin"] == "Library" && p["Defined"] == "" &&
 		strings.Contains(p["ChangeType"], "IsRemembered") && p["ValidTgts"] == ""
 }
+
+func init() {
+	// "[+2], then ..." inside an effect (a die result): a loyalty change,
+	// as the script's PutCounter/RemoveCounter LOYALTY.
+	extAction["Loyalty"] = func(e *effects, n node) {
+		if n := intOr(rawArgs(n)); n < 0 {
+			e.add("countersremove")
+		} else {
+			e.add("counters:loyalty:" + itoaP2B(n))
+		}
+	}
+	// "Attach it to a player" (a Curse): the attach, as AttachPermanentToPermanent.
+	extAction["AttachPermanentToAPlayer"] = func(e *effects, _ node) { e.add("attach") }
+}
+
+func itoaP2B(n int) string { return strconv.Itoa(n) }
