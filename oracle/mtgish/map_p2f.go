@@ -251,3 +251,27 @@ func p2fThreeZoneSearch(o string) bool {
 	}
 	return len(zs) == 3 && zs["Graveyard"] && zs["Hand"] && zs["Library"]
 }
+
+func init() {
+	// "If the copy is a permanent spell, it gains haste": the condition
+	// wraps the copy's modifiers (SpellEffect.IfPermanentSpell); the
+	// ability gained is the same grant (c1CopyWithEffects).
+	for _, v := range []string{"CopySpellWithModifiers", "CopySpellAndMayChooseNewTargetsWithEffects"} {
+		extAction[v] = func(e *effects, n node) {
+			a := argsOf(n)
+			if len(a) < 2 {
+				c1CopyWithEffects(e, n)
+				return
+			}
+			var mods []any
+			for _, x := range list(a[1]) {
+				if variantOf(x) == "IfPermanentSpell" {
+					mods = append(mods, argsOf(x)...)
+					continue
+				}
+				mods = append(mods, x)
+			}
+			c1CopyWithEffects(e, node{"_Action": variantOf(n), "args": []any{a[0], mods}})
+		}
+	}
+}
