@@ -694,6 +694,9 @@ func grantToken(r any) string {
 	if len(m.s.Keywords) == 1 && len(m.s.Abilities) == 0 {
 		return "grant:" + keywordHeadToken(m.s.Keywords[0])
 	}
+	if t, ok := p2cOneKeywordGrant(m.s); ok {
+		return t
+	}
 	return "grant:ability"
 }
 

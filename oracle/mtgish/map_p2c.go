@@ -343,3 +343,20 @@ func p2cGoadAction(t string) string {
 	}
 	return t
 }
+
+// p2cOneKeywordGrant reports a granted rule that is one keyword with
+// several qualities ("protection from green and from white", which the
+// normaliser splits into one keyword token per quality): Forge grants it
+// as one keyword.
+func p2cOneKeywordGrant(s *Summary) (string, bool) {
+	if len(s.Keywords) < 2 || len(s.Abilities) != 0 {
+		return "", false
+	}
+	head := keywordHeadToken(s.Keywords[0])
+	for _, k := range s.Keywords[1:] {
+		if keywordHeadToken(k) != head {
+			return "", false
+		}
+	}
+	return "grant:" + head, true
+}
