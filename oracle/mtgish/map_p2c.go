@@ -218,3 +218,42 @@ func p2cStaticEffects(g *gorgeNorm, st *cards.Static) []string {
 	g.s.Abilities = saved
 	return out
 }
+
+// p2cLookAction summarises a look-at/reveal-the-top sub-action that is
+// not a move of the looked-at cards: an ordinary action written in the
+// look's own enum ("if it's ..., this spell deals 8 damage to that
+// player"), a wrapper whose nested sub-actions are walked, or casting a
+// spell from among the cards (gorge: Play). ok is false for the rest
+// (choices, piles), which stay nothing.
+func (e *effects) p2cLookAction(n node, v string) (descend, ok bool) {
+	switch {
+	case strings.Contains(v, "MayCast") || strings.Contains(v, "MayPlay"):
+		e.add("play")
+		return false, true
+	case wrapperActions[v] || v == "IfElse" || v == "RepeatThisProcess" || v == "RepeatableActions":
+		if v == "MayCost" {
+			// A look's optional pick ("you may put a land card from
+			// among them onto the battlefield") is that look's move.
+			if t := lookMove(variantOf(rawArgs(n))); t != "" {
+				e.add(t)
+			} else {
+				e.action(n, v)
+			}
+			return false, true
+		}
+		return true, true
+	}
+	sub := &effects{}
+	sub.action(n, v)
+	if len(sub.effects) == 0 {
+		return false, false
+	}
+	for _, t := range sub.effects {
+		if IsUnmapped(t) {
+			return false, false
+		}
+	}
+	e.add(sub.effects...)
+	e.targets = append(e.targets, sub.targets...)
+	return !leafActions[v], true
+}
