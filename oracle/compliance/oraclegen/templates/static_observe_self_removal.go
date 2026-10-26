@@ -84,7 +84,7 @@ func staticPreserveETBProbe(reg *cards.Registry, f *cards.Face, name string, req
 			continue
 		}
 		it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"611.3", "613"}, sc)
-		it.XAnswers = oraclegen.XAnswersForScenario(checked, sc, oraclegen.ModeNumbers(f), nil)
+		it.XAnswers = oraclegen.XAnswersForScenario(reg, checked, sc, oraclegen.ModeNumbers(f), nil)
 		it.Ignore = base.Ignore
 		it.XAbility = base.XAbility
 		return it, true

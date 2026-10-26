@@ -90,7 +90,7 @@ func grantedReplacementPreventItem(reg *cards.Registry, f *cards.Face, name stri
 		return oraclegen.Item{}, false
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"614.1a", "615.1"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, true
 }
 
@@ -171,6 +171,6 @@ func grantedReplacementUntapItem(reg *cards.Registry, f *cards.Face, name string
 		return oraclegen.Item{}, false
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"614.1a", "616.1"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, true
 }

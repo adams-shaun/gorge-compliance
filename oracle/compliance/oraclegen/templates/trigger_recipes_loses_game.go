@@ -174,7 +174,7 @@ func losesGameServe(reg *cards.Registry, f *cards.Face, name string, req levelb.
 		}
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, TriggerFires.Version, []string{"603.2", "800.4a"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), castSteps)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), castSteps)
 	if board.ID != "" {
 		// A served board item's own steps keep the answers its template
 		// scripted (a recipe's answer post-processing, such as a choice

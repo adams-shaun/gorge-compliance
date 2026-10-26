@@ -44,6 +44,6 @@ func staticPlayerProtectionItem(reg *cards.Registry, f *cards.Face, name string,
 		return oraclegen.Item{}, false
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"611.3", "702.16j"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, true
 }

@@ -75,7 +75,7 @@ func mayPlayRiderFires(reg *cards.Registry, f *cards.Face, name string, req leve
 		it.XAbility = make([]string, len(sc.Steps))
 		copy(it.XAbility, base.XAbility)
 	}
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), castSteps)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), castSteps)
 	return it, nil
 }
 

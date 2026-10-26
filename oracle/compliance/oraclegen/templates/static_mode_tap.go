@@ -89,7 +89,7 @@ func tapPowerValueItem(reg *cards.Registry, f *cards.Face, name string, req leve
 		return skip(fmt.Sprintf("crew option still offered without the card (ok=%v fails=%v)", ok, controlRes.Fails))
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"702.121a"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 

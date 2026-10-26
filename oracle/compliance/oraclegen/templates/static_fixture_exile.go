@@ -273,7 +273,7 @@ func staticExileOfferScenario(reg *cards.Registry, f *cards.Face, name string, r
 		return oraclegen.Item{}, false
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"601.3"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, true
 }
 
@@ -365,7 +365,7 @@ func staticExileDonorScenario(reg *cards.Registry, f *cards.Face, name string, r
 		return oraclegen.Item{}, false
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"611.3", "613"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, true
 }
 
@@ -560,7 +560,7 @@ func staticExileOpponentOfferVictim(reg *cards.Registry, f *cards.Face, name str
 				continue
 			}
 			it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"601.3"}, sc)
-			it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+			it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 			return it, true
 		}
 	}

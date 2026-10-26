@@ -391,7 +391,7 @@ func activateWithFixture(reg *cards.Registry, f *cards.Face, name string, req le
 		}
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, ActivateAbility.Version, []string{"602.2"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), targetSteps)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), targetSteps)
 	// A forced first-card pick (SearchPicks' re-run of a declined exile-look
 	// ask): XMage poses that ask on its target queue, so the pick's answer is
 	// retargeted from the choice form.

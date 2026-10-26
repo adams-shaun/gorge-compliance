@@ -146,8 +146,8 @@ func ChooseTargets(sc Scenario, ds []rules.OracleDecision) (Scenario, map[int]bo
 // castSteps is the set of cast step indices whose targets ChooseTargets took
 // from the cast; those target decisions travel through castSpell and are not
 // scripted a second time.
-func XAnswersForScenario(res rules.OracleResult, sc Scenario, modes map[string]int, castSteps map[int]bool) [][]XAnswer {
-	return xanswersForScenario(res, sc, modes, castSteps)
+func XAnswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenario, modes map[string]int, castSteps map[int]bool) [][]XAnswer {
+	return xanswersForScenario(reg, res, sc, modes, castSteps)
 }
 
 // TargetSkipsFor derives the XMage explicit-skip plan for a cast whose

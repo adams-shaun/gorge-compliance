@@ -45,8 +45,10 @@ const defaultForgeOracleDir = "/mnt/sata/gorge-training/forgeoracle"
 // The contract the Forge driver reads (DESIGN section 5.2 records the reasons):
 //
 //   - A divided allocation (Twin Bolt, Forked Bolt, distribute counters) is
-//     not a field: gorge poses it as its own decision AFTER the target ask,
-//     a "choose_n" with resume "damage_split", whose options are the chosen
+//     not a field: it is its own decision AFTER the target ask, a
+//     "choose_n" with resume "damage_split" (for a spell gorge announces the
+//     division at cast, CR 601.2d, and oraclegen.CastDivisions restores the
+//     decision at the step the spell resolves in), whose options are the chosen
 //     targets in order (pick_refs) and whose pick_idx repeats a target's
 //     index once per point it receives. min == max == the total. The target
 //     ask's own "divided" is the literal total only for a triggered ability
@@ -137,7 +139,9 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 			return err
 		}
 		g, gerr := rules.RunOracleScenarioJSON(reg, it.Raw())
-		decisions := g.Decisions
+		// A divided spell's shares reach the driver as a "damage_split"
+		// decision (the contract above), which gorge now announces at cast.
+		decisions := oraclegen.CastDivisions(reg, it.Scenario, g)
 		if gerr != nil || decisions == nil {
 			decisions = []rules.OracleDecision{}
 		}

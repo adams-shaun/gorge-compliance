@@ -97,7 +97,7 @@ func castWithFlashOtherItem(reg *cards.Registry, f *cards.Face, name string, req
 			return skip("the p1-main control did not refuse the probe cast: " + strings.Join(cres.Fails, " "))
 		}
 		it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"117.1a"}, sc)
-		it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+		it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 		return it, nil
 	}
 	return skip("no probe spell's cast the grant admits replays")
@@ -148,7 +148,7 @@ func castWithFlashSelfItem(reg *cards.Registry, f *cards.Face, name string, req 
 		return skip("the condition-removed control did not refuse the cast: " + strings.Join(cres.Fails, " "))
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"117.1a"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 

@@ -271,7 +271,7 @@ func manaTapWith(reg *cards.Registry, f *cards.Face, name string, req levelb.Req
 		return it, false, fired
 	}
 	it = oraclegen.NewLevelBItem(name, req.Key, TriggerFires.Version, []string{"603.2"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), castSteps)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), castSteps)
 	it.XAbility = make([]string, len(sc.Steps))
 	it.XAbility[activateStepIndex(sc.Steps)] = s.prefix
 	return it, true, fired

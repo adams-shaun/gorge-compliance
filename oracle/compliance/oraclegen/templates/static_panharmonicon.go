@@ -164,7 +164,7 @@ func panharmoniconItem(reg *cards.Registry, f *cards.Face, name string, req leve
 			continue
 		}
 		it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, cr, sc)
-		it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+		it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 		return it, nil
 	}
 	return skip("no probe's trigger was doubled by the card (2 stack entries with it, 1 without)")

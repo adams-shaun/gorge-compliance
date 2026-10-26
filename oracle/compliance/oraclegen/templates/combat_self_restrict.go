@@ -101,7 +101,7 @@ func selfRestrictionFinish(reg *cards.Registry, f *cards.Face, name, mode string
 		return staticSkip(name, mode, "card is not an untapped battlefield permanent at the checkpoint")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, cr, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 

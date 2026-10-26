@@ -255,8 +255,7 @@
      "eq": 1
     }
    ],
-   "xmage": "PrimalClayTest#testClayCopyPTOnBattlefield",
-   "known_bug": "XP[destroyall-filter-reads-printed-pt]: The Battle of Bywater's DestroyAll Creature.powerGE3 matches with c.SpecContext, which binds no derived P/T, so numericPred reads objectPower (printed */* = 0) instead of the layer value 3 (engine/effects/zone_bulk.go:144 MatchesSpecCtx; engine/effects/filter_value.go:240-245 currentPower falls back when !sc.HasDerivedPT). Probe: Clay chosen 3/3 (assert pt 3/3 passes) survives Bywater while a Hill Giant dies. (Also Cryptoplasm copying Clay becomes 0/0 instead of 3/3 -- CR 707.2 copiable as-enters P/T -- but it dies either way.) CR 613.1, 613.4b."
+   "xmage": "PrimalClayTest#testClayCopyPTOnBattlefield"
   },
   {
    "name": "test-plasma-clone",

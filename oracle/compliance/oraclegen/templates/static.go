@@ -282,7 +282,7 @@ func disableTriggersItem(reg *cards.Registry, f *cards.Face, name string, req le
 		return skip("trigger still on the stack with the card")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"614.1"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -335,7 +335,7 @@ func combatDamageToughnessItem(reg *cards.Registry, f *cards.Face, name string, 
 		return skip("the card does not raise the assigned damage")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"510.1"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 

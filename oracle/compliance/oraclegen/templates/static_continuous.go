@@ -231,7 +231,7 @@ func staticContinuous(reg *cards.Registry, f *cards.Face, name string, req level
 			// scripted from the runner's observed picks at the step the
 			// fixture's activation runs.
 			if cond.reanswers {
-				base.XAnswers = oraclegen.XAnswersForScenario(res, base.Scenario,
+				base.XAnswers = oraclegen.XAnswersForScenario(reg, res, base.Scenario,
 					oraclegen.ModeNumbers(f), castStepIndices(base.Scenario.Steps))
 				if cond.beholdPick != "" {
 					beholdFromHand(base.XAnswers, base.Scenario.Steps, name, cond.beholdPick)
