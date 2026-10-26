@@ -1280,6 +1280,17 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[yes]})
 		case "choose_n":
+			if d.Resume == "search_zones" {
+				// gorge's CR 701.23 "and/or" zone choice (cr-g51, Say Its
+				// Name's "search your graveyard, hand, and/or library"): one
+				// multi-pick over the zones. XMage asks it as card-specific
+				// chooseUse prompts ("Search your graveyard?", "...hand?",
+				// "...library?"), which no zone label answers; a scripted
+				// label is instead consumed by an earlier cost target and
+				// fails the replay. Left unscripted, as it was before gorge
+				// posed the ask.
+				continue
+			}
 			if routing.divideOwned[i] {
 				// The division ask's shares were emitted with its target
 				// ask (dividedTargetAnswers).
