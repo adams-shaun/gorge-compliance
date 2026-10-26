@@ -24,6 +24,12 @@ type answerRouting struct {
 	// recipient set, never by step and seat alone.
 	splitTarget map[int]int
 	targetSplit map[int]int
+	// targetDivide maps a divided target ask to the CR 601.2d / 603.3d
+	// division ask gorge posed for it as the ability was put on the stack
+	// (a choose whose picks are "divide" options, one per target);
+	// divideOwned marks that ask, whose shares the target ask emits.
+	targetDivide map[int]int
+	divideOwned  map[int]bool
 	// manaBool marks a CR 603.5 optional-trigger boolean whose ability
 	// resolves straight into the mana colour ask that follows it in the same
 	// step: XMage's counterpart trigger is mandatory (its mana effect poses
@@ -57,6 +63,7 @@ type answerRouting struct {
 func newAnswerRouting(ds []rules.OracleDecision) *answerRouting {
 	r := &answerRouting{ds: ds, soleCost: map[int]bool{}, opponent: map[int]int{},
 		splitTarget: map[int]int{}, targetSplit: map[int]int{},
+		targetDivide: map[int]int{}, divideOwned: map[int]bool{},
 		manaBool: map[int]bool{}, playBool: map[int]bool{},
 		manaHoist: map[int]XAnswer{}, manaHoisted: map[int]bool{}}
 	for i := range ds {
@@ -152,6 +159,23 @@ func newAnswerRouting(ds []rules.OracleDecision) *answerRouting {
 			r.targetSplit[i] = j
 			claimed[j] = true
 			break
+		}
+	}
+	// Since gorge cr-g04 a divided ability announces its division as it is
+	// put on the stack: a free division (more points than targets, two or
+	// more targets) is a "divide" ask right after the target ask, whose
+	// picks name the target each point above the first goes to.
+	for i := range ds {
+		d := ds[i]
+		if d.Kind != "target" || d.Divided <= 0 || len(d.PickRefs) < 2 {
+			continue
+		}
+		if _, ok := r.targetSplit[i]; ok {
+			continue
+		}
+		if j := divideAsk(ds, i); j >= 0 && !r.divideOwned[j] && ds[j].Options == len(d.PickRefs) {
+			r.targetDivide[i] = j
+			r.divideOwned[j] = true
 		}
 	}
 	return r

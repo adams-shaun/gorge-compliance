@@ -75,7 +75,7 @@ func staticGrantFaceDownItem(reg *cards.Registry, f *cards.Face, name string, re
 		return oraclegen.Item{}, false
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"613.1f", "708.2a", "702.168d"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	it.XAbility = []string{"", "", xtext, ""}
 	return it, true
 }

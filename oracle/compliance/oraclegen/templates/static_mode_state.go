@@ -131,7 +131,7 @@ func unspentManaItem(reg *cards.Registry, f *cards.Face, name string, req levelb
 		return skip("card is not on the battlefield at the checkpoint")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"500.4"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -182,7 +182,7 @@ func noCleanupDamageItem(reg *cards.Registry, f *cards.Face, name string, req le
 		return skip(fmt.Sprintf("the card's damage is not marked across cleanup (damage %d)", op.Damage))
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"514.2"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -230,7 +230,7 @@ func ignoreLegendRuleItem(reg *cards.Registry, f *cards.Face, name string, req l
 		return skip("the duplicate was not both kept with the card on the battlefield")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"704.5j"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -316,7 +316,7 @@ func cantBeCopiedItem(reg *cards.Registry, f *cards.Face, name string, req level
 		return skip(fmt.Sprintf("the copy spell still minted a copy of the card (stack %v)", stackSources(res)))
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"707.10"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -402,6 +402,6 @@ func cantPutCounterItem(reg *cards.Registry, f *cards.Face, name string, req lev
 		return skip("the Aura is not attached at the checkpoint")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"701.25a"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }

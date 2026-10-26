@@ -63,7 +63,7 @@ func TestCompositeMayUsesRecordedMultiCardSubset(t *testing.T) {
 			} else if len(after.Permanents) != 3 || after.Permanents[0].Name == after.Permanents[1].Name || after.Permanents[1].Name == after.Permanents[2].Name {
 				t.Fatalf("battlefield fixture does not contain distinct moved objects: %+v", after.Permanents)
 			}
-			got := xanswersForScenario(res, sc, nil, nil)
+			got := xanswersForScenario(nil, res, sc, nil, nil)
 			want := [][]XAnswer{nil, tc.want}
 			if !reflect.DeepEqual(got, want) {
 				t.Fatalf("composite choices = %#v, want %#v", got, want)
@@ -87,7 +87,7 @@ func TestCompositeMaySkipsUnrelatedObjectPickBeforeCardSelector(t *testing.T) {
 	if len(unrelated.ObjectPicks) != 1 || unrelated.PickKinds[0] == "discard" || len(cardPick.ObjectPicks) != 2 {
 		t.Fatal("fixture must distinguish an unrelated object target from the two-card discard selector")
 	}
-	got := xanswersForScenario(rules.OracleResult{
+	got := xanswersForScenario(nil, rules.OracleResult{
 		Snapshots: []rules.OracleSnapshot{before, before, after},
 		Decisions: []rules.OracleDecision{election, unrelated, cardPick},
 	}, sc, nil, nil)

@@ -74,7 +74,7 @@ func staticWebSlingingGrantItem(reg *cards.Registry, f *cards.Face, name string,
 		return oraclegen.Item{}, false
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"611.3", "601.2b"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	it.XAbility = make([]string, len(sc.Steps))
 	copy(it.XAbility[1:], crewXab)
 	return it, true

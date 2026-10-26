@@ -95,7 +95,7 @@ func cantPreventDamageItem(reg *cards.Registry, f *cards.Face, name string, req 
 		return skip(fmt.Sprintf("the combat damage did not land with the card on the battlefield (p1 life %d)", lifeOf(res, 1)))
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"615.6"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -154,7 +154,7 @@ func cantAttackUnlessTaxItem(reg *cards.Registry, f *cards.Face, name string, re
 		return skip(fmt.Sprintf("control does not offer the attack (ok=%v fails=%v)", ok, cres.Fails))
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"508.1g"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -233,7 +233,7 @@ func cantBlockUnlessTaxItem(reg *cards.Registry, f *cards.Face, name string, req
 		return skip("control blocks with no mana for the tax")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"509.1d"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -273,7 +273,7 @@ func manaConvertCaseItem(reg *cards.Registry, f *cards.Face, name string, req le
 		return skip("the probe did not resolve onto the battlefield")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"609.4b"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -330,6 +330,6 @@ func manaConvertAbilityItem(reg *cards.Registry, f *cards.Face, name string, req
 		return skip("the activation's grant did not reach the target")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"609.4b"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }

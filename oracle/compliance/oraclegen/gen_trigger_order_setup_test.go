@@ -51,7 +51,7 @@ func TestTriggerOrderSetupPosedReachesXAnswersForScenario(t *testing.T) {
 	if len(sc.Setup["p0"].Battlefield) != 2 {
 		t.Fatalf("precondition: setup must place both sources, got %v", sc.Setup)
 	}
-	got := xanswersForScenario(rules.OracleResult{Decisions: []rules.OracleDecision{d}}, sc, nil, nil)
+	got := xanswersForScenario(nil, rules.OracleResult{Decisions: []rules.OracleDecision{d}}, sc, nil, nil)
 	want := [][]XAnswer{{{0, "setup_choice", "Adrenaline Jockey"}}}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("xanswersForScenario = %#v, want %#v (setup threaded to the retiming)", got, want)

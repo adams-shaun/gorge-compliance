@@ -35,7 +35,7 @@ func canAttackDefenderItem(reg *cards.Registry, f *cards.Face, name string, req 
 		}
 		it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"702.3"}, sc)
 		it.Compare = []string{"offered"}
-		it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+		it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 		return it, nil
 	}
 	// A defender is the control: it cannot attack without the source static.
@@ -52,7 +52,7 @@ func canAttackDefenderItem(reg *cards.Registry, f *cards.Face, name string, req 
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"702.3"}, sc)
 	it.Compare = []string{"offered"}
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -83,7 +83,7 @@ func cantBlockByItem(reg *cards.Registry, f *cards.Face, name string, req levelb
 		return staticSkip(name, "CantBlockBy", fmt.Sprintf("block remains offered with source (ok=%v fails=%v)", ok, res.Fails))
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"509.1"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -102,7 +102,7 @@ func cantBeActivatedItem(reg *cards.Registry, f *cards.Face, name string, req le
 		return staticSkip(name, "CantBeActivated", "begin-combat control does not offer ability: "+why)
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"602.2"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -163,7 +163,7 @@ func staticCastOffer(reg *cards.Registry, f *cards.Face, name string, req levelb
 		}
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"601.2"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 

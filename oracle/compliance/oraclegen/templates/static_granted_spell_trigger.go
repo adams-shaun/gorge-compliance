@@ -93,7 +93,7 @@ func staticGrantedSpellTriggerItem(reg *cards.Registry, c *cards.Card, f *cards.
 			continue
 		}
 		it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, grantedSpellTriggerCR(st), with)
-		it.XAnswers = oraclegen.XAnswersForScenario(res, with, oraclegen.ModeNumbers(f), nil)
+		it.XAnswers = oraclegen.XAnswersForScenario(reg, res, with, oraclegen.ModeNumbers(f), nil)
 		return it, true
 	}
 	return oraclegen.Item{}, false

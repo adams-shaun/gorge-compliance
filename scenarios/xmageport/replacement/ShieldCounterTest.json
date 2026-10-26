@@ -55,8 +55,7 @@
      }
     }
    ],
-   "xmage": "ShieldCounterTest#testNoncombatDamage",
-   "known_bug": "XP[shield-counter-unimplemented]: Shield counters have no rules reader (only engine/effects/counters.go:633 names SHIELD) (see ShieldCounterTest#testCombatDamage; engine/rules/replacement_damage.go never consults SHIELD), so Lightning Bolt kills Disciplined Duelist instead of removing its shield counter. CR 122.1c."
+   "xmage": "ShieldCounterTest#testNoncombatDamage"
   },
   {
    "name": "test-combat-damage",
@@ -128,8 +127,7 @@
      "eq": 1
     }
    ],
-   "xmage": "ShieldCounterTest#testCombatDamage",
-   "known_bug": "XP[shield-counter-unimplemented]: Shield counters (CR 122.1c) have no rules reader: no replacement in engine/rules/replacement_damage.go or engine/rules/sba.go removes a shield counter instead of damage/destruction (grep SHIELD finds only engine/effects/counters.go:633 CounterType docs), so Disciplined Duelist dies to combat damage despite its counter (setup probe: SHIELD counter present). CR 122.1c."
+   "xmage": "ShieldCounterTest#testCombatDamage"
   },
   {
    "name": "test-destroy-effect",
@@ -185,8 +183,7 @@
      }
     }
    ],
-   "xmage": "ShieldCounterTest#testDestroyEffect",
-   "known_bug": "XP[shield-counter-unimplemented]: Shield counters have no rules reader (only engine/effects/counters.go:633 names SHIELD) (see ShieldCounterTest#testCombatDamage; no destroy replacement in engine/rules/replacement.go), so Murder destroys Disciplined Duelist instead of removing its shield counter. CR 122.1c."
+   "xmage": "ShieldCounterTest#testDestroyEffect"
   },
   {
    "name": "test-damage-prevention",

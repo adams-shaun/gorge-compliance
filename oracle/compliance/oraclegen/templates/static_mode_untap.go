@@ -104,7 +104,7 @@ func untapOtherPlayerItem(reg *cards.Registry, f *cards.Face, name string, req l
 		return skip("the control's witness is not still tapped in p1's untap step")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"502.2"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -190,6 +190,6 @@ func untapOtherPlayerProbeItem(reg *cards.Registry, c *cards.Card, f *cards.Face
 		return skip("the control's probe is not still tapped")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"502.2"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }

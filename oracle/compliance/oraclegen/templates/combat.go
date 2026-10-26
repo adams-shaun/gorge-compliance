@@ -94,7 +94,7 @@ func combatRequirement(reg *cards.Registry, f *cards.Face, name string, req leve
 	}
 	sc.SetupAnswers = append(sc.SetupAnswers, oraclegen.SetupTargetDeclines(res.Decisions)...)
 	it := oraclegen.NewLevelBItem(name, req.Key, CombatAttack.Version, []string{"506", "508", "509", "510"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), castSteps)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), castSteps)
 	return it, nil
 }
 

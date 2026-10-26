@@ -56,7 +56,7 @@ func panharmoniconEquippedItem(reg *cards.Registry, f *cards.Face, name string, 
 			continue
 		}
 		it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"603.2d", "301.5"}, sc)
-		it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+		it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 		return it, true
 	}
 	return oraclegen.Item{}, false

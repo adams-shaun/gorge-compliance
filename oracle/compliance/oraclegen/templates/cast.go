@@ -220,7 +220,7 @@ func castWithProbes(reg *cards.Registry, f *cards.Face, name, mana string, slots
 						}
 					}
 					it.Scenario = sc
-					it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), castSteps)
+					it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), castSteps)
 					if forced {
 						it.XAnswers = oraclegen.RetargetForcedLookPicks(it.XAnswers, res.Decisions)
 					}

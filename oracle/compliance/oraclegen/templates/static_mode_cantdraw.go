@@ -65,7 +65,7 @@ func cantDrawItem(reg *cards.Registry, f *cards.Face, name string, req levelb.Re
 		return skip(fmt.Sprintf("hand is %d with the card on the battlefield, want %d", got, want))
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"614.1"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 

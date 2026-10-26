@@ -625,7 +625,7 @@ func bookkeepingItem(reg *cards.Registry, f *cards.Face, name string, req levelb
 		cr = append(cr, "400.7")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, TriggerFires.Version, cr, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(b.res, sc, oraclegen.ModeNumbers(f), castSteps)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, b.res, sc, oraclegen.ModeNumbers(f), castSteps)
 	for _, x := range b.xab {
 		if x != "" {
 			it.XAbility = append([]string(nil), b.xab...)

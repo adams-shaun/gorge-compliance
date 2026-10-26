@@ -63,7 +63,7 @@ func offBattlefieldGatedGrantItem(reg *cards.Registry, f *cards.Face, name strin
 		return oraclegen.Item{}, staticGatedControlOfferedReason, false
 	}
 	item := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"611.3", "613"}, sc)
-	item.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	item.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return item, "", true
 }
 
