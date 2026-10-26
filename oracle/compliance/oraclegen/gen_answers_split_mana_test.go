@@ -1,6 +1,7 @@
 package oraclegen
 
 import (
+	"encoding/json"
 	"strings"
 	"testing"
 
@@ -143,9 +144,11 @@ func twinBoltRegistry(t *testing.T) *cards.Registry {
 
 // TestXAnswersTwinBoltEndToEnd exercises the divided-target derivation against
 // a real engine run: cast Twin Bolt (TargetMin$ 1, TargetMax$ 2,
-// DividedAsYouChoose$ 2) at two distinct creatures, and assert the engine's
-// damage_split decision carries the two chosen targets and that XAnswers turns
-// it into two "^X=" target answers.
+// DividedAsYouChoose$ 2) at two distinct creatures. gorge announces that
+// forced one-each division at cast without an ask (CR 601.2d), so
+// castDivisions restores the damage_split decision carrying the two chosen
+// targets at the resolve step, and XAnswersForScenario turns it into two "^X="
+// target answers.
 func TestXAnswersTwinBoltEndToEnd(t *testing.T) {
 	reg := twinBoltRegistry(t)
 	const raw = `{
@@ -166,15 +169,23 @@ func TestXAnswersTwinBoltEndToEnd(t *testing.T) {
 	if len(res.Fails) != 0 {
 		t.Fatalf("Twin Bolt scenario failed: %v\n%s", res.Fails, strings.Join(res.Transcript, "\n"))
 	}
+	var sc Scenario
+	if err := json.Unmarshal([]byte(raw), &sc); err != nil {
+		t.Fatal(err)
+	}
+	ds := castDivisions(reg, sc, res)
 	var split *rules.OracleDecision
-	for i := range res.Decisions {
-		if res.Decisions[i].Resume == "damage_split" {
-			split = &res.Decisions[i]
+	for i := range ds {
+		if ds[i].Resume == "damage_split" {
+			split = &ds[i]
 			break
 		}
 	}
 	if split == nil {
-		t.Fatalf("no damage_split decision posed; decisions: %+v", res.Decisions)
+		t.Fatalf("no damage_split decision restored; decisions: %+v", ds)
+	}
+	if split.Step != 1 {
+		t.Errorf("damage_split at step %d, want the resolve step 1", split.Step)
 	}
 	if split.Kind != "choose_n" || split.Min != 2 || split.Max != 2 {
 		t.Fatalf("split shape = kind %q min %d max %d, want choose_n 2 2", split.Kind, split.Min, split.Max)
@@ -182,7 +193,7 @@ func TestXAnswersTwinBoltEndToEnd(t *testing.T) {
 	if len(split.PickRefs) != 2 || split.PickRefs[0] == split.PickRefs[1] {
 		t.Fatalf("split did not choose two distinct targets: %+v", split.PickRefs)
 	}
-	answers := XAnswers(res.Decisions, len(res.Snapshots), nil)
+	answers := XAnswersForScenario(reg, res, sc, nil, nil)
 	var got []XAnswer
 	for _, step := range answers {
 		for _, a := range step {
@@ -266,5 +277,63 @@ func TestXAnswersDesolationOfSmaugEndToEnd(t *testing.T) {
 		if got[i].Value != want[i] {
 			t.Errorf("amount %d = %q, want %q", i, got[i].Value, want[i])
 		}
+	}
+}
+
+// TestCastDivisionsArcLightningAsked: Arc Lightning (3 damage divided among
+// one, two or three targets) at two creatures leaves one free point, so gorge
+// poses the CR 601.2d division ask while casting (a choose whose picks are
+// "divide" options). castDivisions folds that ask into the resolve step's
+// damage_split (2 to the picked target, 1 to the other) and drops the ask, so
+// no stray choice answer reaches XMage.
+func TestCastDivisionsArcLightningAsked(t *testing.T) {
+	reg := twinBoltRegistry(t)
+	const raw = `{
+  "name": "arc-lightning-split", "cr": ["601.2d"], "why": "asked cast-time division",
+  "setup": {
+    "p0": {"hand": ["Arc Lightning"]},
+    "p1": {"battlefield": ["Grizzly Bears", "Serra Angel"]}
+  },
+  "steps": [
+    {"op": "cast", "seat": 0, "card": "p0:Arc Lightning", "mana": "CCR", "targets": ["p1:Grizzly Bears", "p1:Serra Angel"]},
+    {"op": "resolve"}
+  ]
+}`
+	res, err := rules.RunOracleScenarioJSON(reg, []byte(raw))
+	if err != nil {
+		t.Fatalf("Arc Lightning scenario did not run: %v", err)
+	}
+	if len(res.Fails) != 0 {
+		t.Fatalf("Arc Lightning scenario failed: %v\n%s", res.Fails, strings.Join(res.Transcript, "\n"))
+	}
+	if divideAsk(res.Decisions, castRootTarget(res.Decisions, 0)) < 0 {
+		t.Fatalf("precondition: gorge posed no cast-time division ask: %+v", res.Decisions)
+	}
+	var sc Scenario
+	if err := json.Unmarshal([]byte(raw), &sc); err != nil {
+		t.Fatal(err)
+	}
+	ds := castDivisions(reg, sc, res)
+	for _, d := range ds {
+		for _, k := range d.PickKinds {
+			if k == "divide" {
+				t.Fatalf("the division ask survived castDivisions: %+v", d)
+			}
+		}
+	}
+	answers := XAnswersForScenario(reg, res, sc, nil, nil)
+	var got []string
+	for _, step := range answers {
+		for _, a := range step {
+			if a.Kind != "target" || !strings.Contains(a.Value, "^X=") {
+				t.Errorf("unexpected answer %+v", a)
+				continue
+			}
+			got = append(got, a.Value)
+		}
+	}
+	want := []string{"p1:Grizzly Bears^X=2", "p1:Serra Angel^X=1"}
+	if strings.Join(got, ",") != strings.Join(want, ",") {
+		t.Fatalf("answers = %v, want %v", got, want)
 	}
 }

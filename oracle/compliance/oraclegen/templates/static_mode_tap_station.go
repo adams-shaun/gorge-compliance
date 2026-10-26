@@ -54,7 +54,7 @@ func tapPowerValueStationItem(reg *cards.Registry, f *cards.Face, name string, r
 		return skip(fmt.Sprintf("the probe holds %d charge counters, want the card's toughness %d", p.Counters["CHARGE"], tough))
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"702.184a"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	it.XAbility = []string{"Station", ""}
 	return it, nil
 }

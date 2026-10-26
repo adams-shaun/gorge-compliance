@@ -489,7 +489,7 @@ func offerItem(reg *cards.Registry, f *cards.Face, name string, req levelb.Requi
 		it.XAbility = make([]string, len(sc.Steps))
 		copy(it.XAbility[1+len(t.prelude):], t.attackXAbility)
 	}
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, true
 }
 

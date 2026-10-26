@@ -72,7 +72,7 @@ func activateAsIfHasteItem(reg *cards.Registry, f *cards.Face, name string, req 
 		return skip(fmt.Sprintf("the sick probe's ability is still withheld with the card (ok=%v fails=%v)", ok, res.Fails))
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"302.6"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -138,7 +138,7 @@ func activationsPowerUpItem(reg *cards.Registry, f *cards.Face, name string, req
 		return skip(fmt.Sprintf("the second power-up activation did not happen (counters %d)", countersOf(res)))
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"602.5b"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -209,7 +209,7 @@ func plotZoneItem(reg *cards.Registry, f *cards.Face, name string, req levelb.Re
 		return skip("card is not on the battlefield at the checkpoint")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"701.34a"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -270,7 +270,7 @@ func ignoreHexproofItem(reg *cards.Registry, f *cards.Face, name string, req lev
 		return skip("the hexproof creature survived the burn it was targeted with")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"702.11b"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 
@@ -371,6 +371,6 @@ func cantBeSuspectedItem(reg *cards.Registry, f *cards.Face, name string, req le
 		return skip("the card is not attached at the checkpoint")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"702.157"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }

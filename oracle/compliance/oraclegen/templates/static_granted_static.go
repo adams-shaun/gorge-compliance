@@ -138,7 +138,7 @@ func grantedStaticControl(sc oraclegen.Scenario, name string, pre int) oraclegen
 // answers and, for a characteristic grant, the keyword opt-in.
 func grantedStaticItem(f *cards.Face, name string, req levelb.Requirement, sc oraclegen.Scenario, res rules.OracleResult, cr []string, keywords bool) oraclegen.Item {
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, cr, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(nil, res, sc, oraclegen.ModeNumbers(f), nil)
 	if keywords {
 		it.Compare = []string{oraclediff.CompareKeywords}
 	}

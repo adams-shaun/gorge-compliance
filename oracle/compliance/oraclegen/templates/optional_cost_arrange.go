@@ -42,7 +42,7 @@ func paidArrangeToGraveyard(reg *cards.Registry, f *cards.Face, paid oraclegen.I
 	if !ok || len(moved.Fails) != 0 {
 		return oraclegen.Item{}, false
 	}
-	derived := oraclegen.XAnswersForScenario(moved, out.Scenario, oraclegen.ModeNumbers(f), castStepIndices(out.Scenario.Steps))
+	derived := oraclegen.XAnswersForScenario(reg, moved, out.Scenario, oraclegen.ModeNumbers(f), castStepIndices(out.Scenario.Steps))
 	xa := make([][]oraclegen.XAnswer, len(out.Scenario.Steps))
 	copy(xa, paid.XAnswers)
 	for i := range steps {

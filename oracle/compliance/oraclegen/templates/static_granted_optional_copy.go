@@ -135,7 +135,7 @@ func staticGrantedCopyCostItem(reg *cards.Registry, c *cards.Card, f *cards.Face
 			continue
 		}
 		it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"611.3", g.cr}, with)
-		it.XAnswers = oraclegen.XAnswersForScenario(res, with, oraclegen.ModeNumbers(f), nil)
+		it.XAnswers = oraclegen.XAnswersForScenario(reg, res, with, oraclegen.ModeNumbers(f), nil)
 		return it, true
 	}
 	return oraclegen.Item{}, false

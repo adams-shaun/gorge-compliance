@@ -51,6 +51,6 @@ func activationsExhaustUnboundedItem(reg *cards.Registry, f *cards.Face, name st
 		return skip(fmt.Sprintf("the exhaust ability is not re-activated on the next turn (ok=%v fails=%v)", ok, res.Fails))
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"702.177a", "602.5b"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }

@@ -132,7 +132,7 @@ func TestCombatDamageAnswersTrampleAssignment(t *testing.T) {
 	// that serves rows (gen_composite.go wires the prepend into it), so the
 	// test asserts its return. If the wire is reverted, the decision stream
 	// at step 2 loses its leading assignment answers and this test fails.
-	out := XAnswersForScenario(res, sc, nil, nil)
+	out := XAnswersForScenario(nil, res, sc, nil, nil)
 	if len(out) != len(sc.Steps) {
 		t.Fatalf("wired answers cover %d steps, want %d", len(out), len(sc.Steps))
 	}
@@ -167,7 +167,7 @@ func TestCombatDamageAnswersNoDialogWhenFullyBlocked(t *testing.T) {
 		{Permanents: []rules.OracleSnapPerm{}},
 	}}
 	out := make([][]XAnswer, 4)
-	XAnswersForScenario(res, sc, nil, nil)
+	XAnswersForScenario(nil, res, sc, nil, nil)
 	prependCombatDamageAnswers(res, sc, out)
 	for i, as := range out {
 		if len(as) != 0 {
@@ -196,7 +196,7 @@ func TestCombatDamageAnswersNoneWithoutTrample(t *testing.T) {
 		{Permanents: []rules.OracleSnapPerm{}},
 	}}
 	out := make([][]XAnswer, 4)
-	XAnswersForScenario(res, sc, nil, nil)
+	XAnswersForScenario(nil, res, sc, nil, nil)
 	prependCombatDamageAnswers(res, sc, out)
 	for i, as := range out {
 		if len(as) != 0 {

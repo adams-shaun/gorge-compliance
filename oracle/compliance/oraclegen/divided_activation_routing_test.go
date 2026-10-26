@@ -26,7 +26,7 @@ func TestDividedActivationTargetsScriptedAsShares(t *testing.T) {
 		{"cast", nil},
 	} {
 		sc := Scenario{Steps: []Step{{Op: tc.op, Seat: 0, Card: "p0:X", Targets: []string{"p0:Grizzly Bears"}}, {Op: "resolve"}}}
-		got := xanswersForScenario(rules.OracleResult{Decisions: []rules.OracleDecision{ask}}, sc, nil, map[int]bool{0: true})
+		got := xanswersForScenario(nil, rules.OracleResult{Decisions: []rules.OracleDecision{ask}}, sc, nil, map[int]bool{0: true})
 		var step0 []XAnswer
 		if len(got) > 0 {
 			step0 = got[0]
@@ -39,7 +39,7 @@ func TestDividedActivationTargetsScriptedAsShares(t *testing.T) {
 	plain := ask
 	plain.Divided = 0
 	sc := Scenario{Steps: []Step{{Op: "activate", Seat: 0, Card: "p0:X", Targets: []string{"p0:Grizzly Bears"}}}}
-	if got := xanswersForScenario(rules.OracleResult{Decisions: []rules.OracleDecision{plain}}, sc, nil, map[int]bool{0: true}); len(got) > 0 && len(got[0]) > 0 {
+	if got := xanswersForScenario(nil, rules.OracleResult{Decisions: []rules.OracleDecision{plain}}, sc, nil, map[int]bool{0: true}); len(got) > 0 && len(got[0]) > 0 {
 		t.Errorf("undivided activation scripted %v, want nothing", got[0])
 	}
 }

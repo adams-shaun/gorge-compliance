@@ -163,8 +163,7 @@
      "eq": 0
     }
    ],
-   "xmage": "EnsoulArtifactTest#test_BoostDisappearedOnBlink",
-   "known_bug": "XP[flicker-keeps-attachments]: gorge reuses the ObjID across zone changes; the Move fold clears only the moving object's own AttachedTo (engine/events/apply_zone.go:894), and the attachment SBA only checks the bearer's current zone (engine/rules/attach.go:115), so after Momentary Blink returns Darksteel Citadel within one resolution, Ensoul Artifact stays attached (also reproduced with Rancor on a blinked Grizzly Bears staying 4/2). CR 400.7, 704.5m."
+   "xmage": "EnsoulArtifactTest#test_BoostDisappearedOnBlink"
   }
  ]
 }

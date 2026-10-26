@@ -98,7 +98,7 @@ func alternativeCostEquipItem(reg *cards.Registry, f *cards.Face, name string, r
 	}
 	// The equip target travels on the activate step (the driver queues a
 	// step's targets), so it is not scripted a second time as an answer.
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), map[int]bool{0: true})
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), map[int]bool{0: true})
 	if len(it.XAnswers) < len(it.Steps) {
 		grown := make([][]oraclegen.XAnswer, len(it.Steps))
 		copy(grown, it.XAnswers)

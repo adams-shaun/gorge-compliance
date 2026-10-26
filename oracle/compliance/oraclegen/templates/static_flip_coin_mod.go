@@ -83,6 +83,6 @@ func flipCoinModItem(reg *cards.Registry, f *cards.Face, name string, req levelb
 		return skip("card is not on the battlefield at the checkpoint")
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"705.2", "705.3"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }

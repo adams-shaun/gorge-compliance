@@ -147,6 +147,6 @@ func counterWith(reg *cards.Registry, f *cards.Face, name, mana string, pre prec
 		return oraclegen.Item{}, false
 	}
 	it.Scenario = sc
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), castSteps)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), castSteps)
 	return it, true
 }

@@ -80,7 +80,7 @@ func staticCraftedGainsItem(reg *cards.Registry, c *cards.Card, f *cards.Face, n
 		return oraclegen.Item{}, false
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"702.167", "613.1f", "605.3a"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	it.XAnswers = scriptPreludeActivationCost(it.XAnswers, sc.Steps[:len(craft)], cost, len(sc.Steps), res.Decisions)
 	// The gained ability is a fixed-colour mana ability XMage activates by
 	// its rule text with no colour dialog; gorge's pick among the back

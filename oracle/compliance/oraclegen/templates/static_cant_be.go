@@ -38,7 +38,7 @@ func serveOffered(reg *cards.Registry, f *cards.Face, name, mode string, req lev
 		return staticSkip(name, mode, "control does not offer the option: "+why)
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{cr}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
 	return it, nil
 }
 

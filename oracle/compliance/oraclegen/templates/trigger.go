@@ -464,7 +464,7 @@ func triggerServe(reg *cards.Registry, f *cards.Face, name string, req levelb.Re
 		}
 	}
 	it = oraclegen.NewLevelBItem(name, req.Key, TriggerFires.Version, []string{"603.2"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), castSteps)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), castSteps)
 	if forced {
 		it.XAnswers = oraclegen.RetargetForcedLookPicks(it.XAnswers, res.Decisions)
 	}

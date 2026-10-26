@@ -1280,6 +1280,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[yes]})
 		case "choose_n":
+			if routing.divideOwned[i] {
+				// The division ask's shares were emitted with its target
+				// ask (dividedTargetAnswers).
+				continue
+			}
 			if routing.manaHoistedPick(i) {
 				// The colour answer was hoisted to the trigger-order span's
 				// queue position (manaHoistSpan); emitting it here too would
@@ -1889,6 +1894,21 @@ func dividedTargetAnswers(r *answerRouting, i int) []XAnswer {
 	n := len(d.PickRefs)
 	if j, ok := r.targetSplit[i]; ok {
 		return damageSplitAnswers(r.ds[j])
+	}
+	if j, ok := r.targetDivide[i]; ok {
+		// The announced division: every target takes 1, and each pick of
+		// the division ask adds 1 to the target at that option index.
+		as := make([]XAnswer, 0, n)
+		for k, ref := range d.PickRefs {
+			share := 1
+			for _, p := range r.ds[j].PickIdx {
+				if p == k {
+					share++
+				}
+			}
+			as = append(as, XAnswer{d.Seat, "target", ref + "^X=" + strconv.Itoa(share)})
+		}
+		return as
 	}
 	as := make([]XAnswer, 0, n)
 	for k, ref := range d.PickRefs {

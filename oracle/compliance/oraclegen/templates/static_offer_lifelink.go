@@ -66,7 +66,7 @@ func staticSpellLifelinkItem(reg *cards.Registry, c *cards.Card, f *cards.Face, 
 		return oraclegen.Item{}, false
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"611.3", "702.15"}, with)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, with, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, with, oraclegen.ModeNumbers(f), nil)
 	return it, true
 }
 

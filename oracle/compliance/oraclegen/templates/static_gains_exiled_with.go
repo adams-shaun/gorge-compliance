@@ -70,7 +70,7 @@ func gainsExiledWithItem(reg *cards.Registry, f *cards.Face, name string, req le
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"613.1f", "602.2"}, sc)
 	// Both activate steps' targets travel on the step.
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), map[int]bool{0: true, 3: true})
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), map[int]bool{0: true, 3: true})
 	it.XAbility = []string{srcPrefixes[idx], "", "", probePrefixes[0], ""}
 	return it, true
 }

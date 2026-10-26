@@ -89,7 +89,7 @@ func altCostExiledWithLifeItem(reg *cards.Registry, f *cards.Face, name string, 
 		return oraclegen.Item{}, false
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"118.9", "601.2b", "601.2f", "614.1"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), castStepIndices(sc.Steps))
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), castStepIndices(sc.Steps))
 	return it, true
 }
 
@@ -131,7 +131,7 @@ func altCostExileRepriceItem(reg *cards.Registry, c *cards.Card, f *cards.Face, 
 		return oraclegen.Item{}, false
 	}
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticApplies.Version, []string{"118.9", "601.2f"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(res, sc, oraclegen.ModeNumbers(f), castStepIndices(sc.Steps))
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), castStepIndices(sc.Steps))
 	// XMage poses the alternative cost as a "use the alternative cost?" ask
 	// that gorge's elected cast option answers implicitly (the Leyline of
 	// Mutation shape, static_alternative_cost.go): script the yes lead at
