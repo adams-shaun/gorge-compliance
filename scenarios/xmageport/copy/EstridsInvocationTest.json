@@ -108,7 +108,7 @@
     }
    ],
    "xmage": "EstridsInvocationTest#testCopyAura",
-   "known_bug": "XP[etb-clone-whitelist-missing-addtriggers]: Estrid's Invocation's DB$ Clone carries AddTriggers$/AddSVars$/AILogic$, none in the as-enters Clone whitelist (engine/effects/clone_params.go:279-282 cloneETBShapeKeys; engine/rules/cast_etbchoice.go:165), so no copy election is offered at all (transcript: cast, then the 'Feather of Flight' answers are unconsumed and Grizzly Bears stays 2/2). Even once offered, the Aura copy would hit clone-into-aura-no-enchant-choice (engine/rules/aura_entry.go:92-95). CR 707.9a/707.9b, CR 303.4f."
+   "known_bug": "XP[clone-into-aura-no-enchant-choice]: the copy election is posed (per triage at 2cdff82e8), but Estrid's Invocation's copy of Feather of Flight (an Aura) is never asked what it enchants as it enters (CR 303.4f; gorge's printed-face nonCastAuraEntrant/auraEntryChoice path does not cover a clone-into-Aura entry): the Aura copy stays unattached and dies, so Grizzly Bears stays 2/2 (observed p0:Grizzly Bears P/T 2/2, want 3/2). Tracked in gorge as the parked issue cr-g239-clone-into-aura-enchant-choice. CR 303.4f, 707.2, 707.9b."
   }
  ]
 }
