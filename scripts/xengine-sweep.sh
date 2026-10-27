@@ -43,6 +43,8 @@
 #   XENGINE_GO_JOBS       concurrent play stages, a positive integer (default 1:
 #                         strictly serial; see the ledger merge below)
 #   XENGINE_WINDOWS       1 (default) passes -windows to play
+#   XENGINE_TAPE_TURNS    comma-separated turn counts passed to play as -tape-turns
+#                         (default none): the prefixes `xengine calib` reads
 #   XENGINE_JVM_WAIT      max seconds to wait for a JVM slot (default 21600)
 #   XENGINE_JVM_POLL      poll interval in seconds (default 30)
 #   XENGINE_FORGE_WAIT / XENGINE_FORGE_MEM, XENGINE_XMAGE_WAIT / XENGINE_XMAGE_MEM
@@ -192,6 +194,7 @@ play_stage() { # set chunk dir (reads <dir>/ledger-in.tsv when snapshot_into mad
 	local s=$1 c=$2 d=$3 args
 	args=(play -set "$s" -chunk "$c" -games "$games" -seed "$seed" -out "$d")
 	[ "${XENGINE_WINDOWS:-1}" = 0 ] || args+=(-windows)
+	[ -z "${XENGINE_TAPE_TURNS:-}" ] || args+=(-tape-turns "$XENGINE_TAPE_TURNS")
 	case " $followers " in *" xmage "*) args+=(-xmage) ;; esac
 	[ ! -e "$d/ledger-in.tsv" ] || args+=(-ledger "$d/ledger-in.tsv")
 	run_stage xe "${args[@]}"
