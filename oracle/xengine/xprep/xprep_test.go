@@ -202,3 +202,70 @@ func TestPrepareRefusesSpelling(t *testing.T) {
 		t.Errorf("control item refused: %+v", ref)
 	}
 }
+
+// TestPreparePassPositions: a prepared item has one xmage_pos entry per step,
+// set exactly on the pass steps and equal to gorge's checkpoint after the step;
+// Moved marks a pass that changed the turn or step and Resolves one that
+// removed a stack object, and no pass is both (the object resolves first).
+func TestPreparePassPositions(t *testing.T) {
+	_, _, ws, items := prepared(t, 2)
+	var moved, resolves int
+	for k, it := range items {
+		if len(it.XPos) != len(it.Steps) {
+			t.Errorf("%s: %d xmage_pos for %d steps", it.ID, len(it.XPos), len(it.Steps))
+			continue
+		}
+		snaps := ws[k].g.Snapshots
+		for i, st := range it.Steps {
+			p := it.XPos[i]
+			if (st.Op == "pass") != (p != nil) {
+				t.Errorf("%s step %d (%s): xmage_pos %v", it.ID, i, st.Op, p)
+				continue
+			}
+			if p == nil {
+				continue
+			}
+			after := snaps[i+1]
+			if p.Turn != after.Turn || p.Step != after.Step || p.Active != after.Active {
+				t.Errorf("%s step %d: position %+v, gorge stood at turn %d %s active %d", it.ID, i, *p, after.Turn, after.Step, after.Active)
+			}
+			if p.Moved && p.Resolves {
+				t.Errorf("%s step %d: a pass that moved the step cannot also resolve", it.ID, i)
+			}
+			if p.Resolves && len(snaps[i].Stack) == 0 {
+				t.Errorf("%s step %d: resolves with an empty stack", it.ID, i)
+			}
+			if p.Moved {
+				moved++
+			}
+			if p.Resolves {
+				resolves++
+			}
+		}
+	}
+	t.Logf("%d passes moved the step, %d resolved an object", moved, resolves)
+	if moved == 0 {
+		t.Error("sample has no pass that moves the step")
+	}
+}
+
+func TestStackLost(t *testing.T) {
+	a := rules.OracleSnapStack{Kind: "spell", Source: "p0:Shock", Controller: 0}
+	b := rules.OracleSnapStack{Kind: "ability", Source: "p0:Imp", Controller: 0}
+	for _, c := range []struct {
+		name          string
+		before, after []rules.OracleSnapStack
+		want          bool
+	}{
+		{"both empty", nil, nil, false},
+		{"unchanged", []rules.OracleSnapStack{a}, []rules.OracleSnapStack{a}, false},
+		{"emptied", []rules.OracleSnapStack{a}, nil, true},
+		{"resolved, trigger pushed", []rules.OracleSnapStack{a}, []rules.OracleSnapStack{b}, true},
+		{"pushed only", []rules.OracleSnapStack{a}, []rules.OracleSnapStack{a, b}, false},
+		{"one of two copies left", []rules.OracleSnapStack{a, a}, []rules.OracleSnapStack{a}, true},
+	} {
+		if got := stackLost(c.before, c.after); got != c.want {
+			t.Errorf("%s: stackLost = %v, want %v", c.name, got, c.want)
+		}
+	}
+}
