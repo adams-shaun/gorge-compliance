@@ -1136,6 +1136,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 registerAliases(g);
                 snaps.add(snapshot(info, g));
             });
+            mergePassPositions(sc);
             JsonArray steps = steps(sc);
             JsonArray xans = sc.has("xmage_answers") && sc.get("xmage_answers").isJsonArray()
                     ? sc.getAsJsonArray("xmage_answers") : new JsonArray();
@@ -1260,6 +1261,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * Every other op keeps seat 0, which acts last on the turn it is on.
      */
     private TestPlayer checkpointSeat(String op, JsonObject st, int stepIdx) {
+        if (op.equals("pass") && isPassRun(steps(sc0), stepIdx)) {
+            // The active seat acts first at the step the pass reached, and
+            // XMage runs its whole queue there before the other seat acts.
+            return seat(activeSeat);
+        }
         if (op.equals("pass") && isActiveP1Pair(steps(sc0), stepIdx, activeSeat)
                 && passAction(steps(sc0), stepIdx) == PASS_PAIR_SECOND
                 && !pairEndsMidResolution(steps(sc0), stepIdx)) {
@@ -2812,6 +2818,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * then seat 0 passes to resolve the top object (CR 117.4). Queues nothing
      * like PASS_PAIR_FIRST; the pair's second pass is PASS_PAIR_SECOND. */
     static final int PASS_P1_PAIR_FIRST = 5;
+    /** A pass of a recorded whole game (an xengine tape or window): the step
+     * carries the position gorge reached after it ("xpos", from the item's
+     * xmage_pos). Any run of passes follows CR 117.4 from that position alone:
+     * the pass that finds a non-empty stack resolves its top object, the one
+     * that finds it empty moves the game to the next step. */
+    static final int PASS_RUN = 6;
 
     /** The XMage commands a pass step queues on the active player, the seat
      * that carries every checkpoint. */
@@ -2868,6 +2880,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * object, so p0's pass leaves the stack as it was and only p1's pass
      * resolves. A lone p0 pass hands priority to the p1 cast that follows. */
     static int passAction(JsonArray steps, int index, int activeSeat) {
+        if (isPassRun(steps, index)) {
+            return PASS_RUN;
+        }
         if (isActiveOwnPass(steps, index, activeSeat)) {
             return PASS_ACTIVE_OWN;
         }
@@ -2880,6 +2895,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         if (!isOp(steps, index, "pass")) {
             throw new IllegalArgumentException("pass action requested for non-pass step " + index);
+        }
+        if (isPassRun(steps, index)) {
+            return PASS_RUN;
         }
         int seat = seatOfStep(steps, index);
         if (isOp(steps, index - 1, "pass")) {
@@ -2907,6 +2925,85 @@ public class ScenarioReplay extends CardTestPlayerBase {
         throw new IllegalArgumentException("unsupported pass pattern at step " + index);
     }
 
+    /** Whether step {@code index} is a pass of a recorded game: a pass that
+     * carries the "xpos" position gorge reached after it. The hand-authored
+     * and ported scenarios never carry one, so they keep the shapes above. */
+    static boolean isPassRun(JsonArray steps, int index) {
+        return isOp(steps, index, "pass") && steps.get(index).getAsJsonObject().has("xpos");
+    }
+
+    private static boolean posFlag(JsonObject pos, String key) {
+        return pos.has(key) && pos.get(key).getAsBoolean();
+    }
+
+    /** Copy the item's xmage_pos entries (parallel to the steps, null for a
+     * step that is no pass) onto their steps as "xpos". They ride beside the
+     * steps because gorge's runner rejects unknown per-step fields. */
+    static void mergePassPositions(JsonObject sc) {
+        if (!sc.has("xmage_pos") || !sc.get("xmage_pos").isJsonArray()) {
+            return;
+        }
+        JsonArray pos = sc.getAsJsonArray("xmage_pos");
+        JsonArray steps = steps(sc);
+        for (int i = 0; i < pos.size() && i < steps.size(); i++) {
+            if (pos.get(i).isJsonObject() && isOp(steps, i, "pass")) {
+                steps.get(i).getAsJsonObject().add("xpos", pos.get(i));
+            }
+        }
+    }
+
+    /** The commands of a pass of a recorded game, plus those of the step
+     * after one. The pass that resolves an object (gorge's stack lost one)
+     * queues the one-object resolution on the active seat, the seat that has
+     * priority at the step the pass was made in; a pass that only hands
+     * priority on or moves the step queues nothing. The step after a pass the
+     * active seat made in the same step, if it is an action of the other seat,
+     * starts by yielding priority to that seat (the lone-handoff recipe). */
+    static List<String> passRunCommands(JsonArray steps, int index, int activeSeat) {
+        List<String> cmds = new ArrayList<>();
+        if (isPassRun(steps, index - 1) && !isOp(steps, index, "pass")) {
+            JsonObject prev = steps.get(index - 1).getAsJsonObject();
+            JsonObject pos = prev.getAsJsonObject("xpos");
+            String op = str(steps.get(index).getAsJsonObject(), "op");
+            boolean acts = op.equals("cast") || op.equals("activate") || op.equals("play");
+            if (acts && !posFlag(pos, "moved") && !posFlag(pos, "resolves")
+                    && seatOfStep(steps, index - 1) == activeSeat && seatOfStep(steps, index) != activeSeat) {
+                cmds.add(CMD_YIELD_PRIORITY);
+            }
+        }
+        if (isPassRun(steps, index) && posFlag(steps.get(index).getAsJsonObject().getAsJsonObject("xpos"), "resolves")) {
+            cmds.add(CMD_REQUIRE_STACK);
+            cmds.add(CMD_WAIT_RESOLVE_ONE);
+        }
+        return cmds;
+    }
+
+    /** gorge's step name as the XMage step its priority falls in. */
+    static PhaseStep phaseOfGorgeStep(String step) {
+        switch (step) {
+            case "upkeep": return PhaseStep.UPKEEP;
+            case "draw": return PhaseStep.DRAW;
+            case "main1": return PhaseStep.PRECOMBAT_MAIN;
+            case "begin-combat": return PhaseStep.BEGIN_COMBAT;
+            case "declare-attackers": return PhaseStep.DECLARE_ATTACKERS;
+            case "declare-blockers": return PhaseStep.DECLARE_BLOCKERS;
+            case "combat-damage": return PhaseStep.COMBAT_DAMAGE;
+            case "end-combat": return PhaseStep.END_COMBAT;
+            case "main2": return PhaseStep.POSTCOMBAT_MAIN;
+            case "end": return PhaseStep.END_TURN;
+            default: throw new IllegalArgumentException("pass position in unknown step " + step);
+        }
+    }
+
+    /** Move the replay's turn, step and active seat to where gorge stood after
+     * a pass of a recorded game: the steps that follow are queued there. */
+    private void followPassPosition(JsonObject pos) {
+        turn = pos.get("turn").getAsInt();
+        phase = phaseOfGorgeStep(pos.get("step").getAsString());
+        activeSeat = pos.get("active").getAsInt();
+        attackAdvancedTurn = false;
+    }
+
     /** The commands step {@code index} queues before its own actions and
      * checkpoint, in queue order. XMage runs every queued action of the
      * active player at one priority in order and only then lets the opponent
@@ -2919,6 +3016,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * seat 0; the active seat 1's own lone pass queues nothing. */
     static List<String> passCommands(JsonArray steps, int index, int activeSeat) {
         List<String> cmds = new ArrayList<>();
+        if (isPassRun(steps, index) || isPassRun(steps, index - 1)) {
+            return passRunCommands(steps, index, activeSeat);
+        }
         if (isActiveOwnPass(steps, index, activeSeat)) {
             return cmds;
         }
@@ -3062,7 +3162,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     dropLastCast();
                     break;
                 case CMD_YIELD_PRIORITY:
-                    runCode(cmd, turn, phase, playerA, (info, pl, g) -> pl.pass(g));
+                    runCode(cmd, turn, phase, active, (info, pl, g) -> pl.pass(g));
                     break;
                 case CMD_REQUIRE_EMPTY_STACK:
                     runCode(cmd, turn, phase, playerA, (info, pl, g) -> {
@@ -3199,7 +3299,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
             case "block": {
                 // gorge's blocks are [blocker, attacker] pairs. XMage's
                 // block() queues a declareBlockers command at DECLARE_BLOCKERS.
-                for (JsonElement e : st.getAsJsonArray("blocks")) {
+                // A recorded game's empty declaration has no "blocks": there
+                // is nothing to queue, the step only reaches declare-blockers.
+                JsonArray blocks = st.has("blocks") ? st.getAsJsonArray("blocks") : new JsonArray();
+                for (JsonElement e : blocks) {
                     JsonArray pair = e.getAsJsonArray();
                     block(turn, p, combatName(pair.get(0).getAsString()), combatName(pair.get(1).getAsString()));
                 }
@@ -3479,7 +3582,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
             case "pass":
                 // Validated here; its XMage commands are queued around the
                 // checkpoint by queuePassCommands, which the replay loop runs before this step.
-                passAction(steps(sc0), stepIdx, activeSeat);
+                if (passAction(steps(sc0), stepIdx, activeSeat) == PASS_RUN) {
+                    followPassPosition(st.getAsJsonObject("xpos"));
+                }
                 return;
             case "resolve":
                 // gorge's resolve op passes priority until the stack is empty.

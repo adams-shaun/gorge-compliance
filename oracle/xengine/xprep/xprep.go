@@ -100,7 +100,55 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 		it.XAnswers = make([][]oraclegen.XAnswer, len(sc.Steps))
 	}
 	it.XAbility = abilities
+	it.XPos = passPositions(sc.Steps, g.Snapshots)
 	return it, nil
+}
+
+// passPositions is Item.XPos: for each pass step i, where gorge stood in
+// snaps[i+1] (the checkpoint after step i; snaps[0] is the setup one), and
+// whether that pass moved the turn or step or removed an object from the
+// stack. Nil when the snapshots do not line up with the steps, which leaves
+// the driver on the pass shapes it knows.
+func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*oraclegen.XPos {
+	if len(snaps) != len(steps)+1 {
+		return nil
+	}
+	var out []*oraclegen.XPos
+	any := false
+	for i, st := range steps {
+		if st.Op != "pass" {
+			out = append(out, nil)
+			continue
+		}
+		any = true
+		before, after := snaps[i], snaps[i+1]
+		out = append(out, &oraclegen.XPos{
+			Turn: after.Turn, Step: after.Step, Active: after.Active,
+			Moved:    before.Turn != after.Turn || before.Step != after.Step,
+			Resolves: stackLost(before.Stack, after.Stack),
+		})
+	}
+	if !any {
+		return nil
+	}
+	return out
+}
+
+// stackLost is whether after lacks an object before holds (compared as a
+// multiset of kind, source and controller): a pass never removes an object
+// but by resolving it, and a trigger that resolution puts on does not hide it.
+func stackLost(before, after []rules.OracleSnapStack) bool {
+	left := map[rules.OracleSnapStack]int{}
+	for _, o := range after {
+		left[o]++
+	}
+	for _, o := range before {
+		if left[o] == 0 {
+			return true
+		}
+		left[o]--
+	}
+	return false
 }
 
 // sameOutcome is "" when gorge's runner, given sc, ends in the snapshots g

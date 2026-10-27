@@ -266,6 +266,13 @@ type Item struct {
 	// the supported independent-0..1 shape, which keeps those bytes unchanged
 	// and the driver on its legacy trailing skip.
 	XTargetSkips [][]XTargetSkip `json:"xmage_target_skips,omitempty"`
+	// XPos is parallel to Scenario.Steps: entry i is, for a pass step of a
+	// recorded game (an xengine tape or window), where gorge stood after it
+	// (see XPos); nil for every other step. The XMage driver cannot tell from
+	// the steps alone which pass resolves a stack object and which moves the
+	// game to the next step (CR 117.4), so it follows these. Like XAbility it
+	// is an Item field, never a Step one. Empty for every non-xengine item.
+	XPos []*XPos `json:"xmage_pos,omitempty"`
 	// Ignore names snapshot fields the comparison leaves out for this
 	// scenario: library_top after the card shuffles a library.
 	Ignore []string `json:"ignore,omitempty"`
@@ -273,6 +280,19 @@ type Item struct {
 	// keeps a level-A item byte-identical.
 	Compare []string `json:"compare,omitempty"`
 	Scenario
+}
+
+// XPos is the position gorge reached after one pass step: its turn, step
+// (gorge's name: "main1", "begin-combat", ...) and active seat. Moved is true
+// when the pass changed the turn or step (both players passed in succession
+// with an empty stack, CR 500.2), Resolves when it removed an object from the
+// stack (both passed with a non-empty stack, CR 117.4).
+type XPos struct {
+	Turn     int32  `json:"turn"`
+	Step     string `json:"step"`
+	Active   int    `json:"active"`
+	Moved    bool   `json:"moved,omitempty"`
+	Resolves bool   `json:"resolves,omitempty"`
 }
 
 // XAnswer is one scripted XMage answer: Kind target (Value a card name, a
