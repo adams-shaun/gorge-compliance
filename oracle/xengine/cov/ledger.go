@@ -84,6 +84,23 @@ func (l *Ledger) Merge(o *Ledger) {
 	}
 }
 
+// Sub subtracts every counter of o from l, each counter on its own and clamped
+// at 0. Rows of o that l lacks are ignored (no row is created) and rows of l
+// stay even when all three counters reach 0. o is not changed.
+func (l *Ledger) Sub(o *Ledger) {
+	for card, km := range o.m {
+		for key, b := range km {
+			c := l.m[card][key]
+			if c == nil {
+				continue
+			}
+			c.Exercised = max(0, c.Exercised-b.Exercised)
+			c.Compared = max(0, c.Compared-b.Compared)
+			c.Offered = max(0, c.Offered-b.Offered)
+		}
+	}
+}
+
 const tsvHeader = "card\tkey\texercised\tcompared\toffered"
 
 // WriteTSV writes the ledger sorted by card then key, under a header line.

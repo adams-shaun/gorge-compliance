@@ -11,7 +11,11 @@
 #   - 2 running JVMs make the follower stage wait, then time out with a message;
 #   - a root inside the repository is refused;
 #   - the JVM count is taken again once the heavy lock is held;
-#   - a failing follower, or a failing ledger publish, leaves no .done.
+#   - a failing follower, or a failing ledger publish, leaves no .done;
+#   - XENGINE_GO_JOBS=0 is refused; XENGINE_GO_JOBS=2 plays each chunk index of
+#     all sets before any follower starts, merges every chunk as a ledger delta
+#     (cov -sub <chunk>/ledger-in.tsv), resumes like the serial run, and a
+#     failing set does not stop the other.
 #
 #   ops/scripts/tests/xengine_sweep_smoke.sh
 set -uo pipefail
@@ -42,10 +46,11 @@ if [ "$4" = sweep-plan ]; then exec "$REALGO" "$@"; fi
 shift 3
 sub=$1; shift
 declare -A o
-w=0
+w=0 x=0
 while [ $# -gt 0 ]; do
 	case "$1" in
 	-windows) w=1; shift ;;
+	-xmage) x=1; shift ;;
 	-missing) shift ;;
 	-ledger) o[ledger]="${o[ledger]:-} $2"; shift 2 ;;
 	-*) o[${1#-}]=${2:-}; shift 2 ;;
@@ -54,11 +59,16 @@ while [ $# -gt 0 ]; do
 done
 case "$sub" in
 play)
-	echo "play ${o[set]} ${o[chunk]} windows=$w ledger=${o[ledger]:-none}" >> "$LOG"
+	echo "play ${o[set]} ${o[chunk]} windows=$w xmage=$x ledger=${o[ledger]:-none}" >> "$LOG"
 	mkdir -p "${o[out]}"
 	printf '{"id":"xe:%s:%s:0:tape"}\n' "${o[set]}" "${o[chunk]}" > "${o[out]}/items.jsonl"
 	printf 'card\tkey\texercised\tcompared\toffered\nA\tk\t1\t0\t0\n' > "${o[out]}/exercised.tsv"
 	printf '{"id":"i","status":"lower_ok"}\n{"id":"j","status":"refused"}\n' > "${o[out]}/lower.jsonl"
+	;;
+xprep)
+	echo "xprep" >> "$LOG"
+	mkdir -p "$(dirname "${o[out]}")"
+	cat "${o[play]}/items.jsonl" > "${o[out]}"
 	;;
 diff)
 	echo "diff ${o[engine]}" >> "$LOG"
@@ -67,7 +77,7 @@ diff)
 	printf 'card\tkey\texercised\tcompared\toffered\nA\tk\t0\t1\t0\n' > "${o[out]}/compared.tsv"
 	;;
 cov)
-	if [ -n "${o[write]:-}" ]; then echo "cov-write" >> "$LOG"; else echo "cov-report" >> "$LOG"; fi
+	if [ -n "${o[write]:-}" ]; then echo "cov-write sub=${o[sub]:-none} ledger=${o[ledger]:-none}" >> "$LOG"; else echo "cov-report" >> "$LOG"; fi
 	[ -z "${o[write]:-}" ] || printf 'card\tkey\texercised\tcompared\toffered\nA\tk\t1\t1\t0\n' > "${o[write]}"
 	echo "cov report"
 	;;
@@ -75,14 +85,14 @@ esac
 STUB
 cat > "$BIN/xmage" <<'STUB'
 #!/usr/bin/env bash
-echo "xmage" >> "$LOG"
-[ "${FAIL_FOLLOWER:-}" != xmage ] || exit 1
+echo "xmage $(basename "$1")" >> "$LOG"
+if [ "${FAIL_FOLLOWER:-}" = xmage ] && { [ -z "${FAIL_SET:-}" ] || [[ $1 == */$FAIL_SET/* ]]; }; then exit 1; fi
 cat "$1" > "$2"
 STUB
 cat > "$BIN/forge" <<'STUB'
 #!/usr/bin/env bash
 echo "forge" >> "$LOG"
-[ "${FAIL_FOLLOWER:-}" != forge ] || exit 1
+if [ "${FAIL_FOLLOWER:-}" = forge ] && { [ -z "${FAIL_SET:-}" ] || [[ $1 == */$FAIL_SET/* ]]; }; then exit 1; fi
 cat "$1" > "$2"
 STUB
 cat > "$BIN/oraclediff" <<'STUB'
@@ -116,6 +126,7 @@ out=$(sweep "$R"); rc=$?
 check "cold sweep exits 0" '[ "$rc" = 0 ]' "rc=$rc $out"
 check "cold: 4 play stages" '[ "$(count play)" = 4 ]' "$(count play)"
 check "cold: 4 xmage replays" '[ "$(count xmage)" = 4 ]'
+check "cold: 4 xprep stages, the xmage replays read xitems.jsonl" '[ "$(count xprep)" = 4 ] && [ "$(count "xmage xitems.jsonl")" = 4 ]' "$(cat "$LOG")"
 check "cold: 4 forge replays (4 exports)" '[ "$(count forge)" = 4 ] && [ "$(count export)" = 4 ]'
 check "cold: 8 diffs" '[ "$(count diff)" = 8 ]'
 check "cold: 4 ledger merges" '[ "$(count cov-write)" = 4 ]' "$(count cov-write)"
@@ -123,7 +134,7 @@ n=0
 for s in FDN BLB; do for c in 0 1; do [ -e "$R/$s/$c/.done" ] && n=$((n + 1)); done; done
 check "cold: every chunk has .done" '[ "$n" = 4 ]' "done=$n"
 check "cold: play got -windows" '/usr/bin/grep -q "windows=1" "$LOG"'
-check "cold: first chunk plays without a ledger" '/usr/bin/grep -q "^play FDN 0 windows=1 ledger=none" "$LOG"' "$(cat "$LOG")"
+check "cold: first chunk plays without a ledger" '/usr/bin/grep -q "^play FDN 0 windows=1 xmage=1 ledger=none" "$LOG"' "$(cat "$LOG")"
 check "cold: second chunk reads the ledger" '/usr/bin/grep -q "^play FDN 1 .*ledger-in.tsv" "$LOG"'
 check "cold: ledger.tsv written, no temp left" '[ -s "$R/ledger.tsv" ] && [ -z "$(find "$R" -name "ledger.tsv.tmp*")" ]'
 check "cold: SUMMARY.md has both sets and engines" \
@@ -189,6 +200,55 @@ out=$(PATH=$FAILCP:$PATH sweep "$R4" --sets FDN --chunks 2); rc=$?
 check "ledger publish failure: sweep exits non-zero" '[ "$rc" != 0 ]' "rc=$rc"
 check "ledger publish failure: no .done, later chunk skipped" '[ ! -e "$R4/FDN/0/.done" ] && [ ! -d "$R4/FDN/1" ] && [ ! -e "$R4/ledger.tsv" ]' "$out"
 check "ledger publish failure: says so" 'has "$out" "FDN/0: ledger publish FAILED"' "$out"
+
+# 8. XENGINE_GO_JOBS: 0 is refused; 2 runs a round (one chunk index of every
+# set) of plays, then the chunks one by one, merging deltas.
+out=$(XENGINE_GO_JOBS=0 sweep "$TMP/run5"); rc=$?
+check "jobs=0: exits 2 with a message" '[ "$rc" = 2 ] && has "$out" "XENGINE_GO_JOBS=0" && [ ! -e "$TMP/run5" ]' "rc=$rc $out"
+out=$(XENGINE_GO_JOBS=two sweep "$TMP/run5"); rc=$?
+check "jobs=two: exits 2" '[ "$rc" = 2 ]' "rc=$rc $out"
+
+R5=$TMP/run5
+: > "$LOG"
+out=$(XENGINE_GO_JOBS=2 sweep "$R5"); rc=$?
+check "jobs=2 cold: exits 0" '[ "$rc" = 0 ]' "rc=$rc $out"
+check "jobs=2 cold: 4 plays, 4 xmage, 4 forge, 8 diffs, 4 merges" \
+	'[ "$(count play)" = 4 ] && [ "$(count xmage)" = 4 ] && [ "$(count forge)" = 4 ] && [ "$(count diff)" = 8 ] && [ "$(count cov-write)" = 4 ]' "$(cat "$LOG")"
+n=0
+for s in FDN BLB; do for c in 0 1; do [ -e "$R5/$s/$c/.done" ] && n=$((n + 1)); done; done
+check "jobs=2 cold: every chunk has .done" '[ "$n" = 4 ]' "done=$n"
+# Round barrier: both chunk-0 plays precede the first follower line, and both
+# chunk-1 plays precede the first follower line after them.
+first_follower=$(/usr/bin/grep -n -m1 -E '^(xmage|forge|export)' "$LOG" | cut -d: -f1)
+last_play0=$(/usr/bin/grep -n -E '^play [A-Z]+ 0 ' "$LOG" | tail -1 | cut -d: -f1)
+play1=$(/usr/bin/grep -n -E '^play [A-Z]+ 1 ' "$LOG" | cut -d: -f1 | head -1)
+last_follower0=$(/usr/bin/grep -n -E '^(xmage|forge|export|diff)' "$LOG" | cut -d: -f1 | awk -v p="$play1" '$1 < p' | tail -1)
+check "jobs=2: both round-0 plays before the first follower" '[ "$(/usr/bin/grep -c -E "^play [A-Z]+ 0 " "$LOG")" = 2 ] && [ "$last_play0" -lt "$first_follower" ]' "$(cat "$LOG")"
+check "jobs=2: round-1 plays come after round 0's followers" '[ -n "$last_follower0" ] && [ "$play1" -gt "$last_follower0" ]' "$(cat "$LOG")"
+check "jobs=2: round-1 plays read a ledger snapshot" '[ "$(/usr/bin/grep -c -E "^play [A-Z]+ 1 .*ledger-in.tsv" "$LOG")" = 2 ]' "$(cat "$LOG")"
+check "jobs=2: round-0 merges have no -sub" '/usr/bin/grep -E "^cov-write sub=none" "$LOG" | wc -l | /usr/bin/grep -qx 2' "$(cat "$LOG")"
+check "jobs=2: delta merge (-sub chunk ledger-in.tsv, -ledger root ledger.tsv)" \
+	'/usr/bin/grep -E "^cov-write sub=$R5/[A-Z]+/1/ledger-in.tsv ledger= $R5/ledger.tsv " "$LOG" | wc -l | /usr/bin/grep -qx 2' "$(/usr/bin/grep '^cov-write' "$LOG")"
+check "jobs=2: ledger.tsv written, no temp or snapshot left" '[ -s "$R5/ledger.tsv" ] && [ -z "$(find "$R5" -name "ledger.tsv.tmp*" -o -name "ledger-snap*")" ]'
+check "jobs=2: SUMMARY.md has both sets" '/usr/bin/grep -q "^## BLB" "$R5/SUMMARY.md" && /usr/bin/grep -q "^## FDN" "$R5/SUMMARY.md"'
+
+: > "$LOG"
+out=$(XENGINE_GO_JOBS=2 sweep "$R5"); rc=$?
+check "jobs=2 rerun: exits 0, does nothing" '[ "$rc" = 0 ] && [ ! -s "$LOG" ]' "rc=$rc $(cat "$LOG")"
+rm "$R5/BLB/0/.done"
+: > "$LOG"
+out=$(XENGINE_GO_JOBS=2 sweep "$R5"); rc=$?
+check "jobs=2 redo: exits 0, exactly BLB chunk 0" '[ "$rc" = 0 ] && [ "$(count play)" = 1 ] && /usr/bin/grep -q "^play BLB 0 " "$LOG" && [ -e "$R5/BLB/0/.done" ]' "rc=$rc $(cat "$LOG")"
+check "jobs=2 redo: delta merge against the existing ledger" '/usr/bin/grep -q "^cov-write sub=$R5/BLB/0/ledger-in.tsv ledger= $R5/ledger.tsv " "$LOG"' "$(/usr/bin/grep '^cov-write' "$LOG")"
+
+# A follower that fails for FDN only: FDN/0 gets no .done and FDN/1 is skipped;
+# BLB finishes both chunks; exit 1.
+R6=$TMP/run6
+: > "$LOG"
+out=$(FAIL_FOLLOWER=forge FAIL_SET=FDN XENGINE_GO_JOBS=2 sweep "$R6"); rc=$?
+check "jobs=2 failing FDN follower: exits 1" '[ "$rc" = 1 ]' "rc=$rc $out"
+check "jobs=2 failing FDN follower: FDN/0 no .done, FDN/1 skipped" '[ ! -e "$R6/FDN/0/.done" ] && [ ! -d "$R6/FDN/1" ] && has "$out" "FDN/0: forge replay FAILED" && has "$out" "FDN/1: skipped"' "$out"
+check "jobs=2 failing FDN follower: BLB still finishes both chunks" '[ -e "$R6/BLB/0/.done" ] && [ -e "$R6/BLB/1/.done" ]' "$out"
 
 [ "$fails" = 0 ] && echo "xengine_sweep_smoke: all passed" || echo "xengine_sweep_smoke: $fails FAILED"
 exit $((fails != 0))

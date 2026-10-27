@@ -338,3 +338,146 @@ func TestSweepPlanRefusesRepoRoot(t *testing.T) {
 		t.Fatal("the refused root was created")
 	}
 }
+
+// TestXprepPlay: xprep splits a play dir's items into the served ones (xitems)
+// and the refused ones (xprep.jsonl), loses none, and writes the same bytes
+// twice.
+func TestXprepPlay(t *testing.T) {
+	reg, dir := playTwo(t)
+	sp, err := decks.LoadSpellings(manifestDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	run := func() (served, refused []byte) {
+		out := filepath.Join(t.TempDir(), "xitems.jsonl")
+		if err := xprepPlay(reg, sp, dir, out); err != nil {
+			t.Fatal(err)
+		}
+		served, err := os.ReadFile(out)
+		if err != nil {
+			t.Fatal(err)
+		}
+		refused, err = os.ReadFile(filepath.Join(filepath.Dir(out), xprepRefusalsFile))
+		if err != nil {
+			t.Fatal(err)
+		}
+		return served, refused
+	}
+	served, refused := run()
+	served2, refused2 := run()
+	if !bytes.Equal(served, served2) || !bytes.Equal(refused, refused2) {
+		t.Error("xprep is not deterministic")
+	}
+	in := map[string]bool{}
+	if err := readLines(filepath.Join(dir, "items.jsonl"), func(b []byte) error {
+		var it struct{ ID string }
+		json.Unmarshal(b, &it)
+		in[it.ID] = true
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if len(in) == 0 {
+		t.Fatal("play wrote no lower_ok item")
+	}
+	seen := map[string]bool{}
+	for _, part := range [][]byte{served, refused} {
+		for _, line := range bytes.Split(bytes.TrimSpace(part), []byte("\n")) {
+			if len(line) == 0 {
+				continue
+			}
+			var it struct {
+				ID      string
+				Reason  string
+				Answers [][]any `json:"xmage_answers"`
+			}
+			if err := json.Unmarshal(line, &it); err != nil {
+				t.Fatal(err)
+			}
+			if seen[it.ID] || !in[it.ID] {
+				t.Errorf("item %s is duplicated or not in items.jsonl", it.ID)
+			}
+			seen[it.ID] = true
+		}
+	}
+	if len(seen) != len(in) {
+		t.Errorf("%d of %d items accounted for", len(seen), len(in))
+	}
+}
+
+// TestCalibReport: canned rows (two windows agree, one harness, a lower_gap
+// window; tape A followed to turn 2 and harness at turn 4, tape B harness from
+// turn 2) give the class counts, the harness rate, the prefix curve grouped by
+// turns kept and the gate.
+func TestCalibReport(t *testing.T) {
+	play, diff := t.TempDir(), t.TempDir()
+	type row = map[string]any
+	var lower, verdicts bytes.Buffer
+	add := func(id, status, class string, step int, msg string) {
+		b, _ := jsonl(row{"id": id, "status": status})
+		lower.Write(b)
+		b, _ = jsonl(row{"id": id, "class": class, "step": step, "msg": msg})
+		verdicts.Write(b)
+	}
+	add("xe:FDN:0:0:w1", "lower_ok", "agree", -1, "")
+	add("xe:FDN:0:0:w2", "lower_ok", "agree", -1, "")
+	add("xe:FDN:0:0:w3", "lower_ok", "harness", 4, "no such card: Shock #12 at step 7")
+	add("xe:FDN:0:0:w4", "lower_gap", "lower_gap", 2, "")
+	for _, p := range []struct {
+		id, class string
+		step      int
+	}{
+		{"xe:FDN:0:0:tape:t1", "agree", -1}, {"xe:FDN:0:0:tape:t2", "agree", -1}, {"xe:FDN:0:0:tape:t4", "harness", 9},
+		{"xe:FDN:0:1:tape:t1", "agree", -1}, {"xe:FDN:0:1:tape:t2", "harness", 3}, {"xe:FDN:0:1:tape:t4", "harness", 3},
+	} {
+		add(p.id, "lower_ok", p.class, p.step, "x")
+	}
+	files := map[string][]byte{
+		filepath.Join(play, "lower.jsonl"):    lower.Bytes(),
+		filepath.Join(diff, "verdicts.jsonl"): verdicts.Bytes(),
+		filepath.Join(play, "exercised.tsv"):  []byte("card\tkey\texercised\tcompared\toffered\nA\tk\t1\t0\t0\nB\tk\t2\t0\t0\nC\tk\t0\t0\t0\n"),
+		filepath.Join(diff, "compared.tsv"):   []byte("card\tkey\texercised\tcompared\toffered\nA\tk\t0\t1\t0\n"),
+	}
+	for p, b := range files {
+		if err := os.WriteFile(p, b, 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	c, err := calibrate(play, diff, "xmage")
+	if err != nil {
+		t.Fatal(err)
+	}
+	w := c.Windows
+	if w.Total != 4 || w.LowerOK != 3 || w.ByClass["agree"] != 2 || w.ByClass["harness"] != 1 || w.ByClass["lower_gap"] != 1 {
+		t.Errorf("window counts: %+v", w)
+	}
+	if w.Harness != 1 || w.NotFollowed != 1 || w.HarnessRate < 0.333 || w.HarnessRate > 0.334 {
+		t.Errorf("window rates: %+v", w)
+	}
+	if len(w.TopHarness) != 1 || w.TopHarness[0].Msg != "no such card: Shock N at step N" || w.TopHarness[0].Count != 1 {
+		t.Errorf("top harness: %+v", w.TopHarness)
+	}
+	curve := map[string][2]int{}
+	for k, p := range c.Tapes.Curve {
+		curve[k] = [2]int{p.Followed, p.Items}
+	}
+	want := map[string][2]int{"1": {2, 2}, "2": {1, 2}, "4": {0, 2}}
+	if len(curve) != len(want) || curve["1"] != want["1"] || curve["2"] != want["2"] || curve["4"] != want["4"] {
+		t.Errorf("prefix curve %v, want %v", curve, want)
+	}
+	// Tape A's earliest harness row is step 9, tape B's step 3.
+	if c.Tapes.MedianFirstHarness != 6 {
+		t.Errorf("median first harness step %v, want 6", c.Tapes.MedianFirstHarness)
+	}
+	if c.Gate.Windows || c.Gate.Tape2 == nil || !*c.Gate.Tape2 {
+		t.Errorf("gate %+v: 2 of 3 windows followed fails the 80%% gate, 1 of 2 tape prefixes passes the 50%% one", c.Gate)
+	}
+	if c.Cover.Exercised != 2 || c.Cover.Compared != 1 {
+		t.Errorf("coverage %+v", c.Cover)
+	}
+	b1, _ := json.Marshal(c)
+	c2, _ := calibrate(play, diff, "xmage")
+	if b2, _ := json.Marshal(c2); !bytes.Equal(b1, b2) {
+		t.Error("calibrate is not deterministic")
+	}
+}
