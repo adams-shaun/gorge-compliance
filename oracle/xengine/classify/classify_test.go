@@ -176,3 +176,43 @@ func TestReproRefusesRepoPath(t *testing.T) {
 		}
 	}
 }
+
+// TestClassifyForgeTrailingMiss: a Forge strict miss at the step after the
+// item's last (calib-forge-3 BLB xe:BLB:0:18:w5 "Missing cleanup discard
+// answer at step 12" of 12 steps, xe:BLB:0:3:tape "Missing yesno answer at
+// step 6: optional trigger ..." of 6) is posed past every checkpoint, so it
+// is not a decision_shape finding: the snapshot comparison decides.
+func TestClassifyForgeTrailingMiss(t *testing.T) {
+	discard := "Missing cleanup discard answer at step 2: 8 options, 1..1 to pick"
+	yesno := "Missing yesno answer at step 2: optional trigger When Fountainport Bell enters, you may search your library"
+	cases := []struct {
+		name   string
+		engine string
+		miss   string
+		left   string
+		edit   func(*oraclediff.XResult)
+		want   string
+	}{
+		{"cleanup discard after the last step agrees", "forge", discard, "", nil, ClassAgree},
+		{"optional trigger yes/no after the last step agrees", "forge", yesno, "", nil, ClassAgree},
+		{"trailing miss still diverges on a snapshot", "forge", discard, "",
+			func(x *oraclediff.XResult) { x.Snapshots[2].Players[0].Life = 19 }, ClassDiverge},
+		{"miss at a scripted step stays decision_shape", "forge", "Missing yesno answer at step 1: optional trigger", "", nil, ClassDecisionShape},
+		{"a leftover stays decision_shape", "forge", discard, "step 1 p0 yesno", nil, ClassDecisionShape},
+		{"xmage keeps its strict miss", "xmage", discard, "", nil, ClassDecisionShape},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			item, tp, g := fixture(1)
+			x := follower(g, func(x *oraclediff.XResult) {
+				if c.edit != nil {
+					c.edit(x)
+				}
+				x.StrictMiss, x.Leftover = c.miss, c.left
+			})
+			if f := Classify(item, tp, g, x, c.engine); f.Class != c.want {
+				t.Fatalf("class %q, want %q (finding %+v)", f.Class, c.want, f)
+			}
+		})
+	}
+}

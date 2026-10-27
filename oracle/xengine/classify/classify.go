@@ -7,6 +7,7 @@ package classify
 
 import (
 	"fmt"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -82,7 +83,7 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 			who = engine // CompareOpts names the follower "xmage" whichever it is
 		}
 		f.Class, f.Msg = ClassHarness, who+": "+v.Msg
-	case x.StrictMiss != "" || x.Leftover != "":
+	case (x.StrictMiss != "" || x.Leftover != "") && !trailingMiss(x, len(item.Item.Steps), engine):
 		f.Class = ClassDecisionShape
 		f.Msg = strings.TrimSpace("strict_miss: " + x.StrictMiss + " leftover: " + x.Leftover)
 	case v.Status == oraclediff.Agree:
@@ -95,6 +96,31 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 		f.Class = ClassDiverge
 	}
 	return f
+}
+
+// missStep matches the step a follower's strict miss names ("Missing yesno
+// answer at step 6: ...").
+var missStep = regexp.MustCompile(`^Missing .* answer at step (\d+)`)
+
+// trailingMiss reports a Forge strict miss that is only a question Forge poses
+// after the item's last step and nothing else: a cleanup discard when the hand
+// is over seven, or an optional trigger's yes/no once the last pass lets the
+// trigger resolve. Forge asks it inside that last pass, while gorge stops at
+// the pass with the same decision pending and unlogged, so no checkpoint
+// observes it and it says nothing about decision shape. The comparison of
+// every snapshot then decides the class. A leftover (gorge answered something
+// Forge never asked) is a real shape difference, so it is never trailing, and
+// a miss at any step the item scripts is not either.
+func trailingMiss(x oraclediff.XResult, steps int, engine string) bool {
+	if engine != "forge" || x.Leftover != "" || x.StrictMiss == "" {
+		return false
+	}
+	m := missStep.FindStringSubmatch(x.StrictMiss)
+	if m == nil {
+		return false
+	}
+	n, err := strconv.Atoi(m[1])
+	return err == nil && n >= steps
 }
 
 // Credited reports whether an item with this class counts toward the
