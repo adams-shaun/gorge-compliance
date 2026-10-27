@@ -40,7 +40,7 @@ func views(res rules.OracleResult, compare []string, ignore []string) [][]field 
 	initial := permKeysOpts(res.Snapshots[0].Permanents, compare)
 	out := make([][]field, len(res.Snapshots))
 	for i, s := range res.Snapshots {
-		out[i] = view(s, initial, compare, ignore)
+		out[i] = view(s, initial, compare, ignoreAt(ignore, i))
 	}
 	return out
 }

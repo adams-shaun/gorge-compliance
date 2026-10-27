@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"regexp"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance"
@@ -69,7 +70,10 @@ func XMageLacksCard(msg, scenarioCard string) bool {
 // either side is never a verdict on the card.
 //
 // ignore names fields left out of the comparison (by suffix, e.g.
-// "library_top" after a shuffle, whose order is random in both engines).
+// "library_top" after a shuffle, whose order is random in both engines). An
+// entry "<suffix>@N" leaves the field out only from checkpoint N on (index 0
+// is the setup, step k is checkpoint k+1), so "p0.library_top@6" compares
+// seat 0's library order up to the shuffle and not after it (ignoreAt).
 func Compare(g rules.OracleResult, gerr error, x XResult, ignore ...string) Verdict {
 	return CompareOpts(g, gerr, x, nil, ignore...)
 }
@@ -105,7 +109,7 @@ func CompareOpts(g rules.OracleResult, gerr error, x XResult, compare []string, 
 		return Verdict{Status: Harness, Engine: "both", Msg: fmt.Sprintf("%d gorge checkpoints, %d xmage", len(g.Snapshots), len(x.Snapshots))}
 	}
 	for i := range g.Snapshots {
-		if v, ok := compareSnap(g.Snapshots[i], x.Snapshots[i], compare, ignore); !ok {
+		if v, ok := compareSnap(g.Snapshots[i], x.Snapshots[i], compare, ignoreAt(ignore, i)); !ok {
 			return v
 		}
 	}
@@ -171,6 +175,32 @@ func fields(s rules.OracleSnapshot, xmage bool, compare []string) []field {
 	return out
 }
 
+// ignoreAt is the plain suffix list in force at checkpoint idx: an entry
+// "<suffix>@N" counts as "<suffix>" from checkpoint N on and is dropped before
+// it. A list with no "@" entry is returned as is.
+func ignoreAt(ignore []string, idx int) []string {
+	var out []string
+	for k, s := range ignore {
+		base, from, ok := strings.Cut(s, "@")
+		if !ok {
+			if out != nil {
+				out = append(out, s)
+			}
+			continue
+		}
+		if out == nil {
+			out = append([]string{}, ignore[:k]...)
+		}
+		if n, err := strconv.Atoi(from); err == nil && idx >= n {
+			out = append(out, base)
+		}
+	}
+	if out == nil {
+		return ignore
+	}
+	return out
+}
+
 func ignored(name string, ignore []string) bool {
 	for _, s := range ignore {
 		if strings.HasSuffix(name, s) {
@@ -232,10 +262,11 @@ func Canonical(snaps []rules.OracleSnapshot, ignore ...string) string {
 // (oraclegen.Item.Compare). A nil list is exactly Canonical.
 func CanonicalOpts(snaps []rules.OracleSnapshot, compare []string, ignore ...string) string {
 	var b strings.Builder
-	for _, s := range snaps {
+	for i, s := range snaps {
 		fmt.Fprintf(&b, "== %s\n", s.Checkpoint)
+		at := ignoreAt(ignore, i)
 		for _, f := range fields(s, false, compare) {
-			if ignored(f.name, ignore) {
+			if ignored(f.name, at) {
 				continue
 			}
 			fmt.Fprintf(&b, "%s: %s\n", f.name, f.value)
