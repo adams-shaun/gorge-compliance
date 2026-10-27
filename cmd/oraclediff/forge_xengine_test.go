@@ -96,41 +96,60 @@ func TestForgeExportXengineItem(t *testing.T) {
 }
 
 // TestXengineForgeExportEmptyDeclaration: an xengine item's empty attack or
-// block step reaches the Forge driver as a pass_to the declaration step (the
-// XMage port's skipEmptyDeclaration), the scenario SHA still names the
-// unrewritten item, and a stated attack, a non-xengine item and the other
-// steps are left alone.
+// block step reaches the Forge driver as a pass_to decision "priority" (which
+// the driver completes without consuming a priority), the pass before a
+// stated attack or block becomes a pass_to of that decision (which completes
+// inside Forge's declaration callback), the scenario SHA still names the
+// unrewritten item, and a non-xengine item and the other steps are left alone.
 func TestXengineForgeExportEmptyDeclaration(t *testing.T) {
 	steps := []oraclegen.Step{
 		{Op: "pass_to", Step: "main1"},
 		{Op: "attack", Seat: 1, Defender: "p0", Attackers: []string{}, Expect: []oraclegen.Expect{{}}},
 		{Op: "block", Seat: 0, Blocks: [][2]string{}},
+		{Op: "pass", Seat: 1},
 		{Op: "attack", Seat: 0, Defender: "p1", Attackers: []string{"p0:Bear"}},
+		{Op: "pass", Seat: 0},
 		{Op: "block", Seat: 1, Blocks: [][2]string{{"p1:Bear", "p0:Lion"}}},
+		{Op: "attack", Seat: 0, Defender: "p1"},
 	}
+	ops := []string{"pass_to", "attack", "block", "pass", "attack", "pass", "block", "attack"}
 	mk := func(tmpl string) oraclegen.Item {
 		return oraclegen.Item{ID: "xe:t", Template: tmpl, Scenario: oraclegen.Scenario{Steps: steps}}
 	}
-	got := skipEmptyDeclarations(mk(lower.Template))
-	if g := got.Steps[1]; g.Op != "pass_to" || g.Step != "declare-attackers" || g.Active != "p1" || len(g.Expect) != 1 {
-		t.Errorf("empty attack: %+v", g)
+	got := forgeDeclarations(mk(lower.Template))
+	if len(got.Steps) != len(steps) {
+		t.Fatalf("step count %d, want %d", len(got.Steps), len(steps))
 	}
-	if g := got.Steps[2]; g.Op != "pass_to" || g.Step != "declare-blockers" || g.Active != "p1" {
-		t.Errorf("empty block: %+v", g)
+	for _, i := range []int{1, 2, 7} {
+		if g := got.Steps[i]; g.Op != "pass_to" || g.Decision != "priority" || g.Step != "" || g.Active != "" {
+			t.Errorf("empty declaration %d: %+v", i, g)
+		}
 	}
-	for _, i := range []int{0, 3, 4} {
-		if got.Steps[i].Op != steps[i].Op {
+	if g := got.Steps[1]; len(g.Expect) != 1 {
+		t.Errorf("empty attack lost its expectations: %+v", g)
+	}
+	for i, want := range map[int]string{3: "attackers", 5: "blockers"} {
+		if g := got.Steps[i]; g.Op != "pass_to" || g.Decision != want {
+			t.Errorf("pass %d before a stated declaration: %+v, want pass_to %s", i, g, want)
+		}
+	}
+	for _, i := range []int{0, 4, 6} {
+		if got.Steps[i].Op != ops[i] {
 			t.Errorf("step %d changed: %+v", i, got.Steps[i])
 		}
 	}
-	if steps[1].Op != "attack" || steps[2].Op != "block" {
-		t.Error("the input item's steps were mutated")
+	for i, op := range ops {
+		if steps[i].Op != op {
+			t.Fatalf("the input item's step %d was mutated: %+v", i, steps[i])
+		}
 	}
-	if g := skipEmptyDeclarations(mk(lower.WindowTemplate)); g.Steps[1].Op != "pass_to" {
+	if g := forgeDeclarations(mk(lower.WindowTemplate)); g.Steps[1].Op != "pass_to" {
 		t.Errorf("window item not rewritten: %+v", g.Steps[1])
 	}
-	if g := skipEmptyDeclarations(mk("other")); g.Steps[1].Op != "attack" || g.Steps[2].Op != "block" {
-		t.Errorf("non-xengine item rewritten: %+v", g.Steps)
+	for i, st := range forgeDeclarations(mk("other")).Steps {
+		if st.Op != ops[i] {
+			t.Errorf("non-xengine item rewritten at %d: %+v", i, st)
+		}
 	}
 
 	reg := testutil.CorpusRegistry(t)
@@ -149,7 +168,7 @@ func TestXengineForgeExportEmptyDeclaration(t *testing.T) {
 		t.Fatal(err)
 	}
 	rq := decodeRequests(t, raw)[0]
-	if rq.Item.Steps[1].Op != "pass_to" || rq.Item.Steps[2].Op != "pass_to" {
+	if rq.Item.Steps[1].Op != "pass_to" || rq.Item.Steps[1].Decision != "priority" || rq.Item.Steps[5].Decision != "blockers" {
 		t.Errorf("exported steps %+v", rq.Item.Steps)
 	}
 	if rq.ScenarioSHA != gate.ItemSHA(it) {
