@@ -98,9 +98,11 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	return f
 }
 
-// missStep matches the step a follower's strict miss names ("Missing yesno
-// answer at step 6: ...").
-var missStep = regexp.MustCompile(`^Missing .* answer at step (\d+)`)
+// missStep matches the step of the only two strict misses Forge poses past the
+// item's last step: "Missing cleanup discard answer at step 12: ..." and
+// "Missing yesno answer at step 6: optional trigger ...". Any other kind
+// (order, surveil, target, mode, ...) is a real shape finding wherever it sits.
+var missStep = regexp.MustCompile(`^Missing (?:cleanup discard answer at step (\d+)|yesno answer at step (\d+): optional trigger)`)
 
 // trailingMiss reports a Forge strict miss that is only a question Forge poses
 // after the item's last step and nothing else: a cleanup discard when the hand
@@ -110,7 +112,7 @@ var missStep = regexp.MustCompile(`^Missing .* answer at step (\d+)`)
 // observes it and it says nothing about decision shape. The comparison of
 // every snapshot then decides the class. A leftover (gorge answered something
 // Forge never asked) is a real shape difference, so it is never trailing, and
-// a miss at any step the item scripts is not either.
+// a miss at any step the item scripts, or of any other kind, is not either.
 func trailingMiss(x oraclediff.XResult, steps int, engine string) bool {
 	if engine != "forge" || x.Leftover != "" || x.StrictMiss == "" {
 		return false
@@ -119,8 +121,8 @@ func trailingMiss(x oraclediff.XResult, steps int, engine string) bool {
 	if m == nil {
 		return false
 	}
-	n, err := strconv.Atoi(m[1])
-	return err == nil && n >= steps
+	n, err := strconv.Atoi(m[1] + m[2])
+	return err == nil && n == steps
 }
 
 // Credited reports whether an item with this class counts toward the

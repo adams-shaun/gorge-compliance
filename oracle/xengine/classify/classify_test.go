@@ -198,6 +198,9 @@ func TestClassifyForgeTrailingMiss(t *testing.T) {
 		{"trailing miss still diverges on a snapshot", "forge", discard, "",
 			func(x *oraclediff.XResult) { x.Snapshots[2].Players[0].Life = 19 }, ClassDiverge},
 		{"miss at a scripted step stays decision_shape", "forge", "Missing yesno answer at step 1: optional trigger", "", nil, ClassDecisionShape},
+		{"trailing order miss stays decision_shape", "forge", "Missing order answer at step 2: order to Graveyard", "", nil, ClassDecisionShape},
+		{"trailing surveil miss stays decision_shape", "forge", "Missing surveil answer at step 2: surveil 2", "", nil, ClassDecisionShape},
+		{"trailing target miss stays decision_shape", "forge", "Missing target answer at step 2: target creature", "", nil, ClassDecisionShape},
 		{"a leftover stays decision_shape", "forge", discard, "step 1 p0 yesno", nil, ClassDecisionShape},
 		{"xmage keeps its strict miss", "xmage", discard, "", nil, ClassDecisionShape},
 	}
