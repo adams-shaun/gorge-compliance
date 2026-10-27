@@ -31,6 +31,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/gate"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
@@ -145,8 +146,10 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 		if gerr != nil || decisions == nil {
 			decisions = []rules.OracleDecision{}
 		}
+		sha := gate.ItemSHA(it)
+		it = skipEmptyDeclarations(it)
 		line, err := json.Marshal(forgeRequest{
-			ID: it.ID, ScenarioSHA: gate.ItemSHA(it), Item: it,
+			ID: it.ID, ScenarioSHA: sha, Item: it,
 			GorgeDecisions: decisions, Abilities: forgeAbilityLines(reg, it),
 		})
 		if err != nil {
@@ -163,6 +166,46 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 	}
 	return n, of.Close()
 }
+
+// skipEmptyDeclarations rewrites, in an xengine item, each attack step with no
+// attackers and each block step with no blocks into a pass_to that walks to
+// that declaration step. Forge poses declare-attackers only to a player with
+// a creature able to attack, so the driver cannot follow an empty "attack"
+// step (it reports "passed declare-attackers without being asked"); the walk
+// reaches the same state, and the driver's pass_to answers a declaration it
+// is asked for with none. Steps keep their index, so the per-step side tables
+// (abilities, decisions) stay aligned. The XMage port does the same in
+// cmd/xmageport skipEmptyDeclaration. Other items pass through unchanged, and
+// the caller hashes the item before this rewrite, so the scenario SHA still
+// names the lowered item.
+func skipEmptyDeclarations(it oraclegen.Item) oraclegen.Item {
+	if it.Template != lower.Template && it.Template != lower.WindowTemplate {
+		return it
+	}
+	var steps []oraclegen.Step
+	for i, st := range it.Steps {
+		var to oraclegen.Step
+		switch {
+		case st.Op == "attack" && len(st.Attackers) == 0:
+			to = oraclegen.Step{Op: "pass_to", Step: "declare-attackers", Active: seatRef(st.Seat)}
+		case st.Op == "block" && len(st.Blocks) == 0:
+			to = oraclegen.Step{Op: "pass_to", Step: "declare-blockers", Active: seatRef(1 - st.Seat)}
+		default:
+			continue
+		}
+		to.Expect, to.Answers, to.Targets = st.Expect, st.Answers, st.Targets
+		if steps == nil {
+			steps = append([]oraclegen.Step(nil), it.Steps...)
+		}
+		steps[i] = to
+	}
+	if steps != nil {
+		it.Steps = steps
+	}
+	return it
+}
+
+func seatRef(seat int) string { return "p" + strconv.Itoa(seat) }
 
 // forgeAbilityLines maps each step that names an ability by ability_index to
 // the script line (cards.SA.Line) of Face.Abilities[index] on the step's card.
