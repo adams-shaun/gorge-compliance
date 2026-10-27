@@ -3,7 +3,7 @@
 // oracle tape scenario a follower (XMage, Forge) replays, and every
 // difference is classified and written as a repro directory.
 //
-//	xengine play -set S [-chunk C] [-games K] [-seed N] [-windows] [-ledger L.tsv] [-out DIR]
+//	xengine play -set S [-chunk C] [-games K] [-seed N] [-windows] [-tape-turns 1,2,4,8] [-ledger L.tsv] [-out DIR]
 //	xengine diff -play DIR -engine xmage|forge -rows ROWS.jsonl -out DIR2 [-only ID]
 //	xengine cov  -ledger A.tsv [-ledger B.tsv ...] [-sets FDN,BLB] [-sub BASE.tsv] [-missing] [-write OUT.tsv]
 //	xengine calib -play DIR -diff DIR2 -engine xmage|forge
@@ -14,7 +14,8 @@
 // follower input: only the items whose lowering gorge's own runner
 // reproduced), DIR/gorge.jsonl ({id, result} per item), DIR/lower.jsonl (every
 // item's self-check and each refusal or truncation) and DIR/exercised.tsv
-// (the ledger with Exercised credited). diff compares a follower's rows with
+// (the ledger with Exercised credited); -tape-turns N,... adds each tape cut
+// at the end of turn N (id ...:tape:t<N>). diff compares a follower's rows with
 // gorge's stored results, never replaying gorge, and writes DIR2/verdicts.jsonl,
 // DIR2/compared.tsv and DIR2/finds/<class>/<id>/ (a repro directory per
 // non-agree item). calib reports, from a play dir and its diff dir, how many

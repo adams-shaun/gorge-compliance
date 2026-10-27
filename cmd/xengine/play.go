@@ -6,6 +6,10 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"slices"
+	"sort"
+	"strconv"
+	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
@@ -75,6 +79,7 @@ func runPlay(args []string) error {
 	seed := fs.Uint64("seed", 1, "chunk seed")
 	windows := fs.Bool("windows", false, "also emit one-turn windows")
 	ledgerPath := fs.String("ledger", "", "coverage ledger TSV at chunk start (empty: an empty ledger)")
+	tapeTurns := fs.String("tape-turns", "", "comma-separated turn counts N: also write each tape truncated at the end of turn N (ids ...:tape:t<N>)")
 	xmage := fs.Bool("xmage", false, "leave out the cards XMage spells differently (an XMage item names no per-card spelling)")
 	out := fs.String("out", "", "output dir (default under "+DefaultRoot+")")
 	fs.Parse(args)
@@ -83,6 +88,10 @@ func runPlay(args []string) error {
 	}
 	if *games < 1 || *chunk < 0 {
 		return fmt.Errorf("play needs -games >= 1 and -chunk >= 0")
+	}
+	turns, err := parseTapeTurns(*tapeTurns)
+	if err != nil {
+		return err
 	}
 	if *out == "" {
 		*out = filepath.Join(DefaultRoot, fmt.Sprintf("%s-c%d-s%d", *set, *chunk, *seed))
@@ -113,7 +122,7 @@ func runPlay(args []string) error {
 	if err := decks.Pairable(cands); err != nil {
 		return fmt.Errorf("set %s: %w", *set, err)
 	}
-	return play(reg, cands, led, *set, *chunk, *games, *seed, *out, *windows)
+	return play(reg, cands, led, *set, *chunk, *games, *seed, *out, *windows, turns)
 }
 
 // gameSeed is the seed game g of a chunk plays with: distinct per (chunk,
@@ -140,7 +149,67 @@ func windowFile(l lower.Lowered) *game.Tape {
 	return &t
 }
 
-func play(reg *cards.Registry, cands []decks.Card, led *cov.Ledger, set string, chunk, games int, seed uint64, out string, windows bool) error {
+// parseTapeTurns is the sorted, distinct turn counts of a -tape-turns list.
+func parseTapeTurns(s string) ([]int, error) {
+	var out []int
+	for _, f := range strings.Split(s, ",") {
+		if f = strings.TrimSpace(f); f == "" {
+			continue
+		}
+		n, err := strconv.Atoi(f)
+		if err != nil || n < 1 {
+			return nil, fmt.Errorf("-tape-turns: %q is not a turn count >= 1", f)
+		}
+		out = append(out, n)
+	}
+	sort.Ints(out)
+	return slices.Compact(out), nil
+}
+
+// reasonTurnPrefix is the Truncated reason of a tape prefix: the lowering was
+// cut at a turn boundary on purpose, not because it could not go on.
+const reasonTurnPrefix = "turn_prefix"
+
+// tapePrefix is the lowered tape l of t cut at the end of turn n: the longest
+// run of its steps that carries out only entries of turns <= n. The prefix has
+// the tape's id plus ":t<n>"; its tape file is t cut after the first entry of
+// turn n+1, which the self-check reads for the digest of the last step. ok is
+// false when there is nothing to cut: the tape ends within turn n, the
+// lowering stopped before the boundary, or no step lies before it.
+func tapePrefix(l lower.Lowered, t *game.Tape, n int) (p lower.Lowered, tf *game.Tape, ok bool) {
+	b := -1
+	for i, e := range t.Entries {
+		if int(e.Turn) > n {
+			b = i
+			break
+		}
+	}
+	if b < 0 || (l.Truncated != "" && l.TruncatedAt <= b) {
+		return l, nil, false
+	}
+	k := 0
+	for i, e := range l.StepEntry {
+		if e >= 0 && e < b {
+			k = i + 1
+		}
+	}
+	if k == 0 || k == len(l.Item.Steps) {
+		return l, nil, false
+	}
+	p = l
+	p.Item.ID = l.Item.ID + ":t" + strconv.Itoa(n)
+	p.Item.Steps = l.Item.Steps[:k:k]
+	p.StepEntry = l.StepEntry[:k:k]
+	p.Truncated, p.TruncatedAt = reasonTurnPrefix, b
+	if p.HasRNG && p.RNGStep >= k {
+		p.HasRNG, p.RNGStep = false, 0
+	}
+	cut := *t
+	cut.Entries = t.Entries[: b+1 : b+1]
+	return p, &cut, true
+}
+
+func play(reg *cards.Registry, cands []decks.Card, led *cov.Ledger, set string, chunk, games int, seed uint64, out string, windows bool, tapeTurns []int) error {
 	var items, gorge, lowerLog bytes.Buffer
 	exercised := cov.New()
 	exercised.Merge(led)
@@ -224,6 +293,15 @@ func play(reg *cards.Registry, cands []decks.Card, led *cov.Ledger, set string, 
 			hist[row.Status]++
 		} else if err := emit(l, tp, lower.SelfCheck(reg, l, tp)); err != nil {
 			return err
+		}
+		if err == nil {
+			for _, n := range tapeTurns {
+				if pl, pt, ok := tapePrefix(l, tp, n); ok {
+					if err := emit(pl, pt, lower.SelfCheck(reg, pl, tp)); err != nil {
+						return err
+					}
+				}
+			}
 		}
 		for _, w := range wins {
 			if err := emit(w, windowFile(w), lower.CheckWindow(reg, w)); err != nil {
