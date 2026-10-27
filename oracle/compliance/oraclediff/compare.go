@@ -5,6 +5,7 @@ package oraclediff
 
 import (
 	"fmt"
+	"regexp"
 	"sort"
 	"strings"
 
@@ -179,8 +180,23 @@ func ignored(name string, ignore []string) bool {
 	return false
 }
 
+var stepCheckpoint = regexp.MustCompile(`^step (\d+) \([^()]*\)$`)
+
+// sameStepCheckpoint reports whether two checkpoint labels name the same
+// point: equal, or both "step N (op)" with the same N. A driver labels a
+// snapshot after the op it ran, and the Forge export rewrites some ops (an
+// empty attack becomes pass_to) without moving their step index, so the op
+// suffix may differ while the index must not.
+func sameStepCheckpoint(a, b string) bool {
+	if a == b {
+		return true
+	}
+	ma, mb := stepCheckpoint.FindStringSubmatch(a), stepCheckpoint.FindStringSubmatch(b)
+	return ma != nil && mb != nil && ma[1] == mb[1]
+}
+
 func compareSnap(g, x rules.OracleSnapshot, compare []string, ignore []string) (Verdict, bool) {
-	if g.Checkpoint != x.Checkpoint {
+	if !sameStepCheckpoint(g.Checkpoint, x.Checkpoint) {
 		return Verdict{Status: Harness, Engine: "both", Msg: fmt.Sprintf("checkpoint %q vs %q", g.Checkpoint, x.Checkpoint)}, false
 	}
 	gf, xf := fields(g, false, compare), fields(x, true, compare)
