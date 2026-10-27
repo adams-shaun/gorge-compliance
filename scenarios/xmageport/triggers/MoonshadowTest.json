@@ -98,8 +98,7 @@
      }
     }
    ],
-   "xmage": "MoonshadowTest#testTriggerFromAllZones",
-   "known_bug": "XP[permanent-spec-zone-blind-in-changeszone]: ChangesZoneAll ValidCards$ Permanent.YouOwn+!token is matched against the live card already in the graveyard (non-LKI branch), and the bare Permanent base requires Zone==Battlefield when no zone context is given, so library-\u003egraveyard (mill) and hand-\u003egraveyard (discard) of permanent cards never match; only the battlefield death fires (probe: counters stay 5 after mill and after discard) (engine/rules/trigmatch/zone.go:171-175; engine/effects/filter_compiled.go:385-391). Also mill is not zone-batched (see Sidisi). CR 110.4a / 603.2."
+   "xmage": "MoonshadowTest#testTriggerFromAllZones"
   }
  ]
 }

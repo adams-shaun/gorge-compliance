@@ -290,8 +290,7 @@
      }
     }
    ],
-   "xmage": "DoublingSeasonTest#test_LoyaltyCounters_Pir",
-   "known_bug": "XP[selector-yourteamctrl-unsupported]: Pir's R:Event$ AddCounter | ValidCard$ Permanent.YourTeamCtrl -- 'YourTeamCtrl' has no evaluator anywhere in effects/rules (grep empty; ChooseCounter$ also unread), so Pir never applies (probe: cast Chandra with Pir gets 4 loyalty, want 5) (.cards/cardsfolder/p/pir_imaginative_rascal.txt, coverage gate does not flag it). CR 614.1a (in a two-player game 'your team' is just you, CR 810.2)."
+   "xmage": "DoublingSeasonTest#test_LoyaltyCounters_Pir"
   },
   {
    "name": "test-loyalty-counters-season-and-pir-season-first",

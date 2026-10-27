@@ -87,8 +87,7 @@
      "eq": 1
     }
    ],
-   "xmage": "GrindstoneTest#testGrindstoneUlamog",
-   "known_bug": "XP[from-anywhere-self-trigger-only-admits-hand-origin]: zoneGate admits a no-TriggerZones$ ChangesZone self-trigger only when From==Hand (engine/rules/trigger_zone_gate.go:84-88), so Ulamog's 'put into a graveyard from anywhere' trigger does not fire when milled from the library (probe: Thought Scour milling Ulamog leaves graveyard 2) and the graveyard is never shuffled back. CR 603.6a, 603.10a. (Grindstone also did not repeat; not investigated.)"
+   "xmage": "GrindstoneTest#testGrindstoneUlamog"
   }
  ]
 }

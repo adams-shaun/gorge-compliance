@@ -90,8 +90,7 @@
      "eq": 1
     }
    ],
-   "xmage": "ShamenEnKorTest#testFirstAbilityNonCombatDamage",
-   "known_bug": "XP[replacesplitdamage-unimplemented]: DB$ ReplaceSplitDamage (shaman_en_kor.txt SVar EnKorDmg) has no implementation anywhere in engine/effects/ or engine/rules/ (grep finds none); the en-Kor replacement applies but its body does nothing -- probe shows Shaman and Lion both with 0 damage after Bolt (the 3 damage vanishes) instead of 1 to Shaman / 2 to Lion. CR 614.9, 614.6."
+   "xmage": "ShamenEnKorTest#testFirstAbilityNonCombatDamage"
   },
   {
    "name": "test-second-ability-non-combat-damage",

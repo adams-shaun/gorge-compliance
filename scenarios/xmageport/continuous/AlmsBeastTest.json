@@ -186,8 +186,7 @@
      }
     }
    ],
-   "xmage": "AlmsBeastTest#testNoLifelinkAfterCombat",
-   "known_bug": "XP[effect-prevent-validtarget-ignores-remembered]: Shielded Passage's Effect-created bodyless Event$ DamageDone | Prevent$ True | ValidTarget$ Card.IsRemembered never prevents (probe: Passage then Lightning Bolt on own Rootwater Hunter still kills it), so Hunter dies to Alms Beast in combat and the post-combat activation is not offered. damageReplacementMatches evaluates ValidTarget$ with plain matchesSpecFrom, not the registration's remembered set (engine/rules/replacement_damage.go:326-328; ValidSource$ just above uses rememberedSpecContext). CR 615.1a."
+   "xmage": "AlmsBeastTest#testNoLifelinkAfterCombat"
   }
  ]
 }

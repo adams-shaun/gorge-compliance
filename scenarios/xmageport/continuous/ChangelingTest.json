@@ -76,8 +76,7 @@
      "pt": "3/3"
     }
    ],
-   "xmage": "ChangelingTest#coatOfArmsTest",
-   "known_bug": "XP[shares-creature-type-reads-printed-face]: sharesCreatureTypeWith iterates the referent's PRINTED Face().Types (engine/effects/filter_attachment.go:564), so Mistform Ultimus (CDA every creature type) only 'shares' Illusion and Mutavault (animated, all creature types) shares nothing; Coat of Arms gives Ultimus +3 instead of +5 and Mutavault +0 (probes: Ultimus+Coat+Lord of Atlantis = 4/4 not 5/5; Mutavault+Coat+Ultimus = 2/2 not 3/3). Should read derived creature types. CR 205.3m, 702.73a, 613.1d."
+   "xmage": "ChangelingTest#coatOfArmsTest"
   },
   {
    "name": "test-metallic-mimic-changeling-trigger",

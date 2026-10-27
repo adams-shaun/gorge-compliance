@@ -58,8 +58,7 @@
      }
     }
    ],
-   "xmage": "ZoneChangeReplacementTest#testFromLibraryZoneChange",
-   "known_bug": "XP[mill-one-at-a-time]: Mill moves cards one by one, re-reading the library top each iteration (engine/effects/cardflow.go:872-878), so Darksteel Colossus, shuffled back by its replacement, can be milled (and replaced) again and eats a mill count: probe shows only 3 Wastes milled (graveyard 4 instead of 5). Milling N is one event over the top N cards. CR 701.17a, 614.6."
+   "xmage": "ZoneChangeReplacementTest#testFromLibraryZoneChange"
   },
   {
    "name": "test-from-hand-zone-change",

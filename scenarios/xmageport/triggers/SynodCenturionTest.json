@@ -171,8 +171,7 @@
      "eq": 1
     }
    ],
-   "xmage": "SynodCenturionTest#testWithFlicker",
-   "known_bug": "XP[state-trigger-rechecked-on-resolution]: a Mode$ Always state trigger (Synod Centurion, IsPresent$ Artifact.Other+YouCtrl EQ0) is treated as intervening-if and rechecked at resolution; it triggers while Bottle Gnomes is in exile mid-Cloudshift but fizzles because Gnomes is back (engine/rules/stack.go:79-89 -\u003e engine/rules/trigger_condition.go:72 triggerResolvingCheckHolds, no Always exemption). CR 603.8 (state triggers have no resolution recheck; 603.4 applies only to 'if' clauses)."
+   "xmage": "SynodCenturionTest#testWithFlicker"
   }
  ]
 }

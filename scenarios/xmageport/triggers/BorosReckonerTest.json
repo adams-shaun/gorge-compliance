@@ -86,8 +86,7 @@
      "tapped": true
     }
    ],
-   "xmage": "BorosReckonerTest#testDamageAmountLikeDamageDealt",
-   "known_bug": "XP[player-istriggerremembered-unsupported]: Phytotitan's delayed trigger ValidPlayer$ Player.IsTriggerRemembered is never satisfied. MatchesPlayerSpecCtx handles only IsRemembered/Chosen (engine/effects/player_filter.go:221) and controlsCard.IsTriggerRemembered (:268), not a bare IsTriggerRemembered against pc.DelayedRemembered. The gate at engine/rules/trigger_delayed.go:227 fails closed, so Phytotitan stays in the graveyard (probe: still in GY at turn 3 draw). CR 603.7."
+   "xmage": "BorosReckonerTest#testDamageAmountLikeDamageDealt"
   }
  ]
 }

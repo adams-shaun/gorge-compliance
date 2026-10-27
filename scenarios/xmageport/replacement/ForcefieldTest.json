@@ -86,8 +86,7 @@
      }
     }
    ],
-   "xmage": "ForcefieldTest#testForcefield",
-   "known_bug": "XP[effect-replacement-loses-chosencard]: the DB$ Effect's DamageDone replacement is registered with Remembered/ChosenNumber but no ChosenCard snapshot (engine/effects/effect.go:566-577; statics do snapshot via effectChosenSnapshot at :663), and Forcefield's DBCleanup ClearChosenCard wipes the source's choice, so ValidSource$ Card.ChosenCard never matches and no damage is prevented (p1 14, want 18). CR 615.1a, 615.7. (cause inferred from code; chooses were answered)"
+   "xmage": "ForcefieldTest#testForcefield"
   }
  ]
 }
