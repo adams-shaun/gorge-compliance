@@ -27,8 +27,8 @@ type Card struct {
 }
 
 // Skip is a manifest card that is not a candidate, and why. Reasons:
-// "unfinished", "not in corpus", "unsupported [...]", "basic", "back face of X"
-// and "duplicate of X".
+// "unfinished", "not in corpus", "unsupported [...]", "basic", "back face of X",
+// "duplicate of X" and (Options.XMage only) "xmage_spelling".
 type Skip struct{ Card, Reason string }
 
 // Deck is one 40-card deck: Cards is sorted, basics repeated.
@@ -54,6 +54,14 @@ var basicNames = [5]string{"Plains", "Island", "Swamp", "Mountain", "Forest"}
 // (cmd/oraclediff/main.go): compliance.CorpusNameFold, then reg.Unsupported.
 // Basic lands are skipped. Both lists are in manifest order.
 func Candidates(reg *cards.Registry, manifestDir, set string) ([]Card, []Skip, error) {
+	return CandidatesWith(reg, manifestDir, set, Options{})
+}
+
+// CandidatesWith is Candidates under opt. With opt.XMage a card the manifest
+// lists under another name than the corpus spelling (the manifest is XMage's
+// own list, so that is XMage's spelling: Spellings.Differs agrees) is a Skip
+// "xmage_spelling" instead of a candidate; ExcludedXMage counts them.
+func CandidatesWith(reg *cards.Registry, manifestDir, set string, opt Options) ([]Card, []Skip, error) {
 	m, err := compliance.LoadManifest(manifestDir, set)
 	if err != nil {
 		return nil, nil, err
@@ -104,6 +112,10 @@ func Candidates(reg *cards.Registry, manifestDir, set string) ([]Card, []Skip, e
 		f := c.Faces[0]
 		if hasType(f.Types, "Basic") && hasType(f.Types, "Land") {
 			skips = append(skips, Skip{name, "basic"})
+			continue
+		}
+		if opt.XMage && mc.Name != name {
+			skips = append(skips, Skip{name, ReasonXMageSpelling})
 			continue
 		}
 		out = append(out, Card{Name: name, Identity: c.ColourIdentity(), Land: hasType(f.Types, "Land"), Pips: pips(f.ManaCost)})

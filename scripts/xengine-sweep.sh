@@ -7,7 +7,11 @@
 #                       (every go stage -- play, diff, cov, sweep-plan -- runs
 #                       inside a systemd scope: 4G, 400% CPU, GOMAXPROCS=4)
 #   2. each follower in XENGINE_FOLLOWERS replays items.jsonl under the heavy
-#      lock (scripts/heavy-lock.sh), after waiting for a free JVM slot
+#      lock (scripts/heavy-lock.sh), after waiting for a free JVM slot. XMage
+#      replays <chunk>/xitems.jsonl instead: `xengine xprep` fills the driver's
+#      answers and ability prefixes (the refused items, with their reasons, go
+#      to <chunk>/xprep.jsonl and have no XMage row), and play was given -xmage
+#      so no deck holds a card XMage spells differently
 #   3. xengine diff  -- classify the follower rows into <chunk>/diff-<f>
 #   4. the coverage ledger <root>/ledger.tsv absorbs the chunk (atomically),
 #      SUMMARY.md is regenerated, and <chunk>/.done is touched. A chunk is done
@@ -163,9 +167,10 @@ follower_rows() { # follower dir -> rows file
 	case "$f" in
 	xmage)
 		runner=${XENGINE_XMAGE_RUNNER:-$repo/scripts/xmage-oracle-run.sh}
+		xe xprep -play "$d" -out "$d/xitems.jsonl" || return 1
 		jvm_slot || return 1
 		run_stage "$repo/scripts/heavy-lock.sh" --wait "${XENGINE_XMAGE_WAIT:-20000}" --mem "${XENGINE_XMAGE_MEM:-12G}" \
-			--name xengine-xmage -- bash -c 'jvm_slot && exec "$@"' _ "$runner" "$d/items.jsonl" "$d/xmage.jsonl"
+			--name xengine-xmage -- bash -c 'jvm_slot && exec "$@"' _ "$runner" "$d/xitems.jsonl" "$d/xmage.jsonl"
 		;;
 	forge)
 		runner=${XENGINE_FORGE_RUNNER:-$repo/scripts/forge-oracle-run.sh}
@@ -187,6 +192,7 @@ play_stage() { # set chunk dir (reads <dir>/ledger-in.tsv when snapshot_into mad
 	local s=$1 c=$2 d=$3 args
 	args=(play -set "$s" -chunk "$c" -games "$games" -seed "$seed" -out "$d")
 	[ "${XENGINE_WINDOWS:-1}" = 0 ] || args+=(-windows)
+	case " $followers " in *" xmage "*) args+=(-xmage) ;; esac
 	[ ! -e "$d/ledger-in.tsv" ] || args+=(-ledger "$d/ledger-in.tsv")
 	run_stage xe "${args[@]}"
 }

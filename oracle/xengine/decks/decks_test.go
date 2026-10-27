@@ -1,6 +1,7 @@
 package decks
 
 import (
+	"fmt"
 	"reflect"
 	"sort"
 	"strings"
@@ -268,4 +269,64 @@ func TestReachableFDN(t *testing.T) {
 		t.Errorf("FDN feasible pairs %v, want all 10", FeasiblePairs(cands))
 	}
 	t.Logf("FDN: %d reachable, %d unreachable %v", reach, len(unreach), unreach)
+}
+
+// TestCandidatesXMageFilter: with Options.XMage no candidate is a card XMage
+// spells differently, exactly the cards that spell differently are left out
+// (as Skip "xmage_spelling", in candidate order) and the count is printed.
+// FDN and BLB, the calibration sets, lose none; APC (Fire // Ice) and ALL
+// (a diacritic) show the filter does bite.
+func TestCandidatesXMageFilter(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sp, err := LoadSpellings(manifestDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	bit := 0
+	for _, set := range []string{"FDN", "BLB", "APC", "ALL"} {
+		all, _, err := Candidates(reg, manifestDir, set)
+		if err != nil {
+			t.Fatal(err)
+		}
+		got, skips, err := CandidatesWith(reg, manifestDir, set, Options{XMage: true})
+		if err != nil {
+			t.Fatal(err)
+		}
+		var want []Card
+		var wantOut []string
+		for _, c := range all {
+			if sp.Differs(reg, c.Name) {
+				wantOut = append(wantOut, c.Name)
+			} else {
+				want = append(want, c)
+			}
+		}
+		for _, c := range got {
+			if sp.Differs(reg, c.Name) {
+				t.Errorf("%s: candidate %q has an XMage spelling that differs", set, c.Name)
+			}
+		}
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("%s: filtered candidates are not the unfiltered minus the differing ones (%d vs %d)", set, len(got), len(want))
+		}
+		var out []string
+		for _, s := range skips {
+			if s.Reason == ReasonXMageSpelling {
+				out = append(out, s.Card)
+			}
+		}
+		if !reflect.DeepEqual(out, wantOut) || ExcludedXMage(skips) != len(wantOut) {
+			t.Errorf("%s: excluded %v (count %d), want %v", set, out, ExcludedXMage(skips), wantOut)
+		}
+		fmt.Printf("xmage filter %s: %d of %d candidates excluded for a differing XMage spelling\n", set, ExcludedXMage(skips), len(all))
+		bit += len(wantOut)
+	}
+	if bit == 0 {
+		t.Error("the filter excluded nothing in any set: the test proves nothing")
+	}
+	// Without the option nothing is left out.
+	_, skips, _ := Candidates(reg, manifestDir, "APC")
+	if ExcludedXMage(skips) != 0 {
+		t.Errorf("Candidates without Options.XMage excluded %d cards", ExcludedXMage(skips))
+	}
 }
