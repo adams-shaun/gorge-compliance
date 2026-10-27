@@ -1,0 +1,225 @@
+{
+ "card": "",
+ "cr": [],
+ "id": "xe:BLB:0:3:w3:empty-stack-pair",
+ "name": "xengine window BLB-c0-g3-0-UG vs BLB-c0-g3-1-BR turn 3",
+ "setup": {
+  "p0": {
+   "battlefield": [
+    "Mountain"
+   ],
+   "hand": [
+    "Fountainport",
+    "Coruscation Mage",
+    "Downwind Ambusher",
+    "Mountain",
+    "Stormsplitter",
+    "Sazacap's Brew",
+    "Mountain"
+   ],
+   "library_top": [
+    "Swamp",
+    "Diresight",
+    "Take Out the Trash",
+    "Fountainport Bell",
+    "Mountain",
+    "Mountain",
+    "Manifold Mouse",
+    "Brazen Collector",
+    "Swamp",
+    "Coiling Rebirth",
+    "Swamp",
+    "Short Bow",
+    "Agate Assault",
+    "Swamp",
+    "Mountain",
+    "Flamecache Gecko",
+    "Swamp",
+    "Steampath Charger",
+    "Hazel's Nocturne",
+    "Starforged Sword",
+    "Mountain",
+    "Hearthborn Battler",
+    "Ravine Raider",
+    "Kindlespark Duo",
+    "Valley Flamecaller",
+    "Mountain",
+    "Bandit's Talent",
+    "Swamp",
+    "Mountain",
+    "Mountain",
+    "Tangle Tumbler",
+    "Swamp"
+   ],
+   "life": 20
+  },
+  "p1": {
+   "battlefield": [
+    "Island"
+   ],
+   "graveyard": [
+    "Portent of Calamity"
+   ],
+   "hand": [
+    "Thornvault Forager",
+    "Sugar Coat",
+    "Stocking the Pantry",
+    "Finch Formation",
+    "Druid of the Spade",
+    "Forest"
+   ],
+   "library_top": [
+    "Island",
+    "Forest",
+    "Short Bow",
+    "Scrapshooter",
+    "Island",
+    "Shore Up",
+    "Cache Grab",
+    "Forest",
+    "Island",
+    "Skyskipper Duo",
+    "Lilysplash Mentor",
+    "Forest",
+    "Clement, the Worrywort",
+    "Forest",
+    "Thundertrap Trainer",
+    "Bark-Knuckle Boxer",
+    "Calamitous Tide",
+    "Forest",
+    "Pond Prophet",
+    "Island",
+    "Forest",
+    "Bushy Bodyguard",
+    "Island",
+    "Forest",
+    "Rabid Bite",
+    "Waterspout Warden",
+    "Hivespine Wolverine",
+    "Dreamdew Entrancer",
+    "Pearl of Wisdom",
+    "Island",
+    "Forest",
+    "Island"
+   ],
+   "life": 20,
+   "tapped": [
+    "Island"
+   ]
+  }
+ },
+ "steps": [
+  {
+   "card": "p0:Mountain#2",
+   "op": "play",
+   "seat": 0
+  },
+  {
+   "ability_index": 0,
+   "card": "p0:Mountain",
+   "op": "activate",
+   "seat": 0
+  },
+  {
+   "ability_index": 0,
+   "card": "p0:Mountain#2",
+   "op": "activate",
+   "seat": 0
+  },
+  {
+   "card": "p0:Coruscation Mage",
+   "op": "cast",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  }
+ ],
+ "template": "xengine-window",
+ "turn": 1,
+ "why": "One turn of a recorded gorge game between two explore bots, replayed from its first precombat main phase.",
+ "xmage_ability": [
+  "",
+  "{T}: Add {R}.",
+  "{T}: Add {R}.",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
+ ],
+ "xmage_answers": [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null
+ ],
+ "xmage_pos": [
+  null,
+  null,
+  null,
+  null,
+  {
+   "active": 0,
+   "step": "main1",
+   "turn": 1
+  },
+  {
+   "active": 0,
+   "resolves": true,
+   "step": "main1",
+   "turn": 1
+  },
+  {
+   "active": 0,
+   "step": "main1",
+   "turn": 1
+  },
+  {
+   "active": 0,
+   "resolves": true,
+   "step": "main1",
+   "turn": 1
+  },
+  {
+   "active": 0,
+   "step": "main1",
+   "turn": 1
+  },
+  {
+   "active": 0,
+   "moved": true,
+   "step": "begin-combat",
+   "turn": 1
+  }
+ ]
+}

@@ -1,0 +1,244 @@
+{
+ "card": "",
+ "cr": [],
+ "id": "xe:FDN:0:11:w8:decl-timing",
+ "name": "xengine window FDN-c0-g11-0-WR vs FDN-c0-g11-1-WG turn 8",
+ "setup": {
+  "p0": {
+   "battlefield": [
+    "Mountain",
+    "Mountain",
+    "Plains",
+    "Angel of Vitality"
+   ],
+   "graveyard": [
+    "Burst Lightning"
+   ],
+   "hand": [
+    "Deadly Riposte",
+    "Mountain",
+    "Mountain",
+    "Mountain",
+    "Valorous Stance",
+    "Hinterland Sanctifier"
+   ],
+   "library_top": [
+    "Crystal Barricade",
+    "Mountain",
+    "Harmless Offering",
+    "Prideful Parent",
+    "Swab Goblin",
+    "Devout Decree",
+    "Zetalpa, Primal Dawn",
+    "Electroduplicate",
+    "Fireshrieker",
+    "Heraldic Banner",
+    "Bishop's Soldier",
+    "Mountain",
+    "Plains",
+    "Plains",
+    "Mountain",
+    "Mountain",
+    "Goblin Boarders",
+    "Plains",
+    "Mentor of the Meek",
+    "Plains",
+    "Plains",
+    "Frenzied Goblin",
+    "Plains",
+    "Slagstorm",
+    "Hidetsugu's Second Rite",
+    "Raging Redcap",
+    "Plains",
+    "Carnelian Orb of Dragonkind",
+    "Fire Elemental"
+   ],
+   "life": 20
+  },
+  "p1": {
+   "battlefield": [
+    "Forest",
+    "Forest",
+    "Plains",
+    "Healer's Hawk",
+    "Skyknight Squire",
+    "Dryad Militant"
+   ],
+   "counters": {
+    "Skyknight Squire": {
+     "P1P1": 1
+    }
+   },
+   "hand": [
+    "Springbloom Druid",
+    "Twinblade Blessing",
+    "Cultivator's Caravan",
+    "Joust Through"
+   ],
+   "library_top": [
+    "Soulstone Sanctuary",
+    "Forest",
+    "Quakestrider Ceratops",
+    "Plains",
+    "Plains",
+    "Forest",
+    "Dazzling Angel",
+    "Angelic Destiny",
+    "Hedron Archive",
+    "Quilled Greatwurm",
+    "Plains",
+    "Biogenic Upgrade",
+    "Elfsworn Giant",
+    "Blanchwood Armor",
+    "Vivien Reid",
+    "Forest",
+    "Forest",
+    "Imperious Perfect",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Plains",
+    "Heraldic Banner",
+    "Plains",
+    "Plains",
+    "Uncharted Haven",
+    "Forest",
+    "Pacifism",
+    "Needletooth Pack",
+    "Inspiring Paladin"
+   ],
+   "life": 18,
+   "tapped": [
+    "Forest",
+    "Plains"
+   ]
+  }
+ },
+ "steps": [
+  {
+   "card": "p0:Mountain#3",
+   "op": "play",
+   "seat": 0
+  },
+  {
+   "ability_index": 0,
+   "card": "p0:Plains",
+   "op": "activate",
+   "seat": 0
+  },
+  {
+   "card": "p0:Hinterland Sanctifier",
+   "op": "cast",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "attackers": [
+    "p0:Angel of Vitality"
+   ],
+   "defender": "p1",
+   "op": "attack",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  }
+ ],
+ "template": "xengine-window",
+ "turn": 1,
+ "why": "One turn of a recorded gorge game between two explore bots, replayed from its first precombat main phase.",
+ "xmage_ability": [
+  "",
+  "{T}: Add {W}.",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
+ ],
+ "xmage_answers": [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null
+ ],
+ "xmage_pos": [
+  null,
+  null,
+  null,
+  {
+   "active": 0,
+   "step": "main1",
+   "turn": 1
+  },
+  {
+   "active": 0,
+   "resolves": true,
+   "step": "main1",
+   "turn": 1
+  },
+  {
+   "active": 0,
+   "step": "main1",
+   "turn": 1
+  },
+  {
+   "active": 0,
+   "moved": true,
+   "step": "begin-combat",
+   "turn": 1
+  },
+  {
+   "active": 0,
+   "step": "begin-combat",
+   "turn": 1
+  },
+  {
+   "active": 0,
+   "moved": true,
+   "step": "declare-attackers",
+   "turn": 1
+  },
+  null,
+  {
+   "active": 0,
+   "step": "declare-attackers",
+   "turn": 1
+  }
+ ]
+}

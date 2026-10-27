@@ -91,6 +91,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // whose createNewGameAndPlayers seats a FreeForAll of three for it.
     private int seats = 2;
     private boolean attackAdvancedTurn = false;
+    // The step name the next checkpoint reports instead of the one it is taken
+    // in, set by a pass that stops before a declaration (declarationAhead).
+    private PhaseStep checkpointStepAs = null;
     private static final PhaseStep MAIN = PhaseStep.PRECOMBAT_MAIN;
 
     private final List<JsonObject> snaps = new ArrayList<>();
@@ -1162,7 +1165,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 queuePassCommands(i);
                 step(st, op, i);
                 String cp = "step " + i + " (" + op + ")";
-                runCode(cp, turn, phase, checkpointSeat(op, st, i), (info, p, g) -> snaps.add(snapshot(info, g)));
+                final PhaseStep reportAs = checkpointStepAs;
+                checkpointStepAs = null;
+                runCode(cp, turn, phase, checkpointSeat(op, st, i), (info, p, g) -> {
+                    JsonObject snap = snapshot(info, g);
+                    if (reportAs != null) {
+                        snap.addProperty("step", reportAs.name());
+                    }
+                    snaps.add(snap);
+                });
                 queuedA.add(new ArrayList<>(playerA.getActions().subList(beforeA, playerA.getActions().size())));
                 queuedB.add(new ArrayList<>(playerB.getActions().subList(beforeB, playerB.getActions().size())));
                 choicesA.add(new ArrayList<>(playerA.getChoices().subList(beforeChoicesA, playerA.getChoices().size())));
@@ -2952,6 +2963,59 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
     }
 
+    /** The step whose declaration the pass at {@code index} stops before: the
+     * pass of a recorded game that moved gorge into declare-attackers (or
+     * declare-blockers) and is followed by the step that declares something
+     * there. gorge leaves that declaration pending, so its checkpoint shows the
+     * board as it was before it. XMage declares in the step's beginStep, ahead
+     * of the step's first priority, so a checkpoint taken in that step already
+     * shows the creatures attacking (blocking). Null for any other pass. */
+    static PhaseStep declarationAhead(JsonArray steps, int index) {
+        if (!isPassRun(steps, index)) {
+            return null;
+        }
+        JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
+        if (!posFlag(pos, "moved") || !pos.has("step")) {
+            return null;
+        }
+        String at = pos.get("step").getAsString();
+        if (at.equals("declare-attackers") && declares(steps, index + 1, "attack", "attackers")) {
+            return PhaseStep.DECLARE_ATTACKERS;
+        }
+        if (at.equals("declare-blockers") && declares(steps, index + 1, "block", "blocks")) {
+            return PhaseStep.DECLARE_BLOCKERS;
+        }
+        return null;
+    }
+
+    /** Whether step {@code index} is the op with a non-empty declaration list. */
+    private static boolean declares(JsonArray steps, int index, String op, String key) {
+        return isOp(steps, index, op) && steps.get(index).getAsJsonObject().has(key)
+                && steps.get(index).getAsJsonObject().getAsJsonArray(key).size() > 0;
+    }
+
+    /** The last step with a priority before a declaration step: where XMage
+     * can still show the board as gorge's checkpoint before the declaration
+     * does. A declaration step has no other predecessor in the turn. */
+    static PhaseStep beforeDeclaration(PhaseStep declaration) {
+        switch (declaration) {
+            case DECLARE_ATTACKERS: return PhaseStep.BEGIN_COMBAT;
+            case DECLARE_BLOCKERS: return PhaseStep.DECLARE_ATTACKERS;
+            default: throw new IllegalArgumentException("no declaration in " + declaration);
+        }
+    }
+
+    /** Whether CMD_REQUIRE_STACK is a hard requirement at step {@code index}.
+     * It is for the legacy pairs, where the stack must hold the spell the pair
+     * resolves. A pass of a recorded game only follows gorge's position: gorge
+     * resolved an object XMage never put on its stack (an intervening-if or
+     * delayed trigger XMage does not make), and the stack is then empty. That
+     * is no harness failure: waitStackResolved passes at once on an empty
+     * stack, and the checkpoint shows the stack difference as a diverge. */
+    static boolean requireStackIsStrict(JsonArray steps, int index) {
+        return !isPassRun(steps, index);
+    }
+
     /** The commands of a pass of a recorded game, plus those of the step
      * after one. The pass that resolves an object (gorge's stack lost one)
      * queues the one-object resolution on the active seat, the seat that has
@@ -3142,6 +3206,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
         for (String cmd : passCommands(steps(sc0), stepIdx, activeSeat)) {
             switch (cmd) {
                 case CMD_REQUIRE_STACK:
+                    if (!requireStackIsStrict(steps(sc0), stepIdx)) {
+                        break;
+                    }
                     runCode(cmd, turn, phase, active, (info, pl, g) -> {
                         if (g.getStack().isEmpty()) {
                             Player prio = g.getPriorityPlayerId() == null ? null
@@ -3584,6 +3651,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // checkpoint by queuePassCommands, which the replay loop runs before this step.
                 if (passAction(steps(sc0), stepIdx, activeSeat) == PASS_RUN) {
                     followPassPosition(st.getAsJsonObject("xpos"));
+                    PhaseStep declaration = declarationAhead(steps(sc0), stepIdx);
+                    if (declaration != null) {
+                        // The checkpoint is taken at the last priority before the
+                        // declaration and reports the declaration step; the
+                        // declaring step moves the clock on.
+                        phase = beforeDeclaration(declaration);
+                        checkpointStepAs = declaration;
+                    }
                 }
                 return;
             case "resolve":
