@@ -76,6 +76,11 @@ diff)
 	printf '{"id":"i","class":"agree"}\n' > "${o[out]}/verdicts.jsonl"
 	printf 'card\tkey\texercised\tcompared\toffered\nA\tk\t0\t1\t0\n' > "${o[out]}/compared.tsv"
 	;;
+adjudicate)
+	echo "adjudicate" >> "$LOG"
+	mkdir -p "${o[out]}"
+	printf '{"id":"i","pattern":"FX|G","label":"gorge_suspect"}\n' > "${o[out]}/findings.jsonl"
+	;;
 cov)
 	if [ -n "${o[write]:-}" ]; then echo "cov-write sub=${o[sub]:-none} ledger=${o[ledger]:-none}" >> "$LOG"; else echo "cov-report" >> "$LOG"; fi
 	[ -z "${o[write]:-}" ] || printf 'card\tkey\texercised\tcompared\toffered\nA\tk\t1\t1\t0\n' > "${o[write]}"
@@ -129,6 +134,8 @@ check "cold: 4 xmage replays" '[ "$(count xmage)" = 4 ]'
 check "cold: 4 xprep stages, the xmage replays read xitems.jsonl" '[ "$(count xprep)" = 4 ] && [ "$(count "xmage xitems.jsonl")" = 4 ]' "$(cat "$LOG")"
 check "cold: 4 forge replays (4 exports)" '[ "$(count forge)" = 4 ] && [ "$(count export)" = 4 ]'
 check "cold: 8 diffs" '[ "$(count diff)" = 8 ]'
+check "cold: 4 adjudications, after both diffs" '[ "$(count adjudicate)" = 4 ]' "$(count adjudicate)"
+check "cold: SUMMARY.md has the pattern histogram" '/usr/bin/grep -q "three-way: pattern histogram" "$R/SUMMARY.md" && /usr/bin/grep -q "^FX|G 2" "$R/SUMMARY.md"' "$(cat "$R/SUMMARY.md" 2>/dev/null)"
 check "cold: 4 ledger merges" '[ "$(count cov-write)" = 4 ]' "$(count cov-write)"
 n=0
 for s in FDN BLB; do for c in 0 1; do [ -e "$R/$s/$c/.done" ] && n=$((n + 1)); done; done
@@ -180,9 +187,11 @@ check "repo root not created" '[ ! -e "$ROOT/.xengine-smoke-root" ]'
 
 # 6. A failing follower leaves no .done.
 R3=$TMP/run3
+: > "$LOG"
 out=$(FAIL_FOLLOWER=forge sweep "$R3" --sets FDN --chunks 2); rc=$?
 check "failing follower: sweep exits non-zero" '[ "$rc" != 0 ]' "rc=$rc"
 check "failing follower: no .done, later chunk skipped" '[ ! -e "$R3/FDN/0/.done" ] && [ ! -d "$R3/FDN/1" ]' "$out"
+check "failing follower: no adjudication" '[ "$(count adjudicate)" = 0 ]' "$(cat "$LOG")"
 check "failing follower: says which stage" 'has "$out" "FDN/0: forge replay FAILED"' "$out"
 
 # 7. A ledger publish that fails leaves no .done (chunk runs under `if`, where

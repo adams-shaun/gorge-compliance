@@ -8,6 +8,7 @@
 //	xengine cov  -ledger A.tsv [-ledger B.tsv ...] [-sets FDN,BLB] [-sub BASE.tsv] [-missing] [-write OUT.tsv]
 //	xengine calib -play DIR -diff DIR2 -engine xmage|forge
 //	xengine xprep -play DIR -out xitems.jsonl [-manifests DIR]
+//	xengine adjudicate -play DIR -xmage DIFF_X -forge DIFF_F -out DIR3 [-ledger DIR] [-forge-ref REF12]
 //	xengine sweep-plan -root DIR -sets 'FDN BLB' -chunks N [-stale] [-force]
 //
 // play writes DIR/tapes/*.json (every game's tape), DIR/items.jsonl (the
@@ -24,7 +25,9 @@
 // ability rule-text prefixes) on DIR's items and writes the ones it can serve
 // to xitems.jsonl, the rest with their reason to xprep.jsonl beside it; play's
 // -xmage leaves the cards XMage spells differently out of the decks. sweep-plan lists the SET/CHUNK pairs of a sweep root that
-// have no .done marker (scripts/xengine-sweep.sh). Follower output stays
+// have no .done marker (scripts/xengine-sweep.sh). adjudicate gives the
+// items one follower diverged on a three-way pattern (oraclediff.ThreeWay) from both followers' diffs, writes DIR3/findings.jsonl,
+// patterns.tsv, notes.md and a tickets/<cluster>.md draft per gorge_suspect cluster; -ledger adds the compact ledger shards. All of it is off-repo. Follower output stays
 // outside the repository.
 package main
 
@@ -43,7 +46,7 @@ const DefaultRoot = "/mnt/sata/gorge-training/xengine"
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|calib|xprep|sweep-plan [flags]")
+		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|calib|xprep|adjudicate|sweep-plan [flags]")
 		os.Exit(2)
 	}
 	var err error
@@ -58,10 +61,12 @@ func main() {
 		err = runCalib(os.Args[2:])
 	case "xprep":
 		err = runXprep(os.Args[2:])
+	case "adjudicate":
+		err = runAdjudicate(os.Args[2:])
 	case "sweep-plan":
 		err = runSweepPlan(os.Args[2:])
 	default:
-		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, calib, xprep or sweep-plan)", os.Args[1])
+		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, calib, xprep, adjudicate or sweep-plan)", os.Args[1])
 	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "xengine:", err)

@@ -13,6 +13,9 @@
 #      to <chunk>/xprep.jsonl and have no XMage row), and play was given -xmage
 #      so no deck holds a card XMage spells differently
 #   3. xengine diff  -- classify the follower rows into <chunk>/diff-<f>
+#      with both followers, xengine adjudicate -- the three-way pattern of each
+#                       item either diverged on (<chunk>/adjudicate/, ticket drafts
+#                       under tickets/; off-repo, nothing is ruled or committed)
 #   4. the coverage ledger <root>/ledger.tsv absorbs the chunk (atomically),
 #      SUMMARY.md is regenerated, and <chunk>/.done is touched. A chunk is done
 #      only when every stage exited 0.
@@ -216,6 +219,11 @@ finish_chunk() {
 			|| { echo "$s/$c: $f diff FAILED"; tail -3 "$d/diff-$f.log"; return 1; }
 		cargs+=(-ledger "$d/diff-$f/compared.tsv")
 	done
+	# Both followers' diffs are needed (the patterns compare them with each other).
+	if [[ " $followers " == *" forge "* && " $followers " == *" xmage "* ]]; then
+		xe adjudicate -play "$d" -xmage "$d/diff-xmage" -forge "$d/diff-forge" -out "$d/adjudicate" >"$d/adjudicate.log" 2>&1 \
+			|| { echo "$s/$c: adjudicate FAILED"; tail -3 "$d/adjudicate.log"; return 1; }
+	fi
 	xe cov "${cargs[@]}" -write "$d/ledger-out.tsv" >"$d/cov.log" 2>&1 || { echo "$s/$c: ledger merge FAILED"; tail -3 "$d/cov.log"; return 1; }
 	# finish_chunk runs under `if`, where set -e is off: every step is checked by hand.
 	{ cp "$d/ledger-out.tsv" "$ledger.tmp.$$" && mv "$ledger.tmp.$$" "$ledger"; } \
@@ -272,6 +280,13 @@ summary() {
 				histogram "diff-$f/verdicts.jsonl" .class "${done_dirs[@]}"
 				echo '```'
 			done
+			if [ -n "$(ls "${done_dirs[@]/%//adjudicate/findings.jsonl}" 2>/dev/null)" ]; then
+				echo
+				echo "### three-way: pattern histogram"
+				echo '```'
+				histogram adjudicate/findings.jsonl .pattern "${done_dirs[@]}"
+				echo '```'
+			fi
 			if [ -s "$ledger" ]; then
 				echo
 				echo "### coverage"
