@@ -89,8 +89,7 @@
      ]
     }
    ],
-   "xmage": "CopySpellTest#ZadaHedronGrinderBoost",
-   "known_bug": "XP[copy-for-each-can-target-unread]: Zada's trigger body DB$ CopySpellAbility | CopyForEachCanTarget$ Creature.YouCtrl: the param is not read anywhere (no reader in engine/effects/copy.go effCopySpellAbility, engine/effects/copy.go:55; grep finds no 'CopyForEach'), so gorge makes a single copy keeping Zada as target -\u003e Zada 9/9, Pillarfield Ox 2/4 without flying. Should create one copy per other creature the spell could target, each targeting a different one. CR 707.10d. Card: .cards/cardsfolder/z/zada_hedron_grinder.txt."
+   "xmage": "CopySpellTest#ZadaHedronGrinderBoost"
   },
   {
    "name": "zada-hedron-grinder-and-spliced-spell",

@@ -78,8 +78,7 @@
      ]
     }
    ],
-   "xmage": "ZadaHedronGrinderTest#testWithStriveSpell",
-   "known_bug": "XP[copyspell-copyforeachcantarget-unsupported]: same: one copy of Rouse the Mob stays on Zada (7/3) and Silvercoat Lion gets no copy (engine/effects/copy.go:55 ignores CopyForEachCanTarget$). CR 707.10."
+   "xmage": "ZadaHedronGrinderTest#testWithStriveSpell"
   },
   {
    "name": "test-targets-by-ai",
@@ -152,8 +151,7 @@
      "pt": "3/3"
     }
    ],
-   "xmage": "ZadaHedronGrinderTest#testTargetsByAI",
-   "known_bug": "XP[copyspell-copyforeachcantarget-unsupported]: CopySpellAbility ignores CopyForEachCanTarget$ Creature.YouCtrl (param absent from code), making a single copy that keeps Zada as target instead of one copy per other creature retargeted (Zada 5/5, others unchanged) (engine/effects/copy.go:55 effCopySpellAbility; card .cards/cardsfolder/z/zada_hedron_grinder.txt). CR 707.10c / 707.10 (copy for each, each with new target per Oracle)."
+   "xmage": "ZadaHedronGrinderTest#testTargetsByAI"
   }
  ]
 }
