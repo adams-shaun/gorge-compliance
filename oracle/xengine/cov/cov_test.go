@@ -1,0 +1,102 @@
+package cov
+
+import (
+	"bytes"
+	"fmt"
+	"os"
+	"strings"
+	"testing"
+
+	"github.com/adams-shaun/gorge/testkit/testutil"
+)
+
+// goldenCards is the fixed inventory fixture: one card per shape.
+var goldenCards = []string{
+	"Grizzly Bears",      // vanilla creature
+	"Prodigal Sorcerer",  // one activated ability
+	"Elvish Visionary",   // ETB trigger
+	"Jace Beleren",       // planeswalker
+	"Sulfurous Springs",  // land, mana abilities
+	"Valki, God of Lies", // modal DFC
+	"Bonecrusher Giant",  // adventure
+	"The Eldest Reborn",  // saga
+}
+
+func TestInventoryGolden(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	var b strings.Builder
+	for _, n := range goldenCards {
+		c, ok := reg.Lookup(n)
+		if !ok {
+			t.Fatalf("%q not in the corpus", n)
+		}
+		fmt.Fprintf(&b, "%s\n", n)
+		for _, k := range Keys(c) {
+			m := ""
+			if k.Mana {
+				m = " mana"
+			}
+			fmt.Fprintf(&b, "  %s\t%s%s\n", k.ID, k.Desc, m)
+		}
+	}
+	const path = "testdata/keys.golden"
+	if os.Getenv("XENGINE_REGEN") != "" {
+		if err := os.WriteFile(path, []byte(b.String()), 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	want, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if string(want) != b.String() {
+		t.Errorf("keys differ from %s (XENGINE_REGEN=1 to regenerate)\n--- got\n%s--- want\n%s", path, b.String(), want)
+	}
+}
+
+func TestLedgerRoundTrip(t *testing.T) {
+	a := New()
+	a.Add("Alpha", "cast", Counts{Exercised: 2, Compared: 1})
+	a.Add("Alpha", "f0/a0", Counts{Offered: 3})
+	a.Add("Beta", "land", Counts{Exercised: 1})
+	a.Add("Alpha", "f0/t0", Counts{})
+	var one bytes.Buffer
+	if err := a.WriteTSV(&one); err != nil {
+		t.Fatal(err)
+	}
+	b, err := ReadTSV(bytes.NewReader(one.Bytes()))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var two bytes.Buffer
+	if err := b.WriteTSV(&two); err != nil {
+		t.Fatal(err)
+	}
+	if one.String() != two.String() {
+		t.Fatalf("round trip not stable:\n%s\n%s", one.String(), two.String())
+	}
+	if !strings.HasPrefix(one.String(), tsvHeader+"\nAlpha\tcast\t") {
+		t.Errorf("not sorted under a header:\n%s", one.String())
+	}
+	m := New()
+	m.Merge(a)
+	m.Merge(b)
+	if got := m.Get("Alpha", "cast"); got != (Counts{Exercised: 4, Compared: 2}) {
+		t.Errorf("merge twice: %+v", got)
+	}
+	if got := m.Get("Alpha", "f0/a0"); got.Offered != 6 {
+		t.Errorf("offered: %+v", got)
+	}
+	var m1, m2 bytes.Buffer
+	m.WriteTSV(&m1)
+	m.WriteTSV(&m2)
+	if m1.String() != m2.String() {
+		t.Error("merged bytes unstable")
+	}
+	var rep bytes.Buffer
+	m.Report(&rep, map[string][]string{"X": {"Alpha", "Beta", "Gamma"}})
+	want := "X: candidates 3, exercised 2, fully compared 0, never exercised 1\n  never exercised: Gamma\n"
+	if rep.String() != want {
+		t.Errorf("report:\n%s\nwant\n%s", rep.String(), want)
+	}
+}
