@@ -178,12 +178,14 @@ func TestXengineForgeExportEmptyDeclaration(t *testing.T) {
 	}
 }
 
-// TestForgeDropsEmptyDeclarationDecisions: an empty attack or block step is
-// rewritten to a pass_to "priority" the driver never poses as a declaration,
-// so gorge's attackers/blockers decision for that step must not travel in the
-// request (the driver would report it unconsumed). A stated declaration's
-// decision, other kinds at the same step, and non-xengine items are kept.
-func TestForgeDropsEmptyDeclarationDecisions(t *testing.T) {
+// TestForgeDropsDeclarationDecisions: the driver declares from the step's own
+// list and never takes gorge's attackers/blockers decision, so that decision
+// must not travel in the request for an empty declaration (rewritten to a
+// pass_to "priority") or a stated one (calib-forge-3 BLB xe:BLB:0:11:w3: step
+// 10 attacks with Valley Mightcaller and the decision was left over). Other
+// kinds at the same step, a declaration kind at another step, and non-xengine
+// items are kept.
+func TestForgeDropsDeclarationDecisions(t *testing.T) {
 	steps := []oraclegen.Step{
 		{Op: "pass_to", Step: "main1"},
 		{Op: "attack", Seat: 1, Defender: "p0", Attackers: []string{}},
@@ -201,15 +203,15 @@ func TestForgeDropsEmptyDeclarationDecisions(t *testing.T) {
 	mk := func(tmpl string) oraclegen.Item {
 		return oraclegen.Item{ID: "xe:t", Template: tmpl, Scenario: oraclegen.Scenario{Steps: steps}}
 	}
-	got := forgeDropEmptyDeclarations(mk(lower.Template), ds)
-	want := []rules.OracleDecision{ds[1], ds[3], ds[4]}
+	got := forgeDropDeclarationDecisions(mk(lower.Template), ds)
+	want := []rules.OracleDecision{ds[1], ds[3]}
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("decisions %+v, want %+v", got, want)
 	}
 	if len(ds) != 5 || ds[0].Kind != "attackers" {
 		t.Errorf("the input decisions were mutated: %+v", ds)
 	}
-	if got := forgeDropEmptyDeclarations(mk("other"), ds); len(got) != len(ds) {
+	if got := forgeDropDeclarationDecisions(mk("other"), ds); len(got) != len(ds) {
 		t.Errorf("non-xengine item lost decisions: %+v", got)
 	}
 
