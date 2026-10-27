@@ -31,6 +31,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/gate"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
@@ -145,8 +146,10 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 		if gerr != nil || decisions == nil {
 			decisions = []rules.OracleDecision{}
 		}
+		sha := gate.ItemSHA(it)
+		it = forgeDeclarations(it)
 		line, err := json.Marshal(forgeRequest{
-			ID: it.ID, ScenarioSHA: gate.ItemSHA(it), Item: it,
+			ID: it.ID, ScenarioSHA: sha, Item: it,
 			GorgeDecisions: decisions, Abilities: forgeAbilityLines(reg, it),
 		})
 		if err != nil {
@@ -162,6 +165,63 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 		return n, err
 	}
 	return n, of.Close()
+}
+
+// forgeDeclarations adapts, in an xengine item, the steps around each attack
+// and block to how the Forge driver reaches the declaration. Steps keep their
+// index, so the per-step side tables (abilities, decisions) stay aligned.
+// Other items pass through unchanged, and the caller hashes the item before
+// this rewrite, so the scenario SHA still names the lowered item.
+//
+//   - A declaration with nothing declared (no attackers, no blocks) becomes a
+//     pass_to decision "priority". Forge poses a declaration only to a player
+//     with a creature able to make it, and an empty combat has no priority in
+//     that step, so the driver cannot follow the step (it reports "passed
+//     declare-attackers without being asked"). The driver completes a pass_to
+//     "priority" at once: it snapshots the current state and consumes no
+//     priority, which is all gorge's empty declaration does, and the passes
+//     after it walk on from where they were. (A pass_to the declaration step
+//     would need a further priority and desync the following pass.)
+//   - The pass just before a declaration that declares something becomes a
+//     pass_to decision "attackers" or "blockers". gorge's pass leaves the
+//     decision pending, but Forge asks for the declaration before the priority
+//     where a pass would complete, so the driver's callback finds that pass as
+//     the current step and declares nothing. A pass_to of that decision
+//     completes inside the callback, which then declares the next step. The
+//     pass it replaces passes the same priority first.
+func forgeDeclarations(it oraclegen.Item) oraclegen.Item {
+	if it.Template != lower.Template && it.Template != lower.WindowTemplate {
+		return it
+	}
+	var steps []oraclegen.Step
+	set := func(i int, st oraclegen.Step) {
+		if steps == nil {
+			steps = append([]oraclegen.Step(nil), it.Steps...)
+		}
+		steps[i] = st
+	}
+	for i, st := range it.Steps {
+		var decision string
+		var empty bool
+		switch st.Op {
+		case "attack":
+			decision, empty = "attackers", len(st.Attackers) == 0
+		case "block":
+			decision, empty = "blockers", len(st.Blocks) == 0
+		default:
+			continue
+		}
+		if empty {
+			set(i, oraclegen.Step{Op: "pass_to", Decision: "priority", Expect: st.Expect, Answers: st.Answers, Targets: st.Targets})
+		} else if i > 0 && it.Steps[i-1].Op == "pass" {
+			p := it.Steps[i-1]
+			set(i-1, oraclegen.Step{Op: "pass_to", Decision: decision, Expect: p.Expect, Answers: p.Answers, Targets: p.Targets})
+		}
+	}
+	if steps != nil {
+		it.Steps = steps
+	}
+	return it
 }
 
 // forgeAbilityLines maps each step that names an ability by ability_index to
