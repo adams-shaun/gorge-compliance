@@ -184,15 +184,46 @@ func DigestOfGame(e *rules.Engine) Digest {
 	return d
 }
 
-// sortField orders the battlefield by controller, then name. The sort is
-// stable over creation order, which is the snapshot's ref ordinal order.
+// sortField orders the battlefield by controller, then name, then by the
+// permanent's remaining fields. Object ids and creation order are not part of
+// a digest (the runner mints a scenario's objects in setup order, the live
+// game in deck order), so two same-named permanents of one controller are
+// told apart by what they show, never by which was made first.
 func sortField(f []PermDigest) {
-	sort.SliceStable(f, func(a, b int) bool {
-		if f[a].Controller != f[b].Controller {
-			return f[a].Controller < f[b].Controller
+	key := func(p PermDigest) string {
+		d := Digest{Field: []PermDigest{p}}
+		var b strings.Builder
+		for _, kv := range d.flatten() {
+			if strings.HasPrefix(kv[0], "field[0].") {
+				b.WriteString(kv[1])
+				b.WriteByte(0)
+			}
 		}
-		return f[a].Name < f[b].Name
+		return b.String()
+	}
+	keys := make([]string, len(f))
+	for i := range f {
+		keys[i] = key(f[i])
+	}
+	idx := make([]int, len(f))
+	for i := range idx {
+		idx[i] = i
+	}
+	sort.SliceStable(idx, func(a, b int) bool {
+		x, y := f[idx[a]], f[idx[b]]
+		if x.Controller != y.Controller {
+			return x.Controller < y.Controller
+		}
+		if x.Name != y.Name {
+			return x.Name < y.Name
+		}
+		return keys[idx[a]] < keys[idx[b]]
 	})
+	out := make([]PermDigest, len(f))
+	for i, j := range idx {
+		out[i] = f[j]
+	}
+	copy(f, out)
 }
 
 // DigestOfSnapshot is the digest of an oracle snapshot: the same struct
@@ -333,5 +364,29 @@ func (d Digest) flatten() [][2]string {
 		counters(pre+".counters", p.Counters)
 		add(pre+".attached_to", strconv.Quote(p.AttachedTo))
 	}
+	return out
+}
+
+// Swapped is the digest with seats 0 and 1 exchanged: the seat numbers,
+// the player list, the controllers and owners and the "pN" attachment names.
+// The lowering relabels a tape whose starting player is seat 1 this way.
+func (d Digest) Swapped() Digest {
+	flip := func(i int) int { return 1 - i }
+	out := d
+	out.Active, out.Priority = flip(d.Active), flip(d.Priority)
+	out.Players = make([]PlayerDigest, len(d.Players))
+	for i, p := range d.Players {
+		p.Seat = flip(p.Seat)
+		out.Players[flip(i)] = p
+	}
+	out.Field = make([]PermDigest, len(d.Field))
+	for i, p := range d.Field {
+		p.Controller, p.Owner = flip(p.Controller), flip(p.Owner)
+		if n, err := strconv.Atoi(strings.TrimPrefix(p.AttachedTo, "p")); err == nil && strings.HasPrefix(p.AttachedTo, "p") {
+			p.AttachedTo = fmt.Sprintf("p%d", flip(n))
+		}
+		out.Field[i] = p
+	}
+	sortField(out.Field)
 	return out
 }
