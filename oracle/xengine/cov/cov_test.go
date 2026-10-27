@@ -138,3 +138,54 @@ func TestReportFullyCompared(t *testing.T) {
 		t.Errorf("all keys compared:\n%s\nwant\n%s", got, want)
 	}
 }
+
+func TestLedgerSub(t *testing.T) {
+	base := New()
+	base.Add("A", "cast", Counts{Exercised: 5, Compared: 2, Offered: 1})
+	base.Add("D", "k", Counts{Exercised: 4})
+	base.Add("E", "k", Counts{Exercised: 1, Compared: 1, Offered: 1})
+	l := New()
+	l.Add("A", "cast", Counts{Exercised: 8, Compared: 7, Offered: 3})
+	l.Add("B", "land", Counts{Exercised: 1})
+	l.Add("E", "k", Counts{Exercised: 1, Compared: 1, Offered: 1})
+	var baseBefore bytes.Buffer
+	base.WriteTSV(&baseBefore)
+
+	l.Sub(base)
+	for _, w := range []struct {
+		card, key string
+		want      Counts
+	}{
+		{"A", "cast", Counts{Exercised: 3, Compared: 5, Offered: 2}},
+		{"B", "land", Counts{Exercised: 1}},
+		{"E", "k", Counts{}},
+		{"D", "k", Counts{}},
+	} {
+		if got := l.Get(w.card, w.key); got != w.want {
+			t.Errorf("%s/%s after Sub: %+v, want %+v", w.card, w.key, got, w.want)
+		}
+	}
+	var one, two bytes.Buffer
+	l.WriteTSV(&one)
+	l.WriteTSV(&two)
+	if one.String() != two.String() {
+		t.Error("written bytes unstable")
+	}
+	wantTSV := tsvHeader + "\nA\tcast\t3\t5\t2\nB\tland\t1\t0\t0\nE\tk\t0\t0\t0\n"
+	if one.String() != wantTSV {
+		t.Errorf("tsv:\n%swant\n%s", one.String(), wantTSV)
+	}
+	var baseAfter bytes.Buffer
+	base.WriteTSV(&baseAfter)
+	if baseBefore.String() != baseAfter.String() {
+		t.Error("Sub changed its argument")
+	}
+
+	l.Sub(base)
+	if got := l.Get("A", "cast"); got != (Counts{Exercised: 0, Compared: 3, Offered: 1}) {
+		t.Errorf("second Sub: %+v (want saturation at 0)", got)
+	}
+	if got := l.Get("B", "land"); got != (Counts{Exercised: 1}) {
+		t.Errorf("untouched row: %+v", got)
+	}
+}
