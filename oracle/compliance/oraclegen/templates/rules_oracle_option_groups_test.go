@@ -1,6 +1,7 @@
 package templates_test
 
 import (
+	"encoding/json"
 	"strings"
 	"testing"
 
@@ -38,7 +39,23 @@ func TestOracleDecisionRecordsOptionGroups(t *testing.T) {
 	if skip != nil {
 		t.Fatalf("precondition: scenario does not settle: %s", skip.Reason)
 	}
-	res, err := rules.RunOracleScenarioJSON(reg, it.Raw())
+	// The engine now takes the per-player targets at activation (CR 602.2b),
+	// so the generated step names them and no ask is posed. Strip them: the
+	// engine then poses the grouped ask, which is what the recording must carry.
+	var sc map[string]any
+	if err := json.Unmarshal(it.Raw(), &sc); err != nil {
+		t.Fatal(err)
+	}
+	for _, st := range sc["steps"].([]any) {
+		if m := st.(map[string]any); m["op"] == "activate" {
+			delete(m, "targets")
+		}
+	}
+	raw, err := json.Marshal(sc)
+	if err != nil {
+		t.Fatal(err)
+	}
+	res, err := rules.RunOracleScenarioJSON(reg, raw)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -47,16 +64,16 @@ func TestOracleDecisionRecordsOptionGroups(t *testing.T) {
 	}
 	found := false
 	for _, d := range res.Decisions {
-		if d.Kind != "choose_n" || len(d.OptionGroups) == 0 {
+		if (d.Kind != "choose_n" && d.Kind != "target") || len(d.OptionGroups) == 0 {
 			continue
 		}
 		for _, g := range d.OptionGroups {
 			if !strings.HasPrefix(g, "target-controller-") {
-				t.Fatalf("grouped choose carries a non-target group %q", g)
+				t.Fatalf("grouped ask carries a non-target group %q", g)
 			}
 		}
 		if len(d.OptionRefs) == 0 {
-			t.Fatalf("the grouped choose offers no object options: %+v", d)
+			t.Fatalf("the grouped ask offers no object options: %+v", d)
 		}
 		found = true
 	}
