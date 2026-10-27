@@ -118,7 +118,10 @@ func DigestOfGame(e *rules.Engine) Digest {
 		ids := g.Zone(z, p)
 		out := make([]string, 0, len(ids))
 		for _, id := range ids {
-			out = append(out, faceName(g.Obj(id)))
+			// A nameless object is an ability the engine parked in exile, not a card.
+			if n := faceName(g.Obj(id)); n != "" {
+				out = append(out, n)
+			}
 		}
 		if sorted {
 			sort.Strings(out)
@@ -233,11 +236,16 @@ func DigestOfSnapshot(s rules.OracleSnapshot) Digest {
 		Turn: s.Turn, Step: s.Step, Active: s.Active, Priority: s.Priority,
 		Players: []PlayerDigest{}, Field: []PermDigest{},
 	}
+	// nonNil copies x without its nameless entries: the engine parks resolved
+	// abilities in exile, which DigestOfGame leaves out too.
 	nonNil := func(x []string) []string {
-		if x == nil {
-			return []string{}
+		out := []string{}
+		for _, n := range x {
+			if n != "" {
+				out = append(out, n)
+			}
 		}
-		return append([]string{}, x...)
+		return out
 	}
 	for _, p := range s.Players {
 		top := nonNil(p.LibraryTop)

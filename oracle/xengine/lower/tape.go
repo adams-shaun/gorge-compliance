@@ -47,6 +47,19 @@ type Lowered struct {
 	// Swap is true when the tape's starting player was seat 1, so every seat
 	// in the scenario is the opposite of the tape's.
 	Swap bool `json:"swap,omitempty"`
+	// Prelude is the number of leading attach steps of a window: the setup
+	// checkpoint precedes them, so it carries no attachment, and the state
+	// the cut's digest stands for is the one after the last of them.
+	Prelude int `json:"prelude,omitempty"`
+	// HasRNG and RNGStep: a window entry consumed engine randomness (a
+	// shuffle), and RNGStep is the first step that carries one. From its
+	// checkpoint on the library order is the runner's, not the live game's, so
+	// the self-check leaves library_top out.
+	HasRNG  bool `json:"has_rng,omitempty"`
+	RNGStep int  `json:"rng_step,omitempty"`
+	// Against is the tape a window is self-checked against: its entries
+	// rebased so the cut is turn 1 (see windowTape). nil for a whole-game tape.
+	Against *game.Tape `json:"-"`
 }
 
 var deckName = regexp.MustCompile(`-c(\d+)-g(\d+)-`)
@@ -140,16 +153,23 @@ func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 	}
 	l.FirstEntry = first
 
+	l.lowerEntries(reg, m, t.Entries, first, t.Outcome.Stall != "")
+	return l, nil
+}
+
+// lowerEntries lowers entries[first:] into l's steps. stalled marks entries
+// that end in a watchdog, not a game end or the end of a window.
+func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.Entry, first int, stalled bool) {
 	// A pass that posed asks owes its answers to the next step created; the
 	// pass is not final until that step exists, so its place is kept.
 	var owed []oraclegen.Answer
 	owedAt, owedSteps := -1, 0 // first entry of the pass group, steps before it
-	for i := first; i < len(t.Entries); {
+	for i := first; i < len(entries); {
 		j := i + 1
-		for j < len(t.Entries) && isAsk(t.Entries[j]) {
+		for j < len(entries) && isAsk(entries[j]) {
 			j++
 		}
-		steps, stepEntry, answers, why := lowerGroup(reg, m, t.Entries[i:j])
+		steps, stepEntry, answers, why := lowerGroup(reg, m, entries[i:j])
 		if why != nil {
 			at := i
 			if owedAt >= 0 {
@@ -158,7 +178,7 @@ func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 				l.drop(owedSteps)
 			}
 			l.stop(at, why)
-			return l, nil
+			return
 		}
 		if len(owed) > 0 {
 			steps[0].Answers = append(append([]oraclegen.Answer{}, owed...), steps[0].Answers...)
@@ -166,13 +186,13 @@ func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 		}
 		mainStep := len(steps) - 1
 		if steps[mainStep].Op == "pass" && len(answers) > 0 {
-			if why := unsettled(t.Entries[i:j]); why != nil {
+			if why := unsettled(entries[i:j]); why != nil {
 				l.stop(i, why)
-				return l, nil
+				return
 			}
 			owed, owedAt, owedSteps = answers, i, len(l.Item.Steps)
 		} else if len(answers) > 0 {
-			attach(&steps[mainStep], answers, t.Entries[i:j])
+			attach(&steps[mainStep], answers, entries[i:j])
 		}
 		stepEntry[mainStep] = j - 1
 		l.Item.Steps = append(l.Item.Steps, steps...)
@@ -182,13 +202,12 @@ func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 	if owedAt >= 0 {
 		// The last pass posed an ask nothing after it can answer.
 		l.drop(owedSteps)
-		l.stop(owedAt, unsupported("ask_after_pass:"+t.Entries[owedAt+1].Kind))
-		return l, nil
+		l.stop(owedAt, unsupported("ask_after_pass:"+entries[owedAt+1].Kind))
+		return
 	}
-	if t.Outcome.Stall != "" {
-		l.stop(len(t.Entries), &truncation{ReasonStall})
+	if stalled {
+		l.stop(len(entries), &truncation{ReasonStall})
 	}
-	return l, nil
 }
 
 func (l *Lowered) stop(at int, why *truncation) { l.Truncated, l.TruncatedAt = why.reason, at }
@@ -259,7 +278,7 @@ func answersOf(m seatMap, g []game.Entry) ([]oraclegen.Answer, *truncation) {
 		switch {
 		case a.Reanswered:
 			return nil, unsupported("reanswered")
-		case a.RNG > 0 && len(a.Flips) == 0:
+		case a.RNG > 0 && len(a.Flips) == 0 && !m.rngOK:
 			// A shuffle or a random pick: the runner's seeded RNG cannot land
 			// where the live game did.
 			return nil, unsupported("rng")
