@@ -129,8 +129,9 @@ func TestAdjudicateSkipsNonDiverge(t *testing.T) {
 	}
 }
 
-// clusterInput is n gorge_suspect items on Shock, the i-th with i extra steps
-// before the diverging one (so the repros have different lengths).
+// clusterInput is n gorge_suspect items on Shock, the i-th with n-1-i extra
+// steps before the diverging one: repro length runs against id order, so the
+// shortest repro is the last id and cannot be found by taking the first.
 func clusterInput(t *testing.T, diffs string, n int) Input {
 	in := Input{
 		Items: map[string]oraclegen.Item{}, Gorge: map[string]rules.OracleResult{},
@@ -142,7 +143,8 @@ func clusterInput(t *testing.T, diffs string, n int) Input {
 		id := fmt.Sprintf("xe:T:0:%d:w0", i)
 		it := item(id, "Shock")
 		it.Steps = nil
-		for range i {
+		extra := n - 1 - i
+		for range extra {
 			it.Steps = append(it.Steps, oraclegen.Step{Op: "pass"})
 		}
 		it.Steps = append(it.Steps, oraclegen.Step{Op: "cast", Card: "Shock"})
@@ -150,7 +152,7 @@ func clusterInput(t *testing.T, diffs string, n int) Input {
 		in.Gorge[id] = result(18)
 		in.XRows[id] = row(id, 20, "")
 		in.FRows[id] = row(id, 20, "")
-		xf := classify.Finding{ID: id, Engine: "xmage", Class: classify.ClassDiverge, Checkpoint: "step 0 (cast)", Field: fmt.Sprintf("p%d.life", i), Gorge: "18", Other: "20", Step: i}
+		xf := classify.Finding{ID: id, Engine: "xmage", Class: classify.ClassDiverge, Checkpoint: "step 0 (cast)", Field: fmt.Sprintf("p%d.life", i), Gorge: "18", Other: "20", Step: extra}
 		ff := xf
 		ff.Engine = "forge"
 		in.XFind[id], in.FFind[id] = xf, ff
@@ -175,7 +177,7 @@ func TestClusterDraft(t *testing.T) {
 		t.Fatalf("rows %d clusters %d drafts %d", len(res.Rows), len(res.Clusters), len(res.Drafts))
 	}
 	c := res.Drafts[0]
-	if c.Card != "Shock" || c.FieldClass != "p.life" || len(c.Findings) != 3 || c.Smallest.ID != "xe:T:0:0:w0" {
+	if c.Card != "Shock" || c.FieldClass != "p.life" || len(c.Findings) != 3 || c.Smallest.ID != "xe:T:0:2:w0" {
 		t.Fatalf("cluster %+v", c)
 	}
 	out := filepath.Join(t.TempDir(), "out")
@@ -188,16 +190,31 @@ func TestClusterDraft(t *testing.T) {
 	}
 	md := string(b)
 	for _, want := range []string{
-		"# gorge: Shock", "findings: 3", "xe:T:0:1:w0", "xe:T:0:2:w0",
-		"## Smallest repro\n\n`xe:T:0:0:w0`, 1 step(s)", "run-xmage xe:T:0:0:w0", "run-forge xe:T:0:0:w0",
+		"# gorge: Shock", "findings: 3", "xe:T:0:0:w0", "xe:T:0:1:w0",
+		"## Smallest repro\n\n`xe:T:0:2:w0`, 1 step(s)", "run-xmage xe:T:0:2:w0", "run-forge xe:T:0:2:w0",
 		"## Oracle text + CR",
 	} {
 		if !strings.Contains(md, want) {
 			t.Errorf("draft lacks %q:\n%s", want, md)
 		}
 	}
-	if strings.Contains(md, "run-xmage xe:T:0:2:w0") {
-		t.Errorf("draft quotes a longer repro's commands")
+	for _, longer := range []string{"xe:T:0:0:w0", "xe:T:0:1:w0"} {
+		if strings.Contains(md, "run-xmage "+longer) || strings.Contains(md, "run-forge "+longer) {
+			t.Errorf("draft quotes the commands of the longer repro %s", longer)
+		}
+	}
+
+	// Equal-length repros tie-break to the lowest id.
+	tie := clusterInput(t, t.TempDir(), 2)
+	a, b2 := "xe:T:0:0:w0", "xe:T:0:1:w0"
+	tie.Items[b2] = tie.Items[a]
+	for _, m := range []map[string]classify.Finding{tie.XFind, tie.FFind} {
+		f := m[b2]
+		f.Step = m[a].Step
+		m[b2] = f
+	}
+	if r := Run(tie); len(r.Clusters) != 1 || r.Clusters[0].Smallest.ID != a {
+		t.Errorf("tie did not pick the lowest id: %+v", r.Clusters)
 	}
 
 	// One finding on a card with a committed agree row is no draft; without
