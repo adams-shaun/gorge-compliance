@@ -139,6 +139,9 @@ func Truncate(it oraclegen.Item, f Finding) oraclegen.Item {
 	if len(it.XAbility) > n {
 		it.XAbility = it.XAbility[:n]
 	}
+	if len(it.XPos) > n {
+		it.XPos = it.XPos[:n]
+	}
 	if len(it.XTargetSkips) > n {
 		it.XTargetSkips = it.XTargetSkips[:n]
 	}
