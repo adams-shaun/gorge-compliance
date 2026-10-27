@@ -36,6 +36,7 @@ func runCov(args []string) error {
 	sets := fs.String("sets", "", "comma-separated set codes to report")
 	missing := fs.Bool("missing", false, "also list each reported card's keys never compared")
 	write := fs.String("write", "", "write the merged ledger here (atomically)")
+	sub := fs.String("sub", "", "base ledger TSV subtracted once from the merged total (counters saturate at 0)")
 	fs.Parse(args)
 	if len(ledgers) == 0 {
 		return fmt.Errorf("cov needs at least one -ledger")
@@ -52,6 +53,18 @@ func runCov(args []string) error {
 			return fmt.Errorf("%s: %w", p, err)
 		}
 		merged.Merge(l)
+	}
+	if *sub != "" {
+		f, err := os.Open(*sub)
+		if err != nil {
+			return err
+		}
+		base, err := cov.ReadTSV(f)
+		f.Close()
+		if err != nil {
+			return fmt.Errorf("%s: %w", *sub, err)
+		}
+		merged.Sub(base)
 	}
 	if *write != "" {
 		var b bytes.Buffer

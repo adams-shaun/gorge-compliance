@@ -20,7 +20,11 @@
 # Resumable: xengine sweep-plan lists the chunks without .done; an unfinished
 # chunk directory is moved to <dir>.stale.<n> and redone from stage 1.
 # Chunks of a set run in order and each plays against the ledger as it stood
-# when the previous chunk finished (kept as <chunk>/ledger-in.tsv). A crash
+# when the previous chunk finished (kept as <chunk>/ledger-in.tsv). With
+# XENGINE_GO_JOBS > 1 the plan is grouped into rounds by chunk index: every
+# set's chunk c plays from ONE ledger snapshot taken at the start of the round
+# (up to XENGINE_GO_JOBS plays at once), and only when all of them have played
+# are the followers, diff and ledger merge run, chunk by chunk in set order. A crash
 # between the ledger merge and .done re-merges that chunk's counts on the
 # redo: counters inflate, "never compared" stays exact. --force redoes chunks
 # that already have .done and re-merges them the same way: the ledger is never
@@ -36,7 +40,8 @@
 #   XENGINE_ROOT          output root (default /mnt/sata/gorge-training/xengine/<run>);
 #                         refused inside the repository
 #   XENGINE_FOLLOWERS     'forge xmage' (default)
-#   XENGINE_GO_JOBS       Go-stage parallelism; only 1 is supported (see below)
+#   XENGINE_GO_JOBS       concurrent play stages, a positive integer (default 1:
+#                         strictly serial; see the ledger merge below)
 #   XENGINE_WINDOWS       1 (default) passes -windows to play
 #   XENGINE_JVM_WAIT      max seconds to wait for a JVM slot (default 21600)
 #   XENGINE_JVM_POLL      poll interval in seconds (default 30)
@@ -46,9 +51,14 @@
 #   XENGINE_FORGE_RUNNER, XENGINE_ORACLEDIFF, XENGINE_PGREP, XENGINE_SCOPE=none
 #   (no systemd-run).
 #
-# XENGINE_GO_JOBS > 1 is refused: cov -ledger adds counters, so two chunks
-# played in parallel from one snapshot cannot be merged without counting the
-# snapshot twice.
+# Ledger merge. play writes exercised.tsv = (its input snapshot L) + (this
+# chunk's exercised counts E), and cov -ledger adds counters. A chunk is merged
+# as a delta, in one call: cov -ledger <root>/ledger.tsv -ledger exercised.tsv
+# -sub ledger-in.tsv -ledger compared.tsv..., i.e. current + (L + E) - L + C =
+# current + E + C. current already holds the deltas of the chunks finished
+# earlier in the round, so none of them is lost and L is not counted twice.
+# Serially current == L and the result equals exercised + compared. A chunk
+# that played before any ledger existed has no L: no -sub.
 set -euo pipefail
 
 repo=$(cd "$(dirname "$0")/.." && pwd)
@@ -76,10 +86,10 @@ jvm_wait=${XENGINE_JVM_WAIT:-21600}
 jvm_poll=${XENGINE_JVM_POLL:-30}
 root=${XENGINE_ROOT:-/mnt/sata/gorge-training/xengine/$run}
 
-if [ "${XENGINE_GO_JOBS:-1}" != 1 ]; then
-	echo "xengine-sweep: XENGINE_GO_JOBS=${XENGINE_GO_JOBS} unsupported: the ledger merge adds counters, so parallel chunks would double-count their shared snapshot" >&2
-	exit 2
-fi
+jobs=${XENGINE_GO_JOBS:-1}
+case "$jobs" in
+"" | *[!0-9]* | 0*) echo "xengine-sweep: XENGINE_GO_JOBS=$jobs: want a positive integer (no leading 0)" >&2; exit 2 ;;
+esac
 case "$chunks$games$seed" in *[!0-9]* | "") echo "xengine-sweep: --chunks, --games and --seed are non-negative integers" >&2; exit 2 ;; esac
 command -v jq >/dev/null || { echo "xengine-sweep: jq is needed for SUMMARY.md" >&2; exit 2; }
 for f in $followers; do
@@ -172,24 +182,30 @@ follower_rows() { # follower dir -> rows file
 	esac
 }
 
-play_stage() { # set chunk dir
+snapshot_into() { # dir [snapshot-file]: the chunk's input ledger, if there is one
+	local d=$1 src=${2:-$ledger}
+	rm -f "$d/ledger-in.tsv"
+	[ ! -s "$src" ] || cp "$src" "$d/ledger-in.tsv"
+}
+
+play_stage() { # set chunk dir (reads <dir>/ledger-in.tsv when snapshot_into made one)
 	local s=$1 c=$2 d=$3 args
 	args=(play -set "$s" -chunk "$c" -games "$games" -seed "$seed" -out "$d")
 	[ "${XENGINE_WINDOWS:-1}" = 0 ] || args+=(-windows)
 	case " $followers " in *" xmage "*) args+=(-xmage) ;; esac
-	if [ -s "$ledger" ]; then
-		cp "$ledger" "$d/ledger-in.tsv"
-		args+=(-ledger "$d/ledger-in.tsv")
-	fi
+	[ ! -e "$d/ledger-in.tsv" ] || args+=(-ledger "$d/ledger-in.tsv")
 	run_stage xe "${args[@]}"
 }
 
-chunk() { # set chunk
+# finish_chunk set chunk: followers, diff, the ledger merge and .done of a
+# chunk that has played. Run serially: it reads and replaces <root>/ledger.tsv.
+finish_chunk() {
 	local s=$1 c=$2 d=$root/$1/$2 f
-	mkdir -p "$d"
-	echo "== $s chunk $c: play"
-	play_stage "$s" "$c" "$d" >"$d/play.log" 2>&1 || { echo "$s/$c: play FAILED"; tail -3 "$d/play.log"; return 1; }
-	local cargs=(-ledger "$d/exercised.tsv")
+	local cargs=()
+	[ ! -s "$ledger" ] || cargs+=(-ledger "$ledger")
+	cargs+=(-ledger "$d/exercised.tsv")
+	# -sub once from the merged total (see the header), not per -ledger.
+	[ ! -s "$ledger" ] || [ ! -e "$d/ledger-in.tsv" ] || cargs+=(-sub "$d/ledger-in.tsv")
 	for f in $followers; do
 		echo "== $s chunk $c: $f"
 		follower_rows "$f" "$d" >"$d/$f.log" 2>&1 || { echo "$s/$c: $f replay FAILED"; tail -3 "$d/$f.log"; return 1; }
@@ -197,13 +213,25 @@ chunk() { # set chunk
 			|| { echo "$s/$c: $f diff FAILED"; tail -3 "$d/diff-$f.log"; return 1; }
 		cargs+=(-ledger "$d/diff-$f/compared.tsv")
 	done
-	# exercised.tsv already carries the chunk's input ledger; the compared
-	# tsvs add what the followers confirmed. -write renames atomically.
 	xe cov "${cargs[@]}" -write "$d/ledger-out.tsv" >"$d/cov.log" 2>&1 || { echo "$s/$c: ledger merge FAILED"; tail -3 "$d/cov.log"; return 1; }
-	# chunk runs under `if`, where set -e is off: every step is checked by hand.
+	# finish_chunk runs under `if`, where set -e is off: every step is checked by hand.
 	{ cp "$d/ledger-out.tsv" "$ledger.tmp.$$" && mv "$ledger.tmp.$$" "$ledger"; } \
 		|| { echo "$s/$c: ledger publish FAILED"; rm -f "$ledger.tmp.$$"; return 1; }
 	: >"$d/.done" || { echo "$s/$c: writing .done FAILED"; return 1; }
+}
+
+play_failed() { # set chunk: report a failed play
+	echo "$1/$2: play FAILED"
+	tail -3 "$root/$1/$2/play.log"
+}
+
+chunk() { # set chunk (serial: play, then finish, against the ledger as it is now)
+	local s=$1 c=$2 d=$root/$1/$2
+	mkdir -p "$d"
+	snapshot_into "$d"
+	echo "== $s chunk $c: play"
+	play_stage "$s" "$c" "$d" >"$d/play.log" 2>&1 || { play_failed "$s" "$c"; return 1; }
+	finish_chunk "$s" "$c"
 }
 
 histogram() { # file jq-field dir... -> "value count" lines
@@ -260,15 +288,70 @@ echo "== xengine sweep $run: root $root, $(printf '%s\n' "$plan" | /usr/bin/grep
 
 rc=0
 failed=" "
-for sc in $plan; do
-	s=${sc%/*} c=${sc#*/}
-	case "$failed" in *" $s "*) echo "$s/$c: skipped (an earlier chunk of $s failed)"; continue ;; esac
-	if chunk "$s" "$c"; then
-		summary
-		echo "$s/$c: done"
-	else
-		failed="$failed$s "
-		rc=1
-	fi
+if [ "$jobs" = 1 ]; then
+	for sc in $plan; do
+		s=${sc%/*} c=${sc#*/}
+		case "$failed" in *" $s "*) echo "$s/$c: skipped (an earlier chunk of $s failed)"; continue ;; esac
+		if chunk "$s" "$c"; then
+			summary
+			echo "$s/$c: done"
+		else
+			failed="$failed$s "
+			rc=1
+		fi
+	done
+	exit "$rc"
+fi
+
+# jobs > 1: one round per chunk index, in ascending order; within a round the
+# sets keep plan order. All plays of a round read one snapshot of the ledger and
+# finish before any follower starts; the chunks are then finished serially.
+for c in $(printf '%s\n' $plan | sed 's|.*/||' | LC_ALL=C sort -un); do
+	members=()
+	for sc in $plan; do
+		[ "${sc#*/}" = "$c" ] || continue
+		s=${sc%/*}
+		case "$failed" in *" $s "*) echo "$s/$c: skipped (an earlier chunk of $s failed)"; continue ;; esac
+		members+=("$s")
+	done
+	[ ${#members[@]} -gt 0 ] || continue
+	snap=$root/ledger-snap.$c.$$.tsv
+	if [ -s "$ledger" ]; then cp "$ledger" "$snap" || { echo "round $c: ledger snapshot FAILED"; exit 1; }; else rm -f "$snap"; fi
+	queue=() # pids in launch order, oldest first
+	declare -A play_pid=() play_rc=()
+	for s in "${members[@]}"; do
+		d=$root/$s/$c
+		mkdir -p "$d"
+		snapshot_into "$d" "$snap"
+		while [ ${#queue[@]} -ge "$jobs" ]; do
+			wait "${queue[0]}" || play_rc[${queue[0]}]=$?
+			queue=("${queue[@]:1}")
+		done
+		echo "== $s chunk $c: play"
+		(
+			pids=()
+			trap 'stop_children; exit 130' INT TERM
+			play_stage "$s" "$c" "$d" >"$d/play.log" 2>&1
+		) &
+		play_pid[$s]=$!
+		pids+=("$!")
+		queue+=("$!")
+	done
+	for p in ${queue[@]+"${queue[@]}"}; do wait "$p" || play_rc[$p]=$?; done
+	rm -f "$snap"
+	for s in "${members[@]}"; do
+		if [ "${play_rc[${play_pid[$s]}]:-0}" != 0 ]; then
+			play_failed "$s" "$c"
+			failed="$failed$s "
+			rc=1
+		elif finish_chunk "$s" "$c"; then
+			summary
+			echo "$s/$c: done"
+		else
+			failed="$failed$s "
+			rc=1
+		fi
+	done
+	unset play_pid play_rc
 done
 exit "$rc"
