@@ -42,10 +42,11 @@ if [ "$4" = sweep-plan ]; then exec "$REALGO" "$@"; fi
 shift 3
 sub=$1; shift
 declare -A o
-w=0
+w=0 x=0
 while [ $# -gt 0 ]; do
 	case "$1" in
 	-windows) w=1; shift ;;
+	-xmage) x=1; shift ;;
 	-missing) shift ;;
 	-ledger) o[ledger]="${o[ledger]:-} $2"; shift 2 ;;
 	-*) o[${1#-}]=${2:-}; shift 2 ;;
@@ -54,11 +55,16 @@ while [ $# -gt 0 ]; do
 done
 case "$sub" in
 play)
-	echo "play ${o[set]} ${o[chunk]} windows=$w ledger=${o[ledger]:-none}" >> "$LOG"
+	echo "play ${o[set]} ${o[chunk]} windows=$w xmage=$x ledger=${o[ledger]:-none}" >> "$LOG"
 	mkdir -p "${o[out]}"
 	printf '{"id":"xe:%s:%s:0:tape"}\n' "${o[set]}" "${o[chunk]}" > "${o[out]}/items.jsonl"
 	printf 'card\tkey\texercised\tcompared\toffered\nA\tk\t1\t0\t0\n' > "${o[out]}/exercised.tsv"
 	printf '{"id":"i","status":"lower_ok"}\n{"id":"j","status":"refused"}\n' > "${o[out]}/lower.jsonl"
+	;;
+xprep)
+	echo "xprep" >> "$LOG"
+	mkdir -p "$(dirname "${o[out]}")"
+	cat "${o[play]}/items.jsonl" > "${o[out]}"
 	;;
 diff)
 	echo "diff ${o[engine]}" >> "$LOG"
@@ -75,7 +81,7 @@ esac
 STUB
 cat > "$BIN/xmage" <<'STUB'
 #!/usr/bin/env bash
-echo "xmage" >> "$LOG"
+echo "xmage $(basename "$1")" >> "$LOG"
 [ "${FAIL_FOLLOWER:-}" != xmage ] || exit 1
 cat "$1" > "$2"
 STUB
@@ -116,6 +122,7 @@ out=$(sweep "$R"); rc=$?
 check "cold sweep exits 0" '[ "$rc" = 0 ]' "rc=$rc $out"
 check "cold: 4 play stages" '[ "$(count play)" = 4 ]' "$(count play)"
 check "cold: 4 xmage replays" '[ "$(count xmage)" = 4 ]'
+check "cold: 4 xprep stages, the xmage replays read xitems.jsonl" '[ "$(count xprep)" = 4 ] && [ "$(count "xmage xitems.jsonl")" = 4 ]' "$(cat "$LOG")"
 check "cold: 4 forge replays (4 exports)" '[ "$(count forge)" = 4 ] && [ "$(count export)" = 4 ]'
 check "cold: 8 diffs" '[ "$(count diff)" = 8 ]'
 check "cold: 4 ledger merges" '[ "$(count cov-write)" = 4 ]' "$(count cov-write)"
@@ -123,7 +130,7 @@ n=0
 for s in FDN BLB; do for c in 0 1; do [ -e "$R/$s/$c/.done" ] && n=$((n + 1)); done; done
 check "cold: every chunk has .done" '[ "$n" = 4 ]' "done=$n"
 check "cold: play got -windows" '/usr/bin/grep -q "windows=1" "$LOG"'
-check "cold: first chunk plays without a ledger" '/usr/bin/grep -q "^play FDN 0 windows=1 ledger=none" "$LOG"' "$(cat "$LOG")"
+check "cold: first chunk plays without a ledger" '/usr/bin/grep -q "^play FDN 0 windows=1 xmage=1 ledger=none" "$LOG"' "$(cat "$LOG")"
 check "cold: second chunk reads the ledger" '/usr/bin/grep -q "^play FDN 1 .*ledger-in.tsv" "$LOG"'
 check "cold: ledger.tsv written, no temp left" '[ -s "$R/ledger.tsv" ] && [ -z "$(find "$R" -name "ledger.tsv.tmp*")" ]'
 check "cold: SUMMARY.md has both sets and engines" \

@@ -67,6 +67,7 @@ func runPlay(args []string) error {
 	seed := fs.Uint64("seed", 1, "chunk seed")
 	windows := fs.Bool("windows", false, "also emit one-turn windows (needs lower.Windows)")
 	ledgerPath := fs.String("ledger", "", "coverage ledger TSV at chunk start (empty: an empty ledger)")
+	xmage := fs.Bool("xmage", false, "leave out the cards XMage spells differently (an XMage item names no per-card spelling)")
 	out := fs.String("out", "", "output dir (default under "+DefaultRoot+")")
 	fs.Parse(args)
 	if *set == "" {
@@ -97,9 +98,12 @@ func runPlay(args []string) error {
 	if err != nil {
 		return err
 	}
-	cands, _, err := decks.Candidates(reg, *manifests, *set)
+	cands, skips, err := decks.CandidatesWith(reg, *manifests, *set, decks.Options{XMage: *xmage})
 	if err != nil {
 		return err
+	}
+	if *xmage {
+		fmt.Printf("xmage spelling: %d card(s) of %s left out of the decks, %d candidates\n", decks.ExcludedXMage(skips), *set, len(cands))
 	}
 	if err := decks.Pairable(cands); err != nil {
 		return fmt.Errorf("set %s: %w", *set, err)
