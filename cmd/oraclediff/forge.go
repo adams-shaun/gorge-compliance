@@ -147,6 +147,7 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 			decisions = []rules.OracleDecision{}
 		}
 		sha := gate.ItemSHA(it)
+		decisions = forgeDropEmptyDeclarations(it, decisions)
 		it = forgeDeclarations(it)
 		line, err := json.Marshal(forgeRequest{
 			ID: it.ID, ScenarioSHA: sha, Item: it,
@@ -201,14 +202,8 @@ func forgeDeclarations(it oraclegen.Item) oraclegen.Item {
 		steps[i] = st
 	}
 	for i, st := range it.Steps {
-		var decision string
-		var empty bool
-		switch st.Op {
-		case "attack":
-			decision, empty = "attackers", len(st.Attackers) == 0
-		case "block":
-			decision, empty = "blockers", len(st.Blocks) == 0
-		default:
+		decision, empty, ok := forgeDeclaration(st)
+		if !ok {
 			continue
 		}
 		if empty {
@@ -222,6 +217,48 @@ func forgeDeclarations(it oraclegen.Item) oraclegen.Item {
 		it.Steps = steps
 	}
 	return it
+}
+
+// forgeDeclaration reports, for an attack or block step, gorge's decision
+// kind for it ("attackers"/"blockers") and whether nothing is declared. ok is
+// false for any other step.
+func forgeDeclaration(st oraclegen.Step) (decision string, empty, ok bool) {
+	switch st.Op {
+	case "attack":
+		return "attackers", len(st.Attackers) == 0, true
+	case "block":
+		return "blockers", len(st.Blocks) == 0, true
+	}
+	return "", false, false
+}
+
+// forgeDropEmptyDeclarations removes gorge's attackers/blockers decision for
+// each step forgeDeclarations rewrites to a pass_to "priority". The driver
+// never poses that declaration, so it would never consume the decision and
+// would report it as an unconsumed gorge decision. Call it on the item before
+// the rewrite, since decisions carry the unrewritten step indexes. The input
+// slice is not modified; a list with nothing to drop is returned as is.
+func forgeDropEmptyDeclarations(it oraclegen.Item, decisions []rules.OracleDecision) []rules.OracleDecision {
+	if it.Template != lower.Template && it.Template != lower.WindowTemplate {
+		return decisions
+	}
+	empties := map[int]string{}
+	for i, st := range it.Steps {
+		if decision, empty, ok := forgeDeclaration(st); ok && empty {
+			empties[i] = decision
+		}
+	}
+	if len(empties) == 0 {
+		return decisions
+	}
+	out := make([]rules.OracleDecision, 0, len(decisions))
+	for _, d := range decisions {
+		if kind, ok := empties[d.Step]; ok && d.Kind == kind {
+			continue
+		}
+		out = append(out, d)
+	}
+	return out
 }
 
 // forgeAbilityLines maps each step that names an ability by ability_index to

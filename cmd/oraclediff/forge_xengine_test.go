@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"reflect"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/gate"
@@ -14,6 +15,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
+	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -173,5 +175,61 @@ func TestXengineForgeExportEmptyDeclaration(t *testing.T) {
 	}
 	if rq.ScenarioSHA != gate.ItemSHA(it) {
 		t.Errorf("scenario_sha %s, want the unrewritten item's %s", rq.ScenarioSHA, gate.ItemSHA(it))
+	}
+}
+
+// TestForgeDropsEmptyDeclarationDecisions: an empty attack or block step is
+// rewritten to a pass_to "priority" the driver never poses as a declaration,
+// so gorge's attackers/blockers decision for that step must not travel in the
+// request (the driver would report it unconsumed). A stated declaration's
+// decision, other kinds at the same step, and non-xengine items are kept.
+func TestForgeDropsEmptyDeclarationDecisions(t *testing.T) {
+	steps := []oraclegen.Step{
+		{Op: "pass_to", Step: "main1"},
+		{Op: "attack", Seat: 1, Defender: "p0", Attackers: []string{}},
+		{Op: "block", Seat: 0, Blocks: [][2]string{}},
+		{Op: "pass", Seat: 0},
+		{Op: "attack", Seat: 0, Defender: "p1", Attackers: []string{"p0:Bear"}},
+	}
+	ds := []rules.OracleDecision{
+		{Step: 1, Kind: "attackers"},
+		{Step: 1, Kind: "target"},
+		{Step: 2, Kind: "blockers"},
+		{Step: 2, Kind: "attackers"},
+		{Step: 4, Kind: "attackers", Picks: []string{"Attack with Bear at b"}},
+	}
+	mk := func(tmpl string) oraclegen.Item {
+		return oraclegen.Item{ID: "xe:t", Template: tmpl, Scenario: oraclegen.Scenario{Steps: steps}}
+	}
+	got := forgeDropEmptyDeclarations(mk(lower.Template), ds)
+	want := []rules.OracleDecision{ds[1], ds[3], ds[4]}
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("decisions %+v, want %+v", got, want)
+	}
+	if len(ds) != 5 || ds[0].Kind != "attackers" {
+		t.Errorf("the input decisions were mutated: %+v", ds)
+	}
+	if got := forgeDropEmptyDeclarations(mk("other"), ds); len(got) != len(ds) {
+		t.Errorf("non-xengine item lost decisions: %+v", got)
+	}
+
+	reg := testutil.CorpusRegistry(t)
+	dir := t.TempDir()
+	scen, out := filepath.Join(dir, "items.jsonl"), filepath.Join(dir, "req.jsonl")
+	b, _ := json.Marshal(mk(lower.Template))
+	if err := os.WriteFile(scen, append(b, '\n'), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := forgeExport(reg, scen, out); err != nil {
+		t.Fatal(err)
+	}
+	raw, err := os.ReadFile(out)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, d := range decodeRequests(t, raw)[0].GorgeDecisions {
+		if d.Step == 1 && d.Kind == "attackers" || d.Step == 2 && d.Kind == "blockers" {
+			t.Errorf("exported a leftover decision for an empty declaration: %+v", d)
+		}
 	}
 }
