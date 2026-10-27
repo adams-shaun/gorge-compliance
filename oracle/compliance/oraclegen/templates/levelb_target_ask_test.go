@@ -15,14 +15,13 @@ func answerAt(it oraclegen.Item, i int) []oraclegen.XAnswer {
 	return it.XAnswers[i]
 }
 
-// TestLevelBPerPlayerTargetAsk: Kaya, Spirits' Justice's -2 poses the
-// per-opponent "exile up to one target creature that player controls" ask,
-// which the engine records as a grouped KChoose. The generated item must
-// close XMage's target ask with a target skip on the TARGET queue, not the
-// [choice_skip] the generic choose routing used to emit. The item now leads
-// with the CR 606.3 empty-stack resolve every loyalty setup carries (the
-// source's own entry trigger may be pending); the ask sits on the resolve
-// that follows the activation.
+// TestLevelBPerPlayerTargetAsk: Kaya, Spirits' Justice's -2 takes its
+// per-player "exile up to one target creature that player controls" targets
+// when it is activated (CR 602.2b), one per controller, so the generated
+// item names both on the activate step and poses no resolve-time ask for
+// XMage to close with a skip. The item leads with the CR 606.3 empty-stack
+// resolve every loyalty setup carries (the source's own entry trigger may be
+// pending).
 func TestLevelBPerPlayerTargetAsk(t *testing.T) {
 	it := levelBItem(t, "Kaya, Spirits' Justice", "activate#0.2")
 	if len(it.Scenario.Steps) != 3 ||
@@ -31,12 +30,11 @@ func TestLevelBPerPlayerTargetAsk(t *testing.T) {
 		t.Fatalf("steps = %v, want the empty-stack resolve, activate, resolve", it.Scenario.Steps)
 	}
 	cast := it.Scenario.Steps[1]
-	if strings.Join(cast.Targets, "|") != "p0:Grizzly Bears" {
-		t.Fatalf("precondition: activate targets = %v, want the controller's own creature", cast.Targets)
+	if strings.Join(cast.Targets, "|") != "p0:Grizzly Bears|p1:Grizzly Bears" {
+		t.Fatalf("activate targets = %v, want one creature per controller", cast.Targets)
 	}
-	as := answerAt(it, 2)
-	if len(as) != 1 || as[0].Kind != "target" || as[0].Value != "[target_skip]" {
-		t.Fatalf("resolve answers = %+v, want one target skip on the target queue", as)
+	if as := answerAt(it, 2); len(as) != 0 {
+		t.Fatalf("resolve answers = %+v, want none: every target was taken on activation", as)
 	}
 	for i, list := range it.XAnswers {
 		for _, a := range list {

@@ -62,8 +62,10 @@ func TestOptionalTargetSlots(t *testing.T) {
 		t.Fatalf("Fiery Annihilation: %s", skip.Reason)
 	}
 	st := castStep(t, it, "Fiery Annihilation")
-	if len(st.Targets) != 1 {
-		t.Fatalf("Fiery Annihilation cast targets = %v, want its mandatory creature target", st.Targets)
+	// Both target slots are chosen on cast (CR 601.2c): the creature, then the
+	// optional Equipment attached to it.
+	if len(st.Targets) != 2 {
+		t.Fatalf("Fiery Annihilation cast targets = %v, want its creature and the optional Equipment", st.Targets)
 	}
 	if !strings.Contains(st.Targets[0], "Grizzly Bears") {
 		t.Errorf("Fiery Annihilation first target = %q, want a creature", st.Targets[0])

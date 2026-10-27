@@ -27,8 +27,8 @@ func TestOracleAttachPrelude(t *testing.T) {
 			castTargets = step.Targets
 		}
 	}
-	if attachStep < 0 || len(castTargets) != 1 || equipmentRef == "" {
-		t.Fatalf("steps missing attach or mandatory creature target: attach=%d targets=%q", attachStep, castTargets)
+	if attachStep < 0 || len(castTargets) != 2 || equipmentRef == "" {
+		t.Fatalf("steps missing attach or the creature and Equipment targets: attach=%d targets=%q", attachStep, castTargets)
 	}
 	if attachStep >= 0 && item.Scenario.Steps[attachStep].AttachedTo != castTargets[0] {
 		t.Fatalf("attach bearer %q, want parent creature target %q", item.Scenario.Steps[attachStep].AttachedTo, castTargets[0])

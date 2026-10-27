@@ -182,8 +182,7 @@
      "eq": 0
     }
    ],
-   "xmage": "WouldDieExileInsteadTest#incendiaryFlow_SoulScarMageEffect_ShouldNotExile",
-   "known_bug": "XP[replacedying-ignores-replaced-damage]: DealDamage adds every targeted creature to the ReplaceDyingDefined set (and Remembered) regardless of whether damage was actually dealt (engine/effects/damage_deal.go:315, also :286/:394 ignore 'dealt'); Soul-Scar Mage replaced the damage with -1/-1 counters, so Hill Giant was not \"dealt damage this way\" yet gets exiled. CR 614.6, 120.3."
+   "xmage": "WouldDieExileInsteadTest#incendiaryFlow_SoulScarMageEffect_ShouldNotExile"
   },
   {
    "name": "misery-shadow-replacement",

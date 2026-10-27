@@ -100,8 +100,7 @@
      }
     }
    ],
-   "xmage": "NettlingImplTest#testForcedDidAttack",
-   "known_bug": "XP[animate-staticabilities-mustattack-ignored]: Nettling Imp's AB$ Animate staticAbilities$ MustAttack is dropped -- registerAnimateStaticAbilities only accepts NoCleanupDamage, cost statics, CantSacrifice, CantBlockUnless, CantAttackUnless and notes \"mode MustAttack is not implemented; ignored\", so the Lion is not required to attack (probe: attack_required false after the ability resolved) (engine/effects/leavebattlefield.go:174-177). CR 508.1d."
+   "xmage": "NettlingImplTest#testForcedDidAttack"
   },
   {
    "name": "test-forced-did-not-attack",
@@ -227,8 +226,7 @@
      }
     }
    ],
-   "xmage": "NettlingImplTest#testForcedDidNotAttack",
-   "known_bug": "XP[nettling-delayed-destroy-noop]: the DelayedTrigger (RememberObjects$ ParentTarget) does go on the stack at turn-2's end step (probe stack_size 1) but its TrigDestroy (Defined$ DelayTriggerRemembered, ConditionDefined$ DelayTriggerRemembered ConditionPresent$ Creature.!attackedThisTurn) resolves without destroying the tapped, non-attacking Lion; the loss is in the remembered capture/Defined chain (engine/effects/delayed_trigger.go:74-81 ParentTarget capture; engine/effects/context.go:920-933; engine/effects/conditions.go:689-691). Must-attack is also ignored (engine/effects/leavebattlefield.go:174). CR 603.7c / 701.8."
+   "xmage": "NettlingImplTest#testForcedDidNotAttack"
   }
  ]
 }
