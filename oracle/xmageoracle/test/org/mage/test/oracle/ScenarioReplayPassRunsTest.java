@@ -34,6 +34,52 @@ public final class ScenarioReplayPassRunsTest {
         }
     }
 
+    /** A pass that moves into a declaration step the next step declares in
+     * is checkpointed before the declaration (XMage declares in beginStep). */
+    private static void declTiming() {
+        JsonObject atk = item("{steps:[{op:'pass',seat:0},{op:'pass',seat:1},{op:'attack',seat:0,attackers:['p0:Bear'],defender:'p1'},{op:'pass',seat:0}],"
+                + "xmage_pos:[{turn:1,step:'begin-combat',active:0},{turn:1,step:'declare-attackers',active:0,moved:true},null,"
+                + "{turn:1,step:'declare-attackers',active:0}]}");
+        JsonArray as = ScenarioReplay.steps(atk);
+        check(ScenarioReplay.declarationAhead(as, 0) == null, "a pass that stays in its step has no declaration ahead");
+        check(ScenarioReplay.declarationAhead(as, 1) == PhaseStep.DECLARE_ATTACKERS, "the pass into declare-attackers stops before the attack");
+        check(ScenarioReplay.declarationAhead(as, 3) == null, "the pass after the declaration has none ahead");
+        check(ScenarioReplay.beforeDeclaration(PhaseStep.DECLARE_ATTACKERS) == PhaseStep.BEGIN_COMBAT,
+                "attackers are declared after begin-combat's last priority");
+        check(ScenarioReplay.beforeDeclaration(PhaseStep.DECLARE_BLOCKERS) == PhaseStep.DECLARE_ATTACKERS,
+                "blockers are declared after declare-attackers' last priority");
+        check(throwsIae(() -> ScenarioReplay.beforeDeclaration(PhaseStep.PRECOMBAT_MAIN)), "main has no declaration");
+
+        JsonObject blk = item("{steps:[{op:'pass',seat:1},{op:'block',seat:1,blocks:[['p1:Bear','p0:Bear']]}],"
+                + "xmage_pos:[{turn:1,step:'declare-blockers',active:0,moved:true},null]}");
+        check(ScenarioReplay.declarationAhead(ScenarioReplay.steps(blk), 0) == PhaseStep.DECLARE_BLOCKERS,
+                "the pass into declare-blockers stops before a block");
+
+        // An empty declaration (a no-op step) and a pass not followed by one stay put.
+        JsonObject none = item("{steps:[{op:'pass',seat:1},{op:'block',seat:1}],"
+                + "xmage_pos:[{turn:1,step:'declare-blockers',active:0,moved:true},null]}");
+        check(ScenarioReplay.declarationAhead(ScenarioReplay.steps(none), 0) == null, "an empty block declares nothing");
+        JsonObject move = item("{steps:[{op:'pass',seat:1},{op:'pass',seat:0}],"
+                + "xmage_pos:[{turn:1,step:'declare-attackers',active:0,moved:true},{turn:1,step:'declare-attackers',active:0}]}");
+        check(ScenarioReplay.declarationAhead(ScenarioReplay.steps(move), 0) == null, "no attack follows, so nothing is pending");
+        // A legacy scenario carries no position.
+        JsonArray legacy = JsonParser.parseString("[{op:'pass',seat:0},{op:'attack',seat:0,attackers:['p0:Bear'],defender:'p1'}]").getAsJsonArray();
+        check(ScenarioReplay.declarationAhead(legacy, 0) == null, "legacy scenarios keep their checkpoints");
+    }
+
+    /** A recorded game's resolving pass finds XMage's stack empty (gorge
+     * resolved an object XMage never put there): not a harness failure. The
+     * legacy pairs still require the stack object. */
+    private static void emptyStackPair() {
+        JsonObject res = item("{steps:[{op:'cast',seat:0,card:'p0:Shock'},{op:'pass',seat:0},{op:'pass',seat:1}],"
+                + "xmage_pos:[null,{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0,resolves:true}]}");
+        JsonArray rs = ScenarioReplay.steps(res);
+        check(ScenarioReplay.passCommands(rs, 2, 0).contains(ScenarioReplay.CMD_REQUIRE_STACK), "the command list is unchanged");
+        check(!ScenarioReplay.requireStackIsStrict(rs, 2), "a recorded game's pass does not demand a stack object");
+        JsonArray pair = JsonParser.parseString("[{op:'cast',seat:0,card:'p0:Shock'},{op:'pass',seat:0},{op:'pass',seat:1}]").getAsJsonArray();
+        check(ScenarioReplay.requireStackIsStrict(pair, 2), "a legacy pair demands the stack object it resolves");
+    }
+
     public static void main(String[] args) {
         // Three passes in a row: p0 passes (priority goes to p1, same step),
         // p1 passes (both passed on an empty stack: begin-combat), p0 passes
@@ -88,6 +134,8 @@ public final class ScenarioReplayPassRunsTest {
         JsonArray pair = JsonParser.parseString("[{op:'pass',seat:0},{op:'pass',seat:1}]").getAsJsonArray();
         check(ScenarioReplay.passAction(pair, 0) == ScenarioReplay.PASS_PAIR_FIRST, "legacy pair first");
         check(ScenarioReplay.passAction(pair, 1) == ScenarioReplay.PASS_PAIR_SECOND, "legacy pair second");
+        declTiming();
+        emptyStackPair();
         System.out.println("ScenarioReplayPassRunsTest ok");
     }
 }
