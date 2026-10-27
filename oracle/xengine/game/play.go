@@ -29,6 +29,14 @@ type Options struct {
 	Set string
 	// MaxTurns and MaxIntents are the watchdog caps; 0 means the default.
 	MaxTurns, MaxIntents int
+	// OnCut, when set, is called at each cut point of a window scenario: the
+	// first priority decision of a turn's precombat main phase, held by the
+	// active player. entry is the index the decision's tape entry is about to
+	// get. It runs before the intent is submitted, so e is the engine at that
+	// decision. It must only read e.G: it must not emit, answer or advance
+	// anything, or the tape is no longer the game that would have been played
+	// without it.
+	OnCut func(e *rules.Engine, entry int)
 }
 
 // Play plays pair against each other with two explore bots and records the
@@ -65,7 +73,7 @@ func Play(reg *cards.Registry, pair [2]decks.Deck, seed uint64, opt Options) (*T
 	}
 	cfg := rules.Config{Names: names, Decks: dk, Tokens: reg.Tokens, Seed: seed, NameUniverse: reg.Universe()}
 
-	r := &recorder{t: t}
+	r := &recorder{t: t, onCut: opt.OnCut}
 	var o bench.Outcome
 	var e *rules.Engine
 	var err error
@@ -124,6 +132,8 @@ type recorder struct {
 	started   bool     // Starter is set
 	lastDraws uint64   // e.RNGDraws() at the last flush
 	sent      [][]byte // the intent each entry recorded, for markReanswered
+	onCut     func(e *rules.Engine, entry int)
+	cutTurn   int32 // the turn onCut last fired for
 }
 
 func (r *recorder) setup(e *rules.Engine) {
@@ -207,6 +217,11 @@ func (r *recorder) submit(e *rules.Engine, seatIdx int, d *decision.Decision, in
 			p := state.PlayerID(i)
 			r.t.Open[i] = Opening{Hand: zoneNames(e, state.ZHand, p), Library: zoneNames(e, state.ZLibrary, p)}
 		}
+	}
+	if r.onCut != nil && d.Kind == decision.KPriority && e.G.Step == state.StepMain1 &&
+		d.Player == e.G.Active && e.G.Turn > r.cutTurn {
+		r.cutTurn = e.G.Turn
+		r.onCut(e, len(r.t.Entries))
 	}
 	if !r.started && e.G.Turn >= 1 {
 		// The starting player is turn 1's active player; a pre-game ask

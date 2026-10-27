@@ -18,8 +18,10 @@ import (
 // never invents one. Seats are relabelled so the starting player is p0: every
 // seat index and every "pN" in a ref swaps when the tape's starter is seat 1.
 
-// seatMap relabels live seats to scenario seats.
-type seatMap struct{ swap bool }
+// seatMap relabels live seats to scenario seats. rngOK lowers an entry that
+// consumed engine randomness (a window's item opts out of the library order)
+// where a whole-game tape stops at it.
+type seatMap struct{ swap, rngOK bool }
 
 func (m seatMap) seat(s int) int {
 	if m.swap {
