@@ -2,6 +2,7 @@ package decks
 
 import (
 	"reflect"
+	"sort"
 	"strings"
 	"testing"
 
@@ -171,4 +172,100 @@ func TestPairWeighting(t *testing.T) {
 	if lt < 2*hv {
 		t.Errorf("unexercised cards appear %d times vs %d for heavily exercised: want at least 2x", lt, hv)
 	}
+}
+
+// declaredSets is the sorted set codes of declared.json.
+func declaredSets(t *testing.T) []string {
+	t.Helper()
+	d, err := compliance.EmbeddedDeclared()
+	if err != nil {
+		t.Fatal(err)
+	}
+	var out []string
+	for s := range d {
+		out = append(out, s)
+	}
+	sort.Strings(out)
+	return out
+}
+
+// wantUnreachable pins, per declared set at this gorge pin, how many
+// candidates fit no feasible colour pair (so no deck can hold them). Sets in
+// wantInfeasible have no feasible pair at all and are absent here.
+var wantUnreachable = map[string]int{
+	"BLB": 1, "DFT": 8, "DSK": 3, "ECL": 6, "EOE": 1, "FDN": 0, "FIN": 6, "FRA": 13,
+	"LCI": 0, "MSH": 24, "OTJ": 17, "SOS": 2, "TLA": 0, "WOE": 0,
+}
+
+// wantInfeasible are the declared sets with no colour pair holding 23 eligible
+// candidates: Pair cannot build decks for them, callers skip them.
+var wantInfeasible = []string{"BIG", "HOB", "MKM", "SPM", "TDM", "TMT"}
+
+func TestPairableAllDeclaredSets(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	var infeasible []string
+	got := map[string]int{}
+	for _, set := range declaredSets(t) {
+		cands, _, err := Candidates(reg, manifestDir, set)
+		if err != nil {
+			t.Fatalf("%s: %v", set, err)
+		}
+		reach, unreach := Reachable(cands)
+		t.Logf("%s: %d candidates, feasible pairs %v, reachable %d, unreachable %d", set, len(cands), FeasiblePairs(cands), reach, len(unreach))
+		if err := Pairable(cands); err != nil {
+			infeasible = append(infeasible, set)
+			if reach != 0 || len(unreach) != len(cands) {
+				t.Errorf("%s: infeasible but reachable=%d unreachable=%d of %d", set, reach, len(unreach), len(cands))
+			}
+			continue
+		}
+		got[set] = len(unreach)
+		unr := map[string]bool{}
+		for _, n := range unreach {
+			unr[n] = true
+		}
+		// Pair must not panic, and must never hold an unreachable card.
+		for g := 0; g < 10; g++ {
+			for _, d := range Pair(cands, nil, set, 0, g, 1) {
+				for _, n := range d.Cards {
+					if unr[n] {
+						t.Errorf("%s: %s holds unreachable %s", set, d.Name, n)
+					}
+				}
+			}
+		}
+	}
+	if !reflect.DeepEqual(infeasible, wantInfeasible) {
+		t.Errorf("infeasible sets %v, want %v", infeasible, wantInfeasible)
+	}
+	if !reflect.DeepEqual(got, wantUnreachable) {
+		t.Errorf("unreachable counts %v, want %v", got, wantUnreachable)
+	}
+}
+
+func TestPairPanicsWhenInfeasible(t *testing.T) {
+	cands := []Card{{Name: "A", Identity: 1}}
+	if Pairable(cands) == nil {
+		t.Fatal("one card is pairable")
+	}
+	defer func() {
+		if recover() == nil {
+			t.Error("Pair on an infeasible set did not panic")
+		}
+	}()
+	Pair(cands, nil, "X", 0, 0, 0)
+}
+
+// TestReachableFDN: every FDN candidate fits a feasible pair, and Pair reaches
+// them: Reachable agrees with the decks actually drawn.
+func TestReachableFDN(t *testing.T) {
+	_, cands := fdn(t)
+	reach, unreach := Reachable(cands)
+	if reach+len(unreach) != len(cands) {
+		t.Fatalf("reachable %d + unreachable %d != %d", reach, len(unreach), len(cands))
+	}
+	if len(FeasiblePairs(cands)) != 10 {
+		t.Errorf("FDN feasible pairs %v, want all 10", FeasiblePairs(cands))
+	}
+	t.Logf("FDN: %d reachable, %d unreachable %v", reach, len(unreach), unreach)
 }

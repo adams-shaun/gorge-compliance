@@ -100,3 +100,41 @@ func TestLedgerRoundTrip(t *testing.T) {
 		t.Errorf("report:\n%s\nwant\n%s", rep.String(), want)
 	}
 }
+
+// TestReportFullyCompared: "fully compared" needs the cast/land key AND every
+// ability key compared, which Report can only see for keys that were seeded.
+func TestReportFullyCompared(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	const withAbility, vanilla = "Prodigal Sorcerer", "Grizzly Bears"
+	l := New()
+	for _, n := range []string{withAbility, vanilla} {
+		c, ok := reg.Lookup(n)
+		if !ok {
+			t.Fatalf("%q not in the corpus", n)
+		}
+		l.Seed(n, c)
+	}
+	sets := map[string][]string{"X": {withAbility, vanilla}}
+	report := func() string {
+		var b bytes.Buffer
+		l.Report(&b, sets)
+		return b.String()
+	}
+	// Both cast, only the cast keys compared: the ability key is unexercised.
+	l.Add(withAbility, "cast", Counts{Exercised: 1, Compared: 1})
+	l.Add(vanilla, "cast", Counts{Exercised: 1, Compared: 1})
+	want := "X: candidates 2, exercised 2, fully compared 1, never exercised 0\n"
+	if got := report(); got != want {
+		t.Errorf("ability key still zero:\n%s\nwant\n%s", got, want)
+	}
+	// Exercised but not compared ability key: still not fully compared.
+	l.Add(withAbility, "f0/a0", Counts{Exercised: 1})
+	if got := report(); got != want {
+		t.Errorf("ability key exercised only:\n%s\nwant\n%s", got, want)
+	}
+	l.Add(withAbility, "f0/a0", Counts{Compared: 1})
+	want = "X: candidates 2, exercised 2, fully compared 2, never exercised 0\n"
+	if got := report(); got != want {
+		t.Errorf("all keys compared:\n%s\nwant\n%s", got, want)
+	}
+}

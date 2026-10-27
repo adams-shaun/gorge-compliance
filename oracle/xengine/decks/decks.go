@@ -152,6 +152,8 @@ var colourPairs = func() []colourPair {
 
 func (p colourPair) mask() uint8 { return 1<<p[0] | 1<<p[1] }
 
+func (p colourPair) letters() string { return colourLetters[p[0]] + colourLetters[p[1]] }
+
 func eligible(cands []Card, p colourPair) []Card {
 	var out []Card
 	for _, c := range cands {
@@ -162,13 +164,70 @@ func eligible(cands []Card, p colourPair) []Card {
 	return out
 }
 
+// FeasiblePairs lists, in rotation order, the colour pairs ("WU", "WB", ...)
+// with at least 23 eligible candidates: the only pairs Pair can build a deck
+// for. A set with fewer than 23 cards in every pair has none.
+func FeasiblePairs(cands []Card) []string {
+	var out []string
+	for _, p := range colourPairs {
+		if len(eligible(cands, p)) >= spellCount {
+			out = append(out, p.letters())
+		}
+	}
+	return out
+}
+
+// Pairable is nil when Pair can build decks from cands, else an error naming
+// the best pair. Callers check it before Pair, which panics when it is not nil.
+func Pairable(cands []Card) error {
+	if len(FeasiblePairs(cands)) > 0 {
+		return nil
+	}
+	best, bestN := "", -1
+	for _, p := range colourPairs {
+		if n := len(eligible(cands, p)); n > bestN {
+			best, bestN = p.letters(), n
+		}
+	}
+	return fmt.Errorf("no colour pair has %d eligible candidates (%d candidates; best pair %s has %d)", spellCount, len(cands), best, bestN)
+}
+
+// Reachable is the number of candidates that fit at least one feasible colour
+// pair, i.e. can appear in some deck, and the names of those that cannot. A
+// card whose identity needs three colours, or whose only pairs have fewer than
+// 23 eligible cards, is unreachable: the 23-distinct-cards rule makes this
+// unavoidable, so sweeps report it instead of hiding it.
+func Reachable(cands []Card) (reachable int, unreachable []string) {
+	var masks []uint8
+	for _, p := range colourPairs {
+		if len(eligible(cands, p)) >= spellCount {
+			masks = append(masks, p.mask())
+		}
+	}
+	for _, c := range cands {
+		ok := false
+		for _, m := range masks {
+			if c.Identity&^m == 0 {
+				ok = true
+				break
+			}
+		}
+		if ok {
+			reachable++
+		} else {
+			unreachable = append(unreachable, c.Name)
+		}
+	}
+	return reachable, unreachable
+}
+
 // Pair is deck pair game of chunk for set: a pure function of
 // (set, chunk, game, the ledger's contents, seed). Deck i takes colour pair
 // (7*chunk + 2*game + i) mod 10, advanced to the next pair with at least 23
-// eligible cards, so the 10 pairs rotate and every candidate is reachable.
-// Spells are drawn without replacement with weight 1/(1+uses), uses being the
-// card's exercised total in led (nil reads as empty). It panics when no colour
-// pair has 23 eligible candidates.
+// eligible cards, so the 10 pairs rotate. A candidate that fits no such pair
+// is never drawn (see Reachable). Spells are drawn without replacement with
+// weight 1/(1+uses), uses being the card's exercised total in led (nil reads
+// as empty). It panics when Pairable(cands) is not nil: that is a caller bug.
 func Pair(cands []Card, led *cov.Ledger, set string, chunk, game int, seed uint64) [2]Deck {
 	if led == nil {
 		led = cov.New()
@@ -191,7 +250,7 @@ func Pair(cands []Card, led *cov.Ledger, set string, chunk, game int, seed uint6
 			}
 		}
 		if pi < 0 {
-			panic(fmt.Sprintf("decks.Pair: %s has no colour pair with %d eligible candidates", set, spellCount))
+			panic(fmt.Sprintf("decks.Pair: %s: %v", set, Pairable(cands)))
 		}
 		p := colourPairs[pi]
 		spells := draw(eligible(cands, p), led, rng)
@@ -214,7 +273,7 @@ func Pair(cands []Card, led *cov.Ledger, set string, chunk, game int, seed uint6
 			names = append(names, basicNames[p[1]])
 		}
 		sort.Strings(names)
-		colours := colourLetters[p[0]] + colourLetters[p[1]]
+		colours := p.letters()
 		out[i] = Deck{Name: fmt.Sprintf("%s-c%d-g%d-%d-%s", set, chunk, game, i, colours), Colours: colours, Cards: names}
 	}
 	return out
