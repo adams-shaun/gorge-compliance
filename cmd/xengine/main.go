@@ -5,7 +5,7 @@
 //
 //	xengine play -set S [-chunk C] [-games K] [-seed N] [-windows] [-ledger L.tsv] [-out DIR]
 //	xengine diff -play DIR -engine xmage|forge -rows ROWS.jsonl -out DIR2 [-only ID]
-//	xengine cov  -ledger A.tsv [-ledger B.tsv ...] [-sets FDN,BLB] [-missing] [-write OUT.tsv]
+//	xengine cov  -ledger A.tsv [-ledger B.tsv ...] [-sets FDN,BLB] [-sub BASE.tsv] [-missing] [-write OUT.tsv]
 //	xengine sweep-plan -root DIR -sets 'FDN BLB' -chunks N [-stale] [-force]
 //
 // play writes DIR/tapes/*.json (every game's tape), DIR/items.jsonl (the
