@@ -2,6 +2,8 @@ package game
 
 import (
 	"bytes"
+	"reflect"
+	"sort"
 	"strings"
 	"testing"
 
@@ -255,4 +257,105 @@ func TestDigestOfSnapshotMatchesGame(t *testing.T) {
 	if f := got.Field; f[0].Name != "Grizzly Bears" || f[0].Controller != 0 || f[0].PT != "2/2" || f[1].Name != "Forest" || f[1].Controller != 1 || f[1].PT != "" {
 		t.Errorf("scenario field = %+v", f)
 	}
+}
+
+// TestDigestOfGameValues pins the live-engine side of the digest: the tape's
+// digests come from DigestOfGame, and xe-4 self-checks replays against them.
+// The first entry must show the opening state recorded in the header; later
+// entries must show what the tape's own mana records and picks did.
+func TestDigestOfGameValues(t *testing.T) {
+	reg, pairs := fdnPairs(t, 6)
+	basics := map[string]bool{"Plains": true, "Island": true, "Swamp": true, "Mountain": true, "Forest": true}
+	var tappedLand, creatures, lifeMoved, tapAfterMana, tapChecked int
+	var damaged, countered, attached, tokens, graves, handShrank int
+	for i, p := range pairs {
+		tp := play(t, reg, p, uint64(400+i), Options{Set: "FDN"})
+		if len(tp.Entries) == 0 {
+			t.Fatalf("pair %d: empty tape", i)
+		}
+		first := tp.Entries[0].Digest
+		if first.Turn != 1 || first.Active != tp.Starter || len(first.Players) != 2 || len(first.Field) != 0 {
+			t.Errorf("pair %d first digest: turn %d active %d (starter %d) %d players %d permanents",
+				i, first.Turn, first.Active, tp.Starter, len(first.Players), len(first.Field))
+		}
+		for s, pl := range first.Players {
+			op := tp.Open[s]
+			hand := append([]string(nil), op.Hand...)
+			sort.Strings(hand)
+			if pl.Seat != s || pl.Life != 20 || pl.LibraryCount != 33 || pl.Pool != "" || len(pl.Counters) != 0 ||
+				len(pl.Graveyard) != 0 || len(pl.Exile) != 0 {
+				t.Errorf("pair %d seat %d opening digest = %+v", i, s, pl)
+			}
+			if !reflect.DeepEqual(pl.Hand, hand) || len(hand) != 7 {
+				t.Errorf("pair %d seat %d hand digest %v, header hand %v", i, s, pl.Hand, hand)
+			}
+			if len(op.Library) != 33 || !reflect.DeepEqual(pl.LibraryTop, op.Library[:digestLibraryTop]) {
+				t.Errorf("pair %d seat %d library_top %v, header library top %v", i, s, pl.LibraryTop, op.Library[:digestLibraryTop])
+			}
+		}
+		for j, en := range tp.Entries {
+			d := en.Digest
+			if d.Turn != en.Turn || d.Step != en.Step {
+				t.Errorf("pair %d entry %d: digest turn/step %d/%s, entry %d/%s", i, j, d.Turn, d.Step, en.Turn, en.Step)
+			}
+			for _, pl := range d.Players {
+				if pl.Life != 20 {
+					lifeMoved++
+				}
+				if len(pl.Graveyard) > 0 {
+					graves++
+				}
+				if len(pl.Hand) < 7 {
+					handShrank++
+				}
+			}
+			for _, pd := range d.Field {
+				if pd.PT != "" {
+					creatures++
+				}
+				if pd.Damage > 0 {
+					damaged++
+				}
+				if len(pd.Counters) > 0 {
+					countered++
+				}
+				if pd.AttachedTo != "" {
+					attached++
+				}
+				if pd.Token {
+					tokens++
+				}
+				if pd.Tapped && basics[pd.Name] {
+					tappedLand++
+				}
+			}
+			// The next decision's digest shows the land the previous
+			// entry tapped for mana as tapped (same turn, nothing untaps).
+			if j+1 < len(tp.Entries) && tp.Entries[j+1].Turn == en.Turn {
+				next := tp.Entries[j+1].Digest
+				for _, m := range en.Mana {
+					if m.Ability < 0 || !basics[m.Name] {
+						continue
+					}
+					tapAfterMana++
+					n := 0
+					for _, pd := range next.Field {
+						if pd.Name == m.Name && pd.Owner == m.Owner && pd.Tapped {
+							n++
+						}
+					}
+					if n > 0 {
+						tapChecked++
+					} else {
+						t.Errorf("pair %d entry %d: %s tapped for mana but the next digest shows none tapped", i, j, m.Name)
+					}
+				}
+			}
+		}
+	}
+	if tappedLand == 0 || creatures == 0 || lifeMoved == 0 || tapChecked == 0 || damaged == 0 || graves == 0 || handShrank == 0 || countered == 0 || attached == 0 || tokens == 0 {
+		t.Errorf("games too thin to constrain the digest: %d tapped-land, %d creature, %d damaged, %d life-changed, %d graveyard, %d small-hand, %d countered, %d attached, %d token digests, %d mana taps checked",
+			tappedLand, creatures, damaged, lifeMoved, graves, handShrank, countered, attached, tokens, tapChecked)
+	}
+	t.Logf("%d tapped-land, %d creature digests, %d life-changed player digests, %d/%d mana taps seen tapped", tappedLand, creatures, lifeMoved, tapChecked, tapAfterMana)
 }
