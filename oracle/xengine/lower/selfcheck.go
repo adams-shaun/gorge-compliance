@@ -30,6 +30,10 @@ type Check struct {
 	Field       string
 	Gorge, Tape string
 	Fails       []string
+	// Result is gorge's own result for the scenario (zero when the runner
+	// could not run it), kept so a comparison against a follower never
+	// replays gorge.
+	Result rules.OracleResult
 }
 
 var failStep = regexp.MustCompile(`^(?:after )?step (\d+) \(`)
@@ -41,7 +45,7 @@ var failStep = regexp.MustCompile(`^(?:after )?step (\d+) \(`)
 // the digest of the first entry the scenario starts from. The runner's own
 // failures, a harness error and a coin flipped differently from the live game
 // are gaps too.
-func SelfCheck(reg *cards.Registry, l Lowered, t *game.Tape) Check {
+func SelfCheck(reg *cards.Registry, l Lowered, t *game.Tape) (out Check) {
 	if len(l.Item.Steps) == 0 {
 		why := l.Truncated
 		if why == "" {
@@ -50,6 +54,7 @@ func SelfCheck(reg *cards.Registry, l Lowered, t *game.Tape) Check {
 		return Check{Status: StatusGap, Step: -1, Field: "empty", Gorge: why}
 	}
 	res, err := rules.RunOracleScenarioJSON(reg, l.Item.Raw())
+	defer func() { out.Result = res }()
 	if err != nil {
 		return Check{Status: StatusGap, Step: -1, Field: "harness", Gorge: err.Error()}
 	}
