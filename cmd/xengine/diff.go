@@ -123,6 +123,10 @@ func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) erro
 	for _, r := range lrows {
 		var f classify.Finding
 		switch {
+		case r.Status == statusRefused:
+			// A refused window is a coverage row: no scenario, no gorge
+			// result, nothing for a follower to answer.
+			continue
 		case r.Status == statusPlayError || r.Status == statusLowerError:
 			// No tape and no item: counted as a lowering gap, nothing to repro.
 			f = classify.Finding{ID: r.ID, Class: classify.ClassLowerGap, Step: -1, Field: r.Field, Gorge: r.Gorge, Msg: r.Status}
@@ -190,7 +194,7 @@ func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) erro
 	if err := writeAtomic(filepath.Join(out, "compared.tsv"), tsv.Bytes()); err != nil {
 		return err
 	}
-	fmt.Printf("compared %d items against %s into %s\n", len(lrows), engine, out)
+	fmt.Printf("compared %d items against %s into %s\n", len(lrows)-refusedRows(lrows), engine, out)
 	for _, c := range classify.Classes {
 		if hist[c] > 0 {
 			fmt.Printf("  %-15s %d\n", c, hist[c])
@@ -203,4 +207,14 @@ func emit(w *bytes.Buffer, hist map[string]int, f classify.Finding) {
 	b, _ := jsonl(f)
 	w.Write(b)
 	hist[f.Class]++
+}
+
+// refusedRows counts the refused rows, which are not items.
+func refusedRows(rows []lowerRow) (n int) {
+	for _, r := range rows {
+		if r.Status == statusRefused {
+			n++
+		}
+	}
+	return n
 }

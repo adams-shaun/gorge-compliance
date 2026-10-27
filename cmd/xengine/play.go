@@ -22,6 +22,9 @@ import (
 const (
 	statusPlayError  = "play_error"
 	statusLowerError = "lower_error"
+	// statusRefused is a window turn lower.Windows refused: no scenario, no
+	// tape, no result; diff skips it.
+	statusRefused = "refused"
 )
 
 // lowerRow is one line of lower.jsonl: how one game's lowering went. Item is
@@ -41,6 +44,11 @@ type lowerRow struct {
 	Swap        bool            `json:"swap,omitempty"`
 	StepEntry   []int           `json:"step_entry"`
 	Steps       int             `json:"steps"`
+	Prelude     int             `json:"prelude,omitempty"`
+	HasRNG      bool            `json:"has_rng,omitempty"`
+	RNGStep     int             `json:"rng_step,omitempty"`
+	Reasons     []string        `json:"reasons,omitempty"`
+	Turn        int32           `json:"turn,omitempty"`
 	Item        *oraclegen.Item `json:"item,omitempty"`
 }
 
@@ -48,7 +56,7 @@ type lowerRow struct {
 func (r lowerRow) lowered(item oraclegen.Item) lower.Lowered {
 	return lower.Lowered{
 		Item: item, StepEntry: r.StepEntry, Truncated: r.Truncated, TruncatedAt: r.TruncatedAt,
-		FirstEntry: r.FirstEntry, Swap: r.Swap,
+		FirstEntry: r.FirstEntry, Swap: r.Swap, Prelude: r.Prelude, HasRNG: r.HasRNG, RNGStep: r.RNGStep,
 	}
 }
 
@@ -65,16 +73,13 @@ func runPlay(args []string) error {
 	chunk := fs.Int("chunk", 0, "chunk number")
 	games := fs.Int("games", 4, "games in the chunk")
 	seed := fs.Uint64("seed", 1, "chunk seed")
-	windows := fs.Bool("windows", false, "also emit one-turn windows (needs lower.Windows)")
+	windows := fs.Bool("windows", false, "also emit one-turn windows")
 	ledgerPath := fs.String("ledger", "", "coverage ledger TSV at chunk start (empty: an empty ledger)")
 	xmage := fs.Bool("xmage", false, "leave out the cards XMage spells differently (an XMage item names no per-card spelling)")
 	out := fs.String("out", "", "output dir (default under "+DefaultRoot+")")
 	fs.Parse(args)
 	if *set == "" {
 		return fmt.Errorf("play needs -set")
-	}
-	if *windows {
-		return fmt.Errorf("play -windows: this build has no lower.Windows (xe-5 has not landed); drop the flag")
 	}
 	if *games < 1 || *chunk < 0 {
 		return fmt.Errorf("play needs -games >= 1 and -chunk >= 0")
@@ -108,7 +113,7 @@ func runPlay(args []string) error {
 	if err := decks.Pairable(cands); err != nil {
 		return fmt.Errorf("set %s: %w", *set, err)
 	}
-	return play(reg, cands, led, *set, *chunk, *games, *seed, *out)
+	return play(reg, cands, led, *set, *chunk, *games, *seed, *out, *windows)
 }
 
 // gameSeed is the seed game g of a chunk plays with: distinct per (chunk,
@@ -117,54 +122,43 @@ func gameSeed(seed uint64, chunk, g int) uint64 {
 	return seed*1_000_003 + uint64(chunk)*10_007 + uint64(g)
 }
 
-func play(reg *cards.Registry, cands []decks.Card, led *cov.Ledger, set string, chunk, games int, seed uint64, out string) error {
+// windowFile is the tape file of a window: a shallow copy of its self-check
+// tape cut where the lowering stopped. The next turn's first entry, which the
+// self-check reads only for the digest of the last step, is not the window's.
+func windowFile(l lower.Lowered) *game.Tape {
+	n := len(l.Against.Entries)
+	if l.Truncated != "" {
+		n = min(n, l.TruncatedAt)
+	} else {
+		n = 0
+		for n < len(l.Against.Entries) && l.Against.Entries[n].Turn == 1 {
+			n++
+		}
+	}
+	t := *l.Against
+	t.Entries = l.Against.Entries[:n:n]
+	return &t
+}
+
+func play(reg *cards.Registry, cands []decks.Card, led *cov.Ledger, set string, chunk, games int, seed uint64, out string, windows bool) error {
 	var items, gorge, lowerLog bytes.Buffer
 	exercised := cov.New()
 	exercised.Merge(led)
 	hist := map[string]int{}
-	// The pairs are drawn against the ledger as it stood at chunk start.
-	for g := 0; g < games; g++ {
-		pair := decks.Pair(cands, led, set, chunk, g, seed)
-		for _, d := range pair {
-			for _, n := range d.Cards {
-				if c, ok := reg.Lookup(n); ok {
-					exercised.Seed(n, c)
-				}
-			}
-		}
-		id := fmt.Sprintf("xe:%s:%d:%d:tape", set, chunk, g)
-		row := lowerRow{ID: id, Step: -1}
-		tp, err := game.Play(reg, pair, gameSeed(seed, chunk, g), game.Options{Set: set})
-		if err != nil || tp == nil {
-			row.Status, row.Field, row.Gorge = statusPlayError, "play", fmt.Sprint(err)
-			b, _ := jsonl(row)
-			lowerLog.Write(b)
-			hist[row.Status]++
-			continue
-		}
-		for u, n := range classify.Uses(reg, tp, 0, len(tp.Entries)-1, true) {
-			exercised.Add(u.Card, u.Key, cov.Counts{Exercised: n})
-		}
-		l, err := lower.Tape(reg, tp)
-		if err != nil {
-			row.Status, row.Field, row.Gorge = statusLowerError, "lower", err.Error()
-			b, _ := jsonl(row)
-			lowerLog.Write(b)
-			hist[row.Status]++
-			continue
-		}
-		row.ID = l.Item.ID
-		row.Tape = filepath.Join("tapes", classify.Sanitise(row.ID)+".json")
-		tb, err := tp.Bytes()
+	// emit writes the tape file tf of the lowered item l and its rows, given
+	// its self-check c: the one place a tape and a window take their row shape.
+	emit := func(l lower.Lowered, tf *game.Tape, c lower.Check) error {
+		row := lowerRow{ID: l.Item.ID, Tape: filepath.Join("tapes", classify.Sanitise(l.Item.ID)+".json")}
+		tb, err := tf.Bytes()
 		if err != nil {
 			return err
 		}
 		if err := writeAtomic(filepath.Join(out, row.Tape), tb); err != nil {
 			return err
 		}
-		c := lower.SelfCheck(reg, l, tp)
 		row.Status, row.Step, row.Field, row.Gorge, row.TapeValue = c.Status, c.Step, c.Field, c.Gorge, c.Tape
 		row.Truncated, row.TruncatedAt, row.FirstEntry, row.Swap = l.Truncated, l.TruncatedAt, l.FirstEntry, l.Swap
+		row.Prelude, row.HasRNG, row.RNGStep = l.Prelude, l.HasRNG, l.RNGStep
 		row.StepEntry, row.Steps = l.StepEntry, len(l.Item.Steps)
 		if c.Status == lower.StatusOK {
 			b, err := jsonl(l.Item)
@@ -186,6 +180,65 @@ func play(reg *cards.Registry, cands []decks.Card, led *cov.Ledger, set string, 
 		}
 		lowerLog.Write(b)
 		hist[row.Status]++
+		return nil
+	}
+	// The pairs are drawn against the ledger as it stood at chunk start.
+	for g := 0; g < games; g++ {
+		pair := decks.Pair(cands, led, set, chunk, g, seed)
+		for _, d := range pair {
+			for _, n := range d.Cards {
+				if c, ok := reg.Lookup(n); ok {
+					exercised.Seed(n, c)
+				}
+			}
+		}
+		id := fmt.Sprintf("xe:%s:%d:%d:tape", set, chunk, g)
+		var (
+			tp      *game.Tape
+			wins    []lower.Lowered
+			refused []lower.Refusal
+			err     error
+		)
+		if windows {
+			wins, refused, tp, err = lower.Windows(reg, pair, gameSeed(seed, chunk, g), game.Options{Set: set})
+		} else {
+			tp, err = game.Play(reg, pair, gameSeed(seed, chunk, g), game.Options{Set: set})
+		}
+		if err != nil || tp == nil {
+			row := lowerRow{ID: id, Step: -1, Status: statusPlayError, Field: "play", Gorge: fmt.Sprint(err)}
+			b, _ := jsonl(row)
+			lowerLog.Write(b)
+			hist[row.Status]++
+			continue
+		}
+		for u, n := range classify.Uses(reg, tp, 0, len(tp.Entries)-1, true) {
+			exercised.Add(u.Card, u.Key, cov.Counts{Exercised: n})
+		}
+		// The whole-game tape, then the windows in cut order, then the
+		// refusals in cut order.
+		l, err := lower.Tape(reg, tp)
+		if err != nil {
+			row := lowerRow{ID: id, Step: -1, Status: statusLowerError, Field: "lower", Gorge: err.Error()}
+			b, _ := jsonl(row)
+			lowerLog.Write(b)
+			hist[row.Status]++
+		} else if err := emit(l, tp, lower.SelfCheck(reg, l, tp)); err != nil {
+			return err
+		}
+		for _, w := range wins {
+			if err := emit(w, windowFile(w), lower.CheckWindow(reg, w)); err != nil {
+				return err
+			}
+		}
+		for _, r := range refused {
+			row := lowerRow{ID: r.ID, Status: statusRefused, Step: -1, Turn: r.Turn, Reasons: r.Reasons}
+			b, err := jsonl(row)
+			if err != nil {
+				return err
+			}
+			lowerLog.Write(b)
+			hist[row.Status]++
+		}
 	}
 	var tsv bytes.Buffer
 	if err := exercised.WriteTSV(&tsv); err != nil {
