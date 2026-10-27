@@ -69,6 +69,17 @@ oracle-audit:
 smoke:
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
+	bash ops/scripts/tests/xengine_sweep_smoke.sh
+
+# xengine-sweep runs the chunked, resumable cross-engine sweep
+# (scripts/xengine-sweep.sh) on the host: SETS='FDN BLB' CHUNKS=4 GAMES=50.
+# Heavy and Java-backed: the operator's, never a seat's.
+SETS ?= FDN BLB
+CHUNKS ?= 4
+GAMES ?= 50
+.PHONY: xengine-sweep
+xengine-sweep:
+	scripts/xengine-sweep.sh --sets '$(SETS)' --chunks $(CHUNKS) --games $(GAMES)
 
 # mtgish-fetch downloads mtgish.lines.json and LICENSE at MTGISH_REF into
 # .mtgish/<ref>/ and verifies them against oracle/mtgish/MTGISH.lock.
