@@ -3,6 +3,7 @@ package lower
 import (
 	"fmt"
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -195,6 +196,7 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 			attach(&steps[mainStep], answers, entries[i:j])
 		}
 		stepEntry[mainStep] = j - 1
+		l.markShuffles(m, entries[i:j], len(l.Item.Steps)+mainStep)
 		l.Item.Steps = append(l.Item.Steps, steps...)
 		l.StepEntry = append(l.StepEntry, stepEntry...)
 		i = j
@@ -207,6 +209,28 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 	}
 	if stalled {
 		l.stop(len(entries), &truncation{ReasonStall})
+	}
+}
+
+// markShuffles leaves a seat's library order out of the comparison from the
+// checkpoint of step onward when the group activates an ability whose text
+// shuffles ("Shuffle your graveyard into your library"). Which seat's library
+// the engines mix is theirs to decide, and gorge may not draw randomness for
+// it at all (an empty graveyard), so the tape's RNG count cannot tell: the
+// label can. Each engine's order is its own RNG's afterwards, never a rules
+// difference; the count still compares. The entry "pN.library_top@K" is
+// oraclediff's "from checkpoint K" form (checkpoint 0 is the setup).
+func (l *Lowered) markShuffles(m seatMap, g []game.Entry, step int) {
+	for _, e := range g {
+		for _, p := range e.Picks {
+			if p.Kind != "ability" || !strings.Contains(strings.ToLower(p.Label), "shuffle") {
+				continue
+			}
+			ig := fmt.Sprintf("p%d.library_top@%d", m.seat(p.Player), step+1)
+			if !slices.Contains(l.Item.Ignore, ig) {
+				l.Item.Ignore = append(l.Item.Ignore, ig)
+			}
+		}
 	}
 }
 
