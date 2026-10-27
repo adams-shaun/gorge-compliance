@@ -10,7 +10,8 @@
 #   - deleting one .done redoes exactly that chunk, the old directory moved aside;
 #   - 2 running JVMs make the follower stage wait, then time out with a message;
 #   - a root inside the repository is refused;
-#   - a failing follower leaves no .done.
+#   - the JVM count is taken again once the heavy lock is held;
+#   - a failing follower, or a failing ledger publish, leaves no .done.
 #
 #   ops/scripts/tests/xengine_sweep_smoke.sh
 set -uo pipefail
@@ -66,7 +67,7 @@ diff)
 	printf 'card\tkey\texercised\tcompared\toffered\nA\tk\t0\t1\t0\n' > "${o[out]}/compared.tsv"
 	;;
 cov)
-	echo "cov" >> "$LOG"
+	if [ -n "${o[write]:-}" ]; then echo "cov-write" >> "$LOG"; else echo "cov-report" >> "$LOG"; fi
 	[ -z "${o[write]:-}" ] || printf 'card\tkey\texercised\tcompared\toffered\nA\tk\t1\t1\t0\n' > "${o[write]}"
 	echo "cov report"
 	;;
@@ -92,8 +93,11 @@ cat "$3" > "$5"
 STUB
 cat > "$BIN/pgrep" <<'STUB'
 #!/usr/bin/env bash
-echo "${SMOKE_JVMS:-0}"
-[ "${SMOKE_JVMS:-0}" != 0 ]
+# SMOKE_PGREP_FREE_FIRST: the first count is 0 (the pre-lock check), later ones SMOKE_JVMS.
+n=${SMOKE_JVMS:-0}
+if [ -n "${SMOKE_PGREP_FREE_FIRST:-}" ] && [ ! -e "$SMOKE_PGREP_FREE_FIRST" ]; then : > "$SMOKE_PGREP_FREE_FIRST"; n=0; fi
+echo "$n"
+[ "$n" != 0 ]
 STUB
 chmod +x "$BIN"/*
 
@@ -114,7 +118,7 @@ check "cold: 4 play stages" '[ "$(count play)" = 4 ]' "$(count play)"
 check "cold: 4 xmage replays" '[ "$(count xmage)" = 4 ]'
 check "cold: 4 forge replays (4 exports)" '[ "$(count forge)" = 4 ] && [ "$(count export)" = 4 ]'
 check "cold: 8 diffs" '[ "$(count diff)" = 8 ]'
-check "cold: 4 ledger merges" '[ "$(count cov)" -ge 4 ]'
+check "cold: 4 ledger merges" '[ "$(count cov-write)" = 4 ]' "$(count cov-write)"
 n=0
 for s in FDN BLB; do for c in 0 1; do [ -e "$R/$s/$c/.done" ] && n=$((n + 1)); done; done
 check "cold: every chunk has .done" '[ "$n" = 4 ]' "done=$n"
@@ -150,6 +154,14 @@ check "2 JVMs: waits, then says so" 'has "$out" "waiting for a slot" && has "$ou
 check "2 JVMs: no follower started" '[ "$(count xmage)" = 0 ] && [ "$(count forge)" = 0 ]'
 check "2 JVMs: no .done" '[ ! -e "$R2/FDN/0/.done" ]'
 
+# 4b. The count is taken again once the heavy lock is held: free before the
+# lock, 2 JVMs after it -> no follower starts.
+R2b=$TMP/run2b
+: > "$LOG"
+out=$(SMOKE_JVMS=2 SMOKE_PGREP_FREE_FIRST=$TMP/pgrep-first sweep "$R2b" --sets FDN --chunks 1); rc=$?
+check "JVM appears during the lock wait: sweep exits non-zero" '[ "$rc" != 0 ]' "rc=$rc"
+check "JVM appears during the lock wait: no follower started" '[ "$(count xmage)" = 0 ] && [ "$(count forge)" = 0 ] && has "$out" "timed out"' "$out"
+
 # 5. A root inside the repository is refused.
 out=$(sweep "$ROOT/.xengine-smoke-root"); rc=$?
 check "repo root refused" '[ "$rc" != 0 ] && has "$out" "inside the repository"' "rc=$rc $out"
@@ -161,6 +173,22 @@ out=$(FAIL_FOLLOWER=forge sweep "$R3" --sets FDN --chunks 2); rc=$?
 check "failing follower: sweep exits non-zero" '[ "$rc" != 0 ]' "rc=$rc"
 check "failing follower: no .done, later chunk skipped" '[ ! -e "$R3/FDN/0/.done" ] && [ ! -d "$R3/FDN/1" ]' "$out"
 check "failing follower: says which stage" 'has "$out" "FDN/0: forge replay FAILED"' "$out"
+
+# 7. A ledger publish that fails leaves no .done (chunk runs under `if`, where
+# set -e is off). A cp that fails only for the ledger temp file stands in.
+FAILCP=$TMP/failcp
+mkdir -p "$FAILCP"
+cat > "$FAILCP/cp" <<'STUB'
+#!/usr/bin/env bash
+case "${*: -1}" in *ledger.tsv.tmp*) exit 1 ;; esac
+exec /usr/bin/cp "$@"
+STUB
+chmod +x "$FAILCP/cp"
+R4=$TMP/run4
+out=$(PATH=$FAILCP:$PATH sweep "$R4" --sets FDN --chunks 2); rc=$?
+check "ledger publish failure: sweep exits non-zero" '[ "$rc" != 0 ]' "rc=$rc"
+check "ledger publish failure: no .done, later chunk skipped" '[ ! -e "$R4/FDN/0/.done" ] && [ ! -d "$R4/FDN/1" ] && [ ! -e "$R4/ledger.tsv" ]' "$out"
+check "ledger publish failure: says so" 'has "$out" "FDN/0: ledger publish FAILED"' "$out"
 
 [ "$fails" = 0 ] && echo "xengine_sweep_smoke: all passed" || echo "xengine_sweep_smoke: $fails FAILED"
 exit $((fails != 0))

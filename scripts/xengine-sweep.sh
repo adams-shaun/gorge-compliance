@@ -4,7 +4,8 @@
 # A chunked, resumable xengine sweep outside go test (DESIGN xengine section 8).
 # Per set and chunk c (K games each):
 #   1. xengine play  -- gorge plays K games, lowers them to <chunk>/items.jsonl
-#                       (inside a systemd scope: 4G, 400% CPU, GOMAXPROCS=4)
+#                       (every go stage -- play, diff, cov, sweep-plan -- runs
+#                       inside a systemd scope: 4G, 400% CPU, GOMAXPROCS=4)
 #   2. each follower in XENGINE_FOLLOWERS replays items.jsonl under the heavy
 #      lock (scripts/heavy-lock.sh), after waiting for a free JVM slot
 #   3. xengine diff  -- classify the follower rows into <chunk>/diff-<f>
@@ -17,7 +18,9 @@
 # Chunks of a set run in order and each plays against the ledger as it stood
 # when the previous chunk finished (kept as <chunk>/ledger-in.tsv). A crash
 # between the ledger merge and .done re-merges that chunk's counts on the
-# redo: counters inflate, "never compared" stays exact.
+# redo: counters inflate, "never compared" stays exact. --force redoes chunks
+# that already have .done and re-merges them the same way: the ledger is never
+# rolled back.
 # A failed chunk stops its set (later chunks would read a stale ledger); other
 # sets go on and the sweep exits 1.
 #
@@ -88,7 +91,15 @@ mkdir -p "$absroot"
 root=$absroot
 ledger=$root/ledger.tsv
 
-xe() { "$GO" run -trimpath ./cmd/xengine "$@"; }
+# capped CMD...: the box rule (4G, 400% CPU, GOMAXPROCS=4) for every go stage.
+capped() {
+	if [ "${XENGINE_SCOPE:-systemd}" = none ]; then
+		env GOMAXPROCS=4 GOMEMLIMIT=3GiB "$@"
+	else
+		systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% env GOMAXPROCS=4 GOMEMLIMIT=3GiB "$@"
+	fi
+}
+xe() { capped "$GO" run -trimpath ./cmd/xengine "$@"; }
 
 # Stages run in the background so the pid is ours to stop; the trap stops only
 # pids this script started.
@@ -106,6 +117,7 @@ run_stage() {
 	return "$rc"
 }
 
+# exported: the locked command re-runs it (slot_exec) once the heavy lock is held.
 jvm_slot() {
 	local waited=0 n
 	while :; do
@@ -120,6 +132,11 @@ jvm_slot() {
 		waited=$((waited + jvm_poll))
 	done
 }
+
+export -f jvm_slot
+export PGREP jvm_wait jvm_poll
+# The lock wait can be hours, so the count taken before it is stale: the
+# locked command (bash -c 'jvm_slot && exec RUNNER ...') counts again first.
 
 oracledif() {
 	if [ -n "${XENGINE_ORACLEDIFF:-}" ]; then
@@ -138,14 +155,14 @@ follower_rows() { # follower dir -> rows file
 		runner=${XENGINE_XMAGE_RUNNER:-$repo/scripts/xmage-oracle-run.sh}
 		jvm_slot || return 1
 		run_stage "$repo/scripts/heavy-lock.sh" --wait "${XENGINE_XMAGE_WAIT:-20000}" --mem "${XENGINE_XMAGE_MEM:-12G}" \
-			--name xengine-xmage -- "$runner" "$d/items.jsonl" "$d/xmage.jsonl"
+			--name xengine-xmage -- bash -c 'jvm_slot && exec "$@"' _ "$runner" "$d/items.jsonl" "$d/xmage.jsonl"
 		;;
 	forge)
 		runner=${XENGINE_FORGE_RUNNER:-$repo/scripts/forge-oracle-run.sh}
 		oracledif forge-export -scenarios "$d/items.jsonl" -out "$d/forge-req.jsonl" >"$d/forge-export.log" 2>&1 || return 1
 		jvm_slot || return 1
 		run_stage "$repo/scripts/heavy-lock.sh" --wait "${XENGINE_FORGE_WAIT:-20000}" --mem "${XENGINE_FORGE_MEM:-12G}" \
-			--name xengine-forge -- "$runner" "$d/forge-req.jsonl" "$d/forge.jsonl"
+			--name xengine-forge -- bash -c 'jvm_slot && exec "$@"' _ "$runner" "$d/forge-req.jsonl" "$d/forge.jsonl"
 		;;
 	esac
 }
@@ -158,12 +175,7 @@ play_stage() { # set chunk dir
 		cp "$ledger" "$d/ledger-in.tsv"
 		args+=(-ledger "$d/ledger-in.tsv")
 	fi
-	if [ "${XENGINE_SCOPE:-systemd}" = none ]; then
-		run_stage env GOMAXPROCS=4 GOMEMLIMIT=3GiB "$GO" run -trimpath ./cmd/xengine "${args[@]}"
-	else
-		run_stage systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% \
-			env GOMAXPROCS=4 GOMEMLIMIT=3GiB "$GO" run -trimpath ./cmd/xengine "${args[@]}"
-	fi
+	run_stage xe "${args[@]}"
 }
 
 chunk() { # set chunk
@@ -182,8 +194,10 @@ chunk() { # set chunk
 	# exercised.tsv already carries the chunk's input ledger; the compared
 	# tsvs add what the followers confirmed. -write renames atomically.
 	xe cov "${cargs[@]}" -write "$d/ledger-out.tsv" >"$d/cov.log" 2>&1 || { echo "$s/$c: ledger merge FAILED"; tail -3 "$d/cov.log"; return 1; }
-	cp "$d/ledger-out.tsv" "$ledger.tmp.$$" && mv "$ledger.tmp.$$" "$ledger"
-	: >"$d/.done"
+	# chunk runs under `if`, where set -e is off: every step is checked by hand.
+	{ cp "$d/ledger-out.tsv" "$ledger.tmp.$$" && mv "$ledger.tmp.$$" "$ledger"; } \
+		|| { echo "$s/$c: ledger publish FAILED"; rm -f "$ledger.tmp.$$"; return 1; }
+	: >"$d/.done" || { echo "$s/$c: writing .done FAILED"; return 1; }
 }
 
 histogram() { # file jq-field dir... -> "value count" lines
