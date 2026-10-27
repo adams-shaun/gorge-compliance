@@ -213,23 +213,11 @@ func TestForgeDropsEmptyDeclarationDecisions(t *testing.T) {
 		t.Errorf("non-xengine item lost decisions: %+v", got)
 	}
 
-	reg := testutil.CorpusRegistry(t)
-	dir := t.TempDir()
-	scen, out := filepath.Join(dir, "items.jsonl"), filepath.Join(dir, "req.jsonl")
-	b, _ := json.Marshal(mk(lower.Template))
-	if err := os.WriteFile(scen, append(b, '\n'), 0o644); err != nil {
-		t.Fatal(err)
+	rq := forgeBuildRequest(testutil.CorpusRegistry(t), mk(lower.Template), ds)
+	if !reflect.DeepEqual(rq.GorgeDecisions, want) {
+		t.Errorf("exported decisions %+v, want %+v", rq.GorgeDecisions, want)
 	}
-	if _, err := forgeExport(reg, scen, out); err != nil {
-		t.Fatal(err)
-	}
-	raw, err := os.ReadFile(out)
-	if err != nil {
-		t.Fatal(err)
-	}
-	for _, d := range decodeRequests(t, raw)[0].GorgeDecisions {
-		if d.Step == 1 && d.Kind == "attackers" || d.Step == 2 && d.Kind == "blockers" {
-			t.Errorf("exported a leftover decision for an empty declaration: %+v", d)
-		}
+	if rq.Item.Steps[1].Op != "pass_to" || rq.Item.Steps[1].Decision != "priority" {
+		t.Errorf("empty attack not rewritten: %+v", rq.Item.Steps[1])
 	}
 }

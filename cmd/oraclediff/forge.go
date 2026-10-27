@@ -146,13 +146,7 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 		if gerr != nil || decisions == nil {
 			decisions = []rules.OracleDecision{}
 		}
-		sha := gate.ItemSHA(it)
-		decisions = forgeDropEmptyDeclarations(it, decisions)
-		it = forgeDeclarations(it)
-		line, err := json.Marshal(forgeRequest{
-			ID: it.ID, ScenarioSHA: sha, Item: it,
-			GorgeDecisions: decisions, Abilities: forgeAbilityLines(reg, it),
-		})
+		line, err := json.Marshal(forgeBuildRequest(reg, it, decisions))
 		if err != nil {
 			return err
 		}
@@ -166,6 +160,19 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 		return n, err
 	}
 	return n, of.Close()
+}
+
+// forgeBuildRequest assembles the request for one item from gorge's decisions
+// for it: the scenario SHA names the item as given, the decisions lose those
+// for steps the driver will not pose, and the steps are then rewritten.
+func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, decisions []rules.OracleDecision) forgeRequest {
+	sha := gate.ItemSHA(it)
+	decisions = forgeDropEmptyDeclarations(it, decisions)
+	it = forgeDeclarations(it)
+	return forgeRequest{
+		ID: it.ID, ScenarioSHA: sha, Item: it,
+		GorgeDecisions: decisions, Abilities: forgeAbilityLines(reg, it),
+	}
 }
 
 // forgeDeclarations adapts, in an xengine item, the steps around each attack
