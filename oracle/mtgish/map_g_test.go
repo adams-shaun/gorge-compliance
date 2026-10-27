@@ -184,3 +184,19 @@ func TestSvarParamsAndMergeSpells(t *testing.T) {
 		t.Errorf("sequential merge %+v", s.Abilities)
 	}
 }
+
+// TestGorgeAllMustBlockKeyword: gorge's canonical Lure head is the static
+// rule mtgish writes, not a keyword.
+func TestGorgeAllMustBlockKeyword(t *testing.T) {
+	f := &cards.Face{Name: "Test Card", Types: []string{"Creature"}, Keywords: []string{"AllMustBlock"}}
+	s := gorgeFace("Test Card", f, TypeIndex{})
+	if len(s.Keywords) != 0 {
+		t.Errorf("keywords %v, want none", s.Keywords)
+	}
+	if got, want := shapes(s), "static"; got != want {
+		t.Errorf("abilities %q, want %q", got, want)
+	}
+	if got := strings.Join(s.Abilities[0].Effects, " "); got != "rule:allcreaturesmustblockit" {
+		t.Errorf("effects %q", got)
+	}
+}

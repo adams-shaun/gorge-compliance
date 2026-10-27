@@ -49,6 +49,7 @@ var mtgishKeywordActions = map[string]string{
 // the PermanentRule variants (ruleWord spelling) mtgish writes for them.
 var gorgeRestrictionKeywords = map[string][]string{
 	"MustBlock":              {"mustbeblocked"},
+	"AllMustBlock":           {"allcreaturesmustblockit"},
 	"CantAttackOrBlock":      {"cantattack", "cantblock"},
 	"CantAttackOrBlockAlone": {"cantattackalone", "cantblockalone"},
 	"CantAttackAlone":        {"cantattackalone"},
