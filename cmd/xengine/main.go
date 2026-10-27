@@ -6,6 +6,7 @@
 //	xengine play -set S [-chunk C] [-games K] [-seed N] [-windows] [-ledger L.tsv] [-out DIR]
 //	xengine diff -play DIR -engine xmage|forge -rows ROWS.jsonl -out DIR2 [-only ID]
 //	xengine cov  -ledger A.tsv [-ledger B.tsv ...] [-sets FDN,BLB] [-missing] [-write OUT.tsv]
+//	xengine sweep-plan -root DIR -sets 'FDN BLB' -chunks N [-stale] [-force]
 //
 // play writes DIR/tapes/*.json (every game's tape), DIR/items.jsonl (the
 // follower input: only the items whose lowering gorge's own runner
@@ -14,7 +15,9 @@
 // (the ledger with Exercised credited). diff compares a follower's rows with
 // gorge's stored results, never replaying gorge, and writes DIR2/verdicts.jsonl,
 // DIR2/compared.tsv and DIR2/finds/<class>/<id>/ (a repro directory per
-// non-agree item). Follower output stays outside the repository.
+// non-agree item). sweep-plan lists the SET/CHUNK pairs of a sweep root that
+// have no .done marker (scripts/xengine-sweep.sh). Follower output stays
+// outside the repository.
 package main
 
 import (
@@ -32,7 +35,7 @@ const DefaultRoot = "/mnt/sata/gorge-training/xengine"
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov [flags]")
+		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|sweep-plan [flags]")
 		os.Exit(2)
 	}
 	var err error
@@ -43,8 +46,10 @@ func main() {
 		err = runDiff(os.Args[2:])
 	case "cov":
 		err = runCov(os.Args[2:])
+	case "sweep-plan":
+		err = runSweepPlan(os.Args[2:])
 	default:
-		err = fmt.Errorf("unknown subcommand %q (want play, diff or cov)", os.Args[1])
+		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov or sweep-plan)", os.Args[1])
 	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "xengine:", err)

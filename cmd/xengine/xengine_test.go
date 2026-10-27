@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -241,5 +242,99 @@ func TestXengineCompareCredit(t *testing.T) {
 		if c := led.Get(u.Card, u.Key).Compared; c != 0 {
 			t.Errorf("%s %s: compared %d, but only the harness item exercised it", u.Card, u.Key, c)
 		}
+	}
+}
+
+// mkChunk makes root/set/chunk, with a .done marker when done.
+func mkChunk(t *testing.T, root, set string, chunk int, done bool) string {
+	t.Helper()
+	dir := filepath.Join(root, set, fmt.Sprint(chunk))
+	if err := os.MkdirAll(dir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	if done {
+		if err := os.WriteFile(filepath.Join(dir, doneFile), nil, 0o644); err != nil {
+			t.Fatal(err)
+		}
+	} else if err := os.WriteFile(filepath.Join(dir, "items.jsonl"), []byte("{half"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	return dir
+}
+
+func TestSweepPlanResume(t *testing.T) {
+	root := t.TempDir()
+	mkChunk(t, root, "FDN", 0, true)
+	half := mkChunk(t, root, "FDN", 1, false)
+	mkChunk(t, root, "FDN", 2, true)
+	want := "FDN/1 FDN/3"
+	plan, err := sweepPlan(root, []string{"FDN"}, 4, false, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := strings.Join(plan, " "); got != want {
+		t.Fatalf("plan %q, want %q", got, want)
+	}
+	if _, err := os.Stat(half); err != nil {
+		t.Fatalf("a plan without -stale must leave %s: %v", half, err)
+	}
+	// A stale directory from an earlier attempt takes n=1; the next is n=2.
+	if err := os.MkdirAll(half+".stale.1", 0o755); err != nil {
+		t.Fatal(err)
+	}
+	plan, err = sweepPlan(root, []string{"FDN"}, 4, true, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := strings.Join(plan, " "); got != want {
+		t.Fatalf("-stale plan %q, want %q", got, want)
+	}
+	if _, err := os.Stat(half); !os.IsNotExist(err) {
+		t.Fatalf("%s should have moved aside: %v", half, err)
+	}
+	if b, err := os.ReadFile(filepath.Join(half+".stale.2", "items.jsonl")); err != nil || string(b) != "{half" {
+		t.Fatalf("stale.2 does not hold the half-written chunk: %q %v", b, err)
+	}
+	// Done chunks stay in place and a forced plan redoes them all.
+	if _, err := os.Stat(filepath.Join(root, "FDN", "0", doneFile)); err != nil {
+		t.Fatal(err)
+	}
+	plan, err = sweepPlan(root, []string{"FDN"}, 4, false, true)
+	if err != nil || strings.Join(plan, " ") != "FDN/0 FDN/1 FDN/2 FDN/3" {
+		t.Fatalf("forced plan %v %v", plan, err)
+	}
+}
+
+func TestSweepPlanOrder(t *testing.T) {
+	root := t.TempDir()
+	mkChunk(t, root, "BLB", 0, true)
+	var first []string
+	for i := 0; i < 3; i++ {
+		plan, err := sweepPlan(root, []string{"FDN", "BLB"}, 2, false, false)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if i == 0 {
+			first = plan
+			continue
+		}
+		if strings.Join(plan, "\n") != strings.Join(first, "\n") {
+			t.Fatalf("run %d: %v differs from %v", i, plan, first)
+		}
+	}
+	if got := strings.Join(first, " "); got != "FDN/0 FDN/1 BLB/1" {
+		t.Fatalf("plan %q: sets must keep the given order and chunks ascend", got)
+	}
+}
+
+func TestSweepPlanRefusesRepoRoot(t *testing.T) {
+	root := filepath.Join("..", "..", ".sweep-plan-test-root")
+	defer os.RemoveAll(root)
+	err := runSweepPlan([]string{"-root", root, "-sets", "FDN", "-chunks", "1"})
+	if err == nil || !strings.Contains(err.Error(), "inside the repository") {
+		t.Fatalf("a root inside the module must be refused, got %v", err)
+	}
+	if _, serr := os.Stat(root); serr == nil {
+		t.Fatal("the refused root was created")
 	}
 }
