@@ -359,3 +359,82 @@ func TestDigestOfGameValues(t *testing.T) {
 	}
 	t.Logf("%d tapped-land, %d creature digests, %d life-changed player digests, %d/%d mana taps seen tapped", tappedLand, creatures, lifeMoved, tapChecked, tapAfterMana)
 }
+
+func TestTapeFormat2(t *testing.T) {
+	reg, pairs := fdnPairs(t, 2)
+	tp := play(t, reg, pairs[1], 101, Options{Set: "FDN"})
+	if tp.Format != "xengine-tape-2" {
+		t.Fatalf("format %q", tp.Format)
+	}
+	// Starter is turn 1's active player, whatever came first (game 1 opens
+	// with a pre-game ask by the other seat).
+	for _, en := range tp.Entries {
+		if en.Turn == 1 {
+			if tp.Starter != en.Digest.Active {
+				t.Errorf("starter %d, turn 1 is seat %d's", tp.Starter, en.Digest.Active)
+			}
+			break
+		}
+	}
+	// Every land play, cast and attack names its object by a runner ref, and
+	// every mana record names its source and what it produced.
+	refs, mana := 0, 0
+	for j, en := range tp.Entries {
+		for _, pk := range en.Picks {
+			switch pk.Kind {
+			case "play_land", "cast", "attacker", "activate", "ability":
+				if pk.Ref == "" {
+					t.Errorf("entry %d: %s pick has no ref", j, pk.Kind)
+				}
+				if !strings.HasPrefix(pk.Ref, "p0:") && !strings.HasPrefix(pk.Ref, "p1:") {
+					t.Errorf("entry %d: ref %q is not a runner ref", j, pk.Ref)
+				}
+				refs++
+			}
+		}
+		for _, m := range en.Mana {
+			if m.Ref == "" {
+				t.Errorf("entry %d: mana record of %s has no ref", j, m.Name)
+			}
+			// (A source that asks which colour it makes is answered by a later
+			// entry, so its record cannot say; a basic land always can.)
+			switch m.Name {
+			case "Plains", "Island", "Swamp", "Mountain", "Forest":
+				if len(m.Produced) != 1 || !strings.Contains("WUBRG", m.Produced) {
+					t.Errorf("entry %d: %s produced %q", j, m.Name, m.Produced)
+				}
+			}
+			mana++
+		}
+	}
+	if refs == 0 || mana == 0 {
+		t.Fatalf("%d refs, %d mana records", refs, mana)
+	}
+	// A tape-1 file (no refs) is still read; any other format is not.
+	b, err := tp.Bytes()
+	if err != nil {
+		t.Fatal(err)
+	}
+	old := bytes.Replace(b, []byte(`"xengine-tape-2"`), []byte(`"xengine-tape-1"`), 1)
+	if _, err := ReadTape(bytes.NewReader(old)); err != nil {
+		t.Errorf("tape-1 rejected: %v", err)
+	}
+	bad := bytes.Replace(b, []byte(`"xengine-tape-2"`), []byte(`"xengine-tape-3"`), 1)
+	if _, err := ReadTape(bytes.NewReader(bad)); err == nil {
+		t.Error("tape-3 accepted")
+	}
+}
+
+func TestSwappedDigest(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	tp := play(t, reg, pairs[0], 100, Options{Set: "FDN"})
+	for j, en := range tp.Entries {
+		s := en.Digest.Swapped()
+		if !reflect.DeepEqual(s.Swapped(), en.Digest) {
+			t.Fatalf("entry %d: swapping twice changes the digest", j)
+		}
+		if s.Players[0].Seat != 0 || s.Players[1].Seat != 1 || s.Players[0].Life != en.Digest.Players[1].Life {
+			t.Fatalf("entry %d: players not exchanged", j)
+		}
+	}
+}

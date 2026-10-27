@@ -1,0 +1,472 @@
+package lower
+
+import (
+	"fmt"
+	"regexp"
+	"strconv"
+	"strings"
+
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
+	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/effects"
+)
+
+// Template is the item template of a lowered tape.
+const Template = "xengine-tape"
+
+// Truncation reasons. The list is closed: Lowered.Truncated is one of these
+// or "unsupported_kind:" plus the tape entry kind (or the named feature) the
+// lowering has no step for.
+const (
+	ReasonAttackSplit     = "attack_split"     // one attack at more than one defender
+	ReasonAttackNonPlayer = "attack_nonplayer" // an attack at a planeswalker or battle
+	ReasonUnbindableRef   = "unbindable_ref"   // an object the runner cannot name
+	ReasonStall           = "stall"            // the tape ends in a watchdog, not a game end
+	ReasonUnsupported     = "unsupported_kind:"
+)
+
+// Lowered is a tape lowered to one oracle scenario.
+type Lowered struct {
+	// Item is the scenario. Ignore and Compare stay empty (the classifier
+	// sets them); so do the follower-specific fields.
+	Item oraclegen.Item `json:"item"`
+	// StepEntry is parallel to Item.Steps: the index of the last tape entry
+	// the step carries out, or -1 for a step the live game has no state
+	// after (an explicit mana tap before a cast). The runner's checkpoint
+	// after step i is checked against the digest of entry StepEntry[i]+1.
+	StepEntry []int `json:"step_entry"`
+	// Truncated is why the lowering stopped before the end of the tape ("" if
+	// it did not) and TruncatedAt the index of the first tape entry it did
+	// not lower.
+	Truncated   string `json:"truncated,omitempty"`
+	TruncatedAt int    `json:"truncated_at,omitempty"`
+	// FirstEntry is the tape entry whose state the scenario's setup
+	// checkpoint stands for: the first priority of turn 1's first main phase.
+	FirstEntry int `json:"first_entry"`
+	// Swap is true when the tape's starting player was seat 1, so every seat
+	// in the scenario is the opposite of the tape's.
+	Swap bool `json:"swap,omitempty"`
+}
+
+var deckName = regexp.MustCompile(`-c(\d+)-g(\d+)-`)
+
+// itemID is xe:<set>:<chunk>:<game>:tape; chunk and game come from the deck
+// name decks.Pair gave the tape's first deck (the seed stands in for both when
+// the name is not one of those).
+func itemID(t *game.Tape) string {
+	if m := deckName.FindStringSubmatch(t.Decks[0].Name); m != nil {
+		return fmt.Sprintf("xe:%s:%s:%s:tape", t.Set, m[1], m[2])
+	}
+	return fmt.Sprintf("xe:%s:s%d:%d:tape", t.Set, t.Seed, t.Seed)
+}
+
+// truncation is why a group of entries could not be lowered.
+type truncation struct{ reason string }
+
+func unsupported(k string) *truncation { return &truncation{ReasonUnsupported + k} }
+
+// isAsk is true for a decision that is neither a priority nor a declaration:
+// the kinds that become answers.
+func isAsk(e game.Entry) bool {
+	switch e.Kind {
+	case "priority", "attackers", "blockers":
+		return false
+	}
+	return true
+}
+
+func isPass(e game.Entry) bool {
+	return e.Kind == "priority" && len(e.Picks) == 1 && e.Picks[0].Kind == "pass"
+}
+
+// Tape lowers t. A tape the lowering cannot express in full yields the
+// longest lowerable prefix with Truncated set; only a tape that cannot be
+// read as a game at all (an unknown card) is an error. The result is a pure
+// function of t.
+func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
+	m := seatMap{swap: t.Starter == 1}
+	for s := range t.Open {
+		for _, n := range append(append([]string{}, t.Open[s].Hand...), t.Open[s].Library...) {
+			if _, ok := reg.Lookup(n); !ok {
+				return Lowered{}, fmt.Errorf("lower: seat %d card %q not in the corpus", s, n)
+			}
+		}
+	}
+	sc := oraclegen.Scenario{
+		Name:  "xengine tape " + t.Decks[0].Name + " vs " + t.Decks[1].Name,
+		Turn:  1,
+		CR:    []string{},
+		Why:   "A recorded gorge game between two explore bots, replayed from turn 1.",
+		Setup: map[string]oraclegen.Seat{},
+	}
+	for s := range t.Open {
+		sc.Setup["p"+strconv.Itoa(m.seat(s))] = oraclegen.Seat{
+			Hand:       append([]string{}, t.Open[s].Hand...),
+			LibraryTop: append([]string{}, t.Open[s].Library...),
+		}
+	}
+	l := Lowered{
+		Item: oraclegen.Item{ID: itemID(t), Template: Template, Scenario: sc},
+		Swap: m.swap, StepEntry: []int{},
+	}
+	l.Item.Steps = []oraclegen.Step{}
+
+	first := -1
+	for i, e := range t.Entries {
+		if e.Kind == "priority" && e.Turn == 1 && e.Step == "main1" {
+			first = i
+			break
+		}
+		switch {
+		case isPass(e):
+		case isAsk(e):
+			// A decision posed while the runner drives to turn 1's first
+			// main phase (an opening-hand "begin the game" ask).
+			ans, why := answersOf(m, []game.Entry{e})
+			if why != nil {
+				l.stop(i, why)
+				return l, nil
+			}
+			l.Item.SetupAnswers = append(l.Item.SetupAnswers, ans...)
+		default:
+			l.stop(i, unsupported("prelude_"+e.Kind))
+			return l, nil
+		}
+	}
+	if first < 0 {
+		l.stop(len(t.Entries), unsupported("no_main1"))
+		return l, nil
+	}
+	l.FirstEntry = first
+
+	// A pass that posed asks owes its answers to the next step created; the
+	// pass is not final until that step exists, so its place is kept.
+	var owed []oraclegen.Answer
+	owedAt, owedSteps := -1, 0 // first entry of the pass group, steps before it
+	for i := first; i < len(t.Entries); {
+		j := i + 1
+		for j < len(t.Entries) && isAsk(t.Entries[j]) {
+			j++
+		}
+		steps, stepEntry, answers, why := lowerGroup(reg, m, t.Entries[i:j])
+		if why != nil {
+			at := i
+			if owedAt >= 0 {
+				// The pass before it was waiting for this group's first step.
+				at = owedAt
+				l.drop(owedSteps)
+			}
+			l.stop(at, why)
+			return l, nil
+		}
+		if len(owed) > 0 {
+			steps[0].Answers = append(append([]oraclegen.Answer{}, owed...), steps[0].Answers...)
+			owed, owedAt = nil, -1
+		}
+		mainStep := len(steps) - 1
+		if steps[mainStep].Op == "pass" && len(answers) > 0 {
+			if why := unsettled(t.Entries[i:j]); why != nil {
+				l.stop(i, why)
+				return l, nil
+			}
+			owed, owedAt, owedSteps = answers, i, len(l.Item.Steps)
+		} else if len(answers) > 0 {
+			attach(&steps[mainStep], answers, t.Entries[i:j])
+		}
+		stepEntry[mainStep] = j - 1
+		l.Item.Steps = append(l.Item.Steps, steps...)
+		l.StepEntry = append(l.StepEntry, stepEntry...)
+		i = j
+	}
+	if owedAt >= 0 {
+		// The last pass posed an ask nothing after it can answer.
+		l.drop(owedSteps)
+		l.stop(owedAt, unsupported("ask_after_pass:"+t.Entries[owedAt+1].Kind))
+		return l, nil
+	}
+	if t.Outcome.Stall != "" {
+		l.stop(len(t.Entries), &truncation{ReasonStall})
+	}
+	return l, nil
+}
+
+func (l *Lowered) stop(at int, why *truncation) { l.Truncated, l.TruncatedAt = why.reason, at }
+
+// unsettled is why the asks a pass posed (g[0] is the pass) cannot be
+// answered, nil when the runner answers each: it finishes a resolution the
+// pass began (the object on top of the stack is still there) and a trigger
+// order ask, from the answers of the next step, before the pass's checkpoint
+// (settleResolutionAsk, settleTriggerAsks). Any other ask is left pending and
+// no later step can take it: `pass` needs priority, and no op of the table
+// answers one pending decision alone.
+func unsettled(g []game.Entry) *truncation {
+	top := g[0].StackTop
+	for _, a := range g[1:] {
+		if a.Kind == "trigger_order" {
+			continue
+		}
+		if top == 0 || a.StackTop != top {
+			return unsupported("ask_after_pass:" + a.Kind)
+		}
+	}
+	return nil
+}
+
+// drop keeps the first n steps: the pass group after them found no step to
+// answer its asks.
+func (l *Lowered) drop(n int) {
+	l.Item.Steps = l.Item.Steps[:n]
+	l.StepEntry = l.StepEntry[:n]
+}
+
+// attach puts a step's asks on it. A cast or activation whose every target
+// ask took its full Max goes through the step's targets (the runner hands them
+// to the target decisions in order); anything else is an answer, which the
+// runner matches to a decision by kind.
+func attach(st *oraclegen.Step, answers []oraclegen.Answer, group []game.Entry) {
+	asks := group[1:]
+	useTargets := (st.Op == "cast" || st.Op == "activate") && len(asks) == len(answers)
+	n := 0
+	for _, a := range asks {
+		if a.Kind != "target" {
+			continue
+		}
+		n++
+		if a.Max == 0 || len(a.Picks) != a.Max {
+			useTargets = false
+		}
+	}
+	if !useTargets || n == 0 {
+		st.Answers = append(st.Answers, answers...)
+		return
+	}
+	for k, a := range answers {
+		if a.Kind == "target" {
+			st.Targets = append(st.Targets, a.Pick...)
+		} else {
+			st.Answers = append(st.Answers, answers[k])
+		}
+	}
+}
+
+// answersOf is the entries' asks as answers, in tape order; the first entry
+// of g is the decision that posed them when it is not itself an ask. Every
+// entry must be one the runner can be made to repeat.
+func answersOf(m seatMap, g []game.Entry) ([]oraclegen.Answer, *truncation) {
+	var answers []oraclegen.Answer
+	for _, a := range g {
+		switch {
+		case a.Reanswered:
+			return nil, unsupported("reanswered")
+		case a.RNG > 0 && len(a.Flips) == 0:
+			// A shuffle or a random pick: the runner's seeded RNG cannot land
+			// where the live game did.
+			return nil, unsupported("rng")
+		case len(a.Rest) > 0:
+			return nil, unsupported(a.Kind + "_rest")
+		}
+		if !isAsk(a) {
+			continue
+		}
+		ans := oraclegen.Answer{Kind: a.Kind, Pick: []string{}}
+		for _, p := range a.Picks {
+			s, ok := m.pickString(p)
+			if !ok {
+				if p.Obj != 0 {
+					return nil, &truncation{ReasonUnbindableRef}
+				}
+				return nil, unsupported(a.Kind)
+			}
+			ans.Pick = append(ans.Pick, s)
+		}
+		answers = append(answers, ans)
+	}
+	return answers, nil
+}
+
+// lowerGroup lowers one decision and the asks it posed: the steps (the last is
+// the decision's own, any before it are explicit mana taps), their entry
+// indices (-1 for the taps; the caller fills the last), and the asks as
+// answers, in tape order.
+func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Step, []int, []oraclegen.Answer, *truncation) {
+	en := g[0]
+	var steps []oraclegen.Step
+	var why *truncation
+	var mana []game.ManaRec
+	for _, e := range g {
+		mana = append(mana, e.Mana...)
+	}
+	switch en.Kind {
+	case "priority":
+		steps, why = lowerPriority(reg, m, en, mana)
+	case "attackers":
+		steps, why = lowerAttack(m, en)
+	case "blockers":
+		steps, why = lowerBlock(m, en)
+	}
+	if why != nil {
+		return nil, nil, nil, why
+	}
+	if len(steps) == 0 {
+		return nil, nil, nil, unsupported("empty_" + en.Kind)
+	}
+	if len(mana) > len(en.Mana) && !paysAfterAsks(en) {
+		// Mana fired while an ask was being answered, for a decision that is
+		// not a cast or activation: nothing to tap it ahead of.
+		return nil, nil, nil, unsupported("ask_mana")
+	}
+	answers, why := answersOf(m, g)
+	if why != nil {
+		return nil, nil, nil, why
+	}
+	idx := make([]int, len(steps))
+	for i := range idx {
+		idx[i] = -1
+	}
+	return steps, idx, answers, nil
+}
+
+// lowerPriority lowers a priority decision. mana is every mana ability fired
+// by committing it and the asks it posed: a cast pays after its targets and
+// modes are chosen, so the taps are recorded on those entries, not the cast.
+// paysAfterAsks is true for a priority decision whose cost is paid after the
+// asks it poses (targets, modes, X) are answered: a cast or an ability.
+func paysAfterAsks(en game.Entry) bool {
+	return en.Kind == "priority" && len(en.Picks) == 1 && (en.Picks[0].Kind == "cast" || en.Picks[0].Kind == "ability")
+}
+
+func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.ManaRec) ([]oraclegen.Step, *truncation) {
+	if len(en.Picks) != 1 {
+		return nil, unsupported("priority_picks")
+	}
+	pk := en.Picks[0]
+	seat := m.stepSeat(en)
+	switch pk.Kind {
+	case "pass":
+		return []oraclegen.Step{{Op: "pass", Seat: seat}}, nil
+	case "play_land":
+		if pk.Ref == "" {
+			return nil, &truncation{ReasonUnbindableRef}
+		}
+		return []oraclegen.Step{{Op: "play", Seat: seat, Card: m.ref(pk.Ref)}}, nil
+	case "cast", "ability":
+		taps, why := manaTaps(reg, m, mana)
+		if why != nil {
+			return nil, why
+		}
+		if pk.Ref == "" {
+			return nil, &truncation{ReasonUnbindableRef}
+		}
+		if pk.Kind == "cast" {
+			mode := pk.Mode
+			if mode == "" && pk.AltCost == 1 {
+				mode = "alternative"
+			}
+			return append(taps, oraclegen.Step{Op: "cast", Seat: seat, Card: m.ref(pk.Ref), CastMode: mode}), nil
+		}
+		k := pk.Ability
+		return append(taps, oraclegen.Step{Op: "activate", Seat: seat, Card: m.ref(pk.Ref), AbilityIndex: &k}), nil
+	case "activate":
+		// "Activate <card> for mana": the entry's own mana record is the
+		// ability, which the runner finds by its index.
+		if len(en.Mana) != 1 || en.Mana[0].Obj != pk.Obj {
+			return nil, unsupported("activate")
+		}
+		taps, why := manaTaps(reg, m, en.Mana)
+		if why != nil {
+			return nil, why
+		}
+		return taps, nil
+	}
+	return nil, unsupported(pk.Kind)
+}
+
+// manaTaps is one activate step per mana ability the entry fired, in order. A
+// source whose ability asks which colour it makes (Produced$ Any or Combo) gets
+// the colour the live game made as a "choose" answer, which the runner's mana
+// stage reads instead of taking the first colour.
+func manaTaps(reg *cards.Registry, m seatMap, mana []game.ManaRec) ([]oraclegen.Step, *truncation) {
+	var out []oraclegen.Step
+	for _, mr := range mana {
+		if mr.Ref == "" {
+			return nil, &truncation{ReasonUnbindableRef}
+		}
+		if mr.Ability < 0 {
+			return nil, unsupported("mana_ability")
+		}
+		k := mr.Ability
+		st := oraclegen.Step{Op: "activate", Seat: m.seat(mr.Player), Card: m.ref(mr.Ref), AbilityIndex: &k}
+		if picks := colourPicks(reg, mr); picks != nil {
+			st.Answers = []oraclegen.Answer{{Kind: "choose", Pick: picks}}
+		}
+		out = append(out, st)
+	}
+	return out, nil
+}
+
+// colourPicks is the colours to answer a mana ability's colour ask with, nil
+// when the ability asks none (a fixed colour) or the live activation's
+// colours are unknown. "Any" is one pick; a "Combo" ask takes one per unit.
+func colourPicks(reg *cards.Registry, mr game.ManaRec) []string {
+	c, ok := reg.Lookup(mr.Name)
+	if !ok {
+		return nil
+	}
+	var sa *cards.SA
+	for _, f := range c.Faces {
+		if f.Name == mr.Name && mr.Ability < len(f.Abilities) {
+			sa = f.Abilities[mr.Ability]
+			break
+		}
+	}
+	if sa == nil || mr.Produced == "" {
+		return nil
+	}
+	produced := effects.ManaOf(sa).Produced
+	if _, combo := effects.ComboColours(produced); combo {
+		var out []string
+		for _, r := range mr.Produced {
+			out = append(out, string(r))
+		}
+		return out
+	}
+	if strings.EqualFold(produced, "Any") {
+		return []string{mr.Produced[:1]}
+	}
+	return nil
+}
+
+func lowerAttack(m seatMap, en game.Entry) ([]oraclegen.Step, *truncation) {
+	def := -1
+	st := oraclegen.Step{Op: "attack", Seat: m.stepSeat(en), Attackers: []string{}}
+	for _, p := range en.Picks {
+		if p.Battle != 0 {
+			return nil, &truncation{ReasonAttackNonPlayer}
+		}
+		if def >= 0 && p.Player != def {
+			return nil, &truncation{ReasonAttackSplit}
+		}
+		def = p.Player
+		if p.Ref == "" {
+			return nil, &truncation{ReasonUnbindableRef}
+		}
+		st.Attackers = append(st.Attackers, m.ref(p.Ref))
+	}
+	if def < 0 {
+		def = 1 - en.Seat // no attackers: the declaration still names the opponent
+	}
+	st.Defender = m.player(def)
+	return []oraclegen.Step{st}, nil
+}
+
+func lowerBlock(m seatMap, en game.Entry) ([]oraclegen.Step, *truncation) {
+	st := oraclegen.Step{Op: "block", Seat: m.stepSeat(en), Blocks: [][2]string{}}
+	for _, p := range en.Picks {
+		if p.Ref == "" || p.AttackerRef == "" {
+			return nil, &truncation{ReasonUnbindableRef}
+		}
+		st.Blocks = append(st.Blocks, [2]string{m.ref(p.Ref), m.ref(p.AttackerRef)})
+	}
+	return []oraclegen.Step{st}, nil
+}

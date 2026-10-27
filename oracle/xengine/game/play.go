@@ -9,6 +9,8 @@ import (
 	"github.com/adams-shaun/gorge/bots/heuristic"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/decision"
+	"github.com/adams-shaun/gorge/engine/effects"
+	"github.com/adams-shaun/gorge/engine/events"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/engine/seat"
 	"github.com/adams-shaun/gorge/engine/state"
@@ -115,8 +117,13 @@ func firstLine(s string) string {
 type recorder struct {
 	t         *Tape
 	mana      []ManaRec // fired since the last flush
-	lastDraws uint64    // e.RNGDraws() at the last flush
-	sent      [][]byte  // the intent each entry recorded, for markReanswered
+	flips     []Flip    // coin flips since the last flush
+	flipScan  int       // how far of e.L.Events the flips were read
+	manaScan  int       // how far of e.L.Events the open mana record's Produced was read
+	refs      *refBinder
+	started   bool     // Starter is set
+	lastDraws uint64   // e.RNGDraws() at the last flush
+	sent      [][]byte // the intent each entry recorded, for markReanswered
 }
 
 func (r *recorder) setup(e *rules.Engine) {
@@ -131,22 +138,51 @@ func (r *recorder) setup(e *rules.Engine) {
 				}
 			}
 		}
+		rec.Ref = r.refs.refOf(e, source)
+		r.closeMana(e)
 		r.mana = append(r.mana, rec)
+		r.manaScan = len(e.L.Events)
 	}
+}
+
+// closeMana reads what the latest mana record's activation added to its
+// player's pool: the ManaAdd events logged since the hook fired.
+func (r *recorder) closeMana(e *rules.Engine) {
+	if len(r.mana) == 0 {
+		return
+	}
+	rec := &r.mana[len(r.mana)-1]
+	for _, ev := range e.L.Events[r.manaScan:] {
+		if ev.Kind == events.ManaAdd && ev.Amount > 0 && int(ev.Player) == rec.Player {
+			// Counter is the colour letter, behind a spend-restriction prefix
+			// ("ArtifactG") when the mana carries one.
+			if n := len(ev.Counter); n > 0 && strings.ContainsRune("WUBRGC", rune(ev.Counter[n-1])) {
+				rec.Produced += strings.Repeat(ev.Counter[n-1:], int(ev.Amount))
+			}
+		}
+	}
+	r.manaScan = len(e.L.Events)
 }
 
 // flush hands the mana and draws since the last flush to the latest entry, or
 // to the header before the first.
 func (r *recorder) flush(e *rules.Engine) {
+	r.closeMana(e)
 	draws := e.RNGDraws() - r.lastDraws
 	r.lastDraws = e.RNGDraws()
+	evs := e.L.Events
+	for ; r.flipScan < len(evs); r.flipScan++ {
+		if flipper, win, ok := effects.FlipNoteResult(evs[r.flipScan]); ok {
+			r.flips = append(r.flips, Flip{Seat: int(flipper), Win: win})
+		}
+	}
 	if n := len(r.t.Entries); n > 0 {
 		last := &r.t.Entries[n-1]
-		last.Mana, last.RNG = r.mana, draws
+		last.Mana, last.RNG, last.Flips = r.mana, draws, r.flips
 	} else {
 		r.t.GenesisMana, r.t.GenesisRNG = r.mana, draws
 	}
-	r.mana = nil
+	r.mana, r.flips = nil, nil
 }
 
 func zoneNames(e *rules.Engine, z state.Zone, p state.PlayerID) []string {
@@ -166,54 +202,66 @@ func zoneNames(e *rules.Engine, z state.Zone, p state.PlayerID) []string {
 func (r *recorder) submit(e *rules.Engine, seatIdx int, d *decision.Decision, in decision.Intent) (bool, error) {
 	r.flush(e) // what the previous entry's commit did
 	if len(r.t.Entries) == 0 {
-		r.t.Starter = int(e.G.Active)
+		r.refs = newRefBinder(e)
 		for i := range r.t.Open {
 			p := state.PlayerID(i)
 			r.t.Open[i] = Opening{Hand: zoneNames(e, state.ZHand, p), Library: zoneNames(e, state.ZLibrary, p)}
 		}
 	}
+	if !r.started && e.G.Turn >= 1 {
+		// The starting player is turn 1's active player; a pre-game ask
+		// (turn 0) comes first when a card in an opening hand asks.
+		r.started = true
+		r.t.Starter = int(e.G.Active)
+	}
 	en := Entry{
 		Seq: d.Seq, Seat: seatIdx, Kind: string(d.Kind), Turn: e.G.Turn, Step: e.G.Step.String(),
 		Choices: append([]int{}, in.Choices...), Rest: append([]int(nil), in.Rest...),
+		Max:    d.Max,
 		Digest: DigestOfGame(e),
+	}
+	if n := len(e.G.Stack); n > 0 {
+		en.StackTop = e.G.Stack[n-1]
 	}
 	for _, c := range in.Choices {
 		if c >= 0 && c < len(d.Options) {
-			en.Picks = append(en.Picks, pickOf(d.Options[c]))
+			en.Picks = append(en.Picks, r.pickOf(e, d.Options[c]))
 		}
 	}
 	switch {
 	case in.Payment != nil:
 		en.Payment = in.Payment.ActionID
-		en.Picks = append(en.Picks, actionPick(d, in.Payment.ActionID))
+		en.Picks = append(en.Picks, r.actionPick(e, d, in.Payment.ActionID))
 	case in.Announce != nil:
 		en.Announce = in.Announce.ActionID
-		en.Picks = append(en.Picks, actionPick(d, in.Announce.ActionID))
+		en.Picks = append(en.Picks, r.actionPick(e, d, in.Announce.ActionID))
 	}
 	r.sent = append(r.sent, canonIntent(in))
 	r.t.Entries = append(r.t.Entries, en)
 	return false, nil
 }
 
-func pickOf(o decision.Option) Pick {
+func (r *recorder) pickOf(e *rules.Engine, o decision.Option) Pick {
 	return Pick{
 		Index: o.Index, Kind: o.Kind, Obj: o.Obj, Ability: o.Ability, Mode: o.Mode,
 		AltCost: o.AltCostIndex, Attacker: o.Attacker, Player: int(o.Player), Battle: o.Battle,
-		Label: o.Label,
+		Label: o.Label, Ref: r.refs.refOf(e, o.Obj), AttackerRef: r.refs.refOf(e, o.Attacker),
+		BattleRef: r.refs.refOf(e, o.Battle),
 	}
 }
 
 // actionPick is the cast a payment action names: its base priority option
 // when it has one, else the action itself (a floating-mana plan has none).
-func actionPick(d *decision.Decision, id string) Pick {
+func (r *recorder) actionPick(e *rules.Engine, d *decision.Decision, id string) Pick {
 	for _, a := range d.PaymentActions {
 		if a.ID != id {
 			continue
 		}
 		if a.BaseOptionIndex != nil && *a.BaseOptionIndex >= 0 && *a.BaseOptionIndex < len(d.Options) {
-			return pickOf(d.Options[*a.BaseOptionIndex])
+			return r.pickOf(e, d.Options[*a.BaseOptionIndex])
 		}
-		return Pick{Index: -1, Kind: "cast", Obj: a.Cast.Object, Mode: a.Cast.CastMode(), Player: int(d.Player), Label: a.Label}
+		return Pick{Index: -1, Kind: "cast", Obj: a.Cast.Object, Mode: a.Cast.CastMode(), Player: int(d.Player), Label: a.Label,
+			Ref: r.refs.refOf(e, a.Cast.Object)}
 	}
 	return Pick{Index: -1, Kind: "payment", Player: int(d.Player)}
 }
