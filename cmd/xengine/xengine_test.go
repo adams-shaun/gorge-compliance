@@ -29,7 +29,7 @@ func playTwo(t *testing.T) (*cards.Registry, string) {
 		t.Fatal(err)
 	}
 	dir := t.TempDir()
-	if err := play(reg, cands, cov.New(), "FDN", 0, 2, 1, dir, false); err != nil {
+	if err := play(reg, cands, cov.New(), "FDN", 0, 2, 1, dir, false, nil); err != nil {
 		t.Fatal(err)
 	}
 	return reg, dir
