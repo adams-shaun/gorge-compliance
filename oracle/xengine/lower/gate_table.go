@@ -1,0 +1,323 @@
+package lower
+
+// The expressibility table. Every exported field of state.Game, state.Player
+// and state.Object at the pinned gorge commit is classified here; the gate
+// (gate.go) walks the live engine against it and TestGateTableCoversEveryField
+// fails when a field is added or removed without being classified.
+//
+// A window is a NEW scenario: setup builds the state at the cut from a fresh
+// turn 1, so what the scenario starts from is what setup places, and a fact
+// about the past that setup cannot restate simply never happened in the
+// window. The classes say what that costs:
+//
+//	placed   setup expresses the field (zones, tapped, counters, life, ...).
+//	derived  recomputed from placed state (layers, priority, per-step counters).
+//	ignored  bookkeeping with no effect on the window's future: identity,
+//	         clocks, generation counters, cast-time records already consumed,
+//	         and game-long history flags a few filter words read.
+//	refuse   state setup cannot place and the future depends on; the window is
+//	         refused with reason field:<Type>.<Name> when the field is not at its
+//	         zero value (or, for the entries in gate.go's liveOverride, when its
+//	         special rule says it is live).
+
+type class uint8
+
+const (
+	placed class = iota + 1
+	derived
+	ignored
+	refuse
+)
+
+func (c class) String() string {
+	return [...]string{"", "placed", "derived", "ignored", "refuse"}[c]
+}
+
+type entry struct {
+	Class class
+	Why   string // required for ignored and refuse
+}
+
+func isPlaced(why string) entry  { return entry{placed, why} }
+func isDerived(why string) entry { return entry{derived, why} }
+func isIgnored(why string) entry { return entry{ignored, why} }
+func isRefused(why string) entry { return entry{refuse, why} }
+
+// gameTable is state.Game.
+var gameTable = map[string]entry{
+	"DepSeq":              isIgnored("battlefield-departure ordinal; only a melded or mutated pile compares stamps against it"),
+	"Players":             isPlaced("each seat is walked against playerTable"),
+	"Objs":                isPlaced("each non-ceased object is walked against objectTable"),
+	"ExcessDamageVictims": isRefused("excess-damage history of this turn; setup cannot place it"),
+	"Stack":               isRefused("the runner stops at the first priority with an empty stack"),
+	"Turn":                isPlaced("rebased: the cut is turn 1"),
+	"Active":              isPlaced("relabelled: the active seat is p0"),
+	"Priority":            isDerived("the active player holds priority at the cut"),
+	"StartingPlayer":      isIgnored("read only by the opening-hand effects, which ran before the cut"),
+	"HasStartingPlayer":   isIgnored("presence bit of StartingPlayer"),
+	"Step":                isPlaced("main1"),
+	"Passes":              isDerived("recounted by the priority round"),
+	"Over":                isRefused("a finished game has no window"),
+	"Winner":              isIgnored("meaningful only when Over, which is refused"),
+	"Draw":                isRefused("a finished game has no window"),
+	"ExtraTurns":          isRefused("pending extra turns are not placeable"),
+	"SkipTurns":           isRefused("pending skipped turns are not placeable"),
+	"ExtraTurnQueue":      isRefused("pending extra turns are not placeable"),
+	"ExtraPhases":         isRefused("pending extra phases are not placeable"),
+	"CombatsThisTurn":     isDerived("zero until combat begins; recounted"),
+	"EndStepsThisTurn":    isDerived("zero until the end step begins; recounted"),
+	"ResolvedThisTurn":    isRefused("per-ability resolution tally of this turn (Count$ResolvedThisTurn); setup cannot restate it"),
+	"Monarch":             isIgnored("meaningful only when HasMonarch, which is refused"),
+	"HasMonarch":          isRefused("monarch is not placeable"),
+	"TurnStartMonarch":    isIgnored("meaningful only when HasTurnStartMonarch, which is refused"),
+	"HasTurnStartMonarch": isRefused("monarch is not placeable"),
+	"Initiative":          isIgnored("meaningful only when HasInitiative, which is refused"),
+	"HasInitiative":       isRefused("the initiative is not placeable"),
+	"ControlledBy":        isRefused("a controlled player (CR 720) is not placeable"),
+	"ControlArmedTurn":    isRefused("a controlled player (CR 720) is not placeable"),
+	"NextID":              isIgnored("object id allocator"),
+	"Clock":               isIgnored("timestamp allocator; setup restamps in battlefield-entry order"),
+	"Tokens":              isIgnored("immutable token definitions shared from the corpus"),
+	"NameUniverse":        isIgnored("immutable card-name universe shared from the corpus"),
+	"NamedCorpus":         isIgnored("immutable corpus shared from the corpus"),
+	"NameUniverseNames":   isIgnored("immutable name snapshot shared from the corpus"),
+	"HypotheticalCards":   isIgnored("search-world card table; nil in a real match"),
+	"Delayed":             isRefused("delayed triggers (CR 603.7) are not placeable"),
+	"DelayedNext":         isIgnored("delayed-trigger id allocator"),
+	"Entered":             isRefused("zone entries of this turn (ThisTurnEntered*); only the draw step's library->hand entries are exempt"),
+}
+
+// playerTable is state.Player.
+var playerTable = map[string]entry{
+	"ID":                            isIgnored("seat index, relabelled with the seat"),
+	"Name":                          isIgnored("label"),
+	"PlayerName":                    isIgnored("label"),
+	"Life":                          isPlaced("setup life"),
+	"Lost":                          isRefused("a player who lost is gone"),
+	"LandsPlayed":                   isRefused("land drops of this turn, live for the active player only (the engine resets it at that player's own turn); setup cannot place them"),
+	"DrewFromEmpty":                 isRefused("a pending library-draw loss"),
+	"CoinFlipsThisTurn":             isRefused("this-turn tally setup cannot restate"),
+	"SpellsCastThisTurn":            isRefused("this-turn tally setup cannot restate (storm, magecraft)"),
+	"LifeGainedThisTurn":            isRefused("this-turn tally setup cannot restate"),
+	"LifeLostThisTurn":              isRefused("this-turn tally setup cannot restate"),
+	"TokensCreatedThisTurn":         isRefused("this-turn tally setup cannot restate"),
+	"AttackedPlayersThisTurn":       isRefused("this-turn attack record setup cannot restate"),
+	"AttackedPlaneswalkersThisTurn": isRefused("this-turn attack record setup cannot restate"),
+	"Pool":                          isRefused("a non-empty mana pool; setup can only seed one after the cut"),
+	"RestrictedMana":                isRefused("restricted mana in the pool"),
+	"Counters":                      isRefused("player counters (poison, energy, experience) are not placeable"),
+	"LastUpkeepTurn":                isIgnored("stamp read by the once-per-upkeep guards at the upkeep step, which is over"),
+	"Snow":                          isRefused("mana-pool bookkeeping"),
+	"TypedMana":                     isRefused("mana-pool bookkeeping"),
+	"ArtifactTyped":                 isRefused("mana-pool bookkeeping"),
+	"PersistentMana":                isRefused("mana that persists across steps is not placeable"),
+	"CombatMana":                    isRefused("mana that persists through combat is not placeable"),
+	"Commanders":                    isRefused("commanders are not placed by the window setup"),
+	"CmdCasts":                      isRefused("commander tax is not placeable"),
+	"CmdDamage":                     isRefused("commander damage is not placeable"),
+	"DamageTakenByGame":             isIgnored("game-long history read only by wasDealtDamageThisGameBy-style filter words"),
+	"DungeonObj":                    isRefused("a dungeon in progress is not placeable"),
+	"DungeonRoom":                   isRefused("a dungeon in progress is not placeable"),
+	"DungeonCompleted":              isRefused("dungeon history is not placeable"),
+	"CompletedDungeons":             isRefused("dungeon history is not placeable"),
+	"Speed":                         isPlaced("setup speed"),
+	"RingTempted":                   isRefused("the Ring is not placeable"),
+	"RingBearer":                    isRefused("the Ring is not placeable"),
+	"Blessing":                      isRefused("the city's blessing is not placeable"),
+	"EnduringStory":                 isRefused("not placeable"),
+	"Notes":                         isRefused("free-form player notes carry rules state"),
+}
+
+// objectTable is state.Object.
+var objectTable = map[string]entry{
+	"ID":                           isIgnored("object identity; setup deals fresh ids"),
+	"Card":                         isPlaced("the card name"),
+	"CopyFace":                     isRefused("a copy effect is not placeable"),
+	"FaceIdx":                      isPlaced("back_face places face 1 on the battlefield"),
+	"Owner":                        isPlaced("the seat whose list the card is in"),
+	"Controller":                   isPlaced("must equal Owner: setup lists a battlefield card under its owner"),
+	"Zone":                         isPlaced("the zone list the card is in"),
+	"Tapped":                       isPlaced("setup tapped (by name)"),
+	"SummonSick":                   isDerived("setup settles every placed permanent; an object that entered this turn is refused"),
+	"FaceDown":                     isRefused("a face-down permanent is not placeable"),
+	"PhasedOut":                    isRefused("a phased-out permanent is not placeable"),
+	"Damage":                       isRefused("marked damage is not placeable"),
+	"IsToken":                      isRefused("the runner's setup places cards, not tokens"),
+	"IsCopy":                       isRefused("a copy is not placeable"),
+	"Counters":                     isPlaced("setup counters, less the counters the card enters with"),
+	"ClassLevelValue":              isRefused("a Class level is not placeable"),
+	"AtEOTTrigBody":                isRefused("an end-of-turn trigger body is not placeable"),
+	"MergedCards":                  isRefused("a merged permanent is not placeable"),
+	"EnteredThisTurn":              isRefused("an object that entered this turn; only the drawn card (library->hand) is exempt"),
+	"EnteredFrom":                  isIgnored("provenance of EnteredThisTurn, which is refused when set"),
+	"WasDealtDamageThisTurn":       isRefused("this-turn damage record"),
+	"WasDealtExcessDamageThisTurn": isRefused("this-turn damage record"),
+	"DamageReceivedThisTurn":       isRefused("this-turn damage record"),
+	"DamageDealtThisTurn":          isRefused("this-turn damage record"),
+	"DamageTakenByGame":            isIgnored("game-long history read only by wasDealtDamageByThisGame filter words"),
+	"DamageTakenThisTurnBy":        isRefused("this-turn damage record"),
+	"DealtDamageToAnyGame":         isIgnored("game-long history read only by the dealtDamagetoAny filter word (effects/filter_word.go)"),
+	"DealtCombatDamageToAnyGame":   isIgnored("game-long history read only by the dealtCombatDamagetoAny filter word (effects/filter_word.go)"),
+	"AcqTurn":                      isRefused("turn stamp: live only when it names the cut's turn (came under control this turn)"),
+	"AcqStep":                      isIgnored("step half of AcqTurn"),
+	"ActivatedThisTurn":            isRefused("activation count of this turn; only the ActivationLimit gates read it, so live only on a face that has one"),
+	"AttacksThisTurn":              isRefused("attack count of this turn"),
+	"ExertedThisTurn":              isRefused("exert of this turn"),
+	"ExertSkipUntap":               isRefused("exert state that skips an untap"),
+	"CantUntapNextStep":            isRefused("a pending untap skip"),
+	"EnlistedTurn":                 isRefused("turn stamp: live only when it names the cut's turn"),
+	"EnlistedCombat":               isIgnored("combat half of EnlistedTurn"),
+	"AttackedTurn":                 isRefused("turn stamp: live only when it names the cut's turn"),
+	"AttackedCombat":               isIgnored("combat half of AttackedTurn"),
+	"TextChanges":                  isRefused("a text-changing effect is not placeable"),
+	"HadToAttack":                  isRefused("combat requirement record"),
+	"Harnessed":                    isRefused("harnessed state is not placeable"),
+	"CrewedVehicles":               isRefused("crew record"),
+	"CrewedTurn":                   isRefused("turn stamp: live only when it names the cut's turn"),
+	"LatestCastFrom":               isIgnored("cast provenance, read at entry by cast-from ETB conditions"),
+	"LatestCastBy":                 isIgnored("cast provenance, read at entry by cast-from ETB conditions"),
+	"HasLatestCast":                isIgnored("presence bit of the cast provenance"),
+	"PreStackEntryThisTurn":        isIgnored("rollback bookkeeping of a cast in progress"),
+	"PreStackEntryFrom":            isIgnored("rollback bookkeeping of a cast in progress"),
+	"PreStackEnteredLen":           isIgnored("rollback bookkeeping of a cast in progress"),
+	"HasPreStackEntry":             isIgnored("rollback bookkeeping of a cast in progress"),
+	"Incarnation":                  isIgnored("CR 400.7 generation counter; setup is the first incarnation"),
+	"ZoneGen":                      isIgnored("CR 400.7 generation counter"),
+	"PreStackZoneGen":              isIgnored("CR 400.7 generation counter"),
+	"Ability":                      isRefused("an ability object lives only on the stack"),
+	"Source":                       isRefused("an ability object lives only on the stack"),
+	"SourceIncarnation":            isRefused("an ability object lives only on the stack"),
+	"PushSourceStamped":            isRefused("an ability object lives only on the stack"),
+	"PushSourceOnBattlefield":      isRefused("an ability object lives only on the stack"),
+	"PushSourceIncarnation":        isRefused("an ability object lives only on the stack"),
+	"GrantedBy":                    isRefused("a granted ability object"),
+	"StackKind":                    isRefused("stack-object kind"),
+	"StackKindKnown":               isRefused("stack-object kind"),
+	"Targets":                      isRefused("a stack object's targets; on anything else it is a dead cast-time record (an Aura's attachment is placed by the attach prelude)"),
+	"SubTargets":                   isRefused("a stack object's targets; on anything else a dead cast-time record"),
+	"TargetStamps":                 isRefused("a stack object's targets; on anything else a dead cast-time record"),
+	"Division":                     isRefused("a stack object's divided amounts; on anything else a dead cast-time record"),
+	"Remembered":                   isRefused("remembered objects link this permanent to resolved effects"),
+	"RememberedStackBase":          isIgnored("boundary index into Remembered"),
+	"IsAttacking":                  isRefused("combat state"),
+	"Attacking":                    isIgnored("meaningful only with IsAttacking, which is refused"),
+	"AttackingBattle":              isIgnored("meaningful only with IsAttacking, which is refused"),
+	"Band":                         isIgnored("meaningful only with IsAttacking, which is refused"),
+	"BlockedBy":                    isRefused("combat state"),
+	"IsBlocking":                   isRefused("combat state"),
+	"BlockedByThisTurn":            isRefused("combat state"),
+	"BlockedThisTurn":              isRefused("combat state"),
+	"EncoreAttackTurn":             isRefused("turn stamp: live only when it names the cut's turn"),
+	"EncoreAttackDefender":         isIgnored("defender half of EncoreAttackTurn"),
+	"Goads":                        isRefused("goad effects are not placeable"),
+	"Suspected":                    isRefused("suspect is not placeable"),
+	"Prepared":                     isRefused("prepare is not placeable"),
+	"PreparedSource":               isRefused("prepare is not placeable"),
+	"SaddledTurn":                  isRefused("turn stamp: live only when it names the cut's turn"),
+	"Monstrous":                    isRefused("monstrosity is not placeable"),
+	"Solved":                       isRefused("solved case is not placeable"),
+	"Renowned":                     isRefused("renown is not placeable"),
+	"Tributed":                     isRefused("tribute is not placeable"),
+	"WontPhaseInNormal":            isRefused("phasing state"),
+	"SuspendGranted":               isRefused("a suspend grant is not placeable"),
+	"PlottedTurn":                  isRefused("a plotted card is not placeable"),
+	"DrawnTurn":                    isIgnored("read only by the DrawnThisTurn filter word (Captain Eberhart); set on the one card each draw step draws"),
+	"Timestamp":                    isDerived("restamped by placement; the battlefield is placed in Timestamp order"),
+	"LayerStamp":                   isDerived("restamped by placement"),
+	"X":                            isIgnored("cast-time X, read at entry"),
+	"CastFlags":                    isIgnored("cast-time flags (kicked, ...), read at entry"),
+	"ReplicateTimes":               isIgnored("cast-time record, read at entry"),
+	"SquadPaid":                    isIgnored("cast-time record, read at entry"),
+	"OffspringPaid":                isIgnored("cast-time record, read at entry"),
+	"OptionalCostPaid":             isIgnored("cast-time record, read at entry"),
+	"ConvergeColours":              isIgnored("cast-time record, read at entry"),
+	"TimesKicked":                  isIgnored("cast-time record, read at entry"),
+	"Conspired":                    isIgnored("cast-time record, read at entry"),
+	"TeamworkPaid":                 isIgnored("cast-time record, read at entry"),
+	"Convoked":                     isIgnored("cast-time record, read at entry"),
+	"ManaSpentSources":             isIgnored("cast-time record, read at entry"),
+	"ManaSpent":                    isIgnored("cast-time record, read at entry"),
+	"ManaSnowSpent":                isIgnored("cast-time record, read at entry"),
+	"ManaTreasureSpent":            isIgnored("cast-time record, read at entry"),
+	"ManaCaveSpent":                isIgnored("cast-time record, read at entry"),
+	"ManaDesertSpent":              isIgnored("cast-time record, read at entry"),
+	"ManaAddsCounterGrants":        isIgnored("cast-time record, read at entry"),
+	"ManaArtifactSpent":            isIgnored("cast-time record, read at entry"),
+	"ManaColorSpent":               isIgnored("cast-time record, read at entry (Adamant, Sunburst)"),
+	"CompleatedLifePaid":           isIgnored("cast-time record; its loyalty effect is already in Counters"),
+	"NotedNumber":                  isRefused("noted state a later ability reads"),
+	"RuntimeSVars":                 isRefused("runtime SVars carry rules state"),
+	"Notes":                        isRefused("free-form notes carry rules state"),
+	"ChosenName":                   isRefused("a choice made as it entered"),
+	"ChosenType":                   isRefused("a choice made as it entered"),
+	"ChosenNumber":                 isRefused("a choice made as it entered"),
+	"ChosenColor":                  isPlaced("setup_answers: the as-enters colour ask a placed permanent poses"),
+	"RiotChoice":                   isIgnored("entry election; its counter is already in Counters"),
+	"UntapChoice":                  isRefused("an untap election"),
+	"UnleashChoice":                isIgnored("entry election; its counter is already in Counters"),
+	"GiftPromisedTo":               isIgnored("cast-time record, read at entry"),
+	"Protector":                    isIgnored("meaningful only with ProtectorValid, which is refused"),
+	"ProtectorValid":               isRefused("battle protector"),
+	"SneakDefender":                isIgnored("meaningful only with SneakDefenderValid, which is refused"),
+	"SneakDefenderObject":          isIgnored("meaningful only with SneakDefenderValid, which is refused"),
+	"SneakDefenderValid":           isRefused("sneak attack state"),
+	"LastNotedMana":                isIgnored("cast-time record, read at entry"),
+	"IntrinsicKeywords":            isRefused("keywords granted at entry are not placeable"),
+	"Chosen":                       isRefused("choices made as it entered"),
+	"ETBCloneChoice":               isIgnored("meaningful only with ETBCloneChoiceValid, which is refused"),
+	"ETBCloneChoiceValid":          isRefused("a clone choice"),
+	"ChosenModes":                  isIgnored("cast-time mode record of a spell, read while it resolves"),
+	"CastBattlefield":              isIgnored("cast-time battlefield snapshot, read while the spell resolves"),
+	"ModeChoices":                  isIgnored("cast-time mode record of a spell, read while it resolves"),
+	"CurCombatTurn":                isRefused("turn stamp: live only when it names the cut's turn"),
+	"CurCombatCombat":              isIgnored("combat half of CurCombatTurn"),
+	"EncodedCards":                 isRefused("a cipher link"),
+	"Imprinted":                    isRefused("an imprint link"),
+	"ImprintTokens":                isRefused("an imprint link"),
+	"SeekFound":                    isRefused("resolution scratch"),
+	"ExiledCards":                  isRefused("a linked exile"),
+	"ExileReturn":                  isRefused("a pending return from exile"),
+	"TimesMutated":                 isRefused("a mutated permanent is not placeable"),
+	"AttachedTo":                   isPlaced("an attach prelude step per attachment"),
+	"AttachedPlayer":               isIgnored("meaningful only with HasAttachedPlayer, which is refused"),
+	"HasAttachedPlayer":            isRefused("attached to a player is not placeable"),
+	"LastBearer":                   isIgnored("last-known bearer of an unattached equipment, read by leaves-play look-back only"),
+	"UnattachPending":              isRefused("a pending unattach"),
+	"ExiledWith":                   isRefused("a linked exile"),
+	"MayLookPlayer":                isIgnored("meaningful only with HasMayLook, which is refused"),
+	"HasMayLook":                   isRefused("a may-look permission"),
+	"ExiledBy":                     isIgnored("meaningful only with HasExiledBy, which is refused"),
+	"HasExiledBy":                  isRefused("a linked exile"),
+	"Cloaked":                      isRefused("a cloaked permanent is not placeable"),
+	"Manifested":                   isRefused("a manifested permanent is not placeable"),
+	"FaceDownSetType":              isRefused("face-down state"),
+	"FaceDownPower":                isRefused("face-down state"),
+	"FaceDownToughness":            isRefused("face-down state"),
+	"FaceDownHasPT":                isRefused("face-down state"),
+	"Paired":                       isRefused("a soulbond pair is not placeable"),
+	"MeldedWith":                   isRefused("a melded permanent is not placeable"),
+	"SplitFrom":                    isRefused("a melded or mutated permanent is not placeable"),
+	"SplitDep":                     isIgnored("departure stamp of SplitFrom"),
+	"IsMyriad":                     isRefused("myriad token state"),
+	"CopyMayChooseTarget":          isRefused("copy rider"),
+	"CopyNonLegendary":             isRefused("copy rider"),
+	"CopyLoyalty":                  isRefused("copy rider"),
+	"CopyLoyaltySet":               isRefused("copy rider"),
+	"CopyGainThisAbility":          isRefused("copy rider"),
+	"GainedFace":                   isRefused("a has-all-abilities grant"),
+	"GainedFrom":                   isRefused("a has-all-abilities grant"),
+	"Unlocked":                     isRefused("Room door state"),
+	"CastDoor":                     isRefused("Room door state"),
+	"LockedDoors":                  isRefused("Room door state"),
+}
+
+// turnStamps are the refuse fields of objectTable that hold a turn number: they
+// are live only while they name the cut's turn, and dead history before it.
+var turnStamps = map[string]bool{
+	"AcqTurn": true, "EnlistedTurn": true, "AttackedTurn": true, "CrewedTurn": true,
+	"EncoreAttackTurn": true, "SaddledTurn": true, "CurCombatTurn": true,
+}
+
+// stackOnly are the refuse fields of objectTable that only a stack object's
+// value matters for.
+var stackOnly = map[string]bool{"Targets": true, "SubTargets": true, "TargetStamps": true, "Division": true}

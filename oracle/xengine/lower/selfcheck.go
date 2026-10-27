@@ -77,25 +77,40 @@ func SelfCheck(reg *cards.Registry, l Lowered, t *game.Tape) (out Check) {
 		}
 		return d
 	}
-	compare := func(step int, name string, entry int) *Check {
+	// compare holds a checkpoint to the digest of a tape entry, leaving out the
+	// fields skip names.
+	compare := func(step int, name string, entry int, skip func(path string) bool) *Check {
 		snap, ok := byName[name]
 		if !ok {
 			return &Check{Status: StatusGap, Step: step, Field: "checkpoint", Gorge: "missing " + name}
 		}
-		diff := game.DigestOfSnapshot(snap).Diff(tapeDigest(entry))
-		if diff == nil {
-			return nil
+		for _, df := range game.DigestOfSnapshot(snap).Diff(tapeDigest(entry)) {
+			path, rest, _ := strings.Cut(df, ": ")
+			if skip != nil && skip(path) {
+				continue
+			}
+			g, tp, _ := strings.Cut(rest, " != ")
+			return &Check{Status: StatusGap, Step: step, Field: path, Gorge: g, Tape: tp}
 		}
-		path, rest, _ := strings.Cut(diff[0], ": ")
-		g, tp, _ := strings.Cut(rest, " != ")
-		return &Check{Status: StatusGap, Step: step, Field: path, Gorge: g, Tape: tp}
+		return nil
 	}
-
-	found := compare(-1, "setup", l.FirstEntry)
+	// The setup checkpoint is taken before a window's attach prelude.
+	var skipSetup func(string) bool
+	if l.Prelude > 0 {
+		skipSetup = func(path string) bool { return strings.Contains(path, "attached_to") }
+	}
+	found := compare(-1, "setup", l.FirstEntry, skipSetup)
 	lastEntry := -1
 	for i := range l.Item.Steps {
 		if found != nil {
 			break
+		}
+		name := fmt.Sprintf("step %d (%s)", i, l.Item.Steps[i].Op)
+		if i < l.Prelude {
+			if i == l.Prelude-1 {
+				found = compare(i, name, l.FirstEntry, nil)
+			}
+			continue
 		}
 		e := l.StepEntry[i]
 		if e < 0 {
@@ -105,7 +120,11 @@ func SelfCheck(reg *cards.Registry, l Lowered, t *game.Tape) (out Check) {
 		if e+1 >= len(t.Entries) {
 			continue
 		}
-		found = compare(i, fmt.Sprintf("step %d (%s)", i, l.Item.Steps[i].Op), e+1)
+		var skip func(string) bool
+		if l.HasRNG && i >= l.RNGStep {
+			skip = func(path string) bool { return strings.Contains(path, "library_top") }
+		}
+		found = compare(i, name, e+1, skip)
 	}
 	if f := flipGap(sm, res.Flips, t, lastEntry); f != nil && (found == nil || f.Step <= found.Step) {
 		found = f
