@@ -34,18 +34,23 @@ func TestDriverActivateCasePinsXMageAbility(t *testing.T) {
 	}
 	// The file must read the item's xmage_ability, and the activate case
 	// itself must resolve its step's entry and call both API forms, not
-	// merely mention them somewhere in the file.
+	// merely mention them somewhere in the file. Mana abilities go through
+	// the card-scoped activation: TestPlayer's global manaActivate: scan
+	// takes the first producer whose text matches, not the step's card.
 	if !strings.Contains(java, `"xmage_ability"`) {
 		t.Errorf("ScenarioReplay.java does not read the item's xmage_ability")
 	}
 	for _, required := range []string{
 		"xabilityAt(stepIdx)",
 		"activateAbility(turn, phase, p, boundActivationText(p, str(st, \"card\"), text, stepIdx))",
-		"activateManaAbility(turn, phase, p, text)",
+		"activateManaAbilityOnCard(stepIdx, p, str(st, \"card\"), card, text, abilityIndex)",
 	} {
 		if !strings.Contains(body, required) {
 			t.Errorf("the activate case does not %q", required)
 		}
+	}
+	if strings.Contains(java, "activateManaAbility(turn, phase, p, text)") {
+		t.Errorf("the activate case still routes mana abilities through TestPlayer's global scan")
 	}
 }
 
