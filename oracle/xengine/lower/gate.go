@@ -23,6 +23,10 @@ const (
 	reasonZone        = "zone:"                // + the zone name
 	reasonCard        = "card:no_front_face"
 	reasonAura        = "aura_on_battlefield" // an Aura placed unattached never enters
+	// reasonOpeningHand is a hand card that can act before turn 1 (CR 103.6a,
+	// Leyline and the other MayEffectFromOpeningHand cards): the runner's setup
+	// drive answers the opening-hand ask, so the card would leave the hand.
+	reasonOpeningHand = "opening_hand_effect"
 	// reasonSelfExile is a card exiled by its own effect (warp). Its recast
 	// permission from exile is derived from the event log (warpRecastAvailable),
 	// so no gate field shows it and setup's plain exile placement cannot grant it.
@@ -78,6 +82,13 @@ func capture(e *rules.Engine, entry int) *cut {
 		}
 		if o.Zone == state.ZBattlefield && slices.Contains(e.Derived(o.ID).Types, "Aura") {
 			w.why[reasonAura] = true
+		}
+		if o.Zone == state.ZHand {
+			if f := o.Face(); f != nil {
+				if _, ok := f.KeywordParam("MayEffectFromOpeningHand"); ok {
+					w.why[reasonOpeningHand] = true
+				}
+			}
 		}
 	}
 	for _, ce := range e.RegisteredContinuous() {
