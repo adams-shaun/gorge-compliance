@@ -1380,8 +1380,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 });
                 if (!payment.isEmpty()) {
                     TestPlayer payer = seat(st.has("seat") ? st.get("seat").getAsInt() : 0);
-                    runCode("payment end", turn, phase, payer,
-                            (info, pl, g) -> ((ScriptedChoicePlayer) pl).endPayment());
+                    queuePaymentEnd(payer);
                 }
                 queuedA.add(new ArrayList<>(playerA.getActions().subList(beforeA, playerA.getActions().size())));
                 queuedB.add(new ArrayList<>(playerB.getActions().subList(beforeB, playerB.getActions().size())));
@@ -3875,6 +3874,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 ? pays.get(i).getAsString() : "";
     }
 
+    /** The ScriptedChoicePlayer a runCode action was registered on. runCode
+     * dispatches its payload with the player's INNER computer player
+     * (TestPlayer.priority passes computerPlayer), not the TestPlayer wrapper
+     * createPlayer returned, so the payload argument must never be cast here:
+     * manual-payment state lives on the wrapper. Resolve it from the captured
+     * TestPlayer instead. */
+    private static ScriptedChoicePlayer scriptedPlayer(TestPlayer p) {
+        if (!(p instanceof ScriptedChoicePlayer)) {
+            throw new IllegalStateException("payment hook on a non-scripted player: " + p);
+        }
+        return (ScriptedChoicePlayer) p;
+    }
+
     /** Queue the step's manual-pool-payment start before its cast/activate
      * action. The payment is gorge's actual spend, so XMage must not choose a
      * different legal split. The matching endPayment is queued after the
@@ -3883,8 +3895,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if (payment.isEmpty()) {
             return;
         }
+        ScriptedChoicePlayer player = scriptedPlayer(p);
         runCode("payment " + payment, turn, phase, p,
-                (info, pl, g) -> ((ScriptedChoicePlayer) pl).beginPayment(payment));
+                (info, pl, g) -> player.beginPayment(payment));
+    }
+
+    /** Queue the end of the manual-payment window opened by queuePaymentStart. */
+    private void queuePaymentEnd(TestPlayer payer) {
+        ScriptedChoicePlayer player = scriptedPlayer(payer);
+        runCode("payment end", turn, phase, payer,
+                (info, pl, g) -> player.endPayment());
     }
 
     /** The step being replayed's recorded payment ("" when none); set by the

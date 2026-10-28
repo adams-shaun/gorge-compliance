@@ -11,19 +11,24 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.decks.Deck;
 import mage.constants.MultiplayerAttackOption;
+import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.TwoPlayerDuel;
 import mage.game.mulligan.MulliganType;
 import mage.players.ManaPool;
 import mage.players.ManaPoolItem;
+import mage.players.Player;
+import org.mage.test.player.PlayerAction;
 import org.mage.test.player.TestComputerPlayer;
 import org.mage.test.player.TestPlayer;
 
-/** No database or H2: drives ScriptedChoicePlayer.playMana through a real
- * {1}{G} cost payment. The recorded multiset must decide the colour split, and
- * an unusable multiset must fall back to auto-payment rather than fail the
- * harness. Run scripts/xmage-oracle-test-payment.sh. */
+/** Drives ScriptedChoicePlayer.playMana through a real {1}{G} cost payment,
+ * with no game: the recorded multiset must decide the colour split, an
+ * unusable multiset must fall back to auto-payment rather than fail the
+ * harness, and the replay's runCode payment hooks must reach the
+ * ScriptedChoicePlayer even though TestPlayer hands their payloads the inner
+ * computer player. Run scripts/xmage-oracle-test-payment.sh. */
 public final class ScenarioReplayPaymentTest {
     private static final class Source extends MageObjectImpl {
         Source() {
@@ -97,6 +102,17 @@ public final class ScenarioReplayPaymentTest {
         }
     }
 
+    /** Execute a registered runCode action the way TestPlayer.priority does:
+     * its payload is handed the player's INNER computer player
+     * (TestPlayer.java's codePayload.run call), which is exactly the object
+     * the old payment hooks wrongly cast to ScriptedChoicePlayer. */
+    private static void runQueued(TestPlayer p, PlayerAction action, Game game) throws Exception {
+        Field f = TestPlayer.class.getDeclaredField("computerPlayer");
+        f.setAccessible(true);
+        Player inner = (Player) f.get(p);
+        action.getCodePayload().run(action.getActionName(), inner, game);
+    }
+
     @SuppressWarnings("unchecked")
     private static void testRecordedSplit() throws Exception {
         // Pool RGG, gorge's recorded spend GG: both units are green, so the
@@ -126,6 +142,48 @@ public final class ScenarioReplayPaymentTest {
         equal("G", ScenarioReplay.pool(p.getManaPool()));
         sp.end();
         System.out.println("PASS recorded RG pays {1}{G} as gorge did, leaving G");
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void testRunCodeRecordedPayment() throws Exception {
+        // The real replay shape: queuePaymentStart/queuePaymentEnd register
+        // runCode actions on the TestPlayer wrapper, and TestPlayer dispatches
+        // each payload with the wrapper's INNER computer player. The hooks must
+        // therefore reach the ScriptedChoicePlayer through the captured
+        // TestPlayer, not the payload argument. Before that fix this case threw
+        // ClassCastException: TestComputerPlayer cannot be cast to
+        // ScriptedChoicePlayer.
+        Game game = game();
+        ScriptedPayment sp = newPlayer(game);
+        TestPlayer p = sp.player;
+        addMana(p.getManaPool(), 1, 2);
+        ScenarioReplay replay = new ScenarioReplay();
+
+        Method start = ScenarioReplay.class.getDeclaredMethod(
+                "queuePaymentStart", String.class, TestPlayer.class);
+        start.setAccessible(true);
+        int beforeStart = p.getActions().size();
+        start.invoke(replay, "RG", p);
+        equal(beforeStart + 1, p.getActions().size());
+        PlayerAction begin = p.getActions().get(p.getActions().size() - 1);
+        equal("payment RG", begin.getActionName());
+        equal(PhaseStep.PRECOMBAT_MAIN, begin.getStep());
+        runQueued(p, begin, game);
+        equal(false, p.getManaPool().isAutoPayment());
+        equal(true, pay(p, game, "{1}{G}"));
+        equal("G", ScenarioReplay.pool(p.getManaPool()));
+
+        Method end = ScenarioReplay.class.getDeclaredMethod(
+                "queuePaymentEnd", TestPlayer.class);
+        end.setAccessible(true);
+        int beforeEnd = p.getActions().size();
+        end.invoke(replay, p);
+        equal(beforeEnd + 1, p.getActions().size());
+        PlayerAction finish = p.getActions().get(p.getActions().size() - 1);
+        equal("payment end", finish.getActionName());
+        runQueued(p, finish, game);
+        equal(true, p.getManaPool().isAutoPayment());
+        System.out.println("PASS a recorded-payment cast through the runCode hooks follows gorge's split");
     }
 
     private static void testExhaustedMultisetFallsBack() throws Exception {
@@ -169,6 +227,7 @@ public final class ScenarioReplayPaymentTest {
     public static void main(String[] args) throws Exception {
         testRecordedSplit();
         testGorgeSplit();
+        testRunCodeRecordedPayment();
         testExhaustedMultisetFallsBack();
         testUnusableMultisetFallsBack();
     }
