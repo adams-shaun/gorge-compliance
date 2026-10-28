@@ -804,7 +804,19 @@ func addActivationCostAnswers(answers [][]oraclegen.XAnswer, step int, cost, nam
 					}
 					observed = true
 					if i < len(d.Picks) {
-						picks = append(picks, observedSacPick(tok, d, i))
+						pick := observedSacPick(tok, d, i)
+						if strings.HasPrefix(pick, "@") {
+							// The generic XAnswersForScenario path emits a forced
+							// single-object cost pick as a plain-name choice
+							// (gen.go hasCostPick). The exact-ref alias is
+							// authoritative, so supersede that spelling instead
+							// of queueing both: XMage compares a bare name
+							// exactly, and a Room's front name never matches its
+							// "A // B" object, so the plain duplicate is eaten by
+							// the next dialog ("Found wrong choice command").
+							answers[step] = dropPlainNameAnswer(answers[step], 0, d.Picks[i])
+						}
+						picks = append(picks, pick)
 					}
 				}
 			}
@@ -849,6 +861,25 @@ func addActivationCostAnswers(answers [][]oraclegen.XAnswer, step int, cost, nam
 		answers[step] = append(answers[step], oraclegen.XAnswer{Seat: 0, Kind: "choice", Value: "X=" + strconv.Itoa(n)})
 	}
 	addTapXTypeAnswers(answers, step, cost, decisions)
+}
+
+// dropPlainNameAnswer removes the plain-name choice XAnswersForScenario emits
+// for the same forced cost pick (forcedSingleOption -> hasCostPick). The cost
+// path's exact-ref alias is authoritative: XMage compares a bare name exactly,
+// and a Room's plain front name never matches its "A // B" object, so leaving
+// both queues a duplicate the next dialog consumes. An "@" answer is never
+// dropped; that is the alias this removal makes room for.
+func dropPlainNameAnswer(as []oraclegen.XAnswer, seat int, name string) []oraclegen.XAnswer {
+	if name == "" {
+		return as
+	}
+	for i, a := range as {
+		if a.Seat == seat && a.Kind == "choice" &&
+			!strings.HasPrefix(a.Value, "@") && strings.EqualFold(a.Value, name) {
+			return append(as[:i], as[i+1:]...)
+		}
+	}
+	return as
 }
 
 // tapXAnnounced is the X a tapXType<X/...> cost announces (x, the template's

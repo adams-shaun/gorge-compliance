@@ -45,3 +45,24 @@ func TestActivateSacNicknameHasNoFixture(t *testing.T) {
 		t.Fatalf("self-sacrifice unexpectedly has fixture %q", fixture)
 	}
 }
+
+// The generic XAnswersForScenario path now emits a forced single-object cost
+// pick as a plain-name choice (gen.go hasCostPick). For a Sac that names Room
+// the cost path must supersede that plain spelling with the exact-ref alias,
+// not add a second answer: XMage cannot match a Room by its plain front name.
+func TestActivateSacAliasSupersedesPlainName(t *testing.T) {
+	observed := rules.OracleDecision{
+		Step: 0, Seat: 0, Kind: "choose_n", Options: 1, Min: 1, Max: 1,
+		Picks:           []string{"Bottomless Pool"},
+		PickRefs:        []string{"p0:Bottomless Pool"},
+		PickRefsInexact: []bool{false},
+		PickKinds:       []string{"sacrifice"},
+	}
+	answers := make([][]oraclegen.XAnswer, 1)
+	// The generic answer already in the step, as XAnswersForScenario leaves it.
+	answers[0] = []oraclegen.XAnswer{{Seat: 0, Kind: "choice", Value: "Bottomless Pool"}}
+	addActivationCostAnswers(answers, 0, "Sac<1/Room>", "", []rules.OracleDecision{observed})
+	if len(answers[0]) != 1 || answers[0][0].Kind != "choice" || answers[0][0].Value != "@p0:Bottomless Pool" {
+		t.Fatalf("XMage answers = %+v, want exactly the exact-ref alias", answers[0])
+	}
+}
