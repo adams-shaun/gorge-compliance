@@ -63,6 +63,10 @@ type Seat struct {
 	// placements, so a "pN:token:Name#k" ref binds as in the recorded game.
 	// Placement fires no trigger and no CreateToken replacement.
 	Tokens []SetupToken `json:"tokens,omitempty"`
+	// Attached places listed battlefield Auras already attached to a bearer
+	// (the runner's setup "attached", CR 303.4f): the runner places each
+	// last, after every seat's cards and tokens, and fires no trigger for it.
+	Attached []SetupAttach `json:"attached,omitempty"`
 	// Speed is the seat's starting speed, 0..4 (the runner's setup field).
 	Speed int32 `json:"speed,omitempty"`
 	// Life is the seat's starting life total when set (the runner's and the
@@ -70,6 +74,15 @@ type Seat struct {
 	// activation gated on "at least N life" (Ayli's CheckSVar$ X |
 	// SVarCompare$ GEY over Count$YourLifeTotal) rides it.
 	Life *int32 `json:"life,omitempty"`
+}
+
+// SetupAttach is one Aura a seat's setup places attached. Card is a
+// seat-relative battlefield ref (the part of a runner ref after "pN:", as in
+// TappedAfterUntap) and To the bearer's full ref, of either seat or a setup
+// token.
+type SetupAttach struct {
+	Card string `json:"card"`
+	To   string `json:"to"`
 }
 
 // SetupToken is one token a seat's setup places: the Forge token-script stem
