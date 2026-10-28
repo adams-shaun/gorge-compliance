@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"regexp"
+	"slices"
 	"strings"
 
 	"github.com/adams-shaun/gorge/engine/cards"
@@ -210,6 +211,61 @@ func isTriggerOrderText(s string) bool {
 // stack, which the generated walk cannot express.
 func isAbilityClause(s string) bool {
 	return isTriggerOrderText(s) || strings.Contains(s, "{this}")
+}
+
+// aiAnswers are the choices XMage's AI makes in a test that does not state
+// them (no setStrictChooseMode(true)), as <seat>:<pick> in the order the game
+// asks; a "target:" pick answers a target ask. The runner's fallback declines or picks nothing where the AI would
+// say yes and take the land, so the answer is written down here, per
+// Class#method, from reading the test's asserts. They bind like a trailing
+// setChoice: to the last action.
+var aiAnswers = map[string][]string{
+	// Ghost Quarter's destroyed-land controller may search for a basic
+	// land; the test's final permanent count needs the Plains.
+	"FlagstonesOfTrokairTest#testDontTriggerIfIsland": {"0:yes", "0:Plains"},
+	// Wrexial's trigger asks the "may" once (the stated true) and, after the
+	// target, the may-cast of the chosen spell again; XMage folds them.
+	"MayCastTargetThenExileTest#testWrexial": {"0:yes"},
+	// The copies of Lightning Bolt and Shock are cast without targets
+	// stated; XMage's AI aims both at the opponent (assertLife playerB 15).
+	"SpelltwineTest#testCopyCards": {"0:target:p1", "0:target:p1"},
+}
+
+// poolPaidLands are setup lands per Class#method that XMage taps for a
+// spell the scenario pays from the runner's mana pool, so they must not stay
+// untapped for a later optional payment (Mirari's "you may pay {3}" on each
+// cast copy would otherwise find nine Islands, not the three XMage has left).
+var poolPaidLands = map[string]map[string]int{
+	"SpelltwineTest#testCopyCardsMirari": {"Island": 6},
+}
+
+// unposedChoices are stated choices (by 0-based position among the method's
+// setChoice/addTarget calls, in source order) that gorge never asks: the
+// runner's abstract "yes" would instead take the first "Play ..." option of
+// a later ask.
+var unposedChoices = map[string][]int{
+	// Mirari's "change targets?" yes/no: gorge asks for the new targets
+	// directly (choice 3 is the second setChoice(true)).
+	"SpelltwineTest#testCopyCardsMirari": {3},
+}
+
+// addAIAnswers drops the unposed choices and queues the method's aiAnswers
+// after every stated choice.
+func (t *translator) addAIAnswers() {
+	if drop := unposedChoices[t.jc.Name+"#"+t.m.Name]; len(drop) > 0 {
+		var kept []choice
+		for i, ch := range t.choiceList {
+			if !slices.Contains(drop, i) {
+				kept = append(kept, ch)
+			}
+		}
+		t.choiceList = kept
+	}
+	for _, a := range aiAnswers[t.jc.Name+"#"+t.m.Name] {
+		seat, pick, _ := strings.Cut(a, ":")
+		pick, target := strings.CutPrefix(pick, "target:")
+		t.choiceList = append(t.choiceList, choice{seat: int(seat[0] - '0'), src: 1 << 30, x: -1, pick: pick, target: target})
+	}
 }
 
 // assignChoices binds each queued XMage choice to the action that consumes
@@ -450,6 +506,7 @@ func (t *translator) read() *refusal {
 	if t.stop == nil {
 		return refuse("no-stop", "no setStopAt")
 	}
+	t.addAIAnswers()
 	t.assignChoices()
 	if t.orphanMode {
 		return refuse("mode-choice", "setModeChoice with no cast to consume it")

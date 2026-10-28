@@ -2,6 +2,7 @@ package main
 
 import (
 	"reflect"
+	"slices"
 	"testing"
 )
 
@@ -129,7 +130,7 @@ func TestMergePicksFoldsConsecutiveChoices(t *testing.T) {
 	if !mergePicks(g, 2) {
 		t.Fatal("did not merge")
 	}
-	want := []answer{{Kind: "any", Pick: []string{"yes"}}, {Kind: "choose", Pick: []string{"p0:Grizzly Bears", "p0:Elite Vanguard"}}}
+	want := []answer{{Kind: "any", Pick: []string{"yes"}}, {Kind: "any", Pick: []string{"p0:Grizzly Bears", "p0:Elite Vanguard"}}}
 	if !reflect.DeepEqual(g.answers, want) || len(g.kinds) != 2 {
 		t.Fatalf("answers %+v kinds %v", g.answers, g.kinds)
 	}
@@ -162,5 +163,21 @@ func TestAIChoiceFallback(t *testing.T) {
 	}
 	if k := aiChoiceFallback([]string{"  [pass_to fallback] p0 attackers -> []", "  [resolve fallback] p1 target -> [\"a\"]"}); k != "target" {
 		t.Fatalf("got %q, want target", k)
+	}
+}
+
+// A merged multi-pick answer stays a wildcard so the kind retry can hand it
+// to a modes ask (Ancient Excavation's "discard two" is posed as modes).
+func TestMergedPickRetriesKinds(t *testing.T) {
+	g := &group{answers: []answer{
+		{Kind: "any", Pick: []string{"p0:Shock"}},
+		{Kind: "any", Pick: []string{"p0:Healing Salve"}},
+	}, kinds: []int{0, 0}}
+	if !mergePicks(g, 2) {
+		t.Fatal("did not merge")
+	}
+	ks := answerKinds(g.answers[0])
+	if !slices.Contains(ks, "modes") {
+		t.Fatalf("merged answer kinds %v lack modes", ks)
 	}
 }
