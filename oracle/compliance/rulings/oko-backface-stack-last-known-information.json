@@ -1,0 +1,14 @@
+{
+  "id": "oko-backface-stack-last-known-information",
+  "status": "gorge_wrong",
+  "match": {
+    "template": "activate",
+    "op": "activate",
+    "field": "stack",
+    "diff": "gorge=[ability:$CARD@p0] xmage=[ability:Oko, Shadowmoor Scion@p0]"
+  },
+  "ruling": "Oko, Lorwyn Liege's -3/-6 loyalty abilities take the 3-loyalty walker to 0, so the CR 704.5i state-based action moves it to the graveyard before the step-1 checkpoint. A double-faced card outside the battlefield has only its front-face characteristics (CR 712.8a), so gorge's snapshot names the stack source by the front-face setup ref. The ability's source is the back-face permanent that generated it; its name is last known information (CR 113.7a) and the back face's characteristics are what it had when the ability was activated (CR 712.8e). XMage keeps Oko, Shadowmoor Scion; gorge's snapshot loses it. A gorge snapshot defect, not an XMage or harness gap.",
+  "cr": ["113.7a", "704.5i", "712.8a", "712.8e"],
+  "ticket": "gorge: snapshot stack source keeps the last known face name after the source leaves the battlefield (Oko, Lorwyn Liege activate#1.1/#1.2)",
+  "source": "Oko, Lorwyn Liege (activate#1.1, activate#1.2), level-B refresh at pin da724b42a"
+}
