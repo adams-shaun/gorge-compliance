@@ -97,7 +97,7 @@ func wantTokenRef(g *state.Game, o *state.Object) string {
 }
 
 func TestGateTokens(t *testing.T) {
-	reg, pairs := setPairs(t, "DSK", 12)
+	reg, pairs := setPairs(t, "DSK", 40)
 	e, at := tokenCutIn(t, reg, "DSK", pairs)
 	g := e.G
 
@@ -255,11 +255,6 @@ func TestWindowsTokens(t *testing.T) {
 				var any bool
 				for _, s := range l.Item.Setup {
 					any = any || len(s.Tokens) > 0
-				}
-				// A Leyline in hand starts on the battlefield in the runner's turn 1
-				// and not in the recorded cut: a gap of its own.
-				if leylineInHand(l) {
-					continue
 				}
 				c := CheckWindow(reg, l)
 				if !any {
