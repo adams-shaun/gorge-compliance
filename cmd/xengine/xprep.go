@@ -24,6 +24,7 @@ func runXprep(args []string) error {
 	manifests := fs.String("manifests", "oracle/compliance/manifests", "set manifests dir")
 	playDir := fs.String("play", "", "play output dir (required)")
 	out := fs.String("out", "", "XMage items file, outside the repository (required); refusals go to "+xprepRefusalsFile+" beside it")
+	tapes := fs.Bool("tapes", false, "also prepare tape items; XMage is window-only by default (design O4)")
 	fs.Parse(args)
 	if *playDir == "" || *out == "" {
 		return fmt.Errorf("xprep needs -play and -out")
@@ -39,14 +40,16 @@ func runXprep(args []string) error {
 	if err != nil {
 		return err
 	}
-	return xprepPlay(reg, sp, *playDir, *out)
+	return xprepPlay(reg, sp, *playDir, *out, *tapes)
 }
 
 // xprepPlay prepares every item of playDir/items.jsonl for the XMage driver,
 // in file order: the served items go to out (one line each), the refusals to
 // xprepRefusalsFile beside it. The items file the other stages read is left
 // alone; a refused item has no XMage row, which diff reads as a harness miss.
-func xprepPlay(reg *cards.Registry, sp *decks.Spellings, playDir, out string) error {
+// Unless tapes is set, a tape item is refused with xprep.ReasonWindowOnly
+// before Prepare sees it.
+func xprepPlay(reg *cards.Registry, sp *decks.Spellings, playDir, out string, tapes bool) error {
 	gorge := map[string]rules.OracleResult{}
 	if err := readLines(filepath.Join(playDir, "gorge.jsonl"), func(b []byte) error {
 		var r gorgeRow
@@ -82,7 +85,13 @@ func xprepPlay(reg *cards.Registry, sp *decks.Spellings, playDir, out string) er
 		if !ok {
 			return fmt.Errorf("%s: no gorge result in gorge.jsonl", it.ID)
 		}
-		x, ref := xprep.Prepare(reg, sp, lrows[it.ID].lowered(it), g)
+		var x oraclegen.Item
+		var ref *xprep.Refusal
+		if !tapes && xprep.IsTape(it.ID) {
+			ref = &xprep.Refusal{ID: it.ID, Reason: xprep.ReasonWindowOnly, Detail: "tape item; XMage is window-only"}
+		} else {
+			x, ref = xprep.Prepare(reg, sp, lrows[it.ID].lowered(it), g)
+		}
 		var line []byte
 		var err error
 		if ref != nil {

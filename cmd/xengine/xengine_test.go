@@ -350,7 +350,7 @@ func TestXprepPlay(t *testing.T) {
 	}
 	run := func() (served, refused []byte) {
 		out := filepath.Join(t.TempDir(), "xitems.jsonl")
-		if err := xprepPlay(reg, sp, dir, out); err != nil {
+		if err := xprepPlay(reg, sp, dir, out, true); err != nil {
 			t.Fatal(err)
 		}
 		served, err := os.ReadFile(out)

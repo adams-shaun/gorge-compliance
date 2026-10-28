@@ -48,6 +48,9 @@
 #   XENGINE_WINDOWS       1 (default) passes -windows to play
 #   XENGINE_TAPE_TURNS    comma-separated turn counts passed to play as -tape-turns
 #                         (default none): the prefixes `xengine calib` reads
+#   XENGINE_XMAGE_TAPES   1 passes -tapes to xprep, so tape items go to XMage too;
+#                         0 (default) keeps XMage window-only (design O4). The
+#                         calibration re-runs use 1.
 #   XENGINE_JVM_WAIT      max seconds to wait for a JVM slot (default 21600)
 #   XENGINE_JVM_POLL      poll interval in seconds (default 30)
 #   XENGINE_FORGE_WAIT / XENGINE_FORGE_MEM, XENGINE_XMAGE_WAIT / XENGINE_XMAGE_MEM
@@ -172,7 +175,9 @@ follower_rows() { # follower dir -> rows file
 	case "$f" in
 	xmage)
 		runner=${XENGINE_XMAGE_RUNNER:-$repo/scripts/xmage-oracle-run.sh}
-		xe xprep -play "$d" -out "$d/xitems.jsonl" || return 1
+		local xargs=()
+		[ "${XENGINE_XMAGE_TAPES:-0}" != 1 ] || xargs+=(-tapes)
+		xe xprep ${xargs[@]+"${xargs[@]}"} -play "$d" -out "$d/xitems.jsonl" || return 1
 		jvm_slot || return 1
 		run_stage "$repo/scripts/heavy-lock.sh" --wait "${XENGINE_XMAGE_WAIT:-20000}" --mem "${XENGINE_XMAGE_MEM:-12G}" \
 			--name xengine-xmage -- bash -c 'jvm_slot && exec "$@"' _ "$runner" "$d/xitems.jsonl" "$d/xmage.jsonl"
