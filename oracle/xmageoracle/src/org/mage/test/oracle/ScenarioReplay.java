@@ -112,6 +112,78 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // target names of its own: the split answers are the targets.
     private boolean splitScripted;
 
+    /** The setup "tokens" this driver can place, keyed by the Forge token-script
+     * stem gorge's setup names and valued by the XMage token of the same P/T,
+     * colours, types and abilities (checked against the script). A stem outside
+     * the table fails the scenario; the Go side keeps the same set
+     * (xmageSetupTokens, held equal by TestXMageSetupTokenTableMatchesDriver). */
+    static final Map<String, java.util.function.Supplier<mage.game.permanent.token.Token>> SETUP_TOKENS = new TreeMap<>();
+    static {
+        SETUP_TOKENS.put("b_1_1_bat_flying", mage.game.permanent.token.BatToken::new);
+        SETUP_TOKENS.put("b_2_1_skeleton", mage.game.permanent.token.Skeleton21Token::new);
+        SETUP_TOKENS.put("b_2_2_zombie", mage.game.permanent.token.ZombieToken::new);
+        SETUP_TOKENS.put("b_2_2_zombie_druid", mage.game.permanent.token.ZombieDruidToken::new);
+        SETUP_TOKENS.put("c_0_0_a_thopter_flying", mage.game.permanent.token.Thopter00ColorlessToken::new);
+        SETUP_TOKENS.put("c_1_1_a_drone_flying_blockflying", mage.game.permanent.token.DroneFlyingToken::new);
+        SETUP_TOKENS.put("c_1_1_a_servo", mage.game.permanent.token.ServoToken::new);
+        SETUP_TOKENS.put("c_1_1_a_thopter_flying", mage.game.permanent.token.ThopterColorlessToken::new);
+        SETUP_TOKENS.put("c_1_1_pilot_crewbuff", mage.game.permanent.token.PilotCrewToken::new);
+        SETUP_TOKENS.put("c_1_1_pilot_crewsaddlebuff", mage.game.permanent.token.PilotSaddleCrewToken::new);
+        SETUP_TOKENS.put("c_1_1_sliver", mage.game.permanent.token.SliverToken::new);
+        SETUP_TOKENS.put("c_2_2_a_robot", mage.game.permanent.token.RobotToken::new);
+        SETUP_TOKENS.put("c_3_2_a_vehicle_crew_1", mage.game.permanent.token.VehicleToken::new);
+        SETUP_TOKENS.put("c_a_clue_draw", mage.game.permanent.token.ClueArtifactToken::new);
+        SETUP_TOKENS.put("c_a_food_sac", mage.game.permanent.token.FoodToken::new);
+        SETUP_TOKENS.put("c_a_lander_sac_search", mage.game.permanent.token.LanderToken::new);
+        SETUP_TOKENS.put("c_a_treasure_sac", mage.game.permanent.token.TreasureToken::new);
+        SETUP_TOKENS.put("c_e_shard_draw", mage.game.permanent.token.ShardToken::new);
+        SETUP_TOKENS.put("g_1_1_elf_warrior", mage.game.permanent.token.ElfWarriorToken::new);
+        SETUP_TOKENS.put("g_2_2_spider_reach", mage.game.permanent.token.Spider22Token::new);
+        SETUP_TOKENS.put("g_3_3_elephant", mage.game.permanent.token.ElephantToken::new);
+        SETUP_TOKENS.put("r_1_1_goblin", mage.game.permanent.token.GoblinToken::new);
+        SETUP_TOKENS.put("r_1_1_gremlin", mage.game.permanent.token.Gremlin11Token::new);
+        SETUP_TOKENS.put("r_4_4_dinosaur_dragon_flying", mage.game.permanent.token.DinDragonToken::new);
+        SETUP_TOKENS.put("u_1_1_faerie_flying", mage.game.permanent.token.FaerieToken::new);
+        SETUP_TOKENS.put("u_1_1_fish", mage.game.permanent.token.FishNoAbilityToken::new);
+        SETUP_TOKENS.put("u_1_1_merfolk", mage.game.permanent.token.MerfolkToken::new);
+        SETUP_TOKENS.put("ur_1_1_otter_prowess", mage.game.permanent.token.OtterProwessToken::new);
+        SETUP_TOKENS.put("w_0_4_wall_defender", mage.game.permanent.token.WallWhiteToken::new);
+        SETUP_TOKENS.put("w_1_1_bird_flying", mage.game.permanent.token.BirdToken::new);
+        SETUP_TOKENS.put("w_1_1_cat_lifelink", mage.game.permanent.token.Cat11LifelinkToken::new);
+        SETUP_TOKENS.put("w_1_1_dog", mage.game.permanent.token.WhiteDogToken::new);
+        SETUP_TOKENS.put("w_1_1_e_glimmer", mage.game.permanent.token.GlimmerToken::new);
+        SETUP_TOKENS.put("w_1_1_human", mage.game.permanent.token.HumanToken::new);
+        SETUP_TOKENS.put("w_1_1_human_soldier", mage.game.permanent.token.HumanSoldierToken::new);
+        SETUP_TOKENS.put("w_1_1_monk_prowess", mage.game.permanent.token.MonasteryMentorToken::new);
+        SETUP_TOKENS.put("w_1_1_rabbit", mage.game.permanent.token.RabbitToken::new);
+        SETUP_TOKENS.put("w_1_1_soldier", mage.game.permanent.token.SoldierToken::new);
+        SETUP_TOKENS.put("w_2_1_insect_flying", mage.game.permanent.token.InsectWhiteToken::new);
+        SETUP_TOKENS.put("w_2_2_soldier", mage.game.permanent.token.Soldier22Token::new);
+        SETUP_TOKENS.put("w_3_1_spirit_flying", mage.game.permanent.token.Spirit31Token::new);
+        SETUP_TOKENS.put("w_4_4_beast_lonely", mage.game.permanent.token.BeastieToken::new);
+        SETUP_TOKENS.put("wu_2_2_detective", mage.game.permanent.token.DetectiveToken::new);
+    }
+
+    /** A fresh XMage token for a setup stem; an unmapped stem fails the scenario. */
+    static mage.game.permanent.token.Token setupToken(String stem) {
+        java.util.function.Supplier<mage.game.permanent.token.Token> make = SETUP_TOKENS.get(stem);
+        if (make == null) {
+            throw new IllegalArgumentException("setup token " + stem + " has no XMage token");
+        }
+        return make.get();
+    }
+
+    /** One seat's setup "tokens" entries, in creation order. */
+    static List<JsonObject> setupTokenEntries(JsonObject seatSetup) {
+        List<JsonObject> out = new ArrayList<>();
+        if (seatSetup.has("tokens")) {
+            for (JsonElement e : seatSetup.getAsJsonArray("tokens")) {
+                out.add(e.getAsJsonObject());
+            }
+        }
+        return out;
+    }
+
     // Override the factory the base class calls BEFORE it adds the player to
     // the game. Wrapping createPlayer(Game, ...)'s result instead copies a
     // player the game already holds, so scripted actions go to a player the
@@ -129,10 +201,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // A previous three-seat scenario left playerC set; the base
             // class's per-player helpers treat a non-null playerC as seated.
             playerC = null;
-            return super.createNewGameAndPlayers();
+            // The base class's TwoPlayerDuel, with the pre-start hook.
+            Game duel = new mage.game.TwoPlayerDuel(mage.constants.MultiplayerAttackOption.LEFT,
+                    mage.constants.RangeOfInfluence.ONE, mage.game.mulligan.MulliganType.GAME_DEFAULT.getMulligan(0),
+                    60, 20, 7) {
+                @Override
+                public void start(UUID choosingPlayerId) {
+                    placeSetupTokens(this);
+                    super.start(choosingPlayerId);
+                }
+            };
+            playerA = createPlayer(duel, "PlayerA", deckNameA);
+            playerB = createPlayer(duel, "PlayerB", deckNameB);
+            return duel;
         }
         Game game = new FreeForAll(mage.constants.MultiplayerAttackOption.LEFT, mage.constants.RangeOfInfluence.ALL,
-                mage.game.mulligan.MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
+                mage.game.mulligan.MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7) {
+            @Override
+            public void start(UUID choosingPlayerId) {
+                placeSetupTokens(this);
+                super.start(choosingPlayerId);
+            }
+        };
         playerA = createPlayer(game, "PlayerA", deckNameA);
         playerC = createPlayer(game, "PlayerC", deckNameA);
         playerB = createPlayer(game, "PlayerB", deckNameB);
@@ -1481,6 +1571,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         buildCounts.clear();
         frontCounts.clear();
         setupBattlefield.clear();
+        setupTokensPlaced = false;
         setupNames.clear();
         placedNames.clear();
         abilityAliasSeq = 0;
@@ -1502,6 +1593,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
             named += add(s, "graveyard", Zone.GRAVEYARD, p);
             named += add(s, "exile", Zone.EXILED, p);
             named += add(s, "library", Zone.LIBRARY, p);
+            // Setup tokens are placed by the game's pre-start hook; fail an
+            // unmapped stem now and record them so clearSetupEntryHistory ages
+            // them with the seeded cards (it copies setupBattlefield below).
+            for (JsonObject t : setupTokenEntries(s)) {
+                setupBattlefield.merge(p.getId() + "|" + setupToken(t.get("script").getAsString()).getName(),
+                        1, Integer::sum);
+            }
             if (s.has("command")) {
                 throw new IllegalArgumentException("command zone setup unsupported");
             }
@@ -1601,6 +1699,78 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // in place, exactly as the game loop does at the start of a step.
             g.applyEffects();
         }
+    }
+
+    /** The pre-start hook: places every seat's setup "tokens" (gorge's runner mints
+     * them after the seat's card placements, in list order) once, after
+     * CardTestPlayerAPIImpl.execute's cheat() loop has put the cards on the
+     * battlefield and before start() runs init and the first state-based-action
+     * check. */
+    private void placeSetupTokens(Game game) {
+        if (setupTokensPlaced) {
+            return;
+        }
+        setupTokensPlaced = true;
+        JsonObject setup = sc0.has("setup") ? sc0.getAsJsonObject("setup") : new JsonObject();
+        boolean placed = false;
+        for (int i = 0; i < seats; i++) {
+            if (!setup.has("p" + i)) {
+                continue;
+            }
+            for (JsonObject t : setupTokenEntries(setup.getAsJsonObject("p" + i))) {
+                placeSetupToken(game, seat(i), setupToken(t.get("script").getAsString()),
+                        t.has("counters") ? t.getAsJsonObject("counters") : null);
+                placed = true;
+            }
+        }
+        if (placed) {
+            game.applyEffects();
+        }
+    }
+
+    /** Puts one token onto the battlefield silently, as gorge's setup does: the
+     * cheat() placement of a card (CardUtil.putCardOntoBattlefieldWithEffects:
+     * entersBattlefield and addPermanent, no ZONE_CHANGE event) with the token
+     * registration of TokenImpl.putOntoBattlefieldHelper minus its events (no
+     * CREATE_TOKEN, CREATED_TOKEN or ZONE_CHANGE, so Doubling Season and "whenever
+     * you create a token" never see it). counters is the token's complete counter
+     * set, put on directly: no ADD_COUNTERS replacement (Hardened Scales) and no
+     * COUNTER_ADDED trigger, as gorge's setup drops every trigger it queues. */
+    static Permanent placeSetupToken(Game game, Player controller, mage.game.permanent.token.Token token,
+            JsonObject counters) {
+        Ability source = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("fake ability"));
+        source.setControllerId(controller.getId());
+        mage.game.permanent.PermanentToken permanent =
+                new mage.game.permanent.PermanentToken(token, controller.getId(), game);
+        source.setSourceId(permanent.getId());
+        game.getState().addCard(permanent);
+        game.getPermanentsEntering().put(permanent.getId(), permanent);
+        permanent.updateZoneChangeCounter(game, new mage.game.events.ZoneChangeEvent(permanent, source,
+                controller.getId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
+        if (counters != null) {
+            for (Map.Entry<String, JsonElement> byKind : counters.entrySet()) {
+                permanent.getCounters(game).addCounter(
+                        xmageCounter(byKind.getKey()).createInstance(byKind.getValue().getAsInt()));
+            }
+        }
+        // fireEvent=false: no ENTERS_THE_BATTLEFIELD event is queued (the return
+        // value is false on that path whether or not a replacement applied, as
+        // for the card placement, which ignores it).
+        permanent.entersBattlefield(source, game, Zone.OUTSIDE, false);
+        game.addPermanent(permanent, game.getState().getNextPermanentOrderNumber());
+        permanent.setZone(Zone.BATTLEFIELD, game);
+        game.getPermanentsEntering().remove(permanent.getId());
+        permanent.removeSummoningSickness();
+        // Init the continuous effects of the token's static abilities, as the card
+        // placement does (the game state holds copies).
+        for (mage.abilities.effects.ContinuousEffect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
+            java.util.Optional<Ability> ability = game.getState().getContinuousEffects()
+                    .getLayeredEffectAbilities(effect).stream().findFirst();
+            if (ability.isPresent() && permanent.getId().equals(ability.get().getSourceId())) {
+                effect.init(ability.get(), game, controller.getId());
+            }
+        }
+        return permanent;
     }
 
     private int add(JsonObject s, String key, Zone zone, TestPlayer p) {
@@ -2239,6 +2409,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if (hash >= 0 && ref.substring(hash + 1).matches("[0-9]+")) {
             wanted = Integer.parseInt(ref.substring(hash + 1));
         }
+        if (ref.contains(":token:")) {
+            Permanent token = tokenChoice(ref, seat(seatIndex).getId(), g.getBattlefield().getAllPermanents());
+            if (token == null) {
+                throw new IllegalArgumentException("permanent ref " + ref + " is not on the battlefield");
+            }
+            return token;
+        }
         int seen = 0;
         for (Permanent perm : g.getBattlefield().getAllPermanents()) {
             if (perm.getControllerId().equals(seat(seatIndex).getId())
@@ -2289,6 +2466,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
     private final java.util.Map<String, Integer> frontCounts = new java.util.HashMap<>();
     // Seeded setup permanents keyed "controllerId|xmageName" -> count (build()).
     private final java.util.Map<String, Integer> setupBattlefield = new java.util.HashMap<>();
+    /** True once placeSetupTokens ran for this scenario's game (start() runs once;
+     * build() resets it). */
+    private boolean setupTokensPlaced;
     private final Map<UUID, String> setupNames = new HashMap<>();
     // The name each setup battlefield placement was dealt under, by the id its
     // permanent will carry. Read only when XMage's live name is empty (see

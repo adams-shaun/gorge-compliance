@@ -94,12 +94,14 @@ func SelfCheck(reg *cards.Registry, l Lowered, t *game.Tape) (out Check) {
 		}
 		return nil
 	}
-	// The setup checkpoint is taken before a window's attach prelude.
-	var skipSetup func(string) bool
-	if l.Prelude > 0 {
-		skipSetup = func(path string) bool { return strings.Contains(path, "attached_to") }
+	// The setup checkpoint is taken before a window's attach prelude, and an
+	// attachment changes more than attached_to (an Equipment's +1/+1 and
+	// keywords, an Aura's). A window with a prelude is therefore held to the
+	// cut once, after its last attach step (below), which compares every field.
+	var found *Check
+	if l.Prelude == 0 {
+		found = compare(-1, "setup", l.FirstEntry, nil)
 	}
-	found := compare(-1, "setup", l.FirstEntry, skipSetup)
 	lastEntry := -1
 	for i := range l.Item.Steps {
 		if found != nil {
