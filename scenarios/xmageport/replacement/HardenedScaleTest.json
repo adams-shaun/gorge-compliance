@@ -222,8 +222,7 @@
      "eq": 1
     }
    ],
-   "xmage": "HardenedScaleTest#testWithVigorMortis",
-   "known_bug": "XP[counters-hardened-scales-applied-per-etb-counter-source]: with the pool now paying generic from the Forests (G spent, so Vigor Mortis's +1 counter branch runs) gorge ends with 4 +1/+1 counters on Silvercoat Lion, XMage 3 (observed p0:Silvercoat Lion P1P1 counters 4, want 3): Hardened Scales applies to the Vigor Mortis counter and again to Metallic Mimic's extra ETB counter, while XMage applies it once to the single entering event ('Hardened Scales is only once applied to EntersTheBattlefield event', per the test). Gorge-side ETB replacement ordering / counter modification (engine/rules replacement application for P1P1 counters on entry). CR 614.12, 616.1."
+   "xmage": "HardenedScaleTest#testWithVigorMortis"
   }
  ]
 }
