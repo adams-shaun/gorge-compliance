@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
+	"slices"
 	"sort"
 	"strings"
 	"testing"
@@ -23,14 +24,20 @@ import (
 // tape tests are.
 func fdnPairs(t *testing.T, n int) (*cards.Registry, [][2]decks.Deck) {
 	t.Helper()
+	return setPairs(t, "FDN", n)
+}
+
+// setPairs is the first n deck pairs of set's chunk 0.
+func setPairs(t *testing.T, set string, n int) (*cards.Registry, [][2]decks.Deck) {
+	t.Helper()
 	reg := testutil.CorpusRegistry(t)
-	cands, _, err := decks.Candidates(reg, manifestDir, "FDN")
+	cands, _, err := decks.Candidates(reg, manifestDir, set)
 	if err != nil {
 		t.Fatal(err)
 	}
 	var out [][2]decks.Deck
 	for g := 0; g < n; g++ {
-		out = append(out, decks.Pair(cands, cov.New(), "FDN", 0, g, 7))
+		out = append(out, decks.Pair(cands, cov.New(), set, 0, g, 7))
 	}
 	return reg, out
 }
@@ -230,9 +237,14 @@ func TestOnCutIsReadOnly(t *testing.T) {
 // without touching the game.
 func expressibleCut(t *testing.T, reg *cards.Registry, p [2]decks.Deck, seed uint64) (*rules.Engine, int) {
 	t.Helper()
+	return expressibleCutIn(t, reg, "FDN", p, seed)
+}
+
+func expressibleCutIn(t *testing.T, reg *cards.Registry, set string, p [2]decks.Deck, seed uint64) (*rules.Engine, int) {
+	t.Helper()
 	var got *rules.Engine
 	var at int
-	_, err := game.Play(reg, p, seed, game.Options{Set: "FDN", OnCut: func(e *rules.Engine, entry int) {
+	_, err := game.Play(reg, p, seed, game.Options{Set: set, OnCut: func(e *rules.Engine, entry int) {
 		if got == nil && e.G.Turn >= 3 && len(capture(e, entry).Reasons) == 0 {
 			got, at = e.Clone(), entry
 		}
@@ -319,4 +331,129 @@ func TestWindowCountersNotDoubled(t *testing.T) {
 	if chk := SelfCheck(reg, l, wt); chk.Status != StatusOK && chk.Step < 0 {
 		t.Fatalf("setup checkpoint differs from the planted state: %s: gorge %s, tape %s %v", chk.Field, chk.Gorge, chk.Tape, chk.Fails)
 	}
+}
+
+// plantCard replaces the card of a library object of e with the named corpus
+// card, so the game mentions its text.
+func plantCard(t *testing.T, reg *cards.Registry, e *rules.Engine, name string) {
+	t.Helper()
+	c, ok := reg.Lookup(name)
+	if !ok {
+		t.Fatalf("%s is not in the corpus", name)
+	}
+	for i := range e.G.Objs {
+		if o := &e.G.Objs[i]; o.Zone == state.ZLibrary && o.Card != nil {
+			o.SetCard(c, 0)
+			return
+		}
+	}
+	t.Fatal("no library card to replace")
+}
+
+func hasReason(c *cut, r string) bool { return slices.Contains(c.Reasons, r) }
+
+func TestGateDeadTurnHistory(t *testing.T) {
+	reg, pairs := setPairs(t, "DFT", 1)
+	base, at := expressibleCutIn(t, reg, "DFT", pairs[0], 100)
+	var bf state.ObjID
+	var perm int
+	for i := range base.G.Objs {
+		if o := &base.G.Objs[i]; o.Zone == state.ZBattlefield && o.Card != nil && o.Ability == nil {
+			bf, perm = o.ID, i
+			break
+		}
+	}
+	if bf == 0 {
+		t.Fatal("no battlefield permanent")
+	}
+
+	// (a) a card-less ability object's entry is not history; (b) a card's is.
+	e := base.Clone()
+	e.G.Objs = append(e.G.Objs, state.Object{ID: state.ObjID(len(e.G.Objs) + 1), Zone: state.ZCeased, Source: bf})
+	e.G.Entered = append(e.G.Entered, state.ZoneEntry{Obj: state.ObjID(len(e.G.Objs)), From: state.ZLibrary, To: state.ZStack})
+	if c := capture(e, at); len(c.Reasons) != 0 {
+		t.Fatalf("(a) card-less entry: reasons %v, want none", c.Reasons)
+	}
+	e.G.Entered = append(e.G.Entered, state.ZoneEntry{Obj: bf, From: state.ZGraveyard, To: state.ZExile})
+	if c := capture(e, at); len(c.Reasons) != 1 || c.Reasons[0] != "field:Game.Entered" {
+		t.Fatalf("(b) card entry: reasons %v, want [field:Game.Entered]", c.Reasons)
+	}
+
+	// (c) the tally is live only when a card in the game reads it.
+	e = base.Clone()
+	e.G.ResolvedThisTurn = map[string]int32{"x": 1}
+	if c := capture(e, at); len(c.Reasons) != 0 {
+		t.Fatalf("(c) unread tally: reasons %v, want none", c.Reasons)
+	}
+	plantCard(t, reg, e, "Tannuk, Memorial Ensign")
+	if c := capture(e, at); !hasReason(c, "field:Game.ResolvedThisTurn") {
+		t.Fatalf("(c) read tally: reasons %v, want field:Game.ResolvedThisTurn", c.Reasons)
+	}
+
+	// (d) a runtime SVar is live only when a card in the game names its key.
+	e = base.Clone()
+	e.G.Objs[perm].RuntimeSVars = map[string]int32{"AFLifeLost": 2}
+	if c := capture(e, at); len(c.Reasons) != 0 {
+		t.Fatalf("(d) unread SVar: reasons %v, want none", c.Reasons)
+	}
+	plantCard(t, reg, e, "Gray Merchant of Asphodel")
+	if c := capture(e, at); !hasReason(c, "field:Object.RuntimeSVars") {
+		t.Fatalf("(d) read SVar: reasons %v, want field:Object.RuntimeSVars", c.Reasons)
+	}
+}
+
+// The relaxed fields open windows that lower and self-check: the first twelve
+// DFT games are played with the cut hook recording which cuts carried one.
+func TestWindowsDeadTurnHistory(t *testing.T) {
+	reg, pairs := setPairs(t, "DFT", 12)
+	byStatus := map[string]int{}
+	var okRelaxed int
+	for g, p := range pairs {
+		relaxed := map[int32]bool{}
+		opt := game.Options{Set: "DFT", OnCut: func(e *rules.Engine, entry int) {
+			if nonDrawEntry(e.G) || len(e.G.ResolvedThisTurn) > 0 || runtimeSVarsOf(e.G) {
+				relaxed[e.G.Turn] = true
+			}
+		}}
+		ls, _, _, err := Windows(reg, p, uint64(100+g), opt)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, l := range ls {
+			var turn int32
+			if _, err := fmt.Sscanf(l.Item.ID[strings.LastIndex(l.Item.ID, ":w")+2:], "%d", &turn); err != nil {
+				t.Fatal(err)
+			}
+			if !relaxed[turn] {
+				continue
+			}
+			c := CheckWindow(reg, l)
+			byStatus[string(c.Status)]++
+			if c.Status == StatusOK {
+				okRelaxed++
+			}
+		}
+	}
+	t.Logf("relaxed lowered windows by status: %v", byStatus)
+	if okRelaxed == 0 {
+		t.Fatalf("no relaxed window self-checked ok: %v", byStatus)
+	}
+}
+
+func runtimeSVarsOf(g *state.Game) bool {
+	for i := range g.Objs {
+		if len(g.Objs[i].RuntimeSVars) > 0 {
+			return true
+		}
+	}
+	return false
+}
+
+func nonDrawEntry(g *state.Game) bool {
+	for _, z := range g.Entered {
+		if z.To != state.ZHand || z.From != state.ZLibrary {
+			return true
+		}
+	}
+	return false
 }

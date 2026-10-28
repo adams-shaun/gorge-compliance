@@ -127,6 +127,8 @@ type walker struct {
 	g    *state.Game
 	why  map[string]bool
 	seat int // the seat Player fields are being read for
+	// mention memoises gameMentions per word for this capture.
+	mention map[string]bool
 }
 
 // struct_ visits every exported field of v (a struct of the named type) and adds
@@ -157,8 +159,9 @@ func (w *walker) struct_(v reflect.Value, typ string, table map[string]entry, o 
 
 // live is true when a refuse field carries state. The default is "not at its
 // zero value"; a turn stamp is live only when it names the cut's turn, and the
-// zone entries of the draw step (library to hand) are not history setup could
-// have changed.
+// zone entries of the draw step (library to hand) and of card-less abilities,
+// the this-turn resolution tally and the runtime SVars no card in the game
+// names are not history setup could have changed or a card could read.
 func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 	switch {
 	case typ == "Player" && name == "LandsPlayed":
@@ -173,7 +176,27 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return v.Bool() && !(o.Zone == state.ZHand && o.EnteredFrom == state.ZLibrary)
 	case typ == "Game" && name == "Entered":
 		for _, z := range w.g.Entered {
-			if z.To != state.ZHand || z.From != state.ZLibrary {
+			if z.To == state.ZHand && z.From == state.ZLibrary {
+				continue
+			}
+			// A card-less object is an ability that went on the stack; every
+			// reader of Entered matches a card spec or a card fact.
+			if o := w.g.Obj(z.Obj); o == nil || o.Card == nil {
+				continue
+			}
+			return true
+		}
+		return false
+	case typ == "Game" && name == "ResolvedThisTurn":
+		return v.Len() > 0 && w.gameMentions("ResolvedThisTurn")
+	case typ == "Object" && name == "RuntimeSVars":
+		keys := make([]string, 0, v.Len())
+		for _, k := range v.MapKeys() {
+			keys = append(keys, k.String())
+		}
+		sort.Strings(keys)
+		for _, k := range keys {
+			if w.gameMentions(k) {
 				return true
 			}
 		}
