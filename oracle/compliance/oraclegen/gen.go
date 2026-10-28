@@ -1311,6 +1311,15 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// posed the ask.
 				continue
 			}
+			if d.Resume == "changezone_dest_alt" {
+				// gorge's DestinationAlternative ask (Dina's Guidance's "put it
+				// into your hand or graveyard"). XMage asks it as a boolean
+				// chooseUse("Hand", "Graveyard"), not a labelled choice, so a
+				// scripted "hand" is not an answer to it. Left unscripted, as
+				// it was before gorge posed the ask: gorge's default is the
+				// primary destination, the same zone XMage's default takes.
+				continue
+			}
 			if routing.divideOwned[i] {
 				// The division ask's shares were emitted with its target
 				// ask (dividedTargetAnswers).
