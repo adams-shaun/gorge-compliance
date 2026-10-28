@@ -147,7 +147,7 @@ var objectTable = map[string]entry{
 	"PhasedOut":                    isRefused("a phased-out permanent is not placeable"),
 	"PhasedOutIndirect":            isIgnored("meaningful only when PhasedOut, which is refused"),
 	"Damage":                       isRefused("marked damage is not placeable"),
-	"IsToken":                      isRefused("the runner's setup places cards, not tokens"),
+	"IsToken":                      isPlaced("setup tokens by script (checkToken refuses a copy, a choice, an unmapped stem)"),
 	"IsCopy":                       isRefused("a copy is not placeable"),
 	"Counters":                     isPlaced("setup counters, less the counters the card enters with"),
 	"ClassLevelValue":              isRefused("a Class level is not placeable"),

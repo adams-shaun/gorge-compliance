@@ -135,6 +135,11 @@ func XAnswers(ds []rules.OracleDecision, steps int, modes map[string]int) [][]XA
 	return xanswers(ds, steps, modes, nil)
 }
 
+// ArrangeEmptyGraveyard reports whether an arrange decision sent every
+// looked-at card to the graveyard; XAnswers scripts one choice answer per
+// looked-at card for it, not one per decision.
+func ArrangeEmptyGraveyard(d rules.OracleDecision) bool { return arrangeEmptyGraveyard(d) }
+
 // ChooseTargets rewrites cast steps' targets from gorge's own target
 // decisions and returns the scenario with the set of cast step indices those
 // targets came from.

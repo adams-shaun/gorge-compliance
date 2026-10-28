@@ -129,8 +129,7 @@
      "eq": 1
     }
    ],
-   "xmage": "MimicVatTest#TestClone",
-   "known_bug": "XP[etb-clone-election-not-posed-for-token-entry]: the sacrifice answer now binds the Clone copy by name and the imprint exile works (Clone exiled with Mimic Vat), but when Mimic Vat's {3},{T} ability makes the token copy of the exiled Clone, gorge poses no as-enters copy election at all (no decision, no fallback in the transcript; answers yes / Silvercoat Lion at the activate, pass_to and resolve steps all stay unconsumed) and the 0/0 Clone token leaves the battlefield (probe: no Silvercoat Lion p0 permanent). The election is recorded only for a cast (engine/events/apply_cast.go ETBCloneChoice, engine/rules/cast_etbchoice.go entryETBChoice), not a token created as a copy of a card. CR 614.12, 707.2, 111.1."
+   "xmage": "MimicVatTest#TestClone"
   }
  ]
 }

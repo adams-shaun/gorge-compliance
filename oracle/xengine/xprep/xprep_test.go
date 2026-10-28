@@ -84,7 +84,8 @@ func prepared(t *testing.T, n int) (*cards.Registry, *decks.Spellings, []window,
 // TestPrepareFillsAnswers: every prepared item has one answer list per step,
 // and the answers scripted are gorge's own decisions less the declarations (the
 // attack and block steps carry those) and less the target decisions
-// ChooseTargets moved onto a cast or activate step.
+// ChooseTargets moved onto a cast or activate step. An arrange that sends every
+// looked-at card to the graveyard is one answer per card.
 func TestPrepareFillsAnswers(t *testing.T) {
 	_, _, ws, items := prepared(t, 2)
 	var moved, scripted int
@@ -101,6 +102,10 @@ func TestPrepareFillsAnswers(t *testing.T) {
 			case d.Kind == "attackers" || d.Kind == "blockers":
 			case d.Via == "target" && castSteps[d.Step]:
 				moved++
+			case d.GorgeKind == "arrange" && oraclegen.ArrangeEmptyGraveyard(d):
+				// Every looked-at card to the graveyard: one choice answer
+				// per card (XMage's selection IS the cards to graveyard).
+				want += len(d.ArrangeLabels)
 			default:
 				want++
 			}
