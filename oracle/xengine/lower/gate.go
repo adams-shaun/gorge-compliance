@@ -25,6 +25,10 @@ const (
 	reasonActiveTap    = "tapped_active_permanent" // the setup drive's untap step untaps it
 	reasonTapElsewhere = "tapped_name_elsewhere"   // setup taps every placement of the name
 	reasonAura         = "aura_on_battlefield"     // an Aura placed unattached never enters
+	// reasonSelfExile is a card exiled by its own effect (warp). Its recast
+	// permission from exile is derived from the event log (warpRecastAvailable),
+	// so no gate field shows it and setup's plain exile placement cannot grant it.
+	reasonSelfExile = "exile_self"
 )
 
 // cut is the live engine at one cut point, reduced to what a window needs: the
@@ -129,6 +133,44 @@ type walker struct {
 	seat int // the seat Player fields are being read for
 	// mention memoises gameMentions per word for this capture.
 	mention map[string]bool
+	// exilerRead memoises whether any card of the game reads HasExiledBy
+	// (ExiledByYou, Exiler); exilerKnown says it was computed.
+	exilerRead, exilerKnown bool
+	// entryRead memoises whether any card of the game reads this turn's zone
+	// entries (turnEntryReaders); entryKnown says it was computed.
+	entryRead, entryKnown bool
+}
+
+// turnEntryReaders are the script words through which gorge reads Game.Entered
+// and the EnteredThisTurn of an object off the battlefield (pinned gorge,
+// engine/effects):
+//   - ThisTurnEntered: Count$ThisTurnEntered_* (count_body_heads.go) and the
+//     words ThisTurnEntered, ThisTurnEnteredFrom_<Zone> (filter_word.go);
+//   - Morbid: the dotted Morbid head (count_body_heads.go);
+//   - LeftGraveyardThisTurn, LeftBattlefieldThisTurn: count_cov3.go heads;
+//   - Landfall, Void: count_cov3.go condition branches;
+//   - SacrificedThisTurn, SacrificedPermanentTypes: sacrificedThisTurn and
+//     sacrificedPermanentTypes (count_cov3.go; the latter is the
+//     SacrificedPermanentTypesThisTurn head, which does not contain the former);
+//   - Descended, descended: descendedThisTurn (Count$YouDescendedThisTurn,
+//     the descended player qualifier; count_player.go, player_filter.go).
+//
+// targetedPermanentLKI (conditions.go) also reads an off-battlefield
+// EnteredThisTurn, but only for a target that left the battlefield this turn,
+// which a card that died before the cut cannot be after it.
+var turnEntryReaders = []string{
+	"ThisTurnEntered", "Morbid", "LeftGraveyardThisTurn", "LeftBattlefieldThisTurn",
+	"Landfall", "Void", "SacrificedThisTurn", "SacrificedPermanentTypes",
+	"Descended", "descended",
+}
+
+// entryReader is true when any card of the game, in any zone, reads this
+// turn's zone entries.
+func (w *walker) entryReader() bool {
+	if !w.entryKnown {
+		w.entryRead, w.entryKnown = w.gameMentions(turnEntryReaders...), true
+	}
+	return w.entryRead
 }
 
 // struct_ visits every exported field of v (a struct of the named type) and adds
@@ -161,7 +203,11 @@ func (w *walker) struct_(v reflect.Value, typ string, table map[string]entry, o 
 // zero value"; a turn stamp is live only when it names the cut's turn, and the
 // zone entries of the draw step (library to hand) and of card-less abilities,
 // the this-turn resolution tally and the runtime SVars no card in the game
-// names are not history setup could have changed or a card could read.
+// names are not history setup could have changed or a card could read. Zone
+// entries, and the entry flag of an object off the battlefield, are live only
+// when a card in the game reads them (turnEntryReaders). An
+// exile link is live only when a card can read it; a self-exile (warp) is
+// refused as exile_self.
 func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 	switch {
 	case typ == "Player" && name == "LandsPlayed":
@@ -173,8 +219,16 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 	case typ == "Object" && turnStamps[name]:
 		return v.Int() == int64(w.g.Turn)
 	case typ == "Object" && name == "EnteredThisTurn":
-		return v.Bool() && !(o.Zone == state.ZHand && o.EnteredFrom == state.ZLibrary)
+		if !v.Bool() || (o.Zone == state.ZHand && o.EnteredFrom == state.ZLibrary) {
+			return false
+		}
+		// A battlefield permanent's flag is read by the engine with no script
+		// word (powerUpReduceCost); off the battlefield only the readers see it.
+		return o.Zone == state.ZBattlefield || w.entryReader()
 	case typ == "Game" && name == "Entered":
+		if !w.entryReader() {
+			return false
+		}
 		for _, z := range w.g.Entered {
 			if z.To == state.ZHand && z.From == state.ZLibrary {
 				continue
@@ -189,6 +243,34 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return false
 	case typ == "Game" && name == "ResolvedThisTurn":
 		return v.Len() > 0 && w.gameMentions("ResolvedThisTurn")
+	case typ == "Object" && name == "ExiledCards":
+		if selfExile(o) {
+			w.why[reasonSelfExile] = true
+			return false
+		}
+		return v.Len() > 0 && cardMentions(o.Card, "ExiledWith")
+	case typ == "Object" && name == "ExiledWith":
+		if v.IsZero() {
+			return false
+		}
+		if o.ExiledWith == o.ID {
+			w.why[reasonSelfExile] = true
+			return false
+		}
+		src := w.g.Obj(o.ExiledWith)
+		return src != nil && cardMentions(src.Card, "ExiledWith")
+	case typ == "Object" && name == "HasExiledBy":
+		if !v.Bool() {
+			return false
+		}
+		if selfExile(o) {
+			w.why[reasonSelfExile] = true
+			return false
+		}
+		if !w.exilerKnown {
+			w.exilerRead, w.exilerKnown = w.gameMentions("ExiledByYou") || w.gameMentions("Exiler"), true
+		}
+		return w.exilerRead
 	case typ == "Object" && name == "RuntimeSVars":
 		keys := make([]string, 0, v.Len())
 		for _, k := range v.MapKeys() {
@@ -207,6 +289,12 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return v.Len() > 0
 	}
 	return !v.IsZero()
+}
+
+// selfExile is true for a card in exile that exiled itself: it is its own
+// exiler and is listed in its own ExiledCards.
+func selfExile(o *state.Object) bool {
+	return o.Zone == state.ZExile && (o.ExiledWith == o.ID || slices.Contains(o.ExiledCards, o.ID))
 }
 
 // frontName is the name setup lists a card under: its first face, the name the
