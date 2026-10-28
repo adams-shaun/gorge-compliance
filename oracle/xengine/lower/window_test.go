@@ -924,3 +924,45 @@ func TestWindowsTappedAfterUntap(t *testing.T) {
 		t.Fatal("no window with an active-seat tapped permanent lowered to lower_ok")
 	}
 }
+
+func TestRemapRenamedSetupToken(t *testing.T) {
+	c := &cut{Refs: map[state.ObjID]string{
+		83: "p0:token:Shard Token",
+		20: "p0:Niko, Light of Hope",
+	}, MaxID: 100}
+	for _, tc := range []struct {
+		id         state.ObjID
+		live, want string
+	}{
+		{83, "p0:token:Hardened Escort", "p0:token:Hardened Escort"},
+		{83, "p0:token:Shard Token", "p0:token:Shard Token"},
+		{83, "", "p0:token:Shard Token"},
+		{20, "p0:Niko, Light of Hope", "p0:Niko, Light of Hope"},
+		{101, "p0:token:Soldier", "p0:token:Soldier"},
+	} {
+		if got := c.remap(tc.id, tc.live); got != tc.want {
+			t.Errorf("remap(%d, %q) = %q, want %q", tc.id, tc.live, got, tc.want)
+		}
+	}
+}
+
+// DSK pair 10 turn 11 makes a Shard token a copy of Hardened Escort; the
+// window's attack names it by the copied name.
+func TestWindowsRenamedTokenRef(t *testing.T) {
+	reg, pairs := setPairs(t, "DSK", 11)
+	ls, _, tp, err := Windows(reg, pairs[10], 110, game.Options{Set: "DSK"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	id := windowID(tp, 11)
+	for _, l := range ls {
+		if l.Item.ID != id {
+			continue
+		}
+		if c := CheckWindow(reg, l); c.Status != StatusOK {
+			t.Errorf("%s: status %s at step %d: %s", id, c.Status, c.Step, c.Gorge)
+		}
+		return
+	}
+	t.Fatalf("window %s not lowered", id)
+}

@@ -114,6 +114,11 @@ func (c *cut) remap(id state.ObjID, live string) string {
 		return live
 	}
 	if r, ok := c.Refs[id]; ok {
+		// A setup token is found by its current face name, not bound: a Clone
+		// renames it, so the live ref is the one the runner resolves.
+		if strings.Contains(r, ":token:") && strings.Contains(live, ":token:") {
+			return live
+		}
 		return r
 	}
 	if id <= c.MaxID {
