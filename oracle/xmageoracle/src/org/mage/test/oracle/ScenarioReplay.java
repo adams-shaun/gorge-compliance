@@ -3062,7 +3062,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** Whether the named card has an activated mana ability whose rule text
-     * starts with text; XMage activates those through activateManaAbility. */
+     * starts with text; the activate step then resolves the named permanent
+     * and activates exactly that ability (activateManaAbilityOnCard). */
     private static boolean isManaAbilityText(String name, String text) {
         CardInfo info = CardRepository.instance.findCard(name, true);
         Card c = info == null ? null : info.createCard();
@@ -3083,6 +3084,141 @@ public class ScenarioReplay extends CardTestPlayerBase {
         // tap-for-mana text is activated as the mana ability it is (CR
         // 605.1a); TestPlayer's activate command never finds a mana ability.
         return isTapManaText(text);
+    }
+
+    /** Queue a mana-ability activation on the step's own permanent.
+     *
+     * TestPlayer's manaActivate: command walks every available mana producer
+     * and takes the first whose rule text starts with the command, so a
+     * "{T}" prefix (Hidden Grotto, an untapped Island) lands on whichever
+     * producer XMage lists first. Here the permanent is resolved by its
+     * scenario ref first -- name plus the 1-based "#N" instance, controlled
+     * by the activating seat -- and only its own abilities are considered.
+     * A permanent or ability that cannot be resolved fails the window with
+     * a harness: reason; it never falls back to the global scan. */
+    private void activateManaAbilityOnCard(int stepIdx, TestPlayer p, String ref, String card,
+            String text, Integer abilityIndex) {
+        runCode("mana ability " + card + " \"" + text + "\"", turn, phase, p, (info, pl, g) -> {
+            Permanent permanent = namedPermanent(g, pl, ref, card, stepIdx);
+            ActivatedManaAbilityImpl ability = manaAbilityFor(permanent, pl, g, text, abilityIndex, card, stepIdx);
+            if (!pl.activateAbility(ability, g)) {
+                throw new IllegalStateException("harness: activate step " + stepIdx + " could not activate \""
+                        + text + "\" on " + card + " for " + pl.getName());
+            }
+        });
+    }
+
+    /** The battlefield permanent a scenario ref names, under the activating
+     * player's control. The ref's identity is the setup alias when it has
+     * one: gorge's "#N" counts every same-named card setup dealt, so a
+     * second Plains played from hand is still "p0:Plains#2" when it is the
+     * only Plains on the battlefield. A ref that is not (or no longer) a
+     * live permanent falls back to the same-named battlefield instances:
+     * the only one, or the Nth, the order permanentRef uses. */
+    private Permanent namedPermanent(Game g, Player p, String ref, String card, int stepIdx) {
+        UUID boundId = scenarioObjectId(g, p, ref);
+        if (boundId != null) {
+            Permanent bound = g.getPermanent(boundId);
+            if (bound != null) {
+                if (!bound.getControllerId().equals(p.getId())) {
+                    throw new IllegalStateException("harness: activate step " + stepIdx + " names " + card
+                            + ", which " + p.getName() + " does not control");
+                }
+                return bound;
+            }
+        }
+        String front = xmageSpelling(refName(ref));
+        String live = battlefieldName(ref);
+        List<Permanent> named = new ArrayList<>();
+        for (Permanent perm : g.getBattlefield().getAllPermanents()) {
+            if (!perm.getControllerId().equals(p.getId())) {
+                continue;
+            }
+            String setup = setupName(perm);
+            String actual = xmageSpelling(perm.getName());
+            if (setup.equals(front) || setup.equals(live) || actual.equals(front) || actual.equals(live)) {
+                named.add(perm);
+            }
+        }
+        if (named.size() == 1) {
+            return named.get(0);
+        }
+        int wanted = refOrdinal(ref);
+        if (wanted >= 1 && wanted <= named.size()) {
+            return named.get(wanted - 1);
+        }
+        throw new IllegalStateException("harness: activate step " + stepIdx + " names " + card
+                + (wanted > 1 ? "#" + wanted : "") + ", which is not on " + p.getName() + "'s battlefield");
+    }
+
+    /** The object id a scenario ref is bound to on the activating player,
+     * from setup's "@ref" aliases (registerAliases); null for a ref that no
+     * setup object bound. */
+    private static UUID scenarioObjectId(Game g, Player p, String ref) {
+        Player actual = g.getPlayer(p.getId());
+        return actual instanceof TestPlayer ? ((TestPlayer) actual).getAliases().get(ref) : null;
+    }
+
+    /** The named permanent's one mana ability for an activate step. Its
+     * step's ability_index selects the AB$ the item means (gorge's face
+     * abilities are its activated abilities, in printed order); the rule
+     * text is the selector both sides already agree on, so a differing
+     * XMage ordering still activates the right ability. More than one text
+     * match without a usable index is a harness error, never a guess. */
+    private static ActivatedManaAbilityImpl manaAbilityFor(Permanent permanent, Player p, Game g,
+            String text, Integer abilityIndex, String card, int stepIdx) {
+        List<ActivatedManaAbilityImpl> available = new ArrayList<>(
+                permanent.getAbilities(g).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, p.getId(), g));
+        List<ActivatedManaAbilityImpl> matching = new ArrayList<>();
+        for (ActivatedManaAbilityImpl ability : available) {
+            if (text.isEmpty() || ability.toString().startsWith(text)) {
+                matching.add(ability);
+            }
+        }
+        ActivatedManaAbilityImpl indexed = abilityIndex == null ? null
+                : activatedAbilityAt(permanent, g, abilityIndex);
+        boolean indexMatches = indexed != null && available.contains(indexed)
+                && (text.isEmpty() || indexed.toString().startsWith(text));
+        if (indexMatches) {
+            return indexed;
+        }
+        if (matching.size() == 1) {
+            return matching.get(0);
+        }
+        if (matching.size() > 1) {
+            throw new IllegalStateException("harness: activate step " + stepIdx + " on " + card + " matches "
+                    + matching.size() + " mana abilities for \"" + text + "\" and ability_index "
+                    + abilityIndex + " does not identify one");
+        }
+        if (indexed != null && available.contains(indexed)) {
+            // The text is a prefix XMage spells differently from this card
+            // instance (a granted/blended ability); the index still names
+            // exactly one of the permanent's own mana abilities.
+            return indexed;
+        }
+        throw new IllegalStateException("harness: activate step " + stepIdx + " on " + card
+                + " has no mana ability for \"" + text + "\""
+                + (abilityIndex == null ? "" : " at ability_index " + abilityIndex));
+    }
+
+    /** The permanent's ability_index-th activated ability (gorge indexes its
+     * face's activated AB$ list), or null when the index is out of range or
+     * names a non-mana ability. */
+    private static ActivatedManaAbilityImpl activatedAbilityAt(Permanent permanent, Game g, int abilityIndex) {
+        if (abilityIndex < 0) {
+            return null;
+        }
+        int at = 0;
+        for (Ability ability : permanent.getAbilities(g)) {
+            if (!ability.isActivatedAbility()) {
+                continue;
+            }
+            if (at++ == abilityIndex) {
+                return ability instanceof ActivatedManaAbilityImpl
+                        ? (ActivatedManaAbilityImpl) ability : null;
+            }
+        }
+        return null;
     }
 
     /** A "{T}: Add ..." rule text with no other cost: the mana-ability shape
@@ -3900,7 +4036,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     faceDownRefs.remove(str(st, "card"));
                 }
                 if (isManaAbilityText(card, text)) {
-                    activateManaAbility(turn, phase, p, text);
+                    Integer abilityIndex = st.has("ability_index") && st.get("ability_index").isJsonPrimitive()
+                            ? st.get("ability_index").getAsInt() : null;
+                    activateManaAbilityOnCard(stepIdx, p, str(st, "card"), card, text, abilityIndex);
                     return;
                 }
                 // A divided (TargetAmount) activation's recipients come from
