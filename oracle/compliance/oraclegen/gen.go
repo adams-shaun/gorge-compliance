@@ -1702,6 +1702,15 @@ func forcedSingleOption(d rules.OracleDecision) bool {
 	if hasTargetPick(d) {
 		return false
 	}
+	if hasCostPick(d) {
+		// A tap, sacrifice or exile COST chooser is a real ask even with one
+		// legal object: XMage's TargetPermanent("another untapped creature")
+		// still poses the choice, and a dropped answer leaves the cost unpaid,
+		// so TestPlayer reports "Can't find ability" (Saddle/Crew with one
+		// untapped creature left). The decision's picks are object identities,
+		// not the single-option LABEL asks this predicate exists for.
+		return false
+	}
 	if announcesX(d) {
 		// An X announcement is always posed (XMage's announceXMana), even
 		// when the available mana leaves one legal value: an "{X}{X}, {T}"
@@ -1710,6 +1719,20 @@ func forcedSingleOption(d rules.OracleDecision) bool {
 		return false
 	}
 	return d.Options == 1 && d.Min == 1 && d.Max == 1
+}
+
+// hasCostPick reports whether any pick pays a cost through a chooser XMage
+// poses even when the choice is forced: a tap (Crew/Saddle), sacrifice or
+// exile cost. These picks name object identities, so they can never be the
+// lone-label ask forcedSingleOption drops.
+func hasCostPick(d rules.OracleDecision) bool {
+	for _, k := range d.PickKinds {
+		switch k {
+		case "tapcost", "sacrifice", "exilecost":
+			return true
+		}
+	}
+	return false
 }
 
 // announcesX reports whether d is the single positive "X = <n>" announcement

@@ -170,6 +170,9 @@ func TestForcedSingleOptionOnlyExactOne(t *testing.T) {
 		"mode":             {Kind: "mode", Options: 1, Min: 1, Max: 1},
 		"order":            {Kind: "order", Options: 1, Min: 1, Max: 1},
 		"with target pick": {Kind: "choose_n", Options: 1, Min: 1, Max: 1, Picks: []string{"Bears"}, PickRefs: []string{"p1:Bears"}, PickKinds: []string{"permanent"}},
+		"tap cost pick":    {Kind: "choose_n", Options: 1, Min: 1, Max: 1, Picks: []string{"Bears"}, PickRefs: []string{"p0:Bears"}, PickKinds: []string{"tapcost"}},
+		"sacrifice pick":   {Kind: "choose_n", Options: 1, Min: 1, Max: 1, Picks: []string{"Bears"}, PickRefs: []string{"p0:Bears"}, PickKinds: []string{"sacrifice"}},
+		"exile cost pick":  {Kind: "choose_n", Options: 1, Min: 1, Max: 1, Picks: []string{"Bears"}, PickRefs: []string{"p0:Bears"}, PickKinds: []string{"exilecost"}},
 	} {
 		t.Run(name, func(t *testing.T) {
 			if forcedSingleOption(d) {

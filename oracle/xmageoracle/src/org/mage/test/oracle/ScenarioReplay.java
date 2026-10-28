@@ -372,28 +372,100 @@ public class ScenarioReplay extends CardTestPlayerBase {
 
         private String nextPaymentColour(ManaCost unpaid) {
             Mana due = unpaid.getMana();
+            // An exhausted plan (the manual window is still open, so payment is
+            // "" not null) cannot say which unit pays the rest. A cost larger
+            // than gorge's recorded spend (a reduction difference or an
+            // additional cost paid in the same step) must go back to
+            // auto-payment instead of spending an arbitrary pool unit.
+            if (payment.isEmpty()) {
+                return null;
+            }
+            // A specific coloured pip can only be paid by its own type. Prefer
+            // the recorded unit of that type, but the plan is a preference, not
+            // a restriction: a dual land's chosen colour or a plan written
+            // before a restriction lifted can leave the pool holding the type
+            // while the plan names another, and refusing it would strand the
+            // cast. COLORLESS is XMage's generic bucket, so it belongs to the
+            // plan-preferring generic phase below, not here: taking a {C} unit
+            // here would bypass the plan whenever the pool also holds a colour
+            // gorge actually spent.
             for (char c : "WUBRG".toCharArray()) {
                 ManaType type = manaType(c);
-                if (payment.indexOf(c) >= 0 && due.get(type) > 0 && getManaPool().get(type) > 0) {
+                if (due.get(type) > 0 && getManaPool().get(type) > 0) {
+                    return payment.indexOf(c) >= 0 ? takePayment(c) : dropPaymentLetterAndName(c);
+                }
+            }
+            // A coloured pip the pool does not hold is not payable with any
+            // other colour: leave it to auto-payment (which may float a new
+            // source) instead of spending a unit the cost cannot take.
+            if (hasColouredPip(due)) {
+                return null;
+            }
+            // Only the generic part remains, and every unit pays it. Gorge's
+            // recorded multiset names the units it spent, so take a plan unit
+            // first: a pool unit gorge did NOT spend must not be paid for the
+            // generic part while a recorded unit is still available, or the
+            // post-cast pool holds a different colour than gorge's.
+            for (char c : "WUBRGC".toCharArray()) {
+                if (payment.indexOf(c) >= 0 && getManaPool().get(manaType(c)) > 0) {
                     return takePayment(c);
                 }
             }
-            if (payment.indexOf('C') >= 0 && due.get(ManaType.COLORLESS) > 0
-                    && getManaPool().get(ManaType.COLORLESS) > 0) {
-                return takePayment('C');
-            }
-            for (int i = 0; i < payment.length(); i++) {
-                char c = payment.charAt(i);
+            // No plan letter names a pool unit. The replayed pool can still
+            // hold the same COUNT in other colours (a dual land's chosen colour,
+            // a restriction change), so pay one of those rather than strand the
+            // cast, keeping the plan's total in step.
+            for (char c : "WUBRGC".toCharArray()) {
                 if (getManaPool().get(manaType(c)) > 0) {
-                    return takePayment(c);
+                    return dropPaymentLetterAndName(c);
                 }
             }
             return null;
         }
 
+        /** Whether the unpaid cost still names a WUBRG pip. XMage folds the
+         * generic part into COLORLESS, so this is the "generic only" test. */
+        private static boolean hasColouredPip(Mana due) {
+            for (char c : "WUBRG".toCharArray()) {
+                if (due.get(manaType(c)) > 0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /** Spend a pool unit the recorded plan did not name: the generic part
+         * accepts any colour, so drop one plan unit to keep the plan's count
+         * aligned with the units still to spend. Drop a letter whose unit the
+         * pool no longer holds when there is one: it can never be honoured, so
+         * it is the least-needed remaining letter. */
+        private String dropPaymentLetterAndName(char c) {
+            if (payment != null && !payment.isEmpty()) {
+                int i = leastNeededPaymentLetter();
+                payment = payment.substring(0, i) + payment.substring(i + 1);
+            }
+            return colourName(c);
+        }
+
+        /** Index of the plan letter with no pool unit behind it, or 0 when
+         * every remaining letter still has one (the specific-pip branch can
+         * reach the fallback while the pool holds each plan type). */
+        private int leastNeededPaymentLetter() {
+            for (int i = 0; i < payment.length(); i++) {
+                if (getManaPool().get(manaType(payment.charAt(i))) <= 0) {
+                    return i;
+                }
+            }
+            return 0;
+        }
+
         private String takePayment(char c) {
             int i = payment.indexOf(c);
             payment = payment.substring(0, i) + payment.substring(i + 1);
+            return colourName(c);
+        }
+
+        private static String colourName(char c) {
             switch (c) {
                 case 'W': return "White";
                 case 'U': return "Blue";
