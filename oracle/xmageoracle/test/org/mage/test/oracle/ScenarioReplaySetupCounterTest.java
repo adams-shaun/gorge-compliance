@@ -96,6 +96,8 @@ public final class ScenarioReplaySetupCounterTest {
         TestPlayer p1 = player(UUID.randomUUID());
         set(driver, "playerA", p0);
         set(driver, "playerB", p1);
+        // allocateInstance skips field initializers; applySetupState walks seats.
+        set(driver, "seats", 2);
         set(driver, "gorgeName", "");
         set(driver, "xmageName", "");
 

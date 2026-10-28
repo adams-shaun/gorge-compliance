@@ -1572,6 +1572,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                 }
             }
+            if (s.has("tapped_after_untap")) {
+                // gorge taps these single permanents after the turn's untap
+                // step and drops every trigger the taps queue (CR 502.3), so
+                // flip the flag instead of tap(): tap() fires TAPPED and a
+                // "whenever ~ becomes tapped" trigger would fire on XMage only.
+                for (JsonElement e : s.getAsJsonArray("tapped_after_untap")) {
+                    permanentRef(g, "p" + i + ":" + e.getAsString()).setTapped(true);
+                }
+            }
             if (s.has("speed") && s.get("speed").getAsInt() > 0) {
                 // CR 702.179: speed starts at 1 and rises one step at a time to 4.
                 pl.initSpeed(g);
