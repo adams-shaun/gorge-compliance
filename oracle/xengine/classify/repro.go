@@ -142,6 +142,9 @@ func Truncate(it oraclegen.Item, f Finding) oraclegen.Item {
 	if len(it.XPos) > n {
 		it.XPos = it.XPos[:n]
 	}
+	if len(it.Payment) > n {
+		it.Payment = it.Payment[:n]
+	}
 	if len(it.XTargetSkips) > n {
 		it.XTargetSkips = it.XTargetSkips[:n]
 	}

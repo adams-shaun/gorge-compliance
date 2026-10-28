@@ -219,3 +219,121 @@ func TestClassifyForgeTrailingMiss(t *testing.T) {
 		})
 	}
 }
+
+// TestClassifyPaymentChoice: only a pool-only difference at (or right after) a
+// cast/activate whose recorded spend was nonempty and whose starting pool held
+// two or more colours is the player's legal colour split. A cast that spent
+// nothing, or whose pool had one colour, fixed no choice, so its pool
+// difference stays a divergence, as does every other difference.
+func TestClassifyPaymentChoice(t *testing.T) {
+	snapPool := func(name, pool string) rules.OracleSnapshot {
+		return rules.OracleSnapshot{Checkpoint: name, Turn: 1, Step: "main1",
+			Players: []rules.OracleSnapPlayer{
+				{Seat: 0, Life: 20, LibraryCount: 30, Pool: pool},
+				{Seat: 1, Life: 20, LibraryCount: 30},
+			}}
+	}
+	castThenPassPool := func(payment []string, prePool string) (lower.Lowered, rules.OracleResult) {
+		it := lower.Lowered{
+			Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+				Steps: []oraclegen.Step{{Op: "cast", Card: "Intrepid Stablemaster"}, {Op: "pass"}},
+			}},
+			StepEntry: []int{0, 1},
+		}
+		if payment != nil {
+			it.Item.Payment = payment
+		}
+		g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+			snapPool("setup", prePool), snapPool("step 0 (cast)", "G"), snapPool("step 1 (pass)", "G"),
+		}}
+		return it, g
+	}
+	castThenPass := func(payment []string) (lower.Lowered, rules.OracleResult) {
+		return castThenPassPool(payment, "RG")
+	}
+	passTwice := func() (lower.Lowered, rules.OracleResult) {
+		it := lower.Lowered{
+			Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+				Steps: []oraclegen.Step{{Op: "pass"}, {Op: "pass"}},
+			}},
+			StepEntry: []int{0, 1},
+		}
+		g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+			snapPool("setup", "RG"), snapPool("step 0 (pass)", "G"), snapPool("step 1 (pass)", "G"),
+		}}
+		return it, g
+	}
+	poolDiff := func(at int) func(*oraclediff.XResult) {
+		return func(x *oraclediff.XResult) { x.Snapshots[at].Players[0].Pool = "R" }
+	}
+	cases := []struct {
+		name   string
+		engine string
+		item   func() (lower.Lowered, rules.OracleResult)
+		edit   func(*oraclediff.XResult)
+		want   string
+	}{
+		{"cast spent nothing: the pool diff stays diverge", "xmage", func() (lower.Lowered, rules.OracleResult) { return castThenPass(nil) }, poolDiff(1), ClassDiverge},
+		{"pass after a cast that spent nothing stays diverge", "xmage", func() (lower.Lowered, rules.OracleResult) { return castThenPass(nil) }, poolDiff(2), ClassDiverge},
+		{"one-colour pool has no colour choice", "forge", func() (lower.Lowered, rules.OracleResult) { return castThenPassPool([]string{"G", ""}, "GG") }, poolDiff(1), ClassDiverge},
+		{"one-colour spend from a two-colour pool is still a choice", "forge", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"G", ""}) }, poolDiff(1), ClassPaymentChoice},
+		{"forge two-colour spend is not consumed", "forge", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) }, poolDiff(1), ClassPaymentChoice},
+		{"forge two-colour spend on the next pass", "forge", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) }, poolDiff(2), ClassPaymentChoice},
+		{"pool diff on the opponent seat stays diverge", "forge", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) }, func(x *oraclediff.XResult) { x.Snapshots[1].Players[1].Pool = "R" }, ClassDiverge},
+		{"payer pool diff of a different size stays diverge", "forge", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) }, func(x *oraclediff.XResult) { x.Snapshots[1].Players[0].Pool = "RR" }, ClassDiverge},
+		{"xmage consumes the recorded payment", "xmage", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) }, poolDiff(1), ClassDiverge},
+		{"pool diff at a step with no cast", "xmage", func() (lower.Lowered, rules.OracleResult) { return passTwice() }, poolDiff(1), ClassDiverge},
+		{"pool diff at setup", "xmage", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) }, poolDiff(0), ClassDiverge},
+		{"pool-only later difference", "forge",
+			func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) },
+			func(x *oraclediff.XResult) {
+				x.Snapshots[1].Players[0].Pool = "R"
+				x.Snapshots[2].Players[0].Life = 19
+			}, ClassDiverge},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			it, g := c.item()
+			f := Classify(it, nil, g, follower(g, c.edit), c.engine)
+			if f.Class != c.want {
+				t.Fatalf("class %q, want %q (finding %+v)", f.Class, c.want, f)
+			}
+		})
+	}
+	t.Run("opponent pool diff of the same size stays diverge", func(t *testing.T) {
+		it, g := castThenPass([]string{"RG", ""})
+		g.Snapshots[1].Players[1].Pool = "G"
+		x := follower(g, func(x *oraclediff.XResult) { x.Snapshots[1].Players[1].Pool = "R" })
+		if f := Classify(it, nil, g, x, "forge"); f.Class != ClassDiverge {
+			t.Fatalf("class %q, want %q (finding %+v)", f.Class, ClassDiverge, f)
+		}
+	})
+	t.Run("same-size split of a different colour is a choice", func(t *testing.T) {
+		it, g := castThenPassPool([]string{"R", ""}, "RGG")
+		g.Snapshots[1].Players[0].Pool = "GG"
+		g.Snapshots[2].Players[0].Pool = "GG"
+		x := follower(g, func(x *oraclediff.XResult) { x.Snapshots[1].Players[0].Pool = "RG" })
+		if f := Classify(it, nil, g, x, "forge"); f.Class != ClassPaymentChoice {
+			t.Fatalf("class %q, want %q (finding %+v)", f.Class, ClassPaymentChoice, f)
+		}
+	})
+	if !Credited(ClassPaymentChoice) {
+		t.Error("payment_choice is a decision_shape family finding and must be credited")
+	}
+}
+
+// TestDistinctColours pins the real-choice gate: one colour, or none, is not a
+// colour choice, however many units the spend has.
+func TestDistinctColours(t *testing.T) {
+	cases := []struct {
+		pool string
+		want int
+	}{
+		{"", 0}, {"R", 1}, {"RR", 1}, {"RG", 2}, {"RRGG", 2}, {"WUBRGC", 6},
+	}
+	for _, c := range cases {
+		if got := distinctColours(c.pool); got != c.want {
+			t.Errorf("distinctColours(%q) = %d, want %d", c.pool, got, c.want)
+		}
+	}
+}

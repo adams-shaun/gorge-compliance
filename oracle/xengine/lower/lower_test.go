@@ -376,3 +376,100 @@ func TestSeatMapRefs(t *testing.T) {
 }
 
 func stateID(n uint32) state.ObjID { return state.ObjID(n) }
+
+// TestLowerCastCarriesPayment: the pool mana a cast actually spent is the
+// cast step's payment, not something each follower may choose again. Gorge
+// logs the spend as negative ManaAdd events, so the tape carries it on the
+// entry (or the entry that finishes the cast, when targets/modes are asked
+// before payment); the lowering must merge the group's spend onto the step.
+func TestLowerCastCarriesPayment(t *testing.T) {
+	const ref = "p0:Intrepid Stablemaster"
+	cases := []struct {
+		name   string
+		group  []game.Entry
+		pay    string
+		reason string
+	}{
+		{
+			name:  "spend on the cast entry",
+			group: []game.Entry{{Kind: "priority", Seat: 0, Picks: []game.Pick{{Kind: "cast", Obj: 1, Ref: ref}}, Spent: "R"}},
+			pay:   "R",
+		},
+		{
+			name: "spend after a target ask",
+			group: []game.Entry{
+				{Kind: "priority", Seat: 0, Picks: []game.Pick{{Kind: "cast", Obj: 1, Ref: ref}}},
+				{Kind: "target", Seat: 0, Spent: "R"},
+			},
+			pay: "R",
+		},
+		{
+			name:  "no spend means no payment",
+			group: []game.Entry{{Kind: "priority", Seat: 0, Picks: []game.Pick{{Kind: "cast", Obj: 1, Ref: ref}}}},
+			pay:   "",
+		},
+		{
+			name:  "two colours keep their units",
+			group: []game.Entry{{Kind: "priority", Seat: 0, Picks: []game.Pick{{Kind: "cast", Obj: 1, Ref: ref}}, Spent: "RG"}},
+			pay:   "RG",
+		},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			steps, _, pay, _, why := lowerGroup(nil, seatMap{}, tc.group)
+			if why != nil {
+				t.Fatalf("lowerGroup: %s", why.reason)
+			}
+			if len(steps) != 1 || steps[0].Op != "cast" {
+				t.Fatalf("steps = %+v, want one cast", steps)
+			}
+			if len(pay) != len(steps) || pay[0] != tc.pay {
+				t.Errorf("cast payment = %v, want [%q] (the mana the log spent)", pay, tc.pay)
+			}
+		})
+	}
+
+	// The synthetic groups above pin the lowering; this pins the other half of
+	// the path, the recorder that reads a real gorge log. A game 0 FDN cast
+	// must carry the negative-ManaAdd spend it actually paid, so reverting the
+	// recorder cannot leave the test green.
+	t.Run("recorded game", func(t *testing.T) {
+		reg, tapes := playFDN(t, 1)
+		tp := tapes[0]
+		l, err := Tape(reg, tp)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if bytes.Contains(l.Item.Raw(), []byte(`"payment"`)) {
+			t.Fatal("payment leaked into the scenario Raw(); gorge's runner rejects an unknown step field")
+		}
+		casts := 0
+		if len(l.Item.Payment) != len(l.Item.Steps) {
+			t.Fatalf("%d payments for %d steps", len(l.Item.Payment), len(l.Item.Steps))
+		}
+		for i, st := range l.Item.Steps {
+			if st.Op != "cast" {
+				continue
+			}
+			casts++
+			end := l.StepEntry[i]
+			if end < 0 || end >= len(tp.Entries) {
+				t.Fatalf("cast %d has no tape entry", i)
+			}
+			start := end
+			for start > 0 && tp.Entries[start].Kind != "priority" {
+				start--
+			}
+			want := ""
+			for k := start; k <= end; k++ {
+				want += tp.Entries[k].Spent
+			}
+			if l.Item.Payment[i] != want {
+				t.Errorf("cast %d %s payment = %q, tape spent %q (entries %d..%d)", i, st.Card, l.Item.Payment[i], want, start, end)
+			}
+		}
+		if casts == 0 {
+			t.Fatal("game 0 lowered no cast: the recorder path is unchecked")
+		}
+	})
+}

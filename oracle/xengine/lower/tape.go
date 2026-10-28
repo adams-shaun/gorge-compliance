@@ -155,7 +155,20 @@ func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 	l.FirstEntry = first
 
 	l.lowerEntries(reg, m, t.Entries, first, t.Outcome.Stall != "")
+	l.compactPayment()
 	return l, nil
+}
+
+// compactPayment leaves Payment nil when no step recorded any spend, so an
+// item with no payment keeps its pre-payment bytes (the field is a parallel
+// array, not a sparse map, and omitempty must omit the all-empty slice).
+func (l *Lowered) compactPayment() {
+	for _, p := range l.Item.Payment {
+		if p != "" {
+			return
+		}
+	}
+	l.Item.Payment = nil
 }
 
 // lowerEntries lowers entries[first:] into l's steps. stalled marks entries
@@ -170,7 +183,7 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 		for j < len(entries) && isAsk(entries[j]) {
 			j++
 		}
-		steps, stepEntry, answers, why := lowerGroup(reg, m, entries[i:j])
+		steps, stepEntry, payments, answers, why := lowerGroup(reg, m, entries[i:j])
 		if why != nil {
 			at := i
 			if owedAt >= 0 {
@@ -199,6 +212,7 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 		l.markShuffles(m, entries[i:j], len(l.Item.Steps)+mainStep)
 		l.Item.Steps = append(l.Item.Steps, steps...)
 		l.StepEntry = append(l.StepEntry, stepEntry...)
+		l.Item.Payment = append(l.Item.Payment, payments...)
 		i = j
 	}
 	if owedAt >= 0 {
@@ -261,6 +275,7 @@ func unsettled(g []game.Entry) *truncation {
 func (l *Lowered) drop(n int) {
 	l.Item.Steps = l.Item.Steps[:n]
 	l.StepEntry = l.StepEntry[:n]
+	l.Item.Payment = l.Item.Payment[:n]
 }
 
 // attach puts a step's asks on it. A cast or activation whose every target
@@ -332,13 +347,15 @@ func answersOf(m seatMap, g []game.Entry) ([]oraclegen.Answer, *truncation) {
 // the decision's own, any before it are explicit mana taps), their entry
 // indices (-1 for the taps; the caller fills the last), and the asks as
 // answers, in tape order.
-func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Step, []int, []oraclegen.Answer, *truncation) {
+func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Step, []int, []string, []oraclegen.Answer, *truncation) {
 	en := g[0]
 	var steps []oraclegen.Step
 	var why *truncation
 	var mana []game.ManaRec
+	var spent string
 	for _, e := range g {
 		mana = append(mana, e.Mana...)
+		spent += e.Spent
 	}
 	switch en.Kind {
 	case "priority":
@@ -349,25 +366,31 @@ func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Ste
 		steps, why = lowerBlock(m, en)
 	}
 	if why != nil {
-		return nil, nil, nil, why
+		return nil, nil, nil, nil, why
 	}
 	if len(steps) == 0 {
-		return nil, nil, nil, unsupported("empty_" + en.Kind)
+		return nil, nil, nil, nil, unsupported("empty_" + en.Kind)
 	}
 	if len(mana) > len(en.Mana) && !paysAfterAsks(en) {
 		// Mana fired while an ask was being answered, for a decision that is
 		// not a cast or activation: nothing to tap it ahead of.
-		return nil, nil, nil, unsupported("ask_mana")
+		return nil, nil, nil, nil, unsupported("ask_mana")
 	}
 	answers, why := answersOf(m, g)
 	if why != nil {
-		return nil, nil, nil, why
+		return nil, nil, nil, nil, why
 	}
 	idx := make([]int, len(steps))
+	pay := make([]string, len(steps))
 	for i := range idx {
 		idx[i] = -1
 	}
-	return steps, idx, answers, nil
+	if paysAfterAsks(en) && spent != "" {
+		// The group's spend belongs to its cast or activation, the last step;
+		// every earlier step is an explicit mana tap that adds pool mana.
+		pay[len(steps)-1] = spent
+	}
+	return steps, idx, pay, answers, nil
 }
 
 // lowerPriority lowers a priority decision. mana is every mana ability fired
