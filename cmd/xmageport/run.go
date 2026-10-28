@@ -111,7 +111,7 @@ func mergePicks(g *group, n int) bool {
 		for j := i; j < i+n; j++ {
 			picks = append(picks, g.answers[j].Pick[0])
 		}
-		g.answers[i] = answer{Kind: "choose", Pick: picks}
+		g.answers[i] = answer{Kind: "any", Pick: picks, Seat: g.answers[i].Seat}
 		g.answers = append(g.answers[:i+1], g.answers[i+n:]...)
 		g.kinds = append(g.kinds[:i+1], g.kinds[i+n:]...)
 		g.kinds[i] = 0

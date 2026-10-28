@@ -37,7 +37,18 @@ func (t *translator) build() (*portScenario, []*group, *refusal) {
 	for p := 0; p < 2; p++ {
 		s := &seat{Life: t.life[p]}
 		var lib []string
+		paid := map[string]int{}
+		if p == 0 {
+			for n, c := range poolPaidLands[t.jc.Name+"#"+t.m.Name] {
+				paid[n] = c
+			}
+		}
 		for _, ac := range t.setup[p] {
+			if ac.zone == "battlefield" && paid[ac.name] > 0 {
+				n := min(ac.count, paid[ac.name])
+				paid[ac.name] -= n
+				ac.count -= n
+			}
 			if dropLands && ac.zone == "battlefield" && basicLands[ac.name] && !t.allNames[ac.name] && !t.needAll {
 				continue
 			}
@@ -362,6 +373,12 @@ func (t *translator) choicePick(s string) string {
 	if r != nil {
 		return s
 	}
+	if t.copied[n] {
+		// a copy effect gave the name a second object: a setup ref would
+		// name the original, a sacrifice or target ask may mean the copy,
+		// and the offered options are labelled by name.
+		return s
+	}
 	r0, r1 := t.anyRefs(0, n), t.anyRefs(1, n)
 	if len(r0) > 0 && len(r1) == 0 {
 		return r0[0]
@@ -390,36 +407,118 @@ func manaFromCost(cost string) (string, *refusal) { return manaFromCostX(cost, -
 
 // manaFromCostX is manaFromCost with X announced as x (x < 0: X refuses).
 // Each X symbol adds x generic mana.
-func manaFromCostX(cost string, x int) (string, *refusal) {
-	var b strings.Builder
+func manaFromCostX(cost string, x int) (string, *refusal) { return manaFromCostLands(cost, x, "") }
+
+// manaFromCostLands is manaFromCostX paid from the colours of the casting
+// seat's untapped basic lands (lands, one colour letter per land, setup
+// order), the way XMage's test player pays: a hybrid symbol takes the first
+// of its colours a land can make, and generic mana is paid with whatever
+// land is left, so an "if {B} was spent" rider sees the Swamps' B. Mana the
+// lands cannot supply stays first-colour / colourless.
+func manaFromCostLands(cost string, x int, lands string) (string, *refusal) {
+	// slots keep the cost's symbol order; a slot is a fixed colour, a hybrid
+	// option set ("WB") or generic mana ("").
+	type slot struct {
+		fixed  byte
+		hybrid string
+	}
+	var slots []slot
+	generic := func(n int) {
+		for ; n > 0; n-- {
+			slots = append(slots, slot{})
+		}
+	}
 	for _, tok := range strings.Fields(cost) {
 		switch {
 		case tok == "X" && x >= 0:
-			b.WriteString(strings.Repeat("C", x))
+			generic(x)
 		case tok == "X" || tok == "Y":
 			return "", refuse("x-cost", "cost %q", cost)
 		case allDigits(tok):
 			n := 0
 			fmt.Sscanf(tok, "%d", &n)
-			b.WriteString(strings.Repeat("C", n))
+			generic(n)
 		case len(tok) == 1 && strings.Contains("WUBRGC", tok):
-			b.WriteString(tok)
+			slots = append(slots, slot{fixed: tok[0]})
 		case tok == "S":
-			b.WriteString("C")
+			generic(1)
 		case reHybrid.MatchString(tok) && strings.HasSuffix(tok, "P"):
 			// XMage's test player pays Phyrexian mana with life; the
 			// runner's pool cannot say which.
 			return "", refuse("phyrexian-mana", "cost %q", cost)
 		case reHybrid.MatchString(tok):
-			b.WriteByte(tok[0]) // hybrid: first colour
+			slots = append(slots, slot{hybrid: strings.ReplaceAll(tok, "/", "")})
 		case len(tok) == 2 && tok[0] == '2' && strings.ContainsAny(tok[1:], "WUBRG"):
-			b.WriteByte(tok[1])
+			slots = append(slots, slot{fixed: tok[1]})
 		case tok == "no" || tok == "cost" || tok == "0":
 		default:
 			// non-mana cost token (T, Q, Sac<...>, SubCounter<...>, ...)
 		}
 	}
-	return b.String(), nil
+	left := []byte(lands)
+	take := func(c byte) bool {
+		for i, l := range left {
+			if l == c {
+				left = append(left[:i], left[i+1:]...)
+				return true
+			}
+		}
+		return false
+	}
+	for _, sl := range slots {
+		if sl.fixed != 0 {
+			take(sl.fixed)
+		}
+	}
+	out := make([]byte, len(slots))
+	for i, sl := range slots {
+		switch {
+		case sl.fixed != 0:
+			out[i] = sl.fixed
+		case sl.hybrid != "":
+			out[i] = sl.hybrid[0]
+			for j := 0; j < len(sl.hybrid); j++ {
+				if take(sl.hybrid[j]) {
+					out[i] = sl.hybrid[j]
+					break
+				}
+			}
+		}
+	}
+	for i, sl := range slots {
+		if sl.fixed != 0 || sl.hybrid != "" {
+			continue
+		}
+		out[i] = 'C'
+		if len(left) > 0 {
+			out[i], left = left[0], left[1:]
+		}
+	}
+	return string(out), nil
+}
+
+// basicLandMana lists one colour letter per untapped-at-setup basic land
+// seat p starts with, in setup order.
+func (t *translator) basicLandMana(p int) string {
+	var b strings.Builder
+	for _, pl := range t.places[p] {
+		if pl.zone != "battlefield" {
+			continue
+		}
+		switch pl.name {
+		case "Plains":
+			b.WriteByte('W')
+		case "Island":
+			b.WriteByte('U')
+		case "Swamp":
+			b.WriteByte('B')
+		case "Mountain":
+			b.WriteByte('R')
+		case "Forest":
+			b.WriteByte('G')
+		}
+	}
+	return b.String()
 }
 
 // reHybrid is a hybrid or Phyrexian mana token ("GW", "W/U", "UP", "G/P").
@@ -545,9 +644,16 @@ func (t *translator) findAbility(p int, text string) (*abilityPick, *refusal) {
 
 func ip(n int) *int { return &n }
 
+// enumSpelling is the printed spelling of the XMage constants whose name
+// drops punctuation.
+var enumSpelling = map[string]string{"URZAS": "Urza's"}
+
 func titleEnum(s string) string {
 	if i := strings.LastIndex(s, "."); i >= 0 {
 		s = s[i+1:]
+	}
+	if v, ok := enumSpelling[s]; ok {
+		return v
 	}
 	parts := strings.Split(strings.ToLower(s), "_")
 	for i, p := range parts {
@@ -578,6 +684,20 @@ func (t *translator) canCopy(p int) bool {
 	return false
 }
 
+// copyOnlyRef returns the ref of seat p's copy of the card named n when p's
+// only setup cards of that name are off the battlefield (a graveyard or hand
+// card its copy effect copied): an assert on the name is about the copy,
+// not the setup card. "" when there is no single such copy.
+func (t *translator) copyOnlyRef(p int, n string) string {
+	if !t.copied[n] || len(t.permRefs(p, n)) > 0 {
+		return ""
+	}
+	if r := t.copyRef[fmt.Sprintf("%d|%s", p, n)]; r != "-" {
+		return r
+	}
+	return ""
+}
+
 // assertRef maps an asserted card name to a ref: tokens by controller, cards
 // by the asserting player's objects first, then the other seat's.
 func (t *translator) assertRef(p int, name string) (string, *refusal) {
@@ -593,6 +713,9 @@ func (t *translator) assertRef(p int, name string) (string, *refusal) {
 	}
 	if p >= 0 {
 		if rs := t.anyRefs(p, n); len(rs) > 0 {
+			if r := t.copyOnlyRef(p, n); r != "" {
+				return r, nil
+			}
 			return rs[0], nil
 		}
 		if t.copied[n] {
@@ -613,6 +736,13 @@ func (t *translator) assertRef(p int, name string) (string, *refusal) {
 		return "", refuse("assert-not-in-setup", "%s", n)
 	}
 	r0, r1 := t.anyRefs(0, n), t.anyRefs(1, n)
+	if len(r0) > 0 != (len(r1) > 0) {
+		for _, p := range []int{0, 1} {
+			if r := t.copyOnlyRef(p, n); r != "" {
+				return r, nil
+			}
+		}
+	}
 	switch {
 	case len(r0) > 0 && len(r1) > 0:
 		return "", refuse("unmappable-assert", "%s on both seats", n)
@@ -951,18 +1081,18 @@ func (em *emitter) sorcerySpeedCast(name string) bool {
 	return true
 }
 
-func (em *emitter) castMana(name string, x int) (string, *refusal) {
+func (em *emitter) castMana(seat int, name string, x int) (string, *refusal) {
 	c, ok := em.t.lookup(name)
 	if !ok {
 		return "", refuse("unknown-card", "%s", name)
 	}
 	for _, f := range c.Faces {
 		if f != nil && sameName(f.Name, name) {
-			return manaFromCostX(f.ManaCost, x)
+			return manaFromCostLands(f.ManaCost, x, em.t.basicLandMana(seat))
 		}
 	}
 	if len(c.Faces) > 0 && c.Faces[0] != nil {
-		return manaFromCostX(c.Faces[0].ManaCost, x)
+		return manaFromCostLands(c.Faces[0].ManaCost, x, em.t.basicLandMana(seat))
 	}
 	return "", nil
 }
@@ -1077,7 +1207,7 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 		}
 		s := &step{Op: a.kind, Seat: a.seat, Card: ref}
 		if a.kind == "cast" {
-			m, r := em.castMana(a.card, takeX(a))
+			m, r := em.castMana(a.seat, a.card, takeX(a))
 			if r != nil {
 				return nil, r
 			}
@@ -1108,7 +1238,7 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 		if r := attach(s, len(s.Targets) > 0); r != nil {
 			return nil, r
 		}
-		if a.kind == "cast" && t.isCopyCard(a.card) {
+		if (a.kind == "cast" || a.kind == "play") && t.isCopyCard(a.card) {
 			if !t.isPermanentCard(a.card) {
 				t.markCopied(a, "") // a spell's copies are tokens
 			} else {
