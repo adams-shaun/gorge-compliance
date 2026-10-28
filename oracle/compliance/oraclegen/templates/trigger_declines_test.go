@@ -9,12 +9,14 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// Fireglass Mentor's "Choose one of them" over the Dig'ed exiled cards: the
-// level-B trigger item must make gorge take the first exiled card AND script
-// XMage a target naming it, because XMage poses the ask as a mandatory
-// TargetCardInExile 1..1 that rejects even the skip token ("Wrong skip
-// command found - it can be used with up to targets, but used in
-// TargetCardInExile, from 1 to 1").
+// Fireglass Mentor's "Choose one of them" over the Dig'ed exiled cards. The
+// corpus marks that ChooseCard Mandatory$ (Card-Forge/forge#12481), so gorge
+// poses it 1..1 and takes the first exiled card by its own default: the
+// level-B trigger item must carry no decline and no empty answer on gorge's
+// side, and must script XMage the same first card -- never a skip, which
+// XMage's mandatory 1..1 TargetCardInExile rejects ("Wrong skip command found
+// - it can be used with up to targets, but used in TargetCardInExile, from 1
+// to 1").
 func TestTriggerExileLookPickForcesFirstCard(t *testing.T) {
 	reg := corpusReg(t)
 	c, ok := reg.Lookup("Fireglass Mentor")
@@ -36,37 +38,47 @@ func TestTriggerExileLookPickForcesFirstCard(t *testing.T) {
 		t.Fatalf("GenerateB: %s", skip.Reason)
 	}
 
-	// Precondition: the trigger fired and its effect chain really offers the
-	// exile look ask gorge declined — the resolve step holds gorge's forced
-	// choose answer of the first exiled card.
-	gorgeAt := -1
+	// gorge's side: the trigger resolve step never declines the look pick or
+	// answers it empty (the pre-Mandatory shape was an explicit choose of the
+	// first exiled card; Mandatory leaves the first-option default to gorge).
+	resolveAt := -1
 	for i, s := range it.Scenario.Steps {
+		if s.Op == "resolve" {
+			resolveAt = i
+		}
 		for _, a := range s.Answers {
-			if a.Kind == "choose" && len(a.Pick) == 1 && a.Pick[0] == "p0:Wastes#27" {
-				gorgeAt = i
+			if a.Kind != "choose" {
+				continue
+			}
+			if len(a.Pick) == 0 {
+				t.Fatalf("step %d: gorge answer %+v declines the Mandatory look pick", i, a)
+			}
+			for _, p := range a.Pick {
+				if p == "" {
+					t.Fatalf("step %d: gorge answer %+v picks an empty label", i, a)
+				}
 			}
 		}
 	}
-	if gorgeAt < 0 {
-		t.Fatalf("gorge answers do not take the first exiled card in any step: %+v", it.Scenario.Steps)
+	if resolveAt < 0 {
+		t.Fatalf("precondition: no resolve step in %+v", it.Scenario.Steps)
 	}
 
-	// XMage's scripted answer: a target naming the looked-at card, never a
-	// skip — the mandatory 1..1 target rejects both skip tokens.
-	var gotTarget, gotSkip bool
-	for _, a := range it.XAnswers[gorgeAt] {
-		if a.Seat == 0 && a.Kind == "target" && a.Value == "Wastes" {
-			gotTarget = true
+	// XMage's scripted answer: the looked-at card by name, never a skip.
+	var gotPick, gotSkip bool
+	for _, a := range it.XAnswers[resolveAt] {
+		if a.Seat == 0 && (a.Kind == "choice" || a.Kind == "target") && a.Value == "Wastes" {
+			gotPick = true
 		}
 		if a.Value == "[target_skip]" || a.Value == "[choice_skip]" {
 			gotSkip = true
 		}
 	}
-	if !gotTarget {
-		t.Fatalf("xmage_answers %+v do not target the exiled card", it.XAnswers[gorgeAt])
+	if !gotPick {
+		t.Fatalf("xmage_answers %+v do not name the exiled card", it.XAnswers[resolveAt])
 	}
 	if gotSkip {
-		t.Fatalf("xmage_answers %+v still carry a skip", it.XAnswers[gorgeAt])
+		t.Fatalf("xmage_answers %+v still carry a skip", it.XAnswers[resolveAt])
 	}
 }
 
