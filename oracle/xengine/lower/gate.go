@@ -15,16 +15,18 @@ import (
 
 // Refusal reasons that are not a bare field:<Type>.<Name>.
 const (
-	reasonToken        = "token_on_battlefield"
-	reasonContinuous   = "field:Engine.continuous"
-	reasonPhaseTrig    = "trigger:upkeep_or_draw"
-	reasonByName       = "setup_by_name:"       // + tapped | back_face | counters
-	reasonCountersLow  = "counters_below_entry" // fewer counters than the card enters with
-	reasonZone         = "zone:"                // + the zone name
-	reasonCard         = "card:no_front_face"
-	reasonActiveTap    = "tapped_active_permanent" // the setup drive's untap step untaps it
-	reasonTapElsewhere = "tapped_name_elsewhere"   // setup taps every placement of the name
-	reasonAura         = "aura_on_battlefield"     // an Aura placed unattached never enters
+	reasonToken       = "token_on_battlefield"
+	reasonContinuous  = "field:Engine.continuous"
+	reasonPhaseTrig   = "trigger:upkeep_or_draw"
+	reasonByName      = "setup_by_name:"       // + back_face | counters
+	reasonCountersLow = "counters_below_entry" // fewer counters than the card enters with
+	reasonZone        = "zone:"                // + the zone name
+	reasonCard        = "card:no_front_face"
+	reasonAura        = "aura_on_battlefield" // an Aura placed unattached never enters
+	// reasonOpeningHand is a hand card that can act before turn 1 (CR 103.6a,
+	// Leyline and the other MayEffectFromOpeningHand cards): the runner's setup
+	// drive answers the opening-hand ask, so the card would leave the hand.
+	reasonOpeningHand = "opening_hand_effect"
 	// reasonSelfExile is a card exiled by its own effect (warp). Its recast
 	// permission from exile is derived from the event log (warpRecastAvailable),
 	// so no gate field shows it and setup's plain exile placement cannot grant it.
@@ -80,6 +82,13 @@ func capture(e *rules.Engine, entry int) *cut {
 		}
 		if o.Zone == state.ZBattlefield && slices.Contains(e.Derived(o.ID).Types, "Aura") {
 			w.why[reasonAura] = true
+		}
+		if o.Zone == state.ZHand {
+			if f := o.Face(); f != nil {
+				if _, ok := f.KeywordParam("MayEffectFromOpeningHand"); ok {
+					w.why[reasonOpeningHand] = true
+				}
+			}
 		}
 	}
 	for _, ce := range e.RegisteredContinuous() {
@@ -361,7 +370,7 @@ func (w *walker) place(c *cut) {
 		}
 		// The runner binds refs in setup order: battlefield, hand, graveyard,
 		// exile, then the library top.
-		tapped, back, counters := map[string]map[bool]bool{}, map[string]map[bool]bool{}, map[string]map[string]int32{}
+		back, counters := map[string]map[bool]bool{}, map[string]map[string]int32{}
 		mixed := map[string]bool{}
 		netOf := map[string]string{}
 		for _, o := range bf[s] {
@@ -370,10 +379,13 @@ func (w *walker) place(c *cut) {
 			if o.ChosenColor != "" {
 				c.Answers[s] = append(c.Answers[s], oraclegen.Answer{Kind: "choose", Pick: []string{o.ChosenColor}})
 			}
-			if tapped[n] == nil {
-				tapped[n], back[n] = map[bool]bool{}, map[bool]bool{}
+			if o.Tapped {
+				// One object, after the untap step: the seat-relative ref.
+				seat.TappedAfterUntap = append(seat.TappedAfterUntap, strings.TrimPrefix(c.Refs[o.ID], fmt.Sprintf("p%d:", s)))
 			}
-			tapped[n][o.Tapped] = true
+			if back[n] == nil {
+				back[n] = map[bool]bool{}
+			}
 			if o.FaceIdx > 1 {
 				w.why["field:Object.FaceIdx"] = true
 			}
@@ -402,9 +414,6 @@ func (w *walker) place(c *cut) {
 			}
 		}
 		for _, n := range seat.Battlefield {
-			if len(tapped[n]) > 1 {
-				mixed["tapped"] = true
-			}
 			if len(back[n]) > 1 {
 				mixed["back_face"] = true
 			}
@@ -416,27 +425,7 @@ func (w *walker) place(c *cut) {
 		seat.Graveyard = names(g.Zone(state.ZGraveyard, p))
 		seat.Exile = names(g.Zone(state.ZExile, p))
 		seat.LibraryTop = names(g.Zone(state.ZLibrary, p))
-		elsewhere := map[string]bool{}
-		for _, id := range append(append(append([]state.ObjID{}, g.Zone(state.ZHand, p)...), g.Zone(state.ZGraveyard, p)...), g.Zone(state.ZExile, p)...) {
-			// A land cannot enter the battlefield on the opponent's turn but
-			// by an effect the digest would show; any other card might (flash).
-			if o := g.Obj(id); o != nil && o.Ability == nil && o.Face() != nil && !o.Face().IsLand() {
-				elsewhere[frontName(o)] = true
-			}
-		}
 		for _, n := range dedupe(seat.Battlefield) {
-			if tapped[n][true] && !tapped[n][false] {
-				// The runner taps every placement of the name, in any zone, and a
-				// tapped card keeps it when it later enters the battlefield; a
-				// card in the library is not in play before the window ends.
-				switch {
-				case s == int(g.Active):
-					w.why[reasonActiveTap] = true
-				case elsewhere[n]:
-					w.why[reasonTapElsewhere] = true
-				}
-				seat.Tapped = append(seat.Tapped, n)
-			}
 			if back[n][true] && !back[n][false] {
 				seat.BackFace = append(seat.BackFace, n)
 			}

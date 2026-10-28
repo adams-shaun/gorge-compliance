@@ -352,6 +352,36 @@ func plantCard(t *testing.T, reg *cards.Registry, e *rules.Engine, name string) 
 
 func hasReason(c *cut, r string) bool { return slices.Contains(c.Reasons, r) }
 
+// A hand card that can act before turn 1 (Leyline, Chancellor, Gemstone
+// Caverns) is refused: the runner's setup drive would answer its opening-hand ask.
+func TestGateRefusesOpeningHandCard(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	if hasReason(capture(e, at), "opening_hand_effect") {
+		t.Fatal("unplanted cut already refused as opening_hand_effect")
+	}
+	var o *state.Object
+	for p := range e.G.Players {
+		if ids := e.G.Zone(state.ZHand, state.PlayerID(p)); len(ids) > 0 {
+			o = e.G.Obj(ids[0])
+			break
+		}
+	}
+	if o == nil {
+		t.Fatal("both hands are empty")
+	}
+	for _, name := range []string{"Leyline of Hope", "Chancellor of the Tangle", "Gemstone Caverns"} {
+		c, ok := reg.Lookup(name)
+		if !ok {
+			t.Fatalf("%s is not in the corpus", name)
+		}
+		o.SetCard(c, 0)
+		if !hasReason(capture(e, at), "opening_hand_effect") {
+			t.Errorf("%s in hand: reasons %v, want opening_hand_effect", name, capture(e, at).Reasons)
+		}
+	}
+}
+
 func TestGateDeadTurnHistory(t *testing.T) {
 	reg, pairs := setPairs(t, "DFT", 1)
 	base, at := expressibleCutIn(t, reg, "DFT", pairs[0], 100)
@@ -750,4 +780,139 @@ func offBattlefieldEntry(g *state.Game) bool {
 		}
 	}
 	return false
+}
+
+// seatBattlefield is the seat's placeable battlefield in the order the gate
+// binds refs: timestamp, then id.
+func seatBattlefield(g *state.Game, seat int) []*state.Object {
+	var bf []*state.Object
+	for i := range g.Objs {
+		o := &g.Objs[i]
+		if o.Zone == state.ZBattlefield && o.Ability == nil && int(o.Controller) == seat {
+			bf = append(bf, o)
+		}
+	}
+	sort.SliceStable(bf, func(a, b int) bool {
+		if bf[a].Timestamp != bf[b].Timestamp {
+			return bf[a].Timestamp < bf[b].Timestamp
+		}
+		return bf[a].ID < bf[b].ID
+	})
+	return bf
+}
+
+// refOf is o's seat-relative ref among bf: its front name, "#k" from the
+// second placement of the name on.
+func refOf(bf []*state.Object, o *state.Object) string {
+	n, k := frontName(o), 0
+	for _, x := range bf {
+		if frontName(x) == n {
+			k++
+		}
+		if x == o {
+			break
+		}
+	}
+	if k > 1 {
+		return fmt.Sprintf("%s#%d", n, k)
+	}
+	return n
+}
+
+func TestGateTappedAfterUntap(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	active := int(e.G.Active)
+	bf := seatBattlefield(e.G, active)
+	for _, o := range bf {
+		o.Tapped = false
+	}
+	var plain []*state.Object
+	for _, o := range bf {
+		if o.Face() != nil && o.AttachedTo == 0 && len(o.Counters) == 0 && !o.IsToken && o.FaceIdx == 0 {
+			plain = append(plain, o)
+		}
+	}
+	if len(plain) < 2 {
+		t.Fatalf("active seat has %d plain plain, need 2", len(plain))
+	}
+
+	// (a) One tapped permanent: no refusal, its ref is the only entry.
+	first := plain[0]
+	first.Tapped = true
+	c := capture(e, at)
+	if len(c.Reasons) != 0 {
+		t.Fatalf("a tapped active-seat permanent is refused: %v", c.Reasons)
+	}
+	if got, want := c.Setup[active].TappedAfterUntap, []string{refOf(bf, first)}; !reflect.DeepEqual(got, want) {
+		t.Fatalf("tapped_after_untap = %v, want %v", got, want)
+	}
+
+	// (b) Two placements of one name, only the later one tapped.
+	first.Tapped = false
+	a, b := plain[0], plain[1]
+	b.SetCard(a.Card, a.FaceIdx)
+	bf = seatBattlefield(e.G, active)
+	later := a
+	for _, o := range bf {
+		if o == a || o == b {
+			later = o
+		}
+	}
+	later.Tapped = true
+	c = capture(e, at)
+	if len(c.Reasons) != 0 {
+		t.Fatalf("one tapped of two same-name permanents is refused: %v", c.Reasons)
+	}
+	want := []string{frontName(a) + "#2"}
+	if got := c.Setup[active].TappedAfterUntap; !reflect.DeepEqual(got, want) {
+		t.Fatalf("tapped_after_untap = %v, want %v", got, want)
+	}
+
+	// (c) The by-name list is never emitted.
+	for s := range c.Setup {
+		if len(c.Setup[s].Tapped) != 0 {
+			t.Errorf("seat %d: Setup.Tapped = %v, want empty", s, c.Setup[s].Tapped)
+		}
+	}
+}
+
+// A permanent the active player tapped before the cut is lowered with
+// tapped_after_untap, so the runner's untap step does not undo it.
+func TestWindowsTappedAfterUntap(t *testing.T) {
+	reg, pairs := setPairs(t, "DSK", 12)
+	byStatus := map[string]int{}
+	var tappedWin, activeTapped, okActive int
+	for g, p := range pairs {
+		ls, _, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: "DSK"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, l := range ls {
+			var any bool
+			for _, s := range l.Item.Setup {
+				any = any || len(s.TappedAfterUntap)+len(s.Tapped) > 0
+			}
+			if !any {
+				continue
+			}
+			tappedWin++
+			act := len(l.Item.Setup["p0"].TappedAfterUntap)+len(l.Item.Setup["p0"].Tapped) > 0
+			if act {
+				activeTapped++
+			}
+			c := CheckWindow(reg, l)
+			byStatus[c.Status]++
+			if c.Status == StatusOK && act {
+				okActive++
+			}
+			if c.Status != StatusOK {
+				t.Errorf("%s: %s at step %d, %s: gorge %s, tape %s %v", l.Item.ID, c.Status, c.Step, c.Field, c.Gorge, c.Tape, c.Fails)
+			}
+		}
+	}
+	t.Logf("windows with a tapped permanent: %d (active seat %d, lower_ok active %d); by status %v", tappedWin, activeTapped, okActive, byStatus)
+	if okActive == 0 {
+		t.Fatal("no window with an active-seat tapped permanent lowered to lower_ok")
+	}
 }
