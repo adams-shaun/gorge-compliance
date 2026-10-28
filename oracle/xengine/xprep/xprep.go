@@ -14,6 +14,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
+	"regexp"
 	"sort"
 	"strings"
 
@@ -41,10 +42,21 @@ const (
 	ReasonRetarget = "xmage_retarget_diverges"
 	// ReasonNoResult: there is no gorge result to script the answers from.
 	ReasonNoResult = "xmage_no_result"
+	// ReasonWindowOnly: a tape item; XMage replays windows only (design O4:
+	// the driver's turn model cannot follow a tape, so tapes go to Forge and
+	// the kernel).
+	ReasonWindowOnly = "xmage_window_only"
 )
 
 // Reasons is every reason Prepare refuses with.
-var Reasons = []string{ReasonSpelling, ReasonModeCollision, ReasonAbilityUnknown, ReasonRetarget, ReasonNoResult}
+var Reasons = []string{ReasonSpelling, ReasonModeCollision, ReasonAbilityUnknown, ReasonRetarget, ReasonNoResult, ReasonWindowOnly}
+
+// tapeID matches the id of a tape item: "...:tape" or a prefix "...:tape:t<N>".
+var tapeID = regexp.MustCompile(`:tape(:t\d+)?$`)
+
+// IsTape reports whether id names a tape item (a whole tape or one of its
+// turn prefixes) rather than a window.
+func IsTape(id string) bool { return tapeID.MatchString(id) }
 
 // Refusal is an item that was not prepared, and why.
 type Refusal struct {

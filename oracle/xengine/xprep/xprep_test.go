@@ -269,3 +269,17 @@ func TestStackLost(t *testing.T) {
 		}
 	}
 }
+
+func TestIsTape(t *testing.T) {
+	for id, want := range map[string]bool{
+		"xe:FDN:0:1:tape":    true,
+		"xe:FDN:0:1:tape:t2": true,
+		"xe:FDN:0:1:w3":      false,
+		"xe:FDN:0:1:tape2x":  false,
+		"xe:FDN:0:1:tape:tx": false,
+	} {
+		if got := IsTape(id); got != want {
+			t.Errorf("IsTape(%q) = %v, want %v", id, got, want)
+		}
+	}
+}
