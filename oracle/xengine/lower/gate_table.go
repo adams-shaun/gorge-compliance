@@ -70,7 +70,7 @@ var gameTable = map[string]entry{
 	"PrevTurnSpells":      isIgnored("meaningful only when DayNight is set, which is refused"),
 	"ControlCombatOnly":   isRefused("a controlled player (CR 720) is not placeable"),
 	"EndStepsThisTurn":    isDerived("zero until the end step begins; recounted"),
-	"ResolvedThisTurn":    isRefused("per-ability resolution tally of this turn (Count$ResolvedThisTurn); setup cannot restate it"),
+	"ResolvedThisTurn":    isRefused("per-ability resolution tally of this turn (Count$ResolvedThisTurn); setup cannot restate it; live only when some card in the game mentions ResolvedThisTurn"),
 	"Monarch":             isIgnored("meaningful only when HasMonarch, which is refused"),
 	"HasMonarch":          isRefused("monarch is not placeable"),
 	"TurnStartMonarch":    isIgnored("meaningful only when HasTurnStartMonarch, which is refused"),
@@ -88,7 +88,7 @@ var gameTable = map[string]entry{
 	"HypotheticalCards":   isIgnored("search-world card table; nil in a real match"),
 	"Delayed":             isRefused("delayed triggers (CR 603.7) are not placeable"),
 	"DelayedNext":         isIgnored("delayed-trigger id allocator"),
-	"Entered":             isRefused("zone entries of this turn (ThisTurnEntered*); only the draw step's library->hand entries are exempt"),
+	"Entered":             isRefused("zone entries of this turn (ThisTurnEntered*); exempt: the draw step's library->hand entries and card-less objects (abilities), which no reader counts"),
 }
 
 // playerTable is state.Player.
@@ -252,7 +252,7 @@ var objectTable = map[string]entry{
 	"ManaColorSpent":               isIgnored("cast-time record, read at entry (Adamant, Sunburst)"),
 	"CompleatedLifePaid":           isIgnored("cast-time record; its loyalty effect is already in Counters"),
 	"NotedNumber":                  isRefused("noted state a later ability reads"),
-	"RuntimeSVars":                 isRefused("runtime SVars carry rules state"),
+	"RuntimeSVars":                 isRefused("runtime SVars carry rules state; live only when some card in the game names one of the keys"),
 	"Notes":                        isRefused("free-form notes carry rules state"),
 	"ChosenName":                   isRefused("a choice made as it entered"),
 	"ChosenType":                   isRefused("a choice made as it entered"),
