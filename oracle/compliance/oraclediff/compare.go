@@ -501,10 +501,19 @@ func symDiff(a, b []string) (onlyA, onlyB []string) {
 	return onlyA, onlyB
 }
 
+// sourcelessTriggerNames are Forge's and XMage's names for the CR 702.179
+// speed trigger, which has no source object; gorge reports it with an empty
+// source. stackKeys renders all three the same.
+var sourcelessTriggerNames = map[string]bool{"Start Your Engines!": true, "Speed": true}
+
 func stackKeys(st []rules.OracleSnapStack) string {
 	parts := make([]string, 0, len(st))
 	for _, s := range st {
-		parts = append(parts, fmt.Sprintf("%s:%s@p%d", s.Kind, RefName(s.Source), s.Controller))
+		src := RefName(s.Source)
+		if s.Kind == "ability" && sourcelessTriggerNames[src] {
+			src = ""
+		}
+		parts = append(parts, fmt.Sprintf("%s:%s@p%d", s.Kind, src, s.Controller))
 	}
 	return "[" + strings.Join(parts, ", ") + "]"
 }
