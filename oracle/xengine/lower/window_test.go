@@ -352,6 +352,36 @@ func plantCard(t *testing.T, reg *cards.Registry, e *rules.Engine, name string) 
 
 func hasReason(c *cut, r string) bool { return slices.Contains(c.Reasons, r) }
 
+// A hand card that can act before turn 1 (Leyline, Chancellor, Gemstone
+// Caverns) is refused: the runner's setup drive would answer its opening-hand ask.
+func TestGateRefusesOpeningHandCard(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	if hasReason(capture(e, at), "opening_hand_effect") {
+		t.Fatal("unplanted cut already refused as opening_hand_effect")
+	}
+	var o *state.Object
+	for p := range e.G.Players {
+		if ids := e.G.Zone(state.ZHand, state.PlayerID(p)); len(ids) > 0 {
+			o = e.G.Obj(ids[0])
+			break
+		}
+	}
+	if o == nil {
+		t.Fatal("both hands are empty")
+	}
+	for _, name := range []string{"Leyline of Hope", "Chancellor of the Tangle", "Gemstone Caverns"} {
+		c, ok := reg.Lookup(name)
+		if !ok {
+			t.Fatalf("%s is not in the corpus", name)
+		}
+		o.SetCard(c, 0)
+		if !hasReason(capture(e, at), "opening_hand_effect") {
+			t.Errorf("%s in hand: reasons %v, want opening_hand_effect", name, capture(e, at).Reasons)
+		}
+	}
+}
+
 func TestGateDeadTurnHistory(t *testing.T) {
 	reg, pairs := setPairs(t, "DFT", 1)
 	base, at := expressibleCutIn(t, reg, "DFT", pairs[0], 100)
@@ -852,7 +882,7 @@ func TestGateTappedAfterUntap(t *testing.T) {
 func TestWindowsTappedAfterUntap(t *testing.T) {
 	reg, pairs := setPairs(t, "DSK", 12)
 	byStatus := map[string]int{}
-	var tappedWin, activeTapped, okActive, leyline int
+	var tappedWin, activeTapped, okActive int
 	for g, p := range pairs {
 		ls, _, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: "DSK"})
 		if err != nil {
@@ -864,12 +894,6 @@ func TestWindowsTappedAfterUntap(t *testing.T) {
 				any = any || len(s.TappedAfterUntap)+len(s.Tapped) > 0
 			}
 			if !any {
-				continue
-			}
-			// A Leyline in hand starts on the battlefield in the runner's
-			// turn 1 and not in the recorded cut: a gap of its own.
-			if leylineInHand(l) {
-				leyline++
 				continue
 			}
 			tappedWin++
@@ -887,19 +911,8 @@ func TestWindowsTappedAfterUntap(t *testing.T) {
 			}
 		}
 	}
-	t.Logf("windows with a tapped permanent: %d (active seat %d, lower_ok active %d); by status %v; skipped %d with a Leyline in hand", tappedWin, activeTapped, okActive, byStatus, leyline)
+	t.Logf("windows with a tapped permanent: %d (active seat %d, lower_ok active %d); by status %v", tappedWin, activeTapped, okActive, byStatus)
 	if okActive == 0 {
 		t.Fatal("no window with an active-seat tapped permanent lowered to lower_ok")
 	}
-}
-
-func leylineInHand(l Lowered) bool {
-	for _, s := range l.Item.Setup {
-		for _, n := range s.Hand {
-			if strings.HasPrefix(n, "Leyline of ") {
-				return true
-			}
-		}
-	}
-	return false
 }
