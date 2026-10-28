@@ -261,6 +261,7 @@ var objectTable = map[string]entry{
 	"RiotChoice":                   isIgnored("entry election; its counter is already in Counters"),
 	"UntapChoice":                  isRefused("an untap election"),
 	"UnleashChoice":                isIgnored("entry election; its counter is already in Counters"),
+	"ReadAheadChapter":             isIgnored("entry election (CR 702.155b); its lore counters are already in Counters"),
 	"GiftPromisedTo":               isIgnored("cast-time record, read at entry"),
 	"Protector":                    isIgnored("meaningful only with ProtectorValid, which is refused"),
 	"ProtectorValid":               isRefused("battle protector"),
