@@ -279,6 +279,8 @@ func TestClassifyPaymentChoice(t *testing.T) {
 		{"one-colour spend from a two-colour pool is still a choice", "forge", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"G", ""}) }, poolDiff(1), ClassPaymentChoice},
 		{"forge two-colour spend is not consumed", "forge", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) }, poolDiff(1), ClassPaymentChoice},
 		{"forge two-colour spend on the next pass", "forge", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) }, poolDiff(2), ClassPaymentChoice},
+		{"pool diff on the opponent seat stays diverge", "forge", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) }, func(x *oraclediff.XResult) { x.Snapshots[1].Players[1].Pool = "R" }, ClassDiverge},
+		{"payer pool diff of a different size stays diverge", "forge", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) }, func(x *oraclediff.XResult) { x.Snapshots[1].Players[0].Pool = "RR" }, ClassDiverge},
 		{"xmage consumes the recorded payment", "xmage", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) }, poolDiff(1), ClassDiverge},
 		{"pool diff at a step with no cast", "xmage", func() (lower.Lowered, rules.OracleResult) { return passTwice() }, poolDiff(1), ClassDiverge},
 		{"pool diff at setup", "xmage", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"RG", ""}) }, poolDiff(0), ClassDiverge},
@@ -298,6 +300,23 @@ func TestClassifyPaymentChoice(t *testing.T) {
 			}
 		})
 	}
+	t.Run("opponent pool diff of the same size stays diverge", func(t *testing.T) {
+		it, g := castThenPass([]string{"RG", ""})
+		g.Snapshots[1].Players[1].Pool = "G"
+		x := follower(g, func(x *oraclediff.XResult) { x.Snapshots[1].Players[1].Pool = "R" })
+		if f := Classify(it, nil, g, x, "forge"); f.Class != ClassDiverge {
+			t.Fatalf("class %q, want %q (finding %+v)", f.Class, ClassDiverge, f)
+		}
+	})
+	t.Run("same-size split of a different colour is a choice", func(t *testing.T) {
+		it, g := castThenPassPool([]string{"R", ""}, "RGG")
+		g.Snapshots[1].Players[0].Pool = "GG"
+		g.Snapshots[2].Players[0].Pool = "GG"
+		x := follower(g, func(x *oraclediff.XResult) { x.Snapshots[1].Players[0].Pool = "RG" })
+		if f := Classify(it, nil, g, x, "forge"); f.Class != ClassPaymentChoice {
+			t.Fatalf("class %q, want %q (finding %+v)", f.Class, ClassPaymentChoice, f)
+		}
+	})
 	if !Credited(ClassPaymentChoice) {
 		t.Error("payment_choice is a decision_shape family finding and must be credited")
 	}
