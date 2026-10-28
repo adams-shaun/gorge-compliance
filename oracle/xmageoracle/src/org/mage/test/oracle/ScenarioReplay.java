@@ -345,7 +345,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (payment != null) {
                 String next = nextPaymentColour(unpaid);
                 if (next != null) {
-                    addChoice(next);
+                    // TestPlayer.playMana consumes choices.get(0). This step's
+                    // own answers (a resolution Yes/No, [choice_skip], a target
+                    // pick) are already queued there and belong after the
+                    // payment, so put the payment answer IN FRONT of them.
+                    // Appending made playMana eat the step's answer and assert
+                    // "Can't use choice in play mana: ...".
+                    getChoices().add(0, next);
                 } else {
                     fallBackToAutoPayment();
                 }
