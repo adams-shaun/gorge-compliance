@@ -22,7 +22,10 @@ const (
 	reasonCountersLow = "counters_below_entry" // fewer counters than the card enters with
 	reasonZone        = "zone:"                // + the zone name
 	reasonCard        = "card:no_front_face"
-	reasonAura        = "aura_on_battlefield" // an Aura placed unattached never enters
+	// reasonAuraUnattached is a battlefield Aura attached to no permanent (it
+	// can only be so in transit) and to no player: setup places an Aura
+	// attached (CR 303.4f), so there is no bearer to name.
+	reasonAuraUnattached = "aura_unattached"
 	// reasonOpeningHand is a hand card that can act before turn 1 (CR 103.6a,
 	// Leyline and the other MayEffectFromOpeningHand cards): the runner's setup
 	// drive answers the opening-hand ask, so the card would leave the hand.
@@ -58,7 +61,7 @@ type cut struct {
 func capture(e *rules.Engine, entry int) *cut {
 	g := e.G
 	c := &cut{Entry: entry, Turn: g.Turn, Active: int(g.Active), Refs: map[state.ObjID]string{}, MaxID: state.ObjID(len(g.Objs))}
-	w := &walker{g: g, why: map[string]bool{}}
+	w := &walker{g: g, why: map[string]bool{}, auras: map[state.ObjID]bool{}}
 	w.struct_(reflect.ValueOf(g).Elem(), "Game", gameTable, nil)
 	for i := range g.Players {
 		w.seat = i
@@ -84,7 +87,10 @@ func capture(e *rules.Engine, entry int) *cut {
 			w.why[reasonPhaseTrig] = true
 		}
 		if o.Zone == state.ZBattlefield && slices.Contains(e.Derived(o.ID).Types, "Aura") {
-			w.why[reasonAura] = true
+			w.auras[o.ID] = true
+			if o.AttachedTo == 0 && !o.HasAttachedPlayer {
+				w.why[reasonAuraUnattached] = true
+			}
 		}
 		if o.Zone == state.ZHand {
 			if f := o.Face(); f != nil {
@@ -153,6 +159,9 @@ type walker struct {
 	entryRead, entryKnown bool
 	// stems is the reverse of Game.Tokens, built on first use (tokenScript).
 	stems map[*cards.Card]string
+	// auras is the battlefield Auras of the capture: place lists these in the
+	// runner's attached field instead of an attach prelude step.
+	auras map[state.ObjID]bool
 }
 
 // turnEntryReaders are the script words through which gorge reads Game.Entered
@@ -458,6 +467,18 @@ func (w *walker) place(c *cut) {
 			b := g.Obj(o.AttachedTo)
 			if b == nil || b.Zone != state.ZBattlefield || c.Refs[b.ID] == "" {
 				w.why["field:Object.AttachedTo"] = true
+				continue
+			}
+			if w.auras[o.ID] {
+				// An Aura waits for no prelude: the XMage side would put it
+				// into the graveyard at the first priority (CR 704.5m), and
+				// the runner would leave it in the library with no bearer
+				// placed yet (CR 303.4g). The runner places it attached,
+				// last, from the seat-relative ref.
+				c.Setup[s].Attached = append(c.Setup[s].Attached, oraclegen.SetupAttach{
+					Card: strings.TrimPrefix(c.Refs[o.ID], fmt.Sprintf("p%d:", s)),
+					To:   c.Refs[b.ID],
+				})
 				continue
 			}
 			c.Attach = append(c.Attach, oraclegen.Step{Op: "attach", Seat: s, Card: c.Refs[o.ID], AttachedTo: c.Refs[b.ID]})

@@ -135,7 +135,13 @@ func (c *cut) item(m seatMap, id, name string) oraclegen.Item {
 		Setup: map[string]oraclegen.Seat{},
 	}
 	for s := range c.Setup {
-		sc.Setup["p"+strconv.Itoa(m.seat(s))] = c.Setup[s]
+		seat := c.Setup[s]
+		// Card is seat-relative; To is a full ref, so it follows the swap.
+		seat.Attached = nil
+		for _, a := range c.Setup[s].Attached {
+			seat.Attached = append(seat.Attached, oraclegen.SetupAttach{Card: a.Card, To: m.ref(a.To)})
+		}
+		sc.Setup["p"+strconv.Itoa(m.seat(s))] = seat
 	}
 	// The runner places seat p0's cards first, so p0's asks come first.
 	for k := 0; k < len(c.Answers); k++ {

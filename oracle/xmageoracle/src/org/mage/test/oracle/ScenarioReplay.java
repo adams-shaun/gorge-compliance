@@ -208,6 +208,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 @Override
                 public void start(UUID choosingPlayerId) {
                     placeSetupTokens(this);
+                    placeSetupAttached(this);
                     super.start(choosingPlayerId);
                 }
             };
@@ -220,6 +221,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             @Override
             public void start(UUID choosingPlayerId) {
                 placeSetupTokens(this);
+                placeSetupAttached(this);
                 super.start(choosingPlayerId);
             }
         };
@@ -1572,6 +1574,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
         frontCounts.clear();
         setupBattlefield.clear();
         setupTokensPlaced = false;
+        setupAttachedPlaced = false;
+        setupPermanentIds.clear();
         setupNames.clear();
         placedNames.clear();
         abilityAliasSeq = 0;
@@ -1773,6 +1777,77 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return permanent;
     }
 
+    /** One seat's setup "attached" entries, in list order. */
+    static List<JsonObject> setupAttachedEntries(JsonObject seatSetup) {
+        List<JsonObject> out = new ArrayList<>();
+        if (seatSetup.has("attached")) {
+            for (JsonElement e : seatSetup.getAsJsonArray("attached")) {
+                out.add(e.getAsJsonObject());
+            }
+        }
+        return out;
+    }
+
+    /** Links one Aura to its bearer silently, as gorge's setup places an Aura
+     * attached (CR 303.4f): PermanentImpl.attachTo fires no event for an
+     * unattached Aura, and the bearer's attachment list is extended directly.
+     * Permanent.addAttachment would fire ATTACH and ATTACHED, so a "whenever
+     * an Aura becomes attached" trigger (Bramble Elemental) would fire on
+     * XMage only. Both ends of the link are what checkStateBasedActions reads
+     * to keep an Aura (the Aura's attachedTo and the bearer's attachments), so
+     * the Aura is not put into the graveyard at the first priority. */
+    static void linkSetupAttached(Game game, Permanent aura, Permanent bearer) {
+        aura.attachTo(bearer.getId(), null, game);
+        if (!bearer.getAttachments().contains(aura.getId())) {
+            bearer.getAttachments().add(aura.getId());
+        }
+    }
+
+    /** The pre-start hook, after placeSetupTokens: links every seat's setup
+     * "attached" Auras, in seat then list order (gorge's runner places them
+     * last, after every seat and its tokens). card is a seat-relative ref of
+     * the seat's battlefield; to is a full ref of a battlefield card or a setup
+     * token. A ref that names nothing fails the scenario. */
+    private void placeSetupAttached(Game game) {
+        if (setupAttachedPlaced) {
+            return;
+        }
+        setupAttachedPlaced = true;
+        JsonObject setup = sc0.has("setup") ? sc0.getAsJsonObject("setup") : new JsonObject();
+        boolean linked = false;
+        for (int i = 0; i < seats; i++) {
+            if (!setup.has("p" + i)) {
+                continue;
+            }
+            for (JsonObject a : setupAttachedEntries(setup.getAsJsonObject("p" + i))) {
+                String cardRef = "p" + i + ":" + a.get("card").getAsString();
+                String toRef = a.get("to").getAsString();
+                linkSetupAttached(game, setupPermanent(game, cardRef), setupPermanent(game, toRef));
+                linked = true;
+            }
+        }
+        if (linked) {
+            game.applyEffects();
+        }
+    }
+
+    /** The battlefield permanent a setup ref names: a token through the live
+     * tokens (tokenChoice, as every other token ref), a card through the id
+     * its placement recorded. */
+    private Permanent setupPermanent(Game game, String ref) {
+        Permanent found;
+        if (ref.contains(":token:")) {
+            found = tokenChoice(ref, seat(refSeat(ref)).getId(), game.getBattlefield().getAllPermanents());
+        } else {
+            UUID id = setupPermanentIds.get(ref);
+            found = id == null ? null : game.getPermanent(id);
+        }
+        if (found == null) {
+            throw new IllegalArgumentException("setup attached names " + ref + ", which is not on the battlefield");
+        }
+        return found;
+    }
+
     private int add(JsonObject s, String key, Zone zone, TestPlayer p) {
         List<String> ns = names(s, key);
         // "tapped" names battlefield cards that start tapped (gorge's runner
@@ -1820,6 +1895,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     currentGame.setEnterWithCounters(placedCard.getId(), enter);
                     enterWithCountersApplied.add(placedCard.getId());
                 }
+                List<PutToBattlefieldInfo> seeded = getBattlefieldCards(p);
+                setupPermanentIds.put(ref, CardUtil.getDefaultCardSideForBattlefield(
+                        currentGame, seeded.get(seeded.size() - 1).getCard()).getId());
                 // Record the seeded permanents by (controller id, current XMage
                 // name), including staged back faces, so the entry-history
                 // normalizer ages exactly these, never a genuine turn-1 entry.
@@ -2469,6 +2547,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** True once placeSetupTokens ran for this scenario's game (start() runs once;
      * build() resets it). */
     private boolean setupTokensPlaced;
+    // Whether the pre-start hook has linked the setup "attached" Auras.
+    private boolean setupAttachedPlaced;
+    // The permanent id of each battlefield placement build() seeded, by its
+    // scenario ref ("p0:Grizzly Bears", "p0:Grizzly Bears#2"): the endpoints
+    // placeSetupAttached links.
+    private final Map<String, UUID> setupPermanentIds = new HashMap<>();
     private final Map<UUID, String> setupNames = new HashMap<>();
     // The name each setup battlefield placement was dealt under, by the id its
     // permanent will carry. Read only when XMage's live name is empty (see
