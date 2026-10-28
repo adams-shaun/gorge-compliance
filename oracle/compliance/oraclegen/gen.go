@@ -1349,11 +1349,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			if d.Resume == "changezone_dest_alt" {
 				// gorge's DestinationAlternative ask (Dina's Guidance's "put it
 				// into your hand or graveyard"). XMage asks it as a boolean
-				// chooseUse("Hand", "Graveyard"), not a labelled choice, so a
-				// scripted "hand" is not an answer to it. Left unscripted, as
-				// it was before gorge posed the ask: gorge's default is the
-				// primary destination, the same zone XMage's default takes.
-				continue
+				// chooseUse("Hand", "Graveyard"), so a zone label is not an
+				// answer (it is left over, unconsumed): script yes for gorge's
+				// primary destination (option 0, also its default) and no for
+				// the alternative.
+				yes := len(d.PickIdx) == 0 || d.PickIdx[0] == 0
+				as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[yes]})
+				break
 			}
 			if routing.divideOwned[i] {
 				// The division ask's shares were emitted with its target
