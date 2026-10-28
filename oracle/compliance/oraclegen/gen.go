@@ -436,12 +436,16 @@ func searchPicks(sc Scenario, ds []rules.OracleDecision, look bool) (Scenario, b
 	changed := false
 	for i, d := range ds {
 		if d.Step < 0 || d.Step >= len(out.Steps) || d.Options == 0 ||
-			d.Kind != "choose_n" || len(d.Picks) != 0 {
+			d.Kind != "choose_n" {
+			continue
+		}
+		bare := len(d.Picks) == 0
+		if !bare && !(look && defaultedMandatoryPick(d, out.Steps[d.Step])) {
 			continue
 		}
 		pick := ""
 		switch {
-		case d.Resume == "search" && d.First != "":
+		case d.Resume == "search" && d.First != "" && bare:
 			pick = d.First
 		case look && declinedLookPick(d) && !lookedAck(ds, i):
 			// A declined two-option choose-one from an exile/library look
@@ -482,11 +486,31 @@ func searchPicks(sc Scenario, ds []rules.OracleDecision, look bool) (Scenario, b
 	return out, changed
 }
 
+// defaultedMandatoryPick is a 1..1 chooser (a ChooseCard marked Mandatory$)
+// that no scripted answer settled: gorge records its default first option
+// as an empty-label pick instead of leaving the pick list empty, so the
+// declined-pick arms treat it as undecided and script the same first
+// card explicitly.
+func defaultedMandatoryPick(d rules.OracleDecision, st Step) bool {
+	if d.Min != 1 || len(d.Picks) != 1 || d.Picks[0] != "" {
+		return false
+	}
+	for _, a := range st.Answers {
+		if a.Kind == d.GorgeKind {
+			return false
+		}
+	}
+	return true
+}
+
 // declinedLookPick is the declined shape of the exile/library look chooser:
 // "choose one of them" over two looked-at objects, up to one, nothing
 // picked, option 0's label empty (the options are the looked-at objects).
+// A ChooseCard the script marks Mandatory$ poses it 1..1 instead of 0..1 and
+// leaves the pick to gorge's default (first option); the shape is otherwise
+// the same, and the forced pick makes that default explicit.
 func declinedLookPick(d rules.OracleDecision) bool {
-	return d.Resume == "choice" && d.Options == 2 && d.Min == 0 && d.Max == 1 &&
+	return d.Resume == "choice" && d.Options == 2 && d.Min <= 1 && d.Max == 1 &&
 		len(d.OptionRefs) == 2 && d.First == ""
 }
 
@@ -494,7 +518,7 @@ func declinedLookPick(d rules.OracleDecision) bool {
 // "choose a card" over exactly one looked-at eligible object, up to one,
 // nothing picked, no option label (the option is the object).
 func declinedLookedOnePick(d rules.OracleDecision) bool {
-	return d.Resume == "choice" && d.Options == 1 && d.Min == 0 && d.Max == 1 &&
+	return d.Resume == "choice" && d.Options == 1 && d.Min <= 1 && d.Max == 1 &&
 		len(d.OptionRefs) == 1 && d.First == ""
 }
 
@@ -524,7 +548,7 @@ func RetargetForcedLookPicks(xa [][]XAnswer, ds []rules.OracleDecision) [][]XAns
 		if d.Step < 0 || d.Step >= len(xa) || len(d.Picks) != 1 || d.Picks[0] != "" ||
 			len(d.PickKinds) != 1 || d.PickKinds[0] != "card" ||
 			d.Kind != "choose_n" || d.Resume != "choice" || d.Options != 2 ||
-			d.Min != 0 || d.Max != 1 || len(d.OptionRefs) != 2 || d.First != "" ||
+			d.Min > 1 || d.Max != 1 || len(d.OptionRefs) != 2 || d.First != "" ||
 			len(d.PickRefs) != 1 {
 			continue
 		}
