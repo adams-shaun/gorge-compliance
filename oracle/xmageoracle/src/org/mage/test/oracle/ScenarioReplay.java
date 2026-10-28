@@ -341,9 +341,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String next = nextPaymentColour(unpaid);
                 if (next != null) {
                     addChoice(next);
+                } else {
+                    fallBackToAutoPayment();
                 }
             }
             return super.playMana(ability, unpaid, promptText, game);
+        }
+
+        /** gorge's recorded multiset cannot pay the rest of this ask: XMage's
+         * cost is larger (a cost-reduction difference or an additional cost
+         * paid in the same step), a restricted unit is not in its pool, or the
+         * units are exhausted. Auto-payment is the old behaviour and keeps the
+         * ordinary snapshot divergence instead of TestPlayer failing the whole
+         * harness. */
+        void fallBackToAutoPayment() {
+            payment = null;
+            getManaPool().setAutoPayment(true);
         }
 
         private String nextPaymentColour(ManaCost unpaid) {

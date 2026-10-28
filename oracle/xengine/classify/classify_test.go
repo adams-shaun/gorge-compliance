@@ -219,3 +219,78 @@ func TestClassifyForgeTrailingMiss(t *testing.T) {
 		})
 	}
 }
+
+// TestClassifyPaymentChoice: only a pool-only difference at (or right after) a
+// cast/activate whose payment the follower did not have to take is the
+// player's legal colour split. Every other pool difference still diverges.
+func TestClassifyPaymentChoice(t *testing.T) {
+	snapPool := func(name, pool string) rules.OracleSnapshot {
+		return rules.OracleSnapshot{Checkpoint: name, Turn: 1, Step: "main1",
+			Players: []rules.OracleSnapPlayer{
+				{Seat: 0, Life: 20, LibraryCount: 30, Pool: pool},
+				{Seat: 1, Life: 20, LibraryCount: 30},
+			}}
+	}
+	castThenPass := func(payment []string) (lower.Lowered, rules.OracleResult) {
+		it := lower.Lowered{
+			Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+				Steps: []oraclegen.Step{{Op: "cast", Card: "Intrepid Stablemaster"}, {Op: "pass"}},
+			}},
+			StepEntry: []int{0, 1},
+		}
+		if payment != nil {
+			it.Item.Payment = payment
+		}
+		g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+			snapPool("setup", "RG"), snapPool("step 0 (cast)", "G"), snapPool("step 1 (pass)", "G"),
+		}}
+		return it, g
+	}
+	passTwice := func() (lower.Lowered, rules.OracleResult) {
+		it := lower.Lowered{
+			Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+				Steps: []oraclegen.Step{{Op: "pass"}, {Op: "pass"}},
+			}},
+			StepEntry: []int{0, 1},
+		}
+		g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+			snapPool("setup", "RG"), snapPool("step 0 (pass)", "G"), snapPool("step 1 (pass)", "G"),
+		}}
+		return it, g
+	}
+	poolDiff := func(at int) func(*oraclediff.XResult) {
+		return func(x *oraclediff.XResult) { x.Snapshots[at].Players[0].Pool = "R" }
+	}
+	cases := []struct {
+		name   string
+		engine string
+		item   func() (lower.Lowered, rules.OracleResult)
+		edit   func(*oraclediff.XResult)
+		want   string
+	}{
+		{"xmage unspecified payment at the cast", "xmage", func() (lower.Lowered, rules.OracleResult) { return castThenPass(nil) }, poolDiff(1), ClassPaymentChoice},
+		{"xmage unspecified payment on the next pass", "xmage", func() (lower.Lowered, rules.OracleResult) { return castThenPass(nil) }, poolDiff(2), ClassPaymentChoice},
+		{"forge recorded payment is not consumed", "forge", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"R", ""}) }, poolDiff(1), ClassPaymentChoice},
+		{"xmage consumes the recorded payment", "xmage", func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"R", ""}) }, poolDiff(1), ClassDiverge},
+		{"pool diff at a step with no cast", "xmage", func() (lower.Lowered, rules.OracleResult) { return passTwice() }, poolDiff(1), ClassDiverge},
+		{"pool diff at setup", "xmage", func() (lower.Lowered, rules.OracleResult) { return castThenPass(nil) }, poolDiff(0), ClassDiverge},
+		{"pool-only later difference", "forge",
+			func() (lower.Lowered, rules.OracleResult) { return castThenPass([]string{"R", ""}) },
+			func(x *oraclediff.XResult) {
+				x.Snapshots[1].Players[0].Pool = "R"
+				x.Snapshots[2].Players[0].Life = 19
+			}, ClassDiverge},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			it, g := c.item()
+			f := Classify(it, nil, g, follower(g, c.edit), c.engine)
+			if f.Class != c.want {
+				t.Fatalf("class %q, want %q (finding %+v)", f.Class, c.want, f)
+			}
+		})
+	}
+	if !Credited(ClassPaymentChoice) {
+		t.Error("payment_choice is a decision_shape family finding and must be credited")
+	}
+}

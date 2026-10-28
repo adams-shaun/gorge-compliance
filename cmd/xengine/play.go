@@ -200,6 +200,9 @@ func tapePrefix(l lower.Lowered, t *game.Tape, n int) (p lower.Lowered, tf *game
 	p.Item.ID = l.Item.ID + ":t" + strconv.Itoa(n)
 	p.Item.Steps = l.Item.Steps[:k:k]
 	p.StepEntry = l.StepEntry[:k:k]
+	if len(p.Item.Payment) > k {
+		p.Item.Payment = p.Item.Payment[:k:k]
+	}
 	p.Truncated, p.TruncatedAt = reasonTurnPrefix, b
 	if p.HasRNG && p.RNGStep >= k {
 		p.HasRNG, p.RNGStep = false, 0

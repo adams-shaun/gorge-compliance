@@ -48,8 +48,9 @@ func Label(p oraclediff.Pattern) string {
 // Forge's) is adjudicated: at least one engine diverged, and the other either
 // agreed, diverged, or did not compare at all (harness, xmage_lacks, which
 // ThreeWay turns into the GF|- / G|F|- patterns or F harness). Anything else
-// (rng, projection_gap, decision_shape, lower_gap on either side) keeps its
-// class: the difference there is not yet a statement about an engine.
+// (rng, projection_gap, decision_shape, payment_choice, lower_gap on either
+// side) keeps its class: the difference there is not yet a statement about an
+// engine.
 func Eligible(xClass, fClass string) bool {
 	if xClass != classify.ClassDiverge && fClass != classify.ClassDiverge {
 		return false

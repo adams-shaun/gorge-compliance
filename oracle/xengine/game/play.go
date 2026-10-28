@@ -188,9 +188,19 @@ func (r *recorder) flush(e *rules.Engine) {
 			r.flips = append(r.flips, Flip{Seat: int(flipper), Win: win})
 		}
 	}
+	seat := -1
+	if n := len(r.t.Entries); n > 0 {
+		seat = r.t.Entries[n-1].Seat
+	}
 	for ; r.spendScan < len(evs); r.spendScan++ {
 		ev := evs[r.spendScan]
 		if ev.Kind != events.ManaAdd || ev.Amount >= 0 {
+			continue
+		}
+		// A cost paid by another seat inside the same commit (a ward or an
+		// unless-cost) is not the decision's spend. The entry's seat is the
+		// payer of its own cast/activation.
+		if seat >= 0 && int(ev.Player) != seat {
 			continue
 		}
 		// The engine emits the payment as negative ManaAdd events, one per

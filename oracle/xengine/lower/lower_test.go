@@ -333,7 +333,7 @@ func TestTruncationReasons(t *testing.T) {
 	}
 	// An object with no ref is never given an invented one.
 	noRef := game.Entry{Kind: "priority", Picks: []game.Pick{{Kind: "play_land"}}}
-	if _, why := lowerPriority(nil, m, noRef, nil, ""); why == nil || why.reason != ReasonUnbindableRef {
+	if _, why := lowerPriority(nil, m, noRef, nil); why == nil || why.reason != ReasonUnbindableRef {
 		t.Errorf("land with no ref: %v", why)
 	}
 	// An ask after a pass is only answerable when the pass left a resolution

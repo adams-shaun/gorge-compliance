@@ -359,7 +359,7 @@ func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Ste
 	}
 	switch en.Kind {
 	case "priority":
-		steps, why = lowerPriority(reg, m, en, mana, spent)
+		steps, why = lowerPriority(reg, m, en, mana)
 	case "attackers":
 		steps, why = lowerAttack(m, en)
 	case "blockers":
@@ -402,7 +402,7 @@ func paysAfterAsks(en game.Entry) bool {
 	return en.Kind == "priority" && len(en.Picks) == 1 && (en.Picks[0].Kind == "cast" || en.Picks[0].Kind == "ability")
 }
 
-func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.ManaRec, spent string) ([]oraclegen.Step, *truncation) {
+func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.ManaRec) ([]oraclegen.Step, *truncation) {
 	if len(en.Picks) != 1 {
 		return nil, unsupported("priority_picks")
 	}

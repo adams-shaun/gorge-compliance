@@ -24,6 +24,11 @@ const (
 	ClassXMageLacks    = "xmage_lacks"
 	ClassHarness       = "harness"
 	ClassDecisionShape = "decision_shape"
+	// ClassPaymentChoice is the decision_shape family's mana-payment case:
+	// the only difference is which legal pool units paid a cost neither
+	// engine fixed, so it is the player's choice (CR 601.2h), not a rules
+	// divergence. It never covers any other pool difference.
+	ClassPaymentChoice = "payment_choice"
 	ClassRNG           = "rng"
 	ClassProjectionGap = "projection_gap"
 	ClassDiverge       = "diverge"
@@ -33,7 +38,7 @@ const (
 // Classes lists every class, in report order.
 var Classes = []string{
 	ClassAgree, ClassDiverge, ClassRNG, ClassProjectionGap, ClassDecisionShape,
-	ClassHarness, ClassXMageLacks, ClassLowerGap,
+	ClassPaymentChoice, ClassHarness, ClassXMageLacks, ClassLowerGap,
 }
 
 // Finding is the classified outcome for one item and one follower engine.
@@ -88,6 +93,9 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 		f.Msg = strings.TrimSpace("strict_miss: " + x.StrictMiss + " leftover: " + x.Leftover)
 	case v.Status == oraclediff.Agree:
 		f.Class = ClassAgree
+	case paymentChoice(item, g, x, v, f.Step, engine):
+		f.Class = ClassPaymentChoice
+		f.Msg = "pool split after a cast/activate whose payment was not fixed"
 	case rngField(v.Field) && rngDrawn(item, t, f.Step):
 		f.Class = ClassRNG
 	case projectionGap(v):
@@ -97,6 +105,55 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	}
 	return f
 }
+
+// paymentChoice reports a pool-only difference at or right after a cast or
+// activate whose lowered payment the follower did not have to spend. The
+// difference is then which legal pool units paid (CR 601.2h), not a rules
+// divergence. paymentStep is false for an engine that begins manual payment
+// with the recorded multiset (XMage), unless the tape recorded none: then the
+// follower's auto-payment, like gorge's, is a choice of its own. Forge's
+// out-of-tree driver still documents Item.Payment without consuming it, so a
+// Forge pool split after any cast stays a payment choice until that driver
+// lands (cmd/oraclediff/forge.go). Every other differing field makes this
+// false, so a pool difference that comes with any other change still diverges.
+func paymentChoice(item lower.Lowered, g rules.OracleResult, x oraclediff.XResult, v oraclediff.Verdict, step int, engine string) bool {
+	if v.Status != oraclediff.Diverge || !strings.HasSuffix(v.Field, ".pool") || step < 0 {
+		return false
+	}
+	if !paymentStep(item, step, engine) && !paymentStep(item, step-1, engine) {
+		return false
+	}
+	ignore := make([]string, 0, len(item.Item.Ignore)+1)
+	ignore = append(ignore, item.Item.Ignore...)
+	ignore = append(ignore, "pool")
+	return oraclediff.CompareOpts(g, nil, x, item.Item.Compare, ignore...).Status == oraclediff.Agree
+}
+
+// paymentStep reports whether lowered step i is a cast or activate whose
+// payment the follower can choose or has to take as recorded. A step with no
+// recorded payment is unspecified; engine consumesPayment reports whether that
+// driver applies the recorded multiset.
+func paymentStep(item lower.Lowered, i int, engine string) bool {
+	if i < 0 || i >= len(item.Item.Steps) {
+		return false
+	}
+	switch item.Item.Steps[i].Op {
+	case "cast", "activate":
+	default:
+		return false
+	}
+	pay := ""
+	if i < len(item.Item.Payment) {
+		pay = item.Item.Payment[i]
+	}
+	return pay == "" || !consumesPayment(engine)
+}
+
+// consumesPayment is the driver capability, not a class of difference: XMage
+// queues the recorded multiset as its manual payment (ScenarioReplay.beginPayment).
+// The Forge bridge is outside this repository and does not read Item.Payment
+// yet, so only XMage consumes one.
+func consumesPayment(engine string) bool { return engine == "xmage" }
 
 // missStep matches the step of the only two strict misses Forge poses past the
 // item's last step: "Missing cleanup discard answer at step 12: ..." and
@@ -130,7 +187,8 @@ func trailingMiss(x oraclediff.XResult, steps int, engine string) bool {
 // the engine (agree or any divergence), not a gap in a driver or the lowering.
 func Credited(class string) bool {
 	switch class {
-	case ClassAgree, ClassDiverge, ClassRNG, ClassProjectionGap, ClassDecisionShape:
+	case ClassAgree, ClassDiverge, ClassRNG, ClassProjectionGap, ClassDecisionShape,
+		ClassPaymentChoice:
 		return true
 	}
 	return false
