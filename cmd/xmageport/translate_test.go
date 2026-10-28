@@ -100,3 +100,26 @@ func TestSubstIdentsSkipsStringsAndFields(t *testing.T) {
 		t.Fatalf("got %q want %q", got, want)
 	}
 }
+
+func TestManaFromCostLandsPaysFromLandColours(t *testing.T) {
+	cases := []struct {
+		cost, lands, want string
+	}{
+		{"1 WB", "WB", "BW"},      // hybrid takes the Plains' W, generic the Swamp's B
+		{"1 WB", "BB", "BB"},      // no W land: hybrid falls to B
+		{"2 B B", "GGBB", "GGBB"}, // coloured symbols reserve their lands first
+		{"3 G", "", "CCCG"},       // no lands: colourless generic, as manaFromCostX
+		{"1 WB", "", "CW"},        // no lands: first hybrid colour
+		{"X R", "RR", "RR"},       // X counts as generic (x=1 below)
+	}
+	for _, c := range cases {
+		x := -1
+		if c.cost == "X R" {
+			x = 1
+		}
+		got, r := manaFromCostLands(c.cost, x, c.lands)
+		if r != nil || got != c.want {
+			t.Errorf("manaFromCostLands(%q, %d, %q) = %q, %v; want %q", c.cost, x, c.lands, got, r, c.want)
+		}
+	}
+}
