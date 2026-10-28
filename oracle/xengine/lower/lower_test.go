@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"sort"
 	"strings"
 	"testing"
@@ -472,4 +473,69 @@ func TestLowerCastCarriesPayment(t *testing.T) {
 			t.Fatal("game 0 lowered no cast: the recorder path is unchecked")
 		}
 	})
+}
+
+// TestLowerDropsRefusedCast: a cast or activation the live game left the whole
+// state unchanged on did not happen, so it is not a replayable step. A refused
+// Spree cast is the measured shape (xe:OTJ:0:2:w3): the card stays in hand,
+// the pool is unchanged and the stack is empty afterwards.
+func TestLowerDropsRefusedCast(t *testing.T) {
+	d := game.Digest{Turn: 1, Step: "main1", Active: 0, Priority: 0}
+	prio := func(p game.Pick, d game.Digest) game.Entry {
+		return game.Entry{Kind: "priority", Seat: 0, Turn: 1, Step: "main1",
+			Picks: []game.Pick{p}, Digest: d}
+	}
+	cast := prio(game.Pick{Kind: "cast", Ref: "p0:Phantom Interference"}, d)
+	pass := prio(game.Pick{Kind: "pass"}, d)
+
+	ops := func(es ...game.Entry) []string {
+		var l Lowered
+		l.lowerEntries(nil, seatMap{}, es, 0, false)
+		var out []string
+		for _, s := range l.Item.Steps {
+			out = append(out, s.Op)
+		}
+		return out
+	}
+	if got := ops(cast, pass); !reflect.DeepEqual(got, []string{"pass"}) {
+		t.Fatalf("no-op cast: steps %v, want [pass]", got)
+	}
+	// A group whose digest differs is a real action and must stay.
+	d2 := d
+	d2.Priority = 1
+	if got := ops(prio(game.Pick{Kind: "cast", Ref: "p0:Phantom Interference"}, d2), pass); !reflect.DeepEqual(got, []string{"cast", "pass"}) {
+		t.Fatalf("changed cast: steps %v, want [cast pass]", got)
+	}
+	// The same contract for a non-mana activation.
+	act := prio(game.Pick{Kind: "ability", Ability: 0, Ref: "p0:Phantom Interference"}, d)
+	if got := ops(act, pass); !reflect.DeepEqual(got, []string{"pass"}) {
+		t.Fatalf("no-op activate: steps %v, want [pass]", got)
+	}
+	// Only cast/activate are dropped: a no-op land drop and a pass stay.
+	land := prio(game.Pick{Kind: "play_land", Ref: "p0:Island"}, d)
+	if got := ops(land, pass); !reflect.DeepEqual(got, []string{"play", "pass"}) {
+		t.Fatalf("no-op play: steps %v, want [play pass]", got)
+	}
+	// The last group of a whole tape has no after-state: keep it rather than
+	// inventing one.
+	if got := ops(cast); !reflect.DeepEqual(got, []string{"cast"}) {
+		t.Fatalf("last group, no after-state: steps %v, want [cast]", got)
+	}
+	// The last group of a window does have one: the next turn's first entry,
+	// which windowTape keeps at the index after the window's own entries.
+	window := func(against game.Digest, es ...game.Entry) []string {
+		l := Lowered{Against: &game.Tape{Entries: []game.Entry{{Digest: d}, {Digest: against}}}}
+		l.lowerEntries(nil, seatMap{}, es, 0, false)
+		var out []string
+		for _, s := range l.Item.Steps {
+			out = append(out, s.Op)
+		}
+		return out
+	}
+	if got := window(d, cast); len(got) != 0 {
+		t.Fatalf("window no-op cast: steps %v, want none", got)
+	}
+	if got := window(d2, cast); !reflect.DeepEqual(got, []string{"cast"}) {
+		t.Fatalf("window changed cast: steps %v, want [cast]", got)
+	}
 }
