@@ -141,7 +141,7 @@ var objectTable = map[string]entry{
 	"Owner":                        isPlaced("the seat whose list the card is in"),
 	"Controller":                   isPlaced("must equal Owner: setup lists a battlefield card under its owner"),
 	"Zone":                         isPlaced("the zone list the card is in"),
-	"Tapped":                       isPlaced("setup tapped (by name)"),
+	"Tapped":                       isPlaced("setup tapped_after_untap (per placement, after the untap step)"),
 	"SummonSick":                   isDerived("setup settles every placed permanent; an object that entered this turn is refused"),
 	"FaceDown":                     isRefused("a face-down permanent is not placeable"),
 	"PhasedOut":                    isRefused("a phased-out permanent is not placeable"),

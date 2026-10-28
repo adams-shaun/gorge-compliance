@@ -751,3 +751,155 @@ func offBattlefieldEntry(g *state.Game) bool {
 	}
 	return false
 }
+
+// seatBattlefield is the seat's placeable battlefield in the order the gate
+// binds refs: timestamp, then id.
+func seatBattlefield(g *state.Game, seat int) []*state.Object {
+	var bf []*state.Object
+	for i := range g.Objs {
+		o := &g.Objs[i]
+		if o.Zone == state.ZBattlefield && o.Ability == nil && int(o.Controller) == seat {
+			bf = append(bf, o)
+		}
+	}
+	sort.SliceStable(bf, func(a, b int) bool {
+		if bf[a].Timestamp != bf[b].Timestamp {
+			return bf[a].Timestamp < bf[b].Timestamp
+		}
+		return bf[a].ID < bf[b].ID
+	})
+	return bf
+}
+
+// refOf is o's seat-relative ref among bf: its front name, "#k" from the
+// second placement of the name on.
+func refOf(bf []*state.Object, o *state.Object) string {
+	n, k := frontName(o), 0
+	for _, x := range bf {
+		if frontName(x) == n {
+			k++
+		}
+		if x == o {
+			break
+		}
+	}
+	if k > 1 {
+		return fmt.Sprintf("%s#%d", n, k)
+	}
+	return n
+}
+
+func TestGateTappedAfterUntap(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	active := int(e.G.Active)
+	bf := seatBattlefield(e.G, active)
+	for _, o := range bf {
+		o.Tapped = false
+	}
+	var plain []*state.Object
+	for _, o := range bf {
+		if o.Face() != nil && o.AttachedTo == 0 && len(o.Counters) == 0 && !o.IsToken && o.FaceIdx == 0 {
+			plain = append(plain, o)
+		}
+	}
+	if len(plain) < 2 {
+		t.Fatalf("active seat has %d plain plain, need 2", len(plain))
+	}
+
+	// (a) One tapped permanent: no refusal, its ref is the only entry.
+	first := plain[0]
+	first.Tapped = true
+	c := capture(e, at)
+	if len(c.Reasons) != 0 {
+		t.Fatalf("a tapped active-seat permanent is refused: %v", c.Reasons)
+	}
+	if got, want := c.Setup[active].TappedAfterUntap, []string{refOf(bf, first)}; !reflect.DeepEqual(got, want) {
+		t.Fatalf("tapped_after_untap = %v, want %v", got, want)
+	}
+
+	// (b) Two placements of one name, only the later one tapped.
+	first.Tapped = false
+	a, b := plain[0], plain[1]
+	b.SetCard(a.Card, a.FaceIdx)
+	bf = seatBattlefield(e.G, active)
+	later := a
+	for _, o := range bf {
+		if o == a || o == b {
+			later = o
+		}
+	}
+	later.Tapped = true
+	c = capture(e, at)
+	if len(c.Reasons) != 0 {
+		t.Fatalf("one tapped of two same-name permanents is refused: %v", c.Reasons)
+	}
+	want := []string{frontName(a) + "#2"}
+	if got := c.Setup[active].TappedAfterUntap; !reflect.DeepEqual(got, want) {
+		t.Fatalf("tapped_after_untap = %v, want %v", got, want)
+	}
+
+	// (c) The by-name list is never emitted.
+	for s := range c.Setup {
+		if len(c.Setup[s].Tapped) != 0 {
+			t.Errorf("seat %d: Setup.Tapped = %v, want empty", s, c.Setup[s].Tapped)
+		}
+	}
+}
+
+// A permanent the active player tapped before the cut is lowered with
+// tapped_after_untap, so the runner's untap step does not undo it.
+func TestWindowsTappedAfterUntap(t *testing.T) {
+	reg, pairs := setPairs(t, "DSK", 12)
+	byStatus := map[string]int{}
+	var tappedWin, activeTapped, okActive, leyline int
+	for g, p := range pairs {
+		ls, _, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: "DSK"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, l := range ls {
+			var any bool
+			for _, s := range l.Item.Setup {
+				any = any || len(s.TappedAfterUntap)+len(s.Tapped) > 0
+			}
+			if !any {
+				continue
+			}
+			// A Leyline in hand starts on the battlefield in the runner's
+			// turn 1 and not in the recorded cut: a gap of its own.
+			if leylineInHand(l) {
+				leyline++
+				continue
+			}
+			tappedWin++
+			act := len(l.Item.Setup["p0"].TappedAfterUntap)+len(l.Item.Setup["p0"].Tapped) > 0
+			if act {
+				activeTapped++
+			}
+			c := CheckWindow(reg, l)
+			byStatus[c.Status]++
+			if c.Status == StatusOK && act {
+				okActive++
+			}
+			if c.Status != StatusOK {
+				t.Errorf("%s: %s at step %d, %s: gorge %s, tape %s %v", l.Item.ID, c.Status, c.Step, c.Field, c.Gorge, c.Tape, c.Fails)
+			}
+		}
+	}
+	t.Logf("windows with a tapped permanent: %d (active seat %d, lower_ok active %d); by status %v; skipped %d with a Leyline in hand", tappedWin, activeTapped, okActive, byStatus, leyline)
+	if okActive == 0 {
+		t.Fatal("no window with an active-seat tapped permanent lowered to lower_ok")
+	}
+}
+
+func leylineInHand(l Lowered) bool {
+	for _, s := range l.Item.Setup {
+		for _, n := range s.Hand {
+			if strings.HasPrefix(n, "Leyline of ") {
+				return true
+			}
+		}
+	}
+	return false
+}

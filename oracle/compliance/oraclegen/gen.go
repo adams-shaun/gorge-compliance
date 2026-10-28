@@ -32,6 +32,15 @@ const xValue = 2
 type Seat struct {
 	Battlefield []string `json:"battlefield,omitempty"`
 	Tapped      []string `json:"tapped,omitempty"`
+	// TappedAfterUntap taps single battlefield permanents the moment the
+	// setup drive enters the scenario turn's first main phase, after every
+	// untap step (CR 502.3): the board at the cut when the recorded player
+	// tapped them earlier in the turn. Each entry is a seat-relative
+	// battlefield ref (the part of a runner ref after "pN:"): "Forest" is
+	// the first placement of the name, "Grizzly Bears#2" the second. Unlike
+	// Tapped it names ONE object, only on the battlefield. The tap stands in
+	// for an unspecified earlier action, so it queues no trigger.
+	TappedAfterUntap []string `json:"tapped_after_untap,omitempty"`
 	// BackFace names battlefield cards setup places on their back face (face
 	// index 1). It is emitted as a FlipFace event, so the placement replays
 	// from the log like every other setup op. A name that is not also in
