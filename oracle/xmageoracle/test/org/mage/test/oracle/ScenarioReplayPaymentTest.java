@@ -186,6 +186,28 @@ public final class ScenarioReplayPaymentTest {
         System.out.println("PASS a recorded-payment cast through the runCode hooks follows gorge's split");
     }
 
+    private static void testQueuedStepChoiceSurvivesPayment() throws Exception {
+        // The step queues its own answers before the cast runs: a resolution
+        // Yes/No, a skip marker, or an object pick. TestPlayer.playMana reads
+        // choices.get(0), so manual payment must put its own colour answer in
+        // front of that queue instead of appending it, or playMana consumes
+        // (and Assert.fails on) the step's answer.
+        for (String queued : new String[] {"Yes", TestPlayer.CHOICE_SKIP, "Bird"}) {
+            Game game = game();
+            ScriptedPayment sp = newPlayer(game);
+            TestPlayer p = sp.player;
+            addMana(p.getManaPool(), 1, 2);
+            p.addChoice(queued);
+            sp.begin("RG");
+            equal(true, pay(p, game, "{1}{G}"));
+            equal("G", ScenarioReplay.pool(p.getManaPool()));
+            equal(1, p.getChoices().size());
+            equal(queued, p.getChoices().get(0));
+            sp.end();
+        }
+        System.out.println("PASS a queued step answer survives manual payment");
+    }
+
     private static void testExhaustedMultisetFallsBack() throws Exception {
         // Pool R+G, gorge recorded one green. The first ask consumes it, so a
         // later ask in the same cost finds the multiset empty (payment is "",
@@ -228,6 +250,7 @@ public final class ScenarioReplayPaymentTest {
         testRecordedSplit();
         testGorgeSplit();
         testRunCodeRecordedPayment();
+        testQueuedStepChoiceSurvivesPayment();
         testExhaustedMultisetFallsBack();
         testUnusableMultisetFallsBack();
     }
