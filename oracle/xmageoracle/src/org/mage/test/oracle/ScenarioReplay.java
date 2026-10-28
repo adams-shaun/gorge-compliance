@@ -1366,7 +1366,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 int beforeB = playerB.getActions().size();
                 queuePassCommands(i);
                 String payment = paymentAt(sc, i);
-                step(st, op, i, payment);
+                stepPayment = payment;
+                step(st, op, i);
                 String cp = "step " + i + " (" + op + ")";
                 final PhaseStep reportAs = checkpointStepAs;
                 checkpointStepAs = null;
@@ -3886,7 +3887,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 (info, pl, g) -> ((ScriptedChoicePlayer) pl).beginPayment(payment));
     }
 
-    private void step(JsonObject st, String op, int stepIdx, String payment) {
+    /** The step being replayed's recorded payment ("" when none); set by the
+     * replay loop so step keeps its (st, op, stepIdx) shape. */
+    private String stepPayment = "";
+
+    private void step(JsonObject st, String op, int stepIdx) {
+        String payment = stepPayment;
         int seatIdx = st.has("seat") ? st.get("seat").getAsInt() : 0;
         TestPlayer p = seat(seatIdx);
         switch (op) {
