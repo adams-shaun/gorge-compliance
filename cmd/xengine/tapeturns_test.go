@@ -78,6 +78,20 @@ func TestTapeTurnsPrefixes(t *testing.T) {
 					break
 				}
 			}
+			// Payment is parallel to the steps and is cut with them; a nil
+			// slice means the whole item recorded no spend.
+			if p.Payment != nil && len(p.Payment) != len(p.Steps) {
+				t.Errorf("%s: %d payment entries for %d steps", pid, len(p.Payment), len(p.Steps))
+			}
+			if full.Payment != nil && p.Payment == nil {
+				t.Errorf("%s: the full item has payment and the prefix lost it", pid)
+			}
+			for i, pay := range p.Payment {
+				if i >= len(full.Payment) || pay != full.Payment[i] {
+					t.Errorf("%s: payment entry %d %q is not the full item's", pid, i, pay)
+					break
+				}
+			}
 			f, err := os.Open(filepath.Join(dir, r.Tape))
 			if err != nil {
 				t.Fatal(err)

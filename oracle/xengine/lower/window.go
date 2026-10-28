@@ -170,12 +170,14 @@ func lowerWindow(reg *cards.Registry, t *game.Tape, c *cut, id string) (Lowered,
 		a.Card, a.AttachedTo = m.ref(a.Card), m.ref(a.AttachedTo)
 		l.Item.Steps = append(l.Item.Steps, a)
 		l.StepEntry = append(l.StepEntry, -1)
+		l.Item.Payment = append(l.Item.Payment, "")
 	}
 	l.Prelude = len(c.Attach)
 	// A window ends at the last entry of its turn; the entry after it only
 	// serves as the digest the last step is checked against.
 	stalled := windowEnd(t, c) == len(t.Entries) && t.Outcome.Stall != ""
 	l.lowerEntries(reg, m, wt.Entries[:n], 0, stalled)
+	l.compactPayment()
 	for k, e := range wt.Entries[:n] {
 		if e.RNG > 0 && len(e.Flips) == 0 {
 			l.HasRNG = true

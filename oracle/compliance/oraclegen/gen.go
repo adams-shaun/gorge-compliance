@@ -308,6 +308,15 @@ type Item struct {
 	// game to the next step (CR 117.4), so it follows these. Like XAbility it
 	// is an Item field, never a Step one. Empty for every non-xengine item.
 	XPos []*XPos `json:"xmage_pos,omitempty"`
+	// Payment is parallel to Scenario.Steps: entry i is the pool mana a cast
+	// or activate step must spend, as WUBRGC letters (one per unit), when
+	// gorge's log recorded the actual payment. It is the multiset, not an
+	// order: a follower that offers manual mana payment (XMage's TestPlayer,
+	// Forge's chooseManaFromPool) unlocks the units in whatever order its cost
+	// asks for. Empty entry or nil slice for every other step. Like XAbility
+	// it is an Item field, never a Step one, so Raw() never sends it to
+	// gorge's runner (which decodes steps with DisallowUnknownFields).
+	Payment []string `json:"payment,omitempty"`
 	// Ignore names snapshot fields the comparison leaves out for this
 	// scenario: library_top after the card shuffles a library.
 	Ignore []string `json:"ignore,omitempty"`

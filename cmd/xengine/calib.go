@@ -131,7 +131,8 @@ func runCalib(args []string) error {
 // followed is true for a class where the follower replayed the item far enough
 // to be compared.
 func followed(class string) bool {
-	return class != classify.ClassHarness && class != classify.ClassDecisionShape
+	return class != classify.ClassHarness && class != classify.ClassDecisionShape &&
+		class != classify.ClassPaymentChoice
 }
 
 // normMsg strips object ids and numbers from a harness message.
