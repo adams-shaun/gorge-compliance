@@ -18,9 +18,12 @@ import java.util.List;
  * lands on any untapped land. The fixture windows in test/fixtures/
  * mana-scope.jsonl replay through the production ScenarioReplay and pin the
  * named permanent: Hidden Grotto is tapped and the Island is not, pool C;
- * with two Swamps, Swamp#2 is tapped and Swamp#1 is not; and a Plains#2
- * played from hand resolves by its setup alias although it is the only
- * Plains on the battlefield.
+ * with two Swamps, Swamp#2 is tapped and Swamp#1 is not; a Plains#2 played
+ * from hand resolves by its setup alias although it is the only Plains on
+ * the battlefield; and Simian Spirit Guide's hand-zone mana ability is
+ * activated on the card in hand (exiled, pool R) rather than failing because
+ * the source is not a battlefield permanent, even when a same-named card is
+ * also on the battlefield.
  *
  * Run scripts/xmage-oracle-test-mana-scope.sh. */
 public final class ScenarioReplayManaAbilityScopedToCardTest {
@@ -63,6 +66,14 @@ public final class ScenarioReplayManaAbilityScopedToCardTest {
         return found.get(0);
     }
 
+    private static List<String> strings(JsonArray array) {
+        List<String> out = new ArrayList<>();
+        for (JsonElement e : array) {
+            out.add(e.getAsString());
+        }
+        return out;
+    }
+
     private static boolean tapped(JsonObject perm) {
         return perm.get("tapped").getAsBoolean();
     }
@@ -90,9 +101,9 @@ public final class ScenarioReplayManaAbilityScopedToCardTest {
                     rows.add(JsonParser.parseString(line).getAsJsonObject());
                 }
             }
-            equal(3, n);
+            equal(5, n);
         }
-        equal(3, rows.size());
+        equal(5, rows.size());
         for (JsonObject row : rows) {
             check(!row.has("harness"), row.get("id").getAsString() + " failed its replay: " + row.get("harness"));
         }
@@ -146,8 +157,46 @@ public final class ScenarioReplayManaAbilityScopedToCardTest {
         equal(1, tappedCount(landAfter));
         equal("W", player(landAfter, 0).get("pool").getAsString());
 
-        System.out.println("PASS mana ability is scoped to the named permanent "
+        // A mana ability that lives in the hand, not on the battlefield: the
+        // old manaActivate: scan handled it through TestPlayer's Card branch;
+        // resolving the named permanent only would fail the window. The
+        // guide must leave the hand for exile and add R.
+        JsonObject guideRow = rows.get(3);
+        equal("manascope-spirit-guide", guideRow.get("id").getAsString());
+        JsonObject guideBefore = snapshot(guideRow, 0);
+        equal(1, strings(player(guideBefore, 0).getAsJsonArray("hand")).size());
+        equal(0, strings(player(guideBefore, 0).getAsJsonArray("exile")).size());
+        equal("", player(guideBefore, 0).get("pool").getAsString());
+
+        JsonObject guideAfter = snapshot(guideRow, 1);
+        equal(0, strings(player(guideAfter, 0).getAsJsonArray("hand")).size());
+        check(strings(player(guideAfter, 0).getAsJsonArray("exile")).contains("Simian Spirit Guide"),
+                "Simian Spirit Guide was not exiled from hand");
+        equal("R", player(guideAfter, 0).get("pool").getAsString());
+        equal(0, permanents(guideAfter, "Simian Spirit Guide").size());
+
+        // The same-named card on the battlefield must not shadow the hand one:
+        // the alias picks the hand copy, whose hand-zone ability is available,
+        // while the battlefield copy offers no hand-zone ability.
+        JsonObject bothRow = rows.get(4);
+        equal("manascope-spirit-guide-battlefield", bothRow.get("id").getAsString());
+        JsonObject bothBefore = snapshot(bothRow, 0);
+        equal(1, permanents(bothBefore, "Simian Spirit Guide").size());
+        equal(1, strings(player(bothBefore, 0).getAsJsonArray("hand")).size());
+
+        JsonObject bothAfter = snapshot(bothRow, 1);
+        JsonObject battlefieldGuide = one(bothAfter, "Simian Spirit Guide");
+        check(!tapped(battlefieldGuide), "the battlefield Simian Spirit Guide was tapped");
+        equal(1, strings(player(bothAfter, 0).getAsJsonArray("exile")).size());
+        check(strings(player(bothAfter, 0).getAsJsonArray("exile")).contains("Simian Spirit Guide"),
+                "the hand Simian Spirit Guide was not exiled");
+        equal(0, strings(player(bothAfter, 0).getAsJsonArray("hand")).size());
+        equal("R", player(bothAfter, 0).get("pool").getAsString());
+
+        System.out.println("PASS mana ability is scoped to the named source "
                 + "(Hidden Grotto not Island, pool C; Swamp#2 not Swamp#1, pool B; "
-                + "a played Plains#2 is still the named permanent)");
+                + "a played Plains#2 is still the named permanent; "
+                + "Simian Spirit Guide is exiled from hand for R, "
+                + "even with a same-named battlefield copy)");
     }
 }
