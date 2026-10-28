@@ -412,7 +412,6 @@ Homing Lightning	T4	effects	damage:4	-	equivalent	damage to the target and each 
 Human-Time Lord Meta-Crisis	T4	effects	planeswalk	-	equivalent	phenomenon: Forge planeswalks away after the encounter as part of the phenomenon's script
 Hunter's Mark	T4	effects	spell:cantbecountered	costreduction	mtgish-bug	can't-be-countered rule encoded as a second copy of the cost reduction (mtgish#1 class)
 Hunting Kavu	T4	effects	-	move:battlefield>exile	equivalent	one ChangeZone moves both objects; mtgish one exile per object
-I Am Duskmourn	T4	effects	-	abandon	forge-bug	TrigPlay lacks SubAbility$ Abandon (VERIFIED.md, upstream master)
 Ian the Reckless	T4	effects	damage:*	-	equivalent	the conditional extra damage is a second DealDamage
 Icefeather Aven	T4	effects	move:battlefield>hand	-	mtgish-bug	turned-face-up trigger dropped (morph line lost, mtgish#1)
 Ich-Tekik, Salvage Splicer	T4	effects	-	counters:+1/+1:1	equivalent	one PutCounterAll on itself and each Golem vs two put-counters
@@ -1001,7 +1000,6 @@ Yawgmoth's Will	T4	effects	-	mayplay	equivalent	one MayPlay static covers lands 
 Yidaro, Wandering Monster	T4	effects	effect	-	equivalent	bookkeeping Effect counting cycles
 You Look Upon the Tarrasque	T4	effects	rule:allcreaturesmustblockit	rule:mustblockattacker	equivalent	mtgish writes a granted Lure as each creature MustBlockAttacker
 You Meet in a Tavern	T4	effects	move:library>hand	move:library>library	mtgish-bug	"put them into your hand" encoded as MayRevealAnyNumberOfCardOfTypeAndPutOnTopOfLibrary
-Your Mistake Is My Triumph	T4	effects	move:graveyard>hand	move:graveyard>battlefield	forge-bug	script DBChangeZone Destination$ Hand; printed and mtgish put the card onto the battlefield
 Yume, Chronicler of Valor	T4	effects	spell:assist	spell:cascade	mtgish-bug	the first spell has assist, encoded as SpellEffect Cascade
 Zaffai, Thunder Conductor	T4	effects	damage:10	damage:1	mtgish-bug	10 damage encoded as 1
 Zevlor, Elturel Exile	T4	effects	-	copyspell	equivalent	copy for each other opponent: mtgish a branch per target kind (player, permanent), script one CopySpellAbility
