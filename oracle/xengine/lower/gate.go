@@ -25,6 +25,10 @@ const (
 	reasonActiveTap    = "tapped_active_permanent" // the setup drive's untap step untaps it
 	reasonTapElsewhere = "tapped_name_elsewhere"   // setup taps every placement of the name
 	reasonAura         = "aura_on_battlefield"     // an Aura placed unattached never enters
+	// reasonSelfExile is a card exiled by its own effect (warp). Its recast
+	// permission from exile is derived from the event log (warpRecastAvailable),
+	// so no gate field shows it and setup's plain exile placement cannot grant it.
+	reasonSelfExile = "exile_self"
 )
 
 // cut is the live engine at one cut point, reduced to what a window needs: the
@@ -129,6 +133,9 @@ type walker struct {
 	seat int // the seat Player fields are being read for
 	// mention memoises gameMentions per word for this capture.
 	mention map[string]bool
+	// exilerRead memoises whether any card of the game reads HasExiledBy
+	// (ExiledByYou, Exiler); exilerKnown says it was computed.
+	exilerRead, exilerKnown bool
 }
 
 // struct_ visits every exported field of v (a struct of the named type) and adds
@@ -161,7 +168,9 @@ func (w *walker) struct_(v reflect.Value, typ string, table map[string]entry, o 
 // zero value"; a turn stamp is live only when it names the cut's turn, and the
 // zone entries of the draw step (library to hand) and of card-less abilities,
 // the this-turn resolution tally and the runtime SVars no card in the game
-// names are not history setup could have changed or a card could read.
+// names are not history setup could have changed or a card could read. An
+// exile link is live only when a card can read it; a self-exile (warp) is
+// refused as exile_self.
 func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 	switch {
 	case typ == "Player" && name == "LandsPlayed":
@@ -189,6 +198,34 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return false
 	case typ == "Game" && name == "ResolvedThisTurn":
 		return v.Len() > 0 && w.gameMentions("ResolvedThisTurn")
+	case typ == "Object" && name == "ExiledCards":
+		if selfExile(o) {
+			w.why[reasonSelfExile] = true
+			return false
+		}
+		return v.Len() > 0 && cardMentions(o.Card, "ExiledWith")
+	case typ == "Object" && name == "ExiledWith":
+		if v.IsZero() {
+			return false
+		}
+		if o.ExiledWith == o.ID {
+			w.why[reasonSelfExile] = true
+			return false
+		}
+		src := w.g.Obj(o.ExiledWith)
+		return src != nil && cardMentions(src.Card, "ExiledWith")
+	case typ == "Object" && name == "HasExiledBy":
+		if !v.Bool() {
+			return false
+		}
+		if selfExile(o) {
+			w.why[reasonSelfExile] = true
+			return false
+		}
+		if !w.exilerKnown {
+			w.exilerRead, w.exilerKnown = w.gameMentions("ExiledByYou") || w.gameMentions("Exiler"), true
+		}
+		return w.exilerRead
 	case typ == "Object" && name == "RuntimeSVars":
 		keys := make([]string, 0, v.Len())
 		for _, k := range v.MapKeys() {
@@ -207,6 +244,12 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return v.Len() > 0
 	}
 	return !v.IsZero()
+}
+
+// selfExile is true for a card in exile that exiled itself: it is its own
+// exiler and is listed in its own ExiledCards.
+func selfExile(o *state.Object) bool {
+	return o.Zone == state.ZExile && (o.ExiledWith == o.ID || slices.Contains(o.ExiledCards, o.ID))
 }
 
 // frontName is the name setup lists a card under: its first face, the name the

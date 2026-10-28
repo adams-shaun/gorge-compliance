@@ -457,3 +457,158 @@ func nonDrawEntry(g *state.Game) bool {
 	}
 	return false
 }
+
+// libraryObjs is up to n distinct library objects of e that carry a card.
+func libraryObjs(t *testing.T, e *rules.Engine, n int) []*state.Object {
+	t.Helper()
+	var out []*state.Object
+	for i := range e.G.Objs {
+		if o := &e.G.Objs[i]; o.Zone == state.ZLibrary && o.Card != nil && o.Ability == nil {
+			out = append(out, o)
+			if len(out) == n {
+				return out
+			}
+		}
+	}
+	t.Fatalf("only %d library cards, want %d", len(out), n)
+	return nil
+}
+
+func TestCardMentions(t *testing.T) {
+	reg, _ := setPairs(t, "DFT", 1)
+	look := func(n string) *cards.Card {
+		c, ok := reg.Lookup(n)
+		if !ok {
+			t.Fatalf("%s is not in the corpus", n)
+		}
+		return c
+	}
+	for _, tc := range []struct {
+		card, word string
+		want       bool
+	}{
+		{"Ghost Vacuum", "ExiledWith", true},
+		{"Gonti, Night Minister", "Exiler", true},
+		{"Ride's End", "ExiledWith", false},
+	} {
+		if got := cardMentions(look(tc.card), tc.word); got != tc.want {
+			t.Errorf("cardMentions(%s, %s) = %v, want %v", tc.card, tc.word, got, tc.want)
+		}
+	}
+	if cardMentions(nil, "ExiledWith") {
+		t.Error("a nil card mentions nothing")
+	}
+}
+
+func TestGateDeadExileLink(t *testing.T) {
+	reg, pairs := setPairs(t, "DFT", 1)
+	base, at := expressibleCutIn(t, reg, "DFT", pairs[0], 100)
+	link := func(e *rules.Engine, source string) {
+		objs := libraryObjs(t, e, 2)
+		src, exiled := objs[0], objs[1]
+		c, ok := reg.Lookup(source)
+		if !ok {
+			t.Fatalf("%s is not in the corpus", source)
+		}
+		src.SetCard(c, 0)
+		src.Zone = state.ZGraveyard
+		src.ExiledCards = []state.ObjID{exiled.ID}
+		exiled.Zone = state.ZExile
+		exiled.ExiledWith = src.ID
+		exiled.HasExiledBy = true
+	}
+	reasons := func(e *rules.Engine) []string { return capture(e, at).Reasons }
+
+	// (a) the removal spell's script never reads the link.
+	e := base.Clone()
+	link(e, "Ride's End")
+	if r := reasons(e); len(r) != 0 {
+		t.Fatalf("(a) dead link: reasons %v, want none", r)
+	}
+
+	// (b) a source that reads ExiledWith keeps both link fields live.
+	e = base.Clone()
+	link(e, "Ghost Vacuum")
+	r := reasons(e)
+	if !slices.Contains(r, "field:Object.ExiledCards") || !slices.Contains(r, "field:Object.ExiledWith") {
+		t.Fatalf("(b) read link: reasons %v, want ExiledCards and ExiledWith", r)
+	}
+
+	// (c) a card in the game that reads the exiler makes HasExiledBy live.
+	e = base.Clone()
+	link(e, "Ride's End")
+	g, ok := reg.Lookup("Gonti, Night Minister")
+	if !ok {
+		t.Fatal("Gonti, Night Minister is not in the corpus")
+	}
+	libraryObjs(t, e, 3)[2].SetCard(g, 0)
+	if r := reasons(e); len(r) != 1 || r[0] != "field:Object.HasExiledBy" {
+		t.Fatalf("(c) exiler read: reasons %v, want [field:Object.HasExiledBy]", r)
+	}
+
+	// (d) a card that exiled itself (warp) is refused as exile_self.
+	e = base.Clone()
+	o := libraryObjs(t, e, 1)[0]
+	o.Zone = state.ZExile
+	o.ExiledCards = []state.ObjID{o.ID}
+	o.ExiledWith = o.ID
+	o.HasExiledBy = true
+	r = reasons(e)
+	if !slices.Contains(r, reasonSelfExile) {
+		t.Fatalf("(d) self-exile: reasons %v, want %s", r, reasonSelfExile)
+	}
+	for _, x := range r {
+		if strings.HasPrefix(x, "field:") {
+			t.Fatalf("(d) self-exile: reasons %v carry a field reason", r)
+		}
+	}
+}
+
+// exileLinkOf is true when the game holds an exile link the gate relaxes.
+func exileLinkOf(g *state.Game) bool {
+	for i := range g.Objs {
+		if o := &g.Objs[i]; len(o.ExiledCards) > 0 || o.ExiledWith != 0 || o.HasExiledBy {
+			return true
+		}
+	}
+	return false
+}
+
+// The relaxed fields open windows that lower and self-check: the first twelve
+// EOE games are played with the cut hook recording which turns carried a link.
+func TestWindowsDeadExileLink(t *testing.T) {
+	reg, pairs := setPairs(t, "EOE", 12)
+	byStatus := map[string]int{}
+	var okRelaxed, relaxedWindows int
+	for g, p := range pairs {
+		relaxed := map[int32]bool{}
+		opt := game.Options{Set: "EOE", OnCut: func(e *rules.Engine, entry int) {
+			if exileLinkOf(e.G) && len(capture(e, entry).Reasons) == 0 {
+				relaxed[e.G.Turn] = true
+			}
+		}}
+		ls, _, _, err := Windows(reg, p, uint64(100+g), opt)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, l := range ls {
+			var turn int32
+			if _, err := fmt.Sscanf(l.Item.ID[strings.LastIndex(l.Item.ID, ":w")+2:], "%d", &turn); err != nil {
+				t.Fatal(err)
+			}
+			if !relaxed[turn] {
+				continue
+			}
+			relaxedWindows++
+			c := CheckWindow(reg, l)
+			byStatus[string(c.Status)]++
+			if c.Status == StatusOK {
+				okRelaxed++
+			}
+		}
+	}
+	t.Logf("relaxed lowered windows by status: %v", byStatus)
+	if okRelaxed == 0 {
+		t.Fatalf("relaxed windows but none self-checked ok: %v", byStatus)
+	}
+}
