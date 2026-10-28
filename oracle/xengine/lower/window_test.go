@@ -869,11 +869,86 @@ func TestGateTappedAfterUntap(t *testing.T) {
 		t.Fatalf("tapped_after_untap = %v, want %v", got, want)
 	}
 
-	// (c) The by-name list is never emitted.
-	for s := range c.Setup {
-		if len(c.Setup[s].Tapped) != 0 {
-			t.Errorf("seat %d: Setup.Tapped = %v, want empty", s, c.Setup[s].Tapped)
+	// (c) The active seat never uses the by-name list.
+	if got := c.Setup[active].Tapped; len(got) != 0 {
+		t.Errorf("active seat: Setup.Tapped = %v, want empty", got)
+	}
+}
+
+// The seat that does not start keeps its taps through turn 1, so a name whose
+// placements are all tapped is the by-name tapped field (the Forge fork reads
+// only that one); the active seat's tap stays a tapped_after_untap entry, and
+// a name with mixed placements falls back to tapped_after_untap.
+func TestWindowsTappedNonActiveUsesTapped(t *testing.T) {
+	reg, pairs := fdnPairs(t, 6)
+	var (
+		e     *rules.Engine
+		at    int
+		plain []*state.Object
+	)
+	for g, p := range pairs {
+		e, at = expressibleCut(t, reg, p, uint64(100+g))
+		plain = nil
+		for _, o := range seatBattlefield(e.G, 1-int(e.G.Active)) {
+			o.Tapped = false
+			if o.Face() != nil && o.AttachedTo == 0 && len(o.Counters) == 0 && !o.IsToken && o.FaceIdx == 0 {
+				plain = append(plain, o)
+			}
 		}
+		if len(plain) >= 2 {
+			break
+		}
+	}
+	active := int(e.G.Active)
+	other := 1 - active
+	for _, o := range seatBattlefield(e.G, active) {
+		o.Tapped = false
+	}
+	if len(plain) < 2 {
+		t.Fatalf("non-active seat has %d plain permanents, need 2", len(plain))
+	}
+	a, b := plain[0], plain[1]
+	b.SetCard(a.Card, a.FaceIdx)
+	name := frontName(a)
+	activeBF := seatBattlefield(e.G, active)
+	var mine *state.Object
+	for _, o := range activeBF {
+		if o.Face() != nil && o.AttachedTo == 0 && len(o.Counters) == 0 && !o.IsToken && o.FaceIdx == 0 && frontName(o) != name {
+			mine = o
+			break
+		}
+	}
+	if mine == nil {
+		t.Fatal("active seat has no plain permanent of another name")
+	}
+
+	// (a) Both copies tapped: the by-name field, nothing per object.
+	a.Tapped, b.Tapped, mine.Tapped = true, true, true
+	c := capture(e, at)
+	if len(c.Reasons) != 0 {
+		t.Fatalf("reasons %v", c.Reasons)
+	}
+	if got, want := c.Setup[other].Tapped, []string{name}; !reflect.DeepEqual(got, want) {
+		t.Errorf("non-active tapped = %v, want %v", got, want)
+	}
+	if got := c.Setup[other].TappedAfterUntap; len(got) != 0 {
+		t.Errorf("non-active tapped_after_untap = %v, want empty", got)
+	}
+	if got, want := c.Setup[active].TappedAfterUntap, []string{refOf(activeBF, mine)}; !reflect.DeepEqual(got, want) {
+		t.Errorf("active tapped_after_untap = %v, want %v", got, want)
+	}
+	if got := c.Setup[active].Tapped; len(got) != 0 {
+		t.Errorf("active tapped = %v, want empty", got)
+	}
+
+	// (b) One copy tapped, one not: the per-object field.
+	b.Tapped = false
+	c = capture(e, at)
+	if got := c.Setup[other].Tapped; len(got) != 0 {
+		t.Errorf("mixed copies: non-active tapped = %v, want empty", got)
+	}
+	if got, want := c.Setup[other].TappedAfterUntap, []string{name}; !reflect.DeepEqual(got, want) {
+		t.Errorf("mixed copies: non-active tapped_after_untap = %v, want %v", got, want)
 	}
 }
 

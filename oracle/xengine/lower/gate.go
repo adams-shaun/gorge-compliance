@@ -388,15 +388,25 @@ func (w *walker) place(c *cut) {
 		back, counters := map[string]map[bool]bool{}, map[string]map[string]int32{}
 		mixed := map[string]bool{}
 		netOf := map[string]string{}
+		// tapRefs are the seat-relative refs of the tapped placements; tapState
+		// is, per name, the tapped states its placements carry.
+		var tapRefs []string
+		tapNames := map[string]string{}
+		tapState := map[string]map[bool]bool{}
 		for _, o := range bf[s] {
 			n := bind(o)
 			seat.Battlefield = append(seat.Battlefield, n)
 			if o.ChosenColor != "" {
 				c.Answers[s] = append(c.Answers[s], oraclegen.Answer{Kind: "choose", Pick: []string{o.ChosenColor}})
 			}
+			if tapState[n] == nil {
+				tapState[n] = map[bool]bool{}
+			}
+			tapState[n][o.Tapped] = true
 			if o.Tapped {
-				// One object, after the untap step: the seat-relative ref.
-				seat.TappedAfterUntap = append(seat.TappedAfterUntap, strings.TrimPrefix(c.Refs[o.ID], fmt.Sprintf("p%d:", s)))
+				ref := strings.TrimPrefix(c.Refs[o.ID], fmt.Sprintf("p%d:", s))
+				tapRefs = append(tapRefs, ref)
+				tapNames[ref] = n
 			}
 			if back[n] == nil {
 				back[n] = map[bool]bool{}
@@ -435,6 +445,24 @@ func (w *walker) place(c *cut) {
 		}
 		for _, k := range sortedKeys(mixed) {
 			w.why[reasonByName+k] = true
+		}
+		// Turn 1's untap step untaps only the active seat (p0 once relabelled),
+		// so its tapped permanents are taps after the untap, one object each.
+		// Any other seat keeps what setup put on it, so the by-name field says
+		// it when every placement of the name is tapped (the Forge fork reads
+		// only that field); mixed placements of one name need the per-object
+		// field.
+		byName := map[string]bool{}
+		for _, ref := range tapRefs {
+			n := tapNames[ref]
+			if s != c.Active && !tapState[n][false] {
+				if !byName[n] {
+					byName[n] = true
+					seat.Tapped = append(seat.Tapped, n)
+				}
+				continue
+			}
+			seat.TappedAfterUntap = append(seat.TappedAfterUntap, ref)
 		}
 		seat.Hand = names(g.Zone(state.ZHand, p))
 		seat.Graveyard = names(g.Zone(state.ZGraveyard, p))
