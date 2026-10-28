@@ -88,7 +88,7 @@ var gameTable = map[string]entry{
 	"HypotheticalCards":   isIgnored("search-world card table; nil in a real match"),
 	"Delayed":             isRefused("delayed triggers (CR 603.7) are not placeable"),
 	"DelayedNext":         isIgnored("delayed-trigger id allocator"),
-	"Entered":             isRefused("zone entries of this turn (ThisTurnEntered*); exempt: the draw step's library->hand entries and card-less objects (abilities), which no reader counts"),
+	"Entered":             isRefused("zone entries of this turn; live only when a card in the game names a reader (turnEntryReaders); exempt: the draw step's library->hand entries and card-less objects (abilities)"),
 }
 
 // playerTable is state.Player.
@@ -153,7 +153,7 @@ var objectTable = map[string]entry{
 	"ClassLevelValue":              isRefused("a Class level is not placeable"),
 	"AtEOTTrigBody":                isRefused("an end-of-turn trigger body is not placeable"),
 	"MergedCards":                  isRefused("a merged permanent is not placeable"),
-	"EnteredThisTurn":              isRefused("an object that entered this turn; only the drawn card (library->hand) is exempt"),
+	"EnteredThisTurn":              isRefused("an object that entered this turn; a battlefield permanent always refuses (power-up cost reads it with no script word); off the battlefield it is live only when a card names a turnEntryReaders word; the drawn card (library->hand) is exempt"),
 	"EnteredFrom":                  isIgnored("provenance of EnteredThisTurn, which is refused when set"),
 	"WasDealtDamageThisTurn":       isRefused("this-turn damage record"),
 	"WasDealtExcessDamageThisTurn": isRefused("this-turn damage record"),

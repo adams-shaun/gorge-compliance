@@ -375,6 +375,7 @@ func TestGateDeadTurnHistory(t *testing.T) {
 		t.Fatalf("(a) card-less entry: reasons %v, want none", c.Reasons)
 	}
 	e.G.Entered = append(e.G.Entered, state.ZoneEntry{Obj: bf, From: state.ZGraveyard, To: state.ZExile})
+	plantCard(t, reg, e, entryReaderCard(t, reg))
 	if c := capture(e, at); len(c.Reasons) != 1 || c.Reasons[0] != "field:Game.Entered" {
 		t.Fatalf("(b) card entry: reasons %v, want [field:Game.Entered]", c.Reasons)
 	}
@@ -611,4 +612,142 @@ func TestWindowsDeadExileLink(t *testing.T) {
 	if okRelaxed == 0 {
 		t.Fatalf("relaxed windows but none self-checked ok: %v", byStatus)
 	}
+}
+
+// entryReaderCard is the first corpus card, by name, whose script names one of
+// turnEntryReaders.
+func entryReaderCard(t *testing.T, reg *cards.Registry) string {
+	t.Helper()
+	names := reg.Universe().Names()
+	sort.Strings(names)
+	for _, n := range names {
+		if c, ok := reg.Lookup(n); ok && cardMentions(c, turnEntryReaders...) {
+			return n
+		}
+	}
+	t.Fatal("no corpus card names a turn-entry reader")
+	return ""
+}
+
+// entryReaderIn is true when a card of the game names a turn-entry reader.
+func entryReaderIn(g *state.Game) bool {
+	for i := range g.Objs {
+		if cardMentions(g.Objs[i].Card, turnEntryReaders...) {
+			return true
+		}
+	}
+	return false
+}
+
+func TestGateTurnEntryReaders(t *testing.T) {
+	reg, pairs := setPairs(t, "DFT", 1)
+	base, at := expressibleCutIn(t, reg, "DFT", pairs[0], 100)
+	if entryReaderIn(base.G) {
+		t.Fatal("the base game already holds a turn-entry reader")
+	}
+	// died moves a library card to the graveyard as if it had died this turn.
+	died := func(e *rules.Engine) *state.Object {
+		o := libraryObjs(t, e, 1)[0]
+		o.Zone, o.EnteredThisTurn, o.EnteredFrom = state.ZGraveyard, true, state.ZBattlefield
+		e.G.Entered = append(e.G.Entered, state.ZoneEntry{Obj: o.ID, From: state.ZBattlefield, To: state.ZGraveyard})
+		return o
+	}
+
+	// (a) with no reader in the game a this-turn death is dead history.
+	e := base.Clone()
+	died(e)
+	if c := capture(e, at); len(c.Reasons) != 0 {
+		t.Fatalf("(a) no reader: reasons %v, want none", c.Reasons)
+	}
+
+	// (b) a reader anywhere in the game, library included, makes both live.
+	e = base.Clone()
+	o := died(e)
+	for _, x := range libraryObjs(t, e, 2) {
+		if x.ID != o.ID {
+			x.SetCard(mustLookup(t, reg, entryReaderCard(t, reg)), 0)
+			break
+		}
+	}
+	c := capture(e, at)
+	if !hasReason(c, "field:Game.Entered") || !hasReason(c, "field:Object.EnteredThisTurn") {
+		t.Fatalf("(b) reader: reasons %v, want Game.Entered and Object.EnteredThisTurn", c.Reasons)
+	}
+
+	// (c) a battlefield permanent that entered this turn stays refused.
+	e = base.Clone()
+	for i := range e.G.Objs {
+		if p := &e.G.Objs[i]; p.Zone == state.ZBattlefield && p.Card != nil && p.Ability == nil {
+			p.EnteredThisTurn = true
+			break
+		}
+	}
+	if c := capture(e, at); !hasReason(c, "field:Object.EnteredThisTurn") {
+		t.Fatalf("(c) battlefield entry: reasons %v, want field:Object.EnteredThisTurn", c.Reasons)
+	}
+}
+
+func mustLookup(t *testing.T, reg *cards.Registry, name string) *cards.Card {
+	t.Helper()
+	c, ok := reg.Lookup(name)
+	if !ok {
+		t.Fatalf("%s is not in the corpus", name)
+	}
+	return c
+}
+
+// Windows whose cut carried an off-battlefield entry with no reader in the game
+// are now expressible: the first forty DFT games are played with the cut hook
+// recording which cuts did, and the relaxed windows must lower and self-check.
+// Such cuts are rare (the other gate reasons usually remain): the first twelve
+// DSK games hold none, DFT games 13 and 33 hold one each.
+func TestWindowsTurnEntryReaders(t *testing.T) {
+	reg, pairs := setPairs(t, "DFT", 40)
+	byStatus := map[string]int{}
+	var okRelaxed int
+	for g, p := range pairs {
+		relaxed := map[int32]bool{}
+		opt := game.Options{Set: "DFT", OnCut: func(e *rules.Engine, entry int) {
+			if !entryReaderIn(e.G) && offBattlefieldEntry(e.G) && len(capture(e, entry).Reasons) == 0 {
+				relaxed[e.G.Turn] = true
+			}
+		}}
+		ls, _, _, err := Windows(reg, p, uint64(100+g), opt)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, l := range ls {
+			var turn int32
+			if _, err := fmt.Sscanf(l.Item.ID[strings.LastIndex(l.Item.ID, ":w")+2:], "%d", &turn); err != nil {
+				t.Fatal(err)
+			}
+			if !relaxed[turn] {
+				continue
+			}
+			c := CheckWindow(reg, l)
+			byStatus[string(c.Status)]++
+			if c.Status == StatusOK {
+				okRelaxed++
+			}
+		}
+	}
+	t.Logf("relaxed lowered windows by status: %v", byStatus)
+	if okRelaxed == 0 {
+		t.Fatalf("no relaxed window self-checked ok: %v", byStatus)
+	}
+}
+
+// offBattlefieldEntry is true when the game holds a this-turn zone entry other
+// than the draw step's, or an off-battlefield object flagged EnteredThisTurn.
+func offBattlefieldEntry(g *state.Game) bool {
+	if nonDrawEntry(g) {
+		return true
+	}
+	for i := range g.Objs {
+		if o := &g.Objs[i]; o.EnteredThisTurn && o.Zone != state.ZBattlefield &&
+			!(o.Zone == state.ZHand && o.EnteredFrom == state.ZLibrary) {
+			return true
+		}
+	}
+	return false
 }
