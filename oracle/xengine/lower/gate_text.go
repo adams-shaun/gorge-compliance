@@ -82,9 +82,11 @@ func collectText(b *strings.Builder, v reflect.Value, seen map[uintptr]bool) {
 }
 
 // gameMentions is true when the card of any object of the game, in any zone
-// (library and ceased included), mentions word. It is memoised per capture.
-func (w *walker) gameMentions(word string) bool {
-	if r, ok := w.mention[word]; ok {
+// (library and ceased included), mentions any of words. It is memoised per
+// capture, per word list.
+func (w *walker) gameMentions(words ...string) bool {
+	key := strings.Join(words, "\x00")
+	if r, ok := w.mention[key]; ok {
 		return r
 	}
 	if w.mention == nil {
@@ -92,11 +94,11 @@ func (w *walker) gameMentions(word string) bool {
 	}
 	r := false
 	for i := range w.g.Objs {
-		if cardMentions(w.g.Objs[i].Card, word) {
+		if cardMentions(w.g.Objs[i].Card, words...) {
 			r = true
 			break
 		}
 	}
-	w.mention[word] = r
+	w.mention[key] = r
 	return r
 }
