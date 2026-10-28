@@ -178,6 +178,18 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 	// pass is not final until that step exists, so its place is kept.
 	var owed []oraclegen.Answer
 	owedAt, owedSteps := -1, 0 // first entry of the pass group, steps before it
+	// quiet is true when the group recorded no mana activation, RNG draw or
+	// coin flip; the measured no-op groups are all quiet. Keep a noisy group
+	// even when the digest is equal: dropping it would move RNG/mana
+	// bookkeeping.
+	quiet := func(g []game.Entry) bool {
+		for _, e := range g {
+			if len(e.Mana) > 0 || e.RNG > 0 || len(e.Flips) > 0 {
+				return false
+			}
+		}
+		return true
+	}
 	for i := first; i < len(entries); {
 		j := i + 1
 		for j < len(entries) && isAsk(entries[j]) {
@@ -193,6 +205,17 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 			}
 			l.stop(at, why)
 			return
+		}
+		if len(owed) == 0 && len(steps) > 0 && quiet(entries[i:j]) {
+			if op := steps[len(steps)-1].Op; op == "cast" || op == "activate" {
+				if after, ok := l.afterDigest(j, entries); ok && len(entries[i].Digest.Diff(after)) == 0 {
+					// A cast or activation the live game left the whole state
+					// unchanged on did not happen: it is not a replayable
+					// step (a refused Spree cast, for example).
+					i = j
+					continue
+				}
+			}
 		}
 		if len(owed) > 0 {
 			steps[0].Answers = append(append([]oraclegen.Answer{}, owed...), steps[0].Answers...)
@@ -224,6 +247,18 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 	if stalled {
 		l.stop(len(entries), &truncation{ReasonStall})
 	}
+}
+
+// afterDigest is the state after the group ending at j-1: the next entry in the
+// slice, or a window's next-turn sentinel (l.Against) when the group is last.
+func (l *Lowered) afterDigest(j int, entries []game.Entry) (game.Digest, bool) {
+	if j < len(entries) {
+		return entries[j].Digest, true
+	}
+	if l.Against != nil && j < len(l.Against.Entries) {
+		return l.Against.Entries[j].Digest, true
+	}
+	return game.Digest{}, false
 }
 
 // markShuffles leaves a seat's library order out of the comparison from the
