@@ -78,7 +78,12 @@ type Entry struct {
 	Payment  string    `json:"payment,omitempty"`
 	Announce string    `json:"announce,omitempty"`
 	Mana     []ManaRec `json:"mana,omitempty"`
-	RNG      uint64    `json:"rng,omitempty"`
+	// Spent is the pool mana the commit actually spent, as WUBRGC letters
+	// in the engine's emission order: one letter per unit. The engine logs a
+	// negative ManaAdd per spent unit (plain, tagged or snow Counter), which
+	// the recorder folds here. Empty when the decision spent no pool mana.
+	Spent string `json:"spent,omitempty"`
+	RNG   uint64 `json:"rng,omitempty"`
 	// Flips are the coin flips committing this intent made, in log order.
 	Flips []Flip `json:"flips,omitempty"`
 	// Reanswered marks an entry whose intent the engine refused: gorge's

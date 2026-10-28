@@ -73,6 +73,11 @@ const defaultForgeOracleDir = "/mnt/sata/gorge-training/forgeoracle"
 //     paid at cast time; empty is the ordinary cast). gen's Step still
 //     carries no kicked: a kick is paid only through a logged optional-cost
 //     decision.
+//   - The Item's payment array is parallel to its steps: entry i is the exact
+//     pool mana gorge spent on step i's cast or activate, as WUBRGC letters
+//     (one per unit): a multiset, not an order. A driver that can name pool
+//     mana spends exactly that; empty means auto-pay. It is an Item field,
+//     not a Step one, so Raw() never sends it to gorge's runner.
 //   - abilities is keyed by the decimal step index.
 //   - library_top is not compared when a seat's setup names library cards
 //     (see forgeIgnore).

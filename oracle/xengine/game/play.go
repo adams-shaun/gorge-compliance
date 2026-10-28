@@ -128,6 +128,8 @@ type recorder struct {
 	flips     []Flip    // coin flips since the last flush
 	flipScan  int       // how far of e.L.Events the flips were read
 	manaScan  int       // how far of e.L.Events the open mana record's Produced was read
+	spendScan int       // how far of e.L.Events the spent mana was read
+	spent     string    // pool mana spent since the last flush, one letter per unit
 	refs      *refBinder
 	started   bool     // Starter is set
 	lastDraws uint64   // e.RNGDraws() at the last flush
@@ -186,13 +188,27 @@ func (r *recorder) flush(e *rules.Engine) {
 			r.flips = append(r.flips, Flip{Seat: int(flipper), Win: win})
 		}
 	}
+	for ; r.spendScan < len(evs); r.spendScan++ {
+		ev := evs[r.spendScan]
+		if ev.Kind != events.ManaAdd || ev.Amount >= 0 {
+			continue
+		}
+		// The engine emits the payment as negative ManaAdd events, one per
+		// spent unit; the Counter is the colour letter behind any restriction
+		// or snow prefix ("ArtifactG", "SG"). This is the single place a
+		// spend is read, so every payment path (plain, restricted, typed,
+		// snow) is covered without naming one.
+		if n := len(ev.Counter); n > 0 && strings.ContainsRune("WUBRGC", rune(ev.Counter[n-1])) {
+			r.spent += strings.Repeat(ev.Counter[n-1:], int(-ev.Amount))
+		}
+	}
 	if n := len(r.t.Entries); n > 0 {
 		last := &r.t.Entries[n-1]
-		last.Mana, last.RNG, last.Flips = r.mana, draws, r.flips
+		last.Mana, last.Spent, last.RNG, last.Flips = r.mana, r.spent, draws, r.flips
 	} else {
 		r.t.GenesisMana, r.t.GenesisRNG = r.mana, draws
 	}
-	r.mana, r.flips = nil, nil
+	r.mana, r.spent, r.flips = nil, "", nil
 }
 
 func zoneNames(e *rules.Engine, z state.Zone, p state.PlayerID) []string {

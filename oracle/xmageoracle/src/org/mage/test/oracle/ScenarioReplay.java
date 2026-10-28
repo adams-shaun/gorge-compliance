@@ -19,6 +19,7 @@ import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.OrCost;
 import mage.abilities.keyword.LeylineAbility;
 import mage.abilities.keyword.SpreeAbility;
+import mage.abilities.costs.mana.ManaCost;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.abilities.effects.common.EndTurnEffect;
@@ -28,6 +29,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.DoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -291,6 +293,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
         // cost picks. Carried through copy(), as XMage copies players freely.
         private final ScenarioReplay owner;
 
+        // payment is the pool-mana multiset a cast or activate step must
+        // spend, as WUBRGC letters, while its manual payment is active; null
+        // outside that window. autoPaymentBefore is the pool mode to restore.
+        private String payment;
+        private Boolean autoPaymentBefore;
+
         ScriptedChoicePlayer(org.mage.test.player.TestComputerPlayer computerPlayer, ScenarioReplay owner) {
             super(computerPlayer);
             this.owner = owner;
@@ -299,6 +307,90 @@ public class ScenarioReplay extends CardTestPlayerBase {
         ScriptedChoicePlayer(final ScriptedChoicePlayer player) {
             super(player);
             this.owner = player.owner;
+            this.payment = player.payment;
+            this.autoPaymentBefore = player.autoPaymentBefore;
+        }
+
+        /** Begin spending payment (gorge's logged pool spend) at this step.
+         * Manual mode makes TestPlayer.playMana consume one unlocked colour
+         * per unit; playMana below chooses that colour from what the unpaid
+         * cost still needs, so {1}{G} with R and G spends R for generic and G
+         * for the pip, never the other legal split. */
+        void beginPayment(String letters) {
+            payment = letters == null ? "" : letters.toUpperCase();
+            autoPaymentBefore = getManaPool().isAutoPayment();
+            getManaPool().setAutoPayment(false);
+        }
+
+        void endPayment() {
+            payment = null;
+            if (autoPaymentBefore != null) {
+                getManaPool().setAutoPayment(autoPaymentBefore);
+                autoPaymentBefore = null;
+            }
+        }
+
+        /** Spend one unit of the step's recorded payment. Pool.pay consumes
+         * only the unlocked type in manual mode, so this unlocks the colour
+         * the still-unpaid cost names; only when no specific pip remains may
+         * any remaining unit pay the generic part. The first matching unit is
+         * removed from the multiset, so the count, not the order, is kept. */
+        @Override
+        public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
+            if (payment != null && !payment.isEmpty()) {
+                String next = nextPaymentColour(unpaid);
+                if (next != null) {
+                    addChoice(next);
+                }
+            }
+            return super.playMana(ability, unpaid, promptText, game);
+        }
+
+        private String nextPaymentColour(ManaCost unpaid) {
+            Mana due = unpaid.getMana();
+            for (char c : "WUBRG".toCharArray()) {
+                ManaType type = manaType(c);
+                if (payment.indexOf(c) >= 0 && due.get(type) > 0 && getManaPool().get(type) > 0) {
+                    return takePayment(c);
+                }
+            }
+            if (payment.indexOf('C') >= 0 && due.get(ManaType.COLORLESS) > 0
+                    && getManaPool().get(ManaType.COLORLESS) > 0) {
+                return takePayment('C');
+            }
+            for (int i = 0; i < payment.length(); i++) {
+                char c = payment.charAt(i);
+                if (getManaPool().get(manaType(c)) > 0) {
+                    return takePayment(c);
+                }
+            }
+            return null;
+        }
+
+        private String takePayment(char c) {
+            int i = payment.indexOf(c);
+            payment = payment.substring(0, i) + payment.substring(i + 1);
+            switch (c) {
+                case 'W': return "White";
+                case 'U': return "Blue";
+                case 'B': return "Black";
+                case 'R': return "Red";
+                case 'G': return "Green";
+                case 'C': return "Colorless";
+                default: throw new IllegalArgumentException("mana letter " + c);
+            }
+        }
+
+        private static ManaType manaType(char c) {
+            switch (c) {
+                case 'W': return ManaType.WHITE;
+                case 'U': return ManaType.BLUE;
+                case 'B': return ManaType.BLACK;
+                case 'R': return ManaType.RED;
+                case 'G': return ManaType.GREEN;
+                case 'C': return ManaType.COLORLESS;
+                default: throw new IllegalArgumentException("mana letter " + c);
+            }
         }
 
         /** Whether the current ask is posed from inside the named method of a
@@ -1255,7 +1347,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 int beforeA = playerA.getActions().size();
                 int beforeB = playerB.getActions().size();
                 queuePassCommands(i);
-                step(st, op, i);
+                String payment = paymentAt(sc, i);
+                step(st, op, i, payment);
                 String cp = "step " + i + " (" + op + ")";
                 final PhaseStep reportAs = checkpointStepAs;
                 checkpointStepAs = null;
@@ -1266,6 +1359,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                     snaps.add(snap);
                 });
+                if (!payment.isEmpty()) {
+                    TestPlayer payer = seat(st.has("seat") ? st.get("seat").getAsInt() : 0);
+                    runCode("payment end", turn, phase, payer,
+                            (info, pl, g) -> ((ScriptedChoicePlayer) pl).endPayment());
+                }
                 queuedA.add(new ArrayList<>(playerA.getActions().subList(beforeA, playerA.getActions().size())));
                 queuedB.add(new ArrayList<>(playerB.getActions().subList(beforeB, playerB.getActions().size())));
                 choicesA.add(new ArrayList<>(playerA.getChoices().subList(beforeChoicesA, playerA.getChoices().size())));
@@ -3745,7 +3843,32 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
     }
 
-    private void step(JsonObject st, String op, int stepIdx) {
+    /** The Item's driver-only payment entry for a step: the pool mana gorge
+     * spent on the step's cast/activate, or "" when it recorded none. The
+     * array is parallel to the steps and lives on the Item because gorge's
+     * runner rejects an unknown per-step field. */
+    static String paymentAt(JsonObject sc, int i) {
+        if (!sc.has("payment") || !sc.get("payment").isJsonArray()) {
+            return "";
+        }
+        JsonArray pays = sc.getAsJsonArray("payment");
+        return i >= 0 && i < pays.size() && pays.get(i).isJsonPrimitive()
+                ? pays.get(i).getAsString() : "";
+    }
+
+    /** Queue the step's manual-pool-payment start before its cast/activate
+     * action. The payment is gorge's actual spend, so XMage must not choose a
+     * different legal split. The matching endPayment is queued after the
+     * step's checkpoint, so it also restores auto payment on an early return. */
+    private void queuePaymentStart(String payment, TestPlayer p) {
+        if (payment.isEmpty()) {
+            return;
+        }
+        runCode("payment " + payment, turn, phase, p,
+                (info, pl, g) -> ((ScriptedChoicePlayer) pl).beginPayment(payment));
+    }
+
+    private void step(JsonObject st, String op, int stepIdx, String payment) {
         int seatIdx = st.has("seat") ? st.get("seat").getAsInt() : 0;
         TestPlayer p = seat(seatIdx);
         switch (op) {
@@ -3920,6 +4043,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     String mana = str(st, "mana");
                     runCode("mana " + mana, turn, phase, p, (info, pl, g) -> addPool(pl, g, mana));
                 }
+                queuePaymentStart(payment, p);
                 if (st.has("kicked")) {
                     throw new IllegalArgumentException("kicked unsupported");
                 }
@@ -4115,6 +4239,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     String mana = str(st, "mana");
                     runCode("mana " + mana, turn, phase, p, (info, pl, g) -> addPool(pl, g, mana));
                 }
+                queuePaymentStart(payment, p);
                 if (!sc0.has("xmage_answers")) {
                     answers(st, p);
                 }
