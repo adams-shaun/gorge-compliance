@@ -284,7 +284,7 @@ var objectTable = map[string]entry{
 	"ExiledCards":                  isRefused("forward exile link; live only when the exiler's own card says ExiledWith (its only readers resolve the link from the source) or it is a self-exile (warp, refused as exile_self)"),
 	"ExileReturn":                  isRefused("a pending return from exile"),
 	"TimesMutated":                 isRefused("a mutated permanent is not placeable"),
-	"AttachedTo":                   isPlaced("an attach prelude step per attachment"),
+	"AttachedTo":                   isPlaced("an attach prelude step per Equipment attachment, the seat's attached list for an Aura"),
 	"AttachedPlayer":               isIgnored("meaningful only with HasAttachedPlayer, which is refused"),
 	"HasAttachedPlayer":            isRefused("attached to a player is not placeable"),
 	"LastBearer":                   isIgnored("last-known bearer of an unattached equipment, read by leaves-play look-back only"),
