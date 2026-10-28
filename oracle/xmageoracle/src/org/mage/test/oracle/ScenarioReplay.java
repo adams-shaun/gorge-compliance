@@ -337,7 +337,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * removed from the multiset, so the count, not the order, is kept. */
         @Override
         public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
-            if (payment != null && !payment.isEmpty()) {
+            // payment != null is the manual window, not a nonempty multiset:
+            // once takePayment exhausts it, payment is "" until endPayment.
+            // Test the window, and let nextPaymentColour's null (exhausted or
+            // unusable units) fall back, so no later ask in the step reaches
+            // TestPlayer in manual mode with no choice.
+            if (payment != null) {
                 String next = nextPaymentColour(unpaid);
                 if (next != null) {
                     addChoice(next);

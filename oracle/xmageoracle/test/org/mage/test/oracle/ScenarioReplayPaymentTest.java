@@ -83,9 +83,9 @@ public final class ScenarioReplayPaymentTest {
                 MulliganType.GAME_DEFAULT.getMulligan(0), 60, 20, 7);
     }
 
-    /** Pay a {1}{G} cost from the pool and return whether it was paid. */
-    private static boolean pay(TestPlayer p, Game game) {
-        ManaCostsImpl<ManaCost> costs = new ManaCostsImpl<>("{1}{G}");
+    /** Pay cost from the pool and return whether it was paid. */
+    private static boolean pay(TestPlayer p, Game game, String cost) {
+        ManaCostsImpl<ManaCost> costs = new ManaCostsImpl<>(cost);
         SpellAbility ability = new SpellAbility(costs, "Payment test");
         ability.setControllerId(p.getId());
         return costs.pay(ability, game, ability, p.getId(), false);
@@ -106,7 +106,7 @@ public final class ScenarioReplayPaymentTest {
         TestPlayer p = sp.player;
         addMana(p.getManaPool(), 1, 2);
         sp.begin("GG");
-        equal(true, pay(p, game));
+        equal(true, pay(p, game, "{1}{G}"));
         equal("R", ScenarioReplay.pool(p.getManaPool()));
         sp.end();
         System.out.println("PASS recorded GG pays {1}{G} from two green, leaving R");
@@ -122,27 +122,45 @@ public final class ScenarioReplayPaymentTest {
         TestPlayer p = sp.player;
         addMana(p.getManaPool(), 1, 2);
         sp.begin("RG");
-        equal(true, pay(p, game));
+        equal(true, pay(p, game, "{1}{G}"));
         equal("G", ScenarioReplay.pool(p.getManaPool()));
         sp.end();
         System.out.println("PASS recorded RG pays {1}{G} as gorge did, leaving G");
     }
 
-    private static void testShortMultisetFallsBack() throws Exception {
-        // The second ask cannot use the recorded unit (no green left in the
-        // pool): playMana's null branch must restore auto-payment instead of
-        // leaving TestPlayer in manual mode with no choice, which Assert.fails
-        // the whole harness. The fallback itself is the production method;
-        // auto-payment from here belongs to a started game (the host replay).
+    private static void testExhaustedMultisetFallsBack() throws Exception {
+        // Pool R+G, gorge recorded one green. The first ask consumes it, so a
+        // later ask in the same cost finds the multiset empty (payment is "",
+        // not null). playMana must fall back instead of leaving TestPlayer in
+        // manual mode with no choice, which Assert.fails the whole harness.
         Game game = game();
         ScriptedPayment sp = newPlayer(game);
         TestPlayer p = sp.player;
         addMana(p.getManaPool(), 1, 1);
+        // Auto-payment consults the battlefield, which asks each player for
+        // its range; fill it as beginTurn does in a started game.
+        p.updateRange(game);
+        sp.begin("G");
+        // The generic ask cannot pay from the exhausted multiset. It must not
+        // Assert.fail; the pool must be back on auto-payment. (Whether the
+        // auto path can finish depends on the battlefield, not this fallback.)
+        pay(p, game, "{1}{G}");
+        equal(true, p.getManaPool().isAutoPayment());
+        sp.end();
+        System.out.println("PASS an exhausted recorded multiset falls back to auto-payment");
+    }
+
+    private static void testUnusableMultisetFallsBack() throws Exception {
+        // Pool RR, gorge recorded GG: no green unit is in the pool, so the
+        // first playMana ask cannot use the multiset and must fall back to
+        // auto-payment instead of leaving manual mode with no choice.
+        Game game = game();
+        ScriptedPayment sp = newPlayer(game);
+        TestPlayer p = sp.player;
+        addMana(p.getManaPool(), 2, 0);
+        p.updateRange(game);
         sp.begin("GG");
-        equal(false, p.getManaPool().isAutoPayment());
-        Method fallback = p.getClass().getDeclaredMethod("fallBackToAutoPayment");
-        fallback.setAccessible(true);
-        fallback.invoke(p);
+        pay(p, game, "{2}");
         equal(true, p.getManaPool().isAutoPayment());
         sp.end();
         System.out.println("PASS an unusable recorded multiset falls back to auto-payment");
@@ -151,6 +169,7 @@ public final class ScenarioReplayPaymentTest {
     public static void main(String[] args) throws Exception {
         testRecordedSplit();
         testGorgeSplit();
-        testShortMultisetFallsBack();
+        testExhaustedMultisetFallsBack();
+        testUnusableMultisetFallsBack();
     }
 }

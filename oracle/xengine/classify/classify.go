@@ -107,20 +107,22 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 }
 
 // paymentChoice reports a pool-only difference at or right after a cast or
-// activate whose lowered payment the follower did not have to spend. The
-// difference is then which legal pool units paid (CR 601.2h), not a rules
-// divergence. paymentStep is false for an engine that begins manual payment
-// with the recorded multiset (XMage), unless the tape recorded none: then the
-// follower's auto-payment, like gorge's, is a choice of its own. Forge's
-// out-of-tree driver still documents Item.Payment without consuming it, so a
-// Forge pool split after any cast stays a payment choice until that driver
-// lands (cmd/oraclediff/forge.go). Every other differing field makes this
-// false, so a pool difference that comes with any other change still diverges.
+// activate whose recorded pool spend had a real colour choice the follower
+// did not have to take. The difference is then which legal pool units paid
+// (CR 601.2h), not a rules divergence. A step with no recorded spend, or one
+// that spent a single colour, is not a payment choice (see paymentStep).
+// paymentStep is false for an engine that begins manual payment with the
+// recorded multiset (XMage): then the follower's split is gorge's, so a pool
+// difference is real. Forge's out-of-tree driver still documents Item.Payment
+// without consuming it, so a Forge pool split after such a cast is a payment
+// choice until that driver lands (cmd/oraclediff/forge.go). Every other
+// differing field makes this false, so a pool difference that comes with any
+// other change still diverges.
 func paymentChoice(item lower.Lowered, g rules.OracleResult, x oraclediff.XResult, v oraclediff.Verdict, step int, engine string) bool {
 	if v.Status != oraclediff.Diverge || !strings.HasSuffix(v.Field, ".pool") || step < 0 {
 		return false
 	}
-	if !paymentStep(item, step, engine) && !paymentStep(item, step-1, engine) {
+	if !paymentStep(item, g, step, engine) && !paymentStep(item, g, step-1, engine) {
 		return false
 	}
 	ignore := make([]string, 0, len(item.Item.Ignore)+1)
@@ -130,10 +132,15 @@ func paymentChoice(item lower.Lowered, g rules.OracleResult, x oraclediff.XResul
 }
 
 // paymentStep reports whether lowered step i is a cast or activate whose
-// payment the follower can choose or has to take as recorded. A step with no
-// recorded payment is unspecified; engine consumesPayment reports whether that
-// driver applies the recorded multiset.
-func paymentStep(item lower.Lowered, i int, engine string) bool {
+// recorded pool spend offered a real colour choice for the follower to make
+// differently. A step with no recorded spend (gorge spent nothing, or the
+// item predates the recorder) is not a payment choice: no colour was chosen,
+// so a pool difference there is a real one. The payment step's starting pool
+// must also hold two or more colours; a one-colour pool fixed no choice, so a
+// follower's pool difference there is a real one too. engine consumesPayment
+// reports whether that driver applies the recorded multiset; when it does, a
+// pool difference is real, not a choice.
+func paymentStep(item lower.Lowered, g rules.OracleResult, i int, engine string) bool {
 	if i < 0 || i >= len(item.Item.Steps) {
 		return false
 	}
@@ -142,11 +149,46 @@ func paymentStep(item lower.Lowered, i int, engine string) bool {
 	default:
 		return false
 	}
-	pay := ""
-	if i < len(item.Item.Payment) {
-		pay = item.Item.Payment[i]
+	if i >= len(item.Item.Payment) || item.Item.Payment[i] == "" {
+		return false
 	}
-	return pay == "" || !consumesPayment(engine)
+	if consumesPayment(engine) {
+		return false
+	}
+	return poolColours(g, item.Item.Steps[i].Seat, i) >= 2
+}
+
+// poolColours is how many distinct colours the payment step's starting pool
+// held. The checkpoint before step i is snapshot i (snapshot 0 is the setup),
+// so it carries the mana the cast or activation had available, including any
+// explicit mana-tap steps lowered ahead of it.
+func poolColours(g rules.OracleResult, seat, step int) int {
+	if step < 0 || step >= len(g.Snapshots) {
+		return 0
+	}
+	for _, p := range g.Snapshots[step].Players {
+		if p.Seat == seat {
+			return distinctColours(p.Pool)
+		}
+	}
+	return 0
+}
+
+// distinctColours is how many distinct colours a pool string names. A
+// one-colour pool (including an empty one) fixed no colour choice, so a
+// follower's pool difference cannot be the player's legal split.
+func distinctColours(pool string) int {
+	var seen [128]bool
+	n := 0
+	for i := 0; i < len(pool); i++ {
+		c := pool[i]
+		if c >= 128 || seen[c] {
+			continue
+		}
+		seen[c] = true
+		n++
+	}
+	return n
 }
 
 // consumesPayment is the driver capability, not a class of difference: XMage
