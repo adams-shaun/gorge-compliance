@@ -24,11 +24,12 @@ import org.mage.test.player.TestComputerPlayer;
 import org.mage.test.player.TestPlayer;
 
 /** Drives ScriptedChoicePlayer.playMana through a real {1}{G} cost payment,
- * with no game: the recorded multiset must decide the colour split, an
- * unusable multiset must fall back to auto-payment rather than fail the
- * harness, and the replay's runCode payment hooks must reach the
- * ScriptedChoicePlayer even though TestPlayer hands their payloads the inner
- * computer player. Run scripts/xmage-oracle-test-payment.sh. */
+ * with no game: the recorded multiset must decide the colour split, a
+ * generic-only ask whose plan names no pool unit is payable by any colour, an
+ * exhausted multiset or an unpayable specific pip must fall back to
+ * auto-payment rather than fail the harness, and the replay's runCode payment
+ * hooks must reach the ScriptedChoicePlayer even though TestPlayer hands their
+ * payloads the inner computer player. Run scripts/xmage-oracle-test-payment.sh. */
 public final class ScenarioReplayPaymentTest {
     private static final class Source extends MageObjectImpl {
         Source() {
@@ -230,20 +231,39 @@ public final class ScenarioReplayPaymentTest {
         System.out.println("PASS an exhausted recorded multiset falls back to auto-payment");
     }
 
-    private static void testUnusableMultisetFallsBack() throws Exception {
-        // Pool RR, gorge recorded GG: no green unit is in the pool, so the
-        // first playMana ask cannot use the multiset and must fall back to
-        // auto-payment instead of leaving manual mode with no choice.
+    private static void testUnusableGenericPlanPaysFromPool() throws Exception {
+        // Pool RR, gorge recorded GG for a generic-only {2}. No plan letter
+        // names a pool unit, but the generic part accepts any colour: the
+        // manual window pays RR rather than switching to auto-payment. This is
+        // the dh2 plan-preference contract (and the shape the sweep fixed: a
+        // dual land's chosen colour can leave the pool off the recorded plan).
         Game game = game();
         ScriptedPayment sp = newPlayer(game);
         TestPlayer p = sp.player;
         addMana(p.getManaPool(), 2, 0);
         p.updateRange(game);
         sp.begin("GG");
-        pay(p, game, "{2}");
+        equal(true, pay(p, game, "{2}"));
+        equal(false, p.getManaPool().isAutoPayment());
+        equal("", ScenarioReplay.pool(p.getManaPool()));
+        sp.end();
+        System.out.println("PASS a generic ask off the plan is paid from the pool, not auto-payment");
+    }
+
+    private static void testUnpayablePipFallsBack() throws Exception {
+        // Pool RR, plan GG, cost {1}{G}: the specific {G} pip cannot be paid
+        // by a red unit, so the window must fall back to auto-payment (which
+        // may float a new source) instead of spending a unit the cost rejects.
+        Game game = game();
+        ScriptedPayment sp = newPlayer(game);
+        TestPlayer p = sp.player;
+        addMana(p.getManaPool(), 2, 0);
+        p.updateRange(game);
+        sp.begin("GG");
+        pay(p, game, "{1}{G}");
         equal(true, p.getManaPool().isAutoPayment());
         sp.end();
-        System.out.println("PASS an unusable recorded multiset falls back to auto-payment");
+        System.out.println("PASS an unpayable coloured pip falls back to auto-payment");
     }
 
     public static void main(String[] args) throws Exception {
@@ -252,6 +272,7 @@ public final class ScenarioReplayPaymentTest {
         testRunCodeRecordedPayment();
         testQueuedStepChoiceSurvivesPayment();
         testExhaustedMultisetFallsBack();
-        testUnusableMultisetFallsBack();
+        testUnusableGenericPlanPaysFromPool();
+        testUnpayablePipFallsBack();
     }
 }

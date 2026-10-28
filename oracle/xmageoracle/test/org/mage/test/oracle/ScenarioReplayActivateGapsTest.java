@@ -1,24 +1,38 @@
 package org.mage.test.oracle;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import mage.util.RandomUtil;
 
 /** Replays the activate-gaps shapes end to end, no JUnit: a cast whose
- * recorded pool-spend plan cannot name the generic units, and the Saddle/Crew
- * cost chooser with exactly one legal creature (the shape xprep now scripts).
+ * recorded pool-spend plan cannot name the generic units, casts whose plan
+ * must be preferred over a floating unit of another colour (including a
+ * colorless unit), and the Saddle/Crew cost chooser with exactly one legal
+ * creature (the shape xprep now scripts).
  * Run scripts/xmage-oracle-test-activate-gaps.sh. */
 public final class ScenarioReplayActivateGapsTest {
 
     /** Deal each scenario the same RNG seed replayLines gives it, then fail
      * on the harness row TestPlayer writes instead of an exception. */
-    private static void passes(String name, String json) {
+    private static JsonObject passes(String name, String json) {
         JsonObject sc = JsonParser.parseString(json).getAsJsonObject();
         RandomUtil.setSeed(ScenarioReplay.scenarioSeed(sc));
         JsonObject res = new ScenarioReplay().replay(sc);
         if (res.has("harness")) {
             throw new AssertionError(name + ": " + res.get("harness").getAsString());
         }
+        return res;
+    }
+
+    /** Seat 0's mana pool in the snapshot at `at` (0 is the setup snapshot). */
+    private static String poolAt(JsonObject res, int at) {
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        if (snaps == null || snaps.size() <= at) {
+            throw new AssertionError("no snapshot " + at);
+        }
+        return snaps.get(at).getAsJsonObject().getAsJsonArray("players")
+                .get(0).getAsJsonObject().get("pool").getAsString();
     }
 
     /** gorge spent WUUU from a pool that holds UUWW: after the {U} pip the
@@ -46,6 +60,76 @@ public final class ScenarioReplayActivateGapsTest {
                 + "xmage_pos:[{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0},"
                 + "{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0}],"
                 + "payment:['','','','','WUUU']}");
+    }
+
+    /** The plan is a PREFERENCE, not a restriction: with a floating W outside
+     * gorge's recorded GG, the generic part must take the plan's second G, not
+     * the cheaper-to-index W. Plains/Forest/Forest tap for WGG; Grizzly Bears
+     * ({1}{G}) with payment GG leaves W, exactly what gorge's post-cast pool
+     * holds. The old generic loop walked WUBRGC and spent W for {1}, leaving G,
+     * a false snapshot divergence. */
+    private static void manualPaymentKeepsFloatingColour() {
+        JsonObject res = passes("manual payment keeps floating colour", "{"
+                + "id:'test:activate-gaps-plan-preference',"
+                + "name:'activate gaps plan preference',turn:1,"
+                + "setup:{"
+                + "p0:{battlefield:['Plains','Forest','Forest'],"
+                + "hand:['Grizzly Bears'],"
+                + "library_top:['Island','Island','Island','Island','Island','Island','Island','Island','Island','Island'],life:20},"
+                + "p1:{library_top:['Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain'],life:20}},"
+                + "steps:["
+                + "{op:'activate',seat:0,card:'p0:Plains',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Forest',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Forest#2',ability_index:0},"
+                + "{op:'cast',seat:0,card:'p0:Grizzly Bears'}],"
+                + "xmage_ability:['{T}: Add {W}.','{T}: Add {G}.','{T}: Add {G}.',''],"
+                + "xmage_answers:[null,null,null,null],"
+                + "xmage_pos:[{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0},"
+                + "{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0}],"
+                + "payment:['','','','GG']}");
+        String before = poolAt(res, 3);
+        if (!before.equals("WGG")) {
+            throw new AssertionError("precondition: pool before the cast must be WGG, got " + before);
+        }
+        String after = poolAt(res, 4);
+        if (!after.equals("W")) {
+            throw new AssertionError("expected the plan's GG to be spent, leaving W, got " + after);
+        }
+    }
+
+    /** COLORLESS is XMage's generic bucket, not a specific pip: with a Wastes
+     * floating beside the plan's W, the generic part must still take W (the
+     * recorded unit) and leave C. The old loop's {C} arm spent C first because
+     * it ran before the generic phase, leaving W -- the same class of false
+     * snapshot divergence as the floating-colour case, for the colorless kind
+     * of pool unit. */
+    private static void manualPaymentColorlessFollowsPlan() {
+        JsonObject res = passes("manual payment colorless follows plan", "{"
+                + "id:'test:activate-gaps-colorless-plan-preference',"
+                + "name:'activate gaps colorless plan preference',turn:1,"
+                + "setup:{"
+                + "p0:{battlefield:['Plains','Wastes','Forest'],"
+                + "hand:['Grizzly Bears'],"
+                + "library_top:['Island','Island','Island','Island','Island','Island','Island','Island','Island','Island'],life:20},"
+                + "p1:{library_top:['Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain'],life:20}},"
+                + "steps:["
+                + "{op:'activate',seat:0,card:'p0:Plains',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Wastes',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Forest',ability_index:0},"
+                + "{op:'cast',seat:0,card:'p0:Grizzly Bears'}],"
+                + "xmage_ability:['{T}: Add {W}.','{T}: Add {C}.','{T}: Add {G}.',''],"
+                + "xmage_answers:[null,null,null,null],"
+                + "xmage_pos:[{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0},"
+                + "{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0}],"
+                + "payment:['','','','WG']}");
+        String before = poolAt(res, 3);
+        if (!before.equals("WGC")) {
+            throw new AssertionError("precondition: pool before the cast must be WGC, got " + before);
+        }
+        String after = poolAt(res, 4);
+        if (!after.equals("C")) {
+            throw new AssertionError("expected the plan's W to be spent, leaving C, got " + after);
+        }
     }
 
     /** Saddle 2 with one other untapped creature: the Tap cost's chooser has a
@@ -83,8 +167,11 @@ public final class ScenarioReplayActivateGapsTest {
 
     public static void main(String[] args) {
         manualPaymentGenericFallback();
+        manualPaymentKeepsFloatingColour();
+        manualPaymentColorlessFollowsPlan();
         saddleSingleOptionCost();
         crewSingleOptionCost();
-        System.out.println("PASS manual-payment generic fallback; Saddle/Crew single-option cost choices");
+        System.out.println("PASS manual-payment generic fallback and plan preference "
+                + "(coloured and colorless units); Saddle/Crew single-option cost choices");
     }
 }
