@@ -58,6 +58,11 @@ type Seat struct {
 	// card. A planeswalker's loyalty headroom and a "creature with a +1/+1
 	// counter" target fixture ride it.
 	Counters map[string]map[string]int32 `json:"counters,omitempty"`
+	// Tokens are the tokens the seat controls at setup, in creation order (the
+	// runner's setup "tokens"): the runner mints them after the seat's card
+	// placements, so a "pN:token:Name#k" ref binds as in the recorded game.
+	// Placement fires no trigger and no CreateToken replacement.
+	Tokens []SetupToken `json:"tokens,omitempty"`
 	// Speed is the seat's starting speed, 0..4 (the runner's setup field).
 	Speed int32 `json:"speed,omitempty"`
 	// Life is the seat's starting life total when set (the runner's and the
@@ -65,6 +70,14 @@ type Seat struct {
 	// activation gated on "at least N life" (Ayli's CheckSVar$ X |
 	// SVarCompare$ GEY over Count$YourLifeTotal) rides it.
 	Life *int32 `json:"life,omitempty"`
+}
+
+// SetupToken is one token a seat's setup places: the Forge token-script stem
+// and the token's COMPLETE counter set (a placed token enters with none of its
+// own, so unlike Seat.Counters this is not added on top of entry counters).
+type SetupToken struct {
+	Script   string           `json:"script"`
+	Counters map[string]int32 `json:"counters,omitempty"`
 }
 
 // WithCounters returns s with n more counters of kind on its card name. The

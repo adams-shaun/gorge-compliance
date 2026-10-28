@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/events"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/engine/state"
@@ -15,7 +16,6 @@ import (
 
 // Refusal reasons that are not a bare field:<Type>.<Name>.
 const (
-	reasonToken       = "token_on_battlefield"
 	reasonContinuous  = "field:Engine.continuous"
 	reasonPhaseTrig   = "trigger:upkeep_or_draw"
 	reasonByName      = "setup_by_name:"       // + back_face | counters
@@ -77,6 +77,9 @@ func capture(e *rules.Engine, entry int) *cut {
 			w.why[reasonZone+o.Zone.String()] = true
 		}
 		w.struct_(reflect.ValueOf(o).Elem(), "Object", objectTable, o)
+		if o.Zone == state.ZBattlefield && o.IsToken {
+			w.checkToken(o)
+		}
 		if o.Zone == state.ZBattlefield && phaseTriggered(o) {
 			w.why[reasonPhaseTrig] = true
 		}
@@ -148,6 +151,8 @@ type walker struct {
 	// entryRead memoises whether any card of the game reads this turn's zone
 	// entries (turnEntryReaders); entryKnown says it was computed.
 	entryRead, entryKnown bool
+	// stems is the reverse of Game.Tokens, built on first use (tokenScript).
+	stems map[*cards.Card]string
 }
 
 // turnEntryReaders are the script words through which gorge reads Game.Entered
@@ -198,10 +203,6 @@ func (w *walker) struct_(v reflect.Value, typ string, table map[string]entry, o 
 			continue
 		}
 		if en.Class != refuse || !w.live(typ, f.Name, v.Field(i), o) {
-			continue
-		}
-		if typ == "Object" && f.Name == "IsToken" {
-			w.why[reasonToken] = true
 			continue
 		}
 		w.why[fmt.Sprintf("field:%s.%s", typ, f.Name)] = true
@@ -319,12 +320,17 @@ func frontName(o *state.Object) string {
 // whatever setup cannot say.
 func (w *walker) place(c *cut) {
 	g := w.g
-	var bf [2][]*state.Object
+	var bf, toks [2][]*state.Object
 	for i := range g.Objs {
 		o := &g.Objs[i]
 		if o.Zone == state.ZBattlefield {
 			if o.Owner != o.Controller {
 				w.why["field:Object.Controller"] = true
+				continue
+			}
+			if o.IsToken {
+				// Tokens are listed in id order and bound after every card.
+				toks[o.Owner] = append(toks[o.Owner], o)
 				continue
 			}
 			bf[o.Owner] = append(bf[o.Owner], o)
@@ -441,7 +447,9 @@ func (w *walker) place(c *cut) {
 		seat.Speed = g.Players[s].Speed
 		c.Setup[s] = seat
 	}
-	// An attachment names its bearer's ref, so both seats are bound first.
+	w.placeTokens(c, toks)
+	// An attachment names its bearer's ref, so both seats and their tokens are
+	// bound first.
 	for s := range g.Players {
 		for _, o := range bf[s] {
 			if o.AttachedTo == 0 {
