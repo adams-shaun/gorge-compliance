@@ -701,6 +701,84 @@ func TestLowerResolvesTriggerTargetAfterEmptyPass(t *testing.T) {
 			t.Fatalf("truncated %q, want %q", l.Truncated, want)
 		}
 	})
+
+	t.Run("owed answers land on the kept pass, not the resolve", func(t *testing.T) {
+		// The first pass poses a choice it owes to the next step. That next
+		// step is the empty-stack pass this fallback keeps, so the owed answer
+		// must land on it; the resolve step only carries the trigger target.
+		pos := prio(0, pass, 7)
+		choice := game.Entry{Kind: "choose", Seat: 0, Turn: 1, Step: "main1",
+			StackTop: stateID(7), Digest: d, Picks: []game.Pick{{Kind: "no"}}}
+		var l Lowered
+		l.lowerEntries(nil, seatMap{}, []game.Entry{pos, choice, pass0, target, pass1, pass2, stop}, 0, false)
+		if l.Truncated != "" {
+			t.Fatalf("truncated %q at %d", l.Truncated, l.TruncatedAt)
+		}
+		if got, want := ops(l), []string{"pass", "pass", "resolve", "pass"}; !reflect.DeepEqual(got, want) {
+			t.Fatalf("steps %v, want %v", got, want)
+		}
+		if len(l.Item.Steps[0].Answers) != 0 {
+			t.Fatalf("first pass carries answers %v", l.Item.Steps[0].Answers)
+		}
+		owed := l.Item.Steps[1]
+		if len(owed.Answers) != 1 || owed.Answers[0].Kind != "choose" ||
+			!reflect.DeepEqual(owed.Answers[0].Pick, []string{"no"}) {
+			t.Fatalf("kept pass answers %v, want the owed choose no", owed.Answers)
+		}
+		res := l.Item.Steps[2]
+		if len(res.Answers) != 1 || res.Answers[0].Kind != "target" ||
+			!reflect.DeepEqual(res.Answers[0].Pick, []string{"p1:Stromkirk Bloodthief"}) {
+			t.Fatalf("resolve answers %v, want only the trigger target", res.Answers)
+		}
+	})
+
+	t.Run("fallback guards keep the truncation", func(t *testing.T) {
+		withMana := prio(0, pass, 9)
+		withMana.Mana = []game.ManaRec{{Obj: stateID(5), Name: "Plains", Ref: "p0:Plains"}}
+		withRNG := prio(0, pass, 9)
+		withRNG.RNG = 1
+		withFlip := prio(0, pass, 9)
+		withFlip.Flips = []game.Flip{{Seat: 0, Win: true}}
+		attackers := prio(0, pass, 9)
+		attackers.Kind = "attackers"
+		blockers := prio(0, pass, 9)
+		blockers.Kind = "blockers"
+		choose := game.Entry{Kind: "choose", Seat: 0, Turn: 1, Step: "main1",
+			StackTop: stateID(9), Digest: d, Picks: []game.Pick{{Kind: "no"}}}
+		for _, c := range []struct {
+			name string
+			g    []game.Entry
+		}{
+			{"mana activation before the stop", []game.Entry{pass0, target, withMana, pass2, stop}},
+			{"rng draw before the stop", []game.Entry{pass0, target, withRNG, pass2, stop}},
+			{"coin flip before the stop", []game.Entry{pass0, target, withFlip, pass2, stop}},
+			{"attackers declaration before the stop", []game.Entry{pass0, target, attackers, pass2, stop}},
+			{"blockers declaration before the stop", []game.Entry{pass0, target, blockers, pass2, stop}},
+			{"a non-target ask in the group", []game.Entry{pass0, target, choose, pass1, stop}},
+			{"no later empty-stack priority", []game.Entry{pass0, target, pass1, pass2}},
+		} {
+			t.Run(c.name, func(t *testing.T) {
+				var l Lowered
+				l.lowerEntries(nil, seatMap{}, c.g, 0, false)
+				if want := "unsupported_kind:ask_after_pass:target"; l.Truncated != want {
+					t.Fatalf("truncated %q at %d, want %q", l.Truncated, l.TruncatedAt, want)
+				}
+			})
+		}
+	})
+
+	t.Run("a trigger_order ask is skipped", func(t *testing.T) {
+		order := game.Entry{Kind: "trigger_order", Seat: 0, Turn: 1, Step: "end",
+			StackTop: stateID(9), Digest: d}
+		var l Lowered
+		l.lowerEntries(nil, seatMap{}, []game.Entry{pass0, order, target, pass1, pass2, stop}, 0, false)
+		if l.Truncated != "" {
+			t.Fatalf("truncated %q at %d", l.Truncated, l.TruncatedAt)
+		}
+		if got, want := ops(l), []string{"pass", "resolve", "pass"}; !reflect.DeepEqual(got, want) {
+			t.Fatalf("steps %v, want %v", got, want)
+		}
+	})
 }
 
 func ops(l Lowered) []string {

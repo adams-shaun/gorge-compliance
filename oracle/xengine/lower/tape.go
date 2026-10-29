@@ -239,10 +239,12 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 			}
 		}
 		if len(owed) > 0 {
-			// The pass before this group was waiting for a step's answers;
-			// this group's first step or the resolve step takes them.
+			// The pass before this group was waiting for the next step's
+			// answers. The resolve step takes them only when it replaces the
+			// group's pass; when the pass is kept (resolveKeepsPass) the pass
+			// itself is the next step, so the answers must land on it.
 			dst := &steps[0]
-			if resolve != nil {
+			if resolve != nil && !resolveKeepsPass {
 				dst = resolve
 			}
 			dst.Answers = append(append([]oraclegen.Answer{}, owed...), dst.Answers...)
