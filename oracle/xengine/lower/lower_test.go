@@ -614,7 +614,10 @@ func TestLowerResolvesTriggerTargetAfterPass(t *testing.T) {
 		}
 	})
 
-	t.Run("empty-stack pass still truncates", func(t *testing.T) {
+	t.Run("no priority between the ask and the stop still truncates", func(t *testing.T) {
+		// The target ask is answered by the trigger's own passes, but there is
+		// no priority at the trigger's stack top between it and the empty-stack
+		// stop: the fallback cannot script the target answer on a resolve step.
 		empty := prio(0, game.Pick{Kind: "pass"}, 0)
 		var l Lowered
 		l.lowerEntries(nil, seatMap{}, []game.Entry{empty, target, pass4}, 0, false)
@@ -646,4 +649,64 @@ func TestLowerResolvesTriggerTargetAfterPass(t *testing.T) {
 			t.Fatalf("next step %+v, want the owed target answer", owed)
 		}
 	})
+}
+
+// TestLowerResolvesTriggerTargetAfterEmptyPass: a pass on an empty stack ends
+// the step, and only then does the step-boundary trigger go on the stack with
+// its target. The pass must stay its own step (a resolve starting on an
+// empty-stack priority returns before passing), and a following resolve step
+// answers the trigger's asks and stops at the next empty-stack priority.
+func TestLowerResolvesTriggerTargetAfterEmptyPass(t *testing.T) {
+	d := game.Digest{Turn: 1, Step: "main1", Active: 0, Priority: 0}
+	prio := func(seat int, p game.Pick, top uint32) game.Entry {
+		return game.Entry{Kind: "priority", Seat: seat, Turn: 1, Step: "main1",
+			Picks: []game.Pick{p}, StackTop: stateID(top), Digest: d}
+	}
+	pass := game.Pick{Kind: "pass"}
+	pass0 := prio(0, pass, 0) // empty stack: the pass ends the step
+	target := game.Entry{Kind: "target", Seat: 1, Turn: 1, Step: "end", Digest: d,
+		StackTop: stateID(9), Max: 1,
+		Picks: []game.Pick{{Kind: "permanent", Obj: stateID(42), Ref: "p1:Stromkirk Bloodthief"}}}
+	pass1 := prio(0, pass, 9) // the trigger is on the stack
+	pass2 := prio(1, pass, 9)
+	stop := prio(0, pass, 0) // first empty-stack priority
+
+	t.Run("trigger target after an empty-stack pass", func(t *testing.T) {
+		var l Lowered
+		l.lowerEntries(nil, seatMap{}, []game.Entry{pass0, target, pass1, pass2, stop}, 0, false)
+		if l.Truncated != "" {
+			t.Fatalf("truncated %q at %d", l.Truncated, l.TruncatedAt)
+		}
+		if got, want := ops(l), []string{"pass", "resolve", "pass"}; !reflect.DeepEqual(got, want) {
+			t.Fatalf("steps %v, want %v", got, want)
+		}
+		if !reflect.DeepEqual(l.StepEntry, []int{0, 3, 4}) {
+			t.Fatalf("StepEntry %v, want [0 3 4]", l.StepEntry)
+		}
+		if len(l.Item.Steps[0].Answers) != 0 {
+			t.Fatalf("pass carries answers %v", l.Item.Steps[0].Answers)
+		}
+		res := l.Item.Steps[1]
+		if len(res.Answers) != 1 || res.Answers[0].Kind != "target" ||
+			!reflect.DeepEqual(res.Answers[0].Pick, []string{"p1:Stromkirk Bloodthief"}) {
+			t.Fatalf("resolve answers %v", res.Answers)
+		}
+	})
+
+	t.Run("an intervening priority action still truncates", func(t *testing.T) {
+		act := prio(0, game.Pick{Kind: "activate", Ref: "p0:Plains"}, 9)
+		var l Lowered
+		l.lowerEntries(nil, seatMap{}, []game.Entry{pass0, target, act, pass1, stop}, 0, false)
+		if want := "unsupported_kind:ask_after_pass:target"; l.Truncated != want {
+			t.Fatalf("truncated %q, want %q", l.Truncated, want)
+		}
+	})
+}
+
+func ops(l Lowered) []string {
+	var out []string
+	for _, s := range l.Item.Steps {
+		out = append(out, s.Op)
+	}
+	return out
 }

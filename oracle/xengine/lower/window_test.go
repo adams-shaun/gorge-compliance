@@ -123,6 +123,9 @@ func TestWindowsSelfCheck(t *testing.T) {
 			if l.Truncated != "" {
 				truncated++
 				truncs[l.Truncated]++
+				if strings.Contains(l.Truncated, "ask_after_pass:target") {
+					t.Errorf("%s: still truncates at %d: %s", l.Item.ID, l.TruncatedAt, l.Truncated)
+				}
 			}
 			if l.HasRNG {
 				rngWin++
