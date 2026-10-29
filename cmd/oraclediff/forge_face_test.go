@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -31,7 +32,7 @@ func TestForgeAbilityLinesUseSetupFace(t *testing.T) {
 		Setup: map[string]oraclegen.Seat{"p0": {BackFace: []string{name}}},
 		Steps: []oraclegen.Step{{Op: "activate", Card: "p0:" + name, AbilityIndex: &idx}},
 	}}
-	backLines := forgeAbilityLines(reg, backItem)
+	backLines := forgeAbilityLines(reg, backItem, rules.OracleResult{})
 	gotBack, exists := backLines["0"]
 	if !exists || gotBack != back.Abilities[abilityIndex].Line {
 		t.Fatalf("back-face ability line = %q (present %v), want %q", gotBack, exists, back.Abilities[abilityIndex].Line)
@@ -40,7 +41,7 @@ func TestForgeAbilityLinesUseSetupFace(t *testing.T) {
 	frontFace := card.Faces[0]
 	frontItem := backItem
 	frontItem.Scenario.Setup = map[string]oraclegen.Seat{"p0": {}}
-	frontLines := forgeAbilityLines(reg, frontItem)
+	frontLines := forgeAbilityLines(reg, frontItem, rules.OracleResult{})
 	frontIndex := -1
 	for i, ability := range frontFace.Abilities {
 		if ability != nil {
@@ -57,7 +58,7 @@ func TestForgeAbilityLinesUseSetupFace(t *testing.T) {
 	frontStep := frontItem.Steps[0]
 	frontStep.AbilityIndex = &frontIndex
 	frontItem.Steps = []oraclegen.Step{frontStep}
-	frontLines = forgeAbilityLines(reg, frontItem)
+	frontLines = forgeAbilityLines(reg, frontItem, rules.OracleResult{})
 	if got, want := frontLines["0"], frontFace.Abilities[frontIndex].Line; got != want {
 		t.Errorf("front-face ability line = %q, want %q", got, want)
 	}
