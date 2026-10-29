@@ -454,14 +454,18 @@ func checkA(reg *cards.Registry, root, set string, sh *sharedTables) ([]Problem,
 		wrong := false
 		lacks := false
 		for _, r := range rows {
+			// checkA is the level-A scan: a verdict for a level-B template
+			// says nothing about the level-A claim. Both status checks go
+			// through rowCountsAtLevel so a future one cannot forget it.
+			if !rowCountsAtLevel(r, "A") {
+				continue
+			}
 			switch r.Status {
 			case compliance.StatusGorgeWrong:
 				bad(name, "gorge_wrong verdict (%s): %s", r.Template, r.Ruling)
 				wrong = true
 			case compliance.StatusXMageLacks:
-				if rowCountsAtLevel(r, "A") {
-					lacks = true
-				}
+				lacks = true
 			}
 		}
 		if wrong {
