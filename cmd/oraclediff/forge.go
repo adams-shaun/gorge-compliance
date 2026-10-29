@@ -151,7 +151,7 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 		if gerr != nil || decisions == nil {
 			decisions = []rules.OracleDecision{}
 		}
-		line, err := json.Marshal(forgeBuildRequest(reg, it, decisions))
+		line, err := json.Marshal(forgeBuildRequest(reg, it, g, decisions))
 		if err != nil {
 			return err
 		}
@@ -170,13 +170,13 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 // forgeBuildRequest assembles the request for one item from gorge's decisions
 // for it: the scenario SHA names the item as given, the decisions lose those
 // for steps the driver will not pose, and the steps are then rewritten.
-func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, decisions []rules.OracleDecision) forgeRequest {
+func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision) forgeRequest {
 	sha := gate.ItemSHA(it)
 	decisions = forgeDropDeclarationDecisions(it, decisions)
 	it = forgeDeclarations(it)
 	return forgeRequest{
 		ID: it.ID, ScenarioSHA: sha, Item: it,
-		GorgeDecisions: decisions, Abilities: forgeAbilityLines(reg, it),
+		GorgeDecisions: decisions, Abilities: forgeAbilityLines(reg, it, g),
 	}
 }
 
@@ -280,37 +280,189 @@ func forgeDropDeclarationDecisions(it oraclegen.Item, decisions []rules.OracleDe
 // forgeAbilityLines maps each step that names an ability by ability_index to
 // the script line (cards.SA.Line) of Face.Abilities[index] on the step's card.
 // It reads face 1 when that card is listed in the owning seat's back_face
-// setup. A step whose card does not resolve to a corpus card, or whose index
-// is out of range, is left out: the driver then falls back to its own matching
-// rather than trusting a wrong line.
-func forgeAbilityLines(reg *cards.Registry, it oraclegen.Item) map[string]string {
+// setup. A step the setup face does not resolve is retried against the
+// replay's snapshot entering that step: a token is not in the printed-name
+// registry (tokens live in Registry.Tokens), and a card that transforms
+// during the window is only on its back face from that step on. The retry
+// only fills steps left out today, so an already-emitted line never changes
+// and the Forge result cache stays valid. A step that still does not resolve
+// is left out: the driver then falls back to its own matching rather than
+// trusting a wrong line.
+func forgeAbilityLines(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) map[string]string {
 	lines := map[string]string{}
 	for i, st := range it.Steps {
 		if st.AbilityIndex == nil || st.Card == "" {
 			continue
 		}
+		k := *st.AbilityIndex
 		c, ok := reg.Lookup(refCardName(st.Card))
-		if !ok || len(c.Faces) == 0 {
-			continue
-		}
-		face := 0
-		if seat, _, hasSeat := strings.Cut(st.Card, ":"); hasSeat {
-			for _, name := range it.Setup[seat].BackFace {
-				if name == refCardName(st.Card) {
-					face = 1
-					break
+		if ok && len(c.Faces) > 0 {
+			face := 0
+			if seat, _, hasSeat := strings.Cut(st.Card, ":"); hasSeat {
+				for _, name := range it.Setup[seat].BackFace {
+					if name == refCardName(st.Card) {
+						face = 1
+						break
+					}
+				}
+			}
+			if face < len(c.Faces) {
+				if line, ok := abilityLine(c.Faces[face], k); ok {
+					lines[strconv.Itoa(i)] = line
+					continue
 				}
 			}
 		}
-		if face >= len(c.Faces) {
-			continue
-		}
-		f := c.Faces[face]
-		if k := *st.AbilityIndex; k >= 0 && k < len(f.Abilities) && f.Abilities[k] != nil {
-			lines[strconv.Itoa(i)] = f.Abilities[k].Line
+		if line, ok := forgeSnapshotAbilityLine(reg, it, st, g, i); ok {
+			lines[strconv.Itoa(i)] = line
 		}
 	}
 	return lines
+}
+
+// forgeSnapshotAbilityLine resolves a step the setup face could not: it finds
+// the permanent the step names in the snapshot entering that step and reads
+// the ability off the face that is up there. Token refs resolve through the
+// seat's setup stems, a printed card (a token copy), or the token scripts,
+// narrowed by the snapshot's keywords and types when a name is shared.
+func forgeSnapshotAbilityLine(reg *cards.Registry, it oraclegen.Item, st oraclegen.Step, g rules.OracleResult, i int) (string, bool) {
+	var perm rules.OracleSnapPerm
+	found := false
+	if i < len(g.Snapshots) {
+		for _, p := range g.Snapshots[i].Permanents {
+			if p.Ref == st.Card {
+				perm, found = p, true
+				break
+			}
+		}
+	}
+	name := refCardName(st.Card)
+	if tokenName, isToken := strings.CutPrefix(name, "token:"); isToken {
+		c := forgeTokenCard(reg, it, st.Card, tokenName, perm, found)
+		if c == nil || len(c.Faces) == 0 {
+			return "", false
+		}
+		face := c.Faces[0]
+		for _, f := range c.Faces {
+			if f.Name == tokenName {
+				face = f
+				break
+			}
+		}
+		return abilityLine(face, *st.AbilityIndex)
+	}
+	if !found {
+		return "", false
+	}
+	c, ok := reg.Lookup(name)
+	if !ok || len(c.Faces) == 0 {
+		return "", false
+	}
+	for _, f := range c.Faces {
+		if f.Name == perm.Name {
+			return abilityLine(f, *st.AbilityIndex)
+		}
+	}
+	return "", false
+}
+
+// forgeTokenCard finds the token script behind a "pN:token:Name" ref: the
+// owning seat's setup stem first (exact), then the printed-name registry (a
+// token copy of a real card), then the token scripts. Several scripts can
+// share a printed name (Vehicle Token), so the snapshot's keywords, types and
+// PT narrow them; a remaining tie is left unresolved rather than guessed.
+func forgeTokenCard(reg *cards.Registry, it oraclegen.Item, ref, name string, perm rules.OracleSnapPerm, found bool) *cards.Card {
+	if seat, _, hasSeat := strings.Cut(ref, ":"); hasSeat {
+		for _, t := range it.Setup[seat].Tokens {
+			if c := reg.Tokens[t.Script]; c != nil && len(c.Faces) > 0 && c.Faces[0].Name == name {
+				return c
+			}
+		}
+	}
+	if c, ok := reg.Lookup(name); ok && len(c.Faces) > 0 {
+		return c
+	}
+	stems := make([]string, 0, len(reg.Tokens))
+	for stem := range reg.Tokens {
+		stems = append(stems, stem)
+	}
+	sort.Strings(stems)
+	var cands []*cards.Card
+	for _, stem := range stems {
+		c := reg.Tokens[stem]
+		if c != nil && len(c.Faces) > 0 && c.Faces[0].Name == name {
+			cands = append(cands, c)
+		}
+	}
+	if len(cands) == 1 {
+		return cands[0]
+	}
+	if len(cands) == 0 || !found {
+		return nil
+	}
+	cands = filterCards(cands, func(c *cards.Card) bool {
+		return stringSetSubset(c.Faces[0].Keywords, perm.Keywords)
+	})
+	if len(cands) == 1 {
+		return cands[0]
+	}
+	if len(cands) == 0 {
+		return nil
+	}
+	cands = filterCards(cands, func(c *cards.Card) bool {
+		return stringSetEqual(c.Faces[0].Types, perm.Types)
+	})
+	if len(cands) == 1 {
+		return cands[0]
+	}
+	if len(cands) == 0 {
+		return nil
+	}
+	cands = filterCards(cands, func(c *cards.Card) bool {
+		return c.Faces[0].PT == perm.PT
+	})
+	if len(cands) == 1 {
+		return cands[0]
+	}
+	return nil
+}
+
+// abilityLine is the script line of ability k on f, when k names one.
+func abilityLine(f *cards.Face, k int) (string, bool) {
+	if k >= 0 && k < len(f.Abilities) && f.Abilities[k] != nil {
+		return f.Abilities[k].Line, true
+	}
+	return "", false
+}
+
+// stringSetSubset reports whether every member of a is a member of b.
+func stringSetSubset(a, b []string) bool {
+	in := make(map[string]bool, len(b))
+	for _, s := range b {
+		in[s] = true
+	}
+	for _, s := range a {
+		if !in[s] {
+			return false
+		}
+	}
+	return true
+}
+
+// stringSetEqual reports whether a and b hold the same members.
+func stringSetEqual(a, b []string) bool {
+	return stringSetSubset(a, b) && stringSetSubset(b, a)
+}
+
+// filterCards returns the cards for which keep is true, in input order.
+func filterCards(cs []*cards.Card, keep func(*cards.Card) bool) []*cards.Card {
+	out := cs[:0]
+	for _, c := range cs {
+		if keep(c) {
+			out = append(out, c)
+		}
+	}
+	return out
 }
 
 // refCardName is the printed name inside a card ref ("p0:Shock#2" is

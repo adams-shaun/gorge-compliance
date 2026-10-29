@@ -215,7 +215,7 @@ func TestForgeDropsDeclarationDecisions(t *testing.T) {
 		t.Errorf("non-xengine item lost decisions: %+v", got)
 	}
 
-	rq := forgeBuildRequest(testutil.CorpusRegistry(t), mk(lower.Template), ds)
+	rq := forgeBuildRequest(testutil.CorpusRegistry(t), mk(lower.Template), rules.OracleResult{}, ds)
 	if !reflect.DeepEqual(rq.GorgeDecisions, want) {
 		t.Errorf("exported decisions %+v, want %+v", rq.GorgeDecisions, want)
 	}
