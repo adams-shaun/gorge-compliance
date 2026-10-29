@@ -220,16 +220,38 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 				}
 			}
 		}
-		if len(owed) > 0 {
-			steps[0].Answers = append(append([]oraclegen.Answer{}, owed...), steps[0].Answers...)
-			owed, owedAt = nil, -1
-		}
 		mainStep := len(steps) - 1
+		var resolve *oraclegen.Step
+		resolveEnd := 0
 		if steps[mainStep].Op == "pass" && len(answers) > 0 {
 			if why := unsettled(entries[i:j]); why != nil {
-				l.stop(i, why)
-				return
+				res, end, ok := resolvePass(m, entries, i, j)
+				if !ok {
+					l.stop(i, why)
+					return
+				}
+				resolve, resolveEnd = res, end
 			}
+		}
+		if len(owed) > 0 {
+			// The pass before this group was waiting for a step's answers;
+			// this group's first step or the resolve step takes them.
+			dst := &steps[0]
+			if resolve != nil {
+				dst = resolve
+			}
+			dst.Answers = append(append([]oraclegen.Answer{}, owed...), dst.Answers...)
+			owed, owedAt = nil, -1
+		}
+		if resolve != nil {
+			l.Item.Steps = append(l.Item.Steps, *resolve)
+			l.StepEntry = append(l.StepEntry, resolveEnd-1)
+			l.Item.Payment = append(l.Item.Payment, "")
+			l.markShuffles(m, entries[i:resolveEnd], len(l.Item.Steps)-1)
+			i = resolveEnd
+			continue
+		}
+		if steps[mainStep].Op == "pass" && len(answers) > 0 {
 			owed, owedAt, owedSteps = answers, i, len(l.Item.Steps)
 		} else if len(answers) > 0 {
 			attach(&steps[mainStep], answers, entries[i:j])
@@ -388,6 +410,51 @@ func answersOf(m seatMap, g []game.Entry) ([]oraclegen.Answer, *truncation) {
 		answers = append(answers, ans)
 	}
 	return answers, nil
+}
+
+// resolvePass lowers a pass that resolved an object and put a new object on
+// the stack as one `resolve` step. An ETB trigger is put on the stack after
+// its creature spell resolved, so the pass's stack top (the spell) differs
+// from the ask's (the trigger) and `pass` cannot carry the target answer: a
+// pass answers exactly one priority decision. The runner's resolve op passes
+// priority, answers the pending asks from the step's answers, and stops at
+// the next priority with an empty stack. Only a target ask of a trigger that
+// appeared after a non-empty pass is lowered this way; any other unsettled
+// ask keeps the truncation.
+func resolvePass(m seatMap, entries []game.Entry, i, j int) (*oraclegen.Step, int, bool) {
+	if entries[i].StackTop == 0 {
+		return nil, 0, false
+	}
+	seen := false
+	for _, a := range entries[i+1 : j] {
+		if a.Kind == "trigger_order" {
+			continue
+		}
+		if a.Kind != "target" || a.StackTop == entries[i].StackTop {
+			return nil, 0, false
+		}
+		seen = true
+	}
+	if !seen {
+		return nil, 0, false
+	}
+	end := -1
+	for k := j; k < len(entries); k++ {
+		if entries[k].Kind == "priority" && entries[k].StackTop == 0 {
+			end = k
+			break
+		}
+	}
+	if end <= j {
+		// The stop state must lie after the asks, so the resolve step starts
+		// on the pass with a non-empty stack and does not early-return.
+		return nil, 0, false
+	}
+	answers, why := answersOf(m, entries[i:end])
+	if why != nil {
+		return nil, 0, false
+	}
+	return &oraclegen.Step{Op: "resolve", Seat: m.seat(entries[end].Seat), Answers: answers}, end, true
 }
 
 // lowerGroup lowers one decision and the asks it posed: the steps (the last is
