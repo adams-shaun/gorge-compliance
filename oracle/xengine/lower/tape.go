@@ -208,10 +208,13 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 		}
 		if len(owed) == 0 && len(steps) > 0 && quiet(entries[i:j]) {
 			if op := steps[len(steps)-1].Op; op == "cast" || op == "activate" {
-				if after, ok := l.afterDigest(j, entries); ok && len(entries[i].Digest.Diff(after)) == 0 {
+				if next, ok := l.afterEntry(j, entries); ok &&
+					len(entries[i].Digest.Diff(next.Digest)) == 0 &&
+					entries[i].StackTop == next.StackTop {
 					// A cast or activation the live game left the whole state
-					// unchanged on did not happen: it is not a replayable
-					// step (a refused Spree cast, for example).
+					// and the stack unchanged on did not happen: it is not a
+					// replayable step (a refused Spree cast, for example). A
+					// real action pushes an object, so the stack top changes.
 					i = j
 					continue
 				}
@@ -252,13 +255,22 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 // afterDigest is the state after the group ending at j-1: the next entry in the
 // slice, or a window's next-turn sentinel (l.Against) when the group is last.
 func (l *Lowered) afterDigest(j int, entries []game.Entry) (game.Digest, bool) {
-	if j < len(entries) {
-		return entries[j].Digest, true
-	}
-	if l.Against != nil && j < len(l.Against.Entries) {
-		return l.Against.Entries[j].Digest, true
+	if e, ok := l.afterEntry(j, entries); ok {
+		return e.Digest, true
 	}
 	return game.Digest{}, false
+}
+
+// afterEntry is the entry after the group ending at j-1: the next entry in the
+// slice, or a window's next-turn sentinel (l.Against) when the group is last.
+func (l *Lowered) afterEntry(j int, entries []game.Entry) (game.Entry, bool) {
+	if j < len(entries) {
+		return entries[j], true
+	}
+	if l.Against != nil && j < len(l.Against.Entries) {
+		return l.Against.Entries[j], true
+	}
+	return game.Entry{}, false
 }
 
 // markShuffles leaves a seat's library order out of the comparison from the

@@ -52,6 +52,10 @@ func Windows(reg *cards.Registry, pair [2]decks.Deck, seed uint64, opt game.Opti
 			refused = append(refused, Refusal{ID: id, Turn: c.Turn, Reasons: c.Reasons})
 			continue
 		}
+		if c.setupSpeedLatch(t) {
+			refused = append(refused, Refusal{ID: id, Turn: c.Turn, Reasons: []string{reasonSpeedLatch}})
+			continue
+		}
 		l, err := lowerWindow(reg, t, c, id)
 		if err != nil {
 			return nil, nil, t, err
@@ -73,6 +77,33 @@ func windowEnd(t *game.Tape, c *cut) int {
 		end++
 	}
 	return end
+}
+
+// setupSpeedLatch reports why the runner's setup drive consumes the window's
+// CR 702.179d speed trigger: the non-active seat's setup life is below 20, so
+// it is placed with a life-loss LifeChange, and the active seat already has
+// speed 1..3, so the inherent trigger is queued, resolved and latched at
+// turn 1. Entries are live-numbered; c.Active is the live active seat.
+func (c *cut) setupSpeedLatch(t *game.Tape) bool {
+	if t == nil || c.Entry >= len(t.Entries) {
+		return false
+	}
+	if c.Setup[c.Active].Speed <= 0 || c.Setup[c.Active].Speed >= 4 {
+		return false
+	}
+	life := c.Setup[1-c.Active].Life
+	if life == nil || *life >= 20 {
+		return false
+	}
+	loser := 1 - c.Active
+	hi := min(windowEnd(t, c)+1, len(t.Entries))
+	for i := c.Entry; i+1 < hi; i++ {
+		a, b := t.Entries[i].Digest.Players, t.Entries[i+1].Digest.Players
+		if loser < len(a) && loser < len(b) && a[loser].Life != b[loser].Life {
+			return true
+		}
+	}
+	return false
 }
 
 // windowTape is the tape a window's self-check holds it to: the entries from the

@@ -500,6 +500,16 @@ func TestLowerDropsRefusedCast(t *testing.T) {
 	if got := ops(cast, pass); !reflect.DeepEqual(got, []string{"pass"}) {
 		t.Fatalf("no-op cast: steps %v, want [pass]", got)
 	}
+	// A real cast that leaves the visible state unchanged but pushes an object
+	// on the stack (a {X}=0 ability that destroys nothing) must stay: the stack
+	// top changed from before the group to after it.
+	castStack := prio(game.Pick{Kind: "cast", Ref: "p0:Phantom Interference"}, d)
+	castStack.StackTop = 7
+	passStack := prio(game.Pick{Kind: "pass"}, d)
+	passStack.StackTop = 9
+	if got := ops(castStack, passStack); !reflect.DeepEqual(got, []string{"cast", "pass"}) {
+		t.Fatalf("stack-changing cast: steps %v, want [cast pass]", got)
+	}
 	// A group whose digest differs is a real action and must stay.
 	d2 := d
 	d2.Priority = 1
@@ -510,6 +520,12 @@ func TestLowerDropsRefusedCast(t *testing.T) {
 	act := prio(game.Pick{Kind: "ability", Ability: 0, Ref: "p0:Phantom Interference"}, d)
 	if got := ops(act, pass); !reflect.DeepEqual(got, []string{"pass"}) {
 		t.Fatalf("no-op activate: steps %v, want [pass]", got)
+	}
+	// The same contract for an activation that pushes an object.
+	actStack := prio(game.Pick{Kind: "ability", Ability: 0, Ref: "p0:Phantom Interference"}, d)
+	actStack.StackTop = 7
+	if got := ops(actStack, passStack); !reflect.DeepEqual(got, []string{"activate", "pass"}) {
+		t.Fatalf("stack-changing activate: steps %v, want [activate pass]", got)
 	}
 	// Only cast/activate are dropped: a no-op land drop and a pass stay.
 	land := prio(game.Pick{Kind: "play_land", Ref: "p0:Island"}, d)
