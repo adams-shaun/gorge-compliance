@@ -1450,6 +1450,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 final PhaseStep reportAs = checkpointStepAs;
                 checkpointStepAs = null;
                 runCode(cp, turn, phase, checkpointSeat(op, st, i), (info, p, g) -> {
+                    applyDeclarationStepEnd(reportAs, g);
                     JsonObject snap = snapshot(info, g);
                     if (reportAs != null) {
                         snap.addProperty("step", reportAs.name());
@@ -3692,6 +3693,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
             case DECLARE_ATTACKERS: return PhaseStep.BEGIN_COMBAT;
             case DECLARE_BLOCKERS: return PhaseStep.DECLARE_ATTACKERS;
             default: throw new IllegalArgumentException("no declaration in " + declaration);
+        }
+    }
+
+    /** Apply the step end a declaration-ahead checkpoint stands after: the
+     * checkpoint is taken at the previous step's last priority, and that step
+     * ends immediately afterwards, emptying every mana pool (CR 500.5/106.4). Runs
+     * XMage's own emptyManaPools, so an effect that keeps mana (an EndOfTurn
+     * mana item, a do-not-empty type) still keeps it. */
+    static void applyDeclarationStepEnd(PhaseStep reportAs, Game g) {
+        if (reportAs == PhaseStep.DECLARE_ATTACKERS || reportAs == PhaseStep.DECLARE_BLOCKERS) {
+            g.emptyManaPools(null);
         }
     }
 
