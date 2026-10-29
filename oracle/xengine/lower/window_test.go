@@ -300,39 +300,28 @@ func TestGateRefusesChosenMode(t *testing.T) {
 // refused.
 func TestSetupSpeedLatch(t *testing.T) {
 	life := func(n int32) *int32 { return &n }
-	players := func(p0, p1 int32) []game.PlayerDigest {
-		return []game.PlayerDigest{{Seat: 0, Life: p0}, {Seat: 1, Life: p1}}
-	}
-	tape := func(entries ...game.Entry) *game.Tape { return &game.Tape{Entries: entries} }
-	entry := func(turn int32, p0, p1 int32) game.Entry {
-		return game.Entry{Turn: turn, Digest: game.Digest{Turn: turn, Players: players(p0, p1)}}
-	}
 	c := func(speed int32, opp *int32) *cut {
 		return &cut{Entry: 0, Turn: 1, Active: 0, Setup: [2]oraclegen.Seat{
 			{Speed: speed},
 			{Life: opp},
 		}}
 	}
-	fall := tape(entry(1, 20, 16), entry(1, 20, 12))
-	sentinel := tape(entry(1, 20, 16), entry(2, 20, 12))
-	flat := tape(entry(1, 20, 16), entry(1, 20, 16))
-	seat0 := tape(entry(1, 20, 16), entry(1, 12, 16))
 	for _, tc := range []struct {
 		name string
 		c    *cut
-		t    *game.Tape
 		want bool
 	}{
-		{"speed 2, opponent 16, in-window fall", c(2, life(16)), fall, true},
-		{"speed 4 (max)", c(4, life(16)), fall, false},
-		{"speed 0", c(0, life(16)), fall, false},
-		{"opponent life 20", c(2, life(20)), fall, false},
-		{"no fall in window", c(2, life(16)), flat, false},
-		{"fall on active seat only", c(2, life(16)), seat0, false},
-		{"fall on next-turn sentinel", c(2, life(16)), sentinel, true},
-		{"nil tape", c(2, life(16)), nil, false},
+		{"speed 2, opponent 16", c(2, life(16)), true},
+		{"speed 4 (max)", c(4, life(16)), false},
+		{"speed 0", c(0, life(16)), false},
+		{"opponent life 20", c(2, life(20)), false},
+		// The setup's own LifeChange is the trigger, so no tape life change is
+		// needed (the live tape cannot show the seeded speed anyway).
+		{"no fall in window", c(2, life(16)), true},
+		{"opponent life 19", c(1, life(19)), true},
+		{"nil opponent life", c(2, nil), false},
 	} {
-		if got := tc.c.setupSpeedLatch(tc.t); got != tc.want {
+		if got := tc.c.setupSpeedLatch(); got != tc.want {
 			t.Errorf("%s: setupSpeedLatch = %v, want %v", tc.name, got, tc.want)
 		}
 	}
