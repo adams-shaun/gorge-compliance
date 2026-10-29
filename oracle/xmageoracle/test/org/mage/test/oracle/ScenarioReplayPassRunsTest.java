@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import mage.constants.PhaseStep;
+import mage.game.Game;
 
 /** No database or game: pins how the driver follows the runs of priority
  * passes of a recorded game (an xengine tape or window), where the steps carry
@@ -80,6 +81,31 @@ public final class ScenarioReplayPassRunsTest {
         check(ScenarioReplay.requireStackIsStrict(pair, 2), "a legacy pair demands the stack object it resolves");
     }
 
+    /** A declaration-ahead checkpoint stands after a step end, which empties
+     * every mana pool through XMage's own emptyManaPools; an ordinary
+     * checkpoint keeps the pool XMage shows. */
+    private static void declarationStepEnd() {
+        final int[] calls = {0};
+        Game fake = (Game) java.lang.reflect.Proxy.newProxyInstance(
+                ScenarioReplayPassRunsTest.class.getClassLoader(),
+                new Class<?>[]{Game.class},
+                (proxy, method, args) -> {
+                    if (method.getName().equals("emptyManaPools")) {
+                        calls[0]++;
+                        check(args.length == 1 && args[0] == null, "the step end has no source ability");
+                        return null;
+                    }
+                    throw new AssertionError("unexpected Game call " + method.getName());
+                });
+        ScenarioReplay.applyDeclarationStepEnd(PhaseStep.DECLARE_ATTACKERS, fake);
+        check(calls[0] == 1, "the attacker declaration checkpoint applies the step end");
+        ScenarioReplay.applyDeclarationStepEnd(PhaseStep.DECLARE_BLOCKERS, fake);
+        check(calls[0] == 2, "the blocker declaration checkpoint applies the step end");
+        ScenarioReplay.applyDeclarationStepEnd(null, fake);
+        ScenarioReplay.applyDeclarationStepEnd(PhaseStep.BEGIN_COMBAT, fake);
+        check(calls[0] == 2, "an ordinary checkpoint keeps the pool XMage shows");
+    }
+
     public static void main(String[] args) {
         // Three passes in a row: p0 passes (priority goes to p1, same step),
         // p1 passes (both passed on an empty stack: begin-combat), p0 passes
@@ -136,6 +162,7 @@ public final class ScenarioReplayPassRunsTest {
         check(ScenarioReplay.passAction(pair, 1) == ScenarioReplay.PASS_PAIR_SECOND, "legacy pair second");
         declTiming();
         emptyStackPair();
+        declarationStepEnd();
         System.out.println("ScenarioReplayPassRunsTest ok");
     }
 }
