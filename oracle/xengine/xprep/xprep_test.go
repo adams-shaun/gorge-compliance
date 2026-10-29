@@ -1,6 +1,7 @@
 package xprep
 
 import (
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -272,6 +273,70 @@ func TestStackLost(t *testing.T) {
 		if got := stackLost(c.before, c.after); got != c.want {
 			t.Errorf("%s: stackLost = %v, want %v", c.name, got, c.want)
 		}
+	}
+}
+
+// TestPlayStepUnlessPays: a land played as a step answers the as-enters "pay
+// 2 life?" on XMage's CHOICE queue. The same paid cost on a pass step keeps its
+// numeric mode answer, and a decline or a play-step modal ETB is untouched.
+func TestPlayStepUnlessPays(t *testing.T) {
+	play := oraclegen.Step{Op: "play", Seat: 0, Card: "p0:Sacred Foundry"}
+	pass := oraclegen.Step{Op: "pass", Seat: 0}
+	paid := rules.OracleDecision{
+		Step: 0, Seat: 0, Kind: "mode", GorgeKind: "modes",
+		Options: 2, Min: 1, Max: 1,
+		Picks: []string{"Pay 2 life"}, PickIdx: []int{0},
+		PickRefs: []string{"p0:Sacred Foundry"}, PickKinds: []string{"mode"},
+		Resume: "unless_pay",
+	}
+	decline := paid
+	decline.Picks = []string{"Don't pay"}
+	decline.PickIdx = []int{1}
+	modal := paid
+	modal.Resume = "modes"
+	modal.Picks = []string{"Create a 1/1 token"}
+	passPaid := paid
+	passPaid.Step = 1
+
+	for _, c := range []struct {
+		name  string
+		steps []oraclegen.Step
+		d     rules.OracleDecision
+		want  [][]oraclegen.XAnswer
+	}{
+		{
+			"play step paid",
+			[]oraclegen.Step{play},
+			paid,
+			[][]oraclegen.XAnswer{{{Seat: 0, Kind: "choice", Value: "yes"}}},
+		},
+		{
+			"play step decline",
+			[]oraclegen.Step{play},
+			decline,
+			[][]oraclegen.XAnswer{{{Seat: 0, Kind: "choice", Value: "no"}}},
+		},
+		{
+			"pass step paid",
+			[]oraclegen.Step{play, pass},
+			passPaid,
+			[][]oraclegen.XAnswer{nil, {{Seat: 0, Kind: "mode", Value: "1"}}},
+		},
+		{
+			"play step modal ETB",
+			[]oraclegen.Step{play},
+			modal,
+			[][]oraclegen.XAnswer{{{Seat: 0, Kind: "mode", Value: "1"}}},
+		},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			got := playStepUnlessPays(c.steps, []rules.OracleDecision{c.d})
+			sc := oraclegen.Scenario{Steps: c.steps}
+			as := oraclegen.XAnswersForScenario(nil, rules.OracleResult{Decisions: got}, sc, nil, nil)
+			if !reflect.DeepEqual(as, c.want) {
+				t.Errorf("answers = %+v, want %+v", as, c.want)
+			}
+		})
 	}
 }
 
