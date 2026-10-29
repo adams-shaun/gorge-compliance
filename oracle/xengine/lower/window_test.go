@@ -268,6 +268,76 @@ func TestGateRefusesDelayedTrigger(t *testing.T) {
 	}
 }
 
+// TestGateRefusesChosenMode: an as-enters mode choice (SetChosenMode$) is held
+// on the permanent for its lifetime on the battlefield, but setup places the
+// permanent, not the choice, so the gate must refuse it.
+func TestGateRefusesChosenMode(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	if r := capture(e, at).Reasons; len(r) != 0 {
+		t.Fatalf("base cut refused: %v", r)
+	}
+	var planted bool
+	for i := range e.G.Objs {
+		o := &e.G.Objs[i]
+		if o.Zone == state.ZBattlefield && o.Card != nil {
+			o.ChosenModes = []string{"Abzan"}
+			planted = true
+			break
+		}
+	}
+	if !planted {
+		t.Fatal("no battlefield permanent with a card to plant the mode on")
+	}
+	if r := capture(e, at).Reasons; !slices.Contains(r, "field:Object.ChosenModes") {
+		t.Fatalf("reasons %v, want field:Object.ChosenModes", r)
+	}
+}
+
+// TestSetupSpeedLatch: setup places the non-active seat's life as a life-loss
+// event; with the active seat at speed 1..3 that consumes the once-per-turn
+// CR 702.179d speed trigger the live game still had. The window must be
+// refused.
+func TestSetupSpeedLatch(t *testing.T) {
+	life := func(n int32) *int32 { return &n }
+	players := func(p0, p1 int32) []game.PlayerDigest {
+		return []game.PlayerDigest{{Seat: 0, Life: p0}, {Seat: 1, Life: p1}}
+	}
+	tape := func(entries ...game.Entry) *game.Tape { return &game.Tape{Entries: entries} }
+	entry := func(turn int32, p0, p1 int32) game.Entry {
+		return game.Entry{Turn: turn, Digest: game.Digest{Turn: turn, Players: players(p0, p1)}}
+	}
+	c := func(speed int32, opp *int32) *cut {
+		return &cut{Entry: 0, Turn: 1, Active: 0, Setup: [2]oraclegen.Seat{
+			{Speed: speed},
+			{Life: opp},
+		}}
+	}
+	fall := tape(entry(1, 20, 16), entry(1, 20, 12))
+	sentinel := tape(entry(1, 20, 16), entry(2, 20, 12))
+	flat := tape(entry(1, 20, 16), entry(1, 20, 16))
+	seat0 := tape(entry(1, 20, 16), entry(1, 12, 16))
+	for _, tc := range []struct {
+		name string
+		c    *cut
+		t    *game.Tape
+		want bool
+	}{
+		{"speed 2, opponent 16, in-window fall", c(2, life(16)), fall, true},
+		{"speed 4 (max)", c(4, life(16)), fall, false},
+		{"speed 0", c(0, life(16)), fall, false},
+		{"opponent life 20", c(2, life(20)), fall, false},
+		{"no fall in window", c(2, life(16)), flat, false},
+		{"fall on active seat only", c(2, life(16)), seat0, false},
+		{"fall on next-turn sentinel", c(2, life(16)), sentinel, true},
+		{"nil tape", c(2, life(16)), nil, false},
+	} {
+		if got := tc.c.setupSpeedLatch(tc.t); got != tc.want {
+			t.Errorf("%s: setupSpeedLatch = %v, want %v", tc.name, got, tc.want)
+		}
+	}
+}
+
 // A planeswalker's printed loyalty is a counter the card enters with; setup
 // counters are added to it, so the window must place only the difference. The
 // test plants a planeswalker (a corpus card that is not in the game's decks) in

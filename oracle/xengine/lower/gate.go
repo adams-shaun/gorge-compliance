@@ -34,6 +34,13 @@ const (
 	// permission from exile is derived from the event log (warpRecastAvailable),
 	// so no gate field shows it and setup's plain exile placement cannot grant it.
 	reasonSelfExile = "exile_self"
+	// reasonSpeedLatch is a window whose setup would consume the inherent
+	// CR 702.179d speed trigger: setup places the non-active seat's life below
+	// 20 as a life-loss LifeChange, and the active seat already has speed 1..3,
+	// so the once-per-turn trigger is queued, resolved and latched at turn 1
+	// (the latch is an event-log scan with no state field). The live game's
+	// speed had not triggered that turn.
+	reasonSpeedLatch = "setup_speed_latch"
 )
 
 // cut is the live engine at one cut point, reduced to what a window needs: the

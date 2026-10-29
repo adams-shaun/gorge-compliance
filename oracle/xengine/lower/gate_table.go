@@ -273,7 +273,7 @@ var objectTable = map[string]entry{
 	"Chosen":                       isRefused("choices made as it entered"),
 	"ETBCloneChoice":               isIgnored("meaningful only with ETBCloneChoiceValid, which is refused"),
 	"ETBCloneChoiceValid":          isRefused("a clone choice"),
-	"ChosenModes":                  isIgnored("cast-time mode record of a spell, read while it resolves"),
+	"ChosenModes":                  isRefused("an as-enters mode choice (SetChosenMode$); setup places the permanent, not the choice"),
 	"CastBattlefield":              isIgnored("cast-time battlefield snapshot, read while the spell resolves"),
 	"ModeChoices":                  isIgnored("cast-time mode record of a spell, read while it resolves"),
 	"CurCombatTurn":                isRefused("turn stamp: live only when it names the cut's turn"),
