@@ -24,8 +24,8 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_ROOT)/Makefile)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_ROOT)/Makefile)
 # Forge oracle driver commit (fork, branch oracle-harness): a descendant of FORGE_REF with identical script trees.
-# 20b14298 = oracle-harness + fork gorge 91402ac51 (ChooseCard Mandatory$ fix, 2026-10-28).
-FORGE_ORACLE_REF ?= 20b14298e4332b402288a8ce8597716da23ae4dd
+# 4b1a4fde = oracle-harness 20b14298 + driver setup tokens/attached/tapped_after_untap (2026-10-29).
+FORGE_ORACLE_REF ?= 4b1a4fde4620f2325646ec07e02f4cebf5a2f618
 FORGE_ORACLE_DIR ?= /mnt/sata/gorge-training/forgeoracle
 
 .PHONY: help
