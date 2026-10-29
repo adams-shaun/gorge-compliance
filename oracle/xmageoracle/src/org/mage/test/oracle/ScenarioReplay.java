@@ -24,6 +24,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.abilities.effects.common.EndTurnEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -211,6 +212,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 public void start(UUID choosingPlayerId) {
                     placeSetupTokens(this);
                     placeSetupAttached(this);
+                    applySetupLife();
                     super.start(choosingPlayerId);
                 }
             };
@@ -224,6 +226,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             public void start(UUID choosingPlayerId) {
                 placeSetupTokens(this);
                 placeSetupAttached(this);
+                applySetupLife();
                 super.start(choosingPlayerId);
             }
         };
@@ -568,6 +571,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 if (first != null) {
                     return first;
                 }
+            }
+            if (game.getStep() == null && askedBy(TapSourceUnlessPaysEffect.class, "apply")
+                    && !scriptedYesNoNext()) {
+                // gorge's setup drive answers an unscripted unless-pay KModes
+                // with its first option, which pays (oracleRun.answer; the
+                // unless-pay decision has Min 1). The life is re-applied after
+                // placement below, exactly as oracleRun.build's post-placement
+                // LifeChange does.
+                return true;
             }
             return super.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
         }
@@ -1819,8 +1831,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
             for (int k = top.size() - 1; k >= 0; k--) {
                 addCard(Zone.LIBRARY, p, top.get(k));
             }
+        }
+    }
+
+    /** Re-applies each seat's requested setup life after the cheat placements.
+     * The gorge runner places every setup entry first and only then emits the
+     * seat's LifeChange (oracleRun.build); XMage runs the queued "life:" command
+     * before the cards, so an as-enters pay (a shock land's 2 life) would
+     * otherwise land after the requested value. The hook runs before super.start,
+     * so no trigger can resolve between the payment and this write. */
+    private void applySetupLife() {
+        JsonObject setup = sc0.has("setup") ? sc0.getAsJsonObject("setup") : new JsonObject();
+        for (int i = 0; i < seats; i++) {
+            if (!setup.has("p" + i)) {
+                continue;
+            }
+            JsonObject s = setup.getAsJsonObject("p" + i);
             if (s.has("life")) {
-                setLife(p, s.get("life").getAsInt());
+                seat(i).initLife(s.get("life").getAsInt());
             }
         }
     }
