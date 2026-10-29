@@ -223,9 +223,14 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 		mainStep := len(steps) - 1
 		var resolve *oraclegen.Step
 		resolveEnd := 0
+		resolveKeepsPass := false
 		if steps[mainStep].Op == "pass" && len(answers) > 0 {
 			if why := unsettled(entries[i:j]); why != nil {
 				res, end, ok := resolvePass(m, entries, i, j)
+				if !ok {
+					res, end, ok = resolveEmptyPass(m, entries, i, j)
+					resolveKeepsPass = ok
+				}
 				if !ok {
 					l.stop(i, why)
 					return
@@ -234,16 +239,27 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 			}
 		}
 		if len(owed) > 0 {
-			// The pass before this group was waiting for a step's answers;
-			// this group's first step or the resolve step takes them.
+			// The pass before this group was waiting for the next step's
+			// answers. The resolve step takes them only when it replaces the
+			// group's pass; when the pass is kept (resolveKeepsPass) the pass
+			// itself is the next step, so the answers must land on it.
 			dst := &steps[0]
-			if resolve != nil {
+			if resolve != nil && !resolveKeepsPass {
 				dst = resolve
 			}
 			dst.Answers = append(append([]oraclegen.Answer{}, owed...), dst.Answers...)
 			owed, owedAt = nil, -1
 		}
 		if resolve != nil {
+			if resolveKeepsPass {
+				// The pass is its own step: a resolve starting on an
+				// empty-stack priority returns before passing.
+				stepEntry[mainStep] = i
+				l.markShuffles(m, entries[i:j], len(l.Item.Steps)+mainStep)
+				l.Item.Steps = append(l.Item.Steps, steps...)
+				l.StepEntry = append(l.StepEntry, stepEntry...)
+				l.Item.Payment = append(l.Item.Payment, payments...)
+			}
 			l.Item.Steps = append(l.Item.Steps, *resolve)
 			l.StepEntry = append(l.StepEntry, resolveEnd-1)
 			l.Item.Payment = append(l.Item.Payment, "")
@@ -451,6 +467,58 @@ func resolvePass(m seatMap, entries []game.Entry, i, j int) (*oraclegen.Step, in
 		return nil, 0, false
 	}
 	answers, why := answersOf(m, entries[i:end])
+	if why != nil {
+		return nil, 0, false
+	}
+	return &oraclegen.Step{Op: "resolve", Seat: m.seat(entries[end].Seat), Answers: answers}, end, true
+}
+
+// resolveEmptyPass lowers an empty-stack pass that ends the step and only then
+// puts a trigger with a target on the stack. The pass stays its own step (a
+// resolve starting on an empty-stack priority returns before passing); the
+// returned resolve step answers the trigger's asks and stops at the next
+// empty-stack priority.
+func resolveEmptyPass(m seatMap, entries []game.Entry, i, j int) (*oraclegen.Step, int, bool) {
+	if entries[i].StackTop != 0 {
+		return nil, 0, false
+	}
+	seen := false
+	for _, a := range entries[i+1 : j] {
+		if a.Kind == "trigger_order" {
+			continue
+		}
+		if a.Kind != "target" || a.StackTop == 0 || a.StackTop == entries[i].StackTop {
+			return nil, 0, false
+		}
+		seen = true
+	}
+	if !seen {
+		return nil, 0, false
+	}
+	end := -1
+	for k := j; k < len(entries); k++ {
+		if entries[k].Kind == "priority" && entries[k].StackTop == 0 {
+			end = k
+			break
+		}
+	}
+	if end <= j {
+		return nil, 0, false
+	}
+	// The resolve op only passes priority and answers asks; it cannot replay a
+	// priority action (a mana activation, a cast, a play) taken while the
+	// trigger sat on the stack, nor its mana/randomness. Reject such a range so
+	// the checkpoint cannot silently lose it (xe:TDM:0:0:w29).
+	for k := j; k < end; k++ {
+		e := entries[k]
+		if len(e.Mana) > 0 || e.RNG > 0 || len(e.Flips) > 0 {
+			return nil, 0, false
+		}
+		if e.Kind == "priority" && !isPass(e) || e.Kind == "attackers" || e.Kind == "blockers" {
+			return nil, 0, false
+		}
+	}
+	answers, why := answersOf(m, entries[i+1:end])
 	if why != nil {
 		return nil, 0, false
 	}
