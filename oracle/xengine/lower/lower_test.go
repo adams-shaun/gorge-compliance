@@ -555,3 +555,95 @@ func TestLowerDropsRefusedCast(t *testing.T) {
 		t.Fatalf("window changed cast: steps %v, want [cast]", got)
 	}
 }
+
+// TestLowerResolvesTriggerTargetAfterPass: a pass that resolves a creature
+// spell and then puts its ETB trigger on the stack cannot carry the trigger's
+// target answer. The pass's own object has left the stack, and a pass answers
+// exactly one priority decision, so the group lowers as one `resolve` step
+// that answers the pending target and stops at the next empty-stack priority.
+// Every other unsettled pass keeps the truncation.
+func TestLowerResolvesTriggerTargetAfterPass(t *testing.T) {
+	d := game.Digest{Turn: 1, Step: "main1", Active: 0, Priority: 0}
+	prio := func(seat int, p game.Pick, top uint32) game.Entry {
+		return game.Entry{Kind: "priority", Seat: seat, Turn: 1, Step: "main1",
+			Picks: []game.Pick{p}, StackTop: stateID(top), Digest: d}
+	}
+	cast := game.Entry{Kind: "priority", Seat: 0, Turn: 1, Step: "main1", Digest: d,
+		Picks: []game.Pick{{Kind: "cast", Ref: "p0:Summit Intimidator"}}}
+	pass0 := prio(0, game.Pick{Kind: "pass"}, 7) // p0 hands priority to p1
+	pass1 := prio(1, game.Pick{Kind: "pass"}, 7) // p1's pass resolves the creature
+	target := game.Entry{Kind: "target", Seat: 0, Turn: 1, Step: "main1", Digest: d,
+		StackTop: 9, Max: 1,
+		Picks: []game.Pick{{Kind: "permanent", Obj: stateID(42), Ref: "p1:Wayspeaker Bodyguard"}}}
+	pass2 := prio(0, game.Pick{Kind: "pass"}, 9) // trigger on the stack
+	pass3 := prio(1, game.Pick{Kind: "pass"}, 9)
+	pass4 := prio(0, game.Pick{Kind: "pass"}, 0) // empty stack, next priority
+
+	t.Run("trigger target after a resolving pass", func(t *testing.T) {
+		var l Lowered
+		l.lowerEntries(nil, seatMap{}, []game.Entry{cast, pass0, pass1, target, pass2, pass3, pass4}, 0, false)
+		if l.Truncated != "" {
+			t.Fatalf("truncated %q at %d, want a resolve step", l.Truncated, l.TruncatedAt)
+		}
+		var ops []string
+		for _, s := range l.Item.Steps {
+			ops = append(ops, s.Op)
+		}
+		if want := []string{"cast", "pass", "resolve", "pass"}; !reflect.DeepEqual(ops, want) {
+			t.Fatalf("steps %v, want %v", ops, want)
+		}
+		res := l.Item.Steps[2]
+		if res.Seat != 0 || len(res.Answers) != 1 || res.Answers[0].Kind != "target" ||
+			!reflect.DeepEqual(res.Answers[0].Pick, []string{"p1:Wayspeaker Bodyguard"}) {
+			t.Fatalf("resolve step %+v, want p0's target answer", res)
+		}
+		// The resolve step carries entries 2..5 (the pass, the ask and the
+		// passes that resolve the trigger), so its checkpoint is entry 6.
+		if l.StepEntry[2] != 5 {
+			t.Fatalf("resolve StepEntry = %d, want 5 (checkpoint at entry 6)", l.StepEntry[2])
+		}
+	})
+
+	t.Run("choose still truncates", func(t *testing.T) {
+		choose := game.Entry{Kind: "choose", Seat: 0, Turn: 1, Step: "main1",
+			StackTop: stateID(9), Digest: d, Picks: []game.Pick{{Kind: "no"}}}
+		var l Lowered
+		l.lowerEntries(nil, seatMap{}, []game.Entry{pass1, choose, pass4}, 0, false)
+		if want := "unsupported_kind:ask_after_pass:choose"; l.Truncated != want {
+			t.Fatalf("truncated %q at %d, want %q", l.Truncated, l.TruncatedAt, want)
+		}
+	})
+
+	t.Run("empty-stack pass still truncates", func(t *testing.T) {
+		empty := prio(0, game.Pick{Kind: "pass"}, 0)
+		var l Lowered
+		l.lowerEntries(nil, seatMap{}, []game.Entry{empty, target, pass4}, 0, false)
+		if want := "unsupported_kind:ask_after_pass:target"; l.Truncated != want {
+			t.Fatalf("truncated %q at %d, want %q", l.Truncated, l.TruncatedAt, want)
+		}
+	})
+
+	t.Run("same-stack target keeps the owed answer", func(t *testing.T) {
+		same := target
+		same.StackTop = stateID(7)
+		var l Lowered
+		l.lowerEntries(nil, seatMap{}, []game.Entry{pass1, same, pass4}, 0, false)
+		if l.Truncated != "" {
+			t.Fatalf("truncated %q at %d, want the pass to carry the answer", l.Truncated, l.TruncatedAt)
+		}
+		var ops []string
+		for _, s := range l.Item.Steps {
+			ops = append(ops, s.Op)
+		}
+		if want := []string{"pass", "pass"}; !reflect.DeepEqual(ops, want) {
+			t.Fatalf("steps %v, want %v", ops, want)
+		}
+		// The pass poses the ask and owes the answer to the next step, which
+		// the runner answers as it passes while the object is still on top.
+		owed := l.Item.Steps[1]
+		if len(owed.Answers) != 1 || owed.Answers[0].Kind != "target" ||
+			!reflect.DeepEqual(owed.Answers[0].Pick, []string{"p1:Wayspeaker Bodyguard"}) {
+			t.Fatalf("next step %+v, want the owed target answer", owed)
+		}
+	})
+}
