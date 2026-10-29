@@ -5,6 +5,7 @@ import (
 	"reflect"
 	"slices"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
@@ -37,10 +38,23 @@ const (
 	// reasonSpeedLatch is a window whose setup would consume the inherent
 	// CR 702.179d speed trigger: setup places the non-active seat's life below
 	// 20 as a life-loss LifeChange, and the active seat already has speed 1..3,
-	// so the once-per-turn trigger is queued, resolved and latched at turn 1
-	// (the latch is an event-log scan with no state field). The live game's
-	// speed had not triggered that turn.
+	// so the once-per-turn trigger is queued, resolved and latched at turn 1.
+	// The decision is setup state alone: the tape may show no in-window fall
+	// (the setup LifeChange is the trigger) and cannot show the speed.
 	reasonSpeedLatch = "setup_speed_latch"
+	// reasonCountersEntry is a battlefield card whose entry counter grant is
+	// dynamic (K:etbCounter with an X/Count$ amount): the placement re-runs the
+	// grant, so setup cannot know how many counters to add on top of it.
+	reasonCountersEntry = "counters_entry_unrestatable"
+	// The setup drive expresses state as events: a by-name tapped placement is
+	// a Tap, a counters field a CounterChange, a life field a LifeChange. A
+	// placed permanent that triggers on one of those events would resolve a
+	// trigger the scenario schema cannot say already resolved (CR 603.2), so
+	// the window is refused.
+	reasonSetupTaps       = "setup_trigger:taps"
+	reasonSetupCounterAdd = "setup_trigger:counter_added"
+	reasonSetupLifeGained = "setup_trigger:life_gained"
+	reasonSetupLifeLost   = "setup_trigger:life_lost"
 )
 
 // cut is the live engine at one cut point, reduced to what a window needs: the
@@ -108,15 +122,19 @@ func capture(e *rules.Engine, entry int) *cut {
 		}
 	}
 	for _, ce := range e.RegisteredContinuous() {
-		// printed statics are not registered; a resolved effect whose duration
-		// outlives the turn it was made in is still live at the cut (an
-		// until-end-of-turn one made in an earlier turn has expired).
-		if ce.Permanent || ce.UntilTurn != 0 || ce.UntilUntapOf != 0 || ce.Duration != "" || ce.FromEffect {
+		// printed statics are not registered; a resolved effect that is still
+		// live at the cut cannot be placed from setup. UntilEOT covers the one
+		// made earlier in THIS turn (it expires only in the cleanup step, CR
+		// 514.2); one made in an earlier turn has already expired.
+		if ce.Permanent || ce.UntilEOT || ce.UntilTurn != 0 || ce.UntilUntapOf != 0 || ce.Duration != "" || ce.FromEffect {
 			w.why[reasonContinuous] = true
 		}
 	}
 	if len(w.why) == 0 {
 		w.place(c)
+	}
+	if len(w.why) == 0 {
+		w.setupTriggers(c)
 	}
 	c.Reasons = sortedKeys(w.why)
 	return c
@@ -149,6 +167,68 @@ func phaseTriggered(o *state.Object) bool {
 		}
 	}
 	return false
+}
+
+// setupTriggers refuses a window whose setup drive would resolve a trigger of a
+// placed permanent: the drive expresses setup state as real events (a by-name
+// Tap, a CounterChange for the counters field, a LifeChange for the life field,
+// CR 603.2), and the scenario schema cannot say that trigger already resolved.
+// It runs after place, on an otherwise expressible cut, and matches the
+// engine's own TriggerMode vocabulary so a new spelling cannot slip past.
+func (w *walker) setupTriggers(c *cut) {
+	var tapped, counters, gained, lost bool
+	for s := range c.Setup {
+		if len(c.Setup[s].Tapped) > 0 {
+			tapped = true
+		}
+		if len(c.Setup[s].Counters) > 0 {
+			counters = true
+		}
+		if life := c.Setup[s].Life; life != nil {
+			if *life > 20 {
+				gained = true
+			}
+			if *life < 20 {
+				lost = true
+			}
+		}
+	}
+	if !tapped && !counters && !gained && !lost {
+		return
+	}
+	for i := range w.g.Objs {
+		o := &w.g.Objs[i]
+		// A resolved ability parked off the stack is not a placed permanent
+		// (capture skips it before the gate sees it).
+		if o.Zone != state.ZBattlefield || o.Ability != nil {
+			continue
+		}
+		f := o.Face()
+		if f == nil {
+			continue
+		}
+		for j := range f.Triggers {
+			switch f.Triggers[j].ModeKind() {
+			case cards.TriggerTaps, cards.TriggerTapAll:
+				if tapped {
+					w.why[reasonSetupTaps] = true
+				}
+			case cards.TriggerCounterAdded, cards.TriggerCounterAddedOnce,
+				cards.TriggerCounterAddedAll, cards.TriggerCounterTypeAddedAll:
+				if counters {
+					w.why[reasonSetupCounterAdd] = true
+				}
+			case cards.TriggerLifeGained:
+				if gained {
+					w.why[reasonSetupLifeGained] = true
+				}
+			case cards.TriggerLifeLost, cards.TriggerLifeLostAll:
+				if lost {
+					w.why[reasonSetupLifeLost] = true
+				}
+			}
+		}
+	}
 }
 
 // walker applies the field tables to the live state.
@@ -422,7 +502,10 @@ func (w *walker) place(c *cut) {
 				w.why["field:Object.FaceIdx"] = true
 			}
 			back[n][o.FaceIdx == 1] = true
-			net := setupCounters(o)
+			net, restatable := setupCounters(o)
+			if !restatable {
+				w.why[reasonCountersEntry] = true
+			}
 			key := ""
 			for _, k := range sortedMapKeys(net) {
 				if net[k] < 0 {
@@ -545,8 +628,11 @@ func sortedMapKeys(m map[string]int32) []string {
 // setupCounters is the counters setup must ADD to o's placement: what o carries
 // less what a fresh copy of the card enters with (a planeswalker's printed
 // loyalty), which the runner's counters field is added to. A kind the card
-// carries fewer of than it enters with comes out negative, which setup cannot say.
-func setupCounters(o *state.Object) map[string]int32 {
+// carries fewer of than it enters with comes out negative, which setup cannot
+// say. The second return is false when the entry grant is dynamic and so cannot
+// be restated: the placement re-runs the grant (CR 614.1c), but how many
+// counters it makes is known only at that entry.
+func setupCounters(o *state.Object) (map[string]int32, bool) {
 	net := map[string]int32{}
 	for _, ct := range o.Counters {
 		net[ct.Kind] += ct.N
@@ -554,7 +640,24 @@ func setupCounters(o *state.Object) map[string]int32 {
 	for _, gr := range events.EntryCounterGrants(&state.Object{Card: o.Card, FaceIdx: o.FaceIdx}, false) {
 		net[gr.Kind] -= gr.Amount
 	}
-	return net
+	// K:etbCounter is a replacement on the Moved event, not an
+	// EntryCounterGrants row: the setup placement re-runs it and grants its
+	// counters again. The raw keyword is "<kind>:<n>[:condition[:text]]";
+	// only a literal n can be subtracted here. A dynamic X/Count$ amount
+	// cannot, and a conditional grant whose condition did not hold at entry
+	// comes out negative below (the caller refuses).
+	if f := o.Face(); f != nil {
+		if param, ok := f.KeywordParam("etbCounter"); ok {
+			kind, rest, _ := strings.Cut(param, ":")
+			n, _, _ := strings.Cut(rest, ":")
+			amount, err := strconv.Atoi(strings.TrimSpace(n))
+			if err != nil {
+				return net, false
+			}
+			net[strings.TrimSpace(kind)] -= int32(amount)
+		}
+	}
+	return net, true
 }
 
 // hasActivationLimit is true for a face with an ability gated by an
