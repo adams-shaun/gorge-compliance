@@ -40,8 +40,9 @@
 # max XENGINE_JVM_WAIT seconds) while 2 or more run.
 #
 # Environment:
-#   XENGINE_ROOT          output root (default /mnt/sata/gorge-training/xengine/<run>);
-#                         refused inside the repository
+#   XENGINE_ROOT          output root (default .oracle-build/xengine/<run>); a
+#                         directory inside the repository is refused unless git
+#                         ignores it, because follower output must never be committed
 #   XENGINE_FOLLOWERS     'forge xmage' (default)
 #   XENGINE_GO_JOBS       concurrent play stages, a positive integer (default 1:
 #                         strictly serial; see the ledger merge below)
@@ -92,7 +93,7 @@ PGREP=${XENGINE_PGREP:-/usr/bin/pgrep}
 followers=${XENGINE_FOLLOWERS:-forge xmage}
 jvm_wait=${XENGINE_JVM_WAIT:-21600}
 jvm_poll=${XENGINE_JVM_POLL:-30}
-root=${XENGINE_ROOT:-/mnt/sata/gorge-training/xengine/$run}
+root=${XENGINE_ROOT:-$repo/.oracle-build/xengine/$run}
 
 jobs=${XENGINE_GO_JOBS:-1}
 case "$jobs" in
@@ -104,10 +105,13 @@ for f in $followers; do
 	case "$f" in forge | xmage) ;; *) echo "xengine-sweep: unknown follower $f (want forge or xmage)" >&2; exit 2 ;; esac
 done
 
-# Follower output stays off-repo.
+# Follower output (Forge's is GPL-3.0) can never be one `git add` from a commit.
 absroot=$(realpath -m "$root")
 case "$absroot/" in
-"$repo"/*) echo "xengine-sweep: refusing XENGINE_ROOT $root: it is inside the repository $repo" >&2; exit 2 ;;
+"$repo"/*)
+	git -C "$repo" check-ignore -q "$absroot/" \
+		|| { echo "xengine-sweep: refusing XENGINE_ROOT $root: it is inside the repository $repo and not gitignored" >&2; exit 2; }
+	;;
 esac
 mkdir -p "$absroot"
 root=$absroot

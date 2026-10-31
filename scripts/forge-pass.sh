@@ -78,6 +78,8 @@ oref=${FORGE_ORACLE_REF:-$(sed -n 's/^FORGE_ORACLE_REF *?= *//p' Makefile)}
 root=${FORGE_ORACLE_DIR:-$(sed -n 's/^FORGE_ORACLE_DIR *?= *//p' Makefile)}
 xref=${XMAGE_REF:-$(sed -n 's/^XMAGE_REF *?= *//p' Makefile)}
 xroot=${XMAGE_ORACLE_DIR:-$(sed -n 's/^XMAGE_ORACLE_DIR *?= *//p' Makefile)}
+root=$(realpath -m "$root")
+xroot=$(realpath -m "$xroot")
 [ -n "$oref" ] && [ -n "$root" ] || { echo "forge-pass: FORGE_ORACLE_REF/FORGE_ORACLE_DIR unset" >&2; exit 2; }
 [ -d .cards ] || { echo "forge-pass: no .cards corpus here (make fetch-cards compile-cards)" >&2; exit 2; }
 

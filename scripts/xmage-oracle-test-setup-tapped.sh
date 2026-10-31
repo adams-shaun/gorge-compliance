@@ -3,8 +3,8 @@
 # tap queues no trigger, without H2 or a game replay. Requires
 # the read-only XMage build, just like the driver's javac check.
 set -euo pipefail
-root=${XMAGE_ORACLE_DIR:-/mnt/sata/gorge-training/xmageoracle}
-out=${1:-.ds4/scratch/setup-tapped-out}
+root=$(realpath -m "${XMAGE_ORACLE_DIR:-$(dirname "$0")/../.oracle-build/xmage}")
+out=${1:-.coverage/xmage-driver/setup-tapped-out}
 here=$(cd "$(dirname "$0")/.." && pwd)
 export JAVA_HOME="$root/jdk"
 export PATH="$JAVA_HOME/bin:$PATH"

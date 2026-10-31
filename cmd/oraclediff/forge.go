@@ -36,9 +36,10 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// defaultForgeOracleDir is the host's off-repo Forge state (DESIGN section
-// 4.2), used when FORGE_ORACLE_DIR is unset.
-const defaultForgeOracleDir = "/mnt/sata/gorge-training/forgeoracle"
+// defaultForgeOracleDir is the gitignored directory holding the Forge build
+// and caches, relative to the repository root, used when FORGE_ORACLE_DIR is
+// unset (scripts/forge-oracle-setup.sh writes it).
+const defaultForgeOracleDir = ".oracle-build/forge"
 
 // forgeRequest is one line of forge-req.jsonl. The Item is marshalled
 // exactly as gen wrote it, so its bytes (and gate.ItemSHA) are unchanged.

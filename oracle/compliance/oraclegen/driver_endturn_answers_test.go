@@ -44,7 +44,11 @@ func TestScenarioReplayEndTurnRejectsCompletedStepAnswers(t *testing.T) {
 
 	javac, err := exec.LookPath("javac")
 	if err != nil {
-		javac = "/mnt/sata/gorge-training/xmageoracle/jdk/bin/javac"
+		root := os.Getenv("XMAGE_ORACLE_DIR")
+		if root == "" {
+			root = "../../../.oracle-build/xmage"
+		}
+		javac = filepath.Join(root, "jdk", "bin", "javac")
 		if _, err := os.Stat(javac); err != nil {
 			t.Skip("JDK unavailable; source wiring checked")
 		}

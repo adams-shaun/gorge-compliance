@@ -27,7 +27,7 @@ func xmageReplay(t *testing.T, name, path string) (oraclediff.XResult, string) {
 	} else {
 		root := os.Getenv("XMAGE_ORACLE_DIR")
 		if root == "" {
-			root = "/mnt/sata/gorge-training/xmageoracle"
+			root = "../../.oracle-build/xmage"
 		}
 		if _, err := os.Stat(filepath.Join(root, "mage", "Mage.Tests", "target", "test-classes")); err != nil {
 			return oraclediff.XResult{}, "no XMage build at " + root

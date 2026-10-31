@@ -2,8 +2,8 @@
 # Check surveil's target-shaped skip is routed to XMage's library-selection queue.
 # Requires the read-only XMage build, like the driver's javac checks.
 set -euo pipefail
-root=${XMAGE_ORACLE_DIR:-/mnt/sata/gorge-training/xmageoracle}
-out=${1:-.ds4/scratch/surveil-skip-driverout}
+root=$(realpath -m "${XMAGE_ORACLE_DIR:-$(dirname "$0")/../.oracle-build/xmage}")
+out=${1:-.coverage/xmage-driver/surveil-skip-driverout}
 here=$(cd "$(dirname "$0")/.." && pwd)
 export JAVA_HOME="$root/jdk"
 export PATH="$JAVA_HOME/bin:$PATH"

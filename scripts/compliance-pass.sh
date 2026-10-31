@@ -48,8 +48,10 @@ fi
 
 ref=${XMAGE_REF:-$(sed -n 's/^XMAGE_REF *?= *//p' Makefile)}
 root=${XMAGE_ORACLE_DIR:-$(sed -n 's/^XMAGE_ORACLE_DIR *?= *//p' Makefile)}
+root=$(realpath -m "$root")
+export XMAGE_ORACLE_DIR=$root
 [ -n "$ref" ] && [ -n "$root" ] || { echo "compliance-pass: XMAGE_REF/XMAGE_ORACLE_DIR unset" >&2; exit 2; }
-[ -d .cards ] || { echo "compliance-pass: no .cards corpus here (make fetch-cards compile-cards)" >&2; exit 2; }
+[ -d .cards ] || { echo "compliance-pass: no .cards corpus here (make cards)" >&2; exit 2; }
 
 if [ $# -eq 0 ]; then
 	set -- $(for f in oracle/compliance/printed/*.json; do basename "$f" .json; done)
@@ -60,7 +62,6 @@ drv=$(sha256sum "$driver" | cut -c1-12)
 out=${COMPLIANCE_PASS_OUT:-$root/pass}
 cache=${COMPLIANCE_PASS_CACHE:-$root/cache/${ref:0:12}-$drv}
 mkdir -p "$out" "$cache"
-[ -d /mnt/sata/gorge-training/gotmp ] && export GOTMPDIR=/mnt/sata/gorge-training/gotmp
 export GOMEMLIMIT=${GOMEMLIMIT:-8GiB}
 
 go build -o "$out/oraclediff" ./cmd/oraclediff

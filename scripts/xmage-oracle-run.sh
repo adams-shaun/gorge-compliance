@@ -16,8 +16,8 @@ in=${1:?usage: xmage-oracle-run.sh IN.jsonl OUT.jsonl}
 out=${2:?usage: xmage-oracle-run.sh IN.jsonl OUT.jsonl}
 in=$(realpath "$in")
 out=$(realpath -m "$out")
-root=${XMAGE_ORACLE_DIR:-/mnt/sata/gorge-training/xmageoracle}
 here=$(cd "$(dirname "$0")/.." && pwd)
+root=$(realpath -m "${XMAGE_ORACLE_DIR:-$here/.oracle-build/xmage}")
 src="$here/oracle/xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java"
 
 export JAVA_HOME="$root/jdk"

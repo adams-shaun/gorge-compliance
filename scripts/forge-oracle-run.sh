@@ -16,8 +16,9 @@
 #                         against that worktree's HEAD and its forge-gui/res is
 #                         the runtime script root.
 #   FORGE_ORACLE_CLASSES  compiled-driver root (default $FORGE_ORACLE_DIR/driver)
-#   FORGE_ORACLE_TMP      java.io.tmpdir (default $FORGE_ORACLE_DIR/tmp); a seat
-#                         jail with a read-only /mnt/sata points both at its worktree
+#   FORGE_ORACLE_TMP      java.io.tmpdir (default $FORGE_ORACLE_DIR/tmp); point
+#                         this and FORGE_ORACLE_CLASSES elsewhere when the build
+#                         directory is read-only
 #   FORGE_ORACLE_MAIN     driver main class (default forge.oracle.ScenarioReplay)
 #   FORGE_ORACLE_MEM / FORGE_ORACLE_HEAP   scope MemoryMax / JVM heap (3G / 1536m)
 set -euo pipefail
@@ -33,9 +34,9 @@ else
   out=${2:?usage: forge-oracle-run.sh IN.jsonl OUT.jsonl | --compile}
   mode=run
 fi
-root=${FORGE_ORACLE_DIR:-$(mk FORGE_ORACLE_DIR)}
+root=${FORGE_ORACLE_DIR:-$here/$(mk FORGE_ORACLE_DIR)}
 clone=${FORGE_ORACLE_CLONE:-$root/forge}
-xmage=${XMAGE_ORACLE_DIR:-$(mk XMAGE_ORACLE_DIR)}
+xmage=${XMAGE_ORACLE_DIR:-$here/$(mk XMAGE_ORACLE_DIR)}
 jdk=${FORGE_ORACLE_JDK:-$xmage/jdk}
 [ -n "$root" ] || die "FORGE_ORACLE_DIR unset"
 root=$(realpath -m "$root")

@@ -41,8 +41,9 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
-// DefaultRoot is where host runs write by default.
-const DefaultRoot = "/mnt/sata/gorge-training/xengine"
+// DefaultRoot is where a run writes when -out is not given: a gitignored
+// directory relative to the repository root.
+const DefaultRoot = ".oracle-build/xengine"
 
 func main() {
 	if len(os.Args) < 2 {

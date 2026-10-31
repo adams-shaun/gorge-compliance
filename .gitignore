@@ -15,7 +15,9 @@ oracle/compliance/status.md
 .mtgish
 # Printed-card text from cmd/oraclepacket (Oracle text is Wizards' copyright).
 .oracle-packets/
-# Local agent scratch and heavy-job locks.
-.ds4/
+# Out-of-tree oracle builds and run output (make xmage-oracle-setup,
+# forge-oracle-setup, xengine-sweep): XMAGE_ORACLE_DIR and friends default here.
+# Forge output is GPL-3.0 and never committed.
+.oracle-build/
 # Git worktrees.
 .worktrees/
