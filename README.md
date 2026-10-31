@@ -23,7 +23,7 @@ scripted scenarios, and two engines can share a bug. [docs/oracles.md](docs/orac
 says what each check sees and what it can't.
 
 `oracle/compliance/declared.json` holds the claims. Measured on 2026-10-31 at gorge
-`fb7579ace` with `make compliance-status`: 20 sets are declared, 17 at level B and 3 at
+`ad24e91cf` with `make compliance-status`: 20 sets are declared, 17 at level B and 3 at
 level A. Those are the sets of the Standard target, whose 5331 entries have no
 outstanding problem at level A. Across every set XMage knows, 59672 of 73159 entries are
 outstanding, nearly all because no scenario has been replayed for them yet, so a card
