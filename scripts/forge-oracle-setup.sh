@@ -3,8 +3,8 @@
 # (.ds4/forge-oracle/DESIGN.md §4.2, §7.3). Host only; never run in a seat.
 #
 # Idempotent. Re-run after a FORGE_ORACLE_REF bump. Everything lands under
-# $FORGE_ORACLE_DIR (default /mnt/sata/gorge-training/forgeoracle); nothing in
-# the gorge tree changes. Forge is GPL-3.0: its source, jars and output stay
+# $FORGE_ORACLE_DIR (default .oracle-build/forge, gitignored); nothing tracked
+# changes. Forge is GPL-3.0: its source, jars and output stay
 # under that directory and are never committed.
 #
 #   scripts/forge-oracle-setup.sh                 # clone/fetch, pin check, build, cp.txt, measure
@@ -22,16 +22,16 @@ here=$(cd "$(dirname "$0")/.." && pwd)
 mk() { sed -n "s/^$1 *?= *//p" "$here/Makefile"; }
 # FORGE_REF and FORGE_REPO (the corpus pin) are gorge's: gorge-compliance's Makefile
 # only reads them out of gorge's, so a standalone run does the same.
-# GORGE_ROOT defaults to the gorge module go resolves (go.work, replace).
+# They come from the gorge module go resolves (go.mod's pin, or a go.work).
 gorge_mk() {
-	local g=${GORGE_ROOT:-$(cd "$here" && go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge)}
+	local g=$(cd "$here" && go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge)
 	sed -n "s/^$1 *?= *//p" "$g/Makefile"
 }
 die() { echo "forge-oracle-setup: $*" >&2; exit 2; }
 
 forge_ref=${FORGE_REF:-$(gorge_mk FORGE_REF)}
 oracle_ref=${FORGE_ORACLE_REF:-$(mk FORGE_ORACLE_REF)}
-root=${FORGE_ORACLE_DIR:-$(mk FORGE_ORACLE_DIR)}
+root=${FORGE_ORACLE_DIR:-$here/$(mk FORGE_ORACLE_DIR)}
 repo=${FORGE_REPO:-$(gorge_mk FORGE_REPO)}
 clone=${FORGE_ORACLE_CLONE:-$root/forge}
 [ -n "$forge_ref" ] && [ -n "$oracle_ref" ] && [ -n "$root" ] || die "FORGE_REF/FORGE_ORACLE_REF/FORGE_ORACLE_DIR unset"
@@ -77,11 +77,11 @@ git -C "$clone" fetch -q origin
 oref=$(git -C "$clone" rev-parse --verify -q "$oracle_ref^{commit}") || die "FORGE_ORACLE_REF $oracle_ref is not in $clone after fetch"
 pin_check "$clone" "$oref"
 
-case "$root" in /tmp/*) die "$root is RAM-backed; use /mnt/sata" ;; esac
+case "$root" in /tmp/*) die "$root is under /tmp, which is often RAM-backed; the build needs a directory on disk" ;; esac
 [ -z "$(git -C "$clone" status --porcelain --untracked-files=no)" ] || die "$clone has uncommitted changes; refusing to move HEAD"
 [ "$(git -C "$clone" rev-parse HEAD)" = "$oref" ] || git -C "$clone" checkout -q --detach "$oref"
 
-xmage=${XMAGE_ORACLE_DIR:-$(mk XMAGE_ORACLE_DIR)}
+xmage=${XMAGE_ORACLE_DIR:-$here/$(mk XMAGE_ORACLE_DIR)}
 jdk=$(realpath -m "${FORGE_ORACLE_JDK:-$xmage/jdk}")
 mvn=$(realpath -m "${FORGE_ORACLE_MVN:-$xmage/maven/bin/mvn}")
 [ -x "$jdk/bin/javac" ] || die "no JDK at $jdk; run make xmage-oracle-setup first or set FORGE_ORACLE_JDK"
