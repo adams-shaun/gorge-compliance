@@ -144,8 +144,8 @@ func TestActivateExilePreludeRows(t *testing.T) {
 		it := gen(t, row)
 		p0 := it.Scenario.Setup["p0"]
 		// Precondition: a legal creature card for the Return mode sits in p0's
-		// graveyard, and the activate step carries no targets (the mode and
-		// target are chosen at resolution).
+		// graveyard, and the activate step carries no targets (the runner
+		// announces the mode and picks its target).
 		if !hasName(p0.Graveyard, "Grizzly Bears") {
 			t.Fatalf("precondition: no legal creature card in p0's graveyard: %v", p0.Graveyard)
 		}
@@ -154,7 +154,7 @@ func TestActivateExilePreludeRows(t *testing.T) {
 			t.Fatalf("precondition: want one activate step, got %v", it.Scenario.Steps)
 		}
 		if len(acts[0].Targets) != 0 {
-			t.Fatalf("precondition: the activate step carries targets %v; an activated charm chooses them at resolution", acts[0].Targets)
+			t.Fatalf("precondition: the activate step carries targets %v; an activated charm's step names none", acts[0].Targets)
 		}
 		snap := play(t, row, it)
 		// The chosen mode (1) returned the graveyard creature to the

@@ -325,10 +325,9 @@ func activateWithFixture(reg *cards.Registry, f *cards.Face, name string, req le
 	} else if exOK {
 		targets = exTargets
 	}
-	// An activated charm's mode names its target, not the ability's root, so
-	// a Targets list on the activate step is rejected by the runner ("unused
-	// target(s) for this step"). The seeded fixture only makes a mode's target
-	// legal; the step itself carries none.
+	// An activated charm's step names no targets: the runner announces the
+	// first mode with a legal target and picks that target, which need not be
+	// the fixture's first. The seeded fixture only makes a mode's target legal.
 	if f.Abilities[idx].API == "Charm" {
 		targets = nil
 	}
@@ -675,8 +674,8 @@ func charmModeTargetUnchosen(ds []rules.OracleDecision) bool {
 		}
 		chosen := false
 		for _, t := range ds {
-			// A resolution-time charm target is posed as a target or as a
-			// choose ("tgts", "choice"): any pick at the step counts.
+			// A charm's target is posed as a target or as a choose ("tgts",
+			// "choice"): any pick at the step counts.
 			if t.Step == d.Step && t.Kind != "mode" && len(t.Picks) > 0 {
 				chosen = true
 			}
