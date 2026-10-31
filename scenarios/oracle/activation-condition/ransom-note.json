@@ -6,6 +6,7 @@
     {
       "name": "sacrifice-to-cloak-top-card",
       "cr": [
+        "602.2b",
         "701.62a",
         "708.2"
       ],
@@ -25,10 +26,7 @@
           "op": "activate",
           "seat": 0,
           "card": "p0:Ransom Note",
-          "mana": "CC"
-        },
-        {
-          "op": "resolve",
+          "mana": "CC",
           "answers": [
             {
               "kind": "modes",
@@ -37,6 +35,9 @@
               ]
             }
           ]
+        },
+        {
+          "op": "resolve"
         }
       ],
       "expect": [
@@ -54,6 +55,7 @@
     {
       "name": "sacrifice-to-draw-a-card",
       "cr": [
+        "602.2b",
         "608.2c"
       ],
       "why": "The {2}, sacrifice mode 'Draw a card' draws one card and puts Ransom Note into the graveyard as the sacrifice cost.",
@@ -69,10 +71,7 @@
           "op": "activate",
           "seat": 0,
           "card": "p0:Ransom Note",
-          "mana": "CC"
-        },
-        {
-          "op": "resolve",
+          "mana": "CC",
           "answers": [
             {
               "kind": "modes",
@@ -81,6 +80,9 @@
               ]
             }
           ]
+        },
+        {
+          "op": "resolve"
         }
       ],
       "expect": [
