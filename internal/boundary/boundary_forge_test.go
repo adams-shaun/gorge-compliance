@@ -11,8 +11,8 @@ import (
 // design decision P1-7), ported from gorge's engine/cards/boundary_forge_test.go.
 // Forge is GPL-3.0. Nothing that belongs to Forge — its Java source, its
 // oracle driver tree, its result rows or request files — may be committed to
-// four-yay. boundary_test.go guards the card-script corpus; this guard covers
-// the four Forge-artifact shapes the design names.
+// gorge-compliance. boundary_test.go guards the card-script corpus; this guard
+// covers the four Forge-artifact shapes the design names.
 //
 // A candidate file (tracked, or untracked and not ignored: see
 // boundary_test.go) is an offender when it is any of:
@@ -33,7 +33,7 @@ import (
 // or script fragment. That path is not under `compliance/forge*`, so it needs
 // no entry; the allowlist exists for a path the design later names that a
 // rule would otherwise catch. Entries are repo-relative slash-separated paths
-// matched exactly. four-yay has no oracle/compliance/adjudication/ yet; keep
+// matched exactly. This repository has no oracle/compliance/adjudication/; keep
 // this empty until something the design allows actually needs it.
 var forgeBoundaryAllowlist = map[string]bool{}
 
@@ -178,7 +178,7 @@ func TestForgeBoundaryDetection(t *testing.T) {
 			"package main\n", false, true, false, "only compliance/forge* is a path offender"},
 		{"file carrying the Forge GPL header", "internal/oracle/snapshot.go",
 			"package oracle\n\n// " + gplHeader + "\n", false, true, true,
-			"the Forge GPL header must never enter a four-yay file"},
+			"the Forge GPL header must never enter a gorge-compliance file"},
 		{"innocuous Go file", "internal/oracle/snapshot.go",
 			"package oracle\n\n// A snapshot read from an external process.\n", false, true, false,
 			"an ordinary file is not an offender"},
