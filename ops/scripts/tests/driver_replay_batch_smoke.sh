@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Moved from gorge (2026-10-16) via four-yay to gorge-compliance; PARKED: written for
-# the maintainers' agentctl pipeline, which is not wired to this repository.
+# Parked: written for the maintainers' agentctl pipeline, which is not wired to this
+# repository.
 # driver_replay_batch_smoke.sh -- ops/scripts/driver_replay_batch.sh's selection and
 # decision logic against fakes: a temp git repo, fake issue files carrying the
 # park History line, and stub replay / scenario / diff / check commands. The real

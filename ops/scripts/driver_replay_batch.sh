@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Moved from gorge (2026-10-16) via four-yay to gorge-compliance; PARKED: written for
-# the maintainers' agentctl pipeline, which is not wired to this repository.
+# Parked: written for the maintainers' agentctl pipeline, which is not wired to this
+# repository.
 # Batch-land tickets parked for an XMage driver host replay (operator, 2026-10-06).
 #
 # agentctl's gate "xmage driver needs host replay" (.agentctl/config.toml)

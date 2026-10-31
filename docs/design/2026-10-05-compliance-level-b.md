@@ -1,12 +1,12 @@
 # XMage compliance level B — design (2026-10-05)
 
-> **Moved to gorge-compliance (2026-10-16).** This design was written in gorge
-> (later four-yay); paths below are as written then. Today:
+> **Moved to gorge-compliance (2026-10-16).** This design was written in gorge;
+> paths below are as written then. Today:
 > `engine/rules/testdata/oracle/` and `engine/rules/testdata/xmageport/` are this
 > repository's `scenarios/oracle/` and `scenarios/xmageport/` (gorge keeps nine
 > residual hand-scenario files as its runner contract check), their drivers
 > `rules.TestOracleAudit` / `rules.TestXMagePortScenarios` are `audit/`'s, and
-> `lab/X` / four-yay's `X` is `X` here. See README.md and docs/PINNING.md.
+> `lab/X` is `X` here. See README.md and docs/PINNING.md.
 
 Status: design. Base `main@e24cf157c`. Extends
 [`2026-10-02-xmage-compliance-oracle-design.md`](2026-10-02-xmage-compliance-oracle-design.md)
