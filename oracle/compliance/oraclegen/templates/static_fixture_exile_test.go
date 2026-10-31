@@ -10,7 +10,7 @@ import (
 // the exiled-with fixture family: the source's own graveyard-to-exile ability
 // exiles one card of each type, so the CardTypes count over
 // Card.ExiledWithSource reaches its gate and the card's own P/T and keyword
-// move (ticket agent-20261009T153027Z-bc3dacf9, level-B class G7).
+// move (level-B class).
 func TestStaticExileCardTypesFixtureServesKeenEyed(t *testing.T) {
 	s, served := stateFixtureServed(t, "Keen-Eyed Curator")
 	if !served {
@@ -166,6 +166,6 @@ func TestStaticExileDonorRowServesTerritoryForge(t *testing.T) {
 
 // TestStaticExileUnservedRowsKeepTheNamedGap once locked the family's
 // measured engine gaps; every row is served now: Valgavoth and Veteran
-// Survivor by lb5-exileperm, The Enigma Jewel static#1.0 by lb5-driver's
+// Survivor, The Enigma Jewel static#1.0 by the
 // craft-then-activate observation (static_crafted_gains.go,
 // TestCraftedGainsCensus).

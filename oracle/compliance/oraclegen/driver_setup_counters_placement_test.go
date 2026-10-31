@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-// XMage cannot start in the seat, so pin the driver source: the setup
+// XMage is not part of go test, so pin the driver source: the setup
 // counters must be applied WITH the placement (through the enter-with-counters
 // map, before any state-based action), mirroring gorge's runner order
 // (agent 20261009T041408Z, cluster C1). Before this, applySetupState ran

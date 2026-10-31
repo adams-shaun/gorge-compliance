@@ -13,7 +13,7 @@ import (
 
 // CostStatic probes a cost static by casting either a qualifying spell or its
 // own source at the reduced price. The exact price is intentional: a gorge
-// refusal remains a generated item and becomes a host replay divergence, not a
+// refusal remains a generated item and becomes an XMage replay divergence, not a
 // generator Skip that could hide the behavior under test.
 var CostStatic = Template{ID: "static.cost", Version: 1}
 

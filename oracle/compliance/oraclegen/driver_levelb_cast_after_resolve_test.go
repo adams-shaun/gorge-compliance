@@ -8,7 +8,7 @@ import (
 
 // TestDriverCastTargetAfterResolveIsNotSpellOnStack pins the two places the
 // driver decides a target names a spell still on the stack. `cast` is the
-// list of cast-command names, and before this ticket it accumulated every
+// list of cast-command names, and before this change it accumulated every
 // spell ever cast. A single-target cast whose target name was in `cast` was
 // therefore taken as "targeting a spell an earlier step cast" and queued the
 // `$spellOnStack=` form, which waits for that spell on the stack. After a

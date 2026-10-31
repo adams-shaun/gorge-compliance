@@ -10,7 +10,7 @@ import (
 
 // eventTriggerCases is one real FRA card per recipe shape. probe is the card
 // the cause steps cast or activate (every probe is listed for host
-// confirmation, spec H4); inHand marks a card that starts in p0's hand.
+// confirmation); inHand marks a card that starts in p0's hand.
 var eventTriggerCases = []struct {
 	name, key, sub, probe string
 	inHand                bool
@@ -133,7 +133,7 @@ func without(zone []string, name string) []string {
 	return out
 }
 
-// TestEventTriggerRecipeShapes pins the shape details a host replay depends
+// TestEventTriggerRecipeShapes pins the shape details an XMage replay depends
 // on: the aura is cast on the Bears before the destroy probe, the loyalty
 // activate step names an ability index and carries XMage's rule-text prefix,
 // the discard probe targets p0, the lone attacker is alone, and the new phase

@@ -26,8 +26,7 @@ const (
 	StatusXMageLacks = "xmage_lacks"
 )
 
-// VerdictRow is one card x template result (spec section 5,
-// oracle/compliance/verdicts/<a-z>.jsonl).
+// VerdictRow is one card x template result (oracle/compliance/verdicts/<a-z>.jsonl).
 type VerdictRow struct {
 	Card        string `json:"card"`
 	Template    string `json:"template"`
@@ -54,8 +53,8 @@ type VerdictRow struct {
 }
 
 // Frozen is one frozen expectation: the value a comparator field had at a
-// checkpoint when the engines agreed (spec 2026-10-02 section 7; 2026-10-03
-// section 11.3 C3). Only the fields the scenario changed are frozen, so a
+// checkpoint when the engines agreed (docs/design/2026-10-02-xmage-compliance-oracle-design.md
+// section 7). Only the fields the scenario changed are frozen, so a
 // verdict never depends on board state the card did not touch.
 type Frozen struct {
 	At    string `json:"at"` // checkpoint name; "" for whole-run fields
@@ -141,7 +140,7 @@ func MergeVerdicts(dir string, rows []VerdictRow) error {
 				oldSig, oldOK := divergenceSignature(old)
 				newSig, newOK := divergenceSignature(r)
 				if oldOK && newOK && oldSig == newSig {
-					// Keep the operator's classification only while the underlying
+					// Keep the triaged classification only while the underlying
 					// field and values being classified are unchanged.
 					r.Status, r.Ruling, r.RulingID, r.Review = old.Status, old.Ruling, old.RulingID, old.Review
 					r.CanonSHA, r.Frozen = old.CanonSHA, old.Frozen
@@ -157,7 +156,7 @@ func MergeVerdicts(dir string, rows []VerdictRow) error {
 	return writeVerdicts(dir, all)
 }
 
-// hasRuling reports whether the row carries an operator-authored or
+// hasRuling reports whether the row carries a hand-authored or
 // shape-applied classification worth preserving across an identical divergence.
 func hasRuling(r VerdictRow) bool {
 	return r.Ruling != "" || r.RulingID != "" || r.Review == "confirmed"

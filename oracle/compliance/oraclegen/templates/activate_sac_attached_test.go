@@ -11,7 +11,7 @@ import (
 
 // TestActivateSacAttachedCost generates the level-B activate items for the two
 // attached-Sac cost cards (Ronin, Shadow Stalker's Equipment and Faunsbane
-// Troll's Aura). Both were a `Sac<attached>` cost gap before this ticket: the
+// Troll's Aura). Both were a `Sac<attached>` cost gap before this change: the
 // template had no fixture that puts an Aura/Equipment on the source and
 // attaches it.
 func TestActivateSacAttachedCost(t *testing.T) {
@@ -47,7 +47,7 @@ func TestActivateSacAttachedCost(t *testing.T) {
 			// attaches it to the source. An Aura fixture is cast onto the
 			// source from p0's hand instead: XMage puts an unattached Aura
 			// placed on the battlefield into the graveyard (CR 704.5m) before
-			// an attach step runs (Faunsbane Troll's wave-4 harness row).
+			// an attach step runs (Faunsbane Troll's harness row).
 			seat := it.Scenario.Setup["p0"]
 			aura := tc.fixture == attachedAuraFixture
 			zone := seat.Battlefield

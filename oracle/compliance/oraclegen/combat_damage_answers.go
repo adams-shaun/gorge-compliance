@@ -20,7 +20,7 @@ import (
 //
 // The dialog's messages are the BLOCKERS only, in block-declaration order --
 // the unassigned damage tramples to the defender by itself, and the defender
-// is never an option (HYPOTHESIS, labelled for the host replay batch; read
+// is never an option (HYPOTHESIS, labelled for the XMage replay; read
 // off CombatGroup's damageDivision build, not measured against a live
 // XMage). Each message consumes one "X=<n>" amount answer in order, so the
 // answers are one per blocker carrying the engine's own assignment. They are

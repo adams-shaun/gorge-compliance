@@ -15,8 +15,8 @@ import (
 // TestLevelBProblemsBucketLikeA checks the level-B gate's reasons reuse the
 // level-A wording: every ECL problem classifies into one of the level-A
 // buckets (ECL keeps Swat Away's explained harness row outstanding; FRA, the
-// earlier set, has had no level-B problem since lb5-driver served Codie), and none is the "level not built" stub that Check returned for any
-// level but A before this ticket.
+// earlier set, has had no level-B problem served Codie), and none is the "level not built" stub that Check returned for any
+// level but A before this change.
 func TestLevelBProblemsBucketLikeA(t *testing.T) {
 	t.Parallel()
 	root := filepath.Join("..", "..", "..")

@@ -1,5 +1,5 @@
-// Command xengine drives the cross-engine full-game differential harness
-// (DESIGN xengine): gorge plays explore-bot games, each game is lowered to one
+// Command xengine drives the cross-engine full-game differential harness:
+// gorge plays explore-bot games, each game is lowered to one
 // oracle tape scenario a follower (XMage, Forge) replays, and every
 // difference is classified and written as a repro directory.
 //

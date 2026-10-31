@@ -8,7 +8,7 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// The d8b-zones level-B rows (ticket cli-20261009T105445Z-3420f4d1) whose
+// The zone level-B rows whose
 // gorge half this round fixed. Each test generates the same level-B
 // requirement the diverge row carries and plays it through
 // rules.RunOracleScenarioJSON, asserting the state the comparator compares:

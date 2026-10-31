@@ -144,7 +144,7 @@ func TestStaticNotObservableShapes(t *testing.T) {
 
 	t.Run("rows served only through a new path", func(t *testing.T) {
 		// The census (TestStaticContinuousCensus) pins only BIG, EOE, FDN,
-		// FRA and DFT. These rows newly serve in the other sets this ticket
+		// FRA and DFT. These rows newly serve in the other sets this change
 		// touched; pinning them here is what derives the driver-replay
 		// batch's list from an assertion instead of a report sentence.
 		for _, row := range []struct{ card, key string }{
@@ -163,7 +163,7 @@ func TestStaticNotObservableShapes(t *testing.T) {
 	})
 
 	t.Run("an already-served row keeps its scenario bytes", func(t *testing.T) {
-		// Zoetic Glyph served before this ticket through its Affected$ probe
+		// Zoetic Glyph served before this change through its Affected$ probe
 		// plan (p0 also holds an Ornithopter), because the Aura's own target
 		// was already a probe. The attach-host fallback must not let the bare
 		// plan win that earlier candidate and re-emit a different scenario:

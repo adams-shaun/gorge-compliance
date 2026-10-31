@@ -11,7 +11,7 @@ import (
 )
 
 // TestLevelBRoomVerdictsAreLookedUpByFace pins the level-B gate's verdict
-// lookup for split/Room cards (ticket cli-20261009T031407Z-31a90cb3): the
+// lookup for split/Room cards: the
 // pass keys every verdict row by the card's front face ("Bottomless Pool"),
 // so the gate must look the rows up there and generate the scenario from the
 // face, the way checkA does. Before the fix every Room with a committed row

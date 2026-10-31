@@ -6,7 +6,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 )
 
-// The gated combat-legality templates (cli-20261009T031407Z-6fac1771). Each
+// The gated combat-legality templates. Each
 // test pins one rows-file card's generated item and proves the observation is
 // not vacuous: the gate-held run holds, and the flipped polarity (the gate
 // unheld with the expectation inverted) fails or holds as the engine's gate
@@ -144,7 +144,7 @@ func TestMaxBlockersSafewrightCavalry(t *testing.T) {
 
 // TestMustAttackRedHerring pins the MustAttack requirement flag (MKM Red
 // Herring): the attack step's expects read the requirement off the PENDING
-// attackers decision pre-submit (agent-20261009T172754Z-e2838eed: the
+// attackers decision pre-submit (the
 // scenario declares the card, because a checkpoint on the pending decision
 // diverged against XMage's force-declare), the probe's option does not carry
 // it, and flipping the card's assertion fails the run pre-submit, before the

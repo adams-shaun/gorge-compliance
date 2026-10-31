@@ -9,7 +9,7 @@ import (
 )
 
 // TestLandPlayedZoneRowsGenerate is the class table for the origin-scoped
-// LandPlayed trigger (wave-4 G5 LandPlayed rows): each row generates, plays
+// LandPlayed trigger (LandPlayed rows): each row generates, plays
 // through gorge, plays its land from a non-hand zone, and shows the row's own
 // trigger on the stack.
 func TestLandPlayedZoneRowsGenerate(t *testing.T) {

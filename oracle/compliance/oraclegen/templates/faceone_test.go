@@ -41,7 +41,7 @@ func TestFaceOneTemplatesServeBackFaceSetup(t *testing.T) {
 			if req.Face != 1 {
 				t.Fatalf("requirement %s has face %d, want 1", tc.key, req.Face)
 			}
-			// The gap is what the ticket removes: a servable face must carry
+			// The gap is what the change removes: a servable face must carry
 			// neither a gap nor a ".face:N" sub-family.
 			if req.Gap != "" {
 				t.Fatalf("requirement %s still carries gap %q", tc.key, req.Gap)

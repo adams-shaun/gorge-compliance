@@ -16,8 +16,8 @@ func shockResult() rules.OracleResult {
 }
 
 // TestFreezeKeepsOnlyChangedFields: the expectation names the fields the
-// scenario moved, so a change to anything else does not stale the verdict
-// (section 11.3 C3), while a change to a frozen field does.
+// scenario moved, so a change to anything else does not stale the verdict,
+// while a change to a frozen field does.
 func TestFreezeKeepsOnlyChangedFields(t *testing.T) {
 	res := shockResult()
 	fz := Freeze(res)

@@ -1,7 +1,7 @@
 package templates_test
 
 // static_exile_opponent_offer_test.go pins the opponent-owned exiled-with
-// may-play row (ticket lb-mayplayopp): Azula, Cunning Usurper's ETB makes
+// may-play row: Azula, Cunning Usurper's ETB makes
 // the target opponent exile a creature, and "you may cast cards exiled with
 // Azula" must offer that OPPONENT-owned card to Azula's controller. The
 // engine's may-play walk used to visit only the caster's own cards, so the

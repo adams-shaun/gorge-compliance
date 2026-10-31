@@ -85,7 +85,7 @@ lines = [
     f"- per-test seconds (warm, excluding the slowest): median {med:.3f}, max {max(warm) if warm else -1:.3f}",
     f"- slowest test (includes card DB load): {cases[-1] if cases else -1:.3f} s",
     "",
-    "Spec §10 revisit trigger: warm median above 0.200 s or smoke peak RSS above 2560 MiB.",
+    "Targets: warm median above 0.200 s or smoke peak RSS above 2560 MiB.",
 ]
 open(f"{root}/MEASURE.md", "w").write("\n".join(lines) + "\n")
 print("\n".join(lines))

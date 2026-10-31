@@ -1,5 +1,5 @@
-// Counter and speed fixtures for the level-B static and activate templates
-// (ticket levelb-setup-counters-speed). A setup permanent can start with
+// Counter and speed fixtures for the level-B static and activate templates.
+// A setup permanent can start with
 // counters and a seat with a speed (engine/rules/oracle_setup_state.go), so:
 //
 //   - a static gated on its own counters (a Spacecraft's `Card.Self+

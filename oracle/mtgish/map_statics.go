@@ -6,7 +6,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
-// Unit D2: the static abilities, game-rule modifiers and "as this enters"
+// The static abilities, game-rule modifiers and "as this enters"
 // effects on both sides, so the two halves agree by construction. Gorge's
 // side keys on the S: mode, the keyword line and the as-enters API; mtgish's
 // on the Rule, LayerEffect and ReplacementActionWouldEnter variants.

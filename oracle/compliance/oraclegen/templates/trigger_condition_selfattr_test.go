@@ -1,4 +1,4 @@
-// Focused tests for the self-attribute gates this ticket clears: The Mind
+// Focused tests for the self-attribute gates this change clears: The Mind
 // Stone's ∞ trigger is offered only once its own Harness activation has run
 // (the prelude activates it in turn 1's main phase), and Cryptex's Surveil
 // ability is offered only with five unlock counters on it (the setup carries

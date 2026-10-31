@@ -1,5 +1,5 @@
 // Level-B observation of a continuous static whose AddTrigger$ grants a
-// TRIGGERED ability (ticket levelb-granted-triggers, the trigger slice of the
+// TRIGGERED ability (the trigger slice of the
 // levelb-static-granted-abilities class). The snapshot carries no list of a
 // permanent's abilities, so the grant is observed by MAKING the granted
 // trigger fire: the scenario supplies the static's gate (speed 4, the gate's

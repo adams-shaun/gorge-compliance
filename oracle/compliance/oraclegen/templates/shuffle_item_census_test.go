@@ -14,15 +14,7 @@ import (
 
 // Count emitted items, not shuffle-capable cards: one face can serve several
 // requirements, and a template gap emits no item at all.
-//
-// Re-measured for cli-20261009T031408Z-5823e7de (Level B activate fixtures):
-// DSK 3 -> 4, MKM 0 -> 1, TLA 2 -> 3. The branch's auraSourceAttach prelude
-// brings a battlefield Aura's source on attached, so its own activated ability
-// (offered only while attached) is generated for three level-B activate rows
-// whose cards shuffle a library: DSK Stay Hidden, Stay Silent/activate#0.0/v1,
-// MKM Dramatic Accusation/activate#0.0/v1 and TLA Watery Grasp/activate#0.0/v1.
-// Each item tracks its new scenario one-for-one and disappears if that attach
-// serving is reverted.
+// Git history records why each count moved.
 var wantShuffleItemCensus = map[string]int{
 	"BIG": 0, "BLB": 0, "DFT": 0, "DSK": 4, "ECL": 0,
 	"EOE": 1, "FDN": 3, "FIN": 1, "FRA": 2, "HOB": 2,

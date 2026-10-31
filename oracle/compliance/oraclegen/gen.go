@@ -2,9 +2,8 @@
 // generator: the scenario types, fixtures, gorge-side settling and the
 // XMage answer scripting. Each template (play a land, cast and resolve,
 // counter a spell) lives in its own file under oraclegen/templates with its
-// own version; templates.Generate picks one per card (spec
-// 2026-10-02-xmage-compliance-oracle-design section 6; the split is
-// 2026-10-03-rules-engine-lasagna-design section 11.3 C3). Scenarios use
+// own version; templates.Generate picks one per card (docs/design/2026-10-02-xmage-compliance-oracle-design.md
+// section 6). Scenarios use
 // the oracle-scenario schema of gorge's runner (scenarios/oracle), so gorge's runner and the XMage driver
 // both replay them.
 //

@@ -1,7 +1,6 @@
 // Package templates holds the level-A oracle scenario templates, one file
-// per template, each with its own version
-// (docs/design/2026-10-03-rules-engine-lasagna-design.md section
-// 11.3 C3). A template's version is part of its scenarios' ids and names,
+// per template, each with its own version.
+// A template's version is part of its scenarios' ids and names,
 // so bumping it stales only that template's verdicts; a change to the
 // shared core (package oraclegen) stales exactly the scenarios whose bytes
 // it changes, through the verdict's scenario hash.

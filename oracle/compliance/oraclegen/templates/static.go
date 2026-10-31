@@ -1,4 +1,4 @@
-// Level-B static template (spec
+// Level-B static template (see
 // docs/design/2026-10-05-compliance-level-b.md section 7). It
 // serves statics observed through stack/state differences, combat damage,
 // attack/block legality and priority options. A legality candidate is served

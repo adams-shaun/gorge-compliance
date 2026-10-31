@@ -52,7 +52,7 @@ func TestTriggerETBProbe(t *testing.T) {
 // type, an opponent's permanent) is served by its dedicated cause, and the
 // scenario's probe names the mechanism: a token maker, a face-down cast, a
 // cast of the chosen type's creature, and a p1 cast for the opponent's
-// permanent (ticket g17).
+// permanent.
 func TestTriggerETBProbeSpecialFilters(t *testing.T) {
 	reg := loadGenRegistry(t)
 	for _, tc := range []struct{ name, key, probe string }{

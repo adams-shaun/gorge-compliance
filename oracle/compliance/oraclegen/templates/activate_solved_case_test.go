@@ -1,4 +1,4 @@
-// Focused tests for the activation-restriction preludes this ticket adds:
+// Focused tests for the activation-restriction preludes this change adds:
 // the solved-Case setup (MKM "Solved —" abilities) and the scry / left-
 // graveyard turn-history setups. Each drives a REAL corpus card whose
 // activated ability is offered only when the gate holds, asserts the gate
@@ -15,7 +15,7 @@ import (
 )
 
 // TestActivateSolvedCasePrelude drives the four MKM Case "Solved —" abilities
-// in the ticket's rows file. A Case is solved only by its own end-step "To
+// in the change's rows file. A Case is solved only by its own end-step "To
 // solve" trigger, so the generated scenario must carry the solve sequence
 // (wait for the end step, resolve the solve trigger) and the ability must then
 // be offered and play through gorge.

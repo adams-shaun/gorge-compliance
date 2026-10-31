@@ -65,7 +65,7 @@ func freezeRuled(reg *cards.Registry, r *compliance.VerdictRow) bool {
 }
 
 // runTriage applies the shape rulings to every committed disagreement and
-// clusters what no ruling covers (section 11.3 C2). Without -apply it only
+// clusters what no ruling covers. Without -apply it only
 // reports.
 func runTriage(dir, verdictDir, rulingDir, outDir string, apply bool) error {
 	if err := installXMageKnown(filepath.Join("oracle", "compliance", "manifests")); err != nil {

@@ -8,8 +8,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
-// Ability-on-stack target fixtures (ticket agent-20261009T085207Z-c99a362b,
-// activate_ability_stack.go): the level-B activate rows whose target is an
+// Ability-on-stack target fixtures (activate_ability_stack.go): the level-B activate rows whose target is an
 // ACTIVATED or TRIGGERED ability PENDING on the stack. One "ability prelude"
 // serves them all: a probe permanent's simple ability is activated (or, for
 // a triggered-only TargetType$, a card is moved onto the battlefield so its

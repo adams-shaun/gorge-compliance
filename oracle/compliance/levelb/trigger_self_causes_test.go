@@ -7,15 +7,15 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// TestSelfCauseTriggerClassification pins the routing the self-cause ticket
-// (agent-20261009T160853Z-c3e35453) added: a self-transform trigger, a self
+// TestSelfCauseTriggerClassification pins the routing the self-cause change
+// added: a self-transform trigger, a self
 // cycling trigger and an origin-free land-play trigger now name a servable
 // sub-family, while the shapes their causes cannot produce stay gaps --
 // Shadow of the Goblin's not-owned hand land. Spider-Man 2099's Static$ True
 // LandPlayed bookkeeping line never reaches the stack and is observed through
 // its end-step consumer (trigger.bookkeeping, trigger_bookkeeping.go). The
 // origin-scoped land plays (Gwen Stacy's from-exile, Shadow of the Goblin's
-// not-from-hand) are served by trigger.land-played-zone (wave-4 lb4-gtrig).
+// not-from-hand) are served by trigger.land-played-zone.
 func TestSelfCauseTriggerClassification(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	for _, tc := range []struct{ name, key, sub string }{

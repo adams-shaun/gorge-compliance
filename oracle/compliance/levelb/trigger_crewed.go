@@ -1,5 +1,4 @@
-// Crew/Saddle-perspective trigger classification (ticket
-// agent-20261009T174759Z-80a5bc9a): Mode$ Crewed and Mode$ Saddled fire on
+// Crew/Saddle-perspective trigger classification: Mode$ Crewed and Mode$ Saddled fire on
 // the marker events engine/rules/trigmatch's crewed.go matches, with Forge's
 // ValidCrew$ naming the CREWING/SADDLING creature. The recipes' cause is the
 // reverse of the attack-activation cause: a probe Vehicle or Mount on p0's

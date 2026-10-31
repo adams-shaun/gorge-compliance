@@ -10,7 +10,7 @@ import (
 )
 
 // d8Req finds name's level-B requirement for key, so the test builds the same
-// level-B scenario the D8 diverge rows carry.
+// level-B scenario the diverge rows carry.
 func d8Req(t *testing.T, reg *cards.Registry, name, key string) levelb.Requirement {
 	t.Helper()
 	c, ok := reg.Lookup(name)
@@ -27,7 +27,7 @@ func d8Req(t *testing.T, reg *cards.Registry, name, key string) levelb.Requireme
 }
 
 // TestD8AllColourTokens pins the `Colors:all` token scripts. The two tokens
-// the D8 rows name (The Wandering Minstrel's Elemental, Dragonbroods'
+// the diverge rows name (The Wandering Minstrel's Elemental, Dragonbroods'
 // Relic's Reliquary Dragon) spell their colours `Colors:all`, which
 // effects.ColorMaskOf used to ignore, so gorge's snapshot showed a
 // colourless token where XMage and the token script both say all five.

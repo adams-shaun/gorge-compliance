@@ -1,6 +1,6 @@
 // Level-B observation of a static whose AddReplacementEffect$ grants a
 // REPLACEMENT effect, observed by causing the event the granted replacement
-// rewrites (ticket agent-20261009T094023Z-cd4b2f74; the static slice the
+// rewrites (the static slice the
 // granted-ability, granted-trigger, granted-static and donor templates left as
 // the named "grants a replacement effect" skip). The outer static is a plain
 // Mode$ Continuous whose Affected$ names the HOST the granted replacement

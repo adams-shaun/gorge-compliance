@@ -7,8 +7,8 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// TestCrewedTriggerClassification pins the routing the crew/saddle-cause
-// ticket (agent-20261009T174759Z-80a5bc9a) added: a Mode$ Crewed / Mode$
+// TestCrewedTriggerClassification pins the routing the crew/saddle cause
+// added: a Mode$ Crewed / Mode$
 // Saddled row whose ValidCrew$ admits Card.Self now names a servable
 // sub-family (the recipe activates a probe Vehicle/Mount's own Crew/Saddle
 // ability electing the source), and Balthier and Fran's crew-by-source

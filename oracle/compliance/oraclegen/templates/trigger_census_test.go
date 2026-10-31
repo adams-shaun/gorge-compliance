@@ -39,11 +39,11 @@ var wantTriggerCensus = map[string]map[string]int{
 		"served:trigger.etb-other":                   18,
 		"served:trigger.ltb-other":                   1,
 		"served:trigger.ltb-self":                    4,
-		"served:trigger.land-played":                 1, // The Endstone: agent-20261009T160853Z-c3e35453
+		"served:trigger.land-played":                 1, // The Endstone
 		"served:trigger.phase":                       20,
 		"served:trigger.spell-cast":                  6,
 		"skip:trigger.attacks: trigger did not fire": 0,
-		"served:trigger.becomes-target":              5, // lb4-g12: Famished Worldsire's Ward, kept alive by a +1/+1 counter (the tail's x/0 cause).
+		"served:trigger.becomes-target":              5, // Famished Worldsire's Ward, kept alive by a +1/+1 counter (the tail's x/0 cause).
 		// lb-xpending: Famished Worldsire's Ward trigger (a printed 0/0) moved
 		// from the bare "did not fire" to its named zero-toughness reason.
 		"skip:trigger.becomes-target: trigger did not fire":                                                        0,
@@ -51,7 +51,7 @@ var wantTriggerCensus = map[string]map[string]int{
 		"skip:trigger.dies-other: trigger did not fire":                                                            0,
 		"skip:trigger.dies: trigger no recipe: dies needs a creature":                                              0,
 		"skip:trigger.etb-other: trigger covered by level A":                                                       76,
-		"skip:trigger.phase: trigger did not fire":                                                                 0, // lb4-g12: Chorale of the Void, cast onto a bearer.
+		"skip:trigger.phase: trigger did not fire":                                                                 0, // Chorale of the Void, cast onto a bearer.
 		"skip:trigger.spell-cast: trigger did not fire":                                                            0,
 		"served:trigger.sacrificed":                                                                                2,
 		"served:trigger.damage":                                                                                    6,
@@ -67,9 +67,9 @@ var wantTriggerCensus = map[string]map[string]int{
 		"served:trigger.damage":                                 4,
 		"served:trigger.state-self-counters":                    1,
 		"served:trigger.drawn":                                  4,
-		"served:trigger.drawn-other":                            1, // Scrawling Crawler: cli-20261009T031408Z-a01003ef
-		"served:trigger.discarded-opponent":                     1, // Tinybones, Bauble Burglar: agent-20261009T174759Z-3f3e77a4
-		"served:trigger.life-lost":                              1, // Bloodthirsty Conqueror: cli-20261009T031408Z-a01003ef
+		"served:trigger.drawn-other":                            1, // Scrawling Crawler
+		"served:trigger.discarded-opponent":                     1, // Tinybones, Bauble Burglar
+		"served:trigger.life-lost":                              1, // Bloodthirsty Conqueror
 		"served:trigger.etb-land":                               20,
 		"served:trigger.etb-other":                              24,
 		"served:trigger.life-gained":                            8,
@@ -108,7 +108,7 @@ var wantTriggerCensus = map[string]map[string]int{
 		"served:trigger.noncombat-damage":                    3,
 		"served:trigger.phase":                               16, // Paradox Shaper, Stingerquill Voxmancer, Woodwork Prodigy: the consumed !IsPrepared gate is a cast-self cause now.
 		"served:trigger.scry":                                5,
-		"served:trigger.spell-cast":                          20, // lb4-g12: Danitha, Sword of Hope (the ValidSA$ IsTargeting list). Ruric Thar, Biomagus: both prowess instances are served; Codie, Ravenous Codex: the prepared-copy cast cause now serves it.
+		"served:trigger.spell-cast":                          20, // Danitha, Sword of Hope (the ValidSA$ IsTargeting list). Ruric Thar, Biomagus: both prowess instances are served; Codie, Ravenous Codex: the prepared-copy cast cause now serves it.
 		"served:trigger.spell-cast-opponent":                 1,
 		"served:trigger.surveil":                             5,
 		"skip:trigger.attacks: trigger did not fire":         0,

@@ -228,7 +228,7 @@ func TestRequirementsClassificationTable(t *testing.T) {
 			}},
 		},
 		{
-			// cli-20261009T031408Z: the damage recipes serve the noncombat
+			// the damage recipes serve the noncombat
 			// DamageDone shape too (the Shock probe), so it is no longer a
 			// mode gap; only the self-source combat-damage case keeps
 			// trigger.combat-damage.

@@ -8,7 +8,7 @@ import (
 )
 
 // TestMayPlayRiderRowsGenerate is the class table for the Static$ True
-// SpellCast rider of a play-permission static (wave-4 G5 SpellCast rows):
+// SpellCast rider of a play-permission static (SpellCast rows):
 // every row generates, plays through gorge, ends with the permitted cast's
 // permanent carrying the rider's counter, and the scenario's cast step is the
 // row's cause (not an assertion-only pass_to).

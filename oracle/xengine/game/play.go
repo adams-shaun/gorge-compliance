@@ -17,7 +17,7 @@ import (
 	"github.com/adams-shaun/gorge/testkit/bench"
 )
 
-// Default caps: 30 turns (DESIGN §2) and cardfuzz's -max-intents default.
+// Default caps: 30 turns and cardfuzz's -max-intents default.
 const (
 	DefaultMaxTurns   = 30
 	DefaultMaxIntents = 20000

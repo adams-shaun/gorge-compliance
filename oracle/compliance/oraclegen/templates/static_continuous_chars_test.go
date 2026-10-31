@@ -86,10 +86,10 @@ func TestStaticContinuousTypeChange(t *testing.T) {
 
 // TestStaticContinuousUnobservedStaysSkipped: a keyword-grant static outside
 // both vocabularies still skips (Thrumming Stone grants Ripple 4 to spells;
-// Raiding Schemes' Conspire grant left this set when lb5-driver elected the
+// Raiding Schemes' Conspire grant left this set when the driver elected the
 // granted copy cost, static_granted_optional_copy.go;
-// agent-20261009T153027Z-7c702026 served Colossal Rattlewurm's Flash grant by
-// adding "flash" to the named vocabulary, and lb4-g7 served Teval, Arbiter of
+// Colossal Rattlewurm's Flash grant is served by "flash" in the named
+// vocabulary, and Teval, Arbiter of
 // Virtue's Delve grant through the offered cast once the engine priced a
 // stack-scoped Delve grant). Living Conundrum left this set when the
 // empty-library fixture served it (TestStaticLibraryEmpty).
@@ -102,9 +102,9 @@ func TestStaticContinuousUnobservedStaysSkipped(t *testing.T) {
 // TestStaticContinuousNamedGaps: the shapes the widened observation still
 // cannot reach carry their own reason rather than the generic one. Sunbird
 // Standard's Effigy face left this table with
-// levelb-static-count-attachments (agent-20261009T055718Z-661990d1): its
+// its
 // ExiledWith$Colors CDA is served by the Craft prelude. Lumbering Worldwagon
-// left it with lb4-g7: the crew prelude animates the Vehicle, so its CDA
+// left it: the crew prelude animates the Vehicle, so its CDA
 // power prints (staticCrewCDAFixture).
 func TestStaticContinuousNamedGaps(t *testing.T) {
 	for _, row := range []struct{ card, key, want string }{

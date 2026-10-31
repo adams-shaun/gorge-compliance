@@ -57,9 +57,7 @@ jobs:
         run: |
           pin=$(head -n1 GORGE_PIN | awk '{print $1}')
           ref='${{ inputs.gorge_ref }}'
-          if [ -z "$ref" ]; then
-            if [ "$pin" = PENDING ]; then ref='${{ vars.GORGE_REF || 'wt/restructure' }}'; else ref=$pin; fi
-          fi
+          [ -n "$ref" ] || ref=$pin
           echo "gorge ref: $ref (GORGE_PIN: $(head -n1 GORGE_PIN))"
           echo "ref=$ref" >> "$GITHUB_OUTPUT"
 

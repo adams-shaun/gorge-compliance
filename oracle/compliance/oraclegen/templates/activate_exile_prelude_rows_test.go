@@ -1,5 +1,5 @@
 // The four activate rows whose level-B scenario needs an extra prelude the
-// bare fixture cannot supply (ticket agent-20261010T044009Z-fb50a4ce):
+// bare fixture cannot supply:
 //
 //   - SPM Urban Retreat: a "Return<1/Creature.tapped>" cost's creature is
 //     tapped by a real tap spell, because setup's Tapped list is undone by
@@ -14,7 +14,7 @@
 //
 // Each subtest asserts the PRECONDITION its effect depends on, then that the
 // scenario plays through gorge with zero fails and the final snapshot shows
-// the effect. Kept in its own file so the ticket cannot conflict on a shared
+// the effect. Kept in its own file so the change cannot conflict on a shared
 // test file.
 package templates
 

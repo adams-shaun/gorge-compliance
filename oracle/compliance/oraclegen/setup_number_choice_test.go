@@ -11,7 +11,7 @@ import (
 // Lord, CR 614.12) is queued before setup as XMage's getAmount answer
 // "X=<n>", so both engines enter the permanent with the same chosen number.
 // Unscripted, XMage's AI chose its own and Talion's trigger#0.0 row compared
-// two different numbers (WOE, lb4w2-diverge).
+// two different numbers (WOE).
 func TestSetupNumberChoiceIsQueuedBeforeSetup(t *testing.T) {
 	setup := rules.OracleDecision{
 		Step: -1, Seat: 0, Kind: "choose_n", Resume: "etb",

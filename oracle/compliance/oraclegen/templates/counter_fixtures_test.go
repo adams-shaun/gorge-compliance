@@ -139,7 +139,7 @@ func TestActivateSourceCounterCosts(t *testing.T) {
 		// seeded only for the shortfall: Wishclaw Talisman enters with three
 		// wish counters, Brambleback Brute with two -1/-1 counters, so the
 		// placement itself covers the cost and nothing is seeded
-		// (cli-20261009T031408Z-5823e7de, following adf42bde9's shortfall
+		// (following adf42bde9's shortfall
 		// seeding).
 		{"Wishclaw Talisman", "activate#0.0", "WISH", 1, 3},
 		{"Brambleback Brute", "activate#0.0", "M1M1", 1, 2},

@@ -9,7 +9,7 @@ import (
 )
 
 // TestStaticCounterGatesServed: counter-gated static rows the setup-counters
-// fixture (ticket cli-20261009T031409Z-a76de35a) moved off the named
+// fixture moved off the named
 // "needs counters on the affected permanent" skip. Each subtest pins the
 // effect the scenario's comparison rests on: the fixture counters are really
 // on the board in the setup the two engines share, and the static's grant

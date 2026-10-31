@@ -12,7 +12,7 @@ import (
 )
 
 // TestActivateLevelBRowsAnnouncedCounts serves six example rows of the
-// g10/g14 level-B activate classes the ticket (cli-20261009T031408Z-5823e7de)
+// level-B activate classes the change
 // clears. Each case first asserts the PRECONDITION the served scenario
 // depends on -- the source where the activation happens and the setup the
 // payment needs -- then that the item generates and the scenario plays

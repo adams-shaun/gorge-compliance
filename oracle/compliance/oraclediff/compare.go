@@ -1,6 +1,6 @@
 // Package oraclediff compares gorge's oracle-scenario snapshots with the
 // XMage driver's (oracle/xmageoracle) and reports the first difference
-// (spec 2026-10-02-xmage-compliance-oracle-design section 7).
+// (docs/design/2026-10-02-xmage-compliance-oracle-design.md section 7).
 package oraclediff
 
 import (
@@ -410,7 +410,7 @@ func permKeys(ps []rules.OracleSnapPerm) []string {
 // permKeysOpts is permKeys with the item's opt-in field list: when it names
 // "keywords" the line gains the permanent's folded evergreen keywords, and
 // when it names "keywords_named" it gains the wider named vocabulary
-// (spec 2026-10-05-compliance-level-b section 2.3).
+// (docs/design/2026-10-05-compliance-level-b.md section 2.3).
 func permKeysOpts(ps []rules.OracleSnapPerm, compare []string) []string {
 	wantHexFrom := wantsCompare(compare, CompareKeywordsHexproofFrom)
 	wantNamed := wantHexFrom || wantsCompare(compare, CompareKeywordsNamed)

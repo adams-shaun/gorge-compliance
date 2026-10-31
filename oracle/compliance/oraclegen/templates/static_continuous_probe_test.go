@@ -221,8 +221,7 @@ func TestStaticContinuousBearRowUnchanged(t *testing.T) {
 // exile-and-counter activation (static_gains_exiled_with.go; pinned by
 // TestLevelBCostAndStaticRowsServed), so this pins that the row no longer
 // falls through to the probe paths' named gap. Gideon's Memorial ("token")
-// and Firion ("equipped") left for the state fixtures (ticket
-// cli-20261009T031407Z-8f4b4f49).
+// and Firion ("equipped") left for the state fixtures.
 func TestStaticContinuousNamedSkips(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	it, skip := GenerateB(reg, "Agatha's Soul Cauldron", probeRequirement(t, reg, "Agatha's Soul Cauldron", "static#0.1"))

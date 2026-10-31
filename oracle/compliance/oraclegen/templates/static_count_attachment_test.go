@@ -11,7 +11,7 @@ import (
 )
 
 // The four computed-count rows the static template's count fixtures serve
-// (ticket levelb-static-count-attachments, class G7 "static effect
+// (class "static effect
 // unobservable"): a count-bearing amount the bare turn leaves at zero. Each
 // row's fixture supplies the state the count reads and the serving loop
 // asserts a real change on top of the fixture's own contribution, so a row

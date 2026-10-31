@@ -77,7 +77,7 @@ type childError struct {
 
 func (e *childError) Error() string { return e.err.Error() + ": " + e.out }
 
-// TestCertificationRatchet is section 11.3 C8's ratchet, modelled on
+// TestCertificationRatchet is the certification ratchet, modelled on
 // knownUnsupported: oracle/compliance/ratchet.json records every committed set's
 // declared level (a floor: a declared set or level only grows) and its
 // outstanding count at level A (a ceiling: it only shrinks). Every set
@@ -120,8 +120,7 @@ func TestCertificationRatchet(t *testing.T) {
 		t.Fatalf("measured %d of %d sets", len(measured), len(scope))
 	}
 	fails, slack := CheckRatchet(cs.SetCodes(), measured, declared, ratchet)
-	// The per-ticket gate's stale-only classifier reads this line (see
-	// ops/scripts/gate_affected.sh): the ratchet's outstanding count includes stale
+	// A merge gate's stale-only classifier reads this line: the ratchet's outstanding count includes stale
 	// verdicts, so a ratchet that only grew on stale problems is a host XMage
 	// replay's to clear, not a defect to fix. Emitted on every run (go test
 	// prints it only for a failing test), so a non-stale problem leaves no
@@ -141,7 +140,7 @@ func TestCertificationRatchet(t *testing.T) {
 }
 
 // ratchetVerdict classifies TestCertificationRatchet's failure for the
-// per-ticket gate's stale-only classifier (ops/scripts/gate_affected.sh): "clean"
+// a merge gate's stale-only classifier: "clean"
 // (no fail), "stale-only" (every fail is a set's outstanding GROWTH and that
 // set's problems are ALL stale verdicts, a moved scenario sha a host XMage
 // replay clears), or "mixed" (any other fail -- a set no longer committed, a

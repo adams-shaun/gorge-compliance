@@ -17,7 +17,7 @@ import (
 // the answers are one per offered colour carrying the number of units the
 // engine allocated to it. The dialog's message order is the set's option
 // order, which is what ManaColours records; a wrong order shows up as a
-// stable harness or divergent row on the host replay, not a flake.
+// stable harness or divergent row on the XMage replay, not a flake.
 //
 // A produced-Any ask (XMage's DynamicManaEffect: a colour dialog at one
 // unit, a WUBRG multi-amount above it) never reaches here -- it carries no

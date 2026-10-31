@@ -12,7 +12,7 @@ import mage.game.Game;
 /** No database or game: pins how the driver follows the runs of priority
  * passes of a recorded game (an xengine tape or window), where the steps carry
  * the position gorge reached after each pass (xmage_pos). Run
- * scripts/xmage-oracle-test-pass-runs.sh; the replay itself is a host gate. */
+ * scripts/xmage-oracle-test-pass-runs.sh; the replay itself is a real replay. */
 public final class ScenarioReplayPassRunsTest {
     private static void check(boolean condition, String message) {
         if (!condition) {

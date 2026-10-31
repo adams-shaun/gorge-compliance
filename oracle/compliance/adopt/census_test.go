@@ -59,7 +59,7 @@ func TestConfigIncludes(t *testing.T) {
 	}
 }
 
-// TestTournamentScoping is section 11.3 C7: the All target is tournament
+// TestTournamentScoping: the All target is tournament
 // Magic. A card printed only in joke sets, or one that needs a
 // non-tournament primitive, is outside it; a reprinted staple is inside
 // every format.

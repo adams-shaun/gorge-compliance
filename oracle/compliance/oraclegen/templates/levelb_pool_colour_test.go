@@ -11,7 +11,7 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// Level-B D6 "mana pool colour" rows: the generated item's step-0 checkpoint
+// Level-B "mana pool colour" rows: the generated item's step-0 checkpoint
 // must show the pool both engines can agree on. Each case replays the item
 // gorge's runner sees (Item.Raw) and asserts the pool at the diverging
 // checkpoint, plus the precondition the assertion rides on.
@@ -61,7 +61,7 @@ func poolAtCheckpoint(t *testing.T, reg *cards.Registry, it oraclegen.Item, want
 // A cast of a Convoke spell must pay the whole cost from the pool when no
 // convoke tap is scripted: gorge's forced convoke tap used to leave one
 // floating generic while a pool-paid cast spends everything (XMage pays the
-// pool), the exact D6 divergence on The Wandering Rescuer and Lofty Dreams.
+// pool), the exact divergence on The Wandering Rescuer and Lofty Dreams.
 func TestConvokeCastPoolAgrees(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	for _, tc := range []struct{ card string }{
@@ -82,7 +82,7 @@ func TestConvokeCastPoolAgrees(t *testing.T) {
 // Itlimoc's second ability ({T}: Add {G} for each creature you control) with
 // zero creatures must produce nothing at the activation checkpoint, and its
 // first ability ({T}: Add {G}.) must still produce G: the two pools differ,
-// which is what the label-ambiguous wheel used to collapse (the D6 row on
+// which is what the label-ambiguous wheel used to collapse (the row on
 // activate#1.1).
 func TestItlimocActivatePoolsDiffer(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)

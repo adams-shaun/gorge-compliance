@@ -1,5 +1,4 @@
-// Fixtures for a static over cards exiled with the source (ticket
-// agent-20261009T153027Z-bc3dacf9, level-B class G7 "static effect
+// Fixtures for a static over cards exiled with the source (level-B class "static effect
 // unobservable"). A setup-placed exile carries no exiled-with association, so
 // the offer and donor paths could not serve these rows; each builder here runs
 // the card's OWN move -- its activated exile, or its cast ETB -- so the engine

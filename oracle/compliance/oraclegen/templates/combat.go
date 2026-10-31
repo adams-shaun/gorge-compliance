@@ -1,4 +1,4 @@
-// Level-B combat templates (spec
+// Level-B combat templates (see
 // docs/design/2026-10-05-compliance-level-b.md section 2.4).
 package templates
 

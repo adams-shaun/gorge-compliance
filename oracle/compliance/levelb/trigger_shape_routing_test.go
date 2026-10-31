@@ -7,12 +7,12 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// TestWave4TriggerShapeClassification pins the wave-4 trigger-shape routing
-// (lb4-gtrig): the Static$ True may-play cast rider, the origin-scoped land
+// TestTriggerShapeClassification pins the trigger-shape routing:
+// the Static$ True may-play cast rider, the origin-scoped land
 // play, and the zone-less "When CARDNAME enters" ChangesZone line, which is a
 // self-ETB the level-A cast-resolve scenario settles (it does not look back
 // in time, engine/rules/trigger_zone_gate.go zoneChangeNoLookBack).
-func TestWave4TriggerShapeClassification(t *testing.T) {
+func TestTriggerShapeClassification(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	for _, tc := range []struct {
 		name, key, sub string
@@ -48,8 +48,8 @@ func TestWave4TriggerShapeClassification(t *testing.T) {
 	}
 }
 
-// TestWave4AttachedRelative pins Eriette as trigger.attached.
-func TestWave4AttachedRelative(t *testing.T) {
+// TestTriggerAttachedRelative pins Eriette as trigger.attached.
+func TestTriggerAttachedRelative(t *testing.T) {
 	c, ok := testutil.CorpusRegistry(t).Lookup("Eriette, the Beguiler")
 	if !ok {
 		t.Fatal("Eriette not in the corpus")
@@ -61,11 +61,11 @@ func TestWave4AttachedRelative(t *testing.T) {
 	}
 }
 
-// TestWave4TurnFaceUpYouCause: Growing Dread's "Whenever you turn a permanent
+// TestTriggerTurnFaceUpYouCause: Growing Dread's "Whenever you turn a permanent
 // face up" is served by the turned-face-up-other recipe (p0's own special
 // action), while Oblivious Bookworm's Static$ True imprint line is a
 // bookkeeping record observed through its end-step consumer.
-func TestWave4TurnFaceUpYouCause(t *testing.T) {
+func TestTriggerTurnFaceUpYouCause(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	for _, tc := range []struct{ name, key, sub string }{
 		{"Growing Dread", "trigger#0.1", levelb.TurnedFaceUpOtherSub},

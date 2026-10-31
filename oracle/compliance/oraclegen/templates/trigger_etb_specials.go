@@ -1,5 +1,5 @@
 // ETB causes for the entering-object filters a placed cast cannot serve
-// (ticket g17, wave 3 "trigger with no recipe"): a token, a face-down
+// ("trigger with no recipe"): a token, a face-down
 // permanent, a permanent of the source's chosen type, an opponent's
 // permanent, and a creature with graveyard/exile provenance. Each shape has
 // a turn-1 cause the engine's own matcher accepts or rejects:

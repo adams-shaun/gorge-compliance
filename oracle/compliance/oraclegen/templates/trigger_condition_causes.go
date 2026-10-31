@@ -35,7 +35,7 @@ func attackTriggerSub(sub string) bool {
 }
 
 // Probe cards for conditions a trigger names, each a plain permanent that
-// setup can place (spec hypothesis H4: the host replay confirms each exists in
+// setup can place (the XMage replay confirms each exists in
 // XMage's database).
 var (
 	// bigGraveyard holds four card types, nine cards, eight of them

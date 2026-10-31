@@ -2,12 +2,12 @@
 # forge-oracle-run.sh IN.jsonl OUT.jsonl
 # forge-oracle-run.sh --compile
 #
-# Replays Forge-oracle requests (one JSON object per line, DESIGN.md §5.2) in
+# Replays Forge-oracle requests (one JSON object per line) in
 # Forge through the driver and writes one result row per request. Needs the
 # out-of-tree build that scripts/forge-oracle-setup.sh makes. The driver is
 # compiled with javac against $FORGE_ORACLE_DIR/cp.txt on first use and
 # whenever its source (or the classpath) changes. The pass wrapper, not this
-# script, takes the heavy lock (§7.2).
+# script, takes the heavy lock.
 #
 # Overrides:
 #   FORGE_ORACLE_SRC      the forge-oracle project dir to compile and replay (a

@@ -1,4 +1,4 @@
-// Level-B activate template (spec
+// Level-B activate template (see
 // docs/design/2026-10-05-compliance-level-b.md section 2.1; ticket
 // L5). It serves the activate.battlefield and activate.mana requirements --
 // and the channel-style activate.hand and activate.graveyard ones -- with the

@@ -1,4 +1,4 @@
-// Level-B trigger template (spec
+// Level-B trigger template (see
 // docs/design/2026-10-05-compliance-level-b.md section 2.2; ticket
 // L7). The card sits on p0's battlefield with the recipe's probe; the steps
 // are the recipe's cause and then resolve. A candidate is served only when
@@ -149,7 +149,7 @@ func triggerFires(reg *cards.Registry, f *cards.Face, name string, req levelb.Re
 			}
 		}
 	}
-	// The class-G12 tail (trigger_recipes_tail.go): causes built for the
+	// The class tail (trigger_recipes_tail.go): causes built for the
 	// filter or condition the recipe's own causes miss. They run only after
 	// every cause above failed, so no item an earlier cause serves moves.
 	for _, c := range tailTriggerCauses(reg, f, name, &f.Triggers[idx], req, causes) {

@@ -88,7 +88,7 @@ func TestXAnswersSingleColourManaAskUnchanged(t *testing.T) {
 		}
 	}
 	// The forced one-option ask XMage never poses emits nothing (the
-	// pre-existing behaviour this ticket leaves alone).
+	// pre-existing behaviour this change leaves alone).
 	if len(got) != 0 {
 		t.Fatalf("single-colour ask answers changed shape: %+v", got)
 	}

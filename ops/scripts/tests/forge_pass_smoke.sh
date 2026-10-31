@@ -9,7 +9,7 @@
 #   - a cold cache replays every request and populates the cache;
 #   - a warm cache replays 0 and does not start the runner;
 #   - --force replays every request even when warm;
-#   - every run reaches adjudicate and writes the D1=C ledger.
+#   - every run reaches adjudicate and writes the ledger.
 #
 #   ops/scripts/tests/forge_pass_smoke.sh
 set -uo pipefail

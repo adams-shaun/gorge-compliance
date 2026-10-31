@@ -13,7 +13,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
-// Level B wave 5, class D (lb5-driver): rows that waited on an XMage driver op
+// level-B: rows that waited on an XMage driver op
 // and the generator plumbing that emits it. Each row names the mechanism its
 // item exercises; the item must be served, play through gorge, and carry the
 // shape the driver op reads (a cast_mode, a "^X=" share, an offered compare,
@@ -21,7 +21,7 @@ import (
 // mechanism's corpus carriers in both directions, so a newly served or newly
 // lost carrier fails by name.
 
-func lb5Item(t *testing.T, name, key string) oraclegen.Item {
+func driverRowItem(t *testing.T, name, key string) oraclegen.Item {
 	t.Helper()
 	reg := loadGenRegistry(t)
 	c, ok := reg.Lookup(name)
@@ -102,7 +102,7 @@ func TestLB5DriverRowsServed(t *testing.T) {
 			func(it oraclegen.Item) bool { return hasXAnswer(it, "setup_choice", "no") && len(it.SetupAnswers) > 0 }},
 	} {
 		t.Run(tc.card+"/"+tc.key, func(t *testing.T) {
-			it := lb5Item(t, tc.card, tc.key)
+			it := driverRowItem(t, tc.card, tc.key)
 			if !tc.check(it) {
 				t.Fatalf("item does not carry the %s shape: steps=%+v xanswers=%+v xability=%v compare=%v",
 					tc.mechanism, it.Steps, it.XAnswers, it.XAbility, it.Compare)
@@ -111,9 +111,9 @@ func TestLB5DriverRowsServed(t *testing.T) {
 	}
 }
 
-// lb5Census returns the corpus statics st on face f of card c (with its
+// driverRowCensus returns the corpus statics st on face f of card c (with its
 // requirement) that pick selects, and which of them GenerateB serves.
-func lb5Census(t *testing.T, pick func(*cards.Card, *cards.Face, cards.Static, levelb.Requirement) bool) (all, served []string) {
+func driverRowCensus(t *testing.T, pick func(*cards.Card, *cards.Face, cards.Static, levelb.Requirement) bool) (all, served []string) {
 	t.Helper()
 	reg := loadGenRegistry(t)
 	for _, c := range reg.AllCards() {
@@ -148,7 +148,7 @@ func lb5Census(t *testing.T, pick func(*cards.Card, *cards.Face, cards.Static, l
 // TestGrantedCopyCostCensus: every stack-scoped conspire/casualty grant in the
 // corpus, and the ones the elected-copy-cost observation serves.
 func TestGrantedCopyCostCensus(t *testing.T) {
-	all, served := lb5Census(t, func(_ *cards.Card, _ *cards.Face, st cards.Static, _ levelb.Requirement) bool {
+	all, served := driverRowCensus(t, func(_ *cards.Card, _ *cards.Face, st cards.Static, _ levelb.Requirement) bool {
 		_, ok := grantedCopyCostOf(st)
 		return ok
 	})
@@ -166,7 +166,7 @@ func TestGrantedCopyCostCensus(t *testing.T) {
 // TestFaceDownGrantCensus: every grant of an activated ability over face-down
 // creatures you control, and the ones the face-down activation serves.
 func TestFaceDownGrantCensus(t *testing.T) {
-	all, served := lb5Census(t, func(_ *cards.Card, f *cards.Face, st cards.Static, _ levelb.Requirement) bool {
+	all, served := driverRowCensus(t, func(_ *cards.Card, f *cards.Face, st cards.Static, _ levelb.Requirement) bool {
 		a := st.ParamStr(cards.PKAffected)
 		return st.HasParam(cards.PKAddAbility) && strings.Contains(a, "faceDown") && strings.Contains(a, "YouCtrl")
 	})
@@ -179,7 +179,7 @@ func TestFaceDownGrantCensus(t *testing.T) {
 // TestCraftedGainsCensus: every crafted back face that has the activated
 // abilities of its craft materials, and the ones served.
 func TestCraftedGainsCensus(t *testing.T) {
-	all, served := lb5Census(t, func(c *cards.Card, _ *cards.Face, st cards.Static, req levelb.Requirement) bool {
+	all, served := driverRowCensus(t, func(c *cards.Card, _ *cards.Face, st cards.Static, req levelb.Requirement) bool {
 		return craftedGainsShape(c, req, st)
 	})
 	want := []string{"The Enigma Jewel static#1.0"}

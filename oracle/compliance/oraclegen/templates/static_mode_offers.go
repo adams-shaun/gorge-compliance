@@ -1,5 +1,4 @@
-// Level-B observations for the offer-reading static modes (ticket
-// levelb-remaining-static-modes): an activated ability a summoning-sick
+// Level-B observations for the offer-reading static modes: an activated ability a summoning-sick
 // creature may still activate, a power-up ability's additional activation
 // ceiling, a plot offer for the top card of the library, a hexproof creature
 // that can be targeted after all, and a suspect designation that never lands.

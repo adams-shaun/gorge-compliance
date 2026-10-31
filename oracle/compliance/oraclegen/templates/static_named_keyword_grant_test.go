@@ -69,12 +69,11 @@ func TestStaticNamedKeywordGrant(t *testing.T) {
 // granting a keyword outside BOTH vocabularies keeps the named skip, so
 // widening the set did not swallow every keyword grant. Thrumming Stone
 // grants ripple 4 to the spells its controller casts, a keyword neither
-// snapshot carries. (Raiding Schemes, the previous pin, is served since
-// lb5-driver by electing the granted conspire cost,
+// snapshot carries. (Raiding Schemes, the previous pin, is served by electing the granted conspire cost,
 // static_granted_optional_copy.go; Samut, Tyrant of Naktamun, the earlier pin, is served by
-// the split-second observation since lb4-g7, Absolute Virtue by the
+// the split-second observation, Absolute Virtue by the
 // player-protection observation, and Norman Osborn's Green Goblin mayhem
-// grant by the discard-this-turn offer since lb4w2-diverge.)
+// grant by the discard-this-turn offer.)
 func TestStaticNamedKeywordGrantStillSkips(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	_, skip := GenerateB(reg, "Thrumming Stone",

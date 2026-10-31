@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # xengine-sweep.sh [--run NAME] [--sets 'FDN BLB'] [--chunks N] [--games K] [--seed S] [--force]
 #
-# A chunked, resumable xengine sweep outside go test (DESIGN xengine section 8).
+# A chunked, resumable xengine sweep outside go test.
 # Per set and chunk c (K games each):
 #   1. xengine play  -- gorge plays K games, lowers them to <chunk>/items.jsonl
 #                       (every go stage -- play, diff, cov, sweep-plan -- runs
@@ -15,7 +15,7 @@
 #   3. xengine diff  -- classify the follower rows into <chunk>/diff-<f>
 #      with both followers, xengine adjudicate -- the three-way pattern of each
 #                       item either diverged on (<chunk>/adjudicate/, ticket drafts
-#                       under tickets/; off-repo, nothing is ruled or committed)
+#                       under tickets/; nothing is ruled or committed)
 #   4. the coverage ledger <root>/ledger.tsv absorbs the chunk (atomically),
 #      SUMMARY.md is regenerated, and <chunk>/.done is touched. A chunk is done
 #      only when every stage exited 0.
@@ -50,7 +50,7 @@
 #   XENGINE_TAPE_TURNS    comma-separated turn counts passed to play as -tape-turns
 #                         (default none): the prefixes `xengine calib` reads
 #   XENGINE_XMAGE_TAPES   1 passes -tapes to xprep, so tape items go to XMage too;
-#                         0 (default) keeps XMage window-only (design O4). The
+#                         0 (default) keeps XMage window-only. The
 #                         calibration re-runs use 1.
 #   XENGINE_JVM_WAIT      max seconds to wait for a JVM slot (default 21600)
 #   XENGINE_JVM_POLL      poll interval in seconds (default 30)

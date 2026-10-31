@@ -1,4 +1,4 @@
-// Focused tests for the solved-Case trigger preludes this ticket adds: a
+// Focused tests for the solved-Case trigger preludes this change adds: a
 // Case's "Solved —" trigger is served by the setup that solves the source Case
 // (the solve condition's own candidates, the end-step pass that lets the "To
 // solve" trigger fire, its resolve, and the return to p0's next main phase),
@@ -11,7 +11,7 @@ import (
 )
 
 // TestTriggerSolvedCasePreludes drives the MKM Cases and the TLA attacking
-// caster in the ticket's rows file. Each gate is asserted to be the solved
+// caster in the change's rows file. Each gate is asserted to be the solved
 // Case (or the attacking) gate it claims, the scenario must carry the solve
 // sequence, and the item must play through gorge.
 func TestTriggerSolvedCasePreludes(t *testing.T) {

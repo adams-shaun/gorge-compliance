@@ -9,8 +9,8 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// TestLevelBCostAndStaticRowsServed pins the wave-4 rows the cost-gap,
-// raise-recipient and static-mode mechanisms serve (lb4-gcost), one row per
+// TestLevelBCostAndStaticRowsServed pins the rows the cost-gap,
+// raise-recipient and static-mode mechanisms serve, one row per
 // mechanism. Each row must generate (no skip), replay through gorge with no
 // fail, and show the mechanism's own observable in gorge's final snapshot, so
 // a row can never be served by a scenario that does not exercise it.

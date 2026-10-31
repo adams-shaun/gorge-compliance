@@ -9,8 +9,7 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// servedStaticOfferRows is the levelb-static-zone-permissions Done-means: every
-// appendix row measured on main 613545bd4 that the other-zone observation now
+// servedStaticOfferRows lists every row that the other-zone observation
 // serves. Twenty-eight are the positive "offered" observation (the probe is
 // offered as a cast/play option); two (Heartflame Duelist, Lo and Li) are
 // "spells you control have lifelink", which no snapshot carries as a keyword
@@ -18,8 +17,8 @@ import (
 //
 // The table is deliberately the full served set rather than a handful of
 // examples: a regression that re-skips any one of them fails here by name, and
-// the row's `no verdict for <card>/<key>/vN` measure is what the operator's
-// host pass then confirms.
+// the row's `no verdict for <card>/<key>/vN` measure is what the
+// XMage pass then confirms.
 var servedStaticOfferRows = []struct {
 	card, key string
 	// lifelink marks the two rows served through the granted keyword's

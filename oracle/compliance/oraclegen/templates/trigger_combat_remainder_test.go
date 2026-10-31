@@ -31,8 +31,7 @@ func TestCombatRemainderTriggerRecipes(t *testing.T) {
 		{"Gideon the Oathless", "trigger#0.1", "trigger.ability-activated-opponent", "1", ""},
 		{"Firebender Ascension", "trigger#0.1", "trigger.ability-triggered", "1", ""},
 		{"Case File Auditor", "trigger#0.1", "trigger.case-solved", "1", ""},
-		// Unstable Glyphbridge's back-face trigger, served since
-		// agent-20261009T174731Z-42d5e0f4 read the dotless
+		// Unstable Glyphbridge's back-face trigger, served read the dotless
 		// `Player.Opponent+Active` clause: the cause is a main1@p1 pass and
 		// p1's own cast. The permanent stands on its back face, so the stack
 		// entry's source is reported under "Sandswirl Wanderglyph"
@@ -141,8 +140,7 @@ func TestCombatRemainderCauseDetails(t *testing.T) {
 		t.Fatalf("Gideon has no planeswalker on p1's battlefield: %+v", gideon.Scenario.Setup["p1"])
 	}
 	// Unstable Glyphbridge's back-face trigger is served now
-	// (agent-20261009T174731Z-42d5e0f4 read the dotless
-	// `Player.Opponent+Active` clause): the cause passes to p1's main phase
+	// (the dotless `Player.Opponent+Active` clause is read): the cause passes to p1's main phase
 	// and p1 casts there -- the opponent casts during its OWN turn, so no
 	// extra pass is needed.
 	glb := triggerRequirement(t, reg, "Unstable Glyphbridge", "trigger#1.0", "trigger.spell-cast-opponent-active")
@@ -184,7 +182,7 @@ func TestCombatRemainderCauseDetails(t *testing.T) {
 
 // TestCombatRemainderNamedGaps: the shapes with no cause the recipes can
 // build stay named gaps -- the Static$ True Attached lines. (Eriette's
-// TargetRelativeToSource$ line left this table in wave-4 lb4-gtrig: the
+// TargetRelativeToSource$ line left this table: the
 // engine's matcher reads it and trigger.attached casts Pacifism on p1's
 // creature.)
 func TestCombatRemainderNamedGaps(t *testing.T) {

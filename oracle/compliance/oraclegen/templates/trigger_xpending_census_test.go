@@ -83,8 +83,8 @@ func TestTriggerAsksAreSettledBeforeTheCheckpoint(t *testing.T) {
 }
 
 // Famished Worldsire's Ward is its trigger#0.1; the card is a printed 0/0 that
-// dies as it enters unless something keeps it alive. The wave-4 G12 tail cause
-// (lb4-g12) seats it with a +1/+1 counter, so the becomes-target row is served
+// dies as it enters unless something keeps it alive. The tail cause
+// seats it with a +1/+1 counter, so the becomes-target row is served
 // instead of skipping with the named zero-toughness reason (whose census count
 // trigger_census_test.go pins at 0).
 func TestZeroToughnessWardIsServed(t *testing.T) {

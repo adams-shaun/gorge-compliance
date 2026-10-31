@@ -8,8 +8,7 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// TestBookkeepingTriggerPlans pins the bookkeeping-trigger class (wave-4
-// lb4w2-bookkeep, operator decision 2026-10-13: a multi-turn template, no
+// TestBookkeepingTriggerPlans pins the bookkeeping-trigger class (a multi-turn template, no
 // exemption): every Static$ True record/reset/cleanup line of the Standard
 // sets, the fact it writes or clears, the consumer trigger that reads it and
 // the trigger that records it first.

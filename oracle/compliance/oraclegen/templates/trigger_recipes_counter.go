@@ -1,5 +1,4 @@
-// Counter-added trigger recipes (Level B, ticket
-// cli-20261006T144107Z-0a30b609). The "whenever one or more counters are put
+// Counter-added trigger recipes (Level B). The "whenever one or more counters are put
 // on <recipient>" family (Forge Mode$ CounterAdded, CounterAddedOnce,
 // CounterAddedAll, CounterPlayerAddedAll, CounterTypeAddedAll) has one cause
 // shape a p0-only turn-1 scenario can produce: a counter-placing probe spell

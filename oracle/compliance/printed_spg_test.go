@@ -3,7 +3,7 @@ package compliance
 import "testing"
 
 // spgGuests is the ten standard-set Special Guests reprints whose level-A
-// problems are exactly the declaration blockers ticket spg1 tracks. The
+// problems are exactly the declaration blockers change spg1 tracks. The
 // printed list is what joins SPG to the standard compliance pass; the ten
 // guests must be on it, on the manifest, and covered by committed verdict
 // rows (CV-4's level-B pass), so a printed-list revert or a verdict-row drop

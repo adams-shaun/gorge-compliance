@@ -14,7 +14,7 @@ import (
 )
 
 // cost_grammar_rows_test.go pins the Level B rows the variable and compound
-// cost grammar serves (wave-5 class C, lb5-costgrammar): Fabrication
+// cost grammar serves: Fabrication
 // Foundry's group exile with an announced total, Baron Helmut Zemo's black
 // mana symbol floor behind a Boast prelude, Sidisi, Regent of the Mire's
 // sacrifice filter bound to its target, and Celestial Reunion's optional

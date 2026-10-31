@@ -13,7 +13,7 @@ import (
 )
 
 // runRefreeze converts legacy passing rows (a whole-snapshot canon_sha) to
-// field-level frozen expectations (section 11.3 C3). A row converts only
+// field-level frozen expectations. A row converts only
 // when its scenario is still exactly what the generator makes and gorge
 // still reproduces the hashed snapshots byte for byte, so the frozen fields
 // are the very result XMage agreed with (or the ruling froze). Any other

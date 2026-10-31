@@ -10,7 +10,7 @@ import (
 
 // EndTurn may leave later-step actions queued, but it must not mask a target
 // or choice that a completed step never consumed. Exercise the Java queue
-// matcher without starting XMage (its H2 database cannot start in the jail).
+// matcher without starting XMage (which needs its out-of-tree build).
 func TestScenarioReplayEndTurnRejectsCompletedStepAnswers(t *testing.T) {
 	source, err := os.ReadFile("../../xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java")
 	if err != nil {

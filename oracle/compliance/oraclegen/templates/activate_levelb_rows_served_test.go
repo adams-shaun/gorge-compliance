@@ -9,7 +9,7 @@ import (
 )
 
 // TestActivateLevelBRowsServed pins level-B activate rows that generate and
-// replay gorge-side today (ticket agent-20261009T085207Z-4735cfec): the four
+// replay gorge-side today: the four
 // MKM Case "Solved" rows and Kaito, Bane of Nightmares' three loyalty rows.
 // Each case asserts the PRECONDITION the mechanism depends on (the ability
 // line's gate or cost), then that the item generates (no skip) and plays

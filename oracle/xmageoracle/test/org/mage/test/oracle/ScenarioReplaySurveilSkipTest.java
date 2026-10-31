@@ -5,7 +5,7 @@ import java.util.List;
 import org.mage.test.player.TestPlayer;
 
 /** Pins the target-shaped generator answer routing used by surveil's library chooser.
- * Run scripts/xmage-oracle-test-surveil-skip.sh; full XMage replay remains a host gate. */
+ * Run scripts/xmage-oracle-test-surveil-skip.sh; full XMage replay remains a real replay. */
 public final class ScenarioReplaySurveilSkipTest {
     private static void equal(Object want, Object got) {
         if (!java.util.Objects.equals(want, got)) {

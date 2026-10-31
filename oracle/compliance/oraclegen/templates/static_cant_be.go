@@ -9,8 +9,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
-// The CantBeCast / CantBeActivated shapes beyond the combat window (spec
-// section 7). Each observes "this option is not offered" with an Offered
+// The CantBeCast / CantBeActivated shapes beyond the combat window. Each observes "this option is not offered" with an Offered
 // expectation (want=false) at the checkpoint where the named seat holds
 // priority, and is served only when the identical checkpoint with the static
 // absent offers it.

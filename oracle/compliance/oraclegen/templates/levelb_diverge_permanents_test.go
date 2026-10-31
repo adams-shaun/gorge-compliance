@@ -39,7 +39,7 @@ func snapPerm(t *testing.T, snap rules.OracleSnapshot, name string) rules.Oracle
 	return rules.OracleSnapPerm{}
 }
 
-// TestDoranPumpXIsPowerMinusToughness pins the d8b-permanents fix on the
+// TestDoranPumpXIsPowerMinusToughness pins the permanents fix on the
 // rows' own scenario: Doran's attack pump reads |power - toughness| through
 // the SVar chain (X1 = SVar$Y1/Abs, Y1 = TriggeredAttacker$CardPower/Minus.Z1),
 // so a 0/5 Doran attacking resolves 5/10, and a 2/2 blocker's zero difference

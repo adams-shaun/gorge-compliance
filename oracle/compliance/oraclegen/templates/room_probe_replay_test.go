@@ -11,7 +11,7 @@ import (
 )
 
 // TestRoomProbeScenariosShowTheirEffect pins the fully-unlock probe
-// scenarios of the DSK Eerie rows (ticket cli-20261009T031407Z-31a90cb3):
+// scenarios of the DSK Eerie rows:
 // each item generates and its gorge replay shows, in the compared state,
 // the effect the scenario exists to check. The probe (roomUnlockProbe, cast
 // then paid-unlocked) is the trigger's cause, so every case first asserts

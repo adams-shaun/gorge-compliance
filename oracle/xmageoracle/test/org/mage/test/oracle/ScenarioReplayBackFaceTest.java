@@ -21,7 +21,7 @@ import org.mage.test.player.TestPlayer;
 import sun.misc.Unsafe;
 
 /** Dry setup/helper regression: no H2, reset(), execute(), or game replay.
- * Full snapshots and verdict agreement still require the host pass. */
+ * Full snapshots and verdict agreement still require the XMage pass. */
 public final class ScenarioReplayBackFaceTest {
     public static final class RecordingDriver extends ScenarioReplay {
         Map<TestPlayer, List<PutToBattlefieldInfo>> placements;

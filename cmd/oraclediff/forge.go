@@ -1,7 +1,6 @@
 package main
 
-// The Forge oracle's gorge side (docs: .ds4/forge-oracle/DESIGN.md sections
-// 5.2, 7.1, 7.2).
+// The Forge oracle's gorge side.
 //
 //	oraclediff forge-export [-cards .cards] -scenarios scen.jsonl -out forge-req.jsonl
 //	oraclediff forge-diff   [-cards .cards] -req forge-req.jsonl [-forge forge.jsonl]
@@ -44,7 +43,7 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 // forgeRequest is one line of forge-req.jsonl. The Item is marshalled
 // exactly as gen wrote it, so its bytes (and gate.ItemSHA) are unchanged.
 //
-// The contract the Forge driver reads (DESIGN section 5.2 records the reasons):
+// The contract the Forge driver reads:
 //
 //   - A divided allocation (Twin Bolt, Forked Bolt, distribute counters) is
 //     not a field: it is its own decision AFTER the target ask, a

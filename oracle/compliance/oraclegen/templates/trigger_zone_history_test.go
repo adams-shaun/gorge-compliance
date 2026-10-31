@@ -9,7 +9,7 @@ import (
 )
 
 // TestZoneChangeETBHistoryProvenanceIsServed: a zone-history filter naming
-// graveyard/exile provenance (ticket g17) is served by the probe that
+// graveyard/exile provenance is served by the probe that
 // supplies it — Reanimate reanimates the creature from p0's graveyard,
 // Flicker returns a battlefield creature from exile — mirroring
 // TestTriggerETBProbeSpecialFilters' mechanism assertions: the served item

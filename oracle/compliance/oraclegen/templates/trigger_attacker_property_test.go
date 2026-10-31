@@ -1,4 +1,4 @@
-// Focused tests for the attacker shapes this ticket adds: a typed attacker
+// Focused tests for the attacker shapes this change adds: a typed attacker
 // (a Wolf beside Tolsimir, Midnight's Light), a suspected attacker (Frantic
 // Scapegoat cast ahead of the attack for Clandestine Meddler), and the two
 // extra pass pairs a sibling cast trigger (Scolding Administrator's Repartee)

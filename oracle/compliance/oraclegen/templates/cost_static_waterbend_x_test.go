@@ -6,8 +6,8 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 )
 
-// TestCostStaticWaterbendXProbes covers the RaiseCost Cost$ Waterbend<X> rows
-// (ticket levelb-cost-waterbend-x): the cast ANNOUNCES X = 1 and pays a real
+// TestCostStaticWaterbendXProbes covers the RaiseCost Cost$ Waterbend<X> rows:
+// the cast ANNOUNCES X = 1 and pays a real
 // waterbend of one as one generic beyond the printed price (waterbend lets a
 // player tap artifacts and creatures for {1}, it never requires it, CR
 // 701.67a), and the spell's X-dependent effect reads that announced X.

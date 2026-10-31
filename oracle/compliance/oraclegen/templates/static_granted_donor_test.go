@@ -8,7 +8,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 )
 
-// donorRows are the has-all-abilities-of rows (levelb-static-granted-abilities)
+// donorRows are the has-all-abilities-of rows
 // the donor observation serves: a donor card matching the grant's filter is
 // placed in the GainsAbilitiesOfZones$ zone, and the source is offered the
 // donor ability's activation labelled with its rule text.

@@ -8,8 +8,7 @@ import (
 	costvocab "github.com/adams-shaun/gorge/engine/rules/cost"
 )
 
-// The RaiseCost additional-cost tokens this table pays (ticket
-// levelb-cost-additional-costs). The engine already prices and asks each one
+// The RaiseCost additional-cost tokens this table pays. The engine already prices and asks each one
 // on a cast: engine/rules/pay/costmods.go folds the static's Cost$ into
 // mods.extra, the offer gate enforces it, and the cast's payment stages ask
 // it (xAsk's announcement, blightCostAsk, revealCostOrChooseAsk's choose arm,
@@ -50,7 +49,7 @@ const (
 //     answer is the only choose the cast settles, whatever fixtures a future
 //     corpus move places on p0. Crashing Wave, Foggy Swamp Visions and
 //     Waterbender's Restoration ride this row (their waterbend payment and
-//     their X-dependent effects both bind, ticket levelb-cost-waterbend-x).
+//     their X-dependent effects both bind).
 //   - Blight<N>: N -1/-1 counters on the surviving 3/3 fixture (N <= 2).
 //   - Blight<X>: one counter on the 1/1 fixture, announced as the cast's X.
 //   - Close Encounter's ChooseCard: one creature you control on the
@@ -82,8 +81,7 @@ func raiseCostTokenProbes(p *costProbe, cost string) (handled bool) {
 				// cast settles, whatever fixtures a future corpus move places
 				// on p0. Crashing Wave, Foggy Swamp Visions and Waterbender's
 				// Restoration ride this row (their waterbend payment and their
-				// X-dependent effects both bind, ticket
-				// levelb-cost-waterbend-x).
+				// X-dependent effects both bind).
 				p.battlefield = appendUnique(p.battlefield, raiseBlightXFixture)
 				p.mana += "C"
 				p.answers = append(p.answers,

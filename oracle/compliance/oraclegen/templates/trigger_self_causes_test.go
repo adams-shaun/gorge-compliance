@@ -9,8 +9,8 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
-// selfCauseTriggerCases is one real card per newly served self-cause recipe
-// (ticket agent-20261009T160853Z-c3e35453): a self-transform trigger (the
+// selfCauseTriggerCases is one real card per newly served self-cause recipe:
+// a self-transform trigger (the
 // other face's Phase transform enabler pays and flips the card into the
 // requirement's face), a self cycling trigger (the card's own hand cycling
 // activation discards it as its cost) and an origin-free land-play trigger

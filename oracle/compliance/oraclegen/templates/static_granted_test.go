@@ -9,8 +9,7 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// servedStaticGrantRows are the appendix rows (levelb-static-granted-
-// abilities) the granted-ability observation serves: a granted mana ability or
+// servedStaticGrantRows are the appendix rows the granted-ability observation serves: a granted mana ability or
 // loyalty ability offered on a probe, or an extra land drop. Each names the
 // offered kind and a fragment of its label ("" for a land play, whose probe is
 // the second land).
@@ -116,6 +115,6 @@ func TestStaticGrantedAbilityRowCountPinned(t *testing.T) {
 
 // TestStaticGrantedAbilityNamedSkips once locked the unserved appendix rows
 // named skips; its last row, Etrata, Deadly Fugitive static#0.0 (a grant over
-// face-down creatures), is served since lb5-driver by activating the granted
+// face-down creatures), is served by activating the granted
 // ability on a face-down probe (static_granted_facedown.go,
 // TestLB5DriverRowsServed).

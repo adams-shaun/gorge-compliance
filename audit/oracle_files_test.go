@@ -109,7 +109,7 @@ func loadOracleFiles(t *testing.T) map[string]oracleFile {
 }
 
 // The audit's two ratchets live one file per card per family, never in a
-// shared aggregate (gorge spec 2026-10-03-rules-engine-lasagna-design.md W2):
+// shared aggregate (one file per card, per family):
 // two audits of two cards touch two files.
 //
 //   - <dir>/<family>/known-divergent/<slug>.json: a listed scenario must

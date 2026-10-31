@@ -1,5 +1,4 @@
-// Probe selection for the level-B continuous-static template (ticket
-// levelb-static-probe-from-filter). A lord whose Affected$ names a subtype, a
+// Probe selection for the level-B continuous-static template. A lord whose Affected$ names a subtype, a
 // non-creature type or a state Grizzly Bears lacks pumps nothing observable,
 // so the template retries with the probes this file derives from the filter's
 // words. There is no second filter evaluator: a probe the filter does not
@@ -208,7 +207,7 @@ func staticGap(st cards.Static, affected string) string {
 	// EquippedBy/AttachedBy, a Fortification's FortifiedBy) lands on the
 	// permanent it attaches to, which the attachment prelude's scenario
 	// serves; its rows keep the generic reason rather than the narrower ones
-	// below, which belong to the probe cluster this ticket derives.
+	// below, which belong to the probe cluster this change derives.
 	for _, w := range words {
 		switch w {
 		case "EnchantedBy", "EquippedBy", "AttachedBy", "FortifiedBy":

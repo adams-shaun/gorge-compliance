@@ -18,9 +18,8 @@ func TestSelfLTBRealCards(t *testing.T) {
 		{"Syr Vondam, Sunstar Exemplar", "trigger#0.1", "trigger.ltb-self", ""},
 		// A `Static$ True` self-cleanup trigger (ChangesZone | Origin$
 		// Battlefield | Destination$ Any, DB$ Cleanup body) never reaches the
-		// stack. It was a permanent named gap ("level B: static trigger",
-		// tickets g17 + agent-20261009T090319Z-9b434465) until the operator
-		// decision of 2026-10-13 (wave-4 lb4w2-bookkeep): its consequence IS
+		// stack. It was a permanent named gap ("level B: static trigger") until
+		// 2026-10-13, when it was served because its consequence IS
 		// cross-engine observable through its consumer once the source is
 		// flickered (CR 400.7, a new object) -- Planetarium's "only once each
 		// turn" fires again, Superior Foes' first exiled card stays playable.

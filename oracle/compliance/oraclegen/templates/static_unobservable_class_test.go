@@ -8,12 +8,12 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// TestStaticG7ClassServed is the level-B wave-4 class G7 ("static effect
-// unobservable") ratchet over the rows lb4-g7 served: each row's requirement
+// TestStaticUnobservableClassServed is the level-B class ("static effect
+// unobservable") ratchet over the served rows: each row's requirement
 // is generated, and its scenario carries the observation that serves it.
 // A row that goes back to a skip, or loses its observation, fails here by
 // name.
-func TestStaticG7ClassServed(t *testing.T) {
+func TestStaticUnobservableClassServed(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	for _, tc := range []struct {
 		card, key string

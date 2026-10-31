@@ -48,7 +48,7 @@ func TestRoomDoorTriggersCastTheirDoor(t *testing.T) {
 		}
 	}
 	// Preconditions: the census saw the DSK Rooms and served the five named
-	// by the ticket (front-door triggers on a locked placement).
+	// by the change (front-door triggers on a locked placement).
 	if rooms < 30 || served < 30 {
 		t.Fatalf("census vacuous: %d Rooms, %d served trigger requirements", rooms, served)
 	}

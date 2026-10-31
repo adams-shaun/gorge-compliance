@@ -16,7 +16,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/adopt"
 )
 
-// runStatusAll runs the gate over every committed set (section 11.3 C8)
+// runStatusAll runs the gate over every committed set
 // and prints the format roll-ups ("Standard:A" once every set is
 // declared) with their reason buckets. -out writes the generated dashboard
 // (never committed); -write-ratchet records oracle/compliance/ratchet.json as the

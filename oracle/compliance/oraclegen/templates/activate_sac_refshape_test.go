@@ -14,8 +14,7 @@ import (
 // (isScenarioRef on the Java side); "@<bare label>" would reach XMage's
 // choice queue verbatim and fail the scenario on "Found wrong choice
 // command". A shaped ref keeps the alias; anything else falls back to the
-// plain-name path the other Sac cards agree on (agent-20261009T041321Z-84a3a3ce
-// round 2).
+// plain-name path the other Sac cards agree on.
 func TestObservedSacPickRefShape(t *testing.T) {
 	// A Room-naming Sac token: the same cost Intruding Soulrager carries.
 	tok := "Sac<1/Room>"

@@ -11,7 +11,7 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// The two served rows of Petrified Hamlet (ticket levelb-static-named-enters):
+// The two served rows of Petrified Hamlet:
 // a land that names a card while its ETB trigger resolves. Both scenarios
 // play the land, resolve the ETB trigger -- whose NameCard ask (over the
 // runner's scenario name universe) the resolve step answers with the probe

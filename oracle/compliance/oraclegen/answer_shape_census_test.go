@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-// The two answer-shape derivations this ticket adds are driven by raw Forge
+// The two answer-shape derivations this change adds are driven by raw Forge
 // markers, not by a per-card table: DividedAsYouChoose$ makes a DealDamage
 // ask a "damage_split" KChoose (one index per damage), and Produced$ Combo Any
 // with Amount$ > 1 makes a Mana ask a "mana_color" allocation (one unit per

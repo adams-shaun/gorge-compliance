@@ -21,8 +21,7 @@ func TestActivateSacFilterFixtures(t *testing.T) {
 		// want is the XMage answer that names the fixture. Empty means the
 		// fixture's plain name; a Room fixture is answered by its exact-ref
 		// alias instead, because XMage names the Room object by its whole
-		// split name and the plain name can never match
-		// (agent-20261009T041321Z-84a3a3ce).
+		// split name and the plain name can never match.
 		want string
 	}{
 		{"Nita, Forum Conciliator", "activate#0.0", "Llanowar Elves", ""},

@@ -1,5 +1,5 @@
 // Fixtures for a continuous static whose condition or count the turn-1 static
-// scenario leaves false or zero (ticket levelb-static-condition-fixtures). A
+// scenario leaves false or zero. A
 // "gets +1/+0 as long as you control an artifact", a Threshold or Delirium
 // gate, a "+1/+1 for each Forest you control" or an Infusion "as long as you
 // gained life this turn" changes nothing on the bare scenario, so the row was

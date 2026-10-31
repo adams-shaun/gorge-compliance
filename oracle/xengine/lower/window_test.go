@@ -1046,7 +1046,7 @@ func TestWindowsTappedAfterUntap(t *testing.T) {
 			if c.Status != StatusOK {
 				// A Clone-renamed token (Niko, Light of Hope's Shards) is
 				// named by its pre-copy ref, which the runner no longer
-				// resolves (ticket xe-window-copied-token-ref). The window
+				// resolves. The window
 				// was refused for its Aura until Auras were placed attached.
 				if strings.Contains(c.Gorge, ":token:") && strings.Contains(c.Gorge, "names no object") {
 					t.Logf("%s: known copied-token ref gap: %s", l.Item.ID, c.Gorge)

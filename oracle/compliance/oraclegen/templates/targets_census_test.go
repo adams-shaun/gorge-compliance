@@ -78,7 +78,7 @@ func TestGeneratedTargetsAreGorgeChoices(t *testing.T) {
 	}
 }
 
-// TestDivergentEquationTargetsAreEmpty pins the ticket's headline card: an
+// TestDivergentEquationTargetsAreEmpty pins the change's headline card: an
 // optional "up to X target instant/sorcery card in your graveyard" whose
 // legal pool the fixture cannot fill (the fixture seeds Grizzly Bears, not an
 // instant/sorcery). gorge poses no target decision, so the scenario must

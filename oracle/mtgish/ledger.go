@@ -16,7 +16,7 @@ const LockFile = "oracle/mtgish/MTGISH.lock"
 // and the exclusion list, relative to the repository root.
 const KnownDir = "oracle/mtgish/known"
 
-// KernelSets are the sets the dirty-dirac kernel plays. The ledger covers
+// KernelSets are the sets the dirac kernel plays. The ledger covers
 // the whole corpus; these keep their own per-tier agreement lines in the
 // ratchet's log and their own headline tables in the -all report.
 var KernelSets = []string{"FDN", "BLB"}

@@ -1,11 +1,11 @@
 package templates_test
 
 // static_exile_opponent_census_test.go is the corpus-wide census of the
-// opponent-reachable exiled-with may-play class (ticket lb-mayplayopp): every
+// opponent-reachable exiled-with may-play class: every
 // Mode$ Continuous MayPlay$ True static whose Affected$ names ExiledWithSource
 // WITHOUT a YouOwn qualifier, so the cards it covers can be an OPPONENT's
-// (Azula, Cunning Usurper; Intellect Devourer; Nightveil Specter). Before the
-// ticket the may-play spell walk visited only the caster's own cards, and
+// (Azula, Cunning Usurper; Intellect Devourer; Nightveil Specter). The
+// may-play spell walk once visited only the caster's own cards, and
 // the class's opponent-owned rows were skipped with a named engine gap.
 //
 // It is a ratchet: served may only rise and each skip reason may only fall.
@@ -31,12 +31,12 @@ import (
 // the Dig exile record the exiled-with association, so the old "cards exiled
 // by the source's Dig carry no exiled-with association" reason no longer
 // holds, and those rows now name the remaining may-play walk gap.
-// Re-pinned by lb4w2-engine: that "walk gap" was never measured -- the walk
+// Re-pinned: that "walk gap" was never measured -- the walk
 // offers opponent-owned cards (Azula, Null Summoner) -- and the Dig rows only
 // lacked a library-origin fixture. It now serves Maralen, Fae Ascendant (an
 // enters Dig of a targeted opponent's library), and the other 14 rows name
 // the real gap: no fixture exiles an opponent's card with their source.
-// lb5-exileperm served Valgavoth, Terror Eater: the engine now opens a
+// Valgavoth, Terror Eater is served: the engine now opens a
 // MayPlayAltManaCost$ static's zone permission and prices the cast at the
 // alternative, and static_offer_altcost.go observes the offered cast and its
 // life payment.

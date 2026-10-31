@@ -2,12 +2,10 @@
 # forge-pass.sh [SET...] -- one incremental Forge oracle pass over the named
 # sets (default: every set with a printed list under oracle/compliance/printed/).
 #
-# The Forge oracle is the third reference beside gorge and XMage (design:
-# .ds4/forge-oracle/DESIGN.md sections 7-9). This is the standing
-# second-reference pass: run it AFTER scripts/compliance-pass.sh, so the XMage
+# The Forge oracle is the third reference beside gorge and XMage. Run this pass
+# AFTER scripts/compliance-pass.sh, so the XMage
 # result cache it adjudicates against is current. It ends by writing the
-# compact three-way ledger under compliance/adjudication/ (operator decision
-# D1=C, section 9.1). Forge is GPL-3.0 and its output stays off-repo; only the
+# compact three-way ledger under oracle/compliance/adjudication/. Forge is GPL-3.0 and its output is never committed; only the
 # ledger -- gorge's own pattern and field vocabulary -- is committed.
 #
 # Per set, under the heavy lock:
@@ -22,7 +20,7 @@
 #                                 unchanged comparator, caching Forge's rows
 # then, once over every set:
 #   5. oraclediff adjudicate   -- join the committed verdicts, the XMage cache
-#                                 and the Forge cache into the D1=C ledger
+#                                 and the Forge cache into the ledger
 #
 # A warm cache replays nothing; a cold cache replays every request. A new
 # driver starts cold: the cache directory is named by the driver source sha.
@@ -46,12 +44,12 @@
 #   FORGE_PASS_XMAGE_CACHE              XMage result cache (default
 #                                       $XMAGE_ORACLE_DIR/cache/<xmref12>-<xdriver12>)
 #   FORGE_PASS_FORCE=1                  replay every request (after a driver change)
-#   FORGE_PASS_LEDGER                   D1=C ledger directory (default
-#                                       compliance/adjudication)
+#   FORGE_PASS_LEDGER                   ledger directory (default
+#                                       oracle/compliance/adjudication)
 #   FORGE_PASS_ORACLEDIFF               oraclediff binary (default: built here)
 #   FORGE_PASS_RUNNER                   Forge runner (default
 #                                       scripts/forge-oracle-run.sh)
-#   FORGE_PASS_WAIT / FORGE_PASS_MEM    heavy.sh --wait / --mem (20000 s / 8G)
+#   FORGE_PASS_WAIT / FORGE_PASS_MEM    heavy-lock --wait / --mem (20000 s / 8G)
 set -euo pipefail
 
 repo=$(cd "$(dirname "$0")/.." && pwd)

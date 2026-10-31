@@ -1,4 +1,4 @@
-// Package gate is the compliance claim's check (spec section 8): for a
+// Package gate is the compliance claim's check: for a
 // declared set, every manifest card must be fully supported and covered by
 // a passing verdict whose frozen expectation gorge still meets at this head
 // -- or by a hand-authored oracle scenario. The CI test
@@ -26,7 +26,7 @@ import (
 )
 
 // LevelMeaning says what a claim at level certifies and what it does not
-// (spec 2026-10-03 section 11.3 C6: level A is shallow and must say so).
+// (level A is shallow and must say so).
 // Every gate report prints it next to the claim.
 func LevelMeaning(level string) string {
 	switch level {
@@ -45,20 +45,19 @@ type Problem struct {
 }
 
 // StaleVerdictReason is the reason prefix rowOK reports for a verdict recorded
-// for a different scenario (a moved scenario sha). Only a host XMage replay
-// (scripts/compliance-pass.sh) clears it, so it is not a defect a ticket can
-// fix; adopt.Bucket classifies it as BucketStale and the per-ticket gate
-// (ops/scripts/gate_affected.sh) treats a stale-only certification failure as a
-// non-charging requeue instead of a fix round.
+// for a different scenario (a moved scenario sha). Only an XMage replay
+// (scripts/compliance-pass.sh) clears it, so it is not a defect a code
+// change can fix; adopt.Bucket classifies it as BucketStale, and a merge gate can
+// treat a stale-only certification failure as owing a replay, not a fix.
 const StaleVerdictReason = "verdict is for an older scenario"
 
 // Stale reports whether p is a stale-verdict problem: a verdict recorded for
 // an older scenario, which a host XMage replay clears.
 func Stale(p Problem) bool { return strings.HasPrefix(p.Reason, StaleVerdictReason) }
 
-// CertVerdict classifies a certification check's problems for the per-ticket
-// gate's stale-only classifier (ops/scripts/gate_affected.sh, which reads the
-// GORGE-CERT-RESULT line the chunk tests log): "clean" (no problems),
+// CertVerdict classifies a certification check's problems for a merge
+// gate's stale-only classifier (it reads the GORGE-CERT-RESULT line the chunk
+// tests log): "clean" (no problems),
 // "stale-only" (every problem is a stale verdict, so the failure is a host
 // replay's to clear, not a defect), or "mixed" (at least one non-stale
 // problem, a real regression the gate must still fail).
@@ -191,9 +190,9 @@ func HandScenarios(oracleDirs ...string) (map[string]bool, error) {
 // the gorge-compliance repo root (manifests, verdicts and printed tables are read
 // under it), and so are its hand oracle scenarios, read together with
 // gorge's residual ones (HandOracleDirs).
-// Level A is the cast-and-resolve claim (spec 2026-10-03 section 11.3 C6);
+// Level A is the cast-and-resolve claim;
 // level B is level A plus one scenario per activated ability, trigger mode,
-// static and attack/block (spec 2026-10-05 section 4). Any other level is
+// static and attack/block (docs/design/2026-10-05-compliance-level-b.md section 4). Any other level is
 // not built and reports the one stub problem it always has.
 func Check(reg *cards.Registry, root, set, level string) ([]Problem, error) {
 	return checkLevel(reg, root, set, level, nil)
@@ -320,7 +319,7 @@ func loadSet(reg *cards.Registry, root, set string, sh *sharedTables) (*setScan,
 	// them the oracle can check; the rest need a hand-authored scenario.
 	// Names are matched by fold (case, diacritics, punctuation): Forge prints
 	// "Dáin Ironfoot" where the XMage set class writes "Dain Ironfoot", and
-	// "With Great Power . . ." where XMage writes "With Great Power...".
+	// "With Great Power. . ." where XMage writes "With Great Power...".
 	// A card the set marks unfinished is in SetCardInfo but removed from
 	// XMage's card database, so it is no-XMage too.
 	inXMage := map[string]bool{}
@@ -333,7 +332,7 @@ func loadSet(reg *cards.Registry, root, set string, sh *sharedTables) (*setScan,
 	// pass (oraclediff gen) stamps on the scenario as XMageName whenever it
 	// differs from the corpus face name. The gate must build the very same
 	// Item, or ItemSHA never matches the pass's row (Dáin, Bespoke Bō,
-	// "With Great Power . . .").
+	// "With Great Power. . .").
 	xmageSpelling := map[string]string{}
 	for _, mc := range m.Cards {
 		xmageSpelling[compliance.FoldName(mc.Name)] = mc.Name
@@ -348,7 +347,7 @@ func loadSet(reg *cards.Registry, root, set string, sh *sharedTables) (*setScan,
 		names = pr.Cards
 	} else if os.IsNotExist(err) {
 		// The XMage manifest omits the cards XMage lacks, so a claim over it
-		// would drop them silently (section 11.3 C7): the cards are still
+		// would drop them silently: the cards are still
 		// reported, but the set cannot be declared until it has a list.
 		lead = append(lead, Problem{"*", fmt.Sprintf("no printed list (oracle/compliance/printed/%s.json): the XMage manifest omits cards XMage lacks, so the set cannot be declared", set)})
 	} else {

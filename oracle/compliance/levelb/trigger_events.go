@@ -14,7 +14,7 @@ import (
 const ClassLevelGainedSub = "trigger.class-level-gained"
 
 // classifyEventTrigger names the sub-family of the trigger shapes whose cause
-// a p0-only recipe can produce on turn 1 beyond the original v1 table (spec
+// a p0-only recipe can produce on turn 1 beyond the original v1 table (see
 // docs/design/2026-10-05-compliance-level-b.md section 2.2): a
 // creature or aura-bearer dying, scry and surveil, damage to a player or to
 // the card, a loyalty-ability activation, a discard, and a lone attacker. It

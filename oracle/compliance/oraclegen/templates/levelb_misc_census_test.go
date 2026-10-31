@@ -15,7 +15,7 @@ import (
 )
 
 // wantLb5MiscCarriers pins every corpus carrier, across the declared
-// Standard sets, of the three wave-5 class-T mechanisms, by "set card key",
+// Standard sets, of the three class-T mechanisms, by "set card key",
 // and the template outcome each must reach (served, or the named skip). It
 // fails in both directions: a new carrier, a lost one, or an outcome change.
 //
@@ -86,7 +86,7 @@ func TestLb5MiscCarrierCensus(t *testing.T) {
 				if r.Gap != "" || r.CoveredByA || r.Face < 0 || r.Face >= len(c.Faces) {
 					continue
 				}
-				class := lb5MiscClass(reg, c.Faces[r.Face], r)
+				class := miscMechanismClass(reg, c.Faces[r.Face], r)
 				if class == "" {
 					continue
 				}
@@ -110,8 +110,8 @@ func TestLb5MiscCarrierCensus(t *testing.T) {
 	}
 }
 
-// lb5MiscClass names the class-T mechanism requirement r carries, or "".
-func lb5MiscClass(reg *cards.Registry, f *cards.Face, r levelb.Requirement) string {
+// miscMechanismClass names the class-T mechanism requirement r carries, or "".
+func miscMechanismClass(reg *cards.Registry, f *cards.Face, r levelb.Requirement) string {
 	switch {
 	case r.Family == "trigger":
 		idx := -1

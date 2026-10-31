@@ -209,7 +209,7 @@ func TestOptionalCostCastNoShapes(t *testing.T) {
 }
 
 // mechanismFamilies is the corpus census of the cast-option mechanisms this
-// ticket routes: how many card faces carry each. It is a ratchet -- a corpus
+// change routes: how many card faces carry each. It is a ratchet -- a corpus
 // pin that adds or removes a carrier changes a count here and fails loudly.
 // Measured 2026-10-05 at FORGE_REF 95f04e8a04c8925fa97cb226fc3341cabcc90a53.
 //
@@ -317,7 +317,7 @@ func faceHasMinCharmNum(f *cards.Face) bool {
 
 // faceHasTargetMinZeroUpTo reports a ValidTgts$ ask with a literal TargetMin$ 0
 // and a TargetMax$ above 1 on the spell or one of its SVar sub-abilities: the
-// "up to N" target family whose terminators this ticket adds.
+// "up to N" target family whose terminators this change adds.
 func faceHasTargetMinZeroUpTo(f *cards.Face) bool {
 	hit := func(p map[string]string) bool {
 		if strings.TrimSpace(p["ValidTgts"]) == "" {

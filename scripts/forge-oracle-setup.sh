@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# forge-oracle-setup.sh -- build Forge out of tree for the Forge oracle
-# (.ds4/forge-oracle/DESIGN.md §4.2, §7.3). Host only; never run in a seat.
+# forge-oracle-setup.sh -- build Forge out of tree for the Forge oracle.
 #
 # Idempotent. Re-run after a FORGE_ORACLE_REF bump. Everything lands under
 # $FORGE_ORACLE_DIR (default .oracle-build/forge, gitignored); nothing tracked
@@ -12,7 +11,7 @@
 #   scripts/forge-oracle-setup.sh --check-pin REF CLONE
 #                                                 # pin invariant only (forge-oracle-run.sh calls this)
 #
-# The pin invariant (§7.3): FORGE_REF must be an ancestor of the driver ref, and
+# The pin invariant: FORGE_REF must be an ancestor of the driver ref, and
 # the cardsfolder and tokenscripts trees must be identical at both. Otherwise a
 # script difference between gorge's corpus and Forge's runtime would look like
 # an engine disagreement, so the scripts refuse to run.
@@ -38,7 +37,7 @@ clone=${FORGE_ORACLE_CLONE:-$root/forge}
 root=$(realpath -m "$root")
 clone=$(realpath -m "$clone")
 
-# pin_check CLONE REF: the §7.3 invariant, or exit 2 naming which half failed.
+# pin_check CLONE REF: the pin invariant, or exit 2 naming which half failed.
 pin_check() {
   local c=$1 ref=$2 rc=0 p a b
   git -C "$c" merge-base --is-ancestor "$forge_ref" "$ref" || rc=$?
@@ -63,7 +62,7 @@ fi
 rebuild=0
 [ "${1:-}" = --rebuild ] && rebuild=1
 
-# Clone (sparse, D3) or fetch, then check the pin before anything is built.
+# Clone (sparse) or fetch, then check the pin before anything is built.
 if [ ! -e "$clone/.git" ]; then
   mkdir -p "$(dirname "$clone")"
   git clone --filter=blob:none --no-checkout "$repo" "$clone"
@@ -157,6 +156,6 @@ nsrc=$(find "$clone/forge-oracle/src/main/java" -name '*.java' 2>/dev/null | wc 
   echo "- java: $("$jdk/bin/java" -version 2>&1 | head -1)"
   echo
   echo "P0 reference (2026-10-06): build 33.8 s / 2.17 GB peak RSS; driver javac 0.91 s; 60 warm replays median 14.7 ms, 199 MB RSS."
-  echo "Design §10 targets: warm median at most 500 ms per scenario, JVM heap at most 2.5 GB; replay performance is not measured here."
+  echo "Targets: warm median at most 500 ms per scenario, JVM heap at most 2.5 GB; replay performance is not measured here."
 } > "$root/MEASURE.md"
 cat "$root/MEASURE.md"

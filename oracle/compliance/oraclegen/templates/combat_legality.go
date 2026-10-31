@@ -11,7 +11,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// Level-B combat-legality observations (spec
+// Level-B combat-legality observations (see
 // docs/design/2026-10-05-compliance-level-b.md section 7). A
 // restriction that removes an attacker or a block from what the declare
 // decision offers has no scripted declaration to compare, so the item stops AT

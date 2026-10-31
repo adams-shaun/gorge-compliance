@@ -1,4 +1,4 @@
-// Focused tests for the cast-self prelude this ticket adds: a trigger whose
+// Focused tests for the cast-self prelude this change adds: a trigger whose
 // CheckSVar$ counts a self attribute (prepared, suspected) that the
 // setup-placed source cannot show -- the upkeep "becomes prepared" firing
 // consumed it during the setup drive, or setup placement dropped the enter
@@ -16,7 +16,7 @@ import (
 )
 
 // TestTriggerSelfCastAttributeGate drives the FRA prepare creatures and the
-// MKM suspect pair in the ticket's rows file. Each gate is asserted to be the
+// MKM suspect pair in the change's rows file. Each gate is asserted to be the
 // self-attribute count it claims, the scenario must start the source in HAND
 // (a fresh self, not the consumed setup placement), and the item must play
 // through gorge with the trigger on the stack.

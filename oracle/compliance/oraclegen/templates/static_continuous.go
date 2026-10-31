@@ -1,4 +1,4 @@
-// Level-B continuous-static template (spec
+// Level-B continuous-static template (see
 // docs/design/2026-10-05-compliance-level-b.md section 2.3; ticket
 // L11). The scenario is the card's level-A one (cast and resolve, or play the
 // land) with a probe permanent, Grizzly Bears, on both seats: p1 already holds

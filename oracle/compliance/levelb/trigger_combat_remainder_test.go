@@ -71,8 +71,7 @@ func TestCombatRemainderClassification(t *testing.T) {
 			t.Fatalf("classification = %+v, want one uncovered trigger.attached requirement", got)
 		}
 	})
-	// The opponent-active cast shape is served now: agent-20261009T174731Z-
-	// 42d5e0f4 read the dotless `+` clause, and its cast-family cause passes
+	// The opponent-active cast shape is served now: the dotless `+` clause is read, and its cast-family cause passes
 	// to p1's main phase and casts there.
 	t.Run("opponent-active cast serves", func(t *testing.T) {
 		f := &cards.Face{

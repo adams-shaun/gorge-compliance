@@ -152,7 +152,7 @@ func Find(rs []Ruling, s Shape, api string) []Ruling {
 }
 
 // Sampled is the one-in-ten draw of automatic classifications a human
-// checks (spec 2026-10-02 section 8: a wrong ruling cannot spread
+// checks (a wrong ruling cannot spread
 // unchecked). Deterministic in the card, template and ruling, so a re-run
 // samples the same rows.
 func Sampled(card, template, rulingID string) bool {

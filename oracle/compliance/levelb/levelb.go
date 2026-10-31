@@ -1,5 +1,5 @@
 // Package levelb turns a card's IR into its list of level-B requirements
-// (spec docs/design/2026-10-05-compliance-level-b.md section 1).
+// (see docs/design/2026-10-05-compliance-level-b.md section 1).
 //
 // A requirement is one thing a level-B scenario must exercise: an activated
 // ability, a trigger, a static, or an attack/block. The classifier is a pure
@@ -39,7 +39,7 @@ type Requirement struct {
 }
 
 // combatKeywords are the keywords whose presence on a creature face gives it
-// level-B attack/block requirements (spec section 1).
+// level-B attack/block requirements.
 var combatKeywords = []string{
 	"Flying", "Reach", "First Strike", "Double Strike", "Deathtouch",
 	"Trample", "Lifelink", "Menace", "Vigilance", "Indestructible",
@@ -57,7 +57,7 @@ var servableStaticModes = []struct{ mode, sub string }{
 }
 
 // combatStaticModes are the combat-legality statics whose presence on a face
-// gives it level-B attack/block requirements (spec section 1, section 2.3).
+// gives it level-B attack/block requirements (section 2.3).
 var combatStaticModes = []string{
 	"CantAttack", "CantBlock", "CantBlockBy", "MustAttack", "MustBlock",
 	"MinMaxBlocker", "CanAttackDefender", "CombatDamageToughness",
