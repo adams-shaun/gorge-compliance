@@ -35,8 +35,7 @@ A pin bump is a pull request here, never a side effect:
 
 1. Pick the gorge commit (normally gorge `main`'s head) and write its SHA to
    `GORGE_PIN`.
-2. `go get github.com/adams-shaun/gorge@<sha> && go mod tidy` (drop the
-   `replace` once a real version is required).
+2. `go get github.com/adams-shaun/gorge@<sha> && go mod tidy`.
 3. Refresh the corpus: in the gorge checkout at that commit,
    `make fetch-cards compile-cards`, then `make cards` here.
 4. Rerun and update the targets:

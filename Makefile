@@ -1,8 +1,8 @@
 SHELL := /bin/bash
 
-# gorge-compliance builds against gorge: go.mod's replace points at ../gorge,
-# and a local (gitignored) go.work may point at a gorge worktree instead.
-# GORGE_ROOT is that checkout, for the corpus pin in gorge's Makefile.
+# gorge-compliance builds against the gorge commit go.mod requires; a local
+# (gitignored) go.work may point at a gorge worktree instead. GORGE_ROOT is the
+# directory go resolves gorge to, for the corpus pin in gorge's Makefile.
 # The gorge revision the coverage targets are for is GORGE_PIN (docs/PINNING.md).
 GORGE_ROOT ?= $(shell go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge)
 
