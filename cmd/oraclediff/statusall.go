@@ -16,6 +16,16 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/adopt"
 )
 
+// exitRatchet is oraclediff's exit status when a status run measured everything
+// it was asked to and a ratchet failed. Any other failure exits 1, so a caller
+// can tell a measurement it may still use from one that didn't finish.
+const exitRatchet = 3
+
+// ratchetError is a ratchet failure over a complete measurement.
+type ratchetError string
+
+func (e ratchetError) Error() string { return string(e) }
+
 // runStatusAll runs the gate over every committed set
 // and prints the format roll-ups ("Standard:A" once every set is
 // declared) with their reason buckets. -out writes the generated dashboard
@@ -150,7 +160,7 @@ func finishRatchetA(sets []adopt.SetStatus, only []string, writeRatchet bool, cs
 		fmt.Fprintln(os.Stderr, "RATCHET FAIL:", f)
 	}
 	if len(fails) > 0 {
-		return fmt.Errorf("%d certification ratchet failures", len(fails))
+		return ratchetError(fmt.Sprintf("%d certification ratchet failures", len(fails)))
 	}
 	return nil
 }
@@ -179,7 +189,7 @@ func finishRatchetB(sets []adopt.SetStatus, writeRatchet bool, cs *adopt.Census)
 		fmt.Fprintln(os.Stderr, "RATCHET FAIL:", f)
 	}
 	if len(fails) > 0 {
-		return fmt.Errorf("%d level-B ratchet failures", len(fails))
+		return ratchetError(fmt.Sprintf("%d level-B ratchet failures", len(fails)))
 	}
 	return nil
 }

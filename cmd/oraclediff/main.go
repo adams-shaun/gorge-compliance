@@ -14,6 +14,9 @@
 //	oraclediff sets  [-cards .cards] [-out FILE] [-level A,B|A|B] [-sets S,...] [-procs N] [-json]
 //	oraclediff tickets [-cards .cards] [-out DIR] [-min-cards 10] [-any-in FORMAT] [-json]
 //
+// status exits 3 when it finished measuring and a ratchet failed, and 1 when
+// the measurement itself failed. `go run` reports both as 1.
+//
 // gen writes one level-A scenario per manifest card gorge fully supports
 // (skips go to <out>.skips.jsonl); -level B writes the level-A scenario and
 // then every generable level-B one, with a level-B skip (keyed by its
@@ -44,6 +47,7 @@ package main
 import (
 	"bufio"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -198,6 +202,10 @@ func main() {
 	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "oraclediff:", err)
+		var ratchet ratchetError
+		if errors.As(err, &ratchet) {
+			os.Exit(exitRatchet)
+		}
 		os.Exit(1)
 	}
 }
