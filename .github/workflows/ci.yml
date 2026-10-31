@@ -16,8 +16,10 @@
 #
 # Jobs:
 #   lint, test   push/PR/nightly, against the PIN. Required (ci-ok).
-#   compliance   nightly/dispatch: `make compliance-status` against the pin, and
-#                the per-set data the docs site renders.
+#   compliance   `make compliance-status` against the pin, over every set, where
+#                TestCertificationRatchet covers only Standard and the declared
+#                sets. Required (ci-ok) on a PR to main. Nightly and dispatch also
+#                publish the per-set data the docs site renders.
 #   drift        nightly/dispatch: the tests against gorge MAIN. Reports what a
 #                pin bump would change; never fails the workflow.
 name: ci
@@ -152,20 +154,25 @@ jobs:
 
   compliance:
     needs: pin
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    if: >-
+      github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.base_ref == 'main')
     runs-on: ubuntu-24.04
-    # Writes the docs-data branch (below); everything else here only reads.
+    # Writes the docs-data branch (below); everything else here only reads, so
+    # the checkouts leave no token on disk for a pull request's code to find.
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
         with:
           path: gorge-compliance
+          persist-credentials: false
       - uses: actions/checkout@v4
         with:
           repository: adams-shaun/gorge
           ref: ${{ needs.pin.outputs.ref }}
           path: gorge
+          persist-credentials: false
       - uses: actions/setup-go@v5
         with:
           go-version-file: gorge-compliance/go.mod
@@ -199,6 +206,7 @@ jobs:
       # 1). That data publishes with the failures counted in meta.json, and the
       # ratchet step below ends the job red. Any other failure publishes nothing.
       - name: Per-set status for the docs site
+        if: github.event_name != 'pull_request'
         working-directory: gorge-compliance
         shell: bash
         run: |
@@ -343,8 +351,8 @@ jobs:
   # One required check to name in branch protection.
   ci-ok:
     if: always()
-    needs: [lint, test]
+    needs: [lint, test, compliance]
     runs-on: ubuntu-24.04
     steps:
       - run: |
-          [ "${{ needs.lint.result }}" = success ] && [ "${{ needs.test.result }}" = success ] || { echo "lint=${{ needs.lint.result }} test=${{ needs.test.result }}"; exit 1; }
+          [ "${{ needs.lint.result }}" = success ] && [ "${{ needs.test.result }}" = success ] && { [ "${{ needs.compliance.result }}" = success ] || [ "${{ needs.compliance.result }}" = skipped ]; } || { echo "lint=${{ needs.lint.result }} test=${{ needs.test.result }} compliance=${{ needs.compliance.result }}"; exit 1; }
