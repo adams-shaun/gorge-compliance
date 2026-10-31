@@ -190,7 +190,8 @@ jobs:
           ln -sfn ../gorge/.cards gorge-compliance/.cards
       - name: Compliance status and ratchet
         working-directory: gorge-compliance
-        run: make compliance-status
+        shell: bash
+        run: make compliance-status 2>&1 | tee ../compliance-status.log
       - name: Upload the status page
         if: always()
         uses: actions/upload-artifact@v4
@@ -212,8 +213,8 @@ jobs:
           cat > ../docs-data/meta.json <<EOF
           {"commit": "$(git rev-parse --short=9 HEAD)", "gorge_pin": "$(cat GORGE_PIN)", "forge_ref": "${{ steps.cpin.outputs.forge_ref }}", "date": "$(date -u +%F)"}
           EOF
-      # One force-pushed commit on an orphan branch, like gorge's perf-data:
-      # the data's history is not worth keeping, only its latest state.
+      # One force-pushed commit on an orphan branch: the data's history is not
+      # worth keeping, only its latest state.
       - name: Publish the docs-data branch
         if: github.ref == 'refs/heads/main'
         working-directory: docs-data
@@ -224,6 +225,16 @@ jobs:
           git add status-A.jsonl status-B.jsonl meta.json
           git commit -q -m "docs-data: compliance status $(date -u +%F)"
           git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" docs-data:docs-data
+      - name: Say why in the run summary
+        if: failure()
+        run: |
+          {
+            echo "## Compliance failed at gorge ${{ needs.pin.outputs.ref }}"
+            echo "docs-data was not published, so the site's per-set tables keep their last data."
+            echo '```'
+            grep -E '^RATCHET FAIL|^oraclediff:' compliance-status.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
   # Against gorge MAIN, not the pin: what a pin bump would change. Every
   # check is continue-on-error and lands in the job summary; the job itself
@@ -273,11 +284,13 @@ jobs:
         id: tests
         continue-on-error: true
         working-directory: gorge-compliance
+        shell: bash
         run: go test -count=1 -timeout 40m ./... 2>&1 | tee ../drift-test.log
       - name: Compliance status against gorge main
         id: status
         continue-on-error: true
         working-directory: gorge-compliance
+        shell: bash
         run: make compliance-status 2>&1 | tee ../drift-status.log
       - name: Report
         if: always()
@@ -290,6 +303,10 @@ jobs:
             echo '### Failing tests'
             echo '```'
             grep -E '^(--- FAIL|FAIL|ok )' drift-test.log | grep -v '^ok ' | head -200 || true
+            echo '```'
+            echo '### Compliance ratchet'
+            echo '```'
+            grep -E '^RATCHET FAIL|^ratchet:' drift-status.log || true
             echo '```'
             echo '### Stale ratchet rows'
             echo '```'
