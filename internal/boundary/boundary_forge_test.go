@@ -1,6 +1,7 @@
 package boundary_test
 
 import (
+	"os/exec"
 	"path"
 	"path/filepath"
 	"strings"
@@ -232,5 +233,15 @@ func TestForgeBoundaryDetection(t *testing.T) {
 				t.Errorf("%q flagged=%v, want %v: %v (reason: %s)", tt.file, matched, tt.wantMatch, offenders, tt.reason)
 			}
 		})
+	}
+}
+
+// TestOracleBuildDirIsIgnored holds the exception the output guards make for
+// .oracle-build/ (cmd/oraclediff refuseRepoPath, classify.RefuseRepoPath): Forge
+// output lands there, so the directory must stay gitignored.
+func TestOracleBuildDirIsIgnored(t *testing.T) {
+	out, err := exec.Command("git", "check-ignore", "../../.oracle-build/forge/x.jsonl").CombinedOutput()
+	if err != nil {
+		t.Fatalf(".oracle-build/ is not gitignored: %v: %s", err, out)
 	}
 }

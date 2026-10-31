@@ -17,7 +17,7 @@ package main
 //     Forge cache;
 //   - the two caches give Forge's and XMage's snapshots, from which the
 //     V(F,X) leg is computed with the unchanged comparator (CompareOpts
-//     over ForgeOracleResult, DESIGN section 7.1).
+//     over ForgeOracleResult).
 //
 // compliance/oraclediff.ThreeWay then classifies each scenario with one of
 // the three-way patterns. Outputs:

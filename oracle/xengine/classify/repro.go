@@ -30,7 +30,8 @@ func Dir(out string, f Finding) string {
 }
 
 // RefuseRepoPath rejects a path inside the module (the nearest ancestor of the
-// working directory holding go.mod): follower output is never committed.
+// working directory holding go.mod), except under the gitignored .oracle-build/:
+// follower output is never committed.
 // (cmd/oraclediff has the same guard as package main, so it cannot be imported.)
 func RefuseRepoPath(path string) error {
 	root := repoRoot()
@@ -43,7 +44,10 @@ func RefuseRepoPath(path string) error {
 	}
 	abs, root = resolveExisting(abs), resolveExisting(root)
 	if rel, err := filepath.Rel(root, abs); err == nil && rel != ".." && !strings.HasPrefix(rel, ".."+string(filepath.Separator)) {
-		return fmt.Errorf("refusing to write %s: it is inside the repository %s (follower output and finds stay off-repo)", path, root)
+		if strings.HasPrefix(rel, ".oracle-build"+string(filepath.Separator)) {
+			return nil
+		}
+		return fmt.Errorf("refusing to write %s: it is inside the repository %s (follower output and finds go outside it, or under the gitignored .oracle-build/)", path, root)
 	}
 	return nil
 }

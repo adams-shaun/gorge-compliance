@@ -40,9 +40,9 @@
 # max XENGINE_JVM_WAIT seconds) while 2 or more run.
 #
 # Environment:
-#   XENGINE_ROOT          output root (default .oracle-build/xengine/<run>); a
-#                         directory inside the repository is refused unless git
-#                         ignores it, because follower output must never be committed
+#   XENGINE_ROOT          output root (default .oracle-build/xengine/<run>); any
+#                         other directory inside the repository is refused, because
+#                         follower output must never be committed
 #   XENGINE_FOLLOWERS     'forge xmage' (default)
 #   XENGINE_GO_JOBS       concurrent play stages, a positive integer (default 1:
 #                         strictly serial; see the ledger merge below)
@@ -108,10 +108,8 @@ done
 # Follower output (Forge's is GPL-3.0) can never be one `git add` from a commit.
 absroot=$(realpath -m "$root")
 case "$absroot/" in
-"$repo"/*)
-	git -C "$repo" check-ignore -q "$absroot/" \
-		|| { echo "xengine-sweep: refusing XENGINE_ROOT $root: it is inside the repository $repo and not gitignored" >&2; exit 2; }
-	;;
+"$repo"/.oracle-build/*) ;;
+"$repo"/*) echo "xengine-sweep: refusing XENGINE_ROOT $root: it is inside the repository $repo and not under .oracle-build/" >&2; exit 2 ;;
 esac
 mkdir -p "$absroot"
 root=$absroot

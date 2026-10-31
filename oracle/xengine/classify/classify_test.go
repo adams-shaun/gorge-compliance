@@ -145,6 +145,16 @@ func TestClassifyRngNeedsDraw(t *testing.T) {
 	}
 }
 
+func TestRefuseRepoPathAllowsTheIgnoredBuildDir(t *testing.T) {
+	root, _ := filepath.Abs("../../..")
+	if err := RefuseRepoPath(filepath.Join(root, ".oracle-build", "xengine", "run")); err != nil {
+		t.Errorf("under .oracle-build: %v", err)
+	}
+	if err := RefuseRepoPath(filepath.Join(root, ".oracle-buildx", "run")); err == nil {
+		t.Error("a sibling of .oracle-build was accepted")
+	}
+}
+
 func TestReproRefusesRepoPath(t *testing.T) {
 	item, tp, g := fixture(0)
 	f := Classify(item, tp, g, follower(g, func(x *oraclediff.XResult) { x.Snapshots[2].Players[0].Life = 19 }), "xmage")

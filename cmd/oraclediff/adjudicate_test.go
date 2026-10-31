@@ -34,8 +34,7 @@ var (
 
 func init() { fx21.Snapshots[0].Players[1].Life = 21; x21.Snapshots[0].Players[1].Life = 21 }
 
-// adjGorgeSnap is a gorge-vocabulary snapshot (what Forge's driver emits;
-// DESIGN section 6.7).
+// adjGorgeSnap is a gorge-vocabulary snapshot (what Forge's driver emits).
 func adjGorgeSnap(cp string) rules.OracleSnapshot {
 	return rules.OracleSnapshot{
 		Checkpoint: cp, Turn: 1, Step: "main1",

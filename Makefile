@@ -102,6 +102,7 @@ mtgish-xc:
 XMAGE_DRIVER_OUT ?= $(CURDIR)/.coverage/xmage-driver
 .PHONY: xmage-driver-tests
 xmage-driver-tests:
+	@test -s "$(XMAGE_ORACLE_DIR)/tests.cp" || { echo "no XMage build at $(XMAGE_ORACLE_DIR): run make xmage-oracle-setup, or set XMAGE_ORACLE_DIR" >&2; exit 1; }
 	for t in scripts/xmage-oracle-test-*.sh; do echo "== $$t"; XMAGE_ORACLE_DIR=$(XMAGE_ORACLE_DIR) bash "$$t" "$(XMAGE_DRIVER_OUT)/$$(basename $$t .sh)" || exit 1; done
 
 .PHONY: compliance-manifests
