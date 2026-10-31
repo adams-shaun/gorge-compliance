@@ -62,6 +62,17 @@ Those tests log a `GORGE-CERT-RESULT` line saying whether every problem is a sta
 
 ## After a driver or generator-wide change
 
+A generator change can move a scenario in any set, and `TestCertificationRatchet` measures only
+Standard and the declared sets. Run `make compliance-status`, then re-pass every set it reports,
+including undeclared ones:
+
+```sh
+make compliance-pass SETS='SPG LEA'
+```
+
+A verdict belongs to the card, so re-passing one set that prints a card clears it in every set that
+prints it. A PR to main runs the same status check, so a stale verdict in any set blocks it.
+
 `compliance-pass.sh` replays a scenario only when its sha or `XMAGE_REF` changed. A change to
 `oracle/xmageoracle` changes the cache key but not that test, so rows written by the old driver
 stay in place and look fresh. After any driver change, force a replay instead, and compare every
