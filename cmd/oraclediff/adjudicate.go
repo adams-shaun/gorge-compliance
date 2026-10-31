@@ -25,7 +25,7 @@ package main
 //   - the compact ledger: one row per classified
 //     scenario, {card, template, scenario_sha, forge_ref, pattern,
 //     gf_field, fx_field}, sharded <a-z>.jsonl. By default
-//     it is written under compliance/adjudication/; with -run-ledger, in the
+//     it is written under oracle/compliance/adjudication/; with -run-ledger, in the
 //     run directory. Field names are gorge's comparator vocabulary; no
 //     Forge-produced value, message or script text is ever included.
 //   - the per-row report: pattern, the first-difference field of each pair,

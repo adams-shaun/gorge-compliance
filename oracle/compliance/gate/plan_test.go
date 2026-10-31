@@ -29,7 +29,7 @@ func corpus(t *testing.T) *cards.Registry {
 
 // TestPlanItemRerunsOnlyStaleRows: a pass skips a passing verdict for the
 // same scenario and XMAGE_REF that gorge still meets, recomputes every
-// other one, and replays in XMage only what the cache lacks (C1).
+// other one, and replays in XMage only what the cache lacks.
 func TestPlanItemRerunsOnlyStaleRows(t *testing.T) {
 	reg := corpus(t)
 	it, skip := templates.Generate(reg, "Shock")

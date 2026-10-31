@@ -114,7 +114,7 @@ xdrv=$(sha256sum "$xdriver" | cut -c1-12)
 out=${FORGE_PASS_OUT:-$root/runs/forge-pass}
 cache=${FORGE_PASS_CACHE:-$root/cache/${oref:0:12}-$drv}
 xcache=${FORGE_PASS_XMAGE_CACHE:-$xroot/cache/${xref:0:12}-$xdrv}
-ledger=${FORGE_PASS_LEDGER:-compliance/adjudication}
+ledger=${FORGE_PASS_LEDGER:-oracle/compliance/adjudication}
 mkdir -p "$out" "$cache"
 
 od=${FORGE_PASS_ORACLEDIFF:-}

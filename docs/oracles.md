@@ -91,7 +91,10 @@ scripts/forge-pass.sh BIG
 ```
 
 A pass over named sets writes partial ledger shards, so treat it as a survey. Add `--force` to
-replay every request.
+replay every request. The comparison with XMage reads XMage's result cache and skips what isn't
+there, with the reason in `adjudicate-report.jsonl`. A scenario with a fresh verdict is never
+replayed, so a new build's cache stays empty until scenarios go stale, and the pass then reports
+`no cached XMage result` for them.
 
 ## xengine
 

@@ -78,7 +78,8 @@ card database. Then reconfirm any sampled automatic ruling the rewrite reset, wi
 ## The Forge pass
 
 Forge is a corroborating reference and never enters the CI gate. Run its pass after the XMage pass,
-at the same level, because it adjudicates against XMage's result cache:
+at the same level, because it adjudicates against XMage's result cache and skips any scenario the
+cache doesn't hold:
 
 ```sh
 LEVEL=B scripts/compliance-pass.sh

@@ -8,8 +8,7 @@ import (
 )
 
 // fillActivateXAbility fills every served activate step's empty XAbility slot
-// with the XMage rule-text prefix that selects the step's ability (agent
-// 20261009T041408Z: cluster C5). XAbility is parallel to Scenario.Steps, so
+// with the XMage rule-text prefix that selects the step's ability. XAbility is parallel to Scenario.Steps, so
 // the slice is grown first; a step that is not an activate, or one whose slot
 // the serving template already filled, is left alone. The step's Card ref
 // names the ability's source (a prelude step can activate a probe card, not

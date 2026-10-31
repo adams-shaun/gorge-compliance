@@ -31,7 +31,7 @@ func GenerateB(reg *cards.Registry, name string, req levelb.Requirement) (item o
 		}
 		// Every served activate step names its ability for XMage's replay
 		// driver; a slot a family builder left empty is filled here from the
-		// step's own card (activate_xability_fill.go, cluster C5).
+		// step's own card (activate_xability_fill.go).
 		fillActivateXAbility(reg, &item)
 		// A pass_to the driver would place in the wrong step names where
 		// gorge stopped (passto_pin.go).

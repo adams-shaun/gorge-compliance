@@ -12,8 +12,7 @@ import (
 // read off the ask's own options), and XMage's AddManaInAnyCombinationEffect
 // poses one multi-amount message per colour of that set, in the set's own
 // order, whatever the unit count -- a count-1 restricted set included
-// (Muerra, Trash Tactician's Add R / Add G pair; agent 20261009T041408Z,
-// cluster C2). Each message consumes one "X=<n>" amount answer in order, so
+// (Muerra, Trash Tactician's Add R / Add G pair). Each message consumes one "X=<n>" amount answer in order, so
 // the answers are one per offered colour carrying the number of units the
 // engine allocated to it. The dialog's message order is the set's option
 // order, which is what ManaColours records; a wrong order shows up as a

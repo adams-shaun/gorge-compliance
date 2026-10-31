@@ -12,7 +12,7 @@ import (
 // per OFFERED colour, in the engine's option order -- so the amounts are per
 // option, 1 for the picked one and 0 for each unpicked one. A WUBRG-5 list
 // would fill the first messages with the wrong colours' zeros (agent
-// 20261009T041408Z, cluster C2; HYPOTHESIS: the message order is the
+// HYPOTHESIS: the message order is the
 // engine's option order).
 func TestXAnswersManaColourOptionAmounts(t *testing.T) {
 	d := rules.OracleDecision{
@@ -97,7 +97,7 @@ func TestXAnswersSingleColourManaAskUnchanged(t *testing.T) {
 // TestCombatDamageAnswersTrampleAssignment: a 6/5 trample attacker blocked
 // by a 2/2 has its deterministic assignment scripted as one amount answer
 // per blocker, leading the pass_to step that crosses combat damage (Ojer
-// Kaslem's row; agent 20261009T041408Z, cluster C2).
+// Kaslem's row).
 func TestCombatDamageAnswersTrampleAssignment(t *testing.T) {
 	sc := Scenario{Steps: []Step{
 		{Op: "attack", Seat: 0, Attackers: []string{"p0:Ojer Kaslem, Deepest Growth"}, Defender: "p1"},

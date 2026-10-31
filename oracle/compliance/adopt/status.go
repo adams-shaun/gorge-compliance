@@ -240,7 +240,7 @@ func levelAtLeast(have, want string) bool { return have != "" && have >= want }
 
 // Rollups sums the set lines per format, in Config order, skipping a
 // format none of whose sets were measured. The All target
-// leaves out problems on non-tournament cards (C7).
+// leaves out problems on non-tournament cards.
 func (cs *Census) Rollups(sets []SetStatus) []Rollup {
 	var out []Rollup
 	for _, f := range cs.Config.Formats {

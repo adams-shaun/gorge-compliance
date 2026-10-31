@@ -70,7 +70,7 @@ const staticProbeAura = "Pacifism"
 // enchanted probe. The Aura is cast, never setup-placed with an attach step:
 // setup cannot place an unattached Aura -- XMage's state-based actions move
 // one to its owner's graveyard at game start, so the attach step's permanent
-// ref finds nothing (driver-batch-20261009T201406Z, Zoetic Glyph).
+// ref finds nothing (Zoetic Glyph).
 func addEnchantedProbeAura(reg *cards.Registry, base *oraclegen.Item, probe string) {
 	p0 := base.Scenario.Setup["p0"]
 	p0.Hand = appendFixtureUnique(p0.Hand, staticProbeAura)

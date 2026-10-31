@@ -29,7 +29,7 @@ import (
 // forgeBoundaryAllowlist is the explicit, empty-by-default escape hatch for a
 // file that carries only our own pattern vocabulary and field names, never a
 // Forge-produced value, message or script fragment, at a path a rule would
-// otherwise catch. `compliance/adjudication/<a-z>.jsonl` would be such a file,
+// otherwise catch. `oracle/compliance/adjudication/<a-z>.jsonl` would be such a file,
 // but it is not under `compliance/forge*`, so it needs no entry. Entries are
 // repo-relative slash-separated paths matched exactly. This repository has no
 // oracle/compliance/adjudication/; keep this empty until a file needs it.

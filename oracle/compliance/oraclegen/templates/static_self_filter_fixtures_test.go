@@ -216,7 +216,7 @@ func TestStaticSourceCounterEquipment(t *testing.T) {
 // never setup-placed with an attach step: XMage's state-based actions move an
 // unattached Aura to its owner's graveyard at game start, so a setup-placed
 // Pacifism is off the battlefield when the attach step runs (the driver
-// error that regressed Zoetic Glyph/static#0.0, driver-batch-20261009T201406Z).
+// error that regressed Zoetic Glyph/static#0.0).
 // The precondition asserts the Aura is in p0's hand with a cast step onto the
 // probe and NOT in the setup battlefield, and the probe's printed P/T differs
 // from the observed one.

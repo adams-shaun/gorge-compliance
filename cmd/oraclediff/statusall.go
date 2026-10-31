@@ -193,7 +193,7 @@ func loadRatchetMaybe() (map[string]adopt.RatchetEntry, error) {
 	return old, nil
 }
 
-// writeRatchetFile marshals and writes compliance/ratchet.json.
+// writeRatchetFile marshals and writes oracle/compliance/ratchet.json.
 func writeRatchetFile(rec map[string]adopt.RatchetEntry) error {
 	if err := os.WriteFile(adopt.RatchetFile, adopt.MarshalRatchet(rec), 0o644); err != nil {
 		return err

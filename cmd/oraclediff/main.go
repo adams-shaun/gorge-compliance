@@ -27,7 +27,7 @@
 // Disagreements are triaged by shape (oracle/compliance/shape): diff classifies a
 // new disagreement that a oracle/compliance/rulings/<id>.json ruling matches, and
 // triage re-applies the rulings to every committed row and writes what no
-// ruling covers as one cluster per shape under compliance/triage/.
+// ruling covers as one cluster per shape under oracle/compliance/triage/.
 //
 // A passing row freezes only the fields its scenario changed (Frozen), not
 // a hash of the whole snapshot; refreeze converts legacy canon_sha rows.

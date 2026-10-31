@@ -8,7 +8,7 @@ import (
 )
 
 // fillActivateXAbilityCensusCards are one served level-B static row per
-// measured empty-XAbility hole (agent 20261009T041408Z, cluster C5): the
+// measured empty-XAbility hole: the
 // Surveillance CanAttackDefender branch, the UntapOtherPlayer mana-ability
 // tap, and the gated CantBlockBy prelude's probe sacrifice. XMage's replay
 // driver throws "activate step N has no xmage_ability" on any served activate
