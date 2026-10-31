@@ -5,7 +5,7 @@
 //	oraclediff diff [-cards .cards] -scenarios scenarios.jsonl [-xmage xmage.jsonl] [-cache DIR] -out verdicts.jsonl
 //	oraclediff adjudicate -scenarios scen.jsonl -forge-diff forge-diff.jsonl
 //	                          -xmage-cache DIR -oracle-ref REF [-driver SHA | -forge-cache DIR]
-//	                          [-verdicts oracle/compliance/verdicts] [-d1 C|B] [-mark-review]
+//	                          [-verdicts oracle/compliance/verdicts] [-run-ledger] [-mark-review]
 //	oraclediff show [-cards .cards] -scenarios scenarios.jsonl -card NAME
 //	oraclediff triage [-cards .cards] [-apply]
 //	oraclediff refreeze [-cards .cards] [-apply]
@@ -35,7 +35,7 @@
 // impact is the primitive impact table (oracle/compliance/adopt): every
 // unsupported primitive, the tournament cards it blocks in each target
 // format of oracle/compliance/formats.json and the sets it would unlock. tickets
-// turns the findings into one would-be agentctl ticket per class -- a
+// turns the findings into one ticket draft per class -- a
 // primitive (with the primitives only its cards carry), a gorge_wrong
 // ruling or shape, an untriaged shape cluster -- each with its cards, sets
 // and a class-census ratchet skeleton; it writes them, it never files them.
@@ -285,7 +285,7 @@ func genManifest(reg *cards.Registry, m compliance.Manifest, out, level string) 
 		// Registry lookup accepts punctuation aliases as well as canonical
 		// names. Scenarios must use the face's corpus spelling: otherwise
 		// the fixture itself can fail to find/cast the card (e.g. XMage's
-		// "With Great Power..." alias for Forge's "With Great Power . . .").
+		// "With Great Power..." alias for Forge's "With Great Power. . .").
 		if ok {
 			if c, found := reg.Lookup(name); found && len(c.Faces) > 0 {
 				name = c.Faces[0].Name
@@ -510,8 +510,7 @@ func runDiff(dir, scen, xm, cacheDir, out, write, ref, rulingDir string) error {
 	return nil
 }
 
-// runPlan reads gen's scenarios and writes the stale ones (section 11.3
-// C1): -rediff gets every scenario whose verdict must be recomputed,
+// runPlan reads gen's scenarios and writes the stale ones: -rediff gets every scenario whose verdict must be recomputed,
 // -replay the subset XMage has no cached result for.
 func runPlan(dir, scen, verdictDir, ref, cacheDir, replay, rediff string) error {
 	if scen == "" || ref == "" || replay == "" || rediff == "" {

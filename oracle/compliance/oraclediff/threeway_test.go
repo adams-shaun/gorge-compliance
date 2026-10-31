@@ -6,7 +6,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// wantEvidence pins the DESIGN section 8.1 "Evidence that closes it" text
+// wantEvidence pins the "evidence that closes it" text
 // for every pattern, so a classifier that returns the right pattern with the
 // wrong evidence fails too.
 var wantEvidence = map[Pattern]string{
@@ -15,20 +15,20 @@ var wantEvidence = map[Pattern]string{
 	ForgeXMageG:     "A one-line Oracle-text sanity check, plus the agreement. When the fix lands, a hand oracle scenario under gorge-compliance's scenarios/oracle/ pins it independently of both engines",
 	GorgeXMageF:     "Optional. A driver artefact gets a fork ticket. A Forge engine bug gets an upstream Forge issue at low priority",
 	AllDiffer:       "1. Rule out a harness cause on each side: strict_miss, leftover, decision-shape divergence. 2. A hand oracle scenario written from the Oracle text and the CR, using the W-series two-role authoring (2026-09-27-oracle-text-card-audit.md), is the arbiter",
-	GorgeForgeNoX:   "It cannot count toward compliance (§3). An xmage_lacks card still needs its hand Oracle scenario (XMage design §8, lines 198-201)",
+	GorgeForgeNoX:   "It cannot count toward compliance. An xmage_lacks card still needs its hand Oracle scenario (docs/design/2026-10-02-xmage-compliance-oracle-design.md section 8, lines 198-201)",
 	GorgeNoForgeNoX: "Oracle text plus the CR. Most often a gorge bug, sometimes a Forge bug",
 	ForgeHarness:    "none",
-	Inconsistent:    "The three pairwise verdicts match no section 8.1 row: re-check the pair whose row is stale or harnessed before classifying.",
+	Inconsistent:    "The three pairwise verdicts match no three-way pattern: re-check the pair whose row is stale or harnessed before classifying.",
 }
 
 // allPatterns is every Pattern constant. Its length is held to wantEvidence
-// so a new pattern cannot land without its section 8.1 text.
+// so a new pattern cannot land without its evidence text.
 var allPatterns = []Pattern{
 	Agree3, GorgeForgeX, ForgeXMageG, GorgeXMageF, AllDiffer,
 	GorgeForgeNoX, GorgeNoForgeNoX, ForgeHarness, Inconsistent,
 }
 
-// TestThreeWay covers every row of DESIGN section 8.1, the harness and
+// TestThreeWay covers every pattern, the harness and
 // xmage_lacks states its H/L cells stand for, and the Inconsistent guard.
 func TestThreeWay(t *testing.T) {
 	tests := []struct {
@@ -208,7 +208,7 @@ func TestThreeWay(t *testing.T) {
 	}
 }
 
-// TestThreeWayEvidence holds every Pattern constant to its section 8.1
+// TestThreeWayEvidence holds every Pattern constant to its pattern
 // evidence text and to the map above, so a new pattern without a text fails
 // the build.
 func TestThreeWayEvidence(t *testing.T) {
