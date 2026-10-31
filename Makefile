@@ -7,7 +7,7 @@ SHELL := /bin/bash
 # GORGE_MODULE_DIR is where go resolves gorge's code, usually the module cache,
 # which has no corpus; gorge's corpus pin is read from its Makefile.
 GORGE_ROOT ?= ../gorge
-GORGE_MODULE_DIR = $(shell go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge)
+GORGE_MODULE_DIR = $(shell go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge 2>/dev/null)
 
 export GOMEMLIMIT ?= 5GiB
 export GOFLAGS ?= -p=2 -trimpath
@@ -24,8 +24,8 @@ XMAGE_ORACLE_DIR ?= .oracle-build/xmage
 # mtgish is MIT; its data carries Oracle text and is never committed.
 MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
-FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile)
-FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile)
+FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
+FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 # Forge oracle driver commit (fork, branch oracle-harness): a descendant of FORGE_REF with identical script trees.
 # ae39d915 = 4b1a4fde + driver records the final step when its action ends the game (2026-10-29).
 FORGE_ORACLE_REF ?= ae39d915306df882a9d82c752770c7dfd8f20d07
