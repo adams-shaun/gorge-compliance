@@ -8,8 +8,8 @@ import (
 
 // XMage is not part of go test, so pin the driver source: the setup
 // counters must be applied WITH the placement (through the enter-with-counters
-// map, before any state-based action), mirroring gorge's runner order
-// . Before this, applySetupState ran
+// map, before any state-based action), mirroring gorge's runner order.
+// Before this, applySetupState ran
 // inside the setup checkpoint -- after the game's first SBA check had already
 // killed a would-die placement (a printed 0/0, an X-cost creature's X=0
 // board) -- and threw "counters name <card>, which is not on p0's

@@ -333,8 +333,7 @@ census, so its size is measured before anyone schedules it.
 
 ## 7. The `offered` observation (legality statics)
 
-Status: design + the two positive-observable rows served (ticket
-1f44e455). Base `main@8da804429`. Sections 1-6 stay as
+Status: design + the two positive-observable rows served. Base `main@8da804429`. Sections 1-6 stay as
 written; this section replaces section 6's sketch ("legality statics need an
 `offered` observation in both engines"). Every `path:line` in the XMage source
 below was read at `$XMAGE_ORACLE_DIR/mage` (2026-10-06); the gorge paths at the
