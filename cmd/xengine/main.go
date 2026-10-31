@@ -27,8 +27,8 @@
 // -xmage leaves the cards XMage spells differently out of the decks. sweep-plan lists the SET/CHUNK pairs of a sweep root that
 // have no .done marker (scripts/xengine-sweep.sh). adjudicate gives the
 // items one follower diverged on a three-way pattern (oraclediff.ThreeWay) from both followers' diffs, writes DIR3/findings.jsonl,
-// patterns.tsv, notes.md and a tickets/<cluster>.md draft per gorge_suspect cluster; -ledger adds the compact ledger shards. All of it is off-repo. Follower output stays
-// outside the repository.
+// patterns.tsv, notes.md and a tickets/<cluster>.md draft per gorge_suspect cluster; -ledger adds the compact ledger shards. Follower output is never committed: it goes outside the
+// repository or under the gitignored .oracle-build/.
 package main
 
 import (

@@ -9,9 +9,8 @@ package oraclediff
 
 import "github.com/adams-shaun/gorge/engine/rules"
 
-// Pattern is one of the three-way patterns. The
-// values are the section's own labels, so a ledger row carries them
-// verbatim.
+// Pattern is one of the three-way patterns. A ledger row carries the
+// value verbatim.
 type Pattern string
 
 const (
