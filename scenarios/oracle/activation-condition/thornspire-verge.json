@@ -1,6 +1,6 @@
 {
   "card": "Thornspire Verge", "family": "activation-condition", "oracle_sha": "3d83166f5720",
-  "author": "cli-20260927T211249Z-0d25a7f8 (Oracle + CR only)",
+  "author": "Oracle + CR only",
   "scenarios": [
     {"name": "green-mana-unavailable-without-mountain-or-forest", "cr": ["602.5", "305.6"], "why": "The green-producing ability requires control of a Mountain or Forest; the Verge alone has neither subtype.", "setup": {"p0": {"battlefield": ["Thornspire Verge"]}}, "expect": [{"offered": {"seat": 0, "kind": "activate", "card": "p0:Thornspire Verge", "label": "Add {G}"}, "want": false}]},
     {"name": "green-mana-offered-with-mountain", "cr": ["602.5", "305.6"], "why": "Controlling a Mountain satisfies the stated land-type condition, making the green-producing ability available.", "setup": {"p0": {"battlefield": ["Thornspire Verge", "Mountain"]}}, "expect": [{"offered": {"seat": 0, "kind": "activate", "card": "p0:Thornspire Verge", "label": "Add {G}"}, "want": true}]},

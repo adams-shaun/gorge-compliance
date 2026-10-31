@@ -1,6 +1,6 @@
 {
   "card": "Mistveil Plains", "family": "activation-condition", "oracle_sha": "8563256ccc29",
-  "author": "cli-20260927T211249Z-0d25a7f8 (Oracle + CR only)",
+  "author": "Oracle + CR only",
   "scenarios": [
     {"name": "graveyard-ability-unavailable-with-one-white-permanent", "cr": ["602.2", "602.5"], "why": "White mana is available to pay the activation cost, but one Savannah Lions is one white permanent, one short of the stated two-permanent threshold.", "setup": {"p0": {"battlefield": ["Mistveil Plains", "Savannah Lions"], "graveyard": ["Grizzly Bears"]}}, "steps": [{"op": "mana", "seat": 0, "mana": "W"}], "expect": [{"offered": {"seat": 0, "kind": "activate", "card": "p0:Mistveil Plains", "label": "Put"}, "want": false}]},
     {"name": "graveyard-ability-offered-with-two-white-permanents", "cr": ["602.2", "602.5"], "why": "White mana is available to pay the activation cost, and two Savannah Lions are two white permanents, exactly meeting the minimum for the ability.", "setup": {"p0": {"battlefield": ["Mistveil Plains", "Savannah Lions", "Savannah Lions"], "graveyard": ["Grizzly Bears"]}}, "steps": [{"op": "mana", "seat": 0, "mana": "W"}], "expect": [{"offered": {"seat": 0, "kind": "activate", "card": "p0:Mistveil Plains", "label": "Put"}, "want": true}]},
