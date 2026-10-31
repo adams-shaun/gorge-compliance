@@ -104,8 +104,8 @@ into windows and prefixes that XMage and Forge replay, and each difference is cl
 and written as a repro directory. It reaches board states no scenario sets up. A coverage
 ledger records which cards each sweep exercised and compared.
 
-**Can't check:** windows it can't lower. In a 2-game FDN sweep on 2026-10-31, 26 of 44 windows
-were refused, and of the 18 replayed, 3 in XMage and 1 in Forge came back as a `decision_shape`
+**Can't check:** windows it can't lower. In a 2-game FDN sweep on 2026-10-31, 25 of 44 windows
+were refused, and of the 19 replayed, 5 in XMage and 1 in Forge came back as a `decision_shape`
 difference, with 2 and 3 as `harness`, so a follower can fail to express a position without any
 engine being wrong. A sweep rules on nothing and commits nothing. Its findings are leads for a person.
 
