@@ -8,8 +8,7 @@
 > `rules.TestOracleAudit` / `rules.TestXMagePortScenarios` are `audit/`'s, and
 > `lab/X` is `X` here. See README.md and docs/PINNING.md.
 
-Status: design and prototype (branch `wt/rs-xmagetests`). Author: rs-xmagetests
-seat, 2026-10-10.
+Status: design and prototype (branch `wt/rs-xmagetests`). 2026-10-10.
 
 ## Why
 
@@ -26,10 +25,10 @@ expected behaviour.
 
 ### XMage `Mage.Tests`
 
-The checkout is the compliance oracle's: `/mnt/sata/gorge-training/xmageoracle/mage`
+The checkout is the compliance oracle's: `$XMAGE_ORACLE_DIR/mage`
 at `6b602a1c8`. It is MIT-licensed. There are 2056 Java files and **6967 `@Test`
 methods**. The census script output is in
-`/mnt/sata/gorge-training/xmagetests/census.txt`.
+an out-of-tree `census.txt`.
 
 | directory | tests | rules area |
 |---|---:|---|
@@ -65,7 +64,7 @@ corpus:
 
 ### Forge
 
-The checkout is the Forge oracle's: `/mnt/sata/gorge-training/forgeoracle/forge`
+The checkout is the Forge oracle's: `$FORGE_ORACLE_DIR/forge`
 at `e27d2bdb2`. Forge is GPL-3.0.
 
 - `forge-gui-desktop/src/test`: 60 files and 232 tests. The rules-relevant
@@ -222,7 +221,7 @@ The refusal cases are any `for`/`if`/lambda/`IntStream`, any
 
 ### Feasibility
 
-A syntactic census (`/mnt/sata/gorge-training/xmagetests/census.py`, to be
+A syntactic census (an out-of-tree `census.py`, to be
 re-implemented in the Go tool) puts every method in one of four classes:
 
 | class | tests | share |

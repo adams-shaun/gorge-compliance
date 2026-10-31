@@ -295,14 +295,13 @@ Generator side: `oraclegen.Step` gains `ability_index` (`*int`) and `active`;
   under `XMAGE_ORACLE_DIR` were lost on 2026-10-05: rebuild with `make
   xmage-oracle-setup` before any replay. A driver change needs a forced full
   replay (every scenario, not `plan`'s stale set), per
-  `.ds4/operator-compliance-refresh.md`; the helper it names must be recreated
+  a private note; the helper it names must be recreated
   with the setup.
 
 ## 5. Order of work
 
-Seats cannot run XMage, and any branch touching `oracle/xmageoracle/` parks at
-the "xmage driver needs host replay" gate (`.agentctl/config.toml:220`) for a
-host operator. So every family is a gorge-side ticket (generator, runner,
+The workers doing this could not run XMage, and any branch touching `oracle/xmageoracle/` parks at
+a gate that sends driver changes to whoever can replay them. So every family is a gorge-side ticket (generator, runner,
 comparator, census) followed by a driver ticket that depends on it. Gorge-side
 tickets can land before the driver: level B is declared nowhere, so a
 new-template row reading `harness` or `no verdict` reddens no gate.
@@ -335,7 +334,7 @@ census, so its size is measured before anyone schedules it.
 ## 7. The `offered` observation (legality statics)
 
 Status: design + the two positive-observable rows served (ticket
-cli-20261006T035109Z-1f44e455). Base `main@8da804429`. Sections 1-6 stay as
+1f44e455). Base `main@8da804429`. Sections 1-6 stay as
 written; this section replaces section 6's sketch ("legality statics need an
 `offered` observation in both engines"). Every `path:line` in the XMage source
 below was read at `$XMAGE_ORACLE_DIR/mage` (2026-10-06); the gorge paths at the

@@ -17,7 +17,7 @@ independent source, and a cheap one: the whole corpus compares in about two
 seconds.
 
 The ledger covers the whole corpus (every card both sides know). The sets the
-dirty-dirac kernel plays, FDN and BLB, stay named as the kernel sets: the ratchet
+dirac kernel plays, FDN and BLB, stay named as the kernel sets: the ratchet
 logs their per-tier agreement and the `-all` report keeps a headline table for
 each.
 

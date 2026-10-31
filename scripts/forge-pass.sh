@@ -6,7 +6,7 @@
 # AFTER scripts/compliance-pass.sh, so the XMage
 # result cache it adjudicates against is current. It ends by writing the
 # compact three-way ledger under oracle/compliance/adjudication/. Forge is GPL-3.0 and its output is never committed; only the
-# ledger -- gorge's own pattern and field vocabulary -- is committed.
+# ledger -- gorge's own pattern and field vocabulary -- may be committed.
 #
 # Per set, under the heavy lock:
 #   1. oraclediff gen          -- one level-B scenario per manifest card
