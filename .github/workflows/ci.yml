@@ -20,6 +20,7 @@
 #                TestCertificationRatchet covers only Standard and the declared
 #                sets. Required (ci-ok) on a PR to main. Nightly and dispatch also
 #                publish the per-set data the docs site renders.
+#   nightly-alert  nightly on main: one GitHub issue tracks a failing night.
 #   drift        nightly/dispatch: the tests against gorge MAIN. Reports what a
 #                pin bump would change; never fails the workflow.
 name: ci
@@ -259,6 +260,39 @@ jobs:
             grep -E '^RATCHET FAIL|^oraclediff:' compliance-status.log || true
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+
+  # One issue tracks a failing nightly: opened or commented on when a night fails,
+  # closed by the next green one. A cancelled or skipped night changes nothing.
+  nightly-alert:
+    if: always() && github.event_name == 'schedule' && github.ref == 'refs/heads/main'
+    needs: [lint, test, compliance]
+    runs-on: ubuntu-24.04
+    permissions:
+      issues: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      TITLE: Nightly CI is failing on main
+      RESULTS: lint=${{ needs.lint.result }} test=${{ needs.test.result }} compliance=${{ needs.compliance.result }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - run: |
+          number=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number,title --jq 'map(select(.title == env.TITLE))[0].number // empty')
+          case "$RESULTS" in
+            *=failure*)
+              if [ -n "$number" ]; then
+                gh issue comment "$number" --body "Failed again: $RESULTS, $RUN_URL"
+              else
+                gh issue create --title "$TITLE" --body "$RESULTS, $RUN_URL"
+              fi
+              ;;
+            *=cancelled*|*=skipped*) ;;
+            *)
+              if [ -n "$number" ]; then
+                gh issue close "$number" --comment "Green again: $RUN_URL"
+              fi
+              ;;
+          esac
 
   # Against gorge MAIN, not the pin: what a pin bump would change. Every
   # check is continue-on-error and lands in the job summary; the job itself
