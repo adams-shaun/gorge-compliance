@@ -1690,6 +1690,12 @@ func forcedSingleOption(d rules.OracleDecision) bool {
 	if d.Kind == "target" || d.Kind == "order" || d.Kind == "mode" {
 		return false
 	}
+	if d.Retarget {
+		// A forced "change the target" with one other legal target is still
+		// XMage's chooseTarget: its loop counts the old target among the
+		// possible ones, and unscripted its AI keeps picking the old target.
+		return false
+	}
 	if loneTriggerCostDecline(d) {
 		// A triggered optional cost gorge could not pay (a "may discard your
 		// hand" over an empty hand, a "may pay {2}" over an empty pool) is
