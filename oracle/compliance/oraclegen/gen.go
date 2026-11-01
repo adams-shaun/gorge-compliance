@@ -325,11 +325,15 @@ type Item struct {
 	Scenario
 }
 
+// StepFirstStrikeDamage is XPos.Step for the first of a first-strike combat's
+// two damage steps (CR 510.4), which gorge's step names do not separate.
+const StepFirstStrikeDamage = "first-strike-damage"
+
 // XPos is the position gorge reached after one pass step: its turn, step
-// (gorge's name: "main1", "begin-combat", ...) and active seat. Moved is true
-// when the pass changed the turn or step (both players passed in succession
-// with an empty stack, CR 500.2), Resolves when it removed an object from the
-// stack (both passed with a non-empty stack, CR 117.4).
+// (gorge's name: "main1", "begin-combat", ..., or StepFirstStrikeDamage) and
+// active seat. Moved is true when the pass changed the turn or step (both
+// players passed in succession with an empty stack, CR 500.2), Resolves when it
+// removed an object from the stack (both passed with a non-empty stack, CR 117.4).
 type XPos struct {
 	Turn     int32  `json:"turn"`
 	Step     string `json:"step"`

@@ -15,6 +15,7 @@ import (
 	"fmt"
 	"reflect"
 	"regexp"
+	"slices"
 	"sort"
 	"strings"
 
@@ -160,12 +161,19 @@ func paidUnlessLabel(label string) bool {
 // whether that pass moved the turn or step or removed an object from the
 // stack. Nil when the snapshots do not line up with the steps, which leaves
 // the driver on the pass shapes it knows.
+//
+// Gorge runs both damage steps of a first-strike combat (CR 510.4) under the
+// one step name, so they are told apart here. The first holds from entering
+// the name with a first or double striker in combat until the non-active seat
+// passes on an empty stack: it can only hold priority there once the active
+// seat has passed too, so that pass ends the step (CR 117.4). This reads
+// forward only, so a window cut short inside the first step is still placed.
 func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*oraclegen.XPos {
 	if len(snaps) != len(steps)+1 {
 		return nil
 	}
 	var out []*oraclegen.XPos
-	any := false
+	any, inFirst := false, false
 	for i, st := range steps {
 		if st.Op != "pass" {
 			out = append(out, nil)
@@ -173,9 +181,19 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 		}
 		any = true
 		before, after := snaps[i], snaps[i+1]
+		moved := before.Turn != after.Turn || before.Step != after.Step
+		if moved {
+			inFirst = after.Step == stepCombatDamage && firstStrikerInCombat(before)
+		} else if inFirst && len(before.Stack) == 0 && st.Seat != before.Active {
+			inFirst, moved = false, true
+		}
+		step := after.Step
+		if inFirst {
+			step = oraclegen.StepFirstStrikeDamage
+		}
 		out = append(out, &oraclegen.XPos{
-			Turn: after.Turn, Step: after.Step, Active: after.Active,
-			Moved:    before.Turn != after.Turn || before.Step != after.Step,
+			Turn: after.Turn, Step: step, Active: after.Active,
+			Moved:    moved,
 			Resolves: stackLost(before.Stack, after.Stack),
 		})
 	}
@@ -183,6 +201,22 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 		return nil
 	}
 	return out
+}
+
+// stepCombatDamage is gorge's name for the combat damage step.
+const stepCombatDamage = "combat-damage"
+
+// firstStrikerInCombat is whether an attacking or blocking creature has first
+// strike or double strike, which gives the combat a first damage step.
+func firstStrikerInCombat(s rules.OracleSnapshot) bool {
+	for _, p := range s.Permanents {
+		if p.Attacking || p.Blocking {
+			if slices.Contains(p.Keywords, "First Strike") || slices.Contains(p.Keywords, "Double Strike") {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 // stackLost is whether after lacks an object before holds (compared as a
