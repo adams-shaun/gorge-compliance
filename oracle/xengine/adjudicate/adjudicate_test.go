@@ -110,6 +110,8 @@ func TestAdjudicateSkipsNonDiverge(t *testing.T) {
 		{classify.ClassDecisionShape, classify.ClassDiverge, false},
 		{classify.ClassPaymentChoice, classify.ClassDiverge, false},
 		{classify.ClassDiverge, classify.ClassPaymentChoice, false},
+		{classify.ClassDiverge, classify.ClassForgeSkipsDamageStep, true},
+		{classify.ClassAgree, classify.ClassForgeSkipsDamageStep, false},
 		{classify.ClassDiverge, classify.ClassLowerGap, false},
 	} {
 		if got := Eligible(c.x, c.f); got != c.want {

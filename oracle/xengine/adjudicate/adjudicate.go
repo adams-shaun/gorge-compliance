@@ -46,8 +46,9 @@ func Label(p oraclediff.Pattern) string {
 
 // Eligible reports whether an item with these xe-6 classes (XMage's and
 // Forge's) is adjudicated: at least one engine diverged, and the other either
-// agreed, diverged, or did not compare at all (harness, xmage_lacks, which
-// ThreeWay turns into the GF|- / G|F|- patterns or F harness). Anything else
+// agreed, diverged, or did not compare at all (harness, xmage_lacks,
+// forge_skips_damage_step, which ThreeWay turns into the GF|- / G|F|- patterns
+// or F harness). Anything else
 // (rng, projection_gap, decision_shape, payment_choice, lower_gap on either
 // side) keeps its class: the difference there is not yet a statement about an
 // engine.
@@ -64,7 +65,7 @@ func Eligible(xClass, fClass string) bool {
 	}
 	okF := func(c string) bool {
 		switch c {
-		case classify.ClassDiverge, classify.ClassAgree, classify.ClassHarness:
+		case classify.ClassDiverge, classify.ClassAgree, classify.ClassHarness, classify.ClassForgeSkipsDamageStep:
 			return true
 		}
 		return false

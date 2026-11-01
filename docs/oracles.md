@@ -109,6 +109,11 @@ were refused, and of the 21 replayed, 5 in XMage and 1 in Forge came back as a `
 difference, with 2 and 3 as `harness`, so a follower can fail to express a position without any
 engine being wrong. A sweep rules on nothing and commits nothing. Its findings are leads for a person.
 
+Forge has one known difference of its own here. After a first-strike combat's first damage step, when
+no creature is left to deal damage in the second, Forge goes straight to end of combat, where
+CR 510.4 gives the phase a second damage step and players get priority in it. gorge and XMage do. Those
+items get the class `forge_skips_damage_step` and aren't compared in Forge past that checkpoint.
+
 **Run:** `make xengine-sweep SETS=FDN CHUNKS=1 GAMES=2`, then read
 `.oracle-build/xengine/seed1/SUMMARY.md`. A sweep resumes where it stopped. It needs `jq`, and
 waits while two or more JVMs are running.
