@@ -9,7 +9,7 @@ import (
 )
 
 // Need is what a compliance pass must do for one generated scenario
-// (spec 2026-10-03-rules-engine-lasagna-design section 11.3 C1: rerun only
+// (rerun only
 // stale rows).
 type Need int
 
@@ -72,7 +72,7 @@ func PlanItem(reg *cards.Registry, it oraclegen.Item, row compliance.VerdictRow,
 
 // StillMeets reports whether gorge at this head still produces the result a
 // passing verdict row froze, and if not, why. A row checks its frozen
-// fields (section 11.3 C3); a legacy row its whole-snapshot hash.
+// fields; a legacy row its whole-snapshot hash.
 func StillMeets(reg *cards.Registry, it oraclegen.Item, row compliance.VerdictRow) (bool, string) {
 	if len(row.Frozen) == 0 && row.CanonSHA == "" {
 		return false, "no frozen expectation"

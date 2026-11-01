@@ -16,11 +16,22 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/adopt"
 )
 
-// runStatusAll runs the gate over every committed set (section 11.3 C8)
+// exitRatchet is oraclediff's exit status when a status run measured everything
+// it was asked to and a ratchet failed. Any other failure exits 1, so a caller
+// can tell a measurement it may still use from one that didn't finish.
+const exitRatchet = 3
+
+// ratchetError is a ratchet failure over a complete measurement.
+type ratchetError string
+
+func (e ratchetError) Error() string { return string(e) }
+
+// runStatusAll runs the gate over every committed set
 // and prints the format roll-ups ("Standard:A" once every set is
 // declared) with their reason buckets. -out writes the generated dashboard
 // (never committed); -write-ratchet records oracle/compliance/ratchet.json as the
-// sets stand; -json prints one SetStatus per line.
+// sets stand; -json prints one SetStatus per line. The ratchet's own report
+// goes to stderr, so stdout stays parseable under -json.
 //
 // The gate runs in child processes of at most adopt.ChildMaxCards cards,
 // procs at a time, because a gate run's heap cannot shrink in-process
@@ -143,13 +154,13 @@ func finishRatchetA(sets []adopt.SetStatus, only []string, writeRatchet bool, cs
 	}
 	fails, slack := adopt.CheckRatchet(cs.SetCodes(), sets, d, r)
 	if len(slack) > 0 {
-		fmt.Printf("ratchet: %d sets improved past %s (-write-ratchet records them): %s\n", len(slack), adopt.RatchetFile, strings.Join(slack, "; "))
+		fmt.Fprintf(os.Stderr, "ratchet: %d sets improved past %s (-write-ratchet records them): %s\n", len(slack), adopt.RatchetFile, strings.Join(slack, "; "))
 	}
 	for _, f := range fails {
-		fmt.Println("RATCHET FAIL:", f)
+		fmt.Fprintln(os.Stderr, "RATCHET FAIL:", f)
 	}
 	if len(fails) > 0 {
-		return fmt.Errorf("%d certification ratchet failures", len(fails))
+		return ratchetError(fmt.Sprintf("%d certification ratchet failures", len(fails)))
 	}
 	return nil
 }
@@ -172,13 +183,13 @@ func finishRatchetB(sets []adopt.SetStatus, writeRatchet bool, cs *adopt.Census)
 	}
 	fails, slack := adopt.CheckRatchetB(sets, r)
 	if len(slack) > 0 {
-		fmt.Printf("ratchet: %d sets improved past the level-B floor (-write-ratchet records them): %s\n", len(slack), strings.Join(slack, "; "))
+		fmt.Fprintf(os.Stderr, "ratchet: %d sets improved past the level-B floor (-write-ratchet records them): %s\n", len(slack), strings.Join(slack, "; "))
 	}
 	for _, f := range fails {
-		fmt.Println("RATCHET FAIL:", f)
+		fmt.Fprintln(os.Stderr, "RATCHET FAIL:", f)
 	}
 	if len(fails) > 0 {
-		return fmt.Errorf("%d level-B ratchet failures", len(fails))
+		return ratchetError(fmt.Sprintf("%d level-B ratchet failures", len(fails)))
 	}
 	return nil
 }
@@ -193,7 +204,7 @@ func loadRatchetMaybe() (map[string]adopt.RatchetEntry, error) {
 	return old, nil
 }
 
-// writeRatchetFile marshals and writes compliance/ratchet.json.
+// writeRatchetFile marshals and writes oracle/compliance/ratchet.json.
 func writeRatchetFile(rec map[string]adopt.RatchetEntry) error {
 	if err := os.WriteFile(adopt.RatchetFile, adopt.MarshalRatchet(rec), 0o644); err != nil {
 		return err

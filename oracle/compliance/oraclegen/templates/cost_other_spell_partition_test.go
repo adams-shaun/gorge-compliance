@@ -11,7 +11,7 @@ import (
 // prelude landed (its ReduceCost static is live from level 2 on), and Samut,
 // the Driving Force when the probe learned to set p0's speed. Bilbo, Doc
 // Aurlock's static#0.0 and Beluna moved when the probe learned the
-// cast-provenance shapes (levelb-cost-cast-provenance): a Flashback cast from
+// cast-provenance shapes: a Flashback cast from
 // the probe's own graveyard for the wasCast rows, and an Adventure card's
 // front face for `Permanent.AdventureCard`. Inquisitive Glimmer's Unlock
 // static and Geyser Drake's NotPlayerTurn gate moved when the special-action

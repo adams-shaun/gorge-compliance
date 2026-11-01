@@ -49,7 +49,7 @@ func roomDoorDecisions(t *testing.T, reg *cards.Registry, it oraclegen.Item) (ru
 }
 
 // TestRoomLockAnswersCollapseToYesNo pins the XMage answer shape for the two
-// Mode$ LockOrUnlock activate rows (agent-20261009T041321Z-84a3a3ce): gorge's
+// Mode$ LockOrUnlock activate rows: gorge's
 // unlock/lock ask plus which-door ask collapses into ONE chooseUse boolean,
 // "yes" for the left (front-face, face 0) door, and the trigger's optional
 // target stays an explicit skip. XMage's LockOrUnlockRoomTargetEffect poses

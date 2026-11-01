@@ -1,4 +1,4 @@
-// Ticket g17 (wave 3, "trigger with no recipe"): one real card per shape the
+// "Trigger with no recipe" rows: one real card per shape the
 // new recipes serve. Each row's requirement must generate, play through
 // gorge, and show the row's own trigger on the stack; the effect rows check
 // the trigger's visible consequence in the snapshots, so a stack entry from a

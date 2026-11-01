@@ -23,7 +23,7 @@ import org.mage.test.player.TestPlayer;
 
 /** No database or AI: executable contract checks on the driver helpers that
  * answer an XMage attach ask, map a move step's zone and detect Spree. Actual
- * chooser/strict replay still belongs to the host replay gate. */
+ * chooser/strict replay still belongs to the XMage replay gate. */
 public final class ScenarioReplayDriverContractTest {
     private static final String SKIP = TestPlayer.TARGET_SKIP;
 
@@ -343,7 +343,7 @@ public final class ScenarioReplayDriverContractTest {
         // At active seat 1 the p1-first pair after a seat-1 cast is the
         // active player's OWN pair (Zidane, Wan Shi Tong): its first pass
         // queues nothing and its second resolves one object on seat 1's
-        // queue (ScenarioReplayWave4DriverTest pins the commands).
+        // queue (ScenarioReplayDriverAsksTest pins the commands).
         check(ScenarioReplay.passCommands(p1Pair, 2, 1).isEmpty(),
                 "the active seat 1's own p1-first pair queues nothing at its first pass");
 
@@ -595,11 +595,11 @@ public final class ScenarioReplayDriverContractTest {
         return m.invoke(null, args);
     }
 
-    /** The wave-5 (lb5-driver) ops: the copy-cost cast modes and the keyword
+    /** The copy-cost cast modes and the keyword
      * each elects, the prepared copy cast, the divided activation's scripted
      * "^X=" shares, the teamwork tap's recorded picks and the gained
      * tap-for-mana text a printed card does not carry. */
-    private static void wave5() throws Exception {
+    private static void copyCostOps() throws Exception {
         final String replay = "org.mage.test.oracle.ScenarioReplay";
         final String player = "org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer";
         for (String mode : new String[]{"prepared_copy", "conspired", "casualty", "teamworked"}) {
@@ -651,7 +651,7 @@ public final class ScenarioReplayDriverContractTest {
         check((Boolean) staticCall(replay, "isTapManaText", str, "{T}: Add {C}{C}."), "{T}: Add {C}{C}. is a tap-mana text");
         check(!(Boolean) staticCall(replay, "isTapManaText", str, "{1}, {T}: Add {G}"), "a mana-costed ability is not the shape");
         check(!(Boolean) staticCall(replay, "isTapManaText", str, "{T}: Draw a card."), "a draw is not a mana ability");
-        System.out.println("PASS wave-5 ops (copy-cost modes, prepared copy, divided activation shares, "
+        System.out.println("PASS copy-cost ops (copy-cost modes, prepared copy, divided activation shares, "
                 + "teamwork tap, gained tap-mana text)");
     }
 
@@ -763,7 +763,7 @@ public final class ScenarioReplayDriverContractTest {
         mustAttack();
         bargain();
         craft();
-        wave5();
+        copyCostOps();
         spellings();
         seatCounts();
     }

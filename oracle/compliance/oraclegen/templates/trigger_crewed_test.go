@@ -9,7 +9,7 @@ import (
 )
 
 // crewedTriggerCases is one row per newly served crew/saddle-perspective
-// recipe (ticket agent-20261009T174759Z-80a5bc9a): Canyon Vaulter and
+// recipe: Canyon Vaulter and
 // Reckless Velocitaur's Saddled/Crewed pairs, and Balthier and Fran's
 // crew-by-source attack trigger. probe is the permanent the cause activates
 // (and, for the attack sub, attacks with) and must appear in the item's

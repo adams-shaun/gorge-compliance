@@ -3,9 +3,8 @@ package adopt
 import "testing"
 
 // TestRatchetVerdictClassifiesOnlyStaleGrowth pins the classification the
-// per-ticket gate's stale-only path depends on for TestCertificationRatchet
-// (ops/scripts/gate_affected.sh reads the GORGE-CERT-RESULT line from
-// ratchetVerdict): only a per-set outstanding GROWTH whose set is entirely
+// a merge gate's stale-only path depends on for TestCertificationRatchet
+// (it reads the GORGE-CERT-RESULT line from ratchetVerdict): only a per-set outstanding GROWTH whose set is entirely
 // stale verdicts is "stale-only" (a moved scenario sha a host XMage replay
 // clears, not a fix round). A structural ratchet fail -- a set no longer
 // committed, a declared level that shrank, a committed set missing from the

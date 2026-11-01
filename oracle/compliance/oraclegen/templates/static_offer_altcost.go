@@ -1,5 +1,5 @@
 // Level-B observation of a MayPlay static that prices the cast it permits
-// (wave-5 group X, CR 118.9 / 601.2b,f). Two shapes:
+// (CR 118.9 / 601.2b,f). Two shapes:
 //
 //   - a GRANTING static over cards exiled with the source whose exile is the
 //     source's own graveyard replacement (Valgavoth, Terror Eater: "If a card

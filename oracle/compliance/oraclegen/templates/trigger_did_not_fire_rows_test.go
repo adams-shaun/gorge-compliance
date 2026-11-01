@@ -1,6 +1,6 @@
-// Class G12 (wave 4, "trigger did not fire"): the recipe caused the right
+// class ("trigger did not fire"): the recipe caused the right
 // trigger mode but the trigger's filter or condition rejected the cause. One
-// row per census row (.ds4/levelb-census/wave4 G12); a served row must
+// row per census row; a served row must
 // generate and show its own trigger on the stack, and a residue row is pinned
 // to its skip reason, so a regression and an improvement both fail here.
 package templates
@@ -54,23 +54,22 @@ func TestG12TriggerFilterRows(t *testing.T) {
 		{"Fire Lord Zuko", "trigger#0.1", served},
 		// A graveyard trigger whose sibling would return the card first.
 		{"Fear of Infinity", "trigger#0.1", served},
-		// Residue (see the lb4-g12 report).
-		// A donate prelude (lb4w2-gen): p1 controls a p0-owned permanent.
+		// Residue.
+		// A donate prelude: p1 controls a p0-owned permanent.
 		{"Coveted Falcon", "trigger#0.0", served},
 		// Oblivious Bookworm trigger#0.2 left this residue: a Static$ True
 		// line never reaches the stack, so TestBookkeepingClassRows
 		// (trigger_bookkeeping_test.go) pins it through its turn-3 consumer.
 		// Mikey & Don, Party Planners trigger#0.0 is served by a subtype creature
-		// probe (lb4w2-gen); its Static$ True rider never reaches the stack, so
+		// probe; its Static$ True rider never reaches the stack, so
 		// TestLevelBGeneratorResidueRowsServed pins it by the +1/+1 counter instead.
 		// The back face's optional each-upkeep transform: the declined-setup
-		// cause declines its turn-1 and turn-2 firings (lb5-driver).
+		// cause declines its turn-1 and turn-2 firings.
 		{"Avatar Aang", "trigger#1.0", served},
-		// The prepared-copy cast through Hallway Heckler, a carrier XMage holds
-		// (lb4w2-gen); the XMage driver casts it by its prepare-spell name
-		// since lb5-driver.
+		// The prepared-copy cast through Hallway Heckler, a carrier XMage holds;
+		// the XMage driver casts it by its prepare-spell name.
 		{"Codie, Ravenous Codex", "trigger#0.0", served},
-		// Buried Treasure's mana spent on the probe (lb4w2-gen).
+		// Buried Treasure's mana spent on the probe.
 		{"Smaug, Wicked Worm", "trigger#0.1", served},
 	} {
 		t.Run(tc.name, func(t *testing.T) {

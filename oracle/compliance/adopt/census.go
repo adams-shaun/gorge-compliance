@@ -1,8 +1,7 @@
-// Package adopt turns the compliance data into the set-adoption queue
-// (docs/design/2026-10-03-rules-engine-lasagna-design.md section
-// 11.3): the primitive impact table (C5), one ticket per finding class
-// (C4), honest tournament scoping (C7) and the per-set / per-format status
-// dashboard with its shrink-only ratchet (C8).
+// Package adopt turns the compliance data into the set-adoption queue:
+// the primitive impact table, one ticket draft per finding class, tournament
+// scoping and the per-set / per-format status dashboard with its shrink-only
+// ratchet.
 //
 // Everything is derived from committed data -- the XMage manifests, the
 // printed lists, oracle/compliance/formats.json, the verdicts and triage clusters

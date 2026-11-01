@@ -1,5 +1,5 @@
 // Victims for the dies-other filters a placed-and-destroyed creature cannot
-// satisfy (ticket g17, wave 3 "trigger with no recipe"): a victim with
+// satisfy ("trigger with no recipe"): a victim with
 // toughness below 1, a face-down victim, an attacking victim and a Clue
 // victim. Each shape has a turn-1 cause:
 //

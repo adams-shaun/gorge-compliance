@@ -1,12 +1,12 @@
 // Package adjudicate gives every xengine item that diverged from a follower a
-// three-way verdict (gorge, XMage, Forge) with the existing section 8.1
-// patterns (oraclediff.ThreeWay), and groups the gorge_suspect findings into
-// ticket drafts (DESIGN xengine section 4.1, 10 O3). It adds no comparator and
+// three-way verdict (gorge, XMage, Forge) with the existing patterns
+// (oraclediff.ThreeWay), and groups the gorge_suspect findings into
+// ticket drafts. It adds no comparator and
 // no pattern: the three pairwise legs are oraclediff.CompareOpts, unchanged.
 //
 // Nothing here rules: a GF|X item yields a note, never an xmage_wrong ruling or
-// a verdict row (Forge design D4: Forge runs gorge's own scripts, so Forge
-// agreeing with gorge is weak evidence). Output stays off-repo; the one thing
+// a verdict row (Forge runs gorge's own scripts, so Forge
+// agreeing with gorge is weak evidence). Output stays out of the tree; the one thing
 // that can be committed, the -ledger, carries our labels and field names only.
 package adjudicate
 
@@ -17,7 +17,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// The adjudication labels (DESIGN section 4.1). An item whose pattern has no
+// The adjudication labels. An item whose pattern has no
 // label (F harness, INCONSISTENT, AGREE3) keeps the class xe-6 gave it.
 const (
 	LabelGorgeSuspect   = "gorge_suspect"

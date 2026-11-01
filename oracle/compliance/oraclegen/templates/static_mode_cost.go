@@ -1,5 +1,4 @@
-// Level-B observations for the damage- and cost-reading static modes (ticket
-// levelb-remaining-static-modes): damage a prevention source cannot stop
+// Level-B observations for the damage- and cost-reading static modes: damage a prevention source cannot stop
 // (unconditional and combat-only), the attack/block taxes an untapped or
 // attacking Archangel of Tithes prices onto the opponent's combat pairs, and
 // the two ManaConvert shapes the creature-spell one does not cover. The

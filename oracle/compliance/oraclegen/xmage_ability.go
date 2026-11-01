@@ -1,11 +1,11 @@
-// XMage ability-text derivation (hypothesis H1,
+// XMage ability-text derivation (see
 // docs/design/2026-10-05-compliance-level-b.md section 2.1).
 //
 // XMage's TestPlayer selects an activated ability by a prefix of its printed
 // rule text -- activateAbility(turn, step, player, "{2}, {T}") -- so a level-B
 // activate scenario must carry that prefix outside the scenario body (which
 // rules' runner decodes strictly). The mapping is kept in its own file so the
-// L6 driver ticket can adjust it without touching the template:
+// driver side can adjust it without touching the template:
 //
 //   - The k-th oracle line that is an ACTIVATED-ABILITY line maps to the k-th
 //     non-keyword AB$ in IR order, and that line's text before its first ": "

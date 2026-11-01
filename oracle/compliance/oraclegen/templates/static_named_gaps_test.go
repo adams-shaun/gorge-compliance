@@ -8,9 +8,9 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// TestStaticG7BackFaceGraveyardOfferServed: Emet-Selch, Unsundered
+// TestStaticBackFaceGraveyardOfferServed: Emet-Selch, Unsundered
 // static#1.0 (Hades, Sorcerer of Eld's "During your turn, you may play cards
-// from your graveyard") was the G7 named gap "graveyard probe is exiled by
+// from your graveyard") was the named gap "graveyard probe is exiled by
 // the card's own Moved replacement when setup places it". The measured cause
 // was the face, not the replacement: a fixture's setup graveyard placement
 // does not run replacements, but the offer observation placed the card on
@@ -19,7 +19,7 @@ import (
 //
 // (The Lunar Whale static#0.1 left this slice earlier, at lb-setupparity:
 // static_offer_self_attack_test.go.)
-func TestStaticG7BackFaceGraveyardOfferServed(t *testing.T) {
+func TestStaticBackFaceGraveyardOfferServed(t *testing.T) {
 	const name, key = "Emet-Selch, Unsundered", "static#1.0"
 	reg := testutil.CorpusRegistry(t)
 	c, ok := reg.Lookup(name)

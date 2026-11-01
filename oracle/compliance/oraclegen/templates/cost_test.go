@@ -237,7 +237,7 @@ func TestCostStaticProfilesAndOpponentGap(t *testing.T) {
 	for _, req := range levelb.Requirements(c) {
 		if req.Key == "static#0.0" {
 			// The graveyard-cast raise is served by an opponent's flashback
-			// cast (cost_raise_chosen.go, lb4-gcost).
+			// cast (cost_raise_chosen.go).
 			if req.Sub != "static.cost" || req.Gap != "" {
 				t.Fatalf("Aven Interrupter requirement = %+v, want served static.cost", req)
 			}
@@ -252,7 +252,7 @@ func TestCostStaticProfilesAndOpponentGap(t *testing.T) {
 
 // A gorge that ignores the reduction cannot cast at the reduced price. The
 // generator still returns the item (never a Skip), so the failed cast is a
-// divergence for the host pass rather than a hidden gap. The card is rebuilt
+// divergence for the XMage pass rather than a hidden gap. The card is rebuilt
 // with one inert static in place of its reduction so the slot still exists.
 func TestCostStaticFailedCastStaysAGeneratedItem(t *testing.T) {
 	reg := loadGenRegistry(t)

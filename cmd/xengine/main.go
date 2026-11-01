@@ -1,5 +1,5 @@
-// Command xengine drives the cross-engine full-game differential harness
-// (DESIGN xengine): gorge plays explore-bot games, each game is lowered to one
+// Command xengine drives the cross-engine full-game differential harness:
+// gorge plays explore-bot games, each game is lowered to one
 // oracle tape scenario a follower (XMage, Forge) replays, and every
 // difference is classified and written as a repro directory.
 //
@@ -27,8 +27,8 @@
 // -xmage leaves the cards XMage spells differently out of the decks. sweep-plan lists the SET/CHUNK pairs of a sweep root that
 // have no .done marker (scripts/xengine-sweep.sh). adjudicate gives the
 // items one follower diverged on a three-way pattern (oraclediff.ThreeWay) from both followers' diffs, writes DIR3/findings.jsonl,
-// patterns.tsv, notes.md and a tickets/<cluster>.md draft per gorge_suspect cluster; -ledger adds the compact ledger shards. All of it is off-repo. Follower output stays
-// outside the repository.
+// patterns.tsv, notes.md and a tickets/<cluster>.md draft per gorge_suspect cluster; -ledger adds the compact ledger shards. Follower output is never committed: it goes outside the
+// repository or under the gitignored .oracle-build/.
 package main
 
 import (
@@ -41,8 +41,9 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
-// DefaultRoot is where host runs write by default.
-const DefaultRoot = "/mnt/sata/gorge-training/xengine"
+// DefaultRoot is where a run writes when -out is not given: a gitignored
+// directory relative to the repository root.
+const DefaultRoot = ".oracle-build/xengine"
 
 func main() {
 	if len(os.Args) < 2 {

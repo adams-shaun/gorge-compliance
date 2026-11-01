@@ -8,8 +8,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
-// The probe permanents the crew/saddle causes activate (ticket
-// agent-20261009T174759Z-80a5bc9a). Each carries the printed keyword the
+// The probe permanents the crew/saddle causes activate. Each carries the printed keyword the
 // cause taps with -- Crew on the Vehicle, Saddle on the Mount -- so its
 // expanded ability is found by the Keyword$ param, and each is a plain
 // permanent the setup can place beside the row's source. The tapped body is

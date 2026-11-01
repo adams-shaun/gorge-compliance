@@ -9,7 +9,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// The waterbend-cost activate items (ticket h7-driver-answers): the declined
+// The waterbend-cost activate items: the declined
 // tap-helpers ask is no longer scripted (XMage pays the waterbend generic
 // from the prefilled pool), and what XMage DOES ask is re-scripted by
 // activate_waterbend.go. Each case pins the item's xmage answers and proves

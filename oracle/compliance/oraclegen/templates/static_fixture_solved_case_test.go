@@ -6,7 +6,7 @@ import (
 )
 
 // Tests for the solved-Case static fixtures (static_fixture_solved_case.go,
-// level-B class G7 rows "static needs a solved Case"): the Case's own
+// level-B class rows "static needs a solved Case"): the Case's own
 // end-step "To solve" trigger must have fired and resolved before the
 // static's observation, so each test asserts the solve sequence is in the
 // scenario's steps and runs the served scenario through the engine.

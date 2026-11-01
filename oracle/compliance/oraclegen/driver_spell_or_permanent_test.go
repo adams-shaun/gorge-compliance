@@ -18,8 +18,7 @@ import (
 //
 // This is a STRUCTURAL pin, not a behavioural one: it checks that the
 // override's source text is present, not that XMage matches the answer at
-// run time. XMage cannot run in a seat (its H2 database fails to initialise
-// in the jail), so the behaviour is proved only by the controller's host
+// run time. XMage is not part of go test, so the behaviour is proved only by a
 // replay of the TLA Aang, Swift Savior scenario.
 func TestSpellOrPermanentPermanentHalfIsPinned(t *testing.T) {
 	source, err := os.ReadFile("../../xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java")

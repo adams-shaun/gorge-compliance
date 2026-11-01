@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # heavy-lock.sh [--wait S] [--mem M] [--name N] -- CMD...
 #
-# Runs CMD under an optional heavy-job lock. HEAVY_LOCK names a wrapper with
-# the maintainers' heavy.sh interface (`$HEAVY_LOCK heavy --wait S --mem M
-# --name N -- CMD...`, which sets GORGE_BROKER_CLASS for CMD); unset, CMD
-# runs directly and the lock options are ignored. gorge-compliance carries
-# no lock of its own: the passes are heavy (a JVM per XMage/Forge batch), so
-# on a shared box point HEAVY_LOCK at the box's lock.
+# Runs CMD under an optional heavy-job lock. HEAVY_LOCK names a wrapper called as
+# `$HEAVY_LOCK heavy --wait S --mem M --name N -- CMD...`, which sets
+# GORGE_BROKER_CLASS for CMD so a nested pass does not take the lock twice;
+# unset, CMD runs directly and the lock options are ignored. gorge-compliance
+# carries no lock of its own: the passes start a JVM per XMage or Forge batch,
+# so on a shared machine point HEAVY_LOCK at whatever serialises heavy jobs there.
 set -euo pipefail
 if [ -n "${HEAVY_LOCK:-}" ]; then
 	exec "$HEAVY_LOCK" heavy "$@"

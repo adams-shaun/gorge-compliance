@@ -409,7 +409,7 @@ func answersOf(m seatMap, g []game.Entry) ([]oraclegen.Answer, *truncation) {
 		case len(a.Rest) > 0:
 			return nil, unsupported(a.Kind + "_rest")
 		}
-		if !isAsk(a) {
+		if !isAsk(a) || isWindowTap(a) {
 			continue
 		}
 		ans := oraclegen.Answer{Kind: a.Kind, Pick: []string{}}
@@ -426,6 +426,13 @@ func answersOf(m seatMap, g []game.Entry) ([]oraclegen.Answer, *truncation) {
 		answers = append(answers, ans)
 	}
 	return answers, nil
+}
+
+// isWindowTap reports a mana-window ask answered by firing a mana ability. The
+// tap is lowered ahead of the cast or activation (manaTaps), so the replay pays
+// from its pool and no window opens to ask.
+func isWindowTap(a game.Entry) bool {
+	return len(a.Picks) == 1 && a.Picks[0].Kind == "activate" && len(a.Mana) == 1
 }
 
 // resolvePass lowers a pass that resolved an object and put a new object on

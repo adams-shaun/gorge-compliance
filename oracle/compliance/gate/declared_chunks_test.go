@@ -11,8 +11,7 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// declaredChunks is how many independent tests the compliance claim (spec
-// section 8: every set in oracle/compliance/declared.json meets its level at this
+// declaredChunks is how many independent tests the compliance claim (every set in oracle/compliance/declared.json meets its level at this
 // head) is sharded into. Run whole it was the package's pole: 15.3 s alone
 // at 4 vCPU and 27-34 s under gate contention (2026-10-12), of which ~5 s is
 // the shared corpus, ~1.3 s the root-wide gate tables and ~0.3-0.8 s each
@@ -61,8 +60,8 @@ func loadDeclaredClaim(t *testing.T) {
 		// that last compiled it) and caches the result per process. Bare
 		// LoadRegistry would instead fail hard on that absent cache, and the
 		// gate runs this package in parallel with ./engine/rules, the only other
-		// writer: that raced the cache into existence and failed the gate
-		// (cli-20261006T024354Z-e5dc4abb). A genuinely missing corpus still
+		// writer: that raced the cache into existence and failed the gate.
+		// A genuinely missing corpus still
 		// errors and fails the test. It is also the process-shared registry: a
 		// registry is read-only after open, and a fresh load per test cost
 		// ~600 MB and ~1 s.
@@ -122,8 +121,8 @@ func runDeclaredChunk(t *testing.T, i int) {
 			t.Errorf("%s:%s %s: %s", set, level, p.Card, p.Reason)
 		}
 	}
-	// The per-ticket gate's stale-only classifier reads this line (see
-	// CertVerdict and ops/scripts/gate_affected.sh): a chunk whose every problem is
+	// A merge gate's stale-only classifier reads this line (see
+	// CertVerdict): a chunk whose every problem is
 	// a stale verdict is a host XMage replay's to clear, not a defect to fix, so
 	// the gate requeues it instead of charging a fix round. Emitted on every
 	// run (go test prints it only for a failing test), so a non-stale problem,

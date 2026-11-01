@@ -115,7 +115,7 @@ func TestOracleOpeningHandCensusDeclines(t *testing.T) {
 	}
 }
 
-// TestOracleNamedHarnessCardsGenerate pins the cards this ticket fixed: each
+// TestOracleNamedHarnessCardsGenerate pins the cards this change fixed: each
 // must now produce a level-A scenario instead of landing in the .skips.jsonl.
 func TestOracleNamedHarnessCardsGenerate(t *testing.T) {
 	reg := oracleHarnessCorpus(t)
@@ -134,7 +134,7 @@ func TestOracleNamedHarnessCardsGenerate(t *testing.T) {
 		"Walk-In Closet // Forgotten Cellar",
 		// MKM splits. Push // Pull is excluded: its only half targets a tapped
 		// creature, which no fixture can put on the battlefield (there is no
-		// setup-tap facility), so it needs its own ticket.
+		// setup-tap facility), so it needs its own change.
 		"Cease // Desist", "Flotsam // Jetsam", "Fuss // Bother",
 		// Player-target zone bug.
 		"Cruelclaw's Heist", "Ruthless Negotiation", "Soul Search", "Aggressive Negotiations",

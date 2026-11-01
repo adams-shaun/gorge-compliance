@@ -1,13 +1,15 @@
 package templates
 
 import (
+	"maps"
+	"slices"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 )
 
-// TestCostStaticWaterbendXProbes covers the RaiseCost Cost$ Waterbend<X> rows
-// (ticket levelb-cost-waterbend-x): the cast ANNOUNCES X = 1 and pays a real
+// TestCostStaticWaterbendXProbes covers the RaiseCost Cost$ Waterbend<X> rows:
+// the cast ANNOUNCES X = 1 and pays a real
 // waterbend of one as one generic beyond the printed price (waterbend lets a
 // player tap artifacts and creatures for {1}, it never requires it, CR
 // 701.67a), and the spell's X-dependent effect reads that announced X.
@@ -18,10 +20,10 @@ import (
 // would fail there on an unconsumed answer rather than on the payment. The
 // test therefore runs two mutes of the same item:
 //
-//   - the announcement kept and the payment muted (the printed price) must
-//     FAIL with the static present: an engine or generator that stops
-//     enforcing the Waterbend<X> additional cost passes that cast and the
-//     observation fails;
+//   - the announcement kept and the payment muted (the printed price, and no
+//     Llanowar Elves to pay the rest in the mana window) must FAIL with the
+//     static present: an engine or generator that stops enforcing the
+//     Waterbend<X> additional cost passes that cast and the observation fails;
 //   - the same printed price with the announcement dropped must cast cleanly
 //     once the static is gone, so the failure above is the additional cost's
 //     and nothing else in the mute.
@@ -86,18 +88,27 @@ func TestCostStaticWaterbendXProbes(t *testing.T) {
 }
 
 // waterbendXMute drops the Waterbend<X> additional-cost payment from sc: the
-// cast step pays the printed price only, and with the announcement dropped it
-// also loses the "X = 1" answer and the X-dependent targets (without the
-// static the X-dependent slot bounds at zero).
+// cast step pays the printed price only. With the announcement kept the fixture's
+// Llanowar Elves goes too, and the decline of its waterbend-helper ask with it.
+// With the announcement dropped the step also loses the "X = 1" answer and the
+// X-dependent targets (without the static the X-dependent slot bounds at zero).
 func waterbendXMute(sc oraclegen.Scenario, name, printed string, keepX bool) oraclegen.Scenario {
 	out := sc
 	out.Steps = append([]oraclegen.Step(nil), sc.Steps...)
+	if keepX {
+		out.Setup = maps.Clone(sc.Setup)
+		p0 := out.Setup["p0"]
+		p0.Battlefield = slices.DeleteFunc(slices.Clone(p0.Battlefield), func(c string) bool { return c == "Llanowar Elves" })
+		out.Setup["p0"] = p0
+	}
 	for i, s := range out.Steps {
 		if s.Op != "cast" || s.Card != "p0:"+name {
 			continue
 		}
 		s.Mana = printed
-		if !keepX {
+		if keepX {
+			s.Answers = slices.DeleteFunc(slices.Clone(s.Answers), func(a oraclegen.Answer) bool { return len(a.Pick) == 0 })
+		} else {
 			s.Answers = nil
 			s.Targets = nil
 		}

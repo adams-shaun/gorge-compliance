@@ -788,3 +788,18 @@ func ops(l Lowered) []string {
 	}
 	return out
 }
+
+// A mana-window tap is lowered ahead of the activation, so the replay pays from
+// its pool and the ask that fired it has no answer; the X announcement keeps its.
+func TestAnswersOfSkipsWindowTaps(t *testing.T) {
+	x := game.Entry{Kind: "choose", Picks: []game.Pick{{Kind: "x", Label: "X = 1"}}}
+	tap := game.Entry{Kind: "choose", Picks: []game.Pick{{Kind: "activate", Ref: "p0:Swamp"}},
+		Mana: []game.ManaRec{{Ref: "p0:Swamp"}}}
+	answers, why := answersOf(seatMap{}, []game.Entry{x, tap})
+	if why != nil {
+		t.Fatal(why)
+	}
+	if len(answers) != 1 || !reflect.DeepEqual(answers[0].Pick, []string{"X = 1"}) {
+		t.Fatalf("answers %+v, want only the announcement", answers)
+	}
+}

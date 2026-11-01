@@ -1,4 +1,4 @@
-// Class G12 (wave 4, "trigger did not fire"): the recipe's causes fire the
+// class ("trigger did not fire"): the recipe's causes fire the
 // right trigger MODE but the trigger's own filter or condition rejects them,
 // so no scenario is emitted. tailTriggerCauses builds, per root cause, the
 // cause that satisfies the filter. triggerFires tries them only after every

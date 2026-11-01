@@ -3,9 +3,9 @@
 # (docs/design/2026-10-02-xmage-compliance-oracle-design.md §4-§5).
 #
 # Idempotent. Re-run after an XMAGE_REF bump. Everything lands under
-# $XMAGE_ORACLE_DIR (default /mnt/sata/gorge-training/xmageoracle); nothing in
-# the gorge tree changes. The build and the smoke test each run inside a
-# MemoryMax=7G user scope: this box allows 8 vCPU / 8 GB for the whole job.
+# $XMAGE_ORACLE_DIR (default .oracle-build/xmage, gitignored); nothing tracked
+# changes. The build and the smoke test each run inside a
+# MemoryMax=7G user scope.
 #
 #   scripts/xmage-oracle-setup.sh            # maven + clone + build + smoke + measure
 #   scripts/xmage-oracle-setup.sh --smoke    # smoke + measure only (already built)
@@ -13,14 +13,15 @@ set -euo pipefail
 
 repo=$(git rev-parse --show-toplevel)
 ref=${XMAGE_REF:-$(sed -n 's/^XMAGE_REF *?= *//p' "$repo/Makefile")}
-root=${XMAGE_ORACLE_DIR:-$(sed -n 's/^XMAGE_ORACLE_DIR *?= *//p' "$repo/Makefile")}
+root=${XMAGE_ORACLE_DIR:-$repo/$(sed -n 's/^XMAGE_ORACLE_DIR *?= *//p' "$repo/Makefile")}
+root=$(realpath -m "$root")
 mvn_version=3.9.11
 smoke_test=org.mage.test.cards.abilities.keywords.FlashbackTest
 [ -n "$ref" ] && [ -n "$root" ] || { echo "xmage-oracle-setup: XMAGE_REF/XMAGE_ORACLE_DIR unset" >&2; exit 2; }
-case "$root" in /tmp/*) echo "xmage-oracle-setup: $root is RAM-backed; use /mnt/sata" >&2; exit 2;; esac
+case "$root" in /tmp/*) echo "xmage-oracle-setup: $root is under /tmp, which is often RAM-backed; the build needs a directory on disk" >&2; exit 2;; esac
 mkdir -p "$root"
 mvn="$root/maven/bin/mvn"
-# A full JDK, user-local: the box's system Java is a runtime only (no javac,
+# A full JDK, user-local: a system Java may be a runtime only (no javac,
 # no ct.sym), and XMage compiles with --release 8, which needs ct.sym.
 jdk_major=17
 export JAVA_HOME="$root/jdk"
@@ -84,7 +85,7 @@ lines = [
     f"- per-test seconds (warm, excluding the slowest): median {med:.3f}, max {max(warm) if warm else -1:.3f}",
     f"- slowest test (includes card DB load): {cases[-1] if cases else -1:.3f} s",
     "",
-    "Spec §10 revisit trigger: warm median above 0.200 s or smoke peak RSS above 2560 MiB.",
+    "Targets: warm median above 0.200 s or smoke peak RSS above 2560 MiB.",
 ]
 open(f"{root}/MEASURE.md", "w").write("\n".join(lines) + "\n")
 print("\n".join(lines))

@@ -56,7 +56,7 @@ func TestStaticGatedGrantOffered(t *testing.T) {
 // "Copy target spell you control" is offered with a spell of p0's on the stack;
 // Adagia, Windswept Bastion's "copy target artifact or enchantment you
 // control" with an artifact of p0's on the battlefield. Both left the
-// "gated self grant is not offered in the gate-on fixture" skip (lb4-g7); no
+// "gated self grant is not offered in the gate-on fixture" skip; no
 // card in the 20 measured sets carries that skip any more. Earlier rows of
 // the fall-through table left it as their observations landed: Debris Field
 // Crusher (setup counters), Dawnsire (granted trigger) and Far Fortune, End

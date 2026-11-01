@@ -60,8 +60,7 @@ func tokensOnP0(s rules.OracleSnapshot, want string) []rules.OracleSnapPerm {
 
 // TestStateFixtureTokenRows pins the token fixture's served rows: the
 // scenario casts Dragon Fodder into being the creature tokens the static
-// selects, and the final snapshot shows the static's grant on them (ticket
-// cli-20261009T031407Z-8f4b4f49, level-B class G7).
+// selects, and the final snapshot shows the static's grant on them (level-B class).
 func TestStateFixtureTokenRows(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	goblin, ok := reg.Token("r_1_1_goblin")

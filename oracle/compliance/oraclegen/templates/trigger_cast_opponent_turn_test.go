@@ -1,4 +1,4 @@
-// Focused tests for the opponent-turn spell-cast causes this ticket adds: a
+// Focused tests for the opponent-turn spell-cast causes this change adds: a
 // SpellCast trigger with ValidActivatingPlayer$ You and OpponentTurn$ True
 // fires only on p0's own cast during p1's turn, so the cause passes to p1's
 // main phase, hands priority over, and casts an instant there.

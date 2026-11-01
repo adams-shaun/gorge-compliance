@@ -7,8 +7,8 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
-// Tests for the level-B static-row fixtures this ticket added (level-B class
-// G7 "static effect unobservable", rows file g7c-static-fixtures): the
+// Tests for the level-B static-row fixtures this change added (level-B class
+// "static effect unobservable", rows file g7c-static-fixtures): the
 // CantBlockBy blocker-filter search's Glimmer probe and its alive-lands
 // fixture for a characteristic-defining P/T, and the equip fixture's
 // "modified" host. Each test runs the row's own scenario, so a fix that

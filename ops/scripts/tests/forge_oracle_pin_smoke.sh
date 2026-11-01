@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # forge_oracle_pin_smoke.sh — prove the Forge oracle scripts refuse to run when
-# the pin invariant (DESIGN.md §7.3) fails, and that the javac-on-change stamp
+# the pin invariant fails, and that the javac-on-change stamp
 # works, without Java, git history, systemd or a Forge checkout.
 #
 # git, java, javac and systemd-run are stubs on PATH. The invariant: FORGE_REF

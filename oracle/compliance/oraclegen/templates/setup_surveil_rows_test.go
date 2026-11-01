@@ -8,7 +8,7 @@ import (
 )
 
 // The three stored `diverge` verdict rows whose only difference was
-// `setup p0.graveyard` (ticket D1, class level-B setup arrange fallback):
+// `setup p0.graveyard` (class level-B setup arrange fallback):
 // XMage's unscripted default sends the upkeep-surveil card to the graveyard,
 // so gorge's setup-drive fallback must too. generateServed pins the replay
 // against the live corpus; a generator regression that unserves a row fails

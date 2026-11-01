@@ -7,8 +7,8 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// TestOtherModeTriggerClassification pins the routing the "other mode" ticket
-// (cli-20261009T031408Z-a01003ef) added: LifeLost, a controller-scoped
+// TestOtherModeTriggerClassification pins the routing the "other mode" change
+// added: LifeLost, a controller-scoped
 // Discarded/DiscardedAll and an opponent/player Drawn now name a servable
 // sub-family, while an opponent-scoped discard (Tinybones' ValidCard$
 // Card.OppOwn) stays a gap because the recipe cannot make an opponent discard.

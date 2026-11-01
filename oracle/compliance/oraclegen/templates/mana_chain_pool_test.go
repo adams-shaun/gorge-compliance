@@ -1,10 +1,10 @@
 package templates
 
-// Task agent-20261009T091513Z-3c5153cc: the compliance pool probe for the
+// the compliance pool probe for the
 // ChooseColor -> DB$ Mana chain. ECL Foraging Wickermaw's generated
 // activate#0.0 scenario must show the produced mana in the pool at the
 // ACTIVATION checkpoint (step 0), matching XMage's frozen expectation -- the
-// D6 triage row "step 0 (activate) p0.pool: gorge \"\", xmage \"W\"".
+// Triage row "step 0 (activate) p0.pool: gorge \"\", xmage \"W\"".
 
 import (
 	"path/filepath"
@@ -59,6 +59,6 @@ func TestForagingWickermawChainPoolAtTheActivateCheckpoint(t *testing.T) {
 	}
 	snap := res.Snapshots[act+1]
 	if snap.Players[0].Pool != "W" {
-		t.Fatalf("pool at the activate checkpoint = %q, want W (the D6 XMage expectation)", snap.Players[0].Pool)
+		t.Fatalf("pool at the activate checkpoint = %q, want W (the XMage expectation)", snap.Players[0].Pool)
 	}
 }

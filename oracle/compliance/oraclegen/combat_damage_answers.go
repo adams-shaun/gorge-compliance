@@ -8,8 +8,8 @@ import (
 )
 
 // prependCombatDamageAnswers scripts XMage's combat-damage assignment dialog
-// for an attack+block pair whose damage the engine assigns deterministically
-// (agent 20261009T041408Z, cluster C2, combat half). The engine poses no
+// for an attack+block pair whose damage the engine assigns deterministically.
+// The engine poses no
 // decision for a trample attacker's assignment (engine/rules/combat.go caps every
 // blocker at lethal in declaration order and tramples the remainder), but
 // XMage poses getMultiAmountWithIndividualConstraints whenever the attacker
@@ -20,7 +20,7 @@ import (
 //
 // The dialog's messages are the BLOCKERS only, in block-declaration order --
 // the unassigned damage tramples to the defender by itself, and the defender
-// is never an option (HYPOTHESIS, labelled for the host replay batch; read
+// is never an option (HYPOTHESIS, labelled for the XMage replay; read
 // off CombatGroup's damageDivision build, not measured against a live
 // XMage). Each message consumes one "X=<n>" amount answer in order, so the
 // answers are one per blocker carrying the engine's own assignment. They are

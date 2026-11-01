@@ -42,8 +42,8 @@ func (f *familyFlag) String() string     { return strings.Join(*f, ",") }
 func (f *familyFlag) Set(s string) error { *f = append(*f, s); return nil }
 
 func main() {
-	mage := flag.String("mage", "/mnt/sata/gorge-training/xmageoracle/mage/Mage.Tests/src/test/java/org/mage/test", "XMage test source root")
-	out := flag.String("out", "/mnt/sata/gorge-training/xmagetests/gen", "output directory")
+	mage := flag.String("mage", ".oracle-build/xmage/mage/Mage.Tests/src/test/java/org/mage/test", "XMage test source root")
+	out := flag.String("out", ".oracle-build/xmagetests/gen", "output directory")
 	corpus := flag.String("cards", ".cards", "gorge .cards corpus directory")
 	commit := flag.String("commit", "", "write passing scenarios under this directory (scenarios/xmageport)")
 	xmIn := flag.String("xmage-in", "", "write XMage driver cross-check input (JSONL) for generated scenarios here")

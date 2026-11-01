@@ -1,6 +1,6 @@
 package main
 
-// Canned-cache tests for oraclediff adjudicate (plan P3-2 and P3-3). No
+// Canned-cache tests for oraclediff adjudicate (the three-way pass). No
 // engine runs here: adjudicate is a join, so every fixture is a t.TempDir
 // of committed verdict rows, forge-diff lines and the two caches, and the
 // V(F,X) leg is computed by the same CompareOpts the command uses.
@@ -34,8 +34,7 @@ var (
 
 func init() { fx21.Snapshots[0].Players[1].Life = 21; x21.Snapshots[0].Players[1].Life = 21 }
 
-// adjGorgeSnap is a gorge-vocabulary snapshot (what Forge's driver emits;
-// DESIGN section 6.7).
+// adjGorgeSnap is a gorge-vocabulary snapshot (what Forge's driver emits).
 func adjGorgeSnap(cp string) rules.OracleSnapshot {
 	return rules.OracleSnapshot{
 		Checkpoint: cp, Turn: 1, Step: "main1",
@@ -357,7 +356,7 @@ func TestAdjudicatePatterns(t *testing.T) {
 			t.Errorf("%s suggests a rule command %q", card, got)
 		}
 	}
-	// The contradictions are listed (section 8.2), and the corroboration
+	// The contradictions are listed, and the corroboration
 	// is a note, not one.
 	if got := byCard["FX Auto Card"].Contradiction; got != "xmage_wrong contradicted by FX|G" {
 		t.Errorf("FX Auto Card contradiction %q", got)
@@ -381,7 +380,7 @@ func TestAdjudicatePatterns(t *testing.T) {
 			skipped[r.Card] = r.Note
 		}
 	}
-	if got := skipped["Gorge Boom Card"]; !strings.HasPrefix(got, "the three pairwise verdicts match no section 8.1 row") {
+	if got := skipped["Gorge Boom Card"]; !strings.HasPrefix(got, "the three pairwise verdicts match no three-way pattern") {
 		t.Errorf("gorge harness skip note %q", got)
 	}
 	if got := skipped["Stale Card"]; !strings.HasPrefix(got, "verdict is for an older scenario") {
@@ -389,22 +388,22 @@ func TestAdjudicatePatterns(t *testing.T) {
 	}
 }
 
-func TestAdjudicateD1BLedgerInRunDir(t *testing.T) {
+func TestAdjudicateRunLedgerInRunDir(t *testing.T) {
 	f := newAdjFixture(t, []adjCase{
 		{it: adjItem("agree-a", "Agree Card", "cast-resolve"), forge: fx20, xmage: x20, gf: oraclediff.Verdict{Status: oraclediff.Agree}},
 	})
 	f.adjCommitted(t)
-	// D1=B: no -ledger, so the shards land next to forge-diff.jsonl, and
+	// -run-ledger: no -ledger, so the shards land next to forge-diff.jsonl, and
 	// nothing is written under compliance/.
-	if err := runAdjudicate(f.args("-d1", "B", "-ledger", "compliance/adjudication")); err != nil {
+	if err := runAdjudicate(f.args("-run-ledger", "-ledger", "compliance/adjudication")); err != nil {
 		t.Fatal(err)
 	}
 	if _, err := os.Stat("compliance/adjudication"); !os.IsNotExist(err) {
-		t.Fatalf("D1=B wrote into the repository: %v", err)
+		t.Fatalf("-run-ledger wrote into the repository: %v", err)
 	}
 	got := patternByCard(t, f.dir)
 	if got["Agree Card"] != "AGREE3" {
-		t.Errorf("D1=B ledger pattern %q", got["Agree Card"])
+		t.Errorf("-run-ledger ledger pattern %q", got["Agree Card"])
 	}
 }
 
@@ -412,7 +411,6 @@ func TestAdjudicateBadArgs(t *testing.T) {
 	for _, args := range [][]string{
 		{},
 		{"-scenarios", "s", "-forge-diff", "f", "-xmage-cache", "x"},
-		{"-scenarios", "s", "-forge-diff", "f", "-xmage-cache", "x", "-oracle-ref", "r", "-d1", "A"},
 	} {
 		if err := runAdjudicate(args); err == nil {
 			t.Errorf("runAdjudicate(%v) accepted", args)
@@ -466,10 +464,10 @@ func sortStrings(s []string) {
 	}
 }
 
-// TestAdjudicateMarkReview: -mark-review under D1=C sets Review: pending --
-// and nothing else -- on the section 8.2 contradiction rows, hand ruling or
+// TestAdjudicateMarkReview: -mark-review by default sets Review: pending --
+// and nothing else -- on the contradiction rows, hand ruling or
 // automatic; the agree + GX|F contradiction and a corroborated row are not
-// touched; under D1=B nothing is written.
+// touched; under -run-ledger nothing is written.
 func TestAdjudicateMarkReview(t *testing.T) {
 	gfOK := oraclediff.Verdict{Status: oraclediff.Agree}
 	f := newAdjFixture(t, []adjCase{
@@ -510,7 +508,7 @@ func TestAdjudicateMarkReview(t *testing.T) {
 		t.Errorf("GX|F agree row marked: %+v", r)
 	}
 	// A GF|X on an already-ruled xmage_wrong row corroborates it: no
-	// reopening (D4: Forge agreement alone never reopens a ruling).
+	// reopening (Forge agreement alone never reopens a ruling).
 	if r := hand("GF Ruled Card"); r.Review != "" || r.Status != compliance.StatusXMageWrong || r.RulingID != "xmage-test-auto" {
 		t.Errorf("corroborated row marked: %+v", r)
 	}
@@ -519,19 +517,19 @@ func TestAdjudicateMarkReview(t *testing.T) {
 		t.Errorf("unrelated row marked: %+v", r)
 	}
 
-	// D1=B: the same run marks nothing.
+	// -run-ledger: the same run marks nothing.
 	f2 := newAdjFixture(t, []adjCase{
 		{it: adjItem("fx-h", "FX Hand Card", "cast-resolve"), forge: fx21, xmage: x21, gf: gfDiverge()},
 	})
 	f2.adjCommitted(t)
 	before := verdictBytes(t, f2.verdicts)
-	if err := runAdjudicate(f2.args("-d1", "B", "-ledger", "compliance/adjudication", "-mark-review")); err != nil {
+	if err := runAdjudicate(f2.args("-run-ledger", "-ledger", "compliance/adjudication", "-mark-review")); err != nil {
 		t.Fatal(err)
 	}
 	if string(before) != string(verdictBytes(t, f2.verdicts)) {
-		t.Errorf("D1=B -mark-review changed the verdict directory")
+		t.Errorf("-run-ledger -mark-review changed the verdict directory")
 	}
 	if _, err := os.Stat("compliance/adjudication"); !os.IsNotExist(err) {
-		t.Fatalf("D1=B wrote into the repository: %v", err)
+		t.Fatalf("-run-ledger wrote into the repository: %v", err)
 	}
 }

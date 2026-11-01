@@ -1,5 +1,4 @@
-// Two more Level-B observations for AddReplacementEffect$ statics (ticket
-// agent-20261010T160945Z-e004cc3c), served from staticGrantedReplacementItem:
+// Two more Level-B observations for AddReplacementEffect$ statics, served from staticGrantedReplacementItem:
 //
 //   - a granted DamageDone PREVENTION whose body is DB$ ReplaceDamage (the
 //     Level-up Hedron-Field Purists' two LEVEL statics): the card sits on the

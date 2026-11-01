@@ -7,7 +7,7 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// The level-B rows (ticket lb-lilah) whose gorge half was an Effect-delivered
+// The level-B rows whose gorge half was an Effect-delivered
 // Event$ Moved redirect with a SubAbility$/RememberChanged$ body: each
 // resolving spell used to land in the graveyard behind a loud Note. The
 // rider-level behaviour (plotted, delayed return, time counters, buyback,

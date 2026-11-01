@@ -9,7 +9,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// TestCostStaticSVarAmountProbes covers the G11 SVar-amount cost-static rows
+// TestCostStaticSVarAmountProbes covers the SVar-amount cost-static rows
 // that needed a fixture the probe could not build:
 //
 //   - Rottenmouth Viper announces the Sac<X> count itself (Amount$ X over

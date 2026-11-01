@@ -1,4 +1,4 @@
-// Modal-trigger target fixtures (wave 5, class T: Ferocification).
+// Modal-trigger target fixtures (class T: Ferocification).
 //
 // A triggered ability whose effect is a Charm ("choose one --" over targeted
 // modes) carries its targets on the MODE SVars, not on the Execute$ body, so

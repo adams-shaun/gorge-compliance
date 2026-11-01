@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-// XMage cannot start in the seat, so pin the setup callback and its production
+// XMage is not part of go test, so pin the setup callback and its production
 // helper: setup counters must be followed by a layer refresh before snapshot
 // serializes P/T. The executable XMage-side test covers the helper's result.
 func TestDriverReappliesSetupCountersBeforeSnapshot(t *testing.T) {

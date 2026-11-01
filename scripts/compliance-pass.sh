@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 # compliance-pass.sh [SET...] -- one XMage compliance pass over the named sets
 # (default: every set with a printed list under oracle/compliance/printed/), writing
-# verdict rows into compliance/verdicts.
-#
-# docs/design/2026-10-03-rules-engine-lasagna-design.md section
-# 11.3 C1; the oracle itself is
+# verdict rows into oracle/compliance/verdicts.
+# The oracle's design is
 # docs/design/2026-10-02-xmage-compliance-oracle-design.md.
 #
 # Per set:
@@ -19,7 +17,7 @@
 #                          into oracle/compliance/verdicts; the cache keeps XMage's
 #                          results, so a later pass replays nothing it has
 #                          already seen
-# then oraclediff triage -apply (shape rulings, section 11.3 C2: rows a
+# then oraclediff triage -apply (shape rulings: rows a
 # oracle/compliance/rulings/<id>.json ruling matches are classified, the rest are
 # clustered by shape under oracle/compliance/triage/), a summary (scripts/compliance-summary.py) and `oraclediff status` per set.
 #
@@ -34,7 +32,7 @@
 #   COMPLIANCE_PASS_CACHE        XMage result cache (default
 #                                $XMAGE_ORACLE_DIR/cache/<ref12>-<driver12>)
 #   COMPLIANCE_PASS_NO_WRITE=1   compute verdicts without merging them
-#   COMPLIANCE_PASS_WAIT/_MEM    heavy.sh --wait / --mem (20000 s / 16G)
+#   COMPLIANCE_PASS_WAIT/_MEM    heavy-lock --wait / --mem (20000 s / 16G)
 set -euo pipefail
 
 repo=$(cd "$(dirname "$0")/.." && pwd)
@@ -48,8 +46,10 @@ fi
 
 ref=${XMAGE_REF:-$(sed -n 's/^XMAGE_REF *?= *//p' Makefile)}
 root=${XMAGE_ORACLE_DIR:-$(sed -n 's/^XMAGE_ORACLE_DIR *?= *//p' Makefile)}
+root=$(realpath -m "$root")
+export XMAGE_ORACLE_DIR=$root
 [ -n "$ref" ] && [ -n "$root" ] || { echo "compliance-pass: XMAGE_REF/XMAGE_ORACLE_DIR unset" >&2; exit 2; }
-[ -d .cards ] || { echo "compliance-pass: no .cards corpus here (make fetch-cards compile-cards)" >&2; exit 2; }
+[ -d .cards ] || { echo "compliance-pass: no .cards corpus here (make cards)" >&2; exit 2; }
 
 if [ $# -eq 0 ]; then
 	set -- $(for f in oracle/compliance/printed/*.json; do basename "$f" .json; done)
@@ -60,7 +60,6 @@ drv=$(sha256sum "$driver" | cut -c1-12)
 out=${COMPLIANCE_PASS_OUT:-$root/pass}
 cache=${COMPLIANCE_PASS_CACHE:-$root/cache/${ref:0:12}-$drv}
 mkdir -p "$out" "$cache"
-[ -d /mnt/sata/gorge-training/gotmp ] && export GOTMPDIR=/mnt/sata/gorge-training/gotmp
 export GOMEMLIMIT=${GOMEMLIMIT:-8GiB}
 
 go build -o "$out/oraclediff" ./cmd/oraclediff

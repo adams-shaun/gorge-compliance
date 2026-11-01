@@ -17,7 +17,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 )
 
-// The calibration gate (DESIGN §11 R1): a follower proceeds to a sweep only
+// The calibration gate: a follower proceeds to a sweep only
 // if at least GateWindows of its lower_ok windows were followed (neither
 // harness nor decision_shape). The share of 2-turn tape prefixes followed
 // decides whether the follower runs whole games (O4): below GateTape it is

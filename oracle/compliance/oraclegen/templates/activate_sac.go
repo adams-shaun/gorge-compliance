@@ -43,7 +43,7 @@ func sacSelf(tok string) bool {
 // "creature", and a qualifier that makes a plain fixture illegal (a token, an
 // attachment, a suspected status) is rejected by sacFilterClause before the
 // lookup. Every name is a card the corpus carries and XMage's card database
-// carries; the host pass confirms the XMage side (spec hypothesis H4).
+// carries; the XMage pass confirms the XMage side.
 var sacFixtureCards = map[string][]string{
 	"creature":     {"Llanowar Elves", "Grizzly Bears", "Elvish Mystic", "Nessian Asp", "Craw Wurm", "Siege Wurm"},
 	"artifact":     {"Ornithopter", "Sol Ring", "Arcane Signet"},

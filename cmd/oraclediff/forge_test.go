@@ -275,6 +275,16 @@ func TestForgeDiffForgeHarnessRow(t *testing.T) {
 	}
 }
 
+func TestRefuseRepoPathAllowsTheIgnoredBuildDir(t *testing.T) {
+	root, _ := filepath.Abs("../..")
+	if err := refuseRepoPath(filepath.Join(root, ".oracle-build", "forge", "runs", "r")); err != nil {
+		t.Errorf("under .oracle-build: %v", err)
+	}
+	if err := refuseRepoPath(filepath.Join(root, ".oracle-buildx", "r")); err == nil {
+		t.Error("a sibling of .oracle-build was accepted")
+	}
+}
+
 // TestForgeDiffNeverWritesRepoOrVerdicts: -out inside the repository (above
 // all oracle/compliance/verdicts) is refused before anything is created.
 func TestForgeDiffNeverWritesRepoOrVerdicts(t *testing.T) {

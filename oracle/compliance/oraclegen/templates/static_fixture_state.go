@@ -1,6 +1,5 @@
 // Fixtures for the states a continuous static's condition or count reads that
-// cards in the seats cannot stand in for (ticket
-// cli-20261009T031407Z-8f4b4f49, level-B class G7 "static effect
+// cards in the seats cannot stand in for (level-B class "static effect
 // unobservable"): creature tokens on the battlefield, an Equipment attached
 // to the affected permanent, unspent mana left in the pool, and a raid count
 // the turn's own attack makes true. Each builder returns one staticFixture

@@ -33,7 +33,7 @@ func classifyCastTrigger(f *cards.Face, t *cards.Trigger) (sub string, ok bool) 
 			}
 			return "trigger.spell-cast", true
 		case "player.opponent+active":
-			// agent-20261009T174731Z-42d5e0f4: "an opponent casts a spell
+			// "an opponent casts a spell
 			// during their turn" (Unstable Glyphbridge's back face). The
 			// engine's player-spec grammar now reads the dotless `Active`
 			// clause, so its own cast-family cause passes to p1's main

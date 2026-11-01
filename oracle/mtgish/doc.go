@@ -13,8 +13,8 @@
 //
 // The mtgish data (.mtgish/<ref>/mtgish.lines.json, `make mtgish-fetch`) is
 // decoded generically (node.go): mtgish's JSON is tagged unions, and only the
-// variants the normalisers map are named in code. The FDN and BLB rows are
-// held to a committed ledger (known/<SET>.tsv) by TestMtgishLedger.
+// variants the normalisers map are named in code. Every row of the
+// corpus is held to a committed ledger (known/T1.tsv to T4.tsv) by TestMtgishLedger.
 //
 // docs/design/2026-10-20-mtgish-crosscheck.md has the design: the tiers, the
 // triage classes, the pin and the ratchet.

@@ -9,7 +9,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
-// The cause-driven self recipes (ticket g5d, Transformed / Cycled /
+// The cause-driven self recipes (Transformed / Cycled /
 // LandPlayed): each names the one way a p0-only turn-1 scenario causes the
 // trigger's own event. Engine support already exists (engine/rules/trigmatch
 // TransformedMatches, cycledMatches, landPlayedMatches); this is purely the

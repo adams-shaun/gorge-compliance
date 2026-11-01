@@ -9,7 +9,7 @@ import (
 )
 
 // grantedActivatedRows are the appendix rows a granted non-mana activated
-// ability observation serves (levelb-static-granted-abilities): the recipient
+// ability observation serves: the recipient
 // probe (or the source's host, for an Aura/Equipment grant) is offered the
 // activation, labelled with the ability's rule text.
 var grantedActivatedRows = []struct{ card, key, label string }{

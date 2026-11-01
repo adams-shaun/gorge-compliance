@@ -124,7 +124,7 @@ var reflexiveB = map[string]string{
 // noEffectAPIB are APIs that are not game effects: a choice whose result a
 // later effect reads, or a layout spacer. They map to nothing; the mtgish
 // side's matching choices (ChooseLeftOrRight, ChooseEvenOrOdd, ChooseASector,
-// the pile and look-at actions) map to nothing too (unit C1).
+// the pile and look-at actions) map to nothing too.
 var noEffectAPIB = []string{
 	"ChooseDirection", "ChooseEvenOdd", "ChooseSector", "BlankLine",
 	// Separating piles is a choice (what happens to a pile is its own

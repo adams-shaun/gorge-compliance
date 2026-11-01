@@ -11,7 +11,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// Legality statics on a host other than the card itself (spec section 7):
+// Legality statics on a host other than the card itself:
 // an Aura's "enchanted creature can't attack / can't block" (Pacifism), and
 // a creature's "can't be blocked by <filter>" (Gate Colossus's power-2-or-
 // less, Stromkirk Noble's Humans). Like the self shapes in

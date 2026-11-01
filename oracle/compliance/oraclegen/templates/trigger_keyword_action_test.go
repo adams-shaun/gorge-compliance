@@ -1,5 +1,4 @@
-// Ticket agent-20261009T160937Z-c135e2b0 (level-B keyword-action trigger
-// recipes): one real card per sub-family the new recipes serve. Each row's
+// Level-B keyword-action trigger recipes: one real card per sub-family the new recipes serve. Each row's
 // requirement must generate, play through gorge, and show the row's own
 // trigger (by slot) on the stack; a control replay with the card removed must
 // not.

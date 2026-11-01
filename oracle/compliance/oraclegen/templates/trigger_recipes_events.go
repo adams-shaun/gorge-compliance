@@ -9,8 +9,8 @@ import (
 )
 
 // Probe cards for the event recipes, each tried in order like the lists in
-// trigger_recipes.go (spec hypothesis H4: a gorge PlaysThrough test picks the
-// winner and the host replay confirms it exists in XMage).
+// trigger_recipes.go (a gorge PlaysThrough test picks the
+// winner and the XMage replay confirms it exists in XMage).
 var (
 	// Opt ({U}, scry 1, draw a card) and Preordain ({U}, scry 2, draw a
 	// card) scry with one top-or-bottom answer; Consider ({U}, surveil 1,

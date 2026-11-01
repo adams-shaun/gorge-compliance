@@ -10,7 +10,7 @@ import (
 // mayYes must not force-answer a declined payment-tap ask. The tap changes
 // which mana the cast spends; a forced tap leaves gorge pool mana floating
 // where a pool-paid cast spends everything, and the two engines then disagree
-// at the cast checkpoint (level-B D6: The Wandering Rescuer, Lofty Dreams).
+// at the cast checkpoint (level B: The Wandering Rescuer, Lofty Dreams).
 // The empty fallback answer is the aligned behaviour: both engines pay the
 // whole cost from the pool.
 func TestMayYesSkipsDeclinedTapPaymentAsks(t *testing.T) {

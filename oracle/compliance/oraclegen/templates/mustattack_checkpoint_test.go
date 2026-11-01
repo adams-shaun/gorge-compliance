@@ -5,7 +5,7 @@ import (
 )
 
 // The four level-B MustAttack verdict rows whose pass_to-to-declare-attackers
-// checkpoint diverged (agent-20261009T172754Z-e2838eed): XMage's
+// checkpoint diverged: XMage's
 // checkAttackRequirements force-declares a must-attack creature when its
 // engine enters DECLARE_ATTACKERS, so the stored reference showed the card
 // tapped attacking where gorge's rules-faithful state (CR 508.1d -- the

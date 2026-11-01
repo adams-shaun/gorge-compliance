@@ -1,6 +1,5 @@
 // Level-B observation of a static whose AddStaticAbility$ grants a STATIC
-// ability, observed through the granted static's own effect (ticket
-// levelb-static-granted-abilities; the static slice the granted-ability,
+// ability, observed through the granted static's own effect (the static slice the granted-ability,
 // granted-trigger and donor templates left as the named skip). The outer
 // static is a plain Mode$ Continuous whose Affected$ names the HOST the
 // granted static lands on (the card itself for a chosen-mode Siege, the

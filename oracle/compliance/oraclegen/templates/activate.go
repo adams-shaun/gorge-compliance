@@ -1,4 +1,4 @@
-// Level-B activate template (spec
+// Level-B activate template (see
 // docs/design/2026-10-05-compliance-level-b.md section 2.1; ticket
 // L5). It serves the activate.battlefield and activate.mana requirements --
 // and the channel-style activate.hand and activate.graveyard ones -- with the
@@ -118,11 +118,9 @@ func activateAbility(reg *cards.Registry, f *cards.Face, name string, req levelb
 	}
 	// A charm whose root names no ValidTgts$ (an activated AB$ Charm) has no
 	// slots from AbilitySlotSpecs; its modes' own ValidTgts$ live in the
-	// Choices$ SVars. Try the plain (empty-slot) fixture first -- it serves
-	// the already-served charm rows byte-identically -- then each seeded slot
-	// set (charmSlotSets), because the engine chooses an activated charm's
-	// mode and target at RESOLUTION (engine/rules/cast_asks.go), so only the board
-	// needs a legal target.
+	// Choices$ SVars. Try the plain (empty-slot) fixture first, then each
+	// seeded slot set (charmSlotSets): the engine offers only a mode whose
+	// target is on the board, so the board decides which mode is announced.
 	if castFixtureShape(f, sa) && zone == "battlefield" {
 		// The target is made by a real cast, not by a fixture
 		// (activate_exiled_with_cast.go).
@@ -247,13 +245,14 @@ func activateWithFixture(reg *cards.Registry, f *cards.Face, name string, req le
 		p0.Battlefield = appendFixtureUnique(p0.Battlefield, name)
 	}
 	x := activationX(cost, saXMin(f.Abilities[abilityIndex]))
+	targetX := false
 	if tx, ok := targetManaValueX(reg, f.Abilities[abilityIndex], cost, fx.Targets()); ok {
 		// The announced X is the fixture target's mana value ("target
 		// creature card in your graveyard with mana value X"): any other X
 		// leaves the ability without a legal target, so neither engine
 		// can activate it. Price the pool at that X too.
 		if pool, gap := activationCostIn(cost, zone, name, tx); gap == "" {
-			x, mana = tx, pool
+			x, mana, targetX = tx, pool, true
 		}
 	}
 	addActivationCostFixtures(&p0, name, cost, x)
@@ -326,10 +325,9 @@ func activateWithFixture(reg *cards.Registry, f *cards.Face, name string, req le
 	} else if exOK {
 		targets = exTargets
 	}
-	// An activated charm's mode and target are chosen at RESOLUTION, not on
-	// activation: a Targets list on the activate step is rejected by the
-	// runner ("unused target(s) for this step"). The seeded fixture only makes
-	// a mode's target legal; the step itself carries none.
+	// An activated charm's step names no targets: the runner announces the
+	// first mode with a legal target and picks that target, which need not be
+	// the fixture's first. The seeded fixture only makes a mode's target legal.
 	if f.Abilities[idx].API == "Charm" {
 		targets = nil
 	}
@@ -373,11 +371,10 @@ func activateWithFixture(reg *cards.Registry, f *cards.Face, name string, req le
 		return oraclegen.Item{}, false
 	}
 	if f.Abilities[idx].API == "Charm" && charmModeTargetUnchosen(res.Decisions) {
-		// The fixture left the chosen mode without a legal target (Lost
-		// Jitte's "Untap target land." on a board with no land). XMage
-		// chooses the mode and its target on activation (CR 602.2b, 601.2b-c)
-		// and offers no mode whose targets are missing, so the scenario
-		// cannot activate there: try the next, target-seeded slot set.
+		// The fixture left the chosen mode without a legal target. Both
+		// engines choose the mode and its target on activation (CR 602.2b,
+		// 601.2b-c) and offer no mode whose targets are missing, so the
+		// scenario cannot activate there: try the next, target-seeded slot set.
 		return oraclegen.Item{}, false
 	}
 	// A hidden library search gorge's fallback declined: re-run taking the
@@ -409,6 +406,11 @@ func activateWithFixture(reg *cards.Registry, f *cards.Face, name string, req le
 	addActivationCostAnswers(it.XAnswers, activateStep, cost, name, res.Decisions, x)
 	costAnswers := append([]oraclegen.XAnswer(nil), it.XAnswers[activateStep][costAnswerStart:]...)
 	it.XAnswers[activateStep] = append(costAnswers, it.XAnswers[activateStep][:costAnswerStart]...)
+	// gorge offers only the X its target allows, a forced ask the XMage answers
+	// drop, but XMage's announcement ranges over what the mana can pay.
+	if targetX && !hasChoicePrefix(it.XAnswers[activateStep], "X=") {
+		it.XAnswers[activateStep] = insertAfterSkips(it.XAnswers[activateStep], oraclegen.XAnswer{Seat: 0, Kind: "choice", Value: "X=" + strconv.Itoa(x)})
+	}
 	// The hoist above puts the cost picks first; a setup permanent's as-enters
 	// choice must still lead the step, or XMage's dialog eats the cost answer.
 	oraclegen.HoistSetupChoices(it.XAnswers, activateStep)
@@ -672,8 +674,8 @@ func charmModeTargetUnchosen(ds []rules.OracleDecision) bool {
 		}
 		chosen := false
 		for _, t := range ds {
-			// A resolution-time charm target is posed as a target or as a
-			// choose ("tgts", "choice"): any pick at the step counts.
+			// A charm's target is posed as a target or as a choose ("tgts",
+			// "choice"): any pick at the step counts.
 			if t.Step == d.Step && t.Kind != "mode" && len(t.Picks) > 0 {
 				chosen = true
 			}

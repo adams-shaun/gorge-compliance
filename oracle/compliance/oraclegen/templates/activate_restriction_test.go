@@ -1,5 +1,4 @@
-// Tests for the activation-restriction preludes (ticket
-// cli-20261006T132127Z-088fce64). Each case drives a REAL corpus card whose
+// Tests for the activation-restriction preludes. Each case drives a REAL corpus card whose
 // activated ability is offered only when a restriction gate holds, and asserts
 // both that the generated item plays through gorge and that the setup actually
 // carries the prerequisite board the gate names (so a regression that drops the

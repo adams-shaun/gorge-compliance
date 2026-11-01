@@ -28,7 +28,7 @@ func kwSnap(cp string, keywords ...string) rules.OracleSnapshot {
 	}
 }
 
-// TestKeywordOptInComparesFlying pins the core of L10: two snapshots that
+// TestKeywordOptInComparesFlying pins the core of the opt-in: two snapshots that
 // differ only in a permanent's Flying agree without the opt-in and diverge
 // on the permanents field with it. This test CAN fail: it asserts the two
 // keyword lists actually differ before it asserts the opt-in behaviour.
@@ -58,7 +58,7 @@ func TestKeywordOptInComparesFlying(t *testing.T) {
 // TestKeywordOptInLeavesNoFieldOutputByteIdentical pins that the opt-in
 // changes nothing when no fields are requested: Canonical, Freeze and Meets
 // over a keyword-carrying snapshot are byte-identical to their nil-field
-// forms, matching what main produced before L10.
+// forms, matching what main produced before the opt-in.
 func TestKeywordOptInLeavesNoFieldOutputByteIdentical(t *testing.T) {
 	res := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
 		kwSnap("setup", "Flying", "First Strike"),

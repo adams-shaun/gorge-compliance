@@ -11,11 +11,11 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 )
 
-// bookkeepingClassRows is the wave-4 "bookkeeping static trigger" class
-// (operator decision 2026-10-13: a multi-turn template, no exemption): every
+// bookkeepingClassRows is the "bookkeeping static trigger" class
+// (a multi-turn template, no exemption): every
 // Static$ True record/reset/cleanup line of the Standard sets. Each names
 // what the served scenario must show. (Mikey & Don's Static$ may-play rider,
-// the class's tenth row, is served by lb4w2-gen's subtype probe and pinned by
+// the class's tenth row, is served by a subtype probe and pinned by
 // TestLevelBGeneratorResidueRowsServed.)
 var bookkeepingClassRows = []struct {
 	card, key string

@@ -1,5 +1,4 @@
-// The activate preludes a static fixture's afterSteps run (ticket
-// levelb-static-count-attachments). A static whose amount is a computed count
+// The activate preludes a static fixture's afterSteps run. A static whose amount is a computed count
 // the bare turn cannot make observable has two shapes the cast path cannot
 // reach: a signed "-X where X is your life total" on a Vehicle whose P/T the
 // snapshot prints only once the card is a creature (The Last Ride needs the

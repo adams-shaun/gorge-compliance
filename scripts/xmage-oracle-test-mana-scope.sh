@@ -4,8 +4,8 @@
 # Hidden Grotto (not the untapped Island, pool C) and Swamp#2 (not Swamp#1).
 # Requires the read-only XMage build, like the driver's other javac checks.
 set -euo pipefail
-root=${XMAGE_ORACLE_DIR:-/mnt/sata/gorge-training/xmageoracle}
-out=$(realpath -m "${1:-.ds4/scratch/mana-scope-driverout}")
+root=$(realpath -m "${XMAGE_ORACLE_DIR:-$(dirname "$0")/../.oracle-build/xmage}")
+out=$(realpath -m "${1:-.coverage/xmage-driver/mana-scope-driverout}")
 here=$(cd "$(dirname "$0")/.." && pwd)
 fixture="$here/oracle/xmageoracle/test/fixtures/mana-scope.jsonl"
 export JAVA_HOME="$root/jdk"

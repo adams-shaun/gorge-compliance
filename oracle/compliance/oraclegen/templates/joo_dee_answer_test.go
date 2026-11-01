@@ -15,7 +15,7 @@ import (
 // is the card, so it carries XMage's isCopy() filter "[no copy]"; the token
 // copy carries "[only copy]". A bare name (the pre-fix answer) leaves two
 // candidates and XMage's choice matcher then picks whichever it iterates
-// first -- the 2/2 flake this ticket fixes.
+// first -- the 2/2 flake this change fixes.
 //
 // This runs the real generator over the real corpus, so it pins the exact
 // answer the driver receives, not a synthetic decision.

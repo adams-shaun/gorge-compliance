@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Check the wave-4 driver asks (active p1 pass pair, battlefield move, game over,
+# Check the driver asks (active p1 pass pair, battlefield move, game over,
 # mixed must-attack, face-down attacker, declined dig, alternative cast, promised gift).
 # Requires the read-only XMage build, like the driver's javac checks.
 set -euo pipefail
-root=${XMAGE_ORACLE_DIR:-/mnt/sata/gorge-training/xmageoracle}
-out=${1:-.ds4/scratch/wave4-driverout}
+root=$(realpath -m "${XMAGE_ORACLE_DIR:-$(dirname "$0")/../.oracle-build/xmage}")
+out=${1:-.coverage/xmage-driver/driver-asks-driverout}
 here=$(cd "$(dirname "$0")/.." && pwd)
 export JAVA_HOME="$root/jdk"
 export PATH="$JAVA_HOME/bin:$PATH"
@@ -13,6 +13,6 @@ cp="$tests/target/test-classes:$tests/target/classes:$(< "$root/tests.cp")"
 mkdir -p "$out"
 javac -J-Xmx512m -nowarn -d "$out" -cp "$cp" \
   "$here/oracle/xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java" \
-  "$here/oracle/xmageoracle/test/org/mage/test/oracle/ScenarioReplayWave4DriverTest.java"
+  "$here/oracle/xmageoracle/test/org/mage/test/oracle/ScenarioReplayDriverAsksTest.java"
 java -Xmx512m -XX:ActiveProcessorCount=2 -Dlog4j.configuration=file:/dev/null -cp "$out:$cp" \
-  org.mage.test.oracle.ScenarioReplayWave4DriverTest
+  org.mage.test.oracle.ScenarioReplayDriverAsksTest

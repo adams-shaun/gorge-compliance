@@ -96,7 +96,7 @@ func TestKayaTriggerNeedsATokenTarget(t *testing.T) {
 func TestZoneChangeResiduesHaveNamedSkips(t *testing.T) {
 	reg := loadGenRegistry(t)
 	for _, tc := range []struct{ name, key, want string }{
-		// Zenos yae Galvus left this table in wave-4 lb4-gtrig: its
+		// Zenos yae Galvus left this table: its
 		// ChosenCardStrict row is served by chosenCardLeavesCauses
 		// (TestChosenCardLeavesRowGenerates).
 		// Hedge Shredder left this table when main implemented
@@ -129,8 +129,7 @@ func TestZoneChangeResiduesHaveNamedSkips(t *testing.T) {
 	// Hedge Shredder used to hold the "library to graveyard" named skip: its
 	// body's ChangeType$ Card.TriggeredCards was an unknown predicate, so the
 	// cause builder refused rather than generate a scenario whose body moves
-	// nothing. The predicate is registered now (ticket
-	// agent-20261009T090319Z-4d835724, commit 8e9f1097c), so the residue
+	// nothing. The predicate is registered now, so the residue
 	// builds its mill cause and the named skip is gone.
 	t.Run("Hedge Shredder", func(t *testing.T) {
 		c, ok := reg.Lookup("Hedge Shredder")
@@ -214,7 +213,7 @@ func TestTokenFilterIsServedOnlyForCreatureTokens(t *testing.T) {
 
 // TestTokenChangesZoneFilterGetsItsTokenMaker: a ChangesZoneAll token filter
 // is handled by tokenEnterCauses' one-token maker for every positive-token
-// base (ticket g17): the maker is the candidate cause and the trigger's own
+// base: the maker is the candidate cause and the trigger's own
 // matcher decides at replay what the token satisfies. The corpus sweep
 // behind the cause table found every positive-token ChangesZone filter on a
 // Creature/Card/Permanent base (e.g. Belladonna Took, Junk Winder), so the

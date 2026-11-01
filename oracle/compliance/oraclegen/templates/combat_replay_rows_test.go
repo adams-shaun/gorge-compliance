@@ -11,9 +11,8 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// The G6 combat-replay rows (census class "combat legality (cannot
-// attack/block, evasion)", .ds4/levelb-census wave3 ticket
-// g6b-combat-replay, 37 rows over 12 Standard sets) skipped because the
+// The combat-replay rows (census class "combat legality (cannot
+// attack/block, evasion)", 37 rows over 12 Standard sets) skipped because the
 // ordinary combat scenario could not replay. Four fixture serves clear them;
 // one focused test per serve, each covering rows from the file:
 //

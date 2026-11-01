@@ -6,7 +6,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
-// Unit D1: trigger event classes that had no mapping on either side, the
+// Trigger event classes that had no mapping on either side, the
 // gorge Forge trigger modes (T:Mode$) and the mtgish Trigger variants, mapped
 // together so the two spellings meet on one class. A class already in the
 // vocabulary (etb, ltb, zone, counters, ...) is reused wherever the event is

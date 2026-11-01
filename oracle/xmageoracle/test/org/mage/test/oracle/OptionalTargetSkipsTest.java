@@ -13,7 +13,7 @@ import mage.target.common.TargetPermanentOrPlayer;
 import org.mage.test.player.TestPlayer;
 
 /** No database or AI: executable contract checks on the pinned XMage classes.
- * Actual chooser/strict replay still belongs to the host replay gate. */
+ * Actual chooser/strict replay still belongs to the XMage replay gate. */
 public final class OptionalTargetSkipsTest {
     private static final String SKIP = TestPlayer.TARGET_SKIP;
 

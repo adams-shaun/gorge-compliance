@@ -1,0 +1,142 @@
+# The oracles
+
+This page says what each check of gorge sees, what it can't see, and how to run it. Read it
+to decide how much a passing check tells you. Run commands from the repository root after
+the [setup](../README.md#setup).
+
+| Check | Compares gorge with | Unit | Plays a game? | Blocks CI? |
+|---|---|---|---|---|
+| [Hand scenarios](#hand-scenarios) | Oracle text and the Comprehensive Rules, as read by an author | One card's behaviour | Short script | Yes |
+| [XMage ports](#xmage-ports) | XMage's own test assertions | One XMage test | Short script | Yes |
+| [XMage verdicts](#xmage-verdicts) | XMage's engine | One generated scenario per card or ability | Short script | Yes, on committed verdicts |
+| [Forge adjudication](#forge-adjudication) | Forge's engine | The same scenarios | Short script | No |
+| [xengine](#xengine) | XMage and Forge | A window or prefix of a full game | Full games, replayed in part | No |
+| [mtgish](#mtgish) | An independent encoding of each card | One card face's definition | No | Yes |
+
+## Hand scenarios
+
+**Checks:** one JSON file per card under `scenarios/oracle/`, written from the card's Oracle
+text and the rules without reading gorge's script for the card. Each scenario sets up a
+board, takes steps through gorge's runner and asserts what a player can observe: zones, life,
+P/T, counters, the stack, what is offered.
+
+**Can't check:** a card or behaviour nobody wrote a scenario for. An author can misread a card,
+and nothing here checks the author against another engine. `known-divergent/` lists scenarios
+that fail today, and `known-unconsumed/` lists scenarios that leave a scripted answer unused;
+each row is a known gorge problem, not a pass.
+
+**Run:** `make oracle-audit ORACLE_RUN=Fatal_Push`. A stale row, meaning gorge now passes,
+fails the test until the row is deleted.
+
+## XMage ports
+
+**Checks:** `scenarios/xmageport/` holds XMage's Mage.Tests methods, translated by
+`cmd/xmageport` and run on gorge. The expectations come from XMage's assertions.
+
+**Can't check:** what XMage's tests don't cover. The translator refuses what it can't express,
+including multiplayer and commander tests, because the runner plays two seats. Passing tests
+only are committed, along with `known_bug` rows that must keep failing
+(`cmd/xmageport/known_bugs.tsv`).
+
+**Run:** `make oracle-audit`. To regenerate, run `go run ./cmd/xmageport -mage <Mage.Tests test
+root> -out <dir>`, which reads an XMage checkout.
+
+## XMage verdicts
+
+**Checks:** `oraclediff gen` writes scenarios per card from the set's manifest:
+one per card at level A, and at level B one more per activated ability, trigger, static and
+attack or block. The Java driver in `oracle/xmageoracle` replays each in XMage, and `oraclediff
+diff` compares the two engines' snapshots at each checkpoint, writing a verdict in
+`oracle/compliance/verdicts/`. Disagreements are triaged by shape (`oracle/compliance/rulings/`,
+`oracle/compliance/triage/`), and `oracle/compliance/ratchet.json` holds each set's outstanding
+count so it can only fall.
+
+**Can't check:**
+
+- State the snapshot doesn't compare, or a field the two engines name differently.
+- Boards beyond the scenario: a scenario has few cards, and interactions between cards go
+  untested at both levels.
+- Bugs XMage shares with gorge. Agreement isn't proof, and a `xmage_wrong` ruling rests on
+  a person's reading of the rules.
+- A requirement no template can generate, which is reported as a `template gap`. An unsupported
+  card can't be generated at all.
+- Unfinished XMage sets: a card XMage lacks needs a hand scenario instead.
+
+XMage answers a choice the script didn't expect using its AI, so a row can flip on a rerun:
+replay a scenario twice before believing a flip.
+
+CI doesn't run XMage. `TestDeclaredSetsCompliantChunkNN` and `TestCertificationRatchet` check that
+gorge at the pin still meets each committed verdict's frozen expectation. A stale verdict
+needs a replay, covered in the [runbook](../oracle/validation/oracle/README.md).
+
+**Run:** `make compliance-pass SETS=BIG` replays only stale scenarios and writes verdicts.
+`LEVEL=B` selects level B. Set `COMPLIANCE_PASS_NO_WRITE=1` to compute without writing.
+
+## Forge adjudication
+
+**Checks:** the same scenarios replayed in Forge through a driver in
+[our Forge fork](https://github.com/adams-shaun/forge) (branch `oracle-harness`), giving each
+scenario a pattern: `AGREE3`, `FX|G` (a likely gorge bug), `GF|X`, `GX|F` or `G|F|X`. Forge's
+output stays out of the tree because Forge is GPL-3.0. The pass writes a ledger of gorge's own
+vocabulary to `oracle/compliance/adjudication/`, which holds no committed rows today.
+
+**Can't check:** a wrong card script. gorge compiles Forge's scripts, so gorge and Forge agreeing
+says little: `GF|X` can be a shared script bug. Forge never changes a verdict and isn't a CI gate.
+
+**Run:** the XMage pass first, at the same level, then Forge:
+
+```sh
+LEVEL=B make compliance-pass SETS=BIG
+scripts/forge-pass.sh BIG
+```
+
+A pass over named sets writes partial ledger shards, so treat it as a survey. Add `--force` to
+replay every request. The comparison with XMage reads XMage's result cache and skips what isn't
+there, with the reason in `adjudicate-report.jsonl`. A scenario with a fresh verdict is never
+replayed, so a new build's cache stays empty until scenarios go stale, and the pass then reports
+`no cached XMage result` for them.
+
+## xengine
+
+**Checks:** gorge plays full games with a bot that explores its options, between two-colour decks drawn
+from a set's supported cards and weighted toward the least-exercised ones. Each game is cut
+into windows and prefixes that XMage and Forge replay, and each difference is classified
+and written as a repro directory. It reaches board states no scenario sets up. A coverage
+ledger records which cards each sweep exercised and compared.
+
+**Can't check:** windows it can't lower. In a 2-game FDN sweep on 2026-10-31, 25 of 44 windows
+were refused, and of the 19 replayed, 5 in XMage and 1 in Forge came back as a `decision_shape`
+difference, with 2 and 3 as `harness`, so a follower can fail to express a position without any
+engine being wrong. A sweep rules on nothing and commits nothing. Its findings are leads for a person.
+
+**Run:** `make xengine-sweep SETS=FDN CHUNKS=1 GAMES=2`, then read
+`.oracle-build/xengine/seed1/SUMMARY.md`. A sweep resumes where it stopped. It needs `jq`, and
+waits while two or more JVMs are running.
+
+## mtgish
+
+**Checks:** [mtgish](https://github.com/i5jb/mtgish) (MIT) encodes every card from its Oracle text.
+`cmd/mtgishxc` normalises its definitions and gorge's compiled IR to one token summary per
+face, in four tiers (T1 characteristics, T2 ability shape, T3 targets, T4 effect verbs), and
+diffs them. It finds a wrong card script that no scenario has exercised yet. Each difference is
+triaged as `forge-bug`, `gorge-compile`, `mtgish-bug`, `equivalent` or `digital-variant` in
+`oracle/mtgish/known/`, and `TestMtgishLedger` holds the corpus to that ledger in both directions.
+
+**Can't check:** behaviour. No game is played, so a correct definition gorge executes wrongly passes.
+The summary is coarse: a wrong amount where one side has no literal doesn't show.
+
+**Run:** `make mtgish-fetch mtgish-xc` writes `.coverage/mtgish/report-ALL.md` and runs the ledger.
+FDN and BLB, the sets the dirac kernel plays, get tables of their own. The data carries Oracle text and stays in the gitignored `.mtgish/`.
+
+## What the XMage and Forge oracles need
+
+| Build | Command | Default directory | Size (2026-10-31, `du -sh`) |
+|---|---|---|---|
+| XMage | `make xmage-oracle-setup` | `.oracle-build/xmage` | 1.1 GB for the source and JDK, plus Maven's downloads |
+| Forge | `make forge-oracle-setup` | `.oracle-build/forge` | 850 MB for the source and its Maven cache |
+
+The setup scripts download a JDK and Maven and need `curl`, `git`, `python3`, `flock`, `/usr/bin/time`
+and systemd user scopes (`systemd-run --user`), which also cap the JVMs when they run. Set
+`XMAGE_ORACLE_DIR` and `FORGE_ORACLE_DIR` to share one build across clones. Forge's driver uses
+XMage's JDK, so build XMage first. Passes start a JVM per batch; on a shared machine, set
+`HEAVY_LOCK` to whatever serialises heavy jobs there (`scripts/heavy-lock.sh` has the interface).

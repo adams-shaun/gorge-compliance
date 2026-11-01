@@ -1,5 +1,4 @@
-// Level-B observations for the state-reading static modes (ticket
-// levelb-remaining-static-modes): the mana pool across a step end, damage
+// Level-B observations for the state-reading static modes: the mana pool across a step end, damage
 // across the cleanup step, the legend rule over duplicate permanents, a copy
 // spell pointed at an uncopyable spell, and a counter that never lands on an
 // enchanted host. Every item proves its claim the way the other static

@@ -1,4 +1,4 @@
-// Focused tests for the CheckSVar$ gate setups this ticket adds to
+// Focused tests for the CheckSVar$ gate setups this change adds to
 // activationSVarPrelude: the legendary-combat-damage prelude (FIN Blitzball)
 // and the artifact-sacrifice prelude (MKM Detective's Satchel). Each drives a
 // REAL corpus card whose activated ability is offered only when the gate

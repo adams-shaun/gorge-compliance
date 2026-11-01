@@ -46,7 +46,7 @@ func TestTriggerAttackPreludeCensus(t *testing.T) {
 	//
 	// Giant Beaver (Saddle 3) was the last skip ("trigger attack activation did
 	// not fire"): its attack trigger targets Creature.SaddledThisTurn, and until
-	// D8 recorded the saddler that target set was empty, so the trigger had no
+	// The diverge row recorded the saddler that target set was empty, so the trigger had no
 	// legal target and the prelude could not be built. With the saddler recorded
 	// the scenario serves, so the census is 51/51 and there are no skips.
 	if served != 51 || len(skips) != 0 {

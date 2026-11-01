@@ -11,10 +11,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/** No database or game: pins the wave-4 driver asks (the lb4w2-driver
- * branch). Each block names the Level B row it clears. Run
- * scripts/xmage-oracle-test-wave4-driver.sh; the replay itself is a host gate. */
-public final class ScenarioReplayWave4DriverTest {
+/** No database or game: pins the driver asks. Each block names the Level B row it clears. Run
+ * scripts/xmage-oracle-test-driver-asks.sh; the replay itself is a real replay. */
+public final class ScenarioReplayDriverAsksTest {
     private static void check(boolean condition, String message) {
         if (!condition) {
             throw new AssertionError(message);
@@ -50,7 +49,7 @@ public final class ScenarioReplayWave4DriverTest {
         declinedDig();
         alternativeCast();
         promisedGift();
-        System.out.println("PASS wave-4 driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
+        System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
                 + " face-down attacker, declined dig, alternative cast, promised gift");
     }
 

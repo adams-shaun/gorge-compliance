@@ -10,7 +10,7 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// Setup-and-snapshot parity rows (ticket cli-20261009T031409Z-a76de35a, the
+// Setup-and-snapshot parity rows (the
 // level-B "counters/speed in setup" and "saga lore at setup" classes): each
 // subtest generates one row's item and replays it gorge-side, asserting the
 // effect the scenario's comparison rests on. A subtest whose generator change

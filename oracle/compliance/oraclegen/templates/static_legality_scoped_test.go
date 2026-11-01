@@ -8,8 +8,8 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 )
 
-// The bearer- and filter-scoped combat-legality templates
-// (cli-20261009T041714Z-d0f325e1). Each row's generated item is replayed in
+// The bearer- and filter-scoped combat-legality templates.
+// Each row's generated item is replayed in
 // gorge; the test then proves the observation is not vacuous three ways: the
 // restricted expectation inverted FAILS with the engine's own message, the
 // row's control (the source unattached/uncast/absent, the gate one card

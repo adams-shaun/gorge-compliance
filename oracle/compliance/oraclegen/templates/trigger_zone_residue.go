@@ -1,4 +1,4 @@
-// Causes for the zone-change residue shapes (ticket g17, wave 3 "trigger
+// Causes for the zone-change residue shapes ("trigger
 // with no recipe"): a "when the chosen creature leaves" trigger
 // (ChosenCardStrict), a library-to-graveyard trigger, and a
 // "from anywhere" put-into-the-graveyard trigger. Each has a turn-1 cause:
@@ -179,11 +179,11 @@ func selfETBChoosesOpposingCreature(f *cards.Face) bool {
 // choicesAsTargetAnswers rewrites the item's object "choice" answers as
 // "target" answers naming the decision's exact pick: Zenos's ETB "choose a
 // creature an opponent controls" is a target ask in XMage, so a choice-queue
-// answer is consumed by the wrong ask (measured lb4-gtrig: "Found wrong
+// answer is consumed by the wrong ask (measured: "Found wrong
 // choice command ... TargetOpponent"). A player pick stays a choice:
 // Shinryu's "choose an opponent" is XMage's player.choose over a
 // TargetOpponent, which reads the choice queue by player name (strict replay,
-// lb4w2-3seat: "Missing CHOICE def ... TargetOpponent" with the pick queued
+// "Missing CHOICE def ... TargetOpponent" with the pick queued
 // as a target).
 func choicesAsTargetAnswers(xa [][]oraclegen.XAnswer, ds []rules.OracleDecision) [][]oraclegen.XAnswer {
 	for step := range xa {

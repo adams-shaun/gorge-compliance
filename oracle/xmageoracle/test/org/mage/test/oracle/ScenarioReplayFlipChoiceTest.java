@@ -12,7 +12,7 @@ import org.mage.test.player.TestPlayer;
 /** Executable check of the driver's scripted coin-flip results (Mana Crypt's
  * unscripted upkeep flip: "AssertionError: Missing FLIP COIN RESULT def for
  * turn 1, step UPKEEP, PlayerA"), without H2 or a full game. Run
- * scripts/xmage-oracle-test-flip-choice.sh; the replay itself is a host gate.
+ * scripts/xmage-oracle-test-flip-choice.sh; the replay itself is a real replay.
  * This exercises the exact flipCoinResult consumer with a queue populated as
  * queueSetupChoices ("setup_flip") and scripted ("flip") do; the addCard/build
  * integration is covered only by the XMage batch replay. */

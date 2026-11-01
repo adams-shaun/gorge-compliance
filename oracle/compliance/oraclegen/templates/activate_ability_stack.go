@@ -1,5 +1,4 @@
-// Ability-stack target fixtures for the level-B activate template (ticket
-// agent-20261009T085207Z-c99a362b, level B activate rows whose target is an
+// Ability-stack target fixtures for the level-B activate template (level B activate rows whose target is an
 // ACTIVATED or TRIGGERED ability PENDING on the stack: Gogo, Kirol, Peter
 // Parker's Camera, Echo, Scientist Supreme of A.I.M.). The engine already
 // offers such objects (engine/rules/target_legal.go stackKindAdmits); the gap was
@@ -61,7 +60,7 @@ type abilityStackPlan struct {
 // Activated/Triggered/SpellAbility): the five level-B rows this serves. A
 // spell-kind stack target (Instant/Sorcery -- the spell precast's shape) and
 // any mixed or multi-slot chain keep the ordinary path, which still skips;
-// widening this is the sibling spell-stack tickets' work, not ours.
+// widening this is the sibling spell-stack templates' work, not this one's.
 func abilityStackPlanOf(reg *cards.Registry, sa *cards.SA, slots []oraclegen.Slot) *abilityStackPlan {
 	if sa == nil || len(slots) != 1 {
 		return nil

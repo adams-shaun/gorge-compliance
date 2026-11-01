@@ -8,7 +8,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/adopt"
 )
 
-// runImpact prints the primitive impact table (section 11.3 C5): every
+// runImpact prints the primitive impact table: every
 // unsupported primitive, the tournament cards it blocks per declared-target
 // format and the sets implementing it unlocks, ranked by format.
 func runImpact(dir string, top int, asJSON bool) error {

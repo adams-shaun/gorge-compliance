@@ -115,7 +115,7 @@ func TestTriggerFilterGapsAreNamed(t *testing.T) {
 		// (the predicates joined effects' vocabulary); the named-gap property
 		// is pinned on carriers whose predicates are still unknown.
 		{"Providence of Night", "trigger#0.0", "CostsHybridMana"},
-		// Ares, God of War's attacking-victim row is served by the g17
+		// Ares, God of War's attacking-victim row is served by the
 		// mid-combat destroy cause (trigger_victim_specials.go); no census
 		// card names an unserved dying-victim qualifier any more.
 	} {

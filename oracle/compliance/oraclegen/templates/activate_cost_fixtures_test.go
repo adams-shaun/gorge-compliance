@@ -21,7 +21,7 @@ func TestActivateCostTokenShapes(t *testing.T) {
 		{"tapXType<1/Elf>", "", ""},
 		{"tapXType<2/Permanent>", "", ""},
 		// An announced tapXType<X/filter> count is served with one tapped
-		// catalogue permanent (cli-20261009T031408Z-5823e7de): the X is the
+		// catalogue permanent: the X is the
 		// tap election's own selection, never a posed ask.
 		{"tapXType<X/Artifact>", "", ""},
 		{"tapXType<2/Permanent.token>", "", ""},
@@ -34,7 +34,7 @@ func TestActivateCostTokenShapes(t *testing.T) {
 		{"tapXType<3/Creature.Other/other creature>", "", ""},
 		{"tapXType<1/Mount.Other;Vehicle.Other/another Mount or Vehicle>", "", ""},
 		// Lathril's ten-Elf tap: the catalogue now carries ten distinct
-		// no-ETB corpus Elves (ticket cli-20261009T031408Z-5823e7de r5).
+		// no-ETB corpus Elves.
 		{"tapXType<10/Elf>", "", ""},
 		{"tapXType<10/Elf/Elves>", "", ""},
 		{"tapXType<X/Artifact/artifacts>", "", ""},

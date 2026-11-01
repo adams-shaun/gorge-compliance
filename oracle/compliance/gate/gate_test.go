@@ -25,7 +25,7 @@ func TestDeclaredFileIsWellFormed(t *testing.T) {
 	}
 }
 
-// TestGateRefusesSetWithoutPrintedList is section 11.3 C7: a set with no
+// TestGateRefusesSetWithoutPrintedList: a set with no
 // oracle/compliance/printed list cannot be declared, because the XMage manifest
 // the gate would fall back to omits the cards XMage lacks. Every other
 // problem is still reported, so status stays useful for such a set.

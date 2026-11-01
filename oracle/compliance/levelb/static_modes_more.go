@@ -1,5 +1,4 @@
-// Level-B static shapes for the remaining static modes (ticket
-// levelb-remaining-static-modes). Each reports the exact parameter shape the
+// Level-B static shapes for the remaining static modes. Each reports the exact parameter shape the
 // matching template in oracle/compliance/oraclegen/templates serves; any other
 // parameter keeps the requirement a named gap, so a shape a template cannot
 // observe never changes class silently. The modes whose engine behaviour is
@@ -38,9 +37,9 @@ var manaTypeLetter = map[string]string{
 }
 
 // serveStaticMode reports the classification for one static mode the
-// remaining-modes ticket serves or names. A served shape returns its
-// sub-family and ""; a mode this ticket owns whose shape no template observes
-// returns "" and a named gap; a mode the ticket does not own returns "" and
+// remaining-modes change serves or names. A served shape returns its
+// sub-family and ""; a mode this change owns whose shape no template observes
+// returns "" and a named gap; a mode the change does not own returns "" and
 // "" so the classifier's later chain runs unchanged.
 func serveStaticMode(f *cards.Face, st *cards.Static) (sub, gap string) {
 	gapSub := "static.gap:" + st.Mode
@@ -114,7 +113,7 @@ func serveStaticMode(f *cards.Face, st *cards.Static) (sub, gap string) {
 	case "manaconvert":
 		// The creature-spell form was already served by the classifier's
 		// mana-convert-creature-spells branch above; this case sees only the
-		// rest, of which this ticket serves the two extra shapes.
+		// rest, of which this change serves the two extra shapes.
 		if sub, ok := manaConvertExtraShape(st); ok {
 			return sub, ""
 		}
@@ -338,7 +337,7 @@ func cantPutCounterShape(st *cards.Static) bool {
 }
 
 // manaConvertExtraShape reports whether st is one of the two ManaConvert
-// shapes beyond the existing creature-spell one the ticket serves: the Case
+// shapes beyond the existing creature-spell one the change serves: the Case
 // spells (Case File Auditor) and the activated abilities of creatures you
 // control (Agatha's Soul Cauldron). Both share ManaConversion$ AnyType->AnyColor.
 func manaConvertExtraShape(st *cards.Static) (string, bool) {

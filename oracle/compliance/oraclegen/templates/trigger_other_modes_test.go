@@ -7,8 +7,8 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 )
 
-// otherModeTriggerCases is one real card per newly served "other mode" recipe
-// (ticket cli-20261009T031408Z-a01003ef): a life-loss trigger (Shock at the
+// otherModeTriggerCases is one real card per newly served "other mode" recipe:
+// a life-loss trigger (Shock at the
 // losing player), a discard trigger (Mind Rot making the controller discard)
 // and an opponent-draw trigger (Sign in Blood). probe is the card the cause
 // casts and must appear in the item's steps.

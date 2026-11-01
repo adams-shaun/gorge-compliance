@@ -4,7 +4,7 @@
 // and applies the level-A verdict-row checks to each generable requirement's
 // scenario. Every unmet requirement reports the level-A "no generated
 // scenario (...)" wording (or a row problem), so adopt.Bucket classifies it
-// unchanged (spec 2026-10-05-compliance-level-b.md section 4).
+// unchanged (docs/design/2026-10-05-compliance-level-b.md section 4).
 package gate
 
 import (

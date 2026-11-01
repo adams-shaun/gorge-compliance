@@ -9,8 +9,8 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// TestActivateLevelBRowsR5 serves nine example rows of the g10 activate class
-// this round (ticket cli-20261009T031408Z-5823e7de, round r5) cleared. Each
+// TestActivateLevelBExampleRows serves nine example rows of the activate class
+// this round cleared. Each
 // case first asserts the PRECONDITION the served scenario depends on -- the
 // filter or cost shape the mechanism serves -- then that the item generates
 // and the scenario plays through gorge with zero fails.
@@ -20,7 +20,7 @@ import (
 // first ("Equip—Pay 2 life.{2}"), so the mapping stays ambiguous by design
 // (oracle/compliance/oraclegen/xmage_ability_ambiguity_test.go). Only the word-led
 // alternate-cost shape (Bloodthorn Flail) is the printed prefix.
-func TestActivateLevelBRowsR5(t *testing.T) {
+func TestActivateLevelBExampleRows(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	for _, tc := range []struct {
 		name, key string

@@ -1,18 +1,18 @@
 # XMage compliance oracle — design (2026-10-02)
 
-> **Moved to gorge-compliance (2026-10-16).** This design was written in gorge
-> (later four-yay); paths below are as written then. Today:
+> **Moved to gorge-compliance (2026-10-16).** This design was written in gorge;
+> paths below are as written then. Today:
 > `engine/rules/testdata/oracle/` and `engine/rules/testdata/xmageport/` are this
 > repository's `scenarios/oracle/` and `scenarios/xmageport/` (gorge keeps nine
 > residual hand-scenario files as its runner contract check), their drivers
 > `rules.TestOracleAudit` / `rules.TestXMagePortScenarios` are `audit/`'s, and
-> `lab/X` / four-yay's `X` is `X` here. See README.md and docs/PINNING.md.
+> `lab/X` is `X` here. See README.md and docs/PINNING.md.
 
 Status: design, approved in conversation 2026-10-02. No code yet.
 
 Supersedes the Forge choice in
 [`2026-09-29-cross-engine-oracle-audit.md`](https://github.com/adams-shaun/gorge/blob/main/docs/design/ARCHIVE.md)
-and replaces the seeder's "Oracle-audit the next 25 validated cards" tickets
+and replaces the "Oracle-audit the next 25 validated cards" tickets
 once rollout ticket X10 lands. The scenario format and triage vocabulary of
 [`2026-09-27-oracle-text-card-audit.md`](https://github.com/adams-shaun/gorge/blob/main/docs/design/2026-09-27-oracle-text-card-audit.md)
 stay; this design generates scenarios instead of authoring them.
@@ -112,7 +112,7 @@ Committed in gorge (XMage-derived artefacts are MIT and credited in `NOTICE`):
 | `compliance` test `TestDeclaredSetsCompliant` | The CI gate (§8) |
 | `oracle/xmageoracle/` | Java driver source: `pom.xml` and one `ScenarioReplay` runner extending `CardTestPlayerBase`, reading scenario JSON lines on stdin and writing snapshot JSON lines on stdout. `make test` never builds it |
 
-Not committed, under `/mnt/sata/gorge-training/xmageoracle/`: the full XMage
+Not committed, under `XMAGE_ORACLE_DIR`: the full XMage
 clone at `XMAGE_REF`, a user-local Maven and `~/.m2`, the built jars and H2
 card database, and the run cache (snapshots keyed by scenario hash).
 
@@ -169,7 +169,7 @@ verdict does not depend on board state the card never touched.
 ## 8. Triage, rulings, fix tickets, and the CI gate
 
 **Triage.** Each `DIVERGE`/`DECISION` becomes a triage item, worked in batches
-by a review-tier seat that receives the Oracle text, the CR excerpts and both
+by a reviewer who receives the Oracle text, the CR excerpts and both
 snapshots, and (as in the W-series triage role) may read the script. Verdicts:
 
 | Verdict | Action |
@@ -187,8 +187,8 @@ unchecked.
 
 **Fix tickets** are seeded from committed `gorge_wrong` verdict rows grouped by
 shape: **one ticket per root cause**, listing every affected card. This
-replaces the git-excluded `.ds4/reward/defects.jsonl`, which seats wrote
-inside their own worktrees and which never reached the seeder (no
+replaces a git-excluded defects list, which earlier runs wrote
+inside their own worktrees and which never reached the queue (no
 `correct-defect` candidate was ever produced). When a fix merges, the next
 pass flips the affected verdicts to passing.
 
@@ -222,7 +222,7 @@ this test, not skip it.
 | X7 | `TestDeclaredSetsCompliant` and an empty `declared.json` | X5 | cheap |
 | X8 | FRA level-A pass: run, triage, file root-cause fix tickets; hand Oracle audit of the 16 cards XMage lacks; declare `FRA: A` when green | X0, X6, X7 | pipeline |
 | X9 | Level-B templates (trigger modes, statics, modes) and the IR ability inventory; declare `FRA: B` | X8 | mid |
-| X10 | Full-corpus incremental sweep on the heavy-job schedule; seeder integration (fix tickets from verdicts); retire the "Oracle-audit the next 25" seeder candidate | X8 | mid |
+| X10 | Full-corpus incremental sweep on the heavy-job schedule; fix tickets from verdicts; retire the "Oracle-audit the next 25" seeder candidate | X8 | mid |
 
 X0, X1, X2 and X3 are independent and start together. `engine/rules/oracle_run.go`
 (X3) and the `Makefile` pin (X0, X1) touch hot files; keep those changes small
@@ -230,7 +230,7 @@ and land them in sequence.
 
 ## 10. Revisit triggers
 
-The operator approved this design with "if it looks like there are problems,
+This design was approved with "if it looks like there are problems,
 we revisit". Stop and come back if:
 
 - X1 measures a warm XMage scenario well above 200 ms, or a JVM above 2.5 GB

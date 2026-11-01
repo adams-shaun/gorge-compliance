@@ -1,4 +1,4 @@
-// Focused test for the snow-covered presence this ticket adds: Roiling Canopy
+// Focused test for the snow-covered presence this change adds: Roiling Canopy
 // fires only when a Forest enters while you control five other Forests, and
 // the cause plays a Forest from hand -- so the setup carries the snow-covered
 // twins, whose distinct name keeps the played Forest's ref unambiguous.

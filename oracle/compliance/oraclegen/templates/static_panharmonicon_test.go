@@ -103,9 +103,9 @@ func TestStaticPanharmoniconNamedSkips(t *testing.T) {
 	reg := loadGenRegistry(t)
 	cases := []struct{ card, want string }{
 		{"Roaming Throne", "as-enters creature-type choice"},
-		// Cloud, Midgar Mercenary left this table (lb4w2-diverge): the
+		// Cloud, Midgar Mercenary left this table: the
 		// Equipment probe (panharmoniconEquippedItem) serves it.
-		// Splinter, Radical Rat left this table (lb4-g7): the changeling
+		// Splinter, Radical Rat left this table: the changeling
 		// fallback probe (Irregular Cohort) satisfies its Ninja filter.
 	}
 	for _, tc := range cases {

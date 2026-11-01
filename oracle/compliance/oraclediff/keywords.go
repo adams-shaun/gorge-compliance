@@ -38,8 +38,8 @@ func ValidateCompare(compare []string) error {
 // (gorge "First Strike", XMage "First strike"), so a permanent's keywords
 // are case-folded and intersected with this set: any keyword outside it
 // (Ward:2, a card-specific keyword) is ignored, since the two engines'
-// vocabularies for it are not yet aligned (spec 2026-10-05-compliance-level-b
-// section 2.3, hypothesis H5).
+// vocabularies for it are not yet aligned (docs/design/2026-10-05-compliance-level-b.md
+// section 2.3).
 var evergreenKeywords = map[string]bool{
 	"flying":         true,
 	"first strike":   true,
@@ -57,8 +57,7 @@ var evergreenKeywords = map[string]bool{
 }
 
 // namedKeywords is the wider, opt-in vocabulary of permanent keyword
-// abilities whose names the two engines agree on (spec 2026-10-05-compliance-
-// level-b section 2.3). It is the evergreen set plus the named-ability
+// abilities whose names the two engines agree on (docs/design/2026-10-05-compliance-level-b.md section 2.3). It is the evergreen set plus the named-ability
 // keywords a permanent can carry, which are compared by NAME only: gorge's
 // "Ward:PayLife<2>" and XMage's "ward&mdash;Pay 2 life." both fold to "ward".
 // Flash is a plain word whose name both engines spell identically after

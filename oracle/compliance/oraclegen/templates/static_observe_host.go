@@ -1,7 +1,7 @@
 // Scenario mistakes the continuous-static template used to make: a fixture
 // prelude that casts a card the probe already is, and an effect that lands on
-// the permanent an Aura or Equipment is attached to rather than on a probe
-// (ticket levelb-static-not-observable-shapes). Every helper here only adds a
+// the permanent an Aura or Equipment is attached to rather than on a probe.
+// Every helper here only adds a
 // candidate or widens what counts as observed after the existing paths failed,
 // so a row served before keeps its scenario bytes.
 package templates

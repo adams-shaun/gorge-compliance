@@ -41,10 +41,9 @@ func returnTappedPrelude(reg *cards.Registry, cost string) (conditionPrelude, bo
 // charmSlotSets lists the candidate target-slot sets for an activated AB$
 // Charm whose root names no ValidTgts$: the union of every Choices$ mode's
 // slots first, then each mode's slots alone (one legal mode is enough for the
-// offer). nil when the ability is not a charm or no mode names a target. The
-// engine chooses an activated charm's mode AND target at RESOLUTION
-// (engine/rules/cast_asks.go), so these slots only seed the board -- the activate
-// step itself carries no targets.
+// offer). nil when the ability is not a charm or no mode names a target. These
+// slots only seed the board: the activate step carries no targets, and the
+// runner announces a mode with a legal target and picks that target.
 func charmSlotSets(f *cards.Face, sa *cards.SA) [][]oraclegen.Slot {
 	if sa == nil || sa.API != "Charm" {
 		return nil

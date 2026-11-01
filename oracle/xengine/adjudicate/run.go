@@ -47,7 +47,7 @@ type Row struct {
 	FXField string `json:"fx_field,omitempty"`
 }
 
-// Finding is a Row with the values and repro the ticket draft quotes.
+// Finding is a Row with the values and repro the change draft quotes.
 type Finding struct {
 	Row
 	Item         oraclegen.Item

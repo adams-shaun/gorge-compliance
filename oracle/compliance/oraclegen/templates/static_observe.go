@@ -1,5 +1,5 @@
 // The characteristics a continuous static can move besides P/T and evergreen
-// keywords (ticket levelb-static-cda-types-control): a card's own
+// keywords: a card's own
 // characteristic-defining P/T, a type or colour change, and a control change.
 // Every one is an ordinary field of the frozen permanents line, so a served
 // item compares it with no opt-in; what this file decides is only whether

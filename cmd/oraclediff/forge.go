@@ -1,7 +1,6 @@
 package main
 
-// The Forge oracle's gorge side (docs: .ds4/forge-oracle/DESIGN.md sections
-// 5.2, 7.1, 7.2).
+// The Forge oracle's gorge side.
 //
 //	oraclediff forge-export [-cards .cards] -scenarios scen.jsonl -out forge-req.jsonl
 //	oraclediff forge-diff   [-cards .cards] -req forge-req.jsonl [-forge forge.jsonl]
@@ -36,14 +35,15 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// defaultForgeOracleDir is the host's off-repo Forge state (DESIGN section
-// 4.2), used when FORGE_ORACLE_DIR is unset.
-const defaultForgeOracleDir = "/mnt/sata/gorge-training/forgeoracle"
+// defaultForgeOracleDir is the gitignored directory holding the Forge build
+// and caches, relative to the repository root, used when FORGE_ORACLE_DIR is
+// unset (scripts/forge-oracle-setup.sh writes it).
+const defaultForgeOracleDir = ".oracle-build/forge"
 
 // forgeRequest is one line of forge-req.jsonl. The Item is marshalled
 // exactly as gen wrote it, so its bytes (and gate.ItemSHA) are unchanged.
 //
-// The contract the Forge driver reads (DESIGN section 5.2 records the reasons):
+// The contract the Forge driver reads:
 //
 //   - A divided allocation (Twin Bolt, Forked Bolt, distribute counters) is
 //     not a field: it is its own decision AFTER the target ask, a
@@ -653,9 +653,10 @@ func forgeIgnore(it oraclegen.Item) []string {
 }
 
 // refuseRepoPath rejects an output path inside the repository (the nearest
-// ancestor of the working directory holding go.mod). Forge output and the
-// request's script text are never committed, and a path under
-// oracle/compliance/verdicts would be the one place a Forge pass must not write.
+// ancestor of the working directory holding go.mod), except under the gitignored
+// .oracle-build/. Forge output and the request's script text are never committed,
+// and a path under oracle/compliance/verdicts would be the one place a Forge pass
+// must not write.
 func refuseRepoPath(path string) error {
 	root := repoRoot()
 	if root == "" {
@@ -668,7 +669,10 @@ func refuseRepoPath(path string) error {
 	abs = resolveExisting(abs)
 	root = resolveExisting(root)
 	if rel, err := filepath.Rel(root, abs); err == nil && rel != ".." && !strings.HasPrefix(rel, ".."+string(filepath.Separator)) {
-		return fmt.Errorf("refusing to write %s: it is inside the repository %s (Forge output and request files stay off-repo)", path, root)
+		if strings.HasPrefix(rel, ".oracle-build"+string(filepath.Separator)) {
+			return nil
+		}
+		return fmt.Errorf("refusing to write %s: it is inside the repository %s (Forge output and request files go outside it, or under the gitignored .oracle-build/)", path, root)
 	}
 	return nil
 }

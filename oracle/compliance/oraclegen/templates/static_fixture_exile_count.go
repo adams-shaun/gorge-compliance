@@ -1,4 +1,4 @@
-// The exiled-with COUNT fixture (wave-5 group X): a self static gated on the
+// The exiled-with COUNT fixture: a self static gated on the
 // number of cards exiled with the source, where the source's own exile is a
 // "Survival" second-main-phase trigger that needs the source tapped (Veteran
 // Survivor: "At the beginning of your second main phase, if Veteran Survivor

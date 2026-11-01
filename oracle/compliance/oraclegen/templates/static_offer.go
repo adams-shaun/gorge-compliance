@@ -38,7 +38,7 @@ const staticLookAtReason = "look-at not observable"
 // serve. Since cli-3b80d13b1 the engine offers a MaxSpeed AddAbility$ grant on
 // the card in its own zone (rules' offBattlefieldGrantedWalk), and
 // staticGatedGrantedAbilityItem's off-battlefield arm serves that shape (the
-// Surveyor cycle, agent-20261009T060626Z-a6d0cf40), so a speed-gated SELF
+// Surveyor cycle), so a speed-gated SELF
 // grant reaches no gap here -- the arm's own measured reasons name a residual.
 // What remains is everything else: a grant to OTHER cards (Riftstone Portal's
 // "Lands you control have '{T}: Add {C}'" from the graveyard, with no gate and

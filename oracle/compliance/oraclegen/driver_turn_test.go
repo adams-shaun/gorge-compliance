@@ -7,7 +7,7 @@ import (
 )
 
 // TestScenarioReplayConsumesScenarioTurn pins the XMage driver end of the
-// scenario turn option. XMage cannot run in a seat, so this source contract is
+// scenario turn option. XMage is not part of go test, so this source contract is
 // the only in-tree check that the driver reads the same `turn` field gorge
 // does: it must default to 1, validate 1..100, and use the value for BOTH the
 // setup anchor and the stop-at checkpoint. A driver that ignored the field, or

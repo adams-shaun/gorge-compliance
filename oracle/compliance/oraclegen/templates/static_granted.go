@@ -1,5 +1,5 @@
 // Level-B observation of a continuous static that grants an ABILITY rather
-// than P/T or a keyword (ticket levelb-static-granted-abilities). The
+// than P/T or a keyword. The
 // snapshot carries no list of a permanent's abilities, so the effect is
 // observed by USING it, as an offered option (the positive form of the
 // "offered" observation static_offer.go serves a play permission with):

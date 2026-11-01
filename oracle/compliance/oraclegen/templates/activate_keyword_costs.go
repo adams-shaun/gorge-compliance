@@ -7,7 +7,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 )
 
-// Keyword-shaped activation costs (ticket levelb-activate-keyword-costs):
+// Keyword-shaped activation costs:
 // Waterbend<N|X> (generic mana in the pool: waterbend lets a player tap
 // artifacts and creatures for {1}, it never requires it), XMin<N> (the
 // lowest legal X), PayLife<X>, Blight<N>, Forage, Exert<1/...> and a

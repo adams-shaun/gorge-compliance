@@ -7,8 +7,8 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// TestKeywordActionTriggerClassification pins the routing this ticket
-// (agent-20261009T160937Z-c135e2b0) added: a trigger whose cause is a keyword
+// TestKeywordActionTriggerClassification pins the routing this change
+// added: a trigger whose cause is a keyword
 // action (Forage, GiveGift, Explores, CollectEvidence, ManifestDread,
 // Discover, ElementalBend, BecomesPlotted, BecomesSaddled) now names a
 // servable sub-family instead of its trigger.gap:<Mode> bucket. The engine's

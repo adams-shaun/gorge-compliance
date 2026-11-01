@@ -16,7 +16,11 @@
 #
 # Jobs:
 #   lint, test   push/PR/nightly, against the PIN. Required (ci-ok).
-#   compliance   nightly/dispatch: `make compliance-status` against the pin.
+#   compliance   `make compliance-status` against the pin, over every set, where
+#                TestCertificationRatchet covers only Standard and the declared
+#                sets. Required (ci-ok) on a PR to main. Nightly and dispatch also
+#                publish the per-set data the docs site renders.
+#   nightly-alert  nightly on main: one GitHub issue tracks a failing night.
 #   drift        nightly/dispatch: the tests against gorge MAIN. Reports what a
 #                pin bump would change; never fails the workflow.
 name: ci
@@ -57,9 +61,7 @@ jobs:
         run: |
           pin=$(head -n1 GORGE_PIN | awk '{print $1}')
           ref='${{ inputs.gorge_ref }}'
-          if [ -z "$ref" ]; then
-            if [ "$pin" = PENDING ]; then ref='${{ vars.GORGE_REF || 'wt/restructure' }}'; else ref=$pin; fi
-          fi
+          [ -n "$ref" ] || ref=$pin
           echo "gorge ref: $ref (GORGE_PIN: $(head -n1 GORGE_PIN))"
           echo "ref=$ref" >> "$GITHUB_OUTPUT"
 
@@ -153,20 +155,25 @@ jobs:
 
   compliance:
     needs: pin
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    if: >-
+      github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.base_ref == 'main')
     runs-on: ubuntu-24.04
-    # Writes the docs-data branch (below); everything else here only reads.
+    # Writes the docs-data branch (below); everything else here only reads, so
+    # the checkouts leave no token on disk for a pull request's code to find.
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
         with:
           path: gorge-compliance
+          persist-credentials: false
       - uses: actions/checkout@v4
         with:
           repository: adams-shaun/gorge
           ref: ${{ needs.pin.outputs.ref }}
           path: gorge
+          persist-credentials: false
       - uses: actions/setup-go@v5
         with:
           go-version-file: gorge-compliance/go.mod
@@ -190,33 +197,39 @@ jobs:
           test -s gorge/.cards/cards.lock || { echo "no .cards corpus: every corpus test would skip"; exit 1; }
           grep -q "${{ steps.cpin.outputs.forge_ref }}" gorge/.cards/cards.lock || { echo ".cards is not at FORGE_REF"; cat gorge/.cards/cards.lock; exit 1; }
           ln -sfn ../gorge/.cards gorge-compliance/.cards
-      - name: Compliance status and ratchet
-        working-directory: gorge-compliance
-        run: make compliance-status
-      - name: Upload the status page
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: compliance-status
-          path: gorge-compliance/oracle/compliance/status.md
-          if-no-files-found: ignore
       # gorge's docs site renders its per-set support table from these files
       # (gorge docs.yml fetches the docs-data branch, scripts/docs_sets.py
       # renders it). Level A covers every committed set; Level B only the
       # sets with a printed card list, which are the ones it is defined for.
+      #
+      # oraclediff exits 3 when a ratchet failed over a complete measurement
+      # (it takes a built binary to see that: `go run` reports every failure as
+      # 1). That data publishes with the failures counted in meta.json, and the
+      # ratchet step below ends the job red. Any other failure publishes nothing.
       - name: Per-set status for the docs site
+        if: github.event_name != 'pull_request'
         working-directory: gorge-compliance
+        shell: bash
         run: |
           mkdir -p ../docs-data
-          go run ./cmd/oraclediff status -all -json -level A -procs 4 > ../docs-data/status-A.jsonl
+          go build -trimpath -o ../oraclediff ./cmd/oraclediff
+          measure() {
+            local rc=0
+            ../oraclediff status -all -json -procs 4 "$@" 2>> ../measure.err || rc=$?
+            [ "$rc" = 0 ] || [ "$rc" = 3 ] || { cat ../measure.err; exit "$rc"; }
+          }
+          measure -level A > ../docs-data/status-A.jsonl
           sets=$(python3 -c 'import json,sys; print(",".join(r["set"] for r in map(json.loads, open(sys.argv[1])) if r.get("printed")))' ../docs-data/status-A.jsonl)
-          go run ./cmd/oraclediff status -all -json -level B -procs 4 -sets "$sets" > ../docs-data/status-B.jsonl
+          measure -level B -sets "$sets" > ../docs-data/status-B.jsonl
+          cat ../measure.err
+          failures=$(grep -c '^RATCHET FAIL' ../measure.err || true)
           cat > ../docs-data/meta.json <<EOF
-          {"commit": "$(git rev-parse --short=9 HEAD)", "gorge_pin": "$(cat GORGE_PIN)", "forge_ref": "${{ steps.cpin.outputs.forge_ref }}", "date": "$(date -u +%F)"}
+          {"commit": "$(git rev-parse --short=9 HEAD)", "gorge_pin": "$(cat GORGE_PIN)", "forge_ref": "${{ steps.cpin.outputs.forge_ref }}", "date": "$(date -u +%F)", "ratchet_failures": $failures}
           EOF
-      # One force-pushed commit on an orphan branch, like gorge's perf-data:
-      # the data's history is not worth keeping, only its latest state.
+      # One force-pushed commit on an orphan branch: the data's history is not
+      # worth keeping, only its latest state.
       - name: Publish the docs-data branch
+        id: publish
         if: github.ref == 'refs/heads/main'
         working-directory: docs-data
         run: |
@@ -226,6 +239,60 @@ jobs:
           git add status-A.jsonl status-B.jsonl meta.json
           git commit -q -m "docs-data: compliance status $(date -u +%F)"
           git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" docs-data:docs-data
+      - name: Compliance status and ratchet
+        working-directory: gorge-compliance
+        shell: bash
+        run: make compliance-status 2>&1 | tee ../compliance-status.log
+      - name: Upload the status page
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-status
+          path: gorge-compliance/oracle/compliance/status.md
+          if-no-files-found: ignore
+      - name: Say why in the run summary
+        if: failure()
+        run: |
+          {
+            echo "## Compliance failed at gorge ${{ needs.pin.outputs.ref }}"
+            echo "docs-data publish: ${{ steps.publish.outcome }}"
+            echo '```'
+            grep -E '^RATCHET FAIL|^oraclediff:' compliance-status.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  # One issue tracks a failing nightly: opened or commented on when a night fails,
+  # closed by the next green one. A cancelled or skipped night changes nothing.
+  nightly-alert:
+    if: always() && github.event_name == 'schedule' && github.ref == 'refs/heads/main'
+    needs: [lint, test, compliance]
+    runs-on: ubuntu-24.04
+    permissions:
+      issues: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      TITLE: Nightly CI is failing on main
+      RESULTS: lint=${{ needs.lint.result }} test=${{ needs.test.result }} compliance=${{ needs.compliance.result }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - run: |
+          number=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number,title --jq 'map(select(.title == env.TITLE))[0].number // empty')
+          case "$RESULTS" in
+            *=failure*)
+              if [ -n "$number" ]; then
+                gh issue comment "$number" --body "Failed again: $RESULTS, $RUN_URL"
+              else
+                gh issue create --title "$TITLE" --body "$RESULTS, $RUN_URL"
+              fi
+              ;;
+            *=cancelled*|*=skipped*) ;;
+            *)
+              if [ -n "$number" ]; then
+                gh issue close "$number" --comment "Green again: $RUN_URL"
+              fi
+              ;;
+          esac
 
   # Against gorge MAIN, not the pin: what a pin bump would change. Every
   # check is continue-on-error and lands in the job summary; the job itself
@@ -275,11 +342,13 @@ jobs:
         id: tests
         continue-on-error: true
         working-directory: gorge-compliance
+        shell: bash
         run: go test -count=1 -timeout 40m ./... 2>&1 | tee ../drift-test.log
       - name: Compliance status against gorge main
         id: status
         continue-on-error: true
         working-directory: gorge-compliance
+        shell: bash
         run: make compliance-status 2>&1 | tee ../drift-status.log
       - name: Report
         if: always()
@@ -292,6 +361,10 @@ jobs:
             echo '### Failing tests'
             echo '```'
             grep -E '^(--- FAIL|FAIL|ok )' drift-test.log | grep -v '^ok ' | head -200 || true
+            echo '```'
+            echo '### Compliance ratchet'
+            echo '```'
+            grep -E '^RATCHET FAIL|^ratchet:' drift-status.log || true
             echo '```'
             echo '### Stale ratchet rows'
             echo '```'
@@ -312,8 +385,8 @@ jobs:
   # One required check to name in branch protection.
   ci-ok:
     if: always()
-    needs: [lint, test]
+    needs: [lint, test, compliance]
     runs-on: ubuntu-24.04
     steps:
       - run: |
-          [ "${{ needs.lint.result }}" = success ] && [ "${{ needs.test.result }}" = success ] || { echo "lint=${{ needs.lint.result }} test=${{ needs.test.result }}"; exit 1; }
+          [ "${{ needs.lint.result }}" = success ] && [ "${{ needs.test.result }}" = success ] && { [ "${{ needs.compliance.result }}" = success ] || [ "${{ needs.compliance.result }}" = skipped ]; } || { echo "lint=${{ needs.lint.result }} test=${{ needs.test.result }} compliance=${{ needs.compliance.result }}"; exit 1; }

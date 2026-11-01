@@ -54,7 +54,7 @@ func TestCommittedManifestsAreWellFormed(t *testing.T) {
 }
 
 // TestVerdictsCarryFieldLevelExpectations: every passing committed verdict
-// row freezes its changed fields (section 11.3 C3); no row is back on the
+// row freezes its changed fields; no row is back on the
 // whole-snapshot canon_sha that one unrelated engine change staled across
 // whole sets. `oraclediff refreeze -apply` converts a legacy row.
 func TestVerdictsCarryFieldLevelExpectations(t *testing.T) {

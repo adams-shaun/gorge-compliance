@@ -9,7 +9,7 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// TestTicketsAtHead holds the C4 generator's contract over the committed
+// TestTicketsAtHead holds the generator's contract over the committed
 // data: one ticket per class (stable unique ids, never one per card in a
 // shape), a complete brief with a class-census skeleton that parses, no
 // ticket for a non-tournament primitive, and no primitive ticket whose

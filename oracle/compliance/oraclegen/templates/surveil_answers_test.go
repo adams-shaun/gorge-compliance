@@ -11,7 +11,7 @@ import (
 // named DSK scenario is generated through the real engine and does not
 // misrepresent a synthetic arrange decision as a Broodspinner carrier. The
 // current level-A cast/resolve fixture does not trigger its other-creature
-// surveil ability; host replay fixtures remain the carrier authority.
+// surveil ability; XMage replay fixtures remain the carrier authority.
 func TestGeneratedBroodspinnerScenarioPinsItsActualAnswerShape(t *testing.T) {
 	it, skip := Generate(loadGenRegistry(t), "Broodspinner")
 	if skip != nil {

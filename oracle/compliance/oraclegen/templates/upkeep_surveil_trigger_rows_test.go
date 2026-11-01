@@ -9,8 +9,7 @@ import (
 )
 
 // The six stored `diverge` verdict rows whose detail read `step 1 (resolve)
-// p0.graveyard: gorge "[]", xmage "[Wastes]"` (ticket
-// agent-20261009T115712Z-b072e2c1, stage 2 of 50ed60e1f). Each is a Phase
+// p0.graveyard: gorge "[]", xmage "[Wastes]"`. Each is a Phase
 // upkeep trigger whose chain is `DB$ Surveil`; the trigger#0.0 scenario walks
 // turn 1's upkeep in setup and stops at the same upkeep with a pass_to, so the
 // trigger resolves a second time at step 1. The cached XMage reference

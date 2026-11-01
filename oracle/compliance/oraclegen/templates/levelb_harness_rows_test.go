@@ -9,14 +9,14 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// TestLevelBHarnessRowsWave4 pins the generator side of the wave-4 Level B
-// harness rows (lb4-harness): scenarios XMage could not execute because the
+// TestLevelBHarnessRowspins the generator side of the Level B
+// harness rows: scenarios XMage could not execute because the
 // generated script asked the wrong question, not because either engine
 // disagreed. Each case names the XMage failure the row showed and asserts
 // the generated item now carries what XMage needs (measured by replaying the
 // regenerated scenario in XMage at XMAGE_REF 6b602a1c85e8). The cases are the
 // class members of each root cause, so a regression in any class fails here.
-func TestLevelBHarnessRowsWave4(t *testing.T) {
+func TestLevelBHarnessRows(t *testing.T) {
 	reg := loadGenRegistry(t)
 	type check func(t *testing.T, it oraclegen.Item)
 	cases := []struct {

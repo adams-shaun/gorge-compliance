@@ -36,7 +36,7 @@ func TestDriverCastArmMapsMorphFamilySpelling(t *testing.T) {
 			t.Errorf("cast arm guard does not admit %s", mode)
 		}
 	}
-	// Rejection moved into castModeSupported (the Bargain ticket): the arm
+	// Rejection moved into castModeSupported (the Bargain change): the arm
 	// throws for any mode that helper refuses, and the helper must admit the
 	// three face-down modes.
 	if !strings.Contains(cast, `if (!castModeSupported(castMode))`) ||

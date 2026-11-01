@@ -1,8 +1,8 @@
 # Pinning gorge
 
-gorge-compliance measures **one gorge revision**: the commit named in
-[`GORGE_PIN`](../GORGE_PIN). Every committed target in this repository is a
-statement about that revision and nothing else:
+This page explains why the results here hold for one gorge commit, and how to move to
+another. gorge-compliance measures the commit named in [`GORGE_PIN`](../GORGE_PIN). Every
+committed target in this repository is a statement about that commit and nothing else:
 
 | Target | Where | What it pins |
 |---|---|---|
@@ -13,10 +13,10 @@ statement about that revision and nothing else:
 | XMage-port known bugs | `known_bug` rows in `scenarios/xmageport/**`, `cmd/xmageport/known_bugs.tsv` | ported scenarios that must still fail |
 | Level-B requirements | `oracle/compliance/levelb`, `oracle/compliance/printed` | what level B demands per card |
 
-A ratchet row is stale the moment gorge fixes the behaviour it records, and a
-verdict is stale when gorge's generated scenario moves, so these files are
-only meaningful against the pin. The gorge corpus pin (`FORGE_REF`) is read
-from the pinned gorge's Makefile, so pinning gorge pins the card corpus too.
+A ratchet row is stale the moment gorge fixes the behaviour it records, and a verdict is
+stale when gorge's generated scenario moves, so these files mean something only against the
+pin. gorge's Makefile names its corpus commit (`FORGE_REF`), so pinning gorge pins the card
+corpus too.
 
 ## How the pin is expressed
 
@@ -25,27 +25,22 @@ from the pinned gorge's Makefile, so pinning gorge pins the card corpus too.
 - `go.mod` requires `github.com/adams-shaun/gorge` at the pseudo-version of
   that commit, so `go build` and CI resolve exactly the pinned code.
 
-The first pin is gorge's PR #10 merge commit (`87d079670`, 2026-10-17),
-whose tree is identical to the `wt/restructure` tip the targets were first
-measured against.
-
 ## Bumping the pin
 
 A pin bump is a pull request here, never a side effect:
 
-1. Pick the gorge commit (normally gorge `main`'s head) and write its SHA to
-   `GORGE_PIN`.
-2. `go get github.com/adams-shaun/gorge@<sha> && go mod tidy` (drop the
-   `replace` once a real version is required).
-3. Refresh the corpus: in the gorge checkout at that commit,
-   `make fetch-cards compile-cards`, then `make cards` here.
+1. Pick the gorge commit and write its SHA to `GORGE_PIN`.
+2. `go get github.com/adams-shaun/gorge@<sha> && go mod tidy`.
+3. Refresh the corpus: in a gorge checkout at that commit, run
+   `make fetch-cards compile-cards`, then `make cards` here. `make cards` warns if the
+   corpus isn't at the `FORGE_REF` of the gorge go now resolves.
 4. Rerun and update the targets:
-   - `make test` and `make oracle-audit`: fix or re-ratchet every stale
-     `known-divergent` / `known-unconsumed` / `known_bug` row (a row is
-     deleted when gorge now passes; added only by triage);
-   - `make compliance-pass SETS=...` on a box with the XMage build
-     (`make xmage-oracle-setup`) for every set whose scenarios moved, then
-     `make compliance-status` and update `ratchet.json`.
+   - `make test` and `make oracle-audit`: fix or re-ratchet every stale `known-divergent`,
+     `known-unconsumed` or `known_bug` row. A row is deleted when gorge now passes and added
+     only by triage.
+   - `make compliance-pass SETS=...` with the XMage build (`make xmage-oracle-setup`) for every
+     set whose scenarios moved, as the [runbook](../oracle/validation/oracle/README.md) describes.
+     Then run `make compliance-status` and update `ratchet.json`.
 5. The PR description lists the gorge range (`old..new`), what moved, and
    every row added or deleted.
 
@@ -57,8 +52,7 @@ stale ratchet rows, compliance-status deltas) without failing the workflow.
 Drift is the signal that a bump is due, or that gorge `main` regressed a
 card; it is never a reason to edit targets without bumping the pin.
 
-gorge itself never imports this repository and does not gate on it. gorge
-keeps the oracle runner (`engine/rules/oracle_*.go`), its unit tests and a
-nine-file residual scenario set as the runner's contract check
-(`engine/rules/oracle_contract_test.go`); this repository's audit reads that
-residual set together with its own `scenarios/oracle`.
+gorge itself never imports this repository and doesn't gate on it. gorge keeps the oracle
+runner (`engine/rules/oracle_*.go`), its unit tests and a few residual scenario files as the
+runner's contract check (`engine/rules/oracle_contract_test.go`); the audit here reads those
+files together with `scenarios/oracle`.

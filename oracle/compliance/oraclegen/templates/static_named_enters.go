@@ -1,7 +1,6 @@
 package templates
 
-// Level-B observation of Petrified Hamlet's chosen-name statics (ticket
-// levelb-static-named-enters): a land that names a card while its ETB trigger
+// Level-B observation of Petrified Hamlet's chosen-name statics: a land that names a card while its ETB trigger
 // resolves, not through an as-enters replacement and not at cast time. The
 // name is chosen mid-trigger-resolution (CR 603.3c), so the scenario plays
 // the land, resolves the ETB trigger, and asserts at p0's next priority. The

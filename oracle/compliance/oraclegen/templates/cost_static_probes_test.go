@@ -6,7 +6,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 )
 
-// TestCostStaticWave3Probes covers the wave-3 cost-static rows that needed a
+// TestCostStaticProbes covers the cost-static rows that needed a
 // prerequisite fixture the probe could not build:
 //
 //   - Bolt Bend and Spectral Denial are spells whose own target slot draws
@@ -21,7 +21,7 @@ import (
 // Each row's probe must play through gorge at the exact reduced price, and the
 // same cast must fail once the card's own statics are removed, so a probe that
 // pays the printed cost (or an engine that ignores the reduction) cannot pass.
-func TestCostStaticWave3Probes(t *testing.T) {
+func TestCostStaticProbes(t *testing.T) {
 	reg := loadGenRegistry(t)
 	for _, tc := range []struct {
 		name, key, probe, mana string

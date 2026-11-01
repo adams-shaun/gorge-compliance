@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
-# forge-oracle-setup.sh -- build Forge out of tree for the Forge oracle
-# (.ds4/forge-oracle/DESIGN.md §4.2, §7.3). Host only; never run in a seat.
+# forge-oracle-setup.sh -- build Forge out of tree for the Forge oracle.
 #
 # Idempotent. Re-run after a FORGE_ORACLE_REF bump. Everything lands under
-# $FORGE_ORACLE_DIR (default /mnt/sata/gorge-training/forgeoracle); nothing in
-# the gorge tree changes. Forge is GPL-3.0: its source, jars and output stay
+# $FORGE_ORACLE_DIR (default .oracle-build/forge, gitignored); nothing tracked
+# changes. Forge is GPL-3.0: its source, jars and output stay
 # under that directory and are never committed.
 #
 #   scripts/forge-oracle-setup.sh                 # clone/fetch, pin check, build, cp.txt, measure
@@ -12,7 +11,7 @@
 #   scripts/forge-oracle-setup.sh --check-pin REF CLONE
 #                                                 # pin invariant only (forge-oracle-run.sh calls this)
 #
-# The pin invariant (§7.3): FORGE_REF must be an ancestor of the driver ref, and
+# The pin invariant: FORGE_REF must be an ancestor of the driver ref, and
 # the cardsfolder and tokenscripts trees must be identical at both. Otherwise a
 # script difference between gorge's corpus and Forge's runtime would look like
 # an engine disagreement, so the scripts refuse to run.
@@ -22,23 +21,23 @@ here=$(cd "$(dirname "$0")/.." && pwd)
 mk() { sed -n "s/^$1 *?= *//p" "$here/Makefile"; }
 # FORGE_REF and FORGE_REPO (the corpus pin) are gorge's: gorge-compliance's Makefile
 # only reads them out of gorge's, so a standalone run does the same.
-# GORGE_ROOT defaults to the gorge module go resolves (go.work, replace).
+# They come from the gorge module go resolves (go.mod's pin, or a go.work).
 gorge_mk() {
-	local g=${GORGE_ROOT:-$(cd "$here" && go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge)}
+	local g=$(cd "$here" && go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge)
 	sed -n "s/^$1 *?= *//p" "$g/Makefile"
 }
 die() { echo "forge-oracle-setup: $*" >&2; exit 2; }
 
 forge_ref=${FORGE_REF:-$(gorge_mk FORGE_REF)}
 oracle_ref=${FORGE_ORACLE_REF:-$(mk FORGE_ORACLE_REF)}
-root=${FORGE_ORACLE_DIR:-$(mk FORGE_ORACLE_DIR)}
+root=${FORGE_ORACLE_DIR:-$here/$(mk FORGE_ORACLE_DIR)}
 repo=${FORGE_REPO:-$(gorge_mk FORGE_REPO)}
 clone=${FORGE_ORACLE_CLONE:-$root/forge}
 [ -n "$forge_ref" ] && [ -n "$oracle_ref" ] && [ -n "$root" ] || die "FORGE_REF/FORGE_ORACLE_REF/FORGE_ORACLE_DIR unset"
 root=$(realpath -m "$root")
 clone=$(realpath -m "$clone")
 
-# pin_check CLONE REF: the §7.3 invariant, or exit 2 naming which half failed.
+# pin_check CLONE REF: the pin invariant, or exit 2 naming which half failed.
 pin_check() {
   local c=$1 ref=$2 rc=0 p a b
   git -C "$c" merge-base --is-ancestor "$forge_ref" "$ref" || rc=$?
@@ -63,7 +62,7 @@ fi
 rebuild=0
 [ "${1:-}" = --rebuild ] && rebuild=1
 
-# Clone (sparse, D3) or fetch, then check the pin before anything is built.
+# Clone (sparse) or fetch, then check the pin before anything is built.
 if [ ! -e "$clone/.git" ]; then
   mkdir -p "$(dirname "$clone")"
   git clone --filter=blob:none --no-checkout "$repo" "$clone"
@@ -77,11 +76,11 @@ git -C "$clone" fetch -q origin
 oref=$(git -C "$clone" rev-parse --verify -q "$oracle_ref^{commit}") || die "FORGE_ORACLE_REF $oracle_ref is not in $clone after fetch"
 pin_check "$clone" "$oref"
 
-case "$root" in /tmp/*) die "$root is RAM-backed; use /mnt/sata" ;; esac
+case "$root" in /tmp/*) die "$root is under /tmp, which is often RAM-backed; the build needs a directory on disk" ;; esac
 [ -z "$(git -C "$clone" status --porcelain --untracked-files=no)" ] || die "$clone has uncommitted changes; refusing to move HEAD"
 [ "$(git -C "$clone" rev-parse HEAD)" = "$oref" ] || git -C "$clone" checkout -q --detach "$oref"
 
-xmage=${XMAGE_ORACLE_DIR:-$(mk XMAGE_ORACLE_DIR)}
+xmage=${XMAGE_ORACLE_DIR:-$here/$(mk XMAGE_ORACLE_DIR)}
 jdk=$(realpath -m "${FORGE_ORACLE_JDK:-$xmage/jdk}")
 mvn=$(realpath -m "${FORGE_ORACLE_MVN:-$xmage/maven/bin/mvn}")
 [ -x "$jdk/bin/javac" ] || die "no JDK at $jdk; run make xmage-oracle-setup first or set FORGE_ORACLE_JDK"
@@ -157,6 +156,6 @@ nsrc=$(find "$clone/forge-oracle/src/main/java" -name '*.java' 2>/dev/null | wc 
   echo "- java: $("$jdk/bin/java" -version 2>&1 | head -1)"
   echo
   echo "P0 reference (2026-10-06): build 33.8 s / 2.17 GB peak RSS; driver javac 0.91 s; 60 warm replays median 14.7 ms, 199 MB RSS."
-  echo "Design §10 targets: warm median at most 500 ms per scenario, JVM heap at most 2.5 GB; replay performance is not measured here."
+  echo "Targets: warm median at most 500 ms per scenario, JVM heap at most 2.5 GB; replay performance is not measured here."
 } > "$root/MEASURE.md"
 cat "$root/MEASURE.md"

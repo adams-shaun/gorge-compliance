@@ -57,12 +57,12 @@ func censusPrintedCards(t *testing.T) ([]string, map[string][]string) {
 
 // TestOptionalCostAnswerCensus: every level-B item whose cast step carries
 // cast_mode "optionalcost" scripts XMage's "pay it?" chooseUse as a leading
-// "yes" -- the answer ScenarioReplay.optionalAdditionalCostAnswer consumes
-// (ticket lb-xoptcost rows 138/182). The counts are the corpus-wide inventory
+// "yes" -- the answer ScenarioReplay.optionalAdditionalCostAnswer consumes.
+// The counts are the corpus-wide inventory
 // of the mechanism; a card that starts or stops scripting the yes, or a set
 // whose served rows move, must be re-measured and re-pinned here.
 // ECL 5: Celestial Reunion's compound "choose a creature type and behold
-// two" joined the served rows (lb5-costgrammar).
+// two" joined the served rows.
 var wantOptionalCostAnswerCensus = map[string]int{
 	"BIG": 0, "BLB": 0, "DFT": 0, "DSK": 0, "ECL": 5,
 	"EOE": 0, "FDN": 0, "FIN": 0, "FRA": 0, "HOB": 0,
@@ -109,7 +109,7 @@ func TestOptionalCostAnswerCensus(t *testing.T) {
 
 // TestCraftMaterialAnswerCensus: every Craft activation scripts one target
 // answer per material the cost names (the count ScenarioReplay's fill loop
-// keeps consuming from the target queue; ticket lb-xoptcost row 140). The
+// keeps consuming from the target queue). The
 // counts are the corpus-wide inventory of the mechanism.
 var wantCraftMaterialAnswerCensus = map[string]int{
 	"BIG": 0, "BLB": 0, "DFT": 0, "DSK": 0, "ECL": 0,
@@ -192,8 +192,7 @@ func craftMaterialCount(cost string) int {
 
 // TestSolvedCasePrefixCensus: every solved Case line the corpus prints maps to
 // an XMage prefix that keeps the card's own "Sacrifice this Case" cost text
-// (XMage's Case abilities override SacrificeSourceCost's "sacrifice {this}";
-// ticket lb-xoptcost row 139). The counts are the corpus-wide inventory of the
+// (XMage's Case abilities override SacrificeSourceCost's "sacrifice {this}"). The counts are the corpus-wide inventory of the
 // mechanism.
 var wantSolvedCasePrefixCensus = map[string]int{
 	"BIG": 0, "BLB": 0, "DFT": 0, "DSK": 0, "ECL": 0,

@@ -1,5 +1,4 @@
-// Turned-face-up trigger recipes (Level B, ticket
-// cli-20261006T144107Z-fd029c8f). A "When this is turned face up" trigger
+// Turned-face-up trigger recipes (Level B). A "When this is turned face up" trigger
 // (Forge Mode$ TurnFaceUp, CR 708.6) has one cause a p0-only turn-1 scenario
 // can produce: cast a morph-family card face down for {3}, resolve it, then
 // take the battlefield turn-face-up special action for its family cost. Both

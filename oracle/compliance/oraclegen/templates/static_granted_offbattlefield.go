@@ -12,7 +12,7 @@ import (
 // whose static acts OFF the battlefield (the Surveyor cycle's "Max speed —
 // {3}, Exile this card from your graveyard: Draw a card."). The engine offers
 // the granted activation on the card in its own zone (rules'
-// offBattlefieldGrantedWalk, cli-3b80d13b1), so the observation places the
+// offBattlefieldGrantedWalk), so the observation places the
 // card in that zone at max speed and asserts the "granted" offer; the gate-off
 // control keeps the card in the zone and drops only the speed (a self grant
 // has no source to remove).

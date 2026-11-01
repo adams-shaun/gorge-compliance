@@ -68,7 +68,7 @@ type triggerCause struct {
 }
 
 // Probe cards, each named with why. Spec hypothesis H4: the probe exists in
-// XMage's database; the host replay confirms it. Each list is tried in order
+// XMage's database; the XMage replay confirms it. Each list is tried in order
 // and the first that plays through gorge and fires the trigger wins.
 var (
 	// Murder ({1}{B}{B}, destroy target creature) is unconditional; Doom

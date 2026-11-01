@@ -17,7 +17,7 @@ import (
 // (which carry no sub-family of their own).
 const coveredByAKey = "covered-by-A"
 
-// censusSets are the four level-A sets this ticket pins.
+// censusSets are the four level-A sets this change pins.
 var censusSets = []string{"BIG", "EOE", "FDN", "FRA"}
 
 // wantCensus pins the measured requirement census, per set: count per
@@ -51,7 +51,7 @@ var wantCensus = map[string]map[string]int{
 	},
 	"EOE": {
 		// main (f6fd28f37) classified the combat-only CantPreventDamage static
-		// out of its gap; this branch (agent-20261009T160853Z-c3e35453) serves
+		// out of its gap; this branch serves
 		// The Endstone's plain hand land drop as trigger.land-played.
 		"activate.battlefield":             39,
 		"activate.mana":                    23,
@@ -61,8 +61,8 @@ var wantCensus = map[string]map[string]int{
 		"static.can-attack-defender-gated": 1,
 		"static.cant-block-by-gated":       1,
 		// Meltstrider's Resolve's enchanted-creature MinMaxBlocker moved out
-		// of static.combat when the bearer-scoped sub-family classified it
-		// (cli-20261009T041714Z-d0f325e1); static.combat is now empty in EOE.
+		// of static.combat when the bearer-scoped sub-family classified it;
+		// static.combat is now empty in EOE.
 		"static.max-blockers-bearer":        1,
 		"static.combat-damage-toughness":    1,
 		"static.continuous":                 63,
@@ -70,7 +70,7 @@ var wantCensus = map[string]map[string]int{
 		"static.cant-prevent-damage-combat": 1,
 		"static.panharmonicon":              1,
 		// Tapestry Warden's Station-scoped TapPowerValue is served by the
-		// station-counter template (lb4-gcost).
+		// station-counter template.
 		"static.tap-power-value-station": 1,
 		"trigger.attacks":                7,
 		"trigger.attacks-attached":       2,
@@ -84,7 +84,7 @@ var wantCensus = map[string]map[string]int{
 		"trigger.ltb-other":              1,
 		"trigger.ltb-self":               4,
 		"trigger.damage":                 6,
-		"trigger.land-played":            1, // The Endstone: agent-20261009T160853Z-c3e35453
+		"trigger.land-played":            1, // The Endstone
 		"trigger.phase":                  20,
 		"trigger.blocks":                 1,
 		"trigger.sacrificed":             2,
@@ -99,7 +99,7 @@ var wantCensus = map[string]map[string]int{
 		"combat.block":           127,
 		"covered-by-A":           80,
 		"static.cant-block-self": 2,
-		// cli-20261009T031407Z-6fac1771: Juggernaut's MustAttack, Flamewake
+		// Juggernaut's MustAttack, Flamewake
 		// Phoenix's MustAttack and Cephalid Inkmage's Threshold-gated
 		// CantBlockBy moved out of static.combat; static.combat is now empty
 		// in FDN and the key is gone.
@@ -109,7 +109,7 @@ var wantCensus = map[string]map[string]int{
 		"static.cost":                12,
 		"static.gap:AlternativeCost": 1,
 
-		"static.cast-with-flash":              1, // the gap moved when the cast-with-flash template classified (cli-20261009T031409Z-da8b8021)
+		"static.cast-with-flash":              1, // the gap moved when the cast-with-flash template classified
 		"trigger.attacks":                     26,
 		"trigger.attacks-attached":            1,
 		"trigger.becomes-target":              6,
@@ -122,12 +122,12 @@ var wantCensus = map[string]map[string]int{
 		"trigger.etb-other":                   24,
 		"trigger.state-self-counters":         1, // Mazemind Tome: the self page-counter state trigger, formerly trigger.gap:Always
 		"trigger.damage":                      4,
-		"trigger.drawn-other":                 1, // Scrawling Crawler (opponent draws): cli-20261009T031408Z-a01003ef
-		"trigger.life-lost":                   1, // Bloodthirsty Conqueror: cli-20261009T031408Z-a01003ef
-		"trigger.discarded-opponent":          1, // Tinybones, Bauble Burglar (agent-20261009T174759Z-3f3e77a4)
+		"trigger.drawn-other":                 1, // Scrawling Crawler (opponent draws)
+		"trigger.life-lost":                   1, // Bloodthirsty Conqueror
+		"trigger.discarded-opponent":          1, // Tinybones, Bauble Burglar
 		"trigger.sacrificed":                  1,
 		"trigger.spell-cast-opponent":         4,
-		"trigger.spell-cast-opponent-turn":    1, // FDN Dreams: OpponentTurn$ True now routes here (trigger_cast.go, cli-20261009T031408Z-09f47be1).
+		"trigger.spell-cast-opponent-turn":    1, // FDN Dreams: OpponentTurn$ True now routes here (trigger_cast.go).
 		"trigger.gap:Untaps":                  1,
 		"trigger.life-gained":                 8,
 		"trigger.noncombat-damage":            1,

@@ -1,18 +1,19 @@
 package boundary_test
 
 import (
+	"os/exec"
 	"path"
 	"path/filepath"
 	"strings"
 	"testing"
 )
 
-// TestForgeBoundary is the licence guard from the Forge oracle design (§11,
-// design decision P1-7), ported from gorge's engine/cards/boundary_forge_test.go.
+// TestForgeBoundary is the licence guard for Forge artifacts, ported from
+// gorge's engine/cards/boundary_forge_test.go.
 // Forge is GPL-3.0. Nothing that belongs to Forge — its Java source, its
 // oracle driver tree, its result rows or request files — may be committed to
-// four-yay. boundary_test.go guards the card-script corpus; this guard covers
-// the four Forge-artifact shapes the design names.
+// gorge-compliance. boundary_test.go guards the card-script corpus; this guard
+// covers four Forge-artifact shapes.
 //
 // A candidate file (tracked, or untracked and not ignored: see
 // boundary_test.go) is an offender when it is any of:
@@ -21,20 +22,17 @@ import (
 //  2. a path with a `forge-oracle` component (any depth);
 //  3. a path with a `compliance` component immediately followed by a
 //     component beginning `forge` — `oracle/compliance/forge*`, the
-//     result-row / request-file surface (it was `lab/oracle/compliance/forge*`
-//     while it lived in gorge; the rule is written by component so it follows
-//     the tree if it moves again);
+//     result-row / request-file surface (the rule is written by component so
+//     it follows the tree if it moves);
 //  4. a file carrying the Forge GPL header line.
 //
-// forgeBoundaryAllowlist is the explicit, empty-by-default escape hatch for
-// the §9 adjudication ledger. The design (§9, recommended option C) permits
-// committing `compliance/adjudication/<a-z>.jsonl`, which carries only our own
-// pattern vocabulary and field names — never a Forge-produced value, message
-// or script fragment. That path is not under `compliance/forge*`, so it needs
-// no entry; the allowlist exists for a path the design later names that a
-// rule would otherwise catch. Entries are repo-relative slash-separated paths
-// matched exactly. four-yay has no oracle/compliance/adjudication/ yet; keep
-// this empty until something the design allows actually needs it.
+// forgeBoundaryAllowlist is the explicit, empty-by-default escape hatch for a
+// file that carries only our own pattern vocabulary and field names, never a
+// Forge-produced value, message or script fragment, at a path a rule would
+// otherwise catch. `oracle/compliance/adjudication/<a-z>.jsonl` would be such a file,
+// but it is not under `compliance/forge*`, so it needs no entry. Entries are
+// repo-relative slash-separated paths matched exactly. This repository has no
+// oracle/compliance/adjudication/; keep this empty until a file needs it.
 var forgeBoundaryAllowlist = map[string]bool{}
 
 // forgeGPLHeader is the distinguishing line of the Forge source header: a
@@ -178,7 +176,7 @@ func TestForgeBoundaryDetection(t *testing.T) {
 			"package main\n", false, true, false, "only compliance/forge* is a path offender"},
 		{"file carrying the Forge GPL header", "internal/oracle/snapshot.go",
 			"package oracle\n\n// " + gplHeader + "\n", false, true, true,
-			"the Forge GPL header must never enter a four-yay file"},
+			"the Forge GPL header must never enter a gorge-compliance file"},
 		{"innocuous Go file", "internal/oracle/snapshot.go",
 			"package oracle\n\n// A snapshot read from an external process.\n", false, true, false,
 			"an ordinary file is not an offender"},
@@ -187,7 +185,7 @@ func TestForgeBoundaryDetection(t *testing.T) {
 			"control: the same path IS flagged once the allowlist entry is removed"},
 		{"ledger path is allowed", "oracle/compliance/adjudication/a.jsonl",
 			"{}\n", false, true, false,
-			"the section 9 ledger lives under compliance/adjudication and is allowed"},
+			"an adjudication ledger lives under compliance/adjudication and is allowed"},
 	}
 
 	for _, tt := range tests {
@@ -235,5 +233,15 @@ func TestForgeBoundaryDetection(t *testing.T) {
 				t.Errorf("%q flagged=%v, want %v: %v (reason: %s)", tt.file, matched, tt.wantMatch, offenders, tt.reason)
 			}
 		})
+	}
+}
+
+// TestOracleBuildDirIsIgnored holds the exception the output guards make for
+// .oracle-build/ (cmd/oraclediff refuseRepoPath, classify.RefuseRepoPath): Forge
+// output lands there, so the directory must stay gitignored.
+func TestOracleBuildDirIsIgnored(t *testing.T) {
+	out, err := exec.Command("git", "check-ignore", "../../.oracle-build/forge/x.jsonl").CombinedOutput()
+	if err != nil {
+		t.Fatalf(".oracle-build/ is not gitignored: %v: %s", err, out)
 	}
 }

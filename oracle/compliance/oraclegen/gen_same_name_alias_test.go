@@ -53,7 +53,7 @@ func refNameForTest(ref string) string {
 	return n
 }
 
-// sameNameSelectsExactlyOne is the property the ticket fixes: an ambiguous
+// sameNameSelectsExactlyOne is the property the change fixes: an ambiguous
 // pick's emitted answer must leave exactly one distinct offered object for
 // XMage's name match. A bare name (the pre-fix output) leaves more than one.
 func sameNameSelectsExactlyOne(t *testing.T, d rules.OracleDecision, answer string) {

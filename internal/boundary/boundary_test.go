@@ -15,16 +15,16 @@ import (
 )
 
 // This file is the port of gorge's engine/cards/boundary_test.go: Forge card
-// and token scripts are GPL-3.0 and four-yay never commits one.
+// and token scripts are GPL-3.0 and gorge-compliance never commits one.
 //
-// WHICH FILES ARE SCANNED. gorge scans `git ls-files` (the index). four-yay
+// WHICH FILES ARE SCANNED. gorge scans `git ls-files` (the index). This port
 // scans the index UNION the untracked files git would pick up on the next
 // `git add` (`git ls-files --cached --others --exclude-standard`), for two
-// reasons: the repository was created by an export and had no commit and an
-// empty index, where an index-only scan passes vacuously; and a GPL file that
-// is one `git add` away from being committed is worth failing on now. A file
-// matched by .gitignore (the .cards symlink, bin/, status.md) is not a
-// candidate: git will never commit it without -f.
+// reasons: an index-only scan passes vacuously in a repository with no commit
+// and an empty index; and a GPL file that is one `git add` away from being
+// committed is worth failing on now. A file matched by .gitignore (the .cards
+// symlink, bin/, status.md) is not a candidate: git will never commit it
+// without -f.
 
 // A Forge card script is identifiable by content, not path: it begins with a
 // Name: line and carries an Oracle: line (every card and token script in the
@@ -183,8 +183,8 @@ func checkForgeScriptsInRepo(repoDir string, corpus corpusHashes) ([]scriptOffen
 	return offenders, nil
 }
 
-// TestNoForgeScriptsTracked enforces the GPL boundary: four-yay builds on the
-// corpus `make fetch-cards` puts in gorge's gitignored .cards/, and never
+// TestNoForgeScriptsTracked enforces the GPL boundary: gorge-compliance builds
+// on the corpus `make fetch-cards` puts in gorge's gitignored .cards/, and never
 // carries a script itself.
 func TestNoForgeScriptsTracked(t *testing.T) {
 	root := repoRoot(t)
@@ -203,7 +203,7 @@ func TestNoForgeScriptsTracked(t *testing.T) {
 	if err != nil {
 		t.Fatalf("git unavailable while scanning %s: %v", root, err)
 	}
-	// A guard over zero files passes vacuously; four-yay always has some.
+	// A guard over zero files passes vacuously; this repository always has some.
 	if len(paths) == 0 {
 		t.Fatalf("no candidate files under %s: the guard would scan nothing", root)
 	}
@@ -224,8 +224,7 @@ func TestNoForgeScriptsTracked(t *testing.T) {
 }
 
 // newTempRepo initialises an empty git repository; withCommit adds an empty
-// initial commit (four-yay itself started without one, so both shapes are
-// exercised).
+// initial commit, so both shapes are exercised.
 func newTempRepo(t *testing.T, withCommit bool) string {
 	t.Helper()
 	dir := t.TempDir()
@@ -266,7 +265,7 @@ func gitAdd(t *testing.T, dir string, paths ...string) {
 }
 
 // TestForgeScriptDetection verifies the guard catches a script in every state
-// git can hold it in, including the untracked-but-addable state four-yay
+// git can hold it in, including the untracked-but-addable state this port
 // adds, and does not flag ignored or innocuous files.
 func TestForgeScriptDetection(t *testing.T) {
 	forgeSignature := "Name:Test Card\nManaCost:1 U\nTypes:Creature Test\nPT:1/1\nOracle:Draw a card.\n"

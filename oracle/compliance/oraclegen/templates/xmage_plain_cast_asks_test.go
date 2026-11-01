@@ -121,7 +121,7 @@ func TestPlainCastAsksScenarioShape(t *testing.T) {
 // TestPlainCastAsksDriverPins couples the answer rule to the Java driver:
 // reverting the chooseUse override (or any of its three ask keys) must fail
 // here even though the generator output is unchanged. STRUCTURAL: XMage
-// cannot run in a seat, so the behaviour is proved by the host forced replay
+// is not part of go test, so the behaviour is proved by the forced replay
 // of the sixteen scenarios in plainCastAskCards. The list must also keep the
 // driver's Bargain election helper (the optional-additional-cost ask it pays
 // when a cast step elects cast_mode "bargained").
@@ -140,7 +140,7 @@ func TestPlainCastAsksDriverPins(t *testing.T) {
 		"castCostPicks.addAll(names(a, \"pick\"))",
 		"this.owner = player.owner;",
 		// The election flags: Bargain pays, and an "optionalcost" cast or a
-		// promised Gift (lb4w2-driver) consumes the leading Yes.
+		// promised Gift consumes the leading Yes.
 		"switch (optionalAdditionalCostAnswer(owner.bargainedCast,",
 		"owner.optionalCostCast || owner.giftPromisedCast",
 		"getChoices())) {",

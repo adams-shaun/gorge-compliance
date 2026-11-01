@@ -1,6 +1,4 @@
-// Observation for a Continuous SetMaxHandSize$ static (ticket
-// cli-20261009T031407Z-dd0d6fbb, extended by
-// agent-20261009T055739Z-b43f3480): a player-rule number no snapshot field
+// Observation for a Continuous SetMaxHandSize$ static (extended): a player-rule number no snapshot field
 // carries, so the row was skipped as "hand size is not observable in the
 // permanent snapshot". The item asserts gorge's own effective CR 514.1
 // maximum through a runner expectation, exactly as the MayLookAt$

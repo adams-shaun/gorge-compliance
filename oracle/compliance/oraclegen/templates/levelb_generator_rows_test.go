@@ -8,8 +8,8 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// TestLevelBGeneratorResidueRowsServed pins the wave-4 generator-residue rows
-// lb4w2-gen serves, one row per mechanism. Each must generate, replay through
+// TestLevelBGeneratorResidueRowsServed pins the generator-residue rows,
+// one row per mechanism. Each must generate, replay through
 // gorge with no fail, and show its mechanism's observable, so a row is never
 // served by a scenario that does not exercise it.
 func TestLevelBGeneratorResidueRowsServed(t *testing.T) {

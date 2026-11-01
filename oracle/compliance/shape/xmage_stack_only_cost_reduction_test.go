@@ -12,7 +12,7 @@ import (
 // Away static#0.0: XMage's reduction is stack-only, so TestPlayer cannot
 // find the UU cast the scenario (correctly, CR 601.2f) pays. Lashwhip
 // Predator's static is the same SpellCostReductionSourceEffect
-// .setCanWorksOnStackOnly(true) (operator-triaged 2026-10-13), so the ruling
+// .setCanWorksOnStackOnly(true) (triaged 2026-10-13), so the ruling
 // covers it through its "-" API signature. Bite Down on Crime fails with the
 // same harness shape for another cause (XMage prices it with a cost
 // adjuster), so the API narrowing must leave it unruled.

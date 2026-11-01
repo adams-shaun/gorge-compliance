@@ -1,10 +1,13 @@
 SHELL := /bin/bash
 
-# gorge-compliance builds against gorge: go.mod's replace points at ../gorge,
-# and a local (gitignored) go.work may point at a gorge worktree instead.
-# GORGE_ROOT is that checkout, for the corpus pin in gorge's Makefile.
-# The gorge revision the coverage targets are for is GORGE_PIN (docs/PINNING.md).
-GORGE_ROOT ?= $(shell go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge)
+# gorge-compliance builds against the gorge commit go.mod requires (GORGE_PIN,
+# docs/PINNING.md); a local, gitignored go.work may point at another checkout.
+#
+# GORGE_ROOT is the gorge checkout whose .cards corpus `make cards` links here.
+# GORGE_MODULE_DIR is where go resolves gorge's code, usually the module cache,
+# which has no corpus; gorge's corpus pin is read from its Makefile.
+GORGE_ROOT ?= ../gorge
+GORGE_MODULE_DIR = $(shell go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge 2>/dev/null)
 
 export GOMEMLIMIT ?= 5GiB
 export GOFLAGS ?= -p=2 -trimpath
@@ -12,26 +15,26 @@ GO_TEST_FLAGS ?= -p=2
 
 # The XMage commit the compliance oracle (manifests, out-of-tree driver)
 # is pinned to. XMage is MIT; nothing from it is a build dependency.
-# docs/design/2026-10-02-xmage-compliance-oracle-design.md
 XMAGE_REF  ?= 6b602a1c85e8ed738a4b40b1ef44c54845b57f68
-XMAGE_ORACLE_DIR ?= /mnt/sata/gorge-training/xmageoracle
+# The out-of-tree oracle builds default to gitignored directories here. They run
+# to several GB, so point these at a shared disk to reuse one build across clones.
+XMAGE_ORACLE_DIR ?= .oracle-build/xmage
 # The mtgish commit the card-definition cross-check reads its data at
 # (oracle/mtgish/MTGISH.lock holds the same ref and the files' sha256).
 # mtgish is MIT; its data carries Oracle text and is never committed.
-# docs/design/2026-10-20-mtgish-crosscheck.md
 MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
-FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_ROOT)/Makefile)
-FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_ROOT)/Makefile)
+FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
+FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 # Forge oracle driver commit (fork, branch oracle-harness): a descendant of FORGE_REF with identical script trees.
 # ae39d915 = 4b1a4fde + driver records the final step when its action ends the game (2026-10-29).
 FORGE_ORACLE_REF ?= ae39d915306df882a9d82c752770c7dfd8f20d07
-FORGE_ORACLE_DIR ?= /mnt/sata/gorge-training/forgeoracle
+FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 .PHONY: help
 help:
 	@echo "gorge-compliance targets:"
-	@echo "  make cards          — link gorge's .cards corpus here (run gorge's make fetch-cards compile-cards first)"
+	@echo "  make cards [GORGE_ROOT=../gorge] — link a gorge checkout's .cards corpus here (run gorge's make fetch-cards compile-cards first)"
 	@echo "  make test           — go test ./... (capped like gorge's)"
 	@echo "  make pr [PR_BASE=main] [DRY=1] — open/refresh a GitHub PR with a generated change overview"
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
@@ -49,8 +52,7 @@ help:
 
 .PHONY: cards test boundary oracle-audit smoke
 cards:
-	@test -d "$(GORGE_ROOT)/.cards" || { echo "no corpus at $(GORGE_ROOT)/.cards: run gorge's make fetch-cards compile-cards" >&2; exit 1; }
-	ln -sfn "$(GORGE_ROOT)/.cards" .cards
+	@GORGE_ROOT='$(GORGE_ROOT)' FORGE_REF='$(FORGE_REF)' scripts/link-cards.sh
 
 test:
 	go test $(GO_TEST_FLAGS) ./...
@@ -67,24 +69,24 @@ oracle-audit:
 	go test $(GO_TEST_FLAGS) -count=1 ./audit -run 'TestOracleScenarioFilesWellFormed|TestOracleAudit/$(ORACLE_RUN)|TestXMagePortScenarios' -v
 
 smoke:
+	bash ops/scripts/tests/make_cards_smoke.sh
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
 	bash ops/scripts/tests/xengine_sweep_smoke.sh
 
 # xengine-sweep runs the chunked, resumable cross-engine sweep
-# (scripts/xengine-sweep.sh) on the host: SETS='FDN BLB' CHUNKS=4 GAMES=50.
-# Heavy and Java-backed: the operator's, never a seat's.
-SETS ?= FDN BLB
+# (scripts/xengine-sweep.sh): SETS='FDN BLB' CHUNKS=4 GAMES=50. Heavy: it starts
+# XMage and Forge JVMs, and needs both oracle builds.
 CHUNKS ?= 4
 GAMES ?= 50
 .PHONY: xengine-sweep
 xengine-sweep:
-	scripts/xengine-sweep.sh --sets '$(SETS)' --chunks $(CHUNKS) --games $(GAMES)
+	scripts/xengine-sweep.sh --sets '$(or $(SETS),FDN BLB)' --chunks $(CHUNKS) --games $(GAMES)
 
 # mtgish-fetch downloads mtgish.lines.json and LICENSE at MTGISH_REF into
 # .mtgish/<ref>/ and verifies them against oracle/mtgish/MTGISH.lock.
-# mtgish-xc writes the whole-corpus cross-check report (with the FDN and BLB
-# kernel-set tables) to .coverage/mtgish/ and runs the ledger ratchet: the
+# mtgish-xc writes the whole-corpus cross-check report (with FDN and BLB tables
+# of their own) to .coverage/mtgish/ and runs the ledger ratchet: the
 # corpus ledger oracle/mtgish/known/T1..T4.tsv, the exclusions in
 # known/excluded.tsv, and the shrink-only maxNormalizerRows/maxPendingRows.
 .PHONY: mtgish-fetch mtgish-xc
@@ -100,6 +102,7 @@ mtgish-xc:
 XMAGE_DRIVER_OUT ?= $(CURDIR)/.coverage/xmage-driver
 .PHONY: xmage-driver-tests
 xmage-driver-tests:
+	@test -s "$(XMAGE_ORACLE_DIR)/tests.cp" || { echo "no XMage build at $(XMAGE_ORACLE_DIR): run make xmage-oracle-setup, or set XMAGE_ORACLE_DIR" >&2; exit 1; }
 	for t in scripts/xmage-oracle-test-*.sh; do echo "== $$t"; XMAGE_ORACLE_DIR=$(XMAGE_ORACLE_DIR) bash "$$t" "$(XMAGE_DRIVER_OUT)/$$(basename $$t .sh)" || exit 1; done
 
 .PHONY: compliance-manifests
@@ -114,8 +117,8 @@ forge-oracle-setup:
 
 # compliance-pass runs the XMage compliance pass (gen, plan, XMage replay of
 # the stale scenarios only, diff -write into oracle/compliance/verdicts, summary)
-# over SETS. Needs the xmage-oracle-setup build. HEAVY_LOCK, when set, names
-# the box's heavy-job lock (scripts/heavy-lock.sh).
+# over SETS (default: every set with a printed list). Needs the xmage-oracle-setup
+# build. HEAVY_LOCK, when set, names a heavy-job lock (scripts/heavy-lock.sh).
 SETS ?=
 .PHONY: compliance-pass
 compliance-pass:

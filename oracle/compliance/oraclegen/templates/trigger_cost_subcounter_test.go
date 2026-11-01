@@ -8,7 +8,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// Level B D8: a triggered "remove a counter from this creature" cost
+// Level B: a triggered "remove a counter from this creature" cost
 // (Cost$ SubCounter<1/P1P1>, Cost$ RemoveAnyCounter<1/Any/CARDNAME>) is offered
 // as a pay option at index 0 of the trigger-cost ask, so the generic mayYes
 // answer in the trigger template pays it. The assertions read the counters and

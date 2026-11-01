@@ -1,48 +1,46 @@
 package main
 
-// The Forge oracle's three-way adjudication (DESIGN sections 8-9, plan
-// P3-2 and P3-3).
+// The Forge oracle's three-way adjudication.
 //
 //	oraclediff adjudicate -scenarios scen.jsonl -forge-diff forge-diff.jsonl
 //	    -xmage-cache DIR -oracle-ref REF [-driver SHA | -forge-cache DIR]
-//	    [-verdicts oracle/compliance/verdicts] [-d1 C|B] [-ledger DIR]
+//	    [-verdicts oracle/compliance/verdicts] [-run-ledger] [-ledger DIR]
 //	    [-report PATH] [-mark-review]
 //
 // adjudicate joins three things, by the scenario sha (gate.ItemSHA) and the
 // Forge request sha:
 //
 //   - the committed verdict rows, read from -verdicts, are the V(G,X) leg.
-//     Their status is never changed: Forge never writes a verdict
-//     (DESIGN section 8.2, operator decision D4);
+//     Their status is never changed: Forge never writes a verdict;
 //   - the run's forge-diff rows (-forge-diff) are the V(G,F) leg, already
 //     computed by forge-diff, and carry the request sha that keys the
 //     Forge cache;
 //   - the two caches give Forge's and XMage's snapshots, from which the
 //     V(F,X) leg is computed with the unchanged comparator (CompareOpts
-//     over ForgeOracleResult, DESIGN section 7.1).
+//     over ForgeOracleResult).
 //
 // compliance/oraclediff.ThreeWay then classifies each scenario with one of
-// the DESIGN section 8.1 patterns. Outputs:
+// the three-way patterns. Outputs:
 //
-//   - the compact ledger (operator decision D1): one row per classified
+//   - the compact ledger: one row per classified
 //     scenario, {card, template, scenario_sha, forge_ref, pattern,
-//     gf_field, fx_field}, sharded <a-z>.jsonl. Under D1=C (the default)
-//     it is written under compliance/adjudication/; under D1=B, in the
+//     gf_field, fx_field}, sharded <a-z>.jsonl. By default
+//     it is written under oracle/compliance/adjudication/; with -run-ledger, in the
 //     run directory. Field names are gorge's comparator vocabulary; no
 //     Forge-produced value, message or script text is ever included.
 //   - the per-row report: pattern, the first-difference field of each pair,
 //     and the suggested "oraclediff rule ..." command with its
-//     "forge <pattern> @<ref12>" corroboration suffix (section 8.2). It
+//     "forge <pattern> @<ref12>" corroboration suffix. It
 //     goes next to forge-diff.jsonl in the run directory, never inside the
 //     repository: the run's Forge values stay off-repo under both options.
-//   - with -mark-review (and D1=C): the DESIGN section 8.2 contradiction
+//   - with -mark-review (without -run-ledger): the contradiction
 //     rows get Review: pending through compliance.ReplaceVerdicts -- an
 //     xmage_wrong row whose pattern is FX|G (Forge sides with XMage
 //     against the ruling), and a gorge_wrong row whose pattern is GF|X
 //     (possibly mis-ruled, or a shared script bug). Only the Review field
 //     is written; a status, ruling or frozen expectation is never touched,
-//     hand or automatic. The agree + GX|F contradiction is recorded only
-//     (section 8.2), and under D1=B every contradiction is reported only.
+//     hand or automatic. The agree + GX|F contradiction is recorded only,
+// and with -run-ledger every contradiction is reported only.
 
 import (
 	"bufio"
@@ -62,13 +60,11 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/shape"
 )
 
-// adjudicationDir is the D1=C ledger directory (DESIGN section 9.1, option
-// C), relative to the repo root. The Forge licence boundary test allows
+// adjudicationDir is the ledger directory, relative to the repo root. The Forge licence boundary test allows
 // exactly this path for the ledger shards and nothing else.
 const adjudicationDir = "oracle/compliance/adjudication"
 
-// ledgerRow is one line of the D1=C compact ledger (DESIGN section 9.1,
-// option C). ForgeRef is FORGE_ORACLE_REF[:12], the same pin the cache
+// ledgerRow is one line of the compact ledger. ForgeRef is FORGE_ORACLE_REF[:12], the same pin the cache
 // directory name and the @<ref12> ruling suffix carry.
 type ledgerRow struct {
 	Card        string `json:"card"`
@@ -94,7 +90,7 @@ type reportRow struct {
 	// Status is the committed verdict status, the thing a contradiction is
 	// judged against.
 	Status string `json:"status,omitempty"`
-	// Pattern is the section 8.1 pattern; empty when the row could not be
+	// Pattern is the three-way pattern; empty when the row could not be
 	// classified (Note says why).
 	Pattern string `json:"pattern,omitempty"`
 	// GXField, GFField and FXField are the first-difference field of each
@@ -102,12 +98,12 @@ type reportRow struct {
 	GXField string `json:"gx_field,omitempty"`
 	GFField string `json:"gf_field,omitempty"`
 	FXField string `json:"fx_field,omitempty"`
-	// Evidence is the pattern's section 8.1 "evidence that closes it" text.
+	// Evidence is the pattern's "evidence that closes it" text.
 	Evidence string `json:"evidence,omitempty"`
 	// Rule is the suggested oraclediff rule command, when the pattern's
-	// section 8.1 action is a row ruling this flow can still take.
+	// pattern's action is a row ruling this flow can still take.
 	Rule string `json:"rule,omitempty"`
-	// Contradiction names a section 8.2 contradiction, if any.
+	// Contradiction names a contradiction, if any.
 	Contradiction string `json:"contradiction,omitempty"`
 	// Note is a skip reason or remark.
 	Note string `json:"note,omitempty"`
@@ -122,16 +118,13 @@ func runAdjudicate(args []string) error {
 	fcache := fs.String("forge-cache", "", "Forge result cache directory (default: $FORGE_ORACLE_DIR/cache/<oracle-ref12>-<driver12>)")
 	ref := fs.String("oracle-ref", "", "FORGE_ORACLE_REF of the Forge pass (required: names the Forge cache, the ledger rows and the @ref12 suffix)")
 	driver := fs.String("driver", "", "driver source sha (names the Forge cache directory)")
-	d1 := fs.String("d1", "C", "operator decision D1: C (ledger under "+adjudicationDir+") or B (ledger in the run directory)")
-	ledger := fs.String("ledger", adjudicationDir, "D1=C ledger directory")
+	runLedger := fs.Bool("run-ledger", false, "write the ledger into the run directory, not under "+adjudicationDir+", and only report contradictions")
+	ledger := fs.String("ledger", adjudicationDir, "ledger directory")
 	report := fs.String("report", "", "per-row report JSONL (default: adjudicate-report.jsonl next to -forge-diff, in the run directory)")
-	mark := fs.Bool("mark-review", false, "D1=C: set Review: pending on the section 8.2 contradiction rows through compliance.ReplaceVerdicts")
+	mark := fs.Bool("mark-review", false, "set Review: pending on the contradiction rows through compliance.ReplaceVerdicts")
 	fs.Parse(args)
 	if *scen == "" || *fdPath == "" || *xcache == "" || *ref == "" {
 		return fmt.Errorf("adjudicate needs -scenarios, -forge-diff, -xmage-cache and -oracle-ref")
-	}
-	if *d1 != "C" && *d1 != "B" {
-		return fmt.Errorf("adjudicate -d1 wants C or B, got %q", *d1)
 	}
 	if *fcache == "" && *driver == "" {
 		return fmt.Errorf("adjudicate needs -forge-cache, or -driver with -oracle-ref")
@@ -146,7 +139,7 @@ func runAdjudicate(args []string) error {
 		reportPath = filepath.Join(runDir, "adjudicate-report.jsonl")
 	}
 	ledgerDir := *ledger
-	if *d1 == "B" {
+	if *runLedger {
 		ledgerDir = runDir
 	}
 	frows, dup, err := readForgeRows(*fdPath)
@@ -174,16 +167,16 @@ func runAdjudicate(args []string) error {
 		printCounts("contradiction", res.contradictions)
 	}
 	if *mark && len(res.review) > 0 {
-		if *d1 == "C" {
+		if !*runLedger {
 			if err := compliance.ReplaceVerdicts(*verdicts, res.review); err != nil {
 				return err
 			}
 			fmt.Printf("marked %d contradiction rows Review: pending in %s\n", len(res.review), *verdicts)
 		} else {
-			fmt.Printf("D1=B: %d contradiction rows reported only; verdicts untouched\n", len(res.review))
+			fmt.Printf("-run-ledger: %d contradiction rows reported only; verdicts untouched\n", len(res.review))
 		}
 	}
-	fmt.Printf("ledger: %d rows in %s (D1=%s)\n", len(res.ledger), ledgerDir, *d1)
+	fmt.Printf("ledger: %d rows in %s\n", len(res.ledger), ledgerDir)
 	fmt.Printf("report: %s\n", reportPath)
 	return nil
 }
@@ -244,7 +237,7 @@ func adjudicateRun(scenPath, verdictDir string, frows map[string]ForgeRow,
 		forgeHarness := gf.Status == oraclediff.Harness && gf.Engine != "gorge"
 		// The V(F,X) leg needs both engines' snapshots, which only exist
 		// when the G/X leg was compared and the Forge row carried a result
-		// (DESIGN section 8.1: a harness or lacks row on either side gets
+		// (a harness or lacks row on either side gets
 		// its own pattern without it).
 		fx := oraclediff.Verdict{}
 		fxMissing := ""
@@ -265,7 +258,7 @@ func adjudicateRun(scenPath, verdictDir string, frows map[string]ForgeRow,
 			return nil
 		}
 		if tw.Pattern == oraclediff.Inconsistent {
-			skip("the three pairwise verdicts match no section 8.1 row (gorge's own leg: " +
+			skip("the three pairwise verdicts match no three-way pattern (gorge's own leg: " +
 				string(gx.Status) + " " + gx.Engine + ")")
 			return nil
 		}
@@ -304,8 +297,8 @@ func adjudicateRun(scenPath, verdictDir string, frows map[string]ForgeRow,
 }
 
 // adjudicateRead fills the report's suggested rule command and returns the
-// row's section 8.2 contradiction, if any, and whether -mark-review
-// reopens it. The suggested command is the section 8.1 action only where it
+// row's contradiction, if any, and whether -mark-review
+// reopens it. The suggested command is the pattern's action only where it
 // would still change something: a GF|X on an already-ruled xmage_wrong row
 // is corroboration, and an FX|G on an already-ruled gorge_wrong row
 // likewise. The agree + GX|F contradiction is listed but never marked
@@ -332,7 +325,7 @@ func adjudicateRead(rep *reportRow, vr compliance.VerdictRow, p oraclediff.Patte
 		}
 	case oraclediff.GorgeXMageF:
 		if vr.Status == compliance.StatusAgree {
-			// Recorded only, low priority (DESIGN section 8.2): listed,
+			// Recorded only, low priority: listed,
 			// never marked for review.
 			contradict = "agree contradicted by GX|F (recorded only)"
 		}
@@ -342,7 +335,7 @@ func adjudicateRead(rep *reportRow, vr compliance.VerdictRow, p oraclediff.Patte
 
 // pendingReview copies a contradiction row with only its Review field set:
 // the status, ruling, frozen expectation and every other field are carried
-// through untouched (DESIGN section 8.2: Forge never changes a verdict
+// through untouched (Forge never changes a verdict
 // status, and -mark-review reopens a ruling for a human check, it does not
 // overturn one).
 func pendingReview(vr compliance.VerdictRow) compliance.VerdictRow {
@@ -351,8 +344,8 @@ func pendingReview(vr compliance.VerdictRow) compliance.VerdictRow {
 }
 
 // ruleCmd is the suggested oraclediff rule command for a GF|X or FX|G row
-// (DESIGN section 8.1's "Action in the existing flow"), carrying the
-// "forge <pattern> @<ref12>" corroboration suffix (section 8.2). A level-B
+// (the pattern's action), carrying the
+// "forge <pattern> @<ref12>" corroboration suffix. A level-B
 // template (a requirement key, carrying "#") is passed on; a level-A row
 // needs no -template.
 func ruleCmd(p oraclediff.Pattern, card, template, status, ref12 string) string {
@@ -386,7 +379,7 @@ func committedGX(vr compliance.VerdictRow) oraclediff.Verdict {
 	case compliance.StatusXMageLacks:
 		return oraclediff.Verdict{Status: oraclediff.XMageLacks, Msg: vr.Detail}
 	}
-	// An unknown status matches no section 8.1 row; the report says so.
+	// An unknown status matches no three-way pattern; the report says so.
 	return oraclediff.Verdict{Status: oraclediff.Harness, Engine: "gorge",
 		Msg: "unknown committed status " + vr.Status}
 }

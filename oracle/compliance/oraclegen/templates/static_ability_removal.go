@@ -1,5 +1,5 @@
 // Observation for a RemoveAllAbilities$ static that lands on the permanent
-// its source is attached to (ticket cli-20261009T031407Z-dd0d6fbb). The
+// its source is attached to. The
 // default continuous-static scenario enchants the vanilla Grizzly Bears,
 // whose abilities the removal cannot change, so the row was skipped as
 // "removes the abilities of a permanent the fixture gives none". The Aura is

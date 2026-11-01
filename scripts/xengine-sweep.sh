@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # xengine-sweep.sh [--run NAME] [--sets 'FDN BLB'] [--chunks N] [--games K] [--seed S] [--force]
 #
-# A chunked, resumable xengine sweep outside go test (DESIGN xengine section 8).
+# A chunked, resumable xengine sweep outside go test.
 # Per set and chunk c (K games each):
 #   1. xengine play  -- gorge plays K games, lowers them to <chunk>/items.jsonl
 #                       (every go stage -- play, diff, cov, sweep-plan -- runs
@@ -15,7 +15,7 @@
 #   3. xengine diff  -- classify the follower rows into <chunk>/diff-<f>
 #      with both followers, xengine adjudicate -- the three-way pattern of each
 #                       item either diverged on (<chunk>/adjudicate/, ticket drafts
-#                       under tickets/; off-repo, nothing is ruled or committed)
+#                       under tickets/; nothing is ruled or committed)
 #   4. the coverage ledger <root>/ledger.tsv absorbs the chunk (atomically),
 #      SUMMARY.md is regenerated, and <chunk>/.done is touched. A chunk is done
 #      only when every stage exited 0.
@@ -40,8 +40,9 @@
 # max XENGINE_JVM_WAIT seconds) while 2 or more run.
 #
 # Environment:
-#   XENGINE_ROOT          output root (default /mnt/sata/gorge-training/xengine/<run>);
-#                         refused inside the repository
+#   XENGINE_ROOT          output root (default .oracle-build/xengine/<run>); any
+#                         other directory inside the repository is refused, because
+#                         follower output must never be committed
 #   XENGINE_FOLLOWERS     'forge xmage' (default)
 #   XENGINE_GO_JOBS       concurrent play stages, a positive integer (default 1:
 #                         strictly serial; see the ledger merge below)
@@ -49,7 +50,7 @@
 #   XENGINE_TAPE_TURNS    comma-separated turn counts passed to play as -tape-turns
 #                         (default none): the prefixes `xengine calib` reads
 #   XENGINE_XMAGE_TAPES   1 passes -tapes to xprep, so tape items go to XMage too;
-#                         0 (default) keeps XMage window-only (design O4). The
+#                         0 (default) keeps XMage window-only. The
 #                         calibration re-runs use 1.
 #   XENGINE_JVM_WAIT      max seconds to wait for a JVM slot (default 21600)
 #   XENGINE_JVM_POLL      poll interval in seconds (default 30)
@@ -92,7 +93,7 @@ PGREP=${XENGINE_PGREP:-/usr/bin/pgrep}
 followers=${XENGINE_FOLLOWERS:-forge xmage}
 jvm_wait=${XENGINE_JVM_WAIT:-21600}
 jvm_poll=${XENGINE_JVM_POLL:-30}
-root=${XENGINE_ROOT:-/mnt/sata/gorge-training/xengine/$run}
+root=${XENGINE_ROOT:-$repo/.oracle-build/xengine/$run}
 
 jobs=${XENGINE_GO_JOBS:-1}
 case "$jobs" in
@@ -104,10 +105,11 @@ for f in $followers; do
 	case "$f" in forge | xmage) ;; *) echo "xengine-sweep: unknown follower $f (want forge or xmage)" >&2; exit 2 ;; esac
 done
 
-# Follower output stays off-repo.
+# Follower output (Forge's is GPL-3.0) can never be one `git add` from a commit.
 absroot=$(realpath -m "$root")
 case "$absroot/" in
-"$repo"/*) echo "xengine-sweep: refusing XENGINE_ROOT $root: it is inside the repository $repo" >&2; exit 2 ;;
+"$repo"/.oracle-build/*) ;;
+"$repo"/*) echo "xengine-sweep: refusing XENGINE_ROOT $root: it is inside the repository $repo and not under .oracle-build/" >&2; exit 2 ;;
 esac
 mkdir -p "$absroot"
 root=$absroot

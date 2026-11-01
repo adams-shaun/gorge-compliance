@@ -9,7 +9,7 @@ import (
 )
 
 // TestRemainingStaticModesClassify pins the classification of every row in
-// the remaining-static-modes ticket's measured table: the served rows carry
+// the remaining-static-modes change's measured table: the served rows carry
 // their sub-family with no gap (reqOf), the rows whose probe the engine or
 // the fixture grammar cannot reach carry a named gap (gapOf).
 func TestRemainingStaticModesClassify(t *testing.T) {

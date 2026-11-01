@@ -13,7 +13,7 @@ import (
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
-// static_exileperm_class_test.go is the wave-5 group X ratchet: the exile-zone
+// static_exileperm_class_test.go is the group X ratchet: the exile-zone
 // permission and exiled-with link rows the engine now implements must each be
 // SERVED by a generated scenario that observes the mechanism (the count's
 // grant on the card; the offered cast and the price it charges).
@@ -98,8 +98,7 @@ func onBattlefieldRef(s rules.OracleSnapshot, ref string) bool {
 }
 
 // wantMayPlayAltCostCensus is the corpus-wide split of every Mode$
-// Continuous MayPlay$ True static carrying MayPlayAltManaCost$ (measured at
-// lb5-exileperm). It is a ratchet: served may only rise and each skip reason
+// Continuous MayPlay$ True static carrying MayPlayAltManaCost$. It is a ratchet: served may only rise and each skip reason
 // may only fall; lower a skip and raise served in the same commit.
 //
 // The five served rows: Valgavoth, Terror Eater and Warped Space (this

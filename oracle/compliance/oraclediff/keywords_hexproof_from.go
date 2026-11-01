@@ -5,8 +5,8 @@ import (
 	"strings"
 )
 
-// The hexproof-from opt-in (CompareKeywordsHexproofFrom). Section 2.3 of the
-// level-B spec keeps "hexproof from <quality>" outside both keyword
+// The hexproof-from opt-in (CompareKeywordsHexproofFrom). Section 2.3 of
+// docs/design/2026-10-05-compliance-level-b.md keeps "hexproof from <quality>" outside both keyword
 // vocabularies because the two engines spell the quality differently. The
 // colour qualities are the exception: XMage's driver emits one rule-text
 // keyword per colour ("hexproof from green", HexproofFromGreenAbility and its

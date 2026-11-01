@@ -1,12 +1,12 @@
 # XMage compliance level B — design (2026-10-05)
 
-> **Moved to gorge-compliance (2026-10-16).** This design was written in gorge
-> (later four-yay); paths below are as written then. Today:
+> **Moved to gorge-compliance (2026-10-16).** This design was written in gorge;
+> paths below are as written then. Today:
 > `engine/rules/testdata/oracle/` and `engine/rules/testdata/xmageport/` are this
 > repository's `scenarios/oracle/` and `scenarios/xmageport/` (gorge keeps nine
 > residual hand-scenario files as its runner contract check), their drivers
 > `rules.TestOracleAudit` / `rules.TestXMagePortScenarios` are `audit/`'s, and
-> `lab/X` / four-yay's `X` is `X` here. See README.md and docs/PINNING.md.
+> `lab/X` is `X` here. See README.md and docs/PINNING.md.
 
 Status: design. Base `main@e24cf157c`. Extends
 [`2026-10-02-xmage-compliance-oracle-design.md`](2026-10-02-xmage-compliance-oracle-design.md)
@@ -295,14 +295,13 @@ Generator side: `oraclegen.Step` gains `ability_index` (`*int`) and `active`;
   under `XMAGE_ORACLE_DIR` were lost on 2026-10-05: rebuild with `make
   xmage-oracle-setup` before any replay. A driver change needs a forced full
   replay (every scenario, not `plan`'s stale set), per
-  `.ds4/operator-compliance-refresh.md`; the helper it names must be recreated
+  a private note; the helper it names must be recreated
   with the setup.
 
 ## 5. Order of work
 
-Seats cannot run XMage, and any branch touching `oracle/xmageoracle/` parks at
-the "xmage driver needs host replay" gate (`.agentctl/config.toml:220`) for a
-host operator. So every family is a gorge-side ticket (generator, runner,
+The workers doing this could not run XMage, and any branch touching `oracle/xmageoracle/` parks at
+a gate that sends driver changes to whoever can replay them. So every family is a gorge-side ticket (generator, runner,
 comparator, census) followed by a driver ticket that depends on it. Gorge-side
 tickets can land before the driver: level B is declared nowhere, so a
 new-template row reading `harness` or `no verdict` reddens no gate.
@@ -334,8 +333,7 @@ census, so its size is measured before anyone schedules it.
 
 ## 7. The `offered` observation (legality statics)
 
-Status: design + the two positive-observable rows served (ticket
-cli-20261006T035109Z-1f44e455). Base `main@8da804429`. Sections 1-6 stay as
+Status: design + the two positive-observable rows served. Base `main@8da804429`. Sections 1-6 stay as
 written; this section replaces section 6's sketch ("legality statics need an
 `offered` observation in both engines"). Every `path:line` in the XMage source
 below was read at `$XMAGE_ORACLE_DIR/mage` (2026-10-06); the gorge paths at the

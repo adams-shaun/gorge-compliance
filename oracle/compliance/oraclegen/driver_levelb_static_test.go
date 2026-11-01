@@ -25,7 +25,7 @@ func snapshotBody(t *testing.T, java string) string {
 
 // TestDriverSnapshotEmitsPermanentKeywords pins L12: the XMage snapshot adds a
 // sorted, de-duplicated `keywords` array to every permanent, built from the
-// permanent's ability names (spec 2.3, H5), so L10's opt-in field is not
+// permanent's ability names, so the opt-in field is not
 // empty on the XMage side.
 func TestDriverSnapshotEmitsPermanentKeywords(t *testing.T) {
 	b, err := os.ReadFile(scenarioReplayPath)

@@ -10,7 +10,7 @@ import (
 )
 
 // grantedLoyaltyRows are the granted loyalty-ability rows
-// (levelb-static-granted-abilities) this ticket serves: a planeswalker probe
+// this change serves: a planeswalker probe
 // is offered the granted activation, labelled with the ability's text. The
 // Avatar's [-10] and Kiora's [-8] are beyond every probe's printed loyalty, so
 // the scenario puts the difference on the probe as LOYALTY counters; the

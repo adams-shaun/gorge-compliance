@@ -1,4 +1,4 @@
-// Level-B static shapes for the ticket's three servable static modes
+// Level-B static shapes for the change's three servable static modes
 // (TapPowerValue, CastWithFlash, CantDraw). Each reports one exact parameter
 // shape the matching template in oracle/compliance/oraclegen/templates serves; any
 // other parameter keeps the requirement a named gap, so a shape a template

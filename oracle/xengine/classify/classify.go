@@ -1,6 +1,6 @@
 // Package classify turns the comparison of one lowered xengine item against
 // one follower engine's replay of it into a Finding: one class per (item,
-// engine), first match wins (DESIGN §4.1). It reuses oraclediff.CompareOpts
+// engine), first match wins. It reuses oraclediff.CompareOpts
 // unchanged, so the first difference is the one every other oracle pass
 // reports; the classifier only decides what KIND of difference it is.
 package classify
@@ -331,7 +331,7 @@ func rngDrawn(item lower.Lowered, t *game.Tape, d int) bool {
 
 // projectionGap is a difference the comparison vocabulary cannot decide yet:
 // an unmapped keyword ("other:<kw>") on either side, or tokens the engines
-// name differently (DESIGN §4: such fields are gaps, never divergences).
+// name differently (such fields are gaps, never divergences).
 func projectionGap(v oraclediff.Verdict) bool {
 	if strings.Contains(v.Gorge, "other:") || strings.Contains(v.XMage, "other:") {
 		return true

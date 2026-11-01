@@ -128,7 +128,7 @@ func TestDiesOtherEquipmentIsAttachedBeforeTheKill(t *testing.T) {
 
 // TestDiesOtherDamagedVictimKeepsNamedSkip: the one victim qualifier no
 // cause here serves — "damaged" — keeps its named skip, never a bare "did
-// not fire" (ticket g17 serves the other victim qualifiers).
+// not fire" (other recipes serve the other victim qualifiers).
 func TestDiesOtherDamagedVictimKeepsNamedSkip(t *testing.T) {
 	reg := loadGenRegistry(t)
 	c, ok := reg.Lookup("Trophy Hunter")
@@ -151,7 +151,7 @@ func TestDiesOtherDamagedVictimKeepsNamedSkip(t *testing.T) {
 }
 
 // TestDiesOtherSpecialVictimsAreServed: a dies-other victim qualifier the
-// placed-victim walk cannot satisfy (ticket g17) is served by its dedicated
+// placed-victim walk cannot satisfy is served by its dedicated
 // cause, and the scenario names the mechanism — the Clue dies as a token
 // after its maker, a Blight Rot cast takes the victim to 0 toughness, an
 // attacking victim dies mid-combat — mirroring

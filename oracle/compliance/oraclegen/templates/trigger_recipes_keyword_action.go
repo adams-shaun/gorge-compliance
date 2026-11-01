@@ -8,8 +8,8 @@ import (
 )
 
 // Probe cards for the keyword-action trigger recipes, tried in order like the
-// other probe lists (spec hypothesis H4: a gorge PlaysThrough test picks the
-// winner and the host replay confirms it exists in XMage).
+// other probe lists (a gorge PlaysThrough test picks the
+// winner and the XMage replay confirms it exists in XMage).
 var (
 	// A creature whose enters-the-battlefield trigger explores: casting it
 	// makes a creature p0 controls explore, which fires a "whenever a

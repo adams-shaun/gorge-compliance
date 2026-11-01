@@ -2,8 +2,8 @@
 # Check the driver's scripted colour-choice queueing without starting H2 or a game.
 # Requires the read-only XMage build, just like the driver's javac check.
 set -euo pipefail
-root=${XMAGE_ORACLE_DIR:-/mnt/sata/gorge-training/xmageoracle}
-out=${1:-.ds4/scratch/colour-choice-driverout}
+root=$(realpath -m "${XMAGE_ORACLE_DIR:-$(dirname "$0")/../.oracle-build/xmage}")
+out=${1:-.coverage/xmage-driver/colour-choice-driverout}
 here=$(cd "$(dirname "$0")/.." && pwd)
 export JAVA_HOME="$root/jdk"
 export PATH="$JAVA_HOME/bin:$PATH"

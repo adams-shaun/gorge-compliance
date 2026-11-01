@@ -1,18 +1,16 @@
 package oraclediff
 
-// The three-way adjudication core of the Forge oracle (design
-// .ds4/forge-oracle/DESIGN.md section 8.1, plan P3-1). Everything here is
+// The three-way adjudication core of the Forge oracle. Everything here is
 // pure: the caller supplies the three pairwise comparisons and the two
-// states the comparator cannot report, and gets back one of the section 8.1
+// states the comparator cannot report, and gets back one of the three-way
 // patterns with the evidence that closes it. Nothing here runs an engine,
 // reads a cache or writes a file; cmd/oraclediff/adjudicate joins the rows
 // and calls this.
 
 import "github.com/adams-shaun/gorge/engine/rules"
 
-// Pattern is one of the three-way patterns of DESIGN section 8.1. The
-// values are the section's own labels, so a ledger row carries them
-// verbatim.
+// Pattern is one of the three-way patterns. A ledger row carries the
+// value verbatim.
 type Pattern string
 
 const (
@@ -22,7 +20,7 @@ const (
 	// engine bug, an XMage driver artefact, or a shared script bug.
 	GorgeForgeX Pattern = "GF|X"
 	// ForgeXMageG: Forge = XMage, both differ from gorge ("FX|G"): a gorge
-	// engine bug, and the fast path for a gorge fix ticket.
+	// engine bug, and the fast path for a gorge fix.
 	ForgeXMageG Pattern = "FX|G"
 	// GorgeXMageF: gorge = XMage, both differ from Forge ("GX|F"): a
 	// Forge-only bug or a Forge driver artefact. Recorded only.
@@ -36,16 +34,16 @@ const (
 	// Gorge diverges from the script's reference interpreter.
 	GorgeNoForgeNoX Pattern = "G|F|–"
 	// ForgeHarness: the Forge driver could not express the scenario ("F
-	// harness"). A fork driver ticket, never a verdict on the card.
+	// harness"). A fork driver fix, never a verdict on the card.
 	ForgeHarness Pattern = "F harness"
-	// Inconsistent is not a section 8.1 pattern: the inputs match no row of
+	// Inconsistent is not a real pattern: the inputs match no row of
 	// it (a harness on gorge's own side, or a pairwise combination the
 	// transitivity premise says cannot occur). A caller must not treat it
 	// as a classification.
 	Inconsistent Pattern = "INCONSISTENT"
 )
 
-// ThreeWayVerdict is one scenario's section 8.1 classification: the pattern
+// ThreeWayVerdict is one scenario's three-way classification: the pattern
 // and the section's "Evidence that closes it" text.
 type ThreeWayVerdict struct {
 	Pattern  Pattern
@@ -67,11 +65,11 @@ type ThreeWayVerdict struct {
 // miss (XMageLacksCard): CompareOpts reports it as HARNESS, and only the
 // caller, which knows the scenario card, can tell the two apart.
 //
-// A harness on gorge's own side matches no section 8.1 pattern and returns
+// A harness on gorge's own side matches no three-way pattern and returns
 // Inconsistent; the caller should report the gorge failure instead.
 func ThreeWay(gx, gf, fx Verdict, forgeHarness, xmageLacks bool) ThreeWayVerdict {
 	// A Forge harness is a driver gap whatever the other pairs say
-	// (section 8.1 "F harness": V(G,X) any, V(G,F) H, V(F,X) –). The x side
+	// ("F harness": V(G,X) any, V(G,F) H, V(F,X) –). The x side
 	// of the G/F leg is Forge, so a harness verdict there with an engine
 	// other than gorge is Forge's too; the explicit flag covers a caller
 	// that did not compute gf at all.
@@ -79,14 +77,14 @@ func ThreeWay(gx, gf, fx Verdict, forgeHarness, xmageLacks bool) ThreeWayVerdict
 		return threeWay(ForgeHarness)
 	}
 	// Gorge could not run the scenario: neither comparison says anything
-	// about an engine, and section 8.1 has no pattern for it. CompareOpts
+	// about an engine, and no pattern covers it. CompareOpts
 	// reports it with engine "gorge" on the G/X leg; the same run failed on
 	// the G/F leg, so a harness there is gorge's too.
 	if gf.Status == Harness || (gx.Status == Harness && gx.Engine == "gorge") {
 		return threeWay(Inconsistent)
 	}
-	// XMage harness or lacks: only gorge vs Forge remains (section 8.1
-	// "GF|–" / "G|F|–"; V(F,X) is not computed).
+	// XMage harness or lacks: only gorge vs Forge remains
+	// ("GF|–" / "G|F|–"; V(F,X) is not computed).
 	if xmageLacks || gx.Status == XMageLacks || gx.Status == Harness {
 		switch gf.Status {
 		case Agree:
@@ -119,7 +117,7 @@ func threeWay(p Pattern) ThreeWayVerdict {
 	return ThreeWayVerdict{Pattern: p, Evidence: p.Evidence()}
 }
 
-// Evidence is the DESIGN section 8.1 "Evidence that closes it" text for the
+// Evidence is the "evidence that closes it" text for the
 // pattern.
 func (p Pattern) Evidence() string {
 	switch p {
@@ -134,20 +132,20 @@ func (p Pattern) Evidence() string {
 	case AllDiffer:
 		return "1. Rule out a harness cause on each side: strict_miss, leftover, decision-shape divergence. 2. A hand oracle scenario written from the Oracle text and the CR, using the W-series two-role authoring (2026-09-27-oracle-text-card-audit.md), is the arbiter"
 	case GorgeForgeNoX:
-		return "It cannot count toward compliance (§3). An xmage_lacks card still needs its hand Oracle scenario (XMage design §8, lines 198-201)"
+		return "It cannot count toward compliance. An xmage_lacks card still needs its hand Oracle scenario (docs/design/2026-10-02-xmage-compliance-oracle-design.md section 8, lines 198-201)"
 	case GorgeNoForgeNoX:
 		return "Oracle text plus the CR. Most often a gorge bug, sometimes a Forge bug"
 	case ForgeHarness:
 		return "none"
 	case Inconsistent:
-		return "The three pairwise verdicts match no section 8.1 row: re-check the pair whose row is stale or harnessed before classifying."
+		return "The three pairwise verdicts match no three-way pattern: re-check the pair whose row is stale or harnessed before classifying."
 	}
 	return ""
 }
 
 // ForgeOracleResult converts a Forge row's snapshots into the OracleResult
 // that CompareOpts takes as its left-hand side, so the unchanged comparator
-// can diff Forge against XMage (DESIGN section 7.1). It carries no Fails and
+// can diff Forge against XMage. It carries no Fails and
 // no Decisions: a Forge harness row has no F-vs-X leg (ThreeWay reports
 // ForgeHarness instead), and a caller passes the result with a nil error.
 func ForgeOracleResult(x XResult) rules.OracleResult {

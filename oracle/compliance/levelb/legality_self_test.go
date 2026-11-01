@@ -7,7 +7,7 @@ import (
 )
 
 // TestSelfLegalityStaticShapes pins which self-referential combat-legality
-// statics are served (cli-20261006T132127Z-b96121b3) and that every
+// statics are served and that every
 // conditional or filtered sibling stays the named "legality static" gap.
 func TestSelfLegalityStaticShapes(t *testing.T) {
 	creature := func(st cards.Static) (string, string) {
@@ -24,7 +24,7 @@ func TestSelfLegalityStaticShapes(t *testing.T) {
 		{"CantBlockBy self", stat("CantBlockBy", map[string]string{"ValidAttacker": "Creature.Self"}), "static.cant-block-by-self"},
 		{"MinMaxBlocker Min 3", stat("MinMaxBlocker", map[string]string{"ValidCard": "Creature.Self", "Min": "3"}), "static.min-blockers"},
 		// Gaps: every one of these changes WHEN or FOR WHOM the restriction holds.
-		// Gated shapes are served since cli-20261009T031407Z-6fac1771: the
+		// Gated shapes are served: the
 		// gate is a setup-able board fact the paired template resolves.
 		{"CantBlock conditional", stat("CantBlock", map[string]string{"ValidCard": "Card.Self", "Condition": "Threshold"}), "static.cant-block-gated"},
 		{"CantBlock IsPresent", stat("CantBlock", map[string]string{"ValidCard": "Card.Self", "IsPresent": "Land.YouCtrl+untapped"}), "static.cant-block-gated"},
