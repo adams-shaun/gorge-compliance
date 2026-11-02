@@ -33,15 +33,17 @@ const (
 
 // Dirac's answer for one item.
 const (
-	Agree    = "D=G"  // dirac posed and reached what gorge did through the item
-	Diverge  = "D!=G" // dirac differs from gorge within the item
-	NotAppl  = "D-"   // dirac has no answer here
-	diffClip = 20     // Row.Diff lines kept
+	Agree   = "D=G"  // dirac posed and reached what gorge did through the item
+	Diverge = "D!=G" // dirac differs from gorge within the item
+	NotAppl = "D-"   // dirac has no answer here
 )
 
-// GameTimeout bounds one lockstep game; dirac and gorge each play a game in
-// well under a second.
-const GameTimeout = 30 * time.Second
+const (
+	// GameTimeout bounds one lockstep game. A game takes well under a second, so a
+	// game past it is a hang, and its goroutine is left behind.
+	GameTimeout = 30 * time.Second
+	diffClip    = 20 // Row.Diff lines kept
+)
 
 // Row is one game's line of dirac.jsonl. Intents is how many answers gorge
 // committed in lockstep. FromTurn and ToTurn are the turns of the answer before the
