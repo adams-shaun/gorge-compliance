@@ -13,6 +13,7 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -20,9 +21,15 @@ import (
 
 // The classes, in the order Classify tries them.
 const (
-	ClassLowerGap      = "lower_gap"
-	ClassXMageLacks    = "xmage_lacks"
-	ClassHarness       = "harness"
+	ClassLowerGap   = "lower_gap"
+	ClassXMageLacks = "xmage_lacks"
+	ClassHarness    = "harness"
+	// ClassNotSent is an item xprep left out on purpose: the follower has no
+	// row for it and nothing went wrong.
+	ClassNotSent = "not_sent"
+	// ClassTurnCap is a whole-game tape that agreed as far as the Forge
+	// driver's turn cap, which a window fits inside and a tape does not.
+	ClassTurnCap       = "turn_cap"
 	ClassDecisionShape = "decision_shape"
 	// ClassPaymentChoice is the decision_shape family's mana-payment case:
 	// the only difference is which legal pool units paid a cost neither
@@ -47,7 +54,7 @@ const (
 // Classes lists every class, in report order.
 var Classes = []string{
 	ClassAgree, ClassDiverge, ClassRNG, ClassProjectionGap, ClassDecisionShape,
-	ClassPaymentChoice, ClassForgeSkipsDamageStep, ClassHarness, ClassXMageLacks, ClassLowerGap,
+	ClassPaymentChoice, ClassForgeSkipsDamageStep, ClassHarness, ClassNotSent, ClassTurnCap, ClassXMageLacks, ClassLowerGap,
 }
 
 // Finding is the classified outcome for one item and one follower engine.
@@ -83,6 +90,11 @@ func GapFinding(item lower.Lowered, c lower.Check) Finding {
 // "forge".
 func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oraclediff.XResult, engine string) Finding {
 	f := Finding{ID: item.Item.ID, Engine: engine, Step: -1}
+	stopped := ""
+	if pg, px, ok := Partial(item.Item, g, x); ok {
+		stopped = x.Harness
+		g, x = pg, px
+	}
 	v := oraclediff.CompareOpts(g, nil, x, item.Item.Compare, item.Item.Ignore...)
 	f.Checkpoint, f.Field, f.Gorge, f.Other = v.Checkpoint, v.Field, v.Gorge, v.XMage
 	f.Step = stepOf(v.Checkpoint)
@@ -98,6 +110,8 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	case v.Status == oraclediff.XMageLacks ||
 		(v.Status == oraclediff.Harness && engine == "xmage" && xmageLacks(v.Msg, t)):
 		f.Class, f.Msg = ClassXMageLacks, v.Msg
+	case v.Status == oraclediff.Harness && engine == "forge" && strings.Contains(item.Item.ID, ":tape") && strings.Contains(v.Msg, turnCapMsg):
+		f.Class, f.Msg = ClassTurnCap, v.Msg
 	case v.Status == oraclediff.Harness:
 		who := v.Engine
 		if who == "xmage" {
@@ -118,8 +132,31 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 		f.Class = ClassProjectionGap
 	default:
 		f.Class = ClassDiverge
+		if stopped != "" {
+			f.Msg = "the driver then stopped: " + stopped
+		}
 	}
 	return f
+}
+
+// turnCapMsg starts the Forge driver's report of its turn cap.
+const turnCapMsg = "passed turn "
+
+// Partial is gorge's result and a harness row x, both cut to the checkpoints the
+// driver reached, when the engines already differ there: the driver stopped because
+// the game had parted from the script, so the difference is the finding and the stop
+// is its consequence. ok is false for any other row, which keeps its harness verdict.
+func Partial(item oraclegen.Item, g rules.OracleResult, x oraclediff.XResult) (rules.OracleResult, oraclediff.XResult, bool) {
+	n := len(x.Snapshots)
+	if x.Harness == "" || n == 0 || n > len(g.Snapshots) {
+		return g, x, false
+	}
+	cg, cx := g, x
+	cg.Snapshots, cx.Harness = g.Snapshots[:n], ""
+	if oraclediff.CompareOpts(cg, nil, cx, item.Compare, item.Ignore...).Status != oraclediff.Diverge {
+		return g, x, false
+	}
+	return cg, cx, true
 }
 
 // skippedDamageStep is the checkpoint at which Forge left for end of combat

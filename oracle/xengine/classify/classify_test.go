@@ -270,15 +270,15 @@ func TestClassifyForgeSkipsDamageStep(t *testing.T) {
 	if f := Classify(item, nil, g, shortcut, "xmage"); f.Class == ClassForgeSkipsDamageStep {
 		t.Errorf("another engine: %+v", f)
 	}
-	if f := Classify(item, nil, g, forge("combat-damage", "end-combat", "end-combat"), "forge"); f.Class != ClassHarness {
+	if f := Classify(item, nil, g, forge("combat-damage", "end-combat", "end-combat"), "forge"); f.Class != ClassDiverge {
 		t.Errorf("the active seat's pass does not end a step: %+v", f)
 	}
-	if f := Classify(item, nil, g, forge("combat-damage", "combat-damage", "main2"), "forge"); f.Class != ClassHarness {
+	if f := Classify(item, nil, g, forge("combat-damage", "combat-damage", "main2"), "forge"); f.Class != ClassDiverge {
 		t.Errorf("another first difference: %+v", f)
 	}
 	earlier := forge("combat-damage", "combat-damage", "end-combat")
 	earlier.Snapshots[1].Players[0].Life = 19
-	if f := Classify(item, nil, g, earlier, "forge"); f.Class != ClassHarness {
+	if f := Classify(item, nil, g, earlier, "forge"); f.Class != ClassDiverge {
 		t.Errorf("an earlier disagreement: %+v", f)
 	}
 }
@@ -398,5 +398,40 @@ func TestDistinctColours(t *testing.T) {
 		if got := distinctColours(c.pool); got != c.want {
 			t.Errorf("distinctColours(%q) = %d, want %d", c.pool, got, c.want)
 		}
+	}
+}
+
+func TestClassifyHarnessAfterADifference(t *testing.T) {
+	item, tp, g := fixture(0)
+	differs := follower(g, func(x *oraclediff.XResult) {
+		x.Snapshots = x.Snapshots[:2]
+		x.Snapshots[1].Players[0].Life = 19
+		x.Harness = "harness: pass: p0 does not hold priority at step 1 (p1 does)"
+	})
+	f := Classify(item, tp, g, differs, "forge")
+	if f.Class != ClassDiverge || f.Field != "p0.life" || !strings.Contains(f.Msg, "does not hold priority") {
+		t.Fatalf("a stop after a difference: %+v", f)
+	}
+	same := follower(g, func(x *oraclediff.XResult) {
+		x.Snapshots = x.Snapshots[:2]
+		x.Harness = "harness: step 1 (cast) was not put on the stack"
+	})
+	if f := Classify(item, tp, g, same, "forge"); f.Class != ClassHarness {
+		t.Fatalf("a stop with no difference: %+v", f)
+	}
+}
+
+func TestClassifyTurnCapIsATapesOnly(t *testing.T) {
+	item, tp, g := fixture(0)
+	capped := follower(g, func(x *oraclediff.XResult) {
+		x.Snapshots = x.Snapshots[:2]
+		x.Harness = "harness: passed turn 5 at step 1"
+	})
+	if f := Classify(item, tp, g, capped, "forge"); f.Class != ClassTurnCap {
+		t.Fatalf("a tape at the cap: %+v", f)
+	}
+	item.Item.ID = "xe:T:0:0:w3"
+	if f := Classify(item, tp, g, capped, "forge"); f.Class != ClassHarness {
+		t.Fatalf("a window past the cap: %+v", f)
 	}
 }

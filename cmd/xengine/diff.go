@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -15,6 +16,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/xprep"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
@@ -114,6 +116,19 @@ func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) erro
 		return fmt.Errorf("%s already holds finds; pick a fresh -out", out)
 	}
 
+	notSent := map[string]string{}
+	if engine == "xmage" {
+		if err := readLines(filepath.Join(playDir, xprepRefusalsFile), func(b []byte) error {
+			var r xprep.Refusal
+			if err := json.Unmarshal(b, &r); err != nil {
+				return err
+			}
+			notSent[r.ID] = r.Reason
+			return nil
+		}); err != nil && !errors.Is(err, os.ErrNotExist) {
+			return err
+		}
+	}
 	absPlay, _ := filepath.Abs(playDir)
 	absRows, _ := filepath.Abs(rowsPath)
 	origin := classify.Origin{Play: absPlay, Rows: absRows}
@@ -162,7 +177,9 @@ func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) erro
 			return fmt.Errorf("%s: %w", r.Tape, err)
 		}
 		x, have := rows[r.ID]
-		if !have {
+		if why, left := notSent[r.ID]; !have && left {
+			f = classify.Finding{ID: r.ID, Engine: engine, Class: classify.ClassNotSent, Step: -1, Msg: why}
+		} else if !have {
 			f = classify.Finding{ID: r.ID, Engine: engine, Class: classify.ClassHarness, Step: -1, Msg: "no " + engine + " result"}
 		} else {
 			if only != "" && len(x.Snapshots) < len(g.Snapshots) {
