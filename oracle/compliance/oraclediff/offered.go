@@ -1,6 +1,7 @@
 package oraclediff
 
 import (
+	"regexp"
 	"sort"
 	"strings"
 	"unicode"
@@ -58,9 +59,17 @@ func offeredLabel(source, label string) string {
 	}, label)
 }
 
+// tokenSource is a token's name in a stack field. The engines name tokens differently,
+// which is why permanents compare them by characteristics, and gorge's ref to a token may
+// name only that it is one.
+var tokenSource = regexp.MustCompile(`:(?:[^:@,\[\]]+ )?Token@`)
+
 func fieldEqual(a, b field) bool {
 	if a.name != b.name {
 		return false
+	}
+	if a.name == "stack" {
+		return tokenSource.ReplaceAllString(a.value, ":Token@") == tokenSource.ReplaceAllString(b.value, ":Token@")
 	}
 	if a.name == "offered" {
 		return offeredEqual(a.value, b.value)
