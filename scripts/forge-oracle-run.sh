@@ -76,7 +76,9 @@ if [ ! -f "$classes/.done" ]; then
   tmp=$classes.tmp.$$
   rm -rf "$tmp" && mkdir -p "$tmp"
   mapfile -d '' srcs < <(find "$src/src/main/java" -name '*.java' -print0 | sort -z)
-  systemd-run --user --scope --quiet -p MemoryMax=4G -p CPUQuota=400% -- \
+  javac_scope=(systemd-run --user --scope --quiet -p MemoryMax=4G -p CPUQuota=400% --)
+  [ "${XENGINE_SCOPE:-systemd}" != none ] || javac_scope=()
+  "${javac_scope[@]}" \
     "$jdk/bin/javac" -J-Xmx1g --release 17 -encoding UTF-8 -nowarn -cp "$cp" -d "$tmp" "${srcs[@]}"
   touch "$tmp/.done"
   rm -rf "$classes" && mv "$tmp" "$classes"
@@ -99,6 +101,8 @@ mkdir -p "$(dirname "$out")"
 : > "$out.log"
 split -d -a 8 -l "$chunk_size" -- "$in" "$run_tmp/input."
 chunk_number=0
+scope=(systemd-run --user --scope --quiet -p MemoryMax="${FORGE_ORACLE_MEM:-3G}" -p CPUQuota=400% --)
+[ "${XENGINE_SCOPE:-systemd}" != none ] || scope=()
 cd "$tmpdir"
 for chunk in "$run_tmp"/input.*; do
   [ -f "$chunk" ] || continue
@@ -106,7 +110,7 @@ for chunk in "$run_tmp"/input.*; do
   chunk_name=$(printf 'chunk %d' "$chunk_number")
   chunk_out="$run_tmp/output.$(printf '%08d' "$chunk_number")"
   chunk_log="$run_tmp/log.$(printf '%08d' "$chunk_number")"
-  if ! systemd-run --user --scope --quiet -p MemoryMax="${FORGE_ORACLE_MEM:-3G}" -p CPUQuota=400% -- \
+  if ! "${scope[@]}" \
     env FORGE_RES="$top/forge-gui/res" FORGE_ORACLE_REF="$ref" \
     "$jdk/bin/java" -Djava.awt.headless=true -Xmx"${FORGE_ORACLE_HEAP:-1536m}" -XX:+UseSerialGC \
       -Djava.io.tmpdir="$tmpdir" -cp "$classes:$cp" "${FORGE_ORACLE_MAIN:-forge.oracle.ScenarioReplay}" \

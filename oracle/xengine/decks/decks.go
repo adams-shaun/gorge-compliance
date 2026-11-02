@@ -148,6 +148,22 @@ func pips(cost string) [5]int {
 	return p
 }
 
+// Union is the lists' cards, each name once, in list order: the candidates of
+// decks drawn across sets.
+func Union(lists ...[]Card) []Card {
+	seen := map[string]bool{}
+	var out []Card
+	for _, l := range lists {
+		for _, c := range l {
+			if !seen[c.Name] {
+				seen[c.Name] = true
+				out = append(out, c)
+			}
+		}
+	}
+	return out
+}
+
 // colourPair is a pair of indexes into WUBRG, a < b.
 type colourPair [2]int
 

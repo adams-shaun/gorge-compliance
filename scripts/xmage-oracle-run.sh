@@ -71,6 +71,8 @@ if [ "${XMAGE_ORACLE_PRIVATE_DB:-0}" = 1 ]; then
   cp --reflink=auto "$tests/db/cards.h2.mv.db" "$run_dir/db/"
 fi
 cd "$run_dir"
-systemd-run --user --scope --quiet -p MemoryMax="$mem" -- \
+scope=(systemd-run --user --scope --quiet -p MemoryMax="$mem" --)
+[ "${XENGINE_SCOPE:-systemd}" != none ] || scope=()
+"${scope[@]}" \
   java -Xmx"$heap" -Dlog4j.configuration=file:/dev/null -cp "$classes:$cp" \
   org.mage.test.oracle.ScenarioReplay "$in" "$out" >"$out.log" 2>&1

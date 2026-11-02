@@ -73,6 +73,7 @@ smoke:
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
 	bash ops/scripts/tests/xengine_sweep_smoke.sh
+	bash ops/scripts/tests/xengine_random_smoke.sh
 
 # xengine-sweep runs the chunked, resumable cross-engine sweep
 # (scripts/xengine-sweep.sh): SETS='FDN BLB' CHUNKS=4 GAMES=50. Heavy: it starts

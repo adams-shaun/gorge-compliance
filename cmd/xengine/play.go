@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
+	"math/rand/v2"
 	"os"
 	"path/filepath"
 	"slices"
@@ -15,6 +16,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/dside"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
@@ -81,6 +83,8 @@ func runPlay(args []string) error {
 	ledgerPath := fs.String("ledger", "", "coverage ledger TSV at chunk start (empty: an empty ledger)")
 	tapeTurns := fs.String("tape-turns", "", "comma-separated turn counts N: also write each tape truncated at the end of turn N (ids ...:tape:t<N>)")
 	xmage := fs.Bool("xmage", false, "leave out the cards XMage spells differently (an XMage item names no per-card spelling)")
+	random := fs.String("random", "", "set codes, space or comma separated: draw the decks at random across these sets, ignoring the ledger; -set only names the run in the item ids")
+	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays")
 	out := fs.String("out", "", "output dir (default under "+DefaultRoot+")")
 	fs.Parse(args)
 	if *set == "" {
@@ -112,17 +116,99 @@ func runPlay(args []string) error {
 	if err != nil {
 		return err
 	}
-	cands, skips, err := decks.CandidatesWith(reg, *manifests, *set, decks.Options{XMage: *xmage})
+	var tables *dside.Tables
+	if *dirac {
+		tables = dside.NewTables(reg)
+	}
+	opts := decks.Options{XMage: *xmage}
+	var pick picker
+	if *random != "" {
+		pick, err = randomPicker(reg, *manifests, strings.Fields(strings.ReplaceAll(*random, ",", " ")), opts, tables)
+	} else {
+		pick, err = setPicker(reg, *manifests, *set, led, opts, tables)
+	}
 	if err != nil {
 		return err
 	}
-	if *xmage {
-		fmt.Printf("xmage spelling: %d card(s) of %s left out of the decks, %d candidates\n", decks.ExcludedXMage(skips), *set, len(cands))
+	return play(reg, pick, tables, led, *set, *chunk, *games, *seed, *out, *windows, turns)
+}
+
+// A picker draws game g's decks: the candidates they come from and the set whose
+// dirac table plays them ("" when none does). decks.Pair is a pure function of the
+// candidates, the ledger, the names and the seed.
+type picker func(g int, seed uint64) (cands []decks.Card, led *cov.Ledger, table string)
+
+// setPicker draws every game from set's candidates against the ledger; with
+// tables, from those the set's dirac table plays.
+func setPicker(reg *cards.Registry, manifests, set string, led *cov.Ledger, opts decks.Options, tables *dside.Tables) (picker, error) {
+	cands, skips, err := decks.CandidatesWith(reg, manifests, set, opts)
+	if err != nil {
+		return nil, err
+	}
+	if opts.XMage {
+		fmt.Printf("xmage spelling: %d card(s) of %s left out of the decks, %d candidates\n", decks.ExcludedXMage(skips), set, len(cands))
+	}
+	table := ""
+	if tables != nil {
+		if cands, err = tables.Playable(set, cands); err != nil {
+			return nil, fmt.Errorf("set %s: %w", set, diracTablesHint(err))
+		}
+		table = set
 	}
 	if err := decks.Pairable(cands); err != nil {
-		return fmt.Errorf("set %s: %w", *set, err)
+		return nil, fmt.Errorf("set %s: %w", set, err)
 	}
-	return play(reg, cands, led, *set, *chunk, *games, *seed, *out, *windows, turns)
+	return func(int, uint64) ([]decks.Card, *cov.Ledger, string) { return cands, led, table }, nil
+}
+
+// randomPicker draws decks with no regard to the ledger: from the union of the
+// sets' candidates, and with tables every odd game from one set's cards its dirac
+// table plays, since no table holds cards of two sets.
+func randomPicker(reg *cards.Registry, manifests string, sets []string, opts decks.Options, tables *dside.Tables) (picker, error) {
+	var lists [][]decks.Card
+	type tableSet struct {
+		code  string
+		cands []decks.Card
+	}
+	var bySet []tableSet
+	for _, code := range sets {
+		cands, _, err := decks.CandidatesWith(reg, manifests, code, opts)
+		if err != nil {
+			return nil, err
+		}
+		lists = append(lists, cands)
+		if tables == nil {
+			continue
+		}
+		playable, err := tables.Playable(code, cands)
+		if dside.NoTables(err) {
+			return nil, diracTablesHint(err)
+		}
+		if err == nil && decks.Pairable(playable) == nil {
+			bySet = append(bySet, tableSet{code, playable})
+		}
+	}
+	union := decks.Union(lists...)
+	if err := decks.Pairable(union); err != nil {
+		return nil, err
+	}
+	if tables != nil && len(bySet) == 0 {
+		return nil, fmt.Errorf("-dirac: no set of %v has a dirac table that can build decks", sets)
+	}
+	return func(g int, seed uint64) ([]decks.Card, *cov.Ledger, string) {
+		if tables != nil && g%2 == 1 {
+			s := bySet[rand.New(rand.NewPCG(seed, uint64(g))).IntN(len(bySet))]
+			return s.cands, nil, s.code
+		}
+		return union, nil, ""
+	}, nil
+}
+
+func diracTablesHint(err error) error {
+	if dside.NoTables(err) {
+		return fmt.Errorf("%w (the pin's own: go run -trimpath github.com/adams-shaun/gorge/dirac/cmd/kgen -synth-pools)", err)
+	}
+	return err
 }
 
 // gameSeed is the seed game g of a chunk plays with: distinct per (chunk,
@@ -212,8 +298,8 @@ func tapePrefix(l lower.Lowered, t *game.Tape, n int) (p lower.Lowered, tf *game
 	return p, &cut, true
 }
 
-func play(reg *cards.Registry, cands []decks.Card, led *cov.Ledger, set string, chunk, games int, seed uint64, out string, windows bool, tapeTurns []int) error {
-	var items, gorge, lowerLog bytes.Buffer
+func play(reg *cards.Registry, pick picker, tables *dside.Tables, led *cov.Ledger, set string, chunk, games int, seed uint64, out string, windows bool, tapeTurns []int) error {
+	var items, gorge, lowerLog, diracLog bytes.Buffer
 	exercised := cov.New()
 	exercised.Merge(led)
 	hist := map[string]int{}
@@ -256,7 +342,8 @@ func play(reg *cards.Registry, cands []decks.Card, led *cov.Ledger, set string, 
 	}
 	// The pairs are drawn against the ledger as it stood at chunk start.
 	for g := 0; g < games; g++ {
-		pair := decks.Pair(cands, led, set, chunk, g, seed)
+		cands, drawLed, table := pick(g, gameSeed(seed, chunk, g))
+		pair := decks.Pair(cands, drawLed, set, chunk, g, seed)
 		for _, d := range pair {
 			for _, n := range d.Cards {
 				if c, ok := reg.Lookup(n); ok {
@@ -270,11 +357,29 @@ func play(reg *cards.Registry, cands []decks.Card, led *cov.Ledger, set string, 
 			wins    []lower.Lowered
 			refused []lower.Refusal
 			err     error
+			dRow    dside.Row
 		)
+		opt := game.Options{Set: set}
+		if tables != nil {
+			dRow = dside.NotApplicable(dside.GameID(set, chunk, g), "decks across sets: no dirac table holds them")
+			if table != "" {
+				dRow, opt.Script = tables.Lockstep(dRow.Game, table, pair, gameSeed(seed, chunk, g), game.DefaultMaxTurns)
+			}
+		}
 		if windows {
-			wins, refused, tp, err = lower.Windows(reg, pair, gameSeed(seed, chunk, g), game.Options{Set: set})
+			wins, refused, tp, err = lower.Windows(reg, pair, gameSeed(seed, chunk, g), opt)
 		} else {
-			tp, err = game.Play(reg, pair, gameSeed(seed, chunk, g), game.Options{Set: set})
+			tp, err = game.Play(reg, pair, gameSeed(seed, chunk, g), opt)
+		}
+		if tables != nil {
+			if tp != nil {
+				dRow.Locate(tp)
+			}
+			b, jerr := jsonl(dRow)
+			if jerr != nil {
+				return jerr
+			}
+			diracLog.Write(b)
 		}
 		if err != nil || tp == nil {
 			row := lowerRow{ID: id, Step: -1, Status: statusPlayError, Field: "play", Gorge: fmt.Sprint(err)}
@@ -332,7 +437,13 @@ func play(reg *cards.Registry, cands []decks.Card, led *cov.Ledger, set string, 
 		{"items.jsonl", items.Bytes()}, {"gorge.jsonl", gorge.Bytes()},
 		{"lower.jsonl", lowerLog.Bytes()}, {"exercised.tsv", tsv.Bytes()},
 	} {
+
 		if err := writeAtomic(filepath.Join(out, f.name), f.b); err != nil {
+			return err
+		}
+	}
+	if tables != nil {
+		if err := writeAtomic(filepath.Join(out, "dirac.jsonl"), diracLog.Bytes()); err != nil {
 			return err
 		}
 	}

@@ -32,11 +32,27 @@ func clip(s string) string {
 
 // Write puts the adjudication under out (outside the repository): findings.jsonl
 // (one Row per adjudicated item, no values), notes.md, patterns.tsv and
-// tickets/<cluster-sha12>.md per draft. Nothing it writes is a verdict row or
-// a ruling.
+// tickets/<cluster-sha12>.md per draft, and dirac.jsonl when dirac played. Nothing
+// it writes is a verdict row or a ruling.
 func Write(out string, res Result) error {
 	if err := classify.RefuseRepoPath(out); err != nil {
 		return err
+	}
+	if res.Dirac != nil {
+		var dj bytes.Buffer
+		for _, r := range res.Dirac {
+			b, err := json.Marshal(r)
+			if err != nil {
+				return err
+			}
+			dj.Write(append(b, '\n'))
+		}
+		if err := os.MkdirAll(out, 0o755); err != nil {
+			return err
+		}
+		if err := os.WriteFile(filepath.Join(out, "dirac.jsonl"), dj.Bytes(), 0o644); err != nil {
+			return err
+		}
 	}
 	var fj bytes.Buffer
 	hist := map[string]int{}
