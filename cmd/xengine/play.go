@@ -437,7 +437,6 @@ func play(reg *cards.Registry, pick picker, tables *dside.Tables, led *cov.Ledge
 		{"items.jsonl", items.Bytes()}, {"gorge.jsonl", gorge.Bytes()},
 		{"lower.jsonl", lowerLog.Bytes()}, {"exercised.tsv", tsv.Bytes()},
 	} {
-
 		if err := writeAtomic(filepath.Join(out, f.name), f.b); err != nil {
 			return err
 		}

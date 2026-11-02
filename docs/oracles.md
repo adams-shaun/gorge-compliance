@@ -109,10 +109,9 @@ is a `diverge`, not a `harness`. When both followers differ from gorge they are 
 either differs at, since neither follows the same game after it. An item XMage is never sent (`xprep.jsonl`) is
 `not_sent`, and a whole-game tape that agreed as far as the Forge driver's turn cap is `turn_cap`.
 
-**Can't check:** windows it can't lower. In a 2-game FDN sweep on 2026-11-01, 25 of 46 windows
-were refused, and of the 21 replayed, 5 in XMage and 1 in Forge came back as a `decision_shape`
-difference, with 2 and 3 as `harness`, so a follower can fail to express a position without any
-engine being wrong. A sweep rules on nothing and commits nothing. Its findings are leads for a person.
+**Can't check:** windows it can't lower. In a 2-game FDN sweep on 2026-11-02, 25 of 46 windows
+were refused, and of the 21 replayed, 3 in XMage and 1 in Forge came back as a `decision_shape`
+difference, so a follower can fail to express a position without any engine being wrong. A sweep rules on nothing and commits nothing. Its findings are leads for a person.
 
 Forge has one known difference of its own here. After a first-strike combat's first damage step, when
 no creature is left to deal damage in the second, Forge goes straight to end of combat, where
