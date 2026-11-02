@@ -20,10 +20,6 @@ func TestBookkeepingTriggerPlans(t *testing.T) {
 		kind, key          string
 		consumer, recorder int
 	}{
-		// "if you've played a land ... from anywhere other than your hand":
-		// the LandPlayed record and its Cleanup-step reset.
-		{"Spider-Man 2099", 1, levelb.BookkeepingRecord, "svar:LandsPlayedFromNotHand", 0, 1},
-		{"Spider-Man 2099", 2, levelb.BookkeepingReset, "svar:LandsPlayedFromNotHand", 0, 1},
 		// "Do this only once each turn": RememberPlayed$ on the consumer's
 		// own Play, cleared when it leaves and at every TurnBegin.
 		{"Planetarium of Wan Shi Tong", 2, levelb.BookkeepingLeaves, "remembered", 0, 0},

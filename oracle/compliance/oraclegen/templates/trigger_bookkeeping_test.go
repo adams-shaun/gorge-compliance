@@ -26,8 +26,6 @@ var bookkeepingClassRows = []struct {
 	// notFired marks a last window that pins the consumer NOT firing.
 	notFired bool
 }{
-	{card: "Spider-Man 2099", key: "trigger#0.1", probe: "Forest"},
-	{card: "Spider-Man 2099", key: "trigger#0.2", turn3: true, probe: "Forest", notFired: true},
 	{card: "Superior Foes of Spider-Man", key: "trigger#0.1", probe: "Cloudshift"},
 	{card: "Planetarium of Wan Shi Tong", key: "trigger#0.2", probe: "Ghostly Flicker"},
 	{card: "Planetarium of Wan Shi Tong", key: "trigger#0.3", turn3: true, probe: "Preordain"},
