@@ -118,6 +118,12 @@ no creature is left to deal damage in the second, Forge goes straight to end of 
 CR 510.4 gives the phase a second damage step and players get priority in it. gorge and XMage do. Those
 items get the class `forge_skips_damage_step` and aren't compared in Forge past that checkpoint.
 
+Two `FX|G` patterns are the followers agreeing with each other against the rules, read from their code and not fixed in gorge.
+Lifecraft Engine crewed: its "Vehicle creatures you control" type effect depends on crew's animation (CR 613.8, from memory),
+but XMage's layer-4 effect and Forge's static read the filter without it, so neither gives the Engine the chosen type. Erratic
+Apparition enchanted by Unable to Scream: the Aura's "loses all abilities" applies as it enters, so CR 603.6 (from memory) leaves
+nothing to trigger, but both followers fire Eerie.
+
 **Run:** `make xengine-sweep SETS=FDN CHUNKS=1 GAMES=2`, then read
 `.oracle-build/xengine/seed1/SUMMARY.md`. A sweep resumes where it stopped. It needs `jq`, and
 waits while two or more JVMs are running.
@@ -144,6 +150,9 @@ systemd-run --user --unit=xengine-random --collect --working-directory="$dir" \
   --setenv=XMAGE_ORACLE_DIR="$xmage" --setenv=FORGE_ORACLE_DIR="$forge" \
   "$dir/scripts/xengine-random.sh" --run random1
 ```
+
+`--forge-only FILE` adds a file of card names, one per line, to the cross-set draw: a set XMage has no class for. An
+item naming a card no XMage set lists isn't sent to XMage (`not_sent`, `xmage_lacks_card`), so those games are compared with Forge alone.
 
 `systemctl --user stop xengine-random` stops it, and the same command resumes it. It writes `$root/SUMMARY.md` after every chunk and
 keeps each chunk's rows and the repros of diverged items; `xengine-sweep.sh --force`

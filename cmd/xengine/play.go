@@ -84,6 +84,7 @@ func runPlay(args []string) error {
 	tapeTurns := fs.String("tape-turns", "", "comma-separated turn counts N: also write each tape truncated at the end of turn N (ids ...:tape:t<N>)")
 	xmage := fs.Bool("xmage", false, "leave out the cards XMage spells differently (an XMage item names no per-card spelling)")
 	random := fs.String("random", "", "set codes, space or comma separated: draw the decks at random across these sets, ignoring the ledger; -set only names the run in the item ids")
+	forgeOnly := fs.String("forge-only", "", "with -random, a file of card names, one per line, to add to the cross-set deal: a set XMage has no class for, so its items go to Forge alone")
 	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays")
 	out := fs.String("out", "", "output dir (default under "+DefaultRoot+")")
 	fs.Parse(args)
@@ -123,7 +124,15 @@ func runPlay(args []string) error {
 	opts := decks.Options{XMage: *xmage}
 	var pick picker
 	if *random != "" {
-		pick, err = randomPicker(reg, *manifests, strings.Fields(strings.ReplaceAll(*random, ",", " ")), opts, tables)
+		var extra []decks.Card
+		if *forgeOnly != "" {
+			b, rerr := os.ReadFile(*forgeOnly)
+			if rerr != nil {
+				return rerr
+			}
+			extra, _ = decks.CandidatesNamed(reg, nonEmptyLines(string(b)), opts)
+		}
+		pick, err = randomPicker(reg, *manifests, strings.Fields(strings.ReplaceAll(*random, ",", " ")), opts, tables, extra)
 	} else {
 		pick, err = setPicker(reg, *manifests, *set, led, opts, tables)
 	}
@@ -162,9 +171,9 @@ func setPicker(reg *cards.Registry, manifests, set string, led *cov.Ledger, opts
 }
 
 // randomPicker draws decks with no regard to the ledger: from the union of the
-// sets' candidates, and with tables every odd game from one set's cards its dirac
+// sets' candidates and extra, and with tables every odd game from one set's cards its dirac
 // table plays, since no table holds cards of two sets.
-func randomPicker(reg *cards.Registry, manifests string, sets []string, opts decks.Options, tables *dside.Tables) (picker, error) {
+func randomPicker(reg *cards.Registry, manifests string, sets []string, opts decks.Options, tables *dside.Tables, extra []decks.Card) (picker, error) {
 	var lists [][]decks.Card
 	type tableSet struct {
 		code  string
@@ -188,7 +197,7 @@ func randomPicker(reg *cards.Registry, manifests string, sets []string, opts dec
 			bySet = append(bySet, tableSet{code, playable})
 		}
 	}
-	union := decks.Union(lists...)
+	union := decks.Union(append(lists, extra)...)
 	if err := decks.Pairable(union); err != nil {
 		return nil, err
 	}
@@ -451,4 +460,15 @@ func play(reg *cards.Registry, pick picker, tables *dside.Tables, led *cov.Ledge
 		fmt.Printf("  %-14s %d\n", s, hist[s])
 	}
 	return nil
+}
+
+// nonEmptyLines is s's lines, trimmed, without the blank ones.
+func nonEmptyLines(s string) []string {
+	var out []string
+	for _, l := range strings.Split(s, "\n") {
+		if l = strings.TrimSpace(l); l != "" {
+			out = append(out, l)
+		}
+	}
+	return out
 }

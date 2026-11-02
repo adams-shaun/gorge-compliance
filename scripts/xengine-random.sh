@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
-# xengine-random.sh [--run NAME] [--sets 'FDN BLB ...'] [--games K] [--seed S] [--max-chunks N]
+# xengine-random.sh [--run NAME] [--sets 'FDN BLB ...'] [--forge-only FILE] [--games K] [--seed S] [--max-chunks N]
 #
 # Plays seeded games from randomly drawn cards, one xengine-sweep chunk after
 # another, until stopped. Every chunk is a sweep chunk of the pseudo-set RAND:
 # even games draw from all the sets' supported cards together, odd games from one
 # set's cards its dirac table plays, so dirac answers beside gorge in those (no
 # table holds cards of two sets). --sets defaults to the Standard sets
-# declared in oracle/compliance/declared.json.
+# declared in oracle/compliance/declared.json. --forge-only names a file of card names,
+# one per line, added to the cross-set draw: a set XMage has no class for, whose
+# items Forge alone replays (xprep's xmage_lacks_card). scripts/set-census.sh in gorge
+# shows how to read an edition's names at a Forge commit.
 #
 # Meant for a systemd user unit that caps the whole tree (see docs/oracles.md): the
 # stages start no scopes of their own (XENGINE_SCOPE=none), and stopping the unit
@@ -31,6 +34,7 @@ while [ $# -gt 0 ]; do
 	case "$1" in
 	--run) run=${2:?--run needs a name}; shift 2 ;;
 	--sets) sets=${2:?--sets needs a list}; shift 2 ;;
+	--forge-only) export XENGINE_FORGE_ONLY=$(realpath "${2:?--forge-only needs a file}"); shift 2 ;;
 	--games) games=${2:?--games needs a number}; shift 2 ;;
 	--seed) seed=${2:?--seed needs a number}; shift 2 ;;
 	--max-chunks) max=${2:?--max-chunks needs a number}; shift 2 ;;

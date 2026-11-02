@@ -330,3 +330,12 @@ func TestCandidatesXMageFilter(t *testing.T) {
 		t.Errorf("Candidates without Options.XMage excluded %d cards", ExcludedXMage(skips))
 	}
 }
+
+// A list of names deals like a manifest: a name the corpus lacks is skipped.
+func TestCandidatesNamed(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	got, skips := CandidatesNamed(reg, []string{"Grizzly Bears", "No Such Card"}, Options{})
+	if len(got) != 1 || got[0].Name != "Grizzly Bears" || len(skips) != 1 || skips[0].Reason != "not in corpus" {
+		t.Fatalf("candidates %v, skips %v", got, skips)
+	}
+}

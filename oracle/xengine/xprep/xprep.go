@@ -44,6 +44,9 @@ const (
 	ReasonRetarget = "xmage_retarget_diverges"
 	// ReasonNoResult: there is no gorge result to script the answers from.
 	ReasonNoResult = "xmage_no_result"
+	// ReasonNoXMageCard: the item names a card no XMage set lists, so the driver
+	// could not place it. The game is Forge's alone.
+	ReasonNoXMageCard = "xmage_lacks_card"
 	// ReasonWindowOnly: a tape item; XMage replays windows only (design O4:
 	// the driver's turn model cannot follow a tape, so tapes go to Forge and
 	// the kernel).
@@ -51,7 +54,7 @@ const (
 )
 
 // Reasons is every reason Prepare refuses with.
-var Reasons = []string{ReasonSpelling, ReasonModeCollision, ReasonAbilityUnknown, ReasonRetarget, ReasonNoResult, ReasonWindowOnly}
+var Reasons = []string{ReasonSpelling, ReasonModeCollision, ReasonAbilityUnknown, ReasonRetarget, ReasonNoResult, ReasonNoXMageCard, ReasonWindowOnly}
 
 // tapeID matches the id of a tape item: "...:tape" or a prefix "...:tape:t<N>".
 var tapeID = regexp.MustCompile(`:tape(:t\d+)?$`)
@@ -101,6 +104,9 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 	abilities, ref := prefixes(reg, it)
 	if ref != nil {
 		return it, ref
+	}
+	if bad := unlisted(reg, sp, it); len(bad) > 0 {
+		return it, refuse(it.ID, ReasonNoXMageCard, "%s", strings.Join(bad, "; "))
 	}
 	sc, castSteps := oraclegen.ChooseTargets(it.Scenario, g.Decisions)
 	if why := sameOutcome(reg, sc, g); why != "" {
@@ -331,6 +337,18 @@ func differing(reg *cards.Registry, sp *decks.Spellings, it oraclegen.Item) []st
 	for _, n := range cardNames(it) {
 		if xm, ok := sp.XMage(reg, n); ok && xm != n {
 			out = append(out, n+" -> "+xm)
+		}
+	}
+	return out
+}
+
+// unlisted is the item's corpus cards no manifest lists under any spelling; a
+// player ref or a token name is not a card.
+func unlisted(reg *cards.Registry, sp *decks.Spellings, it oraclegen.Item) []string {
+	var out []string
+	for _, n := range cardNames(it) {
+		if _, known := reg.Lookup(n); known && !sp.Lists(reg, n) {
+			out = append(out, n)
 		}
 	}
 	return out

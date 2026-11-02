@@ -63,6 +63,9 @@
 #   XENGINE_RANDOM_SETS   set codes passed to play as -random: the decks are drawn
 #                         at random across them, ignoring the ledger, and --sets
 #                         only names the run (scripts/xengine-random.sh)
+#   XENGINE_FORGE_ONLY    with XENGINE_RANDOM_SETS, a file of card names, one per line,
+#                         added to the cross-set deal: a set XMage has no class for.
+#                         An item holding one is not sent to XMage (xmage_lacks_card)
 #   XENGINE_JVM_WAIT      max seconds to wait for a JVM slot (default 21600)
 #   XENGINE_JVM_POLL      poll interval in seconds (default 30)
 #   XENGINE_FORGE_WAIT / XENGINE_FORGE_MEM, XENGINE_XMAGE_WAIT / XENGINE_XMAGE_MEM
@@ -220,6 +223,7 @@ play_stage() { # set chunk dir (reads <dir>/ledger-in.tsv when snapshot_into mad
 	case " $followers " in *" xmage "*) args+=(-xmage) ;; esac
 	[ "${XENGINE_DIRAC:-0}" != 1 ] || args+=(-dirac)
 	[ -z "${XENGINE_RANDOM_SETS:-}" ] || args+=(-random "$XENGINE_RANDOM_SETS")
+	[ -z "${XENGINE_FORGE_ONLY:-}" ] || args+=(-forge-only "$XENGINE_FORGE_ONLY")
 	[ ! -e "$d/ledger-in.tsv" ] || args+=(-ledger "$d/ledger-in.tsv")
 	run_stage xe "${args[@]}"
 }
