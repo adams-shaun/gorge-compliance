@@ -142,7 +142,7 @@ systemd-run --user --unit=xengine-random --collect --working-directory="$dir" \
   -p MemoryMax=8G -p CPUQuota=400% -p Nice=15 -p IOSchedulingClass=idle \
   --setenv=PATH="$PATH" --setenv=XENGINE_ROOT="$root" \
   --setenv=XMAGE_ORACLE_DIR="$xmage" --setenv=FORGE_ORACLE_DIR="$forge" \
-  scripts/xengine-random.sh --run random1
+  "$dir/scripts/xengine-random.sh" --run random1
 ```
 
 `systemctl --user stop xengine-random` stops it, and the same command resumes it. It writes `$root/SUMMARY.md` after every chunk and
