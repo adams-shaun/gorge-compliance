@@ -81,7 +81,7 @@ output stays out of the tree because Forge is GPL-3.0. The pass writes a ledger 
 vocabulary to `oracle/compliance/adjudication/`, which holds no committed rows today.
 
 **Can't check:** a wrong card script. gorge compiles Forge's scripts, so gorge and Forge agreeing
-says little: `GF|X` can be a shared script bug. Forge never changes a verdict and isn't a CI gate.
+says little: `GF|X` can be a shared script bug. Forge never changes a verdict and isn't a CI gate. What we've confirmed in the other engines, and whether upstream knows, is in [upstream-bugs.md](upstream-bugs.md).
 
 **Run:** the XMage pass first, at the same level, then Forge:
 
