@@ -230,6 +230,59 @@ func TestClassifyForgeTrailingMiss(t *testing.T) {
 	}
 }
 
+// TestClassifyForgeSkipsDamageStep: Forge at end of combat where gorge is in a
+// first-strike combat's second damage step is Forge's shortcut, whatever the
+// replay did afterwards. Another first difference, an earlier disagreement or a
+// pass that does not end a step leave the item to the other classes.
+func TestClassifyForgeSkipsDamageStep(t *testing.T) {
+	at := func(name, step string) rules.OracleSnapshot {
+		s := snap(name)
+		s.Step = step
+		return s
+	}
+	item := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.Template, Scenario: oraclegen.Scenario{
+		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "pass", Seat: 1}},
+	}}}
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		at("setup", "combat-damage"), at("step 0 (pass)", "combat-damage"), at("step 1 (pass)", "combat-damage"),
+	}}
+	forge := func(steps ...string) oraclediff.XResult {
+		x := oraclediff.XResult{Harness: "harness: pass: p0 does not hold priority at step 2 (p1 does)"}
+		for i, st := range steps {
+			x.Snapshots = append(x.Snapshots, at(g.Snapshots[i].Checkpoint, st))
+		}
+		return x
+	}
+	shortcut := forge("combat-damage", "combat-damage", "end-combat")
+	f := Classify(item, nil, g, shortcut, "forge")
+	if f.Class != ClassForgeSkipsDamageStep || f.Step != 1 || f.Gorge != "combat-damage" || f.Other != "end-combat" {
+		t.Errorf("shortcut: %+v", f)
+	}
+	noHarness := shortcut
+	noHarness.Harness = ""
+	if f := Classify(item, nil, g, noHarness, "forge"); f.Class != ClassForgeSkipsDamageStep {
+		t.Errorf("shortcut without a harness row: %+v", f)
+	}
+	if Credited(ClassForgeSkipsDamageStep) {
+		t.Error("an item Forge could not finish must not count as compared")
+	}
+
+	if f := Classify(item, nil, g, shortcut, "xmage"); f.Class == ClassForgeSkipsDamageStep {
+		t.Errorf("another engine: %+v", f)
+	}
+	if f := Classify(item, nil, g, forge("combat-damage", "end-combat", "end-combat"), "forge"); f.Class != ClassHarness {
+		t.Errorf("the active seat's pass does not end a step: %+v", f)
+	}
+	if f := Classify(item, nil, g, forge("combat-damage", "combat-damage", "main2"), "forge"); f.Class != ClassHarness {
+		t.Errorf("another first difference: %+v", f)
+	}
+	earlier := forge("combat-damage", "combat-damage", "end-combat")
+	earlier.Snapshots[1].Players[0].Life = 19
+	if f := Classify(item, nil, g, earlier, "forge"); f.Class != ClassHarness {
+		t.Errorf("an earlier disagreement: %+v", f)
+	}
+}
+
 // TestClassifyPaymentChoice: only a pool-only difference at (or right after) a
 // cast/activate whose recorded spend was nonempty and whose starting pool held
 // two or more colours is the player's legal colour split. A cast that spent

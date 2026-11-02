@@ -209,6 +209,74 @@ func TestPrepareRefusesSpelling(t *testing.T) {
 	}
 }
 
+// TestPassPositionsFirstStrikeDamage: the two damage steps of a first-strike
+// combat, sharing gorge's one step name, come apart at the non-active seat's
+// pass on an empty stack, with a trigger resolving in the first of them; a
+// combat with no first striker has the one step.
+func TestPassPositionsFirstStrikeDamage(t *testing.T) {
+	striker := []rules.OracleSnapPerm{{Attacking: true, Keywords: []string{"First Strike"}}}
+	plain := []rules.OracleSnapPerm{{Attacking: true}}
+	trigger := []rules.OracleSnapStack{{Kind: "ability", Source: "p0:X"}}
+	at := func(step string, perms []rules.OracleSnapPerm, stack []rules.OracleSnapStack) rules.OracleSnapshot {
+		return rules.OracleSnapshot{Turn: 1, Step: step, Permanents: perms, Stack: stack}
+	}
+	pass := func(seat int) oraclegen.Step { return oraclegen.Step{Op: "pass", Seat: seat} }
+
+	type want struct {
+		step  string
+		moved bool
+	}
+	cases := []struct {
+		name  string
+		steps []oraclegen.Step
+		snaps []rules.OracleSnapshot
+		want  []want
+	}{{
+		name:  "first striker with a trigger in the first step",
+		steps: []oraclegen.Step{pass(1), pass(0), pass(1), pass(0), pass(1), pass(0), pass(1)},
+		snaps: []rules.OracleSnapshot{
+			at("declare-blockers", striker, nil),
+			at("combat-damage", striker, trigger),
+			at("combat-damage", striker, trigger),
+			at("combat-damage", striker, nil),
+			at("combat-damage", striker, nil),
+			at("combat-damage", striker, nil),
+			at("combat-damage", striker, nil),
+			at("end-combat", striker, nil),
+		},
+		want: []want{
+			{oraclegen.StepFirstStrikeDamage, true},
+			{oraclegen.StepFirstStrikeDamage, false},
+			{oraclegen.StepFirstStrikeDamage, false},
+			{oraclegen.StepFirstStrikeDamage, false},
+			{"combat-damage", true},
+			{"combat-damage", false},
+			{"end-combat", true},
+		},
+	}, {
+		name:  "no first striker",
+		steps: []oraclegen.Step{pass(1), pass(0), pass(1)},
+		snaps: []rules.OracleSnapshot{
+			at("declare-blockers", plain, nil),
+			at("combat-damage", plain, nil),
+			at("combat-damage", plain, nil),
+			at("end-combat", plain, nil),
+		},
+		want: []want{{"combat-damage", true}, {"combat-damage", false}, {"end-combat", true}},
+	}}
+	for _, c := range cases {
+		got := passPositions(c.steps, c.snaps)
+		if len(got) != len(c.want) {
+			t.Fatalf("%s: %d positions, want %d", c.name, len(got), len(c.want))
+		}
+		for i, w := range c.want {
+			if got[i].Step != w.step || got[i].Moved != w.moved {
+				t.Errorf("%s: pass %d: %s moved=%v, want %s moved=%v", c.name, i, got[i].Step, got[i].Moved, w.step, w.moved)
+			}
+		}
+	}
+}
+
 // TestPreparePassPositions: a prepared item has one xmage_pos entry per step,
 // set exactly on the pass steps and equal to gorge's checkpoint after the step;
 // Moved marks a pass that changed the turn or step and Resolves one that
@@ -232,7 +300,11 @@ func TestPreparePassPositions(t *testing.T) {
 				continue
 			}
 			after := snaps[i+1]
-			if p.Turn != after.Turn || p.Step != after.Step || p.Active != after.Active {
+			step := p.Step
+			if step == oraclegen.StepFirstStrikeDamage {
+				step = "combat-damage"
+			}
+			if p.Turn != after.Turn || step != after.Step || p.Active != after.Active {
 				t.Errorf("%s step %d: position %+v, gorge stood at turn %d %s active %d", it.ID, i, *p, after.Turn, after.Step, after.Active)
 			}
 			if p.Moved && p.Resolves {

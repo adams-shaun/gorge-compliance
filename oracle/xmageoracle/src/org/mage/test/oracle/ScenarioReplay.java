@@ -3781,6 +3781,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             case "begin-combat": return PhaseStep.BEGIN_COMBAT;
             case "declare-attackers": return PhaseStep.DECLARE_ATTACKERS;
             case "declare-blockers": return PhaseStep.DECLARE_BLOCKERS;
+            case "first-strike-damage": return PhaseStep.FIRST_COMBAT_DAMAGE;
             case "combat-damage": return PhaseStep.COMBAT_DAMAGE;
             case "end-combat": return PhaseStep.END_COMBAT;
             case "main2": return PhaseStep.POSTCOMBAT_MAIN;

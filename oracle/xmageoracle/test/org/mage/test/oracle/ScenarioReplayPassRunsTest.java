@@ -130,6 +130,7 @@ public final class ScenarioReplayPassRunsTest {
         // the step the next steps are queued in.
         check(ScenarioReplay.phaseOfGorgeStep("begin-combat") == PhaseStep.BEGIN_COMBAT, "begin-combat");
         check(ScenarioReplay.phaseOfGorgeStep("main1") == PhaseStep.PRECOMBAT_MAIN, "main1");
+        check(ScenarioReplay.phaseOfGorgeStep("first-strike-damage") == PhaseStep.FIRST_COMBAT_DAMAGE, "first-strike-damage");
         check(ScenarioReplay.phaseOfGorgeStep("combat-damage") == PhaseStep.COMBAT_DAMAGE, "combat-damage");
         check(ScenarioReplay.phaseOfGorgeStep("end") == PhaseStep.END_TURN, "end");
         check(throwsIae(() -> ScenarioReplay.phaseOfGorgeStep("cleanup")), "a step with no priority is refused");

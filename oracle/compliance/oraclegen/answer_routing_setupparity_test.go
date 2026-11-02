@@ -47,6 +47,13 @@ func TestRetargetRedirectIsAScriptedTarget(t *testing.T) {
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("retarget routed = %#v, want %#v", got, want)
 	}
+	// With the old target excluded, one other legal target is forced in gorge
+	// and still asked by XMage, so it stays scripted.
+	ask.Options, ask.OptionRefs = 1, []string{"p0:Nessian Asp"}
+	got = routed(t, []rules.OracleDecision{ask}, 3)
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("forced retarget routed = %#v, want %#v", got, want)
+	}
 }
 
 // A forced X of an single-X cost (Rottenmouth Viper's X = 0, Saheeli's

@@ -29,16 +29,25 @@ const (
 	// engine fixed, so it is the player's choice (CR 601.2h), not a rules
 	// divergence. It never covers any other pool difference.
 	ClassPaymentChoice = "payment_choice"
-	ClassRNG           = "rng"
-	ClassProjectionGap = "projection_gap"
-	ClassDiverge       = "diverge"
-	ClassAgree         = "agree"
+	// ClassForgeSkipsDamageStep is a known Forge difference, not a gorge one:
+	// after a first-strike combat's first damage step, when no creature is left
+	// to deal damage in the second, Forge goes straight to end of combat
+	// (PhaseHandler's COMBAT_DAMAGE gives no priority when
+	// Combat.assignCombatDamage(false) finds nothing). CR 510.4 still gives the
+	// phase that second step, and players get priority in it (CR 510.3). The
+	// item's passes then run out of step with Forge, so nothing past that
+	// checkpoint is compared.
+	ClassForgeSkipsDamageStep = "forge_skips_damage_step"
+	ClassRNG                  = "rng"
+	ClassProjectionGap        = "projection_gap"
+	ClassDiverge              = "diverge"
+	ClassAgree                = "agree"
 )
 
 // Classes lists every class, in report order.
 var Classes = []string{
 	ClassAgree, ClassDiverge, ClassRNG, ClassProjectionGap, ClassDecisionShape,
-	ClassPaymentChoice, ClassHarness, ClassXMageLacks, ClassLowerGap,
+	ClassPaymentChoice, ClassForgeSkipsDamageStep, ClassHarness, ClassXMageLacks, ClassLowerGap,
 }
 
 // Finding is the classified outcome for one item and one follower engine.
@@ -78,6 +87,13 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	f.Checkpoint, f.Field, f.Gorge, f.Other = v.Checkpoint, v.Field, v.Gorge, v.XMage
 	f.Step = stepOf(v.Checkpoint)
 
+	if engine == "forge" {
+		if i := skippedDamageStep(item, g, x); i > 0 {
+			f.Class, f.Checkpoint, f.Field = ClassForgeSkipsDamageStep, g.Snapshots[i].Checkpoint, "step"
+			f.Gorge, f.Other, f.Step = g.Snapshots[i].Step, x.Snapshots[i].Step, stepOf(g.Snapshots[i].Checkpoint)
+			return f
+		}
+	}
 	switch {
 	case v.Status == oraclediff.XMageLacks ||
 		(v.Status == oraclediff.Harness && engine == "xmage" && xmageLacks(v.Msg, t)):
@@ -104,6 +120,35 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 		f.Class = ClassDiverge
 	}
 	return f
+}
+
+// skippedDamageStep is the checkpoint at which Forge left for end of combat
+// while gorge entered a first-strike combat's second damage step, with every
+// checkpoint before it agreeing; 0 if the item has none. The first difference
+// must be that step, after the pass that ends a step: the non-active seat's on
+// an empty stack. Gorge staying in combat-damage across that pass is what marks
+// the second step.
+func skippedDamageStep(item lower.Lowered, g rules.OracleResult, x oraclediff.XResult) int {
+	for i := 1; i < min(len(g.Snapshots), len(x.Snapshots)); i++ {
+		gs, xs := g.Snapshots[i], x.Snapshots[i]
+		if gs.Step == xs.Step {
+			continue
+		}
+		if gs.Step != "combat-damage" || xs.Step != "end-combat" || g.Snapshots[i-1].Step != "combat-damage" ||
+			len(g.Snapshots[i-1].Stack) != 0 || i > len(item.Item.Steps) {
+			return 0
+		}
+		if st := item.Item.Steps[i-1]; st.Op != "pass" || st.Seat == gs.Active {
+			return 0
+		}
+		prior := oraclediff.CompareOpts(rules.OracleResult{Snapshots: g.Snapshots[:i]}, nil,
+			oraclediff.XResult{Snapshots: x.Snapshots[:i]}, item.Item.Compare, item.Item.Ignore...)
+		if prior.Status != oraclediff.Agree {
+			return 0
+		}
+		return i
+	}
+	return 0
 }
 
 // paymentChoice reports a pool-only difference on the paying seat at or right
