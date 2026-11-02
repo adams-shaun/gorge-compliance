@@ -12,21 +12,7 @@ list says whether upstream knows. For Forge, a script that disagrees with the pr
 
 ## XMage, confirmed and not filed
 
-Each was ruled from a scenario at our pin, `XMAGE_REF` (2026-10-02). Check step 2 again before filing: any of these may
-be fixed upstream by now.
-
-| Card | What XMage does | Rule |
-|---|---|---|
-| Bolg's Company | Builds its mana ability as a plain activated ability, so it uses the stack | CR 605.1a |
-| Destined Confrontation | Passes a card id as a player id, so under range of influence one nothing is sacrificed | CR 701.21a |
-| Driftgloom Coyote | Checks "had power 2 or less" against the exiled card rather than last known information | CR 608.2h |
-| Jennifer Walters | She-Hulk's trigger damages the damaged creature, not the chosen target | CR 603.3d |
-| Kitesail Larcenist | Becoming a Treasure also clears the permanent's colour | CR 613.1e, 105.2 |
-| Ojer Pakpatiq, Deepest Epoch | Returns Temple of Cyclical Time without its three time counters | CR 122.6 |
-| Pain for All | Misses the trigger when the Aura and the creature leave in the same state-based action | CR 603.10a |
-| Sage of the Skies | Counts Sage itself for "if you've cast another spell this turn" | CR 603.4 |
-| Sanar, Innovative First-Year | Exiles every revealed card, not only those sharing a colour with your permanents | Oracle text |
-| Serah Farron | Applies the back face's cost reduction while the front face is up | CR 711.4, 712.8d |
+None today.
 
 ## XMage, reported
 
@@ -44,15 +30,30 @@ be fixed upstream by now.
 | magefree/mage#16481 | Deepway Navigator | closed 2026-10-17 |
 | magefree/mage#16482 | Veteran Survivor | closed 2026-10-17 |
 | magefree/mage#13565 (our comment) | Lifecraft Engine | closed 2026-10-17 |
+| magefree/mage#16686, PR #16687 | Bolg's Company: its mana ability is built as a plain activated ability, so it uses the stack (CR 605.1a, 605.3b) | open |
+| magefree/mage#16688, PR #16689 | Destined Confrontation: passes a source id as a player id, so a limited range of influence sacrifices nothing (CR 701.21a, 801.2) | open |
+| magefree/mage#16690, PR #16691 | Jennifer Walters: She-Hulk's trigger damages the damaged creature, not the chosen target (CR 603.3d) | open |
+| magefree/mage#16692, PR #16693 | Driftgloom Coyote: a permanent filter is matched against the exiled card (CR 608.2h) | open |
+| magefree/mage#16694, PR #16695 | Pain for All: the trigger fires, then the effect finds no creature once it has died (CR 603.2, 608.2h) | open |
+| magefree/mage#16696, PR #16697 | Sanar, Innovative First-Year: the colour check never runs for a non-target choice (Oracle text) | open |
+| magefree/mage#16698, PR #16699 | Serah Farron: a copied ability shares its effect id, so the reduction applies once per ability (CR 712.8d, 712.8e) | open |
+| magefree/mage#16700, PR #16701 | Sage of the Skies: counts itself for "if you've cast another spell this turn" (CR 603.4) | open |
+| magefree/mage#16702, PR #16703 | Ojer Pakpatiq, and Unbreakable Bond: a card entering as another half loses its counters (CR 122.6a, 712.14a) | open |
+
+Kitesail Larcenist needed no report: upstream fixed it in PR #16464 (75f4f1ae3d, 2026-10-10), after our pin.
+
+Our fork, adams-shaun/mage, branch `gorge`, is magefree master plus the open fixes.
 
 `XMAGE_REF` predates all of these closures, so the harness still reports the fixed cards as `GF|X` until the pin moves.
 
 ## Forge
 
-27 issues and 22 merged PRs on Card-Forge/forge, 2026-10-06 to 2026-10-28, all closed: `gh search issues --repo Card-Forge/forge --author adams-shaun`.
+Earlier: 27 issues and 22 merged PRs on Card-Forge/forge, 2026-10-06 to 2026-10-28, all closed: `gh search issues --repo Card-Forge/forge --author adams-shaun`.
 
-Suspected, not yet confirmed to the standard above:
+Reported and open:
 
-| Card | What we saw |
-|---|---|
-| Romulan Bird-of-Prey | `Affected$ Self.nonCreature` matches nothing in Forge's `isValid`, so it never gets its printed hexproof |
+| Upstream | Card | What it does |
+|---|---|---|
+| Card-Forge/forge#12581, PR #12582 | Romulan Bird-of-Prey | `Affected$ Self.nonCreature` matches nothing in Forge's `isValid`, so it never gets its printed hexproof (CR 702.11b) |
+
+Our fork, adams-shaun/forge, branch `gorge`, carries that fix.
