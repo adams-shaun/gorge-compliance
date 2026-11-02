@@ -101,6 +101,7 @@ var playerTable = map[string]entry{
 	"LandsPlayed":                   isRefused("land drops of this turn, live for the active player only (the engine resets it at that player's own turn); setup cannot place them"),
 	"DrewFromEmpty":                 isRefused("a pending library-draw loss"),
 	"CoinFlipsThisTurn":             isRefused("this-turn tally setup cannot restate"),
+	"DilemmasFacedThisTurn":         isRefused("this-turn tally setup cannot restate"),
 	"SpellsCastThisTurn":            isRefused("this-turn tally setup cannot restate (storm, magecraft)"),
 	"LifeGainedThisTurn":            isRefused("this-turn tally setup cannot restate"),
 	"LifeLostThisTurn":              isRefused("this-turn tally setup cannot restate"),
