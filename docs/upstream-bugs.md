@@ -50,6 +50,20 @@ Our fork, adams-shaun/mage, branch `gorge`, is magefree master plus the open fix
 
 Earlier: 27 issues and 22 merged PRs on Card-Forge/forge, 2026-10-06 to 2026-10-28, all closed: `gh search issues --repo Card-Forge/forge --author adams-shaun`.
 
+Confirmed, not filed (source read at master 0a8c52d00c; nothing filed yet):
+
+| Card or class | What Forge does | Rule |
+|---|---|---|
+| Combat whose attackers all left | `PhaseHandler` skips declare blockers and damage when no attacker remains; `removeFromCombat` empties the live set | CR 506.1, 508.8, 117.3a |
+| Combat damage with nothing assigned | `PhaseHandler` gives no priority when `assignCombatDamage` assigns nothing, as with a 0-power attacker | CR 510.3, 510.4 |
+| Bucolic Ranch, Cabaretti Ascendancy, Kenessos, Hurkyl, Loyal Inventor | `ChangeZoneEffect` shuffles on Library to Library unless the script says `NoShuffle$`; the `Defined$` branch never clears it | CR 701.24, Oracle text |
+| Hollow Marauder | `AbilityUtils.doXMath` splits its operand on every `.`, so `Minus.Remembered$Valid Card.cmcGE4` reads 0 | Oracle text |
+| Time Stop and kin | `onStackResolved` gives priority after `endTurnByEffect` has entered cleanup | CR 724.1f, 514.3 |
+| Adrenaline Jockey | `Defined$ TriggeredPlayer` on a SpellCast trigger, which sets only the activator | Oracle text |
+| Primo, the Indivisible's token | `Colors:green, blue` has a space, so the token is green only | Printed card |
+
+Reading the rules and not traced in the source: Unwilling Vessel and Erratic Apparition's "enchantment enters" trigger fires in Forge and XMage when the entering Aura strips the ability (CR 603.6a, 603.10; gorge doesn't fire). Lifecraft Engine after crew: Forge's existing Card-Forge/forge#7128; XMage fixed it in magefree/mage#16484.
+
 Reported and open:
 
 | Upstream | Card | What it does |
