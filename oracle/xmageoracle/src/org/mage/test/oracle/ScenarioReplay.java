@@ -3407,10 +3407,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         }
         ManaSource onBattlefield = nthSource(battlefield, wanted);
-        if (onBattlefield == null && boundId == null) {
+        if (onBattlefield == null) {
             // A land played from a hand of same-named cards keeps the ordinal it
-            // had among them, which no permanent has: any untapped one of the
-            // name makes the same mana.
+            // had among them, which no permanent has, and its alias can still
+            // name a copy left in hand: any untapped one of the name makes the
+            // same mana.
             for (ManaSource s : battlefield) {
                 if (s.card instanceof Permanent && !((Permanent) s.card).isTapped()) {
                     onBattlefield = s;
