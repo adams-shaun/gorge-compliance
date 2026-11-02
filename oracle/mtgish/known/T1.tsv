@@ -19,7 +19,6 @@ Awestruck Cygnet	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0
 Bandit's Talent	T1	keywords	class:2:{B} class:3:{3}{B}	class:2:{1}{B} class:3:{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Barbarian Class	T1	keywords	class:2:{1}{R} class:3:{2}{R}	class:2:{R} class:3:{1}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Bard Class	T1	keywords	class:3:{3}{R}{G}	class:3:{R}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Bell Borca, Spectral Sergeant	T1	pt	0/5	*/5	forge-bug	P/T CDA static lacks CharacteristicDefining$ True
 Belltoll Dragon	T1	keywords	-	flying hexproof	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Blacksmith's Talent	T1	keywords	class:2:{2}{R} class:3:{3}{R}	class:2:{R} class:3:{2}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Builder's Talent	T1	keywords	class:2:{W} class:3:{4}{W}	class:2:{1}{W} class:3:{W}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
@@ -73,6 +72,7 @@ Minthara, Merciless Soul	T1	keywords	-	ward:*	equivalent	ward {X}: Forge self st
 Mistfire Weaver	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Mondassian Colony Ship	T1	types	spacecraft	spaceship	mtgish-bug	mtgish#4 stale plane subtype Spaceship
 Monk Class	T1	keywords	class:3:{1}{W}{U}	class:3:{W}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
+Nashi, Illusion Gadgeteer	T1	keywords	-	flash	mtgish-bug	Forge dropped K:Flash and the printed Oracle text has no Flash (Scryfall); the mtgish data still lists it
 Nettling Host	T1	types	rat	horror	digital-variant	Arena-only card; script differs from current Arena text
 Ninja Teen	T1	keywords	class:2:{1}{B} class:3:{B}	class:2:{2}{B} class:3:{1}{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Outfitted Jouster	T1	types	-	human	digital-variant	Arena-only card; script differs from current Arena text
@@ -93,14 +93,12 @@ Sproutwatch Dryad	T1	pt	2/3	3/3	digital-variant	Arena-only card; script differs 
 Stormchaser's Talent	T1	keywords	class:2:{3}{U} class:3:{5}{U}	class:2:{U} class:3:{3}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Stormwing Dragon	T1	keywords	-	firststrike flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Stratus Dancer	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
-Sutured Ghoul	T1	pt	0/0	*/*	forge-bug	P/T CDA static lacks CharacteristicDefining$ True
 Synthesizer Labship	T1	keywords	station:9+	station:2+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
 Teysa of the Ghost Council	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
 The Dining Car	T1	types	spacecraft	spaceship	mtgish-bug	mtgish#4 stale plane subtype Spaceship
 Thousand Winds	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Three Steps Ahead	T1	keywords	spree:{2}	spree:{3}	mtgish-bug	mode costs: a later SpreeAction repeats an earlier ManaCost capture; script ModeCost$ matches the printed costs (i5jb/mtgish#1)
 Torrent Sculptor [Flamethrower Sonata]	T1	mana_cost	{1}{R}	{2}{U}{U}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
-Unlicensed Hearse	T1	pt	0/0	*/*	forge-bug	P/T CDA static lacks CharacteristicDefining$ True
 Uthros Research Craft	T1	keywords	station:12+	station:3+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
 Val, Marooned Surveyor	T1	pt	2/3	3/3	digital-variant	Arena-only card; script differs from current Arena text
 Valki, God of Lies [Tibalt, Cosmic Impostor]	T1	mana_cost	{5}{B}{R}	{1}{B}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
