@@ -130,6 +130,9 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 		f.Msg = strings.TrimSpace("strict_miss: " + x.StrictMiss + " leftover: " + x.Leftover)
 	case v.Status == oraclediff.Agree:
 		f.Class = ClassAgree
+	case forgeStopsInCleanup(x, v, f.Step, engine):
+		f.Class = ClassHarness
+		f.Msg = "forge: a player holds priority in the cleanup step after an end-the-turn effect"
 	case forgeIgnoresCastMode(item, v, f.Step, engine) != "":
 		f.Class = ClassHarness
 		f.Msg = "forge: " + forgeIgnoresCastMode(item, v, f.Step, engine)
@@ -244,6 +247,21 @@ func skippedDamageStep(item lower.Lowered, g rules.OracleResult, x oraclediff.XR
 		return i
 	}
 	return 0
+}
+
+// forgeStopsInCleanup reports a Forge difference at step d where Forge stands
+// in the cleanup step with a player holding priority. Time Stop and its kind
+// end the turn at once (CR 723.1) and no player receives priority in cleanup
+// unless a state-based action or a trigger needs it (CR 514.3); Forge's
+// PhaseHandler.endTurnByEffect enters CLEANUP from inside the resolution, and
+// the resolution's own onStackResolved then hands out priority. Gorge goes on
+// to the next turn's first priority. The item's passes run out of step with
+// Forge from there, so nothing past it compares.
+func forgeStopsInCleanup(x oraclediff.XResult, v oraclediff.Verdict, d int, engine string) bool {
+	if engine != "forge" || v.Status != oraclediff.Diverge || d < 0 || d+1 >= len(x.Snapshots) {
+		return false
+	}
+	return x.Snapshots[d+1].Step == "cleanup" && (v.Field == "turn" || v.Field == "step")
 }
 
 // forgeElectedCastModes are the cast_mode values the Forge driver can act on.

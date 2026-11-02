@@ -369,6 +369,23 @@ func TestClassifyForgeCastMode(t *testing.T) {
 	}
 }
 
+// TestClassifyForgeCleanupPriority: after an end-the-turn effect Forge stops
+// in cleanup where gorge reaches the next turn; that is Forge's, but Forge
+// stopping anywhere else is not.
+func TestClassifyForgeCleanupPriority(t *testing.T) {
+	item, _, g := fixture(0)
+	item.Item.ID = "xe:T:0:0:w1"
+	g.Snapshots[2].Turn, g.Snapshots[2].Step = 2, "upkeep"
+	x := follower(g, func(x *oraclediff.XResult) { x.Snapshots[2].Turn, x.Snapshots[2].Step = 1, "cleanup" })
+	if f := Classify(item, nil, g, x, "forge"); f.Class != ClassHarness || !strings.Contains(f.Msg, "cleanup") {
+		t.Errorf("forge in cleanup: %+v", f)
+	}
+	y := follower(g, func(x *oraclediff.XResult) { x.Snapshots[2].Turn, x.Snapshots[2].Step = 1, "end" })
+	if f := Classify(item, nil, g, y, "forge"); f.Class != ClassDiverge {
+		t.Errorf("forge elsewhere: %+v", f)
+	}
+}
+
 // TestClassifyShuffledWindow: a window that shuffled its library leaves the
 // library order out of the comparison, and a card drawn afterwards is each
 // engine's own: the hand differs without any rules difference.
