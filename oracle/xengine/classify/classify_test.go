@@ -284,6 +284,113 @@ func TestClassifyForgeSkipsDamageStep(t *testing.T) {
 	}
 }
 
+// TestClassifyForgeSkipsEmptyDamageStep: Forge leaves declare attackers or
+// declare blockers for end of combat when every attacker is gone, where gorge
+// enters the next step (CR 506.1, 510.1). That is the shortcut only while
+// nothing in gorge's checkpoint shows damage dealt; a combat whose damage
+// Forge skipped shows it.
+func TestClassifyForgeSkipsEmptyDamageStep(t *testing.T) {
+	at := func(name, step string, active, priority int) rules.OracleSnapshot {
+		s := snap(name)
+		s.Step, s.Active, s.Priority = step, active, priority
+		return s
+	}
+	item := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "pass", Seat: 1}},
+	}}}
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		at("setup", "declare-blockers", 0, 0),
+		at("step 0 (pass)", "declare-blockers", 0, 1),
+		at("step 1 (pass)", "combat-damage", 0, 0),
+	}}
+	forge := func(edit func(*oraclediff.XResult)) oraclediff.XResult {
+		x := follower(g, edit)
+		x.Snapshots[2].Step = "end-combat"
+		return x
+	}
+	f := Classify(item, nil, g, forge(nil), "forge")
+	if f.Class != ClassForgeSkipsDamageStep || f.Step != 1 || f.Gorge != "combat-damage" || f.Other != "end-combat" {
+		t.Errorf("attackers gone: %+v", f)
+	}
+	dealt := g
+	dealt.Snapshots = append([]rules.OracleSnapshot(nil), g.Snapshots...)
+	dealt.Snapshots[2].Players = append([]rules.OracleSnapPlayer(nil), g.Snapshots[2].Players...)
+	dealt.Snapshots[2].Players[1].Life = 17
+	x := forge(nil)
+	if f := Classify(item, nil, dealt, x, "forge"); f.Class != ClassDiverge {
+		t.Errorf("damage dealt in gorge only: %+v", f)
+	}
+	blockers := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		at("setup", "declare-attackers", 0, 0),
+		at("step 0 (pass)", "declare-attackers", 0, 1),
+		at("step 1 (pass)", "declare-blockers", 0, 0),
+	}}
+	xb := follower(blockers, func(x *oraclediff.XResult) { x.Snapshots[2].Step = "end-combat" })
+	if f := Classify(item, nil, blockers, xb, "forge"); f.Class != ClassForgeSkipsDamageStep || f.Gorge != "declare-blockers" {
+		t.Errorf("attackers gone before blockers: %+v", f)
+	}
+	stacked := g
+	stacked.Snapshots = append([]rules.OracleSnapshot(nil), g.Snapshots...)
+	stacked.Snapshots[1].Stack = []rules.OracleSnapStack{{Kind: "spell", Source: "Shock"}}
+	if f := Classify(item, nil, stacked, follower(stacked, func(x *oraclediff.XResult) { x.Snapshots[2].Step = "end-combat" }), "forge"); f.Class != ClassDiverge {
+		t.Errorf("a pass that resolves a spell does not end the step: %+v", f)
+	}
+}
+
+// TestClassifyForgeCastMode: the Forge driver casts the card's first spell
+// ability whatever the step's cast_mode, so a difference at or after a cast it
+// could not follow is the driver's, and a difference before it, or on another
+// engine, is not.
+func TestClassifyForgeCastMode(t *testing.T) {
+	item := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "cast", Card: "p0:Cunning Coyote", CastMode: "plot"}, {Op: "pass"}},
+	}}}
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		snap("setup"), snap("step 0 (pass)"), snap("step 1 (cast)"), snap("step 2 (pass)"),
+	}}
+	diffAt := func(i int) oraclediff.XResult {
+		return follower(g, func(x *oraclediff.XResult) { x.Snapshots[i].Players[0].Exile = []string{"Cunning Coyote"} })
+	}
+	for _, i := range []int{2, 3} {
+		f := Classify(item, nil, g, diffAt(i), "forge")
+		if f.Class != ClassHarness || !strings.Contains(f.Msg, `cast_mode "plot"`) {
+			t.Errorf("difference at checkpoint %d: %+v", i, f)
+		}
+	}
+	if f := Classify(item, nil, g, diffAt(1), "forge"); f.Class != ClassDiverge {
+		t.Errorf("difference before the cast: %+v", f)
+	}
+	if f := Classify(item, nil, g, diffAt(2), "xmage"); f.Class == ClassHarness {
+		t.Errorf("another engine: %+v", f)
+	}
+	item.Item.Steps[1].CastMode = "optionalcost"
+	if f := Classify(item, nil, g, diffAt(2), "forge"); f.Class != ClassDiverge {
+		t.Errorf("an optional-cost election the driver follows: %+v", f)
+	}
+}
+
+// TestClassifyShuffledWindow: a window that shuffled its library leaves the
+// library order out of the comparison, and a card drawn afterwards is each
+// engine's own: the hand differs without any rules difference.
+func TestClassifyShuffledWindow(t *testing.T) {
+	item, _, g := fixture(0)
+	item.Item.ID = "xe:T:0:0:w1"
+	item.HasRNG, item.RNGStep = true, 0
+	x := follower(g, func(x *oraclediff.XResult) { x.Snapshots[2].Players[0].Hand = []string{"Island"} })
+	if f := Classify(item, nil, g, x, "forge"); f.Class != ClassRNG {
+		t.Errorf("hand after a shuffle: %+v", f)
+	}
+	item.RNGStep = 2
+	if f := Classify(item, nil, g, x, "forge"); f.Class != ClassDiverge {
+		t.Errorf("the shuffle comes after the difference: %+v", f)
+	}
+	item.HasRNG = false
+	item.RNGStep = 0
+	if f := Classify(item, nil, g, x, "forge"); f.Class != ClassDiverge {
+		t.Errorf("no shuffle in the window: %+v", f)
+	}
+}
+
 // TestClassifyPaymentChoice: only a pool-only difference at (or right after) a
 // cast/activate whose recorded spend was nonempty and whose starting pool held
 // two or more colours is the player's legal colour split. A cast that spent
