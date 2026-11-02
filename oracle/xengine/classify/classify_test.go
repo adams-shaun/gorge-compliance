@@ -1,6 +1,7 @@
 package classify
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -433,5 +434,33 @@ func TestClassifyTurnCapIsATapesOnly(t *testing.T) {
 	item.Item.ID = "xe:T:0:0:w3"
 	if f := Classify(item, tp, g, capped, "forge"); f.Class != ClassHarness {
 		t.Fatalf("a window past the cap: %+v", f)
+	}
+}
+
+func TestSkipEarlyCasts(t *testing.T) {
+	steps := []oraclegen.Step{{Op: "pass"}, {Op: "activate", Seat: 1}, {Op: "activate", Seat: 1}, {Op: "cast", Seat: 1}, {Op: "activate", Seat: 1}, {Op: "pass", Seat: 1}}
+	item := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.Template, Scenario: oraclegen.Scenario{Steps: steps}}}
+	var g rules.OracleResult
+	g.Snapshots = append(g.Snapshots, snap("setup"))
+	for i, st := range steps {
+		g.Snapshots = append(g.Snapshots, snap(fmt.Sprintf("step %d (%s)", i, st.Op)))
+	}
+	early := follower(g, func(x *oraclediff.XResult) {
+		x.Snapshots[2].Players[1].Hand = nil
+		x.Snapshots[3].Players[1].Hand = nil
+	})
+	if f := Classify(item, nil, g, early, "xmage"); f.Class != ClassAgree {
+		t.Errorf("the taps before a cast: %+v", f)
+	}
+	if f := Classify(item, nil, g, early, "forge"); f.Class != ClassDiverge {
+		t.Errorf("another follower: %+v", f)
+	}
+	atCast := follower(g, func(x *oraclediff.XResult) { x.Snapshots[4].Players[1].Hand = nil })
+	if f := Classify(item, nil, g, atCast, "xmage"); f.Class != ClassDiverge {
+		t.Errorf("the cast's own checkpoint: %+v", f)
+	}
+	notBeforeCast := follower(g, func(x *oraclediff.XResult) { x.Snapshots[5].Players[1].Hand = nil })
+	if f := Classify(item, nil, g, notBeforeCast, "xmage"); f.Class != ClassDiverge {
+		t.Errorf("a tap before a pass: %+v", f)
 	}
 }

@@ -90,6 +90,9 @@ func GapFinding(item lower.Lowered, c lower.Check) Finding {
 // "forge".
 func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oraclediff.XResult, engine string) Finding {
 	f := Finding{ID: item.Item.ID, Engine: engine, Step: -1}
+	if engine == "xmage" {
+		x = SkipEarlyCasts(item.Item, g, x)
+	}
 	stopped := ""
 	if pg, px, ok := Partial(item.Item, g, x); ok {
 		stopped = x.Harness
@@ -137,6 +140,46 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 		}
 	}
 	return f
+}
+
+// SkipEarlyCasts takes gorge's checkpoints for the mana taps leading up to a cast in
+// x, the XMage row. The driver runs such a tap and the cast within one priority when
+// its seat holds priority out of turn or in response, so the tap's checkpoint already
+// shows the cast. The cast's own checkpoint is still compared.
+func SkipEarlyCasts(item oraclegen.Item, g rules.OracleResult, x oraclediff.XResult) oraclediff.XResult {
+	if len(x.Snapshots) > len(g.Snapshots) || len(item.Steps)+1 < len(x.Snapshots) {
+		return x
+	}
+	var snaps []rules.OracleSnapshot
+	for i, st := range item.Steps {
+		if st.Op != "activate" || i+1 >= len(x.Snapshots) || !leadsToCast(item.Steps, i) {
+			continue
+		}
+		if snaps == nil {
+			snaps = append(snaps, x.Snapshots...)
+		}
+		snaps[i+1] = g.Snapshots[i+1]
+	}
+	if snaps != nil {
+		x.Snapshots = snaps
+	}
+	return x
+}
+
+// leadsToCast reports that the steps after the mana tap at i are more taps by its seat,
+// then that seat's cast.
+func leadsToCast(steps []oraclegen.Step, i int) bool {
+	for j := i + 1; j < len(steps); j++ {
+		switch {
+		case steps[j].Seat != steps[i].Seat:
+			return false
+		case steps[j].Op == "cast":
+			return true
+		case steps[j].Op != "activate":
+			return false
+		}
+	}
+	return false
 }
 
 // turnCapMsg starts the Forge driver's report of its turn cap.

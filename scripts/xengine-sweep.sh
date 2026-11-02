@@ -278,6 +278,7 @@ summary() {
 		echo "# xengine sweep $run"
 		echo
 		echo "sets: $sets; followers: $followers; chunks per set: $chunks; games per chunk: $games; seed: $seed"
+		[ -z "${XENGINE_RANDOM_SETS:-}" ] || echo "decks drawn across: $XENGINE_RANDOM_SETS"
 		for s in $sets; do
 			echo
 			echo "## $s"

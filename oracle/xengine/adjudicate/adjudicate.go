@@ -91,7 +91,7 @@ func Item(item oraclegen.Item, g rules.OracleResult, xRow, fRow oraclediff.XResu
 // differs at. The engines have parted there, and the followers then replay the rest
 // of a game gorge alone played, so a later difference between them says nothing.
 func ItemLegs(item oraclegen.Item, g rules.OracleResult, xRow, fRow oraclediff.XResult) (oraclediff.Pattern, Legs) {
-	g, xRow, fRow = cutToPartial(item, g, xRow, fRow)
+	g, xRow, fRow = cutToPartial(item, g, classify.SkipEarlyCasts(item, g, xRow), fRow)
 	p, legs := itemLegs(item, g, xRow, fRow)
 	x, xok := firstDifference(g, legs.GX)
 	f, fok := firstDifference(g, legs.GF)
