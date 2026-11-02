@@ -53,3 +53,32 @@ func TestArrangeAnswersMatchScriptedSurveilQueue(t *testing.T) {
 		t.Fatalf("arrange xanswers = %#v, want %#v", got, want)
 	}
 }
+
+// TestArrangeAllToBottomNamesTheCards: a scry that keeps nothing names the cards it
+// sends away, since XMage's selection is what goes and a skip keeps them all.
+func TestArrangeAllToBottomNamesTheCards(t *testing.T) {
+	d := rules.OracleDecision{Step: 0, Seat: 0, Kind: "order", GorgeKind: "arrange", ArrangeKind: "bottom", Min: 0, Max: 1,
+		Options: 1, ArrangeLabels: []string{"Exclusion Mage"}}
+	got := xanswers([]rules.OracleDecision{d}, 1, nil, nil)
+	if len(got) != 1 || len(got[0]) != 1 || got[0][0].Value != "Exclusion Mage" || got[0][0].Kind != "choice" {
+		t.Fatalf("got %+v", got)
+	}
+}
+
+func TestRetimeEntryTargets(t *testing.T) {
+	steps := []Step{{Op: "pass"}, {Op: "resolve"}}
+	snap := func(step string) rules.OracleSnapshot { return rules.OracleSnapshot{Step: step} }
+	target := rules.OracleDecision{Step: 1, GorgeKind: "target"}
+	moved := []rules.OracleSnapshot{snap("main1"), snap("begin-combat"), snap("begin-combat")}
+	if got := RetimeEntryTargets(steps, moved, []rules.OracleDecision{target}); got[0].Step != 0 {
+		t.Errorf("a trigger of the step entered: step %d", got[0].Step)
+	}
+	stayed := []rules.OracleSnapshot{snap("main1"), snap("main1"), snap("main1")}
+	if got := RetimeEntryTargets(steps, stayed, []rules.OracleDecision{target}); got[0].Step != 1 {
+		t.Errorf("a target asked as something resolves: step %d", got[0].Step)
+	}
+	choice := rules.OracleDecision{Step: 1, GorgeKind: "choose"}
+	if got := RetimeEntryTargets(steps, moved, []rules.OracleDecision{choice}); got[0].Step != 1 {
+		t.Errorf("not a target: step %d", got[0].Step)
+	}
+}

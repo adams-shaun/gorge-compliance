@@ -172,7 +172,7 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 // for steps the driver will not pose, and the steps are then rewritten.
 func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision) forgeRequest {
 	sha := gate.ItemSHA(it)
-	decisions = forgeDropDeclarationDecisions(it, decisions)
+	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, forgeDropDeclarationDecisions(it, decisions))
 	it = forgeDeclarations(it)
 	return forgeRequest{
 		ID: it.ID, ScenarioSHA: sha, Item: it,

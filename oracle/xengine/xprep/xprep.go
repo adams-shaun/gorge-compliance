@@ -23,6 +23,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
@@ -106,12 +107,17 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 		return it, refuse(it.ID, ReasonRetarget, "%s", why)
 	}
 	it.Scenario = sc
-	g.Decisions = playStepUnlessPays(sc.Steps, g.Decisions)
+	g.Decisions = oraclegen.RetimeEntryTargets(sc.Steps, g.Snapshots, playStepUnlessPays(sc.Steps, g.Decisions))
 	it.XAnswers = oraclegen.XAnswersForScenario(reg, g, sc, modes, castSteps)
 	if len(it.XAnswers) == 0 {
 		// Nothing to script: still one (empty) entry per step, as the
 		// generator's activate and combat templates do.
 		it.XAnswers = make([][]oraclegen.XAnswer, len(sc.Steps))
+	}
+	for i := range sc.Steps {
+		if comboColourStep(abilities, i) {
+			it.XAnswers[i] = nil // the prefix names the colour; no ask follows
+		}
 	}
 	it.XAbility = abilities
 	it.XPos = passPositions(sc.Steps, g.Snapshots)
@@ -437,7 +443,27 @@ func prefixes(reg *cards.Registry, it oraclegen.Item) ([]string, *Refusal) {
 		if out == nil {
 			out = make([]string, len(it.Steps))
 		}
-		out[i] = p
+		out[i] = comboColourPrefix(p, c.Faces[face], *st.AbilityIndex, st)
 	}
 	return out, nil
+}
+
+// comboColourStep reports that prefixes named a colour for step i.
+func comboColourStep(abilities []string, i int) bool {
+	return i < len(abilities) && strings.HasPrefix(abilities[i], comboPrefix) && strings.HasSuffix(abilities[i], "}")
+}
+
+const comboPrefix = "{T}: Add {"
+
+// comboColourPrefix names the colour step makes when the ability is a tap for one of
+// several colours (Temple of Deceit's "{T}: Add {U} or {B}"). XMage prints that as one
+// ability per colour, so the bare cost would always pick the first.
+func comboColourPrefix(p string, f *cards.Face, ability int, st oraclegen.Step) string {
+	if p != "{T}" || ability < 0 || ability >= len(f.Abilities) || len(st.Answers) != 1 || len(st.Answers[0].Pick) != 1 {
+		return p
+	}
+	if _, combo := effects.ComboColours(effects.ManaOf(f.Abilities[ability]).Produced); !combo {
+		return p
+	}
+	return comboPrefix + strings.TrimPrefix(st.Answers[0].Pick[0], "Add ") + "}"
 }

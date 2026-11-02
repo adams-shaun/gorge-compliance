@@ -425,3 +425,28 @@ func TestIsTape(t *testing.T) {
 		}
 	}
 }
+
+func TestComboColourPrefix(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	face := func(name string) *cards.Face {
+		c, ok := reg.Lookup(name)
+		if !ok {
+			t.Fatalf("no card %q", name)
+		}
+		return c.Faces[0]
+	}
+	black := oraclegen.Step{Answers: []oraclegen.Answer{{Kind: "choose", Pick: []string{"B"}}}}
+	if got := comboColourPrefix("{T}", face("Temple of Deceit"), 0, black); got != "{T}: Add {B}" {
+		t.Errorf("a two-colour tap: %q", got)
+	}
+	labelled := oraclegen.Step{Answers: []oraclegen.Answer{{Kind: "choose", Pick: []string{"Add U"}}}}
+	if got := comboColourPrefix("{T}", face("Temple of Deceit"), 0, labelled); got != "{T}: Add {U}" {
+		t.Errorf("an answer by the option's label: %q", got)
+	}
+	if got := comboColourPrefix("{T}", face("Temple of Deceit"), 0, oraclegen.Step{}); got != "{T}" {
+		t.Errorf("no colour was asked: %q", got)
+	}
+	if got := comboColourPrefix("{T}: Add {B}.", face("Swamp"), 0, oraclegen.Step{}); got != "{T}: Add {B}." {
+		t.Errorf("a one-colour tap: %q", got)
+	}
+}
