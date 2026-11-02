@@ -5,6 +5,7 @@ import (
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
+	"github.com/adams-shaun/gorge/dirac/cardset"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -94,5 +95,32 @@ func TestScriptReplaysTheLockstepGame(t *testing.T) {
 	}
 	if played == 0 {
 		t.Fatal("no pair played")
+	}
+}
+
+// TestPlayableLeavesRefusedCardsOut: a card dirac refuses by name is known to play
+// wrongly, so no sweep deck holds it.
+func TestPlayableLeavesRefusedCardsOut(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	tables := NewTables(reg)
+	set, err := tables.Table("FDN")
+	if NoTables(err) {
+		t.Skip(err)
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	refused := 0
+	supported := set.Supported()
+	for i := range supported {
+		if set.Status(i) == cardset.StatusRefused {
+			refused++
+			if supported[i] {
+				t.Errorf("pool index %d is refused (%s) and playable", i, set.Reason(i))
+			}
+		}
+	}
+	if refused == 0 {
+		t.Skip("the FDN pool has no refused card at this pin")
 	}
 }

@@ -146,6 +146,10 @@ func (t *Tables) Table(code string) (cardset.Set, error) {
 	if err != nil {
 		return nil, err
 	}
+	// The pool plays every lowered card; a card dirac refuses by name is known to
+	// play wrongly, so it stays out of the decks and a pair holding one is turned
+	// away, as kfuzz -synth does. An unverified card plays.
+	s = cardset.AllowUnverified(s)
 	t.sets[code] = s
 	return s, nil
 }
