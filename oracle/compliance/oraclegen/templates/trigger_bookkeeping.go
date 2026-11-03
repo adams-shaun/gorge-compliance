@@ -19,8 +19,7 @@ import (
 // reads the fact -- possibly on a later turn. The template therefore stages
 // the bookkeeping trigger's cause, lets it run, and observes the consumer:
 //
-//   - record (Spider-Man 2099's land played from a non-hand zone, Oblivious
-//     Bookworm's turned-face-up imprint): the record's cause, then the
+//   - record (Oblivious Bookworm's turned-face-up imprint): the record's cause, then the
 //     consumer's window. When the cause also satisfies the consumer by itself
 //     on turn 1 (a disguise cast ENTERS face down, which the Bookworm counts
 //     too), the cause's preparation runs on turn 1 and its recorded event on

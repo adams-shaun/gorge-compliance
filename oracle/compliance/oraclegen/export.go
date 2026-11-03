@@ -215,3 +215,25 @@ func Repeat(s string, n int) []string { return repeat(s, n) }
 // DonatedProbe is the self-donating permanent the "permanent you own but
 // don't control" fixture's prelude hands the opponent (candidates_donated.go).
 const DonatedProbe = donatedProbe
+
+// RetimeEntryTargets moves a target decision a resolve step records back to the pass
+// before it, when that pass moved the game to another step: the decision belongs to a
+// trigger of the step entered, and XMage and Forge put the trigger on the stack, asking
+// for its target, during the pass. gorge's runner keeps it on the resolve step, which is
+// where a lowered tape answers it. snaps are the checkpoints: setup, then one per step.
+func RetimeEntryTargets(steps []Step, snaps []rules.OracleSnapshot, ds []rules.OracleDecision) []rules.OracleDecision {
+	out := make([]rules.OracleDecision, len(ds))
+	copy(out, ds)
+	if len(snaps) != len(steps)+1 {
+		return out
+	}
+	for i := range out {
+		d := &out[i]
+		if d.GorgeKind == "target" && d.Step > 0 && d.Step < len(steps) &&
+			steps[d.Step].Op == "resolve" && steps[d.Step-1].Op == "pass" &&
+			snaps[d.Step].Step != snaps[d.Step-1].Step {
+			d.Step--
+		}
+	}
+	return out
+}

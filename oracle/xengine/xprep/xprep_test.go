@@ -281,6 +281,28 @@ func TestPassPositionsFirstStrikeDamage(t *testing.T) {
 // set exactly on the pass steps and equal to gorge's checkpoint after the step;
 // Moved marks a pass that changed the turn or step and Resolves one that
 // removed a stack object, and no pass is both (the object resolves first).
+// An item naming a card no manifest lists is Forge's alone: XMage could not place it.
+func TestPrepareRefusesACardNoXMageSetLists(t *testing.T) {
+	reg, sp, ws, _ := prepared(t, 1)
+	w := ws[0]
+	l := w.l
+	l.Item.Setup = map[string]oraclegen.Seat{}
+	for k, s := range w.l.Item.Setup {
+		l.Item.Setup[k] = s
+	}
+	const absent = "A-Blood Artist" // a digital rebalance, in Forge's corpus and no XMage set
+	s := l.Item.Setup["p1"]
+	s.Graveyard = append(slices.Clone(s.Graveyard), absent)
+	l.Item.Setup["p1"] = s
+	_, ref := Prepare(reg, sp, l, w.g)
+	if ref == nil || ref.Reason != ReasonNoXMageCard || !strings.Contains(ref.Detail, absent) {
+		t.Fatalf("refusal %+v, want %s naming %q", ref, ReasonNoXMageCard, absent)
+	}
+	if _, ref := Prepare(reg, sp, w.l, w.g); ref != nil && ref.Reason == ReasonNoXMageCard {
+		t.Fatalf("an item of listed cards was refused: %+v", ref)
+	}
+}
+
 func TestPreparePassPositions(t *testing.T) {
 	_, _, ws, items := prepared(t, 2)
 	var moved, resolves int
@@ -423,5 +445,30 @@ func TestIsTape(t *testing.T) {
 		if got := IsTape(id); got != want {
 			t.Errorf("IsTape(%q) = %v, want %v", id, got, want)
 		}
+	}
+}
+
+func TestComboColourPrefix(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	face := func(name string) *cards.Face {
+		c, ok := reg.Lookup(name)
+		if !ok {
+			t.Fatalf("no card %q", name)
+		}
+		return c.Faces[0]
+	}
+	black := oraclegen.Step{Answers: []oraclegen.Answer{{Kind: "choose", Pick: []string{"B"}}}}
+	if got := comboColourPrefix("{T}", face("Temple of Deceit"), 0, black); got != "{T}: Add {B}" {
+		t.Errorf("a two-colour tap: %q", got)
+	}
+	labelled := oraclegen.Step{Answers: []oraclegen.Answer{{Kind: "choose", Pick: []string{"Add U"}}}}
+	if got := comboColourPrefix("{T}", face("Temple of Deceit"), 0, labelled); got != "{T}: Add {U}" {
+		t.Errorf("an answer by the option's label: %q", got)
+	}
+	if got := comboColourPrefix("{T}", face("Temple of Deceit"), 0, oraclegen.Step{}); got != "{T}" {
+		t.Errorf("no colour was asked: %q", got)
+	}
+	if got := comboColourPrefix("{T}: Add {B}.", face("Swamp"), 0, oraclegen.Step{}); got != "{T}: Add {B}." {
+		t.Errorf("a one-colour tap: %q", got)
 	}
 }

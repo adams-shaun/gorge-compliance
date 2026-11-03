@@ -81,7 +81,7 @@ output stays out of the tree because Forge is GPL-3.0. The pass writes a ledger 
 vocabulary to `oracle/compliance/adjudication/`, which holds no committed rows today.
 
 **Can't check:** a wrong card script. gorge compiles Forge's scripts, so gorge and Forge agreeing
-says little: `GF|X` can be a shared script bug. Forge never changes a verdict and isn't a CI gate.
+says little: `GF|X` can be a shared script bug. Forge never changes a verdict and isn't a CI gate. What we've confirmed in the other engines, and whether upstream knows, is in [upstream-bugs.md](upstream-bugs.md).
 
 **Run:** the XMage pass first, at the same level, then Forge:
 
@@ -104,19 +104,59 @@ into windows and prefixes that XMage and Forge replay, and each difference is cl
 and written as a repro directory. It reaches board states no scenario sets up. A coverage
 ledger records which cards each sweep exercised and compared.
 
-**Can't check:** windows it can't lower. In a 2-game FDN sweep on 2026-11-01, 25 of 46 windows
-were refused, and of the 21 replayed, 5 in XMage and 1 in Forge came back as a `decision_shape`
-difference, with 2 and 3 as `harness`, so a follower can fail to express a position without any
-engine being wrong. A sweep rules on nothing and commits nothing. Its findings are leads for a person.
+A follower that stops partway, because the game parted from the script, is read up to where it stopped: a difference there
+is a `diverge`, not a `harness`. When both followers differ from gorge they are compared up to the first checkpoint
+either differs at, since neither follows the same game after it. An item XMage is never sent (`xprep.jsonl`) is
+`not_sent`, and a whole-game tape that agreed as far as the Forge driver's turn cap is `turn_cap`.
+
+**Can't check:** windows it can't lower. In a 2-game FDN sweep on 2026-11-02, 25 of 46 windows
+were refused, and of the 21 replayed, 3 in XMage and 1 in Forge came back as a `decision_shape`
+difference, so a follower can fail to express a position without any engine being wrong. A sweep rules on nothing and commits nothing. Its findings are leads for a person.
 
 Forge has one known difference of its own here. After a first-strike combat's first damage step, when
 no creature is left to deal damage in the second, Forge goes straight to end of combat, where
 CR 510.4 gives the phase a second damage step and players get priority in it. gorge and XMage do. Those
 items get the class `forge_skips_damage_step` and aren't compared in Forge past that checkpoint.
 
+Two `FX|G` patterns are the followers agreeing with each other against the rules, read from their code and not fixed in gorge.
+Lifecraft Engine crewed: its "Vehicle creatures you control" type effect depends on crew's animation (CR 613.8, from memory),
+but XMage's layer-4 effect and Forge's static read the filter without it, so neither gives the Engine the chosen type. Erratic
+Apparition enchanted by Unable to Scream: the Aura's "loses all abilities" applies as it enters, so CR 603.6 (from memory) leaves
+nothing to trigger, but both followers fire Eerie.
+
 **Run:** `make xengine-sweep SETS=FDN CHUNKS=1 GAMES=2`, then read
 `.oracle-build/xengine/seed1/SUMMARY.md`. A sweep resumes where it stopped. It needs `jq`, and
 waits while two or more JVMs are running.
+
+**dirac as a fourth side:** with `XENGINE_DIRAC=1` the decks hold only cards the set's dirac table
+plays, and each game is played in lockstep between gorge and dirac (`dirac/oracle`) under the explore
+policy before being replayed as the sweep's game, so the windows lowered from it are the positions dirac
+was compared at. `<chunk>/dirac.jsonl` says how each game went on dirac. `<chunk>/adjudicate/dirac.jsonl` gives
+each item dirac's answer beside the three-way pattern: `D=G`, `D!=G`, or `D-` where dirac has no answer
+(a pair its table refuses, a game past a stall or a divergence). `AGREE3 D!=G` points at dirac; `FX|G D=G` is
+a gorge suspect dirac shares. `play`'s error names the command that builds the tables, which are keyed by the pin
+and the corpus. The lockstep runs on the autopay surface. A difference on a card dirac lists as unverified breaks no promise of
+dirac's: `unverified` in the row counts those deck lines.
+
+**In the background:** `scripts/xengine-random.sh` plays random-card games chunk after chunk until stopped:
+even games across all the sets given, odd games within one set's dirac-playable cards. It is meant for
+a user unit that caps the whole tree, from a worktree that nothing moves, because every stage runs from the checkout:
+
+```sh
+git worktree add --detach "$dir" develop && ln -s "$PWD/.cards" "$dir/.cards"
+systemd-run --user --unit=xengine-random --collect --working-directory="$dir" \
+  -p MemoryMax=8G -p CPUQuota=400% -p Nice=15 -p IOSchedulingClass=idle \
+  --setenv=PATH="$PATH" --setenv=XENGINE_ROOT="$root" \
+  --setenv=XMAGE_ORACLE_DIR="$xmage" --setenv=FORGE_ORACLE_DIR="$forge" \
+  "$dir/scripts/xengine-random.sh" --run random1
+```
+
+`--forge-only FILE` adds a file of card names, one per line, to the cross-set draw: a set XMage has no class for. An
+item naming a card no XMage set lists isn't sent to XMage (`not_sent`, `xmage_lacks_card`), so those games are compared with Forge alone.
+
+`systemctl --user stop xengine-random` stops it, and the same command resumes it. It writes `$root/SUMMARY.md` after every chunk and
+keeps each chunk's rows and the repros of diverged items; `xengine-sweep.sh --force`
+rebuilds the rest of a chunk at the same pin.
 
 ## mtgish
 

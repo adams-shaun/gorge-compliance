@@ -34,7 +34,6 @@ Captain's Maneuver	T3	targets	creature|planeswalker|player+creature|planeswalker
 Chandra, Hope's Beacon	T3	targets	anyx0..2	any+any	mtgish-bug	mtgish#3 up-to as exact
 Chandra, the Firebrand	T3	targets	anyx0..6	any+any+any+any+any+any	mtgish-bug	mtgish#3 up-to as exact
 Chaos Is My Plaything	T3	targets	permanentx0..*	permanent	forge-bug	per-opponent target is TargetMin$ 0 (choose none); printed one per opponent: TargetMin$ OneEach
-Cinderheart Giant	T3	targets	creature	-	forge-bug	Forge#12324: targeting modelled differently from the Oracle text
 Cloud of Faeries	T3	targets	-	landx0..2	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
 Cloudspire Skycycle	T3	targets	artifact|creature+artifact|creaturex0..1	artifact|creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
 Contagion	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
@@ -59,7 +58,6 @@ Fear of Immobility	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to a
 Filigree Vector	T3	targets	artifactx0..*+creaturex0..*	creaturex0..*+creaturex0..*	mtgish-bug	mtgish#4: artifact slot encoded as creature
 Fracture	T3	targets	artifact|enchantment|planeswalker	artifact|enchantment|land	mtgish-bug	mtgish#4: Fracture targets a land instead of a planeswalker
 Frenzied Gorespawn	T3	targets	creaturex0..*	creature	forge-bug	per-opponent target is TargetMin$ 0 (choose none); printed one per opponent: TargetMin$ OneEach
-Froghemoth	T3	targets	-	card-graveyardx0..*	forge-bug	Forge#12324: targeting modelled differently from the Oracle text
 Gale, Waterdeep Prodigy	T3	targets	card-graveyardx0..1	-	equivalent	script writes one trigger per spell type cast (instant -> sorcery, sorcery -> instant); mtgish one
 Gargos, Vicious Watcher	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Ghost of Ramirez DePietro	T3	targets	card-graveyardx0..1	card-graveyard	mtgish-bug	mtgish#3 up-to as exact
@@ -76,7 +74,6 @@ Ion Storm	T3	targets	any	-	equivalent	script writes one ability per removable co
 Jeska, Thrice Reborn	T3	targets	anyx0..3	any+any+any	mtgish-bug	mtgish#3 up-to as exact
 Jon Irenicus, Shattered One	T3	targets	creaturex0..1+player	creature+player	mtgish-bug	mtgish#3 up-to as exact
 Kiora, Master of the Depths	T3	targets	creaturex0..1+landx0..1	creaturex0..1+creaturex0..1	mtgish-bug	mtgish#1: the land target encoded as a second creature (capture reuse)
-Knight Rampager	T3	targets	-	player	forge-bug	Forge#12324: targeting modelled differently from the Oracle text
 Kolaghan Stormsinger	T3	targets	creature	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Lethal Protection	T3	targets	card-graveyardx0..1+creature	card-graveyard+creature	mtgish-bug	mtgish#3 up-to as exact
 Lively Dirge	T3	targets	-	card-graveyardx0..2	mtgish-bug	mtgish#4: target added where the text has none
@@ -93,7 +90,6 @@ Nightbird's Clutches	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgis
 Nissa's Judgment	T3	targets	creaturex0..1+creaturex0..2	creature+creaturex0..2	mtgish-bug	mtgish#3 pattern (not in the issue list): choose up to one target encoded exact
 Novel Nunchaku	T3	targets	creature+creaturex0..1	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Obuun, Mul Daya Ancestor	T3	targets	landx0..1	land	mtgish-bug	mtgish#3 up-to as exact
-Oglor, Devoted Assistant	T3	targets	player	-	forge-bug	upkeep dig has ValidTgts$ You; printed look-at-top is untargeted
 Oko, Lorwyn Liege	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Ondu Knotmaster [Throw a Line]	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
 Palinchron	T3	targets	-	landx0..7	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
@@ -103,21 +99,17 @@ Phyrexian Splicer	T3	targets	creature+creature creature+creature creature+creatu
 Pitiless Fists	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Press the Advantage	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Primal Might	T3	targets	creature+creaturex0..1	creature+creature	mtgish-bug	printed fight target is up to one; mtgish TargetPermanent requires exactly one (gorge: TargetMin$ 0) (i5jb/mtgish#3)
-Quandrix Command	T3	targets	card-graveyardx0..3+creature+creature|planeswalkerx0..1+player+spell	card-graveyardx0..3+creature+creature|planeswalker+player+spell	forge-bug	bounce mode has TargetMin$ 0 | TargetMax$ 1; printed target is required
 Rally the Monastery	T3	targets	creature+creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Reasonable Doubt	T3	targets	creaturex0..1+spell	creature+spell	mtgish-bug	mtgish#3 up-to as exact
 Return to Dust	T3	targets	artifact|enchantment+artifact|enchantmentx0..*	artifact|enchantment+artifact|enchantmentx0..1	equivalent	conditional second target: script one 1..X slot; mtgish a required and an up-to-one slot
 River's Grasp	T3	targets	creaturex0..1+player	creature+player	mtgish-bug	mtgish#3 up-to as exact
 Rogues' Gallery	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..*	equivalent	one target per color/type: script one up-to-one slot each; mtgish one per-group slot
-Running Is Useless	T3	targets	creaturex0..*	-	forge-bug	Forge#12324: targeting modelled differently from the Oracle text
 Season of the Bold	T3	targets	creaturex0..1	creature	mtgish-bug	printed damage target is up to one; mtgish TargetPermanent requires exactly one (gorge: TargetMin$ 0) (i5jb/mtgish#3)
 Seize Opportunity	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Silumgar Assassin	T3	targets	creature	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Smogbelcher Chariot	T3	targets	permanent	creature	forge-bug	ValidTgts$ Card.CrewedThisTurn admits a noncreature crewer; printed target creature
-Sparkshaper Visionary	T3	targets	-	planeswalkerx0..*	forge-bug	Forge#12324: targeting modelled differently from the Oracle text
 Splendid Agony	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
 Spry and Mighty	T3	targets	-	creature+creature	mtgish-bug	mtgish#4: target added where the text has none
-Stockpiling Celebrant	T3	targets	-	permanent	forge-bug	Forge#12324: targeting modelled differently from the Oracle text
 Stratus Dancer	T3	targets	spell	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Strength of the Tajuru	T3	targets	creature	creature+creature	equivalent	multikicker targets: script one slot of 1+kicks; mtgish one plus one per kick
 Stunning Shot	T3	targets	creaturex0..1+creaturex0..1	creature+creature	mtgish-bug	mtgish#3 up-to as exact

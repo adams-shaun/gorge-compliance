@@ -27,8 +27,8 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 # Forge oracle driver commit (fork, branch oracle-harness): a descendant of FORGE_REF with identical script trees.
-# ae39d915 = 4b1a4fde + driver records the final step when its action ends the game (2026-10-29).
-FORGE_ORACLE_REF ?= ae39d915306df882a9d82c752770c7dfd8f20d07
+# f8682f9e = the driver merged with gorge's FORGE_REF 07d4f918d (Card-Forge master 2026-11-02).
+FORGE_ORACLE_REF ?= f8682f9e54ea513bc30ba9a1fc5aeece8cf58837
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 .PHONY: help
@@ -73,6 +73,7 @@ smoke:
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
 	bash ops/scripts/tests/xengine_sweep_smoke.sh
+	bash ops/scripts/tests/xengine_random_smoke.sh
 
 # xengine-sweep runs the chunked, resumable cross-engine sweep
 # (scripts/xengine-sweep.sh): SETS='FDN BLB' CHUNKS=4 GAMES=50. Heavy: it starts

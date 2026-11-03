@@ -1,6 +1,7 @@
 package game
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"strings"
@@ -14,6 +15,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/engine/seat"
 	"github.com/adams-shaun/gorge/engine/state"
+	"github.com/adams-shaun/gorge/engine/view"
 	"github.com/adams-shaun/gorge/testkit/bench"
 )
 
@@ -37,10 +39,35 @@ type Options struct {
 	// anything, or the tape is no longer the game that would have been played
 	// without it.
 	OnCut func(e *rules.Engine, entry int)
+	// Script holds the answers the game opens with, in order: the log of an
+	// earlier game of the same decks and seed. The explore bots play on from
+	// where it ends.
+	Script []decision.Intent
 }
 
-// Play plays pair against each other with two explore bots and records the
-// game. Seat i is heuristic.NewExploreBot(seed ^ 0x9e3779b97f4a7c15*(i+1)) with
+// scripted answers from a shared script, then as its explore bot does. It holds the
+// bot in a field: an embedded bot's DecideBoard would answer in Decide's place.
+type scripted struct {
+	bot    *heuristic.Bot
+	script *[]decision.Intent
+}
+
+func (s scripted) WantsPaymentActions() bool { return s.bot.WantsPaymentActions() }
+
+func (s scripted) Decide(ctx context.Context, v view.View, d decision.Decision) (decision.Intent, error) {
+	if len(*s.script) == 0 {
+		return s.bot.Decide(ctx, v, d)
+	}
+	in := (*s.script)[0]
+	if in.Seq != d.Seq {
+		return decision.Intent{}, fmt.Errorf("game: the script answers decision %d, decision %d is pending", in.Seq, d.Seq)
+	}
+	*s.script = (*s.script)[1:]
+	return in, nil
+}
+
+// Play plays pair against each other with two explore bots, after opt.Script if
+// any, and records the game. Seat i is heuristic.NewExploreBot(seed ^ 0x9e3779b97f4a7c15*(i+1)) with
 // auto-pay armed, exactly as gorge's cmd/cardfuzz builds an explore seat. A
 // stall (turn or intent cap, livelock, bigboard, engine panic) returns the tape
 // so far with Outcome.Stall set; only a setup failure or a seat error is an
@@ -57,6 +84,7 @@ func Play(reg *cards.Registry, pair [2]decks.Deck, seed uint64, opt Options) (*T
 	var dk [][]*cards.Card
 	names := make([]string, 2)
 	seats := make([]seat.Seat, 2)
+	script := opt.Script
 	for i, d := range pair {
 		cs := make([]*cards.Card, 0, len(d.Cards))
 		for _, n := range d.Cards {
@@ -69,7 +97,11 @@ func Play(reg *cards.Registry, pair [2]decks.Deck, seed uint64, opt Options) (*T
 		dk = append(dk, cs)
 		names[i] = fmt.Sprintf("%s-%d", d.Colours, i)
 		t.Decks[i] = Deck{Name: d.Name, Colours: d.Colours, Cards: append([]string{}, d.Cards...)}
-		seats[i] = heuristic.NewExploreBot(seed ^ (0x9e3779b97f4a7c15 * uint64(i+1))).EnableAutoPayMana()
+		bot := heuristic.NewExploreBot(seed ^ (0x9e3779b97f4a7c15 * uint64(i+1))).EnableAutoPayMana()
+		seats[i] = bot
+		if len(script) > 0 {
+			seats[i] = scripted{bot: bot, script: &script}
+		}
 	}
 	cfg := rules.Config{Names: names, Decks: dk, Tokens: reg.Tokens, Seed: seed, NameUniverse: reg.Universe()}
 

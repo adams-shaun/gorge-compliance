@@ -29,7 +29,8 @@ func playTwo(t *testing.T) (*cards.Registry, string) {
 		t.Fatal(err)
 	}
 	dir := t.TempDir()
-	if err := play(reg, cands, cov.New(), "FDN", 0, 2, 1, dir, false, nil); err != nil {
+	pick := func(int, uint64) ([]decks.Card, *cov.Ledger, string) { return cands, cov.New(), "" }
+	if err := play(reg, pick, nil, cov.New(), "FDN", 0, 2, 1, dir, false, nil); err != nil {
 		t.Fatal(err)
 	}
 	return reg, dir

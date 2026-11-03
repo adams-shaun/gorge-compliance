@@ -225,7 +225,7 @@ var mechanismFamilies = map[string]int{
 	"Offspring":         21,
 	"OptionalCost":      40,
 	"Spree":             21,
-	"MinCharmNum":       153,
+	"MinCharmNum":       154,
 	"TargetMinZeroUpTo": 403,
 }
 

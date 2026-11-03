@@ -132,7 +132,8 @@ func runCalib(args []string) error {
 // to be compared.
 func followed(class string) bool {
 	return class != classify.ClassHarness && class != classify.ClassDecisionShape &&
-		class != classify.ClassPaymentChoice && class != classify.ClassForgeSkipsDamageStep
+		class != classify.ClassPaymentChoice && class != classify.ClassForgeSkipsDamageStep &&
+		class != classify.ClassNotSent && class != classify.ClassTurnCap
 }
 
 // normMsg strips object ids and numbers from a harness message.

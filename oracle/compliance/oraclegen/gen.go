@@ -1108,8 +1108,15 @@ func chooseTargets(sc Scenario, ds []rules.OracleDecision) (Scenario, map[int]bo
 // shape an upkeep Surveil's step-time fallback poses in a scenario that
 // revisits the upkeep, where every looked-at card went to the graveyard.
 func arrangeEmptyGraveyard(d rules.OracleDecision) bool {
+	return arrangeEmpty(d) && d.ArrangeKind == "graveyard"
+}
+
+// arrangeEmpty reports whether an arrange decision kept none of the cards an
+// optional (Min 0) ask looked at at step time, sending them all away: to the
+// graveyard (surveil) or the bottom of the library (scry).
+func arrangeEmpty(d rules.OracleDecision) bool {
 	return d.Step >= 0 && d.Min == 0 && len(d.PickIdx) == 0 && len(d.ArrangeLabels) > 0 &&
-		len(d.ArrangeLabels) == d.Options && d.ArrangeKind == "graveyard"
+		len(d.ArrangeLabels) == d.Options
 }
 
 // xanswersSetup turns gorge's recorded decisions into XMage's scripted
@@ -1593,10 +1600,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			// Arrange first asks which cards move; its follow-up ordering is
 			// also on XMage's choice queue. Keeping all cards is a choice skip.
-			if d.GorgeKind == "arrange" && arrangeEmptyGraveyard(d) {
-				// Every looked-at card goes to the graveyard (gorge's empty
-				// kept pile). XMage's selection IS the cards to graveyard, so
-				// script each looked-at card's name on the choice queue: a
+			if d.GorgeKind == "arrange" && arrangeEmpty(d) && (d.ArrangeKind == "graveyard" || d.ArrangeKind == "bottom") {
+				// Every looked-at card goes away (gorge's empty kept pile).
+				// XMage's selection IS the cards that go, so script each looked-at card's name on the choice queue: a
 				// leading card name takes precedence over the skip
 				// (librarySelectionQueue), the queue then ends with nothing
 				// further to consume, and no order answers follow. The generic

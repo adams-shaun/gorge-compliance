@@ -11,9 +11,7 @@ import (
 // added: a self-transform trigger, a self
 // cycling trigger and an origin-free land-play trigger now name a servable
 // sub-family, while the shapes their causes cannot produce stay gaps --
-// Shadow of the Goblin's not-owned hand land. Spider-Man 2099's Static$ True
-// LandPlayed bookkeeping line never reaches the stack and is observed through
-// its end-step consumer (trigger.bookkeeping, trigger_bookkeeping.go). The
+// Shadow of the Goblin's not-owned hand land. The
 // origin-scoped land plays (Gwen Stacy's from-exile, Shadow of the Goblin's
 // not-from-hand) are served by trigger.land-played-zone.
 func TestSelfCauseTriggerClassification(t *testing.T) {
@@ -30,7 +28,6 @@ func TestSelfCauseTriggerClassification(t *testing.T) {
 		{"Gwen Stacy", "trigger#1.0", "trigger.land-played-zone"},
 		{"Shadow of the Goblin", "trigger#0.1", "trigger.land-played-zone"},
 		{"Shadow of the Goblin", "trigger#0.2", "trigger.gap:LandPlayed"},
-		{"Spider-Man 2099", "trigger#0.1", levelb.BookkeepingSub},
 	} {
 		c, ok := reg.Lookup(tc.name)
 		if !ok {

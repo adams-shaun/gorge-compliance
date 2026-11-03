@@ -66,6 +66,21 @@ func CandidatesWith(reg *cards.Registry, manifestDir, set string, opt Options) (
 	if err != nil {
 		return nil, nil, err
 	}
+	out, skips := candidatesOf(reg, m, opt)
+	return out, skips, nil
+}
+
+// CandidatesNamed is CandidatesWith over a list of card names instead of a set's
+// manifest: the cards of a set XMage has no class for.
+func CandidatesNamed(reg *cards.Registry, names []string, opt Options) ([]Card, []Skip) {
+	var m compliance.Manifest
+	for _, n := range names {
+		m.Cards = append(m.Cards, compliance.ManifestCard{Name: n})
+	}
+	return candidatesOf(reg, m, opt)
+}
+
+func candidatesOf(reg *cards.Registry, m compliance.Manifest, opt Options) ([]Card, []Skip) {
 	sup := effects.Supported()
 	has := func(n string) bool { _, ok := reg.Lookup(n); return ok }
 	folded := compliance.FoldedNames(reg)
@@ -120,7 +135,7 @@ func CandidatesWith(reg *cards.Registry, manifestDir, set string, opt Options) (
 		}
 		out = append(out, Card{Name: name, Identity: c.ColourIdentity(), Land: hasType(f.Types, "Land"), Pips: pips(f.ManaCost)})
 	}
-	return out, skips, nil
+	return out, skips
 }
 
 func hasType(types []string, t string) bool {
@@ -146,6 +161,22 @@ func pips(cost string) [5]int {
 		}
 	}
 	return p
+}
+
+// Union is the lists' cards, each name once, in list order: the candidates of
+// decks drawn across sets.
+func Union(lists ...[]Card) []Card {
+	seen := map[string]bool{}
+	var out []Card
+	for _, l := range lists {
+		for _, c := range l {
+			if !seen[c.Name] {
+				seen[c.Name] = true
+				out = append(out, c)
+			}
+		}
+	}
+	return out
 }
 
 // colourPair is a pair of indexes into WUBRG, a < b.

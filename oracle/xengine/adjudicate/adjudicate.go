@@ -46,9 +46,9 @@ func Label(p oraclediff.Pattern) string {
 
 // Eligible reports whether an item with these xe-6 classes (XMage's and
 // Forge's) is adjudicated: at least one engine diverged, and the other either
-// agreed, diverged, or did not compare at all (harness, xmage_lacks,
-// forge_skips_damage_step, which ThreeWay turns into the GF|- / G|F|- patterns
-// or F harness). Anything else
+// agreed, diverged, or did not compare at all (harness, not_sent, xmage_lacks,
+// turn_cap, forge_skips_damage_step, which ThreeWay turns into the GF|- / G|F|-
+// patterns or F harness). Anything else
 // (rng, projection_gap, decision_shape, payment_choice, lower_gap on either
 // side) keeps its class: the difference there is not yet a statement about an
 // engine.
@@ -58,14 +58,14 @@ func Eligible(xClass, fClass string) bool {
 	}
 	okX := func(c string) bool {
 		switch c {
-		case classify.ClassDiverge, classify.ClassAgree, classify.ClassHarness, classify.ClassXMageLacks:
+		case classify.ClassDiverge, classify.ClassAgree, classify.ClassHarness, classify.ClassNotSent, classify.ClassXMageLacks:
 			return true
 		}
 		return false
 	}
 	okF := func(c string) bool {
 		switch c {
-		case classify.ClassDiverge, classify.ClassAgree, classify.ClassHarness, classify.ClassForgeSkipsDamageStep:
+		case classify.ClassDiverge, classify.ClassAgree, classify.ClassHarness, classify.ClassTurnCap, classify.ClassForgeSkipsDamageStep:
 			return true
 		}
 		return false
@@ -86,7 +86,26 @@ func Item(item oraclegen.Item, g rules.OracleResult, xRow, fRow oraclediff.XResu
 }
 
 // ItemLegs is Item with the pairwise verdicts that decided it.
+//
+// Both followers differing from gorge are compared up to the first checkpoint either
+// differs at. The engines have parted there, and the followers then replay the rest
+// of a game gorge alone played, so a later difference between them says nothing.
 func ItemLegs(item oraclegen.Item, g rules.OracleResult, xRow, fRow oraclediff.XResult) (oraclediff.Pattern, Legs) {
+	g, xRow, fRow = cutToPartial(item, g, classify.SkipEarlyCasts(item, g, xRow), fRow)
+	p, legs := itemLegs(item, g, xRow, fRow)
+	x, xok := firstDifference(g, legs.GX)
+	f, fok := firstDifference(g, legs.GF)
+	if !xok || !fok || p != oraclediff.AllDiffer {
+		return p, legs
+	}
+	n := min(x, f) + 1
+	g.Snapshots = g.Snapshots[:n]
+	xRow.Snapshots = xRow.Snapshots[:n]
+	fRow.Snapshots = fRow.Snapshots[:n]
+	return itemLegs(item, g, xRow, fRow)
+}
+
+func itemLegs(item oraclegen.Item, g rules.OracleResult, xRow, fRow oraclediff.XResult) (oraclediff.Pattern, Legs) {
 	gx := oraclediff.CompareOpts(g, nil, xRow, item.Compare, item.Ignore...)
 	gf := oraclediff.CompareOpts(g, nil, fRow, item.Compare, item.Ignore...)
 	forgeHarness := fRow.Harness != ""
@@ -100,4 +119,46 @@ func ItemLegs(item oraclegen.Item, g rules.OracleResult, xRow, fRow oraclediff.X
 	}
 	tw := oraclediff.ThreeWay(gx, gf, fx, forgeHarness, false)
 	return tw.Pattern, Legs{GX: gx, GF: gf, FX: fx}
+}
+
+// firstDifference is the snapshot a diverging leg first differs at; ok is false for
+// a leg that agreed or differed in no snapshot.
+func firstDifference(g rules.OracleResult, v oraclediff.Verdict) (i int, ok bool) {
+	if v.Status != oraclediff.Diverge {
+		return 0, false
+	}
+	for i, s := range g.Snapshots {
+		if s.Checkpoint == v.Checkpoint {
+			return i, true
+		}
+	}
+	return 0, false
+}
+
+// cutToPartial cuts all three results to the checkpoints a follower that stopped
+// after a difference reached (classify.Partial), so that the legs compare the same
+// stretch of the game. A row that stopped with no difference keeps its harness.
+func cutToPartial(item oraclegen.Item, g rules.OracleResult, xRow, fRow oraclediff.XResult) (rules.OracleResult, oraclediff.XResult, oraclediff.XResult) {
+	n := len(g.Snapshots)
+	_, _, xPart := classify.Partial(item, g, xRow)
+	_, _, fPart := classify.Partial(item, g, fRow)
+	if xPart {
+		n = min(n, len(xRow.Snapshots))
+		xRow.Harness = ""
+	}
+	if fPart {
+		n = min(n, len(fRow.Snapshots))
+		fRow.Harness = ""
+	}
+	if !xPart && !fPart {
+		return g, xRow, fRow
+	}
+	cut := func(r oraclediff.XResult) oraclediff.XResult {
+		if r.Harness == "" && len(r.Snapshots) > n {
+			r.Snapshots = r.Snapshots[:n]
+		}
+		return r
+	}
+	g.Snapshots = g.Snapshots[:n]
+	return g, cut(xRow), cut(fRow)
 }

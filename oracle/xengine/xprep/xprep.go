@@ -23,6 +23,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
@@ -43,6 +44,9 @@ const (
 	ReasonRetarget = "xmage_retarget_diverges"
 	// ReasonNoResult: there is no gorge result to script the answers from.
 	ReasonNoResult = "xmage_no_result"
+	// ReasonNoXMageCard: the item names a card no XMage set lists, so the driver
+	// could not place it. The game is Forge's alone.
+	ReasonNoXMageCard = "xmage_lacks_card"
 	// ReasonWindowOnly: a tape item; XMage replays windows only (design O4:
 	// the driver's turn model cannot follow a tape, so tapes go to Forge and
 	// the kernel).
@@ -50,7 +54,7 @@ const (
 )
 
 // Reasons is every reason Prepare refuses with.
-var Reasons = []string{ReasonSpelling, ReasonModeCollision, ReasonAbilityUnknown, ReasonRetarget, ReasonNoResult, ReasonWindowOnly}
+var Reasons = []string{ReasonSpelling, ReasonModeCollision, ReasonAbilityUnknown, ReasonRetarget, ReasonNoResult, ReasonNoXMageCard, ReasonWindowOnly}
 
 // tapeID matches the id of a tape item: "...:tape" or a prefix "...:tape:t<N>".
 var tapeID = regexp.MustCompile(`:tape(:t\d+)?$`)
@@ -101,17 +105,25 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 	if ref != nil {
 		return it, ref
 	}
+	if bad := unlisted(reg, sp, it); len(bad) > 0 {
+		return it, refuse(it.ID, ReasonNoXMageCard, "%s", strings.Join(bad, "; "))
+	}
 	sc, castSteps := oraclegen.ChooseTargets(it.Scenario, g.Decisions)
 	if why := sameOutcome(reg, sc, g); why != "" {
 		return it, refuse(it.ID, ReasonRetarget, "%s", why)
 	}
 	it.Scenario = sc
-	g.Decisions = playStepUnlessPays(sc.Steps, g.Decisions)
+	g.Decisions = oraclegen.RetimeEntryTargets(sc.Steps, g.Snapshots, playStepUnlessPays(sc.Steps, g.Decisions))
 	it.XAnswers = oraclegen.XAnswersForScenario(reg, g, sc, modes, castSteps)
 	if len(it.XAnswers) == 0 {
 		// Nothing to script: still one (empty) entry per step, as the
 		// generator's activate and combat templates do.
 		it.XAnswers = make([][]oraclegen.XAnswer, len(sc.Steps))
+	}
+	for i := range sc.Steps {
+		if comboColourStep(abilities, i) {
+			it.XAnswers[i] = nil // the prefix names the colour; no ask follows
+		}
 	}
 	it.XAbility = abilities
 	it.XPos = passPositions(sc.Steps, g.Snapshots)
@@ -330,6 +342,18 @@ func differing(reg *cards.Registry, sp *decks.Spellings, it oraclegen.Item) []st
 	return out
 }
 
+// unlisted is the item's corpus cards no manifest lists under any spelling; a
+// player ref or a token name is not a card.
+func unlisted(reg *cards.Registry, sp *decks.Spellings, it oraclegen.Item) []string {
+	var out []string
+	for _, n := range cardNames(it) {
+		if _, known := reg.Lookup(n); known && !sp.Lists(reg, n) {
+			out = append(out, n)
+		}
+	}
+	return out
+}
+
 // stepCard is the corpus card and face index a cast or activate step names;
 // ok is false for a token, an ability or a card the corpus does not know. A
 // permanent the seat's setup places on its back face is face 1, as the Forge
@@ -437,7 +461,27 @@ func prefixes(reg *cards.Registry, it oraclegen.Item) ([]string, *Refusal) {
 		if out == nil {
 			out = make([]string, len(it.Steps))
 		}
-		out[i] = p
+		out[i] = comboColourPrefix(p, c.Faces[face], *st.AbilityIndex, st)
 	}
 	return out, nil
+}
+
+// comboColourStep reports that prefixes named a colour for step i.
+func comboColourStep(abilities []string, i int) bool {
+	return i < len(abilities) && strings.HasPrefix(abilities[i], comboPrefix) && strings.HasSuffix(abilities[i], "}")
+}
+
+const comboPrefix = "{T}: Add {"
+
+// comboColourPrefix names the colour step makes when the ability is a tap for one of
+// several colours (Temple of Deceit's "{T}: Add {U} or {B}"). XMage prints that as one
+// ability per colour, so the bare cost would always pick the first.
+func comboColourPrefix(p string, f *cards.Face, ability int, st oraclegen.Step) string {
+	if p != "{T}" || ability < 0 || ability >= len(f.Abilities) || len(st.Answers) != 1 || len(st.Answers[0].Pick) != 1 {
+		return p
+	}
+	if _, combo := effects.ComboColours(effects.ManaOf(f.Abilities[ability]).Produced); !combo {
+		return p
+	}
+	return comboPrefix + strings.TrimPrefix(st.Answers[0].Pick[0], "Add ") + "}"
 }

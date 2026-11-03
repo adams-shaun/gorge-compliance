@@ -16,6 +16,11 @@
 #      with both followers, xengine adjudicate -- the three-way pattern of each
 #                       item either diverged on (<chunk>/adjudicate/, ticket drafts
 #                       under tickets/; nothing is ruled or committed)
+#                       With XENGINE_DIRAC=1 play first plays each game of a set
+#                       whose decks a dirac table holds in lockstep with gorge
+#                       (<chunk>/dirac.jsonl), and adjudicate writes dirac's answer
+#                       beside the three-way outcome of each of its items
+#                       (<chunk>/adjudicate/dirac.jsonl)
 #   4. the coverage ledger <root>/ledger.tsv absorbs the chunk (atomically),
 #      SUMMARY.md is regenerated, and <chunk>/.done is touched. A chunk is done
 #      only when every stage exited 0.
@@ -52,13 +57,23 @@
 #   XENGINE_XMAGE_TAPES   1 passes -tapes to xprep, so tape items go to XMage too;
 #                         0 (default) keeps XMage window-only. The
 #                         calibration re-runs use 1.
+#   XENGINE_DIRAC         1 passes -dirac to play: dirac plays beside gorge, and the
+#                         decks hold only cards its table plays. It needs dirac's
+#                         tables for the pin; play's error names the command.
+#   XENGINE_RANDOM_SETS   set codes passed to play as -random: the decks are drawn
+#                         at random across them, ignoring the ledger, and --sets
+#                         only names the run (scripts/xengine-random.sh)
+#   XENGINE_FORGE_ONLY    with XENGINE_RANDOM_SETS, a file of card names, one per line,
+#                         added to the cross-set deal: a set XMage has no class for.
+#                         An item holding one is not sent to XMage (xmage_lacks_card)
 #   XENGINE_JVM_WAIT      max seconds to wait for a JVM slot (default 21600)
 #   XENGINE_JVM_POLL      poll interval in seconds (default 30)
 #   XENGINE_FORGE_WAIT / XENGINE_FORGE_MEM, XENGINE_XMAGE_WAIT / XENGINE_XMAGE_MEM
 #                         heavy-lock --wait / --mem per follower (20000 s / 12G)
 #   Overrides for the smoke: XENGINE_GO (go command), XENGINE_XMAGE_RUNNER,
-#   XENGINE_FORGE_RUNNER, XENGINE_ORACLEDIFF, XENGINE_PGREP, XENGINE_SCOPE=none
-#   (no systemd-run).
+#   XENGINE_FORGE_RUNNER, XENGINE_ORACLEDIFF, XENGINE_PGREP. XENGINE_SCOPE=none
+#   starts no scope, for the go stages or the JVMs, so that all of them stay in
+#   the cgroup of a unit that caps the whole run.
 #
 # Ledger merge. play writes exercised.tsv = (its input snapshot L) + (this
 # chunk's exercised counts E), and cov -ledger adds counters. A chunk is merged
@@ -206,6 +221,9 @@ play_stage() { # set chunk dir (reads <dir>/ledger-in.tsv when snapshot_into mad
 	[ "${XENGINE_WINDOWS:-1}" = 0 ] || args+=(-windows)
 	[ -z "${XENGINE_TAPE_TURNS:-}" ] || args+=(-tape-turns "$XENGINE_TAPE_TURNS")
 	case " $followers " in *" xmage "*) args+=(-xmage) ;; esac
+	[ "${XENGINE_DIRAC:-0}" != 1 ] || args+=(-dirac)
+	[ -z "${XENGINE_RANDOM_SETS:-}" ] || args+=(-random "$XENGINE_RANDOM_SETS")
+	[ -z "${XENGINE_FORGE_ONLY:-}" ] || args+=(-forge-only "$XENGINE_FORGE_ONLY")
 	[ ! -e "$d/ledger-in.tsv" ] || args+=(-ledger "$d/ledger-in.tsv")
 	run_stage xe "${args[@]}"
 }
@@ -264,6 +282,7 @@ summary() {
 		echo "# xengine sweep $run"
 		echo
 		echo "sets: $sets; followers: $followers; chunks per set: $chunks; games per chunk: $games; seed: $seed"
+		[ -z "${XENGINE_RANDOM_SETS:-}" ] || echo "decks drawn across: $XENGINE_RANDOM_SETS"
 		for s in $sets; do
 			echo
 			echo "## $s"
@@ -293,8 +312,34 @@ summary() {
 				echo '```'
 				histogram adjudicate/findings.jsonl .pattern "${done_dirs[@]}"
 				echo '```'
+				echo
+				echo "### three-way: gorge suspects (FX|G) by card"
+				echo '```'
+				for d in "${done_dirs[@]}"; do
+					[ ! -f "$d/adjudicate/findings.jsonl" ] || jq -r 'select(.pattern == "FX|G") | "\(.card // "?") \(.gx_field)"' "$d/adjudicate/findings.jsonl"
+				done | LC_ALL=C sort | uniq -c
+				echo '```'
 			fi
-			if [ -s "$ledger" ]; then
+			if [ "${XENGINE_DIRAC:-0}" = 1 ]; then
+				echo
+				echo "### dirac: games"
+				echo '```'
+				histogram dirac.jsonl .status "${done_dirs[@]}"
+				echo '```'
+				echo
+				echo "### four-way: three-way pattern and dirac's answer"
+				echo '```'
+				histogram adjudicate/dirac.jsonl .four "${done_dirs[@]}"
+				echo '```'
+				echo
+				echo "### dirac: games it stopped or differed in"
+				echo '```'
+				for d in "${done_dirs[@]}"; do
+					[ ! -f "$d/dirac.jsonl" ] || jq -r 'select(.status | IN("diverged", "unmodelled", "hang")) | "\(.game) \(.status) turn \(.from_turn // "?") \(.what // "") \(.field // .reason // "") \(.implicates // [] | join(", "))"' "$d/dirac.jsonl"
+				done
+				echo '```'
+			fi
+			if [ -s "$ledger" ] && [ -z "${XENGINE_RANDOM_SETS:-}" ]; then
 				echo
 				echo "### coverage"
 				echo '```'

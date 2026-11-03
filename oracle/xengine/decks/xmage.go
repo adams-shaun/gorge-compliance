@@ -64,6 +64,23 @@ func (s *Spellings) XMage(reg *cards.Registry, name string) (string, bool) {
 	return "", false
 }
 
+// Lists is whether any manifest lists the card name is a face of.
+func (s *Spellings) Lists(reg *cards.Registry, name string) bool {
+	if _, ok := s.XMage(reg, name); ok {
+		return true
+	}
+	c, ok := reg.Lookup(name)
+	if !ok {
+		return false
+	}
+	for _, f := range c.Faces {
+		if _, ok := s.XMage(reg, f.Name); ok {
+			return true
+		}
+	}
+	return false
+}
+
 // Differs is true when XMage spells the card other than name. The comparison
 // is exact, not folded: "Dáin Ironfoot" and "Dain Ironfoot" fold equal and
 // still need Item.XMageName.

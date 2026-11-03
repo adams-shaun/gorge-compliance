@@ -10,9 +10,7 @@ import (
 // Static$ True line (it never uses the stack, CR 603.2 does not apply to it
 // as a stack object) whose whole effect records or clears a fact another
 // trigger on the same face reads -- a stored SVar, the card's remembered or
-// imprinted set. Spider-Man 2099's "you've played a land from anywhere other
-// than your hand this turn" (a LandPlayed StoreSVar and its Cleanup-step
-// reset), Desert Were-Worm's "for the first time each turn" switch (reset at
+// imprinted set. Desert Were-Worm's "for the first time each turn" switch (reset at
 // TurnBegin), Planetarium of Wan Shi Tong's "Do this only once each turn"
 // (Remembered, cleared at TurnBegin and when it leaves), Oblivious
 // Bookworm's "you turned a permanent face up this turn" (Imprinted, cleared

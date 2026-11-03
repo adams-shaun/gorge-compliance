@@ -43,8 +43,6 @@ Errant Minion	T2	abilities	replacement	-	equivalent	script writes partial preven
 Ertai's Meddling	T2	abilities	triggered:upkeep	-	equivalent	script writes the delayed per-upkeep countdown as a trigger; mtgish a delayed trigger in the spell
 Esika, God of the Tree	T2	abilities	static	-	mtgish-bug	mtgish#1: front face lacks the other-legendary-creatures grant static (MDFC capture reuse)
 Favored Enemy	T2	abilities	triggered:etb	-	mtgish-bug	mtgish#2 dropped capture: the ETB fight trigger is never emitted
-Fear of Change	T2	abilities	triggered:to-graveyard	triggered:dies	forge-bug	dies half has Destination$ Graveyard without Origin$ Battlefield: triggers on discard/mill too
-Fiend of the Shadows	T2	abilities	static	-	equivalent	script writes the may-play of the exiled card as a static on the card; mtgish inside the trigger
 Flitterstep Eidolon	T2	abilities	-	static	equivalent	bestow: script one static covers this creature and the enchanted creature; mtgish one per subject
 Gale, Waterdeep Prodigy	T2	abilities	triggered:cast	-	equivalent	script writes one trigger per spell type cast (instant -> sorcery, sorcery -> instant); mtgish one
 Galea, Kindler of Hope	T2	abilities	triggered:cast	-	equivalent	script writes the equipment-gains-ETB grant as a cast trigger; mtgish inside the cast permission
@@ -82,14 +80,11 @@ Mischievous Quanar	T2	abilities	triggered:turnfaceup	activated	mtgish-bug	mtgish
 Mister Immortal	T2	abilities	-	activated	equivalent	mtgish splits from-graveyard-or-exile into two abilities; script one with two zones
 Mistfire Weaver	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Mogis's Warhound	T2	abilities	-	static	equivalent	bestow: script one static covers this creature and the enchanted creature; mtgish one per subject
-Mole Module	T2	abilities	triggered:damage	triggered:combat-damage-player	forge-bug	DamageDone trigger lacks CombatDamage$ True; printed combat damage
 Muldrotha, the Gravetide	T2	abilities	static static static static static	-	equivalent	script writes one MayPlay static per permanent type; mtgish one player effect
-My Champion Stands Supreme	T2	abilities	triggered:dies	triggered:ltb	forge-bug	leaves-the-battlefield trigger has Destination$ Graveyard; exile/hand/library never abandon
 Naya Soulbeast	T2	abilities	replacement	-	equivalent	script writes enters-with-X-counters as an etb counter replacement; mtgish inside the cast trigger
 No Quarter	T2	abilities	triggered:blocked	triggered:blocks	equivalent	blocks-a-creature-with-lesser-power written AttackerBlockedByCreature (one per pair), the same event
 Noble Quarry	T2	abilities	static	-	equivalent	bestow: script one static covers this creature and the enchanted creature; mtgish one per subject
 Otaria	T2	abilities	static	-	equivalent	script writes one flashback static per spell type (grant + cast); mtgish one graveyard static
-Overclocked Electromancer	T2	abilities	triggered:damage	triggered:combat-damage	forge-bug	DamageDone trigger lacks CombatDamage$ True; printed combat damage
 Parnesse, the Subtle Brush	T2	abilities	-	triggered:becomes-target	equivalent	mtgish splits you-or-a-permanent-you-control into two becomes-target triggers; script one
 Patriarch's Desire	T2	abilities	-	static	equivalent	script one static with a conditional amount; mtgish a static per amount (base, instead)
 Phoenix of Iteration	T2	abilities	-	triggered:cast	equivalent	mtgish writes also-triggers-from-another-zone as a second trigger; script one trigger with TriggerZones$
@@ -101,7 +96,6 @@ Precipitous Drop	T2	abilities	-	static	equivalent	script one static with a condi
 Qasali Ambusher	T2	abilities	-	static	equivalent	script one MayPlay static (free, flash); mtgish flash and alternative cost statics
 Quakebringer	T2	abilities	-	triggered:upkeep	equivalent	mtgish writes also-triggers-from-another-zone as a second trigger; script one trigger with TriggerZones$
 Radagast of Rhosgobel	T2	abilities	static	-	equivalent	script one static per clause (reduction, flash); mtgish one
-Raphael, Tag Team Tough	T2	abilities	triggered:damage	triggered:combat-damage-player	forge-bug	DamageDone trigger lacks CombatDamage$ True; printed combat damage
 Rattleclaw Mystic	T2	abilities	triggered:turnfaceup	activated	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Rayne, Academy Chancellor	T2	abilities	-	triggered:becomes-target	equivalent	mtgish splits you-or-a-permanent-you-control into two becomes-target triggers; script one
 Rebellion of the Flamekin	T2	abilities	triggered:clashed	-	equivalent	Forge splits one clash trigger into won/lost lines (Secondary)
@@ -125,6 +119,7 @@ Squee, the Immortal	T2	abilities	-	static	equivalent	mtgish splits from-graveyar
 Steady Tortoise	T2	abilities	-	triggered:attacks	equivalent	mtgish writes also-triggers-from-another-zone as a second trigger; script one trigger with TriggerZones$
 Stormwing Dragon	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Stratus Dancer	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
+Summitfest Closing Ceremony	T2	abilities	-	triggered:cast	gorge-compile	Covercast intensify trigger (a hand-zone SpellCast with DB$ Intensify) has no gorge primitive and compiles to nothing; mtgish models the trigger
 Syr Carah, the Bold	T2	abilities	-	triggered:damage	equivalent	mtgish splits creature-or-spell / source-or-spell damage into two triggers; script one
 Talon Gates	T2	abilities	activated	static	equivalent	plane special action written as an activated ability; mtgish a player permission
 Temporal Isolation	T2	abilities	-	replacement	equivalent	script grants a prevention keyword in the aura static; mtgish a PreventDamage replacement

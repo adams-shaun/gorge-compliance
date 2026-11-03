@@ -36,6 +36,10 @@ import (
 // lacked a library-origin fixture. It now serves Maralen, Fae Ascendant (an
 // enters Dig of a targeted opponent's library), and the other 14 rows name
 // the real gap: no fixture exiles an opponent's card with their source.
+// Kheru Mind-Eater joined the class when Forge rewrote its exile link from
+// Card.IsRemembered to Card.ExiledWithSource: its MayLookAt$ static was already
+// a named look-at skip (TestStaticLookAtRemainingSkips), so the third look-at row is the
+// same skip newly counted here, not a lost row.
 // Valgavoth, Terror Eater is served: the engine now opens a
 // MayPlayAltManaCost$ static's zone permission and prices the cast at the
 // alternative, and static_offer_altcost.go observes the offered cast and its
@@ -43,7 +47,7 @@ import (
 var wantOpponentExiledWithCensus = map[string]int{
 	"served": 5,
 	"skip:static no fixture exiles an opponent's card with the source (its exile is not an enters ChangeZone or Dig of a targeted opponent's cards)": 14,
-	"skip:static look-at not observable": 2,
+	"skip:static look-at not observable": 3,
 	"skip:static no mana cost":           1,
 }
 

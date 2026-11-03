@@ -3,6 +3,7 @@ package adjudicate
 import (
 	"bufio"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -13,6 +14,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/dside"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
@@ -31,6 +33,8 @@ type Input struct {
 	// HasAgree reports a committed agree verdict row for the card; a cluster
 	// of one finding is drafted only when it does not. Nil: no card has one.
 	HasAgree func(card string) bool
+	// Dirac is the play's dirac.jsonl by game id; nil when dirac did not play.
+	Dirac map[string]dside.Row
 }
 
 // Row is one adjudicated item. It holds ids, labels and field names only,
@@ -69,9 +73,31 @@ type Cluster struct {
 	Smallest   Finding   // fewest steps, then id
 }
 
+// DiracRow is dirac's answer beside the three-way outcome of one item of a game
+// dirac played. Pattern is the three-way pattern, PatternAgreed when both followers
+// agreed with gorge and PatternOther when the item was not adjudicated (a follower
+// did not compare, or refused the position).
+type DiracRow struct {
+	ID         string   `json:"id"`
+	Answer     string   `json:"answer"`
+	Pattern    string   `json:"pattern"`
+	Four       string   `json:"four"`
+	XClass     string   `json:"xmage_class"`
+	FClass     string   `json:"forge_class"`
+	Field      string   `json:"field,omitempty"`
+	Implicates []string `json:"implicates,omitempty"`
+}
+
+// The DiracRow patterns the three-way patterns do not name.
+const (
+	PatternAgreed = "AGREE3"
+	PatternOther  = "uncompared"
+)
+
 // Result is one adjudication.
 type Result struct {
 	Rows     []Row // by id
+	Dirac    []DiracRow
 	Findings []Finding
 	Notes    []string // xmage_suspect and forge_suspect remarks, by id
 	Clusters []Cluster
@@ -135,6 +161,7 @@ func Run(in Input) Result {
 			res.Notes = append(res.Notes, fmt.Sprintf("%s: %s: gorge and XMage agree, Forge differs at %s; recorded only", id, row.Pattern, row.GFField))
 		}
 	}
+	res.Dirac = diracRows(ids, in, res.Rows)
 	res.Clusters = clusters(res.Findings)
 	for _, c := range res.Clusters {
 		if len(c.Findings) >= 2 || in.HasAgree == nil || !in.HasAgree(c.Card) {
@@ -142,6 +169,38 @@ func Run(in Input) Result {
 		}
 	}
 	return res
+}
+
+// diracRows reads dirac's answer for every item of a game it played.
+func diracRows(ids []string, in Input, rows []Row) []DiracRow {
+	pattern := make(map[string]string, len(rows))
+	for _, r := range rows {
+		pattern[r.ID] = r.Pattern
+	}
+	var out []DiracRow
+	for _, id := range ids {
+		game, _, ok := dside.SplitID(id)
+		d, played := in.Dirac[game]
+		if !ok || !played || d.Status == dside.StatusNA {
+			continue
+		}
+		xc, fc := in.XFind[id].Class, in.FFind[id].Class
+		p := pattern[id]
+		switch {
+		case p != "":
+		case xc == classify.ClassAgree && fc == classify.ClassAgree:
+			p = PatternAgreed
+		default:
+			p = PatternOther
+		}
+		row := DiracRow{ID: id, Answer: d.Answer(id), Pattern: p, XClass: xc, FClass: fc}
+		row.Four = p + " " + row.Answer
+		if row.Answer == dside.Diverge {
+			row.Field, row.Implicates = d.Field, d.Implicates
+		}
+		out = append(out, row)
+	}
+	return out
 }
 
 func firstNonEmpty(ss ...string) string {
@@ -188,16 +247,23 @@ func clusters(fs []Finding) []Cluster {
 	return out
 }
 
-var permName = regexp.MustCompile(`c\d+ o\d+ (.+?) \[`)
+var (
+	permName  = regexp.MustCompile(`c\d+ o\d+ (.+?) \[`)
+	stackName = regexp.MustCompile(`(?:ability|spell):(.+?)@`)
+)
 
 // cardOf names the card of the diverging step: the card cast or activated.
 // A step with no card (a pass during which a trigger fired) falls back to the
-// first non-token permanent the diverging values name, the trigger's source.
+// first stack object or non-token permanent the diverging values name, the
+// trigger's source.
 func cardOf(item oraclegen.Item, f classify.Finding) string {
 	if f.Step >= 0 && f.Step < len(item.Steps) && item.Steps[f.Step].Card != "" {
 		return item.Steps[f.Step].Card
 	}
 	for _, v := range []string{f.Gorge, f.Other} {
+		if m := stackName.FindStringSubmatch(v); m != nil {
+			return m[1]
+		}
 		for _, m := range permName.FindAllStringSubmatch(v, -1) {
 			if m[1] != "token" {
 				return m[1]
@@ -300,8 +366,28 @@ func Load(playDir, xDiff, fDiff, xRows, fRows string) (Input, error) {
 	if in.XFind, err = readFindings(xDiff); err != nil {
 		return in, err
 	}
-	in.FFind, err = readFindings(fDiff)
+	if in.FFind, err = readFindings(fDiff); err != nil {
+		return in, err
+	}
+	in.Dirac, err = readDirac(filepath.Join(playDir, "dirac.jsonl"))
 	return in, err
+}
+
+// readDirac reads a play's dirac rows; a play without the file has none.
+func readDirac(path string) (map[string]dside.Row, error) {
+	if _, err := os.Stat(path); errors.Is(err, os.ErrNotExist) {
+		return nil, nil
+	}
+	rows := map[string]dside.Row{}
+	err := readLines(path, func(b []byte) error {
+		var r dside.Row
+		if err := json.Unmarshal(b, &r); err != nil {
+			return err
+		}
+		rows[r.Game] = r
+		return nil
+	})
+	return rows, err
 }
 
 // CommittedAgree reads the committed verdict rows under dir and returns the

@@ -11,6 +11,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/dside"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
@@ -322,5 +323,72 @@ func TestLoadRoundTrip(t *testing.T) {
 	if _, err := Load(filepath.Join(dir, "play"), filepath.Join(dir, "dx"), filepath.Join(dir, "df"),
 		filepath.Join(dir, "play/forge.jsonl"), filepath.Join(dir, "play/forge.jsonl")); err == nil {
 		t.Errorf("a forge row was read as an xmage row")
+	}
+}
+
+// threeSnaps is a result whose life totals for seat 0 are lifes, one checkpoint each.
+func threeSnaps(lifes ...int32) rules.OracleResult {
+	var r rules.OracleResult
+	for i, l := range lifes {
+		s := result(l).Snapshots[1]
+		s.Checkpoint = fmt.Sprintf("step %d (pass)", i)
+		r.Snapshots = append(r.Snapshots, s)
+	}
+	return r
+}
+
+func TestPatternIsReadAtTheFirstDifference(t *testing.T) {
+	it := item("xe:T:0:0:w0", "Shock")
+	g := threeSnaps(20, 18, 18)
+	x := oraclediff.XResult{Snapshots: threeSnaps(20, 20, 20).Snapshots}
+	f := oraclediff.XResult{Snapshots: threeSnaps(20, 20, 19).Snapshots}
+	if p, label := Item(it, g, x, f); p != oraclediff.ForgeXMageG || label != LabelGorgeSuspect {
+		t.Fatalf("the followers agree where they part from gorge: %s %q", p, label)
+	}
+	x = oraclediff.XResult{Snapshots: threeSnaps(20, 20, 20).Snapshots}
+	f = oraclediff.XResult{Snapshots: threeSnaps(20, 17, 19).Snapshots}
+	if p, _ := Item(it, g, x, f); p != oraclediff.AllDiffer {
+		t.Fatalf("all three differ at one checkpoint: %s", p)
+	}
+}
+
+func TestPatternReadsAFollowerThatStopped(t *testing.T) {
+	it := item("xe:T:0:0:w0", "Shock")
+	g := threeSnaps(20, 18, 18)
+	x := oraclediff.XResult{Snapshots: threeSnaps(20, 20, 20).Snapshots}
+	f := oraclediff.XResult{Snapshots: threeSnaps(20, 20).Snapshots, Harness: "harness: pass: p0 does not hold priority at step 2 (p1 does)"}
+	if p, _ := Item(it, g, x, f); p != oraclediff.ForgeXMageG {
+		t.Fatalf("Forge stopped after it parted from gorge: %s", p)
+	}
+	f = oraclediff.XResult{Snapshots: threeSnaps(20, 18).Snapshots, Harness: "harness: step 2 refused"}
+	if p, _ := Item(it, g, x, f); p != oraclediff.ForgeHarness {
+		t.Fatalf("Forge stopped with no difference: %s", p)
+	}
+}
+
+func TestDiracColumn(t *testing.T) {
+	x := func(class string) classify.Finding { return classify.Finding{Class: class} }
+	ids := []string{"xe:T:0:0:w3", "xe:T:0:0:w4", "xe:T:0:0:w5", "xe:T:0:1:w1", "xe:T:0:2:w1"}
+	in := Input{
+		XFind: map[string]classify.Finding{ids[0]: x(classify.ClassAgree), ids[1]: x(classify.ClassAgree), ids[2]: x(classify.ClassHarness), ids[3]: x(classify.ClassAgree), ids[4]: x(classify.ClassAgree)},
+		FFind: map[string]classify.Finding{ids[0]: x(classify.ClassAgree), ids[1]: x(classify.ClassAgree), ids[2]: x(classify.ClassAgree), ids[3]: x(classify.ClassAgree), ids[4]: x(classify.ClassAgree)},
+		Dirac: map[string]dside.Row{
+			"xe:T:0:0": {Game: "xe:T:0:0", Status: dside.StatusDiverged, FromTurn: 4, ToTurn: 4, Field: "NStack", Implicates: []string{"Diamond Mare"}},
+			"xe:T:0:1": {Game: "xe:T:0:1", Status: dside.StatusClean},
+			"xe:T:0:2": dside.NotApplicable("xe:T:0:2", "a refused pair"),
+		},
+	}
+	var got []string
+	for _, r := range Run(in).Dirac {
+		got = append(got, r.ID+" "+r.Four+" "+strings.Join(r.Implicates, ","))
+	}
+	want := []string{
+		"xe:T:0:0:w3 AGREE3 D=G ",
+		"xe:T:0:0:w4 AGREE3 D!=G Diamond Mare",
+		"xe:T:0:0:w5 uncompared D- ",
+		"xe:T:0:1:w1 AGREE3 D=G ",
+	}
+	if fmt.Sprint(got) != fmt.Sprint(want) {
+		t.Fatalf("got %q, want %q", got, want)
 	}
 }
