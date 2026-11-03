@@ -48,6 +48,13 @@ const (
 	// combat that had one keeps its steps and the players priority in each
 	// (CR 506.1, 509.1, 510.1, 117.3a). The item's passes then run out of step
 	// with Forge, so nothing past that checkpoint is compared.
+	//
+	// The common case is a first-strike combat where no creature lacks first
+	// strike: CR 510.4 still gives a second combat damage step, but Forge's
+	// COMBAT_DAMAGE phase assigns nothing and so gives no priority
+	// (PhaseHandler.onPhaseBegin, COMBAT_DAMAGE). In a sample of twelve such
+	// rows every attacker was a lone first striker; the driver cannot supply
+	// the priority round, since it only answers the priorities Forge gives.
 	ClassForgeSkipsDamageStep = "forge_skips_damage_step"
 	ClassRNG                  = "rng"
 	ClassProjectionGap        = "projection_gap"
