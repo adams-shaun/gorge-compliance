@@ -63,6 +63,9 @@
 #   XENGINE_RANDOM_SETS   set codes passed to play as -random: the decks are drawn
 #                         at random across them, ignoring the ledger, and --sets
 #                         only names the run (scripts/xengine-random.sh)
+#   XENGINE_DIRAC_EVERY   with XENGINE_RANDOM_SETS and XENGINE_DIRAC, passed to play as
+#                         -dirac-every: every K-th game is one a dirac table plays (default 2;
+#                         1 gives dirac a lockstep game on every deck)
 #   XENGINE_FORGE_ONLY    with XENGINE_RANDOM_SETS, a file of card names, one per line,
 #                         added to the cross-set deal: a set XMage has no class for.
 #                         An item holding one is not sent to XMage (xmage_lacks_card)
@@ -223,6 +226,7 @@ play_stage() { # set chunk dir (reads <dir>/ledger-in.tsv when snapshot_into mad
 	case " $followers " in *" xmage "*) args+=(-xmage) ;; esac
 	[ "${XENGINE_DIRAC:-0}" != 1 ] || args+=(-dirac)
 	[ -z "${XENGINE_RANDOM_SETS:-}" ] || args+=(-random "$XENGINE_RANDOM_SETS")
+	[ -z "${XENGINE_DIRAC_EVERY:-}" ] || args+=(-dirac-every "$XENGINE_DIRAC_EVERY")
 	[ -z "${XENGINE_FORGE_ONLY:-}" ] || args+=(-forge-only "$XENGINE_FORGE_ONLY")
 	[ ! -e "$d/ledger-in.tsv" ] || args+=(-ledger "$d/ledger-in.tsv")
 	run_stage xe "${args[@]}"

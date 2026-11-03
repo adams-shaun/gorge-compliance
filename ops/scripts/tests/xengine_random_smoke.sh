@@ -15,7 +15,7 @@ cat >"$TMP/sweep" <<'STUB'
 # args: --run R --sets RAND --chunks N --games K --seed S
 c=$(($6 - 1))
 d=$XENGINE_ROOT/RAND/$c
-echo "$c $XENGINE_RANDOM_SETS $XENGINE_DIRAC $XENGINE_SCOPE" >>"$XENGINE_ROOT/calls"
+echo "$c $XENGINE_RANDOM_SETS $XENGINE_DIRAC $XENGINE_SCOPE ${XENGINE_DIRAC_EVERY:-}" >>"$XENGINE_ROOT/calls"
 if [ "$c" = "${FAIL_CHUNK:-}" ]; then exit 1; fi
 if [ "$c" = "${HANG_CHUNK:-}" ]; then exec sleep 60; fi
 mkdir -p "$d/tapes" "$d/diff-forge/finds/diverge/x" "$d/diff-forge/finds/harness/y" "$d/adjudicate"
@@ -31,12 +31,16 @@ export XENGINE_SWEEP=$TMP/sweep XENGINE_RANDOM_BACKOFF=0
 r=$TMP/plain
 XENGINE_ROOT=$r bash "$ROOT/scripts/xengine-random.sh" --run p --sets 'FDN BLB' --max-chunks 3 >/dev/null
 check "three chunks in order" '[ "$(cut -d" " -f1 "$r/calls" | tr -d "\n")" = 012 ]'
-check "the sets, dirac and no scopes reach the sweep" '[ "$(head -1 "$r/calls")" = "0 FDN BLB 1 none" ]'
+check "the sets, dirac and no scopes reach the sweep" '[ "$(head -1 "$r/calls")" = "0 FDN BLB 1 none " ]'
 check "rows stay" '[ -e "$r/RAND/0/lower.jsonl" ] && [ -e "$r/RAND/0/dirac.jsonl" ]'
 check "tapes and follower rows go" '[ ! -e "$r/RAND/0/tapes" ] && [ ! -e "$r/RAND/0/gorge.jsonl" ]'
 check "repros of diverged items stay, others go" '[ -e "$r/RAND/0/diff-forge/finds/diverge/x" ] && [ ! -e "$r/RAND/0/diff-forge/finds/harness" ]'
 XENGINE_ROOT=$r bash "$ROOT/scripts/xengine-random.sh" --run p --sets 'FDN BLB' --max-chunks 4 >/dev/null
 check "a rerun resumes after the done chunks" '[ "$(cut -d" " -f1 "$r/calls" | tr -d "\n")" = 0123 ]'
+
+r=$TMP/every
+XENGINE_ROOT=$r bash "$ROOT/scripts/xengine-random.sh" --run e --sets FDN --dirac-every 1 --max-chunks 1 >/dev/null
+check "--dirac-every reaches the sweep" '[ "$(head -1 "$r/calls")" = "0 FDN 1 none 1" ]'
 
 r=$TMP/fail
 FAIL_CHUNK=1 XENGINE_ROOT=$r bash "$ROOT/scripts/xengine-random.sh" --run f --sets FDN --max-chunks 3 >/dev/null 2>&1
