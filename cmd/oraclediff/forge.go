@@ -69,8 +69,11 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     triggered ability's cost; gift_decline declines a gift (gift_promise
 //     names the opponent in its label).
 //   - A cast step's cast_mode names a non-default cast option the driver
-//     must select (currently only "optionalcost", a self-spell optional cost
-//     paid at cast time; empty is the ordinary cast). gen's Step still
+//     must select: the plot special action, an Adventure or Omen half, a
+//     modal back face, a warp cast, an optional cost paid at cast time
+//     ("optionalcost", kicked, buyback, entwined, offspring, replicated);
+//     empty is the ordinary cast. Modes outside xengine/classify's
+//     forgeElectedCastModes are cast the ordinary way. gen's Step still
 //     carries no kicked: a kick is paid only through a logged optional-cost
 //     decision.
 //   - The Item's payment array is parallel to its steps: entry i is the exact

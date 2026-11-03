@@ -337,13 +337,13 @@ func TestClassifyForgeSkipsEmptyDamageStep(t *testing.T) {
 	}
 }
 
-// TestClassifyForgeCastMode: the Forge driver casts the card's first spell
-// ability whatever the step's cast_mode, so a difference at or after a cast it
-// could not follow is the driver's, and a difference before it, or on another
-// engine, is not.
+// TestClassifyForgeCastMode: the Forge driver follows the cast modes in
+// forgeElectedCastModes and casts any other the card's first spell ability, so
+// a difference at or after a cast it could not follow is the driver's, and a
+// difference before it, on another engine, or after a mode it follows, is not.
 func TestClassifyForgeCastMode(t *testing.T) {
 	item := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
-		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "cast", Card: "p0:Cunning Coyote", CastMode: "plot"}, {Op: "pass"}},
+		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "cast", Card: "p0:Cunning Coyote", CastMode: "foretell"}, {Op: "pass"}},
 	}}}
 	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
 		snap("setup"), snap("step 0 (pass)"), snap("step 1 (cast)"), snap("step 2 (pass)"),
@@ -353,7 +353,7 @@ func TestClassifyForgeCastMode(t *testing.T) {
 	}
 	for _, i := range []int{2, 3} {
 		f := Classify(item, nil, g, diffAt(i), "forge")
-		if f.Class != ClassHarness || !strings.Contains(f.Msg, `cast_mode "plot"`) {
+		if f.Class != ClassHarness || !strings.Contains(f.Msg, `cast_mode "foretell"`) {
 			t.Errorf("difference at checkpoint %d: %+v", i, f)
 		}
 	}
@@ -363,9 +363,11 @@ func TestClassifyForgeCastMode(t *testing.T) {
 	if f := Classify(item, nil, g, diffAt(2), "xmage"); f.Class == ClassHarness {
 		t.Errorf("another engine: %+v", f)
 	}
-	item.Item.Steps[1].CastMode = "optionalcost"
-	if f := Classify(item, nil, g, diffAt(2), "forge"); f.Class != ClassDiverge {
-		t.Errorf("an optional-cost election the driver follows: %+v", f)
+	for _, mode := range []string{"optionalcost", "plot", "adventure_alt", "offspring", "kicked"} {
+		item.Item.Steps[1].CastMode = mode
+		if f := Classify(item, nil, g, diffAt(2), "forge"); f.Class != ClassDiverge {
+			t.Errorf("cast_mode %q is one the driver follows: %+v", mode, f)
+		}
 	}
 }
 
