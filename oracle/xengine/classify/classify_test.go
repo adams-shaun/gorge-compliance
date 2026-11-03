@@ -590,3 +590,37 @@ func TestSkipEarlyCasts(t *testing.T) {
 		t.Errorf("a tap before a pass: %+v", f)
 	}
 }
+
+// TestClassifyXMageSameNameTriggerOrder: XMage's driver orders triggers by
+// rule text or source name, so a trigger order over two same-named objects is
+// one it cannot follow. A difference at or after it is the driver's; Forge
+// follows the order by source, and a distinct-name order is followed too.
+func TestClassifyXMageSameNameTriggerOrder(t *testing.T) {
+	item := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "cast", Card: "p0:Shock", Answers: []oraclegen.Answer{
+			{Kind: "trigger_order", Pick: []string{"p0:token:Otter Token#2", "p0:token:Otter Token"}},
+		}}, {Op: "pass"}},
+	}}}
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		snap("setup"), snap("step 0 (pass)"), snap("step 1 (cast)"), snap("step 2 (pass)"),
+	}}
+	diffAt := func(i int) oraclediff.XResult {
+		return follower(g, func(x *oraclediff.XResult) { x.Snapshots[i].Players[0].Exile = []string{"Cunning Coyote"} })
+	}
+	for _, i := range []int{2, 3} {
+		f := Classify(item, nil, g, diffAt(i), "xmage")
+		if f.Class != ClassHarness || !strings.Contains(f.Msg, `"Otter Token"`) {
+			t.Errorf("difference at checkpoint %d: %+v", i, f)
+		}
+	}
+	if f := Classify(item, nil, g, diffAt(1), "xmage"); f.Class != ClassDiverge {
+		t.Errorf("difference before the order: %+v", f)
+	}
+	if f := Classify(item, nil, g, diffAt(2), "forge"); f.Class == ClassHarness {
+		t.Errorf("forge follows the order: %+v", f)
+	}
+	item.Item.Steps[1].Answers[0].Pick = []string{"p0:Grizzly Bears", "p0:token:Otter Token"}
+	if f := Classify(item, nil, g, diffAt(2), "xmage"); f.Class != ClassDiverge {
+		t.Errorf("distinct names: %+v", f)
+	}
+}

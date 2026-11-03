@@ -143,6 +143,9 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	case forgeIgnoresCastMode(item, v, f.Step, engine) != "":
 		f.Class = ClassHarness
 		f.Msg = "forge: " + forgeIgnoresCastMode(item, v, f.Step, engine)
+	case xmageSameNameTriggerOrder(item, v, f.Step, engine) != "":
+		f.Class = ClassHarness
+		f.Msg = "xmage: " + xmageSameNameTriggerOrder(item, v, f.Step, engine)
 	case paymentChoice(item, g, x, v, f.Step, engine):
 		f.Class = ClassPaymentChoice
 		f.Msg = "pool split after a cast/activate whose payment was not fixed"
@@ -298,6 +301,38 @@ func forgeIgnoresCastMode(item lower.Lowered, v oraclediff.Verdict, d int, engin
 		}
 		if st.Op == "cast" && !slices.Contains(forgeElectedCastModes, st.CastMode) {
 			return fmt.Sprintf("the driver does not follow cast_mode %q (step %d, %s)", st.CastMode, i, st.Card)
+		}
+	}
+	return ""
+}
+
+// xmageSameNameTriggerOrder names, for an XMage difference at step d, the first
+// step at or before d that orders simultaneous triggers from objects with one
+// name. XMage's driver matches a scripted trigger order by the ability's rule
+// text or its source's name, so two such triggers (two Otter tokens with
+// Prowess, one holding a counter) cannot be told apart and XMage orders them
+// itself; from there its game differs by the driver's gap, not by a rule.
+// "" for anything else.
+func xmageSameNameTriggerOrder(item lower.Lowered, v oraclediff.Verdict, d int, engine string) string {
+	if engine != "xmage" || v.Status != oraclediff.Diverge || d < 0 {
+		return ""
+	}
+	for i, st := range item.Item.Steps {
+		if i > d {
+			break
+		}
+		for _, a := range st.Answers {
+			if a.Kind != "trigger_order" {
+				continue
+			}
+			seen := map[string]bool{}
+			for _, p := range a.Pick {
+				n := oraclediff.RefName(p)
+				if seen[n] {
+					return fmt.Sprintf("the driver cannot order triggers of objects named %q apart (step %d)", n, i)
+				}
+				seen[n] = true
+			}
 		}
 	}
 	return ""
