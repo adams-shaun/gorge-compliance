@@ -238,7 +238,7 @@ var objectTable = map[string]entry{
 	"Timestamp":                    isDerived("restamped by placement; the battlefield is placed in Timestamp order"),
 	"LayerStamp":                   isDerived("restamped by placement"),
 	"X":                            isIgnored("cast-time X, read at entry"),
-	"CastFlags":                    isIgnored("cast-time flags (kicked, ...), read at entry"),
+	"CastFlags":                    isRefused("cast-provenance bits read on the battlefield: FlagImpending keeps an impending permanent non-creature while a TIME counter remains (CR 702.176a, Object.ImpendingDormant) and FlagPrototype overrides its characteristics (CR 718.3a, Object.PrototypeCharacteristics); every other bit is read at entry or on the stack"),
 	"ReplicateTimes":               isIgnored("cast-time record, read at entry"),
 	"SquadPaid":                    isIgnored("cast-time record, read at entry"),
 	"OffspringPaid":                isIgnored("cast-time record, read at entry"),
