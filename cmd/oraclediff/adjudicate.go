@@ -11,7 +11,8 @@ package main
 // Forge request sha:
 //
 //   - the committed verdict rows, read from -verdicts, are the V(G,X) leg.
-//     Their status is never changed: Forge never writes a verdict;
+//     Their status is never changed: Forge rows are skipped, and a Forge pass
+//     writes verdict rows only through forge-verdicts;
 //   - the run's forge-diff rows (-forge-diff) are the V(G,F) leg, already
 //     computed by forge-diff, and carry the request sha that keys the
 //     Forge cache;
@@ -220,6 +221,12 @@ func adjudicateRun(scenPath, verdictDir string, frows map[string]ForgeRow,
 		vr, ok := all[it.Card][it.Template]
 		if !ok {
 			skip("no committed verdict row")
+			return nil
+		}
+		if vr.FromForge() {
+			// A Forge-only verdict has no V(G,X) leg until XMage compares
+			// the card, so it can neither be classified nor ledgered.
+			skip("Forge verdict row (no V(G,X) leg until XMage compares it)")
 			return nil
 		}
 		rep.Status = vr.Status

@@ -79,3 +79,32 @@ func TestPlanItemRerunsOnlyStaleRows(t *testing.T) {
 		t.Errorf("cached stale row: %v, want rediff", n)
 	}
 }
+
+// TestPlanItemReplaysForgeVerdicts: a Forge-only verdict never satisfies an
+// XMage pass, even when its scenario, XMAGE_REF and frozen expectation all
+// match. It is replayed from cache when XMage already holds the result.
+func TestPlanItemReplaysForgeVerdicts(t *testing.T) {
+	reg := corpus(t)
+	it, skip := templates.Generate(reg, "Shock")
+	if skip != nil {
+		t.Fatal(skip.Reason)
+	}
+	fz, err := Freeze(reg, it)
+	if err != nil {
+		t.Fatal(err)
+	}
+	const ref = "ref1"
+	row := compliance.VerdictRow{Card: it.Card, Template: it.Template, ID: it.ID, ScenarioSHA: ItemSHA(it),
+		XMageRef: ref, Status: compliance.StatusAgree, Frozen: fz, Source: compliance.SourceForge}
+	cache := oraclediff.Cache{Dir: t.TempDir()}
+	want := "forge verdict (no XMage comparison yet)"
+	if n, why := PlanItem(reg, it, row, true, ref, cache); n != Replay || why != want {
+		t.Errorf("Forge row: %v (%s), want replay (%s)", n, why, want)
+	}
+	if err := cache.Put(ItemSHA(it), oraclediff.XResult{ID: it.ID}); err != nil {
+		t.Fatal(err)
+	}
+	if n, why := PlanItem(reg, it, row, true, ref, cache); n != Rediff || why != want {
+		t.Errorf("cached Forge row: %v (%s), want rediff (%s)", n, why, want)
+	}
+}

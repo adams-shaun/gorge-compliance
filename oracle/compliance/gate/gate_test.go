@@ -55,7 +55,7 @@ func TestGateRefusesSetWithoutPrintedList(t *testing.T) {
 
 func TestLevelMeaningSaysWhatLevelADoesNotCover(t *testing.T) {
 	m := LevelMeaning("A")
-	for _, want := range []string{"cast-and-resolve", "NOT exercised", "level B"} {
+	for _, want := range []string{"cast-and-resolve", "NOT exercised", "level B", "Forge-only"} {
 		if !strings.Contains(m, want) {
 			t.Errorf("LevelMeaning(A) = %q, missing %q", m, want)
 		}

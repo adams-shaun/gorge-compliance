@@ -657,9 +657,8 @@ func forgeIgnore(it oraclegen.Item) []string {
 
 // refuseRepoPath rejects an output path inside the repository (the nearest
 // ancestor of the working directory holding go.mod), except under the gitignored
-// .oracle-build/. Forge output and the request's script text are never committed,
-// and a path under oracle/compliance/verdicts would be the one place a Forge pass
-// must not write.
+// .oracle-build/. Forge output and the request's script text are never committed;
+// a Forge verdict row is written by forge-verdicts, never by this pass's output.
 func refuseRepoPath(path string) error {
 	root := repoRoot()
 	if root == "" {

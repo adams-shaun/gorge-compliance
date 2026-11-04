@@ -24,6 +24,11 @@ const (
 	// (a set marks it unfinished). It is the same endpoint as a card missing
 	// from the manifest: the gate's no-XMage bucket, never a harness gap.
 	StatusXMageLacks = "xmage_lacks"
+
+	// SourceForge marks a verdict row Forge's result stands behind: a card
+	// XMage has not compared may pass level A on it. An empty Source is
+	// XMage's row, so every committed row keeps its bytes.
+	SourceForge = "forge"
 )
 
 // VerdictRow is one card x template result (oracle/compliance/verdicts/<a-z>.jsonl).
@@ -33,6 +38,10 @@ type VerdictRow struct {
 	ID          string `json:"id"`
 	ScenarioSHA string `json:"scenario_sha"` // sha256 of the generated scenario line
 	XMageRef    string `json:"xmage_ref"`
+	// Source is "" for XMage's row and SourceForge for a Forge-only verdict.
+	Source      string `json:"source,omitempty"`
+	ForgeRef    string `json:"forge_ref,omitempty"`
+	ForgeDriver string `json:"forge_driver,omitempty"`
 	Status      string `json:"status"`
 	// Frozen is the expectation the gate holds gorge to on an agree or
 	// xmage_wrong row: the comparator fields the scenario changed, at each
@@ -65,6 +74,10 @@ type Frozen struct {
 // HasExpectation reports whether a passing row carries something the gate
 // can hold gorge to.
 func (r VerdictRow) HasExpectation() bool { return len(r.Frozen) > 0 || r.CanonSHA != "" }
+
+// FromForge reports whether this is a Forge-only verdict: Forge's result
+// stands behind the card until an XMage comparison supersedes it.
+func (r VerdictRow) FromForge() bool { return r.Source == SourceForge }
 
 // VerdictDir is the committed verdict directory, relative to the repo root.
 const VerdictDir = "oracle/compliance/verdicts"
@@ -136,6 +149,13 @@ func MergeVerdicts(dir string, rows []VerdictRow) error {
 			all[r.Card] = map[string]VerdictRow{}
 		}
 		if old, ok := all[r.Card][r.Template]; ok {
+			if old.FromForge() && !r.FromForge() && old.ScenarioSHA == r.ScenarioSHA &&
+				(r.Status == StatusHarness || r.Status == StatusXMageLacks) {
+				// XMage compared nothing for this scenario, so its harness or
+				// lack says nothing about the Forge-only verdict. A comparison
+				// (agree, diverge or a triaged status) replaces it below.
+				continue
+			}
 			if hasRuling(old) {
 				oldSig, oldOK := divergenceSignature(old)
 				newSig, newOK := divergenceSignature(r)
@@ -154,6 +174,39 @@ func MergeVerdicts(dir string, rows []VerdictRow) error {
 		all[r.Card][r.Template] = r
 	}
 	return writeVerdicts(dir, all)
+}
+
+// MergeForgeVerdicts writes Forge-only agree rows into dir. A Forge row never
+// replaces an XMage comparison (agree, diverge or a triaged status): an XMage
+// harness or xmage_lacks row compared nothing, so the Forge row replaces it;
+// every other XMage row stands. It reports how many rows it wrote and how many
+// an XMage comparison kept.
+func MergeForgeVerdicts(dir string, rows []VerdictRow) (wrote, kept int, err error) {
+	for _, r := range rows {
+		if r.Source != SourceForge || r.Status != StatusAgree {
+			return 0, 0, fmt.Errorf("MergeForgeVerdicts: %s (%s) is not a Forge agree row", r.Card, r.Template)
+		}
+	}
+	all, err := LoadVerdicts(dir)
+	if err != nil {
+		return 0, 0, err
+	}
+	for _, r := range rows {
+		if all[r.Card] == nil {
+			all[r.Card] = map[string]VerdictRow{}
+		}
+		old, ok := all[r.Card][r.Template]
+		if ok && !old.FromForge() && old.Status != StatusHarness && old.Status != StatusXMageLacks {
+			kept++
+			continue
+		}
+		all[r.Card][r.Template] = r
+		wrote++
+	}
+	if err := writeVerdicts(dir, all); err != nil {
+		return 0, 0, err
+	}
+	return wrote, kept, nil
 }
 
 // hasRuling reports whether the row carries a hand-authored or

@@ -82,6 +82,11 @@ type SetStatus struct {
 	Printed     bool     `json:"printed"`            // has a oracle/compliance/printed list
 	Cards       int      `json:"cards"`              // cards the claim covers
 	Outstanding int      `json:"outstanding"`
+	// XMageVerified, ForgeOnly and Hand split the level-A passing cards by
+	// what passed them. They are filled at level A only.
+	XMageVerified int `json:"xmage_verified,omitempty"`
+	ForgeOnly     int `json:"forge_only,omitempty"`
+	Hand          int `json:"hand,omitempty"`
 	// ProblemCards counts the DISTINCT cards with at least one problem: a
 	// card failing two requirements is one failing card (Outstanding
 	// counts problems).
@@ -182,9 +187,14 @@ func (cs *Census) Status(reg *cards.Registry, root, level string, only ...string
 		codes = keep
 	}
 	probs := make([][]gate.Problem, len(codes))
+	passes := make([]gate.Passing, len(codes))
 	errs := make([]error, len(codes))
 	for i, code := range codes {
-		probs[i], errs[i] = gate.Check(reg, root, code, level)
+		if level == "A" {
+			probs[i], passes[i], errs[i] = gate.CheckPassing(reg, root, code)
+		} else {
+			probs[i], errs[i] = gate.Check(reg, root, code, level)
+		}
 	}
 	var out []SetStatus
 	for i, code := range codes {
@@ -199,6 +209,11 @@ func (cs *Census) Status(reg *cards.Registry, root, level string, only ...string
 		_, perr := compliance.LoadPrinted(filepath.Join(root, "oracle", "compliance", "printed"), code)
 		st.Printed = perr == nil
 		st.ProblemCards = DistinctProblemCards(probs)
+		if level == "A" {
+			st.XMageVerified = passes[i].XMage
+			st.ForgeOnly = passes[i].Forge
+			st.Hand = passes[i].Hand
+		}
 		for _, p := range probs {
 			st.Buckets[Bucket(p)]++
 			if c, ok := cs.byName[p.Card]; ok && c.NonTournament != "" {
@@ -300,11 +315,11 @@ func (cs *Census) WriteDashboard(w io.Writer, sets []SetStatus, head string) {
 		}
 		fmt.Fprintln(w)
 	}
-	fmt.Fprintf(w, "\n## Sets\n\nOrdered by first target format, then newest first.\n\n| set | name | type | released | formats | declared | printed list | cards | outstanding |")
+	fmt.Fprintf(w, "\n## Sets\n\nOrdered by first target format, then newest first.\n\n| set | name | type | released | formats | declared | printed list | cards | outstanding | xmage-verified | forge-only |")
 	for _, b := range Buckets {
 		fmt.Fprintf(w, " %s |", b)
 	}
-	fmt.Fprintf(w, "\n|---|---|---|---|---|---|---|---|---|%s\n", strings.Repeat("---|", len(Buckets)))
+	fmt.Fprintf(w, "\n|%s%s\n", strings.Repeat("---|", 11), strings.Repeat("---|", len(Buckets)))
 	rank := func(s SetStatus) int {
 		for i, f := range cs.Config.Formats {
 			if contains(s.Formats, f.Name) {
@@ -329,8 +344,8 @@ func (cs *Census) WriteDashboard(w io.Writer, sets []SetStatus, head string) {
 		if s.Printed {
 			pr = "yes"
 		}
-		fmt.Fprintf(w, "| %s | %s | %s | %s | %s | %s | %s | %d | %d |", s.Set, s.Name, s.SetType, s.Released,
-			strings.Join(s.Formats, " "), s.Declared, pr, s.Cards, s.Outstanding)
+		fmt.Fprintf(w, "| %s | %s | %s | %s | %s | %s | %s | %d | %d | %d | %d |", s.Set, s.Name, s.SetType, s.Released,
+			strings.Join(s.Formats, " "), s.Declared, pr, s.Cards, s.Outstanding, s.XMageVerified, s.ForgeOnly)
 		for _, b := range Buckets {
 			if n := s.Buckets[b]; n > 0 {
 				fmt.Fprintf(w, " %d |", n)
@@ -356,6 +371,12 @@ type RatchetEntry struct {
 	Level        string `json:"level,omitempty"`
 	Outstanding  int    `json:"outstanding"`
 	OutstandingB *int   `json:"outstanding_b,omitempty"`
+	// XMageVerified and ForgeOnly record the level-A passing split. Both
+	// are nil for a set that has never had a Forge-only card, so its entry
+	// keeps its one-line bytes; once a set has had one, both are recorded
+	// (0 included), so neither number moves unseen.
+	XMageVerified *int `json:"xmage_verified,omitempty"`
+	ForgeOnly     *int `json:"forge_only,omitempty"`
 }
 
 // LoadRatchet reads oracle/compliance/ratchet.json under root.
@@ -378,7 +399,15 @@ func LoadRatchet(root string) (map[string]RatchetEntry, error) {
 func RatchetOf(sets []SetStatus, prev map[string]RatchetEntry) map[string]RatchetEntry {
 	out := map[string]RatchetEntry{}
 	for _, s := range sets {
-		out[s.Set] = RatchetEntry{Level: s.Declared, Outstanding: s.Outstanding, OutstandingB: prev[s.Set].OutstandingB}
+		p := prev[s.Set]
+		e := RatchetEntry{Level: s.Declared, Outstanding: s.Outstanding, OutstandingB: p.OutstandingB}
+		// A set that has ever had a Forge-only card keeps recording both
+		// numbers, 0 included, so neither moves without a recorded write.
+		if s.ForgeOnly > 0 || p.ForgeOnly != nil {
+			x, f := s.XMageVerified, s.ForgeOnly
+			e.XMageVerified, e.ForgeOnly = &x, &f
+		}
+		out[s.Set] = e
 	}
 	return out
 }
@@ -463,6 +492,22 @@ func CheckRatchet(committed []string, measured []SetStatus, declared compliance.
 			fails = append(fails, fmt.Sprintf("%s: %d outstanding, ratchet %d -- per-set outstanding only shrinks (oraclediff status -set %s)", k, s.Outstanding, e.Outstanding, k))
 		} else if s.Outstanding < e.Outstanding {
 			slack = append(slack, fmt.Sprintf("%s: %d -> %d", k, e.Outstanding, s.Outstanding))
+		}
+		recordedForge := 0
+		if e.ForgeOnly != nil {
+			recordedForge = *e.ForgeOnly
+		}
+		if s.ForgeOnly > recordedForge {
+			fails = append(fails, fmt.Sprintf("%s: %d Forge-only cards, ratchet %d -- a Forge-only verdict counts once recorded (oraclediff status -all -sets %s -write-ratchet)", k, s.ForgeOnly, recordedForge, k))
+		}
+		if e.XMageVerified != nil && s.XMageVerified < *e.XMageVerified {
+			fails = append(fails, fmt.Sprintf("%s: %d XMage-verified cards, ratchet %d -- XMage-verified cards only grow", k, s.XMageVerified, *e.XMageVerified))
+		}
+		if e.ForgeOnly != nil && s.ForgeOnly < *e.ForgeOnly {
+			slack = append(slack, fmt.Sprintf("%s: forge-only %d -> %d", k, *e.ForgeOnly, s.ForgeOnly))
+		}
+		if e.XMageVerified != nil && s.XMageVerified > *e.XMageVerified {
+			slack = append(slack, fmt.Sprintf("%s: xmage-verified %d -> %d", k, *e.XMageVerified, s.XMageVerified))
 		}
 	}
 	codes := append([]string(nil), committed...)
