@@ -221,6 +221,7 @@ func Classify(r *compliance.VerdictRow, rs []Ruling, api string) (applied *Rulin
 func rowEqual(a, b compliance.VerdictRow) bool {
 	if a.Card != b.Card || a.Template != b.Template || a.ID != b.ID ||
 		a.ScenarioSHA != b.ScenarioSHA || a.XMageRef != b.XMageRef ||
+		a.XMageDriver != b.XMageDriver ||
 		a.Status != b.Status || a.CanonSHA != b.CanonSHA || a.Detail != b.Detail ||
 		a.Ruling != b.Ruling || a.RulingID != b.RulingID || a.Review != b.Review ||
 		a.Source != b.Source || a.ForgeRef != b.ForgeRef || a.ForgeDriver != b.ForgeDriver {

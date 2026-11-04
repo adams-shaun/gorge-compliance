@@ -1,8 +1,8 @@
 // Command oraclediff runs the XMage compliance pipeline's gorge side.
 //
 //	oraclediff gen  [-cards .cards] [-level A|B] -manifest oracle/compliance/manifests/FRA.json -out scenarios.jsonl
-//	oraclediff plan [-cards .cards] -scenarios scenarios.jsonl -xmage-ref REF -cache DIR -replay todo.jsonl -rediff rediff.jsonl
-//	oraclediff diff [-cards .cards] -scenarios scenarios.jsonl [-xmage xmage.jsonl] [-cache DIR] -out verdicts.jsonl
+//	oraclediff plan [-cards .cards] -scenarios scenarios.jsonl -xmage-ref REF -driver SHA -cache DIR -replay todo.jsonl -rediff rediff.jsonl
+//	oraclediff diff [-cards .cards] -scenarios scenarios.jsonl [-xmage xmage.jsonl] [-cache DIR] [-driver SHA] -out verdicts.jsonl
 //	oraclediff adjudicate -scenarios scen.jsonl -forge-diff forge-diff.jsonl
 //	                          -xmage-cache DIR -oracle-ref REF [-driver SHA | -forge-cache DIR]
 //	                          [-verdicts oracle/compliance/verdicts] [-run-ledger] [-mark-review]
@@ -89,11 +89,12 @@ func main() {
 		scen := fs.String("scenarios", "", "scenario JSONL (from gen)")
 		verdicts := fs.String("verdicts", compliance.VerdictDir, "committed verdict directory")
 		ref := fs.String("xmage-ref", "", "XMAGE_REF of this pass")
+		driver := fs.String("driver", "", "XMage driver source sha (12 hex)")
 		cache := fs.String("cache", "", "XMage result cache directory for this XMAGE_REF and driver")
 		replay := fs.String("replay", "", "write the scenarios XMage must replay here")
 		rediff := fs.String("rediff", "", "write every stale scenario (replayed or cached) here")
 		fs.Parse(os.Args[2:])
-		err = runPlan(*dir, *scen, *verdicts, *ref, *cache, *replay, *rediff)
+		err = runPlan(*dir, *scen, *verdicts, *ref, *driver, *cache, *replay, *rediff)
 	case "diff":
 		fs := flag.NewFlagSet("diff", flag.ExitOnError)
 		dir := fs.String("cards", ".cards", "corpus dir")
@@ -103,9 +104,10 @@ func main() {
 		out := fs.String("out", "", "verdict JSONL")
 		write := fs.String("write", "", "merge verdict rows into this directory (oracle/compliance/verdicts)")
 		ref := fs.String("xmage-ref", "", "XMAGE_REF the XMage results came from (required with -write)")
+		driver := fs.String("driver", "", "XMage driver source sha (12 hex)")
 		rulings := fs.String("rulings", shape.RulingDir, "shape rulings that classify a disagreement automatically")
 		fs.Parse(os.Args[2:])
-		err = runDiff(*dir, *scen, *xm, *cache, *out, *write, *ref, *rulings)
+		err = runDiff(*dir, *scen, *xm, *cache, *out, *write, *ref, *driver, *rulings)
 	case "forge-export":
 		err = runForgeExport(os.Args[2:])
 	case "forge-diff":
@@ -421,13 +423,17 @@ func readLines(path string, each func([]byte) error) error {
 	return sc.Err()
 }
 
-func runDiff(dir, scen, xm, cacheDir, out, write, ref, rulingDir string) error {
+func runDiff(dir, scen, xm, cacheDir, out, write, ref, driver, rulingDir string) error {
 	if scen == "" || (xm == "" && cacheDir == "") || out == "" {
 		return fmt.Errorf("diff needs -scenarios, -xmage or -cache, and -out")
 	}
 	cache := oraclediff.Cache{Dir: cacheDir}
 	if write != "" && ref == "" {
 		return fmt.Errorf("-write needs -xmage-ref")
+	}
+	driver = short12(driver)
+	if write != "" && driver == "" {
+		fmt.Fprintln(os.Stderr, "oraclediff diff: no -driver; rows are recorded without xmage_driver and the next plan treats them as stale")
 	}
 	var rows []compliance.VerdictRow
 	reg, err := loadReg(dir)
@@ -482,7 +488,7 @@ func runDiff(dir, scen, xm, cacheDir, out, write, ref, rulingDir string) error {
 			row.Verdict = oraclediff.CompareOpts(g, gerr, x, it.Compare, it.Ignore...)
 			row.XMageMS = x.MS
 			vr := compliance.VerdictRow{Card: it.Card, Template: it.Template, ID: it.ID,
-				ScenarioSHA: sha, XMageRef: ref}
+				ScenarioSHA: sha, XMageRef: ref, XMageDriver: driver}
 			switch row.Verdict.Status {
 			case oraclediff.Agree:
 				vr.Status = compliance.StatusAgree
@@ -554,10 +560,11 @@ func runDiff(dir, scen, xm, cacheDir, out, write, ref, rulingDir string) error {
 
 // runPlan reads gen's scenarios and writes the stale ones: -rediff gets every scenario whose verdict must be recomputed,
 // -replay the subset XMage has no cached result for.
-func runPlan(dir, scen, verdictDir, ref, cacheDir, replay, rediff string) error {
-	if scen == "" || ref == "" || replay == "" || rediff == "" {
-		return fmt.Errorf("plan needs -scenarios, -xmage-ref, -replay and -rediff")
+func runPlan(dir, scen, verdictDir, ref, driver, cacheDir, replay, rediff string) error {
+	if scen == "" || ref == "" || driver == "" || replay == "" || rediff == "" {
+		return fmt.Errorf("plan needs -scenarios, -xmage-ref, -driver, -replay and -rediff")
 	}
+	driver = short12(driver)
 	reg, err := loadReg(dir)
 	if err != nil {
 		return err
@@ -585,7 +592,7 @@ func runPlan(dir, scen, verdictDir, ref, cacheDir, replay, rediff string) error 
 			return err
 		}
 		row, have := all[it.Card][it.Template]
-		need, why := gate.PlanItem(reg, it, row, have, ref, cache)
+		need, why := gate.PlanItem(reg, it, row, have, ref, driver, cache)
 		counts[need]++
 		if need == gate.Fresh {
 			return nil
