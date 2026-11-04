@@ -40,7 +40,7 @@ func okWindows(t *testing.T, n int) (*cards.Registry, *decks.Spellings, []window
 	var out []window
 	for g := 0; g < n; g++ {
 		pair := decks.Pair(cands, cov.New(), "FDN", 0, g, 7)
-		ls, _, _, err := lower.Windows(reg, pair, uint64(100+g), game.Options{Set: "FDN"})
+		ls, _, _, err := lower.Windows(reg, pair, uint64(100+g), game.Options{Set: "FDN"}, true)
 		if err != nil {
 			t.Fatal(err)
 		}

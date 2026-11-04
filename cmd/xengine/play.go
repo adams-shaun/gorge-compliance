@@ -143,7 +143,7 @@ func runPlay(args []string) error {
 	if err != nil {
 		return err
 	}
-	return play(reg, pick, tables, led, *set, *chunk, *games, *seed, *out, *windows, turns)
+	return play(reg, pick, tables, led, *set, *chunk, *games, *seed, *out, *windows, *xmage, turns)
 }
 
 // A picker draws game g's decks: the candidates they come from and the set whose
@@ -316,7 +316,7 @@ func tapePrefix(l lower.Lowered, t *game.Tape, n int) (p lower.Lowered, tf *game
 	return p, &cut, true
 }
 
-func play(reg *cards.Registry, pick picker, tables *dside.Tables, led *cov.Ledger, set string, chunk, games int, seed uint64, out string, windows bool, tapeTurns []int) error {
+func play(reg *cards.Registry, pick picker, tables *dside.Tables, led *cov.Ledger, set string, chunk, games int, seed uint64, out string, windows, xmage bool, tapeTurns []int) error {
 	var items, gorge, lowerLog, diracLog bytes.Buffer
 	exercised := cov.New()
 	exercised.Merge(led)
@@ -385,7 +385,7 @@ func play(reg *cards.Registry, pick picker, tables *dside.Tables, led *cov.Ledge
 			}
 		}
 		if windows {
-			wins, refused, tp, err = lower.Windows(reg, pair, gameSeed(seed, chunk, g), opt)
+			wins, refused, tp, err = lower.Windows(reg, pair, gameSeed(seed, chunk, g), opt, xmage)
 		} else {
 			tp, err = game.Play(reg, pair, gameSeed(seed, chunk, g), opt)
 		}

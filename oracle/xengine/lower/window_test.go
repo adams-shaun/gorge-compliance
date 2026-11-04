@@ -96,7 +96,7 @@ func windowsOf(t *testing.T, n int) (*cards.Registry, []played) {
 	reg, pairs := fdnPairs(t, n)
 	var out []played
 	for g, p := range pairs {
-		ls, rs, tp, err := Windows(reg, p, uint64(100+g), game.Options{Set: "FDN"})
+		ls, rs, tp, err := Windows(reg, p, uint64(100+g), game.Options{Set: "FDN"}, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -192,7 +192,7 @@ func TestWindowsDeterministic(t *testing.T) {
 	for g, p := range pairs {
 		var first []byte
 		for run := 0; run < 2; run++ {
-			ls, rs, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: "FDN"})
+			ls, rs, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: "FDN"}, true)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -219,7 +219,7 @@ func TestOnCutIsReadOnly(t *testing.T) {
 		var cuts int
 		with, err := game.Play(reg, p, uint64(100+g), game.Options{Set: "FDN", OnCut: func(e *rules.Engine, entry int) {
 			cuts++
-			capture(e, entry)
+			capture(e, entry, true)
 		}})
 		if err != nil {
 			t.Fatal(err)
@@ -248,7 +248,7 @@ func expressibleCutIn(t *testing.T, reg *cards.Registry, set string, p [2]decks.
 	var got *rules.Engine
 	var at int
 	_, err := game.Play(reg, p, seed, game.Options{Set: set, OnCut: func(e *rules.Engine, entry int) {
-		if got == nil && e.G.Turn >= 3 && len(capture(e, entry).Reasons) == 0 {
+		if got == nil && e.G.Turn >= 3 && len(capture(e, entry, true).Reasons) == 0 {
 			got, at = e.Clone(), entry
 		}
 	}})
@@ -265,7 +265,7 @@ func TestGateRefusesDelayedTrigger(t *testing.T) {
 	reg, pairs := fdnPairs(t, 1)
 	e, at := expressibleCut(t, reg, pairs[0], 100)
 	e.G.Delayed = append(e.G.Delayed, state.DelayedTrigger{ID: 1, Phase: state.StepEnd, Execute: "TrigReturn"})
-	c := capture(e, at)
+	c := capture(e, at, true)
 	if len(c.Reasons) != 1 || c.Reasons[0] != "field:Game.Delayed" {
 		t.Fatalf("reasons %v, want [field:Game.Delayed]", c.Reasons)
 	}
@@ -277,7 +277,7 @@ func TestGateRefusesDelayedTrigger(t *testing.T) {
 func TestGateRefusesChosenMode(t *testing.T) {
 	reg, pairs := fdnPairs(t, 1)
 	e, at := expressibleCut(t, reg, pairs[0], 100)
-	if r := capture(e, at).Reasons; len(r) != 0 {
+	if r := capture(e, at, true).Reasons; len(r) != 0 {
 		t.Fatalf("base cut refused: %v", r)
 	}
 	var planted bool
@@ -292,7 +292,7 @@ func TestGateRefusesChosenMode(t *testing.T) {
 	if !planted {
 		t.Fatal("no battlefield permanent with a card to plant the mode on")
 	}
-	if r := capture(e, at).Reasons; !slices.Contains(r, "field:Object.ChosenModes") {
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, "field:Object.ChosenModes") {
 		t.Fatalf("reasons %v, want field:Object.ChosenModes", r)
 	}
 }
@@ -370,7 +370,7 @@ func TestWindowCountersNotDoubled(t *testing.T) {
 	if !swapped {
 		t.Fatal("no battlefield permanent to replace")
 	}
-	c := capture(planted, at)
+	c := capture(planted, at, true)
 	if len(c.Reasons) > 0 {
 		t.Fatalf("the planted cut is refused: %v", c.Reasons)
 	}
@@ -419,7 +419,7 @@ func hasReason(c *cut, r string) bool { return slices.Contains(c.Reasons, r) }
 func TestGateRefusesOpeningHandCard(t *testing.T) {
 	reg, pairs := fdnPairs(t, 1)
 	e, at := expressibleCut(t, reg, pairs[0], 100)
-	if hasReason(capture(e, at), "opening_hand_effect") {
+	if hasReason(capture(e, at, true), "opening_hand_effect") {
 		t.Fatal("unplanted cut already refused as opening_hand_effect")
 	}
 	var o *state.Object
@@ -438,8 +438,8 @@ func TestGateRefusesOpeningHandCard(t *testing.T) {
 			t.Fatalf("%s is not in the corpus", name)
 		}
 		o.SetCard(c, 0)
-		if !hasReason(capture(e, at), "opening_hand_effect") {
-			t.Errorf("%s in hand: reasons %v, want opening_hand_effect", name, capture(e, at).Reasons)
+		if !hasReason(capture(e, at, true), "opening_hand_effect") {
+			t.Errorf("%s in hand: reasons %v, want opening_hand_effect", name, capture(e, at, true).Reasons)
 		}
 	}
 }
@@ -463,34 +463,34 @@ func TestGateDeadTurnHistory(t *testing.T) {
 	e := base.Clone()
 	e.G.Objs = append(e.G.Objs, state.Object{ID: state.ObjID(len(e.G.Objs) + 1), Zone: state.ZCeased, Source: bf})
 	e.G.Entered = append(e.G.Entered, state.ZoneEntry{Obj: state.ObjID(len(e.G.Objs)), From: state.ZLibrary, To: state.ZStack})
-	if c := capture(e, at); len(c.Reasons) != 0 {
+	if c := capture(e, at, true); len(c.Reasons) != 0 {
 		t.Fatalf("(a) card-less entry: reasons %v, want none", c.Reasons)
 	}
 	e.G.Entered = append(e.G.Entered, state.ZoneEntry{Obj: bf, From: state.ZGraveyard, To: state.ZExile})
 	plantCard(t, reg, e, entryReaderCard(t, reg))
-	if c := capture(e, at); len(c.Reasons) != 1 || c.Reasons[0] != "field:Game.Entered" {
+	if c := capture(e, at, true); len(c.Reasons) != 1 || c.Reasons[0] != "field:Game.Entered" {
 		t.Fatalf("(b) card entry: reasons %v, want [field:Game.Entered]", c.Reasons)
 	}
 
 	// (c) the tally is live only when a card in the game reads it.
 	e = base.Clone()
 	e.G.ResolvedThisTurn = map[string]int32{"x": 1}
-	if c := capture(e, at); len(c.Reasons) != 0 {
+	if c := capture(e, at, true); len(c.Reasons) != 0 {
 		t.Fatalf("(c) unread tally: reasons %v, want none", c.Reasons)
 	}
 	plantCard(t, reg, e, "Tannuk, Memorial Ensign")
-	if c := capture(e, at); !hasReason(c, "field:Game.ResolvedThisTurn") {
+	if c := capture(e, at, true); !hasReason(c, "field:Game.ResolvedThisTurn") {
 		t.Fatalf("(c) read tally: reasons %v, want field:Game.ResolvedThisTurn", c.Reasons)
 	}
 
 	// (d) a runtime SVar is live only when a card in the game names its key.
 	e = base.Clone()
 	e.G.Objs[perm].RuntimeSVars = map[string]int32{"AFLifeLost": 2}
-	if c := capture(e, at); len(c.Reasons) != 0 {
+	if c := capture(e, at, true); len(c.Reasons) != 0 {
 		t.Fatalf("(d) unread SVar: reasons %v, want none", c.Reasons)
 	}
 	plantCard(t, reg, e, "Gray Merchant of Asphodel")
-	if c := capture(e, at); !hasReason(c, "field:Object.RuntimeSVars") {
+	if c := capture(e, at, true); !hasReason(c, "field:Object.RuntimeSVars") {
 		t.Fatalf("(d) read SVar: reasons %v, want field:Object.RuntimeSVars", c.Reasons)
 	}
 }
@@ -508,7 +508,7 @@ func TestWindowsDeadTurnHistory(t *testing.T) {
 				relaxed[e.G.Turn] = true
 			}
 		}}
-		ls, _, _, err := Windows(reg, p, uint64(100+g), opt)
+		ls, _, _, err := Windows(reg, p, uint64(100+g), opt, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -610,7 +610,7 @@ func TestGateDeadExileLink(t *testing.T) {
 		exiled.ExiledWith = src.ID
 		exiled.HasExiledBy = true
 	}
-	reasons := func(e *rules.Engine) []string { return capture(e, at).Reasons }
+	reasons := func(e *rules.Engine) []string { return capture(e, at, true).Reasons }
 
 	// (a) the removal spell's script never reads the link.
 	e := base.Clone()
@@ -676,11 +676,11 @@ func TestWindowsDeadExileLink(t *testing.T) {
 	for g, p := range pairs {
 		relaxed := map[int32]bool{}
 		opt := game.Options{Set: "EOE", OnCut: func(e *rules.Engine, entry int) {
-			if exileLinkOf(e.G) && len(capture(e, entry).Reasons) == 0 {
+			if exileLinkOf(e.G) && len(capture(e, entry, true).Reasons) == 0 {
 				relaxed[e.G.Turn] = true
 			}
 		}}
-		ls, _, _, err := Windows(reg, p, uint64(100+g), opt)
+		ls, _, _, err := Windows(reg, p, uint64(100+g), opt, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -748,7 +748,7 @@ func TestGateTurnEntryReaders(t *testing.T) {
 	// (a) with no reader in the game a this-turn death is dead history.
 	e := base.Clone()
 	died(e)
-	if c := capture(e, at); len(c.Reasons) != 0 {
+	if c := capture(e, at, true); len(c.Reasons) != 0 {
 		t.Fatalf("(a) no reader: reasons %v, want none", c.Reasons)
 	}
 
@@ -761,7 +761,7 @@ func TestGateTurnEntryReaders(t *testing.T) {
 			break
 		}
 	}
-	c := capture(e, at)
+	c := capture(e, at, true)
 	if !hasReason(c, "field:Game.Entered") || !hasReason(c, "field:Object.EnteredThisTurn") {
 		t.Fatalf("(b) reader: reasons %v, want Game.Entered and Object.EnteredThisTurn", c.Reasons)
 	}
@@ -774,7 +774,7 @@ func TestGateTurnEntryReaders(t *testing.T) {
 			break
 		}
 	}
-	if c := capture(e, at); !hasReason(c, "field:Object.EnteredThisTurn") {
+	if c := capture(e, at, true); !hasReason(c, "field:Object.EnteredThisTurn") {
 		t.Fatalf("(c) battlefield entry: reasons %v, want field:Object.EnteredThisTurn", c.Reasons)
 	}
 }
@@ -800,11 +800,11 @@ func TestWindowsTurnEntryReaders(t *testing.T) {
 	for g, p := range pairs {
 		relaxed := map[int32]bool{}
 		opt := game.Options{Set: "DFT", OnCut: func(e *rules.Engine, entry int) {
-			if !entryReaderIn(e.G) && offBattlefieldEntry(e.G) && len(capture(e, entry).Reasons) == 0 {
+			if !entryReaderIn(e.G) && offBattlefieldEntry(e.G) && len(capture(e, entry, true).Reasons) == 0 {
 				relaxed[e.G.Turn] = true
 			}
 		}}
-		ls, _, _, err := Windows(reg, p, uint64(100+g), opt)
+		ls, _, _, err := Windows(reg, p, uint64(100+g), opt, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -902,7 +902,7 @@ func TestGateTappedAfterUntap(t *testing.T) {
 	// (a) One tapped permanent: no refusal, its ref is the only entry.
 	first := plain[0]
 	first.Tapped = true
-	c := capture(e, at)
+	c := capture(e, at, true)
 	if len(c.Reasons) != 0 {
 		t.Fatalf("a tapped active-seat permanent is refused: %v", c.Reasons)
 	}
@@ -922,7 +922,7 @@ func TestGateTappedAfterUntap(t *testing.T) {
 		}
 	}
 	later.Tapped = true
-	c = capture(e, at)
+	c = capture(e, at, true)
 	if len(c.Reasons) != 0 {
 		t.Fatalf("one tapped of two same-name permanents is refused: %v", c.Reasons)
 	}
@@ -986,7 +986,7 @@ func TestWindowsTappedNonActiveUsesTapped(t *testing.T) {
 
 	// (a) Both copies tapped: the by-name field, nothing per object.
 	a.Tapped, b.Tapped, mine.Tapped = true, true, true
-	c := capture(e, at)
+	c := capture(e, at, true)
 	if len(c.Reasons) != 0 {
 		t.Fatalf("reasons %v", c.Reasons)
 	}
@@ -1005,7 +1005,7 @@ func TestWindowsTappedNonActiveUsesTapped(t *testing.T) {
 
 	// (b) One copy tapped, one not: the per-object field.
 	b.Tapped = false
-	c = capture(e, at)
+	c = capture(e, at, true)
 	if got := c.Setup[other].Tapped; len(got) != 0 {
 		t.Errorf("mixed copies: non-active tapped = %v, want empty", got)
 	}
@@ -1021,7 +1021,7 @@ func TestWindowsTappedAfterUntap(t *testing.T) {
 	byStatus := map[string]int{}
 	var tappedWin, activeTapped, okActive int
 	for g, p := range pairs {
-		ls, _, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: "DSK"})
+		ls, _, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: "DSK"}, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1087,7 +1087,7 @@ func TestRemapRenamedSetupToken(t *testing.T) {
 // window's attack names it by the copied name.
 func TestWindowsRenamedTokenRef(t *testing.T) {
 	reg, pairs := setPairs(t, "DSK", 11)
-	ls, _, tp, err := Windows(reg, pairs[10], 110, game.Options{Set: "DSK"})
+	ls, _, tp, err := Windows(reg, pairs[10], 110, game.Options{Set: "DSK"}, true)
 	if err != nil {
 		t.Fatal(err)
 	}
