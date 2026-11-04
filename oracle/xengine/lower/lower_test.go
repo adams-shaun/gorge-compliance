@@ -395,6 +395,59 @@ func TestSeatMapRefs(t *testing.T) {
 	}
 }
 
+func TestElectionPickSpelling(t *testing.T) {
+	m := seatMap{swap: true}
+	for _, c := range []struct {
+		name string
+		p    game.Pick
+		want string
+		ok   bool
+	}{
+		{"replacement apply", game.Pick{Kind: "apply", Obj: 33, Label: "Yes — skip this step", Ref: "p0:Some Source"}, "apply", true},
+		{"replacement decline", game.Pick{Kind: "decline", Obj: 33, Label: "No — do not apply this replacement", Ref: "p0:Some Source"}, "decline", true},
+		{"myriad yes", game.Pick{Kind: "yes", Obj: 33, Label: "Create a copy attacking p1", Ref: "p0:Some Source"}, "yes", true},
+		{"myriad no", game.Pick{Kind: "no", Obj: 33, Label: "Don't create a copy", Ref: "p0:Some Source"}, "no", true},
+		{"trigger cost pay", game.Pick{Kind: "trigger_cost_pay", Obj: 33, Label: "Pay {G}", Ref: "p0:Thing"}, "trigger_cost_pay", true},
+		{"trigger cost pay manual", game.Pick{Kind: "trigger_cost_pay_manual", Obj: 33, Label: "Pay {G} (choose mana sources)", Ref: "p0:Thing"}, "trigger_cost_pay_manual", true},
+		{"trigger cost decline", game.Pick{Kind: "trigger_cost_decline", Obj: 33, Label: "Do not pay", Ref: "p0:Thing"}, "trigger_cost_decline", true},
+		{"cumulative pay", game.Pick{Kind: "cumulative_pay", Obj: 33, Label: "Pay {G}", Ref: "p0:Thing"}, "cumulative_pay", true},
+		{"cumulative pay manual", game.Pick{Kind: "cumulative_pay_manual", Obj: 33, Label: "Pay {G} (choose mana sources)", Ref: "p0:Thing"}, "cumulative_pay_manual", true},
+		{"cumulative sacrifice", game.Pick{Kind: "cumulative_sac", Obj: 33, Label: "Sacrifice Thing", Ref: "p0:Thing"}, "cumulative_sac", true},
+		{"echo pay", game.Pick{Kind: "echo_pay", Obj: 33, Label: "Pay {G}", Ref: "p0:Thing"}, "echo_pay", true},
+		{"echo pay manual", game.Pick{Kind: "echo_pay_manual", Obj: 33, Label: "Pay {G} (choose mana sources)", Ref: "p0:Thing"}, "echo_pay_manual", true},
+		{"echo sacrifice", game.Pick{Kind: "echo_sac", Obj: 33, Label: "Sacrifice Thing", Ref: "p0:Thing"}, "echo_sac", true},
+		{"opening yes", game.Pick{Kind: "opening_yes", Obj: 33, Label: "Yes", Ref: "p0:Card"}, "opening_yes", true},
+		{"opening no", game.Pick{Kind: "opening_no", Obj: 33, Label: "No", Ref: "p0:Card"}, "opening_no", true},
+		{"suspend yes", game.Pick{Kind: "suspend_cast_yes", Obj: 33, Label: "Cast it", Ref: "p0:Card"}, "suspend_cast_yes", true},
+		{"suspend no", game.Pick{Kind: "suspend_cast_no", Obj: 33, Label: "Leave it in exile", Ref: "p0:Card"}, "suspend_cast_no", true},
+		{"defeat yes", game.Pick{Kind: "defeat_cast_yes", Obj: 33, Label: "Cast it", Ref: "p0:Card"}, "defeat_cast_yes", true},
+		{"defeat no", game.Pick{Kind: "defeat_cast_no", Obj: 33, Label: "Leave it in exile", Ref: "p0:Card"}, "defeat_cast_no", true},
+		{"time travel skip", game.Pick{Kind: "time_travel_skip", Obj: 33, Label: "Skip", Ref: "p0:Thing"}, "time_travel_skip", true},
+		{"time travel add", game.Pick{Kind: "time_travel_add", Obj: 33, Label: "Add a time counter", Ref: "p0:Thing"}, "time_travel_add", true},
+		{"time travel remove", game.Pick{Kind: "time_travel_remove", Obj: 33, Label: "Remove a time counter", Ref: "p0:Thing"}, "time_travel_remove", true},
+		{"aor remove", game.Pick{Kind: "aor_remove:charge", Obj: 33, Label: "Remove a charge counter", Ref: "p0:Thing"}, "aor_remove:charge", true},
+		{"aor put", game.Pick{Kind: "aor_put:charge", Obj: 33, Label: "Put another charge counter on it", Ref: "p0:Thing"}, "aor_put:charge", true},
+		{"aor skip", game.Pick{Kind: "aor_skip", Obj: 33, Label: "Do nothing", Ref: "p0:Thing"}, "aor_skip", true},
+		{"command zone", game.Pick{Kind: "command_zone", Obj: 33, Label: "Command zone", Ref: "p0:Thing"}, "command_zone", true},
+		{"leave", game.Pick{Kind: "leave", Obj: 33, Label: "Leave it", Ref: "p0:Thing"}, "leave", true},
+		{"endure counters", game.Pick{Kind: "endure_counters", Obj: 33, Label: "Put +1/+1 counters on it", Ref: "p0:Thing"}, "endure_counters", true},
+		{"endure spirit", game.Pick{Kind: "endure_spirit", Obj: 33, Label: "Create a Spirit", Ref: "p0:Thing"}, "endure_spirit", true},
+		{"riot label", game.Pick{Kind: "riot", Obj: 33, Label: "Gain haste", Ref: "p0:Thing"}, "Gain haste", true},
+		{"unleash label", game.Pick{Kind: "unleash", Obj: 33, Label: "Enter without a counter", Ref: "p0:Thing"}, "Enter without a counter", true},
+		{"trigger cost x label", game.Pick{Kind: "trigger_cost_x", Obj: 33, Label: "X = 3", Ref: "p0:Thing"}, "X = 3", true},
+		{"trigger cost counter label", game.Pick{Kind: "trigger_cost_counter", Obj: 33, Label: "Thing (charge counter)", Ref: "p0:Thing"}, "Thing (charge counter)", true},
+		{"mana convert label", game.Pick{Kind: "manaconvert", Obj: 33, Label: "Don't use mana conversion", Ref: "p0:Card"}, "Don't use mana conversion", true},
+		{"mode still label", game.Pick{Kind: "mode", Obj: 33, Mode: "unless_decline", Label: "Don't pay", Ref: "p0:Steam Vents"}, "Don't pay", true},
+		{"mode empty label fails closed", game.Pick{Kind: "mode", Obj: 33, Ref: "p0:Steam Vents"}, "", false},
+		{"riot empty label fails closed", game.Pick{Kind: "riot", Obj: 33, Ref: "p0:Thing"}, "", false},
+		{"object selection keeps ref", game.Pick{Kind: "permanent", Obj: 5, Ref: "p1:Forest#2"}, "p0:Forest#2", true},
+	} {
+		if got, ok := m.pickString(c.p); got != c.want || ok != c.ok {
+			t.Errorf("%s: pickString(%+v) = %q,%v, want %q,%v", c.name, c.p, got, ok, c.want, c.ok)
+		}
+	}
+}
+
 func stateID(n uint32) state.ObjID { return state.ObjID(n) }
 
 // TestLowerCastCarriesPayment: the pool mana a cast actually spent is the
@@ -727,7 +780,7 @@ func TestLowerResolvesTriggerTargetAfterEmptyPass(t *testing.T) {
 		// must land on it; the resolve step only carries the trigger target.
 		pos := prio(0, pass, 7)
 		choice := game.Entry{Kind: "choose", Seat: 0, Turn: 1, Step: "main1",
-			StackTop: stateID(7), Digest: d, Picks: []game.Pick{{Kind: "no"}}}
+			StackTop: stateID(7), Digest: d, Picks: []game.Pick{{Kind: "no", Obj: 33, Ref: "p0:Steam Vents"}}}
 		var l Lowered
 		l.lowerEntries(nil, seatMap{}, []game.Entry{pos, choice, pass0, target, pass1, pass2, stop}, 0, false)
 		if l.Truncated != "" {
