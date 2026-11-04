@@ -374,6 +374,25 @@ func TestSeatMapRefs(t *testing.T) {
 	if got := (seatMap{}).ref("p1:Forest"); got != "p1:Forest" {
 		t.Errorf("identity relabel changed a ref: %q", got)
 	}
+	// pickString: a mode decision's options all carry the same source object,
+	// so only the label tells them apart. A mode pick with no usable label
+	// fails closed instead of matching the first option by its ref.
+	for _, c := range []struct {
+		p    game.Pick
+		want string
+		ok   bool
+	}{
+		{game.Pick{Kind: "mode", Obj: 33, Mode: "unless_decline", Label: "Don't pay", Ref: "p0:Steam Vents"}, "Don't pay", true},
+		{game.Pick{Kind: "mode", Obj: 33, Label: "Pay 2 life", Ref: "p0:Steam Vents"}, "Pay 2 life", true},
+		{game.Pick{Kind: "mode", Player: 1, Label: "Refuse — it stays"}, "Refuse — it stays", true},
+		{game.Pick{Kind: "mode", Obj: 33, Ref: "p0:Steam Vents"}, "", false},
+		{game.Pick{Kind: "mode", Obj: 33, Label: "p1:Steam Vents", Ref: "p0:Steam Vents"}, "", false},
+		{game.Pick{Kind: "permanent", Obj: 5, Ref: "p1:Forest#2"}, "p0:Forest#2", true},
+	} {
+		if got, ok := m.pickString(c.p); got != c.want || ok != c.ok {
+			t.Errorf("pickString(%+v) = %q,%v, want %q,%v", c.p, got, ok, c.want, c.ok)
+		}
+	}
 }
 
 func stateID(n uint32) state.ObjID { return state.ObjID(n) }
