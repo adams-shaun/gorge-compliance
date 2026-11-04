@@ -38,6 +38,9 @@ type VerdictRow struct {
 	ID          string `json:"id"`
 	ScenarioSHA string `json:"scenario_sha"` // sha256 of the generated scenario line
 	XMageRef    string `json:"xmage_ref"`
+	// XMageDriver is the first 12 hex of the XMage driver source sha that
+	// produced the row. Empty on legacy rows and Forge-only rows.
+	XMageDriver string `json:"xmage_driver,omitempty"`
 	// Source is "" for XMage's row and SourceForge for a Forge-only verdict.
 	Source      string `json:"source,omitempty"`
 	ForgeRef    string `json:"forge_ref,omitempty"`

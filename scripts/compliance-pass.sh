@@ -9,8 +9,8 @@
 #   1. oraclediff gen   -- one level-A scenario per manifest card gorge supports
 #                          (LEVEL=B adds every generable level-B scenario)
 #   2. oraclediff plan  -- keep only the STALE scenarios: no verdict, another
-#                          scenario or XMAGE_REF, not passing, or gorge no
-#                          longer meets the frozen expectation
+#                          scenario, XMAGE_REF or driver, not passing, or
+#                          gorge no longer meets the frozen expectation
 #   3. XMage replays the stale scenarios its result cache does not hold
 #                          (scripts/xmage-oracle-run.sh)
 #   4. oraclediff diff -write -- recompute the stale verdicts, merging them
@@ -75,7 +75,7 @@ for s in "$@"; do
 	if ! "$od" gen -manifest "oracle/compliance/manifests/$s.json" -level "${LEVEL:-A}" -out "$d/scen.jsonl" >"$d/gen.log" 2>&1; then
 		echo "$s: gen FAILED"; tail -3 "$d/gen.log"; rc=1; continue
 	fi
-	if ! "$od" plan -scenarios "$d/scen.jsonl" -xmage-ref "$ref" -cache "$cache" \
+	if ! "$od" plan -scenarios "$d/scen.jsonl" -xmage-ref "$ref" -driver "$drv" -cache "$cache" \
 		-replay "$d/replay.jsonl" -rediff "$d/rediff.jsonl" >"$d/plan.log" 2>&1; then
 		echo "$s: plan FAILED"; tail -3 "$d/plan.log"; rc=1; continue
 	fi
@@ -87,7 +87,7 @@ for s in "$@"; do
 		xm=(-xmage "$d/xmage.jsonl")
 	fi
 	if [ -s "$d/rediff.jsonl" ]; then
-		if ! "$od" diff -scenarios "$d/rediff.jsonl" "${xm[@]}" -cache "$cache" \
+		if ! "$od" diff -scenarios "$d/rediff.jsonl" "${xm[@]}" -cache "$cache" -driver "$drv" \
 			-out "$d/verdicts.jsonl" "${write[@]}" >"$d/diff.log" 2>&1; then
 			echo "$s: diff FAILED"; tail -3 "$d/diff.log"; rc=1; continue
 		fi

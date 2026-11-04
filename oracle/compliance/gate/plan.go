@@ -15,8 +15,8 @@ type Need int
 
 const (
 	// Fresh: the committed verdict is for this exact scenario at this
-	// XMAGE_REF, it passes, and gorge still meets its frozen expectation.
-	// Nothing to do; the gate re-checks it.
+	// XMAGE_REF and driver, it passes, and gorge still meets its frozen
+	// expectation. Nothing to do; the gate re-checks it.
 	Fresh Need = iota
 	// Rediff: the verdict must be recomputed and XMage's result for this
 	// exact scenario is already cached, so no Java runs.
@@ -36,11 +36,11 @@ func (n Need) String() string {
 }
 
 // PlanItem decides what a pass does for one scenario. A row is stale when
-// it is missing, was recorded for another scenario or XMAGE_REF, does not
-// pass (diverge, harness, gorge_wrong: a gorge fix may have flipped it), or
-// passes but gorge no longer meets its frozen expectation. reason names
-// which.
-func PlanItem(reg *cards.Registry, it oraclegen.Item, row compliance.VerdictRow, have bool, ref string, cache oraclediff.Cache) (Need, string) {
+// it is missing, was recorded for another scenario, XMAGE_REF or driver,
+// does not pass (diverge, harness, gorge_wrong: a gorge fix may have flipped
+// it), or passes but gorge no longer meets its frozen expectation. reason
+// names which.
+func PlanItem(reg *cards.Registry, it oraclegen.Item, row compliance.VerdictRow, have bool, ref, driver string, cache oraclediff.Cache) (Need, string) {
 	sha := ItemSHA(it)
 	reason := ""
 	switch {
@@ -61,7 +61,11 @@ func PlanItem(reg *cards.Registry, it oraclegen.Item, row compliance.VerdictRow,
 	case row.Status != compliance.StatusAgree && row.Status != compliance.StatusXMageWrong:
 		reason = "status " + row.Status
 	default:
-		if ok, why := StillMeets(reg, it, row); !ok {
+		// XMage's side is a function of the scenario, XMAGE_REF and the
+		// driver source: a driver edit can move any passing row.
+		if row.XMageDriver != driver {
+			reason = "xmage_driver changed"
+		} else if ok, why := StillMeets(reg, it, row); !ok {
 			reason = why
 		}
 	}
