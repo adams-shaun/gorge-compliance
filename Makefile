@@ -15,7 +15,7 @@ GO_TEST_FLAGS ?= -p=2
 
 # The XMage commit the compliance oracle (manifests, out-of-tree driver)
 # is pinned to. XMage is MIT; nothing from it is a build dependency.
-XMAGE_REF  ?= 6b602a1c85e8ed738a4b40b1ef44c54845b57f68
+XMAGE_REF  ?= 4142596fb72b9dc03a0eae0ec34f4544cfd6d59e
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
