@@ -222,6 +222,12 @@ func adjudicateRun(scenPath, verdictDir string, frows map[string]ForgeRow,
 			skip("no committed verdict row")
 			return nil
 		}
+		if vr.FromForge() {
+			// A Forge-only verdict has no V(G,X) leg until XMage compares
+			// the card, so it can neither be classified nor ledgered.
+			skip("Forge verdict row (no V(G,X) leg until XMage compares it)")
+			return nil
+		}
 		rep.Status = vr.Status
 		if vr.ScenarioSHA != sha {
 			skip("verdict is for an older scenario (scenario_sha " + short12(vr.ScenarioSHA) + ")")
