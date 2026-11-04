@@ -26,9 +26,9 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
-# Forge oracle driver commit (fork, branch oracle-harness-setup-unlesspay): a descendant of FORGE_REF with identical script trees.
-# ae20dc5992c1 = 00b67773 + the setup unless-pay answer (during setup placement, pay a shock land's "pay 2 life or it enters tapped", as gorge's setup drive and XMage do), keeping 00b67773's df3c93c8e41 corpus and card/token trees.
-FORGE_ORACLE_REF ?= ae20dc5992c1187b090d08ad1c08e30fd0f342e0
+# Forge oracle driver commit (fork, branch oracle-harness-trek5): a descendant of FORGE_REF with identical script trees.
+# fc3ad96bff = ae20dc5992 + gorge-trek5 (Card-Forge master da66fb1ac4: The Duras Sisters prints 3/2), keeping FORGE_REF's cardsfolder and tokenscripts trees.
+FORGE_ORACLE_REF ?= fc3ad96bff8db43648070312a4e5f838bd7ed539
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 .PHONY: help
