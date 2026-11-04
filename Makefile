@@ -26,9 +26,9 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
-# Forge oracle driver commit (fork, branch oracle-harness-trek4): a descendant of FORGE_REF with identical script trees.
-# 6c682e0ad20 = the oracle-harness driver f8682f9e54 merged with gorge's FORGE_REF df3c93c8e41 (gorge-trek4).
-FORGE_ORACLE_REF ?= 6c682e0ad20ffc742c8c7e3127e9bc6744b8cf0b
+# Forge oracle driver commit (fork, branch oracle-harness-castmode4-trek4): a descendant of FORGE_REF with identical script trees.
+# 00b67773a7b3 = oracle-harness-trek4 6c682e0ad20 merged with oracle-harness-castmode4 b5ef8ee8 (cast_mode following, history-free setup, payment following gorge's mana, look_ack, Saga lore and the trigger-order tie-break), keeping the df3c93c8e41 corpus.
+FORGE_ORACLE_REF ?= 00b67773a7b36c49bf0ec01c5d99c0d33943cea6
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 .PHONY: help
