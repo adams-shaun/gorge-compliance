@@ -6,14 +6,14 @@
   "scenarios": [
     {
       "name": "creature-entry-trigger-fires-an-additional-time",
-      "cr": ["603.2", "614.5"],
-      "why": "If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time: Savannah Lions entering causes Welcoming Vampire's draw trigger twice, drawing two cards.",
+      "cr": ["603.2d"],
+      "why": "Panharmonicon affects a permanent's own enters-the-battlefield triggered abilities as well as other abilities that trigger when that permanent enters: Elvish Visionary entering causes its own draw trigger to fire an additional time, drawing two cards.",
       "setup": {
-        "p0": {"battlefield": ["Panharmonicon", "Welcoming Vampire"], "hand": ["Savannah Lions"], "library_top": ["Forest", "Island", "Mountain"]},
+        "p0": {"battlefield": ["Panharmonicon"], "hand": ["Elvish Visionary"], "library_top": ["Forest", "Island", "Mountain"]},
         "p1": {}
       },
       "steps": [
-        {"op": "cast", "seat": 0, "card": "p0:Savannah Lions", "mana": "W"},
+        {"op": "cast", "seat": 0, "card": "p0:Elvish Visionary", "mana": "CG"},
         {"op": "resolve"}
       ],
       "expect": [
@@ -22,10 +22,26 @@
     },
     {
       "name": "without-it-the-trigger-fires-once",
-      "cr": ["603.2"],
-      "why": "Control: with no Panharmonicon in play the same entering creature draws only one card.",
+      "cr": ["603.2c"],
+      "why": "Control: with no Panharmonicon in play the same entering creature's own draw trigger fires only once.",
       "setup": {
-        "p0": {"battlefield": ["Welcoming Vampire"], "hand": ["Savannah Lions"], "library_top": ["Forest", "Island"]},
+        "p0": {"hand": ["Elvish Visionary"], "library_top": ["Forest", "Island"]},
+        "p1": {}
+      },
+      "steps": [
+        {"op": "cast", "seat": 0, "card": "p0:Elvish Visionary", "mana": "CG"},
+        {"op": "resolve"}
+      ],
+      "expect": [
+        {"hand_size": {"p0": 1}}
+      ]
+    },
+    {
+      "name": "once-per-turn-trigger-is-not-doubled",
+      "cr": ["603.2d"],
+      "why": "Welcoming Vampire's ability says it triggers only once each turn. CR 603.2d has the game determine how many times the ability should trigger, and that restriction caps the count at one, so Savannah Lions entering draws one card, not two.",
+      "setup": {
+        "p0": {"battlefield": ["Panharmonicon", "Welcoming Vampire"], "hand": ["Savannah Lions"], "library_top": ["Forest", "Island", "Mountain"]},
         "p1": {}
       },
       "steps": [
