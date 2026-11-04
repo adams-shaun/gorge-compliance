@@ -10,6 +10,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"os"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/gate"
@@ -56,7 +57,9 @@ func runForgeVerdicts(args []string) error {
 		printCounts("forge-verdicts", counts)
 		fmt.Printf("forge-verdicts: wrote %d, kept %d (an XMage comparison stands)\n", wrote, kept)
 	}
-	fmt.Println("record the split: go run -trimpath ./cmd/oraclediff status -all -sets <SETS> -write-ratchet")
+	// The set list is the caller's, so this reminder goes to stderr: a pass
+	// script's stdout summary shows the counts and the wrote/kept line.
+	fmt.Fprintln(os.Stderr, "record the split: go run -trimpath ./cmd/oraclediff status -all -sets <SETS> -write-ratchet")
 	return nil
 }
 

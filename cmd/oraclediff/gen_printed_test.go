@@ -22,7 +22,12 @@ func TestGenPrintedAddsCardsXMageLacks(t *testing.T) {
 	m := compliance.Manifest{Code: "ZZP", Cards: []compliance.ManifestCard{
 		{Name: "Shock"}, {Name: "Lightning Bolt"},
 	}, Unfinished: []string{"Lightning Bolt"}}
-	pr := compliance.Printed{Code: "ZZP", Cards: []string{"Shock", "Lightning Bolt", "Giant Growth"}}
+	// The last name is a punctuation alias: it resolves to the corpus's
+	// "With Great Power . . .", so the alias differs from the generated
+	// spelling. That is what makes a missing !PrintedOnly stamp guard fail.
+	pr := compliance.Printed{Code: "ZZP", Cards: []string{
+		"Shock", "Lightning Bolt", "Giant Growth", "With Great Power...",
+	}}
 	tmp := t.TempDir()
 
 	plain := filepath.Join(tmp, "plain.jsonl")
@@ -38,31 +43,38 @@ func TestGenPrintedAddsCardsXMageLacks(t *testing.T) {
 		t.Fatal(err)
 	}
 	got := readLinesBytes(t, printed)
-	if len(got) != 3 {
-		t.Fatalf("printed gen wrote %d lines, want 3", len(got))
+	if len(got) != 4 {
+		t.Fatalf("printed gen wrote %d lines, want 4", len(got))
 	}
-	var giant oraclegen.Item
-	found := false
+	items := map[string]oraclegen.Item{}
 	for _, b := range got {
 		var it oraclegen.Item
 		if err := json.Unmarshal(b, &it); err != nil {
 			t.Fatal(err)
 		}
-		if it.Card == "Giant Growth" {
-			giant, found = it, true
+		items[it.Card] = it
+	}
+	for _, tc := range []struct {
+		printed, corpus string
+	}{
+		{"Giant Growth", "Giant Growth"},
+		// gen writes the corpus spelling and must not stamp the printed alias
+		// on it: XMage has neither spelling.
+		{"With Great Power...", "With Great Power . . ."},
+	} {
+		it, ok := items[tc.corpus]
+		if !ok {
+			t.Fatalf("printed gen did not write %q (printed as %q)", tc.corpus, tc.printed)
 		}
-	}
-	if !found {
-		t.Fatal("printed gen did not write Giant Growth")
-	}
-	if giant.XMageName != "" {
-		t.Errorf("Giant Growth carries xmage_name %q; XMage has no such card", giant.XMageName)
-	}
-	want, skip := templates.Generate(reg, "Giant Growth")
-	if skip != nil {
-		t.Fatal(skip.Reason)
-	}
-	if gate.ItemSHA(giant) != gate.ItemSHA(want) {
-		t.Errorf("Giant Growth's scenario sha differs from templates.Generate's")
+		if it.XMageName != "" {
+			t.Errorf("%q carries xmage_name %q; XMage has no such card", tc.corpus, it.XMageName)
+		}
+		want, skip := templates.Generate(reg, tc.corpus)
+		if skip != nil {
+			t.Fatal(skip.Reason)
+		}
+		if gate.ItemSHA(it) != gate.ItemSHA(want) {
+			t.Errorf("%q's scenario sha differs from templates.Generate's", tc.corpus)
+		}
 	}
 }

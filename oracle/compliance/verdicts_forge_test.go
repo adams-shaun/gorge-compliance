@@ -143,13 +143,25 @@ func TestMergeVerdictsXMageSupersedesForge(t *testing.T) {
 }
 
 // TestMergeForgeVerdictsRowJSON pins the privacy rule: a merged row carries no
-// field a Forge snapshot could fill.
+// field a Forge snapshot could fill. xmage_ref has no omitempty (it is part of
+// every committed XMage row's bytes), so the rule is checked on the value, not
+// on the key's presence; the remaining fields are omitted entirely when empty.
 func TestMergeForgeVerdictsRowJSON(t *testing.T) {
 	b, err := json.Marshal(forgeAgree("Shock", "cast-resolve", "s"))
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, forbidden := range []string{`"detail"`, `"msg"`, `"xmage"`, `"gorge"`, `"ruling"`, `"xmage_ref"`, `"review"`} {
+	var got VerdictRow
+	if err := json.Unmarshal(b, &got); err != nil {
+		t.Fatal(err)
+	}
+	if got.Detail != "" || got.Ruling != "" || got.RulingID != "" || got.Review != "" || got.XMageRef != "" {
+		t.Errorf("Forge row carries a field only a comparison can fill: %s", b)
+	}
+	if got.Source != SourceForge {
+		t.Errorf("source = %q, want %q: %s", got.Source, SourceForge, b)
+	}
+	for _, forbidden := range []string{`"detail"`, `"msg"`, `"xmage"`, `"gorge"`, `"ruling"`, `"review"`} {
 		if strings.Contains(string(b), forbidden) {
 			t.Errorf("Forge row JSON carries %s: %s", forbidden, b)
 		}

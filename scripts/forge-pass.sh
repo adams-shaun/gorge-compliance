@@ -183,9 +183,12 @@ for s in "$@"; do
 		echo "$s: forge-diff FAILED"; tail -3 "$d/diff.log"; rc=1; continue
 	fi
 	if [ "$verdicts" = 1 ]; then
+		# The subcommand's set-list reminder goes to stderr, which the real
+		# reminder after adjudicate replaces; stdout shows the counts and the
+		# wrote/kept line.
 		if ! "$od" forge-verdicts -scenarios "$d/scen.jsonl" -forge-diff "$d/forge-diff.jsonl" \
-			-oracle-ref "$oref" -driver "$drv" >"$d/verdicts.log" 2>&1; then
-			echo "$s: FAILED forge-verdicts"; tail -3 "$d/verdicts.log"; rc=1; continue
+			-oracle-ref "$oref" -driver "$drv" >"$d/verdicts.log" 2>"$d/verdicts.err"; then
+			echo "$s: FAILED forge-verdicts"; cat "$d/verdicts.log" "$d/verdicts.err" | tail -3; rc=1; continue
 		fi
 		tail -2 "$d/verdicts.log"
 	fi
