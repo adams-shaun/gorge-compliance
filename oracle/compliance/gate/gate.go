@@ -31,7 +31,7 @@ import (
 func LevelMeaning(level string) string {
 	switch level {
 	case "A":
-		return "level A: every card is fully supported and its generated cast-and-resolve, play-land or counter-spell scenario agrees with XMage (or a ruled divergence, or a hand oracle scenario passes); activated abilities, trigger modes, attacks/blocks and statics are NOT exercised (level B)"
+		return "level A: every card is fully supported and its generated cast-and-resolve, play-land or counter-spell scenario agrees with XMage (or a ruled divergence, or a hand oracle scenario passes); activated abilities, trigger modes, attacks/blocks and statics are NOT exercised (level B); a card XMage has not compared may instead pass on a scenario that agrees with Forge (a Forge-only verdict, counted separately: it checks gorge's reading of Forge's card script, not the script)"
 	case "B":
 		return "level B: level A plus one generated scenario per activated ability, trigger mode, static and attack/block, each compared with XMage; a requirement that no v1 template serves (an unusual activation zone, a trigger mode outside the recipe table, a cost or legality static, a face after 0) is a template gap and waits for its template"
 	}
@@ -198,6 +198,22 @@ func Check(reg *cards.Registry, root, set, level string) ([]Problem, error) {
 	return checkLevel(reg, root, set, level, nil)
 }
 
+// Passing counts the cards a level-A check passed, by what passed them: an
+// XMage row, a Forge-only row, or a hand-authored scenario. Basic lands,
+// which isBasicLand skips, are in none.
+type Passing struct {
+	XMage int
+	Forge int
+	Hand  int
+}
+
+// CheckPassing is the level-A check with its passing split. Check keeps its
+// signature and returns the same problems.
+func CheckPassing(reg *cards.Registry, root, set string) ([]Problem, Passing, error) {
+	probs, _, _, pass, err := checkA(reg, root, set, nil)
+	return probs, pass, err
+}
+
 // SetProblems is one declared set's piece of a CheckDeclared result.
 type SetProblems struct {
 	Set      string
@@ -237,7 +253,7 @@ func CheckDeclared(reg *cards.Registry, root string, declared map[string]string)
 func checkLevel(reg *cards.Registry, root, set, level string, sh *sharedTables) ([]Problem, error) {
 	switch level {
 	case "A":
-		probs, _, _, err := checkA(reg, root, set, sh)
+		probs, _, _, _, err := checkA(reg, root, set, sh)
 		return probs, err
 	case "B":
 		return checkB(reg, root, set, sh)
@@ -390,6 +406,12 @@ func rowOK(reg *cards.Registry, it oraclegen.Item, rows map[string]compliance.Ve
 	case !ok:
 		bad(it.Card, "no verdict for %s", it.ID)
 		return false
+	case r.FromForge() && strings.Contains(it.Template, "#"):
+		bad(it.Card, "forge verdict (%s) counts at level A only", it.Template)
+		return false
+	case r.FromForge() && r.Status != compliance.StatusAgree:
+		bad(it.Card, "forge verdict %s (%s) counts only as agree", r.Status, it.Template)
+		return false
 	case r.Status != compliance.StatusAgree && r.Status != compliance.StatusXMageWrong:
 		if r.RulingID != "" {
 			bad(it.Card, "verdict %s (%s) [ruling %s]: %s", r.Status, it.Template, r.RulingID, r.Detail)
@@ -413,15 +435,27 @@ func rowOK(reg *cards.Registry, it oraclegen.Item, rows map[string]compliance.Ve
 	return true
 }
 
+// forgeRowA reports whether the card has any level-A Forge-only verdict, so
+// a card XMage has not compared is still generated and checked.
+func forgeRowA(rows map[string]compliance.VerdictRow) bool {
+	for _, r := range rows {
+		if rowCountsAtLevel(r, "A") && r.FromForge() {
+			return true
+		}
+	}
+	return false
+}
+
 // checkA runs the level-A checks over set and returns the problems, the
-// scan both levels share, and the set of cards that had NO level-A problem
-// (so level B skips them wholesale).
-func checkA(reg *cards.Registry, root, set string, sh *sharedTables) ([]Problem, *setScan, map[string]bool, error) {
+// scan both levels share, the set of cards that had NO level-A problem (so
+// level B skips them wholesale), and the passing split.
+func checkA(reg *cards.Registry, root, set string, sh *sharedTables) ([]Problem, *setScan, map[string]bool, Passing, error) {
 	scan, out, err := loadSet(reg, root, set, sh)
 	if err != nil {
-		return nil, nil, nil, err
+		return nil, nil, nil, Passing{}, err
 	}
 	okA := map[string]bool{}
+	pass := Passing{}
 	bad := func(card, format string, a ...any) {
 		out = append(out, Problem{card, fmt.Sprintf(format, a...)})
 	}
@@ -471,10 +505,11 @@ func checkA(reg *cards.Registry, root, set string, sh *sharedTables) ([]Problem,
 			continue
 		}
 		if scan.hand[name] || scan.hand[face] {
+			pass.Hand++
 			continue
 		}
-		if !scan.inXMage[compliance.FoldName(printed)] || lacks {
-			bad(name, "XMage does not implement it; needs a hand-authored oracle scenario")
+		if (!scan.inXMage[compliance.FoldName(printed)] || lacks) && !forgeRowA(rows) {
+			bad(name, "XMage does not implement it; needs a hand-authored oracle scenario or a Forge verdict")
 			continue
 		}
 		it, skip := templates.Generate(reg, face)
@@ -493,10 +528,15 @@ func checkA(reg *cards.Registry, root, set string, sh *sharedTables) ([]Problem,
 		if !rowOK(reg, it, rows, badName) {
 			continue
 		}
+		if rows[it.Template].FromForge() {
+			pass.Forge++
+		} else {
+			pass.XMage++
+		}
 		okA[name] = true
 	}
 	sort.Slice(out, func(i, j int) bool { return out[i].Card < out[j].Card })
-	return out, scan, okA, nil
+	return out, scan, okA, pass, nil
 }
 
 func isBasicLand(c *cards.Card) bool {
