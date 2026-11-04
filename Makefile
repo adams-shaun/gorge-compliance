@@ -26,9 +26,9 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
-# Forge oracle driver commit (fork, branch oracle-harness-trek5): a descendant of FORGE_REF with identical script trees.
-# fc3ad96bff = ae20dc5992 + gorge-trek5 (Card-Forge master da66fb1ac4: The Duras Sisters prints 3/2), keeping FORGE_REF's cardsfolder and tokenscripts trees.
-FORGE_ORACLE_REF ?= fc3ad96bff8db43648070312a4e5f838bd7ed539
+# Forge oracle driver commit (fork, branch oracle-harness-trek6): a descendant of FORGE_REF with identical script trees.
+# e2c55e8dfc = oracle-harness-trek5 + gorge-trek6 (84ce1603d9: 70,000 Light-Years from Home's land to hand; Captain Michael Burnham is a Human Officer), keeping FORGE_REF's cardsfolder and tokenscripts trees.
+FORGE_ORACLE_REF ?= e2c55e8dfc310f57232ed4d1f62b1d5c565b9efd
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 .PHONY: help
