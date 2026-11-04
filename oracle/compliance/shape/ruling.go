@@ -222,7 +222,8 @@ func rowEqual(a, b compliance.VerdictRow) bool {
 	if a.Card != b.Card || a.Template != b.Template || a.ID != b.ID ||
 		a.ScenarioSHA != b.ScenarioSHA || a.XMageRef != b.XMageRef ||
 		a.Status != b.Status || a.CanonSHA != b.CanonSHA || a.Detail != b.Detail ||
-		a.Ruling != b.Ruling || a.RulingID != b.RulingID || a.Review != b.Review {
+		a.Ruling != b.Ruling || a.RulingID != b.RulingID || a.Review != b.Review ||
+		a.Source != b.Source || a.ForgeRef != b.ForgeRef || a.ForgeDriver != b.ForgeDriver {
 		return false
 	}
 	if (a.Frozen == nil) != (b.Frozen == nil) || len(a.Frozen) != len(b.Frozen) {
