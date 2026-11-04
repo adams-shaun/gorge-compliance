@@ -17,11 +17,15 @@ import (
 // fixtureCensus and the template oracleCorpusCarriers ratchet.
 //
 // Measured 2026-10-05 at the corpus pin the brief names. The whole-corpus
-// counts match /usr/bin/grep -rlF over .cards/cardsfolder (132 and 45); the
+// counts match /usr/bin/grep -rlF over .cards/cardsfolder (133 and 45); the
 // audit-set arm counts the carriers among censusSets' manifests, so a set
 // rotation or a new carrier names itself.
+//
+// Re-measured 2026-11-04 at FORGE_REF df3c93c8e41 (gorge-trek4, the corpus of
+// gorge c6675816f): DividedAsYouChoose 132 -> 133; the audit-set arm is
+// unchanged at 17.
 const (
-	dividedAsYouChooseTotal = 132
+	dividedAsYouChooseTotal = 133
 	comboAnyTotal           = 45
 	dividedAsYouChooseAudit = 17
 	comboAnyAudit           = 7

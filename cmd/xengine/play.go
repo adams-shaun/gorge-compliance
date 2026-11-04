@@ -86,6 +86,7 @@ func runPlay(args []string) error {
 	random := fs.String("random", "", "set codes, space or comma separated: draw the decks at random across these sets, ignoring the ledger; -set only names the run in the item ids")
 	forgeOnly := fs.String("forge-only", "", "with -random, a file of card names, one per line, to add to the cross-set deal: a set XMage has no class for, so its items go to Forge alone")
 	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays")
+	diracEvery := fs.Int("dirac-every", 2, "with -random and -dirac, every K-th game (game g with g%K == K-1) draws from one set's dirac-playable cards; 1 makes every game one dirac plays beside gorge, so all four engines see every deck")
 	out := fs.String("out", "", "output dir (default under "+DefaultRoot+")")
 	fs.Parse(args)
 	if *set == "" {
@@ -93,6 +94,9 @@ func runPlay(args []string) error {
 	}
 	if *games < 1 || *chunk < 0 {
 		return fmt.Errorf("play needs -games >= 1 and -chunk >= 0")
+	}
+	if *diracEvery < 1 {
+		return fmt.Errorf("play needs -dirac-every >= 1")
 	}
 	turns, err := parseTapeTurns(*tapeTurns)
 	if err != nil {
@@ -132,7 +136,7 @@ func runPlay(args []string) error {
 			}
 			extra, _ = decks.CandidatesNamed(reg, nonEmptyLines(string(b)), opts)
 		}
-		pick, err = randomPicker(reg, *manifests, strings.Fields(strings.ReplaceAll(*random, ",", " ")), opts, tables, extra)
+		pick, err = randomPicker(reg, *manifests, strings.Fields(strings.ReplaceAll(*random, ",", " ")), opts, tables, extra, *diracEvery)
 	} else {
 		pick, err = setPicker(reg, *manifests, *set, led, opts, tables)
 	}
@@ -171,9 +175,9 @@ func setPicker(reg *cards.Registry, manifests, set string, led *cov.Ledger, opts
 }
 
 // randomPicker draws decks with no regard to the ledger: from the union of the
-// sets' candidates and extra, and with tables every odd game from one set's cards its dirac
-// table plays, since no table holds cards of two sets.
-func randomPicker(reg *cards.Registry, manifests string, sets []string, opts decks.Options, tables *dside.Tables, extra []decks.Card) (picker, error) {
+// sets' candidates and extra, and with tables every diracEvery-th game (see diracGame)
+// from one set's cards its dirac table plays, since no table holds cards of two sets.
+func randomPicker(reg *cards.Registry, manifests string, sets []string, opts decks.Options, tables *dside.Tables, extra []decks.Card, diracEvery int) (picker, error) {
 	var lists [][]decks.Card
 	type tableSet struct {
 		code  string
@@ -205,13 +209,18 @@ func randomPicker(reg *cards.Registry, manifests string, sets []string, opts dec
 		return nil, fmt.Errorf("-dirac: no set of %v has a dirac table that can build decks", sets)
 	}
 	return func(g int, seed uint64) ([]decks.Card, *cov.Ledger, string) {
-		if tables != nil && g%2 == 1 {
+		if tables != nil && diracGame(g, diracEvery) {
 			s := bySet[rand.New(rand.NewPCG(seed, uint64(g))).IntN(len(bySet))]
 			return s.cands, nil, s.code
 		}
 		return union, nil, ""
 	}, nil
 }
+
+// diracGame reports whether game g of a random chunk is dealt from one set's dirac
+// table: every every-th game, the last of each run of every. every 2 is the odd
+// games; 1 is all of them, so every deck is one dirac plays in lockstep.
+func diracGame(g, every int) bool { return g%every == every-1 }
 
 func diracTablesHint(err error) error {
 	if dside.NoTables(err) {

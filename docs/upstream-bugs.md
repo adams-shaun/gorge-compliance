@@ -50,21 +50,40 @@ Our fork, adams-shaun/mage, branch `gorge`, is magefree master plus the open fix
 
 Earlier: 27 issues and 22 merged PRs on Card-Forge/forge, 2026-10-06 to 2026-10-28, all closed: `gh search issues --repo Card-Forge/forge --author adams-shaun`.
 
-Confirmed, not filed (source read at master 0a8c52d00c; nothing filed yet):
+Source read at Card-Forge/forge master 7c34365c74 (2026-11-03). "Our fork" is adams-shaun/forge, branch `gorge` (e59046060a); every file named below is byte-identical there to master, so none of these is fixed on the fork unless the row says so.
 
-| Card or class | What Forge does | Rule |
-|---|---|---|
-| Combat whose attackers all left | `PhaseHandler` skips declare blockers and damage when no attacker remains; `removeFromCombat` empties the live set | CR 506.1, 508.8, 117.3a |
-| Combat damage with nothing assigned | `PhaseHandler` gives no priority when `assignCombatDamage` assigns nothing, as with a 0-power attacker | CR 510.3, 510.4 |
-| Bucolic Ranch, Cabaretti Ascendancy, Kenessos, Hurkyl, Loyal Inventor | `ChangeZoneEffect` shuffles on Library to Library unless the script says `NoShuffle$`; the `Defined$` branch never clears it | CR 701.24, Oracle text |
-| Hollow Marauder | `AbilityUtils.doXMath` splits its operand on every `.`, so `Minus.Remembered$Valid Card.cmcGE4` reads 0 | Oracle text |
-| Time Stop and kin | `onStackResolved` gives priority after `endTurnByEffect` has entered cleanup | CR 724.1f, 514.3 |
-| Adrenaline Jockey | `Defined$ TriggeredPlayer` on a SpellCast trigger, which sets only the activator | Oracle text |
-| Primo, the Indivisible's token | `Colors:green, blue` has a space, so the token is green only | Printed card |
+### Filed 2026-11-03
 
-Reading the rules and not traced in the source: Unwilling Vessel and Erratic Apparition's "enchantment enters" trigger fires in Forge and XMage when the entering Aura strips the ability (CR 603.6a, 603.10; gorge doesn't fire). Lifecraft Engine after crew: Forge's existing Card-Forge/forge#7128; XMage fixed it in magefree/mage#16484.
+All filed after an independent recheck; texts in the operator's triage store, none reproduced in a running game beyond the harness rows named.
 
-Reported and open:
+| Upstream | Card or class | What Forge does | Rule | Our fork |
+|---|---|---|---|---|
+| Card-Forge/forge#12588 | Adrenaline Jockey | `Defined$ TriggeredPlayer` on a SpellCast trigger, which sets only the activator | Oracle text | not fixed |
+| Card-Forge/forge#12589 | Bucolic Ranch, Cabaretti Ascendancy, Kenessos, Hurkyl, Loyal Inventor | `ChangeZoneEffect` shuffles on Library to Library unless the script says `NoShuffle$`; the `Defined$` branch never clears it | CR 701.24, Oracle text | not fixed |
+| Card-Forge/forge#12590 | Combat whose attackers all left | `PhaseHandler.isSkippingPhase` (COMBAT_DECLARE_BLOCKERS) skips declare blockers and both damage steps when `combat.getAttackers()` is empty, and `removeFromCombat` empties the live set; the rule skips them only when no creature was declared. 50 random2 rows | CR 506.1, 508.8, 117.3a | not fixed |
+| Card-Forge/forge#12591 | Hollow Marauder | `AbilityUtils.doXMath` splits its operand on every `.`, so `Minus.Remembered$Valid Card.cmcGE4` reads 0 | Oracle text | not fixed |
+| Card-Forge/forge#12592 | Primo, the Indivisible's token (via Zimone, All-Questioning) | `tokenscripts/primo_the_indivisible.txt` has `Colors:green, blue`; `ColorSet.fromNames` does not trim, so the token is green only. The only token script with a space after the comma. Harness row xe:RAND:59:1:w10 | CR 105.2, printed card | not fixed |
+| Card-Forge/forge#12593 | Time Stop and kin | `onStackResolved` gives priority after `endTurnByEffect` has entered cleanup | CR 724.1f, 514.3 | not fixed |
+| Card-Forge/forge PR comments: #12466, #12409, #12487 | Open Trek script PRs: Enterprise NX-01 (`ValidgTgtsDesc$` typo), Erica Ortegas (`SVarDBDelTrig` missing colon, so the delayed return never exists), Seven of Nine (`DBimmediateTrig` vs `DBImmediateTrig`, SVars are case-sensitive), U.S.S. Enterprise-C (`Execute$ TrigToken` but only `TrigDiscard` exists), Infinite Diversity (`YoupOwn` for `YouOwn`) | script typos, read at each PR head on 2026-11-02 | Oracle text | fixed: branch `gorge-trek2` (66757752dc) carries the five scripts without the typos |
+
+### Confirmed, not filed
+
+| Card or class | What Forge does | Rule | Source | Our fork |
+|---|---|---|---|---|
+| Combat damage with nothing assigned after first strike | `PhaseHandler.onPhaseBegin` COMBAT_DAMAGE sets `givePriorityToPlayer = false` when `assignCombatDamage(false)` assigns nothing, so a lone first striker gets no priority in the second combat damage step. 12 random3 rows (`forge_skips_damage_step`); gorge gives the round | CR 510.4, 117.3a | forge-game/.../phase/PhaseHandler.java lines 335-341; also the same shape for a 0-power attacker (CR 510.3) | not fixed |
+| Parting Gust and any ChangeZone with `WithCountersType$` | `ChangeZoneEffect` passes `sa.getActivatingPlayer()` as the player who puts the entry counters (lines 610-615, 750-754, 1337-1340, 1640-1647, unless the script sets `WithCountersPlacer$`); with no placer the rule says the object's controller does, so a counter-doubling effect of the wrong player applies | CR 122.6a | forge-game/.../ability/effects/ChangeZoneEffect.java; seen on blb Parting Gust (fl-nstack2); the effect on a game was not replayed here | not fixed |
+| Any player at 0 life when a state-based check starts | `GameAction.checkStateEffects` calls `checkGameOverCondition` first and returns when the game is over, before the loop performs the other state-based actions of the same check; The Darkness Crystal's exile-and-gain is lost. Final board and life only, and the early return is deliberate; held back from filing | CR 704.3, 704.5a | forge-game/.../GameAction.java:1424-1429 | not fixed |
+
+### Reading the rules and not traced in the source
+
+- Unwilling Vessel and Erratic Apparition: the "enchantment enters" trigger fires in Forge and XMage when the entering Aura strips the ability (CR 603.6a, 603.10; gorge doesn't fire). Erratic Apparition with Unable to Scream enchanting itself is harness row xe:RAND:426:11:w10. Neither engine's trigger collection was read line by line (Forge: ChangesZone trigger before the static re-layer; XMage: `ErraticApparition.java` via the EntersBattlefield event), so this stays a suspect.
+- Lifecraft Engine after crew: Forge's existing Card-Forge/forge#7128; XMage fixed it in magefree/mage#16484 (our comment on #13565). 12 random2 rows; gorge follows CR 613.8a.
+
+### Looked at and dropped
+
+- Convoke followed by a sacrifice: `CostAdjustment.adjustCostByConvokeOrImprovise` taps the convoke creatures while the cost is adjusted, before mana abilities run, and nothing in the sacrifice-candidate filter reads `SpellAbility.getTappedForConvoke` (its only readers are the AI and trigger code), so Forge lets a creature tapped for convoke be sacrificed to a mana ability in the same payment. gorge refuses it (CR 601.2g-h order). The Comprehensive Rules do not plainly forbid Forge's order (601.2h allows any order), so this is a divergence, not a confirmed Forge bug, and it has no row.
+
+### Reported and open
 
 | Upstream | Card | What it does |
 |---|---|---|

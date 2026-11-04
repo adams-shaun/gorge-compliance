@@ -60,8 +60,7 @@
      "eq": 1
     }
    ],
-   "xmage": "ClergyOfTheHolyNimbusTest#testBasicRegeneration",
-   "known_bug": "XP[repl-destroy-regeneration-unsupported]: card-script gap, coverage gate flags Clergy[api:Regeneration,repl:Destroy,stat:CantRegenerate]; R:Event$ Destroy | Regeneration$ True has no replacement class (engine/rules/replacement.go:701 replacementEventKind has no Destroy event) and destruction only consumes Shield counters (engine/effects/regeneration.go:49), so Doom Blade destroys it (.cards/cardsfolder/c/clergy_of_the_holy_nimbus.txt). CR 701.19a, 614.8."
+   "xmage": "ClergyOfTheHolyNimbusTest#testBasicRegeneration"
   },
   {
    "name": "test-cannot-be-regenerated-spell",

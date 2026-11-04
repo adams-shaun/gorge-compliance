@@ -48,6 +48,13 @@ const (
 	// combat that had one keeps its steps and the players priority in each
 	// (CR 506.1, 509.1, 510.1, 117.3a). The item's passes then run out of step
 	// with Forge, so nothing past that checkpoint is compared.
+	//
+	// The common case is a first-strike combat where no creature lacks first
+	// strike: CR 510.4 still gives a second combat damage step, but Forge's
+	// COMBAT_DAMAGE phase assigns nothing and so gives no priority
+	// (PhaseHandler.onPhaseBegin, COMBAT_DAMAGE). In a sample of twelve such
+	// rows every attacker was a lone first striker; the driver cannot supply
+	// the priority round, since it only answers the priorities Forge gives.
 	ClassForgeSkipsDamageStep = "forge_skips_damage_step"
 	ClassRNG                  = "rng"
 	ClassProjectionGap        = "projection_gap"
@@ -136,6 +143,9 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	case forgeIgnoresCastMode(item, v, f.Step, engine) != "":
 		f.Class = ClassHarness
 		f.Msg = "forge: " + forgeIgnoresCastMode(item, v, f.Step, engine)
+	case xmageSameNameTriggerOrder(item, v, f.Step, engine) != "":
+		f.Class = ClassHarness
+		f.Msg = "xmage: " + xmageSameNameTriggerOrder(item, v, f.Step, engine)
 	case paymentChoice(item, g, x, v, f.Step, engine):
 		f.Class = ClassPaymentChoice
 		f.Msg = "pool split after a cast/activate whose payment was not fixed"
@@ -264,13 +274,17 @@ func forgeStopsInCleanup(x oraclediff.XResult, v oraclediff.Verdict, d int, engi
 	return x.Snapshots[d+1].Step == "cleanup" && (v.Field == "turn" || v.Field == "step")
 }
 
-// forgeElectedCastModes are the cast_mode values the Forge driver can act on.
-// Its cast step takes the card's first spell ability (StepMachine.spellFor) and
-// never reads cast_mode, so a card cast as an adventure, an omen, a plotted
-// card, kicked or with offspring is cast the ordinary way, and an optional cost
-// reaches it only as a decision gorge logged. Only the ordinary cast and the
-// optional-cost election the request carries as a decision are followed.
-var forgeElectedCastModes = []string{"", "optionalcost"}
+// forgeElectedCastModes are the cast_mode values the Forge driver can act on:
+// StepMachine.spellForMode picks the plot special action, an Adventure or Omen
+// half, a modal back face or a warp cast out of Card.getAllPossibleAbilities,
+// and the optional-cost modes pay the kicker, buyback, entwine, offspring or
+// replicate they name. Any other mode (flashback, foretell, escape, ...) is
+// still cast the ordinary way, so the driver takes the card's first spell
+// ability and the difference after it is the driver's gap.
+var forgeElectedCastModes = []string{"", "optionalcost",
+	"plot", "adventure_alt", "omen_alt", "modal_spell", "warped",
+	"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined",
+	"offspring", "replicated", "multikicked"}
 
 // forgeIgnoresCastMode names, for a Forge difference at step d, the first cast
 // step at or before d whose cast_mode the driver does not follow. From that
@@ -287,6 +301,38 @@ func forgeIgnoresCastMode(item lower.Lowered, v oraclediff.Verdict, d int, engin
 		}
 		if st.Op == "cast" && !slices.Contains(forgeElectedCastModes, st.CastMode) {
 			return fmt.Sprintf("the driver does not follow cast_mode %q (step %d, %s)", st.CastMode, i, st.Card)
+		}
+	}
+	return ""
+}
+
+// xmageSameNameTriggerOrder names, for an XMage difference at step d, the first
+// step at or before d that orders simultaneous triggers from objects with one
+// name. XMage's driver matches a scripted trigger order by the ability's rule
+// text or its source's name, so two such triggers (two Otter tokens with
+// Prowess, one holding a counter) cannot be told apart and XMage orders them
+// itself; from there its game differs by the driver's gap, not by a rule.
+// "" for anything else.
+func xmageSameNameTriggerOrder(item lower.Lowered, v oraclediff.Verdict, d int, engine string) string {
+	if engine != "xmage" || v.Status != oraclediff.Diverge || d < 0 {
+		return ""
+	}
+	for i, st := range item.Item.Steps {
+		if i > d {
+			break
+		}
+		for _, a := range st.Answers {
+			if a.Kind != "trigger_order" {
+				continue
+			}
+			seen := map[string]bool{}
+			for _, p := range a.Pick {
+				n := oraclediff.RefName(p)
+				if seen[n] {
+					return fmt.Sprintf("the driver cannot order triggers of objects named %q apart (step %d)", n, i)
+				}
+				seen[n] = true
+			}
 		}
 	}
 	return ""

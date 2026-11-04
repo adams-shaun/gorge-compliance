@@ -167,7 +167,7 @@ func fields(s rules.OracleSnapshot, xmage bool, compare []string) []field {
 	}
 	out = append(out,
 		field{"permanents", strings.Join(permKeysOpts(s.Permanents, compare), "\n")},
-		field{"stack", stackKeys(s.Stack)},
+		field{"stack", stackKeysOf(s.Stack, s.Permanents)},
 	)
 	if wantsCompare(compare, CompareOffered) {
 		out = append(out, field{"offered", offeredKeys(s.Offered)})
@@ -337,6 +337,11 @@ func counters(m map[string]int32) string {
 			continue
 		}
 		nk := normCounter(k)
+		if nk == "DEATHTOUCHED" {
+			// gorge's own marker for damage from a deathtouch source (CR
+			// 704.5h); neither follower has a counter by that name.
+			continue
+		}
 		if _, ok := agg[nk]; !ok {
 			keys = append(keys, nk)
 		}
@@ -506,10 +511,31 @@ func symDiff(a, b []string) (onlyA, onlyB []string) {
 // source. stackKeys renders all three the same.
 var sourcelessTriggerNames = map[string]bool{"Start Your Engines!": true, "Speed": true}
 
-func stackKeys(st []rules.OracleSnapStack) string {
+func stackKeys(st []rules.OracleSnapStack) string { return stackKeysOf(st, nil) }
+
+// effectIDLabel is the id Forge puts in the name of an Effect object's
+// ability, "Full Throttle (8)'s Effect": the delayed effect a spell creates
+// is its own object there, and gorge names the spell that made it.
+var effectIDLabel = regexp.MustCompile(` \(\d+\)'s Effect$`)
+
+// stackKeysOf renders the stack. A source ref that names a permanent in perms
+// is labelled by that permanent's current name, as the followers label an
+// ability: a copy or a permanent whose name was changed shows its new name,
+// where the ref still holds the name it was set up under (CR 707.2, 613.1a).
+func stackKeysOf(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm) string {
+	current := map[string]string{}
+	for _, p := range perms {
+		if p.Ref != "" && p.Name != "" && !p.Token {
+			current[p.Ref] = p.Name
+		}
+	}
 	parts := make([]string, 0, len(st))
 	for _, s := range st {
 		src := RefName(s.Source)
+		if n, ok := current[s.Source]; ok && s.Kind == "ability" {
+			src = n
+		}
+		src = effectIDLabel.ReplaceAllString(src, "")
 		if s.Kind == "ability" && sourcelessTriggerNames[src] {
 			src = ""
 		}
