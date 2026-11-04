@@ -24,6 +24,11 @@ const (
 	// (a set marks it unfinished). It is the same endpoint as a card missing
 	// from the manifest: the gate's no-XMage bucket, never a harness gap.
 	StatusXMageLacks = "xmage_lacks"
+
+	// SourceForge marks a verdict row Forge's result stands behind: a card
+	// XMage has not compared may pass level A on it. An empty Source is
+	// XMage's row, so every committed row keeps its bytes.
+	SourceForge = "forge"
 )
 
 // VerdictRow is one card x template result (oracle/compliance/verdicts/<a-z>.jsonl).
@@ -33,6 +38,10 @@ type VerdictRow struct {
 	ID          string `json:"id"`
 	ScenarioSHA string `json:"scenario_sha"` // sha256 of the generated scenario line
 	XMageRef    string `json:"xmage_ref"`
+	// Source is "" for XMage's row and SourceForge for a Forge-only verdict.
+	Source      string `json:"source,omitempty"`
+	ForgeRef    string `json:"forge_ref,omitempty"`
+	ForgeDriver string `json:"forge_driver,omitempty"`
 	Status      string `json:"status"`
 	// Frozen is the expectation the gate holds gorge to on an agree or
 	// xmage_wrong row: the comparator fields the scenario changed, at each
@@ -65,6 +74,10 @@ type Frozen struct {
 // HasExpectation reports whether a passing row carries something the gate
 // can hold gorge to.
 func (r VerdictRow) HasExpectation() bool { return len(r.Frozen) > 0 || r.CanonSHA != "" }
+
+// FromForge reports whether this is a Forge-only verdict: Forge's result
+// stands behind the card until an XMage comparison supersedes it.
+func (r VerdictRow) FromForge() bool { return r.Source == SourceForge }
 
 // VerdictDir is the committed verdict directory, relative to the repo root.
 const VerdictDir = "oracle/compliance/verdicts"

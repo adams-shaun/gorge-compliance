@@ -626,7 +626,13 @@ func runStatus(dir, set, level string) error {
 	if err != nil {
 		return err
 	}
-	probs, err := gate.Check(reg, ".", set, level)
+	var probs []gate.Problem
+	var pass gate.Passing
+	if level == "A" {
+		probs, pass, err = gate.CheckPassing(reg, ".", set)
+	} else {
+		probs, err = gate.Check(reg, ".", set, level)
+	}
 	if err != nil {
 		return err
 	}
@@ -641,6 +647,9 @@ func runStatus(dir, set, level string) error {
 		fmt.Printf("%-40s %s\n", p.Card, p.Reason)
 	}
 	fmt.Printf("%s:%s -- %d of %d printed cards outstanding\n", set, level, len(probs), total)
+	if level == "A" {
+		fmt.Printf("%s:A passing: %d XMage-verified, %d Forge-only, %d hand scenario\n", set, pass.XMage, pass.Forge, pass.Hand)
+	}
 	fmt.Println(gate.LevelMeaning(level))
 	return nil
 }
