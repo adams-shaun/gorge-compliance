@@ -8,6 +8,14 @@
 # compact three-way ledger under oracle/compliance/adjudication/. Forge is GPL-3.0 and its output is never committed; only the
 # ledger -- gorge's own pattern and field vocabulary -- may be committed.
 #
+# With --verdicts (or FORGE_PASS_VERDICTS=1) the pass runs at level A with
+# gen -printed, so it also checks the cards XMage lacks, and after each set's
+# forge-diff writes that set's AGREE scenarios as Forge-only verdict rows
+# (source "forge"). A row holds gorge's frozen fields and the Forge ref and
+# driver only: no Forge value, message or script text is committed. An XMage
+# comparison supersedes such a row. Record the split afterwards with the
+# printed status -write-ratchet command.
+#
 # Per set, under the heavy lock:
 #   1. oraclediff gen          -- one level-B scenario per manifest card
 #   2. oraclediff forge-export -- the sidecar request (Item + gorge decisions
@@ -44,6 +52,7 @@
 #   FORGE_PASS_XMAGE_CACHE              XMage result cache (default
 #                                       $XMAGE_ORACLE_DIR/cache/<xmref12>-<xdriver12>)
 #   FORGE_PASS_FORCE=1                  replay every request (after a driver change)
+#   FORGE_PASS_VERDICTS=1               level A with gen -printed, then write Forge-only verdict rows
 #   FORGE_PASS_LEDGER                   ledger directory (default
 #                                       oracle/compliance/adjudication)
 #   FORGE_PASS_ORACLEDIFF               oraclediff binary (default: built here)
@@ -63,14 +72,18 @@ fi
 
 force=${FORGE_PASS_FORCE:-0}
 case "$force" in "" | 0) force=0 ;; *) force=1 ;; esac
+verdicts=${FORGE_PASS_VERDICTS:-0}
+case "$verdicts" in "" | 0) verdicts=0 ;; *) verdicts=1 ;; esac
 sets=()
 for a in "$@"; do
 	case "$a" in
 	--force) force=1 ;;
+	--verdicts) verdicts=1 ;;
 	*) sets+=("$a") ;;
 	esac
 done
 if [ ${#sets[@]} -gt 0 ]; then set -- "${sets[@]}"; else set --; fi
+if [ "$verdicts" = 1 ]; then lvl=${LEVEL:-A}; else lvl=${LEVEL:-B}; fi
 
 oref=${FORGE_ORACLE_REF:-$(sed -n 's/^FORGE_ORACLE_REF *?= *//p' Makefile)}
 root=${FORGE_ORACLE_DIR:-$(sed -n 's/^FORGE_ORACLE_DIR *?= *//p' Makefile)}
@@ -120,14 +133,18 @@ mkdir -p "$out" "$cache"
 od=${FORGE_PASS_ORACLEDIFF:-}
 if [ -z "$od" ]; then
 	mkdir -p "$root/bin"
-	go build -o "$root/bin/oraclediff" ./cmd/oraclediff
+	go build -trimpath -o "$root/bin/oraclediff" ./cmd/oraclediff
 	od=$root/bin/oraclediff
 fi
 
 [ -d "$xcache" ] || echo "forge-pass: warning: no XMage cache at $xcache; the F/X leg will be skipped (run scripts/compliance-pass.sh first)" >&2
 
-echo "== forge pass: ${#} set(s), FORGE_ORACLE_REF ${oref:0:12}, driver $drv, level ${LEVEL:-B}, cache $cache"
+echo "== forge pass: ${#} set(s), FORGE_ORACLE_REF ${oref:0:12}, driver $drv, level $lvl, cache $cache"
 rc=0
+gen_printed=()
+if [ "$verdicts" = 1 ]; then
+	gen_printed=(-printed oracle/compliance/printed)
+fi
 allscen=$out/adjudicate-scen.jsonl
 allfd=$out/adjudicate-forge-diff.jsonl
 : > "$allscen"
@@ -135,7 +152,7 @@ allfd=$out/adjudicate-forge-diff.jsonl
 for s in "$@"; do
 	d=$out/$s
 	rm -rf "$d" && mkdir -p "$d"
-	if ! "$od" gen -manifest "oracle/compliance/manifests/$s.json" -level "${LEVEL:-B}" -out "$d/scen.jsonl" >"$d/gen.log" 2>&1; then
+	if ! "$od" gen ${gen_printed[@]+"${gen_printed[@]}"} -manifest "oracle/compliance/manifests/$s.json" -level "$lvl" -out "$d/scen.jsonl" >"$d/gen.log" 2>&1; then
 		echo "$s: gen FAILED"; tail -3 "$d/gen.log"; rc=1; continue
 	fi
 	if ! "$od" forge-export -scenarios "$d/scen.jsonl" -out "$d/forge-req.jsonl" >"$d/export.log" 2>&1; then
@@ -165,6 +182,13 @@ for s in "$@"; do
 		-cache "$cache" -out "$d/forge-diff.jsonl" >"$d/diff.log" 2>&1; then
 		echo "$s: forge-diff FAILED"; tail -3 "$d/diff.log"; rc=1; continue
 	fi
+	if [ "$verdicts" = 1 ]; then
+		if ! "$od" forge-verdicts -scenarios "$d/scen.jsonl" -forge-diff "$d/forge-diff.jsonl" \
+			-oracle-ref "$oref" -driver "$drv" >"$d/verdicts.log" 2>&1; then
+			echo "$s: FAILED forge-verdicts"; tail -3 "$d/verdicts.log"; rc=1; continue
+		fi
+		tail -2 "$d/verdicts.log"
+	fi
 	cat "$d/scen.jsonl" >> "$allscen"
 	cat "$d/forge-diff.jsonl" >> "$allfd"
 	echo "$s: replayed $missing/$total"
@@ -183,4 +207,8 @@ if ! "$od" adjudicate -scenarios "$allscen" -forge-diff "$allfd" \
 	echo "adjudicate FAILED"; tail -5 "$out/adjudicate.log"; exit 1
 fi
 cat "$out/adjudicate.log"
+if [ "$verdicts" = 1 ]; then
+	sets_csv=$(IFS=,; printf '%s' "$*")
+	echo "record the split: go run -trimpath ./cmd/oraclediff status -all -sets $sets_csv -write-ratchet"
+fi
 exit 0

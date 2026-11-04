@@ -80,8 +80,9 @@ func main() {
 		manifest := fs.String("manifest", "", "set manifest")
 		out := fs.String("out", "", "scenario JSONL")
 		level := fs.String("level", "A", "A (one level-A scenario per card) or B (the level-A scenario plus every generable level-B one)")
+		printed := fs.String("printed", "", "printed-list directory: also generate the set's printed cards XMage's manifest omits or marks unfinished")
 		fs.Parse(os.Args[2:])
-		err = runGen(*dir, *manifest, *out, *level)
+		err = runGen(*dir, *manifest, *out, *level, *printed)
 	case "plan":
 		fs := flag.NewFlagSet("plan", flag.ExitOnError)
 		dir := fs.String("cards", ".cards", "corpus dir")
@@ -111,6 +112,8 @@ func main() {
 		err = runForgeDiff(os.Args[2:])
 	case "adjudicate":
 		err = runAdjudicate(os.Args[2:])
+	case "forge-verdicts":
+		err = runForgeVerdicts(os.Args[2:])
 	case "triage":
 		fs := flag.NewFlagSet("triage", flag.ExitOnError)
 		dir := fs.String("cards", ".cards", "corpus dir")
@@ -211,7 +214,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: oraclediff gen|plan|diff|forge-export|forge-diff|adjudicate|status|sets|rule|triage|refreeze|impact|tickets|show ...")
+	fmt.Fprintln(os.Stderr, "usage: oraclediff gen|plan|diff|forge-export|forge-diff|forge-verdicts|adjudicate|status|sets|rule|triage|refreeze|impact|tickets|show ...")
 	os.Exit(2)
 }
 
@@ -222,7 +225,7 @@ func loadReg(dir string) (*cards.Registry, error) {
 	return cards.OpenCorpus(dir)
 }
 
-func runGen(dir, manifest, out, level string) error {
+func runGen(dir, manifest, out, level, printed string) error {
 	if manifest == "" || out == "" {
 		return fmt.Errorf("gen needs -manifest and -out")
 	}
@@ -237,6 +240,14 @@ func runGen(dir, manifest, out, level string) error {
 	if err := json.Unmarshal(raw, &m); err != nil {
 		return err
 	}
+	if printed != "" {
+		pr, err := compliance.LoadPrinted(printed, m.Code)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "gen %s: no printed list under %s; manifest cards only\n", m.Code, printed)
+		} else {
+			m = withPrinted(m, pr)
+		}
+	}
 	if err := installXMageKnown(filepath.Dir(manifest)); err != nil {
 		return err
 	}
@@ -245,6 +256,29 @@ func runGen(dir, manifest, out, level string) error {
 		return err
 	}
 	return genManifest(reg, m, out, level)
+}
+
+// withPrinted adds the printed cards XMage's manifest omits to a copy of m and
+// clears its unfinished list, so the cards XMage marks unfinished get a
+// scenario too. The copy keeps m's byte-stable entry order and spelling; the
+// additions keep the printed list's order.
+func withPrinted(m compliance.Manifest, pr compliance.Printed) compliance.Manifest {
+	out := m
+	out.Unfinished = nil
+	out.Cards = append([]compliance.ManifestCard(nil), m.Cards...)
+	listed := make(map[string]bool, len(out.Cards))
+	for _, mc := range out.Cards {
+		listed[compliance.FoldName(mc.Name)] = true
+	}
+	for _, n := range pr.Cards {
+		fold := compliance.FoldName(n)
+		if listed[fold] {
+			continue
+		}
+		listed[fold] = true
+		out.Cards = append(out.Cards, compliance.ManifestCard{Name: n, PrintedOnly: true})
+	}
+	return out
 }
 
 // genManifest generates from an already loaded registry, so deterministic
@@ -324,7 +358,7 @@ func genManifest(reg *cards.Registry, m compliance.Manifest, out, level string) 
 			skipped++
 			continue
 		}
-		if name != mc.Name {
+		if name != mc.Name && !mc.PrintedOnly {
 			it.XMageName = mc.Name
 		}
 		b, _ := json.Marshal(it)

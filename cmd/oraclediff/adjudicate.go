@@ -11,7 +11,8 @@ package main
 // Forge request sha:
 //
 //   - the committed verdict rows, read from -verdicts, are the V(G,X) leg.
-//     Their status is never changed: Forge never writes a verdict;
+//     Their status is never changed: Forge rows are skipped, and a Forge pass
+//     writes verdict rows only through forge-verdicts;
 //   - the run's forge-diff rows (-forge-diff) are the V(G,F) leg, already
 //     computed by forge-diff, and carry the request sha that keys the
 //     Forge cache;

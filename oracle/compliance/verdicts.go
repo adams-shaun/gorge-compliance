@@ -149,6 +149,13 @@ func MergeVerdicts(dir string, rows []VerdictRow) error {
 			all[r.Card] = map[string]VerdictRow{}
 		}
 		if old, ok := all[r.Card][r.Template]; ok {
+			if old.FromForge() && !r.FromForge() && old.ScenarioSHA == r.ScenarioSHA &&
+				(r.Status == StatusHarness || r.Status == StatusXMageLacks) {
+				// XMage compared nothing for this scenario, so its harness or
+				// lack says nothing about the Forge-only verdict. A comparison
+				// (agree, diverge or a triaged status) replaces it below.
+				continue
+			}
 			if hasRuling(old) {
 				oldSig, oldOK := divergenceSignature(old)
 				newSig, newOK := divergenceSignature(r)
@@ -167,6 +174,39 @@ func MergeVerdicts(dir string, rows []VerdictRow) error {
 		all[r.Card][r.Template] = r
 	}
 	return writeVerdicts(dir, all)
+}
+
+// MergeForgeVerdicts writes Forge-only agree rows into dir. A Forge row never
+// replaces an XMage comparison (agree, diverge or a triaged status): an XMage
+// harness or xmage_lacks row compared nothing, so the Forge row replaces it;
+// every other XMage row stands. It reports how many rows it wrote and how many
+// an XMage comparison kept.
+func MergeForgeVerdicts(dir string, rows []VerdictRow) (wrote, kept int, err error) {
+	for _, r := range rows {
+		if r.Source != SourceForge || r.Status != StatusAgree {
+			return 0, 0, fmt.Errorf("MergeForgeVerdicts: %s (%s) is not a Forge agree row", r.Card, r.Template)
+		}
+	}
+	all, err := LoadVerdicts(dir)
+	if err != nil {
+		return 0, 0, err
+	}
+	for _, r := range rows {
+		if all[r.Card] == nil {
+			all[r.Card] = map[string]VerdictRow{}
+		}
+		old, ok := all[r.Card][r.Template]
+		if ok && !old.FromForge() && old.Status != StatusHarness && old.Status != StatusXMageLacks {
+			kept++
+			continue
+		}
+		all[r.Card][r.Template] = r
+		wrote++
+	}
+	if err := writeVerdicts(dir, all); err != nil {
+		return 0, 0, err
+	}
+	return wrote, kept, nil
 }
 
 // hasRuling reports whether the row carries a hand-authored or

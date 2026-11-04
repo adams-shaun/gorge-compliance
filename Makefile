@@ -116,6 +116,12 @@ xmage-oracle-setup:
 forge-oracle-setup:
 	FORGE_REPO='$(FORGE_REPO)' FORGE_REF='$(FORGE_REF)' FORGE_ORACLE_REF='$(FORGE_ORACLE_REF)' FORGE_ORACLE_DIR='$(FORGE_ORACLE_DIR)' scripts/forge-oracle-setup.sh
 
+# forge-verdicts runs a level-A Forge pass with gen -printed and writes the
+# scenarios Forge agrees with as Forge-only verdict rows.
+.PHONY: forge-verdicts
+forge-verdicts:
+	FORGE_ORACLE_REF='$(FORGE_ORACLE_REF)' FORGE_ORACLE_DIR='$(FORGE_ORACLE_DIR)' XMAGE_REF='$(XMAGE_REF)' XMAGE_ORACLE_DIR='$(XMAGE_ORACLE_DIR)' scripts/forge-pass.sh --verdicts $(SETS)
+
 # compliance-pass runs the XMage compliance pass (gen, plan, XMage replay of
 # the stale scenarios only, diff -write into oracle/compliance/verdicts, summary)
 # over SETS (default: every set with a printed list). Needs the xmage-oracle-setup

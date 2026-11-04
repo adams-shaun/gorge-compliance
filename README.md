@@ -15,8 +15,12 @@ gorge makes a claim per card set, at one of two levels:
 
 | Level | What the claim says | What it leaves out |
 |---|---|---|
-| **A** | Every card in the set is supported, and one generated scenario (cast and resolve, play a land, or counter a spell) agrees with XMage, or a hand scenario passes, or the disagreement has a ruling citing the rules | Activated abilities, triggers, statics, attacks and blocks |
+| **A** | Every card in the set is supported, and one generated scenario (cast and resolve, play a land, or counter a spell) agrees with XMage, or, where XMage has not compared it, with Forge (a Forge-only verdict), or a hand scenario passes, or the disagreement has a ruling citing the rules | Activated abilities, triggers, statics, attacks and blocks |
 | **B** | Level A, plus one generated scenario per activated ability, trigger, static and attack or block, each compared with XMage | Anything no scenario template can express yet, which is reported as a gap, not passed. Interactions between cards |
+
+A Forge-only verdict checks gorge's reading of Forge's own card script, not the script, so a wrong
+script both engines read alike passes; `oraclediff status` reports XMage-verified and Forge-only cards
+separately, and an XMage comparison replaces a Forge-only verdict.
 
 Neither level means gorge is right about a whole game. The claims rest on short
 scripted scenarios, and two engines can share a bug. [docs/oracles.md](docs/oracles.md)
