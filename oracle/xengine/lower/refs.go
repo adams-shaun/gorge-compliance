@@ -54,6 +54,16 @@ func (m seatMap) player(s int) string { return "p" + strconv.Itoa(m.seat(s)) }
 // anything else by its label. ok is false when the option has no spelling the
 // matcher reads back unambiguously.
 func (m seatMap) pickString(p game.Pick) (s string, ok bool) {
+	if p.Kind == "mode" {
+		// Every option of a mode/modes decision carries the same source object
+		// in Obj (an unless-cost's permanent, a modal spell's source), so a ref
+		// matches the first option whatever was picked. The label is the one
+		// spelling that tells the options apart.
+		if p.Label == "" || isRefLike(p.Label) {
+			return "", false
+		}
+		return p.Label, true
+	}
 	if p.Obj != 0 && p.Kind != "mana" {
 		// (A mana-colour wheel offers several options for one source: its
 		// label, "Add B", is what tells them apart.)
