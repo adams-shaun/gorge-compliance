@@ -40,11 +40,11 @@ func TestPlanItemRerunsOnlyStaleRows(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	const ref = "ref1"
+	const ref, driver = "ref1", "aaaaaaaaaaaa"
 	pass := compliance.VerdictRow{Card: it.Card, Template: it.Template, ID: it.ID, ScenarioSHA: ItemSHA(it),
-		XMageRef: ref, Status: compliance.StatusAgree, Frozen: fz}
+		XMageRef: ref, XMageDriver: driver, Status: compliance.StatusAgree, Frozen: fz}
 	cache := oraclediff.Cache{Dir: t.TempDir()}
-	if n, why := PlanItem(reg, it, pass, true, ref, cache); n != Fresh {
+	if n, why := PlanItem(reg, it, pass, true, ref, driver, cache); n != Fresh {
 		t.Fatalf("passing row: %v (%s), want fresh", n, why)
 	}
 	stale := map[string]compliance.VerdictRow{}
@@ -65,17 +65,17 @@ func TestPlanItemRerunsOnlyStaleRows(t *testing.T) {
 	r.Frozen = nil
 	stale["no frozen expectation"] = r
 	for want, row := range stale {
-		if n, why := PlanItem(reg, it, row, true, ref, cache); n != Replay || why != want {
+		if n, why := PlanItem(reg, it, row, true, ref, driver, cache); n != Replay || why != want {
 			t.Errorf("%s: got %v (%s), want replay", want, n, why)
 		}
 	}
-	if n, why := PlanItem(reg, it, compliance.VerdictRow{}, false, ref, cache); n != Replay || why != "no verdict" {
+	if n, why := PlanItem(reg, it, compliance.VerdictRow{}, false, ref, driver, cache); n != Replay || why != "no verdict" {
 		t.Errorf("missing row: %v (%s)", n, why)
 	}
 	if err := cache.Put(ItemSHA(it), oraclediff.XResult{ID: it.ID}); err != nil {
 		t.Fatal(err)
 	}
-	if n, _ := PlanItem(reg, it, stale["status diverge"], true, ref, cache); n != Rediff {
+	if n, _ := PlanItem(reg, it, stale["status diverge"], true, ref, driver, cache); n != Rediff {
 		t.Errorf("cached stale row: %v, want rediff", n)
 	}
 }
@@ -93,18 +93,58 @@ func TestPlanItemReplaysForgeVerdicts(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	const ref = "ref1"
+	const ref, driver = "ref1", "aaaaaaaaaaaa"
 	row := compliance.VerdictRow{Card: it.Card, Template: it.Template, ID: it.ID, ScenarioSHA: ItemSHA(it),
-		XMageRef: ref, Status: compliance.StatusAgree, Frozen: fz, Source: compliance.SourceForge}
+		XMageRef: ref, XMageDriver: driver, Status: compliance.StatusAgree, Frozen: fz, Source: compliance.SourceForge}
 	cache := oraclediff.Cache{Dir: t.TempDir()}
 	want := "forge verdict (no XMage comparison yet)"
-	if n, why := PlanItem(reg, it, row, true, ref, cache); n != Replay || why != want {
+	if n, why := PlanItem(reg, it, row, true, ref, driver, cache); n != Replay || why != want {
 		t.Errorf("Forge row: %v (%s), want replay (%s)", n, why, want)
 	}
 	if err := cache.Put(ItemSHA(it), oraclediff.XResult{ID: it.ID}); err != nil {
 		t.Fatal(err)
 	}
-	if n, why := PlanItem(reg, it, row, true, ref, cache); n != Rediff || why != want {
+	if n, why := PlanItem(reg, it, row, true, ref, driver, cache); n != Rediff || why != want {
 		t.Errorf("cached Forge row: %v (%s), want rediff (%s)", n, why, want)
+	}
+}
+
+// TestPlanItemReplaysOnXMageDriverChange: XMage's side is a function of the
+// driver source too, so a row recorded by another driver is stale even when
+// its scenario, XMAGE_REF and frozen expectation all match. An xmage_lacks
+// row stays terminal: XMage compared nothing.
+func TestPlanItemReplaysOnXMageDriverChange(t *testing.T) {
+	reg := corpus(t)
+	it, skip := templates.Generate(reg, "Shock")
+	if skip != nil {
+		t.Fatal(skip.Reason)
+	}
+	fz, err := Freeze(reg, it)
+	if err != nil {
+		t.Fatal(err)
+	}
+	const ref, driver = "ref1", "aaaaaaaaaaaa"
+	row := compliance.VerdictRow{Card: it.Card, Template: it.Template, ID: it.ID,
+		ScenarioSHA: ItemSHA(it), XMageRef: ref, XMageDriver: driver,
+		Status: compliance.StatusAgree, Frozen: fz}
+	cache := oraclediff.Cache{Dir: t.TempDir()}
+	if n, why := PlanItem(reg, it, row, true, ref, driver, cache); n != Fresh {
+		t.Fatalf("same driver: %v (%s), want fresh", n, why)
+	}
+	old := row
+	old.XMageDriver = "bbbbbbbbbbbb"
+	if n, why := PlanItem(reg, it, old, true, ref, driver, cache); n != Replay || why != "xmage_driver changed" {
+		t.Errorf("driver changed: %v (%s), want replay (xmage_driver changed)", n, why)
+	}
+	if err := cache.Put(ItemSHA(it), oraclediff.XResult{ID: it.ID}); err != nil {
+		t.Fatal(err)
+	}
+	if n, why := PlanItem(reg, it, old, true, ref, driver, cache); n != Rediff || why != "xmage_driver changed" {
+		t.Errorf("cached driver change: %v (%s), want rediff", n, why)
+	}
+	lacks := old
+	lacks.Status = compliance.StatusXMageLacks
+	if n, why := PlanItem(reg, it, lacks, true, ref, driver, cache); n != Fresh {
+		t.Errorf("xmage_lacks row: %v (%s), want fresh", n, why)
 	}
 }
