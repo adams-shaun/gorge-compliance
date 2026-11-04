@@ -78,11 +78,12 @@ type cut struct {
 	Reasons []string
 }
 
-// capture reads the live engine at a cut point. It only reads.
-func capture(e *rules.Engine, entry int) *cut {
+// capture reads the live engine at a cut point. It only reads. xmage says the
+// window is replayed by XMage, which narrows the placeable setup tokens.
+func capture(e *rules.Engine, entry int, xmage bool) *cut {
 	g := e.G
 	c := &cut{Entry: entry, Turn: g.Turn, Active: int(g.Active), Refs: map[state.ObjID]string{}, MaxID: state.ObjID(len(g.Objs))}
-	w := &walker{g: g, why: map[string]bool{}, auras: map[state.ObjID]bool{}}
+	w := &walker{g: g, why: map[string]bool{}, auras: map[state.ObjID]bool{}, xmage: xmage}
 	w.struct_(reflect.ValueOf(g).Elem(), "Game", gameTable, nil)
 	for i := range g.Players {
 		w.seat = i
@@ -236,6 +237,9 @@ type walker struct {
 	g    *state.Game
 	why  map[string]bool
 	seat int // the seat Player fields are being read for
+	// xmage says XMage replays the window, so a setup token it cannot place is
+	// refused; a Forge-only run places any token by its script stem.
+	xmage bool
 	// mention memoises gameMentions per word for this capture.
 	mention map[string]bool
 	// exilerRead memoises whether any card of the game reads HasExiledBy
