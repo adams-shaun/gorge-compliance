@@ -28,7 +28,6 @@ var foldedCarriers = []string{
 	"LCI/Bartolomé del Presidio",
 	"MSH/Mjölnir, Hammer of Thor",
 	"SPM/Araña, Heart of the Spider",
-	"SPM/With Great Power . . .",
 	"TMT/Bespoke Bō",
 }
 

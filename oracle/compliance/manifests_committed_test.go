@@ -39,7 +39,7 @@ func TestCommittedManifestsAreWellFormed(t *testing.T) {
 		if len(m.Cards) == 0 {
 			t.Errorf("%s: no cards", base)
 		}
-		// Spot checks at XMAGE_REF 6b602a1c: Bloomburrow.java comments
+		// Spot checks at XMAGE_REF 4142596fb7: Bloomburrow.java comments
 		// Heirloom Epic out; HasCon2017.java's two cards use the qualified
 		// constructor.
 		for _, c := range m.Cards {
