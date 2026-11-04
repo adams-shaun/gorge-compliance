@@ -324,6 +324,20 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return v.Int() > 0 && hasActivationLimit(o)
 	case typ == "Object" && turnStamps[name]:
 		return v.Int() == int64(w.g.Turn)
+	case typ == "Object" && name == "CastFlags":
+		// Only the cast-provenance bits a battlefield reader consults are live:
+		// ImpendingDormant (CR 702.176a) strips Creature while a TIME counter
+		// remains, and PrototypeCharacteristics (CR 718.3a) replaces the printed
+		// P/T. Setup places the permanent, not the cast, so it can restate
+		// neither. Every other bit is read at entry or on the stack.
+		if o.Zone != state.ZBattlefield {
+			return false
+		}
+		if o.ImpendingDormant() {
+			return true
+		}
+		_, _, _, prototype := o.PrototypeCharacteristics()
+		return prototype
 	case typ == "Object" && name == "EnteredThisTurn":
 		if !v.Bool() || (o.Zone == state.ZHand && o.EnteredFrom == state.ZLibrary) {
 			return false

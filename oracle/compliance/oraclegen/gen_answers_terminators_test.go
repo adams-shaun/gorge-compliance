@@ -220,13 +220,18 @@ func TestOptionalCostCastNoShapes(t *testing.T) {
 // Binding, Aurelia, Plan for All Outcomes, Struggle for Skemfar, Yotia Declares
 // War, Bilbo, Burrog Barrage) are all TargetMax$ 1, and the TargetMin$ 0 that
 // #12321 dropped from Storm the Citadel was TargetMax$ 1 too.
+//
+// Re-measured 2026-11-04 at FORGE_REF df3c93c8e41 (gorge-trek4, the corpus of
+// gorge c6675816f): the corpus grew between 76fd7691a and this pin, so Kicker
+// 239 -> 241, MinCharmNum 154 -> 155 and TargetMinZeroUpTo 403 -> 408.
+// Offspring, OptionalCost and Spree are unchanged.
 var mechanismFamilies = map[string]int{
-	"Kicker":            239,
+	"Kicker":            241,
 	"Offspring":         21,
 	"OptionalCost":      40,
 	"Spree":             21,
-	"MinCharmNum":       154,
-	"TargetMinZeroUpTo": 403,
+	"MinCharmNum":       155,
+	"TargetMinZeroUpTo": 408,
 }
 
 // TestMechanismFamilyCensus pins the per-family carrier counts over the whole
