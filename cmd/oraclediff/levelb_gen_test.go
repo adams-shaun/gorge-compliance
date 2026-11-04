@@ -72,7 +72,7 @@ func TestGenLevelBAddsRequirementRows(t *testing.T) {
 	}
 
 	outA := filepath.Join(tmp, "a.jsonl")
-	if err := runGen(dir, mf, outA, "A"); err != nil {
+	if err := runGen(dir, mf, outA, "A", ""); err != nil {
 		t.Fatal(err)
 	}
 	gotA := readLinesBytes(t, outA)
@@ -93,7 +93,7 @@ func TestGenLevelBAddsRequirementRows(t *testing.T) {
 	}
 
 	outB := filepath.Join(tmp, "b.jsonl")
-	if err := runGen(dir, mf, outB, "B"); err != nil {
+	if err := runGen(dir, mf, outB, "B", ""); err != nil {
 		t.Fatal(err)
 	}
 	gotB := readLinesBytes(t, outB)

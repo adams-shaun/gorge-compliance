@@ -32,6 +32,10 @@ type ManifestCard struct {
 	Name    string   `json:"name"`
 	Numbers []string `json:"numbers"`
 	Rarity  string   `json:"rarity"`
+	// PrintedOnly marks a card a set's printed list has and the XMage
+	// manifest omits; gen adds it only with -printed. It is never
+	// serialised, so a committed manifest keeps its bytes.
+	PrintedOnly bool `json:"-"`
 }
 
 // The shapes every XMage set class uses, measured over all 589 classes at

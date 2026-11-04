@@ -81,7 +81,14 @@ output stays out of the tree because Forge is GPL-3.0. The pass writes a ledger 
 vocabulary to `oracle/compliance/adjudication/`, which holds no committed rows today.
 
 **Can't check:** a wrong card script. gorge compiles Forge's scripts, so gorge and Forge agreeing
-says little: `GF|X` can be a shared script bug. Forge never changes a verdict and isn't a CI gate. What we've confirmed in the other engines, and whether upstream knows, is in [upstream-bugs.md](upstream-bugs.md).
+says little: `GF|X` can be a shared script bug. What we've confirmed in the other engines, and whether upstream knows, is in [upstream-bugs.md](upstream-bugs.md).
+
+**Forge verdicts:** where XMage has not compared a level-A scenario, forge-diff's `AGREE` writes a row
+with `source: "forge"` holding gorge's frozen fields and the two pins, and no Forge output. An XMage
+comparison replaces it; an XMage harness or `xmage_lacks` does not, since XMage compared nothing. Such
+a row checks gorge's reading of Forge's own card script, not the script, so a wrong script both
+engines read alike passes. CI (`TestDeclaredSetsCompliantChunkNN`, `TestCertificationRatchet`) holds
+gorge to the frozen fields like any row.
 
 **Run:** the XMage pass first, at the same level, then Forge:
 
@@ -89,6 +96,10 @@ says little: `GF|X` can be a shared script bug. Forge never changes a verdict an
 LEVEL=B make compliance-pass SETS=BIG
 scripts/forge-pass.sh BIG
 ```
+
+For a set XMage has not compared, `make forge-verdicts SETS=TRK` runs at level A with gen -printed
+and writes the scenarios Forge agrees with as Forge-only verdict rows; record the split afterwards
+with `go run -trimpath ./cmd/oraclediff status -all -sets TRK -write-ratchet`.
 
 A pass over named sets writes partial ledger shards, so treat it as a survey. Add `--force` to
 replay every request. The comparison with XMage reads XMage's result cache and skips what isn't
