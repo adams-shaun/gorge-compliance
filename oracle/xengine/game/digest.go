@@ -84,6 +84,10 @@ func poolString(m state.Mana) string {
 	return b.String()
 }
 
+// counterMap is the live object's counters as a digest map. A zero amount is
+// not a counter: an object keeps a zero entry after its last counter is
+// removed (a stun counter spent by the untap step), while the runner's fresh
+// placement never had one. Dropping zeros keeps the two digests comparable.
 func counterMap(cs []state.Counter) map[string]int32 {
 	if len(cs) == 0 {
 		return nil
@@ -91,6 +95,14 @@ func counterMap(cs []state.Counter) map[string]int32 {
 	m := map[string]int32{}
 	for _, c := range cs {
 		m[normCounter(c.Kind)] += c.N
+	}
+	for k, n := range m {
+		if n == 0 {
+			delete(m, k)
+		}
+	}
+	if len(m) == 0 {
+		return nil
 	}
 	return m
 }
@@ -268,13 +280,20 @@ func DigestOfSnapshot(s rules.OracleSnapshot) Digest {
 	return d
 }
 
+// copyCounters copies a snapshot's counter map, dropping zero amounts: a zero
+// is no counter, and the live digest drops them too (counterMap).
 func copyCounters(m map[string]int32) map[string]int32 {
 	if len(m) == 0 {
 		return nil
 	}
 	out := make(map[string]int32, len(m))
 	for k, v := range m {
-		out[k] = v
+		if v != 0 {
+			out[k] = v
+		}
+	}
+	if len(out) == 0 {
+		return nil
 	}
 	return out
 }

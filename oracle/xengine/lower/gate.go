@@ -46,6 +46,14 @@ const (
 	// dynamic (K:etbCounter with an X/Count$ amount): the placement re-runs the
 	// grant, so setup cannot know how many counters to add on top of it.
 	reasonCountersEntry = "counters_entry_unrestatable"
+	// reasonEntryTap is a non-active seat's UNTAPPED battlefield card whose
+	// placement runs an "enters tapped" replacement. The runner's placement
+	// re-runs it (like the entry counter grant), and with no answer to the
+	// replacement's unless-cost it declines and taps the permanent; the
+	// non-active seat has no untap step before the cut, so the replay can never
+	// show it untapped again. The active seat is exempt: its turn-1 untap step
+	// restores what the placement tapped.
+	reasonEntryTap = "setup_entry_tap"
 	// The setup drive expresses state as events: a by-name tapped placement is
 	// a Tap, a counters field a CounterChange, a life field a LifeChange. A
 	// placed permanent that triggers on one of those events would resolve a
@@ -430,6 +438,32 @@ func frontName(o *state.Object) string {
 	return o.Card.Faces[0].Name
 }
 
+// entryTapReplacement reports whether the face's own battlefield-entry
+// replacement taps it. The runner's setup placement keeps the ordinary
+// battlefield move, so it re-runs the replacement (like the entry counter
+// grant); an "enters tapped unless <cost>" body defaults to the decline when
+// no answer serves it, and the permanent ends tapped whatever the cut says.
+func entryTapReplacement(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	for i := range f.Repls {
+		r := &f.Repls[i]
+		if r.Event != "Moved" {
+			continue
+		}
+		if dest, ok := r.Params["Destination"]; ok && !strings.EqualFold(dest, "Battlefield") {
+			continue
+		}
+		for s := r.With; s != nil; s = s.Sub {
+			if s.API == "Tap" && strings.EqualFold(s.Params["ETB"], "True") {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 // place fills c.Setup, c.Refs and c.Attach from the live game, adding to w.why
 // whatever setup cannot say.
 func (w *walker) place(c *cut) {
@@ -501,6 +535,9 @@ func (w *walker) place(c *cut) {
 		for _, o := range bf[s] {
 			n := bind(o)
 			seat.Battlefield = append(seat.Battlefield, n)
+			if s != c.Active && !o.Tapped && entryTapReplacement(o.Face()) {
+				w.why[reasonEntryTap] = true
+			}
 			if o.ChosenColor != "" {
 				c.Answers[s] = append(c.Answers[s], oraclegen.Answer{Kind: "choose", Pick: []string{o.ChosenColor}})
 			}
