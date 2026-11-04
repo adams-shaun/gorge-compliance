@@ -30,7 +30,7 @@ func tokenCutIn(t *testing.T, reg *cards.Registry, set string, pairs [][2]decks.
 			if got != nil || e.G.Turn < 3 || len(battlefieldTokens(e.G)) == 0 {
 				return
 			}
-			if len(capture(e, entry).Reasons) == 0 {
+			if len(capture(e, entry, true).Reasons) == 0 {
 				got, at = e.Clone(), entry
 			}
 		}})
@@ -108,7 +108,7 @@ func TestGateTokens(t *testing.T) {
 	toks[0].Counters = []state.Counter{{Kind: "P1P1", N: 2}}
 	check := func(label string) *cut {
 		t.Helper()
-		c := capture(e, at)
+		c := capture(e, at, true)
 		if len(c.Reasons) != 0 {
 			t.Fatalf("%s: refused: %v", label, c.Reasons)
 		}
@@ -204,7 +204,7 @@ func TestGateTokens(t *testing.T) {
 		t.Helper()
 		plant()
 		defer undo()
-		if c := capture(e, at); !hasReason(c, reason) {
+		if c := capture(e, at, true); !hasReason(c, reason) {
 			t.Errorf("%s: reasons %v, want %s", label, c.Reasons, reason)
 		}
 	}
@@ -216,6 +216,37 @@ func TestGateTokens(t *testing.T) {
 	refuse("unmapped", reasonTokenUnmapped+"w_1_1_soldier", func() { delete(xmageSetupTokens, "w_1_1_soldier") },
 		func() { xmageSetupTokens["w_1_1_soldier"] = true })
 	check("restored")
+}
+
+// The XMage setup-token table only gates a window XMage replays: a Forge-only
+// run places any token by its token-script stem, so the sweep must not drop its
+// windows for a token the follower that did not run cannot place.
+func TestCheckTokenUnmappedOnlyWhenXMageFollows(t *testing.T) {
+	card := &cards.Card{}
+	g := &state.Game{Tokens: map[string]*cards.Card{"zz_unmapped": card}}
+	reasons := func(xmage bool, o *state.Object) []string {
+		w := &walker{g: g, why: map[string]bool{}, xmage: xmage}
+		w.checkToken(o)
+		var out []string
+		for r := range w.why {
+			out = append(out, r)
+		}
+		sort.Strings(out)
+		return out
+	}
+	token := &state.Object{Card: card, Zone: state.ZBattlefield}
+	if got, want := reasons(true, token), []string{reasonTokenUnmapped + "zz_unmapped"}; !reflect.DeepEqual(got, want) {
+		t.Errorf("XMage follows: reasons %v, want %v", got, want)
+	}
+	if got := reasons(false, token); len(got) != 0 {
+		t.Errorf("Forge only: reasons %v, want none", got)
+	}
+	copied := &state.Object{Card: card, Zone: state.ZBattlefield, IsCopy: true}
+	for _, xmage := range []bool{true, false} {
+		if got, want := reasons(xmage, copied), []string{reasonTokenUnscripted}; !reflect.DeepEqual(got, want) {
+			t.Errorf("copy (XMage follows %v): reasons %v, want %v", xmage, got, want)
+		}
+	}
 }
 
 func contains(xs []string, x string) bool {
@@ -239,7 +270,7 @@ func TestWindowsTokens(t *testing.T) {
 		unmapped := map[string]int{}
 		var refused int
 		for g, p := range pairs {
-			ls, rs, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: set})
+			ls, rs, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: set}, true)
 			if err != nil {
 				t.Fatal(err)
 			}

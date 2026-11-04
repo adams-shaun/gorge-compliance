@@ -58,7 +58,7 @@ func TestGateRefusesUntilEOTContinuous(t *testing.T) {
 		Affects: "Card.Self", Controller: e.G.Obj(id).Controller,
 		AddPower: 1, AddToughness: 1, UntilEOT: true,
 	})
-	c := capture(e, at)
+	c := capture(e, at, true)
 	if len(c.Reasons) != 1 || c.Reasons[0] != "field:Engine.continuous" {
 		t.Fatalf("reasons %v, want [field:Engine.continuous]", c.Reasons)
 	}
@@ -105,7 +105,7 @@ func TestWindowETBCounterNotDoubled(t *testing.T) {
 	if !swapped {
 		t.Fatal("no battlefield permanent to replace")
 	}
-	c := capture(planted, at)
+	c := capture(planted, at, true)
 	if len(c.Reasons) > 0 {
 		t.Fatalf("the planted cut is refused: %v", c.Reasons)
 	}
@@ -144,7 +144,7 @@ func TestGateRefusesSetupTapTrigger(t *testing.T) {
 		return o.Owner != e.G.Active && o.Owner == o.Controller
 	})
 	victim.Tapped = true
-	if r := capture(e, at).Reasons; !slices.Contains(r, "setup_trigger:taps") {
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:taps") {
 		t.Fatalf("reasons %v, want setup_trigger:taps", r)
 	}
 }
@@ -172,7 +172,7 @@ func TestGateRefusesSetupCounterTrigger(t *testing.T) {
 	if !counters {
 		t.Fatal("no battlefield permanent to put setup counters on")
 	}
-	if r := capture(e, at).Reasons; !slices.Contains(r, "setup_trigger:counter_added") {
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:counter_added") {
 		t.Fatalf("reasons %v, want setup_trigger:counter_added", r)
 	}
 }
@@ -184,7 +184,7 @@ func TestGateRefusesSetupLifeTrigger(t *testing.T) {
 	e, at := expressibleCut(t, reg, pairs[0], 100)
 	plantBattlefieldCard(t, reg, e, "Ajani's Pridemate", func(*state.Object) bool { return true })
 	e.G.Players[0].Life = 22
-	if r := capture(e, at).Reasons; !slices.Contains(r, "setup_trigger:life_gained") {
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:life_gained") {
 		t.Fatalf("reasons %v, want setup_trigger:life_gained", r)
 	}
 }

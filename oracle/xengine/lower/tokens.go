@@ -15,13 +15,14 @@ import (
 const (
 	reasonTokenUnscripted = "token_unscripted" // a copy, face-down, or no stem names its card
 	reasonTokenChoice     = "token_choice"     // an as-enters choice the token made
-	reasonTokenUnmapped   = "token_unmapped:"  // + the stem the XMage driver cannot place
+	reasonTokenUnmapped   = "token_unmapped:"  // + the stem XMage cannot place (only when XMage follows)
 )
 
 // xmageSetupTokens is the set of token-script stems ScenarioReplay.SETUP_TOKENS
-// can place (TestXMageSetupTokenTableMatchesDriver holds the two equal). A
-// stem outside it is refused rather than lowered into a window XMage cannot
-// replay.
+// can place (TestXMageSetupTokenTableMatchesDriver holds the two equal). When
+// XMage replays the window, a stem outside it is refused rather than lowered
+// into a window XMage cannot replay; a Forge-only run places any token by its
+// script stem.
 var xmageSetupTokens = map[string]bool{
 	"b_1_1_bat_flying":                 true,
 	"b_2_1_skeleton":                   true,
@@ -97,7 +98,9 @@ func (w *walker) tokenScript(o *state.Object) string {
 	return w.stems[o.Card]
 }
 
-// checkToken refuses a battlefield token setup cannot place.
+// checkToken refuses a battlefield token setup cannot place. The stem check
+// applies only when XMage replays the window: Forge places any token by its
+// script stem.
 func (w *walker) checkToken(o *state.Object) {
 	stem := w.tokenScript(o)
 	switch {
@@ -105,7 +108,7 @@ func (w *walker) checkToken(o *state.Object) {
 		w.why[reasonTokenUnscripted] = true
 	case o.ChosenColor != "":
 		w.why[reasonTokenChoice] = true
-	case !xmageSetupTokens[stem]:
+	case w.xmage && !xmageSetupTokens[stem]:
 		w.why[reasonTokenUnmapped+stem] = true
 	}
 }

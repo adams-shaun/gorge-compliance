@@ -30,12 +30,15 @@ type Refusal struct {
 // tape's entries from there to the end of the turn. A turn whose cut state setup
 // cannot place (the expressibility gate, gate.go) is a Refusal instead. The
 // tape is returned for the caller's use; a window is self-checked against its
-// own rebased tape (Lowered.Against, CheckWindow). The result is a pure function of (pair, seed, opt).
-func Windows(reg *cards.Registry, pair [2]decks.Deck, seed uint64, opt game.Options) ([]Lowered, []Refusal, *game.Tape, error) {
+// own rebased tape (Lowered.Against, CheckWindow). xmage says XMage replays the
+// windows, so a setup token the XMage driver cannot place is refused; a
+// Forge-only run places any token by its script stem. The result is a pure
+// function of (pair, seed, opt, xmage).
+func Windows(reg *cards.Registry, pair [2]decks.Deck, seed uint64, opt game.Options, xmage bool) ([]Lowered, []Refusal, *game.Tape, error) {
 	var cuts []*cut
 	user := opt.OnCut
 	opt.OnCut = func(e *rules.Engine, entry int) {
-		cuts = append(cuts, capture(e, entry))
+		cuts = append(cuts, capture(e, entry, xmage))
 		if user != nil {
 			user(e, entry)
 		}
