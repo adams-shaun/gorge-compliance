@@ -46,6 +46,10 @@ func PlanItem(reg *cards.Registry, it oraclegen.Item, row compliance.VerdictRow,
 	switch {
 	case !have:
 		reason = "no verdict"
+	case row.FromForge():
+		// A Forge-only verdict never satisfies the XMage pass: XMage must
+		// replay or re-diff the scenario so its comparison can supersede it.
+		reason = "forge verdict (no XMage comparison yet)"
 	case row.ScenarioSHA != sha:
 		reason = "scenario changed"
 	case row.XMageRef != ref:
