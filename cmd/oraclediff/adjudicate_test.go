@@ -533,3 +533,47 @@ func TestAdjudicateMarkReview(t *testing.T) {
 		t.Fatalf("-run-ledger wrote into the repository: %v", err)
 	}
 }
+
+// TestAdjudicateSkipsForgeVerdicts: a Forge-only row has no V(G,X) leg until
+// XMage compares the card, so the three-way pass neither classifies nor
+// ledgers it.
+func TestAdjudicateSkipsForgeVerdicts(t *testing.T) {
+	f := newAdjFixture(t, []adjCase{
+		{it: adjItem("gf-a", "GF Diff Card", "cast-resolve"), forge: fx21, xmage: x20, gf: gfDiverge()},
+	})
+	f.adjCommitted(t)
+	all, err := compliance.LoadVerdicts(f.verdicts)
+	if err != nil {
+		t.Fatal(err)
+	}
+	vr := all["GF Diff Card"]["cast-resolve"]
+	vr.Source = compliance.SourceForge
+	if err := compliance.ReplaceVerdicts(f.verdicts, []compliance.VerdictRow{vr}); err != nil {
+		t.Fatal(err)
+	}
+	frows, _, err := readForgeRows(f.fdPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	res, err := adjudicateRun(f.scen, f.verdicts, frows,
+		oraclediff.Cache{Dir: f.xcache}, oraclediff.Cache{Dir: f.fcache}, adjRef[:12])
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := res.skips["Forge verdict row"]; got != 1 {
+		t.Errorf("skips %v, want one Forge verdict row", res.skips)
+	}
+	if len(res.ledger) != 0 {
+		t.Errorf("ledger %v, want no row", res.ledger)
+	}
+	if len(res.report) != 1 {
+		t.Fatalf("report %v, want one row", res.report)
+	}
+	rep := res.report[0]
+	if rep.Pattern != "" {
+		t.Errorf("report pattern %q, want none", rep.Pattern)
+	}
+	if want := "Forge verdict row (no V(G,X) leg until XMage compares it)"; rep.Note != want {
+		t.Errorf("report note %q, want %q", rep.Note, want)
+	}
+}

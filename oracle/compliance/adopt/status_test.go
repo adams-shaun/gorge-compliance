@@ -81,3 +81,89 @@ func TestCheckRatchet(t *testing.T) {
 		t.Errorf("one set per line: %s", round)
 	}
 }
+
+// TestCheckRatchetForgeSplit: Forge-only certification may only grow through
+// a recorded write, an XMage-verified count never falls, and either upgrade
+// is slack that a -write-ratchet records.
+func TestCheckRatchetForgeSplit(t *testing.T) {
+	committed := []string{"TRK"}
+	declared := compliance.Declared{}
+	ten, twoTwenty := 10, 220
+	measured := SetStatus{Set: "TRK", Outstanding: 3, XMageVerified: 10, ForgeOnly: 220}
+
+	// (a) A first Forge-only measurement fails against a nil ratchet.
+	fails, slack := CheckRatchet(committed, []SetStatus{measured}, declared,
+		map[string]RatchetEntry{"TRK": {Outstanding: 223}})
+	if len(fails) != 1 || !strings.HasPrefix(fails[0], "TRK: 220 Forge-only cards, ratchet 0") {
+		t.Errorf("(a) fails %v, want the Forge-only growth only", fails)
+	}
+	if !strings.Contains(strings.Join(slack, "\n"), "TRK: 223 -> 3") {
+		t.Errorf("(a) slack %v, want the outstanding fall", slack)
+	}
+
+	// (b) The recorded split matches: no fail, no slack.
+	fails, slack = CheckRatchet(committed, []SetStatus{measured}, declared,
+		map[string]RatchetEntry{"TRK": {Outstanding: 3, XMageVerified: &ten, ForgeOnly: &twoTwenty}})
+	if len(fails) != 0 || len(slack) != 0 {
+		t.Errorf("(b) fails %v slack %v, want neither", fails, slack)
+	}
+
+	// (c) Forge-only grew while XMage-verified fell: two fails.
+	nine, twoTwentyOne := 9, 221
+	grown := measured
+	grown.XMageVerified, grown.ForgeOnly = nine, twoTwentyOne
+	fails, _ = CheckRatchet(committed, []SetStatus{grown}, declared,
+		map[string]RatchetEntry{"TRK": {Outstanding: 3, XMageVerified: &ten, ForgeOnly: &twoTwenty}})
+	if len(fails) != 2 ||
+		!strings.HasPrefix(fails[0], "TRK: 221 Forge-only cards, ratchet 220") ||
+		!strings.HasPrefix(fails[1], "TRK: 9 XMage-verified cards, ratchet 10") {
+		t.Errorf("(c) fails %v", fails)
+	}
+
+	// (d) XMage superseded a Forge row: both movements are slack.
+	eleven, twoNineteen := 11, 219
+	upgraded := measured
+	upgraded.XMageVerified, upgraded.ForgeOnly = eleven, twoNineteen
+	fails, slack = CheckRatchet(committed, []SetStatus{upgraded}, declared,
+		map[string]RatchetEntry{"TRK": {Outstanding: 3, XMageVerified: &ten, ForgeOnly: &twoTwenty}})
+	if len(fails) != 0 {
+		t.Errorf("(d) fails %v, want none", fails)
+	}
+	all := strings.Join(slack, "\n")
+	if !strings.Contains(all, "TRK: forge-only 220 -> 219") || !strings.Contains(all, "TRK: xmage-verified 10 -> 11") {
+		t.Errorf("(d) slack %v", slack)
+	}
+}
+
+// TestRatchetOfRecordsForgeSplitOnlyWhenForgeOnly: a set that has never had
+// a Forge-only card keeps its one-line entry; one that has records both
+// numbers, 0 included.
+func TestRatchetOfRecordsForgeSplitOnlyWhenForgeOnly(t *testing.T) {
+	sets := []SetStatus{
+		{Set: "FDN", Outstanding: 0, XMageVerified: 300},
+		{Set: "TRK", Outstanding: 3, XMageVerified: 10, ForgeOnly: 220},
+	}
+	r := RatchetOf(sets, map[string]RatchetEntry{})
+	fdn := r["FDN"]
+	if fdn.XMageVerified != nil || fdn.ForgeOnly != nil {
+		t.Errorf("FDN split pointers %v/%v, want nil (never Forge-only)", fdn.XMageVerified, fdn.ForgeOnly)
+	}
+	trk := r["TRK"]
+	if trk.XMageVerified == nil || *trk.XMageVerified != 10 || trk.ForgeOnly == nil || *trk.ForgeOnly != 220 {
+		t.Errorf("TRK split %v/%v, want 10/220", trk.XMageVerified, trk.ForgeOnly)
+	}
+	if got := string(MarshalRatchet(r)); !strings.Contains(got, "\"FDN\": {\"outstanding\":0},\n") {
+		t.Errorf("FDN entry moved: %s", got)
+	}
+
+	// A set that once had Forge-only cards keeps recording both numbers,
+	// even when the measured Forge-only count is now 0.
+	five := 5
+	prev := map[string]RatchetEntry{"TRK": {ForgeOnly: &five}}
+	zero := []SetStatus{{Set: "TRK", Outstanding: 0, XMageVerified: 10, ForgeOnly: 0}}
+	r = RatchetOf(zero, prev)
+	trk = r["TRK"]
+	if trk.ForgeOnly == nil || *trk.ForgeOnly != 0 || trk.XMageVerified == nil || *trk.XMageVerified != 10 {
+		t.Errorf("TRK after Forge-only: %v/%v, want 10/0", trk.XMageVerified, trk.ForgeOnly)
+	}
+}
