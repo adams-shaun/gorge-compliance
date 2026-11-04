@@ -188,3 +188,108 @@ func TestGateRefusesSetupLifeTrigger(t *testing.T) {
 		t.Fatalf("reasons %v, want setup_trigger:life_gained", r)
 	}
 }
+
+// TestGateRefusesSetupEntryTap: a non-active seat's untapped shock land is
+// placed by a move that re-runs its "you may pay 2 life, otherwise it enters
+// tapped" replacement. The runner has no answer for that replacement's
+// unless-cost during placement, so it declines and taps the land; the
+// non-active seat has no untap step before the cut, and the scenario schema
+// has no untap field, so the window cannot be rebuilt. The active seat is
+// exempt (its untap step restores the land), and a cut that already has the
+// land tapped is expressible (the placement's tap agrees).
+func TestGateRefusesSetupEntryTap(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+
+	// A non-active seat's untapped shock land is refused.
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	victim := plantBattlefieldCard(t, reg, e, "Breeding Pool", func(o *state.Object) bool {
+		return o.Owner != e.G.Active && o.Owner == o.Controller
+	})
+	victim.Tapped, victim.Counters = false, nil
+	c := capture(e, at, true)
+	if !hasReason(c, reasonEntryTap) {
+		t.Fatalf("non-active untapped shock land: reasons %v, want %s", c.Reasons, reasonEntryTap)
+	}
+
+	// The same land on the active seat is expressible: the placement taps it
+	// and turn 1's untap step restores it before the cut.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	plantBattlefieldCard(t, reg, e, "Breeding Pool", func(o *state.Object) bool {
+		return o.Owner == e.G.Active && o.Owner == o.Controller
+	}).Tapped = false
+	if r := capture(e, at, true).Reasons; slices.Contains(r, reasonEntryTap) {
+		t.Fatalf("active untapped shock land: reasons %v, want no %s", r, reasonEntryTap)
+	}
+
+	// A non-active seat's TAPPED shock land is expressible: the placement's
+	// entry tap is the state the cut already has.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	victim = plantBattlefieldCard(t, reg, e, "Breeding Pool", func(o *state.Object) bool {
+		return o.Owner != e.G.Active && o.Owner == o.Controller
+	})
+	victim.Tapped, victim.Counters = true, nil
+	if r := capture(e, at, true).Reasons; slices.Contains(r, reasonEntryTap) {
+		t.Fatalf("non-active tapped shock land: reasons %v, want no %s", r, reasonEntryTap)
+	}
+}
+
+// TestWindowSetupKeepsTappedPermanents: a cut with a tapped permanent on each
+// seat lowers to a setup the runner reproduces. The active seat's tap is a
+// tapped_after_untap (turn 1's untap step would otherwise clear it); the
+// non-active seat keeps its tap through placement. The cut also carries a
+// spent stun counter, which the live object keeps as a zero entry and the
+// runner's fresh placement does not: a zero counter is no counter on either
+// side.
+func TestWindowSetupKeepsTappedPermanents(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	active := int(e.G.Active)
+	plain := func(o *state.Object) bool {
+		f := o.Face()
+		return f != nil && len(f.Triggers) == 0 && o.AttachedTo == 0 && len(o.Counters) == 0 &&
+			!o.IsToken && o.FaceIdx == 0 && !entryTapReplacement(f)
+	}
+	var activePerm, otherPerm *state.Object
+	for _, o := range seatBattlefield(e.G, active) {
+		o.Tapped = false
+		if activePerm == nil && plain(o) {
+			activePerm = o
+		}
+	}
+	for _, o := range seatBattlefield(e.G, 1-active) {
+		o.Tapped = false
+		if otherPerm == nil && plain(o) {
+			otherPerm = o
+		}
+	}
+	if activePerm == nil || otherPerm == nil {
+		t.Fatalf("need a plain permanent on each seat (active %v, other %v)", activePerm != nil, otherPerm != nil)
+	}
+	activePerm.Tapped = true
+	otherPerm.Tapped = true
+	// The stun counter the untap step spent: the engine leaves the zero entry
+	// on the live object, which the runner's fresh placement never has.
+	activePerm.Counters = append(activePerm.Counters, state.Counter{Kind: "STUN", N: 0})
+
+	c := capture(e, at, true)
+	if len(c.Reasons) != 0 {
+		t.Fatalf("the planted cut is refused: %v", c.Reasons)
+	}
+	activeRef := refOf(seatBattlefield(e.G, active), activePerm)
+	otherRef := refOf(seatBattlefield(e.G, 1-active), otherPerm)
+	if got := c.Setup[active].TappedAfterUntap; !slices.Contains(got, activeRef) {
+		t.Errorf("active tapped_after_untap = %v, want %q", got, activeRef)
+	}
+	if got := append(append([]string{}, c.Setup[1-active].Tapped...), c.Setup[1-active].TappedAfterUntap...); !slices.Contains(got, otherRef) {
+		t.Errorf("non-active tapped fields = %v, want %q", got, otherRef)
+	}
+
+	m := seatMap{swap: c.Active == 1}
+	l := Lowered{Item: c.item(m, "xe:test:tapped", "tapped"), StepEntry: []int{-1}, Swap: m.swap}
+	l.Item.Steps = []oraclegen.Step{{Op: "pass", Seat: 0}}
+	wt := &game.Tape{Entries: []game.Entry{{Digest: game.DigestOfGame(e)}}}
+	wt.Entries[0].Digest.Turn = 1
+	if chk := SelfCheck(reg, l, wt); chk.Status != StatusOK {
+		t.Fatalf("setup checkpoint differs from the planted state: %s: gorge %s, tape %s %v", chk.Field, chk.Gorge, chk.Tape, chk.Fails)
+	}
+}
