@@ -48,6 +48,7 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.ManaPool;
 import mage.util.RandomUtil;
+import mage.utils.SystemUtil;
 import mage.players.Player;
 import mage.filter.FilterCard;
 import mage.target.TargetCard;
@@ -2798,6 +2799,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * a split/Room card is the whole "A // B" card. */
     private String xmageSpelling(String n) {
         return (!xmageName.isEmpty() && n.equals(gorgeName)) ? xmageName : n;
+    }
+
+    /** XMage's addCard treats a leading "SET-" as a set code (SystemUtil's
+     * rule: 3-6 upper-case/digit characters then '-'), so a real card name
+     * such as "DOT-7 Repair Squad" would be looked up as set DOT, card
+     * "7 Repair Squad". When the parser would split the name, re-spell it
+     * with the card's own set code so the first split leaves the whole name;
+     * every name XMage does not split is passed through unchanged. This is an
+     * override, not a call-site wrapper, so every addCard the driver makes --
+     * setup, filler and library_top -- goes through the same rule. */
+    @Override
+    public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
+        String setCode = "";
+        if (!SystemUtil.parseSetAndCardNameCommand(cardName).get(0).isEmpty()) {
+            CardInfo info = CardRepository.instance.findCard(cardName, true);
+            if (info != null) {
+                setCode = info.getSetCode();
+            }
+        }
+        super.addCard(gameZone, player, setCode.isEmpty() ? cardName : setCode + "-" + cardName, count, tapped);
     }
 
     /** The front half of a split/Room card's "A // B" name, or the name
