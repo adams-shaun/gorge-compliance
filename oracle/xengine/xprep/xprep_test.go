@@ -698,6 +698,76 @@ func TestPrepareModalTriggerMode(t *testing.T) {
 		}
 	})
 
+	// Ni'Var Science Academy is the "enters tapped unless you control two or
+	// more other lands" cycle with a Card.Self+untapped modal enters trigger
+	// (xe:RAND:1:4:w4). With one other land the played land enters tapped,
+	// the trigger never fires, and neither gorge's continuation nor XMage
+	// poses a mode; the window's own (empty) answers must survive instead of
+	// the whole item being refused.
+	landWindow := func(otherLands []string) (lower.Lowered, rules.OracleResult) {
+		t.Helper()
+		it := oraclegen.Item{
+			ID:       "xe:test:modal-land-tapped",
+			Template: "xengine-window",
+			Scenario: oraclegen.Scenario{
+				Name: "Ni'Var Science Academy at a cut pass", Turn: 1,
+				Why: "a Card.Self+untapped modal enters trigger must not be pending when the land enters tapped",
+				Setup: map[string]oraclegen.Seat{
+					"p0": {
+						Battlefield: otherLands,
+						Hand:        []string{"Ni'Var Science Academy", "Island", "Island"},
+						LibraryTop:  []string{"Island", "Forest", "Plains", "Island", "Forest", "Plains", "Island"},
+						Life:        int32p(20),
+					},
+					"p1": {
+						Hand:       []string{"Swamp", "Swamp"},
+						LibraryTop: []string{"Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp"},
+						Life:       int32p(20),
+					},
+				},
+				Steps: []oraclegen.Step{
+					{Op: "play", Seat: 0, Card: "p0:Ni'Var Science Academy"},
+					{Op: "pass", Seat: 0},
+				},
+			},
+		}
+		res, err := rules.RunOracleScenarioJSON(reg, it.Raw())
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(res.Fails) > 0 {
+			t.Fatalf("gorge rejects the window: %v", res.Fails)
+		}
+		return lower.Lowered{Item: it}, res
+	}
+	landTapped := func(g rules.OracleResult, ref string) (tapped, known bool) {
+		if len(g.Snapshots) < 2 {
+			return false, false
+		}
+		for _, p := range g.Snapshots[1].Permanents {
+			if p.Ref == ref {
+				return p.Tapped, true
+			}
+		}
+		return false, false
+	}
+	t.Run("enters-tapped land is not pending", func(t *testing.T) {
+		l, g := landWindow([]string{"Island"})
+		if len(g.Decisions) != 0 {
+			t.Fatalf("precondition: the cut recorded decisions %+v", g.Decisions)
+		}
+		if tapped, known := landTapped(g, "p0:Ni'Var Science Academy"); !known || !tapped {
+			t.Fatalf("precondition: the played land is not on the battlefield tapped (known=%v tapped=%v)", known, tapped)
+		}
+		it, ref := Prepare(reg, sp, l, g)
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		if got := modeAnswers(it); len(got) != 0 {
+			t.Errorf("mode answers = %+v, want none for a trigger that never fired", got)
+		}
+	})
+
 	// Emergency Holographic Crew's second mode is a keep-all Surveil 2: the
 	// completion's follow-up ask is an arrange, and the replay driver reads a
 	// surveil look through the choice queue (choice_skip then the kept-card
@@ -785,8 +855,8 @@ func TestPrepareModalTriggerMode(t *testing.T) {
 		if as[1].Kind != "choice" || as[1].Value != "[choice_skip]" {
 			t.Fatalf("answers after the mode = %+v, want a choice-queue keep-all skip", theRest(as))
 		}
-		if as[2].Kind != "choice" || (as[2].Value != "Forest" && as[2].Value != "Island") {
-			t.Errorf("order answer = %+v, want the looked-at card the dialog asks for", as[2])
+		if as[2].Kind != "choice" || as[2].Value != "Island" {
+			t.Errorf("order answer = %+v, want the second looked-at card as the dialog asks it", as[2])
 		}
 	}
 	t.Run("keep-all surveil at the cut", func(t *testing.T) {
@@ -813,9 +883,9 @@ func TestPrepareModalTriggerMode(t *testing.T) {
 	})
 }
 
-// theRest is the answers after the first two, for a failure message.
+// theRest is the answers after the first (the mode), for a failure message.
 func theRest(as []oraclegen.XAnswer) []oraclegen.XAnswer {
-	if len(as) <= 2 {
+	if len(as) <= 1 {
 		return as
 	}
 	return as[1:]

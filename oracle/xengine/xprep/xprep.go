@@ -182,11 +182,14 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 // last step, where the driver still holds them when it runs past the cut.
 //
 // The completion is only attempted when a modal enters trigger of a cast or
-// play step has no recorded mode decision (recordedTriggerMode); a window
-// where gorge did answer the mode keeps exactly its own answer. Anything the
-// completion cannot decide — a cut in an unknown step, a failure in gorge's
-// continued run, another trigger's mode asked first, an untranslatable span —
-// refuses the item with ReasonModalTrigger rather than guessing.
+// play step has no recorded mode decision (recordedTriggerMode) and the
+// checkpoint shows the trigger can fire (entersTriggerFires); a window where
+// gorge did answer the mode keeps exactly its own answer. A continuation that
+// poses no decision at all means the trigger did not fire, so the window's
+// answers are kept unchanged. Anything else the completion cannot decide — a
+// cut in an unknown step, a failure in gorge's continued run, another
+// trigger's mode asked first, an untranslatable span — refuses the item with
+// ReasonModalTrigger rather than guessing.
 func completeModalTrigger(reg *cards.Registry, it *oraclegen.Item, sc oraclegen.Scenario, g rules.OracleResult, modes map[string]int) *Refusal {
 	if len(sc.Steps) == 0 || len(it.XAnswers) != len(sc.Steps) || len(g.Snapshots) == 0 {
 		return nil
@@ -206,7 +209,11 @@ func completeModalTrigger(reg *cards.Registry, it *oraclegen.Item, sc oraclegen.
 			continue
 		}
 		f := c.Faces[face]
-		if !modalEntersCharm(f) {
+		valid, modal := modalEntersCharm(f)
+		if !modal {
+			continue
+		}
+		if !entersTriggerFires(valid, st.Card, g.Snapshots, i) {
 			continue
 		}
 		labels := oraclegen.ModeNumbers(f)
@@ -252,7 +259,12 @@ func completeModalTrigger(reg *cards.Registry, it *oraclegen.Item, sc oraclegen.
 		}
 	}
 	if len(span) == 0 {
-		return refuse(it.ID, ReasonModalTrigger, "%s: gorge's continued replay posed no decision for the trigger", p.card)
+		// Gorge's own continuation posed no decision at all: the trigger did
+		// not fire (a Card.Self+untapped land that entered tapped, or an
+		// ability removed modeless), so there is nothing to script. Keep the
+		// window's own answers rather than refusing an item the follower can
+		// replay; a refusal here would turn a clean row into not_sent.
+		return nil
 	}
 	if span[0].Kind != "mode" || !modeDecisionOf(span[0], p.card) {
 		return refuse(it.ID, ReasonModalTrigger, "%s: the first ask after the window is not its mode decision", p.card)
@@ -327,25 +339,62 @@ func arrangeLibrarySelection(add []oraclegen.XAnswer, span []rules.OracleDecisio
 
 // modalEntersCharm reports whether the face has an enters-the-battlefield
 // trigger (including "enters or attacks") whose body is a Charm with more than
-// one mode. Only a Card.Self trigger is read: that is the one a cast or play
-// step of the card itself is sure to fire.
-func modalEntersCharm(f *cards.Face) bool {
+// one mode, and returns that trigger's ValidCard filter. Only a Card.Self
+// trigger is read: that is the one a cast or play step of the card itself can
+// fire.
+func modalEntersCharm(f *cards.Face) (string, bool) {
 	for i := range f.Triggers {
 		tr := &f.Triggers[i]
 		if !strings.EqualFold(tr.Mode, "ChangesZone") || tr.Params["Destination"] != "Battlefield" {
 			continue
 		}
-		if !strings.HasPrefix(tr.Params["ValidCard"], "Card.Self") {
+		valid := tr.Params["ValidCard"]
+		if !strings.HasPrefix(valid, "Card.Self") {
 			continue
 		}
 		if tr.Effect == nil || tr.Effect.API != "Charm" {
 			continue
 		}
 		if len(effects.CharmOf(tr.Effect).Modes) > 1 {
-			return true
+			return valid, true
 		}
 	}
-	return false
+	return "", false
+}
+
+// entersTriggerFires reports whether the Card.Self changes-zone trigger with
+// the given ValidCard filter can fire for the permanent the step at index
+// step put on the battlefield. A cast step's permanent is still on the stack
+// at that checkpoint, so only a play step is decidable; a missing checkpoint
+// or permanent leaves the trigger pending (the conservative reading).
+//
+// The tapped/untapped predicates are the decidable half of the filter and the
+// land cycle's "enters tapped unless ..." is the common case: a
+// Card.Self+untapped trigger of a land that entered tapped never fires, and
+// treating it as pending would refuse a window that correctly asks nothing.
+func entersTriggerFires(valid, ref string, snaps []rules.OracleSnapshot, step int) bool {
+	if step+1 >= len(snaps) {
+		return true
+	}
+	wantUntapped, wantTapped := false, false
+	for _, cond := range strings.FieldsFunc(valid, func(r rune) bool { return r == '+' || r == ',' }) {
+		switch {
+		case strings.EqualFold(strings.TrimSpace(cond), "untapped"):
+			wantUntapped = true
+		case strings.EqualFold(strings.TrimSpace(cond), "tapped"):
+			wantTapped = true
+		}
+	}
+	if !wantUntapped && !wantTapped {
+		return true
+	}
+	for _, p := range snaps[step+1].Permanents {
+		if p.Ref != ref {
+			continue
+		}
+		return (!wantUntapped || !p.Tapped) && (!wantTapped || p.Tapped)
+	}
+	return true
 }
 
 // recordedTriggerMode reports whether gorge's result already holds a mode
