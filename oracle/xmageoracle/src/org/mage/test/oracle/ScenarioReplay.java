@@ -125,9 +125,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
     static {
         SETUP_TOKENS.put("b_1_1_bat_flying", mage.game.permanent.token.BatToken::new);
         SETUP_TOKENS.put("b_2_1_skeleton", mage.game.permanent.token.Skeleton21Token::new);
+        SETUP_TOKENS.put("b_2_2_romulan", mage.game.permanent.token.RomulanToken::new);
         SETUP_TOKENS.put("b_2_2_zombie", mage.game.permanent.token.ZombieToken::new);
         SETUP_TOKENS.put("b_2_2_zombie_druid", mage.game.permanent.token.ZombieDruidToken::new);
         SETUP_TOKENS.put("c_0_0_a_thopter_flying", mage.game.permanent.token.Thopter00ColorlessToken::new);
+        SETUP_TOKENS.put("c_1_1_a_borg", mage.game.permanent.token.BorgToken::new);
         SETUP_TOKENS.put("c_1_1_a_drone_flying_blockflying", mage.game.permanent.token.DroneFlyingToken::new);
         SETUP_TOKENS.put("c_1_1_a_servo", mage.game.permanent.token.ServoToken::new);
         SETUP_TOKENS.put("c_1_1_a_thopter_flying", mage.game.permanent.token.ThopterColorlessToken::new);
@@ -136,6 +138,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         SETUP_TOKENS.put("c_1_1_sliver", mage.game.permanent.token.SliverToken::new);
         SETUP_TOKENS.put("c_2_2_a_robot", mage.game.permanent.token.RobotToken::new);
         SETUP_TOKENS.put("c_3_2_a_vehicle_crew_1", mage.game.permanent.token.VehicleToken::new);
+        SETUP_TOKENS.put("c_3_3_a_illusion", mage.game.permanent.token.IllusionArtifactToken::new);
         SETUP_TOKENS.put("c_a_clue_draw", mage.game.permanent.token.ClueArtifactToken::new);
         SETUP_TOKENS.put("c_a_food_sac", mage.game.permanent.token.FoodToken::new);
         SETUP_TOKENS.put("c_a_lander_sac_search", mage.game.permanent.token.LanderToken::new);
@@ -144,8 +147,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
         SETUP_TOKENS.put("g_1_1_elf_warrior", mage.game.permanent.token.ElfWarriorToken::new);
         SETUP_TOKENS.put("g_2_2_spider_reach", mage.game.permanent.token.Spider22Token::new);
         SETUP_TOKENS.put("g_3_3_elephant", mage.game.permanent.token.ElephantToken::new);
+        SETUP_TOKENS.put("murf", mage.game.permanent.token.MurfToken::new);
+        SETUP_TOKENS.put("porthos", mage.game.permanent.token.PorthosToken::new);
         SETUP_TOKENS.put("r_1_1_goblin", mage.game.permanent.token.GoblinToken::new);
         SETUP_TOKENS.put("r_1_1_gremlin", mage.game.permanent.token.Gremlin11Token::new);
+        SETUP_TOKENS.put("r_1_1_officer", mage.game.permanent.token.OfficerToken::new);
+        SETUP_TOKENS.put("r_2_1_klingon_warrior_haste", mage.game.permanent.token.KlingonWarriorToken::new);
         SETUP_TOKENS.put("r_4_4_dinosaur_dragon_flying", mage.game.permanent.token.DinDragonToken::new);
         SETUP_TOKENS.put("u_1_1_faerie_flying", mage.game.permanent.token.FaerieToken::new);
         SETUP_TOKENS.put("u_1_1_fish", mage.game.permanent.token.FishNoAbilityToken::new);
