@@ -84,6 +84,23 @@ func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) erro
 	}); err != nil {
 		return err
 	}
+	// xitems is the item as xprep prepared it for XMage. A repro's input.jsonl
+	// must be that item: the raw items.jsonl row carries no xmage_ability, so
+	// xmage-oracle-run.sh fails before the divergence. xprep writes it beside
+	// the play dir (scripts/xengine-sweep.sh: -play $d -out $d/xitems.jsonl).
+	xitems := map[string]oraclegen.Item{}
+	if engine == "xmage" {
+		if err := readLines(filepath.Join(playDir, "xitems.jsonl"), func(b []byte) error {
+			var it oraclegen.Item
+			if err := json.Unmarshal(b, &it); err != nil {
+				return err
+			}
+			xitems[it.ID] = it
+			return nil
+		}); err != nil && !errors.Is(err, os.ErrNotExist) {
+			return err
+		}
+	}
 	gorge := map[string]rules.OracleResult{}
 	if err := readLines(filepath.Join(playDir, "gorge.jsonl"), func(b []byte) error {
 		var r gorgeRow
@@ -195,7 +212,17 @@ func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) erro
 			}
 		}
 		if f.Class != classify.ClassAgree {
-			if err := classify.WriteReproFrom(classify.Dir(out, f), f, l, g, x, origin); err != nil {
+			// The repro input is the prepared item, so the REPRO re-run can replay
+			// the divergence. A not_sent item was refused before xprep wrote a row:
+			// it has no prepared form, so it keeps the raw item (its REPRO.md is
+			// already unrunnable; changing that is out of scope).
+			repro := l
+			if xit, ok := xitems[r.ID]; ok {
+				repro = r.lowered(xit)
+			} else if engine == "xmage" && f.Class != classify.ClassNotSent {
+				return fmt.Errorf("%s: no prepared item in %s; run xengine xprep first", r.ID, filepath.Join(playDir, "xitems.jsonl"))
+			}
+			if err := classify.WriteReproFrom(classify.Dir(out, f), f, repro, g, x, origin); err != nil {
 				return err
 			}
 		}

@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
@@ -73,6 +74,19 @@ func goldenRows(t *testing.T, playDir, path string, edit func(i int, x *oracledi
 	return ids
 }
 
+// xprepPlayDir prepares playDir's items for XMage into playDir/xitems.jsonl,
+// as the sweep does before the XMage driver runs (scripts/xengine-sweep.sh).
+func xprepPlayDir(t *testing.T, reg *cards.Registry, playDir string) {
+	t.Helper()
+	sp, err := decks.LoadSpellings(manifestDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := xprepPlay(reg, sp, playDir, filepath.Join(playDir, "xitems.jsonl"), true); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func verdictClasses(t *testing.T, path string) map[string]string {
 	t.Helper()
 	got := map[string]string{}
@@ -91,6 +105,7 @@ func verdictClasses(t *testing.T, path string) map[string]string {
 
 func TestXenginePlayDiffRoundTrip(t *testing.T) {
 	reg, play := playTwo(t)
+	xprepPlayDir(t, reg, play)
 	tmp := t.TempDir()
 	rows := filepath.Join(tmp, "rows.jsonl")
 	ids := goldenRows(t, play, rows, nil)
@@ -183,6 +198,7 @@ func TestXenginePlayDiffRoundTrip(t *testing.T) {
 
 func TestXengineCompareCredit(t *testing.T) {
 	reg, play := playTwo(t)
+	xprepPlayDir(t, reg, play)
 	tmp := t.TempDir()
 	rows := filepath.Join(tmp, "rows.jsonl")
 	ids := goldenRows(t, play, rows, func(i int, x *oraclediff.XResult) {
@@ -243,6 +259,90 @@ func TestXengineCompareCredit(t *testing.T) {
 		if c := led.Get(u.Card, u.Key).Compared; c != 0 {
 			t.Errorf("%s %s: compared %d, but only the harness item exercised it", u.Card, u.Key, c)
 		}
+	}
+}
+
+// TestReproInputPrepared: a diverge repro's input.jsonl is the item as xprep
+// prepared it, not the raw items.jsonl row, so the REPRO re-run can replay it.
+// The finding is cut at the first activate step of the first xitems row that
+// has one, and that step must keep the xmage_ability xitems gave it.
+func TestReproInputPrepared(t *testing.T) {
+	reg, play := playTwo(t)
+	xprepPlayDir(t, reg, play)
+	items := func(path string) map[string]oraclegen.Item {
+		t.Helper()
+		got := map[string]oraclegen.Item{}
+		if err := readLines(path, func(b []byte) error {
+			var it oraclegen.Item
+			if err := json.Unmarshal(b, &it); err != nil {
+				return err
+			}
+			got[it.ID] = it
+			return nil
+		}); err != nil {
+			t.Fatal(err)
+		}
+		return got
+	}
+	// The first xitems row, in file order, with an activate step: cut the
+	// finding there. File order is deterministic, so is the choice.
+	var (
+		cutID string
+		cutAt int
+	)
+	if err := readLines(filepath.Join(play, "xitems.jsonl"), func(b []byte) error {
+		if cutID != "" {
+			return nil
+		}
+		var it oraclegen.Item
+		if err := json.Unmarshal(b, &it); err != nil {
+			return err
+		}
+		for i, st := range it.Steps {
+			if st.Op == "activate" {
+				cutID, cutAt = it.ID, i
+				return nil
+			}
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if cutID == "" {
+		t.Fatal("no xitems row has an activate step")
+	}
+	tmp := t.TempDir()
+	rows := filepath.Join(tmp, "rows.jsonl")
+	goldenRows(t, play, rows, func(_ int, x *oraclediff.XResult) {
+		if x.ID == cutID {
+			x.Snapshots[cutAt+1].Players[0].Life--
+		}
+	})
+	out := filepath.Join(tmp, "diverge")
+	if err := diff(reg, play, "xmage", rows, out, ""); err != nil {
+		t.Fatal(err)
+	}
+	repro := filepath.Join(out, "finds", classify.ClassDiverge, classify.Sanitise(cutID))
+	in := items(filepath.Join(repro, "input.jsonl"))[cutID]
+	prep := items(filepath.Join(play, "xitems.jsonl"))[cutID]
+	if len(in.Steps) != cutAt+1 {
+		t.Fatalf("input.jsonl has %d steps, want the cut at %d", len(in.Steps), cutAt+1)
+	}
+	activate := 0
+	for i, st := range in.Steps {
+		if st.Op != "activate" {
+			continue
+		}
+		activate++
+		if i >= len(in.XAbility) || in.XAbility[i] == "" {
+			t.Fatalf("input.jsonl activate step %d carries no xmage_ability", i)
+		}
+		if i >= len(prep.XAbility) || in.XAbility[i] != prep.XAbility[i] {
+			t.Fatalf("activate step %d: input xmage_ability %q, xitems %q", i, in.XAbility[i], prep.XAbility[i])
+		}
+	}
+	if activate == 0 {
+		t.Fatal("the cut scenario has no activate step to check")
 	}
 }
 
