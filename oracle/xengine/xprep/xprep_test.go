@@ -1,6 +1,7 @@
 package xprep
 
 import (
+	"fmt"
 	"reflect"
 	"slices"
 	"strings"
@@ -568,3 +569,327 @@ func TestComboColourPrefix(t *testing.T) {
 		t.Errorf("a one-colour tap: %q", got)
 	}
 }
+
+// TestPrepareModalTriggerMode: a window cut at the pass that hands priority
+// away still has the permanent's spell on the stack, so gorge records no mode
+// decision for its modal enters trigger while XMage resolves it and asks MODE
+// first, then the mode's target. Prepare completes the trigger from gorge's
+// own continued replay onto the window's last step. A window where gorge did
+// answer the mode keeps exactly that one answer.
+func TestPrepareModalTriggerMode(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sp, err := decks.LoadSpellings(manifestDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	zero := 0
+	// The card's own mode label, read from the corpus rather than pasted into
+	// the test (the Forge script's text stays out of this repository).
+	var surveil string
+	if c, ok := reg.Lookup("Federation Probe"); ok {
+		for label, n := range oraclegen.ModeNumbers(c.Faces[0]) {
+			if n == 2 {
+				surveil = label
+			}
+		}
+	}
+	if surveil == "" {
+		t.Fatal("Federation Probe has no second mode label")
+	}
+	// build is the Federation Probe window of xe:RAND:0:15:w1: one land, tap,
+	// cast, then the pass that hands priority to the opponent. recorded adds
+	// the opponent's pass and answers the trigger's mode, so gorge decides it
+	// inside the window.
+	build := func(recorded bool) (lower.Lowered, rules.OracleResult) {
+		t.Helper()
+		steps := []oraclegen.Step{
+			{Op: "play", Seat: 0, Card: "p0:Island"},
+			{Op: "activate", Seat: 0, Card: "p0:Island", AbilityIndex: &zero},
+			{Op: "cast", Seat: 0, Card: "p0:Federation Probe"},
+			{Op: "pass", Seat: 0},
+		}
+		if recorded {
+			steps = append(steps, oraclegen.Step{Op: "pass", Seat: 1,
+				Answers: []oraclegen.Answer{{Kind: "modes", Pick: []string{surveil}}}})
+		}
+		it := oraclegen.Item{
+			ID:       "xe:test:modal-trigger-mode",
+			Template: "xengine-window",
+			Payment:  []string{"", "", "U", ""},
+			Scenario: oraclegen.Scenario{
+				Name: "Federation Probe at a cut pass", Turn: 1,
+				Why: "a modal enters trigger is put on the stack after the window's last checkpoint",
+				Setup: map[string]oraclegen.Seat{
+					"p0": {
+						Hand:       []string{"Island", "Federation Probe", "Plains", "Plains", "Plains", "Island"},
+						LibraryTop: []string{"Command Decision", "Seven of Nine, Unassimilated", "Plains", "Lieutenant Commander Data", "Make It So", "Conquest Mission", "Island"},
+						Life:       int32p(20),
+					},
+					"p1": {
+						Hand:       []string{"Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp"},
+						LibraryTop: []string{"Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp"},
+						Life:       int32p(20),
+					},
+				},
+				Steps: steps,
+			},
+		}
+		res, err := rules.RunOracleScenarioJSON(reg, it.Raw())
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(res.Fails) > 0 {
+			t.Fatalf("gorge rejects the window: %v", res.Fails)
+		}
+		return lower.Lowered{Item: it}, res
+	}
+	modeAnswers := func(it oraclegen.Item) []oraclegen.XAnswer {
+		var out []oraclegen.XAnswer
+		for _, as := range it.XAnswers {
+			for _, a := range as {
+				if a.Kind == "mode" {
+					out = append(out, a)
+				}
+			}
+		}
+		return out
+	}
+	t.Run("cut before the trigger", func(t *testing.T) {
+		l, g := build(false)
+		if len(g.Decisions) != 0 {
+			t.Fatalf("precondition: the cut recorded decisions %+v", g.Decisions)
+		}
+		it, ref := Prepare(reg, sp, l, g)
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		last := len(it.XAnswers) - 1
+		as := it.XAnswers[last]
+		// Federation Probe is itself a legal target, so gorge's fallback takes
+		// mode 1 ("Target creature gets +1/+1") and then targets the Probe.
+		if len(as) < 2 || as[0].Kind != "mode" || as[0].Value != "1" {
+			t.Fatalf("last step answers = %+v, want mode 1 first", as)
+		}
+		targeted := false
+		for _, a := range as[1:] {
+			if a.Kind == "target" && a.Value == "Federation Probe" {
+				targeted = true
+			}
+		}
+		if !targeted {
+			t.Errorf("last step answers = %+v, want the mode's Federation Probe target", as)
+		}
+		if got := modeAnswers(it); len(got) != 1 || got[0].Seat != 0 {
+			t.Errorf("mode answers = %+v, want exactly the completed one", got)
+		}
+	})
+	t.Run("gorge decided the mode", func(t *testing.T) {
+		l, g := build(true)
+		if len(g.Decisions) == 0 {
+			t.Fatal("precondition: the window recorded no mode decision")
+		}
+		it, ref := Prepare(reg, sp, l, g)
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		got := modeAnswers(it)
+		if len(got) != 1 || got[0].Value != "2" {
+			t.Fatalf("mode answers = %+v, want exactly gorge's Surveil answer 2", got)
+		}
+	})
+
+	// Ni'Var Science Academy is the "enters tapped unless you control two or
+	// more other lands" cycle with a Card.Self+untapped modal enters trigger
+	// (xe:RAND:1:4:w4). With one other land the played land enters tapped,
+	// the trigger never fires, and neither gorge's continuation nor XMage
+	// poses a mode; the window's own (empty) answers must survive instead of
+	// the whole item being refused.
+	landWindow := func(otherLands []string) (lower.Lowered, rules.OracleResult) {
+		t.Helper()
+		it := oraclegen.Item{
+			ID:       "xe:test:modal-land-tapped",
+			Template: "xengine-window",
+			Scenario: oraclegen.Scenario{
+				Name: "Ni'Var Science Academy at a cut pass", Turn: 1,
+				Why: "a Card.Self+untapped modal enters trigger must not be pending when the land enters tapped",
+				Setup: map[string]oraclegen.Seat{
+					"p0": {
+						Battlefield: otherLands,
+						Hand:        []string{"Ni'Var Science Academy", "Island", "Island"},
+						LibraryTop:  []string{"Island", "Forest", "Plains", "Island", "Forest", "Plains", "Island"},
+						Life:        int32p(20),
+					},
+					"p1": {
+						Hand:       []string{"Swamp", "Swamp"},
+						LibraryTop: []string{"Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp"},
+						Life:       int32p(20),
+					},
+				},
+				Steps: []oraclegen.Step{
+					{Op: "play", Seat: 0, Card: "p0:Ni'Var Science Academy"},
+					{Op: "pass", Seat: 0},
+				},
+			},
+		}
+		res, err := rules.RunOracleScenarioJSON(reg, it.Raw())
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(res.Fails) > 0 {
+			t.Fatalf("gorge rejects the window: %v", res.Fails)
+		}
+		return lower.Lowered{Item: it}, res
+	}
+	landTapped := func(g rules.OracleResult, ref string) (tapped, known bool) {
+		if len(g.Snapshots) < 2 {
+			return false, false
+		}
+		for _, p := range g.Snapshots[1].Permanents {
+			if p.Ref == ref {
+				return p.Tapped, true
+			}
+		}
+		return false, false
+	}
+	t.Run("enters-tapped land is not pending", func(t *testing.T) {
+		l, g := landWindow([]string{"Island"})
+		if len(g.Decisions) != 0 {
+			t.Fatalf("precondition: the cut recorded decisions %+v", g.Decisions)
+		}
+		if tapped, known := landTapped(g, "p0:Ni'Var Science Academy"); !known || !tapped {
+			t.Fatalf("precondition: the played land is not on the battlefield tapped (known=%v tapped=%v)", known, tapped)
+		}
+		it, ref := Prepare(reg, sp, l, g)
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		if got := modeAnswers(it); len(got) != 0 {
+			t.Errorf("mode answers = %+v, want none for a trigger that never fired", got)
+		}
+	})
+
+	// Emergency Holographic Crew's second mode is a keep-all Surveil 2: the
+	// completion's follow-up ask is an arrange, and the replay driver reads a
+	// surveil look through the choice queue (choice_skip then the kept-card
+	// order), not the target queue. A fixed-colour mana activation earlier in
+	// the window is the other half of xe:RAND:2:0:w7: XMage selects "{T}: Add
+	// {B}." by its text and asks nothing, so gorge's "Add B" answer must not
+	// reach the choice queue in front of the surveil answers.
+	var surveilCrew string
+	if c, ok := reg.Lookup("Emergency Holographic Crew"); ok {
+		for label, n := range oraclegen.ModeNumbers(c.Faces[0]) {
+			if n == 2 {
+				surveilCrew = label
+			}
+		}
+	}
+	if surveilCrew == "" {
+		t.Fatal("Emergency Holographic Crew has no second mode label")
+	}
+	one := 1
+	surveilWindow := func(dirty bool) (lower.Lowered, rules.OracleResult) {
+		t.Helper()
+		battlefield := []string{"Island", "Island", "Island", "Island"}
+		hand := []string{"Emergency Holographic Crew", "Plains"}
+		var steps []oraclegen.Step
+		if dirty {
+			battlefield = battlefield[:3]
+			hand = append([]string{"Watery Grave"}, hand...)
+			steps = append(steps,
+				oraclegen.Step{Op: "play", Seat: 0, Card: "p0:Watery Grave",
+					Answers: []oraclegen.Answer{{Kind: "modes", Pick: []string{"Pay 2 life"}}}},
+				oraclegen.Step{Op: "activate", Seat: 0, Card: "p0:Watery Grave", AbilityIndex: &one},
+			)
+		}
+		for i := range battlefield {
+			ref := "p0:Island"
+			if i > 0 {
+				ref = fmt.Sprintf("p0:Island#%d", i+1)
+			}
+			steps = append(steps, oraclegen.Step{Op: "activate", Seat: 0, Card: ref, AbilityIndex: &zero})
+		}
+		steps = append(steps,
+			oraclegen.Step{Op: "cast", Seat: 0, Card: "p0:Emergency Holographic Crew"},
+			oraclegen.Step{Op: "pass", Seat: 0})
+		it := oraclegen.Item{
+			ID:       "xe:test:modal-trigger-surveil",
+			Template: "xengine-window",
+			Scenario: oraclegen.Scenario{
+				Name: "keep-all surveil at a cut pass", Turn: 1,
+				Why: "a keep-all surveil is a choice-queue arrange, and an earlier fixed-colour answer must not sit in that queue",
+				Setup: map[string]oraclegen.Seat{
+					"p0": {
+						Battlefield: battlefield,
+						Hand:        hand,
+						LibraryTop:  []string{"Forest", "Island", "Plains", "Island", "Forest", "Island", "Plains", "Forest"},
+						Life:        int32p(20),
+					},
+					"p1": {
+						Hand:       []string{"Swamp", "Swamp"},
+						LibraryTop: []string{"Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp"},
+						Life:       int32p(20),
+					},
+				},
+				Steps: steps,
+			},
+		}
+		res, err := rules.RunOracleScenarioJSON(reg, it.Raw())
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(res.Fails) > 0 {
+			t.Fatalf("gorge rejects the window: %v", res.Fails)
+		}
+		return lower.Lowered{Item: it}, res
+	}
+	checkSurveil := func(t *testing.T, it oraclegen.Item) {
+		t.Helper()
+		if got := modeAnswers(it); len(got) != 1 || got[0].Value != "2" {
+			t.Fatalf("mode answers = %+v, want exactly the completed Surveil mode 2", got)
+		}
+		last := len(it.XAnswers) - 1
+		as := it.XAnswers[last]
+		if len(as) != 3 || as[0].Kind != "mode" || as[0].Value != "2" {
+			t.Fatalf("last step answers = %+v, want mode 2 then the keep-all arrange", as)
+		}
+		if as[1].Kind != "choice" || as[1].Value != "[choice_skip]" {
+			t.Fatalf("answers after the mode = %+v, want a choice-queue keep-all skip", theRest(as))
+		}
+		if as[2].Kind != "choice" || as[2].Value != "Island" {
+			t.Errorf("order answer = %+v, want the second looked-at card as the dialog asks it", as[2])
+		}
+	}
+	t.Run("keep-all surveil at the cut", func(t *testing.T) {
+		l, g := surveilWindow(false)
+		it, ref := Prepare(reg, sp, l, g)
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		checkSurveil(t, it)
+	})
+	t.Run("preceding unconsumed colour answer", func(t *testing.T) {
+		l, g := surveilWindow(true)
+		it, ref := Prepare(reg, sp, l, g)
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		// Step 1 activates Watery Grave: XMage's fixed "{T}: Add {B}." text
+		// selects the colour, so the answer gorge's runner recorded for it is
+		// not consumed and must not survive into the choice queue.
+		if got := it.XAnswers[1]; len(got) != 0 {
+			t.Errorf("fixed-colour step answers = %+v, want none", got)
+		}
+		checkSurveil(t, it)
+	})
+}
+
+// theRest is the answers after the first (the mode), for a failure message.
+func theRest(as []oraclegen.XAnswer) []oraclegen.XAnswer {
+	if len(as) <= 1 {
+		return as
+	}
+	return as[1:]
+}
+
+// int32p is a *int32 for a scenario's Life.
+func int32p(v int32) *int32 { return &v }

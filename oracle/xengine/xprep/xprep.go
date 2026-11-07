@@ -56,10 +56,15 @@ const (
 	// answer would hide a disagreement between the two engines' ability
 	// selection, so the item is refused instead.
 	ReasonColourMismatch = "xmage_colour_mismatch"
+	// ReasonModalTrigger: a modal enters trigger's CR 603.3c mode choice (and
+	// the asks it opens) falls after the window's last checkpoint, so gorge's
+	// result holds no decision for it, and completing it from gorge's own
+	// continued replay did not decide it.
+	ReasonModalTrigger = "xmage_modal_trigger_unresolved"
 )
 
 // Reasons is every reason Prepare refuses with.
-var Reasons = []string{ReasonSpelling, ReasonModeCollision, ReasonAbilityUnknown, ReasonRetarget, ReasonNoResult, ReasonNoXMageCard, ReasonWindowOnly, ReasonColourMismatch}
+var Reasons = []string{ReasonSpelling, ReasonModeCollision, ReasonAbilityUnknown, ReasonRetarget, ReasonNoResult, ReasonNoXMageCard, ReasonWindowOnly, ReasonColourMismatch, ReasonModalTrigger}
 
 // tapeID matches the id of a tape item: "...:tape" or a prefix "...:tape:t<N>".
 var tapeID = regexp.MustCompile(`:tape(:t\d+)?$`)
@@ -88,6 +93,10 @@ func refuse(id, reason, format string, a ...any) *Refusal {
 //     are scripted by oraclegen.XAnswersForScenario, which also restores a
 //     divided spell's shares (oraclegen.CastDivisions). The mode numbers are the
 //     union over every face of every card the item casts or activates.
+//   - A modal enters trigger that resolves after the window's last checkpoint
+//     is completed from gorge's own continued replay (completeModalTrigger);
+//     when that completion cannot decide it, the item is refused rather than
+//     replayed with an unscripted ask.
 //   - Ability prefixes: oraclegen.XMageAbility of the step card's face.
 //   - Spellings: an item holding a card XMage spells differently is refused.
 //
@@ -125,6 +134,9 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 		// generator's activate and combat templates do.
 		it.XAnswers = make([][]oraclegen.XAnswer, len(sc.Steps))
 	}
+	if ref := completeModalTrigger(reg, &it, sc, g, modes); ref != nil {
+		return it, ref
+	}
 	for i := range sc.Steps {
 		if comboColourStep(abilities, i) {
 			it.XAnswers[i] = nil // the prefix names the colour; no ask follows
@@ -151,6 +163,323 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 	it.XAbility = abilities
 	it.XPos = passPositions(sc.Steps, g.Snapshots)
 	return it, nil
+}
+
+// completeModalTrigger scripts the CR 603.3c mode choice of a modal enters
+// trigger whose resolution falls after the item's last checkpoint (and the
+// target, arrange and choice asks that mode opens). A lowered window cut at
+// the pass that hands priority away leaves the permanent's spell still on the
+// stack, so gorge's own result records no decision for the trigger; XMage
+// nevertheless resolves the spell while its driver runs on to the end of the
+// turn and asks MODE (and then its targets) with nothing scripted.
+//
+// The completion replays the same scenario one step further through gorge's
+// own runner: the appended pass_to settles the pending trigger with the
+// runner's documented fallback (the first Min eligible modes, then those
+// asks' own fallbacks), so the decisions are gorge's, not a reimplementation
+// of CR 700.2 legality. The translator that scripts every other item
+// (oraclegen.XAnswers) then turns them into XMage answers on the window's
+// last step, where the driver still holds them when it runs past the cut.
+//
+// The completion is only attempted when a modal enters trigger of a cast or
+// play step has no recorded mode decision (recordedTriggerMode) and the
+// checkpoint shows the trigger can fire (entersTriggerFires); a window where
+// gorge did answer the mode keeps exactly its own answer. A continuation that
+// poses no decision at all means the trigger did not fire, so the window's
+// answers are kept unchanged. Anything else the completion cannot decide — a
+// cut in an unknown step, a failure in gorge's continued run, another
+// trigger's mode asked first, an untranslatable span — refuses the item with
+// ReasonModalTrigger rather than guessing.
+func completeModalTrigger(reg *cards.Registry, it *oraclegen.Item, sc oraclegen.Scenario, g rules.OracleResult, modes map[string]int) *Refusal {
+	if len(sc.Steps) == 0 || len(it.XAnswers) != len(sc.Steps) || len(g.Snapshots) == 0 {
+		return nil
+	}
+	type pending struct {
+		step   int
+		card   string
+		labels map[string]int
+	}
+	var pend []pending
+	for i, st := range sc.Steps {
+		if st.Op != "cast" && st.Op != "play" {
+			continue
+		}
+		c, face, ok := stepCard(reg, *it, st)
+		if !ok {
+			continue
+		}
+		f := c.Faces[face]
+		valid, modal := modalEntersCharm(f)
+		if !modal {
+			continue
+		}
+		if !entersTriggerFires(valid, st.Card, g.Snapshots, i) {
+			continue
+		}
+		labels := oraclegen.ModeNumbers(f)
+		if recordedTriggerMode(g.Decisions, st.Card, st.Op, i, labels) {
+			continue
+		}
+		pend = append(pend, pending{i, st.Card, labels})
+	}
+	if len(pend) == 0 {
+		return nil
+	}
+	if len(pend) > 1 {
+		return refuse(it.ID, ReasonModalTrigger, "%d unresolved modal enters triggers (%s, %s); their ask order is not decidable", len(pend), pend[0].card, pend[1].card)
+	}
+	p := pend[0]
+	last := len(sc.Steps) - 1
+	if sc.Steps[last].Op != "pass" {
+		return refuse(it.ID, ReasonModalTrigger, "step %d casts %q with a modal enters trigger, but the window does not end on a pass", p.step, p.card)
+	}
+	next, ok := stepAfterPass(g.Snapshots[len(g.Snapshots)-1].Step)
+	if !ok {
+		return refuse(it.ID, ReasonModalTrigger, "the window ends in %q, whose next step is unknown", g.Snapshots[len(g.Snapshots)-1].Step)
+	}
+	probe := sc
+	probe.Steps = append(slices.Clone(sc.Steps), oraclegen.Step{
+		Op: "pass_to", Step: next, Active: fmt.Sprintf("p%d", g.Snapshots[len(g.Snapshots)-1].Active),
+	})
+	raw, err := json.Marshal(probe)
+	if err != nil {
+		return refuse(it.ID, ReasonModalTrigger, "%s: %v", p.card, err)
+	}
+	res, err := rules.RunOracleScenarioJSON(reg, raw)
+	if err != nil {
+		return refuse(it.ID, ReasonModalTrigger, "%s: gorge could not continue the window: %v", p.card, err)
+	}
+	if len(res.Fails) > 0 {
+		return refuse(it.ID, ReasonModalTrigger, "%s: gorge could not continue the window: %s", p.card, res.Fails[0])
+	}
+	var span []rules.OracleDecision
+	for _, d := range res.Decisions {
+		if d.Step == len(sc.Steps) {
+			span = append(span, d)
+		}
+	}
+	if len(span) == 0 {
+		// Gorge's own continuation posed no decision at all: the trigger did
+		// not fire (a Card.Self+untapped land that entered tapped, or an
+		// ability removed modeless), so there is nothing to script. Keep the
+		// window's own answers rather than refusing an item the follower can
+		// replay; a refusal here would turn a clean row into not_sent.
+		return nil
+	}
+	if span[0].Kind != "mode" || !modeDecisionOf(span[0], p.card) {
+		return refuse(it.ID, ReasonModalTrigger, "%s: the first ask after the window is not its mode decision", p.card)
+	}
+	// The span is the trigger's own ask sequence: the mode, then the targets,
+	// arranges and choices it opens, up to the next modal ask (another
+	// trigger's mode). Decision order is the only binding gorge records
+	// between a mode and its follow-up asks, and XMage asks them in the same
+	// order. A discard picker shares the mode kind but sits inside the
+	// trigger's sequence, so only a charm mode of another source ends the
+	// span.
+	for j := 1; j < len(span); j++ {
+		if span[j].Kind == "mode" && span[j].Resume != "discard" && !modeDecisionOf(span[j], p.card) {
+			span = span[:j]
+			break
+		}
+	}
+	// The trigger's own mode numbers win over the item-wide union: a play-step
+	// card (a modal land) contributes no entry to modeNumbers.
+	pm := make(map[string]int, len(modes)+len(p.labels))
+	for k, v := range modes {
+		pm[k] = v
+	}
+	for k, v := range p.labels {
+		pm[k] = v
+	}
+	for j := range span {
+		span[j].Step = last
+	}
+	add := oraclegen.XAnswers(span, len(sc.Steps), pm)[last]
+	if len(add) == 0 || add[0].Kind != "mode" {
+		return refuse(it.ID, ReasonModalTrigger, "%s: gorge's continuation decided no mode for the trigger", p.card)
+	}
+	add = arrangeLibrarySelection(add, span)
+	it.XAnswers[last] = append(it.XAnswers[last], add...)
+	return nil
+}
+
+// arrangeLibrarySelection corrects oraclegen's keep-all arrange answer for the
+// surveil/scry look: that arm scripts the look selection as a target skip
+// because the generator's scenarios reach XMage's target-shaped
+// chooseTarget. The replay driver instead exposes the look through the choice
+// queue (ScriptedChoicePlayer.doSurveil/doScry's scriptedLibrarySelection), so
+// a target skip would be left unused, and the kept-card order
+// (putCardsOnTopOfLibrary) asks once per card but the topmost one. Replace the
+// trailing target skip with the choice-queue skip that keeps every card, then
+// the order answers: gorge's picks are the final top-first order, so the
+// last len-1 picks, reversed, are the order the dialog asks (the pick never
+// named ends on top). A partial selection's answers already carry their own
+// skip and order.
+func arrangeLibrarySelection(add []oraclegen.XAnswer, span []rules.OracleDecision) []oraclegen.XAnswer {
+	for _, d := range span {
+		if d.GorgeKind != "arrange" || d.Min != 0 || d.Options < 2 || len(d.Picks) != d.Options ||
+			(d.ArrangeKind != "graveyard" && d.ArrangeKind != "bottom") {
+			continue
+		}
+		if len(add) == 0 {
+			return add
+		}
+		last := add[len(add)-1]
+		if last.Kind != "target" || last.Value != "[target_skip]" {
+			continue
+		}
+		add = append(add[:len(add)-1], oraclegen.XAnswer{Seat: d.Seat, Kind: "choice", Value: "[choice_skip]"})
+		for k := len(d.Picks) - 1; k >= 1; k-- {
+			add = append(add, oraclegen.XAnswer{Seat: d.Seat, Kind: "choice", Value: d.Picks[k]})
+		}
+		return add
+	}
+	return add
+}
+
+// modalEntersCharm reports whether the face has an enters-the-battlefield
+// trigger (including "enters or attacks") whose body is a Charm with more than
+// one mode, and returns that trigger's ValidCard filter. Only a Card.Self
+// trigger is read: that is the one a cast or play step of the card itself can
+// fire.
+func modalEntersCharm(f *cards.Face) (string, bool) {
+	for i := range f.Triggers {
+		tr := &f.Triggers[i]
+		if !strings.EqualFold(tr.Mode, "ChangesZone") || tr.Params["Destination"] != "Battlefield" {
+			continue
+		}
+		valid := tr.Params["ValidCard"]
+		if !strings.HasPrefix(valid, "Card.Self") {
+			continue
+		}
+		if tr.Effect == nil || tr.Effect.API != "Charm" {
+			continue
+		}
+		if len(effects.CharmOf(tr.Effect).Modes) > 1 {
+			return valid, true
+		}
+	}
+	return "", false
+}
+
+// entersTriggerFires reports whether the Card.Self changes-zone trigger with
+// the given ValidCard filter can fire for the permanent the step at index
+// step put on the battlefield. A cast step's permanent is still on the stack
+// at that checkpoint, so only a play step is decidable; a missing checkpoint
+// or permanent leaves the trigger pending (the conservative reading).
+//
+// The tapped/untapped predicates are the decidable half of the filter and the
+// land cycle's "enters tapped unless ..." is the common case: a
+// Card.Self+untapped trigger of a land that entered tapped never fires, and
+// treating it as pending would refuse a window that correctly asks nothing.
+func entersTriggerFires(valid, ref string, snaps []rules.OracleSnapshot, step int) bool {
+	if step+1 >= len(snaps) {
+		return true
+	}
+	wantUntapped, wantTapped := false, false
+	for _, cond := range strings.FieldsFunc(valid, func(r rune) bool { return r == '+' || r == ',' }) {
+		switch {
+		case strings.EqualFold(strings.TrimSpace(cond), "untapped"):
+			wantUntapped = true
+		case strings.EqualFold(strings.TrimSpace(cond), "tapped"):
+			wantTapped = true
+		}
+	}
+	if !wantUntapped && !wantTapped {
+		return true
+	}
+	for _, p := range snaps[step+1].Permanents {
+		if p.Ref != ref {
+			continue
+		}
+		return (!wantUntapped || !p.Tapped) && (!wantTapped || p.Tapped)
+	}
+	return true
+}
+
+// recordedTriggerMode reports whether gorge's result already holds a mode
+// decision for the modal enters trigger of a step. A cast's spell mode is
+// decided on the cast step itself, while its enters trigger can only be
+// decided later (the spell must resolve first); a played land's trigger is
+// decided on the play step.
+func recordedTriggerMode(ds []rules.OracleDecision, ref, op string, step int, labels map[string]int) bool {
+	for _, d := range ds {
+		if d.Kind != "mode" {
+			continue
+		}
+		if op == "cast" && d.Step <= step || op == "play" && d.Step < step {
+			continue
+		}
+		if !modeDecisionOf(d, ref) {
+			continue
+		}
+		if len(d.Picks) == 0 {
+			return true // a declined mode is still the trigger's decision
+		}
+		for _, pick := range d.Picks {
+			if _, ok := labels[pick]; ok {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// modeDecisionOf reports whether a mode decision names the card ref as its
+// source. A mode decision carries the source on each option (and on each
+// pick); the "#N" duplicate suffix is ignored.
+func modeDecisionOf(d rules.OracleDecision, ref string) bool {
+	for _, r := range d.OptionRefs {
+		if sameCardRef(r, ref) {
+			return true
+		}
+	}
+	for _, r := range d.PickRefs {
+		if sameCardRef(r, ref) {
+			return true
+		}
+	}
+	return false
+}
+
+// sameCardRef compares two scenario object refs, ignoring the "#N" suffix a
+// duplicate carries.
+func sameCardRef(a, b string) bool { return suffixCut(a) == suffixCut(b) }
+
+// suffixCut drops a trailing "#N" from a scenario ref.
+func suffixCut(ref string) string {
+	if j := strings.LastIndexByte(ref, '#'); j >= 0 && j+1 < len(ref) && strings.Trim(ref[j+1:], "0123456789") == "" {
+		return ref[:j]
+	}
+	return ref
+}
+
+// stepAfterPass is the step a pass leaves when both seats pass on an empty
+// stack. A cut in the end step or a step with no successor is not followed.
+func stepAfterPass(step string) (string, bool) {
+	switch step {
+	case "untap":
+		return "upkeep", true
+	case "upkeep":
+		return "draw", true
+	case "draw":
+		return "main1", true
+	case "main1":
+		return "begin-combat", true
+	case "begin-combat":
+		return "declare-attackers", true
+	case "declare-attackers":
+		return "declare-blockers", true
+	case "declare-blockers":
+		return "combat-damage", true
+	case "combat-damage":
+		return "end-combat", true
+	case "end-combat":
+		return "main2", true
+	case "main2":
+		return "end", true
+	}
+	return "", false
 }
 
 // playStepUnlessPays rewrites the paid as-enters "unless you pay" decision of a
