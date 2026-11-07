@@ -1,0 +1,29 @@
+{
+  "card": "March of the World Ooze",
+  "family": "conditional-static",
+  "oracle_sha": "3f6556cde29c",
+  "author": "Oracle + CR only",
+  "scenarios": [
+    {
+      "name": "ooze-and-base-pt-apply-to-a-vehicle-crewed-after-it-entered",
+      "cr": ["613.8", "702.122"],
+      "why": "March of the World Ooze entered before the Vehicle was crewed. The crew effect makes the Vehicle an artifact creature (layer 4), and March's layer-4 type addition and layer-7b base P/T depend on it: applying the crew effect changes which objects 'creatures you control' covers, so the crewed Vehicle is an Ooze in addition to its other types with base power and toughness 6/6 (CR 613.8a). Timestamp order would apply March first, before the Vehicle is a creature, and miss it.",
+      "setup": {
+        "p0": {"battlefield": ["Lumbering Worldwagon", "Grizzly Bears"], "hand": ["March of the World Ooze"]},
+        "p1": {}
+      },
+      "steps": [
+        {"op": "cast", "seat": 0, "card": "p0:March of the World Ooze", "mana": "CCCGGG"},
+        {"op": "resolve"},
+        {"op": "activate", "seat": 0, "card": "p0:Lumbering Worldwagon", "ability": "Crew 4",
+         "answers": [{"kind": "choose", "pick": ["p0:Grizzly Bears"]}]},
+        {"op": "resolve"}
+      ],
+      "expect": [
+        {"card": "p0:Lumbering Worldwagon", "zone": "battlefield", "pt": "6/6",
+         "types": ["Artifact", "Creature", "Ooze", "Vehicle"]},
+        {"card": "p0:Grizzly Bears", "pt": "6/6", "types": ["Creature", "Ooze"], "tapped": true}
+      ]
+    }
+  ]
+}

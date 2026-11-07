@@ -624,3 +624,148 @@ func TestClassifyXMageSameNameTriggerOrder(t *testing.T) {
 		t.Errorf("distinct names: %+v", f)
 	}
 }
+
+// TestClassifyCrewTypeDependency: a type-adding static on a Vehicle that is a
+// creature leaves the follower's Vehicle with the same P/T and every other
+// characteristic, missing only the added type. The creature-making effect is a
+// crew, an external animate ability or a self-animation already in the hidden
+// setup game; the class reads it from the snapshots. Both engines order the
+// static's layer-4 part by timestamp; either side is this class.
+func TestClassifyCrewTypeDependency(t *testing.T) {
+	vehicle := func(types ...string) rules.OracleSnapPerm {
+		return rules.OracleSnapPerm{
+			Ref: "p0:Dune Drifter", Name: "Dune Drifter", Controller: 0, Owner: 0,
+			Types: types, Colors: "WB", PT: "6/6",
+		}
+	}
+	step := func(op, card string) oraclegen.Step { return oraclegen.Step{Op: op, Card: card} }
+
+	// A crew: the Vehicle is still a non-creature at the activate checkpoint
+	// and is a creature at the resolve checkpoint.
+	crew := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+		Steps: []oraclegen.Step{
+			step("cast", "p0:March of the World Ooze"), {Op: "resolve"},
+			step("activate", "p0:Dune Drifter"), {Op: "resolve"},
+		},
+	}}}
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		snap("setup"), snap("step 0 (cast)"), snap("step 1 (resolve)"),
+		snap("step 2 (activate)"), snap("step 3 (resolve)"),
+	}}
+	g.Snapshots[3].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Vehicle")}
+	g.Snapshots[4].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Creature", "Ooze", "Vehicle")}
+	missingType := follower(g, func(x *oraclediff.XResult) {
+		x.Snapshots[4].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Creature", "Vehicle")}
+	})
+	for _, engine := range []string{"forge", "xmage"} {
+		f := Classify(crew, nil, g, missingType, engine)
+		if f.Class != ClassCrewTypeDependency || f.Step != 3 {
+			t.Errorf("%s crew: %+v", engine, f)
+		}
+	}
+	if !Credited(ClassCrewTypeDependency) {
+		t.Error("a fully compared, understood difference must count as compared")
+	}
+
+	// An external animation: Guidelight Matrix's ability targets the Vehicle,
+	// it is non-creature at the activate checkpoint and a creature after the
+	// resolve. The class must not need an activate on the Vehicle itself.
+	animate := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w2", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+		Steps: []oraclegen.Step{
+			{Op: "activate", Card: "p0:Guidelight Matrix", Targets: []string{"p0:Dune Drifter"}}, {Op: "resolve"},
+		},
+	}}}
+	ag := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		snap("setup"), snap("step 0 (activate)"), snap("step 1 (resolve)"),
+	}}
+	ag.Snapshots[1].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Vehicle")}
+	ag.Snapshots[2].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Creature", "Ooze", "Vehicle")}
+	animated := follower(ag, func(x *oraclediff.XResult) {
+		x.Snapshots[2].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Creature", "Vehicle")}
+	})
+	for _, engine := range []string{"forge", "xmage"} {
+		f := Classify(animate, nil, ag, animated, engine)
+		if f.Class != ClassCrewTypeDependency || f.Step != 1 {
+			t.Errorf("%s external animation: %+v", engine, f)
+		}
+	}
+
+	// A self-animation already in the hidden game: the divergence is at setup,
+	// where both statics were on the battlefield before step 0. The same
+	// dependency applies even though the window holds no animate step.
+	setup := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w3", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+		Steps: []oraclegen.Step{{Op: "play", Card: "p0:Island"}},
+	}}}
+	sg := rules.OracleResult{Snapshots: []rules.OracleSnapshot{snap("setup"), snap("step 0 (play)")}}
+	sg.Snapshots[0].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Creature", "Ooze", "Vehicle")}
+	sg.Snapshots[1].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Creature", "Ooze", "Vehicle")}
+	setupMissing := follower(sg, func(x *oraclediff.XResult) {
+		x.Snapshots[0].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Creature", "Vehicle")}
+		x.Snapshots[1].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Creature", "Vehicle")}
+	})
+	if f := Classify(setup, nil, sg, setupMissing, "forge"); f.Class != ClassCrewTypeDependency || f.Step != -1 {
+		t.Errorf("setup self-animation: %+v", f)
+	}
+
+	// A Vehicle that was already a creature before the divergence gained the
+	// extra type elsewhere: a later, non-crew activate must not make it this
+	// class. The previous checkpoint carries Creature, so no animation explains
+	// the one-type difference.
+	later := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w4", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+		Steps: []oraclegen.Step{step("activate", "p0:Dune Drifter"), {Op: "resolve"}},
+	}}}
+	lg := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		snap("setup"), snap("step 0 (activate)"), snap("step 1 (resolve)"),
+	}}
+	lg.Snapshots[1].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Creature", "Vehicle")}
+	lg.Snapshots[2].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Creature", "Ooze", "Vehicle")}
+	laterDiff := follower(lg, func(x *oraclediff.XResult) {
+		x.Snapshots[1].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Creature", "Vehicle")}
+		x.Snapshots[2].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Creature", "Vehicle")}
+	})
+	if f := Classify(later, nil, lg, laterDiff, "forge"); f.Class == ClassCrewTypeDependency {
+		t.Errorf("an already-creature Vehicle: %+v", f)
+	}
+
+	// A non-animating activation leaves the Vehicle a non-creature: even the
+	// same one-type difference is not this class.
+	nonCreature := follower(ag, func(x *oraclediff.XResult) {
+		x.Snapshots[2].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Vehicle")}
+	})
+	ng := ag
+	ng.Snapshots[2].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Ooze", "Vehicle")}
+	if f := Classify(animate, nil, ng, nonCreature, "forge"); f.Class == ClassCrewTypeDependency {
+		t.Errorf("a Vehicle that never became a creature: %+v", f)
+	}
+
+	// A P/T difference is not the dependency: the static's layer-7b part is
+	// separate, and a wrong P/T is a real divergence.
+	wrongPT := follower(g, func(x *oraclediff.XResult) {
+		x.Snapshots[4].Permanents = []rules.OracleSnapPerm{func() rules.OracleSnapPerm {
+			p := vehicle("Artifact", "Creature", "Vehicle")
+			p.PT = "4/4"
+			return p
+		}()}
+	})
+	if f := Classify(crew, nil, g, wrongPT, "forge"); f.Class == ClassCrewTypeDependency {
+		t.Errorf("a P/T difference: %+v", f)
+	}
+	// The crew effect's own "creature" type is not the static's addition.
+	noCreature := follower(g, func(x *oraclediff.XResult) {
+		x.Snapshots[4].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Vehicle")}
+	})
+	if f := Classify(crew, nil, g, noCreature, "forge"); f.Class == ClassCrewTypeDependency {
+		t.Errorf("the crew effect itself: %+v", f)
+	}
+	// An uncrewed Vehicle never became a creature, so no dependency applies.
+	uncrewed := crew
+	uncrewed.Item.Steps = uncrewed.Item.Steps[:2]
+	uncrewedG := g
+	uncrewedG.Snapshots = append([]rules.OracleSnapshot(nil), g.Snapshots[:4]...)
+	uncrewedDiff := follower(uncrewedG, func(x *oraclediff.XResult) {
+		x.Snapshots[3].Permanents = []rules.OracleSnapPerm{vehicle("Artifact", "Vehicle")}
+	})
+	if f := Classify(uncrewed, nil, uncrewedG, uncrewedDiff, "forge"); f.Class == ClassCrewTypeDependency {
+		t.Errorf("uncrewed: %+v", f)
+	}
+}
