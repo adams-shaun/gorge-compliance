@@ -365,7 +365,13 @@ func digSourceForStep(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnap
 		}
 	}
 	if step < len(snaps) {
-		for _, o := range snaps[step].Stack {
+		// The stack runs bottom-to-top, so the LAST object is the one
+		// resolving and posing the decision. Only it can name the source:
+		// scanning lower objects would attribute a Dig choice to an unrelated
+		// permanent that happens to sit underneath.
+		stack := snaps[step].Stack
+		if len(stack) > 0 {
+			o := stack[len(stack)-1]
 			if o.Kind == "ability" && o.Trigger != "" {
 				if idx, err := strconv.Atoi(o.Trigger); err == nil {
 					if src, ok := digSourceAtTrigger(reg, o.Source, idx); ok {
@@ -373,9 +379,37 @@ func digSourceForStep(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnap
 					}
 				}
 			}
+			if o.Kind == "ability" && o.Trigger == "" {
+				// An activated ability's stack object carries no ability
+				// index (Trigger is for triggers only). The scenario's own
+				// preceding activate step names the exact ability, which is
+				// what tells Ashiok, Wicked Manipulator's one-card exile Dig
+				// from its all-cards exile Dig.
+				if src, ok := digSourceAtActivation(reg, sc, step, o.Source); ok {
+					return src, true
+				}
+			}
 			if src, ok := digSourceOnCard(reg, o.Source); ok {
 				return src, true
 			}
+		}
+	}
+	return digSource{}, false
+}
+
+// digSourceAtActivation is the Dig fact of the most recent activate step for
+// source before step. An activated ability's stack object names its source but
+// not its ability index, so the scenario's activate step is the only exact
+// identity; without it a multi-Dig card (Ashiok) would be ambiguous. The most
+// recent activation is the top copy and therefore the one resolving.
+func digSourceAtActivation(reg *cards.Registry, sc Scenario, step int, source string) (digSource, bool) {
+	for i := step - 1; i >= 0; i-- {
+		st := sc.Steps[i]
+		if st.Op != "activate" || st.Card != source || st.AbilityIndex == nil {
+			continue
+		}
+		if src, ok := digSourceAtAbility(reg, st.Card, *st.AbilityIndex); ok {
+			return src, true
 		}
 	}
 	return digSource{}, false

@@ -72,6 +72,52 @@ func TestDigFiveCardLookKeepsPick(t *testing.T) {
 	}
 }
 
+// TestDigActivatedExileFamilyScriptsComplement pins the threaded Ashiok,
+// Wicked Manipulator path: an activated ability's stack object names the
+// source but not its ability index, and the card carries two Dig abilities
+// whose second destinations disagree (the one-card exile take and the
+// all-cards exile ultimate). The preceding activate step names the exact
+// ability, so the router must still select the complement -- not fall back to
+// gorge's pick just because the card as a whole is ambiguous.
+func TestDigActivatedExileFamilyScriptsComplement(t *testing.T) {
+	reg := cards.NewRegistry()
+	reg.Add(&cards.Card{Faces: []*cards.Face{{
+		Name: "Ashiok, Wicked Manipulator",
+		Abilities: []*cards.SA{
+			{Kind: "AB", API: "Dig", Params: map[string]string{
+				"DigNum": "2", "ChangeNum": "1", "DestinationZone2": "Exile",
+			}},
+			{Kind: "AB", API: "Dig", Params: map[string]string{
+				"DigNum": "Z", "ChangeNum": "All", "DestinationZone": "Exile",
+			}},
+		},
+	}}})
+	idx := 0
+	sc := Scenario{Steps: []Step{
+		{Op: "pass"},
+		{Op: "activate", Seat: 0, Card: "p0:Ashiok, Wicked Manipulator", AbilityIndex: &idx},
+		{Op: "resolve"},
+	}}
+	d := rules.OracleDecision{Step: 2, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "dig",
+		Options: 2, Min: 1, Max: 1, Picks: []string{"Jace Beleren"}, PickIdx: []int{0},
+		PickRefs: []string{"p0:Jace Beleren"}, PickKinds: []string{"dig"},
+		OptionRefs: []string{"p0:Jace Beleren", "p0:Grizzly Bears"}}
+	res := rules.OracleResult{
+		Snapshots: []rules.OracleSnapshot{
+			{}, {},
+			// The activated ability resolves from the top of the stack; its
+			// Trigger field is empty because it is not a triggered ability.
+			{Stack: []rules.OracleSnapStack{{Kind: "ability", Source: "p0:Ashiok, Wicked Manipulator", Controller: 0}}},
+		},
+		Decisions: []rules.OracleDecision{d},
+	}
+	got := xanswersForScenario(reg, res, sc, nil, nil)
+	want := []XAnswer{{Seat: 0, Kind: "target", Value: "Grizzly Bears"}}
+	if len(got) <= 2 || !reflect.DeepEqual(got[2], want) {
+		t.Fatalf("step 2 answer = %#v, want %#v (the activated exile family scripts the complement)", got, want)
+	}
+}
+
 // TestDigBottomLabelStaysUninverted pins the unchanged bottom-label form (Jace,
 // the Mind Sculptor): its pick IS the card XMage selects, so it must script the
 // label's name and never the complement.
