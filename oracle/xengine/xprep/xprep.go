@@ -32,8 +32,9 @@ const (
 	// ReasonSpelling: the item holds a card XMage spells differently
 	// (Item.XMageName names one card only).
 	ReasonSpelling = decks.ReasonXMageSpelling
-	// ReasonModeCollision: two cards that are cast or activated in the item
-	// give one mode label different numbers; the answer map is keyed by label.
+	// ReasonModeCollision: two cards that are cast, activated or played in
+	// the item give one mode label different numbers; the answer map is keyed
+	// by label.
 	ReasonModeCollision = "xmage_mode_collision"
 	// ReasonAbilityUnknown: an activate step has no XMage rule-text prefix (a
 	// token or a card the corpus does not know, an ambiguous face, a step that
@@ -92,7 +93,7 @@ func refuse(id, reason, format string, a ...any) *Refusal {
 //     own target picks (oraclegen.ChooseTargets) and the rest of the decisions
 //     are scripted by oraclegen.XAnswersForScenario, which also restores a
 //     divided spell's shares (oraclegen.CastDivisions). The mode numbers are the
-//     union over every face of every card the item casts or activates.
+//     union over every face of every card the item casts, activates or plays.
 //   - A modal enters trigger that resolves after the window's last checkpoint
 //     is completed from gorge's own continued replay (completeModalTrigger);
 //     when that completion cannot decide it, the item is refused rather than
@@ -282,8 +283,9 @@ func completeModalTrigger(reg *cards.Registry, it *oraclegen.Item, sc oraclegen.
 			break
 		}
 	}
-	// The trigger's own mode numbers win over the item-wide union: a play-step
-	// card (a modal land) contributes no entry to modeNumbers.
+	// The trigger's own mode numbers win over the item-wide union: the union is
+	// keyed by mode label across the whole item, so the firing card's own
+	// printed order is the one XMage asks.
 	pm := make(map[string]int, len(modes)+len(p.labels))
 	for k, v := range modes {
 		pm[k] = v
@@ -737,13 +739,14 @@ func stepCard(reg *cards.Registry, it oraclegen.Item, st oraclegen.Step) (*cards
 }
 
 // modeNumbers is the union of oraclegen.ModeNumbers over every face of every
-// card the item casts or activates, or why two cards disagree on a label.
+// card the item casts, activates or plays, or why two cards disagree on a
+// label.
 func modeNumbers(reg *cards.Registry, it oraclegen.Item) (map[string]int, string) {
 	out := map[string]int{}
 	owner := map[string]string{}
 	done := map[string]bool{}
 	for _, st := range it.Steps {
-		if st.Op != "cast" && st.Op != "activate" {
+		if st.Op != "cast" && st.Op != "activate" && st.Op != "play" {
 			continue
 		}
 		n, ok := refName(st.Card)
