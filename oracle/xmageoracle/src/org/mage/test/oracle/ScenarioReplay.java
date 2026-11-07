@@ -2637,8 +2637,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** Whether a cast step's cast_mode is one this driver elects: Bargain,
-     * "optionalcost", the face-down Disguise/Morph/Megamorph casts and the "plot" special
-     * action and a graveyard "flashback" cast are wired ("plot_cast", the later cast of a plotted card, is not), and an absent or empty mode is the ordinary
+     * "optionalcost", the face-down Disguise/Morph/Megamorph casts, the "plot" special
+     * action, a graveyard "flashback" cast and a "mayplay" cast of a card a
+     * play-from-exile permission (Reckless Impulse) reaches are wired
+     * ("plot_cast", the later cast of a plotted card, is not), and an absent or empty mode is the ordinary
      * cast. Any other mode is a scenario the driver cannot replay and must
      * reject loudly rather than cast at face value. */
     static boolean castModeSupported(String mode) {
@@ -2646,6 +2648,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 || mode.equals("bargained") || mode.equals("optionalcost")
                 || mode.equals("disguised") || mode.equals("morphed") || mode.equals("megamorphed")
                 || mode.equals("plot") || mode.equals("flashback")
+                // "mayplay": the card is in exile (or wherever a play-from-exile
+                // permission reaches) rather than hand, but the cast itself is
+                // the card's ordinary SpellAbility, played by name. TestPlayer's
+                // "Cast <name>" search runs over Zone.ALL, so it finds it.
+                || mode.equals("mayplay")
                 // "alternative": an alternative cost another permanent grants
                 // (Leyline of Mutation's {W}{U}{B}{R}{G}). XMage poses it as
                 // its own yes/no while casting, which the generator scripts
