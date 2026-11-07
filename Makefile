@@ -26,9 +26,9 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
-# Forge oracle driver commit (fork, branch oracle-harness-trek6): a descendant of FORGE_REF with identical script trees.
-# e2c55e8dfc = oracle-harness-trek5 + gorge-trek6 (84ce1603d9: 70,000 Light-Years from Home's land to hand; Captain Michael Burnham is a Human Officer), keeping FORGE_REF's cardsfolder and tokenscripts trees.
-FORGE_ORACLE_REF ?= e2c55e8dfc310f57232ed4d1f62b1d5c565b9efd
+# Forge oracle driver commit (fork, branch wt/setup-turn-history): a descendant of FORGE_REF with identical script trees.
+# baa2c42320 = e2c55e8dfc (oracle-harness-trek5 + gorge-trek6, 84ce1603d9) + driver setup runs Game.onCleanupPhase so setup counters put and setup life gained do not seed per-turn history (Lasting Tarfire, Vanguard Seraph), keeping FORGE_REF's cardsfolder and tokenscripts trees.
+FORGE_ORACLE_REF ?= baa2c423206fcbfb5f0073bf19e9265b7375c1bb
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 .PHONY: help
