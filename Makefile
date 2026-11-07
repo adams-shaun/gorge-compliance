@@ -27,8 +27,8 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 # Forge oracle driver commit (fork, branch wt/setup-turn-history): a descendant of FORGE_REF with identical script trees.
-# baa2c42320 = e2c55e8dfc (oracle-harness-trek5 + gorge-trek6, 84ce1603d9) + driver setup runs Game.onCleanupPhase so setup counters put and setup life gained do not seed per-turn history (Lasting Tarfire, Vanguard Seraph), keeping FORGE_REF's cardsfolder and tokenscripts trees.
-FORGE_ORACLE_REF ?= baa2c423206fcbfb5f0073bf19e9265b7375c1bb
+# 0e200f1410 = baa2c42320 + a second Game.onCleanupPhase pass so setup life lost (player life below 20) does not roll into lifeLostLastTurn, and every other last-turn mirror starts empty too (First Response, Paladin of Atonement, Feast on the Fallen). baa2c42320 made setup counters put and setup life gained not seed per-turn history (Lasting Tarfire, Vanguard Seraph). Keeping FORGE_REF's cardsfolder and tokenscripts trees.
+FORGE_ORACLE_REF ?= 0e200f141026ba6565681a5b449216f7a0015241
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 .PHONY: help
