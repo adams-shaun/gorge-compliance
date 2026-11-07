@@ -47,8 +47,10 @@ func Label(p oraclediff.Pattern) string {
 // Eligible reports whether an item with these xe-6 classes (XMage's and
 // Forge's) is adjudicated: at least one engine diverged, and the other either
 // agreed, diverged, or did not compare at all (harness, not_sent, xmage_lacks,
-// turn_cap, forge_skips_damage_step, which ThreeWay turns into the GF|- / G|F|-
-// patterns or F harness). Anything else
+// turn_cap, forge_skips_damage_step or crew_type_dependency, which ThreeWay
+// turns into the GF|- / G|F|- patterns or F harness). A crew_type_dependency
+// on one side is a known follower difference, not a reason to hide the other
+// side's unexplained divergence, so it is in both allow-lists. Anything else
 // (rng, projection_gap, decision_shape, payment_choice, lower_gap on either
 // side) keeps its class: the difference there is not yet a statement about an
 // engine.
@@ -58,14 +60,14 @@ func Eligible(xClass, fClass string) bool {
 	}
 	okX := func(c string) bool {
 		switch c {
-		case classify.ClassDiverge, classify.ClassAgree, classify.ClassHarness, classify.ClassNotSent, classify.ClassXMageLacks:
+		case classify.ClassDiverge, classify.ClassAgree, classify.ClassHarness, classify.ClassNotSent, classify.ClassXMageLacks, classify.ClassCrewTypeDependency:
 			return true
 		}
 		return false
 	}
 	okF := func(c string) bool {
 		switch c {
-		case classify.ClassDiverge, classify.ClassAgree, classify.ClassHarness, classify.ClassTurnCap, classify.ClassForgeSkipsDamageStep:
+		case classify.ClassDiverge, classify.ClassAgree, classify.ClassHarness, classify.ClassTurnCap, classify.ClassForgeSkipsDamageStep, classify.ClassCrewTypeDependency:
 			return true
 		}
 		return false

@@ -114,6 +114,12 @@ func TestAdjudicateSkipsNonDiverge(t *testing.T) {
 		{classify.ClassDiverge, classify.ClassForgeSkipsDamageStep, true},
 		{classify.ClassAgree, classify.ClassForgeSkipsDamageStep, false},
 		{classify.ClassDiverge, classify.ClassLowerGap, false},
+		// A known follower difference on one side must not hide the other
+		// side's real divergence from three-way adjudication.
+		{classify.ClassCrewTypeDependency, classify.ClassDiverge, true},
+		{classify.ClassDiverge, classify.ClassCrewTypeDependency, true},
+		{classify.ClassCrewTypeDependency, classify.ClassCrewTypeDependency, false},
+		{classify.ClassCrewTypeDependency, classify.ClassAgree, false},
 	} {
 		if got := Eligible(c.x, c.f); got != c.want {
 			t.Errorf("Eligible(%s, %s) = %v, want %v", c.x, c.f, got, c.want)
