@@ -56,16 +56,32 @@ const (
 	// rows every attacker was a lone first striker; the driver cannot supply
 	// the priority round, since it only answers the priorities Forge gives.
 	ClassForgeSkipsDamageStep = "forge_skips_damage_step"
-	ClassRNG                  = "rng"
-	ClassProjectionGap        = "projection_gap"
-	ClassDiverge              = "diverge"
-	ClassAgree                = "agree"
+	// ClassCrewTypeDependency is a type-adding static that misses a Vehicle
+	// crewed after the static entered, in either follower. The static's
+	// layer-4 type addition and layer-7b base P/T depend (CR 613.8a) on the
+	// crew effect that makes the Vehicle an artifact creature: applying the
+	// crew effect changes which objects "creatures you control" covers, so
+	// the crew effect is applied first whatever the timestamps. Both
+	// followers order the static's layer-4 change by timestamp instead:
+	// XMage's filter has already skipped the not-yet-creature Vehicle, and
+	// Forge's subtype table drops the creature subtype while the
+	// intermediate type is not yet a creature. Neither restores it after the
+	// crew effect, while the layer-7b P/T is recomputed on the now-creature
+	// Vehicle, so it ends up 6/6 without the added type. gorge applies the
+	// dependency, so the difference is the followers', not gorge's. See
+	// docs/upstream-bugs.md for the XMage and Forge source.
+	ClassCrewTypeDependency = "crew_type_dependency"
+	ClassRNG                = "rng"
+	ClassProjectionGap      = "projection_gap"
+	ClassDiverge            = "diverge"
+	ClassAgree              = "agree"
 )
 
 // Classes lists every class, in report order.
 var Classes = []string{
 	ClassAgree, ClassDiverge, ClassRNG, ClassProjectionGap, ClassDecisionShape,
-	ClassPaymentChoice, ClassForgeSkipsDamageStep, ClassHarness, ClassNotSent, ClassTurnCap, ClassXMageLacks, ClassLowerGap,
+	ClassPaymentChoice, ClassForgeSkipsDamageStep, ClassCrewTypeDependency,
+	ClassHarness, ClassNotSent, ClassTurnCap, ClassXMageLacks, ClassLowerGap,
 }
 
 // Finding is the classified outcome for one item and one follower engine.
@@ -151,6 +167,8 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 		f.Msg = "pool split after a cast/activate whose payment was not fixed"
 	case rngField(v.Field) && (rngDrawn(item, t, f.Step) || shuffledEarlier(item, f.Step)):
 		f.Class = ClassRNG
+	case crewTypeDependency(item, g, x, v):
+		f.Class = ClassCrewTypeDependency
 	case projectionGap(v):
 		f.Class = ClassProjectionGap
 	default:
@@ -220,6 +238,143 @@ func Partial(item oraclegen.Item, g rules.OracleResult, x oraclediff.XResult) (r
 		return g, x, false
 	}
 	return cg, cx, true
+}
+
+// crewTypeDependency reports the first difference v at a permanent whose
+// canonical line differs only by one extra type on gorge's side, on an
+// artifact creature Vehicle the scenario crewed. That is the shape a
+// type-adding static leaves when it misses the crew effect it depends on
+// (CR 613.8a): the follower's layer-7b P/T still lands, so the P/T, counters,
+// colours, keywords, tap state and every other field agree and only the added
+// type is absent. A difference anywhere else, an uncrewed Vehicle, or an
+// extra "creature" (the crew effect itself) is not this class.
+func crewTypeDependency(item lower.Lowered, g rules.OracleResult, x oraclediff.XResult, v oraclediff.Verdict) bool {
+	if v.Status != oraclediff.Diverge || v.Field != "permanents" {
+		return false
+	}
+	d := stepOf(v.Checkpoint)
+	if d < 0 || d+1 >= len(g.Snapshots) || d+1 >= len(x.Snapshots) {
+		return false
+	}
+	gp, ok := permForLine(g.Snapshots[d+1].Permanents, v.Gorge)
+	if !ok || !crewActivated(item.Item.Steps, gp.Name) {
+		return false
+	}
+	gTypes, ok := lineTypes(v.Gorge)
+	if !ok {
+		return false
+	}
+	xTypes, ok := lineTypes(v.XMage)
+	if !ok {
+		return false
+	}
+	extra, ok := oneExtraType(gTypes, xTypes)
+	if !ok || strings.EqualFold(extra, "creature") {
+		return false
+	}
+	if !hasLineType(xTypes, "artifact") || !hasLineType(xTypes, "creature") || !hasLineType(xTypes, "vehicle") {
+		return false
+	}
+	// Removing the one extra type must reproduce the follower's whole line:
+	// any other difference (P/T, counters, tap state, keywords) is not this
+	// class.
+	without, ok := lineWithoutType(v.Gorge, extra)
+	if !ok {
+		return false
+	}
+	return without == v.XMage
+}
+
+// lineWithoutType removes one type token from the bracketed type list of a
+// canonical permanent line and leaves the rest of the line untouched.
+func lineWithoutType(line, extra string) (string, bool) {
+	open := strings.IndexByte(line, '[')
+	close := strings.IndexByte(line, ']')
+	if open < 0 || close < open {
+		return "", false
+	}
+	types := strings.Fields(line[open+1 : close])
+	var kept []string
+	for _, t := range types {
+		if !strings.EqualFold(t, extra) {
+			kept = append(kept, t)
+		}
+	}
+	if len(kept) != len(types)-1 {
+		return "", false
+	}
+	return line[:open+1] + strings.Join(kept, " ") + line[close:], true
+}
+
+// permForLine returns the permanent whose canonical line prefix is line's:
+// the comparator names a card by controller, owner and current name.
+func permForLine(ps []rules.OracleSnapPerm, line string) (rules.OracleSnapPerm, bool) {
+	for _, p := range ps {
+		prefix := fmt.Sprintf("c%d o%d %s [", p.Controller, p.Owner, p.Name)
+		if strings.HasPrefix(line, prefix) {
+			return p, true
+		}
+	}
+	return rules.OracleSnapPerm{}, false
+}
+
+// lineTypes reads the space-separated type list between the first brackets of
+// a canonical permanent line.
+func lineTypes(line string) ([]string, bool) {
+	open := strings.IndexByte(line, '[')
+	close := strings.IndexByte(line, ']')
+	if open < 0 || close < open {
+		return nil, false
+	}
+	return strings.Fields(line[open+1 : close]), true
+}
+
+// oneExtraType returns a's one type that b lacks, when b holds nothing a
+// lacks. The comparison folds case because the two engines spell types
+// differently.
+func oneExtraType(a, b []string) (string, bool) {
+	inB := make(map[string]bool, len(b))
+	for _, t := range b {
+		inB[strings.ToLower(t)] = true
+	}
+	inA := make(map[string]bool, len(a))
+	var extra []string
+	for _, t := range a {
+		inA[strings.ToLower(t)] = true
+		if !inB[strings.ToLower(t)] {
+			extra = append(extra, t)
+		}
+	}
+	for _, t := range b {
+		if !inA[strings.ToLower(t)] {
+			return "", false
+		}
+	}
+	if len(extra) != 1 {
+		return "", false
+	}
+	return extra[0], true
+}
+
+// hasLineType reports whether the canonical line type list holds t.
+func hasLineType(types []string, t string) bool {
+	for _, x := range types {
+		if strings.EqualFold(x, t) {
+			return true
+		}
+	}
+	return false
+}
+
+// crewActivated reports whether the scenario activated name's own ability:
+// the crew effect that animates the Vehicle after the static entered.
+func crewActivated(steps []oraclegen.Step, name string) bool {
+	for _, st := range steps {
+		if st.Op == "activate" && strings.EqualFold(oraclediff.RefName(st.Card), name) {
+			return true
+		}
+	}
+	return false
 }
 
 // skippedDamageStep is the checkpoint at which Forge left for end of combat
@@ -479,7 +634,7 @@ func trailingMiss(x oraclediff.XResult, steps int, engine string) bool {
 func Credited(class string) bool {
 	switch class {
 	case ClassAgree, ClassDiverge, ClassRNG, ClassProjectionGap, ClassDecisionShape,
-		ClassPaymentChoice:
+		ClassPaymentChoice, ClassCrewTypeDependency:
 		return true
 	}
 	return false

@@ -177,6 +177,25 @@ func staticContinuous(reg *cards.Registry, f *cards.Face, name string, req level
 		}
 		return it, true
 	}
+	// A plain "creatures you control" static that adds a creature type and
+	// sets a literal base P/T depends (CR 613.8a) on the crew effect for a
+	// Vehicle: the Vehicle is not a creature at the static's timestamp, so
+	// the crew effect is applied first and the static must then cover it.
+	// Crew the table's Vehicle probe after the cast so the dependency is
+	// observed on it; a scenario that only holds an existing creature never
+	// exercises it.
+	if cond, vehicle, ok := staticCrewDependencyFixture(reg, name, st, affected); ok {
+		plan := staticProbePlan{probes: []string{vehicle}}
+		base, why := staticBase(reg, c, f, name, req, plan, &cond)
+		if why == "" {
+			if res, err := rules.RunOracleScenarioJSON(reg, base.Raw()); err == nil && len(res.Fails) == 0 && len(res.Snapshots) > 0 {
+				reanswerAfterSteps(reg, f, name, &base, res, &cond)
+				if it, ok := served(base, res, plan, false, cond.baseline()); ok {
+					return it, nil
+				}
+			}
+		}
+	}
 	// Candidates that replayed and showed nothing on the plain probes are
 	// kept so the attach-host fallback can retry observation on their own
 	// snapshot without rebuilding or replaying the scenario. Each carries
@@ -224,35 +243,9 @@ func staticContinuous(reg *cards.Registry, f *cards.Face, name string, req level
 				continue
 			}
 			// A fixture whose afterSteps ask XMage questions (an activate
-			// step's cost) re-derives XAnswers from the full replay: the cast
-			// path's own XAnswers cover only the steps it replayed. The cast
-			// steps are named in the map so their own targets are not
-			// scripted a second time, and the activation's cost selector is
-			// scripted from the runner's observed picks at the step the
-			// fixture's activation runs.
-			if cond.reanswers {
-				base.XAnswers = oraclegen.XAnswersForScenario(reg, res, base.Scenario,
-					oraclegen.ModeNumbers(f), castStepIndices(base.Scenario.Steps))
-				if cond.beholdPick != "" {
-					beholdFromHand(base.XAnswers, base.Scenario.Steps, name, cond.beholdPick)
-				}
-				if cond.activationCost != "" {
-					for i := len(base.Scenario.Steps) - len(cond.afterSteps); i < len(base.Scenario.Steps); i++ {
-						if i < 0 || i >= len(base.Scenario.Steps) || base.Scenario.Steps[i].Op != "activate" {
-							continue
-						}
-						// The generic derivation already scripts an observed
-						// material exile pick; the catalogue fixture appended
-						// beside it would be an unused second answer on the
-						// same target ask (XMage consumes the queue FIFO), so
-						// the cost selector is scripted only when the runner
-						// recorded no exile pick.
-						if !exileCostPickObserved(res.Decisions, i) {
-							addActivationCostAnswers(base.XAnswers, i, cond.activationCost, name, res.Decisions)
-						}
-					}
-				}
-			}
+			// step's cost) re-derives XAnswers from the full replay (see
+			// reanswerAfterSteps).
+			reanswerAfterSteps(reg, f, name, &base, res, &cond)
 			bl := cond.baseline()
 			if it, ok := served(base, res, plan, false, bl); ok {
 				return it, nil

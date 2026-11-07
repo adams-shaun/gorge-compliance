@@ -12,7 +12,9 @@ list says whether upstream knows. For Forge, a script that disagrees with the pr
 
 ## XMage, confirmed and not filed
 
-None today.
+| Card or class | What XMage does | Rule | Source | Upstream |
+|---|---|---|---|---|
+| March of the World Ooze over a crewed Vehicle; the Lifecraft Engine family | `MarchOfTheWorldOoze.java:36-41` registers the layer-4 `AddCardSubtypeAllEffect` (Ooze) and the layer-7b `SetBasePowerToughnessAllEffect` as separate effects. `ContinuousEffects.java:1014` applies layer 4 in timestamp order (`:215-216`, `:239-256`), so March's older Ooze add runs before crew's `AddCardTypeSourceEffect`; its `FILTER_CONTROLLED_CREATURES` is evaluated then, so the still-non-creature Vehicle is skipped. The layer-4 dependency hook exists (`:1176-1185`, `ContinuousEffectImpl.isDependentTo:404-419`) but is a manual `DependencyType` workaround: crew provides `BecomeCreature` (`AddCardTypeSourceEffect.java:36-37`), and March's subtype effect passes `null` and never declares `addDependedToType(BecomeCreature)` (`AddCardSubtypeAllEffect.java:21-27`). Layer 7b re-filters dynamically (`SetBasePowerToughnessAllEffect:91`), so the Vehicle is 6/6 without Ooze | CR 613.8a | Mage/src/main/java/mage/abilities/effects/ContinuousEffects.java:1014, 1176-1185; Mage.Sets/src/mage/cards/m/MarchOfTheWorldOoze.java:36-41 at master be0d2048 (2026-11-07) | not reported |
 
 ## XMage, reported
 
@@ -50,7 +52,7 @@ Our fork, adams-shaun/mage, branch `gorge`, is magefree master plus the open fix
 
 Earlier: 27 issues and 22 merged PRs on Card-Forge/forge, 2026-10-06 to 2026-10-28, all closed: `gh search issues --repo Card-Forge/forge --author adams-shaun`.
 
-Source read at Card-Forge/forge master 7c34365c74 (2026-11-03). "Our fork" is adams-shaun/forge, branch `gorge` (e59046060a); every file named below is byte-identical there to master, so none of these is fixed on the fork unless the row says so.
+Source read at Card-Forge/forge master 7c34365c74 (2026-11-03). "Our fork" is adams-shaun/forge, branch `gorge` (e59046060a); every file named below is byte-identical there to master, so none of these is fixed on the fork unless the row says so. The March of the World Ooze row was read later, at master 54353f6f (2026-11-07); its files are not checked against the fork.
 
 ### Filed 2026-11-03
 
@@ -73,11 +75,13 @@ All filed after an independent recheck; texts in the operator's triage store, no
 | Combat damage with nothing assigned after first strike | `PhaseHandler.onPhaseBegin` COMBAT_DAMAGE sets `givePriorityToPlayer = false` when `assignCombatDamage(false)` assigns nothing, so a lone first striker gets no priority in the second combat damage step. 12 random3 rows (`forge_skips_damage_step`); gorge gives the round | CR 510.4, 117.3a | forge-game/.../phase/PhaseHandler.java:342-351 at master 6d4a175d9e (rechecked 2026-11-06; the pin ae39d91530 has the same block); also the same shape for a 0-power attacker (CR 510.3). Upstream already has it as part 2 of Card-Forge/forge#12590, filed from source reading; no separate issue | fix on branch `fix-second-combat-damage-step-priority` of adams-shaun/forge (b16a076d04, regular damage step only; PR Card-Forge/forge#12722) |
 | Parting Gust and any ChangeZone with `WithCountersType$` | `ChangeZoneEffect` passes `sa.getActivatingPlayer()` as the player who puts the entry counters (lines 610-615, 750-754, 1337-1340, 1640-1647, unless the script sets `WithCountersPlacer$`); with no placer the rule says the object's controller does, so a counter-doubling effect of the wrong player applies | CR 122.6a | forge-game/.../ability/effects/ChangeZoneEffect.java; seen on blb Parting Gust (fl-nstack2); the effect on a game was not replayed here | not fixed |
 | Any player at 0 life when a state-based check starts | `GameAction.checkStateEffects` calls `checkGameOverCondition` first and returns when the game is over, before the loop performs the other state-based actions of the same check; The Darkness Crystal's exile-and-gain is lost. Final board and life only, and the early return is deliberate; held back from filing | CR 704.3, 704.5a | forge-game/.../GameAction.java:1424-1429 | not fixed |
+| March of the World Ooze over a crewed Vehicle; the Lifecraft Engine family | Forge does add March's layer-4 `AddType$ Ooze` record to the Vehicle, but the record carries March's ETB timestamp and sorts before crew's `Animate` record. `CardType.addAll` runs `sanisfySubtypes` after each record, and the Ooze creature subtype is dropped while the intermediate type is still a non-creature artifact (`CardType.java:206-213, 663-704`); crew's later record adds `Creature` but cannot restore Ooze. The P/T still lands because the affected set is computed from the final merged type and cached across layers (CR 613.6, `GameAction.java:1160-1173`). Forge's real 613.8a graph (`GameAction.findStaticAbilityToApply:1297-1409`, TYPE is dependency-enabled) compares `StaticAbility`s only; crew is an `Animate` effect writing `CardChangedType` directly (`CardFactoryUtil.java:3702-3717`, `AnimateEffect.java:57`, `AnimateEffectBase.java:116`), so it is outside the graph. 30 DFT random rows (`crew_type_dependency`: 29 March of the World Ooze, 1 Lifecraft Engine); gorge follows CR 613.8a | CR 613.8a | forge-game/.../GameAction.java:1160-1173, 1297-1409; forge-game/.../staticability/StaticAbilityContinuous.java:104-108, 395-397, 906-909; forge-game/.../CardType.java:206-213, 663-704 at master 54353f6f (2026-11-07) | not fixed |
+
+Lifecraft Engine after crew is the same shape: Forge's older Card-Forge/forge#7128 and XMage's magefree/mage#16484 (our comment on #13565). The rows above now carry the source trace.
 
 ### Reading the rules and not traced in the source
 
 - Unwilling Vessel and Erratic Apparition: the "enchantment enters" trigger fires in Forge and XMage when the entering Aura strips the ability (CR 603.6a, 603.10; gorge doesn't fire). Erratic Apparition with Unable to Scream enchanting itself is harness row xe:RAND:426:11:w10. Neither engine's trigger collection was read line by line (Forge: ChangesZone trigger before the static re-layer; XMage: `ErraticApparition.java` via the EntersBattlefield event), so this stays a suspect.
-- Lifecraft Engine after crew: Forge's existing Card-Forge/forge#7128; XMage fixed it in magefree/mage#16484 (our comment on #13565). 12 random2 rows; gorge follows CR 613.8a.
 
 ### Looked at and dropped
 
