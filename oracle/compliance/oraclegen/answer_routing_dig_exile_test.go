@@ -72,6 +72,160 @@ func TestDigFiveCardLookKeepsPick(t *testing.T) {
 	}
 }
 
+// TestDigTopOfMultiObjectStackKeepsPick pins the top-first stack scan: the
+// snapshot is listed top first, so the resolving Hit It! trigger is stack[0]
+// with an unrelated permanent underneath it. A router that reads the bottom
+// object cannot resolve the source and falls back to the shape-only
+// complement, scripting Forest instead of gorge's Mountain.
+func TestDigTopOfMultiObjectStackKeepsPick(t *testing.T) {
+	reg := hitItDigRegistry()
+	reg.Add(&cards.Card{Faces: []*cards.Face{{Name: "Broodrage Mycoid"}}})
+	res := rules.OracleResult{
+		Snapshots: []rules.OracleSnapshot{
+			{},
+			{Stack: []rules.OracleSnapStack{
+				{Kind: "ability", Source: "p0:Hit It!", Controller: 0, Trigger: "0"},
+				{Kind: "spell", Source: "p0:Broodrage Mycoid", Controller: 0},
+			}},
+			{},
+		},
+		Decisions: []rules.OracleDecision{digMountainDecision(1)},
+	}
+	sc := Scenario{Steps: []Step{{Op: "pass"}, {Op: "pass"}}}
+	want := [][]XAnswer{nil, {{Seat: 0, Kind: "target", Value: "Mountain"}}}
+	if got := xanswersForScenario(reg, res, sc, nil, nil); !reflect.DeepEqual(got, want) {
+		t.Fatalf("routed = %#v, want %#v (the top Dig trigger keeps gorge's pick)", got, want)
+	}
+}
+
+// TestDigLowerStackObjectResolvesSource pins the other half of the scan: a
+// stale start-of-step snapshot can keep the resolving Dig trigger BELOW a
+// non-Dig spell that is already on top. The scan must walk past the top object
+// and resolve the lower Hit It! trigger; a blind stack[0] pick would fall back
+// to the complement.
+func TestDigLowerStackObjectResolvesSource(t *testing.T) {
+	reg := hitItDigRegistry()
+	reg.Add(&cards.Card{Faces: []*cards.Face{{Name: "Unrelated Spell"}}})
+	res := rules.OracleResult{
+		Snapshots: []rules.OracleSnapshot{
+			{},
+			{Stack: []rules.OracleSnapStack{
+				{Kind: "spell", Source: "p0:Unrelated Spell", Controller: 0},
+				{Kind: "ability", Source: "p0:Hit It!", Controller: 0, Trigger: "0"},
+			}},
+			{},
+		},
+		Decisions: []rules.OracleDecision{digMountainDecision(1)},
+	}
+	sc := Scenario{Steps: []Step{{Op: "pass"}, {Op: "pass"}}}
+	want := [][]XAnswer{nil, {{Seat: 0, Kind: "target", Value: "Mountain"}}}
+	if got := xanswersForScenario(reg, res, sc, nil, nil); !reflect.DeepEqual(got, want) {
+		t.Fatalf("routed = %#v, want %#v (the lower Dig source still keeps gorge's pick)", got, want)
+	}
+}
+
+// TestDigTriggerUsesNamedFace pins face-relative trigger resolution. A
+// double-faced card may carry a different Dig at the same trigger index on
+// each face; the stack ref names the face that actually triggered, so the
+// router must read that face's DestinationZone2 rather than the front face's.
+// Here the back face's graveyard-second Dig keeps gorge's pick while the
+// front face's exile Dig would script the complement.
+func TestDigTriggerUsesNamedFace(t *testing.T) {
+	reg := cards.NewRegistry()
+	reg.Add(&cards.Card{Faces: []*cards.Face{
+		{Name: "Front Face", Triggers: []cards.Trigger{{
+			Mode: "ChangesZone",
+			Effect: &cards.SA{Kind: "DB", API: "Dig", Params: map[string]string{
+				"DigNum": "2", "ChangeNum": "1", "DestinationZone2": "Exile",
+			}},
+		}}},
+		{Name: "Back Face", Triggers: []cards.Trigger{{
+			Mode: "ChangesZone",
+			Effect: &cards.SA{Kind: "DB", API: "Dig", Params: map[string]string{
+				"DigNum": "5", "ChangeNum": "1",
+				"DestinationZone": "Battlefield", "DestinationZone2": "Graveyard",
+			}},
+		}}},
+	}})
+	res := rules.OracleResult{
+		Snapshots: []rules.OracleSnapshot{
+			{},
+			{Stack: []rules.OracleSnapStack{
+				{Kind: "ability", Source: "p0:Back Face", Controller: 0, Trigger: "0"},
+			}},
+			{},
+		},
+		Decisions: []rules.OracleDecision{digMountainDecision(1)},
+	}
+	sc := Scenario{Steps: []Step{{Op: "pass"}, {Op: "pass"}}}
+	want := [][]XAnswer{nil, {{Seat: 0, Kind: "target", Value: "Mountain"}}}
+	if got := xanswersForScenario(reg, res, sc, nil, nil); !reflect.DeepEqual(got, want) {
+		t.Fatalf("routed = %#v, want %#v (the named back face's graveyard Dig keeps gorge's pick)", got, want)
+	}
+}
+
+// TestDigStackSourceBeatsStepCard pins that the resolving stack object wins
+// over a step card that names a different Dig permanent. A step can carry a
+// cast/activate of another card while the decision comes from a trigger that
+// is on the stack; attributing the decision to the step card would read that
+// card's DestinationZone2 and script the wrong answer.
+func TestDigStackSourceBeatsStepCard(t *testing.T) {
+	reg := hitItDigRegistry()
+	reg.Add(&cards.Card{Faces: []*cards.Face{{
+		Name: "Ashiok, Wicked Manipulator",
+		Triggers: []cards.Trigger{{
+			Mode: "ChangesZone",
+			Effect: &cards.SA{Kind: "DB", API: "Dig", Params: map[string]string{
+				"DigNum": "2", "ChangeNum": "1", "DestinationZone2": "Exile",
+			}},
+		}},
+	}}})
+	res := rules.OracleResult{
+		Snapshots: []rules.OracleSnapshot{
+			{},
+			{Stack: []rules.OracleSnapStack{
+				{Kind: "ability", Source: "p0:Hit It!", Controller: 0, Trigger: "0"},
+			}},
+			{},
+		},
+		Decisions: []rules.OracleDecision{digMountainDecision(1)},
+	}
+	sc := Scenario{Steps: []Step{
+		{Op: "pass"},
+		{Op: "activate", Seat: 0, Card: "p0:Ashiok, Wicked Manipulator"},
+	}}
+	want := [][]XAnswer{nil, {{Seat: 0, Kind: "target", Value: "Mountain"}}}
+	if got := xanswersForScenario(reg, res, sc, nil, nil); !reflect.DeepEqual(got, want) {
+		t.Fatalf("routed = %#v, want %#v (the resolving stack source beats the step card)", got, want)
+	}
+}
+
+// hitItDigRegistry is the five-card look Hit It! trigger: first destination
+// battlefield, second graveyard, so the router must keep gorge's pick.
+func hitItDigRegistry() *cards.Registry {
+	reg := cards.NewRegistry()
+	reg.Add(&cards.Card{Faces: []*cards.Face{{
+		Name: "Hit It!",
+		Triggers: []cards.Trigger{{
+			Mode: "ChangesZone",
+			Effect: &cards.SA{Kind: "DB", API: "Dig", Params: map[string]string{
+				"DigNum": "5", "ChangeNum": "1",
+				"DestinationZone": "Battlefield", "DestinationZone2": "Graveyard",
+			}},
+		}},
+	}}})
+	return reg
+}
+
+// digMountainDecision is the one-card take over the two named lands Hit It!
+// offers, with gorge picking the Mountain.
+func digMountainDecision(step int) rules.OracleDecision {
+	return rules.OracleDecision{Step: step, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "dig",
+		Options: 2, Min: 1, Max: 1, Picks: []string{"Mountain"}, PickIdx: []int{0},
+		PickRefs: []string{"p0:Mountain#3"}, PickKinds: []string{"dig"},
+		OptionRefs: []string{"p0:Mountain#3", "p0:Forest#5"}}
+}
+
 // TestDigActivatedExileFamilyScriptsComplement pins the threaded Ashiok,
 // Wicked Manipulator path: an activated ability's stack object names the
 // source but not its ability index, and the card carries two Dig abilities

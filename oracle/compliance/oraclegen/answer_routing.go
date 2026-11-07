@@ -342,15 +342,32 @@ type digSource struct {
 
 // digSourceForStep resolves the card (and, when an index is available, the
 // exact ability) that posed a Dig decision at step. sc and snaps are the
-// caller's scenario and gorge result; reg is the corpus. The stack snapshot at
-// the decision's own step holds the resolving trigger/ability (a window's
-// resolving trigger has no scenario step card to name), and an activate/cast
-// step names its source directly. ok is false when nothing resolves: the
-// caller then keeps the historical shape-only routing.
+// caller's scenario and gorge result; reg is the corpus.
+//
+// The stack snapshot at the decision's own step is the authority. Its slice is
+// top-first (OracleSnapStack is documented "listed top first"), so the scan
+// walks it in order and returns the first object whose ability/trigger is a
+// Dig. Scanning past a non-Dig top object is deliberate: a snapshot can predate
+// the activation that resolves next, leaving the Dig source lower in the
+// slice, so neither a blind top-object nor a blind bottom-object pick can
+// resolve such a stack. A cast/activate step card is only a fallback for a
+// step with no resolving stack object, so it cannot override the actual
+// source when a step also casts or activates a different card. ok is false
+// when nothing resolves: the caller then keeps the historical shape-only
+// routing.
 func digSourceForStep(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapshot, step int) (digSource, bool) {
 	if reg == nil || step < 0 {
 		return digSource{}, false
 	}
+	if step < len(snaps) {
+		for _, o := range snaps[step].Stack {
+			if src, ok := digSourceOnStackObject(reg, sc, step, o); ok {
+				return src, true
+			}
+		}
+	}
+	// A cast/activate step names its own source when no snapshot object
+	// resolves it (an empty or stale snapshot).
 	if step < len(sc.Steps) {
 		st := sc.Steps[step]
 		if st.Card != "" {
@@ -364,37 +381,29 @@ func digSourceForStep(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnap
 			}
 		}
 	}
-	if step < len(snaps) {
-		// The stack runs bottom-to-top, so the LAST object is the one
-		// resolving and posing the decision. Only it can name the source:
-		// scanning lower objects would attribute a Dig choice to an unrelated
-		// permanent that happens to sit underneath.
-		stack := snaps[step].Stack
-		if len(stack) > 0 {
-			o := stack[len(stack)-1]
-			if o.Kind == "ability" && o.Trigger != "" {
-				if idx, err := strconv.Atoi(o.Trigger); err == nil {
-					if src, ok := digSourceAtTrigger(reg, o.Source, idx); ok {
-						return src, true
-					}
-				}
-			}
-			if o.Kind == "ability" && o.Trigger == "" {
-				// An activated ability's stack object carries no ability
-				// index (Trigger is for triggers only). The scenario's own
-				// preceding activate step names the exact ability, which is
-				// what tells Ashiok, Wicked Manipulator's one-card exile Dig
-				// from its all-cards exile Dig.
-				if src, ok := digSourceAtActivation(reg, sc, step, o.Source); ok {
-					return src, true
-				}
-			}
-			if src, ok := digSourceOnCard(reg, o.Source); ok {
+	return digSource{}, false
+}
+
+// digSourceOnStackObject resolves one stack snapshot entry. A trigger carries
+// its face-relative printed index; an activated ability carries none, so the
+// scenario's preceding activate step names the exact ability (the difference
+// between Ashiok, Wicked Manipulator's one-card exile Dig and its all-cards
+// exile Dig). The card-level fallback covers a trigger whose own index does
+// not name a Dig.
+func digSourceOnStackObject(reg *cards.Registry, sc Scenario, step int, o rules.OracleSnapStack) (digSource, bool) {
+	if o.Kind == "ability" && o.Trigger != "" {
+		if idx, err := strconv.Atoi(o.Trigger); err == nil {
+			if src, ok := digSourceAtTrigger(reg, o.Source, idx); ok {
 				return src, true
 			}
 		}
 	}
-	return digSource{}, false
+	if o.Kind == "ability" && o.Trigger == "" {
+		if src, ok := digSourceAtActivation(reg, sc, step, o.Source); ok {
+			return src, true
+		}
+	}
+	return digSourceOnCard(reg, o.Source)
 }
 
 // digSourceAtActivation is the Dig fact of the most recent activate step for
@@ -415,6 +424,22 @@ func digSourceAtActivation(reg *cards.Registry, sc Scenario, step int, source st
 	return digSource{}, false
 }
 
+// digFaces returns the faces of c a ref can name. A stack/setup ref names the
+// specific face of a multi-face card (stackSourceRef and abilitySourceRef
+// rewrite it to that face's printed name), so only that face may answer; a
+// whole-card ref keeps every face. This is what makes a face-relative ability
+// or trigger index exact instead of applying index 0 to the front face and
+// returning whichever face happens to carry a Dig there.
+func digFaces(c *cards.Card, ref string) []*cards.Face {
+	name := cards.NormalizeName(oraclediffRefName(ref))
+	for _, f := range c.Faces {
+		if f != nil && cards.NormalizeName(f.Name) == name {
+			return []*cards.Face{f}
+		}
+	}
+	return c.Faces
+}
+
 // digSourceAtAbility is the Dig fact of one activated ability (a step's
 // AbilityIndex), or false when that ability's own chain carries no Dig.
 func digSourceAtAbility(reg *cards.Registry, ref string, idx int) (digSource, bool) {
@@ -422,15 +447,14 @@ func digSourceAtAbility(reg *cards.Registry, ref string, idx int) (digSource, bo
 	if !ok {
 		return digSource{}, false
 	}
-	for _, f := range c.Faces {
+	var dests []string
+	for _, f := range digFaces(c, ref) {
 		if f == nil || idx < 0 || idx >= len(f.Abilities) {
 			continue
 		}
-		if dest, ok := digSecondInSA(f.Abilities[idx]); ok {
-			return digSource{dest, true}, true
-		}
+		dests = append(dests, digSecondsInSA(f.Abilities[idx])...)
 	}
-	return digSource{}, false
+	return digSourceFromSeconds(dests)
 }
 
 // digSourceAtTrigger is the Dig fact of one printed trigger (a stack object's
@@ -440,62 +464,58 @@ func digSourceAtTrigger(reg *cards.Registry, ref string, idx int) (digSource, bo
 	if !ok {
 		return digSource{}, false
 	}
-	for _, f := range c.Faces {
+	var dests []string
+	for _, f := range digFaces(c, ref) {
 		if f == nil || idx < 0 || idx >= len(f.Triggers) {
 			continue
 		}
-		if dest, ok := digSecondInSA(f.Triggers[idx].Effect); ok {
-			return digSource{dest, true}, true
-		}
+		dests = append(dests, digSecondsInSA(f.Triggers[idx].Effect)...)
 	}
-	return digSource{}, false
+	return digSourceFromSeconds(dests)
 }
 
-// digSourceOnCard falls back to every Dig ability on the card. known is false
-// when they disagree on the second destination; the router then keeps gorge's
-// pick rather than guess which family the decision belongs to.
+// digSourceOnCard falls back to every Dig ability on every face of the card.
+// known is false when they disagree on the second destination; the router then
+// keeps gorge's pick rather than guess which family the decision belongs to.
+// Aggregating all faces (rather than returning the first face with any Dig)
+// means a double-faced card's two faces cannot silently disagree.
 func digSourceOnCard(reg *cards.Registry, ref string) (digSource, bool) {
 	c, ok := reg.Lookup(oraclediffRefName(ref))
 	if !ok {
 		return digSource{}, false
 	}
+	var dests []string
+	seen := map[*cards.SA]bool{}
 	for _, f := range c.Faces {
 		if f == nil {
 			continue
 		}
-		if dest, known, any := faceDigSecond(f); any {
-			return digSource{dest, known}, true
+		for _, sa := range f.Abilities {
+			collectDigSeconds(sa, seen, &dests)
+		}
+		for _, tr := range f.Triggers {
+			collectDigSeconds(tr.Effect, seen, &dests)
 		}
 	}
-	return digSource{}, false
+	return digSourceFromSeconds(dests)
 }
 
-// digSecondInSA reports the DestinationZone2 of the Dig in one ability chain.
-func digSecondInSA(sa *cards.SA) (string, bool) {
+// digSecondsInSA reports every Dig second destination in one ability chain.
+func digSecondsInSA(sa *cards.SA) []string {
 	var dests []string
 	collectDigSeconds(sa, map[*cards.SA]bool{}, &dests)
-	if len(dests) == 0 {
-		return "", false
-	}
-	return agreeDigSecond(dests)
+	return dests
 }
 
-// faceDigSecond reports the shared DestinationZone2 of every Dig ability on a
-// face, whether the face has any Dig at all, and whether they agree.
-func faceDigSecond(f *cards.Face) (dest string, known, any bool) {
-	var dests []string
-	seen := map[*cards.SA]bool{}
-	for _, sa := range f.Abilities {
-		collectDigSeconds(sa, seen, &dests)
-	}
-	for _, tr := range f.Triggers {
-		collectDigSeconds(tr.Effect, seen, &dests)
-	}
+// digSourceFromSeconds derives a resolved Dig source from every second
+// destination it collected. There is no source without a Dig; several
+// destinations that disagree are known false.
+func digSourceFromSeconds(dests []string) (digSource, bool) {
 	if len(dests) == 0 {
-		return "", false, false
+		return digSource{}, false
 	}
-	dest, known = agreeDigSecond(dests)
-	return dest, known, true
+	dest, known := agreeDigSecond(dests)
+	return digSource{dest, known}, true
 }
 
 // collectDigSeconds walks an ability's SubAbility$ chain, recording every
