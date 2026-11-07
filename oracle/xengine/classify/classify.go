@@ -57,19 +57,22 @@ const (
 	// the priority round, since it only answers the priorities Forge gives.
 	ClassForgeSkipsDamageStep = "forge_skips_damage_step"
 	// ClassCrewTypeDependency is a type-adding static that misses a Vehicle
-	// crewed after the static entered, in either follower. The static's
-	// layer-4 type addition and layer-7b base P/T depend (CR 613.8a) on the
-	// crew effect that makes the Vehicle an artifact creature: applying the
-	// crew effect changes which objects "creatures you control" covers, so
-	// the crew effect is applied first whatever the timestamps. Both
-	// followers order the static's layer-4 change by timestamp instead:
-	// XMage's filter has already skipped the not-yet-creature Vehicle, and
-	// Forge's subtype table drops the creature subtype while the
-	// intermediate type is not yet a creature. Neither restores it after the
-	// crew effect, while the layer-7b P/T is recomputed on the now-creature
-	// Vehicle, so it ends up 6/6 without the added type. gorge applies the
-	// dependency, so the difference is the followers', not gorge's. See
-	// docs/upstream-bugs.md for the XMage and Forge source.
+	// that is a creature, in either follower. The static's layer-4 type
+	// addition and layer-7b base P/T depend (CR 613.8a) on the effect that
+	// makes the Vehicle an artifact creature: applying that effect changes
+	// which objects "creatures you control" covers, so it is applied first
+	// whatever the timestamps. Both followers order the static's layer-4
+	// change by timestamp instead: XMage's filter has already skipped the
+	// not-yet-creature Vehicle, and Forge's subtype table drops the creature
+	// subtype while the intermediate type is not yet a creature. Neither
+	// restores it after the animation, while the layer-7b P/T is recomputed
+	// on the now-creature Vehicle, so it ends up 6/6 without the added type.
+	// gorge applies the dependency, so the difference is the followers', not
+	// gorge's. The animation is a crew (Dune Drifter), an external animate
+	// ability (Guidelight Matrix) or a self-animating static already on the
+	// battlefield when the window opens (Midnight Mangler); the classifier
+	// reads the Vehicle's type change from the snapshots, not the step that
+	// caused it. See docs/upstream-bugs.md for the XMage and Forge source.
 	ClassCrewTypeDependency = "crew_type_dependency"
 	ClassRNG                = "rng"
 	ClassProjectionGap      = "projection_gap"
@@ -167,7 +170,7 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 		f.Msg = "pool split after a cast/activate whose payment was not fixed"
 	case rngField(v.Field) && (rngDrawn(item, t, f.Step) || shuffledEarlier(item, f.Step)):
 		f.Class = ClassRNG
-	case crewTypeDependency(item, g, x, v):
+	case crewTypeDependency(g, v):
 		f.Class = ClassCrewTypeDependency
 	case projectionGap(v):
 		f.Class = ClassProjectionGap
@@ -242,22 +245,34 @@ func Partial(item oraclegen.Item, g rules.OracleResult, x oraclediff.XResult) (r
 
 // crewTypeDependency reports the first difference v at a permanent whose
 // canonical line differs only by one extra type on gorge's side, on an
-// artifact creature Vehicle the scenario crewed. That is the shape a
-// type-adding static leaves when it misses the crew effect it depends on
+// artifact creature Vehicle. That is the shape a type-adding static leaves
+// when it misses the effect that makes the Vehicle a creature it depends on
 // (CR 613.8a): the follower's layer-7b P/T still lands, so the P/T, counters,
 // colours, keywords, tap state and every other field agree and only the added
-// type is absent. A difference anywhere else, an uncrewed Vehicle, or an
-// extra "creature" (the crew effect itself) is not this class.
-func crewTypeDependency(item lower.Lowered, g rules.OracleResult, x oraclediff.XResult, v oraclediff.Verdict) bool {
+// type is absent.
+//
+// The class reads the animation from the snapshots instead of the step that
+// caused it. At a scenario step the preceding checkpoint must show the same
+// permanent as a non-creature and the diverging one as a creature: that
+// covers a crew, an external "target Vehicle becomes an artifact creature"
+// ability and a self-animation alike, while a non-animation activate, or an
+// activate after the Vehicle was already a creature, cannot match. At "setup"
+// the window opens after the animation, so the type change happened in the
+// hidden game; the shape alone is the class, and the animation's timestamp
+// relative to the static is the same 613.8a dependency.
+//
+// A difference anywhere else, a Vehicle that never became a creature, or an
+// extra "creature" (the animation itself) is not this class.
+func crewTypeDependency(g rules.OracleResult, v oraclediff.Verdict) bool {
 	if v.Status != oraclediff.Diverge || v.Field != "permanents" {
 		return false
 	}
 	d := stepOf(v.Checkpoint)
-	if d < 0 || d+1 >= len(g.Snapshots) || d+1 >= len(x.Snapshots) {
+	if d+1 >= len(g.Snapshots) {
 		return false
 	}
 	gp, ok := permForLine(g.Snapshots[d+1].Permanents, v.Gorge)
-	if !ok || !crewActivated(item.Item.Steps, gp.Name) {
+	if !ok || !hasLineType(gp.Types, "creature") {
 		return false
 	}
 	gTypes, ok := lineTypes(v.Gorge)
@@ -279,10 +294,18 @@ func crewTypeDependency(item lower.Lowered, g rules.OracleResult, x oraclediff.X
 	// any other difference (P/T, counters, tap state, keywords) is not this
 	// class.
 	without, ok := lineWithoutType(v.Gorge, extra)
-	if !ok {
+	if !ok || without != v.XMage {
 		return false
 	}
-	return without == v.XMage
+	if d < 0 {
+		// Setup: the animation is already in the hidden game before step 0.
+		return true
+	}
+	prev, ok := permFor(g.Snapshots[d].Permanents, gp)
+	if !ok || hasLineType(prev.Types, "creature") {
+		return false
+	}
+	return true
 }
 
 // lineWithoutType removes one type token from the bracketed type list of a
@@ -366,15 +389,22 @@ func hasLineType(types []string, t string) bool {
 	return false
 }
 
-// crewActivated reports whether the scenario activated name's own ability:
-// the crew effect that animates the Vehicle after the static entered.
-func crewActivated(steps []oraclegen.Step, name string) bool {
-	for _, st := range steps {
-		if st.Op == "activate" && strings.EqualFold(oraclediff.RefName(st.Card), name) {
-			return true
+// permFor returns the permanent in ps that is the same object as p. The ref
+// is stable across checkpoints; the controller, owner and current name are
+// the fallback when a row omits it.
+func permFor(ps []rules.OracleSnapPerm, p rules.OracleSnapPerm) (rules.OracleSnapPerm, bool) {
+	for _, q := range ps {
+		if p.Ref != "" && q.Ref != "" {
+			if q.Ref == p.Ref {
+				return q, true
+			}
+			continue
+		}
+		if q.Controller == p.Controller && q.Owner == p.Owner && strings.EqualFold(q.Name, p.Name) {
+			return q, true
 		}
 	}
-	return false
+	return rules.OracleSnapPerm{}, false
 }
 
 // skippedDamageStep is the checkpoint at which Forge left for end of combat
