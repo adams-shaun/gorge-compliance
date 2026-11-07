@@ -127,6 +127,102 @@ func TestPrepareFillsAnswers(t *testing.T) {
 	}
 }
 
+// TestPrepareDropsTypedDualColour: a basic-typed dual land (Godless Shrine,
+// Plains and Swamp) has one intrinsic "{T}: Add {X}." ability per basic type.
+// XMage selects the fixed-colour ability by that text and asks no colour, so
+// the colour answer gorge's runner recorded for the activation would be left
+// over; the Temple-style Combo ability (one printed ability, XMage one ability
+// per colour) keeps its existing clear. A non-colour choice on the typed dual's
+// own step and a card choice on a later step are not the mana colour and must
+// survive.
+func TestPrepareDropsTypedDualColour(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sp, err := decks.LoadSpellings(manifestDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	zero, one := 0, 1
+	sc := oraclegen.Scenario{
+		Name: "typed dual and combo mana",
+		Why:  "a basic-typed dual's fixed-colour mana text asks XMage no colour",
+		Setup: map[string]oraclegen.Seat{
+			"p0": {Battlefield: []string{"Godless Shrine", "Temple of Deceit"}},
+		},
+		Steps: []oraclegen.Step{
+			{Op: "activate", Seat: 0, Card: "p0:Godless Shrine", AbilityIndex: &one},
+			{Op: "activate", Seat: 0, Card: "p0:Temple of Deceit", AbilityIndex: &zero,
+				Answers: []oraclegen.Answer{{Kind: "choose", Pick: []string{"Add B"}}}},
+			{Op: "pass", Seat: 0},
+		},
+	}
+	l := lower.Lowered{Item: oraclegen.Item{ID: "xe:test:typed-dual", Scenario: sc}}
+	res, err := rules.RunOracleScenarioJSON(reg, l.Item.Raw())
+	if err != nil {
+		t.Fatalf("run scenario: %v", err)
+	}
+	// A non-colour choice on the typed dual's own step (a cost card pick) and
+	// a card choice on the later step: neither names a colour, so the drop
+	// must keep both.
+	const cardChoice = "Captain Jean-Luc Picard"
+	for _, step := range []int{0, 2} {
+		res.Decisions = append(res.Decisions, rules.OracleDecision{
+			Step: step, Seat: 0, Kind: "choose_n", Options: 2,
+			Picks: []string{cardChoice}, PickIdx: []int{0},
+		})
+	}
+	it, ref := Prepare(reg, sp, l, res)
+	if ref != nil {
+		t.Fatalf("Prepare refused: %+v", ref)
+	}
+	if got := it.XAbility[0]; got != "{T}: Add {B}." {
+		t.Fatalf("typed dual prefix = %q, want %q", got, "{T}: Add {B}.")
+	}
+	isColour := func(v string) bool {
+		switch v {
+		case "White", "Blue", "Black", "Red", "Green":
+			return true
+		}
+		return false
+	}
+	for _, a := range it.XAnswers[0] {
+		if a.Kind == "choice" && isColour(a.Value) {
+			t.Errorf("typed dual step keeps colour answer %q", a.Value)
+		}
+	}
+	if !slices.Contains(it.XAnswers[0], oraclegen.XAnswer{Seat: 0, Kind: "choice", Value: cardChoice}) {
+		t.Errorf("typed dual step lost the non-colour choice answer: %+v", it.XAnswers[0])
+	}
+	if got := it.XAbility[1]; got != "{T}: Add {B}" {
+		t.Fatalf("combo prefix = %q, want %q", got, "{T}: Add {B}")
+	}
+	if len(it.XAnswers[1]) != 0 {
+		t.Errorf("combo step answers = %+v, want none", it.XAnswers[1])
+	}
+	if !slices.Contains(it.XAnswers[2], oraclegen.XAnswer{Seat: 0, Kind: "choice", Value: cardChoice}) {
+		t.Errorf("later step lost the card choice answer: %+v", it.XAnswers[2])
+	}
+	// The form is every fixed single colour (with the period); the Combo text
+	// (no period), a colourless Add and a longer line are not fixed colour
+	// texts. A queued colour naming another colour is reported, not dropped.
+	for _, want := range []string{"W", "U", "B", "R", "G"} {
+		p := "{T}: Add {" + want + "}."
+		if got, ok := fixedColourStep([]string{p}, 0); !ok || got != want {
+			t.Errorf("fixedColourStep(%q) = %q, %v", p, got, ok)
+		}
+	}
+	for _, p := range []string{"{T}: Add {B}", "{T}: Add {C}.", "{T}: Add {B}. Draw a card."} {
+		if got, ok := fixedColourStep([]string{p}, 0); ok {
+			t.Errorf("fixedColourStep(%q) = %q, want no match", p, got)
+		}
+	}
+	if _, bad := dropFixedColourAnswers([]oraclegen.XAnswer{{Kind: "choice", Value: "Black"}}, "W"); bad != "Black" {
+		t.Errorf("mismatched answer = %q, want Black", bad)
+	}
+	if !slices.Contains(Reasons, ReasonColourMismatch) {
+		t.Errorf("reason %q is not in the closed list", ReasonColourMismatch)
+	}
+}
+
 // TestPrepareAbilityPrefixes: every activate step of a prepared item has a
 // prefix, and no other step has one; an activation XMage has no text for (a
 // token's ability, a card the corpus does not know) is a refusal, not a blank.
