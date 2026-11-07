@@ -472,3 +472,135 @@ func TestComboColourPrefix(t *testing.T) {
 		t.Errorf("a one-colour tap: %q", got)
 	}
 }
+
+// TestPrepareModalTriggerMode: a window cut at the pass that hands priority
+// away still has the permanent's spell on the stack, so gorge records no mode
+// decision for its modal enters trigger while XMage resolves it and asks MODE
+// first, then the mode's target. Prepare completes the trigger from gorge's
+// own continued replay onto the window's last step. A window where gorge did
+// answer the mode keeps exactly that one answer.
+func TestPrepareModalTriggerMode(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sp, err := decks.LoadSpellings(manifestDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	zero := 0
+	// The card's own mode label, read from the corpus rather than pasted into
+	// the test (the Forge script's text stays out of this repository).
+	var surveil string
+	if c, ok := reg.Lookup("Federation Probe"); ok {
+		for label, n := range oraclegen.ModeNumbers(c.Faces[0]) {
+			if n == 2 {
+				surveil = label
+			}
+		}
+	}
+	if surveil == "" {
+		t.Fatal("Federation Probe has no second mode label")
+	}
+	// build is the Federation Probe window of xe:RAND:0:15:w1: one land, tap,
+	// cast, then the pass that hands priority to the opponent. recorded adds
+	// the opponent's pass and answers the trigger's mode, so gorge decides it
+	// inside the window.
+	build := func(recorded bool) (lower.Lowered, rules.OracleResult) {
+		t.Helper()
+		steps := []oraclegen.Step{
+			{Op: "play", Seat: 0, Card: "p0:Island"},
+			{Op: "activate", Seat: 0, Card: "p0:Island", AbilityIndex: &zero},
+			{Op: "cast", Seat: 0, Card: "p0:Federation Probe"},
+			{Op: "pass", Seat: 0},
+		}
+		if recorded {
+			steps = append(steps, oraclegen.Step{Op: "pass", Seat: 1,
+				Answers: []oraclegen.Answer{{Kind: "modes", Pick: []string{surveil}}}})
+		}
+		it := oraclegen.Item{
+			ID:       "xe:test:modal-trigger-mode",
+			Template: "xengine-window",
+			Payment:  []string{"", "", "U", ""},
+			Scenario: oraclegen.Scenario{
+				Name: "Federation Probe at a cut pass", Turn: 1,
+				Why: "a modal enters trigger is put on the stack after the window's last checkpoint",
+				Setup: map[string]oraclegen.Seat{
+					"p0": {
+						Hand:       []string{"Island", "Federation Probe", "Plains", "Plains", "Plains", "Island"},
+						LibraryTop: []string{"Command Decision", "Seven of Nine, Unassimilated", "Plains", "Lieutenant Commander Data", "Make It So", "Conquest Mission", "Island"},
+						Life:       int32p(20),
+					},
+					"p1": {
+						Hand:       []string{"Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp"},
+						LibraryTop: []string{"Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp"},
+						Life:       int32p(20),
+					},
+				},
+				Steps: steps,
+			},
+		}
+		res, err := rules.RunOracleScenarioJSON(reg, it.Raw())
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(res.Fails) > 0 {
+			t.Fatalf("gorge rejects the window: %v", res.Fails)
+		}
+		return lower.Lowered{Item: it}, res
+	}
+	modeAnswers := func(it oraclegen.Item) []oraclegen.XAnswer {
+		var out []oraclegen.XAnswer
+		for _, as := range it.XAnswers {
+			for _, a := range as {
+				if a.Kind == "mode" {
+					out = append(out, a)
+				}
+			}
+		}
+		return out
+	}
+	t.Run("cut before the trigger", func(t *testing.T) {
+		l, g := build(false)
+		if len(g.Decisions) != 0 {
+			t.Fatalf("precondition: the cut recorded decisions %+v", g.Decisions)
+		}
+		it, ref := Prepare(reg, sp, l, g)
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		last := len(it.XAnswers) - 1
+		as := it.XAnswers[last]
+		// Federation Probe is itself a legal target, so gorge's fallback takes
+		// mode 1 ("Target creature gets +1/+1") and then targets the Probe.
+		if len(as) < 2 || as[0].Kind != "mode" || as[0].Value != "1" {
+			t.Fatalf("last step answers = %+v, want mode 1 first", as)
+		}
+		targeted := false
+		for _, a := range as[1:] {
+			if a.Kind == "target" && a.Value == "Federation Probe" {
+				targeted = true
+			}
+		}
+		if !targeted {
+			t.Errorf("last step answers = %+v, want the mode's Federation Probe target", as)
+		}
+		if got := modeAnswers(it); len(got) != 1 || got[0].Seat != 0 {
+			t.Errorf("mode answers = %+v, want exactly the completed one", got)
+		}
+	})
+	t.Run("gorge decided the mode", func(t *testing.T) {
+		l, g := build(true)
+		if len(g.Decisions) == 0 {
+			t.Fatal("precondition: the window recorded no mode decision")
+		}
+		it, ref := Prepare(reg, sp, l, g)
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		got := modeAnswers(it)
+		if len(got) != 1 || got[0].Value != "2" {
+			t.Fatalf("mode answers = %+v, want exactly gorge's Surveil answer 2", got)
+		}
+	})
+}
+
+// int32p is a *int32 for a scenario's Life.
+func int32p(v int32) *int32 { return &v }
