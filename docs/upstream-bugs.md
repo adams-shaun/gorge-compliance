@@ -88,5 +88,6 @@ All filed after an independent recheck; texts in the operator's triage store, no
 | Upstream | Card | What it does |
 |---|---|---|
 | Card-Forge/forge#12581, PR #12582 | Romulan Bird-of-Prey | `Affected$ Self.nonCreature` matches nothing in Forge's `isValid`, so it never gets its printed hexproof (CR 702.11b) |
+| Card-Forge/forge#12724, PR #12725 | Homesickness, Mind Spiral, Sygg's Command | the stun `PutCounter` has `Defined$ ParentTarget`, which `getDefinedPlayers` also resolves to the player targeted earlier in the chain, so that player gets a stun counter (Oracle text: only the tapped creature). Fix `Defined$ TargetedCard`, branch `fix/homesickness-mind-spiral-stun` (b2f70dde46, off master 6d4a175d9e); not on `gorge` yet. Harness row SOS-s104 xe:RAND:3:17:w14 |
 
 Our fork, adams-shaun/forge, branch `gorge`, carries that fix.
