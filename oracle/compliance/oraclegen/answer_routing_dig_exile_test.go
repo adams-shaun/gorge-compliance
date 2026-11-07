@@ -4,6 +4,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
@@ -30,6 +31,44 @@ func TestDigExileFamilyScriptsComplement(t *testing.T) {
 	want := []XAnswer{{0, "target", "Grizzly Bears"}}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("routed = %#v, want %#v (the exile family scripts the complement on the target queue)", got, want)
+	}
+}
+
+// TestDigFiveCardLookKeepsPick pins the Hit It! shape: a one-card take over
+// two named cards whose second destination is the GRAVEYARD, from a five-card
+// look. XMage's look-and-pick dialog for this family selects the card going to
+// the FIRST destination (the battlefield here), the same card gorge picked, so
+// the scripted target must be gorge's own pick -- never the exile family's
+// complement. The source is resolved from the trigger on the stack, as
+// xanswersForScenario does from gorge's snapshots.
+func TestDigFiveCardLookKeepsPick(t *testing.T) {
+	reg := cards.NewRegistry()
+	reg.Add(&cards.Card{Faces: []*cards.Face{{
+		Name: "Hit It!",
+		Triggers: []cards.Trigger{{
+			Mode: "ChangesZone",
+			Effect: &cards.SA{Kind: "DB", API: "Dig", Params: map[string]string{
+				"DigNum": "5", "ChangeNum": "1",
+				"DestinationZone": "Battlefield", "DestinationZone2": "Graveyard",
+			}},
+		}},
+	}}})
+	d := rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "dig",
+		Options: 2, Min: 1, Max: 1, Picks: []string{"Mountain"}, PickIdx: []int{0},
+		PickRefs: []string{"p0:Mountain#3"}, PickKinds: []string{"dig"},
+		OptionRefs: []string{"p0:Mountain#3", "p0:Forest#5"}}
+	res := rules.OracleResult{
+		Snapshots: []rules.OracleSnapshot{
+			{},
+			{Stack: []rules.OracleSnapStack{{Kind: "ability", Source: "p0:Hit It!", Controller: 0, Trigger: "0"}}},
+			{},
+		},
+		Decisions: []rules.OracleDecision{d},
+	}
+	sc := Scenario{Steps: []Step{{Op: "pass"}, {Op: "pass"}}}
+	want := [][]XAnswer{nil, {{Seat: 0, Kind: "target", Value: "Mountain"}}}
+	if got := xanswersForScenario(reg, res, sc, nil, nil); !reflect.DeepEqual(got, want) {
+		t.Fatalf("routed = %#v, want %#v (the graveyard-second family keeps gorge's pick)", got, want)
 	}
 }
 

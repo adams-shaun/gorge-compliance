@@ -1127,7 +1127,11 @@ func arrangeEmpty(d rules.OracleDecision) bool {
 // recorded coin-flip results (rules.OracleResult.Flips): a drive-window flip
 // (step < 0) queues on the setup family, a step flip leads its own step's
 // answer stream, each as the XMage flip token the choice queue consumes.
-func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, castSteps map[int]bool, setup map[string]Seat, flips []rules.OracleFlip) [][]XAnswer {
+// digSources, when given, resolves a Dig decision's step to its source card's
+// IR (DestinationZone2); it is how xanswersForScenario tells the exile family
+// from the battlefield/graveyard one. Callers with no scenario/snapshots omit
+// it and keep the historical shape-only routing.
+func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, castSteps map[int]bool, setup map[string]Seat, flips []rules.OracleFlip, digSources ...map[int]digSource) [][]XAnswer {
 	out := make([][]XAnswer, steps)
 	any := false
 	// A step whose card name is then searched for (Ancient Vendetta's "choose
@@ -1154,7 +1158,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			costPosedDeclineStep[d.Step] = true
 		}
 	}
-	routing := newAnswerRouting(ds)
+	routing := newAnswerRouting(ds, digSources...)
 	// Trigger-order name answers are demoted back to the inert text form when
 	// the step also scripts other asks (see the trigger_order case).
 	var trigSpans []*trigSpan

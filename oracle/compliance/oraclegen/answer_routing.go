@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
@@ -58,14 +59,27 @@ type answerRouting struct {
 	// transforms into ...] not found in [White, Blue, Black, Red, Green]").
 	manaHoist   map[int]XAnswer
 	manaHoisted map[int]bool
+	// digSources maps a step holding a Dig decision to the Dig ability's
+	// second destination (the card's IR DestinationZone2), when the caller
+	// can resolve the source card from the scenario and snapshots. It is the
+	// authority that tells the exile family (XMage selects the card to
+	// EXILE, so the answer is the complement) from every other Dig take (XMage
+	// selects the card to the FIRST destination, so the answer is gorge's own
+	// pick). A step absent from the map has no resolved source; the legacy
+	// shape-only test then still applies.
+	digSources map[int]digSource
 }
 
-func newAnswerRouting(ds []rules.OracleDecision) *answerRouting {
+func newAnswerRouting(ds []rules.OracleDecision, digSources ...map[int]digSource) *answerRouting {
 	r := &answerRouting{ds: ds, soleCost: map[int]bool{}, opponent: map[int]int{},
 		splitTarget: map[int]int{}, targetSplit: map[int]int{},
 		targetDivide: map[int]int{}, divideOwned: map[int]bool{},
 		manaBool: map[int]bool{}, playBool: map[int]bool{},
-		manaHoist: map[int]XAnswer{}, manaHoisted: map[int]bool{}}
+		manaHoist: map[int]XAnswer{}, manaHoisted: map[int]bool{},
+		digSources: map[int]digSource{}}
+	if len(digSources) > 0 && digSources[0] != nil {
+		r.digSources = digSources[0]
+	}
 	for i := range ds {
 		if soleAltCost(ds[i]) && i+1 < len(ds) && sameAsker(ds[i], ds[i+1]) && len(ds[i+1].ObjectPicks) == 1 {
 			r.soleCost[i+1] = true
@@ -281,14 +295,14 @@ func digBottomName(label string) string {
 // EXILE, the opposite of gorge's pick (the card to hand), so the scripted
 // answer must be the OTHER offered option. The family is the Dig take whose
 // pick is a plain card name over exactly two offered objects with a one-card
-// take (DigNum$ 2 / ChangeNum$ 1); the complement is computed from the
-// decision alone, since the offered option list holds both names and gorge's
-// pick is the one to hand. The decision carries no destination, so the family
-// is recognised by this shape -- the only shape a Standard-set Dig take
-// produces for it (measured over the 20 level-B sets, Ashiok is the sole
-// real-name two-option one-card take). The bottom-label form (digBottomName)
-// is a different XMage dialog and measures AGREE, so it is excluded here and
-// owned by its own case.
+// take (ChangeNum$ 1), and the complement is computed from the decision
+// alone, since the offered option list holds both names and gorge's pick is
+// the one to hand. This function is the SHAPE only: a five-card look can offer
+// two named lands by accident (Hit It!), so the router must first confirm the
+// source's DestinationZone2 is Exile through digTargetAnswer; only an
+// unthreaded caller with no source falls back to this shape. The bottom-label
+// form (digBottomName) is a different XMage dialog and measures AGREE, so it
+// is excluded here and owned by its own case.
 func digExileComplement(d rules.OracleDecision) string {
 	if d.Resume != "dig" || d.Options != 2 || d.Min != 1 || d.Max != 1 ||
 		len(d.Picks) != 1 || len(d.OptionRefs) != 2 || digBottomName(d.Picks[0]) != "" {
@@ -315,6 +329,191 @@ func digExileComplement(d rules.OracleDecision) string {
 		return ""
 	}
 	return complement
+}
+
+// digSource is the one IR fact that tells a Dig take's two XMage dialogs
+// apart: the DestinationZone2 of the Dig ability that posed the decision.
+// known is false when a resolved card carries several Dig abilities whose
+// second destinations disagree and no ability/trigger index narrowed it down.
+type digSource struct {
+	second string
+	known  bool
+}
+
+// digSourceForStep resolves the card (and, when an index is available, the
+// exact ability) that posed a Dig decision at step. sc and snaps are the
+// caller's scenario and gorge result; reg is the corpus. The stack snapshot at
+// the decision's own step holds the resolving trigger/ability (a window's
+// resolving trigger has no scenario step card to name), and an activate/cast
+// step names its source directly. ok is false when nothing resolves: the
+// caller then keeps the historical shape-only routing.
+func digSourceForStep(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapshot, step int) (digSource, bool) {
+	if reg == nil || step < 0 {
+		return digSource{}, false
+	}
+	if step < len(sc.Steps) {
+		st := sc.Steps[step]
+		if st.Card != "" {
+			if st.AbilityIndex != nil {
+				if src, ok := digSourceAtAbility(reg, st.Card, *st.AbilityIndex); ok {
+					return src, true
+				}
+			}
+			if src, ok := digSourceOnCard(reg, st.Card); ok {
+				return src, true
+			}
+		}
+	}
+	if step < len(snaps) {
+		for _, o := range snaps[step].Stack {
+			if o.Kind == "ability" && o.Trigger != "" {
+				if idx, err := strconv.Atoi(o.Trigger); err == nil {
+					if src, ok := digSourceAtTrigger(reg, o.Source, idx); ok {
+						return src, true
+					}
+				}
+			}
+			if src, ok := digSourceOnCard(reg, o.Source); ok {
+				return src, true
+			}
+		}
+	}
+	return digSource{}, false
+}
+
+// digSourceAtAbility is the Dig fact of one activated ability (a step's
+// AbilityIndex), or false when that ability's own chain carries no Dig.
+func digSourceAtAbility(reg *cards.Registry, ref string, idx int) (digSource, bool) {
+	c, ok := reg.Lookup(oraclediffRefName(ref))
+	if !ok {
+		return digSource{}, false
+	}
+	for _, f := range c.Faces {
+		if f == nil || idx < 0 || idx >= len(f.Abilities) {
+			continue
+		}
+		if dest, ok := digSecondInSA(f.Abilities[idx]); ok {
+			return digSource{dest, true}, true
+		}
+	}
+	return digSource{}, false
+}
+
+// digSourceAtTrigger is the Dig fact of one printed trigger (a stack object's
+// Trigger index), or false when that trigger's effect chain carries no Dig.
+func digSourceAtTrigger(reg *cards.Registry, ref string, idx int) (digSource, bool) {
+	c, ok := reg.Lookup(oraclediffRefName(ref))
+	if !ok {
+		return digSource{}, false
+	}
+	for _, f := range c.Faces {
+		if f == nil || idx < 0 || idx >= len(f.Triggers) {
+			continue
+		}
+		if dest, ok := digSecondInSA(f.Triggers[idx].Effect); ok {
+			return digSource{dest, true}, true
+		}
+	}
+	return digSource{}, false
+}
+
+// digSourceOnCard falls back to every Dig ability on the card. known is false
+// when they disagree on the second destination; the router then keeps gorge's
+// pick rather than guess which family the decision belongs to.
+func digSourceOnCard(reg *cards.Registry, ref string) (digSource, bool) {
+	c, ok := reg.Lookup(oraclediffRefName(ref))
+	if !ok {
+		return digSource{}, false
+	}
+	for _, f := range c.Faces {
+		if f == nil {
+			continue
+		}
+		if dest, known, any := faceDigSecond(f); any {
+			return digSource{dest, known}, true
+		}
+	}
+	return digSource{}, false
+}
+
+// digSecondInSA reports the DestinationZone2 of the Dig in one ability chain.
+func digSecondInSA(sa *cards.SA) (string, bool) {
+	var dests []string
+	collectDigSeconds(sa, map[*cards.SA]bool{}, &dests)
+	if len(dests) == 0 {
+		return "", false
+	}
+	return agreeDigSecond(dests)
+}
+
+// faceDigSecond reports the shared DestinationZone2 of every Dig ability on a
+// face, whether the face has any Dig at all, and whether they agree.
+func faceDigSecond(f *cards.Face) (dest string, known, any bool) {
+	var dests []string
+	seen := map[*cards.SA]bool{}
+	for _, sa := range f.Abilities {
+		collectDigSeconds(sa, seen, &dests)
+	}
+	for _, tr := range f.Triggers {
+		collectDigSeconds(tr.Effect, seen, &dests)
+	}
+	if len(dests) == 0 {
+		return "", false, false
+	}
+	dest, known = agreeDigSecond(dests)
+	return dest, known, true
+}
+
+// collectDigSeconds walks an ability's SubAbility$ chain, recording every
+// Dig's DestinationZone2 once.
+func collectDigSeconds(sa *cards.SA, seen map[*cards.SA]bool, dests *[]string) {
+	if sa == nil || seen[sa] {
+		return
+	}
+	seen[sa] = true
+	if sa.API == "Dig" {
+		*dests = append(*dests, strings.TrimSpace(sa.Params["DestinationZone2"]))
+	}
+	collectDigSeconds(sa.Sub, seen, dests)
+}
+
+// agreeDigSecond is the one DestinationZone2 every Dig in the set states.
+func agreeDigSecond(dests []string) (string, bool) {
+	for _, d := range dests[1:] {
+		if !strings.EqualFold(d, dests[0]) {
+			return "", false
+		}
+	}
+	return dests[0], true
+}
+
+// digTargetAnswer is the target-queue answer for a Dig take, or "" when the
+// decision is not that shape. XMage's dialog selects the FIRST destination:
+// for the exile-second-destination family (Ashiok, Wicked Manipulator; Karn,
+// Scion of Urza) that is the card to exile, the complement of gorge's pick (the
+// card to hand), while for every other family (Hit It!'s battlefield-tapped
+// first destination, graveyard second) it is exactly gorge's pick. The source
+// card's IR decides; a step with no resolved source keeps the historical
+// shape-only complement so the unthreaded callers (XAnswers) are unchanged.
+func (r *answerRouting) digTargetAnswer(i int) string {
+	d := r.ds[i]
+	complement := digExileComplement(d)
+	if complement == "" {
+		return ""
+	}
+	src, ok := r.digSources[d.Step]
+	switch {
+	case !ok:
+		return complement
+	case !src.known:
+		// Several Dig abilities disagree and no index narrowed them down.
+		// Keep gorge's own pick: the exile family is the exception.
+		return d.Picks[0]
+	case strings.EqualFold(src.second, "Exile"):
+		return complement
+	default:
+		return d.Picks[0]
+	}
 }
 
 // declinedChoice is a generic effect ask ("choose up to N") gorge answered
@@ -395,15 +594,16 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 	case d.Resume == "dig" && len(d.Picks) == 1 && digBottomName(d.Picks[0]) != "":
 		// XMage's bottom pick is a card selection by name, not gorge's label.
 		return append(as, XAnswer{d.Seat, "choice", digBottomName(d.Picks[0])}), true
-	case digExileComplement(d) != "":
-		// XMage's Dig dialog for the exile-second-destination family selects
-		// the card to EXILE, the opposite of gorge's pick (the card to hand),
-		// so the scripted answer is the other offered option. The dialog is
-		// LookLibraryAndPickControllerEffect's chooseTarget over a TargetCard,
-		// the TARGET queue (measured 2026-10-13: "Missing TARGET def ...
-		// TargetCard", the choice-queue answer left unused and the AI
-		// exiling the card gorge kept).
-		return append(as, XAnswer{d.Seat, "target", digExileComplement(d)}), true
+	case r.digTargetAnswer(i) != "":
+		// XMage's Dig dialog is LookLibraryAndPickControllerEffect's
+		// chooseTarget over a TargetCard, the TARGET queue, but WHICH endpoint
+		// it selects depends on the Dig's IR: the exile-second-destination
+		// family selects the card to EXILE (the opposite of gorge's pick) and
+		// every other family selects the card to the FIRST destination (gorge's
+		// pick). digTargetAnswer applies that IR gate (measured 2026-10-13:
+		// "Missing TARGET def ... TargetCard", the choice-queue answer left
+		// unused and the AI choosing the card gorge did not).
+		return append(as, XAnswer{d.Seat, "target", r.digTargetAnswer(i)}), true
 	case d.Resume == "taporuntap" && len(d.Picks) == 1:
 		// TapOrUntap's election is XMage's chooseUse, not a labelled choice:
 		// the pick's option index maps to the boolean (option 0, the
