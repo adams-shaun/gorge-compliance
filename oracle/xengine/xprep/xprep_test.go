@@ -570,6 +570,67 @@ func TestComboColourPrefix(t *testing.T) {
 	}
 }
 
+// TestPreparePlayedModalLandModeNumber: a modal land played as a step whose
+// enters trigger resolves inside the window answers the mode by its printed
+// position, not by gorge's eligible-option position.
+func TestPreparePlayedModalLandModeNumber(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sp, err := decks.LoadSpellings(manifestDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	const land = "Ni'Var Science Academy"
+	c, ok := reg.Lookup(land)
+	if !ok || len(c.Faces) == 0 {
+		t.Fatalf("no corpus card %q", land)
+	}
+	printed := oraclegen.ModeNumbers(c.Faces[0])
+	sc := oraclegen.Scenario{
+		Name: "played modal land enters untapped",
+		Why:  "the in-window mode answer is the printed mode number",
+		Setup: map[string]oraclegen.Seat{
+			"p0": {Hand: []string{land}, Battlefield: []string{"Island", "Swamp"}},
+		},
+		Steps: []oraclegen.Step{
+			{Op: "play", Seat: 0, Card: "p0:" + land},
+			{Op: "pass", Seat: 0},
+		},
+	}
+	l := lower.Lowered{Item: oraclegen.Item{ID: "xe:test:play-modal-land", Scenario: sc}}
+	res, err := rules.RunOracleScenarioJSON(reg, l.Item.Raw())
+	if err != nil {
+		t.Fatalf("run scenario: %v", err)
+	}
+	if len(res.Fails) > 0 {
+		t.Fatalf("gorge rejects the scenario: %v", res.Fails)
+	}
+	var pick string
+	n := 0
+	for _, d := range res.Decisions {
+		if d.Step == 0 && d.Kind == "mode" {
+			n++
+			if len(d.Picks) == 1 {
+				pick = d.Picks[0]
+			}
+		}
+	}
+	if n != 1 || pick == "" {
+		t.Fatalf("step 0 mode decisions = %d, pick %q; want one mode with one pick", n, pick)
+	}
+	want, ok := printed[pick]
+	if !ok || want < 2 {
+		t.Fatalf("mode %q prints at %d (ok=%v); the test needs a non-first printed mode", pick, want, ok)
+	}
+	it, ref := Prepare(reg, sp, l, res)
+	if ref != nil {
+		t.Fatalf("Prepare refused: %+v", ref)
+	}
+	wantAnswer := oraclegen.XAnswer{Seat: 0, Kind: "mode", Value: fmt.Sprint(want)}
+	if len(it.XAnswers[0]) != 1 || it.XAnswers[0][0] != wantAnswer {
+		t.Fatalf("xmage_answers[0] = %+v, want exactly %+v", it.XAnswers[0], wantAnswer)
+	}
+}
+
 // TestPrepareModalTriggerMode: a window cut at the pass that hands priority
 // away still has the permanent's spell on the stack, so gorge records no mode
 // decision for its modal enters trigger while XMage resolves it and asks MODE
