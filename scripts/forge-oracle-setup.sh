@@ -63,9 +63,11 @@ rebuild=0
 [ "${1:-}" = --rebuild ] && rebuild=1
 
 # Clone (sparse) or fetch, then check the pin before anything is built.
+fresh_clone=0
 if [ ! -e "$clone/.git" ]; then
   mkdir -p "$(dirname "$clone")"
   git clone --filter=blob:none --no-checkout "$repo" "$clone"
+  fresh_clone=1
   git -C "$clone" sparse-checkout init --no-cone
   git -C "$clone" sparse-checkout set '/*' '!/*/' '/*/pom.xml' '/forge-core/' '/forge-game/' '/forge-ai/' \
     '/forge-gui/src/' '/forge-gui/pom.xml' '/forge-gui/res/cardsfolder/' '/forge-gui/res/tokenscripts/' \
@@ -77,6 +79,14 @@ oref=$(git -C "$clone" rev-parse --verify -q "$oracle_ref^{commit}") || die "FOR
 pin_check "$clone" "$oref"
 
 case "$root" in /tmp/*) die "$root is under /tmp, which is often RAM-backed; the build needs a directory on disk" ;; esac
+# A --no-checkout clone starts with an empty index, and on git 2.53
+# sparse-checkout set does not populate it: every tracked path then looks
+# staged-deleted.  Check the pinned ref out here, which fills the index through
+# the sparse set, so the guard below still means what it says for an existing
+# clone -- a modified tracked file must stop us moving HEAD and discarding it.
+if [ "$fresh_clone" = 1 ]; then
+  git -C "$clone" checkout -q --detach "$oref"
+fi
 [ -z "$(git -C "$clone" status --porcelain --untracked-files=no)" ] || die "$clone has uncommitted changes; refusing to move HEAD"
 [ "$(git -C "$clone" rev-parse HEAD)" = "$oref" ] || git -C "$clone" checkout -q --detach "$oref"
 
