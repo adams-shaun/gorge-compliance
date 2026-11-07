@@ -615,7 +615,7 @@ func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.Ma
 		}
 		if pk.Kind == "cast" {
 			mode := pk.Mode
-			if mode == "" && pk.AltCost == 1 {
+			if (mode == "" || mode == "mayplay") && pk.AltCost == 1 {
 				mode = "alternative"
 			}
 			return append(taps, oraclegen.Step{Op: "cast", Seat: seat, Card: m.ref(pk.Ref), CastMode: mode}), nil
