@@ -51,6 +51,11 @@ const (
 	// the driver's turn model cannot follow a tape, so tapes go to Forge and
 	// the kernel).
 	ReasonWindowOnly = "xmage_window_only"
+	// ReasonColourMismatch: a fixed-colour mana ability's XMage text names a
+	// colour other than the one gorge picked for the activation. Dropping the
+	// answer would hide a disagreement between the two engines' ability
+	// selection, so the item is refused instead.
+	ReasonColourMismatch = "xmage_colour_mismatch"
 	// ReasonModalTrigger: a modal enters trigger's CR 603.3c mode choice (and
 	// the asks it opens) falls after the window's last checkpoint, so gorge's
 	// result holds no decision for it, and completing it from gorge's own
@@ -59,7 +64,7 @@ const (
 )
 
 // Reasons is every reason Prepare refuses with.
-var Reasons = []string{ReasonSpelling, ReasonModeCollision, ReasonAbilityUnknown, ReasonRetarget, ReasonNoResult, ReasonNoXMageCard, ReasonWindowOnly, ReasonModalTrigger}
+var Reasons = []string{ReasonSpelling, ReasonModeCollision, ReasonAbilityUnknown, ReasonRetarget, ReasonNoResult, ReasonNoXMageCard, ReasonWindowOnly, ReasonColourMismatch, ReasonModalTrigger}
 
 // tapeID matches the id of a tape item: "...:tape" or a prefix "...:tape:t<N>".
 var tapeID = regexp.MustCompile(`:tape(:t\d+)?$`)
@@ -135,7 +140,25 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 	for i := range sc.Steps {
 		if comboColourStep(abilities, i) {
 			it.XAnswers[i] = nil // the prefix names the colour; no ask follows
+			continue
 		}
+		colour, fixed := fixedColourStep(abilities, i)
+		if !fixed {
+			continue
+		}
+		// The ability text itself names the colour, so XMage selects that
+		// fixed ability and asks nothing; a queued colour answer would be a
+		// leftover that desyncs the FIFO choice queue. A pick or queued answer
+		// naming another colour is a disagreement, not a leftover: refuse it
+		// rather than drop it silently.
+		if picked, ok := fixedColourPick(g.Decisions, i); ok && picked != colour {
+			return it, refuse(it.ID, ReasonColourMismatch, "step %d: fixed mana text %q names {%s} but gorge picked {%s}", i, abilities[i], colour, picked)
+		}
+		kept, mismatched := dropFixedColourAnswers(it.XAnswers[i], colour)
+		if mismatched != "" {
+			return it, refuse(it.ID, ReasonColourMismatch, "step %d: fixed mana text %q names {%s} but the queued answer is %q", i, abilities[i], colour, mismatched)
+		}
+		it.XAnswers[i] = kept
 	}
 	it.XAbility = abilities
 	it.XPos = passPositions(sc.Steps, g.Snapshots)
@@ -764,4 +787,78 @@ func comboColourPrefix(p string, f *cards.Face, ability int, st oraclegen.Step) 
 		return p
 	}
 	return comboPrefix + strings.TrimPrefix(st.Answers[0].Pick[0], "Add ") + "}"
+}
+
+// fixedColourStep reports the colour letter an activate step's XMage ability
+// text names when it is a fixed single-colour mana text of the form
+// "{T}: Add {X}." (X one of W, U, B, R, G). A basic-typed dual land gets one
+// such intrinsic ability per basic type, and XMage selects it by this text.
+// The trailing period distinguishes it from the Combo prefix comboColourPrefix
+// rewrites to ("{T}: Add {X}", no period), which XMage asks a colour for.
+func fixedColourStep(abilities []string, i int) (string, bool) {
+	if i >= len(abilities) || !strings.HasPrefix(abilities[i], comboPrefix) || !strings.HasSuffix(abilities[i], "}.") {
+		return "", false
+	}
+	colour := strings.TrimSuffix(strings.TrimPrefix(abilities[i], comboPrefix), "}.")
+	if len(colour) != 1 || !strings.Contains("WUBRG", colour) {
+		return "", false
+	}
+	return colour, true
+}
+
+// fixedColourPick is the colour letter gorge picked for the fixed-colour mana
+// activation at step, from the pick's "Add B" label (or a bare "B").
+func fixedColourPick(ds []rules.OracleDecision, step int) (string, bool) {
+	for _, d := range ds {
+		if d.Step != step || d.Via != "mana ability" {
+			continue
+		}
+		for _, p := range d.Picks {
+			label := strings.TrimPrefix(strings.TrimSpace(p), "Add ")
+			if len(label) == 1 && strings.Contains("WUBRG", label) {
+				return label, true
+			}
+		}
+	}
+	return "", false
+}
+
+// colourChoiceLetter translates an XMage colour-choice value to its WUBRG
+// letter; ok is false for a choice answer that names no colour.
+func colourChoiceLetter(v string) (string, bool) {
+	switch v {
+	case "White":
+		return "W", true
+	case "Blue":
+		return "U", true
+	case "Black":
+		return "B", true
+	case "Red":
+		return "R", true
+	case "Green":
+		return "G", true
+	}
+	return "", false
+}
+
+// dropFixedColourAnswers removes the colour answers queued for an activate
+// step whose XMage text already names the colour: XMage selects that fixed
+// ability and poses no colour question, so a queued colour would be left over
+// and poison the next choice in the FIFO queue. A colour answer naming another
+// colour is returned as mismatched instead of dropped: that is a disagreement
+// Prepare refuses, never a silent loss. Answers of any other kind, and choice
+// answers that name no colour, stay.
+func dropFixedColourAnswers(answers []oraclegen.XAnswer, colour string) (kept []oraclegen.XAnswer, mismatched string) {
+	for _, a := range answers {
+		if a.Kind == "choice" {
+			if got, ok := colourChoiceLetter(a.Value); ok {
+				if got != colour {
+					return nil, a.Value
+				}
+				continue
+			}
+		}
+		kept = append(kept, a)
+	}
+	return kept, ""
 }

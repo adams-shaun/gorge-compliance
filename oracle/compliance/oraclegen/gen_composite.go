@@ -86,7 +86,24 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 		castSteps = stepsWithOwnTargets(sc)
 	}
 	castSteps = withoutDividedActivations(castSteps, ds, sc)
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips)
+	// A Dig decision's XMage dialog selects an endpoint that depends on the
+	// source card's IR (DestinationZone2): the exile family inverts gorge's
+	// pick, every other family keeps it. Resolve the source once per step from
+	// the scenario and the stack snapshots, so the answer router never has to
+	// infer the family from the option count alone.
+	digs := map[int]digSource{}
+	for _, d := range ds {
+		if d.Resume != "dig" {
+			continue
+		}
+		if _, done := digs[d.Step]; done {
+			continue
+		}
+		if src, ok := digSourceForStep(reg, sc, res.Snapshots, d.Step); ok {
+			digs[d.Step] = src
+		}
+	}
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, digs)
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that

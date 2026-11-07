@@ -875,3 +875,36 @@ func TestAnswersOfSkipsWindowTaps(t *testing.T) {
 		t.Fatalf("answers %+v, want only the announcement", answers)
 	}
 }
+
+// TestLowerCastModes: a may-play permission offers alternate costs as
+// (Mode "mayplay", AltCostIndex i+1); the first election is the runner's
+// "alternative" mode, not a plain mayplay cast. Gorge's own cast-mode matcher
+// treats (Mode == "" || Mode == "mayplay") && AltCostIndex == 1 the same way,
+// so the lowering keeps the runner's vocabulary instead of inventing a mode.
+func TestLowerCastModes(t *testing.T) {
+	for _, tc := range []struct {
+		name string
+		pk   game.Pick
+		want string
+	}{
+		{"plain mayplay", game.Pick{Kind: "cast", Ref: "p0:Tactical Officer", Mode: "mayplay"}, "mayplay"},
+		{"first alternative on a mayplay", game.Pick{Kind: "cast", Ref: "p0:Misthollow Griffin", Mode: "mayplay", AltCost: 1}, "alternative"},
+		{"first alternative on a hand cast", game.Pick{Kind: "cast", Ref: "p0:Grizzly Bears", AltCost: 1}, "alternative"},
+		{"optionalcost is not the alternative", game.Pick{Kind: "cast", Ref: "p0:Grizzly Bears", Mode: "optionalcost", AltCost: 1}, "optionalcost"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			steps, _, _, _, why := lowerGroup(nil, seatMap{}, []game.Entry{{
+				Kind: "priority", Seat: 0, Picks: []game.Pick{tc.pk},
+			}})
+			if why != nil {
+				t.Fatalf("lowerGroup: %s", why.reason)
+			}
+			if len(steps) != 1 || steps[0].Op != "cast" {
+				t.Fatalf("steps = %+v, want one cast", steps)
+			}
+			if steps[0].CastMode != tc.want {
+				t.Fatalf("cast_mode = %q, want %q", steps[0].CastMode, tc.want)
+			}
+		})
+	}
+}
