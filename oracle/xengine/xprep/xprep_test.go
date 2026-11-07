@@ -1,6 +1,7 @@
 package xprep
 
 import (
+	"fmt"
 	"reflect"
 	"slices"
 	"strings"
@@ -696,6 +697,128 @@ func TestPrepareModalTriggerMode(t *testing.T) {
 			t.Fatalf("mode answers = %+v, want exactly gorge's Surveil answer 2", got)
 		}
 	})
+
+	// Emergency Holographic Crew's second mode is a keep-all Surveil 2: the
+	// completion's follow-up ask is an arrange, and the replay driver reads a
+	// surveil look through the choice queue (choice_skip then the kept-card
+	// order), not the target queue. A fixed-colour mana activation earlier in
+	// the window is the other half of xe:RAND:2:0:w7: XMage selects "{T}: Add
+	// {B}." by its text and asks nothing, so gorge's "Add B" answer must not
+	// reach the choice queue in front of the surveil answers.
+	var surveilCrew string
+	if c, ok := reg.Lookup("Emergency Holographic Crew"); ok {
+		for label, n := range oraclegen.ModeNumbers(c.Faces[0]) {
+			if n == 2 {
+				surveilCrew = label
+			}
+		}
+	}
+	if surveilCrew == "" {
+		t.Fatal("Emergency Holographic Crew has no second mode label")
+	}
+	one := 1
+	surveilWindow := func(dirty bool) (lower.Lowered, rules.OracleResult) {
+		t.Helper()
+		battlefield := []string{"Island", "Island", "Island", "Island"}
+		hand := []string{"Emergency Holographic Crew", "Plains"}
+		var steps []oraclegen.Step
+		if dirty {
+			battlefield = battlefield[:3]
+			hand = append([]string{"Watery Grave"}, hand...)
+			steps = append(steps,
+				oraclegen.Step{Op: "play", Seat: 0, Card: "p0:Watery Grave",
+					Answers: []oraclegen.Answer{{Kind: "modes", Pick: []string{"Pay 2 life"}}}},
+				oraclegen.Step{Op: "activate", Seat: 0, Card: "p0:Watery Grave", AbilityIndex: &one},
+			)
+		}
+		for i := range battlefield {
+			ref := "p0:Island"
+			if i > 0 {
+				ref = fmt.Sprintf("p0:Island#%d", i+1)
+			}
+			steps = append(steps, oraclegen.Step{Op: "activate", Seat: 0, Card: ref, AbilityIndex: &zero})
+		}
+		steps = append(steps,
+			oraclegen.Step{Op: "cast", Seat: 0, Card: "p0:Emergency Holographic Crew"},
+			oraclegen.Step{Op: "pass", Seat: 0})
+		it := oraclegen.Item{
+			ID:       "xe:test:modal-trigger-surveil",
+			Template: "xengine-window",
+			Scenario: oraclegen.Scenario{
+				Name: "keep-all surveil at a cut pass", Turn: 1,
+				Why: "a keep-all surveil is a choice-queue arrange, and an earlier fixed-colour answer must not sit in that queue",
+				Setup: map[string]oraclegen.Seat{
+					"p0": {
+						Battlefield: battlefield,
+						Hand:        hand,
+						LibraryTop:  []string{"Forest", "Island", "Plains", "Island", "Forest", "Island", "Plains", "Forest"},
+						Life:        int32p(20),
+					},
+					"p1": {
+						Hand:       []string{"Swamp", "Swamp"},
+						LibraryTop: []string{"Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp"},
+						Life:       int32p(20),
+					},
+				},
+				Steps: steps,
+			},
+		}
+		res, err := rules.RunOracleScenarioJSON(reg, it.Raw())
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(res.Fails) > 0 {
+			t.Fatalf("gorge rejects the window: %v", res.Fails)
+		}
+		return lower.Lowered{Item: it}, res
+	}
+	checkSurveil := func(t *testing.T, it oraclegen.Item) {
+		t.Helper()
+		if got := modeAnswers(it); len(got) != 1 || got[0].Value != "2" {
+			t.Fatalf("mode answers = %+v, want exactly the completed Surveil mode 2", got)
+		}
+		last := len(it.XAnswers) - 1
+		as := it.XAnswers[last]
+		if len(as) != 3 || as[0].Kind != "mode" || as[0].Value != "2" {
+			t.Fatalf("last step answers = %+v, want mode 2 then the keep-all arrange", as)
+		}
+		if as[1].Kind != "choice" || as[1].Value != "[choice_skip]" {
+			t.Fatalf("answers after the mode = %+v, want a choice-queue keep-all skip", theRest(as))
+		}
+		if as[2].Kind != "choice" || (as[2].Value != "Forest" && as[2].Value != "Island") {
+			t.Errorf("order answer = %+v, want the looked-at card the dialog asks for", as[2])
+		}
+	}
+	t.Run("keep-all surveil at the cut", func(t *testing.T) {
+		l, g := surveilWindow(false)
+		it, ref := Prepare(reg, sp, l, g)
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		checkSurveil(t, it)
+	})
+	t.Run("preceding unconsumed colour answer", func(t *testing.T) {
+		l, g := surveilWindow(true)
+		it, ref := Prepare(reg, sp, l, g)
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		// Step 1 activates Watery Grave: XMage's fixed "{T}: Add {B}." text
+		// selects the colour, so the answer gorge's runner recorded for it is
+		// not consumed and must not survive into the choice queue.
+		if got := it.XAnswers[1]; len(got) != 0 {
+			t.Errorf("fixed-colour step answers = %+v, want none", got)
+		}
+		checkSurveil(t, it)
+	})
+}
+
+// theRest is the answers after the first two, for a failure message.
+func theRest(as []oraclegen.XAnswer) []oraclegen.XAnswer {
+	if len(as) <= 2 {
+		return as
+	}
+	return as[1:]
 }
 
 // int32p is a *int32 for a scenario's Life.
