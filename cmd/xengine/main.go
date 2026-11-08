@@ -34,12 +34,12 @@
 package main
 
 import (
-	"bufio"
 	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/rowio"
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
@@ -116,22 +116,9 @@ func jsonl(v any) ([]byte, error) {
 	return append(b, '\n'), err
 }
 
-// readLines calls each with every non-empty line of path.
+// readLines calls each with every non-empty line of path. A line over the
+// reader's cap is an error: only a follower row file has a classified-row
+// alternative (readFollowerRows).
 func readLines(path string, each func([]byte) error) error {
-	f, err := os.Open(path)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-	sc := bufio.NewScanner(f)
-	sc.Buffer(make([]byte, 1<<20), 256<<20)
-	for sc.Scan() {
-		if len(sc.Bytes()) == 0 {
-			continue
-		}
-		if err := each(append([]byte(nil), sc.Bytes()...)); err != nil {
-			return err
-		}
-	}
-	return sc.Err()
+	return rowio.Read(path, rowio.DefaultCap, each, nil)
 }
