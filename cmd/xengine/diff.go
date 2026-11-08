@@ -16,6 +16,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/rowio"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/xprep"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -43,12 +44,18 @@ func runDiff(args []string) error {
 	return diff(reg, *playDir, *engine, *rowsPath, *out, *only)
 }
 
+// followerRowCap is the per-row cap of a follower result file. A row over it
+// is not an error: readFollowerRows turns it into a harness row (see
+// rowio.Oversized) so one runaway driver transcript cannot lose the chunk.
+// It is a variable so a test can lower the cap instead of writing 256 MiB.
+var followerRowCap = rowio.DefaultCap
+
 // readFollowerRows reads the follower rows by item id. A Forge row carries
 // "engine":"forge"; one fed to the wrong comparison would compare as the other
 // engine's, so the engine field must agree.
 func readFollowerRows(path, engine string) (map[string]oraclediff.XResult, error) {
 	rows := map[string]oraclediff.XResult{}
-	err := readLines(path, func(b []byte) error {
+	err := rowio.Read(path, followerRowCap, func(b []byte) error {
 		var r struct {
 			oraclediff.XResult
 			Engine string `json:"engine"`
@@ -63,6 +70,13 @@ func readFollowerRows(path, engine string) (map[string]oraclediff.XResult, error
 			return fmt.Errorf("row %q is not a Forge row (engine %q)", r.ID, r.Engine)
 		}
 		rows[r.ID] = r.XResult
+		return nil
+	}, func(o rowio.Oversized) error {
+		x, err := rowio.FollowerOversized(o, engine)
+		if err != nil {
+			return err
+		}
+		rows[x.ID] = x
 		return nil
 	})
 	return rows, err

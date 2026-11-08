@@ -1,7 +1,6 @@
 package adjudicate
 
 import (
-	"bufio"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -15,6 +14,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/dside"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/rowio"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
@@ -276,27 +276,12 @@ func cardOf(item oraclegen.Item, f classify.Finding) string {
 // ---- reading a play and its two diffs ----
 
 func readLines(path string, each func([]byte) error) error {
-	f, err := os.Open(path)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-	sc := bufio.NewScanner(f)
-	sc.Buffer(make([]byte, 1<<20), 256<<20)
-	for sc.Scan() {
-		if len(sc.Bytes()) == 0 {
-			continue
-		}
-		if err := each(append([]byte(nil), sc.Bytes()...)); err != nil {
-			return err
-		}
-	}
-	return sc.Err()
+	return rowio.Read(path, rowio.DefaultCap, each, nil)
 }
 
 func readRows(path, engine string) (map[string]oraclediff.XResult, error) {
 	rows := map[string]oraclediff.XResult{}
-	err := readLines(path, func(b []byte) error {
+	err := rowio.Read(path, rowio.DefaultCap, func(b []byte) error {
 		var r struct {
 			oraclediff.XResult
 			Engine string `json:"engine"`
@@ -308,6 +293,13 @@ func readRows(path, engine string) (map[string]oraclediff.XResult, error) {
 			return fmt.Errorf("row %q is a %s row, not %s", r.ID, r.Engine, engine)
 		}
 		rows[r.ID] = r.XResult
+		return nil
+	}, func(o rowio.Oversized) error {
+		x, err := rowio.FollowerOversized(o, engine)
+		if err != nil {
+			return err
+		}
+		rows[x.ID] = x
 		return nil
 	})
 	return rows, err
