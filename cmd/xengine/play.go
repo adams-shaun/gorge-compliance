@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"errors"
 	"flag"
 	"fmt"
 	"math/rand/v2"
@@ -163,15 +164,28 @@ func setPicker(reg *cards.Registry, manifests, set string, led *cov.Ledger, opts
 	}
 	table := ""
 	if tables != nil {
-		if cands, err = tables.Playable(set, cands); err != nil {
-			return nil, fmt.Errorf("set %s: %w", set, diracTablesHint(err))
+		if cands, err = diracCandidates(tables, set, cands); err != nil {
+			return nil, err
 		}
 		table = set
-	}
-	if err := decks.Pairable(cands); err != nil {
+	} else if err := decks.Pairable(cands); err != nil {
 		return nil, fmt.Errorf("set %s: %w", set, err)
 	}
 	return func(int, uint64) ([]decks.Card, *cov.Ledger, string) { return cands, led, table }, nil
+}
+
+// diracCandidates is cands minus the cards set's dirac table does not play, or
+// an error when what remains cannot build decks. Both errors name the set, so a
+// caller that drops the set can report which one and why instead of guessing.
+func diracCandidates(tables *dside.Tables, set string, cands []decks.Card) ([]decks.Card, error) {
+	playable, err := tables.Playable(set, cands)
+	if err != nil {
+		return nil, fmt.Errorf("set %s: %w", set, diracTablesHint(err))
+	}
+	if err := decks.Pairable(playable); err != nil {
+		return nil, fmt.Errorf("set %s: %w", set, err)
+	}
+	return playable, nil
 }
 
 // randomPicker draws decks with no regard to the ledger: from the union of the
@@ -184,6 +198,7 @@ func randomPicker(reg *cards.Registry, manifests string, sets []string, opts dec
 		cands []decks.Card
 	}
 	var bySet []tableSet
+	var drops []error
 	for _, code := range sets {
 		cands, _, err := decks.CandidatesWith(reg, manifests, code, opts)
 		if err != nil {
@@ -193,20 +208,31 @@ func randomPicker(reg *cards.Registry, manifests string, sets []string, opts dec
 		if tables == nil {
 			continue
 		}
-		playable, err := tables.Playable(code, cands)
-		if dside.NoTables(err) {
-			return nil, diracTablesHint(err)
+		playable, err := diracCandidates(tables, code, cands)
+		if err != nil {
+			if dside.NoTables(err) {
+				return nil, err
+			}
+			drops = append(drops, err)
+			continue
 		}
-		if err == nil && decks.Pairable(playable) == nil {
-			bySet = append(bySet, tableSet{code, playable})
-		}
+		bySet = append(bySet, tableSet{code, playable})
 	}
 	union := decks.Union(append(lists, extra)...)
+	// The dropped sets' reasons come before the union's: the union can be
+	// pairable across sets even when no single set can build a dirac-table
+	// deck, and its error would hide why each set was dropped.
+	if tables != nil && len(bySet) == 0 {
+		if len(drops) == 0 {
+			return nil, fmt.Errorf("-dirac: no set of %v can build decks", sets)
+		}
+		return nil, fmt.Errorf("-dirac: no set of %v can build decks: %w", sets, errors.Join(drops...))
+	}
 	if err := decks.Pairable(union); err != nil {
 		return nil, err
 	}
-	if tables != nil && len(bySet) == 0 {
-		return nil, fmt.Errorf("-dirac: no set of %v has a dirac table that can build decks", sets)
+	for _, err := range drops {
+		fmt.Printf("xengine: -dirac: %v\n", err)
 	}
 	return func(g int, seed uint64) ([]decks.Card, *cov.Ledger, string) {
 		if tables != nil && diracGame(g, diracEvery) {
