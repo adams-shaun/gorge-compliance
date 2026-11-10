@@ -330,6 +330,8 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 	switch {
 	case typ == "Player" && name == "LandsPlayed":
 		return v.Int() > 0 && w.seat == int(w.g.Active)
+	case typ == "Player" && name == "LandsPlayedOffHand":
+		return v.Len() > 0 && w.seat == int(w.g.Active)
 	case typ == "Object" && stackOnly[name]:
 		return o.Zone == state.ZStack && v.Len() > 0
 	case typ == "Object" && name == "ActivatedThisTurn":

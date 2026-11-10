@@ -226,8 +226,7 @@
      "pt": "4/2"
     }
    ],
-   "xmage": "CopyEnchantmentTest#copyAuraEnchantment",
-   "known_bug": "XP[clone-into-aura-no-enchant-choice]: Copy Enchantment resolves as a non-Aura permanent spell and enters as a copy of Inferno Fist, but gorge never asks what the Aura enchants: nonCastAuraEntrant excludes entries from the stack and tests the PRINTED face (engine/rules/aura_entry.go:92 o.Zone==ZStack, :95 faceIsAura(o.Face())), and the enchant election runs before the clone election (engine/rules/cast_etbchoice.go:96). The unattached Aura copy then goes to the graveyard by SBA (count p1 graveyard Copy Enchantment=1, Silvercoat Lion 2/2). CR 303.4f (Aura entering other than by resolving as an Aura spell: controller chooses what it enchants), CR 707.2/706 copy; Copy Enchantment ruling. Translation side note: setChoice answers are attached to pass_to but harness copes."
+   "xmage": "CopyEnchantmentTest#copyAuraEnchantment"
   },
   {
    "name": "copy-saga-land-test",
