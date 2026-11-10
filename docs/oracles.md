@@ -122,7 +122,7 @@ either differs at, since neither follows the same game after it. An item XMage i
 
 **Can't check:** windows it can't lower. In a 2-game FDN sweep on 2026-11-02, 25 of 46 windows
 were refused, and of the 21 replayed, 3 in XMage and 1 in Forge came back as a `decision_shape`
-difference, so a follower can fail to express a position without any engine being wrong. A sweep rules on nothing and commits nothing. Its findings are leads for a person.
+difference, so a follower can fail to express a position without any engine being wrong. A sweep rules on nothing and commits nothing. Its findings are leads for a person. A person who has re-verified a sweep's findings records the accounting in [sweeps/](sweeps/).
 
 Forge has one known difference of its own here. After a first-strike combat's first damage step, when
 no creature is left to deal damage in the second, Forge goes straight to end of combat, where
