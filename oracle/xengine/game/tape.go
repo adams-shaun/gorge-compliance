@@ -46,7 +46,8 @@ type Tape struct {
 	Outcome     Outcome   `json:"outcome"`
 }
 
-// Deck is one seat's list as played: 40 cards, or 100 for a Commander deck.
+// Deck is one seat's list as played: 40 cards from decks.Pair, 100 for a
+// Commander deck, or a fixed deck's main deck under play -decks.
 type Deck struct {
 	Name      string   `json:"name"`
 	Colours   string   `json:"colours,omitempty"`

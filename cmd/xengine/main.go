@@ -3,7 +3,7 @@
 // oracle tape scenario a follower (XMage, Forge) replays, and every
 // difference is classified and written as a repro directory.
 //
-//	xengine play -set S [-chunk C] [-games K] [-seed N] [-windows] [-tape-turns 1,2,4,8] [-ledger L.tsv] [-random 'S1 S2'] [-dirac] [-pool FILE [-pool-filter FILE]] [-out DIR]
+//	xengine play -set S [-chunk C] [-games K] [-seed N] [-windows] [-tape-turns 1,2,4,8] [-ledger L.tsv] [-random 'S1 S2'] [-dirac] [-pool FILE [-pool-filter FILE]] [-decks DIR] [-out DIR]
 //	xengine diff -play DIR -engine xmage|forge -rows ROWS.jsonl -out DIR2 [-only ID]
 //	xengine cov  -ledger A.tsv [-ledger B.tsv ...] [-sets FDN,BLB] [-sub BASE.tsv] [-missing] [-write OUT.tsv]
 //	xengine calib -play DIR -diff DIR2 -engine xmage|forge
@@ -20,7 +20,9 @@
 // (the ledger with Exercised credited); -tape-turns N,... adds each tape cut
 // at the end of turn N (id ...:tape:t<N>); -random draws the decks across sets, ignoring
 // the ledger; -pool FILE draws them from a card list alone (DIR/pool.json records
-// the pool and -pool-filter used); -dirac plays each game a dirac table holds in lockstep first and replays
+// the pool and -pool-filter used); -decks DIR plays two different fixed deck
+// files of DIR per game, main deck only (DIR/decks.json records each deck, its
+// sha256 and whether it is playable or why not); -dirac plays each game a dirac table holds in lockstep first and replays
 // gorge's answers as the game, with DIR/dirac.jsonl saying how each went. diff compares a follower's rows with
 // gorge's stored results, never replaying gorge, and writes DIR2/verdicts.jsonl,
 // DIR2/compared.tsv and DIR2/finds/<class>/<id>/ (a repro directory per

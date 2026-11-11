@@ -93,10 +93,17 @@ func runPlay(args []string) error {
 	cmdrDecks := fs.String("commander-decks", "", "with -format commander: a directory of Commander deck files; each game is a 1v1 Commander match between two of them (decks.CommanderPair)")
 	pool := fs.String("pool", "", "a file of card names, one per line (# comments): draw the decks from these cards alone, through the same gorge-supported filter and against the ledger as -set; -set only names the run. Not with -random, -forge-only or -dirac")
 	poolFilter := fs.String("pool-filter", "", "with -pool, a file of card names to leave out of the pool (cards a follower refuses)")
+	decksDir := fs.String("decks", "", "a directory of gorge deck files (*.json, engine/deck's format): every game plays two different fixed decks of it, main deck only, instead of building 40-card decks; -set only names the run. A deck gorge does not fully support (or, with -xmage, naming a card XMage spells otherwise) is skipped; DIR/decks.json records each. Not with -pool, -random, -forge-only or -dirac")
 	out := fs.String("out", "", "output dir (default under "+DefaultRoot+")")
 	fs.Parse(args)
 	if *set == "" {
 		return fmt.Errorf("play needs -set")
+	}
+	if *decksDir != "" && (*format == "commander" || *cmdrDecks != "") {
+		return errors.New("-decks plays fixed constructed lists: it cannot be combined with -format commander or -commander-decks")
+	}
+	if err := decksFlagErr(*decksDir, *pool, *random, *forgeOnly, *dirac); err != nil {
+		return err
 	}
 	if err := poolFlagErr(*pool, *poolFilter, *random, *forgeOnly, *dirac); err != nil {
 		return err
@@ -136,6 +143,27 @@ func runPlay(args []string) error {
 	var tables *dside.Tables
 	if *dirac {
 		tables = dside.NewTables(reg)
+	}
+	if *decksDir != "" {
+		var sp *decks.Spellings
+		if *xmage {
+			if sp, err = decks.LoadSpellings(*manifests); err != nil {
+				return err
+			}
+		}
+		ds, info, derr := loadDeckDir(reg, *decksDir, sp)
+		fmt.Println(info)
+		if derr != nil {
+			return derr
+		}
+		b, err := json.MarshalIndent(info, "", "  ")
+		if err != nil {
+			return err
+		}
+		if err := writeAtomic(filepath.Join(*out, "decks.json"), append(b, '\n')); err != nil {
+			return err
+		}
+		return play(reg, fixedDealer(ds, *chunk, *seed), nil, led, *set, *chunk, *games, *seed, *out, *windows, *xmage, turns)
 	}
 	opts := decks.Options{XMage: *xmage}
 	var deal dealer

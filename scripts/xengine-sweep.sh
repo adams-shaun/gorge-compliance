@@ -95,6 +95,12 @@
 #                         XENGINE_DIRAC (play refuses)
 #   XENGINE_POOL_FILTER   with XENGINE_POOL, a file of names left out of the pool
 #                         (play -pool-filter); <chunk>/pool.json records both and their sha256
+#   XENGINE_DECKS         a directory of gorge deck files (*.json) passed to play as -decks:
+#                         every game plays two different fixed decks of it (main deck
+#                         only; real 60-card lists), and --sets only names the run. Not
+#                         with XENGINE_POOL, XENGINE_RANDOM_SETS, XENGINE_FORGE_ONLY or
+#                         XENGINE_DIRAC (play refuses); <chunk>/decks.json records each
+#                         deck, its sha256 and whether it was playable or why not
 #   XENGINE_JVM_WAIT      max seconds to wait for a JVM slot (default 21600)
 #   XENGINE_JVM_POLL      poll interval in seconds (default 30)
 #   XENGINE_<F>_WAIT / XENGINE_<F>_MEM
@@ -293,6 +299,7 @@ play_stage() { # set chunk dir (reads <dir>/ledger-in.tsv when snapshot_into mad
 	[ -z "${XENGINE_COMMANDER_DECKS:-}" ] || args+=(-format commander -commander-decks "$XENGINE_COMMANDER_DECKS")
 	[ -z "${XENGINE_POOL:-}" ] || args+=(-pool "$XENGINE_POOL")
 	[ -z "${XENGINE_POOL_FILTER:-}" ] || args+=(-pool-filter "$XENGINE_POOL_FILTER")
+	[ -z "${XENGINE_DECKS:-}" ] || args+=(-decks "$XENGINE_DECKS")
 	[ ! -e "$d/ledger-in.tsv" ] || args+=(-ledger "$d/ledger-in.tsv")
 	run_stage xe "${args[@]}"
 }
