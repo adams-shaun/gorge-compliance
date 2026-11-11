@@ -14,6 +14,7 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/follower"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 )
 
@@ -100,10 +101,10 @@ func runCalib(args []string) error {
 	fs := flag.NewFlagSet("calib", flag.ExitOnError)
 	playDir := fs.String("play", "", "play output dir (required)")
 	diffDir := fs.String("diff", "", "diff output dir (required); CALIB.md and calib.json are written here")
-	engine := fs.String("engine", "", "follower: xmage or forge (required)")
+	engine := fs.String("engine", "", "follower: "+strings.Join(follower.Names(), " or ")+" (required)")
 	fs.Parse(args)
-	if *playDir == "" || *diffDir == "" || (*engine != "xmage" && *engine != "forge") {
-		return fmt.Errorf("calib needs -play, -diff and -engine xmage|forge")
+	if *playDir == "" || *diffDir == "" || !follower.Known(*engine) {
+		return fmt.Errorf("calib needs -play, -diff and -engine %s", strings.Join(follower.Names(), "|"))
 	}
 	if err := classify.RefuseRepoPath(*diffDir); err != nil {
 		return err

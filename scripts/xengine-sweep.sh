@@ -4,14 +4,24 @@
 # A chunked, resumable xengine sweep outside go test.
 # Per set and chunk c (K games each):
 #   1. xengine play  -- gorge plays K games, lowers them to <chunk>/items.jsonl
-#                       (every go stage -- play, diff, cov, sweep-plan -- runs
+#                       (every go stage -- play, diff, cov, sweep-plan, followers -- runs
 #                       inside a systemd scope: 4G, 400% CPU, GOMAXPROCS=4)
-#   2. each follower in XENGINE_FOLLOWERS replays items.jsonl under the heavy
-#      lock (scripts/heavy-lock.sh), after waiting for a free JVM slot. XMage
-#      replays <chunk>/xitems.jsonl instead: `xengine xprep` fills the driver's
-#      answers and ability prefixes (the refused items, with their reasons, go
-#      to <chunk>/xprep.jsonl and have no XMage row), and play was given -xmage
-#      so no deck holds a card XMage spells differently
+#   2. each follower in XENGINE_FOLLOWERS (a name `xengine followers` lists:
+#      the registry, oracle/xengine/follower) has its items prepared by its
+#      prep stage, then its runner replays them under the heavy lock
+#      (scripts/heavy-lock.sh) into <chunk>/<f>.jsonl; a JVM follower first
+#      waits for a free JVM slot. The prep stages:
+#        xprep            (xmage) `xengine xprep` fills the driver's answers and
+#                         ability prefixes into <chunk>/xitems.jsonl (the
+#                         refused items, with their reasons, go to
+#                         <chunk>/xprep.jsonl and have no row), and play was
+#                         given -xmage so no deck holds a card XMage spells
+#                         differently
+#        forge-export     (forge) `oraclediff forge-export` writes
+#                         <chunk>/<f>-req.jsonl (log <chunk>/<f>-export.log)
+#        follower-export  `oraclediff follower-export -engine <f>` writes
+#                         <chunk>/<f>-req.jsonl and its refusals to
+#                         <chunk>/<f>-prep.jsonl (log <chunk>/<f>-export.log)
 #   3. xengine diff  -- classify the follower rows into <chunk>/diff-<f>
 #      with both followers, xengine adjudicate -- the three-way pattern of each
 #                       item either diverged on (<chunk>/adjudicate/, ticket drafts
@@ -40,15 +50,18 @@
 # A failed chunk stops its set (later chunks would read a stale ledger); other
 # sets go on and the sweep exits 1.
 #
-# One follower JVM at a time, ever: before each follower stage the script
-# counts running JVMs with `pgrep -c -x java` and waits (poll XENGINE_JVM_POLL,
-# max XENGINE_JVM_WAIT seconds) while 2 or more run.
+# One follower JVM at a time, ever: before each JVM follower's stage (jvm
+# true in `xengine followers`) the script counts running JVMs with
+# `pgrep -c -x java` and waits (poll XENGINE_JVM_POLL, max XENGINE_JVM_WAIT
+# seconds) while 2 or more run. A follower without a JVM takes no slot: it
+# runs under the heavy lock alone, with its own XENGINE_<F>_MEM.
 #
 # Environment:
 #   XENGINE_ROOT          output root (default .oracle-build/xengine/<run>); any
 #                         other directory inside the repository is refused, because
 #                         follower output must never be committed
-#   XENGINE_FOLLOWERS     'forge xmage' (default)
+#   XENGINE_FOLLOWERS     'forge xmage' (default): followers, in run order; each
+#                         must be a name `xengine followers` lists
 #   XENGINE_GO_JOBS       concurrent play stages, a positive integer (default 1:
 #                         strictly serial; see the ledger merge below)
 #   XENGINE_WINDOWS       1 (default) passes -windows to play
@@ -69,12 +82,22 @@
 #   XENGINE_FORGE_ONLY    with XENGINE_RANDOM_SETS, a file of card names, one per line,
 #                         added to the cross-set deal: a set XMage has no class for.
 #                         An item holding one is not sent to XMage (xmage_lacks_card)
+#   XENGINE_POOL          a card-name file passed to play as -pool: the decks are drawn
+#                         from it alone (oracle/xengine/pools/), against the ledger as a
+#                         set's are, and --sets only names the run. Not with
+#                         XENGINE_RANDOM_SETS, XENGINE_FORGE_ONLY or XENGINE_DIRAC (play refuses)
+#   XENGINE_POOL_FILTER   with XENGINE_POOL, a file of names left out of the pool
+#                         (play -pool-filter); <chunk>/pool.json records both and their sha256
 #   XENGINE_JVM_WAIT      max seconds to wait for a JVM slot (default 21600)
 #   XENGINE_JVM_POLL      poll interval in seconds (default 30)
-#   XENGINE_FORGE_WAIT / XENGINE_FORGE_MEM, XENGINE_XMAGE_WAIT / XENGINE_XMAGE_MEM
-#                         heavy-lock --wait / --mem per follower (20000 s / 12G)
-#   Overrides for the smoke: XENGINE_GO (go command), XENGINE_XMAGE_RUNNER,
-#   XENGINE_FORGE_RUNNER, XENGINE_ORACLEDIFF, XENGINE_PGREP. XENGINE_SCOPE=none
+#   XENGINE_<F>_WAIT / XENGINE_<F>_MEM
+#                         heavy-lock --wait / --mem for follower <f> (20000 s / 12G),
+#                         <F> its name upper-cased: XENGINE_FORGE_WAIT,
+#                         XENGINE_XMAGE_MEM, ... (`xengine followers` names them)
+#   XENGINE_<F>_RUNNER    the runner for follower <f> instead of the registry's
+#                         script (XENGINE_XMAGE_RUNNER, XENGINE_FORGE_RUNNER)
+#   Overrides for the smoke: XENGINE_GO (go command), XENGINE_<F>_RUNNER,
+#   XENGINE_ORACLEDIFF, XENGINE_PGREP. XENGINE_SCOPE=none
 #   starts no scope, for the go stages or the JVMs, so that all of them stay in
 #   the cgroup of a unit that caps the whole run.
 #
@@ -119,8 +142,30 @@ case "$jobs" in
 esac
 case "$chunks$games$seed" in *[!0-9]* | "") echo "xengine-sweep: --chunks, --games and --seed are non-negative integers" >&2; exit 2 ;; esac
 command -v jq >/dev/null || { echo "xengine-sweep: jq is needed for SUMMARY.md" >&2; exit 2; }
+
+# capped CMD...: the box rule (4G, 400% CPU, GOMAXPROCS=4) for every go stage.
+capped() {
+	if [ "${XENGINE_SCOPE:-systemd}" = none ]; then
+		env GOMAXPROCS=4 GOMEMLIMIT=3GiB "$@"
+	else
+		systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% env GOMAXPROCS=4 GOMEMLIMIT=3GiB "$@"
+	fi
+}
+xe() { capped "$GO" run -trimpath ./cmd/xengine "$@"; }
+
+# The follower registry (oracle/xengine/follower), one row per follower; see
+# cmd/xengine/followers.go for the columns.
+f_names=()
+declare -A f_runner=() f_prep=() f_jvm=() f_runner_env=() f_mem_env=() f_wait_env=()
+registry=$(xe followers) || { echo "xengine-sweep: xengine followers FAILED" >&2; exit 2; }
+while IFS=$'\t' read -r name runner prep jvm runner_env mem_env wait_env _; do
+	case "$name" in "" | "#"*) continue ;; esac
+	f_names+=("$name")
+	f_runner[$name]=$runner f_prep[$name]=$prep f_jvm[$name]=$jvm
+	f_runner_env[$name]=$runner_env f_mem_env[$name]=$mem_env f_wait_env[$name]=$wait_env
+done <<<"$registry"
 for f in $followers; do
-	case "$f" in forge | xmage) ;; *) echo "xengine-sweep: unknown follower $f (want forge or xmage)" >&2; exit 2 ;; esac
+	[ -n "${f_prep[$f]+set}" ] || { echo "xengine-sweep: unknown follower $f (want one of: ${f_names[*]})" >&2; exit 2; }
 done
 
 # Follower output (Forge's is GPL-3.0) can never be one `git add` from a commit.
@@ -132,16 +177,6 @@ esac
 mkdir -p "$absroot"
 root=$absroot
 ledger=$root/ledger.tsv
-
-# capped CMD...: the box rule (4G, 400% CPU, GOMAXPROCS=4) for every go stage.
-capped() {
-	if [ "${XENGINE_SCOPE:-systemd}" = none ]; then
-		env GOMAXPROCS=4 GOMEMLIMIT=3GiB "$@"
-	else
-		systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% env GOMAXPROCS=4 GOMEMLIMIT=3GiB "$@"
-	fi
-}
-xe() { capped "$GO" run -trimpath ./cmd/xengine "$@"; }
 
 # Stages run in the background so the pid is ours to stop; the trap stops only
 # pids this script started.
@@ -190,26 +225,46 @@ oracledif() {
 	fi
 }
 
-follower_rows() { # follower dir -> rows file
-	local f=$1 d=$2 runner
-	case "$f" in
-	xmage)
-		runner=${XENGINE_XMAGE_RUNNER:-$repo/scripts/xmage-oracle-run.sh}
+# follower_rows follower dir: the follower's prep stage, then its runner,
+# writing <dir>/<follower>.jsonl. The registry row says which prep, which
+# runner (XENGINE_<F>_RUNNER overrides it), and whether it holds a JVM slot.
+follower_rows() {
+	local f=$1 d=$2 in
+	local runner_env=${f_runner_env[$f]} mem_env=${f_mem_env[$f]} wait_env=${f_wait_env[$f]}
+	local runner=${!runner_env:-$repo/${f_runner[$f]}}
+	local lock=("$repo/scripts/heavy-lock.sh" --wait "${!wait_env:-20000}" --mem "${!mem_env:-12G}" --name "xengine-$f" --)
+	case "${f_prep[$f]}" in
+	xprep)
+		# xprep writes the fixed xitems.jsonl / xprep.jsonl that xengine diff
+		# reads: one xprep follower (xmage) per chunk.
 		local xargs=()
 		[ "${XENGINE_XMAGE_TAPES:-0}" != 1 ] || xargs+=(-tapes)
 		xe xprep ${xargs[@]+"${xargs[@]}"} -play "$d" -out "$d/xitems.jsonl" || return 1
-		jvm_slot || return 1
-		run_stage "$repo/scripts/heavy-lock.sh" --wait "${XENGINE_XMAGE_WAIT:-20000}" --mem "${XENGINE_XMAGE_MEM:-12G}" \
-			--name xengine-xmage -- bash -c 'jvm_slot && exec "$@"' _ "$runner" "$d/xitems.jsonl" "$d/xmage.jsonl"
+		in=$d/xitems.jsonl
 		;;
-	forge)
-		runner=${XENGINE_FORGE_RUNNER:-$repo/scripts/forge-oracle-run.sh}
-		oracledif forge-export -scenarios "$d/items.jsonl" -out "$d/forge-req.jsonl" >"$d/forge-export.log" 2>&1 || return 1
-		jvm_slot || return 1
-		run_stage "$repo/scripts/heavy-lock.sh" --wait "${XENGINE_FORGE_WAIT:-20000}" --mem "${XENGINE_FORGE_MEM:-12G}" \
-			--name xengine-forge -- bash -c 'jvm_slot && exec "$@"' _ "$runner" "$d/forge-req.jsonl" "$d/forge.jsonl"
+	forge-export)
+		oracledif forge-export -scenarios "$d/items.jsonl" -out "$d/$f-req.jsonl" >"$d/$f-export.log" 2>&1 || return 1
+		in=$d/$f-req.jsonl
+		;;
+	follower-export)
+		# H3: oraclediff follower-export also writes the follower's refusals to
+		# <dir>/<f>-prep.jsonl, which xengine diff reads as not_sent.
+		oracledif follower-export -engine "$f" -scenarios "$d/items.jsonl" -out "$d/$f-req.jsonl" >"$d/$f-export.log" 2>&1 || return 1
+		in=$d/$f-req.jsonl
+		;;
+	*)
+		echo "xengine-sweep: follower $f: unknown prep ${f_prep[$f]}" >&2
+		return 1
 		;;
 	esac
+	if [ "${f_jvm[$f]}" = true ]; then
+		jvm_slot || return 1
+		run_stage "${lock[@]}" bash -c 'jvm_slot && exec "$@"' _ "$runner" "$in" "$d/$f.jsonl"
+	else
+		# No JVM slot. TODO: a CPU quota for non-JVM followers; heavy-lock.sh
+		# takes none.
+		run_stage "${lock[@]}" "$runner" "$in" "$d/$f.jsonl"
+	fi
 }
 
 snapshot_into() { # dir [snapshot-file]: the chunk's input ledger, if there is one
@@ -228,6 +283,8 @@ play_stage() { # set chunk dir (reads <dir>/ledger-in.tsv when snapshot_into mad
 	[ -z "${XENGINE_RANDOM_SETS:-}" ] || args+=(-random "$XENGINE_RANDOM_SETS")
 	[ -z "${XENGINE_DIRAC_EVERY:-}" ] || args+=(-dirac-every "$XENGINE_DIRAC_EVERY")
 	[ -z "${XENGINE_FORGE_ONLY:-}" ] || args+=(-forge-only "$XENGINE_FORGE_ONLY")
+	[ -z "${XENGINE_POOL:-}" ] || args+=(-pool "$XENGINE_POOL")
+	[ -z "${XENGINE_POOL_FILTER:-}" ] || args+=(-pool-filter "$XENGINE_POOL_FILTER")
 	[ ! -e "$d/ledger-in.tsv" ] || args+=(-ledger "$d/ledger-in.tsv")
 	run_stage xe "${args[@]}"
 }

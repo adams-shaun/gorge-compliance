@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
@@ -88,10 +89,15 @@ func runPlay(args []string) error {
 	forgeOnly := fs.String("forge-only", "", "with -random, a file of card names, one per line, to add to the cross-set deal: a set XMage has no class for, so its items go to Forge alone")
 	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays")
 	diracEvery := fs.Int("dirac-every", 2, "with -random and -dirac, every K-th game (game g with g%K == K-1) draws from one set's dirac-playable cards; 1 makes every game one dirac plays beside gorge, so all four engines see every deck")
+	pool := fs.String("pool", "", "a file of card names, one per line (# comments): draw the decks from these cards alone, through the same gorge-supported filter and against the ledger as -set; -set only names the run. Not with -random, -forge-only or -dirac")
+	poolFilter := fs.String("pool-filter", "", "with -pool, a file of card names to leave out of the pool (cards a follower refuses)")
 	out := fs.String("out", "", "output dir (default under "+DefaultRoot+")")
 	fs.Parse(args)
 	if *set == "" {
 		return fmt.Errorf("play needs -set")
+	}
+	if err := poolFlagErr(*pool, *poolFilter, *random, *forgeOnly, *dirac); err != nil {
+		return err
 	}
 	if *games < 1 || *chunk < 0 {
 		return fmt.Errorf("play needs -games >= 1 and -chunk >= 0")
@@ -128,7 +134,15 @@ func runPlay(args []string) error {
 	}
 	opts := decks.Options{XMage: *xmage}
 	var pick picker
-	if *random != "" {
+	var pinfo *poolInfo
+	if *pool != "" {
+		cands, info, perr := poolCandidates(reg, *manifests, *pool, *poolFilter, *xmage)
+		if perr != nil {
+			return perr
+		}
+		fmt.Println(info)
+		pick, pinfo = poolPicker(cands, led), &info
+	} else if *random != "" {
 		var extra []decks.Card
 		if *forgeOnly != "" {
 			b, rerr := os.ReadFile(*forgeOnly)
@@ -143,6 +157,15 @@ func runPlay(args []string) error {
 	}
 	if err != nil {
 		return err
+	}
+	if pinfo != nil {
+		b, err := json.MarshalIndent(pinfo, "", "  ")
+		if err != nil {
+			return err
+		}
+		if err := writeAtomic(filepath.Join(*out, "pool.json"), append(b, '\n')); err != nil {
+			return err
+		}
 	}
 	return play(reg, pick, tables, led, *set, *chunk, *games, *seed, *out, *windows, *xmage, turns)
 }
