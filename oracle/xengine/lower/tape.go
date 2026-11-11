@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/engine/cards"
@@ -29,8 +30,9 @@ const (
 
 // Lowered is a tape lowered to one oracle scenario.
 type Lowered struct {
-	// Item is the scenario. Ignore and Compare stay empty (the classifier
-	// sets them); so do the follower-specific fields.
+	// Item is the scenario. Ignore stays empty; Compare holds CompareCommand on a
+	// Commander item and is empty otherwise (the classifier sets the rest,
+	// and the follower-specific fields stay empty).
 	Item oraclegen.Item `json:"item"`
 	// StepEntry is parallel to Item.Steps: the index of the last tape entry
 	// the step carries out, or -1 for a step the live game has no state
@@ -101,12 +103,13 @@ func isPass(e game.Entry) bool {
 func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 	m := seatMap{swap: t.Starter == 1}
 	for s := range t.Open {
-		for _, n := range append(append([]string{}, t.Open[s].Hand...), t.Open[s].Library...) {
+		for _, n := range slices.Concat(t.Open[s].Hand, t.Open[s].Command, t.Open[s].Library) {
 			if _, ok := reg.Lookup(n); !ok {
 				return Lowered{}, fmt.Errorf("lower: seat %d card %q not in the corpus", s, n)
 			}
 		}
 	}
+	commander := t.GameFormat == oraclegen.FormatCommander
 	sc := oraclegen.Scenario{
 		Name:  "xengine tape " + t.Decks[0].Name + " vs " + t.Decks[1].Name,
 		Turn:  1,
@@ -115,16 +118,26 @@ func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 		Setup: map[string]oraclegen.Seat{},
 	}
 	for s := range t.Open {
-		sc.Setup["p"+strconv.Itoa(m.seat(s))] = oraclegen.Seat{
+		seat := oraclegen.Seat{
 			Hand:       append([]string{}, t.Open[s].Hand...),
 			LibraryTop: append([]string{}, t.Open[s].Library...),
 		}
+		if commander {
+			seat.Command = append([]string{}, t.Open[s].Command...)
+		}
+		sc.Setup["p"+strconv.Itoa(m.seat(s))] = seat
+	}
+	if commander {
+		sc.Format = oraclegen.FormatCommander
 	}
 	l := Lowered{
 		Item: oraclegen.Item{ID: itemID(t), Template: Template, Scenario: sc},
 		Swap: m.swap, StepEntry: []int{},
 	}
 	l.Item.Steps = []oraclegen.Step{}
+	if commander {
+		l.Item.Compare = []string{oraclediff.CompareCommand}
+	}
 
 	first := -1
 	for i, e := range t.Entries {
