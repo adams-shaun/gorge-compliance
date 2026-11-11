@@ -9,6 +9,8 @@
 // comparison and the xengine commands can both depend on it.
 package follower
 
+import "strings"
+
 // The prep stages a follower's items go through before its runner sees them.
 const (
 	// PrepXPrep is `xengine xprep`: it writes the prepared items to
@@ -75,6 +77,11 @@ type Follower struct {
 	// follower's database does not hold; the card's name follows it. ""
 	// is a follower whose misses are not told apart from other harness rows.
 	LacksCardMsg string
+	// JVM is a runner that starts a Java VM. The sweep holds such a follower
+	// to the box's JVM slots (scripts/xengine-sweep.sh jvm_slot) before and
+	// after it takes the heavy lock; a follower without one runs under the
+	// heavy lock alone.
+	JVM bool
 }
 
 // forgeCastModes are the cast_mode values the Forge driver can act on:
@@ -102,6 +109,7 @@ var registry = []Follower{
 		TapsWithCast:       true,
 		TriggerOrderByName: true,
 		LacksCardMsg:       "Couldn't find a card:",
+		JVM:                true,
 	},
 	{
 		Name:         "forge",
@@ -121,6 +129,7 @@ var registry = []Follower{
 		SkipsDamageStep: true,
 		StopsInCleanup:  true,
 		TrailingMisses:  true,
+		JVM:             true,
 	},
 }
 
@@ -160,4 +169,37 @@ func (f Follower) FollowsCastMode(mode string) bool {
 		}
 	}
 	return false
+}
+
+// EnvPrefix is the prefix of the follower's sweep environment variables:
+// XENGINE_ and the name upper-cased, any byte outside [A-Z0-9] as '_'
+// ("xmage" -> XENGINE_XMAGE).
+func (f Follower) EnvPrefix() string {
+	var b strings.Builder
+	b.WriteString("XENGINE_")
+	for _, r := range strings.ToUpper(f.Name) {
+		if (r >= 'A' && r <= 'Z') || (r >= '0' && r <= '9') {
+			b.WriteRune(r)
+		} else {
+			b.WriteByte('_')
+		}
+	}
+	return b.String()
+}
+
+// RunnerEnv names the variable that overrides the follower's runner in the
+// sweep (XENGINE_XMAGE_RUNNER).
+func (f Follower) RunnerEnv() string { return f.EnvPrefix() + "_RUNNER" }
+
+// MemEnv names the variable that sets the follower's heavy-lock --mem in the
+// sweep (XENGINE_XMAGE_MEM).
+func (f Follower) MemEnv() string { return f.EnvPrefix() + "_MEM" }
+
+// WaitEnv names the variable that sets the follower's heavy-lock --wait in
+// the sweep (XENGINE_XMAGE_WAIT).
+func (f Follower) WaitEnv() string { return f.EnvPrefix() + "_WAIT" }
+
+// All is every registered follower, in registry order.
+func All() []Follower {
+	return append([]Follower(nil), registry...)
 }
