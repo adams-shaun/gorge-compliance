@@ -19,6 +19,10 @@ const (
 	// CompareKeywordsHexproofFrom is the named vocabulary plus the colour
 	// qualities of hexproof-from (keywords_hexproof_from.go).
 	CompareKeywordsHexproofFrom = "keywords_hexproof_from"
+	// CompareCommand compares each seat's command zone as pN.command (sorted
+	// names). The xengine lowering sets it on every Commander item; nothing
+	// else does.
+	CompareCommand = "command"
 )
 
 // ValidateCompare rejects any Compare field outside the closed opt-in vocabulary.
@@ -26,8 +30,8 @@ const (
 // comparator's wantsCompare readers) before an item may name it.
 func ValidateCompare(compare []string) error {
 	for _, c := range compare {
-		if c != CompareKeywords && c != CompareKeywordsNamed && c != CompareOffered && c != CompareNoLibraryOrder && c != CompareHandCount && c != CompareGraveyardCount && c != CompareKeywordsHexproofFrom {
-			return fmt.Errorf("unknown compare field %q (recognised: %q, %q, %q, %q, %q, %q, %q)", c, CompareKeywords, CompareKeywordsNamed, CompareOffered, CompareNoLibraryOrder, CompareHandCount, CompareGraveyardCount, CompareKeywordsHexproofFrom)
+		if c != CompareKeywords && c != CompareKeywordsNamed && c != CompareOffered && c != CompareNoLibraryOrder && c != CompareHandCount && c != CompareGraveyardCount && c != CompareKeywordsHexproofFrom && c != CompareCommand {
+			return fmt.Errorf("unknown compare field %q (recognised: %q, %q, %q, %q, %q, %q, %q, %q)", c, CompareKeywords, CompareKeywordsNamed, CompareOffered, CompareNoLibraryOrder, CompareHandCount, CompareGraveyardCount, CompareKeywordsHexproofFrom, CompareCommand)
 		}
 	}
 	return nil

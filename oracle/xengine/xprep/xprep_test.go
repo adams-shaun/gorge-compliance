@@ -954,3 +954,21 @@ func theRest(as []oraclegen.XAnswer) []oraclegen.XAnswer {
 
 // int32p is a *int32 for a scenario's Life.
 func int32p(v int32) *int32 { return &v }
+
+// TestPrepareRefusesCommander: an item in a Commander game is refused for the
+// XMage driver, which seats a two-player duel and cannot place a command zone;
+// the same item as a constructed game is not refused on this check.
+func TestPrepareRefusesCommander(t *testing.T) {
+	reg, sp, ws, _ := prepared(t, 1)
+	w := ws[0]
+	l := w.l
+	l.Item.Format = oraclegen.FormatCommander
+	_, ref := Prepare(reg, sp, l, w.g)
+	if ref == nil || ref.Reason != ReasonCommander || ReasonCommander != "xmage_commander" {
+		t.Fatalf("commander item: got %+v, want %s", ref, ReasonCommander)
+	}
+	l.Item.Format = ""
+	if _, ref := Prepare(reg, sp, l, w.g); ref != nil {
+		t.Fatalf("constructed item refused: %+v", ref)
+	}
+}
