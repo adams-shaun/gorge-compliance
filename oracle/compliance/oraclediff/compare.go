@@ -150,6 +150,11 @@ func fields(s rules.OracleSnapshot, xmage bool, compare []string) []field {
 			field{pf("hand"), hand},
 			field{pf("graveyard"), graveyard},
 			field{pf("exile"), list(p.Exile, true)},
+		)
+		if wantsCompare(compare, CompareCommand) {
+			out = append(out, field{pf("command"), list(p.Command, true)})
+		}
+		out = append(out,
 			field{pf("library_count"), fmt.Sprint(p.LibraryCount)},
 		)
 		if !noLibraryOrder {
