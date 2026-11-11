@@ -131,7 +131,7 @@ To add a scenario, see [scenarios/README.md](scenarios/README.md).
 | `cmd/` | `oraclediff` (generate, diff, triage, status), `compliance` (manifests), `xmageport`, `oraclepacket` (the printed card, for scenario authors) |
 | `scripts/`, `ops/scripts/tests/` | Oracle setup and run scripts; their smokes |
 | `internal/` | `gorgedir` (locates the gorge module), `boundary` (the licence guards) |
-| `docs/` | [The oracles](docs/oracles.md), [the pin](docs/PINNING.md), [the bug hunter](docs/hunt.md), [old designs](docs/design/README.md) |
+| `docs/` | [The oracles](docs/oracles.md), [the pin](docs/PINNING.md), [the bug hunter](docs/hunt.md), [capacity stalls](docs/capacity.md), [old designs](docs/design/README.md) |
 
 ## Relationship to gorge
 
