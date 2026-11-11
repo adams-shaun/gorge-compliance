@@ -6,6 +6,7 @@
 #   pod4  mtgsim -seats 4 -format commander -verify   G: terminates, no livelock, replay-identical event chain
 #   duel  mtgsim -seats 2 -format commander -verify   the same, 1v1 Commander (the format dirac plays)
 #   lock  kfuzz -kernel cmd5 -allow-unverified         G|D lockstep, 1v1 Commander, every decision compared
+#   std2  mtgsim -seats 2 -format constructed -verify  G: 1v1 Standard on real 60-card lists (HUNT_FORMAT=standard)
 #
 # Yields: no game starts while a landing gate (rgate.scope) or a train (ftrain.scope) is active, and
 # games already running are killed when one starts (the gate needs the memory more than we need the
@@ -61,14 +62,30 @@ COMMIT=$(git -C "$G" rev-parse HEAD 2>/dev/null) || { echo "no gorge worktree at
 C12=${COMMIT:0:12}
 RUN=$H/run/$C12
 mkdir -p "$RUN"
-[ -d "$H/decks" ] && cp -n "$H"/decks/*.json "$G/testkit/testutil/decks/" 2>/dev/null
-mapfile -t DECKS < <(/usr/bin/grep -l '"commander"' "$G"/testkit/testutil/decks/*.json | xargs -n1 basename | sed 's/\.json$//' | sort)
+FORMAT=${HUNT_FORMAT:-commander}   # commander: Commander deck files; standard: $H/decks-standard/*.json
+if [ "$FORMAT" = standard ]; then
+  rm -f "$G"/testkit/testutil/decks/hunt-std-*.json   # copies from an earlier start
+  for f in "$H"/decks-standard/*.json; do cp "$f" "$G/testkit/testutil/decks/hunt-std-$(basename "$f")"; done
+  mapfile -t DECKS < <(ls "$G"/testkit/testutil/decks/hunt-std-*.json | xargs -n1 basename | sed 's/\.json$//' | sort)
+else
+  [ -d "$H/decks" ] && cp -n "$H"/decks/*.json "$G/testkit/testutil/decks/" 2>/dev/null
+  mapfile -t DECKS < <(/usr/bin/grep -l '"commander"' "$G"/testkit/testutil/decks/*.json | xargs -n1 basename | sed 's/\.json$//' | sort)
+fi
 # decks.allow (one deck name a line): only decks the deck audit passed (deckaudit/REPORT.md)
-if [ -s "$H/decks.allow" ]; then
+if [ "$FORMAT" = commander ] && [ -s "$H/decks.allow" ]; then
   mapfile -t DECKS < <(printf '%s\n' "${DECKS[@]}" | /usr/bin/grep -x -F -f "$H/decks.allow")
 fi
-[ ${#DECKS[@]} -ge 4 ] || { echo "fewer than 4 commander decks"; exit 2; }
+[ ${#DECKS[@]} -ge 4 ] || { echo "fewer than 4 $FORMAT decks"; exit 2; }
 printf '%s\n' "${DECKS[@]}" > "$RUN/decks.txt"
+# mtgsim embeds its deck directory at build time (testkit/testutil/decks), so the copies above need a
+# rebuild; one binary per deck set, rebuilt when the set or the commit changes.
+DSUM=$(cat "$G"/testkit/testutil/decks/*.json | sha256sum | cut -c1-12)
+MTGSIM=$BIN/mtgsim-$C12-$DSUM
+if [ ! -x "$MTGSIM" ]; then
+  ( cd "$G" && nice -n 19 go build -o "$MTGSIM.tmp" ./cmd/mtgsim ) >> "$H/hunt.log" 2>&1 && mv "$MTGSIM.tmp" "$MTGSIM" \
+    || { log "mtgsim build failed"; exit 1; }
+fi
+export MTGSIM
 log "start $C12 decks=${#DECKS[@]} legs='$LEGS'"
 
 # pick: n distinct decks for seed s (seat 0 rotates through every deck)
@@ -88,9 +105,10 @@ sig() {
 }
 
 play_mtgsim() {  # leg seed
-  local leg=$1 s=$2 seats=4; [ "$leg" = duel ] && seats=2
+  local leg=$1 s=$2 seats=4 fmt=commander
+  case $leg in duel) seats=2 ;; std2) seats=2 fmt=constructed ;; esac
   local d; d=$(pick "$s" "$seats")
-  local cmd="$BIN/mtgsim -dir $G/.cards -decks $d -seats $seats -format commander -games 1 -seed $s -verify"
+  local cmd="$MTGSIM -dir $G/.cards -decks $d -seats $seats -format $fmt -games 1 -seed $s -verify"
   local out rc
   out=$(cd "$G" && timeout 900 $cmd 2>&1); rc=$?
   if [ $rc -eq 0 ] && printf '%s\n' "$out" | /usr/bin/grep -q 'replay OK'; then
@@ -101,7 +119,7 @@ play_mtgsim() {  # leg seed
     printf '%s\tFAIL rc=%s\t%s\t%s\n' "$s" "$rc" "$d" "$(printf '%s\n' "$out" | tail -1 | cut -c1-200)"
   fi
 }
-export -f play_mtgsim pick; export G BIN RUN
+export -f play_mtgsim pick; export G BIN RUN MTGSIM
 
 wave_mtgsim() {  # leg workers
   local leg=$1 w=$2 L=$RUN/$1/ledger.tsv; mkdir -p "$RUN/$leg"
@@ -138,7 +156,7 @@ watch_gate() {  # pid: wait for it, killing its process tree if a gate starts
 }
 
 signatures() {
-  { for leg in pod4 duel; do
+  { for leg in pod4 duel std2; do
       for f in "$RUN/$leg"/fails/*.txt; do [ -e "$f" ] || continue
         printf '%s\t%s\t%s\n' "$leg" "$(sig "$f")" "$f"; done
     done
@@ -159,7 +177,7 @@ while true; do
     w=$(workers)
     if [ "$w" -lt 1 ]; then log "no spare capacity"; sleep 60; break; fi
     case $leg in
-      pod4|duel) wave_mtgsim "$leg" "$w" ;;
+      pod4|duel|std2) wave_mtgsim "$leg" "$w" ;;
       lock) wave_lock "$w" ;;
     esac
     log "wave $leg workers=$w done"

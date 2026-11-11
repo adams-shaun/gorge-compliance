@@ -16,10 +16,32 @@ Each wave runs every leg in `HUNT_LEGS` once, `HUNT_WAVE` games per leg (default
 | `pod4` | `mtgsim -seats 4 -format commander -games 1 -seed N -verify` | gorge alone: the game terminates, no livelock, rejected intent or panic, and a replay reproduces the event chain |
 | `duel` | the same with `-seats 2` | the same, 1v1 Commander |
 | `lock` | `kfuzz -kernel cmd5 -allow-unverified -keep-going -shrink 0 -implicates-all` | gorge against dirac in lockstep, every decision compared (1v1 Commander on the `cmd5` pool) |
+| `std2` | `mtgsim -seats 2 -format constructed -games 1 -seed N -verify` | gorge alone, as `duel`, on real 60-card Standard lists (`HUNT_FORMAT=standard`) |
 
-Decks are the Commander deck files in the gorge checkout's `testkit/testutil/decks/`, plus any in
-`$HUNT_ROOT/decks/`, narrowed to the names in `$HUNT_ROOT/decks.allow` when that file exists. Seat 0
-rotates through every deck; the others are chosen from the seed.
+`HUNT_FORMAT` picks the deck set. `commander` (the default) uses the Commander deck files in the gorge
+checkout's `testkit/testutil/decks/`, plus any in `$HUNT_ROOT/decks/`, narrowed to the names in
+`$HUNT_ROOT/decks.allow` when that file exists. `standard` uses every deck file in
+`$HUNT_ROOT/decks-standard/`, copied into the checkout as `hunt-std-<name>.json`. Seat 0 rotates through
+every deck; the others are chosen from the seed.
+
+`mtgsim` embeds its deck directory when it's built, so the hunter builds one `mtgsim` per gorge commit and
+deck set (`bin/mtgsim-<commit12>-<decks sha12>`) at start.
+
+### Getting Standard deck lists
+
+The Standard lists are MTGGoldfish's metagame archetypes, imported with gorge's own `cmd/deckimport`:
+
+```sh
+curl -sL -A 'Mozilla/5.0' https://www.mtggoldfish.com/metagame/standard/full -o metagame.html
+# archetype slugs: href="/archetype/standard-..."; for each, fetch https://www.mtggoldfish.com/archetype/<slug>
+# and take the list from the page's deck_input[deck] field (sleep a few seconds between requests)
+go run github.com/adams-shaun/gorge/cmd/deckimport -corpus <gorge>/.cards -format standard \
+  -name <name> -archetype "mtggoldfish <slug>" -in <slug>.txt -out decks-standard/<name>.json
+```
+
+Then check them: `go run ./cmd/deckcheck <gorge>/.cards decks-standard/*.json` for gorge support, and
+MTGJSON's `legalities.standard` for legality (every card `Legal`, at least 60 main-deck cards, at most
+four of a non-basic).
 
 ## How it yields
 
@@ -70,7 +92,7 @@ Under `$HUNT_ROOT/run/<commit12>/`:
 ## Auditing deck lists
 
 ```sh
-go run ./cmd/deckcheck testkit/.../*.json > gorgecheck.json      # gorge's reading of each deck
+go run ./cmd/deckcheck <gorge>/.cards deck.json... > gorgecheck.json      # gorge's reading of each deck
 python3 -I scripts/deck-audit.py OUT AtomicCards.json.gz DeckList.json OFFICIAL_DECKS_DIR gorgecheck.json deck.json...
 ```
 

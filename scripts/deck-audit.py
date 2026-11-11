@@ -8,7 +8,7 @@ commander eligibility (leadershipSkills.commander, legal partner/background/doct
 legalities.commander == Legal; exact name resolution (Forge spelling vs unknown); product fidelity against
 the MTGJSON official list when the deck's name or notes claim a product; cards not printed in the
 product's sets; gorge registry/ValidateCommander/Unsupported findings (from gorgecheck.json, produced by
-cmd/deckcheck: go run ./cmd/deckcheck <deck.json>... > gorgecheck.json). Writes <outdir>/audit.json and <outdir>/REPORT-tables.md.
+cmd/deckcheck: go run ./cmd/deckcheck <corpus dir> <deck.json>... > gorgecheck.json). Writes <outdir>/audit.json and <outdir>/REPORT-tables.md.
 """
 import collections
 import difflib
