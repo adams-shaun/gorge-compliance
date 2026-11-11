@@ -45,10 +45,18 @@ type Seat struct {
 	// from the log like every other setup op. A name that is not also in
 	// Battlefield is an error: only a permanent already on the battlefield can
 	// be flipped.
-	BackFace   []string `json:"back_face,omitempty"`
-	Hand       []string `json:"hand,omitempty"`
-	Graveyard  []string `json:"graveyard,omitempty"`
-	Exile      []string `json:"exile,omitempty"`
+	BackFace  []string `json:"back_face,omitempty"`
+	Hand      []string `json:"hand,omitempty"`
+	Graveyard []string `json:"graveyard,omitempty"`
+	Exile     []string `json:"exile,omitempty"`
+	// Command is the seat's cards in the command zone, which the runner
+	// seats as the seat's commanders (Config.Commanders) in a
+	// FormatCommander scenario; it binds their refs after Exile and before
+	// LibraryTop (its placement order is battlefield, hand, graveyard,
+	// library, exile, command, library_top). Only a FormatCommander scenario
+	// may name one: in a constructed scenario the runner would move a
+	// library card into the command zone with no commander status.
+	Command    []string `json:"command,omitempty"`
 	Library    []string `json:"library,omitempty"`
 	LibraryTop []string `json:"library_top,omitempty"`
 	// Counters puts counters on this seat's battlefield cards at setup:
@@ -248,6 +256,11 @@ type Answer struct {
 // opponents, so one opponent can lose the game while it goes on (CR 800.4a).
 const ThreeSeats = 3
 
+// FormatCommander is Scenario.Format for a Commander game: the runner's
+// oracleFormatCodes key for its Commander format. It is the only non-empty
+// value this repo writes ("constructed" is the empty string).
+const FormatCommander = "commander"
+
 // Scenario is one generated scenario in the runner's schema.
 type Scenario struct {
 	Name string   `json:"name"`
@@ -259,8 +272,13 @@ type Scenario struct {
 	// two-seat item's bytes, and so its scenario sha, unchanged. A scenario
 	// whose observation needs a player to lose while the game goes on (CR
 	// 800.4a) seats ThreeSeats.
-	Players int             `json:"players,omitempty"`
-	Setup   map[string]Seat `json:"setup"`
+	Players int `json:"players,omitempty"`
+	// Format is the game format: "" is a constructed game (20 life);
+	// FormatCommander is a two-seat Commander game (CR 903): 40 starting
+	// life, commanders from each seat's Command, the tax and commander
+	// damage live. omitempty keeps every other item's bytes.
+	Format string          `json:"format,omitempty"`
+	Setup  map[string]Seat `json:"setup"`
 	// SetupAnswers answer decisions posed while the runner drives from
 	// genesis to turn 1 (a permanent's "may begin the game" ask).
 	SetupAnswers []Answer `json:"setup_answers,omitempty"`
