@@ -6,7 +6,8 @@
 # Waves of three legs, each an independent check of gorge (G) and dirac (D):
 #   pod4  mtgsim -seats 4 -format commander -verify   G: terminates, no livelock, replay-identical event chain
 #   duel  mtgsim -seats 2 -format commander -verify   the same, 1v1 Commander (the format dirac plays)
-#   lock  kfuzz -kernel cmd5 -allow-unverified         G|D lockstep, 1v1 Commander, every decision compared
+#   lock  kfuzz -kernel <pool> -allow-unverified       G|D lockstep, every decision compared: cmd5 (1v1 Commander)
+#                                                       or standard-meta (HUNT_FORMAT=standard)
 #   std2  mtgsim -seats 2 -format constructed -verify  G: 1v1 Standard on real 60-card lists (HUNT_FORMAT=standard)
 #
 # Yields: no game starts while a landing gate (rgate.scope) or a train (ftrain.scope) is active, and
@@ -17,7 +18,7 @@
 # Layout under $H (default /scratch/hunt):
 #   gorge/            gorge worktree at the commit under test (.cards linked)
 #   bin/              kfuzz, mtgsim built from gorge/ (docs/hunt.md, Setup on the box)
-#   pools/cmd5        the Commander lockstep pool (DIRAC_POOL_CMD5)
+#   pools/<name>/     lockstep pools for kfuzz (GORGE_POOLS): cmd5, standard-meta
 #   decks/            extra Commander deck JSONs copied into gorge's deck dir
 #   run/<commit12>/<leg>/ledger.tsv   seed<TAB>status<TAB>decks<TAB>summary
 #   run/<commit12>/<leg>/fails/<seed>.txt   full output + REPRO line
@@ -33,7 +34,7 @@ GAME_MEM_MB=${HUNT_GAME_MEM_MB:-3500}   # a 4-seat -verify game peaks ~3.2 GB
 WAVE=${HUNT_WAVE:-48}              # games per leg per wave
 LEGS=${HUNT_LEGS:-pod4 duel lock}
 export PATH=/home/ubuntu/sdk/go1.26.3/bin:$PATH GOWORK=off
-export GORGE_CARDS=$G/.cards DIRAC_POOL_CMD5=$H/pools/cmd5
+export GORGE_CARDS=$G/.cards GORGE_POOLS=$H/pools   # pools/<name>/{decks,pool.tsv}: gorge's committed slices extracted (docs/hunt.md)
 
 log() { echo "$(date -u +%FT%TZ) $*" >> "$H/hunt.log"; }
 
@@ -144,8 +145,12 @@ wave_lock() {  # workers
   local s; s=$(cat "$d/next-seed" 2>/dev/null || echo 2)
   echo $((s + 1)) > "$d/next-seed"
   local o=$d/s$s; mkdir -p "$o"
-  local tables; tables=$(ls -td "$G"/.cards/kernel-tables/*/ 2>/dev/null | head -1)
-  ( cd "$G" && DIRAC_TABLES=${tables%/} timeout 3600 "$BIN/kfuzz" -kernel cmd5 -allow-unverified -pairs "$WAVE" -seed "$s" \
+  # The lockstep pool follows the deck set: cmd5 (the Foundations Commander precons) or standard-meta
+  # (the MTGGoldfish Standard metagame decks, gorge's committed slice). HUNT_LOCK_POOL overrides it.
+  local pool=${HUNT_LOCK_POOL:-cmd5}; [ "$FORMAT" = standard ] && pool=${HUNT_LOCK_POOL:-standard-meta}
+  # No DIRAC_TABLES: kfuzz finds the tables of its own build key under the corpus; the newest directory
+  # by mtime is not necessarily this binary's.
+  ( cd "$G" && timeout 3600 "$BIN/kfuzz" -kernel "$pool" -allow-unverified -pairs "$WAVE" -seed "$s" \
       -workers "$w" -keep-going -shrink 0 -implicates-all -policy random -out "$o/repro" -coverage "$o/coverage.tsv" > "$o/out.txt" 2>&1
     echo "rc=$?" >> "$o/out.txt" ) &
   watch_gate $!

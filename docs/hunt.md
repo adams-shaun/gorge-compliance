@@ -15,7 +15,7 @@ Each wave runs every leg in `HUNT_LEGS` once, `HUNT_WAVE` games per leg (default
 |---|---|---|
 | `pod4` | `mtgsim -seats 4 -format commander -games 1 -seed N -verify` | gorge alone: the game terminates, no livelock, rejected intent or panic, and a replay reproduces the event chain |
 | `duel` | the same with `-seats 2` | the same, 1v1 Commander |
-| `lock` | `kfuzz -kernel cmd5 -allow-unverified -keep-going -shrink 0 -implicates-all` | gorge against dirac in lockstep, every decision compared (1v1 Commander on the `cmd5` pool) |
+| `lock` | `kfuzz -kernel <pool> -allow-unverified -keep-going -shrink 0 -implicates-all` | gorge against dirac in lockstep, every decision compared: the `cmd5` pool (1v1 Commander) or, with `HUNT_FORMAT=standard`, `standard-meta` (the MTGGoldfish Standard decks); `HUNT_LOCK_POOL` overrides |
 | `std2` | `mtgsim -seats 2 -format constructed -games 1 -seed N -verify` | gorge alone, as `duel`, on real 60-card Standard lists (`HUNT_FORMAT=standard`) |
 
 The `mtgsim` legs rotate bot policies by seed (`HUNT_POLICIES`, default `bot lethal-pressure az-redeal
@@ -120,7 +120,7 @@ Stop it with `touch $HUNT_ROOT/STOP` (it exits between waves) or `systemctl --us
 |---|---|
 | `gorge/` | a gorge worktree at the commit under test, with `.cards` linked. Make it from the gate's mirror: `git -C /scratch/gate/repo.git worktree add --detach /scratch/hunt/gorge farm-head` |
 | `bin/kfuzz`, `bin/mtgsim` | built from `gorge/`: `go build -o bin/kfuzz ./dirac/oracle/cmd/kfuzz`, `go build -o bin/mtgsim ./cmd/mtgsim`, then `make dirac-tables` |
-| `pools/cmd5/` | the `cmd5` lockstep pool (`DIRAC_POOL_CMD5`) |
+| `pools/<name>/` | lockstep pools for kfuzz (`GORGE_POOLS`): extract gorge's committed slice, `git -C gorge show HEAD:dirac/oracle/testdata/slices/<name>/decks.tar.gz \| tar xz -C pools/<name>` (`cmd5`, `standard-meta`); without one, kfuzz plays only seed 1 |
 | `decks/`, `decks.allow` | extra deck files and the audited allow-list |
 
 To move to a newer gorge: push it to the box (`git push <box>:/scratch/gate/repo.git land:refs/heads/farm-head`),
