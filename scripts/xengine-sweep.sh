@@ -69,6 +69,12 @@
 #   XENGINE_FORGE_ONLY    with XENGINE_RANDOM_SETS, a file of card names, one per line,
 #                         added to the cross-set deal: a set XMage has no class for.
 #                         An item holding one is not sent to XMage (xmage_lacks_card)
+#   XENGINE_COMMANDER_DECKS  a directory of Commander deck files passed to play as -format commander
+#                         -commander-decks: each game is a 1v1 Commander match between two of them
+#                         (gorge's testkit/testutil/decks holds 15), --sets only names the run. Not
+#                         with XENGINE_RANDOM_SETS, XENGINE_FORGE_ONLY or XENGINE_DIRAC (play
+#                         refuses). XMage refuses every Commander item (xmage_commander): run with
+#                         XENGINE_FOLLOWERS=forge.
 #   XENGINE_JVM_WAIT      max seconds to wait for a JVM slot (default 21600)
 #   XENGINE_JVM_POLL      poll interval in seconds (default 30)
 #   XENGINE_FORGE_WAIT / XENGINE_FORGE_MEM, XENGINE_XMAGE_WAIT / XENGINE_XMAGE_MEM
@@ -228,6 +234,7 @@ play_stage() { # set chunk dir (reads <dir>/ledger-in.tsv when snapshot_into mad
 	[ -z "${XENGINE_RANDOM_SETS:-}" ] || args+=(-random "$XENGINE_RANDOM_SETS")
 	[ -z "${XENGINE_DIRAC_EVERY:-}" ] || args+=(-dirac-every "$XENGINE_DIRAC_EVERY")
 	[ -z "${XENGINE_FORGE_ONLY:-}" ] || args+=(-forge-only "$XENGINE_FORGE_ONLY")
+	[ -z "${XENGINE_COMMANDER_DECKS:-}" ] || args+=(-format commander -commander-decks "$XENGINE_COMMANDER_DECKS")
 	[ ! -e "$d/ledger-in.tsv" ] || args+=(-ledger "$d/ledger-in.tsv")
 	run_stage xe "${args[@]}"
 }
