@@ -27,21 +27,66 @@ every deck; the others are chosen from the seed.
 `mtgsim` embeds its deck directory when it's built, so the hunter builds one `mtgsim` per gorge commit and
 deck set (`bin/mtgsim-<commit12>-<decks sha12>`) at start.
 
-### Getting Standard deck lists
+## Deck sources
 
-The Standard lists are MTGGoldfish's metagame archetypes, imported with gorge's own `cmd/deckimport`:
+Both deck sets beyond gorge's own come from MTGGoldfish's metagame archetypes: `scripts/goldfish/`
+fetches the lists as plain text, and gorge's `cmd/deckimport` turns each into a deck file. Scraped pages
+and lists are never committed; the default output directory, `.goldfish/`, is ignored by git.
+
+| File | What |
+|---|---|
+| `scripts/goldfish/fetch.sh <commander\|standard> [out] [count]` | Reads `https://www.mtggoldfish.com/metagame/<format>/full`, keeps the first `count` (default 50) `/archetype/<format>-...` slugs in `out/archetypes.txt`, then fetches each archetype page to `out/raw/` and writes its list to `out/txt/<slug>.txt`. `out` defaults to `.goldfish/<format>`. |
+| `scripts/goldfish/ext.py PAGE` | Prints the list in a saved archetype page's `deck_input[deck]` field. |
+| `scripts/goldfish/mkcmd.py OUT` | Commander only (`fetch.sh commander` runs it): moves the commander(s) under a `Commander` header. |
+
+`fetch.sh` makes one request at a time, `GOLDFISH_SLEEP` seconds apart (default 3, and never less),
+with a generic User-Agent, and skips a list already fetched, so a rerun only asks for what is missing.
+An `archetypes.txt` that is already there (written by hand, or by an earlier run) is used as it is.
+
+### Standard
 
 ```sh
-curl -sL -A 'Mozilla/5.0' https://www.mtggoldfish.com/metagame/standard/full -o metagame.html
-# archetype slugs: href="/archetype/standard-..."; for each, fetch https://www.mtggoldfish.com/archetype/<slug>
-# and take the list from the page's deck_input[deck] field (sleep a few seconds between requests)
-go run github.com/adams-shaun/gorge/cmd/deckimport -corpus <gorge>/.cards -format standard \
-  -name <name> -archetype "mtggoldfish <slug>" -in <slug>.txt -out decks-standard/<name>.json
+scripts/goldfish/fetch.sh standard
+for t in .goldfish/standard/txt/standard-*.txt; do
+  s=$(basename "$t" .txt); n=${s#standard-}
+  go run github.com/adams-shaun/gorge/cmd/deckimport -corpus <gorge>/.cards -format standard \
+    -name "$n" -archetype "mtggoldfish $s" -notes "MTGGoldfish $s" -in "$t" -out "decks-standard/$n.json"
+done
 ```
 
-Then check them: `go run ./cmd/deckcheck <gorge>/.cards decks-standard/*.json` for gorge support, and
-MTGJSON's `legalities.standard` for legality (every card `Legal`, at least 60 main-deck cards, at most
-four of a non-basic).
+A Standard page's list is the main deck, a blank line, then the sideboard; `fetch.sh` puts a `Sideboard`
+header over the second part and deckimport drops it (gorge has no sideboard). The deck files go to
+`$HUNT_ROOT/decks-standard/` for the `std2` leg.
+
+### Commander
+
+```sh
+scripts/goldfish/fetch.sh commander
+for t in .goldfish/commander/txt/commander-*.txt; do
+  s=$(basename "$t" .txt); n=gf-${s#commander-}
+  go run github.com/adams-shaun/gorge/cmd/deckimport -corpus <gorge>/.cards \
+    -name "$n" -archetype goldfish-edh -notes "MTGGoldfish $s" -in "$t" -out "decks/$n.json" > "decks/$n.report"
+done
+```
+
+A Commander page's list holds the commander inside the 100 cards; the page has no section for it in
+`deck_input[deck]`. `mkcmd.py` takes it from the slug: a card whose slugged name (the front face of a
+`//` card) equals the slug after `commander-`, begins it, or ends it, at most two (a partner pair), goes
+under a `Commander` header. It prints each archetype with the number found; a 0 needs a hand edit
+(the page's `deck_input[commander]` and `deck_input[commander_alt]` fields name the commander exactly).
+
+deckimport makes a `Commander` section the deck's `commander` field, sets the format to `commander`, and
+exits non-zero, writing nothing, when a card is missing from the corpus or the commander is not eligible
+(the `.report` says which). The `gf-` deck files go to `$HUNT_ROOT/decks/`, where the hunter's Commander
+legs pick them up, narrowed by `decks.allow` after the audit below.
+
+Pass `-notes`: deckimport's default note records the input file's absolute path.
+
+### Checking them
+
+`go run ./cmd/deckcheck <gorge>/.cards decks*/*.json` for gorge support (see "Auditing deck lists").
+For a Standard list, MTGJSON's `legalities.standard` for legality (every card `Legal`, at least 60
+main-deck cards, at most four of a non-basic); for Commander, `scripts/deck-audit.py`.
 
 ## How it yields
 
@@ -101,3 +146,33 @@ files from `AllDeckFiles.tar.gz`). The audit writes `OUT/audit.json` and `OUT/RE
 card count, singleton, commander eligibility, colour identity, Commander legality, name resolution,
 fidelity to the official product list when the deck claims to be one, and gorge's unsupported cards.
 The hunter's `decks.allow` is the list of decks the audit passed.
+
+## The pod farm (superseded)
+
+`scripts/podfarm-box.sh` is the hunter's predecessor, kept as it ran on the gate box (as
+`$FARM_ROOT/podfarm.sh`, a `pods` user unit beside `cmd/farm`). It plays endless 4-seat Commander pods,
+one game each, replay-verified (`mtgsim -decks a,b,c,d -games 1 -seed N -verify`, 600 s per game). Seat 0
+rotates through every deck file in the checkout that names a commander; seats 1-3 are three others chosen
+from the seed.
+
+```sh
+podfarm-box.sh <gorge checkout> <run dir> [workers, default 8] [extra deck dir]
+```
+
+The extra deck directory's `*.json` (the `gf-` decks above) are copied into the checkout's
+`testkit/testutil/decks/` before `mtgsim` is built, and left there. It plays 1000 seeds a round, `workers`
+at a time, and keeps the next round's first seed in `<run dir>/next-seed`, so a restart resumes. Results:
+`<run dir>/ledger/pods.tsv` (seed, `ok` or `FAIL rc=N`, decks, summary), `<run dir>/fails/seed-<N>.txt`
+(full output), `<run dir>/ledger/podfarm.log` (starts). It ran under `Nice=19 CPUWeight=10 IOWeight=10
+MemoryMax=12G`.
+
+`hunt-box.sh`'s `pod4` leg replaces it: it yields to gates and trains, sizes its workers to free cores and
+memory every wave, and records a `REPRO:` line per failure. Two known defects, not fixed because the
+script is retired:
+
+- **No `-format commander`.** mtgsim's format defaults to `constructed`, so the Commander decks play at
+  20 life with no command zone: the commander is just a card in the library. `pod4` passes
+  `-format commander`.
+- **OOM-killed under its 12G cap.** `workers` games run at once with no memory check, and the unit is
+  killed by its own `MemoryMax=12G` (Restart=on-failure brings it back to the same end). `hunt-box.sh`
+  sizes workers to MemAvailable.
