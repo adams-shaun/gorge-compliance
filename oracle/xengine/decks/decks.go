@@ -31,11 +31,30 @@ type Card struct {
 // "duplicate of X" and (Options.XMage only) "xmage_spelling".
 type Skip struct{ Card, Reason string }
 
-// Deck is one 40-card deck: Cards is sorted, basics repeated.
+// Deck is one deck: 40 cards for a set deck, 100 for a Commander deck. Cards is
+// sorted, basics repeated.
 type Deck struct {
 	Name    string
-	Colours string // the two colour letters in WUBRG order, e.g. "WU"
+	Colours string // the two colour letters in WUBRG order, e.g. "WU"; a Commander deck's identity
 	Cards   []string
+	// Commander is the commander's corpus spelling (front face name), "" for a
+	// constructed deck.
+	Commander string
+}
+
+// CommanderIndex is the index in d.Cards of the first entry equal to
+// d.Commander, or -1 when d.Commander is "" or absent. It is the
+// rules.Config.Commanders entry for the deck.
+func (d Deck) CommanderIndex() int {
+	if d.Commander == "" {
+		return -1
+	}
+	for i, n := range d.Cards {
+		if n == d.Commander {
+			return i
+		}
+	}
+	return -1
 }
 
 const (
