@@ -6,7 +6,8 @@
 # Waves of three legs, each an independent check of gorge (G) and dirac (D):
 #   pod4  mtgsim -seats 4 -format commander -verify   G: terminates, no livelock, replay-identical event chain
 #   duel  mtgsim -seats 2 -format commander -verify   the same, 1v1 Commander (the format dirac plays)
-#   lock  kfuzz -kernel cmd5 -allow-unverified         G|D lockstep, 1v1 Commander, every decision compared
+#   lock  kfuzz -kernel <pool> -allow-unverified       G|D lockstep, every decision compared: cmd5 (1v1 Commander)
+#                                                       or standard-meta (HUNT_FORMAT=standard)
 #   std2  mtgsim -seats 2 -format constructed -verify  G: 1v1 Standard on real 60-card lists (HUNT_FORMAT=standard)
 #
 # Yields: no game starts while a landing gate (rgate.scope) or a train (ftrain.scope) is active, and
@@ -145,7 +146,10 @@ wave_lock() {  # workers
   echo $((s + 1)) > "$d/next-seed"
   local o=$d/s$s; mkdir -p "$o"
   local tables; tables=$(ls -td "$G"/.cards/kernel-tables/*/ 2>/dev/null | head -1)
-  ( cd "$G" && DIRAC_TABLES=${tables%/} timeout 3600 "$BIN/kfuzz" -kernel cmd5 -allow-unverified -pairs "$WAVE" -seed "$s" \
+  # The lockstep pool follows the deck set: cmd5 (the Foundations Commander precons) or standard-meta
+  # (the MTGGoldfish Standard metagame decks, gorge's committed slice). HUNT_LOCK_POOL overrides it.
+  local pool=${HUNT_LOCK_POOL:-cmd5}; [ "$FORMAT" = standard ] && pool=${HUNT_LOCK_POOL:-standard-meta}
+  ( cd "$G" && DIRAC_TABLES=${tables%/} timeout 3600 "$BIN/kfuzz" -kernel "$pool" -allow-unverified -pairs "$WAVE" -seed "$s" \
       -workers "$w" -keep-going -shrink 0 -implicates-all -policy random -out "$o/repro" -coverage "$o/coverage.tsv" > "$o/out.txt" 2>&1
     echo "rc=$?" >> "$o/out.txt" ) &
   watch_gate $!

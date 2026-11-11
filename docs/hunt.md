@@ -15,7 +15,7 @@ Each wave runs every leg in `HUNT_LEGS` once, `HUNT_WAVE` games per leg (default
 |---|---|---|
 | `pod4` | `mtgsim -seats 4 -format commander -games 1 -seed N -verify` | gorge alone: the game terminates, no livelock, rejected intent or panic, and a replay reproduces the event chain |
 | `duel` | the same with `-seats 2` | the same, 1v1 Commander |
-| `lock` | `kfuzz -kernel cmd5 -allow-unverified -keep-going -shrink 0 -implicates-all` | gorge against dirac in lockstep, every decision compared (1v1 Commander on the `cmd5` pool) |
+| `lock` | `kfuzz -kernel <pool> -allow-unverified -keep-going -shrink 0 -implicates-all` | gorge against dirac in lockstep, every decision compared: the `cmd5` pool (1v1 Commander) or, with `HUNT_FORMAT=standard`, `standard-meta` (the MTGGoldfish Standard decks); `HUNT_LOCK_POOL` overrides |
 | `std2` | `mtgsim -seats 2 -format constructed -games 1 -seed N -verify` | gorge alone, as `duel`, on real 60-card Standard lists (`HUNT_FORMAT=standard`) |
 
 The `mtgsim` legs rotate bot policies by seed (`HUNT_POLICIES`, default `bot lethal-pressure az-redeal
