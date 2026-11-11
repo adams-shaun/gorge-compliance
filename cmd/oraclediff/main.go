@@ -112,6 +112,8 @@ func main() {
 		err = runForgeExport(os.Args[2:])
 	case "forge-diff":
 		err = runForgeDiff(os.Args[2:])
+	case "follower-diff":
+		err = runFollowerDiff("follower-diff", "", os.Args[2:])
 	case "adjudicate":
 		err = runAdjudicate(os.Args[2:])
 	case "forge-verdicts":
@@ -216,7 +218,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: oraclediff gen|plan|diff|forge-export|forge-diff|forge-verdicts|adjudicate|status|sets|rule|triage|refreeze|impact|tickets|show ...")
+	fmt.Fprintln(os.Stderr, "usage: oraclediff gen|plan|diff|forge-export|forge-diff|follower-diff|forge-verdicts|adjudicate|status|sets|rule|triage|refreeze|impact|tickets|show ...")
 	os.Exit(2)
 }
 

@@ -5,6 +5,7 @@ package main
 //	oraclediff forge-export [-cards .cards] -scenarios scen.jsonl -out forge-req.jsonl
 //	oraclediff forge-diff   [-cards .cards] -req forge-req.jsonl [-forge forge.jsonl]
 //	                        (-cache DIR | -oracle-ref REF -driver SHA) -out forge-diff.jsonl
+//	oraclediff follower-diff -engine NAME [forge-diff's flags]
 //
 // forge-export replays each gen Item in gorge once and writes the sidecar
 // request the Forge driver reads: the Item exactly as gen wrote it, the
@@ -15,6 +16,10 @@ package main
 // command touches gen's output or oracle/compliance/verdicts, and both refuse an
 // output path inside this repository: the request carries script text and
 // Forge's rows are Forge output, neither of which may be committed.
+//
+// follower-diff is forge-diff for any registered follower whose items are
+// Forge requests (follower.PrepForgeExport); forge-diff is follower-diff
+// -engine forge.
 
 import (
 	"bufio"
@@ -30,6 +35,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/gate"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/follower"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -482,8 +488,20 @@ func refCardName(ref string) string {
 	return ref
 }
 
+// runForgeDiff is forge-diff, follower-diff -engine forge under its old name.
 func runForgeDiff(args []string) error {
-	fs := flag.NewFlagSet("forge-diff", flag.ExitOnError)
+	return runFollowerDiff("forge-diff", "forge", args)
+}
+
+// runFollowerDiff runs the follower diff as command cmd. engine fixes the
+// follower; "" reads it from -engine, which must name a registered follower
+// that reads Forge requests.
+func runFollowerDiff(cmd, engine string, args []string) error {
+	fs := flag.NewFlagSet(cmd, flag.ExitOnError)
+	var eng *string
+	if engine == "" {
+		eng = fs.String("engine", "", "follower whose items are Forge requests (required)")
+	}
 	dir := fs.String("cards", ".cards", "corpus dir")
 	req := fs.String("req", "", "sidecar request JSONL (from forge-export)")
 	forge := fs.String("forge", "", "Forge driver output JSONL; rows missing from it are read from the cache")
@@ -492,8 +510,14 @@ func runForgeDiff(args []string) error {
 	driver := fs.String("driver", "", "driver source sha (names the cache directory)")
 	out := fs.String("out", "", "forge-diff JSONL (off-repo)")
 	fs.Parse(args)
+	if eng != nil {
+		engine = *eng
+		if f, ok := follower.Lookup(engine); !ok || f.Prep != follower.PrepForgeExport {
+			return fmt.Errorf("%s needs -engine naming a follower that reads Forge requests (%s)", cmd, strings.Join(forgeRequestFollowers(), "|"))
+		}
+	}
 	if *req == "" || *out == "" {
-		return fmt.Errorf("forge-diff needs -req and -out")
+		return fmt.Errorf("%s needs -req and -out", cmd)
 	}
 	cacheDir, err := forgeCacheDir(*cache, *ref, *driver)
 	if err != nil {
@@ -503,7 +527,7 @@ func runForgeDiff(args []string) error {
 	if err != nil {
 		return err
 	}
-	counts, err := forgeDiff(reg, *req, *forge, cacheDir, *out)
+	counts, err := followerDiff(reg, engine, *req, *forge, cacheDir, *out)
 	if err != nil {
 		return err
 	}
@@ -516,6 +540,18 @@ func runForgeDiff(args []string) error {
 		fmt.Printf("%-28s %d\n", k, counts[k])
 	}
 	return nil
+}
+
+// forgeRequestFollowers are the registered followers whose items are Forge
+// requests, the only ones follower-diff can compare.
+func forgeRequestFollowers() []string {
+	var out []string
+	for _, n := range follower.Names() {
+		if f, _ := follower.Lookup(n); f.Prep == follower.PrepForgeExport {
+			out = append(out, n)
+		}
+	}
+	return out
 }
 
 // forgeCacheDir is the Forge result cache: an explicit -cache, else
@@ -543,11 +579,20 @@ func short12(s string) string {
 	return s
 }
 
-// forgeDiff compares gorge with Forge for every request line and writes one
-// ForgeRow per request. Forge rows come from forgePath (stored in the cache
-// under the request sha) or, when absent there, from the cache. The result
-// is the status census, keyed like diff's.
+// forgeDiff is followerDiff for Forge.
 func forgeDiff(reg *cards.Registry, reqPath, forgePath, cacheDir, out string) (map[string]int, error) {
+	return followerDiff(reg, "forge", reqPath, forgePath, cacheDir, out)
+}
+
+// followerDiff compares gorge with the follower engine for every request line
+// and writes one ForgeRow per request. The follower's rows come from forgePath
+// (stored in the cache under the request sha) or, when absent there, from the
+// cache. The result is the status census, keyed like diff's.
+func followerDiff(reg *cards.Registry, engine, reqPath, forgePath, cacheDir, out string) (map[string]int, error) {
+	fl, ok := follower.Lookup(engine)
+	if !ok {
+		return nil, fmt.Errorf("unknown follower %q", engine)
+	}
 	if err := refuseRepoPath(out); err != nil {
 		return nil, err
 	}
@@ -567,9 +612,10 @@ func forgeDiff(reg *cards.Registry, reqPath, forgePath, cacheDir, out string) (m
 			if err := json.Unmarshal(b, &r); err != nil {
 				return err
 			}
-			// An XMage row fed in by mistake would compare as Forge's.
-			if r.Engine != "forge" {
-				return fmt.Errorf("row %q is not a Forge row (engine %q)", r.ID, r.Engine)
+			// Another follower's row fed in by mistake would compare as this
+			// one's.
+			if r.Engine != engine && (fl.StampsEngine || r.Engine != "") {
+				return fmt.Errorf("row %q is not a %s row (engine %q)", r.ID, fl.Display, r.Engine)
 			}
 			fres[r.ID] = r.XResult
 			echoed[r.ID] = r.RequestSHA
@@ -594,12 +640,12 @@ func forgeDiff(reg *cards.Registry, reqPath, forgePath, cacheDir, out string) (m
 		sha := gate.Hash(b)
 		row := ForgeRow{ID: it.ID, Card: it.Card, Template: it.Template, RequestSHA: sha, ScenarioSHA: rq.ScenarioSHA}
 		x, ok := fres[it.ID]
-		missMsg := "no Forge result"
+		missMsg := "no " + fl.Display + " result"
 		if echo := echoed[it.ID]; ok && echo != "" && echo != sha {
 			// The row answers another version of this request (an older
 			// export): caching it under this sha would poison the cache.
 			ok = false
-			missMsg = fmt.Sprintf("stale Forge row: it echoes request_sha %s, this request is %s", short12(echo), short12(sha))
+			missMsg = fmt.Sprintf("stale %s row: it echoes request_sha %s, this request is %s", fl.Display, short12(echo), short12(sha))
 		}
 		if ok && cacheDir != "" {
 			if err := cache.Put(sha, x); err != nil {
@@ -609,12 +655,13 @@ func forgeDiff(reg *cards.Registry, reqPath, forgePath, cacheDir, out string) (m
 			x, ok = cache.Get(sha)
 		}
 		if !ok {
-			row.Verdict = oraclediff.Verdict{Status: oraclediff.Harness, Engine: "forge", Msg: missMsg}
+			row.Verdict = oraclediff.Verdict{Status: oraclediff.Harness, Engine: engine, Msg: missMsg}
 		} else {
 			g, gerr := rules.RunOracleScenarioJSON(reg, it.Raw())
 			row.Verdict = oraclediff.CompareOpts(g, gerr, x, it.Compare, forgeIgnore(it)...)
 			if row.Verdict.Engine == "xmage" {
-				row.Verdict.Engine = "forge"
+				// CompareOpts names the follower "xmage" whichever it is.
+				row.Verdict.Engine = engine
 			}
 			row.ForgeMS = x.MS
 		}

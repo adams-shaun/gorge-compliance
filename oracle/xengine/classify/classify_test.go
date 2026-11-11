@@ -337,10 +337,11 @@ func TestClassifyForgeSkipsEmptyDamageStep(t *testing.T) {
 	}
 }
 
-// TestClassifyForgeCastMode: the Forge driver follows the cast modes in
-// forgeElectedCastModes and casts any other the card's first spell ability, so
-// a difference at or after a cast it could not follow is the driver's, and a
-// difference before it, on another engine, or after a mode it follows, is not.
+// TestClassifyForgeCastMode: the Forge driver follows the cast modes in its
+// registry entry (follower.Follower.CastModes) and casts any other the card's
+// first spell ability, so a difference at or after a cast it could not follow
+// is the driver's, and a difference before it, on another engine, or after a
+// mode it follows, is not.
 func TestClassifyForgeCastMode(t *testing.T) {
 	item := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
 		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "cast", Card: "p0:Cunning Coyote", CastMode: "foretell"}, {Op: "pass"}},
