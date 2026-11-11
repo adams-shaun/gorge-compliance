@@ -18,6 +18,11 @@ Each wave runs every leg in `HUNT_LEGS` once, `HUNT_WAVE` games per leg (default
 | `lock` | `kfuzz -kernel cmd5 -allow-unverified -keep-going -shrink 0 -implicates-all` | gorge against dirac in lockstep, every decision compared (1v1 Commander on the `cmd5` pool) |
 | `std2` | `mtgsim -seats 2 -format constructed -games 1 -seed N -verify` | gorge alone, as `duel`, on real 60-card Standard lists (`HUNT_FORMAT=standard`) |
 
+The `mtgsim` legs rotate bot policies by seed (`HUNT_POLICIES`, default `bot lethal-pressure az-redeal
+forge-heuristic forge-heuristic-hold`): seat 0 plays policy `seed mod n` and seat 1 policy `(seed / n) mod n`,
+so every ordered pair comes up once in n² seeds, and each ledger row records the pair. Different policies
+steer the same decks into different lines of play.
+
 `HUNT_FORMAT` picks the deck set. `commander` (the default) uses the Commander deck files in the gorge
 checkout's `testkit/testutil/decks/`, plus any in `$HUNT_ROOT/decks/`, narrowed to the names in
 `$HUNT_ROOT/decks.allow` when that file exists. `standard` uses every deck file in

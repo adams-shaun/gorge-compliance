@@ -109,15 +109,20 @@ play_mtgsim() {  # leg seed
   local leg=$1 s=$2 seats=4 fmt=commander
   case $leg in duel) seats=2 ;; std2) seats=2 fmt=constructed ;; esac
   local d; d=$(pick "$s" "$seats")
-  local cmd="$MTGSIM -dir $G/.cards -decks $d -seats $seats -format $fmt -games 1 -seed $s -verify"
+  # Bot policies rotate by seed (HUNT_POLICIES), so the same decks are steered into different lines of
+  # play. Seat 0 takes policy s mod n, seat 1 policy (s / n) mod n: every ordered pair in n*n seeds.
+  local P=(${HUNT_POLICIES:-bot lethal-pressure az-redeal forge-heuristic forge-heuristic-hold}) n
+  n=${#P[@]}
+  local pa=${P[$(( s % n ))]} pb=${P[$(( (s / n) % n ))]}
+  local cmd="$MTGSIM -dir $G/.cards -decks $d -seats $seats -format $fmt -games 1 -seed $s -a $pa -b $pb -verify"
   local out rc
   out=$(cd "$G" && timeout 900 $cmd 2>&1); rc=$?
   if [ $rc -eq 0 ] && printf '%s\n' "$out" | /usr/bin/grep -q 'replay OK'; then
-    printf '%s\tok\t%s\t%s\n' "$s" "$d" "$(printf '%s\n' "$out" | /usr/bin/grep -m1 '^seed ' | cut -c1-200)"
+    printf '%s\tok\t%s\t%s\n' "$s" "$d $pa/$pb" "$(printf '%s\n' "$out" | /usr/bin/grep -m1 '^seed ' | cut -c1-200)"
   else
     mkdir -p "$RUN/$leg/fails"
     { printf 'REPRO: cd %s && %s\nrc=%s\n' "$G" "$cmd" "$rc"; printf '%s\n' "$out"; } > "$RUN/$leg/fails/$s.txt"
-    printf '%s\tFAIL rc=%s\t%s\t%s\n' "$s" "$rc" "$d" "$(printf '%s\n' "$out" | tail -1 | cut -c1-200)"
+    printf '%s\tFAIL rc=%s\t%s\t%s\n' "$s" "$rc" "$d $pa/$pb" "$(printf '%s\n' "$out" | tail -1 | cut -c1-200)"
   fi
 }
 export -f play_mtgsim pick; export G BIN RUN MTGSIM
