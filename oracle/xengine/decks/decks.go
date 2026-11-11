@@ -31,11 +31,12 @@ type Card struct {
 // "duplicate of X" and (Options.XMage only) "xmage_spelling".
 type Skip struct{ Card, Reason string }
 
-// Deck is one deck: 40 cards for a set deck, 100 for a Commander deck. Cards is
-// sorted, basics repeated.
+// Deck is one deck: Cards is sorted, basics repeated. Pair builds 40-card set
+// decks, a Commander deck has 100 cards, and play -decks deals fixed lists of
+// any size.
 type Deck struct {
 	Name    string
-	Colours string // the two colour letters in WUBRG order, e.g. "WU"; a Commander deck's identity
+	Colours string // the two colour letters in WUBRG order, e.g. "WU"; a Commander or fixed deck's identity ("C" colourless)
 	Cards   []string
 	// Commander is the commander's corpus spelling (front face name), "" for a
 	// constructed deck.
