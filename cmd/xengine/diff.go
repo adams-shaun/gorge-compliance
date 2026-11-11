@@ -154,8 +154,18 @@ func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) erro
 	}
 
 	notSent := map[string]string{}
-	if xprepped {
-		if err := readLines(filepath.Join(playDir, xprepRefusalsFile), func(b []byte) error {
+	// A follower's prep refusals are class not_sent: xprep's for XMage,
+	// follower-export's <engine>-prep.jsonl for a follower-export follower.
+	// Forge's forge-export refuses nothing.
+	refusals := ""
+	switch fl.Prep {
+	case follower.PrepXPrep:
+		refusals = xprepRefusalsFile
+	case follower.PrepFollowerExport:
+		refusals = engine + followerPrepSuffix
+	}
+	if refusals != "" {
+		if err := readLines(filepath.Join(playDir, refusals), func(b []byte) error {
 			var r xprep.Refusal
 			if err := json.Unmarshal(b, &r); err != nil {
 				return err
