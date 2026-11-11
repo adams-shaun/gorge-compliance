@@ -20,6 +20,12 @@ const (
 	// PrepForgeExport is `oraclediff forge-export`: it turns a scenario into
 	// a Forge request, which carries gorge's decisions.
 	PrepForgeExport = "forge-export"
+	// PrepFollowerExport is `oraclediff follower-export -engine NAME`: a
+	// forge-export request plus the engine-neutral identities ("neutral"),
+	// after the runner's --preflight has refused the items naming a card the
+	// follower lacks. The refusals go to <chunk>/<Name>-prep.jsonl, which
+	// `xengine diff` reads as class not_sent.
+	PrepFollowerExport = "follower-export"
 )
 
 // Follower is one follower engine's entry. Every field is read by a harness
@@ -35,7 +41,7 @@ type Follower struct {
 	// `RUNNER IN.jsonl OUT.jsonl` (REPRO.md quotes it).
 	Runner string
 	// Prep is the stage that turns an item into the runner's input
-	// (PrepXPrep or PrepForgeExport).
+	// (PrepXPrep, PrepForgeExport or PrepFollowerExport).
 	Prep string
 	// StampsEngine is a driver that writes "engine":"<Name>" on every row.
 	// A row without it is then refused, since a row from another follower

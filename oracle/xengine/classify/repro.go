@@ -236,6 +236,12 @@ func reproMD(dir string, f Finding, o Origin) string {
 		req := filepath.Join(abs, "forge.request.jsonl")
 		fmt.Fprintf(&b, "go run -trimpath ./cmd/oraclediff forge-export -scenarios %s -out %s\n", in, req)
 		in = req
+	} else if fl.Prep == followers.PrepFollowerExport {
+		// The follower reads follower-export's requests (a Forge request plus
+		// the neutral identities), after its own preflight.
+		req := filepath.Join(abs, f.Engine+".request.jsonl")
+		fmt.Fprintf(&b, "go run -trimpath ./cmd/oraclediff follower-export -engine %s -scenarios %s -out %s\n", f.Engine, in, req)
+		in = req
 	}
 	fmt.Fprintf(&b, "%s %s %s\n```\n\nThen classify it again against the play's gorge result (cut to the rows' checkpoints):\n\n```\n", run, in, rerun)
 	fmt.Fprintf(&b, "go run -trimpath ./cmd/xengine diff -play %s -engine %s -rows %s -only %s -out <out dir outside the repository>\n```\n", play, f.Engine, rerun, f.ID)

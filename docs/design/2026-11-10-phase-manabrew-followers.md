@@ -149,6 +149,58 @@ and harmless for M:
 
 `scenario_sha` is still computed before any rewrite, so all followers share one sha per item.
 
+#### Preflight protocol, as built
+
+Built in `cmd/oraclediff/follower_export.go` (its file comment is the normative copy).
+
+- **Call.** `oraclediff follower-export -engine NAME -scenarios items.jsonl -out req.jsonl
+  [-cards .cards] [-runner PATH]`. `-engine` must name a registered follower whose Prep is
+  `forge-export` or `follower-export`; `-runner` overrides the registry's runner (tests, stubs).
+  follower-export runs `RUNNER --preflight NAMES.txt` once per run, before writing anything.
+- **NAMES.txt.** One card name per line, sorted, no duplicates, in Forge/gorge spelling. It holds
+  every card any item names: each seat's battlefield, tapped, back_face, hand, graveyard, exile,
+  library, library_top, counters and attached cards, and the card refs in the steps (card, targets,
+  attackers, blocks, attached_to) with `pN:` and `#k` stripped. Tokens, player refs and names
+  gorge's corpus does not know are left out.
+- **Output.** On stdout, one `NAME<TAB>REASON` line per card the follower lacks. NAME is exactly
+  as asked, and REASON is free text with no tab. A supported card gets no line, and blank lines are
+  ignored. stderr passes through.
+- **Exit codes.** 0 means the answer is complete. Any other status fails the whole export. So does
+  a line without a tab or a NAME that was not asked about, and nothing is written.
+- **Refusals.** An item naming a refused card is written to `<dir of -out>/<NAME>-prep.jsonl` as
+  `{id, reason:"<NAME>_lacks_card", detail:"Card: reason; ..."}` and not to req.jsonl. The file is
+  always rewritten, even when empty. `xengine diff -engine NAME` reads it as `not_sent` when the
+  follower's Prep is `follower-export`. XMage still reads `xprep.jsonl`, and Forge reads nothing.
+- **Requests.** Every other line is forge-export's line for the item, byte for byte (the same
+  `scenario_sha`, decisions, abilities and rewrites), with `"neutral"` appended last.
+- **`neutral` as built.** Every map is always present. A field that cannot be derived is left out,
+  never guessed, and the command prints a census of what it filled and what it left out.
+  - `ability`, keyed by step:
+    - `class`. A loyalty ability is one with `Planeswalker$ True`. A mana ability is
+      `cards.IsManaAbilitySA`. intrinsic_mana is the CR 305.6 ability gorge appends.
+    - `ordinal`. It is 0-based and counts script abilities only. An ability minted from a keyword
+      line (Equip, Crew, ...) carries `keyword: "Equip:2"` instead, because its Oracle position is
+      not the script's.
+    - `cost`. Mana symbols are braced and run together, then `{T}`/`{Q}`, then loyalty as
+      `+N`/`-N`. Any other part keeps Forge's spelling with `~`. Parts are joined with `, `.
+    - `text`. The SpellDescription with `~`. It is absent for intrinsic_mana.
+    - `produces`. The set of letters an activation can add, in WUBRGC order (`"UG"` for Combo G U),
+      or `any`. It is absent for Chosen, ColorIdentity and ManaReflected.
+  - `token`, keyed by stem: `name` (the script's, e.g. "Goblin Token"), `supertypes`, `types`,
+    `subtypes`, `colours` (WUBRG letters, "" colourless), `power`/`toughness` (numeric only),
+    `keywords`, `text` (the script's Oracle line).
+  - `mode`, keyed by the index in this request's `gorge_decisions`. It covers decisions of kind
+    `mode` with resume `cast_modes` or `modes`, written as `{step, picks:[{ordinal, text}]}`. The
+    ordinal is the 0-based Choices$ position of a Charm on the source card, matched by gorge's mode
+    label. A label that matches no Charm, or more than one position, leaves the decision out. So
+    does a non-Charm choice, such as Manifold Mouse's KWChoice.
+- **FDN chunk 0 (574 items), with no refusals.**
+  - 3,107 ability steps got class, cost and ordinal, except 29 keyword-minted ones, which got
+    `keyword` instead of an ordinal.
+  - 320 ability steps got text. The other 2,787 are intrinsic, which has no text.
+  - 2,900 of 2,915 mana steps got `produces`. The 15 left out are "chosen color".
+  - All 64 token stems and all 7 modal decisions were filled.
+
 ### H4. A pool-only deck mode (for "Pauper/FDN")
 
 `-forge-only` only adds to the union of `-random` sets (play.go:221). Add

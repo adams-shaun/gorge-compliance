@@ -18,6 +18,11 @@ import (
 // xprepRefusalsFile sits beside the xitems file: one xprep.Refusal per line.
 const xprepRefusalsFile = "xprep.jsonl"
 
+// followerPrepSuffix names a follower-export follower's refusals in the play
+// dir: <engine>-prep.jsonl, written by `oraclediff follower-export` beside its
+// request file, one xprep.Refusal-shaped row per item.
+const followerPrepSuffix = "-prep.jsonl"
+
 func runXprep(args []string) error {
 	fs := flag.NewFlagSet("xprep", flag.ExitOnError)
 	dir := fs.String("cards", ".cards", "corpus dir")

@@ -59,7 +59,7 @@ func TestEntriesWellFormed(t *testing.T) {
 			t.Errorf("duplicate entry %q", f.Name)
 		}
 		seen[f.Name] = true
-		if f.Prep != PrepXPrep && f.Prep != PrepForgeExport {
+		if f.Prep != PrepXPrep && f.Prep != PrepForgeExport && f.Prep != PrepFollowerExport {
 			t.Errorf("%s: unknown prep %q", f.Name, f.Prep)
 		}
 		if _, err := os.Stat(filepath.Join(root, f.Runner)); err != nil {

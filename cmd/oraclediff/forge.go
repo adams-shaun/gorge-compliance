@@ -6,6 +6,8 @@ package main
 //	oraclediff forge-diff   [-cards .cards] -req forge-req.jsonl [-forge forge.jsonl]
 //	                        (-cache DIR | -oracle-ref REF -driver SHA) -out forge-diff.jsonl
 //	oraclediff follower-diff -engine NAME [forge-diff's flags]
+//	oraclediff follower-export -engine NAME [-cards .cards] [-runner PATH]
+//	                        -scenarios items.jsonl -out req.jsonl
 //
 // forge-export replays each gen Item in gorge once and writes the sidecar
 // request the Forge driver reads: the Item exactly as gen wrote it, the
@@ -18,8 +20,10 @@ package main
 // Forge's rows are Forge output, neither of which may be committed.
 //
 // follower-diff is forge-diff for any registered follower whose items are
-// Forge requests (follower.PrepForgeExport); forge-diff is follower-diff
-// -engine forge.
+// Forge requests (follower.PrepForgeExport or follower.PrepFollowerExport);
+// forge-diff is follower-diff -engine forge. follower-export
+// (follower_export.go) is forge-export plus a follower's preflight refusals
+// and the engine-neutral identities.
 
 import (
 	"bufio"
@@ -153,14 +157,8 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 		if err := json.Unmarshal(b, &it); err != nil {
 			return err
 		}
-		g, gerr := rules.RunOracleScenarioJSON(reg, it.Raw())
-		// A divided spell's shares reach the driver as a "damage_split"
-		// decision (the contract above), which gorge now announces at cast.
-		decisions := oraclegen.CastDivisions(reg, it.Scenario, g)
-		if gerr != nil || decisions == nil {
-			decisions = []rules.OracleDecision{}
-		}
-		line, err := json.Marshal(forgeBuildRequest(reg, it, g, decisions))
+		rq, _ := forgeExportItem(reg, it)
+		line, err := json.Marshal(rq)
 		if err != nil {
 			return err
 		}
@@ -174,6 +172,20 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 		return n, err
 	}
 	return n, of.Close()
+}
+
+// forgeExportItem is the request forge-export writes for one item, and
+// gorge's result for it: the item is replayed once in gorge and the request
+// built from the decisions gorge's runner made.
+func forgeExportItem(reg *cards.Registry, it oraclegen.Item) (forgeRequest, rules.OracleResult) {
+	g, gerr := rules.RunOracleScenarioJSON(reg, it.Raw())
+	// A divided spell's shares reach the driver as a "damage_split"
+	// decision (the contract above), which gorge now announces at cast.
+	decisions := oraclegen.CastDivisions(reg, it.Scenario, g)
+	if gerr != nil || decisions == nil {
+		decisions = []rules.OracleDecision{}
+	}
+	return forgeBuildRequest(reg, it, g, decisions), g
 }
 
 // forgeBuildRequest assembles the request for one item from gorge's decisions
@@ -300,41 +312,48 @@ func forgeDropDeclarationDecisions(it oraclegen.Item, decisions []rules.OracleDe
 func forgeAbilityLines(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) map[string]string {
 	lines := map[string]string{}
 	for i, st := range it.Steps {
-		if st.AbilityIndex == nil || st.Card == "" {
-			continue
-		}
-		k := *st.AbilityIndex
-		c, ok := reg.Lookup(refCardName(st.Card))
-		if ok && len(c.Faces) > 0 {
-			face := 0
-			if seat, _, hasSeat := strings.Cut(st.Card, ":"); hasSeat {
-				for _, name := range it.Setup[seat].BackFace {
-					if name == refCardName(st.Card) {
-						face = 1
-						break
-					}
-				}
-			}
-			if face < len(c.Faces) {
-				if line, ok := abilityLine(c.Faces[face], k); ok {
-					lines[strconv.Itoa(i)] = line
-					continue
-				}
-			}
-		}
-		if line, ok := forgeSnapshotAbilityLine(reg, it, st, g, i); ok {
+		if f := forgeAbilityFace(reg, it, st, g, i); f != nil {
+			line, _ := abilityLine(f, *st.AbilityIndex)
 			lines[strconv.Itoa(i)] = line
 		}
 	}
 	return lines
 }
 
-// forgeSnapshotAbilityLine resolves a step the setup face could not: it finds
+// forgeAbilityFace is the face whose Abilities[ability_index] step i names,
+// resolved as forgeAbilityLines documents, or nil when the step names no
+// ability or none resolves.
+func forgeAbilityFace(reg *cards.Registry, it oraclegen.Item, st oraclegen.Step, g rules.OracleResult, i int) *cards.Face {
+	if st.AbilityIndex == nil || st.Card == "" {
+		return nil
+	}
+	k := *st.AbilityIndex
+	c, ok := reg.Lookup(refCardName(st.Card))
+	if ok && len(c.Faces) > 0 {
+		face := 0
+		if seat, _, hasSeat := strings.Cut(st.Card, ":"); hasSeat {
+			for _, name := range it.Setup[seat].BackFace {
+				if name == refCardName(st.Card) {
+					face = 1
+					break
+				}
+			}
+		}
+		if face < len(c.Faces) {
+			if _, ok := abilityLine(c.Faces[face], k); ok {
+				return c.Faces[face]
+			}
+		}
+	}
+	return forgeSnapshotAbilityFace(reg, it, st, g, i)
+}
+
+// forgeSnapshotAbilityFace resolves a step the setup face could not: it finds
 // the permanent the step names in the snapshot entering that step and reads
 // the ability off the face that is up there. Token refs resolve through the
 // seat's setup stems, a printed card (a token copy), or the token scripts,
 // narrowed by the snapshot's keywords and types when a name is shared.
-func forgeSnapshotAbilityLine(reg *cards.Registry, it oraclegen.Item, st oraclegen.Step, g rules.OracleResult, i int) (string, bool) {
+func forgeSnapshotAbilityFace(reg *cards.Registry, it oraclegen.Item, st oraclegen.Step, g rules.OracleResult, i int) *cards.Face {
 	var perm rules.OracleSnapPerm
 	found := false
 	if i < len(g.Snapshots) {
@@ -345,11 +364,17 @@ func forgeSnapshotAbilityLine(reg *cards.Registry, it oraclegen.Item, st oracleg
 			}
 		}
 	}
+	has := func(f *cards.Face) *cards.Face {
+		if _, ok := abilityLine(f, *st.AbilityIndex); ok {
+			return f
+		}
+		return nil
+	}
 	name := refCardName(st.Card)
 	if tokenName, isToken := strings.CutPrefix(name, "token:"); isToken {
 		c := forgeTokenCard(reg, it, st.Card, tokenName, perm, found)
 		if c == nil || len(c.Faces) == 0 {
-			return "", false
+			return nil
 		}
 		face := c.Faces[0]
 		for _, f := range c.Faces {
@@ -358,21 +383,21 @@ func forgeSnapshotAbilityLine(reg *cards.Registry, it oraclegen.Item, st oracleg
 				break
 			}
 		}
-		return abilityLine(face, *st.AbilityIndex)
+		return has(face)
 	}
 	if !found {
-		return "", false
+		return nil
 	}
 	c, ok := reg.Lookup(name)
 	if !ok || len(c.Faces) == 0 {
-		return "", false
+		return nil
 	}
 	for _, f := range c.Faces {
 		if f.Name == perm.Name {
-			return abilityLine(f, *st.AbilityIndex)
+			return has(f)
 		}
 	}
-	return "", false
+	return nil
 }
 
 // forgeTokenCard finds the token script behind a "pN:token:Name" ref: the
@@ -512,7 +537,7 @@ func runFollowerDiff(cmd, engine string, args []string) error {
 	fs.Parse(args)
 	if eng != nil {
 		engine = *eng
-		if f, ok := follower.Lookup(engine); !ok || f.Prep != follower.PrepForgeExport {
+		if f, ok := follower.Lookup(engine); !ok || !readsForgeRequests(f) {
 			return fmt.Errorf("%s needs -engine naming a follower that reads Forge requests (%s)", cmd, strings.Join(forgeRequestFollowers(), "|"))
 		}
 	}
@@ -547,11 +572,17 @@ func runFollowerDiff(cmd, engine string, args []string) error {
 func forgeRequestFollowers() []string {
 	var out []string
 	for _, n := range follower.Names() {
-		if f, _ := follower.Lookup(n); f.Prep == follower.PrepForgeExport {
+		if f, _ := follower.Lookup(n); readsForgeRequests(f) {
 			out = append(out, n)
 		}
 	}
 	return out
+}
+
+// readsForgeRequests reports whether f's runner reads Forge requests: those
+// forge-export writes, or follower-export's (a Forge request plus "neutral").
+func readsForgeRequests(f follower.Follower) bool {
+	return f.Prep == follower.PrepForgeExport || f.Prep == follower.PrepFollowerExport
 }
 
 // forgeCacheDir is the Forge result cache: an explicit -cache, else
