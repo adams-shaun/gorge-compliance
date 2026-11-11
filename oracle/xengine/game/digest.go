@@ -44,6 +44,7 @@ type PlayerDigest struct {
 	Hand         []string         `json:"hand"`
 	Graveyard    []string         `json:"graveyard"`
 	Exile        []string         `json:"exile"`
+	Command      []string         `json:"command,omitempty"` // sorted; Commander games
 	LibraryCount int              `json:"library_count"`
 	LibraryTop   []string         `json:"library_top"`
 	Pool         string           `json:"pool"` // WUBRGC letters
@@ -168,7 +169,7 @@ func DigestOfGame(e *rules.Engine) Digest {
 		d.Players = append(d.Players, PlayerDigest{
 			Seat: i, Life: g.Players[i].Life, Counters: counterMap(g.Players[i].Counters),
 			Hand: zone(state.ZHand, p, true), Graveyard: zone(state.ZGraveyard, p, false),
-			Exile: zone(state.ZExile, p, true), LibraryCount: len(lib), LibraryTop: top,
+			Exile: zone(state.ZExile, p, true), Command: nilIfEmpty(zone(state.ZCommand, p, true)), LibraryCount: len(lib), LibraryTop: top,
 			Pool: poolString(g.Players[i].Pool),
 		})
 	}
@@ -267,6 +268,7 @@ func DigestOfSnapshot(s rules.OracleSnapshot) Digest {
 		d.Players = append(d.Players, PlayerDigest{
 			Seat: p.Seat, Life: p.Life, Counters: copyCounters(p.Counters),
 			Hand: nonNil(p.Hand), Graveyard: nonNil(p.Graveyard), Exile: nonNil(p.Exile),
+			Command:      sortedNonEmpty(nonNil(p.Command)),
 			LibraryCount: p.LibraryCount, LibraryTop: top, Pool: p.Pool,
 		})
 	}
@@ -278,6 +280,23 @@ func DigestOfSnapshot(s rules.OracleSnapshot) Digest {
 	}
 	sortField(d.Field)
 	return d
+}
+
+// nilIfEmpty is x, or nil when x is empty: an empty command zone is no field.
+func nilIfEmpty(x []string) []string {
+	if len(x) == 0 {
+		return nil
+	}
+	return x
+}
+
+// sortedNonEmpty is x sorted, or nil when x is empty.
+func sortedNonEmpty(x []string) []string {
+	if len(x) == 0 {
+		return nil
+	}
+	sort.Strings(x)
+	return x
 }
 
 // copyCounters copies a snapshot's counter map, dropping zero amounts: a zero
@@ -374,6 +393,9 @@ func (d Digest) flatten() [][2]string {
 		list(pre+".hand", p.Hand)
 		list(pre+".graveyard", p.Graveyard)
 		list(pre+".exile", p.Exile)
+		if len(p.Command) > 0 {
+			list(pre+".command", p.Command)
+		}
 		add(pre+".library_count", p.LibraryCount)
 		list(pre+".library_top", p.LibraryTop)
 		add(pre+".pool", strconv.Quote(p.Pool))

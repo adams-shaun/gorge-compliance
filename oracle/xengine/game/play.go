@@ -96,7 +96,7 @@ func Play(reg *cards.Registry, pair [2]decks.Deck, seed uint64, opt Options) (*T
 		}
 		dk = append(dk, cs)
 		names[i] = fmt.Sprintf("%s-%d", d.Colours, i)
-		t.Decks[i] = Deck{Name: d.Name, Colours: d.Colours, Cards: append([]string{}, d.Cards...)}
+		t.Decks[i] = Deck{Name: d.Name, Colours: d.Colours, Cards: append([]string{}, d.Cards...), Commander: d.Commander}
 		bot := heuristic.NewExploreBot(seed ^ (0x9e3779b97f4a7c15 * uint64(i+1))).EnableAutoPayMana()
 		seats[i] = bot
 		if len(script) > 0 {
@@ -104,6 +104,22 @@ func Play(reg *cards.Registry, pair [2]decks.Deck, seed uint64, opt Options) (*T
 		}
 	}
 	cfg := rules.Config{Names: names, Decks: dk, Tokens: reg.Tokens, Seed: seed, NameUniverse: reg.Universe()}
+	if pair[0].Commander != "" || pair[1].Commander != "" {
+		if pair[0].Commander == "" || pair[1].Commander == "" {
+			return nil, fmt.Errorf("game: a Commander game needs a commander in both decks (%q, %q)", pair[0].Commander, pair[1].Commander)
+		}
+		cfg.Format = rules.FormatCommander
+		cfg.StartingLife = CommanderStartingLife
+		cfg.Commanders = make([][]int, 2)
+		for i, d := range pair {
+			idx := d.CommanderIndex()
+			if idx < 0 {
+				return nil, fmt.Errorf("game: deck %q: commander %q is not among its cards", d.Name, d.Commander)
+			}
+			cfg.Commanders[i] = []int{idx}
+		}
+		t.GameFormat = GameFormatCommander
+	}
 
 	r := &recorder{t: t, onCut: opt.OnCut}
 	var o bench.Outcome
@@ -274,6 +290,9 @@ func (r *recorder) submit(e *rules.Engine, seatIdx int, d *decision.Decision, in
 		for i := range r.t.Open {
 			p := state.PlayerID(i)
 			r.t.Open[i] = Opening{Hand: zoneNames(e, state.ZHand, p), Library: zoneNames(e, state.ZLibrary, p)}
+			if cmd := zoneNames(e, state.ZCommand, p); len(cmd) > 0 {
+				r.t.Open[i].Command = cmd
+			}
 		}
 	}
 	if r.onCut != nil && d.Kind == decision.KPriority && e.G.Step == state.StepMain1 &&
