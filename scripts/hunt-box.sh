@@ -145,11 +145,12 @@ wave_lock() {  # workers
   local s; s=$(cat "$d/next-seed" 2>/dev/null || echo 2)
   echo $((s + 1)) > "$d/next-seed"
   local o=$d/s$s; mkdir -p "$o"
-  local tables; tables=$(ls -td "$G"/.cards/kernel-tables/*/ 2>/dev/null | head -1)
   # The lockstep pool follows the deck set: cmd5 (the Foundations Commander precons) or standard-meta
   # (the MTGGoldfish Standard metagame decks, gorge's committed slice). HUNT_LOCK_POOL overrides it.
   local pool=${HUNT_LOCK_POOL:-cmd5}; [ "$FORMAT" = standard ] && pool=${HUNT_LOCK_POOL:-standard-meta}
-  ( cd "$G" && DIRAC_TABLES=${tables%/} timeout 3600 "$BIN/kfuzz" -kernel "$pool" -allow-unverified -pairs "$WAVE" -seed "$s" \
+  # No DIRAC_TABLES: kfuzz finds the tables of its own build key under the corpus; the newest directory
+  # by mtime is not necessarily this binary's.
+  ( cd "$G" && timeout 3600 "$BIN/kfuzz" -kernel "$pool" -allow-unverified -pairs "$WAVE" -seed "$s" \
       -workers "$w" -keep-going -shrink 0 -implicates-all -policy random -out "$o/repro" -coverage "$o/coverage.tsv" > "$o/out.txt" 2>&1
     echo "rc=$?" >> "$o/out.txt" ) &
   watch_gate $!
