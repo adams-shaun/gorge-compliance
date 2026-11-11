@@ -104,6 +104,8 @@ func TestPreH1Behaviour(t *testing.T) {
 		{"forge trigger order by name", f.TriggerOrderByName, false},
 		{"xmage lacks card", x.LacksCardMsg, "Couldn't find a card:"},
 		{"forge lacks card", f.LacksCardMsg, ""},
+		{"xmage jvm", x.JVM, true},
+		{"forge jvm", f.JVM, true},
 	}
 	for _, c := range cases {
 		if c.got != c.want {
@@ -131,5 +133,39 @@ func TestFollowsCastMode(t *testing.T) {
 		if got := f.FollowsCastMode(m); got != want {
 			t.Errorf("forge FollowsCastMode(%q) = %v, want %v", m, got, want)
 		}
+	}
+}
+
+// TestEnvNames pins the sweep's per-follower variables to the names
+// scripts/xengine-sweep.sh read before the registry, and the derivation for
+// a name that is not a shell identifier.
+func TestEnvNames(t *testing.T) {
+	x, _ := Lookup("xmage")
+	f, _ := Lookup("forge")
+	odd := Follower{Name: "phase-rs.2"}
+	cases := []struct{ got, want string }{
+		{x.RunnerEnv(), "XENGINE_XMAGE_RUNNER"},
+		{x.MemEnv(), "XENGINE_XMAGE_MEM"},
+		{x.WaitEnv(), "XENGINE_XMAGE_WAIT"},
+		{f.RunnerEnv(), "XENGINE_FORGE_RUNNER"},
+		{f.MemEnv(), "XENGINE_FORGE_MEM"},
+		{f.WaitEnv(), "XENGINE_FORGE_WAIT"},
+		{odd.EnvPrefix(), "XENGINE_PHASE_RS_2"},
+	}
+	for _, c := range cases {
+		if c.got != c.want {
+			t.Errorf("got %q, want %q", c.got, c.want)
+		}
+	}
+}
+
+func TestAllIsACopy(t *testing.T) {
+	a := All()
+	if len(a) != len(registry) {
+		t.Fatalf("All() has %d entries, registry %d", len(a), len(registry))
+	}
+	a[0].Name = "mutated"
+	if All()[0].Name == "mutated" {
+		t.Error("All() exposes the registry")
 	}
 }
