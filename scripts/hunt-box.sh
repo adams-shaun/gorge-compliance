@@ -18,7 +18,7 @@
 # Layout under $H (default /scratch/hunt):
 #   gorge/            gorge worktree at the commit under test (.cards linked)
 #   bin/              kfuzz, mtgsim built from gorge/ (docs/hunt.md, Setup on the box)
-#   pools/cmd5        the Commander lockstep pool (DIRAC_POOL_CMD5)
+#   pools/<name>/     lockstep pools for kfuzz (GORGE_POOLS): cmd5, standard-meta
 #   decks/            extra Commander deck JSONs copied into gorge's deck dir
 #   run/<commit12>/<leg>/ledger.tsv   seed<TAB>status<TAB>decks<TAB>summary
 #   run/<commit12>/<leg>/fails/<seed>.txt   full output + REPRO line
