@@ -19,6 +19,7 @@ func TestFormatFlagErr(t *testing.T) {
 	for _, c := range []struct {
 		name                       string
 		format, dir, random, forge string
+		pool, poolFilter           string
 		dirac                      bool
 		want                       string // "" = no error
 	}{
@@ -29,9 +30,11 @@ func TestFormatFlagErr(t *testing.T) {
 		{name: "no format", dir: "d", want: "needs -format commander"},
 		{name: "bogus", format: "bogus", want: "want constructed or commander"},
 		{name: "random", format: "commander", dir: "d", random: "FDN", forge: "f", want: "-random, -forge-only"},
+		{name: "pool", format: "commander", dir: "d", pool: "p.txt", want: "-pool"},
+		{name: "pool filter", format: "commander", dir: "d", poolFilter: "f.txt", want: "-pool-filter"},
 		{name: "dirac", format: "commander", dir: "d", dirac: true, want: "xe-cmdr-dirac"},
 	} {
-		err := formatFlagErr(c.format, c.dir, c.random, c.forge, c.dirac)
+		err := formatFlagErr(c.format, c.dir, c.random, c.forge, c.pool, c.poolFilter, c.dirac)
 		switch {
 		case c.want == "" && err != nil:
 			t.Errorf("%s: %v", c.name, err)

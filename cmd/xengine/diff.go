@@ -9,11 +9,13 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/follower"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/rowio"
@@ -26,13 +28,13 @@ func runDiff(args []string) error {
 	fs := flag.NewFlagSet("diff", flag.ExitOnError)
 	dir := fs.String("cards", ".cards", "corpus dir")
 	playDir := fs.String("play", "", "play output dir (required)")
-	engine := fs.String("engine", "", "follower: xmage or forge (required)")
+	engine := fs.String("engine", "", "follower: "+strings.Join(follower.Names(), " or ")+" (required)")
 	rowsPath := fs.String("rows", "", "follower result rows, JSONL (required)")
 	out := fs.String("out", "", "output dir, outside the repository (required)")
 	only := fs.String("only", "", "compare this item id only, against the checkpoints the rows carry (a repro rerun)")
 	fs.Parse(args)
-	if *playDir == "" || *rowsPath == "" || *out == "" || (*engine != "xmage" && *engine != "forge") {
-		return fmt.Errorf("diff needs -play, -engine xmage|forge, -rows and -out")
+	if *playDir == "" || *rowsPath == "" || *out == "" || !follower.Known(*engine) {
+		return fmt.Errorf("diff needs -play, -engine %s, -rows and -out", strings.Join(follower.Names(), "|"))
 	}
 	if err := classify.RefuseRepoPath(*out); err != nil {
 		return err
@@ -50,10 +52,12 @@ func runDiff(args []string) error {
 // It is a variable so a test can lower the cap instead of writing 256 MiB.
 var followerRowCap = rowio.DefaultCap
 
-// readFollowerRows reads the follower rows by item id. A Forge row carries
-// "engine":"forge"; one fed to the wrong comparison would compare as the other
-// engine's, so the engine field must agree.
+// readFollowerRows reads the follower rows by item id. A row fed to the wrong
+// comparison would compare as the other engine's, so a row's engine field must
+// agree, and a follower that stamps its rows (Follower.StampsEngine, Forge)
+// must carry it.
 func readFollowerRows(path, engine string) (map[string]oraclediff.XResult, error) {
+	fl, _ := follower.Lookup(engine)
 	rows := map[string]oraclediff.XResult{}
 	err := rowio.Read(path, followerRowCap, func(b []byte) error {
 		var r struct {
@@ -66,8 +70,8 @@ func readFollowerRows(path, engine string) (map[string]oraclediff.XResult, error
 		if r.Engine != "" && r.Engine != engine {
 			return fmt.Errorf("row %q is a %s row, not %s", r.ID, r.Engine, engine)
 		}
-		if engine == "forge" && r.Engine != "forge" {
-			return fmt.Errorf("row %q is not a Forge row (engine %q)", r.ID, r.Engine)
+		if fl.StampsEngine && r.Engine != engine {
+			return fmt.Errorf("row %q is not a %s row (engine %q)", r.ID, fl.Display, r.Engine)
 		}
 		rows[r.ID] = r.XResult
 		return nil
@@ -83,6 +87,8 @@ func readFollowerRows(path, engine string) (map[string]oraclediff.XResult, error
 }
 
 func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) error {
+	fl, _ := follower.Lookup(engine)
+	xprepped := fl.Prep == follower.PrepXPrep
 	rows, err := readFollowerRows(rowsPath, engine)
 	if err != nil {
 		return err
@@ -103,7 +109,7 @@ func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) erro
 	// xmage-oracle-run.sh fails before the divergence. xprep writes it beside
 	// the play dir (scripts/xengine-sweep.sh: -play $d -out $d/xitems.jsonl).
 	xitems := map[string]oraclegen.Item{}
-	if engine == "xmage" {
+	if xprepped {
 		if err := readLines(filepath.Join(playDir, "xitems.jsonl"), func(b []byte) error {
 			var it oraclegen.Item
 			if err := json.Unmarshal(b, &it); err != nil {
@@ -148,8 +154,18 @@ func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) erro
 	}
 
 	notSent := map[string]string{}
-	if engine == "xmage" {
-		if err := readLines(filepath.Join(playDir, xprepRefusalsFile), func(b []byte) error {
+	// A follower's prep refusals are class not_sent: xprep's for XMage,
+	// follower-export's <engine>-prep.jsonl for a follower-export follower.
+	// Forge's forge-export refuses nothing.
+	refusals := ""
+	switch fl.Prep {
+	case follower.PrepXPrep:
+		refusals = xprepRefusalsFile
+	case follower.PrepFollowerExport:
+		refusals = engine + followerPrepSuffix
+	}
+	if refusals != "" {
+		if err := readLines(filepath.Join(playDir, refusals), func(b []byte) error {
 			var r xprep.Refusal
 			if err := json.Unmarshal(b, &r); err != nil {
 				return err
@@ -233,7 +249,7 @@ func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) erro
 			repro := l
 			if xit, ok := xitems[r.ID]; ok {
 				repro = r.lowered(xit)
-			} else if engine == "xmage" && f.Class != classify.ClassNotSent {
+			} else if xprepped && f.Class != classify.ClassNotSent {
 				return fmt.Errorf("%s: no prepared item in %s; run xengine xprep first", r.ID, filepath.Join(playDir, "xitems.jsonl"))
 			}
 			if err := classify.WriteReproFrom(classify.Dir(out, f), f, repro, g, x, origin); err != nil {

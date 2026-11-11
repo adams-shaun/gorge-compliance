@@ -15,6 +15,22 @@ list says whether upstream knows. For Forge, a script that disagrees with the pr
 | Card or class | What XMage does | Rule | Source | Upstream |
 |---|---|---|---|---|
 | March of the World Ooze over a Vehicle animated after it entered; the Lifecraft Engine family | `MarchOfTheWorldOoze.java:36-41` registers the layer-4 `AddCardSubtypeAllEffect` (Ooze) with a `null` dependency and the layer-7b `SetBasePowerToughnessAllEffect` as separate effects; `AddCardSubtypeAllEffect.java:21-27` therefore never calls `addDependedToType(BecomeCreature)`, so the layer-4 dependency hook (`ContinuousEffects.java:1176-1185`, `ContinuousEffectImpl.isDependentTo:404-419`) never delays March. Layer 4 stays in timestamp order (`:215-216`, `:239-256`, `:1014`): March's older Ooze add runs first, its `FILTER_CONTROLLED_CREATURES` is evaluated while the Vehicle is still a non-creature, and the later animation adds Artifact+Creature but not Ooze. Crew provides `BecomeCreature` through `AddCardTypeSourceEffect.java:32-38` and Midnight Mangler's self-animation uses the same effect (`MidnightMangler.java:29-33`); Guidelight Matrix's external animation is `AddCardTypeTargetEffect` (`GuidelightMatrix.java:48-53`), whose `CREATURE` branch is missing the `BecomeCreature` dependency that `AddCardTypeSourceEffect` has (`AddCardTypeTargetEffect.java:30-39`), so neither side of that dependency is declared either. Layer 7b re-filters dynamically (`SetBasePowerToughnessAllEffect:91`), so the Vehicle is 6/6 without Ooze. 30 DFT random rows: 29 in-window animations (28 March, 1 Lifecraft Engine) and 1 setup divergence (Midnight Mangler, whose self-animation and March are both on the battlefield when the window opens) | CR 613.8a | Mage/src/main/java/mage/abilities/effects/ContinuousEffects.java:1014, 1176-1185; Mage.Sets/src/mage/cards/m/MarchOfTheWorldOoze.java:36-41; Mage.Sets/src/mage/cards/g/GuidelightMatrix.java:48-53; Mage.Sets/src/mage/cards/m/MidnightMangler.java:29-33 at master be0d2048 (2026-11-07; the add-type effect and two card files read at fe075157, 2026-11-02) | not reported |
+| Grand Nagus Zek: "This ability triggers only once each turn" fails when Zek dies at the same time as another creature | `DiesCreatureTriggeredAbility(...).setTriggersLimitEachTurn(1)` (`GrandNagusZek.java`). `TriggeredAbilityImpl` keys the per-turn count with `CardUtil.getCardZoneString(..., getSourceId(), game)` (`getKeyLastTurnTriggered`, `getKeyLastTurnTriggeredCount`), which folds in the source's *current* zone-change counter. A look-back trigger checked after Zek has died reads a new key with no count, so the limit resets and Zek triggers again. Window xe:TRK:3:18:w9 (sweep xe-1110): Zek already made a Treasure this turn when Starfleet Security died; Zek and Tal Shiar Operative then die in combat and XMage triggers again. gorge and Forge do not. Any once-each-turn leaves-the-battlefield trigger whose source dies with the creature has the same shape | Oracle text; CR 603.10a | Mage/src/main/java/mage/abilities/TriggeredAbilityImpl.java:81-120; Mage.Sets/src/mage/cards/g/GrandNagusZek.java at master 2176988146 (2026-11-10) | not reported; issue text below |
+| Ghost of Illyria with no other nonland permanent to exile | `ExileReturnBattlefieldNextEndStepTargetEffect` creates the "return at the beginning of the next end step" delayed trigger only when it exiled something, so with zero targets chosen no trigger goes on the stack at the end step. gorge and Forge create it and it resolves doing nothing. No effect on the board; one window, xe:TRK:2:8:w8 | CR 603.7a (the delayed ability is created when the effect resolves) | Mage.Sets/src/mage/cards/g/GhostOfIllyria.java at master 2176988146 | not reported; low value, no issue text |
+
+Issue text, Grand Nagus Zek (operator approval needed before filing):
+
+> **Grand Nagus Zek triggers twice in a turn when it dies alongside another creature**
+>
+> Grand Nagus Zek: "Whenever another creature dies, create a Treasure token. This ability triggers only once each turn."
+> If Zek has already triggered this turn and then dies at the same time as another creature (for example both die in
+> combat), XMage triggers the ability again. It should not: the ability already triggered this turn (it looks back
+> in time, CR 603.10a, and is the same battlefield ability).
+>
+> Cause: `TriggeredAbilityImpl.getKeyLastTurnTriggered` / `getKeyLastTurnTriggeredCount` build their state key with
+> `CardUtil.getCardZoneString(..., getSourceId(), game)`, which uses the source's current zone-change counter. Once
+> Zek is in the graveyard the counter has moved, the key is new and the count reads 0. The key should use the
+> zone-change counter of the object the ability triggered from (the LKI one for a leaves-the-battlefield trigger).
 
 ## XMage, reported
 
@@ -39,7 +55,7 @@ list says whether upstream knows. For Forge, a script that disagrees with the pr
 | magefree/mage#16694, PR #16695 | Pain for All: the trigger fires, then the effect finds no creature once it has died (CR 603.2, 608.2h) | open |
 | magefree/mage#16696, PR #16697 | Sanar, Innovative First-Year: the colour check never runs for a non-target choice (Oracle text) | open |
 | magefree/mage#16698, PR #16699 | Serah Farron: a copied ability shares its effect id, so the reduction applies once per ability (CR 712.8d, 712.8e) | open |
-| magefree/mage#16700, PR #16701 | Sage of the Skies: counts itself for "if you've cast another spell this turn" (CR 603.4) | open |
+| magefree/mage#16700, PR #16701 | Sage of the Skies: counts itself for "if you've cast another spell this turn" (CR 603.4) | open; still unfixed at master 2176988146 (2026-11-10), 5 windows in sweep xe-1110 |
 | magefree/mage#16702, PR #16703 | Ojer Pakpatiq, and Unbreakable Bond: a card entering as another half loses its counters (CR 122.6a, 712.14a) | open |
 
 Kitesail Larcenist needed no report: upstream fixed it in PR #16464 (75f4f1ae3d, 2026-10-10), after our pin.
@@ -87,10 +103,15 @@ Lifecraft Engine after an animation is the same shape: Forge's older Card-Forge/
 
 - Convoke followed by a sacrifice: `CostAdjustment.adjustCostByConvokeOrImprovise` taps the convoke creatures while the cost is adjusted, before mana abilities run, and nothing in the sacrifice-candidate filter reads `SpellAbility.getTappedForConvoke` (its only readers are the AI and trigger code), so Forge lets a creature tapped for convoke be sacrificed to a mana ability in the same payment. gorge refuses it (CR 601.2g-h order). The Comprehensive Rules do not plainly forbid Forge's order (601.2h allows any order), so this is a divergence, not a confirmed Forge bug, and it has no row.
 
+- Lasting Tarfire (sweep xe-1110, ECL 1:5:w13-w16, `GX|F`): Forge's end-step trigger fires because the -1/-1 counters
+  the Forge driver's setup placed count for `Count$CountersAddedThisTurn`; no step put a counter. The script matches the
+  Oracle text. Our driver's setup, not Forge.
+
 ### Reported and open
 
 | Upstream | Card | What it does |
 |---|---|---|
+| Card-Forge/forge#12804, PR #12805 | Lotus Ring | the granted "{T}, Sacrifice this creature" mana ability is `Cost$ Sac<1/CARDNAME>`, without `T` (Oracle text; CR 302.6). Fix `Cost$ T Sac<1/CARDNAME>` as on Black Lotus, branch `fix/lotus-ring-granted-tap` (a399e53737, off master f3cf2a43cb); also on our fork's `gorge-sync-20261110` |
 | Card-Forge/forge#12581, PR #12582 | Romulan Bird-of-Prey | `Affected$ Self.nonCreature` matches nothing in Forge's `isValid`, so it never gets its printed hexproof (CR 702.11b) |
 | Card-Forge/forge#12724, PR #12725 | Homesickness, Mind Spiral, Sygg's Command | the stun `PutCounter` has `Defined$ ParentTarget`, which `getDefinedPlayers` also resolves to the player targeted earlier in the chain, so that player gets a stun counter (Oracle text: only the tapped creature). Fix `Defined$ TargetedCard`, branch `fix/homesickness-mind-spiral-stun` (b2f70dde46, off master 6d4a175d9e); not on `gorge` yet. Harness row SOS-s104 xe:RAND:3:17:w14 |
 

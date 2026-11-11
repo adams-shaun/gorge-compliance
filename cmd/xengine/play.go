@@ -91,10 +91,15 @@ func runPlay(args []string) error {
 	diracEvery := fs.Int("dirac-every", 2, "with -random and -dirac, every K-th game (game g with g%K == K-1) draws from one set's dirac-playable cards; 1 makes every game one dirac plays beside gorge, so all four engines see every deck")
 	format := fs.String("format", "", "game format: empty or constructed, or commander (with -commander-decks)")
 	cmdrDecks := fs.String("commander-decks", "", "with -format commander: a directory of Commander deck files; each game is a 1v1 Commander match between two of them (decks.CommanderPair)")
+	pool := fs.String("pool", "", "a file of card names, one per line (# comments): draw the decks from these cards alone, through the same gorge-supported filter and against the ledger as -set; -set only names the run. Not with -random, -forge-only or -dirac")
+	poolFilter := fs.String("pool-filter", "", "with -pool, a file of card names to leave out of the pool (cards a follower refuses)")
 	out := fs.String("out", "", "output dir (default under "+DefaultRoot+")")
 	fs.Parse(args)
 	if *set == "" {
 		return fmt.Errorf("play needs -set")
+	}
+	if err := poolFlagErr(*pool, *poolFilter, *random, *forgeOnly, *dirac); err != nil {
+		return err
 	}
 	if *games < 1 || *chunk < 0 {
 		return fmt.Errorf("play needs -games >= 1 and -chunk >= 0")
@@ -102,7 +107,7 @@ func runPlay(args []string) error {
 	if *diracEvery < 1 {
 		return fmt.Errorf("play needs -dirac-every >= 1")
 	}
-	if err := formatFlagErr(*format, *cmdrDecks, *random, *forgeOnly, *dirac); err != nil {
+	if err := formatFlagErr(*format, *cmdrDecks, *random, *forgeOnly, *pool, *poolFilter, *dirac); err != nil {
 		return err
 	}
 	turns, err := parseTapeTurns(*tapeTurns)
@@ -149,7 +154,15 @@ func runPlay(args []string) error {
 		deal = commanderDealer(ds, *set, *chunk, *seed)
 	} else {
 		var pick picker
-		if *random != "" {
+		var pinfo *poolInfo
+		if *pool != "" {
+			cands, info, perr := poolCandidates(reg, *manifests, *pool, *poolFilter, *xmage)
+			if perr != nil {
+				return perr
+			}
+			fmt.Println(info)
+			pick, pinfo = poolPicker(cands, led), &info
+		} else if *random != "" {
 			var extra []decks.Card
 			if *forgeOnly != "" {
 				b, rerr := os.ReadFile(*forgeOnly)
@@ -165,6 +178,15 @@ func runPlay(args []string) error {
 		if err != nil {
 			return err
 		}
+		if pinfo != nil {
+			b, merr := json.MarshalIndent(pinfo, "", "  ")
+			if merr != nil {
+				return merr
+			}
+			if err := writeAtomic(filepath.Join(*out, "pool.json"), append(b, '\n')); err != nil {
+				return err
+			}
+		}
 		deal = pickDealer(pick, *set, *chunk, *seed)
 	}
 	return play(reg, deal, tables, led, *set, *chunk, *games, *seed, *out, *windows, *xmage, turns)
@@ -172,7 +194,7 @@ func runPlay(args []string) error {
 
 // formatFlagErr checks -format and -commander-decks against each other and
 // against the other deck sources: Commander deals from the deck files alone.
-func formatFlagErr(format, cmdrDecks, random, forgeOnly string, dirac bool) error {
+func formatFlagErr(format, cmdrDecks, random, forgeOnly, pool, poolFilter string, dirac bool) error {
 	switch format {
 	case "", "constructed", "commander":
 	default:
@@ -193,6 +215,12 @@ func formatFlagErr(format, cmdrDecks, random, forgeOnly string, dirac bool) erro
 	}
 	if forgeOnly != "" {
 		with = append(with, "-forge-only")
+	}
+	if pool != "" {
+		with = append(with, "-pool")
+	}
+	if poolFilter != "" {
+		with = append(with, "-pool-filter")
 	}
 	if len(with) > 0 {
 		return fmt.Errorf("-format commander deals from -commander-decks: it cannot be combined with %s", strings.Join(with, ", "))
