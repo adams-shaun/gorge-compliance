@@ -69,6 +69,12 @@
 #   XENGINE_FORGE_ONLY    with XENGINE_RANDOM_SETS, a file of card names, one per line,
 #                         added to the cross-set deal: a set XMage has no class for.
 #                         An item holding one is not sent to XMage (xmage_lacks_card)
+#   XENGINE_POOL          a card-name file passed to play as -pool: the decks are drawn
+#                         from it alone (oracle/xengine/pools/), against the ledger as a
+#                         set's are, and --sets only names the run. Not with
+#                         XENGINE_RANDOM_SETS, XENGINE_FORGE_ONLY or XENGINE_DIRAC (play refuses)
+#   XENGINE_POOL_FILTER   with XENGINE_POOL, a file of names left out of the pool
+#                         (play -pool-filter); <chunk>/pool.json records both and their sha256
 #   XENGINE_JVM_WAIT      max seconds to wait for a JVM slot (default 21600)
 #   XENGINE_JVM_POLL      poll interval in seconds (default 30)
 #   XENGINE_FORGE_WAIT / XENGINE_FORGE_MEM, XENGINE_XMAGE_WAIT / XENGINE_XMAGE_MEM
@@ -228,6 +234,8 @@ play_stage() { # set chunk dir (reads <dir>/ledger-in.tsv when snapshot_into mad
 	[ -z "${XENGINE_RANDOM_SETS:-}" ] || args+=(-random "$XENGINE_RANDOM_SETS")
 	[ -z "${XENGINE_DIRAC_EVERY:-}" ] || args+=(-dirac-every "$XENGINE_DIRAC_EVERY")
 	[ -z "${XENGINE_FORGE_ONLY:-}" ] || args+=(-forge-only "$XENGINE_FORGE_ONLY")
+	[ -z "${XENGINE_POOL:-}" ] || args+=(-pool "$XENGINE_POOL")
+	[ -z "${XENGINE_POOL_FILTER:-}" ] || args+=(-pool-filter "$XENGINE_POOL_FILTER")
 	[ ! -e "$d/ledger-in.tsv" ] || args+=(-ledger "$d/ledger-in.tsv")
 	run_stage xe "${args[@]}"
 }
