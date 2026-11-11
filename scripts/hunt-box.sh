@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# hunt.sh: Commander bug hunting on the landing box's spare capacity. Runs ON the box, under
-# `systemctl --user` (see hunt-ctl.sh: Nice=19, CPUWeight=1, IOWeight=1, MemoryMax).
+# hunt-box.sh: bug hunting on the landing box's spare capacity. Runs ON the box (copied there as
+# $HUNT_ROOT/hunt.sh) as a systemd user unit; docs/hunt.md has the systemd-run line (Nice=19,
+# CPUWeight=1, IOWeight=1, MemoryMax).
 #
 # Waves of three legs, each an independent check of gorge (G) and dirac (D):
 #   pod4  mtgsim -seats 4 -format commander -verify   G: terminates, no livelock, replay-identical event chain
@@ -15,7 +16,7 @@
 #
 # Layout under $H (default /scratch/hunt):
 #   gorge/            gorge worktree at the commit under test (.cards linked)
-#   bin/              kfuzz, mtgsim built from gorge/ (hunt-ctl.sh build)
+#   bin/              kfuzz, mtgsim built from gorge/ (docs/hunt.md, Setup on the box)
 #   pools/cmd5        the Commander lockstep pool (DIRAC_POOL_CMD5)
 #   decks/            extra Commander deck JSONs copied into gorge's deck dir
 #   run/<commit12>/<leg>/ledger.tsv   seed<TAB>status<TAB>decks<TAB>summary
