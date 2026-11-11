@@ -645,6 +645,11 @@ func refName(ref string) (string, bool) {
 	return n, n != ""
 }
 
+// CardNames is every card name the item's setup and steps hold, sorted: the
+// names a follower must have in its card database. A player ref, a token ref
+// ("pN:token:Name") and an ability ref are not cards.
+func CardNames(it oraclegen.Item) []string { return cardNames(it) }
+
 // cardNames is every card name the item's setup and steps hold, sorted.
 func cardNames(it oraclegen.Item) []string {
 	seen := map[string]bool{}

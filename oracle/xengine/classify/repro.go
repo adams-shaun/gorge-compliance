@@ -10,6 +10,7 @@ import (
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	followers "github.com/adams-shaun/gorge-compliance/oracle/xengine/follower"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
@@ -225,14 +226,21 @@ func reproMD(dir string, f Finding, o Origin) string {
 		fmt.Fprintf(&b, "The item never reached a follower: the lowering disagrees with gorge's own runner (a bug here, not in an engine). Re-run the play that made it:\n\n```\ngo run -trimpath ./cmd/xengine play ... -out <new dir>\n```\n\nand read its `lower.jsonl` row for `%s`.\n", f.ID)
 		return b.String()
 	}
-	run := map[string]string{"xmage": "scripts/xmage-oracle-run.sh", "forge": "scripts/forge-oracle-run.sh"}[f.Engine]
+	fl, _ := followers.Lookup(f.Engine)
+	run := fl.Runner
 	in := filepath.Join(abs, "input.jsonl")
 	rerun := filepath.Join(abs, f.Engine+".rerun.jsonl")
 	b.WriteString("Re-run the follower on this one scenario (the item cut after the diverging step):\n\n```\n")
-	if f.Engine == "forge" {
+	if fl.Prep == followers.PrepForgeExport {
 		// forge-oracle-run.sh reads Forge requests, which carry gorge's decisions.
 		req := filepath.Join(abs, "forge.request.jsonl")
 		fmt.Fprintf(&b, "go run -trimpath ./cmd/oraclediff forge-export -scenarios %s -out %s\n", in, req)
+		in = req
+	} else if fl.Prep == followers.PrepFollowerExport {
+		// The follower reads follower-export's requests (a Forge request plus
+		// the neutral identities), after its own preflight.
+		req := filepath.Join(abs, f.Engine+".request.jsonl")
+		fmt.Fprintf(&b, "go run -trimpath ./cmd/oraclediff follower-export -engine %s -scenarios %s -out %s\n", f.Engine, in, req)
 		in = req
 	}
 	fmt.Fprintf(&b, "%s %s %s\n```\n\nThen classify it again against the play's gorge result (cut to the rows' checkpoints):\n\n```\n", run, in, rerun)

@@ -9,7 +9,8 @@
 #   - a rerun does nothing;
 #   - deleting one .done redoes exactly that chunk, the old directory moved aside;
 #   - 2 running JVMs make the follower stage wait, then time out with a message;
-#   - a root inside the repository is refused;
+#   - a root inside the repository is refused, and so is a follower
+#     `xengine followers` does not list;
 #   - the JVM count is taken again once the heavy lock is held;
 #   - a failing follower, or a failing ledger publish, leaves no .done;
 #   - XENGINE_GO_JOBS=0 is refused; XENGINE_GO_JOBS=2 plays each chunk index of
@@ -38,11 +39,12 @@ LOG=$TMP/calls.log
 export LOG REALGO
 
 # go stub: `go run -trimpath ./cmd/xengine SUB ARGS` -> a canned chunk; sweep-plan
-# (the resume logic under test) goes to the real go untouched.
+# (the resume logic under test) and followers (the registry the sweep reads)
+# go to the real go untouched.
 cat > "$BIN/go" <<'STUB'
 #!/usr/bin/env bash
 [ "$1" = run ] || exit 0
-if [ "$4" = sweep-plan ]; then exec "$REALGO" "$@"; fi
+case "$4" in sweep-plan | followers) exec "$REALGO" "$@" ;; esac
 shift 3
 sub=$1; shift
 declare -A o
@@ -184,6 +186,10 @@ check "JVM appears during the lock wait: no follower started" '[ "$(count xmage)
 out=$(sweep "$ROOT/.xengine-smoke-root"); rc=$?
 check "repo root refused" '[ "$rc" != 0 ] && has "$out" "inside the repository"' "rc=$rc $out"
 check "repo root not created" '[ ! -e "$ROOT/.xengine-smoke-root" ]'
+
+# 5b. A follower the registry (xengine followers) does not list is refused.
+out=$(XENGINE_FOLLOWERS='forge phase' sweep "$TMP/run-unknown"); rc=$?
+check "unknown follower refused" '[ "$rc" = 2 ] && has "$out" "unknown follower phase (want one of: xmage forge)" && [ ! -e "$TMP/run-unknown" ]' "rc=$rc $out"
 
 # 6. A failing follower leaves no .done.
 R3=$TMP/run3
