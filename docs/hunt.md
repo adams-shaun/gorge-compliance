@@ -120,7 +120,7 @@ Stop it with `touch $HUNT_ROOT/STOP` (it exits between waves) or `systemctl --us
 |---|---|
 | `gorge/` | a gorge worktree at the commit under test, with `.cards` linked. Make it from the gate's mirror: `git -C /scratch/gate/repo.git worktree add --detach /scratch/hunt/gorge farm-head` |
 | `bin/kfuzz`, `bin/mtgsim` | built from `gorge/`: `go build -o bin/kfuzz ./dirac/oracle/cmd/kfuzz`, `go build -o bin/mtgsim ./cmd/mtgsim`, then `make dirac-tables` |
-| `pools/cmd5/` | the `cmd5` lockstep pool (`DIRAC_POOL_CMD5`) |
+| `pools/<name>/` | lockstep pools for kfuzz (`GORGE_POOLS`): extract gorge's committed slice, `git -C gorge show HEAD:dirac/oracle/testdata/slices/<name>/decks.tar.gz \| tar xz -C pools/<name>` (`cmd5`, `standard-meta`); without one, kfuzz plays only seed 1 |
 | `decks/`, `decks.allow` | extra deck files and the audited allow-list |
 
 To move to a newer gorge: push it to the box (`git push <box>:/scratch/gate/repo.git land:refs/heads/farm-head`),

@@ -34,7 +34,7 @@ GAME_MEM_MB=${HUNT_GAME_MEM_MB:-3500}   # a 4-seat -verify game peaks ~3.2 GB
 WAVE=${HUNT_WAVE:-48}              # games per leg per wave
 LEGS=${HUNT_LEGS:-pod4 duel lock}
 export PATH=/home/ubuntu/sdk/go1.26.3/bin:$PATH GOWORK=off
-export GORGE_CARDS=$G/.cards DIRAC_POOL_CMD5=$H/pools/cmd5
+export GORGE_CARDS=$G/.cards GORGE_POOLS=$H/pools   # pools/<name>/{decks,pool.tsv}: gorge's committed slices extracted (docs/hunt.md)
 
 log() { echo "$(date -u +%FT%TZ) $*" >> "$H/hunt.log"; }
 
