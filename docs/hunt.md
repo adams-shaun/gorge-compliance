@@ -20,7 +20,8 @@ Each wave runs every leg in `HUNT_LEGS` once, `HUNT_WAVE` games per leg (default
 
 The `mtgsim` legs rotate bot policies by seed (`HUNT_POLICIES`, default `bot lethal-pressure az-redeal
 forge-heuristic forge-heuristic-hold`): seat 0 plays policy `seed mod n` and seat 1 policy `(seed / n) mod n`,
-so every ordered pair comes up once in n² seeds, and each ledger row records the pair. Different policies
+so every ordered pair comes up once in n² seeds, and each ledger row records the pair. The next n² seeds repeat the
+pairs with `HUNT_MULLIGANS` London mulligans allowed (default 1), so kept sevens and mulligans alternate. Different policies
 steer the same decks into different lines of play.
 
 `HUNT_FORMAT` picks the deck set. `commander` (the default) uses the Commander deck files in the gorge

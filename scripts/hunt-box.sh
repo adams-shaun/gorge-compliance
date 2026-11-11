@@ -114,15 +114,18 @@ play_mtgsim() {  # leg seed
   local P=(${HUNT_POLICIES:-bot lethal-pressure az-redeal forge-heuristic forge-heuristic-hold}) n
   n=${#P[@]}
   local pa=${P[$(( s % n ))]} pb=${P[$(( (s / n) % n ))]}
-  local cmd="$MTGSIM -dir $G/.cards -decks $d -seats $seats -format $fmt -games 1 -seed $s -a $pa -b $pb -verify"
+  # Mulligans alternate with the seed's parity after the policy pairs (0 or HUNT_MULLIGANS, default 1):
+  # a kept seven and a London mulligan exercise different opening code.
+  local mull=0; [ $(( (s / (n * n)) % 2 )) -eq 1 ] && mull=${HUNT_MULLIGANS:-1}
+  local cmd="$MTGSIM -dir $G/.cards -decks $d -seats $seats -format $fmt -games 1 -seed $s -a $pa -b $pb -mulligans $mull -verify"
   local out rc
   out=$(cd "$G" && timeout 900 $cmd 2>&1); rc=$?
   if [ $rc -eq 0 ] && printf '%s\n' "$out" | /usr/bin/grep -q 'replay OK'; then
-    printf '%s\tok\t%s\t%s\n' "$s" "$d $pa/$pb" "$(printf '%s\n' "$out" | /usr/bin/grep -m1 '^seed ' | cut -c1-200)"
+    printf '%s\tok\t%s\t%s\n' "$s" "$d $pa/$pb m$mull" "$(printf '%s\n' "$out" | /usr/bin/grep -m1 '^seed ' | cut -c1-200)"
   else
     mkdir -p "$RUN/$leg/fails"
     { printf 'REPRO: cd %s && %s\nrc=%s\n' "$G" "$cmd" "$rc"; printf '%s\n' "$out"; } > "$RUN/$leg/fails/$s.txt"
-    printf '%s\tFAIL rc=%s\t%s\t%s\n' "$s" "$rc" "$d $pa/$pb" "$(printf '%s\n' "$out" | tail -1 | cut -c1-200)"
+    printf '%s\tFAIL rc=%s\t%s\t%s\n' "$s" "$rc" "$d $pa/$pb m$mull" "$(printf '%s\n' "$out" | tail -1 | cut -c1-200)"
   fi
 }
 export -f play_mtgsim pick; export G BIN RUN MTGSIM
