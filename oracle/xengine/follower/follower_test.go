@@ -12,9 +12,13 @@ import (
 // in cmd/xengine diff and calib). The registry must keep accepting each one.
 var preH1Engines = []string{"xmage", "forge"}
 
+// registered is every engine, in registry order: the pre-H1 ones first, then
+// the followers added since.
+var registered = []string{"xmage", "forge", "phase"}
+
 func TestNamesCoverPreH1Engines(t *testing.T) {
-	if got := Names(); !slices.Equal(got, preH1Engines) {
-		t.Errorf("Names() = %q, want %q (usage text and order unchanged)", got, preH1Engines)
+	if got := Names(); !slices.Equal(got, registered) || !slices.Equal(got[:len(preH1Engines)], preH1Engines) {
+		t.Errorf("Names() = %q, want %q (pre-H1 usage text and order unchanged, then the newer followers)", got, registered)
 	}
 	for _, n := range preH1Engines {
 		if !Known(n) {
@@ -28,7 +32,7 @@ func TestNamesCoverPreH1Engines(t *testing.T) {
 }
 
 func TestLookupUnknown(t *testing.T) {
-	for _, n := range []string{"", "XMage", "Forge", "gorge", "both", "phase"} {
+	for _, n := range []string{"", "XMage", "Forge", "gorge", "both", "Phase", "phase-rs"} {
 		if Known(n) {
 			t.Errorf("Known(%q) = true", n)
 		}
@@ -118,6 +122,46 @@ func TestPreH1Behaviour(t *testing.T) {
 		"offspring", "replicated", "multikicked"}
 	if !slices.Equal(f.CastModes, want) {
 		t.Errorf("forge cast modes = %q, want %q", f.CastModes, want)
+	}
+}
+
+// TestPhaseEntry pins the phase.rs entry (ticket ph-3-runner).
+func TestPhaseEntry(t *testing.T) {
+	p, ok := Lookup("phase")
+	if !ok {
+		t.Fatal("phase is not registered")
+	}
+	cases := []struct {
+		name      string
+		got, want any
+	}{
+		{"display", p.Display, "phase.rs"},
+		{"runner", p.Runner, "scripts/phase-oracle-run.sh"},
+		{"prep", p.Prep, PrepFollowerExport},
+		{"stamps engine", p.StampsEngine, true},
+		{"consumes payment", p.ConsumesPayment, true},
+		{"turn cap", p.TurnCapMsg, ""},
+		{"lacks card", p.LacksCardMsg, "phase lacks card: "},
+		{"jvm", p.JVM, false},
+		{"skips damage step", p.SkipsDamageStep, false},
+		{"stops in cleanup", p.StopsInCleanup, false},
+		{"trailing misses", p.TrailingMisses, false},
+		{"taps with cast", p.TapsWithCast, false},
+		{"trigger order by name", p.TriggerOrderByName, false},
+	}
+	for _, c := range cases {
+		if c.got != c.want {
+			t.Errorf("phase %s = %#v, want %#v", c.name, c.got, c.want)
+		}
+	}
+	if !slices.Equal(p.CastModes, []string{""}) {
+		t.Errorf("phase cast modes = %q, want [\"\"]", p.CastModes)
+	}
+	if !p.FollowsCastMode("") || p.FollowsCastMode("kicked") {
+		t.Error("phase must follow only the ordinary cast")
+	}
+	if p.RunnerEnv() != "XENGINE_PHASE_RUNNER" || p.MemEnv() != "XENGINE_PHASE_MEM" || p.WaitEnv() != "XENGINE_PHASE_WAIT" {
+		t.Errorf("phase env names %s %s %s", p.RunnerEnv(), p.MemEnv(), p.WaitEnv())
 	}
 }
 
