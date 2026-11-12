@@ -154,11 +154,25 @@ func TestPhaseEntry(t *testing.T) {
 			t.Errorf("phase %s = %#v, want %#v", c.name, c.got, c.want)
 		}
 	}
-	if !slices.Equal(p.CastModes, []string{""}) {
-		t.Errorf("phase cast modes = %q, want [\"\"]", p.CastModes)
+	// The modes the answerer maps (CAST_MODES in followers/phase/phase-follower/src/steps.rs).
+	wantModes := []string{"", "optionalcost", "adventure_alt", "omen_alt", "modal_spell", "warped",
+		"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined", "offspring", "replicated", "multikicked"}
+	if !slices.Equal(p.CastModes, wantModes) {
+		t.Errorf("phase cast modes = %q, want %q", p.CastModes, wantModes)
 	}
-	if !p.FollowsCastMode("") || p.FollowsCastMode("kicked") {
-		t.Error("phase must follow only the ordinary cast")
+	// plot is gorge's special action, not phase's cast-from-exile variant: not followed.
+	if p.FollowsCastMode("plot") {
+		t.Errorf("phase must not follow cast_mode plot")
+	}
+	for _, m := range wantModes {
+		if !p.FollowsCastMode(m) {
+			t.Errorf("phase must follow cast_mode %q", m)
+		}
+	}
+	for _, m := range []string{"flashback", "foretell", "escape", "casualty"} {
+		if p.FollowsCastMode(m) {
+			t.Errorf("phase must not follow cast_mode %q", m)
+		}
 	}
 	if p.RunnerEnv() != "XENGINE_PHASE_RUNNER" || p.MemEnv() != "XENGINE_PHASE_MEM" || p.WaitEnv() != "XENGINE_PHASE_WAIT" {
 		t.Errorf("phase env names %s %s %s", p.RunnerEnv(), p.MemEnv(), p.WaitEnv())

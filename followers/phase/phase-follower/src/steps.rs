@@ -11,6 +11,7 @@
 use engine::ai_support::legal_actions_full;
 use engine::game::layers::flush_layers;
 use engine::game::{apply, EngineError};
+use engine::types::ability::TargetRef;
 use engine::types::actions::{DebugAction, GameAction};
 use engine::types::game_state::{ActionDisposition, ActionResult, CastPaymentMode, GameState, WaitingFor};
 use engine::types::identifiers::ObjectId;
@@ -86,6 +87,16 @@ fn parse_mana(text: &str) -> Result<Vec<ManaType>, Stop> {
     Ok(out)
 }
 
+/// The `cast_mode` values the answerer acts on, exactly the registry's `CastModes` for phase
+/// (oracle/xengine/follower/follower.go). The mode only steers the prompts a cast raises
+/// (optional costs, casting variants, faces, alternative costs); any other mode is a harness row.
+/// `plot` is not here: gorge's `plot` is the Plot special action (the card is exiled, plotted),
+/// while phase's plot variant casts a card already plotted, so a hand cast cannot replay it.
+pub const CAST_MODES: [&str; 15] = [
+    "", "optionalcost", "adventure_alt", "omen_alt", "modal_spell", "warped", "kicked", "kicked1", "kicked2",
+    "kickedboth", "buyback", "entwined", "offspring", "replicated", "multikicked",
+];
+
 /// What the machine does at a priority window while driving a step.
 enum Prio {
     Done,
@@ -102,6 +113,14 @@ struct Machine<'a> {
     step: usize,
     last: bool,
     debug_noted: bool,
+    /// Indices of the mode decisions the answerer has taken (the key of `neutral.mode`).
+    used: std::collections::BTreeSet<usize>,
+    /// Stack entries whose chosen targets have been matched against gorge's target decisions.
+    swept: std::collections::BTreeSet<ObjectId>,
+    /// Targets the answerer chose through prompts, not yet matched to the stack entry they made.
+    answered: Vec<TargetRef>,
+    /// Whether an answer arm acted on the current cast step's `cast_mode`.
+    honoured: bool,
 }
 
 /// Replay every step of `req` on `board`, pushing one snapshot per step to `rb`.
@@ -114,6 +133,10 @@ pub fn run(req: &Request, board: Board, rb: &mut RowBuilder) -> Result<(), Stop>
         step: 0,
         last: false,
         debug_noted: false,
+        used: std::collections::BTreeSet::new(),
+        swept: std::collections::BTreeSet::new(),
+        answered: Vec::new(),
+        honoured: false,
     };
     let n = req.item.steps.len();
     for (i, step) in req.item.steps.iter().enumerate() {
@@ -281,10 +304,11 @@ impl Machine<'_> {
 
     fn cast(&mut self, step: &Step, seat: u8, rb: &mut RowBuilder) -> Result<(), Stop> {
         let i = self.step;
-        if !step.cast_mode.is_empty() {
+        if !CAST_MODES.contains(&step.cast_mode.as_str()) {
             return Err(harness(format!("cast_mode {} unsupported", step.cast_mode)));
         }
         self.need_priority(seat)?;
+        self.honoured = false;
         let id = self.object(&step.card, step.seat)?;
         let units = parse_mana(&step.mana)?;
         self.add_mana(seat, units, rb)?;
@@ -294,7 +318,13 @@ impl Machine<'_> {
             GameAction::CastSpell { object_id: id, card_id, targets: vec![], payment_mode: CastPaymentMode::Manual },
             "cast",
         )?;
-        self.drive(rb, move |s| on_stack(s, PlayerId(seat), before, i, "cast"))
+        self.drive(rb, move |s| on_stack(s, PlayerId(seat), before, i, "cast"))?;
+        // The mode steers prompts; one that never posed (or whose origin did not match) leaves the
+        // spell cast the ordinary way, and the difference is the follower's, not phase's.
+        if !step.cast_mode.is_empty() && !self.honoured {
+            return Err(harness(format!("cast_mode {} not honoured at step {i}: phase raised no prompt it maps", step.cast_mode)));
+        }
+        Ok(())
     }
 
     fn activate(&mut self, step: &Step, seat: u8, rb: &mut RowBuilder) -> Result<(), Stop> {
@@ -413,6 +443,8 @@ impl Machine<'_> {
     /// payment go to the answerer.
     fn drive(&mut self, rb: &mut RowBuilder, on_priority: impl Fn(&GameState) -> Prio) -> Result<(), Stop> {
         loop {
+            // phase targets a sole legal target without asking: account for gorge's decision.
+            crate::answer::sweep_stack_targets(&self.board, &mut self.queue, self.step, &mut self.swept, &mut self.answered);
             let wf = self.state().waiting_for.clone();
             match &wf {
                 WaitingFor::GameOver { .. } => {
@@ -427,10 +459,23 @@ impl Machine<'_> {
                 },
                 WaitingFor::ManaPayment { player, .. } => self.pay(*player)?,
                 other => {
-                    let mut cur = Cursor { queue: &mut self.queue, step: self.step, notes: Vec::new() };
+                    let cast_mode = self.req.item.steps.get(self.step).map(|s| s.cast_mode.as_str()).unwrap_or("");
+                    let mut cur = Cursor {
+                        queue: &mut self.queue,
+                        board: &self.board,
+                        req: self.req,
+                        used: &mut self.used,
+                        step: self.step,
+                        cast_mode,
+                        notes: Vec::new(),
+                        honoured: false,
+                    };
                     let a = answer(&self.board.state, other, &mut cur);
                     rb.notes.extend(cur.notes);
-                    self.act(a?.action, &variant_name(other))?;
+                    self.honoured |= cur.honoured;
+                    let action = a?.action;
+                    self.answered.extend(crate::answer::answered_targets(other, &action));
+                    self.act(action, &variant_name(other))?;
                 }
             }
         }
