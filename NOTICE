@@ -29,6 +29,12 @@ The corpus is read at run time from a gitignored .cards link to gorge's
 corpus; internal/boundary fails the build if any Forge content is tracked or
 one `git add` away from it.
 
+Manabrew (https://github.com/witchesofthehill/manabrew), a Rust port of Forge's
+engine, is AGPL-3.0. It is built out of tree from MANABREW_REPO at
+MANABREW_ORACLE_REF (scripts/manabrew-oracle-setup.sh), never committed, and run
+only out of process over JSONL files, as Forge is. Its card archive is built from
+the Forge scripts above and is likewise never committed.
+
 Card names are used for identification only. Card rules (Oracle) text is not
 committed: tools that print it (cmd/oraclepacket) write to gitignored paths.
 
