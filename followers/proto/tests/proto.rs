@@ -4,7 +4,7 @@ use follower_proto::{run_batch, run_preflight, BatchConfig, Request, RowBuilder,
 use serde_json::Value;
 
 // Hand-written fixtures (adapted from the contract's examples; `abilities` is always empty).
-const CAST_RESOLVE: &str = r#"{"abilities":{},"gorge_decisions":[{"step":0,"seat":0,"kind":"target","options":1,"picks":["b"],"pick_idx":[0],"pick_refs":["p1"],"pick_kinds":["player"],"via":"target","gorge_kind":"target","first":"b","min":1,"max":1}],"id":"Ruthless Negotiation/cast-resolve/v1","item":{"id":"Ruthless Negotiation/cast-resolve/v1","card":"Ruthless Negotiation","template":"cast-resolve","name":"gen1-cast-resolve","cr":["601.2"],"why":"generated level-A scenario","setup":{"p0":{"hand":["Ruthless Negotiation"]},"p1":{"battlefield":["Grizzly Bears"]}},"steps":[{"op":"cast","seat":0,"card":"p0:Ruthless Negotiation","mana":"B","targets":["p1"]},{"op":"resolve","seat":0}]},"scenario_sha":"08bac7","neutral":{"ability":{"0":{"class":"mana","cost":"T","produces":"any"}},"token":{"soldier":{"name":"Soldier","supertypes":[],"types":["Creature"],"subtypes":["Soldier"],"colours":["W"],"power":1,"toughness":"*","keywords":[],"text":""}},"mode":{"0":{"step":2,"picks":[{"ordinal":1,"text":"x"}]}}}}"#;
+const CAST_RESOLVE: &str = r#"{"abilities":{},"gorge_decisions":[{"step":0,"seat":0,"kind":"target","options":1,"picks":["b"],"pick_idx":[0],"pick_refs":["p1"],"pick_kinds":["player"],"via":"target","gorge_kind":"target","first":"b","min":1,"max":1}],"id":"Ruthless Negotiation/cast-resolve/v1","item":{"id":"Ruthless Negotiation/cast-resolve/v1","card":"Ruthless Negotiation","template":"cast-resolve","name":"gen1-cast-resolve","cr":["601.2"],"why":"generated level-A scenario","setup":{"p0":{"hand":["Ruthless Negotiation"]},"p1":{"battlefield":["Grizzly Bears"]}},"steps":[{"op":"cast","seat":0,"card":"p0:Ruthless Negotiation","mana":"B","targets":["p1"]},{"op":"resolve","seat":0}]},"scenario_sha":"08bac7","neutral":{"ability":{"0":{"class":"mana","cost":"T","produces":"any"}},"token":{"soldier":{"name":"Soldier","supertypes":[],"types":["Creature"],"subtypes":["Soldier"],"colours":"W","power":1,"toughness":"*","keywords":[],"text":""}},"mode":{"0":{"step":2,"picks":[{"ordinal":1,"text":"x"}]}}}}"#;
 
 fn cfg() -> BatchConfig {
     BatchConfig {
@@ -40,10 +40,11 @@ fn request_parses_cast_resolve_line() {
     assert!(r.abilities.is_empty());
     let d = &r.gorge_decisions[0];
     assert_eq!((d.step, d.kind.as_str(), d.via.as_str()), (0, "target", "target"));
-    assert_eq!((d.pick_idx.clone(), d.min, d.max, d.divided), (vec![0], 1, 1, false));
+    assert_eq!((d.pick_idx.clone(), d.min, d.max, d.divided), (vec![0], 1, 1, 0));
     assert_eq!(d.pick_refs, ["p1"]);
     assert_eq!(r.neutral.ability["0"].class, "mana");
     assert_eq!(r.neutral.ability["0"].produces.as_deref(), Some("any"));
+    assert_eq!(r.neutral.token["soldier"].colours.as_deref(), Some("W"));
     assert_eq!(r.neutral.token["soldier"].power.as_deref(), Some("1"));
     assert_eq!(r.neutral.token["soldier"].toughness.as_deref(), Some("*"));
     assert_eq!(r.neutral.mode["0"].picks[0].ordinal, 1);
@@ -200,4 +201,39 @@ fn preflight_prints_name_tab_reason() {
         String::from_utf8(out).unwrap(),
         "  Odd Name \tno support for 11\nMystery\tCard\tno support for 12\n"
     );
+}
+
+// Every optional key set, with the types follower-export / oraclegen / gorge's OracleDecision write.
+const FULL: &str = r#"{"id":"x/full/v1","scenario_sha":"abc","abilities":{"1":""},"item":{"id":"x/full/v1","card":"C","template":"t","name":"n","turn":3,"players":4,"xmage_name":"X","setup_answers":[],"payment":["WU",""],"ignore":["library_top"],"compare":["a"],"cr":["1.1"],"why":"w","setup":{"p0":{"battlefield":["A"],"tapped":["A"],"tapped_after_untap":["A#2"],"back_face":["A"],"hand":["H"],"graveyard":["G"],"exile":["E"],"library":["L"],"library_top":["T"],"counters":{"A":{"P1P1":2}},"tokens":[{"script":"w_1_1_soldier","counters":{"P1P1":1}}],"attached":[{"card":"Aura","to":"A"}],"life":0,"speed":4,"command":["Cmdr"],"sideboard":["S"],"mana":"WW"},"p1":{}},"steps":[{"op":"activate","seat":1,"card":"p0:A","mana":"W","targets":["p1"],"cast_mode":"kicked","ability_index":0,"ability":"Unlock","attackers":["a"],"defender":"p1","blocks":[["b","a"]],"step":"declare_blockers","active":0,"decision":"target","to":"graveyard","attached_to":"p0:A","amount":-3,"answers":[],"expect":{},"observe":{}}]},"gorge_decisions":[{"step":-1,"seat":1,"kind":"choose_n","gorge_kind":"k","via":"answer","resume":"r","options":5,"picks":["a"],"pick_idx":[2],"pick_refs":["r"],"pick_refs_inexact":[true],"object_picks":["o"],"option_refs":["x"],"pick_kinds":["card"],"first":"a","min":0,"max":2,"divided":3,"option_groups":["g"],"per_player":true}],"neutral":{"ability":{"1":{"class":"activated","ordinal":0,"keyword":"Equip:2","cost":"{2}","text":"t","produces":"WU"}},"token":{"s":{"name":"S","supertypes":["Legendary"],"types":["Creature"],"subtypes":["Elf"],"colours":"","power":2,"toughness":3,"keywords":["Flying"],"text":"x"}},"mode":{"0":{"step":1,"picks":[{"ordinal":0,"text":"m"}]}}}}"#;
+
+#[test]
+fn request_parses_every_optional_key() {
+    let r = Request::parse(FULL).unwrap();
+    assert_eq!(r.item.turn(), 3);
+    assert_eq!(r.item.players(), 4);
+    assert_eq!(r.item.setup.p0.life(), 0);
+    assert_eq!(r.item.setup.p0.speed, 4);
+    assert_eq!(r.item.steps[0].ability_index, Some(0));
+    assert_eq!(r.item.steps[0].amount, -3);
+    assert_eq!(r.item.steps[0].blocks, [("b".to_string(), "a".to_string())]);
+    let d = &r.gorge_decisions[0];
+    assert_eq!((d.step, d.divided, d.min, d.max), (-1, 3, 0, 2));
+    assert_eq!(d.pick_refs_inexact, [true]);
+    let t = &r.neutral.token["s"];
+    assert_eq!(t.colours.as_deref(), Some(""));
+    assert_eq!((t.power.as_deref(), t.toughness.as_deref()), (Some("2"), Some("3")));
+    assert_eq!(r.neutral.ability["1"].keyword.as_deref(), Some("Equip:2"));
+}
+
+#[test]
+fn batch_ref_key_never_duplicates_a_fixed_field() {
+    for key in ["", "id", "engine"] {
+        let cfg = BatchConfig { engine: "e".into(), ref_key: key.into(), ref_value: "v".into() };
+        let mut out = Vec::new();
+        run_batch(&b"{\"id\":\"a\"}\n"[..], &mut out, &cfg, |_, _| Ok(())).unwrap();
+        let text = String::from_utf8(out).unwrap();
+        assert!(!text.contains("\"\":"), "{text}");
+        assert_eq!(text.matches("\"id\":").count(), 1, "{text}");
+        assert!(text.contains("\"engine\":\"e\""), "{text}");
+    }
 }

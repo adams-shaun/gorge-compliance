@@ -208,7 +208,8 @@ pub struct Decision {
     pub first: String,
     pub min: i64,
     pub max: i64,
-    pub divided: bool,
+    /// The literal `DividedAsYouChoose$` total of a divided target ask (0 = not divided).
+    pub divided: i64,
 }
 
 /// Engine-neutral facts derived from the Forge-side data. Every map is present from
@@ -245,7 +246,8 @@ pub struct NeutralToken {
     pub supertypes: Vec<String>,
     pub types: Vec<String>,
     pub subtypes: Vec<String>,
-    pub colours: Vec<String>,
+    /// WUBRG letters (`"WU"`); `""` is colourless; `None` = the producer could not derive it.
+    pub colours: Option<String>,
     /// Kept as text: a token's power can be `*`.
     #[serde(deserialize_with = "de_opt_text")]
     pub power: Option<String>,

@@ -14,7 +14,8 @@ use std::time::Instant;
 pub struct BatchConfig {
     /// Row `engine`, e.g. "phase".
     pub engine: String,
-    /// Engine ref key, e.g. "phase_ref".
+    /// Engine ref key, e.g. "phase_ref". An empty key, or one equal to a fixed row field
+    /// (`id`, `name`, ...), is dropped from the row rather than written as a duplicate member.
     pub ref_key: String,
     /// Engine ref value (the pinned engine commit).
     pub ref_value: String,
@@ -89,6 +90,19 @@ pub fn run_batch(
     Ok(stats)
 }
 
+/// The engine ref member of a row. An empty key, or one naming a fixed row field, would write an
+/// empty or duplicate JSON key, so such a key is dropped (a caller must not pass one).
+fn ref_member(cfg: &BatchConfig) -> BTreeMap<String, String> {
+    const FIXED: [&str; 11] = [
+        "name", "id", "engine", "strict", "ms", "snapshots", "harness", "strict_miss", "leftover",
+        "notes", "request_sha",
+    ];
+    if cfg.ref_key.is_empty() || FIXED.contains(&cfg.ref_key.as_str()) {
+        return BTreeMap::new();
+    }
+    BTreeMap::from([(cfg.ref_key.clone(), cfg.ref_value.clone())])
+}
+
 fn line_row(
     bytes: &[u8],
     cfg: &BatchConfig,
@@ -98,7 +112,7 @@ fn line_row(
     let mut row = ResultRow {
         engine: cfg.engine.clone(),
         request_sha: sha256_hex(bytes),
-        refs: BTreeMap::from([(cfg.ref_key.clone(), cfg.ref_value.clone())]),
+        refs: ref_member(cfg),
         ..ResultRow::default()
     };
     let text = String::from_utf8_lossy(bytes);
