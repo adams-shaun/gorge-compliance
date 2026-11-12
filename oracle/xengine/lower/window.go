@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
@@ -94,7 +95,7 @@ func (c *cut) setupSpeedLatch() bool {
 		return false
 	}
 	life := c.Setup[1-c.Active].Life
-	return life != nil && *life < 20
+	return life != nil && *life < startLife(c)
 }
 
 // windowTape is the tape a window's self-check holds it to: the entries from the
@@ -174,7 +175,12 @@ func (c *cut) item(m seatMap, id, name string) oraclegen.Item {
 	for k := 0; k < len(c.Answers); k++ {
 		sc.SetupAnswers = append(sc.SetupAnswers, c.Answers[m.seat(k)]...)
 	}
-	return oraclegen.Item{ID: id, Template: WindowTemplate, Scenario: sc}
+	it := oraclegen.Item{ID: id, Template: WindowTemplate, Scenario: sc}
+	if c.Commander {
+		it.Scenario.Format = oraclegen.FormatCommander
+		it.Compare = []string{oraclediff.CompareCommand}
+	}
+	return it
 }
 
 func lowerWindow(reg *cards.Registry, t *game.Tape, c *cut, id string) (Lowered, error) {

@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
@@ -88,16 +89,33 @@ func runPlay(args []string) error {
 	forgeOnly := fs.String("forge-only", "", "with -random, a file of card names, one per line, to add to the cross-set deal: a set XMage has no class for, so its items go to Forge alone")
 	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays")
 	diracEvery := fs.Int("dirac-every", 2, "with -random and -dirac, every K-th game (game g with g%K == K-1) draws from one set's dirac-playable cards; 1 makes every game one dirac plays beside gorge, so all four engines see every deck")
+	format := fs.String("format", "", "game format: empty or constructed, or commander (with -commander-decks)")
+	cmdrDecks := fs.String("commander-decks", "", "with -format commander: a directory of Commander deck files; each game is a 1v1 Commander match between two of them (decks.CommanderPair)")
+	pool := fs.String("pool", "", "a file of card names, one per line (# comments): draw the decks from these cards alone, through the same gorge-supported filter and against the ledger as -set; -set only names the run. Not with -random, -forge-only or -dirac")
+	poolFilter := fs.String("pool-filter", "", "with -pool, a file of card names to leave out of the pool (cards a follower refuses)")
+	decksDir := fs.String("decks", "", "a directory of gorge deck files (*.json, engine/deck's format): every game plays two different fixed decks of it, main deck only, instead of building 40-card decks; -set only names the run. A deck gorge does not fully support (or, with -xmage, naming a card XMage spells otherwise) is skipped; DIR/decks.json records each. Not with -pool, -random, -forge-only or -dirac")
 	out := fs.String("out", "", "output dir (default under "+DefaultRoot+")")
 	fs.Parse(args)
 	if *set == "" {
 		return fmt.Errorf("play needs -set")
+	}
+	if *decksDir != "" && (*format == "commander" || *cmdrDecks != "") {
+		return errors.New("-decks plays fixed constructed lists: it cannot be combined with -format commander or -commander-decks")
+	}
+	if err := decksFlagErr(*decksDir, *pool, *random, *forgeOnly, *dirac); err != nil {
+		return err
+	}
+	if err := poolFlagErr(*pool, *poolFilter, *random, *forgeOnly, *dirac); err != nil {
+		return err
 	}
 	if *games < 1 || *chunk < 0 {
 		return fmt.Errorf("play needs -games >= 1 and -chunk >= 0")
 	}
 	if *diracEvery < 1 {
 		return fmt.Errorf("play needs -dirac-every >= 1")
+	}
+	if err := formatFlagErr(*format, *cmdrDecks, *random, *forgeOnly, *pool, *poolFilter, *dirac); err != nil {
+		return err
 	}
 	turns, err := parseTapeTurns(*tapeTurns)
 	if err != nil {
@@ -126,25 +144,199 @@ func runPlay(args []string) error {
 	if *dirac {
 		tables = dside.NewTables(reg)
 	}
-	opts := decks.Options{XMage: *xmage}
-	var pick picker
-	if *random != "" {
-		var extra []decks.Card
-		if *forgeOnly != "" {
-			b, rerr := os.ReadFile(*forgeOnly)
-			if rerr != nil {
-				return rerr
+	if *decksDir != "" {
+		var sp *decks.Spellings
+		if *xmage {
+			if sp, err = decks.LoadSpellings(*manifests); err != nil {
+				return err
 			}
-			extra, _ = decks.CandidatesNamed(reg, nonEmptyLines(string(b)), opts)
 		}
-		pick, err = randomPicker(reg, *manifests, strings.Fields(strings.ReplaceAll(*random, ",", " ")), opts, tables, extra, *diracEvery)
+		ds, info, derr := loadDeckDir(reg, *decksDir, sp)
+		fmt.Println(info)
+		if derr != nil {
+			return derr
+		}
+		b, err := json.MarshalIndent(info, "", "  ")
+		if err != nil {
+			return err
+		}
+		if err := writeAtomic(filepath.Join(*out, "decks.json"), append(b, '\n')); err != nil {
+			return err
+		}
+		return play(reg, fixedDealer(ds, *chunk, *seed), nil, led, *set, *chunk, *games, *seed, *out, *windows, *xmage, turns)
+	}
+	opts := decks.Options{XMage: *xmage}
+	var deal dealer
+	if *format == "commander" {
+		ds, info, derr := loadCommanderDecks(reg, *cmdrDecks)
+		if derr != nil {
+			return derr
+		}
+		b, merr := json.MarshalIndent(info, "", "  ")
+		if merr != nil {
+			return merr
+		}
+		if err := writeAtomic(filepath.Join(*out, "commander.json"), append(b, '\n')); err != nil {
+			return err
+		}
+		deal = commanderDealer(ds, *set, *chunk, *seed)
 	} else {
-		pick, err = setPicker(reg, *manifests, *set, led, opts, tables)
+		var pick picker
+		var pinfo *poolInfo
+		if *pool != "" {
+			cands, info, perr := poolCandidates(reg, *manifests, *pool, *poolFilter, *xmage)
+			if perr != nil {
+				return perr
+			}
+			fmt.Println(info)
+			pick, pinfo = poolPicker(cands, led), &info
+		} else if *random != "" {
+			var extra []decks.Card
+			if *forgeOnly != "" {
+				b, rerr := os.ReadFile(*forgeOnly)
+				if rerr != nil {
+					return rerr
+				}
+				extra, _ = decks.CandidatesNamed(reg, nonEmptyLines(string(b)), opts)
+			}
+			pick, err = randomPicker(reg, *manifests, strings.Fields(strings.ReplaceAll(*random, ",", " ")), opts, tables, extra, *diracEvery)
+		} else {
+			pick, err = setPicker(reg, *manifests, *set, led, opts, tables)
+		}
+		if err != nil {
+			return err
+		}
+		if pinfo != nil {
+			b, merr := json.MarshalIndent(pinfo, "", "  ")
+			if merr != nil {
+				return merr
+			}
+			if err := writeAtomic(filepath.Join(*out, "pool.json"), append(b, '\n')); err != nil {
+				return err
+			}
+		}
+		deal = pickDealer(pick, *set, *chunk, *seed)
 	}
+	return play(reg, deal, tables, led, *set, *chunk, *games, *seed, *out, *windows, *xmage, turns)
+}
+
+// formatFlagErr checks -format and -commander-decks against each other and
+// against the other deck sources: Commander deals from the deck files alone.
+func formatFlagErr(format, cmdrDecks, random, forgeOnly, pool, poolFilter string, dirac bool) error {
+	switch format {
+	case "", "constructed", "commander":
+	default:
+		return fmt.Errorf("-format %q: want constructed or commander", format)
+	}
+	if format != "commander" {
+		if cmdrDecks != "" {
+			return errors.New("-commander-decks needs -format commander")
+		}
+		return nil
+	}
+	if cmdrDecks == "" {
+		return errors.New("-format commander needs -commander-decks")
+	}
+	var with []string
+	if random != "" {
+		with = append(with, "-random")
+	}
+	if forgeOnly != "" {
+		with = append(with, "-forge-only")
+	}
+	if pool != "" {
+		with = append(with, "-pool")
+	}
+	if poolFilter != "" {
+		with = append(with, "-pool-filter")
+	}
+	if len(with) > 0 {
+		return fmt.Errorf("-format commander deals from -commander-decks: it cannot be combined with %s", strings.Join(with, ", "))
+	}
+	if dirac {
+		return errors.New("-dirac with -format commander needs the dirac Commander lockstep (xe-cmdr-dirac)")
+	}
+	return nil
+}
+
+// A dealer deals game g's pair and the set whose dirac table plays it ("" when none does).
+type dealer func(g int) (pair [2]decks.Deck, table string)
+
+// pickDealer deals from a picker's candidates with decks.Pair: today's path.
+func pickDealer(pick picker, set string, chunk int, seed uint64) dealer {
+	return func(g int) ([2]decks.Deck, string) {
+		cands, led, table := pick(g, gameSeed(seed, chunk, g))
+		return decks.Pair(cands, led, set, chunk, g, seed), table
+	}
+}
+
+// commanderDealer deals 1v1 Commander matches between ds.
+func commanderDealer(ds []decks.Deck, set string, chunk int, seed uint64) dealer {
+	return func(g int) ([2]decks.Deck, string) {
+		return decks.CommanderPair(ds, set, chunk, g, seed), ""
+	}
+}
+
+// commanderInfo records which deck files a Commander run dealt from
+// (commander.json).
+type commanderInfo struct {
+	Dir     string              `json:"dir"`
+	Decks   []commanderDeckInfo `json:"decks"`
+	Skipped []commanderSkip     `json:"skipped"`
+}
+
+type commanderDeckInfo struct {
+	Stem      string `json:"stem"`
+	Commander string `json:"commander"`
+	SHA256    string `json:"sha256"`
+}
+
+type commanderSkip struct {
+	Card   string `json:"card"`
+	Reason string `json:"reason"`
+}
+
+// loadCommanderDecks reads dir's deck files and keeps the playable Commander
+// decks; fewer than two is an error naming dir and every skip.
+func loadCommanderDecks(reg *cards.Registry, dir string) ([]decks.Deck, commanderInfo, error) {
+	files, err := decks.ReadCommanderDir(dir)
 	if err != nil {
-		return err
+		return nil, commanderInfo{}, err
 	}
-	return play(reg, pick, tables, led, *set, *chunk, *games, *seed, *out, *windows, *xmage, turns)
+	ds, skips := decks.CommanderDecks(reg, files)
+	info := commanderInfo{Dir: dir, Decks: []commanderDeckInfo{}, Skipped: []commanderSkip{}}
+	sums := map[string]string{}
+	for _, f := range files {
+		sums[f.Stem] = f.SHA256
+	}
+	for _, d := range ds {
+		info.Decks = append(info.Decks, commanderDeckInfo{Stem: d.Name, Commander: d.Commander, SHA256: sums[d.Name]})
+	}
+	var by []string
+	counts := map[string]int{}
+	var order []string
+	for _, s := range skips {
+		info.Skipped = append(info.Skipped, commanderSkip{s.Card, s.Reason})
+		by = append(by, fmt.Sprintf("%s: %s", s.Card, s.Reason))
+		k := s.Reason
+		if i := strings.IndexAny(k, ":["); i > 0 {
+			k = strings.TrimSpace(k[:i])
+		}
+		if counts[k] == 0 {
+			order = append(order, k)
+		}
+		counts[k]++
+	}
+	sort.Strings(order)
+	var parts []string
+	for _, k := range order {
+		parts = append(parts, fmt.Sprintf("%d %s", counts[k], k))
+	}
+	if len(ds) < 2 {
+		return nil, info, fmt.Errorf("-commander-decks %s: %d playable Commander deck(s) of %d files, need 2 (%s)", dir, len(ds), len(files), strings.Join(by, "; "))
+	}
+	fmt.Printf("commander decks: %d of %d files (%s)\n", len(ds), len(files), strings.Join(parts, ", "))
+	return ds, info, nil
 }
 
 // A picker draws game g's decks: the candidates they come from and the set whose
@@ -342,7 +534,7 @@ func tapePrefix(l lower.Lowered, t *game.Tape, n int) (p lower.Lowered, tf *game
 	return p, &cut, true
 }
 
-func play(reg *cards.Registry, pick picker, tables *dside.Tables, led *cov.Ledger, set string, chunk, games int, seed uint64, out string, windows, xmage bool, tapeTurns []int) error {
+func play(reg *cards.Registry, deal dealer, tables *dside.Tables, led *cov.Ledger, set string, chunk, games int, seed uint64, out string, windows, xmage bool, tapeTurns []int) error {
 	var items, gorge, lowerLog, diracLog bytes.Buffer
 	exercised := cov.New()
 	exercised.Merge(led)
@@ -386,8 +578,7 @@ func play(reg *cards.Registry, pick picker, tables *dside.Tables, led *cov.Ledge
 	}
 	// The pairs are drawn against the ledger as it stood at chunk start.
 	for g := 0; g < games; g++ {
-		cands, drawLed, table := pick(g, gameSeed(seed, chunk, g))
-		pair := decks.Pair(cands, drawLed, set, chunk, g, seed)
+		pair, table := deal(g)
 		for _, d := range pair {
 			for _, n := range d.Cards {
 				if c, ok := reg.Lookup(n); ok {

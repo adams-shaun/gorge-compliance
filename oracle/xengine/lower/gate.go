@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/events"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -22,7 +23,11 @@ const (
 	reasonByName      = "setup_by_name:"       // + back_face | counters
 	reasonCountersLow = "counters_below_entry" // fewer counters than the card enters with
 	reasonZone        = "zone:"                // + the zone name
-	reasonCard        = "card:no_front_face"
+	// reasonCommanderZone is a commander outside its command zone (+ the zone
+	// name): the runner at GORGE_PIN seats commanders only from the setup
+	// command list (gorge-oracle-cmdr-setup lifts it).
+	reasonCommanderZone = "commander_zone:"
+	reasonCard          = "card:no_front_face"
 	// reasonAuraUnattached is a battlefield Aura attached to no permanent (it
 	// can only be so in transit) and to no player: setup places an Aura
 	// attached (CR 303.4f), so there is no bearer to name.
@@ -71,6 +76,9 @@ type cut struct {
 	Entry  int   // tape index of the cut's decision
 	Turn   int32 // the live turn
 	Active int
+	// Commander is true in a Commander game: the harness plays one exactly
+	// when game.Play set Config.Commanders, so a seat's Commanders tells.
+	Commander bool
 	// Setup is one seat's placed state; Attach the attach prelude steps.
 	Setup  [2]oraclegen.Seat
 	Attach []oraclegen.Step
@@ -96,6 +104,18 @@ func capture(e *rules.Engine, entry int, xmage bool) *cut {
 	for i := range g.Players {
 		w.seat = i
 		w.struct_(reflect.ValueOf(&g.Players[i]).Elem(), "Player", playerTable, nil)
+		if len(g.Players[i].Commanders) > 0 {
+			c.Commander = true
+		}
+		for _, id := range g.Players[i].Commanders {
+			if o := g.Obj(id); o == nil || o.Zone != state.ZCommand {
+				z := state.ZCeased
+				if o != nil {
+					z = o.Zone
+				}
+				w.why[reasonCommanderZone+z.String()] = true
+			}
+		}
 	}
 	for i := range g.Objs {
 		o := &g.Objs[i]
@@ -106,6 +126,11 @@ func capture(e *rules.Engine, entry int, xmage bool) *cut {
 		}
 		switch o.Zone {
 		case state.ZBattlefield, state.ZHand, state.ZLibrary, state.ZGraveyard, state.ZExile:
+		case state.ZCommand:
+			// A commander card in its command zone is the setup command list.
+			if o.Card == nil || g.CommanderOf(o.ID) != o.ID {
+				w.why[reasonZone+o.Zone.String()] = true
+			}
 		default:
 			w.why[reasonZone+o.Zone.String()] = true
 		}
@@ -178,6 +203,15 @@ func phaseTriggered(o *state.Object) bool {
 	return false
 }
 
+// startLife is each seat's opening life in the cut's game: what a setup life
+// at it leaves unplaced as a LifeChange.
+func startLife(c *cut) int32 {
+	if c.Commander {
+		return game.CommanderStartingLife
+	}
+	return 20
+}
+
 // setupTriggers refuses a window whose setup drive would resolve a trigger of a
 // placed permanent: the drive expresses setup state as real events (a by-name
 // Tap, a CounterChange for the counters field, a LifeChange for the life field,
@@ -194,10 +228,10 @@ func (w *walker) setupTriggers(c *cut) {
 			counters = true
 		}
 		if life := c.Setup[s].Life; life != nil {
-			if *life > 20 {
+			if *life > startLife(c) {
 				gained = true
 			}
-			if *life < 20 {
+			if *life < startLife(c) {
 				lost = true
 			}
 		}
@@ -328,6 +362,14 @@ func (w *walker) struct_(v reflect.Value, typ string, table map[string]entry, o 
 // refused as exile_self.
 func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 	switch {
+	case typ == "Player" && (name == "CmdCasts" || name == "CmdDamage"):
+		// gorge sizes both at genesis, so an all-zero slice is not state.
+		for k := 0; k < v.Len(); k++ {
+			if v.Index(k).Int() != 0 {
+				return true
+			}
+		}
+		return false
 	case typ == "Player" && name == "LandsPlayed":
 		return v.Int() > 0 && w.seat == int(w.g.Active)
 	case typ == "Player" && name == "LandsPlayedOffHand":
@@ -614,6 +656,7 @@ func (w *walker) place(c *cut) {
 		seat.Hand = names(g.Zone(state.ZHand, p))
 		seat.Graveyard = names(g.Zone(state.ZGraveyard, p))
 		seat.Exile = names(g.Zone(state.ZExile, p))
+		seat.Command = names(g.Zone(state.ZCommand, p))
 		seat.LibraryTop = names(g.Zone(state.ZLibrary, p))
 		for _, n := range dedupe(seat.Battlefield) {
 			if back[n][true] && !back[n][false] {

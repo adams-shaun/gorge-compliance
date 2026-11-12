@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/engine/cards"
@@ -29,8 +30,9 @@ const (
 
 // Lowered is a tape lowered to one oracle scenario.
 type Lowered struct {
-	// Item is the scenario. Ignore and Compare stay empty (the classifier
-	// sets them); so do the follower-specific fields.
+	// Item is the scenario. Ignore stays empty; Compare holds CompareCommand on a
+	// Commander item and is empty otherwise (the classifier sets the rest,
+	// and the follower-specific fields stay empty).
 	Item oraclegen.Item `json:"item"`
 	// StepEntry is parallel to Item.Steps: the index of the last tape entry
 	// the step carries out, or -1 for a step the live game has no state
@@ -101,12 +103,13 @@ func isPass(e game.Entry) bool {
 func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 	m := seatMap{swap: t.Starter == 1}
 	for s := range t.Open {
-		for _, n := range append(append([]string{}, t.Open[s].Hand...), t.Open[s].Library...) {
+		for _, n := range slices.Concat(t.Open[s].Hand, t.Open[s].Command, t.Open[s].Library) {
 			if _, ok := reg.Lookup(n); !ok {
 				return Lowered{}, fmt.Errorf("lower: seat %d card %q not in the corpus", s, n)
 			}
 		}
 	}
+	commander := t.GameFormat == oraclegen.FormatCommander
 	sc := oraclegen.Scenario{
 		Name:  "xengine tape " + t.Decks[0].Name + " vs " + t.Decks[1].Name,
 		Turn:  1,
@@ -115,16 +118,26 @@ func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 		Setup: map[string]oraclegen.Seat{},
 	}
 	for s := range t.Open {
-		sc.Setup["p"+strconv.Itoa(m.seat(s))] = oraclegen.Seat{
+		seat := oraclegen.Seat{
 			Hand:       append([]string{}, t.Open[s].Hand...),
 			LibraryTop: append([]string{}, t.Open[s].Library...),
 		}
+		if commander {
+			seat.Command = append([]string{}, t.Open[s].Command...)
+		}
+		sc.Setup["p"+strconv.Itoa(m.seat(s))] = seat
+	}
+	if commander {
+		sc.Format = oraclegen.FormatCommander
 	}
 	l := Lowered{
 		Item: oraclegen.Item{ID: itemID(t), Template: Template, Scenario: sc},
 		Swap: m.swap, StepEntry: []int{},
 	}
 	l.Item.Steps = []oraclegen.Step{}
+	if commander {
+		l.Item.Compare = []string{oraclediff.CompareCommand}
+	}
 
 	first := -1
 	for i, e := range t.Entries {
@@ -560,6 +573,9 @@ func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Ste
 	if len(steps) == 0 {
 		return nil, nil, nil, nil, unsupported("empty_" + en.Kind)
 	}
+	if why := sacrificeTapTrigger(reg, en, mana); why != nil {
+		return nil, nil, nil, nil, why
+	}
 	if len(mana) > len(en.Mana) && !paysAfterAsks(en) {
 		// Mana fired while an ask was being answered, for a decision that is
 		// not a cast or activation: nothing to tap it ahead of.
@@ -664,18 +680,11 @@ func manaTaps(reg *cards.Registry, m seatMap, mana []game.ManaRec) ([]oraclegen.
 // when the ability asks none (a fixed colour) or the live activation's
 // colours are unknown. "Any" is one pick; a "Combo" ask takes one per unit.
 func colourPicks(reg *cards.Registry, mr game.ManaRec) []string {
-	c, ok := reg.Lookup(mr.Name)
-	if !ok {
+	if mr.Produced == "" {
 		return nil
 	}
-	var sa *cards.SA
-	for _, f := range c.Faces {
-		if f.Name == mr.Name && mr.Ability < len(f.Abilities) {
-			sa = f.Abilities[mr.Ability]
-			break
-		}
-	}
-	if sa == nil || mr.Produced == "" {
+	sa := manaSA(reg, mr)
+	if sa == nil {
 		return nil
 	}
 	produced := effects.ManaOf(sa).Produced
@@ -688,6 +697,75 @@ func colourPicks(reg *cards.Registry, mr game.ManaRec) []string {
 	}
 	if strings.EqualFold(produced, "Any") {
 		return []string{mr.Produced[:1]}
+	}
+	return nil
+}
+
+// sacrificeTapTrigger refuses a group whose explicit mana taps sacrifice their
+// source (a Treasure or Gold token) while a permanent triggers on a sacrifice.
+// The live game sacrificed the source while paying, and the trigger went on the
+// stack after the cast; the lowering taps ahead of the cast, so the trigger
+// would sit on the stack first, blocking a sorcery-speed cast and asking its
+// target out of order.
+func sacrificeTapTrigger(reg *cards.Registry, en game.Entry, mana []game.ManaRec) *truncation {
+	if !paysAfterAsks(en) || !sacrificeTrigger(reg, en.Digest.Field) {
+		return nil
+	}
+	for _, mr := range mana {
+		if sa := manaSA(reg, mr); sa != nil && strings.Contains(sa.Params["Cost"], "Sac<") {
+			return unsupported("sacrifice_trigger_tap")
+		}
+	}
+	return nil
+}
+
+// manaSA is the mana ability a recorded activation ran: the card's, or when no
+// card has the name (a token: "Treasure Token"), the token definition's. Token
+// stems can share a face name, so the token's ability is used only when every
+// stem with that name and ability agrees on its Produced$ and Cost$; the answer
+// does not depend on map order. nil when it cannot be told.
+func manaSA(reg *cards.Registry, mr game.ManaRec) *cards.SA {
+	if c, ok := reg.Lookup(mr.Name); ok {
+		return faceAbility(c, mr)
+	}
+	var first *cards.SA
+	for _, c := range reg.Tokens {
+		sa := faceAbility(c, mr)
+		if sa == nil {
+			continue
+		}
+		if first == nil {
+			first = sa
+		} else if effects.ManaOf(sa).Produced != effects.ManaOf(first).Produced || sa.Params["Cost"] != first.Params["Cost"] {
+			return nil
+		}
+	}
+	return first
+}
+
+// sacrificeTrigger reports whether a permanent on the battlefield has a
+// "whenever you sacrifice" trigger.
+func sacrificeTrigger(reg *cards.Registry, field []game.PermDigest) bool {
+	for _, p := range field {
+		if c, ok := reg.Lookup(p.Name); ok {
+			for _, f := range c.Faces {
+				for _, t := range f.Triggers {
+					if t.Mode == "Sacrificed" {
+						return true
+					}
+				}
+			}
+		}
+	}
+	return false
+}
+
+// faceAbility is the ability mr.Ability of c's face named mr.Name, or nil.
+func faceAbility(c *cards.Card, mr game.ManaRec) *cards.SA {
+	for _, f := range c.Faces {
+		if f.Name == mr.Name && mr.Ability >= 0 && mr.Ability < len(f.Abilities) {
+			return f.Abilities[mr.Ability]
+		}
 	}
 	return nil
 }

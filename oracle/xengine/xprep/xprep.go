@@ -62,10 +62,13 @@ const (
 	// result holds no decision for it, and completing it from gorge's own
 	// continued replay did not decide it.
 	ReasonModalTrigger = "xmage_modal_trigger_unresolved"
+	// ReasonCommander: the XMage driver seats a TwoPlayerDuel and refuses
+	// command-zone setup, so a Commander item cannot be replayed there.
+	ReasonCommander = "xmage_commander"
 )
 
 // Reasons is every reason Prepare refuses with.
-var Reasons = []string{ReasonSpelling, ReasonModeCollision, ReasonAbilityUnknown, ReasonRetarget, ReasonNoResult, ReasonNoXMageCard, ReasonWindowOnly, ReasonColourMismatch, ReasonModalTrigger}
+var Reasons = []string{ReasonSpelling, ReasonModeCollision, ReasonAbilityUnknown, ReasonRetarget, ReasonNoResult, ReasonNoXMageCard, ReasonWindowOnly, ReasonColourMismatch, ReasonModalTrigger, ReasonCommander}
 
 // tapeID matches the id of a tape item: "...:tape" or a prefix "...:tape:t<N>".
 var tapeID = regexp.MustCompile(`:tape(:t\d+)?$`)
@@ -106,6 +109,9 @@ func refuse(id, reason, format string, a ...any) *Refusal {
 // keeps its legacy trailing skip.
 func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.OracleResult) (oraclegen.Item, *Refusal) {
 	it := l.Item
+	if it.Format == oraclegen.FormatCommander {
+		return it, refuse(it.ID, ReasonCommander, "format commander; the XMage driver plays no Commander game")
+	}
 	if bad := differing(reg, sp, it); len(bad) > 0 {
 		return it, refuse(it.ID, ReasonSpelling, "%s", strings.Join(bad, "; "))
 	}
@@ -638,6 +644,11 @@ func refName(ref string) (string, bool) {
 	}
 	return n, n != ""
 }
+
+// CardNames is every card name the item's setup and steps hold, sorted: the
+// names a follower must have in its card database. A player ref, a token ref
+// ("pN:token:Name") and an ability ref are not cards.
+func CardNames(it oraclegen.Item) []string { return cardNames(it) }
 
 // cardNames is every card name the item's setup and steps hold, sorted.
 func cardNames(it oraclegen.Item) []string {

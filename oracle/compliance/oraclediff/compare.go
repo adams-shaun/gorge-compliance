@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/follower"
 	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
@@ -57,8 +58,19 @@ type Verdict struct {
 // driver exception; those failures remain HARNESS rather than exempting the
 // card under test.
 func XMageLacksCard(msg, scenarioCard string) bool {
-	const marker = "Couldn't find a card:"
-	_, missing, ok := strings.Cut(msg, marker)
+	return LacksCard("xmage", msg, scenarioCard)
+}
+
+// LacksCard reports that msg is the follower engine's database miss of
+// scenarioCard: it holds the follower's LacksCardMsg (oracle/xengine/follower)
+// followed by that card's name. A follower with no LacksCardMsg, or an
+// unknown engine, never lacks a card.
+func LacksCard(engine, msg, scenarioCard string) bool {
+	f, _ := follower.Lookup(engine)
+	if f.LacksCardMsg == "" {
+		return false
+	}
+	_, missing, ok := strings.Cut(msg, f.LacksCardMsg)
 	if !ok {
 		return false
 	}
@@ -150,6 +162,11 @@ func fields(s rules.OracleSnapshot, xmage bool, compare []string) []field {
 			field{pf("hand"), hand},
 			field{pf("graveyard"), graveyard},
 			field{pf("exile"), list(p.Exile, true)},
+		)
+		if wantsCompare(compare, CompareCommand) {
+			out = append(out, field{pf("command"), list(p.Command, true)})
+		}
+		out = append(out,
 			field{pf("library_count"), fmt.Sprint(p.LibraryCount)},
 		)
 		if !noLibraryOrder {

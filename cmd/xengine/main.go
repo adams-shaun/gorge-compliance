@@ -3,13 +3,15 @@
 // oracle tape scenario a follower (XMage, Forge) replays, and every
 // difference is classified and written as a repro directory.
 //
-//	xengine play -set S [-chunk C] [-games K] [-seed N] [-windows] [-tape-turns 1,2,4,8] [-ledger L.tsv] [-random 'S1 S2'] [-dirac] [-out DIR]
+//	xengine play -set S [-chunk C] [-games K] [-seed N] [-windows] [-tape-turns 1,2,4,8] [-ledger L.tsv] [-random 'S1 S2'] [-dirac] [-pool FILE [-pool-filter FILE]] [-decks DIR] [-out DIR]
 //	xengine diff -play DIR -engine xmage|forge -rows ROWS.jsonl -out DIR2 [-only ID]
 //	xengine cov  -ledger A.tsv [-ledger B.tsv ...] [-sets FDN,BLB] [-sub BASE.tsv] [-missing] [-write OUT.tsv]
 //	xengine calib -play DIR -diff DIR2 -engine xmage|forge
 //	xengine xprep -play DIR -out xitems.jsonl [-manifests DIR]
 //	xengine adjudicate -play DIR -xmage DIFF_X -forge DIFF_F -out DIR3 [-ledger DIR] [-forge-ref REF12]
 //	xengine sweep-plan -root DIR -sets 'FDN BLB' -chunks N [-stale] [-force]
+//	xengine pool -set S [-legal FORMAT -mtgjson S.json.gz] [-out FILE]
+//	xengine followers
 //
 // play writes DIR/tapes/*.json (every game's tape), DIR/items.jsonl (the
 // follower input: only the items whose lowering gorge's own runner
@@ -17,7 +19,10 @@
 // item's self-check and each refusal or truncation) and DIR/exercised.tsv
 // (the ledger with Exercised credited); -tape-turns N,... adds each tape cut
 // at the end of turn N (id ...:tape:t<N>); -random draws the decks across sets, ignoring
-// the ledger; -dirac plays each game a dirac table holds in lockstep first and replays
+// the ledger; -pool FILE draws them from a card list alone (DIR/pool.json records
+// the pool and -pool-filter used); -decks DIR plays two different fixed deck
+// files of DIR per game, main deck only (DIR/decks.json records each deck, its
+// sha256 and whether it is playable or why not); -dirac plays each game a dirac table holds in lockstep first and replays
 // gorge's answers as the game, with DIR/dirac.jsonl saying how each went. diff compares a follower's rows with
 // gorge's stored results, never replaying gorge, and writes DIR2/verdicts.jsonl,
 // DIR2/compared.tsv and DIR2/finds/<class>/<id>/ (a repro directory per
@@ -27,7 +32,11 @@
 // ability rule-text prefixes) on DIR's items and writes the ones it can serve
 // to xitems.jsonl, the rest with their reason to xprep.jsonl beside it; play's
 // -xmage leaves the cards XMage spells differently out of the decks. sweep-plan lists the SET/CHUNK pairs of a sweep root that
-// have no .done marker (scripts/xengine-sweep.sh). adjudicate gives the
+// have no .done marker (scripts/xengine-sweep.sh). pool writes the card list
+// -pool reads for a set's manifest, optionally kept to an MTGJSON format's legal
+// cards (oracle/xengine/pools/). followers prints the follower registry
+// (oracle/xengine/follower) as TSV, one row per follower after a '#' header
+// naming the columns, for scripts/xengine-sweep.sh. adjudicate gives the
 // items one follower diverged on a three-way pattern (oraclediff.ThreeWay) from both followers' diffs, writes DIR3/findings.jsonl,
 // patterns.tsv, notes.md and a tickets/<cluster>.md draft per gorge_suspect cluster; -ledger adds the compact ledger shards. Follower output is never committed: it goes outside the
 // repository or under the gitignored .oracle-build/.
@@ -49,7 +58,7 @@ const DefaultRoot = ".oracle-build/xengine"
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|calib|xprep|adjudicate|sweep-plan [flags]")
+		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|calib|xprep|adjudicate|sweep-plan|pool|followers [flags]")
 		os.Exit(2)
 	}
 	var err error
@@ -68,8 +77,12 @@ func main() {
 		err = runAdjudicate(os.Args[2:])
 	case "sweep-plan":
 		err = runSweepPlan(os.Args[2:])
+	case "pool":
+		err = runPool(os.Args[2:])
+	case "followers":
+		err = runFollowers(os.Args[2:])
 	default:
-		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, calib, xprep, adjudicate or sweep-plan)", os.Args[1])
+		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, calib, xprep, adjudicate, sweep-plan, pool or followers)", os.Args[1])
 	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "xengine:", err)

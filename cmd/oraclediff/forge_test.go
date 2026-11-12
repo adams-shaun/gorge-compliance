@@ -315,3 +315,44 @@ func TestForgeDiffCacheDir(t *testing.T) {
 		t.Errorf("explicit -cache = %q", got)
 	}
 }
+
+// TestFollowerDiffIsForgeDiff: forge-diff is follower-diff -engine forge, byte
+// for byte, and follower-diff refuses a follower whose items are not Forge
+// requests.
+func TestFollowerDiffIsForgeDiff(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	cardsDir, err := filepath.Abs(filepath.Join("..", "..", ".cards"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, reqPath := exportFixture(t, reg)
+	reqs := decodeRequests(t, bytes.Join(readLinesBytes(t, reqPath), []byte("\n")))
+	tmp := t.TempDir()
+	forgePath := filepath.Join(tmp, "forge.jsonl")
+	writeLines(t, forgePath, forgeRowFor(t, reg, reqs[0], nil), forgeRowFor(t, reg, reqs[1], func(x *oraclediff.XResult) {
+		x.Snapshots[1].Players[0].Life++
+	}))
+	run := func(f func([]string) error, name string, extra ...string) []byte {
+		out := filepath.Join(tmp, name+".jsonl")
+		args := append(extra, "-cards", cardsDir, "-req", reqPath, "-forge", forgePath, "-cache", filepath.Join(tmp, name+"-cache"), "-out", out)
+		if err := f(args); err != nil {
+			t.Fatalf("%s: %v", name, err)
+		}
+		b, err := os.ReadFile(out)
+		if err != nil {
+			t.Fatal(err)
+		}
+		return b
+	}
+	old := run(runForgeDiff, "forge-diff")
+	gen := run(func(a []string) error { return runFollowerDiff("follower-diff", "", a) }, "follower-diff", "-engine", "forge")
+	if !bytes.Equal(old, gen) {
+		t.Errorf("follower-diff -engine forge differs from forge-diff:\n%s\n---\n%s", gen, old)
+	}
+	for _, e := range []string{"xmage", "nosuch"} {
+		err := runFollowerDiff("follower-diff", "", []string{"-engine", e, "-req", reqPath, "-out", filepath.Join(tmp, "x.jsonl")})
+		if err == nil || !strings.Contains(err.Error(), "reads Forge requests (forge)") {
+			t.Errorf("-engine %s: err = %v, want a refusal", e, err)
+		}
+	}
+}

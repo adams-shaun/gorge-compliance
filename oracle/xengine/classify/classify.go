@@ -8,13 +8,13 @@ package classify
 import (
 	"fmt"
 	"regexp"
-	"slices"
 	"sort"
 	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	followers "github.com/adams-shaun/gorge-compliance/oracle/xengine/follower"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -116,11 +116,13 @@ func GapFinding(item lower.Lowered, c lower.Check) Finding {
 
 // Classify compares gorge's result g for item with the follower's x and
 // classes the difference. t is the tape the item was lowered from (it may be
-// nil, in which case nothing is ever an rng finding). engine is "xmage" or
-// "forge".
+// nil, in which case nothing is ever an rng finding). engine names a
+// follower in the registry (oracle/xengine/follower); its entry decides which
+// driver quirks apply. An unknown engine has none.
 func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oraclediff.XResult, engine string) Finding {
 	f := Finding{ID: item.Item.ID, Engine: engine, Step: -1}
-	if engine == "xmage" {
+	fl, _ := followers.Lookup(engine)
+	if fl.TapsWithCast {
 		x = SkipEarlyCasts(item.Item, g, x)
 	}
 	stopped := ""
@@ -132,7 +134,7 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	f.Checkpoint, f.Field, f.Gorge, f.Other = v.Checkpoint, v.Field, v.Gorge, v.XMage
 	f.Step = stepOf(v.Checkpoint)
 
-	if engine == "forge" {
+	if fl.SkipsDamageStep {
 		if i := skippedDamageStep(item, g, x); i > 0 {
 			f.Class, f.Checkpoint, f.Field = ClassForgeSkipsDamageStep, g.Snapshots[i].Checkpoint, "step"
 			f.Gorge, f.Other, f.Step = g.Snapshots[i].Step, x.Snapshots[i].Step, stepOf(g.Snapshots[i].Checkpoint)
@@ -141,9 +143,9 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	}
 	switch {
 	case v.Status == oraclediff.XMageLacks ||
-		(v.Status == oraclediff.Harness && engine == "xmage" && xmageLacks(v.Msg, t)):
+		(v.Status == oraclediff.Harness && lacksCard(engine, v.Msg, t)):
 		f.Class, f.Msg = ClassXMageLacks, v.Msg
-	case v.Status == oraclediff.Harness && engine == "forge" && strings.Contains(item.Item.ID, ":tape") && strings.Contains(v.Msg, turnCapMsg):
+	case v.Status == oraclediff.Harness && fl.TurnCapMsg != "" && strings.Contains(item.Item.ID, ":tape") && strings.Contains(v.Msg, fl.TurnCapMsg):
 		f.Class, f.Msg = ClassTurnCap, v.Msg
 	case v.Status == oraclediff.Harness:
 		who := v.Engine
@@ -151,21 +153,21 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 			who = engine // CompareOpts names the follower "xmage" whichever it is
 		}
 		f.Class, f.Msg = ClassHarness, who+": "+v.Msg
-	case (x.StrictMiss != "" || x.Leftover != "") && !trailingMiss(x, len(item.Item.Steps), engine):
+	case (x.StrictMiss != "" || x.Leftover != "") && !trailingMiss(x, len(item.Item.Steps), fl):
 		f.Class = ClassDecisionShape
 		f.Msg = strings.TrimSpace("strict_miss: " + x.StrictMiss + " leftover: " + x.Leftover)
 	case v.Status == oraclediff.Agree:
 		f.Class = ClassAgree
-	case forgeStopsInCleanup(x, v, f.Step, engine):
+	case stopsInCleanup(x, v, f.Step, fl):
 		f.Class = ClassHarness
-		f.Msg = "forge: a player holds priority in the cleanup step after an end-the-turn effect"
-	case forgeIgnoresCastMode(item, v, f.Step, engine) != "":
+		f.Msg = engine + ": a player holds priority in the cleanup step after an end-the-turn effect"
+	case ignoredCastMode(item, v, f.Step, fl) != "":
 		f.Class = ClassHarness
-		f.Msg = "forge: " + forgeIgnoresCastMode(item, v, f.Step, engine)
-	case xmageSameNameTriggerOrder(item, v, f.Step, engine) != "":
+		f.Msg = engine + ": " + ignoredCastMode(item, v, f.Step, fl)
+	case sameNameTriggerOrder(item, v, f.Step, fl) != "":
 		f.Class = ClassHarness
-		f.Msg = "xmage: " + xmageSameNameTriggerOrder(item, v, f.Step, engine)
-	case paymentChoice(item, g, x, v, f.Step, engine):
+		f.Msg = engine + ": " + sameNameTriggerOrder(item, v, f.Step, fl)
+	case paymentChoice(item, g, x, v, f.Step, fl):
 		f.Class = ClassPaymentChoice
 		f.Msg = "pool split after a cast/activate whose payment was not fixed"
 	case rngField(v.Field) && (rngDrawn(item, t, f.Step) || shuffledEarlier(item, f.Step)):
@@ -222,9 +224,6 @@ func leadsToCast(steps []oraclegen.Step, i int) bool {
 	}
 	return false
 }
-
-// turnCapMsg starts the Forge driver's report of its turn cap.
-const turnCapMsg = "passed turn "
 
 // Partial is gorge's result and a harness row x, both cut to the checkpoints the
 // driver reached, when the engines already differ there: the driver stopped because
@@ -444,62 +443,53 @@ func skippedDamageStep(item lower.Lowered, g rules.OracleResult, x oraclediff.XR
 	return 0
 }
 
-// forgeStopsInCleanup reports a Forge difference at step d where Forge stands
-// in the cleanup step with a player holding priority. Time Stop and its kind
-// end the turn at once (CR 723.1) and no player receives priority in cleanup
-// unless a state-based action or a trigger needs it (CR 514.3); Forge's
+// stopsInCleanup reports a difference at step d where a StopsInCleanup
+// follower (Forge) stands in the cleanup step with a player holding priority.
+// Time Stop and its kind end the turn at once (CR 723.1) and no player
+// receives priority in cleanup unless a state-based action or a trigger needs
+// it (CR 514.3); Forge's
 // PhaseHandler.endTurnByEffect enters CLEANUP from inside the resolution, and
 // the resolution's own onStackResolved then hands out priority. Gorge goes on
 // to the next turn's first priority. The item's passes run out of step with
 // Forge from there, so nothing past it compares.
-func forgeStopsInCleanup(x oraclediff.XResult, v oraclediff.Verdict, d int, engine string) bool {
-	if engine != "forge" || v.Status != oraclediff.Diverge || d < 0 || d+1 >= len(x.Snapshots) {
+func stopsInCleanup(x oraclediff.XResult, v oraclediff.Verdict, d int, fl followers.Follower) bool {
+	if !fl.StopsInCleanup || v.Status != oraclediff.Diverge || d < 0 || d+1 >= len(x.Snapshots) {
 		return false
 	}
 	return x.Snapshots[d+1].Step == "cleanup" && (v.Field == "turn" || v.Field == "step")
 }
 
-// forgeElectedCastModes are the cast_mode values the Forge driver can act on:
-// StepMachine.spellForMode picks the plot special action, an Adventure or Omen
-// half, a modal back face or a warp cast out of Card.getAllPossibleAbilities,
-// and the optional-cost modes pay the kicker, buyback, entwine, offspring or
-// replicate they name. Any other mode (flashback, foretell, escape, ...) is
-// still cast the ordinary way, so the driver takes the card's first spell
-// ability and the difference after it is the driver's gap.
-var forgeElectedCastModes = []string{"", "optionalcost",
-	"plot", "adventure_alt", "omen_alt", "modal_spell", "warped",
-	"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined",
-	"offspring", "replicated", "multikicked"}
-
-// forgeIgnoresCastMode names, for a Forge difference at step d, the first cast
-// step at or before d whose cast_mode the driver does not follow. From that
-// cast on, Forge's game is a different one (another spell on the stack, other
+// ignoredCastMode names, for a difference at step d, the first cast step at
+// or before d whose cast_mode the follower's driver does not follow
+// (Follower.CastModes; Forge's list is in the registry). From that cast on,
+// the follower's game is a different one (another spell on the stack, other
 // mana spent, nothing plotted), so the difference is the driver's gap and not
-// a rules difference. "" for anything else.
-func forgeIgnoresCastMode(item lower.Lowered, v oraclediff.Verdict, d int, engine string) string {
-	if engine != "forge" || v.Status != oraclediff.Diverge || d < 0 {
+// a rules difference. "" for anything else, and always for a follower that
+// follows every mode.
+func ignoredCastMode(item lower.Lowered, v oraclediff.Verdict, d int, fl followers.Follower) string {
+	if fl.CastModes == nil || v.Status != oraclediff.Diverge || d < 0 {
 		return ""
 	}
 	for i, st := range item.Item.Steps {
 		if i > d {
 			break
 		}
-		if st.Op == "cast" && !slices.Contains(forgeElectedCastModes, st.CastMode) {
+		if st.Op == "cast" && !fl.FollowsCastMode(st.CastMode) {
 			return fmt.Sprintf("the driver does not follow cast_mode %q (step %d, %s)", st.CastMode, i, st.Card)
 		}
 	}
 	return ""
 }
 
-// xmageSameNameTriggerOrder names, for an XMage difference at step d, the first
-// step at or before d that orders simultaneous triggers from objects with one
-// name. XMage's driver matches a scripted trigger order by the ability's rule
-// text or its source's name, so two such triggers (two Otter tokens with
-// Prowess, one holding a counter) cannot be told apart and XMage orders them
-// itself; from there its game differs by the driver's gap, not by a rule.
-// "" for anything else.
-func xmageSameNameTriggerOrder(item lower.Lowered, v oraclediff.Verdict, d int, engine string) string {
-	if engine != "xmage" || v.Status != oraclediff.Diverge || d < 0 {
+// sameNameTriggerOrder names, for a TriggerOrderByName follower's (XMage's)
+// difference at step d, the first step at or before d that orders
+// simultaneous triggers from objects with one name. XMage's driver matches a
+// scripted trigger order by the ability's rule text or its source's name, so
+// two such triggers (two Otter tokens with Prowess, one holding a counter)
+// cannot be told apart and XMage orders them itself; from there its game
+// differs by the driver's gap, not by a rule. "" for anything else.
+func sameNameTriggerOrder(item lower.Lowered, v oraclediff.Verdict, d int, fl followers.Follower) string {
+	if !fl.TriggerOrderByName || v.Status != oraclediff.Diverge || d < 0 {
 		return ""
 	}
 	for i, st := range item.Item.Steps {
@@ -541,13 +531,13 @@ func xmageSameNameTriggerOrder(item lower.Lowered, v oraclediff.Verdict, d int, 
 // number of units as gorge's. Mana on the opponent's seat, or mana appearing or
 // vanishing, is a real pool difference (a production or timing bug), never a
 // choice.
-func paymentChoice(item lower.Lowered, g rules.OracleResult, x oraclediff.XResult, v oraclediff.Verdict, step int, engine string) bool {
+func paymentChoice(item lower.Lowered, g rules.OracleResult, x oraclediff.XResult, v oraclediff.Verdict, step int, fl followers.Follower) bool {
 	if v.Status != oraclediff.Diverge || !strings.HasSuffix(v.Field, ".pool") || step < 0 {
 		return false
 	}
-	seat, ok := paymentStep(item, g, step, engine)
+	seat, ok := paymentStep(item, g, step, fl)
 	if !ok {
-		seat, ok = paymentStep(item, g, step-1, engine)
+		seat, ok = paymentStep(item, g, step-1, fl)
 	}
 	if !ok {
 		return false
@@ -571,9 +561,9 @@ func paymentChoice(item lower.Lowered, g rules.OracleResult, x oraclediff.XResul
 // no colour was chosen, so a pool difference there is a real one. The payment
 // step's starting pool must also hold two or more colours; a one-colour pool
 // fixed no choice, so a follower's pool difference there is a real one too.
-// engine consumesPayment reports whether that driver applies the recorded
+// Follower.ConsumesPayment reports whether that driver applies the recorded
 // multiset; when it does, a pool difference is real, not a choice.
-func paymentStep(item lower.Lowered, g rules.OracleResult, i int, engine string) (seat int, ok bool) {
+func paymentStep(item lower.Lowered, g rules.OracleResult, i int, fl followers.Follower) (seat int, ok bool) {
 	if i < 0 || i >= len(item.Item.Steps) {
 		return 0, false
 	}
@@ -585,7 +575,11 @@ func paymentStep(item lower.Lowered, g rules.OracleResult, i int, engine string)
 	if i >= len(item.Item.Payment) || item.Item.Payment[i] == "" {
 		return 0, false
 	}
-	if consumesPayment(engine) {
+	// TODO(H1 audit): the registry says only XMage consumes a payment, which
+	// is what this code assumed before H1. The audit found the Forge driver
+	// reads item.payment too; flipping Forge's ConsumesPayment is a behaviour
+	// change left for after H1.
+	if fl.ConsumesPayment {
 		return 0, false
 	}
 	seat = item.Item.Steps[i].Seat
@@ -625,29 +619,23 @@ func distinctColours(pool string) int {
 	return n
 }
 
-// consumesPayment is the driver capability, not a class of difference: XMage
-// queues the recorded multiset as its manual payment (ScenarioReplay.beginPayment).
-// The Forge bridge is outside this repository and does not read Item.Payment
-// yet, so only XMage consumes one.
-func consumesPayment(engine string) bool { return engine == "xmage" }
-
 // missStep matches the step of the only two strict misses Forge poses past the
 // item's last step: "Missing cleanup discard answer at step 12: ..." and
 // "Missing yesno answer at step 6: optional trigger ...". Any other kind
 // (order, surveil, target, mode, ...) is a real shape finding wherever it sits.
 var missStep = regexp.MustCompile(`^Missing (?:cleanup discard answer at step (\d+)|yesno answer at step (\d+): optional trigger)`)
 
-// trailingMiss reports a Forge strict miss that is only a question Forge poses
-// after the item's last step and nothing else: a cleanup discard when the hand
-// is over seven, or an optional trigger's yes/no once the last pass lets the
+// trailingMiss reports a TrailingMisses follower's (Forge's) strict miss that
+// is only a question Forge poses after the item's last step and nothing else:
+// a cleanup discard when the hand is over seven, or an optional trigger's yes/no once the last pass lets the
 // trigger resolve. Forge asks it inside that last pass, while gorge stops at
 // the pass with the same decision pending and unlogged, so no checkpoint
 // observes it and it says nothing about decision shape. The comparison of
 // every snapshot then decides the class. A leftover (gorge answered something
 // Forge never asked) is a real shape difference, so it is never trailing, and
 // a miss at any step the item scripts, or of any other kind, is not either.
-func trailingMiss(x oraclediff.XResult, steps int, engine string) bool {
-	if engine != "forge" || x.Leftover != "" || x.StrictMiss == "" {
+func trailingMiss(x oraclediff.XResult, steps int, fl followers.Follower) bool {
+	if !fl.TrailingMisses || x.Leftover != "" || x.StrictMiss == "" {
 		return false
 	}
 	m := missStep.FindStringSubmatch(x.StrictMiss)
@@ -685,15 +673,15 @@ func stepOf(cp string) int {
 	return i
 }
 
-// xmageLacks reports an XMage database miss of any card the tape's decks
-// hold (the item has no single scenario card).
-func xmageLacks(msg string, t *game.Tape) bool {
+// lacksCard reports engine's database miss (Follower.LacksCardMsg) of any card
+// the tape's decks hold (the item has no single scenario card).
+func lacksCard(engine, msg string, t *game.Tape) bool {
 	if t == nil {
 		return false
 	}
 	for _, d := range t.Decks {
 		for _, n := range d.Cards {
-			if oraclediff.XMageLacksCard(msg, n) {
+			if oraclediff.LacksCard(engine, msg, n) {
 				return true
 			}
 		}

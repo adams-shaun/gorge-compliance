@@ -15,6 +15,13 @@ import (
 // them and is still read. A reader rejects any other format.
 const TapeFormat = "xengine-tape-2"
 
+// GameFormatCommander is Tape.GameFormat of a Commander game.
+const GameFormatCommander = "commander"
+
+// CommanderStartingLife is each seat's opening life in a 1v1 Commander game
+// (CR 903.7).
+const CommanderStartingLife int32 = 40
+
 // TapeFormat1 is the previous format, accepted by ReadTape.
 const TapeFormat1 = "xengine-tape-1"
 
@@ -22,10 +29,12 @@ const TapeFormat1 = "xengine-tape-1"
 // zones), every committed decision, and the outcome. Play produces it; the
 // same (pair, seed) produces byte-identical JSON.
 type Tape struct {
-	Format string  `json:"format"`
-	Set    string  `json:"set,omitempty"`
-	Seed   uint64  `json:"seed"`
-	Decks  [2]Deck `json:"decks"`
+	Format string `json:"format"`
+	// GameFormat is "commander" for a Commander game, "" for a constructed one.
+	GameFormat string  `json:"game_format,omitempty"`
+	Set        string  `json:"set,omitempty"`
+	Seed       uint64  `json:"seed"`
+	Decks      [2]Deck `json:"decks"`
 	// Starter is the starting player: the active seat of turn 1.
 	Starter int        `json:"starter"`
 	Open    [2]Opening `json:"opening"`
@@ -37,17 +46,21 @@ type Tape struct {
 	Outcome     Outcome   `json:"outcome"`
 }
 
-// Deck is one seat's 40-card list as played.
+// Deck is one seat's list as played: 40 cards from decks.Pair, 100 for a
+// Commander deck, or a fixed deck's main deck under play -decks.
 type Deck struct {
-	Name    string   `json:"name"`
-	Colours string   `json:"colours,omitempty"`
-	Cards   []string `json:"cards"`
+	Name      string   `json:"name"`
+	Colours   string   `json:"colours,omitempty"`
+	Cards     []string `json:"cards"`
+	Commander string   `json:"commander,omitempty"`
 }
 
-// Opening is one seat's hand and library as the first decision found them:
-// the hand in zone order and the whole library top first.
+// Opening is one seat's hand, command zone and library as the first decision
+// found them: the hand and command zone in zone order and the whole library
+// top first.
 type Opening struct {
 	Hand    []string `json:"hand"`
+	Command []string `json:"command,omitempty"`
 	Library []string `json:"library"`
 }
 

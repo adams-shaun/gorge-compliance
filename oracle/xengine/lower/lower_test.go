@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
+	"slices"
 	"sort"
 	"strings"
 	"testing"
@@ -907,4 +908,95 @@ func TestLowerCastModes(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestColourPicksToken(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	for _, c := range []struct {
+		name, produced string
+		want           []string
+	}{
+		{"Treasure Token", "R", []string{"R"}},
+		{"Gold Token", "B", []string{"B"}},
+		{"Treasure Token", "", nil}, // live colour unknown
+		{"No Such Token", "R", nil}, // unknown source
+		{"Clue Token", "C", nil},    // no mana ability at index 0
+	} {
+		if got := colourPicks(reg, game.ManaRec{Name: c.name, Ability: 0, Produced: c.produced}); !reflect.DeepEqual(got, c.want) {
+			t.Errorf("colourPicks(%s, %q) = %v, want %v", c.name, c.produced, got, c.want)
+		}
+	}
+	// An ability index the token lacks, and a granted ability (-1), ask nothing.
+	if got := colourPicks(reg, game.ManaRec{Name: "Treasure Token", Ability: 1, Produced: "R"}); got != nil {
+		t.Errorf("colourPicks(Treasure Token ability 1) = %v, want nil", got)
+	}
+	if got := colourPicks(reg, game.ManaRec{Name: "Treasure Token", Ability: -1, Produced: "R"}); got != nil {
+		t.Errorf("colourPicks(granted ability) = %v, want nil", got)
+	}
+}
+
+// TestLowerTreasureTapColour plays a red/black pool that makes Treasure
+// tokens, lowers each game, and checks every Treasure tap step carries the
+// live colour and no cast fails as "not offered".
+func TestLowerTreasureTapColour(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	names := []string{"Wild Ride", "Burst Lightning", "Stingerquill Charm", "Pompous Battlemage",
+		"The Sackville-Bagginses", "Blazemire Verge", "Lobelia Sackville-Baggins", "Grizzly Bears",
+		"Lightning Bolt", "Shock", "Monastery Swiftspear", "Goblin Guide", "Gutterbones", "Bloodghast",
+		"Vampire Nighthawk", "Doom Blade", "Go for the Throat", "Kolaghan's Command", "Terminate",
+		"Bonecrusher Giant", "Rakdos Charm", "Murderous Rider", "Dread Return", "Fatal Push", "Cut Down",
+		"Thoughtseize", "Inquisition of Kozilek", "Ragavan, Nimble Pilferer", "Goblin Chainwhirler",
+		"Fireblast", "Mountain", "Swamp"}
+	cands, _ := decks.CandidatesNamed(reg, names, decks.Options{})
+	const seed = 11
+	taps := 0
+	for g := 0; g < 24; g++ {
+		tp, err := game.Play(reg, decks.Pair(cands, cov.New(), "DSK", 0, g, seed), uint64(seed*1_000_003+g), game.Options{Set: "DSK"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		l, err := Tape(reg, tp)
+		if err != nil {
+			t.Fatal(err)
+		}
+		// The live Produced colour of each Treasure tap, in tape order.
+		var live []string
+		for _, e := range tp.Entries {
+			for _, mr := range e.Mana {
+				if mr.Name == "Treasure Token" {
+					live = append(live, mr.Produced)
+				}
+			}
+		}
+		var got []string
+		for i, st := range l.Item.Steps {
+			if st.Op != "activate" || !strings.Contains(st.Card, ":token:Treasure Token") || l.StepEntry[i] >= 0 {
+				continue
+			}
+			taps++
+			pick := ""
+			for _, a := range st.Answers {
+				if a.Kind == "choose" && len(a.Pick) == 1 && len(a.Pick[0]) == 1 {
+					pick = a.Pick[0]
+				}
+			}
+			if pick == "" {
+				t.Errorf("game %d step %d: Treasure tap has no colour answer: %+v", g, i, st.Answers)
+			}
+			got = append(got, pick)
+		}
+		// Every lowered tap's colour is a colour the live game made.
+		for _, p := range got {
+			if !slices.Contains(live, p) {
+				t.Errorf("game %d: tap picks %q, live Treasure colours %v", g, p, live)
+			}
+		}
+		if c := SelfCheck(reg, l, tp); c.Status != StatusOK && strings.Contains(c.Gorge, "(cast)") && strings.Contains(c.Gorge, "not offered") {
+			t.Errorf("game %d: cast not offered at step %d: %s", g, c.Step, c.Gorge)
+		}
+	}
+	if taps == 0 {
+		t.Fatal("no Treasure tap in 24 games: nothing was checked")
+	}
+	t.Logf("%d Treasure taps checked", taps)
 }

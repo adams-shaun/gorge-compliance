@@ -10,3 +10,4 @@ since moved. For what exists today, read [the oracles](../oracles.md) and the co
 | [2026-10-05](2026-10-05-compliance-level-b.md) | Level B: one scenario per ability, trigger, static and combat action |
 | [2026-10-10](2026-10-10-xmage-scenario-port-design.md) | Translating XMage's Mage.Tests into gorge scenarios |
 | [2026-10-20](2026-10-20-mtgish-crosscheck.md) | The mtgish card-definition cross-check |
+| [2026-11-10](2026-11-10-phase-manabrew-followers.md) | phase.rs and Manabrew as xengine followers (design; audits in [2026-11-10-followers/](2026-11-10-followers/)) |

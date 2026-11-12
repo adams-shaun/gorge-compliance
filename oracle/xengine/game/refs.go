@@ -27,7 +27,8 @@ func objName(o *state.Object) string {
 	return o.Face().Name
 }
 
-// newRefBinder binds every card in a seat's hand and library, in setup order.
+// newRefBinder binds every card in a seat's hand, command zone and library, in
+// setup order (the runner deals hand, command, library_top).
 func newRefBinder(e *rules.Engine) *refBinder {
 	b := &refBinder{bound: map[state.ObjID]string{}}
 	for i := range e.G.Players {
@@ -45,6 +46,7 @@ func newRefBinder(e *rules.Engine) *refBinder {
 			}
 		}
 		place(e.G.Zone(state.ZHand, p))
+		place(e.G.Zone(state.ZCommand, p))
 		place(e.G.Zone(state.ZLibrary, p))
 	}
 	return b
