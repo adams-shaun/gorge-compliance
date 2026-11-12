@@ -23,12 +23,15 @@ func TestCommanderDecksFilter(t *testing.T) {
 		files = append(files, decks.CommanderFile{Stem: s, File: f})
 	}
 	ds, skips := decks.CommanderDecks(reg, files)
-	if len(ds) != 2 {
-		t.Fatalf("kept %d decks, want 2 (skips %v)", len(ds), skips)
+	if len(ds) != 3 {
+		t.Fatalf("kept %d decks, want 3 (skips %v)", len(ds), skips)
 	}
+	// Incinerate is supported, so reign-of-dragons is kept; no repo deck is
+	// skipped as unsupported now.
 	want := []struct{ name, colours, cmdr string }{
 		{"foundations-tramplesaurus-rex", "G", "Ghalta, Primal Hunger"},
 		{"foundations-wretched-ranks", "B", "Ghoulcaller Gisa"},
+		{"foundations-reign-of-dragons", "R", "Lathliss, Dragon Queen"},
 	}
 	for i, w := range want {
 		d := ds[i]
@@ -40,7 +43,6 @@ func TestCommanderDecksFilter(t *testing.T) {
 		}
 	}
 	wantSkips := []decks.Skip{
-		{Card: "foundations-reign-of-dragons", Reason: "unsupported [Incinerate]"},
 		{Card: "mono-red-goblins", Reason: decks.SkipNotCommander},
 	}
 	if !reflect.DeepEqual(skips, wantSkips) {
