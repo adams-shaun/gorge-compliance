@@ -102,6 +102,13 @@ var forgeCastModes = []string{"", "optionalcost",
 	"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined",
 	"offspring", "replicated", "multikicked"}
 
+// phaseCastModes are the cast_mode values the phase.rs driver acts on: exactly the modes its
+// answerer maps (CAST_MODES in steps.rs), the same set the Forge driver follows.
+var phaseCastModes = []string{"", "optionalcost",
+	"plot", "adventure_alt", "omen_alt", "modal_spell", "warped",
+	"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined",
+	"offspring", "replicated", "multikicked"}
+
 // registry holds the followers in the order usage text lists them.
 var registry = []Follower{
 	{
@@ -146,8 +153,10 @@ var registry = []Follower{
 		StampsEngine: true,
 		// The driver spends payment[i] units from the pool first.
 		ConsumesPayment: true,
-		// Ordinary casts only until a later ticket maps cast modes.
-		CastModes: []string{""},
+		// The cast modes the answerer maps (followers/phase/phase-follower/src/steps.rs
+		// CAST_MODES): they steer the prompts a cast raises (optional costs, casting
+		// variants, faces, alternative costs). Any other mode is cast the ordinary way.
+		CastModes: phaseCastModes,
 		// The harness text emitted when a card is missing at run time.
 		LacksCardMsg: "phase lacks card: ",
 		// A Rust binary: the heavy lock alone.

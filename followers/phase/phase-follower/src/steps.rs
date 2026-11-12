@@ -86,6 +86,14 @@ fn parse_mana(text: &str) -> Result<Vec<ManaType>, Stop> {
     Ok(out)
 }
 
+/// The `cast_mode` values the answerer acts on, exactly the registry's `CastModes` for phase
+/// (oracle/xengine/follower/follower.go). The mode only steers the prompts a cast raises
+/// (optional costs, casting variants, faces, alternative costs); any other mode is a harness row.
+pub const CAST_MODES: [&str; 16] = [
+    "", "optionalcost", "plot", "adventure_alt", "omen_alt", "modal_spell", "warped", "kicked", "kicked1", "kicked2",
+    "kickedboth", "buyback", "entwined", "offspring", "replicated", "multikicked",
+];
+
 /// What the machine does at a priority window while driving a step.
 enum Prio {
     Done,
@@ -102,6 +110,10 @@ struct Machine<'a> {
     step: usize,
     last: bool,
     debug_noted: bool,
+    /// Indices of the mode decisions the answerer has taken (the key of `neutral.mode`).
+    used: std::collections::BTreeSet<usize>,
+    /// Stack entries whose chosen targets have been matched against gorge's target decisions.
+    swept: std::collections::BTreeSet<ObjectId>,
 }
 
 /// Replay every step of `req` on `board`, pushing one snapshot per step to `rb`.
@@ -114,6 +126,8 @@ pub fn run(req: &Request, board: Board, rb: &mut RowBuilder) -> Result<(), Stop>
         step: 0,
         last: false,
         debug_noted: false,
+        used: std::collections::BTreeSet::new(),
+        swept: std::collections::BTreeSet::new(),
     };
     let n = req.item.steps.len();
     for (i, step) in req.item.steps.iter().enumerate() {
@@ -281,7 +295,7 @@ impl Machine<'_> {
 
     fn cast(&mut self, step: &Step, seat: u8, rb: &mut RowBuilder) -> Result<(), Stop> {
         let i = self.step;
-        if !step.cast_mode.is_empty() {
+        if !CAST_MODES.contains(&step.cast_mode.as_str()) {
             return Err(harness(format!("cast_mode {} unsupported", step.cast_mode)));
         }
         self.need_priority(seat)?;
@@ -413,6 +427,8 @@ impl Machine<'_> {
     /// payment go to the answerer.
     fn drive(&mut self, rb: &mut RowBuilder, on_priority: impl Fn(&GameState) -> Prio) -> Result<(), Stop> {
         loop {
+            // phase targets a sole legal target without asking: account for gorge's decision.
+            crate::answer::sweep_stack_targets(&self.board, &mut self.queue, self.step, &mut self.swept);
             let wf = self.state().waiting_for.clone();
             match &wf {
                 WaitingFor::GameOver { .. } => {
@@ -427,7 +443,16 @@ impl Machine<'_> {
                 },
                 WaitingFor::ManaPayment { player, .. } => self.pay(*player)?,
                 other => {
-                    let mut cur = Cursor { queue: &mut self.queue, step: self.step, notes: Vec::new() };
+                    let cast_mode = self.req.item.steps.get(self.step).map(|s| s.cast_mode.as_str()).unwrap_or("");
+                    let mut cur = Cursor {
+                        queue: &mut self.queue,
+                        board: &self.board,
+                        req: self.req,
+                        used: &mut self.used,
+                        step: self.step,
+                        cast_mode,
+                        notes: Vec::new(),
+                    };
                     let a = answer(&self.board.state, other, &mut cur);
                     rb.notes.extend(cur.notes);
                     self.act(a?.action, &variant_name(other))?;
