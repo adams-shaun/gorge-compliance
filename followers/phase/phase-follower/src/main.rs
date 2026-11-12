@@ -3,9 +3,9 @@
 //! Modes so far: `--version` prints `phase-follower <engine sha12>+<card-data hash16>`;
 //! `--card-data FILE --count` loads the card database and prints its face count;
 //! `--preflight NAMES|- --card-data FILE` prints `NAME<TAB>REASON` for each card phase lacks (NAMES
-//! `-` is stdin); `scenarios IN OUT --card-data FILE` replays a JSONL batch (one row per line; for
-//! now every row is a harness row, `setup not implemented`). Every other mode exits 2 with
-//! `not implemented`.
+//! `-` is stdin); `scenarios IN OUT --card-data FILE` replays a JSONL batch (one row per line): it builds the
+//! board of `item.setup`, takes the `setup` snapshot and, when the item has steps, stops with a
+//! harness row (`steps not implemented`). Every other mode exits 2 with `not implemented`.
 //!
 //! Later stages replay requests against the engine. Two runtime rules apply to all of them: the
 //! engine assumes deep recursion, so every run sets `RUST_MIN_STACK=16777216` and engine work runs
@@ -18,6 +18,7 @@ use engine::database::card_db::CardDatabase;
 use follower_proto::{run_batch, BatchConfig, BatchStats, Stop};
 
 mod names;
+mod setup;
 mod snapshot;
 mod support;
 
@@ -54,8 +55,8 @@ fn preflight(names: &str, card_data: &str) -> Result<(), String> {
         .map_err(|e| format!("preflight: {e}"))
 }
 
-/// The row message every request gets until the replay exists.
-const NOT_IMPLEMENTED: &str = "phase follower: setup not implemented";
+/// The row message of an item that has steps, until the step replay exists.
+const STEPS_NOT_IMPLEMENTED: &str = "phase follower: steps not implemented";
 
 /// The batch constants: `PHASE_REF` (`<engine sha>+<hash16>`, set by the runner) is the row's
 /// `phase_ref`.
@@ -66,6 +67,7 @@ fn batch_config(phase_ref: &str) -> BatchConfig {
 /// Replay `input` into `output`. The replay runs on a 64 MiB-stack worker thread (phase assumes at
 /// least 16 MiB), joined before returning; a panic in the replay is a row, never a crash.
 fn run_scenarios(
+    db: &CardDatabase,
     input: impl BufRead + Send,
     output: impl io::Write + Send,
     cfg: &BatchConfig,
@@ -74,7 +76,14 @@ fn run_scenarios(
         std::thread::Builder::new()
             .stack_size(64 << 20)
             .spawn_scoped(s, || {
-                run_batch(input, output, cfg, |_req, _rb| Err(Stop::Harness(NOT_IMPLEMENTED.to_string())))
+                run_batch(input, output, cfg, |req, rb| {
+                    setup::run(db, req, rb)?;
+                    if req.item.steps.is_empty() {
+                        Ok(())
+                    } else {
+                        Err(Stop::Harness(STEPS_NOT_IMPLEMENTED.to_string()))
+                    }
+                })
             })?
             .join()
             .map_err(|_| io::Error::new(io::ErrorKind::Other, "replay thread panicked"))?
@@ -83,14 +92,13 @@ fn run_scenarios(
 
 /// `scenarios IN OUT --card-data FILE`: one row per input line.
 fn scenarios(input: &str, output: &str, card_data: &str) -> Result<(), String> {
-    // The card data must load even though the replay does not use it yet: a bad file is a setup
-    // error (exit 1), not a batch of identical rows.
-    let _db = load_db(card_data)?;
+    // A bad card-data file is a setup error (exit 1), not a batch of identical rows.
+    let db = load_db(card_data)?;
     let phase_ref = std::env::var("PHASE_REF").map_err(|_| "PHASE_REF is not set".to_string())?;
     let cfg = batch_config(&phase_ref);
     let reader = io::BufReader::new(std::fs::File::open(input).map_err(|e| format!("cannot read {input}: {e}"))?);
     let writer = io::BufWriter::new(std::fs::File::create(output).map_err(|e| format!("cannot write {output}: {e}"))?);
-    let stats = run_scenarios(reader, writer, &cfg).map_err(|e| format!("scenarios: {e}"))?;
+    let stats = run_scenarios(&db, reader, writer, &cfg).map_err(|e| format!("scenarios: {e}"))?;
     eprintln!("phase-follower: {} rows, {} harness", stats.rows, stats.harness);
     Ok(())
 }
@@ -216,9 +224,9 @@ mod tests {
 
     #[test]
     fn batch_every_line_gets_a_phase_row() {
-        let input = "{\"id\":\"a\",\"item\":{\"id\":\"a\",\"card\":\"Llanowar Elves\",\"name\":\"n\"}}\nnot json\n";
+        let input = "{\"id\":\"a\",\"item\":{\"id\":\"a\",\"card\":\"Llanowar Elves\",\"name\":\"n\",\"steps\":[{\"op\":\"pass\"}]}}\nnot json\n";
         let mut out = Vec::new();
-        let stats = run_scenarios(input.as_bytes(), &mut out, &batch_config("abc+0123456789abcdef")).unwrap();
+        let stats = run_scenarios(db(), input.as_bytes(), &mut out, &batch_config("abc+0123456789abcdef")).unwrap();
         assert_eq!((stats.rows, stats.harness), (2, 2));
         let text = String::from_utf8(out).unwrap();
         let rows: Vec<serde_json::Value> = text.lines().map(|l| serde_json::from_str(l).unwrap()).collect();
@@ -228,7 +236,9 @@ mod tests {
             assert_eq!(r["phase_ref"], "abc+0123456789abcdef");
         }
         assert_eq!(rows[0]["id"], "a");
-        assert_eq!(rows[0]["harness"], "harness: phase follower: setup not implemented");
+        assert_eq!(rows[0]["harness"], "harness: phase follower: steps not implemented");
+        // The setup snapshot is kept when the steps stop the replay.
+        assert_eq!(rows[0]["snapshots"][0]["checkpoint"], "setup");
         assert!(rows[1]["harness"].as_str().unwrap().starts_with("harness: malformed request line"));
     }
 
