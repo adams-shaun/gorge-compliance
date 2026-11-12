@@ -155,10 +155,14 @@ func TestPhaseEntry(t *testing.T) {
 		}
 	}
 	// The modes the answerer maps (CAST_MODES in followers/phase/phase-follower/src/steps.rs).
-	wantModes := []string{"", "optionalcost", "plot", "adventure_alt", "omen_alt", "modal_spell", "warped",
+	wantModes := []string{"", "optionalcost", "adventure_alt", "omen_alt", "modal_spell", "warped",
 		"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined", "offspring", "replicated", "multikicked"}
 	if !slices.Equal(p.CastModes, wantModes) {
 		t.Errorf("phase cast modes = %q, want %q", p.CastModes, wantModes)
+	}
+	// plot is gorge's special action, not phase's cast-from-exile variant: not followed.
+	if p.FollowsCastMode("plot") {
+		t.Errorf("phase must not follow cast_mode plot")
 	}
 	for _, m := range wantModes {
 		if !p.FollowsCastMode(m) {

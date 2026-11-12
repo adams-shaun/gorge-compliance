@@ -24,7 +24,7 @@ use engine::ai_support::AiDecisionContract;
 use engine::types::ability::{AdditionalCost, TargetRef};
 use engine::types::actions::{AlternativeCastDecision, GameAction, UnlessCostBranch};
 use engine::types::game_state::{
-    AlternativeCastKeyword, CastingVariant, GameState, ManaChoice, ManaChoicePrompt, TargetSelectionSlot, WaitingFor,
+    AlternativeCastKeyword, CastOfferKind, CastingVariant, GameState, ManaChoice, ManaChoicePrompt, TargetSelectionSlot, WaitingFor,
 };
 use engine::types::identifiers::ObjectId;
 use engine::types::mana::ManaType;
@@ -54,6 +54,10 @@ pub struct Cursor<'a> {
     /// The step's `cast_mode` ("" for any step that is not a cast).
     pub cast_mode: &'a str,
     pub notes: Vec<String>,
+    /// Set when an arm acted on `cast_mode` (paid the cost, chose the variant, face or mode it
+    /// names). A non-empty mode no arm honoured is a harness row: the spell was cast the ordinary
+    /// way and the difference would be misread as a rules difference.
+    pub honoured: bool,
 }
 
 /// The action to apply to answer a prompt.
@@ -154,8 +158,20 @@ pub(crate) fn target_of(board: &Board, r: &Ref) -> Option<TargetRef> {
 /// entry not yet seen, the refs of this step's target decisions that name what the entry actually
 /// targets are consumed, so the decision is not reported as unconsumed. A decision naming some
 /// other target stays and is reported. Returns the number of refs consumed.
-pub fn sweep_stack_targets(board: &Board, queue: &mut DecisionQueue, step: usize, seen: &mut BTreeSet<ObjectId>) -> usize {
+///
+/// An entry whose every target the answerer itself chose through a prompt (`answered`) is not
+/// swept: its decisions were consumed by that prompt, and taking more would starve a later
+/// decision naming the same object (a spell and its cast trigger on one creature). `answered` is
+/// cleared once such an entry is seen.
+pub fn sweep_stack_targets(
+    board: &Board,
+    queue: &mut DecisionQueue,
+    step: usize,
+    seen: &mut BTreeSet<ObjectId>,
+    answered: &mut Vec<TargetRef>,
+) -> usize {
     let mut taken = 0;
+    let mut prompted = false;
     for entry in board.state.stack.iter() {
         if seen.contains(&entry.id) {
             continue;
@@ -167,10 +183,33 @@ pub fn sweep_stack_targets(board: &Board, queue: &mut DecisionQueue, step: usize
             continue;
         }
         seen.insert(entry.id);
+        if chosen.iter().all(|t| answered.contains(t)) {
+            prompted = true;
+            continue;
+        }
         let got = queue.take_target_refs(step as i32, chosen.len(), |r| target_of(board, r).is_some_and(|t| chosen.contains(&t)));
         taken += got.len();
     }
+    if prompted {
+        answered.clear();
+    }
     taken
+}
+
+/// The targets an answer to the target prompt `wf` chose.
+pub fn answered_targets(wf: &WaitingFor, action: &GameAction) -> Vec<TargetRef> {
+    match (wf, action) {
+        (WaitingFor::TargetSelection { .. } | WaitingFor::TriggerTargetSelection { .. }, GameAction::ChooseTarget { target }) => {
+            target.iter().cloned().collect()
+        }
+        (WaitingFor::TargetSelection { .. } | WaitingFor::TriggerTargetSelection { .. }, GameAction::SelectTargets { targets }) => {
+            targets.clone()
+        }
+        (WaitingFor::MultiTargetSelection { .. }, GameAction::SelectCards { cards }) => {
+            cards.iter().map(|id| TargetRef::Object(*id)).collect()
+        }
+        _ => Vec::new(),
+    }
 }
 
 /// Every target the ability and its chain of sub-abilities hold.
@@ -391,7 +430,6 @@ fn wanted_variant(mode: &str) -> Option<CastingVariant> {
         "adventure_alt" => Some(CastingVariant::Adventure),
         "omen_alt" => Some(CastingVariant::Omen),
         "warped" => Some(CastingVariant::Warp),
-        "plot" => Some(CastingVariant::Plot),
         _ => None,
     }
 }
@@ -430,6 +468,14 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
             multi_target(wf, legal_targets, *min_targets, *max_targets, cur)
         }
 
+        // CR 715.3a: an Adventure-family card cast from hand asks which face. The spell half is
+        // the `adventure_alt` / `omen_alt` modes; any other mode casts the creature face.
+        WaitingFor::CastOffer { kind: CastOfferKind::Adventure { .. }, .. } => {
+            let spell_half = matches!(cur.cast_mode, "adventure_alt" | "omen_alt");
+            cur.honoured |= spell_half;
+            offered(state, wf, GameAction::ChooseAdventureFace { creature: !spell_half }, cur)
+        }
+
         // Modes.
         WaitingFor::ModeChoice { modal, .. } | WaitingFor::AbilityModeChoice { modal, .. } => {
             let chosen = modes(wf, &modal.mode_descriptions, cur)?;
@@ -437,6 +483,8 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
                 if indices.len() < modal.min_choices || indices.len() > modal.max_choices || indices.iter().any(|i| *i >= modal.mode_count) {
                     Err(miss(wf, cur, &format!("gorge chose {} mode(s), phase wants {}..={}", indices.len(), modal.min_choices, modal.max_choices)))
                 } else {
+                    // phase charges entwine when every mode is chosen (CR 702.42).
+                    cur.honoured |= cur.cast_mode == "entwined" && indices.len() == modal.mode_count && modal.mode_count > 1;
                     ok(GameAction::SelectModes { indices })
                 }
             });
@@ -512,9 +560,11 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
             if pay && matches!(cur.cast_mode, "multikicked" | "replicated") {
                 cur.notes.push(format!("cast_mode {} paid once at step {}", cur.cast_mode, cur.step));
             }
+            cur.honoured |= pay;
             offered(state, wf, GameAction::DecideOptionalCost { pay }, cur)
         }
         WaitingFor::DefilerPayment { .. } => {
+            cur.honoured |= cur.cast_mode == "optionalcost";
             offered(state, wf, GameAction::DecideOptionalCost { pay: cur.cast_mode == "optionalcost" }, cur)
         }
 
@@ -525,16 +575,21 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
             };
             let found: Vec<usize> = (0..options.len()).filter(|i| options[*i].variant == want).collect();
             match found.as_slice() {
-                [index] => offered(state, wf, GameAction::ChooseCastingVariant { index: *index }, cur),
+                [index] => {
+                    cur.honoured |= want != CastingVariant::Normal;
+                    offered(state, wf, GameAction::ChooseCastingVariant { index: *index }, cur)
+                }
                 _ => Err(miss(wf, cur, &format!("cast_mode {:?} matches {} variant option(s)", cur.cast_mode, found.len()))),
             }
         }
         WaitingFor::ModalFaceChoice { .. } => {
+            cur.honoured |= cur.cast_mode == "modal_spell";
             offered(state, wf, GameAction::ChooseModalFace { back_face: cur.cast_mode == "modal_spell" }, cur)
         }
         WaitingFor::AlternativeCastChoice { keyword, .. } => {
             let alt = matches!((cur.cast_mode, keyword), ("warped", AlternativeCastKeyword::Warp));
             let choice = if alt { AlternativeCastDecision::Alternative } else { AlternativeCastDecision::Normal };
+            cur.honoured |= alt;
             offered(state, wf, GameAction::ChooseAlternativeCast { choice }, cur)
         }
 
@@ -1107,5 +1162,39 @@ mod tests {
         let bad = r#"{"step":0,"seat":0,"kind":"target","picks":["p1:Island"],"pick_refs":["p1:Island"],"pick_kinds":["permanent"]}"#;
         let (out, _) = go(&bolt("Lightning Strike", "1R", "", bad));
         assert_eq!(out.err(), Some(Stop::StrictMiss("Missing TargetSelection answer at step 0".to_string())));
+    }
+
+    #[test]
+    fn answer_cast_mode_not_honoured_is_harness() {
+        // A kicker the card does not have: the spell would be cast plain, so the row is the
+        // follower's (harness), never a phase rules difference.
+        let (out, _) = go(&bolt("Lightning Strike", "1R", "kicked", PLAYER_TARGET));
+        match out.err() {
+            Some(Stop::Harness(m)) => assert!(m.starts_with("phase follower: cast_mode kicked not honoured at step 0"), "{m}"),
+            other => panic!("{other:?}"),
+        }
+        // plot is gorge's special action; phase's plot variant casts an already plotted card.
+        let (out, _) = go(&bolt("Lightning Strike", "1R", "plot", PLAYER_TARGET));
+        assert_eq!(out.err(), Some(Stop::Harness("phase follower: cast_mode plot unsupported".to_string())));
+    }
+
+    #[test]
+    fn answer_adventure_alt_from_hand() {
+        // Bonecrusher Giant from hand: phase asks which face (CastOffer). adventure_alt casts Stomp.
+        let (s, rb) = last(&bolt("Bonecrusher Giant", "1R", "adventure_alt", PLAYER_TARGET));
+        assert_eq!(s.players[1].life, 18, "notes {:?}", rb.notes);
+        assert_eq!(bf(&s, 0, "Bonecrusher Giant"), 0);
+        // No mode: the creature face.
+        let (s, _) = last(&bolt("Bonecrusher Giant", "2R", "", ""));
+        assert_eq!(bf(&s, 0, "Bonecrusher Giant"), 1);
+    }
+
+    #[test]
+    fn answer_sweep_leaves_decisions_of_answered_targets() {
+        // The spell's target came from the prompt, so the sweep must not take the second target
+        // decision (a later prompt's) when the spell lands on the stack.
+        let (s, rb) = last(&bolt("Lightning Strike", "1R", "", &format!("{BEARS_TARGET},{BEARS_TARGET}")));
+        assert_eq!(bf(&s, 1, "Grizzly Bears"), 0);
+        assert!(rb.leftover.as_deref().is_some_and(|l| l.contains("target")), "{:?}", rb.leftover);
     }
 }

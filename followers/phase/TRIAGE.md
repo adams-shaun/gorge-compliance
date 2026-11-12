@@ -34,3 +34,10 @@ gorge does not log the decision.
 - `kicked1`, `kicked2`, `kickedboth`, `multikicked` and `replicated` are paid as one optional-cost
   prompt, once (the count gorge settles separately is not scriptable here); a row note records it.
   No FDN-commons item exercises them.
+- Cast modes: `plot` is not followed. gorge's `plot` is the Plot special action (the card is
+  exiled and plotted); phase's plot variant only casts a card already plotted, so a hand cast
+  cannot replay it, and a plot step is a driver gap (the follower reports `cast_mode plot
+  unsupported`). A followed mode that no prompt honoured (a kicker the card lacks, a variant phase
+  never offered) is a harness row, `cast_mode X not honoured`, not a silent plain cast.
+  `adventure_alt` and `omen_alt` from hand answer phase's `CastOffer` face prompt. No FDN-commons
+  item exercises any of these.
