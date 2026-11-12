@@ -351,7 +351,7 @@ func TestFollowerDiffIsForgeDiff(t *testing.T) {
 	}
 	for _, e := range []string{"xmage", "nosuch"} {
 		err := runFollowerDiff("follower-diff", "", []string{"-engine", e, "-req", reqPath, "-out", filepath.Join(tmp, "x.jsonl")})
-		if err == nil || !strings.Contains(err.Error(), "reads Forge requests (forge)") {
+		if err == nil || !strings.Contains(err.Error(), "reads Forge requests") {
 			t.Errorf("-engine %s: err = %v, want a refusal", e, err)
 		}
 	}

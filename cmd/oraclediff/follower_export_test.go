@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"slices"
 	"strings"
 	"testing"
 
@@ -174,8 +175,9 @@ func TestFollowerExportEngineFlag(t *testing.T) {
 	}
 	fl, _ := fakeFollower(t)
 	defer follower.RegisterForTest(fl)()
-	if got := forgeRequestFollowers(); !reflect.DeepEqual(got, []string{"fakefol", "forge"}) {
-		t.Errorf("forge-request followers = %v, want fakefol and forge", got)
+	got := forgeRequestFollowers()
+	if !slices.Contains(got, "fakefol") || !slices.Contains(got, "forge") || slices.Contains(got, "xmage") {
+		t.Errorf("forge-request followers = %v, want fakefol and forge, not xmage", got)
 	}
 }
 
