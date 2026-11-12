@@ -7,11 +7,13 @@
 //! * [`request`]: the serde types for one input line,
 //! * [`row`]: the serde types for one output row, plus the message-cap conventions,
 //! * [`batch`]: the JSONL loop (malformed lines, panics, flushing, `request_sha`),
+//! * [`decisions`]: the step-scoped decision queue over a request's `gorge_decisions`,
 //! * [`preflight`]: the `RUNNER --preflight NAMES.txt` helper,
 //! * [`refs`]: gorge's object-reference grammar and a ref-to-engine-id table,
 //! * [`vocab`]: the snapshot vocabulary helpers (steps, colours, counters, zones).
 
 pub mod batch;
+pub mod decisions;
 pub mod preflight;
 pub mod refs;
 pub mod request;
@@ -19,6 +21,7 @@ pub mod row;
 pub mod vocab;
 
 pub use batch::{run_batch, BatchConfig, BatchStats, RowBuilder, Stop};
+pub use decisions::DecisionQueue;
 pub use preflight::run_preflight;
 pub use refs::{ref_name, Ref, RefTable};
 pub use request::Request;
