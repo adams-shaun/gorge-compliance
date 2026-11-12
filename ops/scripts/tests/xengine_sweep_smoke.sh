@@ -189,7 +189,7 @@ check "repo root not created" '[ ! -e "$ROOT/.xengine-smoke-root" ]'
 
 # 5b. A follower the registry (xengine followers) does not list is refused.
 out=$(XENGINE_FOLLOWERS='forge nosuch' sweep "$TMP/run-unknown"); rc=$?
-check "unknown follower refused" '[ "$rc" = 2 ] && has "$out" "unknown follower nosuch (want one of: xmage forge phase)" && [ ! -e "$TMP/run-unknown" ]' "rc=$rc $out"
+check "unknown follower refused" '[ "$rc" = 2 ] && has "$out" "unknown follower nosuch (want one of: xmage forge phase manabrew)" && [ ! -e "$TMP/run-unknown" ]' "rc=$rc $out"
 
 # 6. A failing follower leaves no .done.
 R3=$TMP/run3
