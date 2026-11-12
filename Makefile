@@ -48,6 +48,7 @@ help:
 	@echo "  make forge-oracle-setup — build the Forge oracle driver at FORGE_ORACLE_REF out of tree (heavy)"
 	@echo "  make compliance-pass SETS='FRA BLB' — XMage compliance pass over the sets; reruns only stale verdicts"
 	@echo "  make follower-check ENGINE=phase [ARGS='--setup-only --pool F'] — level-A scenarios through one follower (scripts/follower-check.sh)"
+	@echo "  make follower-sweep-smoke ENGINE=phase [GAMES=2] — one xengine chunk with one follower, pool narrowed by its preflight (scripts/follower-sweep-smoke.sh)"
 	@echo "  make smoke          — the script smokes (stubs only; no Java, no network)"
 	@echo "  make mtgish-fetch   — download the pinned mtgish data into .mtgish/<ref>/ (gitignored) and verify its sha256"
 	@echo "  make mtgish-xc      — the mtgish card-definition cross-check: corpus report + the corpus ledger ratchet"
@@ -90,6 +91,7 @@ smoke:
 	bash ops/scripts/tests/xengine_sweep_smoke.sh
 	bash ops/scripts/tests/xengine_random_smoke.sh
 	bash ops/scripts/tests/follower_check_smoke.sh
+	bash ops/scripts/tests/follower_sweep_smoke_smoke.sh
 	bash ops/scripts/tests/test_targets_smoke.sh
 
 # xengine-sweep runs the chunked, resumable cross-engine sweep
@@ -186,3 +188,10 @@ pr:
 .PHONY: follower-check
 follower-check:
 	scripts/follower-check.sh $(ENGINE) $(ARGS)
+
+# follower-sweep-smoke runs one smoke-sized xengine chunk with one follower, the
+# pool narrowed by the follower's preflight (scripts/follower-sweep-smoke.sh):
+# ENGINE=phase [GAMES=2] [ARGS='--pool F --max-class harness=50'].
+.PHONY: follower-sweep-smoke
+follower-sweep-smoke:
+	scripts/follower-sweep-smoke.sh $(ENGINE) --games $(or $(GAMES),2) $(ARGS)
