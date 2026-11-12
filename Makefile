@@ -47,6 +47,7 @@ help:
 	@echo "  make xmage-oracle-setup — build XMage at XMAGE_REF out of tree (heavy; run alone)"
 	@echo "  make forge-oracle-setup — build the Forge oracle driver at FORGE_ORACLE_REF out of tree (heavy)"
 	@echo "  make compliance-pass SETS='FRA BLB' — XMage compliance pass over the sets; reruns only stale verdicts"
+	@echo "  make follower-check ENGINE=phase [ARGS='--setup-only --pool F'] — level-A scenarios through one follower (scripts/follower-check.sh)"
 	@echo "  make smoke          — the script smokes (stubs only; no Java, no network)"
 	@echo "  make mtgish-fetch   — download the pinned mtgish data into .mtgish/<ref>/ (gitignored) and verify its sha256"
 	@echo "  make mtgish-xc      — the mtgish card-definition cross-check: corpus report + the corpus ledger ratchet"
@@ -88,6 +89,7 @@ smoke:
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
 	bash ops/scripts/tests/xengine_sweep_smoke.sh
 	bash ops/scripts/tests/xengine_random_smoke.sh
+	bash ops/scripts/tests/follower_check_smoke.sh
 	bash ops/scripts/tests/test_targets_smoke.sh
 
 # xengine-sweep runs the chunked, resumable cross-engine sweep
@@ -177,3 +179,10 @@ pr: export DRAFT := $(DRAFT)
 pr: export DRY := $(DRY)
 pr:
 	@bash scripts/open-pr.sh
+
+# follower-check runs level-A scenarios through one registered follower and
+# diffs them against gorge (scripts/follower-check.sh): ENGINE=phase
+# ARGS='--set FDN --setup-only --pool FILE --limit N --min-agree PCT'.
+.PHONY: follower-check
+follower-check:
+	scripts/follower-check.sh $(ENGINE) $(ARGS)
