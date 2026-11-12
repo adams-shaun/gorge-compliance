@@ -16,7 +16,7 @@ use unicode_normalization::UnicodeNormalization;
 pub type FaceRef<'a> = &'a CardFace;
 
 /// NFKD-folded, accent-stripped form of `name` (curly apostrophes straightened).
-fn fold(name: &str) -> String {
+pub fn fold(name: &str) -> String {
     let mut out = String::with_capacity(name.len());
     for c in name.nfkd().filter(|c| !is_combining_mark(*c)) {
         match c {

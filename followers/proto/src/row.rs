@@ -111,7 +111,8 @@ pub struct PermSnap {
     #[serde(skip_serializing_if = "BTreeMap::is_empty", default)]
     pub counters: BTreeMap<String, i64>,
     pub types: Vec<String>,
-    pub colors: Vec<String>,
+    /// WUBRG letters in that order, "" for colourless (a string on the wire, like the Java driver).
+    pub colors: String,
     pub keywords: Vec<String>,
     #[serde(skip_serializing_if = "Option::is_none", default)]
     pub attached_to: Option<String>,
