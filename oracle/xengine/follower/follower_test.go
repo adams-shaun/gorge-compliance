@@ -14,7 +14,7 @@ var preH1Engines = []string{"xmage", "forge"}
 
 // registered is every engine, in registry order: the pre-H1 ones first, then
 // the followers added since.
-var registered = []string{"xmage", "forge", "phase"}
+var registered = []string{"xmage", "forge", "phase", "manabrew"}
 
 func TestNamesCoverPreH1Engines(t *testing.T) {
 	if got := Names(); !slices.Equal(got, registered) || !slices.Equal(got[:len(preH1Engines)], preH1Engines) {
@@ -162,6 +162,46 @@ func TestPhaseEntry(t *testing.T) {
 	}
 	if p.RunnerEnv() != "XENGINE_PHASE_RUNNER" || p.MemEnv() != "XENGINE_PHASE_MEM" || p.WaitEnv() != "XENGINE_PHASE_WAIT" {
 		t.Errorf("phase env names %s %s %s", p.RunnerEnv(), p.MemEnv(), p.WaitEnv())
+	}
+}
+
+// TestManabrewEntry pins the Manabrew entry (ticket mb-5-runner).
+func TestManabrewEntry(t *testing.T) {
+	m, ok := Lookup("manabrew")
+	if !ok {
+		t.Fatal("manabrew is not registered")
+	}
+	cases := []struct {
+		name      string
+		got, want any
+	}{
+		{"display", m.Display, "Manabrew"},
+		{"runner", m.Runner, "scripts/manabrew-oracle-run.sh"},
+		{"prep", m.Prep, PrepFollowerExport},
+		{"stamps engine", m.StampsEngine, true},
+		{"consumes payment", m.ConsumesPayment, true},
+		{"turn cap", m.TurnCapMsg, ""},
+		{"lacks card", m.LacksCardMsg, "manabrew lacks card: "},
+		{"jvm", m.JVM, false},
+		{"skips damage step", m.SkipsDamageStep, false},
+		{"stops in cleanup", m.StopsInCleanup, false},
+		{"trailing misses", m.TrailingMisses, false},
+		{"taps with cast", m.TapsWithCast, false},
+		{"trigger order by name", m.TriggerOrderByName, false},
+	}
+	for _, c := range cases {
+		if c.got != c.want {
+			t.Errorf("manabrew %s = %#v, want %#v", c.name, c.got, c.want)
+		}
+	}
+	if !slices.Equal(m.CastModes, []string{""}) {
+		t.Errorf("manabrew cast modes = %q, want [\"\"]", m.CastModes)
+	}
+	if !m.FollowsCastMode("") || m.FollowsCastMode("kicked") {
+		t.Error("manabrew must follow only the ordinary cast")
+	}
+	if m.RunnerEnv() != "XENGINE_MANABREW_RUNNER" || m.MemEnv() != "XENGINE_MANABREW_MEM" || m.WaitEnv() != "XENGINE_MANABREW_WAIT" {
+		t.Errorf("manabrew env names %s %s %s", m.RunnerEnv(), m.MemEnv(), m.WaitEnv())
 	}
 }
 

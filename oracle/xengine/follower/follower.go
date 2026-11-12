@@ -153,6 +153,23 @@ var registry = []Follower{
 		// A Rust binary: the heavy lock alone.
 		JVM: false,
 	},
+	{
+		Name:    "manabrew",
+		Display: "Manabrew",
+		Runner:  "scripts/manabrew-oracle-run.sh",
+		// follower-export: the preflight refusals; Manabrew reads the same abilities
+		// script lines as Forge and ignores "neutral".
+		Prep:         PrepFollowerExport,
+		StampsEngine: true,
+		// The driver adds payment[i] to the pool and pays from the pool only.
+		ConsumesPayment: true,
+		// Ordinary casts only until the decisions ticket widens this.
+		CastModes: []string{""},
+		// The harness text emitted when a card is missing at run time.
+		LacksCardMsg: "manabrew lacks card: ",
+		// A Rust binary: the heavy lock alone.
+		JVM: false,
+	},
 }
 
 // Lookup is the follower named name.
