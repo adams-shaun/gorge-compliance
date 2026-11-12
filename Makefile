@@ -37,8 +37,8 @@ FOLLOWERS_CACHE ?= $(or $(XDG_CACHE_HOME),$(HOME)/.cache)/gorge-compliance
 # Manabrew (AGPL-3.0, a Rust port of Forge's engine): upstream until the operator creates the fork
 # https://github.com/adams-shaun/manabrew; driver commits sit on branch `oracle` of the local clone.
 MANABREW_REPO ?= https://github.com/witchesofthehill/manabrew
-# af05437209be = upstream dadee731 + oracle patches (place_for_setup, take_state_edit, diagnostics sink, profile.oracle) + the manabrew-oracle driver crate: CLI, preflight, snapshot writer, board setup and the step machine (play, activate, cast, pass, resolve, mana; pool payment; ScriptedRng) (local branch oracle; pushed to adams-shaun/manabrew by the operator)
-MANABREW_ORACLE_REF ?= af05437209be3708eeb245b89ffcd957772dd306
+# 75c1399a6de7 = upstream dadee731 + oracle patches (place_for_setup, take_state_edit, diagnostics sink, profile.oracle) + the manabrew-oracle driver crate: CLI, preflight, snapshot writer, board setup, the step machine (play, activate, cast, pass, resolve, mana; pool payment; ScriptedRng) and the answerer (targets, yes/no, modes, object picks, library, names and numbers, optional costs from cast_mode; adventure_alt and warped play modes) (local branch oracle; pushed to adams-shaun/manabrew by the operator)
+MANABREW_ORACLE_REF ?= 75c1399a6de75960407ba2ff6b4b649b31efa86d
 MANABREW_ORACLE_DIR ?= $(FOLLOWERS_CACHE)/manabrew
 CARGO ?= $(HOME)/.cargo/bin/cargo
 # phase.rs follower: pinned build + card data (followers/phase/PHASE_PIN), out of tree.
