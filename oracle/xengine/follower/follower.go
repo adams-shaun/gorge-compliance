@@ -137,6 +137,22 @@ var registry = []Follower{
 		TrailingMisses:  true,
 		JVM:             true,
 	},
+	{
+		Name:    "phase",
+		Display: "phase.rs",
+		Runner:  "scripts/phase-oracle-run.sh",
+		// follower-export: the neutral identities and the --preflight refusals.
+		Prep:         PrepFollowerExport,
+		StampsEngine: true,
+		// The driver spends payment[i] units from the pool first.
+		ConsumesPayment: true,
+		// Ordinary casts only until a later ticket maps cast modes.
+		CastModes: []string{""},
+		// The harness text emitted when a card is missing at run time.
+		LacksCardMsg: "phase lacks card: ",
+		// A Rust binary: the heavy lock alone.
+		JVM: false,
+	},
 }
 
 // Lookup is the follower named name.
