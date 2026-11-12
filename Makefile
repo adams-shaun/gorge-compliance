@@ -40,6 +40,7 @@ MANABREW_REPO ?= https://github.com/witchesofthehill/manabrew
 # dadee731dc1 = upstream main on 2026-11-10, the audited commit.
 MANABREW_ORACLE_REF ?= dadee731dc1c850f910411acc1b5cc6bb73253ac
 MANABREW_ORACLE_DIR ?= $(FOLLOWERS_CACHE)/manabrew
+CARGO ?= $(HOME)/.cargo/bin/cargo
 
 .PHONY: help
 help:
@@ -58,12 +59,14 @@ help:
 	@echo "  make manabrew-oracle-setup — build Manabrew at MANABREW_ORACLE_REF and its card archive from gorge's FORGE_REF scripts, out of tree (heavy)"
 	@echo "  make compliance-pass SETS='FRA BLB' — XMage compliance pass over the sets; reruns only stale verdicts"
 	@echo "  make follower-check ENGINE=phase [ARGS='--setup-only --pool F'] — level-A scenarios through one follower (scripts/follower-check.sh)"
+	@echo "  make follower-sweep-smoke ENGINE=phase [GAMES=2] — one xengine chunk with one follower, pool narrowed by its preflight (scripts/follower-sweep-smoke.sh)"
 	@echo "  make smoke          — the script smokes (stubs only; no Java, no network)"
 	@echo "  make mtgish-fetch   — download the pinned mtgish data into .mtgish/<ref>/ (gitignored) and verify its sha256"
 	@echo "  make mtgish-xc      — the mtgish card-definition cross-check: corpus report + the corpus ledger ratchet"
+	@echo "  make follower-proto-test [RUN=name] — cargo test for the engine-neutral follower crate (followers/proto; output under FOLLOWERS_CACHE)"
 	@echo "  make xmage-driver-tests — the Java driver's unit tests (needs xmage-oracle-setup)"
 
-.PHONY: cards test boundary oracle-audit smoke
+.PHONY: cards test boundary oracle-audit smoke follower-proto-test
 cards:
 	@GORGE_ROOT='$(GORGE_ROOT)' FORGE_REF='$(FORGE_REF)' scripts/link-cards.sh
 
@@ -81,6 +84,9 @@ test-one: export TIMEOUT := $(TIMEOUT)
 test-one: export TAGS := $(TAGS)
 test-one:
 	@bash scripts/test-targets.sh one
+
+follower-proto-test:
+	systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% env CARGO_TARGET_DIR=$(FOLLOWERS_CACHE)/target/proto $(CARGO) test --locked --manifest-path followers/proto/Cargo.toml $(RUN)
 
 boundary:
 	go test -count=1 ./internal/boundary/
@@ -101,6 +107,7 @@ smoke:
 	bash ops/scripts/tests/xengine_sweep_smoke.sh
 	bash ops/scripts/tests/xengine_random_smoke.sh
 	bash ops/scripts/tests/follower_check_smoke.sh
+	bash ops/scripts/tests/follower_sweep_smoke_smoke.sh
 	bash ops/scripts/tests/test_targets_smoke.sh
 
 # xengine-sweep runs the chunked, resumable cross-engine sweep
@@ -199,3 +206,10 @@ pr:
 .PHONY: follower-check
 follower-check:
 	scripts/follower-check.sh $(ENGINE) $(ARGS)
+
+# follower-sweep-smoke runs one smoke-sized xengine chunk with one follower, the
+# pool narrowed by the follower's preflight (scripts/follower-sweep-smoke.sh):
+# ENGINE=phase [GAMES=2] [ARGS='--pool F --max-class harness=50'].
+.PHONY: follower-sweep-smoke
+follower-sweep-smoke:
+	scripts/follower-sweep-smoke.sh $(ENGINE) --games $(or $(GAMES),2) $(ARGS)
