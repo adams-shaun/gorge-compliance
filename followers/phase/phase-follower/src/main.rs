@@ -4,8 +4,8 @@
 //! `--card-data FILE --count` loads the card database and prints its face count;
 //! `--preflight NAMES|- --card-data FILE` prints `NAME<TAB>REASON` for each card phase lacks (NAMES
 //! `-` is stdin); `scenarios IN OUT --card-data FILE` replays a JSONL batch (one row per line): it builds the
-//! board of `item.setup`, takes the `setup` snapshot and, when the item has steps, stops with a
-//! harness row (`steps not implemented`). Every other mode exits 2 with `not implemented`.
+//! board of `item.setup`, takes the `setup` snapshot and replays the steps (`steps.rs`: `mana play
+//! activate cast pass resolve`; the other ops are harness rows until the combat ticket). Every other mode exits 2 with `not implemented`.
 //!
 //! Later stages replay requests against the engine. Two runtime rules apply to all of them: the
 //! engine assumes deep recursion, so every run sets `RUST_MIN_STACK=16777216` and engine work runs
@@ -15,11 +15,13 @@ use std::io::{self, BufRead};
 use std::process::ExitCode;
 
 use engine::database::card_db::CardDatabase;
-use follower_proto::{run_batch, BatchConfig, BatchStats, Stop};
+use follower_proto::{run_batch, BatchConfig, BatchStats};
 
+mod answer;
 mod names;
 mod setup;
 mod snapshot;
+mod steps;
 mod support;
 
 /// `<engine sha> <hash16> <sha256>` from `../PHASE_PIN`, embedded at compile time.
@@ -55,9 +57,6 @@ fn preflight(names: &str, card_data: &str) -> Result<(), String> {
         .map_err(|e| format!("preflight: {e}"))
 }
 
-/// The row message of an item that has steps, until the step replay exists.
-const STEPS_NOT_IMPLEMENTED: &str = "phase follower: steps not implemented";
-
 /// The batch constants: `PHASE_REF` (`<engine sha>+<hash16>`, set by the runner) is the row's
 /// `phase_ref`.
 fn batch_config(phase_ref: &str) -> BatchConfig {
@@ -77,12 +76,8 @@ fn run_scenarios(
             .stack_size(64 << 20)
             .spawn_scoped(s, || {
                 run_batch(input, output, cfg, |req, rb| {
-                    setup::run(db, req, rb)?;
-                    if req.item.steps.is_empty() {
-                        Ok(())
-                    } else {
-                        Err(Stop::Harness(STEPS_NOT_IMPLEMENTED.to_string()))
-                    }
+                    let board = setup::run(db, req, rb)?;
+                    steps::run(req, board, rb)
                 })
             })?
             .join()
@@ -224,7 +219,7 @@ mod tests {
 
     #[test]
     fn batch_every_line_gets_a_phase_row() {
-        let input = "{\"id\":\"a\",\"item\":{\"id\":\"a\",\"card\":\"Llanowar Elves\",\"name\":\"n\",\"steps\":[{\"op\":\"pass\"}]}}\nnot json\n";
+        let input = "{\"id\":\"a\",\"item\":{\"id\":\"a\",\"card\":\"Llanowar Elves\",\"name\":\"n\",\"steps\":[{\"op\":\"attack\",\"seat\":0}]}}\nnot json\n";
         let mut out = Vec::new();
         let stats = run_scenarios(db(), input.as_bytes(), &mut out, &batch_config("abc+0123456789abcdef")).unwrap();
         assert_eq!((stats.rows, stats.harness), (2, 2));
@@ -236,7 +231,7 @@ mod tests {
             assert_eq!(r["phase_ref"], "abc+0123456789abcdef");
         }
         assert_eq!(rows[0]["id"], "a");
-        assert_eq!(rows[0]["harness"], "harness: phase follower: steps not implemented");
+        assert_eq!(rows[0]["harness"], "harness: phase follower: op attack not implemented");
         // The setup snapshot is kept when the steps stop the replay.
         assert_eq!(rows[0]["snapshots"][0]["checkpoint"], "setup");
         assert!(rows[1]["harness"].as_str().unwrap().starts_with("harness: malformed request line"));
