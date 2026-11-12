@@ -1,0 +1,15 @@
+[package]
+name = "phase-follower"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "gorge-compliance follower for phase.rs (github.com/phase-rs/phase), built at the commit in ../PHASE_PIN."
+publish = false
+
+[dependencies]
+# Pinned by rev (cargo caches the checkout; nothing is vendored). Never enable the engine's
+# `test-support` feature: it exposes raw zone placement meant only for phase's own tests.
+engine = { package = "phase-engine", git = "https://github.com/phase-rs/phase", rev = "b14f974787d86b6b6ade67aaaed67d32d68d7fd8" }
+follower-proto = { path = "../../proto" }
+serde_json = "1"
+crc32fast = "1"

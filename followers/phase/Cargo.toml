@@ -1,0 +1,13 @@
+[workspace]
+members = ["phase-follower"]
+resolver = "2"
+
+# phase's own release profile is size-optimised with fat LTO and panic = "abort"; abort would kill
+# the whole batch on one engine panic. The follower builds with this profile instead.
+[profile.follower]
+inherits = "release"
+opt-level = 2
+lto = "thin"
+codegen-units = 16
+panic = "unwind"
+debug = false
