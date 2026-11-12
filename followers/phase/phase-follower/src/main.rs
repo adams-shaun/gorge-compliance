@@ -18,6 +18,7 @@ use engine::database::card_db::CardDatabase;
 use follower_proto::{run_batch, BatchConfig, BatchStats, Stop};
 
 mod names;
+mod snapshot;
 mod support;
 
 /// `<engine sha> <hash16> <sha256>` from `../PHASE_PIN`, embedded at compile time.
