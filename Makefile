@@ -116,7 +116,7 @@ phase-preflight:
 	cat $$out && echo "refused $$(wc -l < $$out) of $$(wc -l < $$names)"
 
 boundary:
-	go test -count=1 ./internal/boundary/
+	GORGE_TEST_WRAPPER=1 go test -count=1 ./internal/boundary/
 
 # oracle-audit runs both scenario corpora through gorge's runner: the hand
 # Oracle-text audit (scenarios/oracle plus gorge's residual
