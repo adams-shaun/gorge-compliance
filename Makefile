@@ -64,13 +64,14 @@ help:
 	@echo "  make follower-sweep-smoke ENGINE=phase [GAMES=2] — one xengine chunk with one follower, pool narrowed by its preflight (scripts/follower-sweep-smoke.sh)"
 	@echo "  make phase-oracle-setup — build the phase.rs follower and fetch its card data at followers/phase/PHASE_PIN, out of tree (heavy; one cold build per pin)"
 	@echo "  make phase-follower-test [RUN=filter] — cargo test for the phase.rs follower (needs phase-oracle-setup; --profile follower, PHASE_CARD_DATA set)"
+	@echo "  make phase-preflight POOL=FILE — which pool cards phase.rs lacks (rebuilds the follower; prints NAME<TAB>REASON, then 'refused K of P')"
 	@echo "  make smoke          — the script smokes (stubs only; no Java, no network)"
 	@echo "  make mtgish-fetch   — download the pinned mtgish data into .mtgish/<ref>/ (gitignored) and verify its sha256"
 	@echo "  make mtgish-xc      — the mtgish card-definition cross-check: corpus report + the corpus ledger ratchet"
 	@echo "  make follower-proto-test [RUN=name] — cargo test for the engine-neutral follower crate (followers/proto; output under FOLLOWERS_CACHE)"
 	@echo "  make xmage-driver-tests — the Java driver's unit tests (needs xmage-oracle-setup)"
 
-.PHONY: cards test boundary oracle-audit smoke follower-proto-test phase-oracle-setup phase-follower-test
+.PHONY: cards test boundary oracle-audit smoke follower-proto-test phase-oracle-setup phase-follower-test phase-preflight
 cards:
 	@GORGE_ROOT='$(GORGE_ROOT)' FORGE_REF='$(FORGE_REF)' scripts/link-cards.sh
 
@@ -99,6 +100,17 @@ phase-oracle-setup:
 # runs inside followers/phase (env -C) so its rust-toolchain.toml selects the nightly.
 phase-follower-test:
 	systemd-run --user --scope -q -p MemoryMax=8G -p CPUQuota=400% env -C followers/phase CARGO_HOME=$(FOLLOWERS_CACHE)/cargo-home RUSTC=$(dir $(CARGO))rustc CARGO_TARGET_DIR=$(PHASE_ORACLE_DIR)/target PHASE_CARD_DATA=$(PHASE_ORACLE_DIR)/card-data-$(shell cut -d' ' -f2 followers/phase/PHASE_PIN).json RUST_MIN_STACK=16777216 $(CARGO) test --locked --profile follower $(RUN)
+
+# Builds the follower, then asks it which names of POOL it lacks. Comment and blank lines of the pool
+# are dropped; the names go through a temp file under .oracle-build/ (the protocol's NAMES.txt).
+phase-preflight:
+	@test -n '$(POOL)' || { echo "usage: make phase-preflight POOL=oracle/xengine/pools/fdn.txt" >&2; exit 2; }
+	systemd-run --user --scope -q -p MemoryMax=8G -p CPUQuota=400% env -C followers/phase CARGO_HOME=$(FOLLOWERS_CACHE)/cargo-home RUSTC=$(dir $(CARGO))rustc CARGO_TARGET_DIR=$(PHASE_ORACLE_DIR)/target RUST_MIN_STACK=16777216 $(CARGO) build --locked --profile follower
+	@mkdir -p .oracle-build && names=.oracle-build/phase-preflight-names.txt && \
+	/usr/bin/grep -v '^[[:space:]]*\(#\|$$\)' '$(POOL)' | LC_ALL=C sort -u > $$names && \
+	out=.oracle-build/phase-preflight-out.txt && \
+	RUST_MIN_STACK=16777216 $(PHASE_ORACLE_DIR)/target/follower/phase-follower --preflight $$names --card-data $(PHASE_ORACLE_DIR)/card-data-$(shell cut -d' ' -f2 followers/phase/PHASE_PIN).json > $$out && \
+	cat $$out && echo "refused $$(wc -l < $$out) of $$(wc -l < $$names)"
 
 boundary:
 	go test -count=1 ./internal/boundary/
