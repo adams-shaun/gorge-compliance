@@ -66,8 +66,7 @@
      "eq": 2
     }
    ],
-   "xmage": "MirrorworksTest#TestCorrectCopy",
-   "known_bug": "XP[copy-token-own-etb-replacement-not-collected]: the Mirrorworks token copy of Mox Diamond enters without its own \"If CARDNAME would enter, you may discard a land\" replacement being offered (transcript: only one discard ask; 2 Mox on battlefield, 1 Mountain in graveyard). foldCopyToken mints the token via AddObject in an untracked ZLibrary state not in any zone list (engine/events/apply_copy.go:224-231, engine/state/game.go:757), effCopyPermanent then emits its battlefield MoveZone (engine/effects/copypermanent.go:840), and the replacement-source scan only visits zone lists Library..Stack + Command (engine/rules/repl_zoneskip.go:281,303), so the entering token's own R: line is never collected. CR 614.12, 707.2 (copy token has Mox Diamond's replacement ability as it would exist on the battlefield)."
+   "xmage": "MirrorworksTest#TestCorrectCopy"
   }
  ]
 }

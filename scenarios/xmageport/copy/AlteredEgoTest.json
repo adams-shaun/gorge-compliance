@@ -257,7 +257,8 @@
      "pt": "3/3"
     }
    ],
-   "xmage": "AlteredEgoTest#copyXCreature"
+   "xmage": "AlteredEgoTest#copyXCreature",
+   "known_bug": "XP[copy-x-etb-reads-copier-x]: at gorge 7490ec0ff the Altered Ego copy of Endless One enters 6/6, XMage 3/3: gorge applies the copied \"enters with X +1/+1 counters\" with the Altered Ego spell's X (CR 107.3m) on top of Altered Ego's own X counters, XMage counts only the latter. Needs triage: CR 107.3m reads on gorge's side."
   }
  ]
 }
