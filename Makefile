@@ -35,6 +35,8 @@ FORGE_ORACLE_DIR ?= .oracle-build/forge
 # Follower (Rust) build output lives here, out of tree.
 FOLLOWERS_CACHE ?= $(or $(XDG_CACHE_HOME),$(HOME)/.cache)/gorge-compliance
 CARGO ?= $(HOME)/.cargo/bin/cargo
+# phase.rs follower: pinned build + card data (followers/phase/PHASE_PIN), out of tree.
+PHASE_ORACLE_DIR ?= $(FOLLOWERS_CACHE)/phase
 
 .PHONY: help
 help:
@@ -53,13 +55,15 @@ help:
 	@echo "  make compliance-pass SETS='FRA BLB' — XMage compliance pass over the sets; reruns only stale verdicts"
 	@echo "  make follower-check ENGINE=phase [ARGS='--setup-only --pool F'] — level-A scenarios through one follower (scripts/follower-check.sh)"
 	@echo "  make follower-sweep-smoke ENGINE=phase [GAMES=2] — one xengine chunk with one follower, pool narrowed by its preflight (scripts/follower-sweep-smoke.sh)"
+	@echo "  make phase-oracle-setup — build the phase.rs follower and fetch its card data at followers/phase/PHASE_PIN, out of tree (heavy; one cold build per pin)"
+	@echo "  make phase-follower-test [RUN=filter] — cargo test for the phase.rs follower (needs phase-oracle-setup; --profile follower, PHASE_CARD_DATA set)"
 	@echo "  make smoke          — the script smokes (stubs only; no Java, no network)"
 	@echo "  make mtgish-fetch   — download the pinned mtgish data into .mtgish/<ref>/ (gitignored) and verify its sha256"
 	@echo "  make mtgish-xc      — the mtgish card-definition cross-check: corpus report + the corpus ledger ratchet"
 	@echo "  make follower-proto-test [RUN=name] — cargo test for the engine-neutral follower crate (followers/proto; output under FOLLOWERS_CACHE)"
 	@echo "  make xmage-driver-tests — the Java driver's unit tests (needs xmage-oracle-setup)"
 
-.PHONY: cards test boundary oracle-audit smoke follower-proto-test
+.PHONY: cards test boundary oracle-audit smoke follower-proto-test phase-oracle-setup phase-follower-test
 cards:
 	@GORGE_ROOT='$(GORGE_ROOT)' FORGE_REF='$(FORGE_REF)' scripts/link-cards.sh
 
@@ -81,6 +85,14 @@ test-one:
 follower-proto-test:
 	systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% env CARGO_TARGET_DIR=$(FOLLOWERS_CACHE)/target/proto $(CARGO) test --locked --manifest-path followers/proto/Cargo.toml $(RUN)
 
+phase-oracle-setup:
+	FOLLOWERS_CACHE='$(FOLLOWERS_CACHE)' PHASE_ORACLE_DIR='$(PHASE_ORACLE_DIR)' CARGO='$(CARGO)' scripts/phase-oracle-setup.sh
+
+# The follower profile is used for tests too, so the engine is built once, not again in debug. Cargo
+# runs inside followers/phase (env -C) so its rust-toolchain.toml selects the nightly.
+phase-follower-test:
+	systemd-run --user --scope -q -p MemoryMax=8G -p CPUQuota=400% env -C followers/phase CARGO_HOME=$(FOLLOWERS_CACHE)/cargo-home RUSTC=$(dir $(CARGO))rustc CARGO_TARGET_DIR=$(PHASE_ORACLE_DIR)/target PHASE_CARD_DATA=$(PHASE_ORACLE_DIR)/card-data-$(shell cut -d' ' -f2 followers/phase/PHASE_PIN).json RUST_MIN_STACK=16777216 $(CARGO) test --locked --profile follower $(RUN)
+
 boundary:
 	go test -count=1 ./internal/boundary/
 
@@ -96,6 +108,7 @@ smoke:
 	bash ops/scripts/tests/make_cards_smoke.sh
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
+	bash ops/scripts/tests/phase_oracle_pin_smoke.sh
 	bash ops/scripts/tests/xengine_sweep_smoke.sh
 	bash ops/scripts/tests/xengine_random_smoke.sh
 	bash ops/scripts/tests/follower_check_smoke.sh

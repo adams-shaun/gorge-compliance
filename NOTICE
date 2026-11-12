@@ -23,6 +23,12 @@ gitignored .mtgish/ directory and is never committed (it is derived from
 Oracle text); the normalizer's variant names follow mtgish's type
 definitions (rust_syntax/src/mtg_types.rs).
 
+phase.rs (https://github.com/phase-rs/phase, MIT OR Apache-2.0) is a Cargo git
+dependency of followers/phase at the commit named in followers/phase/PHASE_PIN;
+it is never vendored or committed. Its card data (derived from MTGJSON, MIT) is
+downloaded at run time into PHASE_ORACLE_DIR, outside the repository, and is
+never committed.
+
 Forge (https://github.com/Card-Forge/forge) card scripts, token scripts and
 every Forge artifact are GPL-3.0 and are NEVER committed to this repository.
 The corpus is read at run time from a gitignored .cards link to gorge's
