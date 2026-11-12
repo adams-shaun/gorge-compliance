@@ -163,8 +163,12 @@ var registry = []Follower{
 		StampsEngine: true,
 		// The driver adds payment[i] to the pool and pays from the pool only.
 		ConsumesPayment: true,
-		// Ordinary casts only until the decisions ticket widens this.
-		CastModes: []string{""},
+		// The modes the driver follows (step_machine.rs CAST_MODES): the ordinary cast, the
+		// play modes the engine's action space lists (adventure_alt, warped) and the optional
+		// costs its cast prompts ask for. Not followed: omen_alt, modal_spell, plot (no such
+		// cast or special action in the engine), kicked2, kickedboth (one kicker only),
+		// offspring, optionalcost (no cast prompt for them).
+		CastModes: []string{"", "adventure_alt", "warped", "kicked", "kicked1", "buyback", "entwined", "multikicked", "replicated"},
 		// The harness text emitted when a card is missing at run time.
 		LacksCardMsg: "manabrew lacks card: ",
 		// A Rust binary: the heavy lock alone.

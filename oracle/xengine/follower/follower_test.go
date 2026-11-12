@@ -194,11 +194,19 @@ func TestManabrewEntry(t *testing.T) {
 			t.Errorf("manabrew %s = %#v, want %#v", c.name, c.got, c.want)
 		}
 	}
-	if !slices.Equal(m.CastModes, []string{""}) {
-		t.Errorf("manabrew cast modes = %q, want [\"\"]", m.CastModes)
+	wantModes := []string{"", "adventure_alt", "warped", "kicked", "kicked1", "buyback", "entwined", "multikicked", "replicated"}
+	if !slices.Equal(m.CastModes, wantModes) {
+		t.Errorf("manabrew cast modes = %q, want %q", m.CastModes, wantModes)
 	}
-	if !m.FollowsCastMode("") || m.FollowsCastMode("kicked") {
-		t.Error("manabrew must follow only the ordinary cast")
+	for _, mode := range wantModes {
+		if !m.FollowsCastMode(mode) {
+			t.Errorf("manabrew must follow cast mode %q", mode)
+		}
+	}
+	for _, mode := range []string{"omen_alt", "modal_spell", "plot", "kicked2", "kickedboth", "offspring", "optionalcost", "flashback"} {
+		if m.FollowsCastMode(mode) {
+			t.Errorf("manabrew must not follow cast mode %q: the engine has no such cast", mode)
+		}
 	}
 	if m.RunnerEnv() != "XENGINE_MANABREW_RUNNER" || m.MemEnv() != "XENGINE_MANABREW_MEM" || m.WaitEnv() != "XENGINE_MANABREW_WAIT" {
 		t.Errorf("manabrew env names %s %s %s", m.RunnerEnv(), m.MemEnv(), m.WaitEnv())
