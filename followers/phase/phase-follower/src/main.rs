@@ -219,7 +219,7 @@ mod tests {
 
     #[test]
     fn batch_every_line_gets_a_phase_row() {
-        let input = "{\"id\":\"a\",\"item\":{\"id\":\"a\",\"card\":\"Llanowar Elves\",\"name\":\"n\",\"steps\":[{\"op\":\"pass\"}]}}\nnot json\n";
+        let input = "{\"id\":\"a\",\"item\":{\"id\":\"a\",\"card\":\"Llanowar Elves\",\"name\":\"n\",\"steps\":[{\"op\":\"attack\",\"seat\":0}]}}\nnot json\n";
         let mut out = Vec::new();
         let stats = run_scenarios(db(), input.as_bytes(), &mut out, &batch_config("abc+0123456789abcdef")).unwrap();
         assert_eq!((stats.rows, stats.harness), (2, 2));

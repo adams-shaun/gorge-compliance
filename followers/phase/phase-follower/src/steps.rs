@@ -187,6 +187,10 @@ impl Machine<'_> {
         if units.is_empty() {
             return Ok(());
         }
+        self.calls += 1;
+        if self.calls > MAX_APPLY {
+            return Err(harness(format!("no progress at step {}", self.step)));
+        }
         let state = &mut self.board.state;
         state.debug_mode = true;
         let r = apply(
@@ -396,7 +400,9 @@ impl Machine<'_> {
             let corpus = self.board.names.by_object.get(&id).map(String::as_str).unwrap_or("");
             let theirs = normalise(def.description.as_deref().unwrap_or(""), &obj.name, corpus);
             let ours = normalise(text, &obj.name, corpus);
-            if !(theirs == ours || (!theirs.is_empty() && (theirs.contains(&ours) || ours.contains(&theirs)))) {
+            // Equal, or one contains the other (phase may omit or add cost text); never when either is empty.
+            let loose = !ours.is_empty() && !theirs.is_empty() && (theirs.contains(&ours) || ours.contains(&theirs));
+            if !(theirs == ours || loose) {
                 return Err(unmatched(i, format!("phase ability {theirs:?} is not {ours:?}")));
             }
         }
@@ -444,6 +450,10 @@ impl Machine<'_> {
             .unwrap_or_default();
         for pip in pick_pins(pool, gorge_spent, cost.as_ref()) {
             // A pin phase refuses (ineligible unit) is a hint not taken; finalisation chooses.
+            self.calls += 1;
+            if self.calls > MAX_APPLY {
+                return Err(harness(format!("no progress at step {i}")));
+            }
             let actor = self.board.state.waiting_for.acting_player().unwrap_or(player);
             let _ = apply(&mut self.board.state, actor, GameAction::SpendPoolMana { pip_id: pip });
         }
