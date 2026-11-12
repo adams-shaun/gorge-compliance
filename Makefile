@@ -37,8 +37,8 @@ FOLLOWERS_CACHE ?= $(or $(XDG_CACHE_HOME),$(HOME)/.cache)/gorge-compliance
 # Manabrew (AGPL-3.0, a Rust port of Forge's engine): upstream until the operator creates the fork
 # https://github.com/adams-shaun/manabrew; driver commits sit on branch `oracle` of the local clone.
 MANABREW_REPO ?= https://github.com/witchesofthehill/manabrew
-# 0614acae40c2 = upstream dadee731 + oracle patches: place_for_setup, take_state_edit, diagnostics sink, profile.oracle (local branch oracle; pushed to adams-shaun/manabrew by the operator)
-MANABREW_ORACLE_REF ?= 0614acae40c2d29e132cf654cc6ba59d4b92de6f
+# 2747b912d6b5 = upstream dadee731 + oracle patches (place_for_setup, take_state_edit, diagnostics sink, profile.oracle) + the manabrew-oracle driver crate: CLI, preflight, snapshot writer, board setup, the step machine (play, activate, cast, pass, resolve, mana; pool payment; ScriptedRng) and the answerer (targets, yes/no, modes, object picks, library, names and numbers, optional costs from cast_mode; adventure_alt and warped play modes) and combat (pass_to, attack, block, damage assignment from a logged division, exert/enlist/combat costs), the raw move/attach preludes with an engine settle (priority_round settles SBA and triggers after an agent edit), and whole-game tapes with no turn cap (local branch oracle; pushed to adams-shaun/manabrew by the operator)
+MANABREW_ORACLE_REF ?= 2747b912d6b584391ba8cd265098b1931c67281b
 MANABREW_ORACLE_DIR ?= $(FOLLOWERS_CACHE)/manabrew
 CARGO ?= $(HOME)/.cargo/bin/cargo
 # phase.rs follower: pinned build + card data (followers/phase/PHASE_PIN), out of tree.
@@ -60,6 +60,8 @@ help:
 	@echo "  make forge-oracle-setup — build the Forge oracle driver at FORGE_ORACLE_REF out of tree (heavy)"
 	@echo "  make manabrew-oracle-setup — build Manabrew at MANABREW_ORACLE_REF and its card archive from gorge's FORGE_REF scripts, out of tree (heavy)"
 	@echo "  make manabrew-engine-test [RUN=filter] — run the Manabrew engine's lib tests in the MANABREW_ORACLE_REF build tree, capped (heavy)"
+	@echo "  make manabrew-oracle-test RUN=filter — cargo test for the manabrew-oracle driver crate in the MANABREW_ORACLE_REF build tree, capped (heavy)"
+	@echo "  make manabrew-preflight POOL=FILE — which pool cards Manabrew would silently improvise (builds the driver; prints NAME<TAB>REASON, then 'refused K of P')"
 	@echo "  make compliance-pass SETS='FRA BLB' — XMage compliance pass over the sets; reruns only stale verdicts"
 	@echo "  make follower-check ENGINE=phase [ARGS='--setup-only --pool F'] — level-A scenarios through one follower (scripts/follower-check.sh)"
 	@echo "  make follower-sweep-smoke ENGINE=phase [GAMES=2] — one xengine chunk with one follower, pool narrowed by its preflight (scripts/follower-sweep-smoke.sh)"
@@ -114,7 +116,7 @@ phase-preflight:
 	cat $$out && echo "refused $$(wc -l < $$out) of $$(wc -l < $$names)"
 
 boundary:
-	go test -count=1 ./internal/boundary/
+	GORGE_TEST_WRAPPER=1 go test -count=1 ./internal/boundary/
 
 # oracle-audit runs both scenario corpora through gorge's runner: the hand
 # Oracle-text audit (scenarios/oracle plus gorge's residual
@@ -130,6 +132,7 @@ smoke:
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
 	bash ops/scripts/tests/phase_oracle_pin_smoke.sh
 	bash ops/scripts/tests/manabrew_oracle_pin_smoke.sh
+	bash ops/scripts/tests/manabrew_oracle_run_smoke.sh
 	bash ops/scripts/tests/xengine_sweep_smoke.sh
 	bash ops/scripts/tests/xengine_random_smoke.sh
 	bash ops/scripts/tests/follower_check_smoke.sh
@@ -171,7 +174,7 @@ xmage-driver-tests:
 compliance-manifests:
 	go run ./cmd/compliance manifest -xmage $(XMAGE_ORACLE_DIR)/sets-only -ref $(XMAGE_REF) -out oracle/compliance/manifests
 
-.PHONY: xmage-oracle-setup forge-oracle-setup manabrew-oracle-setup manabrew-engine-test
+.PHONY: xmage-oracle-setup forge-oracle-setup manabrew-oracle-setup manabrew-engine-test manabrew-oracle-test manabrew-preflight
 xmage-oracle-setup:
 	XMAGE_REF=$(XMAGE_REF) XMAGE_ORACLE_DIR=$(XMAGE_ORACLE_DIR) scripts/xmage-oracle-setup.sh
 forge-oracle-setup:
@@ -182,6 +185,21 @@ manabrew-oracle-setup:
 MANABREW_ORACLE_REF12 = $(shell printf '%.12s' '$(MANABREW_ORACLE_REF)')
 manabrew-engine-test:
 	cd '$(MANABREW_ORACLE_DIR)/build-$(MANABREW_ORACLE_REF12)/manabrew-rs' && CARGO_HOME='$(FOLLOWERS_CACHE)/cargo-home' CARGO_TARGET_DIR='$(MANABREW_ORACLE_DIR)/target' PATH='$(dir $(CARGO))':"$$PATH" systemd-run --user --scope -q -p MemoryMax=8G -p CPUQuota=400% $(CARGO) test --locked --profile oracle -p manabrew-engine --lib $(RUN)
+
+# The driver crate (manabrew-rs/crates/manabrew-oracle on branch oracle) in the same build tree.
+MANABREW_BUILD_CARGO = cd '$(MANABREW_ORACLE_DIR)/build-$(MANABREW_ORACLE_REF12)/manabrew-rs' && CARGO_HOME='$(FOLLOWERS_CACHE)/cargo-home' CARGO_TARGET_DIR='$(MANABREW_ORACLE_DIR)/target' PATH='$(dir $(CARGO))':"$$PATH" systemd-run --user --scope -q -p MemoryMax=8G -p CPUQuota=400% $(CARGO)
+manabrew-oracle-test:
+	$(MANABREW_BUILD_CARGO) test --locked --profile oracle -p manabrew-oracle $(RUN)
+
+# Builds the driver, then asks it which names of POOL Manabrew would silently improvise (NAME<TAB>REASON,
+# then 'refused K of P'). Comment and blank lines of the pool are dropped.
+manabrew-preflight:
+	@test -n '$(POOL)' || { echo "usage: make manabrew-preflight POOL=oracle/xengine/pools/fdn.txt" >&2; exit 2; }
+	$(MANABREW_BUILD_CARGO) build --locked --profile oracle -p manabrew-oracle
+	@mkdir -p .oracle-build && names=.oracle-build/manabrew-preflight-names.txt && out=.oracle-build/manabrew-preflight-out.txt && \
+	/usr/bin/grep -v '^[[:space:]]*\(#\|$$\)' '$(POOL)' | LC_ALL=C sort -u > $$names && \
+	'$(MANABREW_ORACLE_DIR)/target/oracle/manabrew-oracle' --preflight $$names --archive '$(MANABREW_ORACLE_DIR)/cardset-$(shell printf '%.12s' '$(FORGE_REF)').rkyv' > $$out && \
+	cat $$out && echo "refused $$(wc -l < $$out) of $$(wc -l < $$names)"
 
 # forge-verdicts runs a level-A Forge pass with gen -printed and writes the
 # scenarios Forge agrees with as Forge-only verdict rows.

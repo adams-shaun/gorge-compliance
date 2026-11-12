@@ -12,9 +12,13 @@ import (
 // in cmd/xengine diff and calib). The registry must keep accepting each one.
 var preH1Engines = []string{"xmage", "forge"}
 
+// registered is every engine, in registry order: the pre-H1 ones first, then
+// the followers added since.
+var registered = []string{"xmage", "forge", "phase", "manabrew"}
+
 func TestNamesCoverPreH1Engines(t *testing.T) {
-	if got := Names(); !slices.Equal(got, preH1Engines) {
-		t.Errorf("Names() = %q, want %q (usage text and order unchanged)", got, preH1Engines)
+	if got := Names(); !slices.Equal(got, registered) || !slices.Equal(got[:len(preH1Engines)], preH1Engines) {
+		t.Errorf("Names() = %q, want %q (pre-H1 usage text and order unchanged, then the newer followers)", got, registered)
 	}
 	for _, n := range preH1Engines {
 		if !Known(n) {
@@ -28,7 +32,7 @@ func TestNamesCoverPreH1Engines(t *testing.T) {
 }
 
 func TestLookupUnknown(t *testing.T) {
-	for _, n := range []string{"", "XMage", "Forge", "gorge", "both", "phase"} {
+	for _, n := range []string{"", "XMage", "Forge", "gorge", "both", "Phase", "phase-rs"} {
 		if Known(n) {
 			t.Errorf("Known(%q) = true", n)
 		}
@@ -118,6 +122,108 @@ func TestPreH1Behaviour(t *testing.T) {
 		"offspring", "replicated", "multikicked"}
 	if !slices.Equal(f.CastModes, want) {
 		t.Errorf("forge cast modes = %q, want %q", f.CastModes, want)
+	}
+}
+
+// TestPhaseEntry pins the phase.rs entry (ticket ph-3-runner).
+func TestPhaseEntry(t *testing.T) {
+	p, ok := Lookup("phase")
+	if !ok {
+		t.Fatal("phase is not registered")
+	}
+	cases := []struct {
+		name      string
+		got, want any
+	}{
+		{"display", p.Display, "phase.rs"},
+		{"runner", p.Runner, "scripts/phase-oracle-run.sh"},
+		{"prep", p.Prep, PrepFollowerExport},
+		{"stamps engine", p.StampsEngine, true},
+		{"consumes payment", p.ConsumesPayment, true},
+		{"turn cap", p.TurnCapMsg, ""},
+		{"lacks card", p.LacksCardMsg, "phase lacks card: "},
+		{"jvm", p.JVM, false},
+		{"skips damage step", p.SkipsDamageStep, false},
+		{"stops in cleanup", p.StopsInCleanup, false},
+		{"trailing misses", p.TrailingMisses, false},
+		{"taps with cast", p.TapsWithCast, false},
+		{"trigger order by name", p.TriggerOrderByName, false},
+	}
+	for _, c := range cases {
+		if c.got != c.want {
+			t.Errorf("phase %s = %#v, want %#v", c.name, c.got, c.want)
+		}
+	}
+	// The modes the answerer maps (CAST_MODES in followers/phase/phase-follower/src/steps.rs).
+	wantModes := []string{"", "optionalcost", "adventure_alt", "omen_alt", "modal_spell", "warped",
+		"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined", "offspring", "replicated", "multikicked"}
+	if !slices.Equal(p.CastModes, wantModes) {
+		t.Errorf("phase cast modes = %q, want %q", p.CastModes, wantModes)
+	}
+	// plot is gorge's special action, not phase's cast-from-exile variant: not followed.
+	if p.FollowsCastMode("plot") {
+		t.Errorf("phase must not follow cast_mode plot")
+	}
+	for _, m := range wantModes {
+		if !p.FollowsCastMode(m) {
+			t.Errorf("phase must follow cast_mode %q", m)
+		}
+	}
+	for _, m := range []string{"flashback", "foretell", "escape", "casualty"} {
+		if p.FollowsCastMode(m) {
+			t.Errorf("phase must not follow cast_mode %q", m)
+		}
+	}
+	if p.RunnerEnv() != "XENGINE_PHASE_RUNNER" || p.MemEnv() != "XENGINE_PHASE_MEM" || p.WaitEnv() != "XENGINE_PHASE_WAIT" {
+		t.Errorf("phase env names %s %s %s", p.RunnerEnv(), p.MemEnv(), p.WaitEnv())
+	}
+}
+
+// TestManabrewEntry pins the Manabrew entry (ticket mb-5-runner).
+func TestManabrewEntry(t *testing.T) {
+	m, ok := Lookup("manabrew")
+	if !ok {
+		t.Fatal("manabrew is not registered")
+	}
+	cases := []struct {
+		name      string
+		got, want any
+	}{
+		{"display", m.Display, "Manabrew"},
+		{"runner", m.Runner, "scripts/manabrew-oracle-run.sh"},
+		{"prep", m.Prep, PrepFollowerExport},
+		{"stamps engine", m.StampsEngine, true},
+		{"consumes payment", m.ConsumesPayment, true},
+		{"turn cap", m.TurnCapMsg, ""},
+		{"lacks card", m.LacksCardMsg, "manabrew lacks card: "},
+		{"jvm", m.JVM, false},
+		{"skips damage step", m.SkipsDamageStep, false},
+		{"stops in cleanup", m.StopsInCleanup, false},
+		{"trailing misses", m.TrailingMisses, false},
+		{"taps with cast", m.TapsWithCast, false},
+		{"trigger order by name", m.TriggerOrderByName, false},
+	}
+	for _, c := range cases {
+		if c.got != c.want {
+			t.Errorf("manabrew %s = %#v, want %#v", c.name, c.got, c.want)
+		}
+	}
+	wantModes := []string{"", "adventure_alt", "warped", "kicked", "kicked1", "buyback", "entwined", "multikicked", "replicated"}
+	if !slices.Equal(m.CastModes, wantModes) {
+		t.Errorf("manabrew cast modes = %q, want %q", m.CastModes, wantModes)
+	}
+	for _, mode := range wantModes {
+		if !m.FollowsCastMode(mode) {
+			t.Errorf("manabrew must follow cast mode %q", mode)
+		}
+	}
+	for _, mode := range []string{"omen_alt", "modal_spell", "plot", "kicked2", "kickedboth", "offspring", "optionalcost", "flashback"} {
+		if m.FollowsCastMode(mode) {
+			t.Errorf("manabrew must not follow cast mode %q: the engine has no such cast", mode)
+		}
+	}
+	if m.RunnerEnv() != "XENGINE_MANABREW_RUNNER" || m.MemEnv() != "XENGINE_MANABREW_MEM" || m.WaitEnv() != "XENGINE_MANABREW_WAIT" {
+		t.Errorf("manabrew env names %s %s %s", m.RunnerEnv(), m.MemEnv(), m.WaitEnv())
 	}
 }
 

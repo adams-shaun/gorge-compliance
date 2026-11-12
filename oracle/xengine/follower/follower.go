@@ -102,6 +102,15 @@ var forgeCastModes = []string{"", "optionalcost",
 	"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined",
 	"offspring", "replicated", "multikicked"}
 
+// phaseCastModes are the cast_mode values the phase.rs driver acts on: exactly the modes its
+// answerer maps (CAST_MODES in steps.rs): the Forge driver's set without "plot". gorge's plot is
+// the Plot special action; phase's plot variant casts a card already plotted, so it cannot be
+// replayed from a hand cast.
+var phaseCastModes = []string{"", "optionalcost",
+	"adventure_alt", "omen_alt", "modal_spell", "warped",
+	"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined",
+	"offspring", "replicated", "multikicked"}
+
 // registry holds the followers in the order usage text lists them.
 var registry = []Follower{
 	{
@@ -136,6 +145,46 @@ var registry = []Follower{
 		StopsInCleanup:  true,
 		TrailingMisses:  true,
 		JVM:             true,
+	},
+	{
+		Name:    "phase",
+		Display: "phase.rs",
+		Runner:  "scripts/phase-oracle-run.sh",
+		// follower-export: the neutral identities and the --preflight refusals.
+		Prep:         PrepFollowerExport,
+		StampsEngine: true,
+		// The driver spends payment[i] units from the pool first.
+		ConsumesPayment: true,
+		// The cast modes the answerer maps (followers/phase/phase-follower/src/steps.rs
+		// CAST_MODES): they steer the prompts a cast raises (optional costs, casting
+		// variants, faces, alternative costs). Any other mode is a harness row in the driver, and
+		// the classifier files its difference as a driver gap (FollowsCastMode).
+		CastModes: phaseCastModes,
+		// The harness text emitted when a card is missing at run time.
+		LacksCardMsg: "phase lacks card: ",
+		// A Rust binary: the heavy lock alone.
+		JVM: false,
+	},
+	{
+		Name:    "manabrew",
+		Display: "Manabrew",
+		Runner:  "scripts/manabrew-oracle-run.sh",
+		// follower-export: the preflight refusals; Manabrew reads the same abilities
+		// script lines as Forge and ignores "neutral".
+		Prep:         PrepFollowerExport,
+		StampsEngine: true,
+		// The driver adds payment[i] to the pool and pays from the pool only.
+		ConsumesPayment: true,
+		// The modes the driver follows (step_machine.rs CAST_MODES): the ordinary cast, the
+		// play modes the engine's action space lists (adventure_alt, warped) and the optional
+		// costs its cast prompts ask for. Not followed: omen_alt, modal_spell, plot (no such
+		// cast or special action in the engine), kicked2, kickedboth (one kicker only),
+		// offspring, optionalcost (no cast prompt for them).
+		CastModes: []string{"", "adventure_alt", "warped", "kicked", "kicked1", "buyback", "entwined", "multikicked", "replicated"},
+		// The harness text emitted when a card is missing at run time.
+		LacksCardMsg: "manabrew lacks card: ",
+		// A Rust binary: the heavy lock alone.
+		JVM: false,
 	},
 }
 
