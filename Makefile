@@ -32,6 +32,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 FORGE_ORACLE_REF ?= 54a3777c237672e220425ef8f66955d0a017a71c
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
+# Follower (Rust) build output lives here, out of tree.
+FOLLOWERS_CACHE ?= $(or $(XDG_CACHE_HOME),$(HOME)/.cache)/gorge-compliance
+CARGO ?= $(HOME)/.cargo/bin/cargo
+
 .PHONY: help
 help:
 	@echo "gorge-compliance targets:"
@@ -48,12 +52,14 @@ help:
 	@echo "  make forge-oracle-setup — build the Forge oracle driver at FORGE_ORACLE_REF out of tree (heavy)"
 	@echo "  make compliance-pass SETS='FRA BLB' — XMage compliance pass over the sets; reruns only stale verdicts"
 	@echo "  make follower-check ENGINE=phase [ARGS='--setup-only --pool F'] — level-A scenarios through one follower (scripts/follower-check.sh)"
+	@echo "  make follower-sweep-smoke ENGINE=phase [GAMES=2] — one xengine chunk with one follower, pool narrowed by its preflight (scripts/follower-sweep-smoke.sh)"
 	@echo "  make smoke          — the script smokes (stubs only; no Java, no network)"
 	@echo "  make mtgish-fetch   — download the pinned mtgish data into .mtgish/<ref>/ (gitignored) and verify its sha256"
 	@echo "  make mtgish-xc      — the mtgish card-definition cross-check: corpus report + the corpus ledger ratchet"
+	@echo "  make follower-proto-test [RUN=name] — cargo test for the engine-neutral follower crate (followers/proto; output under FOLLOWERS_CACHE)"
 	@echo "  make xmage-driver-tests — the Java driver's unit tests (needs xmage-oracle-setup)"
 
-.PHONY: cards test boundary oracle-audit smoke
+.PHONY: cards test boundary oracle-audit smoke follower-proto-test
 cards:
 	@GORGE_ROOT='$(GORGE_ROOT)' FORGE_REF='$(FORGE_REF)' scripts/link-cards.sh
 
@@ -71,6 +77,9 @@ test-one: export TIMEOUT := $(TIMEOUT)
 test-one: export TAGS := $(TAGS)
 test-one:
 	@bash scripts/test-targets.sh one
+
+follower-proto-test:
+	systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% env CARGO_TARGET_DIR=$(FOLLOWERS_CACHE)/target/proto $(CARGO) test --locked --manifest-path followers/proto/Cargo.toml $(RUN)
 
 boundary:
 	go test -count=1 ./internal/boundary/
@@ -90,6 +99,7 @@ smoke:
 	bash ops/scripts/tests/xengine_sweep_smoke.sh
 	bash ops/scripts/tests/xengine_random_smoke.sh
 	bash ops/scripts/tests/follower_check_smoke.sh
+	bash ops/scripts/tests/follower_sweep_smoke_smoke.sh
 	bash ops/scripts/tests/test_targets_smoke.sh
 
 # xengine-sweep runs the chunked, resumable cross-engine sweep
@@ -186,3 +196,10 @@ pr:
 .PHONY: follower-check
 follower-check:
 	scripts/follower-check.sh $(ENGINE) $(ARGS)
+
+# follower-sweep-smoke runs one smoke-sized xengine chunk with one follower, the
+# pool narrowed by the follower's preflight (scripts/follower-sweep-smoke.sh):
+# ENGINE=phase [GAMES=2] [ARGS='--pool F --max-class harness=50'].
+.PHONY: follower-sweep-smoke
+follower-sweep-smoke:
+	scripts/follower-sweep-smoke.sh $(ENGINE) --games $(or $(GAMES),2) $(ARGS)
