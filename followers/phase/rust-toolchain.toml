@@ -1,0 +1,5 @@
+[toolchain]
+# phase's root manifest uses cargo-features = ["codegen-backend"], which only its nightly can read,
+# even as a git dependency.
+channel = "nightly-2026-04-19"
+components = ["rustfmt", "clippy"]
