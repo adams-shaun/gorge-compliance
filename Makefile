@@ -37,6 +37,7 @@ help:
 	@echo "gorge-compliance targets:"
 	@echo "  make cards [GORGE_ROOT=../gorge] — link a gorge checkout's .cards corpus here (run gorge's make fetch-cards compile-cards first)"
 	@echo "  make test           — go test ./... (capped like gorge's)"
+	@echo "  make test-one PKG=./p RUN=TestX — one capped, corpus-checked test run with one verdict line"
 	@echo "  make pr [PR_BASE=main] [DRY=1] — open/refresh a GitHub PR with a generated change overview"
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
 	@echo "  make oracle-audit   — the hand Oracle-text audit + XMage ports (audit/; ORACLE_RUN=<Card> to filter)"
@@ -58,6 +59,18 @@ cards:
 test:
 	go test $(GO_TEST_FLAGS) ./...
 
+# test-one: PKG=./path RUN='^TestX$' [SKIP=re] [V=1] [TIMEOUT=2m] [TAGS=a,b]
+# (scripts/test-targets.sh one; the last stdout line is the verdict).
+.PHONY: test-one
+test-one: export PKG := $(PKG)
+test-one: export RUN := $(RUN)
+test-one: export SKIP := $(SKIP)
+test-one: export V := $(V)
+test-one: export TIMEOUT := $(TIMEOUT)
+test-one: export TAGS := $(TAGS)
+test-one:
+	@bash scripts/test-targets.sh one
+
 boundary:
 	go test -count=1 ./internal/boundary/
 
@@ -75,6 +88,7 @@ smoke:
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
 	bash ops/scripts/tests/xengine_sweep_smoke.sh
 	bash ops/scripts/tests/xengine_random_smoke.sh
+	bash ops/scripts/tests/test_targets_smoke.sh
 
 # xengine-sweep runs the chunked, resumable cross-engine sweep
 # (scripts/xengine-sweep.sh): SETS='FDN BLB' CHUNKS=4 GAMES=50. Heavy: it starts
