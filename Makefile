@@ -37,8 +37,8 @@ FOLLOWERS_CACHE ?= $(or $(XDG_CACHE_HOME),$(HOME)/.cache)/gorge-compliance
 # Manabrew (AGPL-3.0, a Rust port of Forge's engine): upstream until the operator creates the fork
 # https://github.com/adams-shaun/manabrew; driver commits sit on branch `oracle` of the local clone.
 MANABREW_REPO ?= https://github.com/witchesofthehill/manabrew
-# dadee731dc1 = upstream main on 2026-11-10, the audited commit.
-MANABREW_ORACLE_REF ?= dadee731dc1c850f910411acc1b5cc6bb73253ac
+# 0614acae40c2 = upstream dadee731 + oracle patches: place_for_setup, take_state_edit, diagnostics sink, profile.oracle (local branch oracle; pushed to adams-shaun/manabrew by the operator)
+MANABREW_ORACLE_REF ?= 0614acae40c2d29e132cf654cc6ba59d4b92de6f
 MANABREW_ORACLE_DIR ?= $(FOLLOWERS_CACHE)/manabrew
 CARGO ?= $(HOME)/.cargo/bin/cargo
 # phase.rs follower: pinned build + card data (followers/phase/PHASE_PIN), out of tree.
@@ -59,6 +59,7 @@ help:
 	@echo "  make xmage-oracle-setup — build XMage at XMAGE_REF out of tree (heavy; run alone)"
 	@echo "  make forge-oracle-setup — build the Forge oracle driver at FORGE_ORACLE_REF out of tree (heavy)"
 	@echo "  make manabrew-oracle-setup — build Manabrew at MANABREW_ORACLE_REF and its card archive from gorge's FORGE_REF scripts, out of tree (heavy)"
+	@echo "  make manabrew-engine-test [RUN=filter] — run the Manabrew engine's lib tests in the MANABREW_ORACLE_REF build tree, capped (heavy)"
 	@echo "  make compliance-pass SETS='FRA BLB' — XMage compliance pass over the sets; reruns only stale verdicts"
 	@echo "  make follower-check ENGINE=phase [ARGS='--setup-only --pool F'] — level-A scenarios through one follower (scripts/follower-check.sh)"
 	@echo "  make follower-sweep-smoke ENGINE=phase [GAMES=2] — one xengine chunk with one follower, pool narrowed by its preflight (scripts/follower-sweep-smoke.sh)"
@@ -170,13 +171,17 @@ xmage-driver-tests:
 compliance-manifests:
 	go run ./cmd/compliance manifest -xmage $(XMAGE_ORACLE_DIR)/sets-only -ref $(XMAGE_REF) -out oracle/compliance/manifests
 
-.PHONY: xmage-oracle-setup forge-oracle-setup manabrew-oracle-setup
+.PHONY: xmage-oracle-setup forge-oracle-setup manabrew-oracle-setup manabrew-engine-test
 xmage-oracle-setup:
 	XMAGE_REF=$(XMAGE_REF) XMAGE_ORACLE_DIR=$(XMAGE_ORACLE_DIR) scripts/xmage-oracle-setup.sh
 forge-oracle-setup:
 	FORGE_REPO='$(FORGE_REPO)' FORGE_REF='$(FORGE_REF)' FORGE_ORACLE_REF='$(FORGE_ORACLE_REF)' FORGE_ORACLE_DIR='$(FORGE_ORACLE_DIR)' scripts/forge-oracle-setup.sh
 manabrew-oracle-setup:
 	FORGE_REPO='$(FORGE_REPO)' FORGE_REF='$(FORGE_REF)' MANABREW_REPO='$(MANABREW_REPO)' MANABREW_ORACLE_REF='$(MANABREW_ORACLE_REF)' MANABREW_ORACLE_DIR='$(MANABREW_ORACLE_DIR)' FOLLOWERS_CACHE='$(FOLLOWERS_CACHE)' scripts/manabrew-oracle-setup.sh
+
+MANABREW_ORACLE_REF12 = $(shell printf '%.12s' '$(MANABREW_ORACLE_REF)')
+manabrew-engine-test:
+	cd '$(MANABREW_ORACLE_DIR)/build-$(MANABREW_ORACLE_REF12)/manabrew-rs' && CARGO_HOME='$(FOLLOWERS_CACHE)/cargo-home' CARGO_TARGET_DIR='$(MANABREW_ORACLE_DIR)/target' PATH='$(dir $(CARGO))':"$$PATH" systemd-run --user --scope -q -p MemoryMax=8G -p CPUQuota=400% $(CARGO) test --locked --profile oracle -p manabrew-engine --lib $(RUN)
 
 # forge-verdicts runs a level-A Forge pass with gen -printed and writes the
 # scenarios Forge agrees with as Forge-only verdict rows.
