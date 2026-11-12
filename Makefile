@@ -38,7 +38,7 @@ FOLLOWERS_CACHE ?= $(or $(XDG_CACHE_HOME),$(HOME)/.cache)/gorge-compliance
 # https://github.com/adams-shaun/manabrew; driver commits sit on branch `oracle` of the local clone.
 MANABREW_REPO ?= https://github.com/witchesofthehill/manabrew
 # 0f38d4c6956a = upstream dadee731 + oracle patches (place_for_setup, take_state_edit, diagnostics sink, profile.oracle) + the manabrew-oracle driver crate: CLI, preflight and snapshot writer (local branch oracle; pushed to adams-shaun/manabrew by the operator)
-MANABREW_ORACLE_REF ?= 0f38d4c6956a00e4fea27697c07aefcfcd4cd845
+MANABREW_ORACLE_REF ?= 1f1d012d1a3204bb2abe8926c1b9e6c09f0cbbf9
 MANABREW_ORACLE_DIR ?= $(FOLLOWERS_CACHE)/manabrew
 CARGO ?= $(HOME)/.cargo/bin/cargo
 # phase.rs follower: pinned build + card data (followers/phase/PHASE_PIN), out of tree.
