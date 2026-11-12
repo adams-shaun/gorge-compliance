@@ -32,6 +32,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 FORGE_ORACLE_REF ?= 54a3777c237672e220425ef8f66955d0a017a71c
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
+# Follower (Rust) build output lives here, out of tree.
+FOLLOWERS_CACHE ?= $(or $(XDG_CACHE_HOME),$(HOME)/.cache)/gorge-compliance
+CARGO ?= $(HOME)/.cargo/bin/cargo
+
 .PHONY: help
 help:
 	@echo "gorge-compliance targets:"
@@ -52,9 +56,10 @@ help:
 	@echo "  make smoke          — the script smokes (stubs only; no Java, no network)"
 	@echo "  make mtgish-fetch   — download the pinned mtgish data into .mtgish/<ref>/ (gitignored) and verify its sha256"
 	@echo "  make mtgish-xc      — the mtgish card-definition cross-check: corpus report + the corpus ledger ratchet"
+	@echo "  make follower-proto-test [RUN=name] — cargo test for the engine-neutral follower crate (followers/proto; output under FOLLOWERS_CACHE)"
 	@echo "  make xmage-driver-tests — the Java driver's unit tests (needs xmage-oracle-setup)"
 
-.PHONY: cards test boundary oracle-audit smoke
+.PHONY: cards test boundary oracle-audit smoke follower-proto-test
 cards:
 	@GORGE_ROOT='$(GORGE_ROOT)' FORGE_REF='$(FORGE_REF)' scripts/link-cards.sh
 
@@ -72,6 +77,9 @@ test-one: export TIMEOUT := $(TIMEOUT)
 test-one: export TAGS := $(TAGS)
 test-one:
 	@bash scripts/test-targets.sh one
+
+follower-proto-test:
+	systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% env CARGO_TARGET_DIR=$(FOLLOWERS_CACHE)/target/proto $(CARGO) test --locked --manifest-path followers/proto/Cargo.toml $(RUN)
 
 boundary:
 	go test -count=1 ./internal/boundary/
