@@ -71,6 +71,8 @@ if [ ! -d "$cards" ] || [ -z "$(ls -A "$cards" 2>/dev/null | head -n 1)" ]; then
 fi
 
 # ---- run ----
+# The go shim allows `go test` only from a sanctioned wrapper (as gorge's copy).
+export GORGE_TEST_WRAPPER=1
 out=.oracle-build/test/one-${sha%+dirty}.json
 mkdir -p "$(dirname "$out")"
 args=(test -json -failfast -timeout "$TIMEOUT" -run "$RUN")
