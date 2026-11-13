@@ -483,6 +483,17 @@ func TestGateDeadTurnHistory(t *testing.T) {
 		t.Fatalf("(c) read tally: reasons %v, want field:Game.ResolvedThisTurn", c.Reasons)
 	}
 
+	// (c2) the last-turn attack record is live only when a card reads it.
+	e = base.Clone()
+	e.G.Players[0].AttackedSeatsLastTurn = 1 << 1
+	if c := capture(e, at, true); len(c.Reasons) != 0 {
+		t.Fatalf("(c2) unread attack record: reasons %v, want none", c.Reasons)
+	}
+	plantCard(t, reg, e, "O-Kagachi, Vengeful Kami")
+	if c := capture(e, at, true); !hasReason(c, "field:Player.AttackedSeatsLastTurn") {
+		t.Fatalf("(c2) read attack record: reasons %v, want field:Player.AttackedSeatsLastTurn", c.Reasons)
+	}
+
 	// (d) a runtime SVar is live only when a card in the game names its key.
 	e = base.Clone()
 	e.G.Objs[perm].RuntimeSVars = map[string]int32{"AFLifeLost": 2}
