@@ -419,6 +419,12 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return false
 	case typ == "Game" && name == "ResolvedThisTurn":
 		return v.Len() > 0 && w.gameMentions("ResolvedThisTurn")
+	case typ == "Player" && name == "AttackedSeatsLastTurn":
+		// The record of the seat's last completed turn is set by any attack, so
+		// it is non-zero in most mid-game cuts; its only readers are the
+		// attackedYouTheirLastTurn player property (O-Kagachi, Avenge,
+		// Weathered Sentinels), so it is history no other card can see.
+		return v.Uint() != 0 && w.gameMentions("attackedYouTheirLastTurn")
 	case typ == "Object" && name == "ExiledCards":
 		if selfExile(o) {
 			w.why[reasonSelfExile] = true
