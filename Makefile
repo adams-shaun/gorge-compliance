@@ -85,13 +85,13 @@ test:
 # (scripts/test-targets.sh one; the last stdout line is the verdict).
 .PHONY: test-one
 test-one: export PKG := $(PKG)
-test-one: export RUN := $(RUN)
-test-one: export SKIP := $(SKIP)
+# RUN/SKIP go to the recipe through $(value ...), verbatim: a command-line RUN re-expands on export and make eats
+# `$|` / `$)` in it (gorge 8117b8ec09; '^TestA$|^TestB$' became '^TestA^TestB$' and matched nothing).
 test-one: export V := $(V)
 test-one: export TIMEOUT := $(TIMEOUT)
 test-one: export TAGS := $(TAGS)
 test-one:
-	@bash scripts/test-targets.sh one
+	@RUN='$(value RUN)' SKIP='$(value SKIP)' bash scripts/test-targets.sh one
 
 follower-proto-test:
 	systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% env CARGO_TARGET_DIR=$(FOLLOWERS_CACHE)/target/proto $(CARGO) test --locked --manifest-path followers/proto/Cargo.toml $(RUN)
