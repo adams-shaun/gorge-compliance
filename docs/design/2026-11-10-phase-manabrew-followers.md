@@ -258,7 +258,8 @@ adjudication writes.
   alphabetically. A follower that did not compare is appended with a mark: `P?` means unsupported
   (it lacks a card), `P–` means not compared. Examples: `FPX|G`, `GP|FX`, `GFX|P`, `FX|G P?`,
   `AGREE4`. With exactly G, F and X it spells the three-way class strings. Labels are
-  `gorge_suspect`, `<engine>_suspect`, `split` and `all_differ`. `Vote("P")` gives `with_gorge`,
+  `gorge_suspect`, `<engine>_suspect`, `split`, `all_differ`, and
+  `gorge_<engine>_only` when gorge and a single follower were the only ones to compare and they differ. `Vote("P")` gives `with_gorge`,
   `with_others`, `alone`, `unsupported` or `uncompared`. Engines are counted one by one, not by
   family; Manabrew is not a letter yet.
 - **xengine.** `xengine adjudicate -phase DIFF_P [-phase-rows ROWS]` writes `fourway.jsonl` and

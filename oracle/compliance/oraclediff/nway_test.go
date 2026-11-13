@@ -57,6 +57,7 @@ func TestNWayFourEngines(t *testing.T) {
 		{"phase harness", []string{"GF"}, map[string]string{"P": MarkUncompared}, "GF|X P–", NWaySuspect("xmage"), PhaseUncompared},
 		{"xmage lacks, phase with forge", []string{"FP"}, map[string]string{"X": MarkUnsupported}, "FP|G X?", NWayGorgeSuspect, PhaseWithOthers},
 		{"agreement among those that compared", []string{"GF"}, map[string]string{"P": MarkUnsupported, "X": MarkUncompared}, "GF P? X–", "", PhaseUnsupported},
+		{"gorge and phase alone, apart", nil, map[string]string{"F": MarkUncompared, "X": MarkUncompared}, "G|P F– X–", NWayOnly("phase"), PhaseAlone},
 	} {
 		t.Run(c.name, func(t *testing.T) {
 			v := NWay([]string{"F", "P", "X"}, c.marks, eqTable(c.agree...), testNames)

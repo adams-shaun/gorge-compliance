@@ -37,8 +37,14 @@ const (
 	// against it (in one class or several).
 	NWaySplit = "split"
 	// A single follower alone against gorge and everyone else that compared
-	// is "<name>_suspect" (NWaySuspect).
+	// is "<name>_suspect" (NWaySuspect); gorge and one follower alone, apart,
+	// is "gorge_<name>_only" (NWayOnly), as the three-way gorge_forge_only.
 )
+
+// NWayOnly is the label when gorge and a single follower were the only
+// engines to compare, and they differ: one reading against another, no
+// majority.
+func NWayOnly(name string) string { return "gorge_" + name + "_only" }
 
 // AgreeN is the pattern when every engine compared and all agree: "AGREE"
 // plus the engine count ("AGREE4" for gorge, Forge, XMage and phase.rs).
@@ -56,8 +62,8 @@ type NWayVerdict struct {
 	// AGREE3 is ThreeWay's word).
 	Pattern string
 	// Label is the pattern's label: NWayGorgeSuspect, NWayAllDiffer,
-	// NWaySplit, NWaySuspect(name), or "" (all compared agree, or fewer than
-	// two engines compared).
+	// NWaySplit, NWaySuspect(name), NWayOnly(name), or "" (all compared
+	// agree, or gorge alone compared).
 	Label string
 	// Classes are the agreement classes, in pattern order.
 	Classes [][]string
@@ -172,6 +178,16 @@ func letterLess(a, b string) bool {
 func nwayLabel(classes [][]string, names map[string]string) string {
 	if len(classes) < 2 {
 		return ""
+	}
+	if len(classes) == 2 && len(classes[0]) == 1 && len(classes[1]) == 1 {
+		l := classes[1][0]
+		if l == "G" {
+			l = classes[0][0]
+		}
+		if n := names[l]; n != "" {
+			return NWayOnly(n)
+		}
+		return NWayOnly(l)
 	}
 	var gc []string
 	var others [][]string
