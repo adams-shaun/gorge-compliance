@@ -93,18 +93,32 @@ func Item(item oraclegen.Item, g rules.OracleResult, xRow, fRow oraclediff.XResu
 // differs at. The engines have parted there, and the followers then replay the rest
 // of a game gorge alone played, so a later difference between them says nothing.
 func ItemLegs(item oraclegen.Item, g rules.OracleResult, xRow, fRow oraclediff.XResult) (oraclediff.Pattern, Legs) {
+	p, legs, _ := cutLegs(item, g, xRow, fRow)
+	return p, legs
+}
+
+// cut holds the three results a three-way verdict was decided over: gorge's
+// and both follower rows, after the partial and first-difference cuts.
+type cut struct {
+	G    rules.OracleResult
+	X, F oraclediff.XResult
+}
+
+// cutLegs is ItemLegs with the cut results its legs compared.
+func cutLegs(item oraclegen.Item, g rules.OracleResult, xRow, fRow oraclediff.XResult) (oraclediff.Pattern, Legs, cut) {
 	g, xRow, fRow = cutToPartial(item, g, classify.SkipEarlyCasts(item, g, xRow), fRow)
 	p, legs := itemLegs(item, g, xRow, fRow)
 	x, xok := firstDifference(g, legs.GX)
 	f, fok := firstDifference(g, legs.GF)
 	if !xok || !fok || p != oraclediff.AllDiffer {
-		return p, legs
+		return p, legs, cut{g, xRow, fRow}
 	}
 	n := min(x, f) + 1
 	g.Snapshots = g.Snapshots[:n]
 	xRow.Snapshots = xRow.Snapshots[:n]
 	fRow.Snapshots = fRow.Snapshots[:n]
-	return itemLegs(item, g, xRow, fRow)
+	p, legs = itemLegs(item, g, xRow, fRow)
+	return p, legs, cut{g, xRow, fRow}
 }
 
 func itemLegs(item oraclegen.Item, g rules.OracleResult, xRow, fRow oraclediff.XResult) (oraclediff.Pattern, Legs) {

@@ -62,6 +62,7 @@ var gameTable = map[string]entry{
 	"Draw":                isRefused("a finished game has no window"),
 	"ExtraTurns":          isRefused("pending extra turns are not placeable"),
 	"SkipTurns":           isRefused("pending skipped turns are not placeable"),
+	"PhaseSkips":          isRefused("a seat's pending or live combat-phase skip (CR 614.10, DB$ SkipPhase: False Peace); nil until one was ever granted, and setup cannot place it"),
 	"ExtraTurnQueue":      isRefused("pending extra turns are not placeable"),
 	"ExtraPhases":         isRefused("pending extra phases are not placeable"),
 	"CombatsThisTurn":     isDerived("zero until combat begins; recounted"),

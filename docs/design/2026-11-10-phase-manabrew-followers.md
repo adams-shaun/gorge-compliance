@@ -247,6 +247,35 @@ Today `adjudicate` takes exactly X plus F and builds the patterns from three pai
 `findings.jsonl` gets `{pattern, families_against_g, followers{engine: class}}`. The ticket drafts
 gain the follower list.
 
+#### The phase.rs column, as built (2026-11-12)
+
+The first slice of H5 adds phase.rs (P) as a fourth column and changes nothing the three-way
+adjudication writes.
+
+- **Core.** `oraclediff.NWay` (`oracle/compliance/oraclediff/nway.go`) is pure. It takes which pairs
+  of engines agree, unions the agreeing engines into classes and spells the pattern. Classes are
+  ordered by size, then gorge's class first; within a class gorge comes first, then the letters
+  alphabetically. A follower that did not compare is appended with a mark: `P?` means unsupported
+  (it lacks a card), `P–` means not compared. Examples: `FPX|G`, `GP|FX`, `GFX|P`, `FX|G P?`,
+  `AGREE4`. With exactly G, F and X it spells the three-way class strings. Labels are
+  `gorge_suspect`, `<engine>_suspect`, `split`, `all_differ`, and
+  `gorge_<engine>_only` when gorge and a single follower were the only ones to compare and they differ. `Vote("P")` gives `with_gorge`,
+  `with_others`, `alone`, `unsupported` or `uncompared`. Engines are counted one by one, not by
+  family; Manabrew is not a letter yet.
+- **xengine.** `xengine adjudicate -phase DIFF_P [-phase-rows ROWS]` writes `fourway.jsonl` and
+  `patterns4.tsv` beside the unchanged `findings.jsonl`, `patterns.tsv`, ledger and drafts.
+  - The G/F/X pairs are the three-way legs themselves.
+  - P is compared with G, F and X over the stretch the three-way verdict turned on: up to the first
+    checkpoint where X or F differs from G.
+  - A P row that stopped earlier counts only if it had already parted from G, and is then `alone`.
+  - Not-sent items whose reason is `phase_lacks_card`, and run-time `xmage_lacks` rows, are
+    unsupported.
+  - Items where only P diverged enter the table too (`GFX|P`).
+  - `scripts/xengine-sweep.sh` passes `-phase` when phase is among `XENGINE_FOLLOWERS`.
+- **oraclediff.** `oraclediff adjudicate -phase-diff PATH [-phase-cache DIR] [-phase-prep PATH]`
+  adds `four`, `four_label`, `phase` and `gp_field` to each classified report row. The ledger shards
+  and every three-way field are unchanged.
+
 **What this buys in confidence.** An xengine item where G, X and P agree is backed by two independent
 card encodings beside gorge's. Today that's one. A `FX|G` item whose P also agrees with F and X is a
 strong gorge suspect. A `FX|G` item where P sides with G is a likely shared Forge/XMage reading, the
