@@ -54,6 +54,11 @@ func Write(out string, res Result) error {
 			return err
 		}
 	}
+	if res.Four != nil {
+		if err := writeFour(out, res.Four); err != nil {
+			return err
+		}
+	}
 	var fj bytes.Buffer
 	hist := map[string]int{}
 	for _, r := range res.Rows {
@@ -216,4 +221,38 @@ func WriteLedger(dir string, rows []Row, forgeRef string) error {
 		}
 	}
 	return nil
+}
+
+// writeFour writes the four-way table: fourway.jsonl (one FourRow per item,
+// no values) and patterns4.tsv (the four-way pattern histogram, then the
+// phase.rs vote histogram under "phase:").
+func writeFour(out string, rows []FourRow) error {
+	var fj, pat bytes.Buffer
+	hist, votes := map[string]int{}, map[string]int{}
+	for _, r := range rows {
+		b, err := json.Marshal(r)
+		if err != nil {
+			return err
+		}
+		fj.Write(append(b, '\n'))
+		hist[r.Four]++
+		votes["phase:"+r.Phase]++
+	}
+	for _, h := range []map[string]int{hist, votes} {
+		ks := make([]string, 0, len(h))
+		for k := range h {
+			ks = append(ks, k)
+		}
+		sort.Strings(ks)
+		for _, k := range ks {
+			fmt.Fprintf(&pat, "%s\t%d\n", k, h[k])
+		}
+	}
+	if err := os.MkdirAll(out, 0o755); err != nil {
+		return err
+	}
+	if err := os.WriteFile(filepath.Join(out, "fourway.jsonl"), fj.Bytes(), 0o644); err != nil {
+		return err
+	}
+	return os.WriteFile(filepath.Join(out, "patterns4.tsv"), pat.Bytes(), 0o644)
 }

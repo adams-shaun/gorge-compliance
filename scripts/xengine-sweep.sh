@@ -25,7 +25,9 @@
 #   3. xengine diff  -- classify the follower rows into <chunk>/diff-<f>
 #      with both followers, xengine adjudicate -- the three-way pattern of each
 #                       item either diverged on (<chunk>/adjudicate/, ticket drafts
-#                       under tickets/; nothing is ruled or committed)
+#                       under tickets/; nothing is ruled or committed); with phase
+#                       among the followers too, the four-way table beside it
+#                       (<chunk>/adjudicate/fourway.jsonl, patterns4.tsv)
 #                       With XENGINE_DIRAC=1 play first plays each game of a set
 #                       whose decks a dirac table holds in lockstep with gorge
 #                       (<chunk>/dirac.jsonl), and adjudicate writes dirac's answer
@@ -321,8 +323,11 @@ finish_chunk() {
 		cargs+=(-ledger "$d/diff-$f/compared.tsv")
 	done
 	# Both followers' diffs are needed (the patterns compare them with each other).
+	# phase.rs, when it followed too, is the fourth column (adjudicate/fourway.jsonl).
 	if [[ " $followers " == *" forge "* && " $followers " == *" xmage "* ]]; then
-		xe adjudicate -play "$d" -xmage "$d/diff-xmage" -forge "$d/diff-forge" -out "$d/adjudicate" >"$d/adjudicate.log" 2>&1 \
+		local pargs=()
+		[[ " $followers " != *" phase "* ]] || pargs=(-phase "$d/diff-phase")
+		xe adjudicate -play "$d" -xmage "$d/diff-xmage" -forge "$d/diff-forge" ${pargs[@]+"${pargs[@]}"} -out "$d/adjudicate" >"$d/adjudicate.log" 2>&1 \
 			|| { echo "$s/$c: adjudicate FAILED"; tail -3 "$d/adjudicate.log"; return 1; }
 	fi
 	xe cov "${cargs[@]}" -write "$d/ledger-out.tsv" >"$d/cov.log" 2>&1 || { echo "$s/$c: ledger merge FAILED"; tail -3 "$d/cov.log"; return 1; }

@@ -11,7 +11,9 @@ import (
 )
 
 // runAdjudicate gives the items that diverged from a follower a three-way
-// verdict and drafts gorge tickets from the gorge_suspect clusters. Everything
+// verdict and drafts gorge tickets from the gorge_suspect clusters. With
+// -phase it also places phase.rs as a fourth column (fourway.jsonl,
+// patterns4.tsv), leaving the three-way output byte for byte as it was. Everything
 // it writes is off-repo; it never writes a verdict row or a ruling.
 func runAdjudicate(args []string) error {
 	fs := flag.NewFlagSet("adjudicate", flag.ExitOnError)
@@ -20,6 +22,8 @@ func runAdjudicate(args []string) error {
 	fDiff := fs.String("forge", "", "xengine diff dir of the Forge follower (required)")
 	xRows := fs.String("xmage-rows", "", "XMage rows (default <play>/xmage.jsonl)")
 	fRows := fs.String("forge-rows", "", "Forge rows (default <play>/forge.jsonl)")
+	pDiff := fs.String("phase", "", "xengine diff dir of the phase.rs follower: adds the four-way table (fourway.jsonl, patterns4.tsv); the three-way output is unchanged")
+	pRows := fs.String("phase-rows", "", "phase.rs rows (default <play>/phase.jsonl)")
 	out := fs.String("out", "", "output dir, outside the repository (required)")
 	ledger := fs.String("ledger", "", "also write the compact ledger shards here (outside the repository; opt-in, nothing is committed by this tool)")
 	forgeRef := fs.String("forge-ref", "", "FORGE_ORACLE_REF[:12] stamped on ledger rows")
@@ -46,6 +50,14 @@ func runAdjudicate(args []string) error {
 	if err != nil {
 		return err
 	}
+	if *pDiff != "" {
+		if *pRows == "" {
+			*pRows = filepath.Join(*playDir, "phase.jsonl")
+		}
+		if err := adjudicate.LoadPhase(&in, *pDiff, *pRows); err != nil {
+			return err
+		}
+	}
 	if in.HasAgree, err = adjudicate.CommittedAgree(*verdicts); err != nil {
 		return err
 	}
@@ -68,5 +80,26 @@ func runAdjudicate(args []string) error {
 			fmt.Printf("  %-13s %d\n", p, hist[p])
 		}
 	}
+	if res.Four != nil {
+		printFour(res.Four)
+	}
 	return nil
+}
+
+// printFour prints the four-way table's pattern and phase.rs vote histograms.
+func printFour(rows []adjudicate.FourRow) {
+	four, votes := map[string]int{}, map[string]int{}
+	for _, r := range rows {
+		four[r.Four]++
+		votes[r.Phase]++
+	}
+	fmt.Printf("four-way (G F P X): %d item(s)\n", len(rows))
+	for _, k := range sortedKeys(four) {
+		fmt.Printf("  %-13s %d\n", k, four[k])
+	}
+	fmt.Printf("phase.rs:")
+	for _, k := range sortedKeys(votes) {
+		fmt.Printf(" %s=%d", k, votes[k])
+	}
+	fmt.Println()
 }

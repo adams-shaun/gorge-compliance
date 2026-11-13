@@ -108,6 +108,15 @@ type reportRow struct {
 	Contradiction string `json:"contradiction,omitempty"`
 	// Note is a skip reason or remark.
 	Note string `json:"note,omitempty"`
+	// Four, FourLabel and Phase are the phase.rs column (-phase-diff):
+	// the oraclediff.NWay pattern over G, F, P and X, its label, and where
+	// phase.rs stands (with_gorge, with_others, alone, unsupported,
+	// uncompared). GPField is the first field phase.rs differs from gorge
+	// at. All empty without -phase-diff.
+	Four      string `json:"four,omitempty"`
+	FourLabel string `json:"four_label,omitempty"`
+	Phase     string `json:"phase,omitempty"`
+	GPField   string `json:"gp_field,omitempty"`
 }
 
 func runAdjudicate(args []string) error {
@@ -123,6 +132,9 @@ func runAdjudicate(args []string) error {
 	ledger := fs.String("ledger", adjudicationDir, "ledger directory")
 	report := fs.String("report", "", "per-row report JSONL (default: adjudicate-report.jsonl next to -forge-diff, in the run directory)")
 	mark := fs.Bool("mark-review", false, "set Review: pending on the contradiction rows through compliance.ReplaceVerdicts")
+	pDiff := fs.String("phase-diff", "", "follower-diff -engine phase JSONL: adds phase.rs as a fourth column (four, four_label, phase, gp_field) to the report; the ledger and the three-way fields are unchanged")
+	pCache := fs.String("phase-cache", "", "phase.rs result cache of that follower-diff (the P/F and P/X legs; without it only P/G is compared)")
+	pPrep := fs.String("phase-prep", "", "phase.rs refusals from follower-export (default: phase-prep.jsonl beside -phase-diff, if present); a refused card is \"unsupported\", never a disagreement")
 	fs.Parse(args)
 	if *scen == "" || *fdPath == "" || *xcache == "" || *ref == "" {
 		return fmt.Errorf("adjudicate needs -scenarios, -forge-diff, -xmage-cache and -oracle-ref")
@@ -150,9 +162,15 @@ func runAdjudicate(args []string) error {
 	if dup > 0 {
 		fmt.Printf("forge-diff: %d duplicate scenario rows (first kept)\n", dup)
 	}
-	res, err := adjudicateRun(*scen, *verdicts, frows,
+	var ph *phaseLeg
+	if *pDiff != "" {
+		if ph, err = loadPhaseLeg(*pDiff, *pCache, *pPrep); err != nil {
+			return err
+		}
+	}
+	res, err := adjudicateRunPhase(*scen, *verdicts, frows,
 		oraclediff.Cache{Dir: *xcache}, oraclediff.Cache{Dir: forgeCache},
-		short12(*ref))
+		short12(*ref), ph)
 	if err != nil {
 		return err
 	}
@@ -163,6 +181,10 @@ func runAdjudicate(args []string) error {
 		return err
 	}
 	printCounts("patterns", res.patterns)
+	if ph != nil {
+		printCounts("four-way", res.fours)
+		printCounts("phase.rs", res.phase)
+	}
 	printCounts("skip", res.skips)
 	if len(res.contradictions) > 0 {
 		printCounts("contradiction", res.contradictions)
@@ -191,12 +213,22 @@ type adjudicateResult struct {
 	contradictions map[string]int
 	// review holds the verdict rows -mark-review would rewrite.
 	review []compliance.VerdictRow
+	// fours and phase count the four-way patterns and phase.rs's votes
+	// (-phase-diff only).
+	fours, phase map[string]int
 }
 
 // adjudicateRun classifies every scenario line. frows are the run's
 // forge-diff rows keyed by scenario sha; the caches answer the V(F,X) leg.
 func adjudicateRun(scenPath, verdictDir string, frows map[string]ForgeRow,
 	xcache, forgeCache oraclediff.Cache, ref12 string) (adjudicateResult, error) {
+	return adjudicateRunPhase(scenPath, verdictDir, frows, xcache, forgeCache, ref12, nil)
+}
+
+// adjudicateRunPhase is adjudicateRun with phase.rs as a fourth column when ph
+// is not nil. Everything adjudicateRun writes is the same either way.
+func adjudicateRunPhase(scenPath, verdictDir string, frows map[string]ForgeRow,
+	xcache, forgeCache oraclediff.Cache, ref12 string, ph *phaseLeg) (adjudicateResult, error) {
 	all, err := compliance.LoadVerdicts(verdictDir)
 	if err != nil {
 		return adjudicateResult{}, err
@@ -205,6 +237,8 @@ func adjudicateRun(scenPath, verdictDir string, frows map[string]ForgeRow,
 		patterns:       map[string]int{},
 		skips:          map[string]int{},
 		contradictions: map[string]int{},
+		fours:          map[string]int{},
+		phase:          map[string]int{},
 	}
 	err = readLines(scenPath, func(b []byte) error {
 		var it oraclegen.Item
@@ -248,15 +282,17 @@ func adjudicateRun(scenPath, verdictDir string, frows map[string]ForgeRow,
 		// its own pattern without it).
 		fx := oraclediff.Verdict{}
 		fxMissing := ""
+		var fsnap, xsnap *oraclediff.XResult
 		if !forgeHarness && gf.Status != oraclediff.Harness &&
 			(gx.Status == oraclediff.Agree || gx.Status == oraclediff.Diverge) {
-			fsnap, ok := forgeCache.Get(fr.RequestSHA)
+			fres, ok := forgeCache.Get(fr.RequestSHA)
 			if !ok {
 				fxMissing = "no cached Forge result for the F/X leg (request_sha " + short12(fr.RequestSHA) + ")"
-			} else if xsnap, ok := xcache.Get(sha); !ok {
+			} else if xs, ok := xcache.Get(sha); !ok {
 				fxMissing = "no cached XMage result for the F/X leg"
 			} else {
-				fx = oraclediff.CompareOpts(oraclediff.ForgeOracleResult(fsnap), nil, xsnap, it.Compare, it.Ignore...)
+				fsnap, xsnap = &fres, &xs
+				fx = oraclediff.CompareOpts(oraclediff.ForgeOracleResult(fres), nil, xs, it.Compare, it.Ignore...)
 			}
 		}
 		tw := oraclediff.ThreeWay(gx, gf, fx, forgeHarness, false)
@@ -279,6 +315,11 @@ func adjudicateRun(scenPath, verdictDir string, frows map[string]ForgeRow,
 		}
 		if fx.Status == oraclediff.Diverge {
 			rep.FXField = fx.Field
+		}
+		if ph != nil {
+			ph.place(&rep, it, sha, legs3{gx, gf, fx, forgeHarness}, fsnap, xsnap)
+			res.fours[rep.Four]++
+			res.phase[rep.Phase]++
 		}
 		contradict, mark, corroborated := adjudicateRead(&rep, vr, tw.Pattern, ref12)
 		if corroborated {

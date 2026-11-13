@@ -35,6 +35,10 @@ type Input struct {
 	HasAgree func(card string) bool
 	// Dirac is the play's dirac.jsonl by game id; nil when dirac did not play.
 	Dirac map[string]dside.Row
+	// PRows and PFind are phase.rs's rows and xe-6 findings (LoadPhase); nil
+	// when the adjudication has no fourth column, and nothing below changes.
+	PRows map[string]oraclediff.XResult
+	PFind map[string]classify.Finding
 }
 
 // Row is one adjudicated item. It holds ids, labels and field names only,
@@ -102,6 +106,8 @@ type Result struct {
 	Notes    []string // xmage_suspect and forge_suspect remarks, by id
 	Clusters []Cluster
 	Drafts   []Cluster // the clusters that become a ticket draft
+	// Four is the four-way table (fourway.go), by id; nil without phase.
+	Four []FourRow
 }
 
 var digits = regexp.MustCompile(`\d+`)
@@ -161,6 +167,9 @@ func Run(in Input) Result {
 			res.Notes = append(res.Notes, fmt.Sprintf("%s: %s: gorge and XMage agree, Forge differs at %s; recorded only", id, row.Pattern, row.GFField))
 		}
 	}
+	if in.PFind != nil {
+		res.Four = fourRows(ids, in)
+	}
 	res.Dirac = diracRows(ids, in, res.Rows)
 	res.Clusters = clusters(res.Findings)
 	for _, c := range res.Clusters {
@@ -169,6 +178,27 @@ func Run(in Input) Result {
 		}
 	}
 	return res
+}
+
+// fourRows places phase.rs beside every item that enters the four-way table.
+// An item phase has no finding for is uncompared on its side.
+func fourRows(ids []string, in Input) []FourRow {
+	out := []FourRow{}
+	for _, id := range ids {
+		xf, ff := in.XFind[id], in.FFind[id]
+		pf, ok := in.PFind[id]
+		if !ok {
+			pf = classify.Finding{ID: id, Engine: "phase", Class: classify.ClassHarness, Step: -1, Msg: "no phase finding"}
+		}
+		item, haveItem := in.Items[id]
+		g, haveG := in.Gorge[id]
+		if !EligibleFour(xf.Class, ff.Class, pf.Class) || !haveItem || !haveG {
+			continue
+		}
+		_, r := Four(item, g, in.XRows[id], in.FRows[id], in.PRows[id], xf, ff, pf)
+		out = append(out, r)
+	}
+	return out
 }
 
 // diracRows reads dirac's answer for every item of a game it played.
@@ -363,6 +393,18 @@ func Load(playDir, xDiff, fDiff, xRows, fRows string) (Input, error) {
 	}
 	in.Dirac, err = readDirac(filepath.Join(playDir, "dirac.jsonl"))
 	return in, err
+}
+
+// LoadPhase adds phase.rs's rows (pRows, the phase runner's output) and its
+// `xengine diff -engine phase` findings (pDiff) to in, which makes the
+// adjudication write the four-way table beside the three-way one.
+func LoadPhase(in *Input, pDiff, pRows string) error {
+	var err error
+	if in.PRows, err = readRows(pRows, "phase"); err != nil {
+		return err
+	}
+	in.PFind, err = readFindings(pDiff)
+	return err
 }
 
 // readDirac reads a play's dirac rows; a play without the file has none.

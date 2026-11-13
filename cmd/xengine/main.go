@@ -8,7 +8,7 @@
 //	xengine cov  -ledger A.tsv [-ledger B.tsv ...] [-sets FDN,BLB] [-sub BASE.tsv] [-missing] [-write OUT.tsv]
 //	xengine calib -play DIR -diff DIR2 -engine xmage|forge
 //	xengine xprep -play DIR -out xitems.jsonl [-manifests DIR]
-//	xengine adjudicate -play DIR -xmage DIFF_X -forge DIFF_F -out DIR3 [-ledger DIR] [-forge-ref REF12]
+//	xengine adjudicate -play DIR -xmage DIFF_X -forge DIFF_F -out DIR3 [-ledger DIR] [-forge-ref REF12] [-phase DIFF_P [-phase-rows ROWS]]
 //	xengine sweep-plan -root DIR -sets 'FDN BLB' -chunks N [-stale] [-force]
 //	xengine pool -set S [-legal FORMAT -mtgjson S.json.gz] [-out FILE]
 //	xengine followers
@@ -38,7 +38,9 @@
 // (oracle/xengine/follower) as TSV, one row per follower after a '#' header
 // naming the columns, for scripts/xengine-sweep.sh. adjudicate gives the
 // items one follower diverged on a three-way pattern (oraclediff.ThreeWay) from both followers' diffs, writes DIR3/findings.jsonl,
-// patterns.tsv, notes.md and a tickets/<cluster>.md draft per gorge_suspect cluster; -ledger adds the compact ledger shards. Follower output is never committed: it goes outside the
+// patterns.tsv, notes.md and a tickets/<cluster>.md draft per gorge_suspect cluster; -ledger adds the compact ledger shards; -phase adds
+// phase.rs as a fourth column (DIR3/fourway.jsonl and patterns4.tsv: oraclediff.NWay over G, F, P and X, with a card phase lacks marked
+// unsupported, "P?", never a disagreement). Follower output is never committed: it goes outside the
 // repository or under the gitignored .oracle-build/.
 package main
 
