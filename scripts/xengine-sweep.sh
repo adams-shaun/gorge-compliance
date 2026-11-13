@@ -274,6 +274,15 @@ follower_rows() {
 		return 1
 		;;
 	esac
+	# A prep that sent the follower nothing (every RAND tape item is
+	# xmage_window_only, so XMage gets none) leaves no replay to run: an empty
+	# rows file is what the runner writes for zero items, without its JVM
+	# start-up, JVM slot or (XMAGE_ORACLE_PRIVATE_DB) ~300 MB card-DB copy.
+	if [ ! -s "$in" ]; then
+		echo "xengine-sweep: $f: no items to replay; runner skipped"
+		: >"$d/$f.jsonl"
+		return 0
+	fi
 	if [ "${f_jvm[$f]}" = true ]; then
 		jvm_slot || return 1
 		run_stage "${lock[@]}" bash -c 'jvm_slot && exec "$@"' _ "$runner" "$in" "$d/$f.jsonl"
