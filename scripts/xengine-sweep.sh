@@ -263,8 +263,10 @@ follower_rows() {
 		;;
 	follower-export)
 		# H3: oraclediff follower-export also writes the follower's refusals to
-		# <dir>/<f>-prep.jsonl, which xengine diff reads as not_sent.
-		oracledif follower-export -engine "$f" -scenarios "$d/items.jsonl" -out "$d/$f-req.jsonl" >"$d/$f-export.log" 2>&1 || return 1
+		# <dir>/<f>-prep.jsonl, which xengine diff reads as not_sent. Its
+		# --preflight goes to the same runner as the replay (XENGINE_<F>_RUNNER
+		# when set), not the registry's.
+		oracledif follower-export -engine "$f" -scenarios "$d/items.jsonl" -out "$d/$f-req.jsonl" -runner "$runner" >"$d/$f-export.log" 2>&1 || return 1
 		in=$d/$f-req.jsonl
 		;;
 	*)
