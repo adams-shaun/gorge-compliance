@@ -63,6 +63,10 @@ type Follower struct {
 	// SkipsDamageStep is a driver whose engine goes straight to end of
 	// combat when no creature is left in it (class forge_skips_damage_step).
 	SkipsDamageStep bool
+	// SkipsEmptyAttackStep is a driver whose engine goes from beginning of
+	// combat straight to end of combat when no creature can attack, giving
+	// no declare attackers priority (class phase_skips_attack_step).
+	SkipsEmptyAttackStep bool
 	// StopsInCleanup is a driver whose engine hands out priority in the
 	// cleanup step after an end-the-turn effect (class harness).
 	StopsInCleanup bool
@@ -162,6 +166,8 @@ var registry = []Follower{
 		CastModes: phaseCastModes,
 		// The harness text emitted when a card is missing at run time.
 		LacksCardMsg: "phase lacks card: ",
+		// No declare attackers prompt or priority when nothing can attack.
+		SkipsEmptyAttackStep: true,
 		// A Rust binary: the heavy lock alone.
 		JVM: false,
 	},

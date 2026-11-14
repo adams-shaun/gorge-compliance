@@ -770,3 +770,62 @@ func TestClassifyCrewTypeDependency(t *testing.T) {
 		t.Errorf("uncrewed: %+v", f)
 	}
 }
+
+// TestClassifyPhaseSkipsAttackStep: phase.rs at end of combat where gorge is
+// in declare attackers (nothing can attack, so phase.rs gives no window) is
+// its shortcut. Another engine, an earlier disagreement, another first
+// difference, or a pass that does not end beginning of combat leave the item
+// to the other classes.
+func TestClassifyPhaseSkipsAttackStep(t *testing.T) {
+	at := func(name, step string) rules.OracleSnapshot {
+		s := snap(name)
+		s.Step = step
+		return s
+	}
+	item := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:tape", Template: lower.Template, Scenario: oraclegen.Scenario{
+		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "pass", Seat: 1}},
+	}}}
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		at("setup", "begin-combat"), at("step 0 (pass)", "begin-combat"), at("step 1 (pass)", "declare-attackers"),
+	}}
+	phase := func(edit func(*oraclediff.XResult)) oraclediff.XResult {
+		x := follower(g, func(x *oraclediff.XResult) {
+			x.Snapshots[2].Step = "end-combat"
+			x.Harness = "harness: pass: p0 does not hold priority at step 2 (p1 does)"
+			if edit != nil {
+				edit(x)
+			}
+		})
+		return x
+	}
+	f := Classify(item, nil, g, phase(nil), "phase")
+	if f.Class != ClassPhaseSkipsAttackStep || f.Step != 1 || f.Field != "step" || f.Gorge != "declare-attackers" || f.Other != "end-combat" {
+		t.Errorf("shortcut: %+v", f)
+	}
+	if Credited(ClassPhaseSkipsAttackStep) {
+		t.Error("an item phase.rs could not finish must not count as compared")
+	}
+	if f := Classify(item, nil, g, phase(nil), "forge"); f.Class == ClassPhaseSkipsAttackStep {
+		t.Errorf("another engine: %+v", f)
+	}
+	if f := Classify(item, nil, g, phase(func(x *oraclediff.XResult) { x.Snapshots[1].Players[0].Life = 19 }), "phase"); f.Class != ClassDiverge {
+		t.Errorf("an earlier disagreement: %+v", f)
+	}
+	if f := Classify(item, nil, g, phase(func(x *oraclediff.XResult) { x.Snapshots[2].Step = "main2" }), "phase"); f.Class != ClassDiverge {
+		t.Errorf("another first difference: %+v", f)
+	}
+	if f := Classify(item, nil, g, phase(func(x *oraclediff.XResult) { x.Snapshots[2].Players[0].Life = 19 }), "phase"); f.Class != ClassDiverge {
+		t.Errorf("a difference besides the step: %+v", f)
+	}
+	active := item
+	active.Item.Scenario.Steps = []oraclegen.Step{{Op: "pass"}, {Op: "pass"}}
+	if f := Classify(active, nil, g, phase(nil), "phase"); f.Class != ClassDiverge {
+		t.Errorf("the active seat's pass does not end the step: %+v", f)
+	}
+	stacked := g
+	stacked.Snapshots = append([]rules.OracleSnapshot(nil), g.Snapshots...)
+	stacked.Snapshots[1].Stack = []rules.OracleSnapStack{{Kind: "spell", Source: "Shock"}}
+	if f := Classify(item, nil, stacked, follower(stacked, func(x *oraclediff.XResult) { x.Snapshots[2].Step = "end-combat" }), "phase"); f.Class != ClassDiverge {
+		t.Errorf("a pass that resolves a spell does not end the step: %+v", f)
+	}
+}

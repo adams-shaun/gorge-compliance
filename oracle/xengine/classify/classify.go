@@ -74,16 +74,26 @@ const (
 	// reads the Vehicle's type change from the snapshots, not the step that
 	// caused it. See docs/upstream-bugs.md for the XMage and Forge source.
 	ClassCrewTypeDependency = "crew_type_dependency"
-	ClassRNG                = "rng"
-	ClassProjectionGap      = "projection_gap"
-	ClassDiverge            = "diverge"
-	ClassAgree              = "agree"
+	// ClassPhaseSkipsAttackStep is a known phase.rs difference, not a gorge
+	// one: when the active player has no creature able to attack, phase.rs
+	// poses no declare-attackers prompt and goes from beginning of combat
+	// straight to end of combat. CR 508.2 gives the active player priority in
+	// the declare attackers step (CR 508.8 skips only declare blockers and
+	// combat damage when no creature attacks), and gorge gives that window.
+	// The item's passes then run out of step with phase.rs by one priority
+	// round, so nothing past that checkpoint is compared. The driver cannot
+	// supply the window: it answers only the priorities phase.rs gives.
+	ClassPhaseSkipsAttackStep = "phase_skips_attack_step"
+	ClassRNG                  = "rng"
+	ClassProjectionGap        = "projection_gap"
+	ClassDiverge              = "diverge"
+	ClassAgree                = "agree"
 )
 
 // Classes lists every class, in report order.
 var Classes = []string{
 	ClassAgree, ClassDiverge, ClassRNG, ClassProjectionGap, ClassDecisionShape,
-	ClassPaymentChoice, ClassForgeSkipsDamageStep, ClassCrewTypeDependency,
+	ClassPaymentChoice, ClassForgeSkipsDamageStep, ClassPhaseSkipsAttackStep, ClassCrewTypeDependency,
 	ClassHarness, ClassNotSent, ClassTurnCap, ClassXMageLacks, ClassLowerGap,
 }
 
@@ -137,6 +147,13 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	if fl.SkipsDamageStep {
 		if i := skippedDamageStep(item, g, x); i > 0 {
 			f.Class, f.Checkpoint, f.Field = ClassForgeSkipsDamageStep, g.Snapshots[i].Checkpoint, "step"
+			f.Gorge, f.Other, f.Step = g.Snapshots[i].Step, x.Snapshots[i].Step, stepOf(g.Snapshots[i].Checkpoint)
+			return f
+		}
+	}
+	if fl.SkipsEmptyAttackStep {
+		if i := skippedAttackStep(item, g, x); i > 0 {
+			f.Class, f.Checkpoint, f.Field = ClassPhaseSkipsAttackStep, g.Snapshots[i].Checkpoint, "step"
 			f.Gorge, f.Other, f.Step = g.Snapshots[i].Step, x.Snapshots[i].Step, stepOf(g.Snapshots[i].Checkpoint)
 			return f
 		}
@@ -430,12 +447,47 @@ func skippedDamageStep(item lower.Lowered, g rules.OracleResult, x oraclediff.XR
 		if st := item.Item.Steps[i-1]; st.Op != "pass" || st.Seat == gs.Active {
 			return 0
 		}
-		// Everything but the step name agrees, up to and including this
-		// checkpoint: the step is set to Forge's in a copy of gorge's.
-		upto := append([]rules.OracleSnapshot(nil), g.Snapshots[:i+1]...)
-		upto[i].Step = xs.Step
-		if oraclediff.CompareOpts(rules.OracleResult{Snapshots: upto}, nil,
-			oraclediff.XResult{Snapshots: x.Snapshots[:i+1]}, item.Item.Compare, item.Item.Ignore...).Status != oraclediff.Agree {
+		if !agreeButStep(item, g, x, i) {
+			return 0
+		}
+		return i
+	}
+	return 0
+}
+
+// agreeButStep reports whether everything but the step name agrees up to and
+// including checkpoint i: the step is set to the follower's in a copy of
+// gorge's.
+func agreeButStep(item lower.Lowered, g rules.OracleResult, x oraclediff.XResult, i int) bool {
+	upto := append([]rules.OracleSnapshot(nil), g.Snapshots[:i+1]...)
+	upto[i].Step = x.Snapshots[i].Step
+	return oraclediff.CompareOpts(rules.OracleResult{Snapshots: upto}, nil,
+		oraclediff.XResult{Snapshots: x.Snapshots[:i+1]}, item.Item.Compare, item.Item.Ignore...).Status == oraclediff.Agree
+}
+
+// skippedAttackStep is the checkpoint at which phase.rs left beginning of
+// combat for end of combat while gorge entered declare attackers (the active
+// player has no creature able to attack, so phase.rs gives no declare
+// attackers prompt or priority), with every checkpoint before it agreeing; 0
+// if the item has none. The first difference must be that step, after the
+// pass that ends beginning of combat: the non-active seat's on an empty
+// stack. Everything else in gorge's checkpoint must agree with the
+// follower's once the step is set aside.
+func skippedAttackStep(item lower.Lowered, g rules.OracleResult, x oraclediff.XResult) int {
+	for i := 1; i < min(len(g.Snapshots), len(x.Snapshots)); i++ {
+		gs, xs := g.Snapshots[i], x.Snapshots[i]
+		if gs.Step == xs.Step {
+			continue
+		}
+		prev := g.Snapshots[i-1]
+		if gs.Step != "declare-attackers" || xs.Step != "end-combat" ||
+			prev.Step != "begin-combat" || len(prev.Stack) != 0 || i > len(item.Item.Steps) {
+			return 0
+		}
+		if st := item.Item.Steps[i-1]; st.Op != "pass" || st.Seat == gs.Active {
+			return 0
+		}
+		if !agreeButStep(item, g, x, i) {
 			return 0
 		}
 		return i
