@@ -75,7 +75,11 @@ xprep)
 diff)
 	echo "diff ${o[engine]}" >> "$LOG"
 	mkdir -p "${o[out]}"
-	printf '{"id":"i","class":"agree"}\n' > "${o[out]}/verdicts.jsonl"
+	case "${o[engine]}" in
+	phase) printf '{"id":"i","class":"agree"}\n{"id":"j","class":"agree"}\n' ;;
+	manabrew) printf '{"id":"i","class":"agree"}\n{"id":"j","class":"diverge"}\n' ;;
+	*) printf '{"id":"i","class":"agree"}\n' ;;
+	esac > "${o[out]}/verdicts.jsonl"
 	printf 'card\tkey\texercised\tcompared\toffered\nA\tk\t0\t1\t0\n' > "${o[out]}/compared.tsv"
 	;;
 adjudicate)
@@ -104,10 +108,23 @@ cat "$1" > "$2"
 STUB
 cat > "$BIN/oraclediff" <<'STUB'
 #!/usr/bin/env bash
-[ "$1" = forge-export ] || exit 1
-echo "export" >> "$LOG"
-cat "$3" > "$5"
+case "$1" in
+forge-export) echo "export" >> "$LOG"; cat "$3" > "$5" ;;
+follower-export) # -engine F -scenarios items -out req -runner R
+	echo "follower-export $3" >> "$LOG"
+	cat "$5" > "$7"
+	: > "$(dirname "$7")/$3-prep.jsonl"
+	;;
+*) exit 1 ;;
+esac
 STUB
+for e in phase manabrew; do
+	cat > "$BIN/$e" <<'STUB'
+#!/usr/bin/env bash
+echo "$(basename "$0")" >> "$LOG"
+cat "$1" > "$2"
+STUB
+done
 cat > "$BIN/pgrep" <<'STUB'
 #!/usr/bin/env bash
 # SMOKE_PGREP_FREE_FIRST: the first count is 0 (the pre-lock check), later ones SMOKE_JVMS.
@@ -123,7 +140,7 @@ sweep() { # root args...
 	local root=$1
 	shift
 	XENGINE_ROOT=$root XENGINE_GO=$BIN/go XENGINE_SCOPE=none XENGINE_XMAGE_RUNNER=$BIN/xmage \
-		XENGINE_FORGE_RUNNER=$BIN/forge XENGINE_ORACLEDIFF=$BIN/oraclediff XENGINE_PGREP=$BIN/pgrep \
+		XENGINE_FORGE_RUNNER=$BIN/forge XENGINE_PHASE_RUNNER=$BIN/phase XENGINE_MANABREW_RUNNER=$BIN/manabrew XENGINE_ORACLEDIFF=$BIN/oraclediff XENGINE_PGREP=$BIN/pgrep \
 		XENGINE_JVM_WAIT=2 XENGINE_JVM_POLL=1 "$SWEEP" --sets 'FDN BLB' --chunks 2 --games 3 "$@" 2>&1
 }
 
@@ -148,6 +165,10 @@ check "cold: second chunk reads the ledger" '/usr/bin/grep -q "^play FDN 1 .*led
 check "cold: ledger.tsv written, no temp left" '[ -s "$R/ledger.tsv" ] && [ -z "$(find "$R" -name "ledger.tsv.tmp*")" ]'
 check "cold: SUMMARY.md has both sets and engines" \
 	'/usr/bin/grep -q "^## BLB" "$R/SUMMARY.md" && /usr/bin/grep -q "xmage: class histogram" "$R/SUMMARY.md" && /usr/bin/grep -q "^agree 2" "$R/SUMMARY.md"' "$(cat "$R/SUMMARY.md" 2>/dev/null)"
+
+# 1b. The joint table: printed for two or more followers, one line per class tuple.
+# (The default pair here is forge xmage: both say `agree` for the one item `i`.)
+check "cold: joint table for forge xmage" '/usr/bin/grep -q "^### joint: class tuple per item (forge xmage)" "$R/SUMMARY.md" && /usr/bin/grep -q "^agree agree 2" "$R/SUMMARY.md"' "$(cat "$R/SUMMARY.md" 2>/dev/null)"
 
 # 2. Rerun: nothing to do.
 : > "$LOG"
@@ -264,6 +285,21 @@ out=$(FAIL_FOLLOWER=forge FAIL_SET=FDN XENGINE_GO_JOBS=2 sweep "$R6"); rc=$?
 check "jobs=2 failing FDN follower: exits 1" '[ "$rc" = 1 ]' "rc=$rc $out"
 check "jobs=2 failing FDN follower: FDN/0 no .done, FDN/1 skipped" '[ ! -e "$R6/FDN/0/.done" ] && [ ! -d "$R6/FDN/1" ] && has "$out" "FDN/0: forge replay FAILED" && has "$out" "FDN/1: skipped"' "$out"
 check "jobs=2 failing FDN follower: BLB still finishes both chunks" '[ -e "$R6/BLB/0/.done" ] && [ -e "$R6/BLB/1/.done" ]' "$out"
+
+# 9. Two non-JVM followers: SUMMARY.md has their joint class tuples; one follower has none.
+R7=$TMP/run7
+: > "$LOG"
+out=$(XENGINE_FOLLOWERS='phase manabrew' sweep "$R7"); rc=$?
+check "phase manabrew: exits 0" '[ "$rc" = 0 ]' "rc=$rc $out"
+check "phase manabrew: both runners ran on every chunk" '[ "$(count phase)" = 4 ] && [ "$(count manabrew)" = 4 ] && [ "$(count follower-export)" = 8 ]' "$(cat "$LOG")"
+check "phase manabrew: one histogram per follower" '/usr/bin/grep -q "^### phase: class histogram" "$R7/SUMMARY.md" && /usr/bin/grep -q "^### manabrew: class histogram" "$R7/SUMMARY.md"'
+check "phase manabrew: joint heading" '/usr/bin/grep -q "^### joint: class tuple per item (phase manabrew)$" "$R7/SUMMARY.md"' "$(cat "$R7/SUMMARY.md")"
+# 2 chunks per set x items i (agree agree) and j (agree diverge), joined per chunk.
+check "phase manabrew: joint lines are exact" '/usr/bin/grep -qx "agree agree 2" "$R7/SUMMARY.md" && /usr/bin/grep -qx "agree diverge 2" "$R7/SUMMARY.md"' "$(cat "$R7/SUMMARY.md")"
+check "phase manabrew: no three-way section" '! /usr/bin/grep -q "three-way" "$R7/SUMMARY.md"'
+R8=$TMP/run8
+out=$(XENGINE_FOLLOWERS=phase sweep "$R8"); rc=$?
+check "one follower: exits 0, no joint text" '[ "$rc" = 0 ] && ! /usr/bin/grep -q "joint:" "$R8/SUMMARY.md" && /usr/bin/grep -q "^### phase: class histogram" "$R8/SUMMARY.md"' "rc=$rc $(cat "$R8/SUMMARY.md" 2>/dev/null)"
 
 [ "$fails" = 0 ] && echo "xengine_sweep_smoke: all passed" || echo "xengine_sweep_smoke: $fails FAILED"
 exit $((fails != 0))

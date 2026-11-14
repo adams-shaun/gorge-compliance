@@ -376,6 +376,21 @@ histogram() { # file jq-field dir... -> "value count" lines
 	for d in "$@"; do [ ! -f "$d/$file" ] || jq -r "$field" "$d/$file"; done | LC_ALL=C sort | uniq -c | sed 's/^ *\([0-9]*\) \(.*\)/\2 \1/'
 }
 
+joint_tuples() { # dir... -> one "class1 class2 ..." line per item present in every follower's verdicts (ids are chunk-scoped, so joined per chunk)
+	local d f ok
+	for d in "$@"; do
+		ok=1
+		for f in $followers; do [ -f "$d/diff-$f/verdicts.jsonl" ] || ok=0; done
+		[ "$ok" = 1 ] || continue
+		for f in $followers; do jq -c --arg f "$f" '{f: $f, id: .id, c: .class}' "$d/diff-$f/verdicts.jsonl"; done |
+			jq -rs --args '. as $r
+				| (reduce $ARGS.positional[] as $f ([]; . + [$r | map(select(.f == $f) | {(.id): .c}) | add // {}])) as $m
+				| ($m[0] | keys[]) as $id
+				| select([$m[] | has($id)] | all)
+				| [$m[] | .[$id]] | join(" ")' $followers
+	done
+}
+
 summary() {
 	local tmp=$root/SUMMARY.md.tmp.$$ s f d
 	{
@@ -406,6 +421,13 @@ summary() {
 				histogram "diff-$f/verdicts.jsonl" .class "${done_dirs[@]}"
 				echo '```'
 			done
+			if [ "$(wc -w <<<"$followers")" -ge 2 ]; then
+				echo
+				echo "### joint: class tuple per item ($followers)"
+				echo '```'
+				joint_tuples "${done_dirs[@]}" | LC_ALL=C sort | uniq -c | sed 's/^ *\([0-9]*\) \(.*\)/\2 \1/'
+				echo '```'
+			fi
 			if [ -n "$(ls "${done_dirs[@]/%//adjudicate/findings.jsonl}" 2>/dev/null)" ]; then
 				echo
 				echo "### three-way: pattern histogram"
