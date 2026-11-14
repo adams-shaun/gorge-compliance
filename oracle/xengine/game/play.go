@@ -66,13 +66,17 @@ func (s scripted) Decide(ctx context.Context, v view.View, d decision.Decision) 
 	return in, nil
 }
 
-// Play plays pair against each other with two explore bots, after opt.Script if
+// MaxSeats is the most seats Play deals: a 4-player Commander pod.
+const MaxSeats = 4
+
+// Play plays the decks against each other, one explore bot a seat (2 to
+// MaxSeats seats; more than two only in Commander), after opt.Script if
 // any, and records the game. Seat i is heuristic.NewExploreBot(seed ^ 0x9e3779b97f4a7c15*(i+1)) with
 // auto-pay armed, exactly as gorge's cmd/cardfuzz builds an explore seat. A
 // stall (turn or intent cap, livelock, bigboard, engine panic) returns the tape
 // so far with Outcome.Stall set; only a setup failure or a seat error is an
 // error.
-func Play(reg *cards.Registry, pair [2]decks.Deck, seed uint64, opt Options) (*Tape, error) {
+func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Tape, error) {
 	maxTurns, maxIntents := opt.MaxTurns, opt.MaxIntents
 	if maxTurns == 0 {
 		maxTurns = DefaultMaxTurns
@@ -80,10 +84,13 @@ func Play(reg *cards.Registry, pair [2]decks.Deck, seed uint64, opt Options) (*T
 	if maxIntents == 0 {
 		maxIntents = DefaultMaxIntents
 	}
-	t := &Tape{Format: TapeFormat, Set: opt.Set, Seed: seed, Entries: []Entry{}}
+	if n := len(pair); n < 2 || n > MaxSeats {
+		return nil, fmt.Errorf("game: %d decks, want 2 to %d", n, MaxSeats)
+	}
+	t := &Tape{Format: TapeFormat, Set: opt.Set, Seed: seed, Entries: []Entry{}, Decks: make([]Deck, len(pair)), Open: make([]Opening, len(pair))}
 	var dk [][]*cards.Card
-	names := make([]string, 2)
-	seats := make([]seat.Seat, 2)
+	names := make([]string, len(pair))
+	seats := make([]seat.Seat, len(pair))
 	script := opt.Script
 	for i, d := range pair {
 		cs := make([]*cards.Card, 0, len(d.Cards))
@@ -104,13 +111,29 @@ func Play(reg *cards.Registry, pair [2]decks.Deck, seed uint64, opt Options) (*T
 		}
 	}
 	cfg := rules.Config{Names: names, Decks: dk, Tokens: reg.Tokens, Seed: seed, NameUniverse: reg.Universe()}
-	if pair[0].Commander != "" || pair[1].Commander != "" {
-		if pair[0].Commander == "" || pair[1].Commander == "" {
-			return nil, fmt.Errorf("game: a Commander game needs a commander in both decks (%q, %q)", pair[0].Commander, pair[1].Commander)
+	anyCmdr, allCmdr := false, true
+	for _, d := range pair {
+		anyCmdr = anyCmdr || d.Commander != ""
+		allCmdr = allCmdr && d.Commander != ""
+	}
+	if len(pair) > 2 && !allCmdr {
+		return nil, fmt.Errorf("game: a %d-seat game is a Commander game, and needs a commander in every deck", len(pair))
+	}
+	if anyCmdr {
+		if !allCmdr {
+			cs := make([]string, len(pair))
+			for i, d := range pair {
+				cs[i] = fmt.Sprintf("%q", d.Commander)
+			}
+			which := "all"
+			if len(pair) == 2 {
+				which = "both"
+			}
+			return nil, fmt.Errorf("game: a Commander game needs a commander in %s decks (%s)", which, strings.Join(cs, ", "))
 		}
 		cfg.Format = rules.FormatCommander
 		cfg.StartingLife = CommanderStartingLife
-		cfg.Commanders = make([][]int, 2)
+		cfg.Commanders = make([][]int, len(pair))
 		for i, d := range pair {
 			idx := d.CommanderIndex()
 			if idx < 0 {

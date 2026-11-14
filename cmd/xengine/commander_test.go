@@ -32,7 +32,7 @@ func TestFormatFlagErr(t *testing.T) {
 		{name: "random", format: "commander", dir: "d", random: "FDN", forge: "f", want: "-random, -forge-only"},
 		{name: "pool", format: "commander", dir: "d", pool: "p.txt", want: "-pool"},
 		{name: "pool filter", format: "commander", dir: "d", poolFilter: "f.txt", want: "-pool-filter"},
-		{name: "dirac", format: "commander", dir: "d", dirac: true, want: "xe-cmdr-dirac"},
+		{name: "dirac", format: "commander", dir: "d", dirac: true},
 	} {
 		err := formatFlagErr(c.format, c.dir, c.random, c.forge, c.pool, c.poolFilter, c.dirac)
 		switch {
@@ -132,7 +132,7 @@ func TestPickDealerMatchesPair(t *testing.T) {
 	deal := pickDealer(pick, "FDN", 0, 1)
 	for g := 0; g < 4; g++ {
 		got, table := deal(g)
-		if want := decks.Pair(cands, led, "FDN", 0, g, 1); !reflect.DeepEqual(got, want) || table != "" {
+		if want := decks.Pair(cands, led, "FDN", 0, g, 1); !reflect.DeepEqual(got, want[:]) || table != "" {
 			t.Errorf("game %d: pair differs", g)
 		}
 	}

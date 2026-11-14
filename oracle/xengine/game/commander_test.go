@@ -8,6 +8,7 @@ import (
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -124,7 +125,7 @@ func TestPlayCommanderGame(t *testing.T) {
 func TestPlayCommanderNeedsBoth(t *testing.T) {
 	reg, p := commanderPair(t)
 	_, fdn := fdnPairs(t, 1)
-	_, err := Play(reg, [2]decks.Deck{p[0], fdn[0][1]}, 1, Options{MaxTurns: 1})
+	_, err := Play(reg, []decks.Deck{p[0], fdn[0][1]}, 1, Options{MaxTurns: 1})
 	if err == nil || !strings.Contains(err.Error(), "needs a commander in both decks") || !strings.Contains(err.Error(), p[0].Commander) {
 		t.Fatalf("err = %v", err)
 	}
@@ -140,5 +141,93 @@ func TestConstructedTapeUnchanged(t *testing.T) {
 		if bytes.Contains(b, []byte(`"`+k+`"`)) {
 			t.Errorf("constructed tape has key %q", k)
 		}
+	}
+}
+
+// TestDigestCommanderTallies: the digest carries each seat's commander tax and
+// commander damage. A live Commander tape shows the tax after the first cast;
+// a runner checkpoint with the same state digests the same way as the live
+// game's (front names, damage keyed by the commander's owner seat); Swapped
+// moves a damage key's seat with the seats.
+func TestDigestCommanderTallies(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	var files []decks.CommanderFile
+	for _, s := range []string{"foundations-keen-engineering", "foundations-wretched-ranks"} {
+		f, err := testutil.LoadRepoDeckFile(s)
+		if err != nil {
+			t.Fatal(err)
+		}
+		files = append(files, decks.CommanderFile{Stem: s, File: f})
+	}
+	ds, skips := decks.CommanderDecks(reg, files)
+	if len(ds) != 2 {
+		t.Fatalf("kept %d decks, skips %v", len(ds), skips)
+	}
+	const sai = "Sai, Master Thopterist"
+	pair := decks.CommanderPair(ds, "CMDR", 0, 0, 2)
+	tp := play(t, reg, pair, 2, Options{MaxTurns: 10})
+	seat := 0
+	if pair[1].Commander == sai {
+		seat = 1
+	}
+	var cast *Digest
+	for i := range tp.Entries {
+		d := &tp.Entries[i].Digest
+		if i == 0 && (d.Players[0].CommanderCasts != nil || d.Players[1].CommanderCasts != nil) {
+			t.Fatalf("opening digest carries a tax: %+v", d.Players)
+		}
+		if cast == nil && d.Players[seat].CommanderCasts != nil {
+			cast = d
+		}
+	}
+	if cast == nil {
+		t.Fatal("no digest after the first cast of Sai")
+	}
+	if got := cast.Players[seat].CommanderCasts; !reflect.DeepEqual(got, map[string]int32{sai: 1}) {
+		t.Fatalf("seat %d casts %v, want {%s: 1}", seat, got, sai)
+	}
+	if cast.Players[1-seat].CommanderCasts != nil || cast.Players[0].CommanderDamage != nil || cast.Players[1].CommanderDamage != nil {
+		t.Errorf("unexpected tallies: %+v", cast.Players)
+	}
+
+	// The runner's checkpoint for the same kind of state digests to the tallies
+	// the live game's digest holds.
+	snapDigest := func(damage string) Digest {
+		res, err := rules.RunOracleScenarioJSON(reg, []byte(`{
+ "name": "digest-tallies", "cr": ["903.8"], "why": "commander tax and damage in the snapshot",
+ "format": "commander",
+ "setup": {"p0": {"battlefield": ["`+sai+`"], "commanders": ["`+sai+`"], "commander_casts": {"`+sai+`": 1}},
+           "p1": {"command": ["Ghoulcaller Gisa"], `+damage+`}},
+ "steps": [], "expect": []}`))
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(res.Snapshots) == 0 {
+			t.Fatalf("no snapshots; fails %v", res.Fails)
+		}
+		return DigestOfSnapshot(res.Snapshots[len(res.Snapshots)-1])
+	}
+	d := snapDigest(`"commander_damage": {"p0:` + sai + `": 3}`)
+	if !reflect.DeepEqual(d.Players[0].CommanderCasts, map[string]int32{sai: 1}) || d.Players[1].CommanderCasts != nil {
+		t.Errorf("snapshot casts %+v", d.Players)
+	}
+	if !reflect.DeepEqual(d.Players[1].CommanderDamage, map[string]int32{"p0:" + sai: 3}) || d.Players[0].CommanderDamage != nil {
+		t.Errorf("snapshot damage %+v", d.Players)
+	}
+	if diff := d.Diff(snapDigest(`"commander_damage": {"p0:` + sai + `": 4}`)); len(diff) != 1 || !strings.HasPrefix(diff[0], "players[1].commander_damage.p0:") {
+		t.Errorf("damage change diff = %v", diff)
+	}
+	if diff := d.Diff(d); diff != nil {
+		t.Errorf("a digest differs from itself: %v", diff)
+	}
+
+	// Swapped exchanges the seats and the seat inside a damage key.
+	s := d.Swapped()
+	if !reflect.DeepEqual(s.Players[0].CommanderDamage, map[string]int32{"p1:" + sai: 3}) ||
+		!reflect.DeepEqual(s.Players[1].CommanderCasts, map[string]int32{sai: 1}) {
+		t.Errorf("swapped %+v", s.Players)
+	}
+	if !reflect.DeepEqual(s.Swapped(), d) {
+		t.Error("swapping twice changes the digest")
 	}
 }

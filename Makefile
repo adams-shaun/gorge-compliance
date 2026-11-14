@@ -26,10 +26,9 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
-# Forge oracle driver commit (fork, branch oracle-harness-trek7): a descendant of FORGE_REF with identical script trees.
-# 54a3777c23 = 0e200f1410 merged with FORGE_REF 418ba5215f (gorge-trek7); 0e200f1410 alone differed from it in 5 Trek scripts.
-# 0e200f1410 = baa2c42320 + a second Game.onCleanupPhase pass so setup life lost (player life below 20) does not roll into lifeLostLastTurn, and every other last-turn mirror starts empty too (First Response, Paladin of Atonement, Feast on the Fallen). baa2c42320 made setup counters put and setup life gained not seed per-turn history (Lasting Tarfire, Vanguard Seraph). Keeping FORGE_REF's cardsfolder and tokenscripts trees.
-FORGE_ORACLE_REF ?= 54a3777c237672e220425ef8f66955d0a017a71c
+# Forge oracle driver commit (fork, branch oracle-cmdr): a descendant of FORGE_REF with identical script trees.
+# 92cf059592 = 54a3777c23 (the gorge-trek7 corpus driver) + 1v1 Commander placement (command zone, commander_casts, commander_damage) and Commander snapshots; same cardsfolder and tokenscripts trees as FORGE_REF 418ba5215f.
+FORGE_ORACLE_REF ?= 92cf0595922afd840672292f8a1e1e00e0e76626
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
@@ -37,8 +36,8 @@ FOLLOWERS_CACHE ?= $(or $(XDG_CACHE_HOME),$(HOME)/.cache)/gorge-compliance
 # Manabrew (AGPL-3.0, a Rust port of Forge's engine): upstream until the operator creates the fork
 # https://github.com/adams-shaun/manabrew; driver commits sit on branch `oracle` of the local clone.
 MANABREW_REPO ?= https://github.com/witchesofthehill/manabrew
-# 2747b912d6b5 = upstream dadee731 + oracle patches (place_for_setup, take_state_edit, diagnostics sink, profile.oracle) + the manabrew-oracle driver crate: CLI, preflight, snapshot writer, board setup, the step machine (play, activate, cast, pass, resolve, mana; pool payment; ScriptedRng) and the answerer (targets, yes/no, modes, object picks, library, names and numbers, optional costs from cast_mode; adventure_alt and warped play modes) and combat (pass_to, attack, block, damage assignment from a logged division, exert/enlist/combat costs), the raw move/attach preludes with an engine settle (priority_round settles SBA and triggers after an agent edit), and whole-game tapes with no turn cap (local branch oracle; pushed to adams-shaun/manabrew by the operator)
-MANABREW_ORACLE_REF ?= 2747b912d6b584391ba8cd265098b1931c67281b
+# 7bfc02e612cf = upstream dadee731 + oracle patches (place_for_setup, take_state_edit, diagnostics sink, profile.oracle) + the manabrew-oracle driver crate: CLI, preflight, snapshot writer, board setup, the step machine (play, activate, cast, pass, resolve, mana; pool payment; ScriptedRng) and the answerer (targets, yes/no, modes, object picks, library, names and numbers, optional costs from cast_mode; adventure_alt and warped play modes) and combat (pass_to, attack, block, damage assignment from a logged division, exert/enlist/combat costs), the raw move/attach preludes with an engine settle (priority_round settles SBA and triggers after an agent edit), and whole-game tapes with no turn cap, the snapshot writer printing a changeling's creature types as gorge's allcreaturetypes (local branch oracle; pushed to adams-shaun/manabrew by the operator)
+MANABREW_ORACLE_REF ?= 7bfc02e612cf4e7f4b8aaf3b00a5a8ce1875da47
 MANABREW_ORACLE_DIR ?= $(FOLLOWERS_CACHE)/manabrew
 CARGO ?= $(HOME)/.cargo/bin/cargo
 # phase.rs follower: pinned build + card data (followers/phase/PHASE_PIN), out of tree.

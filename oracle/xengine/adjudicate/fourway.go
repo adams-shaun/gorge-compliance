@@ -77,7 +77,7 @@ func EligibleFour(xClass, fClass, pClass string) bool {
 	}
 	return ok(xClass, classify.ClassNotSent, classify.ClassXMageLacks) &&
 		ok(fClass, classify.ClassTurnCap, classify.ClassForgeSkipsDamageStep) &&
-		ok(pClass, classify.ClassNotSent, classify.ClassXMageLacks, classify.ClassTurnCap)
+		ok(pClass, classify.ClassNotSent, classify.ClassXMageLacks, classify.ClassTurnCap, classify.ClassPhaseSkipsAttackStep)
 }
 
 // phaseUnsupported reports a phase finding that is a card phase lacks: its

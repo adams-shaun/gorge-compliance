@@ -253,8 +253,8 @@ func fixedDealer(ds []decks.Deck, chunk int, seed uint64) dealer {
 	for i, d := range ds {
 		names[i] = d.Name
 	}
-	return func(g int) ([2]decks.Deck, string) {
+	return func(g int) ([]decks.Deck, string) {
 		a, b := fixedPair(names, chunk, g, seed)
-		return [2]decks.Deck{ds[a], ds[b]}, ""
+		return []decks.Deck{ds[a], ds[b]}, ""
 	}
 }

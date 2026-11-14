@@ -33,7 +33,7 @@ func fdnPairs(t *testing.T, n int) (*cards.Registry, [][2]decks.Deck) {
 
 func play(t *testing.T, reg *cards.Registry, p [2]decks.Deck, seed uint64, opt Options) *Tape {
 	t.Helper()
-	tp, err := Play(reg, p, seed, opt)
+	tp, err := Play(reg, p[:], seed, opt)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +155,7 @@ func TestTapeRecordsManaTaps(t *testing.T) {
 
 func TestPlayStallReturnsTape(t *testing.T) {
 	reg, pairs := fdnPairs(t, 1)
-	tp, err := Play(reg, pairs[0], 5, Options{MaxTurns: 2})
+	tp, err := Play(reg, pairs[0][:], 5, Options{MaxTurns: 2})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,7 +165,7 @@ func TestPlayStallReturnsTape(t *testing.T) {
 	if tp.Outcome.Winner != nil {
 		t.Error("a stalled game has a winner")
 	}
-	tp, err = Play(reg, pairs[0], 5, Options{MaxIntents: 10})
+	tp, err = Play(reg, pairs[0][:], 5, Options{MaxIntents: 10})
 	if err != nil || tp.Outcome.Stall != "intents" || len(tp.Entries) != 10 {
 		t.Fatalf("intent cap: err %v stall %q entries %d", err, tp.Outcome.Stall, len(tp.Entries))
 	}

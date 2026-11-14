@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"sort"
 	"strings"
 	"testing"
 
@@ -121,5 +122,33 @@ func TestReadCommanderDir(t *testing.T) {
 	}
 	if _, err := ReadCommanderDir(t.TempDir()); err == nil {
 		t.Error("empty dir: no error")
+	}
+}
+
+func TestSwapRefused(t *testing.T) {
+	ds := []Deck{
+		{Name: "rg", Colours: "RG", Commander: "Cmdr", Cards: []string{"Cmdr", "Bad", "Bad2", "Good", "Bad", "Forest"}},
+		{Name: "c", Colours: "C", Commander: "X", Cards: []string{"X", "Bad"}},
+	}
+	plays := func(n string) bool { return n != "Bad" && n != "Bad2" && n != "Cmdr" }
+	got, swaps := SwapRefused(ds, plays)
+	want := []string{"Forest", "Forest", "Good", "Cmdr", "Mountain", "Mountain"}
+	sort.Strings(want)
+	if !reflect.DeepEqual(got[0].Cards, want) || got[0].Commander != "Cmdr" {
+		t.Errorf("rg cards %v", got[0].Cards)
+	}
+	wantSw := []Swap{{"rg", "Bad", "Mountain", 1}, {"rg", "Bad", "Forest", 1}, {"rg", "Bad2", "Mountain", 1}}
+	if !reflect.DeepEqual(swaps, wantSw) {
+		t.Errorf("swaps %v want %v", swaps, wantSw)
+	}
+	if !reflect.DeepEqual(got[1].Cards, []string{"Bad", "X"}) {
+		t.Errorf("colourless deck changed: %v", got[1].Cards)
+	}
+	if ds[0].Cards[1] != "Bad" {
+		t.Error("input modified")
+	}
+	again, swaps2 := SwapRefused(ds, plays)
+	if !reflect.DeepEqual(again, got) || !reflect.DeepEqual(swaps, swaps2) {
+		t.Error("not deterministic")
 	}
 }

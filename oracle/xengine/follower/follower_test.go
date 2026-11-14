@@ -144,6 +144,7 @@ func TestPhaseEntry(t *testing.T) {
 		{"lacks card", p.LacksCardMsg, "phase lacks card: "},
 		{"jvm", p.JVM, false},
 		{"skips damage step", p.SkipsDamageStep, false},
+		{"skips empty attack step", p.SkipsEmptyAttackStep, true},
 		{"stops in cleanup", p.StopsInCleanup, false},
 		{"trailing misses", p.TrailingMisses, false},
 		{"taps with cast", p.TapsWithCast, false},

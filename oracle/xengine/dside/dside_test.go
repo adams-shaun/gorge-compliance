@@ -6,6 +6,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/dirac/cardset"
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -80,7 +81,7 @@ func TestScriptReplaysTheLockstepGame(t *testing.T) {
 			continue
 		}
 		played++
-		tp, err := game.Play(reg, pair, seed, game.Options{Set: "FDN", Script: script})
+		tp, err := game.Play(reg, pair[:], seed, game.Options{Set: "FDN", Script: script})
 		if err != nil {
 			t.Fatalf("game %d: %v", g, err)
 		}
@@ -122,5 +123,104 @@ func TestPlayableLeavesRefusedCardsOut(t *testing.T) {
 	}
 	if refused == 0 {
 		t.Skip("the FDN pool has no refused card at this pin")
+	}
+}
+
+func commanderPair(t *testing.T, reg *cards.Registry, stems ...string) [2]decks.Deck {
+	t.Helper()
+	var files []decks.CommanderFile
+	for _, s := range stems {
+		f, err := testutil.LoadRepoDeckFile(s)
+		if err != nil {
+			t.Fatal(err)
+		}
+		files = append(files, decks.CommanderFile{Stem: s, File: f})
+	}
+	ds, skips := decks.CommanderDecks(reg, files)
+	if len(ds) != 2 {
+		t.Fatalf("kept %d decks, skips %v", len(ds), skips)
+	}
+	return [2]decks.Deck{ds[0], ds[1]}
+}
+
+// playablePair is the Foundations pair the tests play, on the table's terms.
+func playablePair(t *testing.T, reg *cards.Registry, tables *Tables) [2]decks.Deck {
+	t.Helper()
+	pair := commanderPair(t, reg, "foundations-tramplesaurus-rex", "foundations-wretched-ranks")
+	ds, swaps, err := tables.SwapRefusedCommander(pair[:])
+	if NoTables(err) {
+		t.Skip(err)
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(swaps) == 0 {
+		t.Log("nothing refused")
+	}
+	return [2]decks.Deck{ds[0], ds[1]}
+}
+
+func TestCommanderLockstepPlays(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	tables := NewTables(reg)
+	pair := playablePair(t, reg, tables)
+	row, script := tables.CommanderLockstep("xe:CMDR:0:0", pair, 1000, 4)
+	if row.Table != "cmd5" {
+		t.Errorf("table %q", row.Table)
+	}
+	if row.Status == StatusNA {
+		t.Fatalf("not applicable: %s", row.Reason)
+	}
+	if row.Intents <= 0 || len(script) != row.Intents {
+		t.Errorf("intents %d, script %d", row.Intents, len(script))
+	}
+}
+
+// TestCommanderScriptReplaysTheLockstepGame is the proof that game.Play's Commander
+// Config and the dirac matchup's agree: the lockstep's answers replay into the game.
+func TestCommanderScriptReplaysTheLockstepGame(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	tables := NewTables(reg)
+	pair := playablePair(t, reg, tables)
+	for seed := uint64(1000); seed <= 1002; seed++ {
+		row, script := tables.CommanderLockstep("xe:CMDR:0:0", pair, seed, 4)
+		if row.Status == StatusNA {
+			t.Fatalf("seed %d: not applicable: %s", seed, row.Reason)
+		}
+		tp, err := game.Play(reg, pair[:], seed, game.Options{Set: "CMDR", Script: script})
+		if err != nil {
+			t.Fatalf("seed %d: %v", seed, err)
+		}
+		if len(tp.Entries) < len(script) {
+			t.Fatalf("seed %d: %d entries for %d answers", seed, len(tp.Entries), len(script))
+		}
+		for i, in := range script {
+			if tp.Entries[i].Seq != in.Seq {
+				t.Fatalf("seed %d entry %d: seq %d, the script's %d", seed, i, tp.Entries[i].Seq, in.Seq)
+			}
+		}
+	}
+}
+
+func TestCommanderLockstepRefusesForeignDeck(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	tables := NewTables(reg)
+	if _, err := tables.CommanderSet(); NoTables(err) {
+		t.Skip(err)
+	}
+	pair := commanderPair(t, reg, "foundations-wretched-ranks", "foundations-tramplesaurus-rex")
+	f, err := testutil.LoadRepoDeckFile("science-pip")
+	if err != nil {
+		t.Fatal(err)
+	}
+	foreign := decks.Deck{Name: "science-pip"}
+	for _, e := range f.Cards {
+		for i := 0; i < e.Count; i++ {
+			foreign.Cards = append(foreign.Cards, e.Name)
+		}
+	}
+	row, script := tables.CommanderLockstep("xe:CMDR:0:1", [2]decks.Deck{foreign, pair[0]}, 1, 4)
+	if row.Status != StatusNA || row.Reason == "" || script != nil {
+		t.Errorf("foreign deck: %+v", row)
 	}
 }

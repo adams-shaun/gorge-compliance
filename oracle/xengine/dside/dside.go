@@ -154,6 +154,44 @@ func (t *Tables) Table(code string) (cardset.Set, error) {
 	return s, nil
 }
 
+// CommanderTable is dirac's Commander deck pool (gorge dirac/oracle/pools.go, Pools):
+// the gorge Foundations Commander precons. A later pool of more Commander decks
+// replaces this one name.
+const CommanderTable = "cmd5"
+
+// CommanderSet is the Commander deck pool's table, from the deck pools' registry
+// rather than the Standard sets'. An error wrapping cardset.ErrNoTables means none
+// are built for this gorge and corpus.
+func (t *Tables) CommanderSet() (cardset.Set, error) {
+	if s, ok := t.sets[CommanderTable]; ok {
+		return s, nil
+	}
+	s, err := cardset.ByName(CommanderTable)
+	if err != nil {
+		return nil, err
+	}
+	s = cardset.AllowUnverified(s)
+	t.sets[CommanderTable] = s
+	return s, nil
+}
+
+// SwapRefusedCommander is ds with every card the Commander table refuses replaced
+// by a basic of the deck's colours (decks.SwapRefused), and each swap. gorge's
+// Foundations precon files hold the printed lists, which the table turns away whole;
+// the decks dealt must be these substituted ones for gorge and dirac to play one game.
+func (t *Tables) SwapRefusedCommander(ds []decks.Deck) ([]decks.Deck, []decks.Swap, error) {
+	set, err := t.CommanderSet()
+	if err != nil {
+		return nil, nil, err
+	}
+	plays := set.Supported()
+	out, swaps := decks.SwapRefused(ds, func(n string) bool {
+		i, ok := set.Lookup(n)
+		return ok && plays[i]
+	})
+	return out, swaps, nil
+}
+
 // Playable is the candidates of set code its table plays.
 func (t *Tables) Playable(code string, cands []decks.Card) ([]decks.Card, error) {
 	s, err := t.Table(code)
@@ -194,14 +232,36 @@ func NotApplicable(gameID, reason string) Row {
 // refuses has no answers.
 func (t *Tables) Lockstep(gameID, code string, pair [2]decks.Deck, seed uint64, maxTurns int) (Row, []decision.Intent) {
 	row := Row{Game: gameID, Table: "std-" + strings.ToLower(code)}
-	refuse := func(err error) (Row, []decision.Intent) {
-		row.Status, row.Reason = StatusNA, err.Error()
-		return row, nil
-	}
 	set, err := t.Table(code)
 	if err != nil {
-		return refuse(err)
+		return refused(row, err)
 	}
+	return t.lockstep(row, set, pair, seed, maxTurns, nil)
+}
+
+// CommanderLockstep plays a 1v1 Commander pair on dirac's Commander table
+// (CommanderTable) as Lockstep plays a constructed one. The commanders are the decks'
+// own (decks.Deck.CommanderIndex), the indices game.Play gives Config.Commanders, so
+// the answers replay into the same game. A pair the table does not hold has no answers.
+func (t *Tables) CommanderLockstep(gameID string, pair [2]decks.Deck, seed uint64, maxTurns int) (Row, []decision.Intent) {
+	row := Row{Game: gameID, Table: CommanderTable}
+	set, err := t.CommanderSet()
+	if err != nil {
+		return refused(row, err)
+	}
+	return t.lockstep(row, set, pair, seed, maxTurns, &[2]int{pair[0].CommanderIndex(), pair[1].CommanderIndex()})
+}
+
+// refused is row as a game no table holds, for err.
+func refused(row Row, err error) (Row, []decision.Intent) {
+	row.Status, row.Reason = StatusNA, err.Error()
+	return row, nil
+}
+
+// lockstep plays pair on set, a Commander game with commanders (indices into each
+// deck) when non-nil.
+func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uint64, maxTurns int, commanders *[2]int) (Row, []decision.Intent) {
+	refuse := func(err error) (Row, []decision.Intent) { return refused(row, err) }
 	tbl, _, _, err := set.Matchup(entries(pair[0]), entries(pair[1]))
 	if err != nil {
 		return refuse(err)
@@ -222,6 +282,10 @@ func (t *Tables) Lockstep(gameID, code string, pair [2]decks.Deck, seed uint64, 
 	m, err := oracle.NewMatchup(t.reg, [2]string{"p0", "p1"}, dk, 0)
 	if err != nil {
 		return refuse(err)
+	}
+	if commanders != nil {
+		m.Commander = true
+		m.Commanders = *commanders
 	}
 	cfg := oracle.Config{GorgeAutopaySurface: true}
 	k, err := oracle.SetSide(set, tbl, cfg)(m, seed)

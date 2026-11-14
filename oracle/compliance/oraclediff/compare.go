@@ -164,7 +164,9 @@ func fields(s rules.OracleSnapshot, xmage bool, compare []string) []field {
 			field{pf("exile"), list(p.Exile, true)},
 		)
 		if wantsCompare(compare, CompareCommand) {
-			out = append(out, field{pf("command"), list(p.Command, true)})
+			out = append(out, field{pf("command"), list(p.Command, true)},
+				field{pf("commander_casts"), tallies(p.CommanderCasts)},
+				field{pf("commander_damage"), tallies(p.CommanderDamage)})
 		}
 		out = append(out,
 			field{pf("library_count"), fmt.Sprint(p.LibraryCount)},
@@ -344,6 +346,25 @@ func normCounter(k string) string {
 		return "M1M1"
 	}
 	return strings.ToUpper(strings.ReplaceAll(k, " ", ""))
+}
+
+// tallies renders a commander tally (tax counts by commander name, damage by
+// "pN:<name>") as sorted name=n pairs joined by ",", non-zero entries only.
+// Keys are card names, so they stay verbatim (counters would normalise them as
+// counter kinds).
+func tallies(m map[string]int32) string {
+	keys := make([]string, 0, len(m))
+	for k, v := range m {
+		if v != 0 {
+			keys = append(keys, k)
+		}
+	}
+	sort.Strings(keys)
+	parts := make([]string, len(keys))
+	for i, k := range keys {
+		parts[i] = fmt.Sprintf("%s=%d", k, m[k])
+	}
+	return strings.Join(parts, ",")
 }
 
 func counters(m map[string]int32) string {

@@ -34,7 +34,7 @@ func TestForgeExportXengineItem(t *testing.T) {
 	var items bytes.Buffer
 	for g := 0; g < 2; g++ {
 		pair := decks.Pair(cands, led, "FDN", 0, g, 1)
-		tp, err := game.Play(reg, pair, 1_000_003+uint64(g), game.Options{Set: "FDN"})
+		tp, err := game.Play(reg, pair[:], 1_000_003+uint64(g), game.Options{Set: "FDN"})
 		if err != nil {
 			t.Fatal(err)
 		}

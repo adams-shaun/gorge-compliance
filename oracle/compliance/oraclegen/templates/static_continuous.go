@@ -99,7 +99,7 @@ func staticContinuous(reg *cards.Registry, f *cards.Face, name string, req level
 	// itself. Try that first, but on failure fall through to the generic
 	// probe and fixture paths: a gated grant that also carries an
 	// observable effect (a level creature's SetPower/SetToughness, Echo
-	// Mage, Joraga Treespeaker) is served by the generic path and must not
+	// Mage) is served by the generic path and must not
 	// be converted into a skip. The helper's specific reason is kept for
 	// the final gap. A grant whose Affected$ names other cards is not a self
 	// grant and is not this helper's to claim.

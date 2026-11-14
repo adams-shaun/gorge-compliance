@@ -694,6 +694,66 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
             or_forced(state, wf, cur, a)
         }
 
+        // Combat. The declarations are the step machine's (`pass_to`/`attack`/`block` stop at the
+        // prompt and apply the step's own lists), so the answerer is never asked.
+        WaitingFor::DeclareAttackers { .. } | WaitingFor::DeclareBlockers { .. } => {
+            Err(harness(format!("answerer asked about {} at step {}", variant_name(wf), cur.step)))
+        }
+        // CR 510.1a: a lone blocker takes all of the attacker's damage. Several blockers (or trample)
+        // divide it, and gorge logs no such decision: never invent an order.
+        WaitingFor::AssignCombatDamage { blockers, total_damage, trample, .. } => {
+            if blockers.len() == 1 && trample.is_none() {
+                cur.notes.push(format!("forced AssignCombatDamage at step {}", cur.step));
+                ok(GameAction::AssignCombatDamage {
+                    mode: Default::default(),
+                    assignments: vec![(blockers[0].blocker_id, *total_damage)],
+                    trample_damage: 0,
+                    controller_damage: 0,
+                })
+            } else {
+                Err(miss(wf, cur, ""))
+            }
+        }
+        // CR 510.1d: a blocker only splits its damage when it blocks several attackers (banding).
+        WaitingFor::AssignBlockerDamage { attackers, total_damage, .. } => {
+            if attackers.len() == 1 {
+                cur.notes.push(format!("forced AssignBlockerDamage at step {}", cur.step));
+                ok(GameAction::AssignBlockerDamage { assignments: vec![(attackers[0], *total_damage)] })
+            } else {
+                Err(miss(wf, cur, ""))
+            }
+        }
+        // Optional costs of untapping and attacking: gorge's yes/no (or object) decision, else forced.
+        WaitingFor::UntapChoice { candidates, .. } => {
+            let a = take(cur, is_yes_no_like).and_then(|d| {
+                candidates.first().map(|id| ok(GameAction::ChooseUntap { object_id: *id, untap: accepts(&d) }))
+            });
+            or_forced(state, wf, cur, a)
+        }
+        WaitingFor::ExertChoice { .. } => {
+            let a = take(cur, is_yes_no_like).map(|d| ok(GameAction::ChooseExert { exert: accepts(&d) }));
+            or_forced(state, wf, cur, a)
+        }
+        WaitingFor::EnlistChoice { eligible, .. } => {
+            let a = if let Some(d) = take(cur, is_object_choice) {
+                let ids = cards_of(cur, &d, eligible);
+                if ids.len() > 1 {
+                    Some(Err(miss(wf, cur, &format!("gorge picked {} creature(s), enlist taps up to one", ids.len()))))
+                } else {
+                    Some(ok(GameAction::ChooseEnlist { target: ids.first().copied() }))
+                }
+            } else {
+                take(cur, is_yes_no_like).map(|d| {
+                    if accepts(&d) {
+                        forced(state, wf, cur)
+                    } else {
+                        ok(GameAction::ChooseEnlist { target: None })
+                    }
+                })
+            };
+            or_forced(state, wf, cur, a)
+        }
+
         // Everything else only ever forces: no level-A scenario scripts it.
         WaitingFor::MeldPairChoice { .. }
         | WaitingFor::MeldAttackTargetChoice { .. }
@@ -704,12 +764,7 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
         | WaitingFor::ManaSourceSelection { .. }
         | WaitingFor::AssistChoosePlayer { .. }
         | WaitingFor::AssistPayment { .. }
-        | WaitingFor::DeclareAttackers { .. }
-        | WaitingFor::DeclareBlockers { .. }
-        | WaitingFor::UntapChoice { .. }
         | WaitingFor::ChooseUntapSubset { .. }
-        | WaitingFor::ExertChoice { .. }
-        | WaitingFor::EnlistChoice { .. }
         | WaitingFor::ReplacementChoice { .. }
         | WaitingFor::EntryControllerChoice { .. }
         | WaitingFor::CopyTargetChoice { .. }
@@ -791,8 +846,6 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
         | WaitingFor::KeepWithinTotalPowerChoice { .. }
         | WaitingFor::KeepExactPermanentsChoice { .. }
         | WaitingFor::CopyRetarget { .. }
-        | WaitingFor::AssignCombatDamage { .. }
-        | WaitingFor::AssignBlockerDamage { .. }
         | WaitingFor::MoveCountersDistribution { .. }
         | WaitingFor::RemoveCountersChoice { .. }
         | WaitingFor::PayAmountChoice { .. }

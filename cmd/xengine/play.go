@@ -87,10 +87,11 @@ func runPlay(args []string) error {
 	xmage := fs.Bool("xmage", false, "leave out the cards XMage spells differently (an XMage item names no per-card spelling)")
 	random := fs.String("random", "", "set codes, space or comma separated: draw the decks at random across these sets, ignoring the ledger; -set only names the run in the item ids")
 	forgeOnly := fs.String("forge-only", "", "with -random, a file of card names, one per line, to add to the cross-set deal: a set XMage has no class for, so its items go to Forge alone")
-	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays")
-	diracEvery := fs.Int("dirac-every", 2, "with -random and -dirac, every K-th game (game g with g%K == K-1) draws from one set's dirac-playable cards; 1 makes every game one dirac plays beside gorge, so all four engines see every deck")
+	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays; with -format commander every game is offered to dirac's cmd5 Commander table, after each card it refuses is replaced by a basic of the deck's colours (commander.json swaps); a pair it still does not hold reads not_applicable")
+	diracEvery := fs.Int("dirac-every", 2, "with -random and -dirac, every K-th game (game g with g%K == K-1) draws from one set's dirac-playable cards; 1 makes every game one dirac plays beside gorge, so all four engines see every deck; not used with -format commander")
 	format := fs.String("format", "", "game format: empty or constructed, or commander (with -commander-decks)")
-	cmdrDecks := fs.String("commander-decks", "", "with -format commander: a directory of Commander deck files; each game is a 1v1 Commander match between two of them (decks.CommanderPair)")
+	seats := fs.Int("seats", 2, "with -format commander: seats a game deals, 2 to 4, each a distinct deck of -commander-decks. More than two seats are played and recorded by gorge alone: the lowering refuses every window and tape of such a game (seats:<n>)")
+	cmdrDecks := fs.String("commander-decks", "", "with -format commander: a directory of Commander deck files; each game deals -seats of them (decks.CommanderPod; two seats is a 1v1 match, decks.CommanderPair)")
 	pool := fs.String("pool", "", "a file of card names, one per line (# comments): draw the decks from these cards alone, through the same gorge-supported filter and against the ledger as -set; -set only names the run. Not with -random, -forge-only or -dirac")
 	poolFilter := fs.String("pool-filter", "", "with -pool, a file of card names to leave out of the pool (cards a follower refuses)")
 	decksDir := fs.String("decks", "", "a directory of gorge deck files (*.json, engine/deck's format): every game plays two different fixed decks of it, main deck only, instead of building 40-card decks; -set only names the run. A deck gorge does not fully support (or, with -xmage, naming a card XMage spells otherwise) is skipped; DIR/decks.json records each. Not with -pool, -random, -forge-only or -dirac")
@@ -113,6 +114,12 @@ func runPlay(args []string) error {
 	}
 	if *diracEvery < 1 {
 		return fmt.Errorf("play needs -dirac-every >= 1")
+	}
+	if *seats < 2 || *seats > game.MaxSeats {
+		return fmt.Errorf("play needs -seats between 2 and %d", game.MaxSeats)
+	}
+	if *seats != 2 && *format != "commander" {
+		return errors.New("-seats other than 2 needs -format commander")
 	}
 	if err := formatFlagErr(*format, *cmdrDecks, *random, *forgeOnly, *pool, *poolFilter, *dirac); err != nil {
 		return err
@@ -168,7 +175,7 @@ func runPlay(args []string) error {
 	opts := decks.Options{XMage: *xmage}
 	var deal dealer
 	if *format == "commander" {
-		ds, info, derr := loadCommanderDecks(reg, *cmdrDecks)
+		ds, info, derr := loadCommanderDecks(reg, *cmdrDecks, *seats, tables)
 		if derr != nil {
 			return derr
 		}
@@ -179,7 +186,7 @@ func runPlay(args []string) error {
 		if err := writeAtomic(filepath.Join(*out, "commander.json"), append(b, '\n')); err != nil {
 			return err
 		}
-		deal = commanderDealer(ds, *set, *chunk, *seed)
+		deal = commanderDealer(ds, *seats, *set, *chunk, *seed, *dirac)
 	} else {
 		var pick picker
 		var pinfo *poolInfo
@@ -253,27 +260,30 @@ func formatFlagErr(format, cmdrDecks, random, forgeOnly, pool, poolFilter string
 	if len(with) > 0 {
 		return fmt.Errorf("-format commander deals from -commander-decks: it cannot be combined with %s", strings.Join(with, ", "))
 	}
-	if dirac {
-		return errors.New("-dirac with -format commander needs the dirac Commander lockstep (xe-cmdr-dirac)")
-	}
 	return nil
 }
 
 // A dealer deals game g's pair and the set whose dirac table plays it ("" when none does).
-type dealer func(g int) (pair [2]decks.Deck, table string)
+type dealer func(g int) (pair []decks.Deck, table string)
 
 // pickDealer deals from a picker's candidates with decks.Pair: today's path.
 func pickDealer(pick picker, set string, chunk int, seed uint64) dealer {
-	return func(g int) ([2]decks.Deck, string) {
+	return func(g int) ([]decks.Deck, string) {
 		cands, led, table := pick(g, gameSeed(seed, chunk, g))
-		return decks.Pair(cands, led, set, chunk, g, seed), table
+		p := decks.Pair(cands, led, set, chunk, g, seed)
+		return p[:], table
 	}
 }
 
-// commanderDealer deals 1v1 Commander matches between ds.
-func commanderDealer(ds []decks.Deck, set string, chunk int, seed uint64) dealer {
-	return func(g int) ([2]decks.Deck, string) {
-		return decks.CommanderPair(ds, set, chunk, g, seed), ""
+// commanderDealer deals Commander games of seats distinct decks of ds (a 1v1
+// match for 2: decks.CommanderPair).
+func commanderDealer(ds []decks.Deck, seats int, set string, chunk int, seed uint64, dirac bool) dealer {
+	table := ""
+	if dirac {
+		table = dside.CommanderTable
+	}
+	return func(g int) ([]decks.Deck, string) {
+		return decks.CommanderPod(ds, seats, set, chunk, g, seed), table
 	}
 }
 
@@ -283,6 +293,9 @@ type commanderInfo struct {
 	Dir     string              `json:"dir"`
 	Decks   []commanderDeckInfo `json:"decks"`
 	Skipped []commanderSkip     `json:"skipped"`
+	// Swaps are the cards replaced by basics so dirac's cmd5 table holds the decks
+	// (-dirac only): every engine plays the substituted lists, not the files'.
+	Swaps []decks.Swap `json:"swaps,omitempty"`
 }
 
 type commanderDeckInfo struct {
@@ -297,8 +310,12 @@ type commanderSkip struct {
 }
 
 // loadCommanderDecks reads dir's deck files and keeps the playable Commander
-// decks; fewer than two is an error naming dir and every skip.
-func loadCommanderDecks(reg *cards.Registry, dir string) ([]decks.Deck, commanderInfo, error) {
+// decks; fewer than seats (each seat plays a distinct deck) is an error naming
+// dir and every skip. With tables, each card dirac's cmd5 table refuses is
+// replaced by a basic of the deck's colours (info.Swaps), since gorge's precon
+// files hold printed lists the table turns away whole; gorge, Forge and dirac then
+// all play the substituted lists.
+func loadCommanderDecks(reg *cards.Registry, dir string, seats int, tables *dside.Tables) ([]decks.Deck, commanderInfo, error) {
 	files, err := decks.ReadCommanderDir(dir)
 	if err != nil {
 		return nil, commanderInfo{}, err
@@ -308,6 +325,19 @@ func loadCommanderDecks(reg *cards.Registry, dir string) ([]decks.Deck, commande
 	sums := map[string]string{}
 	for _, f := range files {
 		sums[f.Stem] = f.SHA256
+	}
+	if tables != nil {
+		var swaps []decks.Swap
+		// No tables built: the decks stay as printed and every game reads not_applicable
+		// with the hint (play's dirac loop).
+		sw, swaps, serr := tables.SwapRefusedCommander(ds)
+		switch {
+		case dside.NoTables(serr):
+		case serr != nil:
+			return nil, info, fmt.Errorf("-dirac: table %s: %w", dside.CommanderTable, serr)
+		default:
+			ds, info.Swaps = sw, swaps
+		}
 	}
 	for _, d := range ds {
 		info.Decks = append(info.Decks, commanderDeckInfo{Stem: d.Name, Commander: d.Commander, SHA256: sums[d.Name]})
@@ -332,8 +362,8 @@ func loadCommanderDecks(reg *cards.Registry, dir string) ([]decks.Deck, commande
 	for _, k := range order {
 		parts = append(parts, fmt.Sprintf("%d %s", counts[k], k))
 	}
-	if len(ds) < 2 {
-		return nil, info, fmt.Errorf("-commander-decks %s: %d playable Commander deck(s) of %d files, need 2 (%s)", dir, len(ds), len(files), strings.Join(by, "; "))
+	if len(ds) < seats {
+		return nil, info, fmt.Errorf("-commander-decks %s: %d playable Commander deck(s) of %d files, need %d (%s)", dir, len(ds), len(files), seats, strings.Join(by, "; "))
 	}
 	fmt.Printf("commander decks: %d of %d files (%s)\n", len(ds), len(files), strings.Join(parts, ", "))
 	return ds, info, nil
@@ -597,8 +627,16 @@ func play(reg *cards.Registry, deal dealer, tables *dside.Tables, led *cov.Ledge
 		opt := game.Options{Set: set}
 		if tables != nil {
 			dRow = dside.NotApplicable(dside.GameID(set, chunk, g), "decks across sets: no dirac table holds them")
-			if table != "" {
-				dRow, opt.Script = tables.Lockstep(dRow.Game, table, pair, gameSeed(seed, chunk, g), game.DefaultMaxTurns)
+			switch {
+			case table == dside.CommanderTable && len(pair) != 2:
+				dRow = dside.NotApplicable(dRow.Game, fmt.Sprintf("seats:%d: dirac plays 1v1 Commander", len(pair)))
+			case table == dside.CommanderTable:
+				if _, terr := tables.CommanderSet(); terr != nil && dside.NoTables(terr) {
+					return fmt.Errorf("-dirac: table %s: %w", table, diracTablesHint(terr))
+				}
+				dRow, opt.Script = tables.CommanderLockstep(dRow.Game, [2]decks.Deck(pair), gameSeed(seed, chunk, g), game.DefaultMaxTurns)
+			case table != "":
+				dRow, opt.Script = tables.Lockstep(dRow.Game, table, [2]decks.Deck(pair), gameSeed(seed, chunk, g), game.DefaultMaxTurns)
 			}
 		}
 		if windows {
@@ -629,7 +667,22 @@ func play(reg *cards.Registry, deal dealer, tables *dside.Tables, led *cov.Ledge
 		// The whole-game tape, then the windows in cut order, then the
 		// refusals in cut order.
 		l, err := lower.Tape(reg, tp)
-		if err != nil {
+		var refusedErr *lower.RefusedError
+		if errors.As(err, &refusedErr) {
+			// A pod: the tape and each of its -tape-turns prefixes are refused.
+			ids := []string{id}
+			for _, n := range tapeTurns {
+				ids = append(ids, id+":t"+strconv.Itoa(n))
+			}
+			for _, rid := range ids {
+				b, jerr := jsonl(lowerRow{ID: rid, Status: statusRefused, Step: -1, Reasons: refusedErr.Reasons})
+				if jerr != nil {
+					return jerr
+				}
+				lowerLog.Write(b)
+				hist[statusRefused]++
+			}
+		} else if err != nil {
 			row := lowerRow{ID: id, Step: -1, Status: statusLowerError, Field: "lower", Gorge: err.Error()}
 			b, _ := jsonl(row)
 			lowerLog.Write(b)

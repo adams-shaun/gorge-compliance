@@ -54,6 +54,7 @@ None of these is a verdict on either engine. They measure how much of the corpus
 | `rng` | A hand, library or graveyard difference after a random event gorge recorded. Each engine drew its own randomness |
 | `projection_gap` | A field neither side can describe in the shared vocabulary: an unmapped keyword (`other:…`) or two token names for the same token |
 | `forge_skips_damage_step` | Forge skips a combat damage step when no creature is left in combat, which the CR doesn't allow. A driver quirk (`SkipsDamageStep`) |
+| `phase_skips_attack_step` | phase.rs gives no declare attackers prompt or priority when no creature can attack, and goes from beginning of combat to end of combat; gorge gives the window (CR 508.2). A driver quirk (`SkipsEmptyAttackStep`) |
 | `crew_type_dependency` | A type-adding static misses a Vehicle that became a creature. XMage and Forge both apply a CR 613.8a dependency by timestamp instead; gorge applies the dependency. Documented in [upstream-bugs.md](https://github.com/adams-shaun/gorge-compliance/blob/main/docs/upstream-bugs.md) |
 
 ### Never sent
