@@ -43,7 +43,6 @@ Final Showdown	T1	keywords	spree:{3}{W}{W}	spree:{1}	mtgish-bug	mode costs: a la
 Fisher's Talent	T1	keywords	class:2:{U}{G} class:3:{2}{U}{G}	class:2:{2}{U}{G} class:3:{U}{G}	mtgish-bug	level costs shifted one capture back (L2 takes the card cost, L3 the L2 cost), the #1 pattern; card not in the #1 list
 Flamescroll Celebrant [Revel in Silence]	T1	mana_cost	{W}{W}	{1}{R}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
 Fortune Teller's Talent	T1	keywords	class:2:{3}{U} class:3:{2}{U}	class:2:{U} class:3:{3}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Gorm the Great	T1	keywords	mustbeblockedbytwo	-	equivalent	gorge lowers the must-be-blocked-by-two clause as a keyword (mustbeblockedbytwo, gorge b2a42a24d8); mtgish writes it as one static rule MustBeBlockedByAtLeastNumberDefenders
 Gossip's Talent	T1	keywords	class:3:{3}{U}	class:3:{1}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Gourmand's Talent	T1	keywords	class:2:{2}{G} class:3:{3}{G}	class:2:{G} class:3:{2}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Great Train Heist	T1	keywords	spree:{R}	spree:{2}	mtgish-bug	mode costs: a later SpreeAction repeats an earlier ManaCost capture; script ModeCost$ matches the printed costs (i5jb/mtgish#1)
