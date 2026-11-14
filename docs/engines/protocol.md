@@ -472,6 +472,7 @@ driver without that quirk.
 | `TurnCapMsg` | The start of the driver's turn-cap harness message (class `turn_cap`) |
 | `CastModes` | The `cast_mode` values the driver can act on. `nil` means all |
 | `SkipsDamageStep` | The engine skips the combat damage step when no creature is left in combat |
+| `SkipsEmptyAttackStep` | The engine goes from beginning of combat to end of combat, with no declare attackers priority, when no creature can attack |
 | `StopsInCleanup` | The engine gives priority in the cleanup step after an end-the-turn effect |
 | `TrailingMisses` | The engine asks a cleanup discard or optional trigger after the item's last step; such a miss alone isn't `decision_shape` |
 | `TapsWithCast` | The driver taps mana and casts within one priority out of turn |
