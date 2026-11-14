@@ -34,12 +34,18 @@ type Refusal struct {
 // own rebased tape (Lowered.Against, CheckWindow). xmage says XMage replays the
 // windows, so a setup token the XMage driver cannot place is refused; a
 // Forge-only run places any token by its script stem. The result is a pure
-// function of (pair, seed, opt, xmage).
-func Windows(reg *cards.Registry, pair [2]decks.Deck, seed uint64, opt game.Options, xmage bool) ([]Lowered, []Refusal, *game.Tape, error) {
+// function of (pair, seed, opt, xmage). A game of more than two seats is played
+// and refused turn by turn, reason seats:<n>, with no cut read.
+func Windows(reg *cards.Registry, pair []decks.Deck, seed uint64, opt game.Options, xmage bool) ([]Lowered, []Refusal, *game.Tape, error) {
 	var cuts []*cut
 	user := opt.OnCut
 	opt.OnCut = func(e *rules.Engine, entry int) {
-		cuts = append(cuts, capture(e, entry, xmage))
+		if r := seatRefusal(len(pair)); r != nil {
+			// capture reads two seats; the pod's windows are refused unread.
+			cuts = append(cuts, &cut{Entry: entry, Turn: e.G.Turn, Reasons: r})
+		} else {
+			cuts = append(cuts, capture(e, entry, xmage))
+		}
 		if user != nil {
 			user(e, entry)
 		}
@@ -106,7 +112,7 @@ func (c *cut) setupSpeedLatch() bool {
 func windowTape(t *game.Tape, c *cut) *game.Tape {
 	end := windowEnd(t, c)
 	hi := min(end+1, len(t.Entries))
-	wt := &game.Tape{Format: t.Format, Set: t.Set, Seed: t.Seed, Decks: t.Decks, Entries: make([]game.Entry, 0, hi-c.Entry)}
+	wt := &game.Tape{Format: t.Format, Set: t.Set, Seed: t.Seed, Decks: t.Decks, Open: make([]game.Opening, len(t.Decks)), Entries: make([]game.Entry, 0, hi-c.Entry)}
 	rebase := c.Turn - 1
 	for _, en := range t.Entries[c.Entry:hi] {
 		en.Turn -= rebase
@@ -187,7 +193,7 @@ func lowerWindow(reg *cards.Registry, t *game.Tape, c *cut, id string) (Lowered,
 	wt := windowTape(t, c)
 	n := windowEnd(t, c) - c.Entry
 	m := seatMap{swap: c.Active == 1, rngOK: true}
-	name := fmt.Sprintf("xengine window %s vs %s turn %d", t.Decks[0].Name, t.Decks[1].Name, c.Turn)
+	name := fmt.Sprintf("xengine window %s vs %s turn %d", deckNameOf(t, 0), deckNameOf(t, 1), c.Turn)
 	l := Lowered{
 		Item: c.item(m, id, name),
 		Swap: m.swap, StepEntry: []int{}, Against: wt,

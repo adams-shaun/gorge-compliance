@@ -32,7 +32,7 @@ func playFDN(t *testing.T, n int) (*cards.Registry, []*game.Tape) {
 	var out []*game.Tape
 	for g := 0; g < n; g++ {
 		p := decks.Pair(cands, cov.New(), "FDN", 0, g, 7)
-		tp, err := game.Play(reg, p, uint64(100+g), game.Options{Set: "FDN"})
+		tp, err := game.Play(reg, p[:], uint64(100+g), game.Options{Set: "FDN"})
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -142,7 +142,7 @@ func playFDN2(t *testing.T, reg *cards.Registry, n int) []*game.Tape {
 	}
 	var out []*game.Tape
 	for g := 0; g < n; g++ {
-		tp, err := game.Play(reg, decks.Pair(cands, cov.New(), "FDN", 0, g, 7), uint64(100+g), game.Options{Set: "FDN"})
+		tp, err := game.Play(reg, podOf(decks.Pair(cands, cov.New(), "FDN", 0, g, 7)), uint64(100+g), game.Options{Set: "FDN"})
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -951,7 +951,7 @@ func TestLowerTreasureTapColour(t *testing.T) {
 	const seed = 11
 	taps := 0
 	for g := 0; g < 24; g++ {
-		tp, err := game.Play(reg, decks.Pair(cands, cov.New(), "DSK", 0, g, seed), uint64(seed*1_000_003+g), game.Options{Set: "DSK"})
+		tp, err := game.Play(reg, podOf(decks.Pair(cands, cov.New(), "DSK", 0, g, seed)), uint64(seed*1_000_003+g), game.Options{Set: "DSK"})
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1000,3 +1000,6 @@ func TestLowerTreasureTapColour(t *testing.T) {
 	}
 	t.Logf("%d Treasure taps checked", taps)
 }
+
+// podOf is a 1v1 pair as the seat list game.Play and Windows take.
+func podOf(p [2]decks.Deck) []decks.Deck { return p[:] }

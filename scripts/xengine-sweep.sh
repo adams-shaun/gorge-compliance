@@ -90,6 +90,10 @@
 #                         with XENGINE_RANDOM_SETS, XENGINE_FORGE_ONLY, XENGINE_POOL,
 #                         XENGINE_POOL_FILTER or XENGINE_DIRAC (play refuses). XMage refuses every
 #                         Commander item (xmage_commander): run with XENGINE_FOLLOWERS=forge.
+#   XENGINE_SEATS         with XENGINE_COMMANDER_DECKS, passed to play as -seats (2..4, default 2): each
+#                         game deals that many distinct decks. More than two seats are played by gorge
+#                         alone: every window and tape lowers to `refused` (seats:<n>), so no follower
+#                         sees it. play refuses it without XENGINE_COMMANDER_DECKS.
 #   XENGINE_POOL          a card-name file passed to play as -pool: the decks are drawn
 #                         from it alone (oracle/xengine/pools/), against the ledger as a
 #                         set's are, and --sets only names the run. Not with
@@ -310,6 +314,7 @@ play_stage() { # set chunk dir (reads <dir>/ledger-in.tsv when snapshot_into mad
 	[ -z "${XENGINE_DIRAC_EVERY:-}" ] || args+=(-dirac-every "$XENGINE_DIRAC_EVERY")
 	[ -z "${XENGINE_FORGE_ONLY:-}" ] || args+=(-forge-only "$XENGINE_FORGE_ONLY")
 	[ -z "${XENGINE_COMMANDER_DECKS:-}" ] || args+=(-format commander -commander-decks "$XENGINE_COMMANDER_DECKS")
+	[ -z "${XENGINE_SEATS:-}" ] || args+=(-seats "$XENGINE_SEATS")
 	[ -z "${XENGINE_POOL:-}" ] || args+=(-pool "$XENGINE_POOL")
 	[ -z "${XENGINE_POOL_FILTER:-}" ] || args+=(-pool-filter "$XENGINE_POOL_FILTER")
 	[ -z "${XENGINE_DECKS:-}" ] || args+=(-decks "$XENGINE_DECKS")

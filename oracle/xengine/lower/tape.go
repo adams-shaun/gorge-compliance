@@ -67,11 +67,20 @@ type Lowered struct {
 
 var deckName = regexp.MustCompile(`-c(\d+)-g(\d+)-`)
 
+// deckNameOf is the name of seat i's deck, "" for a tape that lists none (a
+// hand-built one).
+func deckNameOf(t *game.Tape, i int) string {
+	if i < len(t.Decks) {
+		return t.Decks[i].Name
+	}
+	return ""
+}
+
 // itemID is xe:<set>:<chunk>:<game>:tape; chunk and game come from the deck
 // name decks.Pair gave the tape's first deck (the seed stands in for both when
 // the name is not one of those).
 func itemID(t *game.Tape) string {
-	if m := deckName.FindStringSubmatch(t.Decks[0].Name); m != nil {
+	if m := deckName.FindStringSubmatch(deckNameOf(t, 0)); m != nil {
 		return fmt.Sprintf("xe:%s:%s:%s:tape", t.Set, m[1], m[2])
 	}
 	return fmt.Sprintf("xe:%s:s%d:%d:tape", t.Set, t.Seed, t.Seed)
@@ -96,11 +105,37 @@ func isPass(e game.Entry) bool {
 	return e.Kind == "priority" && len(e.Picks) == 1 && e.Picks[0].Kind == "pass"
 }
 
-// Tape lowers t. A tape the lowering cannot express in full yields the
+// ReasonSeats is the refusal reason of a game with more than two seats:
+// "seats:<n>". The lowering (a scenario's seats p0/p1, the cut's Setup and
+// Answers) is two-seat throughout, so a pod is refused whole.
+const ReasonSeats = "seats:"
+
+// seatRefusal is the one seat-count check of the lowering: the reasons a game
+// of n seats is refused, none for a 1v1 game.
+func seatRefusal(n int) []string {
+	if n > 2 {
+		return []string{ReasonSeats + strconv.Itoa(n)}
+	}
+	return nil
+}
+
+// RefusedError is Tape's error for a game it refuses by name: a game the
+// lowering does not express at all, not one it cannot read.
+type RefusedError struct{ Reasons []string }
+
+func (e *RefusedError) Error() string {
+	return "lower: refused: " + strings.Join(e.Reasons, ", ")
+}
+
+// Tape lowers t. A game with more than two seats is refused with a
+// *RefusedError (reason seats:<n>). A tape the lowering cannot express in full yields the
 // longest lowerable prefix with Truncated set; only a tape that cannot be
 // read as a game at all (an unknown card) is an error. The result is a pure
 // function of t.
 func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
+	if r := seatRefusal(max(len(t.Decks), len(t.Open))); r != nil {
+		return Lowered{}, &RefusedError{Reasons: r}
+	}
 	m := seatMap{swap: t.Starter == 1}
 	for s := range t.Open {
 		for _, n := range slices.Concat(t.Open[s].Hand, t.Open[s].Command, t.Open[s].Library) {
@@ -111,7 +146,7 @@ func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 	}
 	commander := t.GameFormat == oraclegen.FormatCommander
 	sc := oraclegen.Scenario{
-		Name:  "xengine tape " + t.Decks[0].Name + " vs " + t.Decks[1].Name,
+		Name:  "xengine tape " + deckNameOf(t, 0) + " vs " + deckNameOf(t, 1),
 		Turn:  1,
 		CR:    []string{},
 		Why:   "A recorded gorge game between two explore bots, replayed from turn 1.",

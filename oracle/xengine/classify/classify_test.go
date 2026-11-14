@@ -35,7 +35,7 @@ func fixture(draws uint64) (lower.Lowered, *game.Tape, rules.OracleResult) {
 		StepEntry: []int{0, 1},
 	}
 	tp := &game.Tape{
-		Decks:   [2]game.Deck{{Cards: []string{"Forest", "Island"}}, {Cards: []string{"Swamp"}}},
+		Decks:   []game.Deck{{Cards: []string{"Forest", "Island"}}, {Cards: []string{"Swamp"}}},
 		Entries: []game.Entry{{Kind: "priority"}, {Kind: "priority", RNG: draws}},
 	}
 	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{snap("setup"), snap("step 0 (pass)"), snap("step 1 (pass)")}}

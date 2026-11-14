@@ -31,13 +31,13 @@ const TapeFormat1 = "xengine-tape-1"
 type Tape struct {
 	Format string `json:"format"`
 	// GameFormat is "commander" for a Commander game, "" for a constructed one.
-	GameFormat string  `json:"game_format,omitempty"`
-	Set        string  `json:"set,omitempty"`
-	Seed       uint64  `json:"seed"`
-	Decks      [2]Deck `json:"decks"`
+	GameFormat string `json:"game_format,omitempty"`
+	Set        string `json:"set,omitempty"`
+	Seed       uint64 `json:"seed"`
+	Decks      []Deck `json:"decks"`
 	// Starter is the starting player: the active seat of turn 1.
-	Starter int        `json:"starter"`
-	Open    [2]Opening `json:"opening"`
+	Starter int       `json:"starter"`
+	Open    []Opening `json:"opening"`
 	// GenesisRNG and GenesisMana are the engine draws and mana abilities
 	// before the first decision (the opening shuffle and deal).
 	GenesisRNG  uint64    `json:"genesis_rng,omitempty"`

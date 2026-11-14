@@ -31,7 +31,7 @@ func auraCuts(t *testing.T, set string, n int) map[int][]auraCut {
 	reg, pairs := setPairs(t, set, n)
 	out := map[int][]auraCut{}
 	for g, p := range pairs {
-		_, err := game.Play(reg, p, uint64(100+g), game.Options{Set: set, OnCut: func(e *rules.Engine, entry int) {
+		_, err := game.Play(reg, p[:], uint64(100+g), game.Options{Set: set, OnCut: func(e *rules.Engine, entry int) {
 			c := capture(e, entry, true)
 			if len(c.Reasons) != 0 {
 				return
@@ -107,7 +107,7 @@ func TestGateAttachedAura(t *testing.T) {
 	}
 	// The window lowered from the same game carries it, with no attach step.
 	reg, pairs := setPairs(t, "DSK", seed-100+1)
-	ls, _, tp, err := Windows(reg, pairs[seed-100], uint64(seed), game.Options{Set: "DSK"}, true)
+	ls, _, tp, err := Windows(reg, pairs[seed-100][:], uint64(seed), game.Options{Set: "DSK"}, true)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -144,7 +144,7 @@ func TestWindowsAttachedAuras(t *testing.T) {
 	status := map[string]int{}
 	var attachedWin, attachedOK int
 	for g, p := range pairs {
-		ls, rs, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: "DSK"}, true)
+		ls, rs, _, err := Windows(reg, p[:], uint64(100+g), game.Options{Set: "DSK"}, true)
 		if err != nil {
 			t.Fatal(err)
 		}
