@@ -88,8 +88,11 @@
 #                         -commander-decks: each game is a 1v1 Commander match between two of them
 #                         (gorge's testkit/testutil/decks holds 15), --sets only names the run. Not
 #                         with XENGINE_RANDOM_SETS, XENGINE_FORGE_ONLY, XENGINE_POOL,
-#                         XENGINE_POOL_FILTER or XENGINE_DIRAC (play refuses). XMage refuses every
+#                         XENGINE_POOL_FILTER (play refuses). XMage refuses every
 #                         Commander item (xmage_commander): run with XENGINE_FOLLOWERS=forge.
+#                         With XENGINE_DIRAC=1 each game is offered to dirac's cmd5 Commander table
+#                         (a pair it holds gets a lockstep row, any other reads not_applicable);
+#                         XENGINE_DIRAC_EVERY does not apply.
 #   XENGINE_SEATS         with XENGINE_COMMANDER_DECKS, passed to play as -seats (2..4, default 2): each
 #                         game deals that many distinct decks. More than two seats are played by gorge
 #                         alone: every window and tape lowers to `refused` (seats:<n>), so no follower
