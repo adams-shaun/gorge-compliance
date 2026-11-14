@@ -25,12 +25,17 @@ func staticAt(t *testing.T, reg *cards.Registry, name, key string) cards.Static 
 // Mage / Joraga Treespeaker live in ROE, which no census pins, so the
 // regression this test guards was invisible to every other test in the
 // package.
+//
+// Joraga Treespeaker static#0.0 used to be in this list. It stopped being a
+// fall-through row at gorge b2a42a24d8, which made the mana-grant scan honour
+// an IsPresent$ gate (engine/rules/mana_grant_gate.go): the gate-off control
+// no longer leaks the {T}: Add {G}{G} offer, so the helper observes the
+// LEVEL 1-4 grant itself (TestStaticGatedManaGrantServedByHelper).
 func TestStaticGatedGrantFallsThroughToGenericPath(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	for _, tc := range []struct{ card, key string }{
 		{"Echo Mage", "static#0.0"},
 		{"Echo Mage", "static#0.1"},
-		{"Joraga Treespeaker", "static#0.0"},
 	} {
 		card, key := tc.card, tc.key
 		t.Run(card+"/"+key, func(t *testing.T) {
@@ -70,6 +75,35 @@ func TestStaticGatedGrantFallsThroughToGenericPath(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+// TestStaticGatedManaGrantServedByHelper pins Joraga Treespeaker's LEVEL 1-4
+// band as served by the gated self-grant helper: the card carries a level
+// counter, so gorge offers "Add GG" on it, and the helper's gate-off control
+// (counter removed) must not offer it. The item asserts that offer, not the
+// generic keyword comparison.
+func TestStaticGatedManaGrantServedByHelper(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	const card, key = "Joraga Treespeaker", "static#0.0"
+	st := staticAt(t, reg, card, key)
+	if !st.HasParam(cards.PKAddAbility) || !staticSelfGrantedAbility(&st) {
+		t.Fatalf("precondition: %s %s is not a self grant", card, key)
+	}
+	item, skip := GenerateB(reg, card, counterReq(t, reg, card, key))
+	if skip != nil {
+		t.Fatalf("GenerateB skip = %v; want the helper to serve it", skip)
+	}
+	offered := false
+	for _, step := range item.Scenario.Steps {
+		for _, ex := range step.Expect {
+			if ex.Offered != nil && ex.Offered.Card == "p0:"+card && ex.Offered.Kind == "activate" && ex.Want != nil && *ex.Want {
+				offered = true
+			}
+		}
+	}
+	if !offered {
+		t.Fatalf("%s %s: want an offered activate assertion on the card: %+v", card, key, item.Scenario.Steps)
 	}
 }
 
