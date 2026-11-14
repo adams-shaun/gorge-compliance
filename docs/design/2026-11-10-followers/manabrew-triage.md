@@ -23,9 +23,6 @@ there is no F-versus-M disagreement to split yet; every row reads "no Forge row"
 
 | id | status | field or message | cause | Forge agrees with gorge? |
 |---|---|---|---|---|
-| Bushwhack/cast-resolve/v1 | HARNESS | `rng_miss: shuffle of 38 cards at step 1` | driver gap: `ScriptedRng` refuses the shuffle after the library search; the classifier leaves library order out of the comparison once a window has shuffled, so an identity shuffle with a note would let the row compare (follow-up filed) | no Forge row |
-| Grow from the Ashes/cast-resolve/v1 | HARNESS | `rng_miss: shuffle of 38 cards at step 1` | driver gap: same shuffle after a search | no Forge row |
-| Mystical Teachings/cast-resolve/v1 | HARNESS | `rng_miss: shuffle of 38 cards at step 1` | driver gap: same shuffle after a search | no Forge row |
 | Gnarlid Colony/cast-resolve/v1 | DIVERGE | permanents: gorge 2/2; Manabrew 4/4 with two +1/+1 counters | Manabrew engine bug: an unkicked cast (the kicker was not payable and `choose_kicker` was never asked) still enters with the kicked counters; the condition on the enters-with-counters keyword is ignored | no Forge row |
 | Goblin Boarders/cast-resolve/v1 | DIVERGE | permanents: gorge 3/2; Manabrew 4/3 with a +1/+1 counter | Manabrew engine bug: enters with the counter although nothing attacked; same ignored condition on the enters-with-counters keyword | no Forge row |
 | Imprisoned in the Moon/cast-resolve/v1 | DIVERGE | permanents: gorge Grizzly Bears is a land with no colour or P/T; Manabrew keeps `bear creature land`, `{G}`, 2/2 | Manabrew engine bug: the aura's type, colour and ability-loss effect is applied only as an added land type | no Forge row |
@@ -62,3 +59,11 @@ default. Notes for reading rows:
   (the engine orders its own triggers, no agent hook). None occurs in this pool.
 - Mana-ability colour choices, convoke, delve, improvise, tap-type costs, dice, mulligans and combat remain
   strict misses: nothing in this pool asks for them.
+
+Update 2026-11-13 (MANABREW_ORACLE_REF e7b9dd21af46): the three shuffle rows are gone. `ScriptedRng::shuffle_cards`
+now completes a shuffle as an identity shuffle and adds the row note `shuffle of N cards: order not compared`;
+a `next_int` bound above one is still an `rng_miss`. Library order needs no handling in the comparison: those
+items already carry `ignore: ["library_top"]` and `library_count` is unchanged by a shuffle. A three-name pool
+(`Bushwhack`, `Grow from the Ashes`, `Mystical Teachings`) through `scripts/follower-check.sh manabrew` reads 3
+AGREE, each row carrying the note `shuffle of 38 cards: order not compared`. The full-pool counts above were not
+re-measured by this change; they drop by the three rows (5 rows left in the table).
