@@ -203,7 +203,8 @@ func TestGorgeAllMustBlockKeyword(t *testing.T) {
 
 // TestGorgeMustBeBlockedByTwoKeyword: gorge's canonical head for "must be
 // blocked by two or more creatures if able" (CR 509.1c, Gorm the Great) is
-// the static rule mtgish writes, not a keyword.
+// the static rule mtgish writes, not a keyword. Regression guard for the
+// d2Keywords mapping in map_d2.go.
 func TestGorgeMustBeBlockedByTwoKeyword(t *testing.T) {
 	f := &cards.Face{Name: "Test Card", Types: []string{"Creature"}, Keywords: []string{"MustBeBlockedByTwo"}}
 	s := gorgeFace("Test Card", f, TypeIndex{})
@@ -211,7 +212,7 @@ func TestGorgeMustBeBlockedByTwoKeyword(t *testing.T) {
 		t.Errorf("keywords %v, want none", s.Keywords)
 	}
 	if got, want := shapes(s), "static"; got != want {
-		t.Errorf("abilities %q, want %q", got, want)
+		t.Fatalf("abilities %q, want %q", got, want)
 	}
 	if got := strings.Join(s.Abilities[0].Effects, " "); got != "rule:mustbeblockedbyatleastnumberdefenders" {
 		t.Errorf("effects %q", got)

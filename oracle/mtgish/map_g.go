@@ -33,7 +33,6 @@ func init() {
 			[]string{"rule:mayassigncombatdamagedividedasyouchooseamongplayerorcreaturesandplaneswalkers"}},
 		{"If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.",
 			[]string{"rule:mayassigncombatdamagetoapermanent"}},
-		{"MustBeBlockedByTwo", []string{"rule:mustbeblockedbyatleastnumberdefenders"}},
 		{"CARDNAME must be blocked by two or more creatures if able.", []string{"rule:mustbeblockedbyatleastnumberdefenders"}},
 		{"CARDNAME must be blocked by exactly one creature if able.", []string{"rule:mustbeblockedbyexactlyonedefender"}},
 		{"CARDNAME can only attack alone.", []string{"rule:canonlyattackalone"}},
