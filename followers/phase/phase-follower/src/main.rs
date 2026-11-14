@@ -219,7 +219,7 @@ mod tests {
 
     #[test]
     fn batch_every_line_gets_a_phase_row() {
-        let input = "{\"id\":\"a\",\"item\":{\"id\":\"a\",\"card\":\"Llanowar Elves\",\"name\":\"n\",\"steps\":[{\"op\":\"attack\",\"seat\":0}]}}\nnot json\n";
+        let input = "{\"id\":\"a\",\"item\":{\"id\":\"a\",\"card\":\"Llanowar Elves\",\"name\":\"n\",\"steps\":[{\"op\":\"life\",\"seat\":0}]}}\nnot json\n";
         let mut out = Vec::new();
         let stats = run_scenarios(db(), input.as_bytes(), &mut out, &batch_config("abc+0123456789abcdef")).unwrap();
         assert_eq!((stats.rows, stats.harness), (2, 2));
@@ -231,7 +231,7 @@ mod tests {
             assert_eq!(r["phase_ref"], "abc+0123456789abcdef");
         }
         assert_eq!(rows[0]["id"], "a");
-        assert_eq!(rows[0]["harness"], "harness: phase follower: op attack not implemented");
+        assert_eq!(rows[0]["harness"], "harness: phase follower: op life is a gorge-runner-only op (step 0)");
         // The setup snapshot is kept when the steps stop the replay.
         assert_eq!(rows[0]["snapshots"][0]["checkpoint"], "setup");
         assert!(rows[1]["harness"].as_str().unwrap().starts_with("harness: malformed request line"));

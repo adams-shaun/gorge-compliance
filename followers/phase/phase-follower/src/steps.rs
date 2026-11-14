@@ -1,5 +1,5 @@
 //! The step machine: replays `item.steps` after setup for the ops `mana play activate cast pass
-//! resolve`, with gorge's priority model and checkpoints.
+//! resolve pass_to attack block attach move`, with gorge's priority model and checkpoints.
 //!
 //! Each step ends with the checkpoint `step <i> (<op>)`, a snapshot (Forge's semantics, which
 //! gorge's runner shares). Every phase action goes through [`Machine::act`], the one place that
@@ -8,7 +8,11 @@
 //! Prompts that are not a priority window go to [`crate::answer`]; the one prompt the machine
 //! answers itself is `ManaPayment` (pin the pool units gorge spent, then finalise).
 
+use std::cell::Cell;
+
 use engine::ai_support::legal_actions_full;
+use engine::game::combat::AttackTarget;
+use engine::game::game_object::AttachTarget;
 use engine::game::layers::flush_layers;
 use engine::game::{apply, EngineError};
 use engine::types::ability::TargetRef;
@@ -18,15 +22,18 @@ use engine::types::identifiers::ObjectId;
 use engine::types::mana::{ManaCost, ManaCostShard, ManaPipId, ManaType};
 use engine::types::phase::Phase;
 use engine::types::player::PlayerId;
+use engine::types::zones::Zone;
 use follower_proto::batch::{RowBuilder, Stop};
 use follower_proto::decisions::DecisionQueue;
 use follower_proto::refs::Ref;
 use follower_proto::request::{NeutralAbility, Request, Step};
 use follower_proto::row::strict_miss_msg;
+use follower_proto::vocab;
+use serde_json::Value;
 
 use crate::answer::{answer, variant_name, Cursor};
 use crate::setup::Board;
-use crate::snapshot::snapshot;
+use crate::snapshot::{snapshot, step_name};
 
 /// Cap on `apply` calls inside one step.
 const MAX_APPLY: usize = 4000;
@@ -113,6 +120,11 @@ struct Machine<'a> {
     step: usize,
     last: bool,
     debug_noted: bool,
+    /// The note for `attach`/`move` was written (once per row, like `debug_noted`).
+    edit_noted: bool,
+    /// The previous step was a `pass_to` that reached its named step: the queue's lookahead stays
+    /// on through the next step (see `run`).
+    carry_lookahead: bool,
     /// Indices of the mode decisions the answerer has taken (the key of `neutral.mode`).
     used: std::collections::BTreeSet<usize>,
     /// Stack entries whose chosen targets have been matched against gorge's target decisions.
@@ -133,6 +145,8 @@ pub fn run(req: &Request, board: Board, rb: &mut RowBuilder) -> Result<(), Stop>
         step: 0,
         last: false,
         debug_noted: false,
+        edit_noted: false,
+        carry_lookahead: false,
         used: std::collections::BTreeSet::new(),
         swept: std::collections::BTreeSet::new(),
         answered: Vec::new(),
@@ -143,6 +157,9 @@ pub fn run(req: &Request, board: Board, rb: &mut RowBuilder) -> Result<(), Stop>
         m.step = i;
         m.last = i + 1 == n;
         m.calls = 0;
+        if !std::mem::take(&mut m.carry_lookahead) {
+            m.queue.set_lookahead(false);
+        }
         if matches!(m.board.state.waiting_for, WaitingFor::GameOver { .. }) {
             return Err(m.game_ended());
         }
@@ -205,24 +222,25 @@ impl Machine<'_> {
         }
     }
 
-    /// Add `units` to `seat`'s pool with the debug action (debug mode on for this action only).
-    fn add_mana(&mut self, seat: u8, units: Vec<ManaType>, rb: &mut RowBuilder) -> Result<(), Stop> {
-        if units.is_empty() {
-            return Ok(());
-        }
+    /// Apply the debug `action` (debug mode on for this action only).
+    fn debug(&mut self, action: DebugAction) -> Result<(), Stop> {
         self.calls += 1;
         if self.calls > MAX_APPLY {
             return Err(harness(format!("no progress at step {}", self.step)));
         }
         let state = &mut self.board.state;
         state.debug_mode = true;
-        let r = apply(
-            state,
-            PlayerId(0),
-            GameAction::Debug(DebugAction::AddMana { player_id: PlayerId(seat), mana: units }),
-        );
+        let r = apply(state, PlayerId(0), GameAction::Debug(action));
         state.debug_mode = false;
-        r.map_err(|e| harness(format!("engine error: {e}")))?;
+        r.map(|_| ()).map_err(|e| harness(format!("engine error: {e}")))
+    }
+
+    /// Add `units` to `seat`'s pool with the debug action (debug mode on for this action only).
+    fn add_mana(&mut self, seat: u8, units: Vec<ManaType>, rb: &mut RowBuilder) -> Result<(), Stop> {
+        if units.is_empty() {
+            return Ok(());
+        }
+        self.debug(DebugAction::AddMana { player_id: PlayerId(seat), mana: units })?;
         if !self.debug_noted {
             self.debug_noted = true;
             rb.note("mana added to the pool by a debug AddMana (debug mode on for that action only)");
@@ -278,11 +296,219 @@ impl Machine<'_> {
                 _ => Prio::Act(GameAction::PassPriority),
             }),
             "life" => Err(harness(format!("op life is a gorge-runner-only op (step {i})"))),
-            op @ ("attack" | "block" | "pass_to" | "attach" | "move") => {
-                Err(harness(format!("op {op} not implemented")))
-            }
+            "pass_to" => self.pass_to(step, rb),
+            "attack" => self.attack(step, seat, rb),
+            "block" => self.block(step, seat, rb),
+            "attach" => self.attach(step, rb),
+            "move" => self.move_card(step, rb),
             op => Err(harness(format!("unknown op {op:?} at step {i}"))),
         }
+    }
+
+    /// `pass_to`: gorge passes (and declares nothing) until the named decision is pending or,
+    /// after at least one action, the named step is reached on the named active seat. A
+    /// `priority` decision is satisfied by a priority window at once, with no pass.
+    fn pass_to(&mut self, step: &Step, rb: &mut RowBuilder) -> Result<(), Stop> {
+        let i = self.step;
+        let decision = match &step.decision {
+            Value::Null => "",
+            Value::String(d) => d.as_str(),
+            other => return Err(harness(format!("pass_to: decision {other} at step {i} is not a name"))),
+        };
+        if !matches!(decision, "" | "priority" | "attackers" | "blockers") {
+            return Err(harness(format!("pass_to: decision {decision:?} unsupported at step {i}")));
+        }
+        let want = match step.step.as_str() {
+            "" => None,
+            name => Some(
+                vocab::STEP_NAMES
+                    .iter()
+                    .position(|n| *n == name)
+                    .ok_or_else(|| harness(format!("pass_to: unknown step {name:?} at step {i}")))?,
+            ),
+        };
+        if decision.is_empty() && want.is_none() {
+            return Err(harness(format!("pass_to: names neither a decision nor a step (step {i})")));
+        }
+        let active = seat_of(&step.active).map_err(|e| harness(format!("pass_to: active {e} at step {i}")))?;
+        let turn = self.state().turn_number;
+        let acted = Cell::new(0usize);
+        let by_step = Cell::new(false);
+        let check = |s: &GameState| -> Option<Prio> {
+            let kind = decision_kind(&s.waiting_for);
+            if !decision.is_empty() && kind == decision {
+                return Some(Prio::Done);
+            }
+            if let Some(w) = want {
+                let at = vocab::STEP_NAMES[w] == step_name(s.phase);
+                if acted.get() > 0 && at && active.map_or(true, |a| s.active_player == a) {
+                    by_step.set(true);
+                    return Some(Prio::Done);
+                }
+            }
+            // The declaration was passed without the prompt (nothing could attack or block):
+            // stop with a row naming it, never spin on into later turns.
+            let last = match decision {
+                "attackers" => Some(Phase::DeclareAttackers),
+                "blockers" => Some(Phase::DeclareBlockers),
+                _ => None,
+            };
+            if let Some(last) = last {
+                if s.phase > last || s.turn_number != turn {
+                    return Some(Prio::Fail(format!("pass_to {decision}: no declaration prompt by {}", step_name(s.phase))));
+                }
+            }
+            None
+        };
+        let r = self.drive_with(
+            rb,
+            |s| {
+                check(s).unwrap_or_else(|| {
+                    acted.set(acted.get() + 1);
+                    Prio::Act(GameAction::PassPriority)
+                })
+            },
+            |s| {
+                check(s).unwrap_or_else(|| {
+                    acted.set(acted.get() + 1);
+                    Prio::Act(empty_declaration(&s.waiting_for))
+                })
+            },
+        );
+        r?;
+        if by_step.get() {
+            self.queue.set_lookahead(true);
+            self.carry_lookahead = true;
+        }
+        Ok(())
+    }
+
+    /// `attack`: gorge answers decisions (passing priority) until the attackers decision of `seat`
+    /// is pending, declares `step.attackers` at `step.defender`, and plays on to the next priority.
+    fn attack(&mut self, step: &Step, seat: u8, rb: &mut RowBuilder) -> Result<(), Stop> {
+        let i = self.step;
+        let turn = self.state().turn_number;
+        self.drive_with(
+            rb,
+            |s| {
+                if s.phase > Phase::DeclareAttackers || s.turn_number != turn {
+                    Prio::Fail(format!("attack: no DeclareAttackers prompt (the game passed {})", step_name(s.phase)))
+                } else {
+                    Prio::Act(GameAction::PassPriority)
+                }
+            },
+            |s| match &s.waiting_for {
+                WaitingFor::DeclareAttackers { player, .. } if *player == PlayerId(seat) => Prio::Done,
+                wf => Prio::Act(empty_declaration(wf)),
+            },
+        )?;
+        match &self.state().waiting_for {
+            WaitingFor::DeclareAttackers { player, .. } if *player == PlayerId(seat) => {}
+            other => {
+                return Err(harness(format!("attack: no DeclareAttackers prompt at step {i} ({})", variant_name(other))));
+            }
+        }
+        let mut attacks = Vec::new();
+        if !step.attackers.is_empty() {
+            let defender = seat_of(&Value::String(step.defender.clone()))
+                .ok()
+                .flatten()
+                .ok_or_else(|| harness(format!("attack: defender {:?} at step {i} is not a seat", step.defender)))?;
+            for a in &step.attackers {
+                attacks.push((self.object(a, step.seat)?, AttackTarget::Player(defender)));
+            }
+        }
+        self.act(GameAction::DeclareAttackers { attacks, bands: vec![] }, "attack")?;
+        self.drive_with(rb, |_| Prio::Done, |_| Prio::Done)
+    }
+
+    /// `block`: like `attack`, for the blockers decision; `step.blocks` are `[blocker, attacker]`.
+    fn block(&mut self, step: &Step, _seat: u8, rb: &mut RowBuilder) -> Result<(), Stop> {
+        let i = self.step;
+        let turn = self.state().turn_number;
+        self.drive_with(
+            rb,
+            |s| {
+                if s.phase > Phase::DeclareBlockers || s.turn_number != turn {
+                    Prio::Fail(format!("block: no DeclareBlockers prompt (the game passed {})", step_name(s.phase)))
+                } else {
+                    Prio::Act(GameAction::PassPriority)
+                }
+            },
+            |s| match &s.waiting_for {
+                WaitingFor::DeclareBlockers { .. } => Prio::Done,
+                wf => Prio::Act(empty_declaration(wf)),
+            },
+        )?;
+        if !matches!(self.state().waiting_for, WaitingFor::DeclareBlockers { .. }) {
+            return Err(harness(format!(
+                "block: no DeclareBlockers prompt at step {i} ({})",
+                variant_name(&self.state().waiting_for)
+            )));
+        }
+        let mut assignments = Vec::new();
+        for (blocker, attacker) in &step.blocks {
+            assignments.push((self.object(blocker, step.seat)?, self.object(attacker, 1 - step.seat)?));
+        }
+        self.act(GameAction::DeclareBlockers { assignments }, "block")?;
+        self.drive_with(rb, |_| Prio::Done, |_| Prio::Done)
+    }
+
+    /// `attach`: the debug Attach of `step.card` to `step.attached_to` (a creature).
+    fn attach(&mut self, step: &Step, rb: &mut RowBuilder) -> Result<(), Stop> {
+        let object_id = self.object(&step.card, step.seat)?;
+        let host = self.object(&step.attached_to, step.seat)?;
+        let holder = self.priority_holder();
+        self.debug(DebugAction::Attach { object_id, target: AttachTarget::Object(host) })?;
+        self.note_edit(rb);
+        self.settle(holder, rb)
+    }
+
+    /// `move`: the debug MoveToZone of `step.card` to `step.to` (raw: no replacements, entry
+    /// triggers or SBAs of its own, `simulate: false`).
+    fn move_card(&mut self, step: &Step, rb: &mut RowBuilder) -> Result<(), Stop> {
+        let to_zone = match step.to.as_str() {
+            "library" => Zone::Library,
+            "hand" => Zone::Hand,
+            "battlefield" => Zone::Battlefield,
+            "graveyard" => Zone::Graveyard,
+            "exile" => Zone::Exile,
+            other => return Err(harness(format!("move: unknown zone {other:?} at step {}", self.step))),
+        };
+        let object_id = self.object(&step.card, step.seat)?;
+        let holder = self.priority_holder();
+        self.debug(DebugAction::MoveToZone { object_id, to_zone, library_position: None, simulate: false })?;
+        self.note_edit(rb);
+        self.settle(holder, rb)
+    }
+
+    fn note_edit(&mut self, rb: &mut RowBuilder) {
+        if !self.edit_noted {
+            self.edit_noted = true;
+            rb.note("attach/move done by a debug action (debug mode on for that action only; no replacements or entry triggers)");
+        }
+    }
+
+    /// The seat holding priority now, if a priority window is open.
+    fn priority_holder(&self) -> Option<PlayerId> {
+        match &self.state().waiting_for {
+            WaitingFor::Priority { player } => Some(*player),
+            _ => None,
+        }
+    }
+
+    /// The empty priority round after a debug edit: nothing is passed while the stack is empty (a
+    /// pass pair would end the step); anything the edit put on the stack is passed away until the
+    /// stack is empty with `holder` holding priority again.
+    fn settle(&mut self, holder: Option<PlayerId>, rb: &mut RowBuilder) -> Result<(), Stop> {
+        let Some(holder) = holder else { return Ok(()) };
+        self.drive(rb, move |s| match &s.waiting_for {
+            WaitingFor::Priority { player } if s.stack.is_empty() && *player == holder => Prio::Done,
+            WaitingFor::Priority { player } if s.stack.is_empty() => {
+                Prio::Fail(format!("priority moved from p{} to p{} after the edit", holder.0, player.0))
+            }
+            _ => Prio::Act(GameAction::PassPriority),
+        })
     }
 
     /// The step needs `seat` to hold priority now.
@@ -441,7 +667,19 @@ impl Machine<'_> {
 
     /// Drive the game until a priority window `on_priority` calls done. Prompts other than mana
     /// payment go to the answerer.
-    fn drive(&mut self, rb: &mut RowBuilder, on_priority: impl Fn(&GameState) -> Prio) -> Result<(), Stop> {
+    fn drive(&mut self, rb: &mut RowBuilder, on_priority: impl FnMut(&GameState) -> Prio) -> Result<(), Stop> {
+        self.drive_with(rb, on_priority, |_| Prio::Done)
+    }
+
+    /// [`Machine::drive`] with `on_declaration` for the two declaration prompts: they belong to the
+    /// step machine (never the answerer), and a step that is not declaring just stops there, which
+    /// is where gorge's `pass` leaves its pending decision.
+    fn drive_with(
+        &mut self,
+        rb: &mut RowBuilder,
+        mut on_priority: impl FnMut(&GameState) -> Prio,
+        mut on_declaration: impl FnMut(&GameState) -> Prio,
+    ) -> Result<(), Stop> {
         loop {
             // phase targets a sole legal target without asking: account for gorge's decision.
             crate::answer::sweep_stack_targets(&self.board, &mut self.queue, self.step, &mut self.swept, &mut self.answered);
@@ -457,6 +695,15 @@ impl Machine<'_> {
                     }
                     Prio::Fail(m) => return Err(harness(format!("{m} (step {})", self.step))),
                 },
+                WaitingFor::DeclareAttackers { .. } | WaitingFor::DeclareBlockers { .. } => {
+                    match on_declaration(self.state()) {
+                        Prio::Done => return Ok(()),
+                        Prio::Act(a) => {
+                            self.act(a, "declaration")?;
+                        }
+                        Prio::Fail(m) => return Err(harness(format!("{m} (step {})", self.step))),
+                    }
+                }
                 WaitingFor::ManaPayment { player, .. } => self.pay(*player)?,
                 other => {
                     let cast_mode = self.req.item.steps.get(self.step).map(|s| s.cast_mode.as_str()).unwrap_or("");
@@ -507,6 +754,39 @@ impl Machine<'_> {
             return Err(harness(format!("mana payment incomplete at step {i}: the pool does not cover the cost")));
         }
         Ok(())
+    }
+}
+
+/// gorge's decision kind for the prompts `pass_to` can stop on ("" for any other).
+fn decision_kind(wf: &WaitingFor) -> &'static str {
+    match wf {
+        WaitingFor::Priority { .. } => "priority",
+        WaitingFor::DeclareAttackers { .. } => "attackers",
+        WaitingFor::DeclareBlockers { .. } => "blockers",
+        _ => "",
+    }
+}
+
+/// gorge's default answer to a declaration it is not scripted for: declare nothing.
+fn empty_declaration(wf: &WaitingFor) -> GameAction {
+    match wf {
+        WaitingFor::DeclareBlockers { .. } => GameAction::DeclareBlockers { assignments: vec![] },
+        _ => GameAction::DeclareAttackers { attacks: vec![], bands: vec![] },
+    }
+}
+
+/// The seat a step's raw `active` (or a defender string) names: `"p1"`, `1`, or none (null/empty).
+fn seat_of(v: &Value) -> Result<Option<PlayerId>, String> {
+    let n = match v {
+        Value::Null => return Ok(None),
+        Value::String(s) if s.is_empty() => return Ok(None),
+        Value::String(s) => s.strip_prefix('p').unwrap_or(s).parse::<u8>().ok(),
+        Value::Number(n) => n.as_u64().and_then(|n| u8::try_from(n).ok()),
+        _ => None,
+    };
+    match n {
+        Some(n) if n < 2 => Ok(Some(PlayerId(n))),
+        _ => Err(format!("{v} is not a seat")),
     }
 }
 
@@ -711,12 +991,145 @@ mod tests {
     #[test]
     fn steps_unsupported_ops_and_cast_mode_are_harness() {
         for (step, msg) in [
-            (r#"{"op":"attack","seat":0}"#, "phase follower: op attack not implemented"),
             (r#"{"op":"cast","seat":0,"card":"p0:Forest","cast_mode":"flashback"}"#, "phase follower: cast_mode flashback unsupported"),
         ] {
             let (out, _) = go(&format!(r#"{{"id":"t","item":{{"id":"t","setup":{{"p0":{{"hand":["Forest"]}}}},"steps":[{step}]}}}}"#));
             assert_eq!(out.err(), Some(Stop::Harness(msg.to_string())));
         }
+    }
+
+    /// A two-player item with `setup` (the inside of `"setup":{...}`) and `steps`.
+    fn item(setup: &str, steps: &str) -> String {
+        format!(r#"{{"id":"t","item":{{"id":"t","setup":{{{setup}}},"steps":[{steps}]}}}}"#)
+    }
+
+    const TO_ATTACK: &str = r#"{"op":"pass_to","seat":0,"decision":"attackers"}"#;
+    const BEARS_ATTACK: &str = r#"{"op":"attack","seat":0,"attackers":["p0:Grizzly Bears"],"defender":"p1"}"#;
+    const BEARS_ATTACK_SETUP: &str = r#""p0":{"battlefield":["Grizzly Bears"]}"#;
+
+    #[test]
+    fn combat_pass_to_attackers() {
+        let rb = ok(&item(BEARS_ATTACK_SETUP, TO_ATTACK));
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (pass_to)");
+        assert_eq!(s.step, "declare-attackers");
+        assert!(!s.permanents.iter().any(|p| p.attacking), "pass_to never declares");
+        // Still at the prompt: the same pass_to completes at once, and so does the attack after it.
+        let rb = ok(&item(BEARS_ATTACK_SETUP, &format!("{TO_ATTACK},{TO_ATTACK},{BEARS_ATTACK}")));
+        assert_eq!(rb.snapshots[2].step, "declare-attackers");
+        assert!(rb.snapshots[3].permanents.iter().any(|p| p.name == "Grizzly Bears" && p.attacking));
+    }
+
+    #[test]
+    fn combat_pass_to_without_a_prompt_is_a_named_harness_row() {
+        // No creature can attack: phase poses no prompt, and pass_to must not run on to later turns.
+        let (out, _) = go(&item(r#""p0":{"hand":["Forest"]}"#, TO_ATTACK));
+        match out.err() {
+            Some(Stop::Harness(m)) => assert!(m.contains("pass_to attackers: no declaration prompt by"), "{m}"),
+            other => panic!("{other:?}"),
+        }
+        // attack outside a prompt: the same, in its own words.
+        let (out, _) = go(&item(r#""p0":{"hand":["Forest"]}"#, r#"{"op":"attack","seat":0,"attackers":[],"defender":"p1"}"#));
+        match out.err() {
+            Some(Stop::Harness(m)) => assert!(m.contains("attack: no DeclareAttackers prompt"), "{m}"),
+            other => panic!("{other:?}"),
+        }
+    }
+
+    #[test]
+    fn combat_pass_to_step_and_active() {
+        // main1 of turn 1 to p1's upkeep: the turn passes, so does cleanup, and p0 never acts again.
+        let rb = ok(&item(
+            "",
+            r#"{"op":"pass_to","seat":0,"step":"upkeep","active":"p1"},{"op":"pass_to","seat":0,"step":"main1","active":1}"#,
+        ));
+        assert_eq!((rb.snapshots[1].step.as_str(), rb.snapshots[1].active), ("upkeep", 1));
+        assert_eq!((rb.snapshots[2].step.as_str(), rb.snapshots[2].active), ("main1", 1));
+        let (out, _) = go(&item("", r#"{"op":"pass_to","seat":0,"step":"nowhere"}"#));
+        assert_eq!(out.err(), Some(Stop::Harness("phase follower: pass_to: unknown step \"nowhere\" at step 0".to_string())));
+    }
+
+    #[test]
+    fn combat_declare_attack_player() {
+        let rb = ok(&item(
+            BEARS_ATTACK_SETUP,
+            &format!(r#"{TO_ATTACK},{BEARS_ATTACK},{{"op":"pass","seat":0}},{{"op":"pass","seat":1}},{{"op":"pass_to","seat":0,"step":"main2","active":"p0"}}"#),
+        ));
+        let declared = &rb.snapshots[2];
+        assert_eq!(declared.checkpoint, "step 1 (attack)");
+        assert_eq!(declared.step, "declare-attackers");
+        assert_eq!(declared.priority, 0);
+        let bears = declared.permanents.iter().find(|p| p.name == "Grizzly Bears").unwrap();
+        assert!(bears.attacking && bears.tapped);
+        assert_eq!(declared.players[1].life, 20);
+        let after = rb.snapshots.last().unwrap();
+        assert_eq!(after.players[1].life, 18, "the 2/2 connects");
+    }
+
+    #[test]
+    fn combat_declare_blocks() {
+        let setup = r#""p0":{"battlefield":["Grizzly Bears"]},"p1":{"battlefield":["Llanowar Elves"]}"#;
+        let rb = ok(&item(
+            setup,
+            &format!(
+                r#"{TO_ATTACK},{BEARS_ATTACK},{{"op":"pass_to","seat":1,"decision":"blockers"}},
+                   {{"op":"block","seat":1,"blocks":[["p1:Llanowar Elves","p0:Grizzly Bears"]]}},
+                   {{"op":"pass_to","seat":0,"step":"main2","active":"p0"}}"#
+            ),
+        ));
+        let at_blockers = &rb.snapshots[3];
+        assert_eq!(at_blockers.step, "declare-blockers");
+        assert!(!at_blockers.permanents.iter().any(|p| p.blocking));
+        let blocked = &rb.snapshots[4];
+        assert!(blocked.permanents.iter().any(|p| p.name == "Llanowar Elves" && p.blocking));
+        let after = rb.snapshots.last().unwrap();
+        assert_eq!(after.players[1].life, 20, "blocked: no damage to the player");
+        assert_eq!(on_bf(after, 1, "Llanowar Elves"), 0, "the 1/1 dies to the 2/2");
+        assert_eq!(on_bf(after, 0, "Grizzly Bears"), 1);
+    }
+
+    #[test]
+    fn combat_multi_blocker_damage_is_strict_miss() {
+        let setup = r#""p0":{"battlefield":["Grizzly Bears"]},"p1":{"battlefield":["Llanowar Elves","Llanowar Elves"]}"#;
+        let (out, _) = go(&item(
+            setup,
+            &format!(
+                r#"{TO_ATTACK},{BEARS_ATTACK},{{"op":"pass_to","seat":1,"decision":"blockers"}},
+                   {{"op":"block","seat":1,"blocks":[["p1:Llanowar Elves","p0:Grizzly Bears"],["p1:Llanowar Elves#2","p0:Grizzly Bears"]]}},
+                   {{"op":"pass_to","seat":0,"step":"main2","active":"p0"}}"#
+            ),
+        ));
+        assert_eq!(out.err(), Some(Stop::StrictMiss("Missing AssignCombatDamage answer at step 4".to_string())));
+    }
+
+    #[test]
+    fn combat_attach_prelude() {
+        let setup = r#""p0":{"battlefield":["Grizzly Bears","Short Sword"]}"#;
+        let rb = ok(&item(setup, r#"{"op":"attach","seat":0,"card":"p0:Short Sword","attached_to":"p0:Grizzly Bears"}"#));
+        let (before, after) = (&rb.snapshots[0], &rb.snapshots[1]);
+        assert_eq!(after.checkpoint, "step 0 (attach)");
+        let sword = |s: &Snapshot| s.permanents.iter().find(|p| p.name == "Short Sword").unwrap().attached_to.clone();
+        assert_eq!(sword(before), None);
+        assert_eq!(sword(after).as_deref(), Some("Grizzly Bears"));
+        assert_eq!((after.step.as_str(), after.priority), (before.step.as_str(), before.priority));
+        assert!(rb.notes.iter().any(|n| n.starts_with("attach/move done by a debug action")), "{:?}", rb.notes);
+    }
+
+    #[test]
+    fn combat_move_then_empty_round() {
+        let rb = ok(&item(
+            r#""p0":{"hand":["Forest"]}"#,
+            r#"{"op":"move","seat":0,"card":"p0:Forest","to":"graveyard"},{"op":"move","seat":0,"card":"p0:Forest","to":"battlefield"}"#,
+        ));
+        let (before, gy, bf) = (&rb.snapshots[0], &rb.snapshots[1], &rb.snapshots[2]);
+        assert_eq!(before.players[0].hand, ["Forest"]);
+        assert_eq!((gy.players[0].graveyard.as_slice(), gy.players[0].hand.len()), (&["Forest".to_string()][..], 0));
+        assert_eq!((gy.step.as_str(), gy.priority), (before.step.as_str(), before.priority));
+        assert_eq!(on_bf(bf, 0, "Forest"), 1);
+        assert!(bf.players[0].graveyard.is_empty());
+        assert_eq!(rb.notes.iter().filter(|n| n.starts_with("attach/move done")).count(), 1);
+        let (out, _) = go(&item(r#""p0":{"hand":["Forest"]}"#, r#"{"op":"move","seat":0,"card":"p0:Forest","to":"nowhere"}"#));
+        assert_eq!(out.err(), Some(Stop::Harness("phase follower: move: unknown zone \"nowhere\" at step 0".to_string())));
     }
 
     #[test]
