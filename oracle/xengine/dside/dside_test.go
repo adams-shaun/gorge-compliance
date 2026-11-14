@@ -1,7 +1,6 @@
 package dside
 
 import (
-	"sort"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
@@ -144,43 +143,21 @@ func commanderPair(t *testing.T, reg *cards.Registry, stems ...string) [2]decks.
 	return [2]decks.Deck{ds[0], ds[1]}
 }
 
-// withBasics is d with every card the cmd5 table refuses replaced by basic, as the
-// pool's own deck files do ("kernel-refused copies replaced by basics"): gorge's
-// Foundations precon files (testkit/testutil/decks) hold the printed lists, which the
-// table turns away whole. The commander stays.
-func withBasics(t *testing.T, set cardset.Set, d decks.Deck, basic string) decks.Deck {
-	t.Helper()
-	plays := set.Supported()
-	out := d
-	out.Cards = nil
-	swapped := 0
-	for _, n := range d.Cards {
-		if i, ok := set.Lookup(n); (!ok || !plays[i]) && n != d.Commander {
-			n = basic
-			swapped++
-		}
-		out.Cards = append(out.Cards, n)
-	}
-	sort.Strings(out.Cards)
-	out.Commander = d.Commander
-	if swapped == 0 {
-		t.Logf("deck %s: nothing refused", d.Name)
-	}
-	return out
-}
-
 // playablePair is the Foundations pair the tests play, on the table's terms.
 func playablePair(t *testing.T, reg *cards.Registry, tables *Tables) [2]decks.Deck {
 	t.Helper()
-	set, err := tables.CommanderSet()
+	pair := commanderPair(t, reg, "foundations-tramplesaurus-rex", "foundations-wretched-ranks")
+	ds, swaps, err := tables.SwapRefusedCommander(pair[:])
 	if NoTables(err) {
 		t.Skip(err)
 	}
 	if err != nil {
 		t.Fatal(err)
 	}
-	pair := commanderPair(t, reg, "foundations-tramplesaurus-rex", "foundations-wretched-ranks")
-	return [2]decks.Deck{withBasics(t, set, pair[0], "Forest"), withBasics(t, set, pair[1], "Swamp")}
+	if len(swaps) == 0 {
+		t.Log("nothing refused")
+	}
+	return [2]decks.Deck{ds[0], ds[1]}
 }
 
 func TestCommanderLockstepPlays(t *testing.T) {
