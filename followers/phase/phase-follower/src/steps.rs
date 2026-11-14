@@ -1089,6 +1089,25 @@ mod tests {
     }
 
     #[test]
+    fn combat_blocker_stays_blocking_after_its_attacker_dies() {
+        // CR 509.1g: the 2/2 blocks and kills the 1/1; it is still a blocking creature afterwards.
+        let setup = r#""p0":{"battlefield":["Llanowar Elves"]},"p1":{"battlefield":["Grizzly Bears"]}"#;
+        let rb = ok(&item(
+            setup,
+            &format!(
+                r#"{TO_ATTACK},{{"op":"attack","seat":0,"attackers":["p0:Llanowar Elves"],"defender":"p1"}},
+                   {{"op":"pass_to","seat":1,"decision":"blockers"}},
+                   {{"op":"block","seat":1,"blocks":[["p1:Grizzly Bears","p0:Llanowar Elves"]]}},
+                   {{"op":"pass","seat":0}},{{"op":"pass","seat":1}}"#
+            ),
+        ));
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.step, "combat-damage");
+        assert_eq!(on_bf(s, 0, "Llanowar Elves"), 0);
+        assert!(s.permanents.iter().any(|p| p.name == "Grizzly Bears" && p.blocking && p.damage == 1), "{:?}", s.permanents);
+    }
+
+    #[test]
     fn combat_multi_blocker_damage_is_strict_miss() {
         let setup = r#""p0":{"battlefield":["Grizzly Bears"]},"p1":{"battlefield":["Llanowar Elves","Llanowar Elves"]}"#;
         let (out, _) = go(&item(

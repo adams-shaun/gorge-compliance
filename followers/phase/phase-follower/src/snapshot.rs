@@ -197,11 +197,9 @@ pub fn snapshot(state: &GameState, checkpoint: &str, names: &NameMap) -> Snapsho
     let (mut attackers, mut blockers) = (BTreeSet::new(), BTreeSet::new());
     if let Some(c) = &state.combat {
         attackers.extend(c.attackers.iter().map(|a| a.object_id));
-        for (blocker, attacked) in &c.blocker_to_attacker {
-            if !attacked.is_empty() {
-                blockers.insert(*blocker);
-            }
-        }
+        // CR 509.1g + CR 506.4: key presence is the blocking role; the list may be empty once every
+        // attacker it blocked has left combat, and the creature still counts as blocking.
+        blockers.extend(c.blocker_to_attacker.keys().copied());
         for list in c.blocker_assignments.values() {
             blockers.extend(list.iter().copied());
         }
