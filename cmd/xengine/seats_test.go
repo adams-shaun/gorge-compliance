@@ -102,12 +102,12 @@ func TestCommanderPodDeal(t *testing.T) {
 		ds = append(ds, decks.Deck{Name: n, Cards: []string{n}, Commander: n})
 	}
 	for g := 0; g < 20; g++ {
-		two, _ := commanderDealer(ds, 2, "S", 0, 1)(g)
+		two, _ := commanderDealer(ds, 2, "S", 0, 1, false)(g)
 		if want := decks.CommanderPair(ds, "S", 0, g, 1); !reflect.DeepEqual(two, want[:]) {
 			t.Fatalf("game %d: 2-seat deal %v differs from CommanderPair %v", g, two, want)
 		}
 		for n := 3; n <= 4; n++ {
-			pod, _ := commanderDealer(ds, n, "S", 0, 1)(g)
+			pod, _ := commanderDealer(ds, n, "S", 0, 1, false)(g)
 			if len(pod) != n {
 				t.Fatalf("game %d: %d decks, want %d", g, len(pod), n)
 			}
@@ -121,8 +121,8 @@ func TestCommanderPodDeal(t *testing.T) {
 			}
 		}
 	}
-	a, _ := commanderDealer(ds, 4, "S", 0, 1)(7)
-	b, _ := commanderDealer(ds, 4, "S", 0, 1)(7)
+	a, _ := commanderDealer(ds, 4, "S", 0, 1, false)(7)
+	b, _ := commanderDealer(ds, 4, "S", 0, 1, false)(7)
 	if !reflect.DeepEqual(a, b) {
 		t.Error("the deal is not a pure function of its arguments")
 	}

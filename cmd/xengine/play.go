@@ -87,8 +87,8 @@ func runPlay(args []string) error {
 	xmage := fs.Bool("xmage", false, "leave out the cards XMage spells differently (an XMage item names no per-card spelling)")
 	random := fs.String("random", "", "set codes, space or comma separated: draw the decks at random across these sets, ignoring the ledger; -set only names the run in the item ids")
 	forgeOnly := fs.String("forge-only", "", "with -random, a file of card names, one per line, to add to the cross-set deal: a set XMage has no class for, so its items go to Forge alone")
-	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays")
-	diracEvery := fs.Int("dirac-every", 2, "with -random and -dirac, every K-th game (game g with g%K == K-1) draws from one set's dirac-playable cards; 1 makes every game one dirac plays beside gorge, so all four engines see every deck")
+	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays; with -format commander every game is offered to dirac's cmd5 Commander table, a pair it does not hold reads not_applicable")
+	diracEvery := fs.Int("dirac-every", 2, "with -random and -dirac, every K-th game (game g with g%K == K-1) draws from one set's dirac-playable cards; 1 makes every game one dirac plays beside gorge, so all four engines see every deck; not used with -format commander")
 	format := fs.String("format", "", "game format: empty or constructed, or commander (with -commander-decks)")
 	seats := fs.Int("seats", 2, "with -format commander: seats a game deals, 2 to 4, each a distinct deck of -commander-decks. More than two seats are played and recorded by gorge alone: the lowering refuses every window and tape of such a game (seats:<n>)")
 	cmdrDecks := fs.String("commander-decks", "", "with -format commander: a directory of Commander deck files; each game deals -seats of them (decks.CommanderPod; two seats is a 1v1 match, decks.CommanderPair)")
@@ -186,7 +186,7 @@ func runPlay(args []string) error {
 		if err := writeAtomic(filepath.Join(*out, "commander.json"), append(b, '\n')); err != nil {
 			return err
 		}
-		deal = commanderDealer(ds, *seats, *set, *chunk, *seed)
+		deal = commanderDealer(ds, *seats, *set, *chunk, *seed, *dirac)
 	} else {
 		var pick picker
 		var pinfo *poolInfo
@@ -260,9 +260,6 @@ func formatFlagErr(format, cmdrDecks, random, forgeOnly, pool, poolFilter string
 	if len(with) > 0 {
 		return fmt.Errorf("-format commander deals from -commander-decks: it cannot be combined with %s", strings.Join(with, ", "))
 	}
-	if dirac {
-		return errors.New("-dirac with -format commander needs the dirac Commander lockstep (xe-cmdr-dirac)")
-	}
 	return nil
 }
 
@@ -280,9 +277,13 @@ func pickDealer(pick picker, set string, chunk int, seed uint64) dealer {
 
 // commanderDealer deals Commander games of seats distinct decks of ds (a 1v1
 // match for 2: decks.CommanderPair).
-func commanderDealer(ds []decks.Deck, seats int, set string, chunk int, seed uint64) dealer {
+func commanderDealer(ds []decks.Deck, seats int, set string, chunk int, seed uint64, dirac bool) dealer {
+	table := ""
+	if dirac {
+		table = dside.CommanderTable
+	}
 	return func(g int) ([]decks.Deck, string) {
-		return decks.CommanderPod(ds, seats, set, chunk, g, seed), ""
+		return decks.CommanderPod(ds, seats, set, chunk, g, seed), table
 	}
 }
 
@@ -607,7 +608,15 @@ func play(reg *cards.Registry, deal dealer, tables *dside.Tables, led *cov.Ledge
 		opt := game.Options{Set: set}
 		if tables != nil {
 			dRow = dside.NotApplicable(dside.GameID(set, chunk, g), "decks across sets: no dirac table holds them")
-			if table != "" {
+			switch {
+			case table == dside.CommanderTable && len(pair) != 2:
+				dRow = dside.NotApplicable(dRow.Game, fmt.Sprintf("seats:%d: dirac plays 1v1 Commander", len(pair)))
+			case table == dside.CommanderTable:
+				if _, terr := tables.CommanderSet(); terr != nil && dside.NoTables(terr) {
+					return fmt.Errorf("-dirac: table %s: %w", table, diracTablesHint(terr))
+				}
+				dRow, opt.Script = tables.CommanderLockstep(dRow.Game, [2]decks.Deck(pair), gameSeed(seed, chunk, g), game.DefaultMaxTurns)
+			case table != "":
 				dRow, opt.Script = tables.Lockstep(dRow.Game, table, [2]decks.Deck(pair), gameSeed(seed, chunk, g), game.DefaultMaxTurns)
 			}
 		}
