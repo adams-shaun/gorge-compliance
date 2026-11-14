@@ -56,9 +56,21 @@ type Seat struct {
 	// library, exile, command, library_top). Only a FormatCommander scenario
 	// may name one: in a constructed scenario the runner would move a
 	// library card into the command zone with no commander status.
-	Command    []string `json:"command,omitempty"`
-	Library    []string `json:"library,omitempty"`
-	LibraryTop []string `json:"library_top,omitempty"`
+	Command []string `json:"command,omitempty"`
+	// Commanders makes these placements of the seat (battlefield, hand,
+	// graveyard, exile or library) its commanders, as if they had started in
+	// the command zone (gorge's oracleSeat.Commanders, CR 903.9). A commander
+	// in the command zone is named in Command instead.
+	Commanders []string `json:"commanders,omitempty"`
+	// CommanderCasts starts a commander's tax count (gorge's
+	// oracleSeat.CommanderCasts, CR 903.8): front name -> n >= 1.
+	CommanderCasts map[string]int32 `json:"commander_casts,omitempty"`
+	// CommanderDamage starts this seat's commander damage (gorge's
+	// oracleSeat.CommanderDamage, CR 903.10a): the commander's full ref
+	// "pN:<name>", N its owner seat -> n.
+	CommanderDamage map[string]int32 `json:"commander_damage,omitempty"`
+	Library         []string         `json:"library,omitempty"`
+	LibraryTop      []string         `json:"library_top,omitempty"`
 	// Counters puts counters on this seat's battlefield cards at setup:
 	// card name -> counter kind (LOYALTY, P1P1) -> how many, added to what
 	// the card enters with. Like Tapped it names every placement of that

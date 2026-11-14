@@ -23,11 +23,7 @@ const (
 	reasonByName      = "setup_by_name:"       // + back_face | counters
 	reasonCountersLow = "counters_below_entry" // fewer counters than the card enters with
 	reasonZone        = "zone:"                // + the zone name
-	// reasonCommanderZone is a commander outside its command zone (+ the zone
-	// name): the runner at GORGE_PIN seats commanders only from the setup
-	// command list (gorge-oracle-cmdr-setup lifts it).
-	reasonCommanderZone = "commander_zone:"
-	reasonCard          = "card:no_front_face"
+	reasonCard        = "card:no_front_face"
 	// reasonAuraUnattached is a battlefield Aura attached to no permanent (it
 	// can only be so in transit) and to no player: setup places an Aura
 	// attached (CR 303.4f), so there is no bearer to name.
@@ -106,15 +102,6 @@ func capture(e *rules.Engine, entry int, xmage bool) *cut {
 		w.struct_(reflect.ValueOf(&g.Players[i]).Elem(), "Player", playerTable, nil)
 		if len(g.Players[i].Commanders) > 0 {
 			c.Commander = true
-		}
-		for _, id := range g.Players[i].Commanders {
-			if o := g.Obj(id); o == nil || o.Zone != state.ZCommand {
-				z := state.ZCeased
-				if o != nil {
-					z = o.Zone
-				}
-				w.why[reasonCommanderZone+z.String()] = true
-			}
 		}
 	}
 	for i := range g.Objs {
@@ -362,14 +349,6 @@ func (w *walker) struct_(v reflect.Value, typ string, table map[string]entry, o 
 // refused as exile_self.
 func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 	switch {
-	case typ == "Player" && (name == "CmdCasts" || name == "CmdDamage"):
-		// gorge sizes both at genesis, so an all-zero slice is not state.
-		for k := 0; k < v.Len(); k++ {
-			if v.Index(k).Int() != 0 {
-				return true
-			}
-		}
-		return false
 	case typ == "Player" && name == "LandsPlayed":
 		return v.Int() > 0 && w.seat == int(w.g.Active)
 	case typ == "Player" && name == "LandsPlayedOffHand":
@@ -664,6 +643,30 @@ func (w *walker) place(c *cut) {
 		seat.Exile = names(g.Zone(state.ZExile, p))
 		seat.Command = names(g.Zone(state.ZCommand, p))
 		seat.LibraryTop = names(g.Zone(state.ZLibrary, p))
+		// A commander outside the command zone is a Commanders placement
+		// (CR 903.9); its tax count rides CommanderCasts by front name.
+		for k, id := range g.Players[s].Commanders {
+			o := g.Obj(id)
+			if o == nil {
+				w.why[reasonCard] = true
+				continue
+			}
+			n := frontName(o)
+			if c.Refs[id] == "" {
+				// Not bound by any zone list above (a ceased object).
+				w.why[reasonZone+o.Zone.String()] = true
+				continue
+			}
+			if o.Zone != state.ZCommand {
+				seat.Commanders = append(seat.Commanders, n)
+			}
+			if k < len(g.Players[s].CmdCasts) && g.Players[s].CmdCasts[k] > 0 {
+				if seat.CommanderCasts == nil {
+					seat.CommanderCasts = map[string]int32{}
+				}
+				seat.CommanderCasts[n] = g.Players[s].CmdCasts[k]
+			}
+		}
 		for _, n := range dedupe(seat.Battlefield) {
 			if back[n][true] && !back[n][false] {
 				seat.BackFace = append(seat.BackFace, n)
@@ -681,6 +684,7 @@ func (w *walker) place(c *cut) {
 		c.Setup[s] = seat
 	}
 	w.placeTokens(c, toks)
+	w.placeCommanderDamage(c)
 	// An attachment names its bearer's ref, so both seats and their tokens are
 	// bound first.
 	for s := range g.Players {
@@ -706,6 +710,33 @@ func (w *walker) place(c *cut) {
 				continue
 			}
 			c.Attach = append(c.Attach, oraclegen.Step{Op: "attach", Seat: s, Card: c.Refs[o.ID], AttachedTo: c.Refs[b.ID]})
+		}
+	}
+}
+
+// placeCommanderDamage sets each victim seat's CommanderDamage, keyed by the
+// commander's full ref. It runs once every ref is bound. The damage index is
+// gorge's dense commander order (foldCmdDamage, commanderDenseIndex): seat
+// order, then each seat's Commanders order.
+func (w *walker) placeCommanderDamage(c *cut) {
+	g := w.g
+	dense := 0
+	for s := range g.Players {
+		for _, id := range g.Players[s].Commanders {
+			for v := range g.Players {
+				if dense >= len(g.Players[v].CmdDamage) || g.Players[v].CmdDamage[dense] <= 0 {
+					continue
+				}
+				if c.Refs[id] == "" {
+					w.why[reasonCard] = true
+					continue
+				}
+				if c.Setup[v].CommanderDamage == nil {
+					c.Setup[v].CommanderDamage = map[string]int32{}
+				}
+				c.Setup[v].CommanderDamage[c.Refs[id]] = g.Players[v].CmdDamage[dense]
+			}
+			dense++
 		}
 	}
 }

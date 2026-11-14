@@ -50,7 +50,8 @@ func TestCompareCommandKeepsFieldOrder(t *testing.T) {
 	for _, n := range want {
 		wantOn = append(wantOn, n)
 		if strings.HasSuffix(n, ".exile") {
-			wantOn = append(wantOn, strings.TrimSuffix(n, ".exile")+".command")
+			base := strings.TrimSuffix(n, ".exile")
+			wantOn = append(wantOn, base+".command", base+".commander_casts", base+".commander_damage")
 		}
 	}
 	if got := names([]string{CompareCommand}); !slices.Equal(got, wantOn) {
@@ -65,5 +66,29 @@ func TestValidateCompareCommand(t *testing.T) {
 	err := ValidateCompare([]string{"commandx"})
 	if err == nil || !strings.Contains(err.Error(), `"command"`) {
 		t.Fatalf("commandx: got %v, want an error naming command", err)
+	}
+}
+
+func TestCompareCommanderTallies(t *testing.T) {
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{snap("setup")}}
+	x := XResult{Snapshots: []rules.OracleSnapshot{xsnap("setup")}}
+	g.Snapshots[0].Players[1].CommanderDamage = map[string]int32{"p0:Isamaru, Hound of Konda": 3}
+	if v := CompareOpts(g, nil, x, nil); v.Status != Agree {
+		t.Fatalf("tallies compared without the opt-in: %+v", v)
+	}
+	v := CompareOpts(g, nil, x, []string{CompareCommand})
+	if v.Status != Diverge || v.Field != "p1.commander_damage" || v.Gorge != "p0:Isamaru, Hound of Konda=3" {
+		t.Fatalf("opted in: got %+v, want p1.commander_damage divergence", v)
+	}
+	x.Snapshots[0].Players[1].CommanderDamage = map[string]int32{"p0:Isamaru, Hound of Konda": 3}
+	g.Snapshots[0].Players[0].CommanderCasts = map[string]int32{"B": 2, "A": 1, "Z": 0}
+	x.Snapshots[0].Players[0].CommanderCasts = map[string]int32{"A": 1}
+	v = CompareOpts(g, nil, x, []string{CompareCommand})
+	if v.Status != Diverge || v.Field != "p0.commander_casts" || v.Gorge != "A=1,B=2" || v.XMage != "A=1" {
+		t.Fatalf("casts: got %+v, want p0.commander_casts A=1,B=2 vs A=1", v)
+	}
+	x.Snapshots[0].Players[0].CommanderCasts = map[string]int32{"B": 2, "A": 1}
+	if v := CompareOpts(g, nil, x, []string{CompareCommand}); v.Status != Agree {
+		t.Fatalf("equal tallies: %+v", v)
 	}
 }
