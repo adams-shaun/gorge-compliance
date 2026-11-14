@@ -54,6 +54,7 @@ var gorgeRestrictionKeywords = map[string][]string{
 	"CantAttackOrBlockAlone": {"cantattackalone", "cantblockalone"},
 	"CantAttackAlone":        {"cantattackalone"},
 	"CantBlockAlone":         {"cantblockalone"},
+	"MustBeBlockedByTwo":     {"mustbeblockedbyatleastnumberdefenders"},
 }
 
 // mtgishFaceE runs after a face's rules are mapped and its P/T read.
