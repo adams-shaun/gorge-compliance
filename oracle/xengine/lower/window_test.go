@@ -96,7 +96,7 @@ func windowsOf(t *testing.T, n int) (*cards.Registry, []played) {
 	reg, pairs := fdnPairs(t, n)
 	var out []played
 	for g, p := range pairs {
-		ls, rs, tp, err := Windows(reg, p, uint64(100+g), game.Options{Set: "FDN"}, true)
+		ls, rs, tp, err := Windows(reg, p[:], uint64(100+g), game.Options{Set: "FDN"}, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -192,7 +192,7 @@ func TestWindowsDeterministic(t *testing.T) {
 	for g, p := range pairs {
 		var first []byte
 		for run := 0; run < 2; run++ {
-			ls, rs, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: "FDN"}, true)
+			ls, rs, _, err := Windows(reg, p[:], uint64(100+g), game.Options{Set: "FDN"}, true)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -212,12 +212,12 @@ func TestWindowsDeterministic(t *testing.T) {
 func TestOnCutIsReadOnly(t *testing.T) {
 	reg, pairs := fdnPairs(t, 2)
 	for g, p := range pairs {
-		without, err := game.Play(reg, p, uint64(100+g), game.Options{Set: "FDN"})
+		without, err := game.Play(reg, p[:], uint64(100+g), game.Options{Set: "FDN"})
 		if err != nil {
 			t.Fatal(err)
 		}
 		var cuts int
-		with, err := game.Play(reg, p, uint64(100+g), game.Options{Set: "FDN", OnCut: func(e *rules.Engine, entry int) {
+		with, err := game.Play(reg, p[:], uint64(100+g), game.Options{Set: "FDN", OnCut: func(e *rules.Engine, entry int) {
 			cuts++
 			capture(e, entry, true)
 		}})
@@ -247,7 +247,7 @@ func expressibleCutIn(t *testing.T, reg *cards.Registry, set string, p [2]decks.
 	t.Helper()
 	var got *rules.Engine
 	var at int
-	_, err := game.Play(reg, p, seed, game.Options{Set: set, OnCut: func(e *rules.Engine, entry int) {
+	_, err := game.Play(reg, p[:], seed, game.Options{Set: set, OnCut: func(e *rules.Engine, entry int) {
 		if got == nil && e.G.Turn >= 3 && len(capture(e, entry, true).Reasons) == 0 {
 			got, at = e.Clone(), entry
 		}
@@ -519,7 +519,7 @@ func TestWindowsDeadTurnHistory(t *testing.T) {
 				relaxed[e.G.Turn] = true
 			}
 		}}
-		ls, _, _, err := Windows(reg, p, uint64(100+g), opt, true)
+		ls, _, _, err := Windows(reg, p[:], uint64(100+g), opt, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -691,7 +691,7 @@ func TestWindowsDeadExileLink(t *testing.T) {
 				relaxed[e.G.Turn] = true
 			}
 		}}
-		ls, _, _, err := Windows(reg, p, uint64(100+g), opt, true)
+		ls, _, _, err := Windows(reg, p[:], uint64(100+g), opt, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -815,7 +815,7 @@ func TestWindowsTurnEntryReaders(t *testing.T) {
 				relaxed[e.G.Turn] = true
 			}
 		}}
-		ls, _, _, err := Windows(reg, p, uint64(100+g), opt, true)
+		ls, _, _, err := Windows(reg, p[:], uint64(100+g), opt, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1032,7 +1032,7 @@ func TestWindowsTappedAfterUntap(t *testing.T) {
 	byStatus := map[string]int{}
 	var tappedWin, activeTapped, okActive int
 	for g, p := range pairs {
-		ls, _, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: "DSK"}, true)
+		ls, _, _, err := Windows(reg, p[:], uint64(100+g), game.Options{Set: "DSK"}, true)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1098,7 +1098,7 @@ func TestRemapRenamedSetupToken(t *testing.T) {
 // window's attack names it by the copied name.
 func TestWindowsRenamedTokenRef(t *testing.T) {
 	reg, pairs := setPairs(t, "DSK", 11)
-	ls, _, tp, err := Windows(reg, pairs[10], 110, game.Options{Set: "DSK"}, true)
+	ls, _, tp, err := Windows(reg, pairs[10][:], 110, game.Options{Set: "DSK"}, true)
 	if err != nil {
 		t.Fatal(err)
 	}

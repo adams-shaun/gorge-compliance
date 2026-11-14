@@ -34,7 +34,7 @@ func cmdrPair(t *testing.T) (*cards.Registry, [2]decks.Deck) {
 
 func TestTapeCommanderSetup(t *testing.T) {
 	reg, pair := cmdrPair(t)
-	tp, err := game.Play(reg, pair, 5, game.Options{MaxTurns: 6})
+	tp, err := game.Play(reg, pair[:], 5, game.Options{MaxTurns: 6})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -81,7 +81,7 @@ func btoi(b bool) int {
 
 func TestWindowCommanderInCommandZone(t *testing.T) {
 	reg, pair := cmdrPair(t)
-	ws, refs, _, err := Windows(reg, pair, 5, game.Options{MaxTurns: 6}, false)
+	ws, refs, _, err := Windows(reg, pair[:], 5, game.Options{MaxTurns: 6}, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -113,7 +113,7 @@ func cmdrCut(t *testing.T) (*rules.Engine, int) {
 	reg, pair := cmdrPair(t)
 	var got *rules.Engine
 	var at int
-	_, err := game.Play(reg, pair, 5, game.Options{MaxTurns: 6, OnCut: func(e *rules.Engine, entry int) {
+	_, err := game.Play(reg, pair[:], 5, game.Options{MaxTurns: 6, OnCut: func(e *rules.Engine, entry int) {
 		if got == nil && len(capture(e, entry, false).Reasons) == 0 {
 			got, at = e.Clone(), entry
 		}

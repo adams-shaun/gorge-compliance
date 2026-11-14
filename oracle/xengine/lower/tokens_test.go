@@ -26,7 +26,7 @@ func tokenCutIn(t *testing.T, reg *cards.Registry, set string, pairs [][2]decks.
 	for g, p := range pairs {
 		var got *rules.Engine
 		var at int
-		_, err := game.Play(reg, p, uint64(100+g), game.Options{Set: set, OnCut: func(e *rules.Engine, entry int) {
+		_, err := game.Play(reg, p[:], uint64(100+g), game.Options{Set: set, OnCut: func(e *rules.Engine, entry int) {
 			if got != nil || e.G.Turn < 3 || len(battlefieldTokens(e.G)) == 0 {
 				return
 			}
@@ -270,7 +270,7 @@ func TestWindowsTokens(t *testing.T) {
 		unmapped := map[string]int{}
 		var refused int
 		for g, p := range pairs {
-			ls, rs, _, err := Windows(reg, p, uint64(100+g), game.Options{Set: set}, true)
+			ls, rs, _, err := Windows(reg, p[:], uint64(100+g), game.Options{Set: set}, true)
 			if err != nil {
 				t.Fatal(err)
 			}

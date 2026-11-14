@@ -162,3 +162,48 @@ func CommanderPair(ds []Deck, set string, chunk, game int, seed uint64) [2]Deck 
 	}
 	return out
 }
+
+// CommanderPod is the n decks (2 <= n <= len(ds)) game `game` of chunk `chunk`
+// plays, n distinct decks in seat order. For n == 2 it is CommanderPair. For
+// more, the index k = seed*1_000_003 + chunk*10_007 + game is read as a
+// mixed-radix number: seat 0 takes deck k mod len(ds) of the decks left, seat 1
+// takes (k / len(ds)) mod (len(ds)-1) of those still left, and so on, so
+// consecutive games walk consecutive first decks. Each deck is a copy renamed
+// like CommanderPair's. It panics when n is below 2 or above len(ds).
+func CommanderPod(ds []Deck, n int, set string, chunk, game int, seed uint64) []Deck {
+	if n == 2 {
+		p := CommanderPair(ds, set, chunk, game, seed)
+		return p[:]
+	}
+	if n < 2 || n > len(ds) {
+		panic(fmt.Sprintf("decks: CommanderPod needs 2 <= n <= %d decks, n is %d", len(ds), n))
+	}
+	k := seed*1_000_003 + uint64(chunk)*10_007 + uint64(game)
+	left := make([]int, len(ds))
+	for i := range left {
+		left[i] = i
+	}
+	out := make([]Deck, n)
+	for seat := range out {
+		m := uint64(len(left))
+		x := left[k%m]
+		k /= m
+		i := k0(left, x)
+		left = append(left[:i], left[i+1:]...)
+		d := ds[x]
+		d.Cards = append([]string(nil), d.Cards...)
+		d.Name = fmt.Sprintf("%s-c%d-g%d-%d-%s", set, chunk, game, seat, ds[x].Name)
+		out[seat] = d
+	}
+	return out
+}
+
+// k0 is the index of v in s (v is in s).
+func k0(s []int, v int) int {
+	for i, x := range s {
+		if x == v {
+			return i
+		}
+	}
+	return -1
+}

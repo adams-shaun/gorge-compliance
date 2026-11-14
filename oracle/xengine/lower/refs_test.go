@@ -16,7 +16,7 @@ func TestLowerPlayStepUnlessAnswer(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	tp := &game.Tape{
 		Format: game.TapeFormat, Starter: 0,
-		Open: [2]game.Opening{{Hand: []string{"Steam Vents"}}, {}},
+		Open: []game.Opening{{Hand: []string{"Steam Vents"}}, {}},
 		Entries: []game.Entry{
 			{Kind: "priority", Seat: 0, Turn: 1, Step: "main1",
 				Picks: []game.Pick{{Kind: "play_land", Ref: "p0:Steam Vents"}}},

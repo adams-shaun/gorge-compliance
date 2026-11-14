@@ -80,7 +80,7 @@ func TestScriptReplaysTheLockstepGame(t *testing.T) {
 			continue
 		}
 		played++
-		tp, err := game.Play(reg, pair, seed, game.Options{Set: "FDN", Script: script})
+		tp, err := game.Play(reg, pair[:], seed, game.Options{Set: "FDN", Script: script})
 		if err != nil {
 			t.Fatalf("game %d: %v", g, err)
 		}

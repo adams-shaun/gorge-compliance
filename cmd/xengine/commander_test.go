@@ -132,7 +132,7 @@ func TestPickDealerMatchesPair(t *testing.T) {
 	deal := pickDealer(pick, "FDN", 0, 1)
 	for g := 0; g < 4; g++ {
 		got, table := deal(g)
-		if want := decks.Pair(cands, led, "FDN", 0, g, 1); !reflect.DeepEqual(got, want) || table != "" {
+		if want := decks.Pair(cands, led, "FDN", 0, g, 1); !reflect.DeepEqual(got, want[:]) || table != "" {
 			t.Errorf("game %d: pair differs", g)
 		}
 	}

@@ -124,7 +124,7 @@ func TestPlayCommanderGame(t *testing.T) {
 func TestPlayCommanderNeedsBoth(t *testing.T) {
 	reg, p := commanderPair(t)
 	_, fdn := fdnPairs(t, 1)
-	_, err := Play(reg, [2]decks.Deck{p[0], fdn[0][1]}, 1, Options{MaxTurns: 1})
+	_, err := Play(reg, []decks.Deck{p[0], fdn[0][1]}, 1, Options{MaxTurns: 1})
 	if err == nil || !strings.Contains(err.Error(), "needs a commander in both decks") || !strings.Contains(err.Error(), p[0].Commander) {
 		t.Fatalf("err = %v", err)
 	}
