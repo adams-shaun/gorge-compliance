@@ -439,6 +439,7 @@ var d2Keywords = map[string]func(g *gorgeNorm, param string){
 		"rule:mayassigncombatdamagetoapermanent"),
 	"All creatures able to block CARDNAME do so.":                staticAbility("rule:allcreaturesmustblockit"),
 	"MustBeBlockedByAll":                                         staticAbility("rule:allcreaturesmustblockit"),
+	"MustBeBlockedByTwo":                                         staticAbility("rule:mustbeblockedbyatleastnumberdefenders"),
 	"CARDNAME must be blocked by two or more creatures if able.": staticAbility("rule:mustbeblockedbyatleastnumberdefenders"),
 	"CARDNAME must be blocked by exactly one creature if able.":  staticAbility("rule:mustbeblockedbyexactlyonedefender"),
 	"CARDNAME can only attack alone.":                            staticAbility("rule:canonlyattackalone"),
