@@ -63,7 +63,7 @@ help:
 	@echo "  make manabrew-preflight POOL=FILE — which pool cards Manabrew would silently improvise (builds the driver; prints NAME<TAB>REASON, then 'refused K of P')"
 	@echo "  make compliance-pass SETS='FRA BLB' — XMage compliance pass over the sets; reruns only stale verdicts"
 	@echo "  make follower-check ENGINE=phase [ARGS='--setup-only --pool F'] — level-A scenarios through one follower (scripts/follower-check.sh)"
-	@echo "  make follower-sweep-smoke ENGINE=phase [GAMES=2] — one xengine chunk with one follower, pool narrowed by its preflight (scripts/follower-sweep-smoke.sh)"
+	@echo "  make follower-sweep-smoke ENGINE=phase [GAMES=2] — one xengine chunk with one follower (or several: ENGINE='phase manabrew'), pool narrowed by their preflights (scripts/follower-sweep-smoke.sh)"
 	@echo "  make phase-oracle-setup — build the phase.rs follower and fetch its card data at followers/phase/PHASE_PIN, out of tree (heavy; one cold build per pin)"
 	@echo "  make phase-follower-test [RUN=filter] — cargo test for the phase.rs follower (needs phase-oracle-setup; --profile follower, PHASE_CARD_DATA set)"
 	@echo "  make phase-preflight POOL=FILE — which pool cards phase.rs lacks (rebuilds the follower; prints NAME<TAB>REASON, then 'refused K of P')"
@@ -254,9 +254,9 @@ pr:
 follower-check:
 	scripts/follower-check.sh $(ENGINE) $(ARGS)
 
-# follower-sweep-smoke runs one smoke-sized xengine chunk with one follower, the
+# follower-sweep-smoke runs one smoke-sized xengine chunk with one or several followers (ENGINE='phase manabrew'), the
 # pool narrowed by the follower's preflight (scripts/follower-sweep-smoke.sh):
 # ENGINE=phase [GAMES=2] [ARGS='--pool F --max-class harness=50'].
 .PHONY: follower-sweep-smoke
 follower-sweep-smoke:
-	scripts/follower-sweep-smoke.sh $(ENGINE) --games $(or $(GAMES),2) $(ARGS)
+	scripts/follower-sweep-smoke.sh "$(ENGINE)" --games $(or $(GAMES),2) $(ARGS)
