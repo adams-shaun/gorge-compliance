@@ -175,6 +175,23 @@ func (t *Tables) CommanderSet() (cardset.Set, error) {
 	return s, nil
 }
 
+// SwapRefusedCommander is ds with every card the Commander table refuses replaced
+// by a basic of the deck's colours (decks.SwapRefused), and each swap. gorge's
+// Foundations precon files hold the printed lists, which the table turns away whole;
+// the decks dealt must be these substituted ones for gorge and dirac to play one game.
+func (t *Tables) SwapRefusedCommander(ds []decks.Deck) ([]decks.Deck, []decks.Swap, error) {
+	set, err := t.CommanderSet()
+	if err != nil {
+		return nil, nil, err
+	}
+	plays := set.Supported()
+	out, swaps := decks.SwapRefused(ds, func(n string) bool {
+		i, ok := set.Lookup(n)
+		return ok && plays[i]
+	})
+	return out, swaps, nil
+}
+
 // Playable is the candidates of set code its table plays.
 func (t *Tables) Playable(code string, cands []decks.Card) ([]decks.Card, error) {
 	s, err := t.Table(code)

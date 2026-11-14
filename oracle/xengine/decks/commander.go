@@ -207,3 +207,65 @@ func k0(s []int, v int) int {
 	}
 	return -1
 }
+
+// Swap is one refused card of a Commander deck replaced by a basic land: Count
+// copies of Card became With in deck Deck (commander.json records each).
+type Swap struct {
+	Deck  string `json:"deck"`
+	Card  string `json:"card"`
+	With  string `json:"with"`
+	Count int    `json:"count"`
+}
+
+// basicOf is the basic land that taps for each colour letter.
+var basicOf = map[rune]string{'W': "Plains", 'U': "Island", 'B': "Swamp", 'R': "Mountain", 'G': "Forest"}
+
+// SwapRefused returns ds with every card the table refuses (plays(name) false)
+// replaced by a basic land of the deck's colour identity, the commander kept and
+// the cards re-sorted, as dirac's own pool decks replace "kernel-refused copies
+// by basics". Copies cycle through the identity's colours in WUBRG order, cards
+// taken in name order, so the result is a pure function of ds. A card stays when
+// it is the commander or the deck is colourless (no basic is in its identity), or
+// when the basic is not itself played. The swaps name each change; ds is not
+// modified.
+func SwapRefused(ds []Deck, plays func(name string) bool) ([]Deck, []Swap) {
+	var swaps []Swap
+	out := make([]Deck, len(ds))
+	for i, d := range ds {
+		var basics []string
+		for _, l := range d.Colours {
+			if b, ok := basicOf[l]; ok && plays(b) {
+				basics = append(basics, b)
+			}
+		}
+		nd := d
+		nd.Cards = append([]string(nil), d.Cards...)
+		sort.Strings(nd.Cards)
+		out[i] = nd
+		if len(basics) == 0 {
+			continue
+		}
+		type key struct{ card, with string }
+		counts := map[key]int{}
+		var order []key
+		n := 0
+		for j, c := range nd.Cards {
+			if c == d.Commander || plays(c) {
+				continue
+			}
+			k := key{c, basics[n%len(basics)]}
+			n++
+			if counts[k] == 0 {
+				order = append(order, k)
+			}
+			counts[k]++
+			nd.Cards[j] = k.with
+		}
+		sort.Strings(nd.Cards)
+		out[i] = nd
+		for _, k := range order {
+			swaps = append(swaps, Swap{Deck: d.Name, Card: k.card, With: k.with, Count: counts[k]})
+		}
+	}
+	return out, swaps
+}

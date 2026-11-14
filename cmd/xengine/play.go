@@ -87,7 +87,7 @@ func runPlay(args []string) error {
 	xmage := fs.Bool("xmage", false, "leave out the cards XMage spells differently (an XMage item names no per-card spelling)")
 	random := fs.String("random", "", "set codes, space or comma separated: draw the decks at random across these sets, ignoring the ledger; -set only names the run in the item ids")
 	forgeOnly := fs.String("forge-only", "", "with -random, a file of card names, one per line, to add to the cross-set deal: a set XMage has no class for, so its items go to Forge alone")
-	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays; with -format commander every game is offered to dirac's cmd5 Commander table, a pair it does not hold reads not_applicable")
+	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays; with -format commander every game is offered to dirac's cmd5 Commander table, after each card it refuses is replaced by a basic of the deck's colours (commander.json "swaps"); a pair it still does not hold reads not_applicable")
 	diracEvery := fs.Int("dirac-every", 2, "with -random and -dirac, every K-th game (game g with g%K == K-1) draws from one set's dirac-playable cards; 1 makes every game one dirac plays beside gorge, so all four engines see every deck; not used with -format commander")
 	format := fs.String("format", "", "game format: empty or constructed, or commander (with -commander-decks)")
 	seats := fs.Int("seats", 2, "with -format commander: seats a game deals, 2 to 4, each a distinct deck of -commander-decks. More than two seats are played and recorded by gorge alone: the lowering refuses every window and tape of such a game (seats:<n>)")
@@ -175,7 +175,7 @@ func runPlay(args []string) error {
 	opts := decks.Options{XMage: *xmage}
 	var deal dealer
 	if *format == "commander" {
-		ds, info, derr := loadCommanderDecks(reg, *cmdrDecks, *seats)
+		ds, info, derr := loadCommanderDecks(reg, *cmdrDecks, *seats, tables)
 		if derr != nil {
 			return derr
 		}
@@ -293,6 +293,9 @@ type commanderInfo struct {
 	Dir     string              `json:"dir"`
 	Decks   []commanderDeckInfo `json:"decks"`
 	Skipped []commanderSkip     `json:"skipped"`
+	// Swaps are the cards replaced by basics so dirac's cmd5 table holds the decks
+	// (-dirac only): every engine plays the substituted lists, not the files'.
+	Swaps []decks.Swap `json:"swaps,omitempty"`
 }
 
 type commanderDeckInfo struct {
@@ -308,8 +311,11 @@ type commanderSkip struct {
 
 // loadCommanderDecks reads dir's deck files and keeps the playable Commander
 // decks; fewer than seats (each seat plays a distinct deck) is an error naming
-// dir and every skip.
-func loadCommanderDecks(reg *cards.Registry, dir string, seats int) ([]decks.Deck, commanderInfo, error) {
+// dir and every skip. With tables, each card dirac's cmd5 table refuses is
+// replaced by a basic of the deck's colours (info.Swaps), since gorge's precon
+// files hold printed lists the table turns away whole; gorge, Forge and dirac then
+// all play the substituted lists.
+func loadCommanderDecks(reg *cards.Registry, dir string, seats int, tables *dside.Tables) ([]decks.Deck, commanderInfo, error) {
 	files, err := decks.ReadCommanderDir(dir)
 	if err != nil {
 		return nil, commanderInfo{}, err
@@ -319,6 +325,19 @@ func loadCommanderDecks(reg *cards.Registry, dir string, seats int) ([]decks.Dec
 	sums := map[string]string{}
 	for _, f := range files {
 		sums[f.Stem] = f.SHA256
+	}
+	if tables != nil {
+		var swaps []decks.Swap
+		// No tables built: the decks stay as printed and every game reads not_applicable
+		// with the hint (play's dirac loop).
+		sw, swaps, serr := tables.SwapRefusedCommander(ds)
+		switch {
+		case dside.NoTables(serr):
+		case serr != nil:
+			return nil, info, fmt.Errorf("-dirac: table %s: %w", dside.CommanderTable, serr)
+		default:
+			ds, info.Swaps = sw, swaps
+		}
 	}
 	for _, d := range ds {
 		info.Decks = append(info.Decks, commanderDeckInfo{Stem: d.Name, Commander: d.Commander, SHA256: sums[d.Name]})
