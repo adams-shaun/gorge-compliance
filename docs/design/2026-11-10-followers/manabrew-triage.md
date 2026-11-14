@@ -29,9 +29,15 @@ there is no F-versus-M disagreement to split yet; every row reads "no Forge row"
 | Gnarlid Colony/cast-resolve/v1 | DIVERGE | permanents: gorge 2/2; Manabrew 4/4 with two +1/+1 counters | Manabrew engine bug: an unkicked cast (the kicker was not payable and `choose_kicker` was never asked) still enters with the kicked counters; the condition on the enters-with-counters keyword is ignored | no Forge row |
 | Goblin Boarders/cast-resolve/v1 | DIVERGE | permanents: gorge 3/2; Manabrew 4/3 with a +1/+1 counter | Manabrew engine bug: enters with the counter although nothing attacked; same ignored condition on the enters-with-counters keyword | no Forge row |
 | Imprisoned in the Moon/cast-resolve/v1 | DIVERGE | permanents: gorge Grizzly Bears is a land with no colour or P/T; Manabrew keeps `bear creature land`, `{G}`, 2/2 | Manabrew engine bug: the aura's type, colour and ability-loss effect is applied only as an added land type | no Forge row |
-| Three Tree Mascot/cast-resolve/v1 | DIVERGE | permanents: gorge `allcreaturetypes artifact creature`; Manabrew `artifact creature shapeshifter` | driver gap: the snapshot writer prints the printed subtype for a changeling instead of gorge's `allcreaturetypes` (follow-up filed) | no Forge row |
 | Witness Protection/cast-resolve/v1 | DIVERGE | permanents: gorge names the enchanted creature Legitimate Businessperson, `citizen creature`, `{WG}`, 1/1; Manabrew keeps Grizzly Bears, `bear citizen creature`, `{G}`, 1/1 | Manabrew engine bug: the aura's "becomes a named 1/1" effect sets P/T and adds the type but does not set the name, replace the old subtype or set the colours | no Forge row |
 | Uncharted Haven/play-land/v1 | HARNESS | `Missing order answer at step 0: choose_single_replacement_effect` (1 follower checkpoint, gorge 2) | gorge does not log the decision: two replacement effects apply as the land enters and gorge recorded only the colour pick, never an order | no Forge row |
+
+Update 2026-11-13 (MANABREW_ORACLE_REF 7bfc02e612cf): the Three Tree Mascot row is gone. `perm_snap` now prints a
+creature with the `Changeling` keyword as its core types, supertypes and non-creature subtypes plus the token
+`allcreaturetypes`, as gorge does; the sweep reads 176 AGREE, 4 DIVERGE, 4 HARNESS (8 rows left in the table
+above). The `Changeling` keyword is Manabrew's only all-types marker. The effect form (`AddAllCreatureTypes`, 23
+cards in the pinned Forge corpus) is not modelled by the engine, so a card that gains every creature type that
+way cannot print the token; that would be a Manabrew engine bug, not a driver gap, and none is in this pool.
 
 ## What the answerer does (Forge driver's rules, ported)
 
