@@ -112,7 +112,7 @@ func (c *cut) setupSpeedLatch() bool {
 func windowTape(t *game.Tape, c *cut) *game.Tape {
 	end := windowEnd(t, c)
 	hi := min(end+1, len(t.Entries))
-	wt := &game.Tape{Format: t.Format, Set: t.Set, Seed: t.Seed, Decks: t.Decks, Entries: make([]game.Entry, 0, hi-c.Entry)}
+	wt := &game.Tape{Format: t.Format, Set: t.Set, Seed: t.Seed, Decks: t.Decks, Open: make([]game.Opening, len(t.Decks)), Entries: make([]game.Entry, 0, hi-c.Entry)}
 	rebase := c.Turn - 1
 	for _, en := range t.Entries[c.Entry:hi] {
 		en.Turn -= rebase

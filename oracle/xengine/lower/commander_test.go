@@ -1,6 +1,8 @@
 package lower
 
 import (
+	"bytes"
+	"encoding/json"
 	"slices"
 	"testing"
 
@@ -184,5 +186,32 @@ func TestCommanderStartLife(t *testing.T) {
 	}
 	if startLife(&cut{Commander: true}) != 40 || startLife(&cut{}) != 20 {
 		t.Error("startLife is not 40 / 20")
+	}
+}
+
+// TestWindowTapeTwoSeatOpening: a 1v1 window's self-check tape (the tape file
+// of a window) writes two empty openings, as it always has, not null.
+func TestWindowTapeTwoSeatOpening(t *testing.T) {
+	reg, pair := cmdrPair(t)
+	ws, refs, _, err := Windows(reg, pair[:], 5, game.Options{MaxTurns: 6}, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(ws) == 0 {
+		t.Fatalf("no lowered window; refusals %v", refs)
+	}
+	b, err := ws[0].Against.Bytes()
+	if err != nil {
+		t.Fatal(err)
+	}
+	var head struct {
+		Decks []json.RawMessage `json:"decks"`
+		Open  []json.RawMessage `json:"opening"`
+	}
+	if err := json.Unmarshal(b, &head); err != nil || len(head.Decks) != 2 || len(head.Open) != 2 {
+		t.Fatalf("window tape header: %v, %d decks, %d openings", err, len(head.Decks), len(head.Open))
+	}
+	if !bytes.Contains(b, []byte(`"opening": [`)) || bytes.Contains(b, []byte(`"opening": null`)) {
+		t.Fatal("window tape opening is not a two-element array")
 	}
 }
