@@ -48,6 +48,12 @@ type PlayerDigest struct {
 	LibraryCount int              `json:"library_count"`
 	LibraryTop   []string         `json:"library_top"`
 	Pool         string           `json:"pool"` // WUBRGC letters
+	// CommanderCasts and CommanderDamage are the snapshot's commander tallies
+	// (CR 903.8, 903.10a): commander front name -> times cast from the command
+	// zone, and "pN:<front name>" (N the commander's owner) -> combat damage
+	// this seat has taken from it. Non-zero entries only, nil when none.
+	CommanderCasts  map[string]int32 `json:"commander_casts,omitempty"`
+	CommanderDamage map[string]int32 `json:"commander_damage,omitempty"`
 }
 
 // PermDigest is one battlefield object. Field is ordered by controller, then
@@ -166,7 +172,9 @@ func DigestOfGame(e *rules.Engine) Digest {
 		for j := 0; j < len(lib) && j < digestLibraryTop; j++ {
 			top = append(top, faceName(g.Obj(lib[j])))
 		}
+		casts, damage := cmdTallies(g, i)
 		d.Players = append(d.Players, PlayerDigest{
+			CommanderCasts: casts, CommanderDamage: damage,
 			Seat: i, Life: g.Players[i].Life, Counters: counterMap(g.Players[i].Counters),
 			Hand: zone(state.ZHand, p, true), Graveyard: zone(state.ZGraveyard, p, false),
 			Exile: zone(state.ZExile, p, true), Command: nilIfEmpty(zone(state.ZCommand, p, true)), LibraryCount: len(lib), LibraryTop: top,
@@ -268,7 +276,8 @@ func DigestOfSnapshot(s rules.OracleSnapshot) Digest {
 		d.Players = append(d.Players, PlayerDigest{
 			Seat: p.Seat, Life: p.Life, Counters: copyCounters(p.Counters),
 			Hand: nonNil(p.Hand), Graveyard: nonNil(p.Graveyard), Exile: nonNil(p.Exile),
-			Command:      sortedNonEmpty(nonNil(p.Command)),
+			Command:        sortedNonEmpty(nonNil(p.Command)),
+			CommanderCasts: copyCounters(p.CommanderCasts), CommanderDamage: copyCounters(p.CommanderDamage),
 			LibraryCount: p.LibraryCount, LibraryTop: top, Pool: p.Pool,
 		})
 	}
@@ -280,6 +289,46 @@ func DigestOfSnapshot(s rules.OracleSnapshot) Digest {
 	}
 	sortField(d.Field)
 	return d
+}
+
+// cmdTallies is seat i's commander tax counts and commander damage as the
+// snapshot reports them (rules.cmdTallies): front-face names, damage keyed
+// "pN:<name>" of the commander's owner, in gorge's dense commander order
+// (seat order, then each seat's Commanders order). Non-zero entries only.
+func cmdTallies(g *state.Game, i int) (casts, damage map[string]int32) {
+	front := func(id state.ObjID) string {
+		if o := g.Obj(id); o != nil && o.Card != nil && len(o.Card.Faces) > 0 {
+			return o.Card.Faces[0].Name
+		}
+		return ""
+	}
+	pl := &g.Players[i]
+	for k, id := range pl.Commanders {
+		if k >= len(pl.CmdCasts) {
+			break
+		}
+		if n := pl.CmdCasts[k]; n != 0 {
+			if casts == nil {
+				casts = map[string]int32{}
+			}
+			casts[front(id)] = n
+		}
+	}
+	dense := 0
+	for s := range g.Players {
+		for _, id := range g.Players[s].Commanders {
+			if dense < len(pl.CmdDamage) {
+				if n := pl.CmdDamage[dense]; n != 0 {
+					if damage == nil {
+						damage = map[string]int32{}
+					}
+					damage[fmt.Sprintf("p%d:%s", s, front(id))] = n
+				}
+			}
+			dense++
+		}
+	}
+	return casts, damage
 }
 
 // nilIfEmpty is x, or nil when x is empty: an empty command zone is no field.
@@ -396,6 +445,12 @@ func (d Digest) flatten() [][2]string {
 		if len(p.Command) > 0 {
 			list(pre+".command", p.Command)
 		}
+		if len(p.CommanderCasts) > 0 {
+			counters(pre+".commander_casts", p.CommanderCasts)
+		}
+		if len(p.CommanderDamage) > 0 {
+			counters(pre+".commander_damage", p.CommanderDamage)
+		}
 		add(pre+".library_count", p.LibraryCount)
 		list(pre+".library_top", p.LibraryTop)
 		add(pre+".pool", strconv.Quote(p.Pool))
@@ -417,7 +472,8 @@ func (d Digest) flatten() [][2]string {
 }
 
 // Swapped is the digest with seats 0 and 1 exchanged: the seat numbers,
-// the player list, the controllers and owners and the "pN" attachment names.
+// the player list, the controllers and owners, the "pN" attachment names and
+// the "pN:" prefix of a commander damage key.
 // The lowering relabels a tape whose starting player is seat 1 this way.
 func (d Digest) Swapped() Digest {
 	flip := func(i int) int { return 1 - i }
@@ -426,6 +482,13 @@ func (d Digest) Swapped() Digest {
 	out.Players = make([]PlayerDigest, len(d.Players))
 	for i, p := range d.Players {
 		p.Seat = flip(p.Seat)
+		if p.CommanderDamage != nil {
+			sw := make(map[string]int32, len(p.CommanderDamage))
+			for k, n := range p.CommanderDamage {
+				sw[swapSeatRef(k)] = n
+			}
+			p.CommanderDamage = sw
+		}
 		out.Players[flip(i)] = p
 	}
 	out.Field = make([]PermDigest, len(d.Field))
@@ -438,4 +501,17 @@ func (d Digest) Swapped() Digest {
 	}
 	sortField(out.Field)
 	return out
+}
+
+// swapSeatRef exchanges seats 0 and 1 in a "pN:<name>" ref key.
+func swapSeatRef(k string) string {
+	i := strings.IndexByte(k, ':')
+	if i < 2 || k[0] != 'p' {
+		return k
+	}
+	n, err := strconv.Atoi(k[1:i])
+	if err != nil || n > 1 {
+		return k
+	}
+	return fmt.Sprintf("p%d%s", 1-n, k[i:])
 }

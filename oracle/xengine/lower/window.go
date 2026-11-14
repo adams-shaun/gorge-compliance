@@ -175,6 +175,14 @@ func (c *cut) item(m seatMap, id, name string) oraclegen.Item {
 		for _, a := range c.Setup[s].Attached {
 			seat.Attached = append(seat.Attached, oraclegen.SetupAttach{Card: a.Card, To: m.ref(a.To)})
 		}
+		// CommanderDamage keys are full refs, so they follow the swap too.
+		seat.CommanderDamage = nil
+		for k, n := range c.Setup[s].CommanderDamage {
+			if seat.CommanderDamage == nil {
+				seat.CommanderDamage = map[string]int32{}
+			}
+			seat.CommanderDamage[m.ref(k)] = n
+		}
 		sc.Setup["p"+strconv.Itoa(m.seat(s))] = seat
 	}
 	// The runner places seat p0's cards first, so p0's asks come first.

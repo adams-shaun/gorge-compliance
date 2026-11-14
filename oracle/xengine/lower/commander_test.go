@@ -3,7 +3,9 @@ package lower
 import (
 	"bytes"
 	"encoding/json"
+	"reflect"
 	"slices"
+	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
@@ -129,37 +131,146 @@ func cmdrCut(t *testing.T) (*rules.Engine, int) {
 	return got, at
 }
 
-func TestGateCommanderOutsideCommandZone(t *testing.T) {
-	e, at := cmdrCut(t)
-	c := capture(e, at, false)
-	if !c.Commander {
-		t.Fatal("cut is not a Commander cut")
+// TestWindowCommanderOnBattlefield: a window whose cut has a commander on the
+// battlefield is lowered, with the card placed and named in its seat's
+// Commanders, and the self-check holds the runner to the live game.
+func TestWindowCommanderOnBattlefield(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	var files []decks.CommanderFile
+	for _, s := range []string{"foundations-keen-engineering", "foundations-wretched-ranks"} {
+		f, err := testutil.LoadRepoDeckFile(s)
+		if err != nil {
+			t.Fatal(err)
+		}
+		files = append(files, decks.CommanderFile{Stem: s, File: f})
 	}
-	id := e.G.Players[0].Commanders[0]
-	e.G.Obj(id).Zone = state.ZBattlefield
-	if r := capture(e, at, false).Reasons; !slices.Contains(r, "commander_zone:battlefield") {
-		t.Fatalf("reasons %v, want commander_zone:battlefield", r)
+	ds, skips := decks.CommanderDecks(reg, files)
+	if len(ds) != 2 {
+		t.Fatalf("kept %d decks, skips %v", len(ds), skips)
+	}
+	const seed = 2 // Sai is cast by turn 6 and sits on the battlefield at the cut
+	pair := decks.CommanderPair(ds, "CMDR", 0, 0, seed)
+	ws, refs, _, err := Windows(reg, pair[:], seed, game.Options{MaxTurns: 10}, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	const sai = "Sai, Master Thopterist"
+	var got *Lowered
+	for i, l := range ws {
+		for _, seat := range l.Item.Scenario.Setup {
+			if slices.Contains(seat.Battlefield, sai) {
+				got = &ws[i]
+			}
+		}
+		if got != nil {
+			break
+		}
+	}
+	if got == nil {
+		t.Fatalf("no lowered window with %s on the battlefield; refusals %v", sai, refs)
+	}
+	found := false
+	for _, seat := range got.Item.Scenario.Setup {
+		if slices.Contains(seat.Battlefield, sai) {
+			found = true
+			if !slices.Equal(seat.Commanders, []string{sai}) {
+				t.Errorf("Commanders %v, want [%s]", seat.Commanders, sai)
+			}
+			if slices.Contains(seat.Command, sai) {
+				t.Errorf("%s is also in the command zone", sai)
+			}
+		}
+	}
+	if !found {
+		t.Fatal("Sai on no seat")
+	}
+	if c := CheckWindow(reg, *got); c.Status != StatusOK {
+		t.Fatalf("CheckWindow %s step %d field %s: gorge %q tape %q", c.Status, c.Step, c.Field, c.Gorge, c.Tape)
+	}
+	// No window of the game is refused for a commander's zone any more.
+	for _, r := range refs {
+		for _, why := range r.Reasons {
+			if strings.HasPrefix(why, "commander_zone:") {
+				t.Errorf("window refused as %s", why)
+			}
+		}
 	}
 }
 
-func TestGateCommanderTaxAndDamage(t *testing.T) {
+func TestGateCommanderTaxPlaced(t *testing.T) {
 	e, at := cmdrCut(t)
-	has := func(r string) bool { return slices.Contains(capture(e, at, false).Reasons, r) }
-	if has("field:Player.CmdCasts") || has("field:Player.CmdDamage") {
-		t.Fatal("genesis-sized zero slices are refused")
-	}
+	cmdr := frontName(e.G.Obj(e.G.Players[0].Commanders[0]))
 	e.G.Players[0].CmdCasts[0] = 1
-	if !has("field:Player.CmdCasts") {
-		t.Error("a paid tax is not refused")
+	c := capture(e, at, false)
+	if len(c.Reasons) != 0 {
+		t.Fatalf("reasons %v, want none", c.Reasons)
 	}
-	e.G.Players[0].CmdCasts[0] = 0
+	if !reflect.DeepEqual(c.Setup[0].CommanderCasts, map[string]int32{cmdr: 1}) {
+		t.Errorf("seat 0 CommanderCasts %v, want {%s: 1}", c.Setup[0].CommanderCasts, cmdr)
+	}
+	if c.Setup[1].CommanderCasts != nil {
+		t.Errorf("seat 1 CommanderCasts %v", c.Setup[1].CommanderCasts)
+	}
+	// A commander in the command zone stays a Command placement.
+	if !slices.Equal(c.Setup[0].Command, []string{cmdr}) || len(c.Setup[0].Commanders) != 0 {
+		t.Errorf("seat 0 command %v commanders %v", c.Setup[0].Command, c.Setup[0].Commanders)
+	}
+	// A commander elsewhere is named in Commanders, never refused for its zone.
+	id := e.G.Players[0].Commanders[0]
+	e.G.SetZone(state.ZCommand, 0, nil)
+	e.G.SetZone(state.ZHand, 0, append(slices.Clone(e.G.Zone(state.ZHand, 0)), id))
+	e.G.Obj(id).Zone = state.ZHand
+	c = capture(e, at, false)
+	if len(c.Reasons) != 0 {
+		t.Fatalf("commander in hand: reasons %v", c.Reasons)
+	}
+	if !slices.Equal(c.Setup[0].Commanders, []string{cmdr}) || !slices.Contains(c.Setup[0].Hand, cmdr) || len(c.Setup[0].Command) != 0 {
+		t.Errorf("commander in hand: commanders %v hand %v command %v", c.Setup[0].Commanders, c.Setup[0].Hand, c.Setup[0].Command)
+	}
+	// A non-commander object in the command zone is still refused.
+	e2, at2 := cmdrCut(t)
+	for i := range e2.G.Objs {
+		o := &e2.G.Objs[i]
+		if o.Zone == state.ZLibrary && o.Card != nil {
+			o.Zone = state.ZCommand
+			break
+		}
+	}
+	if r := capture(e2, at2, false).Reasons; !slices.Contains(r, "zone:command") {
+		t.Errorf("reasons %v, want zone:command", r)
+	}
+}
+
+func TestGateCommanderDamagePlaced(t *testing.T) {
+	e, at := cmdrCut(t)
+	cmdr := frontName(e.G.Obj(e.G.Players[0].Commanders[0]))
+	// p0's commander is at dense index 0, p1's at 1.
 	e.G.Players[1].CmdDamage[0] = 3
-	if !has("field:Player.CmdDamage") {
-		t.Error("commander damage is not refused")
+	c := capture(e, at, false)
+	if len(c.Reasons) != 0 {
+		t.Fatalf("reasons %v, want none", c.Reasons)
 	}
+	if want := map[string]int32{"p0:" + cmdr: 3}; !reflect.DeepEqual(c.Setup[1].CommanderDamage, want) {
+		t.Errorf("seat 1 CommanderDamage %v, want %v", c.Setup[1].CommanderDamage, want)
+	}
+	if c.Setup[0].CommanderDamage != nil {
+		t.Errorf("seat 0 CommanderDamage %v", c.Setup[0].CommanderDamage)
+	}
+	// With the cut's active seat 1 the seats swap, and the key with them.
+	it := c.item(seatMap{swap: true}, "x", "x")
+	if want := map[string]int32{"p1:" + cmdr: 3}; !reflect.DeepEqual(it.Scenario.Setup["p0"].CommanderDamage, want) {
+		t.Errorf("swapped p0 CommanderDamage %v, want %v", it.Scenario.Setup["p0"].CommanderDamage, want)
+	}
+	if it.Scenario.Setup["p1"].CommanderDamage != nil {
+		t.Errorf("swapped p1 CommanderDamage %v", it.Scenario.Setup["p1"].CommanderDamage)
+	}
+	// p1's commander at dense index 1, dealt to p0.
 	e.G.Players[1].CmdDamage[0] = 0
-	if has("field:Player.CmdCasts") || has("field:Player.CmdDamage") {
-		t.Error("reset state still refused")
+	e.G.Players[0].CmdDamage[1] = 5
+	c = capture(e, at, false)
+	cmdr1 := frontName(e.G.Obj(e.G.Players[1].Commanders[0]))
+	if want := map[string]int32{"p1:" + cmdr1: 5}; len(c.Reasons) != 0 || !reflect.DeepEqual(c.Setup[0].CommanderDamage, want) {
+		t.Errorf("seat 0 CommanderDamage %v (reasons %v), want %v", c.Setup[0].CommanderDamage, c.Reasons, want)
 	}
 }
 
