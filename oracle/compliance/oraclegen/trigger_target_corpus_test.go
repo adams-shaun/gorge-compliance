@@ -26,7 +26,10 @@ func TestTriggerTargetAnswersOfRealCards(t *testing.T) {
 		{"Gandalf, Spark Starter", []oraclegen.XAnswer{{Seat: 0, Kind: "target", Value: "p0^X=3"}}},
 		// Target opponent, then an "up to one creature" slot nobody filled.
 		{"Sting, Bilbo's Sword", []oraclegen.XAnswer{{Seat: 0, Kind: "target", Value: "p1"}, skip}},
-		{"Cloak and Dagger, Entwined", []oraclegen.XAnswer{{Seat: 0, Kind: "target", Value: "p1"}, skip}},
+		// Target opponent, then "up to one creature they control": gorge
+		// resolves the ParentTarget-controlled slot, so the fixture's Grizzly
+		// Bears fills it and the exile choice names it.
+		{"Cloak and Dagger, Entwined", []oraclegen.XAnswer{{Seat: 0, Kind: "target", Value: "p1"}, {Seat: 0, Kind: "target", Value: "Grizzly Bears"}, {Seat: 0, Kind: "choice", Value: "Grizzly Bears"}}},
 		{"The Spot, Living Portal", []oraclegen.XAnswer{{Seat: 0, Kind: "target", Value: "The Spot, Living Portal"}, skip}},
 	} {
 		t.Run(tc.card, func(t *testing.T) {

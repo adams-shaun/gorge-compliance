@@ -309,6 +309,7 @@ var objectTable = map[string]entry{
 	"AttachedPlayer":               isIgnored("meaningful only with HasAttachedPlayer, which is refused"),
 	"HasAttachedPlayer":            isRefused("attached to a player is not placeable"),
 	"LastBearer":                   isIgnored("last-known bearer of an unattached equipment, read by leaves-play look-back only"),
+	"LastBearerInc":                isIgnored("incarnation stamp of LastBearer, read with it by leaves-play look-back only"),
 	"UnattachPending":              isRefused("a pending unattach"),
 	"ExiledWith":                   isRefused("reverse exile link; live only when the source object's card says ExiledWith or it is a self-exile (warp, refused as exile_self)"),
 	"ExiledWithInc":                isIgnored("meaningful only with ExiledWith, which is refused"),
