@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"regexp"
 	"sort"
+	"strconv"
 	"strings"
 	"unicode"
 
@@ -416,16 +418,27 @@ func manaFromCostX(cost string, x int) (string, *refusal) { return manaFromCostL
 // land is left, so an "if {B} was spent" rider sees the Swamps' B. Mana the
 // lands cannot supply stays first-colour / colourless.
 func manaFromCostLands(cost string, x int, lands string) (string, *refusal) {
-	// slots keep the cost's symbol order; a slot is a fixed colour, a hybrid
-	// option set ("WB") or generic mana ("").
-	type slot struct {
-		fixed  byte
-		hybrid string
+	srcs := make([][]byte, len(lands))
+	for i := 0; i < len(lands); i++ {
+		srcs[i] = []byte{lands[i]}
 	}
-	var slots []slot
+	return manaFromCostSources(cost, x, srcs, true)
+}
+
+// costSlot is one mana symbol of a cost: a fixed colour, a hybrid option set
+// ("WB") or generic mana (both zero).
+type costSlot struct {
+	fixed  byte
+	hybrid string
+}
+
+// costSlots parses a Forge mana cost into its symbols, in cost order. X
+// announced as x (x < 0: refuse) adds x generic slots.
+func costSlots(cost string, x int) ([]costSlot, *refusal) {
+	var slots []costSlot
 	generic := func(n int) {
 		for ; n > 0; n-- {
-			slots = append(slots, slot{})
+			slots = append(slots, costSlot{})
 		}
 	}
 	for _, tok := range strings.Fields(cost) {
@@ -433,68 +446,103 @@ func manaFromCostLands(cost string, x int, lands string) (string, *refusal) {
 		case tok == "X" && x >= 0:
 			generic(x)
 		case tok == "X" || tok == "Y":
-			return "", refuse("x-cost", "cost %q", cost)
+			return nil, refuse("x-cost", "cost %q", cost)
 		case allDigits(tok):
 			n := 0
 			fmt.Sscanf(tok, "%d", &n)
 			generic(n)
 		case len(tok) == 1 && strings.Contains("WUBRGC", tok):
-			slots = append(slots, slot{fixed: tok[0]})
+			slots = append(slots, costSlot{fixed: tok[0]})
 		case tok == "S":
 			generic(1)
 		case reHybrid.MatchString(tok) && strings.HasSuffix(tok, "P"):
 			// XMage's test player pays Phyrexian mana with life; the
 			// runner's pool cannot say which.
-			return "", refuse("phyrexian-mana", "cost %q", cost)
+			return nil, refuse("phyrexian-mana", "cost %q", cost)
 		case reHybrid.MatchString(tok):
-			slots = append(slots, slot{hybrid: strings.ReplaceAll(tok, "/", "")})
+			slots = append(slots, costSlot{hybrid: strings.ReplaceAll(tok, "/", "")})
 		case len(tok) == 2 && tok[0] == '2' && strings.ContainsAny(tok[1:], "WUBRG"):
-			slots = append(slots, slot{fixed: tok[1]})
+			slots = append(slots, costSlot{fixed: tok[1]})
 		case tok == "no" || tok == "cost" || tok == "0":
 		default:
 			// non-mana cost token (T, Q, Sac<...>, SubCounter<...>, ...)
 		}
 	}
-	left := []byte(lands)
-	take := func(c byte) bool {
+	return slots, nil
+}
+
+// manaFromCostSources pays cost from srcs, one entry per mana the seat's
+// battlefield can make (each entry the set of colours that one mana can be,
+// setup order; "Any" sources list WUBRG). fill: a slot no source can pay is
+// still emitted first-colour / colourless (the legacy behaviour activations
+// use); otherwise it is left out of the pool so gorge pays it the way the game
+// would (life, an alternative cost) or fails visibly.
+func manaFromCostSources(cost string, x int, srcs [][]byte, fill bool) (string, *refusal) {
+	slots, r := costSlots(cost, x)
+	if r != nil {
+		return "", r
+	}
+	left := append([][]byte(nil), srcs...)
+	// take removes and returns the narrowest remaining source able to make
+	// one of colours, so an any-colour source is kept for later slots.
+	take := func(colours string) (byte, bool) {
+		best, bc := -1, byte(0)
 		for i, l := range left {
-			if l == c {
-				left = append(left[:i], left[i+1:]...)
-				return true
-			}
-		}
-		return false
-	}
-	for _, sl := range slots {
-		if sl.fixed != 0 {
-			take(sl.fixed)
-		}
-	}
-	out := make([]byte, len(slots))
-	for i, sl := range slots {
-		switch {
-		case sl.fixed != 0:
-			out[i] = sl.fixed
-		case sl.hybrid != "":
-			out[i] = sl.hybrid[0]
-			for j := 0; j < len(sl.hybrid); j++ {
-				if take(sl.hybrid[j]) {
-					out[i] = sl.hybrid[j]
+			for j := 0; j < len(colours); j++ {
+				if bytes.IndexByte(l, colours[j]) >= 0 && (best < 0 || len(l) < len(left[best])) {
+					best, bc = i, colours[j]
 					break
 				}
 			}
+		}
+		if best < 0 {
+			return 0, false
+		}
+		left = append(left[:best], left[best+1:]...)
+		return bc, true
+	}
+	out := make([]byte, len(slots))
+	for i, sl := range slots {
+		if sl.fixed != 0 {
+			if _, ok := take(string(sl.fixed)); ok || fill {
+				out[i] = sl.fixed
+			}
+		}
+	}
+	for i, sl := range slots {
+		if sl.hybrid == "" {
+			continue
+		}
+		if c, ok := take(sl.hybrid); ok {
+			out[i] = c
+		} else if fill {
+			out[i] = sl.hybrid[0]
 		}
 	}
 	for i, sl := range slots {
 		if sl.fixed != 0 || sl.hybrid != "" {
 			continue
 		}
-		out[i] = 'C'
 		if len(left) > 0 {
-			out[i], left = left[0], left[1:]
+			c := left[0][0]
+			if len(left[0]) > 1 {
+				c = 'C' // any-colour or multi-colour source paying generic
+				if len(left[0]) == 2 {
+					c = left[0][0]
+				}
+			}
+			out[i], left = c, left[1:]
+		} else if fill {
+			out[i] = 'C'
 		}
 	}
-	return string(out), nil
+	res := make([]byte, 0, len(out))
+	for _, c := range out {
+		if c != 0 {
+			res = append(res, c)
+		}
+	}
+	return string(res), nil
 }
 
 // basicLandMana lists one colour letter per untapped-at-setup basic land
@@ -990,6 +1038,10 @@ type emitter struct {
 	blocked        map[int]bool
 	hasStepExpects bool
 	tappedAt       map[string]int // {T}-cost source ref -> turn last tapped
+	// entered lists, per seat in action order, the permanents earlier play
+	// and cast steps put on the battlefield after setup (a land drop, a mana
+	// rock): castMana counts them as mana sources.
+	entered [2][]string
 }
 
 func (em *emitter) add(s *step) *step {
@@ -1091,15 +1143,233 @@ func (em *emitter) castMana(seat int, name string, x int) (string, *refusal) {
 	if !ok {
 		return "", refuse("unknown-card", "%s", name)
 	}
-	for _, f := range c.Faces {
-		if f != nil && sameName(f.Name, name) {
-			return manaFromCostLands(f.ManaCost, x, em.t.basicLandMana(seat))
+	cost := ""
+	switch {
+	case len(c.Faces) == 0:
+		return "", nil
+	default:
+		cost = c.Faces[0].ManaCost
+		for _, f := range c.Faces {
+			if f != nil && sameName(f.Name, name) {
+				cost = f.ManaCost
+				break
+			}
 		}
 	}
-	if len(c.Faces) > 0 && c.Faces[0] != nil {
-		return manaFromCostLands(c.Faces[0].ManaCost, x, em.t.basicLandMana(seat))
+	ms := em.t.manaSources(seat, em.entered[seat])
+	if ms.spent != "" {
+		slots, r := costSlots(cost, x)
+		if r != nil {
+			return "", r
+		}
+		if len(slots) > ms.basics {
+			return "", refuse("mana-source-payment", "%s may have paid for %s", ms.spent, name)
+		}
 	}
-	return "", nil
+	if ms.loose || em.t.castsForAlternativeCost(c) {
+		ms.loose = true
+	}
+	return manaFromCostSources(cost, x, ms.srcs, ms.loose)
+}
+
+// staticChangesMana reports whether a static ability of f rewrites mana
+// production or payment: mana spent as another type (Mode$ ManaConvert), a
+// granted AB$ Mana ability, an every-basic-land-type land, or a granted
+// alternative-cost keyword (Evoke, Dash, ...).
+func staticChangesMana(f *cards.Face, st *cards.Static) bool {
+	if st.Mode == "ManaConvert" {
+		return true
+	}
+	for _, n := range strings.Split(st.Params["AddAbility"], "&") {
+		if strings.Contains(f.SVars[strings.TrimSpace(n)], "AB$ Mana") {
+			return true
+		}
+	}
+	if strings.Contains(st.Params["AddType"], "AllBasicLandType") {
+		return true
+	}
+	for _, kw := range strings.Split(st.Params["AddKeyword"], "&") {
+		if altCostKeyword[strings.TrimSpace(strings.SplitN(kw, ":", 2)[0])] {
+			return true
+		}
+	}
+	return false
+}
+
+// altCostKeyword names the keywords whose cost replaces the printed mana cost.
+var altCostKeyword = map[string]bool{"Evoke": true, "Dash": true, "Flashback": true, "Escape": true,
+	"Prowl": true, "Surge": true, "Emerge": true, "Overload": true, "Bestow": true, "Blitz": true,
+	"Spectacle": true, "Disturb": true, "Foretell": true, "Plot": true, "Madness": true, "Cleave": true}
+
+// castsForAlternativeCost reports whether the card prints an alternative cost
+// (Mode$ AlternativeCost: Cobra Trap, Security Rhox) so its printed mana cost
+// is not necessarily what XMage's player paid.
+func (t *translator) castsForAlternativeCost(c *cards.Card) bool {
+	for _, f := range c.Faces {
+		if f == nil {
+			continue
+		}
+		for i := range f.Statics {
+			if f.Statics[i].Mode == "AlternativeCost" {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// noteEntered records a played land or a cast noncreature permanent as a
+// mana source for later casts. A creature cast this way is summoning sick, so
+// it cannot pay (a missing source fails visibly rather than falsely passing).
+func (em *emitter) noteEntered(a *action) {
+	if a.kind != "play" && (a.kind != "cast" || !em.t.isPermanentCard(a.card) || em.t.isCreatureCard(a.card)) {
+		return
+	}
+	em.entered[a.seat] = append(em.entered[a.seat], a.card)
+}
+
+// manaSources collects every mana the seat's untapped setup permanents, plus
+// the permanents entered since setup, can make: one entry per mana, holding
+// the colours it can be (an any-colour source lists WUBRG). A land with basic
+// land types makes those colours; any other permanent contributes its printed
+// AB$ Mana abilities' Produced$.
+func (t *translator) manaSources(p int, entered []string) *manaSet {
+	ms := &manaSet{}
+	tapped := map[string]bool{}
+	var names []string
+	// t.setup, not t.places: a basic land the translator drops from the
+	// scenario (poolPaidLands, -droplands) is still a source XMage paid with.
+	for _, ac := range t.setup[p] {
+		if ac.zone != "battlefield" {
+			continue
+		}
+		if ac.tapped {
+			tapped[ac.name] = true
+			continue
+		}
+		for i := 0; i < ac.count; i++ {
+			names = append(names, ac.name)
+		}
+	}
+	for _, n := range append(names, entered...) {
+		if tapped[n] {
+			continue
+		}
+		nm, r := xmageName(n)
+		if r != nil {
+			continue
+		}
+		c, ok := t.lookup(nm)
+		if !ok {
+			continue
+		}
+		for _, f := range c.Faces {
+			if f == nil || !sameName(f.Name, nm) {
+				continue
+			}
+			for i := range f.Statics {
+				if staticChangesMana(f, &f.Statics[i]) {
+					ms.loose = true
+				}
+			}
+			land := f.IsLand()
+			var basic []byte
+			if land {
+				for _, ty := range f.Types {
+					if col, ok := basicLandColour[ty]; ok {
+						basic = append(basic, col)
+					}
+				}
+			}
+			if len(basic) > 0 {
+				ms.srcs = append(ms.srcs, basic)
+				if f.IsBasic() {
+					ms.basics++
+				}
+				continue
+			}
+			sas := append(f.ManaAbilities(), f.ManaReflectedAbilities()...)
+			for _, sa := range sas {
+				if !land && ms.spent == "" && sacrificesItself(sa.Params["Cost"]) {
+					ms.spent = nm
+				}
+				ms.srcs = append(ms.srcs, producedMana(sa)...)
+			}
+		}
+	}
+	return ms
+}
+
+// manaSet is what a seat's battlefield can pay with at one cast.
+type manaSet struct {
+	srcs [][]byte // one entry per mana, the colours it can be
+	// spent names the first self-sacrificing / self-exiling non-land mana
+	// source (Black Lotus, Lotus Petal, a Treasure): XMage's auto-payment may
+	// have used it up and the runner cannot say.
+	spent string
+	// loose: a permanent changes what mana the seat can make or how it may
+	// be spent in a way the printed Produced$ lists cannot show (mana spent
+	// as another type, granted mana abilities, an every-land-type land, a
+	// granted alternative cost). The seed then keeps every cost slot, as it
+	// did before sources were read.
+	loose  bool
+	basics int // untapped basic lands
+}
+
+var basicLandColour = map[string]byte{"Plains": 'W', "Island": 'U', "Swamp": 'B', "Mountain": 'R', "Forest": 'G'}
+
+// sacrificesItself reports whether a Forge ability cost sacrifices or exiles
+// its own source.
+func sacrificesItself(cost string) bool {
+	return strings.Contains(cost, "/CARDNAME>") && (strings.Contains(cost, "Sac<") || strings.Contains(cost, "Exile<"))
+}
+
+// producedMana is the mana one activation of a mana ability makes: "Combo W U"
+// is one mana of either colour, "W B" is two mana, "Any" and the computed
+// forms (Chosen, reflected) are one mana of any colour. Amount$ multiplies it.
+func producedMana(sa *cards.SA) [][]byte {
+	const anyColour = "WUBRG"
+	var one [][]byte
+	prod := strings.Fields(sa.Params["Produced"])
+	switch {
+	case len(prod) == 0 || sa.API == "ManaReflected":
+		one = [][]byte{[]byte(anyColour)}
+	case prod[0] == "Combo":
+		set := ""
+		for _, c := range prod[1:] {
+			if len(c) == 1 && strings.Contains("WUBRGC", c) {
+				set += c
+			} else {
+				set = anyColour
+				break
+			}
+		}
+		if set == "" {
+			set = anyColour
+		}
+		one = [][]byte{[]byte(set)}
+	default:
+		for _, c := range prod {
+			if len(c) == 1 && strings.Contains("WUBRGC", c) {
+				one = append(one, []byte(c))
+			} else {
+				one = append(one, []byte(anyColour))
+			}
+		}
+	}
+	n := 1
+	if a := sa.Params["Amount"]; a != "" {
+		if v, err := strconv.Atoi(a); err == nil && v > 0 {
+			n = v
+		} else {
+			n = 2 // computed amount (X, a count): at least a pair
+		}
+	}
+	var out [][]byte
+	for ; n > 0; n-- {
+		out = append(out, one...)
+	}
+	return out
 }
 
 // kickerCost returns the card's Kicker cost ("R", "1 U"), or "".
@@ -1243,6 +1513,7 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 		if r := attach(s, len(s.Targets) > 0); r != nil {
 			return nil, r
 		}
+		em.noteEntered(a)
 		if (a.kind == "cast" || a.kind == "play") && t.isCopyCard(a.card) {
 			if !t.isPermanentCard(a.card) {
 				t.markCopied(a, "") // a spell's copies are tokens
@@ -1766,6 +2037,12 @@ func (t *translator) isPermanentCard(name string) bool {
 		}
 	}
 	return true
+}
+
+// isCreatureCard reports whether the named card's front face is a creature.
+func (t *translator) isCreatureCard(name string) bool {
+	c, ok := t.lookup(name)
+	return ok && len(c.Faces) > 0 && c.Faces[0] != nil && c.Faces[0].IsCreature()
 }
 
 // saCopies reports whether activating sa makes a permanent copy.
