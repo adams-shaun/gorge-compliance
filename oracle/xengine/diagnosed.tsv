@@ -1,1 +1,2 @@
 kind	set	card	field	wrong	cr	evidence	upstream	ticket
+diverge	FDN	Bulk Up	p0.exile	harness	702.34a	FDN-s107 xe:RAND:1:4:w13: the driver queues waitStackResolved:1 on the active seat for p1's step-8 resolving pass, but p1's queued flashback Think Twice (full item step 14) fires first; the step-8 xmage snapshot still holds Think Twice+Bulk Up on the stack with p0.exile [], so Bulk Up never resolves and is never exiled. Gorge follows CR 702.34a. The cut repro input omits step 14 and cannot reproduce it; replay the full xitems.jsonl item.		agent-20261117T094201Z-7bc15aff
