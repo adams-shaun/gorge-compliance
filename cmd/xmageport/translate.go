@@ -349,6 +349,7 @@ type result struct {
 	ReplayDiff                 string // live game vs log-only replay (audit gate); non-empty => fail-replay
 	Status                     string // refused | pass | fail-harness | fail-replay | fail-expect
 	Dropped                    int
+	nflips                     int            // booleans the run mapped onto two-option asks (runResult)
 	Unsupported                string         // "Card[prim,...]; ..." for cards gorge's coverage gate does not support
 	Strict                     bool           // setStrictChooseMode(true)
 	XAnswers                   map[int][]xans // final step index -> original XMage choices

@@ -58,8 +58,9 @@ func TestCheckPlayableAbilityEmitsOffered(t *testing.T) {
 		t.Errorf("second offered = %+v, want p0 cast Karn, Silver Golem (p0:Karn, Silver Golem)", second)
 	}
 	// the expect must ride the check's own clock: the first at the initial
-	// 1/main1 priority decision (no pass of the checking seat's priority
-	// before it), the second at turn 1 main2.
+	// 1/main1 priority decision (the setup anchor, then the mana step that
+	// floats the cast's cost so gorge offers it -- no pass of the checking
+	// seat's priority before it), the second at turn 1 main2.
 	var carriers []*step
 	for _, st := range res.Scenario.Steps {
 		for _, x := range st.Expect {
@@ -71,11 +72,14 @@ func TestCheckPlayableAbilityEmitsOffered(t *testing.T) {
 	if len(carriers) != 2 {
 		t.Fatalf("got %d carrier steps, want 2", len(carriers))
 	}
-	if c := carriers[0]; c.Op != "pass_to" || c.Decision != "priority" || c.Step != "" {
-		t.Errorf("first check rides %+v, want the setup pass_to decision=priority anchor", *c)
+	if c := carriers[0]; c.Op != "mana" || c.Mana != "R" {
+		t.Errorf("first check rides %+v, want the mana step floating Lightning Bolt's R", *c)
 	}
-	if res.Scenario.Steps[0] != carriers[0] {
-		t.Errorf("a step precedes the first check at the initial clock: %+v", *res.Scenario.Steps[0])
+	if a := res.Scenario.Steps[0]; a.Op != "pass_to" || a.Decision != "priority" || a.Step != "" || len(a.Expect) != 0 {
+		t.Errorf("first step %+v, want the bare setup pass_to decision=priority anchor", *a)
+	}
+	if res.Scenario.Steps[1] != carriers[0] {
+		t.Errorf("a step sits between the anchor and the first check: %+v", *res.Scenario.Steps[1])
 	}
 	for _, st := range res.Scenario.Steps {
 		if st == carriers[1] {

@@ -181,3 +181,24 @@ func TestMergedPickRetriesKinds(t *testing.T) {
 		t.Fatalf("merged answer kinds %v lack modes", ks)
 	}
 }
+
+// Anrakyr's tests answer "use the ability" and "pay life instead of mana" with
+// two setChoice(true); gorge never asks the second. The unconsumed answer is
+// the LATER yes (the runner consumes a group in order): moving the first one
+// instead put the later name picks in front of the trigger's own ask.
+func TestTakeLeftoversMovesTheLaterDuplicatePick(t *testing.T) {
+	yes := answer{Kind: "any", Pick: []string{"yes"}}
+	g := &group{answers: []answer{yes, {Kind: "any", Pick: []string{"p0:Cryptek"}}, yes, {Kind: "any", Pick: []string{"p0:Lesser Masticore"}}},
+		kinds: []int{0, 0, 0, 0}}
+	left := takeLeftovers(g, `step 1 (pass_to): unconsumed answer(s) for this step: [{"kind":"any","pick":["yes"],"seat":0}]`)
+	if left == nil || len(left.answers) != 1 || left.answers[0].Pick[0] != "yes" {
+		t.Fatalf("left = %+v", left)
+	}
+	var picks []string
+	for _, a := range g.answers {
+		picks = append(picks, a.Pick[0])
+	}
+	if want := []string{"yes", "p0:Cryptek", "p0:Lesser Masticore"}; !reflect.DeepEqual(picks, want) || len(g.kinds) != 3 {
+		t.Fatalf("group keeps %v (kinds %v), want %v", picks, g.kinds, want)
+	}
+}

@@ -759,6 +759,32 @@ func (t *translator) copyOnlyRef(p int, n string) string {
 
 // assertRef maps an asserted card name to a ref: tokens by controller, cards
 // by the asserting player's objects first, then the other seat's.
+// castTurns counts the distinct turns seat p casts a card named name on.
+func (t *translator) castTurns(p int, name string) int {
+	turns := map[int]bool{}
+	for _, a := range t.actions {
+		if a.kind == "cast" && a.seat == p && sameName(a.card, name) {
+			turns[a.turn] = true
+		}
+	}
+	return len(turns)
+}
+
+// allOffBattlefield reports whether every setup placement of name for seat p
+// is outside the battlefield.
+func (t *translator) allOffBattlefield(p int, name string) bool {
+	n := 0
+	for _, pl := range t.places[p] {
+		if sameName(pl.name, name) {
+			if pl.zone == "battlefield" {
+				return false
+			}
+			n++
+		}
+	}
+	return n > 0
+}
+
 func (t *translator) assertRef(p int, name string) (string, *refusal) {
 	n, r := xmageName(name)
 	if r != nil {
@@ -774,6 +800,12 @@ func (t *translator) assertRef(p int, name string) (string, *refusal) {
 		if rs := t.anyRefs(p, n); len(rs) > 0 {
 			if r := t.copyOnlyRef(p, n); r != "" {
 				return r, nil
+			}
+			if t.allOffBattlefield(p, n) && len(rs) > 1 && t.castTurns(p, n) > 1 {
+				// two copies waiting in hand/graveyard: XMage's assert binds
+				// whichever copy ends up on the battlefield (copies cast on
+				// different turns diverge), which a ref cannot name
+				return "", refuse("duplicate-name-assert", "%d copies of %s are cast or played during the method", len(rs), n)
 			}
 			return rs[0], nil
 		}
@@ -1404,6 +1436,55 @@ func (em *emitter) hasOptionalCost(name string) bool {
 	return false
 }
 
+// hasKeywordPrefix reports whether a face of the card carries a keyword
+// starting with prefix ("Offspring:2").
+func (em *emitter) hasKeywordPrefix(name, prefix string) bool {
+	c, ok := em.t.lookup(name)
+	if !ok {
+		return false
+	}
+	for _, f := range c.Faces {
+		if f == nil {
+			continue
+		}
+		for _, k := range f.Keywords {
+			if strings.HasPrefix(k, prefix) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// activatedAltCost names a setup battlefield card whose static lets a player
+// pay an alternative cost for an activated ability (Bruenor Battlehammer's
+// {0} equip), or "".
+func (t *translator) activatedAltCost() string {
+	for p := 0; p < 2; p++ {
+		for _, ac := range t.setup[p] {
+			if ac.zone != "battlefield" {
+				continue
+			}
+			c, ok := t.lookup(ac.name)
+			if !ok {
+				continue
+			}
+			for _, f := range c.Faces {
+				if f == nil {
+					continue
+				}
+				for i := range f.Statics {
+					st := &f.Statics[i]
+					if st.Mode == "AlternativeCost" && strings.Contains(st.Params["ValidSA"], "Activated") {
+						return ac.name
+					}
+				}
+			}
+		}
+	}
+	return ""
+}
+
 // kickerCost returns the card's Kicker cost ("R", "1 U"), or "".
 func (em *emitter) kickerCost(name string) string {
 	c, ok := em.t.lookup(name)
@@ -1439,6 +1520,20 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			return nil
 		}
 		g = &group{at: len(em.steps) - 1}
+		modes := 0
+		for _, ch := range a.choices {
+			if ch.mode > 0 {
+				modes++
+			}
+			if a.kind == "activate" && modes == 0 && (ch.pick == "yes" || ch.pick == "no") && !ch.target && ch.x < 0 && t.activatedAltCost() != "" {
+				return refuse("alt-cost-activation-choice", "%s's alternative cost is elected by a boolean", t.activatedAltCost())
+			}
+		}
+		if modes > 1 {
+			// XMage answers a charm with repeatable modes one setModeChoice
+			// per pick; gorge asks it once with a multi-pick
+			return refuse("multi-mode-choice", "%d setModeChoice calls on %s", modes, a.card)
+		}
 		for _, ch := range a.choices {
 			seat := ch.seat
 			if ch.x >= 0 && a.kind != "cast" && a.kind != "activate" {
@@ -1514,6 +1609,14 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 		}
 		s := &step{Op: a.kind, Seat: a.seat, Card: ref}
 		if a.kind == "cast" {
+			if len(a.choices) > 0 && !a.choices[0].target && a.choices[0].x < 0 && a.choices[0].mode == 0 &&
+				a.choices[0].pick != "yes" && a.choices[0].pick != "no" && em.hasOptionalCost(a.card) {
+				// the optional cost's payment is a card (Redemptor
+				// Dreadnought exiles one from the graveyard): the cast needs
+				// cast_mode optionalcost AND that pick as an answer, where a
+				// yes/no election is consumed below
+				return nil, refuse("optional-cost-pick", "%s: %s", a.card, a.choices[0].pick)
+			}
 			m, r := em.castMana(a.seat, a.card, takeX(a))
 			if r != nil {
 				return nil, r
@@ -1543,6 +1646,41 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 					s.CastMode = "optionalcost"
 				}
 				a.choices = a.choices[1:]
+			}
+			if len(a.choices) > 0 && !a.choices[0].target && a.choices[0].x < 0 && a.choices[0].mode == 0 {
+				switch p := a.choices[0].pick; {
+				case p == "yes" && em.hasKeywordPrefix(a.card, "Offspring"):
+					// paying for offspring is a cast option in gorge
+					return nil, refuse("offspring-choice", "%s", a.card)
+				case p == "no" && em.hasKeywordPrefix(a.card, "Offspring"):
+					// "Offspring?" declined: the plain cast gorge offers
+					a.choices = a.choices[1:]
+				case strings.HasPrefix(p, "name:Cast with alternative cost"):
+					// XMage's pick of a MayPlay alternative cost (Demon of
+					// Fates' Design: "Pay 3 life"); gorge offers it as its
+					// own cast option and the step pays no mana
+					s.CastMode, s.Mana = "alternative", ""
+					a.choices = a.choices[1:]
+				}
+			}
+			if len(a.targets) == 0 {
+				// no explicit target: XMage serves the spell's targets and
+				// its triggers' targets from one addTarget queue in the order
+				// it asks them, which the runner (placing by step) cannot
+				// reproduce
+				n, seats, interleaved := 0, map[int]bool{}, false
+				for i, ch := range a.choices {
+					if ch.target {
+						n++
+						seats[ch.seat] = true
+						if i > 0 && !a.choices[i-1].target && n >= 2 {
+							interleaved = true
+						}
+					}
+				}
+				if n >= 2 && (len(seats) >= 2 || interleaved) {
+					return nil, refuse("target-queue-order", "%s: %d addTarget calls and no explicit target", a.card, n)
+				}
 			}
 			for _, x := range a.targets {
 				tr, r := t.targetRef(x)
@@ -1712,6 +1850,19 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			// the offered check reads the priority holder, so the expect
 			// must ride a step that leaves the checking seat on priority.
 			em.priorityTo(a.seat)
+		}
+		if a.playCheck != nil && a.playCheck.want && len(xs) == 1 && xs[0].Offered != nil && xs[0].Offered.Kind == "cast" {
+			// gorge lists a cast option only while the pool already holds its
+			// cost, and the runner has no land-tapping autopay: XMage's
+			// checkPlayableAbility counts the lands, so float the cost on the
+			// step that carries the offered expect.
+			m, r := em.castMana(a.seat, refName(xs[0].Offered.Card), 0)
+			if r != nil {
+				return nil, refuse("playable-check", "cost of %s: %s", xs[0].Offered.Card, r.Detail)
+			}
+			if m != "" {
+				em.add(&step{Op: "mana", Seat: a.seat, Mana: m})
+			}
 		}
 		last := em.steps[len(em.steps)-1]
 		last.Expect = append(last.Expect, xs...)
@@ -2214,11 +2365,24 @@ func (t *translator) manaSideEffects(steps []*step) *refusal {
 						return refuse("mana-payment", "%s triggers on mana", ac.name)
 					}
 				}
+				for i := range f.Statics {
+					st := &f.Statics[i]
+					if st.Mode == "RaiseCost" && strings.Contains(st.Params["ValidSpell"], "Activated.ManaAbility") {
+						// Thran Portal: its mana abilities cost 1 life, paid
+						// by tapping it, which the pool never does
+						return refuse("mana-ability-cost", "%s taxes its own mana abilities", ac.name)
+					}
+					if strings.Contains(st.Params["AddKeyword"], "PayLifeInsteadOf") {
+						// K'rrik: XMage's choice to pay life for {B}
+						return refuse("pay-life-instead-of-mana", "%s lets life pay for mana", ac.name)
+					}
+				}
 				if ac.zone != "battlefield" {
 					continue
 				}
 				for _, sa := range f.Abilities {
-					if sa != nil && sa.API == "Mana" && sa.Sub != nil {
+					if sa != nil && sa.API == "Mana" && (sa.Sub != nil || sa.ParamStr(cards.PKTriggersWhenSpent) != "") {
+						// a sub-ability, or "when you spend this mana ..."
 						return refuse("mana-payment", "%s's mana ability does more", ac.name)
 					}
 				}

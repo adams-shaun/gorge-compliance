@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"regexp"
 	"runtime"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -182,6 +183,80 @@ func answerKinds(a answer) []string {
 	return []string{"any", "choose", "modes", "replacement", "trigger_order"}
 }
 
+// splitUnaskedTail moves g.answers[i:] to a new group at step n+1 (or drops
+// them when n is the last step), leaving the answers a decision already
+// consumed where they are. Moving the whole group instead would unplace the
+// consumed answers too.
+func splitUnaskedTail(r *result, g *group, i, n, steps int) bool {
+	if i <= 0 || i >= len(g.answers) {
+		return false
+	}
+	tail := &group{answers: append([]answer(nil), g.answers[i:]...), kinds: make([]int, len(g.answers)-i), at: n + 1}
+	g.answers, g.kinds = g.answers[:i:i], g.kinds[:i:i]
+	if n+1 < steps {
+		r.Groups = append(r.Groups, tail)
+	} else {
+		r.Dropped += len(tail.answers)
+	}
+	return true
+}
+
+// refBareName strips a runner ref ("p0:Llanowar Elves#2") to its card name;
+// ok is false for anything that is not a ref.
+func refBareName(pick string) (string, bool) {
+	i := strings.IndexByte(pick, ':')
+	if i != 2 || pick[0] != 'p' || (pick[1] != '0' && pick[1] != '1') {
+		return "", false
+	}
+	n := pick[i+1:]
+	if j := strings.LastIndexByte(n, '#'); j >= 0 && allDigits(n[j+1:]) {
+		n = n[:j]
+	}
+	return n, true
+}
+
+// rewriteOfferedLabel fixes an answer gorge reports as not offered for kind
+// because XMage names a card where the ask labels it differently:
+//
+//   - a card REF ("p0:Llanowar Elves") against an ask whose options carry the
+//     bare card name ("choose a card name", a hidden pick from the library):
+//     the pick becomes that label;
+//   - a card pick against an optional ask's leading Yes/No pair ("you may put
+//     a creature card from among them"): XMage states only the card, so the
+//     "Yes" that opens the optional is inserted before it.
+//
+// It reports whether it changed g.
+func rewriteOfferedLabel(g *group, i int, kind string, opts []dumpOption) bool {
+	a := g.answers[i]
+	name, ok := refBareName(a.Pick[0])
+	if !ok || len(opts) == 0 {
+		return false
+	}
+	for _, o := range opts {
+		if strings.EqualFold(o.Label, name) {
+			g.answers[i] = answer{Kind: kind, Pick: []string{o.Label}, Seat: a.Seat}
+			return true
+		}
+	}
+	if len(opts) == 2 {
+		yes, no := -1, -1
+		for j, o := range opts {
+			switch strings.ToLower(o.Label) {
+			case "yes":
+				yes = j
+			case "no":
+				no = j
+			}
+		}
+		if yes >= 0 && no >= 0 {
+			g.answers = append(g.answers[:i:i], append([]answer{{Kind: kind, Pick: []string{opts[yes].Label}, Seat: a.Seat}}, g.answers[i:]...)...)
+			g.kinds = append(g.kinds[:i:i], append([]int{0}, g.kinds[i:]...)...)
+			return true
+		}
+	}
+	return false
+}
+
 func (g *group) placed() []answer {
 	out := make([]answer, len(g.answers))
 	for i, a := range g.answers {
@@ -217,7 +292,13 @@ func takeLeftovers(g *group, line string) *group {
 			return nil
 		}
 		for _, l := range left {
-			for j, a := range g.answers {
+			// The runner consumes a group's answers in order, so of several
+			// answers with one pick (XMage's two setChoice(true): "use the
+			// ability", then "pay life instead of mana") the LATER one is the
+			// one left over; taking the first would move an answer a decision
+			// already consumed and leave the unconsumed one in place.
+			for j := len(g.answers) - 1; j >= 0; j-- {
+				a := g.answers[j]
 				if len(a.Pick) > 0 && len(l.Pick) > 0 && a.Pick[0] == l.Pick[0] {
 					out.answers = append(out.answers, a)
 					out.kinds = append(out.kinds, 0)
@@ -248,13 +329,49 @@ func takeLeftovers(g *group, line string) *group {
 	return out
 }
 
+// runResult plays r once, then -- when the run still fails an assert and
+// mapped booleans onto two-option asks -- replays it with each inversion of
+// up to three of those mappings (XMage's true is the first option only by
+// convention), keeping the first run that reproduces every XMage assert.
 func runResult(reg *cards.Registry, r *result) {
+	orig, sc0 := cloneGroups(r.Groups), r.Scenario
+	runResultMask(reg, r, 0)
+	if r.Status != "fail-expect" || r.nflips == 0 || r.nflips > 3 {
+		return
+	}
+	for mask := uint(1); mask < 1<<uint(r.nflips); mask++ {
+		r2 := *r
+		r2.Groups, r2.Scenario, r2.Dropped, r2.nflips = cloneGroups(orig), sc0, 0, 0
+		runResultMask(reg, &r2, mask)
+		if r2.Status == "pass" {
+			*r = r2
+			r.Scenario.Why += " A boolean XMage answers is the affirmative option of a two-option gorge ask that is listed second."
+			return
+		}
+	}
+}
+
+func cloneGroups(gs []*group) []*group {
+	out := make([]*group, len(gs))
+	for i, g := range gs {
+		c := *g
+		c.targets = append([]string(nil), g.targets...)
+		c.answers = append([]answer(nil), g.answers...)
+		c.kinds = append([]int(nil), g.kinds...)
+		c.xvals = append([]xans(nil), g.xvals...)
+		out[i] = &c
+	}
+	return out
+}
+
+func runResultMask(reg *cards.Registry, r *result, mask uint) {
 	sc := r.Scenario
 	for _, g := range r.Groups {
 		g.kinds = make([]int, len(g.answers))
 	}
 	var fails, transcript []string
 	var replayDiff string
+	flips := &boolFlips{mask: mask}
 	for iter := 0; iter < 40; iter++ {
 		cur := materialize(sc, r.Groups)
 		f, tr, rd, err := runOne(reg, cur)
@@ -300,7 +417,7 @@ func runResult(reg *cards.Registry, r *result) {
 			if len(boolLeftovers(line)) > 0 {
 				// an XMage boolean gorge asks as a two-option choose or
 				// modes: place it as that ask's option, not as "yes"/"no"
-				if mapBoolLeftover(reg, cur, at, n, asks[n]) {
+				if mapBoolLeftover(reg, cur, at, n, asks[n], flips) {
 					progress = true
 					continue
 				}
@@ -322,6 +439,10 @@ func runResult(reg *cards.Registry, r *result) {
 						if done || a.Pick[0] != nm[1] {
 							continue
 						}
+						if rewriteOfferedLabel(g, i, nm[2], parseOptionDump(line)) {
+							progress, done = true, true
+							continue
+						}
 						ks := answerKinds(a)
 						k := g.kinds[i] + 1
 						for k < len(ks) && ks[k] == nm[2] {
@@ -329,6 +450,11 @@ func runResult(reg *cards.Registry, r *result) {
 						}
 						if k < len(ks) {
 							g.kinds[i] = k
+							progress = true
+						} else if i > 0 && splitUnaskedTail(r, g, i, n, len(sc.Steps)) {
+							// the answers before i were consumed (the runner
+							// takes a group in order): only i and what follows
+							// is unasked at this step, so only that moves on
 							progress = true
 						} else if !bump(g) && g.tail {
 							// a choice of a method with no action that no
@@ -371,6 +497,35 @@ func runResult(reg *cards.Registry, r *result) {
 				}
 			}
 		}
+		if !progress && len(f) > 0 {
+			// An unless-cost GenericChoice's two modes asks: the boolean is
+			// consumed by the first (by a substring of its text), so no
+			// placement failure names it -- only the second ask falls back.
+			ma := modesAsks(tr)
+			steps := make([]int, 0, len(ma))
+			for n := range ma {
+				steps = append(steps, n)
+			}
+			sort.Ints(steps)
+		chain:
+			for _, n := range steps {
+				var at []*group
+				for _, g := range r.Groups {
+					if g.at+g.offset == n {
+						at = append(at, g)
+					}
+				}
+				if len(at) == 0 || n >= len(sc.Steps) {
+					continue
+				}
+				for _, seat := range ma[n] {
+					if mapUnlessChain(reg, cur, at, n, seat) {
+						progress = true
+						break chain
+					}
+				}
+			}
+		}
 		if !progress {
 			break
 		}
@@ -385,6 +540,7 @@ func runResult(reg *cards.Registry, r *result) {
 	r.Scenario = final
 	r.Groups = nil
 	r.Fails = fails
+	r.nflips = flips.seq
 	if r.Dropped > 0 {
 		r.Scenario.Why += fmt.Sprintf(" %d XMage choice(s) gorge never asks were dropped.", r.Dropped)
 	}
