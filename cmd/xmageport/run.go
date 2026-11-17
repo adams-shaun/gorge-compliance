@@ -393,6 +393,14 @@ func runResult(reg *cards.Registry, r *result) {
 		// test does not state; the runner's fallback is not that AI, so
 		// the failure says nothing about gorge -- unless triage traced it
 		// to a gorge bug (known_bugs.tsv), which keeps it as a known_bug.
+		if alt, why, ok := tryFallbackAlternatives(reg, r.Scenario, transcript); ok {
+			// another answer to that one decision reproduces every XMage
+			// assert: keep it, written down on the fallback's step
+			r.Scenario = alt
+			r.Scenario.Why += why
+			r.Fails, r.ReplayDiff, r.Status = nil, "", "pass"
+			return
+		}
 		r.Code, r.Detail, r.Status = "nonstrict-ai-choice", "unstated "+k+" answered by the runner's fallback", "refused"
 		r.Scenario = nil
 		return
