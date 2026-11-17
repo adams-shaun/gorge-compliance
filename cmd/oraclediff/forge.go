@@ -201,6 +201,7 @@ func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 	decisions = forgeDropNamedManaAbilityDecisions(reg, it, g, forgeDropDeclarationDecisions(it, decisions))
 	decisions = forgeExploreAsYesNo(decisions)
 	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, decisions)
+	decisions = forgeGraveyardOrderDecisions(it, g, decisions)
 	it = forgeDeclarations(it)
 	return forgeRequest{
 		ID: it.ID, ScenarioSHA: sha, Item: it,
