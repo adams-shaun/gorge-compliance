@@ -147,3 +147,74 @@ func TestCountByAnAnimatedNameRefusesOnlyWhenItFails(t *testing.T) {
 		t.Fatalf("status %s code %q (%v), want the fail-expect of a count that read 2", res.Status, res.Code, res.Fails)
 	}
 }
+
+// A token's name is not a card, but the runner can count it: a failing count
+// by "Banana" (a token script) must stay fail-expect, not be refused as a
+// renamed permanent.
+func TestCountByATokenNameKeepsItsFailingExpect(t *testing.T) {
+	res := translateBody(t, `addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertPermanentCount(playerA, "Banana", 1);`)
+	if res.Scenario == nil {
+		t.Fatalf("refused early %s: %s", res.Code, res.Detail)
+	}
+	runResult(testutilRegistry(t), res)
+	if res.Status != "fail-expect" || res.Code != "" {
+		t.Fatalf("status %s code %q (%v), want the fail-expect of a missing token", res.Status, res.Code, res.Fails)
+	}
+}
+
+// The runner counts by substring of the printed name, so "Avacyn" can count
+// "Avacyn, Angel of Hope". A failing partial-card count (the Angel was exiled,
+// so the count reads 0) must stay fail-expect rather than be refused as a name
+// no card has.
+func TestCountByAPartialCardNameKeepsItsFailingExpect(t *testing.T) {
+	res := translateBody(t, `addCard(Zone.BATTLEFIELD, playerA, "Avacyn, Angel of Hope");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Swords to Plowshares");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swords to Plowshares", "Avacyn, Angel of Hope");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertPermanentCount(playerA, "Avacyn", 1);`)
+	if res.Scenario == nil {
+		t.Fatalf("refused early %s: %s", res.Code, res.Detail)
+	}
+	runResult(testutilRegistry(t), res)
+	if res.Status != "fail-expect" || res.Code != "" {
+		t.Fatalf("status %s code %q (%v), want the fail-expect of a missing partial name", res.Status, res.Code, res.Fails)
+	}
+	// a permanent card in hand can be cast onto the battlefield, so the same
+	// partial name is expressible there too even before it is played
+	res = translateBody(t, `addCard(Zone.HAND, playerA, "Avacyn, Angel of Hope");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertPermanentCount(playerA, "Avacyn", 1);`)
+	if res.Scenario == nil {
+		t.Fatalf("refused a permanent in hand %s: %s", res.Code, res.Detail)
+	}
+	runResult(testutilRegistry(t), res)
+	if res.Status != "fail-expect" || res.Code != "" {
+		t.Fatalf("status %s code %q (%v), want the fail-expect of a permanent still in hand", res.Status, res.Code, res.Fails)
+	}
+}
+
+// "Afterlife" is both a triggered keyword and a card. A setChoice naming a
+// card the scenario sets up is an answer, not an order of simultaneous
+// triggers, so it must survive the trigger-order drop; a bare keyword with no
+// such card in the setup is still dropped.
+func TestKeywordNamedChoiceForCardInHandIsKept(t *testing.T) {
+	tr := &translator{setup: [2][]addCardCall{0: {{zone: "hand", name: "Afterlife", count: 1}}}}
+	tr.choiceList = []choice{
+		{pick: "name:Afterlife"},
+		{pick: "name:Evolve"},
+		{pick: "name:Afterlife 1"},
+	}
+	tr.dropTriggerOrderChoices()
+	if len(tr.choiceList) != 1 || tr.choiceList[0].pick != "name:Afterlife" {
+		t.Fatalf("choiceList = %+v, want only the card the setup names", tr.choiceList)
+	}
+	if tr.droppedOrder != 2 {
+		t.Fatalf("dropped %d choices (%v), want 2 trigger orders", tr.droppedOrder, tr.droppedOrderTexts)
+	}
+}

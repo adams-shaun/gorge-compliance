@@ -65,7 +65,7 @@
     }
    ],
    "xmage": "NivmagusElementalTest#testNivmagusElemental",
-   "known_bug": "XP[exilefromstack-spell-cost-unpaid]: Nivmagus Elemental's Cost$ ExileFromStack\u003c1/Spell.Instant+YouCtrl;Spell.Sorcery+YouCtrl/...\u003e is not a cost gorge pays: the activation is offered and resolves with the cost unpaid (cost.ParseCost reads only ExileFromStack\u003c1/Card.Self\u003e, in parseUnlessSpecialCost) (two +1/+1 counters) while the Lightning Bolt it should exile stays on the stack and resolves (p1 life 17, want 20; exile count 0, want 1), CR 601.2h, 118.3, verified at gorge c3b957bf36."
+   "known_bug": "XP[exilefromstack-spell-cost-unpaid]: Nivmagus Elemental's Cost$ ExileFromStack\u003c1/Spell.Instant+YouCtrl;Spell.Sorcery+YouCtrl/...\u003e is not a cost gorge pays: the activation is offered and resolves (two +1/+1 counters) with the cost unpaid, while the Lightning Bolt it should exile stays on the stack and resolves (p1 life 17, want 20; exile count 0, want 1); cost.ParseCost reads only ExileFromStack\u003c1/Card.Self\u003e (parseUnlessSpecialCost), CR 601.2h, 118.3, verified at gorge c3b957bf36."
   }
  ]
 }

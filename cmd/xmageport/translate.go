@@ -241,18 +241,62 @@ var triggeredKeywords = map[string]bool{
 	"Training": true, "Undying": true,
 }
 
-// isTriggerOrderChoice reports whether a setChoice string orders simultaneous
-// triggers: rule text starting "When ...", or the name of a triggered keyword
-// ("Afterlife", or "Afterlife 1") that no card shares.
-func isTriggerOrderChoice(s string) bool {
-	if isTriggerOrderText(s) {
-		return true
-	}
+// triggeredKeywordName returns the triggered keyword a string names, if any:
+// "Afterlife", or "Afterlife 1" with a count.
+func triggeredKeywordName(s string) string {
 	kw := strings.TrimSpace(s)
 	if i := strings.LastIndexByte(kw, ' '); i > 0 && allDigits(kw[i+1:]) {
 		kw = kw[:i]
 	}
-	return triggeredKeywords[kw]
+	if triggeredKeywords[kw] {
+		return kw
+	}
+	return ""
+}
+
+// isTriggerOrderChoice reports whether a setChoice string names a triggered
+// keyword ("Afterlife", or "Afterlife 1"), which orders simultaneous triggers.
+// Several of those keyword names are also card names (Afterlife, Afflict,
+// Melee, Persist...), and XMage's corpus has tests that name such a card as an
+// answer, so the keyword form counts only when the scenario does not set up a
+// card of exactly that name. Rule text is decided by isTriggerOrderText before
+// the setup is known.
+func (t *translator) isTriggerOrderChoice(s string) bool {
+	return triggeredKeywordName(s) != "" && !t.setupHasName(s)
+}
+
+// setupHasName reports whether either seat's addCard setup names a card
+// exactly name. The trigger-order drop uses it: "Afterlife" is both a keyword
+// and a card, so a scenario that sets the card up may name it as an answer.
+func (t *translator) setupHasName(name string) bool {
+	for p := 0; p < 2; p++ {
+		for _, ac := range t.setup[p] {
+			if sameName(ac.name, name) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// dropTriggerOrderChoices removes the setChoice strings that order
+// simultaneous triggers. It runs after read() has seen every addCard, because
+// whether a keyword-named choice is a trigger order depends on the scenario's
+// own setup (a card named Afterlife in hand is an answer, not an order).
+func (t *translator) dropTriggerOrderChoices() {
+	kept := t.choiceList[:0]
+	for _, ch := range t.choiceList {
+		name, ok := strings.CutPrefix(ch.pick, "name:")
+		if !ok || ch.target || !t.isTriggerOrderChoice(name) {
+			kept = append(kept, ch)
+			continue
+		}
+		// gorge's runner keeps the offered order. Dropped (the asserts still
+		// judge the outcome) and noted in why.
+		t.droppedOrder++
+		t.droppedOrderTexts = append(t.droppedOrderTexts, name)
+	}
+	t.choiceList = kept
 }
 
 func isTriggerOrderText(s string) bool {
@@ -673,6 +717,7 @@ func (t *translator) read() *refusal {
 		return r
 	}
 	t.addAIAnswers()
+	t.dropTriggerOrderChoices()
 	t.assignChoices()
 	if t.orphanMode {
 		return refuse("mode-choice", "setModeChoice with no cast to consume it")
@@ -1231,7 +1276,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		}
 		ch.target = c.Name == "addTarget"
 		ch.seat, ch.src = p0(c.Args[0]), idx
-		if !ch.target && isTriggerOrderChoice(strings.TrimPrefix(ch.pick, "name:")) {
+		if !ch.target && isTriggerOrderText(strings.TrimPrefix(ch.pick, "name:")) {
 			// XMage orders simultaneous triggers by rule text; gorge's
 			// runner keeps the offered order. Dropped (the asserts still
 			// judge the outcome) and noted in why.

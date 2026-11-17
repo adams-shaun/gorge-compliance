@@ -908,13 +908,14 @@ func countExpect(p int, zone, name string, n int) (*expect, *refusal) {
 }
 
 // countNameRefusal is the shape refusal of a positive count asserted by a name
-// no card has: a permanent an effect renamed (Awakening of Vitu-Ghazi turns a
-// land into "Vitu-Ghazi"). The scenario's count matches the printed face
-// name, which the rename does not change, so it reads 0 whatever gorge did.
-// It is a shape, not a hard refusal: the name may be a token's (Banana) or a
-// part of a card's (Avacyn) and a count that holds then stays covered, so the
-// row refuses only when the run fails the count. A count of 0 is vacuous.
-func (t *translator) countNameRefusal(name string, want int) *refusal {
+// no object can carry: a permanent an effect renamed (Awakening of Vitu-Ghazi
+// turns a land into "Vitu-Ghazi"). The scenario's count matches the printed
+// face name, which the rename does not change, so it reads 0 whatever gorge
+// did. It is a shape, not a hard refusal: the name may be a token's (Banana)
+// or part of a card's (Avacyn for "Avacyn, Angel of Hope") and a count that
+// holds then stays covered, so the row refuses only when the run fails a count
+// no scenario object could satisfy. A count of 0 is vacuous.
+func (t *translator) countNameRefusal(p int, zone, name string, want int) *refusal {
 	n, r := xmageName(name)
 	if r != nil || n == "" || want == 0 {
 		// a count of 0 by a name nothing bears holds whatever gorge did
@@ -924,6 +925,9 @@ func (t *translator) countNameRefusal(name string, want int) *refusal {
 		return nil
 	}
 	if _, ok := t.lookup(n); ok {
+		return nil
+	}
+	if t.countNameExpressible(p, zone, n) {
 		return nil
 	}
 	sh := refuse("count-name-not-a-card", "%q is not a card name (a renamed permanent?)", n)
@@ -938,6 +942,64 @@ func (t *translator) countNameRefusal(name string, want int) *refusal {
 		return false
 	}
 	return sh
+}
+
+// countNameExpressible reports whether the runner's count by name in zone for
+// seat p can match an object the scenario puts there. The runner counts an
+// object when its printed face name CONTAINS the asserted name, case
+// insensitively (engine/rules/oracle_run.go), so a partial card name like
+// "Avacyn" counts "Avacyn, Angel of Hope".
+//
+// A card set up outside the counted zone can still reach it: a permanent in
+// hand can be cast onto the battlefield, and any card can be discarded,
+// milled or exiled. So for a non-battlefield count every placement is
+// expressible, and for a battlefield count a placement is too when its card
+// can be a permanent (Awakening of Vitu-Ghazi, an instant, cannot; that is why
+// Tomik's "Vitu-Ghazi" remains the rename shape). Tokens exist only on the
+// battlefield, so a token script's printed name covers a battlefield count.
+// A renamed permanent's new name matches no card and no token, which is the
+// shape refused here.
+func (t *translator) countNameExpressible(p int, zone, name string) bool {
+	ln := strings.ToLower(name)
+	for _, pl := range t.places[p] {
+		if !strings.Contains(strings.ToLower(pl.name), ln) {
+			continue
+		}
+		if zone != "battlefield" || pl.zone == "battlefield" || t.canBePermanent(pl.name) {
+			return true
+		}
+	}
+	if zone != "battlefield" {
+		return false
+	}
+	for _, c := range t.reg.Tokens {
+		if c == nil || len(c.Faces) == 0 || c.Faces[0] == nil {
+			continue
+		}
+		if strings.Contains(strings.ToLower(c.Faces[0].Name), ln) {
+			return true
+		}
+	}
+	return false
+}
+
+// canBePermanent reports whether any face of the named card has a permanent
+// card type, so a placement of it outside the battlefield can still be counted
+// there after it is cast or put onto the battlefield.
+func (t *translator) canBePermanent(name string) bool {
+	c, ok := t.lookup(name)
+	if !ok {
+		return false
+	}
+	for _, f := range c.Faces {
+		if f == nil {
+			continue
+		}
+		if f.IsCreature() || f.IsArtifact() || f.IsEnchantment() || f.IsLand() || f.IsPlaneswalker() || f.IsBattle() {
+			return true
+		}
+	}
+	return false
 }
 
 func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
@@ -989,7 +1051,7 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 			if !ok || !ok2 || !ok3 {
 				return bad()
 			}
-			if r := t.countNameRefusal(name, n); r != nil && t.countShape == nil {
+			if r := t.countNameRefusal(p, zone, name, n); r != nil && t.countShape == nil {
 				t.countShape = r
 			}
 			e, r := countExpect(p, zone, name, n)
