@@ -119,7 +119,7 @@ func TestForgeExportDropsNamedManaAbilityChoice(t *testing.T) {
 		}
 	}
 	build := func(it oraclegen.Item, d rules.OracleDecision) []rules.OracleDecision {
-		return forgeBuildRequest(reg, it, rules.OracleResult{}, []rules.OracleDecision{d}).GorgeDecisions
+		return forgeBuildRequest(reg, it, rules.OracleResult{}, []rules.OracleDecision{d}, true).GorgeDecisions
 	}
 
 	// Turtle Lair's first ability is "{T}: Add {C}"; the wheel ask that chose
@@ -262,7 +262,7 @@ func TestForgeDropsDeclarationDecisions(t *testing.T) {
 		t.Errorf("non-xengine item lost decisions: %+v", got)
 	}
 
-	rq := forgeBuildRequest(testutil.CorpusRegistry(t), mk(lower.Template), rules.OracleResult{}, ds)
+	rq := forgeBuildRequest(testutil.CorpusRegistry(t), mk(lower.Template), rules.OracleResult{}, ds, true)
 	if !reflect.DeepEqual(rq.GorgeDecisions, want) {
 		t.Errorf("exported decisions %+v, want %+v", rq.GorgeDecisions, want)
 	}
@@ -287,7 +287,7 @@ func TestForgeExportLibrarySearchPick(t *testing.T) {
 			Name: "search", Setup: map[string]oraclegen.Seat{"p0": {
 				Battlefield: []string{"Evolving Wilds"}, LibraryTop: []string{"Forest"}}},
 			Steps: steps}}
-		rq, _ := forgeExportItem(reg, it)
+		rq, _ := forgeExportItem(reg, it, true)
 		return rq.GorgeDecisions
 	}
 	act := oraclegen.Step{Op: "activate", Seat: 0, Card: "p0:Evolving Wilds", AbilityIndex: &k}
@@ -362,7 +362,7 @@ func TestForgeExportExploreYesNo(t *testing.T) {
 			LibraryTop: []string{"Grizzly Bears", "Forest", "Forest"}}},
 		Steps: []oraclegen.Step{{Op: "cast", Seat: 0, Card: "p0:Merfolk Branchwalker", Mana: "GG"},
 			{Op: "resolve", Seat: 0}, {Op: "resolve", Seat: 0}}}}
-	rq, _ := forgeExportItem(reg, it)
+	rq, _ := forgeExportItem(reg, it, true)
 	if len(rq.GorgeDecisions) != 1 {
 		t.Fatalf("explore item: %d decisions, want 1: %+v", len(rq.GorgeDecisions), rq.GorgeDecisions)
 	}

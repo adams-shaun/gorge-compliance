@@ -162,7 +162,7 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 		if err := json.Unmarshal(b, &it); err != nil {
 			return err
 		}
-		rq, _ := forgeExportItem(reg, it)
+		rq, _ := forgeExportItem(reg, it, true)
 		line, err := json.Marshal(rq)
 		if err != nil {
 			return err
@@ -181,8 +181,12 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 
 // forgeExportItem is the request forge-export writes for one item, and
 // gorge's result for it: the item is replayed once in gorge and the request
-// built from the decisions gorge's runner made.
-func forgeExportItem(reg *cards.Registry, it oraclegen.Item) (forgeRequest, rules.OracleResult) {
+// built from the decisions gorge's runner made. graveyardOrder opts into the
+// Forge-only "graveyard_order" role; a caller whose engine queue has no
+// consumer for it (follower-export, see follower_export.go) must pass false,
+// or the unasked role becomes an unconsumed leftover. A failed gorge run has
+// no checkpoints to derive the role from, so it is never pinned.
+func forgeExportItem(reg *cards.Registry, it oraclegen.Item, graveyardOrder bool) (forgeRequest, rules.OracleResult) {
 	g, gerr := rules.RunOracleScenarioJSON(reg, it.Raw())
 	// A divided spell's shares reach the driver as a "damage_split"
 	// decision (the contract above), which gorge now announces at cast.
@@ -190,18 +194,24 @@ func forgeExportItem(reg *cards.Registry, it oraclegen.Item) (forgeRequest, rule
 	if gerr != nil || decisions == nil {
 		decisions = []rules.OracleDecision{}
 	}
-	return forgeBuildRequest(reg, it, g, decisions), g
+	return forgeBuildRequest(reg, it, g, decisions, graveyardOrder && gerr == nil), g
 }
 
 // forgeBuildRequest assembles the request for one item from gorge's decisions
 // for it: the scenario SHA names the item as given, the decisions lose those
 // for steps the driver will not pose, and the steps are then rewritten.
-func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision) forgeRequest {
+// graveyardOrder is explicit at every call site: only the Forge driver
+// consumes the role, and a new caller has to say so instead of inheriting it.
+func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision, graveyardOrder bool) forgeRequest {
 	sha := gate.ItemSHA(it)
 	decisions = forgeDropNamedManaAbilityDecisions(reg, it, g, forgeDropDeclarationDecisions(it, decisions))
 	decisions = forgeExploreAsYesNo(decisions)
 	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, decisions)
-	decisions = forgeGraveyardOrderDecisions(it, g, decisions)
+	if graveyardOrder {
+		decisions = forgeGraveyardOrderDecisions(it, g, decisions)
+	} else {
+		decisions = forgeDropGraveyardOrderDecisions(decisions)
+	}
 	it = forgeDeclarations(it)
 	return forgeRequest{
 		ID: it.ID, ScenarioSHA: sha, Item: it,

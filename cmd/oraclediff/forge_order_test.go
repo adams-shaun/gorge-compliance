@@ -1,11 +1,15 @@
 package main
 
 import (
+	"encoding/json"
+	"os"
+	"path/filepath"
 	"reflect"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
 func orderSnap(p0, p1 []string) rules.OracleSnapshot {
@@ -23,11 +27,18 @@ func orderItems(steps int) oraclegen.Item {
 	return oraclegen.Item{ID: "order", Template: "other", Scenario: oraclegen.Scenario{Steps: ss}}
 }
 
+// orderWrathItem is a cast-resolve item that puts two differently named
+// creatures into each player's graveyard in the resolving step (Wrath of God):
+// the shape the pin exists for, with no selection decision to derive it from.
+// The mana is in the cast step so the item does not depend on which lands the
+// runner taps.
+const orderWrathItem = `{"id":"Wrath of God/order/v1","card":"Wrath of God","template":"cast-resolve","name":"graveyard order","cr":["404.3"],"why":"graveyard order regression","setup":{"p0":{"battlefield":["Plains","Plains","Plains","Plains","Grizzly Bears"],"hand":["Wrath of God"]},"p1":{"battlefield":["Hill Giant","Air Elemental"]}},"steps":[{"op":"cast","seat":0,"card":"p0:Wrath of God","mana":"WWWW"},{"op":"resolve","seat":0}]}`
+
 // TestForgeGraveyardOrderDecisions: a step/seat whose checkpoints show two or
-// more differently named cards entering that graveyard at once gets one order
-// decision, in the new zone order, and a same-named pair does not (the order
-// of identical cards is unobservable). An order already present is kept, not
-// duplicated.
+// more differently named cards entering that graveyard between them gets one
+// order decision, in the new zone order, and a same-named pair does not (the
+// order of identical cards is unobservable). An order already present is kept,
+// not duplicated.
 func TestForgeGraveyardOrderDecisions(t *testing.T) {
 	it := orderItems(3)
 	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
@@ -72,21 +83,121 @@ func TestForgeGraveyardOrderNeedsFullCheckpoints(t *testing.T) {
 	}
 }
 
+// TestForgeGraveyardOrderOnePinPerStep keeps the documented approximation
+// visible: gorge's checkpoints cannot tell one simultaneous move from two in
+// the same step, so four cards entering one graveyard between two checkpoints
+// produce one pin, in the final zone order, and not one pin per event. The
+// driver's first ask consumes it; a second ask in the same step still misses.
+func TestForgeGraveyardOrderOnePinPerStep(t *testing.T) {
+	it := orderItems(1)
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		orderSnap(nil, nil),
+		orderSnap([]string{"A", "B", "C", "D"}, nil),
+	}}
+	got := forgeGraveyardOrderDecisions(it, g, nil)
+	if len(got) != 1 {
+		t.Fatalf("%d order decisions, want one per step/seat: %+v", len(got), got)
+	}
+	if !reflect.DeepEqual(got[0].Picks, []string{"A", "B", "C", "D"}) {
+		t.Errorf("picks = %v, want the whole step's zone order", got[0].Picks)
+	}
+}
+
 // TestForgeBuildRequestCarriesGraveyardOrder: the export wires the pin into
-// the request the driver reads, so orderCards can consume it.
+// the request the driver reads, so orderCards can consume it. The same builder
+// without the opt-in (the follower path) must not carry it: a phase/Manabrew
+// queue has no consumer for the role and an unasked pin is a leftover.
 func TestForgeBuildRequestCarriesGraveyardOrder(t *testing.T) {
 	it := orderItems(1)
 	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
 		orderSnap(nil, nil),
-		orderSnap(nil, []string{"Akal Pakal", "First Among Equals", "Poison Dart Frog"}),
+		orderSnap(nil, []string{"Akal Pakal, First Among Equals", "Poison Dart Frog"}),
 	}}
-	rq := forgeBuildRequest(nil, it, g, nil)
+	rq := forgeBuildRequest(nil, it, g, nil, true)
 	if len(rq.GorgeDecisions) != 1 {
 		t.Fatalf("%d decisions, want one graveyard order: %+v", len(rq.GorgeDecisions), rq.GorgeDecisions)
 	}
 	d := rq.GorgeDecisions[0]
 	if d.Kind != "order" || d.GorgeKind != "graveyard_order" || d.Step != 0 || d.Seat != 1 ||
-		!reflect.DeepEqual(d.Picks, []string{"Akal Pakal", "First Among Equals", "Poison Dart Frog"}) {
+		!reflect.DeepEqual(d.Picks, []string{"Akal Pakal, First Among Equals", "Poison Dart Frog"}) {
 		t.Errorf("request order = %+v", d)
+	}
+
+	// Without the opt-in (the follower path) the role is stripped, even one
+	// the runner itself produced, and the other decisions stay.
+	have := []rules.OracleDecision{
+		{Step: 0, Seat: 0, Kind: "order", GorgeKind: "graveyard_order", Picks: []string{"X", "Y"}},
+		{Step: 0, Seat: 0, Kind: "target"},
+	}
+	if got := forgeBuildRequest(nil, it, g, have, false); len(got.GorgeDecisions) != 1 || got.GorgeDecisions[0].Kind != "target" {
+		t.Errorf("the builder without the opt-in kept the role: %+v", got.GorgeDecisions)
+	}
+}
+
+// TestForgeGraveyardOrderReachesForgeExportOnly exports a real multi-card
+// graveyard move through both commands: forge-export carries the pin at the
+// resolving step, so the driver can answer Forge's ask, and follower-export
+// writes the same item without the role, because the follower queues have no
+// consumer for it (an unasked decision would become an unconsumed leftover
+// and classify a clean row as decision_shape).
+func TestForgeGraveyardOrderReachesForgeExportOnly(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	dir := t.TempDir()
+	scen := filepath.Join(dir, "items.jsonl")
+	if err := os.WriteFile(scen, []byte(orderWrathItem+"\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	forgeOut := filepath.Join(dir, "forge-req.jsonl")
+	if _, err := forgeExport(reg, scen, forgeOut); err != nil {
+		t.Fatal(err)
+	}
+	forgeBytes, err := os.ReadFile(forgeOut)
+	if err != nil {
+		t.Fatal(err)
+	}
+	reqs := decodeRequests(t, forgeBytes)
+	if len(reqs) != 1 {
+		t.Fatalf("%d forge requests, want 1", len(reqs))
+	}
+	want := map[[2]int][]string{
+		{1, 0}: {"Grizzly Bears", "Wrath of God"},
+		{1, 1}: {"Hill Giant", "Air Elemental"},
+	}
+	pins := 0
+	for _, d := range reqs[0].GorgeDecisions {
+		if d.GorgeKind != "graveyard_order" {
+			continue
+		}
+		pins++
+		if got, ok := want[[2]int{d.Step, d.Seat}]; !ok || !reflect.DeepEqual(d.Picks, got) {
+			t.Errorf("pin step %d seat %d picks %v, want one of %v", d.Step, d.Seat, d.Picks, want)
+		}
+	}
+	if pins != 2 {
+		t.Errorf("%d graveyard-order pins, want 2 (one per seat): %+v", pins, reqs[0].GorgeDecisions)
+	}
+
+	fl, runner := fakeFollower(t)
+	followerOut := filepath.Join(dir, "follower-req.jsonl")
+	if _, err := followerExport(reg, fl, runner, scen, followerOut); err != nil {
+		t.Fatal(err)
+	}
+	followerBytes, err := os.ReadFile(followerOut)
+	if err != nil {
+		t.Fatal(err)
+	}
+	lines := splitLines(followerBytes)
+	if len(lines) != 1 {
+		t.Fatalf("%d follower requests, want 1", len(lines))
+	}
+	var rq followerRequest
+	if err := json.Unmarshal(lines[0], &rq); err != nil {
+		t.Fatal(err)
+	}
+	for _, d := range rq.GorgeDecisions {
+		if d.GorgeKind == "graveyard_order" {
+			t.Errorf("follower-export wrote the Forge-only role: %+v", d)
+		}
 	}
 }

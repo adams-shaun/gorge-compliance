@@ -9,10 +9,11 @@ import (
 
 // forgeGraveyardOrderDecisions adds one "order" decision per step and seat
 // whose gorge checkpoints show two or more differently named cards entering
-// that seat's graveyard at once. Forge asks "order to Graveyard" separately
-// from the selection (a board wipe or mass sacrifice moves the cards together
-// and the owner arranges them, CR 404.3), and orderCards consumes the picks in
-// that order, so the driver reproduces gorge's graveyard exactly.
+// that seat's graveyard between the two checkpoints. Forge asks "order to
+// Graveyard" separately from the selection (a board wipe or mass sacrifice
+// moves the cards together and the owner arranges them, CR 404.3), and
+// orderCards consumes the picks in that order, so the driver reproduces
+// gorge's graveyard exactly.
 //
 // The decision is separate from the selection decision because that decision
 // was already consumed when the move started: a sacrifice's choose_n answers
@@ -21,6 +22,16 @@ import (
 // wipe's state-based deaths) is covered too. The role is gorge_kind
 // "graveyard_order"; DecisionQueue keeps an unasked pin out of the leftover
 // list, since an order Forge never asks about is unobservable.
+//
+// Limitation: one pin per step and seat is the finest granularity gorge's
+// checkpoints expose; they do not say which cards moved in the same event. If
+// one step contains two separate simultaneous multi-card moves, the pin lists
+// both groups in the final zone order. Forge's first "order to Graveyard" ask
+// in that step consumes the pin and orders its offered subset by it (extra
+// picks are skipped), so the second ask still has no pin and misses. That is
+// no worse than the previous unconditional miss, but it is not a pin per
+// event; splitting the delta would need event data the runner does not
+// record.
 func forgeGraveyardOrderDecisions(it oraclegen.Item, g rules.OracleResult, ds []rules.OracleDecision) []rules.OracleDecision {
 	if len(g.Snapshots) < len(it.Steps)+1 {
 		return ds
@@ -58,6 +69,22 @@ func forgeGraveyardOrderDecisions(it oraclegen.Item, g rules.OracleResult, ds []
 				Min: len(added), Max: len(added),
 			})
 		}
+	}
+	return out
+}
+
+// forgeDropGraveyardOrderDecisions removes the Forge-only role from decisions,
+// for a caller (follower-export) whose engine queue has no consumer for it.
+// It applies to the whole list, not just the pins this file adds, so a role
+// that ever reaches the decisions from the runner cannot leak either. The
+// result is non-nil so the request still encodes gorge_decisions as [].
+func forgeDropGraveyardOrderDecisions(ds []rules.OracleDecision) []rules.OracleDecision {
+	out := make([]rules.OracleDecision, 0, len(ds))
+	for _, d := range ds {
+		if d.Kind == "order" && d.GorgeKind == "graveyard_order" {
+			continue
+		}
+		out = append(out, d)
 	}
 	return out
 }
