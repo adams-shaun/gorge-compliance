@@ -27,6 +27,7 @@ import mage.abilities.effects.common.EndTurnEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.cards.Card;
+import mage.cards.CardWithSpellOption;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.DoubleFacedCard;
@@ -219,6 +220,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     60, 20, 7) {
                 @Override
                 public void start(UUID choosingPlayerId) {
+                    placeSetupCounters(this);
                     placeSetupTokens(this);
                     placeSetupAttached(this);
                     applySetupLife();
@@ -233,6 +235,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 mage.game.mulligan.MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7) {
             @Override
             public void start(UUID choosingPlayerId) {
+                placeSetupCounters(this);
                 placeSetupTokens(this);
                 placeSetupAttached(this);
                 applySetupLife();
@@ -1688,20 +1691,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
      *    loyalty activation (Found Footage's hand, Ajani's loyalty).
      *  - resolve by seat 1 waits on seat 1's queue (waitStackResolved), so a
      *    checkpoint on seat 0 would run while the spell is still on the stack.
-     *  - in a recorded run, an action of the non-active seat checkpoints on
-     *    that seat. XMage runs the whole queue of the seat that holds priority
-     *    before the opponent acts, so a checkpoint on the active seat would
-     *    run after every later action of that seat in the same turn and step
-     *    (ECL Impolite Entrance: p1's three mana activations and flash cast
-     *    were all visible at the step-10 checkpoint, though gorge cast the
-     *    flash at step 13). The actor's own queue puts its checkpoint between
-     *    its actions, holding the later one for its own step.
+     *  - in a recorded run, an action (a cast, activation or land play) of the
+     *    non-active seat checkpoints on that seat. XMage runs the whole queue
+     *    of the seat that holds priority before the opponent acts, so a
+     *    checkpoint on the active seat would run after every later action of
+     *    that seat in the same turn and step (ECL Impolite Entrance: p1's
+     *    three mana activations and flash cast were all visible at the
+     *    step-10 checkpoint, though gorge cast the flash at step 13). The
+     *    actor's own queue puts its checkpoint between its actions, holding
+     *    the later one for its own step.
      *  - a recorded pass that resolves or moves the step checkpoints on the
      *    active seat, which has priority after the resolution or at the step
      *    it reached; any other recorded pass checkpoints on the seat that
      *    passed, which still holds priority.
      *
-     * Every other op keeps seat 0, which acts last on the turn it is on.
+     * Every other op keeps seat 0, which acts last on the turn it is on. That
+     * includes the declarations: XMage makes attack and block in the step's
+     * beginStep on the declaring seat, not as a queued action of that seat, so
+     * a checkpoint on the declaring seat would run only after the active
+     * seat's next pass moved the game on. attach is likewise queued on
+     * playerA.
      */
     private TestPlayer checkpointSeat(String op, JsonObject st, int stepIdx) {
         if (op.equals("pass") && isPassRun(steps(sc0), stepIdx)) {
@@ -1736,10 +1745,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if (op.equals("resolve")) {
             return seat(st.has("seat") ? st.get("seat").getAsInt() : 0);
         }
-        if (sc0 != null && isRecordedRun(steps(sc0)) && !op.equals("attach")) {
-            // attach is queued on playerA (it must apply before this step's
-            // snapshot even when the step names the other seat), so its
-            // checkpoint stays there.
+        if (sc0 != null && isRecordedAction(steps(sc0), stepIdx)) {
+            // A recorded cast, activation or land play is queued on the seat
+            // that takes it, and that seat's queue carries its checkpoint
+            // between its other actions. A declaration (attack, block) is
+            // beginStep work on the declaring seat, not an action of its
+            // queue, and attach is queued on playerA; those keep seat 0,
+            // which acts last on the turn it is on and so snapshots after the
+            // declaration has happened.
             return seat(seatOfStep(steps(sc0), stepIdx));
         }
         return playerA;
@@ -1934,13 +1947,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
         frontCounts.clear();
         setupBattlefield.clear();
         setupTokensPlaced = false;
+        setupCountersPlaced = false;
         setupAttachedPlaced = false;
         setupPermanentIds.clear();
         setupNames.clear();
         placedNames.clear();
         abilityAliasSeq = 0;
         backFaceNames.clear();
-        enterWithCountersApplied.clear();
         String format = str(sc, "format");
         if (!format.isEmpty() && !format.equals("constructed")) {
             throw new IllegalArgumentException("unsupported format " + format);
@@ -2006,13 +2019,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
     }
 
-    /** The setup's per-seat "counters" and "speed" (gorge's runner emits the same
-     * CounterChange / SpeedChange events when it places the cards). Runs inside
-     * the "setup" checkpoint, before the first snapshot, because a counter or a
-     * speed needs a live game. "counters" is card name -> counter kind (the
-     * CounterType enum name: CHARGE, P1P1, M1M1, ...) -> amount, applied to every
-     * battlefield placement of the name, like "tapped"; a name or kind XMage does
-     * not know fails the scenario rather than placing nothing. */
+    /** The setup's per-seat "tapped_after_untap" and "speed" (gorge's runner emits
+     * the same SpeedChange events when it places the cards). Runs inside the
+     * "setup" checkpoint, before the first snapshot, because a speed needs a live
+     * game. The setup "counters" are not here: placeSetupCounters seeds them
+     * before start(). */
     private void applySetupState(Game g) {
         JsonObject setup = sc0.has("setup") ? sc0.getAsJsonObject("setup") : new JsonObject();
         boolean changed = false;
@@ -2022,34 +2033,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             JsonObject s = setup.getAsJsonObject("p" + i);
             TestPlayer pl = seat(i);
-            if (s.has("counters")) {
-                for (Map.Entry<String, JsonElement> byCard : s.getAsJsonObject("counters").entrySet()) {
-                    String name = xmageSpelling(byCard.getKey());
-                    boolean placed = false;
-                    for (Permanent perm : g.getBattlefield().getAllPermanents()) {
-                        // A back-face-staged permanent is still named by its front (setupNames).
-                        if (!pl.getId().equals(perm.getControllerId()) || !setupName(perm).equals(name)) {
-                            continue;
-                        }
-                        if (enterWithCountersApplied.contains(perm.getId())) {
-                            // Applied with the placement (build()), which is
-                            // what keeps a would-die placement alive to here;
-                            // a second application would double the counters.
-                            placed = true;
-                            continue;
-                        }
-                        for (Map.Entry<String, JsonElement> byKind : byCard.getValue().getAsJsonObject().entrySet()) {
-                            CounterType kind = xmageCounter(byKind.getKey());
-                            perm.addCounters(kind.createInstance(byKind.getValue().getAsInt()), pl.getId(), null, g);
-                        }
-                        placed = true;
-                        changed = true;
-                    }
-                    if (!placed) {
-                        throw new IllegalArgumentException("counters name " + byCard.getKey() + ", which is not on p" + i + "'s battlefield");
-                    }
-                }
-            }
             if (s.has("tapped_after_untap")) {
                 // gorge taps these single permanents after the turn's untap
                 // step and drops every trigger the taps queue (CR 502.3), so
@@ -2078,6 +2061,66 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // no keyword) where gorge shows it live. Apply once with the counters
             // in place, exactly as the game loop does at the start of a step.
             g.applyEffects();
+        }
+    }
+
+    /** The pre-start hook that seeds every seat's setup "counters" (card name ->
+     * counter kind -> amount, applied to every battlefield placement of the
+     * name; a name or kind XMage does not know fails the scenario rather than
+     * placing nothing). The counters are recorded board state, not an event:
+     * they are written straight onto the permanent (putSetupCounters), so a
+     * counter-replacement permanent (Dr. Joseph M'Benga, Hardened Scales) never
+     * sees them, as in gorge and Forge. Runs after the cheat() placements and
+     * before start() checks state-based actions, so a printed 0/0 or an X=0
+     * placement survives with its counters, as gorge emits them with the
+     * placement. */
+    private void placeSetupCounters(Game g) {
+        if (setupCountersPlaced) {
+            return;
+        }
+        setupCountersPlaced = true;
+        JsonObject setup = sc0.has("setup") ? sc0.getAsJsonObject("setup") : new JsonObject();
+        boolean changed = false;
+        for (int i = 0; i < seats; i++) {
+            if (!setup.has("p" + i)) {
+                continue;
+            }
+            JsonObject s = setup.getAsJsonObject("p" + i);
+            if (!s.has("counters")) {
+                continue;
+            }
+            TestPlayer pl = seat(i);
+            for (Map.Entry<String, JsonElement> byCard : s.getAsJsonObject("counters").entrySet()) {
+                String name = xmageSpelling(byCard.getKey());
+                boolean placed = false;
+                for (Permanent perm : g.getBattlefield().getAllPermanents()) {
+                    // A back-face-staged permanent is still named by its front (setupNames).
+                    if (!pl.getId().equals(perm.getControllerId()) || !setupName(perm).equals(name)) {
+                        continue;
+                    }
+                    putSetupCounters(g, perm, byCard.getValue().getAsJsonObject());
+                    placed = true;
+                    changed = true;
+                }
+                if (!placed) {
+                    throw new IllegalArgumentException("counters name " + byCard.getKey() + ", which is not on p" + i + "'s battlefield");
+                }
+            }
+        }
+        if (changed) {
+            g.applyEffects();
+        }
+    }
+
+    /** Writes a setup counter set onto a permanent as recorded state: straight
+     * into its Counters, with no ADD_COUNTERS event (so no replacement such as
+     * Hardened Scales or Dr. Joseph M'Benga applies) and no COUNTER_ADDED
+     * trigger. Shared by setup cards and setup tokens so the two cannot drift.
+     * Never use Permanent.addCounters here. */
+    static void putSetupCounters(Game game, Permanent permanent, JsonObject kinds) {
+        for (Map.Entry<String, JsonElement> byKind : kinds.entrySet()) {
+            permanent.getCounters(game).addCounter(
+                    xmageCounter(byKind.getKey()).createInstance(byKind.getValue().getAsInt()));
         }
     }
 
@@ -2128,10 +2171,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         permanent.updateZoneChangeCounter(game, new mage.game.events.ZoneChangeEvent(permanent, source,
                 controller.getId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
         if (counters != null) {
-            for (Map.Entry<String, JsonElement> byKind : counters.entrySet()) {
-                permanent.getCounters(game).addCounter(
-                        xmageCounter(byKind.getKey()).createInstance(byKind.getValue().getAsInt()));
-            }
+            putSetupCounters(game, permanent, counters);
         }
         // fireEvent=false: no ENTERS_THE_BATTLEFIELD event is queued (the return
         // value is false on that path whether or not a replacement applied, as
@@ -2243,34 +2283,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 xmageName = backFaceNames.get("p" + i + ":" + xmageName);
             }
             if (zone == Zone.BATTLEFIELD) {
-                // gorge's runner emits the setup counters WITH the placement,
-                // before any state-based action, so a placement that would die
-                // as an SBA (a printed 0/0, an X-cost creature's X=0 board)
-                // survives with them. Apply through XMage's enter-with-counters
-                // map, keyed by the id the placement resolution produces.
-                // CardUtil.getDefaultCardSideForBattlefield is the exact card
-                // the cheat() placement turns into a PermanentCard (a stored
-                // half maps to itself, a stored parent to its left half, a
-                // plain card to itself), and PermanentCard shares the card's
-                // id, so applyEnterWithCounters' getEnterWithCounters lookup
-                // hits for plain cards AND staged back faces alike. Keying on
-                // getMainCard() instead holds the parent's id for a staged
-                // half, which the resolution never looks up. The counters are
-                // on the permanent when the first SBA check runs, exactly the
-                // runner's order; applySetupState no longer re-adds them.
-                JsonObject counters = s.has("counters") ? s.getAsJsonObject("counters") : null;
-                JsonElement kinds = counters == null ? null : counters.get(n);
-                if (kinds != null && kinds.isJsonObject()) {
-                    List<PutToBattlefieldInfo> placements = getBattlefieldCards(p);
-                    Card placedCard = CardUtil.getDefaultCardSideForBattlefield(
-                            currentGame, placements.get(placements.size() - 1).getCard());
-                    Counters enter = new Counters();
-                    for (Map.Entry<String, JsonElement> byKind : kinds.getAsJsonObject().entrySet()) {
-                        enter.addCounter(xmageCounter(byKind.getKey()).createInstance(byKind.getValue().getAsInt()));
-                    }
-                    currentGame.setEnterWithCounters(placedCard.getId(), enter);
-                    enterWithCountersApplied.add(placedCard.getId());
-                }
                 List<PutToBattlefieldInfo> seeded = getBattlefieldCards(p);
                 setupPermanentIds.put(ref, CardUtil.getDefaultCardSideForBattlefield(
                         currentGame, seeded.get(seeded.size() - 1).getCard()).getId());
@@ -2811,11 +2823,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
 
     /** Whether a cast step's cast_mode is one this driver elects: Bargain,
      * "optionalcost", the face-down Disguise/Morph/Megamorph casts, the "plot" special
-     * action, a graveyard "flashback" cast and a "mayplay" cast of a card a
+     * action, a graveyard "flashback" cast, and a "mayplay" cast of a card a
      * play-from-exile permission (Reckless Impulse) reaches are wired
-     * ("plot_cast", the later cast of a plotted card, is not), and an absent or empty mode is the ordinary
-     * cast. Any other mode is a scenario the driver cannot replay and must
-     * reject loudly rather than cast at face value. */
+     * ("plot_cast", the later cast of a plotted card, is not); so are the
+     * "adventure_alt"/"omen_alt" casts of an Adventure or Omen half, whose
+     * parent card the step names and the cast arm resolves to the half. An
+     * absent or empty mode is the ordinary cast. Any other mode is a scenario
+     * the driver cannot replay and must reject loudly rather than cast at face
+     * value. */
     static boolean castModeSupported(String mode) {
         return mode == null || mode.isEmpty()
                 || mode.equals("bargained") || mode.equals("optionalcost")
@@ -2832,6 +2847,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // from gorge's election, so the step is a plain cast here.
                 || mode.equals("alternative")
                 || mode.equals("prepared_copy")
+                // "adventure_alt" / "omen_alt": the cast of an Adventure or
+                // Omen half. The farm's step names the parent card (the
+                // xengine ref binder keeps the dealt card's name); setup deals
+                // the whole card and the cast arm resolves the inset spell
+                // half's XMage name (spellOptionCastName), which is what
+                // XMage's castSpell takes. A step that already names the half
+                // also replays.
+                || mode.equals("adventure_alt") || mode.equals("omen_alt")
                 || copyCostKeyword(mode) != null;
     }
 
@@ -2975,6 +2998,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** True once placeSetupTokens ran for this scenario's game (start() runs once;
      * build() resets it). */
     private boolean setupTokensPlaced;
+    /** True once placeSetupCounters ran for this scenario's game (build() resets it). */
+    private boolean setupCountersPlaced;
     // Whether the pre-start hook has linked the setup "attached" Auras.
     private boolean setupAttachedPlaced;
     // The permanent id of each battlefield placement build() seeded, by its
@@ -2987,10 +3012,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // setupObjectName); setupNames stays the staged back faces' map.
     private final Map<UUID, String> placedNames = new HashMap<>();
     private final Map<String, String> backFaceNames = new HashMap<>();
-    // Setup counters already applied WITH the placement (build(), through the
-    // enter-with-counters map): applySetupState skips these permanents, since
-    // a second application would double them.
-    private final Set<UUID> enterWithCountersApplied = new java.util.HashSet<>();
     // The card under test's two spellings: the scenario's (gorge/corpus) name
     // and XMage's card-database name when they differ (Forge prints "Dáin
     // Ironfoot", XMage stores "Dain Ironfoot"). xmageName is empty when equal.
@@ -3178,6 +3199,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return n.equals(xmageName) ? gorgeName : frontHalf(n);
         }
         return null;
+    }
+
+    /** The XMage cast name of an Adventure or Omen card's spell half ("Stomp"
+     * for Bonecrusher Giant, "Absorb Essence" for Purging Stormbrood), or
+     * null when name is not such a parent card.
+     *
+     * The farm's cast step names the parent card, not the half: the xengine
+     * lowering puts the setup-bound ref on the step (refBinder.refOf keeps the
+     * dealt card's name, e.g. "p1:Grabby Giant"), while XMage casts the half
+     * through its own spell name. Adventure and Omen share the role --
+     * CardWithSpellOption carries the inset spell card XMage names -- so this
+     * matches the type, not a hardcoded card or mode list. A step that already
+     * names the half returns null and falls through to castSpelling, so both
+     * shapes replay; so does every card without an inset spell. */
+    static String spellOptionCastName(String name) {
+        CardInfo info = CardRepository.instance.findCard(name, true);
+        Card c = info == null ? null : info.createCard();
+        if (!(c instanceof CardWithSpellOption)) {
+            return null;
+        }
+        String half = ((CardWithSpellOption) c).getSpellCard().getName();
+        return half == null || half.isEmpty() || half.equals(name) ? null : half;
     }
 
     private String castSpelling(String n) {
@@ -3915,15 +3958,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return false;
     }
 
-    /** Whether step {@code index} is a cast, activation or land play, of a
-     * recorded game (one that has passes with positions), by a seat that is
-     * not the active player. */
+    /** Whether step {@code index} is an action -- a cast, activation or land
+     * play -- of a recorded game (one that has passes with positions). These
+     * are the ops whose commands, and with them the checkpoint, run on the
+     * acting seat's own queue. A declaration (attack, block) is XMage's step
+     * beginStep work on the declaring seat, not a queued action of that seat,
+     * so it is deliberately not an action here. */
+    static boolean isRecordedAction(JsonArray steps, int index) {
+        return (isOp(steps, index, "cast") || isOp(steps, index, "activate") || isOp(steps, index, "play"))
+                && isRecordedRun(steps);
+    }
+
+    /** Whether step {@code index} is a recorded action by a seat that is not
+     * the active player. */
     static boolean opensOnOtherSeat(JsonArray steps, int index, int activeSeat) {
-        if (!(isOp(steps, index, "cast") || isOp(steps, index, "activate") || isOp(steps, index, "play"))
-                || seatOfStep(steps, index) == activeSeat) {
-            return false;
-        }
-        return isRecordedRun(steps);
+        return isRecordedAction(steps, index) && seatOfStep(steps, index) != activeSeat;
     }
 
     private static boolean posFlag(JsonObject pos, String key) {
@@ -4619,8 +4668,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 giftPromisedCast = castCostPicks.contains("gift_promise");
                 // The cast command names the SpellAbility, not the card
                 // object: a split/Room half is cast by its half name while
-                // the hand holds the whole "A // B" card (castSpelling).
-                String cardName = castSpelling(refName(str(st, "card")));
+                // the hand holds the whole "A // B" card (castSpelling). An
+                // Adventure/Omen cast is the other way round: the farm's step
+                // names the parent card (the xengine ref binder keeps the
+                // dealt card's name), so resolve the inset spell half's XMage
+                // name and cast that. A step that already names the half
+                // falls through unchanged.
+                String refCard = refName(str(st, "card"));
+                String halfName = "adventure_alt".equals(mode) || "omen_alt".equals(mode)
+                        ? spellOptionCastName(xmageSpelling(refCard)) : null;
+                String cardName = halfName != null ? halfName : castSpelling(refCard);
                 // A face-down Morph/Megamorph/Disguise cast names the
                 // SpellAbility by its XMage cast spelling; every plain cast
                 // names the card itself. Morph and Megamorph share "using

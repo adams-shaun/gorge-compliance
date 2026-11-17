@@ -55,6 +55,14 @@ const (
 	// show it untapped again. The active seat is exempt: its turn-1 untap step
 	// restores what the placement tapped.
 	reasonEntryTap = "setup_entry_tap"
+	// reasonPrepareEntry is a placed battlefield card whose own entry
+	// replacement grants Prepared (K:ETBReplacement, or a printed
+	// R:Event$ Moved body). The runner's placement re-runs the replacement,
+	// which mints the CR 722.3c exile copy; the copy enters the setup
+	// checkpoint's exile list, but the scenario schema has no prepared field
+	// that could remove it, and the live game may have cast it long ago, so the
+	// replay would show one exile card too many.
+	reasonPrepareEntry = "setup_entry_prepared"
 	// The setup drive expresses state as events: a by-name tapped placement is
 	// a Tap, a counters field a CounterChange, a life field a LifeChange. A
 	// placed permanent that triggers on one of those events would resolve a
@@ -493,6 +501,37 @@ func entryTapReplacement(f *cards.Face) bool {
 	return false
 }
 
+// entryPrepareReplacement reports whether the face's own battlefield-entry
+// replacement grants it Prepared (CR 722.3a). The runner's setup placement
+// keeps the ordinary battlefield move, so a replacement that grants Prepared
+// re-runs and mints the CR 722.3c exile copy (grantPreparedCopy), an extra
+// exile object the setup checkpoint sees and the cut may not have.
+func entryPrepareReplacement(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	for i := range f.Repls {
+		r := &f.Repls[i]
+		if r.Event != "Moved" {
+			continue
+		}
+		if dest, ok := r.Params["Destination"]; ok && !strings.EqualFold(dest, "Battlefield") {
+			continue
+		}
+		for s := r.With; s != nil; s = s.Sub {
+			if s.API != "AlterAttribute" || strings.EqualFold(s.Params["Activate"], "False") {
+				continue
+			}
+			for _, a := range strings.Split(s.Params["Attributes"], ",") {
+				if strings.EqualFold(strings.TrimSpace(a), "Prepared") {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
 // place fills c.Setup, c.Refs and c.Attach from the live game, adding to w.why
 // whatever setup cannot say.
 func (w *walker) place(c *cut) {
@@ -501,6 +540,11 @@ func (w *walker) place(c *cut) {
 	for i := range g.Objs {
 		o := &g.Objs[i]
 		if o.Zone == state.ZBattlefield {
+			// A permanent that enters prepared mints an exile copy on the
+			// runner's placement; no setup field can remove it.
+			if entryPrepareReplacement(o.Face()) {
+				w.why[reasonPrepareEntry] = true
+			}
 			if o.Owner != o.Controller {
 				w.why["field:Object.Controller"] = true
 				continue

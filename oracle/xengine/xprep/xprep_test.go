@@ -233,8 +233,21 @@ func TestPrepareAbilityPrefixes(t *testing.T) {
 	for _, it := range items {
 		for i, st := range it.Steps {
 			if st.Op != "activate" {
-				if len(it.XAbility) > i && it.XAbility[i] != "" {
-					t.Errorf("%s step %d (%s) has prefix %q", it.ID, i, st.Op, it.XAbility[i])
+				got := ""
+				if i < len(it.XAbility) {
+					got = it.XAbility[i]
+				}
+				// A plot cast is the one non-activate step XMage selects by
+				// rule text: it replays the PlotAbility special action, not a
+				// cast, so it carries a "Plot..." prefix.
+				if st.Op == "cast" && strings.EqualFold(st.CastMode, "plot") {
+					if len(it.XAbility) != len(it.Steps) || !strings.HasPrefix(got, "Plot") {
+						t.Errorf("%s step %d plots %s with xmage_ability %q", it.ID, i, st.Card, got)
+					}
+					continue
+				}
+				if got != "" {
+					t.Errorf("%s step %d (%s) has prefix %q", it.ID, i, st.Op, got)
 				}
 				continue
 			}
@@ -270,6 +283,41 @@ func TestPrepareAbilityPrefixes(t *testing.T) {
 		if k >= 2 {
 			break
 		}
+	}
+}
+
+// TestPrefixesPlotCast: a cast step whose cast_mode is "plot" is XMage's
+// PlotAbility special action, not a cast, so it carries the "Plot {cost}" rule
+// text the driver activates it by even though the step is not an activate step.
+func TestPrefixesPlotCast(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	it := oraclegen.Item{
+		ID: "xe:test:plot-cast",
+		Scenario: oraclegen.Scenario{
+			Steps: []oraclegen.Step{
+				{Op: "cast", Seat: 0, Card: "p0:Beastbond Outcaster", CastMode: "plot"},
+				{Op: "pass", Seat: 0},
+				// An ordinary cast is not a special action: it has no prefix.
+				{Op: "cast", Seat: 0, Card: "p0:Beastbond Outcaster"},
+			},
+		},
+	}
+	got, ref := prefixes(reg, it)
+	if ref != nil {
+		t.Fatalf("prefixes refused: %+v", ref)
+	}
+	if len(got) != len(it.Steps) {
+		t.Fatalf("prefixes = %q, want %d entries (one per step)", got, len(it.Steps))
+	}
+	// Beastbond Outcaster's Forge face prints K:Plot:1 G.
+	if want := "Plot {1}{G}"; got[0] != want {
+		t.Fatalf("plot step prefix = %q, want %q", got[0], want)
+	}
+	if got[1] != "" {
+		t.Errorf("pass step prefix = %q, want empty", got[1])
+	}
+	if got[2] != "" {
+		t.Errorf("ordinary cast step prefix = %q, want empty", got[2])
 	}
 }
 
