@@ -866,7 +866,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                         new FilterCard("card" + (cards.size() == 1 ? "" : "s") + " to PUT on the BOTTOM of your library (Scry)"));
                 Cards selected = scriptedLibrarySelection(cards, game);
-                if (selected == null) {
+                if (selected == null && nothingScripted(getChoices(), getTargets())) {
+                    // Gorge recorded no arrange decision, so nothing was
+                    // scripted: keep every looked-at card where it is.
+                    selected = new CardsImpl();
+                } else if (selected == null) {
                     chooseTarget(Outcome.Benefit, cards, target, source, game);
                     selected = new CardsImpl(target.getTargets());
                 }
@@ -896,7 +900,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                         new FilterCard("card" + (cards.size() == 1 ? "" : "s") + " to PUT into your GRAVEYARD (Surveil)"));
                 Cards selected = scriptedLibrarySelection(cards, game);
-                if (selected == null) {
+                if (selected == null && nothingScripted(getChoices(), getTargets())) {
+                    // Gorge recorded no arrange decision, so nothing was
+                    // scripted: keep every looked-at card where it is.
+                    selected = new CardsImpl();
+                } else if (selected == null) {
                     chooseTarget(Outcome.Benefit, cards, target, source, game);
                     selected = new CardsImpl(target.getTargets());
                 }
@@ -909,6 +917,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             game.fireEvent(new GameEvent(GameEvent.EventType.SURVEILED, getId(), source, getId(), event.getAmount(), true));
             return Player.SurveilResult.surveil(graveyard, top);
+        }
+
+        /** Whether the scenario scripted nothing at all for the player: both
+         * answer queues are empty. A scry/surveil ask in that state has no
+         * answer to read -- gorge recorded no arrange decision for it (Carrot
+         * Cake's "create a Rabbit and scry 1" off an OrTriggeredAbility) -- so
+         * the cards stay where they are instead of failing "Missing TARGET
+         * def". A queue holding anything keeps the base's strict reading. */
+        static boolean nothingScripted(List<String> choices, List<String> targets) {
+            return choices.isEmpty() && targets.isEmpty();
         }
 
         /** Consume the generator's choice-queue selection and kept-card order.
@@ -1030,6 +1048,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             }
             return null;
+        }
+
+        /** The cards-list overload TargetCardInLibrary.choose (every library
+         * search) reaches. A search whose filter matches no library card is
+         * declined here rather than failing "Missing TARGET def"
+         * ({@link #noCandidateOptionalAsk}); every other ask is the base's. */
+        @Override
+        public boolean chooseTarget(Outcome outcome, Cards cards, mage.target.TargetCard target, Ability source, Game game) {
+            if (target instanceof mage.target.common.TargetCardInLibrary
+                    && noCandidateOptionalAsk(getTargets(), target.getMinNumberOfTargets() - target.getSize(),
+                            target.possibleTargets(target.getAffectedAbilityControllerId(this.getId()), source, game, cards))) {
+                return false;
+            }
+            return super.chooseTarget(outcome, cards, target, source, game);
         }
 
         /**
@@ -1176,6 +1208,69 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     && target.getTargetName().contains("can be attached to");
         }
 
+        /** Whether an optional ask has nothing to answer: it needs no more
+         * picks and no candidate is legal. XMage poses a "you may search your
+         * library for a Food card" TargetCardInLibrary (Courier of
+         * Comestibles' ETB) even when the library holds no Food, and gorge,
+         * which asks nothing of an empty candidate set, records only the
+         * accepted confirm -- so no target answer exists to script. Declining
+         * is then the only legal outcome. The queue is deliberately ignored
+         * (every answer is queued up front, so a later ask's answer sits in
+         * it and no answer can match zero candidates), except a skip at the
+         * front, which belongs to this ask and is the base's to honour (same
+         * rule as {@link #unscriptableEmptyAsk}). */
+        static boolean noCandidateOptionalAsk(List<String> targetQueue, int needed, java.util.Collection<UUID> candidates) {
+            return needed <= 0 && candidates.isEmpty()
+                    && !(!targetQueue.isEmpty() && TestPlayer.TARGET_SKIP.equals(targetQueue.get(0)));
+        }
+
+        /** The hand card a TargetCardInHand ask reached through chooseTarget
+         * should take when the TARGET queue has nothing for it, or null to
+         * fall through to the base player. Two shapes: (1) the scripted pick
+         * sits on the CHOICE queue -- gorge records a hand pick as a choose
+         * ask, but an XMage effect that calls Target.chooseTarget (Ruthless
+         * Negotiation's ExileFromZoneTargetEffect, Mindmelter, Unscrupulous
+         * Agent) reads the target queue, so the pick is consumed from the
+         * choice queue head when it names a candidate; (2) the pick was
+         * forced -- the mandatory ask has no more candidates than picks it
+         * must make -- which gorge never records as a decision (a one-card
+         * hand), so a legal card is taken (the game re-asks for the rest). A
+         * queued target answer naming a candidate is always the base's to
+         * read, so a scripted target is never overridden
+         * and a choice that names no candidate is left in place for the
+         * base's strict unused-command check. {@code needed} is how many more
+         * picks the ask must make (0 for an "up to" ask with its minimum met). */
+        static UUID handCardChoice(List<String> targetQueue, List<String> choices, List<UUID> candidates,
+                int needed, BiPredicate<UUID, String> matches) {
+            if (!targetQueue.isEmpty()) {
+                // A queued answer naming a candidate (or a skip) is this ask's
+                // own and the base's to read. One that names no candidate
+                // belongs to a later ask in the window, so it only stops the
+                // choice-queue shortcut; a forced pick is still taken.
+                if (TestPlayer.TARGET_SKIP.equals(targetQueue.get(0))) {
+                    return null;
+                }
+                for (UUID id : candidates) {
+                    if (matches.test(id, targetQueue.get(0))) {
+                        return null;
+                    }
+                }
+                return needed > 0 && candidates.size() <= needed ? candidates.get(0) : null;
+            }
+            if (!choices.isEmpty() && !TestPlayer.CHOICE_SKIP.equals(choices.get(0))) {
+                for (UUID id : candidates) {
+                    if (matches.test(id, choices.get(0))) {
+                        choices.remove(0);
+                        return id;
+                    }
+                }
+            }
+            if (needed > 0 && candidates.size() <= needed && !candidates.isEmpty()) {
+                return candidates.get(0);
+            }
+            return null;
+        }
+
         /** A cast-time sacrifice ask: the non-targeting TargetSacrifice a
          * paid additional cost poses (Bargain, or an OrCost's sacrifice half).
          * XMage hints it "to sacrifice", which is what the target carries
@@ -1320,6 +1415,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 List<UUID> candidates = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
                 UUID chosen = attachmentChoice(getTargets(), candidates,
                         (id, answer) -> hasObjectTargetNameOrAlias(game.getPermanent(id), answer));
+                if (chosen != null) {
+                    target.addTarget(chosen, source, game);
+                    return true;
+                }
+            }
+            if (target.getOriginalTarget() instanceof mage.target.common.TargetCardInHand) {
+                UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+                List<UUID> candidates = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
+                UUID chosen = handCardChoice(getTargets(), getChoices(), candidates,
+                        target.getMinNumberOfTargets() - target.getSize(),
+                        (id, answer) -> hasObjectTargetNameOrAlias(game.getCard(id), answer));
                 if (chosen != null) {
                     target.addTarget(chosen, source, game);
                     return true;
