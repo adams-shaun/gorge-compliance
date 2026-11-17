@@ -1,0 +1,55 @@
+{
+ "card": "Village Ironsmith",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "c1dabc00263c",
+ "scenarios": [
+  {
+   "name": "pump-persists-through-transform",
+   "cr": [
+    "701.27c"
+   ],
+   "why": "A +3/+3 effect on the Ironsmith lasts through its transformation into Ironfang: a 1/1 that got +3/+3 becomes a 3/1 plus +3/+3, i.e. a 6/4.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Village Ironsmith"
+     ],
+     "hand": [
+      "Giant Growth",
+      "Moonmist"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Giant Growth",
+     "mana": "G",
+     "targets": [
+      "p0:Village Ironsmith"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Moonmist",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Village Ironsmith",
+     "pt": "6/4"
+    }
+   ]
+  }
+ ]
+}

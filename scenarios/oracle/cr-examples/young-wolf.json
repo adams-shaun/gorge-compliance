@@ -1,0 +1,60 @@
+{
+ "card": "Young Wolf",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "40d95499c0b7",
+ "scenarios": [
+  {
+   "name": "counter-on-it-when-it-dies-so-no-undying",
+   "cr": [
+    "704.8",
+    "702.93a"
+   ],
+   "why": "Young Wolf holds a +1/+1 counter when three -1/-1 counters land on it; once state-based actions run it is dead, and since it last had a +1/+1 counter on the battlefield, undying does not bring it back.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Young Wolf"
+     ],
+     "hand": [
+      "Skinrender"
+     ],
+     "counters": {
+      "Young Wolf": {
+       "P1P1": 1
+      }
+     }
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Skinrender",
+     "mana": "CCBB"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "target",
+       "pick": [
+        "p0:Young Wolf"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Young Wolf",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Skinrender",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

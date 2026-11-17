@@ -1,0 +1,71 @@
+{
+ "card": "Darksteel Colossus",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "d0b57298b50c",
+ "scenarios": [
+  {
+   "name": "colossus-shuffles-in-zombie-goes-on-top",
+   "cr": [
+    "701.24g",
+    "614.5"
+   ],
+   "why": "Barter in Blood makes p0 sacrifice both creatures at once; the Colossus replacement shuffles it into the library and the Zombie replacement puts it on top, so the next card drawn is the Zombie and neither is in the graveyard.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Darksteel Colossus",
+      "Gravebane Zombie"
+     ],
+     "hand": [
+      "Barter in Blood",
+      "Think Twice"
+     ],
+     "library": [
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Barter in Blood",
+     "mana": "CCBB"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Think Twice",
+     "mana": "CU"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Darksteel Colossus",
+     "zone": "library"
+    },
+    {
+     "card": "p0:Gravebane Zombie",
+     "zone": "hand"
+    },
+    {
+     "graveyard_size": {
+      "p0": 2
+     }
+    }
+   ]
+  }
+ ]
+}

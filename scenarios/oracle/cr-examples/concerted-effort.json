@@ -1,0 +1,44 @@
+{
+ "card": "Concerted Effort",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "4a647cd32412",
+ "scenarios": [
+  {
+   "name": "landwalk-and-protection-shared-around",
+   "cr": [
+    "702.1c"
+   ],
+   "why": "At upkeep Concerted Effort shares each landwalk and protection ability found among its controller's creatures with all of them, so a vanilla Bear ends up with swampwalk and protection from black.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Concerted Effort",
+      "Bog Wraith",
+      "White Knight",
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p1"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "keywords": [
+      "Landwalk:Swamp",
+      "Protection from black"
+     ]
+    }
+   ]
+  }
+ ]
+}

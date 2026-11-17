@@ -1,0 +1,54 @@
+{
+ "card": "Varolz, the Scar-Striped",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "6d9499cd0e1c",
+ "scenarios": [
+  {
+   "name": "scavenge-cost-is-the-mana-cost",
+   "cr": [
+    "702.1a",
+    "702.97a"
+   ],
+   "why": "Varolz gives a creature card in its controller's graveyard scavenge at its mana cost; paying {1}{G} for Grizzly Bears exiles it and puts two +1/+1 counters (its power) on a target creature.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Varolz, the Scar-Striped"
+     ],
+     "graveyard": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Grizzly Bears",
+     "mana": "CG",
+     "ability": "scavenge",
+     "targets": [
+      "p0:Varolz, the Scar-Striped"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Varolz, the Scar-Striped",
+     "counters": {
+      "+1/+1": 2
+     },
+     "pt": "4/4"
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "exile"
+    }
+   ]
+  }
+ ]
+}

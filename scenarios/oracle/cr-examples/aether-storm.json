@@ -1,0 +1,57 @@
+{
+ "card": "Aether Storm",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "52d8911effe9",
+ "scenarios": [
+  {
+   "name": "creature-card-with-bestow-still-castable-bestowed",
+   "cr": [
+    "702.103d"
+   ],
+   "why": "Aether Storm stops creature spells, but a bestow card cast for its bestow cost is an Aura spell, not a creature spell, so it can still be cast and ends up on the target creature.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Aether Storm",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Hopeful Eidolon"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Hopeful Eidolon",
+     "mana": "CCCW",
+     "targets": [
+      "p0:Grizzly Bears"
+     ],
+     "cast_mode": "bestowed"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Hopeful Eidolon",
+     "zone": "battlefield",
+     "no_types": [
+      "Creature"
+     ]
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "pt": "3/3",
+     "keywords": [
+      "Lifelink"
+     ]
+    }
+   ]
+  }
+ ]
+}

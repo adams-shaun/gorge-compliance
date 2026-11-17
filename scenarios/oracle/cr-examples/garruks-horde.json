@@ -47,6 +47,44 @@
      "zone": "battlefield"
     }
    ]
+  },
+  {
+   "name": "bestow-card-on-top-castable-only-as-a-creature",
+   "cr": [
+    "702.103d"
+   ],
+   "why": "With the Horde out, a bestow creature on top of the library can be cast from there as an ordinary creature spell for its mana cost; it arrives as a 1/1 lifelink creature.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Garruk's Horde"
+     ],
+     "library_top": [
+      "Hopeful Eidolon"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Hopeful Eidolon",
+     "mana": "W"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Hopeful Eidolon",
+     "zone": "battlefield",
+     "pt": "1/1",
+     "types": [
+      "Creature"
+     ]
+    }
+   ]
   }
  ]
 }

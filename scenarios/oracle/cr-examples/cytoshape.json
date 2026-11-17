@@ -1,0 +1,68 @@
+{
+ "card": "Cytoshape",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "862f333c201a",
+ "scenarios": [
+  {
+   "name": "copy-effect-survives-transform",
+   "cr": [
+    "701.27d"
+   ],
+   "why": "Cytoshape makes the Outlaw a copy of Elite Vanguard (2/1 Human, no abilities). Moonmist transforms all Humans, so it flips, but until end of turn it remains a copy of Elite Vanguard: 2/1 with no first or double strike.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Kruin Outlaw",
+      "Elite Vanguard"
+     ],
+     "hand": [
+      "Cytoshape",
+      "Moonmist"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Cytoshape",
+     "mana": "CGU",
+     "targets": [
+      "p0:Kruin Outlaw"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Elite Vanguard"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Moonmist",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Kruin Outlaw",
+     "pt": "2/1",
+     "no_keywords": [
+      "First strike",
+      "Double strike"
+     ]
+    }
+   ]
+  }
+ ]
+}
