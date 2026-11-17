@@ -1684,13 +1684,37 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 		}
 	case "check":
 		if r := em.gotoClock(a.turn, a.step); r != nil {
+			if a.playCheck != nil {
+				// the check names a step the runner cannot stop in with a
+				// player on priority (combat without attackers, a clock
+				// that has already moved past it, ...)
+				return nil, refuse("playable-check", "%s", r.Detail)
+			}
 			return nil, r
 		}
+		xs := a.expects
+		if a.playCheck != nil {
+			off, r := em.t.playableOffer(a.seat, a.playCheck.text)
+			if r != nil {
+				return nil, r
+			}
+			want := a.playCheck.want
+			xs = []*expect{{Offered: off, Want: &want}}
+		}
 		if len(em.steps) == 0 {
+			// anchor on the setup decision: the runner's first priority
+			// decision already lists the hand's plays and casts. Never pass
+			// the checking seat's own priority here: that ends the step the
+			// check is about.
 			em.add(&step{Op: "pass_to", Decision: "priority"})
 		}
+		if a.playCheck != nil {
+			// the offered check reads the priority holder, so the expect
+			// must ride a step that leaves the checking seat on priority.
+			em.priorityTo(a.seat)
+		}
 		last := em.steps[len(em.steps)-1]
-		last.Expect = append(last.Expect, a.expects...)
+		last.Expect = append(last.Expect, xs...)
 		em.hasStepExpects = true
 	}
 	return g, nil

@@ -1,0 +1,73 @@
+{
+ "card": "Fling",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "5e55318e018e",
+ "scenarios": [
+  {
+   "name": "the-copy-uses-the-creature-sacrificed-to-the-original",
+   "cr": [
+    "707.10"
+   ],
+   "why": "Fling's damage is fixed by the creature sacrificed to pay for the original cast. Fork copies that spell after the sacrifice, so the copy deals the same 2 damage even though the copy itself was not cast and paid no additional cost.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Fling",
+      "Fork"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Fling",
+     "mana": "CR",
+     "targets": [
+      "p1"
+     ],
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Grizzly Bears"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Fork",
+     "mana": "RR",
+     "targets": [
+      "p0:Fling"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 20,
+      "p1": 16
+     }
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Fork",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

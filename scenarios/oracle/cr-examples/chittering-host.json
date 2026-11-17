@@ -1,0 +1,81 @@
+{
+ "card": "Chittering Host",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "cb64a86a4f2e",
+ "scenarios": [
+  {
+   "name": "one-creature-died-event-but-two-cards-reach-the-graveyard",
+   "cr": [
+    "713.8"
+   ],
+   "why": "Midnight Scavengers and Graf Rats meld into one Chittering Host permanent made of two cards. When the Host dies, Blood Artist sees a single creature dying, but both component cards are put into the graveyard.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Midnight Scavengers",
+      "Graf Rats",
+      "Blood Artist"
+     ],
+     "hand": [
+      "Doom Blade"
+     ]
+    },
+    "p1": {}
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "begin-combat",
+     "active": "p0"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Doom Blade",
+     "mana": "CB",
+     "targets": [
+      "p0:Chittering Host"
+     ]
+    },
+    {
+     "op": "resolve",
+     "targets": [
+      "p1"
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 21,
+      "p1": 19
+     }
+    },
+    {
+     "card": "p0:Midnight Scavengers",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Graf Rats",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Blood Artist",
+     "zone": "battlefield"
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Chittering Host"
+     },
+     "eq": 0
+    }
+   ]
+  }
+ ]
+}

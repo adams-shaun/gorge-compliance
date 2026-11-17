@@ -1,0 +1,88 @@
+{
+ "card": "Leyline of the Void",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "4108b4d2b09d",
+ "scenarios": [
+  {
+   "name": "both-cards-follow-one-replacement-effect",
+   "cr": [
+    "713.8d"
+   ],
+   "why": "Leyline of the Void and Wheel of Sun and Moon both replace a card going to the Chittering Host controller's graveyard. The controller picks one effect, and the melded permanent's two cards both move where that effect sends them: both are exiled, or both go to the bottom of the library.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Leyline of the Void"
+     ],
+     "hand": [
+      "Wheel of Sun and Moon",
+      "Terminate"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Midnight Scavengers",
+      "Graf Rats"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Wheel of Sun and Moon",
+     "mana": "GWGW",
+     "targets": [
+      "p1"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "begin-combat",
+     "active": "p1"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Terminate",
+     "mana": "BR",
+     "targets": [
+      "p1:Chittering Host"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Leyline of the Void"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Midnight Scavengers",
+     "zone": "exile"
+    },
+    {
+     "card": "p1:Graf Rats",
+     "zone": "exile"
+    }
+   ]
+  }
+ ]
+}

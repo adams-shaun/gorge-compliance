@@ -1,0 +1,59 @@
+{
+ "card": "Glasspool Mimic",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "73c6a578affe",
+ "scenarios": [
+  {
+   "name": "copying-a-changeling-keeps-changeling-and-all-types",
+   "cr": [
+    "707.9d"
+   ],
+   "why": "The exception adds Shapeshifter and Rogue but does not remove the copied changeling ability. The Mimic therefore has changeling, and the Goblin Chieftain's bonus to other Goblins applies to it, making it 2/2 rather than 1/1.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Mirror Entity",
+      "Goblin Chieftain"
+     ],
+     "hand": [
+      "Glasspool Mimic"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Glasspool Mimic",
+     "mana": "CCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Mirror Entity"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Glasspool Mimic",
+     "zone": "battlefield",
+     "pt": "2/2",
+     "keywords": [
+      "Changeling"
+     ],
+     "types": [
+      "Shapeshifter",
+      "Rogue"
+     ]
+    }
+   ]
+  }
+ ]
+}

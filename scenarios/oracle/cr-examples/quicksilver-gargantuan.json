@@ -1,0 +1,58 @@
+{
+ "card": "Quicksilver Gargantuan",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "956728db9aaa",
+ "scenarios": [
+  {
+   "name": "copying-tarmogoyf-drops-its-characteristic-defining-ability",
+   "cr": [
+    "707.9d"
+   ],
+   "why": "The exception sets the entering body to 7/7 and the copy does not gain Tarmogoyf's characteristic-defining ability. With no card types in any graveyard the original Tarmogoyf is 0/1, while the Gargantuan is 7/7.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Tarmogoyf"
+     ],
+     "hand": [
+      "Quicksilver Gargantuan"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Quicksilver Gargantuan",
+     "mana": "CCCCCUU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Tarmogoyf"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Quicksilver Gargantuan",
+     "zone": "battlefield",
+     "pt": "7/7",
+     "types": [
+      "Lhurgoyf"
+     ]
+    },
+    {
+     "card": "p0:Tarmogoyf",
+     "pt": "0/1"
+    }
+   ]
+  }
+ ]
+}
