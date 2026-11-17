@@ -181,10 +181,68 @@ public final class OptionalTargetSkipsTest {
         System.out.println("PASS queue boundaries (front/future/consecutive/trailing, consumption and unused restoration)");
     }
 
+    /** Asks gorge records no decision for (a forced one-card hand pick, a
+     * search whose filter matches nothing, a scry with nothing scripted) are
+     * answered by the driver, while every scripted answer is left to the
+     * base player's strict reading. */
+    private static void unrecordedAsks() throws Exception {
+        Class<?> adapter = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
+        Method hand = adapter.getDeclaredMethod("handCardChoice", List.class, List.class, List.class,
+                int.class, java.util.function.BiPredicate.class);
+        hand.setAccessible(true);
+        java.util.UUID bears = java.util.UUID.randomUUID();
+        java.util.UUID shock = java.util.UUID.randomUUID();
+        java.util.function.BiPredicate<java.util.UUID, String> byName =
+                (id, name) -> name.equals(id.equals(bears) ? "Grizzly Bears" : "Shock");
+        // The pick on the choice queue (Ruthless Negotiation's exile choice,
+        // recorded as a choose ask) is consumed and chosen.
+        List<String> choices = new ArrayList<>(Arrays.asList("Shock", "later"));
+        check(shock.equals(hand.invoke(null, new ArrayList<String>(), choices, Arrays.asList(bears, shock), 1, byName))
+                && choices.equals(Arrays.asList("later")), "choice-queue hand pick not consumed");
+        // A forced single candidate with nothing scripted is taken.
+        check(bears.equals(hand.invoke(null, new ArrayList<String>(), new ArrayList<String>(), Arrays.asList(bears), 1, byName)),
+                "forced one-card hand pick not taken");
+        // Two candidates and nothing scripted, a met minimum, a queued target
+        // answer, and a choice naming no candidate all fall through.
+        check(hand.invoke(null, new ArrayList<String>(), new ArrayList<String>(), Arrays.asList(bears, shock), 1, byName) == null,
+                "an unscripted two-card pick was guessed");
+        check(hand.invoke(null, new ArrayList<String>(), new ArrayList<String>(), Arrays.asList(bears), 0, byName) == null,
+                "an optional hand ask was filled");
+        choices = new ArrayList<>(Arrays.asList("Shock"));
+        List<String> targets = new ArrayList<>(Arrays.asList("Grizzly Bears"));
+        check(hand.invoke(null, targets, choices, Arrays.asList(bears, shock), 1, byName) == null
+                && choices.equals(Arrays.asList("Shock")), "a queued target answer was overridden");
+        choices = new ArrayList<>(Arrays.asList("Island"));
+        check(hand.invoke(null, new ArrayList<String>(), choices, Arrays.asList(bears, shock), 1, byName) == null
+                && choices.equals(Arrays.asList("Island")), "a non-candidate choice was consumed");
+
+        Method search = adapter.getDeclaredMethod("noCandidateOptionalAsk", List.class, int.class,
+                java.util.Collection.class);
+        search.setAccessible(true);
+        check(Boolean.TRUE.equals(search.invoke(null, new ArrayList<String>(), 0, new ArrayList<java.util.UUID>())),
+                "an empty optional search was not declined");
+        check(Boolean.FALSE.equals(search.invoke(null, new ArrayList<String>(), 0, Arrays.asList(bears))),
+                "a search with a legal card was declined");
+        check(Boolean.FALSE.equals(search.invoke(null, new ArrayList<String>(Arrays.asList("Forest")), 0,
+                new ArrayList<java.util.UUID>())), "a scripted search answer was skipped");
+        check(Boolean.FALSE.equals(search.invoke(null, new ArrayList<String>(), 1, new ArrayList<java.util.UUID>())),
+                "a mandatory search was declined");
+
+        Method scripted = adapter.getDeclaredMethod("nothingScripted", List.class, List.class);
+        scripted.setAccessible(true);
+        check(Boolean.TRUE.equals(scripted.invoke(null, new ArrayList<String>(), new ArrayList<String>())),
+                "empty queues are not 'nothing scripted'");
+        check(Boolean.FALSE.equals(scripted.invoke(null, new ArrayList<String>(Arrays.asList("No")), new ArrayList<String>()))
+                && Boolean.FALSE.equals(scripted.invoke(null, new ArrayList<String>(), new ArrayList<String>(Arrays.asList(SKIP)))),
+                "a scripted queue counted as empty");
+        System.out.println("PASS driver-answered asks gorge records no decision for (hand pick, empty search, unscripted scry)");
+    }
+
     public static void main(String[] args) throws Exception {
         plans();
         playerQueue();
         unscriptableAsk();
         boundaries();
+        unrecordedAsks();
     }
 }
