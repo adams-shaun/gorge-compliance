@@ -8,13 +8,17 @@ import mage.game.permanent.Permanent;
 /** No H2: prove that token refs rank by creation, not battlefield iteration. */
 public final class ScenarioReplaySameNameChoiceTest {
     private static Permanent object(UUID controller, boolean token, int order) {
+        return object(controller, token, order, "Grizzly Bears");
+    }
+
+    private static Permanent object(UUID controller, boolean token, int order, String name) {
         UUID id = UUID.randomUUID();
         return (Permanent) Proxy.newProxyInstance(Permanent.class.getClassLoader(),
                 new Class<?>[]{Permanent.class}, (proxy, method, args) -> {
                     switch (method.getName()) {
                         case "getId": return id;
                         case "getControllerId": return controller;
-                        case "getName": return "Grizzly Bears";
+                        case "getName": return name;
                         case "isToken": return token;
                         case "getCreateOrder": return order;
                         default: throw new AssertionError("unexpected call " + method);
@@ -26,6 +30,51 @@ public final class ScenarioReplaySameNameChoiceTest {
         if (want != got) {
             throw new AssertionError("choice selected the wrong object");
         }
+    }
+
+    private static void check(boolean condition, String message) {
+        if (!condition) {
+            throw new AssertionError(message);
+        }
+    }
+
+    /** Attack and block both go through these two helpers. A recorded
+     * "token:" ref must resolve to the token, not a same-name card; the
+     * name-only XMage command is ambiguous only when both kinds are present
+     * under the same controller. */
+    private static void combatRefs() {
+        UUID own = UUID.randomUUID(), other = UUID.randomUUID();
+        Permanent card = object(own, false, 1);
+        Permanent first = object(own, true, 2);
+        Permanent second = object(own, true, 3);
+        Permanent opponentCard = object(other, false, 4);
+        Permanent card2 = object(own, false, 5);
+        List<Permanent> battlefield = List.of(second, opponentCard, card2, card, first);
+        // The attacker path: the recorded token ref names the token, and the
+        // recorded card ref names the card, even though both are "Grizzly
+        // Bears" and battlefield iteration order is not creation order.
+        chosen(first, ScenarioReplay.combatPermanent("p0:token:Grizzly Bears", "Grizzly Bears", own, battlefield));
+        chosen(second, ScenarioReplay.combatPermanent("p0:token:Grizzly Bears#2", "Grizzly Bears", own, battlefield));
+        chosen(card, ScenarioReplay.combatPermanent("p0:Grizzly Bears", "Grizzly Bears", own, battlefield));
+        chosen(card2, ScenarioReplay.combatPermanent("p0:Grizzly Bears#2", "Grizzly Bears", own, battlefield));
+        // The blocker path uses the same helpers; an ambiguous pair is one
+        // where the recorded side is a token and the same controller also has
+        // a card of that name, or the reverse.
+        check(ScenarioReplay.combatRefAmbiguous("Grizzly Bears", own, battlefield),
+                "a same-controller token and card of one name are ambiguous");
+        check(!ScenarioReplay.combatRefAmbiguous("Grizzly Bears", own, List.of(first, second)),
+                "two tokens of one name are distinguishable by the command's :k index");
+        check(!ScenarioReplay.combatRefAmbiguous("Grizzly Bears", own, List.of(card, card2)),
+                "two cards of one name are distinguishable by the command's :k index");
+        check(!ScenarioReplay.combatRefAmbiguous("Grizzly Bears", other, List.of(opponentCard, first)),
+                "a card on another seat does not collide with this seat's token");
+        // A token copy of the renamed card under test carries XMage's
+        // spelling ("Dain Ironfoot") while the scenario ref keeps the
+        // corpus spelling ("Dáin Ironfoot").
+        Permanent renamed = object(own, true, 6, "Dain Ironfoot");
+        chosen(renamed, ScenarioReplay.combatPermanent("p0:token:Dáin Ironfoot", "Dain Ironfoot", own,
+                List.of(renamed)));
+        System.out.println("PASS token:/card combat refs resolve exactly and detect a token/card name collision");
     }
 
     private static void set(Object target, Class<?> type, String name, Object value) throws Exception {
@@ -101,6 +150,7 @@ public final class ScenarioReplaySameNameChoiceTest {
         chosen(second, ScenarioReplay.tokenChoice("p0:token:Grizzly Bears", own, List.of(second)));
         chosen(null, ScenarioReplay.tokenChoice("p0:token:Grizzly Bears#2", own, List.of(second)));
         System.out.println("PASS exact token choice is creation-ordered, controller-scoped and live");
+        combatRefs();
         liveMatcher();
     }
 }

@@ -621,6 +621,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return new ScriptedChoicePlayer(this);
         }
 
+        // XMage declares attackers/blockers in beginStep, before priority, so
+        // this is the only point where a recorded token ref can be resolved
+        // from the live battlefield and declared exactly instead of by name.
+        @Override
+        public void selectAttackers(Game game, UUID attackingPlayerId) {
+            owner.applyExactAttackers(this, game);
+            super.selectAttackers(game, attackingPlayerId);
+        }
+
+        @Override
+        public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
+            owner.applyExactBlockers(this, game);
+            super.selectBlockers(source, game, defendingPlayerId);
+        }
+
         // Tokens may be created after scripted() queues an answer. Resolve a
         // token ref against the LIVE choice game, not a prematurely bound or
         // stale alias. Other choice values and the target path stay unchanged.
@@ -1418,6 +1433,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
             cast.clear();
             adjustedCasts.clear();
             faceDownRefs.clear();
+            exactAttacks.clear();
+            exactBlocks.clear();
             refAlias.clear();
             phase = MAIN;
             TURN = scenarioTurn(sc);
@@ -2282,7 +2299,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** Tokens' gorge refs rank the controller's live tokens in creation order.
      * Battlefield iteration is UUID/hash order in XMage, not entry order. */
     static Permanent tokenChoice(String ref, UUID controller, Iterable<Permanent> battlefield) {
-        String name = refName(ref).toLowerCase(java.util.Locale.ROOT);
+        return tokenChoice(ref, refName(ref), controller, battlefield);
+    }
+
+    /** As tokenChoice, but names the token under the given spelling. A token
+     * copy of the card under test carries XMage's spelling while the combat
+     * ref carries the scenario's. */
+    static Permanent tokenChoice(String ref, String name, UUID controller, Iterable<Permanent> battlefield) {
+        String wantedName = name.toLowerCase(java.util.Locale.ROOT);
         int wanted = 1;
         int hash = ref.lastIndexOf('#');
         if (hash >= 0 && ref.substring(hash + 1).matches("[0-9]+")) {
@@ -2291,7 +2315,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         List<Permanent> candidates = new ArrayList<>();
         for (Permanent permanent : battlefield) {
             if (permanent.isToken() && controller.equals(permanent.getControllerId())
-                    && permanent.getName().toLowerCase(java.util.Locale.ROOT).contains(name)) {
+                    && permanent.getName().toLowerCase(java.util.Locale.ROOT).contains(wantedName)) {
                 candidates.add(permanent);
             }
         }
@@ -2820,6 +2844,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // up: XMage's face-down permanent has no name, so a combat command names
     // it by TestPlayer's face-down test command instead (combatName).
     private final Set<String> faceDownRefs = new java.util.HashSet<>();
+    // One batch per recorded attack/block step: the refs its commands were
+    // lowered from and the PlayerAction each command added. XMage's
+    // attack/block command takes only a name (plus a same-name ":k" index),
+    // so it cannot distinguish a token from a card of the same name. A batch
+    // is resolved against the LIVE battlefield inside selectAttackers/
+    // selectBlockers, when a token created earlier in the replay exists; an
+    // ambiguous command is replaced by an exact declaration.
+    private final List<ExactAttackBatch> exactAttacks = new ArrayList<>();
+    private final List<ExactBlockBatch> exactBlocks = new ArrayList<>();
     // Setup objects the scenario can name by ref ("p0:Grizzly Bears#2"): the
     // XMage alias each ref is registered under, so two same-name permanents
     // are told apart. Filled during setup, read by step targeting.
@@ -4232,9 +4265,38 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // Bears): XMage declares the must-attack creature itself
                 // (above), and selectAttackers consumes only the commands of
                 // the others, so a command for the forced one is left over.
-                attackNames = withoutMustAttack(attackNames, ScenarioReplay::isMustAttackName);
-                for (String a : attackCommandOrder(attackNames)) {
-                    attack(turn, p, a, seat(seatOf(str(st, "defender"))));
+                List<String> keptNames = withoutMustAttack(attackNames, ScenarioReplay::isMustAttackName);
+                List<String> keptRefs = new ArrayList<>();
+                for (int i = 0, kept = 0; i < attackNames.size() && kept < keptNames.size(); i++) {
+                    if (keptNames.get(kept).equals(attackNames.get(i))) {
+                        keptRefs.add(attackers.get(i));
+                        kept++;
+                    }
+                }
+                ExactAttackBatch exact = new ExactAttackBatch(turn, seatIdx, seatOf(str(st, "defender")));
+                List<String> refs = new ArrayList<>(keptRefs);
+                for (String name : attackCommandOrder(keptNames)) {
+                    // The ordered names are a permutation of keptNames, so
+                    // each has one ref left; duplicates are interchangeable
+                    // here because the batch resolves the ref exactly.
+                    int at = -1;
+                    for (int i = 0; i < refs.size(); i++) {
+                        if (combatName(refs.get(i)).equals(name)) {
+                            at = i;
+                            break;
+                        }
+                    }
+                    if (at < 0) {
+                        throw new IllegalStateException("no attack ref lowered to command " + name);
+                    }
+                    String ref = refs.remove(at);
+                    int before = p.getActions().size();
+                    attack(turn, p, name, seat(exact.defenderSeat));
+                    exact.refs.add(ref);
+                    exact.actions.add(p.getActions().get(before));
+                }
+                if (!exact.refs.isEmpty()) {
+                    exactAttacks.add(exact);
                 }
                 phase = PhaseStep.DECLARE_ATTACKERS;
                 return;
@@ -4306,9 +4368,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // A recorded game's empty declaration has no "blocks": there
                 // is nothing to queue, the step only reaches declare-blockers.
                 JsonArray blocks = st.has("blocks") ? st.getAsJsonArray("blocks") : new JsonArray();
+                ExactBlockBatch exact = new ExactBlockBatch(turn, seatIdx);
                 for (JsonElement e : blocks) {
                     JsonArray pair = e.getAsJsonArray();
-                    block(turn, p, combatName(pair.get(0).getAsString()), combatName(pair.get(1).getAsString()));
+                    String blocker = pair.get(0).getAsString();
+                    String attacker = pair.get(1).getAsString();
+                    int before = p.getActions().size();
+                    block(turn, p, combatName(blocker), combatName(attacker));
+                    exact.blockers.add(blocker);
+                    exact.attackers.add(attacker);
+                    exact.actions.add(p.getActions().get(before));
+                }
+                if (!exact.blockers.isEmpty()) {
+                    exactBlocks.add(exact);
                 }
                 phase = PhaseStep.DECLARE_BLOCKERS;
                 return;
@@ -5096,6 +5168,170 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** TestPlayer's combat command for a face-down creature. */
     static String faceDownCombatName() {
         return mage.constants.EmptyNames.FACE_DOWN_CREATURE.getTestCommand();
+    }
+
+    /** One attack step's queued commands: the scenario refs they were
+     * lowered from and the PlayerAction each command added. */
+    private static final class ExactAttackBatch {
+        final int turn;
+        final int seat;
+        final int defenderSeat;
+        final List<String> refs = new ArrayList<>();
+        final List<PlayerAction> actions = new ArrayList<>();
+
+        ExactAttackBatch(int turn, int seat, int defenderSeat) {
+            this.turn = turn;
+            this.seat = seat;
+            this.defenderSeat = defenderSeat;
+        }
+    }
+
+    /** One block step's queued [blocker, attacker] commands and actions. */
+    private static final class ExactBlockBatch {
+        final int turn;
+        final int seat;
+        final List<String> blockers = new ArrayList<>();
+        final List<String> attackers = new ArrayList<>();
+        final List<PlayerAction> actions = new ArrayList<>();
+
+        ExactBlockBatch(int turn, int seat) {
+            this.turn = turn;
+            this.seat = seat;
+        }
+    }
+
+    /**
+     * Replace a name-only attacker command with an exact declaration when the
+     * controlling seat has both a token and a card of that name. XMage's
+     * "Name:k" command ranks the two kinds together and takes whichever it
+     * finds first, so it can declare the card when the scenario recorded the
+     * token (and the reverse). This runs at the engine's declaration point,
+     * after a token created earlier in the turn is on the battlefield.
+     */
+    private void applyExactAttackers(TestPlayer player, Game game) {
+        for (java.util.Iterator<ExactAttackBatch> it = exactAttacks.iterator(); it.hasNext();) {
+            ExactAttackBatch batch = it.next();
+            if (batch.turn != game.getTurnNum() || !player.getId().equals(seat(batch.seat).getId())) {
+                continue;
+            }
+            it.remove();
+            for (int i = 0; i < batch.refs.size(); i++) {
+                String ref = batch.refs.get(i);
+                String name = battlefieldName(ref);
+                Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
+                Permanent exact = combatPermanent(ref, name, player.getId(), battlefield);
+                if (exact != null && game.getCombat().getAttackers().contains(exact.getId())) {
+                    // XMage's checkAttackRequirements declared this forced
+                    // attacker itself; the recorded command is satisfied.
+                    player.getActions().remove(batch.actions.get(i));
+                    continue;
+                }
+                if (!combatRefAmbiguous(name, player.getId(), battlefield)) {
+                    continue;
+                }
+                player.getActions().remove(batch.actions.get(i));
+                if (exact == null) {
+                    throw new IllegalArgumentException("attack ref " + ref + " is not on the battlefield");
+                }
+                player.declareAttacker(exact.getId(), seat(batch.defenderSeat).getId(), game, false);
+                if (!game.getCombat().getAttackers().contains(exact.getId())) {
+                    throw new IllegalArgumentException("attack ref " + ref + " was not declared (battlefield: "
+                            + battlefieldListing() + ")");
+                }
+            }
+        }
+    }
+
+    /**
+     * The blocker counterpart of applyExactAttackers. Either side of a
+     * recorded [blocker, attacker] pair can be the token that shares its name
+     * with a card, so both refs are resolved exactly and the pair is declared
+     * directly instead of lowering either to a name.
+     */
+    private void applyExactBlockers(TestPlayer player, Game game) {
+        UUID attackerId = game.getCombat().getAttackingPlayerId();
+        if (attackerId == null) {
+            return;
+        }
+        for (java.util.Iterator<ExactBlockBatch> it = exactBlocks.iterator(); it.hasNext();) {
+            ExactBlockBatch batch = it.next();
+            if (batch.turn != game.getTurnNum() || !player.getId().equals(seat(batch.seat).getId())) {
+                continue;
+            }
+            it.remove();
+            for (int i = 0; i < batch.blockers.size(); i++) {
+                String blockerRef = batch.blockers.get(i);
+                String attackerRef = batch.attackers.get(i);
+                String blockerName = battlefieldName(blockerRef);
+                String attackerName = battlefieldName(attackerRef);
+                Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
+                if (!combatRefAmbiguous(blockerName, player.getId(), battlefield)
+                        && !combatRefAmbiguous(attackerName, attackerId, battlefield)) {
+                    continue;
+                }
+                player.getActions().remove(batch.actions.get(i));
+                Permanent blocker = combatPermanent(blockerRef, blockerName, player.getId(), battlefield);
+                Permanent attacker = combatPermanent(attackerRef, attackerName, attackerId, battlefield);
+                if (blocker == null || attacker == null) {
+                    throw new IllegalArgumentException("block " + blockerRef + " -> " + attackerRef
+                            + " names no live permanent (battlefield: " + battlefieldListing() + ")");
+                }
+                player.declareBlocker(player.getId(), blocker.getId(), attacker.getId(), game);
+                mage.game.combat.CombatGroup group = game.getCombat().findGroup(attacker.getId());
+                if (group == null || !group.getBlockers().contains(blocker.getId())) {
+                    throw new IllegalArgumentException("block " + blockerRef + " -> " + attackerRef
+                            + " was not declared (battlefield: " + battlefieldListing() + ")");
+                }
+            }
+        }
+    }
+
+    /** The exact permanent a recorded combat ref names, resolved from live
+     * state: a token ref ranks its controller's tokens by creation order
+     * (tokenChoice); a card ref ranks its controller's non-token permanents
+     * of that name the same way. `name` is the XMage spelling from
+     * battlefieldName. */
+    static Permanent combatPermanent(String ref, String name, UUID controller, Iterable<Permanent> battlefield) {
+        if (ref.contains(":token:")) {
+            Permanent token = tokenChoice(ref, controller, battlefield);
+            if (token == null && !name.equals(refName(ref))) {
+                // A token copy of a renamed card under test carries the
+                // XMage spelling, not the scenario ref's spelling.
+                token = tokenChoice(ref, name, controller, battlefield);
+            }
+            return token;
+        }
+        int wanted = refOrdinal(ref);
+        List<Permanent> candidates = new ArrayList<>();
+        for (Permanent permanent : battlefield) {
+            if (!permanent.isToken() && controller.equals(permanent.getControllerId())
+                    && CardUtil.haveSameNames(permanent.getName(), name, true)) {
+                candidates.add(permanent);
+            }
+        }
+        candidates.sort(java.util.Comparator.comparingInt(Permanent::getCreateOrder));
+        return wanted > 0 && wanted <= candidates.size() ? candidates.get(wanted - 1) : null;
+    }
+
+    /** Whether XMage's name-only combat command cannot tell this name's
+     * token(s) and card(s) apart: the seat controls both kinds under it. The
+     * rule is by kind, not a list of cards, so it covers a token copy of a
+     * card, a card created beside a same-name token, attackers and blockers. */
+    static boolean combatRefAmbiguous(String name, UUID controller, Iterable<Permanent> battlefield) {
+        boolean token = false;
+        boolean card = false;
+        for (Permanent permanent : battlefield) {
+            if (!controller.equals(permanent.getControllerId())
+                    || !CardUtil.haveSameNames(permanent.getName(), name, true)) {
+                continue;
+            }
+            if (permanent.isToken()) {
+                token = true;
+            } else {
+                card = true;
+            }
+        }
+        return token && card;
     }
 
     /** Whether an activation's XMage text turns its permanent face up
