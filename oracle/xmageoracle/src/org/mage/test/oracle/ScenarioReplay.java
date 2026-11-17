@@ -2855,6 +2855,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // XMage's castSpell takes. A step that already names the half
                 // also replays.
                 || mode.equals("adventure_alt") || mode.equals("omen_alt")
+                // "warped": Warp (CR 702.185) is its own SpellAbility on the
+                // card (WarpAbility, "<card> with Warp"), picked by that name
+                // like WarpTest does; the step's mana is the warp cost.
+                || mode.equals("warped")
                 || copyCostKeyword(mode) != null;
     }
 
@@ -4685,12 +4689,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String castSuffix = "morphed".equals(mode) || "megamorphed".equals(mode)
                         ? " using Morph"
                         : "disguised".equals(mode) ? " using Disguise" : "";
-                String card = cardName + castSuffix;
+                boolean warpedCast = "warped".equals(mode);
+                String card = cardName + castSuffix + (warpedCast ? " with Warp" : "");
                 if (!castSuffix.isEmpty()) {
                     faceDownRefs.add(str(st, "card"));
                 }
                 List<String> tg = targets(st);
-                if (hasAlternativeSourceCost(cardName)) {
+                if (!warpedCast && hasAlternativeSourceCost(cardName)) {
                     // A plain cast step: gorge paid the mana cost, so decline
                     // the alternative cost (evoke, impending, dash, ...)
                     // XMage offers through its "Cast with no alternative
