@@ -746,8 +746,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (choiceGame != null && value != null && value.startsWith("@")
                     && isScenarioRef(value.substring(1)) && value.contains(":token:")) {
                 String ref = value.substring(1);
-                Permanent chosen = tokenChoice(ref, owner.seat(refSeat(ref)).getId(),
-                        choiceGame.getBattlefield().getAllPermanents());
+                UUID seatId = owner.seat(refSeat(ref)).getId();
+                Iterable<Permanent> field = choiceGame.getBattlefield().getAllPermanents();
+                Permanent chosen = tokenChoice(ref, seatId, field);
+                if (chosen == null && !owner.xmageSpelling(refName(ref)).equals(refName(ref))) {
+                    // A token copy of a renamed card carries XMage's spelling.
+                    chosen = tokenChoice(ref, owner.xmageSpelling(refName(ref)), seatId, field);
+                }
                 return object != null && chosen != null && chosen.getId().equals(object.getId());
             }
             return super.hasObjectTargetNameOrAlias(object, value);
@@ -952,41 +957,85 @@ public class ScenarioReplay extends CardTestPlayerBase {
          */
         @Override
         public boolean chooseTarget(Outcome outcome, mage.target.Target target, Ability source, Game game) {
-            // XMage poses every optional target ask even when no candidate is
-            // legal (Targets.canChooseFromPossibleTargets returns true for a
-            // min-0 object whatever its candidate set), while gorge's engine
-            // never poses an ask without a legal option -- so such an ask is
-            // unscriptable by construction and its only legal answer is none.
-            // Decline it without consulting the queue: a later ask's scripted
-            // answer (Does Machines' combat trigger, queued behind an earlier
-            // level-gain trigger's empty graveyard ask) must stay untouched
-            // for its own ask. A queued skip still belongs to THIS ask and is
-            // honoured by the ordinary path below.
-            if (unscriptableEmptyAsk(target.getMinNumberOfTargets(),
-                    target.possibleTargets(target.getAffectedAbilityControllerId(this.getId()), source, game).size(),
-                    !getTargets().isEmpty() && TestPlayer.TARGET_SKIP.equals(getTargets().get(0)))) {
-                return target.getSize() > 0 && target.isChosen(game);
-            }
-            // TestPlayer.chooseTarget runs its zone matcher over every queued
-            // answer and rejects a "[target_skip]" that is not at the queue
-            // front (checkTargetDefinitionMarksSupport), so a skip queued for
-            // a LATER target object (Rise from the Wreck's empty Mount slot)
-            // is hidden from this ask and restored, in order, afterwards.
-            List<String> later = hideAfterNextSkip(getTargets());
-            // TestPlayer's player branch scans the WHOLE queue for a
-            // "targetPlayer=" answer whenever the ask is a TargetPlayer OR a
-            // TargetPermanentOrPlayer, before its permanent branch runs, so
-            // the any-target ask of a chain whose LATER object targets a
-            // player would consume the later object's answer (Survey Mechan:
-            // "deals 3 damage to any target" then "target player draws
-            // three"). Withhold the later objects' player answers from this
-            // ask and restore them, in order, afterwards.
-            List<String> laterPlayers = hideLaterPlayerTargets(target, getTargets());
+            // The engine also calls chooseTarget directly (a spell's own
+            // target selection), not only through choose. Make the scripted
+            // matcher see this ask as a choice so a token ref's live,
+            // creation-order resolution applies here too; the outer finally
+            // keeps the previous game for the nested ask.
+            Game previous = choiceGame;
+            choiceGame = game;
             try {
-                return chooseTargetInSegment(outcome, target, source, game);
+                // XMage poses every optional target ask even when no candidate is
+                // legal (Targets.canChooseFromPossibleTargets returns true for a
+                // min-0 object whatever its candidate set), while gorge's engine
+                // never poses an ask without a legal option -- so such an ask is
+                // unscriptable by construction and its only legal answer is none.
+                // Decline it without consulting the queue: a later ask's scripted
+                // answer (Does Machines' combat trigger, queued behind an earlier
+                // level-gain trigger's empty graveyard ask) must stay untouched
+                // for its own ask. A queued skip still belongs to THIS ask and is
+                // honoured by the ordinary path below.
+                if (unscriptableEmptyAsk(target.getMinNumberOfTargets(),
+                        target.possibleTargets(target.getAffectedAbilityControllerId(this.getId()), source, game).size(),
+                        !getTargets().isEmpty() && TestPlayer.TARGET_SKIP.equals(getTargets().get(0)))) {
+                    return target.getSize() > 0 && target.isChosen(game);
+                }
+                // TestPlayer.chooseTarget runs its zone matcher over every queued
+                // answer and rejects a "[target_skip]" that is not at the queue
+                // front (checkTargetDefinitionMarksSupport), so a skip queued for
+                // a LATER target object (Rise from the Wreck's empty Mount slot)
+                // is hidden from this ask and restored, in order, afterwards.
+                List<String> later = hideAfterNextSkip(getTargets());
+                // TestPlayer's player branch scans the WHOLE queue for a
+                // "targetPlayer=" answer whenever the ask is a TargetPlayer OR a
+                // TargetPermanentOrPlayer, before its permanent branch runs, so
+                // the any-target ask of a chain whose LATER object targets a
+                // player would consume the later object's answer (Survey Mechan:
+                // "deals 3 damage to any target" then "target player draws
+                // three"). Withhold the later objects' player answers from this
+                // ask and restore them, in order, afterwards.
+                List<String> laterPlayers = hideLaterPlayerTargets(target, getTargets());
+                try {
+                    return chooseTargetInSegment(outcome, target, source, game);
+                } finally {
+                    getTargets().addAll(laterPlayers);
+                    getTargets().addAll(later);
+                }
             } finally {
-                getTargets().addAll(laterPlayers);
-                getTargets().addAll(later);
+                choiceGame = previous;
+            }
+        }
+
+        /** A divided target is chosen by TestPlayer.chooseTargetAmount, outside
+         * choose and chooseTarget, and reads the queue through the same name/
+         * alias matcher. Make that a choice too, so a token ref's live,
+         * creation-order resolution reaches the TargetAmount path. */
+        @Override
+        public boolean chooseTargetAmount(Outcome outcome, mage.target.TargetAmount target,
+                Ability source, Game game) {
+            Game previous = choiceGame;
+            choiceGame = game;
+            try {
+                return super.chooseTargetAmount(outcome, target, source, game);
+            } finally {
+                choiceGame = previous;
+            }
+        }
+
+        /** XMage's inline {@code $target=} form (castSpell/activateAbility
+         * with a target string) sets its targets in TestPlayer.addTargets,
+         * before any chooseTarget ask and outside choose. It reads the same
+         * name/alias matcher, so make it a choice too: a token ref spelled
+         * "@...:token:" resolves against the LIVE game through tokenChoice
+         * here as well, instead of a stale setup alias or a bare name. */
+        @Override
+        public boolean addTargets(Ability ability, Game game) {
+            Game previous = choiceGame;
+            choiceGame = game;
+            try {
+                return super.addTargets(ability, game);
+            } finally {
+                choiceGame = previous;
             }
         }
 
@@ -2372,27 +2421,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return;
         }
         int seatIndex = refSeat(ref);
-        String name = refName(ref);
         boolean token = ref.contains(":token:");
-        int wanted = 1;
-        int hash = ref.lastIndexOf('#');
-        if (hash >= 0 && ref.substring(hash + 1).matches("[0-9]+")) {
-            wanted = Integer.parseInt(ref.substring(hash + 1));
-        }
         mage.MageObject match = null;
-        int seen = 0;
         if (token) {
-            for (Permanent perm : currentGame.getBattlefield().getAllPermanents()) {
-                if (!perm.isToken() || !seat(seatIndex).getId().equals(perm.getControllerId())
-                        || !perm.getName().contains(name)) {
-                    continue;
-                }
-                if (++seen == wanted) {
-                    match = perm;
-                    break;
-                }
-            }
+            // A token ref ranks its controller's live tokens in creation
+            // order (tokenChoice), the same rule permanentRef and
+            // setupPermanent use. Battlefield iteration is UUID/hash order,
+            // so binding by iteration bound the wrong same-named token.
+            match = tokenChoice(ref, seat(seatIndex).getId(),
+                    currentGame.getBattlefield().getAllPermanents());
         } else {
+            String name = refName(ref);
+            int wanted = 1;
+            int hash = ref.lastIndexOf('#');
+            if (hash >= 0 && ref.substring(hash + 1).matches("[0-9]+")) {
+                wanted = Integer.parseInt(ref.substring(hash + 1));
+            }
+            int seen = 0;
             List<mage.MageObject> objs = new ArrayList<>();
             Player pl = seat(seatIndex);
             for (Permanent perm : currentGame.getBattlefield().getAllPermanents()) {
@@ -2784,12 +2829,25 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** The XMage target string for one scenario target ref: its alias when
-     * setup bound one, else the stripped, XMage-spelled card name. A scripted
-     * xmage_answers target binds a post-setup ref (bindAnswerAlias) before it
-     * gets here. */
+     * setup bound one, else the stripped, XMage-spelled card name. A token
+     * ref keeps its "@" alias spelling even when setup bound none: the token
+     * may not exist yet (a later step creates it, or setup places it at
+     * start), so the steps are queued before any id can be bound.
+     * ScriptedChoicePlayer resolves an "@...:token:" alias against the LIVE
+     * game through tokenChoice, so the ref's creation-order #n reaches
+     * exactly one of several same-named tokens. A scripted xmage_answers
+     * target binds a post-setup ref (bindAnswerAlias) before it gets here.
+     * An already-aliased ref is returned unchanged, so the funnel is
+     * idempotent for a hand-authored "@..." answer. */
     private String targetName(String ref) {
+        if (ref.startsWith("@")) {
+            return ref;
+        }
         String a = refAlias.get(ref);
-        return a != null ? a : xmageSpelling(refName(ref));
+        if (a != null) {
+            return a;
+        }
+        return ref.contains(":token:") ? "@" + ref : xmageSpelling(refName(ref));
     }
 
     /** Resolve a named setup permanent ref, preserving duplicate suffixes. */
@@ -4597,9 +4655,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         // as one castSpell string and lets XMage split it,
                         // as the single-target form does; addTarget's alias
                         // answers are rejected ("Must be target amount").
+                        // Use the same target-amount name helper as the
+                        // scripted "<ref>^X=<share>" answers, so a token ref
+                        // keeps its "@...:token:" spelling and the addTargets
+                        // choice context resolves it live (a bare name would
+                        // lose the ref's creation-order #n).
                         List<String> names = new ArrayList<>();
                         for (String t : tg) {
-                            names.add(xmageSpelling(refName(t)));
+                            names.add(amountTargetName(t));
                         }
                         castSpell(turn, phase, p, card, String.join("^", names));
                         cast.add(cardName);
