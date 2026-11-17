@@ -1545,6 +1545,18 @@ func (em *emitter) optionalSacrificeMode(a *action) string {
 // the battlefield instead of the stack, or after its once-per-turn use does
 // not turn an unrelated setChoice(true) into a cast mode.
 func (t *translator) setupGrantsKeyword(prefix string, a *action) bool {
+	return t.keywordGrants(prefix, a, false)
+}
+
+// setupMayGrantKeyword is setupGrantsKeyword for a refusal rather than a
+// mapping: a selector or gate word it cannot evaluate (numColorsEQ3, wasCast)
+// counts as "may apply", so a grant it cannot rule out is still seen, while a
+// type word or controller that excludes the cast still rules it out.
+func (t *translator) setupMayGrantKeyword(prefix string, a *action) bool {
+	return t.keywordGrants(prefix, a, true)
+}
+
+func (t *translator) keywordGrants(prefix string, a *action, lenient bool) bool {
 	castFace := t.castFace(a.card)
 	if castFace == nil {
 		return false
@@ -1569,10 +1581,10 @@ func (t *translator) setupGrantsKeyword(prefix string, a *action) bool {
 				if !t.affectedZoneStack(st.Params["AffectedZone"]) {
 					continue
 				}
-				if !affectedMatchesFace(castFace, st.Params["Affected"]) {
+				if !affectedMayMatchFace(castFace, st.Params["Affected"], lenient) {
 					continue
 				}
-				if !t.staticGateHolds(f, st, a) {
+				if !t.staticGateHolds(f, st, a, lenient) {
 					continue
 				}
 				return true
@@ -1624,6 +1636,12 @@ func (t *translator) affectedZoneStack(zone string) bool {
 // that is an artifact, not legendary, controlled by the caster, so a word can
 // be a type wherever it appears.
 func affectedMatchesFace(f *cards.Face, affected string) bool {
+	return affectedMayMatchFace(f, affected, false)
+}
+
+// affectedMayMatchFace is affectedMatchesFace; lenient lets a word it cannot
+// evaluate hold instead of failing closed.
+func affectedMayMatchFace(f *cards.Face, affected string, lenient bool) bool {
 	for _, alt := range strings.Split(affected, ",") {
 		alt = strings.TrimSpace(alt)
 		if alt == "" {
@@ -1650,7 +1668,9 @@ func affectedMatchesFace(f *cards.Face, affected string) bool {
 					ok = false
 				}
 			default:
-				ok = false
+				if !lenient {
+					ok = false
+				}
 			}
 		}
 		if ok {
@@ -1700,28 +1720,28 @@ func affectedTypeWord(word string, f *cards.Face) bool {
 // carries. Only the turn-scoped cast count the corpus uses is understood; any
 // other gate fails closed, so the translator cannot grant a keyword the game
 // might withhold.
-func (t *translator) staticGateHolds(f *cards.Face, st *cards.Static, a *action) bool {
+func (t *translator) staticGateHolds(f *cards.Face, st *cards.Static, a *action, lenient bool) bool {
 	sv := st.Params["CheckSVar"]
 	if sv == "" {
 		return true
 	}
 	if st.Params["SVarCompare"] != "EQ0" {
-		return false
+		return lenient
 	}
 	body, ok := f.SVars[sv]
 	if !ok {
-		return false
+		return lenient
 	}
 	const pfx = "Count$ThisTurnCast_"
 	if !strings.HasPrefix(body, pfx) {
-		return false
+		return lenient
 	}
 	filter := strings.TrimPrefix(body, pfx)
 	for _, prev := range t.actions {
 		if prev.turn != a.turn || prev.seat != a.seat || prev.src >= a.src || (prev.kind != "cast" && prev.kind != "play") {
 			continue
 		}
-		if pf := t.castFace(prev.card); pf != nil && affectedMatchesFace(pf, filter) {
+		if pf := t.castFace(prev.card); pf != nil && affectedMayMatchFace(pf, filter, !lenient) {
 			return false
 		}
 	}
@@ -1948,6 +1968,13 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			// cast this spell") with the first setChoice; gorge offers it as
 			// the "bargained" / "casualty" cast mode and then asks which
 			// permanent to sacrifice, which is the choice after the boolean.
+			if em.hasKeywordPrefix(a.card, "Casualty") && em.t.setupGrantsKeyword("Casualty", a) &&
+				len(a.choices) > 0 && a.choices[0].pick == "yes" {
+				// a printed Casualty plus a granted one is two instances
+				// (CR 702.153b): gorge offers one casualty election and
+				// one sacrifice, so the second cannot be stated
+				return nil, refuse("casualty-second-instance", "%s has printed and granted Casualty", a.card)
+			}
 			if mode := em.optionalSacrificeMode(a); mode != "" && len(a.choices) > 0 && !a.choices[0].target &&
 				a.choices[0].x < 0 && a.choices[0].mode == 0 &&
 				(a.choices[0].pick == "yes" || a.choices[0].pick == "no") {
@@ -1988,7 +2015,15 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 					}
 				}
 				if n >= 2 && (len(seats) >= 2 || interleaved) {
-					return nil, refuse("target-queue-order", "%s: %d addTarget calls and no explicit target", a.card, n)
+					r := refuse("target-queue-order", "%s: %d addTarget calls and no explicit target", a.card, n)
+					if len(seats) >= 2 || !eachTargetHasOwnMay(a.choices) {
+						return nil, r
+					}
+					// One seat, every target followed by its own yes/no (a
+					// doubled "you may" trigger, Panharmonicon): the queue
+					// order is not ambiguous between a spell's target and a
+					// trigger's, so play it and refuse only if it fails.
+					t.queueShape = r
 				}
 			}
 			for _, x := range a.targets {
@@ -2746,35 +2781,14 @@ func (t *translator) manaSideEffects(steps []*step) *refusal {
 // replicateChoiceRefusal refuses a spell cast whose replicate count XMage
 // states as a boolean. XMage's "Yes, replicate / No, only once" answers are
 // gorge's cast-flow KChoose count ask (0..N), not a yes/no, so the stated
-// choices are never consumed and the spell is cast once (Djinn Illuminatus).
+// choices are never consumed and the spell is cast once (Djinn Illuminatus,
+// Threefold Signal). A grant reaches a cast by its own Affected$ scope, not by
+// the cast's card type, so each cast is asked of the grants that may apply to
+// it; gorge also never offers the replicated mode for a granted keyword, so a
+// corrected election cannot be stated either.
 func (t *translator) replicateChoiceRefusal() *refusal {
-	grants := false
-	for p := 0; p < 2 && !grants; p++ {
-		for _, ac := range t.setup[p] {
-			if ac.zone != "battlefield" {
-				continue
-			}
-			c, ok := t.lookup(ac.name)
-			if !ok {
-				continue
-			}
-			for _, f := range c.Faces {
-				if f == nil {
-					continue
-				}
-				for _, st := range f.Statics {
-					if strings.Contains(st.Params["AddKeyword"], "Replicate") {
-						grants = true
-					}
-				}
-			}
-		}
-	}
-	if !grants {
-		return nil
-	}
 	for _, a := range t.actions {
-		if a.kind != "cast" || len(a.choices) == 0 || t.isPermanentCard(a.card) {
+		if a.kind != "cast" || len(a.choices) == 0 || !t.setupMayGrantKeyword("Replicate", a) {
 			continue
 		}
 		for _, ch := range a.choices {
@@ -2854,4 +2868,23 @@ func manaSideEffect(c *cards.Card, name string) *refusal {
 		}
 	}
 	return nil
+}
+
+// eachTargetHasOwnMay reports whether every target choice of cs is directly
+// followed by a yes/no answer: each addTarget answers a trigger's target and
+// its own optional ask, not a spell's target ahead of a trigger's.
+func eachTargetHasOwnMay(cs []choice) bool {
+	for i, ch := range cs {
+		if !ch.target {
+			continue
+		}
+		if i+1 >= len(cs) {
+			return false
+		}
+		nx := cs[i+1]
+		if nx.target || nx.x >= 0 || nx.mode != 0 || (nx.pick != "yes" && nx.pick != "no") {
+			return false
+		}
+	}
+	return true
 }

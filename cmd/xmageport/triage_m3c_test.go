@@ -19,14 +19,12 @@ func playsToPass(t *testing.T, body string) {
 	}
 }
 
-// Omo's enter trigger names its targets with addTarget, but its hybrid
-// {G/U} cost makes gorge pose a "Pay U" choose at the cast first. The unused
-// target is re-homed as an answer of that payment choose, never reaching the
-// trigger's target ask, so the counters are not put. This is one row, below
-// the three-row bar for a shared translator fix: the shape is refused, not
-// silently played differently.
-func TestUnusedTargetPaymentChooseRefuses(t *testing.T) {
-	res := translateBody(t, `setStrictChooseMode(true);
+// Omo's enter trigger names its targets with addTarget, but its hybrid cost
+// poses a mana-payment choose. The targets must stay on the step (re-homing
+// them as that choose's answers is what lost the passing scenario); a run that
+// then reproduces every assert passes, and one that fails refuses.
+func TestUnusedTargetPaymentChooseIsAShape(t *testing.T) {
+	const body = `setStrictChooseMode(true);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Coiling Woodworm", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Imperious Perfect", 1);
@@ -36,14 +34,20 @@ func TestUnusedTargetPaymentChooseRefuses(t *testing.T) {
         addTarget(playerA, "Coiling Woodworm");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertCounterCount(playerA, "Coiling Woodworm", CounterType.EVERYTHING, 1);
-        assertPowerToughness(playerA, "Coiling Woodworm", 2, 2);`)
-	if res.Scenario == nil {
-		t.Fatalf("refused early %s: %s", res.Code, res.Detail)
-	}
-	runResult(testutilRegistry(t), res)
-	if res.Status != "refused" || res.Code != "unused-target-payment-choose" {
-		t.Fatalf("status %s code %q (%v), want refused unused-target-payment-choose", res.Status, res.Code, res.Fails)
+        assertPowerToughness(playerA, "Coiling Woodworm", 2, 2);
+        assertCounterCount(playerA, "Coiling Woodworm", CounterType.EVERYTHING, `
+	for _, c := range []struct{ n, status, code string }{
+		{"1);", "pass", ""},
+		{"7);", "refused", "unused-target-payment-choose"},
+	} {
+		res := translateBody(t, body+c.n)
+		if res.Scenario == nil {
+			t.Fatalf("refused early %s: %s", res.Code, res.Detail)
+		}
+		runResult(testutilRegistry(t), res)
+		if res.Status != c.status || res.Code != c.code {
+			t.Fatalf("%s: status %s code %q (%v), want %s %q", c.n, res.Status, res.Code, res.Fails, c.status, c.code)
+		}
 	}
 }
 
@@ -497,5 +501,138 @@ func TestAffectedMatchesCardArtifactForm(t *testing.T) {
 	}
 	if affectedMatchesFace(f, "Creature.YouCtrl") {
 		t.Fatal("Creature.YouCtrl matched an artifact")
+	}
+}
+
+// The setup-decision and continue-acknowledgement refusals are shapes of a
+// failing run, found in its transcript: like a translator shape they wait for
+// a replay diff or a harness failure, which outrank a fail-expect row.
+func TestRunShapeWaitsForHardFailures(t *testing.T) {
+	for _, code := range []string{"setup-decision", "continue-acknowledgement"} {
+		r := &result{runShape: refuse(code, "x"), Status: "fail-expect",
+			Fails: []string{"p0 hand 0, want 1"}}
+		if !shapeRefusalApplies(r) {
+			t.Fatalf("%s: a plain fail-expect was not refused", code)
+		}
+		refuseShape(r)
+		if r.Status != "refused" || r.Code != code || r.Scenario != nil {
+			t.Fatalf("%s: got %s %s", code, r.Status, r.Code)
+		}
+		for _, hard := range []*result{
+			{runShape: refuse(code, "x"), Status: "fail-harness", Fails: []string{"harness: answer \"x\" not offered"}},
+			{runShape: refuse(code, "x"), Status: "fail-expect", Fails: []string{"unconsumed answer(s): 1"}},
+			{runShape: refuse(code, "x"), Status: "fail-expect", Fails: []string{"p0 hand 0, want 1"}, ReplayDiff: "live != replay"},
+		} {
+			if shapeRefusalApplies(hard) {
+				t.Fatalf("%s: a hard failure was refused away: %+v", code, hard.Fails)
+			}
+		}
+	}
+}
+
+// A doubled "you may" trigger states each target with its own yes/no
+// (Phyrexian Ingester under Panharmonicon). That is not a spell's target
+// ahead of a trigger's, so it is played, and refused only when the run fails.
+func TestTargetQueueOfPerTargetMaysIsAShape(t *testing.T) {
+	const pre = `addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+        addCard(Zone.HAND, playerA, "Ancestral Recall");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancestral Recall");
+`
+	res := translateAsserting(t, pre+`addTarget(playerA, playerB); setChoice(playerA, true); addTarget(playerA, playerA); setChoice(playerA, true);`)
+	if res.Code != "" || res.shape == nil || res.shape.Code != "target-queue-order" {
+		t.Fatalf("code %q shape %v, want a target-queue-order shape", res.Code, res.shape)
+	}
+	// a trailing target with no yes/no of its own stays refused outright
+	res = translateAsserting(t, pre+`addTarget(playerA, playerB); setChoice(playerA, true); addTarget(playerA, playerA);`)
+	if res.Code != "target-queue-order" {
+		t.Fatalf("code %q, want target-queue-order", res.Code)
+	}
+}
+
+// Threefold Signal grants replicate to a three-colour spell of any type, so
+// XMage's replicate yes/no on a creature spell is the same unstateable count
+// ask the Djinn Illuminatus rows refuse. The grant's own Affected$ scope, not
+// the cast's card type, decides which casts it reaches.
+func TestGrantedReplicateRefusesByScope(t *testing.T) {
+	const threefold = `addCard(Zone.BATTLEFIELD, playerA, "Threefold Signal");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.HAND, playerA, "Esper Sojourners");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Esper Sojourners");
+        setChoice(playerA, true);
+        setChoice(playerA, false);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Esper Sojourners", 2);`
+	if res := translateBody(t, threefold); res.Code != "replicate-choice" {
+		t.Fatalf("code %q (%s), want replicate-choice", res.Code, res.Detail)
+	}
+	// Djinn Illuminatus grants only instants and sorceries: a creature spell's
+	// booleans are not its replicate count.
+	djinn := strings.Replace(strings.Replace(threefold, "Threefold Signal", "Djinn Illuminatus", 1), "Esper Sojourners", "Grizzly Bears", 3)
+	if res := translateBody(t, djinn); res.Code == "replicate-choice" {
+		t.Fatalf("a creature spell under Djinn Illuminatus was refused: %s", res.Detail)
+	}
+}
+
+// A card with printed Casualty that Anhelo also grants Casualty has two
+// instances; gorge offers one casualty election and one sacrifice.
+func TestSecondCasualtyInstanceRefuses(t *testing.T) {
+	res := translateBody(t, `addCard(Zone.BATTLEFIELD, playerA, "Anhelo, the Painter");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Aetherwind Basker", 2);
+        addCard(Zone.HAND, playerA, "A Little Chat");
+        setStrictChooseMode(true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "A Little Chat");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Aetherwind Basker");
+        setChoice(playerA, "Aetherwind Basker");
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertHandCount(playerA, 3);`)
+	if res.Code != "casualty-second-instance" {
+		t.Fatalf("code %q (%s), want casualty-second-instance", res.Code, res.Detail)
+	}
+}
+
+// The Spear on the battlefield does not make every pick of a mana rock its
+// target: a Shatter the Spear's controller casts at the same Mind Stone
+// answers the spell, not the "target tapped nonland permanent" ability.
+func TestManaSourceShapeIgnoresSpellTargetWithSpearPresent(t *testing.T) {
+	res := translateBody(t, `addCard(Zone.BATTLEFIELD, playerA, "The Spear of Bashenga");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, "Shatter");
+        addCard(Zone.BATTLEFIELD, playerB, "Mind Stone");
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shatter");
+        addTarget(playerA, "Mind Stone");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertGraveyardCount(playerB, "Mind Stone", 1);`)
+	if res.shape != nil {
+		t.Fatalf("a spell's target armed shape %v", res.shape)
+	}
+}
+
+// A subtype assert on a card no action is aimed at (Vraska in play, but the
+// assert is about an unrelated creature) is not the contested animation.
+func TestRemoveCardTypesIgnoresUnaimedAssert(t *testing.T) {
+	res := translateBody(t, `addCard(Zone.BATTLEFIELD, playerA, "Vraska, the Silencer");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, "Doom Blade");
+        addCard(Zone.BATTLEFIELD, playerB, "Red Herring");
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Doom Blade", "Red Herring");
+        setChoice(playerA, true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertSubtype("Grizzly Bears", SubType.BEAR);`)
+	if res.shape != nil {
+		t.Fatalf("an unrelated subtype assert armed shape %v", res.shape)
 	}
 }

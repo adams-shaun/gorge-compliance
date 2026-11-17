@@ -83,6 +83,16 @@ func (t *translator) manaSourceRefusal() *refusal {
 		if !ch.target || !ok {
 			continue
 		}
+		// The pick must answer the tapped-target ability's own trigger: its
+		// controller answers it, and the statement before it is an attack or
+		// an activation, not a spell (a Shatter aimed at the same Mind Stone
+		// is not the Spear's target).
+		if !tappedSeats[ch.seat] {
+			continue
+		}
+		if owner := t.choiceOwner(ch); owner == nil || owner.kind == "cast" || owner.kind == "play" {
+			continue
+		}
 		for p := 0; p < 2; p++ {
 			for _, ac := range t.setup[p] {
 				if ac.zone != "battlefield" || ac.tapped || !sameName(ac.name, name) || tappedSeats[p] || !casts[p] {
@@ -109,4 +119,16 @@ func (t *translator) castsCard(p int, name string) bool {
 		}
 	}
 	return false
+}
+
+// choiceOwner returns the last action stated before ch, the one whose ask the
+// choice answers, or nil.
+func (t *translator) choiceOwner(ch choice) *action {
+	var owner *action
+	for _, a := range t.actions {
+		if a.src < ch.src && (owner == nil || a.src > owner.src) {
+			owner = a
+		}
+	}
+	return owner
 }

@@ -188,7 +188,10 @@ type translator struct {
 	choiceList        []choice
 	droppedOrder      int
 	droppedOrderTexts []string
-	orphanMode        bool // a setModeChoice no action consumes (a trigger's modes)
+	// queueShape is the target-queue-order refusal of a one-seat run of
+	// addTargets that each carry their own yes/no; it applies only on failure.
+	queueShape *refusal
+	orphanMode bool // a setModeChoice no action consumes (a trigger's modes)
 	// playEffectKicker names a card an effect plays (not a cast step) that
 	// prints Kicker/Multikicker: gorge's effPlay cast has no kicked answer, so
 	// the XMage kicker choices cannot be stated and a nonzero count would be
@@ -383,7 +386,10 @@ type addCardCall struct {
 type result struct {
 	// shape is the refusal a failing run converts to (manaSourceRefusal,
 	// orderedPicksRefusal); nil when the test has none of those shapes.
-	shape                      *refusal
+	shape *refusal
+	// runShape is the refusal the last run's transcript showed (a setup
+	// decision, a bare Continue acknowledgement); see activeShape.
+	runShape                   *refusal
 	Family, Class, Method, Rel string
 	Code, Detail               string // refusal (empty when generated)
 	Scenario                   *portScenario
@@ -518,6 +524,9 @@ func translate(reg *cards.Registry, jc *javaClass, m *javaMethod, family string)
 	}
 	if res.shape == nil {
 		res.shape = t.removeCardTypesSubtypeRefusal()
+	}
+	if res.shape == nil {
+		res.shape = t.queueShape
 	}
 	return res
 }

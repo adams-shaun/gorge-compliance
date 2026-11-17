@@ -565,7 +565,7 @@ func runResult(reg *cards.Registry, r *result) {
 // the audit gate's own verdict and outranks a fail-expect row, so a shape can
 // never hide it; a row triaged as a known gorge bug keeps its fail-expect.
 func shapeRefusalApplies(r *result) bool {
-	if r.shape == nil || r.Status != "fail-expect" {
+	if r.activeShape() == nil || r.Status != "fail-expect" {
 		return false
 	}
 	if r.Scenario != nil && knownBugs[r.Scenario.XMage] != "" {
@@ -574,10 +574,20 @@ func shapeRefusalApplies(r *result) bool {
 	return r.ReplayDiff == "" && !anyHarness(r.Fails)
 }
 
+// activeShape is the shape refusal a failing run converts to: the one the
+// translator derived from the test, else the one the run's transcript showed.
+func (r *result) activeShape() *refusal {
+	if r.shape != nil {
+		return r.shape
+	}
+	return r.runShape
+}
+
 // refuseShape converts a failing run into the shape refusal r.shape names and
 // drops the scenario, so writeCommit does not write it.
 func refuseShape(r *result) {
-	r.Code, r.Detail, r.Status = r.shape.Code, r.shape.Detail, "refused"
+	sh := r.activeShape()
+	r.Code, r.Detail, r.Status = sh.Code, sh.Detail, "refused"
 	r.Scenario = nil
 }
 
@@ -596,6 +606,7 @@ func cloneGroups(gs []*group) []*group {
 
 func runResultMask(reg *cards.Registry, r *result, mask uint) {
 	sc := r.Scenario
+	r.runShape = nil
 	for _, g := range r.Groups {
 		g.kinds = make([]int, len(g.answers))
 	}
@@ -727,10 +738,14 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 				// ask is re-homed as its answer before the leftover is
 				// moved on to the next step.
 				if strings.Contains(line, "unused target(s)") {
-					if kind, ok := targetAskKind(asks[n]); ok {
-						if paymentChooseOnly(asks[n]) {
-							r.shape = refuse("unused-target-payment-choose", "an XMage addTarget can only answer a card choice; the step poses only a mana-payment choose")
-						}
+					if kind, ok := targetAskKind(asks[n]); ok && paymentChooseOnly(asks[n]) {
+						// The only choose is gorge's mana-payment plumbing
+						// ("Pay U"), which no addTarget answers: the targets
+						// stay on the step (where the run may still reproduce
+						// every assert) and move on as leftovers, and the
+						// row refuses only if it then fails.
+						r.shape = refuse("unused-target-payment-choose", "an XMage addTarget can only answer a card choice; the step poses only a mana-payment choose")
+					} else if ok {
 						for _, g := range at {
 							if convertUnusedTargetsToAnswers(g, line, kind) {
 								progress = true
@@ -832,15 +847,14 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 		//   - gorge poses a bare "Continue" acknowledgement of a
 		//     look-at-top reveal (Birthing Ritual) that XMage never asks,
 		//     which the stated picks are then offered to.
+		// Neither refuses here: a replay diff or a harness failure is the
+		// audit gate's own verdict and outranks them, and the boolean-mask
+		// retries may still reproduce every assert. runResult applies the
+		// refusal after those, through shapeRefusalApplies.
 		if k := setupDecision(transcript); k != "" {
-			r.Code, r.Detail, r.Status = "setup-decision", "a "+k+" decision is posed before the first step", "refused"
-			r.Scenario = nil
-			return
-		}
-		if hasContinueAck(transcript) {
-			r.Code, r.Detail, r.Status = "continue-acknowledgement", "gorge poses a bare Continue acknowledgement XMage never asks", "refused"
-			r.Scenario = nil
-			return
+			r.runShape = refuse("setup-decision", "a %s decision is posed before the first step", k)
+		} else if hasContinueAck(transcript) {
+			r.runShape = refuse("continue-acknowledgement", "gorge poses a bare Continue acknowledgement XMage never asks")
 		}
 	}
 	if k := aiChoiceFallback(transcript); len(fails) > 0 && !r.Strict && k != "" && knownBugs[sc.XMage] == "" {

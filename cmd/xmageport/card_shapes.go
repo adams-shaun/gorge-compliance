@@ -48,6 +48,12 @@ func (t *translator) removeCardTypesSubtypeRefusal() *refusal {
 						if sub == "" || slices.Contains(added, sub) {
 							continue
 						}
+						// the assert must be about the card the effect
+						// animates: one the test aims an action at, which
+						// printed the old subtype it expects retained
+						if !t.targetedCardPrints(c.Args[0].s, sub) {
+							continue
+						}
 						return refuse("removecardtypes-subtype-contested", "%s sets the artifact subtype set to %s; the test expects the old subtype %s retained", ac.name, strings.Join(added, "/"), sub)
 					}
 				}
@@ -70,4 +76,30 @@ func addedSubtypeWords(s string) []string {
 		out = append(out, w)
 	}
 	return out
+}
+
+// targetedCardPrints reports whether some action of the test is aimed at the
+// card name and the card's own face prints the subtype sub.
+func (t *translator) targetedCardPrints(name, sub string) bool {
+	aimed := false
+	for _, a := range t.actions {
+		for _, x := range a.targets {
+			if sameName(x, name) {
+				aimed = true
+			}
+		}
+	}
+	if !aimed {
+		return false
+	}
+	c, ok := t.lookup(name)
+	if !ok {
+		return false
+	}
+	for _, f := range c.Faces {
+		if f != nil && f.HasTypeWord(sub) {
+			return true
+		}
+	}
+	return false
 }
