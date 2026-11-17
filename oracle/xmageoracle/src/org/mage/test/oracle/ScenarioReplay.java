@@ -2832,6 +2832,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // from gorge's election, so the step is a plain cast here.
                 || mode.equals("alternative")
                 || mode.equals("prepared_copy")
+                // "adventure_alt" / "omen_alt": the cast of an Adventure or
+                // Omen half. gorge's step names the half ("p0:Stomp") and
+                // setup deals the whole card; XMage casts the half by its own
+                // spell name (AdventureSpellCard / the Omen half), so the step
+                // is a plain cast of the name the step carries.
+                || mode.equals("adventure_alt") || mode.equals("omen_alt")
                 || copyCostKeyword(mode) != null;
     }
 
