@@ -268,20 +268,20 @@ func writeCommit(dir string, results []*result) error {
 		p := filepath.Join(dir, k)
 		// Keep committed scenarios this run did not regenerate. A run is often
 		// a chunk or a single -only method, and a method whose translation now
-		// fails the harness has no replacement scenario: writing only this
-		// run's results would silently delete the coverage. A method this run
-		// triaged as refused or fail-expect (not known_bug) is a deliberate
-		// removal and stays out, whether or not the class has a scenario to
-		// write. A fail-harness method is kept only while this run writes no
-		// replacement for it (a known_bug fail-harness row is written anew),
-		// so a repeated run does not append the same scenario again.
+		// fails the harness or is refused has no replacement scenario: writing
+		// only this run's results would silently delete coverage that still
+		// passes the audit. A refusal is a limit of this translator, not
+		// evidence the committed scenario is wrong, so its old scenario stays
+		// too. A method is only dropped when this run wrote its replacement
+		// (or triaged it fail-replay, which is never written and outranks the
+		// old row).
 		old, hadOld := readPortFile(p)
 		var kept []portScenario
 		for _, sc := range old.Scenarios {
 			switch status[sc.XMage] {
 			case "":
 				kept = append(kept, sc)
-			case "fail-harness":
+			case "fail-harness", "fail-expect", "refused":
 				if !written[sc.XMage] {
 					kept = append(kept, sc)
 				}

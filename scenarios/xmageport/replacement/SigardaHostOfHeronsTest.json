@@ -46,7 +46,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:Diabolic Edict",
-     "mana": "CB",
+     "mana": "BB",
      "targets": [
       "p0"
      ]
@@ -67,7 +67,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Diabolic Edict",
-     "mana": "CB",
+     "mana": "BB",
      "targets": [
       "p1"
      ]
@@ -218,7 +218,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:Tempt with Immortality",
-     "mana": "CCCCB"
+     "mana": "BBBBB"
     },
     {
      "op": "pass_to",
@@ -230,13 +230,15 @@
        "kind": "any",
        "pick": [
         "p1:Merciless Executioner"
-       ]
+       ],
+       "seat": 1
       },
       {
        "kind": "any",
        "pick": [
         "p0:Sigarda, Host of Herons"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },

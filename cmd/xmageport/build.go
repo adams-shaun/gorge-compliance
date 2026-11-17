@@ -910,6 +910,30 @@ func countExpect(p int, zone, name string, n int) (*expect, *refusal) {
 	return &expect{Count: c, Eq: ip(n)}, nil
 }
 
+// countOf is countExpect plus the token-only rule: XMage counts the permanents
+// whose name IS the asserted one, but the runner counts the objects whose
+// printed name CONTAINS it, so a Role token's name ("Cursed") also counts the
+// card that happens to start with it ("Cursed Courtier"). A name no card
+// bears and a token script does can only be a token's, so the count is
+// restricted to tokens, which keeps the two readings equal.
+func (t *translator) countOf(p int, zone, name string, n int) (*expect, *refusal) {
+	e, r := countExpect(p, zone, name, n)
+	if r != nil || e == nil || e.Count == nil || e.Count.Token != nil || e.Count.Name == "" {
+		return e, r
+	}
+	if _, isCard := t.lookup(e.Count.Name); isCard {
+		return e, r
+	}
+	for _, c := range t.reg.Tokens {
+		if c != nil && len(c.Faces) > 0 && c.Faces[0] != nil && strings.EqualFold(c.Faces[0].Name, e.Count.Name) {
+			tr := true
+			e.Count.Token = &tr
+			break
+		}
+	}
+	return e, r
+}
+
 // countNameRefusal is the shape refusal of a positive count asserted by a name
 // no object can carry: a permanent an effect renamed (Awakening of Vitu-Ghazi
 // turns a land into "Vitu-Ghazi"). The scenario's count matches the printed
@@ -1054,7 +1078,7 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 			if r != nil {
 				return nil, r
 			}
-			e, r := countExpect(int(ref[1]-'0'), zone, name, n)
+			e, r := t.countOf(int(ref[1]-'0'), zone, name, n)
 			return []*expect{e}, r
 		case 3:
 			p, ok := seatOf(a[0])
@@ -1066,7 +1090,8 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 			if r := t.countNameRefusal(p, zone, name, n); r != nil && t.countShape == nil {
 				t.countShape = r
 			}
-			e, r := countExpect(p, zone, name, n)
+			t.tokenCapShape(zone, n)
+			e, r := t.countOf(p, zone, name, n)
 			return []*expect{e}, r
 		}
 		return bad()
@@ -1093,6 +1118,11 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 			if r := t.anyScopePTConflict(p, nm, pt); r != nil {
 				return nil, r
 			}
+			// a mana ability that puts a -0/-1 counter (Wall of Roots) moves
+			// the P/T this asserts, and the runner pays from the pool
+			if t.manaSource(nm) && !t.manaSourceLand(nm) && t.paysFromPool(nm) && t.manaAbilityPutsCounter(nm) && !t.sourceStatedPaid(nm) {
+				t.noteShape(refuse("mana-ability-counter", "%s's mana ability puts a counter that changes its P/T, and the runner pays from the pool", nm))
+			}
 		}
 		return []*expect{{Card: ref, PT: pt}}, nil
 	case "assertCounterCount":
@@ -1117,8 +1147,11 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 		if r != nil {
 			return nil, r
 		}
-		if nm, rr := xmageName(a[0].s); rr == nil && t.manaSource(nm) && !t.manaSourceLand(nm) && t.paysFromPool(nm) && t.manaAbilityPutsCounter(nm) {
+		if nm, rr := xmageName(a[0].s); rr == nil && t.manaSource(nm) && !t.manaSourceLand(nm) && t.paysFromPool(nm) && t.manaAbilityPutsCounter(nm) && !t.sourceStatedPaid(nm) {
 			t.noteShape(refuse("mana-ability-counter", "%s's mana ability puts the %s counter, and the runner pays from the pool", nm, kind))
+		}
+		if nm, rr := xmageName(a[0].s); rr == nil {
+			t.counterReplacedEntry(nm, kind)
 		}
 		return []*expect{{Card: ref, Counters: map[string]int32{kind: int32(a[2].n)}}}, nil
 	case "assertType", "assertSubtype", "assertNotSubtype":
@@ -1148,7 +1181,13 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 					e.NoTypes = []string{ty}
 				}
 			case vIdent:
-				e.Types = []string{ty, titleEnum(a[2].s)}
+				if a[2].s == "null" {
+					// assertType(name, type, null): XMage checks the type
+					// only; null states no subtype to require
+					e.Types = []string{ty}
+				} else {
+					e.Types = []string{ty, titleEnum(a[2].s)}
+				}
 			default:
 				return bad()
 			}
@@ -1246,6 +1285,14 @@ type emitter struct {
 	// and cast steps put on the battlefield after setup (a land drop, a mana
 	// rock): castMana counts them as mana sources.
 	entered [2][]string
+	// sensUsed: payment-sensitive source ref -> turn it last paid a cast
+	// (-1 once a flicker made it a new object).
+	sensUsed map[string]int
+	// cloned: per seat, the permanents that entered as a copy of a
+	// payment-sensitive source (source_payment.go).
+	cloned [2][]*sensSource
+	// spent: per seat, the mana earlier casts seeded since its last untap.
+	spent [2]spentMana
 }
 
 func (em *emitter) add(s *step) *step {
@@ -1474,6 +1521,12 @@ func (em *emitter) noteEntered(a *action) {
 // land types makes those colours; any other permanent contributes its printed
 // AB$ Mana abilities' Produced$.
 func (t *translator) manaSources(p int, entered []string) *manaSet {
+	return t.manaSourcesSkipping(p, entered, nil)
+}
+
+// manaSourcesSkipping is manaSources without the named permanents: the
+// payment-sensitive sources a cast pays by activating them.
+func (t *translator) manaSourcesSkipping(p int, entered []string, skip map[string]bool) *manaSet {
 	ms := &manaSet{}
 	tapped := map[string]bool{}
 	var names []string
@@ -1492,7 +1545,7 @@ func (t *translator) manaSources(p int, entered []string) *manaSet {
 		}
 	}
 	for _, n := range append(names, entered...) {
-		if tapped[n] {
+		if tapped[n] || skip[n] {
 			continue
 		}
 		nm, r := xmageName(n)
@@ -2088,6 +2141,7 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			return nil, refuse("cast-not-in-setup", "%s", a.card)
 		}
 		s := &step{Op: a.kind, Seat: a.seat, Card: ref}
+		var payment []*step
 		if a.kind == "cast" {
 			if len(a.choices) > 0 && !a.choices[0].target && a.choices[0].x < 0 && a.choices[0].mode == 0 &&
 				a.choices[0].pick != "yes" && a.choices[0].pick != "no" && em.hasOptionalCost(a.card) {
@@ -2097,11 +2151,29 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 				// yes/no election is consumed below
 				return nil, refuse("optional-cost-pick", "%s: %s", a.card, a.choices[0].pick)
 			}
-			m, r := em.castMana(a.seat, a.card, takeX(a))
+			if t.playsAllAtOnce(a.card) {
+				// two or more cards picked by name and confirmed: a pick and a
+				// yes/no per card (a lone pick is a sacrifice or bargain cost)
+				yes, picks := 0, 0
+				for _, ch := range a.choices {
+					switch {
+					case ch.target || ch.x >= 0:
+					case ch.pick == "yes":
+						yes++
+					case strings.HasPrefix(ch.pick, "name:"):
+						picks++
+					}
+				}
+				if yes >= 2 && picks >= 2 {
+					return nil, refuse("play-all-one-ask", "%s: XMage asks a pick and a yes/no per card cast (%d casts), gorge poses one modes ask for the whole set", a.card, yes)
+				}
+			}
+			m, pay, r := em.castManaPaying(a.seat, a.card, takeX(a))
 			if r != nil {
 				return nil, r
 			}
 			s.Mana = m
+			payment = pay
 			// XMage answers Kicker's "pay the kicker?" with the first
 			// setChoice after the cast; gorge offers it as a cast mode.
 			if kc := em.kickerCost(a.card); kc != "" && len(a.choices) > 0 && !a.choices[0].target &&
@@ -2212,7 +2284,22 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			}
 			s.Targets = append(s.Targets, trs...)
 		}
+		if s.CastMode != "alternative" {
+			em.commitPayment(a.seat, payment)
+		} else {
+			// the alternative cost pays no mana: the activations are not
+			// needed and the sources were not stated paid
+			for _, st := range payment {
+				t.markSourceUnpaid(refName(st.Card))
+			}
+		}
 		em.add(s)
+		if a.kind == "cast" {
+			em.noteFlicker(a.card, s.Targets)
+		}
+		if a.kind == "play" {
+			em.noteClonedSource(a, ref)
+		}
 		if r := attach(s, len(s.Targets) > 0); r != nil {
 			return nil, r
 		}

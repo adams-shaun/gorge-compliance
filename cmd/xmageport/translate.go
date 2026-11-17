@@ -217,6 +217,10 @@ type translator struct {
 	// check the runner would reach in another step, a counter a pooled
 	// mana ability never puts. It converts a failing run only.
 	emitShape *refusal
+	// sourcePaid / sourceUnpaid record, per payment-sensitive mana source
+	// name, whether the emitter paid a cast by activating it or left it to
+	// the pool (source_payment.go).
+	sourcePaid, sourceUnpaid map[string]bool
 	// ptAsserted remembers the P/T an assertPowerToughness stated per seat
 	// and name (anyScopePTConflict).
 	ptAsserted map[string]string
@@ -632,6 +636,9 @@ func translate(reg *cards.Registry, jc *javaClass, m *javaMethod, family string)
 	}
 	if res.shape == nil {
 		res.shape = t.electShape
+	}
+	if res.shape == nil {
+		res.shape = t.familyShapes()
 	}
 	if res.shape == nil {
 		res.shape = t.emitShape
