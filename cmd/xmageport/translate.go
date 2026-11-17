@@ -171,6 +171,7 @@ type translator struct {
 	castRefs      [2]map[string][]string
 	allNames      map[string]bool // every string arg outside addCard (keeps lands)
 	nameUses      map[string]int  // how many times each such string arg appears (casts, activations)
+	abilityUses   map[string]int  // how many times each activateAbility text appears
 	needAll       bool            // an assert counts all permanents: keep lands
 	pendingChecks []pendingCheck
 	preChoices    []choice
@@ -516,6 +517,12 @@ func (t *translator) read() *refusal {
 				}
 				t.nameUses[a.s]++
 			}
+		}
+		if c.Name == "activateAbility" && len(c.Args) > 3 && c.Args[3].kind == vStr {
+			if t.abilityUses == nil {
+				t.abilityUses = map[string]int{}
+			}
+			t.abilityUses[c.Args[3].s]++
 		}
 		if r := t.readCall(i, c); r != nil {
 			return r

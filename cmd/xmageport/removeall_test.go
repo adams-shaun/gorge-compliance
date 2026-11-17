@@ -181,6 +181,23 @@ func TestRemoveAllCardsTranslates(t *testing.T) {
 // TestOracleDrawDepths pins the Oracle-text scan: a fixed high amount still
 // counts, an amount fixed per permanent or per trigger does not, and a draw
 // named in a trigger's condition is not an effect.
+// An activateAbility names the ability text, not the card: two activations of
+// Jayemdae Tome plus a turn-3 draw step reach 3 cards of a 2-card library.
+func TestRepeatActivationsRefuse(t *testing.T) {
+	body := func(extra string) string {
+		return `removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Jayemdae Tome");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}, {T}: Draw a card.");` + extra + `
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();`
+	}
+	if _, r := readWithCorpus(t, body(`activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}, {T}: Draw a card.");`)); r == nil || r.Code != "library-size" {
+		t.Fatalf("two Tome activations: refusal %v, want library-size", r)
+	}
+}
+
 func TestOracleDrawDepths(t *testing.T) {
 	tr, r := readWithCorpus(t, `setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

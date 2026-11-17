@@ -86,25 +86,31 @@ func (t *translator) oracleDraws(name string) int {
 	}
 	n := 0
 	for _, f := range c.Faces {
-		if f == nil {
-			continue
+		if f != nil {
+			n += textDepth(strings.ToLower(f.Oracle))
 		}
-		text := strings.ToLower(f.Oracle)
-		for _, ef := range []struct {
-			re         *regexp.Regexp
-			repeatable bool
-		}{
-			{reDrawEffect, true},
-			{reMillEffect, false},
-			{reTopCards, false},
-		} {
-			for _, m := range ef.re.FindAllStringSubmatchIndex(text, -1) {
-				n += effectDepth(text, m, text[m[2]:m[3]], ef.repeatable)
-			}
+	}
+	return n
+}
+
+// textDepth is how many library cards the (lowercased) text can draw, mill or
+// look at: the sum of every matched clause, unknownDraws for a deep read.
+func textDepth(text string) int {
+	n := 0
+	for _, ef := range []struct {
+		re         *regexp.Regexp
+		repeatable bool
+	}{
+		{reDrawEffect, true},
+		{reMillEffect, false},
+		{reTopCards, false},
+	} {
+		for _, m := range ef.re.FindAllStringSubmatchIndex(text, -1) {
+			n += effectDepth(text, m, text[m[2]:m[3]], ef.repeatable)
 		}
-		if reDeepLibrary.MatchString(text) {
-			n += unknownDraws
-		}
+	}
+	if reDeepLibrary.MatchString(text) {
+		n += unknownDraws
 	}
 	return n
 }
@@ -167,6 +173,16 @@ func (t *translator) checkClearedLibraries() *refusal {
 		for name, n := range uses { // an integer sum: map order cannot reach the output
 			if d := t.oracleDraws(name); d > 0 {
 				draws += min(d*n, unknownDraws)
+			}
+		}
+		// An activateAbility names the ability text, not the card, so the
+		// card's own text (counted once per copy above) misses repeat
+		// activations: each activation past the first adds that text's depth.
+		for text, n := range t.abilityUses { // an integer sum: map order cannot reach the output
+			if n > 1 {
+				if d := textDepth(strings.ToLower(text)); d > 0 {
+					draws += min(d*(n-1), unknownDraws)
+				}
 			}
 		}
 		if draws > added {
