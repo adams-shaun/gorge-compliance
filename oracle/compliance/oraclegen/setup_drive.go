@@ -19,9 +19,11 @@ import (
 // judged (Zuko, Conflicted's turn-1 charm; Gathering Stone's mill/reveal
 // pair).
 //
-// This covers the two classes those predicates leave: a modal pick
-// (GorgeKind "modes") and a bare two-way boolean (yesNo) -- the optional
-// mill/reveal booleans Gathering Stone's triggers pose. Each answer is the
+// This covers the classes those predicates leave: a modal pick
+// (GorgeKind "modes"), a bare two-way boolean (yesNo) -- the optional
+// mill/reveal booleans Gathering Stone's triggers pose -- and a library
+// arrange (GorgeKind "arrange"), the upkeep Surveil/Scry that sends every
+// looked-at card to the graveyard (Essence Anchor). Each answer is the
 // fallback's own pick, mapped to XMage's dialog vocabulary the same way the
 // step-time transcriber maps the identical decision (the numeric mode queue,
 // the boolean choice, the labelled choice queue), so scripting it cannot
@@ -40,13 +42,8 @@ func setupDriveAnswers(d rules.OracleDecision, modes map[string]int) []XAnswer {
 	if v, ok := yesNo(d); ok {
 		return []XAnswer{{d.Seat, "setup_choice", v}}
 	}
-	if setupKeepsAllOnTop(d) {
-		// XMage's turn-1 upkeep Surveil/Scry ask is posed during build, before
-		// any step, and consumes the head of the choice queue. Unscripted it
-		// takes the first answer a LATER step queued (the step that
-		// graveyards the card), so the setup checkpoint already shows the
-		// card in the graveyard: script the keep-on-top the runner took.
-		return []XAnswer{{d.Seat, "setup_choice", "[choice_skip]"}}
+	if as := setupLibraryArrange(d); len(as) > 0 {
+		return as
 	}
 	if v := triggerCostAnswer(d); v != "" {
 		return []XAnswer{{d.Seat, "setup_choice", v}}
@@ -54,13 +51,45 @@ func setupDriveAnswers(d rules.OracleDecision, modes map[string]int) []XAnswer {
 	return nil
 }
 
-// setupKeepsAllOnTop reports a setup-drive library-arrange ask (an upkeep
-// Surveil's graveyard-or-top selection) that the runner answered by keeping
-// every looked-at card where it is. A forced ordering (Min == Max == Options)
-// is a different dialog and is left alone.
-func setupKeepsAllOnTop(d rules.OracleDecision) bool {
-	return d.Step < 0 && d.GorgeKind == "arrange" && d.ArrangeKind == "graveyard" &&
-		d.Options > 0 && len(d.PickIdx) == d.Options && !(d.Min == d.Max && d.Max == d.Options)
+// setupLibraryArrange scripts a setup-drive library-arrange ask (an upkeep
+// Surveil/Scry's card-by-card selection) into XMage's library-selection
+// queue. XMage poses it during build(), before any step, and consumes the
+// head of the choice queue; unscripted it answers with its own default (the
+// old build sent every looked-at card to the graveyard, the new one keeps
+// them on top), which can disagree with gorge's fallback. The answers are
+// the SELECTED cards first (the ones the runner sent to the graveyard or the
+// bottom), then the kept cards in the runner's order, because XMage reads the
+// remaining labels as the top-card ordering. Keeping every card is the one
+// shape XMage spells as its skip token. A forced ordering (Min == Max ==
+// Options) is a different dialog and is left alone.
+func setupLibraryArrange(d rules.OracleDecision) []XAnswer {
+	if d.Step >= 0 || d.GorgeKind != "arrange" || d.ArrangeKind == "" ||
+		len(d.ArrangeLabels) == 0 || len(d.ArrangeLabels) != d.Options ||
+		(d.Min == d.Max && d.Max == d.Options) {
+		return nil
+	}
+	picked := make(map[int]bool, len(d.PickIdx))
+	for _, i := range d.PickIdx {
+		if i >= 0 && i < len(d.ArrangeLabels) {
+			picked[i] = true
+		}
+	}
+	if len(picked) == len(d.ArrangeLabels) {
+		// Keep every looked-at card where it is.
+		return []XAnswer{{d.Seat, "setup_choice", "[choice_skip]"}}
+	}
+	out := make([]XAnswer, 0, len(d.ArrangeLabels))
+	for i, label := range d.ArrangeLabels {
+		if !picked[i] {
+			out = append(out, XAnswer{d.Seat, "setup_choice", label})
+		}
+	}
+	for _, i := range d.PickIdx {
+		if i >= 0 && i < len(d.ArrangeLabels) {
+			out = append(out, XAnswer{d.Seat, "setup_choice", d.ArrangeLabels[i]})
+		}
+	}
+	return out
 }
 
 // setupModeAnswers is the setup-drive form of the step-time "mode" arm for a

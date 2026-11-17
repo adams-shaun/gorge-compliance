@@ -314,8 +314,15 @@ func cantBeCopiedItem(reg *cards.Registry, f *cards.Face, name string, req level
 	if stackCountOf(res, name) != 1 {
 		return skip(fmt.Sprintf("the copy spell still minted a copy of the card (stack %v)", stackSources(res)))
 	}
+	// The observation's Choreographed Sparks cast is modal: its target (the
+	// Shock spell on the stack) is a runner fallback, not a Via "target"
+	// decision. Fold the step's own targets from the recorded decisions (as
+	// every other cast template does) so XMage queues the target with the
+	// cast instead of leaving "Shock" in its target list until a later
+	// any-target ask rejects it.
+	sc, castSteps := oraclegen.ChooseTargets(sc, res.Decisions)
 	it := oraclegen.NewLevelBItem(name, req.Key, StaticObserved.Version, []string{"707.10"}, sc)
-	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), nil)
+	it.XAnswers = oraclegen.XAnswersForScenario(reg, res, sc, oraclegen.ModeNumbers(f), castSteps)
 	return it, nil
 }
 
