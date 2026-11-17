@@ -229,6 +229,7 @@ var objectTable = map[string]entry{
 	"IsAttacking":                  isRefused("combat state"),
 	"Attacking":                    isIgnored("meaningful only with IsAttacking, which is refused"),
 	"AttackingBattle":              isIgnored("meaningful only with IsAttacking, which is refused"),
+	"AttackingBattleGen":           isIgnored("ZoneGen stamp of AttackingBattle; meaningful only with IsAttacking, which is refused"),
 	"Band":                         isIgnored("meaningful only with IsAttacking, which is refused"),
 	"BlockedBy":                    isRefused("combat state"),
 	"IsBlocking":                   isRefused("combat state"),
