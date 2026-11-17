@@ -54,7 +54,7 @@ func TestFallbackAsksIndexesByStep(t *testing.T) {
 		"  [pass_to fallback] p0 blockers -> []", "step cast p0:X", "  [mana] p0 +W",
 		"step pass_to ", "  [pass_to fallback] p1 modes -> [\"a\"]"}
 	got := fallbackAsks(tr)
-	if len(got[1]) != 1 || got[1][0] != (fallbackAsk{0, "blockers"}) || len(got[3]) != 1 || got[3][0] != (fallbackAsk{1, "modes"}) {
+	if len(got[1]) != 1 || got[1][0] != (fallbackAsk{Seat: 0, Kind: "blockers"}) || len(got[3]) != 1 || got[3][0] != (fallbackAsk{Seat: 1, Kind: "modes"}) {
 		t.Fatalf("fallbackAsks = %+v", got)
 	}
 }

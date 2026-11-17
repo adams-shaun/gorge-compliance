@@ -177,17 +177,21 @@ type translator struct {
 	stop    *[2]int
 	asserts []call
 	// derived
-	places        [2][]*placement
-	castRefs      [2]map[string][]string
-	allNames      map[string]bool // every string arg outside addCard (keeps lands)
-	nameUses      map[string]int  // how many times each such string arg appears (casts, activations)
-	abilityUses   map[string]int  // how many times each activateAbility text appears
-	needAll       bool            // an assert counts all permanents: keep lands
-	pendingChecks []pendingCheck
-	preChoices    []choice
-	choiceList    []choice
-	droppedOrder  int
-	orphanMode    bool // a setModeChoice no action consumes (a trigger's modes)
+	places            [2][]*placement
+	castRefs          [2]map[string][]string
+	allNames          map[string]bool // every string arg outside addCard (keeps lands)
+	nameUses          map[string]int  // how many times each such string arg appears (casts, activations)
+	abilityUses       map[string]int  // how many times each activateAbility text appears
+	needAll           bool            // an assert counts all permanents: keep lands
+	pendingChecks     []pendingCheck
+	preChoices        []choice
+	choiceList        []choice
+	droppedOrder      int
+	droppedOrderTexts []string
+	// queueShape is the target-queue-order refusal of a one-seat run of
+	// addTargets that each carry their own yes/no; it applies only on failure.
+	queueShape *refusal
+	orphanMode bool // a setModeChoice no action consumes (a trigger's modes)
 	// playEffectKicker names a card an effect plays (not a cast step) that
 	// prints Kicker/Multikicker: gorge's effPlay cast has no kicked answer, so
 	// the XMage kicker choices cannot be stated and a nonzero count would be
@@ -380,6 +384,12 @@ type addCardCall struct {
 }
 
 type result struct {
+	// shape is the refusal a failing run converts to (manaSourceRefusal,
+	// orderedPicksRefusal); nil when the test has none of those shapes.
+	shape *refusal
+	// runShape is the refusal the last run's transcript showed (a setup
+	// decision, a bare Continue acknowledgement); see activeShape.
+	runShape                   *refusal
 	Family, Class, Method, Rel string
 	Code, Detail               string // refusal (empty when generated)
 	Scenario                   *portScenario
@@ -436,6 +446,24 @@ func (t *translator) lookup(name string) (*cards.Card, bool) {
 	return t.reg.Lookup(name)
 }
 
+// setupOwner reports the one seat whose setup adds name. ok is false when no
+// seat adds it or both seats do, so a caller cannot infer an owner.
+func (t *translator) setupOwner(name string) (int, bool) {
+	owner := -1
+	for p := 0; p < 2; p++ {
+		for _, ac := range t.setup[p] {
+			if !sameName(ac.name, name) {
+				continue
+			}
+			if owner >= 0 && owner != p {
+				return 0, false
+			}
+			owner = p
+		}
+	}
+	return owner, owner >= 0
+}
+
 func xmageName(s string) (string, *refusal) {
 	if strings.Contains(s, "@") {
 		return "", refuse("alias", "alias ref %q", s)
@@ -488,6 +516,18 @@ func translate(reg *cards.Registry, jc *javaClass, m *javaMethod, family string)
 	res.Status = "generated"
 	res.Unsupported = t.unsupportedCards()
 	res.Strict = t.strict
+	// Shapes the runner cannot play faithfully: they refuse only when the
+	// run fails an assert (a test of the same shape that passes stays
+	// covered), see runResultMask.
+	if res.shape = t.manaSourceRefusal(); res.shape == nil {
+		res.shape = t.orderedPicksRefusal()
+	}
+	if res.shape == nil {
+		res.shape = t.removeCardTypesSubtypeRefusal()
+	}
+	if res.shape == nil {
+		res.shape = t.queueShape
+	}
 	return res
 }
 
@@ -1147,6 +1187,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 			// runner keeps the offered order. Dropped (the asserts still
 			// judge the outcome) and noted in why.
 			t.droppedOrder++
+			t.droppedOrderTexts = append(t.droppedOrderTexts, strings.TrimPrefix(ch.pick, "name:"))
 			return nil
 		}
 		for i := 0; i < times; i++ {
@@ -1225,6 +1266,19 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		case "checkHandCardCount":
 			ac = call{Name: "assertHandCount", Args: c.Args[3:]}
 		case "checkExileCount":
+			// XMage's check reads every exile zone by name and ignores its
+			// player argument (TestPlayer.assertExileCount over
+			// game.getExile().getAllCards). When the named seat does not own
+			// the card the two readings differ, and no scenario shape can
+			// state "count this card in either exile": refuse the shape
+			// instead of silently counting the wrong seat.
+			if len(c.Args) >= 6 {
+				if owner, ok := t.setupOwner(c.Args[4].s); ok {
+					if seat, isSeat := seatOf(c.Args[3]); isSeat && seat != owner {
+						return refuse("check-exile-count-player", "%s is owned by p%d but the check names p%d", c.Args[4], owner, seat)
+					}
+				}
+			}
 			ac = call{Name: "assertExileCount", Args: c.Args[3:]}
 		case "checkStackSize":
 			ac = call{Name: "checkStackSize", Args: c.Args[3:]}
