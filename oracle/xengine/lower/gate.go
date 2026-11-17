@@ -55,6 +55,13 @@ const (
 	// show it untapped again. The active seat is exempt: its turn-1 untap step
 	// restores what the placement tapped.
 	reasonEntryTap = "setup_entry_tap"
+	// reasonEntryCounterOther is a battlefield permanent whose replacement puts
+	// counters on OTHER permanents as they enter (Deanna Troi's "other creatures
+	// you control enter with an additional +1/+1 counter"). The runner's
+	// placement re-runs it on every permanent placed after the replacer, so a
+	// placed permanent carries one counter more than the live game's, and the
+	// extra depends on placement order; setup has no field to subtract it.
+	reasonEntryCounterOther = "setup_entry_counter_other"
 	// reasonPrepareEntry is a placed battlefield card whose own entry
 	// replacement grants Prepared (K:ETBReplacement, or a printed
 	// R:Event$ Moved body). The runner's placement re-runs the replacement,
@@ -80,6 +87,13 @@ const (
 	// unplaceable rather than merely divergent. The reason names the decision
 	// kind, e.g. setup_answer:mode.
 	reasonSetupAnswer = "setup_answer:"
+	// reasonPTTurnHistory is a battlefield permanent whose P/T is a static
+	// function of what happened earlier THIS turn (Duelist of the Mind: power
+	// is the cards its controller drew this turn). A window starts after the
+	// turn's draw step, but the placed game has an empty turn history, so the
+	// placed P/T differs from the live one and setup has no field for the
+	// history.
+	reasonPTTurnHistory = "pt_turn_history"
 	// The setup drive expresses state as events: a by-name tapped placement is
 	// a Tap, a counters field a CounterChange, a life field a LifeChange. A
 	// placed permanent that triggers on one of those events would resolve a
@@ -89,6 +103,11 @@ const (
 	reasonSetupCounterAdd = "setup_trigger:counter_added"
 	reasonSetupLifeGained = "setup_trigger:life_gained"
 	reasonSetupLifeLost   = "setup_trigger:life_lost"
+	// reasonSetupCounterRepl is a placed battlefield card with an AddCounter
+	// replacement (Hardened Scales, Michelangelo, Weirdness to 11). The
+	// counters field is a CounterChange event, so the placement re-runs the
+	// replacement and the permanent gets a different net than the cut.
+	reasonSetupCounterRepl = "setup_replacement:counter_added"
 )
 
 // cut is the live engine at one cut point, reduced to what a window needs: the
@@ -167,14 +186,17 @@ func capture(e *rules.Engine, entry int, xmage bool) *cut {
 			}
 		}
 	}
-	for _, ce := range e.RegisteredContinuous() {
-		// printed statics are not registered; a resolved effect that is still
-		// live at the cut cannot be placed from setup. UntilEOT covers the one
-		// made earlier in THIS turn (it expires only in the cleanup step, CR
-		// 514.2); one made in an earlier turn has already expired.
-		if ce.Permanent || ce.UntilEOT || ce.UntilTurn != 0 || ce.UntilUntapOf != 0 || ce.Duration != "" || ce.FromEffect {
-			w.why[reasonContinuous] = true
-		}
+	// e.RegisteredContinuous is AddContinuous's registry, not the printed
+	// static scanner's list: every entry is a continuous effect a resolution
+	// created (a pump, an Effect-API grant, a copy effect, a StaticEffect$
+	// rider such as Enduring Innocence returning as a non-creature
+	// enchantment). Setup starts from the card faces and replays no
+	// resolution, so no entry here is state setup can re-create. Refusing the
+	// whole registry (not a duration subset -- an undurationed StaticEffect$
+	// grant is exactly the sibling the subset missed) keeps the next such
+	// effect from shipping a printed face over a changed live permanent.
+	if len(e.RegisteredContinuous()) > 0 {
+		w.why[reasonContinuous] = true
 	}
 	if len(w.why) == 0 {
 		w.place(c)
@@ -224,12 +246,13 @@ func startLife(c *cut) int32 {
 	return 20
 }
 
-// setupTriggers refuses a window whose setup drive would resolve a trigger of a
-// placed permanent: the drive expresses setup state as real events (a by-name
-// Tap, a CounterChange for the counters field, a LifeChange for the life field,
-// CR 603.2), and the scenario schema cannot say that trigger already resolved.
-// It runs after place, on an otherwise expressible cut, and matches the
-// engine's own TriggerMode vocabulary so a new spelling cannot slip past.
+// setupTriggers refuses a window whose setup drive would resolve a trigger or
+// replacement of a placed permanent: the drive expresses setup state as real
+// events (a by-name Tap, a CounterChange for the counters field, a LifeChange
+// for the life field, CR 603.2/614.1c), and the scenario schema cannot say that
+// trigger/replacement already resolved. It runs after place, on an otherwise
+// expressible cut, and matches the engine's own TriggerMode vocabulary plus the
+// AddCounter replacement event so a new spelling cannot slip past.
 func (w *walker) setupTriggers(c *cut) {
 	var tapped, counters, gained, lost bool
 	for s := range c.Setup {
@@ -238,6 +261,15 @@ func (w *walker) setupTriggers(c *cut) {
 		}
 		if len(c.Setup[s].Counters) > 0 {
 			counters = true
+		}
+		// A placed token's counters are CounterChange events too
+		// (engine/rules/oracle_setup_tokens.go), so they re-run a
+		// battlefield AddCounter replacement or counter trigger exactly as
+		// a card's do.
+		for _, tk := range c.Setup[s].Tokens {
+			if len(tk.Counters) > 0 {
+				counters = true
+			}
 		}
 		if life := c.Setup[s].Life; life != nil {
 			if *life > startLife(c) {
@@ -261,6 +293,9 @@ func (w *walker) setupTriggers(c *cut) {
 		f := o.Face()
 		if f == nil {
 			continue
+		}
+		if counters && counterAddReplacement(f) {
+			w.why[reasonSetupCounterRepl] = true
 		}
 		for j := range f.Triggers {
 			switch f.Triggers[j].ModeKind() {
@@ -518,6 +553,197 @@ func entryTapReplacement(f *cards.Face) bool {
 	return false
 }
 
+// movedCounterBodies resolves every Moved battlefield-entry replacement on f
+// to the counters its ReplaceWith$ body (and SubAbility chain) puts on entry.
+// The placement re-runs a Moved replacement (CR 614.1c), so a grant on the
+// entering card itself is subtracted from the counters field by setupCounters.
+// selfGrants are the unconditional, literal grants setup can subtract; other
+// reports a body that puts counters on another object (or an unknown target),
+// and restatable is false for a grant setup cannot restate (a condition on the
+// entry, a dynamic amount/type, or a PutCounterAll). Either of the last two is
+// a refusal: a wrong net silently ships the wrong permanent.
+//
+// The body comes from r.With, already resolved through ReplaceWith$ (both the
+// K:etbCounter and K:ETBReplacement:Other keyword forms and printed
+// R:Event$ Moved lines), and the walk follows SubAbility because a body can
+// split its grants (Dust Animus: two +1/+1 then a lifelink counter).
+func movedCounterBodies(f *cards.Face) (selfGrants []state.Counter, other, restatable bool) {
+	restatable = true
+	if f == nil {
+		return nil, false, true
+	}
+	for i := range f.Repls {
+		r := &f.Repls[i]
+		if r.Event != "Moved" {
+			continue
+		}
+		if dest, ok := r.Params["Destination"]; ok && !strings.EqualFold(dest, "Battlefield") {
+			continue
+		}
+		vc := strings.TrimSpace(r.Params["ValidCard"])
+		selfEntry := vc == "" || strings.Contains(strings.ToLower(vc), "self")
+		exactSelf := vc == "" || strings.EqualFold(vc, "Card.Self")
+		for s := r.With; s != nil; s = s.Sub {
+			switch {
+			case s.API == "PutCounterAll" || s.API == "PutCounterPlayer":
+				if selfEntry {
+					restatable = false
+				} else {
+					other = true
+				}
+				continue
+			case s.API != "PutCounter" || !strings.EqualFold(strings.TrimSpace(s.Params["ETB"]), "True"):
+				continue
+			}
+			if !selfEntry {
+				// The carrier's replacement serves other entering permanents:
+				// the placement re-runs it for every permanent placed after it,
+				// and the extra counters depend on placement order.
+				other = true
+				continue
+			}
+			if !exactSelf || !counterParamsRestatable(r.Params) || !counterParamsRestatable(s.Params) {
+				// A condition on the entry (Card.Self+kicked, CheckSVar$,
+				// Revolt$, ...) or a dynamic amount/type: the live entry may
+				// differ from the placement's, so no net can be known here.
+				restatable = false
+				continue
+			}
+			kind, n, ok := counterKindAmount(s.Params)
+			if !ok {
+				restatable = false
+				continue
+			}
+			if !counterTargetsSelf(s.Params) {
+				// The source's own entry put counters on another object: the
+				// live object already carries them and the placement re-runs
+				// the body against a different board.
+				other = true
+				continue
+			}
+			selfGrants = append(selfGrants, state.Counter{Kind: kind, N: n})
+		}
+	}
+	return selfGrants, other, restatable
+}
+
+// counterParamsRestatable is false when a replacement body's parameters make
+// its counter grant depend on the entry (a condition or an optional choice)
+// rather than a literal amount setup can subtract.
+func counterParamsRestatable(p map[string]string) bool {
+	for k, v := range p {
+		if strings.TrimSpace(v) == "" {
+			continue
+		}
+		switch {
+		case strings.HasPrefix(k, "Condition"),
+			k == "CheckSVar", k == "SVarCompare", k == "Revolt", k == "Adamant",
+			k == "IsPresent", k == "Optional":
+			return false
+		}
+	}
+	return true
+}
+
+// counterKindAmount reads a PutCounter body's literal kind and amount. A
+// dynamic kind or amount (X, Count$, DiceResult, ...) is not restatable.
+func counterKindAmount(p map[string]string) (string, int32, bool) {
+	kind := strings.TrimSpace(p["CounterType"])
+	if kind == "" || strings.Contains(kind, "$") || strings.Contains(kind, ".") {
+		return "", 0, false
+	}
+	num := strings.TrimSpace(p["CounterNum"])
+	if num == "" {
+		return kind, 1, true
+	}
+	n, err := strconv.Atoi(num)
+	if err != nil || n < 0 {
+		return "", 0, false
+	}
+	return kind, int32(n), true
+}
+
+// counterTargetsSelf is true when a PutCounter body's Defined$ names the
+// entering card: the default, Self, and ReplacedCard are all the object the
+// Moved replacement is replacing.
+func counterTargetsSelf(p map[string]string) bool {
+	switch d := strings.ToLower(strings.TrimSpace(p["Defined"])); d {
+	case "", "self", "replacedcard", "replacedcardlki":
+		return true
+	default:
+		return false
+	}
+}
+
+// entryCounterOtherReplacement reports whether the face carries a battlefield-
+// entry replacement that puts counters on a permanent other than itself: a
+// Moved replacement whose ValidCard names more than the card itself and whose
+// body is a PutCounter on the ETB. The setup placement re-runs it for every
+// permanent placed after the carrier (see reasonEntryCounterOther).
+func entryCounterOtherReplacement(f *cards.Face) bool {
+	_, other, _ := movedCounterBodies(f)
+	return other
+}
+
+// ptTurnHistoryMarkers are the Count$ spellings whose value is read from the
+// turn's history (draws, casts, entries, life change) and so is empty in a
+// placed game. "Lost" is deliberately absent: it also matches
+// Count$PlayerCountHasLost, a game-long count of eliminated players, not the
+// turn history this refusal is about. The turn-scoped life-lost spellings
+// (LifeYouLostThisTurn, LifeOppsLostThisTurn) all carry "ThisTurn".
+var ptTurnHistoryMarkers = []string{"ThisTurn", "Drew", "Gained"}
+
+// ptTurnHistory reports whether a static of the face sets or adds P/T from a
+// Count$ SVar that reads the current turn's history, either as the P/T value
+// itself or as the CheckSVar condition that gates the static (Ulna Alley
+// Shopkeep's "as long as you gained life this turn"). The placed game starts
+// with an empty history, so the live P/T cannot be re-derived (see
+// reasonPTTurnHistory).
+func ptTurnHistory(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	ptKeys := []string{"SetPower", "SetToughness", "AddPower", "AddToughness"}
+	for i := range f.Statics {
+		st := &f.Statics[i]
+		hasPT := false
+		for _, key := range ptKeys {
+			if _, ok := st.Params[key]; ok {
+				hasPT = true
+				break
+			}
+		}
+		if !hasPT {
+			continue
+		}
+		for _, key := range ptKeys {
+			if v, ok := st.Params[key]; ok && ptHistoryValue(f, v) {
+				return true
+			}
+		}
+		for _, key := range []string{"CheckSVar", "ConditionCheckSVar"} {
+			if v, ok := st.Params[key]; ok && ptHistoryValue(f, v) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// ptHistoryValue resolves v through the face's SVar table (the Count$ body a
+// static names) and reports whether it reads this turn's history.
+func ptHistoryValue(f *cards.Face, v string) bool {
+	if sv, ok := f.SVars[strings.TrimSpace(v)]; ok {
+		v = sv
+	}
+	for _, m := range ptTurnHistoryMarkers {
+		if strings.Contains(v, m) {
+			return true
+		}
+	}
+	return false
+}
+
 // entryPrepareReplacement reports whether the face's own battlefield-entry
 // replacement grants it Prepared (CR 722.3a). The runner's setup placement
 // keeps the ordinary battlefield move, so a replacement that grants Prepared
@@ -564,6 +790,12 @@ func (w *walker) place(c *cut) {
 			}
 			if n, _ := cards.SagaChapters(o.Face()); n > 0 && o.Ability == nil {
 				w.why[reasonSagaEntry] = true
+			}
+			if ptTurnHistory(o.Face()) {
+				w.why[reasonPTTurnHistory] = true
+			}
+			if entryCounterOtherReplacement(o.Face()) {
+				w.why[reasonEntryCounterOther] = true
 			}
 			if o.Owner != o.Controller {
 				w.why["field:Object.Controller"] = true
@@ -841,24 +1073,48 @@ func setupCounters(o *state.Object) (map[string]int32, bool) {
 	for _, gr := range events.EntryCounterGrants(&state.Object{Card: o.Card, FaceIdx: o.FaceIdx}, false) {
 		net[gr.Kind] -= gr.Amount
 	}
-	// K:etbCounter is a replacement on the Moved event, not an
-	// EntryCounterGrants row: the setup placement re-runs it and grants its
-	// counters again. The raw keyword is "<kind>:<n>[:condition[:text]]";
-	// only a literal n can be subtracted here. A dynamic X/Count$ amount
-	// cannot, and a conditional grant whose condition did not hold at entry
-	// comes out negative below (the caller refuses).
+	// A Moved replacement (K:etbCounter, K:ETBReplacement:Other and the
+	// printed R:Event$ Moved lines) is re-run by the setup placement, so its
+	// self grants must be subtracted here exactly like the EntryCounterGrants
+	// above. A body setup cannot restate (a condition on the entry, a dynamic
+	// amount, a grant on another object) is refused instead of shipping a
+	// wrong net: the live entry and the placement's entry can disagree.
 	if f := o.Face(); f != nil {
-		if param, ok := f.KeywordParam("etbCounter"); ok {
-			kind, rest, _ := strings.Cut(param, ":")
-			n, _, _ := strings.Cut(rest, ":")
-			amount, err := strconv.Atoi(strings.TrimSpace(n))
-			if err != nil {
-				return net, false
-			}
-			net[strings.TrimSpace(kind)] -= int32(amount)
+		grants, _, restatable := movedCounterBodies(f)
+		if !restatable {
+			return net, false
+		}
+		for _, gr := range grants {
+			net[gr.Kind] -= gr.N
 		}
 	}
 	return net, true
+}
+
+// counterAddReplacement reports whether the face replaces the AddCounter
+// event (Hardened Scales, Doubling Season, Michelangelo, Weirdness to 11). A
+// battlefield permanent carrying one is re-run by the setup drive's
+// CounterChange, so a placed counter field can be doubled or incremented.
+func counterAddReplacement(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	for i := range f.Repls {
+		if f.Repls[i].Event == "AddCounter" {
+			return true
+		}
+	}
+	// A static grant (S:Mode$ Continuous | AddReplacementEffect$ Name) names
+	// an SVar whose R: body is the replacement; the layer system registers it
+	// as a derived replacement, so it is not in f.Repls.
+	for i := range f.Statics {
+		for _, name := range cards.SplitGrantNames(f.Statics[i].ParamStr(cards.PKAddReplacementEffect)) {
+			if r, ok := cards.ParseReplacementLine(f.SVars[name]); ok && r.Event == "AddCounter" {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 // hasActivationLimit is true for a face with an ability gated by an
