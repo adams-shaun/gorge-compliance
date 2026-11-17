@@ -262,6 +262,15 @@ func (w *walker) setupTriggers(c *cut) {
 		if len(c.Setup[s].Counters) > 0 {
 			counters = true
 		}
+		// A placed token's counters are CounterChange events too
+		// (engine/rules/oracle_setup_tokens.go), so they re-run a
+		// battlefield AddCounter replacement or counter trigger exactly as
+		// a card's do.
+		for _, tk := range c.Setup[s].Tokens {
+			if len(tk.Counters) > 0 {
+				counters = true
+			}
+		}
 		if life := c.Setup[s].Life; life != nil {
 			if *life > startLife(c) {
 				gained = true
@@ -1093,6 +1102,16 @@ func counterAddReplacement(f *cards.Face) bool {
 	for i := range f.Repls {
 		if f.Repls[i].Event == "AddCounter" {
 			return true
+		}
+	}
+	// A static grant (S:Mode$ Continuous | AddReplacementEffect$ Name) names
+	// an SVar whose R: body is the replacement; the layer system registers it
+	// as a derived replacement, so it is not in f.Repls.
+	for i := range f.Statics {
+		for _, name := range cards.SplitGrantNames(f.Statics[i].ParamStr(cards.PKAddReplacementEffect)) {
+			if r, ok := cards.ParseReplacementLine(f.SVars[name]); ok && r.Event == "AddCounter" {
+				return true
+			}
 		}
 	}
 	return false

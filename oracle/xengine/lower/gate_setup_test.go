@@ -499,6 +499,28 @@ func TestGateRefusesSetupCounterReplacement(t *testing.T) {
 	}
 }
 
+// TestGateRefusesTokenCounterReplacement: a placed token's counters are
+// CounterChange events as well, so a battlefield AddCounter replacement re-runs
+// on them (a 2-counter token becomes 3). The refusal must not depend on a card
+// carrying counters; a counter-carrying token beside a plain card stays
+// placeable.
+func TestGateRefusesTokenCounterReplacement(t *testing.T) {
+	reg, pairs := setPairs(t, "DSK", 40)
+	e, at := tokenCutIn(t, reg, "DSK", pairs)
+	battlefieldTokens(e.G)[0].Counters = []state.Counter{{Kind: "P1P1", N: 2}}
+	plantBattlefieldCard(t, reg, e, "Michelangelo, Weirdness to 11", func(o *state.Object) bool { return !o.Tapped && len(o.Counters) == 0 })
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonSetupCounterRepl) {
+		t.Fatalf("token counters + carrier: reasons %v, want %s", r, reasonSetupCounterRepl)
+	}
+
+	e, at = tokenCutIn(t, reg, "DSK", pairs)
+	battlefieldTokens(e.G)[0].Counters = []state.Counter{{Kind: "P1P1", N: 2}}
+	plantBattlefieldCard(t, reg, e, "Grizzly Bears", func(o *state.Object) bool { return !o.Tapped && len(o.Counters) == 0 })
+	if r := capture(e, at, true).Reasons; slices.Contains(r, reasonSetupCounterRepl) {
+		t.Fatalf("token counters, plain card: reasons %v, want no %s", r, reasonSetupCounterRepl)
+	}
+}
+
 // TestGateRefusesStaticEffectGrant: a StaticEffect$ rider registers an
 // undurationed source-scoped continuous effect (Enduring Innocence returns as
 // a non-creature enchantment). The placement starts from the card face and
