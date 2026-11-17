@@ -27,6 +27,7 @@ import mage.abilities.effects.common.EndTurnEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.cards.Card;
+import mage.cards.CardWithSpellOption;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.DoubleFacedCard;
@@ -2812,11 +2813,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
 
     /** Whether a cast step's cast_mode is one this driver elects: Bargain,
      * "optionalcost", the face-down Disguise/Morph/Megamorph casts, the "plot" special
-     * action, a graveyard "flashback" cast and a "mayplay" cast of a card a
+     * action, a graveyard "flashback" cast, and a "mayplay" cast of a card a
      * play-from-exile permission (Reckless Impulse) reaches are wired
-     * ("plot_cast", the later cast of a plotted card, is not), and an absent or empty mode is the ordinary
-     * cast. Any other mode is a scenario the driver cannot replay and must
-     * reject loudly rather than cast at face value. */
+     * ("plot_cast", the later cast of a plotted card, is not); so are the
+     * "adventure_alt"/"omen_alt" casts of an Adventure or Omen half, whose
+     * parent card the step names and the cast arm resolves to the half. An
+     * absent or empty mode is the ordinary cast. Any other mode is a scenario
+     * the driver cannot replay and must reject loudly rather than cast at face
+     * value. */
     static boolean castModeSupported(String mode) {
         return mode == null || mode.isEmpty()
                 || mode.equals("bargained") || mode.equals("optionalcost")
@@ -2833,6 +2837,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // from gorge's election, so the step is a plain cast here.
                 || mode.equals("alternative")
                 || mode.equals("prepared_copy")
+                // "adventure_alt" / "omen_alt": the cast of an Adventure or
+                // Omen half. The farm's step names the parent card (the
+                // xengine ref binder keeps the dealt card's name); setup deals
+                // the whole card and the cast arm resolves the inset spell
+                // half's XMage name (spellOptionCastName), which is what
+                // XMage's castSpell takes. A step that already names the half
+                // also replays.
+                || mode.equals("adventure_alt") || mode.equals("omen_alt")
                 || copyCostKeyword(mode) != null;
     }
 
@@ -3177,6 +3189,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return n.equals(xmageName) ? gorgeName : frontHalf(n);
         }
         return null;
+    }
+
+    /** The XMage cast name of an Adventure or Omen card's spell half ("Stomp"
+     * for Bonecrusher Giant, "Absorb Essence" for Purging Stormbrood), or
+     * null when name is not such a parent card.
+     *
+     * The farm's cast step names the parent card, not the half: the xengine
+     * lowering puts the setup-bound ref on the step (refBinder.refOf keeps the
+     * dealt card's name, e.g. "p1:Grabby Giant"), while XMage casts the half
+     * through its own spell name. Adventure and Omen share the role --
+     * CardWithSpellOption carries the inset spell card XMage names -- so this
+     * matches the type, not a hardcoded card or mode list. A step that already
+     * names the half returns null and falls through to castSpelling, so both
+     * shapes replay; so does every card without an inset spell. */
+    static String spellOptionCastName(String name) {
+        CardInfo info = CardRepository.instance.findCard(name, true);
+        Card c = info == null ? null : info.createCard();
+        if (!(c instanceof CardWithSpellOption)) {
+            return null;
+        }
+        String half = ((CardWithSpellOption) c).getSpellCard().getName();
+        return half == null || half.isEmpty() || half.equals(name) ? null : half;
     }
 
     private String castSpelling(String n) {
@@ -4618,8 +4652,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 giftPromisedCast = castCostPicks.contains("gift_promise");
                 // The cast command names the SpellAbility, not the card
                 // object: a split/Room half is cast by its half name while
-                // the hand holds the whole "A // B" card (castSpelling).
-                String cardName = castSpelling(refName(str(st, "card")));
+                // the hand holds the whole "A // B" card (castSpelling). An
+                // Adventure/Omen cast is the other way round: the farm's step
+                // names the parent card (the xengine ref binder keeps the
+                // dealt card's name), so resolve the inset spell half's XMage
+                // name and cast that. A step that already names the half
+                // falls through unchanged.
+                String refCard = refName(str(st, "card"));
+                String halfName = "adventure_alt".equals(mode) || "omen_alt".equals(mode)
+                        ? spellOptionCastName(xmageSpelling(refCard)) : null;
+                String cardName = halfName != null ? halfName : castSpelling(refCard);
                 // A face-down Morph/Megamorph/Disguise cast names the
                 // SpellAbility by its XMage cast spelling; every plain cast
                 // names the card itself. Morph and Megamorph share "using
