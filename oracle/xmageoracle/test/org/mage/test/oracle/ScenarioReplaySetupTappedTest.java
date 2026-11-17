@@ -124,7 +124,6 @@ public final class ScenarioReplaySetupTappedTest {
         setupNames.put(first.getId(), "Grizzly Bears");
         setupNames.put(second.getId(), "Grizzly Bears");
         set(driver, "setupNames", setupNames);
-        set(driver, "enterWithCountersApplied", new java.util.HashSet<UUID>());
 
         check(game.getBattlefield().getAllPermanents().size() == 2,
                 "precondition: two battlefield permanents");
