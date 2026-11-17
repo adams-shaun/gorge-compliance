@@ -70,7 +70,13 @@
     {
      "op": "life",
      "seat": 0,
-     "amount": -1
+     "amount": -1,
+     "expect": [
+      {
+       "trigger_on_stack": "p0:Felidar Sovereign",
+       "want": true
+      }
+     ]
     },
     {
      "op": "resolve"

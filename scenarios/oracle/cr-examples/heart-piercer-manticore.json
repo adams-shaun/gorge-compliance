@@ -61,6 +61,83 @@
      "zone": "battlefield"
     }
    ]
+  },
+  {
+   "name": "a-sacrifice-for-another-cost-does-not-trigger-the-reflexive-ability",
+   "cr": [
+    "603.12"
+   ],
+   "why": "Declining the enters trigger's optional sacrifice means the reflexive ability is never created. Sacrificing the Bear to Ashnod's Altar afterwards is for a different cost, so the Manticore deals no damage.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Ashnod's Altar",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Heart-Piercer Manticore"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Savannah Lions"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Heart-Piercer Manticore",
+     "mana": "CCRR"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "no"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Ashnod's Altar",
+     "ability": "Sacrifice",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Grizzly Bears"
+       ]
+      }
+     ],
+     "expect": [
+      {
+       "trigger_on_stack": "p0:Heart-Piercer Manticore",
+       "want": false
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p1:Savannah Lions",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "card": "p0:Heart-Piercer Manticore",
+     "zone": "battlefield"
+    }
+   ]
   }
  ]
 }
