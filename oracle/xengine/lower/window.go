@@ -59,7 +59,7 @@ func Windows(reg *cards.Registry, pair []decks.Deck, seed uint64, opt game.Optio
 	for _, c := range cuts {
 		id := windowID(t, c.Turn)
 		if len(c.Reasons) > 0 {
-			refused = append(refused, Refusal{ID: id, Turn: c.Turn, Reasons: c.Reasons})
+			refused = append(refused, Refusal{ID: id, Turn: c.Turn, Reasons: c.refusalReasons(reg, t, id)})
 			continue
 		}
 		if c.setupSpeedLatch() {
@@ -77,6 +77,25 @@ func Windows(reg *cards.Registry, pair []decks.Deck, seed uint64, opt game.Optio
 		out = append(out, l)
 	}
 	return out, refused, t, nil
+}
+
+// refusalReasons is c.Reasons, except that a window refused for a placed Saga
+// alone (reasonSagaEntry, the coarse gate: the runner's placement re-fires the
+// chapters whatever they say) reports the setup drive's own unscripted asks
+// when it has any, since those name the decision the cut cannot state. The
+// window is refused either way; a probe that cannot run keeps the Saga reason.
+func (c *cut) refusalReasons(reg *cards.Registry, t *game.Tape, id string) []string {
+	if len(c.Reasons) != 1 || c.Reasons[0] != reasonSagaEntry {
+		return c.Reasons
+	}
+	l, err := lowerWindow(reg, t, c, id)
+	if err != nil {
+		return c.Reasons
+	}
+	if why := setupAnswerReasons(reg, l.Item); len(why) > 0 {
+		return why
+	}
+	return c.Reasons
 }
 
 // windowID is xe:<set>:<chunk>:<game>:w<turn>.
