@@ -103,7 +103,7 @@
     }
    ],
    "xmage": "SunderingTitanTest#testComesIntoTriggeredAbility",
-   "known_bug": "XP[choosecard-eachbasictype-unsupported]: ChooseCard ignores EachBasicType$ True (no PK param exists); effChooseCard poses a single 0..1 'Land' choice (choiceBounds min=0 when not Mandatory) instead of one land per basic land type, so no lands are destroyed (engine/effects/choose_control.go:579, choiceBounds engine/effects/choose_control.go:31; card script .cards/cardsfolder/s/sundering_titan.txt). CR 608.2c (follow card text: choose a land of each basic land type). Note test is non-strict too."
+   "known_bug": "XP[choosecard-eachbasictype-unsupported]: ChooseCard ignores EachBasicType$ True (no such parameter exists): effChooseCard poses a single 0..1 \"Land\" choice (choiceBounds min=0 when not Mandatory) instead of one land per basic land type, so no lands are destroyed (observed Swamp/Forest/Island/Mountain/Plains graveyard 0, want 1 each). CR 608.2c. Note the XMage test is non-strict too. verified at gorge 08fc227a61."
   }
  ]
 }

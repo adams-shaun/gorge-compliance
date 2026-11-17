@@ -72,7 +72,7 @@
    ],
    "expect": [],
    "xmage": "SilumgarScavengerTest#test_BoostOnDies",
-   "known_bug": "XP[exploited-predicate-missing]: DBPump's ConditionPresent$ Card.exploited uses a predicate gorge's filter vocabulary lacks (no \"exploited\" predicate anywhere in engine/effects/), so the condition is unresolved/fail-closed and Haste is never granted though the counter lands (engine/effects/conditions.go:595 UnknownPredicates gate; .cards/cardsfolder/s/silumgar_scavenger.txt DBPump). CR 702.110a/b."
+   "known_bug": "XP[exploited-predicate-missing]: DBPump's ConditionPresent$ Card.exploited uses a predicate the filter vocabulary lacks (there is no \"exploited\" case in the card-property matcher), so UnknownPredicates fails the condition closed and Haste is never granted though the +1/+1 counter lands (observed p0:Silumgar Scavenger lacks Haste though it has the counter; the exploit answer is unconsumed). CR 702.110a/b. verified at gorge 08fc227a61."
   }
  ]
 }

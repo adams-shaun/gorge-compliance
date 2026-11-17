@@ -82,7 +82,7 @@
     }
    ],
    "xmage": "InfiniteReflectionTest#testCopyAsEnters",
-   "known_bug": "XP[static-true-changeszone-trigger-on-stack]: Infinite Reflection's Static$ True ChangesZone trigger (RememberInitialAttach) is queued as an ordinary stacked trigger and offered in a trigger_order with TrigClone; ordered first it resolves last, so TrigClone resolves with an empty Remembered set, Silvercoat Lion stops being a creature/dies and Reflection goes to the graveyard (probe: Lion and Reflection in graveyard, Ox not a copy). checkFaceTriggers queues every matching T: line and only Attached/RolledDie matchers honour Static$ True (engine/rules/trigger_match.go:1147; engine/rules/trigmatch/actions.go:179,561). Static$ True lines must apply immediately, not use the stack. CR 603.3 (only real triggered abilities are put on the stack; Forge Static$ True lines are rules-engine bookkeeping that must apply immediately)."
+   "known_bug": "XP[static-true-remember-lost]: Infinite Reflection's Static$ True RememberInitialAttach line now resolves off the stack through resolveStaticTriggers, so the old \"queued as an ordinary stacked trigger and offered in a trigger_order\" reason is stale. The scenario still fails: Reanimation's Pillarfield Ox never becomes a copy of the enchanted Silvercoat Lion (transcript: Silvercoat Lion count 1, want 2). The following TrigClone's Defined$ Remembered comes up empty (rememberDefinedObjects/resolvedRemembered), so the ordinary trigger has no creature to copy. CR 603.3, 707.2. verified at gorge 08fc227a61."
   }
  ]
 }

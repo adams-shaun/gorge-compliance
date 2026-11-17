@@ -108,7 +108,7 @@
     }
    ],
    "xmage": "MeriekeRiBeritTest#testCreatureWasDestroyed",
-   "known_bug": "XP[permanent-effect-ltb-trigger-killed-by-own-source-leaving]: the DB$ Effect (Duration$ Permanent, source on battlefield -\u003e |SB) registers LeavesPlay (ChangesZone, ValidCard$ Card.EffectSource) as a delayed trigger, but checkEventDelayedTriggers first runs delayedRegistrationLive, which drops a SourceBattlefield registration once its source is off the battlefield -- i.e. the very event it waits for kills it. Probe: control is gained, Bolt kills Merieke, stack stays empty (engine/rules/trigger_delayed.go:88-90 and :379; engine/effects/effect.go:404-406). CR 603.10a / 603.6c."
+   "known_bug": "XP[permanent-effect-ltb-trigger-killed-by-own-source-leaving]: the DB$ Effect (Duration$ Permanent, source on the battlefield) registers LeavesPlay (ChangesZone, ValidCard$ Card.EffectSource) as a delayed trigger, but checkEventDelayedTriggers first calls delayedRegistrationLive, which drops a SourceBattlefield registration once its source is off the battlefield -- the very event it waits for kills it. Transcript: control is gained and Bolt kills Merieke, but Silvercoat Lion stays on the battlefield and the stack stays empty (p0 battlefield Lion 1, want 0; graveyard Lion 0, want 1). CR 603.10a / 603.6c. verified at gorge 08fc227a61."
   }
  ]
 }

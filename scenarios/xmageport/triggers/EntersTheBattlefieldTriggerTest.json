@@ -525,7 +525,7 @@
     }
    ],
    "xmage": "EntersTheBattlefieldTriggerTest#testWildPair",
-   "known_bug": "XP[totalpt-filter-unsupported]: Wild Pair's ChangeType$ Creature.totalPT_EQX and SVar X:TriggeredCard$CardSumPT have no implementation anywhere in engine/effects/ or engine/rules/ (grep finds no 'totalPT'/'CardSumPT'). The search finds nothing (no pick is offered, only the shuffle ask). Card script .cards/cardsfolder/w/wild_pair.txt; Oracle text (search for a creature with the same total power and toughness). CR 701.23a."
+   "known_bug": "XP[totalpt-search-no-candidate]: both pieces now exist: numericPred reads Creature.totalPT_\u003cCMP\u003e\u003cn\u003e and evalRefProperty reads TriggeredCard$CardSumPT, but Wild Pair's library search still offers no candidate (transcript: after the optional trigger is accepted, a choose with an empty pick; p0 battlefield Silvercoat Lion 1, want 2). effSearchLibrary's ChangeType$ eligibility walk (MatchesSpecCtx through forgetOtherSpecContext) does not turn the trigger's CardSumPT X into a matching library card, so the search finds nothing. CR 701.23a. verified at gorge 08fc227a61."
   },
   {
    "name": "test-noxious-ghoul1",

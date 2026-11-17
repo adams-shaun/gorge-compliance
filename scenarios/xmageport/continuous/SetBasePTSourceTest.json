@@ -77,7 +77,7 @@
     }
    ],
    "xmage": "SetBasePTSourceTest#testCDAsetPT",
-   "known_bug": "XP[cda-not-applied-off-battlefield]: Rootless Yew's library search (ChangeType$ Creature.powerGE6,...) offers no candidate for Enigma Drake (*/4, CDA power = 6 instants/sorceries in graveyard): only 'Yes - shuffle' is asked, while a printed 6/4 Craw Wurm IS offered (probe). The search filter reads printed P/T for library cards; the derived-PT bridge (engine/rules/layers_derived.go:104 FilterDerivedPT) is only bound for Count$Valid folds. CR 604.3. Secondary translation issue: addTarget for the search maps to kind 'target' (cmd/xmageport/translate.go:711) but gorge poses the pick as a 'choose' decision, so even a found card would be fallback-declined."
+   "known_bug": "XP[cda-not-applied-off-battlefield]: Rootless Yew's library search (ChangeType$ Creature.powerGE6,...) offers no candidate for Enigma Drake (*/4, CDA power = number of instants and sorceries in the graveyard): only the shuffle ask is posed, while a printed 6/4 Craw Wurm is offered. effSearchLibrary's eligibility walk uses MatchesSpecCtx without binding FilterDerivedPT, so the filter reads the printed */* for a library card; the derived-PT bridge is only bound for Count$Valid folds. CR 604.3. Secondary translation issue: addTarget for the search maps to kind \"target\", but gorge poses the pick as a \"choose\" decision, so even a found card would be fallback-declined. verified at gorge 08fc227a61."
   },
   {
    "name": "test-svogthos",

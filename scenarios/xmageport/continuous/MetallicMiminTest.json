@@ -92,7 +92,7 @@
     }
    ],
    "xmage": "MetallicMiminTest#testMetallicMimic",
-   "known_bug": "XP[etb-repl-validcard-ignores-entering-statics]: the first Mimic's ETB counter replacement (ValidCard$ Creature.ChosenType+Other+YouCtrl) is matched against the second Mimic in its origin zone (engine/rules/replacement_match.go:253, matchesSpec on ev.Obj), without the entering permanent's own 'is the chosen type' static/its ETB choice, so the second Mimic (chosen Dwarf) gets no +1/+1 counter. CR 614.12."
+   "known_bug": "XP[etb-repl-validcard-ignores-entering-statics]: the first Mimic's ETB counter replacement (ValidCard$ Creature.ChosenType+Other+YouCtrl) is matched by enteringObjectMatches against the second Mimic in its origin zone: entryBasisDiffers sees no entry-counter grant or entrant-sourced continuous effect, so enteringCounterBasisMatch falls back to the plain matcher, which cannot apply the entering Mimic's own chosen-type static. The second Mimic (chosen Dwarf) gets no +1/+1 counter (observed 2/1, want 3/2). CR 614.12. verified at gorge 08fc227a61."
   },
   {
    "name": "test-metallic-mimic-bramblewood-paragon",
