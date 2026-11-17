@@ -168,3 +168,93 @@ func TestSetupDriveUnmappedModeIsLeftToXMage(t *testing.T) {
 		t.Fatalf("setupDriveAnswers scripted an unless-pay mode: %v", as)
 	}
 }
+
+// TestSetupDriveLibraryArrangePartitions pins the whole setup choice queue for
+// every library-arrange partition. Gorge names only pile A (the kept cards, in
+// PickIdx order); XMage's chooser names pile B (the cards sent to the
+// graveyard or the bottom) and reads the labels after the skip as pile A's top
+// order. A proper subset therefore needs the skip between the two piles: with
+// [binned..., kept...] and no skip, the driver selects the kept cards too and
+// drops the top order. The all-kept skip is only correct when the picks keep
+// the offered order; a permutation cannot be expressed on this queue and must
+// stay unscripted rather than silently keep the wrong order.
+func TestSetupDriveLibraryArrangePartitions(t *testing.T) {
+	labels := []string{"Nessian Asp", "Wastes"}
+	for _, tc := range []struct {
+		name string
+		d    rules.OracleDecision
+		want [][]XAnswer
+	}{
+		{
+			name: "proper subset keeps the picked card on top",
+			d: rules.OracleDecision{Step: -1, Seat: 0, Kind: "order", GorgeKind: "arrange",
+				ArrangeKind: "graveyard", Options: 2, Min: 0, Max: 2,
+				ArrangeLabels: labels, Picks: []string{"Wastes"}, PickIdx: []int{1}},
+			want: [][]XAnswer{{{0, "setup_choice", "Nessian Asp"}, {0, "setup_choice", "[choice_skip]"}, {0, "setup_choice", "Wastes"}}},
+		},
+		{
+			name: "proper subset keeps the PickIdx order",
+			d: rules.OracleDecision{Step: -1, Seat: 0, Kind: "order", GorgeKind: "arrange",
+				ArrangeKind: "bottom", Options: 3, Min: 0, Max: 2,
+				ArrangeLabels: []string{"Ornithopter", "Grizzly Bears", "Wastes"},
+				Picks:         []string{"Wastes", "Ornithopter"}, PickIdx: []int{2, 0}},
+			want: [][]XAnswer{{{0, "setup_choice", "Grizzly Bears"}, {0, "setup_choice", "[choice_skip]"}, {0, "setup_choice", "Wastes"}, {0, "setup_choice", "Ornithopter"}}},
+		},
+		{
+			name: "empty kept pile names every card to send away",
+			d: rules.OracleDecision{Step: -1, Seat: 0, Kind: "order", GorgeKind: "arrange",
+				ArrangeKind: "graveyard", Options: 2, Min: 0, Max: 2,
+				ArrangeLabels: labels},
+			want: [][]XAnswer{{{0, "setup_choice", "Nessian Asp"}, {0, "setup_choice", "Wastes"}}},
+		},
+		{
+			name: "empty kept pile on a scry names every card too",
+			d: rules.OracleDecision{Step: -1, Seat: 0, Kind: "order", GorgeKind: "arrange",
+				ArrangeKind: "bottom", Options: 2, Min: 0, Max: 2,
+				ArrangeLabels: labels},
+			want: [][]XAnswer{{{0, "setup_choice", "Nessian Asp"}, {0, "setup_choice", "Wastes"}}},
+		},
+		{
+			name: "keep every card in offered order is the skip alone",
+			d: rules.OracleDecision{Step: -1, Seat: 0, Kind: "order", GorgeKind: "arrange",
+				ArrangeKind: "graveyard", Options: 2, Min: 0, Max: 2,
+				ArrangeLabels: labels, Picks: labels, PickIdx: []int{0, 1}},
+			want: [][]XAnswer{{{0, "setup_choice", "[choice_skip]"}}},
+		},
+		{
+			name: "keep every scry card in offered order is the skip alone",
+			d: rules.OracleDecision{Step: -1, Seat: 0, Kind: "order", GorgeKind: "arrange",
+				ArrangeKind: "bottom", Options: 2, Min: 0, Max: 2,
+				ArrangeLabels: labels, Picks: labels, PickIdx: []int{0, 1}},
+			want: [][]XAnswer{{{0, "setup_choice", "[choice_skip]"}}},
+		},
+		{
+			name: "keep every card in a different order is unscriptable",
+			d: rules.OracleDecision{Step: -1, Seat: 0, Kind: "order", GorgeKind: "arrange",
+				ArrangeKind: "graveyard", Options: 2, Min: 0, Max: 2,
+				ArrangeLabels: labels, Picks: []string{"Wastes", "Nessian Asp"}, PickIdx: []int{1, 0}},
+			want: nil,
+		},
+		{
+			name: "forced ordering is a different dialog",
+			d: rules.OracleDecision{Step: -1, Seat: 0, Kind: "order", GorgeKind: "arrange",
+				ArrangeKind: "bottom", Options: 2, Min: 2, Max: 2,
+				ArrangeLabels: labels, Picks: []string{"Wastes", "Nessian Asp"}, PickIdx: []int{1, 0}},
+			want: nil,
+		},
+		{
+			name: "non-library arrange kinds are not this dialog",
+			d: rules.OracleDecision{Step: -1, Seat: 0, Kind: "order", GorgeKind: "arrange",
+				ArrangeKind: "hand", Options: 2, Min: 0, Max: 1,
+				ArrangeLabels: labels, Picks: []string{"Wastes"}, PickIdx: []int{1}},
+			want: nil,
+		},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			got := xanswersSetup([]rules.OracleDecision{tc.d}, 1, nil, nil, nil, nil)
+			if !reflect.DeepEqual(got, tc.want) {
+				t.Fatalf("xanswersSetup = %#v, want %#v", got, tc.want)
+			}
+		})
+	}
+}

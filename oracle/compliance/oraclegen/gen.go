@@ -956,8 +956,10 @@ func baseline(setup map[string]Seat, f *cards.Face) {
 		// Barrel's "put a random creature card from among them onto the
 		// battlefield") picks with each engine's own RNG, so a varied top made
 		// the permanent's identity differ run to run (gorge Ornithopter, XMage
-		// Grizzly Bears). One card repeated 13 times (the largest reveal the
-		// generated rows inspect) makes every random pick the same object.
+		// Grizzly Bears). One NAME repeated 13 times (the largest reveal the
+		// generated rows inspect) makes every random pick choose the same name
+		// -- the 13 entries are distinct card objects whose names match, which
+		// is what the name-level frozen snapshot compares.
 		p0 := setup["p0"]
 		p0.LibraryTop = repeat("Grizzly Bears", 13)
 		setup["p0"] = p0
@@ -1697,7 +1699,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				}
 			} else if d.GorgeKind == "arrange" {
 				forcedOrder := d.Min == d.Max && d.Max == d.Options
-				if !forcedOrder && len(d.PickIdx) == d.Options {
+				if forcedOrder {
+					// A forced bottom order (Min == Max == Options) has no
+					// selection dialog: the answer order IS the bottom order.
+					for _, label := range d.Picks {
+						as = append(as, XAnswer{d.Seat, "choice", label})
+					}
+				} else if len(d.PickIdx) == d.Options {
 					// Keeping every card where it is: XMage's surveil/scry
 					// selection is a TargetCard on the target queue, and a
 					// skip dismisses it. Measured against XMage on the std
@@ -1705,20 +1713,31 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					// cards that agree only with this answer); no ORDER
 					// answer follows, XMage keeps the cards in place.
 					as = append(as, XAnswer{d.Seat, "target", "[target_skip]"})
-					break
-				}
-				if !forcedOrder {
-					// A proper subset is selected on the choice queue,
-					// then choice_skip terminates that dialog.
+				} else if binned, kept, ok := libraryArrangePartition(d.ArrangeLabels, d.PickIdx, d.Options); ok {
+					// XMage's selection is pile B, the cards that go to the
+					// graveyard/bottom; the labels after the skip are pile A's
+					// top order, in PickIdx order. Naming the kept cards as the
+					// selection sends them away too and drops the order.
+					for _, label := range binned {
+						as = append(as, XAnswer{d.Seat, "choice", label})
+					}
+					if len(kept) > 0 {
+						as = append(as, XAnswer{d.Seat, "choice", "[choice_skip]"})
+						for _, label := range kept {
+							as = append(as, XAnswer{d.Seat, "choice", label})
+						}
+					}
+				} else {
+					// A legacy decision without the full offered label list:
+					// keep the recorded picks as both the selection and the
+					// order, the only split the old wire data supports.
 					for _, label := range d.Picks {
 						as = append(as, XAnswer{d.Seat, "choice", label})
 					}
 					as = append(as, XAnswer{d.Seat, "choice", "[choice_skip]"})
-				}
-				// The subsequent ORDER prompt consumes one choice for each
-				// kept card, in the order gorge selected them.
-				for _, label := range d.Picks {
-					as = append(as, XAnswer{d.Seat, "choice", label})
+					for _, label := range d.Picks {
+						as = append(as, XAnswer{d.Seat, "choice", label})
+					}
 				}
 			} else {
 				continue

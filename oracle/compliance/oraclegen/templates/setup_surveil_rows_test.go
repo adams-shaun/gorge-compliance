@@ -16,15 +16,22 @@ import (
 // scripted on the setup choice queue. generateServed pins the replay against
 // the live corpus; a generator regression that unserves a row fails at the
 // generate step.
+//
+// Each card's setup graveyard also holds a card the template seeds for the
+// activated ability, which the Surveil never looked at. The exact queue is
+// therefore only the one surveilled card, not the whole graveyard: asserting
+// the whole queue catches a seeded card leaking into the selection, a kept
+// card named after the skip, or a wrong order.
 func TestSetupParityD1SurveilRows(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	for _, row := range []struct {
-		name string
-		gy   []string
+		name  string
+		gy    []string
+		queue []string
 	}{
-		{"Broodheart Engine", []string{"Grizzly Bears", "Wastes"}},
-		{"Essence Anchor", []string{"Nessian Asp", "Wastes"}},
-		{"Morcant's Eyes", []string{"Wastes"}},
+		{"Broodheart Engine", []string{"Grizzly Bears", "Wastes"}, []string{"Wastes"}},
+		{"Essence Anchor", []string{"Nessian Asp", "Wastes"}, []string{"Wastes"}},
+		{"Morcant's Eyes", []string{"Wastes"}, []string{"Wastes"}},
 	} {
 		t.Run(row.name, func(t *testing.T) {
 			it, res := generateServed(t, reg, row.name, "activate#0.0")
@@ -36,20 +43,20 @@ func TestSetupParityD1SurveilRows(t *testing.T) {
 			if !reflect.DeepEqual(gy, row.gy) {
 				t.Errorf("%s setup p0 graveyard = %v, want %v (the stored XMage list)", row.name, gy, row.gy)
 			}
-			// The same answer must reach XMage: the card the fallback sent to
-			// the graveyard is selected by name on the setup choice queue, so
-			// the driver's library chooser picks it instead of keeping it.
-			scripted := false
-			for _, as := range it.XAnswers {
-				for _, a := range as {
-					if a.Seat == 0 && a.Kind == "setup_choice" && a.Value == row.gy[len(row.gy)-1] {
-						scripted = true
-					}
-				}
+			if len(it.XAnswers) == 0 {
+				t.Fatalf("%s has no xmage_answers", row.name)
 			}
-			if !scripted {
-				t.Errorf("%s xmage_answers = %v, want a setup_choice naming %q (the surveil card the fallback sent to the graveyard)",
-					row.name, it.XAnswers, row.gy[len(row.gy)-1])
+			var got []string
+			for _, a := range it.XAnswers[0] {
+				if a.Seat != 0 || a.Kind != "setup_choice" {
+					t.Errorf("%s setup answer = %+v, want seat 0 setup_choice", row.name, a)
+					continue
+				}
+				got = append(got, a.Value)
+			}
+			if !reflect.DeepEqual(got, row.queue) {
+				t.Errorf("%s setup choice queue = %v, want %v (the one surveilled card selected, no skip)",
+					row.name, got, row.queue)
 			}
 		})
 	}

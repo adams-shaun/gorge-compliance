@@ -9,14 +9,16 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// A partial arrange's order phase is bounded by its picks, not its looked-at
-// cards. A later choice may name a different looked-at card in the same step.
+// A partial arrange emits each pile once, so its order phase is bounded by the
+// selection size, not the looked-at card count. A later choice may name a
+// different looked-at card in the same step.
 func TestArrangeOrderConsumerLeavesFollowingSameNameAnswer(t *testing.T) {
 	decisions := []rules.OracleDecision{
 		{
 			Step: 0, Seat: 0, Kind: "order", GorgeKind: "arrange",
-			Options: 3, Min: 0, Max: 1,
-			Picks: []string{"Forest"}, PickIdx: []int{0},
+			Options: 2, Min: 0, Max: 1,
+			ArrangeLabels: []string{"Forest", "Island"},
+			Picks:         []string{"Forest"}, PickIdx: []int{0},
 			PickKinds: []string{"graveyard"},
 		},
 		{
@@ -27,7 +29,7 @@ func TestArrangeOrderConsumerLeavesFollowingSameNameAnswer(t *testing.T) {
 	}
 	got := xanswers(decisions, 1, nil, nil)
 	want := [][]XAnswer{{
-		{Seat: 0, Kind: "choice", Value: "Forest"},
+		{Seat: 0, Kind: "choice", Value: "Island"},
 		{Seat: 0, Kind: "choice", Value: "[choice_skip]"},
 		{Seat: 0, Kind: "choice", Value: "Forest"},
 		{Seat: 0, Kind: "choice", Value: "Island"},
@@ -35,9 +37,9 @@ func TestArrangeOrderConsumerLeavesFollowingSameNameAnswer(t *testing.T) {
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("xanswers = %#v, want %#v", got, want)
 	}
-	// This is a valid one-pick decision over three looked-at cards. The
-	// consumer's one order slot is followed immediately by another answer
-	// naming a looked-at card; using Options as the slot count steals it.
+	// The arrange's one order label is followed immediately by another answer
+	// naming a looked-at card (the binned Island); using Options as the slot
+	// count steals it.
 	if decisions[0].Options <= len(decisions[0].Picks) {
 		t.Fatal("boundary requires more looked-at cards than emitted order picks")
 	}

@@ -56,40 +56,95 @@ func setupDriveAnswers(d rules.OracleDecision, modes map[string]int) []XAnswer {
 // queue. XMage poses it during build(), before any step, and consumes the
 // head of the choice queue; unscripted it answers with its own default (the
 // old build sent every looked-at card to the graveyard, the new one keeps
-// them on top), which can disagree with gorge's fallback. The answers are
-// the SELECTED cards first (the ones the runner sent to the graveyard or the
-// bottom), then the kept cards in the runner's order, because XMage reads the
-// remaining labels as the top-card ordering. Keeping every card is the one
-// shape XMage spells as its skip token. A forced ordering (Min == Max ==
-// Options) is a different dialog and is left alone.
+// them on top), which can disagree with gorge's fallback.
+//
+// Gorge's answer names only pile A -- the cards KEPT on top, in the order the
+// player keeps them; every card it does not name is pile B, sent to the
+// arrange's shared destination (ArrangeKind). XMage's dialog is the other way
+// round: the leading names are pile B (the cards selected to the graveyard or
+// the bottom) and the names after the skip are pile A's top order. So a
+// partial partition queues the UNPICKED labels in offered order, then the
+// skip that ends selection, then the PICKED labels in PickIdx order. Keeping
+// every picked card where it is is the skip alone; sending every card away is
+// every label with no skip (a skip would read as keep-all).
+//
+// Only the two shapes whose XMage consumer is the same library-selection
+// dialog are scripted: "graveyard" (Surveil) and "bottom" (Scry). A forced
+// ordering (Min == Max == Options) is a different dialog and is left alone,
+// as are the dig/hand/exile arrange kinds, which the setup drive has never
+// measured. Keeping every card in an order other than the offered one cannot
+// be expressed through this queue (the driver reads the skip as keep-in-place
+// and has no selection labels to order), so it is left unscripted rather than
+// silently mis-scripted until the driver grows that shape.
 func setupLibraryArrange(d rules.OracleDecision) []XAnswer {
-	if d.Step >= 0 || d.GorgeKind != "arrange" || d.ArrangeKind == "" ||
+	if d.Step >= 0 || d.GorgeKind != "arrange" ||
+		(d.ArrangeKind != "graveyard" && d.ArrangeKind != "bottom") ||
 		len(d.ArrangeLabels) == 0 || len(d.ArrangeLabels) != d.Options ||
 		(d.Min == d.Max && d.Max == d.Options) {
 		return nil
 	}
-	picked := make(map[int]bool, len(d.PickIdx))
-	for _, i := range d.PickIdx {
-		if i >= 0 && i < len(d.ArrangeLabels) {
-			picked[i] = true
-		}
+	binned, kept, ok := libraryArrangePartition(d.ArrangeLabels, d.PickIdx, d.Options)
+	if !ok {
+		return nil
 	}
-	if len(picked) == len(d.ArrangeLabels) {
-		// Keep every looked-at card where it is.
+	if len(kept) == len(d.ArrangeLabels) {
+		// The skip keeps every card in place; it cannot express a different
+		// kept order (the driver has no selection labels to order), so that
+		// shape stays unscripted instead of silently keeping the wrong order.
+		for i, label := range d.ArrangeLabels {
+			if kept[i] != label {
+				return nil
+			}
+		}
 		return []XAnswer{{d.Seat, "setup_choice", "[choice_skip]"}}
 	}
-	out := make([]XAnswer, 0, len(d.ArrangeLabels))
-	for i, label := range d.ArrangeLabels {
-		if !picked[i] {
+	out := make([]XAnswer, 0, len(d.ArrangeLabels)+1)
+	for _, label := range binned {
+		out = append(out, XAnswer{d.Seat, "setup_choice", label})
+	}
+	if len(kept) > 0 {
+		// The skip separates pile B (the selection already named) from pile
+		// A (the kept cards' top order). Without it the driver would read the
+		// kept labels as more cards to send away; an empty pile A has no
+		// selection to end, so it queues no skip.
+		out = append(out, XAnswer{d.Seat, "setup_choice", "[choice_skip]"})
+		for _, label := range kept {
 			out = append(out, XAnswer{d.Seat, "setup_choice", label})
 		}
 	}
-	for _, i := range d.PickIdx {
-		if i >= 0 && i < len(d.ArrangeLabels) {
-			out = append(out, XAnswer{d.Seat, "setup_choice", d.ArrangeLabels[i]})
+	return out
+}
+
+// libraryArrangePartition splits a KArrange answer into the two piles XMage's
+// library dialog names separately: binned is pile B in offered order (every
+// label the answer did not pick) and kept is pile A in PickIdx order (the
+// cards that stay on top, topmost first). ok is false when the decision does
+// not carry the full offered label list or a pick index is out of range, so a
+// caller never scripts a guessed split. Every library-arrange transcription
+// goes through this one split, so the next caller cannot re-derive the two
+// piles backwards.
+func libraryArrangePartition(labels []string, pickIdx []int, options int) (binned, kept []string, ok bool) {
+	if len(labels) == 0 || len(labels) != options {
+		return nil, nil, false
+	}
+	picked := make(map[int]bool, len(pickIdx))
+	for _, i := range pickIdx {
+		if i < 0 || i >= len(labels) {
+			return nil, nil, false
+		}
+		picked[i] = true
+	}
+	binned = make([]string, 0, len(labels)-len(picked))
+	for i, label := range labels {
+		if !picked[i] {
+			binned = append(binned, label)
 		}
 	}
-	return out
+	kept = make([]string, 0, len(pickIdx))
+	for _, i := range pickIdx {
+		kept = append(kept, labels[i])
+	}
+	return binned, kept, true
 }
 
 // setupModeAnswers is the setup-drive form of the step-time "mode" arm for a

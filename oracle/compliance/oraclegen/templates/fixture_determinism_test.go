@@ -9,8 +9,9 @@ import (
 // TestRandomLibraryPickUsesOneTopCard: Getaway Barrel's trigger reveals the
 // top thirteen cards and puts a RANDOM creature among them onto the
 // battlefield. A varied library top made gorge and XMage pick different
-// creatures with their own RNGs; the scenario now seeds one repeated creature
-// so every random pick is the same object.
+// creatures with their own RNGs; the scenario now seeds one repeated NAME (13
+// distinct card objects) so every random pick chooses the same name, which is
+// what the name-level frozen snapshot compares.
 func TestRandomLibraryPickUsesOneTopCard(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	it, _ := generateServed(t, reg, "Getaway Barrel", "trigger#0.0")

@@ -36,18 +36,21 @@ func TestScriptedLibraryAnswersPinDriverConsumer(t *testing.T) {
 }
 
 // TestArrangeAnswersMatchScriptedSurveilQueue pins the choice-queue sequence
-// consumed by scry/surveil: selection, optional terminator, then order labels.
+// consumed by scry/surveil: pile B in offered order, the terminator, then pile
+// A's top order in PickIdx order.
 func TestArrangeAnswersMatchScriptedSurveilQueue(t *testing.T) {
 	d := rules.OracleDecision{
 		Step: 0, Seat: 0, Kind: "order", GorgeKind: "arrange",
 		Options: 3, Min: 0, Max: 2,
-		Picks: []string{"Forest"}, PickIdx: []int{1}, PickKinds: []string{"graveyard"},
+		ArrangeLabels: []string{"Forest", "Island", "Mountain"},
+		Picks:         []string{"Island"}, PickIdx: []int{1}, PickKinds: []string{"graveyard"},
 	}
 	got := xanswers([]rules.OracleDecision{d}, 1, nil, nil)
 	want := [][]XAnswer{{
 		{Seat: 0, Kind: "choice", Value: "Forest"},
+		{Seat: 0, Kind: "choice", Value: "Mountain"},
 		{Seat: 0, Kind: "choice", Value: "[choice_skip]"},
-		{Seat: 0, Kind: "choice", Value: "Forest"},
+		{Seat: 0, Kind: "choice", Value: "Island"},
 	}}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("arrange xanswers = %#v, want %#v", got, want)
