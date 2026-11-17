@@ -649,11 +649,29 @@ func resolvePass(m seatMap, entries []game.Entry, i, j int) (*oraclegen.Step, in
 		// on the pass with a non-empty stack and does not early-return.
 		return nil, 0, false
 	}
+	if !onlyPasses(entries[j:end]) {
+		return nil, 0, false
+	}
 	answers, why := answersOf(m, entries[i:end])
 	if why != nil {
 		return nil, 0, false
 	}
 	return &oraclegen.Step{Op: "resolve", Seat: m.seat(entries[end].Seat), Answers: answers}, end, true
+}
+
+// onlyPasses reports whether the entries after a resolve step's asks hold
+// nothing but priority passes (and the asks they pose). The resolve op only
+// passes priority and answers asks: a priority action taken while the object
+// sat on the stack (a Crew or waterbend activation, a cast in response) is not
+// replayed, and the asks it posed (its tapcost or waterbend choose, a target)
+// would stay queued with no decision to take them ("unconsumed answer(s)").
+func onlyPasses(es []game.Entry) bool {
+	for _, e := range es {
+		if e.Kind == "priority" && !isPass(e) || e.Kind == "attackers" || e.Kind == "blockers" {
+			return false
+		}
+	}
+	return true
 }
 
 // resolveEmptyPass lowers an empty-stack pass that ends the step and only then
@@ -697,9 +715,9 @@ func resolveEmptyPass(m seatMap, entries []game.Entry, i, j int) (*oraclegen.Ste
 		if len(e.Mana) > 0 || e.RNG > 0 || len(e.Flips) > 0 {
 			return nil, 0, false
 		}
-		if e.Kind == "priority" && !isPass(e) || e.Kind == "attackers" || e.Kind == "blockers" {
-			return nil, 0, false
-		}
+	}
+	if !onlyPasses(entries[j:end]) {
+		return nil, 0, false
 	}
 	answers, why := answersOf(m, entries[i+1:end])
 	if why != nil {
