@@ -951,11 +951,50 @@ func baseline(setup map[string]Seat, f *cards.Face) {
 		p1.Battlefield = append(p1.Battlefield, "Grizzly Bears")
 	}
 	setup["p1"] = p1
-	if searchesLibrary(f) {
+	if randomLibraryPick(f) {
+		// An effect that CHOOSES a card from the library at random (Getaway
+		// Barrel's "put a random creature card from among them onto the
+		// battlefield") picks with each engine's own RNG, so a varied top made
+		// the permanent's identity differ run to run (gorge Ornithopter, XMage
+		// Grizzly Bears). One NAME repeated 13 times (the largest reveal the
+		// generated rows inspect) makes every random pick choose the same name
+		// -- the 13 entries are distinct card objects whose names match, which
+		// is what the name-level frozen snapshot compares.
+		p0 := setup["p0"]
+		p0.LibraryTop = repeat("Grizzly Bears", 13)
+		setup["p0"] = p0
+	} else if searchesLibrary(f) {
 		p0 := setup["p0"]
 		p0.LibraryTop = []string{"Jace Beleren", "Grizzly Bears", "Forest", "Glorious Anthem", "Shock", "Plains", "Ornithopter"}
 		setup["p0"] = p0
 	}
+}
+
+// randomLibraryPick reports whether one of the card's effects selects a card
+// from a library with AtRandom$ True (Getaway Barrel's ChooseCard). Such a
+// scenario needs a single-name library top: the selection is random, and the
+// two engines' RNGs do not agree.
+func randomLibraryPick(f *cards.Face) bool {
+	randomFromLibrary := func(line string) bool {
+		return strings.Contains(line, "AtRandom$ True") &&
+			(strings.Contains(line, "ChoiceZone$ Library") || strings.Contains(line, "Origin$ Library"))
+	}
+	for _, sa := range f.Abilities {
+		if randomFromLibrary(sa.Line) {
+			return true
+		}
+	}
+	for _, body := range f.SVars {
+		if randomFromLibrary(body) {
+			return true
+		}
+	}
+	for _, t := range f.Triggers {
+		if t.Effect != nil && randomFromLibrary(t.Effect.Line) {
+			return true
+		}
+	}
+	return false
 }
 
 func searchesLibrary(f *cards.Face) bool {
@@ -1104,10 +1143,24 @@ func chooseTargets(sc Scenario, ds []rules.OracleDecision) (Scenario, map[int]bo
 	// carriesTargets is the op set whose own targets XMage consumes: cast
 	// through castSpell, activate through activateAbility.
 	carriesTargets := func(op string) bool { return op == "cast" || op == "activate" }
+	// A modal cast's target is posed after the mode pick, so the runner's
+	// fallback target decision ("cast fallback") is deterministic but not
+	// Via "target"; fold it into the step too. Left as an xanswer it sat in
+	// XMage's target queue until the NEXT target ask (a copied Shock's
+	// any-target), which then rejected the name (Choreographed Sparks).
+	modal := map[int]bool{}
+	for _, d := range ds {
+		if d.Kind == "mode" && d.Step >= 0 {
+			modal[d.Step] = true
+		}
+	}
 	chosen := map[int][]string{}
 	castSteps := map[int]bool{}
 	for _, d := range ds {
-		if d.Via != "target" || d.Step < 0 || d.Step >= len(out.Steps) || !carriesTargets(out.Steps[d.Step].Op) {
+		if d.Kind != "target" || d.Step < 0 || d.Step >= len(out.Steps) || !carriesTargets(out.Steps[d.Step].Op) {
+			continue
+		}
+		if d.Via != "target" && !(modal[d.Step] && out.Steps[d.Step].Op == "cast") {
 			continue
 		}
 		// A copy's CR 707.10c new-target election is never a cast step's own
@@ -1168,9 +1221,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	// a card name. Search ... for cards with that name"): XMage poses the name
 	// dialog however narrowly gorge offered it, and the search must find it.
 	namedSearch := map[int]bool{}
+	modal := map[int]bool{}
 	for _, d := range ds {
 		if pickKind(d, 0) == "search" {
 			namedSearch[d.Step] = true
+		}
+		if d.Kind == "mode" && d.Step >= 0 {
+			modal[d.Step] = true
 		}
 	}
 	routing := newAnswerRouting(ds, digSources...)
@@ -1255,10 +1312,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			continue
 		}
-		if d.Step >= steps || (d.Via == "target" && d.Resume != "copy_targets" && castSteps[d.Step]) {
+		folded := d.Via == "target" || (d.Kind == "target" && modal[d.Step])
+		if d.Step >= steps || (folded && d.Resume != "copy_targets" && castSteps[d.Step]) {
 			// A cast step's own targets reach XMage through castSpell; a
 			// target decision posed at a resolve step is scripted below. A
-			// copy's new-target election is never a cast step's targets even
+			// modal cast's fallback target is folded the same way (the mode
+			// pick precedes it, so the runner records it Via "cast fallback").
+			// A copy's new-target election is never a cast step's targets even
 			// if it shares the step, so it is scripted below regardless.
 			continue
 		}
@@ -1639,7 +1699,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				}
 			} else if d.GorgeKind == "arrange" {
 				forcedOrder := d.Min == d.Max && d.Max == d.Options
-				if !forcedOrder && len(d.PickIdx) == d.Options {
+				if forcedOrder {
+					// A forced bottom order (Min == Max == Options) has no
+					// selection dialog: the answer order IS the bottom order.
+					for _, label := range d.Picks {
+						as = append(as, XAnswer{d.Seat, "choice", label})
+					}
+				} else if len(d.PickIdx) == d.Options {
 					// Keeping every card where it is: XMage's surveil/scry
 					// selection is a TargetCard on the target queue, and a
 					// skip dismisses it. Measured against XMage on the std
@@ -1647,21 +1713,25 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					// cards that agree only with this answer); no ORDER
 					// answer follows, XMage keeps the cards in place.
 					as = append(as, XAnswer{d.Seat, "target", "[target_skip]"})
-					break
-				}
-				if !forcedOrder {
-					// A proper subset is selected on the choice queue,
-					// then choice_skip terminates that dialog.
-					for _, label := range d.Picks {
+				} else if binned, kept, ok := libraryArrangePartition(d.ArrangeLabels, d.PickIdx, d.Options); ok {
+					// XMage's selection is pile B, the cards that go to the
+					// graveyard/bottom; the labels after the skip are pile A's
+					// top order, in PickIdx order. Naming the kept cards as the
+					// selection sends them away too and drops the order.
+					for _, label := range binned {
 						as = append(as, XAnswer{d.Seat, "choice", label})
 					}
-					as = append(as, XAnswer{d.Seat, "choice", "[choice_skip]"})
+					if len(kept) > 0 {
+						as = append(as, XAnswer{d.Seat, "choice", "[choice_skip]"})
+						for _, label := range kept {
+							as = append(as, XAnswer{d.Seat, "choice", label})
+						}
+					}
 				}
-				// The subsequent ORDER prompt consumes one choice for each
-				// kept card, in the order gorge selected them.
-				for _, label := range d.Picks {
-					as = append(as, XAnswer{d.Seat, "choice", label})
-				}
+				// A decision without the full offered label list cannot be
+				// split into the two piles (libraryArrangePartition refuses
+				// it) and is left unscripted: guessing a split would send the
+				// kept cards away. gorge records the labels of every KArrange.
 			} else {
 				continue
 			}

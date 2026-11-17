@@ -40,6 +40,28 @@ public final class ScenarioReplaySurveilSkipTest {
         equal(cardChoice, route.invoke(null, cardChoice, otherTarget,
                 (java.util.function.Predicate<String>) "Wastes"::equals));
         equal(List.of(TestPlayer.TARGET_SKIP), otherTarget);
+        // The kept-card order phase after a partial arrange's skip consumes
+        // exactly the kept labels. binned (Island, Mountain) > kept (Forest):
+        // a same-step answer naming the binned Island stays queued.
+        java.lang.reflect.Method order = adapter.getDeclaredMethod("keptOrderLabels", List.class, List.class);
+        order.setAccessible(true);
+        List<String> q1 = new ArrayList<>(List.of("Forest", "Island"));
+        equal(List.of("Forest"), order.invoke(null, q1, new ArrayList<>(List.of("Forest"))));
+        equal(List.of("Island"), q1);
+        // kept (Mountain, Forest) > binned (Island): both labels are consumed,
+        // in queue (PickIdx) order, and the next decision's answer is left.
+        List<String> q2 = new ArrayList<>(List.of("Mountain", "Forest", "Mountain"));
+        equal(List.of("Mountain", "Forest"), order.invoke(null, q2, new ArrayList<>(List.of("Forest", "Mountain"))));
+        equal(List.of("Mountain"), q2);
+        // An all-kept arrange emits no order labels: a label naming a kept
+        // card is not consumed when no kept card remains to order.
+        List<String> q3 = new ArrayList<>(List.of("Forest"));
+        equal(List.of(), order.invoke(null, q3, new ArrayList<>()));
+        equal(List.of("Forest"), q3);
+        // The first label naming no remaining kept card ends the phase.
+        List<String> q4 = new ArrayList<>(List.of("Forest", "Island", "Mountain"));
+        equal(List.of("Forest"), order.invoke(null, q4, new ArrayList<>(List.of("Forest", "Mountain"))));
+        equal(List.of("Island", "Mountain"), q4);
         System.out.println("PASS surveil library skip moves from target queue to choice queue");
     }
 }

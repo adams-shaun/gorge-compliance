@@ -970,37 +970,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 return null;
             }
 
-            // The remaining labels are the chosen top-card ordering. The
-            // generator repeats labels from the arrange decision here; a label
-            // may therefore name a card already selected for the graveyard.
-            // Match against the original look set to distinguish an answer for
-            // this order prompt from an answer belonging to a later choice,
-            // while only adding cards still available to the top of the library.
-            Set<Card> lookedAt = new java.util.LinkedHashSet<>(lookedAtOrder);
+            // The labels after the selection's skip are the kept cards' top
+            // order (pile A, in the decision's pick order). The generator
+            // emits every kept card exactly once, so the order phase is
+            // bounded by the cards still available after the selection and
+            // consumes only labels naming one of them: a later decision's
+            // answer in the same step may name a looked-at card (a binned
+            // duplicate, or a card already selected), and must stay queued.
+            // An all-kept arrange is the skip alone (nothing selected, no
+            // order labels follow), so it consumes none.
             List<Card> ordered = new ArrayList<>();
-            // A partial arrange emits each pick once for selection, then a
-            // skip and exactly those same picks for order. The look set can
-            // be larger than the pick set; counting it steals later answers.
-            // A forced bottom order emits picks only once (no skip), so it
-            // has no separate order answers to consume.
-            int orderAnswersRemaining = selectionEnded ? selected.size() : 0;
-            while (orderAnswersRemaining > 0 && !queue.isEmpty()) {
-                String answer = queue.get(0);
-                Card match = findByName(available, answer);
-                if (match != null) {
-                    queue.remove(0);
+            if (selectionEnded && !selected.isEmpty()) {
+                List<String> keptNames = new ArrayList<>();
+                for (Card card : available) {
+                    keptNames.add(card.getName());
+                }
+                for (String name : keptOrderLabels(queue, keptNames)) {
+                    Card match = findByName(available, name);
                     available.remove(match);
                     ordered.add(match);
-                    orderAnswersRemaining--;
-                    continue;
                 }
-                if (findByName(lookedAt, answer) == null) {
-                    break;
-                }
-                // This order label names a card consumed during selection.
-                // Consume it even though that card cannot be put back on top.
-                queue.remove(0);
-                orderAnswersRemaining--;
             }
             cards.clear();
             for (Card card : ordered) {
@@ -1014,6 +1003,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             }
             return selected;
+        }
+
+        /** Consume the kept-card order labels at the head of {@code queue}:
+         * the longest leading run naming a not-yet-ordered kept card, never
+         * more than there are kept cards. The first label that names no
+         * remaining kept card (or the queue's end) stops the phase, so an
+         * answer belonging to a later decision is left queued. Returns the
+         * consumed names in order. */
+        static List<String> keptOrderLabels(List<String> queue, List<String> keptNames) {
+            List<String> remaining = new ArrayList<>(keptNames);
+            List<String> consumed = new ArrayList<>();
+            while (!remaining.isEmpty() && !queue.isEmpty()) {
+                if (!remaining.remove(queue.get(0))) {
+                    break;
+                }
+                consumed.add(queue.remove(0));
+            }
+            return consumed;
         }
 
         /**
@@ -3789,7 +3796,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             String text, Integer abilityIndex) {
         runCode("mana ability " + card + " \"" + text + "\"", turn, phase, p, (info, pl, g) -> {
             for (ManaSource source : namedManaSources(g, pl, ref, card, stepIdx)) {
-                ActivatedManaAbilityImpl ability = findManaAbility(source.card, source.zone, pl, g,
+                ActivatedManaAbilityImpl ability = findManaAbility(source.card, source.zone, p, g,
                         text, abilityIndex, card, stepIdx);
                 if (ability == null) {
                     continue;
@@ -3856,7 +3863,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if (boundId != null) {
             Card boundCard = g.getCard(boundId);
             Zone boundZone = g.getState().getZone(boundId);
-            if (boundCard != null && boundZone != null) {
+            // A transformed double-faced card's setup alias can name the OLD
+            // half after the craft/transform returned a new card object to the
+            // battlefield; that half is OUTSIDE and has no live mana ability.
+            // Only a card in a real zone is a candidate.
+            if (boundCard != null && boundZone != null && boundZone != Zone.OUTSIDE) {
                 seen.add(boundCard.getId());
                 sources.add(new ManaSource(boundCard, boundZone));
             }
@@ -3929,11 +3940,35 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** Whether a live object is one of the same-named objects a scenario ref
-     * names, by its setup spelling, its staged back face or its live name. */
+     * names, by its setup spelling, its staged back face or its live name.
+     *
+     * A transformed double-faced permanent is also matched by either face of
+     * its main card: a front-face ref ("p0:Sunbird Standard") names the craft
+     * source that has since become "Sunbird Effigy", and the live permanent
+     * keeps the front name only on the main card. */
     private boolean matchesRef(Card object, String front, String live) {
         String setup = setupName(object);
         String actual = xmageSpelling(object.getName());
-        return setup.equals(front) || setup.equals(live) || actual.equals(front) || actual.equals(live);
+        if (setup.equals(front) || setup.equals(live) || actual.equals(front) || actual.equals(live)) {
+            return true;
+        }
+        if (object instanceof Permanent) {
+            Card main = ((Permanent) object).getMainCard();
+            if (main != null) {
+                String frontFace = xmageSpelling(main.getName());
+                if (frontFace.equals(front) || frontFace.equals(live)) {
+                    return true;
+                }
+                Card other = main.getSecondCardFace();
+                if (other != null) {
+                    String otherFace = xmageSpelling(other.getName());
+                    if (otherFace.equals(front) || otherFace.equals(live)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /** The object id a scenario ref is bound to on the activating player,
@@ -3949,9 +3984,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * the item means (gorge's face abilities are its activated abilities, in
      * printed order); the rule text is the selector both sides already agree
      * on, so a differing XMage ordering still activates the right ability.
-     * More than one text match without a usable index is a harness error,
-     * never a guess. */
-    private static ActivatedManaAbilityImpl findManaAbility(Card source, Zone zone, Player p, Game g,
+     *
+     * XMage often splits one gorge ability into several: "{T}, Pay 1 life: Add
+     * {G}, {U}, or {R}" is three Green/Blue/RedManaAbility instances, so the
+     * gorge ability_index does not name one of them. When the text matches
+     * several abilities, the scripted colour choice that gorge recorded for
+     * the same activation picks the split member (and is consumed, since XMage
+     * poses no colour dialog for it). Duplicate granted abilities (Locus of
+     * Enlightenment keeps both Elvish Mystic's and Llanowar Elves' "{T}: Add
+     * {G}") have identical rule text, so any one is the same activation. More
+     * than one DISTINCT text match without a usable index or colour answer is
+     * a harness error, never a guess. */
+    private static ActivatedManaAbilityImpl findManaAbility(Card source, Zone zone, TestPlayer p, Game g,
             String text, Integer abilityIndex, String card, int stepIdx) {
         List<ActivatedManaAbilityImpl> available = new ArrayList<>(
                 source.getAbilities(g).getAvailableActivatedManaAbilities(zone, p.getId(), g));
@@ -3972,6 +4016,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return matching.get(0);
         }
         if (matching.size() > 1) {
+            if (sameRuleText(matching)) {
+                return matching.get(0);
+            }
+            char colour = queuedManaColour(p);
+            ActivatedManaAbilityImpl chosen = colour == 0 ? null : soleColourMatch(matching, colour);
+            if (chosen != null) {
+                p.getChoices().remove(0);
+                return chosen;
+            }
             throw new IllegalStateException("harness: activate step " + stepIdx + " on " + card + " matches "
                     + matching.size() + " mana abilities for \"" + text + "\" and ability_index "
                     + abilityIndex + " does not identify one");
@@ -3983,6 +4036,49 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return indexed;
         }
         return null;
+    }
+
+    /** Whether every matching ability has the same rule text: granted
+     * duplicates of one ability, where activating any is the same choice. */
+    private static boolean sameRuleText(List<ActivatedManaAbilityImpl> abilities) {
+        String first = abilities.get(0).toString();
+        for (ActivatedManaAbilityImpl ability : abilities) {
+            if (!first.equals(ability.toString())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** The mana colour the player's next scripted choice names, or 0 when the
+     * head of the choice queue is not a colour (an unrelated ask is next). */
+    private static char queuedManaColour(TestPlayer p) {
+        if (p.getChoices().isEmpty()) {
+            return 0;
+        }
+        String choice = p.getChoices().get(0);
+        for (char c : "WUBRGC".toCharArray()) {
+            if (ScriptedChoicePlayer.colourName(c).equalsIgnoreCase(choice)) {
+                return c;
+            }
+        }
+        return 0;
+    }
+
+    /** The one text-matching ability whose rule adds the named colour, or
+     * null when none or several do. */
+    private static ActivatedManaAbilityImpl soleColourMatch(List<ActivatedManaAbilityImpl> matching, char colour) {
+        String mark = "{" + colour + "}";
+        ActivatedManaAbilityImpl chosen = null;
+        for (ActivatedManaAbilityImpl ability : matching) {
+            if (ability.toString().contains(mark)) {
+                if (chosen != null) {
+                    return null;
+                }
+                chosen = ability;
+            }
+        }
+        return chosen;
     }
 
     /** The source's ability_index-th activated ability (gorge indexes its

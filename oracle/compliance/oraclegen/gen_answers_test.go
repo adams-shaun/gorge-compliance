@@ -33,11 +33,13 @@ func TestXAnswersQueueRoutingShapes(t *testing.T) {
 			want: []XAnswer{{0, "target", "[target_skip]"}},
 		},
 		{
-			// Generic partial arrange queue shape: selection, terminator, then
-			// the emitted order labels. The driver must preserve that order.
-			name: "arrange partial selection: selection skip then independent order",
-			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "order", GorgeKind: "arrange", Options: 3, Min: 0, Max: 2, Picks: []string{"Forest"}, PickIdx: []int{0}, PickKinds: []string{"graveyard"}},
-			want: []XAnswer{{0, "choice", "Forest"}, {0, "choice", "[choice_skip]"}, {0, "choice", "Forest"}},
+			// Generic partial arrange queue shape: XMage's selection is pile B
+			// (the two cards sent away, offered order), then the terminator,
+			// then pile A's top order. Naming the kept Forest as the selection
+			// would send it away too.
+			name: "arrange partial selection: binned, skip, then kept order",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "order", GorgeKind: "arrange", Options: 3, Min: 0, Max: 2, ArrangeLabels: []string{"Forest", "Island", "Mountain"}, Picks: []string{"Forest"}, PickIdx: []int{0}, PickKinds: []string{"graveyard"}},
+			want: []XAnswer{{0, "choice", "Island"}, {0, "choice", "Mountain"}, {0, "choice", "[choice_skip]"}, {0, "choice", "Forest"}},
 		},
 		{
 			// A forced bottom order (Min==Max==Options) never offers a skip.
