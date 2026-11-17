@@ -1,0 +1,67 @@
+{
+ "card": "Standstill",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "bdfb62ae5fcc",
+ "scenarios": [
+  {
+   "name": "exiled-in-response-so-nobody-draws",
+   "cr": [
+    "118.12"
+   ],
+   "why": "Casting a spell triggers Standstill. Before the trigger resolves the enchantment is exiled, so its controller cannot pay the sacrifice cost and the draw never happens.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Standstill"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Lightning Bolt"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Lightning Bolt",
+     "mana": "R",
+     "targets": [
+      "p0"
+     ]
+    },
+    {
+     "op": "move",
+     "card": "p0:Standstill",
+     "to": "exile"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Standstill",
+     "zone": "exile"
+    },
+    {
+     "hand_size": {
+      "p0": 0,
+      "p1": 0
+     }
+    },
+    {
+     "life": {
+      "p0": 17
+     }
+    }
+   ]
+  }
+ ]
+}

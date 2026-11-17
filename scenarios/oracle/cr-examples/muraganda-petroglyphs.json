@@ -1,0 +1,91 @@
+{
+ "card": "Muraganda Petroglyphs",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "c9e6ec4ebd28",
+ "scenarios": [
+  {
+   "name": "plain-bear-gets-the-bonus",
+   "cr": [
+    "113.12"
+   ],
+   "why": "Runeclaw Bear has no abilities, so the Petroglyphs' static ability makes it a 4/4.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Muraganda Petroglyphs",
+      "Runeclaw Bear"
+     ]
+    }
+   },
+   "steps": [],
+   "expect": [
+    {
+     "card": "p0:Runeclaw Bear",
+     "pt": "4/4"
+    }
+   ]
+  },
+  {
+   "name": "flying-aura-turns-the-bonus-off",
+   "cr": [
+    "113.12"
+   ],
+   "why": "Flight gives the Bear an ability, so it is no longer a creature with no abilities and stays a 2/2.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Muraganda Petroglyphs",
+      "Runeclaw Bear",
+      "Flight"
+     ],
+     "attached": [
+      {
+       "card": "Flight",
+       "to": "p0:Runeclaw Bear"
+      }
+     ]
+    }
+   },
+   "steps": [],
+   "expect": [
+    {
+     "card": "p0:Runeclaw Bear",
+     "pt": "2/2",
+     "keywords": [
+      "Flying"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "unblockable-aura-keeps-the-bonus",
+   "cr": [
+    "113.12"
+   ],
+   "why": "Cloak of Mists does not give the Bear an ability of its own, so the Bear still has no abilities and gets +2/+2.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Muraganda Petroglyphs",
+      "Runeclaw Bear",
+      "Cloak of Mists"
+     ],
+     "attached": [
+      {
+       "card": "Cloak of Mists",
+       "to": "p0:Runeclaw Bear"
+      }
+     ]
+    }
+   },
+   "steps": [],
+   "expect": [
+    {
+     "card": "p0:Runeclaw Bear",
+     "pt": "4/4"
+    }
+   ]
+  }
+ ]
+}

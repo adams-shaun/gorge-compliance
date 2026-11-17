@@ -1,0 +1,64 @@
+{
+ "card": "Viridian Joiner",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "f75985028f7d",
+ "scenarios": [
+  {
+   "name": "negative-power-adds-no-mana",
+   "cr": [
+    "107.1b"
+   ],
+   "why": "A -5/-0 effect makes the 1/2 Joiner a -4/2. Its mana ability would add an amount equal to a negative power, so the calculation gives zero and the pool stays empty.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Viridian Joiner"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Shrink"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Shrink",
+     "mana": "G",
+     "targets": [
+      "p0:Viridian Joiner"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Viridian Joiner",
+       "pt": "-4/2"
+      }
+     ]
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Viridian Joiner",
+     "ability": "for mana"
+    }
+   ],
+   "expect": [
+    {
+     "pool": {
+      "p0": ""
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,59 @@
+{
+ "card": "Jade Mage",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "fea9db8211e1",
+ "scenarios": [
+  {
+   "name": "saproling-token-is-a-plain-green-1-1",
+   "cr": [
+    "111.3"
+   ],
+   "why": "The activated ability creates a green 1/1 Saproling. A token has no mana cost, supertypes, rules text or abilities of its own, so the observable card is only its colour, type line and P/T.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Jade Mage"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Jade Mage",
+     "ability": "Saproling",
+     "mana": "CCG"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Saproling",
+      "token": true
+     },
+     "eq": 1
+    },
+    {
+     "card": "p0:token:Saproling",
+     "pt": "1/1",
+     "types": [
+      "Creature",
+      "Saproling"
+     ],
+     "colours": "G"
+    },
+    {
+     "pool": {
+      "p0": ""
+     }
+    }
+   ]
+  }
+ ]
+}

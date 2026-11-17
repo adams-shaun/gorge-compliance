@@ -1,0 +1,150 @@
+{
+ "card": "Exotic Orchard",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "549742fb7886",
+ "scenarios": [
+  {
+   "name": "opponent-with-no-lands-adds-nothing",
+   "cr": [
+    "106.7"
+   ],
+   "why": "The Orchard reflects a colour an opponent's land could make. An opponent with no lands offers no colour, so no mana is produced and no activation is offered.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Exotic Orchard"
+     ]
+    },
+    "p1": {}
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": ""
+    }
+   ],
+   "expect": [
+    {
+     "pool": {
+      "p0": ""
+     }
+    },
+    {
+     "offered": {
+      "seat": 0,
+      "kind": "activate",
+      "card": "p0:Exotic Orchard",
+      "label": "for mana"
+     },
+     "want": false
+    }
+   ]
+  },
+  {
+   "name": "two-orchards-alone-add-nothing",
+   "cr": [
+    "106.7"
+   ],
+   "why": "When the only lands in play are two Orchards, each one looks at the other for a colour and finds none, so no mana is produced and no activation is offered.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Exotic Orchard"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Exotic Orchard"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": ""
+    }
+   ],
+   "expect": [
+    {
+     "pool": {
+      "p0": ""
+     }
+    },
+    {
+     "offered": {
+      "seat": 0,
+      "kind": "activate",
+      "card": "p0:Exotic Orchard",
+      "label": "for mana"
+     },
+     "want": false
+    }
+   ]
+  },
+  {
+   "name": "forest-and-orchard-add-green",
+   "cr": [
+    "106.7"
+   ],
+   "why": "With a Forest out on each side, an Orchard has a colour to reflect: both Orchards can add {G}, and each player's pool gets one green mana.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Forest",
+      "Exotic Orchard"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Exotic Orchard"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Exotic Orchard",
+     "ability": "for mana",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "G"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "activate",
+     "seat": 1,
+     "card": "p1:Exotic Orchard",
+     "ability": "for mana",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "G"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "pool": {
+      "p0": "G",
+      "p1": "G"
+     }
+    }
+   ]
+  }
+ ]
+}

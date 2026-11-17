@@ -1,0 +1,53 @@
+{
+ "card": "Mimic Vat",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "4578097d56d2",
+ "scenarios": [
+  {
+   "name": "no-imprinted-card-no-token",
+   "cr": [
+    "111.12"
+   ],
+   "why": "The activated ability copies a card exiled with Mimic Vat. Nothing is exiled with it, so resolving the ability creates no token at all.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Mimic Vat"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Mimic Vat",
+     "ability": "Create a token",
+     "mana": "CCC"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "",
+      "token": true
+     },
+     "eq": 0
+    },
+    {
+     "card": "p0:Mimic Vat",
+     "zone": "battlefield",
+     "tapped": true
+    },
+    {
+     "stack_size": 0
+    }
+   ]
+  }
+ ]
+}

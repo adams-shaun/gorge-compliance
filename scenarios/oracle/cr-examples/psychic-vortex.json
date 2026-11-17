@@ -1,0 +1,61 @@
+{
+ "card": "Psychic Vortex",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "94e74b17f19d",
+ "scenarios": [
+  {
+   "name": "paying-the-upkeep-with-a-skipped-draw-still-pays",
+   "cr": [
+    "118.11"
+   ],
+   "why": "The setup drive already pays the first upkeep, skipping its draw. At the next upkeep the Vortex adds another age counter and asks again; choosing to pay and then replacing that draw with Obstinate Familiar's skip still counts the cost as paid, so the Vortex stays and the hand stays empty.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Psychic Vortex",
+      "Obstinate Familiar"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p0"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      },
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Psychic Vortex",
+     "zone": "battlefield",
+     "counters": {
+      "age": 2
+     }
+    },
+    {
+     "hand_size": {
+      "p0": 0
+     }
+    }
+   ]
+  }
+ ]
+}

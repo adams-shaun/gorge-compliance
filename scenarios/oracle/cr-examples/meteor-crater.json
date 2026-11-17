@@ -1,0 +1,45 @@
+{
+ "card": "Meteor Crater",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "128d0f39f126",
+ "scenarios": [
+  {
+   "name": "no-coloured-permanent-adds-nothing",
+   "cr": [
+    "106.5"
+   ],
+   "why": "With only the colourless Crater itself out, its controller has no coloured permanent to name, so the pool stays empty and the engine offers no mana activation.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Meteor Crater"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": ""
+    }
+   ],
+   "expect": [
+    {
+     "pool": {
+      "p0": ""
+     }
+    },
+    {
+     "offered": {
+      "seat": 0,
+      "kind": "activate",
+      "card": "p0:Meteor Crater",
+      "label": "for mana"
+     },
+     "want": false
+    }
+   ]
+  }
+ ]
+}

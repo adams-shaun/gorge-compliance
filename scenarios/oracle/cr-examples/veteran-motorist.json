@@ -1,0 +1,57 @@
+{
+ "card": "Veteran Motorist",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "3cc8d48c841f",
+ "scenarios": [
+  {
+   "name": "crew-trigger-applies-after-the-vehicle-becomes-a-creature",
+   "cr": [
+    "208.3a"
+   ],
+   "why": "The Motorist's crew trigger resolves while the Copter is still a noncreature artifact. The +1/+1 effect waits and applies once the crew ability makes the Copter an artifact creature: a 4/4.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Veteran Motorist",
+      "Smuggler's Copter"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Smuggler's Copter",
+     "ability": "Crew",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Veteran Motorist"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Smuggler's Copter",
+     "pt": "4/4",
+     "types": [
+      "Artifact",
+      "Creature",
+      "Vehicle"
+     ]
+    },
+    {
+     "card": "p0:Veteran Motorist",
+     "tapped": true
+    }
+   ]
+  }
+ ]
+}
