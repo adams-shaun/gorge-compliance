@@ -54,16 +54,16 @@ func checkDiagnosed(file, cardsDir string, w io.Writer) (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	bad := 0
+	badRows := map[int]bool{}
 	report := func(row int, format string, args ...any) {
 		fmt.Fprintf(w, "%s:%d: %s\n", file, row, fmt.Sprintf(format, args...))
-		bad++
+		badRows[row] = true
 	}
 
 	lines := strings.Split(string(b), "\n")
 	if len(lines) == 0 || strings.TrimSpace(lines[0]) == "" {
 		report(1, "header must be %q", diagnosedHeader)
-		return bad, nil
+		return len(badRows), nil
 	}
 	if got := strings.TrimSuffix(lines[0], "\r"); got != diagnosedHeader {
 		report(1, "header must be %q", diagnosedHeader)
@@ -107,11 +107,12 @@ func checkDiagnosed(file, cardsDir string, w io.Writer) (int, error) {
 			report(row, "needs an upstream URL or a ticket id")
 		}
 	}
-	return bad, nil
+	return len(badRows), nil
 }
 
 // diagnosedCardNames walks cardsfolder once and returns every card's Name:
-// value, so a register row names a card the corpus actually has.
+// value, including alternate faces, so a register row names a card the corpus
+// actually has.
 func diagnosedCardNames(folder string) (map[string]bool, error) {
 	names := map[string]bool{}
 	err := filepath.WalkDir(folder, func(path string, d fs.DirEntry, err error) error {
@@ -128,7 +129,6 @@ func diagnosedCardNames(folder string) (map[string]bool, error) {
 		for _, line := range strings.Split(string(b), "\n") {
 			if name, ok := strings.CutPrefix(strings.TrimSuffix(line, "\r"), "Name:"); ok {
 				names[strings.TrimSpace(name)] = true
-				break
 			}
 		}
 		return nil
