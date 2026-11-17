@@ -48,6 +48,7 @@ type step struct {
 	Mana         string      `json:"mana,omitempty"`
 	Targets      []string    `json:"targets,omitempty"`
 	Kicked       bool        `json:"kicked,omitempty"`
+	CastMode     string      `json:"cast_mode,omitempty"`
 	AbilityIndex *int        `json:"ability_index,omitempty"`
 	Attackers    []string    `json:"attackers,omitempty"`
 	Defender     string      `json:"defender,omitempty"`

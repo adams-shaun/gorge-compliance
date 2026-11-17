@@ -370,7 +370,18 @@ func (t *translator) targetRef(name string) (string, *refusal) {
 
 // choicePick maps a setChoice string: a card name becomes its ref, anything
 // else stays a label fragment.
-func (t *translator) choicePick(s string) string {
+func (t *translator) choicePick(s string) string { return t.choicePickN(s, 0) }
+
+// choicePickN is choicePick for the ord-th (0-based) pick of one counted
+// setChoice(player, name, n): the ord-th card of that name, which the runner
+// refs as pN:Name, pN:Name#2, ... A repeated bare ref binds the first copy
+// only and is rejected as not offered.
+//
+// Known limitation: the ord indexes anyRefs (battlefield first, then setup
+// places), not the one zone the choice reads; a seat holding copies of the
+// name in two zones could pick across them. The translator does not track
+// which zone a choice reads.
+func (t *translator) choicePickN(s string, ord int) string {
 	n, r := xmageName(s)
 	if r != nil {
 		return s
@@ -383,10 +394,10 @@ func (t *translator) choicePick(s string) string {
 	}
 	r0, r1 := t.anyRefs(0, n), t.anyRefs(1, n)
 	if len(r0) > 0 && len(r1) == 0 {
-		return r0[0]
+		return r0[min(ord, len(r0)-1)]
 	}
 	if len(r1) > 0 && len(r0) == 0 {
-		return r1[0]
+		return r1[min(ord, len(r1)-1)]
 	}
 	if _, ok := t.lookup(n); !ok {
 		// XMage words an as-enters P/T choice by its result ("a 3/3
@@ -1372,6 +1383,27 @@ func producedMana(sa *cards.SA) [][]byte {
 	return out
 }
 
+// hasOptionalCost reports whether the card has a Mode$ OptionalCost static on
+// itself (ValidCard$ Card.Self), gorge's "optionalcost" cast option.
+func (em *emitter) hasOptionalCost(name string) bool {
+	c, ok := em.t.lookup(name)
+	if !ok {
+		return false
+	}
+	for _, f := range c.Faces {
+		if f == nil {
+			continue
+		}
+		for i := range f.Statics {
+			st := &f.Statics[i]
+			if st.Mode == "OptionalCost" && st.Params["ValidCard"] == "Card.Self" {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 // kickerCost returns the card's Kicker cost ("R", "1 U"), or "".
 func (em *emitter) kickerCost(name string) string {
 	c, ok := em.t.lookup(name)
@@ -1433,7 +1465,7 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 					}
 					pick = r
 				} else {
-					pick = t.choicePick(n)
+					pick = t.choicePickN(n, ch.ord)
 				}
 			}
 			xk := "choice"
@@ -1498,6 +1530,17 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 					}
 					s.Mana += km
 					s.Kicked = true
+				}
+				a.choices = a.choices[1:]
+			}
+			// XMage answers an OptionalCost static ("As an additional cost to
+			// cast this spell, you may ...") with the first setChoice(true);
+			// gorge offers it as its own cast option, picked by cast_mode.
+			if em.hasOptionalCost(a.card) && len(a.choices) > 0 && !a.choices[0].target &&
+				a.choices[0].x < 0 && a.choices[0].mode == 0 &&
+				(a.choices[0].pick == "yes" || a.choices[0].pick == "no") {
+				if a.choices[0].pick == "yes" {
+					s.CastMode = "optionalcost"
 				}
 				a.choices = a.choices[1:]
 			}
@@ -2102,7 +2145,7 @@ func (t *translator) tailGroup() (*group, *refusal) {
 				}
 				pick, kind = r, "target"
 			} else {
-				pick = t.choicePick(n)
+				pick = t.choicePickN(n, ch.ord)
 			}
 		} else if ch.target {
 			kind = "target"

@@ -130,6 +130,7 @@ type choice struct {
 	pick   string // already a gorge pick (ref, yes/no, text)
 	x      int    // setChoice "X=N": N, the announced X (-1 otherwise)
 	mode   int    // setModeChoice "N": 1-based mode index (0 otherwise)
+	ord    int    // pick's 0-based position within one counted setChoice(player, name, n)
 }
 
 type action struct {
@@ -828,6 +829,10 @@ func (t *translator) readCall(idx int, c call) *refusal {
 			return nil
 		}
 		for i := 0; i < times; i++ {
+			// a counted setChoice names n distinct objects of that name.
+			if times > 1 && !ch.target {
+				ch.ord = i
+			}
 			t.choiceList = append(t.choiceList, ch)
 		}
 	case "setModeChoice":
