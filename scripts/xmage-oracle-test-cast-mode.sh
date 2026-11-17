@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Check the driver's cast-mode acceptance list without starting H2 or a game.
-# Requires the read-only XMage build, just like the driver's javac check.
-# The Adventure/Omen cases replay a real one-step game, so the driver
-# constructor opens XMage's H2 card DB from a scratch cwd with a private copy
-# (as xmage-oracle-test-driver-contract.sh does).
+# Check the driver's cast-mode acceptance list and the Adventure/Omen cast
+# path. The acceptance checks need no game; the Adventure/Omen cases replay a
+# real one-step game, so the driver constructor opens XMage's H2 card DB from a
+# scratch cwd with a private copy (as xmage-oracle-test-driver-contract.sh
+# does). Requires the read-only XMage build, just like the driver's javac check.
 set -euo pipefail
 root=$(realpath -m "${XMAGE_ORACLE_DIR:-$(dirname "$0")/../.oracle-build/xmage}")
 out=${1:-.coverage/xmage-driver/cast-mode-driverout}
