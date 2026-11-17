@@ -1,0 +1,66 @@
+{
+ "card": "Heart-Piercer Manticore",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "43c5007eda07",
+ "scenarios": [
+  {
+   "name": "reflexive-damage-fires-after-the-sacrifice",
+   "cr": [
+    "603.12"
+   ],
+   "why": "The enters trigger sacrifices the Bear, and the reflexive ability then deals the Bear's power to the targeted Lions. The Manticore stays on the battlefield.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Heart-Piercer Manticore"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Savannah Lions"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Heart-Piercer Manticore",
+     "mana": "CCRR"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ],
+     "targets": [
+      "p1:Savannah Lions"
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p1:Savannah Lions",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Heart-Piercer Manticore",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

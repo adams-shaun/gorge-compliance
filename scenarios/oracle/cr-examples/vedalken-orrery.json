@@ -1,0 +1,82 @@
+{
+ "card": "Vedalken Orrery",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "cd67e7ffd988",
+ "scenarios": [
+  {
+   "name": "sorcery-from-another-graveyard-is-cast-at-flash-speed",
+   "cr": [
+    "609.4a"
+   ],
+   "why": "Shaman's Trance lets p0 cast a spell from p1's graveyard as though it were in p0's own. With the Orrery out, the sorcery can be cast during p1's main phase, and flashback then exiles it.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Vedalken Orrery"
+     ],
+     "hand": [
+      "Shaman's Trance"
+     ]
+    },
+    "p1": {
+     "graveyard": [
+      "Firebolt"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p1"
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Shaman's Trance",
+     "mana": "CCR"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p1:Firebolt",
+     "mana": "CCCCR",
+     "cast_mode": "flashback",
+     "targets": [
+      "p1"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p1": 18
+     }
+    },
+    {
+     "card": "p1:Firebolt",
+     "zone": "exile"
+    },
+    {
+     "card": "p0:Shaman's Trance",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

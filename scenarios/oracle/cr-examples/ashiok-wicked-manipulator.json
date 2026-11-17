@@ -1,0 +1,63 @@
+{
+ "card": "Ashiok, Wicked Manipulator",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "d2a978cf6dc8",
+ "scenarios": [
+  {
+   "name": "the-life-payment-is-replaced-by-exiling-two-cards",
+   "cr": [
+    "614.13b"
+   ],
+   "why": "Ashiok replaces the two life that Breeding Pool would cost with exiling the top two cards. The Pool still enters untapped, p0's life total is unchanged, and the two cards are exiled.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Ashiok, Wicked Manipulator"
+     ],
+     "hand": [
+      "Breeding Pool"
+     ],
+     "library_top": [
+      "Grizzly Bears",
+      "Savannah Lions"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "play",
+     "card": "p0:Breeding Pool",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Breeding Pool",
+     "zone": "battlefield",
+     "tapped": false
+    },
+    {
+     "life": {
+      "p0": 20
+     }
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "exile"
+    },
+    {
+     "card": "p0:Savannah Lions",
+     "zone": "exile"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,108 @@
+{
+ "card": "Jund",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "1c50ebf4c8b2",
+ "scenarios": [
+  {
+   "name": "the-two-devour-effects-do-not-stack",
+   "cr": [
+    "614.13a"
+   ],
+   "why": "Jund gives the red Elder devour 5 while the Elder has devour 3 of its own. Sacrificing the Bear can pay only one of those replacement effects, so the Elder gets three counters rather than eight.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Jund",
+      "Runeclaw Bear"
+     ],
+     "hand": [
+      "Thunder-Thrash Elder"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Thunder-Thrash Elder",
+     "mana": "CCR"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p0:Runeclaw Bear"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Thunder-Thrash Elder",
+     "pt": "4/4",
+     "counters": {
+      "P1P1": 3
+     }
+    },
+    {
+     "card": "p0:Runeclaw Bear",
+     "zone": "graveyard"
+    }
+   ]
+  },
+  {
+   "name": "junds-devour-five-applies-to-a-creature-without-its-own",
+   "cr": [
+    "614.13a"
+   ],
+   "why": "Jund grants devour 5 to the green creature spell. The Bear has no devour ability of its own, so sacrificing the other Bear gives it five +1/+1 counters.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Jund",
+      "Runeclaw Bear"
+     ],
+     "hand": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Grizzly Bears",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p0:Runeclaw Bear"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "pt": "7/7",
+     "counters": {
+      "P1P1": 5
+     }
+    },
+    {
+     "card": "p0:Runeclaw Bear",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

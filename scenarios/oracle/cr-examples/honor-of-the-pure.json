@@ -1,0 +1,67 @@
+{
+ "card": "Honor of the Pure",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "81cdaccb1441",
+ "scenarios": [
+  {
+   "name": "the-bonus-follows-the-colour-change-in-both-directions",
+   "cr": [
+    "613.5"
+   ],
+   "why": "Honor of the Pure's bonus applies in a later layer than color changes. The Knight grows to 3/3 when it becomes white, then drops back to 2/2 when it becomes red.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Honor of the Pure",
+      "Hypnotic Specter"
+     ],
+     "hand": [
+      "Niveous Wisps",
+      "Crimson Wisps"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Niveous Wisps",
+     "mana": "W",
+     "targets": [
+      "p0:Hypnotic Specter"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Hypnotic Specter",
+       "pt": "3/3",
+       "colours": "W"
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Crimson Wisps",
+     "mana": "R",
+     "targets": [
+      "p0:Hypnotic Specter"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Hypnotic Specter",
+     "pt": "2/2",
+     "colours": "R"
+    }
+   ]
+  }
+ ]
+}
