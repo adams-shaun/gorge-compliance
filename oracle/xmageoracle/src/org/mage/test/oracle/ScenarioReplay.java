@@ -1691,20 +1691,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
      *    loyalty activation (Found Footage's hand, Ajani's loyalty).
      *  - resolve by seat 1 waits on seat 1's queue (waitStackResolved), so a
      *    checkpoint on seat 0 would run while the spell is still on the stack.
-     *  - in a recorded run, an action of the non-active seat checkpoints on
-     *    that seat. XMage runs the whole queue of the seat that holds priority
-     *    before the opponent acts, so a checkpoint on the active seat would
-     *    run after every later action of that seat in the same turn and step
-     *    (ECL Impolite Entrance: p1's three mana activations and flash cast
-     *    were all visible at the step-10 checkpoint, though gorge cast the
-     *    flash at step 13). The actor's own queue puts its checkpoint between
-     *    its actions, holding the later one for its own step.
+     *  - in a recorded run, an action (a cast, activation or land play) of the
+     *    non-active seat checkpoints on that seat. XMage runs the whole queue
+     *    of the seat that holds priority before the opponent acts, so a
+     *    checkpoint on the active seat would run after every later action of
+     *    that seat in the same turn and step (ECL Impolite Entrance: p1's
+     *    three mana activations and flash cast were all visible at the
+     *    step-10 checkpoint, though gorge cast the flash at step 13). The
+     *    actor's own queue puts its checkpoint between its actions, holding
+     *    the later one for its own step.
      *  - a recorded pass that resolves or moves the step checkpoints on the
      *    active seat, which has priority after the resolution or at the step
      *    it reached; any other recorded pass checkpoints on the seat that
      *    passed, which still holds priority.
      *
-     * Every other op keeps seat 0, which acts last on the turn it is on.
+     * Every other op keeps seat 0, which acts last on the turn it is on. That
+     * includes the declarations: XMage makes attack and block in the step's
+     * beginStep on the declaring seat, not as a queued action of that seat, so
+     * a checkpoint on the declaring seat would run only after the active
+     * seat's next pass moved the game on. attach is likewise queued on
+     * playerA.
      */
     private TestPlayer checkpointSeat(String op, JsonObject st, int stepIdx) {
         if (op.equals("pass") && isPassRun(steps(sc0), stepIdx)) {
@@ -1739,10 +1745,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if (op.equals("resolve")) {
             return seat(st.has("seat") ? st.get("seat").getAsInt() : 0);
         }
-        if (sc0 != null && isRecordedRun(steps(sc0)) && !op.equals("attach")) {
-            // attach is queued on playerA (it must apply before this step's
-            // snapshot even when the step names the other seat), so its
-            // checkpoint stays there.
+        if (sc0 != null && isRecordedAction(steps(sc0), stepIdx)) {
+            // A recorded cast, activation or land play is queued on the seat
+            // that takes it, and that seat's queue carries its checkpoint
+            // between its other actions. A declaration (attack, block) is
+            // beginStep work on the declaring seat, not an action of its
+            // queue, and attach is queued on playerA; those keep seat 0,
+            // which acts last on the turn it is on and so snapshots after the
+            // declaration has happened.
             return seat(seatOfStep(steps(sc0), stepIdx));
         }
         return playerA;
@@ -3948,15 +3958,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return false;
     }
 
-    /** Whether step {@code index} is a cast, activation or land play, of a
-     * recorded game (one that has passes with positions), by a seat that is
-     * not the active player. */
+    /** Whether step {@code index} is an action -- a cast, activation or land
+     * play -- of a recorded game (one that has passes with positions). These
+     * are the ops whose commands, and with them the checkpoint, run on the
+     * acting seat's own queue. A declaration (attack, block) is XMage's step
+     * beginStep work on the declaring seat, not a queued action of that seat,
+     * so it is deliberately not an action here. */
+    static boolean isRecordedAction(JsonArray steps, int index) {
+        return (isOp(steps, index, "cast") || isOp(steps, index, "activate") || isOp(steps, index, "play"))
+                && isRecordedRun(steps);
+    }
+
+    /** Whether step {@code index} is a recorded action by a seat that is not
+     * the active player. */
     static boolean opensOnOtherSeat(JsonArray steps, int index, int activeSeat) {
-        if (!(isOp(steps, index, "cast") || isOp(steps, index, "activate") || isOp(steps, index, "play"))
-                || seatOfStep(steps, index) == activeSeat) {
-            return false;
-        }
-        return isRecordedRun(steps);
+        return isRecordedAction(steps, index) && seatOfStep(steps, index) != activeSeat;
     }
 
     private static boolean posFlag(JsonObject pos, String key) {
