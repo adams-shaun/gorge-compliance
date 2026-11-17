@@ -62,12 +62,14 @@ func TestXAnswersTriggerCostPayNonMana(t *testing.T) {
 		// mana route (triggerCostAnswer), never by this non-mana classifier.
 		{"mana pay", []rules.OracleDecision{manaPay("Pay W", "p0:Brigid")},
 			[][]XAnswer{nil, {{0, "choice", "yes"}}}},
-		// The engine leaves TriggerCostMana false for an X cost, so the phrase
-		// itself must still classify as mana: a scripted "yes" here is left
-		// unconsumed and XMage strict still reports "Pay {X}?" (Wildborn
-		// Preserver). A raw Forge-style label and a blight keep their
-		// pre-existing routing.
-		{"mana X label", []rules.OracleDecision{pay("Pay X", "p0:Wildborn Preserver")}, nil},
+		// The engine leaves TriggerCostMana false for an X cost, but the
+		// phrase itself still classifies as mana (xOnlyCostPay), so
+		// triggerCostAnswer answers the chooseUse yes; a paired X
+		// announcement and election is grouped by xTriggerCostGroup
+		// (TestXAnswersXOnlyTriggerCostPay). A raw Forge-style label and a
+		// blight keep their pre-existing routing.
+		{"mana X label", []rules.OracleDecision{pay("Pay X", "p0:Wildborn Preserver")},
+			[][]XAnswer{nil, {{0, "choice", "yes"}}}},
 		{"mana hybrid phyrexian label", []rules.OracleDecision{pay("Pay W/U/P", "p0:Brigid")}, nil},
 		{"raw mana label", []rules.OracleDecision{pay("Pay {W}", "p0:Brigid")}, nil},
 		{"blight", []rules.OracleDecision{pay("Blight 1", "p0:Scuzzback Scrounger")}, nil},

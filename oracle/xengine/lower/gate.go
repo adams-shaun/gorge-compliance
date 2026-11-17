@@ -63,6 +63,14 @@ const (
 	// that could remove it, and the live game may have cast it long ago, so the
 	// replay would show one exile card too many.
 	reasonPrepareEntry = "setup_entry_prepared"
+	// reasonSagaEntry is a placed battlefield Saga. The runner's placement
+	// enters it with its lore counter and fires chapter I (and the counters
+	// field adds the rest as CounterChange events, each firing its chapter), so
+	// the chapter abilities the live game resolved turns ago run again in the
+	// setup drive, answered by the harness's fallback (a "destroy up to one
+	// target creature" chapter killed the opponent's creature before step 0).
+	// No scenario field says a chapter already resolved.
+	reasonSagaEntry = "setup_entry_saga"
 	// reasonSetupAnswer is a window whose setup drive poses a decision no
 	// scenario answer scripts. SetupAnswers carries only the as-enters choices
 	// capture could read from state (a permanent's chosen colour); every other
@@ -553,6 +561,9 @@ func (w *walker) place(c *cut) {
 			// runner's placement; no setup field can remove it.
 			if entryPrepareReplacement(o.Face()) {
 				w.why[reasonPrepareEntry] = true
+			}
+			if n, _ := cards.SagaChapters(o.Face()); n > 0 && o.Ability == nil {
+				w.why[reasonSagaEntry] = true
 			}
 			if o.Owner != o.Controller {
 				w.why["field:Object.Controller"] = true
