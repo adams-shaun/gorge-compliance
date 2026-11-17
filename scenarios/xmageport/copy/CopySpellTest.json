@@ -155,7 +155,7 @@
     }
    ],
    "xmage": "CopySpellTest#ZadaHedronGrinderAndSplicedSpell",
-   "known_bug": "XP[splice-copy-lacks-spliced-text]: the splice election now works: casting Into the Fray offers \"Evermind - splice pay 1 U\", pays {1}{U} and keeps Evermind in hand. The scenario still fails at p0 hand size 2, want 3 because Zada's copy of the spliced Into the Fray does not carry the spliced text: the StackCopy splice inheritance in the emit fold only copies e.spliceFor when len(ev.IDs) == 0, and copyForEachCanTarget's per-target copy sets ev.IDs, so the copy resolves Into the Fray's own text only and never draws for the spliced Evermind (CR 707.10, 612.10). verified at gorge 08fc227a61."
+   "known_bug": "XP[splice-copy-lacks-spliced-text]: the splice election now works: casting Into the Fray offers \"Evermind — splice pay 1 U\", pays {1}{U} and keeps Evermind in hand. The scenario still fails at p0 hand size 2, want 3 because Zada's copy of the spliced Into the Fray does not carry the spliced text: the StackCopy splice inheritance in the emit fold only copies e.spliceFor when len(ev.IDs) == 0, and copyForEachCanTarget's per-target copy sets ev.IDs, so the copy resolves Into the Fray's own text only and never draws for the spliced Evermind (CR 707.10, 612.10). verified at gorge 08fc227a61."
   },
   {
    "name": "test-curse-of-echoes",

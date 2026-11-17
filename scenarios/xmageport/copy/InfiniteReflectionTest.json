@@ -82,7 +82,7 @@
     }
    ],
    "xmage": "InfiniteReflectionTest#testCopyAsEnters",
-   "known_bug": "XP[static-true-remember-lost]: Infinite Reflection's Static$ True RememberInitialAttach line now resolves off the stack through resolveStaticTriggers, so the old \"queued as an ordinary stacked trigger and offered in a trigger_order\" reason is stale. The scenario still fails: Reanimation's Pillarfield Ox never becomes a copy of the enchanted Silvercoat Lion (transcript: Silvercoat Lion count 1, want 2). The following TrigClone's Defined$ Remembered comes up empty (rememberDefinedObjects/resolvedRemembered), so the ordinary trigger has no creature to copy. CR 603.3, 707.2. verified at gorge 08fc227a61."
+   "known_bug": "XP[etb-clone-defined-source-no-copy]: the failing path is Infinite Reflection's ETB replacement, not the TrigClone/Defined$ Remembered trigger: Reflections is DB$ Clone | Defined$ Enchanted | CloneTarget$ ReplacedCard, and replCtx marks it as an as-enters Clone election (CloneEnter.ETB) while recording no valid election (CloneEnter.ChoiceValid false, because the body's source is Defined$ Enchanted, not a Choices$ pick). effClone's ETB branch returns on !ChoiceValid without copying, so the Pillarfield Ox returned by Reanimate never becomes a copy of the enchanted Silvercoat Lion (transcript: Silvercoat Lion count 1, want 2). CR 614.1a, 707.2. verified at gorge 08fc227a61."
   }
  ]
 }

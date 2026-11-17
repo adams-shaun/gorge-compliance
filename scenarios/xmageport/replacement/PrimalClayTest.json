@@ -362,7 +362,7 @@
     }
    ],
    "xmage": "PrimalClayTest#testPlasmaClone",
-   "known_bug": "XP[clone-copied-entry-choice-missing]: p1's Clone copying Primal Plasma never gets its own as-enters P/T choice: entryETBChoice calls faceETBChoice on the copied template face, but faceETBChoice only walks K:ETBReplacement lines (plus the pay-life arm) and Primal Plasma's choice is a non-keyword R:Event$ Moved GenericChoice replacement, so no 1/6-vs-2/2-Flying election is offered. The Clone keeps the copied 1/6 with defender (observed p1:Clone 1/6, want 2/2 with Flying; the \"2/2\" answer is unconsumed) instead of choosing its own 2/2 (CR 707.5, 707.6). IdentityThiefTest#testCopyPrimalClay is the copiable-values case (CR 707.2). verified at gorge 08fc227a61."
+   "known_bug": "XP[clone-copied-entry-choice-missing]: p1's Clone copying Primal Plasma never gets its own as-enters P/T choice: entryETBChoice calls faceETBChoice on the copied template face, but faceETBChoice only walks K:ETBReplacement lines (plus the pay-life arm) and Primal Plasma's choice is a non-keyword R:Event$ Moved GenericChoice replacement, so no 1/6-vs-2/2-Flying election is offered. The Clone keeps the copied 1/6 with defender (observed p1:Clone 1/6, want 2/2 with Flying); the 2/2 election was never asked in the committed scenario (the port dropped that XMage choice) instead of choosing its own 2/2 (CR 707.5, 707.6). IdentityThiefTest#testCopyPrimalClay is the copiable-values case (CR 707.2). verified at gorge 08fc227a61."
   },
   {
    "name": "test-aquamorph-entity-etb",

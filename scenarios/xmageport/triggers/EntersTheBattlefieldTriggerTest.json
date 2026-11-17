@@ -525,7 +525,7 @@
     }
    ],
    "xmage": "EntersTheBattlefieldTriggerTest#testWildPair",
-   "known_bug": "XP[totalpt-search-no-candidate]: both pieces now exist: numericPred reads Creature.totalPT_\u003cCMP\u003e\u003cn\u003e and evalRefProperty reads TriggeredCard$CardSumPT, but Wild Pair's library search still offers no candidate (transcript: after the optional trigger is accepted, a choose with an empty pick; p0 battlefield Silvercoat Lion 1, want 2). effSearchLibrary's ChangeType$ eligibility walk (MatchesSpecCtx through forgetOtherSpecContext) does not turn the trigger's CardSumPT X into a matching library card, so the search finds nothing. CR 701.23a. verified at gorge 08fc227a61."
+   "known_bug": "XP[search-one-option-label-fallback]: both pieces now exist (numericPred reads Creature.totalPT_\u003cCMP\u003e\u003cn\u003e and evalRefProperty reads TriggeredCard$CardSumPT), and effSearchLibrary does find the matching card: Wild Pair poses a choose whose sole option is Kind search, Label Silvercoat Lion. The scenario still fails because nothing answers that choose: the generated scenario carries only the optional-trigger yes, and the port's object-ref form p0:Silvercoat Lion resolves to the Silvercoat Lion already on the battlefield, not the library copy, so it is rejected; the fallback then takes the empty pick and no card is put onto the battlefield (p0 battlefield Silvercoat Lion 1, want 2). A bare label pick (Silvercoat Lion) is consumed and the scenario passes, matching XMage's auto-choice of the sole candidate (testWildPair comment). Interop gap in the port's one-option search answer/fallback, not the eligibility walk. CR 701.23a. verified at gorge 08fc227a61."
   },
   {
    "name": "test-noxious-ghoul1",
