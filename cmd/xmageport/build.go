@@ -939,8 +939,10 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 		if r != nil {
 			return nil, r
 		}
-		if t.manaSource(a[0].s) {
-			return nil, refuse("tapped-land-count", "%s", a[0].s)
+		if a[1].b {
+			if r := t.tappedRefusal(a[0].s); r != nil {
+				return nil, r
+			}
 		}
 		b := a[1].b
 		return []*expect{{Card: ref, Tapped: &b}}, nil
@@ -1512,8 +1514,7 @@ func takeX(a *action) int {
 // manaSource reports whether the named card is a permanent XMage can tap to
 // pay a cost that the runner pays from the pool instead: a land (basic lands
 // carry their mana ability intrinsically, not as a printed AB$ Mana) or a face
-// with a mana ability. assertTapped and assertTappedCount both refuse such a
-// source; sharing this predicate keeps the two from drifting.
+// with a mana ability.
 func (t *translator) manaSource(name string) bool {
 	nm, r := xmageName(name)
 	if r != nil {
@@ -1534,18 +1535,104 @@ func (t *translator) manaSource(name string) bool {
 	return false
 }
 
+// manaSourceLand reports whether any face of the named card is a land. Lands
+// have an intrinsic mana ability (basic lands carry no printed AB$ Mana), so
+// a "tapped" assertion on one always refuses.
+func (t *translator) manaSourceLand(name string) bool {
+	nm, r := xmageName(name)
+	if r != nil {
+		return false
+	}
+	c, ok := t.lookup(nm)
+	if !ok {
+		return false
+	}
+	for _, f := range c.Faces {
+		if f != nil && f.IsLand() {
+			return true
+		}
+	}
+	return false
+}
+
+// sourceSeat returns the seat that put the named permanent on the
+// battlefield, so a non-land mana source only refuses for a cast/activation
+// its controller could have paid for.
+func (t *translator) sourceSeat(name string) (int, bool) {
+	for p := 0; p < 2; p++ {
+		for _, ac := range t.setup[p] {
+			if ac.zone == "battlefield" && ac.name == name {
+				return p, true
+			}
+		}
+	}
+	return 0, false
+}
+
+// paysFromPool reports whether the method casts or activates something the
+// source's controller could pay for. XMage taps a mana source only while
+// paying such a cost; a source tapped for a non-mana {T} ability, crew or
+// convoke is not this class (brief 10) and must keep generating. When the
+// controller is not in setup (a token), any cast/activation counts: refusing
+// is the direction that cannot hide a false fail.
+func (t *translator) paysFromPool(name string) bool {
+	nm, r := xmageName(name)
+	if r != nil {
+		return false
+	}
+	seat, known := t.sourceSeat(nm)
+	for _, a := range t.actions {
+		if a.kind != "cast" && a.kind != "activate" {
+			continue
+		}
+		if !known || a.seat == seat {
+			return true
+		}
+	}
+	return false
+}
+
+// tappedRefusal refuses an assertion that the named permanent is tapped when
+// the runner would leave it untapped: a step's mana is injected into the pool,
+// so a source XMage tapped to pay for a spell or ability never taps here.
+// assertTapped and assertTappedCount both call it, so the two cannot drift.
+// The caller owns the assert direction: a "not tapped" expectation matches the
+// runner and must still generate.
+func (t *translator) tappedRefusal(name string) *refusal {
+	if !t.manaSource(name) {
+		return nil
+	}
+	// A land always refuses: that is tappedCount's existing fallback, which
+	// the brief allows. A non-land mana source refuses only when the method
+	// casts or activates something its controller could pay for with it; a
+	// mana dork tapped by a non-mana ability (crew, convoke) still generates.
+	if t.manaSourceLand(name) || t.paysFromPool(name) {
+		return refuse("tapped-land-count", "%s", name)
+	}
+	return nil
+}
+
 // tappedCount maps assertTappedCount(name, tapped, n): exactly n permanents
 // named name have isTapped()==tapped. Expressible per object only when n is
 // 0 (all have the other state) or every known instance. A mana source
-// refuses: the runner pays from the pool, so a source XMage tapped for mana
-// stays untapped.
+// refuses only when the assertion expects an instance tapped: the runner pays
+// from the pool, so a source XMage tapped for mana stays untapped, while an
+// "untapped" expectation is what the runner already produces.
 func (t *translator) tappedCount(name string, tapped bool, n int) ([]*expect, *refusal) {
 	nm, r := xmageName(name)
 	if r != nil {
 		return nil, r
 	}
-	if t.manaSource(nm) {
-		return nil, refuse("tapped-land-count", "%s", nm)
+	// n==0 inverts the predicate: "0 tapped" expects all untapped, "0
+	// untapped" expects all tapped.
+	wantsTapped := tapped
+	if n == 0 {
+		wantsTapped = !tapped
+	}
+	if wantsTapped {
+		if r := t.tappedRefusal(nm); r != nil {
+			return nil, r
+		}
 	}
 	refs := append(t.permRefs(0, nm), t.permRefs(1, nm)...)
 	if len(refs) == 0 {
