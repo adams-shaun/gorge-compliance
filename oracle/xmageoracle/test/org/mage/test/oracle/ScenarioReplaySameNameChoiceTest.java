@@ -28,6 +28,12 @@ public final class ScenarioReplaySameNameChoiceTest {
         }
     }
 
+    private static void equal(Object want, Object got) {
+        if (!want.equals(got)) {
+            throw new AssertionError("expected " + want + ", got " + got);
+        }
+    }
+
     private static void set(Object target, Class<?> type, String name, Object value) throws Exception {
         java.lang.reflect.Field f = type.getDeclaredField(name);
         f.setAccessible(true);
@@ -79,6 +85,28 @@ public final class ScenarioReplaySameNameChoiceTest {
         System.out.println("PASS production choice matcher overrides stale token aliases only inside a choice");
     }
 
+    /** The target path must keep a token ref's alias even when setup bound
+     * none, so the live choice matcher above can resolve it by creation
+     * order. A card ref with no alias keeps the bare-name fallback. */
+    private static void tokenTargetName() throws Exception {
+        java.lang.reflect.Field f = sun.misc.Unsafe.class.getDeclaredField("theUnsafe");
+        f.setAccessible(true);
+        sun.misc.Unsafe unsafe = (sun.misc.Unsafe) f.get(null);
+        ScenarioReplay owner = (ScenarioReplay) unsafe.allocateInstance(ScenarioReplay.class);
+        java.util.Map<String, String> refs = new java.util.LinkedHashMap<>();
+        set(owner, ScenarioReplay.class, "refAlias", refs);
+        set(owner, ScenarioReplay.class, "gorgeName", "");
+        set(owner, ScenarioReplay.class, "xmageName", "");
+        java.lang.reflect.Method targetName = ScenarioReplay.class.getDeclaredMethod("targetName", String.class);
+        targetName.setAccessible(true);
+        equal("@p0:token:Grizzly Bears", targetName.invoke(owner, "p0:token:Grizzly Bears"));
+        equal("@p1:token:Officer Token#2", targetName.invoke(owner, "p1:token:Officer Token#2"));
+        equal("Grizzly Bears", targetName.invoke(owner, "p0:Grizzly Bears"));
+        refs.put("p0:Grizzly Bears", "@p0:Grizzly Bears");
+        equal("@p0:Grizzly Bears", targetName.invoke(owner, "p0:Grizzly Bears"));
+        System.out.println("PASS token target refs keep their alias for live creation-order resolution");
+    }
+
     public static void main(String[] args) throws Exception {
         UUID own = UUID.randomUUID(), other = UUID.randomUUID();
         Permanent original = object(own, false, 1);
@@ -102,5 +130,6 @@ public final class ScenarioReplaySameNameChoiceTest {
         chosen(null, ScenarioReplay.tokenChoice("p0:token:Grizzly Bears#2", own, List.of(second)));
         System.out.println("PASS exact token choice is creation-ordered, controller-scoped and live");
         liveMatcher();
+        tokenTargetName();
     }
 }
