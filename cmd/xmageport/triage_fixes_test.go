@@ -396,3 +396,41 @@ func TestCrossSeatCardPicksDoNotMerge(t *testing.T) {
 		t.Fatalf("cross-seat picks merged into %+v", g.answers)
 	}
 }
+
+// Mizzix's Mastery copies See the Truth and XMage's framework accepts the
+// may-cast even under strict choose mode; the aiAnswers entry for this real
+// Class#method supplies the accept the test never states. Without it the
+// optional-modes fallback declines and the looked-at cards never reach hand.
+func TestSeeTheTruthImplicitMayCastAccepts(t *testing.T) {
+	src := `class SeeTheTruthTest extends CardTestPlayerBase {
+    @Test
+    public void castCopyFromExile() {
+        setStrictChooseMode(true);
+        addCard(Zone.LIBRARY, playerA, "Centaur Courser");
+        addCard(Zone.LIBRARY, playerA, "Bear Cub");
+        addCard(Zone.LIBRARY, playerA, "Alpine Grizzly");
+        skipInitShuffling();
+        addCard(Zone.GRAVEYARD, playerA, "See the Truth");
+        addCard(Zone.HAND, playerA, "Mizzix's Mastery");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mizzix's Mastery", "See the Truth");
+        addTarget(playerA, "See the Truth");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertHandCount(playerA, 3);
+        assertExileCount(playerA, 2);
+    }
+}`
+	jc, err := parseJava("x", "x", src)
+	if err != nil {
+		t.Fatal(err)
+	}
+	res := translate(testutilRegistry(t), jc, &jc.Methods[0], "single")
+	if res.Scenario == nil {
+		t.Fatalf("refused %s: %s", res.Code, res.Detail)
+	}
+	runResult(testutilRegistry(t), res)
+	if res.Status != "pass" {
+		t.Fatalf("status %s (%v), want pass", res.Status, res.Fails)
+	}
+}
