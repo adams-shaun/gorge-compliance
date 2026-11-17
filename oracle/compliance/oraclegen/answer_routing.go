@@ -744,6 +744,30 @@ func triggerCostAnswer(d rules.OracleDecision) string {
 	return ""
 }
 
+// nonManaTriggerCostPay reports the pay side of a triggered optional NON-mana
+// cost ("you may discard a card. If you do, ...", "you may sacrifice another
+// creature. If you do, ...", "you may tap an untapped permanent you
+// control"): XMage's DoIfCostPaid poses its chooseUse whenever the cost can be
+// paid, and gorge offers the pay side only then. A mana cost is paid from the
+// pool and answered by triggerCostAnswer; a blight goes straight to its
+// creature target (Scuzzback Scrounger: a scripted "yes" met "Select a
+// creature you control"), so neither is scripted here. Only the engine's
+// own pay pick scripts: a pick with another kind never reaches this.
+func nonManaTriggerCostPay(d rules.OracleDecision) bool {
+	if d.Kind != "choose_n" || len(d.Picks) != 1 || d.TriggerCostMana || pickKind(d, 0) != "trigger_cost_pay" {
+		return false
+	}
+	l := strings.ToLower(strings.TrimSpace(d.Picks[0]))
+	switch {
+	case l == "", strings.HasPrefix(l, "blight"), strings.Contains(l, "{"):
+		return false
+	case strings.HasPrefix(l, "pay ") && !strings.HasSuffix(l, " life"):
+		// "Pay W" / "Pay 2": a mana payment.
+		return false
+	}
+	return true
+}
+
 // triggerCostWindow reports a mana-window decision (an "activate" source tap,
 // its "done", or the tapped source's colour pick) that belongs to a
 // triggered cost: the run of such decisions by the same asker ends at that

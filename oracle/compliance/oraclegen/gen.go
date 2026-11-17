@@ -1501,12 +1501,18 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = append(as, XAnswer{d.Seat, "choice", yn})
 				break
 			}
-			if pickKind(d, 0) == "trigger_cost_pay" && len(d.Picks) == 1 && costPosedDeclineStep[d.Step] {
+			if pickKind(d, 0) == "trigger_cost_pay" && len(d.Picks) == 1 &&
+				(costPosedDeclineStep[d.Step] || nonManaTriggerCostPay(d)) {
 				// The pay side of a triggered optional cost XMage poses as a
-				// chooseUse, in a step that also scripts a cost_posed decline's
-				// "no" (see costPosedDeclineStep). Gorge elected the cost, so
-				// answer XMage's chooseUse yes and let the decline's "no" land
-				// on its own ask instead of this one.
+				// chooseUse. Gorge elected the cost, so answer XMage's
+				// chooseUse yes: in a step that also scripts a cost_posed
+				// decline's "no" (see costPosedDeclineStep) that lets the
+				// decline's "no" land on its own ask instead of this one, and
+				// for a payable non-mana cost (nonManaTriggerCostPay) XMage's
+				// DoIfCostPaid asks it whenever canPay holds, so an unscripted
+				// pay is a strict "Missing CHOICE def" (Melded Moxite's
+				// "Discard a card and draw two cards?", Vampire Gourmand's
+				// "Sacrifice another creature and ...?").
 				as = append(as, XAnswer{d.Seat, "choice", "yes"})
 				break
 			}

@@ -642,6 +642,46 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return super.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
         }
 
+        /**
+         * XMage asks the controller to order simultaneous replacement effects
+         * (CR 616.1: Edgewall Inn's "enters tapped" and "as it enters, choose a
+         * color"; Zhao's "nonbasic lands enter tapped" beside Deserted Beach's
+         * own). gorge applies them in its own fixed order and poses no decision
+         * for it, so the order is never scripted, and TestPlayer's strict mode
+         * stops the replay at "Missing CHOICE def" -- or, with a scripted answer
+         * for a LATER ask at the head of the queue (the setup colour), logs a
+         * wrong choice and fails the same way. An unscripted ask takes the
+         * base AI's order, exactly the loose rerun's fallback, WITHOUT touching
+         * the queue; a head that names one of the effects is still consumed by
+         * the base player.
+         */
+        @Override
+        public int chooseReplacementEffect(Map<String, String> effectsMap,
+                Map<String, mage.MageObject> objectsMap, Game game) {
+            if (effectsMap.size() > 1 && !replacementScripted(getChoices(), effectsMap.values())) {
+                return getRealPlayer().chooseReplacementEffect(effectsMap, objectsMap, game);
+            }
+            return super.chooseReplacementEffect(effectsMap, objectsMap, game);
+        }
+
+        /** Whether the head of the choice queue names one of the replacement
+         * effects' texts, by TestPlayer.chooseReplacementEffect's own rule: a
+         * text prefix, or "<part>*<part>" with both parts contained. */
+        static boolean replacementScripted(List<String> choices, java.util.Collection<String> effectTexts) {
+            if (choices.isEmpty()) {
+                return false;
+            }
+            String head = choices.get(0);
+            String[] parts = head.split("\\*");
+            for (String text : effectTexts) {
+                if (text.startsWith(head)
+                        || parts.length > 1 && text.contains(parts[0]) && text.contains(parts[1])) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /** An "alternative" cast's menu: AbilityImpl's alternative-cost key
          * choice ("You may choose an alternative cost", keys "1".. per
          * alternative, then "Cast with no alternative cost"). */

@@ -49,14 +49,32 @@ public final class ScenarioReplayDriverAsksTest {
         declinedDig();
         alternativeCast();
         promisedGift();
+        replacementOrder();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
-                + " face-down attacker, declined dig, alternative cast, promised gift");
+                + " face-down attacker, declined dig, alternative cast, promised gift, replacement order");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
      * own turn and the p1 -> p0 pass pair resolves the spell on seat 1's
      * queue. A pair whose next step answers a mid-resolution choose (Wan Shi
      * Tong's opponent tutor) defers the resolution to that pass_to. */
+    /** Edgewall Inn / Zhao + Deserted Beach: XMage asks the controller to order
+     * simultaneous replacement effects, which gorge never poses. The driver
+     * answers an unscripted ask itself and leaves a scripted head alone: a
+     * queued colour for the LATER as-enters ask is not a replacement text. */
+    private static void replacementOrder() throws Exception {
+        List<String> texts = Arrays.asList("Edgewall Inn enters tapped.", "As Edgewall Inn enters, choose a color.");
+        Class<?>[] types = {List.class, java.util.Collection.class};
+        check(!(Boolean) adapter("replacementScripted", types, new ArrayList<String>(), texts),
+                "an empty queue scripts no replacement order");
+        check(!(Boolean) adapter("replacementScripted", types, new ArrayList<>(Arrays.asList("White")), texts),
+                "a queued colour is not a replacement text: the ordering ask must not consume or fail on it");
+        check((Boolean) adapter("replacementScripted", types, new ArrayList<>(Arrays.asList("As Edgewall Inn enters")), texts),
+                "a head naming an effect's text is a scripted order");
+        check((Boolean) adapter("replacementScripted", types, new ArrayList<>(Arrays.asList("Edgewall Inn*choose a color")), texts),
+                "TestPlayer's object*ability form is a scripted order");
+    }
+
     private static void activeSeatOnePair() {
         JsonArray zidane = steps("[{op:'pass_to',seat:0,step:'main1',active:'p1'},"
                 + "{op:'cast',seat:1,card:'p1:Threaten',targets:['p0:Llanowar Elves']},"
