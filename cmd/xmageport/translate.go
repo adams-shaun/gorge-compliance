@@ -41,7 +41,6 @@ var hardCalls = map[string]string{
 	"setFlipCoinResult":             "dice",
 	"activateManaAbility":           "mana-payment",
 	"assertManaOptions":             "mana-payment",
-	"checkPlayableAbility":          "playable-check",
 	"rollbackTurns":                 "rollback",
 	"rollbackAfterActionsStart":     "rollback",
 	"rollbackAfterActionsEnd":       "rollback",
@@ -144,6 +143,16 @@ type action struct {
 	blocks          [][2]string
 	expects         []*expect
 	choices         []choice
+	playCheck       *playableCheck
+}
+
+// playableCheck is one XMage checkPlayableAbility: the text names a cast,
+// a land play or an ability, and want says whether it must be on offer.
+// The card ref is resolved at emit time, after setup and the actions before
+// it have bound their refs.
+type playableCheck struct {
+	text string
+	want bool
 }
 
 type group struct {
@@ -580,6 +589,198 @@ func (t *translator) clock(c call, ti, si int) (int, int, *refusal) {
 	return turn, st, nil
 }
 
+// playableStepRefusal refuses checkPlayableAbility at a step the runner
+// cannot reach with a player holding priority: untap and cleanup have no
+// priority, and the game opens at turn 1's first main phase.
+func playableStepRefusal(turn, st int) *refusal {
+	if st == sUntap || st == sCleanup {
+		return refuse("playable-check", "no priority in %s", stepNames[st])
+	}
+	if turn == 1 && st < sMain1 {
+		return refuse("playable-check", "turn 1 %s", stepNames[st])
+	}
+	return nil
+}
+
+// namePrefixMatch reports whether want is a prefix of the full card name at
+// a word boundary. XMage's checkPlayableAbility matches an ability string by
+// startsWith, so tests routinely abbreviate a card ("Silvercoat" for
+// "Silvercoat Lion", "Lightning" for "Lightning Bolt").
+func namePrefixMatch(full, want string) bool {
+	if want == "" || len(want) > len(full) || !strings.EqualFold(full[:len(want)], want) {
+		return false
+	}
+	if len(want) == len(full) {
+		return true
+	}
+	return strings.ContainsRune(" :,(", rune(full[len(want)]))
+}
+
+// cardNames lists a placement's name plus the names of the card's faces: a
+// check may name an adventure, prepare or modal back face whose object the
+// setup placed under the front-face name.
+func (t *translator) cardNames(pl *placement) []string {
+	names := []string{pl.name}
+	if c, ok := t.lookup(pl.name); ok {
+		for _, f := range c.Faces {
+			if f != nil && !sameName(f.Name, pl.name) {
+				names = append(names, f.Name)
+			}
+		}
+	}
+	return names
+}
+
+// cardNamePrefix returns the card name the text starts with, if any.
+// checkPlayableAbility matches an ability description by prefix, so an
+// ability check can only be tied to a source when its text names the card.
+func (t *translator) cardNamePrefix(p int, text string) string {
+	best := ""
+	for _, pl := range t.places[p] {
+		for _, n := range t.cardNames(pl) {
+			if namePrefixMatch(text, n) && len(n) > len(best) {
+				best = n
+			}
+		}
+	}
+	return best
+}
+
+// cardMatch scores a placement against a card name: 2 exact, 1 prefix, 0 no
+// match, and returns the matched face name.
+func (t *translator) cardMatch(pl *placement, want string) (int, string) {
+	best, bestName := 0, ""
+	for _, n := range t.cardNames(pl) {
+		if sameName(n, want) {
+			return 2, n
+		}
+		if best < 1 && namePrefixMatch(n, want) {
+			best, bestName = 1, n
+		}
+	}
+	return best, bestName
+}
+
+// offeredRef names the object a checkPlayableAbility talks about. Cast and
+// play look at the zones a card can be cast/played from (hand first, not the
+// battlefield copy a same-named permanent may occupy); activate looks at the
+// battlefield first. Unused placements win so a second copy in hand is not
+// confused with one already cast.
+func (t *translator) offeredRef(p int, name, kind string) (string, string, bool) {
+	zones := []string{"hand", "library_top", "exile", "graveyard", "battlefield"}
+	if kind == "activate" {
+		zones = []string{"battlefield", "hand", "graveyard", "exile", "library_top"}
+	}
+	for level := 2; level >= 1; level-- {
+		for _, used := range []bool{false, true} {
+			for _, z := range zones {
+				for _, pl := range t.places[p] {
+					if pl.used != used || pl.zone != z {
+						continue
+					}
+					if lvl, full := t.cardMatch(pl, name); lvl == level {
+						return refStr(p, pl.name, pl.ord), full, true
+					}
+				}
+			}
+		}
+	}
+	// A copy or generated object has no setup placement; anyRefs knows the
+	// refs the translator minted for it.
+	if rs := t.anyRefs(p, name); len(rs) > 0 {
+		return rs[0], name, true
+	}
+	return "", "", false
+}
+
+// castQualifierModes maps XMage's "using X"/"with X" cast qualifier to the
+// mode word gorge appends to that cast option's label. A qualifier absent
+// from the table is not treated as a qualifier at all, so a card whose name
+// contains "with" ("Craft with Pride") stays intact; an empty word means the
+// option label carries no mode suffix the translator knows.
+var castQualifierModes = map[string]string{
+	"morph": "face down", "megamorph": "face down", "disguise": "face down",
+	"bestow": "bestowed", "overload": "overloaded", "plot": "plotted",
+	"escape": "escape", "prepare": "prepared", "foretell": "foretold",
+	"flashback": "flashback", "disturb": "", "spectacle": "", "madness": "",
+}
+
+// splitCastQualifier separates a cast text's card from a known alternative-
+// cast qualifier ("Willbender using Morph" -> "Willbender", "morph").
+func splitCastQualifier(s string) (string, string) {
+	for _, sep := range []string{" using ", " with "} {
+		if i := strings.LastIndex(s, sep); i > 0 {
+			q := strings.ToLower(s[i+len(sep):])
+			if _, ok := castQualifierModes[q]; ok {
+				return s[:i], q
+			}
+		}
+	}
+	return s, ""
+}
+
+// hasKeywordPrefix recognises "Cast X", "CastX" (a constant concatenation)
+// without treating a card such as "Castigate" as the cast keyword.
+func hasKeywordPrefix(text, kw string) bool {
+	if !strings.HasPrefix(text, kw) {
+		return false
+	}
+	if len(text) == len(kw) || text[len(kw)] == ' ' {
+		return true
+	}
+	c := text[len(kw)]
+	return c >= 'A' && c <= 'Z'
+}
+
+// playableOffer turns an XMage checkPlayableAbility text into the runner's
+// inline offered expect. "Cast X" is the cast option labelled X, "Play X" the
+// land play, and any other text must name the source card (XMage searches
+// every playable ability for a prefix, so an unnamed source is unresolvable).
+func (t *translator) playableOffer(p int, text string) (*offered, *refusal) {
+	kind := ""
+	cardText := ""
+	switch {
+	case hasKeywordPrefix(text, "Cast"):
+		kind, cardText = "cast", strings.TrimSpace(strings.TrimPrefix(text, "Cast"))
+	case hasKeywordPrefix(text, "Play"):
+		kind, cardText = "play", strings.TrimSpace(strings.TrimPrefix(text, "Play"))
+	}
+	missing := ""
+	if kind != "" {
+		qual := ""
+		if kind == "cast" {
+			cardText, qual = splitCastQualifier(cardText)
+		}
+		nm, r := xmageName(cardText)
+		if r != nil {
+			return nil, r
+		}
+		ref, full, ok := t.offeredRef(p, nm, kind)
+		if ok {
+			if mode := castQualifierModes[qual]; mode != "" {
+				full += " (" + mode + ")"
+			}
+			return &offered{Seat: p, Kind: kind, Card: ref, Label: full}, nil
+		}
+		missing = nm
+	}
+	// Not a resolvable cast/play: the text may still name a card whose
+	// ability is being checked ("Serra Avenger"), or a card whose name
+	// merely starts with the cast keyword ("Play with Fire").
+	name := t.cardNamePrefix(p, text)
+	if name == "" {
+		if missing != "" {
+			return nil, refuse("playable-check", "%s not in setup", missing)
+		}
+		return nil, refuse("playable-check", "no card named in %q", text)
+	}
+	ref, _, ok := t.offeredRef(p, name, "activate")
+	if !ok {
+		return nil, refuse("playable-check", "source %s of %q not in setup", name, text)
+	}
+	return &offered{Seat: p, Kind: "activate", Card: ref, Label: text}, nil
+}
+
 func (t *translator) addAction(a *action) {
 	if len(t.preChoices) > 0 && a.kind != "check" && a.kind != "wait" {
 		a.choices = append(t.preChoices, a.choices...)
@@ -900,6 +1101,30 @@ func (t *translator) readCall(idx int, c call) *refusal {
 			return refuse("mode-choice", "setModeChoice %s", v)
 		}
 		t.choiceList = append(t.choiceList, choice{seat: p0(c.Args[0]), src: idx, x: -1, mode: n, pick: v.s})
+	case "checkPlayableAbility":
+		if len(c.Args) < 6 {
+			return refuse("bad-args", "%s", c.Name)
+		}
+		turn, st, r := t.clock(c, 1, 2)
+		if r != nil {
+			return r
+		}
+		p, ok := seatOf(c.Args[3])
+		if !ok {
+			return refuse("bad-args", "%s player", c.Name)
+		}
+		text, ok := argStr(c, 4)
+		if !ok {
+			return refuse("bad-args", "%s ability %s", c.Name, c.Args[4])
+		}
+		if c.Args[5].kind != vBool {
+			return refuse("bad-args", "%s want %s", c.Name, c.Args[5])
+		}
+		if r := playableStepRefusal(turn, st); r != nil {
+			return r
+		}
+		t.addAction(&action{turn: turn, step: st, sub: 1, seat: p, kind: "check", src: idx,
+			playCheck: &playableCheck{text: text, want: c.Args[5].b}})
 	case "checkPermanentCount", "checkLife", "checkPT", "checkGraveyardCount", "checkHandCardCount",
 		"checkExileCount", "checkStackSize", "checkAbility", "checkPermanentCounters":
 		if len(c.Args) < 4 {
