@@ -778,7 +778,32 @@ func (t *translator) playableOffer(p int, text string) (*offered, *refusal) {
 	if !ok {
 		return nil, refuse("playable-check", "source %s of %q not in setup", name, text)
 	}
-	return &offered{Seat: p, Kind: "activate", Card: ref, Label: text}, nil
+	// XMage's prefix search covers every playable ability of the card, the
+	// cast action included. A card off the battlefield can only be cast (or
+	// have a hand/graveyard ability activated, which the card name alone
+	// cannot pick), so offer it as a cast; a permanent's text is an
+	// activation.
+	switch t.placeZone(p, ref) {
+	case "battlefield":
+		return &offered{Seat: p, Kind: "activate", Card: ref, Label: text}, nil
+	case "":
+		return nil, refuse("playable-check", "zone of %s unknown for %q", name, text)
+	}
+	if !sameName(text, name) {
+		return nil, refuse("playable-check", "ability text %q on %s outside the battlefield", text, name)
+	}
+	return &offered{Seat: p, Kind: "cast", Card: ref, Label: name}, nil
+}
+
+// placeZone returns the setup zone of the placement a ref names, or "" for a
+// minted object with none.
+func (t *translator) placeZone(p int, ref string) string {
+	for _, pl := range t.places[p] {
+		if refStr(p, pl.name, pl.ord) == ref {
+			return pl.zone
+		}
+	}
+	return ""
 }
 
 func (t *translator) addAction(a *action) {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge/testkit/testutil"
@@ -56,6 +57,38 @@ func TestCheckPlayableAbilityEmitsOffered(t *testing.T) {
 	if second.Seat != 0 || second.Kind != "cast" || second.Label != "Karn, Silver Golem" || second.Card != "p0:Karn, Silver Golem" {
 		t.Errorf("second offered = %+v, want p0 cast Karn, Silver Golem (p0:Karn, Silver Golem)", second)
 	}
+	// the expect must ride the check's own clock: the first at the initial
+	// 1/main1 priority decision (no pass of the checking seat's priority
+	// before it), the second at turn 1 main2.
+	var carriers []*step
+	for _, st := range res.Scenario.Steps {
+		for _, x := range st.Expect {
+			if x.Offered != nil {
+				carriers = append(carriers, st)
+			}
+		}
+	}
+	if len(carriers) != 2 {
+		t.Fatalf("got %d carrier steps, want 2", len(carriers))
+	}
+	if c := carriers[0]; c.Op != "pass_to" || c.Decision != "priority" || c.Step != "" {
+		t.Errorf("first check rides %+v, want the setup pass_to decision=priority anchor", *c)
+	}
+	if res.Scenario.Steps[0] != carriers[0] {
+		t.Errorf("a step precedes the first check at the initial clock: %+v", *res.Scenario.Steps[0])
+	}
+	for _, st := range res.Scenario.Steps {
+		if st == carriers[1] {
+			break
+		}
+		if st.Op == "pass_to" && st.Step == "main2" {
+			goto ok
+		}
+	}
+	if carriers[1].Op != "pass_to" || carriers[1].Step != "main2" {
+		t.Errorf("second check rides %+v, want pass_to main2", *carriers[1])
+	}
+ok:
 	// wants ride the owning expect, not the offered struct: collect them.
 	var wants []bool
 	for _, st := range res.Scenario.Steps {
@@ -123,5 +156,85 @@ func TestPlayableOfferResolvesSiblingSpellings(t *testing.T) {
 		if *got[i] != want[i] {
 			t.Errorf("offered[%d] = %+v, want %+v", i, *got[i], want[i])
 		}
+	}
+}
+
+// TestPlayableOfferBareNameKindFollowsZone: a bare card name matches every
+// playable ability of the card. On the battlefield that is an activation; in
+// hand it can only be the cast.
+func TestPlayableOfferBareNameKindFollowsZone(t *testing.T) {
+	src := `class BareNameTest extends CardTestPlayerBase {
+    @Test
+    public void testBare() {
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Serra Avenger", 1);
+        checkPlayableAbility("hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", false);
+        checkPlayableAbility("bf", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger", false);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+}`
+	jc, err := parseJava("BareNameTest.java", "BareNameTest.java", src)
+	if err != nil {
+		t.Fatal(err)
+	}
+	res := translate(testutil.CorpusRegistry(t), jc, &jc.Methods[0], "rules")
+	if res.Status == "refused" {
+		t.Fatalf("method refused %s: %s", res.Code, res.Detail)
+	}
+	var got []*offered
+	for _, st := range res.Scenario.Steps {
+		for _, x := range st.Expect {
+			if x.Offered != nil {
+				got = append(got, x.Offered)
+			}
+		}
+	}
+	want := []offered{
+		{Seat: 0, Kind: "cast", Card: "p0:Silvercoat Lion", Label: "Silvercoat Lion"},
+		{Seat: 0, Kind: "activate", Card: "p0:Serra Avenger", Label: "Serra Avenger"},
+	}
+	if len(got) != len(want) {
+		t.Fatalf("got %d offered expects, want %d: %+v", len(got), len(want), got)
+	}
+	for i := range want {
+		if *got[i] != want[i] {
+			t.Errorf("offered[%d] = %+v, want %+v", i, *got[i], want[i])
+		}
+	}
+}
+
+// TestPlayableCheckAtInitialClockRunsInMain1 runs the translated scenario in
+// the pinned runner: a land play checked "true" at 1/main1 must be on offer
+// (the check may not have passed main1's priority away), and a sorcery cast
+// after the check must still be offered.
+func TestPlayableCheckAtInitialClockRunsInMain1(t *testing.T) {
+	src := `class InitialClockTest extends CardTestPlayerBase {
+    @Test
+    public void testInitial() {
+        addCard(Zone.HAND, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.HAND, playerA, "Divination", 1);
+        checkPlayableAbility("land", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Forest", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Divination");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
+}`
+	jc, err := parseJava("InitialClockTest.java", "InitialClockTest.java", src)
+	if err != nil {
+		t.Fatal(err)
+	}
+	reg := testutil.CorpusRegistry(t)
+	res := translate(reg, jc, &jc.Methods[0], "rules")
+	if res.Status == "refused" {
+		t.Fatalf("method refused %s: %s", res.Code, res.Detail)
+	}
+	run, _, err := execScenario(reg, res.Scenario)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(run.Fails) > 0 {
+		t.Errorf("runner fails: %s\ntranscript:\n  %s", strings.Join(run.Fails, "\n  "), strings.Join(run.Transcript, "\n  "))
 	}
 }

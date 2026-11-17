@@ -1702,25 +1702,11 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			xs = []*expect{{Offered: off, Want: &want}}
 		}
 		if len(em.steps) == 0 {
-			if a.playCheck != nil {
-				// The setup drive leaves a priority decision whose option
-				// list pre-dates the hand. Answer one real pass at the
-				// step, then hand priority back below, so the check reads
-				// a freshly posed list.
-				em.add(&step{Op: "pass_to", Step: stepNames[a.step], Active: pref(active(a.turn))})
-				em.holder = 1 - active(a.turn)
-			} else {
-				em.add(&step{Op: "pass_to", Decision: "priority"})
-			}
-		} else if a.playCheck != nil {
-			// A preceding non-offered check may have anchored on that same
-			// stale setup decision; turn the anchor into the real pass.
-			if last := em.steps[len(em.steps)-1]; last.Op == "pass_to" && last.Decision == "priority" {
-				last.Decision = ""
-				last.Step = stepNames[a.step]
-				last.Active = pref(active(a.turn))
-				em.holder = 1 - active(a.turn)
-			}
+			// anchor on the setup decision: the runner's first priority
+			// decision already lists the hand's plays and casts. Never pass
+			// the checking seat's own priority here: that ends the step the
+			// check is about.
+			em.add(&step{Op: "pass_to", Decision: "priority"})
 		}
 		if a.playCheck != nil {
 			// the offered check reads the priority holder, so the expect
