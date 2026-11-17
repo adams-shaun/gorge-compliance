@@ -111,6 +111,35 @@ func TestBuybackElectionIsTheBuybackCastMode(t *testing.T) {
 	playsToPass(t, body)
 }
 
+// Buyback is a single yes/no: a second yes after it answers something else (a
+// "you may" on resolution) and must stay a queued answer, not be swallowed as
+// a second election.
+func TestBuybackTakesOnlyTheFirstBoolean(t *testing.T) {
+	const body = `addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.HAND, playerA, "Elvish Fury", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elvish Fury", "Silvercoat Lion");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertHandCount(playerA, "Elvish Fury", 1);`
+	res := translateBody(t, body)
+	if cast := castStepOf(t, res); cast.CastMode != "buyback" {
+		t.Fatalf("cast_mode %q, want buyback", cast.CastMode)
+	}
+	var yes int
+	for _, p := range groupPicks(res) {
+		if p == "yes" {
+			yes++
+		}
+	}
+	if yes != 1 {
+		t.Fatalf("%d yes answers left for the later ask, want 1 (picks %v)", yes, groupPicks(res))
+	}
+}
+
 const wortBody = `addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
         addCard(Zone.HAND, playerA, "Wort, the Raidmother");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
@@ -142,12 +171,24 @@ func TestConspireElectionIsTheConspiredCastMode(t *testing.T) {
 	playsToPass(t, wortBody)
 }
 
-// Two instances of conspire are paid separately (CR 702.78b) but gorge poses one
-// election per cast, so a test that pays both cannot be stated.
-func TestConspireSecondPaymentRefuses(t *testing.T) {
+// Two instances of conspire are paid separately (CR 702.78b). Gorge poses one
+// election per cast, which is its defect, so the translator must not refuse the
+// shape: it states the conspired cast mode and the scenario fails on gorge
+// (one copy, XMage two) until gorge asks each instance.
+func TestConspireSecondPaymentIsAKnownBugNotARefusal(t *testing.T) {
 	body := strings.Replace(wortBody, "setChoice(playerA, true);\n", "setChoice(playerA, true);\n        setChoice(playerA, true);\n", 1)
-	if res := translateBody(t, body); res.Code != "conspire-second-instance" {
-		t.Fatalf("code %q (%s), want conspire-second-instance", res.Code, res.Detail)
+	res := translateBody(t, body)
+	if res.Scenario == nil {
+		t.Fatalf("refused %s: %s", res.Code, res.Detail)
+	}
+	var cast *step
+	for _, st := range res.Scenario.Steps {
+		if st.Op == "cast" && st.Card == "p0:Lightning Bolt" {
+			cast = st
+		}
+	}
+	if cast == nil || cast.CastMode != "conspired" {
+		t.Fatalf("Lightning Bolt cast %+v, want cast_mode conspired", cast)
 	}
 }
 

@@ -139,7 +139,16 @@ func (em *emitter) optionalKeywordCasts(a *action, s *step) *refusal {
 		return nil
 	}
 	if cost, ok := em.keywordCost(a.card, "Buyback"); ok {
+		// one yes/no: only the first boolean is the election, a later yes may
+		// answer a "you may" on resolution
 		yes, used := electionPrefix(a.choices, true)
+		if len(used) > 1 {
+			used = used[:1]
+			yes = 0
+			if a.choices[used[0]].pick == "yes" {
+				yes = 1
+			}
+		}
 		if len(used) == 0 {
 			em.aiElects(a, "Buyback")
 			return nil
@@ -163,13 +172,8 @@ func (em *emitter) optionalKeywordCasts(a *action, s *step) *refusal {
 		em.aiElects(a, "Conspire")
 		return nil
 	}
-	if yes > 1 {
-		// CR 702.78b: each instance is paid on its own, but gorge poses one
-		// conspire election per cast, so the second payment cannot be stated
-		return refuse("conspire-second-instance", "%s pays conspire %d times", a.card, yes)
-	}
 	a.consume(used)
-	if yes == 1 {
+	if yes >= 1 {
 		s.CastMode = "conspired"
 	}
 	return nil

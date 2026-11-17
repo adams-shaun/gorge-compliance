@@ -6,7 +6,10 @@ import "testing"
 // with the lands: Willbender's face-down {3} with three Swamps, Cyclonic
 // Rift's {6}{U} overload with seven Islands. The runner pays from the pool,
 // so the check's mana must be what the lands can make, not only the plain
-// cost (MorphTest, OverloadTest).
+// cost (MorphTest, OverloadTest). Only the morph case is failing-first for the
+// land pool: the overload case already passes without it (Cyclonic Rift's
+// overload is seeded by its own alternative-cost path) and stays as a
+// regression check.
 func TestAlternateCastCheckSeedsWhatTheLandsCanPay(t *testing.T) {
 	for name, body := range map[string]string{
 		"morph": `addCard(Zone.HAND, playerA, "Willbender");
