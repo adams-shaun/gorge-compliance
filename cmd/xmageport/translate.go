@@ -45,8 +45,6 @@ var hardCalls = map[string]string{
 	"rollbackTurns":                 "rollback",
 	"rollbackAfterActionsStart":     "rollback",
 	"rollbackAfterActionsEnd":       "rollback",
-	"removeAllCardsFromLibrary":     "library-manipulation",
-	"removeAllCardsFromHand":        "library-manipulation",
 	"assertLibraryCount":            "library-assert",
 	"setChoiceAmount":               "amount-choice",
 	"addTargetAmount":               "amount-choice",
@@ -172,6 +170,8 @@ type translator struct {
 	places        [2][]*placement
 	castRefs      [2]map[string][]string
 	allNames      map[string]bool // every string arg outside addCard (keeps lands)
+	nameUses      map[string]int  // how many times each such string arg appears (casts, activations)
+	abilityUses   map[string]int  // how many times each activateAbility text appears
 	needAll       bool            // an assert counts all permanents: keep lands
 	pendingChecks []pendingCheck
 	preChoices    []choice
@@ -189,6 +189,10 @@ type translator struct {
 	// object is ambiguous (XMage takes whichever it finds first).
 	copied  map[string]bool
 	copyRef map[string]string // "seat|name" -> the ref of seat's copy ("-": several)
+	// libCleared marks a seat after removeAllCardsFromLibrary: XMage's library
+	// is then only the cards the test adds, where the runner pads its own with
+	// filler. The two differ only if a draw reaches past those cards.
+	libCleared [2]bool
 }
 
 func p0(v value) int {
@@ -441,6 +445,7 @@ func translate(reg *cards.Registry, jc *javaClass, m *javaMethod, family string)
 // read classifies every statement into setup/actions/asserts.
 func (t *translator) read() *refusal {
 	var calls []call
+	clearedLib := false
 	// First pass: hard refusals win over everything else, so the census key
 	// names the real obstacle.
 	for _, st := range inlineHelpers(t.m.Stmts, t.jc.Defs, 0) {
@@ -463,7 +468,15 @@ func (t *translator) read() *refusal {
 			}
 			return refuse("java-statement", "%s", head)
 		}
+		if c.Name == "removeAllCardsFromLibrary" {
+			clearedLib = true
+		}
 		if code, ok := hardCalls[c.Name]; ok && code != "" {
+			if c.Name == "assertLibraryCount" && clearedLib {
+				// XMage counts only the cards the test added; the runner's
+				// library carries filler, so the count cannot be asserted
+				return refuse("library-size", "%s after removeAllCardsFromLibrary", c.Name)
+			}
 			return refuse(code, "%s", c.Name)
 		}
 		calls = append(calls, c)
@@ -499,7 +512,17 @@ func (t *translator) read() *refusal {
 		for _, a := range c.Args {
 			if a.kind == vStr && c.Name != "addCard" {
 				t.allNames[a.s] = true
+				if t.nameUses == nil {
+					t.nameUses = map[string]int{}
+				}
+				t.nameUses[a.s]++
 			}
+		}
+		if c.Name == "activateAbility" && len(c.Args) > 3 && c.Args[3].kind == vStr {
+			if t.abilityUses == nil {
+				t.abilityUses = map[string]int{}
+			}
+			t.abilityUses[c.Args[3].s]++
 		}
 		if r := t.readCall(i, c); r != nil {
 			return r
@@ -507,6 +530,9 @@ func (t *translator) read() *refusal {
 	}
 	if t.stop == nil {
 		return refuse("no-stop", "no setStopAt")
+	}
+	if r := t.checkClearedLibraries(); r != nil {
+		return r
 	}
 	t.addAIAnswers()
 	t.assignChoices()
@@ -614,6 +640,32 @@ func (t *translator) readCall(idx int, c call) *refusal {
 			return refuse("bad-args", "addCard count %d", n)
 		}
 		t.setup[p] = append(t.setup[p], addCardCall{zone: zone, name: name, count: n, tapped: tapped})
+	case "removeAllCardsFromHand", "removeAllCardsFromLibrary":
+		if len(c.Args) != 1 {
+			return refuse("bad-args", "%s", c.Name)
+		}
+		p, ok := seatOf(c.Args[0])
+		if !ok {
+			return refuse("bad-args", "%s player %s", c.Name, c.Args[0])
+		}
+		if c.Name == "removeAllCardsFromHand" {
+			// the runner deals no opening hand, so there is nothing to clear
+			// unless the test already built the hand: dropping those cards
+			// is a real action the setup cannot express
+			for _, ac := range t.setup[p] {
+				if ac.zone == "hand" {
+					return refuse("library-manipulation", "removeAllCardsFromHand after addCard HAND")
+				}
+			}
+			break
+		}
+		// XMage queues Zone.LIBRARY -> "clear" and applies it before the
+		// separate cheat call that adds the setup cards, so a card the test
+		// added earlier still survives. The runner's library already holds
+		// exactly the test's cards, so marking the seat is the whole
+		// translation; dropping addCard(Zone.LIBRARY, ...) entries would
+		// disagree with XMage.
+		t.libCleared[p] = true
 	case "setLife":
 		p, ok := seatOf(c.Args[0])
 		n, ok2 := argInt(c, 1)
