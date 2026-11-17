@@ -1,0 +1,168 @@
+{
+ "card": "Unstable Shapeshifter",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "c5ed8b4e7c2c",
+ "scenarios": [
+  {
+   "name": "existing-pump-stays-after-it-copies-the-next-creature",
+   "cr": [
+    "707.4"
+   ],
+   "why": "Giant Growth has already resolved on the Shapeshifter. When a Bear enters later in the turn the Shapeshifter takes the Bear's copiable values, but the +3/+3 effect is a separate effect still applying, so it is a 5/5 Bear.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Unstable Shapeshifter"
+     ],
+     "hand": [
+      "Giant Growth",
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Giant Growth",
+     "mana": "G",
+     "targets": [
+      "p0:Unstable Shapeshifter"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Unstable Shapeshifter",
+       "pt": "3/4"
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Grizzly Bears",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Unstable Shapeshifter",
+     "zone": "battlefield",
+     "pt": "5/5",
+     "types": [
+      "Bear"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "the-copied-activated-ability-finishes-after-the-copy-ends",
+   "cr": [
+    "707.11"
+   ],
+   "why": "The Shapeshifter borrowed Olivia's damage ability and activates it. A later creature entry makes the Shapeshifter copy that creature before the ability resolves, but the ability is already on the stack: it still deals 1 damage, makes the target a Vampire, and puts the +1/+1 counter on the Shapeshifter itself.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Mirror Gallery"
+     ],
+     "hand": [
+      "Unstable Shapeshifter",
+      "Olivia Voldaren",
+      "Ambush Viper"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Unstable Shapeshifter",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Olivia Voldaren",
+     "mana": "CCBR"
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Unstable Shapeshifter",
+       "zone": "battlefield",
+       "pt": "3/3",
+       "types": [
+        "Vampire"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Unstable Shapeshifter",
+     "ability": "deals 1 damage",
+     "mana": "CR",
+     "targets": [
+      "p1:Grizzly Bears"
+     ],
+     "expect": [
+      {
+       "hand_size": {
+        "p0": 1
+       }
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Ambush Viper",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Unstable Shapeshifter",
+     "zone": "battlefield",
+     "pt": "3/2",
+     "types": [
+      "Snake"
+     ],
+     "counters": {
+      "P1P1": 1
+     },
+     "keywords": [
+      "Deathtouch"
+     ]
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "damage": 1,
+     "types": [
+      "Vampire"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,97 @@
+{
+ "card": "Moritte of the Frost",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "8dab12e84adb",
+ "scenarios": [
+  {
+   "name": "copying-an-animated-land-skips-the-entry-counters-and-changeling",
+   "cr": [
+    "707.9f"
+   ],
+   "why": "Rude Awakening's animation applied only to the lands that existed when it resolved, so it is not part of the Forest's copiable values. Moritte therefore enters as a plain noncreature land copy of the Forest: the creature-only parts of its own copy exception do not apply, so it gets no +1/+1 counters and no changeling, and it has no power or toughness.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Forest"
+     ],
+     "hand": [
+      "Rude Awakening",
+      "Moritte of the Frost"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Rude Awakening",
+     "mana": "CCCCG",
+     "answers": [
+      {
+       "kind": "modes",
+       "pick": [
+        "lands you control become"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Forest",
+       "zone": "battlefield",
+       "pt": "2/2",
+       "types": [
+        "Creature",
+        "Land"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Moritte of the Frost",
+     "mana": "CCGUU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      },
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Forest"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Moritte of the Frost",
+     "zone": "battlefield",
+     "types": [
+      "Land"
+     ],
+     "counters": {
+      "P1P1": 0
+     },
+     "no_keywords": [
+      "Changeling"
+     ],
+     "no_types": [
+      "Creature"
+     ]
+    }
+   ]
+  }
+ ]
+}

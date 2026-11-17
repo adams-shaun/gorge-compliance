@@ -1,0 +1,57 @@
+{
+ "card": "Copy Artifact",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "193231b25cc5",
+ "scenarios": [
+  {
+   "name": "copying-a-juggernaut-adds-the-enchantment-type",
+   "cr": [
+    "707.9b"
+   ],
+   "why": "The copy exception adds enchantment to the copied types. Copy Artifact therefore enters as an artifact creature enchantment with Juggernaut's 5/3 body and its abilities.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Juggernaut"
+     ],
+     "hand": [
+      "Copy Artifact"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Copy Artifact",
+     "mana": "CU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Juggernaut"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Copy Artifact",
+     "zone": "battlefield",
+     "pt": "5/3",
+     "types": [
+      "Artifact",
+      "Creature",
+      "Enchantment",
+      "Juggernaut"
+     ]
+    }
+   ]
+  }
+ ]
+}
