@@ -1,0 +1,86 @@
+{
+ "card": "Duplicant",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "25b7c0b21002",
+ "scenarios": [
+  {
+   "name": "the-controller-picks-which-half-the-duplicant-imprints",
+   "cr": [
+    "713.8b"
+   ],
+   "why": "Exiling the melded Chittering Host puts both of its component cards into exile, and Duplicant's controller decides which of the two counts as the last creature card exiled. Choosing Midnight Scavengers gives Duplicant that card's 3/3 Human Rogue body; choosing Graf Rats would give the 2/1 Rat body.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Midnight Scavengers",
+      "Graf Rats"
+     ],
+     "hand": [
+      "Duplicant"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "begin-combat",
+     "active": "p0"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "main2",
+     "active": "p0"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Duplicant",
+     "mana": "CCCCCC"
+    },
+    {
+     "op": "resolve",
+     "targets": [
+      "p0:Chittering Host"
+     ],
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      },
+      {
+       "kind": "any",
+       "pick": [
+        "Midnight Scavengers"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Duplicant",
+     "zone": "battlefield",
+     "pt": "3/3",
+     "types": [
+      "Human",
+      "Rogue"
+     ]
+    },
+    {
+     "card": "p0:Midnight Scavengers",
+     "zone": "exile"
+    },
+    {
+     "card": "p0:Graf Rats",
+     "zone": "exile"
+    }
+   ]
+  }
+ ]
+}
