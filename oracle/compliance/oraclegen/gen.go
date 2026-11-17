@@ -1284,13 +1284,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		var as []XAnswer
 		switch d.Kind {
 		case "target":
-			if d.Resume == "trig_sub" && d.Options == 1 && d.Min == 1 && d.Max == 1 {
-				// A CR 603.3d chain link's forced single target (Mechanical
-				// Mobster's "target creature you control" with only itself):
-				// XMage picks it without asking, so a scripted answer is left
-				// unused (measured on the std pass).
-				continue
-			}
+			// A CR 603.3d chain link's forced single target (Mechanical
+			// Mobster's "target creature you control" with only itself) is
+			// scripted like any other: XMage's Targets.chooseTargets asks
+			// every target object that still has a candidate, so a missing
+			// answer is "Missing TARGET def" (measured on SPM-s103 xe:SPM:0:3:w10,
+			// with the first object picked and again with it skipped; an earlier
+			// std-pass note that XMage picks it unasked no longer holds).
 			as = targetDecisionAnswers(routing, i)
 		case "mode":
 			if d.Resume == "play" {
@@ -1988,7 +1988,7 @@ func targetDecisionAnswers(r *answerRouting, i int) []XAnswer {
 		for k := range d.PickRefs {
 			as = append(as, singleTargetAnswer(d, k))
 		}
-		if len(d.PickRefs) < d.Max {
+		if len(d.PickRefs) < d.Max && !poolExhausted(d) {
 			// Fewer picks than the "up to N" ask allows: XMage keeps
 			// asking, so stop it with the target queue's skip token. This
 			// also covers a slot gorge never posed at all (zero picks).
@@ -1999,6 +1999,16 @@ func targetDecisionAnswers(r *answerRouting, i int) []XAnswer {
 		as = append(as, XAnswer{d.Seat, "target", "[target_skip]"})
 	}
 	return as
+}
+
+// poolExhausted reports an ask whose picks took every candidate gorge offered:
+// XMage completes such an object by itself (TargetImpl.isChoiceCompleted's
+// moreSelectCount == 0), so a closing skip would be left unused ("Targets ...
+// Count are not equal (found [[target_skip]])": Eddymurk Crab's "up to two
+// target creatures" with itself the only creature). A decision that records
+// no candidate count keeps the skip.
+func poolExhausted(d rules.OracleDecision) bool {
+	return d.Options > 0 && d.Options <= len(d.PickRefs)
 }
 
 // singleTargetAnswer is the TARGET-queue answer for one pick: a seat ref, an

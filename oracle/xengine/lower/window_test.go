@@ -105,6 +105,51 @@ func windowsOf(t *testing.T, n int) (*cards.Registry, []played) {
 	return reg, out
 }
 
+// TestLowerWindowSetupAnswer pins a window whose setup drive poses an ask the
+// capture cannot answer. HOB game 10 turn 9 places Down, Down to Goblin-town,
+// a front-face Saga: the runner's fixture placement re-runs chapter I ("target
+// opponent reveals their hand. You choose a nonland card from it. That player
+// discards that card."), whose target and mode are absent from SetupAnswers,
+// so the fallback discards the active seat's Moment of Glory before the window
+// starts. The window must be refused with the named setup reason, not lowered
+// into a cast the replay can never offer.
+func TestLowerWindowSetupAnswer(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	cands, _, err := decks.CandidatesWith(reg, manifestDir, "HOB", decks.Options{XMage: true})
+	if err != nil {
+		t.Fatal(err)
+	}
+	// The repro's deal: -set RAND -random HOB -chunk 3 -games 20 -seed 108.
+	pair := decks.Pair(decks.Union(cands), cov.New(), "RAND", 3, 10, 108)
+	seed := uint64(108*1_000_003 + 3*10_007 + 10)
+	ls, rs, _, err := Windows(reg, pair[:], seed, game.Options{Set: "RAND"}, true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	const id = "xe:RAND:3:10:w9"
+	var got *Refusal
+	for i := range rs {
+		if rs[i].ID == id {
+			got = &rs[i]
+		}
+	}
+	if got == nil {
+		t.Fatalf("%s was not refused: the setup fallback discards a live hand card", id)
+	}
+	want := []string{"setup_answer:mode", "setup_answer:target"}
+	if !reflect.DeepEqual(got.Reasons, want) {
+		t.Errorf("%s reasons = %v, want %v", id, got.Reasons, want)
+	}
+	for _, l := range ls {
+		if l.Item.ID == id {
+			t.Errorf("%s was lowered despite an unscripted setup ask: %d steps", id, len(l.Item.Steps))
+		}
+	}
+	if len(ls) == 0 {
+		t.Error("every window of the game was refused; the answer gate is too broad")
+	}
+}
+
 func TestWindowsSelfCheck(t *testing.T) {
 	reg, games := windowsOf(t, 4)
 	reasons := map[string]int{}

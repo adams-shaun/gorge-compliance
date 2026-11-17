@@ -212,6 +212,11 @@ type translator struct {
 	// does, two kicker costs XMage elects one boolean at a time, a convoke tap
 	// stated as an addTarget. It converts a failing run only.
 	electShape *refusal
+	// emitShape is the first shape refusal the emitter or an assert mapper
+	// recorded (noteShape): a spent permission the runner cannot pick, a
+	// check the runner would reach in another step, a counter a pooled
+	// mana ability never puts. It converts a failing run only.
+	emitShape *refusal
 	// ptAsserted remembers the P/T an assertPowerToughness stated per seat
 	// and name (anyScopePTConflict).
 	ptAsserted map[string]string
@@ -627,6 +632,9 @@ func translate(reg *cards.Registry, jc *javaClass, m *javaMethod, family string)
 	}
 	if res.shape == nil {
 		res.shape = t.electShape
+	}
+	if res.shape == nil {
+		res.shape = t.emitShape
 	}
 	return res
 }

@@ -300,6 +300,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // an optional additional cost, so the generator's leading "Yes" pays it,
     // and its PromiseGiftCost then asks which opponent (giftOpponentChoice).
     private boolean giftPromisedCast = false;
+    /** Whether the replay followed a recorded pass position (turn/step/active seat). */
+    private boolean followedPassPosition = false;
 
     /** TestPlayer normally delegates these library decisions directly to its AI,
      * bypassing the scripted target/choice queues. Route them through this player. */
@@ -1566,6 +1568,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             alternativeCostCast = false;
             copyCostCast = null;
             giftPromisedCast = false;
+            followedPassPosition = false;
             gorgeName = str(sc, "card");
             xmageName = str(sc, "xmage_name");
             endTurnScenario = hasEndTurnEffect(xmageName.isEmpty() ? gorgeName : xmageName);
@@ -1647,8 +1650,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // Only EndTurn scenarios need the extended boundary. Ordinary
             // replays retain the original turn-1 stop and cannot encounter
             // unrelated turn-2 upkeep triggers or decisions.
-            setStopAt(endTurnScenario ? turn + 1 : turn,
-                    endTurnScenario ? PhaseStep.UPKEEP : PhaseStep.END_TURN);
+            // A recorded game's window ends at the step its last pass entered
+            // (gorge's final checkpoint). Playing on to the turn's end step
+            // lets XMage's own AI pass through later steps that gorge never
+            // reached, and a trigger there (a beginning-of-combat "up to two
+            // target creatures") asks a target nobody scripted: "Missing
+            // TARGET def". So stop at that step instead.
+            if (!endTurnScenario && followedPassPosition) {
+                setStopAt(turn, phase);
+            } else {
+                setStopAt(endTurnScenario ? turn + 1 : turn,
+                        endTurnScenario ? PhaseStep.UPKEEP : PhaseStep.END_TURN);
+            }
             execute();
         } catch (Throwable t) {
             String msg = t.getClass().getSimpleName() + ": " + t.getMessage();
@@ -2615,8 +2628,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /**
-     * Whether a spell ability is *targetless until its adjuster runs*: it has a
-     * target adjuster AND no base target. Only this shape breaks the inline
+     * Whether a spell ability must take its targets through the queue: it has a
+     * target adjuster AND either no base target or an adjuster that discards
+     * pre-set targets ({@link #replacesCastTargets}). The first shape breaks the inline
      * {@code $target=} form -- the up-front check reads the unadjusted ability
      * ({@code handleNonPlayerTargetTarget}'s empty {@code selectedMode.getTargets()})
      * and throws "Ability has no targets" (The Eagles Are Coming!: no base
@@ -2626,7 +2640,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * cannot reroute it.
      */
     static boolean needsQueuedCastTargets(Ability ability) {
-        return hasTargetAdjuster(ability) && ability.getAllSelectedTargets().isEmpty();
+        return hasTargetAdjuster(ability)
+                && (ability.getAllSelectedTargets().isEmpty() || replacesCastTargets(ability));
+    }
+
+    /**
+     * Whether the ability's adjuster discards whatever the cast command
+     * pre-set and builds fresh target objects: a {@code ConditionalTargetAdjuster}
+     * ({@code adjustTargets} starts with {@code getTargets().clear()}, then
+     * re-adds the blueprint or the replacement). Such a card (Into the Flood
+     * Maw, Long River's Pull: a gift swaps the target filter) declares a base
+     * target, so the inline {@code $target=} form validates, is stored on the
+     * base object, and is wiped when the adjuster runs mid-cast; the chooser
+     * then asks again and the TestPlayer fails "Missing TARGET def". A queued
+     * target is read by that later ask, so these casts take the queue route.
+     */
+    static boolean replacesCastTargets(Ability ability) {
+        return ability != null
+                && ability.getTargetAdjuster() instanceof mage.target.targetadjustment.ConditionalTargetAdjuster;
     }
 
     /** The card's spell ability, or null when the name does not resolve. */
@@ -2804,9 +2835,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return targetsDivided(spellAbility(name));
     }
 
-    /** Whether the card's spell ability has exactly one target object and
-     * n answers already reach its maximum, so no slot is left to skip. */
-    private static boolean singleTargetFilled(String name, int n) {
+    /** Whether n answers already reach the combined maximum of the card's
+     * spell-ability target objects, so no slot is left to skip. */
+    private static boolean targetSlotsFilled(String name, int n) {
         CardInfo info = CardRepository.instance.findCard(name);
         Card c = info == null ? null : info.createCard();
         if (c == null) {
@@ -2815,9 +2846,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return !targetSlotNeedsSkip(c.getSpellAbility().getAllSelectedTargets(), n);
     }
 
-    /** An unfilled or open target slot needs an explicit skip to finish casting. */
+    /** An unfilled or open target slot needs an explicit skip to finish casting.
+     * XMage poses each slot in order and a slot closes at its maximum, so the
+     * supplied answers leave an ask open only when they total less than every
+     * slot's maximum (Rabid Bite's two required slots, both filled, ask nothing
+     * more: a trailing skip there is left unused). A spell with no declared
+     * slot gets its targets from an adjuster after cast setup, so it keeps the
+     * skip. */
     static boolean targetSlotNeedsSkip(List<mage.target.Target> targets, int supplied) {
-        return targets.size() != 1 || supplied < targets.get(0).getMaxNumberOfTargets();
+        if (targets.isEmpty()) {
+            return true;
+        }
+        long capacity = 0;
+        for (mage.target.Target t : targets) {
+            capacity += t.getMaxNumberOfTargets();
+        }
+        return supplied < capacity;
     }
 
     /** Normalises a cost label so gorge's pick ("Sacrifice artifact or
@@ -4172,6 +4216,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         phase = phaseOfGorgeStep(pos.get("step").getAsString());
         activeSeat = pos.get("active").getAsInt();
         attackAdvancedTurn = false;
+        followedPassPosition = true;
     }
 
     /** The commands step {@code index} queues before its own actions and
@@ -4772,8 +4817,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // A Gift spell (Mind Spiral, Sazacap's Brew): the castSpell
                     // player form binds the wrong ask, so queue the spell's
                     // own player target and close the rest.
+                    // Only a promised gift opens the spell's second, gift-gated
+                    // target (Sazacap's Brew, Mind Spiral); a declined gift has
+                    // no such object, and a skip queued for it is left unused
+                    // ("Targets ... Count are not equal (found [[target_skip]])").
                     addTarget(p, seat(seatOf(tg.get(0))));
-                    addTarget(p, TestPlayer.TARGET_SKIP);
+                    if (giftPromisedCast) {
+                        addTarget(p, TestPlayer.TARGET_SKIP);
+                    }
                     castSpell(turn, phase, p, card);
                 } else if (tg.isEmpty()) {
                     castSpell(turn, phase, p, card);
@@ -4820,11 +4871,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     for (String t : tg) {
                         queueCastTarget(p, t);
                     }
-                    if (!singleTargetFilled(cardName, tg.size())) {
-                        // Close an "up to N" slot the scenario left short,
-                        // or a later slot (Rhino's Rampage's reflexive
-                        // trigger). A skip after the one multi-target slot
-                        // is filled is rejected (Pull Through the Weft).
+                    if (!targetSlotsFilled(cardName, tg.size())) {
+                        // Close an "up to N" slot the scenario left short.
+                        // A skip once every slot is filled is rejected (Pull
+                        // Through the Weft, Rabid Bite).
                         addTarget(p, TestPlayer.TARGET_SKIP);
                     }
                     castSpell(turn, phase, p, card);
