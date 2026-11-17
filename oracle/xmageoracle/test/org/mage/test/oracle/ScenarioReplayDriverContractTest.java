@@ -1,6 +1,7 @@
 package org.mage.test.oracle;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -803,6 +804,54 @@ public final class ScenarioReplayDriverContractTest {
         System.out.println("PASS seat counts (absent/2 duel, 3 free-for-all, others refused)");
     }
 
+    /** An owner-qualified graveyard ref names the picked seat's card: the
+     * ref's seat-scoped object list ranks only that seat's own cards, so
+     * p1's Pennant is selected even though p0's same-named card exists
+     * (CR 601.2c's announced object). A joined multi-pick answer carries
+     * every segment as an "@ref" the driver binds one by one. */
+    private static void ownerQualifiedGraveyardTarget() throws Exception {
+        UUID p0 = id(20), p1 = id(21);
+        Card own = fakeCard(p0, "Dawn-Blessed Pennant");
+        Card forest = fakeCard(p1, "Forest");
+        Card theirs = fakeCard(p1, "Dawn-Blessed Pennant");
+        Card second = fakeCard(p1, "Dawn-Blessed Pennant");
+        // bindOneAlias scopes its object list to the ref's seat before ranking.
+        List<mage.MageObject> p0Objs = Arrays.asList(own);
+        List<mage.MageObject> p1Objs = Arrays.asList(forest, theirs, second);
+        check(ScenarioReplay.refRankChoice("p1:Dawn-Blessed Pennant", p1Objs,
+                mage.MageObject::getName) == theirs, "owner-qualified ref did not select p1's graveyard card");
+        check(ScenarioReplay.refRankChoice("p0:Dawn-Blessed Pennant", p0Objs,
+                mage.MageObject::getName) == own, "owner-qualified ref did not select p0's graveyard card");
+        check(ScenarioReplay.refRankChoice("p1:Forest", p1Objs,
+                mage.MageObject::getName) == forest, "rank-free ref did not select its seat's card");
+        check(ScenarioReplay.refRankChoice("p1:Dawn-Blessed Pennant#2", p1Objs,
+                mage.MageObject::getName) == second, "ranked ref did not select the second card");
+        check(ScenarioReplay.refRankChoice("p1:Grizzly Bears", p1Objs,
+                mage.MageObject::getName) == null, "an unmatched ref selected an object");
+        check(ScenarioReplay.answerRefs("@p1:Dawn-Blessed Pennant^@p0:Grizzly Bears#2")
+                .equals(Arrays.asList("p1:Dawn-Blessed Pennant", "p0:Grizzly Bears#2")),
+                "a joined owner-qualified answer did not split into its refs");
+        System.out.println("PASS owner-qualified graveyard target (seat-scoped rank choice, "
+                + "exact owner card, joined @ref answers)");
+    }
+
+    private static Card fakeCard(UUID owner, String name) {
+        UUID id = UUID.randomUUID();
+        return (Card) Proxy.newProxyInstance(Card.class.getClassLoader(),
+                new Class<?>[]{Card.class}, (proxy, method, args) -> {
+                    switch (method.getName()) {
+                        case "getId":
+                            return id;
+                        case "getName":
+                            return name;
+                        case "getOwnerId":
+                            return owner;
+                        default:
+                            throw new AssertionError("unexpected call " + method);
+                    }
+                });
+    }
+
     public static void main(String[] args) throws Exception {
         attachments();
         zones();
@@ -816,5 +865,6 @@ public final class ScenarioReplayDriverContractTest {
         copyCostOps();
         spellings();
         seatCounts();
+        ownerQualifiedGraveyardTarget();
     }
 }

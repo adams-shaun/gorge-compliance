@@ -6,14 +6,14 @@ import (
 )
 
 func TestFallbackAlternativesTried(t *testing.T) {
-	trig := []dumpOption{{0, "trigger", "A"}, {1, "trigger", "B"}, {2, "trigger", "C"}}
+	trig := []dumpOption{{0, "trigger", "A", ""}, {1, "trigger", "B", ""}, {2, "trigger", "C", ""}}
 	got := fallbackAlternatives("trigger_order", trig)
 	want := [][]string{{"A", "B", "C"}, {"A", "C", "B"}, {"B", "A", "C"}, {"B", "C", "A"}, {"C", "A", "B"}, {"C", "B", "A"}}
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("three triggers: %v, want the 6 orders %v", got, want)
 	}
 
-	tgt := []dumpOption{{0, "target", "a"}, {1, "target", "b"}, {2, "target", "c"}, {3, "target", "d"}}
+	tgt := []dumpOption{{0, "target", "a", ""}, {1, "target", "b", ""}, {2, "target", "c", ""}, {3, "target", "d", ""}}
 	got = fallbackAlternatives("target", tgt)
 	want = [][]string{{"a"}, {"b"}, {"c"}, {"d"}}
 	if !reflect.DeepEqual(got, want) {
@@ -21,7 +21,7 @@ func TestFallbackAlternativesTried(t *testing.T) {
 	}
 
 	// caps and other kinds
-	five := append(append([]dumpOption(nil), trig...), dumpOption{3, "trigger", "D"}, dumpOption{4, "trigger", "E"})
+	five := append(append([]dumpOption(nil), trig...), dumpOption{3, "trigger", "D", ""}, dumpOption{4, "trigger", "E", ""})
 	if got := fallbackAlternatives("trigger_order", five); got != nil {
 		t.Errorf("five triggers: %v, want none (past the cap)", got)
 	}
@@ -36,7 +36,7 @@ func TestFallbackAlternativesTried(t *testing.T) {
 		t.Errorf("choose: %v, want none", got)
 	}
 	// equal labels are one answer
-	if got := fallbackAlternatives("target", []dumpOption{{0, "target", "x"}, {1, "target", "x"}}); len(got) != 1 {
+	if got := fallbackAlternatives("target", []dumpOption{{0, "target", "x", ""}, {1, "target", "x", ""}}); len(got) != 1 {
 		t.Errorf("duplicate labels: %v, want one answer", got)
 	}
 

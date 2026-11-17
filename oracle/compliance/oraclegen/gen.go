@@ -2010,10 +2010,10 @@ func targetDecisionAnswers(r *answerRouting, i int) []XAnswer {
 }
 
 // singleTargetAnswer is the TARGET-queue answer for one pick: a seat ref, an
-// exact identity ref (a same-name alias, a permanent's current face), or the
-// ref's name with a same-name marker. It is the one home for that spelling,
-// shared by the ordinary target ask and a copy's per-slot replacement, so the
-// two cannot drift.
+// exact identity ref (a same-name alias, a permanent's current face, or an
+// inexact ref's exact owner prefix), or the ref's name with a same-name
+// marker. It is the one home for that spelling, shared by the ordinary target
+// ask and a copy's per-slot replacement, so the two cannot drift.
 func singleTargetAnswer(d rules.OracleDecision, k int) XAnswer {
 	ref := d.PickRefs[k]
 	if isSeat(ref) {
@@ -2024,8 +2024,19 @@ func singleTargetAnswer(d rules.OracleDecision, k int) XAnswer {
 	// offered object needs the discriminator here too (a token copy of a
 	// card, Extravagant Replication). An alias pick keeps its full ref, which
 	// the driver's targetName maps to the object's @alias.
-	if p := ClassifySameName(d, k); p.Alias != "" {
+	p := ClassifySameName(d, k)
+	if p.Alias != "" {
 		return XAnswer{d.Seat, "target", ref}
+	}
+	if p.Unanswerable {
+		// The ref is rank-derived, but its owner prefix may still separate
+		// the candidates (two same-named cards in different graveyards). The
+		// driver's alias binding scopes a non-token ref to that seat, so
+		// "<seat>:<name>" reaches the picked card instead of the first
+		// same-named one XMage matches by name alone (CR 601.2c).
+		if owner := ownerQualifiedRef(d, k); owner != "" {
+			return XAnswer{d.Seat, "target", owner}
+		}
 	}
 	if currentFaceTargetRef(d, k) {
 		// The option label names a different object than the ref -- the
@@ -2699,8 +2710,10 @@ type SameNamePick struct {
 	Alias      string // "@<ref>" when only the exact ref separates the candidates
 	// Unanswerable is set when the copy filter is not unique AND the pick's
 	// ref is not an identity XMage can bind (a rank-derived library/hand
-	// card). There is no sound answer; the census counts the item as
-	// unproven rather than resolved.
+	// card). The name-only answer is unsound, so the census counts the item
+	// as unproven rather than resolved. A target ask can still carry the
+	// ref's exact owner prefix when that prefix separates the candidates
+	// (ownerQualifiedRef), and a choice pick as its "@<ref>" alias form.
 	Unanswerable bool
 }
 
@@ -2714,6 +2727,49 @@ func pickRefExact(d rules.OracleDecision, k int) bool {
 		return !d.PickRefsInexact[k]
 	}
 	return true
+}
+
+// ownerQualifiedRef returns pick k's ref when its owner prefix alone still
+// identifies one object, even though the ref is rank-derived: the ref carries
+// no "#k" rank and no other same-named offered ref belongs to the same seat.
+// XMage's alias binding scopes a non-token ref to that seat's own objects, so
+// a card picked from p1's graveyard ("p1:Dawn-Blessed Pennant") reaches p1's
+// card, not the first same-named card in either graveyard (CR 601.2c).
+//
+// Known limit: only the OFFERED refs are visible here. Gorge's rank-free ref
+// is k==1 among the owner's live same-named objects in EVERY zone, while the
+// driver's alias binding ranks battlefield and hand before graveyard, so a
+// same-named card the owner has on the battlefield or in hand (not offered)
+// can still win the driver's binding. A decision cannot rule that out; the
+// result is a visible replay mismatch, never a silent pass.
+//
+// An empty result means the owner does not separate the candidates -- two
+// same-named objects of one seat, or a ranked ref whose ObjID rank the
+// driver's zone order cannot reproduce -- so the conservative bare-name form
+// stays.
+func ownerQualifiedRef(d rules.OracleDecision, k int) string {
+	if k < 0 || k >= len(d.PickRefs) || pickRefExact(d, k) {
+		return ""
+	}
+	ref := d.PickRefs[k]
+	seat, ok := refSeat(ref)
+	if !ok || !strings.Contains(ref, ":") || strings.Contains(ref, ":token:") {
+		return ""
+	}
+	if i := strings.LastIndexByte(ref, '#'); i >= 0 && i+1 < len(ref) &&
+		strings.Trim(ref[i+1:], "0123456789") == "" {
+		return ""
+	}
+	name := oraclediffRefName(ref)
+	for _, candidate := range d.OptionRefs {
+		if candidate == ref || !strings.EqualFold(oraclediffRefName(candidate), name) {
+			continue
+		}
+		if s, ok := refSeat(candidate); ok && s == seat {
+			return ""
+		}
+	}
+	return ref
 }
 
 // ClassifySameName reports how pick k of d is disambiguated.
@@ -2826,18 +2882,24 @@ func namesObject(label, ref string) bool {
 	return strings.EqualFold(label, oraclediffRefName(ref))
 }
 
-// ExactRefAlias is the "@ref" answer that names decision d's pick k when its
-// name alone matches more than one offered object, or "" when the name is
-// unambiguous (ClassifySameName). Cost paths that script a batch as one answer
-// per pick use it so each single binds the exact object, as JoinedChoice does
-// for the joined answer.
+// ExactRefAlias is the "@ref" answer (or the ref's exact owner-qualified form)
+// that names decision d's pick k when its name alone matches more than one
+// offered object, or "" when the name is unambiguous (ClassifySameName). Cost
+// paths that script a batch as one answer per pick use it so each single binds
+// the exact object, as JoinedChoice does for the joined answer.
 func ExactRefAlias(d rules.OracleDecision, k int) string {
 	if k >= len(d.Picks) || k >= len(d.PickRefs) {
 		return ""
 	}
 	p := ClassifySameName(d, k)
-	if p.Alias != "" && namesObject(d.Picks[k], d.PickRefs[k]) {
+	names := namesObject(d.Picks[k], d.PickRefs[k])
+	if p.Alias != "" && names {
 		return p.Alias
+	}
+	if p.Unanswerable && names {
+		if owner := ownerQualifiedRef(d, k); owner != "" {
+			return "@" + owner
+		}
 	}
 	return ""
 }
@@ -2864,19 +2926,29 @@ func JoinedChoice(d rules.OracleDecision) string {
 
 // disambiguatedObjectChoice returns the choice-queue answer for pick k: the
 // exact-ref alias when the copy marker cannot separate the candidates AND the
-// label is an object-name answer, else the label with the copy marker
-// appended (no space before the bracket).
+// label is an object-name answer, the owner-qualified ref when an inexact ref's
+// owner still separates them, else the label with the copy marker appended (no
+// space before the bracket).
 func disambiguatedObjectChoice(d rules.OracleDecision, k int, label string) string {
 	p := ClassifySameName(d, k)
 	if p.Alias != "" && k < len(d.PickRefs) && namesObject(label, d.PickRefs[k]) {
 		return p.Alias
+	}
+	if p.Unanswerable && k < len(d.PickRefs) && namesObject(label, d.PickRefs[k]) {
+		if owner := ownerQualifiedRef(d, k); owner != "" {
+			// "@<ref>", the same spelling as the alias branch: a joined
+			// multi-pick answer binds every segment through the "@" path, and
+			// a bare "pN:<name>" segment would match no alias and no card.
+			return "@" + owner
+		}
 	}
 	return label + p.CopyMarker
 }
 
 // targetPickValue is the target-queue answer for pick k of d: the seat ref
 // as offered, the exact-ref alias when only the ref separates same-named
-// candidates (the driver's targetName maps a bound ref to its @alias), else
+// candidates (the driver's targetName maps a bound ref to its @alias), the
+// owner-qualified ref when an inexact ref's owner still separates them, else
 // the object name with the copy marker appended. XMage's chooseTarget parses
 // the same copy marker as makeChoose, so a target among same-named objects
 // needs the discriminator too.
@@ -2888,8 +2960,17 @@ func targetPickValue(d rules.OracleDecision, k int, label string) string {
 	if isSeat(v) {
 		return v
 	}
-	if p := ClassifySameName(d, k); p.Alias != "" {
+	p := ClassifySameName(d, k)
+	if p.Alias != "" {
 		return d.PickRefs[k]
+	}
+	if p.Unanswerable {
+		// The owner prefix is exact even when the rank is not: a graveyard
+		// card picked from p1's graveyard is "p1:<name>", which the driver
+		// binds to p1's own object instead of the first same-named card.
+		if owner := ownerQualifiedRef(d, k); owner != "" {
+			return owner
+		}
 	}
 	v = oraclediffRefName(v)
 	_, marker := SameNameAmbiguity(d, k)
