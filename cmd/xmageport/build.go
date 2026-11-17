@@ -939,6 +939,9 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 		if r != nil {
 			return nil, r
 		}
+		if t.manaSource(a[0].s) {
+			return nil, refuse("tapped-land-count", "%s", a[0].s)
+		}
 		b := a[1].b
 		return []*expect{{Card: ref, Tapped: &b}}, nil
 	case "assertTappedCount":
@@ -1506,21 +1509,43 @@ func takeX(a *action) int {
 	return -1
 }
 
+// manaSource reports whether the named card is a permanent XMage can tap to
+// pay a cost that the runner pays from the pool instead: a land (basic lands
+// carry their mana ability intrinsically, not as a printed AB$ Mana) or a face
+// with a mana ability. assertTapped and assertTappedCount both refuse such a
+// source; sharing this predicate keeps the two from drifting.
+func (t *translator) manaSource(name string) bool {
+	nm, r := xmageName(name)
+	if r != nil {
+		return false
+	}
+	c, ok := t.lookup(nm)
+	if !ok {
+		return false
+	}
+	for _, f := range c.Faces {
+		if f == nil {
+			continue
+		}
+		if f.IsLand() || f.HasManaAbility() {
+			return true
+		}
+	}
+	return false
+}
+
 // tappedCount maps assertTappedCount(name, tapped, n): exactly n permanents
 // named name have isTapped()==tapped. Expressible per object only when n is
-// 0 (all have the other state) or every known instance. Lands refuse: the
-// runner pays from the pool, so a land XMage tapped for mana stays untapped.
+// 0 (all have the other state) or every known instance. A mana source
+// refuses: the runner pays from the pool, so a source XMage tapped for mana
+// stays untapped.
 func (t *translator) tappedCount(name string, tapped bool, n int) ([]*expect, *refusal) {
 	nm, r := xmageName(name)
 	if r != nil {
 		return nil, r
 	}
-	if c, ok := t.lookup(nm); ok && len(c.Faces) > 0 && c.Faces[0] != nil {
-		for _, ty := range c.Faces[0].Types {
-			if ty == "Land" {
-				return nil, refuse("tapped-land-count", "%s", nm)
-			}
-		}
+	if t.manaSource(nm) {
+		return nil, refuse("tapped-land-count", "%s", nm)
 	}
 	refs := append(t.permRefs(0, nm), t.permRefs(1, nm)...)
 	if len(refs) == 0 {
