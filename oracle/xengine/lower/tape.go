@@ -24,6 +24,7 @@ const (
 	ReasonAttackSplit     = "attack_split"     // one attack at more than one defender
 	ReasonAttackNonPlayer = "attack_nonplayer" // an attack at a planeswalker or battle
 	ReasonUnbindableRef   = "unbindable_ref"   // an object the runner cannot name
+	ReasonLogOnlyCast     = "log_only_cast:"   // a window cast only the event log entitled
 	ReasonStall           = "stall"            // the tape ends in a watchdog, not a game end
 	ReasonUnsupported     = "unsupported_kind:"
 )
@@ -243,6 +244,10 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 		for j < len(entries) && isAsk(entries[j]) {
 			j++
 		}
+		if why := l.logOnlyCast(m, entries[i]); why != nil {
+			l.refuse(i, why, owedAt, owedSteps)
+			return
+		}
 		steps, stepEntry, payments, answers, why := lowerGroup(reg, m, entries[i:j])
 		if why != nil {
 			l.refuse(i, why, owedAt, owedSteps)
@@ -350,6 +355,50 @@ func (l *Lowered) refuse(i int, why *truncation, owedAt, owedSteps int) {
 		l.drop(owedSteps)
 	}
 	l.stop(at, why)
+}
+
+// logOnlyCastMode reports a cast mode gorge's walk offers from a log-derived
+// provenance, never from the object's own state: the Adventure recast (the
+// resolved Adventure spell's exile marker and its CastInfo), the warp recast
+// (the delayed trigger and its CastInfo), the foretell cast ("a later turn"
+// after the foretell action) and the airbend recast (the exile move's
+// airbend marker). A window's setup carries state only, so it cannot entitle
+// one: the runner's walk would not offer the cast at all, and the self-check
+// would fail with "cast <card> not offered" at that step.
+func logOnlyCastMode(mode string) bool {
+	switch mode {
+	case "adventure_recast", "warp_recast", "foretell_cast", "airbend_cast":
+		return true
+	}
+	return false
+}
+
+// logOnlyCast refuses a window's cast when the card already sits in the
+// scenario setup's exile and the cast's mode is one the runner offers only
+// from its own event log. The window starts at a turn's first priority, so the
+// event that put the card there is before the window and no lowered step can
+// recreate it. A card that enters exile inside the window (an Adventure cast
+// and its recast in the same turn, an airbend) is not refused: the replay
+// derives the provenance from that step's own events.
+func (l *Lowered) logOnlyCast(m seatMap, en game.Entry) *truncation {
+	if l.Against == nil || len(en.Picks) != 1 {
+		return nil
+	}
+	pk := en.Picks[0]
+	if pk.Kind != "cast" || !logOnlyCastMode(pk.Mode) {
+		return nil
+	}
+	seat, rest, ok := strings.Cut(m.ref(pk.Ref), ":")
+	if !ok || seat == "" {
+		return nil
+	}
+	name, _, _ := strings.Cut(rest, "#")
+	for _, n := range l.Item.Setup[seat].Exile {
+		if n == name {
+			return &truncation{ReasonLogOnlyCast + pk.Mode}
+		}
+	}
+	return nil
 }
 
 // isResolvePay is true for the entry that answers an election to pay a cost
@@ -611,6 +660,28 @@ func isWindowTap(a game.Entry) bool {
 	return len(a.Picks) == 1 && a.Picks[0].Kind == "activate" && len(a.Mana) == 1
 }
 
+// resolveSpanLowerable reports that the entries between a pass group's end j
+// and the empty-stack pass end hold only asks the resolve op can answer: no
+// priority action (a mana tap, a cast, an ability) and no attack, block, mana
+// or randomness. The resolve op passes priority and answers asks; a priority
+// action in the span would be silently dropped, and the checkpoint after the
+// step would no longer match (xe:RAND:0:11:tape lost Soul-Guide Lantern's
+// sacrifice this way, and the later Scarecrow Guide cast was then not
+// offered). resolvePass and resolveEmptyPass share the one guard so the next
+// span shape cannot skip it.
+func resolveSpanLowerable(entries []game.Entry, j, end int) bool {
+	for k := j; k < end; k++ {
+		e := entries[k]
+		if len(e.Mana) > 0 || e.RNG > 0 || len(e.Flips) > 0 {
+			return false
+		}
+		if e.Kind == "priority" && !isPass(e) || e.Kind == "attackers" || e.Kind == "blockers" {
+			return false
+		}
+	}
+	return true
+}
+
 // resolvePass lowers a pass that resolved an object and put a new object on
 // the stack as one `resolve` step. An ETB trigger is put on the stack after
 // its creature spell resolved, so the pass's stack top (the spell) differs
@@ -647,6 +718,9 @@ func resolvePass(m seatMap, entries []game.Entry, i, j int) (*oraclegen.Step, in
 	if end <= j {
 		// The stop state must lie after the asks, so the resolve step starts
 		// on the pass with a non-empty stack and does not early-return.
+		return nil, 0, false
+	}
+	if !resolveSpanLowerable(entries, j, end) {
 		return nil, 0, false
 	}
 	answers, why := answersOf(m, entries[i:end])
@@ -692,14 +766,8 @@ func resolveEmptyPass(m seatMap, entries []game.Entry, i, j int) (*oraclegen.Ste
 	// priority action (a mana activation, a cast, a play) taken while the
 	// trigger sat on the stack, nor its mana/randomness. Reject such a range so
 	// the checkpoint cannot silently lose it (xe:TDM:0:0:w29).
-	for k := j; k < end; k++ {
-		e := entries[k]
-		if len(e.Mana) > 0 || e.RNG > 0 || len(e.Flips) > 0 {
-			return nil, 0, false
-		}
-		if e.Kind == "priority" && !isPass(e) || e.Kind == "attackers" || e.Kind == "blockers" {
-			return nil, 0, false
-		}
+	if !resolveSpanLowerable(entries, j, end) {
+		return nil, 0, false
 	}
 	answers, why := answersOf(m, entries[i+1:end])
 	if why != nil {
