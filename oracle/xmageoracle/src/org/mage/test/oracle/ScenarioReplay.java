@@ -2319,6 +2319,30 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return refs;
     }
 
+    /** The object a non-token scenario ref names among objs, the ref's seat's
+     * own objects in the caller's zone order: the rank-th whose scenario name
+     * matches. A rank-free ref is #1. Null when the ref names no such
+     * object. */
+    static mage.MageObject refRankChoice(String ref, List<mage.MageObject> objs,
+            java.util.function.Function<mage.MageObject, String> setupName) {
+        String name = refName(ref);
+        int wanted = 1;
+        int hash = ref.lastIndexOf('#');
+        if (hash >= 0 && ref.substring(hash + 1).matches("[0-9]+")) {
+            wanted = Integer.parseInt(ref.substring(hash + 1));
+        }
+        int seen = 0;
+        for (mage.MageObject o : objs) {
+            if (!setupName.apply(o).equals(name)) {
+                continue;
+            }
+            if (++seen == wanted) {
+                return o;
+            }
+        }
+        return null;
+    }
+
     private void bindOneAlias(String ref) {
         if (refAlias.containsKey(ref) || currentGame == null) {
             return;
@@ -2358,15 +2382,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 if (pl.getId().equals(c.getOwnerId())) objs.add(c);
             }
             for (Card c : pl.getLibrary().getCards(currentGame)) objs.add(c);
-            for (mage.MageObject o : objs) {
-                if (!setupName(o).equals(name)) {
-                    continue;
-                }
-                if (++seen == wanted) {
-                    match = o;
-                    break;
-                }
-            }
+            // objs is already scoped to the ref's seat, so "p1:<name>" never
+            // binds a same-named card another seat owns.
+            match = refRankChoice(ref, objs, this::setupName);
         }
         if (match == null) {
             return;
@@ -2742,7 +2760,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** The XMage target string for one scenario target ref: its alias when
-     * setup bound one, else the stripped, XMage-spelled card name. */
+     * setup bound one, else the stripped, XMage-spelled card name. A scripted
+     * xmage_answers target binds a post-setup ref (bindAnswerAlias) before it
+     * gets here. */
     private String targetName(String ref) {
         String a = refAlias.get(ref);
         return a != null ? a : xmageSpelling(refName(ref));
