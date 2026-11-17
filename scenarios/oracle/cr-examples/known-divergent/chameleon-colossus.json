@@ -1,6 +1,6 @@
 {
  "card": "Chameleon Colossus",
  "rows": {
-  "negative-power-pump-does-not-make-it-worse": "CR 107.1b: after two -5/-0 effects the 4/4 is -6/4, and its +X/+X activation must leave it at -6/4 because a negative calculation yields zero. Observed: the activation leaves it 4/4, losing the -5/-0 effects."
+  "negative-power-pump-does-not-make-it-worse": "CR 107.1b: with -6 power the pump should compute X as zero and leave the body at -6/4. Observed: activating it produced 4/4, discarding the earlier -5/-0 effects."
  }
 }

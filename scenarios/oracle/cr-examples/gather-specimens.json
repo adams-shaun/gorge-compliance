@@ -1,0 +1,95 @@
+{
+ "card": "Gather Specimens",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "2f9675345373",
+ "scenarios": [
+  {
+   "name": "dermoplasm-puts-a-morph-under-the-opponent",
+   "cr": [
+    "118.12"
+   ],
+   "why": "Gather Specimens changes who receives a creature that would enter under its caster's opponent. Turning Dermoplasm face up puts a morph card from its controller's hand onto the battlefield; that card lands under the Gather Specimens caster instead, while Dermoplasm still returns to the hand of the player who owns it because the choice was made.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Dermoplasm",
+      "Akroma, Angel of Fury"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Gather Specimens"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Gather Specimens",
+     "mana": "CCCUUU"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Dermoplasm",
+     "cast_mode": "morphed",
+     "mana": "CCC"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "CCUU"
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Dermoplasm",
+     "ability": "Turn face up"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Akroma, Angel of Fury"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Dermoplasm",
+     "zone": "hand"
+    },
+    {
+     "card": "p1:Akroma, Angel of Fury",
+     "zone": "battlefield",
+     "pt": "6/6",
+     "keywords": [
+      "Flying",
+      "Trample"
+     ]
+    },
+    {
+     "hand_size": {
+      "p0": 1
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -9,7 +9,7 @@
    "cr": [
     "510.1c"
    ],
-   "why": "The 4/3 attacker is blocked by a 2/3 and a 1/1. Its controller may divide all 4 damage among them; sending all 4 to the 1/1 is one of the legal divisions, so the 2/3 survives while the blockers' 3 total damage is lethal to the attacker.",
+   "why": "The 4/3 attacker faces a 2/3 and a 1/1. Its controller can put all 4 damage on the 1/1, leaving the 2/3 alive; the two blockers together deal enough damage to kill the attacker.",
    "setup": {
     "p0": {
      "battlefield": [
@@ -52,7 +52,15 @@
     },
     {
      "op": "pass_to",
-     "step": "main2"
+     "step": "main2",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "0 to Vampire Spawn,4 to Helpful Hunter"
+       ]
+      }
+     ]
     }
    ],
    "expect": [

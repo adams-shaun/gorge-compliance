@@ -9,7 +9,7 @@
    "cr": [
     "111.3"
    ],
-   "why": "The activated ability creates a green 1/1 Saproling. A token has no mana cost, supertypes, rules text or abilities of its own, so the observable card is only its colour, type line and P/T.",
+   "why": "Jade Mage's activation makes a green 1/1 Saproling. The token's only observable features are its colour, creature type and body; it brings no keyword abilities of its own.",
    "setup": {
     "p0": {
      "battlefield": [
@@ -45,6 +45,21 @@
      "types": [
       "Creature",
       "Saproling"
+     ],
+     "no_types": [
+      "Artifact",
+      "Enchantment",
+      "Land",
+      "Planeswalker",
+      "Battle"
+     ],
+     "no_keywords": [
+      "Flying",
+      "Trample",
+      "Haste",
+      "Lifelink",
+      "Deathtouch",
+      "Vigilance"
      ],
      "colours": "G"
     },

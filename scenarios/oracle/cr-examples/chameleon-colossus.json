@@ -9,7 +9,7 @@
    "cr": [
     "107.1b"
    ],
-   "why": "Two -5/-0 effects leave the 4/4 as -6/4. Activating its +X/+X ability uses its power for X, but a negative calculation yields zero, so it stays -6/4 instead of becoming -12/-2 or similar.",
+   "why": "After two -5/-0 effects the 4/4 has -6 power. Its pump ability computes X from that negative power, which counts as zero, so the body remains -6/4 rather than getting even smaller.",
    "setup": {
     "p0": {
      "battlefield": [
