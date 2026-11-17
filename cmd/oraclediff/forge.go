@@ -43,6 +43,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/engine/rules/pay"
 )
 
 // defaultForgeOracleDir is the gitignored directory holding the Forge build
@@ -70,7 +71,11 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //   - Decisions are exported verbatim. pay_<C>, pay_generic and pay_life are
 //     pick kinds of gorge's hybrid/Phyrexian pip ask, and a mana-ability
 //     "activate" pick is a payment-window choice; Forge asks neither, so the
-//     driver does not count them as leftover.
+//     driver does not count them as leftover. A "Choose a mana ability of
+//     <name>" wheel on an activate step is dropped for the same reason: the
+//     step's ability_index already names the ability, so the driver poses no
+//     wheel. A colour pick of an any-colour ability stays (it is a real
+//     choice).
 //   - arrange: the picks are the cards kept on top in pick order; the
 //     pick_kinds name where the unpicked go (bottom, graveyard, exile, hand),
 //     in offered order. hideaway_bottom and dig_bottom leave none unpicked:
@@ -193,7 +198,8 @@ func forgeExportItem(reg *cards.Registry, it oraclegen.Item) (forgeRequest, rule
 // for steps the driver will not pose, and the steps are then rewritten.
 func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision) forgeRequest {
 	sha := gate.ItemSHA(it)
-	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, forgeDropDeclarationDecisions(it, decisions))
+	decisions = forgeDropNamedManaAbilityDecisions(reg, it, g, forgeDropDeclarationDecisions(it, decisions))
+	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, decisions)
 	it = forgeDeclarations(it)
 	return forgeRequest{
 		ID: it.ID, ScenarioSHA: sha, Item: it,
@@ -296,6 +302,95 @@ func forgeDropDeclarationDecisions(it oraclegen.Item, decisions []rules.OracleDe
 		out = append(out, d)
 	}
 	return out
+}
+
+// forgeDropNamedManaAbilityDecisions removes gorge's "Choose a mana ability of
+// <name>" decision for an activate step that already names the chosen ability
+// by ability_index. forgeAbilityLines sends the driver that exact ability's
+// script line, so Forge activates it and poses no ability wheel: the decision
+// would only be reported as an unconsumed gorge decision. A colour pick of an
+// any-colour ability is also pick kind "mana" but is a real choice, so a
+// decision is dropped only when its pick names the labelled ability itself.
+// Call it on the item before forgeDeclarations rewrites the steps, since
+// decisions carry the unrewritten step indexes. The input slice is not
+// modified; a list with nothing to drop is returned as is.
+func forgeDropNamedManaAbilityDecisions(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision) []rules.OracleDecision {
+	if it.Template != lower.Template && it.Template != lower.WindowTemplate {
+		return decisions
+	}
+	named := map[int]namedManaAbility{}
+	for i, st := range it.Steps {
+		if st.Op != "activate" || st.AbilityIndex == nil || st.Card == "" {
+			continue
+		}
+		if f := forgeAbilityFace(reg, it, st, g, i); f != nil {
+			named[i] = namedManaAbility{face: f, index: *st.AbilityIndex}
+		}
+	}
+	if len(named) == 0 {
+		return decisions
+	}
+	out := make([]rules.OracleDecision, 0, len(decisions))
+	for _, d := range decisions {
+		if a, ok := named[d.Step]; ok && a.drops(d) {
+			continue
+		}
+		out = append(out, d)
+	}
+	return out
+}
+
+// namedManaAbility is an activate step's resolved ability, the anchor for
+// dropping the "Choose a mana ability" wheel decision.
+type namedManaAbility struct {
+	face  *cards.Face
+	index int
+}
+
+// drops reports whether d is the wheel ask that chose a.face.Abilities[index]:
+// a one-pick choose_n whose only options are mana and whose pick is that
+// ability's wheel label. An explicit "Combo <colours>" ability is flattened
+// into one option per colour in the wheel (pay.ManaAbilityComboColours), so
+// its per-colour labels count when the face offers a wheel at all; a
+// single-ability source never poses the wheel, and its colour ask ("Add W" for
+// an "Add any color" ability) must stay. A "Chosen" production is labelled
+// with the source's recorded colour, so the wheel labels for every colour
+// count too.
+func (a namedManaAbility) drops(d rules.OracleDecision) bool {
+	if d.Kind != "choose_n" || d.Options <= 1 || len(d.Picks) != 1 || len(d.PickKinds) != len(d.Picks) {
+		return false
+	}
+	for _, kind := range d.PickKinds {
+		if kind != "mana" {
+			return false
+		}
+	}
+	if a.index < 0 || a.index >= len(a.face.Abilities) || a.face.Abilities[a.index] == nil {
+		return false
+	}
+	sa := a.face.Abilities[a.index]
+	if !cards.IsManaAbilitySA(sa) {
+		return false
+	}
+	labels := map[string]bool{pay.ManaAbilityLabel(sa, ""): true}
+	if len(a.face.ManaAbilities()) > 1 {
+		prefix := pay.ManaAbilityCostPrefix(sa)
+		for _, chosen := range []string{"W", "U", "B", "R", "G"} {
+			labels[pay.ManaAbilityLabel(sa, chosen)] = true
+			cols, ok := pay.ManaAbilityComboColours(sa, chosen)
+			if !ok {
+				continue
+			}
+			for _, col := range cols {
+				labels[prefix+"Add "+pay.ManaAmountPips(sa, col)] = true
+			}
+		}
+	}
+	pick := d.Picks[0]
+	if pick == "" && len(d.PickRefs) == 1 {
+		pick = d.PickRefs[0]
+	}
+	return labels[pick]
 }
 
 // forgeAbilityLines maps each step that names an ability by ability_index to
