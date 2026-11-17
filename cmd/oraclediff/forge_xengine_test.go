@@ -97,6 +97,53 @@ func TestForgeExportXengineItem(t *testing.T) {
 	}
 }
 
+// TestForgeExportDropsNamedManaAbilityChoice: an activate step that names its
+// ability by ability_index already sends the driver that exact line, so the
+// "Choose a mana ability of <name>" wheel decision at that step is dropped.
+// The same decision on a cast step, and a colour pick of the source's
+// any-colour ability, are real choices and stay.
+func TestForgeExportDropsNamedManaAbilityChoice(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	item := func(st oraclegen.Step) oraclegen.Item {
+		return oraclegen.Item{ID: "xe:manaab", Template: lower.Template,
+			Scenario: oraclegen.Scenario{Steps: []oraclegen.Step{st}}}
+	}
+	activate := func(card string, k int) oraclegen.Step {
+		return oraclegen.Step{Op: "activate", Seat: 0, Card: card, AbilityIndex: &k}
+	}
+	wheel := func(pick string, options int) rules.OracleDecision {
+		return rules.OracleDecision{
+			Step: 0, Seat: 0, Kind: "choose_n", Options: options, Min: 1, Max: 1,
+			Picks: []string{pick}, PickIdx: []int{0}, PickRefs: []string{pick},
+			PickKinds: []string{"mana"}, GorgeKind: "choose", First: pick, Via: "answer",
+		}
+	}
+	build := func(it oraclegen.Item, d rules.OracleDecision) []rules.OracleDecision {
+		return forgeBuildRequest(reg, it, rules.OracleResult{}, []rules.OracleDecision{d}).GorgeDecisions
+	}
+
+	// Turtle Lair's first ability is "{T}: Add {C}"; the wheel ask that chose
+	// it is the decision the driver never poses.
+	if got := build(item(activate("p0:Turtle Lair", 0)), wheel("Add C", 2)); len(got) != 0 {
+		t.Fatalf("named mana-ability wheel exported: %+v", got)
+	}
+	// The union wheel flattens an explicit two-colour ability into one option
+	// per colour; its pick still names the ability at ability_index.
+	if got := build(item(activate("p0:Hidden Lair", 1)), wheel("Add B", 2)); len(got) != 0 {
+		t.Fatalf("flattened combo mana-ability wheel exported: %+v", got)
+	}
+	// A cast's payment window is a real choice, and the payment array covers it.
+	cast := oraclegen.Step{Op: "cast", Seat: 0, Card: "p0:Grizzly Bears"}
+	if got := build(item(cast), wheel("Add C", 2)); len(got) != 1 {
+		t.Fatalf("cast step decision dropped: %+v", got)
+	}
+	// Turtle Lair's second ability adds any colour: "Add W" is its colour ask,
+	// not the wheel, so it must stay.
+	if got := build(item(activate("p0:Turtle Lair", 1)), wheel("Add W", 5)); len(got) != 1 {
+		t.Fatalf("any-colour colour pick dropped: %+v", got)
+	}
+}
+
 // TestXengineForgeExportEmptyDeclaration: an xengine item's empty attack or
 // block step reaches the Forge driver as a pass_to decision "priority" (which
 // the driver completes without consuming a priority), the pass before a
