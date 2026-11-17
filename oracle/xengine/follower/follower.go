@@ -70,8 +70,8 @@ type Follower struct {
 	// StopsInCleanup is a driver whose engine hands out priority in the
 	// cleanup step after an end-the-turn effect (class harness).
 	StopsInCleanup bool
-	// TrailingMisses is a driver that poses a cleanup discard or an optional
-	// trigger's yes/no past the item's last step. Such a strict miss alone is
+	// TrailingMisses is a driver that poses a cleanup discard, an optional
+	// trigger's yes/no or a library search's card pick past the item's last step. Such a strict miss alone is
 	// not a decision_shape finding.
 	TrailingMisses bool
 	// TapsWithCast is a driver that runs a mana tap and the cast it leads to
