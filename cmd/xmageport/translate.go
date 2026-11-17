@@ -15,6 +15,9 @@ import (
 type refusal struct {
 	Code   string
 	Detail string
+	// onlyIf, when set on a shape refusal, further limits it to runs whose
+	// fails satisfy it (a shape that only some failures are evidence of).
+	onlyIf func(fails []string) bool
 }
 
 func (r *refusal) Error() string { return r.Code + ": " + r.Detail }
@@ -188,6 +191,13 @@ type translator struct {
 	choiceList        []choice
 	droppedOrder      int
 	droppedOrderTexts []string
+	// droppedPreAsserts counts asserts written before execute(): XMage runs
+	// them against the game as it is before the test's setup lands, so they
+	// state the empty starting state, never the state at the stop step.
+	droppedPreAsserts int
+	// countShape is the count-name-not-a-card shape: the first positive count
+	// asserted by a name no card has (see countNameRefusal).
+	countShape *refusal
 	// queueShape is the target-queue-order refusal of a one-seat run of
 	// addTargets that each carry their own yes/no; it applies only on failure.
 	queueShape *refusal
@@ -217,6 +227,76 @@ type translator struct {
 func p0(v value) int {
 	p, _ := seatOf(v)
 	return p
+}
+
+// triggeredKeywords are the keyword abilities whose triggers XMage lists by
+// the keyword's own name ("Afterlife", "Evolve") when a test orders
+// simultaneous triggers, where other triggers are listed by rule text.
+var triggeredKeywords = map[string]bool{
+	"Afflict": true, "Afterlife": true, "Annihilator": true, "Backup": true, "Battle cry": true,
+	"Bushido": true, "Cascade": true, "Dethrone": true, "Enlist": true, "Evolve": true,
+	"Exalted": true, "Exploit": true, "Extort": true, "Fabricate": true, "Flanking": true,
+	"Melee": true, "Mentor": true, "Myriad": true, "Persist": true, "Prowess": true,
+	"Rampage": true, "Renown": true, "Ripple": true, "Soulbond": true, "Storm": true,
+	"Training": true, "Undying": true,
+}
+
+// triggeredKeywordName returns the triggered keyword a string names, if any:
+// "Afterlife", or "Afterlife 1" with a count.
+func triggeredKeywordName(s string) string {
+	kw := strings.TrimSpace(s)
+	if i := strings.LastIndexByte(kw, ' '); i > 0 && allDigits(kw[i+1:]) {
+		kw = kw[:i]
+	}
+	if triggeredKeywords[kw] {
+		return kw
+	}
+	return ""
+}
+
+// isTriggerOrderChoice reports whether a setChoice string names a triggered
+// keyword ("Afterlife", or "Afterlife 1"), which orders simultaneous triggers.
+// Several of those keyword names are also card names (Afterlife, Afflict,
+// Melee, Persist...), and XMage's corpus has tests that name such a card as an
+// answer, so the keyword form counts only when the scenario does not set up a
+// card of exactly that name. Rule text is decided by isTriggerOrderText before
+// the setup is known.
+func (t *translator) isTriggerOrderChoice(s string) bool {
+	return triggeredKeywordName(s) != "" && !t.setupHasName(s)
+}
+
+// setupHasName reports whether either seat's addCard setup names a card
+// exactly name. The trigger-order drop uses it: "Afterlife" is both a keyword
+// and a card, so a scenario that sets the card up may name it as an answer.
+func (t *translator) setupHasName(name string) bool {
+	for p := 0; p < 2; p++ {
+		for _, ac := range t.setup[p] {
+			if sameName(ac.name, name) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// dropTriggerOrderChoices removes the setChoice strings that order
+// simultaneous triggers. It runs after read() has seen every addCard, because
+// whether a keyword-named choice is a trigger order depends on the scenario's
+// own setup (a card named Afterlife in hand is an answer, not an order).
+func (t *translator) dropTriggerOrderChoices() {
+	kept := t.choiceList[:0]
+	for _, ch := range t.choiceList {
+		name, ok := strings.CutPrefix(ch.pick, "name:")
+		if !ok || ch.target || !t.isTriggerOrderChoice(name) {
+			kept = append(kept, ch)
+			continue
+		}
+		// gorge's runner keeps the offered order. Dropped (the asserts still
+		// judge the outcome) and noted in why.
+		t.droppedOrder++
+		t.droppedOrderTexts = append(t.droppedOrderTexts, name)
+	}
+	t.choiceList = kept
 }
 
 func isTriggerOrderText(s string) bool {
@@ -528,6 +608,9 @@ func translate(reg *cards.Registry, jc *javaClass, m *javaMethod, family string)
 	if res.shape == nil {
 		res.shape = t.queueShape
 	}
+	if res.shape == nil {
+		res.shape = t.countShape
+	}
 	return res
 }
 
@@ -571,6 +654,12 @@ func (t *translator) read() *refusal {
 		calls = append(calls, c)
 	}
 	executed := false
+	hasExecute := false
+	for _, c := range calls {
+		if c.Name == "execute" {
+			hasExecute = true
+		}
+	}
 	for i, c := range calls {
 		if c.Recv != "" && c.Recv != "this" && c.Recv != "super" {
 			if c.Recv == "Assert" || strings.HasPrefix(c.Name, "assert") {
@@ -591,6 +680,10 @@ func (t *translator) read() *refusal {
 				return refuse("multi-execute", "execute() called more than once")
 			}
 			executed = true
+		}
+		if hasExecute && !executed && strings.HasPrefix(c.Name, "assert") && !ignoredCalls[c.Name] {
+			t.droppedPreAsserts++
+			continue
 		}
 		if ignoredCalls[c.Name] {
 			continue
@@ -624,6 +717,7 @@ func (t *translator) read() *refusal {
 		return r
 	}
 	t.addAIAnswers()
+	t.dropTriggerOrderChoices()
 	t.assignChoices()
 	if t.orphanMode {
 		return refuse("mode-choice", "setModeChoice with no cast to consume it")
@@ -1191,8 +1285,9 @@ func (t *translator) readCall(idx int, c call) *refusal {
 			return nil
 		}
 		for i := 0; i < times; i++ {
-			// a counted setChoice names n distinct objects of that name.
-			if times > 1 && !ch.target {
+			// a counted setChoice or addTarget names n distinct objects of
+			// that name.
+			if times > 1 {
 				ch.ord = i
 			}
 			t.choiceList = append(t.choiceList, ch)
