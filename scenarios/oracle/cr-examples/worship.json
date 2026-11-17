@@ -1,0 +1,89 @@
+{
+ "card": "Worship",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e9a2bd5123c8",
+ "scenarios": [
+  {
+   "name": "prevented-damage-plus-life-gain-keeps-worship-idle",
+   "cr": [
+    "120.4d"
+   ],
+   "why": "The defending player is at 2 life with Worship and a creature. Awe Strike prevents one attacker's 5 damage and gains 5 life, while the other attacker deals 5. The damage event nets to no life change, so Worship never sees a drop below 1 and does not replace anything; the player ends at 2 life.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Shivan Dragon",
+      "Shivan Dragon"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Worship",
+      "Wind Drake"
+     ],
+     "hand": [
+      "Awe Strike"
+     ],
+     "life": 2
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Shivan Dragon",
+      "p0:Shivan Dragon#2"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "seat": 1,
+     "blocks": []
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Awe Strike",
+     "mana": "W",
+     "targets": [
+      "p0:Shivan Dragon"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "main2"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 20,
+      "p1": 2
+     }
+    },
+    {
+     "card": "p1:Worship",
+     "zone": "battlefield"
+    },
+    {
+     "card": "p1:Wind Drake",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}
