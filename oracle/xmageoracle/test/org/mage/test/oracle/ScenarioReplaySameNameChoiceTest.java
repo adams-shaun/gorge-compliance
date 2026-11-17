@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import org.mage.test.player.PlayerAction;
@@ -30,6 +31,11 @@ public final class ScenarioReplaySameNameChoiceTest {
                         case "getName": return name;
                         case "isToken": return token;
                         case "getCreateOrder": return order;
+                        // The target fixtures run XMage's own filter/possible
+                        // set over this proxy, which asks these.
+                        case "isPhasedIn": return true;
+                        case "isCopy": return false;
+                        case "getExpansionSetCode": return "TST";
                         default: throw new AssertionError("unexpected call " + method);
                     }
                 });
@@ -38,6 +44,12 @@ public final class ScenarioReplaySameNameChoiceTest {
     private static void chosen(Permanent want, Permanent got) {
         if (want != got) {
             throw new AssertionError("choice selected the wrong object");
+        }
+    }
+
+    private static void equal(Object want, Object got) {
+        if (!want.equals(got)) {
+            throw new AssertionError("expected " + want + ", got " + got);
         }
     }
 
@@ -359,6 +371,228 @@ public final class ScenarioReplaySameNameChoiceTest {
         System.out.println("PASS production choice matcher overrides stale token aliases only inside a choice");
     }
 
+    /** The target path must keep a token ref's alias even when setup bound
+     * none, so the live choice matcher above can resolve it by creation
+     * order. A card ref with no alias keeps the bare-name fallback. */
+    private static void tokenTargetName() throws Exception {
+        java.lang.reflect.Field f = sun.misc.Unsafe.class.getDeclaredField("theUnsafe");
+        f.setAccessible(true);
+        sun.misc.Unsafe unsafe = (sun.misc.Unsafe) f.get(null);
+        ScenarioReplay owner = (ScenarioReplay) unsafe.allocateInstance(ScenarioReplay.class);
+        java.util.Map<String, String> refs = new java.util.LinkedHashMap<>();
+        set(owner, ScenarioReplay.class, "refAlias", refs);
+        set(owner, ScenarioReplay.class, "gorgeName", "");
+        set(owner, ScenarioReplay.class, "xmageName", "");
+        java.lang.reflect.Method targetName = ScenarioReplay.class.getDeclaredMethod("targetName", String.class);
+        targetName.setAccessible(true);
+        equal("@p0:token:Grizzly Bears", targetName.invoke(owner, "p0:token:Grizzly Bears"));
+        equal("@p1:token:Officer Token#2", targetName.invoke(owner, "p1:token:Officer Token#2"));
+        // An answer already carrying its alias is left alone: the funnel is
+        // idempotent for a hand-authored "@..." xmage_answers target.
+        equal("@p0:token:Grizzly Bears#2", targetName.invoke(owner, "@p0:token:Grizzly Bears#2"));
+        equal("@p0:Grizzly Bears", targetName.invoke(owner, "@p0:Grizzly Bears"));
+        equal("Grizzly Bears", targetName.invoke(owner, "p0:Grizzly Bears"));
+        refs.put("p0:Grizzly Bears", "@p0:Grizzly Bears");
+        equal("@p0:Grizzly Bears", targetName.invoke(owner, "p0:Grizzly Bears"));
+        System.out.println("PASS token target refs keep their alias for live creation-order resolution");
+    }
+
+    /** The target surface the production chooseTarget/chooseTargetAmount
+     * overrides read, with the legal set and chosen id under test control. */
+    private static final class PermanentTarget implements java.lang.reflect.InvocationHandler {
+        private final mage.target.TargetPermanent original = new mage.target.TargetPermanent();
+        private final Set<UUID> possible;
+        UUID chosen;
+        int chosenCount;
+
+        PermanentTarget(UUID only) {
+            possible = new LinkedHashSet<>(List.of(only));
+        }
+
+        mage.target.Target target() {
+            return (mage.target.Target) Proxy.newProxyInstance(mage.target.Target.class.getClassLoader(),
+                    new Class<?>[]{mage.target.Target.class}, this);
+        }
+
+        @Override
+        public Object invoke(Object proxy, java.lang.reflect.Method method, Object[] args) {
+            switch (method.getName()) {
+                case "getAffectedAbilityControllerId": return args[0];
+                case "getOriginalTarget": return original;
+                case "getMinNumberOfTargets": return 1;
+                case "getMaxNumberOfTargets": return 1;
+                case "getSize": return chosenCount;
+                case "getTargets":
+                    return chosen == null ? new ArrayList<UUID>() : new ArrayList<>(List.of(chosen));
+                case "clearChosen": return null;
+                case "possibleTargets": return possible;
+                case "contains": return false;
+                case "canTarget": return true;
+                case "addTarget":
+                    if (args.length == 3) {
+                        chosen = (UUID) args[0];
+                        chosenCount++;
+                        return null;
+                    }
+                    throw new AssertionError("unexpected addTarget overload");
+                case "isChosen": return true;
+                case "getChooseHint": return null;
+                case "getTargetName": return "";
+                case "getMessage": return "Grizzly Bears";
+                case "isNotTarget": return false;
+                case "toString": return "PermanentTarget";
+                default: throw new AssertionError("unexpected target call " + method);
+            }
+        }
+    }
+
+    /** A divided-amount target with one legal recipient; the production
+     * chooseTargetAmount reads its queue and chooses the recipient. */
+    private static final class AmountTarget extends mage.target.TargetAmount {
+        private final Set<UUID> possible;
+
+        AmountTarget(UUID only) {
+            super(mage.abilities.dynamicvalue.common.StaticValue.get(1), 1, 1);
+            possible = new LinkedHashSet<>(List.of(only));
+        }
+
+        @Override
+        public AmountTarget copy() {
+            return this;
+        }
+
+        @Override
+        public mage.filter.Filter getFilter() {
+            return mage.filter.StaticFilters.FILTER_PERMANENT;
+        }
+
+        @Override
+        public String getTargetedName(Game game) {
+            return "";
+        }
+
+        @Override
+        public boolean canChoose(UUID playerId, Ability source, Game game) {
+            return true;
+        }
+
+        @Override
+        public Set<UUID> possibleTargets(UUID controllerId, Ability source, Game game) {
+            return possible;
+        }
+
+        @Override
+        public boolean canTarget(UUID id, Ability source, Game game) {
+            return true;
+        }
+
+        @Override
+        public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+            return true;
+        }
+    }
+
+    /** The live choice game both target entry points need: one battlefield
+     * permanent, answered lookup so the matcher can resolve a token ref. */
+    private static Game liveGame(mage.game.permanent.Battlefield board, Permanent only) {
+        return (Game) Proxy.newProxyInstance(Game.class.getClassLoader(),
+                new Class<?>[]{Game.class}, (proxy, method, args) -> {
+                    switch (method.getName()) {
+                        case "getBattlefield": return board;
+                        case "getRangeOfInfluence": return mage.constants.RangeOfInfluence.ALL;
+                        case "getObject": return only.getId().equals(args[0]) ? only : null;
+                        case "getPermanent": return only.getId().equals(args[0]) ? only : null;
+                        case "getCard": return null;
+                        case "isSimulation": return true;
+                        case "getPlayer": return null;
+                        case "getPlayers": return new LinkedHashMap<UUID, mage.players.Player>();
+                        default: throw new AssertionError("unexpected game call " + method);
+                    }
+                });
+    }
+
+    /** The production chooseTarget/chooseTargetAmount overrides, not just the
+     * matcher they hand choiceGame to: a token alias queued through the real
+     * entry point must resolve against the live battlefield's creation order.
+     * The setup alias deliberately points at a token that is no longer live,
+     * so only the choice-game wiring makes the queued alias match. */
+    private static void targetEntryPointsResolveLive() throws Exception {
+        ScenarioReplay owner = (ScenarioReplay) unsafe().allocateInstance(ScenarioReplay.class);
+        Class<?> type = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
+        java.lang.reflect.Constructor<?> ctor = type.getDeclaredConstructor(
+                org.mage.test.player.TestComputerPlayer.class, ScenarioReplay.class);
+        ctor.setAccessible(true);
+        org.mage.test.player.TestPlayer player = (org.mage.test.player.TestPlayer) ctor.newInstance(
+                new org.mage.test.player.TestComputerPlayer("PlayerA", mage.constants.RangeOfInfluence.ALL), owner);
+        seat(owner, "playerA", player);
+        UUID own = player.getId();
+        Permanent stale = object(own, true, 1), live = object(own, true, 2);
+        mage.game.permanent.Battlefield board = new mage.game.permanent.Battlefield();
+        board.addPermanent(live);
+        player.addAlias("p0:token:Grizzly Bears", stale.getId());
+        Game game = liveGame(board, live);
+
+        PermanentTarget permanent = new PermanentTarget(live.getId());
+        player.addTarget("@p0:token:Grizzly Bears");
+        check(player.chooseTarget(mage.constants.Outcome.Benefit, permanent.target(), null, game),
+                "chooseTarget did not accept the live token alias");
+        equal(live.getId(), permanent.chosen);
+        check(player.getTargets().isEmpty(), "chooseTarget left the target answer queued");
+        check(get(player, type, "choiceGame") == null, "chooseTarget must restore the outer choice game");
+
+        AmountTarget amount = new AmountTarget(live.getId());
+        player.addTarget("@p0:token:Grizzly Bears^X=1");
+        check(player.chooseTargetAmount(mage.constants.Outcome.Benefit, amount, null, game),
+                "chooseTargetAmount did not accept the live token alias");
+        check(amount.getTargets().contains(live.getId()),
+                "chooseTargetAmount chose " + amount.getTargets() + ", not the live token");
+        check(player.getTargets().isEmpty(), "chooseTargetAmount left the target answer queued");
+        check(get(player, type, "choiceGame") == null, "chooseTargetAmount must restore the outer choice game");
+        System.out.println("PASS token target refs resolve through chooseTarget and chooseTargetAmount");
+    }
+
+    /** XMage's inline castSpell $target= form sets targets in addTargets,
+     * before any chooseTarget ask. The new divided multi-target path uses the
+     * amount-target name helper, so a token ref reaches this entry point as
+     * "@...:token:"; it must resolve live here too. */
+    @SuppressWarnings("unchecked")
+    private static void inlineTargetsResolveLive() throws Exception {
+        ScenarioReplay owner = (ScenarioReplay) unsafe().allocateInstance(ScenarioReplay.class);
+        Class<?> type = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
+        java.lang.reflect.Constructor<?> ctor = type.getDeclaredConstructor(
+                org.mage.test.player.TestComputerPlayer.class, ScenarioReplay.class);
+        ctor.setAccessible(true);
+        org.mage.test.player.TestPlayer player = (org.mage.test.player.TestPlayer) ctor.newInstance(
+                new org.mage.test.player.TestComputerPlayer("PlayerA", mage.constants.RangeOfInfluence.ALL), owner);
+        seat(owner, "playerA", player);
+        UUID own = player.getId();
+        Permanent stale = object(own, true, 1), live = object(own, true, 2);
+        mage.game.permanent.Battlefield board = new mage.game.permanent.Battlefield();
+        board.addPermanent(live);
+        player.addAlias("p0:token:Grizzly Bears", stale.getId());
+        Game game = liveGame(board, live);
+
+        PermanentTarget permanent = new PermanentTarget(live.getId());
+        mage.abilities.Modes modes = new mage.abilities.Modes();
+        modes.getMode().addTarget(permanent.target());
+        Ability ability = (Ability) Proxy.newProxyInstance(Ability.class.getClassLoader(),
+                new Class<?>[]{Ability.class}, (proxy, method, args) -> {
+                    switch (method.getName()) {
+                        case "getModes": return modes;
+                        case "getControllerId": return own;
+                        case "getSourceId": return null;
+                        case "toString": return "Test Ability";
+                        default: throw new AssertionError("unexpected ability call " + method);
+                    }
+                });
+        set(player, org.mage.test.player.TestPlayer.class, "groupsForTargetHandling",
+                new String[]{"", "target=@p0:token:Grizzly Bears"});
+        check(player.addTargets(ability, game), "addTargets rejected the live token alias");
+        equal(live.getId(), permanent.chosen);
+        check(get(player, type, "choiceGame") == null, "addTargets must restore the outer choice game");
+        System.out.println("PASS inline $target= token refs resolve live through addTargets");
+    }
+
     public static void main(String[] args) throws Exception {
         UUID own = UUID.randomUUID(), other = UUID.randomUUID();
         Permanent original = object(own, false, 1);
@@ -384,5 +618,8 @@ public final class ScenarioReplaySameNameChoiceTest {
         combatRefs();
         exactCombatBatches();
         liveMatcher();
+        tokenTargetName();
+        targetEntryPointsResolveLive();
+        inlineTargetsResolveLive();
     }
 }
