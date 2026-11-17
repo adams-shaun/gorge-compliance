@@ -957,8 +957,9 @@ func (t *translator) countNameRefusal(p int, zone, name string, want int) *refus
 // can be a permanent (Awakening of Vitu-Ghazi, an instant, cannot; that is why
 // Tomik's "Vitu-Ghazi" remains the rename shape). Tokens exist only on the
 // battlefield, so a token script's printed name covers a battlefield count.
-// A renamed permanent's new name matches no card and no token, which is the
-// shape refused here.
+// The other seat's setup counts too for a battlefield count (control can
+// change). A renamed permanent's new name matches no card and no token, which
+// is the shape refused here.
 func (t *translator) countNameExpressible(p int, zone, name string) bool {
 	ln := strings.ToLower(name)
 	for _, pl := range t.places[p] {
@@ -971,6 +972,14 @@ func (t *translator) countNameExpressible(p int, zone, name string) bool {
 	}
 	if zone != "battlefield" {
 		return false
+	}
+	// The other seat's permanent can be controlled by p (Act of Treason), so
+	// a battlefield count by its name is expressible whatever zone it is set
+	// up in, as long as it can be a permanent.
+	for _, pl := range t.places[1-p] {
+		if strings.Contains(strings.ToLower(pl.name), ln) && (pl.zone == "battlefield" || t.canBePermanent(pl.name)) {
+			return true
+		}
 	}
 	for _, c := range t.reg.Tokens {
 		if c == nil || len(c.Faces) == 0 || c.Faces[0] == nil {

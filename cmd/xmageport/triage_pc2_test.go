@@ -165,18 +165,18 @@ func TestCountByATokenNameKeepsItsFailingExpect(t *testing.T) {
 	}
 }
 
-// The runner counts by substring of the printed name, so "Avacyn" can count
-// "Avacyn, Angel of Hope". A failing partial-card count (the Angel was exiled,
-// so the count reads 0) must stay fail-expect rather than be refused as a name
-// no card has.
+// The runner counts by substring of the printed name, so "A-Baba" can count
+// "A-Baba Lysaga, Night Witch" (a name no token script shares, so only the
+// placement scan can make it expressible). A failing partial-card count must
+// stay fail-expect rather than be refused as a name no card has.
 func TestCountByAPartialCardNameKeepsItsFailingExpect(t *testing.T) {
-	res := translateBody(t, `addCard(Zone.BATTLEFIELD, playerA, "Avacyn, Angel of Hope");
+	res := translateBody(t, `addCard(Zone.BATTLEFIELD, playerA, "A-Baba Lysaga, Night Witch");
         addCard(Zone.BATTLEFIELD, playerA, "Plains");
         addCard(Zone.HAND, playerA, "Swords to Plowshares");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swords to Plowshares", "Avacyn, Angel of Hope");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swords to Plowshares", "A-Baba Lysaga, Night Witch");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertPermanentCount(playerA, "Avacyn", 1);`)
+        assertPermanentCount(playerA, "A-Baba", 1);`)
 	if res.Scenario == nil {
 		t.Fatalf("refused early %s: %s", res.Code, res.Detail)
 	}
@@ -186,16 +186,36 @@ func TestCountByAPartialCardNameKeepsItsFailingExpect(t *testing.T) {
 	}
 	// a permanent card in hand can be cast onto the battlefield, so the same
 	// partial name is expressible there too even before it is played
-	res = translateBody(t, `addCard(Zone.HAND, playerA, "Avacyn, Angel of Hope");
+	res = translateBody(t, `addCard(Zone.HAND, playerA, "A-Baba Lysaga, Night Witch");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertPermanentCount(playerA, "Avacyn", 1);`)
+        assertPermanentCount(playerA, "A-Baba", 1);`)
 	if res.Scenario == nil {
 		t.Fatalf("refused a permanent in hand %s: %s", res.Code, res.Detail)
 	}
 	runResult(testutilRegistry(t), res)
 	if res.Status != "fail-expect" || res.Code != "" {
 		t.Fatalf("status %s code %q (%v), want the fail-expect of a permanent still in hand", res.Status, res.Code, res.Fails)
+	}
+}
+
+// A battlefield count by a partial name of a card the OTHER seat has can be
+// met (Act of Treason hands it over), so a count that reads 0 after control
+// ends is a fail-expect, not a count by a name no card has.
+func TestCountByPartialNameOfTheOtherSeatsCardKeepsItsFailingExpect(t *testing.T) {
+	res := translateBody(t, `addCard(Zone.BATTLEFIELD, playerB, "A-Baba Lysaga, Night Witch");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, "Act of Treason");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Act of Treason", "A-Baba Lysaga, Night Witch");
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+        assertPermanentCount(playerA, "A-Baba", 1);`)
+	if res.Scenario == nil {
+		t.Fatalf("refused early %s: %s", res.Code, res.Detail)
+	}
+	runResult(testutilRegistry(t), res)
+	if res.Status != "fail-expect" || res.Code != "" {
+		t.Fatalf("status %s code %q (%v), want the fail-expect of control that has ended", res.Status, res.Code, res.Fails)
 	}
 }
 
