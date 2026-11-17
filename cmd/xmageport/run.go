@@ -91,6 +91,33 @@ func execScenario(reg *cards.Registry, sc *portScenario) (*rules.OracleAuditResu
 
 var reFallback = regexp.MustCompile(`\[\w+ fallback\] p\d (\w+) ->`)
 
+var reContinueAck = regexp.MustCompile(`^\s+\[\w+ fallback\] p\d choose -> \["Continue"\]`)
+
+// hasContinueAck reports whether the runner answered a bare "Continue"
+// acknowledgement by its fallback.
+func hasContinueAck(transcript []string) bool {
+	for _, l := range transcript {
+		if reContinueAck.MatchString(l) {
+			return true
+		}
+	}
+	return false
+}
+
+var reSetupFallback = regexp.MustCompile(`^\s+\[setup fallback\] p\d (\w+) ->`)
+
+// setupDecision returns the first decision kind the runner answered by its
+// fallback while building the setup (before step 0), or "". An empty attack
+// or block declaration is not a choice a test states.
+func setupDecision(transcript []string) string {
+	for _, l := range transcript {
+		if m := reSetupFallback.FindStringSubmatch(l); m != nil && m[1] != "attackers" && m[1] != "blockers" {
+			return m[1]
+		}
+	}
+	return ""
+}
+
 // aiChoiceFallback returns the first decision kind the runner answered by
 // its fallback that is a real game choice (not an empty attack/block
 // declaration, which the test states with attack/block calls).
@@ -381,6 +408,24 @@ func targetAskKind(asks []fallbackAsk) (string, bool) {
 	return "", false
 }
 
+// paymentChooseOnly reports whether every choose/arrange/modes ask of a step
+// is a mana-payment choose ("Pay U": gorge's cost plumbing). An XMage
+// addTarget can only have been meant for a card choice, so re-homing it onto
+// such a choose is the unused-target-payment-choose shape, not a fix.
+func paymentChooseOnly(asks []fallbackAsk) bool {
+	seen := false
+	for _, a := range asks {
+		if a.Kind != "choose" && a.Kind != "arrange" && a.Kind != "modes" {
+			continue
+		}
+		seen = true
+		if !a.Pay {
+			return false
+		}
+	}
+	return seen
+}
+
 // mergeUnconsumedCardPick folds a leftover card choice into the earlier
 // single-pick answer of the same step: XMage states one addTarget per card for
 // an "and/or" search while gorge poses one multi-pick choose, so the first
@@ -493,19 +538,57 @@ func convertUnusedTargetsToAnswers(g *group, line, kind string) bool {
 func runResult(reg *cards.Registry, r *result) {
 	orig, sc0 := cloneGroups(r.Groups), r.Scenario
 	runResultMask(reg, r, 0)
-	if r.Status != "fail-expect" || r.nflips == 0 || r.nflips > 3 {
-		return
-	}
-	for mask := uint(1); mask < 1<<uint(r.nflips); mask++ {
-		r2 := *r
-		r2.Groups, r2.Scenario, r2.Dropped, r2.nflips = cloneGroups(orig), sc0, 0, 0
-		runResultMask(reg, &r2, mask)
-		if r2.Status == "pass" {
-			*r = r2
-			r.Scenario.Why += " A boolean XMage answers is the affirmative option of a two-option gorge ask that is listed second."
-			return
+	if r.Status == "fail-expect" && r.nflips > 0 && r.nflips <= 3 {
+		for mask := uint(1); mask < 1<<uint(r.nflips); mask++ {
+			r2 := *r
+			r2.Groups, r2.Scenario, r2.Dropped, r2.nflips = cloneGroups(orig), sc0, 0, 0
+			runResultMask(reg, &r2, mask)
+			if r2.Status == "pass" {
+				*r = r2
+				r.Scenario.Why += " A boolean XMage answers is the affirmative option of a two-option gorge ask that is listed second."
+				return
+			}
+			if shapeRefusalApplies(&r2) {
+				*r = r2
+				refuseShape(r)
+				return
+			}
 		}
 	}
+	if shapeRefusalApplies(r) {
+		refuseShape(r)
+	}
+}
+
+// shapeRefusalApplies reports whether r's failing run is the translator shape
+// r.shape names, and nothing harder. A replay diff or a harness failure is
+// the audit gate's own verdict and outranks a fail-expect row, so a shape can
+// never hide it; a row triaged as a known gorge bug keeps its fail-expect.
+func shapeRefusalApplies(r *result) bool {
+	if r.activeShape() == nil || r.Status != "fail-expect" {
+		return false
+	}
+	if r.Scenario != nil && knownBugs[r.Scenario.XMage] != "" {
+		return false
+	}
+	return r.ReplayDiff == "" && !anyHarness(r.Fails)
+}
+
+// activeShape is the shape refusal a failing run converts to: the one the
+// translator derived from the test, else the one the run's transcript showed.
+func (r *result) activeShape() *refusal {
+	if r.shape != nil {
+		return r.shape
+	}
+	return r.runShape
+}
+
+// refuseShape converts a failing run into the shape refusal r.shape names and
+// drops the scenario, so writeCommit does not write it.
+func refuseShape(r *result) {
+	sh := r.activeShape()
+	r.Code, r.Detail, r.Status = sh.Code, sh.Detail, "refused"
+	r.Scenario = nil
 }
 
 func cloneGroups(gs []*group) []*group {
@@ -523,6 +606,7 @@ func cloneGroups(gs []*group) []*group {
 
 func runResultMask(reg *cards.Registry, r *result, mask uint) {
 	sc := r.Scenario
+	r.runShape = nil
 	for _, g := range r.Groups {
 		g.kinds = make([]int, len(g.answers))
 	}
@@ -654,7 +738,14 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 				// ask is re-homed as its answer before the leftover is
 				// moved on to the next step.
 				if strings.Contains(line, "unused target(s)") {
-					if kind, ok := targetAskKind(asks[n]); ok {
+					if kind, ok := targetAskKind(asks[n]); ok && paymentChooseOnly(asks[n]) {
+						// The only choose is gorge's mana-payment plumbing
+						// ("Pay U"), which no addTarget answers: the targets
+						// stay on the step (where the run may still reproduce
+						// every assert) and move on as leftovers, and the
+						// row refuses only if it then fails.
+						r.shape = refuse("unused-target-payment-choose", "an XMage addTarget can only answer a card choice; the step poses only a mana-payment choose")
+					} else if ok {
 						for _, g := range at {
 							if convertUnusedTargetsToAnswers(g, line, kind) {
 								progress = true
@@ -746,6 +837,25 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 	r.nflips = flips.seq
 	if r.Dropped > 0 {
 		r.Scenario.Why += fmt.Sprintf(" %d XMage choice(s) gorge never asks were dropped.", r.Dropped)
+	}
+	if len(fails) > 0 && r.Dropped > 0 && r.Strict && knownBugs[sc.XMage] == "" {
+		// The test states choices gorge never asks where XMage does, or
+		// asks where XMage does not, so the answers found no home:
+		//   - a permanent in the setup triggers before the first step (a
+		//     turn-1 upkeep trigger) and no step can carry an answer to the
+		//     setup, so the runner took its fallback;
+		//   - gorge poses a bare "Continue" acknowledgement of a
+		//     look-at-top reveal (Birthing Ritual) that XMage never asks,
+		//     which the stated picks are then offered to.
+		// Neither refuses here: a replay diff or a harness failure is the
+		// audit gate's own verdict and outranks them, and the boolean-mask
+		// retries may still reproduce every assert. runResult applies the
+		// refusal after those, through shapeRefusalApplies.
+		if k := setupDecision(transcript); k != "" {
+			r.runShape = refuse("setup-decision", "a %s decision is posed before the first step", k)
+		} else if hasContinueAck(transcript) {
+			r.runShape = refuse("continue-acknowledgement", "gorge poses a bare Continue acknowledgement XMage never asks")
+		}
 	}
 	if k := aiChoiceFallback(transcript); len(fails) > 0 && !r.Strict && k != "" && knownBugs[sc.XMage] == "" {
 		// Without setStrictChooseMode(true) XMage's AI answered what the

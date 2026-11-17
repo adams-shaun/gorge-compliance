@@ -116,11 +116,16 @@ func (f *boolFlips) next() (invert bool) {
 type fallbackAsk struct {
 	Seat int
 	Kind string
+	// Pay marks a choose the runner answered by taking a mana-payment
+	// option ("Pay U": how a hybrid or phyrexian symbol is paid). It is
+	// gorge's cost plumbing, never a card choice an XMage addTarget or
+	// setChoice could be answering.
+	Pay bool
 }
 
 var (
 	reTranscriptStep = regexp.MustCompile(`^step [a-z_]+(?: |$)`)
-	reFallbackAsk    = regexp.MustCompile(`^\s+\[\w+ fallback\] p(\d) (\w+) ->`)
+	reFallbackAsk    = regexp.MustCompile(`^\s+\[\w+ fallback\] p(\d) (\w+) ->( \["Pay [^"]*"\])?`)
 )
 
 // fallbackAsks lists, per step index, the decisions the runner answered by
@@ -135,7 +140,7 @@ func fallbackAsks(transcript []string) map[int][]fallbackAsk {
 		}
 		if m := reFallbackAsk.FindStringSubmatch(l); m != nil && step >= 0 {
 			s, _ := strconv.Atoi(m[1])
-			out[step] = append(out[step], fallbackAsk{Seat: s, Kind: m[2]})
+			out[step] = append(out[step], fallbackAsk{Seat: s, Kind: m[2], Pay: m[3] != ""})
 		}
 	}
 	return out
