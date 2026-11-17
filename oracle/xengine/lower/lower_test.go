@@ -1090,3 +1090,64 @@ func TestLowerCastBargainOffered(t *testing.T) {
 
 // podOf is a 1v1 pair as the seat list game.Play and Windows take.
 func podOf(p [2]decks.Deck) []decks.Deck { return p[:] }
+
+// TestResolveAnswerConsumed: a resolve step carries only answers the runner
+// poses while it passes priority. A priority action taken while the trigger
+// sat on the stack (a Crew activation, a cast in response) is not replayed by
+// the resolve op, so the ask it posed (the tapcost choose) would stay queued and
+// gorge's runner would fail "unconsumed answer(s) for this step". Such a range
+// must not lower to a resolve step (farm class lower_gap:step # (resolve):
+// unconsumed answer(s), xe:RAND:1:10:w9 and xe:RAND:1:35:w13).
+func TestResolveAnswerConsumed(t *testing.T) {
+	d := game.Digest{Turn: 1, Step: "main1", Active: 0, Priority: 0}
+	prio := func(seat int, p game.Pick, top uint32) game.Entry {
+		return game.Entry{Kind: "priority", Seat: seat, Turn: 1, Step: "main1",
+			Picks: []game.Pick{p}, StackTop: stateID(top), Digest: d}
+	}
+	pass1 := prio(1, game.Pick{Kind: "pass"}, 7)
+	target := game.Entry{Kind: "target", Seat: 0, Turn: 1, Step: "main1", Digest: d,
+		StackTop: 9, Max: 1,
+		Picks: []game.Pick{{Kind: "permanent", Obj: stateID(42), Ref: "p1:Wayspeaker Bodyguard"}}}
+	crew := prio(0, game.Pick{Kind: "ability", Obj: stateID(50), Ref: "p0:Burner Rocket"}, 9)
+	tap := game.Entry{Kind: "choose", Seat: 0, Turn: 1, Step: "main1", Digest: d,
+		StackTop: 10, Max: 1,
+		Picks: []game.Pick{{Kind: "tapcost", Obj: stateID(43), Ref: "p0:Deathless Pilot"}}}
+	respond := prio(0, game.Pick{Kind: "cast", Ref: "p0:Shock"}, 9)
+	pass3 := prio(0, game.Pick{Kind: "pass"}, 10)
+	pass4 := prio(1, game.Pick{Kind: "pass"}, 10)
+	pass5 := prio(0, game.Pick{Kind: "pass"}, 9)
+	pass6 := prio(1, game.Pick{Kind: "pass"}, 9)
+	stop := prio(0, game.Pick{Kind: "pass"}, 0)
+
+	for _, tc := range []struct {
+		name string
+		es   []game.Entry
+	}{
+		{"crew activation in response", []game.Entry{pass1, target, crew, tap, pass3, pass4, pass5, pass6, stop}},
+		{"cast in response", []game.Entry{pass1, target, respond, pass3, pass4, pass5, pass6, stop}},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			var l Lowered
+			l.lowerEntries(nil, seatMap{}, tc.es, 0, false)
+			for i, s := range l.Item.Steps {
+				if s.Op == "resolve" {
+					t.Fatalf("step %d is a resolve step %+v over an action the runner cannot replay", i, s)
+				}
+			}
+			if l.Truncated == "" {
+				t.Fatalf("lowered to %d steps without truncating; the action was dropped silently", len(l.Item.Steps))
+			}
+		})
+	}
+
+	t.Run("passes only still resolve", func(t *testing.T) {
+		pass2 := prio(0, game.Pick{Kind: "pass"}, 9)
+		pass3 := prio(1, game.Pick{Kind: "pass"}, 9)
+		var l Lowered
+		l.lowerEntries(nil, seatMap{}, []game.Entry{pass1, target, pass2, pass3, stop}, 0, false)
+		if l.Truncated != "" || len(l.Item.Steps) != 2 || l.Item.Steps[0].Op != "resolve" ||
+			len(l.Item.Steps[0].Answers) != 1 {
+			t.Fatalf("steps %+v truncated %q, want one resolve step with the target answer", l.Item.Steps, l.Truncated)
+		}
+	})
+}
