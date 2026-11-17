@@ -85,6 +85,50 @@
      ]
     }
    ]
+  },
+  {
+   "name": "bestow-card-on-top-cannot-be-cast-bestowed",
+   "cr": [
+    "702.103d"
+   ],
+   "why": "The Horde only allows creature spells from the top of the library, and a bestowed cast is not a creature spell, so with a creature to enchant and enough mana the top card is offered as an ordinary cast but not as a bestow cast.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Garruk's Horde",
+      "Grizzly Bears"
+     ],
+     "library_top": [
+      "Hopeful Eidolon"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": "WWWW"
+    }
+   ],
+   "expect": [
+    {
+     "offered": {
+      "seat": 0,
+      "kind": "cast",
+      "card": "p0:Hopeful Eidolon"
+     },
+     "want": true
+    },
+    {
+     "offered": {
+      "seat": 0,
+      "kind": "cast",
+      "card": "p0:Hopeful Eidolon",
+      "label": "bestowed"
+     },
+     "want": false
+    }
+   ]
   }
  ]
 }
