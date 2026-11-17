@@ -14,7 +14,10 @@ import (
 //     reacts to mana "from a Treasure" / "from a Desert" spent on a spell
 //     (Rain of Riches, Cataclysmic Prospecting), or to "{S}" spent on it
 //     (Search for Glory, Berg Strider). Gorge tags pooled mana with its
-//     source only when the source's own mana ability is activated.
+//     source only when the source's own mana ability is activated. A land's
+//     own rider on its mana ("If that mana is spent on a creature spell, it
+//     gains haste", Hall of the Bandit Lord; "... can't be countered",
+//     Boseiju) is the same: the pool-seeded mana carries no such tag.
 //   - tapped-target-mana-source: a battlefield permanent's "target tapped
 //     nonland permanent" ability is aimed at a mana source the other seat
 //     pays with (The Spear of Bashenga on Mind Stone, "tapped to cast
@@ -26,7 +29,7 @@ import (
 // text must be the exact "target tapped nonland permanent" ability, so an
 // unrelated "target tapped creature" card in hand cannot refuse the row.
 var (
-	reManaFromSourceSpent     = regexp.MustCompile(`(?i)mana from an? [a-z]+ (?:was )?spent|\{S\}[^.\n]*\bspent\b|\bspent[^.\n]*\{S\}`)
+	reManaFromSourceSpent     = regexp.MustCompile(`(?i)mana from an? [a-z]+ (?:was )?spent|\{S\}[^.\n]*\bspent\b|\bspent[^.\n]*\{S\}|\bthat mana is spent\b`)
 	reTargetTappedNonlandPerm = regexp.MustCompile(`(?i)target tapped nonland permanent`)
 )
 

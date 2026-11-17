@@ -31,7 +31,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Oblivion Ring",
-     "mana": "CCW"
+     "mana": "WWW"
     },
     {
      "op": "pass_to",
@@ -109,7 +109,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Oblivion Ring",
-     "mana": "CCW"
+     "mana": "WWW"
     },
     {
      "op": "pass_to",
@@ -127,7 +127,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:Naturalize",
-     "mana": "CG",
+     "mana": "GG",
      "targets": [
       "p0:Oblivion Ring"
      ]
@@ -209,7 +209,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Oblivion Ring",
-     "mana": "CCW"
+     "mana": "WWW"
     },
     {
      "op": "pass_to",
@@ -231,7 +231,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:Revoke Existence",
-     "mana": "CW",
+     "mana": "WW",
      "targets": [
       "p0:Oblivion Ring"
      ]
@@ -323,7 +323,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Oblivion Ring",
-     "mana": "CCW"
+     "mana": "WWW"
     },
     {
      "op": "resolve",
@@ -343,7 +343,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Revoke Existence",
-     "mana": "CW",
+     "mana": "WW",
      "targets": [
       "p0:Oblivion Ring"
      ]
@@ -462,13 +462,14 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Hangarback Walker",
-     "mana": "CCCC",
+     "mana": "GGGG",
      "answers": [
       {
        "kind": "choose",
        "pick": [
         "2"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },
@@ -492,7 +493,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:Oblivion Ring",
-     "mana": "CCW"
+     "mana": "WWW"
     },
     {
      "op": "pass_to",
@@ -510,7 +511,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Naturalize",
-     "mana": "CG",
+     "mana": "GG",
      "targets": [
       "p1:Oblivion Ring"
      ]

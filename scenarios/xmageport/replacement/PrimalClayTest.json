@@ -27,7 +27,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Primal Clay",
-     "mana": "CCCC"
+     "mana": "UUUU"
     },
     {
      "op": "pass_to",
@@ -39,7 +39,8 @@
        "kind": "any",
        "pick": [
         "3/3"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },
@@ -82,7 +83,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Primal Clay",
-     "mana": "CCCC"
+     "mana": "UUUU"
     },
     {
      "op": "pass_to",
@@ -94,7 +95,8 @@
        "kind": "any",
        "pick": [
         "2/2"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },
@@ -157,7 +159,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Primal Clay",
-     "mana": "CCCC"
+     "mana": "UUUU"
     },
     {
      "op": "resolve",
@@ -167,7 +169,8 @@
        "kind": "any",
        "pick": [
         "3/3"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },
@@ -179,7 +182,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Cryptoplasm",
-     "mana": "CUU"
+     "mana": "UUU"
     },
     {
      "op": "pass_to",
@@ -190,15 +193,15 @@
     {
      "op": "pass_to",
      "seat": 0,
+     "targets": [
+      "p0:Primal Clay"
+     ],
      "step": "upkeep",
      "active": "p0"
     },
     {
      "op": "pass_to",
      "seat": 0,
-     "targets": [
-      "p0:Primal Clay"
-     ],
      "step": "upkeep",
      "active": "p1",
      "answers": [
@@ -206,7 +209,8 @@
        "kind": "any",
        "pick": [
         "yes"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },
@@ -224,7 +228,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:The Battle of Bywater",
-     "mana": "CWW"
+     "mana": "WWW"
     },
     {
      "op": "pass_to",
@@ -283,7 +287,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Aquamorph Entity",
-     "mana": "CCUU"
+     "mana": "UUUU"
     },
     {
      "op": "pass_to",
@@ -295,7 +299,8 @@
        "kind": "any",
        "pick": [
         "5/1"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },
@@ -341,7 +346,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Primal Clay",
-     "mana": "CCCC"
+     "mana": "WWWW"
     },
     {
      "op": "resolve",
@@ -351,7 +356,8 @@
        "kind": "any",
        "pick": [
         "2/2"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },
@@ -374,7 +380,8 @@
        "kind": "any",
        "pick": [
         "3/3"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },
@@ -429,7 +436,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Primal Clay",
-     "mana": "CCCC"
+     "mana": "WWWW"
     },
     {
      "op": "resolve",
@@ -439,7 +446,8 @@
        "kind": "any",
        "pick": [
         "1/6"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },
@@ -462,7 +470,8 @@
        "kind": "any",
        "pick": [
         "3/3"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },

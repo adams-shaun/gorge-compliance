@@ -634,6 +634,9 @@ func translate(reg *cards.Registry, jc *javaClass, m *javaMethod, family string)
 		res.shape = t.electShape
 	}
 	if res.shape == nil {
+		res.shape = t.familyShapes()
+	}
+	if res.shape == nil {
 		res.shape = t.emitShape
 	}
 	return res

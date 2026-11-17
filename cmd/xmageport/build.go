@@ -910,6 +910,30 @@ func countExpect(p int, zone, name string, n int) (*expect, *refusal) {
 	return &expect{Count: c, Eq: ip(n)}, nil
 }
 
+// countOf is countExpect plus the token-only rule: XMage counts the permanents
+// whose name IS the asserted one, but the runner counts the objects whose
+// printed name CONTAINS it, so a Role token's name ("Cursed") also counts the
+// card that happens to start with it ("Cursed Courtier"). A name no card
+// bears and a token script does can only be a token's, so the count is
+// restricted to tokens, which keeps the two readings equal.
+func (t *translator) countOf(p int, zone, name string, n int) (*expect, *refusal) {
+	e, r := countExpect(p, zone, name, n)
+	if r != nil || e == nil || e.Count == nil || e.Count.Token != nil || e.Count.Name == "" {
+		return e, r
+	}
+	if _, isCard := t.lookup(e.Count.Name); isCard {
+		return e, r
+	}
+	for _, c := range t.reg.Tokens {
+		if c != nil && len(c.Faces) > 0 && c.Faces[0] != nil && strings.EqualFold(c.Faces[0].Name, e.Count.Name) {
+			tr := true
+			e.Count.Token = &tr
+			break
+		}
+	}
+	return e, r
+}
+
 // countNameRefusal is the shape refusal of a positive count asserted by a name
 // no object can carry: a permanent an effect renamed (Awakening of Vitu-Ghazi
 // turns a land into "Vitu-Ghazi"). The scenario's count matches the printed
@@ -1054,7 +1078,7 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 			if r != nil {
 				return nil, r
 			}
-			e, r := countExpect(int(ref[1]-'0'), zone, name, n)
+			e, r := t.countOf(int(ref[1]-'0'), zone, name, n)
 			return []*expect{e}, r
 		case 3:
 			p, ok := seatOf(a[0])
@@ -1066,7 +1090,8 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 			if r := t.countNameRefusal(p, zone, name, n); r != nil && t.countShape == nil {
 				t.countShape = r
 			}
-			e, r := countExpect(p, zone, name, n)
+			t.tokenCapShape(zone, n)
+			e, r := t.countOf(p, zone, name, n)
 			return []*expect{e}, r
 		}
 		return bad()
@@ -1092,6 +1117,11 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 		if nm, rr := xmageName(name); rr == nil {
 			if r := t.anyScopePTConflict(p, nm, pt); r != nil {
 				return nil, r
+			}
+			// a mana ability that puts a -0/-1 counter (Wall of Roots) moves
+			// the P/T this asserts, and the runner pays from the pool
+			if t.manaSource(nm) && !t.manaSourceLand(nm) && t.paysFromPool(nm) && t.manaAbilityPutsCounter(nm) {
+				t.noteShape(refuse("mana-ability-counter", "%s's mana ability puts a counter that changes its P/T, and the runner pays from the pool", nm))
 			}
 		}
 		return []*expect{{Card: ref, PT: pt}}, nil
@@ -1119,6 +1149,9 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 		}
 		if nm, rr := xmageName(a[0].s); rr == nil && t.manaSource(nm) && !t.manaSourceLand(nm) && t.paysFromPool(nm) && t.manaAbilityPutsCounter(nm) {
 			t.noteShape(refuse("mana-ability-counter", "%s's mana ability puts the %s counter, and the runner pays from the pool", nm, kind))
+		}
+		if nm, rr := xmageName(a[0].s); rr == nil {
+			t.counterReplacedEntry(nm, kind)
 		}
 		return []*expect{{Card: ref, Counters: map[string]int32{kind: int32(a[2].n)}}}, nil
 	case "assertType", "assertSubtype", "assertNotSubtype":
@@ -1148,7 +1181,13 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 					e.NoTypes = []string{ty}
 				}
 			case vIdent:
-				e.Types = []string{ty, titleEnum(a[2].s)}
+				if a[2].s == "null" {
+					// assertType(name, type, null): XMage checks the type
+					// only; null states no subtype to require
+					e.Types = []string{ty}
+				} else {
+					e.Types = []string{ty, titleEnum(a[2].s)}
+				}
 			default:
 				return bad()
 			}

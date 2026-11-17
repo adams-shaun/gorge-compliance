@@ -51,7 +51,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Allied Reinforcements",
-     "mana": "CCCW"
+     "mana": "WWWW"
     },
     {
      "op": "resolve",
@@ -65,7 +65,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Angel of Serenity",
-     "mana": "CCCCWWW"
+     "mana": "WWWWWWW"
     },
     {
      "op": "pass_to",
@@ -74,10 +74,11 @@
      "active": "p0",
      "answers": [
       {
-       "kind": "trigger_optional",
+       "kind": "any",
        "pick": [
         "yes"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },

@@ -129,8 +129,9 @@ func TestCountByAnAnimatedNameRefusesOnlyWhenItFails(t *testing.T) {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertPermanentCount(playerA, "Vitu-Ghazi", 1);`)
-	// a count that fails by reading too MANY (RoleTest: "Cursed" matches
-	// Cursed Courtier as well as its Cursed Role) is not evidence of a rename
+	// a Role token's name ("Cursed") is a token's, so the count reads tokens
+	// only and no longer also reads Cursed Courtier (it read 2, a name
+	// matching too much, never a rename)
 	res = translateBody(t, `addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Nexus Wardens");
         addCard(Zone.HAND, playerA, "Cursed Courtier");
@@ -143,8 +144,8 @@ func TestCountByAnAnimatedNameRefusesOnlyWhenItFails(t *testing.T) {
 		t.Fatalf("refused early %s: %s", res.Code, res.Detail)
 	}
 	runResult(testutilRegistry(t), res)
-	if res.Status != "fail-expect" {
-		t.Fatalf("status %s code %q (%v), want the fail-expect of a count that read 2", res.Status, res.Code, res.Fails)
+	if res.Status != "pass" {
+		t.Fatalf("status %s code %q (%v), want a pass: the token-only count reads 1", res.Status, res.Code, res.Fails)
 	}
 }
 

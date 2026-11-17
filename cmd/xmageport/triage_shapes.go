@@ -38,9 +38,11 @@ func (t *translator) permittingObjectPick(seat int, card, pick string) bool {
 	return fromZone && permitting
 }
 
-// reManaAbilityCounter matches a {T} ability that puts a counter and then adds
-// mana (Empowered Autogenerator): the counter is a side effect of paying.
-var reManaAbilityCounter = regexp.MustCompile(`(?is)\{T\}[^\n]*\bput an? [^.\n]*counter\b[^\n]*\badd\b`)
+// reManaAbilityCounter matches a mana ability that puts a counter on the way:
+// "{T}, put a counter: add" (Empowered Autogenerator) or the counter as the
+// whole cost, "Put a -0/-1 counter on Wall of Roots: Add {G}". The counter is
+// a side effect of paying.
+var reManaAbilityCounter = regexp.MustCompile(`(?is)\{T\}[^\n]*\bput an? [^.\n]*counter\b[^\n]*\badd\b|(?:^|\\n)put an? [^.\n:\\]*counter[^.\n:\\]*:\s*add\b`)
 
 // manaAbilityPutsCounter reports whether the named card's own mana ability
 // puts a counter on it. The runner pays a cast from the pool, so that ability
