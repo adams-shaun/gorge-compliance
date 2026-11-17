@@ -75,7 +75,7 @@ check "ENV never reached go" $(! /usr/bin/grep -q '^go ' "$STUB_LOG" && echo 0 |
 t "pass" 0 "test-one: PASS" PKG=./p RUN=TestA STUB_EVENTS="$RUNEV\n$PASSEV"
 check "  ...verdict names the package" $([[ $LAST == *" ./p "* ]] && echo 0 || echo 1) "$LAST"
 check "  ...scoped under systemd-run with the cap" $(/usr/bin/grep -q 'systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% env TEST_TARGETS_SCOPED=1 GOMAXPROCS=4 GOMEMLIMIT=3GiB' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
-check "  ...go test -json -failfast, no -count" $(/usr/bin/grep -q '^go test -json -failfast -timeout 2m -run TestA ./p$' "$STUB_LOG" && ! /usr/bin/grep -q -- '-count' "$STUB_LOG" && echo 0 || echo 1) "$(/usr/bin/grep '^go' "$STUB_LOG")"
+check "  ...go test -json -failfast, no -count" $(/usr/bin/grep -q '^go test -json -failfast -timeout 2m -run TestA ./p$' "$STUB_LOG" && ! /usr/bin/grep '^go ' "$STUB_LOG" | /usr/bin/grep -q -- '-count' && echo 0 || echo 1) "$(/usr/bin/grep '^go' "$STUB_LOG")"
 check "  ...stream saved under .oracle-build/test" $(ls "$TMP"/work/.oracle-build/test/one-*.json >/dev/null 2>&1 && echo 0 || echo 1)
 
 t "flags pass through" 0 "test-one: PASS" PKG=./p RUN=TestA SKIP=Slow TAGS=a,b V=1 TIMEOUT=90s STUB_EVENTS="$RUNEV\n$PASSEV"

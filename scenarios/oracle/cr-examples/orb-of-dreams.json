@@ -1,0 +1,40 @@
+{
+ "card": "Orb of Dreams",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "8697dd87b4a4",
+ "scenarios": [
+  {
+   "name": "the-orb-does-not-tap-itself",
+   "cr": [
+    "614.12"
+   ],
+   "why": "The Orb's own static ability would tap each permanent as it enters, but the Orb is not yet on the battlefield when it would apply to itself, so it enters untapped.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Orb of Dreams"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Orb of Dreams",
+     "mana": "CCC"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Orb of Dreams",
+     "zone": "battlefield",
+     "tapped": false
+    }
+   ]
+  }
+ ]
+}

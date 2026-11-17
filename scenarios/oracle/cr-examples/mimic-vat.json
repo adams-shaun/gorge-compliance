@@ -1,0 +1,116 @@
+{
+ "card": "Mimic Vat",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "4578097d56d2",
+ "scenarios": [
+  {
+   "name": "no-imprinted-card-no-token",
+   "cr": [
+    "111.12"
+   ],
+   "why": "The Vat's activated ability copies a card that the Vat exiled. No card was exiled with it, so the activation produces no token.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Mimic Vat"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Mimic Vat",
+     "ability": "Create a token",
+     "mana": "CCC"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "",
+      "token": true
+     },
+     "eq": 0
+    },
+    {
+     "card": "p0:Mimic Vat",
+     "zone": "battlefield",
+     "tapped": true
+    },
+    {
+     "stack_size": 0
+    }
+   ]
+  },
+  {
+   "name": "a-melded-permanent-is-exiled-as-both-cards",
+   "cr": [
+    "713.8c"
+   ],
+   "why": "The Chittering Host is one permanent made of Midnight Scavengers and Graf Rats. When it dies, Mimic Vat asks a single yes-or-no question about that permanent, and answering yes exiles both of its component cards.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Mimic Vat",
+      "Midnight Scavengers",
+      "Graf Rats"
+     ],
+     "hand": [
+      "Doom Blade"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "begin-combat",
+     "active": "p0"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Doom Blade",
+     "mana": "CB",
+     "targets": [
+      "p0:Chittering Host"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Midnight Scavengers",
+     "zone": "exile"
+    },
+    {
+     "card": "p0:Graf Rats",
+     "zone": "exile"
+    },
+    {
+     "card": "p0:Mimic Vat",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

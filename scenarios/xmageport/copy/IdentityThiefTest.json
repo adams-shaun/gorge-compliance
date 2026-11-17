@@ -109,7 +109,7 @@
     }
    ],
    "xmage": "IdentityThiefTest#testCopyPrimalClay",
-   "known_bug": "XP[clone-setpt-not-copiable]: Primal Clay's as-enters choice is DB$ Clone Defined$ Self SetPower$/SetToughness$, which effClone registers as a separate layer-7b P/T effect (engine/effects/clone.go:591-596) instead of folding it into the copiable values, so Identity Thief copying Primal Clay gets printed */* = 0/0 and dies to SBA (probe: Identity Thief in p1 graveyard). CR 707.2 (as-enters P/T choices are copiable) / CR 707.9b. Secondary translation issue: assertPowerToughness(playerB,\"Primal Clay\") is mapped to p0's card ref because assertRef falls back to the other seat's card (cmd/xmageport/build.go:546) -- should be a seat-scoped battlefield-name P/T check."
+   "known_bug": "XP[clone-setpt-not-copiable]: Primal Clay's as-enters choice is DB$ Clone Defined$ Self SetPower$/SetToughness$, which effClone installs as a separate layer-7b P/T continuous effect (clonePT) instead of folding it into the copiable values, so Identity Thief copying the 3/3 Primal Clay gets the printed */* = 0/0 and dies to state-based actions (transcript: p1 battlefield Primal Clay 0, want 1; \"p1:Primal Clay\" names no object). CR 707.2 (as-enters P/T choices are copiable) / 707.9b. verified at gorge 08fc227a61."
   },
   {
    "name": "test-should-not-copy-p1-p1-counters",

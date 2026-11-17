@@ -1,0 +1,64 @@
+{
+ "card": "Altar's Reap",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "c35fcea4edc4",
+ "scenarios": [
+  {
+   "name": "familiar-pays-for-the-reap-as-it-is-sacrificed",
+   "cr": [
+    "601.2h"
+   ],
+   "why": "The Familiar's cost reduction is locked in before the sacrifice is made, so the Reap costs one black mana even though the creature that provides the discount is the one sacrificed.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Thunderscape Familiar"
+     ],
+     "hand": [
+      "Altar's Reap"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Altar's Reap",
+     "mana": "B",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p0:Thunderscape Familiar"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Thunderscape Familiar",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Altar's Reap",
+     "zone": "graveyard"
+    },
+    {
+     "hand_size": {
+      "p0": 2
+     }
+    },
+    {
+     "pool": {
+      "p0": ""
+     }
+    }
+   ]
+  }
+ ]
+}

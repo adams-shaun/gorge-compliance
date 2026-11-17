@@ -1,0 +1,71 @@
+{
+ "card": "Liliana's Contract",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "bb84e159d904",
+ "scenarios": [
+  {
+   "name": "nameless-face-down-demon-does-not-complete-the-set",
+   "cr": [
+    "201.2b"
+   ],
+   "why": "The Contract checks for four differently named Demons at its controller's upkeep. Maskwood Nexus makes every creature a Demon, but the face-down morph has no name, so the group is three named Demons plus one nameless creature and the win trigger stays off.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Liliana's Contract",
+      "Maskwood Nexus",
+      "Rune-Scarred Demon",
+      "Griselbrand",
+      "Demon of Catastrophes"
+     ],
+     "hand": [
+      "Akroma, Angel of Fury"
+     ]
+    },
+    "p1": {}
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Akroma, Angel of Fury",
+     "cast_mode": "morphed",
+     "mana": "CCC"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p0"
+    }
+   ],
+   "expect": [
+    {
+     "trigger_on_stack": "p0:Liliana's Contract",
+     "want": false
+    },
+    {
+     "stack_size": 0
+    },
+    {
+     "card": "p0:Liliana's Contract",
+     "zone": "battlefield"
+    },
+    {
+     "card": "p0:Akroma, Angel of Fury",
+     "zone": "battlefield",
+     "pt": "2/2"
+    },
+    {
+     "life": {
+      "p0": 16,
+      "p1": 20
+     }
+    }
+   ]
+  }
+ ]
+}

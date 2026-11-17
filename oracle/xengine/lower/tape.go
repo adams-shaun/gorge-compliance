@@ -245,13 +245,7 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 		}
 		steps, stepEntry, payments, answers, why := lowerGroup(reg, m, entries[i:j])
 		if why != nil {
-			at := i
-			if owedAt >= 0 {
-				// The pass before it was waiting for this group's first step.
-				at = owedAt
-				l.drop(owedSteps)
-			}
-			l.stop(at, why)
+			l.refuse(i, why, owedAt, owedSteps)
 			return
 		}
 		if len(owed) == 0 && len(steps) > 0 && quiet(entries[i:j]) {
@@ -286,6 +280,12 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 				resolve, resolveEnd = res, end
 			}
 		}
+		hadOwed := len(owed) > 0
+		fund := l.fundingTaps(reg, m, entries, i, j, resolve, resolveEnd, resolveKeepsPass, hadOwed)
+		if fund.refused {
+			l.refuse(i, unsupported("ask_mana"), owedAt, owedSteps)
+			return
+		}
 		if len(owed) > 0 {
 			// The pass before this group was waiting for the next step's
 			// answers. The resolve step takes them only when it replaces the
@@ -308,6 +308,7 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 				l.StepEntry = append(l.StepEntry, stepEntry...)
 				l.Item.Payment = append(l.Item.Payment, payments...)
 			}
+			l.pushFunding(fund)
 			l.Item.Steps = append(l.Item.Steps, *resolve)
 			l.StepEntry = append(l.StepEntry, resolveEnd-1)
 			l.Item.Payment = append(l.Item.Payment, "")
@@ -315,6 +316,7 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 			i = resolveEnd
 			continue
 		}
+		l.pushFunding(fund)
 		if steps[mainStep].Op == "pass" && len(answers) > 0 {
 			owed, owedAt, owedSteps = answers, i, len(l.Item.Steps)
 		} else if len(answers) > 0 {
@@ -336,6 +338,132 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 	if stalled {
 		l.stop(len(entries), &truncation{ReasonStall})
 	}
+}
+
+// refuse stops the lowering at entry i for why. A pass before it that was
+// waiting for this group's first step goes too: owedAt is its first entry and
+// owedSteps the steps before it (owedAt < 0 when none waits).
+func (l *Lowered) refuse(i int, why *truncation, owedAt, owedSteps int) {
+	at := i
+	if owedAt >= 0 {
+		at = owedAt
+		l.drop(owedSteps)
+	}
+	l.stop(at, why)
+}
+
+// isResolvePay is true for the entry that answers an election to pay a cost
+// when an object resolves or a step begins (a triggered ability's "you may
+// pay", cumulative upkeep, echo) by the plain route, where gorge funds it
+// itself: gorge's resolve-time planner taps the payer's sources while it
+// commits the election, and logs no `activate` decision for them. The manual
+// routes (..._pay_manual) are answered by explicit activations and are not
+// this.
+func isResolvePay(e game.Entry) bool {
+	if !isAsk(e) || len(e.Picks) != 1 {
+		return false
+	}
+	switch e.Picks[0].Kind {
+	case "trigger_cost_pay", "cumulative_pay", "echo_pay":
+		return true
+	}
+	return false
+}
+
+// funding is the explicit mana taps a resolve-time payment needs ahead of the
+// pass that resolves its object. Forge and XMage pay such a cost from the
+// floating pool only, so a plan whose tape carries no tap leaves them with an
+// empty pool and a payment that fails where gorge's planner paid.
+type funding struct {
+	taps []oraclegen.Step
+	// before puts the taps ahead of the last step already emitted (the
+	// payer's pass), not at the end of the steps.
+	before bool
+	// refused is true when the group's funding cannot be placed and the group
+	// is a pass that does not lower as a resolve step: it must stop the
+	// lowering, as an unplaceable tap always did.
+	refused bool
+}
+
+// fundingTaps plans the taps for the resolve-time payments in the group
+// entries[i:j] (entries[i:resolveEnd] when it lowers as a resolve step). The
+// taps are the mana abilities gorge's planner fired on the election's own
+// entry, so they name the same sources. They are floated while the payer holds
+// priority with the object still on the stack: at the payer's own pass (the
+// group's first entry), or ahead of the step already emitted for the payer's
+// pass the group's first entry follows (the opponent's pass resolves the
+// object, and the runner's `pass` leaves the opponent holding priority).
+// Pool mana lasts to the end of the step, so it is still there when the trigger
+// resolves and asks.
+func (l *Lowered) fundingTaps(reg *cards.Registry, m seatMap, entries []game.Entry, i, j int,
+	resolve *oraclegen.Step, resolveEnd int, keepsPass, hadOwed bool) funding {
+	end := j
+	if resolve != nil {
+		end = resolveEnd
+	}
+	var mana []game.ManaRec
+	for _, e := range entries[i:end] {
+		if isResolvePay(e) {
+			mana = append(mana, e.Mana...)
+		}
+	}
+	if len(mana) == 0 {
+		return funding{}
+	}
+	if resolve == nil && paysAfterAsks(entries[i]) {
+		// A cast or ability: lowerGroup already lowers its group's taps.
+		return funding{}
+	}
+	fail := funding{refused: resolve == nil}
+	if hadOwed || keepsPass {
+		return fail
+	}
+	payer := mana[0].Player
+	for _, mr := range mana {
+		if mr.Player != payer {
+			return fail
+		}
+		if sa := manaSA(reg, mr); sa != nil && strings.Contains(sa.Params["Cost"], "Sac<") {
+			return fail
+		}
+	}
+	taps, why := manaTaps(reg, m, mana)
+	if why != nil {
+		return fail
+	}
+	openPass := func(k int) bool {
+		return k >= 0 && isPass(entries[k]) && entries[k].Seat == payer && entries[k].StackTop != 0
+	}
+	if openPass(i) {
+		return funding{taps: taps}
+	}
+	if n := len(l.Item.Steps); n > 0 && openPass(i-1) && l.StepEntry[n-1] == i-1 &&
+		l.Item.Steps[n-1].Op == "pass" && l.Item.Steps[n-1].Seat == m.seat(payer) {
+		return funding{taps: taps, before: true}
+	}
+	return fail
+}
+
+// pushFunding adds f's taps to the steps. A tap has no live state of its own,
+// and the pass it goes ahead of now ends with the mana floating, which the live
+// game never had, so that pass is not checked against the tape either.
+func (l *Lowered) pushFunding(f funding) {
+	if len(f.taps) == 0 {
+		return
+	}
+	idx := make([]int, len(f.taps))
+	pay := make([]string, len(f.taps))
+	for k := range idx {
+		idx[k] = -1
+	}
+	at := len(l.Item.Steps)
+	if f.before {
+		at--
+		l.StepEntry[at] = -1
+	}
+	l.Item.Steps = slices.Insert(l.Item.Steps, at, f.taps...)
+	l.StepEntry = slices.Insert(l.StepEntry, at, idx...)
+	l.Item.Payment = slices.Insert(l.Item.Payment, at, pay...)
 }
 
 // afterDigest is the state after the group ending at j-1: the next entry in the
@@ -591,6 +719,11 @@ func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Ste
 	var mana []game.ManaRec
 	var spent string
 	for _, e := range g {
+		if !paysAfterAsks(en) && isResolvePay(e) {
+			// The planner's funding of a resolve-time payment: lowerEntries
+			// floats it ahead of the pass that resolves the object.
+			continue
+		}
 		mana = append(mana, e.Mana...)
 		spent += e.Spent
 	}

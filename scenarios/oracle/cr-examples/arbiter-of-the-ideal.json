@@ -1,0 +1,59 @@
+{
+ "card": "Arbiter of the Ideal",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "b3cd6376c43e",
+ "scenarios": [
+  {
+   "name": "the-manifested-permanent-arrives-as-an-enchantment",
+   "cr": [
+    "611.2e"
+   ],
+   "why": "The inspired trigger puts the artifact onto the battlefield already carrying a manifestation counter and already an enchantment, so Ajani's Chosen sees an enchantment enter and makes a Cat token.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Arbiter of the Ideal",
+      "Ajani's Chosen"
+     ],
+     "tapped": [
+      "Arbiter of the Ideal"
+     ],
+     "library_top": [
+      "Sol Ring"
+     ]
+    }
+   },
+   "steps": [],
+   "expect": [
+    {
+     "card": "p0:Sol Ring",
+     "zone": "battlefield",
+     "counters": {
+      "MANIFESTATION": 1
+     },
+     "types": [
+      "Artifact",
+      "Enchantment"
+     ]
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Cat"
+     },
+     "eq": 1
+    }
+   ],
+   "setup_answers": [
+    {
+     "kind": "any",
+     "pick": [
+      "yes"
+     ]
+    }
+   ]
+  }
+ ]
+}

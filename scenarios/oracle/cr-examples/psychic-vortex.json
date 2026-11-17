@@ -1,0 +1,61 @@
+{
+ "card": "Psychic Vortex",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "94e74b17f19d",
+ "scenarios": [
+  {
+   "name": "paying-the-upkeep-with-a-skipped-draw-still-pays",
+   "cr": [
+    "118.11"
+   ],
+   "why": "The Vortex's cumulative upkeep was already paid once during setup with its draw skipped. On the next upkeep the same payment is made and the Familiar skips the new draw; the payment still counts, so the Vortex remains and the hand stays empty.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Psychic Vortex",
+      "Obstinate Familiar"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p0"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      },
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Psychic Vortex",
+     "zone": "battlefield",
+     "counters": {
+      "age": 2
+     }
+    },
+    {
+     "hand_size": {
+      "p0": 0
+     }
+    }
+   ]
+  }
+ ]
+}

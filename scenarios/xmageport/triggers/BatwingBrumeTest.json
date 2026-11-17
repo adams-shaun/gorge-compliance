@@ -76,7 +76,7 @@
     }
    ],
    "xmage": "BatwingBrumeTest#testWhiteAndBlackManaWasPaidCard",
-   "known_bug": "XP[playercountremembered-youctrl-caster-relative]: same remaining gorge cause as testOnlyBlackManaWasPaidCard. The pool 'BW' now pays {W/B} with the Plains' W and generic with the Swamp's B, so the W (Fog) half runs (p0 stays at 20) and the B half is spent, but 'each player loses 1 life for each attacking creature they control' counts the caster's attackers (Creature.YouCtrl+attacking relative to the caster) so the attacking opponent still loses 0 (want p1 19, observed 20). CR 608.2c + Oracle."
+   "known_bug": "XP[playercountremembered-youctrl-caster-relative]: same remaining gorge cause as testOnlyBlackManaWasPaidCard: the W half runs (p0 stays at 20) and the B half is spent, but \"each player loses 1 life for each attacking creature they control\" counts Creature.YouCtrl+attacking relative to the caster (evalCov3PlayerHead -\u003e evalCountBody), so the attacking opponent still loses 0 (want p1 19, observed 20). CR 608.2c + Oracle. verified at gorge 08fc227a61."
   },
   {
    "name": "test-only-black-mana-was-paid-card",
@@ -153,7 +153,7 @@
     }
    ],
    "xmage": "BatwingBrumeTest#testOnlyBlackManaWasPaidCard",
-   "known_bug": "XP[playercountremembered-youctrl-caster-relative]: with the pool now paid from the Swamps' colours (castMana pays hybrid and generic from the seat's lands) both Batwing Brume halves resolve (p0 lands on the right life total), but the B half 'each player loses 1 life for each attacking creature they control' reads SVar X:PlayerCountRemembered$Valid Creature.YouCtrl+attacking with YouCtrl bound to the CASTER, not the remembered player: probe with the caster's own Lion attacking shows the caster losing 1 and the attacking opponent 0 (want p1 19, observed 20). Gorge-side card/evaluator semantics (engine/effects PlayerCountRemembered$Valid / playercount_remembered_valid.go). CR 608.2c + Oracle."
+   "known_bug": "XP[playercountremembered-youctrl-caster-relative]: both Batwing Brume halves resolve (the W/Fog half keeps p0 at 20 where it was paid and the B half is spent), but the B half \"each player loses 1 life for each attacking creature they control\" reads the SVar X:PlayerCountRemembered$Valid Creature.YouCtrl+attacking with YouCtrl bound to the CASTER, not the remembered player (evalCov3PlayerHead's Valid arm routes to evalCountBody): the caster has no attackers, so the attacking opponent loses 0 (want p1 19, observed 20). Gorge-side card/evaluator semantics. CR 608.2c + Oracle. verified at gorge 08fc227a61."
   }
  ]
 }

@@ -1,0 +1,92 @@
+{
+ "card": "Arc Trail",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "447f87746d46",
+ "scenarios": [
+  {
+   "name": "redirect-swaps-the-two-targets",
+   "cr": [
+    "115.7e"
+   ],
+   "why": "Redirect can replace both targets of a two-target spell. The 2-damage and 1-damage halves can therefore be sent to the other creature, so the Elf dies and the Bear takes 1.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Arc Trail"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Runeclaw Bear",
+      "Llanowar Elves"
+     ],
+     "hand": [
+      "Redirect"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Arc Trail",
+     "mana": "CR",
+     "targets": [
+      "p1:Runeclaw Bear",
+      "p1:Llanowar Elves"
+     ]
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Redirect",
+     "mana": "UU",
+     "targets": [
+      "p0:Arc Trail"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p1:Llanowar Elves"
+       ]
+      },
+      {
+       "kind": "any",
+       "pick": [
+        "p1:Runeclaw Bear"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Runeclaw Bear",
+     "zone": "battlefield",
+     "damage": 1
+    },
+    {
+     "card": "p1:Llanowar Elves",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Arc Trail",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p1:Redirect",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

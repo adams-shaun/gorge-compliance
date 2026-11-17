@@ -1,0 +1,58 @@
+{
+ "card": "Lich's Mirror",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "6d44b8d3fab0",
+ "scenarios": [
+  {
+   "name": "replaces-loss-from-life-and-empty-library",
+   "cr": [
+    "704.7",
+    "704.5a",
+    "704.5b"
+   ],
+   "why": "At 1 life with one card in the library, Night's Whisper draws two and costs 2 life, which would lose the game two ways at once. The Mirror replaces that loss: everything is shuffled back, seven cards are drawn and the life total is 20.",
+   "setup": {
+    "p0": {
+     "life": 1,
+     "battlefield": [
+      "Lich's Mirror",
+      "Swamp",
+      "Swamp",
+      "Swamp",
+      "Swamp"
+     ],
+     "hand": [
+      "Night's Whisper"
+     ],
+     "library": [
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Night's Whisper",
+     "mana": "CB"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 20
+     }
+    },
+    {
+     "hand_size": {
+      "p0": 7
+     }
+    }
+   ]
+  }
+ ]
+}

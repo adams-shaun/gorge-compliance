@@ -1,6 +1,7 @@
 package org.mage.test.oracle;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -440,6 +441,55 @@ public final class ScenarioReplayDriverContractTest {
                 + "second pass; other shapes rejected; empty-stack failure self-diagnosing)");
     }
 
+    /** A recorded run's resolving pass by the seat that is not active is that
+     * seat's own real pass (CR 117.4). The seat holds a Flash card for its own
+     * step; without the pass queued first, that later action fires at this
+     * priority instead of the top object resolving. The steps are the EOE
+     * Nutrient Block window (xe:RAND:3:12:w4) followed by seat 1's Flash card,
+     * Illvoi Light Jammer. */
+    private static void recordedSeatOneResolvingPass() throws Exception {
+        JsonArray run = steps("[{op:'play',seat:0,card:'p0:Forest'},"
+                + "{op:'activate',seat:0,card:'p0:Island',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Forest',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Nutrient Block',ability_index:0},"
+                + "{op:'pass',seat:0,xpos:{turn:1,step:'main1',active:0}},"
+                + "{op:'pass',seat:1,xpos:{turn:1,step:'main1',active:0,resolves:true}},"
+                + "{op:'cast',seat:1,card:'p1:Illvoi Light Jammer'}]");
+        check(ScenarioReplay.passAction(run, 4) == ScenarioReplay.PASS_RUN,
+                "a recorded pass with a position is PASS_RUN");
+        check(ScenarioReplay.passAction(run, 5) == ScenarioReplay.PASS_RUN,
+                "the seat-1 resolving pass is PASS_RUN");
+        check(ScenarioReplay.passCommands(run, 4, 0).isEmpty(),
+                "a recorded pass that only yields priority queues nothing");
+        check(ScenarioReplay.passCommands(run, 5, 0).equals(Arrays.asList(ScenarioReplay.CMD_PASS_OWN_PRIORITY,
+                        ScenarioReplay.CMD_REQUIRE_STACK, ScenarioReplay.CMD_WAIT_RESOLVE_ONE)),
+                "the seat-1 resolving pass queues its own pass, then the one-object resolution");
+        check(ScenarioReplay.passCommands(run, 6, 0).isEmpty(),
+                "the later flash cast queues no priority change of its own");
+
+        // At priority, seat 1 consumes its own pass first; the cast it holds
+        // for a later step is queued behind it, so it cannot fire here.
+        TestPlayer a = bare("A");
+        TestPlayer b = bare("B");
+        ScenarioReplay r = queueingDriver(run, a, b);
+        queue(r, "queuePassCommands", 5);
+        check(names(b).equals(Arrays.asList(ScenarioReplay.CMD_PASS_OWN_PRIORITY)),
+                "the pass is queued on seat 1, not the active seat; got " + names(b));
+        check(names(a).equals(Arrays.asList(ScenarioReplay.CMD_WAIT_RESOLVE_ONE)),
+                "the active seat only waits for one object to resolve; got " + names(a));
+
+        // The active seat's own resolving pass needs no extra pass: its wait
+        // already passes for it.
+        JsonArray own = steps("[{op:'cast',seat:0,card:'p0:Shock'},"
+                + "{op:'pass',seat:0,xpos:{turn:1,step:'main1',active:0}},"
+                + "{op:'pass',seat:0,xpos:{turn:1,step:'main1',active:0,resolves:true}}]");
+        check(ScenarioReplay.passCommands(own, 2, 0).equals(Arrays.asList(ScenarioReplay.CMD_REQUIRE_STACK,
+                        ScenarioReplay.CMD_WAIT_RESOLVE_ONE)),
+                "the active seat's own resolving pass queues no extra pass");
+        System.out.println("PASS recorded seat-1 resolving pass (its own pass before a later flash cast; "
+                + "the active seat only waits)");
+    }
+
     private static void mustAttack() {
         // The structural check the attack step uses must be exact on the
         // actual XMage card models, not a name list: a card that carries
@@ -754,10 +804,59 @@ public final class ScenarioReplayDriverContractTest {
         System.out.println("PASS seat counts (absent/2 duel, 3 free-for-all, others refused)");
     }
 
+    /** An owner-qualified graveyard ref names the picked seat's card: the
+     * ref's seat-scoped object list ranks only that seat's own cards, so
+     * p1's Pennant is selected even though p0's same-named card exists
+     * (CR 601.2c's announced object). A joined multi-pick answer carries
+     * every segment as an "@ref" the driver binds one by one. */
+    private static void ownerQualifiedGraveyardTarget() throws Exception {
+        UUID p0 = id(20), p1 = id(21);
+        Card own = fakeCard(p0, "Dawn-Blessed Pennant");
+        Card forest = fakeCard(p1, "Forest");
+        Card theirs = fakeCard(p1, "Dawn-Blessed Pennant");
+        Card second = fakeCard(p1, "Dawn-Blessed Pennant");
+        // bindOneAlias scopes its object list to the ref's seat before ranking.
+        List<mage.MageObject> p0Objs = Arrays.asList(own);
+        List<mage.MageObject> p1Objs = Arrays.asList(forest, theirs, second);
+        check(ScenarioReplay.refRankChoice("p1:Dawn-Blessed Pennant", p1Objs,
+                mage.MageObject::getName) == theirs, "owner-qualified ref did not select p1's graveyard card");
+        check(ScenarioReplay.refRankChoice("p0:Dawn-Blessed Pennant", p0Objs,
+                mage.MageObject::getName) == own, "owner-qualified ref did not select p0's graveyard card");
+        check(ScenarioReplay.refRankChoice("p1:Forest", p1Objs,
+                mage.MageObject::getName) == forest, "rank-free ref did not select its seat's card");
+        check(ScenarioReplay.refRankChoice("p1:Dawn-Blessed Pennant#2", p1Objs,
+                mage.MageObject::getName) == second, "ranked ref did not select the second card");
+        check(ScenarioReplay.refRankChoice("p1:Grizzly Bears", p1Objs,
+                mage.MageObject::getName) == null, "an unmatched ref selected an object");
+        check(ScenarioReplay.answerRefs("@p1:Dawn-Blessed Pennant^@p0:Grizzly Bears#2")
+                .equals(Arrays.asList("p1:Dawn-Blessed Pennant", "p0:Grizzly Bears#2")),
+                "a joined owner-qualified answer did not split into its refs");
+        System.out.println("PASS owner-qualified graveyard target (seat-scoped rank choice, "
+                + "exact owner card, joined @ref answers)");
+    }
+
+    private static Card fakeCard(UUID owner, String name) {
+        UUID id = UUID.randomUUID();
+        return (Card) Proxy.newProxyInstance(Card.class.getClassLoader(),
+                new Class<?>[]{Card.class}, (proxy, method, args) -> {
+                    switch (method.getName()) {
+                        case "getId":
+                            return id;
+                        case "getName":
+                            return name;
+                        case "getOwnerId":
+                            return owner;
+                        default:
+                            throw new AssertionError("unexpected call " + method);
+                    }
+                });
+    }
+
     public static void main(String[] args) throws Exception {
         attachments();
         zones();
         passes();
+        recordedSeatOneResolvingPass();
         statelessPassToKeepsPhase();
         spree();
         mustAttack();
@@ -766,5 +865,6 @@ public final class ScenarioReplayDriverContractTest {
         copyCostOps();
         spellings();
         seatCounts();
+        ownerQualifiedGraveyardTarget();
     }
 }

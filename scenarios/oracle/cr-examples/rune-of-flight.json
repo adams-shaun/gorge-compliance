@@ -1,0 +1,55 @@
+{
+ "card": "Rune of Flight",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "29967e1fa498",
+ "scenarios": [
+  {
+   "name": "the-runes-later-timestamp-wins-over-the-hammer",
+   "cr": [
+    "613.7a"
+   ],
+   "why": "Rune of Flight entered after Colossus Hammer, so the flying ability it grants to the equipped creature is applied after the Hammer's 'loses flying'. The Bear therefore gets both +10/+10 and flying.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Colossus Hammer",
+      "Grizzly Bears",
+      "Rune of Flight"
+     ],
+     "attached": [
+      {
+       "card": "Rune of Flight",
+       "to": "p0:Colossus Hammer"
+      }
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Colossus Hammer",
+     "mana": "CCCCCCCC",
+     "ability": "Equip",
+     "targets": [
+      "p0:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "pt": "12/12",
+     "keywords": [
+      "Flying"
+     ],
+     "tapped": false
+    }
+   ]
+  }
+ ]
+}

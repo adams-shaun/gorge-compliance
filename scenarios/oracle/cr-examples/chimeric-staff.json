@@ -1,0 +1,90 @@
+{
+ "card": "Chimeric Staff",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "84a9d1c22f3f",
+ "scenarios": [
+  {
+   "name": "clone-copies-the-artifact-not-its-animation",
+   "cr": [
+    "707.2"
+   ],
+   "why": "The Staff's animation lasts only until end of turn, so it is not a copiable value. A Clone copying the animated Staff arrives as the noncreature artifact with the same activation ability; only activating that ability would make it a creature.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Chimeric Staff"
+     ],
+     "hand": [
+      "Clone"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Chimeric Staff",
+     "ability": "becomes an X/X",
+     "mana": "CCCCC",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "X = 5"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Chimeric Staff",
+       "pt": "5/5",
+       "types": [
+        "Artifact",
+        "Creature",
+        "Construct"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Clone",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Chimeric Staff"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Clone",
+     "zone": "battlefield",
+     "types": [
+      "Artifact"
+     ],
+     "no_types": [
+      "Creature",
+      "Construct"
+     ]
+    },
+    {
+     "card": "p0:Chimeric Staff",
+     "pt": "5/5"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "card": "Otherworldly Journey",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "3bf59311ddf7",
+ "scenarios": [
+  {
+   "name": "a-melded-permanent-returns-as-its-two-cards",
+   "cr": [
+    "713.8c"
+   ],
+   "why": "The Journey exiles the Chittering Host, which is one permanent made of Midnight Scavengers and Graf Rats. The delayed return brings both cards back separately, each with its own +1/+1 counter.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Midnight Scavengers",
+      "Graf Rats"
+     ],
+     "hand": [
+      "Otherworldly Journey"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "begin-combat",
+     "active": "p0"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Otherworldly Journey",
+     "mana": "CW",
+     "targets": [
+      "p0:Chittering Host"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "end",
+     "active": "p0"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Midnight Scavengers",
+     "zone": "battlefield",
+     "pt": "4/4",
+     "counters": {
+      "P1P1": 1
+     }
+    },
+    {
+     "card": "p0:Graf Rats",
+     "zone": "battlefield",
+     "pt": "3/2",
+     "counters": {
+      "P1P1": 1
+     }
+    }
+   ]
+  }
+ ]
+}

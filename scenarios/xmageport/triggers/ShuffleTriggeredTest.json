@@ -85,7 +85,7 @@
     }
    ],
    "xmage": "ShuffleTriggeredTest#testWidespreadPanicDoesTrigger",
-   "known_bug": "XP[trig-mode-shuffled-unsupported]: Widespread Panic's T:Mode$ Shuffled has no gorge trigger mode (coverage gate: Widespread Panic[trig:Shuffled]; absent from triggerModeNames), so Untamed Wilds' shuffle never makes p0 put a card on top (engine/cards/linemodes.go:147; .cards/cardsfolder/w/widespread_panic.txt). CR 701.24 / 603.2."
+   "known_bug": "XP[trig-mode-shuffled-unsupported]: Widespread Panic's T:Mode$ Shuffled has no entry in triggerModeNames, so checkFaceTriggers never queues it and Untamed Wilds' shuffle never makes p0 put a card on top (observed p0 hand Silvercoat Lion 1, want 0). CR 701.24 / 603.2. verified at gorge 08fc227a61."
   },
   {
    "name": "test-widespread-panic-does-not-trigger-if-opponent-shuffles-players-library",

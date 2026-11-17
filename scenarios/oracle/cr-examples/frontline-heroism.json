@@ -1,0 +1,77 @@
+{
+ "card": "Frontline Heroism",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "c415b90ac0a1",
+ "scenarios": [
+  {
+   "name": "the-copy-targets-one-of-the-doubled-tokens",
+   "cr": [
+    "707.10e"
+   ],
+   "why": "Frontline Heroism's own enters trigger already made two Soldiers (Anointed Procession doubles that too). Its cast trigger then makes two more, and the spell copy targets only one of the new pair, giving that one +2/+2 while the other new Soldier stays 1/1; the original spell pumps the Bear.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Frontline Heroism",
+      "Anointed Procession",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Moment of Triumph"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Moment of Triumph",
+     "mana": "W",
+     "targets": [
+      "p0:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:token:Soldier#3"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "pt": "4/4"
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Soldier",
+      "token": true
+     },
+     "eq": 4
+    },
+    {
+     "card": "p0:token:Soldier#3",
+     "pt": "3/3"
+    },
+    {
+     "card": "p0:token:Soldier#4",
+     "pt": "1/1"
+    },
+    {
+     "life": {
+      "p0": 24
+     }
+    }
+   ]
+  }
+ ]
+}

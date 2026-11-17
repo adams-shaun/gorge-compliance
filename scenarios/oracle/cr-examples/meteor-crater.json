@@ -1,0 +1,45 @@
+{
+ "card": "Meteor Crater",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "128d0f39f126",
+ "scenarios": [
+  {
+   "name": "no-coloured-permanent-adds-nothing",
+   "cr": [
+    "106.5"
+   ],
+   "why": "The Crater can name a colour only from a coloured permanent its controller has. With just the colourless Crater, there is no colour, so no mana is made and the ability is not offered.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Meteor Crater"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "mana",
+     "seat": 0,
+     "mana": ""
+    }
+   ],
+   "expect": [
+    {
+     "pool": {
+      "p0": ""
+     }
+    },
+    {
+     "offered": {
+      "seat": 0,
+      "kind": "activate",
+      "card": "p0:Meteor Crater",
+      "label": "for mana"
+     },
+     "want": false
+    }
+   ]
+  }
+ ]
+}

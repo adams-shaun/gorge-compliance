@@ -94,7 +94,7 @@
     }
    ],
    "xmage": "StrictProctorTest#testStrictProctorNotPaid",
-   "known_bug": "XP[abilitytriggered-validdestination-unsupported]: Strict Proctor's T:Mode$ AbilityTriggered line carries ValidDestination$ Battlefield, which the matcher deliberately fails closed on, so the Primeval Bounty ETB trigger is never countered/taxed and the pay-{2} question is never asked (life 23) (engine/rules/trigmatch/abilitytriggered.go:24). CR 603.2 / 603.6a (ETB-caused trigger) per Oracle."
+   "known_bug": "XP[abilitytriggered-validdestination-unsupported]: Strict Proctor's T:Mode$ AbilityTriggered line carries ValidDestination$ Battlefield, which abilityTriggeredMatches deliberately fails closed on, so the Primeval Bounty ETB trigger is never countered or taxed and the pay-{2} question is never asked (observed p0 life 23, want 20). CR 603.2 / 603.6a. verified at gorge 08fc227a61."
   }
  ]
 }

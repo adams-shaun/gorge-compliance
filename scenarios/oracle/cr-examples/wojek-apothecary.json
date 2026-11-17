@@ -1,0 +1,84 @@
+{
+ "card": "Wojek Apothecary",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "882d11706920",
+ "scenarios": [
+  {
+   "name": "shields-are-fixed-when-the-ability-resolves",
+   "cr": [
+    "615.11"
+   ],
+   "why": "The Radiance ability shields the targeted Angel and every creature sharing a color with it at that moment. Recoloring one Angel afterwards does not remove its shield, so both Angels still prevent one damage from Pyroclasm.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Wojek Apothecary",
+      "Serra Angel",
+      "Serra Angel",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Crimson Wisps",
+      "Pyroclasm"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Wojek Apothecary",
+     "ability": "Prevent the next 1 damage",
+     "targets": [
+      "p0:Serra Angel"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Crimson Wisps",
+     "mana": "R",
+     "targets": [
+      "p0:Serra Angel"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Pyroclasm",
+     "mana": "CR"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Serra Angel",
+     "zone": "battlefield",
+     "damage": 1
+    },
+    {
+     "card": "p0:Serra Angel#2",
+     "zone": "battlefield",
+     "damage": 1
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Wojek Apothecary",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

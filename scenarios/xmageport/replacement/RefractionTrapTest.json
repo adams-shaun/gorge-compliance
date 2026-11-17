@@ -103,7 +103,7 @@
     }
    ],
    "xmage": "RefractionTrapTest#testPreventDamageFromSpell",
-   "known_bug": "XP[choosesource-effect-redirect-not-dealt]: Refraction Trap's DB$ Effect ValidTgts$ Any is not asked at cast (harness: unused target p0:Silvercoat Lion at the cast step) but as a KChoose during resolution, and after the shield prevents Bolt (p1 stays 20) the ReplaceWith body's SubAbility DBDealDamage (NumDmg$ ReplaceCount$DamageAmount, Defined$ Remembered) deals nothing -- probe answering the resolution choice with Silvercoat Lion leaves it undamaged, and the fallback recipient p0 stays at 20. Effect-created replacement chains are relinked in engine/rules/replacement.go:1026-1040; exact failing read not pinned. CR 601.2c, 615.5."
+   "known_bug": "XP[choosesource-choice-not-selectable]: Refraction Trap's ChooseSource ask is posed but its card options carry Obj and no Label (effChooseSource/sourceChoices), so the ported setChoice(playerB, \"Lightning Bolt\") is not offered and the fallback records the empty first option. With no chosen source the ReDamage replacement's ValidSource$ Card.ChosenCardStrict never matches: the Bolt is not prevented (p1 17, want 20) and the ReplaceDamage/DealDamage chain never runs (Silvercoat Lion graveyard 0, want 1). The old \"ValidTgts$ Any not posed at cast / unlinked replacement\" reason is stale -- the target is asked at cast and the replacement primitive is implemented. CR 601.2c, 615.5. verified at gorge 08fc227a61."
   }
  ]
 }

@@ -1,0 +1,109 @@
+{
+ "card": "Gutter Grime",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "b187bb9bfb38",
+ "scenarios": [
+  {
+   "name": "each-ooze-counts-only-its-own-gutter-grime",
+   "cr": [
+    "201.5a"
+   ],
+   "why": "Two Gutter Grimes watch the same death. The Ooze made by the one carrying two setup slime counters grows with that permanent's count, while the Ooze from the newly cast one uses its own new counter.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Gutter Grime",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Gutter Grime"
+     ],
+     "counters": {
+      "Gutter Grime": {
+       "slime": 2
+      }
+     }
+    },
+    "p1": {
+     "hand": [
+      "Lightning Bolt"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Gutter Grime#2",
+     "mana": "CCCCG"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Lightning Bolt",
+     "mana": "R",
+     "targets": [
+      "p0:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "trigger_order",
+       "pick": [
+        "p0:Gutter Grime#2",
+        "p0:Gutter Grime"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Gutter Grime",
+     "zone": "battlefield",
+     "counters": {
+      "slime": 3
+     }
+    },
+    {
+     "card": "p0:Gutter Grime#2",
+     "zone": "battlefield",
+     "counters": {
+      "slime": 1
+     }
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Ooze",
+      "token": true
+     },
+     "eq": 2
+    },
+    {
+     "card": "p0:token:Ooze",
+     "pt": "3/3"
+    },
+    {
+     "card": "p0:token:Ooze#2",
+     "pt": "1/1"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,71 @@
+{
+ "card": "Lost Order of Jarkeld",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "2b963a069a7c",
+ "scenarios": [
+  {
+   "name": "counts-the-chosen-opponents-creatures",
+   "cr": [
+    "208.2a"
+   ],
+   "why": "With two creatures under the chosen opponent's control, the Order's characteristic-defining ability makes it 1 plus 2, a 3/3.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Lost Order of Jarkeld"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears",
+      "Hill Giant"
+     ]
+    }
+   },
+   "setup_answers": [
+    {
+     "kind": "any",
+     "pick": [
+      "p1"
+     ]
+    }
+   ],
+   "steps": [],
+   "expect": [
+    {
+     "card": "p0:Lost Order of Jarkeld",
+     "pt": "3/3"
+    }
+   ]
+  },
+  {
+   "name": "outside-play-there-is-no-chosen-player",
+   "cr": [
+    "208.2a"
+   ],
+   "why": "A card in the graveyard has no chosen opponent, so the 1+* rule sees zero creatures and the card is 1/1.",
+   "setup": {
+    "p0": {
+     "graveyard": [
+      "Lost Order of Jarkeld"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears",
+      "Hill Giant"
+     ]
+    }
+   },
+   "steps": [],
+   "expect": [
+    {
+     "card": "p0:Lost Order of Jarkeld",
+     "zone": "graveyard",
+     "pt": "1/1"
+    }
+   ]
+  }
+ ]
+}

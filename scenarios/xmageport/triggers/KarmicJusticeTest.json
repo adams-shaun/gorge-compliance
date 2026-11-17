@@ -73,7 +73,7 @@
     }
    ],
    "xmage": "KarmicJusticeTest#testFirstTriggeredAbility",
-   "known_bug": "XP[trig-mode-destroyed-unsupported]: Karmic Justice's T:Mode$ Destroyed has no trigger mode in gorge (absent from triggerModeNames; coverage gate reports Karmic Justice[trig:Destroyed]), so the trigger never fires (engine/cards/linemodes.go:147; .cards/cardsfolder/k/karmic_justice.txt T:Mode$ Destroyed). CR 701.8 / 603.10a."
+   "known_bug": "XP[trig-mode-destroyed-unsupported]: Karmic Justice's T:Mode$ Destroyed has no entry in triggerModeNames, so checkFaceTriggers never matches it and no trigger fires when the enchanted permanent is destroyed (transcript: p1 Forest count 2, want 1). CR 701.8 / 603.10a. verified at gorge 08fc227a61."
   },
   {
    "name": "test-multiple-permanents-destroyed-triggered-ability",
@@ -186,7 +186,7 @@
     }
    ],
    "xmage": "KarmicJusticeTest#testMultiplePermanentsDestroyedTriggeredAbility",
-   "known_bug": "XP[trig-mode-destroyed-unsupported]: same as testFirstTriggeredAbility -- Mode$ Destroyed unsupported, no trigger for any of the destroyed noncreature permanents (engine/cards/linemodes.go:147; .cards/cardsfolder/k/karmic_justice.txt). CR 701.8 / 603.10a."
+   "known_bug": "XP[trig-mode-destroyed-unsupported]: same as testFirstTriggeredAbility -- Mode$ Destroyed is absent from triggerModeNames and checkFaceTriggers never queues it, so none of the destroyed noncreature permanents triggers (transcript: p1 graveyard Mountain/Swamp/Plains 0, want 1 each). CR 701.8 / 603.10a. verified at gorge 08fc227a61."
   }
  ]
 }

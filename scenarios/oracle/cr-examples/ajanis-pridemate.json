@@ -1,0 +1,54 @@
+{
+ "card": "Ajani's Pridemate",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "9d089dcf86c1",
+ "scenarios": [
+  {
+   "name": "two-lifelink-hits-trigger-twice",
+   "cr": [
+    "702.15e"
+   ],
+   "why": "Two lifelinkers deal combat damage at the same moment; each one is a separate life-gain event, so the Pridemate triggers twice and ends with two +1/+1 counters.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Ajani's Pridemate",
+      "Child of Night",
+      "Child of Night"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Child of Night",
+      "p0:Child of Night#2"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "step": "end"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 24,
+      "p1": 16
+     }
+    },
+    {
+     "card": "p0:Ajani's Pridemate",
+     "counters": {
+      "+1/+1": 2
+     },
+     "pt": "4/4"
+    }
+   ]
+  }
+ ]
+}

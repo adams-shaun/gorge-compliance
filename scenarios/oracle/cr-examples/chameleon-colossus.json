@@ -1,0 +1,89 @@
+{
+ "card": "Chameleon Colossus",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "20843c53dec8",
+ "scenarios": [
+  {
+   "name": "negative-power-pump-does-not-make-it-worse",
+   "cr": [
+    "107.1b"
+   ],
+   "why": "After two -5/-0 effects the 4/4 has -6 power. Its pump ability computes X from that negative power, which counts as zero, so the body remains -6/4 rather than getting even smaller.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Chameleon Colossus"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Shrink",
+      "Shrink"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Shrink",
+     "mana": "G",
+     "targets": [
+      "p0:Chameleon Colossus"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Shrink#2",
+     "mana": "G",
+     "targets": [
+      "p0:Chameleon Colossus"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Chameleon Colossus",
+       "pt": "-6/4"
+      }
+     ]
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Chameleon Colossus",
+     "ability": "gets +X/+X",
+     "mana": "CCGG"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Chameleon Colossus",
+     "pt": "-6/4"
+    },
+    {
+     "pool": {
+      "p0": ""
+     }
+    }
+   ]
+  }
+ ]
+}

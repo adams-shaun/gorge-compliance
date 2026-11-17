@@ -1,0 +1,62 @@
+{
+ "card": "Dawnglow Infusion",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "fe1f0be2f0b9",
+ "scenarios": [
+  {
+   "name": "a-copy-of-the-spell-sees-no-mana-spent",
+   "cr": [
+    "707.10"
+   ],
+   "why": "The original spell was cast with both a green and a white mana, so its controller gains X twice. The Fork copy was not cast with any mana, so the copy's resolution gains nothing and the life total rises only by the original's amount.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Dawnglow Infusion",
+      "Fork"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Dawnglow Infusion",
+     "mana": "GGWW",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "X = 2"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Fork",
+     "mana": "RR",
+     "targets": [
+      "p0:Dawnglow Infusion"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 24
+     }
+    },
+    {
+     "card": "p0:Fork",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

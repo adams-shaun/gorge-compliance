@@ -525,7 +525,7 @@
     }
    ],
    "xmage": "EntersTheBattlefieldTriggerTest#testWildPair",
-   "known_bug": "XP[totalpt-filter-unsupported]: Wild Pair's ChangeType$ Creature.totalPT_EQX and SVar X:TriggeredCard$CardSumPT have no implementation anywhere in engine/effects/ or engine/rules/ (grep finds no 'totalPT'/'CardSumPT'). The search finds nothing (no pick is offered, only the shuffle ask). Card script .cards/cardsfolder/w/wild_pair.txt; Oracle text (search for a creature with the same total power and toughness). CR 701.23a."
+   "known_bug": "XP[search-one-option-label-fallback]: both pieces now exist (numericPred reads Creature.totalPT_\u003cCMP\u003e\u003cn\u003e and evalRefProperty reads TriggeredCard$CardSumPT), and effSearchLibrary does find the matching card: Wild Pair poses a choose whose sole option is Kind search, Label Silvercoat Lion. The scenario still fails because nothing answers that choose: the generated scenario carries only the optional-trigger yes, and the port's object-ref form p0:Silvercoat Lion resolves to the Silvercoat Lion already on the battlefield, not the library copy, so it is rejected; the fallback then takes the empty pick and no card is put onto the battlefield (p0 battlefield Silvercoat Lion 1, want 2). A bare label pick (Silvercoat Lion) is consumed and the scenario passes, matching XMage's auto-choice of the sole candidate (testWildPair comment). Interop gap in the port's one-option search answer/fallback, not the eligibility walk. CR 701.23a. verified at gorge 08fc227a61."
   },
   {
    "name": "test-noxious-ghoul1",

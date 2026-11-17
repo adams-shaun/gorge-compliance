@@ -1,0 +1,50 @@
+{
+ "card": "Yixlid Jailer",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "1c9322ce79d6",
+ "scenarios": [
+  {
+   "name": "treefolk-from-the-graveyard-enters-tapped",
+   "cr": [
+    "614.12"
+   ],
+   "why": "The Treefolk's enters-tapped replacement still applies when the card is returned from the graveyard, even though Yixlid Jailer makes cards in graveyards lose their abilities.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Yixlid Jailer"
+     ],
+     "graveyard": [
+      "Scarwood Treefolk"
+     ],
+     "hand": [
+      "Resurrection"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Resurrection",
+     "mana": "CCWW",
+     "targets": [
+      "p0:Scarwood Treefolk"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Scarwood Treefolk",
+     "zone": "battlefield",
+     "tapped": true,
+     "pt": "3/5"
+    }
+   ]
+  }
+ ]
+}

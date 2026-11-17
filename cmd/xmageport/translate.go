@@ -41,12 +41,9 @@ var hardCalls = map[string]string{
 	"setFlipCoinResult":             "dice",
 	"activateManaAbility":           "mana-payment",
 	"assertManaOptions":             "mana-payment",
-	"checkPlayableAbility":          "playable-check",
 	"rollbackTurns":                 "rollback",
 	"rollbackAfterActionsStart":     "rollback",
 	"rollbackAfterActionsEnd":       "rollback",
-	"removeAllCardsFromLibrary":     "library-manipulation",
-	"removeAllCardsFromHand":        "library-manipulation",
 	"assertLibraryCount":            "library-assert",
 	"setChoiceAmount":               "amount-choice",
 	"addTargetAmount":               "amount-choice",
@@ -130,6 +127,7 @@ type choice struct {
 	pick   string // already a gorge pick (ref, yes/no, text)
 	x      int    // setChoice "X=N": N, the announced X (-1 otherwise)
 	mode   int    // setModeChoice "N": 1-based mode index (0 otherwise)
+	ord    int    // pick's 0-based position within one counted setChoice(player, name, n)
 }
 
 type action struct {
@@ -141,10 +139,21 @@ type action struct {
 	targets         []string // xmage target strings, translated at emit time
 	ability         string
 	resolveAfter    bool
+	endAt           int // emission: len(steps) once this action is emitted
 	attackers       []string
 	blocks          [][2]string
 	expects         []*expect
 	choices         []choice
+	playCheck       *playableCheck
+}
+
+// playableCheck is one XMage checkPlayableAbility: the text names a cast,
+// a land play or an ability, and want says whether it must be on offer.
+// The card ref is resolved at emit time, after setup and the actions before
+// it have bound their refs.
+type playableCheck struct {
+	text string
+	want bool
 }
 
 type group struct {
@@ -171,12 +180,19 @@ type translator struct {
 	places        [2][]*placement
 	castRefs      [2]map[string][]string
 	allNames      map[string]bool // every string arg outside addCard (keeps lands)
+	nameUses      map[string]int  // how many times each such string arg appears (casts, activations)
+	abilityUses   map[string]int  // how many times each activateAbility text appears
 	needAll       bool            // an assert counts all permanents: keep lands
 	pendingChecks []pendingCheck
 	preChoices    []choice
 	choiceList    []choice
 	droppedOrder  int
 	orphanMode    bool // a setModeChoice no action consumes (a trigger's modes)
+	// playEffectKicker names a card an effect plays (not a cast step) that
+	// prints Kicker/Multikicker: gorge's effPlay cast has no kicked answer, so
+	// the XMage kicker choices cannot be stated and a nonzero count would be
+	// silently dropped.
+	playEffectKicker string
 	// strict is setStrictChooseMode(true): every choice the game asks is
 	// stated by the test. Without it XMage's AI answers the unstated ones.
 	strict bool
@@ -188,6 +204,10 @@ type translator struct {
 	// object is ambiguous (XMage takes whichever it finds first).
 	copied  map[string]bool
 	copyRef map[string]string // "seat|name" -> the ref of seat's copy ("-": several)
+	// libCleared marks a seat after removeAllCardsFromLibrary: XMage's library
+	// is then only the cards the test adds, where the runner pads its own with
+	// filler. The two differ only if a draw reaches past those cards.
+	libCleared [2]bool
 }
 
 func p0(v value) int {
@@ -229,6 +249,11 @@ var aiAnswers = map[string][]string{
 	// The copies of Lightning Bolt and Shock are cast without targets
 	// stated; XMage's AI aims both at the opponent (assertLife playerB 15).
 	"SpelltwineTest#testCopyCards": {"0:target:p1", "0:target:p1"},
+	// Mizzix's Mastery copies See the Truth and XMage's framework accepts
+	// the may-cast even under setStrictChooseMode (the test asserts all
+	// three looked-at cards reach the hand); the runner's optional-modes
+	// fallback declines an unattended ask, so the accept is written down.
+	"SeeTheTruthTest#castCopyFromExile": {"0:yes"},
 }
 
 // poolPaidLands are setup lands per Class#method that XMage taps for a
@@ -305,6 +330,15 @@ func (t *translator) assignChoices() {
 		}
 		switch {
 		case to != nil:
+			if to.kind != "cast" {
+				// A card named to be played by an effect (Anrakyr the
+				// Traveller's DB$ Play) is not a cast step, so neither the
+				// kicker nor the life-for-mana choice can be stated; the
+				// whole shape is refused in build().
+				if n, ok := strings.CutPrefix(ch.pick, "name:"); ok && t.cardHasKicker(n) {
+					t.playEffectKicker = n
+				}
+			}
 			to.choices = append(to.choices, ch)
 		case ch.mode > 0:
 			t.orphanMode = true
@@ -312,6 +346,25 @@ func (t *translator) assignChoices() {
 			t.tailChoices = append(t.tailChoices, ch)
 		}
 	}
+}
+
+// cardHasKicker reports whether a face of name prints Kicker or Multikicker.
+func (t *translator) cardHasKicker(name string) bool {
+	c, ok := t.lookup(name)
+	if !ok {
+		return false
+	}
+	for _, f := range c.Faces {
+		if f == nil {
+			continue
+		}
+		for _, k := range f.Keywords {
+			if strings.HasPrefix(k, "Kicker:") || strings.HasPrefix(k, "Multikicker:") {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 type pendingCheck struct {
@@ -332,8 +385,10 @@ type result struct {
 	Scenario                   *portScenario
 	Groups                     []*group
 	Fails                      []string
-	Status                     string // refused | pass | fail-harness | fail-expect
+	ReplayDiff                 string // live game vs log-only replay (audit gate); non-empty => fail-replay
+	Status                     string // refused | pass | fail-harness | fail-replay | fail-expect
 	Dropped                    int
+	nflips                     int            // booleans the run mapped onto two-option asks (runResult)
 	Unsupported                string         // "Card[prim,...]; ..." for cards gorge's coverage gate does not support
 	Strict                     bool           // setStrictChooseMode(true)
 	XAnswers                   map[int][]xans // final step index -> original XMage choices
@@ -439,6 +494,7 @@ func translate(reg *cards.Registry, jc *javaClass, m *javaMethod, family string)
 // read classifies every statement into setup/actions/asserts.
 func (t *translator) read() *refusal {
 	var calls []call
+	clearedLib := false
 	// First pass: hard refusals win over everything else, so the census key
 	// names the real obstacle.
 	for _, st := range inlineHelpers(t.m.Stmts, t.jc.Defs, 0) {
@@ -461,7 +517,15 @@ func (t *translator) read() *refusal {
 			}
 			return refuse("java-statement", "%s", head)
 		}
+		if c.Name == "removeAllCardsFromLibrary" {
+			clearedLib = true
+		}
 		if code, ok := hardCalls[c.Name]; ok && code != "" {
+			if c.Name == "assertLibraryCount" && clearedLib {
+				// XMage counts only the cards the test added; the runner's
+				// library carries filler, so the count cannot be asserted
+				return refuse("library-size", "%s after removeAllCardsFromLibrary", c.Name)
+			}
 			return refuse(code, "%s", c.Name)
 		}
 		calls = append(calls, c)
@@ -497,7 +561,17 @@ func (t *translator) read() *refusal {
 		for _, a := range c.Args {
 			if a.kind == vStr && c.Name != "addCard" {
 				t.allNames[a.s] = true
+				if t.nameUses == nil {
+					t.nameUses = map[string]int{}
+				}
+				t.nameUses[a.s]++
 			}
+		}
+		if c.Name == "activateAbility" && len(c.Args) > 3 && c.Args[3].kind == vStr {
+			if t.abilityUses == nil {
+				t.abilityUses = map[string]int{}
+			}
+			t.abilityUses[c.Args[3].s]++
 		}
 		if r := t.readCall(i, c); r != nil {
 			return r
@@ -506,10 +580,16 @@ func (t *translator) read() *refusal {
 	if t.stop == nil {
 		return refuse("no-stop", "no setStopAt")
 	}
+	if r := t.checkClearedLibraries(); r != nil {
+		return r
+	}
 	t.addAIAnswers()
 	t.assignChoices()
 	if t.orphanMode {
 		return refuse("mode-choice", "setModeChoice with no cast to consume it")
+	}
+	if t.playEffectKicker != "" {
+		return refuse("play-effect-kicker", "%s is played by an effect, whose kicker count the runner cannot state", t.playEffectKicker)
 	}
 	return nil
 }
@@ -550,6 +630,223 @@ func (t *translator) clock(c call, ti, si int) (int, int, *refusal) {
 		return 0, 0, refuse("long-game", "turn %d", turn)
 	}
 	return turn, st, nil
+}
+
+// playableStepRefusal refuses checkPlayableAbility at a step the runner
+// cannot reach with a player holding priority: untap and cleanup have no
+// priority, and the game opens at turn 1's first main phase.
+func playableStepRefusal(turn, st int) *refusal {
+	if st == sUntap || st == sCleanup {
+		return refuse("playable-check", "no priority in %s", stepNames[st])
+	}
+	if turn == 1 && st < sMain1 {
+		return refuse("playable-check", "turn 1 %s", stepNames[st])
+	}
+	return nil
+}
+
+// namePrefixMatch reports whether want is a prefix of the full card name at
+// a word boundary. XMage's checkPlayableAbility matches an ability string by
+// startsWith, so tests routinely abbreviate a card ("Silvercoat" for
+// "Silvercoat Lion", "Lightning" for "Lightning Bolt").
+func namePrefixMatch(full, want string) bool {
+	if want == "" || len(want) > len(full) || !strings.EqualFold(full[:len(want)], want) {
+		return false
+	}
+	if len(want) == len(full) {
+		return true
+	}
+	return strings.ContainsRune(" :,(", rune(full[len(want)]))
+}
+
+// cardNames lists a placement's name plus the names of the card's faces: a
+// check may name an adventure, prepare or modal back face whose object the
+// setup placed under the front-face name.
+func (t *translator) cardNames(pl *placement) []string {
+	names := []string{pl.name}
+	if c, ok := t.lookup(pl.name); ok {
+		for _, f := range c.Faces {
+			if f != nil && !sameName(f.Name, pl.name) {
+				names = append(names, f.Name)
+			}
+		}
+	}
+	return names
+}
+
+// cardNamePrefix returns the card name the text starts with, if any.
+// checkPlayableAbility matches an ability description by prefix, so an
+// ability check can only be tied to a source when its text names the card.
+func (t *translator) cardNamePrefix(p int, text string) string {
+	best := ""
+	for _, pl := range t.places[p] {
+		for _, n := range t.cardNames(pl) {
+			if namePrefixMatch(text, n) && len(n) > len(best) {
+				best = n
+			}
+		}
+	}
+	return best
+}
+
+// cardMatch scores a placement against a card name: 2 exact, 1 prefix, 0 no
+// match, and returns the matched face name.
+func (t *translator) cardMatch(pl *placement, want string) (int, string) {
+	best, bestName := 0, ""
+	for _, n := range t.cardNames(pl) {
+		if sameName(n, want) {
+			return 2, n
+		}
+		if best < 1 && namePrefixMatch(n, want) {
+			best, bestName = 1, n
+		}
+	}
+	return best, bestName
+}
+
+// offeredRef names the object a checkPlayableAbility talks about. Cast and
+// play look at the zones a card can be cast/played from (hand first, not the
+// battlefield copy a same-named permanent may occupy); activate looks at the
+// battlefield first. Unused placements win so a second copy in hand is not
+// confused with one already cast.
+func (t *translator) offeredRef(p int, name, kind string) (string, string, bool) {
+	zones := []string{"hand", "library_top", "exile", "graveyard", "battlefield"}
+	if kind == "activate" {
+		zones = []string{"battlefield", "hand", "graveyard", "exile", "library_top"}
+	}
+	for level := 2; level >= 1; level-- {
+		for _, used := range []bool{false, true} {
+			for _, z := range zones {
+				for _, pl := range t.places[p] {
+					if pl.used != used || pl.zone != z {
+						continue
+					}
+					if lvl, full := t.cardMatch(pl, name); lvl == level {
+						return refStr(p, pl.name, pl.ord), full, true
+					}
+				}
+			}
+		}
+	}
+	// A copy or generated object has no setup placement; anyRefs knows the
+	// refs the translator minted for it.
+	if rs := t.anyRefs(p, name); len(rs) > 0 {
+		return rs[0], name, true
+	}
+	return "", "", false
+}
+
+// castQualifierModes maps XMage's "using X"/"with X" cast qualifier to the
+// mode word gorge appends to that cast option's label. A qualifier absent
+// from the table is not treated as a qualifier at all, so a card whose name
+// contains "with" ("Craft with Pride") stays intact; an empty word means the
+// option label carries no mode suffix the translator knows.
+var castQualifierModes = map[string]string{
+	"morph": "face down", "megamorph": "face down", "disguise": "face down",
+	"bestow": "bestowed", "overload": "overloaded", "plot": "plotted",
+	"escape": "escape", "prepare": "prepared", "foretell": "foretold",
+	"flashback": "flashback", "disturb": "", "spectacle": "", "madness": "",
+}
+
+// splitCastQualifier separates a cast text's card from a known alternative-
+// cast qualifier ("Willbender using Morph" -> "Willbender", "morph").
+func splitCastQualifier(s string) (string, string) {
+	for _, sep := range []string{" using ", " with "} {
+		if i := strings.LastIndex(s, sep); i > 0 {
+			q := strings.ToLower(s[i+len(sep):])
+			if _, ok := castQualifierModes[q]; ok {
+				return s[:i], q
+			}
+		}
+	}
+	return s, ""
+}
+
+// hasKeywordPrefix recognises "Cast X", "CastX" (a constant concatenation)
+// without treating a card such as "Castigate" as the cast keyword.
+func hasKeywordPrefix(text, kw string) bool {
+	if !strings.HasPrefix(text, kw) {
+		return false
+	}
+	if len(text) == len(kw) || text[len(kw)] == ' ' {
+		return true
+	}
+	c := text[len(kw)]
+	return c >= 'A' && c <= 'Z'
+}
+
+// playableOffer turns an XMage checkPlayableAbility text into the runner's
+// inline offered expect. "Cast X" is the cast option labelled X, "Play X" the
+// land play, and any other text must name the source card (XMage searches
+// every playable ability for a prefix, so an unnamed source is unresolvable).
+func (t *translator) playableOffer(p int, text string) (*offered, *refusal) {
+	kind := ""
+	cardText := ""
+	switch {
+	case hasKeywordPrefix(text, "Cast"):
+		kind, cardText = "cast", strings.TrimSpace(strings.TrimPrefix(text, "Cast"))
+	case hasKeywordPrefix(text, "Play"):
+		kind, cardText = "play", strings.TrimSpace(strings.TrimPrefix(text, "Play"))
+	}
+	missing := ""
+	if kind != "" {
+		qual := ""
+		if kind == "cast" {
+			cardText, qual = splitCastQualifier(cardText)
+		}
+		nm, r := xmageName(cardText)
+		if r != nil {
+			return nil, r
+		}
+		ref, full, ok := t.offeredRef(p, nm, kind)
+		if ok {
+			if mode := castQualifierModes[qual]; mode != "" {
+				full += " (" + mode + ")"
+			}
+			return &offered{Seat: p, Kind: kind, Card: ref, Label: full}, nil
+		}
+		missing = nm
+	}
+	// Not a resolvable cast/play: the text may still name a card whose
+	// ability is being checked ("Serra Avenger"), or a card whose name
+	// merely starts with the cast keyword ("Play with Fire").
+	name := t.cardNamePrefix(p, text)
+	if name == "" {
+		if missing != "" {
+			return nil, refuse("playable-check", "%s not in setup", missing)
+		}
+		return nil, refuse("playable-check", "no card named in %q", text)
+	}
+	ref, _, ok := t.offeredRef(p, name, "activate")
+	if !ok {
+		return nil, refuse("playable-check", "source %s of %q not in setup", name, text)
+	}
+	// XMage's prefix search covers every playable ability of the card, the
+	// cast action included. A card off the battlefield can only be cast (or
+	// have a hand/graveyard ability activated, which the card name alone
+	// cannot pick), so offer it as a cast; a permanent's text is an
+	// activation.
+	switch t.placeZone(p, ref) {
+	case "battlefield":
+		return &offered{Seat: p, Kind: "activate", Card: ref, Label: text}, nil
+	case "":
+		return nil, refuse("playable-check", "zone of %s unknown for %q", name, text)
+	}
+	if !sameName(text, name) {
+		return nil, refuse("playable-check", "ability text %q on %s outside the battlefield", text, name)
+	}
+	return &offered{Seat: p, Kind: "cast", Card: ref, Label: name}, nil
+}
+
+// placeZone returns the setup zone of the placement a ref names, or "" for a
+// minted object with none.
+func (t *translator) placeZone(p int, ref string) string {
+	for _, pl := range t.places[p] {
+		if refStr(p, pl.name, pl.ord) == ref {
+			return pl.zone
+		}
+	}
+	return ""
 }
 
 func (t *translator) addAction(a *action) {
@@ -612,6 +909,32 @@ func (t *translator) readCall(idx int, c call) *refusal {
 			return refuse("bad-args", "addCard count %d", n)
 		}
 		t.setup[p] = append(t.setup[p], addCardCall{zone: zone, name: name, count: n, tapped: tapped})
+	case "removeAllCardsFromHand", "removeAllCardsFromLibrary":
+		if len(c.Args) != 1 {
+			return refuse("bad-args", "%s", c.Name)
+		}
+		p, ok := seatOf(c.Args[0])
+		if !ok {
+			return refuse("bad-args", "%s player %s", c.Name, c.Args[0])
+		}
+		if c.Name == "removeAllCardsFromHand" {
+			// the runner deals no opening hand, so there is nothing to clear
+			// unless the test already built the hand: dropping those cards
+			// is a real action the setup cannot express
+			for _, ac := range t.setup[p] {
+				if ac.zone == "hand" {
+					return refuse("library-manipulation", "removeAllCardsFromHand after addCard HAND")
+				}
+			}
+			break
+		}
+		// XMage queues Zone.LIBRARY -> "clear" and applies it before the
+		// separate cheat call that adds the setup cards, so a card the test
+		// added earlier still survives. The runner's library already holds
+		// exactly the test's cards, so marking the seat is the whole
+		// translation; dropping addCard(Zone.LIBRARY, ...) entries would
+		// disagree with XMage.
+		t.libCleared[p] = true
 	case "setLife":
 		p, ok := seatOf(c.Args[0])
 		n, ok2 := argInt(c, 1)
@@ -827,6 +1150,10 @@ func (t *translator) readCall(idx int, c call) *refusal {
 			return nil
 		}
 		for i := 0; i < times; i++ {
+			// a counted setChoice names n distinct objects of that name.
+			if times > 1 && !ch.target {
+				ch.ord = i
+			}
 			t.choiceList = append(t.choiceList, ch)
 		}
 	case "setModeChoice":
@@ -842,6 +1169,30 @@ func (t *translator) readCall(idx int, c call) *refusal {
 			return refuse("mode-choice", "setModeChoice %s", v)
 		}
 		t.choiceList = append(t.choiceList, choice{seat: p0(c.Args[0]), src: idx, x: -1, mode: n, pick: v.s})
+	case "checkPlayableAbility":
+		if len(c.Args) < 6 {
+			return refuse("bad-args", "%s", c.Name)
+		}
+		turn, st, r := t.clock(c, 1, 2)
+		if r != nil {
+			return r
+		}
+		p, ok := seatOf(c.Args[3])
+		if !ok {
+			return refuse("bad-args", "%s player", c.Name)
+		}
+		text, ok := argStr(c, 4)
+		if !ok {
+			return refuse("bad-args", "%s ability %s", c.Name, c.Args[4])
+		}
+		if c.Args[5].kind != vBool {
+			return refuse("bad-args", "%s want %s", c.Name, c.Args[5])
+		}
+		if r := playableStepRefusal(turn, st); r != nil {
+			return r
+		}
+		t.addAction(&action{turn: turn, step: st, sub: 1, seat: p, kind: "check", src: idx,
+			playCheck: &playableCheck{text: text, want: c.Args[5].b}})
 	case "checkPermanentCount", "checkLife", "checkPT", "checkGraveyardCount", "checkHandCardCount",
 		"checkExileCount", "checkStackSize", "checkAbility", "checkPermanentCounters":
 		if len(c.Args) < 4 {

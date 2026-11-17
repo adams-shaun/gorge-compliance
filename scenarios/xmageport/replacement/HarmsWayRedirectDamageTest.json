@@ -512,7 +512,7 @@
     }
    ],
    "xmage": "HarmsWayRedirectDamageTest#testNoRedirectLavaBurst",
-   "known_bug": "XP[harms-way-replacesplitdamage-unsupported]: card-script gap, coverage gate flags Harm's Way[api:ReplaceSplitDamage] (SVar SplitDamage DB$ ReplaceSplitDamage, .cards/cardsfolder/h/harms_way.txt); the DB$ Effect's ValidTgts$ Any target is also not posed at cast (step's target unused; it is asked at resolution). CR 614.9, 601.2c."
+   "known_bug": "XP[choosesource-choice-not-selectable]: Harm's Way's ChooseSource ask is posed at resolution with card options that carry Obj but no Label (effChooseSource/sourceChoices), so the ported setChoice(playerB, \"Lava Burst\") is not offered and the fallback records the empty first option; with no chosen source the ReplaceSplitDamage shield's ValidSource$ Card.ChosenCardStrict never matches, so neither the damage to Aegis Turtle nor the damage to p0 is redirected (observed p0 20, p1 17, Aegis Turtle damage 2; want 18/19/4). ReplaceSplitDamage itself is implemented now (applyReplaceSplitDamageBody), so the old \"unsupported card-script gap\" reason is stale. CR 601.2c, 614.9. verified at gorge 08fc227a61."
   }
  ]
 }

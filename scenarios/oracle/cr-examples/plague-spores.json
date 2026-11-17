@@ -1,0 +1,66 @@
+{
+ "card": "Plague Spores",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e394c76ea15a",
+ "scenarios": [
+  {
+   "name": "one-target-illegal-but-the-land-target-still-destroys",
+   "cr": [
+    "608.2b"
+   ],
+   "why": "The Dryad Arbor is a legal nonblack creature and a legal land when the Spores are cast. Turning it black later makes the creature clause illegal but leaves the land clause legal, so the spell still resolves and destroys it.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Plague Spores",
+      "Deathlace"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Dryad Arbor"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Plague Spores",
+     "mana": "CCCCBR",
+     "targets": [
+      "p1:Dryad Arbor",
+      "p1:Dryad Arbor"
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Deathlace",
+     "mana": "B",
+     "targets": [
+      "p1:Dryad Arbor"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Dryad Arbor",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Plague Spores",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Deathlace",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

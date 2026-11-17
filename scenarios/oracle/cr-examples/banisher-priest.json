@@ -1,0 +1,83 @@
+{
+ "card": "Banisher Priest",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "35f86f92e403",
+ "scenarios": [
+  {
+   "name": "both-exiled-creatures-return-when-both-priests-die-together",
+   "cr": [
+    "610.3d"
+   ],
+   "why": "Each Priest exiles one creature, then a sweeper destroys both Priests at the same time. Both leaves-the-battlefield triggers resolve, so both exiled creatures return together.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Banisher Priest",
+      "Banisher Priest",
+      "Day of Judgment"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears",
+      "Savannah Lions"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Banisher Priest",
+     "mana": "CWW"
+    },
+    {
+     "op": "resolve",
+     "targets": [
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Banisher Priest#2",
+     "mana": "CWW"
+    },
+    {
+     "op": "resolve",
+     "targets": [
+      "p1:Savannah Lions"
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Day of Judgment",
+     "mana": "CCWW"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Banisher Priest",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Banisher Priest#2",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "battlefield"
+    },
+    {
+     "card": "p1:Savannah Lions",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

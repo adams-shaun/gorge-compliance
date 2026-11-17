@@ -1,0 +1,64 @@
+{
+ "card": "Telepathy",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "86dc9f1c3635",
+ "scenarios": [
+  {
+   "name": "already-revealed-merfolk-card-still-pays-the-additional-cost",
+   "cr": [
+    "701.20c"
+   ],
+   "why": "Telepathy reveals the caster's hand to its opponent already, yet the caster may still reveal a Merfolk card from hand to pay Silvergill Adept's additional cost instead of {3}: only {1}{U} is paid.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Silvergill Adept",
+      "Silvergill Adept"
+     ],
+     "library": [
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Telepathy"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Silvergill Adept",
+     "mana": "CU",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "Reveal 1 card"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Silvergill Adept",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

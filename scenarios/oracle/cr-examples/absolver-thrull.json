@@ -1,0 +1,107 @@
+{
+ "card": "Absolver Thrull",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "13924475fac2",
+ "scenarios": [
+  {
+   "name": "haunted-creature-dies-and-the-exiled-thrull-triggers",
+   "cr": [
+    "113.6k"
+   ],
+   "why": "The Thrull's ability works once from the battlefield and once from the exile zone after haunt moves it onto a creature. When the haunted creature dies, the exiled card's ability fires and destroys an enchantment.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Absolver Thrull"
+     ],
+     "hand": [
+      "Muraganda Petroglyphs"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Lightning Bolt",
+      "Lightning Bolt"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Lightning Bolt",
+     "mana": "R",
+     "targets": [
+      "p0:Absolver Thrull"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p1:Grizzly Bears"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Muraganda Petroglyphs",
+     "mana": "CCCG"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Lightning Bolt#2",
+     "mana": "R",
+     "targets": [
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p0:Muraganda Petroglyphs"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Absolver Thrull",
+     "zone": "exile"
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Muraganda Petroglyphs",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

@@ -48,6 +48,7 @@ type step struct {
 	Mana         string      `json:"mana,omitempty"`
 	Targets      []string    `json:"targets,omitempty"`
 	Kicked       bool        `json:"kicked,omitempty"`
+	CastMode     string      `json:"cast_mode,omitempty"`
 	AbilityIndex *int        `json:"ability_index,omitempty"`
 	Attackers    []string    `json:"attackers,omitempty"`
 	Defender     string      `json:"defender,omitempty"`
@@ -90,6 +91,19 @@ type expect struct {
 	HandSize      map[string]int   `json:"hand_size,omitempty"`
 	GraveyardSize map[string]int   `json:"graveyard_size,omitempty"`
 	StackSize     *int             `json:"stack_size,omitempty"`
+	Offered       *offered         `json:"offered,omitempty"`
 	Count         *count           `json:"count,omitempty"`
 	Eq            *int             `json:"eq,omitempty"`
+	Want          *bool            `json:"want,omitempty"`
+}
+
+// offered mirrors rules.oracleOffered: the inline expect that an action of
+// this kind on this card is (or, with want=false, is not) on offer while the
+// seat holds priority. The label is matched by gorge's oracleLabelMatches
+// (a case-insensitive substring after brace stripping).
+type offered struct {
+	Seat  int    `json:"seat"`
+	Kind  string `json:"kind"`
+	Card  string `json:"card"`
+	Label string `json:"label,omitempty"`
 }

@@ -1,0 +1,113 @@
+{
+ "card": "Boon Reflection",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "6ca7e954c18f",
+ "scenarios": [
+  {
+   "name": "lifelink-gain-is-doubled",
+   "cr": [
+    "120.4d"
+   ],
+   "why": "A wither lifelink attacker gets 2 damage prevented from its blocker, so it deals 1 and its controller would gain 1 life. Boon Reflection turns that gain into 2, while the blocker receives one -1/-1 counter and survives.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Boon Reflection",
+      "Boggart Ram-Gang",
+      "Lifelink"
+     ],
+     "attached": [
+      {
+       "card": "Lifelink",
+       "to": "p0:Boggart Ram-Gang"
+      }
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears",
+      "Samite Healer",
+      "Samite Healer"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "activate",
+     "seat": 1,
+     "card": "p1:Samite Healer",
+     "ability": "Prevent the next 1 damage",
+     "targets": [
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "activate",
+     "seat": 1,
+     "card": "p1:Samite Healer#2",
+     "ability": "Prevent the next 1 damage",
+     "targets": [
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Boggart Ram-Gang"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "seat": 1,
+     "blocks": [
+      [
+       "p1:Grizzly Bears",
+       "p0:Boggart Ram-Gang"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "main2"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 22,
+      "p1": 20
+     }
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "battlefield",
+     "pt": "1/1",
+     "counters": {
+      "-1/-1": 1
+     }
+    },
+    {
+     "card": "p0:Boggart Ram-Gang",
+     "zone": "battlefield",
+     "pt": "3/3",
+     "damage": 2
+    },
+    {
+     "card": "p0:Boon Reflection",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

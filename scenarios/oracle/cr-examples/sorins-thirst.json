@@ -1,0 +1,61 @@
+{
+ "card": "Sorin's Thirst",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "8052ecb0cab5",
+ "scenarios": [
+  {
+   "name": "target-leaves-before-resolution-so-no-life-is-gained",
+   "cr": [
+    "608.2b"
+   ],
+   "why": "The target is no longer on the battlefield when the Thirst tries to resolve, so the spell has no legal target and does nothing; its caster gains no life.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Sorin's Thirst"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Sorin's Thirst",
+     "mana": "BB",
+     "targets": [
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "move",
+     "card": "p1:Grizzly Bears",
+     "to": "hand"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 20
+     }
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "hand"
+    },
+    {
+     "card": "p0:Sorin's Thirst",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

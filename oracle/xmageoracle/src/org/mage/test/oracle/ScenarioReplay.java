@@ -621,6 +621,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return new ScriptedChoicePlayer(this);
         }
 
+        // XMage declares attackers/blockers in beginStep, before priority, so
+        // this is the only point where a recorded token ref can be resolved
+        // from the live battlefield and declared exactly instead of by name.
+        @Override
+        public void selectAttackers(Game game, UUID attackingPlayerId) {
+            owner.applyExactAttackers(this, game);
+            super.selectAttackers(game, attackingPlayerId);
+        }
+
+        @Override
+        public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
+            owner.applyExactBlockers(this, game);
+            super.selectBlockers(source, game, defendingPlayerId);
+        }
+
         // Tokens may be created after scripted() queues an answer. Resolve a
         // token ref against the LIVE choice game, not a prematurely bound or
         // stale alias. Other choice values and the target path stay unchanged.
@@ -731,8 +746,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (choiceGame != null && value != null && value.startsWith("@")
                     && isScenarioRef(value.substring(1)) && value.contains(":token:")) {
                 String ref = value.substring(1);
-                Permanent chosen = tokenChoice(ref, owner.seat(refSeat(ref)).getId(),
-                        choiceGame.getBattlefield().getAllPermanents());
+                UUID seatId = owner.seat(refSeat(ref)).getId();
+                Iterable<Permanent> field = choiceGame.getBattlefield().getAllPermanents();
+                Permanent chosen = tokenChoice(ref, seatId, field);
+                if (chosen == null && !owner.xmageSpelling(refName(ref)).equals(refName(ref))) {
+                    // A token copy of a renamed card carries XMage's spelling.
+                    chosen = tokenChoice(ref, owner.xmageSpelling(refName(ref)), seatId, field);
+                }
                 return object != null && chosen != null && chosen.getId().equals(object.getId());
             }
             return super.hasObjectTargetNameOrAlias(object, value);
@@ -937,41 +957,85 @@ public class ScenarioReplay extends CardTestPlayerBase {
          */
         @Override
         public boolean chooseTarget(Outcome outcome, mage.target.Target target, Ability source, Game game) {
-            // XMage poses every optional target ask even when no candidate is
-            // legal (Targets.canChooseFromPossibleTargets returns true for a
-            // min-0 object whatever its candidate set), while gorge's engine
-            // never poses an ask without a legal option -- so such an ask is
-            // unscriptable by construction and its only legal answer is none.
-            // Decline it without consulting the queue: a later ask's scripted
-            // answer (Does Machines' combat trigger, queued behind an earlier
-            // level-gain trigger's empty graveyard ask) must stay untouched
-            // for its own ask. A queued skip still belongs to THIS ask and is
-            // honoured by the ordinary path below.
-            if (unscriptableEmptyAsk(target.getMinNumberOfTargets(),
-                    target.possibleTargets(target.getAffectedAbilityControllerId(this.getId()), source, game).size(),
-                    !getTargets().isEmpty() && TestPlayer.TARGET_SKIP.equals(getTargets().get(0)))) {
-                return target.getSize() > 0 && target.isChosen(game);
-            }
-            // TestPlayer.chooseTarget runs its zone matcher over every queued
-            // answer and rejects a "[target_skip]" that is not at the queue
-            // front (checkTargetDefinitionMarksSupport), so a skip queued for
-            // a LATER target object (Rise from the Wreck's empty Mount slot)
-            // is hidden from this ask and restored, in order, afterwards.
-            List<String> later = hideAfterNextSkip(getTargets());
-            // TestPlayer's player branch scans the WHOLE queue for a
-            // "targetPlayer=" answer whenever the ask is a TargetPlayer OR a
-            // TargetPermanentOrPlayer, before its permanent branch runs, so
-            // the any-target ask of a chain whose LATER object targets a
-            // player would consume the later object's answer (Survey Mechan:
-            // "deals 3 damage to any target" then "target player draws
-            // three"). Withhold the later objects' player answers from this
-            // ask and restore them, in order, afterwards.
-            List<String> laterPlayers = hideLaterPlayerTargets(target, getTargets());
+            // The engine also calls chooseTarget directly (a spell's own
+            // target selection), not only through choose. Make the scripted
+            // matcher see this ask as a choice so a token ref's live,
+            // creation-order resolution applies here too; the outer finally
+            // keeps the previous game for the nested ask.
+            Game previous = choiceGame;
+            choiceGame = game;
             try {
-                return chooseTargetInSegment(outcome, target, source, game);
+                // XMage poses every optional target ask even when no candidate is
+                // legal (Targets.canChooseFromPossibleTargets returns true for a
+                // min-0 object whatever its candidate set), while gorge's engine
+                // never poses an ask without a legal option -- so such an ask is
+                // unscriptable by construction and its only legal answer is none.
+                // Decline it without consulting the queue: a later ask's scripted
+                // answer (Does Machines' combat trigger, queued behind an earlier
+                // level-gain trigger's empty graveyard ask) must stay untouched
+                // for its own ask. A queued skip still belongs to THIS ask and is
+                // honoured by the ordinary path below.
+                if (unscriptableEmptyAsk(target.getMinNumberOfTargets(),
+                        target.possibleTargets(target.getAffectedAbilityControllerId(this.getId()), source, game).size(),
+                        !getTargets().isEmpty() && TestPlayer.TARGET_SKIP.equals(getTargets().get(0)))) {
+                    return target.getSize() > 0 && target.isChosen(game);
+                }
+                // TestPlayer.chooseTarget runs its zone matcher over every queued
+                // answer and rejects a "[target_skip]" that is not at the queue
+                // front (checkTargetDefinitionMarksSupport), so a skip queued for
+                // a LATER target object (Rise from the Wreck's empty Mount slot)
+                // is hidden from this ask and restored, in order, afterwards.
+                List<String> later = hideAfterNextSkip(getTargets());
+                // TestPlayer's player branch scans the WHOLE queue for a
+                // "targetPlayer=" answer whenever the ask is a TargetPlayer OR a
+                // TargetPermanentOrPlayer, before its permanent branch runs, so
+                // the any-target ask of a chain whose LATER object targets a
+                // player would consume the later object's answer (Survey Mechan:
+                // "deals 3 damage to any target" then "target player draws
+                // three"). Withhold the later objects' player answers from this
+                // ask and restore them, in order, afterwards.
+                List<String> laterPlayers = hideLaterPlayerTargets(target, getTargets());
+                try {
+                    return chooseTargetInSegment(outcome, target, source, game);
+                } finally {
+                    getTargets().addAll(laterPlayers);
+                    getTargets().addAll(later);
+                }
             } finally {
-                getTargets().addAll(laterPlayers);
-                getTargets().addAll(later);
+                choiceGame = previous;
+            }
+        }
+
+        /** A divided target is chosen by TestPlayer.chooseTargetAmount, outside
+         * choose and chooseTarget, and reads the queue through the same name/
+         * alias matcher. Make that a choice too, so a token ref's live,
+         * creation-order resolution reaches the TargetAmount path. */
+        @Override
+        public boolean chooseTargetAmount(Outcome outcome, mage.target.TargetAmount target,
+                Ability source, Game game) {
+            Game previous = choiceGame;
+            choiceGame = game;
+            try {
+                return super.chooseTargetAmount(outcome, target, source, game);
+            } finally {
+                choiceGame = previous;
+            }
+        }
+
+        /** XMage's inline {@code $target=} form (castSpell/activateAbility
+         * with a target string) sets its targets in TestPlayer.addTargets,
+         * before any chooseTarget ask and outside choose. It reads the same
+         * name/alias matcher, so make it a choice too: a token ref spelled
+         * "@...:token:" resolves against the LIVE game through tokenChoice
+         * here as well, instead of a stale setup alias or a bare name. */
+        @Override
+        public boolean addTargets(Ability ability, Game game) {
+            Game previous = choiceGame;
+            choiceGame = game;
+            try {
+                return super.addTargets(ability, game);
+            } finally {
+                choiceGame = previous;
             }
         }
 
@@ -1418,6 +1482,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
             cast.clear();
             adjustedCasts.clear();
             faceDownRefs.clear();
+            exactAttacks.clear();
+            exactBlocks.clear();
             refAlias.clear();
             phase = MAIN;
             TURN = scenarioTurn(sc);
@@ -1575,14 +1641,33 @@ public class ScenarioReplay extends CardTestPlayerBase {
      *    loyalty activation (Found Footage's hand, Ajani's loyalty).
      *  - resolve by seat 1 waits on seat 1's queue (waitStackResolved), so a
      *    checkpoint on seat 0 would run while the spell is still on the stack.
+     *  - in a recorded run, an action of the non-active seat checkpoints on
+     *    that seat. XMage runs the whole queue of the seat that holds priority
+     *    before the opponent acts, so a checkpoint on the active seat would
+     *    run after every later action of that seat in the same turn and step
+     *    (ECL Impolite Entrance: p1's three mana activations and flash cast
+     *    were all visible at the step-10 checkpoint, though gorge cast the
+     *    flash at step 13). The actor's own queue puts its checkpoint between
+     *    its actions, holding the later one for its own step.
+     *  - a recorded pass that resolves or moves the step checkpoints on the
+     *    active seat, which has priority after the resolution or at the step
+     *    it reached; any other recorded pass checkpoints on the seat that
+     *    passed, which still holds priority.
      *
      * Every other op keeps seat 0, which acts last on the turn it is on.
      */
     private TestPlayer checkpointSeat(String op, JsonObject st, int stepIdx) {
         if (op.equals("pass") && isPassRun(steps(sc0), stepIdx)) {
-            // The active seat acts first at the step the pass reached, and
-            // XMage runs its whole queue there before the other seat acts.
-            return seat(activeSeat);
+            JsonObject pos = st.getAsJsonObject("xpos");
+            if (posFlag(pos, "moved") || posFlag(pos, "resolves")) {
+                // The active seat acts first at the step the pass reached (or
+                // gets priority back once the top object resolves), and XMage
+                // runs its whole queue there before the other seat acts.
+                return seat(activeSeat);
+            }
+            // Otherwise the recorded seat still holds priority: its checkpoint
+            // is a no-op between its own queued actions and checkpoints.
+            return seat(seatOfStep(steps(sc0), stepIdx));
         }
         if (op.equals("pass") && isActiveP1Pair(steps(sc0), stepIdx, activeSeat)
                 && passAction(steps(sc0), stepIdx) == PASS_PAIR_SECOND
@@ -1591,11 +1676,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // second checkpoint must follow that wait there.
             return seat(activeSeat);
         }
+        if (sc0 != null && opensOnOtherSeat(steps(sc0), stepIdx, activeSeat)) {
+            // A recorded game's action of the seat that is not active runs on
+            // that seat's queue, and so must its checkpoint: a checkpoint on
+            // the active seat runs only after the whole run of that seat's
+            // actions, so every one of them would show the last one's stack.
+            return seat(seatOfStep(steps(sc0), stepIdx));
+        }
         if (op.equals("pass_to")) {
             return seat(activeSeat);
         }
         if (op.equals("resolve")) {
             return seat(st.has("seat") ? st.get("seat").getAsInt() : 0);
+        }
+        if (sc0 != null && isRecordedRun(steps(sc0)) && !op.equals("attach")) {
+            // attach is queued on playerA (it must apply before this step's
+            // snapshot even when the step names the other seat), so its
+            // checkpoint stays there.
+            return seat(seatOfStep(steps(sc0), stepIdx));
         }
         return playerA;
     }
@@ -2250,7 +2348,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** Tokens' gorge refs rank the controller's live tokens in creation order.
      * Battlefield iteration is UUID/hash order in XMage, not entry order. */
     static Permanent tokenChoice(String ref, UUID controller, Iterable<Permanent> battlefield) {
-        String name = refName(ref).toLowerCase(java.util.Locale.ROOT);
+        return tokenChoice(ref, refName(ref), controller, battlefield);
+    }
+
+    /** As tokenChoice, but names the token under the given spelling. A token
+     * copy of the card under test carries XMage's spelling while the combat
+     * ref carries the scenario's. */
+    static Permanent tokenChoice(String ref, String name, UUID controller, Iterable<Permanent> battlefield) {
+        String wantedName = name.toLowerCase(java.util.Locale.ROOT);
         int wanted = 1;
         int hash = ref.lastIndexOf('#');
         if (hash >= 0 && ref.substring(hash + 1).matches("[0-9]+")) {
@@ -2259,7 +2364,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         List<Permanent> candidates = new ArrayList<>();
         for (Permanent permanent : battlefield) {
             if (permanent.isToken() && controller.equals(permanent.getControllerId())
-                    && permanent.getName().toLowerCase(java.util.Locale.ROOT).contains(name)) {
+                    && permanent.getName().toLowerCase(java.util.Locale.ROOT).contains(wantedName)) {
                 candidates.add(permanent);
             }
         }
@@ -2287,32 +2392,52 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return refs;
     }
 
-    private void bindOneAlias(String ref) {
-        if (refAlias.containsKey(ref) || currentGame == null) {
-            return;
-        }
-        int seatIndex = refSeat(ref);
+    /** The object a non-token scenario ref names among objs, the ref's seat's
+     * own objects in the caller's zone order: the rank-th whose scenario name
+     * matches. A rank-free ref is #1. Null when the ref names no such
+     * object. */
+    static mage.MageObject refRankChoice(String ref, List<mage.MageObject> objs,
+            java.util.function.Function<mage.MageObject, String> setupName) {
         String name = refName(ref);
-        boolean token = ref.contains(":token:");
         int wanted = 1;
         int hash = ref.lastIndexOf('#');
         if (hash >= 0 && ref.substring(hash + 1).matches("[0-9]+")) {
             wanted = Integer.parseInt(ref.substring(hash + 1));
         }
-        mage.MageObject match = null;
         int seen = 0;
-        if (token) {
-            for (Permanent perm : currentGame.getBattlefield().getAllPermanents()) {
-                if (!perm.isToken() || !seat(seatIndex).getId().equals(perm.getControllerId())
-                        || !perm.getName().contains(name)) {
-                    continue;
-                }
-                if (++seen == wanted) {
-                    match = perm;
-                    break;
-                }
+        for (mage.MageObject o : objs) {
+            if (!setupName.apply(o).equals(name)) {
+                continue;
             }
+            if (++seen == wanted) {
+                return o;
+            }
+        }
+        return null;
+    }
+
+    private void bindOneAlias(String ref) {
+        if (refAlias.containsKey(ref) || currentGame == null) {
+            return;
+        }
+        int seatIndex = refSeat(ref);
+        boolean token = ref.contains(":token:");
+        mage.MageObject match = null;
+        if (token) {
+            // A token ref ranks its controller's live tokens in creation
+            // order (tokenChoice), the same rule permanentRef and
+            // setupPermanent use. Battlefield iteration is UUID/hash order,
+            // so binding by iteration bound the wrong same-named token.
+            match = tokenChoice(ref, seat(seatIndex).getId(),
+                    currentGame.getBattlefield().getAllPermanents());
         } else {
+            String name = refName(ref);
+            int wanted = 1;
+            int hash = ref.lastIndexOf('#');
+            if (hash >= 0 && ref.substring(hash + 1).matches("[0-9]+")) {
+                wanted = Integer.parseInt(ref.substring(hash + 1));
+            }
+            int seen = 0;
             List<mage.MageObject> objs = new ArrayList<>();
             Player pl = seat(seatIndex);
             for (Permanent perm : currentGame.getBattlefield().getAllPermanents()) {
@@ -2326,15 +2451,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 if (pl.getId().equals(c.getOwnerId())) objs.add(c);
             }
             for (Card c : pl.getLibrary().getCards(currentGame)) objs.add(c);
-            for (mage.MageObject o : objs) {
-                if (!setupName(o).equals(name)) {
-                    continue;
-                }
-                if (++seen == wanted) {
-                    match = o;
-                    break;
-                }
-            }
+            // objs is already scoped to the ref's seat, so "p1:<name>" never
+            // binds a same-named card another seat owns.
+            match = refRankChoice(ref, objs, this::setupName);
         }
         if (match == null) {
             return;
@@ -2710,10 +2829,25 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** The XMage target string for one scenario target ref: its alias when
-     * setup bound one, else the stripped, XMage-spelled card name. */
+     * setup bound one, else the stripped, XMage-spelled card name. A token
+     * ref keeps its "@" alias spelling even when setup bound none: the token
+     * may not exist yet (a later step creates it, or setup places it at
+     * start), so the steps are queued before any id can be bound.
+     * ScriptedChoicePlayer resolves an "@...:token:" alias against the LIVE
+     * game through tokenChoice, so the ref's creation-order #n reaches
+     * exactly one of several same-named tokens. A scripted xmage_answers
+     * target binds a post-setup ref (bindAnswerAlias) before it gets here.
+     * An already-aliased ref is returned unchanged, so the funnel is
+     * idempotent for a hand-authored "@..." answer. */
     private String targetName(String ref) {
+        if (ref.startsWith("@")) {
+            return ref;
+        }
         String a = refAlias.get(ref);
-        return a != null ? a : xmageSpelling(refName(ref));
+        if (a != null) {
+            return a;
+        }
+        return ref.contains(":token:") ? "@" + ref : xmageSpelling(refName(ref));
     }
 
     /** Resolve a named setup permanent ref, preserving duplicate suffixes. */
@@ -2768,6 +2902,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // up: XMage's face-down permanent has no name, so a combat command names
     // it by TestPlayer's face-down test command instead (combatName).
     private final Set<String> faceDownRefs = new java.util.HashSet<>();
+    // One batch per recorded attack/block step: the refs its commands were
+    // lowered from and the PlayerAction each command added. XMage's
+    // attack/block command takes only a name (plus a same-name ":k" index),
+    // so it cannot distinguish a token from a card of the same name. A batch
+    // is resolved against the LIVE battlefield inside selectAttackers/
+    // selectBlockers, when a token created earlier in the replay exists; an
+    // ambiguous command is replaced by an exact declaration.
+    private final List<ExactAttackBatch> exactAttacks = new ArrayList<>();
+    private final List<ExactBlockBatch> exactBlocks = new ArrayList<>();
     // Setup objects the scenario can name by ref ("p0:Grizzly Bears#2"): the
     // XMage alias each ref is registered under, so two same-name permanents
     // are told apart. Filled during setup, read by step targeting.
@@ -3607,6 +3750,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
     static final String CMD_REQUIRE_STACK = "pass pair needs a stack object";
     static final String CMD_WAIT_RESOLVE_ONE = "waitStackResolved:1";
     static final String CMD_YIELD_PRIORITY = "pass handoff to the opponent";
+    /** Queued on the passing seat itself (not the active one) by a resolving
+     * pass of a seat that is not the active player: that seat passes for real,
+     * so nothing it has queued later in the turn and step runs at this
+     * priority. */
+    static final String CMD_PASS_OWN_PRIORITY = "resolving pass of the non-active seat";
     static final String CMD_REQUIRE_EMPTY_STACK = "opening pass pair needs an empty stack";
     static final String CMD_ADVANCE_STEP = "opening pass pair advances the step";
 
@@ -3709,6 +3857,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return isOp(steps, index, "pass") && steps.get(index).getAsJsonObject().has("xpos");
     }
 
+    /** Whether the scenario is a recorded whole game (an xengine tape or
+     * window): at least one of its passes carries a position. */
+    static boolean isRecordedRun(JsonArray steps) {
+        for (int i = 0; i < steps.size(); i++) {
+            if (isPassRun(steps, i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether step {@code index} is a cast, activation or land play, of a
+     * recorded game (one that has passes with positions), by a seat that is
+     * not the active player. */
+    static boolean opensOnOtherSeat(JsonArray steps, int index, int activeSeat) {
+        if (!(isOp(steps, index, "cast") || isOp(steps, index, "activate") || isOp(steps, index, "play"))
+                || seatOfStep(steps, index) == activeSeat) {
+            return false;
+        }
+        return isRecordedRun(steps);
+    }
+
     private static boolean posFlag(JsonObject pos, String key) {
         return pos.has(key) && pos.get(key).getAsBoolean();
     }
@@ -3797,9 +3967,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * after one. The pass that resolves an object (gorge's stack lost one)
      * queues the one-object resolution on the active seat, the seat that has
      * priority at the step the pass was made in; a pass that only hands
-     * priority on or moves the step queues nothing. The step after a pass the
-     * active seat made in the same step, if it is an action of the other seat,
-     * starts by yielding priority to that seat (the lone-handoff recipe). */
+     * priority on or moves the step queues nothing. A recorded pass by the
+     * OTHER seat that resolves the top object is queued on that seat as its
+     * own real pass (the active seat's passes stay virtual checkpoints), so an
+     * action that seat has queued later in the same turn and step -- a flash
+     * spell held for its own step -- cannot fire at this priority instead
+     * (ECL Impolite Entrance: p1's Glamermite fired at the p0/p1 pass pair, so
+     * the top object never resolved). The step after a pass the active seat
+     * made in the same step, if it is an action of the other seat, starts by
+     * yielding priority to that seat (the lone-handoff recipe). */
     static List<String> passRunCommands(JsonArray steps, int index, int activeSeat) {
         List<String> cmds = new ArrayList<>();
         if (isPassRun(steps, index - 1) && !isOp(steps, index, "pass")) {
@@ -3812,9 +3988,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 cmds.add(CMD_YIELD_PRIORITY);
             }
         }
-        if (isPassRun(steps, index) && posFlag(steps.get(index).getAsJsonObject().getAsJsonObject("xpos"), "resolves")) {
-            cmds.add(CMD_REQUIRE_STACK);
-            cmds.add(CMD_WAIT_RESOLVE_ONE);
+        if (isPassRun(steps, index)) {
+            JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
+            // A pass that resolves an object needs the recorded seat to
+            // really pass: the active seat's wait is already a real pass,
+            // but the other seat would otherwise run its next queued action
+            // at this priority (a flash cast held for its own step). A pass
+            // that only hands priority on is virtual; its checkpoint
+            // consumes the seat's priority instead.
+            if (seatOfStep(steps, index) != activeSeat && posFlag(pos, "resolves")) {
+                cmds.add(CMD_PASS_OWN_PRIORITY);
+            }
+            if (posFlag(pos, "resolves")) {
+                cmds.add(CMD_REQUIRE_STACK);
+                cmds.add(CMD_WAIT_RESOLVE_ONE);
+            }
         }
         return cmds;
     }
@@ -3978,8 +4166,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     private void queuePassCommands(int stepIdx) {
-        // Every pass command runs on the active seat: seat 0 for every shape
+        // Most pass commands run on the active seat: seat 0 for every shape
         // but the active seat 1's own p1-first pair (isActiveP1Pair).
+        // CMD_PASS_OWN_PRIORITY is the exception: it runs on the passing
+        // non-active seat, not the active seat that carries the checkpoints.
         TestPlayer active = seat(activeSeat);
         for (String cmd : passCommands(steps(sc0), stepIdx, activeSeat)) {
             switch (cmd) {
@@ -4008,6 +4198,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     break;
                 case CMD_YIELD_PRIORITY:
                     runCode(cmd, turn, phase, active, (info, pl, g) -> pl.pass(g));
+                    break;
+                case CMD_PASS_OWN_PRIORITY:
+                    // The seat that actually passed in the recorded game, not
+                    // the active seat that carries the checkpoints. Queueing a
+                    // real pass here puts it ahead of that seat's later actions
+                    // in the same turn and step, which must not fire at this
+                    // priority (a flash cast held for its own step).
+                    runCode(cmd, turn, phase, seat(seatOfStep(steps(sc0), stepIdx)),
+                            (info, pl, g) -> pl.pass(g));
                     break;
                 case CMD_REQUIRE_EMPTY_STACK:
                     runCode(cmd, turn, phase, playerA, (info, pl, g) -> {
@@ -4124,9 +4323,38 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // Bears): XMage declares the must-attack creature itself
                 // (above), and selectAttackers consumes only the commands of
                 // the others, so a command for the forced one is left over.
-                attackNames = withoutMustAttack(attackNames, ScenarioReplay::isMustAttackName);
-                for (String a : attackCommandOrder(attackNames)) {
-                    attack(turn, p, a, seat(seatOf(str(st, "defender"))));
+                List<String> keptNames = withoutMustAttack(attackNames, ScenarioReplay::isMustAttackName);
+                List<String> keptRefs = new ArrayList<>();
+                for (int i = 0, kept = 0; i < attackNames.size() && kept < keptNames.size(); i++) {
+                    if (keptNames.get(kept).equals(attackNames.get(i))) {
+                        keptRefs.add(attackers.get(i));
+                        kept++;
+                    }
+                }
+                ExactAttackBatch exact = new ExactAttackBatch(turn, seatIdx, seatOf(str(st, "defender")));
+                List<String> refs = new ArrayList<>(keptRefs);
+                for (String name : attackCommandOrder(keptNames)) {
+                    // The ordered names are a permutation of keptNames, so
+                    // each has one ref left; duplicates are interchangeable
+                    // here because the batch resolves the ref exactly.
+                    int at = -1;
+                    for (int i = 0; i < refs.size(); i++) {
+                        if (combatName(refs.get(i)).equals(name)) {
+                            at = i;
+                            break;
+                        }
+                    }
+                    if (at < 0) {
+                        throw new IllegalStateException("no attack ref lowered to command " + name);
+                    }
+                    String ref = refs.remove(at);
+                    int before = p.getActions().size();
+                    attack(turn, p, name, seat(exact.defenderSeat));
+                    exact.refs.add(ref);
+                    exact.actions.add(p.getActions().get(before));
+                }
+                if (!exact.refs.isEmpty()) {
+                    exactAttacks.add(exact);
                 }
                 phase = PhaseStep.DECLARE_ATTACKERS;
                 return;
@@ -4198,9 +4426,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // A recorded game's empty declaration has no "blocks": there
                 // is nothing to queue, the step only reaches declare-blockers.
                 JsonArray blocks = st.has("blocks") ? st.getAsJsonArray("blocks") : new JsonArray();
+                ExactBlockBatch exact = new ExactBlockBatch(turn, seatIdx);
                 for (JsonElement e : blocks) {
                     JsonArray pair = e.getAsJsonArray();
-                    block(turn, p, combatName(pair.get(0).getAsString()), combatName(pair.get(1).getAsString()));
+                    String blocker = pair.get(0).getAsString();
+                    String attacker = pair.get(1).getAsString();
+                    int before = p.getActions().size();
+                    block(turn, p, combatName(blocker), combatName(attacker));
+                    exact.blockers.add(blocker);
+                    exact.attackers.add(attacker);
+                    exact.actions.add(p.getActions().get(before));
+                }
+                if (!exact.blockers.isEmpty()) {
+                    exactBlocks.add(exact);
                 }
                 phase = PhaseStep.DECLARE_BLOCKERS;
                 return;
@@ -4417,9 +4655,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         // as one castSpell string and lets XMage split it,
                         // as the single-target form does; addTarget's alias
                         // answers are rejected ("Must be target amount").
+                        // Use the same target-amount name helper as the
+                        // scripted "<ref>^X=<share>" answers, so a token ref
+                        // keeps its "@...:token:" spelling and the addTargets
+                        // choice context resolves it live (a bare name would
+                        // lose the ref's creation-order #n).
                         List<String> names = new ArrayList<>();
                         for (String t : tg) {
-                            names.add(xmageSpelling(refName(t)));
+                            names.add(amountTargetName(t));
                         }
                         castSpell(turn, phase, p, card, String.join("^", names));
                         cast.add(cardName);
@@ -4988,6 +5231,191 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** TestPlayer's combat command for a face-down creature. */
     static String faceDownCombatName() {
         return mage.constants.EmptyNames.FACE_DOWN_CREATURE.getTestCommand();
+    }
+
+    /** One attack step's queued commands: the scenario refs they were
+     * lowered from and the PlayerAction each command added. */
+    private static final class ExactAttackBatch {
+        final int turn;
+        final int seat;
+        final int defenderSeat;
+        final List<String> refs = new ArrayList<>();
+        final List<PlayerAction> actions = new ArrayList<>();
+
+        ExactAttackBatch(int turn, int seat, int defenderSeat) {
+            this.turn = turn;
+            this.seat = seat;
+            this.defenderSeat = defenderSeat;
+        }
+    }
+
+    /** One block step's queued [blocker, attacker] commands and actions. */
+    private static final class ExactBlockBatch {
+        final int turn;
+        final int seat;
+        final List<String> blockers = new ArrayList<>();
+        final List<String> attackers = new ArrayList<>();
+        final List<PlayerAction> actions = new ArrayList<>();
+
+        ExactBlockBatch(int turn, int seat) {
+            this.turn = turn;
+            this.seat = seat;
+        }
+    }
+
+    /**
+     * Replace a name-only attacker command with an exact declaration when the
+     * controlling seat has both a token and a card of that name. XMage's
+     * "Name:k" command ranks the two kinds together and takes whichever it
+     * finds first, so it can declare the card when the scenario recorded the
+     * token (and the reverse). This runs at the engine's declaration point,
+     * after a token created earlier in the turn is on the battlefield.
+     */
+    private void applyExactAttackers(TestPlayer player, Game game) {
+        for (java.util.Iterator<ExactAttackBatch> it = exactAttacks.iterator(); it.hasNext();) {
+            ExactAttackBatch batch = it.next();
+            if (batch.turn != game.getTurnNum() || !player.getId().equals(seat(batch.seat).getId())) {
+                continue;
+            }
+            it.remove();
+            for (int i = 0; i < batch.refs.size(); i++) {
+                String ref = batch.refs.get(i);
+                String name = battlefieldName(ref);
+                Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
+                Permanent exact = combatPermanent(ref, name, player.getId(), game);
+                if (exact != null && game.getCombat().getAttackers().contains(exact.getId())) {
+                    // XMage's checkAttackRequirements declared this forced
+                    // attacker itself; the recorded command is satisfied.
+                    player.getActions().remove(batch.actions.get(i));
+                    continue;
+                }
+                if (!combatRefAmbiguous(name, player.getId(), battlefield)) {
+                    continue;
+                }
+                player.getActions().remove(batch.actions.get(i));
+                if (exact == null) {
+                    throw new IllegalArgumentException("attack ref " + ref + " is not on the battlefield");
+                }
+                player.declareAttacker(exact.getId(), seat(batch.defenderSeat).getId(), game, false);
+                if (!game.getCombat().getAttackers().contains(exact.getId())) {
+                    throw new IllegalArgumentException("attack ref " + ref + " was not declared (battlefield: "
+                            + battlefieldListing() + ")");
+                }
+            }
+        }
+    }
+
+    /**
+     * The blocker counterpart of applyExactAttackers. Either side of a
+     * recorded [blocker, attacker] pair can be the token that shares its name
+     * with a card, so both refs are resolved exactly and the pair is declared
+     * directly instead of lowering either to a name.
+     */
+    private void applyExactBlockers(TestPlayer player, Game game) {
+        UUID attackerId = game.getCombat().getAttackingPlayerId();
+        if (attackerId == null) {
+            return;
+        }
+        for (java.util.Iterator<ExactBlockBatch> it = exactBlocks.iterator(); it.hasNext();) {
+            ExactBlockBatch batch = it.next();
+            if (batch.turn != game.getTurnNum() || !player.getId().equals(seat(batch.seat).getId())) {
+                continue;
+            }
+            it.remove();
+            for (int i = 0; i < batch.blockers.size(); i++) {
+                String blockerRef = batch.blockers.get(i);
+                String attackerRef = batch.attackers.get(i);
+                String blockerName = battlefieldName(blockerRef);
+                String attackerName = battlefieldName(attackerRef);
+                Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
+                if (!combatRefAmbiguous(blockerName, player.getId(), battlefield)
+                        && !combatRefAmbiguous(attackerName, attackerId, battlefield)) {
+                    continue;
+                }
+                player.getActions().remove(batch.actions.get(i));
+                Permanent blocker = combatPermanent(blockerRef, blockerName, player.getId(), game);
+                Permanent attacker = combatPermanent(attackerRef, attackerName, attackerId, game);
+                if (blocker == null || attacker == null) {
+                    throw new IllegalArgumentException("block " + blockerRef + " -> " + attackerRef
+                            + " names no live permanent (battlefield: " + battlefieldListing() + ")");
+                }
+                player.declareBlocker(player.getId(), blocker.getId(), attacker.getId(), game);
+                mage.game.combat.CombatGroup group = game.getCombat().findGroup(attacker.getId());
+                if (group == null || !group.getBlockers().contains(blocker.getId())) {
+                    throw new IllegalArgumentException("block " + blockerRef + " -> " + attackerRef
+                            + " was not declared (battlefield: " + battlefieldListing() + ")");
+                }
+            }
+        }
+    }
+
+    /** The exact permanent a recorded combat ref names, resolved from live
+     * state. A token ref ranks its controller's live tokens by creation order
+     * (tokenChoice). A non-token ref names the object the driver bound to the
+     * ref: a card ref's `#k` is the setup/objRef ordinal ACROSS ZONES (the
+     * second `X` in the deck is `p0:X#2` whether it sits in the graveyard or
+     * the battlefield), not a rank among the controller's live battlefield
+     * permanents, so only the bound object id can identify it. `name` is the
+     * XMage spelling from battlefieldName; `boundId` is the id bound to a
+     * non-token ref (null when the driver never bound one). */
+    static Permanent combatPermanent(String ref, String name, UUID controller, UUID boundId,
+            Iterable<Permanent> battlefield) {
+        if (ref.contains(":token:")) {
+            Permanent token = tokenChoice(ref, controller, battlefield);
+            if (token == null && !name.equals(refName(ref))) {
+                // A token copy of a renamed card under test carries the
+                // XMage spelling, not the scenario ref's spelling.
+                token = tokenChoice(ref, name, controller, battlefield);
+            }
+            return token;
+        }
+        if (boundId == null) {
+            return null;
+        }
+        for (Permanent permanent : battlefield) {
+            if (!permanent.isToken() && permanent.getId().equals(boundId)
+                    && controller.equals(permanent.getControllerId())) {
+                return permanent;
+            }
+        }
+        return null;
+    }
+
+    /** combatPermanent for a live game: resolve a non-token ref through the
+     * object id registerAliases (or bindOneAlias) bound to it, so a `#k`
+     * setup ordinal is never mistaken for a live battlefield rank. A token
+     * ref keeps tokenChoice's live creation order, where `#k` IS a live
+     * rank. */
+    private Permanent combatPermanent(String ref, String name, UUID controller, Game game) {
+        UUID boundId = null;
+        if (!ref.contains(":token:")) {
+            String alias = refAlias.get(ref);
+            if (alias != null) {
+                boundId = seat(refSeat(ref)).getAliasByName(alias);
+            }
+        }
+        return combatPermanent(ref, name, controller, boundId, game.getBattlefield().getAllPermanents());
+    }
+
+    /** Whether XMage's name-only combat command cannot tell this name's
+     * token(s) and card(s) apart: the seat controls both kinds under it. The
+     * rule is by kind, not a list of cards, so it covers a token copy of a
+     * card, a card created beside a same-name token, attackers and blockers. */
+    static boolean combatRefAmbiguous(String name, UUID controller, Iterable<Permanent> battlefield) {
+        boolean token = false;
+        boolean card = false;
+        for (Permanent permanent : battlefield) {
+            if (!controller.equals(permanent.getControllerId())
+                    || !CardUtil.haveSameNames(permanent.getName(), name, true)) {
+                continue;
+            }
+            if (permanent.isToken()) {
+                token = true;
+            } else {
+                card = true;
+            }
+        }
+        return token && card;
     }
 
     /** Whether an activation's XMage text turns its permanent face up

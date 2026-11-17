@@ -380,7 +380,7 @@
     }
    ],
    "xmage": "SanctifierEnVecTest#testEtbWithPaintersServant",
-   "known_bug": "XP[layer5-colors-battlefield-only]: the derived colour table only records battlefield objects (engine/rules/layer5colors.go:55 'o.Zone != state.ZBattlefield' returns), so Painter's Servant's AddColor (AffectedZone$ All, chosen Black) never colours graveyard cards and Sanctifier's ChangeZoneAll Card.Black,Card.Red skips Divination. CR 611.3a, 613.1e (layer 5 applies to cards in all zones the effect names)."
+   "known_bug": "XP[layer5-colors-battlefield-only]: the derived colour table records battlefield objects only: derivedColorTable's add closure returns for any object whose Zone is not ZBattlefield, so Painter's Servant's AddColor (AffectedZone$ All, chosen Black) never colours graveyard cards and Sanctifier en-Vec's ChangeZoneAll Card.Black,Card.Red skips Divination (observed p0 exile Divination 0, want 1). CR 611.3a, 613.1e (layer 5 applies to cards in all zones the effect names). verified at gorge 08fc227a61."
   }
  ]
 }

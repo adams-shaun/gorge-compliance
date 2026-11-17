@@ -1,0 +1,63 @@
+{
+ "card": "Akki Lavarunner",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "7358ef0e3075",
+ "scenarios": [
+  {
+   "name": "a-flip-card-is-only-legendary-after-it-flips",
+   "cr": [
+    "710.2"
+   ],
+   "why": "Akki Lavarunner is not legendary before it flips, so Day of Destiny leaves it a 1/1. When its combat damage to the opponent flips it into the legendary Tok-Tok, the +2/+2 applies and the same permanent is 4/4.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Akki Lavarunner",
+      "Day of Destiny"
+     ]
+    },
+    "p1": {}
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Akki Lavarunner"
+     ],
+     "defender": "p1",
+     "expect": [
+      {
+       "card": "p0:Akki Lavarunner",
+       "pt": "1/1",
+       "no_types": [
+        "Legendary"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "end-combat"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Akki Lavarunner",
+     "zone": "battlefield",
+     "pt": "4/4",
+     "types": [
+      "Legendary",
+      "Goblin"
+     ]
+    },
+    {
+     "life": {
+      "p1": 19
+     }
+    }
+   ]
+  }
+ ]
+}

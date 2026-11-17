@@ -184,7 +184,7 @@
     }
    ],
    "xmage": "ShamenEnKorTest#testSecondAbilityNonCombatDamage",
-   "known_bug": "XP[effect-replacement-chosencard-cleared]: the {1}{W} SelflessDamage replacement (ValidSource$ Card.ChosenCardStrict) never applies; Lion takes Bolt and dies, Shaman untouched. The chain's DB$ Cleanup ClearChosenCard$ True wipes the source's chosen list, and gorge snapshots the chosen card onto Effect-created objects only for may-play grants (engine/effects/misc.go:225-247 effectChosenSnapshot), so the replacement's ChosenCardStrict falls back to the cleared live list and fails closed (engine/effects/filter.go:2014-2019). CR 614.9, 609.7."
+   "known_bug": "XP[choosesource-choice-not-selectable]: Shaman en-Kor's {1}{W} ability poses a ChooseSource ask whose card options carry Obj but no Label (effChooseSource/sourceChoices), so the ported setChoice(playerB, \"Lightning Bolt\") is not offered and the fallback records the empty first option; the SelflessDamage replacement's ValidSource$ Card.ChosenCardStrict never matches, so the Bolt kills the Lion while the Shaman survives (observed Lion battlefield 0, want 1; Shaman graveyard 0, want 1). The old ClearChosenCard$/effectChosenSnapshot claim is not the failing read at this pin: the choice is never bound. CR 614.9, 609.7. verified at gorge 08fc227a61."
   }
  ]
 }

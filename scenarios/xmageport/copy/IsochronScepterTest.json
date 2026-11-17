@@ -379,7 +379,7 @@
     }
    ],
    "xmage": "IsochronScepterTest#testAngelsGrace",
-   "known_bug": "XP[effect-lifereduced-replacement-unregistered]: Angel's Grace's SP$ Effect ReplacementEffects$ SelflessDamage (Event$ LifeReduced with ReplaceWith$ ReduceLoss body) is never registered: engine/effects/effect.go:560-565 only registers bodied effect replacements for DamageDone/Moved/CreateToken/AddCounter, and engine/rules/replacement_life.go:159-162 only scans bodiless Prevent$ effect replacements. p0 took 20 combat + 3 Bolt to -3 (probe), survived turn 2 only via can't-lose, then lost on turn 3 -\u003e 'game stopped'. CR 614.1a / Angel's Grace Oracle."
+   "known_bug": "XP[effect-lifereduced-replacement-unregistered]: Angel's Grace's SP$ Effect ReplacementEffects$ SelflessDamage (Event$ LifeReduced, ReplaceWith$ ReduceLoss) is never registered: effEffect only creates a bodied continuous-effect replacement for DamageDone/Destroy/Moved/CreateToken/AddCounter, and lifeReplacementCandidates' effect-created arm only scans bodyless Prevent$ True lines. The life floor is not applied; p0 loses to the combat damage and Bolt and the scenario's pass_to reports the game stopped (want p0 1). CR 614.1a / Angel's Grace Oracle. verified at gorge 08fc227a61."
   }
  ]
 }

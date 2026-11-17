@@ -1,0 +1,56 @@
+{
+ "card": "Lightning Bolt",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "1c8ec5180252",
+ "scenarios": [
+  {
+   "name": "lethal-damage-then-state-based-destruction",
+   "cr": [
+    "120.5"
+   ],
+   "why": "The Bolt puts 3 damage on a 2/2. The game's state-based cleanup then moves the creature into the graveyard of the player who owns it; the spell itself is not what destroys it.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Lightning Bolt"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Lightning Bolt",
+     "mana": "R",
+     "targets": [
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Lightning Bolt",
+     "zone": "graveyard"
+    },
+    {
+     "life": {
+      "p1": 20
+     }
+    }
+   ]
+  }
+ ]
+}

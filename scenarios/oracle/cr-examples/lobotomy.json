@@ -1,0 +1,57 @@
+{
+ "card": "Lobotomy",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "48ef53fd31c3",
+ "scenarios": [
+  {
+   "name": "empty-hand-chooses-nothing-so-nothing-is-exiled",
+   "cr": [
+    "701.23c"
+   ],
+   "why": "The target player has no cards in hand, so no card can be chosen; the search finds no name to look for and the card in their graveyard stays put.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Lobotomy"
+     ]
+    },
+    "p1": {
+     "graveyard": [
+      "Lightning Bolt"
+     ],
+     "library": [
+      "Forest",
+      "Forest",
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Lobotomy",
+     "mana": "CCUB",
+     "targets": [
+      "p1"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "graveyard_size": {
+      "p1": 1
+     }
+    },
+    {
+     "card": "p1:Lightning Bolt",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

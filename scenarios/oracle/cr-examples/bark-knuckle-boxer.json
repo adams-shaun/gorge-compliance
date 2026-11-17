@@ -1,0 +1,63 @@
+{
+ "card": "Bark-Knuckle Boxer",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "44e016585c9c",
+ "scenarios": [
+  {
+   "name": "fourth-mana-spent-on-spells-triggers-expend",
+   "cr": [
+    "700.14"
+   ],
+   "why": "Casting the Boxer spends two mana on spells this turn; a following three-mana Divination takes the turn's total to five, so the fourth-mana threshold is crossed and the Boxer gains indestructible.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Bark-Knuckle Boxer",
+      "Divination"
+     ],
+     "library": [
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Bark-Knuckle Boxer",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Divination",
+     "mana": "CCU"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Bark-Knuckle Boxer",
+     "zone": "battlefield",
+     "keywords": [
+      "Indestructible"
+     ]
+    }
+   ]
+  }
+ ]
+}
