@@ -215,7 +215,7 @@
     }
    ],
    "xmage": "SerraAscendantTest#testSilence",
-   "known_bug": "XP[reveal-x-cost-unparsed]: Martyr of Sands' Reveal\u003cX/Card.White\u003e cost doesn't match choiceCost (needs \\d+, engine/rules/cost/parse.go:181) so it degrades to Unknown; no reveal is asked, X=0, life gain 0 (the 3 Silvercoat Lion choices go unconsumed), p0 stays below 30 and Serra Ascendant dies as a 1/1. CR 107.3/601.2b (X announced in cost). Secondary translation bug: manaFromCostX treats the token 'Reveal\u003c...\u003e' as hybrid R mana (cmd/xmageport/build.go:385) -\u003e activation mana 'CR'."
+   "known_bug": "XP[reveal-x-cost-unparsed]: Martyr of Sands' Reveal\u003cX/Card.White\u003e cost does not match the choiceCost pattern (Reveal\u003cN/Spec\u003e needs a literal digit count), so ParseCost degrades it to Unknown: no reveal is asked, X=0, the life gain is 0 and Serra Ascendant is a 1/1 that dies in the block (observed p0 life 21, want 30; Serra Ascendant battlefield 0, want 1). CR 107.3 / 601.2b (X announced in cost). Secondary translation issue: manaFromCostX treats the token \"Reveal\u003c...\u003e\" as hybrid R mana, giving activation mana \"CR\". verified at gorge 08fc227a61."
   }
  ]
 }

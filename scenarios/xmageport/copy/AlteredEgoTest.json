@@ -258,7 +258,7 @@
     }
    ],
    "xmage": "AlteredEgoTest#copyXCreature",
-   "known_bug": "XP[copy-x-etb-reads-copier-x]: at gorge 7490ec0ff the Altered Ego copy of Endless One enters 6/6, XMage 3/3: gorge applies the copied \"enters with X +1/+1 counters\" with the Altered Ego spell's X (CR 107.3m) on top of Altered Ego's own X counters, XMage counts only the latter. Needs triage: CR 107.3m reads on gorge's side."
+   "known_bug": "XP[copy-x-etb-reads-copier-x]: triaged: XMage's expectation is wrong, gorge is right. The Altered Ego copy of Endless One enters 6/6 while XMage's test asserts 3/3 (\"The X should not be copied\"). CR 107.3m: an enters replacement that refers to X takes the X chosen for the spell that became the object, so the copied \"enters with X +1/+1 counters\" reads Altered Ego's X=3 and Altered Ego's own X=3 adds another three counters to the 0/0 (effClone/clonePT fold the copy exceptions; entryCounterGrants folds the entry counters). The row stays until the XMage test is corrected upstream. verified at gorge 08fc227a61."
   }
  ]
 }
