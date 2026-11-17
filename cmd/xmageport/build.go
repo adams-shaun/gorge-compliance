@@ -837,6 +837,9 @@ func (t *translator) assertRef(p int, name string) (string, *refusal) {
 	}
 	if p >= 0 {
 		if rs := t.anyRefs(p, n); len(rs) > 0 {
+			if r := t.tokenCopyAssertRefusal(p, n); r != nil {
+				return "", r
+			}
 			if r := t.copyOnlyRef(p, n); r != "" {
 				return r, nil
 			}
@@ -1085,7 +1088,13 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 		if r != nil {
 			return nil, r
 		}
-		return []*expect{{Card: ref, PT: fmt.Sprintf("%d/%d", pw, tg)}}, nil
+		pt := fmt.Sprintf("%d/%d", pw, tg)
+		if nm, rr := xmageName(name); rr == nil {
+			if r := t.anyScopePTConflict(p, nm, pt); r != nil {
+				return nil, r
+			}
+		}
+		return []*expect{{Card: ref, PT: pt}}, nil
 	case "assertCounterCount":
 		var p = -1
 		if q, ok := seatOf(a[0]); ok {
@@ -1676,7 +1685,7 @@ func (em *emitter) optionalSacrificeMode(a *action) string {
 // the battlefield instead of the stack, or after its once-per-turn use does
 // not turn an unrelated setChoice(true) into a cast mode.
 func (t *translator) setupGrantsKeyword(prefix string, a *action) bool {
-	return t.keywordGrants(prefix, a, false)
+	return t.keywordGrants(prefix, a, false, false)
 }
 
 // setupMayGrantKeyword is setupGrantsKeyword for a refusal rather than a
@@ -1684,16 +1693,18 @@ func (t *translator) setupGrantsKeyword(prefix string, a *action) bool {
 // counts as "may apply", so a grant it cannot rule out is still seen, while a
 // type word or controller that excludes the cast still rules it out.
 func (t *translator) setupMayGrantKeyword(prefix string, a *action) bool {
-	return t.keywordGrants(prefix, a, true)
+	return t.keywordGrants(prefix, a, true, false)
 }
 
-func (t *translator) keywordGrants(prefix string, a *action, lenient bool) bool {
+// keywordGrants scans the seat's setup battlefield (every setup zone when
+// anyZone: a granter that a test casts or copies into play still grants).
+func (t *translator) keywordGrants(prefix string, a *action, lenient, anyZone bool) bool {
 	castFace := t.castFace(a.card)
 	if castFace == nil {
 		return false
 	}
 	for _, ac := range t.setup[a.seat] {
-		if ac.zone != "battlefield" {
+		if ac.zone != "battlefield" && !anyZone {
 			continue
 		}
 		c, ok := t.lookup(ac.name)
@@ -1943,6 +1954,7 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			return nil
 		}
 		g = &group{at: len(em.steps) - 1}
+		g.xvals = append(g.xvals, a.xlead...)
 		modes := 0
 		for _, ch := range a.choices {
 			if ch.mode > 0 {
@@ -2014,8 +2026,12 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			if ch.target {
 				xk = "target"
 			}
-			g.xvals = append(g.xvals, xans{Seat: ch.seat, Kind: xk, Value: pick})
-			if ch.target && !hasTargets {
+			if !ch.synth {
+				g.xvals = append(g.xvals, xans{Seat: ch.seat, Kind: xk, Value: pick})
+			}
+			if ch.kind != "" {
+				g.answers = append(g.answers, answer{Kind: ch.kind, Pick: []string{pick}, Seat: &seat})
+			} else if ch.target && !hasTargets {
 				g.targets = append(g.targets, pick)
 			} else if ch.target {
 				g.answers = append(g.answers, answer{Kind: "target", Pick: []string{pick}, Seat: &seat})
@@ -2082,6 +2098,10 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 					s.Kicked = true
 				}
 				a.choices = a.choices[1:]
+			}
+			em.armCastShapes(a)
+			if r := em.optionalKeywordCasts(a, s); r != nil {
+				return nil, r
 			}
 			// XMage answers an OptionalCost static ("As an additional cost to
 			// cast this spell, you may ...") with the first setChoice(true);
@@ -2306,7 +2326,7 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 		}
 		xs := a.expects
 		if a.playCheck != nil {
-			off, r := em.t.playableOffer(a.seat, a.playCheck.text)
+			off, r := em.t.playableOffer(a.seat, a.src, a.playCheck.want, a.playCheck.text)
 			if r != nil {
 				return nil, r
 			}
@@ -2341,6 +2361,15 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			m, r := em.castMana(a.seat, name, 0)
 			if r != nil {
 				return nil, refuse("playable-check", "cost of %s: %s", xs[0].Offered.Card, r.Detail)
+			}
+			if c, ok := em.t.lookup(name); ok && printsAltCast(c) {
+				// XMage's check is true when ANY cast of the card is payable
+				// (the face-down {3} of a Willbender with Swamps, Cyclonic
+				// Rift's {6}{U} overload), so the pool holds what the lands
+				// can make, not only the plain cost
+				if lp := landPool(em.t.manaSources(a.seat, em.entered[a.seat]).landSrcs); len(lp) > len(m) {
+					m = lp
+				}
 			}
 			if m != "" {
 				em.add(&step{Op: "mana", Seat: a.seat, Mana: m})
