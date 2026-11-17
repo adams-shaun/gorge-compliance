@@ -17,8 +17,8 @@ func TestBoolAnswerMapsToBinaryAsk(t *testing.T) {
 
 	// cumulative upkeep: matched by Kind, whatever the order
 	for _, opts := range [][]dumpOption{
-		{{0, "cumulative_pay", "Pay 1 per age (1 age counter(s))"}, {1, "sacrifice", "Sacrifice Energy Storm"}},
-		{{0, "sacrifice", "Sacrifice Energy Storm"}, {1, "cumulative_pay", "Pay 1 per age (1 age counter(s))"}},
+		{{Index: 0, Kind: "cumulative_pay", Label: "Pay 1 per age (1 age counter(s))"}, {Index: 1, Kind: "sacrifice", Label: "Sacrifice Energy Storm"}},
+		{{Index: 0, Kind: "sacrifice", Label: "Sacrifice Energy Storm"}, {Index: 1, Kind: "cumulative_pay", Label: "Pay 1 per age (1 age counter(s))"}},
 	} {
 		if got, ok := mapBoolAnswer("no", opts); !ok || got != "Sacrifice Energy Storm" {
 			t.Errorf("no -> %q, %v; want the Sacrifice option (%+v)", got, ok, opts)
@@ -36,9 +36,9 @@ func TestBoolAnswerMapsToBinaryAsk(t *testing.T) {
 
 	// not a binary non-yes/no ask: no mapping
 	for name, opts := range map[string][]dumpOption{
-		"yes/no ask":  {{0, "yes", "Yes"}, {1, "no", "No"}},
-		"three modes": {{0, "mode", "a"}, {1, "mode", "b"}, {2, "mode", "c"}},
-		"one option":  {{0, "mode", "a"}},
+		"yes/no ask":  {{0, "yes", "Yes", ""}, {1, "no", "No", ""}},
+		"three modes": {{0, "mode", "a", ""}, {1, "mode", "b", ""}, {2, "mode", "c", ""}},
+		"one option":  {{0, "mode", "a", ""}},
 	} {
 		if got, ok := mapBoolAnswer("no", opts); ok {
 			t.Errorf("%s: mapped to %q, want no mapping", name, got)
