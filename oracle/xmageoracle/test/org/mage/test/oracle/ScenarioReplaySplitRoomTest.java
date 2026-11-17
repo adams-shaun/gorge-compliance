@@ -261,6 +261,12 @@ public final class ScenarioReplaySplitRoomTest {
         equal(true, ScenarioReplay.targetSlotNeedsSkip(
                 java.util.List.of(new TargetPermanent(0, Integer.MAX_VALUE, new FilterPermanent())), 1));
         equal(false, ScenarioReplay.targetSlotNeedsSkip(java.util.List.of(new TargetPermanent()), 1));
+        // Two required slots both filled (Rabid Bite): nothing is left to ask,
+        // so no trailing skip; one answer short of the total still needs it.
+        equal(false, ScenarioReplay.targetSlotNeedsSkip(
+                java.util.List.of(new TargetPermanent(), new TargetPermanent()), 2));
+        equal(true, ScenarioReplay.targetSlotNeedsSkip(
+                java.util.List.of(new TargetPermanent(), new TargetPermanent(0, 1, new FilterPermanent())), 1));
         // The skip is added only when XMage asks again with no answer left, so
         // a pool the supplied target exhausted never asks, so nothing calls
         // this and no skip is left behind; an ask with candidates left gets it.
