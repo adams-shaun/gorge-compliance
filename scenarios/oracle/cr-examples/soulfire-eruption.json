@@ -1,0 +1,65 @@
+{
+ "card": "Soulfire Eruption",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "57d2bebd01d6",
+ "scenarios": [
+  {
+   "name": "each-target-exiles-its-own-card-in-turn",
+   "cr": [
+    "608.2f"
+   ],
+   "why": "The Eruption handles one chosen target at a time: p1 is dealt the mana value of the first exiled card, then the creature is dealt the mana value of the second. The two cards are exiled one after the other.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Soulfire Eruption"
+     ],
+     "library_top": [
+      "Lightning Bolt",
+      "Craw Wurm"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Soulfire Eruption",
+     "mana": "CCCCCCRRR",
+     "targets": [
+      "p1",
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p1": 19
+     }
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Lightning Bolt",
+     "zone": "exile"
+    },
+    {
+     "card": "p0:Craw Wurm",
+     "zone": "exile"
+    }
+   ]
+  }
+ ]
+}

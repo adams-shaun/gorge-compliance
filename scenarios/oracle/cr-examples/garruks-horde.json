@@ -1,0 +1,52 @@
+{
+ "card": "Garruk's Horde",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "89b675c2bbad",
+ "scenarios": [
+  {
+   "name": "face-down-land-from-the-top-is-a-creature-spell",
+   "cr": [
+    "601.3e"
+   ],
+   "why": "The Horde lets its controller cast creature spells from the top; a face-down morph counts as a creature spell even though the card is a land, so it can be cast for three and arrives as a 2/2.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Garruk's Horde"
+     ],
+     "library_top": [
+      "Zoetic Cavern"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Zoetic Cavern",
+     "mana": "CCC",
+     "cast_mode": "morphed"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Zoetic Cavern",
+     "zone": "battlefield",
+     "pt": "2/2",
+     "types": [
+      "Creature"
+     ],
+     "colours": ""
+    },
+    {
+     "card": "p0:Garruk's Horde",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

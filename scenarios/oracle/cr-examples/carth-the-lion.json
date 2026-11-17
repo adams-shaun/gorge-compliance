@@ -1,0 +1,95 @@
+{
+ "card": "Carth the Lion",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "4f8da4660a78",
+ "scenarios": [
+  {
+   "name": "a-plus-one-ability-adds-two-counters",
+   "cr": [
+    "606.5"
+   ],
+   "why": "Carth makes each loyalty ability cost an extra +1, so activating the +1 ability puts two loyalty counters on Garruk instead of one.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Carth the Lion",
+      "Garruk Wildspeaker",
+      "Forest",
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Garruk Wildspeaker",
+     "ability": "Untap two target lands",
+     "targets": [
+      "p0:Forest",
+      "p0:Forest#2"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Garruk Wildspeaker",
+     "counters": {
+      "LOYALTY": 5
+     }
+    }
+   ]
+  },
+  {
+   "name": "a-minus-four-ability-removes-only-three",
+   "cr": [
+    "606.5"
+   ],
+   "why": "With five loyalty already on Garruk, Carth makes the -4 ability remove only three counters, leaving two loyalty and resolving the +3/+3 trample bonus.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Carth the Lion",
+      "Garruk Wildspeaker",
+      "Grizzly Bears"
+     ],
+     "counters": {
+      "Garruk Wildspeaker": {
+       "LOYALTY": 2
+      }
+     }
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Garruk Wildspeaker",
+     "ability": "Creatures you control get"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Garruk Wildspeaker",
+     "counters": {
+      "LOYALTY": 2
+     }
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "pt": "5/5",
+     "keywords": [
+      "Trample"
+     ]
+    }
+   ]
+  }
+ ]
+}

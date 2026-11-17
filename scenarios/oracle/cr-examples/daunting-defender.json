@@ -1,0 +1,53 @@
+{
+ "card": "Daunting Defender",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e629047c4e31",
+ "scenarios": [
+  {
+   "name": "clerics-take-one-less-from-the-sweeper",
+   "cr": [
+    "615.10"
+   ],
+   "why": "Daunting Defender's replacement cuts one damage from every Cleric its controller controls. The 3/3 Defender survives with one damage; the 1/1 Cleric Soul Warden still dies; and the non-Cleric Grizzly Bears takes the full two and dies.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Daunting Defender",
+      "Soul Warden",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Pyroclasm"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Pyroclasm",
+     "mana": "CR"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Daunting Defender",
+     "zone": "battlefield",
+     "damage": 1
+    },
+    {
+     "card": "p0:Soul Warden",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,65 @@
+{
+ "card": "Act of Treason",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "0ade38d4cd19",
+ "scenarios": [
+  {
+   "name": "control-and-haste-let-the-stolen-creature-attack",
+   "cr": [
+    "613.6"
+   ],
+   "why": "The Treason changes the Bear's controller and gives it haste. Haste overrides the usual summoning restriction, so p0 can attack with the stolen Bear right away.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Act of Treason"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Act of Treason",
+     "mana": "CCR",
+     "targets": [
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p1:Grizzly Bears"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "step": "end-combat"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p1": 18
+     }
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "battlefield",
+     "tapped": true
+    }
+   ]
+  }
+ ]
+}

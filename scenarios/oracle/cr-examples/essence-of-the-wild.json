@@ -1,0 +1,44 @@
+{
+ "card": "Essence of the Wild",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "bd47b62610bd",
+ "scenarios": [
+  {
+   "name": "the-copy-arrives-untapped-and-never-had-the-tapped-ability",
+   "cr": [
+    "616.1f"
+   ],
+   "why": "Essence of the Wild's copy replacement applies as the Sentinel enters, so the permanent arrives as an untapped 6/6 Essence and never has the enters-tapped ability.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Essence of the Wild"
+     ],
+     "hand": [
+      "Rusted Sentinel"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Rusted Sentinel",
+     "mana": "CCCC"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Rusted Sentinel",
+     "zone": "battlefield",
+     "tapped": false,
+     "pt": "6/6"
+    }
+   ]
+  }
+ ]
+}
