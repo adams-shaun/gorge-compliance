@@ -1,0 +1,94 @@
+{
+ "card": "Vesuvan Doppelganger",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "6a0e0c205440",
+ "scenarios": [
+  {
+   "name": "a-copied-mana-ability-has-no-chosen-color",
+   "cr": [
+    "607.5a"
+   ],
+   "why": "The Doppelganger chose blue when it copied the Angel, but that choice is not linked to the Elves' mana ability it copies later. Activating the copied ability therefore produces no mana.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Voice of All",
+      "Quirion Elves"
+     ],
+     "hand": [
+      "Vesuvan Doppelganger"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Vesuvan Doppelganger",
+     "mana": "CCCUU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p0:Voice of All"
+       ]
+      },
+      {
+       "kind": "any",
+       "pick": [
+        "blue"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p0"
+    },
+    {
+     "op": "resolve",
+     "targets": [
+      "p0:Quirion Elves"
+     ],
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Quirion Elves#2",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Add U"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "pool": {
+      "p0": ""
+     }
+    },
+    {
+     "card": "p0:Quirion Elves#2",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

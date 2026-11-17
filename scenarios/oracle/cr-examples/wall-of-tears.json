@@ -1,0 +1,90 @@
+{
+ "card": "Wall of Tears",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "719439a325d2",
+ "scenarios": [
+  {
+   "name": "blocked-permanent-is-returned-even-after-it-stops-being-a-creature",
+   "cr": [
+    "608.2k"
+   ],
+   "why": "The Wall's end-of-combat trigger is already on the stack when the blocked Bear stops being a creature. The trigger does not recheck the card type, so the permanent still returns to its owner's hand.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Wall of Tears",
+      "Vedalken Orrery"
+     ],
+     "hand": [
+      "Imprisoned in the Moon"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "attack",
+     "seat": 1,
+     "attackers": [
+      "p1:Grizzly Bears"
+     ],
+     "defender": "p0"
+    },
+    {
+     "op": "block",
+     "seat": 0,
+     "blocks": [
+      [
+       "p0:Wall of Tears",
+       "p1:Grizzly Bears"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "end-combat"
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Imprisoned in the Moon",
+     "mana": "CCU",
+     "targets": [
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "hand"
+    },
+    {
+     "card": "p0:Imprisoned in the Moon",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Wall of Tears",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

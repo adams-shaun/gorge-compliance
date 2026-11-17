@@ -1,0 +1,54 @@
+{
+ "card": "Melek, Izzet Paragon",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "f35d61efaed7",
+ "scenarios": [
+  {
+   "name": "adventure-face-is-the-instant-melek-allows",
+   "cr": [
+    "601.3e"
+   ],
+   "why": "Melek lets its controller cast instant and sorcery spells from the top. Giant Killer is a creature card, but its Adventure face is an instant, so Chop Down can be cast from the top while the creature face could not.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Melek, Izzet Paragon"
+     ],
+     "library_top": [
+      "Giant Killer"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Craw Wurm"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Chop Down",
+     "mana": "CCW",
+     "targets": [
+      "p1:Craw Wurm"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Craw Wurm",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Melek, Izzet Paragon",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

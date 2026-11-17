@@ -1,0 +1,68 @@
+{
+ "card": "Inscription of Abundance",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "b1e21ad84994",
+ "scenarios": [
+  {
+   "name": "kicked-cast-announces-two-modes",
+   "cr": [
+    "601.4"
+   ],
+   "why": "Paying the kicker turns the choose-one spell into choose-any-number; the counters mode and the life mode are both announced, so the Bear grows and its controller then gains life equal to its new power.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Inscription of Abundance"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Inscription of Abundance",
+     "mana": "CCCGG",
+     "kicked": true,
+     "answers": [
+      {
+       "kind": "modes",
+       "pick": [
+        "two +1/+1 counters",
+        "gains X life"
+       ]
+      }
+     ],
+     "targets": [
+      "p0:Grizzly Bears",
+      "p0"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "pt": "4/4",
+     "counters": {
+      "P1P1": 2
+     }
+    },
+    {
+     "life": {
+      "p0": 24
+     }
+    },
+    {
+     "card": "p0:Inscription of Abundance",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

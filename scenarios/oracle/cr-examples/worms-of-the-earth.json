@@ -1,0 +1,55 @@
+{
+ "card": "Worms of the Earth",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "3ec3f5a259a3",
+ "scenarios": [
+  {
+   "name": "clone-cannot-arrive-as-a-land-creature",
+   "cr": [
+    "608.3e"
+   ],
+   "why": "Worms of the Earth stops lands from entering. Clone would enter as a copy of the land creature Dryad Arbor, so the copy never arrives and the Clone card goes to its owner's graveyard.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Worms of the Earth",
+      "Dryad Arbor"
+     ],
+     "hand": [
+      "Clone"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Clone",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p0:Dryad Arbor"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Clone",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Dryad Arbor",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

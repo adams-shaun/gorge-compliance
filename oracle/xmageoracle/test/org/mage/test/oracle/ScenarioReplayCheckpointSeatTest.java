@@ -1,5 +1,6 @@
 package org.mage.test.oracle;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.lang.reflect.Field;
@@ -97,6 +98,45 @@ public final class ScenarioReplayCheckpointSeatTest {
         set(d, "activeSeat", 1);
         equal(true, seatFor.invoke(d, "pass", pass1, 2) == a);
         equal(true, seatFor.invoke(d, "pass", pass0, 3) == b);
+        set(d, "activeSeat", 0);
+
+        // In a recorded run (any pass carries an xmage position), an action
+        // of the non-active seat checkpoints on its own queue, so its later
+        // actions in the same turn and step cannot leak into this snapshot.
+        // A resolving or step-moving pass checkpoints on the active seat; a
+        // pass that only hands priority on stays with the seat that passed.
+        JsonObject run = JsonParser.parseString("{\"steps\":["
+                + "{\"op\":\"cast\",\"seat\":0},{\"op\":\"pass\",\"seat\":0},"
+                + "{\"op\":\"pass\",\"seat\":1},{\"op\":\"pass\",\"seat\":1},"
+                + "{\"op\":\"pass\",\"seat\":0},{\"op\":\"cast\",\"seat\":1}],"
+                + "\"xmage_pos\":[null,{\"turn\":1,\"step\":\"main1\",\"active\":0},"
+                + "{\"turn\":1,\"step\":\"main1\",\"active\":0,\"resolves\":true},"
+                + "{\"turn\":1,\"step\":\"main1\",\"active\":0},"
+                + "{\"turn\":1,\"step\":\"begin-combat\",\"active\":0,\"moved\":true},null]}")
+                .getAsJsonObject();
+        ScenarioReplay.mergePassPositions(run);
+        set(d, "sc0", run);
+        JsonArray rs = ScenarioReplay.steps(run);
+        set(d, "activeSeat", 0);
+        equal(true, seatFor.invoke(d, "cast", rs.get(0).getAsJsonObject(), 0) == a);
+        equal(true, seatFor.invoke(d, "pass", rs.get(1).getAsJsonObject(), 1) == a);
+        equal(true, seatFor.invoke(d, "pass", rs.get(2).getAsJsonObject(), 2) == a);
+        equal(true, seatFor.invoke(d, "pass", rs.get(3).getAsJsonObject(), 3) == b);
+        equal(true, seatFor.invoke(d, "pass", rs.get(4).getAsJsonObject(), 4) == a);
+        equal(true, seatFor.invoke(d, "cast", rs.get(5).getAsJsonObject(), 5) == b);
+
+        // The same recorded run with seat 1 active: a non-active p0 pass or
+        // action checkpoints on p0, and an action of the active seat 1
+        // checkpoints on seat 1's own queue. The latter is the generic rule's
+        // active-seat-1 path: a checkpoint left on playerA would run after
+        // the whole run of seat 1's queued actions instead of between them.
+        set(d, "activeSeat", 1);
+        equal(true, seatFor.invoke(d, "cast", rs.get(0).getAsJsonObject(), 0) == a);
+        equal(true, seatFor.invoke(d, "pass", rs.get(1).getAsJsonObject(), 1) == a);
+        equal(true, seatFor.invoke(d, "pass", rs.get(2).getAsJsonObject(), 2) == b);
+        equal(true, seatFor.invoke(d, "pass", rs.get(3).getAsJsonObject(), 3) == b);
+        equal(true, seatFor.invoke(d, "pass", rs.get(4).getAsJsonObject(), 4) == b);
+        equal(true, seatFor.invoke(d, "cast", rs.get(5).getAsJsonObject(), 5) == b);
         set(d, "activeSeat", 0);
 
         // The activation text names its card: a space-free alias prefix, so

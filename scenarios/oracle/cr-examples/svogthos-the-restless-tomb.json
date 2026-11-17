@@ -1,0 +1,73 @@
+{
+ "card": "Svogthos, the Restless Tomb",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "78a373fe9486",
+ "scenarios": [
+  {
+   "name": "the-animated-land-counts-the-graveyard-live",
+   "cr": [
+    "613.6"
+   ],
+   "why": "Glorious Anthem adds +1/+1 after the animation sets the land's body from the graveyard count. Ten creature cards therefore make it 11/11, and moving one card out drops it to 10/10.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Svogthos, the Restless Tomb",
+      "Glorious Anthem"
+     ],
+     "graveyard": [
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Svogthos, the Restless Tomb",
+     "mana": "CCCBG",
+     "ability": "becomes a black and green Plant Zombie creature"
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Svogthos, the Restless Tomb",
+       "pt": "11/11",
+       "types": [
+        "Land",
+        "Creature"
+       ],
+       "colours": "BG"
+      }
+     ]
+    },
+    {
+     "op": "move",
+     "card": "p0:Grizzly Bears",
+     "to": "exile"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Svogthos, the Restless Tomb",
+     "pt": "10/10",
+     "types": [
+      "Land",
+      "Creature"
+     ]
+    }
+   ]
+  }
+ ]
+}

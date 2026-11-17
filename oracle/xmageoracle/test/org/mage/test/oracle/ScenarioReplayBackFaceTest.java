@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -65,6 +64,26 @@ public final class ScenarioReplayBackFaceTest {
         throw new NoSuchFieldException(name);
     }
 
+    /** Gives every still-null Map/List/Set field of the driver an empty instance. */
+    private static void initCollections(ScenarioReplay driver) throws Exception {
+        for (Field f : ScenarioReplay.class.getDeclaredFields()) {
+            if (java.lang.reflect.Modifier.isStatic(f.getModifiers())) {
+                continue;
+            }
+            f.setAccessible(true);
+            if (f.get(driver) != null) {
+                continue;
+            }
+            if (f.getType() == Map.class) {
+                f.set(driver, new HashMap<>());
+            } else if (f.getType() == List.class) {
+                f.set(driver, new ArrayList<>());
+            } else if (f.getType() == java.util.Set.class) {
+                f.set(driver, new java.util.HashSet<>());
+            }
+        }
+    }
+
     private static Object call(ScenarioReplay driver, String name, Class<?>[] types, Object... args) throws Exception {
         Method method = ScenarioReplay.class.getDeclaredMethod(name, types);
         method.setAccessible(true);
@@ -93,16 +112,10 @@ public final class ScenarioReplayBackFaceTest {
         driver.placements = new HashMap<>();
         Map<UUID, String> setupNames = new HashMap<>();
         set(driver, "setupNames", setupNames);
-        set(driver, "backFaceNames", new HashMap<String, String>());
-        set(driver, "buildCounts", new HashMap<String, Integer>());
-        set(driver, "refAlias", new HashMap<String, String>());
-        // Every field add()/stageBackFace()/combatName() touch, since the
-        // superclass constructor that would initialise them is bypassed.
-        set(driver, "setupPermanentIds", new HashMap<String, UUID>());
-        set(driver, "setupBattlefield", new HashMap<String, Integer>());
-        set(driver, "placedNames", new HashMap<UUID, String>());
-        set(driver, "enterWithCountersApplied", new HashSet<UUID>());
-        set(driver, "faceDownRefs", new HashSet<String>());
+        // allocateInstance skips field initialisers too, so give every
+        // collection field of the driver an empty instance (a new field the
+        // helpers touch cannot reintroduce the NPE).
+        initCollections(driver);
         set(driver, "gorgeName", "");
         set(driver, "xmageName", "");
 

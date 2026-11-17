@@ -1,0 +1,81 @@
+{
+ "card": "Paradise Plume",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "f9f88fd4eacb",
+ "scenarios": [
+  {
+   "name": "chosen-red-links-the-life-trigger-and-the-mana-ability",
+   "cr": [
+    "607.4"
+   ],
+   "why": "The color choice is shared by the Plume's second and third abilities. A red spell makes its controller gain one life, and tapping the Plume afterwards adds red mana, not any other color.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Paradise Plume",
+      "Lightning Bolt"
+     ]
+    },
+    "p1": {}
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Paradise Plume",
+     "mana": "CCCC"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "red"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Lightning Bolt",
+     "mana": "R",
+     "targets": [
+      "p1"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Paradise Plume"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 21,
+      "p1": 17
+     }
+    },
+    {
+     "pool": {
+      "p0": "R"
+     }
+    }
+   ]
+  }
+ ]
+}
