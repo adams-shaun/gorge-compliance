@@ -293,3 +293,61 @@ func TestWindowSetupKeepsTappedPermanents(t *testing.T) {
 		t.Fatalf("setup checkpoint differs from the planted state: %s: gorge %s, tape %s %v", chk.Field, chk.Gorge, chk.Tape, chk.Fails)
 	}
 }
+
+// TestPlaceKeepsExiledObject pins the two halves of the setup exile list. A
+// plain card in exile is named there (names does not drop it), so a window
+// holding one is not a lower_gap. A battlefield card whose own entry
+// replacement grants Prepared is refused: the runner's placement re-runs the
+// replacement and mints the CR 722.3c exile copy, an extra exile object no
+// setup field can remove. Both the keyword form (K:ETBReplacement, Skycoach
+// Conductor) and the printed Moved replacement (Emeritus of Woe) go through
+// the same detector, so a new spelling of the same body cannot slip past.
+func TestPlaceKeepsExiledObject(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+
+	// A card exiled through the real zone lists stays in the seat's setup
+	// exile: capture names every exiled card, not just the ones a link keeps.
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	o := libraryObjs(t, e, 1)[0]
+	owner, name := o.Owner, frontName(o)
+	if name == "" {
+		t.Fatal("the library card has no front name")
+	}
+	e.G.SetZone(state.ZLibrary, owner, slices.DeleteFunc(slices.Clone(e.G.Zone(state.ZLibrary, owner)), func(id state.ObjID) bool {
+		return id == o.ID
+	}))
+	e.G.SetZone(state.ZExile, owner, append(slices.Clone(e.G.Zone(state.ZExile, owner)), o.ID))
+	o.Zone = state.ZExile
+	c := capture(e, at, true)
+	if len(c.Reasons) != 0 {
+		t.Fatalf("a plain exiled card is refused: %v", c.Reasons)
+	}
+	if !slices.Contains(c.Setup[owner].Exile, name) {
+		t.Fatalf("setup exile for seat %d = %v, want %q", owner, c.Setup[owner].Exile, name)
+	}
+
+	// An entry-prepared permanent is refused, whichever card form carries the
+	// replacement: the keyword expansion or a printed R:Event$ Moved.
+	for _, card := range []string{"Skycoach Conductor", "Emeritus of Woe"} {
+		prep, ok := reg.Lookup(card)
+		if !ok {
+			t.Fatalf("%s is not in the corpus", card)
+		}
+		e, at := expressibleCut(t, reg, pairs[0], 100)
+		var planted bool
+		for i := range e.G.Objs {
+			o := &e.G.Objs[i]
+			if o.Zone == state.ZBattlefield && o.Ability == nil && !o.IsToken && o.Card != nil && o.AttachedTo == 0 {
+				o.SetCard(prep, 0)
+				planted = true
+				break
+			}
+		}
+		if !planted {
+			t.Fatalf("%s: no battlefield permanent to plant", card)
+		}
+		if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonPrepareEntry) {
+			t.Fatalf("%s: reasons %v, want %s", card, r, reasonPrepareEntry)
+		}
+	}
+}
