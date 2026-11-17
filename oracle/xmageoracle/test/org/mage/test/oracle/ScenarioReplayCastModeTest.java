@@ -66,7 +66,33 @@ public final class ScenarioReplayCastModeTest {
                 + (namesParent ? " from a parent-card step" : " from a half-named step") + "; it is on the stack");
     }
 
+    /** Replays a one-step warped cast of Bygone Colossus ({9}, Warp {3}) with
+     * only {3} of mana: the spell is on the stack only if XMage's warp
+     * SpellAbility ("<card> with Warp") was the one cast and paid. */
+    private static void warpedCast() throws Exception {
+        equal("true", castModeSupported("warped"), "warped cast_mode");
+        JsonObject sc = JsonParser.parseString("{name:'Bygone Colossus',card:'Bygone Colossus',"
+                + "setup:{p0:{hand:['Bygone Colossus']}},"
+                + "steps:[{op:'cast',seat:0,card:'p0:Bygone Colossus',cast_mode:'warped',mana:'CCC'}]}")
+                .getAsJsonObject();
+        JsonObject res = new ScenarioReplay().replayOnce(sc, false);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("warped replay failed: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        boolean onStack = false;
+        for (JsonElement e : last.getAsJsonArray("stack")) {
+            onStack |= "Bygone Colossus".equals(e.getAsJsonObject().get("source").getAsString());
+        }
+        if (!onStack) {
+            throw new AssertionError("warped Bygone Colossus is not on the stack: " + last);
+        }
+        System.out.println("PASS warped casts Bygone Colossus for its {3} warp cost; it is on the stack");
+    }
+
     public static void main(String[] args) throws Exception {
+        warpedCast();
         // Regression: the driver rejected "mayplay" by name before the replay
         // ever reached the cast, so every Reckless Impulse window was a
         // harness row. The card is in exile under a play-from-exile

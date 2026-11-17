@@ -587,7 +587,8 @@ public final class ScenarioReplayDriverContractTest {
         check(castModeSupported("kicked").equals("false"), "kicked cast_mode must stay unsupported");
         check(castModeSupported("adventure_alt").equals("true"), "adventure_alt cast_mode was not accepted");
         check(castModeSupported("omen_alt").equals("true"), "omen_alt cast_mode was not accepted");
-        check(castModeSupported("warped").equals("false"),
+        check(castModeSupported("warped").equals("true"), "warped cast_mode was not accepted");
+        check(castModeSupported("escape").equals("false"),
                 "an unwired cast_mode must be rejected, not cast at face value");
 
         // The sacrifice ask is recognized structurally by its "to sacrifice"
