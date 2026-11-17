@@ -1,0 +1,66 @@
+{
+ "card": "Minsc, Beloved Ranger",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "d9d0f08cc03b",
+ "scenarios": [
+  {
+   "name": "boo-is-named-boo-not-hamster-token",
+   "cr": [
+    "111.4"
+   ],
+   "why": "Minsc's enters trigger creates a red 1/1 Hamster token named Boo with trample and haste. Its name is Boo, not a combination of its subtype and the word Token.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Minsc, Beloved Ranger"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Minsc, Beloved Ranger",
+     "mana": "RGW"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Boo",
+      "token": true
+     },
+     "eq": 1
+    },
+    {
+     "card": "p0:token:Boo",
+     "pt": "1/1",
+     "types": [
+      "Creature",
+      "Hamster"
+     ],
+     "keywords": [
+      "Trample",
+      "Haste"
+     ],
+     "colours": "R"
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Hamster Token",
+      "token": true
+     },
+     "eq": 0
+    }
+   ]
+  }
+ ]
+}

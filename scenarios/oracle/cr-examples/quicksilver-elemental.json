@@ -1,0 +1,89 @@
+{
+ "card": "Quicksilver Elemental",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "97fedc90938e",
+ "scenarios": [
+  {
+   "name": "gained-regeneration-uses-the-gaining-creatures-name",
+   "cr": [
+    "201.5b"
+   ],
+   "why": "The regeneration ability the Elemental borrowed refers to the creature that currently has it. Activating it therefore regenerates the Elemental, not the Dragon it came from.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Quicksilver Elemental"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Skithiryx, the Blight Dragon"
+     ],
+     "hand": [
+      "Doom Blade"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Quicksilver Elemental",
+     "ability": "gains all activated abilities",
+     "mana": "U",
+     "targets": [
+      "p1:Skithiryx, the Blight Dragon"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Quicksilver Elemental",
+     "ability": "Regenerate",
+     "mana": "BB"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Doom Blade",
+     "mana": "CB",
+     "targets": [
+      "p0:Quicksilver Elemental"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Quicksilver Elemental",
+       "zone": "battlefield",
+       "tapped": true
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Skithiryx, the Blight Dragon",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "card": "p1:Doom Blade",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

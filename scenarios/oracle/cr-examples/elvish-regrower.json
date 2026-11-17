@@ -1,0 +1,83 @@
+{
+ "card": "Elvish Regrower",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "db773a30cae0",
+ "scenarios": [
+  {
+   "name": "four-damage-split-between-two-blockers",
+   "cr": [
+    "510.1c"
+   ],
+   "why": "The 4/3 attacker faces a 2/3 and a 1/1. Its controller can put all 4 damage on the 1/1, leaving the 2/3 alive; the two blockers together deal enough damage to kill the attacker.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Elvish Regrower"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Vampire Spawn",
+      "Helpful Hunter"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Elvish Regrower"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "seat": 1,
+     "blocks": [
+      [
+       "p1:Vampire Spawn",
+       "p0:Elvish Regrower"
+      ],
+      [
+       "p1:Helpful Hunter",
+       "p0:Elvish Regrower"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "main2",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "0 to Vampire Spawn,4 to Helpful Hunter"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Vampire Spawn",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "card": "p1:Helpful Hunter",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Elvish Regrower",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

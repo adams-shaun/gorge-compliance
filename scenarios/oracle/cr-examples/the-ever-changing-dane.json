@@ -1,0 +1,57 @@
+{
+ "card": "The Ever-Changing 'Dane",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e95dc2aa8ed5",
+ "scenarios": [
+  {
+   "name": "sacrificed-bear-becomes-the-new-copy",
+   "cr": [
+    "201.5b"
+   ],
+   "why": "Sacrificing Runeclaw Bear makes the Dane a copy of that Bear, so it becomes a 2/2 Bear and its own ability now names Runeclaw Bear.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "The Ever-Changing 'Dane",
+      "Runeclaw Bear"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:The Ever-Changing 'Dane",
+     "ability": "becomes a copy",
+     "mana": "C",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Runeclaw Bear"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:The Ever-Changing 'Dane",
+     "pt": "2/2",
+     "types": [
+      "Creature",
+      "Bear"
+     ]
+    },
+    {
+     "card": "p0:Runeclaw Bear",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

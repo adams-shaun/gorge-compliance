@@ -1,0 +1,58 @@
+{
+ "card": "Dwarven Reinforcements",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "aa11f0424555",
+ "scenarios": [
+  {
+   "name": "two-named-dwarf-berserker-tokens",
+   "cr": [
+    "111.4"
+   ],
+   "why": "The sorcery makes two red 2/1 Dwarf Berserker tokens. Both carry the token name Dwarf Berserker Token and have the Dwarf and Berserker creature types.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Dwarven Reinforcements"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Dwarven Reinforcements",
+     "mana": "CCCR"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Dwarf Berserker Token",
+      "token": true
+     },
+     "eq": 2
+    },
+    {
+     "card": "p0:token:Dwarf Berserker Token",
+     "pt": "2/1",
+     "types": [
+      "Creature",
+      "Dwarf",
+      "Berserker"
+     ],
+     "colours": "R"
+    },
+    {
+     "card": "p0:token:Dwarf Berserker Token#2",
+     "pt": "2/1"
+    }
+   ]
+  }
+ ]
+}

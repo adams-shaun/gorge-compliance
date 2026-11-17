@@ -1,0 +1,35 @@
+{
+ "card": "Dryad Arbor",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "c27c921f7540",
+ "scenarios": [
+  {
+   "name": "forest-is-a-land-type-and-dryad-a-creature-type",
+   "cr": [
+    "205.3c"
+   ],
+   "why": "Dryad Arbor puts a land subtype and a creature subtype on the same type line, and the permanent counts as a land and as a creature at the same time.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Dryad Arbor"
+     ]
+    }
+   },
+   "steps": [],
+   "expect": [
+    {
+     "card": "p0:Dryad Arbor",
+     "pt": "1/1",
+     "types": [
+      "Land",
+      "Creature",
+      "Forest",
+      "Dryad"
+     ]
+    }
+   ]
+  }
+ ]
+}

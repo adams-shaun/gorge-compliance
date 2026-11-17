@@ -1,0 +1,69 @@
+{
+ "card": "Exquisite Archangel",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "ba1e21e49554",
+ "scenarios": [
+  {
+   "name": "lethal-damage-is-replaced-and-the-angel-leaves",
+   "cr": [
+    "400.6"
+   ],
+   "why": "At 5 life, Hurricane's 5 damage to the player would end the game and its 5 damage to the 5/5 Angel would destroy it. The Angel's replacement effect resets the player to 20 life, and the Angel goes to the graveyard or exile.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Exquisite Archangel"
+     ],
+     "life": 5
+    },
+    "p1": {
+     "hand": [
+      "Hurricane"
+     ],
+     "life": 20
+    }
+   },
+   "steps": [
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Hurricane",
+     "mana": "CCCCCG",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "X = 5"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 20,
+      "p1": 15
+     }
+    },
+    {
+     "card": "p0:Exquisite Archangel",
+     "zone": "exile"
+    }
+   ]
+  }
+ ]
+}
