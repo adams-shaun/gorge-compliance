@@ -91,6 +91,33 @@ func execScenario(reg *cards.Registry, sc *portScenario) (*rules.OracleAuditResu
 
 var reFallback = regexp.MustCompile(`\[\w+ fallback\] p\d (\w+) ->`)
 
+var reContinueAck = regexp.MustCompile(`^\s+\[\w+ fallback\] p\d choose -> \["Continue"\]`)
+
+// hasContinueAck reports whether the runner answered a bare "Continue"
+// acknowledgement by its fallback.
+func hasContinueAck(transcript []string) bool {
+	for _, l := range transcript {
+		if reContinueAck.MatchString(l) {
+			return true
+		}
+	}
+	return false
+}
+
+var reSetupFallback = regexp.MustCompile(`^\s+\[setup fallback\] p\d (\w+) ->`)
+
+// setupDecision returns the first decision kind the runner answered by its
+// fallback while building the setup (before step 0), or "". An empty attack
+// or block declaration is not a choice a test states.
+func setupDecision(transcript []string) string {
+	for _, l := range transcript {
+		if m := reSetupFallback.FindStringSubmatch(l); m != nil && m[1] != "attackers" && m[1] != "blockers" {
+			return m[1]
+		}
+	}
+	return ""
+}
+
 // aiChoiceFallback returns the first decision kind the runner answered by
 // its fallback that is a real game choice (not an empty attack/block
 // declaration, which the test states with attack/block calls).
@@ -373,7 +400,7 @@ func reorderAnswerForSeat(g *group, i, seat int) bool {
 func targetAskKind(asks []fallbackAsk) (string, bool) {
 	for _, k := range []string{"choose", "arrange", "modes"} {
 		for _, a := range asks {
-			if a.Kind == k {
+			if a.Kind == k && !a.Pay {
 				return k, true
 			}
 		}
@@ -746,6 +773,31 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 	r.nflips = flips.seq
 	if r.Dropped > 0 {
 		r.Scenario.Why += fmt.Sprintf(" %d XMage choice(s) gorge never asks were dropped.", r.Dropped)
+	}
+	if len(fails) > 0 && r.shape != nil && knownBugs[sc.XMage] == "" {
+		r.Code, r.Detail, r.Status = r.shape.Code, r.shape.Detail, "refused"
+		r.Scenario = nil
+		return
+	}
+	if len(fails) > 0 && r.Dropped > 0 && r.Strict && knownBugs[sc.XMage] == "" {
+		// The test states choices gorge never asks where XMage does, or
+		// asks where XMage does not, so the answers found no home:
+		//   - a permanent in the setup triggers before the first step (a
+		//     turn-1 upkeep trigger) and no step can carry an answer to the
+		//     setup, so the runner took its fallback;
+		//   - gorge poses a bare "Continue" acknowledgement of a
+		//     look-at-top reveal (Birthing Ritual) that XMage never asks,
+		//     which the stated picks are then offered to.
+		if k := setupDecision(transcript); k != "" {
+			r.Code, r.Detail, r.Status = "setup-decision", "a "+k+" decision is posed before the first step", "refused"
+			r.Scenario = nil
+			return
+		}
+		if hasContinueAck(transcript) {
+			r.Code, r.Detail, r.Status = "continue-acknowledgement", "gorge poses a bare Continue acknowledgement XMage never asks", "refused"
+			r.Scenario = nil
+			return
+		}
 	}
 	if k := aiChoiceFallback(transcript); len(fails) > 0 && !r.Strict && k != "" && knownBugs[sc.XMage] == "" {
 		// Without setStrictChooseMode(true) XMage's AI answered what the

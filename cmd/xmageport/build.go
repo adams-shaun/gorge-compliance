@@ -1511,6 +1511,48 @@ func (em *emitter) hasKeywordPrefix(name, prefix string) bool {
 	return false
 }
 
+// optionalSacrificeMode is the gorge cast mode of the spell's optional
+// sacrifice additional cost: "bargained" for Bargain, "casualty" for
+// Casualty N, or "" (engine/rules optional_sacrifice.go's two rows). The
+// keyword is the card's own or one a setup permanent grants (Anhelo, the
+// Painter's AddKeyword$ Casualty:2).
+func (em *emitter) optionalSacrificeMode(name string) string {
+	for _, m := range [...]struct{ kw, mode string }{{"Bargain", "bargained"}, {"Casualty", "casualty"}} {
+		if em.hasKeywordPrefix(name, m.kw) || em.t.setupGrantsKeyword(m.kw) {
+			return m.mode
+		}
+	}
+	return ""
+}
+
+// setupGrantsKeyword reports whether a setup battlefield card has a static
+// that adds a keyword starting with prefix.
+func (t *translator) setupGrantsKeyword(prefix string) bool {
+	for p := 0; p < 2; p++ {
+		for _, ac := range t.setup[p] {
+			if ac.zone != "battlefield" {
+				continue
+			}
+			c, ok := t.lookup(ac.name)
+			if !ok {
+				continue
+			}
+			for _, f := range c.Faces {
+				if f == nil {
+					continue
+				}
+				for i := range f.Statics {
+					st := &f.Statics[i]
+					if st.Mode == "Continuous" && strings.HasPrefix(st.Params["AddKeyword"], prefix) {
+						return true
+					}
+				}
+			}
+		}
+	}
+	return false
+}
+
 // activatedAltCost names a setup battlefield card whose static lets a player
 // pay an alternative cost for an activated ability (Bruenor Battlehammer's
 // {0} equip), or "".
@@ -1723,6 +1765,19 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 				(a.choices[0].pick == "yes" || a.choices[0].pick == "no") {
 				if a.choices[0].pick == "yes" {
 					s.CastMode = "optionalcost"
+				}
+				a.choices = a.choices[1:]
+			}
+			// XMage answers the optional sacrifice cost of Bargain and
+			// Casualty ("sacrifice an artifact, enchantment, or token as you
+			// cast this spell") with the first setChoice; gorge offers it as
+			// the "bargained" / "casualty" cast mode and then asks which
+			// permanent to sacrifice, which is the choice after the boolean.
+			if mode := em.optionalSacrificeMode(a.card); mode != "" && len(a.choices) > 0 && !a.choices[0].target &&
+				a.choices[0].x < 0 && a.choices[0].mode == 0 &&
+				(a.choices[0].pick == "yes" || a.choices[0].pick == "no") {
+				if a.choices[0].pick == "yes" {
+					s.CastMode = mode
 				}
 				a.choices = a.choices[1:]
 			}

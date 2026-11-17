@@ -380,6 +380,9 @@ type addCardCall struct {
 }
 
 type result struct {
+	// shape is the refusal a failing run converts to (manaSourceRefusal,
+	// orderedPicksRefusal); nil when the test has none of those shapes.
+	shape                      *refusal
 	Family, Class, Method, Rel string
 	Code, Detail               string // refusal (empty when generated)
 	Scenario                   *portScenario
@@ -488,6 +491,12 @@ func translate(reg *cards.Registry, jc *javaClass, m *javaMethod, family string)
 	res.Status = "generated"
 	res.Unsupported = t.unsupportedCards()
 	res.Strict = t.strict
+	// Shapes the runner cannot play faithfully: they refuse only when the
+	// run fails an assert (a test of the same shape that passes stays
+	// covered), see runResultMask.
+	if res.shape = t.manaSourceRefusal(); res.shape == nil {
+		res.shape = t.orderedPicksRefusal()
+	}
 	return res
 }
 
@@ -1225,7 +1234,12 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		case "checkHandCardCount":
 			ac = call{Name: "assertHandCount", Args: c.Args[3:]}
 		case "checkExileCount":
-			ac = call{Name: "assertExileCount", Args: c.Args[3:]}
+			// XMage's check reads every exile zone by name and ignores its
+			// player argument (TestPlayer.assertExileCount over
+			// game.getExile().getAllCards), so it is the name-only
+			// assertExileCount(name, n): the count lands on the seat that
+			// owns the card, not the seat the check names.
+			ac = call{Name: "assertExileCount", Args: c.Args[4:]}
 		case "checkStackSize":
 			ac = call{Name: "checkStackSize", Args: c.Args[3:]}
 		case "checkAbility":
