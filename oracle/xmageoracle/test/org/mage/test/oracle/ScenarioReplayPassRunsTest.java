@@ -142,9 +142,23 @@ public final class ScenarioReplayPassRunsTest {
         JsonArray rs = ScenarioReplay.steps(res);
         check(ScenarioReplay.passCommands(rs, 1, 0).isEmpty(), "the first pass of a pair queues nothing");
         List<String> resolve = ScenarioReplay.passCommands(rs, 2, 0);
-        check(resolve.equals(Arrays.asList(ScenarioReplay.CMD_REQUIRE_STACK, ScenarioReplay.CMD_WAIT_RESOLVE_ONE)),
-                "the resolving pass queues the one-object resolution: " + resolve);
-        check(ScenarioReplay.passCommands(rs, 2, 1).equals(resolve), "the resolution queues the same on seat 1's turn");
+        check(resolve.equals(Arrays.asList(ScenarioReplay.CMD_PASS_OWN_PRIORITY, ScenarioReplay.CMD_REQUIRE_STACK,
+                ScenarioReplay.CMD_WAIT_RESOLVE_ONE)),
+                "seat 1's resolving pass on seat 0's turn queues its own pass, then the one-object resolution: " + resolve);
+        check(ScenarioReplay.passCommands(rs, 2, 1).equals(Arrays.asList(ScenarioReplay.CMD_REQUIRE_STACK,
+                ScenarioReplay.CMD_WAIT_RESOLVE_ONE)), "the active seat's own resolving pass queues no extra pass");
+        // The Lunar Insight shape: seat 1's resolving pass sits between seat 0's
+        // passes and seat 1's own later cast on the same step. The pass seat 1
+        // makes at its first priority must be queued before that cast.
+        JsonObject lunar = item("{steps:[{op:'cast',seat:0,card:'p0:Lunar Insight'},{op:'pass',seat:0},{op:'pass',seat:1},{op:'pass',seat:0},"
+                + "{op:'activate',seat:1,card:'p1:Island'},{op:'cast',seat:1,card:'p1:Voracious Greatshark'}],"
+                + "xmage_pos:[null,{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0,resolves:true},{turn:1,step:'main1',active:0},null,null]}");
+        JsonArray ls = ScenarioReplay.steps(lunar);
+        List<String> lres = ScenarioReplay.passCommands(ls, 2, 0);
+        check(lres.get(0).equals(ScenarioReplay.CMD_PASS_OWN_PRIORITY), "seat 1's pass is queued first: " + lres);
+        check(ScenarioReplay.passCommands(ls, 3, 0).isEmpty(), "seat 0's later pass queues nothing");
+        check(ScenarioReplay.passCommands(ls, 4, 0).equals(Collections.singletonList(ScenarioReplay.CMD_YIELD_PRIORITY)),
+                "seat 0's pass on the empty stack hands priority to seat 1's activation");
 
         // The active seat passes within a step and the other seat acts next:
         // yield priority first. After a pass that moved the step, or one that
@@ -156,6 +170,15 @@ public final class ScenarioReplayPassRunsTest {
         check(ScenarioReplay.passCommands(hs, 1, 0).equals(Collections.singletonList(ScenarioReplay.CMD_YIELD_PRIORITY)),
                 "the other seat's cast after the active seat's pass starts by yielding");
         check(ScenarioReplay.passCommands(hs, 4, 0).isEmpty(), "no yield after a pass that moved the step");
+
+        // The checkpoints of seat 1's actions in that game run on seat 1's queue,
+        // each right after its action; no other shape moves its checkpoint.
+        check(ScenarioReplay.opensOnOtherSeat(ls, 4, 0) && ScenarioReplay.opensOnOtherSeat(ls, 5, 0),
+                "a recorded game's non-active seat actions checkpoint on their own seat");
+        check(!ScenarioReplay.opensOnOtherSeat(ls, 0, 0), "the active seat's action keeps its checkpoint seat");
+        check(!ScenarioReplay.opensOnOtherSeat(ls, 4, 1), "the active seat's own action keeps its checkpoint seat");
+        JsonArray legacy = JsonParser.parseString("[{op:'cast',seat:1,card:'p1:Shock'},{op:'pass',seat:0}]").getAsJsonArray();
+        check(!ScenarioReplay.opensOnOtherSeat(legacy, 0, 0), "a scenario with no positioned pass keeps its checkpoint seat");
 
         // Legacy scenarios carry no position and keep their shapes.
         JsonArray pair = JsonParser.parseString("[{op:'pass',seat:0},{op:'pass',seat:1}]").getAsJsonArray();
