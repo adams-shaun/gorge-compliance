@@ -59,7 +59,7 @@
     }
    ],
    "xmage": "HinterlandScourgeTest#testCard",
-   "known_bug": "XP[werewolf-transform-condition-not-modelled]: Hinterland Hermit's turn-2 upkeep trigger (WerewolfTransformCondition$ True, DB$ SetState Mode$ Transform) goes on the stack and resolves but the Hermit stays Hinterland Hermit 2/1 (want the Scourge 3/2, no Hermit left); no engine code reads WerewolfTransformCondition$ and effSetState's Transform arm does not flip the face here (root cause below effSetState not isolated), CR 701.27, verified at gorge 981b98963b. Hand probe at gorge 981b98963b reproduces both fails (Hermit 1, want 0; Scourge 0, want 1)."
+   "known_bug": "XP[werewolf-flipped-at-setup-then-turn2]: Hinterland Hermit's Mode$ Phase upkeep trigger (WerewolfTransformCondition$ True, DB$ SetState Mode$ Transform) is modelled, but the fixture's setup already shows the Hermit as Hinterland Scourge 3/2 at turn 1 main1 (the permanent was in play at turn 1's upkeep, so \"no spells were cast last turn\" held with no previous turn) and the turn-2 upkeep trigger then flips it back to Hinterland Hermit 2/1 (Hermit 1, want 0; Scourge 0, want 1), where XMage flips it once; the scenario has no mana, choice or boolean, only pass_to steps, so the gorge decision is the first-turn \"last turn\" check in the werewolf transform condition (the function was not isolated), CR 701.27, 103.1, verified at gorge 981b98963b. Isolating probe at gorge 981b98963b: pass_to end of turn 1 still shows the Scourge and turn 2 begin-combat shows the Hermit."
   }
  ]
 }

@@ -80,7 +80,7 @@
     }
    ],
    "xmage": "AdrestiaTest#testAdrestia",
-   "known_bug": "XP[count-crewed-valid-head-unsupported]: Adrestia's attack trigger is gated by CheckSVar$ X with X:Crewed$Valid Assassin, a Count head the evaluator (EvalCount) does not model, so after Nekrataal crews it the gate fails closed: no card is drawn and no Assassin type is added (lacks type Assassin, hand 0 want 1), CR 603.4, 702.122, verified at gorge 981b98963b. Hand probe at gorge 981b98963b reproduces both fails (no Assassin type; hand 0, want 1)."
+   "known_bug": "XP[count-crewed-valid-head-unsupported]: Adrestia's attack trigger is gated by CheckSVar$ X with X:Crewed$Valid Assassin, a Count head the evaluator (EvalCount) does not model, so after Nekrataal crews it the gate fails closed: no card is drawn and no Assassin type is added (lacks type Assassin, hand 0 want 1), CR 603.4, 702.122, verified at gorge 981b98963b. Isolating probe at gorge 981b98963b: the crew answer is honoured (Nekrataal, an Assassin, is tapped, Adrestia becomes a 4/3 Creature) yet the stack is empty after Adrestia attacks, so the trigger is never queued; hand 0, want 1 and no Assassin type, with no mana or boolean in the scenario."
   }
  ]
 }

@@ -196,6 +196,7 @@ func (t *translator) build() (*portScenario, []*group, *refusal) {
 		if r != nil {
 			return nil, nil, r
 		}
+		a.endAt = len(em.steps)
 		if g != nil {
 			groups = append(groups, g)
 		}
@@ -1580,6 +1581,21 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 				return refuse("alt-cost-activation-choice", "%s's alternative cost is elected by a boolean", t.activatedAltCost())
 			}
 		}
+		if a.kind == "cast" && t.copyReplacementOnBattlefield() {
+			n := 0
+			for _, ch := range a.choices {
+				if ch.target {
+					n++
+				}
+			}
+			if n >= 2 {
+				// each extra copy's "choose new targets" is its own
+				// addTarget; the runner cannot place the later ones and its
+				// fallback takes the first option, so a known_bug here could
+				// never go stale
+				return refuse("copy-target-choice", "%d new-target answers on %s with a copy replacement in play", n, a.card)
+			}
+		}
 		if modes > 1 {
 			// XMage answers a charm with repeatable modes one setModeChoice
 			// per pick; gorge asks it once with a multi-pick
@@ -2455,10 +2471,10 @@ func (t *translator) manaSideEffects(steps []*step) *refusal {
 		}
 	}
 	// A land played or a permanent cast during the method is on the
-	// battlefield by the time a later pool-paid step runs (Thran Portal's
-	// mana abilities taxed in chromaticLanternCostInteraction). Only actions
-	// with a later cast/activate/offered-check can precede such a step.
-	for i, a := range t.actions {
+	// battlefield only for the pool-paid steps emitted after it (Thran
+	// Portal's mana abilities taxed in chromaticLanternCostInteraction): a
+	// later cast or activation that pays nothing from the pool never uses it.
+	for _, a := range t.actions {
 		switch a.kind {
 		case "play":
 		case "cast":
@@ -2469,8 +2485,8 @@ func (t *translator) manaSideEffects(steps []*step) *refusal {
 			continue
 		}
 		later := false
-		for _, b := range t.actions[i+1:] {
-			if b.kind == "cast" || b.kind == "activate" || (b.kind == "check" && b.playCheck != nil && b.playCheck.want) {
+		for i := a.endAt; i < len(steps); i++ {
+			if steps[i].Mana != "" {
 				later = true
 				break
 			}
@@ -2483,6 +2499,33 @@ func (t *translator) manaSideEffects(steps []*step) *refusal {
 		}
 	}
 	return nil
+}
+
+// copyReplacementOnBattlefield reports a setup battlefield permanent that
+// changes how many copies of a spell are made (Twinning Staff's Event$ CopySpell).
+func (t *translator) copyReplacementOnBattlefield() bool {
+	for p := 0; p < 2; p++ {
+		for _, ac := range t.setup[p] {
+			if ac.zone != "battlefield" {
+				continue
+			}
+			c, ok := t.lookup(ac.name)
+			if !ok {
+				continue
+			}
+			for _, f := range c.Faces {
+				if f == nil {
+					continue
+				}
+				for _, r := range f.Repls {
+					if r.Event == "CopySpell" {
+						return true
+					}
+				}
+			}
+		}
+	}
+	return false
 }
 
 // manaSideEffect refuses one battlefield card that cares how mana was made.

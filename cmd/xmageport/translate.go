@@ -139,6 +139,7 @@ type action struct {
 	targets         []string // xmage target strings, translated at emit time
 	ability         string
 	resolveAfter    bool
+	endAt           int // emission: len(steps) once this action is emitted
 	attackers       []string
 	blocks          [][2]string
 	expects         []*expect

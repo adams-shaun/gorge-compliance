@@ -444,3 +444,51 @@ func TestBooleanReplayEndToEnd(t *testing.T) {
 		t.Fatalf("replay status %s (%v), want pass", res.Status, res.Fails)
 	}
 }
+
+// A land played during the method taxes only the pool-paid steps that run
+// after it. Thran Portal played after the method's only pool-paid cast, then an
+// unrelated no-mana activation, never takes part in a mana payment: refusing
+// it would hide a scenario that proves nothing about mana.
+func TestPoolPaymentLandPlayedAfterLastPaidStepIsFine(t *testing.T) {
+	res := translateAsserting(t, `addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Prodigal Sorcerer");
+        addCard(Zone.HAND, playerA, "Thran Portal");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Thran Portal");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: ", playerB);`)
+	if res.Code == "mana-ability-cost" {
+		t.Fatalf("refused %q (%s): the Portal enters after the only pool-paid step", res.Code, res.Detail)
+	}
+}
+
+// XMage answers each additional Twinning Staff copy's "choose new targets"
+// with its own addTarget. Gorge asks that only for copies it makes, and a
+// copy that is not yet red (Fork) or a doubled replacement it does not apply
+// (Zada twice) offers other targets; the runner's first-option fallback would
+// then pick a different target, so the scenario could never go stale.
+func TestCopyReplacementTargetChoicesRefuse(t *testing.T) {
+	res := translateAsserting(t, `addCard(Zone.BATTLEFIELD, playerA, "Badlands", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Twinning Staff");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Scalebane's Elite");
+        addCard(Zone.HAND, playerA, "Disfigure");
+        addCard(Zone.HAND, playerA, "Fork");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Disfigure", "Grizzly Bears");
+        addTarget(playerA, "Scalebane's Elite", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fork", "Disfigure", "Disfigure");`)
+	if res.Code != "copy-target-choice" {
+		t.Fatalf("code %q (%s), want copy-target-choice", res.Code, res.Detail)
+	}
+	// one new-target answer for one extra copy is asked by gorge and stays
+	res = translateAsserting(t, `addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, "Twinning Staff");
+        addCard(Zone.BATTLEFIELD, playerA, "Zada, Hedron Grinder");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.HAND, playerA, "Giant Growth");
+        addTarget(playerA, "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Zada, Hedron Grinder");`)
+	if res.Code == "copy-target-choice" {
+		t.Fatalf("a single new-target answer was refused: %s", res.Detail)
+	}
+}
