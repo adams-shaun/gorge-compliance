@@ -27,7 +27,9 @@ corpus too.
 
 ## Bumping the pin
 
-A pin bump is a pull request here, never a side effect:
+A pin bump is one commit on `develop` that moves `GORGE_PIN` and `go.mod` together, with the
+gorge range in its subject (`gorge pin: <old>..<new> (gorge origin/main, ...)`); it reaches
+`main` through the next promote PR.
 
 1. Pick the gorge commit and write its SHA to `GORGE_PIN`.
 2. `go get github.com/adams-shaun/gorge@<sha> && go mod tidy`.
@@ -41,8 +43,6 @@ A pin bump is a pull request here, never a side effect:
    - `make compliance-pass SETS=...` with the XMage build (`make xmage-oracle-setup`) for every
      set whose scenarios moved, as the [runbook](../oracle/validation/oracle/README.md) describes.
      Then run `make compliance-status` and update `ratchet.json`.
-5. The PR description lists the gorge range (`old..new`), what moved, and
-   every row added or deleted.
 
 ## Drift reporting
 

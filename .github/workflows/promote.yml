@@ -1,10 +1,9 @@
 # Promote develop to main by pull request.
 #
-# Nothing pushes main: work lands on develop, and when the `ci` workflow
-# finishes GREEN on a push to develop this opens a develop -> main PR -- or,
-# when one is already open, leaves it (a push to develop already updated it).
-# Merging stays a human decision on GitHub; use a merge commit, not squash,
-# or develop and main stop sharing history.
+# Nothing pushes main: work lands on develop. `main` moves through a
+# `promote/develop-<yyyymmddHHMM>` snapshot branch and a PR to `main`, merged
+# with a merge commit once its checks are green. Use a merge commit, not
+# squash, or develop and main stop sharing history.
 #
 # Only the green commit that is STILL develop's tip promotes: when develop
 # moved during the run, the newer commit's own ci run decides.
