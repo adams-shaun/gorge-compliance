@@ -1,0 +1,110 @@
+{
+ "card": "Village Ironsmith",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "c1dabc00263c",
+ "scenarios": [
+  {
+   "name": "pump-persists-through-transform",
+   "cr": [
+    "701.27c"
+   ],
+   "why": "A +3/+3 effect on the Ironsmith keeps applying after it transforms into Ironfang: 1/1 plus 3/3 is 4/4, and after the flip the base 3/1 plus the same 3/3 is 6/4. The runner starts the werewolf already flipped, so the setup first lets two spells be cast in turn 1 so the flip-back trigger returns it to the Ironsmith on the opponent's upkeep; only then is the pump cast, followed by Moonmist (which transforms Humans, and the Ironsmith is one). Without the flip the creature would stay 4/4.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Lightning Bolt",
+      "Shock"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Village Ironsmith"
+     ],
+     "hand": [
+      "Giant Growth",
+      "Moonmist"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Lightning Bolt",
+     "mana": "R",
+     "targets": [
+      "p1"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Shock",
+     "mana": "R",
+     "targets": [
+      "p1"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p1"
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p1:Village Ironsmith",
+       "pt": "1/1"
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Giant Growth",
+     "mana": "G",
+     "targets": [
+      "p1:Village Ironsmith"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p1:Village Ironsmith",
+       "pt": "4/4"
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Moonmist",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Village Ironsmith",
+     "pt": "6/4"
+    }
+   ]
+  }
+ ]
+}

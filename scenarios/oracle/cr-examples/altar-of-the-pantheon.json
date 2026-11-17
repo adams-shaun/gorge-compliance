@@ -1,0 +1,71 @@
+{
+ "card": "Altar of the Pantheon",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "3d430f7cab38",
+ "scenarios": [
+  {
+   "name": "altar-lifts-devotion-to-five-before-type-change",
+   "cr": [
+    "700.5a"
+   ],
+   "why": "Purphoros, a one-pip red permanent, a two-pip one and a one-pip one total devotion 4; Altar of the Pantheon adds one to every devotion, making it 5, so Purphoros is a creature.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Altar of the Pantheon",
+      "Purphoros, God of the Forge",
+      "Goblin Chieftain",
+      "Mogg Fanatic"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "end"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Purphoros, God of the Forge",
+     "zone": "battlefield",
+     "types": [
+      "Creature"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "without-the-altar-devotion-stays-four",
+   "cr": [
+    "700.5a"
+   ],
+   "why": "Same board minus the Altar: devotion to red is only 4, so Purphoros stays a non-creature enchantment.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Purphoros, God of the Forge",
+      "Goblin Chieftain",
+      "Mogg Fanatic"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "end"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Purphoros, God of the Forge",
+     "zone": "battlefield",
+     "no_types": [
+      "Creature"
+     ]
+    }
+   ]
+  }
+ ]
+}

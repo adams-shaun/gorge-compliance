@@ -1,0 +1,74 @@
+{
+ "card": "Maro",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "10ecc91c54ac",
+ "scenarios": [
+  {
+   "name": "toughness-zero-mid-resolution-does-not-kill",
+   "cr": [
+    "704.4"
+   ],
+   "why": "Maro's size is the hand count. The spell empties the hand and then refills it to seven, and state-based actions are only checked once the spell has finished, so Maro is a 7/7 and survives.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Maro"
+     ],
+     "hand": [
+      "Wheel of Fortune",
+      "Forest",
+      "Forest"
+     ],
+     "library": [
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest"
+     ]
+    },
+    "p1": {
+     "library": [
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Wheel of Fortune",
+     "mana": "CCR"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Maro",
+     "zone": "battlefield",
+     "pt": "7/7"
+    },
+    {
+     "hand_size": {
+      "p0": 7
+     }
+    }
+   ]
+  }
+ ]
+}
