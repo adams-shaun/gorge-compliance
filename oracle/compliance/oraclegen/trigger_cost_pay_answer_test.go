@@ -88,9 +88,9 @@ func TestManaTriggerCostPayStaysSkipped(t *testing.T) {
 // An X-only triggered cost ("you may pay {X}", Wildborn Preserver) is XMage's
 // DoIfCostPaid chooseUse like any mana cost, but gorge's TriggerCostMana is
 // false for it (measured FDN xe:FDN:0:3:w24: "Missing CHOICE def ... Pay
-// {X}?"). The X announce scripts "X=<n>" and the pay pick exactly the one
-// boolean "yes" XMage asks; a non-X, non-mana pay (a blight) still scripts
-// nothing.
+// {X}?"). XMage asks the boolean BEFORE announceX, so the queue is "yes" then
+// "X=<n>"; a decline returns before announceX, so it scripts the lone "no".
+// A non-X, non-mana pay (a blight) still scripts nothing.
 func TestXAnswersXOnlyTriggerCostPay(t *testing.T) {
 	x := rules.OracleDecision{Step: 14, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
 		Options: 3, Min: 1, Max: 1, Picks: []string{"X = 0"}, PickKinds: []string{"trigger_cost_x"},
@@ -101,12 +101,20 @@ func TestXAnswersXOnlyTriggerCostPay(t *testing.T) {
 			PickRefs: []string{"p0:Wildborn Preserver"}, PickKinds: []string{"trigger_cost_pay"},
 			ObjectPicks: []string{"p0:Wildborn Preserver"}, Via: "answer"}
 		got := XAnswers([]rules.OracleDecision{x, pay}, 15, nil)
-		if want := []XAnswer{{0, "choice", "X=0"}, {0, "choice", "yes"}}; !reflect.DeepEqual(got[14], want) {
+		if want := []XAnswer{{0, "choice", "yes"}, {0, "choice", "X=0"}}; !reflect.DeepEqual(got[14], want) {
 			t.Fatalf("%q answers = %v, want exactly %v", label, got[14], want)
 		}
 		if !xOnlyCostPay(pay) || triggerCostAnswer(pay) != "yes" {
 			t.Fatalf("%q not recognised as an X-only trigger cost pay", label)
 		}
+	}
+	decline := rules.OracleDecision{Step: 14, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+		Options: 2, Min: 1, Max: 1, Picks: []string{"Do not pay"}, PickIdx: []int{1},
+		PickRefs: []string{"p0:Wildborn Preserver"}, PickKinds: []string{"trigger_cost_decline"},
+		ObjectPicks: []string{"p0:Wildborn Preserver"}, Via: "answer"}
+	got := XAnswers([]rules.OracleDecision{x, decline}, 15, nil)
+	if want := []XAnswer{{0, "choice", "no"}}; !reflect.DeepEqual(got[14], want) {
+		t.Fatalf("declined X-only answers = %v, want exactly %v (no announceX ask)", got[14], want)
 	}
 	for _, label := range []string{"Blight 1", "Pay {2}X", "Pay ", "Pay 2 life"} {
 		d := rules.OracleDecision{Kind: "choose_n", Picks: []string{label}, PickKinds: []string{"trigger_cost_pay"}}

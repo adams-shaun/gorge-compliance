@@ -597,6 +597,19 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		}
 		as = append(as, XAnswer{asker, "choice", seatRef(seat)})
 	}
+	if ga, ok := xTriggerCostGroup(r.ds, i); ok {
+		// Gorge logs a triggered cost's X announcement BEFORE the pay/decline
+		// election (cumulative.go's triggeredCostXAsk); XMage's DoIfCostPaid
+		// asks its chooseUse first and calls announceX only once it is paying
+		// (Wildborn Preserver), so the whole group is answered here, in
+		// XMage's ask order, and a declined trigger scripts no X at all.
+		return append(as, ga...), true
+	}
+	if xTriggerCostElection(r.ds, i) {
+		// This pay/decline election was answered with its X announcement
+		// above; emitting it again would leave a stray boolean.
+		return as, true
+	}
 	switch {
 	case r.playBool[i]:
 		// The redundant trigger-level half of a single "may cast": the Play
@@ -760,6 +773,50 @@ func xOnlyCostPay(d rules.OracleDecision) bool {
 	}
 	rest = strings.NewReplacer("{", "", "}", "").Replace(rest)
 	return rest != "" && strings.Trim(rest, "X") == ""
+}
+
+// xTriggerCostGroup returns the answers for the X announcement at i that opens
+// a triggered cost carrying a payer-chosen {X} (the next decision, by the same
+// seat and step, is that cost's pay/decline election). Gorge announces X
+// before the election; XMage's DoIfCostPaid-style effect asks its chooseUse
+// ("Pay {X}?") first and only calls announceX when it is paying, and returns
+// before announceX on a decline (Wildborn Preserver, Incinerator of the
+// Guilty). So a paid cost needs the boolean AHEAD of the X value, and a
+// declined one needs the boolean alone: gorge's X answer has no ask to answer.
+func xTriggerCostGroup(ds []rules.OracleDecision, i int) ([]XAnswer, bool) {
+	d := ds[i]
+	if pickKind(d, 0) != "trigger_cost_x" || len(d.Picks) != 1 {
+		return nil, false
+	}
+	x, ok := strings.CutPrefix(d.Picks[0], "X = ")
+	if !ok || i+1 >= len(ds) {
+		return nil, false
+	}
+	e := ds[i+1]
+	if e.Step != d.Step || e.Seat != d.Seat || e.Kind != "choose_n" || len(e.Picks) != 1 {
+		return nil, false
+	}
+	switch pickKind(e, 0) {
+	case "trigger_cost_decline":
+		return []XAnswer{{d.Seat, "choice", "no"}}, true
+	case "trigger_cost_pay", "trigger_cost_pay_manual":
+		if !xOnlyCostPay(e) && !e.TriggerCostMana {
+			return nil, false
+		}
+		return []XAnswer{{d.Seat, "choice", "yes"}, {d.Seat, "choice", "X=" + x}}, true
+	}
+	return nil, false
+}
+
+// xTriggerCostElection reports an election whose answers were emitted with its
+// preceding X announcement (xTriggerCostGroup), so route must not answer it a
+// second time.
+func xTriggerCostElection(ds []rules.OracleDecision, i int) bool {
+	if i == 0 {
+		return false
+	}
+	_, ok := xTriggerCostGroup(ds, i-1)
+	return ok
 }
 
 // triggerCostWindow reports a mana-window decision (an "activate" source tap,
