@@ -1,0 +1,69 @@
+{
+ "card": "Afflicted Deserter",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "1ff53d81fcdf",
+ "scenarios": [
+  {
+   "name": "token-copy-of-the-double-faced-creature-transforms",
+   "cr": [
+    "707.8a"
+   ],
+   "why": "The token that copies Afflicted Deserter copies both of its faces, not just the face that is up, so it is a double-faced token and Moonmist can transform it into Werewolf Ransacker.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Afflicted Deserter"
+     ],
+     "hand": [
+      "Cackling Counterpart",
+      "Moonmist"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Cackling Counterpart",
+     "mana": "CUU",
+     "targets": [
+      "p0:Afflicted Deserter"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Moonmist",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Werewolf Ransacker",
+      "token": true
+     },
+     "eq": 1
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Afflicted Deserter",
+      "token": true
+     },
+     "eq": 0
+    }
+   ]
+  }
+ ]
+}

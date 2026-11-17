@@ -1,0 +1,82 @@
+{
+ "card": "Adaptive Automaton",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "87b336b1f706",
+ "scenarios": [
+  {
+   "name": "a-clone-copying-the-automaton-makes-a-new-type-choice",
+   "cr": [
+    "707.6"
+   ],
+   "why": "The Automaton's chosen type was fixed when it entered and is not a copiable value. The Clone copying it chooses its own type, so choosing Bear makes the Grizzly Bears 3/3 while the original Automaton's Elf choice does nothing to them.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Adaptive Automaton",
+      "Clone"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Adaptive Automaton",
+     "mana": "CCC"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "Elf"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Clone",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Adaptive Automaton"
+       ]
+      },
+      {
+       "kind": "choose",
+       "pick": [
+        "Bear"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "pt": "3/3"
+    },
+    {
+     "card": "p0:Clone",
+     "zone": "battlefield",
+     "pt": "2/2",
+     "types": [
+      "Bear"
+     ]
+    }
+   ]
+  }
+ ]
+}

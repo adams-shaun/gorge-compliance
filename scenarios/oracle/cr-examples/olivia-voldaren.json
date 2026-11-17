@@ -1,0 +1,111 @@
+{
+ "card": "Olivia Voldaren",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "838ab0205a15",
+ "scenarios": [
+  {
+   "name": "the-copied-activated-ability-finishes-after-the-copy-ends",
+   "cr": [
+    "707.11"
+   ],
+   "why": "The Shapeshifter borrowed Olivia's damage ability and activates it. A later creature entry makes the Shapeshifter copy that creature before the ability resolves, but the ability is already on the stack: it still deals 1 damage, makes the target a Vampire, and puts the +1/+1 counter on the Shapeshifter itself.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Mirror Gallery"
+     ],
+     "hand": [
+      "Unstable Shapeshifter",
+      "Olivia Voldaren",
+      "Ambush Viper"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Unstable Shapeshifter",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Olivia Voldaren",
+     "mana": "CCBR"
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Unstable Shapeshifter",
+       "zone": "battlefield",
+       "pt": "3/3",
+       "types": [
+        "Vampire"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Unstable Shapeshifter",
+     "ability": "deals 1 damage",
+     "mana": "CR",
+     "targets": [
+      "p1:Grizzly Bears"
+     ],
+     "expect": [
+      {
+       "hand_size": {
+        "p0": 1
+       }
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Ambush Viper",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Unstable Shapeshifter",
+     "zone": "battlefield",
+     "pt": "3/2",
+     "types": [
+      "Snake"
+     ],
+     "counters": {
+      "P1P1": 1
+     },
+     "keywords": [
+      "Deathtouch"
+     ]
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "damage": 1,
+     "types": [
+      "Vampire"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,65 @@
+{
+ "card": "Unstable Shapeshifter",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "c5ed8b4e7c2c",
+ "scenarios": [
+  {
+   "name": "existing-pump-stays-after-it-copies-the-next-creature",
+   "cr": [
+    "707.4"
+   ],
+   "why": "Giant Growth has already resolved on the Shapeshifter. When a Bear enters later in the turn the Shapeshifter takes the Bear's copiable values, but the +3/+3 effect is a separate effect still applying, so it is a 5/5 Bear.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Unstable Shapeshifter"
+     ],
+     "hand": [
+      "Giant Growth",
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Giant Growth",
+     "mana": "G",
+     "targets": [
+      "p0:Unstable Shapeshifter"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Unstable Shapeshifter",
+       "pt": "3/4"
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Grizzly Bears",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Unstable Shapeshifter",
+     "zone": "battlefield",
+     "pt": "5/5",
+     "types": [
+      "Bear"
+     ]
+    }
+   ]
+  }
+ ]
+}

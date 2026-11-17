@@ -1,0 +1,84 @@
+{
+ "card": "Fork",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e605a8ff006d",
+ "scenarios": [
+  {
+   "name": "the-copy-shares-the-original-spells-chosen-mode",
+   "cr": [
+    "707.10"
+   ],
+   "why": "Fork copies the Emerald Charm spell with its chosen mode already locked in. Because Fork may choose a new target for the copy, the copy's untap mode can untap a second tapped creature while the original untaps the first.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Grizzly Bears",
+      "Runeclaw Bear"
+     ],
+     "tapped": [
+      "Grizzly Bears",
+      "Runeclaw Bear"
+     ],
+     "hand": [
+      "Emerald Charm",
+      "Fork"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Emerald Charm",
+     "mana": "G",
+     "targets": [
+      "p0:Grizzly Bears"
+     ],
+     "answers": [
+      {
+       "kind": "modes",
+       "pick": [
+        "Untap target permanent"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Fork",
+     "mana": "RR",
+     "targets": [
+      "p0:Emerald Charm"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "target",
+       "pick": [
+        "p0:Runeclaw Bear"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "tapped": false
+    },
+    {
+     "card": "p0:Runeclaw Bear",
+     "tapped": false
+    },
+    {
+     "card": "p0:Fork",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,80 @@
+{
+ "card": "False Demise",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "3fe8e88c5cb4",
+ "scenarios": [
+  {
+   "name": "the-aura-returns-both-cards-of-the-melded-permanent",
+   "cr": [
+    "713.8c"
+   ],
+   "why": "False Demise is attached to the Chittering Host, a single permanent made of two cards. When that permanent dies, the Aura's trigger returns both Midnight Scavengers and Graf Rats to the battlefield under its controller's control.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Midnight Scavengers",
+      "Graf Rats"
+     ],
+     "hand": [
+      "False Demise",
+      "Doom Blade"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "begin-combat",
+     "active": "p0"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "main2",
+     "active": "p0"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:False Demise",
+     "mana": "CCU",
+     "targets": [
+      "p0:Chittering Host"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Doom Blade",
+     "mana": "CB",
+     "targets": [
+      "p0:Chittering Host"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Midnight Scavengers",
+     "zone": "battlefield"
+    },
+    {
+     "card": "p0:Graf Rats",
+     "zone": "battlefield"
+    },
+    {
+     "card": "p0:False Demise",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

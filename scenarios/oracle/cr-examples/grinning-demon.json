@@ -1,0 +1,79 @@
+{
+ "card": "Grinning Demon",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "cf3492e39e5f",
+ "scenarios": [
+  {
+   "name": "clone-of-a-face-down-morph-is-a-nameless-2-2",
+   "cr": [
+    "707.2"
+   ],
+   "why": "A face-down morph is a colourless 2/2 creature with no name, types, abilities or mana cost. Copying that permanent gives Clone the same faceless body, and it is face up, so it cannot be turned face up for the Demon's morph cost.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Grinning Demon",
+      "Clone"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Grinning Demon",
+     "cast_mode": "morphed",
+     "mana": "CCC"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Clone",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Grinning Demon"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Clone",
+     "zone": "battlefield",
+     "pt": "2/2",
+     "colours": "",
+     "no_types": [
+      "Artifact",
+      "Enchantment",
+      "Land",
+      "Planeswalker",
+      "Battle"
+     ],
+     "no_keywords": [
+      "Flying",
+      "Trample",
+      "Menace",
+      "Lifelink"
+     ]
+    },
+    {
+     "card": "p0:Grinning Demon",
+     "zone": "battlefield",
+     "pt": "2/2",
+     "colours": ""
+    }
+   ]
+  }
+ ]
+}
