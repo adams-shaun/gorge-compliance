@@ -1050,6 +1050,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return null;
         }
 
+        /** The cards-list overload TargetCardInLibrary.choose (every library
+         * search) reaches. A search whose filter matches no library card is
+         * declined here rather than failing "Missing TARGET def"
+         * ({@link #noCandidateOptionalAsk}); every other ask is the base's. */
+        @Override
+        public boolean chooseTarget(Outcome outcome, Cards cards, mage.target.TargetCard target, Ability source, Game game) {
+            if (target instanceof mage.target.common.TargetCardInLibrary
+                    && noCandidateOptionalAsk(getTargets(), target.getMinNumberOfTargets() - target.getSize(),
+                            target.possibleTargets(target.getAffectedAbilityControllerId(this.getId()), source, game, cards))) {
+                return false;
+            }
+            return super.chooseTarget(outcome, cards, target, source, game);
+        }
+
         /**
          * The base TestPlayer handles a TargetSpellOrPermanent's stack half
          * only: its "stack" branch in chooseTarget searches game.getStack()
@@ -1065,20 +1079,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * does handle -- to super. This lives in the tracked driver, not in
          * the out-of-tree TestPlayer, so it survives an XMAGE_REF bump.
          */
-        /** The cards-list overload TargetCardInLibrary.choose (every library
-         * search) reaches. A search whose filter matches no library card is
-         * declined here rather than failing "Missing TARGET def"
-         * ({@link #noCandidateOptionalAsk}); every other ask is the base's. */
-        @Override
-        public boolean chooseTarget(Outcome outcome, Cards cards, mage.target.TargetCard target, Ability source, Game game) {
-            if (target instanceof mage.target.common.TargetCardInLibrary
-                    && noCandidateOptionalAsk(getTargets(), target.getMinNumberOfTargets() - target.getSize(),
-                            target.possibleTargets(target.getAffectedAbilityControllerId(this.getId()), source, game, cards))) {
-                return false;
-            }
-            return super.chooseTarget(outcome, cards, target, source, game);
-        }
-
         @Override
         public boolean chooseTarget(Outcome outcome, mage.target.Target target, Ability source, Game game) {
             // The engine also calls chooseTarget directly (a spell's own
@@ -1208,15 +1208,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     && target.getTargetName().contains("can be attached to");
         }
 
-        /** Whether an optional ask has nothing to answer: the TARGET queue is
-         * empty, the ask needs no more picks, and no candidate is legal. XMage
-         * poses a "you may search your library for a Food card" TargetCardInLibrary
-         * (Courier of Comestibles' ETB) even when the library holds no Food, and
-         * gorge, which asks nothing of an empty candidate set, records only the
-         * accepted confirm -- so no target answer exists to script. Declining is
-         * then the only legal outcome. A queued answer is the base's to read. */
+        /** Whether an optional ask has nothing to answer: it needs no more
+         * picks and no candidate is legal. XMage poses a "you may search your
+         * library for a Food card" TargetCardInLibrary (Courier of
+         * Comestibles' ETB) even when the library holds no Food, and gorge,
+         * which asks nothing of an empty candidate set, records only the
+         * accepted confirm -- so no target answer exists to script. Declining
+         * is then the only legal outcome. The queue is deliberately ignored
+         * (every answer is queued up front, so a later ask's answer sits in
+         * it and no answer can match zero candidates), except a skip at the
+         * front, which belongs to this ask and is the base's to honour (same
+         * rule as {@link #unscriptableEmptyAsk}). */
         static boolean noCandidateOptionalAsk(List<String> targetQueue, int needed, java.util.Collection<UUID> candidates) {
-            return targetQueue.isEmpty() && needed <= 0 && candidates.isEmpty();
+            return needed <= 0 && candidates.isEmpty()
+                    && !(!targetQueue.isEmpty() && TestPlayer.TARGET_SKIP.equals(targetQueue.get(0)));
         }
 
         /** The hand card a TargetCardInHand ask reached through chooseTarget
@@ -1229,15 +1234,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * choice queue head when it names a candidate; (2) the pick was
          * forced -- the mandatory ask has no more candidates than picks it
          * must make -- which gorge never records as a decision (a one-card
-         * hand), so the sole legal card is taken. A queued target answer is
-         * always the base's to read, so a scripted target is never overridden
+         * hand), so a legal card is taken (the game re-asks for the rest). A
+         * queued target answer naming a candidate is always the base's to
+         * read, so a scripted target is never overridden
          * and a choice that names no candidate is left in place for the
          * base's strict unused-command check. {@code needed} is how many more
          * picks the ask must make (0 for an "up to" ask with its minimum met). */
         static UUID handCardChoice(List<String> targetQueue, List<String> choices, List<UUID> candidates,
                 int needed, BiPredicate<UUID, String> matches) {
             if (!targetQueue.isEmpty()) {
-                return null;
+                // A queued answer naming a candidate (or a skip) is this ask's
+                // own and the base's to read. One that names no candidate
+                // belongs to a later ask in the window, so it only stops the
+                // choice-queue shortcut; a forced pick is still taken.
+                if (TestPlayer.TARGET_SKIP.equals(targetQueue.get(0))) {
+                    return null;
+                }
+                for (UUID id : candidates) {
+                    if (matches.test(id, targetQueue.get(0))) {
+                        return null;
+                    }
+                }
+                return needed > 0 && candidates.size() <= needed ? candidates.get(0) : null;
             }
             if (!choices.isEmpty() && !TestPlayer.CHOICE_SKIP.equals(choices.get(0))) {
                 for (UUID id : candidates) {
@@ -1247,7 +1265,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                 }
             }
-            if (needed > 0 && candidates.size() == 1) {
+            if (needed > 0 && candidates.size() <= needed && !candidates.isEmpty()) {
                 return candidates.get(0);
             }
             return null;

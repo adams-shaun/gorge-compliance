@@ -212,6 +212,19 @@ public final class OptionalTargetSkipsTest {
         List<String> targets = new ArrayList<>(Arrays.asList("Grizzly Bears"));
         check(hand.invoke(null, targets, choices, Arrays.asList(bears, shock), 1, byName) == null
                 && choices.equals(Arrays.asList("Shock")), "a queued target answer was overridden");
+        // A forced pick is still taken when the queue holds only a later ask's
+        // answer (names no candidate), but not when the front names one or is a skip.
+        check(bears.equals(hand.invoke(null, new ArrayList<String>(Arrays.asList("Island")), new ArrayList<String>(),
+                Arrays.asList(bears), 1, byName)), "forced pick lost to a later ask's queued answer");
+        check(hand.invoke(null, new ArrayList<String>(Arrays.asList("Grizzly Bears")), new ArrayList<String>(),
+                Arrays.asList(bears), 1, byName) == null, "a front answer naming the candidate was overridden");
+        check(hand.invoke(null, new ArrayList<String>(Arrays.asList(SKIP)), new ArrayList<String>(),
+                Arrays.asList(bears), 1, byName) == null, "a front skip was overridden");
+        // Candidates equal to the picks needed are forced too ("exile two" from two).
+        check(bears.equals(hand.invoke(null, new ArrayList<String>(), new ArrayList<String>(),
+                Arrays.asList(bears, shock), 2, byName)), "forced two-of-two hand pick not taken");
+        check(hand.invoke(null, new ArrayList<String>(), new ArrayList<String>(), new ArrayList<java.util.UUID>(), 1, byName) == null,
+                "an empty candidate set produced a pick");
         choices = new ArrayList<>(Arrays.asList("Island"));
         check(hand.invoke(null, new ArrayList<String>(), choices, Arrays.asList(bears, shock), 1, byName) == null
                 && choices.equals(Arrays.asList("Island")), "a non-candidate choice was consumed");
@@ -223,8 +236,10 @@ public final class OptionalTargetSkipsTest {
                 "an empty optional search was not declined");
         check(Boolean.FALSE.equals(search.invoke(null, new ArrayList<String>(), 0, Arrays.asList(bears))),
                 "a search with a legal card was declined");
-        check(Boolean.FALSE.equals(search.invoke(null, new ArrayList<String>(Arrays.asList("Forest")), 0,
-                new ArrayList<java.util.UUID>())), "a scripted search answer was skipped");
+        check(Boolean.TRUE.equals(search.invoke(null, new ArrayList<String>(Arrays.asList("Forest")), 0,
+                new ArrayList<java.util.UUID>())), "an empty search with a later ask's answer queued was not declined");
+        check(Boolean.FALSE.equals(search.invoke(null, new ArrayList<String>(Arrays.asList(SKIP, "Forest")), 0,
+                new ArrayList<java.util.UUID>())), "a front skip was not left to the base");
         check(Boolean.FALSE.equals(search.invoke(null, new ArrayList<String>(), 1, new ArrayList<java.util.UUID>())),
                 "a mandatory search was declined");
 
