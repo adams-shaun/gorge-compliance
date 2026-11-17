@@ -5219,7 +5219,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String ref = batch.refs.get(i);
                 String name = battlefieldName(ref);
                 Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
-                Permanent exact = combatPermanent(ref, name, player.getId(), battlefield);
+                Permanent exact = combatPermanent(ref, name, player.getId(), game);
                 if (exact != null && game.getCombat().getAttackers().contains(exact.getId())) {
                     // XMage's checkAttackRequirements declared this forced
                     // attacker itself; the recorded command is satisfied.
@@ -5270,8 +5270,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     continue;
                 }
                 player.getActions().remove(batch.actions.get(i));
-                Permanent blocker = combatPermanent(blockerRef, blockerName, player.getId(), battlefield);
-                Permanent attacker = combatPermanent(attackerRef, attackerName, attackerId, battlefield);
+                Permanent blocker = combatPermanent(blockerRef, blockerName, player.getId(), game);
+                Permanent attacker = combatPermanent(attackerRef, attackerName, attackerId, game);
                 if (blocker == null || attacker == null) {
                     throw new IllegalArgumentException("block " + blockerRef + " -> " + attackerRef
                             + " names no live permanent (battlefield: " + battlefieldListing() + ")");
@@ -5287,11 +5287,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** The exact permanent a recorded combat ref names, resolved from live
-     * state: a token ref ranks its controller's tokens by creation order
-     * (tokenChoice); a card ref ranks its controller's non-token permanents
-     * of that name the same way. `name` is the XMage spelling from
-     * battlefieldName. */
-    static Permanent combatPermanent(String ref, String name, UUID controller, Iterable<Permanent> battlefield) {
+     * state. A token ref ranks its controller's live tokens by creation order
+     * (tokenChoice). A non-token ref names the object the driver bound to the
+     * ref: a card ref's `#k` is the setup/objRef ordinal ACROSS ZONES (the
+     * second `X` in the deck is `p0:X#2` whether it sits in the graveyard or
+     * the battlefield), not a rank among the controller's live battlefield
+     * permanents, so only the bound object id can identify it. `name` is the
+     * XMage spelling from battlefieldName; `boundId` is the id bound to a
+     * non-token ref (null when the driver never bound one). */
+    static Permanent combatPermanent(String ref, String name, UUID controller, UUID boundId,
+            Iterable<Permanent> battlefield) {
         if (ref.contains(":token:")) {
             Permanent token = tokenChoice(ref, controller, battlefield);
             if (token == null && !name.equals(refName(ref))) {
@@ -5301,16 +5306,32 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             return token;
         }
-        int wanted = refOrdinal(ref);
-        List<Permanent> candidates = new ArrayList<>();
+        if (boundId == null) {
+            return null;
+        }
         for (Permanent permanent : battlefield) {
-            if (!permanent.isToken() && controller.equals(permanent.getControllerId())
-                    && CardUtil.haveSameNames(permanent.getName(), name, true)) {
-                candidates.add(permanent);
+            if (!permanent.isToken() && permanent.getId().equals(boundId)
+                    && controller.equals(permanent.getControllerId())) {
+                return permanent;
             }
         }
-        candidates.sort(java.util.Comparator.comparingInt(Permanent::getCreateOrder));
-        return wanted > 0 && wanted <= candidates.size() ? candidates.get(wanted - 1) : null;
+        return null;
+    }
+
+    /** combatPermanent for a live game: resolve a non-token ref through the
+     * object id registerAliases (or bindOneAlias) bound to it, so a `#k`
+     * setup ordinal is never mistaken for a live battlefield rank. A token
+     * ref keeps tokenChoice's live creation order, where `#k` IS a live
+     * rank. */
+    private Permanent combatPermanent(String ref, String name, UUID controller, Game game) {
+        UUID boundId = null;
+        if (!ref.contains(":token:")) {
+            String alias = refAlias.get(ref);
+            if (alias != null) {
+                boundId = seat(refSeat(ref)).getAliasByName(alias);
+            }
+        }
+        return combatPermanent(ref, name, controller, boundId, game.getBattlefield().getAllPermanents());
     }
 
     /** Whether XMage's name-only combat command cannot tell this name's
