@@ -1117,6 +1117,9 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 		if r != nil {
 			return nil, r
 		}
+		if nm, rr := xmageName(a[0].s); rr == nil && t.manaSource(nm) && !t.manaSourceLand(nm) && t.paysFromPool(nm) && t.manaAbilityPutsCounter(nm) {
+			t.noteShape(refuse("mana-ability-counter", "%s's mana ability puts the %s counter, and the runner pays from the pool", nm, kind))
+		}
 		return []*expect{{Card: ref, Counters: map[string]int32{kind: int32(a[2].n)}}}, nil
 	case "assertType", "assertSubtype", "assertNotSubtype":
 		if len(a) < 2 || a[0].kind != vStr {
@@ -1236,6 +1239,9 @@ type emitter struct {
 	blocked        map[int]bool
 	hasStepExpects bool
 	tappedAt       map[string]int // {T}-cost source ref -> turn last tapped
+	// passed marks the seats whose priority a step already passed at the
+	// current clock: a later check for such a seat would sit in the next step.
+	passed [2]bool
 	// entered lists, per seat in action order, the permanents earlier play
 	// and cast steps put on the battlefield after setup (a land drop, a mana
 	// rock): castMana counts them as mana sources.
@@ -1250,6 +1256,7 @@ func (em *emitter) add(s *step) *step {
 func (em *emitter) resolve() {
 	em.add(&step{Op: "resolve"})
 	em.holder = active(em.turn)
+	em.passed = [2]bool{}
 }
 
 func (em *emitter) note(turn int) {
@@ -1261,6 +1268,15 @@ func (em *emitter) note(turn int) {
 // gotoClock emits the steps that bring the game to priority in step s of
 // turn tn.
 func (em *emitter) gotoClock(tn, s int) *refusal {
+	moved := tn != em.turn || s != em.stp
+	r := em.gotoClockSteps(tn, s)
+	if moved && r == nil {
+		em.passed = [2]bool{}
+	}
+	return r
+}
+
+func (em *emitter) gotoClockSteps(tn, s int) *refusal {
 	em.note(tn)
 	if tn < em.turn || (tn == em.turn && s < em.stp) {
 		return refuse("clock-backwards", "to %d/%s from %d/%s", tn, stepNames[s], em.turn, stepNames[em.stp])
@@ -1942,6 +1958,7 @@ func (em *emitter) kickerCost(name string) string {
 func (em *emitter) priorityTo(seat int) {
 	if em.holder != seat {
 		em.add(&step{Op: "pass", Seat: em.holder})
+		em.passed[em.holder] = true
 		em.holder = seat
 	}
 }
@@ -2134,6 +2151,16 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 				}
 				a.choices = a.choices[1:]
 			}
+			// XMage's pick of a MayPlay alternative cost may follow the
+			// spell's addTarget (Force of Will under Boromir): the cast still
+			// pays no mana and takes the alternative cast option
+			for i, ch := range a.choices {
+				if !ch.target && ch.x < 0 && ch.mode == 0 && strings.HasPrefix(ch.pick, "name:Cast with alternative cost") {
+					s.CastMode, s.Mana = "alternative", ""
+					a.choices = append(a.choices[:i:i], a.choices[i+1:]...)
+					break
+				}
+			}
 			if len(a.choices) > 0 && !a.choices[0].target && a.choices[0].x < 0 && a.choices[0].mode == 0 {
 				switch p := a.choices[0].pick; {
 				case p == "yes" && em.hasKeywordPrefix(a.card, "Offspring"):
@@ -2148,6 +2175,8 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 					// own cast option and the step pays no mana
 					s.CastMode, s.Mana = "alternative", ""
 					a.choices = a.choices[1:]
+				case t.permittingObjectPick(a.seat, a.card, p):
+					t.noteShape(refuse("mayplay-source-choice", "%s is cast from a zone and %s is picked as the permitting object", a.card, strings.TrimPrefix(p, "name:")))
 				}
 			}
 			if len(a.targets) == 0 {
@@ -2343,6 +2372,12 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 		if a.playCheck != nil {
 			// the offered check reads the priority holder, so the expect
 			// must ride a step that leaves the checking seat on priority.
+			if em.holder != a.seat && em.passed[a.seat] {
+				// the seat's priority was already passed at this clock (the
+				// test states one player's checks around the other's), so
+				// the runner's pass would end the step the check is about
+				em.t.noteShape(refuse("playable-check-order", "%s's priority at %s of turn %d was passed by an earlier check", pref(a.seat), stepNames[em.stp], em.turn))
+			}
 			em.priorityTo(a.seat)
 		}
 		if a.playCheck != nil && a.playCheck.want && len(xs) == 1 && xs[0].Offered != nil && xs[0].Offered.Kind == "cast" {
@@ -2376,6 +2411,11 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			}
 		}
 		last := em.steps[len(em.steps)-1]
+		if last.Op == "activate" && a.playCheck == nil {
+			// XMage's check sees the game after the ability resolved; the
+			// expect rides the activation step, before it does
+			em.t.noteShape(refuse("check-before-ability-resolves", "a check follows %s's activation with no resolve", last.Card))
+		}
 		last.Expect = append(last.Expect, xs...)
 		em.hasStepExpects = true
 	}

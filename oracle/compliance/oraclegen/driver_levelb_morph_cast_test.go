@@ -10,7 +10,8 @@ import (
 // the morph-family extension: morphed and megamorphed both spell the face-down
 // cast "... using Morph" (XMage has NO "using Megamorph"; MorphAbility sets
 // SpellAbilityCastMode.MORPH for both families), disguised keeps "... using
-// Disguise", and every other cast_mode stays rejected.
+// Disguise", and every other cast_mode stays rejected. A warped cast appends
+// " with Warp" after the suffix, so the composition check matches the prefix.
 func TestDriverCastArmMapsMorphFamilySpelling(t *testing.T) {
 	b, err := os.ReadFile(scenarioReplayPath)
 	if err != nil {
