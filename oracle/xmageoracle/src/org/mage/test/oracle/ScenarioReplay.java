@@ -2319,7 +2319,33 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return refs;
     }
 
-    private void bindOneAlias(String ref) {
+    /** The object a non-token scenario ref names among objs: the rank-th
+     * object whose scenario name matches and whose seat is the ref's seat,
+     * in the caller's zone order. A rank-free ref is #1. Null when the ref
+     * names no such object. */
+    static mage.MageObject refRankChoice(String ref, List<mage.MageObject> objs,
+            java.util.function.ToIntFunction<mage.MageObject> seatOf,
+            java.util.function.Function<mage.MageObject, String> setupName) {
+        int seat = refSeat(ref);
+        String name = refName(ref);
+        int wanted = 1;
+        int hash = ref.lastIndexOf('#');
+        if (hash >= 0 && ref.substring(hash + 1).matches("[0-9]+")) {
+            wanted = Integer.parseInt(ref.substring(hash + 1));
+        }
+        int seen = 0;
+        for (mage.MageObject o : objs) {
+            if (seatOf.applyAsInt(o) != seat || !setupName.apply(o).equals(name)) {
+                continue;
+            }
+            if (++seen == wanted) {
+                return o;
+            }
+        }
+        return null;
+    }
+
+    void bindOneAlias(String ref) {
         if (refAlias.containsKey(ref) || currentGame == null) {
             return;
         }
@@ -2358,15 +2384,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 if (pl.getId().equals(c.getOwnerId())) objs.add(c);
             }
             for (Card c : pl.getLibrary().getCards(currentGame)) objs.add(c);
-            for (mage.MageObject o : objs) {
-                if (!setupName(o).equals(name)) {
-                    continue;
-                }
-                if (++seen == wanted) {
-                    match = o;
-                    break;
-                }
-            }
+            // The list is already scoped to the ref's seat; passing that seat
+            // keeps refRankChoice's owner/seat contract explicit and lets the
+            // driver test drive it with a mixed-seat list.
+            match = refRankChoice(ref, objs, o -> seatIndex, this::setupName);
         }
         if (match == null) {
             return;
@@ -2742,9 +2763,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** The XMage target string for one scenario target ref: its alias when
-     * setup bound one, else the stripped, XMage-spelled card name. */
+     * setup bound one, else the stripped, XMage-spelled card name.
+     *
+     * A ref that entered after setup -- a card moved to a graveyard, a token
+     * copy -- has no setup alias yet, so bind it here by its owner/controller
+     * prefix and rank before falling back to the bare name. This is the one
+     * place every target path (cast, activate, scripted answer, copy slot)
+     * converts a ref, so an owner-qualified ref cannot silently lose its
+     * owner and match the first same-named object. */
     private String targetName(String ref) {
         String a = refAlias.get(ref);
+        if (a == null && isScenarioRef(ref)) {
+            bindAnswerAlias(ref);
+            a = refAlias.get(ref);
+        }
         return a != null ? a : xmageSpelling(refName(ref));
     }
 
@@ -2802,8 +2834,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
     private final Set<String> faceDownRefs = new java.util.HashSet<>();
     // Setup objects the scenario can name by ref ("p0:Grizzly Bears#2"): the
     // XMage alias each ref is registered under, so two same-name permanents
-    // are told apart. Filled during setup, read by step targeting.
-    private final java.util.Map<String, String> refAlias = new java.util.LinkedHashMap<>();
+    // are told apart. Filled during setup, read by step targeting. Package
+    // visibility lets the no-H2 driver tests exercise the late-binding path.
+    final java.util.Map<String, String> refAlias = new java.util.LinkedHashMap<>();
     // Per-seat per-name occurrence counter build() uses to spell setup refs
     // ("p0:Grizzly Bears", "p0:Grizzly Bears#2") in the same order XMage
     // adds the cards, so registerAliases can bind each to its object.

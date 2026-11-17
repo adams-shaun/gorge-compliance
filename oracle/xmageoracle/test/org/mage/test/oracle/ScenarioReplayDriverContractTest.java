@@ -1,6 +1,7 @@
 package org.mage.test.oracle;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -803,6 +804,80 @@ public final class ScenarioReplayDriverContractTest {
         System.out.println("PASS seat counts (absent/2 duel, 3 free-for-all, others refused)");
     }
 
+    /** An owner-qualified graveyard ref names the picked seat's card: the
+     * ref's owner prefix scopes the rank search, so p1's Pennant is selected
+     * even when p0's same-named card comes first in the offered zone order.
+     * The target path also binds a ref that entered after setup before
+     * falling back to a bare name (CR 601.2c's announced object). */
+    private static void ownerQualifiedGraveyardTarget() throws Exception {
+        UUID p0 = id(20), p1 = id(21);
+        Card own = fakeCard(p0, "Dawn-Blessed Pennant");
+        Card forest = fakeCard(p1, "Forest");
+        Card theirs = fakeCard(p1, "Dawn-Blessed Pennant");
+        Card second = fakeCard(p1, "Dawn-Blessed Pennant");
+        List<mage.MageObject> graveyards = Arrays.asList(own, forest, theirs, second);
+        java.util.function.ToIntFunction<mage.MageObject> seatOf =
+                o -> p0.equals(((Card) o).getOwnerId()) ? 0 : 1;
+        check(ScenarioReplay.refRankChoice("p1:Dawn-Blessed Pennant", graveyards, seatOf,
+                mage.MageObject::getName) == theirs, "owner-qualified ref did not select p1's graveyard card");
+        check(ScenarioReplay.refRankChoice("p0:Dawn-Blessed Pennant", graveyards, seatOf,
+                mage.MageObject::getName) == own, "owner-qualified ref did not select p0's graveyard card");
+        check(ScenarioReplay.refRankChoice("p1:Forest", graveyards, seatOf,
+                mage.MageObject::getName) == forest, "rank-free ref did not select its seat's card");
+        check(ScenarioReplay.refRankChoice("p1:Dawn-Blessed Pennant#2", graveyards, seatOf,
+                mage.MageObject::getName) == second, "ranked ref did not select the second card");
+        check(ScenarioReplay.refRankChoice("p1:Grizzly Bears", graveyards, seatOf,
+                mage.MageObject::getName) == null, "an unmatched ref selected an object");
+
+        BindingDriver d = new BindingDriver();
+        String ref = "p1:Dawn-Blessed Pennant";
+        check("@p1:Dawn-Blessed Pennant".equals(targetName(d, ref)),
+                "an unbound owner-qualified ref did not bind to its alias");
+        check(d.bound.equals(Arrays.asList(ref)), "targetName did not bind the ref exactly once: " + d.bound);
+        d.bound.clear();
+        check("@p1:Dawn-Blessed Pennant".equals(targetName(d, ref)), "an already-bound ref changed alias");
+        check(d.bound.isEmpty(), "an already-bound ref was rebound: " + d.bound);
+        check("Dawn-Blessed Pennant".equals(targetName(d, "Dawn-Blessed Pennant")), "a bare name changed");
+        check(d.bound.isEmpty(), "a bare name was bound as a ref");
+        System.out.println("PASS owner-qualified graveyard target (seat-scoped rank choice, "
+                + "exact owner card, late target ref binding)");
+    }
+
+    /** Records the refs targetName resolves late, so the lazy binding runs
+     * without a game (the superclass constructor is the only H2 touch). */
+    public static final class BindingDriver extends ScenarioReplay {
+        final List<String> bound = new ArrayList<>();
+
+        @Override
+        void bindOneAlias(String ref) {
+            bound.add(ref);
+            refAlias.put(ref, "@" + ref);
+        }
+    }
+
+    private static String targetName(ScenarioReplay d, String ref) throws Exception {
+        Method m = ScenarioReplay.class.getDeclaredMethod("targetName", String.class);
+        m.setAccessible(true);
+        return (String) m.invoke(d, ref);
+    }
+
+    private static Card fakeCard(UUID owner, String name) {
+        UUID id = UUID.randomUUID();
+        return (Card) Proxy.newProxyInstance(Card.class.getClassLoader(),
+                new Class<?>[]{Card.class}, (proxy, method, args) -> {
+                    switch (method.getName()) {
+                        case "getId":
+                            return id;
+                        case "getName":
+                            return name;
+                        case "getOwnerId":
+                            return owner;
+                        default:
+                            throw new AssertionError("unexpected call " + method);
+                    }
+                });
+    }
+
     public static void main(String[] args) throws Exception {
         attachments();
         zones();
@@ -816,5 +891,6 @@ public final class ScenarioReplayDriverContractTest {
         copyCostOps();
         spellings();
         seatCounts();
+        ownerQualifiedGraveyardTarget();
     }
 }
