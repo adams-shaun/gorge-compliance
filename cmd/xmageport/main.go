@@ -57,7 +57,13 @@ func main() {
 	flag.Parse()
 	if len(fams) == 0 {
 		fams = familyFlag{"continuous=cards/continuous", "replacement=cards/replacement", "copy=cards/copy",
-			"triggers=cards/triggers", "combat=combat"}
+			"triggers=cards/triggers", "combat=combat",
+			"cost=cards/cost", "conditional=cards/conditional", "enchantments=cards/enchantments",
+			"watchers=cards/watchers", "mana=cards/mana", "rules=cards/rules",
+			"prevention=cards/prevention", "planeswalker=cards/planeswalker", "control=cards/control",
+			"filters=cards/filters", "requirement=cards/requirement", "restriction=cards/restriction",
+			"damage=cards/damage", "dynamicvalue=cards/dynamicvalue", "asthough=cards/asthough",
+			"sba=sba", "protection=cards/protection", "modal=cards/modal", "targets=cards/targets"}
 	}
 	knownBugs = loadKnownBugs(*kbPath)
 	reg, err := testutil.OpenCorpusRegistry(*corpus)
