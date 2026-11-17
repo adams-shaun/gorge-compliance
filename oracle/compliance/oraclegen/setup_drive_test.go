@@ -201,6 +201,16 @@ func TestSetupDriveLibraryArrangePartitions(t *testing.T) {
 			want: [][]XAnswer{{{0, "setup_choice", "Grizzly Bears"}, {0, "setup_choice", "[choice_skip]"}, {0, "setup_choice", "Wastes"}, {0, "setup_choice", "Ornithopter"}}},
 		},
 		{
+			// binned (2) > kept (1): the driver's order phase must stop after
+			// the one kept label (see keptOrderLabels), not after one label
+			// per binned card.
+			name: "proper subset with more binned than kept",
+			d: rules.OracleDecision{Step: -1, Seat: 0, Kind: "order", GorgeKind: "arrange",
+				ArrangeKind: "graveyard", Options: 3, Min: 0, Max: 2,
+				ArrangeLabels: []string{"Forest", "Island", "Mountain"}, Picks: []string{"Forest"}, PickIdx: []int{0}},
+			want: [][]XAnswer{{{0, "setup_choice", "Island"}, {0, "setup_choice", "Mountain"}, {0, "setup_choice", "[choice_skip]"}, {0, "setup_choice", "Forest"}}},
+		},
+		{
 			name: "empty kept pile names every card to send away",
 			d: rules.OracleDecision{Step: -1, Seat: 0, Kind: "order", GorgeKind: "arrange",
 				ArrangeKind: "graveyard", Options: 2, Min: 0, Max: 2,

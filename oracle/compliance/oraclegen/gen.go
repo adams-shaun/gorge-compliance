@@ -1727,18 +1727,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 							as = append(as, XAnswer{d.Seat, "choice", label})
 						}
 					}
-				} else {
-					// A legacy decision without the full offered label list:
-					// keep the recorded picks as both the selection and the
-					// order, the only split the old wire data supports.
-					for _, label := range d.Picks {
-						as = append(as, XAnswer{d.Seat, "choice", label})
-					}
-					as = append(as, XAnswer{d.Seat, "choice", "[choice_skip]"})
-					for _, label := range d.Picks {
-						as = append(as, XAnswer{d.Seat, "choice", label})
-					}
 				}
+				// A decision without the full offered label list cannot be
+				// split into the two piles (libraryArrangePartition refuses
+				// it) and is left unscripted: guessing a split would send the
+				// kept cards away. gorge records the labels of every KArrange.
 			} else {
 				continue
 			}

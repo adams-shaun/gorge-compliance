@@ -970,37 +970,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 return null;
             }
 
-            // The remaining labels are the chosen top-card ordering. The
-            // generator repeats labels from the arrange decision here; a label
-            // may therefore name a card already selected for the graveyard.
-            // Match against the original look set to distinguish an answer for
-            // this order prompt from an answer belonging to a later choice,
-            // while only adding cards still available to the top of the library.
-            Set<Card> lookedAt = new java.util.LinkedHashSet<>(lookedAtOrder);
+            // The labels after the selection's skip are the kept cards' top
+            // order (pile A, in the decision's pick order). The generator
+            // emits every kept card exactly once, so the order phase is
+            // bounded by the cards still available after the selection and
+            // consumes only labels naming one of them: a later decision's
+            // answer in the same step may name a looked-at card (a binned
+            // duplicate, or a card already selected), and must stay queued.
+            // An all-kept arrange is the skip alone (nothing selected, no
+            // order labels follow), so it consumes none.
             List<Card> ordered = new ArrayList<>();
-            // A partial arrange emits each pick once for selection, then a
-            // skip and exactly those same picks for order. The look set can
-            // be larger than the pick set; counting it steals later answers.
-            // A forced bottom order emits picks only once (no skip), so it
-            // has no separate order answers to consume.
-            int orderAnswersRemaining = selectionEnded ? selected.size() : 0;
-            while (orderAnswersRemaining > 0 && !queue.isEmpty()) {
-                String answer = queue.get(0);
-                Card match = findByName(available, answer);
-                if (match != null) {
-                    queue.remove(0);
+            if (selectionEnded && !selected.isEmpty()) {
+                List<String> keptNames = new ArrayList<>();
+                for (Card card : available) {
+                    keptNames.add(card.getName());
+                }
+                for (String name : keptOrderLabels(queue, keptNames)) {
+                    Card match = findByName(available, name);
                     available.remove(match);
                     ordered.add(match);
-                    orderAnswersRemaining--;
-                    continue;
                 }
-                if (findByName(lookedAt, answer) == null) {
-                    break;
-                }
-                // This order label names a card consumed during selection.
-                // Consume it even though that card cannot be put back on top.
-                queue.remove(0);
-                orderAnswersRemaining--;
             }
             cards.clear();
             for (Card card : ordered) {
@@ -1014,6 +1003,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             }
             return selected;
+        }
+
+        /** Consume the kept-card order labels at the head of {@code queue}:
+         * the longest leading run naming a not-yet-ordered kept card, never
+         * more than there are kept cards. The first label that names no
+         * remaining kept card (or the queue's end) stops the phase, so an
+         * answer belonging to a later decision is left queued. Returns the
+         * consumed names in order. */
+        static List<String> keptOrderLabels(List<String> queue, List<String> keptNames) {
+            List<String> remaining = new ArrayList<>(keptNames);
+            List<String> consumed = new ArrayList<>();
+            while (!remaining.isEmpty() && !queue.isEmpty()) {
+                if (!remaining.remove(queue.get(0))) {
+                    break;
+                }
+                consumed.add(queue.remove(0));
+            }
+            return consumed;
         }
 
         /**
