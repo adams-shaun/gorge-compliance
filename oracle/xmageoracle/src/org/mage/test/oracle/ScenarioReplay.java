@@ -362,6 +362,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // payment, so put the payment answer IN FRONT of them.
                     // Appending made playMana eat the step's answer and assert
                     // "Can't use choice in play mana: ...".
+                    ManaType nextType = manaTypeOfName(next);
+                    if (getManaPool().get(nextType) <= 0) {
+                        // Only a conditional (restricted) unit of this type
+                        // is in the pool. TestPlayer's colour choice asserts
+                        // an unconditional unit ("pool must have red mana"),
+                        // so unlock the type here: that is all the choice
+                        // does before it reports the ask answered, and
+                        // ManaPool.pay then spends the conditional unit when
+                        // its restriction admits the spell.
+                        getManaPool().unlockManaType(nextType);
+                        return true;
+                    }
                     getChoices().add(0, next);
                 } else {
                     fallBackToAutoPayment();
@@ -402,7 +414,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // gorge actually spent.
             for (char c : "WUBRG".toCharArray()) {
                 ManaType type = manaType(c);
-                if (due.get(type) > 0 && getManaPool().get(type) > 0) {
+                if (due.get(type) > 0 && poolHolds(type)) {
                     return payment.indexOf(c) >= 0 ? takePayment(c) : dropPaymentLetterAndName(c);
                 }
             }
@@ -418,7 +430,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // generic part while a recorded unit is still available, or the
             // post-cast pool holds a different colour than gorge's.
             for (char c : "WUBRGC".toCharArray()) {
-                if (payment.indexOf(c) >= 0 && getManaPool().get(manaType(c)) > 0) {
+                if (payment.indexOf(c) >= 0 && poolHolds(manaType(c))) {
                     return takePayment(c);
                 }
             }
@@ -427,7 +439,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // a restriction change), so pay one of those rather than strand the
             // cast, keeping the plan's total in step.
             for (char c : "WUBRGC".toCharArray()) {
-                if (getManaPool().get(manaType(c)) > 0) {
+                if (poolHolds(manaType(c))) {
                     return dropPaymentLetterAndName(c);
                 }
             }
@@ -463,7 +475,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * reach the fallback while the pool holds each plan type). */
         private int leastNeededPaymentLetter() {
             for (int i = 0; i < payment.length(); i++) {
-                if (getManaPool().get(manaType(payment.charAt(i))) <= 0) {
+                if (!poolHolds(manaType(payment.charAt(i)))) {
                     return i;
                 }
             }
@@ -474,6 +486,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
             int i = payment.indexOf(c);
             payment = payment.substring(0, i) + payment.substring(i + 1);
             return colourName(c);
+        }
+
+        /** Whether the pool holds a unit of the type that a manual payment can
+         * spend: an unconditional one, or a conditional (restricted) one such
+         * as "Spend this mana only to cast instant and sorcery spells". The
+         * plain ManaPool.get excludes conditional units, so a cast paid from
+         * them alone looked unpayable and fell back to auto-payment. */
+        private boolean poolHolds(ManaType type) {
+            return getManaPool().get(type) > 0 || getManaPool().conditionalManaHasManaType(type);
+        }
+
+        private static ManaType manaTypeOfName(String name) {
+            for (char c : "WUBRGC".toCharArray()) {
+                if (colourName(c).equals(name)) {
+                    return manaType(c);
+                }
+            }
+            throw new IllegalArgumentException("mana colour " + name);
         }
 
         private static String colourName(char c) {

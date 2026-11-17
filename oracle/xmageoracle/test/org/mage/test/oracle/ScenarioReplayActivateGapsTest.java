@@ -132,6 +132,68 @@ public final class ScenarioReplayActivateGapsTest {
         }
     }
 
+    /** Tablet of Discovery's {T}: Add {R}{R} (spend only on instants and
+     * sorceries) floats two conditional red units; Tome Blast ({1}{R}, a
+     * sorcery) must spend both (CR 601.2h, 106.6), not tap a Mountain for
+     * one and leave an R floating. TestPlayer's "Red" choice asserts an
+     * unconditional unit, so the driver unlocks the type itself. */
+    private static void conditionalPoolMana() {
+        JsonObject res = tomeBlast("conditional pool mana", "'Tablet of Discovery','Mountain','Mountain'");
+        String before = poolAt(res, 1);
+        if (!before.equals("RR")) {
+            throw new AssertionError("precondition: pool before the cast must be RR, got " + before);
+        }
+        String after = poolAt(res, 2);
+        if (!after.isEmpty()) {
+            throw new AssertionError("expected both conditional R spent, got pool " + after);
+        }
+        if (tappedMountains(res) != 0) {
+            throw new AssertionError("a Mountain was tapped for a cost the pool covers");
+        }
+    }
+
+    /** The same cast with no Mountain: the cost is payable only from the
+     * conditional units, so a fall back to auto-payment fails the harness
+     * ("Can't find ability to activate"). */
+    private static void conditionalPoolManaNoLand() {
+        JsonObject res = tomeBlast("conditional pool mana without land", "'Tablet of Discovery'");
+        String after = poolAt(res, 2);
+        if (!after.isEmpty()) {
+            throw new AssertionError("expected both conditional R spent, got pool " + after);
+        }
+    }
+
+    /** Tapped Mountains in the last snapshot. */
+    private static int tappedMountains(JsonObject res) {
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        int n = 0;
+        for (var e : snaps.get(snaps.size() - 1).getAsJsonObject().getAsJsonArray("permanents")) {
+            JsonObject o = e.getAsJsonObject();
+            if (o.get("name").getAsString().equals("Mountain") && o.get("tapped").getAsBoolean()) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    private static JsonObject tomeBlast(String name, String battlefield) {
+        return passes(name, "{"
+                + "id:'test:activate-gaps-conditional-pool',name:'activate gaps conditional pool',turn:1,"
+                + "setup:{"
+                + "p0:{battlefield:[" + battlefield + "],"
+                + "hand:['Tome Blast'],"
+                + "library_top:['Island','Island','Island','Island','Island','Island','Island','Island','Island','Island'],life:20},"
+                + "p1:{battlefield:['Poisoner\\'s Apprentice'],"
+                + "library_top:['Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain'],life:20}},"
+                + "steps:["
+                + "{op:'activate',seat:0,card:'p0:Tablet of Discovery',ability_index:1},"
+                + "{op:'cast',seat:0,card:'p0:Tome Blast',targets:['p1:Poisoner\\'s Apprentice']}],"
+                + "xmage_ability:['{T}: Add {R}{R}.',''],"
+                + "xmage_answers:[null,null],"
+                + "xmage_pos:[{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0}],"
+                + "payment:['','RR']}");
+    }
+
     /** Saddle 2 with one other untapped creature: the Tap cost's chooser has a
      * single legal object, but XMage still poses it, so the answer must be on
      * the choice queue (xprep's single-option cost pick used to be dropped). */
@@ -169,9 +231,11 @@ public final class ScenarioReplayActivateGapsTest {
         manualPaymentGenericFallback();
         manualPaymentKeepsFloatingColour();
         manualPaymentColorlessFollowsPlan();
+        conditionalPoolMana();
+        conditionalPoolManaNoLand();
         saddleSingleOptionCost();
         crewSingleOptionCost();
         System.out.println("PASS manual-payment generic fallback and plan preference "
-                + "(coloured and colorless units); Saddle/Crew single-option cost choices");
+                + "(coloured and colorless units); conditional pool mana (with and without a land); Saddle/Crew single-option cost choices");
     }
 }
