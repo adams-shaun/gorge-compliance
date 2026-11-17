@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge/testkit/testutil"
@@ -10,12 +11,21 @@ import (
 // asserts (the readMethod pattern, plus the corpus translate uses).
 func translateTapped(t *testing.T, body string) *result {
 	t.Helper()
+	// execute() goes before the body's first assert: XMage runs an assert
+	// written earlier against the game before setup, and the translator drops it.
+	lines := strings.Split(body, "\n")
+	at := len(lines)
+	for i, l := range lines {
+		if strings.HasPrefix(strings.TrimSpace(l), "assert") {
+			at = i
+			break
+		}
+	}
+	body = strings.Join(lines[:at], "\n") + "\n        setStopAt(2, PhaseStep.END_TURN);\n        execute();\n" + strings.Join(lines[at:], "\n")
 	src := `class TappedManaSourceTest extends CardTestPlayerBase {
     @Test
     public void testTappedManaSource() {
 ` + body + `
-        setStopAt(2, PhaseStep.END_TURN);
-        execute();
     }
 }`
 	jc, err := parseJava("x", "x", src)

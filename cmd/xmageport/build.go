@@ -238,6 +238,9 @@ func (t *translator) build() (*portScenario, []*group, *refusal) {
 	if t.droppedOrder > 0 {
 		sc.Why += fmt.Sprintf(" %d XMage trigger-order choice(s) dropped (gorge keeps the offered order).", t.droppedOrder)
 	}
+	if t.droppedPreAsserts > 0 {
+		sc.Why += fmt.Sprintf(" %d assert(s) before execute() dropped (XMage checks them against the game before setup).", t.droppedPreAsserts)
+	}
 	if len(sc.Expect) == 0 && !em.hasStepExpects {
 		return nil, nil, refuse("no-asserts", "no assertion")
 	}
@@ -354,10 +357,15 @@ func isTokenName(n string) (string, bool) {
 	return n, false
 }
 
-// targetRef maps an XMage target/choice name to a gorge pick, preferring
+// targetRefN maps an XMage target/choice name to a gorge pick, preferring
 // the acting seat's objects for nothing: XMage resolves by name over every
-// object, so a name present for both seats is refused as ambiguous.
-func (t *translator) targetRef(name string) (string, *refusal) {
+// object, so a name present for both seats is refused as ambiguous. It is
+// for the ord-th (0-based) pick of one name: an
+// addTarget(player, name, 2) or a spell naming the same card twice means two
+// different cards of that name, which the runner refs as pN:Name,
+// pN:Name#2. A repeated bare ref would bind the first copy twice and be
+// rejected as not offered. A name with a single card keeps its one ref.
+func (t *translator) targetRefN(name string, ord int) (string, *refusal) {
 	if name == "p0" || name == "p1" {
 		return name, nil
 	}
@@ -376,11 +384,27 @@ func (t *translator) targetRef(name string) (string, *refusal) {
 	case len(r0) > 0 && len(r1) > 0:
 		return "", refuse("ambiguous-target", "%s on both seats", n)
 	case len(r0) > 0:
-		return r0[0], nil
+		return r0[min(ord, len(r0)-1)], nil
 	case len(r1) > 0:
-		return r1[0], nil
+		return r1[min(ord, len(r1)-1)], nil
 	}
 	return "", refuse("target-not-in-setup", "%s", n)
+}
+
+// targetRefs maps a step's target names in order, numbering the repeats of
+// one name so each names its own card (see targetRefN).
+func (t *translator) targetRefs(names []string) ([]string, *refusal) {
+	seen := map[string]int{}
+	out := make([]string, 0, len(names))
+	for _, x := range names {
+		r, rr := t.targetRefN(x, seen[x])
+		if rr != nil {
+			return nil, rr
+		}
+		seen[x]++
+		out = append(out, r)
+	}
+	return out, nil
 }
 
 // choicePick maps a setChoice string: a card name becomes its ref, anything
@@ -883,6 +907,39 @@ func countExpect(p int, zone, name string, n int) (*expect, *refusal) {
 	return &expect{Count: c, Eq: ip(n)}, nil
 }
 
+// countNameRefusal is the shape refusal of a positive count asserted by a name
+// no card has: a permanent an effect renamed (Awakening of Vitu-Ghazi turns a
+// land into "Vitu-Ghazi"). The scenario's count matches the printed face
+// name, which the rename does not change, so it reads 0 whatever gorge did.
+// It is a shape, not a hard refusal: the name may be a token's (Banana) or a
+// part of a card's (Avacyn) and a count that holds then stays covered, so the
+// row refuses only when the run fails the count. A count of 0 is vacuous.
+func (t *translator) countNameRefusal(name string, want int) *refusal {
+	n, r := xmageName(name)
+	if r != nil || n == "" || want == 0 {
+		// a count of 0 by a name nothing bears holds whatever gorge did
+		return nil
+	}
+	if _, tok := isTokenName(n); tok {
+		return nil
+	}
+	if _, ok := t.lookup(n); ok {
+		return nil
+	}
+	sh := refuse("count-name-not-a-card", "%q is not a card name (a renamed permanent?)", n)
+	// only a count that read 0 is evidence of the rename: "Cursed" reading 2
+	// (Cursed Courtier and its Cursed Role) is the name matching too much.
+	sh.onlyIf = func(fails []string) bool {
+		for _, f := range fails {
+			if strings.Contains(f, fmt.Sprintf("%q = 0, want", n)) {
+				return true
+			}
+		}
+		return false
+	}
+	return sh
+}
+
 func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 	a := c.Args
 	bad := func() ([]*expect, *refusal) { return nil, refuse("unmappable-assert", "%s(%d args)", c.Name, len(a)) }
@@ -931,6 +988,9 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 			n, ok3 := argInt(c, 2)
 			if !ok || !ok2 || !ok3 {
 				return bad()
+			}
+			if r := t.countNameRefusal(name, n); r != nil && t.countShape == nil {
+				t.countShape = r
 			}
 			e, r := countExpect(p, zone, name, n)
 			return []*expect{e}, r
@@ -1870,7 +1930,7 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			if strings.HasPrefix(pick, "name:") {
 				n := strings.TrimPrefix(pick, "name:")
 				if ch.target {
-					r, rr := t.targetRef(n)
+					r, rr := t.targetRefN(n, ch.ord)
 					if rr != nil {
 						return rr
 					}
@@ -2026,13 +2086,11 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 					t.queueShape = r
 				}
 			}
-			for _, x := range a.targets {
-				tr, r := t.targetRef(x)
-				if r != nil {
-					return nil, r
-				}
-				s.Targets = append(s.Targets, tr)
+			trs, r := t.targetRefs(a.targets)
+			if r != nil {
+				return nil, r
 			}
+			s.Targets = append(s.Targets, trs...)
 		}
 		em.add(s)
 		if r := attach(s, len(s.Targets) > 0); r != nil {
@@ -2040,6 +2098,9 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 		}
 		em.noteEntered(a)
 		if (a.kind == "cast" || a.kind == "play") && t.isCopyCard(a.card) {
+			if r := t.copiedTargetRefusal(a); r != nil {
+				return nil, r
+			}
 			if !t.isPermanentCard(a.card) {
 				t.markCopied(a, "") // a spell's copies are tokens
 			} else {
@@ -2079,13 +2140,11 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 		}
 		idx := pick.index
 		s := &step{Op: "activate", Seat: a.seat, Card: pick.ref, Mana: mana, AbilityIndex: &idx, XAbility: a.ability}
-		for _, x := range a.targets {
-			tr, r := t.targetRef(x)
-			if r != nil {
-				return nil, r
-			}
-			s.Targets = append(s.Targets, tr)
+		trs, r := t.targetRefs(a.targets)
+		if r != nil {
+			return nil, r
 		}
+		s.Targets = append(s.Targets, trs...)
 		em.add(s)
 		if r := attach(s, len(s.Targets) > 0); r != nil {
 			return nil, r
@@ -2645,6 +2704,34 @@ func saCopies(sa *cards.SA) bool {
 	return false
 }
 
+// copiedTargetRefusal refuses a copy action whose own targets name a card its
+// setChoice picks copy (Clone's "Craw Wurm" followed by addTarget "Craw
+// Wurm" for a trigger of the permanent that entered): the target is the copy,
+// which the caster controls, while setup names only the original, so the ref
+// the targets resolved to before the copy existed names the wrong object.
+func (t *translator) copiedTargetRefusal(a *action) *refusal {
+	copiedNames := map[string]bool{}
+	for _, ch := range a.choices {
+		if n, ok := strings.CutPrefix(ch.pick, "name:"); ok && !ch.target {
+			if x, r := xmageName(n); r == nil {
+				copiedNames[x] = true
+			}
+		}
+	}
+	named := append([]string(nil), a.targets...)
+	for _, ch := range a.choices {
+		if n, ok := strings.CutPrefix(ch.pick, "name:"); ok && ch.target {
+			named = append(named, n)
+		}
+	}
+	for _, x := range named {
+		if n, r := xmageName(x); r == nil && copiedNames[n] {
+			return refuse("copy-ambiguous-ref", "target %s names the card %s copies", n, a.card)
+		}
+	}
+	return nil
+}
+
 // markCopied records the names a copy action's choices and targets name:
 // from here on that name may belong to two permanents. The copy itself is
 // the cast card (ref) or, for an ability, a token of the acting seat.
@@ -2686,7 +2773,7 @@ func (t *translator) tailGroup() (*group, *refusal) {
 		pick, kind := ch.pick, "any"
 		if n, ok := strings.CutPrefix(pick, "name:"); ok {
 			if ch.target {
-				r, rr := t.targetRef(n)
+				r, rr := t.targetRefN(n, ch.ord)
 				if rr != nil {
 					return nil, rr
 				}
