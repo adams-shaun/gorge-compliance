@@ -329,6 +329,163 @@ func takeLeftovers(g *group, line string) *group {
 	return out
 }
 
+// targetAskKind picks the decision kind an XMage addTarget can answer when a
+// step poses a card-choice ask instead of a target ask: the test framework's
+// target queue carries both real targets and card choices (a library search,
+// an encode, a surveil), and gorge poses those as choose/arrange/modes.
+var reOptionSeat = regexp.MustCompile(`\[\d+ \S+ "(?:[^"\\]|\\.)*" obj=\d+ pl=(\d+)`)
+
+// optionSeat reads the seat the pending decision's options are posed to out
+// of a not-offered dump.
+func optionSeat(line string) (int, bool) {
+	m := reOptionSeat.FindStringSubmatch(line)
+	if m == nil {
+		return 0, false
+	}
+	n, err := strconv.Atoi(m[1])
+	return n, err == nil
+}
+
+// pickSeat reads the seat a pN: pick names.
+func pickSeat(pick string) (int, bool) {
+	if len(pick) >= 2 && pick[0] == 'p' && (pick[1] == '0' || pick[1] == '1') {
+		return int(pick[1] - '0'), true
+	}
+	return 0, false
+}
+
+// reorderAnswerForSeat moves the first answer of the asked seat to position i
+// (swapping it with the pick the runner read there). Reports whether it did.
+func reorderAnswerForSeat(g *group, i, seat int) bool {
+	for j := i + 1; j < len(g.answers); j++ {
+		if len(g.answers[j].Pick) == 0 {
+			continue
+		}
+		if s, ok := pickSeat(g.answers[j].Pick[0]); ok && s == seat {
+			g.answers[i], g.answers[j] = g.answers[j], g.answers[i]
+			g.kinds[i], g.kinds[j] = g.kinds[j], g.kinds[i]
+			return true
+		}
+	}
+	return false
+}
+
+func targetAskKind(asks []fallbackAsk) (string, bool) {
+	for _, k := range []string{"choose", "arrange", "modes"} {
+		for _, a := range asks {
+			if a.Kind == k {
+				return k, true
+			}
+		}
+	}
+	return "", false
+}
+
+// mergeUnconsumedCardPick folds a leftover card choice into the earlier
+// single-pick answer of the same step: XMage states one addTarget per card for
+// an "and/or" search while gorge poses one multi-pick choose, so the first
+// pick is consumed and the second is left over -- the two are one answer.
+func mergeUnconsumedCardPick(g *group, line string) bool {
+	i := strings.Index(line, "[")
+	if i < 0 {
+		return false
+	}
+	var left []answer
+	if json.Unmarshal([]byte(line[i:]), &left) != nil {
+		return false
+	}
+	merged := false
+	for _, l := range left {
+		if len(l.Pick) != 1 {
+			continue
+		}
+		if _, ok := refBareName(l.Pick[0]); !ok {
+			continue
+		}
+		ai, li := -1, -1
+		for j, a := range g.answers {
+			if len(a.Pick) == 0 {
+				continue
+			}
+			if a.Pick[0] == l.Pick[0] {
+				li = j
+				continue
+			}
+			// A repeated pick of one multi-pick card choice (Garnet's
+			// "each of any number of Sagas", an "and/or" search) is one
+			// answer; a card pick consumed and another left over at the
+			// same step are the two picks of that one answer.
+			if ai < 0 && (a.Kind == "any" || a.Kind == "choose") {
+				if _, ok := refBareName(a.Pick[0]); ok {
+					ai = j
+				}
+			}
+		}
+		if ai < 0 || li < 0 || li < ai {
+			continue
+		}
+		// One choose decision per seat is a separate answer, not two picks
+		// of one multi-pick ask (Gandalf's "each player sacrifices a
+		// creature": p0's and p1's picks are different decisions).
+		a, b := g.answers[ai], g.answers[li]
+		if a.Seat != nil && b.Seat != nil && *a.Seat != *b.Seat {
+			continue
+		}
+		if as, aok := pickSeat(a.Pick[0]); aok {
+			if bs, bok := pickSeat(b.Pick[0]); bok && as != bs {
+				continue
+			}
+		}
+		// Distinct card names at one step are separate choose decisions
+		// (Juxtapose's tied creature and tied artifact), unless both came
+		// from addTarget, which states one multi-pick search as one
+		// addTarget per card. A repeated pick of the same card (Garnet's
+		// "each of any number of Sagas", written with #2 ordinals) is one
+		// answer too.
+		if a.Kind != "choose" {
+			an, _ := refBareName(a.Pick[0])
+			bn, _ := refBareName(b.Pick[0])
+			if !strings.EqualFold(an, bn) {
+				continue
+			}
+		}
+		g.answers[ai].Kind = "choose"
+		g.answers[ai].Pick = append(g.answers[ai].Pick, l.Pick[0])
+		g.answers = append(g.answers[:li:li], g.answers[li+1:]...)
+		g.kinds = append(g.kinds[:li:li], g.kinds[li+1:]...)
+		merged = true
+	}
+	return merged
+}
+
+// convertUnusedTargetsToAnswers re-homes the unused targets listed in line as
+// answers of kind k, so a card choice XMage states with addTarget reaches the
+// choose/arrange/modes ask it was meant for. It reports whether it moved any.
+func convertUnusedTargetsToAnswers(g *group, line, kind string) bool {
+	i := strings.Index(line, "[")
+	if i < 0 {
+		return false
+	}
+	var left []string
+	if json.Unmarshal([]byte(line[i:]), &left) != nil {
+		return false
+	}
+	moved := false
+	for _, l := range left {
+		for j, x := range g.targets {
+			if x != l {
+				continue
+			}
+			g.targets = append(g.targets[:j:j], g.targets[j+1:]...)
+			g.answers = append(g.answers, answer{Kind: kind, Pick: []string{l}})
+			g.kinds = append(g.kinds, 0)
+			moved = true
+			break
+		}
+	}
+	return moved
+}
+
 // runResult plays r once, then -- when the run still fails an assert and
 // mapped booleans onto two-option asks -- replays it with each inversion of
 // up to three of those mappings (XMage's true is the first option only by
@@ -439,6 +596,21 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 						if done || a.Pick[0] != nm[1] {
 							continue
 						}
+						// gorge and XMage need not ask the same seat's
+						// card choice first (Juxtapose asks the defender
+						// before the caster). The pick for the asked seat
+						// is in the group, just at another position: put
+						// it where the runner reads answers from.
+						if nm[2] == "choose" || nm[2] == "modes" {
+							if askSeat, ok := optionSeat(line); ok {
+								if ps, ok := pickSeat(a.Pick[0]); ok && ps != askSeat {
+									if reorderAnswerForSeat(g, i, askSeat) {
+										progress, done = true, true
+										continue
+									}
+								}
+							}
+						}
 						if rewriteOfferedLabel(g, i, nm[2], parseOptionDump(line)) {
 							progress, done = true, true
 							continue
@@ -475,6 +647,37 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 				continue
 			}
 			if strings.Contains(line, "unconsumed answer(s)") || strings.Contains(line, "unused target(s)") {
+				// XMage's addTarget queue also answers card-choice asks
+				// (a library search, an encode, a surveil). Gorge poses
+				// those as choose/arrange/modes, which cannot consume a
+				// step target, so an unused target that matches such an
+				// ask is re-homed as its answer before the leftover is
+				// moved on to the next step.
+				if strings.Contains(line, "unused target(s)") {
+					if kind, ok := targetAskKind(asks[n]); ok {
+						for _, g := range at {
+							if convertUnusedTargetsToAnswers(g, line, kind) {
+								progress = true
+							}
+						}
+						if progress {
+							continue
+						}
+					}
+				}
+				// A repeated pick of one choose ask (XMage's addTarget per
+				// card for an "and/or" search) is one multi-pick answer:
+				// the first pick is consumed and the leftover rides it.
+				if strings.Contains(line, "unconsumed answer(s)") {
+					for _, g := range at {
+						if mergeUnconsumedCardPick(g, line) {
+							progress = true
+						}
+					}
+					if progress {
+						continue
+					}
+				}
 				// Only the LEFTOVERS move on: what this step consumed stays.
 				for _, g := range at {
 					left := takeLeftovers(g, line)
