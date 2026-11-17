@@ -1,0 +1,71 @@
+{
+ "card": "Black Sun's Zenith",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "03fd62f46990",
+ "scenarios": [
+  {
+   "name": "flashback-granted-sorcery-shuffle-still-exiles",
+   "cr": [
+    "701.24c",
+    "702.34a"
+   ],
+   "why": "Recoup gives Black Sun's Zenith flashback from the graveyard; cast that way it is exiled on resolution (the flashback rule), so the shuffle-into-library instruction does not keep it, and it does put its counters on creatures.",
+   "setup": {
+    "p0": {
+     "graveyard": [
+      "Black Sun's Zenith"
+     ],
+     "hand": [
+      "Recoup"
+     ],
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Recoup",
+     "mana": "CR",
+     "targets": [
+      "p0:Black Sun's Zenith"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Black Sun's Zenith",
+     "mana": "CBB",
+     "cast_mode": "flashback",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "X = 1"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Black Sun's Zenith",
+     "zone": "exile"
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "pt": "1/1"
+    }
+   ]
+  }
+ ]
+}

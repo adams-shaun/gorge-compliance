@@ -1,0 +1,66 @@
+{
+ "card": "Splinter",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "470338f7c3db",
+ "scenarios": [
+  {
+   "name": "exiles-target-and-same-name-cards-in-graveyard",
+   "cr": [
+    "701.23b"
+   ],
+   "why": "Splinter exiles the targeted Howling Mine and must also exile the copy sitting in its controller's graveyard; the copies in the library are optional.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Splinter"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Howling Mine"
+     ],
+     "graveyard": [
+      "Howling Mine"
+     ],
+     "library": [
+      "Howling Mine",
+      "Howling Mine",
+      "Forest",
+      "Forest",
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Splinter",
+     "mana": "CCGG",
+     "targets": [
+      "p1:Howling Mine"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "graveyard_size": {
+      "p1": 0
+     }
+    },
+    {
+     "count": {
+      "seat": 1,
+      "zone": "battlefield",
+      "name": "Howling Mine"
+     },
+     "eq": 0
+    }
+   ]
+  }
+ ]
+}

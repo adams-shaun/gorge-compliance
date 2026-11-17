@@ -1,0 +1,62 @@
+{
+ "card": "Fire // Ice",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "d811dae3ab1d",
+ "scenarios": [
+  {
+   "name": "fire-half-flashbacks-for-its-own-cost",
+   "cr": [
+    "702.1b",
+    "702.34a"
+   ],
+   "why": "Past in Flames gives the split card flashback at its combined mana cost in the graveyard, but casting just the Fire half uses Fire's own cost of {1}{R}; Fire deals its 2 damage and the card is then exiled.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Past in Flames"
+     ],
+     "graveyard": [
+      "Fire // Ice"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Past in Flames",
+     "mana": "CCCR"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Fire // Ice",
+     "mana": "CR",
+     "targets": [
+      "p1"
+     ],
+     "cast_mode": "flashback"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 20,
+      "p1": 18
+     }
+    },
+    {
+     "card": "p0:Fire // Ice",
+     "zone": "exile"
+    }
+   ]
+  }
+ ]
+}
