@@ -270,3 +270,43 @@ func TestForgeDropsDeclarationDecisions(t *testing.T) {
 		t.Errorf("empty attack not rewritten: %+v", rq.Item.Steps[1])
 	}
 }
+
+// TestForgeExportLibrarySearchPick: an Evolving Wilds activated and resolved
+// by passes (the shape xengine lowers) logs gorge's search pick on the pass
+// that resolves it, the step Forge's driver is at when Forge asks, so the
+// export keeps that decision there as the object choice the driver consumes.
+// When the item ends on the pass that leaves the ability on the stack, gorge
+// poses no search at all, the export carries none, and Forge's ask past the
+// last step is a trailing miss the classifier absorbs
+// (oracle/xengine/classify TestClassifyForgeTrailingMiss), not an export gap.
+func TestForgeExportLibrarySearchPick(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	k := 0
+	build := func(steps ...oraclegen.Step) []rules.OracleDecision {
+		it := oraclegen.Item{ID: "xe:search", Template: lower.Template, Scenario: oraclegen.Scenario{
+			Name: "search", Setup: map[string]oraclegen.Seat{"p0": {
+				Battlefield: []string{"Evolving Wilds"}, LibraryTop: []string{"Forest"}}},
+			Steps: steps}}
+		rq, _ := forgeExportItem(reg, it)
+		return rq.GorgeDecisions
+	}
+	act := oraclegen.Step{Op: "activate", Seat: 0, Card: "p0:Evolving Wilds", AbilityIndex: &k}
+	pass0 := oraclegen.Step{Op: "pass", Seat: 0}
+	resolve := oraclegen.Step{Op: "pass", Seat: 1,
+		Answers: []oraclegen.Answer{{Kind: "choose", Pick: []string{"p0:Forest"}}}}
+
+	got := build(act, pass0, resolve)
+	if len(got) != 1 {
+		t.Fatalf("resolved search: %d decisions, want 1: %+v", len(got), got)
+	}
+	d := got[0]
+	if d.Step != 2 || d.Seat != 0 || d.Kind != "choose_n" || !reflect.DeepEqual(d.PickKinds, []string{"search"}) ||
+		!reflect.DeepEqual(d.PickRefs, []string{"p0:Forest"}) || d.Min != 0 || d.Max != 1 {
+		t.Errorf("search decision = step %d seat %d %s kinds %v refs %v min %d max %d, want step 2 seat 0 choose_n [search] [p0:Forest] 0..1",
+			d.Step, d.Seat, d.Kind, d.PickKinds, d.PickRefs, d.Min, d.Max)
+	}
+
+	if got := build(act, pass0); len(got) != 0 {
+		t.Errorf("item ending on the pass before resolution carries decisions: %+v", got)
+	}
+}
