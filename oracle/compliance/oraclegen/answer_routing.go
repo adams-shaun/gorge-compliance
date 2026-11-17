@@ -732,7 +732,7 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 // asked) and a blight goes straight to its creature target (measured:
 // Scuzzback Scrounger's "yes" met "Select a creature you control").
 func triggerCostAnswer(d rules.OracleDecision) string {
-	if d.Kind != "choose_n" || len(d.Picks) != 1 || !d.TriggerCostMana {
+	if d.Kind != "choose_n" || len(d.Picks) != 1 || !(d.TriggerCostMana || xOnlyCostPay(d)) {
 		return ""
 	}
 	switch pickKind(d, 0) {
@@ -742,6 +742,24 @@ func triggerCostAnswer(d rules.OracleDecision) string {
 		return "no"
 	}
 	return ""
+}
+
+// xOnlyCostPay is the pay pick of a triggered cost whose whole mana cost is
+// {X} ("you may pay {X}", Wildborn Preserver): gorge's TriggerCostMana flag is
+// false there (an X-only cost has no announced mana payment until X is
+// chosen), yet XMage's DoIfCostPaid poses the same chooseUse as for any other
+// mana cost (measured strict miss "Missing CHOICE def ... Pay {X}?"). The
+// label is the authority: "Pay X" / "Pay {X}" / "Pay {X}{X}".
+func xOnlyCostPay(d rules.OracleDecision) bool {
+	if len(d.Picks) != 1 || pickKind(d, 0) != "trigger_cost_pay" {
+		return false
+	}
+	rest, ok := strings.CutPrefix(d.Picks[0], "Pay ")
+	if !ok {
+		return false
+	}
+	rest = strings.NewReplacer("{", "", "}", "").Replace(rest)
+	return rest != "" && strings.Trim(rest, "X") == ""
 }
 
 // triggerCostWindow reports a mana-window decision (an "activate" source tap,
