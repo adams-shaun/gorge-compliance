@@ -63,6 +63,19 @@ public final class ScenarioReplayDriverAsksTest {
      * answers an unscripted ask itself and leaves a scripted head alone: a
      * queued colour for the LATER as-enters ask is not a replacement text. */
     private static void replacementOrder() throws Exception {
+        // The helper alone is not the fix: a merge that drops the override
+        // leaves every check below passing while the strict replay fails
+        // again. Pin that ScriptedChoicePlayer DECLARES the override (it
+        // would otherwise inherit TestPlayer's and consume the queue head).
+        Class<?> scripted = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
+        boolean declares = false;
+        for (Method method : scripted.getDeclaredMethods()) {
+            if (method.getName().equals("chooseReplacementEffect")) {
+                declares = true;
+            }
+        }
+        check(declares, "ScriptedChoicePlayer must override chooseReplacementEffect to answer an unscripted"
+                + " multi-effect order ask without consuming the queue head (Edgewall Inn strict miss)");
         List<String> texts = Arrays.asList("Edgewall Inn enters tapped.", "As Edgewall Inn enters, choose a color.");
         Class<?>[] types = {List.class, java.util.Collection.class};
         check(!(Boolean) adapter("replacementScripted", types, new ArrayList<String>(), texts),

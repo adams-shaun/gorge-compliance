@@ -744,25 +744,77 @@ func triggerCostAnswer(d rules.OracleDecision) string {
 	return ""
 }
 
-// nonManaTriggerCostPay reports the pay side of a triggered optional NON-mana
-// cost ("you may discard a card. If you do, ...", "you may sacrifice another
-// creature. If you do, ...", "you may tap an untapped permanent you
-// control"): XMage's DoIfCostPaid poses its chooseUse whenever the cost can be
-// paid, and gorge offers the pay side only then. A mana cost is paid from the
-// pool and answered by triggerCostAnswer; a blight goes straight to its
-// creature target (Scuzzback Scrounger: a scripted "yes" met "Select a
-// creature you control"), so neither is scripted here. Only the engine's
-// own pay pick scripts: a pick with another kind never reaches this.
+// nonManaTriggerCostPay reports the pay side of a triggered optional cost that
+// is not a PURE mana payment ("you may discard a card. If you do, ...", "you
+// may pay 1 life. If you do, ...", "you may pay 2 energy. If you do, ...",
+// "you may pay 2 B and pay 1 life. If you do, ..."): XMage's DoIfCostPaid
+// poses its chooseUse whenever the cost can be paid, and gorge offers the pay
+// side only then. A pure mana pay is answered by triggerCostAnswer in the
+// routing pass. TriggerCostMana alone is not enough: the engine leaves it
+// false for an X cost ("Pay X", Wildborn Preserver), so the phrase itself is
+// also classified by manaPaymentLabel. A blight goes straight to its creature
+// target (Scuzzback Scrounger: a scripted "yes" met "Select a creature you
+// control") and is excluded. Only the engine's own pay pick scripts: a pick
+// with another kind never reaches this.
 func nonManaTriggerCostPay(d rules.OracleDecision) bool {
 	if d.Kind != "choose_n" || len(d.Picks) != 1 || d.TriggerCostMana || pickKind(d, 0) != "trigger_cost_pay" {
 		return false
 	}
 	l := strings.ToLower(strings.TrimSpace(d.Picks[0]))
 	switch {
-	case l == "", strings.HasPrefix(l, "blight"), strings.Contains(l, "{"):
+	case l == "", strings.HasPrefix(l, "blight"):
 		return false
-	case strings.HasPrefix(l, "pay ") && !strings.HasSuffix(l, " life"):
-		// "Pay W" / "Pay 2": a mana payment.
+	case manaPaymentLabel(l):
+		return false
+	}
+	return true
+}
+
+// manaPaymentLabel reports whether a cost phrase is a pure mana payment. gorge
+// renders mana in Forge notation without a "mana" word ("pay 2 B", "pay X",
+// "pay W/U/P", "pay 2/W"), and a raw label may carry the brace form ("pay
+// {G}"). Every non-mana part (life, energy, discard, sacrifice, tap, ...) adds
+// a word that is not a mana token, so a token walk classifies the whole phrase
+// without a hand-maintained list of non-mana costs -- the next life, energy or
+// composite phrase is covered by construction.
+func manaPaymentLabel(label string) bool {
+	l := strings.ToLower(strings.TrimSpace(label))
+	rest, ok := strings.CutPrefix(l, "pay ")
+	if !ok {
+		return false
+	}
+	fields := strings.Fields(rest)
+	if len(fields) == 0 {
+		return false
+	}
+	for _, tok := range fields {
+		if !manaToken(tok) {
+			return false
+		}
+	}
+	return true
+}
+
+// manaToken reports whether one whitespace-separated token is a mana symbol:
+// generic digits, WUBRGC/X/S, a hybrid/twobrid/phyrexian slash form, a
+// two-letter phyrexian pair, or a raw brace symbol.
+func manaToken(tok string) bool {
+	if strings.HasPrefix(tok, "{") && strings.HasSuffix(tok, "}") {
+		return true
+	}
+	for _, part := range strings.Split(tok, "/") {
+		if part == "" {
+			return false
+		}
+		if strings.Trim(part, "0123456789") == "" {
+			continue
+		}
+		if len(part) == 1 && strings.ContainsRune("wubrgcsxp", rune(part[0])) {
+			continue
+		}
+		if len(part) == 2 && strings.ContainsRune("wubrgc", rune(part[0])) && part[1] == 'p' {
+			continue
+		}
 		return false
 	}
 	return true
