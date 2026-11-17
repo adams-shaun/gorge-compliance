@@ -12,8 +12,9 @@ import (
 //
 //   - mana-spent-by-source-type: a card that is live in the test counts or
 //     reacts to mana "from a Treasure" / "from a Desert" spent on a spell
-//     (Rain of Riches, Cataclysmic Prospecting). Gorge tags pooled mana with
-//     its source only when the source's own mana ability is activated.
+//     (Rain of Riches, Cataclysmic Prospecting), or to "{S}" spent on it
+//     (Search for Glory, Berg Strider). Gorge tags pooled mana with its
+//     source only when the source's own mana ability is activated.
 //   - tapped-target-mana-source: a battlefield permanent's "target tapped
 //     nonland permanent" ability is aimed at a mana source the other seat
 //     pays with (The Spear of Bashenga on Mind Stone, "tapped to cast
@@ -25,7 +26,7 @@ import (
 // text must be the exact "target tapped nonland permanent" ability, so an
 // unrelated "target tapped creature" card in hand cannot refuse the row.
 var (
-	reManaFromSourceSpent     = regexp.MustCompile(`(?i)mana from an? [a-z]+ (?:was )?spent`)
+	reManaFromSourceSpent     = regexp.MustCompile(`(?i)mana from an? [a-z]+ (?:was )?spent|\{S\}[^.\n]*\bspent\b|\bspent[^.\n]*\{S\}`)
 	reTargetTappedNonlandPerm = regexp.MustCompile(`(?i)target tapped nonland permanent`)
 )
 

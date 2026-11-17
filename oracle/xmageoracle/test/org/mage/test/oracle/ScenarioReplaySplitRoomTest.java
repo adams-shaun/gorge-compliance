@@ -207,6 +207,20 @@ public final class ScenarioReplaySplitRoomTest {
         equal(true, ScenarioReplay.hasTargetAdjuster(withBaseTarget.getSpellAbility()));
         equal(false, withBaseTarget.getSpellAbility().getAllSelectedTargets().isEmpty());
         equal(false, ScenarioReplay.needsQueuedCastTargets(withBaseTarget.getSpellAbility()));
+        // A gift spell whose ConditionalTargetAdjuster clear()s and rebuilds the
+        // targets declares a base target but still loses an inline $target=
+        // ("Missing TARGET def", Into the Flood Maw / Long River's Pull), so it
+        // is queued too, and its adjusted ask is registered.
+        mage.cards.i.IntoTheFloodMaw floodMaw = new mage.cards.i.IntoTheFloodMaw(UUID.randomUUID(),
+                new CardSetInfo("Into the Flood Maw", "BLB", "1", Rarity.UNCOMMON));
+        equal(false, floodMaw.getSpellAbility().getAllSelectedTargets().isEmpty());
+        equal(true, ScenarioReplay.replacesCastTargets(floodMaw.getSpellAbility()));
+        equal(true, ScenarioReplay.needsQueuedCastTargets(floodMaw.getSpellAbility()));
+        equal(false, ScenarioReplay.replacesCastTargets(withBaseTarget.getSpellAbility()));
+        equal(false, ScenarioReplay.replacesCastTargets(null));
+        mage.cards.l.LongRiversPull pull = new mage.cards.l.LongRiversPull(UUID.randomUUID(),
+                new CardSetInfo("Long River's Pull", "BLB", "1", Rarity.RARE));
+        equal(true, ScenarioReplay.needsQueuedCastTargets(pull.getSpellAbility()));
         // A modal spell whose only target is in a later mode (Cosmium Confluence:
         // modes 1 and 2 targetless, mode 3 destroys target enchantment) fails the
         // inline $target= check against the first mode, so it is queued instead.
@@ -244,6 +258,12 @@ public final class ScenarioReplaySplitRoomTest {
                 "The Eagles Are Coming!", tgt, eagles.getSpellAbility()));
         equal(java.util.List.of("Glorious Anthem"), adj.queued);
         equal(true, ((java.util.Set<?>) field(adj, "adjustedCasts")).contains("The Eagles Are Coming!"));
+        RecordingDriver gift = routeDriver();
+        equal(true, call(gift, "castQueuedTargets", ROUTE_TYPES, 1, PhaseStep.PRECOMBAT_MAIN, null,
+                "Into the Flood Maw", tgt, floodMaw.getSpellAbility()));
+        equal(java.util.List.of("Glorious Anthem"), gift.queued);
+        equal(java.util.List.of("Into the Flood Maw"), gift.casts);
+        equal(true, ((java.util.Set<?>) field(gift, "adjustedCasts")).contains("Into the Flood Maw"));
         // Ordinary (Abrade), divided (Biogenic Upgrade's TargetAmount), and
         // targetless casts keep their own routes: nothing queued, nothing cast.
         mage.cards.b.BiogenicUpgrade biogenic = new mage.cards.b.BiogenicUpgrade(UUID.randomUUID(),
