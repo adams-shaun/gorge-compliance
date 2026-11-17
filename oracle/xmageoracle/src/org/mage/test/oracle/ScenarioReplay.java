@@ -1575,14 +1575,33 @@ public class ScenarioReplay extends CardTestPlayerBase {
      *    loyalty activation (Found Footage's hand, Ajani's loyalty).
      *  - resolve by seat 1 waits on seat 1's queue (waitStackResolved), so a
      *    checkpoint on seat 0 would run while the spell is still on the stack.
+     *  - in a recorded run, an action of the non-active seat checkpoints on
+     *    that seat. XMage runs the whole queue of the seat that holds priority
+     *    before the opponent acts, so a checkpoint on the active seat would
+     *    run after every later action of that seat in the same turn and step
+     *    (ECL Impolite Entrance: p1's three mana activations and flash cast
+     *    were all visible at the step-10 checkpoint, though gorge cast the
+     *    flash at step 13). The actor's own queue puts its checkpoint between
+     *    its actions, holding the later one for its own step.
+     *  - a recorded pass that resolves or moves the step checkpoints on the
+     *    active seat, which has priority after the resolution or at the step
+     *    it reached; any other recorded pass checkpoints on the seat that
+     *    passed, which still holds priority.
      *
      * Every other op keeps seat 0, which acts last on the turn it is on.
      */
     private TestPlayer checkpointSeat(String op, JsonObject st, int stepIdx) {
         if (op.equals("pass") && isPassRun(steps(sc0), stepIdx)) {
-            // The active seat acts first at the step the pass reached, and
-            // XMage runs its whole queue there before the other seat acts.
-            return seat(activeSeat);
+            JsonObject pos = st.getAsJsonObject("xpos");
+            if (posFlag(pos, "moved") || posFlag(pos, "resolves")) {
+                // The active seat acts first at the step the pass reached (or
+                // gets priority back once the top object resolves), and XMage
+                // runs its whole queue there before the other seat acts.
+                return seat(activeSeat);
+            }
+            // Otherwise the recorded seat still holds priority: its checkpoint
+            // is a no-op between its own queued actions and checkpoints.
+            return seat(seatOfStep(steps(sc0), stepIdx));
         }
         if (op.equals("pass") && isActiveP1Pair(steps(sc0), stepIdx, activeSeat)
                 && passAction(steps(sc0), stepIdx) == PASS_PAIR_SECOND
@@ -1603,6 +1622,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         if (op.equals("resolve")) {
             return seat(st.has("seat") ? st.get("seat").getAsInt() : 0);
+        }
+        if (sc0 != null && isRecordedRun(steps(sc0)) && !op.equals("attach")) {
+            // attach is queued on playerA (it must apply before this step's
+            // snapshot even when the step names the other seat), so its
+            // checkpoint stays there.
+            return seat(seatOfStep(steps(sc0), stepIdx));
         }
         return playerA;
     }
@@ -3615,7 +3640,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
     static final String CMD_WAIT_RESOLVE_ONE = "waitStackResolved:1";
     static final String CMD_YIELD_PRIORITY = "pass handoff to the opponent";
     /** Queued on the passing seat itself (not the active one) by a resolving
-     * pass of a seat that is not the active player. */
+     * pass of a seat that is not the active player: that seat passes for real,
+     * so nothing it has queued later in the turn and step runs at this
+     * priority. */
     static final String CMD_PASS_OWN_PRIORITY = "resolving pass of the non-active seat";
     static final String CMD_REQUIRE_EMPTY_STACK = "opening pass pair needs an empty stack";
     static final String CMD_ADVANCE_STEP = "opening pass pair advances the step";
@@ -3719,6 +3746,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return isOp(steps, index, "pass") && steps.get(index).getAsJsonObject().has("xpos");
     }
 
+    /** Whether the scenario is a recorded whole game (an xengine tape or
+     * window): at least one of its passes carries a position. */
+    static boolean isRecordedRun(JsonArray steps) {
+        for (int i = 0; i < steps.size(); i++) {
+            if (isPassRun(steps, i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** Whether step {@code index} is a cast, activation or land play, of a
      * recorded game (one that has passes with positions), by a seat that is
      * not the active player. */
@@ -3727,12 +3765,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 || seatOfStep(steps, index) == activeSeat) {
             return false;
         }
-        for (int i = 0; i < steps.size(); i++) {
-            if (isPassRun(steps, i)) {
-                return true;
-            }
-        }
-        return false;
+        return isRecordedRun(steps);
     }
 
     private static boolean posFlag(JsonObject pos, String key) {
@@ -3823,11 +3856,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * after one. The pass that resolves an object (gorge's stack lost one)
      * queues the one-object resolution on the active seat, the seat that has
      * priority at the step the pass was made in; a pass that only hands
-     * priority on or moves the step queues nothing. The step after a pass the
-     * active seat made in the same step, if it is an action of the other seat,
-     * starts by yielding priority to that seat (the lone-handoff recipe). A
-     * resolving pass by a seat other than the active one also queues that
-     * seat's own pass, so its later queued actions wait for the resolution. */
+     * priority on or moves the step queues nothing. A recorded pass by the
+     * OTHER seat that resolves the top object is queued on that seat as its
+     * own real pass (the active seat's passes stay virtual checkpoints), so an
+     * action that seat has queued later in the same turn and step -- a flash
+     * spell held for its own step -- cannot fire at this priority instead
+     * (ECL Impolite Entrance: p1's Glamermite fired at the p0/p1 pass pair, so
+     * the top object never resolved). The step after a pass the active seat
+     * made in the same step, if it is an action of the other seat, starts by
+     * yielding priority to that seat (the lone-handoff recipe). */
     static List<String> passRunCommands(JsonArray steps, int index, int activeSeat) {
         List<String> cmds = new ArrayList<>();
         if (isPassRun(steps, index - 1) && !isOp(steps, index, "pass")) {
@@ -3840,17 +3877,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 cmds.add(CMD_YIELD_PRIORITY);
             }
         }
-        if (isPassRun(steps, index) && posFlag(steps.get(index).getAsJsonObject().getAsJsonObject("xpos"), "resolves")) {
-            if (seatOfStep(steps, index) != activeSeat) {
-                // The resolving pass belongs to a seat that is not the active
-                // player. The active seat's wait only hands priority to that
-                // seat, and the first queued action of its turn and step
-                // would fire there, ahead of the pass gorge recorded; queue
-                // the pass first, so it takes that priority (CR 117.4).
+        if (isPassRun(steps, index)) {
+            JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
+            // A pass that resolves an object needs the recorded seat to
+            // really pass: the active seat's wait is already a real pass,
+            // but the other seat would otherwise run its next queued action
+            // at this priority (a flash cast held for its own step). A pass
+            // that only hands priority on is virtual; its checkpoint
+            // consumes the seat's priority instead.
+            if (seatOfStep(steps, index) != activeSeat && posFlag(pos, "resolves")) {
                 cmds.add(CMD_PASS_OWN_PRIORITY);
             }
-            cmds.add(CMD_REQUIRE_STACK);
-            cmds.add(CMD_WAIT_RESOLVE_ONE);
+            if (posFlag(pos, "resolves")) {
+                cmds.add(CMD_REQUIRE_STACK);
+                cmds.add(CMD_WAIT_RESOLVE_ONE);
+            }
         }
         return cmds;
     }
@@ -4014,8 +4055,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     private void queuePassCommands(int stepIdx) {
-        // Every pass command runs on the active seat: seat 0 for every shape
+        // Most pass commands run on the active seat: seat 0 for every shape
         // but the active seat 1's own p1-first pair (isActiveP1Pair).
+        // CMD_PASS_OWN_PRIORITY is the exception: it runs on the passing
+        // non-active seat, not the active seat that carries the checkpoints.
         TestPlayer active = seat(activeSeat);
         for (String cmd : passCommands(steps(sc0), stepIdx, activeSeat)) {
             switch (cmd) {
@@ -4046,7 +4089,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     runCode(cmd, turn, phase, active, (info, pl, g) -> pl.pass(g));
                     break;
                 case CMD_PASS_OWN_PRIORITY:
-                    runCode(cmd, turn, phase, seat(seatOfStep(steps(sc0), stepIdx)), (info, pl, g) -> pl.pass(g));
+                    // The seat that actually passed in the recorded game, not
+                    // the active seat that carries the checkpoints. Queueing a
+                    // real pass here puts it ahead of that seat's later actions
+                    // in the same turn and step, which must not fire at this
+                    // priority (a flash cast held for its own step).
+                    runCode(cmd, turn, phase, seat(seatOfStep(steps(sc0), stepIdx)),
+                            (info, pl, g) -> pl.pass(g));
                     break;
                 case CMD_REQUIRE_EMPTY_STACK:
                     runCode(cmd, turn, phase, playerA, (info, pl, g) -> {
