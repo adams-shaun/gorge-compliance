@@ -122,6 +122,7 @@ var playerTable = map[string]entry{
 	"Snow":                          isRefused("mana-pool bookkeeping"),
 	"TypedMana":                     isRefused("mana-pool bookkeeping"),
 	"ArtifactTyped":                 isRefused("mana-pool bookkeeping"),
+	"SnowTyped":                     isRefused("mana-pool bookkeeping"),
 	"PersistentMana":                isRefused("mana that persists across steps is not placeable"),
 	"CombatMana":                    isRefused("mana that persists through combat is not placeable"),
 	"Commanders":                    isPlaced("the seat's commanders: setup command for one in the command zone, setup commanders for one placed in any other zone"),
