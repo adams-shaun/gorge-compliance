@@ -109,6 +109,7 @@ var playerTable = map[string]entry{
 	"LifeGainedThisTurn":            isRefused("this-turn tally setup cannot restate"),
 	"LifeLostThisTurn":              isRefused("this-turn tally setup cannot restate"),
 	"TokensCreatedThisTurn":         isRefused("this-turn tally setup cannot restate"),
+	"WasDealtDamageThisTurn":        isRefused("this-turn damage record; setup places life, not a damage event"),
 	"AttackedPlayersThisTurn":       isRefused("this-turn attack record setup cannot restate"),
 	"AttackedSeatsThisTurn":         isRefused("this-turn attack record setup cannot restate"),
 	"AttackedSeatsLastTurn":         isRefused("last-turn attack record setup cannot restate; live only when a card in the game mentions attackedYouTheirLastTurn, its one reader"),
