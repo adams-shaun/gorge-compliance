@@ -2588,8 +2588,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /**
-     * Whether a spell ability is *targetless until its adjuster runs*: it has a
-     * target adjuster AND no base target. Only this shape breaks the inline
+     * Whether a spell ability must take its targets through the queue: it has a
+     * target adjuster AND either no base target or an adjuster that discards
+     * pre-set targets ({@link #replacesCastTargets}). The first shape breaks the inline
      * {@code $target=} form -- the up-front check reads the unadjusted ability
      * ({@code handleNonPlayerTargetTarget}'s empty {@code selectedMode.getTargets()})
      * and throws "Ability has no targets" (The Eagles Are Coming!: no base
@@ -2599,7 +2600,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * cannot reroute it.
      */
     static boolean needsQueuedCastTargets(Ability ability) {
-        return hasTargetAdjuster(ability) && ability.getAllSelectedTargets().isEmpty();
+        return hasTargetAdjuster(ability)
+                && (ability.getAllSelectedTargets().isEmpty() || replacesCastTargets(ability));
+    }
+
+    /**
+     * Whether the ability's adjuster discards whatever the cast command
+     * pre-set and builds fresh target objects: a {@code ConditionalTargetAdjuster}
+     * ({@code adjustTargets} starts with {@code getTargets().clear()}, then
+     * re-adds the blueprint or the replacement). Such a card (Into the Flood
+     * Maw, Long River's Pull: a gift swaps the target filter) declares a base
+     * target, so the inline {@code $target=} form validates, is stored on the
+     * base object, and is wiped when the adjuster runs mid-cast; the chooser
+     * then asks again and the TestPlayer fails "Missing TARGET def". A queued
+     * target is read by that later ask, so these casts take the queue route.
+     */
+    static boolean replacesCastTargets(Ability ability) {
+        return ability != null
+                && ability.getTargetAdjuster() instanceof mage.target.targetadjustment.ConditionalTargetAdjuster;
     }
 
     /** The card's spell ability, or null when the name does not resolve. */
