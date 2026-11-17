@@ -26,10 +26,13 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
-# Forge oracle driver commit (fork, branch oracle-cmdr): a descendant of FORGE_REF with identical script trees.
-# 327ad7fb80 = 92cf059592 + CR 404.3 graveyard order answers (orderCards consumes the scripted
-# "graveyard_order" pin in gorge_decisions); same cardsfolder and tokenscripts trees as FORGE_REF 418ba5215f.
-FORGE_ORACLE_REF ?= 327ad7fb806e13166bf24cec6b609adf90a65d03
+# Forge oracle driver commit (fork, branch oracle-harness-setup-entry-counter): a descendant of FORGE_REF
+# with identical script trees.
+# 0958a1aca2 = 327ad7fb80 (branch oracle-cmdr: CR 404.3 graveyard order answers) + setup keeps every entry
+# counter the real move applies (SetupBuilder.putOntoBattlefield no longer strips a printed R:Event$ Moved
+# body's counter, e.g. Tonberry's stun counter; CR 614.1c, 122.1d); same cardsfolder and tokenscripts trees
+# as FORGE_REF 418ba5215f.
+FORGE_ORACLE_REF ?= 0958a1aca204b3291994deebc2565b3bd474f49c
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
