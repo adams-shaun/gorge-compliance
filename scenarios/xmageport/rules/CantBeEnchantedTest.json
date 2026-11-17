@@ -115,7 +115,7 @@
     }
    ],
    "xmage": "CantBeEnchantedTest#testConsecrateLand",
-   "known_bug": "XP[cantattach-static-unmodelled]: Consecrate Land's S:Mode$ CantAttach | ValidCard$ Aura.Other | Target$ Land.EnchantedBy is read nowhere in the engine, so Psychic Venom resolves onto the enchanted Plains instead of being put into the graveyard (p1 battlefield Psychic Venom 1, want 0), CR 303.4d, 704.5m, verified at gorge c3b957bf36."
+   "known_bug": "XP[cantattach-static-unmodelled]: Consecrate Land's S:Mode$ CantAttach | ValidCard$ Aura.Other | Target$ Land.EnchantedBy is read nowhere; attachRefused (engine/rules/attach.go) reads only the granted attach keyword, so Psychic Venom resolves onto the enchanted Plains instead of being put into the graveyard (p1 battlefield Psychic Venom 1, want 0), CR 303.4d, 704.5m, verified at gorge c3b957bf36."
   },
   {
    "name": "test-consecrate-land-enchanted-before",
@@ -256,7 +256,7 @@
     }
    ],
    "xmage": "CantBeEnchantedTest#testConsecrateLandEnchantedBefore",
-   "known_bug": "XP[cantattach-static-unmodelled]: same cause with Psychic Venom already attached: Consecrate Land's Mode$ CantAttach is never read, so Psychic Venom stays on the Plains and its tap trigger hits p0 (p0 life 20, want 18), CR 303.4d, 704.5m, verified at gorge c3b957bf36."
+   "known_bug": "XP[cantattach-static-unmodelled]: same cause with Psychic Venom already attached: Consecrate Land's Mode$ CantAttach is never read by attachRefused (engine/rules/attach.go), so Psychic Venom stays on the Plains and its tap trigger hits p0 (p0 life 20, want 18), CR 303.4d, 704.5m, verified at gorge c3b957bf36."
   }
  ]
 }

@@ -9,9 +9,9 @@ import (
 
 // writeCommit must not delete committed scenarios a run did not regenerate.
 // A chunk or an -only run writes one method's result into a class file that
-// may hold others; a method whose translation now fails the harness has no
-// replacement scenario at all. Only a triaged refusal or fail-expect is a
-// deliberate removal.
+// may hold others; a method whose translation now fails the harness or is
+// refused has no replacement scenario at all, and the committed one still
+// passes the audit, so it stays.
 func TestWriteCommitKeepsScenariosNotRegenerated(t *testing.T) {
 	dir := t.TempDir()
 	if err := os.MkdirAll(filepath.Join(dir, "single"), 0o755); err != nil {
@@ -52,7 +52,7 @@ func TestWriteCommitKeepsScenariosNotRegenerated(t *testing.T) {
 	for _, sc := range got.Scenarios {
 		names = append(names, sc.Name)
 	}
-	want := []string{"test-card", "test-harness", "test-card-negative"}
+	want := []string{"test-card", "test-harness", "test-refused", "test-card-negative"}
 	if len(names) != len(want) {
 		t.Fatalf("scenarios %v, want %v", names, want)
 	}
@@ -122,10 +122,10 @@ func TestWriteCommitKnownBugFailHarnessIsNotDuplicated(t *testing.T) {
 	}
 }
 
-// A class whose only results are refusals has no scenario to write, but a
-// refusal still removes the old scenario of that method; the others stay. A
-// file that is not generated (hand-ported) is never touched.
-func TestWriteCommitRefusalRemovesOldScenarioWithoutANewOne(t *testing.T) {
+// A class whose only results are refusals has no scenario to write; its old
+// scenarios still pass the audit, so they stay. A file that is not generated
+// (hand-ported) is never touched.
+func TestWriteCommitRefusalKeepsOldScenarioWithoutANewOne(t *testing.T) {
 	dir := t.TempDir()
 	path := writeOldPortFile(t, dir, "CobraTrapTest.json", generatedSource,
 		portScenario{Name: "test-a", XMage: "CobraTrapTest#testA"},
@@ -142,11 +142,11 @@ func TestWriteCommitRefusalRemovesOldScenarioWithoutANewOne(t *testing.T) {
 	if err := writeCommit(dir, rows); err != nil {
 		t.Fatal(err)
 	}
-	if names := portNames(t, path); len(names) != 1 || names[0] != "test-b" {
-		t.Fatalf("scenarios %v, want only test-b", names)
+	if names := portNames(t, path); len(names) != 2 || names[0] != "test-a" || names[1] != "test-b" {
+		t.Fatalf("scenarios %v, want the refused test-a kept beside test-b", names)
 	}
-	if _, err := os.Stat(only); err == nil {
-		t.Fatal("a generated file left with no scenario must be removed")
+	if names := portNames(t, only); len(names) != 1 || names[0] != "test-only" {
+		t.Fatalf("scenarios %v, want the fail-expect test-only kept", names)
 	}
 	if names := portNames(t, hand); len(names) != 1 {
 		t.Fatalf("hand-ported file changed: %v", names)

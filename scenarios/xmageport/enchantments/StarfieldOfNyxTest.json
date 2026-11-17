@@ -123,7 +123,7 @@
     }
    ],
    "xmage": "StarfieldOfNyxTest#testStarfieldOfNyxAndSongOfTheDryads",
-   "known_bug": "XP[layer-dependency-not-ordered]: Song of the Dryads makes Starfield of Nyx a Forest land (CR 305.7 removes its abilities), so its layer-4 grant depends on Song's and must not apply (CR 613.8a); gorge orders by timestamp and the five Always Watching stay creatures (types [Enchantment Creature], P/T 8/8, want 0/0), verified at gorge c3b957bf36."
+   "known_bug": "XP[layer-dependency-not-ordered]: Song of the Dryads makes Starfield of Nyx a Forest land (CR 305.7 removes its abilities), so its layer-4 grant depends on Song's and must not apply (CR 613.8a); active (engine/rules/layers.go) sorts by timestamp with no dependency step, so the five Always Watching stay creatures (types [Enchantment Creature], P/T 8/8, want 0/0), verified at gorge c3b957bf36."
   }
  ]
 }

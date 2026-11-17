@@ -75,7 +75,7 @@
     }
    ],
    "xmage": "SearchShuffleTest#testEvent",
-   "known_bug": "XP[trig-mode-shuffled-unsupported]: same cause as IncarnationTechniqueTest#testEmrakul: Cosi's Trickster's T:Mode$ Shuffled is not a trigger mode checkFaceTriggers matches, so no +1/+1 counter is put on it after the shuffle (counters 0, want 1), CR 701.24, verified at gorge c3b957bf36."
+   "known_bug": "XP[trig-mode-shuffled-unsupported]: same cause as IncarnationTechniqueTest#testEmrakul: Cosi's Trickster's T:Mode$ Shuffled is not a trigger mode checkFaceTriggers (engine/rules/trigger_match.go) matches, so no +1/+1 counter is put on it after the shuffle (counters 0, want 1), CR 701.24, verified at gorge c3b957bf36."
   }
  ]
 }

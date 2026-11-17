@@ -118,7 +118,7 @@
     }
    ],
    "xmage": "EnchantedPermanentLKITest#testAuraFlickered",
-   "known_bug": "XP[ability-enchanted-uses-new-aura-not-lki]: Dreadful Apathy's {2}{W} AB$ ChangeZone | Defined$ Enchanted resolves after Flicker of Fate returned the Aura attached to Thran Golem and reads the returned Aura's attachment, so the Golem is exiled and Apathy falls off while Skyrider Trainee stays (exile Skyrider Trainee 0, want 1; Golem lacks Trample), the ability should use last known information about the old Aura, CR 113.7a, 608.2h, 400.7, verified at gorge c3b957bf36."
+   "known_bug": "XP[ability-enchanted-uses-new-aura-not-lki]: Dreadful Apathy's {2}{W} AB$ ChangeZone | Defined$ Enchanted resolves after Flicker of Fate returned the Aura attached to Thran Golem and reads the returned Aura's attachment, so the Golem is exiled and Apathy falls off while Skyrider Trainee stays (exile Skyrider Trainee 0, want 1; Golem lacks Trample), effChangeZone (engine/effects/zone_change.go) should use last known information about the old Aura, CR 113.7a, 608.2h, 400.7, verified at gorge c3b957bf36."
   },
   {
    "name": "test-aura-moved",

@@ -115,7 +115,7 @@
     }
    ],
    "xmage": "AuraMovingTest#testOneAttackerDamage",
-   "known_bug": "XP[canenchantsource-predicate-missing]: Bruna's ZoneAuras ChangeType$ Aura.CanEnchantSource+YouOwn uses the predicate the filter vocabulary lacks (the DanithaBenaliasHopeTest cause), so only the attach prompt is posed (the second yes is unconsumed) and Unholy Strength stays in the graveyard (p0 life 15, want 13), CR 303.4f, verified at gorge c3b957bf36."
+   "known_bug": "XP[canenchantsource-predicate-missing]: Bruna's ZoneAuras ChangeType$ Aura.CanEnchantSource+YouOwn uses a predicate the filter vocabulary (wordPredicate, engine/effects/filter_word.go) lacks (the DanithaBenaliasHopeTest cause), so only the attach prompt is posed (the second yes is unconsumed) and Unholy Strength stays in the graveyard (p0 life 15, want 13), CR 303.4f, verified at gorge c3b957bf36."
   }
  ]
 }

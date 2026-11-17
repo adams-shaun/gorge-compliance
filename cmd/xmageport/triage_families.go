@@ -72,6 +72,15 @@ func (t *translator) familyShapes() *refusal {
 	if t.searchesDefaultLibrary() {
 		return refuse("search-default-library", "the test searches a library it never stocks; XMage's default library has the cards, the runner's is filler")
 	}
+	// Mycosynth Lattice + March of the Machines + Humility: XMage's expected
+	// end state is a layer-dependency ruling this repository's hand-ported
+	// layer_tests.json deliberately does not adopt (CR 613.7 timestamps leave
+	// the three permanents 4/4, 4/4 and 6/6, so the port asserts only the lands
+	// dying). The generated scenario would assert the opposite without a
+	// ruling, so it is refused rather than ratcheted as a gorge bug.
+	if t.setupHasName("Mycosynth Lattice") && t.setupHasName("March of the Machines") && t.setupHasName("Humility") {
+		return refuse("layer-dependency-hand-port-ruling", "the expected end state of Mycosynth Lattice + March of the Machines + Humility is disputed by the hand-ported layer scenario; the generated row is not a proven gorge gap")
+	}
 	return nil
 }
 

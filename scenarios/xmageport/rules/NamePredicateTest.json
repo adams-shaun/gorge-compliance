@@ -121,7 +121,7 @@
     }
    ],
    "xmage": "NamePredicateTest#testCityInABottle",
-   "known_bug": "XP[set-printed-predicate-unmodelled]: City in a Bottle's IsPresent$ Permanent.!token+setARN+Other and Card.setARN use an originally-printed-in-expansion predicate the filter vocabulary has no word for (and gorge has no set data), so Camel is not sacrificed and Desert Nomads stays castable (Camel graveyard 0, want 1), CR 603.8, verified at gorge c3b957bf36."
+   "known_bug": "XP[set-printed-predicate-unmodelled]: City in a Bottle's IsPresent$ Permanent.!token+setARN+Other and Card.setARN use an originally-printed-in-expansion predicate wordPredicate (engine/effects/filter_word.go) has no word for (and gorge has no set data), so Camel is not sacrificed and Desert Nomads stays castable (Camel graveyard 0, want 1), CR 603.8, verified at gorge c3b957bf36."
   }
  ]
 }

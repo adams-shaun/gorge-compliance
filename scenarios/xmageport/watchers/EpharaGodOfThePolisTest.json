@@ -78,7 +78,7 @@
     }
    ],
    "xmage": "EpharaGodOfThePolisTest#testDrawCard",
-   "known_bug": "XP[count-lastturnentered-unmodelled]: Ephara's CheckSVar$ Y is Count$LastTurnEntered_Battlefield_Creature.YouCtrl+Other, which no count evaluator reads, so the upkeep trigger never draws (hand 0 at turn 3's upkeep, 1 at the end, want 2), CR 603.4, verified at gorge c3b957bf36."
+   "known_bug": "XP[count-lastturnentered-unmodelled]: Ephara's CheckSVar$ Y is Count$LastTurnEntered_Battlefield_Creature.YouCtrl+Other, EvalCount (engine/effects/count.go) has no LastTurnEntered form, so the upkeep trigger never draws (hand 0 at turn 3's upkeep, 1 at the end, want 2), CR 603.4, verified at gorge c3b957bf36."
   },
   {
    "name": "test-not-draw-card",

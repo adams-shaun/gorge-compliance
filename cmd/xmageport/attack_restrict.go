@@ -16,7 +16,7 @@ import (
 // run's transcript names the refused one, so the runner drops it from the
 // attack step and plays again until the declaration stands.
 var (
-	reAttackRestrictRefused = regexp.MustCompile(`^\s+\[attack\] refused, reversed to the empty declaration \(CR 733\.1\): harness: submit attackers \[[\d ]*\]: (?:choices (\d+) and (\d+) are mutually exclusive|choice (\d+) exceeds the per-group limit of \d+) \(group "attack-restrict:\d+"\) \((.*)\)$`)
+	reAttackRestrictRefused = regexp.MustCompile(`^\s+\[attack\] refused, reversed to the empty declaration \(CR 733\.1\): harness: submit attackers \[[\d ]*\]: (?:choices (\d+) and (\d+) are mutually exclusive|choice (\d+) exceeds the per-group limit of \d+) \(group "attack-restrict:\d+(?::\d+)?"\) \((.*)\)$`)
 	reAttackOption          = regexp.MustCompile(`\[(\d+) attacker "Attack with (.*?) at [^"]*"`)
 )
 
@@ -41,9 +41,11 @@ func trimRestrictedAttack(sc *portScenario, transcript []string) bool {
 		case m[3] != "":
 			drop, _ = strconv.Atoi(m[3])
 		default:
-			a, _ := strconv.Atoi(m[1])
-			b, _ := strconv.Atoi(m[2])
-			drop = max(a, b)
+			// The engine names the group's first-selected option and the option
+			// that exceeded the cap, in the order the attack step declared them:
+			// the second number is the later attack() call, which is the one
+			// XMage drops. It is not necessarily the larger option index.
+			drop, _ = strconv.Atoi(m[2])
 		}
 		name := ""
 		for _, o := range reAttackOption.FindAllStringSubmatch(m[4], -1) {

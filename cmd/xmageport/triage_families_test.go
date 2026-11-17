@@ -48,21 +48,53 @@ func TestRestrictedAttackerIsTrimmedNotReversed(t *testing.T) {
 	}
 }
 
-func TestTrimRestrictedAttackReadsTheRefusedOption(t *testing.T) {
-	sc := &portScenario{Steps: []*step{{Op: "resolve"}, {Op: "attack", Attackers: []string{"p0:Grizzly Bears", "p0:Silvercoat Lion#2", "p0:Elite Vanguard"}}}}
+// The attack() calls can be in the opposite order to the option list: option 0
+// may be the second attack() call. The engine names the later call as the one
+// that exceeded the cap, so the runner must drop it, not the larger index.
+func TestRestrictedAttackerKeepsTheFirstDeclaration(t *testing.T) {
+	res := runBody(t, `addCard(Zone.BATTLEFIELD, playerB, "Mirri, Weatherlight Duelist", 1, true);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Craw Wurm");
+        attack(1, playerA, "Craw Wurm", playerB);
+        attack(1, playerA, "Grizzly Bears", playerB); // can't attack
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+        assertLife(playerB, 20 - 6);`)
+	wantStatus(t, res, "pass", "")
+	for _, st := range res.Scenario.Steps {
+		if st.Op == "attack" && (len(st.Attackers) != 1 || attackerName(st.Attackers[0]) != "Craw Wurm") {
+			t.Fatalf("attackers %v, want only the first-declared Craw Wurm", st.Attackers)
+		}
+	}
+}
+
+func TestTrimRestrictedAttackReadsTheSecondChoice(t *testing.T) {
+	sc := &portScenario{Steps: []*step{{Op: "resolve"}, {Op: "attack", Attackers: []string{"p0:Craw Wurm", "p0:Grizzly Bears"}}}}
 	tr := []string{
 		"step resolve ",
 		"step attack ",
-		`  [attack] refused, reversed to the empty declaration (CR 733.1): harness: submit attackers [0 1]: choices 0 and 2 are mutually exclusive (group "attack-restrict:1") (options [0 attacker "Attack with Grizzly Bears at b" obj=1 pl=1 att=0 mode=] [1 attacker "Attack with Silvercoat Lion at b" obj=2 pl=1 att=0 mode=] [2 attacker "Attack with Elite Vanguard at b" obj=3 pl=1 att=0 mode=] )`,
+		`  [attack] refused, reversed to the empty declaration (CR 733.1): harness: submit attackers [1 0]: choices 1 and 0 are mutually exclusive (group "attack-restrict:1") (options [0 attacker "Attack with Grizzly Bears at b" obj=1 pl=1 att=0 mode=] [1 attacker "Attack with Craw Wurm at b" obj=2 pl=1 att=0 mode=] )`,
 	}
 	if !trimRestrictedAttack(sc, tr) {
 		t.Fatal("nothing trimmed")
 	}
-	if got := strings.Join(sc.Steps[1].Attackers, ","); got != "p0:Grizzly Bears,p0:Silvercoat Lion#2" {
-		t.Fatalf("attackers %s, want the later of the exclusive pair (Elite Vanguard) dropped", got)
+	// The engine's second number is the choice that exceeded the cap, i.e. the
+	// later-declared attacker (option 0, Grizzly Bears), not the larger option
+	// index (option 1, Craw Wurm, the first attack() XMage keeps).
+	if got := strings.Join(sc.Steps[1].Attackers, ","); got != "p0:Craw Wurm" {
+		t.Fatalf("attackers %s, want the later-declared Grizzly Bears dropped", got)
 	}
 	if trimRestrictedAttack(sc, []string{"step resolve ", "step attack ", "  [attack] p0 attackers -> []"}) {
 		t.Fatal("trimmed a declaration that was not refused")
+	}
+	// A battle-scoped restriction uses attack-restrict:<defender>:<battle>; the
+	// same trim applies, so the helper does not reverse a battle attack.
+	battle := &portScenario{Steps: []*step{{Op: "attack", Attackers: []string{"p0:Grizzly Bears", "p0:Silvercoat Lion"}}}}
+	btr := []string{"step attack ",
+		`  [attack] refused, reversed to the empty declaration (CR 733.1): harness: submit attackers [0 1]: choices 0 and 1 are mutually exclusive (group "attack-restrict:1:7") (options [0 attacker "Attack with Grizzly Bears at b" obj=1 pl=1 att=0 mode=] [1 attacker "Attack with Silvercoat Lion at b" obj=2 pl=1 att=0 mode=] )`}
+	if !trimRestrictedAttack(battle, btr) || len(battle.Steps[0].Attackers) != 1 || attackerName(battle.Steps[0].Attackers[0]) != "Grizzly Bears" {
+		t.Fatalf("battle attackers %v, want the second choice dropped", battle.Steps[0].Attackers)
 	}
 }
 
@@ -287,5 +319,44 @@ func TestChoiceTakenByADeclarationIsAShape(t *testing.T) {
 	r.runShape = refuse("choice-consumed-by-declaration", "x")
 	if !shapeRefusalApplies(r) {
 		t.Fatal("a plain fail-expect was not refused")
+	}
+}
+
+// The real shape: Breath of Fury's Aura move has one candidate, so gorge asks
+// nothing; XMage's setChoice("Pillarfield Ox") is carried to the additional
+// combat's attack declaration. The run must convert that to the refusal, not
+// pass the choice off as an answer.
+func TestChoiceTakenByADeclarationRefusesTheScenario(t *testing.T) {
+	res := runBody(t, `addCard(Zone.HAND, playerA, "Breath of Fury", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox");
+        setStrictChooseMode(true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Breath of Fury", "Silvercoat Lion");
+        attack(3, playerA, "Silvercoat Lion");
+        attack(3, playerA, "Pillarfield Ox");
+        setChoice(playerA, "Pillarfield Ox");
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertLife(playerA, 20);
+        assertLife(playerB, 16);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertTappedCount("Pillarfield Ox", false, 1);
+        assertPermanentCount(playerA, "Breath of Fury", 1);`)
+	wantStatus(t, res, "refused", "choice-consumed-by-declaration")
+}
+
+// Mycosynth Lattice + March of the Machines + Humility asserts a layer
+// dependency the hand-ported layer scenario deliberately does not adopt, so
+// the generated row is refused rather than ratcheted as a gorge bug.
+func TestLayerDependencyHandPortRulingIsAShape(t *testing.T) {
+	res := translateBody(t, `addCard(Zone.BATTLEFIELD, playerA, "Mycosynth Lattice");
+        addCard(Zone.BATTLEFIELD, playerA, "March of the Machines");
+        addCard(Zone.BATTLEFIELD, playerA, "Humility");
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Humility", 0);`)
+	if res.shape == nil || res.shape.Code != "layer-dependency-hand-port-ruling" {
+		t.Fatalf("shape %v, want layer-dependency-hand-port-ruling", res.shape)
 	}
 }
