@@ -15,6 +15,7 @@ import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.costs.AlternativeSourceCosts;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.OrCost;
 import mage.abilities.keyword.LeylineAbility;
@@ -354,7 +355,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // unusable units) fall back, so no later ask in the step reaches
             // TestPlayer in manual mode with no choice.
             if (payment != null) {
-                String next = nextPaymentColour(unpaid);
+                String next = nextPaymentColour(ability, unpaid, game);
                 if (next != null) {
                     // TestPlayer.playMana consumes choices.get(0). This step's
                     // own answers (a resolution Yes/No, [choice_skip], a target
@@ -362,6 +363,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // payment, so put the payment answer IN FRONT of them.
                     // Appending made playMana eat the step's answer and assert
                     // "Can't use choice in play mana: ...".
+                    ManaType nextType = manaTypeOfName(next);
+                    if (getManaPool().get(nextType) <= 0) {
+                        // Only a conditional (restricted) unit of this type
+                        // is in the pool. TestPlayer's colour choice asserts
+                        // an unconditional unit ("pool must have red mana"),
+                        // so unlock the type here: that is all the choice
+                        // does before it reports the ask answered, and
+                        // ManaPool.pay then spends the conditional unit when
+                        // its restriction admits the spell.
+                        getManaPool().unlockManaType(nextType);
+                        return true;
+                    }
                     getChoices().add(0, next);
                 } else {
                     fallBackToAutoPayment();
@@ -381,7 +394,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             getManaPool().setAutoPayment(true);
         }
 
-        private String nextPaymentColour(ManaCost unpaid) {
+        private String nextPaymentColour(Ability ability, ManaCost unpaid, Game game) {
             Mana due = unpaid.getMana();
             // An exhausted plan (the manual window is still open, so payment is
             // "" not null) cannot say which unit pays the rest. A cost larger
@@ -402,8 +415,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // gorge actually spent.
             for (char c : "WUBRG".toCharArray()) {
                 ManaType type = manaType(c);
-                if (due.get(type) > 0 && getManaPool().get(type) > 0) {
-                    return payment.indexOf(c) >= 0 ? takePayment(c) : dropPaymentLetterAndName(c);
+                if (due.get(type) > 0 && poolSpendable(type, ability, game)) {
+                    return payment.indexOf(c) >= 0
+                            ? takePayment(c) : dropPaymentLetterAndName(c, ability, game);
                 }
             }
             // A coloured pip the pool does not hold is not payable with any
@@ -418,7 +432,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // generic part while a recorded unit is still available, or the
             // post-cast pool holds a different colour than gorge's.
             for (char c : "WUBRGC".toCharArray()) {
-                if (payment.indexOf(c) >= 0 && getManaPool().get(manaType(c)) > 0) {
+                if (payment.indexOf(c) >= 0 && poolSpendable(manaType(c), ability, game)) {
                     return takePayment(c);
                 }
             }
@@ -427,8 +441,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // a restriction change), so pay one of those rather than strand the
             // cast, keeping the plan's total in step.
             for (char c : "WUBRGC".toCharArray()) {
-                if (getManaPool().get(manaType(c)) > 0) {
-                    return dropPaymentLetterAndName(c);
+                if (poolSpendable(manaType(c), ability, game)) {
+                    return dropPaymentLetterAndName(c, ability, game);
                 }
             }
             return null;
@@ -450,9 +464,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * aligned with the units still to spend. Drop a letter whose unit the
          * pool no longer holds when there is one: it can never be honoured, so
          * it is the least-needed remaining letter. */
-        private String dropPaymentLetterAndName(char c) {
+        private String dropPaymentLetterAndName(char c, Ability ability, Game game) {
             if (payment != null && !payment.isEmpty()) {
-                int i = leastNeededPaymentLetter();
+                int i = leastNeededPaymentLetter(ability, game);
                 payment = payment.substring(0, i) + payment.substring(i + 1);
             }
             return colourName(c);
@@ -461,9 +475,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
         /** Index of the plan letter with no pool unit behind it, or 0 when
          * every remaining letter still has one (the specific-pip branch can
          * reach the fallback while the pool holds each plan type). */
-        private int leastNeededPaymentLetter() {
+        private int leastNeededPaymentLetter(Ability ability, Game game) {
             for (int i = 0; i < payment.length(); i++) {
-                if (getManaPool().get(manaType(payment.charAt(i))) <= 0) {
+                if (!poolSpendable(manaType(payment.charAt(i)), ability, game)) {
                     return i;
                 }
             }
@@ -474,6 +488,39 @@ public class ScenarioReplay extends CardTestPlayerBase {
             int i = payment.indexOf(c);
             payment = payment.substring(0, i) + payment.substring(i + 1);
             return colourName(c);
+        }
+
+        /** Whether this ask can actually spend a pool unit of `type`: an
+         * unconditional unit, or a conditional (restricted) unit whose own
+         * restriction admits the ability and cost being paid. The plain
+         * ManaPool.get excludes conditional units, so a cast paid from them
+         * alone looked unpayable and fell back to auto-payment. But mere
+         * presence is not enough either: ManaPool.pay spends a conditional
+         * unit only when ConditionalMana.apply(ability, game, producer,
+         * costToPay) accepts the ask. Reporting a rejected unit as spendable
+         * would consume the plan letter and unlock a type pay then refuses,
+         * leaving auto-payment too late to spend already-floating mana. */
+        private boolean poolSpendable(ManaType type, Ability ability, Game game) {
+            if (getManaPool().get(type) > 0) {
+                return true;
+            }
+            Cost costToPay = ability == null ? null : ability.getManaCostsToPay();
+            for (ConditionalMana mana : getManaPool().getConditionalMana()) {
+                if (mana.get(type) > 0
+                        && mana.apply(ability, game, mana.getManaProducerId(), costToPay)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static ManaType manaTypeOfName(String name) {
+            for (char c : "WUBRGC".toCharArray()) {
+                if (colourName(c).equals(name)) {
+                    return manaType(c);
+                }
+            }
+            throw new IllegalArgumentException("mana colour " + name);
         }
 
         private static String colourName(char c) {
