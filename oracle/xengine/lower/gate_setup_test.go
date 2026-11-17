@@ -356,3 +356,55 @@ func TestPlaceKeepsExiledObject(t *testing.T) {
 		}
 	}
 }
+
+// TestPlaceCarriesPT: Patched Plaything (4/3, K:etbCounter two -1/-1 counters
+// only if cast from hand). Cast from hand it carries the two counters (2/1),
+// but the setup placement is not a cast, so the re-run entry grants none and
+// setup adds none (net zero): the placed permanent would be 4/3. A gated
+// etbCounter is refused whatever the carried counters, including none (a
+// permanent that did not come from a hand cast).
+func TestPlaceCarriesPT(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	for _, tc := range []struct {
+		name     string
+		counters []state.Counter
+		want     string
+	}{
+		{"cast from hand", []state.Counter{{Kind: "M1M1", N: 2}}, reasonCountersEntry},
+		{"not cast from hand", nil, reasonCountersEntry},
+	} {
+		e, at := expressibleCut(t, reg, pairs[0], 100)
+		o := plantBattlefieldCard(t, reg, e, "Patched Plaything", func(o *state.Object) bool { return !o.Tapped && len(o.Counters) == 0 })
+		o.Counters = tc.counters
+		if r := capture(e, at, true).Reasons; !slices.Contains(r, tc.want) {
+			t.Errorf("%s: reasons %v, want %s", tc.name, r, tc.want)
+		}
+	}
+}
+
+// TestPlaceRefusesEntryCounterOther: Deanna Troi's "other creatures you control
+// enter with an additional +1/+1 counter" is re-run by the placement on every
+// permanent placed after her, so a carried +1/+1 counter would be doubled
+// (live 3/3, placed 4/4). The gate refuses her presence, whatever else is
+// placed.
+func TestPlaceRefusesEntryCounterOther(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	plantBattlefieldCard(t, reg, e, "Deanna Troi, Psychic Counsel", func(o *state.Object) bool { return !o.Tapped })
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonEntryCounterOther) {
+		t.Fatalf("reasons %v, want %s", r, reasonEntryCounterOther)
+	}
+}
+
+// TestPlaceRefusesPTTurnHistory: Duelist of the Mind's power is the cards its
+// controller drew this turn. The live game at a window start has drawn the
+// turn's card (1/3), the placed one has drawn none (0/3), so the gate refuses
+// the card. A static P/T that reads no turn history stays placeable.
+func TestPlaceRefusesPTTurnHistory(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	plantBattlefieldCard(t, reg, e, "Duelist of the Mind", func(o *state.Object) bool { return !o.Tapped })
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonPTTurnHistory) {
+		t.Fatalf("reasons %v, want %s", r, reasonPTTurnHistory)
+	}
+}

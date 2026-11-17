@@ -55,6 +55,13 @@ const (
 	// show it untapped again. The active seat is exempt: its turn-1 untap step
 	// restores what the placement tapped.
 	reasonEntryTap = "setup_entry_tap"
+	// reasonEntryCounterOther is a battlefield permanent whose replacement puts
+	// counters on OTHER permanents as they enter (Deanna Troi's "other creatures
+	// you control enter with an additional +1/+1 counter"). The runner's
+	// placement re-runs it on every permanent placed after the replacer, so a
+	// placed permanent carries one counter more than the live game's, and the
+	// extra depends on placement order; setup has no field to subtract it.
+	reasonEntryCounterOther = "setup_entry_counter_other"
 	// reasonPrepareEntry is a placed battlefield card whose own entry
 	// replacement grants Prepared (K:ETBReplacement, or a printed
 	// R:Event$ Moved body). The runner's placement re-runs the replacement,
@@ -80,6 +87,13 @@ const (
 	// unplaceable rather than merely divergent. The reason names the decision
 	// kind, e.g. setup_answer:mode.
 	reasonSetupAnswer = "setup_answer:"
+	// reasonPTTurnHistory is a battlefield permanent whose P/T is a static
+	// function of what happened earlier THIS turn (Duelist of the Mind: power
+	// is the cards its controller drew this turn). A window starts after the
+	// turn's draw step, but the placed game has an empty turn history, so the
+	// placed P/T differs from the live one and setup has no field for the
+	// history.
+	reasonPTTurnHistory = "pt_turn_history"
 	// The setup drive expresses state as events: a by-name tapped placement is
 	// a Tap, a counters field a CounterChange, a life field a LifeChange. A
 	// placed permanent that triggers on one of those events would resolve a
@@ -518,6 +532,65 @@ func entryTapReplacement(f *cards.Face) bool {
 	return false
 }
 
+// entryCounterOtherReplacement reports whether the face carries a battlefield-
+// entry replacement that puts counters on a permanent other than itself: a
+// Moved replacement whose ValidCard names more than the card itself and whose
+// body is a PutCounter on the ETB. The setup placement re-runs it for every
+// permanent placed after the carrier (see reasonEntryCounterOther).
+func entryCounterOtherReplacement(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	for i := range f.Repls {
+		r := &f.Repls[i]
+		if r.Event != "Moved" {
+			continue
+		}
+		if dest, ok := r.Params["Destination"]; ok && !strings.EqualFold(dest, "Battlefield") {
+			continue
+		}
+		if v := r.Params["ValidCard"]; v == "" || v == "Card.Self" {
+			continue
+		}
+		for s := r.With; s != nil; s = s.Sub {
+			if s.API == "PutCounter" && strings.EqualFold(s.Params["ETB"], "True") {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// ptTurnHistoryMarkers are the Count$ spellings whose value is read from the
+// turn's history (draws, casts, entries, life change) and so is empty in a
+// placed game.
+var ptTurnHistoryMarkers = []string{"ThisTurn", "Drew", "Gained", "Lost"}
+
+// ptTurnHistory reports whether a static of the face sets or adds P/T from a
+// Count$ SVar that reads the current turn's history (see reasonPTTurnHistory).
+func ptTurnHistory(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	for i := range f.Statics {
+		for _, key := range []string{"SetPower", "SetToughness", "AddPower", "AddToughness"} {
+			v, ok := f.Statics[i].Params[key]
+			if !ok {
+				continue
+			}
+			if sv, ok := f.SVars[strings.TrimSpace(v)]; ok {
+				v = sv
+			}
+			for _, m := range ptTurnHistoryMarkers {
+				if strings.Contains(v, m) {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
 // entryPrepareReplacement reports whether the face's own battlefield-entry
 // replacement grants it Prepared (CR 722.3a). The runner's setup placement
 // keeps the ordinary battlefield move, so a replacement that grants Prepared
@@ -564,6 +637,12 @@ func (w *walker) place(c *cut) {
 			}
 			if n, _ := cards.SagaChapters(o.Face()); n > 0 && o.Ability == nil {
 				w.why[reasonSagaEntry] = true
+			}
+			if ptTurnHistory(o.Face()) {
+				w.why[reasonPTTurnHistory] = true
+			}
+			if entryCounterOtherReplacement(o.Face()) {
+				w.why[reasonEntryCounterOther] = true
 			}
 			if o.Owner != o.Controller {
 				w.why["field:Object.Controller"] = true
@@ -850,7 +929,20 @@ func setupCounters(o *state.Object) (map[string]int32, bool) {
 	if f := o.Face(); f != nil {
 		if param, ok := f.KeywordParam("etbCounter"); ok {
 			kind, rest, _ := strings.Cut(param, ":")
-			n, _, _ := strings.Cut(rest, ":")
+			n, extra, _ := strings.Cut(rest, ":")
+			// A gate field ("CheckSVar$ FromHand", Revolt$, Adamant$, ...)
+			// makes the grant depend on how the permanent entered. The live
+			// game's entry may have held it (the permanent carries the
+			// counters) while the setup placement, which is not a cast, does
+			// not: setup would then add nothing and the placement would grant
+			// nothing, leaving P/T short of the live value (Patched Plaything
+			// cast from hand is 2/1 live, 4/3 placed). The reverse (held at
+			// placement, failed live) is the negative net below. Neither
+			// direction is known here, so refuse. This mirrors the gate-field
+			// test in gorge's kwEtbCounter.
+			if first, _, _ := strings.Cut(extra, ":"); strings.Contains(first, "$") {
+				return net, false
+			}
 			amount, err := strconv.Atoi(strings.TrimSpace(n))
 			if err != nil {
 				return net, false
