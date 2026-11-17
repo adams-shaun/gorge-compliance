@@ -746,8 +746,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (choiceGame != null && value != null && value.startsWith("@")
                     && isScenarioRef(value.substring(1)) && value.contains(":token:")) {
                 String ref = value.substring(1);
-                Permanent chosen = tokenChoice(ref, owner.seat(refSeat(ref)).getId(),
-                        choiceGame.getBattlefield().getAllPermanents());
+                UUID seatId = owner.seat(refSeat(ref)).getId();
+                Iterable<Permanent> field = choiceGame.getBattlefield().getAllPermanents();
+                Permanent chosen = tokenChoice(ref, seatId, field);
+                if (chosen == null && !owner.xmageSpelling(refName(ref)).equals(refName(ref))) {
+                    // A token copy of a renamed card carries XMage's spelling.
+                    chosen = tokenChoice(ref, owner.xmageSpelling(refName(ref)), seatId, field);
+                }
                 return object != null && chosen != null && chosen.getId().equals(object.getId());
             }
             return super.hasObjectTargetNameOrAlias(object, value);
@@ -4632,18 +4637,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // card in hand, not the spell, so target by name.
                     String spell = castSpelling(refName(tg.get(0)));
                     castSpell(turn, phase, p, card, spell, spell);
-                } else if (tg.size() == 1 && tg.get(0).contains(":token:")) {
-                    // Queue a sole token target like the multi-target path, so
-                    // one funnel carries the ref: chooseTarget resolves the
-                    // "@...:token:" alias against the live game through
-                    // tokenChoice (one of several same-named tokens), rather
-                    // than spelling it inline and relying on the separate
-                    // addTargets pass to do the same.
-                    queueCastTarget(p, tg.get(0));
-                    if (!singleTargetFilled(cardName, tg.size())) {
-                        addTarget(p, TestPlayer.TARGET_SKIP);
-                    }
-                    castSpell(turn, phase, p, card);
                 } else if (tg.size() == 1) {
                     // A single target goes through XMage's own string form. A
                     // divided target whose inline form XMage cannot read
