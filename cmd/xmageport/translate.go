@@ -131,6 +131,11 @@ type choice struct {
 	x      int    // setChoice "X=N": N, the announced X (-1 otherwise)
 	mode   int    // setModeChoice "N": 1-based mode index (0 otherwise)
 	ord    int    // pick's 0-based position within one counted setChoice(player, name, n)
+	// kind overrides the answer kind (the runner's default is "any" for a
+	// plain pick); synth marks a pick the translator derived from several
+	// XMage choices, whose originals travel in action.xlead.
+	kind  string
+	synth bool
 }
 
 type action struct {
@@ -147,6 +152,7 @@ type action struct {
 	blocks          [][2]string
 	expects         []*expect
 	choices         []choice
+	xlead           []xans // XMage choices the emitter consumed into a cast mode
 	playCheck       *playableCheck
 }
 
@@ -201,6 +207,14 @@ type translator struct {
 	// queueShape is the target-queue-order refusal of a one-seat run of
 	// addTargets that each carry their own yes/no; it applies only on failure.
 	queueShape *refusal
+	// electShape is the first shape refusal a cast's optional costs arm
+	// (armCastShapes, aiElects): a cost the test never elects while XMage's AI
+	// does, two kicker costs XMage elects one boolean at a time, a convoke tap
+	// stated as an addTarget. It converts a failing run only.
+	electShape *refusal
+	// ptAsserted remembers the P/T an assertPowerToughness stated per seat
+	// and name (anyScopePTConflict).
+	ptAsserted map[string]string
 	orphanMode bool // a setModeChoice no action consumes (a trigger's modes)
 	// playEffectKicker names a card an effect plays (not a cast step) that
 	// prints Kicker/Multikicker: gorge's effPlay cast has no kicked answer, so
@@ -611,6 +625,9 @@ func translate(reg *cards.Registry, jc *javaClass, m *javaMethod, family string)
 	if res.shape == nil {
 		res.shape = t.countShape
 	}
+	if res.shape == nil {
+		res.shape = t.electShape
+	}
 	return res
 }
 
@@ -913,7 +930,7 @@ func hasKeywordPrefix(text, kw string) bool {
 // inline offered expect. "Cast X" is the cast option labelled X, "Play X" the
 // land play, and any other text must name the source card (XMage searches
 // every playable ability for a prefix, so an unnamed source is unresolvable).
-func (t *translator) playableOffer(p int, text string) (*offered, *refusal) {
+func (t *translator) playableOffer(p, src int, want bool, text string) (*offered, *refusal) {
 	kind := ""
 	cardText := ""
 	switch {
@@ -936,6 +953,9 @@ func (t *translator) playableOffer(p int, text string) (*offered, *refusal) {
 		if ok {
 			if mode := castQualifierModes[qual]; mode != "" {
 				full += " (" + mode + ")"
+			}
+			if kind == "cast" && want {
+				ref = t.preparedCopyRef(p, src, ref, nm)
 			}
 			return &offered{Seat: p, Kind: kind, Card: ref, Label: full}, nil
 		}

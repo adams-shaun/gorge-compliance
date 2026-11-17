@@ -10,6 +10,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
@@ -687,6 +688,26 @@ func TestLowerResolvesTriggerTargetAfterPass(t *testing.T) {
 		}
 	})
 
+	t.Run("priority action between the ask and the stop truncates", func(t *testing.T) {
+		// The live game activated Soul-Guide Lantern's draw ability while the
+		// ETB trigger was on the stack (xe:RAND:0:11:tape). A resolve step
+		// passes priority and answers asks; it cannot replay that activation,
+		// so the activation used to be swallowed and the sacrifice/draw were
+		// lost, leaving the Lantern on the battlefield (a later Scarecrow Guide
+		// cast was then not offered).
+		act := prio(1, game.Pick{Kind: "ability", Obj: stateID(75), Ref: "p1:Soul-Guide Lantern"}, 9)
+		var l Lowered
+		l.lowerEntries(nil, seatMap{}, []game.Entry{pass1, target, act, pass2, pass3, pass4}, 0, false)
+		if want := "unsupported_kind:ask_after_pass:target"; l.Truncated != want {
+			t.Fatalf("truncated %q at %d, want %q", l.Truncated, l.TruncatedAt, want)
+		}
+		for i, s := range l.Item.Steps {
+			if s.Op == "resolve" {
+				t.Fatalf("step %d is a resolve over the activation: %+v", i, s)
+			}
+		}
+	})
+
 	t.Run("no priority between the ask and the stop still truncates", func(t *testing.T) {
 		// The target ask is answered by the trigger's own passes, but there is
 		// no priority at the trigger's stack top between it and the empty-stack
@@ -999,6 +1020,72 @@ func TestLowerTreasureTapColour(t *testing.T) {
 		t.Fatal("no Treasure tap in 24 games: nothing was checked")
 	}
 	t.Logf("%d Treasure taps checked", taps)
+}
+
+// TestLowerCastBargainOffered pins a window whose first cast needs a cast
+// mode the runner offers only from its own event log: the card already sits in
+// the setup's exile (a resolved Adventure, a warp or foretell exile, an
+// airbend), the event that entitled the cast is before the cut, and the
+// scenario setup carries state only. The lowering must refuse that window at
+// the cast with a named truncation instead of emitting a step the runner
+// cannot offer (the live WOE game 19 windows: Hollow Scavenger, Hearth
+// Elemental, and their siblings all failed as `cast ... not offered`). A card
+// that reaches exile inside the window, and a whole-game tape that replays the
+// entitling cast, keep it.
+func TestLowerCastBargainOffered(t *testing.T) {
+	cast := func(mode, ref string) game.Entry {
+		return game.Entry{Kind: "priority", Picks: []game.Pick{{Kind: "cast", Mode: mode, Ref: ref, Player: 0}}}
+	}
+	window := func(exile ...string) Lowered {
+		return Lowered{
+			Item:    oraclegen.Item{Scenario: oraclegen.Scenario{Setup: map[string]oraclegen.Seat{"p0": {Exile: exile}}}},
+			Against: &game.Tape{},
+		}
+	}
+	for _, mode := range []string{"adventure_recast", "warp_recast", "foretell_cast", "airbend_cast"} {
+		t.Run("refuses_"+mode, func(t *testing.T) {
+			l := window("Hollow Scavenger")
+			l.lowerEntries(&cards.Registry{}, seatMap{}, []game.Entry{cast(mode, "p0:Hollow Scavenger")}, 0, false)
+			if want := ReasonLogOnlyCast + mode; l.Truncated != want {
+				t.Fatalf("truncated %q at %d, want %q", l.Truncated, l.TruncatedAt, want)
+			}
+			if len(l.Item.Steps) != 0 {
+				t.Fatalf("steps %+v, want none: the cast cannot be offered", l.Item.Steps)
+			}
+		})
+	}
+	t.Run("swap follows the setup seat", func(t *testing.T) {
+		l := window("Hollow Scavenger")
+		l.lowerEntries(&cards.Registry{}, seatMap{swap: true}, []game.Entry{cast("adventure_recast", "p1:Hollow Scavenger")}, 0, false)
+		if want := ReasonLogOnlyCast + "adventure_recast"; l.Truncated != want {
+			t.Fatalf("truncated %q, want %q", l.Truncated, want)
+		}
+	})
+	for _, tc := range []struct {
+		name string
+		mode string
+		item Lowered
+	}{
+		// The card entered exile inside the window: the replay derives the
+		// provenance from that step, so the cast stays.
+		{"card enters exile inside the window", "adventure_recast", window()},
+		// A whole-game tape replays the entitling cast from turn 1.
+		{"whole tape", "adventure_recast", Lowered{}},
+		// Modes that need no log keep lowering, in a window and in a tape.
+		{"bargained window", "bargained", window("Hollow Scavenger")},
+		{"plain window", "", window("Hollow Scavenger")},
+		{"mayplay window", "mayplay", window("Hollow Scavenger")},
+	} {
+		t.Run("keeps_"+strings.ReplaceAll(tc.name, " ", "_"), func(t *testing.T) {
+			tc.item.lowerEntries(&cards.Registry{}, seatMap{}, []game.Entry{cast(tc.mode, "p0:Hollow Scavenger")}, 0, false)
+			if tc.item.Truncated != "" {
+				t.Fatalf("truncated %q at %d, want the cast lowered", tc.item.Truncated, tc.item.TruncatedAt)
+			}
+			if len(tc.item.Item.Steps) != 1 || tc.item.Item.Steps[0].Op != "cast" {
+				t.Fatalf("steps %+v, want one cast", tc.item.Item.Steps)
+			}
+		})
+	}
 }
 
 // podOf is a 1v1 pair as the seat list game.Play and Windows take.

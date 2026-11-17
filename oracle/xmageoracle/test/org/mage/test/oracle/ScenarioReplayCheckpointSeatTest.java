@@ -139,6 +139,38 @@ public final class ScenarioReplayCheckpointSeatTest {
         equal(true, seatFor.invoke(d, "cast", rs.get(5).getAsJsonObject(), 5) == b);
         set(d, "activeSeat", 0);
 
+        // A declaration is not an action of its declaring seat. XMage makes
+        // the block in the step's beginStep on the blocking seat, but the
+        // snapshot after it must be taken where the step's first priority is
+        // -- the active seat -- not on the blocker's queue, which only runs
+        // after the active seat's next pass has moved the game on (so XMage's
+        // snapshot k became gorge's k+1). A recorded run whose step 0 is a
+        // seat-1 block checkpoints on the active seat 0.
+        JsonObject declarations = JsonParser.parseString("{\"steps\":["
+                + "{\"op\":\"block\",\"seat\":1,\"blocks\":[[\"p1:Bear\",\"p0:Lion\"]]},"
+                + "{\"op\":\"pass\",\"seat\":0}],"
+                + "\"xmage_pos\":[null,{\"turn\":2,\"step\":\"declare-blockers\",\"active\":0}]}")
+                .getAsJsonObject();
+        ScenarioReplay.mergePassPositions(declarations);
+        set(d, "sc0", declarations);
+        JsonArray ds = ScenarioReplay.steps(declarations);
+        set(d, "activeSeat", 0);
+        equal(true, seatFor.invoke(d, "block", ds.get(0).getAsJsonObject(), 0) == a);
+
+        // The other declaration, attack, has the same shape: a seat-1
+        // attacker in a recorded run checkpoints on the active seat 0, not on
+        // the attacker's queue.
+        JsonObject attackRun = JsonParser.parseString("{\"steps\":["
+                + "{\"op\":\"attack\",\"seat\":1,\"attackers\":[\"p1:Bear\"]},"
+                + "{\"op\":\"pass\",\"seat\":0}],"
+                + "\"xmage_pos\":[null,{\"turn\":2,\"step\":\"declare-attackers\",\"active\":0}]}")
+                .getAsJsonObject();
+        ScenarioReplay.mergePassPositions(attackRun);
+        set(d, "sc0", attackRun);
+        JsonArray ats = ScenarioReplay.steps(attackRun);
+        set(d, "activeSeat", 0);
+        equal(true, seatFor.invoke(d, "attack", ats.get(0).getAsJsonObject(), 0) == a);
+
         // The activation text names its card: a space-free alias prefix, so
         // "+1" no longer matches whichever planeswalker XMage lists first.
         Method bound = ScenarioReplay.class.getDeclaredMethod("boundActivationText",

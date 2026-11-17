@@ -6,14 +6,12 @@ import (
 	"testing"
 )
 
-// XMage is not part of go test, so pin the driver source: the setup
-// counters must be applied WITH the placement (through the enter-with-counters
-// map, before any state-based action), mirroring gorge's runner order.
-// Before this, applySetupState ran
-// inside the setup checkpoint -- after the game's first SBA check had already
-// killed a would-die placement (a printed 0/0, an X-cost creature's X=0
-// board) -- and threw "counters name <card>, which is not on p0's
-// battlefield" (the 14-row harness class).
+// XMage is not part of go test, so pin the driver source: the setup counters
+// are seeded by placeSetupCounters from the pre-start hook, after the
+// cheat() placements and BEFORE start() runs the first state-based-action
+// check, so a would-die placement (a printed 0/0, an X-cost creature's X=0
+// board) survives with its counters, as gorge emits them with the placement.
+// add() only places the card; it must not re-apply the counters.
 func TestDriverAppliesSetupCountersWithPlacement(t *testing.T) {
 	source, err := os.ReadFile("../../xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java")
 	if err != nil {
@@ -21,86 +19,46 @@ func TestDriverAppliesSetupCountersWithPlacement(t *testing.T) {
 	}
 	java := string(source)
 
-	// The placement loop applies the counters after the back-face staging, so
-	// a staged placement (a face-1 combat row) is keyed by the card the
-	// placement list now holds, and through XMage's enter-with-counters map,
-	// which the placement path consumes before the first SBA check.
-	//
-	// The key MUST be the card the placement RESOLUTION produces:
-	// CardUtil.getDefaultCardSideForBattlefield maps a stored back half to
-	// itself and a stored parent to its left half (CardUtil.java:1270), and
-	// PermanentCard shares its card's id, so applyEnterWithCounters'
-	// getEnterWithCounters lookup hits for a staged half AND a plain card.
-	// Keying on getMainCard() instead holds the parent's id for a staged
-	// half -- an id the resolution never looks up (the Sunbird Standard
-	// face-1 break, fixed round 2).
-	addStart := strings.Index(java, "private int add(JsonObject s, String key, Zone zone, TestPlayer p) {")
-	if addStart < 0 {
-		t.Fatal("ScenarioReplay.java has no add() placement helper")
+	// Both game constructions (TwoPlayerDuel and FreeForAll) hook start():
+	// placeSetupCounters must run before super.start in each.
+	if n := strings.Count(java, "placeSetupCounters(this);"); n != 2 {
+		t.Fatalf("expected placeSetupCounters(this) in both start() overrides, found %d", n)
 	}
-	addEnd := strings.Index(java[addStart:], "\n    }")
-	if addEnd < 0 {
-		t.Fatal("add() is unterminated")
+	rest := java
+	for seen := 0; seen < 2; seen++ {
+		hookAt := strings.Index(rest, "placeSetupCounters(this);")
+		superAt := strings.Index(rest[hookAt:], "super.start(choosingPlayerId);")
+		if hookAt < 0 || superAt < 0 {
+			t.Fatal("a start() override is missing super.start after placeSetupCounters")
+		}
+		between := rest[hookAt : hookAt+superAt]
+		if strings.Contains(between, "public void start(") {
+			t.Fatalf("placeSetupCounters must run before super.start in the same override:\n%s", between)
+		}
+		rest = rest[hookAt+superAt:]
 	}
-	addFn := java[addStart : addStart+addEnd]
-	stagingAt := strings.Index(addFn, "stageBackFace(p, n);")
-	applyAt := strings.Index(addFn, "setEnterWithCounters(placedCard.getId(), enter)")
-	if stagingAt < 0 || applyAt < 0 || stagingAt > applyAt {
-		t.Fatalf("add() must apply the setup counters after the back-face staging; add():\n%s", addFn)
+
+	// placeSetupCounters runs once per game and build() resets that.
+	place := javaFunc(t, java, "private void placeSetupCounters(Game g) {")
+	if !strings.Contains(place, "if (setupCountersPlaced) {") || !strings.Contains(place, "setupCountersPlaced = true;") {
+		t.Fatalf("placeSetupCounters must run once per game; helper:\n%s", place)
 	}
-	if !strings.Contains(addFn, "CardUtil.getDefaultCardSideForBattlefield(") ||
-		!strings.Contains(addFn, "getCard())") {
-		t.Fatalf("add() must key the counters by the id the placement resolution produces; add():\n%s", addFn)
+	build := javaFunc(t, java, "private void build(JsonObject sc) {")
+	if !strings.Contains(build, "setupCountersPlaced = false;") {
+		t.Fatal("build() must reset setupCountersPlaced")
 	}
-	if strings.Contains(addFn, "placements.get(placements.size() - 1).getMainCard()") {
-		t.Fatalf("add() must not key the counters by getMainCard(): for a staged back half that is the parent's id, which the resolution never looks up; add():\n%s", addFn)
+
+	// add() only places the card: no counters, no enter-with-counters map.
+	addFn := javaFunc(t, java, "private int add(JsonObject s, String key, Zone zone, TestPlayer p) {")
+	for _, bad := range []string{"counters.get(", "setEnterWithCounters", "enterWithCountersApplied", "addCounters(", "putSetupCounters("} {
+		if strings.Contains(addFn, bad) {
+			t.Fatalf("add() must not apply setup counters (found %s); add():\n%s", bad, addFn)
+		}
 	}
-	for _, want := range []string{
-		`counters.get(n)`,                  // the scenario's counters JSON, by the placed name
-		"currentGame.setEnterWithCounters", // the map the placement path consumes
-		"enterWithCountersApplied.add",     // applySetupState must not re-add
-		"setupBattlefield.merge",           // the entry-history record is unchanged
-	} {
+	// The placement bookkeeping the entry-history normaliser relies on stays.
+	for _, want := range []string{"stageBackFace(p, n);", "setupBattlefield.merge"} {
 		if !strings.Contains(addFn, want) {
 			t.Fatalf("add() lost %s; add():\n%s", want, addFn)
 		}
-	}
-
-	// build() resets the applied set per scenario, so one scenario's applied
-	// ids cannot leak into the next.
-	buildStart := strings.Index(java, "private void build(JsonObject sc) {")
-	if buildStart < 0 {
-		t.Fatal("ScenarioReplay.java has no build()")
-	}
-	buildEnd := strings.Index(java[buildStart:], "\n    }")
-	if buildEnd < 0 {
-		t.Fatal("build() is unterminated")
-	}
-	if !strings.Contains(java[buildStart:buildStart+buildEnd], "enterWithCountersApplied.clear();") {
-		t.Fatal("build() must reset the placement-applied counters set")
-	}
-
-	// applySetupState keeps its loud unknown-name behaviour but skips the
-	// permanents the placement already counted, and still recomputes effects
-	// when it adds anything itself (counter-gated statics).
-	helperStart := strings.Index(java, "private void applySetupState(Game g) {")
-	if helperStart < 0 {
-		t.Fatal("setup state helper is missing")
-	}
-	helperEnd := strings.Index(java[helperStart:], "\n    }")
-	if helperEnd < 0 {
-		t.Fatal("setup state helper is unterminated")
-	}
-	helper := java[helperStart : helperStart+helperEnd]
-	if !strings.Contains(helper, "enterWithCountersApplied.contains(perm.getId())") {
-		t.Fatalf("applySetupState must skip the placement-applied permanents; helper:\n%s", helper)
-	}
-	if !strings.Contains(helper, "counters name ") {
-		t.Fatalf("applySetupState must keep the loud unknown-name throw; helper:\n%s", helper)
-	}
-	helperAddAt := strings.Index(helper, "perm.addCounters(")
-	helperApplyAt := strings.Index(helper, "g.applyEffects();")
-	if helperAddAt < 0 || helperApplyAt < 0 || helperAddAt >= helperApplyAt {
-		t.Fatalf("setup state helper must add counters and then apply effects; helper:\n%s", helper)
 	}
 }
