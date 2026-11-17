@@ -9,10 +9,13 @@ package main
 // forge-export writes for that item (same id, scenario_sha, item, decisions
 // and abilities, the same Forge rewrites) plus one more field, "neutral": the
 // engine-neutral identities of the abilities, setup tokens and modes the item
-// names, for a follower that does not read Forge scripts. An item that names
-// a card the follower lacks is not written to req.jsonl; it goes to
-// <dir of -out>/<NAME>-prep.jsonl instead, which `xengine diff -engine NAME`
-// reads as class not_sent.
+// names, for a follower that does not read Forge scripts. The one exception
+// is the Forge-only "graveyard_order" decision role: forge-export pins it for
+// the Forge driver's separate "order to Graveyard" ask, but no follower queue
+// consumes it (an unasked question), so it is omitted here rather than left as
+// an unconsumed leftover. An item that names a card the follower lacks is not
+// written to req.jsonl; it goes to <dir of -out>/<NAME>-prep.jsonl instead,
+// which `xengine diff -engine NAME` reads as class not_sent.
 //
 // # Preflight protocol
 //
@@ -282,7 +285,11 @@ func followerExport(reg *cards.Registry, fl follower.Follower, runner, scen, out
 			pw.WriteByte('\n')
 			continue
 		}
-		rq, g := forgeExportItem(reg, it)
+		// A follower's queue has no consumer for the Forge-only
+		// "graveyard_order" role, so it is not written here: an unasked
+		// decision would become an unconsumed leftover and turn a clean row
+		// into decision_shape. forge-export (the Forge path) opts in.
+		rq, g := forgeExportItem(reg, it, false)
 		line, err = json.Marshal(followerRequest{forgeRequest: rq, Neutral: neutralFor(reg, rq, g, st.Census)})
 		if err != nil {
 			return st, err
