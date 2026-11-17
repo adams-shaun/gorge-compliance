@@ -64,13 +64,34 @@ func TestRemoveAllCardsTranslates(t *testing.T) {
 		// turn 3 is playerA's only draw by turn 4: one card is enough
 		t.Fatalf("one draw, one added card: refused %v", r)
 	}
-	// cards added before the removal are gone with it
+	// XMage applies the queued clear before it adds the cheated cards, so a
+	// card added before the call survives; one card covers the turn 3 draw
 	if _, r := readWithCorpus(t, `addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
         removeAllCardsFromLibrary(playerA);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertLife(playerA, 20);`); r == nil || r.Code != "library-size" {
-		t.Fatalf("library cleared after the add, then a draw: refusal %v, want library-size", r)
+        assertLife(playerA, 20);`); r != nil {
+		t.Fatalf("addCard LIBRARY before the clear: refused %v", r)
+	}
+	// a card queued between two clears survives both: the clear is applied
+	// once, before the cheats, not at its source position
+	tr, r := readWithCorpus(t, `removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+        removeAllCardsFromLibrary(playerA);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertLife(playerA, 20);`)
+	if r != nil {
+		t.Fatalf("addCard between two clears: refused %v", r)
+	}
+	added := 0
+	for _, ac := range tr.setup[0] {
+		if ac.zone == "library_top" {
+			added += ac.count
+		}
+	}
+	if added != 1 {
+		t.Fatalf("addCard between two clears: %d library card(s) in the setup, want 1", added)
 	}
 	// a card the test plays that draws is a visible draw effect
 	if _, r := readWithCorpus(t, `removeAllCardsFromLibrary(playerA);
@@ -92,6 +113,26 @@ func TestRemoveAllCardsTranslates(t *testing.T) {
         assertLife(playerA, 20);`); r == nil || r.Code != "library-size" {
 		t.Fatalf("mill ten from three added cards: refusal %v, want library-size", r)
 	}
+	// "draw a card for each" is not one fixed draw
+	if _, r := readWithCorpus(t, `removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+        addCard(Zone.HAND, playerA, "Collective Unconscious");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Collective Unconscious");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertLife(playerA, 20);`); r == nil || r.Code != "library-size" {
+		t.Fatalf("Collective Unconscious draws for each creature: refusal %v, want library-size", r)
+	}
+	// amounts above seven were dropped by the draw scan
+	if _, r := readWithCorpus(t, `removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+        addCard(Zone.HAND, playerA, "Blood for the Blood God!");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood for the Blood God!");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertLife(playerA, 20);`); r == nil || r.Code != "library-size" {
+		t.Fatalf("Blood for the Blood God! draws eight: refusal %v, want library-size", r)
+	}
 	// the library count is XMage's alone
 	if _, r := readWithCorpus(t, `removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, "Grizzly Bears", 3);
@@ -99,5 +140,30 @@ func TestRemoveAllCardsTranslates(t *testing.T) {
         execute();
         assertLibraryCount(playerA, 3);`); r == nil || r.Code != "library-size" {
 		t.Fatalf("assertLibraryCount after a clear: refusal %v, want library-size", r)
+	}
+}
+
+// TestOracleDrawDepths pins the Oracle-text scan: a fixed high amount still
+// counts, an amount fixed per permanent or per trigger does not, and a draw
+// named in a trigger's condition is not an effect.
+func TestOracleDrawDepths(t *testing.T) {
+	tr, r := readWithCorpus(t, `setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertLife(playerA, 20);`)
+	if r != nil {
+		t.Fatalf("plain method: refused %v", r)
+	}
+	for _, tc := range []struct {
+		name string
+		want int
+	}{
+		{"Blood for the Blood God!", 8},
+		{"Collective Unconscious", unknownDraws},
+		{"Ripjaw Raptor", unknownDraws},
+		{"Chasm Skulker", 1},
+	} {
+		if got := tr.oracleDraws(tc.name); got != tc.want {
+			t.Errorf("oracleDraws(%q) = %d, want %d", tc.name, got, tc.want)
+		}
 	}
 }

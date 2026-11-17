@@ -6,8 +6,8 @@ import (
 )
 
 // reDrawEffect finds a draw in printed Oracle text ("draw a card", "draws two
-// cards", "draw X cards"); the group is the amount word.
-var reDrawEffect = regexp.MustCompile(`\bdraws?\s+(an additional|additional|a|an|one|two|three|four|five|six|seven|x|\d+|that many|cards?|half|up to)\b`)
+// cards", "draw eight cards"); the group is the amount word.
+var reDrawEffect = regexp.MustCompile(`\bdraws?\s+(an additional|additional|a|an|one|two|three|four|five|six|seven|eight|nine|ten|x|\d+|that many|cards?|half|up to)\b`)
 
 var drawWords = map[string]int{"a": 1, "an": 1, "an additional": 1, "additional": 1, "one": 1, "two": 2,
 	"three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10}
@@ -18,13 +18,60 @@ var drawWords = map[string]int{"a": 1, "an": 1, "an additional": 1, "additional"
 var reMillEffect = regexp.MustCompile(`\bmills?\s+(a|an|one|two|three|four|five|six|seven|eight|nine|ten|x|\d+|that many|cards?|half)\b`)
 var reTopCards = regexp.MustCompile(`\btop\s+(a|an|one|two|three|four|five|six|seven|eight|nine|ten|x|\d+|that many|card|cards|half)\b`)
 
+// reUnboundedAmount follows a draw amount the text does not fix: "draw a card
+// for each creature you control", "draw cards equal to its power", "draw a
+// number of cards". The amount word may be followed by the "card(s)" it
+// counts.
+var reUnboundedAmount = regexp.MustCompile(`^\s*(cards?\s+)?(for each|equal to|number of cards)\b`)
+
+// reRepeatable marks a triggered ability that can resolve more than once
+// before the scenario stops: "Whenever ...", "each time ...", or a
+// beginning-of-step trigger on every turn.
+var reRepeatable = regexp.MustCompile(`\b(whenever|each time|at the beginning of (each|your|every))\b`)
+
 // reDeepLibrary marks text that reads a library of a size the text does not
 // state: half of it, until a card is found, cascade, ripple.
 var reDeepLibrary = regexp.MustCompile(`\bcascade\b|\bripple\b|\bclash\b|\bhalf (of )?(your|their|that player's|its owner's) library|(until|each card|all cards|the rest) .*\blibrary\b|\blibrary\b.* until\b`)
 
 // unknownDraws stands for a draw whose size the text does not fix (X, "that
-// many"): larger than any library a test adds.
+// many", "for each"): larger than any library a test adds.
 const unknownDraws = 99
+
+// effectDepth is how many library cards one matched draw/mill/look clause can
+// reach. "For each"/"equal to" and a repeatable draw effect reach as many
+// cards as the game gives them, so both are unknownDraws. Only draw effects
+// repeat here: a triggered "exile the top card" fires once per stated event,
+// and the Oracle text does not say how many events the test creates.
+func effectDepth(text string, m []int, amount string, repeatable bool) int {
+	if reUnboundedAmount.MatchString(text[m[1]:]) || (repeatable && clauseRepeats(text, m[0])) {
+		return unknownDraws
+	}
+	if w, ok := drawWords[amount]; ok {
+		return w
+	}
+	if amount == "card" {
+		return 1
+	}
+	return unknownDraws
+}
+
+// clauseRepeats reports whether the draw at pos is the effect of a trigger
+// that can resolve more than once. The clause before the first comma is the
+// trigger condition itself, so a draw there ("Whenever you draw a card, ...")
+// does not repeat.
+func clauseRepeats(text string, pos int) bool {
+	start := strings.LastIndexAny(text[:pos], ".\n") + 1
+	end := len(text)
+	if i := strings.IndexAny(text[pos:], ".\n"); i >= 0 {
+		end = pos + i
+	}
+	clause := text[start:end]
+	if !reRepeatable.MatchString(clause) {
+		return false
+	}
+	comma := strings.Index(clause, ",")
+	return comma < 0 || pos-start >= comma
+}
 
 // oracleDraws is how many library cards the named card's Oracle text can draw,
 // mill or look at (unknownDraws when the text does not bound it).
@@ -42,15 +89,16 @@ func (t *translator) oracleDraws(name string) int {
 			continue
 		}
 		text := strings.ToLower(f.Oracle)
-		for _, re := range []*regexp.Regexp{reDrawEffect, reMillEffect, reTopCards} {
-			for _, m := range re.FindAllStringSubmatch(text, -1) {
-				if w, ok := drawWords[m[1]]; ok {
-					n += w
-				} else if m[1] == "card" {
-					n++
-				} else {
-					n += unknownDraws
-				}
+		for _, ef := range []struct {
+			re         *regexp.Regexp
+			repeatable bool
+		}{
+			{reDrawEffect, true},
+			{reMillEffect, false},
+			{reTopCards, false},
+		} {
+			for _, m := range ef.re.FindAllStringSubmatchIndex(text, -1) {
+				n += effectDepth(text, m, text[m[2]:m[3]], ef.repeatable)
 			}
 		}
 		if reDeepLibrary.MatchString(text) {

@@ -647,9 +647,13 @@ func (t *translator) readCall(idx int, c call) *refusal {
 			}
 			break
 		}
+		// XMage queues Zone.LIBRARY -> "clear" and applies it before the
+		// separate cheat call that adds the setup cards, so a card the test
+		// added earlier still survives. The runner's library already holds
+		// exactly the test's cards, so marking the seat is the whole
+		// translation; dropping addCard(Zone.LIBRARY, ...) entries would
+		// disagree with XMage.
 		t.libCleared[p] = true
-		// XMage empties the library, cards the test already added included
-		t.setup[p] = slices.DeleteFunc(t.setup[p], func(ac addCardCall) bool { return ac.zone == "library_top" })
 	case "setLife":
 		p, ok := seatOf(c.Args[0])
 		n, ok2 := argInt(c, 1)
