@@ -440,6 +440,55 @@ public final class ScenarioReplayDriverContractTest {
                 + "second pass; other shapes rejected; empty-stack failure self-diagnosing)");
     }
 
+    /** A recorded run's resolving pass by the seat that is not active is that
+     * seat's own real pass (CR 117.4). The seat holds a Flash card for its own
+     * step; without the pass queued first, that later action fires at this
+     * priority instead of the top object resolving. The steps are the EOE
+     * Nutrient Block window (xe:RAND:3:12:w4) followed by seat 1's Flash card,
+     * Illvoi Light Jammer. */
+    private static void recordedSeatOneResolvingPass() throws Exception {
+        JsonArray run = steps("[{op:'play',seat:0,card:'p0:Forest'},"
+                + "{op:'activate',seat:0,card:'p0:Island',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Forest',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Nutrient Block',ability_index:0},"
+                + "{op:'pass',seat:0,xpos:{turn:1,step:'main1',active:0}},"
+                + "{op:'pass',seat:1,xpos:{turn:1,step:'main1',active:0,resolves:true}},"
+                + "{op:'cast',seat:1,card:'p1:Illvoi Light Jammer'}]");
+        check(ScenarioReplay.passAction(run, 4) == ScenarioReplay.PASS_RUN,
+                "a recorded pass with a position is PASS_RUN");
+        check(ScenarioReplay.passAction(run, 5) == ScenarioReplay.PASS_RUN,
+                "the seat-1 resolving pass is PASS_RUN");
+        check(ScenarioReplay.passCommands(run, 4, 0).isEmpty(),
+                "a recorded pass that only yields priority queues nothing");
+        check(ScenarioReplay.passCommands(run, 5, 0).equals(Arrays.asList(ScenarioReplay.CMD_PASS_OWN_PRIORITY,
+                        ScenarioReplay.CMD_REQUIRE_STACK, ScenarioReplay.CMD_WAIT_RESOLVE_ONE)),
+                "the seat-1 resolving pass queues its own pass, then the one-object resolution");
+        check(ScenarioReplay.passCommands(run, 6, 0).isEmpty(),
+                "the later flash cast queues no priority change of its own");
+
+        // At priority, seat 1 consumes its own pass first; the cast it holds
+        // for a later step is queued behind it, so it cannot fire here.
+        TestPlayer a = bare("A");
+        TestPlayer b = bare("B");
+        ScenarioReplay r = queueingDriver(run, a, b);
+        queue(r, "queuePassCommands", 5);
+        check(names(b).equals(Arrays.asList(ScenarioReplay.CMD_PASS_OWN_PRIORITY)),
+                "the pass is queued on seat 1, not the active seat; got " + names(b));
+        check(names(a).equals(Arrays.asList(ScenarioReplay.CMD_WAIT_RESOLVE_ONE)),
+                "the active seat only waits for one object to resolve; got " + names(a));
+
+        // The active seat's own resolving pass needs no extra pass: its wait
+        // already passes for it.
+        JsonArray own = steps("[{op:'cast',seat:0,card:'p0:Shock'},"
+                + "{op:'pass',seat:0,xpos:{turn:1,step:'main1',active:0}},"
+                + "{op:'pass',seat:0,xpos:{turn:1,step:'main1',active:0,resolves:true}}]");
+        check(ScenarioReplay.passCommands(own, 2, 0).equals(Arrays.asList(ScenarioReplay.CMD_REQUIRE_STACK,
+                        ScenarioReplay.CMD_WAIT_RESOLVE_ONE)),
+                "the active seat's own resolving pass queues no extra pass");
+        System.out.println("PASS recorded seat-1 resolving pass (its own pass before a later flash cast; "
+                + "the active seat only waits)");
+    }
+
     private static void mustAttack() {
         // The structural check the attack step uses must be exact on the
         // actual XMage card models, not a name list: a card that carries
@@ -758,6 +807,7 @@ public final class ScenarioReplayDriverContractTest {
         attachments();
         zones();
         passes();
+        recordedSeatOneResolvingPass();
         statelessPassToKeepsPhase();
         spree();
         mustAttack();
