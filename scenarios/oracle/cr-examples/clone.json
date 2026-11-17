@@ -1,0 +1,132 @@
+{
+ "card": "Clone",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "f0ca42b2ea7c",
+ "scenarios": [
+  {
+   "name": "token-copied-from-a-clone-is-not-double-faced",
+   "cr": [
+    "707.8a"
+   ],
+   "why": "Clone copies Afflicted Deserter but Clone is not a double-faced card, so a token made from Clone has only the values Clone presents and no back face. Moonmist turns the original Afflicted Deserter over; the Clone and its token keep the front-face name.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Afflicted Deserter",
+      "Clone",
+      "Cackling Counterpart",
+      "Moonmist"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Afflicted Deserter",
+     "mana": "CCCR"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Clone",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p0:Afflicted Deserter"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Cackling Counterpart",
+     "mana": "CUU",
+     "targets": [
+      "p0:Clone"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Afflicted Deserter",
+        "token": true
+       },
+       "eq": 1
+      },
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Werewolf Ransacker",
+        "token": true
+       },
+       "eq": 0
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Moonmist",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Afflicted Deserter",
+        "token": true
+       },
+       "eq": 1
+      },
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Werewolf Ransacker",
+        "token": true
+       },
+       "eq": 0
+      },
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Afflicted Deserter",
+        "token": false
+       },
+       "eq": 1
+      },
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Werewolf Ransacker",
+        "token": false
+       },
+       "eq": 1
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -9,7 +9,7 @@
    "cr": [
     "707.2"
    ],
-   "why": "A face-down morph is a colourless 2/2 creature with no name, types, abilities or mana cost. Copying that permanent gives Clone the same faceless body, and it is face up, so it cannot be turned face up for the Demon's morph cost.",
+   "why": "Clone takes the copiable values of the permanent while the Demon is face down, so it receives the anonymous 2/2 body a face-down card presents rather than the Demon's printed 6/6. The Clone is already face up and has no morph cost of its own, so the Demon's mana cost cannot turn it over.",
    "setup": {
     "p0": {
      "hand": [
@@ -72,6 +72,160 @@
      "zone": "battlefield",
      "pt": "2/2",
      "colours": ""
+    }
+   ]
+  },
+  {
+   "name": "a-face-down-demon-copied-from-branchsnap-lorian-turns-up-for-green",
+   "cr": [
+    "707.3"
+   ],
+   "why": "Cytoshape gives the face-down Demon the copiable values of Branchsnap Lorian, but its face-down status keeps it the same anonymous 2/2. The Lorian's morph cost is now what turns it over, so paying {G} reveals a green 4/1 Beast with trample.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Branchsnap Lorian"
+     ],
+     "hand": [
+      "Grinning Demon",
+      "Cytoshape"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Grinning Demon",
+     "cast_mode": "morphed",
+     "mana": "CCC"
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Grinning Demon",
+       "zone": "battlefield",
+       "pt": "2/2",
+       "colours": ""
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Cytoshape",
+     "mana": "CGU",
+     "targets": [
+      "p0:Grinning Demon"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Branchsnap Lorian"
+       ]
+      }
+     ],
+     "expect": [
+      {
+       "card": "p0:Grinning Demon",
+       "zone": "battlefield",
+       "pt": "2/2",
+       "colours": ""
+      }
+     ]
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Grinning Demon",
+     "ability": "Turn face up",
+     "mana": "G"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grinning Demon",
+     "zone": "battlefield",
+     "pt": "4/1",
+     "colours": "G",
+     "types": [
+      "Beast"
+     ],
+     "keywords": [
+      "Trample"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "a-face-down-demons-copy-of-wandering-ones-cannot-turn-up",
+   "cr": [
+    "707.3"
+   ],
+   "why": "A face-down Demon that becomes a copy of Wandering Ones is still the anonymous 2/2, but Wandering Ones has no morph, so there is no turn-face-up action to pay for. The permanent stays face down with the 2/2 body.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Wandering Ones"
+     ],
+     "hand": [
+      "Grinning Demon",
+      "Cytoshape"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Grinning Demon",
+     "cast_mode": "morphed",
+     "mana": "CCC"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Cytoshape",
+     "mana": "CGU",
+     "targets": [
+      "p0:Grinning Demon"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Wandering Ones"
+       ]
+      }
+     ],
+     "expect": [
+      {
+       "card": "p0:Grinning Demon",
+       "zone": "battlefield",
+       "pt": "2/2",
+       "colours": ""
+      },
+      {
+       "offered": {
+        "seat": 0,
+        "kind": "turn_face_up",
+        "card": "p0:Grinning Demon",
+        "label": "Turn face up"
+       },
+       "want": false
+      }
+     ]
     }
    ]
   }

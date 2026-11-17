@@ -1,0 +1,96 @@
+{
+ "card": "Moritte of the Frost",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "8dab12e84adb",
+ "scenarios": [
+  {
+   "name": "copying-an-animated-land-skips-the-entry-counters-and-changeling",
+   "cr": [
+    "707.9f"
+   ],
+   "why": "Moritte copies the Forest's card values, which are not a creature, so the creature-only parts of its own copy exception do not apply even though Rude Awakening makes the land a 2/2 creature. Moritte enters with no +1/+1 counters and without changeling.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Forest"
+     ],
+     "hand": [
+      "Rude Awakening",
+      "Moritte of the Frost"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Rude Awakening",
+     "mana": "CCCCG",
+     "answers": [
+      {
+       "kind": "modes",
+       "pick": [
+        "lands you control become"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Forest",
+       "zone": "battlefield",
+       "pt": "2/2",
+       "types": [
+        "Creature",
+        "Land"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Moritte of the Frost",
+     "mana": "CCGUU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      },
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Forest"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Moritte of the Frost",
+     "zone": "battlefield",
+     "pt": "2/2",
+     "types": [
+      "Creature",
+      "Land"
+     ],
+     "counters": {
+      "P1P1": 0
+     },
+     "no_keywords": [
+      "Changeling"
+     ]
+    }
+   ]
+  }
+ ]
+}

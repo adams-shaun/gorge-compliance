@@ -9,19 +9,37 @@
    "cr": [
     "707.8a"
    ],
-   "why": "The token that copies Afflicted Deserter copies both of its faces, not just the face that is up, so it is a double-faced token and Moonmist can transform it into Werewolf Ransacker.",
+   "why": "Afflicted Deserter is a double-faced card, so Cackling Counterpart makes a token that also has both faces. While the front face is up the token is named Afflicted Deserter; Moonmist then turns both the original and the token into Werewolf Ransacker. A single-faced copy would keep the front-face name.",
    "setup": {
     "p0": {
-     "battlefield": [
-      "Afflicted Deserter"
-     ],
      "hand": [
+      "Afflicted Deserter",
       "Cackling Counterpart",
       "Moonmist"
      ]
     }
    },
    "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Afflicted Deserter",
+     "mana": "CCCR"
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Afflicted Deserter",
+       "zone": "battlefield",
+       "pt": "3/2",
+       "types": [
+        "Human",
+        "Werewolf"
+       ]
+      }
+     ]
+    },
     {
      "op": "cast",
      "seat": 0,
@@ -32,7 +50,27 @@
      ]
     },
     {
-     "op": "resolve"
+     "op": "resolve",
+     "expect": [
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Werewolf Ransacker",
+        "token": true
+       },
+       "eq": 0
+      },
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Afflicted Deserter",
+        "token": true
+       },
+       "eq": 1
+      }
+     ]
     },
     {
      "op": "cast",
@@ -41,27 +79,34 @@
      "mana": "CG"
     },
     {
-     "op": "resolve"
-    }
-   ],
-   "expect": [
-    {
-     "count": {
-      "seat": 0,
-      "zone": "battlefield",
-      "name": "Werewolf Ransacker",
-      "token": true
-     },
-     "eq": 1
-    },
-    {
-     "count": {
-      "seat": 0,
-      "zone": "battlefield",
-      "name": "Afflicted Deserter",
-      "token": true
-     },
-     "eq": 0
+     "op": "resolve",
+     "expect": [
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Werewolf Ransacker",
+        "token": true
+       },
+       "eq": 1
+      },
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Afflicted Deserter",
+        "token": true
+       },
+       "eq": 0
+      },
+      {
+       "card": "p0:Afflicted Deserter",
+       "pt": "5/4",
+       "no_types": [
+        "Human"
+       ]
+      }
+     ]
     }
    ]
   }
