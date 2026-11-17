@@ -59,7 +59,7 @@
     }
    ],
    "xmage": "HinterlandScourgeTest#testCard",
-   "known_bug": "XP[werewolf-transform-condition-not-modelled]: Hinterland Hermit's turn-2 upkeep trigger (WerewolfTransformCondition$ True, DB$ SetState Mode$ Transform) goes on the stack and resolves but the Hermit stays Hinterland Hermit 2/1 (want the Scourge 3/2, no Hermit left); no engine code reads WerewolfTransformCondition$ and effSetState's Transform arm does not flip the face here (root cause below effSetState not isolated), CR 701.27, verified at gorge 981b98963b."
+   "known_bug": "XP[werewolf-transform-condition-not-modelled]: Hinterland Hermit's turn-2 upkeep trigger (WerewolfTransformCondition$ True, DB$ SetState Mode$ Transform) goes on the stack and resolves but the Hermit stays Hinterland Hermit 2/1 (want the Scourge 3/2, no Hermit left); no engine code reads WerewolfTransformCondition$ and effSetState's Transform arm does not flip the face here (root cause below effSetState not isolated), CR 701.27, verified at gorge 981b98963b. Hand probe at gorge 981b98963b reproduces both fails (Hermit 1, want 0; Scourge 0, want 1)."
   }
  ]
 }

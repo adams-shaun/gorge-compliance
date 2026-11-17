@@ -757,8 +757,6 @@ func (t *translator) copyOnlyRef(p int, n string) string {
 	return ""
 }
 
-// assertRef maps an asserted card name to a ref: tokens by controller, cards
-// by the asserting player's objects first, then the other seat's.
 // castTurns counts the distinct turns seat p casts a card named name on.
 func (t *translator) castTurns(p int, name string) int {
 	turns := map[int]bool{}
@@ -785,6 +783,8 @@ func (t *translator) allOffBattlefield(p int, name string) bool {
 	return n > 0
 }
 
+// assertRef maps an asserted card name to a ref: tokens by controller, cards
+// by the asserting player's objects first, then the other seat's.
 func (t *translator) assertRef(p int, name string) (string, *refusal) {
 	n, r := xmageName(name)
 	if r != nil {
@@ -1186,19 +1186,10 @@ func (em *emitter) castMana(seat int, name string, x int) (string, *refusal) {
 	if !ok {
 		return "", refuse("unknown-card", "%s", name)
 	}
-	cost := ""
-	switch {
-	case len(c.Faces) == 0:
+	if len(c.Faces) == 0 {
 		return "", nil
-	default:
-		cost = c.Faces[0].ManaCost
-		for _, f := range c.Faces {
-			if f != nil && sameName(f.Name, name) {
-				cost = f.ManaCost
-				break
-			}
-		}
 	}
+	cost := cardManaCost(c, name)
 	ms := em.t.manaSources(seat, em.entered[seat])
 	if ms.spent != "" {
 		slots, r := costSlots(cost, x)
@@ -1213,6 +1204,41 @@ func (em *emitter) castMana(seat int, name string, x int) (string, *refusal) {
 		ms.loose = true
 	}
 	return manaFromCostSources(cost, x, ms.srcs, ms.loose)
+}
+
+// cardManaCost returns the printed mana cost of the named face.
+func cardManaCost(c *cards.Card, name string) string {
+	if len(c.Faces) == 0 {
+		return ""
+	}
+	cost := c.Faces[0].ManaCost
+	for _, f := range c.Faces {
+		if f != nil && sameName(f.Name, name) {
+			return f.ManaCost
+		}
+	}
+	return cost
+}
+
+// landsPay reports whether untapped lands alone cover the named card's cost.
+// A mana conversion, an every-land-type land or an alternative cost can
+// change what the lands really pay, so those report true (no refusal).
+func (em *emitter) landsPay(seat int, name string) bool {
+	c, ok := em.t.lookup(name)
+	if !ok || len(c.Faces) == 0 {
+		return true
+	}
+	ms := em.t.manaSources(seat, em.entered[seat])
+	if ms.loose || em.t.castsForAlternativeCost(c) {
+		return true
+	}
+	cost := cardManaCost(c, name)
+	slots, r := costSlots(cost, 0)
+	if r != nil {
+		return true
+	}
+	paid, r := manaFromCostSources(cost, 0, ms.landSrcs, false)
+	return r == nil && len(paid) >= len(slots)
 }
 
 // staticChangesMana reports whether a static ability of f rewrites mana
@@ -1326,6 +1352,7 @@ func (t *translator) manaSources(p int, entered []string) *manaSet {
 			}
 			if len(basic) > 0 {
 				ms.srcs = append(ms.srcs, basic)
+				ms.landSrcs = append(ms.landSrcs, basic)
 				if f.IsBasic() {
 					ms.basics++
 				}
@@ -1336,7 +1363,15 @@ func (t *translator) manaSources(p int, entered []string) *manaSet {
 				if !land && ms.spent == "" && sacrificesItself(sa.Params["Cost"]) {
 					ms.spent = nm
 				}
-				ms.srcs = append(ms.srcs, producedMana(sa)...)
+				produced := producedMana(sa)
+				ms.srcs = append(ms.srcs, produced...)
+				if land {
+					ms.landSrcs = append(ms.landSrcs, produced...)
+				} else if len(produced) > 0 {
+					// a non-land permanent's mana ability: the runner seeds
+					// its mana into the pool instead of activating it
+					ms.nonlandSrc = true
+				}
 			}
 		}
 	}
@@ -1346,6 +1381,13 @@ func (t *translator) manaSources(p int, entered []string) *manaSet {
 // manaSet is what a seat's battlefield can pay with at one cast.
 type manaSet struct {
 	srcs [][]byte // one entry per mana, the colours it can be
+	// landSrcs is the subset land sources make, so a playable check that only
+	// a non-land mana ability can pay is refused instead of seeded.
+	landSrcs [][]byte
+	// nonlandSrc is set when a non-land permanent contributes mana: XMage's
+	// checkPlayableAbility counts that ability, which the runner never
+	// activates.
+	nonlandSrc bool
 	// spent names the first self-sacrificing / self-exiling non-land mana
 	// source (Black Lotus, Lotus Petal, a Treasure): XMage's auto-payment may
 	// have used it up and the runner cannot say.
@@ -1524,6 +1566,15 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 		for _, ch := range a.choices {
 			if ch.mode > 0 {
 				modes++
+			}
+			if a.kind == "attack" && !ch.target {
+				// XMage chooses the planeswalker an effect puts a creature
+				// onto the battlefield attacking; gorge never poses that
+				// defender choice, so stating it here would only be dropped
+				// and the scenario could not go stale when gorge adds it.
+				if n, ok := strings.CutPrefix(ch.pick, "name:"); ok && t.isPlaneswalkerCard(n) {
+					return refuse("attack-planeswalker-choice", "%s is chosen as an attacker's defender", n)
+				}
 			}
 			if a.kind == "activate" && modes == 0 && (ch.pick == "yes" || ch.pick == "no") && !ch.target && ch.x < 0 && t.activatedAltCost() != "" {
 				return refuse("alt-cost-activation-choice", "%s's alternative cost is elected by a boolean", t.activatedAltCost())
@@ -1856,7 +1907,15 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			// cost, and the runner has no land-tapping autopay: XMage's
 			// checkPlayableAbility counts the lands, so float the cost on the
 			// step that carries the offered expect.
-			m, r := em.castMana(a.seat, refName(xs[0].Offered.Card), 0)
+			name := refName(xs[0].Offered.Card)
+			if ms := em.t.manaSources(a.seat, em.entered[a.seat]); ms.nonlandSrc && !em.landsPay(a.seat, name) {
+				// The check can only be true because of a non-land mana
+				// ability (Alena, Kessig Trapper's {T}: Add {R}); seeding
+				// that mana into the pool proves nothing about the ability
+				// and would hide the defect the check is about.
+				return nil, refuse("offered-check-mana-source", "%s needs a non-land mana ability", name)
+			}
+			m, r := em.castMana(a.seat, name, 0)
 			if r != nil {
 				return nil, refuse("playable-check", "cost of %s: %s", xs[0].Offered.Card, r.Detail)
 			}
@@ -2263,6 +2322,26 @@ func (t *translator) isCreatureCard(name string) bool {
 	return ok && len(c.Faces) > 0 && c.Faces[0] != nil && c.Faces[0].IsCreature()
 }
 
+// isPlaneswalkerCard reports whether any face of the named card is a
+// planeswalker.
+func (t *translator) isPlaneswalkerCard(name string) bool {
+	c, ok := t.lookup(name)
+	if !ok {
+		return false
+	}
+	for _, f := range c.Faces {
+		if f == nil {
+			continue
+		}
+		for _, ty := range f.Types {
+			if ty == "Planeswalker" {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 // saCopies reports whether activating sa makes a permanent copy.
 func saCopies(sa *cards.SA) bool {
 	for x := sa; x != nil; x = x.Sub {
@@ -2350,42 +2429,89 @@ func (t *translator) manaSideEffects(steps []*step) *refusal {
 	if !paid {
 		return nil
 	}
+	seen := map[string]bool{}
+	check := func(name string) *refusal {
+		if seen[name] {
+			return nil
+		}
+		seen[name] = true
+		c, ok := t.lookup(name)
+		if !ok {
+			return nil
+		}
+		return manaSideEffect(c, name)
+	}
 	for p := 0; p < 2; p++ {
 		for _, ac := range t.setup[p] {
-			c, ok := t.lookup(ac.name)
-			if !ok {
+			if ac.zone != "battlefield" {
+				// only battlefield permanents have active triggered or
+				// static abilities: a card merely in hand or in a graveyard
+				// cannot trigger on mana or tax its own mana abilities
 				continue
 			}
-			for _, f := range c.Faces {
-				if f == nil {
-					continue
-				}
-				for _, tr := range f.Triggers {
-					if tr.Mode == "TapsForMana" || tr.Mode == "ManaAdded" {
-						return refuse("mana-payment", "%s triggers on mana", ac.name)
-					}
-				}
-				for i := range f.Statics {
-					st := &f.Statics[i]
-					if st.Mode == "RaiseCost" && strings.Contains(st.Params["ValidSpell"], "Activated.ManaAbility") {
-						// Thran Portal: its mana abilities cost 1 life, paid
-						// by tapping it, which the pool never does
-						return refuse("mana-ability-cost", "%s taxes its own mana abilities", ac.name)
-					}
-					if strings.Contains(st.Params["AddKeyword"], "PayLifeInsteadOf") {
-						// K'rrik: XMage's choice to pay life for {B}
-						return refuse("pay-life-instead-of-mana", "%s lets life pay for mana", ac.name)
-					}
-				}
-				if ac.zone != "battlefield" {
-					continue
-				}
-				for _, sa := range f.Abilities {
-					if sa != nil && sa.API == "Mana" && (sa.Sub != nil || sa.ParamStr(cards.PKTriggersWhenSpent) != "") {
-						// a sub-ability, or "when you spend this mana ..."
-						return refuse("mana-payment", "%s's mana ability does more", ac.name)
-					}
-				}
+			if r := check(ac.name); r != nil {
+				return r
+			}
+		}
+	}
+	// A land played or a permanent cast during the method is on the
+	// battlefield by the time a later pool-paid step runs (Thran Portal's
+	// mana abilities taxed in chromaticLanternCostInteraction). Only actions
+	// with a later cast/activate/offered-check can precede such a step.
+	for i, a := range t.actions {
+		switch a.kind {
+		case "play":
+		case "cast":
+			if !t.isPermanentCard(a.card) {
+				continue
+			}
+		default:
+			continue
+		}
+		later := false
+		for _, b := range t.actions[i+1:] {
+			if b.kind == "cast" || b.kind == "activate" || (b.kind == "check" && b.playCheck != nil && b.playCheck.want) {
+				later = true
+				break
+			}
+		}
+		if !later {
+			continue
+		}
+		if r := check(a.card); r != nil {
+			return r
+		}
+	}
+	return nil
+}
+
+// manaSideEffect refuses one battlefield card that cares how mana was made.
+func manaSideEffect(c *cards.Card, name string) *refusal {
+	for _, f := range c.Faces {
+		if f == nil {
+			continue
+		}
+		for _, tr := range f.Triggers {
+			if tr.Mode == "TapsForMana" || tr.Mode == "ManaAdded" {
+				return refuse("mana-payment", "%s triggers on mana", name)
+			}
+		}
+		for i := range f.Statics {
+			st := &f.Statics[i]
+			if st.Mode == "RaiseCost" && strings.Contains(st.Params["ValidSpell"], "Activated.ManaAbility") {
+				// Thran Portal: its mana abilities cost 1 life, paid
+				// by tapping it, which the pool never does
+				return refuse("mana-ability-cost", "%s taxes its own mana abilities", name)
+			}
+			if strings.Contains(st.Params["AddKeyword"], "PayLifeInsteadOf") {
+				// K'rrik: XMage's choice to pay life for {B}
+				return refuse("pay-life-instead-of-mana", "%s lets life pay for mana", name)
+			}
+		}
+		for _, sa := range f.Abilities {
+			if sa != nil && sa.API == "Mana" && (sa.Sub != nil || sa.ParamStr(cards.PKTriggersWhenSpent) != "") {
+				// a sub-ability, or "when you spend this mana ..."
+				return refuse("mana-payment", "%s's mana ability does more", name)
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/adams-shaun/gorge/engine/cards"
@@ -300,5 +301,146 @@ func TestDuplicateNameAssertRefusesCopiesCastOnDifferentTurns(t *testing.T) {
         assertPowerToughness(playerA, "Memnite", 1, 1);`)
 	if res.Code == "duplicate-name-assert" {
 		t.Fatal("copies cast on one turn are not ambiguous")
+	}
+}
+
+// Only battlefield permanents have active statics: a K'rrik or Thran Portal
+// merely in hand must not refuse a scenario that pays from the pool.
+func TestPoolPaymentStaticRequiresBattlefield(t *testing.T) {
+	const cast = `addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "%s");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);`
+	for _, c := range []struct{ card, code string }{
+		{"K'rrik, Son of Yawgmoth", "pay-life-instead-of-mana"},
+		{"Thran Portal", "mana-ability-cost"},
+	} {
+		res := translateAsserting(t, fmt.Sprintf(cast, c.card))
+		if res.Code != "" {
+			t.Errorf("%s in hand: refused %q (%s), want a scenario", c.card, res.Code, res.Detail)
+		}
+		res = translateAsserting(t, `addCard(Zone.BATTLEFIELD, playerA, "`+c.card+`");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);`)
+		if res.Code != c.code {
+			t.Errorf("%s on battlefield: code %q (%s), want %q", c.card, res.Code, res.Detail, c.code)
+		}
+	}
+	// a land played during the method is on the battlefield when the later
+	// pool-paid cast runs, so its mana tax still applies
+	res := translateAsserting(t, `addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "Thran Portal");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thran Portal");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);`)
+	if res.Code != "mana-ability-cost" {
+		t.Fatalf("Thran Portal played then paid from pool: code %q (%s), want mana-ability-cost", res.Code, res.Detail)
+	}
+}
+
+// XMage's checkPlayableAbility counts Alena's {T}: Add {R}; seeding that mana
+// into the pool would make the check pass without the ability ever producing
+// it, so a check only a non-land mana source can pay is refused.
+func TestOfferedCheckRefusesNonlandManaSource(t *testing.T) {
+	res := translateAsserting(t, `addCard(Zone.BATTLEFIELD, playerA, "Alena, Kessig Trapper");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Barbarian Horde");
+        checkPlayableAbility("horde", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Barbarian Horde", true);`)
+	if res.Code != "offered-check-mana-source" {
+		t.Fatalf("code %q (%s), want offered-check-mana-source", res.Code, res.Detail)
+	}
+	// the same check paid by lands alone still floats and stays a scenario
+	res = translateAsserting(t, `addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        checkPlayableAbility("bolt", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", true);`)
+	if res.Code != "" {
+		t.Fatalf("land-paid check refused %q (%s)", res.Code, res.Detail)
+	}
+}
+
+// Anrakyr's DB$ Play casts an artifact for life; gorge's effect-play path has
+// no kicked answer, so a multikicker count cannot be stated (the multikicker
+// 1 and no-mana rows would otherwise be dropped choices, and cannot go stale).
+func TestPlayEffectKickerRefuses(t *testing.T) {
+	res := translateAsserting(t, `addCard(Zone.BATTLEFIELD, playerA, "Anrakyr the Traveller");
+        addCard(Zone.HAND, playerA, "Everflowing Chalice");
+        attack(1, playerA, "Anrakyr the Traveller", playerB);
+        setChoice(playerA, true);
+        setChoice(playerA, "Everflowing Chalice");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        setChoice(playerA, false);`)
+	if res.Code != "play-effect-kicker" {
+		t.Fatalf("code %q (%s), want play-effect-kicker", res.Code, res.Detail)
+	}
+}
+
+// XMage's setChoice of a planeswalker after an attack says which planeswalker
+// the effect's creature attacks; gorge never poses that defender choice, so
+// the stated choice would be dropped and could not go stale.
+func TestAttackPlaneswalkerChoiceRefuses(t *testing.T) {
+	res := translateAsserting(t, `addCard(Zone.BATTLEFIELD, playerA, "Hans Eriksson");
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerB, "Chandra, Flame's Fury");
+        attack(1, playerA, "Hans Eriksson", playerB);
+        setChoice(playerA, "Chandra, Flame's Fury");`)
+	if res.Code != "attack-planeswalker-choice" {
+		t.Fatalf("code %q (%s), want attack-planeswalker-choice", res.Code, res.Detail)
+	}
+}
+
+// The boolean-flip replay must be exercised end to end: Sigurd's "put another
+// LORE counter" is the second option of a two-option ask, so the mask-0 run
+// fails and runResult's replay is what makes the scenario pass.
+func TestBooleanReplayEndToEnd(t *testing.T) {
+	const body = `setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Sigurd, Jarl of Ravensthorpe");
+        addCard(Zone.BATTLEFIELD, playerA, "Bear Cub");
+        addCard(Zone.HAND, playerA, "Urza's Saga");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Urza's Saga");
+        addTarget(playerA, "Bear Cub");
+        setChoice(playerA, "I - {this} gains");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCounters("Saga entering counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Urza's Saga", CounterType.LORE, 1);
+        checkPermanentCounters("Bear cub single counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bear Cub", CounterType.P1P1, 1);
+        attack(1, playerA, "Sigurd, Jarl of Ravensthorpe");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Boast &mdash; {1}: ", "Urza's Saga");
+        setChoice(playerA, true);
+        setChoice(playerA, "II - {this} gains");
+        addTarget(playerA, "Bear Cub");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
+        checkPermanentCounters("Saga boast counter", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Urza's Saga", CounterType.LORE, 2);
+        checkPermanentCounters("Bear cub two counters", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Bear Cub", CounterType.P1P1, 2);`
+	src := `class SigurdReplayTest extends CardTestPlayerBase {
+    @Test
+    public void testSigurd() {
+` + body + `
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+}`
+	jc, err := parseJava("x", "x", src)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(jc.Methods) != 1 {
+		t.Fatalf("parsed %d methods, want 1", len(jc.Methods))
+	}
+	reg := testutilRegistry(t)
+	res := translate(reg, jc, &jc.Methods[0], "rules")
+	if res.Scenario == nil {
+		t.Fatalf("refused %s: %s", res.Code, res.Detail)
+	}
+	without := *res
+	without.Groups = cloneGroups(res.Groups)
+	runResultMask(reg, &without, 0)
+	if without.Status != "fail-expect" {
+		t.Fatalf("mask 0 status %s (%v), want fail-expect", without.Status, without.Fails)
+	}
+	runResult(reg, res)
+	if res.Status != "pass" {
+		t.Fatalf("replay status %s (%v), want pass", res.Status, res.Fails)
 	}
 }

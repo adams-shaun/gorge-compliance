@@ -187,6 +187,11 @@ type translator struct {
 	choiceList    []choice
 	droppedOrder  int
 	orphanMode    bool // a setModeChoice no action consumes (a trigger's modes)
+	// playEffectKicker names a card an effect plays (not a cast step) that
+	// prints Kicker/Multikicker: gorge's effPlay cast has no kicked answer, so
+	// the XMage kicker choices cannot be stated and a nonzero count would be
+	// silently dropped.
+	playEffectKicker string
 	// strict is setStrictChooseMode(true): every choice the game asks is
 	// stated by the test. Without it XMage's AI answers the unstated ones.
 	strict bool
@@ -319,6 +324,15 @@ func (t *translator) assignChoices() {
 		}
 		switch {
 		case to != nil:
+			if to.kind != "cast" {
+				// A card named to be played by an effect (Anrakyr the
+				// Traveller's DB$ Play) is not a cast step, so neither the
+				// kicker nor the life-for-mana choice can be stated; the
+				// whole shape is refused in build().
+				if n, ok := strings.CutPrefix(ch.pick, "name:"); ok && t.cardHasKicker(n) {
+					t.playEffectKicker = n
+				}
+			}
 			to.choices = append(to.choices, ch)
 		case ch.mode > 0:
 			t.orphanMode = true
@@ -326,6 +340,25 @@ func (t *translator) assignChoices() {
 			t.tailChoices = append(t.tailChoices, ch)
 		}
 	}
+}
+
+// cardHasKicker reports whether a face of name prints Kicker or Multikicker.
+func (t *translator) cardHasKicker(name string) bool {
+	c, ok := t.lookup(name)
+	if !ok {
+		return false
+	}
+	for _, f := range c.Faces {
+		if f == nil {
+			continue
+		}
+		for _, k := range f.Keywords {
+			if strings.HasPrefix(k, "Kicker:") || strings.HasPrefix(k, "Multikicker:") {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 type pendingCheck struct {
@@ -548,6 +581,9 @@ func (t *translator) read() *refusal {
 	t.assignChoices()
 	if t.orphanMode {
 		return refuse("mode-choice", "setModeChoice with no cast to consume it")
+	}
+	if t.playEffectKicker != "" {
+		return refuse("play-effect-kicker", "%s is played by an effect, whose kicker count the runner cannot state", t.playEffectKicker)
 	}
 	return nil
 }

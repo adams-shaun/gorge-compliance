@@ -149,7 +149,7 @@
     }
    ],
    "xmage": "TheAesirEscapeValhallaTest#test_SimplePlay",
-   "known_bug": "XP[exiledwith-referent-not-recorded-graveyard-exile]: chapter I's exile from the graveyard (DB$ ChangeZone Hidden$ True) is not recorded as exiled with the Saga because moveZoneEvent/exileProvenanceNeeded only recognise the ExiledWithSource spelling, not the ExiledWith$CardManaCost / Defined$ ExiledWith its later chapters read, so chapter II adds 0 counters (Memnite P1P1 0, want 5) and chapter III returns nothing, CR 607.2a, verified at gorge 981b98963b."
+   "known_bug": "XP[exiledwith-referent-not-recorded-graveyard-exile]: chapter I's exile from the graveyard (DB$ ChangeZone Hidden$ True) is not recorded as exiled with the Saga because moveZoneEvent/exileProvenanceNeeded only recognise the ExiledWithSource spelling, not the ExiledWith$CardManaCost / Defined$ ExiledWith its later chapters read, so chapter II adds 0 counters (Memnite P1P1 0, want 5) and chapter III returns nothing, CR 607.2a, verified at gorge 981b98963b. Hand probe at gorge 981b98963b reproduces all three fails (Memnite 0 P1P1, want 5; Gigantosaurus hand 0, want 1; exile 1, want 0)."
   }
  ]
 }
