@@ -1616,9 +1616,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // reached, and a trigger there (a beginning-of-combat "up to two
             // target creatures") asks a target nobody scripted: "Missing
             // TARGET def". So stop at that step instead.
-            boolean stopAtLastPass = !endTurnScenario && followedPassPosition;
-            setStopAt(endTurnScenario ? turn + 1 : turn,
-                    endTurnScenario ? PhaseStep.UPKEEP : stopAtLastPass ? phase : PhaseStep.END_TURN);
+            if (!endTurnScenario && followedPassPosition) {
+                setStopAt(turn, phase);
+            } else {
+                setStopAt(endTurnScenario ? turn + 1 : turn,
+                        endTurnScenario ? PhaseStep.UPKEEP : PhaseStep.END_TURN);
+            }
             execute();
         } catch (Throwable t) {
             String msg = t.getClass().getSimpleName() + ": " + t.getMessage();
@@ -2774,9 +2777,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return targetsDivided(spellAbility(name));
     }
 
-    /** Whether the card's spell ability has exactly one target object and
-     * n answers already reach its maximum, so no slot is left to skip. */
-    private static boolean singleTargetFilled(String name, int n) {
+    /** Whether n answers already reach the combined maximum of the card's
+     * spell-ability target objects, so no slot is left to skip. */
+    private static boolean targetSlotsFilled(String name, int n) {
         CardInfo info = CardRepository.instance.findCard(name);
         Card c = info == null ? null : info.createCard();
         if (c == null) {
@@ -4810,11 +4813,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     for (String t : tg) {
                         queueCastTarget(p, t);
                     }
-                    if (!singleTargetFilled(cardName, tg.size())) {
-                        // Close an "up to N" slot the scenario left short,
-                        // or a later slot (Rhino's Rampage's reflexive
-                        // trigger). A skip after the one multi-target slot
-                        // is filled is rejected (Pull Through the Weft).
+                    if (!targetSlotsFilled(cardName, tg.size())) {
+                        // Close an "up to N" slot the scenario left short.
+                        // A skip once every slot is filled is rejected (Pull
+                        // Through the Weft, Rabid Bite).
                         addTarget(p, TestPlayer.TARGET_SKIP);
                     }
                     castSpell(turn, phase, p, card);
