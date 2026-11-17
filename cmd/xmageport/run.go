@@ -62,11 +62,7 @@ var verbose bool
 // point in XMage-fixture mode), so the log-only replay verdict is known too:
 // a scenario whose replay differs from its live game cannot be committed.
 func runOne(reg *cards.Registry, sc *portScenario) (fails, transcript []string, replayDiff string, err error) {
-	raw, err := json.Marshal(scenarioBody(sc))
-	if err != nil {
-		return nil, nil, "", err
-	}
-	res, err := rules.RunOracleAuditScenarioJSON(reg, raw, true)
+	res, raw, err := execScenario(reg, sc)
 	if err != nil {
 		return nil, nil, "", err
 	}
@@ -76,6 +72,20 @@ func runOne(reg *cards.Registry, sc *portScenario) (fails, transcript []string, 
 		fmt.Println(strings.Join(res.Fails, "\n"))
 	}
 	return res.Fails, res.Transcript, res.ReplayDiff, nil
+}
+
+// execScenario runs sc without printing; probes use it so -v shows only the
+// scenario's own runs.
+func execScenario(reg *cards.Registry, sc *portScenario) (*rules.OracleAuditResult, []byte, error) {
+	raw, err := json.Marshal(scenarioBody(sc))
+	if err != nil {
+		return nil, nil, err
+	}
+	res, err := rules.RunOracleAuditScenarioJSON(reg, raw, true)
+	if err != nil {
+		return nil, nil, err
+	}
+	return &res, raw, nil
 }
 
 var reFallback = regexp.MustCompile(`\[\w+ fallback\] p\d (\w+) ->`)
@@ -255,6 +265,7 @@ func runResult(reg *cards.Registry, r *result) {
 			break
 		}
 		fails = f
+		asks := fallbackAsks(tr)
 		progress := false
 		bump := func(g *group) bool {
 			if g.at+g.offset+1 < len(sc.Steps) {
@@ -285,6 +296,14 @@ func runResult(reg *cards.Registry, r *result) {
 			}
 			if len(at) == 0 {
 				continue
+			}
+			if len(boolLeftovers(line)) > 0 {
+				// an XMage boolean gorge asks as a two-option choose or
+				// modes: place it as that ask's option, not as "yes"/"no"
+				if mapBoolLeftover(reg, cur, at, n, asks[n]) {
+					progress = true
+					continue
+				}
 			}
 			if cm := reCountMismatch.FindStringSubmatch(line); cm != nil {
 				want, _ := strconv.Atoi(cm[1])
