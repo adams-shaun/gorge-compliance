@@ -386,13 +386,57 @@ func TestPlaceCarriesPT(t *testing.T) {
 // enter with an additional +1/+1 counter" is re-run by the placement on every
 // permanent placed after her, so a carried +1/+1 counter would be doubled
 // (live 3/3, placed 4/4). The gate refuses her presence, whatever else is
-// placed.
+// placed. A plain permanent and a non-counter entry replacement stay
+// placeable, so the detector is not over-broad.
 func TestPlaceRefusesEntryCounterOther(t *testing.T) {
 	reg, pairs := fdnPairs(t, 1)
 	e, at := expressibleCut(t, reg, pairs[0], 100)
 	plantBattlefieldCard(t, reg, e, "Deanna Troi, Psychic Counsel", func(o *state.Object) bool { return !o.Tapped })
 	if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonEntryCounterOther) {
 		t.Fatalf("reasons %v, want %s", r, reasonEntryCounterOther)
+	}
+
+	// A vanilla permanent carries no such replacement.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	plantBattlefieldCard(t, reg, e, "Grizzly Bears", func(*state.Object) bool { return true })
+	if r := capture(e, at, true).Reasons; slices.Contains(r, reasonEntryCounterOther) {
+		t.Fatalf("plain permanent: reasons %v, want no %s", r, reasonEntryCounterOther)
+	}
+
+	// An entry replacement that puts no counters (Karn's Sylex enters tapped)
+	// must not trip the counter detector.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	victim := plantBattlefieldCard(t, reg, e, "Karn's Sylex", func(o *state.Object) bool {
+		return o.Owner == e.G.Active && o.Owner == o.Controller
+	})
+	victim.Tapped = false
+	if r := capture(e, at, true).Reasons; slices.Contains(r, reasonEntryCounterOther) {
+		t.Fatalf("non-counter entry replacement: reasons %v, want no %s", r, reasonEntryCounterOther)
+	}
+}
+
+// TestPlaceRefusesEntryCounterSelf: Dust Animus's K:ETBReplacement body
+// (ConditionCheckSVar$ X, five or more untapped lands) is a self-targeted
+// entry-counter replacement. The live permanent may have entered with no
+// counters while the placement re-runs the body against the checkpoint's
+// board and grants two +1/+1 + a lifelink counter (4/5 placed versus 2/3
+// live). setupCounters cannot restate a conditional grant, so the gate must
+// refuse it with either carried-counter state.
+func TestPlaceRefusesEntryCounterSelf(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	for _, counters := range []struct {
+		name string
+		cs   []state.Counter
+	}{
+		{"entered before the condition held", nil},
+		{"entered with the grant", []state.Counter{{Kind: "P1P1", N: 2}, {Kind: "Lifelink", N: 1}}},
+	} {
+		e, at := expressibleCut(t, reg, pairs[0], 100)
+		o := plantBattlefieldCard(t, reg, e, "Dust Animus", func(o *state.Object) bool { return !o.Tapped })
+		o.Counters = counters.cs
+		if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonCountersEntry) {
+			t.Errorf("%s: reasons %v, want %s", counters.name, r, reasonCountersEntry)
+		}
 	}
 }
 
@@ -406,5 +450,78 @@ func TestPlaceRefusesPTTurnHistory(t *testing.T) {
 	plantBattlefieldCard(t, reg, e, "Duelist of the Mind", func(o *state.Object) bool { return !o.Tapped })
 	if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonPTTurnHistory) {
 		t.Fatalf("reasons %v, want %s", r, reasonPTTurnHistory)
+	}
+
+	// A CheckSVar gate on the P/T static is the same history: Ulna Alley
+	// Shopkeep gets +2/+0 only while its controller gained life this turn.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	plantBattlefieldCard(t, reg, e, "Ulna Alley Shopkeep", func(o *state.Object) bool { return !o.Tapped })
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonPTTurnHistory) {
+		t.Fatalf("gated static: reasons %v, want %s", r, reasonPTTurnHistory)
+	}
+
+	// Rampant Frogantua counts players who have lost the GAME, not this
+	// turn's history: PlayerCountHasLost must not trip the marker.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	plantBattlefieldCard(t, reg, e, "Rampant Frogantua", func(o *state.Object) bool { return !o.Tapped })
+	if r := capture(e, at, true).Reasons; slices.Contains(r, reasonPTTurnHistory) {
+		t.Fatalf("game-long lost count: reasons %v, want no %s", r, reasonPTTurnHistory)
+	}
+
+	// Glorious Anthem is a printed static pump with no Count$ history.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	plantBattlefieldCard(t, reg, e, "Glorious Anthem", func(*state.Object) bool { return true })
+	if r := capture(e, at, true).Reasons; slices.Contains(r, reasonPTTurnHistory) {
+		t.Fatalf("printed static pump: reasons %v, want no %s", r, reasonPTTurnHistory)
+	}
+}
+
+// TestGateRefusesSetupCounterReplacement: the counters field is placed as a
+// CounterChange, so a placed permanent's AddCounter replacement (Michelangelo,
+// Weirdness to 11: "that many plus one") re-runs on it and the permanent gets
+// one more counter than the cut (2 carried -> 3 placed, 3/3 -> 4/4). The gate
+// must refuse the counter placement, and a counter-carrier with no replacement
+// must stay placeable.
+func TestGateRefusesSetupCounterReplacement(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	o := plantBattlefieldCard(t, reg, e, "Michelangelo, Weirdness to 11", func(o *state.Object) bool { return !o.Tapped })
+	o.Counters = []state.Counter{{Kind: "P1P1", N: 2}}
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonSetupCounterRepl) {
+		t.Fatalf("reasons %v, want %s", r, reasonSetupCounterRepl)
+	}
+
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	plain := plantBattlefieldCard(t, reg, e, "Grizzly Bears", func(*state.Object) bool { return true })
+	plain.Counters = []state.Counter{{Kind: "P1P1", N: 2}}
+	if r := capture(e, at, true).Reasons; slices.Contains(r, reasonSetupCounterRepl) {
+		t.Fatalf("plain counter carrier: reasons %v, want no %s", r, reasonSetupCounterRepl)
+	}
+}
+
+// TestGateRefusesStaticEffectGrant: a StaticEffect$ rider registers an
+// undurationed source-scoped continuous effect (Enduring Innocence returns as
+// a non-creature enchantment). The placement starts from the card face and
+// would recreate the printed 2/1 creature, so the whole registered-effect
+// registry is refused, not just the duration-flagged subset. A printed static
+// is not in that registry and stays placeable.
+func TestGateRefusesStaticEffectGrant(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	o := plantBattlefieldCard(t, reg, e, "Enduring Innocence", func(o *state.Object) bool { return !o.Tapped })
+	e.AddContinuous(state.ContinuousEffect{
+		Source: o.ID, Affects: "Card.Self", Controller: o.Controller,
+		Layer: state.LType, AddTypes: []string{"Enchantment"}, RemoveCardTypes: true,
+	})
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonContinuous) {
+		t.Fatalf("registered type change: reasons %v, want %s", r, reasonContinuous)
+	}
+
+	// The same card without the registered rider is a printed static and
+	// stays placeable.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	plantBattlefieldCard(t, reg, e, "Enduring Innocence", func(o *state.Object) bool { return !o.Tapped })
+	if r := capture(e, at, true).Reasons; slices.Contains(r, reasonContinuous) {
+		t.Fatalf("printed face: reasons %v, want no %s", r, reasonContinuous)
 	}
 }
