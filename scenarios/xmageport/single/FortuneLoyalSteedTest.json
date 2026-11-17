@@ -179,7 +179,7 @@
     }
    ],
    "xmage": "FortuneLoyalSteedTest#test_Saddling_FortuneDies",
-   "known_bug": "XP[fortune-endcombat-saddler-blink-dies]: Fortune's attack-created EndCombat delayed trigger poses no ChooseCard once Fortune has died in combat (the Creature.SaddledThisTurn candidate set is empty), so the saddler is never blinked (p0 life 20, want 24), most likely pairedWithSourceThisTurn in effects/filter.go keyed to Fortune's object id (not isolated from the delayed trigger being dropped with its source), CR 603.7, verified at gorge 981b98963b."
+   "known_bug": "XP[fortune-endcombat-saddler-blink-dies]: Fortune's attack-created EndCombat delayed trigger poses no ChooseCard once Fortune has died in combat (p0 life 20, want 24): the MoveZone fold prunes the dead Mount's id from every creature's CrewedVehicles, so Creature.SaddledThisTurn finds no candidate (events.Apply's crew/saddle pairing sweep), CR 702.171, 603.7, verified at gorge 981b98963b."
   }
  ]
 }

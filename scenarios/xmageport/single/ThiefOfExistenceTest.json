@@ -107,7 +107,7 @@
     }
    ],
    "xmage": "ThiefOfExistenceTest#test_Target_AddedTrigger",
-   "known_bug": "XP[thief-granted-leaves-trigger-missing]: after Thief of Existence's cast trigger exiles a permanent, the Animate Triggers$ \"when this creature leaves the battlefield, target opponent draws a card\" is never granted (sacrificed to Goblin Bombardment, p1 hand 0, want 1), kgen animate/latentTrigger grant under ConditionPresent$ Card (not isolated further), CR 611.2a, verified at gorge 981b98963b."
+   "known_bug": "XP[thief-granted-leaves-trigger-missing]: after Thief of Existence's cast trigger exiles a permanent, the Animate Triggers$ \"when this creature leaves the battlefield, target opponent draws a card\" is never granted (sacrificed to Goblin Bombardment, p1 hand 0, want 1): the Duration$ Permanent trigger grant is swept on the animated object's own departure Move before the departure trigger is matched, so the granted leave trigger never fires (rules.effectMoveSweep over effects.registerAnimateEffects' lifetime), CR 611.2a, 603.2, verified at gorge 981b98963b."
   }
  ]
 }

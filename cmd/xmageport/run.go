@@ -400,12 +400,30 @@ func reorderAnswerForSeat(g *group, i, seat int) bool {
 func targetAskKind(asks []fallbackAsk) (string, bool) {
 	for _, k := range []string{"choose", "arrange", "modes"} {
 		for _, a := range asks {
-			if a.Kind == k && !a.Pay {
+			if a.Kind == k {
 				return k, true
 			}
 		}
 	}
 	return "", false
+}
+
+// paymentChooseOnly reports whether every choose/arrange/modes ask of a step
+// is a mana-payment choose ("Pay U": gorge's cost plumbing). An XMage
+// addTarget can only have been meant for a card choice, so re-homing it onto
+// such a choose is the unused-target-payment-choose shape, not a fix.
+func paymentChooseOnly(asks []fallbackAsk) bool {
+	seen := false
+	for _, a := range asks {
+		if a.Kind != "choose" && a.Kind != "arrange" && a.Kind != "modes" {
+			continue
+		}
+		seen = true
+		if !a.Pay {
+			return false
+		}
+	}
+	return seen
 }
 
 // mergeUnconsumedCardPick folds a leftover card choice into the earlier
@@ -520,19 +538,47 @@ func convertUnusedTargetsToAnswers(g *group, line, kind string) bool {
 func runResult(reg *cards.Registry, r *result) {
 	orig, sc0 := cloneGroups(r.Groups), r.Scenario
 	runResultMask(reg, r, 0)
-	if r.Status != "fail-expect" || r.nflips == 0 || r.nflips > 3 {
-		return
-	}
-	for mask := uint(1); mask < 1<<uint(r.nflips); mask++ {
-		r2 := *r
-		r2.Groups, r2.Scenario, r2.Dropped, r2.nflips = cloneGroups(orig), sc0, 0, 0
-		runResultMask(reg, &r2, mask)
-		if r2.Status == "pass" {
-			*r = r2
-			r.Scenario.Why += " A boolean XMage answers is the affirmative option of a two-option gorge ask that is listed second."
-			return
+	if r.Status == "fail-expect" && r.nflips > 0 && r.nflips <= 3 {
+		for mask := uint(1); mask < 1<<uint(r.nflips); mask++ {
+			r2 := *r
+			r2.Groups, r2.Scenario, r2.Dropped, r2.nflips = cloneGroups(orig), sc0, 0, 0
+			runResultMask(reg, &r2, mask)
+			if r2.Status == "pass" {
+				*r = r2
+				r.Scenario.Why += " A boolean XMage answers is the affirmative option of a two-option gorge ask that is listed second."
+				return
+			}
+			if shapeRefusalApplies(&r2) {
+				*r = r2
+				refuseShape(r)
+				return
+			}
 		}
 	}
+	if shapeRefusalApplies(r) {
+		refuseShape(r)
+	}
+}
+
+// shapeRefusalApplies reports whether r's failing run is the translator shape
+// r.shape names, and nothing harder. A replay diff or a harness failure is
+// the audit gate's own verdict and outranks a fail-expect row, so a shape can
+// never hide it; a row triaged as a known gorge bug keeps its fail-expect.
+func shapeRefusalApplies(r *result) bool {
+	if r.shape == nil || r.Status != "fail-expect" {
+		return false
+	}
+	if r.Scenario != nil && knownBugs[r.Scenario.XMage] != "" {
+		return false
+	}
+	return r.ReplayDiff == "" && !anyHarness(r.Fails)
+}
+
+// refuseShape converts a failing run into the shape refusal r.shape names and
+// drops the scenario, so writeCommit does not write it.
+func refuseShape(r *result) {
+	r.Code, r.Detail, r.Status = r.shape.Code, r.shape.Detail, "refused"
+	r.Scenario = nil
 }
 
 func cloneGroups(gs []*group) []*group {
@@ -682,6 +728,9 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 				// moved on to the next step.
 				if strings.Contains(line, "unused target(s)") {
 					if kind, ok := targetAskKind(asks[n]); ok {
+						if paymentChooseOnly(asks[n]) {
+							r.shape = refuse("unused-target-payment-choose", "an XMage addTarget can only answer a card choice; the step poses only a mana-payment choose")
+						}
 						for _, g := range at {
 							if convertUnusedTargetsToAnswers(g, line, kind) {
 								progress = true
@@ -773,11 +822,6 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 	r.nflips = flips.seq
 	if r.Dropped > 0 {
 		r.Scenario.Why += fmt.Sprintf(" %d XMage choice(s) gorge never asks were dropped.", r.Dropped)
-	}
-	if len(fails) > 0 && r.shape != nil && knownBugs[sc.XMage] == "" {
-		r.Code, r.Detail, r.Status = r.shape.Code, r.shape.Detail, "refused"
-		r.Scenario = nil
-		return
 	}
 	if len(fails) > 0 && r.Dropped > 0 && r.Strict && knownBugs[sc.XMage] == "" {
 		// The test states choices gorge never asks where XMage does, or

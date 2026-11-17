@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"regexp"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -12,6 +13,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/effects"
+	"github.com/adams-shaun/gorge/engine/state"
 )
 
 func active(turn int) int { return (turn - 1) % 2 }
@@ -1498,10 +1500,20 @@ func (em *emitter) hasKeywordPrefix(name, prefix string) bool {
 	if !ok {
 		return false
 	}
+	var faces []*cards.Face
 	for _, f := range c.Faces {
-		if f == nil {
-			continue
+		if f != nil && sameName(f.Name, name) {
+			faces = append(faces, f)
 		}
+	}
+	if len(faces) == 0 {
+		for _, f := range c.Faces {
+			if f != nil {
+				faces = append(faces, f)
+			}
+		}
+	}
+	for _, f := range faces {
 		for _, k := range f.Keywords {
 			if strings.HasPrefix(k, prefix) {
 				return true
@@ -1514,43 +1526,206 @@ func (em *emitter) hasKeywordPrefix(name, prefix string) bool {
 // optionalSacrificeMode is the gorge cast mode of the spell's optional
 // sacrifice additional cost: "bargained" for Bargain, "casualty" for
 // Casualty N, or "" (engine/rules optional_sacrifice.go's two rows). The
-// keyword is the card's own or one a setup permanent grants (Anhelo, the
-// Painter's AddKeyword$ Casualty:2).
-func (em *emitter) optionalSacrificeMode(name string) string {
+// keyword is the card's own or one a setup permanent its controller controls
+// grants to THIS spell (Anhelo, the Painter's AddKeyword$ Casualty:2, which
+// matches only the controller's instant and sorcery spells on the stack).
+func (em *emitter) optionalSacrificeMode(a *action) string {
 	for _, m := range [...]struct{ kw, mode string }{{"Bargain", "bargained"}, {"Casualty", "casualty"}} {
-		if em.hasKeywordPrefix(name, m.kw) || em.t.setupGrantsKeyword(m.kw) {
+		if em.hasKeywordPrefix(a.card, m.kw) || em.t.setupGrantsKeyword(m.kw, a) {
 			return m.mode
 		}
 	}
 	return ""
 }
 
-// setupGrantsKeyword reports whether a setup battlefield card has a static
-// that adds a keyword starting with prefix.
-func (t *translator) setupGrantsKeyword(prefix string) bool {
-	for p := 0; p < 2; p++ {
-		for _, ac := range t.setup[p] {
-			if ac.zone != "battlefield" {
+// setupGrantsKeyword reports whether a setup battlefield permanent the caster
+// controls has a static that adds a keyword starting with prefix to this
+// cast. It honours the static's own Affected$/AffectedZone$ scope and its
+// CheckSVar$ gate, so a grant aimed at another card type, another controller,
+// the battlefield instead of the stack, or after its once-per-turn use does
+// not turn an unrelated setChoice(true) into a cast mode.
+func (t *translator) setupGrantsKeyword(prefix string, a *action) bool {
+	castFace := t.castFace(a.card)
+	if castFace == nil {
+		return false
+	}
+	for _, ac := range t.setup[a.seat] {
+		if ac.zone != "battlefield" {
+			continue
+		}
+		c, ok := t.lookup(ac.name)
+		if !ok {
+			continue
+		}
+		for _, f := range c.Faces {
+			if f == nil || !sameName(f.Name, ac.name) {
 				continue
 			}
-			c, ok := t.lookup(ac.name)
-			if !ok {
-				continue
-			}
-			for _, f := range c.Faces {
-				if f == nil {
+			for i := range f.Statics {
+				st := &f.Statics[i]
+				if st.Mode != "Continuous" || !strings.HasPrefix(st.Params["AddKeyword"], prefix) {
 					continue
 				}
-				for i := range f.Statics {
-					st := &f.Statics[i]
-					if st.Mode == "Continuous" && strings.HasPrefix(st.Params["AddKeyword"], prefix) {
-						return true
-					}
+				if !t.affectedZoneStack(st.Params["AffectedZone"]) {
+					continue
 				}
+				if !affectedMatchesFace(castFace, st.Params["Affected"]) {
+					continue
+				}
+				if !t.staticGateHolds(f, st, a) {
+					continue
+				}
+				return true
 			}
 		}
 	}
 	return false
+}
+
+// castFace returns the face of name a cast names: the matching front face,
+// or the first face for a one-face card. A face that does not match the cast
+// name is never inspected, so a keyword on an MDFC's other face cannot leak
+// into the cast.
+func (t *translator) castFace(name string) *cards.Face {
+	c, ok := t.lookup(name)
+	if !ok {
+		return nil
+	}
+	for _, f := range c.Faces {
+		if f != nil && sameName(f.Name, name) {
+			return f
+		}
+	}
+	for _, f := range c.Faces {
+		if f != nil {
+			return f
+		}
+	}
+	return nil
+}
+
+// affectedZoneStack reports whether an AffectedZone$ value admits the stack.
+// An absent value is the battlefield default, so it never reaches a spell.
+func (t *translator) affectedZoneStack(zone string) bool {
+	zones, all, ok := effects.ParseZones(zone)
+	if !ok || zone == "" {
+		return false
+	}
+	if all {
+		return true
+	}
+	return slices.Contains(zones, state.ZStack)
+}
+
+// affectedMatchesFace matches one Affected$ alternative against the cast
+// face. It understands the type words and controller/cast qualifiers the
+// corpus uses on keyword grants; an unknown word fails closed rather than
+// granting to every spell. "Card.Artifact+nonLegendary+YouCtrl" is a card
+// that is an artifact, not legendary, controlled by the caster, so a word can
+// be a type wherever it appears.
+func affectedMatchesFace(f *cards.Face, affected string) bool {
+	for _, alt := range strings.Split(affected, ",") {
+		alt = strings.TrimSpace(alt)
+		if alt == "" {
+			continue
+		}
+		ok := true
+		for _, word := range strings.FieldsFunc(alt, func(r rune) bool { return r == '.' || r == '+' }) {
+			word = strings.TrimSpace(word)
+			if word == "" {
+				continue
+			}
+			if isAffectedTypeWord(word) {
+				if !affectedTypeWord(word, f) {
+					ok = false
+				}
+				continue
+			}
+			switch word {
+			case "YouCtrl", "wasCastByYou", "You", "CastSa":
+				// The grant's controller is the caster, so every "you"
+				// qualifier holds for this cast.
+			case "nonLegendary":
+				if f.IsLegendary() {
+					ok = false
+				}
+			default:
+				ok = false
+			}
+		}
+		if ok {
+			return true
+		}
+	}
+	return false
+}
+
+// isAffectedTypeWord reports whether word is a card-type selector an Affected$
+// value may name.
+func isAffectedTypeWord(word string) bool {
+	switch strings.ToLower(word) {
+	case "card", "instant", "sorcery", "creature", "artifact", "enchantment", "land", "planeswalker", "battle":
+		return true
+	}
+	return false
+}
+
+// affectedTypeWord matches one type word of an Affected$ alternative.
+func affectedTypeWord(word string, f *cards.Face) bool {
+	switch strings.ToLower(word) {
+	case "card":
+		return true
+	case "instant":
+		return f.IsInstant()
+	case "sorcery":
+		return f.IsSorcery()
+	case "creature":
+		return f.IsCreature()
+	case "artifact":
+		return f.IsArtifact()
+	case "enchantment":
+		return f.IsEnchantment()
+	case "land":
+		return f.IsLand()
+	case "planeswalker":
+		return f.IsPlaneswalker()
+	case "battle":
+		return f.IsBattle()
+	default:
+		return false
+	}
+}
+
+// staticGateHolds evaluates the once-per-turn CheckSVar$ gate a grant static
+// carries. Only the turn-scoped cast count the corpus uses is understood; any
+// other gate fails closed, so the translator cannot grant a keyword the game
+// might withhold.
+func (t *translator) staticGateHolds(f *cards.Face, st *cards.Static, a *action) bool {
+	sv := st.Params["CheckSVar"]
+	if sv == "" {
+		return true
+	}
+	if st.Params["SVarCompare"] != "EQ0" {
+		return false
+	}
+	body, ok := f.SVars[sv]
+	if !ok {
+		return false
+	}
+	const pfx = "Count$ThisTurnCast_"
+	if !strings.HasPrefix(body, pfx) {
+		return false
+	}
+	filter := strings.TrimPrefix(body, pfx)
+	for _, prev := range t.actions {
+		if prev.turn != a.turn || prev.seat != a.seat || prev.src >= a.src || (prev.kind != "cast" && prev.kind != "play") {
+			continue
+		}
+		if pf := t.castFace(prev.card); pf != nil && affectedMatchesFace(pf, filter) {
+			return false
+		}
+	}
+	return true
 }
 
 // activatedAltCost names a setup battlefield card whose static lets a player
@@ -1773,7 +1948,7 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			// cast this spell") with the first setChoice; gorge offers it as
 			// the "bargained" / "casualty" cast mode and then asks which
 			// permanent to sacrifice, which is the choice after the boolean.
-			if mode := em.optionalSacrificeMode(a.card); mode != "" && len(a.choices) > 0 && !a.choices[0].target &&
+			if mode := em.optionalSacrificeMode(a); mode != "" && len(a.choices) > 0 && !a.choices[0].target &&
 				a.choices[0].x < 0 && a.choices[0].mode == 0 &&
 				(a.choices[0].pick == "yes" || a.choices[0].pick == "no") {
 				if a.choices[0].pick == "yes" {

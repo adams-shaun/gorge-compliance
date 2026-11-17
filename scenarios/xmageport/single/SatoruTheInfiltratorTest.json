@@ -679,7 +679,7 @@
     }
    ],
    "xmage": "SatoruTheInfiltratorTest#test_CopySatoruOnStack",
-   "known_bug": "XP[satoru-self-token-copy-excluded]: Satoru's ChangesZoneAll ValidCards$ requires !token, so the token copy Double Major makes never draws although Oracle's \"Satoru and/or one or more other nontoken creatures\" lets Satoru's own entry count (hand 0, want 1); a script-versus-Oracle divergence in the corpus line, applied by the trigger ValidCards$ match in engine/rules (not isolated further), CR 603.2, verified at gorge 981b98963b."
+   "known_bug": "XP[satoru-self-token-copy-excluded]: Satoru's ChangesZoneAll ValidCards$ Creature.YouCtrl+!token+!wasCast excludes every token, including the token copy Double Major makes of Satoru, although Oracle's \"Satoru and/or one or more other nontoken creatures\" counts Satoru's own entry (the card script, applied by the trigger ValidCards$ match), CR 603.2, verified at gorge 981b98963b."
   }
  ]
 }

@@ -10,18 +10,23 @@ import (
 // WHICH permanents paid, and the translator cannot state that, so it refuses
 // them rather than play a different game:
 //
-//   - mana-spent-by-source-type: a card counts or reacts to mana "from a
-//     Treasure" / "from a Desert" spent on a spell (Rain of Riches,
-//     Cataclysmic Prospecting). Gorge tags pooled mana with its source only
-//     when the source's own mana ability is activated.
-//   - tapped-target-mana-source: a card targets a tapped permanent and the
-//     test aims it at a mana source the other seat pays with (The Spear of
-//     Bashenga on Mind Stone, "tapped to cast Hireling"). XMage taps the
-//     source to pay; the pool-seeded cast leaves it untapped, so the target
-//     is illegal.
+//   - mana-spent-by-source-type: a card that is live in the test counts or
+//     reacts to mana "from a Treasure" / "from a Desert" spent on a spell
+//     (Rain of Riches, Cataclysmic Prospecting). Gorge tags pooled mana with
+//     its source only when the source's own mana ability is activated.
+//   - tapped-target-mana-source: a battlefield permanent's "target tapped
+//     nonland permanent" ability is aimed at a mana source the other seat
+//     pays with (The Spear of Bashenga on Mind Stone, "tapped to cast
+//     Hireling"). XMage taps the source to pay; the pool-seeded cast leaves
+//     it untapped, so the target is illegal.
+//
+// Both scans are anchored: the mana-source text only arms when that card is
+// on the battlefield or is itself cast in the test, and the tapped-target
+// text must be the exact "target tapped nonland permanent" ability, so an
+// unrelated "target tapped creature" card in hand cannot refuse the row.
 var (
-	reManaFromSourceSpent = regexp.MustCompile(`(?i)mana from an? [a-z]+ (?:was )?spent`)
-	reTargetTapped        = regexp.MustCompile(`(?i)target tapped`)
+	reManaFromSourceSpent     = regexp.MustCompile(`(?i)mana from an? [a-z]+ (?:was )?spent`)
+	reTargetTappedNonlandPerm = regexp.MustCompile(`(?i)target tapped nonland permanent`)
 )
 
 // manaSourceRefusal reports the refusal for one of those two shapes, or nil.
@@ -38,16 +43,33 @@ func (t *translator) manaSourceRefusal() *refusal {
 		}
 		return false
 	}
-	tappedTargets := false
-	for p := 0; p < 2; p++ {
-		for _, ac := range t.setup[p] {
-			if oracleHas(ac.name, reManaFromSourceSpent) {
-				return refuse("mana-spent-by-source-type", "%s reads the source of the mana spent", ac.name)
-			}
-			tappedTargets = tappedTargets || oracleHas(ac.name, reTargetTapped)
+	hasCast := false
+	for _, a := range t.actions {
+		if a.kind == "cast" {
+			hasCast = true
 		}
 	}
-	if !tappedTargets {
+	var tappedSeats [2]bool
+	for p := 0; p < 2; p++ {
+		for _, ac := range t.setup[p] {
+			if !oracleHas(ac.name, reManaFromSourceSpent) {
+				continue
+			}
+			// A card that counts the mana spent is live only on the
+			// battlefield (Rain of Riches) or as the spell being cast
+			// (Cataclysmic Prospecting). A never-cast card in hand or a
+			// graveyard does not arm the shape.
+			if hasCast && (ac.zone == "battlefield" || t.castsCard(p, ac.name)) {
+				return refuse("mana-spent-by-source-type", "%s reads the source of the mana spent", ac.name)
+			}
+		}
+		for _, ac := range t.setup[p] {
+			if ac.zone == "battlefield" && oracleHas(ac.name, reTargetTappedNonlandPerm) {
+				tappedSeats[p] = true
+			}
+		}
+	}
+	if !tappedSeats[0] && !tappedSeats[1] {
 		return nil
 	}
 	casts := map[int]bool{}
@@ -63,7 +85,7 @@ func (t *translator) manaSourceRefusal() *refusal {
 		}
 		for p := 0; p < 2; p++ {
 			for _, ac := range t.setup[p] {
-				if ac.zone != "battlefield" || ac.tapped || !sameName(ac.name, name) || !casts[p] {
+				if ac.zone != "battlefield" || ac.tapped || !sameName(ac.name, name) || tappedSeats[p] || !casts[p] {
 					continue
 				}
 				if c, ok := t.lookup(name); ok {
@@ -77,4 +99,14 @@ func (t *translator) manaSourceRefusal() *refusal {
 		}
 	}
 	return nil
+}
+
+// castsCard reports whether the test casts or plays name for seat p.
+func (t *translator) castsCard(p int, name string) bool {
+	for _, a := range t.actions {
+		if a.seat == p && (a.kind == "cast" || a.kind == "play") && sameName(a.card, name) {
+			return true
+		}
+	}
+	return false
 }

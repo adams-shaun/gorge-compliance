@@ -154,7 +154,7 @@
     }
    ],
    "xmage": "PheliaExuberantShepherdTest#test_Simple_Owned",
-   "known_bug": "XP[phelia-imprint-counter-missing]: Phelia's end-step delayed return puts the exiled Memnite back under its owner's control but adds no +1/+1 counter to Phelia (2/2, want 3/3); the DBPutCounter ConditionDefined$ Imprinted reads Object.Imprinted, which the delayed ChangeZone Imprint$ return does not populate (not isolated further), effects conditionMet, CR 608.2c, verified at gorge 981b98963b."
+   "known_bug": "XP[phelia-imprint-counter-missing]: Phelia's end-step delayed return puts the exiled Memnite back under its owner's control but adds no +1/+1 counter (2/2, want 3/3): the delayed ChangeZone's Imprint$ True only records a card moved to exile, so the Exile-\u003eBattlefield return leaves Phelia's Imprinted list empty and the chained ConditionDefined$ Imprinted gate is false (effects.effChangeZone's Imprint gate), CR 608.2c, verified at gorge 981b98963b."
   },
   {
    "name": "test-killed-on-trigger",
