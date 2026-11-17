@@ -17,6 +17,7 @@ import mage.cards.p.PeterParker;
 import mage.cards.v.VincentValentine;
 import mage.constants.Zone;
 import mage.game.PutToBattlefieldInfo;
+import mage.player.ai.ComputerPlayer;
 import org.mage.test.player.TestPlayer;
 import sun.misc.Unsafe;
 
@@ -64,6 +65,26 @@ public final class ScenarioReplayBackFaceTest {
         throw new NoSuchFieldException(name);
     }
 
+    /** Gives every still-null Map/List/Set field of the driver an empty instance. */
+    private static void initCollections(ScenarioReplay driver) throws Exception {
+        for (Field f : ScenarioReplay.class.getDeclaredFields()) {
+            if (java.lang.reflect.Modifier.isStatic(f.getModifiers())) {
+                continue;
+            }
+            f.setAccessible(true);
+            if (f.get(driver) != null) {
+                continue;
+            }
+            if (f.getType() == Map.class) {
+                f.set(driver, new HashMap<>());
+            } else if (f.getType() == List.class) {
+                f.set(driver, new ArrayList<>());
+            } else if (f.getType() == java.util.Set.class) {
+                f.set(driver, new java.util.HashSet<>());
+            }
+        }
+    }
+
     private static Object call(ScenarioReplay driver, String name, Class<?>[] types, Object... args) throws Exception {
         Method method = ScenarioReplay.class.getDeclaredMethod(name, types);
         method.setAccessible(true);
@@ -85,14 +106,21 @@ public final class ScenarioReplayBackFaceTest {
         RecordingDriver driver = (RecordingDriver) unsafe.allocateInstance(RecordingDriver.class);
         TestPlayer p0 = (TestPlayer) unsafe.allocateInstance(TestPlayer.class);
         TestPlayer p1 = (TestPlayer) unsafe.allocateInstance(TestPlayer.class);
+        // add() reads p.getId(), which TestPlayer forwards to its ComputerPlayer.
+        for (TestPlayer p : new TestPlayer[]{p0, p1}) {
+            ComputerPlayer inner = (ComputerPlayer) unsafe.allocateInstance(ComputerPlayer.class);
+            set(inner, "playerId", UUID.randomUUID());
+            set(p, "computerPlayer", inner);
+        }
         set(driver, "playerA", p0);
         set(driver, "playerB", p1);
         driver.placements = new HashMap<>();
         Map<UUID, String> setupNames = new HashMap<>();
         set(driver, "setupNames", setupNames);
-        set(driver, "backFaceNames", new HashMap<String, String>());
-        set(driver, "buildCounts", new HashMap<String, Integer>());
-        set(driver, "refAlias", new HashMap<String, String>());
+        // allocateInstance skips field initialisers too, so give every
+        // collection field of the driver an empty instance (a new field the
+        // helpers touch cannot reintroduce the NPE).
+        initCollections(driver);
         set(driver, "gorgeName", "");
         set(driver, "xmageName", "");
 
