@@ -48,6 +48,69 @@
      "stack_size": 0
     }
    ]
+  },
+  {
+   "name": "a-melded-permanent-is-exiled-as-both-cards",
+   "cr": [
+    "713.8c"
+   ],
+   "why": "The Chittering Host is one permanent made of Midnight Scavengers and Graf Rats. When it dies, Mimic Vat asks a single yes-or-no question about that permanent, and answering yes exiles both of its component cards.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Mimic Vat",
+      "Midnight Scavengers",
+      "Graf Rats"
+     ],
+     "hand": [
+      "Doom Blade"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "begin-combat",
+     "active": "p0"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Doom Blade",
+     "mana": "CB",
+     "targets": [
+      "p0:Chittering Host"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Midnight Scavengers",
+     "zone": "exile"
+    },
+    {
+     "card": "p0:Graf Rats",
+     "zone": "exile"
+    },
+    {
+     "card": "p0:Mimic Vat",
+     "zone": "battlefield"
+    }
+   ]
   }
  ]
 }

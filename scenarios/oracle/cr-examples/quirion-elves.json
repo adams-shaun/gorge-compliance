@@ -1,0 +1,102 @@
+{
+ "card": "Quirion Elves",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "fb1fd7b1d0c6",
+ "scenarios": [
+  {
+   "name": "a-clone-copies-the-copy-ability-the-shapeshifter-gained",
+   "cr": [
+    "707.9a"
+   ],
+   "why": "Unstable Shapeshifter copies the Elves and keeps the trigger that made it a copy, so those two things together are its copiable values. Clone then copies the Shapeshifter, which means the Clone also gets that trigger and becomes a copy of a later creature.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Unstable Shapeshifter"
+     ],
+     "hand": [
+      "Quirion Elves",
+      "Clone",
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Quirion Elves",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "green"
+       ]
+      }
+     ],
+     "expect": [
+      {
+       "card": "p0:Unstable Shapeshifter",
+       "zone": "battlefield",
+       "pt": "1/1",
+       "types": [
+        "Elf"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Clone",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p0:Unstable Shapeshifter"
+       ]
+      }
+     ],
+     "expect": [
+      {
+       "card": "p0:Clone",
+       "zone": "battlefield",
+       "pt": "1/1",
+       "types": [
+        "Elf"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Grizzly Bears",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Clone",
+       "zone": "battlefield",
+       "pt": "2/2",
+       "types": [
+        "Bear"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

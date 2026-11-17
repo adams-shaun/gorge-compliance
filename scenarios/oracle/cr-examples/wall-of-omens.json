@@ -1,0 +1,72 @@
+{
+ "card": "Wall of Omens",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e410d839d89f",
+ "scenarios": [
+  {
+   "name": "clone-copies-the-entry-trigger-and-draws",
+   "cr": [
+    "707.5"
+   ],
+   "why": "Clone copies the Wall's enters-the-battlefield trigger as well as its body, so the Clone's controller draws a card when it enters. Both the Wall and the Clone draw exactly once.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Wall of Omens",
+      "Clone"
+     ],
+     "library": [
+      "Forest",
+      "Forest",
+      "Forest",
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Wall of Omens",
+     "mana": "CW"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Clone",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Wall of Omens"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Clone",
+     "zone": "battlefield",
+     "pt": "0/4",
+     "keywords": [
+      "Defender"
+     ]
+    },
+    {
+     "hand_size": {
+      "p0": 2
+     }
+    }
+   ]
+  }
+ ]
+}
