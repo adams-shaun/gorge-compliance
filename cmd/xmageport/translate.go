@@ -170,6 +170,7 @@ type translator struct {
 	places        [2][]*placement
 	castRefs      [2]map[string][]string
 	allNames      map[string]bool // every string arg outside addCard (keeps lands)
+	nameUses      map[string]int  // how many times each such string arg appears (casts, activations)
 	needAll       bool            // an assert counts all permanents: keep lands
 	pendingChecks []pendingCheck
 	preChoices    []choice
@@ -510,6 +511,10 @@ func (t *translator) read() *refusal {
 		for _, a := range c.Args {
 			if a.kind == vStr && c.Name != "addCard" {
 				t.allNames[a.s] = true
+				if t.nameUses == nil {
+					t.nameUses = map[string]int{}
+				}
+				t.nameUses[a.s]++
 			}
 		}
 		if r := t.readCall(i, c); r != nil {

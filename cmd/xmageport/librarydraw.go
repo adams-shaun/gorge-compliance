@@ -30,8 +30,9 @@ var reUnboundedAmount = regexp.MustCompile(`^\s*(cards?\s+)?(for each|equal to|n
 var reRepeatable = regexp.MustCompile(`\b(whenever|each time|at the beginning of (each|your|every))\b`)
 
 // reDeepLibrary marks text that reads a library of a size the text does not
-// state: half of it, until a card is found, cascade, ripple.
-var reDeepLibrary = regexp.MustCompile(`\bcascade\b|\bripple\b|\bclash\b|\bhalf (of )?(your|their|that player's|its owner's) library|(until|each card|all cards|the rest) .*\blibrary\b|\blibrary\b.* until\b`)
+// state: half of it, until a card is found, cascade, ripple, a search (which
+// looks at every card), scry, surveil, explore.
+var reDeepLibrary = regexp.MustCompile(`\bsearch(es)?\b.*\blibrary\b|\bscry\b|\bsurveil\b|\bexplores?\b|\bcascade\b|\bripple\b|\bclash\b|\bhalf (of )?(your|their|that player's|its owner's) library|(until|each card|all cards|the rest) .*\blibrary\b|\blibrary\b.* until\b`)
 
 // unknownDraws stands for a draw whose size the text does not fix (X, "that
 // many", "for each"): larger than any library a test adds.
@@ -130,7 +131,7 @@ func (t *translator) drawStepsBy(p int) int {
 // put back: XMage then draws from an empty library, where the runner draws its
 // filler; the same goes for a mill or a look at the top that goes deeper than
 // the added cards. Both are read from the Oracle text of every card the test
-// names, counted once per card.
+// names, once per use of the card (copies in play or hand, casts, activations).
 func (t *translator) checkClearedLibraries() *refusal {
 	for p := 0; p < 2; p++ {
 		if !t.libCleared[p] {
@@ -143,19 +144,29 @@ func (t *translator) checkClearedLibraries() *refusal {
 			}
 		}
 		draws := t.drawStepsBy(p)
-		seen := map[string]bool{}
+		// uses[name] is how many times the test can play the card: at least
+		// one per copy it puts in play, hand or graveyard, and one per time
+		// it names the card in a cast or activation. A draw spell cast twice
+		// draws twice.
+		uses := map[string]int{}
 		for q := 0; q < 2; q++ {
 			for _, ac := range t.setup[q] {
-				if ac.zone != "library_top" && !seen[ac.name] {
-					seen[ac.name] = true
-					draws += t.oracleDraws(ac.name)
+				if ac.zone != "library_top" {
+					uses[ac.name] += ac.count
 				}
 			}
 		}
 		for name := range t.allNames {
-			if !seen[name] {
-				seen[name] = true
-				draws += t.oracleDraws(name)
+			if t.nameUses[name] > uses[name] {
+				uses[name] = t.nameUses[name]
+			}
+			if uses[name] < 1 {
+				uses[name] = 1
+			}
+		}
+		for name, n := range uses { // an integer sum: map order cannot reach the output
+			if d := t.oracleDraws(name); d > 0 {
+				draws += min(d*n, unknownDraws)
 			}
 		}
 		if draws > added {

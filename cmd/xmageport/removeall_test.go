@@ -103,6 +103,41 @@ func TestRemoveAllCardsTranslates(t *testing.T) {
         assertLife(playerA, 20);`); r == nil || r.Code != "library-size" {
 		t.Fatalf("Divination draws two from one card: refusal %v, want library-size", r)
 	}
+	// the same draw spell twice draws twice: 1 draw step + 2 + 2 > 3 added
+	if _, r := readWithCorpus(t, `removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.HAND, playerA, "Divination", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Divination");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Divination");
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertLife(playerA, 20);`); r == nil || r.Code != "library-size" {
+		t.Fatalf("Divination twice from three added cards: refusal %v, want library-size", r)
+	}
+	// ... and once, 1 draw step + 2 = 3 added, is covered
+	if _, r := readWithCorpus(t, `removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.HAND, playerA, "Divination");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Divination");
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertLife(playerA, 20);`); r != nil {
+		t.Fatalf("Divination once from three added cards: refused %v", r)
+	}
+	// a search looks at every card of the library: the runner's filler
+	// still holds Wastes, XMage's cleared library holds nothing
+	if _, r := readWithCorpus(t, `removeAllCardsFromLibrary(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerA, "Rampant Growth");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rampant Growth");
+        addTarget(playerA, "Forest");
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertLife(playerA, 20);`); r == nil || r.Code != "library-size" {
+		t.Fatalf("Rampant Growth searches the cleared library: refusal %v, want library-size", r)
+	}
 	// a mill past the added cards reads the runner's filler
 	if _, r := readWithCorpus(t, `removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, "Grizzly Bears", 3);
@@ -161,6 +196,7 @@ func TestOracleDrawDepths(t *testing.T) {
 		{"Collective Unconscious", unknownDraws},
 		{"Ripjaw Raptor", unknownDraws},
 		{"Chasm Skulker", 1},
+		{"Rampant Growth", unknownDraws},
 	} {
 		if got := tr.oracleDraws(tc.name); got != tc.want {
 			t.Errorf("oracleDraws(%q) = %d, want %d", tc.name, got, tc.want)
