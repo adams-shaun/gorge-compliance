@@ -89,6 +89,76 @@
      "zone": "battlefield"
     }
    ]
+  },
+  {
+   "name": "a-clone-copies-the-doppelgangers-copied-values",
+   "cr": [
+    "707.3"
+   ],
+   "why": "The Doppelganger is already a blue 2/2 Bear with its upkeep ability. Clone copies that permanent, so the Clone is also a blue 2/2 Bear and has the upkeep ability; copying the original green Bear would give a green 2/2 with no such ability.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Runeclaw Bear"
+     ],
+     "hand": [
+      "Vesuvan Doppelganger",
+      "Clone"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Vesuvan Doppelganger",
+     "mana": "CCCUU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p0:Runeclaw Bear"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Clone",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p0:Runeclaw Bear#2"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Clone",
+     "zone": "battlefield",
+     "pt": "2/2",
+     "colours": "U",
+     "types": [
+      "Bear"
+     ]
+    },
+    {
+     "card": "p0:Runeclaw Bear",
+     "colours": "G",
+     "pt": "2/2"
+    }
+   ]
   }
  ]
 }

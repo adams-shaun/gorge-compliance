@@ -1,0 +1,58 @@
+{
+ "card": "Skyshroud Behemoth",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "329636034b73",
+ "scenarios": [
+  {
+   "name": "clone-copies-the-entry-replacement-and-fading",
+   "cr": [
+    "707.5"
+   ],
+   "why": "Fading and the enters-tapped replacement are printed abilities, so they are copiable. A Clone copying the Behemoth arrives tapped with two fade counters on it, just as the Behemoth did.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Skyshroud Behemoth"
+     ],
+     "hand": [
+      "Clone"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Clone",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Skyshroud Behemoth"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Clone",
+     "zone": "battlefield",
+     "tapped": true,
+     "counters": {
+      "fade": 2
+     },
+     "pt": "10/10",
+     "types": [
+      "Beast"
+     ]
+    }
+   ]
+  }
+ ]
+}

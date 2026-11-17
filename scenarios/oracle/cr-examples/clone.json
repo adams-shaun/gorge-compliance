@@ -1,0 +1,277 @@
+{
+ "card": "Clone",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "f0ca42b2ea7c",
+ "scenarios": [
+  {
+   "name": "clone-of-a-face-down-morph-is-a-nameless-2-2",
+   "cr": [
+    "707.2"
+   ],
+   "why": "Clone takes the copiable values of the permanent while the Demon is face down, so it receives the anonymous 2/2 body a face-down card presents rather than the Demon's printed 6/6. The Clone is already face up and has no morph cost of its own, so the Demon's mana cost cannot turn it over.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Grinning Demon",
+      "Clone"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Grinning Demon",
+     "cast_mode": "morphed",
+     "mana": "CCC"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Clone",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Grinning Demon"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Clone",
+     "zone": "battlefield",
+     "pt": "2/2",
+     "colours": "",
+     "no_types": [
+      "Artifact",
+      "Enchantment",
+      "Land",
+      "Planeswalker",
+      "Battle"
+     ],
+     "no_keywords": [
+      "Flying",
+      "Trample",
+      "Menace",
+      "Lifelink"
+     ]
+    },
+    {
+     "card": "p0:Grinning Demon",
+     "zone": "battlefield",
+     "pt": "2/2",
+     "colours": ""
+    }
+   ]
+  },
+  {
+   "name": "a-clone-copying-the-automaton-makes-a-new-type-choice",
+   "cr": [
+    "707.6"
+   ],
+   "why": "The Automaton's chosen type was fixed when it entered and is not a copiable value. The Clone copying it chooses its own type, so choosing Bear makes the Grizzly Bears 3/3 while the original Automaton's Elf choice does nothing to them.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Adaptive Automaton",
+      "Clone"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Adaptive Automaton",
+     "mana": "CCC"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "Elf"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Clone",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Adaptive Automaton"
+       ]
+      },
+      {
+       "kind": "choose",
+       "pick": [
+        "Bear"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "pt": "3/3"
+    },
+    {
+     "card": "p0:Clone",
+     "zone": "battlefield",
+     "pt": "2/2",
+     "types": [
+      "Bear"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "token-copied-from-a-clone-is-not-double-faced",
+   "cr": [
+    "707.8a"
+   ],
+   "why": "Clone copies Afflicted Deserter but Clone is not a double-faced card, so a token made from Clone has only the values Clone presents and no back face. Moonmist turns the original Afflicted Deserter over; the Clone and its token keep the front-face name.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Afflicted Deserter",
+      "Clone",
+      "Cackling Counterpart",
+      "Moonmist"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Afflicted Deserter",
+     "mana": "CCCR"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Clone",
+     "mana": "CCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p0:Afflicted Deserter"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Cackling Counterpart",
+     "mana": "CUU",
+     "targets": [
+      "p0:Clone"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Afflicted Deserter",
+        "token": true
+       },
+       "eq": 1
+      },
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Werewolf Ransacker",
+        "token": true
+       },
+       "eq": 0
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Moonmist",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Afflicted Deserter",
+        "token": true
+       },
+       "eq": 1
+      },
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Werewolf Ransacker",
+        "token": true
+       },
+       "eq": 0
+      },
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Afflicted Deserter",
+        "token": false
+       },
+       "eq": 1
+      },
+      {
+       "count": {
+        "seat": 0,
+        "zone": "battlefield",
+        "name": "Werewolf Ransacker",
+        "token": false
+       },
+       "eq": 1
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

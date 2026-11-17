@@ -1,0 +1,58 @@
+{
+ "card": "Assault // Battery",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "7ddb76774fb0",
+ "scenarios": [
+  {
+   "name": "the-cast-half-has-mana-value-one",
+   "cr": [
+    "709.4b"
+   ],
+   "why": "The split card's printed total is five, but only the Assault half is cast and the resulting spell has mana value 1. Eidolon of the Great Revel therefore triggers and deals 2 damage to Assault's caster; a spell with mana value 5 would not trigger it.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Eidolon of the Great Revel"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Assault // Battery"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Assault",
+     "mana": "R",
+     "targets": [
+      "p0"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 18,
+      "p1": 18
+     }
+    },
+    {
+     "card": "p1:Assault // Battery",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}
