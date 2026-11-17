@@ -376,6 +376,11 @@ func (t *translator) choicePick(s string) string { return t.choicePickN(s, 0) }
 // setChoice(player, name, n): the ord-th card of that name, which the runner
 // refs as pN:Name, pN:Name#2, ... A repeated bare ref binds the first copy
 // only and is rejected as not offered.
+//
+// Known limitation: the ord indexes anyRefs (battlefield first, then setup
+// places), not the one zone the choice reads; a seat holding copies of the
+// name in two zones could pick across them. The translator does not track
+// which zone a choice reads.
 func (t *translator) choicePickN(s string, ord int) string {
 	n, r := xmageName(s)
 	if r != nil {

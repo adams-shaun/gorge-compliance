@@ -1,6 +1,10 @@
 package main
 
-import "testing"
+import (
+	"slices"
+	"strings"
+	"testing"
+)
 
 // TestOptionalCostCastUsesCastMode: XMage answers an OptionalCost static
 // (Crimestopper Sprite's collect evidence) with setChoice(true) on the cast;
@@ -43,14 +47,16 @@ func TestOptionalCostCastUsesCastMode(t *testing.T) {
 			t.Errorf("yes/no answer left in %v", picks)
 		}
 	}
-	want := []string{"p0:Gray Ogre", "p0:Gray Ogre#2"}
-	n := 0
+	// Only the Gray Ogre refs: they must be exactly the two distinct
+	// copies, so [p0:Gray Ogre, p0:Gray Ogre] (one copy twice) fails.
+	var ogres []string
 	for _, p := range picks {
-		if p == want[0] || p == want[1] {
-			n++
+		if strings.HasPrefix(p, "p0:Gray Ogre") {
+			ogres = append(ogres, p)
 		}
 	}
-	if n != 2 {
-		t.Errorf("picks = %v, want both %v", picks, want)
+	want := []string{"p0:Gray Ogre", "p0:Gray Ogre#2"}
+	if !slices.Equal(ogres, want) {
+		t.Errorf("Gray Ogre picks = %v (all picks %v), want %v", ogres, picks, want)
 	}
 }
