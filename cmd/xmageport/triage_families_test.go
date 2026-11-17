@@ -199,32 +199,6 @@ func TestCloneElectionIsNotAnsweredByTheNextTarget(t *testing.T) {
 	wantStatus(t, res, "pass", "")
 }
 
-// Wall of Roots pays for a cast with a -0/-1 counter; the runner pays from
-// the pool, so no counter is ever put and its P/T cannot move.
-func TestManaAbilityCounterShapeCoversPowerToughness(t *testing.T) {
-	res := runBody(t, `addCard(Zone.HAND, playerA, "Runeclaw Bear");
-        addCard(Zone.BATTLEFIELD, playerA, "Wall of Roots", 2);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Runeclaw Bear");
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-        assertPowerToughness(playerA, "Wall of Roots", 0, 4);`)
-	wantStatus(t, res, "refused", "mana-ability-counter")
-}
-
-// Hall of the Bandit Lord and Boseiju mark the mana they make: "If that mana
-// is spent on ..." The pool-seeded cast carries no such mana.
-func TestManaSpentRiderIsAManaSourceShape(t *testing.T) {
-	res := runBody(t, `addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Hall of the Bandit Lord");
-        addCard(Zone.HAND, playerA, "Goblin Roughrider");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Roughrider");
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-        assertAbility(playerA, "Goblin Roughrider", HasteAbility.getInstance(), true);`)
-	wantStatus(t, res, "refused", "mana-spent-by-source-type")
-}
-
 func TestSetupEntryCounterReplacementIsAShape(t *testing.T) {
 	res := runBody(t, `addCard(Zone.BATTLEFIELD, playerA, "Doubling Season");
         addCard(Zone.BATTLEFIELD, playerA, "Tibalt, the Fiend-Blooded");

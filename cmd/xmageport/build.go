@@ -1120,7 +1120,7 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 			}
 			// a mana ability that puts a -0/-1 counter (Wall of Roots) moves
 			// the P/T this asserts, and the runner pays from the pool
-			if t.manaSource(nm) && !t.manaSourceLand(nm) && t.paysFromPool(nm) && t.manaAbilityPutsCounter(nm) {
+			if t.manaSource(nm) && !t.manaSourceLand(nm) && t.paysFromPool(nm) && t.manaAbilityPutsCounter(nm) && !t.sourceStatedPaid(nm) {
 				t.noteShape(refuse("mana-ability-counter", "%s's mana ability puts a counter that changes its P/T, and the runner pays from the pool", nm))
 			}
 		}
@@ -1147,7 +1147,7 @@ func (t *translator) mapAssert(c call) ([]*expect, *refusal) {
 		if r != nil {
 			return nil, r
 		}
-		if nm, rr := xmageName(a[0].s); rr == nil && t.manaSource(nm) && !t.manaSourceLand(nm) && t.paysFromPool(nm) && t.manaAbilityPutsCounter(nm) {
+		if nm, rr := xmageName(a[0].s); rr == nil && t.manaSource(nm) && !t.manaSourceLand(nm) && t.paysFromPool(nm) && t.manaAbilityPutsCounter(nm) && !t.sourceStatedPaid(nm) {
 			t.noteShape(refuse("mana-ability-counter", "%s's mana ability puts the %s counter, and the runner pays from the pool", nm, kind))
 		}
 		if nm, rr := xmageName(a[0].s); rr == nil {
@@ -1285,6 +1285,14 @@ type emitter struct {
 	// and cast steps put on the battlefield after setup (a land drop, a mana
 	// rock): castMana counts them as mana sources.
 	entered [2][]string
+	// sensUsed: payment-sensitive source ref -> turn it last paid a cast
+	// (-1 once a flicker made it a new object).
+	sensUsed map[string]int
+	// cloned: per seat, the permanents that entered as a copy of a
+	// payment-sensitive source (source_payment.go).
+	cloned [2][]*sensSource
+	// spent: per seat, the mana earlier casts seeded since its last untap.
+	spent [2]spentMana
 }
 
 func (em *emitter) add(s *step) *step {
@@ -1513,6 +1521,12 @@ func (em *emitter) noteEntered(a *action) {
 // land types makes those colours; any other permanent contributes its printed
 // AB$ Mana abilities' Produced$.
 func (t *translator) manaSources(p int, entered []string) *manaSet {
+	return t.manaSourcesSkipping(p, entered, nil)
+}
+
+// manaSourcesSkipping is manaSources without the named permanents: the
+// payment-sensitive sources a cast pays by activating them.
+func (t *translator) manaSourcesSkipping(p int, entered []string, skip map[string]bool) *manaSet {
 	ms := &manaSet{}
 	tapped := map[string]bool{}
 	var names []string
@@ -1531,7 +1545,7 @@ func (t *translator) manaSources(p int, entered []string) *manaSet {
 		}
 	}
 	for _, n := range append(names, entered...) {
-		if tapped[n] {
+		if tapped[n] || skip[n] {
 			continue
 		}
 		nm, r := xmageName(n)
@@ -2127,6 +2141,7 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			return nil, refuse("cast-not-in-setup", "%s", a.card)
 		}
 		s := &step{Op: a.kind, Seat: a.seat, Card: ref}
+		var payment []*step
 		if a.kind == "cast" {
 			if len(a.choices) > 0 && !a.choices[0].target && a.choices[0].x < 0 && a.choices[0].mode == 0 &&
 				a.choices[0].pick != "yes" && a.choices[0].pick != "no" && em.hasOptionalCost(a.card) {
@@ -2136,11 +2151,29 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 				// yes/no election is consumed below
 				return nil, refuse("optional-cost-pick", "%s: %s", a.card, a.choices[0].pick)
 			}
-			m, r := em.castMana(a.seat, a.card, takeX(a))
+			if t.playsAllAtOnce(a.card) {
+				// two or more cards picked by name and confirmed: a pick and a
+				// yes/no per card (a lone pick is a sacrifice or bargain cost)
+				yes, picks := 0, 0
+				for _, ch := range a.choices {
+					switch {
+					case ch.target || ch.x >= 0:
+					case ch.pick == "yes":
+						yes++
+					case strings.HasPrefix(ch.pick, "name:"):
+						picks++
+					}
+				}
+				if yes >= 2 && picks >= 2 {
+					return nil, refuse("play-all-one-ask", "%s: XMage asks a pick and a yes/no per card cast (%d casts), gorge poses one modes ask for the whole set", a.card, yes)
+				}
+			}
+			m, pay, r := em.castManaPaying(a.seat, a.card, takeX(a))
 			if r != nil {
 				return nil, r
 			}
 			s.Mana = m
+			payment = pay
 			// XMage answers Kicker's "pay the kicker?" with the first
 			// setChoice after the cast; gorge offers it as a cast mode.
 			if kc := em.kickerCost(a.card); kc != "" && len(a.choices) > 0 && !a.choices[0].target &&
@@ -2251,7 +2284,22 @@ func (em *emitter) emit(a *action) (*group, *refusal) {
 			}
 			s.Targets = append(s.Targets, trs...)
 		}
+		if s.CastMode != "alternative" {
+			em.commitPayment(a.seat, payment)
+		} else {
+			// the alternative cost pays no mana: the activations are not
+			// needed and the sources were not stated paid
+			for _, st := range payment {
+				t.markSourceUnpaid(refName(st.Card))
+			}
+		}
 		em.add(s)
+		if a.kind == "cast" {
+			em.noteFlicker(a.card, s.Targets)
+		}
+		if a.kind == "play" {
+			em.noteClonedSource(a, ref)
+		}
 		if r := attach(s, len(s.Targets) > 0); r != nil {
 			return nil, r
 		}

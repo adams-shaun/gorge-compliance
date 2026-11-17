@@ -330,7 +330,7 @@
     }
    ],
    "xmage": "ReadAheadTest#testBarbaraWrightChapter3",
-   "known_bug": "XP[readahead-granted-keyword-unmodelled]: Barbara Wright's S:Mode$ Continuous | Affected$ Saga.YouCtrl | AddKeyword$ Read ahead is a granted keyword only cast_etbchoice.go (engine/rules) reads from the printed face, so the entry code never asks (only a printed Read ahead poses the chapter ask), so Rite of Belzenlok enters at chapter I and the X=3 answer is unconsumed (Cleric 2, want 0), CR 702.155a, verified at gorge c3b957bf36."
+   "known_bug": "XP[readahead-granted-keyword-unmodelled]: Barbara Wright's S:Mode$ Continuous | Affected$ Saga.YouCtrl | AddKeyword$ Read ahead is a granted keyword that faceETBChoice (engine/rules/cast_etbchoice.go) never reads (it tests HasKeywordRef(kwRefReadAhead) on the printed face only), so the entry code never asks (only a printed Read ahead poses the chapter ask), so Rite of Belzenlok enters at chapter I and the X=3 answer is unconsumed (Cleric 2, want 0), CR 702.155a, verified at gorge c3b957bf36."
   }
  ]
 }

@@ -61,6 +61,10 @@ type step struct {
 	// XAbility is the XMage activateAbility text, kept only for the XMage
 	// driver cross-check input (never written to a committed scenario).
 	XAbility string `json:"-"`
+	// payment marks an activation the translator adds to pay a cast with a
+	// payment-sensitive mana source; XMage pays by itself, so the driver line
+	// drops it like a gorge-only pass.
+	payment bool
 }
 
 // xans is one original XMage choice, for the driver cross-check.

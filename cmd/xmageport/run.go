@@ -1005,7 +1005,7 @@ func driverLine(r *result) ([]byte, error) {
 	var carry []xans
 	for i, s := range r.Scenario.Steps {
 		carry = append(carry, r.XAnswers[i]...)
-		if s.Op == "pass" {
+		if s.Op == "pass" || s.payment {
 			continue
 		}
 		c := *s
