@@ -571,6 +571,9 @@ func shapeRefusalApplies(r *result) bool {
 	if r.Scenario != nil && knownBugs[r.Scenario.XMage] != "" {
 		return false
 	}
+	if sh := r.activeShape(); sh.onlyIf != nil && !sh.onlyIf(r.Fails) {
+		return false
+	}
 	return r.ReplayDiff == "" && !anyHarness(r.Fails)
 }
 
