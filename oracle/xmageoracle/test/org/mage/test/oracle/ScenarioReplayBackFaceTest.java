@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -83,8 +84,10 @@ public final class ScenarioReplayBackFaceTest {
         field.setAccessible(true);
         Unsafe unsafe = (Unsafe) field.get(null);
         RecordingDriver driver = (RecordingDriver) unsafe.allocateInstance(RecordingDriver.class);
-        TestPlayer p0 = (TestPlayer) unsafe.allocateInstance(TestPlayer.class);
-        TestPlayer p1 = (TestPlayer) unsafe.allocateInstance(TestPlayer.class);
+        TestPlayer p0 = new TestPlayer(new org.mage.test.player.TestComputerPlayer("A",
+                mage.constants.RangeOfInfluence.ALL));
+        TestPlayer p1 = new TestPlayer(new org.mage.test.player.TestComputerPlayer("B",
+                mage.constants.RangeOfInfluence.ALL));
         set(driver, "playerA", p0);
         set(driver, "playerB", p1);
         driver.placements = new HashMap<>();
@@ -93,6 +96,13 @@ public final class ScenarioReplayBackFaceTest {
         set(driver, "backFaceNames", new HashMap<String, String>());
         set(driver, "buildCounts", new HashMap<String, Integer>());
         set(driver, "refAlias", new HashMap<String, String>());
+        // Every field add()/stageBackFace()/combatName() touch, since the
+        // superclass constructor that would initialise them is bypassed.
+        set(driver, "setupPermanentIds", new HashMap<String, UUID>());
+        set(driver, "setupBattlefield", new HashMap<String, Integer>());
+        set(driver, "placedNames", new HashMap<UUID, String>());
+        set(driver, "enterWithCountersApplied", new HashSet<UUID>());
+        set(driver, "faceDownRefs", new HashSet<String>());
         set(driver, "gorgeName", "");
         set(driver, "xmageName", "");
 
