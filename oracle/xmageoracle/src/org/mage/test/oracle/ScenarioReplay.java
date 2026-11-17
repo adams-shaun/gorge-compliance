@@ -219,6 +219,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     60, 20, 7) {
                 @Override
                 public void start(UUID choosingPlayerId) {
+                    placeSetupCounters(this);
                     placeSetupTokens(this);
                     placeSetupAttached(this);
                     applySetupLife();
@@ -233,6 +234,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 mage.game.mulligan.MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7) {
             @Override
             public void start(UUID choosingPlayerId) {
+                placeSetupCounters(this);
                 placeSetupTokens(this);
                 placeSetupAttached(this);
                 applySetupLife();
@@ -1934,13 +1936,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
         frontCounts.clear();
         setupBattlefield.clear();
         setupTokensPlaced = false;
+        setupCountersPlaced = false;
         setupAttachedPlaced = false;
         setupPermanentIds.clear();
         setupNames.clear();
         placedNames.clear();
         abilityAliasSeq = 0;
         backFaceNames.clear();
-        enterWithCountersApplied.clear();
         String format = str(sc, "format");
         if (!format.isEmpty() && !format.equals("constructed")) {
             throw new IllegalArgumentException("unsupported format " + format);
@@ -2006,13 +2008,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
     }
 
-    /** The setup's per-seat "counters" and "speed" (gorge's runner emits the same
-     * CounterChange / SpeedChange events when it places the cards). Runs inside
-     * the "setup" checkpoint, before the first snapshot, because a counter or a
-     * speed needs a live game. "counters" is card name -> counter kind (the
-     * CounterType enum name: CHARGE, P1P1, M1M1, ...) -> amount, applied to every
-     * battlefield placement of the name, like "tapped"; a name or kind XMage does
-     * not know fails the scenario rather than placing nothing. */
+    /** The setup's per-seat "tapped_after_untap" and "speed" (gorge's runner emits
+     * the same SpeedChange events when it places the cards). Runs inside the
+     * "setup" checkpoint, before the first snapshot, because a speed needs a live
+     * game. The setup "counters" are not here: placeSetupCounters seeds them
+     * before start(). */
     private void applySetupState(Game g) {
         JsonObject setup = sc0.has("setup") ? sc0.getAsJsonObject("setup") : new JsonObject();
         boolean changed = false;
@@ -2022,34 +2022,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             JsonObject s = setup.getAsJsonObject("p" + i);
             TestPlayer pl = seat(i);
-            if (s.has("counters")) {
-                for (Map.Entry<String, JsonElement> byCard : s.getAsJsonObject("counters").entrySet()) {
-                    String name = xmageSpelling(byCard.getKey());
-                    boolean placed = false;
-                    for (Permanent perm : g.getBattlefield().getAllPermanents()) {
-                        // A back-face-staged permanent is still named by its front (setupNames).
-                        if (!pl.getId().equals(perm.getControllerId()) || !setupName(perm).equals(name)) {
-                            continue;
-                        }
-                        if (enterWithCountersApplied.contains(perm.getId())) {
-                            // Applied with the placement (build()), which is
-                            // what keeps a would-die placement alive to here;
-                            // a second application would double the counters.
-                            placed = true;
-                            continue;
-                        }
-                        for (Map.Entry<String, JsonElement> byKind : byCard.getValue().getAsJsonObject().entrySet()) {
-                            CounterType kind = xmageCounter(byKind.getKey());
-                            perm.addCounters(kind.createInstance(byKind.getValue().getAsInt()), pl.getId(), null, g);
-                        }
-                        placed = true;
-                        changed = true;
-                    }
-                    if (!placed) {
-                        throw new IllegalArgumentException("counters name " + byCard.getKey() + ", which is not on p" + i + "'s battlefield");
-                    }
-                }
-            }
             if (s.has("tapped_after_untap")) {
                 // gorge taps these single permanents after the turn's untap
                 // step and drops every trigger the taps queue (CR 502.3), so
@@ -2078,6 +2050,66 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // no keyword) where gorge shows it live. Apply once with the counters
             // in place, exactly as the game loop does at the start of a step.
             g.applyEffects();
+        }
+    }
+
+    /** The pre-start hook that seeds every seat's setup "counters" (card name ->
+     * counter kind -> amount, applied to every battlefield placement of the
+     * name; a name or kind XMage does not know fails the scenario rather than
+     * placing nothing). The counters are recorded board state, not an event:
+     * they are written straight onto the permanent (putSetupCounters), so a
+     * counter-replacement permanent (Dr. Joseph M'Benga, Hardened Scales) never
+     * sees them, as in gorge and Forge. Runs after the cheat() placements and
+     * before start() checks state-based actions, so a printed 0/0 or an X=0
+     * placement survives with its counters, as gorge emits them with the
+     * placement. */
+    private void placeSetupCounters(Game g) {
+        if (setupCountersPlaced) {
+            return;
+        }
+        setupCountersPlaced = true;
+        JsonObject setup = sc0.has("setup") ? sc0.getAsJsonObject("setup") : new JsonObject();
+        boolean changed = false;
+        for (int i = 0; i < seats; i++) {
+            if (!setup.has("p" + i)) {
+                continue;
+            }
+            JsonObject s = setup.getAsJsonObject("p" + i);
+            if (!s.has("counters")) {
+                continue;
+            }
+            TestPlayer pl = seat(i);
+            for (Map.Entry<String, JsonElement> byCard : s.getAsJsonObject("counters").entrySet()) {
+                String name = xmageSpelling(byCard.getKey());
+                boolean placed = false;
+                for (Permanent perm : g.getBattlefield().getAllPermanents()) {
+                    // A back-face-staged permanent is still named by its front (setupNames).
+                    if (!pl.getId().equals(perm.getControllerId()) || !setupName(perm).equals(name)) {
+                        continue;
+                    }
+                    putSetupCounters(g, perm, byCard.getValue().getAsJsonObject());
+                    placed = true;
+                    changed = true;
+                }
+                if (!placed) {
+                    throw new IllegalArgumentException("counters name " + byCard.getKey() + ", which is not on p" + i + "'s battlefield");
+                }
+            }
+        }
+        if (changed) {
+            g.applyEffects();
+        }
+    }
+
+    /** Writes a setup counter set onto a permanent as recorded state: straight
+     * into its Counters, with no ADD_COUNTERS event (so no replacement such as
+     * Hardened Scales or Dr. Joseph M'Benga applies) and no COUNTER_ADDED
+     * trigger. Shared by setup cards and setup tokens so the two cannot drift.
+     * Never use Permanent.addCounters here. */
+    static void putSetupCounters(Game game, Permanent permanent, JsonObject kinds) {
+        for (Map.Entry<String, JsonElement> byKind : kinds.entrySet()) {
+            permanent.getCounters(game).addCounter(
+                    xmageCounter(byKind.getKey()).createInstance(byKind.getValue().getAsInt()));
         }
     }
 
@@ -2128,10 +2160,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         permanent.updateZoneChangeCounter(game, new mage.game.events.ZoneChangeEvent(permanent, source,
                 controller.getId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
         if (counters != null) {
-            for (Map.Entry<String, JsonElement> byKind : counters.entrySet()) {
-                permanent.getCounters(game).addCounter(
-                        xmageCounter(byKind.getKey()).createInstance(byKind.getValue().getAsInt()));
-            }
+            putSetupCounters(game, permanent, counters);
         }
         // fireEvent=false: no ENTERS_THE_BATTLEFIELD event is queued (the return
         // value is false on that path whether or not a replacement applied, as
@@ -2243,34 +2272,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 xmageName = backFaceNames.get("p" + i + ":" + xmageName);
             }
             if (zone == Zone.BATTLEFIELD) {
-                // gorge's runner emits the setup counters WITH the placement,
-                // before any state-based action, so a placement that would die
-                // as an SBA (a printed 0/0, an X-cost creature's X=0 board)
-                // survives with them. Apply through XMage's enter-with-counters
-                // map, keyed by the id the placement resolution produces.
-                // CardUtil.getDefaultCardSideForBattlefield is the exact card
-                // the cheat() placement turns into a PermanentCard (a stored
-                // half maps to itself, a stored parent to its left half, a
-                // plain card to itself), and PermanentCard shares the card's
-                // id, so applyEnterWithCounters' getEnterWithCounters lookup
-                // hits for plain cards AND staged back faces alike. Keying on
-                // getMainCard() instead holds the parent's id for a staged
-                // half, which the resolution never looks up. The counters are
-                // on the permanent when the first SBA check runs, exactly the
-                // runner's order; applySetupState no longer re-adds them.
-                JsonObject counters = s.has("counters") ? s.getAsJsonObject("counters") : null;
-                JsonElement kinds = counters == null ? null : counters.get(n);
-                if (kinds != null && kinds.isJsonObject()) {
-                    List<PutToBattlefieldInfo> placements = getBattlefieldCards(p);
-                    Card placedCard = CardUtil.getDefaultCardSideForBattlefield(
-                            currentGame, placements.get(placements.size() - 1).getCard());
-                    Counters enter = new Counters();
-                    for (Map.Entry<String, JsonElement> byKind : kinds.getAsJsonObject().entrySet()) {
-                        enter.addCounter(xmageCounter(byKind.getKey()).createInstance(byKind.getValue().getAsInt()));
-                    }
-                    currentGame.setEnterWithCounters(placedCard.getId(), enter);
-                    enterWithCountersApplied.add(placedCard.getId());
-                }
                 List<PutToBattlefieldInfo> seeded = getBattlefieldCards(p);
                 setupPermanentIds.put(ref, CardUtil.getDefaultCardSideForBattlefield(
                         currentGame, seeded.get(seeded.size() - 1).getCard()).getId());
@@ -2981,6 +2982,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** True once placeSetupTokens ran for this scenario's game (start() runs once;
      * build() resets it). */
     private boolean setupTokensPlaced;
+    /** True once placeSetupCounters ran for this scenario's game (build() resets it). */
+    private boolean setupCountersPlaced;
     // Whether the pre-start hook has linked the setup "attached" Auras.
     private boolean setupAttachedPlaced;
     // The permanent id of each battlefield placement build() seeded, by its
@@ -2993,10 +2996,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // setupObjectName); setupNames stays the staged back faces' map.
     private final Map<UUID, String> placedNames = new HashMap<>();
     private final Map<String, String> backFaceNames = new HashMap<>();
-    // Setup counters already applied WITH the placement (build(), through the
-    // enter-with-counters map): applySetupState skips these permanents, since
-    // a second application would double them.
-    private final Set<UUID> enterWithCountersApplied = new java.util.HashSet<>();
     // The card under test's two spellings: the scenario's (gorge/corpus) name
     // and XMage's card-database name when they differ (Forge prints "Dáin
     // Ironfoot", XMage stores "Dain Ironfoot"). xmageName is empty when equal.
