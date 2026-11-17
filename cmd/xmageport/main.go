@@ -64,7 +64,7 @@ func main() {
 			"filters=cards/filters", "requirement=cards/requirement", "restriction=cards/restriction",
 			"damage=cards/damage", "dynamicvalue=cards/dynamicvalue", "asthough=cards/asthough",
 			"sba=sba", "protection=cards/protection", "modal=cards/modal", "targets=cards/targets",
-			"abilities=cards/abilities"}
+			"abilities=cards/abilities", "single=cards/single"}
 	}
 	knownBugs = loadKnownBugs(*kbPath)
 	reg, err := testutil.OpenCorpusRegistry(*corpus)
