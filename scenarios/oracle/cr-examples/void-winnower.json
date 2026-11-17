@@ -1,0 +1,65 @@
+{
+ "card": "Void Winnower",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "624c6520d822",
+ "scenarios": [
+  {
+   "name": "odd-mana-value-slips-past-the-lock",
+   "cr": [
+    "601.3a"
+   ],
+   "why": "Announcing X as one makes the Thunder's mana value three, so the Winnower's even-value casting lock does not stop the opponent; the spell then deals one to p0.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Void Winnower"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Rolling Thunder"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Rolling Thunder",
+     "mana": "CRR",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "X = 1"
+       ]
+      }
+     ],
+     "targets": [
+      "p0"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 19
+     }
+    },
+    {
+     "card": "p0:Void Winnower",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

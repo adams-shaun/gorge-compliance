@@ -1,0 +1,83 @@
+{
+ "card": "Bear Cub",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e3b0c44298fc",
+ "scenarios": [
+  {
+   "name": "discount-counts-a-creature-that-is-no-longer-a-creature",
+   "cr": [
+    "608.2i"
+   ],
+   "why": "The Captain's discount counts the creature p0 attacked with even after the Bear has been turned into a land. Three mana is therefore enough for its four-mana cost.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Bear Cub"
+     ],
+     "hand": [
+      "Imprisoned in the Moon",
+      "Search Party Captain"
+     ]
+    },
+    "p1": {}
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Bear Cub"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "step": "main2"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Imprisoned in the Moon",
+     "mana": "CCU",
+     "targets": [
+      "p0:Bear Cub"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Search Party Captain",
+     "mana": "CCW"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p1": 18
+     }
+    },
+    {
+     "card": "p0:Bear Cub",
+     "zone": "battlefield",
+     "types": [
+      "Land"
+     ],
+     "no_types": [
+      "Creature"
+     ]
+    },
+    {
+     "card": "p0:Search Party Captain",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

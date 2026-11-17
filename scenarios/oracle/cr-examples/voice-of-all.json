@@ -1,0 +1,214 @@
+{
+ "card": "Voice of All",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "92ce0b130f7c",
+ "scenarios": [
+  {
+   "name": "copying-the-angel-does-not-give-the-copy-a-chosen-color",
+   "cr": [
+    "607.5a"
+   ],
+   "why": "The Shapeshifter becomes a copy of the Angel after the Angel entered, so it never makes an as-enters color choice. A red sweeper kills the unprotected copy but not the Angel, which chose red protection.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Unstable Shapeshifter"
+     ],
+     "hand": [
+      "Voice of All",
+      "Pyroclasm"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Voice of All",
+     "mana": "CCWW"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "red"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Pyroclasm",
+     "mana": "CR"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Voice of All"
+     },
+     "eq": 1
+    },
+    {
+     "card": "p0:Voice of All#1",
+     "zone": "battlefield",
+     "damage": 0,
+     "keywords": [
+      "Flying"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "a-token-copy-chooses-its-own-color",
+   "cr": [
+    "614.12"
+   ],
+   "why": "The token copy is created rather than entering as the printed card, so its controller makes a fresh color choice for it. The red token survives a red sweeper, while the setup Angel does not.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Voice of All"
+     ],
+     "hand": [
+      "Cackling Counterpart",
+      "Pyroclasm"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Cackling Counterpart",
+     "mana": "CUU",
+     "targets": [
+      "p0:Voice of All"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "red"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Pyroclasm",
+     "mana": "CR"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Voice of All",
+      "token": true
+     },
+     "eq": 1
+    },
+    {
+     "card": "p0:token:Voice of All",
+     "zone": "battlefield",
+     "damage": 0
+    }
+   ]
+  },
+  {
+   "name": "doubling-season-makes-two-copies-that-each-choose",
+   "cr": [
+    "616.1g"
+   ],
+   "why": "The token-making effect is replaced so it creates two copies, and each copy makes its own color choice as it is created; both choose red and both survive a red sweeper.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Doubling Season",
+      "Voice of All"
+     ],
+     "hand": [
+      "Cackling Counterpart",
+      "Pyroclasm"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Cackling Counterpart",
+     "mana": "CUU",
+     "targets": [
+      "p0:Voice of All"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "red"
+       ]
+      },
+      {
+       "kind": "any",
+       "pick": [
+        "red"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Pyroclasm",
+     "mana": "CR"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Voice of All",
+      "token": true
+     },
+     "eq": 2
+    },
+    {
+     "card": "p0:token:Voice of All#1",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "card": "p0:token:Voice of All#2",
+     "zone": "battlefield",
+     "damage": 0
+    }
+   ]
+  }
+ ]
+}

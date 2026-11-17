@@ -1,0 +1,94 @@
+{
+ "card": "Stormscape Battlemage",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "12057b75ec61",
+ "scenarios": [
+  {
+   "name": "white-kicker-only-gains-life",
+   "cr": [
+    "607.2i"
+   ],
+   "why": "Only the white kicker was paid, so only the trigger linked to that kicker fires: the caster gains three life and nothing is destroyed.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Stormscape Battlemage"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Stormscape Battlemage",
+     "mana": "CCUW",
+     "cast_mode": "kicked1"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 23
+     }
+    },
+    {
+     "card": "p0:Stormscape Battlemage",
+     "zone": "battlefield"
+    }
+   ]
+  },
+  {
+   "name": "black-kicker-only-destroys",
+   "cr": [
+    "607.2i"
+   ],
+   "why": "Only the black kicker was paid, so only the trigger linked to that kicker fires: the target nonblack creature is destroyed and no life is gained.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Stormscape Battlemage"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Stormscape Battlemage",
+     "mana": "CCCCUB",
+     "cast_mode": "kicked2"
+    },
+    {
+     "op": "resolve",
+     "targets": [
+      "p1:Grizzly Bears"
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 20
+     }
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Stormscape Battlemage",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

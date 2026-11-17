@@ -1,0 +1,103 @@
+{
+ "card": "Felidar Sovereign",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "0a550c466614",
+ "scenarios": [
+  {
+   "name": "short-of-forty-the-upkeep-ability-never-triggers",
+   "cr": [
+    "603.4"
+   ],
+   "why": "The intervening condition is checked as the upkeep begins. At 39 life the ability does not trigger at all, so nothing goes on the stack.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Felidar Sovereign"
+     ],
+     "life": 39
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p0"
+    }
+   ],
+   "expect": [
+    {
+     "trigger_on_stack": "p0:Felidar Sovereign",
+     "want": false
+    },
+    {
+     "life": {
+      "p0": 39
+     }
+    }
+   ]
+  },
+  {
+   "name": "falling-below-forty-removes-the-trigger-before-it-resolves",
+   "cr": [
+    "603.4"
+   ],
+   "why": "The life total is raised to 40 during the previous turn's end step so the upkeep trigger fires. Losing a life before it resolves leaves it at 39, so the ability is removed and the game continues.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Felidar Sovereign"
+     ],
+     "life": 39
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "end",
+     "active": "p1"
+    },
+    {
+     "op": "life",
+     "seat": 0,
+     "amount": 1
+    },
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p0"
+    },
+    {
+     "op": "life",
+     "seat": 0,
+     "amount": -1,
+     "expect": [
+      {
+       "trigger_on_stack": "p0:Felidar Sovereign",
+       "want": true
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p0"
+    }
+   ],
+   "expect": [
+    {
+     "trigger_on_stack": "p0:Felidar Sovereign",
+     "want": false
+    },
+    {
+     "life": {
+      "p0": 39
+     }
+    }
+   ]
+  }
+ ]
+}

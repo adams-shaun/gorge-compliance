@@ -1,0 +1,65 @@
+{
+ "card": "Blatant Thievery",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "d7066a71e545",
+ "scenarios": [
+  {
+   "name": "both-opponents-permanents-change-control-together",
+   "cr": [
+    "608.2f"
+   ],
+   "why": "The Thievery takes one permanent from each opponent at once. After it resolves, p0 can tap both stolen lands for mana in the same step, which shows both are under p0's control.",
+   "players": 3,
+   "setup": {
+    "p0": {
+     "hand": [
+      "Blatant Thievery"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Forest"
+     ]
+    },
+    "p2": {
+     "battlefield": [
+      "Island"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Blatant Thievery",
+     "mana": "CCCCUUU",
+     "targets": [
+      "p1:Forest",
+      "p2:Island"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p1:Forest"
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p2:Island"
+    }
+   ],
+   "expect": [
+    {
+     "pool": {
+      "p0": "GU"
+     }
+    }
+   ]
+  }
+ ]
+}
