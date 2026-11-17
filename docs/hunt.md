@@ -2,7 +2,7 @@
 
 `scripts/hunt-box.sh` plays waves of games on a machine that also runs landing gates, using only the
 capacity nobody else needs, and records every failure with the command that reproduces it. It runs on
-the remote gate box today, beside `cmd/farm` (lockstep sweeps) and the landing gate.
+the remote gate box today, beside the box's other gate jobs.
 
 `scripts/deck-audit.py` and `cmd/deckcheck` audit the deck lists the hunter plays, because a game on a
 wrong deck list (a card the deck never held, a banned card) wastes the hunt and misleads triage.
@@ -123,7 +123,7 @@ Stop it with `touch $HUNT_ROOT/STOP` (it exits between waves) or `systemctl --us
 | `pools/<name>/` | lockstep pools for kfuzz (`GORGE_POOLS`): extract gorge's committed slice, `git -C gorge show HEAD:dirac/oracle/testdata/slices/<name>/decks.tar.gz \| tar xz -C pools/<name>` (`cmd5`, `standard-meta`); without one, kfuzz plays only seed 1 |
 | `decks/`, `decks.allow` | extra deck files and the audited allow-list |
 
-To move to a newer gorge: push it to the box (`git push <box>:/scratch/gate/repo.git land:refs/heads/farm-head`),
+To move to a newer gorge: push it to the box (`git push <box>:/scratch/gate/repo.git origin/main:refs/heads/farm-head`),
 check it out in `gorge/`, rebuild `bin/`, and restart the unit. Results are kept per commit.
 
 ## Results
@@ -156,7 +156,7 @@ The hunter's `decks.allow` is the list of decks the audit passed.
 ## The pod farm (superseded)
 
 `scripts/podfarm-box.sh` is the hunter's predecessor, kept as it ran on the gate box (as
-`$FARM_ROOT/podfarm.sh`, a `pods` user unit beside `cmd/farm`). It plays endless 4-seat Commander pods,
+`$FARM_ROOT/podfarm.sh`, a `pods` user unit). It plays endless 4-seat Commander pods,
 one game each, replay-verified (`mtgsim -decks a,b,c,d -games 1 -seed N -verify`, 600 s per game). Seat 0
 rotates through every deck file in the checkout that names a commander; seats 1-3 are three others chosen
 from the seed.
