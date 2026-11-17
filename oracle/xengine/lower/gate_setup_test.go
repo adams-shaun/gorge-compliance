@@ -328,7 +328,7 @@ func TestPlaceKeepsExiledObject(t *testing.T) {
 
 	// An entry-prepared permanent is refused, whichever card form carries the
 	// replacement: the keyword expansion or a printed R:Event$ Moved.
-	for _, card := range []string{"Skycoach Conductor", "Emeritus of Woe"} {
+	for _, card := range []string{"Skycoach Conductor", "Emeritus of Woe", "The Death of Gwen Stacy"} {
 		prep, ok := reg.Lookup(card)
 		if !ok {
 			t.Fatalf("%s is not in the corpus", card)
@@ -346,8 +346,13 @@ func TestPlaceKeepsExiledObject(t *testing.T) {
 		if !planted {
 			t.Fatalf("%s: no battlefield permanent to plant", card)
 		}
-		if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonPrepareEntry) {
-			t.Fatalf("%s: reasons %v, want %s", card, r, reasonPrepareEntry)
+		// A Saga's placement re-fires its chapters (reasonSagaEntry).
+		want := reasonPrepareEntry
+		if card == "The Death of Gwen Stacy" {
+			want = reasonSagaEntry
+		}
+		if r := capture(e, at, true).Reasons; !slices.Contains(r, want) {
+			t.Fatalf("%s: reasons %v, want %s", card, r, want)
 		}
 	}
 }
