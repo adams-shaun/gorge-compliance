@@ -332,7 +332,8 @@ type result struct {
 	Scenario                   *portScenario
 	Groups                     []*group
 	Fails                      []string
-	Status                     string // refused | pass | fail-harness | fail-expect
+	ReplayDiff                 string // live game vs log-only replay (audit gate); non-empty => fail-replay
+	Status                     string // refused | pass | fail-harness | fail-replay | fail-expect
 	Dropped                    int
 	Unsupported                string         // "Card[prim,...]; ..." for cards gorge's coverage gate does not support
 	Strict                     bool           // setStrictChooseMode(true)

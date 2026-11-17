@@ -234,12 +234,14 @@ func writeCommit(dir string, results []*result) error {
 	have := existingMethods(dir)
 	byFile := map[string][]*result{}
 	for _, r := range results {
-		if r.Scenario != nil && r.Status != "pass" {
+		if r.Scenario != nil && r.Status != "pass" && r.Status != "fail-replay" {
 			if kb := knownBugs[r.Scenario.XMage]; kb != "" {
 				r.Scenario.KnownBug = kb
 			}
 		}
-		if r.Scenario == nil || (r.Status != "pass" && r.Scenario.KnownBug == "") || have[r.Scenario.XMage] {
+		// fail-replay is never written, known_bug or not: the audit fails a
+		// replay diff before it looks at known_bug.
+		if r.Scenario == nil || r.Status == "fail-replay" || (r.Status != "pass" && r.Scenario.KnownBug == "") || have[r.Scenario.XMage] {
 			continue
 		}
 		k := filepath.Join(r.Family, r.Class+".json")
