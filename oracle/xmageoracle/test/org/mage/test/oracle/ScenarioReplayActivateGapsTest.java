@@ -163,6 +163,40 @@ public final class ScenarioReplayActivateGapsTest {
         }
     }
 
+    /** The plan names the Tablet's conditional R for a CREATURE spell, which
+     * its "instant and sorcery" restriction rejects, while unconditional GG
+     * can pay Bronze Sable's {2}. The driver must not unlock Red for a unit
+     * ManaPool.pay then refuses: taking the plan letter there strands the cast
+     * (and with no producer left fails the harness) instead of falling back to
+     * the unconditional unit. The restricted RR must stay floating. */
+    private static void conditionalPlanRejectedByRestriction() {
+        JsonObject res = passes("conditional plan rejected by restriction", "{"
+                + "id:'test:activate-gaps-conditional-rejected',name:'activate gaps conditional rejected',turn:1,"
+                + "setup:{"
+                + "p0:{battlefield:['Tablet of Discovery','Forest','Forest'],"
+                + "hand:['Bronze Sable'],"
+                + "library_top:['Island','Island','Island','Island','Island','Island','Island','Island','Island','Island'],life:20},"
+                + "p1:{library_top:['Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain','Mountain'],life:20}},"
+                + "steps:["
+                + "{op:'activate',seat:0,card:'p0:Tablet of Discovery',ability_index:1},"
+                + "{op:'activate',seat:0,card:'p0:Forest',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Forest#2',ability_index:0},"
+                + "{op:'cast',seat:0,card:'p0:Bronze Sable'}],"
+                + "xmage_ability:['{T}: Add {R}{R}.','{T}: Add {G}.','{T}: Add {G}.',''],"
+                + "xmage_answers:[null,null,null,null],"
+                + "xmage_pos:[{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0},"
+                + "{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0}],"
+                + "payment:['','','','RR']}");
+        String before = poolAt(res, 3);
+        if (!before.equals("RRGG")) {
+            throw new AssertionError("precondition: pool before the cast must be RRGG, got " + before);
+        }
+        String after = poolAt(res, 4);
+        if (!after.equals("RR")) {
+            throw new AssertionError("expected the rejected R plan to leave RR and spend GG, got pool " + after);
+        }
+    }
+
     /** Tapped Mountains in the last snapshot. */
     private static int tappedMountains(JsonObject res) {
         JsonArray snaps = res.getAsJsonArray("snapshots");
@@ -233,9 +267,10 @@ public final class ScenarioReplayActivateGapsTest {
         manualPaymentColorlessFollowsPlan();
         conditionalPoolMana();
         conditionalPoolManaNoLand();
+        conditionalPlanRejectedByRestriction();
         saddleSingleOptionCost();
         crewSingleOptionCost();
         System.out.println("PASS manual-payment generic fallback and plan preference "
-                + "(coloured and colorless units); conditional pool mana (with and without a land); Saddle/Crew single-option cost choices");
+                + "(coloured and colorless units); conditional pool mana (with and without a land, and a rejected conditional plan); Saddle/Crew single-option cost choices");
     }
 }
