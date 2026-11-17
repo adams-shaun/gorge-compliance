@@ -9,16 +9,16 @@
    "cr": [
     "614.13b"
    ],
-   "why": "Ashiok replaces the two life that Breeding Pool would cost with exiling the top two cards. The Pool still enters untapped, p0's life total is unchanged, and the two cards are exiled.",
+   "why": "Breeding Pool is played from the top of the library with Oracle of Mul Daya out. Ashiok replaces the two life with exiling the top two cards, and the Pool, no longer in the library, is not one of them: the next two cards are exiled, the Pool enters untapped and life stays unchanged.",
    "setup": {
     "p0": {
      "battlefield": [
-      "Ashiok, Wicked Manipulator"
+      "Ashiok, Wicked Manipulator",
+      "Oracle of Mul Daya"
      ],
-     "hand": [
-      "Breeding Pool"
-     ],
+     "hand": [],
      "library_top": [
+      "Breeding Pool",
       "Grizzly Bears",
       "Savannah Lions"
      ]
