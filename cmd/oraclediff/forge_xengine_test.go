@@ -310,3 +310,64 @@ func TestForgeExportLibrarySearchPick(t *testing.T) {
 		t.Errorf("item ending on the pass before resolution carries decisions: %+v", got)
 	}
 }
+
+// TestForgeExportExploreYesNo: gorge's explore pick (CR 701.44a) is a
+// choose_n with resume "explore" and one pick of kind "graveyard" or "top";
+// Forge poses it as the yes/no "Put <card> in your graveyard?". The export
+// rewrites it to a choose_n whose single pick has kind yes (graveyard) or no
+// (back on top), the shape the driver's DecisionQueue.isYesNo matches, on
+// the same step and seat, with no object refs.
+func TestForgeExportExploreYesNo(t *testing.T) {
+	mk := func(pick, label string, idx int) rules.OracleDecision {
+		return rules.OracleDecision{
+			Step: 1, Seat: 0, Kind: "choose_n", Options: 2,
+			Picks: []string{label}, PickIdx: []int{idx},
+			PickRefs: []string{"p0:Grizzly Bears"}, PickRefsInexact: []bool{true},
+			OptionRefs:  []string{"p0:Grizzly Bears", "p0:Grizzly Bears"},
+			ObjectPicks: []string{"p0:Grizzly Bears"}, PickKinds: []string{pick},
+			Resume: "explore", GorgeKind: "choose", First: "Put it into your graveyard", Min: 1, Max: 1,
+		}
+	}
+	other := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", Picks: []string{"Forest"},
+		PickRefs: []string{"p0:Forest"}, PickKinds: []string{"search"}, Resume: "search"}
+	in := []rules.OracleDecision{other,
+		mk("graveyard", "Put it into your graveyard", 0),
+		mk("top", "Put it back on top of your library", 1),
+		mk("keep", "Keep it", 1)}
+	orig := fmt.Sprintf("%+v", in)
+	got := forgeExploreAsYesNo(in)
+	if fmt.Sprintf("%+v", in) != orig {
+		t.Fatalf("input modified: %+v", in)
+	}
+	if len(got) != 4 || !reflect.DeepEqual(got[0], other) {
+		t.Fatalf("non-explore decision changed or count off: %+v", got)
+	}
+	for i, want := range []struct{ label, kind string }{{"Yes", "yes"}, {"No", "no"}, {"No", "no"}} {
+		d := got[i+1]
+		if d.Step != 1 || d.Seat != 0 || d.Kind != "choose_n" ||
+			!reflect.DeepEqual(d.Picks, []string{want.label}) || !reflect.DeepEqual(d.PickKinds, []string{want.kind}) ||
+			len(d.PickRefs) != 0 || len(d.ObjectPicks) != 0 || len(d.OptionRefs) != 0 {
+			t.Errorf("explore decision %d = %+v, want step 1 seat 0 choose_n [%s] [%s] no refs", i, d, want.label, want.kind)
+		}
+	}
+	if same := forgeExploreAsYesNo([]rules.OracleDecision{other}); len(same) != 1 || !reflect.DeepEqual(same[0], other) {
+		t.Errorf("list with no explore pick changed: %+v", same)
+	}
+
+	// End to end: the real explore of Merfolk Branchwalker, graveyard pick.
+	reg := testutil.CorpusRegistry(t)
+	it := oraclegen.Item{ID: "xe:explore", Template: lower.Template, Scenario: oraclegen.Scenario{
+		Name: "explore", Setup: map[string]oraclegen.Seat{"p0": {
+			Hand: []string{"Merfolk Branchwalker"}, Battlefield: []string{"Forest", "Forest", "Forest"},
+			LibraryTop: []string{"Grizzly Bears", "Forest", "Forest"}}},
+		Steps: []oraclegen.Step{{Op: "cast", Seat: 0, Card: "p0:Merfolk Branchwalker", Mana: "GG"},
+			{Op: "resolve", Seat: 0}, {Op: "resolve", Seat: 0}}}}
+	rq, _ := forgeExportItem(reg, it)
+	if len(rq.GorgeDecisions) != 1 {
+		t.Fatalf("explore item: %d decisions, want 1: %+v", len(rq.GorgeDecisions), rq.GorgeDecisions)
+	}
+	d := rq.GorgeDecisions[0]
+	if d.Step != 1 || d.Kind != "choose_n" || !reflect.DeepEqual(d.PickKinds, []string{"yes"}) || !reflect.DeepEqual(d.Picks, []string{"Yes"}) {
+		t.Errorf("exported explore decision = %+v, want step 1 choose_n [yes] [Yes]", d)
+	}
+}

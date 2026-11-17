@@ -25,7 +25,7 @@ func TestDriverCastArmMapsMorphFamilySpelling(t *testing.T) {
 
 	// Precondition: this is the arm that builds the cast command; without the
 	// suffix expression the assertions below would be vacuous.
-	if !strings.Contains(cast, "String castSuffix") || !strings.Contains(cast, "String card = cardName + castSuffix;") {
+	if !strings.Contains(cast, "String castSuffix") || !strings.Contains(cast, "String card = cardName + castSuffix") {
 		t.Fatalf("cast arm no longer composes the cast command from a suffix:\n%s", cast)
 	}
 

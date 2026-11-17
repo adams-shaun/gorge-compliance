@@ -407,19 +407,19 @@ func TestPickKindSeparatesPlayerTargetFromOpponentChoice(t *testing.T) {
 	}
 }
 
-// TestForcedChainSubTargetIsNotScripted: a CR 603.3d chain link with exactly
-// one legal target is chosen by XMage without asking (Mechanical Mobster,
-// Thorin, Mountain-king); a root trigger target is still scripted.
-func TestForcedChainSubTargetIsNotScripted(t *testing.T) {
+// TestForcedChainSubTargetIsScripted: a CR 603.3d chain link with exactly one
+// legal target is still a target object XMage asks (Mechanical Mobster's
+// "Target creature you control connives" after "up to one target card from a
+// graveyard"), so its pick is scripted after the root slot's, like a root
+// trigger target.
+func TestForcedChainSubTargetIsScripted(t *testing.T) {
+	root := rules.OracleDecision{Step: 0, Kind: "target", Options: 2, Min: 0, Max: 1, Resume: "target",
+		Picks: []string{"Heroes' Hangout (b)"}, PickRefs: []string{"p1:Heroes' Hangout"}, PickKinds: []string{"permanent"}}
 	sub := rules.OracleDecision{Step: 0, Kind: "target", Options: 1, Min: 1, Max: 1, Resume: "trig_sub",
 		Picks: []string{"Mechanical Mobster (a)"}, PickRefs: []string{"p0:Mechanical Mobster"}, PickKinds: []string{"permanent"}}
-	if got := XAnswers([]rules.OracleDecision{sub}, 1, nil); got != nil {
-		t.Fatalf("forced chain sub-target = %#v, want nothing scripted", got)
-	}
-	root := sub
-	root.Resume = "target"
-	if got := XAnswers([]rules.OracleDecision{root}, 1, nil); got == nil {
-		t.Fatal("a forced root trigger target must still be scripted")
+	want := [][]XAnswer{{{0, "target", "Heroes' Hangout"}, {0, "target", "Mechanical Mobster"}}}
+	if got := XAnswers([]rules.OracleDecision{root, sub}, 1, nil); !reflect.DeepEqual(got, want) {
+		t.Fatalf("XAnswers = %#v, want %#v", got, want)
 	}
 }
 

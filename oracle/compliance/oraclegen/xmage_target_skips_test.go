@@ -307,3 +307,44 @@ func TestXMageOptionalTargetSkipSlotShape(t *testing.T) {
 		}
 	}
 }
+
+// TestXMageTriggerUpToTargetDeclinedSkip: a triggered ability's "up to N"
+// target gorge answered with no pick (a beginning-of-combat "up to one target
+// creature" with candidates on the table) is one XMage ask, closed by exactly
+// one target skip queued at the trigger's resolve step.
+func TestXMageTriggerUpToTargetDeclinedSkip(t *testing.T) {
+	for _, max := range []int{1, 2} {
+		d := rules.OracleDecision{Step: 1, Kind: "target", Via: "target", GorgeKind: "target", Min: 0, Max: max,
+			Options: 2, OptionRefs: []string{"p0:CardA", "p1:CardB"}}
+		got := xanswers([]rules.OracleDecision{d}, 2, nil, map[int]bool{0: true})
+		if len(got) != 2 || len(got[0]) != 0 || len(got[1]) != 1 || got[1][0] != (XAnswer{0, "target", "[target_skip]"}) {
+			t.Errorf("max %d: answers %v, want one target skip at the resolve step", max, got)
+		}
+	}
+}
+
+// TestXMageUpToTargetSkipOnlyWhileCandidatesRemain: an "up to N" ask closed
+// short of N takes a closing skip only while gorge offered more candidates
+// than it took; once the picks exhaust the pool XMage completes the object
+// itself and a queued skip would be left over (Eddymurk Crab, itself the only
+// creature for "up to two target creatures").
+func TestXMageUpToTargetSkipOnlyWhileCandidatesRemain(t *testing.T) {
+	for _, c := range []struct {
+		name    string
+		options int
+		skips   int
+	}{{"pool exhausted", 1, 0}, {"candidates remain", 3, 1}, {"count not recorded", 0, 1}} {
+		d := rules.OracleDecision{Step: 1, Kind: "target", Via: "target", GorgeKind: "target", Min: 0, Max: 2,
+			Options: c.options, PickRefs: []string{"p0:CardA"}, Picks: []string{"CardA (a)"}}
+		got := xanswers([]rules.OracleDecision{d}, 2, nil, map[int]bool{0: true})
+		n := 0
+		for _, a := range got[1] {
+			if a.Value == "[target_skip]" {
+				n++
+			}
+		}
+		if n != c.skips || len(got[1]) != 1+c.skips {
+			t.Errorf("%s: answers %v, want the pick plus %d skip(s)", c.name, got[1], c.skips)
+		}
+	}
+}
