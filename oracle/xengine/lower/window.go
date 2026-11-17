@@ -70,6 +70,10 @@ func Windows(reg *cards.Registry, pair []decks.Deck, seed uint64, opt game.Optio
 		if err != nil {
 			return nil, nil, t, err
 		}
+		if why := setupAnswerReasons(reg, l.Item); len(why) > 0 {
+			refused = append(refused, Refusal{ID: id, Turn: c.Turn, Reasons: why})
+			continue
+		}
 		out = append(out, l)
 	}
 	return out, refused, t, nil
@@ -235,6 +239,38 @@ func lowerWindow(reg *cards.Registry, t *game.Tape, c *cut, id string) (Lowered,
 		}
 	}
 	return l, nil
+}
+
+// setupAnswerReasons is why the window's setup drive cannot place the cut: it
+// runs the runner's own setup (the same xmage-fixture drive the self-check
+// uses) with no gameplay steps and reports every ask no scenario answer
+// scripts, so the runner took its fallback. A fallback that picks nothing (a
+// declined target, an optional trigger's empty choice) leaves the state as
+// placed, and a trigger order only orders triggers the drive was going to
+// resolve anyway; every other pick is a decision the cut cannot state, and the
+// lowering would report it at a later gameplay step instead (HOB Down, Down to
+// Goblin-town's chapter I discarding the active seat's hand). A probe that
+// cannot run is left to the self-check's own harness verdict.
+func setupAnswerReasons(reg *cards.Registry, it oraclegen.Item) []string {
+	probe := it
+	probe.Steps = nil
+	res, err := rules.RunOracleScenarioJSON(reg, probe.Raw())
+	if err != nil {
+		return nil
+	}
+	why := map[string]bool{}
+	for _, d := range res.Decisions {
+		if d.Via != "setup fallback" || len(d.Picks) == 0 {
+			continue
+		}
+		if d.Kind == "order" {
+			// A trigger order: the fallback keeps the offered order, and the
+			// drive resolves the same triggers either way.
+			continue
+		}
+		why[reasonSetupAnswer+d.Kind] = true
+	}
+	return sortedKeys(why)
 }
 
 // CheckWindow is SelfCheck for a window, against its own tape.

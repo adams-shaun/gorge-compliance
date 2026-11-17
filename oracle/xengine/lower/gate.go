@@ -63,6 +63,15 @@ const (
 	// that could remove it, and the live game may have cast it long ago, so the
 	// replay would show one exile card too many.
 	reasonPrepareEntry = "setup_entry_prepared"
+	// reasonSetupAnswer is a window whose setup drive poses a decision no
+	// scenario answer scripts. SetupAnswers carries only the as-enters choices
+	// capture could read from state (a permanent's chosen colour); every other
+	// ask is missing, so the runner takes its fallback. The fallback's pick is
+	// not the cut's and can change state the self-check cannot see (a card
+	// discarded from a hidden hand, a library order), so the window is
+	// unplaceable rather than merely divergent. The reason names the decision
+	// kind, e.g. setup_answer:mode.
+	reasonSetupAnswer = "setup_answer:"
 	// The setup drive expresses state as events: a by-name tapped placement is
 	// a Tap, a counters field a CounterChange, a life field a LifeChange. A
 	// placed permanent that triggers on one of those events would resolve a
