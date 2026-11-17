@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Check the driver's back-face setup staging (duplicate/tapped placements, front refs, seat and hand isolation) without H2 or a game.
+# Check the driver's back-face setup staging (duplicate/tapped placements,
+# front refs, per-seat and hand isolation) without starting H2 or a game.
 # Requires the read-only XMage build, just like the driver's javac check.
 set -euo pipefail
 root=$(realpath -m "${XMAGE_ORACLE_DIR:-$(dirname "$0")/../.oracle-build/xmage}")

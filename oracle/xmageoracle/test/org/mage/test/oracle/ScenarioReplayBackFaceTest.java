@@ -17,7 +17,6 @@ import mage.cards.p.PeterParker;
 import mage.cards.v.VincentValentine;
 import mage.constants.Zone;
 import mage.game.PutToBattlefieldInfo;
-import mage.player.ai.ComputerPlayer;
 import org.mage.test.player.TestPlayer;
 import sun.misc.Unsafe;
 
@@ -104,14 +103,10 @@ public final class ScenarioReplayBackFaceTest {
         field.setAccessible(true);
         Unsafe unsafe = (Unsafe) field.get(null);
         RecordingDriver driver = (RecordingDriver) unsafe.allocateInstance(RecordingDriver.class);
-        TestPlayer p0 = (TestPlayer) unsafe.allocateInstance(TestPlayer.class);
-        TestPlayer p1 = (TestPlayer) unsafe.allocateInstance(TestPlayer.class);
-        // add() reads p.getId(), which TestPlayer forwards to its ComputerPlayer.
-        for (TestPlayer p : new TestPlayer[]{p0, p1}) {
-            ComputerPlayer inner = (ComputerPlayer) unsafe.allocateInstance(ComputerPlayer.class);
-            set(inner, "playerId", UUID.randomUUID());
-            set(p, "computerPlayer", inner);
-        }
+        TestPlayer p0 = new TestPlayer(new org.mage.test.player.TestComputerPlayer("A",
+                mage.constants.RangeOfInfluence.ALL));
+        TestPlayer p1 = new TestPlayer(new org.mage.test.player.TestComputerPlayer("B",
+                mage.constants.RangeOfInfluence.ALL));
         set(driver, "playerA", p0);
         set(driver, "playerB", p1);
         driver.placements = new HashMap<>();
