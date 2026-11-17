@@ -199,6 +199,7 @@ func forgeExportItem(reg *cards.Registry, it oraclegen.Item) (forgeRequest, rule
 func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision) forgeRequest {
 	sha := gate.ItemSHA(it)
 	decisions = forgeDropNamedManaAbilityDecisions(reg, it, g, forgeDropDeclarationDecisions(it, decisions))
+	decisions = forgeExploreAsYesNo(decisions)
 	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, decisions)
 	it = forgeDeclarations(it)
 	return forgeRequest{
@@ -302,6 +303,63 @@ func forgeDropDeclarationDecisions(it oraclegen.Item, decisions []rules.OracleDe
 		out = append(out, d)
 	}
 	return out
+}
+
+// forgeExploreAsYesNo rewrites gorge's explore pick (CR 701.44a: a nonland
+// card revealed by explore goes back on top or into the graveyard) into the
+// yes/no decision Forge poses for it, "[Explore] Put <card> in your
+// graveyard?". gorge logs it as a choose_n with resume "explore" and one pick
+// of kind "graveyard" (option 0) or "top" (option 1, "keep" in older
+// snapshots); the driver's DecisionQueue only matches a yes/no ask to a
+// choose_n whose single pick has kind yes or no (isYesNo), so left as is the
+// ask is a strict miss and the pick an unconsumed gorge decision. "yes" puts
+// the card into the graveyard. The pick loses its object refs: the card is
+// the one revealed, not a choice among objects. Step, seat and order are
+// kept, so the decision stays on the step it was logged at. The input slice
+// is not modified; a list with no explore pick is returned as is.
+func forgeExploreAsYesNo(decisions []rules.OracleDecision) []rules.OracleDecision {
+	var out []rules.OracleDecision
+	for i, d := range decisions {
+		pick, ok := forgeExplorePick(d)
+		if !ok {
+			continue
+		}
+		if out == nil {
+			out = append([]rules.OracleDecision(nil), decisions...)
+		}
+		label := "No"
+		if pick == "yes" {
+			label = "Yes"
+		}
+		d.Picks = []string{label}
+		d.PickKinds = []string{pick}
+		d.PickIdx = nil
+		d.PickRefs = nil
+		d.PickRefsInexact = nil
+		d.ObjectPicks = nil
+		d.OptionRefs = nil
+		d.First = "Yes"
+		out[i] = d
+	}
+	if out == nil {
+		return decisions
+	}
+	return out
+}
+
+// forgeExplorePick reports gorge's explore pick as "yes" (graveyard) or "no"
+// (back on top).
+func forgeExplorePick(d rules.OracleDecision) (string, bool) {
+	if d.Kind != "choose_n" || d.Resume != "explore" || len(d.PickKinds) != 1 || len(d.Picks) != 1 {
+		return "", false
+	}
+	switch d.PickKinds[0] {
+	case "graveyard":
+		return "yes", true
+	case "top", "keep":
+		return "no", true
+	}
+	return "", false
 }
 
 // forgeDropNamedManaAbilityDecisions removes gorge's "Choose a mana ability of
