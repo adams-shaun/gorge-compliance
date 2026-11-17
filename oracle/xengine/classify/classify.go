@@ -671,16 +671,21 @@ func distinctColours(pool string) int {
 	return n
 }
 
-// missStep matches the step of the only two strict misses Forge poses past the
-// item's last step: "Missing cleanup discard answer at step 12: ..." and
-// "Missing yesno answer at step 6: optional trigger ...". Any other kind
-// (order, surveil, target, mode, ...) is a real shape finding wherever it sits.
-var missStep = regexp.MustCompile(`^Missing (?:cleanup discard answer at step (\d+)|yesno answer at step (\d+): optional trigger)`)
+// missStep matches the step of the only strict misses Forge poses past the
+// item's last step: "Missing cleanup discard answer at step 12: ...",
+// "Missing yesno answer at step 6: optional trigger ..." and "Missing zone
+// change answer at step 39: 7 options, 0..1 to pick" (a library search, with
+// no gorge pick logged to answer it). Any other kind (order, surveil, target,
+// mode, a zone change whose logged pick is not among Forge's options, ...) is a
+// real shape finding wherever it sits.
+var missStep = regexp.MustCompile(`^Missing (?:cleanup discard answer at step (\d+)|yesno answer at step (\d+): optional trigger|zone change answer at step (\d+): \d+ options, \d+\.\.\d+ to pick)`)
 
 // trailingMiss reports a TrailingMisses follower's (Forge's) strict miss that
 // is only a question Forge poses after the item's last step and nothing else:
-// a cleanup discard when the hand is over seven, or an optional trigger's yes/no once the last pass lets the
-// trigger resolve. Forge asks it inside that last pass, while gorge stops at
+// a cleanup discard when the hand is over seven, an optional trigger's yes/no
+// once the last pass lets the trigger resolve, or the card pick of a library
+// search (Evolving Wilds, Prishe's Wanderings) the last pass lets resolve.
+// Forge asks it inside that last pass, while gorge stops at
 // the pass with the same decision pending and unlogged, so no checkpoint
 // observes it and it says nothing about decision shape. The comparison of
 // every snapshot then decides the class. A leftover (gorge answered something
@@ -694,7 +699,7 @@ func trailingMiss(x oraclediff.XResult, steps int, fl followers.Follower) bool {
 	if m == nil {
 		return false
 	}
-	n, err := strconv.Atoi(m[1] + m[2])
+	n, err := strconv.Atoi(m[1] + m[2] + m[3])
 	return err == nil && n == steps
 }
 

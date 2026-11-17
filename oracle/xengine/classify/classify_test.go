@@ -192,10 +192,14 @@ func TestReproRefusesRepoPath(t *testing.T) {
 // item's last (calib-forge-3 BLB xe:BLB:0:18:w5 "Missing cleanup discard
 // answer at step 12" of 12 steps, xe:BLB:0:3:tape "Missing yesno answer at
 // step 6: optional trigger ..." of 6) is posed past every checkpoint, so it
-// is not a decision_shape finding: the snapshot comparison decides.
+// is not a decision_shape finding: the snapshot comparison decides. The same
+// holds for a library search's card pick ("Missing zone change answer at step
+// N: K options, 0..1 to pick", N the step count: the last pass resolves the
+// search and gorge leaves its pick pending and unlogged).
 func TestClassifyForgeTrailingMiss(t *testing.T) {
 	discard := "Missing cleanup discard answer at step 2: 8 options, 1..1 to pick"
 	yesno := "Missing yesno answer at step 2: optional trigger When Fountainport Bell enters, you may search your library"
+	search := "Missing zone change answer at step 2: 7 options, 0..1 to pick"
 	cases := []struct {
 		name   string
 		engine string
@@ -204,6 +208,9 @@ func TestClassifyForgeTrailingMiss(t *testing.T) {
 		edit   func(*oraclediff.XResult)
 		want   string
 	}{
+		{"library search pick after the last step agrees", "forge", search, "", nil, ClassAgree},
+		{"library search pick at a scripted step stays decision_shape", "forge", "Missing zone change answer at step 1: 7 options, 0..1 to pick", "", nil, ClassDecisionShape},
+		{"a zone change pick not among Forge's options stays decision_shape", "forge", "Missing zone change answer at step 2: gorge pick p1 is not among Forge's 4 options", "", nil, ClassDecisionShape},
 		{"cleanup discard after the last step agrees", "forge", discard, "", nil, ClassAgree},
 		{"optional trigger yes/no after the last step agrees", "forge", yesno, "", nil, ClassAgree},
 		{"trailing miss still diverges on a snapshot", "forge", discard, "",
