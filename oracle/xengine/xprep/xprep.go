@@ -790,8 +790,9 @@ func modeNumbers(reg *cards.Registry, it oraclegen.Item) (map[string]int, string
 }
 
 // prefixes is Item.XAbility: parallel to the steps, the XMage rule-text prefix
-// of every activate step's ability and "" elsewhere (nil when no step
-// activates). An activate step whose prefix is unknown is a Refusal.
+// of every activate step's ability and of a cast step that is the Plot special
+// action, and "" elsewhere (nil when no step carries one). An activate step
+// whose prefix is unknown is a Refusal.
 func prefixes(reg *cards.Registry, it oraclegen.Item) ([]string, *Refusal) {
 	type key struct {
 		card string
@@ -801,6 +802,23 @@ func prefixes(reg *cards.Registry, it oraclegen.Item) ([]string, *Refusal) {
 	cached := map[key]string{}
 	var out []string
 	for i, st := range it.Steps {
+		// Plot is not an activate step: gorge offers it as a cast option
+		// (cast_mode "plot") and XMage replays it as the PlotAbility special
+		// action, selected by its rule text "Plot {cost}". The Forge face's
+		// K:Plot:<cost> keyword gives the cost; a face without one falls back
+		// to the bare "Plot" prefix, which still selects the only PlotAbility.
+		if st.Op == "cast" && strings.EqualFold(st.CastMode, "plot") {
+			if out == nil {
+				out = make([]string, len(it.Steps))
+			}
+			out[i] = "Plot"
+			if c, face, ok := stepCard(reg, it, st); ok {
+				if cost, ok := c.Faces[face].KeywordCostParam("Plot"); ok && cost != "" {
+					out[i] = "Plot " + xmageManaText(cost)
+				}
+			}
+			continue
+		}
 		if st.Op != "activate" {
 			continue
 		}
@@ -830,6 +848,32 @@ func prefixes(reg *cards.Registry, it oraclegen.Item) ([]string, *Refusal) {
 		out[i] = comboColourPrefix(p, c.Faces[face], *st.AbilityIndex, st)
 	}
 	return out, nil
+}
+
+// xmageManaText renders a Forge mana cost ("RW RW", "3", "G") in XMage's
+// rule-text braces, including hybrid halves: "RW" is "{R/W}". It mirrors the
+// generator's identically named helper in oraclegen/templates, which xprep
+// must not import: that package is the Level B generator above this one. The
+// two renderings must agree on the cost a step pays, so keep them in sync.
+func xmageManaText(cost string) string {
+	var b strings.Builder
+	for _, sym := range strings.Fields(cost) {
+		switch {
+		case sym == "0":
+			b.WriteString("{0}")
+		case strings.Trim(sym, "0123456789") == "":
+			b.WriteString("{" + sym + "}")
+		case len(sym) == 1:
+			b.WriteString("{" + sym + "}")
+		case len(sym) == 2 && strings.Contains("WUBRG", sym[:1]) && strings.Contains("WUBRG", sym[1:]):
+			b.WriteString("{" + sym[:1] + "/" + sym[1:] + "}")
+		case len(sym) == 2 && sym[0] == '2' && strings.Contains("WUBRG", sym[1:]):
+			b.WriteString("{2/" + sym[1:] + "}")
+		default:
+			b.WriteString("{" + sym + "}")
+		}
+	}
+	return b.String()
 }
 
 // comboColourStep reports that prefixes named a colour for step i.
