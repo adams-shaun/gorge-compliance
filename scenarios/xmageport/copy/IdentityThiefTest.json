@@ -32,7 +32,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Primal Clay",
-     "mana": "CCCC"
+     "mana": "RRRR"
     },
     {
      "op": "pass_to",
@@ -44,7 +44,8 @@
        "kind": "any",
        "pick": [
         "3/3"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },
@@ -69,7 +70,8 @@
        "kind": "any",
        "pick": [
         "yes"
-       ]
+       ],
+       "seat": 1
       }
      ]
     },
@@ -104,12 +106,11 @@
      "eq": 1
     },
     {
-     "card": "p0:Primal Clay",
+     "card": "p1:Primal Clay",
      "pt": "3/3"
     }
    ],
-   "xmage": "IdentityThiefTest#testCopyPrimalClay",
-   "known_bug": "XP[clone-setpt-not-copiable]: Primal Clay's as-enters choice is DB$ Clone Defined$ Self SetPower$/SetToughness$, which effClone installs as a separate layer-7b P/T continuous effect (clonePT) instead of folding it into the copiable values, so Identity Thief copying the 3/3 Primal Clay gets the printed */* = 0/0 and dies to state-based actions (transcript: p1 battlefield Primal Clay 0, want 1; \"p1:Primal Clay\" names no object). CR 707.2 (as-enters P/T choices are copiable) / 707.9b. verified at gorge 08fc227a61."
+   "xmage": "IdentityThiefTest#testCopyPrimalClay"
   },
   {
    "name": "test-should-not-copy-p1-p1-counters",

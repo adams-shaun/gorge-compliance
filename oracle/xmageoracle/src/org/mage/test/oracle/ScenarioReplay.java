@@ -300,6 +300,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // an optional additional cost, so the generator's leading "Yes" pays it,
     // and its PromiseGiftCost then asks which opponent (giftOpponentChoice).
     private boolean giftPromisedCast = false;
+    /** Whether the replay followed a recorded pass position (turn/step/active seat). */
+    private boolean followedPassPosition = false;
 
     /** TestPlayer normally delegates these library decisions directly to its AI,
      * bypassing the scripted target/choice queues. Route them through this player. */
@@ -642,6 +644,46 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return super.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
         }
 
+        /**
+         * XMage asks the controller to order simultaneous replacement effects
+         * (CR 616.1: Edgewall Inn's "enters tapped" and "as it enters, choose a
+         * color"; Zhao's "nonbasic lands enter tapped" beside Deserted Beach's
+         * own). gorge applies them in its own fixed order and poses no decision
+         * for it, so the order is never scripted, and TestPlayer's strict mode
+         * stops the replay at "Missing CHOICE def" -- or, with a scripted answer
+         * for a LATER ask at the head of the queue (the setup colour), logs a
+         * wrong choice and fails the same way. An unscripted ask takes the
+         * base AI's order, exactly the loose rerun's fallback, WITHOUT touching
+         * the queue; a head that names one of the effects is still consumed by
+         * the base player.
+         */
+        @Override
+        public int chooseReplacementEffect(Map<String, String> effectsMap,
+                Map<String, mage.MageObject> objectsMap, Game game) {
+            if (effectsMap.size() > 1 && !replacementScripted(getChoices(), effectsMap.values())) {
+                return getRealPlayer().chooseReplacementEffect(effectsMap, objectsMap, game);
+            }
+            return super.chooseReplacementEffect(effectsMap, objectsMap, game);
+        }
+
+        /** Whether the head of the choice queue names one of the replacement
+         * effects' texts, by TestPlayer.chooseReplacementEffect's own rule: a
+         * text prefix, or "<part>*<part>" with both parts contained. */
+        static boolean replacementScripted(List<String> choices, java.util.Collection<String> effectTexts) {
+            if (choices.isEmpty()) {
+                return false;
+            }
+            String head = choices.get(0);
+            String[] parts = head.split("\\*");
+            for (String text : effectTexts) {
+                if (text.startsWith(head)
+                        || parts.length > 1 && text.contains(parts[0]) && text.contains(parts[1])) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /** An "alternative" cast's menu: AbilityImpl's alternative-cost key
          * choice ("You may choose an alternative cost", keys "1".. per
          * alternative, then "Cast with no alternative cost"). */
@@ -824,7 +866,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                         new FilterCard("card" + (cards.size() == 1 ? "" : "s") + " to PUT on the BOTTOM of your library (Scry)"));
                 Cards selected = scriptedLibrarySelection(cards, game);
-                if (selected == null) {
+                if (selected == null && nothingScripted(getChoices(), getTargets())) {
+                    // Gorge recorded no arrange decision, so nothing was
+                    // scripted: keep every looked-at card where it is.
+                    selected = new CardsImpl();
+                } else if (selected == null) {
                     chooseTarget(Outcome.Benefit, cards, target, source, game);
                     selected = new CardsImpl(target.getTargets());
                 }
@@ -854,7 +900,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                         new FilterCard("card" + (cards.size() == 1 ? "" : "s") + " to PUT into your GRAVEYARD (Surveil)"));
                 Cards selected = scriptedLibrarySelection(cards, game);
-                if (selected == null) {
+                if (selected == null && nothingScripted(getChoices(), getTargets())) {
+                    // Gorge recorded no arrange decision, so nothing was
+                    // scripted: keep every looked-at card where it is.
+                    selected = new CardsImpl();
+                } else if (selected == null) {
                     chooseTarget(Outcome.Benefit, cards, target, source, game);
                     selected = new CardsImpl(target.getTargets());
                 }
@@ -867,6 +917,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             game.fireEvent(new GameEvent(GameEvent.EventType.SURVEILED, getId(), source, getId(), event.getAmount(), true));
             return Player.SurveilResult.surveil(graveyard, top);
+        }
+
+        /** Whether the scenario scripted nothing at all for the player: both
+         * answer queues are empty. A scry/surveil ask in that state has no
+         * answer to read -- gorge recorded no arrange decision for it (Carrot
+         * Cake's "create a Rabbit and scry 1" off an OrTriggeredAbility) -- so
+         * the cards stay where they are instead of failing "Missing TARGET
+         * def". A queue holding anything keeps the base's strict reading. */
+        static boolean nothingScripted(List<String> choices, List<String> targets) {
+            return choices.isEmpty() && targets.isEmpty();
         }
 
         /** Consume the generator's choice-queue selection and kept-card order.
@@ -910,37 +970,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 return null;
             }
 
-            // The remaining labels are the chosen top-card ordering. The
-            // generator repeats labels from the arrange decision here; a label
-            // may therefore name a card already selected for the graveyard.
-            // Match against the original look set to distinguish an answer for
-            // this order prompt from an answer belonging to a later choice,
-            // while only adding cards still available to the top of the library.
-            Set<Card> lookedAt = new java.util.LinkedHashSet<>(lookedAtOrder);
+            // The labels after the selection's skip are the kept cards' top
+            // order (pile A, in the decision's pick order). The generator
+            // emits every kept card exactly once, so the order phase is
+            // bounded by the cards still available after the selection and
+            // consumes only labels naming one of them: a later decision's
+            // answer in the same step may name a looked-at card (a binned
+            // duplicate, or a card already selected), and must stay queued.
+            // An all-kept arrange is the skip alone (nothing selected, no
+            // order labels follow), so it consumes none.
             List<Card> ordered = new ArrayList<>();
-            // A partial arrange emits each pick once for selection, then a
-            // skip and exactly those same picks for order. The look set can
-            // be larger than the pick set; counting it steals later answers.
-            // A forced bottom order emits picks only once (no skip), so it
-            // has no separate order answers to consume.
-            int orderAnswersRemaining = selectionEnded ? selected.size() : 0;
-            while (orderAnswersRemaining > 0 && !queue.isEmpty()) {
-                String answer = queue.get(0);
-                Card match = findByName(available, answer);
-                if (match != null) {
-                    queue.remove(0);
+            if (selectionEnded && !selected.isEmpty()) {
+                List<String> keptNames = new ArrayList<>();
+                for (Card card : available) {
+                    keptNames.add(card.getName());
+                }
+                for (String name : keptOrderLabels(queue, keptNames)) {
+                    Card match = findByName(available, name);
                     available.remove(match);
                     ordered.add(match);
-                    orderAnswersRemaining--;
-                    continue;
                 }
-                if (findByName(lookedAt, answer) == null) {
-                    break;
-                }
-                // This order label names a card consumed during selection.
-                // Consume it even though that card cannot be put back on top.
-                queue.remove(0);
-                orderAnswersRemaining--;
             }
             cards.clear();
             for (Card card : ordered) {
@@ -954,6 +1003,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             }
             return selected;
+        }
+
+        /** Consume the kept-card order labels at the head of {@code queue}:
+         * the longest leading run naming a not-yet-ordered kept card, never
+         * more than there are kept cards. The first label that names no
+         * remaining kept card (or the queue's end) stops the phase, so an
+         * answer belonging to a later decision is left queued. Returns the
+         * consumed names in order. */
+        static List<String> keptOrderLabels(List<String> queue, List<String> keptNames) {
+            List<String> remaining = new ArrayList<>(keptNames);
+            List<String> consumed = new ArrayList<>();
+            while (!remaining.isEmpty() && !queue.isEmpty()) {
+                if (!remaining.remove(queue.get(0))) {
+                    break;
+                }
+                consumed.add(queue.remove(0));
+            }
+            return consumed;
         }
 
         /**
@@ -988,6 +1055,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             }
             return null;
+        }
+
+        /** The cards-list overload TargetCardInLibrary.choose (every library
+         * search) reaches. A search whose filter matches no library card is
+         * declined here rather than failing "Missing TARGET def"
+         * ({@link #noCandidateOptionalAsk}); every other ask is the base's. */
+        @Override
+        public boolean chooseTarget(Outcome outcome, Cards cards, mage.target.TargetCard target, Ability source, Game game) {
+            if (target instanceof mage.target.common.TargetCardInLibrary
+                    && noCandidateOptionalAsk(getTargets(), target.getMinNumberOfTargets() - target.getSize(),
+                            target.possibleTargets(target.getAffectedAbilityControllerId(this.getId()), source, game, cards))) {
+                return false;
+            }
+            return super.chooseTarget(outcome, cards, target, source, game);
         }
 
         /**
@@ -1134,6 +1215,69 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     && target.getTargetName().contains("can be attached to");
         }
 
+        /** Whether an optional ask has nothing to answer: it needs no more
+         * picks and no candidate is legal. XMage poses a "you may search your
+         * library for a Food card" TargetCardInLibrary (Courier of
+         * Comestibles' ETB) even when the library holds no Food, and gorge,
+         * which asks nothing of an empty candidate set, records only the
+         * accepted confirm -- so no target answer exists to script. Declining
+         * is then the only legal outcome. The queue is deliberately ignored
+         * (every answer is queued up front, so a later ask's answer sits in
+         * it and no answer can match zero candidates), except a skip at the
+         * front, which belongs to this ask and is the base's to honour (same
+         * rule as {@link #unscriptableEmptyAsk}). */
+        static boolean noCandidateOptionalAsk(List<String> targetQueue, int needed, java.util.Collection<UUID> candidates) {
+            return needed <= 0 && candidates.isEmpty()
+                    && !(!targetQueue.isEmpty() && TestPlayer.TARGET_SKIP.equals(targetQueue.get(0)));
+        }
+
+        /** The hand card a TargetCardInHand ask reached through chooseTarget
+         * should take when the TARGET queue has nothing for it, or null to
+         * fall through to the base player. Two shapes: (1) the scripted pick
+         * sits on the CHOICE queue -- gorge records a hand pick as a choose
+         * ask, but an XMage effect that calls Target.chooseTarget (Ruthless
+         * Negotiation's ExileFromZoneTargetEffect, Mindmelter, Unscrupulous
+         * Agent) reads the target queue, so the pick is consumed from the
+         * choice queue head when it names a candidate; (2) the pick was
+         * forced -- the mandatory ask has no more candidates than picks it
+         * must make -- which gorge never records as a decision (a one-card
+         * hand), so a legal card is taken (the game re-asks for the rest). A
+         * queued target answer naming a candidate is always the base's to
+         * read, so a scripted target is never overridden
+         * and a choice that names no candidate is left in place for the
+         * base's strict unused-command check. {@code needed} is how many more
+         * picks the ask must make (0 for an "up to" ask with its minimum met). */
+        static UUID handCardChoice(List<String> targetQueue, List<String> choices, List<UUID> candidates,
+                int needed, BiPredicate<UUID, String> matches) {
+            if (!targetQueue.isEmpty()) {
+                // A queued answer naming a candidate (or a skip) is this ask's
+                // own and the base's to read. One that names no candidate
+                // belongs to a later ask in the window, so it only stops the
+                // choice-queue shortcut; a forced pick is still taken.
+                if (TestPlayer.TARGET_SKIP.equals(targetQueue.get(0))) {
+                    return null;
+                }
+                for (UUID id : candidates) {
+                    if (matches.test(id, targetQueue.get(0))) {
+                        return null;
+                    }
+                }
+                return needed > 0 && candidates.size() <= needed ? candidates.get(0) : null;
+            }
+            if (!choices.isEmpty() && !TestPlayer.CHOICE_SKIP.equals(choices.get(0))) {
+                for (UUID id : candidates) {
+                    if (matches.test(id, choices.get(0))) {
+                        choices.remove(0);
+                        return id;
+                    }
+                }
+            }
+            if (needed > 0 && candidates.size() <= needed && !candidates.isEmpty()) {
+                return candidates.get(0);
+            }
+            return null;
+        }
+
         /** A cast-time sacrifice ask: the non-targeting TargetSacrifice a
          * paid additional cost poses (Bargain, or an OrCost's sacrifice half).
          * XMage hints it "to sacrifice", which is what the target carries
@@ -1278,6 +1422,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 List<UUID> candidates = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
                 UUID chosen = attachmentChoice(getTargets(), candidates,
                         (id, answer) -> hasObjectTargetNameOrAlias(game.getPermanent(id), answer));
+                if (chosen != null) {
+                    target.addTarget(chosen, source, game);
+                    return true;
+                }
+            }
+            if (target.getOriginalTarget() instanceof mage.target.common.TargetCardInHand) {
+                UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+                List<UUID> candidates = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
+                UUID chosen = handCardChoice(getTargets(), getChoices(), candidates,
+                        target.getMinNumberOfTargets() - target.getSize(),
+                        (id, answer) -> hasObjectTargetNameOrAlias(game.getCard(id), answer));
                 if (chosen != null) {
                     target.addTarget(chosen, source, game);
                     return true;
@@ -1526,6 +1681,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             alternativeCostCast = false;
             copyCostCast = null;
             giftPromisedCast = false;
+            followedPassPosition = false;
             gorgeName = str(sc, "card");
             xmageName = str(sc, "xmage_name");
             endTurnScenario = hasEndTurnEffect(xmageName.isEmpty() ? gorgeName : xmageName);
@@ -1607,8 +1763,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // Only EndTurn scenarios need the extended boundary. Ordinary
             // replays retain the original turn-1 stop and cannot encounter
             // unrelated turn-2 upkeep triggers or decisions.
-            setStopAt(endTurnScenario ? turn + 1 : turn,
-                    endTurnScenario ? PhaseStep.UPKEEP : PhaseStep.END_TURN);
+            // A recorded game's window ends at the step its last pass entered
+            // (gorge's final checkpoint). Playing on to the turn's end step
+            // lets XMage's own AI pass through later steps that gorge never
+            // reached, and a trigger there (a beginning-of-combat "up to two
+            // target creatures") asks a target nobody scripted: "Missing
+            // TARGET def". So stop at that step instead.
+            if (!endTurnScenario && followedPassPosition) {
+                setStopAt(turn, phase);
+            } else {
+                setStopAt(endTurnScenario ? turn + 1 : turn,
+                        endTurnScenario ? PhaseStep.UPKEEP : PhaseStep.END_TURN);
+            }
             execute();
         } catch (Throwable t) {
             String msg = t.getClass().getSimpleName() + ": " + t.getMessage();
@@ -2575,8 +2741,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /**
-     * Whether a spell ability is *targetless until its adjuster runs*: it has a
-     * target adjuster AND no base target. Only this shape breaks the inline
+     * Whether a spell ability must take its targets through the queue: it has a
+     * target adjuster AND either no base target or an adjuster that discards
+     * pre-set targets ({@link #replacesCastTargets}). The first shape breaks the inline
      * {@code $target=} form -- the up-front check reads the unadjusted ability
      * ({@code handleNonPlayerTargetTarget}'s empty {@code selectedMode.getTargets()})
      * and throws "Ability has no targets" (The Eagles Are Coming!: no base
@@ -2586,7 +2753,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * cannot reroute it.
      */
     static boolean needsQueuedCastTargets(Ability ability) {
-        return hasTargetAdjuster(ability) && ability.getAllSelectedTargets().isEmpty();
+        return hasTargetAdjuster(ability)
+                && (ability.getAllSelectedTargets().isEmpty() || replacesCastTargets(ability));
+    }
+
+    /**
+     * Whether the ability's adjuster discards whatever the cast command
+     * pre-set and builds fresh target objects: a {@code ConditionalTargetAdjuster}
+     * ({@code adjustTargets} starts with {@code getTargets().clear()}, then
+     * re-adds the blueprint or the replacement). Such a card (Into the Flood
+     * Maw, Long River's Pull: a gift swaps the target filter) declares a base
+     * target, so the inline {@code $target=} form validates, is stored on the
+     * base object, and is wiped when the adjuster runs mid-cast; the chooser
+     * then asks again and the TestPlayer fails "Missing TARGET def". A queued
+     * target is read by that later ask, so these casts take the queue route.
+     */
+    static boolean replacesCastTargets(Ability ability) {
+        return ability != null
+                && ability.getTargetAdjuster() instanceof mage.target.targetadjustment.ConditionalTargetAdjuster;
     }
 
     /** The card's spell ability, or null when the name does not resolve. */
@@ -2764,9 +2948,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return targetsDivided(spellAbility(name));
     }
 
-    /** Whether the card's spell ability has exactly one target object and
-     * n answers already reach its maximum, so no slot is left to skip. */
-    private static boolean singleTargetFilled(String name, int n) {
+    /** Whether n answers already reach the combined maximum of the card's
+     * spell-ability target objects, so no slot is left to skip. */
+    private static boolean targetSlotsFilled(String name, int n) {
         CardInfo info = CardRepository.instance.findCard(name);
         Card c = info == null ? null : info.createCard();
         if (c == null) {
@@ -2775,9 +2959,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return !targetSlotNeedsSkip(c.getSpellAbility().getAllSelectedTargets(), n);
     }
 
-    /** An unfilled or open target slot needs an explicit skip to finish casting. */
+    /** An unfilled or open target slot needs an explicit skip to finish casting.
+     * XMage poses each slot in order and a slot closes at its maximum, so the
+     * supplied answers leave an ask open only when they total less than every
+     * slot's maximum (Rabid Bite's two required slots, both filled, ask nothing
+     * more: a trailing skip there is left unused). A spell with no declared
+     * slot gets its targets from an adjuster after cast setup, so it keeps the
+     * skip. */
     static boolean targetSlotNeedsSkip(List<mage.target.Target> targets, int supplied) {
-        return targets.size() != 1 || supplied < targets.get(0).getMaxNumberOfTargets();
+        if (targets.isEmpty()) {
+            return true;
+        }
+        long capacity = 0;
+        for (mage.target.Target t : targets) {
+            capacity += t.getMaxNumberOfTargets();
+        }
+        return supplied < capacity;
     }
 
     /** Normalises a cost label so gorge's pick ("Sacrifice artifact or
@@ -2855,6 +3052,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // XMage's castSpell takes. A step that already names the half
                 // also replays.
                 || mode.equals("adventure_alt") || mode.equals("omen_alt")
+                // "warped": Warp (CR 702.185) is its own SpellAbility on the
+                // card (WarpAbility, "<card> with Warp"), picked by that name
+                // like WarpTest does; the step's mana is the warp cost.
+                || mode.equals("warped")
                 || copyCostKeyword(mode) != null;
     }
 
@@ -3595,7 +3796,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             String text, Integer abilityIndex) {
         runCode("mana ability " + card + " \"" + text + "\"", turn, phase, p, (info, pl, g) -> {
             for (ManaSource source : namedManaSources(g, pl, ref, card, stepIdx)) {
-                ActivatedManaAbilityImpl ability = findManaAbility(source.card, source.zone, pl, g,
+                ActivatedManaAbilityImpl ability = findManaAbility(source.card, source.zone, p, g,
                         text, abilityIndex, card, stepIdx);
                 if (ability == null) {
                     continue;
@@ -3662,7 +3863,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if (boundId != null) {
             Card boundCard = g.getCard(boundId);
             Zone boundZone = g.getState().getZone(boundId);
-            if (boundCard != null && boundZone != null) {
+            // A transformed double-faced card's setup alias can name the OLD
+            // half after the craft/transform returned a new card object to the
+            // battlefield; that half is OUTSIDE and has no live mana ability.
+            // Only a card in a real zone is a candidate.
+            if (boundCard != null && boundZone != null && boundZone != Zone.OUTSIDE) {
                 seen.add(boundCard.getId());
                 sources.add(new ManaSource(boundCard, boundZone));
             }
@@ -3735,11 +3940,35 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** Whether a live object is one of the same-named objects a scenario ref
-     * names, by its setup spelling, its staged back face or its live name. */
+     * names, by its setup spelling, its staged back face or its live name.
+     *
+     * A transformed double-faced permanent is also matched by either face of
+     * its main card: a front-face ref ("p0:Sunbird Standard") names the craft
+     * source that has since become "Sunbird Effigy", and the live permanent
+     * keeps the front name only on the main card. */
     private boolean matchesRef(Card object, String front, String live) {
         String setup = setupName(object);
         String actual = xmageSpelling(object.getName());
-        return setup.equals(front) || setup.equals(live) || actual.equals(front) || actual.equals(live);
+        if (setup.equals(front) || setup.equals(live) || actual.equals(front) || actual.equals(live)) {
+            return true;
+        }
+        if (object instanceof Permanent) {
+            Card main = ((Permanent) object).getMainCard();
+            if (main != null) {
+                String frontFace = xmageSpelling(main.getName());
+                if (frontFace.equals(front) || frontFace.equals(live)) {
+                    return true;
+                }
+                Card other = main.getSecondCardFace();
+                if (other != null) {
+                    String otherFace = xmageSpelling(other.getName());
+                    if (otherFace.equals(front) || otherFace.equals(live)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /** The object id a scenario ref is bound to on the activating player,
@@ -3755,9 +3984,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * the item means (gorge's face abilities are its activated abilities, in
      * printed order); the rule text is the selector both sides already agree
      * on, so a differing XMage ordering still activates the right ability.
-     * More than one text match without a usable index is a harness error,
-     * never a guess. */
-    private static ActivatedManaAbilityImpl findManaAbility(Card source, Zone zone, Player p, Game g,
+     *
+     * XMage often splits one gorge ability into several: "{T}, Pay 1 life: Add
+     * {G}, {U}, or {R}" is three Green/Blue/RedManaAbility instances, so the
+     * gorge ability_index does not name one of them. When the text matches
+     * several abilities, the scripted colour choice that gorge recorded for
+     * the same activation picks the split member (and is consumed, since XMage
+     * poses no colour dialog for it). Duplicate granted abilities (Locus of
+     * Enlightenment keeps both Elvish Mystic's and Llanowar Elves' "{T}: Add
+     * {G}") have identical rule text, so any one is the same activation. More
+     * than one DISTINCT text match without a usable index or colour answer is
+     * a harness error, never a guess. */
+    private static ActivatedManaAbilityImpl findManaAbility(Card source, Zone zone, TestPlayer p, Game g,
             String text, Integer abilityIndex, String card, int stepIdx) {
         List<ActivatedManaAbilityImpl> available = new ArrayList<>(
                 source.getAbilities(g).getAvailableActivatedManaAbilities(zone, p.getId(), g));
@@ -3778,6 +4016,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return matching.get(0);
         }
         if (matching.size() > 1) {
+            if (sameRuleText(matching)) {
+                return matching.get(0);
+            }
+            char colour = queuedManaColour(p);
+            ActivatedManaAbilityImpl chosen = colour == 0 ? null : soleColourMatch(matching, colour);
+            if (chosen != null) {
+                p.getChoices().remove(0);
+                return chosen;
+            }
             throw new IllegalStateException("harness: activate step " + stepIdx + " on " + card + " matches "
                     + matching.size() + " mana abilities for \"" + text + "\" and ability_index "
                     + abilityIndex + " does not identify one");
@@ -3789,6 +4036,49 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return indexed;
         }
         return null;
+    }
+
+    /** Whether every matching ability has the same rule text: granted
+     * duplicates of one ability, where activating any is the same choice. */
+    private static boolean sameRuleText(List<ActivatedManaAbilityImpl> abilities) {
+        String first = abilities.get(0).toString();
+        for (ActivatedManaAbilityImpl ability : abilities) {
+            if (!first.equals(ability.toString())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** The mana colour the player's next scripted choice names, or 0 when the
+     * head of the choice queue is not a colour (an unrelated ask is next). */
+    private static char queuedManaColour(TestPlayer p) {
+        if (p.getChoices().isEmpty()) {
+            return 0;
+        }
+        String choice = p.getChoices().get(0);
+        for (char c : "WUBRGC".toCharArray()) {
+            if (ScriptedChoicePlayer.colourName(c).equalsIgnoreCase(choice)) {
+                return c;
+            }
+        }
+        return 0;
+    }
+
+    /** The one text-matching ability whose rule adds the named colour, or
+     * null when none or several do. */
+    private static ActivatedManaAbilityImpl soleColourMatch(List<ActivatedManaAbilityImpl> matching, char colour) {
+        String mark = "{" + colour + "}";
+        ActivatedManaAbilityImpl chosen = null;
+        for (ActivatedManaAbilityImpl ability : matching) {
+            if (ability.toString().contains(mark)) {
+                if (chosen != null) {
+                    return null;
+                }
+                chosen = ability;
+            }
+        }
+        return chosen;
     }
 
     /** The source's ability_index-th activated ability (gorge indexes its
@@ -4128,6 +4418,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         phase = phaseOfGorgeStep(pos.get("step").getAsString());
         activeSeat = pos.get("active").getAsInt();
         attackAdvancedTurn = false;
+        followedPassPosition = true;
     }
 
     /** The commands step {@code index} queues before its own actions and
@@ -4685,12 +4976,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String castSuffix = "morphed".equals(mode) || "megamorphed".equals(mode)
                         ? " using Morph"
                         : "disguised".equals(mode) ? " using Disguise" : "";
-                String card = cardName + castSuffix;
+                boolean warpedCast = "warped".equals(mode);
+                String card = cardName + castSuffix + (warpedCast ? " with Warp" : "");
                 if (!castSuffix.isEmpty()) {
                     faceDownRefs.add(str(st, "card"));
                 }
                 List<String> tg = targets(st);
-                if (hasAlternativeSourceCost(cardName)) {
+                if (!warpedCast && hasAlternativeSourceCost(cardName)) {
                     // A plain cast step: gorge paid the mana cost, so decline
                     // the alternative cost (evoke, impending, dash, ...)
                     // XMage offers through its "Cast with no alternative
@@ -4727,8 +5019,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // A Gift spell (Mind Spiral, Sazacap's Brew): the castSpell
                     // player form binds the wrong ask, so queue the spell's
                     // own player target and close the rest.
+                    // Only a promised gift opens the spell's second, gift-gated
+                    // target (Sazacap's Brew, Mind Spiral); a declined gift has
+                    // no such object, and a skip queued for it is left unused
+                    // ("Targets ... Count are not equal (found [[target_skip]])").
                     addTarget(p, seat(seatOf(tg.get(0))));
-                    addTarget(p, TestPlayer.TARGET_SKIP);
+                    if (giftPromisedCast) {
+                        addTarget(p, TestPlayer.TARGET_SKIP);
+                    }
                     castSpell(turn, phase, p, card);
                 } else if (tg.isEmpty()) {
                     castSpell(turn, phase, p, card);
@@ -4775,11 +5073,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     for (String t : tg) {
                         queueCastTarget(p, t);
                     }
-                    if (!singleTargetFilled(cardName, tg.size())) {
-                        // Close an "up to N" slot the scenario left short,
-                        // or a later slot (Rhino's Rampage's reflexive
-                        // trigger). A skip after the one multi-target slot
-                        // is filled is rejected (Pull Through the Weft).
+                    if (!targetSlotsFilled(cardName, tg.size())) {
+                        // Close an "up to N" slot the scenario left short.
+                        // A skip once every slot is filled is rejected (Pull
+                        // Through the Weft, Rabid Bite).
                         addTarget(p, TestPlayer.TARGET_SKIP);
                     }
                     castSpell(turn, phase, p, card);

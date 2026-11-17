@@ -12,6 +12,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/effects"
+	"github.com/adams-shaun/gorge/engine/state"
 )
 
 // Template is the item template of a lowered tape.
@@ -24,6 +25,7 @@ const (
 	ReasonAttackSplit     = "attack_split"     // one attack at more than one defender
 	ReasonAttackNonPlayer = "attack_nonplayer" // an attack at a planeswalker or battle
 	ReasonUnbindableRef   = "unbindable_ref"   // an object the runner cannot name
+	ReasonLogOnlyCast     = "log_only_cast:"   // a window cast only the event log entitled
 	ReasonStall           = "stall"            // the tape ends in a watchdog, not a game end
 	ReasonUnsupported     = "unsupported_kind:"
 )
@@ -243,6 +245,10 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 		for j < len(entries) && isAsk(entries[j]) {
 			j++
 		}
+		if why := l.logOnlyCast(m, entries[i]); why != nil {
+			l.refuse(i, why, owedAt, owedSteps)
+			return
+		}
 		steps, stepEntry, payments, answers, why := lowerGroup(reg, m, entries[i:j])
 		if why != nil {
 			l.refuse(i, why, owedAt, owedSteps)
@@ -317,7 +323,7 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 			continue
 		}
 		l.pushFunding(fund)
-		if steps[mainStep].Op == "pass" && len(answers) > 0 {
+		if steps[mainStep].Op == "pass" && len(answers) > 0 && !settlesTwice(entries[i:j]) {
 			owed, owedAt, owedSteps = answers, i, len(l.Item.Steps)
 		} else if len(answers) > 0 {
 			attach(&steps[mainStep], answers, entries[i:j])
@@ -350,6 +356,50 @@ func (l *Lowered) refuse(i int, why *truncation, owedAt, owedSteps int) {
 		l.drop(owedSteps)
 	}
 	l.stop(at, why)
+}
+
+// logOnlyCastMode reports a cast mode gorge's walk offers from a log-derived
+// provenance, never from the object's own state: the Adventure recast (the
+// resolved Adventure spell's exile marker and its CastInfo), the warp recast
+// (the delayed trigger and its CastInfo), the foretell cast ("a later turn"
+// after the foretell action) and the airbend recast (the exile move's
+// airbend marker). A window's setup carries state only, so it cannot entitle
+// one: the runner's walk would not offer the cast at all, and the self-check
+// would fail with "cast <card> not offered" at that step.
+func logOnlyCastMode(mode string) bool {
+	switch mode {
+	case "adventure_recast", "warp_recast", "foretell_cast", "airbend_cast":
+		return true
+	}
+	return false
+}
+
+// logOnlyCast refuses a window's cast when the card already sits in the
+// scenario setup's exile and the cast's mode is one the runner offers only
+// from its own event log. The window starts at a turn's first priority, so the
+// event that put the card there is before the window and no lowered step can
+// recreate it. A card that enters exile inside the window (an Adventure cast
+// and its recast in the same turn, an airbend) is not refused: the replay
+// derives the provenance from that step's own events.
+func (l *Lowered) logOnlyCast(m seatMap, en game.Entry) *truncation {
+	if l.Against == nil || len(en.Picks) != 1 {
+		return nil
+	}
+	pk := en.Picks[0]
+	if pk.Kind != "cast" || !logOnlyCastMode(pk.Mode) {
+		return nil
+	}
+	seat, rest, ok := strings.Cut(m.ref(pk.Ref), ":")
+	if !ok || seat == "" {
+		return nil
+	}
+	name, _, _ := strings.Cut(rest, "#")
+	for _, n := range l.Item.Setup[seat].Exile {
+		if n == name {
+			return &truncation{ReasonLogOnlyCast + pk.Mode}
+		}
+	}
+	return nil
 }
 
 // isResolvePay is true for the entry that answers an election to pay a cost
@@ -531,6 +581,33 @@ func unsettled(g []game.Entry) *truncation {
 	return nil
 }
 
+// settlesTwice is true for a pass group (g[0] is the pass) the runner settles
+// in two passes before its checkpoint: an ask of the resolution the pass began
+// (the object on top of the stack is still there) and, after the resolution
+// finished, a trigger-order ask. Both borrow their answers from the next step
+// that has any, and the second borrows the step's full script again instead of
+// what the first left, so the answers owed to that step would be consumed once
+// and then be left over (the Destined Confrontation sacrifice picks followed by
+// Pirate Peddlers' order: "unconsumed answer(s)" on the next pass). The group's
+// answers go on the pass itself: its own answers settle each ask in tape order
+// and nothing is borrowed.
+func settlesTwice(g []game.Entry) bool {
+	top := g[0].StackTop
+	if top == 0 {
+		return false
+	}
+	resolution, order := false, false
+	for _, a := range g[1:] {
+		switch {
+		case a.Kind == "trigger_order":
+			order = true
+		case a.StackTop == top:
+			resolution = true
+		}
+	}
+	return resolution && order
+}
+
 // drop keeps the first n steps: the pass group after them found no step to
 // answer its asks.
 func (l *Lowered) drop(n int) {
@@ -574,6 +651,7 @@ func attach(st *oraclegen.Step, answers []oraclegen.Answer, group []game.Entry) 
 // entry must be one the runner can be made to repeat.
 func answersOf(m seatMap, g []game.Entry) ([]oraclegen.Answer, *truncation) {
 	var answers []oraclegen.Answer
+	fired := firedSources(g)
 	for _, a := range g {
 		switch {
 		case a.Reanswered:
@@ -585,7 +663,7 @@ func answersOf(m seatMap, g []game.Entry) ([]oraclegen.Answer, *truncation) {
 		case len(a.Rest) > 0:
 			return nil, unsupported(a.Kind + "_rest")
 		}
-		if !isAsk(a) || isWindowTap(a) {
+		if !isAsk(a) || isWindowTap(a) || isManaAbilityAsk(a, fired) {
 			continue
 		}
 		ans := oraclegen.Answer{Kind: a.Kind, Pick: []string{}}
@@ -609,6 +687,105 @@ func answersOf(m seatMap, g []game.Entry) ([]oraclegen.Answer, *truncation) {
 // from its pool and no window opens to ask.
 func isWindowTap(a game.Entry) bool {
 	return len(a.Picks) == 1 && a.Picks[0].Kind == "activate" && len(a.Mana) == 1
+}
+
+// firedSources is the group's mana records by source object: whether the
+// ability produced a recorded colour (see colourProduced).
+func firedSources(g []game.Entry) map[state.ObjID]bool {
+	var out map[state.ObjID]bool
+	for _, e := range g {
+		for _, mr := range e.Mana {
+			if out == nil {
+				out = map[state.ObjID]bool{}
+			}
+			out[mr.Obj] = out[mr.Obj] || mr.Produced != ""
+		}
+	}
+	return out
+}
+
+// isManaAbilityAsk reports an ask of a mana ability the group fired: the
+// "activate <source> for mana" window pick whose own entry carries no mana
+// record (the hook fires on the colour pick that follows it), and the colour
+// pick ("Add U") of a source whose recorded colour is known (fired maps a
+// source to that). manaTaps lowers every fired ability as an explicit activate
+// step ahead of the decision, answering the colour ask on that step itself, so
+// neither is left for a later step to consume (the runner never poses them
+// again: "unconsumed answer(s)"). A mana effect of a resolving object (no hook
+// record) is not this and keeps its answer.
+func isManaAbilityAsk(a game.Entry, fired map[state.ObjID]bool) bool {
+	if len(a.Picks) != 1 {
+		return false
+	}
+	known, ok := fired[a.Picks[0].Obj]
+	switch a.Picks[0].Kind {
+	case "activate":
+		return ok
+	case "mana":
+		return ok && known
+	}
+	return false
+}
+
+var addColour = regexp.MustCompile(`^Add ([WUBRGC])$`)
+
+// colourProduced fills in the colour of a mana record that has none from the
+// colour pick that chose it. The recorder closes a record when the next
+// decision is committed, so an ability that asks its colour is closed before
+// the pick lands and carries no Produced; the pick ("Add U", a choose ask on
+// the same source, in this or a later entry) is the colour the live game made.
+// g is not modified.
+func colourProduced(g []game.Entry) []game.Entry {
+	var out []game.Entry
+	for k, e := range g {
+		if !isAsk(e) || len(e.Picks) != 1 || e.Picks[0].Kind != "mana" {
+			continue
+		}
+		c := addColour.FindStringSubmatch(e.Picks[0].Label)
+		if c == nil {
+			continue
+		}
+		for q := 0; q <= k; q++ {
+			for r, mr := range g[q].Mana {
+				if mr.Obj != e.Picks[0].Obj || mr.Produced != "" {
+					continue
+				}
+				if out == nil {
+					out = append([]game.Entry(nil), g...)
+				}
+				out[q].Mana = slices.Clone(out[q].Mana)
+				out[q].Mana[r].Produced = c[1]
+				goto next
+			}
+		}
+	next:
+	}
+	if out == nil {
+		return g
+	}
+	return out
+}
+
+// resolveSpanLowerable reports that the entries between a pass group's end j
+// and the empty-stack pass end hold only asks the resolve op can answer: no
+// priority action (a mana tap, a cast, an ability) and no attack, block, mana
+// or randomness. The resolve op passes priority and answers asks; a priority
+// action in the span would be silently dropped, and the checkpoint after the
+// step would no longer match (xe:RAND:0:11:tape lost Soul-Guide Lantern's
+// sacrifice this way, and the later Scarecrow Guide cast was then not
+// offered). resolvePass and resolveEmptyPass share the one guard so the next
+// span shape cannot skip it.
+func resolveSpanLowerable(entries []game.Entry, j, end int) bool {
+	for k := j; k < end; k++ {
+		e := entries[k]
+		if len(e.Mana) > 0 || e.RNG > 0 || len(e.Flips) > 0 {
+			return false
+		}
+		if e.Kind == "priority" && !isPass(e) || e.Kind == "attackers" || e.Kind == "blockers" {
+			return false
+		}
+	}
+	return true
 }
 
 // resolvePass lowers a pass that resolved an object and put a new object on
@@ -647,6 +824,9 @@ func resolvePass(m seatMap, entries []game.Entry, i, j int) (*oraclegen.Step, in
 	if end <= j {
 		// The stop state must lie after the asks, so the resolve step starts
 		// on the pass with a non-empty stack and does not early-return.
+		return nil, 0, false
+	}
+	if !resolveSpanLowerable(entries, j, end) {
 		return nil, 0, false
 	}
 	answers, why := answersOf(m, entries[i:end])
@@ -692,14 +872,8 @@ func resolveEmptyPass(m seatMap, entries []game.Entry, i, j int) (*oraclegen.Ste
 	// priority action (a mana activation, a cast, a play) taken while the
 	// trigger sat on the stack, nor its mana/randomness. Reject such a range so
 	// the checkpoint cannot silently lose it (xe:TDM:0:0:w29).
-	for k := j; k < end; k++ {
-		e := entries[k]
-		if len(e.Mana) > 0 || e.RNG > 0 || len(e.Flips) > 0 {
-			return nil, 0, false
-		}
-		if e.Kind == "priority" && !isPass(e) || e.Kind == "attackers" || e.Kind == "blockers" {
-			return nil, 0, false
-		}
+	if !resolveSpanLowerable(entries, j, end) {
+		return nil, 0, false
 	}
 	answers, why := answersOf(m, entries[i+1:end])
 	if why != nil {
@@ -713,6 +887,7 @@ func resolveEmptyPass(m seatMap, entries []game.Entry, i, j int) (*oraclegen.Ste
 // indices (-1 for the taps; the caller fills the last), and the asks as
 // answers, in tape order.
 func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Step, []int, []string, []oraclegen.Answer, *truncation) {
+	g = colourProduced(g)
 	en := g[0]
 	var steps []oraclegen.Step
 	var why *truncation

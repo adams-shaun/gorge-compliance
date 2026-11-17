@@ -597,6 +597,19 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		}
 		as = append(as, XAnswer{asker, "choice", seatRef(seat)})
 	}
+	if ga, ok := xTriggerCostGroup(r.ds, i); ok {
+		// Gorge logs a triggered cost's X announcement BEFORE the pay/decline
+		// election (cumulative.go's triggeredCostXAsk); XMage's DoIfCostPaid
+		// asks its chooseUse first and calls announceX only once it is paying
+		// (Wildborn Preserver), so the whole group is answered here, in
+		// XMage's ask order, and a declined trigger scripts no X at all.
+		return append(as, ga...), true
+	}
+	if xTriggerCostElection(r.ds, i) {
+		// This pay/decline election was answered with its X announcement
+		// above; emitting it again would leave a stray boolean.
+		return as, true
+	}
 	switch {
 	case r.playBool[i]:
 		// The redundant trigger-level half of a single "may cast": the Play
@@ -732,7 +745,7 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 // asked) and a blight goes straight to its creature target (measured:
 // Scuzzback Scrounger's "yes" met "Select a creature you control").
 func triggerCostAnswer(d rules.OracleDecision) string {
-	if d.Kind != "choose_n" || len(d.Picks) != 1 || !d.TriggerCostMana {
+	if d.Kind != "choose_n" || len(d.Picks) != 1 || !(d.TriggerCostMana || xOnlyCostPay(d)) {
 		return ""
 	}
 	switch pickKind(d, 0) {
@@ -742,6 +755,144 @@ func triggerCostAnswer(d rules.OracleDecision) string {
 		return "no"
 	}
 	return ""
+}
+
+// nonManaTriggerCostPay reports the pay side of a triggered optional cost that
+// is not a PURE mana payment ("you may discard a card. If you do, ...", "you
+// may pay 1 life. If you do, ...", "you may pay 2 energy. If you do, ...",
+// "you may pay 2 B and pay 1 life. If you do, ..."): XMage's DoIfCostPaid
+// poses its chooseUse whenever the cost can be paid, and gorge offers the pay
+// side only then. A pure mana pay is answered by triggerCostAnswer in the
+// routing pass. TriggerCostMana alone is not enough: the engine leaves it
+// false for an X cost ("Pay X", Wildborn Preserver), so the phrase itself is
+// also classified by manaPaymentLabel. A blight goes straight to its creature
+// target (Scuzzback Scrounger: a scripted "yes" met "Select a creature you
+// control") and is excluded. Only the engine's own pay pick scripts: a pick
+// with another kind never reaches this.
+func nonManaTriggerCostPay(d rules.OracleDecision) bool {
+	if d.Kind != "choose_n" || len(d.Picks) != 1 || d.TriggerCostMana || pickKind(d, 0) != "trigger_cost_pay" {
+		return false
+	}
+	l := strings.ToLower(strings.TrimSpace(d.Picks[0]))
+	switch {
+	case l == "", strings.HasPrefix(l, "blight"):
+		return false
+	case manaPaymentLabel(l):
+		return false
+	}
+	return true
+}
+
+// manaPaymentLabel reports whether a cost phrase is a pure mana payment. gorge
+// renders mana in Forge notation without a "mana" word ("pay 2 B", "pay X",
+// "pay W/U/P", "pay 2/W"), and a raw label may carry the brace form ("pay
+// {G}"). Every non-mana part (life, energy, discard, sacrifice, tap, ...) adds
+// a word that is not a mana token, so a token walk classifies the whole phrase
+// without a hand-maintained list of non-mana costs -- the next life, energy or
+// composite phrase is covered by construction.
+func manaPaymentLabel(label string) bool {
+	l := strings.ToLower(strings.TrimSpace(label))
+	rest, ok := strings.CutPrefix(l, "pay ")
+	if !ok {
+		return false
+	}
+	fields := strings.Fields(rest)
+	if len(fields) == 0 {
+		return false
+	}
+	for _, tok := range fields {
+		if !manaToken(tok) {
+			return false
+		}
+	}
+	return true
+}
+
+// manaToken reports whether one whitespace-separated token is a mana symbol:
+// generic digits, WUBRGC/X/S, a hybrid/twobrid/phyrexian slash form, a
+// two-letter phyrexian pair, or a raw brace symbol.
+func manaToken(tok string) bool {
+	if strings.HasPrefix(tok, "{") && strings.HasSuffix(tok, "}") {
+		return true
+	}
+	for _, part := range strings.Split(tok, "/") {
+		if part == "" {
+			return false
+		}
+		if strings.Trim(part, "0123456789") == "" {
+			continue
+		}
+		if len(part) == 1 && strings.ContainsRune("wubrgcsxp", rune(part[0])) {
+			continue
+		}
+		if len(part) == 2 && strings.ContainsRune("wubrgc", rune(part[0])) && part[1] == 'p' {
+			continue
+		}
+		return false
+	}
+	return true
+}
+
+// xOnlyCostPay is the pay pick of a triggered cost whose whole mana cost is
+// {X} ("you may pay {X}", Wildborn Preserver): gorge's TriggerCostMana flag is
+// false there (an X-only cost has no announced mana payment until X is
+// chosen), yet XMage's DoIfCostPaid poses the same chooseUse as for any other
+// mana cost (measured strict miss "Missing CHOICE def ... Pay {X}?"). The
+// label is the authority: "Pay X" / "Pay {X}" / "Pay {X}{X}".
+func xOnlyCostPay(d rules.OracleDecision) bool {
+	if len(d.Picks) != 1 || pickKind(d, 0) != "trigger_cost_pay" {
+		return false
+	}
+	rest, ok := strings.CutPrefix(d.Picks[0], "Pay ")
+	if !ok {
+		return false
+	}
+	rest = strings.NewReplacer("{", "", "}", "").Replace(rest)
+	return rest != "" && strings.Trim(rest, "X") == ""
+}
+
+// xTriggerCostGroup returns the answers for the X announcement at i that opens
+// a triggered cost carrying a payer-chosen {X} (the next decision, by the same
+// seat and step, is that cost's pay/decline election). Gorge announces X
+// before the election; XMage's DoIfCostPaid-style effect asks its chooseUse
+// ("Pay {X}?") first and only calls announceX when it is paying, and returns
+// before announceX on a decline (Wildborn Preserver, Incinerator of the
+// Guilty). So a paid cost needs the boolean AHEAD of the X value, and a
+// declined one needs the boolean alone: gorge's X answer has no ask to answer.
+func xTriggerCostGroup(ds []rules.OracleDecision, i int) ([]XAnswer, bool) {
+	d := ds[i]
+	if pickKind(d, 0) != "trigger_cost_x" || len(d.Picks) != 1 {
+		return nil, false
+	}
+	x, ok := strings.CutPrefix(d.Picks[0], "X = ")
+	if !ok || i+1 >= len(ds) {
+		return nil, false
+	}
+	e := ds[i+1]
+	if e.Step != d.Step || e.Seat != d.Seat || e.Kind != "choose_n" || len(e.Picks) != 1 {
+		return nil, false
+	}
+	switch pickKind(e, 0) {
+	case "trigger_cost_decline":
+		return []XAnswer{{d.Seat, "choice", "no"}}, true
+	case "trigger_cost_pay", "trigger_cost_pay_manual":
+		if !xOnlyCostPay(e) && !e.TriggerCostMana {
+			return nil, false
+		}
+		return []XAnswer{{d.Seat, "choice", "yes"}, {d.Seat, "choice", "X=" + x}}, true
+	}
+	return nil, false
+}
+
+// xTriggerCostElection reports an election whose answers were emitted with its
+// preceding X announcement (xTriggerCostGroup), so route must not answer it a
+// second time.
+func xTriggerCostElection(ds []rules.OracleDecision, i int) bool {
+	if i == 0 {
+		return false
+	}
+	_, ok := xTriggerCostGroup(ds, i-1)
+	return ok
 }
 
 // triggerCostWindow reports a mana-window decision (an "activate" source tap,

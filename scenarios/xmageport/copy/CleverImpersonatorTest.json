@@ -38,7 +38,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Gilded Drake",
-     "mana": "CU"
+     "mana": "UU"
     },
     {
      "op": "pass_to",
@@ -63,7 +63,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:Clever Impersonator",
-     "mana": "CCUU"
+     "mana": "UUUU"
     },
     {
      "op": "pass_to",
@@ -78,7 +78,8 @@
        "kind": "any",
        "pick": [
         "p0:Gilded Drake"
-       ]
+       ],
+       "seat": 1
       }
      ]
     },
@@ -220,9 +221,17 @@
      ]
     },
     {
+     "op": "resolve",
+     "seat": 0
+    },
+    {
      "op": "cast",
      "seat": 1,
      "card": "p1:Ornithopter"
+    },
+    {
+     "op": "resolve",
+     "seat": 0
     },
     {
      "op": "resolve",
@@ -238,21 +247,13 @@
      "seat": 0
     },
     {
+     "op": "resolve",
+     "seat": 0
+    },
+    {
      "op": "cast",
      "seat": 1,
      "card": "p1:Memnite"
-    },
-    {
-     "op": "resolve",
-     "seat": 0
-    },
-    {
-     "op": "resolve",
-     "seat": 0
-    },
-    {
-     "op": "resolve",
-     "seat": 0
     },
     {
      "op": "pass_to",

@@ -27,8 +27,9 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 # Forge oracle driver commit (fork, branch oracle-cmdr): a descendant of FORGE_REF with identical script trees.
-# 92cf059592 = 54a3777c23 (the gorge-trek7 corpus driver) + 1v1 Commander placement (command zone, commander_casts, commander_damage) and Commander snapshots; same cardsfolder and tokenscripts trees as FORGE_REF 418ba5215f.
-FORGE_ORACLE_REF ?= 92cf0595922afd840672292f8a1e1e00e0e76626
+# 327ad7fb80 = 92cf059592 + CR 404.3 graveyard order answers (orderCards consumes the scripted
+# "graveyard_order" pin in gorge_decisions); same cardsfolder and tokenscripts trees as FORGE_REF 418ba5215f.
+FORGE_ORACLE_REF ?= 327ad7fb806e13166bf24cec6b609adf90a65d03
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

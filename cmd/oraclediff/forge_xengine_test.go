@@ -119,7 +119,7 @@ func TestForgeExportDropsNamedManaAbilityChoice(t *testing.T) {
 		}
 	}
 	build := func(it oraclegen.Item, d rules.OracleDecision) []rules.OracleDecision {
-		return forgeBuildRequest(reg, it, rules.OracleResult{}, []rules.OracleDecision{d}).GorgeDecisions
+		return forgeBuildRequest(reg, it, rules.OracleResult{}, []rules.OracleDecision{d}, true).GorgeDecisions
 	}
 
 	// Turtle Lair's first ability is "{T}: Add {C}"; the wheel ask that chose
@@ -262,11 +262,112 @@ func TestForgeDropsDeclarationDecisions(t *testing.T) {
 		t.Errorf("non-xengine item lost decisions: %+v", got)
 	}
 
-	rq := forgeBuildRequest(testutil.CorpusRegistry(t), mk(lower.Template), rules.OracleResult{}, ds)
+	rq := forgeBuildRequest(testutil.CorpusRegistry(t), mk(lower.Template), rules.OracleResult{}, ds, true)
 	if !reflect.DeepEqual(rq.GorgeDecisions, want) {
 		t.Errorf("exported decisions %+v, want %+v", rq.GorgeDecisions, want)
 	}
 	if rq.Item.Steps[1].Op != "pass_to" || rq.Item.Steps[1].Decision != "priority" {
 		t.Errorf("empty attack not rewritten: %+v", rq.Item.Steps[1])
+	}
+}
+
+// TestForgeExportLibrarySearchPick: an Evolving Wilds activated and resolved
+// by passes (the shape xengine lowers) logs gorge's search pick on the pass
+// that resolves it, the step Forge's driver is at when Forge asks, so the
+// export keeps that decision there as the object choice the driver consumes.
+// When the item ends on the pass that leaves the ability on the stack, gorge
+// poses no search at all, the export carries none, and Forge's ask past the
+// last step is a trailing miss the classifier absorbs
+// (oracle/xengine/classify TestClassifyForgeTrailingMiss), not an export gap.
+func TestForgeExportLibrarySearchPick(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	k := 0
+	build := func(steps ...oraclegen.Step) []rules.OracleDecision {
+		it := oraclegen.Item{ID: "xe:search", Template: lower.Template, Scenario: oraclegen.Scenario{
+			Name: "search", Setup: map[string]oraclegen.Seat{"p0": {
+				Battlefield: []string{"Evolving Wilds"}, LibraryTop: []string{"Forest"}}},
+			Steps: steps}}
+		rq, _ := forgeExportItem(reg, it, true)
+		return rq.GorgeDecisions
+	}
+	act := oraclegen.Step{Op: "activate", Seat: 0, Card: "p0:Evolving Wilds", AbilityIndex: &k}
+	pass0 := oraclegen.Step{Op: "pass", Seat: 0}
+	resolve := oraclegen.Step{Op: "pass", Seat: 1,
+		Answers: []oraclegen.Answer{{Kind: "choose", Pick: []string{"p0:Forest"}}}}
+
+	got := build(act, pass0, resolve)
+	if len(got) != 1 {
+		t.Fatalf("resolved search: %d decisions, want 1: %+v", len(got), got)
+	}
+	d := got[0]
+	if d.Step != 2 || d.Seat != 0 || d.Kind != "choose_n" || !reflect.DeepEqual(d.PickKinds, []string{"search"}) ||
+		!reflect.DeepEqual(d.PickRefs, []string{"p0:Forest"}) || d.Min != 0 || d.Max != 1 {
+		t.Errorf("search decision = step %d seat %d %s kinds %v refs %v min %d max %d, want step 2 seat 0 choose_n [search] [p0:Forest] 0..1",
+			d.Step, d.Seat, d.Kind, d.PickKinds, d.PickRefs, d.Min, d.Max)
+	}
+
+	if got := build(act, pass0); len(got) != 0 {
+		t.Errorf("item ending on the pass before resolution carries decisions: %+v", got)
+	}
+}
+
+// TestForgeExportExploreYesNo: gorge's explore pick (CR 701.44a) is a
+// choose_n with resume "explore" and one pick of kind "graveyard" or "top";
+// Forge poses it as the yes/no "Put <card> in your graveyard?". The export
+// rewrites it to a choose_n whose single pick has kind yes (graveyard) or no
+// (back on top), the shape the driver's DecisionQueue.isYesNo matches, on
+// the same step and seat, with no object refs.
+func TestForgeExportExploreYesNo(t *testing.T) {
+	mk := func(pick, label string, idx int) rules.OracleDecision {
+		return rules.OracleDecision{
+			Step: 1, Seat: 0, Kind: "choose_n", Options: 2,
+			Picks: []string{label}, PickIdx: []int{idx},
+			PickRefs: []string{"p0:Grizzly Bears"}, PickRefsInexact: []bool{true},
+			OptionRefs:  []string{"p0:Grizzly Bears", "p0:Grizzly Bears"},
+			ObjectPicks: []string{"p0:Grizzly Bears"}, PickKinds: []string{pick},
+			Resume: "explore", GorgeKind: "choose", First: "Put it into your graveyard", Min: 1, Max: 1,
+		}
+	}
+	other := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", Picks: []string{"Forest"},
+		PickRefs: []string{"p0:Forest"}, PickKinds: []string{"search"}, Resume: "search"}
+	in := []rules.OracleDecision{other,
+		mk("graveyard", "Put it into your graveyard", 0),
+		mk("top", "Put it back on top of your library", 1),
+		mk("keep", "Keep it", 1)}
+	orig := fmt.Sprintf("%+v", in)
+	got := forgeExploreAsYesNo(in)
+	if fmt.Sprintf("%+v", in) != orig {
+		t.Fatalf("input modified: %+v", in)
+	}
+	if len(got) != 4 || !reflect.DeepEqual(got[0], other) {
+		t.Fatalf("non-explore decision changed or count off: %+v", got)
+	}
+	for i, want := range []struct{ label, kind string }{{"Yes", "yes"}, {"No", "no"}, {"No", "no"}} {
+		d := got[i+1]
+		if d.Step != 1 || d.Seat != 0 || d.Kind != "choose_n" ||
+			!reflect.DeepEqual(d.Picks, []string{want.label}) || !reflect.DeepEqual(d.PickKinds, []string{want.kind}) ||
+			len(d.PickRefs) != 0 || len(d.ObjectPicks) != 0 || len(d.OptionRefs) != 0 {
+			t.Errorf("explore decision %d = %+v, want step 1 seat 0 choose_n [%s] [%s] no refs", i, d, want.label, want.kind)
+		}
+	}
+	if same := forgeExploreAsYesNo([]rules.OracleDecision{other}); len(same) != 1 || !reflect.DeepEqual(same[0], other) {
+		t.Errorf("list with no explore pick changed: %+v", same)
+	}
+
+	// End to end: the real explore of Merfolk Branchwalker, graveyard pick.
+	reg := testutil.CorpusRegistry(t)
+	it := oraclegen.Item{ID: "xe:explore", Template: lower.Template, Scenario: oraclegen.Scenario{
+		Name: "explore", Setup: map[string]oraclegen.Seat{"p0": {
+			Hand: []string{"Merfolk Branchwalker"}, Battlefield: []string{"Forest", "Forest", "Forest"},
+			LibraryTop: []string{"Grizzly Bears", "Forest", "Forest"}}},
+		Steps: []oraclegen.Step{{Op: "cast", Seat: 0, Card: "p0:Merfolk Branchwalker", Mana: "GG"},
+			{Op: "resolve", Seat: 0}, {Op: "resolve", Seat: 0}}}}
+	rq, _ := forgeExportItem(reg, it, true)
+	if len(rq.GorgeDecisions) != 1 {
+		t.Fatalf("explore item: %d decisions, want 1: %+v", len(rq.GorgeDecisions), rq.GorgeDecisions)
+	}
+	d := rq.GorgeDecisions[0]
+	if d.Step != 1 || d.Kind != "choose_n" || !reflect.DeepEqual(d.PickKinds, []string{"yes"}) || !reflect.DeepEqual(d.Picks, []string{"Yes"}) {
+		t.Errorf("exported explore decision = %+v, want step 1 choose_n [yes] [Yes]", d)
 	}
 }

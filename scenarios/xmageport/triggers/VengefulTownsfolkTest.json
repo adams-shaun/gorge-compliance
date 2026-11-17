@@ -50,7 +50,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:Duneblast",
-     "mana": "CCCCWBG"
+     "mana": "WWGBWBG"
     },
     {
      "op": "pass_to",
@@ -62,7 +62,8 @@
        "kind": "any",
        "pick": [
         "p0:Vengeful Townsfolk"
-       ]
+       ],
+       "seat": 1
       }
      ]
     },
@@ -145,7 +146,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:Doom Blade",
-     "mana": "CB",
+     "mana": "BB",
      "targets": [
       "p0:Elite Vanguard"
      ]
@@ -154,7 +155,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:Doom Blade#2",
-     "mana": "CB",
+     "mana": "BB",
      "targets": [
       "p0:Grizzly Bears"
      ]
@@ -252,7 +253,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:Doom Blade",
-     "mana": "CB",
+     "mana": "BB",
      "targets": [
       "p0:Elite Vanguard"
      ]
@@ -261,7 +262,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:Doom Blade#2",
-     "mana": "CB",
+     "mana": "BB",
      "targets": [
       "p1:Grizzly Bears"
      ]
@@ -370,7 +371,7 @@
      "op": "cast",
      "seat": 1,
      "card": "p1:Barter in Blood",
-     "mana": "CCBB"
+     "mana": "BBBB"
     },
     {
      "op": "pass_to",
@@ -379,11 +380,12 @@
      "active": "p1",
      "answers": [
       {
-       "kind": "choose",
+       "kind": "any",
        "pick": [
         "p0:Grizzly Bears",
         "p0:Elite Vanguard"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },

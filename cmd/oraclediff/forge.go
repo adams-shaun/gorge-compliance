@@ -162,7 +162,7 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 		if err := json.Unmarshal(b, &it); err != nil {
 			return err
 		}
-		rq, _ := forgeExportItem(reg, it)
+		rq, _ := forgeExportItem(reg, it, true)
 		line, err := json.Marshal(rq)
 		if err != nil {
 			return err
@@ -181,8 +181,12 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 
 // forgeExportItem is the request forge-export writes for one item, and
 // gorge's result for it: the item is replayed once in gorge and the request
-// built from the decisions gorge's runner made.
-func forgeExportItem(reg *cards.Registry, it oraclegen.Item) (forgeRequest, rules.OracleResult) {
+// built from the decisions gorge's runner made. graveyardOrder opts into the
+// Forge-only "graveyard_order" role; a caller whose engine queue has no
+// consumer for it (follower-export, see follower_export.go) must pass false,
+// or the unasked role becomes an unconsumed leftover. A failed gorge run has
+// no checkpoints to derive the role from, so it is never pinned.
+func forgeExportItem(reg *cards.Registry, it oraclegen.Item, graveyardOrder bool) (forgeRequest, rules.OracleResult) {
 	g, gerr := rules.RunOracleScenarioJSON(reg, it.Raw())
 	// A divided spell's shares reach the driver as a "damage_split"
 	// decision (the contract above), which gorge now announces at cast.
@@ -190,16 +194,24 @@ func forgeExportItem(reg *cards.Registry, it oraclegen.Item) (forgeRequest, rule
 	if gerr != nil || decisions == nil {
 		decisions = []rules.OracleDecision{}
 	}
-	return forgeBuildRequest(reg, it, g, decisions), g
+	return forgeBuildRequest(reg, it, g, decisions, graveyardOrder && gerr == nil), g
 }
 
 // forgeBuildRequest assembles the request for one item from gorge's decisions
 // for it: the scenario SHA names the item as given, the decisions lose those
 // for steps the driver will not pose, and the steps are then rewritten.
-func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision) forgeRequest {
+// graveyardOrder is explicit at every call site: only the Forge driver
+// consumes the role, and a new caller has to say so instead of inheriting it.
+func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision, graveyardOrder bool) forgeRequest {
 	sha := gate.ItemSHA(it)
 	decisions = forgeDropNamedManaAbilityDecisions(reg, it, g, forgeDropDeclarationDecisions(it, decisions))
+	decisions = forgeExploreAsYesNo(decisions)
 	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, decisions)
+	if graveyardOrder {
+		decisions = forgeGraveyardOrderDecisions(it, g, decisions)
+	} else {
+		decisions = forgeDropGraveyardOrderDecisions(decisions)
+	}
 	it = forgeDeclarations(it)
 	return forgeRequest{
 		ID: it.ID, ScenarioSHA: sha, Item: it,
@@ -302,6 +314,63 @@ func forgeDropDeclarationDecisions(it oraclegen.Item, decisions []rules.OracleDe
 		out = append(out, d)
 	}
 	return out
+}
+
+// forgeExploreAsYesNo rewrites gorge's explore pick (CR 701.44a: a nonland
+// card revealed by explore goes back on top or into the graveyard) into the
+// yes/no decision Forge poses for it, "[Explore] Put <card> in your
+// graveyard?". gorge logs it as a choose_n with resume "explore" and one pick
+// of kind "graveyard" (option 0) or "top" (option 1, "keep" in older
+// snapshots); the driver's DecisionQueue only matches a yes/no ask to a
+// choose_n whose single pick has kind yes or no (isYesNo), so left as is the
+// ask is a strict miss and the pick an unconsumed gorge decision. "yes" puts
+// the card into the graveyard. The pick loses its object refs: the card is
+// the one revealed, not a choice among objects. Step, seat and order are
+// kept, so the decision stays on the step it was logged at. The input slice
+// is not modified; a list with no explore pick is returned as is.
+func forgeExploreAsYesNo(decisions []rules.OracleDecision) []rules.OracleDecision {
+	var out []rules.OracleDecision
+	for i, d := range decisions {
+		pick, ok := forgeExplorePick(d)
+		if !ok {
+			continue
+		}
+		if out == nil {
+			out = append([]rules.OracleDecision(nil), decisions...)
+		}
+		label := "No"
+		if pick == "yes" {
+			label = "Yes"
+		}
+		d.Picks = []string{label}
+		d.PickKinds = []string{pick}
+		d.PickIdx = nil
+		d.PickRefs = nil
+		d.PickRefsInexact = nil
+		d.ObjectPicks = nil
+		d.OptionRefs = nil
+		d.First = "Yes"
+		out[i] = d
+	}
+	if out == nil {
+		return decisions
+	}
+	return out
+}
+
+// forgeExplorePick reports gorge's explore pick as "yes" (graveyard) or "no"
+// (back on top).
+func forgeExplorePick(d rules.OracleDecision) (string, bool) {
+	if d.Kind != "choose_n" || d.Resume != "explore" || len(d.PickKinds) != 1 || len(d.Picks) != 1 {
+		return "", false
+	}
+	switch d.PickKinds[0] {
+	case "graveyard":
+		return "yes", true
+	case "top", "keep":
+		return "no", true
+	}
+	return "", false
 }
 
 // forgeDropNamedManaAbilityDecisions removes gorge's "Choose a mana ability of

@@ -40,7 +40,7 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Sudden Shock",
-     "mana": "CR",
+     "mana": "RR",
      "targets": [
       "p1"
      ]
@@ -127,13 +127,14 @@
      "op": "cast",
      "seat": 0,
      "card": "p0:Molten Disaster",
-     "mana": "CRR",
+     "mana": "RRR",
      "answers": [
       {
        "kind": "choose",
        "pick": [
         "1"
-       ]
+       ],
+       "seat": 0
       }
      ]
     },

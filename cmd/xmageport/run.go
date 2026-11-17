@@ -104,6 +104,23 @@ func hasContinueAck(transcript []string) bool {
 	return false
 }
 
+var reDeclarationAnswer = regexp.MustCompile(`^\s+\[answer\] p\d (?:attackers|blockers) ->`)
+
+// declarationAnswer reports whether a stated choice was consumed by an attack
+// or block declaration. The tests declare those with attack()/block(), which
+// become attack/block steps, so an answer taken by the declaration decision
+// is a choice gorge never asked (XMage asked which creature to move an Aura
+// to; gorge has one candidate), carried to the next decision that would take
+// it: the run is not the game the test states.
+func declarationAnswer(transcript []string) bool {
+	for _, l := range transcript {
+		if reDeclarationAnswer.MatchString(l) {
+			return true
+		}
+	}
+	return false
+}
+
 var reSetupFallback = regexp.MustCompile(`^\s+\[setup fallback\] p\d (\w+) ->`)
 
 // setupDecision returns the first decision kind the runner answered by its
@@ -248,6 +265,8 @@ func refBareName(pick string) (string, bool) {
 //   - a card REF ("p0:Llanowar Elves") against an ask whose options carry the
 //     bare card name ("choose a card name", a hidden pick from the library):
 //     the pick becomes that label;
+//   - a chapter number ("X=2") against read ahead's chapter ask: the pick
+//     becomes that chapter's label ("Chapter II");
 //   - a card pick against an optional ask's leading Yes/No pair ("you may put
 //     a creature card from among them"): XMage states only the card, so the
 //     "Yes" that opens the optional is inserted before it.
@@ -255,6 +274,10 @@ func refBareName(pick string) (string, bool) {
 // It reports whether it changed g.
 func rewriteOfferedLabel(g *group, i int, kind string, opts []dumpOption) bool {
 	a := g.answers[i]
+	if label, ok := readAheadLabel(a.Pick[0], opts); ok {
+		g.answers[i] = answer{Kind: kind, Pick: []string{label}, Seat: a.Seat}
+		return true
+	}
 	name, ok := refBareName(a.Pick[0])
 	if !ok || len(opts) == 0 {
 		return false
@@ -272,6 +295,15 @@ func rewriteOfferedLabel(g *group, i int, kind string, opts []dumpOption) bool {
 			case "yes":
 				yes = j
 			case "no":
+				no = j
+			}
+			// an optional trigger's cost ask ("Sacrifice 1 creature" /
+			// "Do not pay", Industrial Advancement) is the same leading pair:
+			// XMage states only the object paid, the pay option precedes it
+			switch o.Kind {
+			case "trigger_cost_pay":
+				yes = j
+			case "trigger_cost_decline":
 				no = j
 			}
 		}
@@ -626,11 +658,18 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 			break
 		}
 		fails = f
+		if trimRestrictedAttack(sc, tr) {
+			continue
+		}
 		asks := fallbackAsks(tr)
 		progress := false
+		// movedTo marks the steps an answer was moved onto in this pass: an
+		// unused target there is judged after the answer lands, not before.
+		movedTo := map[int]bool{}
 		bump := func(g *group) bool {
 			if g.at+g.offset+1 < len(sc.Steps) {
 				g.offset++
+				movedTo[g.at+g.offset] = true
 				for i := range g.kinds {
 					g.kinds[i] = 0
 				}
@@ -741,6 +780,15 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 				// ask is re-homed as its answer before the leftover is
 				// moved on to the next step.
 				if strings.Contains(line, "unused target(s)") {
+					if movedTo[n] {
+						// An answer XMage states before this target (the clone
+						// election, then Gilded Drake's exchange target) moves
+						// onto this step in the same pass and takes the first
+						// choose ask; converting the target now would answer
+						// that ask with the target instead.
+						progress = true
+						continue
+					}
 					if kind, ok := targetAskKind(asks[n]); ok && paymentChooseOnly(asks[n]) {
 						// The only choose is gorge's mana-payment plumbing
 						// ("Pay U"), which no addTarget answers: the targets
@@ -781,6 +829,7 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 					progress = true
 					if n+1 < len(sc.Steps) {
 						left.at = n + 1
+						movedTo[n+1] = true
 						r.Groups = append(r.Groups, left)
 					} else {
 						r.Dropped += len(left.answers) + len(left.targets)
@@ -859,6 +908,9 @@ func runResultMask(reg *cards.Registry, r *result, mask uint) {
 		} else if hasContinueAck(transcript) {
 			r.runShape = refuse("continue-acknowledgement", "gorge poses a bare Continue acknowledgement XMage never asks")
 		}
+	}
+	if len(fails) > 0 && r.runShape == nil && knownBugs[sc.XMage] == "" && declarationAnswer(transcript) {
+		r.runShape = refuse("choice-consumed-by-declaration", "an XMage choice gorge never asks was taken by an attack or block declaration")
 	}
 	if k := aiChoiceFallback(transcript); len(fails) > 0 && !r.Strict && k != "" && knownBugs[sc.XMage] == "" {
 		// Without setStrictChooseMode(true) XMage's AI answered what the
@@ -953,7 +1005,7 @@ func driverLine(r *result) ([]byte, error) {
 	var carry []xans
 	for i, s := range r.Scenario.Steps {
 		carry = append(carry, r.XAnswers[i]...)
-		if s.Op == "pass" {
+		if s.Op == "pass" || s.payment {
 			continue
 		}
 		c := *s
