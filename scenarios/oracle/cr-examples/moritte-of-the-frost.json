@@ -9,7 +9,7 @@
    "cr": [
     "707.9f"
    ],
-   "why": "Moritte copies the Forest's card values, which are not a creature, so the creature-only parts of its own copy exception do not apply even though Rude Awakening makes the land a 2/2 creature. Moritte enters with no +1/+1 counters and without changeling.",
+   "why": "Rude Awakening's animation applied only to the lands that existed when it resolved, so it is not part of the Forest's copiable values. Moritte therefore enters as a plain noncreature land copy of the Forest: the creature-only parts of its own copy exception do not apply, so it gets no +1/+1 counters and no changeling, and it has no power or toughness.",
    "setup": {
     "p0": {
      "battlefield": [
@@ -78,9 +78,7 @@
     {
      "card": "p0:Moritte of the Frost",
      "zone": "battlefield",
-     "pt": "2/2",
      "types": [
-      "Creature",
       "Land"
      ],
      "counters": {
@@ -88,6 +86,9 @@
      },
      "no_keywords": [
       "Changeling"
+     ],
+     "no_types": [
+      "Creature"
      ]
     }
    ]
