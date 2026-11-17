@@ -43,8 +43,28 @@ func TestSameNameGraveyardTargetCarriesOwner(t *testing.T) {
 	}
 	// The choice-queue spelling shares the rule (a same-name pick on
 	// makeChoose), so the owner form cannot drift between queues.
-	if got := disambiguatedObjectChoice(d, 0, "Dawn-Blessed Pennant"); got != "p1:Dawn-Blessed Pennant" {
-		t.Fatalf("disambiguatedObjectChoice = %q, want %q", got, "p1:Dawn-Blessed Pennant")
+	if got := disambiguatedObjectChoice(d, 0, "Dawn-Blessed Pennant"); got != "@p1:Dawn-Blessed Pennant" {
+		t.Fatalf("disambiguatedObjectChoice = %q, want %q", got, "@p1:Dawn-Blessed Pennant")
+	}
+	// A joined multi-pick answer mixing an owner-qualified pick with an exact
+	// alias pick keeps every segment in "@<ref>" form, so the driver binds
+	// each one; a bare "p1:<name>" segment would match no alias and no card.
+	mixed := rules.OracleDecision{
+		Step: 3, Seat: 0, Kind: "choose", GorgeKind: "choose", Options: 4, Min: 2, Max: 2,
+		Picks:           []string{"Dawn-Blessed Pennant", "Grizzly Bears"},
+		PickRefs:        []string{"p1:Dawn-Blessed Pennant", "p0:Grizzly Bears#2"},
+		PickKinds:       []string{"card", "card"},
+		OptionRefs:      []string{"p0:Dawn-Blessed Pennant", "p1:Dawn-Blessed Pennant", "p0:Grizzly Bears", "p0:Grizzly Bears#2"},
+		PickRefsInexact: []bool{true, false},
+	}
+	if got, want := JoinedChoice(mixed), "@p1:Dawn-Blessed Pennant^@p0:Grizzly Bears#2"; got != want {
+		t.Fatalf("JoinedChoice = %q, want %q", got, want)
+	}
+	mixed.Picks[0], mixed.Picks[1] = mixed.Picks[1], mixed.Picks[0]
+	mixed.PickRefs[0], mixed.PickRefs[1] = mixed.PickRefs[1], mixed.PickRefs[0]
+	mixed.PickRefsInexact[0], mixed.PickRefsInexact[1] = mixed.PickRefsInexact[1], mixed.PickRefsInexact[0]
+	if got, want := JoinedChoice(mixed), "@p0:Grizzly Bears#2^@p1:Dawn-Blessed Pennant"; got != want {
+		t.Fatalf("reversed JoinedChoice = %q, want %q", got, want)
 	}
 	// Batch cost paths that script one answer per pick go through the same
 	// exact-ref helper.

@@ -2713,7 +2713,7 @@ type SameNamePick struct {
 	// card). The name-only answer is unsound, so the census counts the item
 	// as unproven rather than resolved. A target ask can still carry the
 	// ref's exact owner prefix when that prefix separates the candidates
-	// (ownerQualifiedRef); the choice queue keeps the bare-name fallback.
+	// (ownerQualifiedRef), and a choice pick as its "@<ref>" alias form.
 	Unanswerable bool
 }
 
@@ -2735,6 +2735,13 @@ func pickRefExact(d rules.OracleDecision, k int) bool {
 // XMage's alias binding scopes a non-token ref to that seat's own objects, so
 // a card picked from p1's graveyard ("p1:Dawn-Blessed Pennant") reaches p1's
 // card, not the first same-named card in either graveyard (CR 601.2c).
+//
+// Known limit: only the OFFERED refs are visible here. Gorge's rank-free ref
+// is k==1 among the owner's live same-named objects in EVERY zone, while the
+// driver's alias binding ranks battlefield and hand before graveyard, so a
+// same-named card the owner has on the battlefield or in hand (not offered)
+// can still win the driver's binding. A decision cannot rule that out; the
+// result is a visible replay mismatch, never a silent pass.
 //
 // An empty result means the owner does not separate the candidates -- two
 // same-named objects of one seat, or a ranked ref whose ObjID rank the
@@ -2929,7 +2936,10 @@ func disambiguatedObjectChoice(d rules.OracleDecision, k int, label string) stri
 	}
 	if p.Unanswerable && k < len(d.PickRefs) && namesObject(label, d.PickRefs[k]) {
 		if owner := ownerQualifiedRef(d, k); owner != "" {
-			return owner
+			// "@<ref>", the same spelling as the alias branch: a joined
+			// multi-pick answer binds every segment through the "@" path, and
+			// a bare "pN:<name>" segment would match no alias and no card.
+			return "@" + owner
 		}
 	}
 	return label + p.CopyMarker

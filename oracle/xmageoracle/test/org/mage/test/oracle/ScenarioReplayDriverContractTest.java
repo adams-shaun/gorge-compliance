@@ -805,60 +805,34 @@ public final class ScenarioReplayDriverContractTest {
     }
 
     /** An owner-qualified graveyard ref names the picked seat's card: the
-     * ref's owner prefix scopes the rank search, so p1's Pennant is selected
-     * even when p0's same-named card comes first in the offered zone order.
-     * The target path also binds a ref that entered after setup before
-     * falling back to a bare name (CR 601.2c's announced object). */
+     * ref's seat-scoped object list ranks only that seat's own cards, so
+     * p1's Pennant is selected even though p0's same-named card exists
+     * (CR 601.2c's announced object). A joined multi-pick answer carries
+     * every segment as an "@ref" the driver binds one by one. */
     private static void ownerQualifiedGraveyardTarget() throws Exception {
         UUID p0 = id(20), p1 = id(21);
         Card own = fakeCard(p0, "Dawn-Blessed Pennant");
         Card forest = fakeCard(p1, "Forest");
         Card theirs = fakeCard(p1, "Dawn-Blessed Pennant");
         Card second = fakeCard(p1, "Dawn-Blessed Pennant");
-        List<mage.MageObject> graveyards = Arrays.asList(own, forest, theirs, second);
-        java.util.function.ToIntFunction<mage.MageObject> seatOf =
-                o -> p0.equals(((Card) o).getOwnerId()) ? 0 : 1;
-        check(ScenarioReplay.refRankChoice("p1:Dawn-Blessed Pennant", graveyards, seatOf,
+        // bindOneAlias scopes its object list to the ref's seat before ranking.
+        List<mage.MageObject> p0Objs = Arrays.asList(own);
+        List<mage.MageObject> p1Objs = Arrays.asList(forest, theirs, second);
+        check(ScenarioReplay.refRankChoice("p1:Dawn-Blessed Pennant", p1Objs,
                 mage.MageObject::getName) == theirs, "owner-qualified ref did not select p1's graveyard card");
-        check(ScenarioReplay.refRankChoice("p0:Dawn-Blessed Pennant", graveyards, seatOf,
+        check(ScenarioReplay.refRankChoice("p0:Dawn-Blessed Pennant", p0Objs,
                 mage.MageObject::getName) == own, "owner-qualified ref did not select p0's graveyard card");
-        check(ScenarioReplay.refRankChoice("p1:Forest", graveyards, seatOf,
+        check(ScenarioReplay.refRankChoice("p1:Forest", p1Objs,
                 mage.MageObject::getName) == forest, "rank-free ref did not select its seat's card");
-        check(ScenarioReplay.refRankChoice("p1:Dawn-Blessed Pennant#2", graveyards, seatOf,
+        check(ScenarioReplay.refRankChoice("p1:Dawn-Blessed Pennant#2", p1Objs,
                 mage.MageObject::getName) == second, "ranked ref did not select the second card");
-        check(ScenarioReplay.refRankChoice("p1:Grizzly Bears", graveyards, seatOf,
+        check(ScenarioReplay.refRankChoice("p1:Grizzly Bears", p1Objs,
                 mage.MageObject::getName) == null, "an unmatched ref selected an object");
-
-        BindingDriver d = new BindingDriver();
-        String ref = "p1:Dawn-Blessed Pennant";
-        check("@p1:Dawn-Blessed Pennant".equals(targetName(d, ref)),
-                "an unbound owner-qualified ref did not bind to its alias");
-        check(d.bound.equals(Arrays.asList(ref)), "targetName did not bind the ref exactly once: " + d.bound);
-        d.bound.clear();
-        check("@p1:Dawn-Blessed Pennant".equals(targetName(d, ref)), "an already-bound ref changed alias");
-        check(d.bound.isEmpty(), "an already-bound ref was rebound: " + d.bound);
-        check("Dawn-Blessed Pennant".equals(targetName(d, "Dawn-Blessed Pennant")), "a bare name changed");
-        check(d.bound.isEmpty(), "a bare name was bound as a ref");
+        check(ScenarioReplay.answerRefs("@p1:Dawn-Blessed Pennant^@p0:Grizzly Bears#2")
+                .equals(Arrays.asList("p1:Dawn-Blessed Pennant", "p0:Grizzly Bears#2")),
+                "a joined owner-qualified answer did not split into its refs");
         System.out.println("PASS owner-qualified graveyard target (seat-scoped rank choice, "
-                + "exact owner card, late target ref binding)");
-    }
-
-    /** Records the refs targetName resolves late, so the lazy binding runs
-     * without a game (the superclass constructor is the only H2 touch). */
-    public static final class BindingDriver extends ScenarioReplay {
-        final List<String> bound = new ArrayList<>();
-
-        @Override
-        void bindOneAlias(String ref) {
-            bound.add(ref);
-            refAlias.put(ref, "@" + ref);
-        }
-    }
-
-    private static String targetName(ScenarioReplay d, String ref) throws Exception {
-        Method m = ScenarioReplay.class.getDeclaredMethod("targetName", String.class);
-        m.setAccessible(true);
-        return (String) m.invoke(d, ref);
+                + "exact owner card, joined @ref answers)");
     }
 
     private static Card fakeCard(UUID owner, String name) {
