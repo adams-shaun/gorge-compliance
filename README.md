@@ -117,6 +117,8 @@ To add a scenario, see [scenarios/README.md](scenarios/README.md).
 | `make xengine-sweep SETS=FDN CHUNKS=1 GAMES=2` | Full-game differential sweep | both builds |
 | `make pr DRY=1` | Print the pull request `make pr` would open | `gh` |
 
+Blame verdicts land in `oracle/xengine/diagnosed.tsv`, checked by `xengine diagnosed -check`.
+
 ## Layout
 
 | Path | What |
