@@ -162,10 +162,22 @@ mtgish-xc:
 
 # xmage-driver-tests compiles the Java replay driver and runs its unit tests
 # (oracle/xmageoracle/test) against the xmage-oracle-setup build. Needs Java
-# from that build; no game, no H2.
+# from that build; no game, no H2. The first recipe line is the structural
+# guard for the per-class wrapper convention: every runnable driver test must
+# be named by a scripts/xmage-oracle-test-*.sh, or the glob below silently
+# skips it.
 XMAGE_DRIVER_OUT ?= $(CURDIR)/.coverage/xmage-driver
 .PHONY: xmage-driver-tests
 xmage-driver-tests:
+	@missing=; for f in oracle/xmageoracle/test/org/mage/test/oracle/*Test.java; do \
+	  /usr/bin/grep -q 'public static void main' "$$f" || continue; \
+	  b=$$(basename "$$f"); \
+	  /usr/bin/grep -q "$$b" scripts/xmage-oracle-test-*.sh || missing="$$missing $$b"; \
+	done; \
+	if [ -n "$$missing" ]; then \
+	  echo "driver tests with a main not wired into scripts/xmage-oracle-test-*.sh:$$missing" >&2; \
+	  exit 1; \
+	fi
 	@test -s "$(XMAGE_ORACLE_DIR)/tests.cp" || { echo "no XMage build at $(XMAGE_ORACLE_DIR): run make xmage-oracle-setup, or set XMAGE_ORACLE_DIR" >&2; exit 1; }
 	for t in scripts/xmage-oracle-test-*.sh scripts/forge-oracle-test-*.sh; do echo "== $$t"; XMAGE_ORACLE_DIR=$(XMAGE_ORACLE_DIR) bash "$$t" "$(XMAGE_DRIVER_OUT)/$$(basename $$t .sh)" || exit 1; done
 

@@ -1,0 +1,86 @@
+{
+ "card": "Master Thief",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "012d928a42f9",
+ "scenarios": [
+  {
+   "name": "losing-the-thief-before-the-trigger-resolves-leaves-the-artifact-alone",
+   "cr": [
+    "611.2b"
+   ],
+   "why": "The Thief's trigger is still on the stack when Ray of Command takes the Thief away. The duration had already ended, so the trigger does nothing and p1 can still tap the Ring itself.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Master Thief"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Sol Ring"
+     ],
+     "hand": [
+      "Ray of Command"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Master Thief",
+     "mana": "CCUU"
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "pass_to",
+     "decision": "priority"
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Ray of Command",
+     "mana": "CCCU",
+     "targets": [
+      "p0:Master Thief"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "activate",
+     "seat": 1,
+     "card": "p1:Sol Ring"
+    }
+   ],
+   "expect": [
+    {
+     "pool": {
+      "p1": "CC"
+     }
+    },
+    {
+     "card": "p0:Master Thief",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

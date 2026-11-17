@@ -1,0 +1,47 @@
+{
+ "card": "Sutured Ghoul",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "049542f2ea36",
+ "scenarios": [
+  {
+   "name": "simultaneous-arrival-leaves-nothing-to-exile",
+   "cr": [
+    "614.13a"
+   ],
+   "why": "Living Death returns the Ghoul and the Bear at the same time. Neither is in the graveyard while the Ghoul's replacement applies, so it exiles nothing, is 0/0, and dies; the Bear stays.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Living Death"
+     ],
+     "graveyard": [
+      "Sutured Ghoul",
+      "Runeclaw Bear"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Living Death",
+     "mana": "CCCBB"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Sutured Ghoul",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Runeclaw Bear",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

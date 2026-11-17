@@ -1,0 +1,74 @@
+{
+ "card": "Gray Ogre",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e3b0c44298fc",
+ "scenarios": [
+  {
+   "name": "a-base-power-set-applies-after-pumps-and-counters",
+   "cr": [
+    "613.5"
+   ],
+   "why": "The Ogre starts at 2/2, gains a counter and a +4/+4 pump, and gets +0/+2 from two Armorers. Ovinize then sets its base body to 0/1 in an earlier layer, so the final body is 5/8, not 0/1.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Gray Ogre",
+      "Veteran Armorer",
+      "Veteran Armorer"
+     ],
+     "counters": {
+      "Gray Ogre": {
+       "P1P1": 1
+      }
+     },
+     "hand": [
+      "Titanic Growth",
+      "Ovinize"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Titanic Growth",
+     "mana": "CG",
+     "targets": [
+      "p0:Gray Ogre"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Gray Ogre",
+       "pt": "7/9"
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Ovinize",
+     "mana": "CU",
+     "targets": [
+      "p0:Gray Ogre"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Gray Ogre",
+     "pt": "5/8",
+     "counters": {
+      "P1P1": 1
+     }
+    }
+   ]
+  }
+ ]
+}
