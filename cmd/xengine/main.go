@@ -6,6 +6,7 @@
 //	xengine play -set S [-chunk C] [-games K] [-seed N] [-windows] [-tape-turns 1,2,4,8] [-ledger L.tsv] [-random 'S1 S2'] [-dirac] [-pool FILE [-pool-filter FILE]] [-decks DIR] [-out DIR]
 //	xengine diff -play DIR -engine xmage|forge -rows ROWS.jsonl -out DIR2 [-only ID]
 //	xengine cov  -ledger A.tsv [-ledger B.tsv ...] [-sets FDN,BLB] [-sub BASE.tsv] [-missing] [-write OUT.tsv]
+//	xengine diagnosed -check [-file oracle/xengine/diagnosed.tsv] [-cards .cards]
 //	xengine calib -play DIR -diff DIR2 -engine xmage|forge
 //	xengine xprep -play DIR -out xitems.jsonl [-manifests DIR]
 //	xengine adjudicate -play DIR -xmage DIFF_X -forge DIFF_F -out DIR3 [-ledger DIR] [-forge-ref REF12] [-phase DIFF_P [-phase-rows ROWS]]
@@ -60,7 +61,7 @@ const DefaultRoot = ".oracle-build/xengine"
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|calib|xprep|adjudicate|sweep-plan|pool|followers [flags]")
+		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|diagnosed|calib|xprep|adjudicate|sweep-plan|pool|followers [flags]")
 		os.Exit(2)
 	}
 	var err error
@@ -71,6 +72,8 @@ func main() {
 		err = runDiff(os.Args[2:])
 	case "cov":
 		err = runCov(os.Args[2:])
+	case "diagnosed":
+		err = runDiagnosed(os.Args[2:])
 	case "calib":
 		err = runCalib(os.Args[2:])
 	case "xprep":
@@ -84,7 +87,7 @@ func main() {
 	case "followers":
 		err = runFollowers(os.Args[2:])
 	default:
-		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, calib, xprep, adjudicate, sweep-plan, pool or followers)", os.Args[1])
+		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, diagnosed, calib, xprep, adjudicate, sweep-plan, pool or followers)", os.Args[1])
 	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "xengine:", err)
