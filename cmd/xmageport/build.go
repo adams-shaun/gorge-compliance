@@ -170,6 +170,15 @@ func (t *translator) build() (*portScenario, []*group, *refusal) {
 		if a.sub != b.sub {
 			return a.sub < b.sub
 		}
+		// A checkpoint assert or a wait is evaluated where the XMage method
+		// states it, so it follows source order. The active-seat tiebreak
+		// below orders simultaneous casts, but applying it to a check put
+		// the active seat's check before the opponent's later cast it
+		// actually follows (ThousandYearStorm's checkLife at end of turn
+		// rode the second Bolt's cast step and saw 20 life, not 17).
+		if a.kind == "check" || a.kind == "wait" || b.kind == "check" || b.kind == "wait" {
+			return a.src < b.src
+		}
 		an, bn := a.seat != active(a.turn), b.seat != active(b.turn)
 		if an != bn {
 			return !an
@@ -212,6 +221,9 @@ func (t *translator) build() (*portScenario, []*group, *refusal) {
 		groups = append(groups, g)
 	}
 	if r := t.manaSideEffects(em.steps); r != nil {
+		return nil, nil, r
+	}
+	if r := t.replicateChoiceRefusal(); r != nil {
 		return nil, nil, r
 	}
 	for _, c := range t.asserts {
@@ -2501,6 +2513,49 @@ func (t *translator) manaSideEffects(steps []*step) *refusal {
 	return nil
 }
 
+// replicateChoiceRefusal refuses a spell cast whose replicate count XMage
+// states as a boolean. XMage's "Yes, replicate / No, only once" answers are
+// gorge's cast-flow KChoose count ask (0..N), not a yes/no, so the stated
+// choices are never consumed and the spell is cast once (Djinn Illuminatus).
+func (t *translator) replicateChoiceRefusal() *refusal {
+	grants := false
+	for p := 0; p < 2 && !grants; p++ {
+		for _, ac := range t.setup[p] {
+			if ac.zone != "battlefield" {
+				continue
+			}
+			c, ok := t.lookup(ac.name)
+			if !ok {
+				continue
+			}
+			for _, f := range c.Faces {
+				if f == nil {
+					continue
+				}
+				for _, st := range f.Statics {
+					if strings.Contains(st.Params["AddKeyword"], "Replicate") {
+						grants = true
+					}
+				}
+			}
+		}
+	}
+	if !grants {
+		return nil
+	}
+	for _, a := range t.actions {
+		if a.kind != "cast" || len(a.choices) == 0 || t.isPermanentCard(a.card) {
+			continue
+		}
+		for _, ch := range a.choices {
+			if p := strings.ToLower(ch.pick); p == "yes" || p == "no" {
+				return refuse("replicate-choice", "%s replicate count", a.card)
+			}
+		}
+	}
+	return nil
+}
+
 // copyReplacementOnBattlefield reports a setup battlefield permanent that
 // changes how many copies of a spell are made (Twinning Staff's Event$ CopySpell).
 func (t *translator) copyReplacementOnBattlefield() bool {
@@ -2552,7 +2607,17 @@ func manaSideEffect(c *cards.Card, name string) *refusal {
 			}
 		}
 		for _, sa := range f.Abilities {
-			if sa != nil && sa.API == "Mana" && (sa.Sub != nil || sa.ParamStr(cards.PKTriggersWhenSpent) != "") {
+			if sa == nil || sa.API != "Mana" {
+				continue
+			}
+			if strings.Contains(sa.ParamStr(cards.PKCost), "Sac<") {
+				// Bolg's Company: "{T}, Sacrifice another Goblin: Add
+				// {B}{R}". Paying the spell from the pool never activates
+				// the ability, so the sacrifice and the choice of Goblin
+				// are skipped.
+				return refuse("mana-ability-cost", "%s sacrifices a permanent for mana", name)
+			}
+			if sa.Sub != nil || sa.ParamStr(cards.PKTriggersWhenSpent) != "" {
 				// a sub-ability, or "when you spend this mana ..."
 				return refuse("mana-payment", "%s's mana ability does more", name)
 			}

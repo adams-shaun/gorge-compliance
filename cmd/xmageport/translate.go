@@ -249,6 +249,11 @@ var aiAnswers = map[string][]string{
 	// The copies of Lightning Bolt and Shock are cast without targets
 	// stated; XMage's AI aims both at the opponent (assertLife playerB 15).
 	"SpelltwineTest#testCopyCards": {"0:target:p1", "0:target:p1"},
+	// Mizzix's Mastery copies See the Truth and XMage's framework accepts
+	// the may-cast even under setStrictChooseMode (the test asserts all
+	// three looked-at cards reach the hand); the runner's optional-modes
+	// fallback declines an unattended ask, so the accept is written down.
+	"SeeTheTruthTest#castCopyFromExile": {"0:yes"},
 }
 
 // poolPaidLands are setup lands per Class#method that XMage taps for a
