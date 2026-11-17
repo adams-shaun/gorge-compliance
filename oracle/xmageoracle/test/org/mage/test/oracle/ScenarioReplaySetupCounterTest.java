@@ -20,13 +20,13 @@ import org.mage.test.player.TestPlayer;
 import sun.misc.Unsafe;
 
 /** Executable check that a setup P1P1 counter reaches the setup snapshot's
- * P/T. No H2 or game replay: the production applySetupState runs against a
+ * P/T. No H2 or game replay: the production placeSetupCounters runs against a
  * real FakeGame and a real permanent. Run
  * scripts/xmage-oracle-test-setup-counter.sh.
  *
  * The setup snapshot serializes a creature's pt as
  * {@code perm.getPower().getValue() + "/" + perm.getToughness().getValue()},
- * so asserting the permanent's P/T after the production helper is asserting
+ * so asserting the permanent's P/T after the production hook is asserting
  * exactly the value the snapshot records. */
 public final class ScenarioReplaySetupCounterTest {
     private static void check(boolean condition, String message) {
@@ -73,19 +73,19 @@ public final class ScenarioReplaySetupCounterTest {
         return p;
     }
 
-    /** Runs the production helper the setup runCode uses: it adds the
+    /** Runs the production pre-start hook that seeds the setup counters: it adds the
      * scenario's counters and then re-applies the game's continuous effects,
      * so the permanent's P/T carries the counter's layer-7d boost. */
-    private static void applySetupState(ScenarioReplay driver, FakeGame game) throws Exception {
+    private static void placeSetupCounters(ScenarioReplay driver, FakeGame game) throws Exception {
         Method method = ScenarioReplay.class
-                .getDeclaredMethod("applySetupState", mage.game.Game.class);
+                .getDeclaredMethod("placeSetupCounters", mage.game.Game.class);
         method.setAccessible(true);
         method.invoke(driver, game);
     }
 
     public static void main(String[] args) throws Exception {
         // The superclass constructor opens H2. Bypass it and initialise only
-        // the fields the setup-counter helper reads.
+        // the fields the setup-counter hook reads.
         Field field = Unsafe.class.getDeclaredField("theUnsafe");
         field.setAccessible(true);
         Unsafe unsafe = (Unsafe) field.get(null);
@@ -96,7 +96,7 @@ public final class ScenarioReplaySetupCounterTest {
         TestPlayer p1 = player(UUID.randomUUID());
         set(driver, "playerA", p0);
         set(driver, "playerB", p1);
-        // allocateInstance skips field initializers; applySetupState walks seats.
+        // allocateInstance skips field initializers; placeSetupCounters walks seats.
         set(driver, "seats", 2);
         set(driver, "gorgeName", "");
         set(driver, "xmageName", "");
@@ -122,9 +122,6 @@ public final class ScenarioReplaySetupCounterTest {
         Map<UUID, String> setupNames = new HashMap<>();
         setupNames.put(perm.getId(), "Grizzly Bears");
         set(driver, "setupNames", setupNames);
-        // allocateInstance skips field initializers; applySetupState reads
-        // the enters-with-counters set (empty: no placement applied any).
-        set(driver, "enterWithCountersApplied", new java.util.HashSet<UUID>());
 
         // Preconditions the assertion depends on: the permanent is a real
         // battlefield creature with no counter yet, and its printed P/T is
@@ -135,7 +132,7 @@ public final class ScenarioReplaySetupCounterTest {
         equal(0, perm.getCounters(game).getCount(CounterType.P1P1));
         equal("2/2", perm.getPower().getValue() + "/" + perm.getToughness().getValue());
 
-        applySetupState(driver, game);
+        placeSetupCounters(driver, game);
 
         equal(1, perm.getCounters(game).getCount(CounterType.P1P1));
         // The snapshot writes exactly this pt string. 3/3 proves the layer-7d
