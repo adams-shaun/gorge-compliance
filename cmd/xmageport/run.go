@@ -58,21 +58,24 @@ func placementFailSteps(fails []string) map[int]bool {
 
 var verbose bool
 
-func runOne(reg *cards.Registry, sc *portScenario) ([]string, []string, error) {
+// runOne runs sc the way audit.TestXMagePortScenarios does (the audit entry
+// point in XMage-fixture mode), so the log-only replay verdict is known too:
+// a scenario whose replay differs from its live game cannot be committed.
+func runOne(reg *cards.Registry, sc *portScenario) (fails, transcript []string, replayDiff string, err error) {
 	raw, err := json.Marshal(scenarioBody(sc))
 	if err != nil {
-		return nil, nil, err
+		return nil, nil, "", err
 	}
-	res, err := rules.RunOracleScenarioJSON(reg, raw)
+	res, err := rules.RunOracleAuditScenarioJSON(reg, raw, true)
 	if err != nil {
-		return nil, nil, err
+		return nil, nil, "", err
 	}
 	if verbose {
 		fmt.Println(string(raw))
 		fmt.Println(strings.Join(res.Transcript, "\n"))
 		fmt.Println(strings.Join(res.Fails, "\n"))
 	}
-	return res.Fails, res.Transcript, nil
+	return res.Fails, res.Transcript, res.ReplayDiff, nil
 }
 
 var reFallback = regexp.MustCompile(`\[\w+ fallback\] p\d (\w+) ->`)
@@ -241,10 +244,11 @@ func runResult(reg *cards.Registry, r *result) {
 		g.kinds = make([]int, len(g.answers))
 	}
 	var fails, transcript []string
+	var replayDiff string
 	for iter := 0; iter < 40; iter++ {
 		cur := materialize(sc, r.Groups)
-		f, tr, err := runOne(reg, cur)
-		transcript = tr
+		f, tr, rd, err := runOne(reg, cur)
+		transcript, replayDiff = tr, rd
 		ngroups := len(r.Groups)
 		if err != nil {
 			fails = []string{"decode: " + err.Error()}
@@ -374,13 +378,25 @@ func runResult(reg *cards.Registry, r *result) {
 		r.Scenario = nil
 		return
 	}
+	r.ReplayDiff = replayDiff
+	r.Status = decideStatus(fails, replayDiff)
+}
+
+// decideStatus maps a finished run to a result status. A non-empty replayDiff
+// (the live game and its log-only replay disagree) is a hard failure of the
+// audit gate whatever the expectations say, so it outranks pass and
+// fail-expect; writeCommit writes only pass and known_bug rows, and
+// fail-replay is neither.
+func decideStatus(fails []string, replayDiff string) string {
 	switch {
-	case len(fails) == 0:
-		r.Status = "pass"
 	case anyHarness(fails):
-		r.Status = "fail-harness"
+		return "fail-harness"
+	case replayDiff != "":
+		return "fail-replay"
+	case len(fails) == 0:
+		return "pass"
 	default:
-		r.Status = "fail-expect"
+		return "fail-expect"
 	}
 }
 
