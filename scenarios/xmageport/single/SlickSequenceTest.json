@@ -228,19 +228,6 @@
    },
    "steps": [
     {
-     "op": "resolve",
-     "seat": 0
-    },
-    {
-     "op": "cast",
-     "seat": 0,
-     "card": "p0:Slick Sequence",
-     "mana": "UR",
-     "targets": [
-      "p1"
-     ]
-    },
-    {
      "op": "pass",
      "seat": 0
     },
@@ -249,6 +236,19 @@
      "seat": 1,
      "card": "p1:Lightning Bolt",
      "mana": "R",
+     "targets": [
+      "p1"
+     ]
+    },
+    {
+     "op": "resolve",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Slick Sequence",
+     "mana": "UR",
      "targets": [
       "p1"
      ]
