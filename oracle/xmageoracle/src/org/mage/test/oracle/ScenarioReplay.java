@@ -1591,6 +1591,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // second checkpoint must follow that wait there.
             return seat(activeSeat);
         }
+        if (sc0 != null && opensOnOtherSeat(steps(sc0), stepIdx, activeSeat)) {
+            // A recorded game's action of the seat that is not active runs on
+            // that seat's queue, and so must its checkpoint: a checkpoint on
+            // the active seat runs only after the whole run of that seat's
+            // actions, so every one of them would show the last one's stack.
+            return seat(seatOfStep(steps(sc0), stepIdx));
+        }
         if (op.equals("pass_to")) {
             return seat(activeSeat);
         }
@@ -3607,6 +3614,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
     static final String CMD_REQUIRE_STACK = "pass pair needs a stack object";
     static final String CMD_WAIT_RESOLVE_ONE = "waitStackResolved:1";
     static final String CMD_YIELD_PRIORITY = "pass handoff to the opponent";
+    /** Queued on the passing seat itself (not the active one) by a resolving
+     * pass of a seat that is not the active player. */
+    static final String CMD_PASS_OWN_PRIORITY = "resolving pass of the non-active seat";
     static final String CMD_REQUIRE_EMPTY_STACK = "opening pass pair needs an empty stack";
     static final String CMD_ADVANCE_STEP = "opening pass pair advances the step";
 
@@ -3709,6 +3719,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return isOp(steps, index, "pass") && steps.get(index).getAsJsonObject().has("xpos");
     }
 
+    /** Whether step {@code index} is a cast, activation or land play, of a
+     * recorded game (one that has passes with positions), by a seat that is
+     * not the active player. */
+    static boolean opensOnOtherSeat(JsonArray steps, int index, int activeSeat) {
+        if (!(isOp(steps, index, "cast") || isOp(steps, index, "activate") || isOp(steps, index, "play"))
+                || seatOfStep(steps, index) == activeSeat) {
+            return false;
+        }
+        for (int i = 0; i < steps.size(); i++) {
+            if (isPassRun(steps, i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static boolean posFlag(JsonObject pos, String key) {
         return pos.has(key) && pos.get(key).getAsBoolean();
     }
@@ -3799,7 +3825,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * priority at the step the pass was made in; a pass that only hands
      * priority on or moves the step queues nothing. The step after a pass the
      * active seat made in the same step, if it is an action of the other seat,
-     * starts by yielding priority to that seat (the lone-handoff recipe). */
+     * starts by yielding priority to that seat (the lone-handoff recipe). A
+     * resolving pass by a seat other than the active one also queues that
+     * seat's own pass, so its later queued actions wait for the resolution. */
     static List<String> passRunCommands(JsonArray steps, int index, int activeSeat) {
         List<String> cmds = new ArrayList<>();
         if (isPassRun(steps, index - 1) && !isOp(steps, index, "pass")) {
@@ -3813,6 +3841,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         }
         if (isPassRun(steps, index) && posFlag(steps.get(index).getAsJsonObject().getAsJsonObject("xpos"), "resolves")) {
+            if (seatOfStep(steps, index) != activeSeat) {
+                // The resolving pass belongs to a seat that is not the active
+                // player. The active seat's wait only hands priority to that
+                // seat, and the first queued action of its turn and step
+                // would fire there, ahead of the pass gorge recorded; queue
+                // the pass first, so it takes that priority (CR 117.4).
+                cmds.add(CMD_PASS_OWN_PRIORITY);
+            }
             cmds.add(CMD_REQUIRE_STACK);
             cmds.add(CMD_WAIT_RESOLVE_ONE);
         }
@@ -4008,6 +4044,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     break;
                 case CMD_YIELD_PRIORITY:
                     runCode(cmd, turn, phase, active, (info, pl, g) -> pl.pass(g));
+                    break;
+                case CMD_PASS_OWN_PRIORITY:
+                    runCode(cmd, turn, phase, seat(seatOfStep(steps(sc0), stepIdx)), (info, pl, g) -> pl.pass(g));
                     break;
                 case CMD_REQUIRE_EMPTY_STACK:
                     runCode(cmd, turn, phase, playerA, (info, pl, g) -> {
