@@ -96,7 +96,7 @@ func refuse(id, reason, format string, a ...any) *Refusal {
 //     own target picks (oraclegen.ChooseTargets) and the rest of the decisions
 //     are scripted by oraclegen.XAnswersForScenario, which also restores a
 //     divided spell's shares (oraclegen.CastDivisions). The mode numbers are the
-//     union over every face of every card the item casts, activates or plays.
+//     union over every face of every card the item holds (stepped cards first).
 //   - A modal enters trigger that resolves after the window's last checkpoint
 //     is completed from gorge's own continued replay (completeModalTrigger);
 //     when that completion cannot decide it, the item is refused rather than
@@ -118,7 +118,7 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 	if len(g.Snapshots) == 0 {
 		return it, refuse(it.ID, ReasonNoResult, "gorge result has no snapshots")
 	}
-	modes, why := modeNumbers(reg, it)
+	modes, why := modeNumbers(reg, it, g.Decisions)
 	if why != "" {
 		return it, refuse(it.ID, ReasonModeCollision, "%s", why)
 	}
@@ -794,11 +794,36 @@ func stepCard(reg *cards.Registry, it oraclegen.Item, st oraclegen.Step) (*cards
 
 // modeNumbers is the union of oraclegen.ModeNumbers over every face of every
 // card the item casts, activates or plays, or why two cards disagree on a
-// label.
-func modeNumbers(reg *cards.Registry, it oraclegen.Item) (map[string]int, string) {
+// label. A card the item only places (battlefield, hand, graveyard, ...) can
+// own a modal trigger or an enters mode that resolves in the window, so its
+// labels are added too (CR 700.2: the printed mode number is what XMage
+// reads, not gorge's position among the offered modes). Such a bystander's
+// label never overrides a stepped card's; a label that bystanders number
+// differently is dropped, and refused only when a recorded decision actually
+// picks it (the printed number is then unknowable from the label alone).
+func modeNumbers(reg *cards.Registry, it oraclegen.Item, ds []rules.OracleDecision) (map[string]int, string) {
 	out := map[string]int{}
 	owner := map[string]string{}
 	done := map[string]bool{}
+	add := func(into map[string]int, who map[string]string, n string, c *cards.Card) (string, bool) {
+		for _, f := range c.Faces {
+			m := oraclegen.ModeNumbers(f)
+			labels := make([]string, 0, len(m))
+			for k := range m {
+				labels = append(labels, k)
+			}
+			sort.Strings(labels)
+			for _, k := range labels {
+				if prev, seen := into[k]; seen && prev != m[k] {
+					return fmt.Sprintf("mode %q is %d on %s and %d on %s", k, prev, who[k], m[k], n), false
+				}
+				if _, seen := into[k]; !seen {
+					into[k], who[k] = m[k], n
+				}
+			}
+		}
+		return "", true
+	}
 	for _, st := range it.Steps {
 		if st.Op != "cast" && st.Op != "activate" && st.Op != "play" {
 			continue
@@ -812,22 +837,59 @@ func modeNumbers(reg *cards.Registry, it oraclegen.Item) (map[string]int, string
 		if !ok {
 			continue
 		}
-		for _, f := range c.Faces {
-			m := oraclegen.ModeNumbers(f)
-			labels := make([]string, 0, len(m))
-			for k := range m {
-				labels = append(labels, k)
-			}
-			sort.Strings(labels)
-			for _, k := range labels {
-				if prev, seen := out[k]; seen && prev != m[k] {
-					return nil, fmt.Sprintf("mode %q is %d on %s and %d on %s", k, prev, owner[k], m[k], n)
-				}
-				if _, seen := out[k]; !seen {
-					out[k], owner[k] = m[k], n
-				}
+		if why, ok := add(out, owner, n, c); !ok {
+			return nil, why
+		}
+	}
+	picked := map[string]bool{}
+	for _, d := range ds {
+		for _, p := range d.Picks {
+			picked[p] = true
+		}
+	}
+	extra := map[string]int{}
+	extraOwner := map[string]string{}
+	ambiguous := map[string]string{}
+	for _, n := range cardNames(it) {
+		if done[n] {
+			continue
+		}
+		c, ok := reg.Lookup(n)
+		if !ok {
+			continue
+		}
+		one := map[string]int{}
+		oneOwner := map[string]string{}
+		add(one, oneOwner, n, c) // a card's own faces may disagree; the first face wins
+		labels := make([]string, 0, len(one))
+		for k := range one {
+			labels = append(labels, k)
+		}
+		sort.Strings(labels)
+		for _, k := range labels {
+			if prev, seen := extra[k]; seen && prev != one[k] {
+				ambiguous[k] = fmt.Sprintf("mode %q is %d on %s and %d on %s", k, prev, extraOwner[k], one[k], n)
+			} else if !seen {
+				extra[k], extraOwner[k] = one[k], n
 			}
 		}
+	}
+	labels := make([]string, 0, len(extra))
+	for k := range extra {
+		labels = append(labels, k)
+	}
+	sort.Strings(labels)
+	for _, k := range labels {
+		if _, seen := out[k]; seen {
+			continue
+		}
+		if why, bad := ambiguous[k]; bad {
+			if picked[k] {
+				return nil, why
+			}
+			continue
+		}
+		out[k] = extra[k]
 	}
 	return out, ""
 }
