@@ -1,9 +1,11 @@
 package oraclegen
 
 import (
+	"reflect"
 	"slices"
 	"testing"
 
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
@@ -85,5 +87,43 @@ func TestLiveNamedSameNamesKeepsOptionsDistinct(t *testing.T) {
 	p := ClassifySameName(ds[0], 0)
 	if !p.Ambiguous || p.Distinct != 2 || p.Alias != "@p0:Magebane Lizard" {
 		t.Fatalf("classification = %+v, refs %v", p, ds[0].OptionRefs)
+	}
+}
+
+// Both objects renamed to a third name by copy effects, neither setup ref
+// carrying it: the pick's own current name must reach the census too, and the
+// answer is the exact ref whichever option was recorded.
+func TestLiveNamedSameNamesBothOptionsRenamed(t *testing.T) {
+	d, _ := copyEffectDecision()
+	d.OptionRefs = []string{"p0:Cactarantula", "p1:Grizzly Bears"}
+	snap := rules.OracleSnapshot{Permanents: []rules.OracleSnapPerm{
+		{Ref: "p0:Cactarantula", Name: "Magebane Lizard"},
+		{Ref: "p1:Grizzly Bears", Name: "Magebane Lizard"},
+	}}
+	snaps := []rules.OracleSnapshot{snap, snap, snap}
+	for _, pick := range d.OptionRefs {
+		d.PickRefs = []string{pick}
+		d.Picks = []string{"Magebane Lizard (" + pick[:2] + ")"}
+		var answers []XAnswer
+		for _, step := range XAnswers(liveNamedSameNames([]rules.OracleDecision{d}, snaps), 2, nil) {
+			answers = append(answers, step...)
+		}
+		if len(answers) != 1 || answers[0].Value != pick {
+			t.Fatalf("pick %s: answers = %#v, want its exact ref", pick, answers)
+		}
+	}
+}
+
+// The production wiring: xanswersForScenario restates the options from the
+// result's own snapshots before any answer is spelled, so the recorded ask
+// answers its exact ref rather than the bare name XMage binds to the copy.
+func TestXAnswersForScenarioSeesCopyEffectCollision(t *testing.T) {
+	d, snaps := copyEffectDecision()
+	res := rules.OracleResult{Snapshots: snaps, Decisions: []rules.OracleDecision{d}}
+	sc := Scenario{Steps: []Step{{Op: "pass"}, {Op: "pass"}}}
+	got := xanswersForScenario(cards.NewRegistry(), res, sc, nil, nil)
+	want := [][]XAnswer{nil, {{Seat: 0, Kind: "target", Value: "p1:Magebane Lizard"}}}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("routed = %#v, want %#v", got, want)
 	}
 }

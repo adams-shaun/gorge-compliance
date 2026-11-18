@@ -54,6 +54,10 @@ func liveNameOf(snap rules.OracleSnapshot, ref string) string {
 // d.Step+1 (after it), and a "until end of turn" copy may begin or end inside
 // that span, so an option collides when EITHER checkpoint names it so.
 //
+// An option collides when its current name is the pick's setup name or the
+// pick's own current name (both objects renamed to a third name). It is
+// restated under the pick's SETUP name, the one the census compares.
+//
 // Only a decision's OptionRefs are rewritten, only for an option whose setup
 // name differs from the pick's, and the pick's own ref (the identity the alias
 // binds) is never touched. ds itself and its slices are left as they were.
@@ -72,12 +76,22 @@ func liveNamedSameNames(ds []rules.OracleDecision, snaps []rules.OracleSnapshot)
 				continue
 			}
 			name := oraclediffRefName(pick)
+			// XMage knows the pick by its current name too: a pick that a copy
+			// or becomes effect renamed is matched under that name, so another
+			// option wearing it collides even when neither setup ref does.
+			names := []string{name}
+			for _, s := range window {
+				if live := liveNameOf(s, pick); live != "" && !slices.ContainsFunc(names, func(n string) bool { return strings.EqualFold(n, live) }) {
+					names = append(names, live)
+				}
+			}
 			for j, opt := range d.OptionRefs {
 				if opt == pick || strings.EqualFold(oraclediffRefName(opt), name) {
 					continue
 				}
 				collides := slices.ContainsFunc(window, func(s rules.OracleSnapshot) bool {
-					return strings.EqualFold(liveNameOf(s, opt), name)
+					live := liveNameOf(s, opt)
+					return slices.ContainsFunc(names, func(n string) bool { return strings.EqualFold(live, n) })
 				})
 				if !collides {
 					continue
