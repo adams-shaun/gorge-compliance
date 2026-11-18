@@ -165,7 +165,7 @@ func TestPrepareDropsTypedDualColour(t *testing.T) {
 	// a card choice on the later step: neither names a colour, so the drop
 	// must keep both.
 	const cardChoice = "Captain Jean-Luc Picard"
-	for _, step := range []int{0, 2} {
+	for _, step := range []int{0, 1, 2} {
 		res.Decisions = append(res.Decisions, rules.OracleDecision{
 			Step: step, Seat: 0, Kind: "choose_n", Options: 2,
 			Picks: []string{cardChoice}, PickIdx: []int{0},
@@ -196,8 +196,15 @@ func TestPrepareDropsTypedDualColour(t *testing.T) {
 	if got := it.XAbility[1]; got != "{T}: Add {B}" {
 		t.Fatalf("combo prefix = %q, want %q", got, "{T}: Add {B}")
 	}
-	if len(it.XAnswers[1]) != 0 {
-		t.Errorf("combo step answers = %+v, want none", it.XAnswers[1])
+	// The combo step's prefix names the colour, so only its colour answer is
+	// dropped; the non-colour card choice queued on it must survive.
+	for _, a := range it.XAnswers[1] {
+		if a.Kind == "choice" && isColour(a.Value) {
+			t.Errorf("combo step keeps colour answer %q", a.Value)
+		}
+	}
+	if !slices.Contains(it.XAnswers[1], oraclegen.XAnswer{Seat: 0, Kind: "choice", Value: cardChoice}) {
+		t.Errorf("combo step lost the non-colour choice answer: %+v", it.XAnswers[1])
 	}
 	if !slices.Contains(it.XAnswers[2], oraclegen.XAnswer{Seat: 0, Kind: "choice", Value: cardChoice}) {
 		t.Errorf("later step lost the card choice answer: %+v", it.XAnswers[2])

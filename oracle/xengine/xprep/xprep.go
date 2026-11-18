@@ -146,7 +146,16 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 	}
 	for i := range sc.Steps {
 		if comboColourStep(abilities, i) {
-			it.XAnswers[i] = nil // the prefix names the colour; no ask follows
+			// The prefix names the colour, so XMage asks no colour question and
+			// a queued colour answer would be left over. Drop only the colour
+			// answers: a trigger's target, an ordering or a may answer queued
+			// on the same step must stay or the FIFO queue desyncs.
+			colour := strings.TrimSuffix(strings.TrimPrefix(abilities[i], comboPrefix), "}")
+			kept, mismatched := dropFixedColourAnswers(it.XAnswers[i], colour)
+			if mismatched != "" {
+				return it, refuse(it.ID, ReasonColourMismatch, "step %d: combo mana text %q names {%s} but the queued answer is %q", i, abilities[i], colour, mismatched)
+			}
+			it.XAnswers[i] = kept
 			continue
 		}
 		colour, fixed := fixedColourStep(abilities, i)
