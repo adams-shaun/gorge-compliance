@@ -536,6 +536,52 @@ func TestForgeLibraryTopCutToGorgeDepth(t *testing.T) {
 	}
 }
 
+// TestModesWithoutALogLineAnsweredByDefault is the farm cmdr4 repro (seeds
+// 13001 and 12901): gorge asks a modal pick where Forge's next log line is
+// the seat's priority, because Forge's recorder writes no line for a modal
+// answer. The follower used to stop there with kind "modes seat 2" against
+// "priority seat 2"; it now answers by default and consumes no line.
+func TestModesWithoutALogLineAnsweredByDefault(t *testing.T) {
+	prio := parseAsk(t, `{"t":"ask","n":113,"seat":2,"turn":3,"step":"main1","kind":"priority","answer":{"action":"pass"}}`)
+	modes := func(min, max int, n int) *decision.Decision {
+		d := &decision.Decision{Seq: 5, Player: 2, Kind: decision.KModes, Min: min, Max: max}
+		for i := 0; i < n; i++ {
+			d.Options = append(d.Options, decision.Option{Index: i, Kind: "mode"})
+		}
+		return d
+	}
+	for _, c := range []struct {
+		name string
+		d    *decision.Decision
+		want []int
+	}{
+		{"choose one", modes(1, 1, 3), []int{0}},
+		{"choose two", modes(2, 2, 3), []int{0, 1}},
+		{"choose both", modes(2, 2, 2), []int{0, 1}},
+		{"up to two takes one", modes(0, 2, 3), []int{0}},
+		{"clamped to the offer", modes(3, 3, 2), []int{0, 1}},
+		{"repeatable cycles", func() *decision.Decision { d := modes(3, 3, 2); d.Repeatable = true; return d }(), []int{0, 1, 0}},
+		{"budget keeps the sum", func() *decision.Decision {
+			d := modes(1, 3, 3)
+			d.Budgeted, d.MaxSum = true, 2
+			d.Options[0].Value, d.Options[1].Value, d.Options[2].Value = 1, 2, 1
+			return d
+		}(), []int{0}},
+	} {
+		f := &follower{log: &Log{}}
+		in, ok := f.answer(c.d, Entry{Line: 156, T: TAsk, Ask: prio})
+		if !ok || f.res.Hard != nil {
+			t.Fatalf("%s: hard divergence %+v", c.name, f.res.Hard)
+		}
+		if !reflect.DeepEqual(in.Choices, c.want) || in.Seq != 5 || in.Player != 2 {
+			t.Errorf("%s: intent %+v, want choices %v", c.name, in, c.want)
+		}
+		if f.pos != 0 || f.res.Modes != 1 || f.res.Asks != 0 {
+			t.Errorf("%s: pos %d modes %d asks %d, want the log line left unconsumed", c.name, f.pos, f.res.Modes, f.res.Asks)
+		}
+	}
+}
+
 // TestUnloggedArrangeIsAnsweredByDefault is the farm cmdr4 repro (seeds
 // 13000, 13003 and the HOB/OTJ pods): Forge's recorder logs no scry or
 // surveil answer (BridgeController.arrangeForScry/arrangeForSurveil take the
