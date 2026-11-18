@@ -39,6 +39,11 @@ type Input struct {
 	// when the adjudication has no fourth column, and nothing below changes.
 	PRows map[string]oraclediff.XResult
 	PFind map[string]classify.Finding
+	// FShadow is the Forge-led follower's hard divergences (LoadFShadow) and
+	// Rank what their census reads; nil when there is no fshadow input, and
+	// nothing below changes.
+	FShadow []Divergence
+	Rank    Ranker
 }
 
 // Row is one adjudicated item. It holds ids, labels and field names only,
@@ -108,6 +113,10 @@ type Result struct {
 	Drafts   []Cluster // the clusters that become a ticket draft
 	// Four is the four-way table (fourway.go), by id; nil without phase.
 	Four []FourRow
+	// Census is the fshadow class census (fshadow.go); nil without it.
+	Census *Census
+	// Rank is the Input's, for the briefs' suspect lines.
+	Rank Ranker
 }
 
 var digits = regexp.MustCompile(`\d+`)
@@ -169,6 +178,9 @@ func Run(in Input) Result {
 	}
 	if in.PFind != nil {
 		res.Four = fourRows(ids, in)
+	}
+	if in.FShadow != nil {
+		res.Census, res.Rank = BuildCensus(in.FShadow, in.Rank), in.Rank
 	}
 	res.Dirac = diracRows(ids, in, res.Rows)
 	res.Clusters = clusters(res.Findings)
