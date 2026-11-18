@@ -678,6 +678,15 @@ func TestComboColourPrefix(t *testing.T) {
 	if got := comboColourPrefix("{T}", face("Temple of Deceit"), 0, oraclegen.Step{}); got != "{T}" {
 		t.Errorf("no colour was asked: %q", got)
 	}
+	// An extended prefix naming the first member (Gleaming Bastion) takes the recorded colour.
+	if got := comboColourPrefix("{T}: Add {W}", face("Temple of Deceit"), 0, labelled); got != "{T}: Add {U}" {
+		t.Errorf("an extended first-colour prefix: %q", got)
+	}
+	// Another answer on the step (an arrange ask) does not hide the colour pick.
+	arranged := oraclegen.Step{Answers: []oraclegen.Answer{{Kind: "arrange"}, {Kind: "choose", Pick: []string{"Add U"}}}}
+	if got := comboColourPrefix("{T}", face("Temple of Deceit"), 0, arranged); got != "{T}: Add {U}" {
+		t.Errorf("two answers on the step: %q", got)
+	}
 	if got := comboColourPrefix("{T}: Add {B}.", face("Swamp"), 0, oraclegen.Step{}); got != "{T}: Add {B}." {
 		t.Errorf("a one-colour tap: %q", got)
 	}

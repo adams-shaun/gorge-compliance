@@ -991,14 +991,45 @@ const comboPrefix = "{T}: Add {"
 // comboColourPrefix names the colour step makes when the ability is a tap for one of
 // several colours (Temple of Deceit's "{T}: Add {U} or {B}"). XMage prints that as one
 // ability per colour, so the bare cost would always pick the first.
+//
+// The prefix XMageAbility returned is either the bare "{T}" or, when another mana
+// ability shares that cost (Gleaming Bastion's "{T}: Add {C}."), "{T}" extended to
+// the first colour member ("{T}: Add {W}"). Both are rewritten to the recorded
+// colour; a prefix ending in a period is a fixed one-colour text and stays. Other
+// recorded answers on the step (an arrange ask) do not hide the colour pick.
 func comboColourPrefix(p string, f *cards.Face, ability int, st oraclegen.Step) string {
-	if p != "{T}" || ability < 0 || ability >= len(f.Abilities) || len(st.Answers) != 1 || len(st.Answers[0].Pick) != 1 {
+	if p != "{T}" && (!strings.HasPrefix(p, comboPrefix) || strings.HasSuffix(p, ".")) {
+		return p
+	}
+	if ability < 0 || ability >= len(f.Abilities) {
+		return p
+	}
+	colour, ok := recordedComboColour(st)
+	if !ok {
 		return p
 	}
 	if _, combo := effects.ComboColours(effects.ManaOf(f.Abilities[ability]).Produced); !combo {
 		return p
 	}
-	return comboPrefix + strings.TrimPrefix(st.Answers[0].Pick[0], "Add ") + "}"
+	return comboPrefix + colour + "}"
+}
+
+// recordedComboColour is the one colour a step's recorded answers pick, from an
+// answer with a single pick naming a mana colour ("B" or "Add B"). Zero or several
+// such answers name no colour.
+func recordedComboColour(st oraclegen.Step) (string, bool) {
+	colour, n := "", 0
+	for _, a := range st.Answers {
+		if len(a.Pick) != 1 {
+			continue
+		}
+		label := strings.TrimPrefix(strings.TrimSpace(a.Pick[0]), "Add ")
+		if len(label) == 1 && strings.Contains("WUBRGC", label) {
+			colour = label
+			n++
+		}
+	}
+	return colour, n == 1
 }
 
 // fixedColourStep reports the colour letter an activate step's XMage ability
