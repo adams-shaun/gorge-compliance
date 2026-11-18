@@ -43,7 +43,7 @@ func TestDriverPlotCast(t *testing.T) {
 	branch := cast[plotAt : plotAt+branchEnd]
 	if !strings.Contains(branch, "xabilityAt(stepIdx)") ||
 		!strings.Contains(branch, `has no xmage_ability`) ||
-		!strings.Contains(branch, "activateAbility(turn, phase, p, plotText)") {
+		!strings.Contains(branch, `activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), plotText, stepIdx))`) {
 		t.Errorf("plot branch must read xmage_ability, reject an empty one, and activateAbility:\n%s", branch)
 	}
 	if strings.Contains(branch, "castSpell") {
