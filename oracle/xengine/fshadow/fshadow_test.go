@@ -626,6 +626,40 @@ func TestUnloggedArrangeIsAnsweredByDefault(t *testing.T) {
 	}
 }
 
+// TestPriorityActivateMapsToAbilityOption is the farm cmdr4 repro (FDN-s131
+// pods 13101 and 13103, Blast Zone and Evolving Wilds): Forge's seat
+// activated a land's printed ability and the follower stopped with
+// "unsupported priority action activate" (class answer-unmapped). gorge lists
+// that as an "ability" option on the same card, which the follower now picks.
+func TestPriorityActivateMapsToAbilityOption(t *testing.T) {
+	const host, wilds = 301, state.ObjID(41)
+	d := &decision.Decision{Seq: 9, Player: 3, Kind: decision.KPriority, Options: []decision.Option{
+		{Index: 0, Kind: "pass"},
+		{Index: 1, Kind: "ability", Obj: 7, Ability: 0},
+		{Index: 2, Kind: "ability", Obj: wilds, Ability: 0},
+		{Index: 3, Kind: "ability", Obj: wilds, Ability: 1},
+	}}
+	f := &follower{log: &Log{}, toG: map[int]state.ObjID{host: wilds, 302: 7}}
+	// One ability option on the card: the answer is that option.
+	one := *d
+	one.Options = d.Options[:3]
+	in, dv := f.priority(&one, parseAsk(t, `{"t":"ask","n":254,"seat":3,"turn":5,"step":"main1","kind":"priority","options":[{"action":"activate","card":301,"ability":9}],"answer":{"action":"activate","card":301,"ability":9}}`))
+	if dv != nil || !reflect.DeepEqual(in.Choices, []int{2}) {
+		t.Fatalf("single ability: intent %+v divergence %+v, want option 2", in, dv)
+	}
+	// Two: the ability's rank among Forge's activate options picks the option.
+	in, dv = f.priority(d, parseAsk(t, `{"t":"ask","n":254,"seat":3,"turn":5,"step":"main1","kind":"priority","options":[{"action":"activate","card":301,"ability":20},{"action":"activate","card":301,"ability":21}],"answer":{"action":"activate","card":301,"ability":21}}`))
+	if dv != nil || !reflect.DeepEqual(in.Choices, []int{3}) {
+		t.Fatalf("two abilities: intent %+v divergence %+v, want option 3", in, dv)
+	}
+	// A card gorge offers no ability on is answer-missing, not a harness gap.
+	in, dv = f.priority(&decision.Decision{Seq: 9, Player: 3, Kind: decision.KPriority, Options: d.Options[:1]},
+		parseAsk(t, `{"t":"ask","n":254,"seat":3,"turn":5,"step":"main1","kind":"priority","answer":{"action":"activate","card":301,"ability":9}}`))
+	if dv == nil || dv.What != WhatAnswerMissing || dv.Harness != "" {
+		t.Fatalf("no ability offered: %+v, want answer-missing", dv)
+	}
+}
+
 // TestChooseWithoutALogLineAnsweredByDefault is the farm cmdr4 repro (seeds
 // 13100 and 13102): gorge asks a list-pick (KChoose) where Forge's next log
 // line is the seat's priority, because Forge's recorder logs only priority,

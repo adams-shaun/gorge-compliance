@@ -548,8 +548,55 @@ func (f *follower) priority(d *decision.Decision, a *Ask) (decision.Intent, *Div
 			return in, f.unbound(a.Answer.Card)
 		}
 		return f.cast(d, a, g)
+	case "activate":
+		g, ok := f.toG[a.Answer.Card]
+		if !ok {
+			return in, f.unbound(a.Answer.Card)
+		}
+		return f.activate(d, a, g)
 	}
 	return in, &Divergence{What: WhatError, Harness: HarnessUnmapped, Detail: "unsupported priority action " + a.Answer.Action, Forge: a.Answer.Action}
+}
+
+// activate answers a Forge "activate" with gorge's "ability" option of the
+// same card (a printed activated ability that is not a mana tap: Evolving
+// Wilds' sacrifice, a manland's animation). Forge's ability id is a
+// SpellAbility id, not an index into the card's faces, so it cannot name
+// gorge's option directly. A card with one ability option has one answer; with
+// several, the ability's rank among the activate options Forge listed for the
+// card picks the option of the same rank, when both sides list as many.
+func (f *follower) activate(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
+	in := decision.Intent{Seq: d.Seq, Player: d.Player}
+	var cands []int
+	for i, o := range d.Options {
+		if o.Kind == "ability" && o.Obj == obj {
+			cands = append(cands, i)
+		}
+	}
+	pick := -1
+	switch {
+	case len(cands) == 1:
+		pick = cands[0]
+	case len(cands) > 1:
+		var ids []int
+		for _, o := range a.Options {
+			if o.Action == "activate" && o.Card == a.Answer.Card {
+				ids = append(ids, o.Ability)
+			}
+		}
+		if len(ids) == len(cands) {
+			for r, id := range ids {
+				if id == a.Answer.Ability {
+					pick = cands[r]
+				}
+			}
+		}
+	}
+	if pick < 0 {
+		return in, &Divergence{What: WhatAnswerMissing, Forge: answerKey(a.Answer)}
+	}
+	in.Choices = []int{pick}
+	return in, nil
 }
 
 // cast pays a cast with the payment plan whose activations tap exactly the
