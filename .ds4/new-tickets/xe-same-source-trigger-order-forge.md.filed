@@ -1,0 +1,24 @@
+Priority: 3
+
+# xengine: a trigger order of two triggers of one source object (Norin, Swift Survivalist x2) is lowered as two identical picks, so Forge orders them itself and the window reads as a gorge/Forge divergence
+
+Kind: defect
+
+## Symptom
+
+DSK-s130-rand window `xe:RAND:4:12:w12` (farm row 2026-11-18T22:13:46Z, diverge, `p0.exile`, card Friendly Ghost) reads gorge `[Norin, Swift Survivalist]` vs forge `[Acrobatic Cheerleader]` at step 17 (pass). p0 attacks with Norin, Swift Survivalist and Acrobatic Cheerleader; p1 blocks both, so Norin's "Whenever a creature you control becomes blocked, you may exile it" triggers twice (once per blocked creature). Gorge's recorded `trigger_order` decision picks `[p0:Norin, Swift Survivalist, p0:Norin, Swift Survivalist]`, the lowered step carries `{"kind":"trigger_order","pick":["p0:Norin, Swift Survivalist","p0:Norin, Swift Survivalist"]}`. Both picks name the same object and ability; the only thing that differs between the two triggers is which creature each one is for, and the pick does not carry it. Forge therefore puts its own order on the stack (its first exile is Acrobatic Cheerleader, gorge's is Norin). The Forge and gorge stacks are identical at steps 16 and 17 (two Norin abilities); the XMage follower of the same window already classes this as a harness gap (`xmage: the driver cannot order triggers of objects named "Norin, Swift Survivalist" apart (step 15)`). Friendly Ghost is only in the window (its +2/+4 trigger targets p1's Acrobatic Cheerleader at step 7); it is not involved in the exile.
+
+## Root cause
+
+CR 603.3b: "If multiple abilities have triggered since the last time a player received priority, each player, in APNAP order, puts triggered abilities they control on the stack in any order they choose." The order of the two Norin triggers is p0's free choice, so neither gorge's nor Forge's first exile is a rules deviation. The deviation is the harness's: `oracle/xengine/classify/classify.go` `sameNameTriggerOrder` (line ~550) returns "the driver cannot order triggers of objects named ... apart" only for a follower whose `TriggerOrderByName` is true (XMage, `oracle/xengine/follower/follower.go:129`); Forge's is false (`follower_test.go:108`), so the same lowered pick (`oracle/xengine/lower/tape.go`, trigger_order answers) that XMage's classifier rejects is compared as a real difference for Forge. A name-keyed pick cannot order two triggers of one source object, so it is not a Forge-specific property, it is a property of the lowering for any follower.
+
+## Workspace facts
+
+- Evidence: `/mnt/sata/gorge-training/fleet/remote/pulled/5.187.38.38/xengine/DSK-s130-rand/raw.tar.zst`, member `RAND/4/diff-forge/finds/diverge/xe_RAND_4_12_w12/` (input.jsonl has the trigger_order answer on the `block` step; gorge.json `decisions` has the step-15 `trigger_order` entry with two identical `pick_refs`).
+- Classifier: `oracle/xengine/classify/classify.go` `sameNameTriggerOrder`; follower flag `TriggerOrderByName` in `oracle/xengine/follower/follower.go`.
+- Register row: `oracle/xengine/diagnosed.tsv` `blame|diverge|p0.exile|Friendly Ghost` (verdict harness, 603.3b), added with this ticket.
+
+## Done means
+
+- [ ] a Forge-follower window whose lowered steps carry a `trigger_order` answer naming one source twice is classed `harness` (as XMage's is), not `diverge`: `make test-one PKG=./oracle/xengine/classify RUN='^TestSameNameTriggerOrderForge$'` passes
+- [ ] the `blame|diverge|p0.exile|Friendly Ghost` row in `oracle/xengine/diagnosed.tsv` names this ticket's id in its `ticket` column
