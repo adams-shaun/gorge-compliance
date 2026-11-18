@@ -108,6 +108,9 @@ type Result struct {
 	// Modes counts the modal picks (a charm's modes, an unless-pay ask) the
 	// log has no line for, which the follower answered by default.
 	Modes int `json:"modes,omitempty"`
+	// Chooses counts the list-picks (discard, keep, x, sacrifice ...) the
+	// log has no line for, which the follower answered by default.
+	Chooses int `json:"chooses,omitempty"`
 	// Arranges counts the arrange decisions (scry, surveil, ...) the log has
 	// no line for, which the follower answered by default.
 	Arranges int `json:"arranges,omitempty"`
@@ -480,6 +483,16 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// differs, shows at the next library_top snapshot.
 		return f.defaultArrange(d), true
 	}
+	if d.Kind == decision.KChoose {
+		// Forge's recorder logs only priority, attack, block and target
+		// asks: a list-pick (a cleanup discard, the legend rule's keep, an
+		// "as this enters" choice, a cost's sacrifice ...) is answered
+		// through hooks that write no ask line, so the next line belongs to
+		// a later decision. Answer by default -- the first Min options in
+		// offered order -- and consume no line; Forge's real choice, if it
+		// differs, shows at the next snapshot.
+		return f.defaultChoose(d), true
+	}
 	if e.Ask == nil {
 		f.hard(WhatKind, d, Divergence{Line: e.Line, Gorge: string(d.Kind), Forge: e.T})
 		return in, false
@@ -547,8 +560,55 @@ func (f *follower) priority(d *decision.Decision, a *Ask) (decision.Intent, *Div
 			return in, f.unbound(a.Answer.Card)
 		}
 		return f.cast(d, a, g)
+	case "activate":
+		g, ok := f.toG[a.Answer.Card]
+		if !ok {
+			return in, f.unbound(a.Answer.Card)
+		}
+		return f.activate(d, a, g)
 	}
 	return in, &Divergence{What: WhatError, Harness: HarnessUnmapped, Detail: "unsupported priority action " + a.Answer.Action, Forge: a.Answer.Action}
+}
+
+// activate answers a Forge "activate" with gorge's "ability" option of the
+// same card (a printed activated ability that is not a mana tap: Evolving
+// Wilds' sacrifice, a manland's animation). Forge's ability id is a
+// SpellAbility id, not an index into the card's faces, so it cannot name
+// gorge's option directly. A card with one ability option has one answer; with
+// several, the ability's rank among the activate options Forge listed for the
+// card picks the option of the same rank, when both sides list as many.
+func (f *follower) activate(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
+	in := decision.Intent{Seq: d.Seq, Player: d.Player}
+	var cands []int
+	for i, o := range d.Options {
+		if o.Kind == "ability" && o.Obj == obj {
+			cands = append(cands, i)
+		}
+	}
+	pick := -1
+	switch {
+	case len(cands) == 1:
+		pick = cands[0]
+	case len(cands) > 1:
+		var ids []int
+		for _, o := range a.Options {
+			if o.Action == "activate" && o.Card == a.Answer.Card {
+				ids = append(ids, o.Ability)
+			}
+		}
+		if len(ids) == len(cands) {
+			for r, id := range ids {
+				if id == a.Answer.Ability {
+					pick = cands[r]
+				}
+			}
+		}
+	}
+	if pick < 0 {
+		return in, &Divergence{What: WhatAnswerMissing, Forge: answerKey(a.Answer)}
+	}
+	in.Choices = []int{pick}
+	return in, nil
 }
 
 // cast pays a cast with the payment plan whose activations tap exactly the
@@ -1016,6 +1076,28 @@ func (f *follower) defaultModes(d *decision.Decision) decision.Intent {
 		sum += d.Options[c].Value
 	}
 	f.res.Modes++
+	return in
+}
+
+// defaultChoose answers a choose decision the log has no line for: the first
+// Min options in offered order (none when Min is 0), capped at Max and at the
+// offered count.
+func (f *follower) defaultChoose(d *decision.Decision) decision.Intent {
+	k := d.Min
+	if d.Max > 0 && k > d.Max {
+		k = d.Max
+	}
+	if k > len(d.Options) {
+		k = len(d.Options)
+	}
+	if k < 0 {
+		k = 0
+	}
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: make([]int, k)}
+	for i := range in.Choices {
+		in.Choices[i] = i
+	}
+	f.res.Chooses++
 	return in
 }
 
