@@ -862,3 +862,39 @@ func TestClassifyShuffledTopExile(t *testing.T) {
 		t.Errorf("no shuffle in the window: %+v", f)
 	}
 }
+
+// TestClassifyGraveyardOrderSimultaneous: cards that entered a graveyard in the
+// same step may be ordered either way (CR 404.3); a one-card arrival, a
+// reorder of cards already there, or a different multiset stays a divergence.
+func TestClassifyGraveyardOrderSimultaneous(t *testing.T) {
+	item, _, g := fixture(0)
+	item.Item.ID = "xe:T:0:0:w1"
+	set := func(s *rules.OracleSnapshot, gy ...string) { s.Players[1].Graveyard = gy }
+	cases := []struct {
+		name          string
+		before        []string
+		gorge, follow []string
+		want          string
+	}{
+		{"swap of two simultaneous arrivals", nil, []string{"A", "B"}, []string{"B", "A"}, ClassHarness},
+		{"swap of three, older card below", []string{"Z"}, []string{"Z", "A", "B", "C"}, []string{"Z", "C", "A", "B"}, ClassHarness},
+		{"one card arrives alone", []string{"A"}, []string{"A", "B"}, []string{"B", "A"}, ClassDiverge},
+		{"older cards swap places", []string{"A", "B"}, []string{"A", "B", "C", "D"}, []string{"B", "A", "C", "D"}, ClassDiverge},
+		{"older card moves above arrivals", []string{"A"}, []string{"A", "B", "C"}, []string{"B", "A", "C"}, ClassDiverge},
+		{"different cards", nil, []string{"A", "B"}, []string{"B", "C"}, ClassDiverge},
+	}
+	for _, c := range cases {
+		g := rules.OracleResult{Snapshots: append([]rules.OracleSnapshot(nil), g.Snapshots...)}
+		for i := 1; i <= 2; i++ {
+			g.Snapshots[i].Players = append([]rules.OracleSnapPlayer(nil), g.Snapshots[i].Players...)
+		}
+		set(&g.Snapshots[1], c.before...)
+		set(&g.Snapshots[2], c.gorge...)
+		x := follower(g, func(x *oraclediff.XResult) { set(&x.Snapshots[2], c.follow...) })
+		for _, engine := range []string{"xmage", "forge"} {
+			if f := Classify(item, nil, g, x, engine); f.Class != c.want {
+				t.Errorf("%s (%s): class %q, want %q (%+v)", c.name, engine, f.Class, c.want, f)
+			}
+		}
+	}
+}
