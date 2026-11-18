@@ -33,7 +33,7 @@ func TestDriverCastTargetAfterResolveIsNotSpellOnStack(t *testing.T) {
 	if !ok {
 		t.Fatal("ScenarioReplay.java has no cast case")
 	}
-	if !strings.Contains(cast, "castSpell(turn, phase, p, card, spell, spell)") {
+	if !strings.Contains(cast, "castSpell(turn, phase, p, castObject, spell, spell)") {
 		t.Fatalf("cast case no longer queues the $spellOnStack form; the tracking under test is gone")
 	}
 	if !strings.Contains(cast, "cast.contains(castSpelling(refName(tg.get(0))))") {
