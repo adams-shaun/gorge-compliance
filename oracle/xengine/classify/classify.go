@@ -189,6 +189,8 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 		f.Msg = "pool split after a cast/activate whose payment was not fixed"
 	case rngField(v.Field) && (rngDrawn(item, t, f.Step) || shuffledEarlier(item, f.Step)):
 		f.Class = ClassRNG
+	case shuffledTopExile(item, t, v, f.Step):
+		f.Class = ClassRNG
 	case crewTypeDependency(g, v):
 		f.Class = ClassCrewTypeDependency
 	case projectionGap(v):
@@ -755,6 +757,52 @@ func rngField(field string) bool {
 		}
 	}
 	return false
+}
+
+// shuffledTopExile reports a pN.exile difference after a shuffle (CR 701.24a)
+// whose every exiled card, on both sides, is a card of that seat's deck: an
+// effect that exiles the top card of a shuffled library exiles each engine's own
+// card. A card the seat's deck cannot hold on its library still diverges, and
+// without the tape's decks there is nothing to test, so the row stays a
+// divergence.
+func shuffledTopExile(item lower.Lowered, t *game.Tape, v oraclediff.Verdict, d int) bool {
+	rest, ok := strings.CutPrefix(v.Field, "p")
+	seat, tail, ok2 := strings.Cut(rest, ".")
+	if !ok || !ok2 || tail != "exile" || t == nil || !shuffledEarlier(item, d) {
+		return false
+	}
+	n, err := strconv.Atoi(seat)
+	if err != nil || n < 0 || n >= len(t.Decks) {
+		return false
+	}
+	deck := map[string]bool{}
+	for _, c := range t.Decks[n].Cards {
+		deck[c] = true
+	}
+	return inDeck(v.Gorge, deck) && inDeck(v.XMage, deck)
+}
+
+// inDeck reports that every name in a rendered "[a, b]" list is in deck. A name
+// may itself hold ", ", so each name is the longest run of items that is a card.
+func inDeck(list string, deck map[string]bool) bool {
+	list = strings.TrimSuffix(strings.TrimPrefix(list, "["), "]")
+	if list == "" {
+		return true
+	}
+	parts := strings.Split(list, ", ")
+	for i := 0; i < len(parts); {
+		j := len(parts)
+		for ; j > i; j-- {
+			if deck[strings.Join(parts[i:j], ", ")] {
+				break
+			}
+		}
+		if j == i {
+			return false
+		}
+		i = j
+	}
+	return true
 }
 
 // shuffledEarlier reports a window whose library order is not compared (a

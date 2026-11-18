@@ -76,6 +76,18 @@ func sameNameBucketRank(bucket string) int {
 // the Mind's ReduceCost static, adding one TDM unproven item (its pick ref is
 // a rank-derived library card, so no exact answer exists); TDM's unproven pin
 // moved 5 to 6, unresolved stayed 0.
+// Re-measured after 5ddad40, which withholds a same-name hidden_pick no exact
+// answer can name instead of scripting the bare name: a withheld pick has no
+// emitted answer, so it no longer counts as unproven. Unproven moved BLB 5 to
+// 4, DFT 4 to 2, DSK 36 to 35, ECL 5 to 3, FIN 4 to 2, FRA 2 to 1, MSH 3 to 2,
+// OTJ 1 to 0, SPM 2 to 1, TDM 6 to 5, TLA 2 to 1, WOE 3 to 0; alias, copy and
+// unresolved (0 everywhere) did not move.
+// Re-measured after 355c221, which scripts the bare label again for a
+// hidden_pick whose every offer is a same-seat copy of the pick's one name
+// (which copy leaves cannot change the compared state). Every item 5ddad40
+// withheld was such an all-copies ask, so each counts as unproven again: the
+// 17 items it re-scripts are the 17 verdict rows 355c221 re-ran, and the pins
+// return to their pre-5ddad40 values. Unresolved stays 0.
 // Git history records why each count moved.
 var wantSameNameCensus = map[string]string{
 	"BIG": `{"alias":0,"copy":0,"unresolved":0,"unproven":1,"items":null}`,

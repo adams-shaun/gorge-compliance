@@ -210,11 +210,34 @@ func (f *follower) setup() error {
 	f.e = e
 	for fid, gid := range f.toG {
 		o := e.G.Obj(gid)
-		if o == nil || o.Card == nil || len(o.Card.Faces) == 0 || !strings.EqualFold(o.Card.Faces[0].Name, f.name[fid]) {
+		if o == nil || !bindsName(o.Card, f.name[fid]) {
 			return fmt.Errorf("fshadow: Forge id %d (%q) does not bind to gorge object %d", fid, f.name[fid], gid)
 		}
 	}
 	return nil
+}
+
+// bindsName reports whether Forge's name for a card is gorge's card: its
+// front face's name, or for a split card (CR 709.4) both halves joined by
+// " // ", which is the name Forge's card database and header use for one
+// (Dusk // Dawn; an adventurer or a DFC is named by its front face).
+func bindsName(c *cards.Card, name string) bool {
+	if c == nil || len(c.Faces) == 0 || c.Faces[0] == nil {
+		return false
+	}
+	if strings.EqualFold(c.Faces[0].Name, name) {
+		return true
+	}
+	if !strings.EqualFold(c.AlternateMode, "Split") {
+		return false
+	}
+	parts := make([]string, 0, len(c.Faces))
+	for _, fc := range c.Faces {
+		if fc != nil {
+			parts = append(parts, fc.Name)
+		}
+	}
+	return strings.EqualFold(strings.Join(parts, " // "), name)
 }
 
 // planShuffle returns Forge's logged order for the seat's next shuffle.
@@ -734,9 +757,27 @@ func (f *follower) soft(e Entry, d *decision.Decision, gorgeKeys []string) {
 	f.res.Soft = append(f.res.Soft, Soft{Line: e.Line, Ask: e.Ask.N, Seat: e.Ask.Seat, Kind: string(d.Kind), OnlyForge: onlyF, OnlyGorge: onlyG, Cards: f.keyCards(append(append([]string{}, onlyF...), onlyG...))})
 }
 
+// sameLibraryDepth cuts every seat's library_top in Forge's snapshot to the
+// libraryTopN cards gorge's names: Forge's SnapshotWriter names 5
+// (LIBRARY_TOP_N), gorge's 3, so every snapshot of a real Forge game differed
+// on p<k>.library_top at its first checkpoint (farm cmdr4 pods 13000 and
+// 13002: a 3-name list against a 5-name one, the first 3 equal). The cards
+// beyond gorge's depth are not compared; the ones within it still are.
+func sameLibraryDepth(x rules.OracleSnapshot) rules.OracleSnapshot {
+	ps := make([]rules.OracleSnapPlayer, len(x.Players))
+	copy(ps, x.Players)
+	for i := range ps {
+		if len(ps[i].LibraryTop) > libraryTopN {
+			ps[i].LibraryTop = ps[i].LibraryTop[:libraryTopN:libraryTopN]
+		}
+	}
+	x.Players = ps
+	return x
+}
+
 func (f *follower) compareSnap(e Entry) bool {
 	f.res.Snaps++
-	x := e.Snap.Snapshot
+	x := sameLibraryDepth(e.Snap.Snapshot)
 	g := Snapshot(f.e, x.Checkpoint)
 	v := oraclediff.CompareOpts(rules.OracleResult{Snapshots: []rules.OracleSnapshot{g}}, nil, oraclediff.XResult{Snapshots: []rules.OracleSnapshot{x}}, nil)
 	if v.Status == oraclediff.Agree {
