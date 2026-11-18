@@ -818,6 +818,36 @@ func TestFollowAnswersUnloggedChooseBeforeAheadSnapshot(t *testing.T) {
 	}
 }
 
+// TestTargetWithoutALogLineAnsweredByDefault is the farm cmdr4 repro (pod
+// 13203, offset 448): gorge asks a target (KTarget) where Forge's next log line
+// is the seat's priority ask, because Forge's recorder writes a target ask only
+// where its targeting hook is asked. The follower used to stop with kind
+// "target seat 2" against "priority seat 2"; it now answers by default (the
+// first Min options) and consumes no line. A target ask in the log still maps.
+func TestTargetWithoutALogLineAnsweredByDefault(t *testing.T) {
+	prio := parseAsk(t, `{"t":"ask","n":349,"seat":2,"turn":5,"step":"main1","kind":"priority","answer":{"action":"pass"}}`)
+	d := &decision.Decision{Seq: 9, Player: 2, Kind: decision.KTarget, Min: 1, Max: 1,
+		Options: []decision.Option{{Index: 0, Player: 0}, {Index: 1, Obj: 6}}}
+	f := &follower{log: &Log{}}
+	in, ok := f.answer(d, Entry{Line: 448, T: TAsk, Ask: prio})
+	if !ok || f.res.Hard != nil {
+		t.Fatalf("hard divergence %+v", f.res.Hard)
+	}
+	if !reflect.DeepEqual(in.Choices, []int{0}) || in.Seq != 9 || in.Player != 2 {
+		t.Errorf("intent %+v, want the first option", in)
+	}
+	if f.pos != 0 || f.res.Targets != 1 || f.res.Chooses != 0 || f.res.Asks != 0 {
+		t.Errorf("pos %d targets %d chooses %d asks %d, want the log line left unconsumed", f.pos, f.res.Targets, f.res.Chooses, f.res.Asks)
+	}
+
+	// A logged target ask is still followed, not defaulted.
+	ta := parseAsk(t, `{"t":"ask","n":350,"seat":2,"turn":5,"step":"main1","kind":"target","options":[{"player":0}],"answer":{"targets":[{"player":0}]}}`)
+	f = &follower{log: &Log{Entries: []Entry{{Line: 449, T: TAsk, Ask: ta}}}}
+	if in, ok = f.answer(d, f.log.Entries[0]); !ok || f.pos != 1 || f.res.Targets != 0 || !reflect.DeepEqual(in.Choices, []int{0}) {
+		t.Errorf("logged target: ok %v pos %d targets %d intent %+v", ok, f.pos, f.res.Targets, in)
+	}
+}
+
 // mayShuffleFixture builds a follower on the golden log (seat 1 never mulligans, so it has one shuffle) with one extra
 // seat-1 shuffle line appended, carrying the forge ids of seat 1's library
 // as it stands after the opening deal, minus the last drop cards. It stops

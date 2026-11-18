@@ -111,6 +111,10 @@ type Result struct {
 	// Chooses counts the list-picks (discard, keep, x, sacrifice ...) the
 	// log has no line for, which the follower answered by default.
 	Chooses int `json:"chooses,omitempty"`
+	// Targets counts the target decisions gorge posed where the log's next
+	// line is an ask of another kind (Forge chose no target through its
+	// logged hook), which the follower answered by default.
+	Targets int `json:"targets,omitempty"`
 	// Arranges counts the arrange decisions (scry, surveil, ...) the log has
 	// no line for, which the follower answered by default.
 	Arranges int `json:"arranges,omitempty"`
@@ -517,6 +521,17 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 			return in, true
 		}
 		return f.defaultChoose(d), true
+	}
+	if d.Kind == decision.KTarget && e.Ask != nil && e.Ask.Kind != KindTarget {
+		// Forge's recorder logs a target ask only where its targeting hook
+		// is asked. A target it fixes without asking (a forced single
+		// candidate, a trigger's target picked inside resolution ...) writes
+		// no line, so the next line is the seat's next priority, attack or
+		// block ask. Answer by default -- the first Min options in offered
+		// order -- and consume no line; Forge's real choice, if it differs,
+		// shows at the next snapshot.
+		f.res.Targets++
+		return firstMin(d), true
 	}
 	if e.Ask == nil {
 		f.hard(WhatKind, d, Divergence{Line: e.Line, Gorge: string(d.Kind), Forge: e.T})
@@ -1108,6 +1123,12 @@ func (f *follower) defaultModes(d *decision.Decision) decision.Intent {
 // Min options in offered order (none when Min is 0), capped at Max and at the
 // offered count.
 func (f *follower) defaultChoose(d *decision.Decision) decision.Intent {
+	f.res.Chooses++
+	return firstMin(d)
+}
+
+// firstMin is the intent picking the first Min options in offered order.
+func firstMin(d *decision.Decision) decision.Intent {
 	k := d.Min
 	if d.Max > 0 && k > d.Max {
 		k = d.Max
@@ -1122,7 +1143,6 @@ func (f *follower) defaultChoose(d *decision.Decision) decision.Intent {
 	for i := range in.Choices {
 		in.Choices[i] = i
 	}
-	f.res.Chooses++
 	return in
 }
 
