@@ -5005,14 +5005,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // "plot" is XMage's Plot special action (PlotAbility is a
                 // SpecialAction: no stack, not a cast), activated from the
                 // hand by its rule text "Plot {cost}" like XMage's own
-                // PlotTest does. The step's mana was added above; a
+                // PlotTest does, scoped to the step's card. The step's mana was added above; a
                 // reduction (Doc Aurlock) is applied by XMage itself.
                 if ("plot".equals(castMode)) {
                     String plotText = xabilityAt(stepIdx);
                     if (plotText.isEmpty()) {
                         throw new IllegalArgumentException("plot step " + stepIdx + " has no xmage_ability");
                     }
-                    activateAbility(turn, phase, p, plotText);
+                    // Scope the pick to this step's card: two hand cards
+                    // sharing a Plot cost have identical rule text, and the
+                    // bare text plots whichever XMage lists first (CR
+                    // 702.170a). boundActivationText binds the card's id as
+                    // an alias, like an ordinary activation.
+                    activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), plotText, stepIdx));
                     return;
                 }
                 // "flashback" is the cast of a graveyard card for its
