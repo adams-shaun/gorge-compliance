@@ -11,6 +11,7 @@ import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.PlayLandAbility;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -5286,14 +5287,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // hand card, not the one the ref's setup alias binds, so a
                 // later "p0:Swamp#4" tap or pick reaches a different land
                 // than gorge's (CR 305.1, 605.3a). Bind a space-free alias to
-                // the hand card the ref means just ahead of the play and
-                // prefix the command with it ("@key Play <name>").
+                // the card the ref means (from whichever zone it plays: hand,
+                // graveyard, exile, library; a double-faced land by its half)
+                // just ahead of the play and prefix the command with it
+                // ("@key Play <name>").
                 String playKey = "play" + stepIdx;
                 runCode("bind " + playRef, turn, phase, p, (info, pl, g) -> {
                     UUID id = playableLandId(p, g, p.getAliasByName(playAlias), landName);
                     if (id == null) {
                         throw new IllegalArgumentException("play " + playRef + ": no " + landName
-                                + " in " + p.getName() + "'s hand");
+                                + " playable by " + p.getName());
                     }
                     for (int j = 0; j < seats; j++) {
                         seat(j).addAlias(playKey, id);
@@ -5729,21 +5732,59 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /**
-     * The hand card a land-play step plays: the ref's setup-bound object when
-     * it is still in the player's hand (the same card the later mana and pick
-     * refs name), else the first same-named hand card, which is what a
-     * name-only play would enter. Null when the hand holds neither.
+     * The source id XMage must match for a land-play step: the live
+     * PlayLandAbility (any zone the player can play from: hand, graveyard,
+     * exile, library top) whose source is the ref's setup-bound object. A
+     * double-faced land's ability sits on a HALF card whose id differs from
+     * the main card the setup alias binds, so the main card id counts as the
+     * bound object too. Null when no live ability matches.
      */
-    private UUID playableLandId(Player p, Game g, UUID bound, String landName) {
-        if (bound != null && p.getHand().contains(bound)) {
-            return bound;
+    private UUID playableLandId(TestPlayer p, Game g, UUID bound, String landName) {
+        List<PlayLandCandidate> candidates = new ArrayList<>();
+        for (Ability ability : p.getPlayable(g, true)) {
+            if (!(ability instanceof PlayLandAbility)) {
+                continue;
+            }
+            Card source = g.getCard(ability.getSourceId());
+            candidates.add(new PlayLandCandidate(source == null ? null : source.getName(),
+                    ability.getSourceId(), source == null ? null : source.getMainCard().getId()));
         }
-        for (Card c : p.getHand().getCards(g)) {
-            if (xmageSpelling(c.getName()).equals(landName)) {
-                return c.getId();
+        return choosePlayLandSource(candidates, landName, bound);
+    }
+
+    /** One live land-play ability: its source card's name, the source id the
+     * alias must carry, and the id of the source's main card (the same id
+     * for a plain card, the whole card for a double-faced half). */
+    static final class PlayLandCandidate {
+        final String sourceName;
+        final UUID sourceId;
+        final UUID mainId;
+
+        PlayLandCandidate(String sourceName, UUID sourceId, UUID mainId) {
+            this.sourceName = sourceName;
+            this.sourceId = sourceId;
+            this.mainId = mainId;
+        }
+    }
+
+    /**
+     * Picks the source id a land-play alias must carry: the ability of the
+     * setup-bound object itself (by source id, or by main-card id for a
+     * double-faced half) so a later tap or pick of the ref reaches the land
+     * the play entered (CR 305.1, 605.3a); otherwise the first same-named
+     * land, which is what a name-only play would enter. Null when none.
+     */
+    UUID choosePlayLandSource(List<PlayLandCandidate> candidates, String landName, UUID bound) {
+        UUID nameMatch = null;
+        for (PlayLandCandidate c : candidates) {
+            if (bound != null && (c.sourceId.equals(bound) || bound.equals(c.mainId))) {
+                return c.sourceId;
+            }
+            if (nameMatch == null && sourceNameIsNamed(c.sourceName, landName)) {
+                nameMatch = c.sourceId;
             }
         }
-        return null;
+        return nameMatch;
     }
 
     /**

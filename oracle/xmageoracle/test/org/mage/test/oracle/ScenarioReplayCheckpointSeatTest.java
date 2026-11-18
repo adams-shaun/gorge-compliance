@@ -215,6 +215,26 @@ public final class ScenarioReplayCheckpointSeatTest {
         List<ScenarioReplay.ActivationCandidate> none = List.of(
                 new ScenarioReplay.ActivationCandidate("Grizzly Bears", "+1", other));
         equal(null, d.chooseActivationSource(none, "Ajani Goldmane", "+1", setup));
+
+        // A land play binds the setup object's own PlayLandAbility, from any
+        // zone; a double-faced half (source id differs from the main card
+        // the setup alias binds) matches by main-card id; no bound object
+        // falls back to the first same-named land.
+        UUID first = UUID.randomUUID();
+        UUID second = UUID.randomUUID();
+        List<ScenarioReplay.PlayLandCandidate> lands = List.of(
+                new ScenarioReplay.PlayLandCandidate("Swamp", first, first),
+                new ScenarioReplay.PlayLandCandidate("Swamp", second, second));
+        equal(second, d.choosePlayLandSource(lands, "Swamp", second));
+        equal(first, d.choosePlayLandSource(lands, "Swamp", null));
+        equal(first, d.choosePlayLandSource(lands, "Swamp", UUID.randomUUID()));
+        UUID mainCard = UUID.randomUUID();
+        UUID half = UUID.randomUUID();
+        List<ScenarioReplay.PlayLandCandidate> dfc = List.of(
+                new ScenarioReplay.PlayLandCandidate("Swamp", first, first),
+                new ScenarioReplay.PlayLandCandidate("Brightclimb Pathway", half, mainCard));
+        equal(half, d.choosePlayLandSource(dfc, "Brightclimb Pathway", mainCard));
+        equal(null, d.choosePlayLandSource(dfc, "Island", null));
         System.out.println("PASS checkpoint seat and bound activation text");
     }
 }
