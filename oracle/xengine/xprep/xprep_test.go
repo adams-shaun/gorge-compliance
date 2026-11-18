@@ -1085,3 +1085,66 @@ func TestPrepareRefusesCommander(t *testing.T) {
 		t.Fatalf("constructed item refused: %+v", ref)
 	}
 }
+
+// TestPrepareBattlefieldModalTriggerMode: a modal trigger of a permanent the
+// item only places on the battlefield (Elven Raft-Steerer's landfall, HOB-s114)
+// answers the mode by its printed number, not by gorge's position among the
+// offered modes: with no opposing creature gorge offers only the second mode.
+func TestPrepareBattlefieldModalTriggerMode(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sp, err := decks.LoadSpellings(manifestDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	const perm = "Elven Raft-Steerer"
+	c, ok := reg.Lookup(perm)
+	if !ok || len(c.Faces) == 0 {
+		t.Fatalf("no corpus card %q", perm)
+	}
+	sc := oraclegen.Scenario{
+		Name: "landfall modal trigger of a battlefield permanent",
+		Why:  "the in-window mode answer is the printed mode number",
+		Setup: map[string]oraclegen.Seat{
+			"p0": {Hand: []string{"Plains"}, Battlefield: []string{perm}},
+			"p1": {Battlefield: []string{"Swamp", "Swamp"}},
+		},
+		Steps: []oraclegen.Step{
+			{Op: "play", Seat: 0, Card: "p0:Plains"},
+			{Op: "pass", Seat: 0},
+		},
+	}
+	l := lower.Lowered{Item: oraclegen.Item{ID: "xe:test:battlefield-modal-trigger", Scenario: sc}}
+	res, err := rules.RunOracleScenarioJSON(reg, l.Item.Raw())
+	if err != nil {
+		t.Fatalf("run scenario: %v", err)
+	}
+	if len(res.Fails) > 0 {
+		t.Fatalf("gorge rejects the scenario: %v", res.Fails)
+	}
+	var pick string
+	for _, d := range res.Decisions {
+		if d.Kind == "mode" && len(d.Picks) == 1 {
+			pick = d.Picks[0]
+		}
+	}
+	printed := oraclegen.ModeNumbers(c.Faces[0])
+	want, ok := printed[pick]
+	if pick == "" || !ok || want < 2 {
+		t.Fatalf("gorge's mode pick %q prints at %d (ok=%v); the test needs a non-first printed mode", pick, want, ok)
+	}
+	it, ref := Prepare(reg, sp, l, res)
+	if ref != nil {
+		t.Fatalf("Prepare refused: %+v", ref)
+	}
+	got := ""
+	for _, as := range it.XAnswers {
+		for _, a := range as {
+			if a.Kind == "mode" {
+				got = a.Value
+			}
+		}
+	}
+	if got != fmt.Sprint(want) {
+		t.Fatalf("mode answer = %q, want printed mode %d (xmage_answers %+v)", got, want, it.XAnswers)
+	}
+}
