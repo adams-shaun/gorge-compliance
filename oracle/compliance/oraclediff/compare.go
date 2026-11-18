@@ -249,6 +249,9 @@ func compareSnap(g, x rules.OracleSnapshot, compare []string, ignore []string) (
 		return Verdict{Status: Harness, Engine: "both", Msg: fmt.Sprintf("checkpoint %q vs %q", g.Checkpoint, x.Checkpoint)}, false
 	}
 	gf, xf := fields(g, false, compare), fields(x, true, compare)
+	if k, kx := fieldIndex(gf, "stack"), fieldIndex(xf, "stack"); k >= 0 && kx >= 0 {
+		gf[k].value, xf[kx].value = pairedStackKeys(g, x)
+	}
 	for k := range gf {
 		if ignored(gf[k].name, ignore) || (g.Over && x.Over && !gameOverField(gf[k].name)) {
 			continue
@@ -267,6 +270,15 @@ func compareSnap(g, x rules.OracleSnapshot, compare []string, ignore []string) (
 		}
 	}
 	return Verdict{}, true
+}
+
+func fieldIndex(fs []field, name string) int {
+	for i, f := range fs {
+		if f.name == name {
+			return i
+		}
+	}
+	return -1
 }
 
 // Canonical is gorge's side of a scenario in the comparator's normalized
@@ -561,6 +573,57 @@ var effectIDLabel = regexp.MustCompile(` \(\d+\)'s Effect$`)
 // ability: a copy or a permanent whose name was changed shows its new name,
 // where the ref still holds the name it was set up under (CR 707.2, 613.1a).
 func stackKeysOf(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm) string {
+	return stackKeysLabelled(st, perms, nil)
+}
+
+// leftSourceLabel stands for the source of an ability whose source is no
+// longer on the battlefield.
+const leftSourceLabel = "<left-battlefield>"
+
+// leftSourceItems is the set of stack indexes, in gorge's stack st, holding an
+// ability whose source ref names nothing on the battlefield perms. An ability
+// exists independently of its source (CR 113.7a) and is built from the source
+// as it last existed (CR 603.10a), so a source that died as a copy is named
+// by its copied name in a follower but by its setup ref in gorge's snapshot,
+// which keeps no last-known name: neither name is comparable. Only gorge's
+// refs can tell that a source left the battlefield (a follower's bare name may
+// match another permanent), so compareSnap masks these indexes on both sides.
+func leftSourceItems(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm) map[int]bool {
+	on := map[string]bool{}
+	for _, p := range perms {
+		on[p.Ref] = true
+	}
+	var out map[int]bool
+	for i, s := range st {
+		if s.Kind == "ability" && s.Source != "" && !on[s.Source] && !sourcelessTriggerNames[RefName(s.Source)] {
+			if out == nil {
+				out = map[int]bool{}
+			}
+			out[i] = true
+		}
+	}
+	return out
+}
+
+// pairedStackKeys renders both engines' stacks for comparison. When the two
+// stacks have the same shape (length and item kinds) the items gorge's refs
+// show to have a source off the battlefield are labelled leftSourceLabel on
+// both sides, so only kind and controller are compared for them.
+func pairedStackKeys(g, x rules.OracleSnapshot) (gv, xv string) {
+	gv, xv = stackKeysOf(g.Stack, g.Permanents), stackKeysOf(x.Stack, x.Permanents)
+	left := leftSourceItems(g.Stack, g.Permanents)
+	if len(left) == 0 || len(g.Stack) != len(x.Stack) {
+		return gv, xv
+	}
+	for i := range left {
+		if x.Stack[i].Kind != "ability" || x.Stack[i].Controller != g.Stack[i].Controller {
+			return gv, xv
+		}
+	}
+	return stackKeysLabelled(g.Stack, g.Permanents, left), stackKeysLabelled(x.Stack, x.Permanents, left)
+}
+
+func stackKeysLabelled(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm, left map[int]bool) string {
 	current := map[string]string{}
 	for _, p := range perms {
 		if p.Ref != "" && p.Name != "" && !p.Token {
@@ -568,7 +631,7 @@ func stackKeysOf(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm) strin
 		}
 	}
 	parts := make([]string, 0, len(st))
-	for _, s := range st {
+	for i, s := range st {
 		src := RefName(s.Source)
 		if n, ok := current[s.Source]; ok && s.Kind == "ability" {
 			src = n
@@ -576,6 +639,9 @@ func stackKeysOf(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm) strin
 		src = effectIDLabel.ReplaceAllString(src, "")
 		if s.Kind == "ability" && sourcelessTriggerNames[src] {
 			src = ""
+		}
+		if left[i] {
+			src = leftSourceLabel
 		}
 		parts = append(parts, fmt.Sprintf("%s:%s@p%d", s.Kind, src, s.Controller))
 	}
