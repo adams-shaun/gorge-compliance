@@ -15,7 +15,7 @@ import (
 // castSteps is passed through to xanswers so a cast step's own targets are not
 // scripted a second time.
 func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenario, modes map[string]int, castSteps map[int]bool) [][]XAnswer {
-	ds := append([]rules.OracleDecision(nil), castDivisions(reg, sc, res)...)
+	ds := liveNamedSameNames(castDivisions(reg, sc, res), res.Snapshots)
 	for i := range ds {
 		d := &ds[i]
 		if d.Kind != "choose_n" || d.Options != 2 || len(d.Picks) != 1 ||
