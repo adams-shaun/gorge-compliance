@@ -26,9 +26,9 @@ func TestDriverPlotCast(t *testing.T) {
 	// the ordinary cast path (castSpell) exists after it for the order check.
 	manaAt := strings.Index(cast, `addPool(pl, g, mana)`)
 	plotAt := strings.Index(cast, `if ("plot".equals(castMode))`)
-	castAt := strings.Index(cast, `castSpell(turn, phase, p, card)`)
+	castAt := strings.Index(cast, `castObjectSpell(turn, phase, p, castObject)`)
 	if manaAt < 0 || castAt < 0 {
-		t.Fatalf("cast arm lost its mana or castSpell path; the assertions below would be vacuous:\n%s", cast)
+		t.Fatalf("cast arm lost its mana or castObjectSpell path; the assertions below would be vacuous:\n%s", cast)
 	}
 	if plotAt < 0 {
 		t.Fatal(`cast arm has no "plot" branch`)

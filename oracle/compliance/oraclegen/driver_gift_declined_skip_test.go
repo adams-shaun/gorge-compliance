@@ -28,7 +28,7 @@ func TestDriverGiftSpellSkipOnlyWhenPromised(t *testing.T) {
 		t.Fatal("gift-spell branch (queue the player target) not found")
 	}
 	branch := cast[i:]
-	if j := strings.Index(branch, "castSpell(turn, phase, p, card);"); j >= 0 {
+	if j := strings.Index(branch, "castObjectSpell(turn, phase, p, castObject);"); j >= 0 {
 		branch = branch[:j]
 	}
 	k := strings.Index(branch, "if (giftPromisedCast)")

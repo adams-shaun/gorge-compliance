@@ -47,7 +47,7 @@ func TestScenarioReplayEndTurnTracksMultiActionSkippedStep(t *testing.T) {
 		}
 	}
 	cast := java[strings.Index(java, "case \"cast\":"):strings.Index(java, "case \"play\":")]
-	if !strings.Contains(cast, "runCode(\"mana \" + mana") || !strings.Contains(cast, "castSpell(turn, phase, p, card") {
+	if !strings.Contains(cast, "runCode(\"mana \" + mana") || !strings.Contains(cast, "castObjectSpell(turn, phase, p, castObject") {
 		t.Fatal("test requires a cast-with-mana that schedules actions besides its checkpoint")
 	}
 	if strings.Contains(queue, "unusedActions == skippedSteps") {

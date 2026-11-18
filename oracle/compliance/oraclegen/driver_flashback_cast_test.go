@@ -23,9 +23,9 @@ func TestDriverFlashbackCast(t *testing.T) {
 	}
 	manaAt := strings.Index(cast, `addPool(pl, g, mana)`)
 	fbAt := strings.Index(cast, `if ("flashback".equals(castMode))`)
-	castAt := strings.Index(cast, `castSpell(turn, phase, p, card)`)
+	castAt := strings.Index(cast, `castObjectSpell(turn, phase, p, castObject)`)
 	if manaAt < 0 || castAt < 0 {
-		t.Fatalf("cast arm lost its mana or castSpell path; the assertions below would be vacuous:\n%s", cast)
+		t.Fatalf("cast arm lost its mana or castObjectSpell path; the assertions below would be vacuous:\n%s", cast)
 	}
 	if fbAt < 0 {
 		t.Fatal(`cast arm has no "flashback" branch`)
