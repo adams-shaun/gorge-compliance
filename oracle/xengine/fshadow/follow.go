@@ -111,6 +111,10 @@ type Result struct {
 	// Chooses counts the list-picks (discard, keep, x, sacrifice ...) the
 	// log has no line for, which the follower answered by default.
 	Chooses int `json:"chooses,omitempty"`
+	// Targets counts the target decisions gorge posed where the log's next
+	// line is an ask of another kind (Forge chose no target through its
+	// logged hook), which the follower answered by default.
+	Targets int `json:"targets,omitempty"`
 	// Arranges counts the arrange decisions (scry, surveil, ...) the log has
 	// no line for, which the follower answered by default.
 	Arranges int `json:"arranges,omitempty"`
@@ -131,6 +135,7 @@ type follower struct {
 	name map[int]string      // Forge id -> card name
 
 	shuffles map[int][]*Shuffle // per seat, in order
+	planned  map[int]int        // per seat, how many of its shuffles gorge has asked the planner for
 	rands    []*Rand
 	start    int
 
@@ -144,7 +149,7 @@ type follower struct {
 // Follow replays l in gorge. A setup failure (an unknown card, a binding
 // that does not hold) is an error; every in-game difference is a Result.
 func Follow(reg *cards.Registry, l *Log, opt Options) (*Result, error) {
-	f := &follower{log: l, reg: reg, toG: map[int]state.ObjID{}, toF: map[state.ObjID]int{}, name: map[int]string{}, shuffles: map[int][]*Shuffle{}, start: -1}
+	f := &follower{log: l, reg: reg, toG: map[int]state.ObjID{}, toF: map[state.ObjID]int{}, name: map[int]string{}, shuffles: map[int][]*Shuffle{}, planned: map[int]int{}, start: -1}
 	if err := f.setup(); err != nil {
 		return nil, err
 	}
@@ -252,6 +257,7 @@ func bindsName(c *cards.Card, name string) bool {
 // planShuffle returns Forge's logged order for the seat's next shuffle.
 func (f *follower) planShuffle(c rules.ShuffleContext) ([]state.ObjID, error) {
 	ss := f.shuffles[int(c.Player)]
+	f.planned[int(c.Player)] = c.Ordinal + 1
 	if c.Ordinal >= len(ss) {
 		return nil, fmt.Errorf("seat %d shuffle %d: the log has %d shuffles for it", c.Player, c.Ordinal, len(ss))
 	}
@@ -511,7 +517,21 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// a later decision. Answer by default -- the first Min options in
 		// offered order -- and consume no line; Forge's real choice, if it
 		// differs, shows at the next snapshot.
+		if in, ok := f.mayShuffleChoose(d); ok {
+			return in, true
+		}
 		return f.defaultChoose(d), true
+	}
+	if d.Kind == decision.KTarget && e.Ask != nil && e.Ask.Kind != KindTarget {
+		// Forge's recorder logs a target ask only where its targeting hook
+		// is asked. A target it fixes without asking (a forced single
+		// candidate, a trigger's target picked inside resolution ...) writes
+		// no line, so the next line is the seat's next priority, attack or
+		// block ask. Answer by default -- the first Min options in offered
+		// order -- and consume no line; Forge's real choice, if it differs,
+		// shows at the next snapshot.
+		f.res.Targets++
+		return firstMin(d), true
 	}
 	if e.Ask == nil {
 		f.hard(WhatKind, d, Divergence{Line: e.Line, Gorge: string(d.Kind), Forge: e.T})
@@ -1103,6 +1123,12 @@ func (f *follower) defaultModes(d *decision.Decision) decision.Intent {
 // Min options in offered order (none when Min is 0), capped at Max and at the
 // offered count.
 func (f *follower) defaultChoose(d *decision.Decision) decision.Intent {
+	f.res.Chooses++
+	return firstMin(d)
+}
+
+// firstMin is the intent picking the first Min options in offered order.
+func firstMin(d *decision.Decision) decision.Intent {
 	k := d.Min
 	if d.Max > 0 && k > d.Max {
 		k = d.Max
@@ -1117,8 +1143,75 @@ func (f *follower) defaultChoose(d *decision.Decision) decision.Intent {
 	for i := range in.Choices {
 		in.Choices[i] = i
 	}
-	f.res.Chooses++
 	return in
+}
+
+// mayShuffleChoose answers a "you may shuffle" election (the resume kinds
+// ending in "mayshuffle": a search or rearrange effect's optional shuffle)
+// from the shuffle lines instead of by default. Forge's recorder writes no
+// ask line for it, but a shuffle Forge took leaves a shuffle line and a
+// shuffle it declined leaves none. Answering yes by default (the first
+// option) made gorge shuffle where Forge did not, so gorge's next planned
+// shuffle consumed a LATER Forge shuffle of a library a draw smaller
+// (chance-misaligned, "Forge shuffled 90 cards, gorge 91"). The election is
+// taken (yes) exactly when some seat's next unconsumed Forge shuffle holds
+// every card now in that seat's library -- the library at the shuffle is
+// that one plus whatever the effect moves in first -- and declined (no)
+// when none does, the next Forge shuffle then being a later one.
+func (f *follower) mayShuffleChoose(d *decision.Decision) (decision.Intent, bool) {
+	if !strings.HasSuffix(d.ResumeKind, "mayshuffle") {
+		return decision.Intent{}, false
+	}
+	yes, no := -1, -1
+	for i, o := range d.Options {
+		switch o.Kind {
+		case "yes":
+			yes = i
+		case "no":
+			no = i
+		}
+	}
+	if yes < 0 || no < 0 || d.Min != 1 || d.Max != 1 {
+		return decision.Intent{}, false
+	}
+	pick := no
+	if f.shuffleLogged() {
+		pick = yes
+	}
+	f.res.Chooses++
+	return decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{pick}}, true
+}
+
+// shuffleLogged reports whether some seat's next unconsumed Forge shuffle
+// holds every card in that seat's current gorge library (a non-empty one).
+func (f *follower) shuffleLogged() bool {
+	for seat, ss := range f.shuffles {
+		n := f.planned[seat]
+		if n >= len(ss) || seat < 0 || seat >= len(f.log.Header.Seats) {
+			continue
+		}
+		lib := f.e.G.Zone(state.ZLibrary, state.PlayerID(seat))
+		if len(lib) == 0 {
+			continue
+		}
+		in := map[state.ObjID]bool{}
+		for _, fid := range ss[n].Order {
+			if g, ok := f.toG[fid]; ok {
+				in[g] = true
+			}
+		}
+		all := true
+		for _, id := range lib {
+			if !in[id] {
+				all = false
+				break
+			}
+		}
+		if all {
+			return true
+		}
+	}
+	return false
 }
 
 // defaultArrange answers an arrange decision the log has no line for: the
