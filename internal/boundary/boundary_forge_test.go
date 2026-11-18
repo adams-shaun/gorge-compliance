@@ -1,6 +1,7 @@
 package boundary_test
 
 import (
+	"os"
 	"os/exec"
 	"path"
 	"path/filepath"
@@ -24,7 +25,13 @@ import (
 //     component beginning `forge` — `oracle/compliance/forge*`, the
 //     result-row / request-file surface (the rule is written by component so
 //     it follows the tree if it moves);
-//  4. a file carrying the Forge GPL header line.
+//  4. a file carrying the Forge GPL header line;
+//  5. a *.patch or *.diff file whose hunk lines (added, removed or context:
+//     the one-character diff prefix is stripped first) carry Forge Java
+//     (`package forge.`), a GPL-3.0 SPDX header, or a Forge card script shape.
+//     Rules 1 and 4's line-start signatures never match behind a diff prefix,
+//     so patches are scanned with the prefix removed. XMage (MIT) patches
+//     under docs/upstream-patches/ carry none of these and stay allowed.
 //
 // forgeBoundaryAllowlist is the explicit, empty-by-default escape hatch for a
 // file that carries only our own pattern vocabulary and field names, never a
@@ -101,6 +108,61 @@ func forgeBoundaryViolations(p string, blob []byte) []forgeBoundaryOffender {
 		if strings.Contains(string(blob), forgeGPLHeader) {
 			out = append(out, forgeBoundaryOffender{p, "carries the Forge GPL header"})
 		}
+		// Rule 5.
+		if strings.HasSuffix(slash, ".patch") || strings.HasSuffix(slash, ".diff") {
+			for _, r := range forgePatchViolations(blob) {
+				out = append(out, forgeBoundaryOffender{p, r})
+			}
+		}
+	}
+	return out
+}
+
+// forgeSPDXGPL is the SPDX GPL identifier prefix, assembled from two pieces so
+// this file never literally contains it.
+const forgeSPDXGPL = "SPDX-License-Identifier: " + "GPL-3.0"
+
+// forgeScriptMarkers are the line-start field shapes of a Forge card script.
+// A patch is a script carrier when its hunk lines show two distinct ones.
+var forgeScriptMarkers = []string{"Name:", "ManaCost:", "Types:", "Oracle:", "SVar:", "A:AB$", "A:SP$", "A:DB$"}
+
+// forgePatchViolations scans a unified diff for Forge content behind the
+// one-character diff prefix, and returns the reasons it found.
+func forgePatchViolations(blob []byte) []string {
+	var out []string
+	var javaPkg, spdx bool
+	seen := map[string]bool{}
+	for _, line := range strings.Split(string(blob), "\n") {
+		if line == "" || strings.HasPrefix(line, "+++") || strings.HasPrefix(line, "---") {
+			continue
+		}
+		switch line[0] {
+		case '+', '-', ' ':
+		default:
+			continue
+		}
+		body := strings.TrimRight(line[1:], "\r")
+		trimmed := strings.TrimSuffix(strings.TrimSpace(body), ";")
+		if strings.HasPrefix(trimmed, "package forge.") || trimmed == "package forge" {
+			javaPkg = true
+		}
+		if strings.Contains(body, forgeSPDXGPL) {
+			spdx = true
+		}
+		for _, m := range forgeScriptMarkers {
+			if strings.HasPrefix(body, m) {
+				seen[m] = true
+			}
+		}
+	}
+	if javaPkg {
+		out = append(out, "patch hunk carries Forge Java (package forge.)")
+	}
+	if spdx {
+		out = append(out, "patch hunk carries a GPL-3.0 SPDX header")
+	}
+	if len(seen) >= 2 {
+		out = append(out, "patch hunk carries a Forge card script")
 	}
 	return out
 }
@@ -180,6 +242,18 @@ func TestForgeBoundaryDetection(t *testing.T) {
 		{"innocuous Go file", "internal/oracle/snapshot.go",
 			"package oracle\n\n// A snapshot read from an external process.\n", false, true, false,
 			"an ordinary file is not an offender"},
+		{"patch adding Forge Java", "docs/upstream-patches/x.patch",
+			"--- a/G.java\n+++ b/G.java\n@@ -1,2 +1,3 @@\n package forge.game;\n+class G {}\n", false, true, true,
+			"a unified diff context line declaring package forge. is Forge source"},
+		{"patch adding the GPL SPDX header", "docs/upstream-patches/x.diff",
+			"--- /dev/null\n+++ b/T.java\n@@ -0,0 +1 @@\n+// " + forgeSPDXGPL + "-or-later\n", false, true, true,
+			"an added GPL-3.0 SPDX header line is Forge source"},
+		{"patch adding a Forge card script", "docs/upstream-patches/x.patch",
+			"--- /dev/null\n+++ b/c.txt\n@@ -0,0 +1,4 @@\n+Name:Foo\n+ManaCost:1 R\n+A:AB$ Draw | Cost$ T\n+SVar:X:Count$Valid Card\n", false, true, true,
+			"an added card script behind the diff prefix is a Forge script"},
+		{"patch of our own code", "docs/upstream-patches/x.patch",
+			"--- a/a.go\n+++ b/a.go\n@@ -1,2 +1,3 @@\n package a\n+// Name: a helper\n+var x = 1\n", false, true, false,
+			"a patch with a single Name: comment is not a script"},
 		{"allowlisted forge path", "oracle/compliance/forge-verdicts/a.jsonl",
 			"{}\n", true, true, true,
 			"control: the same path IS flagged once the allowlist entry is removed"},
@@ -233,6 +307,19 @@ func TestForgeBoundaryDetection(t *testing.T) {
 				t.Errorf("%q flagged=%v, want %v: %v (reason: %s)", tt.file, matched, tt.wantMatch, offenders, tt.reason)
 			}
 		})
+	}
+}
+
+// TestForgeBoundaryAllowsXMagePatch holds that the committed XMage (MIT) patch
+// is not mistaken for Forge content by the patch scan.
+func TestForgeBoundaryAllowsXMagePatch(t *testing.T) {
+	rel := "docs/upstream-patches/xmage-leaves-graveyard-self-enter.patch"
+	blob, err := os.ReadFile(filepath.Join(repoRoot(t), filepath.FromSlash(rel)))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := forgeBoundaryViolations(rel, blob); len(got) != 0 {
+		t.Fatalf("XMage patch flagged: %v", got)
 	}
 }
 
