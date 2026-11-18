@@ -399,6 +399,19 @@ func TestPassPositionsFirstStrikeDamage(t *testing.T) {
 			{"end-combat", true},
 		},
 	}, {
+		// The regular damage step pauses on an ask (damage division, an
+		// as-unblocked election) before priority is given, so the checkpoint
+		// after the ending pass still shows the non-active passer holding it.
+		name:  "first striker, regular step entered with priority stale",
+		steps: []oraclegen.Step{pass(1), pass(0), pass(1)},
+		snaps: []rules.OracleSnapshot{
+			{Turn: 1, Step: "declare-blockers", Priority: 1, Permanents: striker},
+			{Turn: 1, Step: "combat-damage", Priority: 0, Permanents: striker},
+			{Turn: 1, Step: "combat-damage", Priority: 1, Permanents: striker},
+			{Turn: 1, Step: "combat-damage", Priority: 1, Permanents: striker},
+		},
+		want: []want{{oraclegen.StepFirstStrikeDamage, true}, {oraclegen.StepFirstStrikeDamage, false}, {"combat-damage", true}},
+	}, {
 		name:  "no first striker",
 		steps: []oraclegen.Step{pass(1), pass(0), pass(1)},
 		snaps: []rules.OracleSnapshot{
@@ -445,6 +458,29 @@ func TestPrepareRefusesACardNoXMageSetLists(t *testing.T) {
 	}
 	if _, ref := Prepare(reg, sp, w.l, w.g); ref != nil && ref.Reason == ReasonNoXMageCard {
 		t.Fatalf("an item of listed cards was refused: %+v", ref)
+	}
+}
+
+// TestPassPositionsExtraStepSameName: a pass that begins an additional end step
+// (CR 500.9), which has the name of the step it follows, is Moved, even when a
+// trigger of the new step is on the stack after it; the active seat's own pass
+// on an empty stack only hands priority on, and the pass resolving that trigger
+// moves nothing.
+func TestPassPositionsExtraStepSameName(t *testing.T) {
+	trigger := []rules.OracleSnapStack{{Kind: "ability", Source: "p0:X"}}
+	at := func(prio int, stack []rules.OracleSnapStack) rules.OracleSnapshot {
+		return rules.OracleSnapshot{Turn: 1, Step: "end", Active: 0, Priority: prio, Stack: stack}
+	}
+	pass := func(seat int) oraclegen.Step { return oraclegen.Step{Op: "pass", Seat: seat} }
+	got := passPositions(
+		[]oraclegen.Step{pass(0), pass(1), pass(0)},
+		[]rules.OracleSnapshot{at(0, nil), at(1, nil), at(0, trigger), at(1, trigger)},
+	)
+	want := []struct{ moved, resolves bool }{{false, false}, {true, false}, {false, false}}
+	for i, w := range want {
+		if got[i].Moved != w.moved || got[i].Resolves != w.resolves {
+			t.Errorf("pass %d: moved=%v resolves=%v, want %v", i, got[i].Moved, got[i].Resolves, w)
+		}
 	}
 }
 
