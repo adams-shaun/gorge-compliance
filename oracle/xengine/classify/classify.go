@@ -546,8 +546,14 @@ func ignoredCastMode(item lower.Lowered, v oraclediff.Verdict, d int, fl followe
 // two such triggers (two Otter tokens with Prowess, one holding a counter)
 // cannot be told apart and XMage orders them itself; from there its game
 // differs by the driver's gap, not by a rule. "" for anything else.
+//
+// A pick that names one ref twice (two triggers of one source object, such as
+// Norin's blocked-creature trigger once per blocked creature) is ambiguous for
+// every follower, by-name or not: the pick does not say which trigger goes
+// first, so the follower orders them itself (CR 603.3b, the order is the
+// controller's free choice). Such a pick is class harness for any follower.
 func sameNameTriggerOrder(item lower.Lowered, v oraclediff.Verdict, d int, fl followers.Follower) string {
-	if !fl.TriggerOrderByName || v.Status != oraclediff.Diverge || d < 0 {
+	if v.Status != oraclediff.Diverge || d < 0 {
 		return ""
 	}
 	for i, st := range item.Item.Steps {
@@ -558,13 +564,16 @@ func sameNameTriggerOrder(item lower.Lowered, v oraclediff.Verdict, d int, fl fo
 			if a.Kind != "trigger_order" {
 				continue
 			}
-			seen := map[string]bool{}
+			seen, seenRef := map[string]bool{}, map[string]bool{}
 			for _, p := range a.Pick {
 				n := oraclediff.RefName(p)
-				if seen[n] {
+				if fl.TriggerOrderByName && seen[n] {
 					return fmt.Sprintf("the driver cannot order triggers of objects named %q apart (step %d)", n, i)
 				}
-				seen[n] = true
+				if seenRef[p] {
+					return fmt.Sprintf("the recorded trigger order names %q twice and cannot say which of its triggers goes first (step %d)", p, i)
+				}
+				seen[n], seenRef[p] = true, true
 			}
 		}
 	}

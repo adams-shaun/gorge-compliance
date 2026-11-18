@@ -633,6 +633,38 @@ func TestClassifyXMageSameNameTriggerOrder(t *testing.T) {
 	}
 }
 
+// TestSameNameTriggerOrderForge: a trigger_order pick that names one ref twice
+// (two Norin triggers, one per blocked creature) does not say which trigger
+// goes first, so Forge orders them itself; a difference at or after it is the
+// harness's (CR 603.3b). A pick over distinct refs of one name is still
+// followed by source, and a difference before the order still diverges.
+func TestSameNameTriggerOrderForge(t *testing.T) {
+	item := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "block", Answers: []oraclegen.Answer{
+			{Kind: "trigger_order", Pick: []string{"p0:Norin, Swift Survivalist", "p0:Norin, Swift Survivalist"}},
+		}}, {Op: "pass"}},
+	}}}
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		snap("setup"), snap("step 0 (pass)"), snap("step 1 (block)"), snap("step 2 (pass)"),
+	}}
+	diffAt := func(i int) oraclediff.XResult {
+		return follower(g, func(x *oraclediff.XResult) { x.Snapshots[i].Players[0].Exile = []string{"Acrobatic Cheerleader"} })
+	}
+	for _, i := range []int{2, 3} {
+		f := Classify(item, nil, g, diffAt(i), "forge")
+		if f.Class != ClassHarness || !strings.Contains(f.Msg, "Norin, Swift Survivalist") {
+			t.Errorf("forge difference at checkpoint %d: %+v", i, f)
+		}
+	}
+	if f := Classify(item, nil, g, diffAt(1), "forge"); f.Class != ClassDiverge {
+		t.Errorf("difference before the order: %+v", f)
+	}
+	item.Item.Steps[1].Answers[0].Pick = []string{"p0:token:Otter Token#2", "p0:token:Otter Token"}
+	if f := Classify(item, nil, g, diffAt(2), "forge"); f.Class == ClassHarness {
+		t.Errorf("distinct refs are followed by source: %+v", f)
+	}
+}
+
 // TestClassifyCrewTypeDependency: a type-adding static on a Vehicle that is a
 // creature leaves the follower's Vehicle with the same P/T and every other
 // characteristic, missing only the added type. The creature-making effect is a
