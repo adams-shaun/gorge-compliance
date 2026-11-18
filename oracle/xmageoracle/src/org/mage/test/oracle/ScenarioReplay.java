@@ -11,6 +11,7 @@ import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.PlayLandAbility;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -20,7 +21,9 @@ import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.OrCost;
 import mage.abilities.keyword.LeylineAbility;
 import mage.abilities.keyword.SpreeAbility;
+import mage.abilities.costs.mana.HybridManaCost;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.abilities.effects.common.EndTurnEffect;
@@ -32,6 +35,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.DoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -419,11 +423,37 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // plan-preferring generic phase below, not here: taking a {C} unit
             // here would bypass the plan whenever the pool also holds a colour
             // gorge actually spent.
+            // A hybrid pip is NOT a specific pip: XMage's HybridManaCost keeps
+            // BOTH halves in its cost Mana, so walking `due` would spend a
+            // floating W for every {R/W} even when the plan holds no W left
+            // (CR 107.4e lets either half pay). Split the hybrids out: the
+            // forced pips go first, then each hybrid takes the plan letter
+            // that is one of its halves before any WUBRG order.
+            Mana forced = new Mana();
+            List<HybridManaCost> hybrids = new ArrayList<>();
+            collectDue(unpaid, forced, hybrids);
             for (char c : "WUBRG".toCharArray()) {
                 ManaType type = manaType(c);
-                if (due.get(type) > 0 && poolSpendable(type, ability, game)) {
+                if (forced.get(type) > 0 && poolSpendable(type, ability, game)) {
                     return payment.indexOf(c) >= 0
                             ? takePayment(c) : dropPaymentLetterAndName(c, ability, game);
+                }
+            }
+            for (HybridManaCost hybrid : hybrids) {
+                String halves = hybridHalves(hybrid);
+                for (int i = 0; i < payment.length(); i++) {
+                    char c = payment.charAt(i);
+                    if (halves.indexOf(c) >= 0 && poolSpendable(manaType(c), ability, game)) {
+                        return takePayment(c);
+                    }
+                }
+            }
+            for (HybridManaCost hybrid : hybrids) {
+                String halves = hybridHalves(hybrid);
+                for (char c : "WUBRG".toCharArray()) {
+                    if (halves.indexOf(c) >= 0 && poolSpendable(manaType(c), ability, game)) {
+                        return dropPaymentLetterAndName(c, ability, game);
+                    }
                 }
             }
             // An any-type asThough effect (Vizier of the Menagerie) lets a pool
@@ -473,6 +503,32 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             }
             return null;
+        }
+
+        /** Split an unpaid cost into the mana every pip forces (`forced`) and
+         * its hybrid pips, whose halves are alternatives, not both due. */
+        private static void collectDue(ManaCost cost, Mana forced, List<HybridManaCost> hybrids) {
+            if (cost instanceof HybridManaCost) {
+                hybrids.add((HybridManaCost) cost);
+            } else if (cost instanceof ManaCosts) {
+                for (Object part : (ManaCosts<?>) cost) {
+                    collectDue((ManaCost) part, forced, hybrids);
+                }
+            } else {
+                forced.add(cost.getMana());
+            }
+        }
+
+        /** The plan letters of a hybrid pip's two halves ("RW" for {R/W}); a
+         * generic half contributes none. */
+        private static String hybridHalves(HybridManaCost hybrid) {
+            StringBuilder halves = new StringBuilder();
+            for (ColoredManaSymbol half : new ColoredManaSymbol[]{hybrid.getMana1(), hybrid.getMana2()}) {
+                if (half != null) {
+                    halves.append(half.toString().charAt(0));
+                }
+            }
+            return halves.toString();
         }
 
         /** Whether the unpaid cost still names a WUBRG pip. XMage folds the
@@ -3517,6 +3573,46 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return frontHalf(s);
     }
 
+    /** The name a stack ability's source is reported under. An ability of a
+     * double-faced card that has left the battlefield is still the ability its
+     * own face printed (CR 113.7a, 712.8e), and gorge names it by that face
+     * (rules.abilitySourceRef): Aclazotz's dies trigger is the front face's, so
+     * gorge reads "Aclazotz, Deepest Betrayal" while XMage's source lookup can
+     * resolve to the back half ("Temple of the Dead"). So for a non-Room
+     * DoubleFacedCard (a Room is a SplitCard: its door names are real, CR
+     * 709.5) that is not a battlefield permanent -- a permanent on its back face
+     * is named by that face on both sides -- the name is the half whose own
+     * abilities include the stack ability, matched by id, original id, or rule
+     * text. An ability neither half owns (a granted one) keeps the object's own
+     * name. Card-based, so a test pins it without a game. */
+    static String abilitySourceName(mage.MageObject source, Ability ability) {
+        if (!(source instanceof Card) || source instanceof Permanent || ability == null) {
+            return source.getName();
+        }
+        Card main = ((Card) source).getMainCard();
+        if (!(main instanceof DoubleFacedCard)) {
+            return source.getName();
+        }
+        DoubleFacedCard df = (DoubleFacedCard) main;
+        boolean left = ownsAbility(df.getLeftHalfCard(), ability);
+        boolean right = ownsAbility(df.getRightHalfCard(), ability);
+        if (left != right) {
+            return (left ? df.getLeftHalfCard() : df.getRightHalfCard()).getName();
+        }
+        return source.getName();
+    }
+
+    private static boolean ownsAbility(Card half, Ability ability) {
+        String rule = ability.getRule();
+        for (Ability a : half.getAbilities()) {
+            if (a.getId().equals(ability.getId()) || a.getOriginalId().equals(ability.getOriginalId())
+                    || a.getRule().equals(rule)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** The spelling rewrite for a battlefield permanent's name (a snapshot
      * permanent's "name" and "attached_to"). The only permanent XMage names
      * "A // B" is a Room with both doors unlocked, and that IS its name (CR
@@ -4950,14 +5046,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // "plot" is XMage's Plot special action (PlotAbility is a
                 // SpecialAction: no stack, not a cast), activated from the
                 // hand by its rule text "Plot {cost}" like XMage's own
-                // PlotTest does. The step's mana was added above; a
+                // PlotTest does, scoped to the step's card. The step's mana was added above; a
                 // reduction (Doc Aurlock) is applied by XMage itself.
                 if ("plot".equals(castMode)) {
                     String plotText = xabilityAt(stepIdx);
                     if (plotText.isEmpty()) {
                         throw new IllegalArgumentException("plot step " + stepIdx + " has no xmage_ability");
                     }
-                    activateAbility(turn, phase, p, plotText);
+                    // Scope the pick to this step's card: two hand cards
+                    // sharing a Plot cost have identical rule text, and the
+                    // bare text plots whichever XMage lists first (CR
+                    // 702.170a). boundActivationText binds the card's id as
+                    // an alias, like an ordinary activation.
+                    activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), plotText, stepIdx));
                     return;
                 }
                 // "flashback" is the cast of a graveyard card for its
@@ -5174,9 +5275,36 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), text, stepIdx));
                 return;
             }
-            case "play":
-                playLand(turn, phase, p, xmageSpelling(refName(str(st, "card"))));
+            case "play": {
+                String playRef = str(st, "card");
+                String landName = xmageSpelling(refName(playRef));
+                String playAlias = refAlias.get(playRef);
+                if (playAlias == null) {
+                    playLand(turn, phase, p, landName);
+                    return;
+                }
+                // playLand names the land: XMage enters the FIRST same-named
+                // hand card, not the one the ref's setup alias binds, so a
+                // later "p0:Swamp#4" tap or pick reaches a different land
+                // than gorge's (CR 305.1, 605.3a). Bind a space-free alias to
+                // the card the ref means (from whichever zone it plays: hand,
+                // graveyard, exile, library; a double-faced land by its half)
+                // just ahead of the play and prefix the command with it
+                // ("@key Play <name>").
+                String playKey = "play" + stepIdx;
+                runCode("bind " + playRef, turn, phase, p, (info, pl, g) -> {
+                    UUID id = playableLandId(p, g, p.getAliasByName(playAlias), landName);
+                    if (id == null) {
+                        throw new IllegalArgumentException("play " + playRef + ": no " + landName
+                                + " playable by " + p.getName());
+                    }
+                    for (int j = 0; j < seats; j++) {
+                        seat(j).addAlias(playKey, id);
+                    }
+                });
+                activateAbility(turn, phase, p, "@" + playKey + " Play " + landName);
                 return;
+            }
             case "pass":
                 // Validated here; its XMage commands are queued around the
                 // checkpoint by queuePassCommands, which the replay loop runs before this step.
@@ -5601,6 +5729,62 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         });
         return "@" + key + " " + text;
+    }
+
+    /**
+     * The source id XMage must match for a land-play step: the live
+     * PlayLandAbility (any zone the player can play from: hand, graveyard,
+     * exile, library top) whose source is the ref's setup-bound object. A
+     * double-faced land's ability sits on a HALF card whose id differs from
+     * the main card the setup alias binds, so the main card id counts as the
+     * bound object too. Null when no live ability matches.
+     */
+    private UUID playableLandId(TestPlayer p, Game g, UUID bound, String landName) {
+        List<PlayLandCandidate> candidates = new ArrayList<>();
+        for (Ability ability : p.getPlayable(g, true)) {
+            if (!(ability instanceof PlayLandAbility)) {
+                continue;
+            }
+            Card source = g.getCard(ability.getSourceId());
+            candidates.add(new PlayLandCandidate(source == null ? null : source.getName(),
+                    ability.getSourceId(), source == null ? null : source.getMainCard().getId()));
+        }
+        return choosePlayLandSource(candidates, landName, bound);
+    }
+
+    /** One live land-play ability: its source card's name, the source id the
+     * alias must carry, and the id of the source's main card (the same id
+     * for a plain card, the whole card for a double-faced half). */
+    static final class PlayLandCandidate {
+        final String sourceName;
+        final UUID sourceId;
+        final UUID mainId;
+
+        PlayLandCandidate(String sourceName, UUID sourceId, UUID mainId) {
+            this.sourceName = sourceName;
+            this.sourceId = sourceId;
+            this.mainId = mainId;
+        }
+    }
+
+    /**
+     * Picks the source id a land-play alias must carry: the ability of the
+     * setup-bound object itself (by source id, or by main-card id for a
+     * double-faced half) so a later tap or pick of the ref reaches the land
+     * the play entered (CR 305.1, 605.3a); otherwise the first same-named
+     * land, which is what a name-only play would enter. Null when none.
+     */
+    UUID choosePlayLandSource(List<PlayLandCandidate> candidates, String landName, UUID bound) {
+        UUID nameMatch = null;
+        for (PlayLandCandidate c : candidates) {
+            if (bound != null && (c.sourceId.equals(bound) || bound.equals(c.mainId))) {
+                return c.sourceId;
+            }
+            if (nameMatch == null && sourceNameIsNamed(c.sourceName, landName)) {
+                nameMatch = c.sourceId;
+            }
+        }
+        return nameMatch;
     }
 
     /**
@@ -6245,7 +6429,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             String src = so.getName();
             if (!(so instanceof Spell)) {
                 mage.MageObject mo = g.getObject(so.getSourceId());
-                src = mo == null ? "?" : mo.getName();
+                src = mo == null ? "?" : abilitySourceName(mo, ((StackAbility) so).getStackAbility());
             }
             o.addProperty("source", src);
             o.addProperty("controller", seatIndex(g, so.getControllerId()));
