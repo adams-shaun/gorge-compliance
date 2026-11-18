@@ -57,6 +57,14 @@ public final class ScenarioReplayPaymentTest {
                 new ManaPoolItem(red, green, 0, 0, 0, 0, new Source(), UUID.randomUUID(), false));
     }
 
+    @SuppressWarnings("unchecked")
+    private static void addRedWhite(ManaPool pool, int red, int white) throws Exception {
+        Field f = ManaPool.class.getDeclaredField("manaItems");
+        f.setAccessible(true);
+        ((List<ManaPoolItem>) f.get(pool)).add(
+                new ManaPoolItem(red, 0, 0, white, 0, 0, new Source(), UUID.randomUUID(), false));
+    }
+
     private static ScriptedPayment newPlayer(Game game) throws Exception {
         Class<?> cls = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
         Constructor<?> ctor = cls.getDeclaredConstructor(TestComputerPlayer.class, ScenarioReplay.class);
@@ -325,6 +333,23 @@ public final class ScenarioReplayPaymentTest {
         System.out.println("PASS an any-type conversion pays the pip from the recorded RR, leaving R");
     }
 
+    private static void testHybridPipFollowsPlan() throws Exception {
+        // TMT Raph & Leo window: pool WWRR, cost {1}{R/W}{R/W}, gorge spent
+        // WRR (both hybrid pips with R, the generic with W). XMage's hybrid
+        // cost holds both halves, so the old WUBRG walk spent a floating W
+        // for each hybrid pip and left R where gorge keeps W (CR 107.4e).
+        Game game = game();
+        ScriptedPayment sp = newPlayer(game);
+        TestPlayer p = sp.player;
+        addRedWhite(p.getManaPool(), 2, 2);
+        p.updateRange(game);
+        sp.begin("WRR");
+        equal(true, pay(p, game, "{1}{R/W}{R/W}"));
+        equal("W", ScenarioReplay.pool(p.getManaPool()));
+        sp.end();
+        System.out.println("PASS a hybrid pip is paid with the plan's half, leaving W");
+    }
+
     public static void main(String[] args) throws Exception {
         testRecordedSplit();
         testGorgeSplit();
@@ -334,5 +359,6 @@ public final class ScenarioReplayPaymentTest {
         testUnusableGenericPlanPaysFromPool();
         testUnpayablePipFallsBack();
         testAnyTypeConversionPaysPip();
+        testHybridPipFollowsPlan();
     }
 }

@@ -20,7 +20,9 @@ import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.OrCost;
 import mage.abilities.keyword.LeylineAbility;
 import mage.abilities.keyword.SpreeAbility;
+import mage.abilities.costs.mana.HybridManaCost;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.abilities.effects.common.EndTurnEffect;
@@ -32,6 +34,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.DoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -419,11 +422,37 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // plan-preferring generic phase below, not here: taking a {C} unit
             // here would bypass the plan whenever the pool also holds a colour
             // gorge actually spent.
+            // A hybrid pip is NOT a specific pip: XMage's HybridManaCost keeps
+            // BOTH halves in its cost Mana, so walking `due` would spend a
+            // floating W for every {R/W} even when the plan holds no W left
+            // (CR 107.4e lets either half pay). Split the hybrids out: the
+            // forced pips go first, then each hybrid takes the plan letter
+            // that is one of its halves before any WUBRG order.
+            Mana forced = new Mana();
+            List<HybridManaCost> hybrids = new ArrayList<>();
+            collectDue(unpaid, forced, hybrids);
             for (char c : "WUBRG".toCharArray()) {
                 ManaType type = manaType(c);
-                if (due.get(type) > 0 && poolSpendable(type, ability, game)) {
+                if (forced.get(type) > 0 && poolSpendable(type, ability, game)) {
                     return payment.indexOf(c) >= 0
                             ? takePayment(c) : dropPaymentLetterAndName(c, ability, game);
+                }
+            }
+            for (HybridManaCost hybrid : hybrids) {
+                String halves = hybridHalves(hybrid);
+                for (int i = 0; i < payment.length(); i++) {
+                    char c = payment.charAt(i);
+                    if (halves.indexOf(c) >= 0 && poolSpendable(manaType(c), ability, game)) {
+                        return takePayment(c);
+                    }
+                }
+            }
+            for (HybridManaCost hybrid : hybrids) {
+                String halves = hybridHalves(hybrid);
+                for (char c : "WUBRG".toCharArray()) {
+                    if (halves.indexOf(c) >= 0 && poolSpendable(manaType(c), ability, game)) {
+                        return dropPaymentLetterAndName(c, ability, game);
+                    }
                 }
             }
             // An any-type asThough effect (Vizier of the Menagerie) lets a pool
@@ -473,6 +502,32 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             }
             return null;
+        }
+
+        /** Split an unpaid cost into the mana every pip forces (`forced`) and
+         * its hybrid pips, whose halves are alternatives, not both due. */
+        private static void collectDue(ManaCost cost, Mana forced, List<HybridManaCost> hybrids) {
+            if (cost instanceof HybridManaCost) {
+                hybrids.add((HybridManaCost) cost);
+            } else if (cost instanceof ManaCosts) {
+                for (Object part : (ManaCosts<?>) cost) {
+                    collectDue((ManaCost) part, forced, hybrids);
+                }
+            } else {
+                forced.add(cost.getMana());
+            }
+        }
+
+        /** The plan letters of a hybrid pip's two halves ("RW" for {R/W}); a
+         * generic half contributes none. */
+        private static String hybridHalves(HybridManaCost hybrid) {
+            StringBuilder halves = new StringBuilder();
+            for (ColoredManaSymbol half : new ColoredManaSymbol[]{hybrid.getMana1(), hybrid.getMana2()}) {
+                if (half != null) {
+                    halves.append(half.toString().charAt(0));
+                }
+            }
+            return halves.toString();
         }
 
         /** Whether the unpaid cost still names a WUBRG pip. XMage folds the
