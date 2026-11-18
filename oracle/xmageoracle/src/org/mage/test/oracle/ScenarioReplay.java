@@ -386,11 +386,120 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         return true;
                     }
                     getChoices().add(0, next);
+                } else if (queueTapPaymentAction(game)) {
+                    // The recorded plan is spent and the step's next answer is
+                    // gorge's improvise/convoke tap. Stay in manual payment so
+                    // TestPlayer takes the special action it now names.
+                    try {
+                        return super.playMana(ability, unpaid, promptText, game);
+                    } finally {
+                        convokeColour = null;
+                    }
                 } else {
                     fallBackToAutoPayment();
                 }
             }
             return super.playMana(ability, unpaid, promptText, game);
+        }
+
+        /** The colour XMage's convoke effect is to be answered with when it
+         * asks which mana the tapped creature pays (set only while a convoke
+         * special action runs inside playMana). The effect asks only when the
+         * creature can pay more than one kind, so the answer is queued lazily
+         * in choose(Choice), never up front where an unasked answer would be
+         * left unconsumed. */
+        private String convokeColour;
+
+        /** Translate gorge's recorded payment tap ("Tap <name> for 1" or "for
+         * <colour>", pay.ConvokeAsk's option label) at the front of the choice
+         * queue into XMage's special mana action: the choice becomes the
+         * action's rule prefix ("Improvise" / "Convoke", the key TestPlayer
+         * matches in its manual branch) and the permanent goes to the front of
+         * the target queue, which the action's own target ask reads. The
+         * action is the one whose legal set holds a permanent of that name, so
+         * an artifact improvises and a creature convokes. The ask's trailing
+         * [choice_skip] is gorge's end of the tap menu and is dropped with the
+         * last pick. False (nothing queued) when no action names the pick: the
+         * caller then falls back to auto-payment as before. */
+        private boolean queueTapPaymentAction(Game game) {
+            if (getChoices().isEmpty()) {
+                return false;
+            }
+            String[] pick = tapPaymentPick(getChoices().get(0));
+            if (pick == null) {
+                return false;
+            }
+            Map<UUID, mage.abilities.SpecialAction> actions =
+                    game.getState().getSpecialActions().getControlledBy(getId(), true);
+            for (mage.abilities.SpecialAction action : actions.values()) {
+                String rule = action.getRule(true);
+                String key = rule.startsWith("Improvise") ? "Improvise"
+                        : rule.startsWith("Convoke") ? "Convoke" : null;
+                if (key == null || action.getTargets().isEmpty()
+                        || !action.canActivate(getId(), game).canActivate()) {
+                    continue;
+                }
+                mage.target.Target target = action.getTargets().get(0);
+                Set<UUID> legal = target.possibleTargets(getId(), action, game);
+                boolean named = false;
+                for (UUID id : legal) {
+                    if (hasObjectTargetNameOrAlias(game.getPermanent(id), pick[0])) {
+                        named = true;
+                        break;
+                    }
+                }
+                if (!named) {
+                    continue;
+                }
+                getChoices().remove(0);
+                if (!getChoices().isEmpty() && TestPlayer.CHOICE_SKIP.equals(getChoices().get(0))) {
+                    getChoices().remove(0);
+                }
+                getChoices().add(0, key);
+                getTargets().add(0, pick[0]);
+                if (target.getMaxNumberOfTargets() > 1 && legal.size() > 1) {
+                    // Improvise takes up to one artifact per generic mana and
+                    // asks again while more can be chosen: close the ask.
+                    getTargets().add(1, TestPlayer.TARGET_SKIP);
+                }
+                convokeColour = "Convoke".equals(key) ? tapPaymentColourName(pick[1]) : null;
+                return true;
+            }
+            return false;
+        }
+
+        /** Splits a payment-tap label into {permanent name, contribution}
+         * ("1" or a WUBRG letter), or null for any other label: a mana wheel's
+         * "Tap <name> for mana", a waterbend, a Harmonize "(reduce by N)". */
+        static String[] tapPaymentPick(String label) {
+            if (label == null || !label.startsWith("Tap ")) {
+                return null;
+            }
+            int at = label.lastIndexOf(" for ");
+            if (at < 4) {
+                return null;
+            }
+            String what = label.substring(at + 5);
+            if (!what.matches("[1WUBRG]")) {
+                return null;
+            }
+            String name = label.substring(4, at);
+            if (name.isEmpty() || name.endsWith(" to waterbend")) {
+                return null;
+            }
+            return new String[] {name, what};
+        }
+
+        /** XMage's colour-choice text for a tap's contribution. */
+        static String tapPaymentColourName(String what) {
+            switch (what) {
+                case "W": return "White";
+                case "U": return "Blue";
+                case "B": return "Black";
+                case "R": return "Red";
+                case "G": return "Green";
+                default: return "Colorless";
+            }
         }
 
         /** gorge's recorded multiset cannot pay the rest of this ask: XMage's
@@ -795,6 +904,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
         public boolean choose(Outcome outcome, mage.choices.Choice choice, Game game) {
             if (owner.alternativeCostCast && choice.isKeyChoice()) {
                 alternativeCostKey(choice.getMessage(), getChoices());
+            }
+            if (convokeColour != null && choice.getMessage() != null
+                    && choice.getMessage().startsWith("Choose mana color to reduce from ")) {
+                getChoices().add(0, convokeColour);
+                convokeColour = null;
             }
             return super.choose(outcome, choice, game);
         }
