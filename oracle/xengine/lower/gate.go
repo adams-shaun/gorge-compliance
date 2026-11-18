@@ -480,6 +480,12 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		}
 		src := w.g.Obj(o.ExiledWith)
 		return src != nil && cardMentions(src.Card, "ExiledWith")
+	case typ == "Object" && name == "Haunting":
+		// The haunt link joins an exiled card to the creature it haunts
+		// (CR 702.55b). Setup places cards, not a link to a creature the
+		// exiled card's own trigger found, so it is refused when live: only
+		// the HauntedBy reader in a filter (effects/filter.go) can see it.
+		return !v.IsZero() && w.gameMentions("HauntedBy")
 	case typ == "Object" && name == "HasExiledBy":
 		if !v.Bool() {
 			return false

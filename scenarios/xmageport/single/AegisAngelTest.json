@@ -121,8 +121,7 @@
      ]
     }
    ],
-   "xmage": "AegisAngelTest#testKeepsAbility",
-   "known_bug": "XP[aslongascontrol-lost-while-source-lives]: the 'another target permanent gains indestructible for as long as you control Aegis Angel' Pump is not kept while Aegis remains (Silvercoat Lion lacks Indestructible at turn 3), so the AsLongAsControl duration is lost (continuousLive/AsLongAsControl), CR 611.2b, verified at gorge 981b98963b."
+   "xmage": "AegisAngelTest#testKeepsAbility"
   },
   {
    "name": "test-angel-dies-after-entering",
@@ -212,8 +211,7 @@
      ]
     }
    ],
-   "xmage": "AegisAngelTest#testAngelDiesAfterEntering",
-   "known_bug": "XP[aslongascontrol-survives-source-death]: the Pump's AsLongAsControl indestructible persists after Aegis Angel dies (Silvercoat Lion still has it, want none): expireAsLongAsControl/continuousLive only end on a control change, not when the source leaves the battlefield, CR 611.2b, verified at gorge 981b98963b."
+   "xmage": "AegisAngelTest#testAngelDiesAfterEntering"
   },
   {
    "name": "test-angel-lose-control",

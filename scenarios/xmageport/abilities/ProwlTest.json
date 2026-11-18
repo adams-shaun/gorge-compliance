@@ -108,8 +108,7 @@
      "eq": 1
     }
    ],
-   "xmage": "ProwlTest#test_ProwlNormal",
-   "known_bug": "XP[prowl-alt-cost-absent]: Auntie's Snitch's K:Prowl:1 B has no row in altCastModes (no prowl alternative-cost cast option), so after Bloodmark Mentor deals combat damage to a player only the {2}{B} plain cast is offered (nothing offered with {B}{B} floating; cast_mode prowl is not offered), CR 702.76a, verified at gorge c3b957bf36."
+   "xmage": "ProwlTest#test_ProwlNormal"
   },
   {
    "name": "test-prowl-with-cost-reduce",
@@ -217,8 +216,7 @@
      "eq": 1
     }
    ],
-   "xmage": "ProwlTest#test_ProwlWithCostReduce",
-   "known_bug": "XP[prowl-alt-cost-absent]: same cause as test_ProwlNormal: no prowl cast option exists, so with the cost reduction only the plain cast is offered and the prowl cast the test pays with one less mana is never offered, CR 702.76a, verified at gorge c3b957bf36."
+   "xmage": "ProwlTest#test_ProwlWithCostReduce"
   }
  ]
 }

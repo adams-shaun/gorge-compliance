@@ -267,8 +267,7 @@
      "eq": 1
     }
    ],
-   "xmage": "TransformTest#testTransformCopy",
-   "known_bug": "XP[werewolf-flipped-at-setup-then-turn2]: same cause as HinterlandScourgeTest#testCard: gorge flips Lambholt Pacifist at each upkeep without reading WerewolfTransformCondition$ (the condition appears nowhere in the gorge source), so it is already Lambholt Butcher at turn 2 although a spell was cast on turn 1, and the Clone offered a copy of the Butcher (Lambholt Pacifist count 0 on p1, want 1), CR 701.27, 712, verified at gorge c3b957bf36."
+   "xmage": "TransformTest#testTransformCopy"
   },
   {
    "name": "test-no-spells-cast-last-turn-transform-does-not-trigger-turn1",

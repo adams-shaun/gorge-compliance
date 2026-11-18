@@ -638,7 +638,9 @@ func TestCardMentions(t *testing.T) {
 	}{
 		{"Ghost Vacuum", "ExiledWith", true},
 		{"Gonti, Night Minister", "Exiler", true},
+		{"Cry of Contrition", "HauntedBy", true},
 		{"Ride's End", "ExiledWith", false},
+		{"Ride's End", "HauntedBy", false},
 	} {
 		if got := cardMentions(look(tc.card), tc.word); got != tc.want {
 			t.Errorf("cardMentions(%s, %s) = %v, want %v", tc.card, tc.word, got, tc.want)
@@ -710,6 +712,61 @@ func TestGateDeadExileLink(t *testing.T) {
 		if strings.HasPrefix(x, "field:") {
 			t.Fatalf("(d) self-exile: reasons %v carry a field reason", r)
 		}
+	}
+}
+
+// TestGateHauntLink: state.Object.Haunting joins an exiled card to the
+// creature it haunts (CR 702.55b). Setup cannot place the link, so it is
+// refused only when a card in the game reads HauntedBy; a dead link and the
+// zero value stay placeable.
+func TestGateHauntLink(t *testing.T) {
+	reg, pairs := setPairs(t, "DFT", 1)
+	base, at := expressibleCutIn(t, reg, "DFT", pairs[0], 100)
+	link := func(e *rules.Engine, source string) {
+		objs := libraryObjs(t, e, 2)
+		src, haunted := objs[0], objs[1]
+		c, ok := reg.Lookup(source)
+		if !ok {
+			t.Fatalf("%s is not in the corpus", source)
+		}
+		src.SetCard(c, 0)
+		src.Zone = state.ZExile
+		src.Haunting = haunted.ID
+	}
+	reasons := func(e *rules.Engine) []string { return capture(e, at, true).Reasons }
+
+	// (a) a removal spell's script never reads the link.
+	e := base.Clone()
+	link(e, "Ride's End")
+	if r := reasons(e); len(r) != 0 {
+		t.Fatalf("(a) dead haunt link: reasons %v, want none", r)
+	}
+
+	// (b) a K:Haunt card in the game reads it through its generated trigger.
+	e = base.Clone()
+	link(e, "Ride's End")
+	h, ok := reg.Lookup("Cry of Contrition")
+	if !ok {
+		t.Fatal("Cry of Contrition is not in the corpus")
+	}
+	libraryObjs(t, e, 3)[2].SetCard(h, 0)
+	if r := reasons(e); len(r) != 1 || r[0] != "field:Object.Haunting" {
+		t.Fatalf("(b) haunt reader: reasons %v, want [field:Object.Haunting]", r)
+	}
+
+	// (c) the zero link is not live even with the reader in the game.
+	e = base.Clone()
+	objs := libraryObjs(t, e, 2)
+	src := objs[0]
+	c, ok := reg.Lookup("Ride's End")
+	if !ok {
+		t.Fatal("Ride's End is not in the corpus")
+	}
+	src.SetCard(c, 0)
+	src.Zone = state.ZExile
+	libraryObjs(t, e, 3)[2].SetCard(h, 0)
+	if r := reasons(e); len(r) != 0 {
+		t.Fatalf("(c) zero haunt link: reasons %v, want none", r)
 	}
 }
 
