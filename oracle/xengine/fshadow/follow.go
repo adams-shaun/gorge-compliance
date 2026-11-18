@@ -105,6 +105,9 @@ type Result struct {
 	// the snapshots of steps gorge gives no decision in (the untap step).
 	SkippedAsks  int `json:"skipped_asks,omitempty"`
 	SkippedSnaps int `json:"skipped_snaps,omitempty"`
+	// Modes counts the modal picks (a charm's modes, an unless-pay ask) the
+	// log has no line for, which the follower answered by default.
+	Modes int `json:"modes,omitempty"`
 	// End is how the follow finished: "end" (the log's end line matched),
 	// "unfinished" (Forge stopped the game early), "log" (the log ran out
 	// first), "cap" or "divergence".
@@ -442,6 +445,15 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		}
 		f.hard(WhatAnswerMissing, d, Divergence{Line: e.Line, Forge: want, Gorge: optKeys(f, d)})
 		return in, false
+	}
+	if d.Kind == decision.KModes {
+		// Forge's recorder logs no modal answer (a charm's modes, a
+		// modal trigger's, a nested Charm): the AI answers through hooks that
+		// write no ask line, so the next line belongs to a later decision.
+		// Answer by default -- the first modes the ask requires, at least
+		// one -- and consume no line; Forge's real choice, if it differs,
+		// shows at the next snapshot.
+		return f.defaultModes(d), true
 	}
 	if e.Ask == nil {
 		f.hard(WhatKind, d, Divergence{Line: e.Line, Gorge: string(d.Kind), Forge: e.T})
@@ -941,6 +953,45 @@ func optKeys(f *follower, d *decision.Decision) string {
 		}
 	}
 	return strings.Join(out, " ")
+}
+
+// defaultModes answers a modes decision the log has no line for: the first
+// Min modes in offered order (at least one when the ask allows any), within
+// Max and, for a budgeted pick, within MaxSum. A Repeatable ask may name a
+// mode more than once, so its picks cycle through the offered modes.
+func (f *follower) defaultModes(d *decision.Decision) decision.Intent {
+	k := d.Min
+	if k < 1 {
+		k = 1
+	}
+	if k > d.Max {
+		k = d.Max
+	}
+	if !d.Repeatable && k > len(d.Options) {
+		k = len(d.Options)
+	}
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{}}
+	if len(d.Options) == 0 {
+		f.res.Modes++
+		return in
+	}
+	budgeted := d.Budgeted || d.MaxSum > 0
+	sum := 0
+	for i := 0; len(in.Choices) < k && i < k+len(d.Options); i++ {
+		c := i
+		if d.Repeatable {
+			c = i % len(d.Options)
+		} else if c >= len(d.Options) {
+			break
+		}
+		if budgeted && len(in.Choices) >= d.Min && sum+d.Options[c].Value > d.MaxSum {
+			continue
+		}
+		in.Choices = append(in.Choices, c)
+		sum += d.Options[c].Value
+	}
+	f.res.Modes++
+	return in
 }
 
 // gorgeKind maps Forge's ask kind to the gorge decision kind it answers.

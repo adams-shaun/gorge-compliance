@@ -14,6 +14,10 @@
 // cast), attackers, blockers and targets; any other ask kind is a harness
 // divergence (what "error", field "harness:...").
 //
+// Forge's recorder writes no ask line for a modal answer (a charm's modes, a
+// modal trigger's), so a gorge modes decision is answered by default (the
+// first modes it requires; Result.Modes counts them) and consumes no log line.
+//
 // # The forge-shadow-1 log
 //
 // One JSON object per line, told apart by "t". Card identities are Forge's
