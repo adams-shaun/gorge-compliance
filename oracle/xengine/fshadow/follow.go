@@ -108,6 +108,9 @@ type Result struct {
 	// Modes counts the modal picks (a charm's modes, an unless-pay ask) the
 	// log has no line for, which the follower answered by default.
 	Modes int `json:"modes,omitempty"`
+	// Chooses counts the list-picks (discard, keep, x, sacrifice ...) the
+	// log has no line for, which the follower answered by default.
+	Chooses int `json:"chooses,omitempty"`
 	// Arranges counts the arrange decisions (scry, surveil, ...) the log has
 	// no line for, which the follower answered by default.
 	Arranges int `json:"arranges,omitempty"`
@@ -467,6 +470,16 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// allows -- and consume no line; Forge's real choice, if it
 		// differs, shows at the next library_top snapshot.
 		return f.defaultArrange(d), true
+	}
+	if d.Kind == decision.KChoose {
+		// Forge's recorder logs only priority, attack, block and target
+		// asks: a list-pick (a cleanup discard, the legend rule's keep, an
+		// "as this enters" choice, a cost's sacrifice ...) is answered
+		// through hooks that write no ask line, so the next line belongs to
+		// a later decision. Answer by default -- the first Min options in
+		// offered order -- and consume no line; Forge's real choice, if it
+		// differs, shows at the next snapshot.
+		return f.defaultChoose(d), true
 	}
 	if e.Ask == nil {
 		f.hard(WhatKind, d, Divergence{Line: e.Line, Gorge: string(d.Kind), Forge: e.T})
@@ -1051,6 +1064,28 @@ func (f *follower) defaultModes(d *decision.Decision) decision.Intent {
 		sum += d.Options[c].Value
 	}
 	f.res.Modes++
+	return in
+}
+
+// defaultChoose answers a choose decision the log has no line for: the first
+// Min options in offered order (none when Min is 0), capped at Max and at the
+// offered count.
+func (f *follower) defaultChoose(d *decision.Decision) decision.Intent {
+	k := d.Min
+	if d.Max > 0 && k > d.Max {
+		k = d.Max
+	}
+	if k > len(d.Options) {
+		k = len(d.Options)
+	}
+	if k < 0 {
+		k = 0
+	}
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: make([]int, k)}
+	for i := range in.Choices {
+		in.Choices[i] = i
+	}
+	f.res.Chooses++
 	return in
 }
 
