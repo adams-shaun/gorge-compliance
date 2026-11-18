@@ -11,8 +11,10 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/decision"
+	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/engine/state"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
@@ -497,5 +499,39 @@ func TestSplitCardBindsByJoinedName(t *testing.T) {
 		if got := bindsName(c.card, c.name); got != c.want {
 			t.Errorf("bindsName(%q) = %v, want %v", c.name, got, c.want)
 		}
+	}
+}
+
+// TestForgeLibraryTopCutToGorgeDepth is the second pod repro (farm cmdr4,
+// seeds 13000 and 13002): Forge's SnapshotWriter names 5 library cards and
+// gorge's snapshot 3, so the first checkpoint of every real Forge game was a
+// p0.library_top snapshot divergence. The Forge side is cut to gorge's depth
+// before the compare, and a difference within it still counts.
+func TestForgeLibraryTopCutToGorgeDepth(t *testing.T) {
+	x := rules.OracleSnapshot{Players: []rules.OracleSnapPlayer{
+		{Seat: 0, LibraryTop: []string{"Forest", "Island", "Swamp", "Mountain", "Plains"}},
+		{Seat: 1, LibraryTop: []string{"Forest"}},
+	}}
+	got := sameLibraryDepth(x)
+	if want := []string{"Forest", "Island", "Swamp"}; !reflect.DeepEqual(got.Players[0].LibraryTop, want) {
+		t.Errorf("seat 0 library_top = %v, want %v", got.Players[0].LibraryTop, want)
+	}
+	if !reflect.DeepEqual(got.Players[1].LibraryTop, []string{"Forest"}) {
+		t.Errorf("seat 1 library_top = %v, want [Forest]", got.Players[1].LibraryTop)
+	}
+	if len(x.Players[0].LibraryTop) != 5 {
+		t.Errorf("the log's snapshot was modified: %v", x.Players[0].LibraryTop)
+	}
+	g := x
+	g.Players = []rules.OracleSnapPlayer{
+		{Seat: 0, LibraryTop: []string{"Forest", "Island", "Swamp"}},
+		{Seat: 1, LibraryTop: []string{"Forest"}},
+	}
+	if v := oraclediff.CompareOpts(rules.OracleResult{Snapshots: []rules.OracleSnapshot{g}}, nil, oraclediff.XResult{Snapshots: []rules.OracleSnapshot{got}}, nil); v.Status != oraclediff.Agree {
+		t.Errorf("gorge's 3 against Forge's first 3: %v %s", v.Status, v.Field)
+	}
+	g.Players[0].LibraryTop = []string{"Forest", "Swamp", "Island"}
+	if v := oraclediff.CompareOpts(rules.OracleResult{Snapshots: []rules.OracleSnapshot{g}}, nil, oraclediff.XResult{Snapshots: []rules.OracleSnapshot{got}}, nil); v.Status == oraclediff.Agree {
+		t.Error("an order difference within gorge's depth agreed")
 	}
 }

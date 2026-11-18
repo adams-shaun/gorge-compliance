@@ -757,9 +757,27 @@ func (f *follower) soft(e Entry, d *decision.Decision, gorgeKeys []string) {
 	f.res.Soft = append(f.res.Soft, Soft{Line: e.Line, Ask: e.Ask.N, Seat: e.Ask.Seat, Kind: string(d.Kind), OnlyForge: onlyF, OnlyGorge: onlyG, Cards: f.keyCards(append(append([]string{}, onlyF...), onlyG...))})
 }
 
+// sameLibraryDepth cuts every seat's library_top in Forge's snapshot to the
+// libraryTopN cards gorge's names: Forge's SnapshotWriter names 5
+// (LIBRARY_TOP_N), gorge's 3, so every snapshot of a real Forge game differed
+// on p<k>.library_top at its first checkpoint (farm cmdr4 pods 13000 and
+// 13002: a 3-name list against a 5-name one, the first 3 equal). The cards
+// beyond gorge's depth are not compared; the ones within it still are.
+func sameLibraryDepth(x rules.OracleSnapshot) rules.OracleSnapshot {
+	ps := make([]rules.OracleSnapPlayer, len(x.Players))
+	copy(ps, x.Players)
+	for i := range ps {
+		if len(ps[i].LibraryTop) > libraryTopN {
+			ps[i].LibraryTop = ps[i].LibraryTop[:libraryTopN:libraryTopN]
+		}
+	}
+	x.Players = ps
+	return x
+}
+
 func (f *follower) compareSnap(e Entry) bool {
 	f.res.Snaps++
-	x := e.Snap.Snapshot
+	x := sameLibraryDepth(e.Snap.Snapshot)
 	g := Snapshot(f.e, x.Checkpoint)
 	v := oraclediff.CompareOpts(rules.OracleResult{Snapshots: []rules.OracleSnapshot{g}}, nil, oraclediff.XResult{Snapshots: []rules.OracleSnapshot{x}}, nil)
 	if v.Status == oraclediff.Agree {
