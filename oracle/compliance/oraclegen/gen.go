@@ -1569,6 +1569,14 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// a "yes" ahead of it. The decline already scripts "no".
 				as = append(as, XAnswer{d.Seat, "choice", "yes"})
 			}
+			if hiddenPickUnanswerable(d) {
+				// A hidden-zone pick (a graveyard "you may return a land
+				// card") among same-named cards no exact answer can name: the
+				// bare label would let XMage return whichever one it meets
+				// first. Script nothing; the replay reports the missing
+				// answer instead of a false divergence (CR 608.2d).
+				break
+			}
 			if len(d.Picks) > 1 && allChoiceQueue(d) {
 				// One makeChoose dialog consumes ONE definition, whose own
 				// parser splits on '^' into the multi-card selection (Dig's
@@ -2952,6 +2960,30 @@ func namesObject(label, ref string) bool {
 		return true
 	}
 	return strings.EqualFold(label, oraclediffRefName(ref))
+}
+
+// hiddenPickUnanswerable reports a hidden_pick decision with a pick that
+// shares its name with another offered object and has no exact spelling:
+// ClassifySameName finds no alias or unique copy marker (the ref is
+// rank-derived) and no owner prefix separates the candidates (both objects
+// are one seat's). A bare name there reaches XMage's first same-named card
+// (Pothole Mole returning the setup Forest, xe:RAND:1:5:w13), so the choice
+// is withheld. Only a label that names the object is affected: a pick with an
+// action label keeps its literal answer.
+func hiddenPickUnanswerable(d rules.OracleDecision) bool {
+	if d.Resume != "hidden_pick" {
+		return false
+	}
+	for k := range d.PickRefs {
+		if k >= len(d.Picks) || !ClassifySameName(d, k).Unanswerable ||
+			!namesObject(d.Picks[k], d.PickRefs[k]) {
+			continue
+		}
+		if ownerQualifiedRef(d, k) == "" {
+			return true
+		}
+	}
+	return false
 }
 
 // ExactRefAlias is the "@ref" answer (or the ref's exact owner-qualified form)
