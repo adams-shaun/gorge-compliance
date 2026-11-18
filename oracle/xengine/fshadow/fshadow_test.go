@@ -626,6 +626,83 @@ func TestUnloggedArrangeIsAnsweredByDefault(t *testing.T) {
 	}
 }
 
+// TestMulliganBottomWaitsForTheBottomingAsk is the farm cmdr4 repro (EOE and
+// OTJ pods, seed 13003, log line 17): Forge bottoms a London mulligan's cards
+// right after drawing, so its mull line for a kept hand carries the bottom;
+// gorge asks every seat keep-or-mulligan first and the bottoming of every
+// kept hand after, in seat order. In a 4-seat pod the next keep ask belongs
+// to another seat, and the follower, still holding the first seat's line for
+// its bottom, stopped on "mulligan seat: gorge 3, Forge 1". The bottom is
+// now remembered by seat and answers the bottoming ask whenever it comes.
+func TestMulliganBottomWaitsForTheBottomingAsk(t *testing.T) {
+	l, err := Read(strings.NewReader(`{"t":"header","format":"forge-shadow-1","seats":[{"seat":0},{"seat":1},{"seat":2},{"seat":3}]}
+{"t":"mull","seat":1,"keep":true,"bottom":[201,202]}
+{"t":"mull","seat":3,"keep":true}
+{"t":"ask","n":1,"seat":1,"turn":1,"step":"main1","kind":"priority","answer":{"action":"pass"}}
+`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	f := &follower{log: l, toG: map[int]state.ObjID{201: 11, 202: 12, 203: 13}}
+	keepAsk := func(p state.PlayerID) *decision.Decision {
+		return &decision.Decision{Seq: 1, Player: p, Kind: decision.KMulligan, Min: 1, Max: 1,
+			Options: []decision.Option{{Index: 0, Kind: "keep"}, {Index: 1, Kind: "mulligan"}}}
+	}
+	bottomAsk := &decision.Decision{Seq: 3, Player: 1, Kind: decision.KMulligan, Min: 2, Max: 2,
+		Options: []decision.Option{{Index: 0, Kind: "bottom", Obj: 13}, {Index: 1, Kind: "bottom", Obj: 12}, {Index: 2, Kind: "bottom", Obj: 11}}}
+	for _, c := range []struct {
+		d    *decision.Decision
+		want []int
+		pos  int
+	}{
+		{keepAsk(1), []int{0}, 1},
+		{keepAsk(3), []int{0}, 2},
+		{bottomAsk, []int{2, 1}, 2},
+	} {
+		in, ok := f.answer(c.d, l.Entries[f.pos])
+		if !ok || f.res.Hard != nil {
+			t.Fatalf("%s for seat %d: hard divergence %+v", c.d.Kind, c.d.Player, f.res.Hard)
+		}
+		if !reflect.DeepEqual(in.Choices, c.want) || f.pos != c.pos {
+			t.Errorf("seat %d: choices %v pos %d, want %v pos %d", c.d.Player, in.Choices, f.pos, c.want, c.pos)
+		}
+	}
+}
+
+// TestPriorityActivateMapsToAbilityOption is the farm cmdr4 repro (FDN-s131
+// pods 13101 and 13103, Blast Zone and Evolving Wilds): Forge's seat
+// activated a land's printed ability and the follower stopped with
+// "unsupported priority action activate" (class answer-unmapped). gorge lists
+// that as an "ability" option on the same card, which the follower now picks.
+func TestPriorityActivateMapsToAbilityOption(t *testing.T) {
+	const host, wilds = 301, state.ObjID(41)
+	d := &decision.Decision{Seq: 9, Player: 3, Kind: decision.KPriority, Options: []decision.Option{
+		{Index: 0, Kind: "pass"},
+		{Index: 1, Kind: "ability", Obj: 7, Ability: 0},
+		{Index: 2, Kind: "ability", Obj: wilds, Ability: 0},
+		{Index: 3, Kind: "ability", Obj: wilds, Ability: 1},
+	}}
+	f := &follower{log: &Log{}, toG: map[int]state.ObjID{host: wilds, 302: 7}}
+	// One ability option on the card: the answer is that option.
+	one := *d
+	one.Options = d.Options[:3]
+	in, dv := f.priority(&one, parseAsk(t, `{"t":"ask","n":254,"seat":3,"turn":5,"step":"main1","kind":"priority","options":[{"action":"activate","card":301,"ability":9}],"answer":{"action":"activate","card":301,"ability":9}}`))
+	if dv != nil || !reflect.DeepEqual(in.Choices, []int{2}) {
+		t.Fatalf("single ability: intent %+v divergence %+v, want option 2", in, dv)
+	}
+	// Two: the ability's rank among Forge's activate options picks the option.
+	in, dv = f.priority(d, parseAsk(t, `{"t":"ask","n":254,"seat":3,"turn":5,"step":"main1","kind":"priority","options":[{"action":"activate","card":301,"ability":20},{"action":"activate","card":301,"ability":21}],"answer":{"action":"activate","card":301,"ability":21}}`))
+	if dv != nil || !reflect.DeepEqual(in.Choices, []int{3}) {
+		t.Fatalf("two abilities: intent %+v divergence %+v, want option 3", in, dv)
+	}
+	// A card gorge offers no ability on is answer-missing, not a harness gap.
+	in, dv = f.priority(&decision.Decision{Seq: 9, Player: 3, Kind: decision.KPriority, Options: d.Options[:1]},
+		parseAsk(t, `{"t":"ask","n":254,"seat":3,"turn":5,"step":"main1","kind":"priority","answer":{"action":"activate","card":301,"ability":9}}`))
+	if dv == nil || dv.What != WhatAnswerMissing || dv.Harness != "" {
+		t.Fatalf("no ability offered: %+v, want answer-missing", dv)
+	}
+}
+
 // TestChooseWithoutALogLineAnsweredByDefault is the farm cmdr4 repro (seeds
 // 13100 and 13102): gorge asks a list-pick (KChoose) where Forge's next log
 // line is the seat's priority, because Forge's recorder logs only priority,
@@ -662,5 +739,81 @@ func TestChooseWithoutALogLineAnsweredByDefault(t *testing.T) {
 		if f.pos != 0 || f.res.Chooses != 1 || f.res.Asks != 0 {
 			t.Errorf("%s: pos %d chooses %d asks %d, want the log line left unconsumed", c.name, f.pos, f.res.Chooses, f.res.Asks)
 		}
+	}
+}
+
+// TestSnapshotAheadOfUnloggedDecisionWaits is the farm cmdr4 repro (EOE and
+// OTJ pod 13002, HOB pod 12903): gorge waits on a cleanup discard (turn 2)
+// while Forge, which logs no ask for it, has already answered and written the
+// next snapshot (turn 3). The follower compared that snapshot against gorge's
+// pre-discard state and stopped on "snapshot turn: gorge 2, forge 3". It must
+// answer the unlogged decision by default first, and only then compare.
+func TestSnapshotAheadOfUnloggedDecisionWaits(t *testing.T) {
+	snap := func(turn int, step string) Entry {
+		return Entry{Line: 97, T: TSnap, Snap: &Snap{T: TSnap, Snapshot: rules.OracleSnapshot{Turn: int32(turn), Step: step}}}
+	}
+	cleanup := at(2, "cleanup")
+	for _, c := range []struct {
+		name string
+		kind decision.Kind
+		e    Entry
+		at   int
+		want bool
+	}{
+		{"discard waits for the next turn's snapshot", decision.KChoose, snap(3, "upkeep"), cleanup, true},
+		{"modes", decision.KModes, snap(3, "upkeep"), cleanup, true},
+		{"arrange", decision.KArrange, snap(2, "main2"), at(2, "main1"), true},
+		{"a snapshot of this very step is compared", decision.KChoose, snap(2, "cleanup"), cleanup, false},
+		{"a logged decision still compares", decision.KPriority, snap(3, "upkeep"), cleanup, false},
+		{"a mulligan still compares", decision.KMulligan, snap(3, "upkeep"), cleanup, false},
+		{"not a snapshot", decision.KChoose, Entry{Line: 3, T: TAsk}, cleanup, false},
+	} {
+		if got := snapAheadOfUnlogged(c.e, c.at, &decision.Decision{Kind: c.kind}); got != c.want {
+			t.Errorf("%s: got %v, want %v", c.name, got, c.want)
+		}
+	}
+}
+
+// TestFollowAnswersUnloggedChooseBeforeAheadSnapshot drives the real
+// follower loop (not just snapAheadOfUnlogged): the golden log is doctored so
+// seat 0 keeps its 7 and passes without playing a land on turn 2, so gorge
+// asks a cleanup discard (KChoose, no log line) at turn 2's cleanup while the
+// log's next entry is a snapshot of turn 3. The follower must answer the
+// discard by default first (Chooses == 1) and not stop on the "turn" field
+// of that snapshot; with the run-loop deferral removed it stops there.
+func TestFollowAnswersUnloggedChooseBeforeAheadSnapshot(t *testing.T) {
+	l := readGolden(t)
+	var entries []Entry
+	mulls := 0
+	for _, e := range l.Entries {
+		switch {
+		case e.Snap != nil || e.End != nil:
+			continue
+		case e.Mull != nil && e.Mull.Seat == 0:
+			mulls++
+			if mulls == 1 { // the mulligan: keep the opening seven instead
+				e.Mull.Keep = true
+			} else {
+				continue
+			}
+		case e.Shuffle != nil && e.Shuffle.Seat == 0 && len(entries) > 0 && mulls > 0:
+			continue // the post-mulligan reshuffle
+		case e.Ask != nil && e.Ask.Seat == 0 && e.Ask.Turn == 2 && e.Ask.Step == "main1" && e.Ask.Answer.Action == "land":
+			continue // no land play: the pass that follows it is the seat's only main1 ask
+		}
+		if e.Ask != nil && e.Ask.Turn > 2 {
+			continue
+		}
+		entries = append(entries, e)
+	}
+	last := entries[len(entries)-1].Line
+	entries = append(entries, Entry{Line: last + 1, T: TSnap, Snap: &Snap{T: TSnap, Snapshot: rules.OracleSnapshot{Turn: 3, Step: "upkeep"}}})
+	l.Entries = entries
+	res := follow(t, l)
+	if res.Chooses != 1 {
+		t.Errorf("chooses %d, want the cleanup discard answered by default once (hard %+v)", res.Chooses, res.Hard)
+	}
+	if h := res.Hard; h != nil && (h.Field == "turn" || h.Line == last+1 && h.Gorge == "2") {
+		t.Errorf("stopped comparing the turn-3 snapshot against gorge's pre-discard state: %+v", h)
 	}
 }

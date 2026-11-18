@@ -136,9 +136,9 @@ type follower struct {
 
 	setupHarness string // a header gorge's Config cannot express
 
-	pos      int  // next unread entry
-	mullKept bool // the current mull line's keep has been answered; its bottom is next
-	res      Result
+	pos        int           // next unread entry
+	mullBottom map[int][]int // Forge seat -> the bottom its kept mull line carried, until gorge's bottoming ask for that seat
+	res        Result
 }
 
 // Follow replays l in gorge. A setup failure (an unknown card, a binding
@@ -330,6 +330,23 @@ func at(turn int, step string) int {
 	return turn*100 + stepOrder[step]
 }
 
+// unloggedKind reports whether Forge's recorder writes no ask line for a
+// decision of kind k, so the follower answers it by default (answer).
+func unloggedKind(k decision.Kind) bool {
+	return k == decision.KChoose || k == decision.KModes || k == decision.KArrange
+}
+
+// snapAheadOfUnlogged reports whether snapshot entry e describes a point past
+// gorge's position while gorge waits on an unlogged decision (a cleanup
+// discard, a modal pick, a scry): Forge answered it with no ask line and moved
+// on, so the snapshot is the state after the answer. Comparing now would read
+// gorge's pre-answer state (farm cmdr4: gorge turn 2 against Forge turn 3 at
+// the cleanup discard); the follower answers by default first and compares
+// the snapshot at the state the answer reaches.
+func snapAheadOfUnlogged(e Entry, gorge int, d *decision.Decision) bool {
+	return e.Snap != nil && unloggedKind(d.Kind) && at(int(e.Snap.Snapshot.Turn), e.Snap.Snapshot.Step) > gorge
+}
+
 func (f *follower) gorgeAt() int { return at(int(f.e.G.Turn), f.e.G.Step.String()) }
 
 func (f *follower) run(max int) {
@@ -360,10 +377,19 @@ func (f *follower) run(max int) {
 			if e.Snap == nil {
 				break
 			}
+			if d := f.e.Pending(); d != nil && d.Kind == decision.KMulligan && isBottomingAsk(d) {
+				// The bottoming of a kept hand reads no line (its bottom came
+				// with the keep), so the snapshot that follows that keep
+				// belongs to the state after the bottoming, not before it.
+				break
+			}
 			if at(int(e.Snap.Snapshot.Turn), e.Snap.Snapshot.Step) < f.gorgeAt() && !f.e.G.Over {
 				f.res.SkippedSnaps++
 				f.pos++
 				continue
+			}
+			if pend := f.e.Pending(); pend != nil && snapAheadOfUnlogged(e, f.gorgeAt(), pend) {
+				break
 			}
 			if !f.compareSnap(e) {
 				return
@@ -413,6 +439,22 @@ func (f *follower) run(max int) {
 func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
 	if d.Kind == decision.KMulligan {
+		if isBottomingAsk(d) {
+			// Forge bottoms a London mulligan's cards right after drawing, so
+			// its mull line for the kept hand carries the bottom and was
+			// consumed with the keep. gorge asks every seat keep-or-mulligan
+			// first and the bottoming of each kept hand after, in seat order:
+			// the answer is the seat's remembered bottom, and no line is read.
+			bottom, ok := f.mullBottom[int(d.Player)]
+			idx, missing := f.objIndices(d, bottom)
+			if !ok || missing != "" || len(idx) != d.Min {
+				f.hard(WhatAnswerMissing, d, Divergence{Line: e.Line, Field: "bottom", Forge: fmt.Sprint(bottom), Gorge: optKeys(f, d), Detail: missing})
+				return in, false
+			}
+			delete(f.mullBottom, int(d.Player))
+			in.Choices = idx
+			return in, true
+		}
 		if e.Mull == nil {
 			f.hard(WhatKind, d, Divergence{Line: e.Line, Gorge: string(d.Kind), Forge: e.T + forgeKind(e)})
 			return in, false
@@ -422,18 +464,6 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 			f.hard(WhatKind, d, Divergence{Line: e.Line, Field: "seat", Gorge: fmt.Sprint(d.Player), Forge: fmt.Sprint(m.Seat)})
 			return in, false
 		}
-		if f.mullKept {
-			// The bottoming ask of a kept hand.
-			idx, missing := f.objIndices(d, m.Bottom)
-			if missing != "" || len(idx) != d.Min {
-				f.hard(WhatAnswerMissing, d, Divergence{Line: e.Line, Field: "bottom", Forge: fmt.Sprint(m.Bottom), Gorge: optKeys(f, d), Detail: missing})
-				return in, false
-			}
-			in.Choices = idx
-			f.mullKept = false
-			f.pos++
-			return in, true
-		}
 		want := "mulligan"
 		if m.Keep {
 			want = "keep"
@@ -442,10 +472,12 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 			if o.Kind == want {
 				in.Choices = []int{i}
 				if m.Keep && len(m.Bottom) > 0 {
-					f.mullKept = true // the same line answers the bottoming ask next
-				} else {
-					f.pos++
+					if f.mullBottom == nil {
+						f.mullBottom = map[int][]int{}
+					}
+					f.mullBottom[m.Seat] = m.Bottom
 				}
+				f.pos++
 				return in, true
 			}
 		}
@@ -548,8 +580,55 @@ func (f *follower) priority(d *decision.Decision, a *Ask) (decision.Intent, *Div
 			return in, f.unbound(a.Answer.Card)
 		}
 		return f.cast(d, a, g)
+	case "activate":
+		g, ok := f.toG[a.Answer.Card]
+		if !ok {
+			return in, f.unbound(a.Answer.Card)
+		}
+		return f.activate(d, a, g)
 	}
 	return in, &Divergence{What: WhatError, Harness: HarnessUnmapped, Detail: "unsupported priority action " + a.Answer.Action, Forge: a.Answer.Action}
+}
+
+// activate answers a Forge "activate" with gorge's "ability" option of the
+// same card (a printed activated ability that is not a mana tap: Evolving
+// Wilds' sacrifice, a manland's animation). Forge's ability id is a
+// SpellAbility id, not an index into the card's faces, so it cannot name
+// gorge's option directly. A card with one ability option has one answer; with
+// several, the ability's rank among the activate options Forge listed for the
+// card picks the option of the same rank, when both sides list as many.
+func (f *follower) activate(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
+	in := decision.Intent{Seq: d.Seq, Player: d.Player}
+	var cands []int
+	for i, o := range d.Options {
+		if o.Kind == "ability" && o.Obj == obj {
+			cands = append(cands, i)
+		}
+	}
+	pick := -1
+	switch {
+	case len(cands) == 1:
+		pick = cands[0]
+	case len(cands) > 1:
+		var ids []int
+		for _, o := range a.Options {
+			if o.Action == "activate" && o.Card == a.Answer.Card {
+				ids = append(ids, o.Ability)
+			}
+		}
+		if len(ids) == len(cands) {
+			for r, id := range ids {
+				if id == a.Answer.Ability {
+					pick = cands[r]
+				}
+			}
+		}
+	}
+	if pick < 0 {
+		return in, &Divergence{What: WhatAnswerMissing, Forge: answerKey(a.Answer)}
+	}
+	in.Choices = []int{pick}
+	return in, nil
 }
 
 // cast pays a cast with the payment plan whose activations tap exactly the
@@ -1181,4 +1260,10 @@ func equalIDs(a, b []state.ObjID) bool {
 		}
 	}
 	return true
+}
+
+// isBottomingAsk reports whether d is a London bottoming ask (CR 103.5) as
+// opposed to a keep-or-mulligan one: its options are the cards of the hand.
+func isBottomingAsk(d *decision.Decision) bool {
+	return len(d.Options) > 0 && d.Options[0].Kind == "bottom"
 }
