@@ -84,12 +84,16 @@ func uniqueCurrentFaceName(d rules.OracleDecision, k int) (string, bool) {
 		return "", false
 	}
 	seen := 0
+	setup := oraclediffRefName(d.PickRefs[k])
 	for _, ref := range d.OptionRefs {
 		if ref == d.PickRefs[k] {
 			seen++
 			continue
 		}
-		if strings.EqualFold(oraclediffRefName(ref), name) {
+		// An option restated under the pick's setup name (liveNamedSameNames:
+		// a copy effect gave it the pick's current name) is as ambiguous as
+		// one that names the current face itself.
+		if strings.EqualFold(oraclediffRefName(ref), name) || strings.EqualFold(oraclediffRefName(ref), setup) {
 			return "", false
 		}
 	}

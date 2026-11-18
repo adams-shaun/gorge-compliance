@@ -350,7 +350,59 @@ public final class ScenarioReplayPaymentTest {
         System.out.println("PASS a hybrid pip is paid with the plan's half, leaving W");
     }
 
+    private static void testTapPaymentPickParsing() throws Exception {
+        Class<?> cls = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
+        Method pick = cls.getDeclaredMethod("tapPaymentPick", String.class);
+        pick.setAccessible(true);
+        equal("[Crimson Operative, 1]", java.util.Arrays.toString((String[]) pick.invoke(null, "Tap Crimson Operative for 1")));
+        equal("[Hexing Squelcher, R]", java.util.Arrays.toString((String[]) pick.invoke(null, "Tap Hexing Squelcher for R")));
+        for (String no : new String[] {"Tap Elves for mana", "Tap Giant Koi to waterbend for 1",
+                "Tap Grizzly Bears (reduce by 2)", "Tap Grizzly Bears instead of paying 1", "Island", "Tap  for 1", null}) {
+            if (pick.invoke(null, no) != null) {
+                throw new AssertionError("label parsed as a payment tap: " + no);
+            }
+        }
+        Method colour = cls.getDeclaredMethod("tapPaymentColourName", String.class);
+        colour.setAccessible(true);
+        equal("Red", colour.invoke(null, "R"));
+        equal("Colorless", colour.invoke(null, "1"));
+        System.out.println("PASS payment-tap labels parse to the permanent and its contribution");
+    }
+
+    /** An improvise-shaped special action (rule text "Improvise (...)", an
+     * artifact target) with the recorded tap pick at the front of the choice
+     * queue and the recorded multiset spent: playMana must translate the pick
+     * to the action's choice key and target, keep manual payment, and take
+     * the action, not fall back to auto-payment and leave the pick queued. */
+    private static void testImproviseTapIsTakenAsSpecialAction() throws Exception {
+        Game game = game();
+        ScriptedPayment sp = newPlayer(game);
+        TestPlayer p = sp.player;
+        p.updateRange(game);
+        mage.game.permanent.PermanentToken artifact = new mage.game.permanent.PermanentToken(
+                new mage.game.permanent.token.TreasureToken(), p.getId(), game);
+        game.addPermanent(artifact, 0);
+        // The real improvise special action, built the way the cast's
+        // payment cycle builds it for {4}{U}.
+        ManaCostsImpl<ManaCost> costs = new ManaCostsImpl<>("{4}{U}");
+        SpellAbility spell = new SpellAbility(costs, "Improvise test");
+        spell.setControllerId(p.getId());
+        new mage.abilities.keyword.ImproviseAbility().addSpecialAction(spell, game, costs);
+        sp.begin("");
+        p.addChoice("Tap Treasure Token for 1");
+        p.addChoice(TestPlayer.CHOICE_SKIP);
+        Method queue = p.getClass().getDeclaredMethod("queueTapPaymentAction", Game.class);
+        queue.setAccessible(true);
+        equal(true, queue.invoke(p, game));
+        equal("[Improvise]", p.getChoices().toString());
+        equal("[Treasure Token]", p.getTargets().toString());
+        sp.end();
+        System.out.println("PASS an improvise tap pick becomes the special action's choice key and target");
+    }
+
     public static void main(String[] args) throws Exception {
+        testTapPaymentPickParsing();
+        testImproviseTapIsTakenAsSpecialAction();
         testRecordedSplit();
         testGorgeSplit();
         testRunCodeRecordedPayment();
