@@ -3,7 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os/exec"
 	"path/filepath"
+	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/adjudicate"
@@ -28,9 +30,15 @@ func runAdjudicate(args []string) error {
 	ledger := fs.String("ledger", "", "also write the compact ledger shards here (outside the repository; opt-in, nothing is committed by this tool)")
 	forgeRef := fs.String("forge-ref", "", "FORGE_ORACLE_REF[:12] stamped on ledger rows")
 	verdicts := fs.String("verdicts", compliance.VerdictDir, "committed verdict directory (a card with an agree row there needs two findings to be drafted)")
+	fshadow := fs.String("fshadow", "", "xengine fshadow output dir: its divergence-<n>.json findings get signatures, a class census (census.tsv) and one brief per class under tickets/; without -play the three-way inputs are not needed")
+	manifest := fs.String("manifest", "", "with -fshadow: the deck manifest TSV (edh-manifest.tsv) whose decks rank a card; private data, never committed")
+	decklists := fs.String("decklists", "", "with -fshadow: the stored decklists (default edh-decks.jsonl beside -manifest)")
+	cardsDir := fs.String("cards", ".cards", "with -fshadow: corpus dir, for each implicated card's IR (its primitive and paper factor)")
+	setManifests := fs.String("set-manifests", "oracle/compliance/manifests", "with -fshadow: the committed set manifests (a card printed only in an Un- set ranks as digital)")
+	gorgeSrc := fs.String("gorge-src", "", "with -fshadow: the gorge module dir, for the briefs' handler file:function (default `go list -m` of gorge)")
 	fs.Parse(args)
-	if *playDir == "" || *xDiff == "" || *fDiff == "" || *out == "" {
-		return fmt.Errorf("adjudicate needs -play, -xmage, -forge and -out")
+	if *out == "" || (*fshadow == "" && (*playDir == "" || *xDiff == "" || *fDiff == "")) {
+		return fmt.Errorf("adjudicate needs -out and either -play, -xmage and -forge, or -fshadow")
 	}
 	for _, p := range []string{*out, *ledger} {
 		if p == "" {
@@ -40,17 +48,29 @@ func runAdjudicate(args []string) error {
 			return err
 		}
 	}
-	if *xRows == "" {
-		*xRows = filepath.Join(*playDir, "xmage.jsonl")
+	var in adjudicate.Input
+	if *playDir != "" {
+		if *xDiff == "" || *fDiff == "" {
+			return fmt.Errorf("adjudicate -play needs -xmage and -forge")
+		}
+		if *xRows == "" {
+			*xRows = filepath.Join(*playDir, "xmage.jsonl")
+		}
+		if *fRows == "" {
+			*fRows = filepath.Join(*playDir, "forge.jsonl")
+		}
+		var err error
+		if in, err = adjudicate.Load(*playDir, *xDiff, *fDiff, *xRows, *fRows); err != nil {
+			return err
+		}
 	}
-	if *fRows == "" {
-		*fRows = filepath.Join(*playDir, "forge.jsonl")
+	if *fshadow != "" {
+		if err := loadFShadow(&in, *fshadow, *manifest, *decklists, *cardsDir, *setManifests, *gorgeSrc); err != nil {
+			return err
+		}
 	}
-	in, err := adjudicate.Load(*playDir, *xDiff, *fDiff, *xRows, *fRows)
-	if err != nil {
-		return err
-	}
-	if *pDiff != "" {
+	var err error
+	if *pDiff != "" && *playDir != "" {
 		if *pRows == "" {
 			*pRows = filepath.Join(*playDir, "phase.jsonl")
 		}
@@ -75,6 +95,9 @@ func runAdjudicate(args []string) error {
 		hist[r.Pattern]++
 	}
 	fmt.Printf("adjudicated %d items into %s: %d cluster(s), %d ticket draft(s)\n", len(res.Rows), *out, len(res.Clusters), len(res.Drafts))
+	if res.Census != nil {
+		fmt.Printf("fshadow: %d finding(s), %d class(es), %d harness class(es); census.tsv\n", len(in.FShadow), len(res.Census.Classes), len(res.Census.Harness))
+	}
 	for _, p := range []string{"AGREE3", "GF|X", "FX|G", "GX|F", "G|F|X", "GF|–", "G|F|–", "F harness", "INCONSISTENT"} {
 		if hist[p] > 0 {
 			fmt.Printf("  %-13s %d\n", p, hist[p])
@@ -102,4 +125,41 @@ func printFour(rows []adjudicate.FourRow) {
 		fmt.Printf(" %s=%d", k, votes[k])
 	}
 	fmt.Println()
+}
+
+// loadFShadow adds the fshadow findings under dir to in, with the ranker the
+// census reads: the implicated cards' IR from the corpus, manifest deck counts
+// (one deck each without -manifest), Un- set membership and handler names.
+func loadFShadow(in *adjudicate.Input, dir, manifest, decklists, cardsDir, setManifests, gorgeSrc string) error {
+	divs, err := adjudicate.LoadFShadow(dir)
+	if err != nil {
+		return err
+	}
+	in.FShadow = divs
+	reg, err := loadReg(cardsDir)
+	if err != nil {
+		return fmt.Errorf("-cards %s: %v", cardsDir, err)
+	}
+	var unOnly map[string]bool
+	if setManifests != "" {
+		if unOnly, err = adjudicate.UnOnlyNames(setManifests); err != nil {
+			return err
+		}
+	}
+	in.Rank = adjudicate.Ranker{Primitive: adjudicate.RegistryPrimitive(reg), Paper: adjudicate.RegistryPaper(reg, unOnly)}
+	if manifest != "" {
+		if decklists == "" {
+			decklists = filepath.Join(filepath.Dir(manifest), "edh-decks.jsonl")
+		}
+		if in.Rank.Decks, err = adjudicate.LoadDeckCounts(manifest, decklists); err != nil {
+			return err
+		}
+	}
+	if gorgeSrc == "" {
+		if b, err := exec.Command("go", "list", "-m", "-f", "{{.Dir}}", "github.com/adams-shaun/gorge").Output(); err == nil {
+			gorgeSrc = strings.TrimSpace(string(b))
+		}
+	}
+	in.Rank.Suspect = adjudicate.HandlerSuspect(gorgeSrc)
+	return nil
 }

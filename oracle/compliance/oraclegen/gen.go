@@ -2970,6 +2970,17 @@ func namesObject(label, ref string) bool {
 // (Pothole Mole returning the setup Forest, xe:RAND:1:5:w13), so the choice
 // is withheld. Only a label that names the object is affected: a pick with an
 // action label keeps its literal answer.
+//
+// An ask whose every offered object is a copy of the pick's one name held by
+// the pick's own seat (offersOnlyCopiesOf) is NOT withheld. Which copy returns
+// cannot change what the compared state shows when the offered copies are all
+// the zone's cards -- the zone keeps the same name sequence whichever one
+// leaves -- so the bare label is exact enough. Withholding it instead leaves
+// the ask to XMage's own AI, which takes the maximum of an "up to N" pick
+// (Rickety Gazebo: mill four, return up to two permanents; gorge returns the
+// one scripted Wastes, XMage's AI returns two). Pothole Mole's ask offers a
+// different name too, and a copy sitting between other cards moves the
+// zone's order, so it stays withheld.
 func hiddenPickUnanswerable(d rules.OracleDecision) bool {
 	if d.Resume != "hidden_pick" {
 		return false
@@ -2979,11 +2990,34 @@ func hiddenPickUnanswerable(d rules.OracleDecision) bool {
 			!namesObject(d.Picks[k], d.PickRefs[k]) {
 			continue
 		}
-		if ownerQualifiedRef(d, k) == "" {
+		if ownerQualifiedRef(d, k) == "" && !offersOnlyCopiesOf(d, k) {
 			return true
 		}
 	}
 	return false
+}
+
+// offersOnlyCopiesOf reports whether every object decision d offers is a
+// same-named object of pick k's own seat: the candidates differ only in
+// identity, never in name or owner.
+func offersOnlyCopiesOf(d rules.OracleDecision, k int) bool {
+	if k < 0 || k >= len(d.PickRefs) || len(d.OptionRefs) == 0 {
+		return false
+	}
+	name := oraclediffRefName(d.PickRefs[k])
+	seat, ok := refSeat(d.PickRefs[k])
+	if !ok {
+		return false
+	}
+	for _, candidate := range d.OptionRefs {
+		if !strings.EqualFold(oraclediffRefName(candidate), name) || strings.Contains(candidate, ":token:") {
+			return false
+		}
+		if s, ok := refSeat(candidate); !ok || s != seat {
+			return false
+		}
+	}
+	return !strings.Contains(d.PickRefs[k], ":token:")
 }
 
 // ExactRefAlias is the "@ref" answer (or the ref's exact owner-qualified form)

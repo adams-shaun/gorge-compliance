@@ -30,3 +30,46 @@ func TestStackKeysUsesSourcesCurrentName(t *testing.T) {
 		t.Fatalf("spell %q", s)
 	}
 }
+
+// An ability whose source has left the battlefield exists on its own (CR
+// 113.7a) and is built from the source's last-known information (CR
+// 603.10a): a Daring Thunder-Thief that died as a copy of Wanted Griffin is
+// "p0:Daring Thunder-Thief" in gorge's snapshot, which keeps only the setup
+// ref, and "Wanted Griffin" in Forge's. Neither is on the battlefield, so the
+// two sides render the same string.
+func TestStackKeysSourceLeftBattlefield(t *testing.T) {
+	perms := []rules.OracleSnapPerm{{Ref: "p1:Wanted Griffin", Name: "Wanted Griffin"}}
+	gs := rules.OracleSnapshot{Permanents: perms, Stack: []rules.OracleSnapStack{
+		{Kind: "ability", Source: "p1:Wanted Griffin", Controller: 1},
+		{Kind: "ability", Source: "p0:Daring Thunder-Thief", Controller: 0},
+	}}
+	// the follower's perms hold a Wanted Griffin too, so its label alone
+	// cannot say that the p0 source is gone
+	xs := rules.OracleSnapshot{Permanents: perms, Stack: []rules.OracleSnapStack{
+		{Kind: "ability", Source: "Wanted Griffin", Controller: 1},
+		{Kind: "ability", Source: "Wanted Griffin", Controller: 0},
+	}}
+	if a, b := stackKeysOf(gs.Stack, perms), stackKeysOf(xs.Stack, perms); a == b {
+		t.Fatalf("unmasked labels already agree: %q", a)
+	}
+	g, x := pairedStackKeys(gs, xs)
+	if g != x {
+		t.Fatalf("gorge %q, follower %q", g, x)
+	}
+	if want := "[ability:Wanted Griffin@p1, ability:" + leftSourceLabel + "@p0]"; g != want {
+		t.Fatalf("got %q want %q", g, want)
+	}
+	// a differing controller is still a divergence
+	xs.Stack[1].Controller = 1
+	if g, x := pairedStackKeys(gs, xs); g == x {
+		t.Fatalf("controller difference hidden: %q", g)
+	}
+	// a source still on the battlefield keeps its name on both sides
+	gs.Stack[1].Source = "p1:Wanted Griffin"
+	xs.Stack[1].Controller = 0
+	gs.Stack[1].Controller = 0
+	xs.Stack[1].Source = "Other"
+	if g, x := pairedStackKeys(gs, xs); g == x {
+		t.Fatalf("name difference hidden for a live source: %q", g)
+	}
+}

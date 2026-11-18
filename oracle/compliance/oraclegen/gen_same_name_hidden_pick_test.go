@@ -50,3 +50,42 @@ func TestSameNameHiddenPickNeverBareName(t *testing.T) {
 		t.Fatalf("unique-name answer = %+v, want Forest", xa[11])
 	}
 }
+
+// TestSameNameHiddenPickAllCopiesKeepsBareName pins DSK Greenhouse // Rickety
+// Gazebo (mill four, "return up to two permanent cards"): all four offered
+// objects are p0's Wastes, so which one gorge returns is invisible to the
+// compared state. Withholding the pick left the ask to XMage's AI, which took
+// two ([Wastes, Wastes] against gorge's one). The bare label stays scripted.
+func TestSameNameHiddenPickAllCopiesKeepsBareName(t *testing.T) {
+	d := rules.OracleDecision{
+		Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "hidden_pick",
+		Options: 4, Min: 0, Max: 2,
+		Picks: []string{"Wastes"}, PickRefs: []string{"p0:Wastes#27"}, PickIdx: []int{0},
+		PickKinds:       []string{"hidden_pick"},
+		OptionRefs:      []string{"p0:Wastes#27", "p0:Wastes#39", "p0:Wastes#4", "p0:Wastes#2"},
+		PickRefsInexact: []bool{true},
+	}
+	if p := ClassifySameName(d, 0); !p.Unanswerable {
+		t.Fatalf("fixture must be an unanswerable same-name pick: %+v", p)
+	}
+	if hiddenPickUnanswerable(d) {
+		t.Fatalf("an all-copies ask was withheld")
+	}
+	if xa := xanswersSetup([]rules.OracleDecision{d}, 2, nil, nil, nil, nil); len(xa[1]) < 1 || xa[1][0].Value != "Wastes" {
+		t.Fatalf("all-copies answer = %+v, want the bare Wastes first (the up-to ask is then closed with a skip)", xa[1])
+	}
+
+	// A different name among the offers, another seat's same-named card, or
+	// a token copy keeps the withhold.
+	for name, refs := range map[string][]string{
+		"other name":  {"p0:Wastes#27", "p0:Wastes#39", "p0:Forest#4"},
+		"other seat":  {"p0:Wastes#27", "p0:Wastes#39", "p1:Wastes#4"},
+		"token among": {"p0:Wastes#27", "p0:Wastes#39", "p0:token:Wastes"},
+	} {
+		w := d
+		w.OptionRefs = refs
+		if !hiddenPickUnanswerable(w) {
+			t.Errorf("%s: pick not withheld", name)
+		}
+	}
+}

@@ -836,3 +836,29 @@ func TestClassifyPhaseSkipsAttackStep(t *testing.T) {
 		t.Errorf("a pass that resolves a spell does not end the step: %+v", f)
 	}
 }
+
+// TestClassifyShuffledTopExile: after a shuffle, a seat's exile that differs
+// because each engine exiled its own top card is rng; with no shuffle, or with a
+// card the seat's deck cannot hold, it stays a divergence.
+func TestClassifyShuffledTopExile(t *testing.T) {
+	item, tp, g := fixture(0)
+	item.Item.ID = "xe:T:0:0:w1"
+	g.Snapshots[2].Players[0].Exile = []string{"Forest"}
+	exile := func(names ...string) oraclediff.XResult {
+		return follower(g, func(x *oraclediff.XResult) { x.Snapshots[2].Players[0].Exile = names })
+	}
+	item.HasRNG, item.RNGStep = true, 0
+	if f := Classify(item, tp, g, exile("Island"), "xmage"); f.Class != ClassRNG || f.Field != "p0.exile" {
+		t.Errorf("exile after a shuffle: %+v", f)
+	}
+	if f := Classify(item, tp, g, exile("Swamp"), "xmage"); f.Class != ClassDiverge {
+		t.Errorf("a card outside the seat's deck: %+v", f)
+	}
+	if f := Classify(item, nil, g, exile("Island"), "xmage"); f.Class != ClassDiverge {
+		t.Errorf("no tape decks: %+v", f)
+	}
+	item.HasRNG = false
+	if f := Classify(item, tp, g, exile("Island"), "xmage"); f.Class != ClassDiverge {
+		t.Errorf("no shuffle in the window: %+v", f)
+	}
+}
