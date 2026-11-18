@@ -316,6 +316,7 @@ var objectTable = map[string]entry{
 	"UnattachPending":              isRefused("a pending unattach"),
 	"ExiledWith":                   isRefused("reverse exile link; live only when the source object's card says ExiledWith or it is a self-exile (warp, refused as exile_self)"),
 	"ExiledWithInc":                isIgnored("meaningful only with ExiledWith, which is refused"),
+	"Haunting":                     isRefused("an exiled card's haunt link (CR 702.55b) is not placeable; live only when a card in the game reads HauntedBy"),
 	"MayLookPlayer":                isIgnored("meaningful only with HasMayLook, which is refused"),
 	"HasMayLook":                   isRefused("a may-look permission"),
 	"ExiledBy":                     isIgnored("meaningful only with HasExiledBy, which is refused"),

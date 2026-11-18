@@ -126,8 +126,7 @@
      "eq": 1
     }
    ],
-   "xmage": "TwoFacedCardEffectsTest#testCopyCantTransform",
-   "known_bug": "XP[werewolf-flipped-at-setup-then-turn2]: same cause as TransformTest#testTransformCopy: gorge flips Mayor of Avabruck at turn 2's upkeep although it was cast on turn 1 (a probe with only the cast and a pass_to turn 2 main1 shows no Mayor of Avabruck on p0's battlefield), so the Clone is offered a copy of Howlpack Alpha and the expected Mayor copy and Howlpack Alpha at turn 5 do not appear (Howlpack Alpha p0 0, want 1; Mayor of Avabruck p1 0, want 1), CR 701.27, 712, verified at gorge c3b957bf36."
+   "xmage": "TwoFacedCardEffectsTest#testCopyCantTransform"
   }
  ]
 }
