@@ -76,28 +76,34 @@ func sameNameBucketRank(bucket string) int {
 // the Mind's ReduceCost static, adding one TDM unproven item (its pick ref is
 // a rank-derived library card, so no exact answer exists); TDM's unproven pin
 // moved 5 to 6, unresolved stayed 0.
+// Re-measured after 5ddad40, which withholds a same-name hidden_pick no exact
+// answer can name instead of scripting the bare name: a withheld pick has no
+// emitted answer, so it no longer counts as unproven. Unproven moved BLB 5 to
+// 4, DFT 4 to 2, DSK 36 to 35, ECL 5 to 3, FIN 4 to 2, FRA 2 to 1, MSH 3 to 2,
+// OTJ 1 to 0, SPM 2 to 1, TDM 6 to 5, TLA 2 to 1, WOE 3 to 0; alias, copy and
+// unresolved (0 everywhere) did not move.
 // Git history records why each count moved.
 var wantSameNameCensus = map[string]string{
 	"BIG": `{"alias":0,"copy":0,"unresolved":0,"unproven":1,"items":null}`,
-	"BLB": `{"alias":3,"copy":0,"unresolved":0,"unproven":5,"items":null}`,
-	"DFT": `{"alias":0,"copy":0,"unresolved":0,"unproven":4,"items":null}`,
-	"DSK": `{"alias":2,"copy":0,"unresolved":0,"unproven":36,"items":null}`,
-	"ECL": `{"alias":1,"copy":0,"unresolved":0,"unproven":5,"items":null}`,
+	"BLB": `{"alias":3,"copy":0,"unresolved":0,"unproven":4,"items":null}`,
+	"DFT": `{"alias":0,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
+	"DSK": `{"alias":2,"copy":0,"unresolved":0,"unproven":35,"items":null}`,
+	"ECL": `{"alias":1,"copy":0,"unresolved":0,"unproven":3,"items":null}`,
 	"EOE": `{"alias":3,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
 	"FDN": `{"alias":0,"copy":1,"unresolved":0,"unproven":2,"items":null}`,
-	"FIN": `{"alias":0,"copy":0,"unresolved":0,"unproven":4,"items":null}`,
-	"FRA": `{"alias":0,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
+	"FIN": `{"alias":0,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
+	"FRA": `{"alias":0,"copy":0,"unresolved":0,"unproven":1,"items":null}`,
 	"HOB": `{"alias":0,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
 	"LCI": `{"alias":0,"copy":0,"unresolved":0,"unproven":5,"items":null}`,
 	"MKM": `{"alias":3,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
-	"MSH": `{"alias":1,"copy":0,"unresolved":0,"unproven":3,"items":null}`,
-	"OTJ": `{"alias":2,"copy":1,"unresolved":0,"unproven":1,"items":null}`,
+	"MSH": `{"alias":1,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
+	"OTJ": `{"alias":2,"copy":1,"unresolved":0,"unproven":0,"items":null}`,
 	"SOS": `{"alias":1,"copy":0,"unresolved":0,"unproven":5,"items":null}`,
-	"SPM": `{"alias":1,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
-	"TDM": `{"alias":1,"copy":0,"unresolved":0,"unproven":6,"items":null}`,
-	"TLA": `{"alias":1,"copy":1,"unresolved":0,"unproven":2,"items":null}`,
+	"SPM": `{"alias":1,"copy":0,"unresolved":0,"unproven":1,"items":null}`,
+	"TDM": `{"alias":1,"copy":0,"unresolved":0,"unproven":5,"items":null}`,
+	"TLA": `{"alias":1,"copy":1,"unresolved":0,"unproven":1,"items":null}`,
 	"TMT": `{"alias":3,"copy":0,"unresolved":0,"unproven":2,"items":null}`,
-	"WOE": `{"alias":0,"copy":0,"unresolved":0,"unproven":3,"items":null}`,
+	"WOE": `{"alias":0,"copy":0,"unresolved":0,"unproven":0,"items":null}`,
 }
 
 // refName strips a scenario ref to the object name.
