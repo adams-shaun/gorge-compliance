@@ -18,6 +18,11 @@
 // modal trigger's), so a gorge modes decision is answered by default (the
 // first modes it requires; Result.Modes counts them) and consumes no log line.
 //
+// Forge's recorder writes no ask line for a scry, surveil or other
+// library-arranging answer, so a gorge arrange decision is answered by
+// default (offered cards stay on top in order; Result.Arranges counts them)
+// and consumes no log line.
+//
 // # The forge-shadow-1 log
 //
 // One JSON object per line, told apart by "t". Card identities are Forge's
