@@ -165,7 +165,7 @@ func TestPrepareDropsTypedDualColour(t *testing.T) {
 	// a card choice on the later step: neither names a colour, so the drop
 	// must keep both.
 	const cardChoice = "Captain Jean-Luc Picard"
-	for _, step := range []int{0, 2} {
+	for _, step := range []int{0, 1, 2} {
 		res.Decisions = append(res.Decisions, rules.OracleDecision{
 			Step: step, Seat: 0, Kind: "choose_n", Options: 2,
 			Picks: []string{cardChoice}, PickIdx: []int{0},
@@ -196,8 +196,15 @@ func TestPrepareDropsTypedDualColour(t *testing.T) {
 	if got := it.XAbility[1]; got != "{T}: Add {B}" {
 		t.Fatalf("combo prefix = %q, want %q", got, "{T}: Add {B}")
 	}
-	if len(it.XAnswers[1]) != 0 {
-		t.Errorf("combo step answers = %+v, want none", it.XAnswers[1])
+	// The combo step's prefix names the colour, so only its colour answer is
+	// dropped; the non-colour card choice queued on it must survive.
+	for _, a := range it.XAnswers[1] {
+		if a.Kind == "choice" && isColour(a.Value) {
+			t.Errorf("combo step keeps colour answer %q", a.Value)
+		}
+	}
+	if !slices.Contains(it.XAnswers[1], oraclegen.XAnswer{Seat: 0, Kind: "choice", Value: cardChoice}) {
+		t.Errorf("combo step lost the non-colour choice answer: %+v", it.XAnswers[1])
 	}
 	if !slices.Contains(it.XAnswers[2], oraclegen.XAnswer{Seat: 0, Kind: "choice", Value: cardChoice}) {
 		t.Errorf("later step lost the card choice answer: %+v", it.XAnswers[2])
@@ -678,6 +685,15 @@ func TestComboColourPrefix(t *testing.T) {
 	if got := comboColourPrefix("{T}", face("Temple of Deceit"), 0, oraclegen.Step{}); got != "{T}" {
 		t.Errorf("no colour was asked: %q", got)
 	}
+	// An extended prefix naming the first member (Gleaming Bastion) takes the recorded colour.
+	if got := comboColourPrefix("{T}: Add {W}", face("Temple of Deceit"), 0, labelled); got != "{T}: Add {U}" {
+		t.Errorf("an extended first-colour prefix: %q", got)
+	}
+	// Another answer on the step (an arrange ask) does not hide the colour pick.
+	arranged := oraclegen.Step{Answers: []oraclegen.Answer{{Kind: "arrange"}, {Kind: "choose", Pick: []string{"Add U"}}}}
+	if got := comboColourPrefix("{T}", face("Temple of Deceit"), 0, arranged); got != "{T}: Add {U}" {
+		t.Errorf("two answers on the step: %q", got)
+	}
 	if got := comboColourPrefix("{T}: Add {B}.", face("Swamp"), 0, oraclegen.Step{}); got != "{T}: Add {B}." {
 		t.Errorf("a one-colour tap: %q", got)
 	}
@@ -1083,5 +1099,68 @@ func TestPrepareRefusesCommander(t *testing.T) {
 	l.Item.Format = ""
 	if _, ref := Prepare(reg, sp, l, w.g); ref != nil {
 		t.Fatalf("constructed item refused: %+v", ref)
+	}
+}
+
+// TestPrepareBattlefieldModalTriggerMode: a modal trigger of a permanent the
+// item only places on the battlefield (Elven Raft-Steerer's landfall, HOB-s114)
+// answers the mode by its printed number, not by gorge's position among the
+// offered modes: with no opposing creature gorge offers only the second mode.
+func TestPrepareBattlefieldModalTriggerMode(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sp, err := decks.LoadSpellings(manifestDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	const perm = "Elven Raft-Steerer"
+	c, ok := reg.Lookup(perm)
+	if !ok || len(c.Faces) == 0 {
+		t.Fatalf("no corpus card %q", perm)
+	}
+	sc := oraclegen.Scenario{
+		Name: "landfall modal trigger of a battlefield permanent",
+		Why:  "the in-window mode answer is the printed mode number",
+		Setup: map[string]oraclegen.Seat{
+			"p0": {Hand: []string{"Plains"}, Battlefield: []string{perm}},
+			"p1": {Battlefield: []string{"Swamp", "Swamp"}},
+		},
+		Steps: []oraclegen.Step{
+			{Op: "play", Seat: 0, Card: "p0:Plains"},
+			{Op: "pass", Seat: 0},
+		},
+	}
+	l := lower.Lowered{Item: oraclegen.Item{ID: "xe:test:battlefield-modal-trigger", Scenario: sc}}
+	res, err := rules.RunOracleScenarioJSON(reg, l.Item.Raw())
+	if err != nil {
+		t.Fatalf("run scenario: %v", err)
+	}
+	if len(res.Fails) > 0 {
+		t.Fatalf("gorge rejects the scenario: %v", res.Fails)
+	}
+	var pick string
+	for _, d := range res.Decisions {
+		if d.Kind == "mode" && len(d.Picks) == 1 {
+			pick = d.Picks[0]
+		}
+	}
+	printed := oraclegen.ModeNumbers(c.Faces[0])
+	want, ok := printed[pick]
+	if pick == "" || !ok || want < 2 {
+		t.Fatalf("gorge's mode pick %q prints at %d (ok=%v); the test needs a non-first printed mode", pick, want, ok)
+	}
+	it, ref := Prepare(reg, sp, l, res)
+	if ref != nil {
+		t.Fatalf("Prepare refused: %+v", ref)
+	}
+	got := ""
+	for _, as := range it.XAnswers {
+		for _, a := range as {
+			if a.Kind == "mode" {
+				got = a.Value
+			}
+		}
+	}
+	if got != fmt.Sprint(want) {
+		t.Fatalf("mode answer = %q, want printed mode %d (xmage_answers %+v)", got, want, it.XAnswers)
 	}
 }

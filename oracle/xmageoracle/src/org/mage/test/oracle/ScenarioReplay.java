@@ -4149,6 +4149,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 matching.add(ability);
             }
         }
+        // XMage models a split or combo ability ("{T}: Add {R} or {G}") as one
+        // mana ability per colour, so gorge's ability_index names whichever
+        // member XMage listed first. The colour gorge recorded for this
+        // activation decides among distinct text matches before the index is
+        // honoured; the choice is consumed, as XMage poses no colour dialog.
+        if (matching.size() > 1 && !sameRuleText(matching)) {
+            char colour = queuedManaColour(p);
+            ActivatedManaAbilityImpl chosen = colour == 0 ? null : soleColourMatch(matching, colour);
+            if (chosen != null) {
+                p.getChoices().remove(0);
+                return chosen;
+            }
+        }
         ActivatedManaAbilityImpl indexed = abilityIndex == null ? null
                 : activatedAbilityAt(source, g, abilityIndex);
         boolean indexMatches = indexed != null && available.contains(indexed)
@@ -4162,12 +4175,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if (matching.size() > 1) {
             if (sameRuleText(matching)) {
                 return matching.get(0);
-            }
-            char colour = queuedManaColour(p);
-            ActivatedManaAbilityImpl chosen = colour == 0 ? null : soleColourMatch(matching, colour);
-            if (chosen != null) {
-                p.getChoices().remove(0);
-                return chosen;
             }
             throw new IllegalStateException("harness: activate step " + stepIdx + " on " + card + " matches "
                     + matching.size() + " mana abilities for \"" + text + "\" and ability_index "
@@ -5705,24 +5712,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * Unrelenting beside Ajani Goldmane). The scenario names the card: bind a
      * space-free alias to that setup object just ahead of the activation and
      * prefix the command with it ("@ref text from ref object"). A card with no
-     * setup alias (a token, a permanent that entered later) keeps the plain
-     * text.
+     * setup alias (a token, a permanent cast or entered mid-window) is bound
+     * the same way, by the live playable ability whose source carries the
+     * ref's name: left bare, a cost-only text like "{T}" matches any playable
+     * ability that starts with it (a Swamp's "{T}: Add {B}" beside the Hulk's
+     * "{T}: Mill a card."), so XMage would activate the wrong object.
      */
     private String boundActivationText(TestPlayer p, String ref, String text, int stepIdx) {
         String alias = refAlias.get(ref);
-        if (alias == null || text.startsWith("@")) {
+        if (text.startsWith("@")) {
             return text;
         }
         String key = "act" + stepIdx;
         String name = refName(ref);
         runCode("bind " + ref, turn, phase, p, (info, pl, g) -> {
-            UUID setupId = p.getAliasByName(alias);
+            UUID setupId = alias == null ? null : p.getAliasByName(alias);
             UUID id = activationSourceId(p, g, name, text, setupId);
             if (id == null) {
                 id = setupId;
             }
             if (id == null) {
-                throw new IllegalArgumentException("activate " + ref + ": no setup object bound to " + alias);
+                throw new IllegalArgumentException("activate " + ref + ": no live ability for it and no setup object bound to "
+                        + alias);
             }
             for (int j = 0; j < seats; j++) {
                 seat(j).addAlias(key, id);
