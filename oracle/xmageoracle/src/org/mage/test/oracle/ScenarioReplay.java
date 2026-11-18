@@ -5274,9 +5274,34 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), text, stepIdx));
                 return;
             }
-            case "play":
-                playLand(turn, phase, p, xmageSpelling(refName(str(st, "card"))));
+            case "play": {
+                String playRef = str(st, "card");
+                String landName = xmageSpelling(refName(playRef));
+                String playAlias = refAlias.get(playRef);
+                if (playAlias == null) {
+                    playLand(turn, phase, p, landName);
+                    return;
+                }
+                // playLand names the land: XMage enters the FIRST same-named
+                // hand card, not the one the ref's setup alias binds, so a
+                // later "p0:Swamp#4" tap or pick reaches a different land
+                // than gorge's (CR 305.1, 605.3a). Bind a space-free alias to
+                // the hand card the ref means just ahead of the play and
+                // prefix the command with it ("@key Play <name>").
+                String playKey = "play" + stepIdx;
+                runCode("bind " + playRef, turn, phase, p, (info, pl, g) -> {
+                    UUID id = playableLandId(p, g, p.getAliasByName(playAlias), landName);
+                    if (id == null) {
+                        throw new IllegalArgumentException("play " + playRef + ": no " + landName
+                                + " in " + p.getName() + "'s hand");
+                    }
+                    for (int j = 0; j < seats; j++) {
+                        seat(j).addAlias(playKey, id);
+                    }
+                });
+                activateAbility(turn, phase, p, "@" + playKey + " Play " + landName);
                 return;
+            }
             case "pass":
                 // Validated here; its XMage commands are queued around the
                 // checkpoint by queuePassCommands, which the replay loop runs before this step.
@@ -5701,6 +5726,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         });
         return "@" + key + " " + text;
+    }
+
+    /**
+     * The hand card a land-play step plays: the ref's setup-bound object when
+     * it is still in the player's hand (the same card the later mana and pick
+     * refs name), else the first same-named hand card, which is what a
+     * name-only play would enter. Null when the hand holds neither.
+     */
+    private UUID playableLandId(Player p, Game g, UUID bound, String landName) {
+        if (bound != null && p.getHand().contains(bound)) {
+            return bound;
+        }
+        for (Card c : p.getHand().getCards(g)) {
+            if (xmageSpelling(c.getName()).equals(landName)) {
+                return c.getId();
+            }
+        }
+        return null;
     }
 
     /**
