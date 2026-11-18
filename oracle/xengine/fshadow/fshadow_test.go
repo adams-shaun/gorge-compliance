@@ -847,3 +847,77 @@ func TestTargetWithoutALogLineAnsweredByDefault(t *testing.T) {
 		t.Errorf("logged target: ok %v pos %d targets %d intent %+v", ok, f.pos, f.res.Targets, in)
 	}
 }
+
+// mayShuffleFixture builds a follower on the golden log (seat 1 never mulligans, so it has one shuffle) with one extra
+// seat-1 shuffle line appended, carrying the forge ids of seat 1's library
+// as it stands after the opening deal, minus the last drop cards. It stops
+// before any decision, with the engine past genesis.
+func mayShuffleFixture(t *testing.T, drop int) *follower {
+	t.Helper()
+	probe := &follower{log: readGolden(t), reg: corpus(t), toG: map[int]state.ObjID{}, toF: map[state.ObjID]int{}, name: map[int]string{}, shuffles: map[int][]*Shuffle{}, planned: map[int]int{}, start: -1}
+	if err := probe.setup(); err != nil {
+		t.Fatal(err)
+	}
+	if err := probe.e.AdvanceHypothetical(); err != nil {
+		t.Fatal(err)
+	}
+	lib := probe.e.G.Zone(state.ZLibrary, 1)
+	if len(lib) <= drop {
+		t.Fatalf("library %d, drop %d", len(lib), drop)
+	}
+	order := make([]int, 0, len(lib))
+	for _, id := range lib[:len(lib)-drop] {
+		order = append(order, probe.toF[id])
+	}
+	l := readGolden(t)
+	l.Entries = append(l.Entries, Entry{T: TShuffle, Shuffle: &Shuffle{T: TShuffle, Seat: 1, Order: order}})
+	f := &follower{log: l, reg: corpus(t), toG: map[int]state.ObjID{}, toF: map[state.ObjID]int{}, name: map[int]string{}, shuffles: map[int][]*Shuffle{}, planned: map[int]int{}, start: -1}
+	if err := f.setup(); err != nil {
+		t.Fatal(err)
+	}
+	if err := f.e.AdvanceHypothetical(); err != nil {
+		t.Fatal(err)
+	}
+	// Seat 0's mulligan reshuffle is not yet planned (the mulligan is a
+	// decision, not genesis), and its 9-card line would hold seat 0's smaller
+	// library: only seat 1's appended line is under test.
+	f.planned[0] = len(f.shuffles[0])
+	return f
+}
+
+func mayShuffleDecision(f *follower) *decision.Decision {
+	return &decision.Decision{Player: 0, Kind: decision.KChoose, Min: 1, Max: 1, ResumeKind: "arrange_mayshuffle",
+		Options: []decision.Option{{Index: 0, Kind: "yes", Label: "Yes — shuffle"}, {Index: 1, Kind: "no", Label: "No — keep the order"}}}
+}
+
+// A "you may shuffle" election has no Forge ask line: Forge's shuffle line
+// is the only trace of the answer. harness:chance-misaligned came from
+// answering yes by default when Forge declined, so gorge's next planned
+// shuffle took a later Forge shuffle of a smaller library ("Forge shuffled
+// 90 cards, gorge 91"). The next shuffle line holding gorge's whole library
+// is a yes, and the next one being a later, smaller shuffle is a no.
+func TestMayShuffleElectionFollowsShuffleLines(t *testing.T) {
+	for _, c := range []struct {
+		name string
+		drop int // cards the next Forge shuffle holds fewer than gorge's library
+		want string
+	}{
+		{"taken", 0, "yes"},
+		{"declined", 1, "no"},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			f := mayShuffleFixture(t, c.drop)
+			d := mayShuffleDecision(f)
+			in, ok := f.mayShuffleChoose(d)
+			if !ok || len(in.Choices) != 1 || d.Options[in.Choices[0]].Kind != c.want {
+				t.Fatalf("answered %+v ok %v, want %s", in, ok, c.want)
+			}
+		})
+	}
+	f := mayShuffleFixture(t, 0)
+	d := mayShuffleDecision(f)
+	d.ResumeKind = "cast_modes"
+	if _, ok := f.mayShuffleChoose(d); ok {
+		t.Error("a non-shuffle choose is answered by mayShuffleChoose")
+	}
+}
