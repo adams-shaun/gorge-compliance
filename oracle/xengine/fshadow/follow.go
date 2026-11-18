@@ -105,6 +105,9 @@ type Result struct {
 	// the snapshots of steps gorge gives no decision in (the untap step).
 	SkippedAsks  int `json:"skipped_asks,omitempty"`
 	SkippedSnaps int `json:"skipped_snaps,omitempty"`
+	// Arranges counts the arrange decisions (scry, surveil, ...) the log has
+	// no line for, which the follower answered by default.
+	Arranges int `json:"arranges,omitempty"`
 	// End is how the follow finished: "end" (the log's end line matched),
 	// "unfinished" (Forge stopped the game early), "log" (the log ran out
 	// first), "cap" or "divergence".
@@ -442,6 +445,16 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		}
 		f.hard(WhatAnswerMissing, d, Divergence{Line: e.Line, Forge: want, Gorge: optKeys(f, d)})
 		return in, false
+	}
+	if d.Kind == decision.KArrange {
+		// Forge's recorder logs no scry/surveil/dig-order answer (its
+		// arrangeForScry and arrangeForSurveil hooks write no ask line), so
+		// the log has nothing to match this decision against and the next
+		// line belongs to a later decision. Answer by default -- the
+		// offered cards stay on top in offered order, as many as the ask
+		// allows -- and consume no line; Forge's real choice, if it
+		// differs, shows at the next library_top snapshot.
+		return f.defaultArrange(d), true
 	}
 	if e.Ask == nil {
 		f.hard(WhatKind, d, Divergence{Line: e.Line, Gorge: string(d.Kind), Forge: e.T})
@@ -941,6 +954,24 @@ func optKeys(f *follower, d *decision.Decision) string {
 		}
 	}
 	return strings.Join(out, " ")
+}
+
+// defaultArrange answers an arrange decision the log has no line for: the
+// first Max offered options (at least Min), in offered order, form pile A.
+func (f *follower) defaultArrange(d *decision.Decision) decision.Intent {
+	k := d.Max
+	if k < d.Min {
+		k = d.Min
+	}
+	if k > len(d.Options) {
+		k = len(d.Options)
+	}
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: make([]int, k)}
+	for i := range in.Choices {
+		in.Choices[i] = i
+	}
+	f.res.Arranges++
+	return in
 }
 
 // gorgeKind maps Forge's ask kind to the gorge decision kind it answers.

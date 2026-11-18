@@ -535,3 +535,47 @@ func TestForgeLibraryTopCutToGorgeDepth(t *testing.T) {
 		t.Error("an order difference within gorge's depth agreed")
 	}
 }
+
+// TestUnloggedArrangeIsAnsweredByDefault is the farm cmdr4 repro (seeds
+// 13000, 13003 and the HOB/OTJ pods): Forge's recorder logs no scry or
+// surveil answer (BridgeController.arrangeForScry/arrangeForSurveil take the
+// fallback path, no ask line), so a scry land's arrange ask was matched
+// against the next priority line and read as a kind divergence ("arrange seat
+// 1" vs "priority seat 1"). An arrange the log has no line for is gorge's
+// own bookkeeping: the follower keeps the offered cards on top in order,
+// consumes no log line, and Forge's real choice shows at the next
+// library_top snapshot instead.
+func TestUnloggedArrangeIsAnsweredByDefault(t *testing.T) {
+	l := readGolden(t)
+	const temple = "Temple of Mystery"
+	if _, ok := corpus(t).Lookup(temple); !ok {
+		t.Skipf("no %s in the corpus", temple)
+	}
+	// Seat 1's first land play (card 206) is a scry-1 land.
+	for i := range l.Header.Seats[1].Cards {
+		if l.Header.Seats[1].Cards[i].ID == 206 {
+			l.Header.Seats[1].Cards[i].Name = temple
+		}
+	}
+	entries := l.Entries[:0]
+	for _, e := range l.Entries {
+		if e.Snap == nil { // the doctored deck changes every later snapshot
+			entries = append(entries, e)
+		}
+	}
+	l.Entries = entries
+	res := follow(t, l)
+	// The land play is ask 4; the arrange follows it, before ask 5. The
+	// doctored deck may diverge later (the scry trigger gives both seats
+	// priority passes the golden log lacks), but not at the arrange.
+	if res.Hard != nil && res.Hard.Ask <= 5 {
+		b, _ := json.MarshalIndent(res.Hard, "", "  ")
+		t.Fatalf("divergence at or before the scry land's arrange:\n%s", b)
+	}
+	if res.Decisions < 5 {
+		t.Errorf("only %d decisions followed; the arrange was not passed (hard %+v)", res.Decisions, res.Hard)
+	}
+	if res.Arranges == 0 {
+		t.Error("no default arrange answered")
+	}
+}
