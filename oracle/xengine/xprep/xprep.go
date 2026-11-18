@@ -540,6 +540,8 @@ func paidUnlessLabel(label string) bool {
 // passes on an empty stack: it can only hold priority there once the active
 // seat has passed too, so that pass ends the step (CR 117.4). This reads
 // forward only, so a window cut short inside the first step is still placed.
+// An additional step (CR 500.9) likewise repeats the name of the one before it;
+// newStepInstance marks the pass that enters it as moved.
 func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*oraclegen.XPos {
 	if len(snaps) != len(steps)+1 {
 		return nil
@@ -569,10 +571,23 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 				resolves, run = true, 0
 			}
 		}
-		if moved {
+		switch {
+		case moved:
 			inFirst = after.Step == stepCombatDamage && firstStrikerInCombat(before)
-		} else if inFirst && len(before.Stack) == 0 && st.Seat != before.Active {
-			inFirst, moved = false, true
+		case inFirst:
+			// The non-active seat's pass on an empty stack ends the first
+			// damage step. Priority is not read here: the regular damage step
+			// can pause on a damage-division ask, an as-unblocked election or
+			// a state-based-action decision before priority is given, so the
+			// checkpoint still shows the passer holding it.
+			if len(before.Stack) == 0 && st.Seat != before.Active {
+				inFirst, moved = false, true
+			}
+		case newStepInstance(st, before, after):
+			// The step name did not change, but the pass ended one step and
+			// began an additional one of the same name (CR 500.9), such as an
+			// extra end step.
+			moved = true
 		}
 		step := after.Step
 		if inFirst {
@@ -588,6 +603,19 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 		return nil
 	}
 	return out
+}
+
+// newStepInstance is whether pass st, which left the turn and step name alone,
+// still ended the step (both seats passed in succession with an empty stack,
+// CR 500.2) and began a new step of the same name. The seat passing was not the
+// active one, so it was the last to pass, and priority is back with the active
+// seat as a fresh step gives it (CR 117.3a). A pass that merely hands priority
+// on leaves it with another seat, and a pass over a non-empty stack resolves
+// the top object (CR 117.4) and is the stack's business, not the step's.
+func newStepInstance(st oraclegen.Step, before, after rules.OracleSnapshot) bool {
+	return len(before.Stack) == 0 && !after.Over &&
+		before.Turn == after.Turn && before.Step == after.Step &&
+		st.Seat != before.Active && after.Priority == after.Active
 }
 
 // stepCombatDamage is gorge's name for the combat damage step.

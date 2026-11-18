@@ -16,6 +16,7 @@ import (
 // trigger-order names left live in its place.
 func TestFlipLeadsDemotedSharedStep(t *testing.T) {
 	order := triggerOrderDecision(1, "p0:Adrenaline Jockey", "p0:Rangers' Refueler")
+	order.Picks[1] = "Source: When this enters, do another thing."
 	target := rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
 		Options: 2, Max: 1, Picks: []string{"Wastes"}, PickRefs: []string{"p0:Wastes#9"},
 		PickIdx: []int{0}, PickKinds: []string{"search"}}
@@ -36,7 +37,7 @@ func TestFlipLeadsDemotedSharedStep(t *testing.T) {
 	want := [][]XAnswer{
 		nil,
 		{{0, "flip", "win"}, {0, "target", "Wastes"},
-			{0, "choice", "When this enters, do a thing."}, {0, "choice", "When this enters, do a thing."}},
+			{0, "choice", "When this enters, do a thing."}, {0, "choice", "When this enters, do another thing."}},
 	}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("xanswersSetup = %#v, want %#v (flip leads; the scripted target survives the demote splice)", got, want)

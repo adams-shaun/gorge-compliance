@@ -3572,6 +3572,46 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return frontHalf(s);
     }
 
+    /** The name a stack ability's source is reported under. An ability of a
+     * double-faced card that has left the battlefield is still the ability its
+     * own face printed (CR 113.7a, 712.8e), and gorge names it by that face
+     * (rules.abilitySourceRef): Aclazotz's dies trigger is the front face's, so
+     * gorge reads "Aclazotz, Deepest Betrayal" while XMage's source lookup can
+     * resolve to the back half ("Temple of the Dead"). So for a non-Room
+     * DoubleFacedCard (a Room is a SplitCard: its door names are real, CR
+     * 709.5) that is not a battlefield permanent -- a permanent on its back face
+     * is named by that face on both sides -- the name is the half whose own
+     * abilities include the stack ability, matched by id, original id, or rule
+     * text. An ability neither half owns (a granted one) keeps the object's own
+     * name. Card-based, so a test pins it without a game. */
+    static String abilitySourceName(mage.MageObject source, Ability ability) {
+        if (!(source instanceof Card) || source instanceof Permanent || ability == null) {
+            return source.getName();
+        }
+        Card main = ((Card) source).getMainCard();
+        if (!(main instanceof DoubleFacedCard)) {
+            return source.getName();
+        }
+        DoubleFacedCard df = (DoubleFacedCard) main;
+        boolean left = ownsAbility(df.getLeftHalfCard(), ability);
+        boolean right = ownsAbility(df.getRightHalfCard(), ability);
+        if (left != right) {
+            return (left ? df.getLeftHalfCard() : df.getRightHalfCard()).getName();
+        }
+        return source.getName();
+    }
+
+    private static boolean ownsAbility(Card half, Ability ability) {
+        String rule = ability.getRule();
+        for (Ability a : half.getAbilities()) {
+            if (a.getId().equals(ability.getId()) || a.getOriginalId().equals(ability.getOriginalId())
+                    || a.getRule().equals(rule)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** The spelling rewrite for a battlefield permanent's name (a snapshot
      * permanent's "name" and "attached_to"). The only permanent XMage names
      * "A // B" is a Room with both doors unlocked, and that IS its name (CR
@@ -5005,14 +5045,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // "plot" is XMage's Plot special action (PlotAbility is a
                 // SpecialAction: no stack, not a cast), activated from the
                 // hand by its rule text "Plot {cost}" like XMage's own
-                // PlotTest does. The step's mana was added above; a
+                // PlotTest does, scoped to the step's card. The step's mana was added above; a
                 // reduction (Doc Aurlock) is applied by XMage itself.
                 if ("plot".equals(castMode)) {
                     String plotText = xabilityAt(stepIdx);
                     if (plotText.isEmpty()) {
                         throw new IllegalArgumentException("plot step " + stepIdx + " has no xmage_ability");
                     }
-                    activateAbility(turn, phase, p, plotText);
+                    // Scope the pick to this step's card: two hand cards
+                    // sharing a Plot cost have identical rule text, and the
+                    // bare text plots whichever XMage lists first (CR
+                    // 702.170a). boundActivationText binds the card's id as
+                    // an alias, like an ordinary activation.
+                    activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), plotText, stepIdx));
                     return;
                 }
                 // "flashback" is the cast of a graveyard card for its
@@ -6300,7 +6345,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             String src = so.getName();
             if (!(so instanceof Spell)) {
                 mage.MageObject mo = g.getObject(so.getSourceId());
-                src = mo == null ? "?" : mo.getName();
+                src = mo == null ? "?" : abilitySourceName(mo, ((StackAbility) so).getStackAbility());
             }
             o.addProperty("source", src);
             o.addProperty("controller", seatIndex(g, so.getControllerId()));

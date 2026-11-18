@@ -136,6 +136,7 @@ func TestTriggerOrderSetupQueueFollowsAsEntersChoice(t *testing.T) {
 // under the name form; the demoted text form agrees).
 func TestTriggerOrderGameplaySharedStepStaysDemoted(t *testing.T) {
 	order := triggerOrderDecision(1, "p0:Adrenaline Jockey", "p0:Rangers' Refueler")
+	order.Picks[1] = "Source: When this enters, do another thing."
 	target := rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
 		Options: 2, Max: 1, Picks: []string{"Wastes"}, PickRefs: []string{"p0:Wastes#9"},
 		PickIdx: []int{0}, PickKinds: []string{"search"}}
@@ -151,7 +152,7 @@ func TestTriggerOrderGameplaySharedStepStaysDemoted(t *testing.T) {
 	got := xanswersSetup([]rules.OracleDecision{target, order}, 2, nil, nil, setup, nil)
 	want := [][]XAnswer{
 		nil,
-		{{0, "target", "Wastes"}, {0, "choice", "When this enters, do a thing."}, {0, "choice", "When this enters, do a thing."}},
+		{{0, "target", "Wastes"}, {0, "choice", "When this enters, do a thing."}, {0, "choice", "When this enters, do another thing."}},
 	}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("xanswersSetup = %#v, want %#v (a gameplay shared step keeps the inert text form)", got, want)
