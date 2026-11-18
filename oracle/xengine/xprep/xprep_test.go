@@ -399,6 +399,19 @@ func TestPassPositionsFirstStrikeDamage(t *testing.T) {
 			{"end-combat", true},
 		},
 	}, {
+		// The regular damage step pauses on an ask (damage division, an
+		// as-unblocked election) before priority is given, so the checkpoint
+		// after the ending pass still shows the non-active passer holding it.
+		name:  "first striker, regular step entered with priority stale",
+		steps: []oraclegen.Step{pass(1), pass(0), pass(1)},
+		snaps: []rules.OracleSnapshot{
+			{Turn: 1, Step: "declare-blockers", Priority: 1, Permanents: striker},
+			{Turn: 1, Step: "combat-damage", Priority: 0, Permanents: striker},
+			{Turn: 1, Step: "combat-damage", Priority: 1, Permanents: striker},
+			{Turn: 1, Step: "combat-damage", Priority: 1, Permanents: striker},
+		},
+		want: []want{{oraclegen.StepFirstStrikeDamage, true}, {oraclegen.StepFirstStrikeDamage, false}, {"combat-damage", true}},
+	}, {
 		name:  "no first striker",
 		steps: []oraclegen.Step{pass(1), pass(0), pass(1)},
 		snaps: []rules.OracleSnapshot{

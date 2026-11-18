@@ -556,14 +556,23 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 		any = true
 		before, after := snaps[i], snaps[i+1]
 		moved := before.Turn != after.Turn || before.Step != after.Step
-		if !moved && newStepInstance(st, before, after) {
-			// The step name did not change, but the pass ended one step and
-			// began another of the same name: the second damage step of a
-			// first-strike combat, or an additional step (CR 500.9) such as
-			// an extra end step.
-			moved, inFirst = true, false
-		} else if moved {
+		switch {
+		case moved:
 			inFirst = after.Step == stepCombatDamage && firstStrikerInCombat(before)
+		case inFirst:
+			// The non-active seat's pass on an empty stack ends the first
+			// damage step. Priority is not read here: the regular damage step
+			// can pause on a damage-division ask, an as-unblocked election or
+			// a state-based-action decision before priority is given, so the
+			// checkpoint still shows the passer holding it.
+			if len(before.Stack) == 0 && st.Seat != before.Active {
+				inFirst, moved = false, true
+			}
+		case newStepInstance(st, before, after):
+			// The step name did not change, but the pass ended one step and
+			// began an additional one of the same name (CR 500.9), such as an
+			// extra end step.
+			moved = true
 		}
 		step := after.Step
 		if inFirst {
