@@ -1688,7 +1688,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					as = append(as, XAnswer{d.Seat, "choice", triggerOrderChoice(d, k)})
 				}
 				if len(as) > 0 {
-					pendingTrig = &trigSpan{step: d.Step, count: len(as), old: triggerOrderTextAnswers(d)}
+					pendingTrig = &trigSpan{step: d.Step, count: len(as), old: triggerOrderTextAnswers(d), textBlind: triggerOrderTextBlind(d)}
 				}
 				break
 			}
@@ -2607,6 +2607,25 @@ type trigSpan struct {
 	start int
 	count int
 	old   []XAnswer
+	// textBlind marks a span whose picks share rule text (two Prowess
+	// triggers): the inert text form cannot tell them apart, so XMage orders
+	// them itself and the extra text entry stays queued for a later ask.
+	// Such a span keeps its source-name answers even on a shared step.
+	textBlind bool
+}
+
+// triggerOrderTextBlind reports whether two picks carry the same rule text
+// (after the source prefix is dropped), so only the source name can order them.
+func triggerOrderTextBlind(d rules.OracleDecision) bool {
+	seen := map[string]bool{}
+	for _, label := range d.Picks {
+		t := strings.TrimSpace(triggerRule(label))
+		if seen[t] {
+			return true
+		}
+		seen[t] = true
+	}
+	return false
 }
 
 // triggerOrderTextAnswers is the pre-name behaviour: the label's rule text
@@ -2633,7 +2652,10 @@ func triggerOrderTextAnswers(d rules.OracleDecision) []XAnswer {
 // The text form is not inert against EVERY dialog: a firing colour dialog
 // pops and throws on it, which is the manaHoistSpan routing's job. A step
 // whose ONLY answers are trigger-order names keeps the name form: the
-// names are consumed by the order ask itself and steer it.
+// names are consumed by the order ask itself and steer it. A span whose
+// picks share rule text (trigSpan.textBlind) is never demoted: the text form
+// cannot order identical triggers and leaves a stray answer queued
+// (BLB Dawn's Truce with two Prowess triggers).
 func demoteTriggerOrderSpans(out [][]XAnswer, spans []*trigSpan) {
 	if len(spans) == 0 {
 		return
@@ -2670,6 +2692,9 @@ func demoteTriggerOrderSpans(out [][]XAnswer, spans []*trigSpan) {
 		}
 		for i := len(sp) - 1; i >= 0; i-- {
 			s := sp[i]
+			if s.textBlind {
+				continue
+			}
 			tail := append([]XAnswer(nil), out[step][s.start+s.count:]...)
 			out[step] = append(out[step][:s.start], append(append([]XAnswer(nil), s.old...), tail...)...)
 		}

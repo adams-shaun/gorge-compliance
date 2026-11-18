@@ -73,6 +73,7 @@ func TestTriggerOrderSourcelessFallsBackToText(t *testing.T) {
 // Baron Strucker/static#0.0 replays agree only with the text form.
 func TestTriggerOrderSharedStepKeepsInertText(t *testing.T) {
 	order := triggerOrderDecision(1, "p0:Adrenaline Jockey", "p0:Rangers' Refueler")
+	order.Picks[1] = "Source: When this enters, do another thing."
 	// A target ask at the same step shares the answer list with the order.
 	target := rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
 		Options: 2, Max: 1, Picks: []string{"Wastes"}, PickRefs: []string{"p0:Wastes#9"},
@@ -80,10 +81,30 @@ func TestTriggerOrderSharedStepKeepsInertText(t *testing.T) {
 	got := XAnswers([]rules.OracleDecision{target, order}, 2, nil)
 	want := [][]XAnswer{
 		nil,
-		{{0, "target", "Wastes"}, {0, "choice", "When this enters, do a thing."}, {0, "choice", "When this enters, do a thing."}},
+		{{0, "target", "Wastes"}, {0, "choice", "When this enters, do a thing."}, {0, "choice", "When this enters, do another thing."}},
 	}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("XAnswers = %#v, want %#v (shared step keeps the inert text form)", got, want)
+	}
+}
+
+// TestTriggerOrderSharedStepIdenticalTextKeepsName pins the text-blind
+// exemption: two triggers with the SAME rule text (Kitsa's and the Otter
+// Token's Prowess, BLB Dawn's Truce) cannot be ordered by the text form, and
+// its second entry stays queued to derail a later ask. The shared step keeps
+// the n-1 source-name answers, after the other ask's answer, in place.
+func TestTriggerOrderSharedStepIdenticalTextKeepsName(t *testing.T) {
+	order := triggerOrderDecision(1, "p0:token:Otter Token", "p0:Kitsa, Otterball Elite")
+	gift := rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+		Options: 2, Max: 1, Picks: []string{"Wastes"}, PickRefs: []string{"p0:Wastes#9"},
+		PickIdx: []int{0}, PickKinds: []string{"search"}}
+	got := XAnswers([]rules.OracleDecision{gift, order}, 2, nil)
+	want := [][]XAnswer{
+		nil,
+		{{0, "target", "Wastes"}, {0, "choice", "Otter Token"}},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("XAnswers = %#v, want %#v (identical-text order keeps its source name)", got, want)
 	}
 }
 
@@ -95,10 +116,11 @@ func TestTriggerOrderSpansKeepDecisionOrder(t *testing.T) {
 		Options: 2, Max: 1, Picks: []string{"Wastes"}, PickRefs: []string{"p0:Wastes#9"},
 		PickIdx: []int{0}, PickKinds: []string{"search"}}
 	order := triggerOrderDecision(1, "p0:Adrenaline Jockey", "p0:Rangers' Refueler")
+	order.Picks[1] = "Source: When this enters, do another thing."
 	got := XAnswers([]rules.OracleDecision{order, target}, 2, nil)
 	want := [][]XAnswer{
 		nil,
-		{{0, "choice", "When this enters, do a thing."}, {0, "choice", "When this enters, do a thing."}, {0, "target", "Wastes"}},
+		{{0, "choice", "When this enters, do a thing."}, {0, "choice", "When this enters, do another thing."}, {0, "target", "Wastes"}},
 	}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("XAnswers = %#v, want %#v", got, want)
