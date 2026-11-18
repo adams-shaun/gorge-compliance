@@ -178,16 +178,18 @@ public final class ScenarioReplayCheckpointSeatTest {
         bound.setAccessible(true);
         equal("@act1 +1", bound.invoke(d, a, "p0:Ajani Goldmane", "+1", 1));
         equal(List.of("bind p0:Ajani Goldmane"), d.codeActions);
-        // A ref with no setup alias keeps the plain text and binds nothing.
-        equal("+1", bound.invoke(d, a, "p0:Ajani Unrelenting", "+1", 2));
-        equal(1, d.codeActions.size());
+        // A ref with no setup alias (a permanent cast or entered mid-window)
+        // is bound too, by the live ability's source at activation time: the
+        // bare text "{T}" would match a land's mana ability instead.
+        equal("@act2 {T}", bound.invoke(d, a, "p0:Waterlogged Hulk", "{T}", 2));
+        equal(2, d.codeActions.size());
         // A cost-only activation text ("{3}{B}{B}{R}{R}", "Craft with one or
         // more {5}") goes through the bound path too: the regression was
         // that XMage cannot match the setup-id binding for a card that moved
         // zones, so the driver must resolve the live ability's source id.
         equal("@act3 {3}{B}{B}{R}{R}",
                 bound.invoke(d, a, "p0:Garland, Knight of Cornelia", "{3}{B}{B}{R}{R}", 3));
-        equal(2, d.codeActions.size());
+        equal(3, d.codeActions.size());
 
         // The live ability's source id is chosen when the setup id is a
         // different object (the card moved zones): the half-card of a
@@ -209,6 +211,14 @@ public final class ScenarioReplayCheckpointSeatTest {
                 new ScenarioReplay.ActivationCandidate("Grizzly Bears", "+1", other),
                 new ScenarioReplay.ActivationCandidate("Grizzly Bears", "+1", setup));
         equal(setup, d.chooseActivationSource(dup, "Grizzly Bears", "+1", setup));
+
+        // A mid-window object has no setup id: the live "{T}" ability of the
+        // named card is chosen, not the Swamp's that starts with the same cost.
+        UUID hulk = UUID.randomUUID();
+        List<ScenarioReplay.ActivationCandidate> tap = List.of(
+                new ScenarioReplay.ActivationCandidate("Swamp", "{T}: Add {B}.", other),
+                new ScenarioReplay.ActivationCandidate("Waterlogged Hulk", "{T}: Mill a card.", hulk));
+        equal(hulk, d.chooseActivationSource(tap, "Waterlogged Hulk", "{T}", null));
 
         // No live ability for the named card: null, so the caller keeps the
         // setup alias (unchanged behavior for a row that never had the bug).
