@@ -24,6 +24,7 @@ Azusa's Many Journeys [Likeness of the Seeker]	T3	targets	-	landx0..3	mtgish-bug
 Back for More	T3	targets	card-graveyard+creaturex0..1	card-graveyard+creature	mtgish-bug	mtgish#3 up-to as exact
 Bellowing Bruiser [Beat a Path]	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Blinding Beam	T3	targets	creature+creature+player	creature+creature	mtgish-bug	mtgish drops target player: creatures don't untap during target player's next untap step is encoded for all creatures
+Boiling Earth	T3	targets	land	-	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
 Boros Battleshaper	T3	targets	creaturex0..1+creaturex0..1	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Break Ties	T3	targets	artifact+card-graveyard+enchantment	artifact+enchantment	mtgish-bug	mtgish#1: exile-from-graveyard mode lost (capture reuse)
 Bumi's Feast Lecture	T3	targets	land	creature	mtgish-bug	mtgish#4: earthbend targets a creature (printed target land you control)
@@ -36,6 +37,8 @@ Chandra, the Firebrand	T3	targets	anyx0..6	any+any+any+any+any+any	mtgish-bug	mt
 Chaos Is My Plaything	T3	targets	permanentx0..*	permanent	forge-bug	per-opponent target is TargetMin$ 0 (choose none); printed one per opponent: TargetMin$ OneEach
 Cloud of Faeries	T3	targets	-	landx0..2	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
 Cloudspire Skycycle	T3	targets	artifact|creature+artifact|creaturex0..1	artifact|creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
+Clutch of Currents	T3	targets	creature+land	creature	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
+Coastal Discovery	T3	targets	land	-	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
 Contagion	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
 Coordinated Assault	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Cost of Brilliance	T3	targets	creaturex0..1+player	creature+player	mtgish-bug	mtgish#3 up-to as exact
@@ -50,7 +53,9 @@ Disorienting Choice	T3	targets	artifact|enchantmentx0..*	artifact|enchantment	mt
 Dragonspark Reactor	T3	targets	creaturex0..1+player	creature+player	mtgish-bug	mtgish#3 up-to as exact
 Dwarven Armorer	T3	targets	creature	-	equivalent	script writes one ability per counter choice; mtgish one ability with a choice
 Earth Rumble	T3	targets	creature+creaturex0..1+land	creature+creature+land	mtgish-bug	mtgish#3 up-to as exact
+Earthen Arms	T3	targets	land+permanent	permanent	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
 Elven Rite	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
+Encircling Fissure	T3	targets	land+player	player	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
 Entangling Trap	T3	targets	creature	-	equivalent	Forge splits one clash trigger into won/lost lines (Secondary)
 Everything Pizza	T3	targets	any+creaturex0..1+player	any+creature+player	mtgish-bug	mtgish#3 up-to as exact
 Favored Enemy	T3	targets	creature+creaturex0..1	-	mtgish-bug	mtgish#2 dropped capture: the ETB fight trigger is never emitted
@@ -80,6 +85,7 @@ Lively Dirge	T3	targets	-	card-graveyardx0..2	mtgish-bug	mtgish#4: target added 
 Lizard, Connors's Curse	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Markov Enforcer	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Meltstrider's Resolve	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Mire's Malice	T3	targets	land+player	player	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
 Mischief and Mayhem	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Mischievous Quanar	T3	targets	spell	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Mistbreath Elder	T3	targets	-	creature	mtgish-bug	printed return is untargeted; mtgish adds a TargetPermanent (gorge: a hidden ChangeType choice) (i5jb/mtgish#4)
@@ -92,20 +98,29 @@ Novel Nunchaku	T3	targets	creature+creaturex0..1	creature+creature	mtgish-bug	mt
 Obuun, Mul Daya Ancestor	T3	targets	landx0..1	land	mtgish-bug	mtgish#3 up-to as exact
 Oko, Lorwyn Liege	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Ondu Knotmaster [Throw a Line]	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
+Ondu Rising	T3	targets	land	-	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
 Palinchron	T3	targets	-	landx0..7	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
 Panic Attack	T3	targets	creaturex0..3	creature+creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Part the Waterveil	T3	targets	land	-	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
 Peregrine Drake	T3	targets	-	landx0..5	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
 Phyrexian Splicer	T3	targets	creature+creature creature+creature creature+creature	-	equivalent	script writes one ability per keyword choice; mtgish one with a choice
 Pitiless Fists	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Planar Outburst	T3	targets	land	-	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
 Press the Advantage	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Primal Might	T3	targets	creature+creaturex0..1	creature+creature	mtgish-bug	printed fight target is up to one; mtgish TargetPermanent requires exactly one (gorge: TargetMin$ 0) (i5jb/mtgish#3)
 Rally the Monastery	T3	targets	creature+creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Reasonable Doubt	T3	targets	creaturex0..1+spell	creature+spell	mtgish-bug	mtgish#3 up-to as exact
 Return to Dust	T3	targets	artifact|enchantment+artifact|enchantmentx0..*	artifact|enchantment+artifact|enchantmentx0..1	equivalent	conditional second target: script one 1..X slot; mtgish a required and an up-to-one slot
+Rising Miasma	T3	targets	land	-	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
 River's Grasp	T3	targets	creaturex0..1+player	creature+player	mtgish-bug	mtgish#3 up-to as exact
 Rogues' Gallery	T3	targets	card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1+card-graveyardx0..1	card-graveyardx0..*	equivalent	one target per color/type: script one up-to-one slot each; mtgish one per-group slot
+Roil Spout	T3	targets	creature+land	creature	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
+Ruinous Path	T3	targets	creature|planeswalker+land	creature|planeswalker	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
+Rush of Ice	T3	targets	creature+land	creature	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
+Scatter to the Winds	T3	targets	land+spell	spell	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
 Season of the Bold	T3	targets	creaturex0..1	creature	mtgish-bug	printed damage target is up to one; mtgish TargetPermanent requires exactly one (gorge: TargetMin$ 0) (i5jb/mtgish#3)
 Seize Opportunity	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
+Sheer Drop	T3	targets	creature+land	creature	equivalent	awaken: script exposes the keyword's land target as a slot; mtgish keeps awaken a bare keyword with no target
 Silumgar Assassin	T3	targets	creature	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Smogbelcher Chariot	T3	targets	permanent	creature	forge-bug	ValidTgts$ Card.CrewedThisTurn admits a noncreature crewer; printed target creature
 Splendid Agony	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
