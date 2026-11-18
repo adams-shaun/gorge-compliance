@@ -330,6 +330,23 @@ func at(turn int, step string) int {
 	return turn*100 + stepOrder[step]
 }
 
+// unloggedKind reports whether Forge's recorder writes no ask line for a
+// decision of kind k, so the follower answers it by default (answer).
+func unloggedKind(k decision.Kind) bool {
+	return k == decision.KChoose || k == decision.KModes || k == decision.KArrange
+}
+
+// snapAheadOfUnlogged reports whether snapshot entry e describes a point past
+// gorge's position while gorge waits on an unlogged decision (a cleanup
+// discard, a modal pick, a scry): Forge answered it with no ask line and moved
+// on, so the snapshot is the state after the answer. Comparing now would read
+// gorge's pre-answer state (farm cmdr4: gorge turn 2 against Forge turn 3 at
+// the cleanup discard); the follower answers by default first and compares
+// the snapshot at the state the answer reaches.
+func snapAheadOfUnlogged(e Entry, gorge int, d *decision.Decision) bool {
+	return e.Snap != nil && unloggedKind(d.Kind) && at(int(e.Snap.Snapshot.Turn), e.Snap.Snapshot.Step) > gorge
+}
+
 func (f *follower) gorgeAt() int { return at(int(f.e.G.Turn), f.e.G.Step.String()) }
 
 func (f *follower) run(max int) {
@@ -370,6 +387,9 @@ func (f *follower) run(max int) {
 				f.res.SkippedSnaps++
 				f.pos++
 				continue
+			}
+			if pend := f.e.Pending(); pend != nil && snapAheadOfUnlogged(e, f.gorgeAt(), pend) {
+				break
 			}
 			if !f.compareSnap(e) {
 				return

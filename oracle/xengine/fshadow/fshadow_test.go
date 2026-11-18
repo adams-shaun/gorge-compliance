@@ -741,3 +741,35 @@ func TestChooseWithoutALogLineAnsweredByDefault(t *testing.T) {
 		}
 	}
 }
+
+// TestSnapshotAheadOfUnloggedDecisionWaits is the farm cmdr4 repro (EOE and
+// OTJ pod 13002, HOB pod 12903): gorge waits on a cleanup discard (turn 2)
+// while Forge, which logs no ask for it, has already answered and written the
+// next snapshot (turn 3). The follower compared that snapshot against gorge's
+// pre-discard state and stopped on "snapshot turn: gorge 2, forge 3". It must
+// answer the unlogged decision by default first, and only then compare.
+func TestSnapshotAheadOfUnloggedDecisionWaits(t *testing.T) {
+	snap := func(turn int, step string) Entry {
+		return Entry{Line: 97, T: TSnap, Snap: &Snap{T: TSnap, Snapshot: rules.OracleSnapshot{Turn: int32(turn), Step: step}}}
+	}
+	cleanup := at(2, "cleanup")
+	for _, c := range []struct {
+		name string
+		kind decision.Kind
+		e    Entry
+		at   int
+		want bool
+	}{
+		{"discard waits for the next turn's snapshot", decision.KChoose, snap(3, "upkeep"), cleanup, true},
+		{"modes", decision.KModes, snap(3, "upkeep"), cleanup, true},
+		{"arrange", decision.KArrange, snap(2, "main2"), at(2, "main1"), true},
+		{"a snapshot of this very step is compared", decision.KChoose, snap(2, "cleanup"), cleanup, false},
+		{"a logged decision still compares", decision.KPriority, snap(3, "upkeep"), cleanup, false},
+		{"a mulligan still compares", decision.KMulligan, snap(3, "upkeep"), cleanup, false},
+		{"not a snapshot", decision.KChoose, Entry{Line: 3, T: TAsk}, cleanup, false},
+	} {
+		if got := snapAheadOfUnlogged(c.e, c.at, &decision.Decision{Kind: c.kind}); got != c.want {
+			t.Errorf("%s: got %v, want %v", c.name, got, c.want)
+		}
+	}
+}
