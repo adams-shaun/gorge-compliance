@@ -23,6 +23,11 @@
 // default (offered cards stay on top in order; Result.Arranges counts them)
 // and consumes no log line.
 //
+// Forge's recorder writes a target ask only where its targeting hook is asked,
+// so a gorge target decision whose log line is an ask of another kind (the
+// seat's next priority) is answered by default (the first Min options;
+// Result.Targets counts them) and consumes no log line.
+//
 // # The forge-shadow-1 log
 //
 // One JSON object per line, told apart by "t". Card identities are Forge's
