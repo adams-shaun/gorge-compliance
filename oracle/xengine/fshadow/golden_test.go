@@ -52,7 +52,7 @@ var goldenDeck = []string{"Forest", "Grizzly Bears", "Forest", "Grizzly Bears", 
 func writeGolden(t *testing.T, reg *cards.Registry) *Log {
 	t.Helper()
 	const start = 1
-	h := Header{T: THeader, Format: Format, Seed: 7, ForgeRef: "golden", GameFormat: "constructed", Mulligans: 1, MaxTurns: 60, MaxMS: 600000}
+	h := Header{T: THeader, Format: Format, Seed: 7, ForgeRef: "golden", GameFormat: "constructed", Mulligans: 7, MaxTurns: 60, MaxMS: 600000}
 	toF := map[state.ObjID]int{}
 	cfg := rules.Config{Seed: h.Seed, Tokens: reg.Tokens, NameUniverse: reg.Universe(), Mulligans: h.Mulligans}
 	next := state.ObjID(1)
@@ -99,7 +99,8 @@ func writeGolden(t *testing.T, reg *cards.Registry) *Log {
 	}
 	chance := func(c rules.ChanceContext) (int, error) {
 		if c.Ordinal == 0 {
-			add(Entry{T: TStart, Start: &Start{T: TStart, Seat: start}})
+			// gorge draws the toss first; Forge logs it after the opening
+			// shuffles, so the start line is placed after them below.
 			return start, nil
 		}
 		return 0, fmt.Errorf("the golden game draws no chance past the toss")
@@ -111,6 +112,7 @@ func writeGolden(t *testing.T, reg *cards.Registry) *Log {
 	if err := e.AdvanceHypothetical(); err != nil {
 		t.Fatal(err)
 	}
+	add(Entry{T: TStart, Start: &Start{T: TStart, Seat: start}}) // the deal has shuffled both libraries; nothing else is logged yet
 	asks, snaps := 0, 0
 	lastTurn, lastStep := int32(-1), ""
 	mulled := map[state.PlayerID]bool{}
@@ -120,10 +122,25 @@ func writeGolden(t *testing.T, reg *cards.Registry) *Log {
 		if d == nil {
 			break
 		}
+		snap := func(step string) {
+			snaps++
+			s := Snapshot(e, fmt.Sprintf("t%d:%s", e.G.Turn, step))
+			s.Step = step
+			add(Entry{T: TSnap, Snap: &Snap{T: TSnap, N: snaps, Snapshot: s}})
+		}
+		if e.G.Turn >= 1 && e.G.Turn != lastTurn {
+			// Forge snaps the untap step too, and asks the active seat
+			// priority in turn 1's: gorge asks nothing there, so the
+			// follower skips both.
+			snap("untap")
+			if e.G.Turn == 1 {
+				asks++
+				add(Entry{T: TAsk, Ask: &Ask{T: TAsk, N: asks, Seat: int(e.G.Active), Turn: 1, Step: "untap", Kind: KindPriority, Answer: Answer{Action: "pass"}}})
+			}
+		}
 		if e.G.Turn >= 1 && len(e.G.Stack) == 0 && (e.G.Turn != lastTurn || e.G.Step.String() != lastStep) {
 			lastTurn, lastStep = e.G.Turn, e.G.Step.String()
-			snaps++
-			add(Entry{T: TSnap, Snap: &Snap{T: TSnap, N: snaps, Snapshot: Snapshot(e, fmt.Sprintf("snap %d", snaps))}})
+			snap(lastStep)
 		}
 		in := decision.Intent{Seq: d.Seq, Player: d.Player}
 		ask := func(kind string, opts []Option, ans Answer) {
@@ -222,7 +239,7 @@ func writeGolden(t *testing.T, reg *cards.Registry) *Log {
 	if !e.G.Over {
 		t.Fatal("the golden game did not end")
 	}
-	end := &End{T: TEnd, Reason: "empty library"}
+	end := &End{T: TEnd, Reason: "AllOpponentsLost"}
 	if !e.G.Draw {
 		w := int(e.G.Winner)
 		end.Winner = &w

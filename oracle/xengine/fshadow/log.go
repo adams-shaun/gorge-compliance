@@ -22,19 +22,24 @@
 //
 //	header   {"t":"header","format":"forge-shadow-1","seed":N,"forge_ref":"...","game_format":"constructed|commander",
 //	          "mulligans":K,"max_turns":T,"max_ms":M,"seats":[{"seat":0,"name":"..","cards":[{"id":101,"name":"Forest"},..],"commanders":[idx..]}]}
-//	shuffle  {"t":"shuffle","seat":0,"order":[ids, top first]}            the opening shuffle and every later one, in order per seat
+//	shuffle  {"t":"shuffle","seat":0,"order":[ids, top first]}            the opening shuffles (before start) and every later one
 //	start    {"t":"start","seat":1}                                       the seat taking the first turn
 //	mull     {"t":"mull","seat":1,"keep":false}                           or {"keep":true,"bottom":[ids]}
 //	ask      {"t":"ask","n":7,"seat":1,"turn":3,"step":"main1","kind":"priority","options":[..],"answer":{..}}
-//	rand     {"t":"rand","kind":"coin|die|pick","bound":2,"value":1}
-//	snap     {"t":"snap","n":3,"snapshot":{rules.OracleSnapshot}}         at the start of a step with an empty stack
-//	end      {"t":"end","winner":0,"reason":".."}                         winner omitted for a draw or a capped game
+//	rand     {"t":"rand","kind":"coin|die","bound":2,"value":1}            coin 1 heads 0 tails; die 1..bound
+//	snap     {"t":"snap","n":3,"snapshot":{rules.OracleSnapshot}}         checkpoint "t<turn>:<step>", at the start of a step with an empty stack
+//	end      {"t":"end","winner":0,"reason":"AllOpponentsLost"}           Forge's GameEndReason, or "unfinished"; no winner for a draw
 //
 // An ask's kind is Forge's: priority, attack, block, target (and mode, choose,
 // optional, order, ... which the MVP refuses). Its options are what Forge
 // offered (Option) and its answer what the seat chose (Answer); a priority
-// answer's action is pass, land, cast or activate, and a cast lists the mana
-// sources Forge tapped for it.
+// answer's action is pass, land, cast, activate or other, and a cast lists the
+// mana sources Forge tapped for it. A ref is {"card":id}, {"player":seat} or
+// {"spell":id}. Forge asks priority in steps gorge does not (the turn-1 untap
+// step): such an ask is always a pass, and the follower skips it, as it
+// skips a snap of a step gorge has already left. The line grammar is
+// forge-oracle's ShadowLog (adams-shaun/forge, forge-oracle/.../ShadowLog.java);
+// fields it marks as extras (policy, hand, index, label, ...) are ignored.
 package fshadow
 
 import (
@@ -69,10 +74,15 @@ type Header struct {
 	Seed       uint64 `json:"seed"`
 	ForgeRef   string `json:"forge_ref,omitempty"`
 	GameFormat string `json:"game_format,omitempty"` // "constructed" (default) or "commander"
-	Mulligans  int    `json:"mulligans,omitempty"`   // London mulligans each seat may take
-	MaxTurns   int    `json:"max_turns,omitempty"`
-	MaxMS      int    `json:"max_ms,omitempty"`
-	Seats      []Seat `json:"seats"`
+	Mulligans  int    `json:"mulligans,omitempty"`   // London mulligans each seat may take (Forge: 7)
+	// FreeMulligan is Forge's first-mulligan-is-free rule (more than two
+	// seats). gorge derives the same rule from the seat count (CR 103.5c) and
+	// has no Config input for it, so a header that disagrees is a harness
+	// finding (setup-inexpressible).
+	FreeMulligan bool   `json:"free_mulligan,omitempty"`
+	MaxTurns     int    `json:"max_turns,omitempty"`
+	MaxMS        int    `json:"max_ms,omitempty"`
+	Seats        []Seat `json:"seats"`
 }
 
 // Seat is one seat's deck in library-build order.
@@ -132,20 +142,24 @@ const (
 )
 
 // Option is one choice Forge offered. Priority: Action (land, cast,
-// activate), Card and Ability. Attack: Card attacks Player. Block: Card
-// blocks Attacker. Target: Card, or Player when Card is 0.
+// activate, other), Card and Ability. Attack: Card attacks Player, or the
+// planeswalker or battle DefenderCard. Block: Card blocks Attacker. Target:
+// a ref (Card, Player or Spell).
 type Option struct {
-	Action   string `json:"action,omitempty"`
-	Card     int    `json:"card,omitempty"`
-	Ability  int    `json:"ability,omitempty"`
-	Player   *int   `json:"player,omitempty"`
-	Attacker int    `json:"attacker,omitempty"`
+	Action       string `json:"action,omitempty"`
+	Card         int    `json:"card,omitempty"`
+	Ability      int    `json:"ability,omitempty"`
+	Player       *int   `json:"player,omitempty"`
+	Spell        int    `json:"spell,omitempty"`
+	DefenderCard int    `json:"defender_card,omitempty"`
+	Attacker     int    `json:"attacker,omitempty"`
 }
 
 // Answer is the seat's answer to an ask.
 type Answer struct {
-	Action  string   `json:"action,omitempty"` // priority: pass, land, cast, activate
+	Action  string   `json:"action,omitempty"` // priority: pass, land, cast, activate, other
 	Card    int      `json:"card,omitempty"`
+	Source  int      `json:"source,omitempty"` // target: the host card
 	Ability int      `json:"ability,omitempty"`
 	Tapped  []int    `json:"tapped,omitempty"`  // the mana sources tapped to pay
 	Targets []Ref    `json:"targets,omitempty"` // target
@@ -153,16 +167,19 @@ type Answer struct {
 	Blocks  []Block  `json:"blocks,omitempty"`  // block
 }
 
-// Ref is a card or a player.
+// Ref is a card, a player, or a spell on the stack (by its host card's id).
 type Ref struct {
 	Card   int  `json:"card,omitempty"`
 	Player *int `json:"player,omitempty"`
+	Spell  int  `json:"spell,omitempty"`
 }
 
-// Attack is one attacker and the player it attacks.
+// Attack is one attacker and the seat it attacks; an attack on a
+// planeswalker or battle is Defender -1 with DefenderCard.
 type Attack struct {
-	Card     int `json:"card"`
-	Defender int `json:"defender"`
+	Card         int `json:"card"`
+	Defender     int `json:"defender"`
+	DefenderCard int `json:"defender_card,omitempty"`
 }
 
 // Block is one blocker and the attacker it blocks.
@@ -171,7 +188,9 @@ type Block struct {
 	Attacker int `json:"attacker"`
 }
 
-// Rand is one random draw that is not a shuffle: a coin, a die, a random pick.
+// Rand is one random draw that is neither a shuffle nor the starting toss:
+// a coin (Bound 2, Value 1 heads, 0 tails) or a die (Value 1..Bound). Forge
+// logs no random pick yet (its AtRandom choices have no hook).
 type Rand struct {
 	T     string `json:"t"`
 	Kind  string `json:"kind"`
@@ -190,8 +209,12 @@ type Snap struct {
 type End struct {
 	T      string `json:"t"`
 	Winner *int   `json:"winner,omitempty"`
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty"` // Forge's GameEndReason name, or ReasonUnfinished
 }
+
+// ReasonUnfinished is an end line's reason for a game Forge stopped early (a
+// turn or time cap): the follower stops clean there.
+const ReasonUnfinished = "unfinished"
 
 // Entry is one parsed line: Line is its 1-based line number (the log offset a
 // divergence reports) and exactly one of the pointers is set, per T.

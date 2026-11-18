@@ -19,6 +19,7 @@ import (
 const (
 	HarnessUnmapped = "answer-unmapped"
 	HarnessChance   = "chance-misaligned"
+	HarnessSetup    = "setup-inexpressible"
 )
 
 // chanceHarness classifies an engine error: a planner failure is the
@@ -100,8 +101,13 @@ type Result struct {
 	Soft      []Soft      `json:"soft,omitempty"`
 	Hard      *Divergence `json:"-"` // written on its own by WriteDivergence
 	Capped    bool        `json:"capped,omitempty"`
+	// SkippedAsks and SkippedSnaps count the Forge-only priority passes and
+	// the snapshots of steps gorge gives no decision in (the untap step).
+	SkippedAsks  int `json:"skipped_asks,omitempty"`
+	SkippedSnaps int `json:"skipped_snaps,omitempty"`
 	// End is how the follow finished: "end" (the log's end line matched),
-	// "log" (the log ran out first), "cap" or "divergence".
+	// "unfinished" (Forge stopped the game early), "log" (the log ran out
+	// first), "cap" or "divergence".
 	End string `json:"end"`
 }
 
@@ -118,6 +124,8 @@ type follower struct {
 	shuffles map[int][]*Shuffle // per seat, in order
 	rands    []*Rand
 	start    int
+
+	setupHarness string // a header gorge's Config cannot express
 
 	pos      int  // next unread entry
 	mullKept bool // the current mull line's keep has been answered; its bottom is next
@@ -191,6 +199,9 @@ func (f *follower) setup() error {
 	if f.start < 0 || f.start >= len(h.Seats) {
 		return fmt.Errorf("fshadow: no start line naming a seat of %d", len(h.Seats))
 	}
+	if h.FreeMulligan != (len(h.Seats) > 2) {
+		f.setupHarness = fmt.Sprintf("free_mulligan %v in a %d-seat game: gorge grants the free mulligan from the seat count alone (CR 103.5c) and has no Config input for it", h.FreeMulligan, len(h.Seats))
+	}
 	f.cfg = cfg
 	e, err := rules.NewHypotheticalChancePlanned(cfg, nil, f.planShuffle, f.planChance)
 	if err != nil {
@@ -245,29 +256,82 @@ func (f *follower) planChance(c rules.ChanceContext) (int, error) {
 	if k >= len(f.rands) {
 		return 0, fmt.Errorf("draw %d (bound %d): the log has %d rand lines", k, c.Bound, len(f.rands))
 	}
-	r := f.rands[k]
-	if r.Bound != c.Bound {
-		return 0, fmt.Errorf("draw %d: Forge's bound %d, gorge's %d", k, r.Bound, c.Bound)
-	}
-	return r.Value, nil
+	return randValue(f.rands[k], k, c.Bound)
 }
+
+// randValue maps a Forge rand line onto gorge's draw. gorge's coin wins on 0
+// (effects.FlipCoinWin), and the log records the face, not the call: the
+// follower takes heads (1) as the flipper's win, an assumption a misaligned
+// flip shows up against as a later snapshot difference. A die is 1..bound in
+// Forge and 0..bound-1 drawn in gorge.
+func randValue(r *Rand, k, bound int) (int, error) {
+	if r.Bound != bound {
+		return 0, fmt.Errorf("draw %d (%s): Forge's bound %d, gorge's %d", k, r.Kind, r.Bound, bound)
+	}
+	switch r.Kind {
+	case "coin":
+		if r.Value != 0 && r.Value != 1 {
+			return 0, fmt.Errorf("draw %d: coin value %d", k, r.Value)
+		}
+		return 1 - r.Value, nil
+	case "die":
+		if r.Value < 1 || r.Value > r.Bound {
+			return 0, fmt.Errorf("draw %d: die value %d of %d", k, r.Value, r.Bound)
+		}
+		return r.Value - 1, nil
+	}
+	return 0, fmt.Errorf("draw %d: rand kind %q", k, r.Kind)
+}
+
+// stepOrder is gorge's step names in turn order.
+var stepOrder = map[string]int{
+	"untap": 0, "upkeep": 1, "draw": 2, "main1": 3, "begin-combat": 4, "declare-attackers": 5,
+	"declare-blockers": 6, "first-strike-damage": 7, "combat-damage": 7, "end-combat": 8, "main2": 9, "end": 10, "cleanup": 11,
+}
+
+// at is a (turn, step) position, comparable in game order; before turn 1
+// (the mulligans) is the lowest.
+func at(turn int, step string) int {
+	if turn <= 0 {
+		return -1
+	}
+	return turn*100 + stepOrder[step]
+}
+
+func (f *follower) gorgeAt() int { return at(int(f.e.G.Turn), f.e.G.Step.String()) }
 
 func (f *follower) run(max int) {
 	if err := f.e.AdvanceHypothetical(); err != nil {
 		f.hard(WhatError, nil, Divergence{Detail: err.Error(), Harness: chanceHarness(err)})
 		return
 	}
+	if f.setupHarness != "" {
+		f.hard(WhatError, nil, Divergence{Line: 1, Field: "free_mulligan", Harness: HarnessSetup, Detail: f.setupHarness})
+		return
+	}
 	for {
 		// Snapshots before the next decision line describe the state gorge
-		// is in now.
+		// is in now; one of a step gorge has already left (the untap step,
+		// where gorge asks nothing) has no gorge counterpart, nor does a
+		// Forge priority pass there.
 		for f.pos < len(f.log.Entries) {
 			e := f.log.Entries[f.pos]
+			if e.Shuffle != nil || e.Rand != nil || e.Start != nil {
+				f.pos++ // consumed by the planners
+				continue
+			}
+			if a := e.Ask; a != nil && a.Kind == KindPriority && (a.Answer.Action == "pass" || a.Answer.Action == "") && at(a.Turn, a.Step) < f.gorgeAt() {
+				f.res.SkippedAsks++
+				f.pos++
+				continue
+			}
 			if e.Snap == nil {
-				if e.Shuffle != nil || e.Rand != nil || e.Start != nil {
-					f.pos++ // consumed by the planners
-					continue
-				}
 				break
+			}
+			if at(int(e.Snap.Snapshot.Turn), e.Snap.Snapshot.Step) < f.gorgeAt() && !f.e.G.Over {
+				f.res.SkippedSnaps++
+				f.pos++
+				continue
 			}
 			if !f.compareSnap(e) {
 				return
@@ -288,6 +352,10 @@ func (f *follower) run(max int) {
 			return
 		}
 		e := f.log.Entries[f.pos]
+		if e.End != nil && e.End.Reason == ReasonUnfinished && e.End.Winner == nil {
+			f.res.End = ReasonUnfinished
+			return
+		}
 		if e.End != nil {
 			f.hard(WhatTerminal, d, Divergence{Line: e.Line, Gorge: fmt.Sprintf("%s for seat %d", d.Kind, d.Player), Forge: endString(e.End)})
 			return
@@ -478,15 +546,23 @@ func (f *follower) attackers(d *decision.Decision, a *Ask) (decision.Intent, *Di
 		if !ok {
 			return in, f.unbound(at.Card)
 		}
+		var battle state.ObjID
+		if at.Defender < 0 {
+			b, ok := f.toG[at.DefenderCard]
+			if !ok {
+				return in, f.unbound(at.DefenderCard)
+			}
+			battle = b
+		}
 		i := -1
 		for k, o := range d.Options {
-			if o.Kind == "attacker" && o.Obj == g && o.Battle == 0 && int(o.Player) == at.Defender {
+			if o.Kind == "attacker" && o.Obj == g && o.Battle == battle && (battle != 0 || int(o.Player) == at.Defender) {
 				i = k
 				break
 			}
 		}
 		if i < 0 {
-			return in, &Divergence{What: WhatAnswerMissing, Forge: fmt.Sprintf("attack:%d:p%d", at.Card, at.Defender)}
+			return in, &Divergence{What: WhatAnswerMissing, Forge: attackKey(at.Card, at.Defender, at.DefenderCard)}
 		}
 		in.Choices = append(in.Choices, i)
 	}
@@ -523,10 +599,11 @@ func (f *follower) targets(d *decision.Decision, a *Ask) (decision.Intent, *Dive
 	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{}}
 	for _, r := range a.Answer.Targets {
 		i := -1
-		if r.Card != 0 {
-			g, ok := f.toG[r.Card]
+		if id := r.Card + r.Spell; id != 0 {
+			// A spell is its host card's object on the stack.
+			g, ok := f.toG[id]
 			if !ok {
-				return in, f.unbound(r.Card)
+				return in, f.unbound(id)
 			}
 			for k, o := range d.Options {
 				if o.Obj == g {
@@ -597,8 +674,12 @@ func (f *follower) gorgeOptionKeys(d *decision.Decision) []string {
 		}
 	case decision.KAttackers:
 		for _, o := range d.Options {
-			if o.Kind == "attacker" && o.Battle == 0 {
-				out = append(out, fmt.Sprintf("attack:%s:p%d", f.fid(o.Obj), o.Player))
+			if o.Kind == "attacker" {
+				if o.Battle != 0 {
+					out = append(out, fmt.Sprintf("attack:%s:c%s", f.fid(o.Obj), f.fid(o.Battle)))
+				} else {
+					out = append(out, fmt.Sprintf("attack:%s:p%d", f.fid(o.Obj), o.Player))
+				}
 			}
 		}
 	case decision.KBlockers:
@@ -609,7 +690,9 @@ func (f *follower) gorgeOptionKeys(d *decision.Decision) []string {
 		}
 	case decision.KTarget:
 		for _, o := range d.Options {
-			if o.Obj != 0 {
+			if o.Obj != 0 && f.e != nil && f.e.G.Obj(o.Obj) != nil && f.e.G.Obj(o.Obj).Zone == state.ZStack {
+				out = append(out, "spell:"+f.fid(o.Obj))
+			} else if o.Obj != 0 {
 				out = append(out, "card:"+f.fid(o.Obj))
 			} else {
 				out = append(out, fmt.Sprintf("player:%d", o.Player))
@@ -632,11 +715,11 @@ func forgeOptionKeys(a *Ask) []string {
 			if o.Player != nil {
 				p = *o.Player
 			}
-			out = append(out, fmt.Sprintf("attack:%d:p%d", o.Card, p))
+			out = append(out, attackKey(o.Card, p, o.DefenderCard))
 		case KindBlock:
 			out = append(out, fmt.Sprintf("block:%d:%d", o.Card, o.Attacker))
 		case KindTarget:
-			out = append(out, refKey(Ref{Card: o.Card, Player: o.Player}))
+			out = append(out, refKey(Ref{Card: o.Card, Player: o.Player, Spell: o.Spell}))
 		}
 	}
 	return dedupe(out)
@@ -682,6 +765,10 @@ func (f *follower) terminal() {
 		return
 	}
 	end := f.log.Entries[f.pos]
+	if end.End.Reason == ReasonUnfinished && end.End.Winner == nil && f.e.G.Over {
+		f.hard(WhatTerminal, nil, Divergence{Line: end.Line, Gorge: f.gorgeEnd(), Forge: endString(end.End)})
+		return
+	}
 	if !f.e.G.Over {
 		f.hard(WhatTerminal, nil, Divergence{Line: end.Line, Gorge: f.gorgeEnd(), Forge: endString(end.End)})
 		return
@@ -763,11 +850,13 @@ func (f *follower) entryCards(e Entry) []Implicated {
 	if a.Action != "" && a.Action != "pass" {
 		add(a.Card, "action:"+a.Action)
 	}
+	add(a.Source, "")
 	for _, r := range a.Targets {
-		add(r.Card, "")
+		add(r.Card+r.Spell, "")
 	}
 	for _, at := range a.Attacks {
 		add(at.Card, "action:attack")
+		add(at.DefenderCard, "")
 	}
 	for _, b := range a.Blocks {
 		add(b.Card, "action:block")
@@ -842,7 +931,17 @@ func answerKey(a Answer) string {
 	return fmt.Sprintf("%s:%d", a.Action, a.Card)
 }
 
+func attackKey(card, defender, defenderCard int) string {
+	if defender < 0 && defenderCard != 0 {
+		return fmt.Sprintf("attack:%d:c%d", card, defenderCard)
+	}
+	return fmt.Sprintf("attack:%d:p%d", card, defender)
+}
+
 func refKey(r Ref) string {
+	if r.Spell != 0 {
+		return fmt.Sprintf("spell:%d", r.Spell)
+	}
 	if r.Card != 0 {
 		return fmt.Sprintf("card:%d", r.Card)
 	}

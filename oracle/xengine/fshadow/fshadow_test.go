@@ -3,13 +3,17 @@ package fshadow
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 	"reflect"
+	"regexp"
 	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/decision"
+	"github.com/adams-shaun/gorge/engine/state"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -66,8 +70,13 @@ func TestGoldenReplaysClean(t *testing.T) {
 			snaps++
 		}
 	}
-	if res.Asks != asks || res.Snaps != snaps || snaps == 0 {
-		t.Errorf("followed %d asks and %d snaps, the log has %d and %d", res.Asks, res.Snaps, asks, snaps)
+	if res.Asks+res.SkippedAsks != asks || res.Snaps+res.SkippedSnaps != snaps || res.Snaps == 0 {
+		t.Errorf("followed %d asks (+%d skipped) and %d snaps (+%d skipped), the log has %d and %d", res.Asks, res.SkippedAsks, res.Snaps, res.SkippedSnaps, asks, snaps)
+	}
+	// Recorder item 7: Forge's turn-1 untap priority pass and its untap
+	// snaps have no gorge counterpart and are skipped, not compared.
+	if res.SkippedAsks != 1 || res.SkippedSnaps == 0 {
+		t.Errorf("skipped %d asks and %d snaps, want the turn-1 untap pass and every untap snap", res.SkippedAsks, res.SkippedSnaps)
 	}
 	t.Logf("fshadow: clean: %d decisions, %d asks, %d snaps", res.Decisions, res.Asks, res.Snaps)
 }
@@ -172,7 +181,7 @@ func TestDoctoredSnapshotReportsSnapshot(t *testing.T) {
 // TestOneSidedOptionIsSoft: an option Forge offers and gorge does not, with
 // Forge's answer still on gorge's list, is recorded and does not stop.
 func TestOneSidedOptionIsSoft(t *testing.T) {
-	l, line := doctor(t, func(a *Ask) bool { return a.Kind == KindPriority && a.Answer.Action == "pass" }, func(a *Ask) {
+	l, line := doctor(t, func(a *Ask) bool { return a.Kind == KindPriority && a.Answer.Action == "pass" && a.Step != "untap" }, func(a *Ask) {
 		a.Options = append(a.Options, Option{Action: "cast", Card: 999})
 	})
 	res := follow(t, l)
@@ -281,4 +290,178 @@ func TestDivergenceFileFields(t *testing.T) {
 	if string(keys["schema"]) != `"`+DivergenceSchema+`"` {
 		t.Errorf("schema %s", keys["schema"])
 	}
+}
+
+// The recorder reconciliation (adams-shaun/forge PR #2, "Reader changes
+// needed"): one test per item.
+
+// Item 1: an attack on a planeswalker or battle is defender -1 with
+// defender_card, and maps onto gorge's option of that Battle; one gorge does
+// not offer is answer-missing in that key form.
+func TestAttackOnAPermanent(t *testing.T) {
+	line := `{"t":"ask","n":1,"seat":0,"turn":3,"step":"declare-attackers","kind":"attack","options":[{"card":101,"defender_card":204}],"answer":{"attacks":[{"card":101,"defender":-1,"defender_card":204}]}}`
+	a := parseAsk(t, line)
+	if a.Answer.Attacks[0].DefenderCard != 204 || a.Options[0].DefenderCard != 204 || a.Options[0].Player != nil {
+		t.Fatalf("parsed %+v", a)
+	}
+	f := &follower{toG: map[int]state.ObjID{101: 2, 204: 14}, toF: map[state.ObjID]int{2: 101, 14: 204}, name: map[int]string{}}
+	d := &decision.Decision{Kind: decision.KAttackers, Options: []decision.Option{
+		{Index: 0, Kind: "attacker", Obj: 2, Player: 1},
+		{Index: 1, Kind: "attacker", Obj: 2, Player: 1, Battle: 14},
+	}}
+	in, dv := f.attackers(d, a)
+	if dv != nil || len(in.Choices) != 1 || in.Choices[0] != 1 {
+		t.Fatalf("intent %+v, divergence %+v: want the Battle option", in, dv)
+	}
+	if got := forgeOptionKeys(a); len(got) != 1 || got[0] != "attack:101:c204" {
+		t.Fatalf("forge keys %v", got)
+	}
+	if got := f.gorgeOptionKeys(d); len(got) != 2 || got[0] != "attack:101:c204" {
+		t.Fatalf("gorge keys %v", got)
+	}
+	d.Options = d.Options[:1]
+	if _, dv := f.attackers(d, a); dv == nil || dv.What != WhatAnswerMissing || dv.Forge != "attack:101:c204" {
+		t.Fatalf("divergence %+v", dv)
+	}
+}
+
+// Items 2 and 8: a spell target is {"spell":id}, its host card's object on
+// the stack; a target answer names its host as source.
+func TestSpellTargetAndSource(t *testing.T) {
+	line := `{"t":"ask","n":4,"seat":1,"turn":3,"step":"main1","kind":"target","options":[{"spell":105},{"player":0}],"answer":{"targets":[{"spell":105}],"source":203}}`
+	a := parseAsk(t, line)
+	if a.Answer.Source != 203 || a.Answer.Targets[0].Spell != 105 {
+		t.Fatalf("parsed %+v", a.Answer)
+	}
+	f := &follower{toG: map[int]state.ObjID{105: 6, 203: 13}, toF: map[state.ObjID]int{6: 105, 13: 203}, name: map[int]string{105: "Shock", 203: "Spellstutter"}}
+	d := &decision.Decision{Kind: decision.KTarget, Options: []decision.Option{{Index: 0, Player: 0}, {Index: 1, Obj: 6}}}
+	in, dv := f.targets(d, a)
+	if dv != nil || len(in.Choices) != 1 || in.Choices[0] != 1 {
+		t.Fatalf("intent %+v, divergence %+v", in, dv)
+	}
+	if got := forgeOptionKeys(a); len(got) != 2 || got[1] != "spell:105" {
+		t.Fatalf("forge keys %v", got)
+	}
+	cs := f.entryCards(Entry{Ask: a})
+	if len(cs) != 2 || cs[0].Name != "Spellstutter" || cs[1].Name != "Shock" {
+		t.Fatalf("implicated %+v, want the source then the spell", cs)
+	}
+}
+
+// Item 3: a priority action "other" has no gorge mapping: a harness finding,
+// not a crash.
+func TestPriorityOtherIsHarness(t *testing.T) {
+	l, line := doctor(t, func(a *Ask) bool { return a.Kind == KindPriority && a.Answer.Action == "pass" && a.Step != "untap" }, func(a *Ask) {
+		a.Answer = Answer{Action: "other", Card: a.Seat*100 + 100}
+	})
+	h := follow(t, l).Hard
+	if h == nil || h.What != WhatError || h.Harness != HarnessUnmapped || h.Line != line {
+		t.Fatalf("divergence %+v, want an answer-unmapped harness finding at line %d", h, line)
+	}
+}
+
+// Item 4: end.reason is Forge's GameEndReason name; "unfinished" with no
+// winner is a game Forge stopped early, which stops the follow clean, and a
+// winner that differs is still terminal.
+func TestEndReasons(t *testing.T) {
+	l := readGolden(t)
+	if e := l.Entries[len(l.Entries)-1].End; e == nil || e.Reason != "AllOpponentsLost" {
+		t.Fatalf("golden end %+v", e)
+	}
+	cut := readGolden(t)
+	for i, e := range cut.Entries {
+		if e.Ask != nil && e.Ask.Turn == 3 {
+			cut.Entries = append(cut.Entries[:i:i], Entry{Line: e.Line, T: TEnd, End: &End{T: TEnd, Reason: ReasonUnfinished}})
+			break
+		}
+	}
+	if res := follow(t, cut); res.Hard != nil || res.End != ReasonUnfinished {
+		t.Fatalf("unfinished: end %q, hard %+v", res.End, res.Hard)
+	}
+	w := 1 - *l.Entries[len(l.Entries)-1].End.Winner
+	l.Entries[len(l.Entries)-1].End.Winner = &w
+	if h := follow(t, l).Hard; h == nil || h.What != WhatTerminal || h.Field != "winner" {
+		t.Fatalf("other winner: %+v", h)
+	}
+}
+
+// Item 5: the opening shuffles come before start (the golden's order), and
+// a log with start first reads and follows the same.
+func TestShufflesBeforeStart(t *testing.T) {
+	l := readGolden(t)
+	if l.Entries[0].Shuffle == nil || l.Entries[1].Shuffle == nil || l.Entries[2].Start == nil {
+		t.Fatalf("golden opens %s %s %s, want shuffle shuffle start", l.Entries[0].T, l.Entries[1].T, l.Entries[2].T)
+	}
+	l.Entries[0], l.Entries[1], l.Entries[2] = l.Entries[2], l.Entries[0], l.Entries[1]
+	if res := follow(t, l); res.Hard != nil || res.End != "end" {
+		t.Fatalf("start first: %+v", res.Hard)
+	}
+}
+
+// Item 6: mulligans is Forge's cap of 7, which gorge takes as its limit; a
+// free_mulligan gorge's seat-count rule disagrees with (a 2-seat game) has
+// no Config input, so it is a harness finding, not a crash.
+func TestFreeMulliganInexpressible(t *testing.T) {
+	l := readGolden(t)
+	if l.Header.Mulligans != 7 || l.Header.FreeMulligan {
+		t.Fatalf("golden header mulligans %d free %v", l.Header.Mulligans, l.Header.FreeMulligan)
+	}
+	l.Header.FreeMulligan = true
+	h := follow(t, l).Hard
+	if h == nil || h.Harness != HarnessSetup || h.Field != "free_mulligan" || h.Line != 1 {
+		t.Fatalf("divergence %+v, want a setup-inexpressible harness finding at the header", h)
+	}
+}
+
+// Item 9: rand is coin or die only. A coin's heads (1) is gorge's winning
+// draw 0, a die's 1..bound is gorge's 0..bound-1, and any other kind (Forge
+// logs no pick) is chance-misaligned.
+func TestRandValues(t *testing.T) {
+	for _, c := range []struct {
+		r     Rand
+		bound int
+		want  int
+		ok    bool
+	}{
+		{Rand{Kind: "coin", Bound: 2, Value: 1}, 2, 0, true},
+		{Rand{Kind: "coin", Bound: 2, Value: 0}, 2, 1, true},
+		{Rand{Kind: "die", Bound: 6, Value: 6}, 6, 5, true},
+		{Rand{Kind: "die", Bound: 6, Value: 1}, 6, 0, true},
+		{Rand{Kind: "die", Bound: 20, Value: 3}, 6, 0, false},
+		{Rand{Kind: "pick", Bound: 3, Value: 1}, 3, 0, false},
+	} {
+		got, err := randValue(&c.r, 0, c.bound)
+		if (err == nil) != c.ok || (c.ok && got != c.want) {
+			t.Errorf("%+v bound %d: %d, %v", c.r, c.bound, got, err)
+		}
+	}
+	if chanceHarness(fmt.Errorf("hypothetical chance planner draw 3: x")) != HarnessChance {
+		t.Error("a planner failure is not chance-misaligned")
+	}
+}
+
+// Item 10: snapshot checkpoints are "t<turn>:<step>".
+func TestSnapCheckpoints(t *testing.T) {
+	re := regexp.MustCompile(`^t[0-9]+:[a-z0-9-]+$`)
+	n := 0
+	for _, e := range readGolden(t).Entries {
+		if e.Snap != nil {
+			n++
+			if !re.MatchString(e.Snap.Snapshot.Checkpoint) {
+				t.Fatalf("checkpoint %q", e.Snap.Snapshot.Checkpoint)
+			}
+		}
+	}
+	if n == 0 {
+		t.Fatal("no snaps")
+	}
+}
+
+func parseAsk(t *testing.T, line string) *Ask {
+	t.Helper()
+	l, err := Read(bytes.NewReader([]byte(`{"t":"header","format":"forge-shadow-1","seats":[{"seat":0},{"seat":1}]}` + "\n" + line + "\n")))
+	if err != nil {
+		t.Fatal(err)
+	}
+	return l.Entries[0].Ask
 }
