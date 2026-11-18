@@ -21,6 +21,15 @@ func (g *gorgeNorm) chain(e *effects, a *cards.SA, depth int) {
 		g.parked = false
 	}
 	for ; a != nil; a = a.Sub {
+		if a.Params["Condition"] == "Awakened" {
+			// kwAwaken appends its awakened-only links (counters on a
+			// land, the animate) to the END of the spell chain without a
+			// KeywordLine tag. A keyword's expansion is summarised by its
+			// T1 token on both sides (awakenPlainBranch drops the mtgish
+			// AwakenPermanent branch), so cut the chain here: nothing
+			// printed follows the minted links.
+			break
+		}
 		if a.API == "Branch" {
 			// An if/else: the two branches are alternatives.
 			var subs []*effects
