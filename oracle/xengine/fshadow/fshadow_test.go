@@ -625,3 +625,42 @@ func TestUnloggedArrangeIsAnsweredByDefault(t *testing.T) {
 		t.Error("no default arrange answered")
 	}
 }
+
+// TestChooseWithoutALogLineAnsweredByDefault is the farm cmdr4 repro (seeds
+// 13100 and 13102): gorge asks a list-pick (KChoose) where Forge's next log
+// line is the seat's priority, because Forge's recorder logs only priority,
+// attack, block and target asks. The follower used to stop there with kind
+// "choose seat 2" against "priority seat 2"; it now answers by default (the
+// first Min options) and consumes no line.
+func TestChooseWithoutALogLineAnsweredByDefault(t *testing.T) {
+	prio := parseAsk(t, `{"t":"ask","n":200,"seat":2,"turn":5,"step":"main1","kind":"priority","answer":{"action":"pass"}}`)
+	choose := func(min, max, n int) *decision.Decision {
+		d := &decision.Decision{Seq: 7, Player: 2, Kind: decision.KChoose, Min: min, Max: max}
+		for i := 0; i < n; i++ {
+			d.Options = append(d.Options, decision.Option{Index: i, Kind: "discard"})
+		}
+		return d
+	}
+	for _, c := range []struct {
+		name string
+		d    *decision.Decision
+		want []int
+	}{
+		{"exactly one", choose(1, 1, 3), []int{0}},
+		{"discard down", choose(2, 2, 4), []int{0, 1}},
+		{"optional picks none", choose(0, 2, 3), []int{}},
+		{"clamped to the offer", choose(3, 3, 2), []int{0, 1}},
+	} {
+		f := &follower{log: &Log{}}
+		in, ok := f.answer(c.d, Entry{Line: 292, T: TAsk, Ask: prio})
+		if !ok || f.res.Hard != nil {
+			t.Fatalf("%s: hard divergence %+v", c.name, f.res.Hard)
+		}
+		if !reflect.DeepEqual(in.Choices, c.want) || in.Seq != 7 || in.Player != 2 {
+			t.Errorf("%s: intent %+v, want choices %v", c.name, in, c.want)
+		}
+		if f.pos != 0 || f.res.Chooses != 1 || f.res.Asks != 0 {
+			t.Errorf("%s: pos %d chooses %d asks %d, want the log line left unconsumed", c.name, f.pos, f.res.Chooses, f.res.Asks)
+		}
+	}
+}
