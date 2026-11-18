@@ -546,14 +546,29 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 	}
 	var out []*oraclegen.XPos
 	any, inFirst := false, false
+	// run is the passes in succession on the current stack: every seat passing
+	// one after another resolves its top object (CR 117.4), which no snapshot
+	// diff can show when the resolution's own trigger stands in its place.
+	run := 0
 	for i, st := range steps {
 		if st.Op != "pass" {
 			out = append(out, nil)
+			run = 0
 			continue
 		}
 		any = true
 		before, after := snaps[i], snaps[i+1]
 		moved := before.Turn != after.Turn || before.Step != after.Step
+		resolves := stackLost(before.Stack, after.Stack)
+		switch {
+		case moved || resolves || len(before.Stack) == 0:
+			run = 0
+		default:
+			run++
+			if run >= max(len(before.Players), 2) {
+				resolves, run = true, 0
+			}
+		}
 		if moved {
 			inFirst = after.Step == stepCombatDamage && firstStrikerInCombat(before)
 		} else if inFirst && len(before.Stack) == 0 && st.Seat != before.Active {
@@ -566,7 +581,7 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 		out = append(out, &oraclegen.XPos{
 			Turn: after.Turn, Step: step, Active: after.Active,
 			Moved:    moved,
-			Resolves: stackLost(before.Stack, after.Stack),
+			Resolves: resolves,
 		})
 	}
 	if !any {

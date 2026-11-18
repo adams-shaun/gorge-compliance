@@ -448,6 +448,35 @@ func TestPrepareRefusesACardNoXMageSetLists(t *testing.T) {
 	}
 }
 
+// TestPassPositionsResolvesSameSourceTrigger: a resolution whose own trigger
+// stands in its place (Aether Syphon's draw, then its max-speed mill rider)
+// leaves the stack unchanged, yet the pass that completes the round resolves
+// it (CR 117.4). A lone pass, a pass after an action and a pass on an empty
+// stack do not.
+func TestPassPositionsResolvesSameSourceTrigger(t *testing.T) {
+	ab := []rules.OracleSnapStack{{Kind: "ability", Source: "p0:Aether Syphon"}}
+	at := func(stack []rules.OracleSnapStack) rules.OracleSnapshot {
+		return rules.OracleSnapshot{Turn: 3, Step: "main1", Players: make([]rules.OracleSnapPlayer, 2), Stack: stack}
+	}
+	pass := func(seat int) oraclegen.Step { return oraclegen.Step{Op: "pass", Seat: seat} }
+	act := oraclegen.Step{Op: "activate"}
+	steps := []oraclegen.Step{act, pass(0), pass(1), pass(0), pass(1), pass(0)}
+	snaps := []rules.OracleSnapshot{at(nil), at(ab), at(ab), at(ab), at(ab), at(ab), at(ab)}
+	// activate puts ab on; passes 1,2 resolve it and the rider replaces it;
+	// passes 3,4 resolve the rider and nothing replaces it.
+	snaps[5], snaps[6] = at(nil), at(nil)
+	got := passPositions(steps, snaps)
+	want := []bool{false, true, false, true, false}
+	if len(got) != len(steps) {
+		t.Fatalf("%d positions, want %d", len(got), len(steps))
+	}
+	for i, w := range want {
+		if p := got[i+1]; p.Resolves != w {
+			t.Errorf("pass %d: resolves=%v, want %v", i, p.Resolves, w)
+		}
+	}
+}
+
 func TestPreparePassPositions(t *testing.T) {
 	_, _, ws, items := prepared(t, 2)
 	var moved, resolves int
