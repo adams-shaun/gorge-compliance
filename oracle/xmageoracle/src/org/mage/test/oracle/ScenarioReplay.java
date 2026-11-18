@@ -5026,6 +5026,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         : "disguised".equals(mode) ? " using Disguise" : "";
                 boolean warpedCast = "warped".equals(mode);
                 String card = cardName + castSuffix + (warpedCast ? " with Warp" : "");
+                // A mayplay cast names the object by where it is (CR 601.2a),
+                // not by its name: TestPlayer's "Cast <name>" search runs
+                // over Zone.ALL and takes the first same-name match, so a
+                // same-name card in the caster's hand beat the exiled one.
+                String castObject = mayplayCastObject(mode, refAlias.get(str(st, "card")), cardName,
+                        xmageSpelling(refCard), card);
                 if (!castSuffix.isEmpty()) {
                     faceDownRefs.add(str(st, "card"));
                 }
@@ -5042,7 +5048,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // The scripted "<ref>^X=<share>" answers name the targets
                     // and gorge's split; a target string here would be a
                     // second, unconsumed set.
-                    castSpell(turn, phase, p, card);
+                    castObjectSpell(turn, phase, p, castObject);
                     cast.add(cardName);
                     return;
                 }
@@ -5058,11 +5064,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
                                 + ", a divided, adjusted or later-mode-target spell the explicit skip plan does not cover");
                     }
                     queueCastTargetsWithSkips(p, tg, skips);
-                    castSpell(turn, phase, p, card);
-                } else if (!tg.isEmpty() && castQueuedTargets(turn, phase, p, cardName, tg, castAbility)) {
+                    castObjectSpell(turn, phase, p, castObject);
+                } else if (!tg.isEmpty() && castQueuedTargets(turn, phase, p, cardName, castObject, tg, castAbility)) {
                     // Cast with its targets queued: see castQueuedTargets.
                 } else if (tg.size() == 1 && isSeatRef(tg.get(0)) && !hasGift(cardName)) {
-                    castSpell(turn, phase, p, card, seat(seatOf(tg.get(0))));
+                    castObjectSpell(turn, phase, p, castObject, seat(seatOf(tg.get(0))));
                 } else if (tg.size() == 1 && isSeatRef(tg.get(0))) {
                     // A Gift spell (Mind Spiral, Sazacap's Brew): the castSpell
                     // player form binds the wrong ask, so queue the spell's
@@ -5075,9 +5081,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     if (giftPromisedCast) {
                         addTarget(p, TestPlayer.TARGET_SKIP);
                     }
-                    castSpell(turn, phase, p, card);
+                    castObjectSpell(turn, phase, p, castObject);
                 } else if (tg.isEmpty()) {
-                    castSpell(turn, phase, p, card);
+                    castObjectSpell(turn, phase, p, castObject);
                     cast.add(cardName);
                     return;
                 } else if (tg.size() == 1 && cast.contains(castSpelling(refName(tg.get(0))))) {
@@ -5086,12 +5092,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // target is a scenario ref; the setup alias names the
                     // card in hand, not the spell, so target by name.
                     String spell = castSpelling(refName(tg.get(0)));
-                    castSpell(turn, phase, p, card, spell, spell);
+                    castSpell(turn, phase, p, castObject, spell, spell);
                 } else if (tg.size() == 1) {
                     // A single target goes through XMage's own string form. A
                     // divided target whose inline form XMage cannot read
                     // (Twin Bolt) was queued by castQueuedTargets above.
-                    castSpell(turn, phase, p, card, targetName(tg.get(0)));
+                    castSpell(turn, phase, p, castObject, targetName(tg.get(0)));
                 } else {
                     // Two or more targets: queue each through addTarget and
                     // cast with no $target, so an "up to N" slot stays open
@@ -5114,7 +5120,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         for (String t : tg) {
                             names.add(amountTargetName(t));
                         }
-                        castSpell(turn, phase, p, card, String.join("^", names));
+                        castSpell(turn, phase, p, castObject, String.join("^", names));
                         cast.add(cardName);
                         return;
                     }
@@ -5127,7 +5133,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         // Through the Weft, Rabid Bite).
                         addTarget(p, TestPlayer.TARGET_SKIP);
                     }
-                    castSpell(turn, phase, p, card);
+                    castObjectSpell(turn, phase, p, castObject);
                 }
                 cast.add(cardName);
                 return;
@@ -5404,6 +5410,43 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
     }
 
+    /**
+     * What a cast command names for one cast step. A "mayplay" cast of a whole
+     * card (not a split/Room half, which XMage names by half) whose ref setup
+     * bound an alias is the cast "@ref": TestPlayer then matches the
+     * ability's source object by id, so the exiled copy is cast and a
+     * same-name card in the caster's hand stays there (CR 601.2a: the card
+     * is picked by where it is). Every other cast, and a mayplay ref setup
+     * never bound, keeps the name form (card).
+     */
+    static String mayplayCastObject(String mode, String alias, String castName, String refSpelling,
+            String card) {
+        if (!"mayplay".equals(mode) || alias == null || !castName.equals(refSpelling)) {
+            return card;
+        }
+        return alias;
+    }
+
+    /** castSpell for what mayplayCastObject picked. The plain and the
+     * player-target castSpell forms refuse an "@ref" alias, so an aliased cast
+     * goes through activateAbility, whose "activate:Cast @ref" command is the
+     * same one (ACTIVATE_CAST) and which TestPlayer matches by object id. */
+    private void castObjectSpell(int turn, PhaseStep phase, TestPlayer p, String castObject) {
+        if (castObject.startsWith("@")) {
+            activateAbility(turn, phase, p, "Cast " + castObject);
+        } else {
+            castSpell(turn, phase, p, castObject);
+        }
+    }
+
+    private void castObjectSpell(int turn, PhaseStep phase, TestPlayer p, String castObject, Player target) {
+        if (castObject.startsWith("@")) {
+            activateAbility(turn, phase, p, "Cast " + castObject, target);
+        } else {
+            castSpell(turn, phase, p, castObject, target);
+        }
+    }
+
     private List<String> targets(JsonObject st) {
         return new ArrayList<>(names(st, "targets"));
     }
@@ -5427,6 +5470,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
      */
     boolean castQueuedTargets(int turn, PhaseStep phase, TestPlayer p, String card, List<String> tg,
             Ability ability) {
+        return castQueuedTargets(turn, phase, p, card, card, tg, ability);
+    }
+
+    /** As above; castObject is what the cast command names (the card's name,
+     * or its "@ref" alias for a mayplay cast, see mayplayCastObject). */
+    boolean castQueuedTargets(int turn, PhaseStep phase, TestPlayer p, String card, String castObject,
+            List<String> tg, Ability ability) {
         // Derive every routing flag HERE, from the one ability, so a caller
         // cannot drop the modal-first-target-in-a-later-mode term: the test
         // drives this method with a real card's spell ability, and a routing
@@ -5441,7 +5491,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // recipient takes the whole amount, which chooseTargetAmount
             // reads from the queue as "<name>^X=<amount>" while casting.
             addTarget(p, amountTargetName(tg.get(0)) + "^X=" + soleShare);
-            castSpell(turn, phase, p, card);
+            castObjectSpell(turn, phase, p, castObject);
             return true;
         }
         if (!queueAdjustedCastTargets(adjusted || firstTargetInLaterMode, divided, tg.size())) {
@@ -5453,7 +5503,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if (adjusted) {
             adjustedCasts.add(card);
         }
-        castSpell(turn, phase, p, card);
+        castObjectSpell(turn, phase, p, castObject);
         return true;
     }
 
