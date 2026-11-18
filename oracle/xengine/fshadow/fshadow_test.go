@@ -626,6 +626,49 @@ func TestUnloggedArrangeIsAnsweredByDefault(t *testing.T) {
 	}
 }
 
+// TestMulliganBottomWaitsForTheBottomingAsk is the farm cmdr4 repro (EOE and
+// OTJ pods, seed 13003, log line 17): Forge bottoms a London mulligan's cards
+// right after drawing, so its mull line for a kept hand carries the bottom;
+// gorge asks every seat keep-or-mulligan first and the bottoming of every
+// kept hand after, in seat order. In a 4-seat pod the next keep ask belongs
+// to another seat, and the follower, still holding the first seat's line for
+// its bottom, stopped on "mulligan seat: gorge 3, Forge 1". The bottom is
+// now remembered by seat and answers the bottoming ask whenever it comes.
+func TestMulliganBottomWaitsForTheBottomingAsk(t *testing.T) {
+	l, err := Read(strings.NewReader(`{"t":"header","format":"forge-shadow-1","seats":[{"seat":0},{"seat":1},{"seat":2},{"seat":3}]}
+{"t":"mull","seat":1,"keep":true,"bottom":[201,202]}
+{"t":"mull","seat":3,"keep":true}
+{"t":"ask","n":1,"seat":1,"turn":1,"step":"main1","kind":"priority","answer":{"action":"pass"}}
+`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	f := &follower{log: l, toG: map[int]state.ObjID{201: 11, 202: 12, 203: 13}}
+	keepAsk := func(p state.PlayerID) *decision.Decision {
+		return &decision.Decision{Seq: 1, Player: p, Kind: decision.KMulligan, Min: 1, Max: 1,
+			Options: []decision.Option{{Index: 0, Kind: "keep"}, {Index: 1, Kind: "mulligan"}}}
+	}
+	bottomAsk := &decision.Decision{Seq: 3, Player: 1, Kind: decision.KMulligan, Min: 2, Max: 2,
+		Options: []decision.Option{{Index: 0, Kind: "bottom", Obj: 13}, {Index: 1, Kind: "bottom", Obj: 12}, {Index: 2, Kind: "bottom", Obj: 11}}}
+	for _, c := range []struct {
+		d    *decision.Decision
+		want []int
+		pos  int
+	}{
+		{keepAsk(1), []int{0}, 1},
+		{keepAsk(3), []int{0}, 2},
+		{bottomAsk, []int{2, 1}, 2},
+	} {
+		in, ok := f.answer(c.d, l.Entries[f.pos])
+		if !ok || f.res.Hard != nil {
+			t.Fatalf("%s for seat %d: hard divergence %+v", c.d.Kind, c.d.Player, f.res.Hard)
+		}
+		if !reflect.DeepEqual(in.Choices, c.want) || f.pos != c.pos {
+			t.Errorf("seat %d: choices %v pos %d, want %v pos %d", c.d.Player, in.Choices, f.pos, c.want, c.pos)
+		}
+	}
+}
+
 // TestPriorityActivateMapsToAbilityOption is the farm cmdr4 repro (FDN-s131
 // pods 13101 and 13103, Blast Zone and Evolving Wilds): Forge's seat
 // activated a land's printed ability and the follower stopped with
