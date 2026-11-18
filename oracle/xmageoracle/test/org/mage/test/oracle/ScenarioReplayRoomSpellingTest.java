@@ -202,5 +202,27 @@ public final class ScenarioReplayRoomSpellingTest {
                 new CardSetInfo(cease, "MKM", "1", Rarity.UNCOMMON))), "Cease // Desist is not a Room");
         equal(false, ScenarioReplay.isRoomCard(null), "an unresolved name is not a Room");
         System.out.println("PASS Room detection by XMage card class");
+
+        // A stack ability is named by the face that printed it (CR 113.7a),
+        // whichever half XMage's source lookup resolved to.
+        mage.cards.a.AclazotzDeepestBetrayal acl = new mage.cards.a.AclazotzDeepestBetrayal(UUID.randomUUID(),
+                new CardSetInfo("Aclazotz, Deepest Betrayal", "LCI", "90", Rarity.MYTHIC));
+        mage.abilities.Ability dies = null;
+        for (mage.abilities.Ability a : acl.getLeftHalfCard().getAbilities()) {
+            if (a.getRule().contains("dies")) {
+                dies = a.copy();
+            }
+        }
+        mage.abilities.Ability mana = acl.getRightHalfCard().getAbilities().get(0).copy();
+        equal("Aclazotz, Deepest Betrayal", ScenarioReplay.abilitySourceName(acl.getRightHalfCard(), dies),
+                "front-face trigger resolved to the back half reads the front face");
+        equal("Aclazotz, Deepest Betrayal", ScenarioReplay.abilitySourceName(acl.getLeftHalfCard(), dies),
+                "front-face trigger from the front half");
+        equal("Temple of the Dead", ScenarioReplay.abilitySourceName(acl.getLeftHalfCard(), mana),
+                "an ability the back face printed keeps the back face's name");
+        equal(cease, ScenarioReplay.abilitySourceName(new mage.cards.c.CeaseDesist(UUID.randomUUID(),
+                new CardSetInfo(cease, "MKM", "1", Rarity.UNCOMMON)), dies),
+                "a split card is not a double-faced card");
+        System.out.println("PASS stack ability source names the printing face");
     }
 }
