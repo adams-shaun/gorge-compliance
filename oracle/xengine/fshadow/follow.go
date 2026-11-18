@@ -118,6 +118,10 @@ type Result struct {
 	// Arranges counts the arrange decisions (scry, surveil, ...) the log has
 	// no line for, which the follower answered by default.
 	Arranges int `json:"arranges,omitempty"`
+	// Optionals counts the optional-trigger yes/no decisions (an
+	// OptionalDecider$ trigger) the log has no line for, which the follower
+	// answered by default (yes).
+	Optionals int `json:"optionals,omitempty"`
 	// End is how the follow finished: "end" (the log's end line matched),
 	// "unfinished" (Forge stopped the game early), "log" (the log ran out
 	// first), "cap" or "divergence".
@@ -339,7 +343,7 @@ func at(turn int, step string) int {
 // unloggedKind reports whether Forge's recorder writes no ask line for a
 // decision of kind k, so the follower answers it by default (answer).
 func unloggedKind(k decision.Kind) bool {
-	return k == decision.KChoose || k == decision.KModes || k == decision.KArrange
+	return k == decision.KChoose || k == decision.KModes || k == decision.KArrange || k == decision.KTriggerOptional
 }
 
 // snapAheadOfUnlogged reports whether snapshot entry e describes a point past
@@ -508,6 +512,17 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// allows -- and consume no line; Forge's real choice, if it
 		// differs, shows at the next library_top snapshot.
 		return f.defaultArrange(d), true
+	}
+	if d.Kind == decision.KTriggerOptional {
+		// Forge's recorder logs no "may" trigger's yes/no (its
+		// confirmTrigger hook writes no ask line), so the next line belongs
+		// to a later decision (farm cmdr4: gorge "trigger_optional seat 0"
+		// against Forge's "priority seat 0"). Answer by default -- the first
+		// option, "yes", as Forge's controller accepts a trigger it may
+		// decline -- and consume no line; Forge's real choice, if it
+		// differs, shows at the next snapshot.
+		f.res.Optionals++
+		return firstMin(d), true
 	}
 	if d.Kind == decision.KChoose {
 		// Forge's recorder logs only priority, attack, block and target
