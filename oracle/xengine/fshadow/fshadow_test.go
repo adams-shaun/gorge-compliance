@@ -465,3 +465,37 @@ func parseAsk(t *testing.T, line string) *Ask {
 	}
 	return l.Entries[0].Ask
 }
+
+// TestSplitCardBindsByJoinedName is the 4-seat pod repro (farm cmdr4, seed
+// 13000): Forge's header names a split card "Dusk // Dawn" while gorge's
+// front face is "Dusk", and setup refused the whole game ("does not bind").
+// The joined name binds a split card only; an adventurer binds by its front
+// face alone.
+func TestSplitCardBindsByJoinedName(t *testing.T) {
+	reg := corpus(t)
+	split, ok := reg.Lookup("Dusk // Dawn")
+	if !ok {
+		t.Fatal("no Dusk // Dawn in the corpus")
+	}
+	adv, ok := reg.Lookup("Beanstalk Giant")
+	if !ok {
+		t.Fatal("no Beanstalk Giant in the corpus")
+	}
+	for _, c := range []struct {
+		card *cards.Card
+		name string
+		want bool
+	}{
+		{split, "Dusk // Dawn", true},
+		{split, "dusk // dawn", true},
+		{split, "Dusk", true},
+		{split, "Dawn", false},
+		{adv, "Beanstalk Giant", true},
+		{adv, "Beanstalk Giant // Fertile Footsteps", false},
+		{nil, "Dusk", false},
+	} {
+		if got := bindsName(c.card, c.name); got != c.want {
+			t.Errorf("bindsName(%q) = %v, want %v", c.name, got, c.want)
+		}
+	}
+}

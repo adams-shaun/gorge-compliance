@@ -210,11 +210,34 @@ func (f *follower) setup() error {
 	f.e = e
 	for fid, gid := range f.toG {
 		o := e.G.Obj(gid)
-		if o == nil || o.Card == nil || len(o.Card.Faces) == 0 || !strings.EqualFold(o.Card.Faces[0].Name, f.name[fid]) {
+		if o == nil || !bindsName(o.Card, f.name[fid]) {
 			return fmt.Errorf("fshadow: Forge id %d (%q) does not bind to gorge object %d", fid, f.name[fid], gid)
 		}
 	}
 	return nil
+}
+
+// bindsName reports whether Forge's name for a card is gorge's card: its
+// front face's name, or for a split card (CR 709.4) both halves joined by
+// " // ", which is the name Forge's card database and header use for one
+// (Dusk // Dawn; an adventurer or a DFC is named by its front face).
+func bindsName(c *cards.Card, name string) bool {
+	if c == nil || len(c.Faces) == 0 || c.Faces[0] == nil {
+		return false
+	}
+	if strings.EqualFold(c.Faces[0].Name, name) {
+		return true
+	}
+	if !strings.EqualFold(c.AlternateMode, "Split") {
+		return false
+	}
+	parts := make([]string, 0, len(c.Faces))
+	for _, fc := range c.Faces {
+		if fc != nil {
+			parts = append(parts, fc.Name)
+		}
+	}
+	return strings.EqualFold(strings.Join(parts, " // "), name)
 }
 
 // planShuffle returns Forge's logged order for the seat's next shuffle.
