@@ -448,6 +448,29 @@ func TestPrepareRefusesACardNoXMageSetLists(t *testing.T) {
 	}
 }
 
+// TestPassPositionsExtraStepSameName: a pass that begins an additional end step
+// (CR 500.9), which has the name of the step it follows, is Moved, even when a
+// trigger of the new step is on the stack after it; the active seat's own pass
+// on an empty stack only hands priority on, and the pass resolving that trigger
+// moves nothing.
+func TestPassPositionsExtraStepSameName(t *testing.T) {
+	trigger := []rules.OracleSnapStack{{Kind: "ability", Source: "p0:X"}}
+	at := func(prio int, stack []rules.OracleSnapStack) rules.OracleSnapshot {
+		return rules.OracleSnapshot{Turn: 1, Step: "end", Active: 0, Priority: prio, Stack: stack}
+	}
+	pass := func(seat int) oraclegen.Step { return oraclegen.Step{Op: "pass", Seat: seat} }
+	got := passPositions(
+		[]oraclegen.Step{pass(0), pass(1), pass(0)},
+		[]rules.OracleSnapshot{at(0, nil), at(1, nil), at(0, trigger), at(1, trigger)},
+	)
+	want := []struct{ moved, resolves bool }{{false, false}, {true, false}, {false, false}}
+	for i, w := range want {
+		if got[i].Moved != w.moved || got[i].Resolves != w.resolves {
+			t.Errorf("pass %d: moved=%v resolves=%v, want %v", i, got[i].Moved, got[i].Resolves, w)
+		}
+	}
+}
+
 func TestPreparePassPositions(t *testing.T) {
 	_, _, ws, items := prepared(t, 2)
 	var moved, resolves int
