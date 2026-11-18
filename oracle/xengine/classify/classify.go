@@ -8,6 +8,7 @@ package classify
 import (
 	"fmt"
 	"regexp"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -184,6 +185,9 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	case sameNameTriggerOrder(item, v, f.Step, fl) != "":
 		f.Class = ClassHarness
 		f.Msg = engine + ": " + sameNameTriggerOrder(item, v, f.Step, fl)
+	case graveyardOrderOnly(g, x, v, f.Step):
+		f.Class = ClassHarness
+		f.Msg = engine + ": two or more cards entered the graveyard in the same step and the engines ordered them differently (CR 404.3)"
 	case paymentChoice(item, g, x, v, f.Step, fl):
 		f.Class = ClassPaymentChoice
 		f.Msg = "pool split after a cast/activate whose payment was not fixed"
@@ -757,6 +761,42 @@ func rngField(field string) bool {
 		}
 	}
 	return false
+}
+
+// graveyardOrderOnly reports a pN.graveyard divergence at checkpoint step d
+// that is only the order of two or more cards that entered that graveyard at
+// that step. CR 404.3 lets the owner arrange simultaneous arrivals in any
+// order, and the engines pick differently. Both engines must hold, below the
+// arrivals, exactly the graveyard gorge held after the step before (so no card
+// already there moved), and the arrivals must be the same multiset. One card
+// entering alone, or any reorder of older cards, stays a divergence: the top of
+// a graveyard is rules-relevant.
+func graveyardOrderOnly(g rules.OracleResult, x oraclediff.XResult, v oraclediff.Verdict, d int) bool {
+	rest, ok := strings.CutPrefix(v.Field, "p")
+	seatS, tail, ok2 := strings.Cut(rest, ".")
+	if v.Status != oraclediff.Diverge || !ok || !ok2 || tail != "graveyard" || d < 0 {
+		return false
+	}
+	seat, err := strconv.Atoi(seatS)
+	if err != nil || seat < 0 || d+1 >= len(g.Snapshots) || d+1 >= len(x.Snapshots) {
+		return false
+	}
+	gs, xs := g.Snapshots[d].Players, g.Snapshots[d+1].Players
+	xp := x.Snapshots[d+1].Players
+	if seat >= len(gs) || seat >= len(xs) || seat >= len(xp) {
+		return false
+	}
+	before, gNow, xNow := gs[seat].Graveyard, xs[seat].Graveyard, xp[seat].Graveyard
+	n := len(before)
+	if len(gNow) != len(xNow) || len(gNow)-n < 2 || slices.Equal(gNow, xNow) ||
+		!slices.Equal(gNow[:n], before) || !slices.Equal(xNow[:n], before) {
+		return false
+	}
+	a := append([]string(nil), gNow[n:]...)
+	b := append([]string(nil), xNow[n:]...)
+	sort.Strings(a)
+	sort.Strings(b)
+	return slices.Equal(a, b)
 }
 
 // shuffledTopExile reports a pN.exile difference after a shuffle (CR 701.24a)
