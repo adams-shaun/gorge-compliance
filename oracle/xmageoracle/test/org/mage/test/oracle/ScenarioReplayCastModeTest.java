@@ -91,8 +91,54 @@ public final class ScenarioReplayCastModeTest {
         System.out.println("PASS warped casts Bygone Colossus for its {3} warp cost; it is on the stack");
     }
 
+    private static String mayplayCastObject(String mode, String alias, String castName, String refSpelling,
+            String card) throws Exception {
+        java.lang.reflect.Method m = ScenarioReplay.class.getDeclaredMethod("mayplayCastObject",
+                String.class, String.class, String.class, String.class, String.class);
+        m.setAccessible(true);
+        return String.valueOf(m.invoke(null, mode, alias, castName, refSpelling, card));
+    }
+
+    private static int count(JsonObject snap, String zone, String name) {
+        int n = 0;
+        for (JsonElement e : snap.getAsJsonArray(zone)) {
+            n += name.equals(e.isJsonObject() ? e.getAsJsonObject().get("source").getAsString()
+                    : e.getAsString()) ? 1 : 0;
+        }
+        return n;
+    }
+
+    /** CR 601.2a: a mayplay cast names the card by where it is. p0 holds one
+     * Misthollow Griffin (hand) and has another in exile (castable from there);
+     * the step names the exiled copy ("#2": hand is counted before exile). The
+     * exiled copy must be the spell, and the hand copy must stay in hand. The
+     * name form ("Cast Misthollow Griffin") took the first same-name match. */
+    private static void mayplayPicksTheNamedCopy() throws Exception {
+        equal("@p0:Ring", mayplayCastObject("mayplay", "@p0:Ring", "Ring", "Ring", "Ring"), "mayplay alias");
+        equal("Ring", mayplayCastObject("mayplay", null, "Ring", "Ring", "Ring"), "mayplay, no alias bound");
+        equal("Ring", mayplayCastObject("", "@p0:Ring", "Ring", "Ring", "Ring"), "ordinary cast keeps the name");
+        equal("Fire", mayplayCastObject("mayplay", "@p0:Fire", "Fire", "Fire // Ice", "Fire"),
+                "a split half keeps its half name");
+        JsonObject sc = JsonParser.parseString("{name:'Misthollow Griffin',card:'Misthollow Griffin',"
+                + "setup:{p0:{hand:['Misthollow Griffin'],exile:['Misthollow Griffin']}},"
+                + "steps:[{op:'cast',seat:0,card:'p0:Misthollow Griffin#2',cast_mode:'mayplay',mana:'UUUU'}]}")
+                .getAsJsonObject();
+        JsonObject res = new ScenarioReplay().replayOnce(sc, false);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("mayplay replay failed: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        equal(1, count(last, "stack", "Misthollow Griffin"), "Griffin spells on the stack: " + last);
+        JsonObject p0 = last.getAsJsonArray("players").get(0).getAsJsonObject();
+        equal(1, count(p0, "hand", "Misthollow Griffin"), "hand Griffin stayed in hand: " + last);
+        equal(0, count(p0, "exile", "Misthollow Griffin"), "exiled Griffin was the one cast: " + last);
+        System.out.println("PASS a mayplay cast of the exiled copy leaves the same-name hand copy in hand");
+    }
+
     public static void main(String[] args) throws Exception {
         warpedCast();
+        mayplayPicksTheNamedCopy();
         // Regression: the driver rejected "mayplay" by name before the replay
         // ever reached the cast, so every Reckless Impulse window was a
         // harness row. The card is in exile under a play-from-exile
