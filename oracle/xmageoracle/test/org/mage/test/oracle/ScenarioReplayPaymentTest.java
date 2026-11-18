@@ -6,11 +6,18 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObjectImpl;
+import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.decks.Deck;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
 import mage.constants.MultiplayerAttackOption;
+import mage.constants.Outcome;
+import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
@@ -266,6 +273,58 @@ public final class ScenarioReplayPaymentTest {
         System.out.println("PASS an unpayable coloured pip falls back to auto-payment");
     }
 
+    /** Vizier of the Menagerie's shape: any pool unit pays any pip. */
+    private static final class AnyTypeSpend extends AsThoughEffectImpl implements AsThoughManaEffect {
+        AnyTypeSpend() {
+            super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfGame, Outcome.Benefit);
+        }
+
+        private AnyTypeSpend(AnyTypeSpend e) {
+            super(e);
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            return true;
+        }
+
+        @Override
+        public AnyTypeSpend copy() {
+            return new AnyTypeSpend(this);
+        }
+
+        @Override
+        public boolean applies(java.util.UUID objectId, Ability source, java.util.UUID affected, Game game) {
+            return true;
+        }
+
+        @Override
+        public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana,
+                java.util.UUID affected, Ability source, Game game) {
+            return mana.getFirstAvailable();
+        }
+    }
+
+    private static void testAnyTypeConversionPaysPip() throws Exception {
+        // Pool RRR, plan RR, cost {1}{G}, with an any-type asThough effect:
+        // the red units pay the green pip (CR 609.4b), so the driver must not
+        // fall back to auto-payment (which taps a land for G) and the pool
+        // keeps its one unspent R with no floated G.
+        Game game = game();
+        ScriptedPayment sp = newPlayer(game);
+        TestPlayer p = sp.player;
+        addMana(p.getManaPool(), 3, 0);
+        p.updateRange(game);
+        game.getContinuousEffects().addEffect(new AnyTypeSpend(),
+                new mage.abilities.common.SimpleStaticAbility(new AnyTypeSpend()));
+        sp.begin("RR");
+        equal(true, pay(p, game, "{1}{G}"));
+        equal("R", ScenarioReplay.pool(p.getManaPool()));
+        equal(false, p.getManaPool().isAutoPayment());
+        sp.end();
+        System.out.println("PASS an any-type conversion pays the pip from the recorded RR, leaving R");
+    }
+
     public static void main(String[] args) throws Exception {
         testRecordedSplit();
         testGorgeSplit();
@@ -274,5 +333,6 @@ public final class ScenarioReplayPaymentTest {
         testExhaustedMultisetFallsBack();
         testUnusableGenericPlanPaysFromPool();
         testUnpayablePipFallsBack();
+        testAnyTypeConversionPaysPip();
     }
 }

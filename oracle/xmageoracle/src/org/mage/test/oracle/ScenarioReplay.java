@@ -49,6 +49,7 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.ManaPool;
+import mage.players.ManaPoolItem;
 import mage.util.RandomUtil;
 import mage.utils.SystemUtil;
 import mage.players.Player;
@@ -425,6 +426,27 @@ public class ScenarioReplay extends CardTestPlayerBase {
                             ? takePayment(c) : dropPaymentLetterAndName(c, ability, game);
                 }
             }
+            // An any-type asThough effect (Vizier of the Menagerie) lets a pool
+            // unit of ANOTHER type pay a pip the pool holds none of. XMage's
+            // ManaPool.pay then wants the pip's own type unlocked and picks
+            // the unit itself, so name the pip's colour and spend the plan
+            // letter of the unit that converts; auto-payment here would tap a
+            // land for the pip and leave the recorded activation stranded.
+            for (char c : "WUBRG".toCharArray()) {
+                ManaType type = manaType(c);
+                if (due.get(type) <= 0) {
+                    continue;
+                }
+                char unit = convertedUnit(type, ability, game);
+                if (unit != 0) {
+                    if (payment.indexOf(unit) >= 0) {
+                        takePayment(unit);
+                    } else {
+                        dropPaymentLetterAndName(unit, ability, game);
+                    }
+                    return colourName(c);
+                }
+            }
             // A coloured pip the pool does not hold is not payable with any
             // other colour: leave it to auto-payment (which may float a new
             // source) instead of spending a unit the cost cannot take.
@@ -517,6 +539,32 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             }
             return false;
+        }
+
+        /** The pool unit (a plan letter first, else WUBRGC order) that an
+         * asThough effect lets pay a `pip` the pool holds no unit of, or 0.
+         * Asks the same ContinuousEffects.asThoughMana that ManaPool.pay asks,
+         * with a one-unit item per type as pay's own restricted-payment check
+         * does, so a conditional or unapplicable effect is never assumed. */
+        private char convertedUnit(ManaType pip, Ability ability, Game game) {
+            if (ability == null || game == null) {
+                return 0;
+            }
+            String order = payment + "WUBRGC";
+            for (int i = 0; i < order.length(); i++) {
+                ManaType unit = manaType(order.charAt(i));
+                if (unit == pip || getManaPool().get(unit) <= 0) {
+                    continue;
+                }
+                ManaPoolItem item = new ManaPoolItem();
+                item.add(unit, 1);
+                ManaType usable = game.getContinuousEffects().asThoughMana(
+                        pip, item, ability.getSourceId(), ability, ability.getControllerId(), game);
+                if (usable == unit) {
+                    return order.charAt(i);
+                }
+            }
+            return 0;
         }
 
         private static ManaType manaTypeOfName(String name) {
