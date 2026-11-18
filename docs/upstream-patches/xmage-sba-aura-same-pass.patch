@@ -1,0 +1,201 @@
+diff --git a/Mage.Tests/src/test/java/org/mage/test/sba/AuraLeavesAfterEnchantedCreatureTest.java b/Mage.Tests/src/test/java/org/mage/test/sba/AuraLeavesAfterEnchantedCreatureTest.java
+new file mode 100644
+index 0000000..e33d20b
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/sba/AuraLeavesAfterEnchantedCreatureTest.java
+@@ -0,0 +1,78 @@
++package org.mage.test.sba;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Assert;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++import java.util.ArrayList;
++import java.util.List;
++import java.util.UUID;
++
++/**
++ * CR 704.3: the state-based actions found by one check are performed simultaneously as a single event, and
++ * the check is repeated. An Aura whose enchanted creature dies in this check is still attached to a legal
++ * object when the check is made, so it goes to the graveyard in the repeated check (CR 704.5m), after every
++ * creature that died in the first one, wherever the Aura sits in battlefield order.
++ */
++public class AuraLeavesAfterEnchantedCreatureTest extends CardTestPlayerBase {
++
++    private static final String first = "Grizzly Bears";
++    private static final String second = "Runeclaw Bear";
++    private static final String aura = "Pacifism"; // {1}{W} Aura, enchanted creature can't attack or block
++
++    private void putAuraBetweenTheCreatures() {
++        addCard(Zone.BATTLEFIELD, playerA, first);
++        addCard(Zone.HAND, playerA, aura);
++        addCard(Zone.HAND, playerA, second);
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
++
++        // battlefield order: first, aura, second
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aura, first);
++        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, second);
++        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
++    }
++
++    private void assertAuraIsLast() {
++        assertGraveyardCount(playerA, 4);
++        List<String> names = new ArrayList<>();
++        for (UUID id : new ArrayList<>(playerA.getGraveyard())) {
++            names.add(currentGame.getCard(id).getName());
++        }
++        Assert.assertEquals("the Aura leaves in the repeated check, after both creatures",
++                aura, names.get(names.size() - 1));
++    }
++
++    @Test
++    public void test_ToughnessZeroCreatures() {
++        putAuraBetweenTheCreatures();
++        addCard(Zone.HAND, playerA, "Darkness Descends"); // {2}{B}{B}, two -1/-1 counters on each creature
++        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
++
++        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Darkness Descends");
++
++        setStrictChooseMode(true);
++        setStopAt(1, PhaseStep.END_TURN);
++        execute();
++
++        assertAuraIsLast();
++    }
++
++    @Test
++    public void test_LethalDamageCreatures() {
++        putAuraBetweenTheCreatures();
++        addCard(Zone.HAND, playerA, "Pyroclasm"); // {1}{R}, 2 damage to each creature
++        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
++
++        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Pyroclasm");
++
++        setStrictChooseMode(true);
++        setStopAt(1, PhaseStep.END_TURN);
++        execute();
++
++        assertAuraIsLast();
++    }
++}
+diff --git a/Mage/src/main/java/mage/game/GameImpl.java b/Mage/src/main/java/mage/game/GameImpl.java
+index 798c65d..75853eb 100644
+--- a/Mage/src/main/java/mage/game/GameImpl.java
++++ b/Mage/src/main/java/mage/game/GameImpl.java
+@@ -2701,6 +2701,10 @@ public abstract class GameImpl implements Game {
+         List<Permanent> worldEnchantment = new ArrayList<>();
+         Map<UUID, Map<UUID, Set<Permanent>>> roleMap = new HashMap<>();
+         List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
++        // 704.3: the creatures that die in this check go to the graveyard together, and an Aura that was attached to one of
++        // them goes in the repeated check (704.5m), after them. The Aura is put away at the end of this scan, not in the
++        // middle of it, so it lands after every creature of the scan wherever it sits in battlefield order
++        List<java.util.function.BooleanSupplier> auraDeaths = new ArrayList<>();
+         for (Permanent perm : getBattlefield().getAllActivePermanents()) {
+             if (perm.isCreature(this)) {
+                 //20091005 - 704.5f
+@@ -2782,12 +2786,11 @@ public abstract class GameImpl implements Game {
+                 worldEnchantment.add(perm);
+             }
+             if (perm.hasSubtype(SubType.AURA, this)) {
++                int auraDeathsBeforePerm = auraDeaths.size();
+                 //20091005 - 704.5n, 702.14c
+                 if (perm.getAttachedTo() == null) {
+                     if (!perm.isCreature(this) && !perm.getAbilities(this).containsClass(BestowAbility.class)) {
+-                        if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can be attached to creature only")) {
+-                            somethingHappened = true;
+-                        }
++                        auraDeaths.add(() -> movePermanentToGraveyardWithInfo(perm, "SBA: aura can be attached to creature only"));
+                     }
+                 } else {
+                     Ability spellAbility = perm.getSpellAbility();
+@@ -2819,8 +2822,8 @@ public abstract class GameImpl implements Game {
+                                     UUID wasAttachedTo = perm.getAttachedTo();
+                                     perm.unattach(this); // TODO: add reason to the log?
+                                     fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
+-                                } else if (movePermanentToGraveyardWithInfo(perm, "SBA: aura doesn't attached")) {
+-                                    somethingHappened = true;
++                                } else {
++                                    auraDeaths.add(() -> movePermanentToGraveyardWithInfo(perm, "SBA: aura doesn't attached"));
+                                 }
+                             } else {
+                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
+@@ -2831,8 +2834,8 @@ public abstract class GameImpl implements Game {
+                                             UUID wasAttachedTo = perm.getAttachedTo();
+                                             perm.unattach(this);
+                                             fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
+-                                        } else if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to that permanent")) {
+-                                            somethingHappened = true;
++                                        } else {
++                                            auraDeaths.add(() -> movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to that permanent"));
+                                         }
+                                     }
+                                 } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeAttachedBy(perm, null, this, true)) {
+@@ -2841,40 +2844,40 @@ public abstract class GameImpl implements Game {
+                                         UUID wasAttachedTo = perm.getAttachedTo();
+                                         perm.unattach(this);
+                                         fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
+-                                    } else if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to that permanent")) {
+-                                        somethingHappened = true;
++                                    } else {
++                                        auraDeaths.add(() -> movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to that permanent"));
+                                     }
+                                 }
+                             }
+                         } else if (target instanceof TargetPlayer) {
+                             Player attachedToPlayer = getPlayer(perm.getAttachedTo());
+                             if (attachedToPlayer == null || attachedToPlayer.hasLost()) {
+-                                if (movePermanentToGraveyardWithInfo(perm, "SBA: aura doesn't attached to that player")) {
+-                                    somethingHappened = true;
+-                                }
++                                auraDeaths.add(() -> movePermanentToGraveyardWithInfo(perm, "SBA: aura doesn't attached to that player"));
+                             } else {
+                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
+                                 if (!auraFilter.match(attachedToPlayer, this) || attachedToPlayer.hasProtectionFrom(perm, this)) {
+-                                    if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to player")) {
+-                                        somethingHappened = true;
+-                                    }
++                                    auraDeaths.add(() -> movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to player"));
+                                 }
+                             }
+                         } else if (target instanceof TargetCard) {
+                             Card attachedTo = getCard(perm.getAttachedTo());
+                             if (attachedTo == null
+                                     || !(spellAbility.getTargets().get(0)).canTarget(perm.getControllerId(), perm.getAttachedTo(), spellAbility, this)) {
+-                                if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to that card")) {
++                                auraDeaths.add(() -> {
++                                    if (!movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to that card")) {
++                                        return false;
++                                    }
+                                     if (attachedTo != null) {
+                                         attachedTo.removeAttachment(perm.getId(), null, this);
+                                     }
+-                                    somethingHappened = true;
+-                                }
++                                    return true;
++                                });
+                             }
+                         }
+                     }
+                 }
+-                if (perm.hasSubtype(SubType.ROLE, this) && state.getZone(perm.getId()) == Zone.BATTLEFIELD) {
++                if (perm.hasSubtype(SubType.ROLE, this) && state.getZone(perm.getId()) == Zone.BATTLEFIELD
++                        && auraDeaths.size() == auraDeathsBeforePerm) {
+                     roleMap.computeIfAbsent(perm.getControllerId(), x -> new HashMap<>())
+                             .computeIfAbsent(perm.getAttachedTo(), x -> new HashSet<>())
+                             .add(perm);
+@@ -3043,6 +3046,11 @@ public abstract class GameImpl implements Game {
+                         .ifPresent(player -> player.initSpeed(this));
+             }
+         }
++        for (java.util.function.BooleanSupplier auraDeath : auraDeaths) {
++            if (auraDeath.getAsBoolean()) {
++                somethingHappened = true;
++            }
++        }
+         //201300713 - 704.5k
+         // If a player controls two or more legendary permanents with the same name, that player
+         // chooses one of them, and the rest are put into their owners' graveyards.
