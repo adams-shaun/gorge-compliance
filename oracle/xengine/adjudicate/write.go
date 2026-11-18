@@ -32,7 +32,8 @@ func clip(s string) string {
 
 // Write puts the adjudication under out (outside the repository): findings.jsonl
 // (one Row per adjudicated item, no values), notes.md, patterns.tsv and
-// tickets/<cluster-sha12>.md per draft, and dirac.jsonl when dirac played. Nothing
+// tickets/<cluster-sha12>.md per draft, and dirac.jsonl when dirac played. With
+// an fshadow census it adds census.tsv and tickets/<class-sha12>.md per class. Nothing
 // it writes is a verdict row or a ruling.
 func Write(out string, res Result) error {
 	if err := classify.RefuseRepoPath(out); err != nil {
@@ -86,6 +87,11 @@ func Write(out string, res Result) error {
 	files := map[string][]byte{"findings.jsonl": fj.Bytes(), "patterns.tsv": pat.Bytes(), "notes.md": notes.Bytes()}
 	for _, c := range res.Drafts {
 		files[filepath.Join("tickets", c.SHA12+".md")] = []byte(draft(c))
+	}
+	if res.Census != nil {
+		for n, b := range fshadowFiles(res.Census, res.Rank) {
+			files[n] = b
+		}
 	}
 	names := make([]string, 0, len(files))
 	for n := range files {
