@@ -535,3 +535,93 @@ func TestForgeLibraryTopCutToGorgeDepth(t *testing.T) {
 		t.Error("an order difference within gorge's depth agreed")
 	}
 }
+
+// TestModesWithoutALogLineAnsweredByDefault is the farm cmdr4 repro (seeds
+// 13001 and 12901): gorge asks a modal pick where Forge's next log line is
+// the seat's priority, because Forge's recorder writes no line for a modal
+// answer. The follower used to stop there with kind "modes seat 2" against
+// "priority seat 2"; it now answers by default and consumes no line.
+func TestModesWithoutALogLineAnsweredByDefault(t *testing.T) {
+	prio := parseAsk(t, `{"t":"ask","n":113,"seat":2,"turn":3,"step":"main1","kind":"priority","answer":{"action":"pass"}}`)
+	modes := func(min, max int, n int) *decision.Decision {
+		d := &decision.Decision{Seq: 5, Player: 2, Kind: decision.KModes, Min: min, Max: max}
+		for i := 0; i < n; i++ {
+			d.Options = append(d.Options, decision.Option{Index: i, Kind: "mode"})
+		}
+		return d
+	}
+	for _, c := range []struct {
+		name string
+		d    *decision.Decision
+		want []int
+	}{
+		{"choose one", modes(1, 1, 3), []int{0}},
+		{"choose two", modes(2, 2, 3), []int{0, 1}},
+		{"choose both", modes(2, 2, 2), []int{0, 1}},
+		{"up to two takes one", modes(0, 2, 3), []int{0}},
+		{"clamped to the offer", modes(3, 3, 2), []int{0, 1}},
+		{"repeatable cycles", func() *decision.Decision { d := modes(3, 3, 2); d.Repeatable = true; return d }(), []int{0, 1, 0}},
+		{"budget keeps the sum", func() *decision.Decision {
+			d := modes(1, 3, 3)
+			d.Budgeted, d.MaxSum = true, 2
+			d.Options[0].Value, d.Options[1].Value, d.Options[2].Value = 1, 2, 1
+			return d
+		}(), []int{0}},
+	} {
+		f := &follower{log: &Log{}}
+		in, ok := f.answer(c.d, Entry{Line: 156, T: TAsk, Ask: prio})
+		if !ok || f.res.Hard != nil {
+			t.Fatalf("%s: hard divergence %+v", c.name, f.res.Hard)
+		}
+		if !reflect.DeepEqual(in.Choices, c.want) || in.Seq != 5 || in.Player != 2 {
+			t.Errorf("%s: intent %+v, want choices %v", c.name, in, c.want)
+		}
+		if f.pos != 0 || f.res.Modes != 1 || f.res.Asks != 0 {
+			t.Errorf("%s: pos %d modes %d asks %d, want the log line left unconsumed", c.name, f.pos, f.res.Modes, f.res.Asks)
+		}
+	}
+}
+
+// TestUnloggedArrangeIsAnsweredByDefault is the farm cmdr4 repro (seeds
+// 13000, 13003 and the HOB/OTJ pods): Forge's recorder logs no scry or
+// surveil answer (BridgeController.arrangeForScry/arrangeForSurveil take the
+// fallback path, no ask line), so a scry land's arrange ask was matched
+// against the next priority line and read as a kind divergence ("arrange seat
+// 1" vs "priority seat 1"). An arrange the log has no line for is gorge's
+// own bookkeeping: the follower keeps the offered cards on top in order,
+// consumes no log line, and Forge's real choice shows at the next
+// library_top snapshot instead.
+func TestUnloggedArrangeIsAnsweredByDefault(t *testing.T) {
+	l := readGolden(t)
+	const temple = "Temple of Mystery"
+	if _, ok := corpus(t).Lookup(temple); !ok {
+		t.Skipf("no %s in the corpus", temple)
+	}
+	// Seat 1's first land play (card 206) is a scry-1 land.
+	for i := range l.Header.Seats[1].Cards {
+		if l.Header.Seats[1].Cards[i].ID == 206 {
+			l.Header.Seats[1].Cards[i].Name = temple
+		}
+	}
+	entries := l.Entries[:0]
+	for _, e := range l.Entries {
+		if e.Snap == nil { // the doctored deck changes every later snapshot
+			entries = append(entries, e)
+		}
+	}
+	l.Entries = entries
+	res := follow(t, l)
+	// The land play is ask 4; the arrange follows it, before ask 5. The
+	// doctored deck may diverge later (the scry trigger gives both seats
+	// priority passes the golden log lacks), but not at the arrange.
+	if res.Hard != nil && res.Hard.Ask <= 5 {
+		b, _ := json.MarshalIndent(res.Hard, "", "  ")
+		t.Fatalf("divergence at or before the scry land's arrange:\n%s", b)
+	}
+	if res.Decisions < 5 {
+		t.Errorf("only %d decisions followed; the arrange was not passed (hard %+v)", res.Decisions, res.Hard)
+	}
+	if res.Arranges == 0 {
+		t.Error("no default arrange answered")
+	}
+}
