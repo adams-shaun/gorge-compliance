@@ -921,3 +921,29 @@ func TestMayShuffleElectionFollowsShuffleLines(t *testing.T) {
 		t.Error("a non-shuffle choose is answered by mayShuffleChoose")
 	}
 }
+
+// TestOptionalTriggerWithoutALogLineAnsweredByDefault is the farm cmdr4 repro
+// (TLA-s135 pod 13501, offset 233): gorge asks whether an optional trigger is
+// put on the stack (KTriggerOptional) where Forge's next log line is the
+// seat's priority ask, because Forge's recorder writes no ask for a "may"
+// trigger. The follower used to stop with kind "trigger_optional seat 0"
+// against "priority seat 0"; it now answers yes and consumes no line.
+func TestOptionalTriggerWithoutALogLineAnsweredByDefault(t *testing.T) {
+	prio := parseAsk(t, `{"t":"ask","n":178,"seat":0,"turn":3,"step":"main1","kind":"priority","answer":{"action":"pass"}}`)
+	d := &decision.Decision{Seq: 4, Player: 0, Kind: decision.KTriggerOptional, Min: 1, Max: 1,
+		Options: []decision.Option{{Index: 0, Kind: "yes"}, {Index: 1, Kind: "no"}}}
+	f := &follower{log: &Log{}}
+	in, ok := f.answer(d, Entry{Line: 233, T: TAsk, Ask: prio})
+	if !ok || f.res.Hard != nil {
+		t.Fatalf("hard divergence %+v", f.res.Hard)
+	}
+	if !reflect.DeepEqual(in.Choices, []int{0}) || in.Seq != 4 || in.Player != 0 {
+		t.Errorf("intent %+v, want yes", in)
+	}
+	if f.pos != 0 || f.res.Optionals != 1 || f.res.Asks != 0 {
+		t.Errorf("pos %d optionals %d asks %d, want the log line left unconsumed", f.pos, f.res.Optionals, f.res.Asks)
+	}
+	if !unloggedKind(decision.KTriggerOptional) {
+		t.Error("trigger_optional is not an unlogged kind: a snapshot past it would compare gorge's pre-answer state")
+	}
+}
