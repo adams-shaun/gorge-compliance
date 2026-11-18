@@ -13,6 +13,7 @@
 //	xengine sweep-plan -root DIR -sets 'FDN BLB' -chunks N [-stale] [-force]
 //	xengine pool -set S [-legal FORMAT -mtgjson S.json.gz] [-out FILE]
 //	xengine followers
+//	xengine fshadow -log GAME.jsonl [-out DIR] [-game ID] [-max-decisions N]
 //
 // play writes DIR/tapes/*.json (every game's tape), DIR/items.jsonl (the
 // follower input: only the items whose lowering gorge's own runner
@@ -37,7 +38,11 @@
 // -pool reads for a set's manifest, optionally kept to an MTGJSON format's legal
 // cards (oracle/xengine/pools/). followers prints the follower registry
 // (oracle/xengine/follower) as TSV, one row per follower after a '#' header
-// naming the columns, for scripts/xengine-sweep.sh. adjudicate gives the
+// naming the columns, for scripts/xengine-sweep.sh. fshadow follows one
+// Forge-hosted game's forge-shadow-1 log in gorge (oracle/xengine/fshadow) and
+// writes DIR/result.json and, at the first hard divergence,
+// DIR/divergence-1.json (schema fshadow-divergence-1) with its gorge record
+// prefix. adjudicate gives the
 // items one follower diverged on a three-way pattern (oraclediff.ThreeWay) from both followers' diffs, writes DIR3/findings.jsonl,
 // patterns.tsv, notes.md and a tickets/<cluster>.md draft per gorge_suspect cluster; -ledger adds the compact ledger shards; -phase adds
 // phase.rs as a fourth column (DIR3/fourway.jsonl and patterns4.tsv: oraclediff.NWay over G, F, P and X, with a card phase lacks marked
@@ -61,7 +66,7 @@ const DefaultRoot = ".oracle-build/xengine"
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|diagnosed|calib|xprep|adjudicate|sweep-plan|pool|followers [flags]")
+		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|diagnosed|calib|xprep|adjudicate|sweep-plan|pool|followers|fshadow [flags]")
 		os.Exit(2)
 	}
 	var err error
@@ -86,8 +91,10 @@ func main() {
 		err = runPool(os.Args[2:])
 	case "followers":
 		err = runFollowers(os.Args[2:])
+	case "fshadow":
+		err = runFShadow(os.Args[2:])
 	default:
-		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, diagnosed, calib, xprep, adjudicate, sweep-plan, pool or followers)", os.Args[1])
+		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, diagnosed, calib, xprep, adjudicate, sweep-plan, pool, followers or fshadow)", os.Args[1])
 	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "xengine:", err)
