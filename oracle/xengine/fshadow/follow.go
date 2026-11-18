@@ -133,9 +133,9 @@ type follower struct {
 
 	setupHarness string // a header gorge's Config cannot express
 
-	pos      int  // next unread entry
-	mullKept bool // the current mull line's keep has been answered; its bottom is next
-	res      Result
+	pos        int           // next unread entry
+	mullBottom map[int][]int // Forge seat -> the bottom its kept mull line carried, until gorge's bottoming ask for that seat
+	res        Result
 }
 
 // Follow replays l in gorge. A setup failure (an unknown card, a binding
@@ -357,6 +357,12 @@ func (f *follower) run(max int) {
 			if e.Snap == nil {
 				break
 			}
+			if d := f.e.Pending(); d != nil && d.Kind == decision.KMulligan && isBottomingAsk(d) {
+				// The bottoming of a kept hand reads no line (its bottom came
+				// with the keep), so the snapshot that follows that keep
+				// belongs to the state after the bottoming, not before it.
+				break
+			}
 			if at(int(e.Snap.Snapshot.Turn), e.Snap.Snapshot.Step) < f.gorgeAt() && !f.e.G.Over {
 				f.res.SkippedSnaps++
 				f.pos++
@@ -410,6 +416,22 @@ func (f *follower) run(max int) {
 func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
 	if d.Kind == decision.KMulligan {
+		if isBottomingAsk(d) {
+			// Forge bottoms a London mulligan's cards right after drawing, so
+			// its mull line for the kept hand carries the bottom and was
+			// consumed with the keep. gorge asks every seat keep-or-mulligan
+			// first and the bottoming of each kept hand after, in seat order:
+			// the answer is the seat's remembered bottom, and no line is read.
+			bottom, ok := f.mullBottom[int(d.Player)]
+			idx, missing := f.objIndices(d, bottom)
+			if !ok || missing != "" || len(idx) != d.Min {
+				f.hard(WhatAnswerMissing, d, Divergence{Line: e.Line, Field: "bottom", Forge: fmt.Sprint(bottom), Gorge: optKeys(f, d), Detail: missing})
+				return in, false
+			}
+			delete(f.mullBottom, int(d.Player))
+			in.Choices = idx
+			return in, true
+		}
 		if e.Mull == nil {
 			f.hard(WhatKind, d, Divergence{Line: e.Line, Gorge: string(d.Kind), Forge: e.T + forgeKind(e)})
 			return in, false
@@ -419,18 +441,6 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 			f.hard(WhatKind, d, Divergence{Line: e.Line, Field: "seat", Gorge: fmt.Sprint(d.Player), Forge: fmt.Sprint(m.Seat)})
 			return in, false
 		}
-		if f.mullKept {
-			// The bottoming ask of a kept hand.
-			idx, missing := f.objIndices(d, m.Bottom)
-			if missing != "" || len(idx) != d.Min {
-				f.hard(WhatAnswerMissing, d, Divergence{Line: e.Line, Field: "bottom", Forge: fmt.Sprint(m.Bottom), Gorge: optKeys(f, d), Detail: missing})
-				return in, false
-			}
-			in.Choices = idx
-			f.mullKept = false
-			f.pos++
-			return in, true
-		}
 		want := "mulligan"
 		if m.Keep {
 			want = "keep"
@@ -439,10 +449,12 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 			if o.Kind == want {
 				in.Choices = []int{i}
 				if m.Keep && len(m.Bottom) > 0 {
-					f.mullKept = true // the same line answers the bottoming ask next
-				} else {
-					f.pos++
+					if f.mullBottom == nil {
+						f.mullBottom = map[int][]int{}
+					}
+					f.mullBottom[m.Seat] = m.Bottom
 				}
+				f.pos++
 				return in, true
 			}
 		}
@@ -1146,4 +1158,10 @@ func equalIDs(a, b []state.ObjID) bool {
 		}
 	}
 	return true
+}
+
+// isBottomingAsk reports whether d is a London bottoming ask (CR 103.5) as
+// opposed to a keep-or-mulligan one: its options are the cards of the hand.
+func isBottomingAsk(d *decision.Decision) bool {
+	return len(d.Options) > 0 && d.Options[0].Kind == "bottom"
 }
