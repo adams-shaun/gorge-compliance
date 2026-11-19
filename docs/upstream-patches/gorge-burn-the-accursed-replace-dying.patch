@@ -1,0 +1,169 @@
+diff --git a/dirac/dmgmap_exile_test.go b/dirac/dmgmap_exile_test.go
+new file mode 100644
+index 0000000000..25c42a1f11
+--- /dev/null
++++ b/dirac/dmgmap_exile_test.go
+@@ -0,0 +1,56 @@
++package dirac
++
++import (
++	"testing"
++
++	"github.com/adams-shaun/gorge/dirac/kop"
++	v "github.com/adams-shaun/gorge/dirac/vanilla"
++)
++
++// TestDamageMapExileIfDiesMarksBeforeFlush is the dirac half of gorge's
++// Burn the Accursed divergence (SUP-s186-supp/s189-supp p1.graveyard): the
++// card's DealDamage carries both DamageMap$ True and ReplaceDyingDefined$
++// Targeted, so the 5 damage is marked and flushed later by DB$
++// DamageResolve. CR 614.1a/614.4: the exile-instead replacement must exist
++// before the flush can kill the recipient, so the mark has to be registered
++// while the instruction is marked, not when its map entry is dealt.
++func TestDamageMapExileIfDiesMarksBeforeFlush(t *testing.T) {
++	tbl := *v.NewTable()
++	tbl.Filters = append([]kop.Filter(nil), v.Table.Filters...)
++	tbl.Exprs = []kop.Expr{{}}
++	// The arena assigns mechExileEx from a table instruction carrying the
++	// flag (arena.go), as Burn the Accursed's lowered DealDamage does.
++	tbl.Cards = append(tbl.Cards, kop.CardDef{Name: "Exile Map Host", Types: kop.TCreature,
++		Abilities: []kop.Ability{{Kind: kop.AbActivated, Prog: []kop.Instr{
++			{Op: kop.OpDealDamageEx, Obj: kop.RefTarget0, A: kop.Const(1),
++				C: int16(kop.DmgExileIfDiesThisTurn)}}}}})
++	sc := newScenTable(t, &tbl, Config{NoElide: true})
++	k := sc.k
++	if k.gen.ix[mechExileEx] == arenaNone {
++		t.Fatal("the table's exile-if-dies DealDamage did not give the arena a mechExileEx mask")
++	}
++	victim := sc.perm(v.TyphoidRats, 1) // 1/1
++	sl := sc.slot(victim)
++	sc.s.res.e.ctrl = 0
++	sc.s.res.e.tgt[0] = TCode(victim)
++	marked := kop.Instr{Op: kop.OpDealDamageEx, Obj: kop.RefTarget0, A: kop.Const(5),
++		C: int16(kop.DmgMapped | kop.DmgExileIfDiesThisTurn)}
++	sc.s.exec(k, &marked)
++	if sc.s.g.ndmg != 1 {
++		t.Fatalf("the marked damage was not collected: ndmg %d, want 1", sc.s.g.ndmg)
++	}
++	if !sc.onBF(victim) {
++		t.Fatal("the marked damage was dealt before the map flush")
++	}
++	if !sc.s.mSl(k, mechExileEx, sl) {
++		t.Fatal("a mapped DealDamage with the exile-instead flag did not mark its recipient")
++	}
++	sc.s.exec(k, &kop.Instr{Op: kop.OpResolveDamageMap})
++	sc.s.sba(k)
++	if sc.onBF(victim) {
++		t.Fatal("the 5 damage did not kill the 1/1")
++	}
++	if got := sc.s.objs[victim].zone; got != kop.ZoneExile {
++		t.Fatalf("the marked creature's zone after the lethal flush is %d, want exile (CR 614.1a, 614.4)", got)
++	}
++}
+diff --git a/dirac/interp_gen.go b/dirac/interp_gen.go
+index 335b64780d..09db91ace8 100644
+--- a/dirac/interp_gen.go
++++ b/dirac/interp_gen.go
+@@ -1422,6 +1422,17 @@ func (s *State) execDamageEx(k *prep, in *kop.Instr) {
+ 	}
+ 	n := s.value(k, in.A)
+ 	if in.C&kop.DmgMapped != 0 {
++		// The damage is marked, not dealt: damageBatch later re-enters with
++		// only the map entry and knows nothing of this instruction's flag,
++		// so the exile-instead replacement must exist now, before DB$
++		// DamageResolve's flush can kill the recipient (CR 614.1a, 614.4).
++		// Remembered (DmgExileIfDealt) is the other shape: kgen permits it
++		// with RememberDamaged$ and registers it on the DamageResolve SA
++		// after the flush, so it is not marked here.
++		if isObjTarget(code) && s.objs[code].zone == kop.ZoneBattlefield &&
++			in.C&kop.DmgExileIfDiesThisTurn != 0 && in.C&kop.DmgExileIfDealt == 0 {
++			s.markExileEx(k, s.objs[code].slot)
++		}
+ 		if s.g.ndmg < maxDmgMap && n > 0 {
+ 			s.g.dmg[s.g.ndmg] = struct {
+ 				code TCode
+diff --git a/engine/effects/damage_deal.go b/engine/effects/damage_deal.go
+index e37703be59..9821648b14 100644
+--- a/engine/effects/damage_deal.go
++++ b/engine/effects/damage_deal.go
+@@ -334,6 +334,12 @@ func effDealDamage(h Host, c *Ctx, sa *cards.SA) {
+ 			if o := h.Game().Obj(t.Obj); o != nil && o.Zone == state.ZBattlefield {
+ 				c.PendingDamage = append(c.PendingDamage, PendingDamage{rider: rider,
+ 					target: state.Target{Obj: t.Obj}})
++				// The damage is marked, not dealt, so c.PendingDamage now holds
++				// the recipient tree: the deferred registerReplaceDying must
++				// still see every permanent this resolution targeted, or the
++				// exile-instead replacement never exists when DB$ DamageResolve
++				// flushes the mark and the target dies (CR 614.1a, 614.4).
++				dying = append(dying, state.Target{Obj: t.Obj})
+ 			}
+ 		}
+ 		return
+diff --git a/engine/rules/farm_burn_the_accursed_test.go b/engine/rules/farm_burn_the_accursed_test.go
+new file mode 100644
+index 0000000000..b9df84bb66
+--- /dev/null
++++ b/engine/rules/farm_burn_the_accursed_test.go
+@@ -0,0 +1,62 @@
++package rules
++
++import (
++	"testing"
++
++	"github.com/adams-shaun/gorge/engine/cards"
++	"github.com/adams-shaun/gorge/engine/decision"
++	"github.com/adams-shaun/gorge/engine/state"
++	"github.com/adams-shaun/gorge/testkit/testutil"
++)
++
++// TestFarmBurntheAccursed reproduces the SUP-s186-supp/s189-supp p1.graveyard
++// divergence: Burn the Accursed's 5 damage is marked (DamageMap$ True) and
++// flushed later by DB$ DamageResolve, but its Target form of
++// ReplaceDyingDefined$ must register the exile-instead replacement over the
++// marked recipient too (CR 614.1a, 614.4). At the pin the mark branch returns
++// without recording the recipient in the dying slice, so the replacement never
++// exists and the lethal target goes to the graveyard instead of exile.
++func TestFarmBurntheAccursed(t *testing.T) {
++	t.Parallel()
++	reg := testutil.CorpusRegistry(t)
++	burn := mustCorpusCard(t, reg, "Burn the Accursed")
++	hound := mustCorpusCard(t, reg, "Blood Hound")
++	e, cfg := censusEngine(t, 18611, []*cards.Card{burn}, []*cards.Card{hound})
++	cardToHand(t, e, burn)
++	houndID := moveOwnerCard(t, e, 1, hound, state.ZBattlefield)
++	if o := e.G.Obj(houndID); o.Zone != state.ZBattlefield || e.Toughness(houndID) != 1 {
++		t.Fatalf("precondition: target Blood Hound is zone %s with toughness %d, want battlefield 1/1", o.Zone, e.Toughness(houndID))
++	}
++	addMana(t, e, 0, "RRRRR")
++	castFirst(t, e, "cast")
++	targetObject(t, e, houndID)
++	for n := 0; n < 40 && !e.G.Over && len(e.G.Stack) > 0; n++ {
++		d := e.Pending()
++		if d == nil {
++			t.Fatalf("no decision while draining the stack (stack depth %d)", len(e.G.Stack))
++		}
++		if d.Kind == decision.KTriggerOptional {
++			declineOptional(t, e)
++			continue
++		}
++		if d.Kind != decision.KPriority {
++			t.Fatalf("unexpected %s decision while draining the stack: %+v", d.Kind, d)
++		}
++		pass := -1
++		for _, o := range d.Options {
++			if o.Kind == "pass" {
++				pass = o.Index
++			}
++		}
++		if pass < 0 {
++			t.Fatalf("priority decision with no pass option: %+v", d)
++		}
++		if err := e.Submit(decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{pass}}); err != nil {
++			t.Fatalf("submit pass: %v", err)
++		}
++	}
++	if got := e.G.Obj(houndID).Zone; got != state.ZExile {
++		t.Fatalf("Burn the Accursed's lethal target should be exiled (CR 614.1a, 614.4; Forge and XMage both exile it), got %s", got)
++	}
++	replayCheck(t, e, cfg)
++}
