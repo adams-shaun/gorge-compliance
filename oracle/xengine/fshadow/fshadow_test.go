@@ -974,3 +974,23 @@ func TestTriggerOrderWithoutALogLineAnsweredByDefault(t *testing.T) {
 		t.Error("trigger_order is not an unlogged kind: a snapshot past it would compare gorge's pre-answer state")
 	}
 }
+
+// TestKindDivergenceCarriesPlacement: a same-kind seat mismatch (the farm
+// cmdr4 pod-43324287302 "priority seat 1" against "priority seat 0") must say
+// where Forge's ask and gorge each are, so the next farm run is diagnosable
+// from divergence-<n>.json alone.
+func TestKindDivergenceCarriesPlacement(t *testing.T) {
+	l, line := doctor(t, func(a *Ask) bool { return a.Kind == KindPriority && a.Answer.Action == "pass" && a.Step != "untap" }, func(a *Ask) {
+		a.Seat = 1 - a.Seat
+	})
+	h := follow(t, l).Hard
+	if h == nil || h.What != WhatKind || h.Line != line {
+		t.Fatalf("divergence %+v, want a kind divergence at line %d", h, line)
+	}
+	if !strings.Contains(h.Detail, "forge ask t") || !strings.Contains(h.Detail, "gorge t") || !strings.Contains(h.Detail, "stack ") {
+		t.Errorf("detail %q does not place the divergence", h.Detail)
+	}
+	if got := FileOf(h, "g", "", "").Msg; !strings.Contains(got, h.Detail) {
+		t.Errorf("msg %q drops the detail", got)
+	}
+}

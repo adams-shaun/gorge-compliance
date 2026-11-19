@@ -573,7 +573,7 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		f.hard(WhatError, d, Divergence{Line: e.Line, Ask: a.N, Harness: HarnessUnmapped, Detail: "unsupported ask kind " + a.Kind, Forge: a.Kind, Gorge: string(d.Kind)})
 		return in, false
 	} else if gk != d.Kind || a.Seat != int(d.Acting()) {
-		f.hard(WhatKind, d, Divergence{Line: e.Line, Ask: a.N, Gorge: fmt.Sprintf("%s seat %d", d.Kind, d.Acting()), Forge: fmt.Sprintf("%s seat %d", a.Kind, a.Seat)})
+		f.hard(WhatKind, d, Divergence{Line: e.Line, Ask: a.N, Gorge: fmt.Sprintf("%s seat %d", d.Kind, d.Acting()), Forge: fmt.Sprintf("%s seat %d", a.Kind, a.Seat), Detail: f.kindContext(a)})
 		return in, false
 	}
 	gorgeKeys := f.gorgeOptionKeys(d)
@@ -602,6 +602,20 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 	}
 	f.pos++
 	return in, true
+}
+
+// kindContext places a kind divergence: where Forge's ask sits (turn, step,
+// what it answered) and where gorge is (turn, step, active seat, stack depth),
+// so a same-kind seat mismatch (gorge "priority seat 1" against Forge's
+// "priority seat 0") can be read as an ordering or a missing-line difference
+// without the full log. It rides in the divergence's msg, never in its class.
+func (f *follower) kindContext(a *Ask) string {
+	if f.e == nil || f.e.G == nil {
+		return ""
+	}
+	g := f.e.G
+	return fmt.Sprintf("forge ask t%d:%s answer %q; gorge t%d:%s active seat %d, stack %d",
+		a.Turn, a.Step, a.Answer.Action, g.Turn, g.Step, g.Active, len(g.Stack))
 }
 
 func (f *follower) priority(d *decision.Decision, a *Ask) (decision.Intent, *Divergence) {
