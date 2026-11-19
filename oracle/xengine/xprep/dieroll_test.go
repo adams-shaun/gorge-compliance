@@ -56,11 +56,34 @@ func TestAddDieRollAnswersSameStepOrder(t *testing.T) {
 }
 
 // TestAddDieRollAnswersEbonyFlyStep6 pins the real shape the farm row
-// xe:RAND:0:7:w7 lowers to: the tape's natural 3 is on scenario step 6 (the
-// pass that resolves Ebony Fly's activation), where gorge's own answer list
+// xe:RAND:0:7:w7 lowers to: one d6, natural 3, on scenario step 6 (the pass
+// that resolves Ebony Fly's activation), where gorge's own answer list
 // already holds the animate "yes". The die must come first in that step's
-// queue, and a multi-die step keeps its log order.
+// queue, and no other step changes.
 func TestAddDieRollAnswersEbonyFlyStep6(t *testing.T) {
+	answers := make([][]oraclegen.XAnswer, 20)
+	answers[6] = []oraclegen.XAnswer{{Seat: 0, Kind: "choice", Value: "yes"}}
+	rolls := []oraclegen.DieRoll{
+		{Step: 6, Seat: 0, Sides: 6, Natural: 3, Result: 3},
+	}
+	got := addDieRollAnswers(answers, rolls, 20)
+	want := []oraclegen.XAnswer{
+		{Seat: 0, Kind: "die", Value: "3"},
+		{Seat: 0, Kind: "choice", Value: "yes"},
+	}
+	if !reflect.DeepEqual(got[6], want) {
+		t.Fatalf("step 6 answers %+v, want %+v", got[6], want)
+	}
+	for i, as := range got {
+		if i != 6 && len(as) != 0 {
+			t.Fatalf("step %d changed: %+v", i, as)
+		}
+	}
+}
+
+// TestAddDieRollAnswersMultiDie keeps the two-die case: a step that rolls
+// more than once queues its dice in log order ahead of its decisions.
+func TestAddDieRollAnswersMultiDie(t *testing.T) {
 	answers := make([][]oraclegen.XAnswer, 20)
 	answers[6] = []oraclegen.XAnswer{{Seat: 0, Kind: "choice", Value: "yes"}}
 	rolls := []oraclegen.DieRoll{

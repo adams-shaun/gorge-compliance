@@ -13,9 +13,9 @@ import (
 // die rolls of an entry to xengine-tape-2's runner refs (Pick.Ref,
 // Pick.AttackerRef, Pick.BattleRef, ManaRec.Ref), the decision's Max and the
 // coin flips (each also marked Forced when a FlipCoinMod static made it
-// without an RNG draw). Both earlier formats are still read: tape-2 has no die
-// rolls, tape-1 has no refs, Max or flips either. A reader rejects any other
-// format.
+// without an RNG draw, and carrying Draws when a FlipCoinDoubler made it two).
+// Both earlier formats are still read: tape-2 has no die rolls, tape-1 has no
+// refs, Max or flips either. A reader rejects any other format.
 const TapeFormat = "xengine-tape-3"
 
 // TapeFormat2 is the format before the entry die rolls.
@@ -123,10 +123,31 @@ type Entry struct {
 // reading: an unmarked flip is counted as a draw. A follower replaying the
 // same script reproduces a forced flip through the static, so it needs no
 // answer for it.
+//
+// Draws is how many engine RNG values the flip consumed: 0 for a forced
+// flip, 2 while a FlipCoinDoubler static (Krark's Thumb) makes coinResult
+// flip two coins for one instruction, and omitted for the ordinary one-draw
+// flip. A tape written before this field read it as 0; Forced tells the two
+// zero cases apart, so such a flip is counted as one draw.
 type Flip struct {
 	Seat   int  `json:"seat"`
 	Win    bool `json:"win"`
 	Forced bool `json:"forced,omitempty"`
+	Draws  int  `json:"draws,omitempty"`
+}
+
+// DrawCount is the number of engine RNG values the flip consumed. An absent
+// Draws on an older tape means the ordinary one draw (or none when Forced);
+// a forced flip never draws, even under a doubler, because gorge reads
+// FlipCoinForced before it calls coinResult.
+func (f Flip) DrawCount() uint64 {
+	if f.Forced {
+		return 0
+	}
+	if f.Draws > 0 {
+		return uint64(f.Draws)
+	}
+	return 1
 }
 
 // Roll is one die-roll result: the roller's seat, the die's sides, the

@@ -511,8 +511,11 @@ func TestSwappedDigest(t *testing.T) {
 // TestMarkForcedFlips: a FlipCoinMod static turns the turn's first coin flip
 // heads without drawing, so the recorder marks that winning flip Forced. A
 // flip later in the turn, a flip the flipper does not control the static for,
-// and a losing flip are ordinary draws. This is the bit the lowering gate
-// reads: counting a forced flip as a draw would let a shuffle through.
+// and a losing flip are ordinary draws. A static destroyed in the same entry
+// after the flip still counts: the start-of-entry snapshot is what the engine
+// could have read before the batch, so the flush's missing static cannot turn
+// a forced flip into a counted draw. This is the bit the lowering gate reads:
+// counting a forced flip as a draw would let a shuffle through.
 func TestMarkForcedFlips(t *testing.T) {
 	g := state.NewGame([]string{"p0", "p1"})
 	edgar := &cards.Card{Faces: []*cards.Face{{Name: "Edgar, King of Figaro",
@@ -525,29 +528,73 @@ func TestMarkForcedFlips(t *testing.T) {
 	o := g.AddObject(edgar, 0)
 	g.SetZone(state.ZBattlefield, 0, []state.ObjID{o.ID})
 	e := &rules.Engine{G: g}
+	start := snapshotFlipStatics(e)
 
 	// Each seat's first flip of the turn: p0 forced, p1 has no static.
 	g.Players[0].CoinFlipsThisTurn, g.Players[1].CoinFlipsThisTurn = 1, 1
 	first := []Flip{{Seat: 0, Win: true}, {Seat: 1, Win: true}}
-	markForcedFlips(e, first)
-	want := []Flip{{Seat: 0, Win: true, Forced: true}, {Seat: 1, Win: true}}
+	markFlipDraws(e, first, start)
+	want := []Flip{{Seat: 0, Win: true, Forced: true}, {Seat: 1, Win: true, Draws: 1}}
 	if !reflect.DeepEqual(first, want) {
 		t.Fatalf("first flips %+v, want %+v", first, want)
+	}
+
+	// The static is destroyed in the same entry after the winning flip: the
+	// flush board no longer has it, but the entry began with it, so the flip
+	// was forced and must not be counted as a draw.
+	g.SetZone(state.ZBattlefield, 0, nil)
+	g.Players[0].CoinFlipsThisTurn = 1
+	destroyed := []Flip{{Seat: 0, Win: true}}
+	markFlipDraws(e, destroyed, start)
+	if !destroyed[0].Forced || destroyed[0].Draws != 0 {
+		t.Fatalf("flip with a static destroyed in the entry: %+v, want forced with no draw", destroyed[0])
 	}
 
 	// p0's second flip of the turn is past the static's window.
 	g.Players[0].CoinFlipsThisTurn = 2
 	later := []Flip{{Seat: 0, Win: true}}
-	markForcedFlips(e, later)
-	if later[0].Forced {
-		t.Fatalf("second flip of the turn marked forced: %+v", later[0])
+	markFlipDraws(e, later, start)
+	if later[0].Forced || later[0].Draws != 1 {
+		t.Fatalf("second flip of the turn: %+v, want an ordinary draw", later[0])
 	}
 
 	// A lost first flip was a real draw even though the static is present.
 	g.Players[0].CoinFlipsThisTurn = 1
 	lost := []Flip{{Seat: 0, Win: false}}
-	markForcedFlips(e, lost)
-	if lost[0].Forced {
+	markFlipDraws(e, lost, start)
+	if lost[0].Forced || lost[0].Draws != 1 {
 		t.Fatalf("a lost flip cannot be forced: %+v", lost[0])
+	}
+}
+
+// TestMarkFlipDrawsDoubler: coinResult draws twice for one flip while a
+// FlipCoinDoubler static (Krark's Thumb) is live, so the lowering gate must
+// count two. A doubler that changed inside the entry is counted as one draw
+// (the gate then refuses rather than accepting a shuffle the second draw
+// could be hiding).
+func TestMarkFlipDrawsDoubler(t *testing.T) {
+	g := state.NewGame([]string{"p0", "p1"})
+	thumb := &cards.Card{Faces: []*cards.Face{{Name: "Krark's Thumb",
+		Statics: []cards.Static{{Mode: effects.ModeFlipCoinDoubler, Params: map[string]string{
+			"ValidPlayer": "You",
+		}}}}}}
+	o := g.AddObject(thumb, 0)
+	g.SetZone(state.ZBattlefield, 0, []state.ObjID{o.ID})
+	e := &rules.Engine{G: g}
+	start := snapshotFlipStatics(e)
+
+	g.Players[0].CoinFlipsThisTurn = 1
+	stable := []Flip{{Seat: 0, Win: true}}
+	markFlipDraws(e, stable, start)
+	if stable[0].Forced || stable[0].Draws != 2 {
+		t.Fatalf("doubled flip %+v, want two draws", stable[0])
+	}
+
+	// The doubler leaves in the same entry: count one, never two.
+	g.SetZone(state.ZBattlefield, 0, nil)
+	changed := []Flip{{Seat: 0, Win: true}}
+	markFlipDraws(e, changed, start)
+	if changed[0].Draws != 1 {
+		t.Fatalf("doubler changed in the entry: %+v, want one draw", changed[0])
 	}
 }

@@ -17,6 +17,9 @@ import (
 // (Forge poses no decision for a die), so it must not be exported as one: a
 // decision the driver never consumes would be an unconsumed leftover. The
 // side field is also absent from Raw(), which is all gorge's runner reads.
+// The driver-side half of the behaviour -- that MyRandom.setRandom's wrapper
+// forwards the bounded draw to the installed generator -- is pinned by
+// forge-oracle's ForcedDieRollTest.productionSetRandomForwardsTheBound.
 func TestForgeRolledDie(t *testing.T) {
 	roll := oraclegen.DieRoll{Step: 1, Seat: 0, Sides: 6, Natural: 3, Result: 3}
 	it := oraclegen.Item{

@@ -43,18 +43,20 @@ func TestLowerDieRollResult(t *testing.T) {
 	}
 }
 
-// TestRNGDrawsAccounted: one die roll or coin flip is exactly one engine
-// draw (gorge's rng.IntN), except a flip a FlipCoinMod static forced heads:
-// it emits the same Note but consumes no draw, so the gate must count only
-// the flips marked Forced=false. An entry that also shuffled -- Wand of
-// Wonder's DBShuffle, Wild Endeavor's search and shuffle -- spends more draws
-// than it records outcomes, so the seeded runner cannot reproduce it. The
-// gate must count every draw, not just look for a recorded roll; all three
-// call sites share rngAccounted so the next one cannot drift.
+// TestRNGDrawsAccounted: one die roll or ordinary coin flip is exactly one
+// engine draw (gorge's rng.IntN), except a flip a FlipCoinMod static forced
+// heads (it emits the same Note but consumes no draw), and a flip under a
+// FlipCoinDoubler static (Krark's Thumb) draws twice for one instruction.
+// The gate must use each flip's recorded draw count, not just len(Flips). An
+// entry that also shuffled -- Wand of Wonder's DBShuffle, Wild Endeavor's
+// search and shuffle -- spends more draws than it records outcomes, so the
+// seeded runner cannot reproduce it. All three call sites share rngAccounted
+// so the next one cannot drift.
 func TestRNGDrawsAccounted(t *testing.T) {
 	roll := game.Roll{Seat: 0, Sides: 6, Natural: 3, Result: 3}
 	flip := game.Flip{Seat: 0, Win: true}
 	forced := game.Flip{Seat: 0, Win: true, Forced: true}
+	doubled := game.Flip{Seat: 0, Win: true, Draws: 2}
 	for _, c := range []struct {
 		name string
 		e    game.Entry
@@ -66,6 +68,12 @@ func TestRNGDrawsAccounted(t *testing.T) {
 		{"forced flip alone", game.Entry{RNG: 0, Flips: []game.Flip{forced}}, true},
 		{"die and flip", game.Entry{RNG: 2, Rolls: []game.Roll{roll}, Flips: []game.Flip{flip}}, true},
 		{"die and forced flip", game.Entry{RNG: 1, Rolls: []game.Roll{roll}, Flips: []game.Flip{forced}}, true},
+		// Krark's Thumb: one instruction, two draws. The old one-draw count
+		// refused this entry, which the live game can reproduce (the follower
+		// runs the same doubler static).
+		{"doubled flip", game.Entry{RNG: 2, Flips: []game.Flip{doubled}}, true},
+		{"doubled flip plus die", game.Entry{RNG: 3, Rolls: []game.Roll{roll}, Flips: []game.Flip{doubled}}, true},
+		{"shuffle plus doubled flip", game.Entry{RNG: 3, Flips: []game.Flip{doubled}}, false},
 		{"shuffle plus die", game.Entry{RNG: 7, Rolls: []game.Roll{roll}}, false},
 		{"shuffle plus flip", game.Entry{RNG: 7, Flips: []game.Flip{flip}}, false},
 		// The finding's case: the flip was forced so the entry's one draw is
