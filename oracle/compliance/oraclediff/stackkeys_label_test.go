@@ -73,3 +73,27 @@ func TestStackKeysSourceLeftBattlefield(t *testing.T) {
 		t.Fatalf("name difference hidden for a live source: %q", g)
 	}
 }
+
+// A sourceless designation beside a source that left the battlefield: the
+// SUP-s148-supp shape. Both stand-ins are display values, so the two engines'
+// stacks render the same and neither label is mistaken for a card.
+func TestStackKeysLeftSourceBesideDesignation(t *testing.T) {
+	g := rules.OracleSnapshot{Stack: []rules.OracleSnapStack{
+		{Kind: "ability", Source: "p1:Brood of Cockroaches", Controller: 1},
+		{Kind: "ability", Source: "", Controller: 0},
+	}}
+	x := rules.OracleSnapshot{Stack: []rules.OracleSnapStack{
+		{Kind: "ability", Source: "Brood of Cockroaches", Controller: 1},
+		{Kind: "ability", Source: "The Monarch", Controller: 0},
+	}}
+	gv, xv := pairedStackKeys(g, x)
+	if gv != xv {
+		t.Fatalf("gorge %q, xmage %q", gv, xv)
+	}
+	if want := "[ability:" + leftSourceLabel + "@p1, ability:@p0]"; gv != want {
+		t.Fatalf("got %q want %q", gv, want)
+	}
+	if !IsLeftSourceLabel(leftSourceLabel) || IsLeftSourceLabel("The Monarch") || IsLeftSourceLabel("Brood of Cockroaches") {
+		t.Fatal("IsLeftSourceLabel does not identify only the comparator stand-in")
+	}
+}
