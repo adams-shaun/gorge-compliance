@@ -293,8 +293,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // other cast a leading Yes belongs to a later ask and is left queued.
     private boolean optionalCostCast = false;
     // A cast step with cast_mode "alternative": gorge elected the first
-    // alternative cost (Leyline of Mutation's grant). XMage poses that as its
-    // alternative-cost key menu; the generator's leading "Yes" picks key 1.
+    // alternative cost (Leyline of Mutation's grant, Land Grant's reveal).
+    // XMage poses that as its alternative-cost key menu. The mode itself is
+    // the election, so the menu is answered with key 1 even when the
+    // generator queued no answer (the cost is on the card, not a gorge
+    // decision); an older "Yes" shape is rewritten to the same key.
     private boolean alternativeCostCast = false;
     // A cast step with cast_mode "conspired" or "casualty": gorge elected the
     // spell's (often granted) copy cost -- Raiding Schemes' conspire,
@@ -917,16 +920,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return super.choose(outcome, choice, game);
         }
 
-        /** Rewrites the generator's leading "Yes" into key "1", the first
-         * alternative cost (gorge's AltCostIndex-1 election), when the menu is
-         * XMage's alternative-cost choice. Returns whether it did. */
+        /** Elects the first alternative cost (gorge's AltCostIndex-1 choice)
+         * when the menu is XMage's alternative-cost key choice. The item's
+         * cast_mode is the election, so key "1" is queued even when the
+         * generator queued no answer (a plain alternative cast on the card
+         * itself, e.g. Land Grant); a generator that queued "Yes" gets the
+         * same key. Returns whether the menu was this one. */
         static boolean alternativeCostKey(String message, List<String> choices) {
-            if (message == null || !message.endsWith("choose an alternative cost")
-                    && !message.equals("Choose an alternative cost")
-                    || choices.isEmpty() || !"Yes".equals(choices.get(0))) {
+            if (message == null || !message.toLowerCase(java.util.Locale.ROOT)
+                    .endsWith("choose an alternative cost")) {
                 return false;
             }
-            choices.set(0, "1");
+            if (choices.isEmpty()) {
+                choices.add("1");
+            } else {
+                choices.set(0, "1");
+            }
             return true;
         }
 
@@ -3269,10 +3278,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // the card's ordinary SpellAbility, played by name. TestPlayer's
                 // "Cast <name>" search runs over Zone.ALL, so it finds it.
                 || mode.equals("mayplay")
-                // "alternative": an alternative cost another permanent grants
-                // (Leyline of Mutation's {W}{U}{B}{R}{G}). XMage poses it as
-                // its own yes/no while casting, which the generator scripts
-                // from gorge's election, so the step is a plain cast here.
+                // "alternative": the first alternative cost, whether the card
+                // carries it itself (Land Grant's reveal) or another permanent
+                // grants it (Leyline of Mutation's {W}{U}{B}{R}{G}). XMage
+                // poses its alternative-cost key menu during the cast; the
+                // mode is the election, so ScriptedChoicePlayer queues key 1
+                // there and the step is otherwise a plain cast.
                 || mode.equals("alternative")
                 || mode.equals("prepared_copy")
                 // "adventure_alt" / "omen_alt": the cast of an Adventure or
