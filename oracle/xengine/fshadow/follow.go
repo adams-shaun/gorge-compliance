@@ -605,11 +605,11 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// is asked. A target it fixes without asking (a forced single
 		// candidate, a trigger's target picked inside resolution ...) writes
 		// no line, so the next line is the seat's next priority, attack or
-		// block ask. Answer by default -- the first Min options in offered
-		// order -- and consume no line; Forge's real choice, if it differs,
-		// shows at the next snapshot.
+		// block ask. Answer by default -- the first Min offered options the
+		// Group contract admits -- and consume no line; Forge's real choice,
+		// if it differs, shows at the next snapshot.
 		f.res.Targets++
-		return firstMin(d), true
+		return f.defaultTargets(d), true
 	}
 	if e.Ask == nil {
 		f.hard(WhatKind, d, Divergence{Line: e.Line, Gorge: string(d.Kind), Forge: e.T})
@@ -849,34 +849,137 @@ func (f *follower) blockers(d *decision.Decision, a *Ask) (decision.Intent, *Div
 
 func (f *follower) targets(d *decision.Decision, a *Ask) (decision.Intent, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{}}
-	for _, r := range a.Answer.Targets {
-		i := -1
-		if id := r.Card + r.Spell; id != 0 {
-			// A spell is its host card's object on the stack.
-			g, ok := f.toG[id]
-			if !ok {
-				return in, f.unbound(id)
-			}
-			for k, o := range d.Options {
-				if o.Obj == g {
-					i = k
-					break
-				}
-			}
-		} else if r.Player != nil {
-			for k, o := range d.Options {
-				if o.Obj == 0 && int(o.Player) == *r.Player {
-					i = k
-					break
-				}
-			}
+	cands := make([][]int, len(a.Answer.Targets))
+	for i, r := range a.Answer.Targets {
+		var ok bool
+		cands[i], ok = f.targetCandidates(d, r)
+		if !ok {
+			return in, f.unbound(r.Card + r.Spell)
 		}
-		if i < 0 {
+		if len(cands[i]) == 0 {
 			return in, &Divergence{What: WhatAnswerMissing, Forge: refKey(r)}
 		}
-		in.Choices = append(in.Choices, i)
 	}
+	choices, ok := assignTargetOptions(d, cands)
+	if !ok {
+		return in, &Divergence{What: WhatAnswerMissing, Forge: targetRefKeys(a.Answer.Targets),
+			Detail: "no assignment of the answer to one option per Group"}
+	}
+	in.Choices = choices
 	return in, nil
+}
+
+// targetCandidates is the offered option indices answer ref r names, in offer
+// order: an object (a spell is its host card's object on the stack) or a
+// player. ok is false when the Forge id is unbound, which is a harness gap
+// (unbound), not an answer-missing.
+func (f *follower) targetCandidates(d *decision.Decision, r Ref) (out []int, ok bool) {
+	if id := r.Card + r.Spell; id != 0 {
+		g, bound := f.toG[id]
+		if !bound {
+			return nil, false
+		}
+		for k, o := range d.Options {
+			if o.Obj == g {
+				out = append(out, k)
+			}
+		}
+		return out, true
+	}
+	if r.Player != nil {
+		for k, o := range d.Options {
+			if o.Obj == 0 && int(o.Player) == *r.Player {
+				out = append(out, k)
+			}
+		}
+	}
+	return out, true
+}
+
+// targetOptionsGrouped reports whether the offer carries the per-Option Group
+// exclusivity contract. Both target intent builders read this one predicate,
+// so a Group-less ask can never be routed through the grouped assignment.
+func targetOptionsGrouped(d *decision.Decision) bool {
+	for _, o := range d.Options {
+		if o.Group != "" {
+			return true
+		}
+	}
+	return false
+}
+
+// assignTargetOptions maps each selected ref onto one offered target option.
+// With a Group-less decision that is first-match in offer order. A decision
+// with Option.Group is bound by Decision.Validate's exclusivity contract
+// (at most GroupCapFor(group) picks per group) -- most visibly a combined
+// charm ask's one charm-mode-N group per target-bearing mode -- and the same
+// permanent can be a legal target in several modes. First-match is not enough
+// there: it can put two picks in one mode's group, which the engine rejects
+// with "choices N and M are mutually exclusive (group "charm-mode-0")". This
+// is a bipartite assignment that keeps first-match preference but backtracks
+// an earlier ref to another mode's option rather than exceed a group's cap.
+func assignTargetOptions(d *decision.Decision, cands [][]int) ([]int, bool) {
+	chosen := make([]int, len(cands))
+	if !targetOptionsGrouped(d) {
+		for i := range cands {
+			chosen[i] = cands[i][0]
+		}
+		return chosen, true
+	}
+	for i := range chosen {
+		chosen[i] = -1
+	}
+	used := map[string]int{}
+	var assign func(int) bool
+	assign = func(i int) bool {
+		if i == len(cands) {
+			return true
+		}
+		for _, c := range cands[i] {
+			o := d.Options[c]
+			if !d.GroupAdmits(used, o.Group) {
+				continue
+			}
+			dup := false
+			if !d.Repeatable {
+				for _, prev := range chosen[:i] {
+					if prev == c {
+						dup = true
+						break
+					}
+				}
+			}
+			if dup {
+				continue
+			}
+			chosen[i] = c
+			if o.Group != "" {
+				used[o.Group]++
+			}
+			if assign(i + 1) {
+				return true
+			}
+			if o.Group != "" {
+				used[o.Group]--
+			}
+			chosen[i] = -1
+		}
+		return false
+	}
+	if !assign(0) {
+		return nil, false
+	}
+	return chosen, true
+}
+
+// targetRefKeys is a target answer's refs in key form, for a divergence that
+// has no single ref to name.
+func targetRefKeys(refs []Ref) string {
+	keys := make([]string, len(refs))
+	for i, r := range refs {
+		keys[i] = refKey(r)
+	}
+	return strings.Join(keys, " ")
 }
 
 func (f *follower) unbound(fid int) *Divergence {
@@ -1217,6 +1320,41 @@ func (f *follower) defaultModes(d *decision.Decision) decision.Intent {
 func (f *follower) defaultChoose(d *decision.Decision) decision.Intent {
 	f.res.Chooses++
 	return firstMin(d)
+}
+
+// defaultTargets answers a target decision the log has no line for. A
+// Group-less ask is firstMin unchanged: its slots are not exclusive, so the
+// first Min offered options are always a valid answer (and giving every slot
+// the same offer list would answer all-zero, which Validate rejects as a
+// duplicate choice). A grouped ask needs the Group contract: a combined
+// charm's options are emitted mode by mode, so a plain prefix can lie inside
+// one charm-mode Group and the engine rejects it with "choices 0 and 1 are
+// mutually exclusive (group \"charm-mode-0\")". That path walks the offer and
+// skips an option whose Group is already at its cap.
+func (f *follower) defaultTargets(d *decision.Decision) decision.Intent {
+	if !targetOptionsGrouped(d) {
+		return firstMin(d)
+	}
+	k := d.Min
+	if d.Max > 0 && k > d.Max {
+		k = d.Max
+	}
+	if k > len(d.Options) {
+		k = len(d.Options)
+	}
+	if k < 0 {
+		k = 0
+	}
+	all := make([]int, len(d.Options))
+	for i := range all {
+		all[i] = i
+	}
+	cands := make([][]int, k)
+	for i := range cands {
+		cands[i] = all
+	}
+	choices, _ := assignTargetOptions(d, cands)
+	return decision.Intent{Seq: d.Seq, Player: d.Player, Choices: choices}
 }
 
 // firstMin is the intent picking the first Min options in offered order.

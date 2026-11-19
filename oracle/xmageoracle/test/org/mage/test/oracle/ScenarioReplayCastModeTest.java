@@ -7,12 +7,12 @@ import com.google.gson.JsonParser;
 
 /** Executable check of the driver's cast-mode acceptance list and of the
  * Adventure/Omen cast path. The acceptance checks are pure (cast_mode decides
- * whether a cast step is replayed at all); the Adventure/Omen cases replay a
- * real one-step game, so the script gives XMage's H2 card DB a private copy.
- * "mayplay" is the cast from exile under Reckless Impulse's play permission; it
- * must be accepted, while the modes the driver still cannot replay
- * ("plot_cast") and the deliberately-unsupported "kicked" must stay rejected.
- * Run scripts/xmage-oracle-test-cast-mode.sh. */
+ * whether a cast step is replayed at all); the Adventure/Omen and alternative
+ * cost cases replay a real one-step game, so the script gives XMage's H2 card
+ * DB a private copy. "mayplay" is the cast from exile under Reckless Impulse's
+ * play permission; it must be accepted, while the modes the driver still
+ * cannot replay ("plot_cast") and the deliberately-unsupported "kicked" must
+ * stay rejected. Run scripts/xmage-oracle-test-cast-mode.sh. */
 public final class ScenarioReplayCastModeTest {
     private static String castModeSupported(String mode) throws Exception {
         Class<?> replay = ScenarioReplay.class;
@@ -91,6 +91,48 @@ public final class ScenarioReplayCastModeTest {
         System.out.println("PASS warped casts Bygone Colossus for its {3} warp cost; it is on the stack");
     }
 
+    /** A plain cast whose cast_mode is "alternative": the mode is the election,
+     * so the driver picks XMage's first alternative-cost key even when the
+     * generator queued no answer. Land Grant ({1}{G}) offers "reveal your
+     * hand" when the hand holds no land cards; an answer from the AI's default
+     * (the last key, "Cast with no alternative cost") taps the Island and Tree
+     * of Tales instead. The spell must be on the stack with both lands
+     * untapped, as gorge's step 7 in SUP-s167 (xe:RAND:2:0:w16) has them. */
+    private static void landGrantAlternativeCost() throws Exception {
+        equal("true", castModeSupported("alternative"), "alternative cast_mode");
+        JsonObject sc = JsonParser.parseString("{name:'Land Grant',card:'Land Grant',"
+                + "setup:{p0:{battlefield:['Island','Tree of Tales'],hand:['Land Grant'],"
+                + "library_top:['Forest','Island','Forest','Island']}},"
+                + "steps:[{op:'cast',seat:0,card:'p0:Land Grant',cast_mode:'alternative'}]}")
+                .getAsJsonObject();
+        JsonObject res = new ScenarioReplay().replayOnce(sc, false);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("alternative Land Grant replay failed: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        boolean onStack = false;
+        for (JsonElement e : last.getAsJsonArray("stack")) {
+            onStack |= "Land Grant".equals(e.getAsJsonObject().get("source").getAsString());
+        }
+        if (!onStack) {
+            throw new AssertionError("alternative Land Grant is not on the stack: " + last);
+        }
+        for (JsonElement e : last.getAsJsonArray("permanents")) {
+            JsonObject o = e.getAsJsonObject();
+            if (o.get("controller").getAsInt() != 0) {
+                continue;
+            }
+            String name = o.get("name").getAsString();
+            if (("Island".equals(name) || "Tree of Tales".equals(name))
+                    && o.has("tapped") && o.get("tapped").getAsBoolean()) {
+                throw new AssertionError(name + " was tapped for the ordinary cost: " + last);
+            }
+        }
+        System.out.println("PASS alternative Land Grant reveals the hand, leaves Island and Tree of Tales"
+                + " untapped and is on the stack");
+    }
+
     private static String mayplayCastObject(String mode, String alias, String castName, String refSpelling,
             String card) throws Exception {
         java.lang.reflect.Method m = ScenarioReplay.class.getDeclaredMethod("mayplayCastObject",
@@ -165,6 +207,10 @@ public final class ScenarioReplayCastModeTest {
         stackHas("Bonecrusher Giant", "Stomp", "adventure_alt", "RR", true);
         stackHas("Purging Stormbrood", "Absorb Essence", "omen_alt", "WW", true);
         stackHas("Bonecrusher Giant", "Stomp", "adventure_alt", "RR", false);
+
+        // cast_mode "alternative" on the card's own cost: the generator queues
+        // no answer, so the driver must elect XMage's first alternative itself.
+        landGrantAlternativeCost();
 
         // Guards the list's ordinary behaviour: no mode is the plain cast.
         equal("true", castModeSupported(""), "absent cast_mode");
