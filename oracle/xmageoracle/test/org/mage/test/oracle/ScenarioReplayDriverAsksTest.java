@@ -50,8 +50,10 @@ public final class ScenarioReplayDriverAsksTest {
         alternativeCast();
         promisedGift();
         replacementOrder();
+        phyrexianLife();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
-                + " face-down attacker, declined dig, alternative cast, promised gift, replacement order");
+                + " face-down attacker, declined dig, alternative cast, promised gift, replacement order,"
+                + " phyrexian life");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
@@ -234,5 +236,41 @@ public final class ScenarioReplayDriverAsksTest {
                 "not a gift ask");
         check(adapter("giftOpponentChoice", types, true, Arrays.asList("PlayerB", "PlayerC"), new ArrayList<String>()) == null,
                 "two opponents is a real choice");
+    }
+
+    /** (j) NPH Blinding Souleater's {W/P} activation: XMage asks "Pay 2 life
+     * instead of {W} (phyrexian cost)?" at CR 601.2b. A recorded life face
+     * scripts one "Yes", which TestPlayer consumes (the helper must leave it
+     * alone). A colour-face pick scripts nothing, so the ask must be answered
+     * no WITHOUT consuming the step's next answer -- TestPlayer would
+     * otherwise stop the replay at "Missing CHOICE def" before the pool pays
+     * the pip. The other Phyrexian wording (ManaCostsImpl's "?" and K'rrik's
+     * "(pay life cost)?") is the same ask. */
+    private static void phyrexianLife() throws Exception {
+        String[] asks = {
+            "Pay 2 life instead of {W} (phyrexian cost)?",
+            "Pay 2 life instead of {B} (pay life cost)?",
+            "Pay 2 life instead of {U}?"
+        };
+        Class<?>[] one = {String.class};
+        for (String ask : asks) {
+            check((Boolean) adapter("phyrexianAsk", one, ask), "not recognised as a Phyrexian ask: " + ask);
+        }
+        for (String other : new String[] {"Pay 1 life.", "Pay {W}?", "Choose a color", null}) {
+            check(!(Boolean) adapter("phyrexianAsk", one, other), "misread as a Phyrexian ask: " + other);
+        }
+        Class<?>[] two = {String.class, List.class};
+        String ask = asks[0];
+        check(!(Boolean) adapter("phyrexianStarved", two, ask, new ArrayList<>(Collections.singletonList("Yes"))),
+                "a queued life-face Yes is left for TestPlayer to consume");
+        check(!(Boolean) adapter("phyrexianStarved", two, ask, new ArrayList<>(Collections.singletonList("No"))),
+                "a queued No is left for TestPlayer to consume");
+        check((Boolean) adapter("phyrexianStarved", two, ask, new ArrayList<String>()),
+                "no queued answer: a colour-face pick is answered no, not Missing CHOICE def");
+        check((Boolean) adapter("phyrexianStarved", two, ask,
+                new ArrayList<>(Collections.singletonList(TestPlayer.CHOICE_SKIP))),
+                "the step's next non-boolean answer is not consumed");
+        check(!(Boolean) adapter("phyrexianStarved", two, "Choose a color", new ArrayList<String>()),
+                "another ask is untouched");
     }
 }
