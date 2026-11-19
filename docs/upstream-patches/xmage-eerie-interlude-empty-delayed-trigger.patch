@@ -1,0 +1,72 @@
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/EerieInterludeTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/EerieInterludeTest.java
+new file mode 100644
+index 0000000..db8e144
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/EerieInterludeTest.java
+@@ -0,0 +1,47 @@
++package org.mage.test.cards.single;
++
++import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Assert;
++import org.junit.Test;
++import org.mage.test.player.TestPlayer;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * CR 603.7a: an effect may create a delayed triggered ability that does
++ * something at a later time. Eerie Interlude's return sentence is
++ * unconditional, so the delayed ability is created even when zero creatures
++ * are exiled; it then resolves doing nothing.
++ */
++public class EerieInterludeTest extends CardTestPlayerBase {
++
++    private static final String interlude = "Eerie Interlude";
++
++    @Test
++    public void test_DelayedReturnTriggerWithZeroTargets() {
++        setStrictChooseMode(true);
++
++        addCard(Zone.HAND, playerA, interlude);
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
++
++        // "any number of target creatures" allows choosing zero targets.
++        addTarget(playerA, TestPlayer.TARGET_SKIP);
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, interlude);
++
++        runCode("delayed return trigger at the beginning of the next end step", 1, PhaseStep.END_TURN, playerA,
++                (info, player, game) -> {
++                    Assert.assertEquals("one delayed ability on the stack", 1, game.getStack().size());
++                    Assert.assertTrue("the delayed return ability is on the stack",
++                            game.getStack().getFirstOrNull().getStackAbility() instanceof AtTheBeginOfNextEndStepDelayedTriggeredAbility);
++                });
++
++        setStopAt(1, PhaseStep.END_TURN);
++        execute();
++
++        // Nothing was exiled, so the trigger resolved doing nothing.
++        assertPermanentCount(playerA, "Grizzly Bears", 1);
++        assertExileCount(playerA, 0);
++    }
++}
+diff --git a/Mage/src/main/java/mage/abilities/effects/common/ExileReturnBattlefieldNextEndStepTargetEffect.java b/Mage/src/main/java/mage/abilities/effects/common/ExileReturnBattlefieldNextEndStepTargetEffect.java
+index 939d928..880fa42 100644
+--- a/Mage/src/main/java/mage/abilities/effects/common/ExileReturnBattlefieldNextEndStepTargetEffect.java
++++ b/Mage/src/main/java/mage/abilities/effects/common/ExileReturnBattlefieldNextEndStepTargetEffect.java
+@@ -75,10 +75,11 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
+                 .map(game::getPermanent)
+                 .filter(Objects::nonNull)
+                 .collect(Collectors.toCollection(LinkedHashSet::new));
+-        if (toExile.isEmpty()) {
+-            return false;
++        // The delayed return trigger is created even when nothing was exiled
++        // (the target is "up to one"); it then resolves doing nothing.
++        if (!toExile.isEmpty()) {
++            controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
+         }
+-        controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
+         Effect effect = yourControl
+                 ? new ReturnToBattlefieldUnderYourControlTargetEffect(exiledOnly, tapped)
+                 : new ReturnToBattlefieldUnderOwnerControlTargetEffect(tapped, exiledOnly);
