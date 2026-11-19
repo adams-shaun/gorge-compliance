@@ -990,7 +990,8 @@ func TestEmptyAttackPasses(t *testing.T) {
 
 // TestClassifyShuffledTopExile: after a shuffle, a seat's exile that differs
 // because each engine exiled its own top card is rng; with no shuffle, or with a
-// card the seat's deck cannot hold, it stays a divergence.
+// card the seat's deck cannot hold, it stays a divergence. A swapped window maps
+// the field's scenario seat through item.Swap to the tape's deck index.
 func TestClassifyShuffledTopExile(t *testing.T) {
 	item, tp, g := fixture(0)
 	item.Item.ID = "xe:T:0:0:w1"
@@ -1011,6 +1012,17 @@ func TestClassifyShuffledTopExile(t *testing.T) {
 	item.HasRNG = false
 	if f := Classify(item, tp, g, exile("Island"), "xmage"); f.Class != ClassDiverge {
 		t.Errorf("no shuffle in the window: %+v", f)
+	}
+	item.HasRNG, item.Swap = true, true
+	g.Snapshots[2].Players[0].Exile = []string{"Swamp"}
+	// The follower exiled one more copy than gorge (as in the row that motivated
+	// this: forge had an extra Island), so the lists differ while both names are
+	// still cards of the scenario seat's tape deck.
+	if f := Classify(item, tp, g, exile("Swamp", "Swamp"), "xmage"); f.Class != ClassRNG || f.Field != "p0.exile" {
+		t.Errorf("swapped window, cards in the scenario seat's tape deck: %+v", f)
+	}
+	if f := Classify(item, tp, g, exile("Plains"), "xmage"); f.Class != ClassDiverge {
+		t.Errorf("swapped window, card outside both decks: %+v", f)
 	}
 }
 
