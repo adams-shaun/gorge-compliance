@@ -1,0 +1,83 @@
+diff --git a/Mage.Sets/src/mage/cards/b/BiorganicCarapace.java b/Mage.Sets/src/mage/cards/b/BiorganicCarapace.java
+index b27b1cd..843b220 100644
+--- a/Mage.Sets/src/mage/cards/b/BiorganicCarapace.java
++++ b/Mage.Sets/src/mage/cards/b/BiorganicCarapace.java
+@@ -1,7 +1,7 @@
+ package mage.cards.b;
+ 
+ import mage.abilities.Ability;
+-import mage.abilities.common.DealsCombatDamageTriggeredAbility;
++import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+ import mage.abilities.common.EntersBattlefieldAttachToTarget;
+ import mage.abilities.common.SimpleStaticAbility;
+ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+@@ -39,7 +39,7 @@ public final class BiorganicCarapace extends CardImpl {
+         this.addAbility(new EntersBattlefieldAttachToTarget());
+ 
+         // Equipped creature gets +2/+2 and has "Whenever this creature deals combat damage to a player, draw a card for each modified creature you control."
+-        Ability gainedAbility = new DealsCombatDamageTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)), false);
++        Ability gainedAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)), false);
+         Ability equipAbility = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
+         equipAbility.addEffect(new GainAbilityAttachedEffect(gainedAbility, null)
+                 .concatBy("and"));
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/spm/BiorganicCarapaceTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/spm/BiorganicCarapaceTest.java
+new file mode 100644
+index 0000000..845451c
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/spm/BiorganicCarapaceTest.java
+@@ -0,0 +1,55 @@
++package org.mage.test.cards.single.spm;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * Biorganic Carapace (SPM): "Equipped creature gets +2/+2 and has 'Whenever
++ * this creature deals combat damage to a player, draw a card for each
++ * modified creature you control.'"
++ *
++ * CR 120.2a: combat damage is dealt by attacking and blocking creatures.
++ * CR 510.1c: a blocked creature assigns its combat damage to the creatures
++ * blocking it, so that damage is not dealt to a player.
++ * CR 603.2: a triggered ability triggers only when its trigger event occurs;
++ * "deals combat damage to a player" does not match damage dealt to a creature.
++ */
++public class BiorganicCarapaceTest extends CardTestPlayerBase {
++
++    private void setUpEquippedBears() {
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
++        addCard(Zone.BATTLEFIELD, playerA, "Biorganic Carapace");
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
++        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Grizzly Bears");
++    }
++
++    @Test
++    public void testBlockedEquippedCreatureDoesNotDraw() {
++        setStrictChooseMode(true);
++        setUpEquippedBears();
++        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
++
++        attack(1, playerA, "Grizzly Bears");
++        block(1, playerB, "Grizzly Bears", "Grizzly Bears");
++
++        setStopAt(1, PhaseStep.END_TURN);
++        execute();
++
++        assertHandCount(playerA, 0);
++    }
++
++    @Test
++    public void testUnblockedEquippedCreatureDraws() {
++        setStrictChooseMode(true);
++        setUpEquippedBears();
++
++        attack(1, playerA, "Grizzly Bears");
++
++        setStopAt(1, PhaseStep.END_TURN);
++        execute();
++
++        assertHandCount(playerA, 1);
++    }
++}
