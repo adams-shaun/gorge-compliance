@@ -1,0 +1,40 @@
+{
+  "card": "Laboratory Drudge",
+  "family": "trigger-condition",
+  "author": "Oracle + CR only",
+  "scenarios": [
+    {
+      "name": "no-graveyard-activity-still-triggers-and-draws",
+      "cr": ["603.4"],
+      "why": "The 'if you've cast a spell from a graveyard or activated an ability of a card in a graveyard this turn' clause follows the draw effect, not the trigger condition, so it is not an intervening-if (CR 603.4 final sentence): the ability triggers at EVERY end step and the 2020-11-10 ruling says so; the condition is checked only as the draw resolves.",
+      "setup": {"p0": {"battlefield": ["Laboratory Drudge"]}, "p1": {}},
+      "steps": [
+        {"op": "pass_to", "step": "end", "active": "p0", "expect": [{"trigger_on_stack": "p0:Laboratory Drudge", "want": true}]},
+        {"op": "resolve"}
+      ],
+      "expect": [
+        {"hand_size": {"p0": 1}}
+      ]
+    },
+    {
+      "name": "graveyard-cast-triggers-and-draws",
+      "cr": ["603.4", "702.34a"],
+      "why": "Casting Firebolt with flashback satisfies 'you've cast a spell from a graveyard this turn', so the end-step ability triggers and the condition holds as the draw resolves: one card is drawn.",
+      "setup": {
+        "p0": {"battlefield": ["Laboratory Drudge"], "graveyard": ["Firebolt"], "library_top": ["Grizzly Bears"]},
+        "p1": {}
+      },
+      "steps": [
+        {"op": "cast", "seat": 0, "card": "p0:Firebolt", "mana": "RRRRR", "cast_mode": "flashback", "targets": ["p1"]},
+        {"op": "resolve"},
+        {"op": "pass_to", "step": "end", "active": "p0", "expect": [{"trigger_on_stack": "p0:Laboratory Drudge", "want": true}]},
+        {"op": "resolve"}
+      ],
+      "expect": [
+        {"hand_size": {"p0": 1}},
+        {"life": {"p1": 18}},
+        {"card": "p0:Firebolt", "zone": "exile"}
+      ]
+    }
+  ]
+}

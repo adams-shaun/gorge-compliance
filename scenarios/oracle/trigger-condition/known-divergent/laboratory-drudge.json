@@ -1,0 +1,6 @@
+{
+  "card": "Laboratory Drudge",
+  "rows": {
+    "no-graveyard-activity-still-triggers-and-draws": "gorge gates the end-step trigger on the NumCast count (CheckSVar$ on the T:Mode$ Phase line in the shared Forge script laboratory_drudge.txt), so with no graveyard cast or graveyard-card activation this turn the trigger never goes on the stack and no card is drawn; Oracle and the 2020-11-10 ruling make the trigger unconditional and the draw conditional at resolution (CR 603.4 final sentence). Gorge+Forge card-data fix filed in gorge's pipeline (gorge-compliance oracle/xengine/diagnosed.tsv, blame|GF|X|stack|Laboratory Drudge); delete this row when the pin carries the fix."
+  }
+}
