@@ -47,7 +47,7 @@
 //	          "mulligans":K,"max_turns":T,"max_ms":M,"seats":[{"seat":0,"name":"..","cards":[{"id":101,"name":"Forest"},..],"commanders":[idx..]}]}
 //	shuffle  {"t":"shuffle","seat":0,"order":[ids, top first]}            the opening shuffles (before start) and every later one
 //	start    {"t":"start","seat":1}                                       the seat taking the first turn
-//	mull     {"t":"mull","seat":1,"keep":false}                           or {"keep":true,"bottom":[ids]}
+//	mull     {"t":"mull","seat":1,"keep":false,"hand":[ids]}              or {"keep":true,"bottom":[ids],"hand":[ids]}
 //	ask      {"t":"ask","n":7,"seat":1,"turn":3,"step":"main1","kind":"priority","options":[..],"answer":{..}}
 //	rand     {"t":"rand","kind":"coin|die","bound":2,"value":1}            coin 1 heads 0 tails; die 1..bound
 //	snap     {"t":"snap","n":3,"snapshot":{rules.OracleSnapshot}}         checkpoint "t<turn>:<step>", at the start of a step with an empty stack
@@ -62,7 +62,9 @@
 // step): such an ask is always a pass, and the follower skips it, as it
 // skips a snap of a step gorge has already left. The line grammar is
 // forge-oracle's ShadowLog (adams-shaun/forge, forge-oracle/.../ShadowLog.java);
-// fields it marks as extras (policy, hand, index, label, ...) are ignored.
+// fields it marks as extras (policy, index, label, ...) are ignored, except a
+// mull line's hand, which tells a state-neutral mulligan after the hand has
+// emptied from an ordinary one.
 package fshadow
 
 import (
@@ -97,7 +99,10 @@ type Header struct {
 	Seed       uint64 `json:"seed"`
 	ForgeRef   string `json:"forge_ref,omitempty"`
 	GameFormat string `json:"game_format,omitempty"` // "constructed" (default) or "commander"
-	Mulligans  int    `json:"mulligans,omitempty"`   // London mulligans each seat may take (Forge: 7)
+	// Mulligans is Forge's counted London mulligan cap (its starting hand
+	// size, 7). Setup adds FreeMulligan back when it converts the header to
+	// gorge's Config, whose allowance counts the free first mulligan too.
+	Mulligans int `json:"mulligans,omitempty"`
 	// FreeMulligan is Forge's first-mulligan-is-free rule (more than two
 	// seats). gorge derives the same rule from the seat count (CR 103.5c) and
 	// has no Config input for it, so a header that disagrees is a harness
@@ -136,13 +141,21 @@ type Start struct {
 }
 
 // Mull is one keep-or-mulligan answer; a keep lists the cards put on the
-// bottom (CR 103.5).
+// bottom (CR 103.5). Hand is Forge's hand after the decision (the recorder
+// writes it as an extra); it is a pointer so an omitted extra (nil, older
+// logs and synthetic fixtures) stays distinct from a recorded empty hand
+// (&[]), the state a mulligan after the hand has emptied leaves.
 type Mull struct {
 	T      string `json:"t"`
 	Seat   int    `json:"seat"`
 	Keep   bool   `json:"keep"`
 	Bottom []int  `json:"bottom,omitempty"`
+	Hand   *[]int `json:"hand,omitempty"`
 }
+
+// emptyHand reports whether the line records a decision made with no cards in
+// hand, as opposed to a log or fixture that omits the hand extra.
+func (m *Mull) emptyHand() bool { return m.Hand != nil && len(*m.Hand) == 0 }
 
 // Ask is one decision Forge's seat answered.
 type Ask struct {
