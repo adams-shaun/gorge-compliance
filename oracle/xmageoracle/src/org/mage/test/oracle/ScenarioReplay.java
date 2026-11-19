@@ -372,6 +372,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // unusable units) fall back, so no later ask in the step reaches
             // TestPlayer in manual mode with no choice.
             if (payment != null) {
+                // A recorded coloured tap can be the unit a still-unpaid
+                // forced pip needs while the plan has no letter of that
+                // colour: gorge tapped the creature for that pip, and the
+                // plan's other letters paid everything else. Take the tap
+                // before nextPaymentColour's drop-a-letter fallback would
+                // spend a pool unit the recorded cast kept.
+                if (takeRecordedTapForForcedPip(unpaid, game)) {
+                    return playQueuedTapPayment(ability, unpaid, promptText, game);
+                }
                 String next = nextPaymentColour(ability, unpaid, game);
                 if (next != null) {
                     // TestPlayer.playMana consumes choices.get(0). This step's
@@ -397,16 +406,51 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // The recorded plan is spent and the step's next answer is
                     // gorge's improvise/convoke tap. Stay in manual payment so
                     // TestPlayer takes the special action it now names.
-                    try {
-                        return super.playMana(ability, unpaid, promptText, game);
-                    } finally {
-                        convokeColour = null;
-                    }
+                    return playQueuedTapPayment(ability, unpaid, promptText, game);
                 } else {
                     fallBackToAutoPayment();
                 }
             }
             return super.playMana(ability, unpaid, promptText, game);
+        }
+
+        /** Take the recorded tap special action the queue now names, clearing
+         * the one-shot convoke colour answer on either return path. */
+        private boolean playQueuedTapPayment(Ability ability, ManaCost unpaid,
+                String promptText, Game game) {
+            try {
+                return super.playMana(ability, unpaid, promptText, game);
+            } finally {
+                convokeColour = null;
+            }
+        }
+
+        /** Whether the still-unpaid cost forces a WUBRG pip the recorded plan
+         * has no letter for, and the recorded payment tap at the front of the
+         * choice queue pays exactly that colour. Such a tap is the recorded
+         * unit for the pip: queue its special action and let playMana take it,
+         * so assignPayment consumes the added unit and the pool unit the plan
+         * intended to keep survives. A "for 1" tap does not qualify (it is the
+         * generic contribution, and the plan-exhausted path below takes it);
+         * neither does a tap for a colour no unpaid pip forces. */
+        private boolean takeRecordedTapForForcedPip(ManaCost unpaid, Game game) {
+            if (getChoices().isEmpty()) {
+                return false;
+            }
+            String[] pick = tapPaymentPick(getChoices().get(0));
+            if (pick == null || "1".equals(pick[1])) {
+                return false;
+            }
+            char colour = pick[1].charAt(0);
+            if (payment.indexOf(colour) >= 0) {
+                return false;
+            }
+            Mana forced = new Mana();
+            collectDue(unpaid, forced, new ArrayList<HybridManaCost>());
+            if (forced.get(manaType(colour)) <= 0) {
+                return false;
+            }
+            return queueTapPaymentAction(game);
         }
 
         /** The colour XMage's convoke effect is to be answered with when it
