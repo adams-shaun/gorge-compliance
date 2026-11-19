@@ -27,6 +27,10 @@
 //     non-intrinsic AB remain (the only possible pairing). A line that still
 //     matches no AB, more than one AB, or that leaves a non-intrinsic AB
 //     unmatched is ambiguous and the caller skips the face.
+//   - A face whose ABs carry neither a Cost$ nor a SpellDescription has no
+//     printed evidence to pair on (hand-built faces and parser gaps). It keeps
+//     the legacy ordinal pairing instead of turning every line ambiguous; an
+//     empty SpellDescription is unknown, never a wildcard match.
 package oraclegen
 
 import (
@@ -141,6 +145,9 @@ func XMageAbility(f *cards.Face) (map[int]string, string) {
 // every line that is left ambiguous, makes the face ambiguous.
 func pairAbilityLines(f *cards.Face, lines []string) ([]int, bool) {
 	candidates := nonKeywordAbilities(f, true)
+	if !hasPairingMetadata(f, candidates) {
+		return ordinalPairs(f, lines)
+	}
 	sets := make([][]int, len(lines))
 	for k, line := range lines {
 		sets[k] = abilitiesForLine(f, line, candidates)
@@ -208,6 +215,36 @@ func pairAbilityLines(f *cards.Face, lines []string) ([]int, bool) {
 		}
 	}
 	return pairs, true
+}
+
+// hasPairingMetadata reports whether any candidate carries a printed cost or
+// effect to pair its line against. When none does, the face is a hand-built or
+// parser-gap shape with no evidence beyond order, and the legacy ordinal path
+// below is the only relation available.
+func hasPairingMetadata(f *cards.Face, candidates []int) bool {
+	for _, ai := range candidates {
+		sa := f.Abilities[ai]
+		if sa.ParamStr(cards.PKCost) != "" || sa.ParamStr(cards.PKSpellDescription) != "" {
+			return true
+		}
+	}
+	return false
+}
+
+// ordinalPairs is the legacy pairing for metadata-less faces: the k-th
+// non-keyword AB (in IR order) describes the k-th printed line. An injected
+// basic-land mana ability usually has no printed line, but a face whose Oracle
+// prints one of its lines (the Gates) keeps it; otherwise the intrinsic is
+// dropped and the counts must agree.
+func ordinalPairs(f *cards.Face, lines []string) ([]int, bool) {
+	candidates := nonKeywordAbilities(f, true)
+	if len(lines) != len(candidates) {
+		candidates = nonKeywordAbilities(f, false)
+	}
+	if len(lines) != len(candidates) {
+		return nil, false
+	}
+	return append([]int(nil), candidates...), true
 }
 
 // abilitiesForLine returns the candidates the line can describe. Printed cost
@@ -325,9 +362,11 @@ func lineEffectText(line string) string {
 // may precede the effect), and a prefix are accepted; a prefix whose leftover
 // begins "or " is rejected because that is one printed line describing two
 // different ABs (Jinxed Choker, Cadaverous Bloom), which must stay ambiguous.
+// An empty desc is unknown, not a wildcard: treating it as a match would let
+// every metadata-less line claim every AB.
 func effectMatches(line, desc, name string) bool {
 	if desc == "" {
-		return true
+		return false
 	}
 	want := normalizeXMageText(lineEffectText(line), name)
 	if strings.Contains(desc, "NICKNAME") && !strings.Contains(want, "{this}") {
