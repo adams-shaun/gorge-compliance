@@ -48,6 +48,27 @@ func TestXAnswersQueueRoutingShapes(t *testing.T) {
 			want: []XAnswer{{0, "choice", "Forest"}, {0, "choice", "Island"}},
 		},
 		{
+			// A full top reorder (effRearrangeTopOfLibrary): Resume "arrange",
+			// ArrangeKind "bottom", Min==Max==Options. XMage asks N-1 times and
+			// auto-tops the card never named, so the answers are the picks
+			// reversed minus the topmost (picks[0]).
+			name: "arrange full top reorder: reversed picks minus the topmost",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "order", GorgeKind: "arrange", Resume: "arrange", ArrangeKind: "bottom", Options: 4, Min: 4, Max: 4, Picks: []string{"Forest", "Island", "Plains", "Swamp"}, PickIdx: []int{0, 1, 2, 3}, PickKinds: []string{"bottom", "bottom", "bottom", "bottom"}},
+			want: []XAnswer{{0, "choice", "Swamp"}, {0, "choice", "Plains"}, {0, "choice", "Island"}},
+		},
+		{
+			// The all-to-bottom Dig remainder keeps gorge's answer order.
+			name: "arrange dig bottom remainder: picks in order",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "order", GorgeKind: "arrange", Resume: "dig_arrange", ArrangeKind: "dig_bottom", Options: 4, Min: 4, Max: 4, Picks: []string{"Forest", "Island", "Plains", "Swamp"}, PickIdx: []int{0, 1, 2, 3}, PickKinds: []string{"dig_bottom", "dig_bottom", "dig_bottom", "dig_bottom"}},
+			want: []XAnswer{{0, "choice", "Forest"}, {0, "choice", "Island"}, {0, "choice", "Plains"}, {0, "choice", "Swamp"}},
+		},
+		{
+			// One card: XMage's loop runs while cards.size() > 1, so it asks nothing.
+			name: "arrange full top reorder one card: no ask",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "order", GorgeKind: "arrange", Resume: "arrange", ArrangeKind: "bottom", Options: 1, Min: 1, Max: 1, Picks: []string{"Forest"}, PickIdx: []int{0}, PickKinds: []string{"bottom"}},
+			want: nil,
+		},
+		{
 			// chooseTriggeredAbility matches the ability's rule text (getRule)
 			// or its source object's NAME. These two picks share one source
 			// (Celebrate the Mountain-king), so a name could not tell them

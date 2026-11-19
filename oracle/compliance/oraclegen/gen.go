@@ -1779,7 +1779,25 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				}
 			} else if d.GorgeKind == "arrange" {
 				forcedOrder := d.Min == d.Max && d.Max == d.Options
-				if forcedOrder {
+				// The producer, not the option Kind, decides which question the
+				// forced order answers: a full top reorder
+				// (effRearrangeTopOfLibrary) and a Dig all-to-bottom remainder
+				// both offer every card with Kind "bottom" (the reorder's pile
+				// B is empty), but they ask opposite orders. gorge's
+				// ResumeKind is what tells them apart: "arrange" is the top
+				// reorder, "dig_arrange" the bottom remainder.
+				fullTopReorder := d.Resume == "arrange" && d.ArrangeKind == "bottom" &&
+					len(d.Picks) == d.Options
+				if forcedOrder && fullTopReorder {
+					// gorge's picks are the final top-first order, but XMage's
+					// putCardsOnTopOfLibrary asks only while more than one card
+					// is left and auto-tops the card never named (last one
+					// chosen is topmost). Script the last N-1 picks reversed:
+					// picks[0] is the topmost card and stays unnamed.
+					for k := len(d.Picks) - 1; k >= 1; k-- {
+						as = append(as, XAnswer{d.Seat, "choice", d.Picks[k]})
+					}
+				} else if forcedOrder {
 					// A forced bottom order (Min == Max == Options) has no
 					// selection dialog: the answer order IS the bottom order.
 					for _, label := range d.Picks {
