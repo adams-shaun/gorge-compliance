@@ -105,6 +105,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // The step name the next checkpoint reports instead of the one it is taken
     // in, set by a pass that stops before a declaration (declarationAhead).
     private PhaseStep checkpointStepAs = null;
+    // Whether a forced waitStackResolved ran since the last checkpoint. The
+    // replay loop captures it per step and the checkpoint runs the game's
+    // state-based check before its snapshot (waitStackResolved override).
+    private boolean settleCheckpoint = false;
     private static final PhaseStep MAIN = PhaseStep.PRECOMBAT_MAIN;
 
     private final List<JsonObject> snaps = new ArrayList<>();
@@ -1900,6 +1904,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             copyCostCast = null;
             giftPromisedCast = false;
             followedPassPosition = false;
+            settleCheckpoint = false;
             gorgeName = str(sc, "card");
             xmageName = str(sc, "xmage_name");
             endTurnScenario = hasEndTurnEffect(xmageName.isEmpty() ? gorgeName : xmageName);
@@ -1959,7 +1964,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String cp = "step " + i + " (" + op + ")";
                 final PhaseStep reportAs = checkpointStepAs;
                 checkpointStepAs = null;
+                // A forced resolution queued during this step (waitStackResolved
+                // override) must settle before the snapshot. Capture the flag
+                // now: the whole action queue is built before execute(), so the
+                // field's later value cannot describe this checkpoint.
+                final boolean settleHere = settleCheckpoint;
+                settleCheckpoint = false;
                 runCode(cp, turn, phase, checkpointSeat(op, st, i), (info, p, g) -> {
+                    if (settleHere) {
+                        g.checkStateAndTriggered();
+                    }
                     applyDeclarationStepEnd(reportAs, g);
                     JsonObject snap = snapshot(info, g);
                     if (reportAs != null) {
@@ -4817,6 +4831,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 + ", priority " + priority + "; since the last checkpoint the stack lost " + departed + ")";
     }
 
+    /** A forced resolution (waitStackResolved) happens inside a TestPlayer
+     * action, before the game loop's next checkStateAndTriggered. A checkpoint
+     * queued in the same priority would otherwise snapshot the pre-SBA board:
+     * an Aura whose bearer an exile-instead replacement removed (Bleed Dry,
+     * Gnashing of Teeth) is still on the battlefield, and its CR 704.5m move
+     * waits for the next priority. Arm the next checkpoint instead of queueing
+     * a separate action: the checkpoint runs the game's own check just before
+     * its snapshot, on the checkpoint's seat, so a forced resolution cannot
+     * leave its state-based actions behind and the pinned queue order is
+     * unchanged. Overriding the single wait entry point covers every forced
+     * resolution site, including a future one (CR 117.5, 704.3). */
+    @Override
+    public void waitStackResolved(int turnNum, PhaseStep step, TestPlayer player, boolean skipOneStackObjectOnly) {
+        super.waitStackResolved(turnNum, step, player, skipOneStackObjectOnly);
+        settleCheckpoint = true;
+    }
+
     private void queuePassCommands(int stepIdx) {
         // Most pass commands run on the active seat: seat 0 for every shape
         // but the active seat 1's own p1-first pair (isActiveP1Pair).
@@ -5027,7 +5058,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // (the answers are consumed by that resolution).
                     // A pair's deferred resolution waits on the active seat,
                     // the seat that queued the pair (queuePassCommands).
-                    waitStackResolved(turn, phase, isOp(steps(sc0), stepIdx - 1, "pass") ? seat(activeSeat) : p, true);
+                    TestPlayer waiter = isOp(steps(sc0), stepIdx - 1, "pass") ? seat(activeSeat) : p;
+                    waitStackResolved(turn, phase, waiter, true);
                     dropLastCast();
                     return;
                 }
