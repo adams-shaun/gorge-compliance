@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/adams-shaun/gorge-compliance/internal/ptcounter"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/follower"
 	"github.com/adams-shaun/gorge/engine/effects"
@@ -350,12 +351,13 @@ func RefName(ref string) string {
 	return n
 }
 
+// normCounter folds a counter kind to the comparison label: every
+// power/toughness counter to the shared canonical P/M vocabulary
+// (internal/ptcounter, CR 122.1a), everything else upper-cased with its
+// spaces stripped.
 func normCounter(k string) string {
-	switch strings.ReplaceAll(strings.ToLower(k), " ", "") {
-	case "+1/+1", "p1p1":
-		return "P1P1"
-	case "-1/-1", "m1m1":
-		return "M1M1"
+	if c, ok := ptcounter.Canonical(k); ok {
+		return c
 	}
 	return strings.ToUpper(strings.ReplaceAll(k, " ", ""))
 }
