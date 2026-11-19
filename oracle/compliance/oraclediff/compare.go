@@ -558,13 +558,12 @@ func symDiff(a, b []string) (onlyA, onlyB []string) {
 
 // sourcelessTriggerNames are Forge's and XMage's names for the inherent
 // triggered abilities that have no source object: the CR 702.179 speed
-// trigger ("Start Your Engines!", "Speed") and the designation triggers of
-// CR 725.2 (monarch) and 726.2 (initiative), which the engines name after the
-// designation. gorge reports all of them with an empty source, so stackKeys
-// renders every spelling the same.
+// trigger ("Start Your Engines!", "Speed") and the CR 725.2 monarch trigger,
+// which the engines name after the designation. gorge reports all of them
+// with an empty source, so stackKeys renders every spelling the same.
 var sourcelessTriggerNames = map[string]bool{
 	"Start Your Engines!": true, "Speed": true,
-	"The Monarch": true, "The Initiative": true,
+	"The Monarch": true,
 }
 
 // SourcelessTriggerNames returns the engine names for stack abilities that
