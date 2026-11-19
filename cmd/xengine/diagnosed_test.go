@@ -10,9 +10,9 @@ import (
 )
 
 // diagnosedCorpus copies the fixture corpus into a t.TempDir() as
-// cardsfolder/<rel> and returns the temp dir. The fixtures themselves stay
-// outside any cardsfolder path, so the licence guard never mistakes them for a
-// Forge corpus.
+// cardsfolder/<rel> (and tokenscripts/<rel> for token scripts) and returns the
+// temp dir. The fixtures themselves stay outside any cardsfolder path, so the
+// licence guard never mistakes them for a Forge corpus.
 func diagnosedCorpus(t *testing.T) string {
 	t.Helper()
 	src := filepath.Join("testdata", "diagnosed", "corpus")
@@ -33,6 +33,9 @@ func diagnosedCorpus(t *testing.T) string {
 			return err
 		}
 		dst := filepath.Join(dir, "cardsfolder", rel)
+		if strings.HasPrefix(rel, "tokenscripts"+string(os.PathSeparator)) {
+			dst = filepath.Join(dir, rel)
+		}
 		if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
 			return err
 		}

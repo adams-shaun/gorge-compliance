@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -46,7 +47,7 @@ func runDiagnosed(args []string) error {
 // rows; a read or corpus error is returned separately.
 func checkDiagnosed(file, cardsDir string, w io.Writer) (int, error) {
 	folder := filepath.Join(cardsDir, "cardsfolder")
-	names, err := diagnosedCardNames(folder)
+	names, err := diagnosedCardNames(cardsDir)
 	if err != nil {
 		return 0, err
 	}
@@ -110,13 +111,43 @@ func checkDiagnosed(file, cardsDir string, w io.Writer) (int, error) {
 	return len(badRows), nil
 }
 
-// diagnosedCardNames walks cardsfolder once and returns every card's Name:
-// value, including alternate faces, so a register row names a card the corpus
-// actually has.
-func diagnosedCardNames(folder string) (map[string]bool, error) {
+// diagnosedCardNames indexes the names a register row may use. A row normally
+// names a card (cardsfolder, including alternate faces). It may also name a
+// token object with the farm's "token:" spelling ("token:Blood Token"): the
+// farm attributes a primary difference to the object its last step named, and
+// that object is a token when the step activated or attacked with one. Both a
+// token script's own name and a copied card's name can be that object, so every
+// indexed name gets the token spelling too.
+func diagnosedCardNames(cardsDir string) (map[string]bool, error) {
+	cards, err := diagnosedNames(filepath.Join(cardsDir, "cardsfolder"))
+	if err != nil {
+		return nil, err
+	}
+	tokens, err := diagnosedNames(filepath.Join(cardsDir, "tokenscripts"))
+	if err != nil {
+		return nil, err
+	}
+	names := map[string]bool{}
+	for name := range cards {
+		names[name] = true
+		names["token:"+name] = true
+	}
+	for name := range tokens {
+		names["token:"+name] = true
+	}
+	return names, nil
+}
+
+// diagnosedNames indexes the Name: values under folder, including alternate
+// faces. A missing folder is empty, not an error: the fixture corpus has no
+// tokenscripts directory.
+func diagnosedNames(folder string) (map[string]bool, error) {
 	names := map[string]bool{}
 	err := filepath.WalkDir(folder, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
+			if errors.Is(err, fs.ErrNotExist) {
+				return nil
+			}
 			return err
 		}
 		if d.IsDir() || !strings.EqualFold(filepath.Ext(path), ".txt") {
