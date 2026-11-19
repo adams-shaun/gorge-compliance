@@ -108,8 +108,7 @@
      "eq": 1
     }
    ],
-   "xmage": "ImmerwolfTest#testCard1",
-   "known_bug": "XP[cant-transform-static-not-implemented]: Immerwolf's S:Mode$ CantTransform (ValidCard$ Creature.Werewolf+nonHuman+YouCtrl, \"Non-Human Werewolves you control can't transform\", CR 701.28, 712) is parsed into dirac StatCantTransform but no engine code reads it (the only gorge reads are manifest/kgen, none under engine/rules), so Werewolf Ransacker, flipped at turn 1 upkeep by Afflicted Deserter's WerewolfTransformCondition$ trigger, is flipped back to Afflicted Deserter by its WerewolfUntransformCondition$ upkeep trigger once p1 casts two Lightning Bolts (Afflicted Deserter 1, want 0; Werewolf Ransacker 0, want 1); the flip itself is phaseTriggerMatches in engine/rules/trigmatch/actions.go, verified at gorge 2bd2725cd693."
+   "xmage": "ImmerwolfTest#testCard1"
   }
  ]
 }
