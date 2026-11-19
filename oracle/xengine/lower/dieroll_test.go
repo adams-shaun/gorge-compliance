@@ -44,14 +44,17 @@ func TestLowerDieRollResult(t *testing.T) {
 }
 
 // TestRNGDrawsAccounted: one die roll or coin flip is exactly one engine
-// draw (gorge's rng.IntN). An entry that also shuffled -- Wand of Wonder's
-// DBShuffle, Wild Endeavor's search and shuffle -- spends more draws than it
-// records outcomes, so the seeded runner cannot reproduce it. The gate must
-// count every draw, not just look for a recorded roll; all three call sites
-// share rngAccounted so the next one cannot drift.
+// draw (gorge's rng.IntN), except a flip a FlipCoinMod static forced heads:
+// it emits the same Note but consumes no draw, so the gate must count only
+// the flips marked Forced=false. An entry that also shuffled -- Wand of
+// Wonder's DBShuffle, Wild Endeavor's search and shuffle -- spends more draws
+// than it records outcomes, so the seeded runner cannot reproduce it. The
+// gate must count every draw, not just look for a recorded roll; all three
+// call sites share rngAccounted so the next one cannot drift.
 func TestRNGDrawsAccounted(t *testing.T) {
 	roll := game.Roll{Seat: 0, Sides: 6, Natural: 3, Result: 3}
 	flip := game.Flip{Seat: 0, Win: true}
+	forced := game.Flip{Seat: 0, Win: true, Forced: true}
 	for _, c := range []struct {
 		name string
 		e    game.Entry
@@ -60,9 +63,14 @@ func TestRNGDrawsAccounted(t *testing.T) {
 		{"no draws", game.Entry{}, true},
 		{"one die", game.Entry{RNG: 1, Rolls: []game.Roll{roll}}, true},
 		{"one flip", game.Entry{RNG: 1, Flips: []game.Flip{flip}}, true},
+		{"forced flip alone", game.Entry{RNG: 0, Flips: []game.Flip{forced}}, true},
 		{"die and flip", game.Entry{RNG: 2, Rolls: []game.Roll{roll}, Flips: []game.Flip{flip}}, true},
+		{"die and forced flip", game.Entry{RNG: 1, Rolls: []game.Roll{roll}, Flips: []game.Flip{forced}}, true},
 		{"shuffle plus die", game.Entry{RNG: 7, Rolls: []game.Roll{roll}}, false},
 		{"shuffle plus flip", game.Entry{RNG: 7, Flips: []game.Flip{flip}}, false},
+		// The finding's case: the flip was forced so the entry's one draw is
+		// the shuffle, not the flip. Counting len(Flips) would accept it.
+		{"shuffle plus forced flip", game.Entry{RNG: 1, Flips: []game.Flip{forced}}, false},
 		{"shuffle only", game.Entry{RNG: 7}, false},
 	} {
 		if got := rngAccounted(c.e); got != c.want {

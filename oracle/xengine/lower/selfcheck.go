@@ -143,8 +143,9 @@ func flipGap(sm seatMap, got []rules.OracleFlip, t *game.Tape, last int) *Check 
 	var want []game.Flip
 	for i := 0; i <= last && i < len(t.Entries); i++ {
 		for _, f := range t.Entries[i].Flips {
-			f.Seat = sm.seat(f.Seat)
-			want = append(want, f)
+			// Forced is a lowering-gate mark, not part of the outcome the
+			// runner reproduces: gorge's own flip list has no such field.
+			want = append(want, game.Flip{Seat: sm.seat(f.Seat), Win: f.Win})
 		}
 	}
 	render := func(fs []game.Flip) string {

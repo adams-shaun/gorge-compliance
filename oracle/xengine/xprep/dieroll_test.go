@@ -31,12 +31,11 @@ func TestAddDieRollAnswers(t *testing.T) {
 }
 
 // TestAddDieRollAnswersSameStepOrder pins the queue order when a step already
-// carries a decision and also rolls: the step's scripted decisions queue
-// first and the die after them. XMage consumes a seat's CHOICE queue in ask
-// order; the die is asked while the step's action resolves, after the
-// decisions that selected and paid for it, and a follow-up decision is posed
-// on a later step (Ebony Fly's animate yes/no is step 6 while its roll is
-// step 4).
+// carries a decision and also rolls: the die leads, then the step's scripted
+// decisions. XMage's CHOICE queue is FIFO: TestPlayer.rollDieResult consumes
+// only a head that starts with DIE_ROLL, and Ebony Fly's ability rolls the
+// d6 before it asks the animate yes/no, so ["Yes", die] strict-misses while
+// [die, "Yes"] works.
 func TestAddDieRollAnswersSameStepOrder(t *testing.T) {
 	rolls := []oraclegen.DieRoll{{Step: 1, Seat: 0, Sides: 6, Natural: 3, Result: 3}}
 	existing := [][]oraclegen.XAnswer{
@@ -47,11 +46,39 @@ func TestAddDieRollAnswersSameStepOrder(t *testing.T) {
 	want := [][]oraclegen.XAnswer{
 		nil,
 		{
-			{Seat: 0, Kind: "choice", Value: "yes"},
 			{Seat: 0, Kind: "die", Value: "3"},
+			{Seat: 0, Kind: "choice", Value: "yes"},
 		},
 	}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("answers %+v, want %+v", got, want)
+	}
+}
+
+// TestAddDieRollAnswersEbonyFlyStep6 pins the real shape the farm row
+// xe:RAND:0:7:w7 lowers to: the tape's natural 3 is on scenario step 6 (the
+// pass that resolves Ebony Fly's activation), where gorge's own answer list
+// already holds the animate "yes". The die must come first in that step's
+// queue, and a multi-die step keeps its log order.
+func TestAddDieRollAnswersEbonyFlyStep6(t *testing.T) {
+	answers := make([][]oraclegen.XAnswer, 20)
+	answers[6] = []oraclegen.XAnswer{{Seat: 0, Kind: "choice", Value: "yes"}}
+	rolls := []oraclegen.DieRoll{
+		{Step: 6, Seat: 0, Sides: 6, Natural: 3, Result: 3},
+		{Step: 6, Seat: 0, Sides: 6, Natural: 5, Result: 5},
+	}
+	got := addDieRollAnswers(answers, rolls, 20)
+	want := []oraclegen.XAnswer{
+		{Seat: 0, Kind: "die", Value: "3"},
+		{Seat: 0, Kind: "die", Value: "5"},
+		{Seat: 0, Kind: "choice", Value: "yes"},
+	}
+	if !reflect.DeepEqual(got[6], want) {
+		t.Fatalf("step 6 answers %+v, want %+v", got[6], want)
+	}
+	for i, as := range got {
+		if i != 6 && len(as) != 0 {
+			t.Fatalf("step %d changed: %+v", i, as)
+		}
 	}
 }

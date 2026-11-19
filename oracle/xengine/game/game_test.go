@@ -12,6 +12,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/engine/state"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -504,5 +505,49 @@ func TestSwappedDigest(t *testing.T) {
 		if s.Players[0].Seat != 0 || s.Players[1].Seat != 1 || s.Players[0].Life != en.Digest.Players[1].Life {
 			t.Fatalf("entry %d: players not exchanged", j)
 		}
+	}
+}
+
+// TestMarkForcedFlips: a FlipCoinMod static turns the turn's first coin flip
+// heads without drawing, so the recorder marks that winning flip Forced. A
+// flip later in the turn, a flip the flipper does not control the static for,
+// and a losing flip are ordinary draws. This is the bit the lowering gate
+// reads: counting a forced flip as a draw would let a shuffle through.
+func TestMarkForcedFlips(t *testing.T) {
+	g := state.NewGame([]string{"p0", "p1"})
+	edgar := &cards.Card{Faces: []*cards.Face{{Name: "Edgar, King of Figaro",
+		Statics: []cards.Static{{Mode: effects.ModeFlipCoinMod, Params: map[string]string{
+			"ValidPlayer": "You",
+			"CheckSVar":   "Count$YouFlipThisTurn",
+			"SVarCompare": "EQ0",
+			"Result":      "True",
+		}}}}}}
+	o := g.AddObject(edgar, 0)
+	g.SetZone(state.ZBattlefield, 0, []state.ObjID{o.ID})
+	e := &rules.Engine{G: g}
+
+	// Each seat's first flip of the turn: p0 forced, p1 has no static.
+	g.Players[0].CoinFlipsThisTurn, g.Players[1].CoinFlipsThisTurn = 1, 1
+	first := []Flip{{Seat: 0, Win: true}, {Seat: 1, Win: true}}
+	markForcedFlips(e, first)
+	want := []Flip{{Seat: 0, Win: true, Forced: true}, {Seat: 1, Win: true}}
+	if !reflect.DeepEqual(first, want) {
+		t.Fatalf("first flips %+v, want %+v", first, want)
+	}
+
+	// p0's second flip of the turn is past the static's window.
+	g.Players[0].CoinFlipsThisTurn = 2
+	later := []Flip{{Seat: 0, Win: true}}
+	markForcedFlips(e, later)
+	if later[0].Forced {
+		t.Fatalf("second flip of the turn marked forced: %+v", later[0])
+	}
+
+	// A lost first flip was a real draw even though the static is present.
+	g.Players[0].CoinFlipsThisTurn = 1
+	lost := []Flip{{Seat: 0, Win: false}}
+	markForcedFlips(e, lost)
+	if lost[0].Forced {
+		t.Fatalf("a lost flip cannot be forced: %+v", lost[0])
 	}
 }

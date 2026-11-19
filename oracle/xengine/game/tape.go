@@ -12,8 +12,10 @@ import (
 // TapeFormat is the Tape.Format value Play writes. xengine-tape-3 adds the
 // die rolls of an entry to xengine-tape-2's runner refs (Pick.Ref,
 // Pick.AttackerRef, Pick.BattleRef, ManaRec.Ref), the decision's Max and the
-// coin flips. Both earlier formats are still read: tape-2 has no die rolls,
-// tape-1 has no refs, Max or flips either. A reader rejects any other format.
+// coin flips (each also marked Forced when a FlipCoinMod static made it
+// without an RNG draw). Both earlier formats are still read: tape-2 has no die
+// rolls, tape-1 has no refs, Max or flips either. A reader rejects any other
+// format.
 const TapeFormat = "xengine-tape-3"
 
 // TapeFormat2 is the format before the entry die rolls.
@@ -113,9 +115,18 @@ type Entry struct {
 }
 
 // Flip is one coin-flip result: the flipper's seat and whether it won.
+// Forced marks a flip a FlipCoinMod static turned heads without drawing from
+// the engine's RNG (Edgar, King of Figaro's "those coins come up heads"). It
+// is recorded so the lowering gate can tell a flip that accounts for a draw
+// from one that does not; a winning flip the static did not cover is a real
+// draw. Absent (false) in a tape written before this mark, which is the safe
+// reading: an unmarked flip is counted as a draw. A follower replaying the
+// same script reproduces a forced flip through the static, so it needs no
+// answer for it.
 type Flip struct {
-	Seat int  `json:"seat"`
-	Win  bool `json:"win"`
+	Seat   int  `json:"seat"`
+	Win    bool `json:"win"`
+	Forced bool `json:"forced,omitempty"`
 }
 
 // Roll is one die-roll result: the roller's seat, the die's sides, the

@@ -680,12 +680,19 @@ func attach(st *oraclegen.Step, answers []oraclegen.Answer, group []game.Entry) 
 
 // rngAccounted reports whether every engine draw an entry consumed is one
 // the tape records explicitly: a die roll or a coin flip. Each consumes
-// exactly one draw (gorge's rng.IntN), so RNG == len(Rolls)+len(Flips). A
-// surplus draw is a shuffle or a random pick the runner's seeded RNG cannot
+// exactly one draw (gorge's rng.IntN) unless a FlipCoinMod static forced the
+// flip heads without drawing (Flip.Forced), so RNG == len(Rolls)+drawn flips.
+// A surplus draw is a shuffle or a random pick the runner's seeded RNG cannot
 // land where the live game did. One shared test keeps the three gates
 // (answersOf, resolveSpanLowerable, a window's HasRNG) from drifting apart.
 func rngAccounted(e game.Entry) bool {
-	return e.RNG == uint64(len(e.Rolls)+len(e.Flips))
+	draws := uint64(len(e.Rolls))
+	for _, f := range e.Flips {
+		if !f.Forced {
+			draws++
+		}
+	}
+	return e.RNG == draws
 }
 
 // answersOf is the entries' asks as answers, in tape order; the first entry

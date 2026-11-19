@@ -261,6 +261,7 @@ func (r *recorder) flush(e *rules.Engine) {
 			r.flips = append(r.flips, Flip{Seat: int(flipper), Win: win})
 		}
 	}
+	markForcedFlips(e, r.flips)
 	for ; r.rollScan < len(evs); r.rollScan++ {
 		if roller, sides, natural, result, ok := effects.DieRollResult(evs[r.rollScan]); ok {
 			r.rolls = append(r.rolls, Roll{Seat: int(roller), Sides: int(sides), Natural: int(natural), Result: int(result)})
@@ -297,6 +298,64 @@ func (r *recorder) flush(e *rules.Engine) {
 		r.t.GenesisMana, r.t.GenesisRNG = r.mana, draws
 	}
 	r.mana, r.spent, r.flips, r.rolls = nil, "", nil, nil
+}
+
+// FlipCoinMod says a player's first coin flip each turn comes up heads, so
+// that flip consumed no engine draw. The canonical flip Note does not carry
+// the distinction, so the recorder re-derives it from the state at flush: a
+// winning flip is forced only when the flipper controls the static and this
+// entry holds the turn's first flips for that seat. The engine reads the
+// static once per batch and only the first flip of a FlipUntilYouLose run can
+// be forced; marking a whole winning batch forced is conservative (the gate
+// refuses draws it cannot account for) and cannot hide a shuffle.
+func markForcedFlips(e *rules.Engine, flips []Flip) {
+	if len(flips) == 0 {
+		return
+	}
+	count := make(map[int]int, 2)
+	for _, f := range flips {
+		count[f.Seat]++
+	}
+	first := make(map[int]bool, len(count))
+	for seat, n := range count {
+		if seat < 0 || seat >= len(e.G.Players) {
+			continue
+		}
+		first[seat] = int(e.G.Players[seat].CoinFlipsThisTurn)-n <= 0
+	}
+	for i := range flips {
+		if flips[i].Win && first[flips[i].Seat] {
+			flips[i].Forced = controlsFlipCoinMod(e.G, state.PlayerID(flips[i].Seat))
+		}
+	}
+}
+
+// controlsFlipCoinMod is effects.FlipCoinForced's static test without its
+// "no flip yet this turn" half: the flush runs after the flip has bumped the
+// tally, so only the static is readable here. The parameter shape is the one
+// gorge reads for Edgar, King of Figaro; any other shape is not a force.
+func controlsFlipCoinMod(g *state.Game, p state.PlayerID) bool {
+	if int(p) < 0 || int(p) >= len(g.Players) {
+		return false
+	}
+	for _, controller := range g.Players {
+		for _, id := range g.Zone(state.ZBattlefield, controller.ID) {
+			o := g.Obj(id)
+			if o == nil || o.PhasedOut || o.FaceDown || o.Face() == nil || o.Controller != p {
+				continue
+			}
+			for _, st := range o.Face().Statics {
+				if st.Mode == effects.ModeFlipCoinMod &&
+					st.ParamStr(cards.PKValidPlayer) == "You" &&
+					st.ParamStr(cards.PKCheckSVar) == "Count$YouFlipThisTurn" &&
+					st.ParamStr(cards.PKSVarCompare) == "EQ0" &&
+					st.ParamStr(cards.PKResult) == "True" {
+					return true
+				}
+			}
+		}
+	}
+	return false
 }
 
 func zoneNames(e *rules.Engine, z state.Zone, p state.PlayerID) []string {
