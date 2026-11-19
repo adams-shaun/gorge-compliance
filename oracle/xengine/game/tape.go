@@ -9,11 +9,17 @@ import (
 	"github.com/adams-shaun/gorge/engine/state"
 )
 
-// TapeFormat is the Tape.Format value Play writes. xengine-tape-2 adds the
-// runner refs (Pick.Ref, Pick.AttackerRef, Pick.BattleRef, ManaRec.Ref), the
-// decision's Max and the coin flips of an entry; xengine-tape-1 has none of
-// them and is still read. A reader rejects any other format.
-const TapeFormat = "xengine-tape-2"
+// TapeFormat is the Tape.Format value Play writes. xengine-tape-3 adds the
+// die rolls of an entry to xengine-tape-2's runner refs (Pick.Ref,
+// Pick.AttackerRef, Pick.BattleRef, ManaRec.Ref), the decision's Max and the
+// coin flips (each also marked Forced when a FlipCoinMod static made it
+// without an RNG draw, and carrying Draws when a FlipCoinDoubler made it two).
+// Both earlier formats are still read: tape-2 has no die rolls, tape-1 has no
+// refs, Max or flips either. A reader rejects any other format.
+const TapeFormat = "xengine-tape-3"
+
+// TapeFormat2 is the format before the entry die rolls.
+const TapeFormat2 = "xengine-tape-2"
 
 // GameFormatCommander is Tape.GameFormat of a Commander game.
 const GameFormatCommander = "commander"
@@ -99,6 +105,8 @@ type Entry struct {
 	RNG   uint64 `json:"rng,omitempty"`
 	// Flips are the coin flips committing this intent made, in log order.
 	Flips []Flip `json:"flips,omitempty"`
+	// Rolls are the die rolls committing this intent made, in log order.
+	Rolls []Roll `json:"rolls,omitempty"`
 	// Reanswered marks an entry whose intent the engine refused: gorge's
 	// refusal ladder committed a different answer, which the tape does not
 	// carry.
@@ -107,9 +115,50 @@ type Entry struct {
 }
 
 // Flip is one coin-flip result: the flipper's seat and whether it won.
+// Forced marks a flip a FlipCoinMod static turned heads without drawing from
+// the engine's RNG (Edgar, King of Figaro's "those coins come up heads"). It
+// is recorded so the lowering gate can tell a flip that accounts for a draw
+// from one that does not; a winning flip the static did not cover is a real
+// draw. Absent (false) in a tape written before this mark, which is the safe
+// reading: an unmarked flip is counted as a draw. A follower replaying the
+// same script reproduces a forced flip through the static, so it needs no
+// answer for it.
+//
+// Draws is how many engine RNG values the flip consumed: 0 for a forced
+// flip, 2 while a FlipCoinDoubler static (Krark's Thumb) makes coinResult
+// flip two coins for one instruction, and omitted for the ordinary one-draw
+// flip. A tape written before this field read it as 0; Forced tells the two
+// zero cases apart, so such a flip is counted as one draw.
 type Flip struct {
-	Seat int  `json:"seat"`
-	Win  bool `json:"win"`
+	Seat   int  `json:"seat"`
+	Win    bool `json:"win"`
+	Forced bool `json:"forced,omitempty"`
+	Draws  int  `json:"draws,omitempty"`
+}
+
+// DrawCount is the number of engine RNG values the flip consumed. An absent
+// Draws on an older tape means the ordinary one draw (or none when Forced);
+// a forced flip never draws, even under a doubler, because gorge reads
+// FlipCoinForced before it calls coinResult.
+func (f Flip) DrawCount() uint64 {
+	if f.Forced {
+		return 0
+	}
+	if f.Draws > 0 {
+		return uint64(f.Draws)
+	}
+	return 1
+}
+
+// Roll is one die-roll result: the roller's seat, the die's sides, the
+// natural roll and the result after any modifier. Both values are recorded
+// because a follower must force the natural roll (the modifier is the
+// follower's own) while the live game's outcome is the modified one.
+type Roll struct {
+	Seat    int `json:"seat"`
+	Sides   int `json:"sides"`
+	Natural int `json:"natural"`
+	Result  int `json:"result"`
 }
 
 // Pick is one option an intent chose. Which fields matter follows Kind: Ability
@@ -182,8 +231,8 @@ func ReadTape(r io.Reader) (*Tape, error) {
 	if err := dec.Decode(&t); err != nil {
 		return nil, fmt.Errorf("game: read tape: %w", err)
 	}
-	if t.Format != TapeFormat && t.Format != TapeFormat1 {
-		return nil, fmt.Errorf("game: tape format %q, want %q or %q", t.Format, TapeFormat, TapeFormat1)
+	if t.Format != TapeFormat && t.Format != TapeFormat2 && t.Format != TapeFormat1 {
+		return nil, fmt.Errorf("game: tape format %q, want %q, %q or %q", t.Format, TapeFormat, TapeFormat2, TapeFormat1)
 	}
 	return &t, nil
 }

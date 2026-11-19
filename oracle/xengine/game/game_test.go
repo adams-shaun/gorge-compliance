@@ -10,7 +10,9 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/engine/state"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -360,10 +362,72 @@ func TestDigestOfGameValues(t *testing.T) {
 	t.Logf("%d tapped-land, %d creature digests, %d life-changed player digests, %d/%d mana taps seen tapped", tappedLand, creatures, lifeMoved, tapChecked, tapAfterMana)
 }
 
-func TestTapeFormat2(t *testing.T) {
+// TestTapeRecordsDieRoll drives the engine's canonical die-roll event (the
+// one effects.effRollDice emits for every DB$ RollDice) through the recorder
+// and asserts it lands on the committed entry, then survives the tape
+// round-trip. Reverting the recorder's roll scan leaves the entry's Rolls
+// empty, so this fails where TestTapeFormat3 (a format-string assertion) does
+// not.
+func TestTapeRecordsDieRoll(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	deck := func(i int) []*cards.Card {
+		out := make([]*cards.Card, 0, len(pairs[0][i].Cards))
+		for _, n := range pairs[0][i].Cards {
+			c, ok := reg.Lookup(n)
+			if !ok {
+				t.Fatalf("deck card %q not found", n)
+			}
+			out = append(out, c)
+		}
+		return out
+	}
+	e := rules.New(rules.Config{
+		Seed: 1, Names: []string{"p0", "p1"},
+		Decks:  [][]*cards.Card{deck(0), deck(1)},
+		Tokens: reg.Tokens, NameUniverse: reg.Universe(),
+	})
+	tape := &Tape{
+		Format: TapeFormat, Seed: 1,
+		Decks: []Deck{
+			{Name: pairs[0][0].Name, Colours: pairs[0][0].Colours, Cards: pairs[0][0].Cards},
+			{Name: pairs[0][1].Name, Colours: pairs[0][1].Colours, Cards: pairs[0][1].Cards},
+		},
+		Entries: []Entry{{Kind: "priority", Seat: 0, Turn: 1, Step: "main1"}},
+	}
+	r := &recorder{t: tape}
+	// The setup shuffles consumed draws before this entry; only the die's
+	// draw belongs to it.
+	r.lastDraws = e.RNGDraws()
+	r.flipScan, r.rollScan = len(e.L.Events), len(e.L.Events)
+	r.manaScan, r.spendScan = len(e.L.Events), len(e.L.Events)
+	_ = e.Rand(6) // the die's one engine draw
+	e.Emit(effects.DieRollNote(0, 0, 6, 3, 3))
+	r.flush(e)
+
+	want := []Roll{{Seat: 0, Sides: 6, Natural: 3, Result: 3}}
+	if got := tape.Entries[0].Rolls; !reflect.DeepEqual(got, want) {
+		t.Fatalf("entry rolls %+v, want %+v", got, want)
+	}
+	if got := tape.Entries[0].RNG; got != 1 {
+		t.Fatalf("entry rng %d, want the die's one draw", got)
+	}
+	b, err := tape.Bytes()
+	if err != nil {
+		t.Fatal(err)
+	}
+	got, err := ReadTape(bytes.NewReader(b))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !reflect.DeepEqual(got.Entries[0].Rolls, want) {
+		t.Fatalf("round-tripped rolls %+v, want %+v", got.Entries[0].Rolls, want)
+	}
+}
+
+func TestTapeFormat3(t *testing.T) {
 	reg, pairs := fdnPairs(t, 2)
 	tp := play(t, reg, pairs[1], 101, Options{Set: "FDN"})
-	if tp.Format != "xengine-tape-2" {
+	if tp.Format != "xengine-tape-3" {
 		t.Fatalf("format %q", tp.Format)
 	}
 	// Starter is turn 1's active player, whatever came first (game 1 opens
@@ -410,18 +474,23 @@ func TestTapeFormat2(t *testing.T) {
 	if refs == 0 || mana == 0 {
 		t.Fatalf("%d refs, %d mana records", refs, mana)
 	}
-	// A tape-1 file (no refs) is still read; any other format is not.
+	// A tape-2 file (no die rolls) and a tape-1 file (no refs either) are
+	// still read; any other format is not.
 	b, err := tp.Bytes()
 	if err != nil {
 		t.Fatal(err)
 	}
-	old := bytes.Replace(b, []byte(`"xengine-tape-2"`), []byte(`"xengine-tape-1"`), 1)
+	two := bytes.Replace(b, []byte(`"xengine-tape-3"`), []byte(`"xengine-tape-2"`), 1)
+	if _, err := ReadTape(bytes.NewReader(two)); err != nil {
+		t.Errorf("tape-2 rejected: %v", err)
+	}
+	old := bytes.Replace(b, []byte(`"xengine-tape-3"`), []byte(`"xengine-tape-1"`), 1)
 	if _, err := ReadTape(bytes.NewReader(old)); err != nil {
 		t.Errorf("tape-1 rejected: %v", err)
 	}
-	bad := bytes.Replace(b, []byte(`"xengine-tape-2"`), []byte(`"xengine-tape-3"`), 1)
+	bad := bytes.Replace(b, []byte(`"xengine-tape-3"`), []byte(`"xengine-tape-4"`), 1)
 	if _, err := ReadTape(bytes.NewReader(bad)); err == nil {
-		t.Error("tape-3 accepted")
+		t.Error("tape-4 accepted")
 	}
 }
 
@@ -436,5 +505,96 @@ func TestSwappedDigest(t *testing.T) {
 		if s.Players[0].Seat != 0 || s.Players[1].Seat != 1 || s.Players[0].Life != en.Digest.Players[1].Life {
 			t.Fatalf("entry %d: players not exchanged", j)
 		}
+	}
+}
+
+// TestMarkForcedFlips: a FlipCoinMod static turns the turn's first coin flip
+// heads without drawing, so the recorder marks that winning flip Forced. A
+// flip later in the turn, a flip the flipper does not control the static for,
+// and a losing flip are ordinary draws. A static destroyed in the same entry
+// after the flip still counts: the start-of-entry snapshot is what the engine
+// could have read before the batch, so the flush's missing static cannot turn
+// a forced flip into a counted draw. This is the bit the lowering gate reads:
+// counting a forced flip as a draw would let a shuffle through.
+func TestMarkForcedFlips(t *testing.T) {
+	g := state.NewGame([]string{"p0", "p1"})
+	edgar := &cards.Card{Faces: []*cards.Face{{Name: "Edgar, King of Figaro",
+		Statics: []cards.Static{{Mode: effects.ModeFlipCoinMod, Params: map[string]string{
+			"ValidPlayer": "You",
+			"CheckSVar":   "Count$YouFlipThisTurn",
+			"SVarCompare": "EQ0",
+			"Result":      "True",
+		}}}}}}
+	o := g.AddObject(edgar, 0)
+	g.SetZone(state.ZBattlefield, 0, []state.ObjID{o.ID})
+	e := &rules.Engine{G: g}
+	start := snapshotFlipStatics(e)
+
+	// Each seat's first flip of the turn: p0 forced, p1 has no static.
+	g.Players[0].CoinFlipsThisTurn, g.Players[1].CoinFlipsThisTurn = 1, 1
+	first := []Flip{{Seat: 0, Win: true}, {Seat: 1, Win: true}}
+	markFlipDraws(e, first, start)
+	want := []Flip{{Seat: 0, Win: true, Forced: true}, {Seat: 1, Win: true, Draws: 1}}
+	if !reflect.DeepEqual(first, want) {
+		t.Fatalf("first flips %+v, want %+v", first, want)
+	}
+
+	// The static is destroyed in the same entry after the winning flip: the
+	// flush board no longer has it, but the entry began with it, so the flip
+	// was forced and must not be counted as a draw.
+	g.SetZone(state.ZBattlefield, 0, nil)
+	g.Players[0].CoinFlipsThisTurn = 1
+	destroyed := []Flip{{Seat: 0, Win: true}}
+	markFlipDraws(e, destroyed, start)
+	if !destroyed[0].Forced || destroyed[0].Draws != 0 {
+		t.Fatalf("flip with a static destroyed in the entry: %+v, want forced with no draw", destroyed[0])
+	}
+
+	// p0's second flip of the turn is past the static's window.
+	g.Players[0].CoinFlipsThisTurn = 2
+	later := []Flip{{Seat: 0, Win: true}}
+	markFlipDraws(e, later, start)
+	if later[0].Forced || later[0].Draws != 1 {
+		t.Fatalf("second flip of the turn: %+v, want an ordinary draw", later[0])
+	}
+
+	// A lost first flip was a real draw even though the static is present.
+	g.Players[0].CoinFlipsThisTurn = 1
+	lost := []Flip{{Seat: 0, Win: false}}
+	markFlipDraws(e, lost, start)
+	if lost[0].Forced || lost[0].Draws != 1 {
+		t.Fatalf("a lost flip cannot be forced: %+v", lost[0])
+	}
+}
+
+// TestMarkFlipDrawsDoubler: coinResult draws twice for one flip while a
+// FlipCoinDoubler static (Krark's Thumb) is live, so the lowering gate must
+// count two. A doubler that changed inside the entry is counted as one draw
+// (the gate then refuses rather than accepting a shuffle the second draw
+// could be hiding).
+func TestMarkFlipDrawsDoubler(t *testing.T) {
+	g := state.NewGame([]string{"p0", "p1"})
+	thumb := &cards.Card{Faces: []*cards.Face{{Name: "Krark's Thumb",
+		Statics: []cards.Static{{Mode: effects.ModeFlipCoinDoubler, Params: map[string]string{
+			"ValidPlayer": "You",
+		}}}}}}
+	o := g.AddObject(thumb, 0)
+	g.SetZone(state.ZBattlefield, 0, []state.ObjID{o.ID})
+	e := &rules.Engine{G: g}
+	start := snapshotFlipStatics(e)
+
+	g.Players[0].CoinFlipsThisTurn = 1
+	stable := []Flip{{Seat: 0, Win: true}}
+	markFlipDraws(e, stable, start)
+	if stable[0].Forced || stable[0].Draws != 2 {
+		t.Fatalf("doubled flip %+v, want two draws", stable[0])
+	}
+
+	// The doubler leaves in the same entry: count one, never two.
+	g.SetZone(state.ZBattlefield, 0, nil)
+	changed := []Flip{{Seat: 0, Win: true}}
+	markFlipDraws(e, changed, start)
+	if changed[0].Draws != 1 {
+		t.Fatalf("doubler changed in the entry: %+v, want one draw", changed[0])
 	}
 }

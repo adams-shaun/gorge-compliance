@@ -17,6 +17,7 @@ import (
 	"regexp"
 	"slices"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
@@ -178,7 +179,49 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 	}
 	it.XAbility = abilities
 	it.XPos = passPositions(sc.Steps, g.Snapshots)
+	it.XAnswers = addDieRollAnswers(it.XAnswers, it.DieRolls, len(sc.Steps))
 	return it, nil
+}
+
+// addDieRollAnswers scripts each recorded die roll on the step that made it.
+// XMage's TestPlayer.rollDieResult consumes a "[die_roll]: N" token from the
+// choice queue, which ScenarioReplay queues from a kind "die" answer, so the
+// driver forces the tape's natural roll instead of rolling its own.
+//
+// The die leads its step's answers, mirroring oraclegen's stepFlips: the
+// CHOICE queue is FIFO and shared by the die token and every queued label,
+// and a die the step's action rolls before it asks anything (Ebony Fly
+// animates only after the roll) must be at the head. Appending it behind a
+// "yes" leaves the queue ["Yes", "[die_roll]: 3"], and TestPlayer.rollDieResult
+// consumes only a head that starts with DIE_ROLL: it strict-misses and the
+// follower rolls its own die. Rolls outside the item's steps (a truncated
+// tail) are not scripted.
+func addDieRollAnswers(answers [][]oraclegen.XAnswer, rolls []oraclegen.DieRoll, steps int) [][]oraclegen.XAnswer {
+	if len(rolls) == 0 {
+		return answers
+	}
+	if len(answers) < steps {
+		grown := make([][]oraclegen.XAnswer, steps)
+		copy(grown, answers)
+		answers = grown
+	}
+	// Collect per step in log order, then prepend the batch: prepending each
+	// roll would reverse a multi-die step's order.
+	lead := make([][]oraclegen.XAnswer, steps)
+	for _, r := range rolls {
+		if r.Step < 0 || r.Step >= steps {
+			continue
+		}
+		lead[r.Step] = append(lead[r.Step], oraclegen.XAnswer{
+			Seat: r.Seat, Kind: "die", Value: strconv.Itoa(r.Natural),
+		})
+	}
+	for step := range lead {
+		if len(lead[step]) > 0 {
+			answers[step] = append(lead[step], answers[step]...)
+		}
+	}
+	return answers
 }
 
 // completeModalTrigger scripts the CR 603.3c mode choice of a modal enters

@@ -194,13 +194,21 @@ func firstLine(s string) string {
 // recorder is the Hooks state: it watches mana abilities from genesis and
 // writes one Entry per decision, just before the engine commits the intent.
 type recorder struct {
-	t         *Tape
-	mana      []ManaRec // fired since the last flush
-	flips     []Flip    // coin flips since the last flush
-	flipScan  int       // how far of e.L.Events the flips were read
-	manaScan  int       // how far of e.L.Events the open mana record's Produced was read
-	spendScan int       // how far of e.L.Events the spent mana was read
-	spent     string    // pool mana spent since the last flush, one letter per unit
+	t     *Tape
+	mana  []ManaRec // fired since the last flush
+	flips []Flip    // coin flips since the last flush
+	// flipStart is the coin-flip statics on the battlefield when the entry
+	// currently being recorded began to commit. The engine reads them while
+	// the batch resolves; the flush only sees the board after it, so this
+	// snapshot is what keeps a static destroyed in the same entry from
+	// turning a forced flip into a counted draw.
+	flipStart flipStatics
+	flipScan  int    // how far of e.L.Events the flips were read
+	rolls     []Roll // die rolls since the last flush
+	rollScan  int    // how far of e.L.Events the die rolls were read
+	manaScan  int    // how far of e.L.Events the open mana record's Produced was read
+	spendScan int    // how far of e.L.Events the spent mana was read
+	spent     string // pool mana spent since the last flush, one letter per unit
 	refs      *refBinder
 	started   bool     // Starter is set
 	lastDraws uint64   // e.RNGDraws() at the last flush
@@ -259,6 +267,12 @@ func (r *recorder) flush(e *rules.Engine) {
 			r.flips = append(r.flips, Flip{Seat: int(flipper), Win: win})
 		}
 	}
+	markFlipDraws(e, r.flips, r.flipStart)
+	for ; r.rollScan < len(evs); r.rollScan++ {
+		if roller, sides, natural, result, ok := effects.DieRollResult(evs[r.rollScan]); ok {
+			r.rolls = append(r.rolls, Roll{Seat: int(roller), Sides: int(sides), Natural: int(natural), Result: int(result)})
+		}
+	}
 	seat := -1
 	if n := len(r.t.Entries); n > 0 {
 		seat = r.t.Entries[n-1].Seat
@@ -285,11 +299,154 @@ func (r *recorder) flush(e *rules.Engine) {
 	}
 	if n := len(r.t.Entries); n > 0 {
 		last := &r.t.Entries[n-1]
-		last.Mana, last.Spent, last.RNG, last.Flips = r.mana, r.spent, draws, r.flips
+		last.Mana, last.Spent, last.RNG, last.Flips, last.Rolls = r.mana, r.spent, draws, r.flips, r.rolls
 	} else {
 		r.t.GenesisMana, r.t.GenesisRNG = r.mana, draws
 	}
-	r.mana, r.spent, r.flips = nil, "", nil
+	r.mana, r.spent, r.flips, r.rolls = nil, "", nil, nil
+}
+
+// flipStatics is which seats controlled the coin-flip statics when one
+// recorded entry began to commit.
+type flipStatics struct {
+	mod     map[int]bool
+	doubler map[int]bool
+}
+
+// snapshotFlipStatics reads the two statics the engine consults while a flip
+// resolves. The engine sees them mid-batch; the recorder's only other look is
+// the flush, after the entry's own events have changed the board.
+func snapshotFlipStatics(e *rules.Engine) flipStatics {
+	s := flipStatics{mod: make(map[int]bool, len(e.G.Players)), doubler: make(map[int]bool, len(e.G.Players))}
+	for i := range e.G.Players {
+		p := state.PlayerID(i)
+		s.mod[i] = controlsFlipCoinMod(e.G, p)
+		s.doubler[i] = controlsFlipCoinDoubler(e.G, p)
+	}
+	return s
+}
+
+// markFlipDraws accounts for each coin flip's engine draws. A FlipCoinMod
+// static turns the turn's first winning flip heads without drawing, and a
+// FlipCoinDoubler static makes coinResult draw twice for one flip (Krark's
+// Thumb). The canonical flip Note carries neither, and the engine reads the
+// statics while the batch resolves, which the flush cannot see. The
+// start-of-entry snapshot is the board the engine could have read before the
+// batch; the flush board is what survives it. A winning first flip is marked
+// Forced when the static was present at either end: a static destroyed (or
+// created) inside the entry is treated as present, which makes the gate
+// refuse an entry it cannot account for instead of accepting an unproven
+// shuffle. For the same reason a doubler counts two draws only when it was
+// present at BOTH ends; a doubler that changed inside the entry is counted as
+// one draw, which can only make the gate stricter. Marking a whole winning
+// batch forced is likewise conservative: the engine reads the static once per
+// batch, and only the first flip of a FlipUntilYouLose run can be forced.
+func markFlipDraws(e *rules.Engine, flips []Flip, start flipStatics) {
+	if len(flips) == 0 {
+		return
+	}
+	count := make(map[int]int, 2)
+	for _, f := range flips {
+		count[f.Seat]++
+	}
+	first := make(map[int]bool, len(count))
+	for seat, n := range count {
+		if seat < 0 || seat >= len(e.G.Players) {
+			continue
+		}
+		first[seat] = int(e.G.Players[seat].CoinFlipsThisTurn)-n <= 0
+	}
+	for i := range flips {
+		f := &flips[i]
+		if f.Seat < 0 || f.Seat >= len(e.G.Players) {
+			f.Draws = 1
+			continue
+		}
+		p := state.PlayerID(f.Seat)
+		f.Forced = f.Win && first[f.Seat] &&
+			(start.mod[f.Seat] || controlsFlipCoinMod(e.G, p))
+		if f.Forced {
+			f.Draws = 0
+			continue
+		}
+		if start.doubler[f.Seat] && controlsFlipCoinDoubler(e.G, p) {
+			f.Draws = 2
+		} else {
+			f.Draws = 1
+		}
+	}
+}
+
+// controlsFlipCoinMod is effects.FlipCoinForced's static test without its
+// "no flip yet this turn" half. The snapshot runs before the flip and the
+// flush after it, so only the static is readable at either look. The
+// parameter shape is the one gorge reads for Edgar, King of Figaro; any other
+// shape is not a force.
+func controlsFlipCoinMod(g *state.Game, p state.PlayerID) bool {
+	if int(p) < 0 || int(p) >= len(g.Players) {
+		return false
+	}
+	for _, controller := range g.Players {
+		for _, id := range g.Zone(state.ZBattlefield, controller.ID) {
+			o := g.Obj(id)
+			if o == nil || o.PhasedOut || o.FaceDown || o.Face() == nil || o.Controller != p {
+				continue
+			}
+			for _, st := range o.Face().Statics {
+				if st.Mode == effects.ModeFlipCoinMod &&
+					st.ParamStr(cards.PKValidPlayer) == "You" &&
+					st.ParamStr(cards.PKCheckSVar) == "Count$YouFlipThisTurn" &&
+					st.ParamStr(cards.PKSVarCompare) == "EQ0" &&
+					st.ParamStr(cards.PKResult) == "True" {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
+// controlsFlipCoinDoubler is effects.youStaticCount(g, p, FlipCoinDoubler)
+// (unexported): a live permanent p controls carrying that mode and no
+// parameter beyond the corpus shape. Counted at both ends of an entry so a
+// statics change can only under-count, never invent a second draw.
+func controlsFlipCoinDoubler(g *state.Game, p state.PlayerID) bool {
+	if int(p) < 0 || int(p) >= len(g.Players) {
+		return false
+	}
+	for _, owner := range g.Players {
+		for _, id := range g.Zone(state.ZBattlefield, owner.ID) {
+			o := g.Obj(id)
+			if o == nil || o.Controller != p || o.PhasedOut || o.FaceDown || o.Face() == nil {
+				continue
+			}
+			for _, st := range o.Face().Statics {
+				if st.Mode == effects.ModeFlipCoinDoubler &&
+					staticParamsOnly(st.Params, "Mode", "ValidPlayer", "Description") {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
+// staticParamsOnly mirrors effects.staticKeysReadable: a static whose params
+// carry a key outside the allowed corpus shape does not function.
+func staticParamsOnly(params map[string]string, keys ...string) bool {
+	for k := range params {
+		found := false
+		for _, allowed := range keys {
+			if k == allowed {
+				found = true
+				break
+			}
+		}
+		if !found {
+			return false
+		}
+	}
+	return true
 }
 
 func zoneNames(e *rules.Engine, z state.Zone, p state.PlayerID) []string {
@@ -308,6 +465,9 @@ func zoneNames(e *rules.Engine, z state.Zone, p state.PlayerID) []string {
 // submit is Hooks.Submit: it records, then lets the engine commit.
 func (r *recorder) submit(e *rules.Engine, seatIdx int, d *decision.Decision, in decision.Intent) (bool, error) {
 	r.flush(e) // what the previous entry's commit did
+	// The board is now exactly as this entry's commit will leave it before it
+	// starts resolving: the moment to read the statics the flip will consult.
+	r.flipStart = snapshotFlipStatics(e)
 	if len(r.t.Entries) == 0 {
 		r.refs = newRefBinder(e)
 		for i := range r.t.Open {

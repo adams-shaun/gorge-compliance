@@ -26,13 +26,20 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
-# Forge oracle driver commit (fork, branch oracle-harness-setup-entry-counter): a descendant of FORGE_REF
+# Forge oracle driver commit (fork, branch oracle-die-roll): a descendant of FORGE_REF
 # with identical script trees.
-# 0958a1aca2 = 327ad7fb80 (branch oracle-cmdr: CR 404.3 graveyard order answers) + setup keeps every entry
-# counter the real move applies (SetupBuilder.putOntoBattlefield no longer strips a printed R:Event$ Moved
-# body's counter, e.g. Tonberry's stun counter; CR 614.1c, 122.1d); same cardsfolder and tokenscripts trees
-# as FORGE_REF 418ba5215f.
-FORGE_ORACLE_REF ?= 0958a1aca204b3291994deebc2565b3bd474f49c
+# d2939e9b61 = 7f287e888f (below) + MyRandom's counting wrapper forwards bounded
+# nextInt(bound) to the supplied generator: at 7f287e888f the wrapper routed it through
+# next(bits), which calls the delegate's UNBOUNDED nextInt(), so ForcedDieRandom.nextInt(bound)
+# never ran on RollDiceEffect's MyRandom.getRandom().nextInt(sides) path and the follower
+# rolled its own d6 (Ebony Fly 5/5). Same cardsfolder and tokenscripts trees as
+# FORGE_REF 418ba5215f.
+# 7f287e888f = 0958a1aca2 (oracle-harness-setup-entry-counter: 327ad7fb80 + setup keeps every entry
+# counter the real move applies, e.g. Tonberry's stun counter) + the driver forces each step's
+# recorded die result (item.die_rolls) before the step runs, so a follower accepts the tape's natural
+# roll instead of rolling its own (Ebony Fly's d6); same cardsfolder and tokenscripts trees as
+# FORGE_REF 418ba5215f.
+FORGE_ORACLE_REF ?= d2939e9b61b9726f358d33aec91ce313af940e64
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
