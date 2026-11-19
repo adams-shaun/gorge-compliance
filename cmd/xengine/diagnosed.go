@@ -115,9 +115,9 @@ func checkDiagnosed(file, cardsDir string, w io.Writer) (int, error) {
 // diagnosedCardNames walks cardsfolder once and returns every card's Name:
 // value, including alternate faces, so a register row names a card the corpus
 // actually has. It also accepts the engine names of sourceless triggered
-// abilities (the CR 702.179 speed trigger and the CR 725.2/726.2 designation
-// triggers): the farm's report.py can attribute such a stack row to the
-// designation the follower prints, and no card carries that name.
+// abilities (the CR 702.179 speed trigger and the CR 725.2 monarch trigger):
+// the farm's report.py can attribute such a stack row to the designation the
+// follower prints, and no card carries that name.
 func diagnosedCardNames(folder string) (map[string]bool, error) {
 	names := map[string]bool{}
 	err := filepath.WalkDir(folder, func(path string, d fs.DirEntry, err error) error {
