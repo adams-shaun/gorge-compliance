@@ -255,7 +255,7 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 			return
 		}
 		if len(owed) == 0 && len(steps) > 0 && quiet(entries[i:j]) {
-			if op := steps[len(steps)-1].Op; op == "cast" || op == "activate" {
+			if isPaidStep(steps[len(steps)-1].Op) {
 				if next, ok := l.afterEntry(j, entries); ok &&
 					len(entries[i].Digest.Diff(next.Digest)) == 0 &&
 					entries[i].StackTop == next.StackTop {
@@ -622,7 +622,7 @@ func (l *Lowered) drop(n int) {
 // runner matches to a decision by kind.
 func attach(st *oraclegen.Step, answers []oraclegen.Answer, group []game.Entry) {
 	asks := group[1:]
-	useTargets := (st.Op == "cast" || st.Op == "activate") && len(asks) == len(answers)
+	useTargets := isPaidStep(st.Op) && len(asks) == len(answers)
 	n := 0
 	for _, a := range asks {
 		if a.Kind != "target" {
@@ -933,12 +933,25 @@ func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Ste
 	for i := range idx {
 		idx[i] = -1
 	}
-	if paysAfterAsks(en) && spent != "" {
-		// The group's spend belongs to its cast or activation, the last step;
-		// every earlier step is an explicit mana tap that adds pool mana.
-		pay[len(steps)-1] = spent
+	if spent != "" {
+		// The group's spend belongs to the step that paid it, the last step:
+		// the cast or the activation (including a mana ability activation,
+		// whose own cost the recorded game already paid). Every earlier step is
+		// an explicit mana tap that adds pool mana. The placement comes from the
+		// lowered step's role, not the option kind that produced it, so a future
+		// paying option kind cannot silently lose its spend.
+		if last := len(steps) - 1; isPaidStep(steps[last].Op) {
+			pay[last] = spent
+		}
 	}
 	return steps, idx, pay, answers, nil
+}
+
+// isPaidStep reports whether a lowered step pays a cost from its controller's
+// pool: a spell cast or a permanent/ability activation. It is the one place the
+// lowering decides what a payment can attach to.
+func isPaidStep(op string) bool {
+	return op == "cast" || op == "activate"
 }
 
 // lowerPriority lowers a priority decision. mana is every mana ability fired
