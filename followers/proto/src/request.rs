@@ -23,6 +23,11 @@ pub struct Request {
     /// Forge script line per step index (kept as strings; level-B only).
     pub abilities: BTreeMap<String, String>,
     pub neutral: Neutral,
+    /// Indices of the steps gorge plays as passes in a declare attackers step in which no creature
+    /// attacks (gorge-compliance classify.EmptyAttackPasses). A driver whose engine goes from
+    /// beginning of combat to end of combat when no creature can attack, with no such step, stands
+    /// still on these instead of passing in the wrong step.
+    pub attack_window_passes: Vec<usize>,
 }
 
 impl Request {

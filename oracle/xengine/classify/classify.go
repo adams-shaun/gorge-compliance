@@ -81,9 +81,14 @@ const (
 	// straight to end of combat. CR 508.2 gives the active player priority in
 	// the declare attackers step (CR 508.8 skips only declare blockers and
 	// combat damage when no creature attacks), and gorge gives that window.
-	// The item's passes then run out of step with phase.rs by one priority
-	// round, so nothing past that checkpoint is compared. The driver cannot
-	// supply the window: it answers only the priorities phase.rs gives.
+	// The comparison steps over such a step (StepOverAttackWindows): the
+	// driver stands still through the passes gorge plays there
+	// (EmptyAttackPasses) and the comparison resumes at the end of combat,
+	// counting each one in Finding.SteppedOver. This class is what is left:
+	// a row with no evidence the driver stood still (one from a driver that
+	// passed on in the wrong step, so its passes run out of step with gorge's
+	// by one priority round and nothing past the checkpoint is compared). A
+	// skipped step gorge acted in is a difference (class diverge), never this.
 	ClassPhaseSkipsAttackStep = "phase_skips_attack_step"
 	ClassRNG                  = "rng"
 	ClassProjectionGap        = "projection_gap"
@@ -113,6 +118,10 @@ type Finding struct {
 	// Step is the scenario step of the checkpoint (-1 for "setup" and for a
 	// finding with no checkpoint).
 	Step int `json:"step"`
+	// SteppedOver counts the empty declare attackers steps the follower gave
+	// no priority in and the comparison stepped over (StepOverAttackWindows):
+	// the comparison went on past each one, so it is counted, never silent.
+	SteppedOver int `json:"stepped_over,omitempty"`
 }
 
 // GapFinding is the lower_gap finding of an item whose self-check did not
@@ -136,6 +145,16 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	if fl.TapsWithCast {
 		x = SkipEarlyCasts(item.Item, g, x)
 	}
+	var so StepOver
+	if fl.SkipsEmptyAttackStep {
+		x, so = StepOverAttackWindows(item.Item, g, x)
+		f.SteppedOver = so.Stepped
+		if i := so.Unproven; i > 0 {
+			f.Class, f.Checkpoint, f.Field = ClassPhaseSkipsAttackStep, g.Snapshots[i].Checkpoint, "step"
+			f.Gorge, f.Other, f.Step = g.Snapshots[i].Step, x.Snapshots[i].Step, stepOf(g.Snapshots[i].Checkpoint)
+			return f
+		}
+	}
 	stopped := ""
 	if pg, px, ok := Partial(item.Item, g, x); ok {
 		stopped = x.Harness
@@ -148,13 +167,6 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	if fl.SkipsDamageStep {
 		if i := skippedDamageStep(item, g, x); i > 0 {
 			f.Class, f.Checkpoint, f.Field = ClassForgeSkipsDamageStep, g.Snapshots[i].Checkpoint, "step"
-			f.Gorge, f.Other, f.Step = g.Snapshots[i].Step, x.Snapshots[i].Step, stepOf(g.Snapshots[i].Checkpoint)
-			return f
-		}
-	}
-	if fl.SkipsEmptyAttackStep {
-		if i := skippedAttackStep(item, g, x); i > 0 {
-			f.Class, f.Checkpoint, f.Field = ClassPhaseSkipsAttackStep, g.Snapshots[i].Checkpoint, "step"
 			f.Gorge, f.Other, f.Step = g.Snapshots[i].Step, x.Snapshots[i].Step, stepOf(g.Snapshots[i].Checkpoint)
 			return f
 		}
@@ -203,6 +215,9 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 		f.Class = ClassDiverge
 		if stopped != "" {
 			f.Msg = "the driver then stopped: " + stopped
+		}
+		if i := so.Acted; i > 0 && f.Checkpoint == g.Snapshots[i].Checkpoint {
+			f.Msg = strings.TrimSpace(engine + " gave no declare attackers step, and gorge acted in it (CR 508.1, 117.3a) " + f.Msg)
 		}
 	}
 	return f
@@ -469,36 +484,6 @@ func agreeButStep(item lower.Lowered, g rules.OracleResult, x oraclediff.XResult
 	upto[i].Step = x.Snapshots[i].Step
 	return oraclediff.CompareOpts(rules.OracleResult{Snapshots: upto}, nil,
 		oraclediff.XResult{Snapshots: x.Snapshots[:i+1]}, item.Item.Compare, item.Item.Ignore...).Status == oraclediff.Agree
-}
-
-// skippedAttackStep is the checkpoint at which phase.rs left beginning of
-// combat for end of combat while gorge entered declare attackers (the active
-// player has no creature able to attack, so phase.rs gives no declare
-// attackers prompt or priority), with every checkpoint before it agreeing; 0
-// if the item has none. The first difference must be that step, after the
-// pass that ends beginning of combat: the non-active seat's on an empty
-// stack. Everything else in gorge's checkpoint must agree with the
-// follower's once the step is set aside.
-func skippedAttackStep(item lower.Lowered, g rules.OracleResult, x oraclediff.XResult) int {
-	for i := 1; i < min(len(g.Snapshots), len(x.Snapshots)); i++ {
-		gs, xs := g.Snapshots[i], x.Snapshots[i]
-		if gs.Step == xs.Step {
-			continue
-		}
-		prev := g.Snapshots[i-1]
-		if gs.Step != "declare-attackers" || xs.Step != "end-combat" ||
-			prev.Step != "begin-combat" || len(prev.Stack) != 0 || i > len(item.Item.Steps) {
-			return 0
-		}
-		if st := item.Item.Steps[i-1]; st.Op != "pass" || st.Seat == gs.Active {
-			return 0
-		}
-		if !agreeButStep(item, g, x, i) {
-			return 0
-		}
-		return i
-	}
-	return 0
 }
 
 // stopsInCleanup reports a difference at step d where a StopsInCleanup
