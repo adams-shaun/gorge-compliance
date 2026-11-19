@@ -119,6 +119,51 @@ func TestFollowerExportRefusalSplit(t *testing.T) {
 	}
 }
 
+// TestFollowerExportAttackWindowPasses: for a SkipsEmptyAttackStep follower,
+// a request marks the passes gorge plays in a declare attackers step no
+// creature attacks in (here the board is empty, so steps 4 and 5); any other
+// follower's request has no such field.
+func TestFollowerExportAttackWindowPasses(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	fl, runner := fakeFollower(t)
+	dir := t.TempDir()
+	scen := filepath.Join(dir, "items.jsonl")
+	item := `{"id":"combat/v1","card":"Grizzly Bears","template":"hand","setup":{"p0":{"hand":["Grizzly Bears"]}},"steps":[` +
+		strings.Repeat(`{"op":"pass","seat":0},{"op":"pass","seat":1},`, 2) + `{"op":"pass","seat":0},{"op":"pass","seat":1}]}` + "\n"
+	if err := os.WriteFile(scen, []byte(item), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	read := func(fl follower.Follower) (followerRequest, string) {
+		out := filepath.Join(dir, fl.Name+"-req.jsonl")
+		if _, err := followerExport(reg, fl, runner, scen, out); err != nil {
+			t.Fatal(err)
+		}
+		b, _ := os.ReadFile(out)
+		var rq followerRequest
+		if err := json.Unmarshal(b, &rq); err != nil {
+			t.Fatal(err)
+		}
+		return rq, string(b)
+	}
+	if rq, line := read(fl); rq.AttackWindowPasses != nil || strings.Contains(line, "attack_window_passes") {
+		t.Errorf("a follower that gives the step: %s", line)
+	}
+	fl.SkipsEmptyAttackStep = true
+	if rq, line := read(fl); !reflect.DeepEqual(rq.AttackWindowPasses, []int{4, 5}) {
+		t.Errorf("attack_window_passes = %v, want [4 5]: %s", rq.AttackWindowPasses, line)
+	}
+	// A creature that could attack, and gorge declares none at step 4: the passes after the
+	// declaration, though forge-export rewrites the empty attack as a pass_to.
+	item = `{"id":"combat/v2","card":"Grizzly Bears","template":"hand","setup":{"p0":{"battlefield":["Grizzly Bears"]}},"steps":[` +
+		strings.Repeat(`{"op":"pass","seat":0},{"op":"pass","seat":1},`, 2) + `{"op":"attack","seat":0,"defender":"p1"},{"op":"pass","seat":0},{"op":"pass","seat":1}]}` + "\n"
+	if err := os.WriteFile(scen, []byte(item), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if rq, line := read(fl); !reflect.DeepEqual(rq.AttackWindowPasses, []int{5, 6}) {
+		t.Errorf("empty declaration: attack_window_passes = %v, want [5 6]: %s", rq.AttackWindowPasses, line)
+	}
+}
+
 // TestFollowerExportPreflightFailure: a preflight that exits nonzero, prints a
 // line without a tab or names a card it was not asked about fails the whole
 // export.

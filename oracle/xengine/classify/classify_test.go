@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"reflect"
 	"strings"
 	"testing"
 
@@ -778,62 +779,180 @@ func TestClassifyCrewTypeDependency(t *testing.T) {
 	}
 }
 
-// TestClassifyPhaseSkipsAttackStep: phase.rs at end of combat where gorge is
-// in declare attackers (nothing can attack, so phase.rs gives no window) is
-// its shortcut. Another engine, an earlier disagreement, another first
-// difference, or a pass that does not end beginning of combat leave the item
-// to the other classes.
+// TestClassifyPhaseSkipsAttackStep: phase.rs goes from beginning of combat to
+// end of combat when nothing can attack, while gorge gives an empty declare
+// attackers step and passes through it. A row whose driver stood still through
+// gorge's passes is stepped over and compared on to the end of the item, and
+// counted; a row from a driver that passed on in the wrong step keeps the old
+// class; a step gorge acted in, a difference the step-over would hide, another
+// engine, and a pass that does not end beginning of combat are differences.
 func TestClassifyPhaseSkipsAttackStep(t *testing.T) {
-	at := func(name, step string) rules.OracleSnapshot {
+	at := func(name, step string, prio int) rules.OracleSnapshot {
 		s := snap(name)
-		s.Step = step
+		s.Step, s.Priority = step, prio
 		return s
 	}
+	pass := func(seat int) oraclegen.Step { return oraclegen.Step{Op: "pass", Seat: seat} }
 	item := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:tape", Template: lower.Template, Scenario: oraclegen.Scenario{
-		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "pass", Seat: 1}},
+		Steps: []oraclegen.Step{pass(0), pass(1), pass(0), pass(1), pass(0), pass(1)},
 	}}}
+	// gorge: beginning of combat, declare attackers (steps 2 and 3 pass in it), end of combat, main 2.
 	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
-		at("setup", "begin-combat"), at("step 0 (pass)", "begin-combat"), at("step 1 (pass)", "declare-attackers"),
+		at("setup", "begin-combat", 0), at("step 0 (pass)", "begin-combat", 1),
+		at("step 1 (pass)", "declare-attackers", 0), at("step 2 (pass)", "declare-attackers", 1),
+		at("step 3 (pass)", "end-combat", 0), at("step 4 (pass)", "end-combat", 1), at("step 5 (pass)", "main2", 0),
 	}}
-	phase := func(edit func(*oraclediff.XResult)) oraclediff.XResult {
-		x := follower(g, func(x *oraclediff.XResult) {
-			x.Snapshots[2].Step = "end-combat"
-			x.Harness = "harness: pass: p0 does not hold priority at step 2 (p1 does)"
+	// row is phase's: at end of combat from checkpoint 2, then (by stood) standing still on steps 2
+	// and 3, or (an old driver) passing on in the wrong step.
+	row := func(stood bool, edit func(*oraclediff.XResult)) oraclediff.XResult {
+		return follower(g, func(x *oraclediff.XResult) {
+			steps := []string{"begin-combat", "begin-combat", "end-combat", "end-combat", "end-combat", "end-combat", "main2"}
+			prio := []int{0, 1, 0, 0, 0, 1, 0}
+			if !stood {
+				steps = []string{"begin-combat", "begin-combat", "end-combat", "end-combat", "main2", "main2", "end"}
+				prio = []int{0, 1, 0, 1, 0, 1, 0}
+			}
+			for i := range x.Snapshots {
+				x.Snapshots[i].Step, x.Snapshots[i].Priority = steps[i], prio[i]
+			}
 			if edit != nil {
 				edit(x)
 			}
 		})
-		return x
 	}
-	f := Classify(item, nil, g, phase(nil), "phase")
-	if f.Class != ClassPhaseSkipsAttackStep || f.Step != 1 || f.Field != "step" || f.Gorge != "declare-attackers" || f.Other != "end-combat" {
-		t.Errorf("shortcut: %+v", f)
+
+	f := Classify(item, nil, g, row(true, nil), "phase")
+	if f.Class != ClassAgree || f.SteppedOver != 1 || !Credited(f.Class) {
+		t.Errorf("stood still through the step: %+v", f)
+	}
+	// The comparison goes on past the end of combat.
+	f = Classify(item, nil, g, row(true, func(x *oraclediff.XResult) { x.Snapshots[6].Players[0].Life = 19 }), "phase")
+	if f.Class != ClassDiverge || f.Step != 5 || f.SteppedOver != 1 {
+		t.Errorf("a difference after the step: %+v", f)
+	}
+	// A difference in phase's end of combat is not hidden: it shows when gorge's step ends.
+	f = Classify(item, nil, g, row(true, func(x *oraclediff.XResult) {
+		for i := 2; i < len(x.Snapshots); i++ {
+			x.Snapshots[i].Players[1].Life = 17
+		}
+	}), "phase")
+	if f.Class != ClassDiverge || f.Step != 3 || f.Field != "p1.life" {
+		t.Errorf("a difference besides the step inside it: %+v", f)
+	}
+	// An old driver passed on in the wrong step: the old finding, not compared.
+	f = Classify(item, nil, g, row(false, nil), "phase")
+	if f.Class != ClassPhaseSkipsAttackStep || f.Step != 1 || f.Field != "step" || f.Gorge != "declare-attackers" || f.Other != "end-combat" || f.SteppedOver != 0 {
+		t.Errorf("an old driver: %+v", f)
 	}
 	if Credited(ClassPhaseSkipsAttackStep) {
 		t.Error("an item phase.rs could not finish must not count as compared")
 	}
-	if f := Classify(item, nil, g, phase(nil), "forge"); f.Class == ClassPhaseSkipsAttackStep {
-		t.Errorf("another engine: %+v", f)
-	}
-	if f := Classify(item, nil, g, phase(func(x *oraclediff.XResult) { x.Snapshots[1].Players[0].Life = 19 }), "phase"); f.Class != ClassDiverge {
+	if f := Classify(item, nil, g, row(false, func(x *oraclediff.XResult) { x.Snapshots[1].Players[0].Life = 19 }), "phase"); f.Class != ClassDiverge || f.Step != 0 {
 		t.Errorf("an earlier disagreement: %+v", f)
 	}
-	if f := Classify(item, nil, g, phase(func(x *oraclediff.XResult) { x.Snapshots[2].Step = "main2" }), "phase"); f.Class != ClassDiverge {
-		t.Errorf("another first difference: %+v", f)
+
+	// gorge acts in the step phase skipped (a mana ability): a difference, never stepped over.
+	acted := item
+	acted.Item.Scenario.Steps = append([]oraclegen.Step(nil), item.Item.Steps...)
+	acted.Item.Scenario.Steps[2] = oraclegen.Step{Op: "activate", Seat: 0, Card: "p0:Forest"}
+	ag := g
+	ag.Snapshots = append([]rules.OracleSnapshot(nil), g.Snapshots...)
+	ag.Snapshots[3].Checkpoint = "step 2 (activate)"
+	ag.Snapshots[3].Priority = 0
+	ag.Snapshots[3].Players = append([]rules.OracleSnapPlayer(nil), g.Snapshots[3].Players...)
+	ag.Snapshots[3].Players[0].Pool = "G"
+	f = Classify(acted, nil, ag, row(true, nil), "phase")
+	if f.Class != ClassDiverge || f.Step != 1 || f.Field != "step" || f.SteppedOver != 0 || !strings.Contains(f.Msg, "gorge acted in it") {
+		t.Errorf("gorge acted in the skipped step: %+v", f)
 	}
-	if f := Classify(item, nil, g, phase(func(x *oraclediff.XResult) { x.Snapshots[2].Players[0].Life = 19 }), "phase"); f.Class != ClassDiverge {
-		t.Errorf("a difference besides the step: %+v", f)
+	attacked := g
+	attacked.Snapshots = append([]rules.OracleSnapshot(nil), g.Snapshots...)
+	attacked.Snapshots[3].Permanents = []rules.OracleSnapPerm{{Name: "Grizzly Bears", Attacking: true}}
+	if f := Classify(item, nil, attacked, row(true, nil), "phase"); f.Class != ClassDiverge || f.SteppedOver != 0 {
+		t.Errorf("a creature attacking in the step: %+v", f)
 	}
+
+	// A creature could attack and gorge declares none (an attack step with no attackers): phase
+	// goes from the declaration to end of combat, giving no priority in the step either.
+	declared := item
+	declared.Item.Scenario.Steps = append([]oraclegen.Step(nil), item.Item.Steps...)
+	declared.Item.Scenario.Steps[1] = oraclegen.Step{Op: "attack", Seat: 0, Defender: "p1"}
+	dg := g
+	dg.Snapshots = append([]rules.OracleSnapshot(nil), g.Snapshots...)
+	dg.Snapshots[1] = at("step 0 (pass)", "declare-attackers", 0)
+	dg.Snapshots[2].Checkpoint = "step 1 (attack)"
+	drow := row(true, func(x *oraclediff.XResult) { x.Snapshots[1] = dg.Snapshots[1] })
+	if f := Classify(declared, nil, dg, drow, "phase"); f.Class != ClassAgree || f.SteppedOver != 1 {
+		t.Errorf("an empty declaration: %+v", f)
+	}
+	declared.Item.Scenario.Steps[1].Attackers = []string{"p0:Grizzly Bears"}
+	if f := Classify(declared, nil, dg, drow, "phase"); f.Class != ClassDiverge || f.SteppedOver != 0 {
+		t.Errorf("a declaration with an attacker: %+v", f)
+	}
+
+	// Another engine has no such step-over.
+	if f := Classify(item, nil, g, row(true, nil), "forge"); f.Class != ClassDiverge || f.SteppedOver != 0 {
+		t.Errorf("another engine: %+v", f)
+	}
+	// phase gave the step too: compared as it is.
+	if f := Classify(item, nil, g, follower(g, nil), "phase"); f.Class != ClassAgree || f.SteppedOver != 0 {
+		t.Errorf("phase gave the step: %+v", f)
+	}
+
+	// The item ends inside the step: the entry agrees but for the step, so it is stepped over.
+	short := item
+	short.Item.Scenario.Steps = item.Item.Steps[:3]
+	sg := g
+	sg.Snapshots = g.Snapshots[:4]
+	cut := func(x oraclediff.XResult) oraclediff.XResult { x.Snapshots = x.Snapshots[:4]; return x }
+	if f := Classify(short, nil, sg, cut(row(true, nil)), "phase"); f.Class != ClassAgree || f.SteppedOver != 1 {
+		t.Errorf("an item ending in the step: %+v", f)
+	}
+	if f := Classify(short, nil, sg, cut(row(true, func(x *oraclediff.XResult) {
+		x.Snapshots[2].Players[0].Life, x.Snapshots[3].Players[0].Life = 19, 19
+	})), "phase"); f.Class != ClassDiverge || f.SteppedOver != 0 {
+		t.Errorf("an item ending in the step, the entry differing: %+v", f)
+	}
+
+	// Not an empty declare attackers step: the active seat's pass does not end beginning of
+	// combat, nor does a pass that resolves a spell.
 	active := item
-	active.Item.Scenario.Steps = []oraclegen.Step{{Op: "pass"}, {Op: "pass"}}
-	if f := Classify(active, nil, g, phase(nil), "phase"); f.Class != ClassDiverge {
+	active.Item.Scenario.Steps = append([]oraclegen.Step(nil), item.Item.Steps...)
+	active.Item.Scenario.Steps[1] = pass(0)
+	if f := Classify(active, nil, g, row(true, nil), "phase"); f.Class != ClassDiverge {
 		t.Errorf("the active seat's pass does not end the step: %+v", f)
 	}
 	stacked := g
 	stacked.Snapshots = append([]rules.OracleSnapshot(nil), g.Snapshots...)
 	stacked.Snapshots[1].Stack = []rules.OracleSnapStack{{Kind: "spell", Source: "Shock"}}
-	if f := Classify(item, nil, stacked, follower(stacked, func(x *oraclediff.XResult) { x.Snapshots[2].Step = "end-combat" }), "phase"); f.Class != ClassDiverge {
+	if f := Classify(item, nil, stacked, row(true, func(x *oraclediff.XResult) { x.Snapshots[1].Stack = stacked.Snapshots[1].Stack }), "phase"); f.Class != ClassDiverge {
 		t.Errorf("a pass that resolves a spell does not end the step: %+v", f)
+	}
+}
+
+// TestEmptyAttackPasses: the passes gorge plays in each empty declare attackers
+// step, the ones follower-export marks for the phase.rs driver.
+func TestEmptyAttackPasses(t *testing.T) {
+	at := func(step string) rules.OracleSnapshot { s := snap(""); s.Step = step; return s }
+	pass := func(seat int) oraclegen.Step { return oraclegen.Step{Op: "pass", Seat: seat} }
+	steps := []oraclegen.Step{pass(0), pass(1), pass(0), pass(1), pass(0), pass(1), pass(0), pass(1)}
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		at("begin-combat"), at("begin-combat"), at("declare-attackers"), at("declare-attackers"),
+		at("end-combat"), at("end-combat"), at("main2"), at("main2"), at("end"),
+	}}
+	if got := EmptyAttackPasses(steps, g); !reflect.DeepEqual(got, []int{2, 3}) {
+		t.Errorf("one empty step: %v", got)
+	}
+	// gorge declares no attacker (step 2) where phase gave the declaration: the passes after it.
+	steps[2] = oraclegen.Step{Op: "attack", Seat: 0, Defender: "p1"}
+	g.Snapshots[3].Priority = 0
+	if got := EmptyAttackPasses(steps, g); !reflect.DeepEqual(got, []int{3}) {
+		t.Errorf("an empty declaration: %v", got)
+	}
+	steps[2] = pass(0)
+	steps[3] = oraclegen.Step{Op: "cast", Seat: 1, Card: "p1:Shock"}
+	if got := EmptyAttackPasses(steps, g); got != nil {
+		t.Errorf("a cast in the step: %v", got)
 	}
 }
 

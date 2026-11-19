@@ -9,7 +9,9 @@ package main
 // forge-export writes for that item (same id, scenario_sha, item, decisions
 // and abilities, the same Forge rewrites) plus one more field, "neutral": the
 // engine-neutral identities of the abilities, setup tokens and modes the item
-// names, for a follower that does not read Forge scripts. The one exception
+// names, for a follower that does not read Forge scripts, and for a
+// SkipsEmptyAttackStep follower "attack_window_passes" (the passes gorge plays
+// in an empty declare attackers step; followerRequest). The one exception
 // is the Forge-only "graveyard_order" decision role: forge-export pins it for
 // the Forge driver's separate "order to Graveyard" ask, but no follower queue
 // consumes it (an unasked question), so it is omitted here rather than left as
@@ -68,6 +70,7 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/follower"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/xprep"
 	"github.com/adams-shaun/gorge/engine/cards"
@@ -81,6 +84,14 @@ import (
 type followerRequest struct {
 	forgeRequest
 	Neutral neutralIDs `json:"neutral"`
+	// AttackWindowPasses, for a SkipsEmptyAttackStep follower (phase.rs),
+	// is the indices of the steps gorge plays as passes in a declare
+	// attackers step in which no creature attacks
+	// (classify.EmptyAttackPasses). The driver steps over each one it
+	// reaches with its engine already at end of combat, having given no
+	// such step, and the comparison resumes at the end of combat
+	// (classify.StepOverAttackWindows). Left out when there are none.
+	AttackWindowPasses []int `json:"attack_window_passes,omitempty"`
 }
 
 // neutralIDs are the identities a follower that does not read Forge scripts
@@ -290,7 +301,16 @@ func followerExport(reg *cards.Registry, fl follower.Follower, runner, scen, out
 		// decision would become an unconsumed leftover and turn a clean row
 		// into decision_shape. forge-export (the Forge path) opts in.
 		rq, g := forgeExportItem(reg, it, false)
-		line, err = json.Marshal(followerRequest{forgeRequest: rq, Neutral: neutralFor(reg, rq, g, st.Census)})
+		fr := followerRequest{forgeRequest: rq, Neutral: neutralFor(reg, rq, g, st.Census)}
+		if fl.SkipsEmptyAttackStep {
+			// The item as gorge played it: forge-export rewrites an empty attack as a
+			// pass_to, and step indices never move.
+			fr.AttackWindowPasses = classify.EmptyAttackPasses(it.Steps, g)
+			if len(fr.AttackWindowPasses) > 0 {
+				st.Census.add("attack_window_passes.items")
+			}
+		}
+		line, err = json.Marshal(fr)
 		if err != nil {
 			return st, err
 		}
