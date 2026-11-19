@@ -25,3 +25,5 @@ oracle/compliance/status.md
 .goldfish/
 # Rust follower build output (lives under FOLLOWERS_CACHE, never in tree).
 followers/**/target/
+# Stray `go build ./cmd/xengine` output at the repo root.
+/xengine

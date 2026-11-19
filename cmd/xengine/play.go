@@ -87,7 +87,7 @@ func runPlay(args []string) error {
 	xmage := fs.Bool("xmage", false, "leave out the cards XMage spells differently (an XMage item names no per-card spelling)")
 	random := fs.String("random", "", "set codes, space or comma separated: draw the decks at random across these sets, ignoring the ledger; -set only names the run in the item ids")
 	forgeOnly := fs.String("forge-only", "", "with -random, a file of card names, one per line, to add to the cross-set deal: a set XMage has no class for, so its items go to Forge alone")
-	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays; with -format commander every game is offered to dirac's cmd5 Commander table, after each card it refuses is replaced by a basic of the deck's colours (commander.json swaps); a pair it still does not hold reads not_applicable")
+	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays; with -format commander every game is offered to dirac's cmd5 Commander table, after each card it refuses is replaced by a basic of the deck's colours (commander.json swaps); in a set, a pair its table refuses as an interaction has the named card replaced by a basic first, up to 4 times a game (swaps.jsonl); a pair it still does not hold reads not_applicable")
 	diracEvery := fs.Int("dirac-every", 2, "with -random and -dirac, every K-th game (game g with g%K == K-1) draws from one set's dirac-playable cards; 1 makes every game one dirac plays beside gorge, so all four engines see every deck; not used with -format commander")
 	format := fs.String("format", "", "game format: empty or constructed, or commander (with -commander-decks)")
 	seats := fs.Int("seats", 2, "with -format commander: seats a game deals, 2 to 4, each a distinct deck of -commander-decks. More than two seats are played and recorded by gorge alone: the lowering refuses every window and tape of such a game (seats:<n>)")
@@ -174,6 +174,7 @@ func runPlay(args []string) error {
 	}
 	opts := decks.Options{XMage: *xmage}
 	var deal dealer
+	var swapRec *swapLog
 	if *format == "commander" {
 		ds, info, derr := loadCommanderDecks(reg, *cmdrDecks, *seats, tables)
 		if derr != nil {
@@ -209,6 +210,9 @@ func runPlay(args []string) error {
 			pick, err = randomPicker(reg, *manifests, strings.Fields(strings.ReplaceAll(*random, ",", " ")), opts, tables, extra, *diracEvery)
 		} else {
 			pick, err = setPicker(reg, *manifests, *set, led, opts, tables)
+			if err == nil && tables != nil {
+				swapRec = &swapLog{}
+			}
 		}
 		if err != nil {
 			return err
@@ -223,8 +227,50 @@ func runPlay(args []string) error {
 			}
 		}
 		deal = pickDealer(pick, *set, *chunk, *seed)
+		if swapRec != nil {
+			deal = swapDealer(deal, tables, *set, *chunk, swapRec)
+		}
 	}
-	return play(reg, deal, tables, led, *set, *chunk, *games, *seed, *out, *windows, *xmage, turns)
+	if err := play(reg, deal, tables, led, *set, *chunk, *games, *seed, *out, *windows, *xmage, turns); err != nil {
+		return err
+	}
+	if swapRec != nil {
+		return writeAtomic(filepath.Join(*out, "swaps.jsonl"), swapRec.buf.Bytes())
+	}
+	return nil
+}
+
+// swapLog collects the swaps of a set-mode -dirac play (swaps.jsonl).
+type swapLog struct{ buf bytes.Buffer }
+
+// swapRow is one line of swaps.jsonl: a card of game Game's deal replaced by a basic
+// so dirac's table holds the pair (dside.InteractionSwap, which it embeds).
+type swapRow struct {
+	Game string `json:"game"`
+	dside.InteractionSwap
+}
+
+// swapDealer is deal with each pair dirac's set table refuses as an interaction made
+// one it holds, by swapping the named card for a basic (dside.SwapRefusedInteraction),
+// before the game is played: gorge, Forge and XMage all play the swapped lists, as in
+// Commander. A pair left refused is dealt as it was and reads not_applicable. The swap
+// reads the pair alone, so the dealer's RNG stream is untouched. Each swap goes to log.
+func swapDealer(deal dealer, tables *dside.Tables, set string, chunk int, log *swapLog) dealer {
+	return func(g int) ([]decks.Deck, string) {
+		pair, table := deal(g)
+		if table != set || len(pair) != 2 {
+			return pair, table
+		}
+		sw, swaps, err := tables.SwapRefusedInteraction(table, [2]decks.Deck(pair))
+		if err != nil {
+			return pair, table
+		}
+		for _, s := range swaps {
+			b, _ := jsonl(swapRow{Game: dside.GameID(set, chunk, g), InteractionSwap: s})
+			log.buf.Write(b)
+		}
+		return sw[:], table
+	}
 }
 
 // formatFlagErr checks -format and -commander-decks against each other and
@@ -383,6 +429,21 @@ func setPicker(reg *cards.Registry, manifests, set string, led *cov.Ledger, opts
 	}
 	if opts.XMage {
 		fmt.Printf("xmage spelling: %d card(s) of %s left out of the decks, %d candidates\n", decks.ExcludedXMage(skips), set, len(cands))
+	}
+	if parent, ok := decks.ParentSets[set]; ok && decks.Pairable(cands) != nil {
+		// A bonus-sheet set too small to deal alone: its decks hold its own cards and its
+		// parent's, and the game is still recorded under the child's code. No dirac table
+		// holds cards of two sets, so with -dirac every such game reads not_applicable.
+		pc, _, perr := decks.CandidatesWith(reg, manifests, parent, opts)
+		if perr != nil {
+			return nil, perr
+		}
+		cands = decks.WithParent(cands, pc)
+		if err := decks.Pairable(cands); err != nil {
+			return nil, fmt.Errorf("set %s with parent %s: %w", set, parent, err)
+		}
+		fmt.Printf("xengine: set %s deals with parent %s: %d candidates, each deck holds up to %d %s cards\n", set, parent, len(cands), decks.MinChild, set)
+		return func(int, uint64) ([]decks.Card, *cov.Ledger, string) { return cands, led, "" }, nil
 	}
 	table := ""
 	if tables != nil {

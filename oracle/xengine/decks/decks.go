@@ -8,6 +8,7 @@ import (
 	"crypto/sha256"
 	"encoding/binary"
 	"fmt"
+	"math/bits"
 	"math/rand/v2"
 	"sort"
 	"strings"
@@ -24,6 +25,7 @@ type Card struct {
 	Identity uint8  // cards.Colour* mask over every face
 	Land     bool   // front face is a land
 	Pips     [5]int // coloured mana symbols of the front face, WUBRG order
+	Child    bool   // a child set's card in a child-plus-parent pool (WithParent)
 }
 
 // Skip is a manifest card that is not a candidate, and why. Reasons:
@@ -36,7 +38,7 @@ type Skip struct{ Card, Reason string }
 // any size.
 type Deck struct {
 	Name    string
-	Colours string // the two colour letters in WUBRG order, e.g. "WU"; a Commander or fixed deck's identity ("C" colourless)
+	Colours string // the colour letters (two, or three for a three-colour deck) in WUBRG order, e.g. "WU"; a Commander or fixed deck's identity ("C" colourless)
 	Cards   []string
 	// Commander is the commander's corpus spelling (front face name), "" for a
 	// constructed deck.
@@ -199,25 +201,52 @@ func Union(lists ...[]Card) []Card {
 	return out
 }
 
-// colourPair is a pair of indexes into WUBRG, a < b.
-type colourPair [2]int
+// colourCombo is a deck's colours: indexes into WUBRG, ascending. The rotation
+// is the 10 pairs, then (for a set that needs them) the 10 three-colour
+// combinations, the 5 shards and the 5 wedges.
+type colourCombo []int
 
-// colourPairs is the 10 pairs in a fixed order.
-var colourPairs = func() []colourPair {
-	var out []colourPair
+var pairCombos, tripleCombos = func() (pairs, triples []colourCombo) {
 	for a := 0; a < 5; a++ {
 		for b := a + 1; b < 5; b++ {
-			out = append(out, colourPair{a, b})
+			pairs = append(pairs, colourCombo{a, b})
+			for c := b + 1; c < 5; c++ {
+				triples = append(triples, colourCombo{a, b, c})
+			}
 		}
 	}
-	return out
+	return pairs, triples
 }()
 
-func (p colourPair) mask() uint8 { return 1<<p[0] | 1<<p[1] }
+// combosFor is the colour combinations cands rotate through: the 10 pairs, plus
+// the 10 triples only when some candidate's identity needs three colours, so a
+// two-colour set's rotation is the same as it was before triples existed.
+func combosFor(cands []Card) []colourCombo {
+	for _, c := range cands {
+		if bits.OnesCount8(c.Identity) == 3 {
+			return append(append([]colourCombo(nil), pairCombos...), tripleCombos...)
+		}
+	}
+	return pairCombos
+}
 
-func (p colourPair) letters() string { return colourLetters[p[0]] + colourLetters[p[1]] }
+func (p colourCombo) mask() uint8 {
+	var m uint8
+	for _, i := range p {
+		m |= 1 << i
+	}
+	return m
+}
 
-func eligible(cands []Card, p colourPair) []Card {
+func (p colourCombo) letters() string {
+	var s string
+	for _, i := range p {
+		s += colourLetters[i]
+	}
+	return s
+}
+
+func eligible(cands []Card, p colourCombo) []Card {
 	var out []Card
 	for _, c := range cands {
 		if c.Identity&^p.mask() == 0 {
@@ -227,12 +256,12 @@ func eligible(cands []Card, p colourPair) []Card {
 	return out
 }
 
-// FeasiblePairs lists, in rotation order, the colour pairs ("WU", "WB", ...)
-// with at least 23 eligible candidates: the only pairs Pair can build a deck
-// for. A set with fewer than 23 cards in every pair has none.
+// FeasiblePairs lists, in rotation order, the colour combinations ("WU", "WB",
+// ..., and "WUB"... when the set has a three-colour candidate) with at least 23
+// eligible candidates: the only ones Pair can build a deck for.
 func FeasiblePairs(cands []Card) []string {
 	var out []string
-	for _, p := range colourPairs {
+	for _, p := range combosFor(cands) {
 		if len(eligible(cands, p)) >= spellCount {
 			out = append(out, p.letters())
 		}
@@ -241,13 +270,14 @@ func FeasiblePairs(cands []Card) []string {
 }
 
 // Pairable is nil when Pair can build decks from cands, else an error naming
-// the best pair. Callers check it before Pair, which panics when it is not nil.
+// the best combination. Callers check it before Pair, which panics when it is
+// not nil.
 func Pairable(cands []Card) error {
 	if len(FeasiblePairs(cands)) > 0 {
 		return nil
 	}
 	best, bestN := "", -1
-	for _, p := range colourPairs {
+	for _, p := range combosFor(cands) {
 		if n := len(eligible(cands, p)); n > bestN {
 			best, bestN = p.letters(), n
 		}
@@ -256,13 +286,13 @@ func Pairable(cands []Card) error {
 }
 
 // Reachable is the number of candidates that fit at least one feasible colour
-// pair, i.e. can appear in some deck, and the names of those that cannot. A
-// card whose identity needs three colours, or whose only pairs have fewer than
-// 23 eligible cards, is unreachable: the 23-distinct-cards rule makes this
-// unavoidable, so sweeps report it instead of hiding it.
+// combination, i.e. can appear in some deck, and the names of those that cannot.
+// A card whose identity needs four colours, or whose only combinations have
+// fewer than 23 eligible cards, is unreachable: the 23-distinct-cards rule makes
+// this unavoidable, so sweeps report it instead of hiding it.
 func Reachable(cands []Card) (reachable int, unreachable []string) {
 	var masks []uint8
-	for _, p := range colourPairs {
+	for _, p := range combosFor(cands) {
 		if len(eligible(cands, p)) >= spellCount {
 			masks = append(masks, p.mask())
 		}
@@ -284,13 +314,36 @@ func Reachable(cands []Card) (reachable int, unreachable []string) {
 	return reachable, unreachable
 }
 
+// ParentSets maps a bonus-sheet set too small to deal alone to the set whose
+// cards fill its decks (WithParent).
+var ParentSets = map[string]string{"BIG": "OTJ"}
+
+// MinChild is the number of a child set's cards each deck of a child-plus-parent
+// pool holds, when the child has that many in the deck's colours.
+const MinChild = 8
+
+// WithParent is the candidates of a child set dealt with its parent: the child's
+// cards first, marked Child, then the parent's not already listed. Pair gives
+// every deck at least MinChild Child cards when the colours hold them.
+func WithParent(child, parent []Card) []Card {
+	var out []Card
+	for _, c := range child {
+		c.Child = true
+		out = append(out, c)
+	}
+	return Union(out, parent)
+}
+
 // Pair is deck pair game of chunk for set: a pure function of
-// (set, chunk, game, the ledger's contents, seed). Deck i takes colour pair
-// (7*chunk + 2*game + i) mod 10, advanced to the next pair with at least 23
-// eligible cards, so the 10 pairs rotate. A candidate that fits no such pair
-// is never drawn (see Reachable). Spells are drawn without replacement with
-// weight 1/(1+uses), uses being the card's exercised total in led (nil reads
-// as empty). It panics when Pairable(cands) is not nil: that is a caller bug.
+// (set, chunk, game, the ledger's contents, seed). Deck i takes colour
+// combination (7*chunk + 2*game + i) mod n of the rotation (the 10 pairs, plus
+// the 10 triples for a set with a three-colour candidate), advanced to the next
+// one with at least 23 eligible cards. A candidate that fits no such
+// combination is never drawn (see Reachable). Spells are drawn without
+// replacement with weight 1/(1+uses), uses being the card's exercised total in
+// led (nil reads as empty); with Child cards in the pool, MinChild of them are
+// drawn first. A three-colour deck splits its 17 basics evenly. It panics when
+// Pairable(cands) is not nil: that is a caller bug.
 func Pair(cands []Card, led *cov.Ledger, set string, chunk, game int, seed uint64) [2]Deck {
 	if led == nil {
 		led = cov.New()
@@ -302,38 +355,35 @@ func Pair(cands []Card, led *cov.Ledger, set string, chunk, game int, seed uint6
 	h.Write(tsv.Bytes())
 	sum := h.Sum(nil)
 	rng := rand.New(rand.NewPCG(binary.LittleEndian.Uint64(sum[:8]), binary.LittleEndian.Uint64(sum[8:16])))
+	combos := combosFor(cands)
+	n := len(combos)
 	var out [2]Deck
 	for i := range out {
-		start := ((7*chunk+2*game+i)%10 + 10) % 10
+		start := ((7*chunk+2*game+i)%n + n) % n
 		pi := -1
-		for k := 0; k < 10; k++ {
-			if len(eligible(cands, colourPairs[(start+k)%10])) >= spellCount {
-				pi = (start + k) % 10
+		for k := 0; k < n; k++ {
+			if len(eligible(cands, combos[(start+k)%n])) >= spellCount {
+				pi = (start + k) % n
 				break
 			}
 		}
 		if pi < 0 {
 			panic(fmt.Sprintf("decks.Pair: %s: %v", set, Pairable(cands)))
 		}
-		p := colourPairs[pi]
-		spells := draw(eligible(cands, p), led, rng)
-		var pa, pb int
+		p := combos[pi]
+		spells := drawDeck(eligible(cands, p), led, rng)
+		var pips [5]int
 		names := make([]string, 0, deckSize)
 		for _, s := range spells {
 			names = append(names, s.Name)
-			pa += s.Pips[p[0]]
-			pb += s.Pips[p[1]]
+			for _, ci := range p {
+				pips[ci] += s.Pips[ci]
+			}
 		}
-		na := basicCount / 2
-		if pa+pb > 0 {
-			na = (basicCount*pa + (pa+pb)/2) / (pa + pb)
-		}
-		na = min(max(na, minBasic), basicCount-minBasic)
-		for j := 0; j < na; j++ {
-			names = append(names, basicNames[p[0]])
-		}
-		for j := na; j < basicCount; j++ {
-			names = append(names, basicNames[p[1]])
+		for j, k := range basicSplit(p, pips) {
+			for ; k > 0; k-- {
+				names = append(names, basicNames[p[j]])
+			}
 		}
 		sort.Strings(names)
 		colours := p.letters()
@@ -342,10 +392,60 @@ func Pair(cands []Card, led *cov.Ledger, set string, chunk, game int, seed uint6
 	return out
 }
 
-// draw picks spellCount distinct cards without replacement, each pick
+// basicSplit is the basicCount basics per colour of p: a pair splits by pips
+// (at least minBasic each), a triple evenly.
+func basicSplit(p colourCombo, pips [5]int) []int {
+	if len(p) == 2 {
+		pa, pb := pips[p[0]], pips[p[1]]
+		na := basicCount / 2
+		if pa+pb > 0 {
+			na = (basicCount*pa + (pa+pb)/2) / (pa + pb)
+		}
+		na = min(max(na, minBasic), basicCount-minBasic)
+		return []int{na, basicCount - na}
+	}
+	out := make([]int, len(p))
+	for j := range out {
+		out[j] = basicCount / len(p)
+		if j < basicCount%len(p) {
+			out[j]++
+		}
+	}
+	return out
+}
+
+// drawDeck is the deck's spells from pool: spellCount cards, the first MinChild
+// of them from the pool's Child cards when it has any.
+func drawDeck(pool []Card, led *cov.Ledger, rng *rand.Rand) []Card {
+	var child, rest []Card
+	for _, c := range pool {
+		if c.Child {
+			child = append(child, c)
+		} else {
+			rest = append(rest, c)
+		}
+	}
+	if len(child) == 0 {
+		return draw(pool, spellCount, led, rng)
+	}
+	first := draw(child, min(MinChild, len(child)), led, rng)
+	taken := map[string]bool{}
+	for _, c := range first {
+		taken[c.Name] = true
+	}
+	var left []Card
+	for _, c := range pool {
+		if !taken[c.Name] {
+			left = append(left, c)
+		}
+	}
+	return append(first, draw(left, spellCount-len(first), led, rng)...)
+}
+
+// draw picks k distinct cards without replacement, each pick
 // proportional to 1/(1+uses). pool is in manifest order, so the draw is
 // deterministic for a given rng.
-func draw(pool []Card, led *cov.Ledger, rng *rand.Rand) []Card {
+func draw(pool []Card, k int, led *cov.Ledger, rng *rand.Rand) []Card {
 	pool = append([]Card(nil), pool...)
 	w := make([]float64, len(pool))
 	total := 0.0
@@ -354,7 +454,7 @@ func draw(pool []Card, led *cov.Ledger, rng *rand.Rand) []Card {
 		total += w[i]
 	}
 	var out []Card
-	for len(out) < spellCount {
+	for len(out) < k {
 		x := rng.Float64() * total
 		pick := len(pool) - 1
 		for i := range pool {

@@ -142,7 +142,7 @@ waits while two or more JVMs are running.
 **dirac as a fourth side:** with `XENGINE_DIRAC=1` the decks hold only cards the set's dirac table
 plays, and each game is played in lockstep between gorge and dirac (`dirac/oracle`) under the explore
 policy before being replayed as the sweep's game, so the windows lowered from it are the positions dirac
-was compared at. `<chunk>/dirac.jsonl` says how each game went on dirac. `<chunk>/adjudicate/dirac.jsonl` gives
+was compared at. In a set game, a pair the table refuses as an interaction (`interaction atktax: Archangel of Tithes, ...`) first has the named card with fewest copies swapped for a basic of its deck's colours, up to 4 times, so gorge, Forge and XMage all play the swapped lists; `<chunk>/swaps.jsonl` records each swap (`game`, `seat`, `card`, `basic`, `reason`, `count`). `<chunk>/dirac.jsonl` says how each game went on dirac. `<chunk>/adjudicate/dirac.jsonl` gives
 each item dirac's answer beside the three-way pattern: `D=G`, `D!=G`, or `D-` where dirac has no answer
 (a pair its table refuses, a game past a stall or a divergence). `AGREE3 D!=G` points at dirac; `FX|G D=G` is
 a gorge suspect dirac shares. `play`'s error names the command that builds the tables, which are keyed by the pin
