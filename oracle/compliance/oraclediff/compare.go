@@ -556,10 +556,29 @@ func symDiff(a, b []string) (onlyA, onlyB []string) {
 	return onlyA, onlyB
 }
 
-// sourcelessTriggerNames are Forge's and XMage's names for the CR 702.179
-// speed trigger, which has no source object; gorge reports it with an empty
-// source. stackKeys renders all three the same.
-var sourcelessTriggerNames = map[string]bool{"Start Your Engines!": true, "Speed": true}
+// sourcelessTriggerNames are Forge's and XMage's names for the inherent
+// triggered abilities that have no source object: the CR 702.179 speed
+// trigger ("Start Your Engines!", "Speed") and the designation triggers of
+// CR 725.2 (monarch) and 726.2 (initiative), which the engines name after the
+// designation. gorge reports all of them with an empty source, so stackKeys
+// renders every spelling the same.
+var sourcelessTriggerNames = map[string]bool{
+	"Start Your Engines!": true, "Speed": true,
+	"The Monarch": true, "The Initiative": true,
+}
+
+// SourcelessTriggerNames returns the engine names for stack abilities that
+// have no source object, sorted. The diagnosed register accepts them as the
+// card column: the farm's report.py attributes a stack row to the name the
+// follower prints, and no card carries a designation's name.
+func SourcelessTriggerNames() []string {
+	names := make([]string, 0, len(sourcelessTriggerNames))
+	for n := range sourcelessTriggerNames {
+		names = append(names, n)
+	}
+	sort.Strings(names)
+	return names
+}
 
 func stackKeys(st []rules.OracleSnapStack) string { return stackKeysOf(st, nil) }
 
