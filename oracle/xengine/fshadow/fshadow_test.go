@@ -350,6 +350,82 @@ func TestSpellTargetAndSource(t *testing.T) {
 	}
 }
 
+// TestTargetGroupsOneChoicePerGroup is the farm cmdr4 repro (BIG/DFT/WOE
+// s148 cmdr4, pod 14801, offset 388): a combined charm target ask (gorge
+// KTarget with one Option.Group per target-bearing mode) was answered by
+// first-match object, so two Forge targets that were both legal for the
+// first mode landed in that one group and Decision.Validate rejected the
+// answer with `choices 0 and 1 are mutually exclusive (group
+// "charm-mode-0")`. The follower must choose one option per group; the
+// no-log-line default answer is bound by the same wire contract.
+func TestTargetGroupsOneChoicePerGroup(t *testing.T) {
+	// Two modes, each able to target either of the same two permanents, so
+	// first-match by object puts both picks in charm-mode-0.
+	line := `{"t":"ask","n":388,"seat":0,"turn":5,"step":"main1","kind":"target","options":[{"card":20},{"card":30},{"card":20},{"card":30}],"answer":{"targets":[{"card":20},{"card":30}]}}`
+	a := parseAsk(t, line)
+	f := &follower{toG: map[int]state.ObjID{20: 2, 30: 3}, toF: map[state.ObjID]int{2: 20, 3: 30}, name: map[int]string{}}
+	d := &decision.Decision{Seq: 9, Player: 0, Kind: decision.KTarget, Min: 2, Max: 2,
+		Options: []decision.Option{
+			{Index: 0, Kind: "card", Obj: 2, Group: "charm-mode-0"},
+			{Index: 1, Kind: "card", Obj: 3, Group: "charm-mode-0"},
+			{Index: 2, Kind: "card", Obj: 2, Group: "charm-mode-1"},
+			{Index: 3, Kind: "card", Obj: 3, Group: "charm-mode-1"},
+		}}
+	// Pin the fixture to the pod's rejection: first-match choices [0 1] are
+	// both charm-mode-0, and the engine's own fence refuses them with the
+	// divergence's message.
+	naive := decision.Intent{Seq: 9, Player: 0, Choices: []int{0, 1}}
+	if err := d.Validate(naive); err == nil || !strings.Contains(err.Error(), `mutually exclusive (group "charm-mode-0")`) {
+		t.Fatalf("fixture no longer reproduces the pod rejection: %v", err)
+	}
+	in, dv := f.targets(d, a)
+	if dv != nil {
+		t.Fatalf("logged target ask: divergence %+v", dv)
+	}
+	if len(in.Choices) != 2 || d.Options[in.Choices[0]].Group == d.Options[in.Choices[1]].Group {
+		t.Fatalf("intent %+v: want one choice per charm mode group", in)
+	}
+	if err := d.Validate(in); err != nil {
+		t.Errorf("intent %+v rejected by the wire contract: %v", in, err)
+	}
+
+	// A target decision with no log line is answered by default: it must obey
+	// the same Group contract, not take the first Min options (all of mode 0).
+	prio := parseAsk(t, `{"t":"ask","n":389,"seat":0,"turn":5,"step":"main1","kind":"priority","answer":{"action":"pass"}}`)
+	f2 := &follower{log: &Log{}}
+	din, ok := f2.answer(d, Entry{Line: 389, T: TAsk, Ask: prio})
+	if !ok || f2.res.Hard != nil {
+		t.Fatalf("default target answer: ok %v hard %+v", ok, f2.res.Hard)
+	}
+	if len(din.Choices) != 2 || d.Options[din.Choices[0]].Group == d.Options[din.Choices[1]].Group {
+		t.Fatalf("default intent %+v: want one choice per charm mode group", din)
+	}
+	if err := d.Validate(din); err != nil {
+		t.Errorf("default intent %+v rejected by the wire contract: %v", din, err)
+	}
+
+	// An ungrouped ask is a different shape: no Option.Group means no
+	// exclusivity, so the default must stay firstMin's [0 1]. Giving every
+	// slot the whole offer list answers [0 0], which Validate rejects as a
+	// duplicate choice.
+	ungrouped := &decision.Decision{Seq: 10, Player: 0, Kind: decision.KTarget, Min: 2, Max: 2,
+		Options: []decision.Option{
+			{Index: 0, Kind: "card", Obj: 2},
+			{Index: 1, Kind: "card", Obj: 3},
+			{Index: 2, Kind: "player", Player: 1},
+		}}
+	uin, ok := f2.answer(ungrouped, Entry{Line: 390, T: TAsk, Ask: prio})
+	if !ok || f2.res.Hard != nil {
+		t.Fatalf("ungrouped default target answer: ok %v hard %+v", ok, f2.res.Hard)
+	}
+	if !reflect.DeepEqual(uin.Choices, []int{0, 1}) {
+		t.Fatalf("ungrouped default intent %+v: want first Min choices [0 1]", uin)
+	}
+	if err := ungrouped.Validate(uin); err != nil {
+		t.Errorf("ungrouped default intent %+v rejected by the wire contract: %v", uin, err)
+	}
+}
+
 // Item 3: a priority action "other" has no gorge mapping: a harness finding,
 // not a crash.
 func TestPriorityOtherIsHarness(t *testing.T) {
