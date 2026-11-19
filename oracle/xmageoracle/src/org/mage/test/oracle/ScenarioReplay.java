@@ -847,6 +847,35 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return !getChoices().isEmpty() && (getChoices().get(0).equals("Yes") || getChoices().get(0).equals("No"));
         }
 
+        /** XMage's Phyrexian cost prompts: AbilityImpl.handlePhyrexianCosts
+         * ("... (phyrexian cost)?" at CR 601.2b), ManaCostsImpl
+         * .handlePhyrexianManaCosts ("...?" while a cost is paid) and
+         * AbilityImpl.handlePhyrexianLikeEffects (K'rrik's PayLifeInsteadOf
+         * grant, "... (pay life cost)?"). All three ask whether to pay two
+         * life instead of a pip, and only these three use this wording. */
+        static boolean phyrexianAsk(String message) {
+            return message != null && message.startsWith("Pay 2 life instead of ");
+        }
+
+        /** Whether a Phyrexian ask must be declined because the step queued
+         * no boolean for it. The generator scripts "yes" only for a recorded
+         * pay_life face, so a starved ask means gorge paid the pip's mana
+         * face: answer no WITHOUT consuming the step's next answer.
+         * TestPlayer would otherwise stop the replay at "Missing CHOICE def"
+         * before the cost can be paid from the pool (Blinding Souleater's
+         * {W/P} activation). A queued Yes/No is left for TestPlayer, which
+         * consumes it as the recorded life-face answer. */
+        static boolean phyrexianStarved(String message, List<String> choices) {
+            if (!phyrexianAsk(message)) {
+                return false;
+            }
+            if (choices.isEmpty()) {
+                return true;
+            }
+            String head = choices.get(0);
+            return !head.equals("Yes") && !head.equals("No");
+        }
+
         /**
          * The yes/no asks a plain cast step implies. gorge's cast-resolve
          * scenario casts for the mana cost only, so each of these is answered
@@ -863,6 +892,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
          */
         @Override
         public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
+            if (phyrexianStarved(message, getChoices())) {
+                return false;
+            }
             if (source instanceof LeylineAbility) {
                 return false;
             }
