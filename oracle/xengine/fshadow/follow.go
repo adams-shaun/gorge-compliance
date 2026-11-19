@@ -105,6 +105,10 @@ type Result struct {
 	// the snapshots of steps gorge gives no decision in (the untap step).
 	SkippedAsks  int `json:"skipped_asks,omitempty"`
 	SkippedSnaps int `json:"skipped_snaps,omitempty"`
+	// SkippedMulls counts the state-neutral mulligan answers Forge's random
+	// seat can log after its hand has emptied: AbstractMulligan.mulligan()
+	// returns without a redraw, and Forge asks again.
+	SkippedMulls int `json:"skipped_mulls,omitempty"`
 	// Modes counts the modal picks (a charm's modes, an unless-pay ask) the
 	// log has no line for, which the follower answered by default.
 	Modes int `json:"modes,omitempty"`
@@ -151,7 +155,11 @@ type follower struct {
 
 	pos        int           // next unread entry
 	mullBottom map[int][]int // Forge seat -> the bottom its kept mull line carried, until gorge's bottoming ask for that seat
-	res        Result
+	// mullBottomAll marks a seat whose keep had an empty hand and no recorded
+	// bottom (the recorder cleared it on a no-op mulligan line): the whole
+	// hand goes to the bottom.
+	mullBottomAll map[int]bool
+	res           Result
 }
 
 // Follow replays l in gorge. A setup failure (an unknown card, a binding
@@ -171,7 +179,19 @@ func Follow(reg *cards.Registry, l *Log, opt Options) (*Result, error) {
 
 func (f *follower) setup() error {
 	h := f.log.Header
-	cfg := rules.Config{Seed: h.Seed, Tokens: f.reg.Tokens, NameUniverse: f.reg.Universe(), Mulligans: h.Mulligans}
+	// The header's mulligans is Forge's counted cap: CR 103.5c's free first
+	// mulligan of a multiplayer game does not count toward the number of
+	// mulligans a player may take, and Forge's canMulligan is derived from the
+	// counted ones, so its seats can answer one more than the cap. gorge's
+	// Config.Mulligans counts the free mulligan against the allowance (its
+	// crcoverage 103.5c row records the deviation), so hand it the cap plus
+	// the free mulligan the header declares. The extra mulligan bottoms at
+	// most the seven-card hand, which gorge's bottoming ask can express.
+	mulligans := h.Mulligans
+	if mulligans > 0 && h.FreeMulligan {
+		mulligans++
+	}
+	cfg := rules.Config{Seed: h.Seed, Tokens: f.reg.Tokens, NameUniverse: f.reg.Universe(), Mulligans: mulligans}
 	next := state.ObjID(1)
 	for _, s := range h.Seats {
 		cs := make([]*cards.Card, 0, len(s.Cards))
@@ -415,6 +435,9 @@ func (f *follower) run(max int) {
 			f.terminal()
 			return
 		}
+		if f.skipNoOpMulligan(d) {
+			continue
+		}
 		if f.res.Decisions >= max {
 			f.res.Capped, f.res.End = true, "cap"
 			return
@@ -459,6 +482,21 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 			// consumed with the keep. gorge asks every seat keep-or-mulligan
 			// first and the bottoming of each kept hand after, in seat order:
 			// the answer is the seat's remembered bottom, and no line is read.
+			if f.mullBottomAll[int(d.Player)] {
+				// The recorder cleared the bottom on a no-op mulligan line, so
+				// the keep's empty hand is the record: bottom the whole hand.
+				if d.Min != len(d.Options) {
+					f.hard(WhatAnswerMissing, d, Divergence{Line: e.Line, Field: "bottom",
+						Forge: "the whole hand", Gorge: optKeys(f, d),
+						Detail: fmt.Sprintf("want %d cards on the bottom, the hand holds %d", d.Min, len(d.Options))})
+					return in, false
+				}
+				delete(f.mullBottomAll, int(d.Player))
+				for _, o := range d.Options {
+					in.Choices = append(in.Choices, o.Index)
+				}
+				return in, true
+			}
 			bottom, ok := f.mullBottom[int(d.Player)]
 			idx, missing := f.objIndices(d, bottom)
 			if !ok || missing != "" || len(idx) != d.Min {
@@ -485,11 +523,21 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		for i, o := range d.Options {
 			if o.Kind == want {
 				in.Choices = []int{i}
-				if m.Keep && len(m.Bottom) > 0 {
+				switch {
+				case m.Keep && len(m.Bottom) > 0:
 					if f.mullBottom == nil {
 						f.mullBottom = map[int][]int{}
 					}
 					f.mullBottom[m.Seat] = m.Bottom
+				case m.Keep && m.emptyHand():
+					// A keep with no cards in hand and no recorded bottom:
+					// the recorder cleared the tucked cards when Forge logged
+					// a no-op mulligan after the hand had already emptied.
+					// Bottom the whole hand at the bottoming ask.
+					if f.mullBottomAll == nil {
+						f.mullBottomAll = map[int]bool{}
+					}
+					f.mullBottomAll[m.Seat] = true
 				}
 				f.pos++
 				return in, true
@@ -1403,4 +1451,28 @@ func equalIDs(a, b []state.ObjID) bool {
 // opposed to a keep-or-mulligan one: its options are the cards of the hand.
 func isBottomingAsk(d *decision.Decision) bool {
 	return len(d.Options) > 0 && d.Options[0].Kind == "bottom"
+}
+
+// skipNoOpMulligan consumes the mulligan lines that changed nothing. Forge's
+// random-policy seat can answer "mulligan" after its hand has emptied:
+// AbstractMulligan.mulligan() returns without a redraw, a shuffle or an
+// increment, and Forge asks the seat again, writing one mull line per answer.
+// gorge's allowance is spent by then and offers only "keep", so such a line
+// has no gorge counterpart. The seat's recorded empty hand is the evidence;
+// the keep that follows (after any number of no-ops) answers gorge's ask.
+func (f *follower) skipNoOpMulligan(d *decision.Decision) bool {
+	if d == nil || d.Kind != decision.KMulligan || isBottomingAsk(d) {
+		return false
+	}
+	skipped := false
+	for f.pos < len(f.log.Entries) {
+		m := f.log.Entries[f.pos].Mull
+		if m == nil || m.Keep || !m.emptyHand() || m.Seat != int(d.Player) {
+			return skipped
+		}
+		f.res.SkippedMulls++
+		f.pos++
+		skipped = true
+	}
+	return skipped
 }
