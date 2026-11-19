@@ -10,6 +10,8 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 )
 
 // diagnosedHeader is the exact column order the register and the farm's
@@ -119,6 +121,11 @@ func checkDiagnosed(file, cardsDir string, w io.Writer) (int, error) {
 // that object is a token when the step activated or attacked with one. Both a
 // token script's own name and a copied card's name can be that object, so every
 // indexed name gets the token spelling too.
+//
+// It also accepts the engine names of sourceless triggered abilities (the CR
+// 702.179 speed trigger and the CR 725.2 monarch trigger): the farm's
+// report.py can attribute such a stack row to the designation the follower
+// prints, and no card carries that name.
 func diagnosedCardNames(cardsDir string) (map[string]bool, error) {
 	cards, err := diagnosedNames(filepath.Join(cardsDir, "cardsfolder"), false)
 	if err != nil {
@@ -135,6 +142,9 @@ func diagnosedCardNames(cardsDir string) (map[string]bool, error) {
 	}
 	for name := range tokens {
 		names["token:"+name] = true
+	}
+	for _, name := range oraclediff.SourcelessTriggerNames() {
+		names[name] = true
 	}
 	return names, nil
 }

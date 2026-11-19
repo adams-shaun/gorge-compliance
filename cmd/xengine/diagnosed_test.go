@@ -73,6 +73,20 @@ func TestDiagnosedCheckValid(t *testing.T) {
 	}
 }
 
+// TestDiagnosedCheckDesignation: a farm row can be attributed to a designation
+// whose inherent triggered abilities have no source (CR 725.2, The Monarch),
+// so the card column carries a name no corpus card has. The register accepts
+// the same names the stack comparer normalises.
+func TestDiagnosedCheckDesignation(t *testing.T) {
+	out, err := checkDiagnosedFile(t, "designation.tsv")
+	if err != nil {
+		t.Fatalf("designation register rejected: %v\n%s", err, out)
+	}
+	if out != "" {
+		t.Fatalf("designation register printed errors:\n%s", out)
+	}
+}
+
 func TestDiagnosedCheckRejects(t *testing.T) {
 	cases := []struct {
 		file    string
