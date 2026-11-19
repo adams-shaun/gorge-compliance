@@ -7,9 +7,10 @@
 // rules' runner decodes strictly). The mapping is kept in its own file so the
 // driver side can adjust it without touching the template:
 //
-//   - The k-th oracle line that is an ACTIVATED-ABILITY line maps to the k-th
-//     non-keyword AB$ in IR order, and that line's text before its first ": "
-//     is the prefix.
+//   - Each printed activated-ability line is paired with the non-keyword AB
+//     that spells the same printed cost (Cost$) and effect
+//     (SpellDescription), never by ordinal position: a face's A:AB$ order may
+//     differ from its Oracle line order (Ezuri, Renegade Leader).
 //   - A keyword-expanded AB (Equip, Cycling, Station, ...) maps to its
 //     keyword line's text ("Equip {2}"), found by the keyword's printed name.
 //   - A loyalty cost prints as XMage does ("+1", "-3", "0", "-X"), without
@@ -20,9 +21,8 @@
 //     Other faces retain their legacy cost-only mappings.
 //   - An injected basic-land-type mana ability with no printed line maps to
 //     XMage's "{T}: Add {C}." text.
-//   - When the two ordinal counts differ, a keyword line cannot be found, or
-//     two abilities still share a prefix, the mapping is ambiguous and the
-//     caller skips.
+//   - A line that matches no AB, more than one AB, or that leaves a
+//     non-intrinsic AB unmatched is ambiguous and the caller skips the face.
 package oraclegen
 
 import (
@@ -36,34 +36,30 @@ import (
 // XMageAbility maps every activated ability of f (by index into
 // f.Abilities) to the XMage rule-text prefix that selects it, or returns a
 // non-empty reason the whole face's mapping is ambiguous. A caller that only
-// needs one ability still fails closed for the face, because the ordinal
-// mapping is derived from the whole face.
+// needs one ability still fails closed for the face, because the pairing is
+// derived from the whole face.
 func XMageAbility(f *cards.Face) (map[int]string, string) {
 	lines := abilityLines(f.Oracle)
 	// Keyword-expanded activations can also have colon-bearing printed
 	// selector lines (Class: "{cost}: Level N"). They belong to that
-	// keyword AB, not to the ordinal list of ordinary activated abilities.
+	// keyword AB, not to the ordinary activated-ability lines paired below.
 	lines = removeKeywordAbilityLines(f, lines)
-	// An injected basic-land-type mana ability usually has no printed line (a
-	// dual land's second type), but a face whose Oracle prints "{T}: Add {B}."
-	// (the Gates) has one. Keep the intrinsic in the ordinal match when that is
-	// what makes the counts agree; drop it only when dropping it does.
-	nonKeyword := nonKeywordAbilities(f, true)
-	intrinsicHasLine := len(lines) == len(nonKeyword)
-	if !intrinsicHasLine {
-		nonKeyword = nonKeywordAbilities(f, false)
-	}
-	if len(lines) != len(nonKeyword) {
+	pairs, ok := pairAbilityLines(f, lines)
+	if !ok {
 		return nil, "activate xmage text ambiguous"
 	}
 	out := make(map[int]string, len(f.Abilities))
-	seen := make(map[string]bool)
-	// full and base live in the same {this}-rewritten text space, so a shared
-	// self-referential cost ("{T}, Sacrifice {this}") is seen as shared and an
-	// extension into the rule text never copies the printed name.
-	full := make([]string, len(nonKeyword))
-	base := make([]string, len(nonKeyword))
-	for k, i := range nonKeyword {
+	full := make([]string, len(pairs))
+	base := make([]string, len(pairs))
+	nonKeyword := make([]int, len(pairs))
+	mapped := make(map[int]bool, len(pairs))
+	for k, i := range pairs {
+		nonKeyword[k] = i
+		mapped[i] = true
+		// full and base live in the same {this}-rewritten text space, so a
+		// shared self-referential cost ("{T}, Sacrifice {this}") is seen as
+		// shared and an extension into the rule text never copies the printed
+		// name.
 		full[k] = xmageRuleLine(lines[k], f.Name)
 		base[k] = linePrefix(lines[k], f.Name)
 		if loyalty := loyaltyCost(f.Abilities[i].ParamStr(cards.PKCost)); loyalty != "" {
@@ -82,16 +78,17 @@ func XMageAbility(f *cards.Face) (map[int]string, string) {
 			base[k] = hdr + base[k]
 		}
 	}
-	// Ordinal matching excludes line-less intrinsics, but startsWith selection
-	// must include them. Assemble EVERY selectable line before extending any
-	// prefix, including keyword abilities, so insertion order cannot hide a
-	// conflict (Murmuring Bosk's printed {T} versus its Forest intrinsic).
+	// Keyword ABs and line-less intrinsic mana abilities are not in the
+	// printed-line pairing; append every selectable synthetic text now.
+	// Assemble EVERY selectable line before extending any prefix, including
+	// keyword abilities, so insertion order cannot hide a conflict (Murmuring
+	// Bosk's printed {T} versus its Forest intrinsic).
 	for i, sa := range f.Abilities {
-		if !sa.IsActivated() {
+		if !sa.IsActivated() || mapped[i] {
 			continue
 		}
 		var text string
-		if !intrinsicHasLine && intrinsicLandMana(sa) {
+		if intrinsicLandMana(sa) {
 			text = intrinsicManaText(sa)
 		} else if keyword := sa.ParamStr(cards.PKKeyword); keyword != "" {
 			var ok bool
@@ -106,12 +103,13 @@ func XMageAbility(f *cards.Face) (map[int]string, string) {
 		base = append(base, text)
 		full = append(full, text)
 	}
+	seen := make(map[string]bool, len(nonKeyword))
 	for k, i := range nonKeyword {
 		prefix := extendPrefix(base[k], full, k)
 		if conflictsWithOtherLine(prefix, k, full) || namesShortName(prefix[len(base[k]):], f.Name) {
 			return nil, "activate xmage text ambiguous"
 		}
-		if prefix == "" || seen[prefix] {
+		if prefix == "" || seen[prefix] || out[i] != "" {
 			return nil, "activate xmage text ambiguous"
 		}
 		seen[prefix] = true
@@ -130,6 +128,556 @@ func XMageAbility(f *cards.Face) (map[int]string, string) {
 	}
 	return out, ""
 }
+
+// pairAbilityLines pairs every printed activated-ability line with the
+// non-keyword AB that describes it. A face's A:AB$ order is not the Oracle
+// line order, so matching is by the printed cost and effect text, never by
+// ordinal position. An intrinsic basic-land mana ability may have no printed
+// line and is left for the synthetic-text path; every other unmatched AB, and
+// every line that does not match exactly one AB, makes the face ambiguous.
+func pairAbilityLines(f *cards.Face, lines []string) ([]int, bool) {
+	candidates := nonKeywordAbilities(f, true)
+	pairs := make([]int, len(lines))
+	used := make(map[int]bool, len(lines))
+	for k, line := range lines {
+		matches := abilitiesForLine(f, line, candidates)
+		if len(matches) != 1 {
+			return nil, false
+		}
+		ai := matches[0]
+		if used[ai] {
+			return nil, false
+		}
+		used[ai] = true
+		pairs[k] = ai
+	}
+	for _, ai := range candidates {
+		if !used[ai] && !intrinsicLandMana(f.Abilities[ai]) {
+			return nil, false
+		}
+	}
+	return pairs, true
+}
+
+// abilitiesForLine returns the candidates the line can describe. Printed cost
+// symbols are the primary key; a shared symbol set is narrowed by the
+// non-mana cost's printed words and then by the effect text. A line whose
+// symbols match nothing falls back to the effect alone, which serves Oracle
+// lines that spell alternative or compound costs in one line. More than one
+// remaining candidate is deliberately left ambiguous.
+func abilitiesForLine(f *cards.Face, line string, candidates []int) []int {
+	prefix := strings.ToLower(line)
+	if i := strings.Index(prefix, ": "); i >= 0 {
+		prefix = prefix[:i]
+	}
+	want := oracleCostSymbols(line)
+	var matches []int
+	for _, ai := range candidates {
+		if sameCostSymbols(want, forgeCostSymbols(f.Abilities[ai].ParamStr(cards.PKCost))) {
+			matches = append(matches, ai)
+		}
+	}
+	if len(matches) > 1 {
+		if narrowed := filterCostFeatures(f, matches, line, prefix); len(narrowed) > 0 {
+			matches = narrowed
+		}
+	}
+	if len(matches) > 1 {
+		if narrowed := filterEffects(f, matches, line); len(narrowed) > 0 {
+			matches = narrowed
+		}
+	}
+	if len(matches) == 0 {
+		matches = filterEffects(f, candidates, line)
+	}
+	return matches
+}
+
+// filterCostFeatures keeps the candidates whose non-mana Cost$ words are
+// spelled in the line's cost prefix. An empty result leaves the previous
+// candidate set in place: a feature spelling this matcher cannot derive must
+// not by itself turn a known cost match into a different pairing.
+func filterCostFeatures(f *cards.Face, candidates []int, line, prefix string) []int {
+	var out []int
+	for _, ai := range candidates {
+		if costFeaturesMatch(f.Abilities[ai], line, prefix) {
+			out = append(out, ai)
+		}
+	}
+	return out
+}
+
+// costFeaturesMatch reports whether every non-mana Cost$ token has a word in
+// the line's printed cost prefix. A token's printed description (the last
+// slash-separated payload part) is required in full; without one, any word of
+// its filter is enough. A line that prints non-mana cost text cannot match a
+// candidate with no non-mana Cost$ token at all.
+func costFeaturesMatch(sa *cards.SA, line, prefix string) bool {
+	features := forgeCostFeatures(sa.ParamStr(cards.PKCost))
+	if prefixHasCostText(line) && len(features) == 0 {
+		return false
+	}
+	for _, feature := range features {
+		head, desc, filter := feature[0], feature[1], feature[2]
+		if len(head) > 0 && !anyWordIn(prefix, head) {
+			return false
+		}
+		if len(desc) > 0 {
+			for _, word := range desc {
+				if !strings.Contains(prefix, word) {
+					return false
+				}
+			}
+		} else if len(filter) > 0 && !anyWordIn(prefix, filter) {
+			return false
+		}
+	}
+	return true
+}
+
+// filterEffects keeps the candidates whose SpellDescription describes the
+// line's effect text under effectMatches.
+func filterEffects(f *cards.Face, candidates []int, line string) []int {
+	var out []int
+	for _, ai := range candidates {
+		if effectMatches(line, abilityEffectText(f, ai), f.Name) {
+			out = append(out, ai)
+		}
+	}
+	return out
+}
+
+// abilityEffectText is the ability's printed effect, or the injected mana
+// ability's synthetic "Add {C}." text for an intrinsic with no printed line.
+func abilityEffectText(f *cards.Face, ai int) string {
+	sa := f.Abilities[ai]
+	if intrinsicLandMana(sa) {
+		return strings.TrimPrefix(intrinsicManaText(sa), "{T}: ")
+	}
+	return sa.ParamStr(cards.PKSpellDescription)
+}
+
+// lineEffectText is the text after the line's first ": ", including any
+// second colon a compound cost prints (Rasputin, the Oneiromancer's
+// "{T}: Remove ...: Add ...").
+func lineEffectText(line string) string {
+	i := strings.Index(line, ": ")
+	if i < 0 {
+		return ""
+	}
+	return line[i+2:]
+}
+
+// effectMatches reports whether desc spells the line's effect. Both sides are
+// normalised for {this}, card-name spelling, number words and common Oracle /
+// Forge wording differences. Equality, a whole-word suffix (a compound cost
+// may precede the effect), and a prefix are accepted; a prefix whose leftover
+// begins "or " is rejected because that is one printed line describing two
+// different ABs (Jinxed Choker, Cadaverous Bloom), which must stay ambiguous.
+func effectMatches(line, desc, name string) bool {
+	if desc == "" {
+		return true
+	}
+	want := normalizeXMageText(lineEffectText(line), name)
+	if strings.Contains(desc, "NICKNAME") && !strings.Contains(want, "{this}") {
+		want = normalizeNickname(want, name)
+	}
+	got := normalizeXMageText(desc, name)
+	if strings.TrimRight(want, ".,;:") == strings.TrimRight(got, ".,;:") {
+		return true
+	}
+	if strings.HasSuffix(want, " "+got) {
+		return true
+	}
+	if strings.HasPrefix(want, got) {
+		return !strings.HasPrefix(strings.TrimSpace(want[len(got):]), "or ")
+	}
+	return false
+}
+
+// normalizeXMageText puts an effect in the spelling both sides can share:
+// {this} for every printed name or Forge placeholder, lower case, collapsed
+// whitespace, number words as digits, and the hand-mapped Oracle/Forge word
+// differences. The alternatives in "add {G} or {W}" are sorted, because XMage
+// prints the card's own order and Forge may reverse it.
+func normalizeXMageText(text, name string) string {
+	text = stripReminder(strings.TrimSpace(text))
+	text = selfRef(text, name)
+	text = strings.ReplaceAll(text, "CARDNAME", "{this}")
+	text = strings.ReplaceAll(text, "NICKNAME", "{this}")
+	if short, _, ok := strings.Cut(name, ","); ok {
+		if short = strings.TrimSpace(short); short != "" {
+			text = strings.ReplaceAll(text, short, "{this}")
+		}
+	}
+	norm := strings.ToLower(strings.Join(strings.Fields(text), " "))
+	norm = strings.ReplaceAll(norm, "'s", "s")
+	norm = " " + norm + " "
+	for _, pair := range [][2]string{
+		{"gains", "get"}, {"gain", "get"}, {"gets", "get"},
+		{"amount", "number"}, {"that card", "it"},
+	} {
+		norm = strings.ReplaceAll(norm, " "+pair[0]+" ", " "+pair[1]+" ")
+	}
+	for _, pair := range numberWordPairs {
+		norm = strings.ReplaceAll(norm, " "+pair[0]+" ", " "+pair[1]+" ")
+	}
+	norm = strings.TrimSpace(norm)
+	return sortAddAlternatives(norm)
+}
+
+var addOrRE = regexp.MustCompile(`add (\{[^{}]+\}) or (\{[^{}]+\})`)
+
+// sortAddAlternatives orders a two-colour "add {X} or {Y}" alternative so the
+// printed order cannot hide the same effect.
+func sortAddAlternatives(s string) string {
+	return addOrRE.ReplaceAllStringFunc(s, func(m string) string {
+		sub := addOrRE.FindStringSubmatch(m)
+		if len(sub) != 3 {
+			return m
+		}
+		a, b := sub[1], sub[2]
+		if a > b {
+			a, b = b, a
+		}
+		return "add " + a + " or " + b
+	})
+}
+
+// normalizeNickname rewrites the longest word-prefix of a comma-less card's
+// name that appears in text to {this}. Forge uses NICKNAME where the Oracle
+// prints a short name that is not before a comma ("Crovax" for "Crovax the
+// Cursed"), and selfRef cannot derive it from the full name.
+func normalizeNickname(text, name string) string {
+	fields := strings.Fields(name)
+	for n := len(fields) - 1; n >= 1; n-- {
+		prefix := strings.Join(fields[:n], " ")
+		if prefix != "" && strings.Contains(strings.ToLower(text), strings.ToLower(prefix)) {
+			return selfRef(text, prefix)
+		}
+	}
+	return text
+}
+
+// numberWordPairs maps the English number words Forge spells to the digits the
+// Oracle uses ("mills ten cards" versus "mills 10 cards"). A slice, not a map,
+// so the replacement order is fixed even though the words do not overlap.
+var numberWordPairs = [][2]string{
+	{"one", "1"}, {"two", "2"}, {"three", "3"}, {"four", "4"},
+	{"five", "5"}, {"six", "6"}, {"seven", "7"}, {"eight", "8"},
+	{"nine", "9"}, {"ten", "10"}, {"eleven", "11"}, {"twelve", "12"},
+	{"thirteen", "13"}, {"fourteen", "14"}, {"fifteen", "15"},
+	{"sixteen", "16"}, {"seventeen", "17"}, {"eighteen", "18"},
+	{"nineteen", "19"}, {"twenty", "20"}, {"thirty", "30"},
+	{"forty", "40"}, {"fifty", "50"}, {"sixty", "60"},
+	{"seventy", "70"}, {"eighty", "80"}, {"ninety", "90"},
+	{"hundred", "100"},
+}
+
+// oracleCostSymbols extracts the mana and loyalty symbols from a line's cost
+// prefix. A brace whose content is not a mana symbol ({this}) is ignored.
+func oracleCostSymbols(line string) []string {
+	prefix := line
+	if i := strings.Index(prefix, ": "); i >= 0 {
+		prefix = prefix[:i]
+	}
+	var out []string
+	for _, m := range costBraceRE.FindAllStringSubmatch(prefix, -1) {
+		if sym, ok := oracleManaSymbol(m[1]); ok {
+			out = append(out, sym)
+		}
+	}
+	for _, m := range loyaltyBracketRE.FindAllStringSubmatch(prefix, -1) {
+		n := m[1]
+		switch {
+		case n == "X" || n == "-X":
+			out = append(out, "-X")
+		case n == "0" || n == "+0" || n == "-0":
+			out = append(out, "0")
+		case strings.HasPrefix(n, "-"):
+			out = append(out, n)
+		default:
+			out = append(out, "+"+strings.TrimPrefix(n, "+"))
+		}
+	}
+	return out
+}
+
+// forgeCostSymbols extracts the mana and loyalty symbols from a Forge Cost$
+// string. Non-symbol tokens (Sac<...>, PayLife<...>) are handled by
+// forgeCostFeatures; Waterbend<N> is a mana cost of N in XMage's rule text.
+func forgeCostSymbols(cost string) []string {
+	var out []string
+	for _, tok := range forgeCostTokens(cost) {
+		if sym, ok := forgeManaSymbol(tok); ok {
+			out = append(out, sym)
+			continue
+		}
+		if n, ok := loyaltyTokenCount(tok); ok {
+			switch {
+			case n == "X":
+				out = append(out, "-X")
+			case n == "0":
+				out = append(out, "0")
+			case strings.HasPrefix(tok, "SubCounter<"):
+				out = append(out, "-"+n)
+			default:
+				out = append(out, "+"+n)
+			}
+			continue
+		}
+		if strings.HasPrefix(tok, "Waterbend<") {
+			out = append(out, "{"+strings.TrimSuffix(strings.TrimPrefix(tok, "Waterbend<"), ">")+"}")
+		}
+	}
+	return out
+}
+
+// forgeCostFeatures returns one (head, description, filter) word list per
+// non-mana Cost$ token.
+func forgeCostFeatures(cost string) [][3][]string {
+	var out [][3][]string
+	for _, tok := range forgeCostTokens(cost) {
+		if _, ok := forgeManaSymbol(tok); ok {
+			continue
+		}
+		if _, ok := loyaltyTokenCount(tok); ok || strings.HasPrefix(tok, "XMin") {
+			continue
+		}
+		head, desc, filter := forgeCostFeatureWords(tok)
+		if len(head)+len(desc)+len(filter) > 0 {
+			out = append(out, [3][]string{head, desc, filter})
+		}
+	}
+	return out
+}
+
+// loyaltyTokenCount returns the counter count of a loyalty Cost$ token.
+func loyaltyTokenCount(tok string) (string, bool) {
+	for _, spec := range []struct{ prefix, sign string }{{"AddCounter<", "+"}, {"SubCounter<", "-"}} {
+		if strings.HasPrefix(tok, spec.prefix) && strings.HasSuffix(tok, "/LOYALTY>") {
+			return strings.TrimSuffix(strings.TrimPrefix(tok, spec.prefix), "/LOYALTY>"), true
+		}
+	}
+	return "", false
+}
+
+// forgeCostFeatureWords splits a Cost$ token's head and its <count/filter/
+// description> payload into the printed words a cost prefix can contain.
+func forgeCostFeatureWords(tok string) (head, desc, filter []string) {
+	rawHead, payload, _ := strings.Cut(tok, "<")
+	payload = strings.TrimSuffix(payload, ">")
+	head = costFeatureWords(rawHead)
+	parts := strings.Split(payload, "/")
+	if len(parts) >= 2 {
+		filter = costFeatureWords(parts[1])
+	}
+	if len(parts) >= 3 {
+		desc = costFeatureWords(parts[len(parts)-1])
+	}
+	return head, desc, filter
+}
+
+// costFeatureWords lower-cases a camelCase Forge word or filter and drops the
+// grammar and placeholder words that are not printed cost text.
+func costFeatureWords(text string) []string {
+	var b strings.Builder
+	for i, r := range text {
+		if i > 0 && r >= 'A' && r <= 'Z' {
+			b.WriteByte(' ')
+		}
+		b.WriteRune(r)
+	}
+	var out []string
+	for _, w := range strings.FieldsFunc(strings.ToLower(b.String()), func(r rune) bool {
+		return !(r >= 'a' && r <= 'z' || r >= '0' && r <= '9')
+	}) {
+		if !costFeatureWord(w) {
+			continue
+		}
+		out = append(out, w)
+	}
+	return out
+}
+
+// costFeatureWord filters placeholders, counts and grammar words out of a
+// Cost$ token's printed spelling.
+func costFeatureWord(w string) bool {
+	switch w {
+	case "xmin1", "xmin4", "xmin", "x", "cardname", "nickname", "youctrl",
+		"ctrl", "p1p1", "one", "two", "three", "four", "five", "six",
+		"seven", "eight", "nine", "ten", "s":
+		return false
+	}
+	if len(w) < 3 || strings.Trim(w, "0123456789") == "" {
+		return false
+	}
+	return true
+}
+
+// anyWordIn reports whether prefix contains any of words.
+func anyWordIn(prefix string, words []string) bool {
+	for _, w := range words {
+		if strings.Contains(prefix, w) {
+			return true
+		}
+	}
+	return false
+}
+
+// prefixHasCostText reports whether a line's cost prefix prints words beyond
+// its mana and loyalty symbols (a sacrifice, discard, tap or forge cost), so a
+// candidate with no corresponding non-mana Cost$ token cannot match it. Dash
+// headers ("Metalcraft — ") and pure alternatives ("{3}, {T} or {G}, {T}") do
+// not count.
+func prefixHasCostText(line string) bool {
+	prefix := line
+	if i := strings.Index(prefix, ": "); i >= 0 {
+		prefix = prefix[:i]
+	}
+	for _, sep := range []string{" — ", " - "} {
+		if i := strings.Index(prefix, sep); i > 0 {
+			prefix = prefix[i+len(sep):]
+		}
+	}
+	prefix = costBraceRE.ReplaceAllString(prefix, " ")
+	prefix = loyaltyBracketRE.ReplaceAllString(prefix, " ")
+	for _, w := range strings.FieldsFunc(strings.ToLower(prefix), func(r rune) bool {
+		return !(r >= 'a' && r <= 'z')
+	}) {
+		switch w {
+		case "or", "and", "then", "to":
+			continue
+		}
+		if len(w) >= 3 {
+			return true
+		}
+	}
+	return false
+}
+
+// sameCostSymbols compares two symbol lists as multisets: Forge and Oracle
+// spell the same cost in a different order ("T G" versus "{G}, {T}").
+func sameCostSymbols(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	counts := make(map[string]int, len(a))
+	for _, s := range a {
+		counts[s]++
+	}
+	for _, s := range b {
+		counts[s]--
+	}
+	for _, n := range counts {
+		if n != 0 {
+			return false
+		}
+	}
+	return true
+}
+
+// forgeCostTokens splits a Forge Cost$ string on whitespace, keeping a
+// token's <...> payload (which may itself contain spaces) together.
+func forgeCostTokens(cost string) []string {
+	var out []string
+	depth, start := 0, -1
+	for i, r := range cost {
+		switch r {
+		case '<':
+			depth++
+		case '>':
+			if depth > 0 {
+				depth--
+			}
+		case ' ', '\t':
+			if depth == 0 {
+				if start >= 0 {
+					out = append(out, cost[start:i])
+					start = -1
+				}
+				continue
+			}
+		}
+		if start < 0 {
+			start = i
+		}
+	}
+	if start >= 0 {
+		out = append(out, cost[start:])
+	}
+	return out
+}
+
+// forgeManaSymbol renders one bare Forge cost token as XMage's braces, or
+// reports false for a token that is not a mana symbol. Forge spells a hybrid
+// or Phyrexian symbol as two letters ("RW", "GP", "2B").
+func forgeManaSymbol(tok string) (string, bool) {
+	if tok == "" {
+		return "", false
+	}
+	if strings.Trim(tok, "0123456789") == "" {
+		return "{" + tok + "}", true
+	}
+	if len(tok) == 1 && strings.Contains("WUBRGCSXQTP", tok) {
+		return "{" + tok + "}", true
+	}
+	if len(tok) == 2 {
+		switch {
+		case strings.Contains("WUBRG", tok[:1]) && strings.Contains("WUBRG", tok[1:]):
+			return "{" + tok[:1] + "/" + tok[1:] + "}", true
+		case tok[0] == '2' && strings.Contains("WUBRG", tok[1:]):
+			return "{2/" + tok[1:] + "}", true
+		case strings.Contains("WUBRG", tok[:1]) && tok[1] == 'P':
+			return "{" + tok[:1] + "/P}", true
+		}
+	}
+	if strings.Count(tok, "/") == 1 {
+		return oracleManaSymbol(tok)
+	}
+	return "", false
+}
+
+// oracleManaSymbol renders a brace-enclosed printed symbol, or reports false
+// when the brace is a placeholder ({this}) rather than mana.
+func oracleManaSymbol(tok string) (string, bool) {
+	if tok == "" {
+		return "", false
+	}
+	if strings.Trim(tok, "0123456789") == "" {
+		return "{" + tok + "}", true
+	}
+	if strings.Count(tok, "/") == 1 {
+		left, right, _ := strings.Cut(tok, "/")
+		l, lok := oracleManaSide(left)
+		r, rok := oracleManaSide(right)
+		if lok && rok {
+			return "{" + strings.ToUpper(l) + "/" + strings.ToUpper(r) + "}", true
+		}
+		return "", false
+	}
+	if len(tok) == 1 && strings.Contains("WUBRGCSXQTP", strings.ToUpper(tok)) {
+		return "{" + strings.ToUpper(tok) + "}", true
+	}
+	return "", false
+}
+
+// oracleManaSide validates one half of a hybrid or Phyrexian printed symbol.
+func oracleManaSide(s string) (string, bool) {
+	if strings.Trim(s, "0123456789") == "" {
+		return s, true
+	}
+	if len(s) == 1 && strings.Contains("WUBRGCSXQTP", strings.ToUpper(s)) {
+		return s, true
+	}
+	return "", false
+}
+
+// costBraceRE and loyaltyBracketRE find a line's printed cost symbols.
+var (
+	costBraceRE      = regexp.MustCompile(`\{([^{}]+)\}`)
+	loyaltyBracketRE = regexp.MustCompile(`\[([+-]?(?:[0-9]+|X))\]`)
+)
 
 // loyaltyCost renders Forge's bracketed loyalty counter cost as XMage's
 // printed cost. Empty means this is not a loyalty cost.
