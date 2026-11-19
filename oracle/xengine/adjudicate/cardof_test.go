@@ -35,4 +35,26 @@ func TestCardOfSkipsLeftSourceLabel(t *testing.T) {
 	if got := cardOf(it, f); got != "" {
 		t.Fatalf("cardOf = %q, want no card", got)
 	}
+	// A sourceless trigger (CR 725.2) is not a card either. The Grave
+	// Venerations row in diagnosed.tsv has exactly this shape: the empty
+	// source must be skipped without swallowing the separator and the label
+	// that follows it.
+	f.Gorge = "[ability:@p0, ability:Grave Venerations@p0]"
+	f.Other = f.Gorge
+	if got := cardOf(it, f); got != "Grave Venerations" {
+		t.Fatalf("cardOf = %q, want Grave Venerations", got)
+	}
+	// Both non-card labels before the real object: the left-battlefield
+	// stand-in, then a sourceless trigger, then the card the scan must name.
+	f.Gorge = "[ability:<left-battlefield>@p1, ability:@p0, ability:Real Card@p0]"
+	f.Other = f.Gorge
+	if got := cardOf(it, f); got != "Real Card" {
+		t.Fatalf("cardOf = %q, want Real Card", got)
+	}
+	// A lone sourceless trigger names no card, so no sentinel ticket.
+	f.Gorge = "[ability:@p0]"
+	f.Other = f.Gorge
+	if got := cardOf(it, f); got != "" {
+		t.Fatalf("cardOf = %q, want no card", got)
+	}
 }

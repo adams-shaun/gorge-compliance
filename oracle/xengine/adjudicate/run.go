@@ -290,25 +290,30 @@ func clusters(fs []Finding) []Cluster {
 }
 
 var (
-	permName  = regexp.MustCompile(`c\d+ o\d+ (.+?) \[`)
-	stackName = regexp.MustCompile(`(?:ability|spell):(.+?)@`)
+	permName = regexp.MustCompile(`c\d+ o\d+ (.+?) \[`)
+	// The source group must be able to match empty: a sourceless trigger
+	// renders as ability:@pN (CR 725.2), and a lazy .+? would swallow the @
+	// separator and the next label, naming a non-card.
+	stackName = regexp.MustCompile(`(?:ability|spell):([^@]*)@`)
 )
 
 // cardOf names the card of the diverging step: the card cast or activated.
 // A step with no card (a pass during which a trigger fired) falls back to the
 // first stack object or non-token permanent the diverging values name, the
-// trigger's source. The comparator's left-battlefield stand-in is skipped: it
-// labels a source that left the battlefield (CR 113.7a, 603.10a), so it is a
-// display value rather than a card, and the next object is the attribution.
+// trigger's source. Two labels are not cards and are skipped: a sourceless
+// trigger's empty source (CR 725.2), and the comparator's left-battlefield
+// stand-in, which labels a source that left the battlefield (CR 113.7a,
+// 603.10a). The scan continues, so the next object is the attribution.
 func cardOf(item oraclegen.Item, f classify.Finding) string {
 	if f.Step >= 0 && f.Step < len(item.Steps) && item.Steps[f.Step].Card != "" {
 		return item.Steps[f.Step].Card
 	}
 	for _, v := range []string{f.Gorge, f.Other} {
 		for _, m := range stackName.FindAllStringSubmatch(v, -1) {
-			if m[1] != "" && !oraclediff.IsLeftSourceLabel(m[1]) {
-				return m[1]
+			if m[1] == "" || oraclediff.IsLeftSourceLabel(m[1]) {
+				continue
 			}
+			return m[1]
 		}
 		for _, m := range permName.FindAllStringSubmatch(v, -1) {
 			if m[1] != "token" {
