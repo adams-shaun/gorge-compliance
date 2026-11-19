@@ -21,8 +21,12 @@
 //     Other faces retain their legacy cost-only mappings.
 //   - An injected basic-land-type mana ability with no printed line maps to
 //     XMage's "{T}: Add {C}." text.
-//   - A line that matches no AB, more than one AB, or that leaves a
-//     non-intrinsic AB unmatched is ambiguous and the caller skips the face.
+//   - Matching is a bijection: distinct lines map to distinct ABs, so a line
+//     left with one unused candidate is forced to it, and a line whose wording
+//     derives no candidate is paired when exactly one line and one
+//     non-intrinsic AB remain (the only possible pairing). A line that still
+//     matches no AB, more than one AB, or that leaves a non-intrinsic AB
+//     unmatched is ambiguous and the caller skips the face.
 package oraclegen
 
 import (
@@ -134,22 +138,69 @@ func XMageAbility(f *cards.Face) (map[int]string, string) {
 // line order, so matching is by the printed cost and effect text, never by
 // ordinal position. An intrinsic basic-land mana ability may have no printed
 // line and is left for the synthetic-text path; every other unmatched AB, and
-// every line that does not match exactly one AB, makes the face ambiguous.
+// every line that is left ambiguous, makes the face ambiguous.
 func pairAbilityLines(f *cards.Face, lines []string) ([]int, bool) {
 	candidates := nonKeywordAbilities(f, true)
-	pairs := make([]int, len(lines))
-	used := make(map[int]bool, len(lines))
+	sets := make([][]int, len(lines))
 	for k, line := range lines {
-		matches := abilitiesForLine(f, line, candidates)
-		if len(matches) != 1 {
+		sets[k] = abilitiesForLine(f, line, candidates)
+	}
+	pairs := make([]int, len(lines))
+	for k := range pairs {
+		pairs[k] = -1
+	}
+	used := make(map[int]bool, len(lines))
+	// Distinct lines cannot claim the same AB, so a line with exactly one
+	// unused candidate is forced to it. Repeating the pass is what makes a
+	// cost/effect wording gap harmless: once the other lines are fixed, the
+	// gap line is the only one left for the remaining AB.
+	for progress := true; progress; {
+		progress = false
+		for k := range lines {
+			if pairs[k] >= 0 {
+				continue
+			}
+			ai, n := -1, 0
+			for _, c := range sets[k] {
+				if !used[c] {
+					ai, n = c, n+1
+				}
+			}
+			if n == 1 {
+				pairs[k] = ai
+				used[ai] = true
+				progress = true
+			}
+		}
+	}
+	// A line whose wording derives no candidate at all can still be paired
+	// when the bijection leaves it alone: one printed line and one
+	// non-intrinsic AB remain, so no other pairing exists (Goblin Polka Band's
+	// Forge cost spells the per-target {R} as X). This is not extended to a
+	// line whose candidates were all claimed by other lines: that is a real
+	// conflict, not an elimination.
+	last := -1
+	for k := range lines {
+		if pairs[k] >= 0 {
+			continue
+		}
+		if last >= 0 {
 			return nil, false
 		}
-		ai := matches[0]
-		if used[ai] {
+		last = k
+	}
+	if last >= 0 {
+		var free []int
+		for _, ai := range candidates {
+			if !used[ai] && !intrinsicLandMana(f.Abilities[ai]) {
+				free = append(free, ai)
+			}
+		}
+		if len(free) != 1 || len(sets[last]) != 0 {
 			return nil, false
 		}
-		used[ai] = true
-		pairs[k] = ai
+		pairs[last] = free[0]
+		used[free[0]] = true
 	}
 	for _, ai := range candidates {
 		if !used[ai] && !intrinsicLandMana(f.Abilities[ai]) {
@@ -322,11 +373,21 @@ func normalizeXMageText(text, name string) string {
 	for _, pair := range numberWordPairs {
 		norm = strings.ReplaceAll(norm, " "+pair[0]+" ", " "+pair[1]+" ")
 	}
+	// Forge prints a type-restricted mana effect's list as "Dragon or Omen
+	// spell" where the Oracle repeats the noun ("Dragon spell or an Omen
+	// spell"). Collapse both spellings to the Forge form.
+	norm = spellListRE.ReplaceAllString(norm, "$1 or $2 spell")
+	// Forge also keeps a stale sentence period inside a mana alternative
+	// ("Add {W}. or {U}.") where the Oracle has none.
+	norm = strings.ReplaceAll(norm, ". or ", " or ")
 	norm = strings.TrimSpace(norm)
 	return sortAddAlternatives(norm)
 }
 
-var addOrRE = regexp.MustCompile(`add (\{[^{}]+\}) or (\{[^{}]+\})`)
+var (
+	addOrRE     = regexp.MustCompile(`add (\{[^{}]+\}) or (\{[^{}]+\})`)
+	spellListRE = regexp.MustCompile(`\b([a-z]+) spell or (?:an? )?([a-z]+) spell\b`)
+)
 
 // sortAddAlternatives orders a two-colour "add {X} or {Y}" alternative so the
 // printed order cannot hide the same effect.
