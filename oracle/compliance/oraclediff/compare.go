@@ -598,6 +598,12 @@ func stackKeysOf(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm) strin
 // longer on the battlefield.
 const leftSourceLabel = "<left-battlefield>"
 
+// IsLeftSourceLabel reports whether name is the comparator's stand-in for the
+// source of an ability whose source has left the battlefield. It is a display
+// value, not a card or object name: a consumer that attributes a divergence to
+// a card must skip it and use the next object the values name.
+func IsLeftSourceLabel(name string) bool { return name == leftSourceLabel }
+
 // leftSourceItems is the set of stack indexes, in gorge's stack st, holding an
 // ability whose source ref names nothing on the battlefield perms. An ability
 // exists independently of its source (CR 113.7a) and is built from the source
