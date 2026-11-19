@@ -84,8 +84,7 @@
      "eq": 0
     }
    ],
-   "xmage": "ShuffleTriggeredTest#testWidespreadPanicDoesTrigger",
-   "known_bug": "XP[trig-mode-shuffled-unsupported]: Widespread Panic's T:Mode$ Shuffled has no entry in triggerModeNames, so checkFaceTriggers never queues it and Untamed Wilds' shuffle never makes p0 put a card on top (observed p0 hand Silvercoat Lion 1, want 0). CR 701.24 / 603.2. verified at gorge 08fc227a61."
+   "xmage": "ShuffleTriggeredTest#testWidespreadPanicDoesTrigger"
   },
   {
    "name": "test-widespread-panic-does-not-trigger-if-opponent-shuffles-players-library",
