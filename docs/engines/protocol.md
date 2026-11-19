@@ -104,6 +104,7 @@ Each line of the request file is one JSON object:
 | `gorge_decisions` | Every choice gorge made while replaying the item. You answer your engine's prompts from these |
 | `abilities` | For each step with an `ability_index`, the Forge script line of that ability. Useful if your engine reads Forge scripts; otherwise use `neutral` |
 | `neutral` | Engine-neutral identities of the abilities, tokens and modes the item names. See [neutral](#neutral) |
+| `attack_window_passes` | Only for a `SkipsEmptyAttackStep` follower, and only when there are some: the indices of the steps gorge plays as passes in a declare attackers step in which no creature attacks. If your engine is already at end of combat on such a step (it gave no priority in declare attackers, CR 508.1, 117.3a: nothing could attack, or no attacker was declared), do nothing for it and write the checkpoint as it stands. The comparison steps over the window and resumes at end of combat |
 
 ### Kinds of item
 
@@ -472,7 +473,7 @@ driver without that quirk.
 | `TurnCapMsg` | The start of the driver's turn-cap harness message (class `turn_cap`) |
 | `CastModes` | The `cast_mode` values the driver can act on. `nil` means all |
 | `SkipsDamageStep` | The engine skips the combat damage step when no creature is left in combat |
-| `SkipsEmptyAttackStep` | The engine goes from beginning of combat to end of combat, with no declare attackers priority, when no creature can attack |
+| `SkipsEmptyAttackStep` | The engine goes from beginning of combat to end of combat, with no declare attackers priority, when no creature can attack. follower-export marks gorge's passes in such a step (`attack_window_passes`); a driver that stands still on them is compared on past it (`stepped_over` in the verdict) |
 | `StopsInCleanup` | The engine gives priority in the cleanup step after an end-the-turn effect |
 | `TrailingMisses` | The engine asks a cleanup discard or optional trigger after the item's last step; such a miss alone isn't `decision_shape` |
 | `TapsWithCast` | The driver taps mana and casts within one priority out of turn |
