@@ -87,11 +87,12 @@ func resolveExisting(p string) string {
 }
 
 // WriteRepro writes the repro directory of f into dir (which Dir names):
-// scenario.json (the item cut after the diverging step, ids unchanged),
-// input.jsonl (that scenario as the one-line follower input), gorge.json and
-// <engine>.json (both results cut to the checkpoints the scenario has),
-// verdict.json and REPRO.md. A lower_gap finding has no follower and no
-// gorge result: it gets the scenario, the verdict and REPRO.md only.
+// scenario.json (the item cut after the diverging step, plus the answer-bearing
+// steps a borrow can read, ids unchanged), input.jsonl (that scenario as the
+// one-line follower input), gorge.json and <engine>.json (both results cut to
+// the checkpoints the scenario has), verdict.json and REPRO.md. A lower_gap
+// finding has no follower and no gorge result: it gets the scenario, the
+// verdict and REPRO.md only.
 func WriteRepro(dir string, f Finding, item lower.Lowered, g rules.OracleResult, x oraclediff.XResult) error {
 	return WriteReproFrom(dir, f, item, g, x, Origin{})
 }
@@ -129,16 +130,40 @@ func WriteReproFrom(dir string, f Finding, item lower.Lowered, g rules.OracleRes
 	return os.WriteFile(filepath.Join(dir, "REPRO.md"), []byte(reproMD(dir, f, o)), 0o644)
 }
 
-// Truncate cuts the item to steps [0, f.Step]. A finding with no checkpoint,
-// and one whose step is not known, keeps every step; the setup checkpoint
-// keeps the first step (a scenario needs one).
+// Truncate cuts the item to steps [0, f.Step], plus every later step that
+// scripts answers (see keepBorrowedAnswers). A finding with no checkpoint, and
+// one whose step is not known, keeps every step; the setup checkpoint keeps the
+// first step (a scenario needs one).
 func Truncate(it oraclegen.Item, f Finding) oraclegen.Item {
 	n := len(it.Steps)
 	if f.Checkpoint != "" {
 		n = min(max(f.Step+1, 1), n)
+		if f.Step >= 0 {
+			n = keepBorrowedAnswers(it, n)
+		}
 	}
 	it.CutSteps(n)
 	return it
+}
+
+// keepBorrowedAnswers extends a cut at n through the LAST step after it that
+// scripts answers. A step's checkpoint can answer an ask from the first later
+// step that scripts any: gorge's settleResolutionAsk answers the asks a pass's
+// resolution poses (CR 608.2c) and settleTriggerAsks a trigger-order or
+// triggered-cost ask left pending, each borrowing steps[j].Answers and leaving
+// the remainder owed to step j (oracle_settle_resolution.go, oracle_run.go).
+// Cutting strictly before that step leaves nothing to borrow, so the replay
+// takes the harness fallback and its decisions differ from the play's. Keeping
+// every answer-carrying step means each kept step's borrow finds the same
+// source it did in the play (the last one is the furthest a borrow can reach);
+// only the steps after the last one are cut.
+func keepBorrowedAnswers(it oraclegen.Item, n int) int {
+	for j := len(it.Steps) - 1; j >= n; j-- {
+		if len(it.Steps[j].Answers) > 0 {
+			return j + 1
+		}
+	}
+	return n
 }
 
 // keepSnapshots is how many leading snapshots f's checkpoint ends at (all of
@@ -215,7 +240,7 @@ func reproMD(dir string, f Finding, o Origin) string {
 	run := fl.Runner
 	in := filepath.Join(abs, "input.jsonl")
 	rerun := filepath.Join(abs, f.Engine+".rerun.jsonl")
-	b.WriteString("Re-run the follower on this one scenario (the item cut after the diverging step):\n\n```\n")
+	b.WriteString("Re-run the follower on this one scenario (the item cut after the diverging step, plus any later step whose answers its resolution borrows):\n\n```\n")
 	if fl.Prep == followers.PrepForgeExport {
 		// forge-oracle-run.sh reads Forge requests, which carry gorge's decisions.
 		req := filepath.Join(abs, "forge.request.jsonl")
