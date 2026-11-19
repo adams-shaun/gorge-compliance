@@ -9,6 +9,7 @@ package dside
 import (
 	"errors"
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -338,3 +339,102 @@ func (r *Row) classify(res oracle.Result, m *oracle.Matchup) {
 
 // NoTables reports whether err says the dirac tables are not built.
 func NoTables(err error) bool { return errors.Is(err, cardset.ErrNoTables) }
+
+// MaxInteractionSwaps bounds the cards SwapRefusedInteraction replaces in one game.
+const MaxInteractionSwaps = 4
+
+// InteractionSwap is one interaction-refused card of a set pair replaced by a basic
+// land: Count copies of Card in seat Seat's deck became Basic (swaps.jsonl records
+// each). Reason is the refusal the swap answered.
+type InteractionSwap struct {
+	Seat   int    `json:"seat"`
+	Card   string `json:"card"`
+	Basic  string `json:"basic"`
+	Reason string `json:"reason"`
+	Count  int    `json:"count"`
+}
+
+// SwapRefusedInteraction is pair with the cards the set code's table refuses as an
+// interaction (cardset.InteractionRefusal: each card plays alone, the two together
+// stall the game at its start) replaced by basics of the deck's colours, and each
+// swap. Every round asks the table whether the pair is held (the matchup Lockstep
+// builds, without playing); on an interaction refusal naming cards it replaces, in the
+// seat holding it fewer times, every copy of the named card the pair holds fewest
+// times, then asks again, at most MaxInteractionSwaps times. The choice reads the
+// pair alone, so a seed reproduces it. A pair that is held, refused for no named
+// card or any other reason, or still refused after the last swap comes back as dealt,
+// with no swaps: Lockstep then reads it not_applicable as before. An error is only a
+// table that cannot be had (NoTables).
+func (t *Tables) SwapRefusedInteraction(code string, pair [2]decks.Deck) ([2]decks.Deck, []InteractionSwap, error) {
+	set, err := t.Table(code)
+	if err != nil {
+		return pair, nil, err
+	}
+	plays := set.Supported()
+	playable := func(n string) bool { i, ok := set.Lookup(n); return ok && plays[i] }
+	cur := pair
+	var swaps []InteractionSwap
+	for round := 0; ; round++ {
+		_, _, _, err := set.Matchup(entries(cur[0]), entries(cur[1]))
+		var ref *cardset.InteractionRefusal
+		if err == nil {
+			return cur, swaps, nil
+		}
+		if !errors.As(err, &ref) || round >= MaxInteractionSwaps {
+			return pair, nil, nil
+		}
+		card, seat, ok := fewestNamed(cur, ref.Cards)
+		if !ok {
+			return pair, nil, nil
+		}
+		basics := decks.BasicsOf(cur[seat].Colours, playable)
+		if len(basics) == 0 {
+			return pair, nil, nil
+		}
+		nd := cur[seat]
+		nd.Cards = append([]string(nil), nd.Cards...)
+		n := 0
+		got := make([]int, len(basics))
+		for j, c := range nd.Cards {
+			if c == card {
+				nd.Cards[j] = basics[n%len(basics)]
+				got[n%len(basics)]++
+				n++
+			}
+		}
+		sort.Strings(nd.Cards)
+		cur[seat] = nd
+		for i, k := range got {
+			if k > 0 {
+				swaps = append(swaps, InteractionSwap{Seat: seat, Card: card, Basic: basics[i], Reason: "interaction " + ref.Reason, Count: k})
+			}
+		}
+	}
+}
+
+// fewestNamed is the card of names the pair holds fewest times (the first of a tie, in
+// names' order) and the seat holding it fewer times (seat 0 on a tie); !ok when the
+// pair holds none of them.
+func fewestNamed(pair [2]decks.Deck, names []string) (card string, seat int, ok bool) {
+	best := 0
+	for _, n := range names {
+		var per [2]int
+		for i, d := range pair {
+			for _, c := range d.Cards {
+				if c == n {
+					per[i]++
+				}
+			}
+		}
+		total := per[0] + per[1]
+		if total == 0 || (ok && total >= best) {
+			continue
+		}
+		card, best, ok = n, total, true
+		seat = 0
+		if per[0] == 0 || (per[1] > 0 && per[1] < per[0]) {
+			seat = 1
+		}
+	}
+	return card, seat, ok
+}

@@ -220,6 +220,18 @@ type Swap struct {
 // basicOf is the basic land that taps for each colour letter.
 var basicOf = map[rune]string{'W': "Plains", 'U': "Island", 'B': "Swamp", 'R': "Mountain", 'G': "Forest"}
 
+// BasicsOf is the basic lands of colours (letters, WUBRG order) that plays accepts,
+// in colour order.
+func BasicsOf(colours string, plays func(name string) bool) []string {
+	var basics []string
+	for _, l := range colours {
+		if b, ok := basicOf[l]; ok && plays(b) {
+			basics = append(basics, b)
+		}
+	}
+	return basics
+}
+
 // SwapRefused returns ds with every card the table refuses (plays(name) false)
 // replaced by a basic land of the deck's colour identity, the commander kept and
 // the cards re-sorted, as dirac's own pool decks replace "kernel-refused copies
@@ -232,12 +244,7 @@ func SwapRefused(ds []Deck, plays func(name string) bool) ([]Deck, []Swap) {
 	var swaps []Swap
 	out := make([]Deck, len(ds))
 	for i, d := range ds {
-		var basics []string
-		for _, l := range d.Colours {
-			if b, ok := basicOf[l]; ok && plays(b) {
-				basics = append(basics, b)
-			}
-		}
+		basics := BasicsOf(d.Colours, plays)
 		nd := d
 		nd.Cards = append([]string(nil), d.Cards...)
 		sort.Strings(nd.Cards)

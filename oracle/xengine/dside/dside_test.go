@@ -1,8 +1,11 @@
 package dside
 
 import (
+	"errors"
+	"slices"
 	"testing"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/dirac/cardset"
@@ -222,5 +225,101 @@ func TestCommanderLockstepRefusesForeignDeck(t *testing.T) {
 	row, script := tables.CommanderLockstep("xe:CMDR:0:1", [2]decks.Deck{foreign, pair[0]}, 1, 4)
 	if row.Status != StatusNA || row.Reason == "" || script != nil {
 		t.Errorf("foreign deck: %+v", row)
+	}
+}
+
+// otjRefusedPair is the first OTJ pair of the sweep's own deal that the table turns
+// away as an interaction with a card of name in it, and that error.
+func otjRefusedPair(t *testing.T, tables *Tables, name string) ([2]decks.Deck, *cardset.InteractionRefusal) {
+	t.Helper()
+	cands, _, err := decks.Candidates(tables.reg, "../../compliance/manifests", "OTJ")
+	if err != nil {
+		t.Skip(err)
+	}
+	cands, err = tables.Playable("OTJ", cands)
+	if NoTables(err) {
+		t.Skip(err)
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	set, err := tables.Table("OTJ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for g := 0; g < 300; g++ {
+		p := decks.Pair(cands, cov.New(), "OTJ", 0, g, 1)
+		_, _, _, err := set.Matchup(entries(p[0]), entries(p[1]))
+		var ref *cardset.InteractionRefusal
+		if errors.As(err, &ref) && slices.Contains(ref.Cards, name) {
+			return p, ref
+		}
+	}
+	t.Skipf("no OTJ pair of 300 is refused with %s at this pin", name)
+	return [2]decks.Deck{}, nil
+}
+
+// TestSwapRefusedInteraction: a pair the OTJ table refuses for Archangel of Tithes
+// beside another card has the named card swapped for a basic of its deck, and
+// Lockstep then plays it instead of reading it not_applicable.
+func TestSwapRefusedInteraction(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	tables := NewTables(reg)
+	pair, ref := otjRefusedPair(t, tables, "Archangel of Tithes")
+	if row, _ := tables.Lockstep("g", "OTJ", pair, 1, game.DefaultMaxTurns); row.Status != StatusNA {
+		t.Fatalf("the dealt pair reads %s, want not_applicable (%s)", row.Status, ref)
+	}
+	got, swaps, err := tables.SwapRefusedInteraction("OTJ", pair)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(swaps) == 0 || len(swaps) > MaxInteractionSwaps {
+		t.Fatalf("swaps %v, want 1..%d", swaps, MaxInteractionSwaps)
+	}
+	for _, s := range swaps {
+		if s.Reason != "interaction "+ref.Reason || s.Count < 1 || !slices.Contains(ref.Cards, s.Card) {
+			t.Errorf("swap %+v does not answer %s", s, ref)
+		}
+		if !slices.Contains(got[s.Seat].Cards, s.Basic) || slices.Contains(got[s.Seat].Cards, s.Card) {
+			t.Errorf("swap %+v: seat %d deck %v", s, s.Seat, got[s.Seat].Cards)
+		}
+	}
+	for i := range got {
+		if len(got[i].Cards) != len(pair[i].Cards) || !slices.IsSorted(got[i].Cards) {
+			t.Errorf("seat %d: %d cards sorted=%v, was %d", i, len(got[i].Cards), slices.IsSorted(got[i].Cards), len(pair[i].Cards))
+		}
+	}
+	if row, _ := tables.Lockstep("g", "OTJ", got, 1, game.DefaultMaxTurns); row.Status == StatusNA {
+		t.Errorf("the swapped pair is still not_applicable: %s", row.Reason)
+	}
+	again, swaps2, _ := tables.SwapRefusedInteraction("OTJ", pair)
+	if !slices.Equal(swaps, swaps2) || !slices.Equal(again[0].Cards, got[0].Cards) || !slices.Equal(again[1].Cards, got[1].Cards) {
+		t.Error("the swap is not a pure function of the pair")
+	}
+	// A held pair has nothing to swap.
+	if h, none, _ := tables.SwapRefusedInteraction("OTJ", got); len(none) != 0 || !slices.Equal(h[0].Cards, got[0].Cards) {
+		t.Errorf("a held pair swapped %v", none)
+	}
+}
+
+func TestFewestNamed(t *testing.T) {
+	d := func(cs ...string) decks.Deck { return decks.Deck{Cards: cs} }
+	for _, c := range []struct {
+		pair  [2]decks.Deck
+		names []string
+		card  string
+		seat  int
+		ok    bool
+	}{
+		{[2]decks.Deck{d("A", "A", "B"), d("C")}, []string{"A", "B", "C"}, "B", 0, true},
+		{[2]decks.Deck{d("A", "B"), d("A", "A")}, []string{"A", "B"}, "B", 0, true},
+		{[2]decks.Deck{d("A", "A"), d("A")}, []string{"A"}, "A", 1, true},
+		{[2]decks.Deck{d("X"), d("A", "B")}, []string{"B", "A"}, "B", 1, true}, // a tie: names' order
+		{[2]decks.Deck{d("X"), d("Y")}, []string{"A"}, "", 0, false},
+	} {
+		card, seat, ok := fewestNamed(c.pair, c.names)
+		if card != c.card || seat != c.seat || ok != c.ok {
+			t.Errorf("%v %v: %q seat %d %v, want %q seat %d %v", c.pair, c.names, card, seat, ok, c.card, c.seat, c.ok)
+		}
 	}
 }
