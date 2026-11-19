@@ -309,7 +309,7 @@ func TestPrefixesPlotCast(t *testing.T) {
 			},
 		},
 	}
-	got, ref := prefixes(reg, it)
+	got, ref := prefixes(reg, it, rules.OracleResult{})
 	if ref != nil {
 		t.Fatalf("prefixes refused: %+v", ref)
 	}
@@ -325,6 +325,44 @@ func TestPrefixesPlotCast(t *testing.T) {
 	}
 	if got[2] != "" {
 		t.Errorf("ordinary cast step prefix = %q, want empty", got[2])
+	}
+}
+
+// TestPrefixesGrantedAbility: an activate step that names a granted ability by
+// its engine label resolves through the shared grant resolver and carries that
+// ability's own XMage prefix, not the printed index's "{T}" mana text. This is
+// the XMage half of xe:RAND:1:4:w14 step 8.
+func TestPrefixesGrantedAbility(t *testing.T) {
+	const card = "Dalakos, Crafter of Wonders"
+	const label = card + ": CARDNAME gets +1/+0 until end of turn."
+	reg := testutil.CorpusRegistry(t)
+	zero := 0
+	it := oraclegen.Item{
+		ID: "xe:test:dalakos-granted",
+		Scenario: oraclegen.Scenario{
+			Setup: map[string]oraclegen.Seat{"p0": {
+				Battlefield:      []string{"Island", "Mountain", card, "Dragon Mantle"},
+				TappedAfterUntap: []string{card},
+				Attached:         []oraclegen.SetupAttach{{Card: "Dragon Mantle", To: "p0:" + card}},
+				Library:          []string{"Plains", "Plains", "Plains", "Plains", "Plains"},
+			}},
+			Steps: []oraclegen.Step{
+				{Op: "activate", Seat: 0, Card: "p0:Island", AbilityIndex: &zero},
+				{Op: "activate", Seat: 0, Card: "p0:Mountain", AbilityIndex: &zero},
+				{Op: "activate", Seat: 0, Card: "p0:" + card, AbilityIndex: &zero, Ability: label},
+			},
+		},
+	}
+	g, err := rules.RunOracleScenarioJSON(reg, it.Raw())
+	if err != nil || len(g.Fails) != 0 {
+		t.Fatalf("gorge replay: err %v fails %v", err, g.Fails)
+	}
+	got, ref := prefixes(reg, it, g)
+	if ref != nil {
+		t.Fatalf("prefixes refused a granted step: %+v", ref)
+	}
+	if want := "{R}"; got[2] != want {
+		t.Fatalf("granted step prefix = %q, want %q (not the printed {T} mana text)", got[2], want)
 	}
 }
 

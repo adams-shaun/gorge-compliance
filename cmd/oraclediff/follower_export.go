@@ -119,8 +119,14 @@ type neutralAbility struct {
 	// Ordinal is the ability's 0-based index among the face's abilities of
 	// the same class, in script order. Left out for an ability a keyword
 	// line mints (Equip, Cycling, ...): its place in the Oracle text is not
-	// the script's, so Keyword names it instead.
+	// the script's, so Keyword names it instead. Also left out for a
+	// granted/gained ability, which is not on the recipient's face at all;
+	// Granted marks that case.
 	Ordinal *int `json:"ordinal,omitempty"`
+	// Granted marks a granted, gained or keyword-granted ability: the step
+	// names it by the engine's offered label (Step.Ability), not by the
+	// recipient face's printed index, so it has no face-relative ordinal.
+	Granted bool `json:"granted,omitempty"`
 	// Keyword is the keyword line ("Equip:2") a minted ability comes from.
 	Keyword string `json:"keyword,omitempty"`
 	// Cost is the activation cost: mana symbols braced and run together
@@ -431,16 +437,17 @@ func neutralFor(reg *cards.Registry, rq forgeRequest, g rules.OracleResult, c ce
 			continue
 		}
 		c.add("ability.steps")
-		if st.Ability != "" {
-			// A granted/gained step names the engine's offered label;
-			// its identity is not the printed index's ability.
-			if sa, ok := resolveGrantedStepAbility(reg, it, st); ok {
-				if a, ok := neutralGrantedAbilityOf(sa, c); ok {
-					n.Ability[strconv.Itoa(i)] = a
-				}
-			} else {
-				c.add("ability.omit:granted_unresolved")
+		// Resolve the grant identity before the printed index: a granted
+		// step's index aliases a printed one, and a pre-fix item carries no
+		// Step.Ability label but does carry gorge's recorded pick.
+		if sa, ok := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); ok {
+			if a, ok := neutralGrantedAbilityOf(sa, c); ok {
+				n.Ability[strconv.Itoa(i)] = a
 			}
+			continue
+		}
+		if st.Ability != "" {
+			c.add("ability.omit:granted_unresolved")
 			continue
 		}
 		f := forgeAbilityFace(reg, it, st, g, i)
@@ -544,7 +551,7 @@ func neutralGrantedAbilityOf(sa *cards.SA, c census) (neutralAbility, bool) {
 		c.add("ability.omit:" + why)
 		return neutralAbility{}, false
 	}
-	a := neutralAbility{Class: class}
+	a := neutralAbility{Class: class, Granted: true}
 	c.add("ability.class")
 	c.add("ability.ordinal_omit:granted")
 	neutralAbilityBody(sa, class, &a, c)

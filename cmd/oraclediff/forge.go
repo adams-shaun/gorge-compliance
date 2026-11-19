@@ -600,10 +600,14 @@ func forgeDropNamedManaAbilityDecisions(reg *cards.Registry, it oraclegen.Item, 
 	}
 	named := map[int]namedManaAbility{}
 	for i, st := range it.Steps {
-		// A granted step's ability is resolved by its label, not the
-		// printed index's ability: dropping a wheel decision against the
-		// printed face could only drop the WRONG wheel.
-		if st.Op != "activate" || st.AbilityIndex == nil || st.Card == "" || st.Ability != "" {
+		// A granted step's ability is resolved by its grant identity, not
+		// the printed index's ability: dropping a wheel decision against
+		// the printed face could only drop the WRONG wheel. Resolve first
+		// so a pre-fix item (no Step.Ability label) is covered too.
+		if st.Op != "activate" || st.AbilityIndex == nil || st.Card == "" {
+			continue
+		}
+		if _, granted := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); granted {
 			continue
 		}
 		if f := forgeAbilityFace(reg, it, st, g, i); f != nil {
@@ -690,13 +694,13 @@ func (a namedManaAbility) drops(d rules.OracleDecision) bool {
 func forgeAbilityLines(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) map[string]string {
 	lines := map[string]string{}
 	for i, st := range it.Steps {
-		if st.Ability != "" {
-			// A granted/gained/keyword step names the engine's offered
-			// label: resolve by it, not by the printed index (which
-			// aliases printed ability 0 for an SVar grant).
-			if sa, ok := resolveGrantedStepAbility(reg, it, st); ok {
-				lines[strconv.Itoa(i)] = sa.Line
-			}
+		// A granted/gained/keyword step's identity is its grant, not the
+		// printed index (which aliases printed ability 0 for an SVar
+		// grant); a pre-fix item with no label is resolved from gorge's
+		// recorded pick. A printed pick returns false and keeps the
+		// index-only path byte-identical.
+		if sa, ok := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); ok {
+			lines[strconv.Itoa(i)] = sa.Line
 			continue
 		}
 		if f := forgeAbilityFace(reg, it, st, g, i); f != nil {
