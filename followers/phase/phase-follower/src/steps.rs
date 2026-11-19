@@ -133,6 +133,8 @@ struct Machine<'a> {
     answered: Vec<TargetRef>,
     /// Whether an answer arm acted on the current cast step's `cast_mode`.
     honoured: bool,
+    /// `pass` steps stood still on in a declare attackers step phase skipped.
+    stepped_over: usize,
 }
 
 /// Replay every step of `req` on `board`, pushing one snapshot per step to `rb`.
@@ -151,6 +153,7 @@ pub fn run(req: &Request, board: Board, rb: &mut RowBuilder) -> Result<(), Stop>
         swept: std::collections::BTreeSet::new(),
         answered: Vec::new(),
         honoured: false,
+        stepped_over: 0,
     };
     let n = req.item.steps.len();
     for (i, step) in req.item.steps.iter().enumerate() {
@@ -272,6 +275,9 @@ impl Machine<'_> {
             "cast" => self.cast(step, seat, rb),
             "activate" => self.activate(step, seat, rb),
             "pass" => {
+                if self.steps_over_attack_window(rb) {
+                    return Ok(());
+                }
                 let holder = match &self.state().waiting_for {
                     WaitingFor::Priority { player } => *player,
                     other => {
@@ -303,6 +309,26 @@ impl Machine<'_> {
             "move" => self.move_card(step, rb),
             op => Err(harness(format!("unknown op {op:?} at step {i}"))),
         }
+    }
+
+    /// A `pass` gorge plays in a declare attackers step in which no creature attacks
+    /// (`attack_window_passes`), reached with phase already at end of combat: phase goes from beginning
+    /// of combat to end of combat, giving no declare attackers step, when no creature can attack (and
+    /// from an empty declaration to end of combat, with no priority in the step, when one could),
+    /// where gorge gives the step and priority in it (CR 508.1, 508.8, 117.3a). Nothing happened in
+    /// gorge's step but the passes, so the machine stands still on each (no action; the checkpoint is
+    /// phase's unchanged end of combat) and gorge's pass that ends the step leaves both engines in end
+    /// of combat with the same priority. The classifier steps over the window
+    /// (classify.StepOverAttackWindows) and counts it. A row note says so once.
+    fn steps_over_attack_window(&mut self, rb: &mut RowBuilder) -> bool {
+        if !self.req.attack_window_passes.contains(&self.step) || self.state().phase != Phase::EndCombat {
+            return false;
+        }
+        self.stepped_over += 1;
+        if self.stepped_over == 1 {
+            rb.note("stood still on gorge's passes in a declare attackers step phase gave no priority in (no creature could attack; CR 508.1, 508.8)");
+        }
+        true
     }
 
     /// `pass_to`: gorge passes (and declares nothing) until the named decision is pending or,
@@ -1034,6 +1060,45 @@ mod tests {
             Some(Stop::Harness(m)) => assert!(m.contains("attack: no DeclareAttackers prompt"), "{m}"),
             other => panic!("{other:?}"),
         }
+    }
+
+    #[test]
+    fn combat_stands_still_on_an_empty_attack_step_phase_skipped() {
+        // No creature: phase goes from beginning of combat (steps 2, 3) to end of combat, while gorge
+        // passes twice in declare attackers (steps 4, 5) before its end of combat (6, 7).
+        let passes = r#"{"op":"pass","seat":0},{"op":"pass","seat":1},{"op":"pass","seat":0},{"op":"pass","seat":1},
+            {"op":"pass","seat":0},{"op":"pass","seat":1},{"op":"pass","seat":0},{"op":"pass","seat":1}"#;
+        let marked = |at: &str| {
+            format!(r#"{{"id":"t","attack_window_passes":[{at}],"item":{{"id":"t","setup":{{"p0":{{"hand":["Forest"]}}}},"steps":[{passes}]}}}}"#)
+        };
+        let rb = ok(&marked("4,5"));
+        let at = |i: usize| (rb.snapshots[i].step.as_str(), rb.snapshots[i].priority);
+        assert_eq!(at(3), ("begin-combat", 1));
+        assert_eq!(at(4), ("end-combat", 0), "phase skipped declare attackers");
+        assert_eq!((at(5), at(6)), (("end-combat", 0), ("end-combat", 0)), "stood still on gorge's two passes");
+        assert_eq!((at(7), at(8)), (("end-combat", 1), ("main2", 0)), "in step again from end of combat");
+        assert!(rb.notes.iter().any(|n| n.contains("declare attackers step phase gave no priority in")), "{:?}", rb.notes);
+
+        // Unmarked, the passes run one priority round ahead of gorge's.
+        let rb = ok(&item(r#""p0":{"hand":["Forest"]}"#, passes));
+        assert_eq!((rb.snapshots[5].priority, rb.snapshots[6].step.as_str()), (1, "main2"));
+        assert!(rb.notes.iter().all(|n| !n.contains("declare attackers")));
+
+        // A creature could attack and gorge declares none: phase goes from the declaration to end
+        // of combat too, and the machine stands still on gorge's two passes in declare attackers.
+        let no_attack = format!(
+            r#"{{"id":"t","attack_window_passes":[2,3],"item":{{"id":"t","setup":{{{BEARS_ATTACK_SETUP}}},"steps":[{TO_ATTACK},
+                {{"op":"attack","seat":0,"defender":"p1"}},{{"op":"pass","seat":0}},{{"op":"pass","seat":1}},
+                {{"op":"pass","seat":0}},{{"op":"pass","seat":1}}]}}}}"#
+        );
+        let rb = ok(&no_attack);
+        let at = |i: usize| (rb.snapshots[i].step.as_str(), rb.snapshots[i].priority);
+        assert_eq!((at(2), at(3), at(4)), (("end-combat", 0), ("end-combat", 0), ("end-combat", 0)));
+        assert_eq!((at(5), at(6)), (("end-combat", 1), ("main2", 0)));
+
+        // A marked pass phase is not at end of combat for is played as a pass.
+        let rb = ok(&marked("0"));
+        assert_eq!((rb.snapshots[1].step.as_str(), rb.snapshots[1].priority), ("main1", 1));
     }
 
     #[test]

@@ -274,13 +274,28 @@ func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) erro
 			fmt.Printf("  %-15s %d\n", c, hist[c])
 		}
 	}
+	if hist[steppedOverItems] > 0 {
+		fmt.Printf("  stepped over %d empty declare attackers steps %s gave no priority in, in %d items (verdicts.jsonl stepped_over)\n",
+			hist[steppedOverSteps], fl.Display, hist[steppedOverItems])
+	}
 	return nil
 }
+
+// The hist keys emit counts classify.Finding.SteppedOver under; no class has
+// a space in its name, so they never collide with one.
+const (
+	steppedOverItems = "stepped over items"
+	steppedOverSteps = "stepped over steps"
+)
 
 func emit(w *bytes.Buffer, hist map[string]int, f classify.Finding) {
 	b, _ := jsonl(f)
 	w.Write(b)
 	hist[f.Class]++
+	if f.SteppedOver > 0 {
+		hist[steppedOverItems]++
+		hist[steppedOverSteps] += f.SteppedOver
+	}
 }
 
 // refusedRows counts the refused rows, which are not items.
