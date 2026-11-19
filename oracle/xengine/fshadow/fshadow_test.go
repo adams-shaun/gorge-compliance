@@ -669,6 +669,185 @@ func TestMulliganBottomWaitsForTheBottomingAsk(t *testing.T) {
 	}
 }
 
+// mulliganFarmLog is the farm cmdr4 pod-14400 pregame (ECL/OTJ/TLA
+// s144-cmdr4, seed 14400) as forge-shadow-1 records it: four 9-card seats,
+// seat 0 the random-policy seat. Seat 0 mulligans seven times in a row while
+// the other three keep, so its eighth mulligan is line 24, the farm's
+// divergence offset. Forge's London rule still offers that mulligan: CR
+// 103.5c's free first mulligan of a multiplayer game does not count toward
+// the number of mulligans the player may take, and Forge derives its cap from
+// the counted ones. gorge's Config.Mulligans counts the free mulligan too
+// (gorge's own crcoverage 103.5c row records the deviation), so the follower
+// reached line 24 with only "keep" on gorge's list.
+//
+// withNoOp adds what Forge writes next when the random seat answers
+// "mulligan" again with an empty hand: AbstractMulligan.mulligan() returns
+// without a redraw or an increment, so Forge logs a state-neutral mull and
+// asks again. The keep that follows carries no bottom (the recorder cleared
+// the tucked cards on the no-op line) and an empty hand, so the whole hand
+// goes to the library bottom.
+func mulliganFarmLog(withNoOp bool) *Log {
+	const seats, deck = 4, 9
+	h := Header{T: THeader, Format: Format, Seed: 14400, ForgeRef: "farm-cmdr4",
+		Mulligans: 7, FreeMulligan: true}
+	for s := 0; s < seats; s++ {
+		seat := Seat{Seat: s, Name: fmt.Sprintf("seat%d", s)}
+		for k := 0; k < deck; k++ {
+			name := "Forest"
+			if k%2 == 1 {
+				name = "Grizzly Bears"
+			}
+			seat.Cards = append(seat.Cards, Card{ID: (s+1)*100 + k, Name: name})
+		}
+		h.Seats = append(h.Seats, seat)
+	}
+	order := func(s int) []int {
+		ids := make([]int, deck)
+		for k := range ids {
+			ids[k] = (s+1)*100 + k
+		}
+		return ids
+	}
+	l := &Log{Header: h}
+	line := 2 // the header is line 1
+	add := func(e Entry) {
+		e.Line = line
+		line++
+		l.Entries = append(l.Entries, e)
+	}
+	for s := 0; s < seats; s++ {
+		add(Entry{T: TShuffle, Shuffle: &Shuffle{T: TShuffle, Seat: s, Order: order(s)}})
+	}
+	add(Entry{T: TStart, Start: &Start{T: TStart, Seat: 0}})
+	for m := 1; m <= 8; m++ {
+		// Before mulligan m, Forge has bottomed max(0, m-2) cards of its
+		// seven (the first mulligan of a multiplayer game is free).
+		n := 7
+		if m >= 3 {
+			n = 9 - m
+		}
+		hand := append([]int(nil), order(0)[:n]...)
+		add(Entry{T: TMull, Mull: &Mull{T: TMull, Seat: 0, Keep: false, Hand: &hand}})
+		if m == 1 {
+			for s := 1; s < seats; s++ {
+				add(Entry{T: TMull, Mull: &Mull{T: TMull, Seat: s, Keep: true}})
+			}
+		}
+		// The redraw shuffle after this mulligan (line 24's is line 25).
+		add(Entry{T: TShuffle, Shuffle: &Shuffle{T: TShuffle, Seat: 0, Order: order(0)}})
+	}
+	if withNoOp {
+		add(Entry{T: TMull, Mull: &Mull{T: TMull, Seat: 0, Keep: false, Hand: &[]int{}}})
+		add(Entry{T: TMull, Mull: &Mull{T: TMull, Seat: 0, Keep: true, Hand: &[]int{}}})
+	} else {
+		add(Entry{T: TMull, Mull: &Mull{T: TMull, Seat: 0, Keep: true,
+			Hand: &[]int{}, Bottom: append([]int(nil), order(0)[:7]...)}})
+	}
+	add(Entry{T: TEnd, End: &End{T: TEnd, Reason: ReasonUnfinished}})
+	return l
+}
+
+// TestMulliganAllowanceCoversTheFreeMulligan is the farm cmdr4 repro
+// (ECL/OTJ/TLA s144-cmdr4, pod-14400 seed 14400, log line 24, class
+// answer-missing|mulligan): the random-policy seat answers its eighth
+// mulligan and gorge's list has only "keep", because the follower handed
+// Config.Mulligans Forge's counted cap and gorge counts the free first
+// mulligan against the allowance too. The follower must translate the
+// header's cap into the allowance gorge's Config actually means (cap plus the
+// free mulligan of CR 103.5c), so the eighth mulligan and the keep that
+// follows it are answered.
+func TestMulliganAllowanceCoversTheFreeMulligan(t *testing.T) {
+	l := mulliganFarmLog(false)
+	eighth := 0
+	seen := 0
+	for _, e := range l.Entries {
+		if m := e.Mull; m != nil && m.Seat == 0 && !m.Keep {
+			seen++
+			if seen == 8 {
+				eighth = e.Line
+			}
+		}
+	}
+	if eighth != 24 {
+		t.Fatalf("the eighth mulligan is at line %d, want the farm's line 24", eighth)
+	}
+	res := follow(t, l)
+	if res.Hard != nil {
+		b, _ := json.MarshalIndent(res.Hard, "", "  ")
+		t.Fatalf("divergence at line %d:\n%.3000s", res.Hard.Line, b)
+	}
+	// 4 keeps/mulligans in the first pass, seven more mulligans, then the
+	// keep that ends the round. The truncated log's unfinished end line stops
+	// the follower at the pending bottoming ask, so the keep is the last
+	// decision; the bottoming itself is covered by
+	// TestMulliganEmptyHandKeepBottomsTheWholeHand.
+	if res.Decisions < 12 {
+		t.Errorf("followed only %d decisions; the eighth mulligan was not answered", res.Decisions)
+	}
+	if res.End != ReasonUnfinished {
+		t.Errorf("end %q, want the log's unfinished end", res.End)
+	}
+}
+
+// TestMulliganNoOpAtEmptyHandKeepsForGorge is the tail of the same pod: after
+// the eighth mulligan the random seat's hand is empty, and Forge can log one
+// or more further "mulligan" answers that do nothing (AbstractMulligan
+// returns without a redraw). gorge's allowance is spent, so its only option
+// is keep; a no-op line must be skipped, and the eventual keep (whose bottom
+// the recorder cleared) bottoms the whole hand.
+func TestMulliganNoOpAtEmptyHandKeepsForGorge(t *testing.T) {
+	l := mulliganFarmLog(true)
+	res := follow(t, l)
+	if res.Hard != nil {
+		b, _ := json.MarshalIndent(res.Hard, "", "  ")
+		t.Fatalf("divergence at line %d:\n%.3000s", res.Hard.Line, b)
+	}
+	if res.SkippedMulls != 1 {
+		t.Errorf("skipped %d empty-hand mulligans, want 1", res.SkippedMulls)
+	}
+	if res.Decisions < 12 {
+		t.Errorf("followed only %d decisions; the keep after the no-op was not answered", res.Decisions)
+	}
+	if res.End != ReasonUnfinished {
+		t.Errorf("end %q, want the log's unfinished end", res.End)
+	}
+}
+
+// TestMulliganEmptyHandKeepBottomsTheWholeHand drives the keep and bottoming
+// answers of the no-op tail directly: a keep line with an empty hand and no
+// recorded bottom (the recorder cleared it) must bottom the whole gorge hand
+// at the bottoming ask, and an ask that cannot reach an empty hand is a
+// genuine answer-missing, not a silent partial bottom.
+func TestMulliganEmptyHandKeepBottomsTheWholeHand(t *testing.T) {
+	f := &follower{log: &Log{}}
+	keep := &decision.Decision{Seq: 1, Player: 0, Kind: decision.KMulligan, Min: 1, Max: 1,
+		Options: []decision.Option{{Index: 0, Kind: "keep"}}}
+	if in, ok := f.answer(keep, Entry{Line: 27, T: TMull, Mull: &Mull{T: TMull, Seat: 0, Keep: true, Hand: &[]int{}}}); !ok || !reflect.DeepEqual(in.Choices, []int{0}) {
+		t.Fatalf("keep: intent %+v ok %v, hard %+v", in, ok, f.res.Hard)
+	}
+	bottom := func(min int, n int) *decision.Decision {
+		d := &decision.Decision{Seq: 2, Player: 0, Kind: decision.KMulligan, Min: min, Max: min}
+		for i := 0; i < n; i++ {
+			d.Options = append(d.Options, decision.Option{Index: i, Kind: "bottom", Obj: state.ObjID(10 + i)})
+		}
+		return d
+	}
+	in, ok := f.answer(bottom(2, 2), Entry{Line: 28, T: TMull})
+	if !ok || !reflect.DeepEqual(in.Choices, []int{0, 1}) {
+		t.Fatalf("bottoming: intent %+v ok %v, want the whole hand", in, ok)
+	}
+	if f.mullBottomAll[0] {
+		t.Error("the whole-hand marker was not consumed")
+	}
+	f = &follower{log: &Log{}}
+	if in, _ := f.answer(keep, Entry{Line: 27, T: TMull, Mull: &Mull{T: TMull, Seat: 0, Keep: true, Hand: &[]int{}}}); !reflect.DeepEqual(in.Choices, []int{0}) {
+		t.Fatalf("second keep: intent %+v", in)
+	}
+	if _, ok := f.answer(bottom(3, 2), Entry{Line: 28, T: TMull}); ok || f.res.Hard == nil || f.res.Hard.Field != "bottom" {
+		t.Fatalf("a 3-card bottom from a 2-card hand: ok %v hard %+v, want answer-missing bottom", ok, f.res.Hard)
+	}
+}
+
 // TestPriorityActivateMapsToAbilityOption is the farm cmdr4 repro (FDN-s131
 // pods 13101 and 13103, Blast Zone and Evolving Wilds): Forge's seat
 // activated a land's printed ability and the follower stopped with
