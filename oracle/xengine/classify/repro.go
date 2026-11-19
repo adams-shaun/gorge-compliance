@@ -90,9 +90,9 @@ func resolveExisting(p string) string {
 // scenario.json (the item cut after the diverging step, plus the answer-bearing
 // steps a borrow can read, ids unchanged), input.jsonl (that scenario as the
 // one-line follower input), gorge.json and <engine>.json (both results cut to
-// the checkpoints the scenario has), verdict.json and REPRO.md. A lower_gap
-// finding has no follower and no gorge result: it gets the scenario, the
-// verdict and REPRO.md only.
+// the finding's checkpoint, since the extra steps only supply answers),
+// verdict.json and REPRO.md. A lower_gap finding has no follower and no gorge
+// result: it gets the scenario, the verdict and REPRO.md only.
 func WriteRepro(dir string, f Finding, item lower.Lowered, g rules.OracleResult, x oraclediff.XResult) error {
 	return WriteReproFrom(dir, f, item, g, x, Origin{})
 }
