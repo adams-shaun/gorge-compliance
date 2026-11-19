@@ -134,8 +134,7 @@
      "eq": 1
     }
    ],
-   "xmage": "ZellixSanityFlayerTest#test_Trigger_1Player_MillingCreature",
-   "known_bug": "XP[trig-mode-milledonce-unsupported]: Zellix's T:Mode$ MilledOnce has no entry in triggerModeNames (only Milled and MilledAll are registered), so checkFaceTriggers never queues it and milling Memnite creates no Horror (graveyard counts match; Horror count 0, want 1), CR 701.17, verified at gorge 981b98963b."
+   "xmage": "ZellixSanityFlayerTest#test_Trigger_1Player_MillingCreature"
   },
   {
    "name": "test-no-trigger-0-creature-milled",

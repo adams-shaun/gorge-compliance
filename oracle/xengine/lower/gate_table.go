@@ -91,6 +91,7 @@ var gameTable = map[string]entry{
 	"Delayed":             isRefused("delayed triggers (CR 603.7) are not placeable"),
 	"DelayedNext":         isIgnored("delayed-trigger id allocator"),
 	"Entered":             isRefused("zone entries of this turn; live only when a card in the game names a reader (turnEntryReaders); exempt: the draw step's library->hand entries and card-less objects (abilities)"),
+	"EnteredLastTurn":     isRefused("the previous turn's zone entries (the TurnChange fold rotates Entered into it); live only when a card in the game names the Count$LastTurnEntered reader; setup cannot restate it"),
 }
 
 // playerTable is state.Player.
