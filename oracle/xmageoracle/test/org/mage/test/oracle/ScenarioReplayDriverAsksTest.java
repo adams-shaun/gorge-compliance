@@ -203,8 +203,10 @@ public final class ScenarioReplayDriverAsksTest {
                 "a lone No (Oko's chooseUse) is kept");
     }
 
-    /** (g) DSK Leyline of Mutation static#0.0: cast_mode "alternative" is a
-     * plain cast whose leading Yes picks XMage's first alternative cost. */
+    /** (g) DSK Leyline of Mutation static#0.0 and Land Grant's own cost:
+     * cast_mode "alternative" is the election, so the first alternative is
+     * key 1 whether the generator queued a leading "Yes" or nothing at all
+     * (Land Grant's cost is on the card, not a gorge decision). */
     private static void alternativeCast() throws Exception {
         check(ScenarioReplay.castModeSupported("alternative"), "alternative cast_mode must be elected");
         check(!ScenarioReplay.castModeSupported("kicked"), "an unwired cast_mode is still rejected");
@@ -212,6 +214,9 @@ public final class ScenarioReplayDriverAsksTest {
         List<String> choices = new ArrayList<>(Collections.singletonList("Yes"));
         check((Boolean) adapter("alternativeCostKey", types, "You may choose an alternative cost", choices)
                 && choices.get(0).equals("1"), "Yes -> key 1: " + choices);
+        List<String> queuedNone = new ArrayList<>();
+        check((Boolean) adapter("alternativeCostKey", types, "Choose an alternative cost", queuedNone)
+                && queuedNone.equals(Collections.singletonList("1")), "no answer -> key 1: " + queuedNone);
         List<String> other = new ArrayList<>(Collections.singletonList("Yes"));
         check(!(Boolean) adapter("alternativeCostKey", types, "Choose a creature type", other) && other.get(0).equals("Yes"),
                 "another key menu is untouched");
