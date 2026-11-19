@@ -78,7 +78,17 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     permanent instead. The no-op pick is dropped; when none remain and the
 //     ask is "up to" (min 0), the decision becomes an empty choose_n, which
 //     the driver consumes as "untap nothing", exactly as gorge did.
-//   - Except for the untap rewrite above, decisions are exported verbatim.
+//   - A multi-card hand -> library batch (resume "hand_move", every pick kind
+//     "hand_move") followed in the same step by its "changezone_alternative"
+//     pick is exported in reverse when that alternative is "top": Forge's
+//     ChangeZoneEffect asks for one card at a time and puts each successive
+//     pick on top, so the last pick ends topmost and gorge's top-first order
+//     needs reversing. A "bottom" alternative needs no reversal (successive
+//     puts on the bottom append, leaving the first pick above the second), and
+//     a batch with no paired alternative in the same step is left alone. Only
+//     the parallel pick arrays reverse; the label fields stay.
+//   - Except for the untap and top hand_move rewrites above, decisions are
+//     exported verbatim.
 //     pay_<C>, pay_generic and pay_life are
 //     pick kinds of gorge's hybrid/Phyrexian pip ask, and a mana-ability
 //     "activate" pick is a payment-window choice; Forge asks neither, so the
@@ -200,12 +210,13 @@ func forgeExport(reg *cards.Registry, scen, out string) (int, error) {
 
 // forgeExportItem is the request forge-export writes for one item, and
 // gorge's result for it: the item is replayed once in gorge and the request
-// built from the decisions gorge's runner made. graveyardOrder opts into the
-// Forge-only "graveyard_order" role; a caller whose engine queue has no
-// consumer for it (follower-export, see follower_export.go) must pass false,
-// or the unasked role becomes an unconsumed leftover. A failed gorge run has
-// no checkpoints to derive the role from, so it is never pinned.
-func forgeExportItem(reg *cards.Registry, it oraclegen.Item, graveyardOrder bool) (forgeRequest, rules.OracleResult) {
+// built from the decisions gorge's runner made. forgeDriver opts into the
+// rewrites and roles only the Forge driver consumes ("graveyard_order",
+// reversing a top hand -> library batch); a caller whose engine queue has no
+// consumer for them (follower-export, see follower_export.go) must pass false,
+// or an unasked role becomes an unconsumed leftover. A failed gorge run has no
+// checkpoints to derive the role from, so it is never pinned.
+func forgeExportItem(reg *cards.Registry, it oraclegen.Item, forgeDriver bool) (forgeRequest, rules.OracleResult) {
 	g, gerr := rules.RunOracleScenarioJSON(reg, it.Raw())
 	// A divided spell's shares reach the driver as a "damage_split"
 	// decision (the contract above), which gorge now announces at cast.
@@ -213,21 +224,23 @@ func forgeExportItem(reg *cards.Registry, it oraclegen.Item, graveyardOrder bool
 	if gerr != nil || decisions == nil {
 		decisions = []rules.OracleDecision{}
 	}
-	return forgeBuildRequest(reg, it, g, decisions, graveyardOrder && gerr == nil), g
+	return forgeBuildRequest(reg, it, g, decisions, forgeDriver && gerr == nil), g
 }
 
 // forgeBuildRequest assembles the request for one item from gorge's decisions
 // for it: the scenario SHA names the item as given, the decisions lose those
 // for steps the driver will not pose, and the steps are then rewritten.
-// graveyardOrder is explicit at every call site: only the Forge driver
-// consumes the role, and a new caller has to say so instead of inheriting it.
-func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision, graveyardOrder bool) forgeRequest {
+// forgeDriver is explicit at every call site: only the Forge driver consumes
+// the Forge-only rewrites and role, and a new caller has to say so instead of
+// inheriting them.
+func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision, forgeDriver bool) forgeRequest {
 	sha := gate.ItemSHA(it)
 	decisions = forgeDropNamedManaAbilityDecisions(reg, it, g, forgeDropDeclarationDecisions(it, decisions))
 	decisions = forgeExploreAsYesNo(decisions)
 	decisions = forgeUntapNoOps(g, decisions)
 	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, decisions)
-	if graveyardOrder {
+	if forgeDriver {
+		decisions = forgeLibraryTopOrder(decisions)
 		decisions = forgeGraveyardOrderDecisions(it, g, decisions)
 	} else {
 		decisions = forgeDropGraveyardOrderDecisions(decisions)
