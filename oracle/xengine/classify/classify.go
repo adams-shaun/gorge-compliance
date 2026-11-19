@@ -796,9 +796,10 @@ func graveyardOrderOnly(g rules.OracleResult, x oraclediff.XResult, v oraclediff
 // shuffledTopExile reports a pN.exile difference after a shuffle (CR 701.24a)
 // whose every exiled card, on both sides, is a card of that seat's deck: an
 // effect that exiles the top card of a shuffled library exiles each engine's own
-// card. A card the seat's deck cannot hold on its library still diverges, and
-// without the tape's decks there is nothing to test, so the row stays a
-// divergence.
+// card. The field's seat is the scenario's while tape decks are indexed by the
+// tape's seat, so a swapped window maps it through item.Swap before the lookup.
+// A card the seat's deck cannot hold on its library still diverges, and without
+// the tape's decks there is nothing to test, so the row stays a divergence.
 func shuffledTopExile(item lower.Lowered, t *game.Tape, v oraclediff.Verdict, d int) bool {
 	rest, ok := strings.CutPrefix(v.Field, "p")
 	seat, tail, ok2 := strings.Cut(rest, ".")
@@ -808,6 +809,12 @@ func shuffledTopExile(item lower.Lowered, t *game.Tape, v oraclediff.Verdict, d 
 	n, err := strconv.Atoi(seat)
 	if err != nil || n < 0 || n >= len(t.Decks) {
 		return false
+	}
+	if item.Swap {
+		n = 1 - n
+		if n < 0 || n >= len(t.Decks) {
+			return false
+		}
 	}
 	deck := map[string]bool{}
 	for _, c := range t.Decks[n].Cards {
