@@ -137,8 +137,7 @@
      "eq": 2
     }
    ],
-   "xmage": "BalanceTest#testBalance",
-   "known_bug": "XP[balance-no-resolver]: Balance is cast but no land/creature/hand choice is posed and nothing is sacrificed or discarded (p0 Runeclaw Bear 3 want 2, p1 Swamp 3 want 2 etc.); the DB$ Balance API has no resolver in gorge (no Balance handler in effects/rules), CR 701.17, 608.2c, verified at gorge 981b98963b."
+   "xmage": "BalanceTest#testBalance"
   },
   {
    "name": "test-lands-and-cards-are-separate-events",
