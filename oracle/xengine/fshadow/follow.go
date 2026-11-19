@@ -896,6 +896,18 @@ func (f *follower) targetCandidates(d *decision.Decision, r Ref) (out []int, ok 
 	return out, true
 }
 
+// targetOptionsGrouped reports whether the offer carries the per-Option Group
+// exclusivity contract. Both target intent builders read this one predicate,
+// so a Group-less ask can never be routed through the grouped assignment.
+func targetOptionsGrouped(d *decision.Decision) bool {
+	for _, o := range d.Options {
+		if o.Group != "" {
+			return true
+		}
+	}
+	return false
+}
+
 // assignTargetOptions maps each selected ref onto one offered target option.
 // With a Group-less decision that is first-match in offer order. A decision
 // with Option.Group is bound by Decision.Validate's exclusivity contract
@@ -907,15 +919,8 @@ func (f *follower) targetCandidates(d *decision.Decision, r Ref) (out []int, ok 
 // is a bipartite assignment that keeps first-match preference but backtracks
 // an earlier ref to another mode's option rather than exceed a group's cap.
 func assignTargetOptions(d *decision.Decision, cands [][]int) ([]int, bool) {
-	grouped := false
-	for _, o := range d.Options {
-		if o.Group != "" {
-			grouped = true
-			break
-		}
-	}
 	chosen := make([]int, len(cands))
-	if !grouped {
+	if !targetOptionsGrouped(d) {
 		for i := range cands {
 			chosen[i] = cands[i][0]
 		}
@@ -1317,14 +1322,19 @@ func (f *follower) defaultChoose(d *decision.Decision) decision.Intent {
 	return firstMin(d)
 }
 
-// defaultTargets answers a target decision the log has no line for: the first
-// Min offered options the Group contract admits. Picking the first Min in
-// offered order is not enough for a grouped target ask -- a combined charm's
-// options are emitted mode by mode, so that prefix can lie inside one
-// charm-mode Group and the engine rejects it with "choices 0 and 1 are
-// mutually exclusive (group \"charm-mode-0\")". This walks the offer and skips
-// an option whose Group is already at its cap.
+// defaultTargets answers a target decision the log has no line for. A
+// Group-less ask is firstMin unchanged: its slots are not exclusive, so the
+// first Min offered options are always a valid answer (and giving every slot
+// the same offer list would answer all-zero, which Validate rejects as a
+// duplicate choice). A grouped ask needs the Group contract: a combined
+// charm's options are emitted mode by mode, so a plain prefix can lie inside
+// one charm-mode Group and the engine rejects it with "choices 0 and 1 are
+// mutually exclusive (group \"charm-mode-0\")". That path walks the offer and
+// skips an option whose Group is already at its cap.
 func (f *follower) defaultTargets(d *decision.Decision) decision.Intent {
+	if !targetOptionsGrouped(d) {
+		return firstMin(d)
+	}
 	k := d.Min
 	if d.Max > 0 && k > d.Max {
 		k = d.Max

@@ -403,6 +403,27 @@ func TestTargetGroupsOneChoicePerGroup(t *testing.T) {
 	if err := d.Validate(din); err != nil {
 		t.Errorf("default intent %+v rejected by the wire contract: %v", din, err)
 	}
+
+	// An ungrouped ask is a different shape: no Option.Group means no
+	// exclusivity, so the default must stay firstMin's [0 1]. Giving every
+	// slot the whole offer list answers [0 0], which Validate rejects as a
+	// duplicate choice.
+	ungrouped := &decision.Decision{Seq: 10, Player: 0, Kind: decision.KTarget, Min: 2, Max: 2,
+		Options: []decision.Option{
+			{Index: 0, Kind: "card", Obj: 2},
+			{Index: 1, Kind: "card", Obj: 3},
+			{Index: 2, Kind: "player", Player: 1},
+		}}
+	uin, ok := f2.answer(ungrouped, Entry{Line: 390, T: TAsk, Ask: prio})
+	if !ok || f2.res.Hard != nil {
+		t.Fatalf("ungrouped default target answer: ok %v hard %+v", ok, f2.res.Hard)
+	}
+	if !reflect.DeepEqual(uin.Choices, []int{0, 1}) {
+		t.Fatalf("ungrouped default intent %+v: want first Min choices [0 1]", uin)
+	}
+	if err := ungrouped.Validate(uin); err != nil {
+		t.Errorf("ungrouped default intent %+v rejected by the wire contract: %v", uin, err)
+	}
 }
 
 // Item 3: a priority action "other" has no gorge mapping: a harness finding,
