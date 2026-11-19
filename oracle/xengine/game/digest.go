@@ -11,6 +11,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/adams-shaun/gorge-compliance/internal/ptcounter"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/engine/state"
 )
@@ -71,13 +72,12 @@ type PermDigest struct {
 }
 
 // normCounter is rules.normCounter (oracle_run.go): the snapshot's counter
-// vocabulary. The table is copied because the function is unexported.
+// vocabulary. The P/T-counter fold lives in internal/ptcounter so the
+// comparator (oraclediff) and this digest agree on every power/toughness
+// counter, not just ±1/±1; other kinds upper-case as before.
 func normCounter(k string) string {
-	switch strings.ReplaceAll(strings.ToLower(k), " ", "") {
-	case "+1/+1", "p1p1":
-		return "P1P1"
-	case "-1/-1", "m1m1":
-		return "M1M1"
+	if c, ok := ptcounter.Canonical(k); ok {
+		return c
 	}
 	return strings.ToUpper(k)
 }
