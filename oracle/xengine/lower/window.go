@@ -245,7 +245,7 @@ func lowerWindow(reg *cards.Registry, t *game.Tape, c *cut, id string) (Lowered,
 	l.markDieRolls(m, wt.Entries[:n])
 	l.compactPayment()
 	for k, e := range wt.Entries[:n] {
-		if e.RNG > 0 && len(e.Flips) == 0 && len(e.Rolls) == 0 {
+		if e.RNG > 0 && !rngAccounted(e) {
 			l.HasRNG = true
 			l.RNGStep = len(l.StepEntry)
 			for i, se := range l.StepEntry {

@@ -678,6 +678,16 @@ func attach(st *oraclegen.Step, answers []oraclegen.Answer, group []game.Entry) 
 	}
 }
 
+// rngAccounted reports whether every engine draw an entry consumed is one
+// the tape records explicitly: a die roll or a coin flip. Each consumes
+// exactly one draw (gorge's rng.IntN), so RNG == len(Rolls)+len(Flips). A
+// surplus draw is a shuffle or a random pick the runner's seeded RNG cannot
+// land where the live game did. One shared test keeps the three gates
+// (answersOf, resolveSpanLowerable, a window's HasRNG) from drifting apart.
+func rngAccounted(e game.Entry) bool {
+	return e.RNG == uint64(len(e.Rolls)+len(e.Flips))
+}
+
 // answersOf is the entries' asks as answers, in tape order; the first entry
 // of g is the decision that posed them when it is not itself an ask. Every
 // entry must be one the runner can be made to repeat.
@@ -688,9 +698,10 @@ func answersOf(m seatMap, g []game.Entry) ([]oraclegen.Answer, *truncation) {
 		switch {
 		case a.Reanswered:
 			return nil, unsupported("reanswered")
-		case a.RNG > 0 && len(a.Flips) == 0 && len(a.Rolls) == 0 && !m.rngOK:
+		case a.RNG > 0 && !rngAccounted(a) && !m.rngOK:
 			// A shuffle or a random pick: the runner's seeded RNG cannot land
-			// where the live game did.
+			// where the live game did. A roll or flip is exempt only when it
+			// accounts for every draw the entry made.
 			return nil, unsupported("rng")
 		case len(a.Rest) > 0:
 			return nil, unsupported(a.Kind + "_rest")
@@ -810,7 +821,7 @@ func colourProduced(g []game.Entry) []game.Entry {
 func resolveSpanLowerable(entries []game.Entry, j, end int) bool {
 	for k := j; k < end; k++ {
 		e := entries[k]
-		if len(e.Mana) > 0 || (e.RNG > 0 && len(e.Rolls) == 0) || len(e.Flips) > 0 {
+		if len(e.Mana) > 0 || (e.RNG > 0 && !rngAccounted(e)) || len(e.Flips) > 0 {
 			return false
 		}
 		if e.Kind == "priority" && !isPass(e) || e.Kind == "attackers" || e.Kind == "blockers" {

@@ -5486,13 +5486,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 queueFlipResult(p, value);
                 continue;
             }
-            if (kind.equals("setup_die")) {
-                // A die roll the setup drive walked into: the same reason as
-                // setup_flip, with TestPlayer.rollDieResult's "[die_roll]: N"
-                // token (item.die_rolls scripts each roll).
-                queueDieResult(p, value);
-                continue;
-            }
             if (kind.equals("setup_mode")) {
                 // A setup-drive modal pick (Zuko, Conflicted's turn-1 charm):
                 // XMage poses chooseMode, or chooseUse for a yes/no
@@ -5534,7 +5527,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** Queue one scripted die-roll result on the player's CHOICE queue:
      * TestPlayer.DIE_ROLL ("[die_roll]: ") followed by the natural result, the
      * token TestPlayer.rollDieResult consumes from the queue head. Unscripted,
-     * the replay fails with "Missing DIE ROLL RESULT def". */
+     * the replay fails with "Missing DIE ROLL RESULT def". Only step-time
+     * rolls have a producer (oraclegen's kind "die"); a die the setup drive
+     * rolls before the first gameplay step is not scripted, unlike a setup
+     * coin flip, so it still strict-misses. */
     static void queueDieResult(TestPlayer p, String value) {
         p.addChoice(TestPlayer.DIE_ROLL + value);
     }
@@ -5622,7 +5618,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 case "setup_target":
                 case "setup_mode":
                 case "setup_flip":
-                case "setup_die":
                     // Queued before setup placement; never enqueue it again at
                     // the corresponding gameplay step.
                     break;

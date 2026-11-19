@@ -10,6 +10,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
@@ -358,6 +359,68 @@ func TestDigestOfGameValues(t *testing.T) {
 			tappedLand, creatures, damaged, lifeMoved, graves, handShrank, countered, attached, tokens, tapChecked)
 	}
 	t.Logf("%d tapped-land, %d creature digests, %d life-changed player digests, %d/%d mana taps seen tapped", tappedLand, creatures, lifeMoved, tapChecked, tapAfterMana)
+}
+
+// TestTapeRecordsDieRoll drives the engine's canonical die-roll event (the
+// one effects.effRollDice emits for every DB$ RollDice) through the recorder
+// and asserts it lands on the committed entry, then survives the tape
+// round-trip. Reverting the recorder's roll scan leaves the entry's Rolls
+// empty, so this fails where TestTapeFormat3 (a format-string assertion) does
+// not.
+func TestTapeRecordsDieRoll(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	deck := func(i int) []*cards.Card {
+		out := make([]*cards.Card, 0, len(pairs[0][i].Cards))
+		for _, n := range pairs[0][i].Cards {
+			c, ok := reg.Lookup(n)
+			if !ok {
+				t.Fatalf("deck card %q not found", n)
+			}
+			out = append(out, c)
+		}
+		return out
+	}
+	e := rules.New(rules.Config{
+		Seed: 1, Names: []string{"p0", "p1"},
+		Decks:  [][]*cards.Card{deck(0), deck(1)},
+		Tokens: reg.Tokens, NameUniverse: reg.Universe(),
+	})
+	tape := &Tape{
+		Format: TapeFormat, Seed: 1,
+		Decks: []Deck{
+			{Name: pairs[0][0].Name, Colours: pairs[0][0].Colours, Cards: pairs[0][0].Cards},
+			{Name: pairs[0][1].Name, Colours: pairs[0][1].Colours, Cards: pairs[0][1].Cards},
+		},
+		Entries: []Entry{{Kind: "priority", Seat: 0, Turn: 1, Step: "main1"}},
+	}
+	r := &recorder{t: tape}
+	// The setup shuffles consumed draws before this entry; only the die's
+	// draw belongs to it.
+	r.lastDraws = e.RNGDraws()
+	r.flipScan, r.rollScan = len(e.L.Events), len(e.L.Events)
+	r.manaScan, r.spendScan = len(e.L.Events), len(e.L.Events)
+	_ = e.Rand(6) // the die's one engine draw
+	e.Emit(effects.DieRollNote(0, 0, 6, 3, 3))
+	r.flush(e)
+
+	want := []Roll{{Seat: 0, Sides: 6, Natural: 3, Result: 3}}
+	if got := tape.Entries[0].Rolls; !reflect.DeepEqual(got, want) {
+		t.Fatalf("entry rolls %+v, want %+v", got, want)
+	}
+	if got := tape.Entries[0].RNG; got != 1 {
+		t.Fatalf("entry rng %d, want the die's one draw", got)
+	}
+	b, err := tape.Bytes()
+	if err != nil {
+		t.Fatal(err)
+	}
+	got, err := ReadTape(bytes.NewReader(b))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !reflect.DeepEqual(got.Entries[0].Rolls, want) {
+		t.Fatalf("round-tripped rolls %+v, want %+v", got.Entries[0].Rolls, want)
+	}
 }
 
 func TestTapeFormat3(t *testing.T) {

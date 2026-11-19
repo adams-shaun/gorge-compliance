@@ -29,3 +29,29 @@ func TestAddDieRollAnswers(t *testing.T) {
 		t.Fatalf("no rolls changed the answers: %+v", nothing)
 	}
 }
+
+// TestAddDieRollAnswersSameStepOrder pins the queue order when a step already
+// carries a decision and also rolls: the step's scripted decisions queue
+// first and the die after them. XMage consumes a seat's CHOICE queue in ask
+// order; the die is asked while the step's action resolves, after the
+// decisions that selected and paid for it, and a follow-up decision is posed
+// on a later step (Ebony Fly's animate yes/no is step 6 while its roll is
+// step 4).
+func TestAddDieRollAnswersSameStepOrder(t *testing.T) {
+	rolls := []oraclegen.DieRoll{{Step: 1, Seat: 0, Sides: 6, Natural: 3, Result: 3}}
+	existing := [][]oraclegen.XAnswer{
+		nil,
+		{{Seat: 0, Kind: "choice", Value: "yes"}},
+	}
+	got := addDieRollAnswers(existing, rolls, 2)
+	want := [][]oraclegen.XAnswer{
+		nil,
+		{
+			{Seat: 0, Kind: "choice", Value: "yes"},
+			{Seat: 0, Kind: "die", Value: "3"},
+		},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("answers %+v, want %+v", got, want)
+	}
+}
