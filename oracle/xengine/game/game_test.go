@@ -360,10 +360,10 @@ func TestDigestOfGameValues(t *testing.T) {
 	t.Logf("%d tapped-land, %d creature digests, %d life-changed player digests, %d/%d mana taps seen tapped", tappedLand, creatures, lifeMoved, tapChecked, tapAfterMana)
 }
 
-func TestTapeFormat2(t *testing.T) {
+func TestTapeFormat3(t *testing.T) {
 	reg, pairs := fdnPairs(t, 2)
 	tp := play(t, reg, pairs[1], 101, Options{Set: "FDN"})
-	if tp.Format != "xengine-tape-2" {
+	if tp.Format != "xengine-tape-3" {
 		t.Fatalf("format %q", tp.Format)
 	}
 	// Starter is turn 1's active player, whatever came first (game 1 opens
@@ -410,18 +410,23 @@ func TestTapeFormat2(t *testing.T) {
 	if refs == 0 || mana == 0 {
 		t.Fatalf("%d refs, %d mana records", refs, mana)
 	}
-	// A tape-1 file (no refs) is still read; any other format is not.
+	// A tape-2 file (no die rolls) and a tape-1 file (no refs either) are
+	// still read; any other format is not.
 	b, err := tp.Bytes()
 	if err != nil {
 		t.Fatal(err)
 	}
-	old := bytes.Replace(b, []byte(`"xengine-tape-2"`), []byte(`"xengine-tape-1"`), 1)
+	two := bytes.Replace(b, []byte(`"xengine-tape-3"`), []byte(`"xengine-tape-2"`), 1)
+	if _, err := ReadTape(bytes.NewReader(two)); err != nil {
+		t.Errorf("tape-2 rejected: %v", err)
+	}
+	old := bytes.Replace(b, []byte(`"xengine-tape-3"`), []byte(`"xengine-tape-1"`), 1)
 	if _, err := ReadTape(bytes.NewReader(old)); err != nil {
 		t.Errorf("tape-1 rejected: %v", err)
 	}
-	bad := bytes.Replace(b, []byte(`"xengine-tape-2"`), []byte(`"xengine-tape-3"`), 1)
+	bad := bytes.Replace(b, []byte(`"xengine-tape-3"`), []byte(`"xengine-tape-4"`), 1)
 	if _, err := ReadTape(bytes.NewReader(bad)); err == nil {
-		t.Error("tape-3 accepted")
+		t.Error("tape-4 accepted")
 	}
 }
 

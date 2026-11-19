@@ -17,6 +17,7 @@ import (
 	"regexp"
 	"slices"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
@@ -178,7 +179,36 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 	}
 	it.XAbility = abilities
 	it.XPos = passPositions(sc.Steps, g.Snapshots)
+	it.XAnswers = addDieRollAnswers(it.XAnswers, it.DieRolls, len(sc.Steps))
 	return it, nil
+}
+
+// addDieRollAnswers scripts each recorded die roll on the step that made it.
+// XMage's TestPlayer.rollDieResult consumes a "[die_roll]: N" token from the
+// choice queue, which ScenarioReplay queues from a kind "die" answer, so the
+// driver forces the tape's natural roll instead of rolling its own. The
+// answer is appended after the step's decisions: a die roll is not a
+// decision, so gorge's replay-derived answers come first in the order the
+// step asks them. Rolls outside the item's steps (a truncated tail) are not
+// scripted.
+func addDieRollAnswers(answers [][]oraclegen.XAnswer, rolls []oraclegen.DieRoll, steps int) [][]oraclegen.XAnswer {
+	if len(rolls) == 0 {
+		return answers
+	}
+	if len(answers) < steps {
+		grown := make([][]oraclegen.XAnswer, steps)
+		copy(grown, answers)
+		answers = grown
+	}
+	for _, r := range rolls {
+		if r.Step < 0 || r.Step >= steps {
+			continue
+		}
+		answers[r.Step] = append(answers[r.Step], oraclegen.XAnswer{
+			Seat: r.Seat, Kind: "die", Value: strconv.Itoa(r.Natural),
+		})
+	}
+	return answers
 }
 
 // completeModalTrigger scripts the CR 603.3c mode choice of a modal enters

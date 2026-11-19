@@ -9,11 +9,15 @@ import (
 	"github.com/adams-shaun/gorge/engine/state"
 )
 
-// TapeFormat is the Tape.Format value Play writes. xengine-tape-2 adds the
-// runner refs (Pick.Ref, Pick.AttackerRef, Pick.BattleRef, ManaRec.Ref), the
-// decision's Max and the coin flips of an entry; xengine-tape-1 has none of
-// them and is still read. A reader rejects any other format.
-const TapeFormat = "xengine-tape-2"
+// TapeFormat is the Tape.Format value Play writes. xengine-tape-3 adds the
+// die rolls of an entry to xengine-tape-2's runner refs (Pick.Ref,
+// Pick.AttackerRef, Pick.BattleRef, ManaRec.Ref), the decision's Max and the
+// coin flips. Both earlier formats are still read: tape-2 has no die rolls,
+// tape-1 has no refs, Max or flips either. A reader rejects any other format.
+const TapeFormat = "xengine-tape-3"
+
+// TapeFormat2 is the format before the entry die rolls.
+const TapeFormat2 = "xengine-tape-2"
 
 // GameFormatCommander is Tape.GameFormat of a Commander game.
 const GameFormatCommander = "commander"
@@ -99,6 +103,8 @@ type Entry struct {
 	RNG   uint64 `json:"rng,omitempty"`
 	// Flips are the coin flips committing this intent made, in log order.
 	Flips []Flip `json:"flips,omitempty"`
+	// Rolls are the die rolls committing this intent made, in log order.
+	Rolls []Roll `json:"rolls,omitempty"`
 	// Reanswered marks an entry whose intent the engine refused: gorge's
 	// refusal ladder committed a different answer, which the tape does not
 	// carry.
@@ -110,6 +116,17 @@ type Entry struct {
 type Flip struct {
 	Seat int  `json:"seat"`
 	Win  bool `json:"win"`
+}
+
+// Roll is one die-roll result: the roller's seat, the die's sides, the
+// natural roll and the result after any modifier. Both values are recorded
+// because a follower must force the natural roll (the modifier is the
+// follower's own) while the live game's outcome is the modified one.
+type Roll struct {
+	Seat    int `json:"seat"`
+	Sides   int `json:"sides"`
+	Natural int `json:"natural"`
+	Result  int `json:"result"`
 }
 
 // Pick is one option an intent chose. Which fields matter follows Kind: Ability
@@ -182,8 +199,8 @@ func ReadTape(r io.Reader) (*Tape, error) {
 	if err := dec.Decode(&t); err != nil {
 		return nil, fmt.Errorf("game: read tape: %w", err)
 	}
-	if t.Format != TapeFormat && t.Format != TapeFormat1 {
-		return nil, fmt.Errorf("game: tape format %q, want %q or %q", t.Format, TapeFormat, TapeFormat1)
+	if t.Format != TapeFormat && t.Format != TapeFormat2 && t.Format != TapeFormat1 {
+		return nil, fmt.Errorf("game: tape format %q, want %q, %q or %q", t.Format, TapeFormat, TapeFormat2, TapeFormat1)
 	}
 	return &t, nil
 }

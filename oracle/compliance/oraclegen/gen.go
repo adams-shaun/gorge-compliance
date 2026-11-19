@@ -264,6 +264,20 @@ type Answer struct {
 	Pick []string `json:"pick"`
 }
 
+// DieRoll is one die roll an item's step makes. Step is the scenario step
+// whose action (or resolution) rolled it, Seat the roller, Sides the die and
+// Natural the unmodified result. Result is the recorded result after any
+// Modifier$; a follower forces Natural, then applies its own modifier exactly
+// as the live game did. The list is flat and in log order, so a step that
+// rolls several dice keeps every one.
+type DieRoll struct {
+	Step    int `json:"step"`
+	Seat    int `json:"seat"`
+	Sides   int `json:"sides"`
+	Natural int `json:"natural"`
+	Result  int `json:"result,omitempty"`
+}
+
 // ThreeSeats is Scenario.Players for a multiplayer scenario: p0 and two
 // opponents, so one opponent can lose the game while it goes on (CR 800.4a).
 const ThreeSeats = 3
@@ -346,6 +360,14 @@ type Item struct {
 	// it is an Item field, never a Step one, so Raw() never sends it to
 	// gorge's runner (which decodes steps with DisallowUnknownFields).
 	Payment []string `json:"payment,omitempty"`
+	// DieRolls is every die roll the item's steps made, in log order. It is
+	// an Item field, never a Step one, so Raw() never sends it to gorge's
+	// runner (which cannot force a roll at this pin). A follower that must
+	// not roll its own die reads it: XMage scripts each roll through
+	// xmage_answers (kind "die"), and a Forge driver forces item.die_rolls
+	// before running the step. Empty for every item that rolls no die, so
+	// existing item bytes are unchanged.
+	DieRolls []DieRoll `json:"die_rolls,omitempty"`
 	// Ignore names snapshot fields the comparison leaves out for this
 	// scenario: library_top after the card shuffles a library.
 	Ignore []string `json:"ignore,omitempty"`
@@ -373,8 +395,9 @@ type XPos struct {
 }
 
 // XAnswer is one scripted XMage answer: Kind target (Value a card name, a
-// seat "pN", or "[target_skip]"), mode (Value the 1-based mode number), or
-// choice (Value "yes"/"no" or an option label).
+// seat "pN", or "[target_skip]"), mode (Value the 1-based mode number),
+// choice (Value "yes"/"no" or an option label), flip (Value "win"/"lose"),
+// or die (Value the natural die result).
 type XAnswer struct {
 	Seat  int    `json:"seat"`
 	Kind  string `json:"kind"`
@@ -385,6 +408,39 @@ type XAnswer struct {
 func (it Item) Raw() []byte {
 	b, _ := json.Marshal(it.Scenario)
 	return b
+}
+
+// CutSteps keeps the first n steps and every per-step side table parallel to
+// them. It is the one place an item is shortened, so a side table added later
+// cannot be forgotten at a call site: the repro cut and the tape-turn prefix
+// both go through here.
+func (it *Item) CutSteps(n int) {
+	n = max(0, min(n, len(it.Steps)))
+	it.Steps = it.Steps[:n]
+	if len(it.XAnswers) > n {
+		it.XAnswers = it.XAnswers[:n]
+	}
+	if len(it.XAbility) > n {
+		it.XAbility = it.XAbility[:n]
+	}
+	if len(it.XPos) > n {
+		it.XPos = it.XPos[:n]
+	}
+	if len(it.Payment) > n {
+		it.Payment = it.Payment[:n]
+	}
+	if len(it.XTargetSkips) > n {
+		it.XTargetSkips = it.XTargetSkips[:n]
+	}
+	if len(it.DieRolls) > 0 {
+		var out []DieRoll
+		for _, r := range it.DieRolls {
+			if r.Step < n {
+				out = append(out, r)
+			}
+		}
+		it.DieRolls = out
+	}
 }
 
 // Skip explains why a card got no scenario.

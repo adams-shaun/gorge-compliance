@@ -5486,6 +5486,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 queueFlipResult(p, value);
                 continue;
             }
+            if (kind.equals("setup_die")) {
+                // A die roll the setup drive walked into: the same reason as
+                // setup_flip, with TestPlayer.rollDieResult's "[die_roll]: N"
+                // token (item.die_rolls scripts each roll).
+                queueDieResult(p, value);
+                continue;
+            }
             if (kind.equals("setup_mode")) {
                 // A setup-drive modal pick (Zuko, Conflicted's turn-1 charm):
                 // XMage poses chooseMode, or chooseUse for a yes/no
@@ -5522,6 +5529,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * "Missing FLIP COIN RESULT def". */
     static void queueFlipResult(TestPlayer p, String value) {
         p.addChoice(value.equals("win") ? TestPlayer.FLIPCOIN_RESULT_TRUE : TestPlayer.FLIPCOIN_RESULT_FALSE);
+    }
+
+    /** Queue one scripted die-roll result on the player's CHOICE queue:
+     * TestPlayer.DIE_ROLL ("[die_roll]: ") followed by the natural result, the
+     * token TestPlayer.rollDieResult consumes from the queue head. Unscripted,
+     * the replay fails with "Missing DIE ROLL RESULT def". */
+    static void queueDieResult(TestPlayer p, String value) {
+        p.addChoice(TestPlayer.DIE_ROLL + value);
     }
 
     /** Whether the generator scripted a divided-target share
@@ -5594,10 +5609,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // queued before build() and never reaches this switch).
                     queueFlipResult(p, v);
                     break;
+                case "die":
+                    // A die roll the scenario's runner recorded
+                    // (item.die_rolls): XMage poses the same roll while this
+                    // step executes, and TestPlayer.rollDieResult consumes the
+                    // natural result from the CHOICE queue head. The die
+                    // modifier is the engine's own, so the natural roll is the
+                    // value to force.
+                    queueDieResult(p, v);
+                    break;
                 case "setup_choice":
                 case "setup_target":
                 case "setup_mode":
                 case "setup_flip":
+                case "setup_die":
                     // Queued before setup placement; never enqueue it again at
                     // the corresponding gameplay step.
                     break;

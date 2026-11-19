@@ -205,6 +205,7 @@ func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 	l.FirstEntry = first
 
 	l.lowerEntries(reg, m, t.Entries, first, t.Outcome.Stall != "")
+	l.markDieRolls(m, t.Entries)
 	l.compactPayment()
 	return l, nil
 }
@@ -234,7 +235,7 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 	// bookkeeping.
 	quiet := func(g []game.Entry) bool {
 		for _, e := range g {
-			if len(e.Mana) > 0 || e.RNG > 0 || len(e.Flips) > 0 {
+			if len(e.Mana) > 0 || e.RNG > 0 || len(e.Flips) > 0 || len(e.Rolls) > 0 {
 				return false
 			}
 		}
@@ -611,9 +612,40 @@ func settlesTwice(g []game.Entry) bool {
 // drop keeps the first n steps: the pass group after them found no step to
 // answer its asks.
 func (l *Lowered) drop(n int) {
-	l.Item.Steps = l.Item.Steps[:n]
+	l.Item.CutSteps(n)
 	l.StepEntry = l.StepEntry[:n]
-	l.Item.Payment = l.Item.Payment[:n]
+}
+
+// markDieRolls lowers every recorded die roll to the step it belongs to:
+// the first step whose StepEntry reaches the entry that rolled it (a group's
+// mana taps have StepEntry -1, so they can never claim a roll). A roll in an
+// entry the lowering stopped before belongs to no step and is dropped.
+// Rolls are appended in tape and log order, so the item order is the order
+// the engines make them.
+func (l *Lowered) markDieRolls(m seatMap, entries []game.Entry) {
+	if len(l.Item.DieRolls) > 0 || len(l.StepEntry) == 0 {
+		return
+	}
+	for i, e := range entries {
+		if len(e.Rolls) == 0 || i < l.FirstEntry {
+			continue
+		}
+		step := -1
+		for k := l.Prelude; k < len(l.StepEntry); k++ {
+			if l.StepEntry[k] >= i {
+				step = k
+				break
+			}
+		}
+		if step < 0 {
+			continue
+		}
+		for _, r := range e.Rolls {
+			l.Item.DieRolls = append(l.Item.DieRolls, oraclegen.DieRoll{
+				Step: step, Seat: m.seat(r.Seat), Sides: r.Sides, Natural: r.Natural, Result: r.Result,
+			})
+		}
+	}
 }
 
 // attach puts a step's asks on it. A cast or activation whose every target
@@ -656,7 +688,7 @@ func answersOf(m seatMap, g []game.Entry) ([]oraclegen.Answer, *truncation) {
 		switch {
 		case a.Reanswered:
 			return nil, unsupported("reanswered")
-		case a.RNG > 0 && len(a.Flips) == 0 && !m.rngOK:
+		case a.RNG > 0 && len(a.Flips) == 0 && len(a.Rolls) == 0 && !m.rngOK:
 			// A shuffle or a random pick: the runner's seeded RNG cannot land
 			// where the live game did.
 			return nil, unsupported("rng")
@@ -778,7 +810,7 @@ func colourProduced(g []game.Entry) []game.Entry {
 func resolveSpanLowerable(entries []game.Entry, j, end int) bool {
 	for k := j; k < end; k++ {
 		e := entries[k]
-		if len(e.Mana) > 0 || e.RNG > 0 || len(e.Flips) > 0 {
+		if len(e.Mana) > 0 || (e.RNG > 0 && len(e.Rolls) == 0) || len(e.Flips) > 0 {
 			return false
 		}
 		if e.Kind == "priority" && !isPass(e) || e.Kind == "attackers" || e.Kind == "blockers" {

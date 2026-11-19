@@ -198,6 +198,8 @@ type recorder struct {
 	mana      []ManaRec // fired since the last flush
 	flips     []Flip    // coin flips since the last flush
 	flipScan  int       // how far of e.L.Events the flips were read
+	rolls     []Roll    // die rolls since the last flush
+	rollScan  int       // how far of e.L.Events the die rolls were read
 	manaScan  int       // how far of e.L.Events the open mana record's Produced was read
 	spendScan int       // how far of e.L.Events the spent mana was read
 	spent     string    // pool mana spent since the last flush, one letter per unit
@@ -259,6 +261,11 @@ func (r *recorder) flush(e *rules.Engine) {
 			r.flips = append(r.flips, Flip{Seat: int(flipper), Win: win})
 		}
 	}
+	for ; r.rollScan < len(evs); r.rollScan++ {
+		if roller, sides, natural, result, ok := effects.DieRollResult(evs[r.rollScan]); ok {
+			r.rolls = append(r.rolls, Roll{Seat: int(roller), Sides: int(sides), Natural: int(natural), Result: int(result)})
+		}
+	}
 	seat := -1
 	if n := len(r.t.Entries); n > 0 {
 		seat = r.t.Entries[n-1].Seat
@@ -285,11 +292,11 @@ func (r *recorder) flush(e *rules.Engine) {
 	}
 	if n := len(r.t.Entries); n > 0 {
 		last := &r.t.Entries[n-1]
-		last.Mana, last.Spent, last.RNG, last.Flips = r.mana, r.spent, draws, r.flips
+		last.Mana, last.Spent, last.RNG, last.Flips, last.Rolls = r.mana, r.spent, draws, r.flips, r.rolls
 	} else {
 		r.t.GenesisMana, r.t.GenesisRNG = r.mana, draws
 	}
-	r.mana, r.spent, r.flips = nil, "", nil
+	r.mana, r.spent, r.flips, r.rolls = nil, "", nil, nil
 }
 
 func zoneNames(e *rules.Engine, z state.Zone, p state.PlayerID) []string {
