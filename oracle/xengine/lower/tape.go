@@ -942,15 +942,20 @@ func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Ste
 	var steps []oraclegen.Step
 	var why *truncation
 	var mana []game.ManaRec
-	var spent string
-	for _, e := range g {
+	// recAt is, per entry, where its mana records sit in the group's
+	// aggregate: the lowering lowers each record as the tap step at that
+	// index of the group's steps. An entry skipped for a resolve-time
+	// payment has -1.
+	recAt := make([]int, len(g))
+	for k, e := range g {
+		recAt[k] = -1
 		if !paysAfterAsks(en) && isResolvePay(e) {
 			// The planner's funding of a resolve-time payment: lowerEntries
 			// floats it ahead of the pass that resolves the object.
 			continue
 		}
+		recAt[k] = len(mana)
 		mana = append(mana, e.Mana...)
-		spent += e.Spent
 	}
 	switch en.Kind {
 	case "priority":
@@ -983,18 +988,96 @@ func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Ste
 	for i := range idx {
 		idx[i] = -1
 	}
-	if spent != "" {
-		// The group's spend belongs to the step that paid it, the last step:
-		// the cast or the activation (including a mana ability activation,
-		// whose own cost the recorded game already paid). Every earlier step is
-		// an explicit mana tap that adds pool mana. The placement comes from the
-		// lowered step's role, not the option kind that produced it, so a future
-		// paying option kind cannot silently lose its spend.
+	// Each entry's Spent is the cost its own commit paid, so it belongs to
+	// the step that commit lowered as: a mana window ask pays its
+	// activation's own cost on the tap step that activation is lowered as
+	// (its record's step, the same index the record sits at in the group's
+	// steps), and everything else — the decision itself, the asks it posed,
+	// the payment they completed — pays the decision's cost on the
+	// decision's step. An activate ask whose record is not on it (the hook
+	// fires on the colour pick that follows it, isManaAbilityAsk) carries
+	// the spend to that record's tap step by object. Merging the entries
+	// into one aggregate instead put a nested mana activation's own cost (a
+	// Ferrous Lake's {1}, CR 107.4b) on the later cast or ability, which
+	// replayed a pool split the live game never had (xe:RAND:1:13:w14).
+	//
+	// allTaps marks a decision that is itself a mana ability activation:
+	// every step is a record's tap step and the records sit at their own
+	// step indexes; for a cast or ability the last step is the decision, so
+	// only the indexes before it are taps.
+	allTaps := en.Kind == "priority" && len(en.Picks) == 1 && en.Picks[0].Kind == "activate"
+	tapLimit := len(steps)
+	if !allTaps {
+		tapLimit--
+	}
+	var decSpent string
+	type deferPay struct {
+		obj   state.ObjID
+		spent string
+	}
+	var deferred []deferPay
+	claimed := make([]bool, len(steps))
+	for k, e := range g {
+		if recAt[k] < 0 || e.Spent == "" {
+			continue
+		}
+		last := recAt[k] + len(e.Mana) - 1
+		if pk := manaAsk(e); pk != nil {
+			switch {
+			case len(e.Mana) > 0 && last < tapLimit:
+				pay[last] += e.Spent
+				claimed[last] = true
+			case len(e.Mana) > 0:
+				decSpent += e.Spent
+			default:
+				deferred = append(deferred, deferPay{pk.Obj, e.Spent})
+			}
+			continue
+		}
+		decSpent += e.Spent
+	}
+	// The deferred spends: the first unclaimed tap step of a record of that
+	// object, in activation order, so a source activated twice gives each
+	// activation its own.
+	for _, d := range deferred {
+		for i, mr := range mana {
+			if i >= tapLimit || claimed[i] || mr.Obj != d.obj {
+				continue
+			}
+			pay[i] += d.spent
+			claimed[i] = true
+			d.spent = ""
+			break
+		}
+		if d.spent != "" {
+			// No record of that object was lowered as a tap: keep the spend
+			// with the decision's, the aggregate the group lowered before.
+			decSpent += d.spent
+		}
+	}
+	if decSpent != "" {
+		// The decision's spend belongs to the step that paid it, the last
+		// step: the cast or the activation (including a mana ability
+		// activation, whose own cost the recorded game already paid). Every
+		// earlier step is an explicit mana tap that adds pool mana. The
+		// placement comes from the lowered step's role, not the option kind
+		// that produced it, so a future paying option kind cannot silently
+		// lose its spend.
 		if last := len(steps) - 1; isPaidStep(steps[last].Op) {
-			pay[last] = spent
+			pay[last] += decSpent
 		}
 	}
 	return steps, idx, pay, answers, nil
+}
+
+// manaAsk is the pick of an entry whose commit is part of a mana activation:
+// the "activate <source> for mana" window ask, or the priority decision that
+// activated a mana ability directly. nil when the commit is not one.
+func manaAsk(e game.Entry) *game.Pick {
+	if len(e.Picks) != 1 || e.Picks[0].Kind != "activate" {
+		return nil
+	}
+	return &e.Picks[0]
 }
 
 // isPaidStep reports whether a lowered step pays a cost from its controller's
