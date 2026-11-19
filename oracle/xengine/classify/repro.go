@@ -137,22 +137,7 @@ func Truncate(it oraclegen.Item, f Finding) oraclegen.Item {
 	if f.Checkpoint != "" {
 		n = min(max(f.Step+1, 1), n)
 	}
-	it.Steps = append([]oraclegen.Step{}, it.Steps[:n]...)
-	if len(it.XAnswers) > n {
-		it.XAnswers = it.XAnswers[:n]
-	}
-	if len(it.XAbility) > n {
-		it.XAbility = it.XAbility[:n]
-	}
-	if len(it.XPos) > n {
-		it.XPos = it.XPos[:n]
-	}
-	if len(it.Payment) > n {
-		it.Payment = it.Payment[:n]
-	}
-	if len(it.XTargetSkips) > n {
-		it.XTargetSkips = it.XTargetSkips[:n]
-	}
+	it.CutSteps(n)
 	return it
 }
 

@@ -5524,6 +5524,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
         p.addChoice(value.equals("win") ? TestPlayer.FLIPCOIN_RESULT_TRUE : TestPlayer.FLIPCOIN_RESULT_FALSE);
     }
 
+    /** Queue one scripted die-roll result on the player's CHOICE queue:
+     * TestPlayer.DIE_ROLL ("[die_roll]: ") followed by the natural result, the
+     * token TestPlayer.rollDieResult consumes from the queue head. Unscripted,
+     * the replay fails with "Missing DIE ROLL RESULT def". Only step-time
+     * rolls have a producer (oraclegen's kind "die"); a die the setup drive
+     * rolls before the first gameplay step is not scripted, unlike a setup
+     * coin flip, so it still strict-misses. */
+    static void queueDieResult(TestPlayer p, String value) {
+        p.addChoice(TestPlayer.DIE_ROLL + value);
+    }
+
     /** Whether the generator scripted a divided-target share
      * ("<ref>^X=<share>", oraclegen dividedTargetAnswers) for step i: the
      * TargetAmount recipients of an activation whose own targets it then
@@ -5593,6 +5604,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // "win"/"lose"; the drive-window "setup_flip" kind is
                     // queued before build() and never reaches this switch).
                     queueFlipResult(p, v);
+                    break;
+                case "die":
+                    // A die roll the scenario's runner recorded
+                    // (item.die_rolls): XMage poses the same roll while this
+                    // step executes, and TestPlayer.rollDieResult consumes the
+                    // natural result from the CHOICE queue head. The die
+                    // modifier is the engine's own, so the natural roll is the
+                    // value to force.
+                    queueDieResult(p, v);
                     break;
                 case "setup_choice":
                 case "setup_target":

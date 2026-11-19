@@ -107,6 +107,14 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     (one per unit): a multiset, not an order. A driver that can name pool
 //     mana spends exactly that; empty means auto-pay. It is an Item field,
 //     not a Step one, so Raw() never sends it to gorge's runner.
+//   - item.die_rolls lists every die roll a step made (step, seat, sides,
+//     natural, result), in log order. A driver must force the NATURAL roll
+//     before running that step and let its own Modifier$ apply, or its
+//     follower rolls its own die and a card like Ebony Fly animates to a
+//     different P/T. It is an Item field, not a Step one, so Raw() never
+//     sends it to gorge's runner, and it is not a gorge decision: Forge poses
+//     no decision for a die, so exporting it in gorge_decisions would be an
+//     unconsumed leftover.
 //   - abilities is keyed by the decimal step index.
 //   - library_top is not compared when a seat's setup names library cards
 //     (see forgeIgnore).
