@@ -57,8 +57,9 @@ type Divergence struct {
 	Repro  string `json:"repro,omitempty"`
 	// Harness is non-empty when the difference is the follower's, not an
 	// engine's: answer-unmapped (a Forge answer with no gorge mapping),
-	// setup-inexpressible, chance-misaligned. Such a finding ranks with the
-	// follower tickets, never as a gorge defect.
+	// setup-inexpressible, chance-misaligned, intent-invalid (a follower-built
+	// intent decision.Decision.Validate refused). Such a finding ranks with
+	// the follower tickets, never as a gorge defect.
 	Harness string `json:"harness,omitempty"`
 	Msg     string `json:"msg,omitempty"`
 }
