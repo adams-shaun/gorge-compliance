@@ -32,6 +32,11 @@
 // optional-trigger decision (trigger_optional) is answered by default (the
 // first option, yes; Result.Optionals counts them) and consumes no log line.
 //
+// Forge's recorder writes no ask for the order of a seat's simultaneously
+// triggered abilities, so a gorge trigger-order decision (trigger_order) is
+// answered by default (the offered order; Result.Orders counts them) and
+// consumes no log line.
+//
 // # The forge-shadow-1 log
 //
 // One JSON object per line, told apart by "t". Card identities are Forge's
