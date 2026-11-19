@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Check that a forced resolution (a pass-run resolving pass) settles the
-# state-based actions a real priority grant would run before the checkpoint:
-# Bleed Dry exiles an enchanted creature, so its Aura must be in the owner's
-# graveyard at the resolving pass snapshot (CR 704.3/704.5m). Requires the
-# read-only XMage build, and the constructor opens the H2 card DB, so run in a
-# scratch cwd with a private copy.
+# Check that a forced resolution (pass-run, resolve op or pass_to deferred
+# resolution) settles the state-based actions a real priority grant would run
+# before the checkpoint: Bleed Dry exiles an enchanted creature, so its Aura
+# must be in the owner's graveyard at the checkpoint snapshot (CR
+# 704.3/704.5m). Requires the read-only XMage build, and the constructor opens
+# the H2 card DB, so run in a scratch cwd with a private copy.
 set -euo pipefail
 root=$(realpath -m "${XMAGE_ORACLE_DIR:-$(dirname "$0")/../.oracle-build/xmage}")
 out=${1:-.coverage/xmage-driver/resolve-settle-out}

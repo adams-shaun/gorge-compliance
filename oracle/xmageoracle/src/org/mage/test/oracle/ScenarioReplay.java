@@ -105,6 +105,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // The step name the next checkpoint reports instead of the one it is taken
     // in, set by a pass that stops before a declaration (declarationAhead).
     private PhaseStep checkpointStepAs = null;
+    // Whether a forced waitStackResolved ran since the last checkpoint. The
+    // replay loop captures it per step and the checkpoint runs the game's
+    // state-based check before its snapshot (waitStackResolved override).
+    private boolean settleCheckpoint = false;
     private static final PhaseStep MAIN = PhaseStep.PRECOMBAT_MAIN;
 
     private final List<JsonObject> snaps = new ArrayList<>();
@@ -1900,6 +1904,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             copyCostCast = null;
             giftPromisedCast = false;
             followedPassPosition = false;
+            settleCheckpoint = false;
             gorgeName = str(sc, "card");
             xmageName = str(sc, "xmage_name");
             endTurnScenario = hasEndTurnEffect(xmageName.isEmpty() ? gorgeName : xmageName);
@@ -1959,7 +1964,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String cp = "step " + i + " (" + op + ")";
                 final PhaseStep reportAs = checkpointStepAs;
                 checkpointStepAs = null;
+                // A forced resolution queued during this step (waitStackResolved
+                // override) must settle before the snapshot. Capture the flag
+                // now: the whole action queue is built before execute(), so the
+                // field's later value cannot describe this checkpoint.
+                final boolean settleHere = settleCheckpoint;
+                settleCheckpoint = false;
                 runCode(cp, turn, phase, checkpointSeat(op, st, i), (info, p, g) -> {
+                    if (settleHere) {
+                        g.checkStateAndTriggered();
+                    }
                     applyDeclarationStepEnd(reportAs, g);
                     JsonObject snap = snapshot(info, g);
                     if (reportAs != null) {
@@ -4822,12 +4836,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * queued in the same priority would otherwise snapshot the pre-SBA board:
      * an Aura whose bearer an exile-instead replacement removed (Bleed Dry,
      * Gnashing of Teeth) is still on the battlefield, and its CR 704.5m move
-     * waits for the next priority. Queue the game's own check after the
-     * resolution, ahead of the checkpoint, so every forced-resolution site
-     * snapshots what a real priority grant would see (CR 117.5, 704.3). */
-    private void settleForCheckpoint(TestPlayer p) {
-        runCode("settle the state a forced resolution left", turn, phase, p,
-                (info, pl, g) -> g.checkStateAndTriggered());
+     * waits for the next priority. Arm the next checkpoint instead of queueing
+     * a separate action: the checkpoint runs the game's own check just before
+     * its snapshot, on the checkpoint's seat, so a forced resolution cannot
+     * leave its state-based actions behind and the pinned queue order is
+     * unchanged. Overriding the single wait entry point covers every forced
+     * resolution site, including a future one (CR 117.5, 704.3). */
+    @Override
+    public void waitStackResolved(int turnNum, PhaseStep step, TestPlayer player, boolean skipOneStackObjectOnly) {
+        super.waitStackResolved(turnNum, step, player, skipOneStackObjectOnly);
+        settleCheckpoint = true;
     }
 
     private void queuePassCommands(int stepIdx) {
@@ -4855,7 +4873,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     break;
                 case CMD_WAIT_RESOLVE_ONE:
                     waitStackResolved(turn, phase, active, true);
-                    settleForCheckpoint(active);
                     // The pair resolves the stack's top object, so a cast
                     // step's spell has left the stack: a later cast that
                     // names it targets its permanent, not a spell that will
@@ -5043,7 +5060,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // the seat that queued the pair (queuePassCommands).
                     TestPlayer waiter = isOp(steps(sc0), stepIdx - 1, "pass") ? seat(activeSeat) : p;
                     waitStackResolved(turn, phase, waiter, true);
-                    settleForCheckpoint(waiter);
                     dropLastCast();
                     return;
                 }
@@ -5460,7 +5476,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
             case "resolve":
                 // gorge's resolve op passes priority until the stack is empty.
                 waitStackResolved(turn, phase, p);
-                settleForCheckpoint(p);
                 // waitStackResolved empties the stack, so every cast recorded
                 // on it is gone. A later cast targeting one of those names is
                 // targeting the permanent (the setup alias still names it),
