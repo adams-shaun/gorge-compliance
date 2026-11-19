@@ -9,10 +9,11 @@ import (
 	"testing"
 )
 
-// diagnosedCorpus copies the fixture corpus into a t.TempDir() as
-// cardsfolder/<rel> and returns the temp dir. The fixtures themselves stay
-// outside any cardsfolder path, so the licence guard never mistakes them for a
-// Forge corpus.
+// diagnosedCorpus copies the fixture corpus into a t.TempDir() and returns the
+// temp dir. Most fixtures land under cardsfolder/<rel>; tok/ holds token-script
+// fixtures and lands under tokenscripts/<rest>. The fixture sources stay outside
+// any cardsfolder/ or tokenscripts/ directory, so the licence guard never
+// mistakes them for a Forge corpus.
 func diagnosedCorpus(t *testing.T) string {
 	t.Helper()
 	src := filepath.Join("testdata", "diagnosed", "corpus")
@@ -33,6 +34,9 @@ func diagnosedCorpus(t *testing.T) string {
 			return err
 		}
 		dst := filepath.Join(dir, "cardsfolder", rel)
+		if rest, ok := strings.CutPrefix(rel, "tok"+string(os.PathSeparator)); ok {
+			dst = filepath.Join(dir, "tokenscripts", rest)
+		}
 		if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
 			return err
 		}
@@ -83,6 +87,7 @@ func TestDiagnosedCheckRejects(t *testing.T) {
 		{"bad_wrong.tsv", 2, `unknown wrong "Z"`, ""},
 		{"bad_cr.tsv", 2, `bad cr "CR601"`, ""},
 		{"bad_card.tsv", 2, `unknown card "Missing"`, ""},
+		{"bad_token.tsv", 2, `unknown card "token:Missing"`, ""},
 		{"bad_ref.tsv", 2, "needs an upstream URL or a ticket id", ""},
 		{"dup.tsv", 3, "duplicate (kind, set, card, field)", ""},
 		// multi.tsv's single row breaks five rules; the summary counts the row
@@ -106,5 +111,61 @@ func TestDiagnosedCheckRejects(t *testing.T) {
 				t.Errorf("%s: command error %q missing %q", c.file, err, c.wantErr)
 			}
 		})
+	}
+}
+
+// tempRegister writes a one-row register whose card column is card.
+func tempRegister(t *testing.T, card string) string {
+	t.Helper()
+	row := strings.Join([]string{
+		"diverge", "FDN", card, "cast", "harness", "601.2", "evidence", "", "compliance-token",
+	}, "\t")
+	file := filepath.Join(t.TempDir(), "register.tsv")
+	if err := os.WriteFile(file, []byte(diagnosedHeader+"\n"+row+"\n"), 0o644); err != nil {
+		t.Fatalf("write register: %v", err)
+	}
+	return file
+}
+
+// tempCardsCorpus builds a temp corpus with only cardsfolder/a/alpha.txt and no
+// tokenscripts directory.
+func tempCardsCorpus(t *testing.T) string {
+	t.Helper()
+	dir := t.TempDir()
+	folder := filepath.Join(dir, "cardsfolder", "a")
+	if err := os.MkdirAll(folder, 0o755); err != nil {
+		t.Fatalf("build corpus: %v", err)
+	}
+	if err := os.WriteFile(filepath.Join(folder, "alpha.txt"), []byte("Name:Alpha\n"), 0o644); err != nil {
+		t.Fatalf("build corpus: %v", err)
+	}
+	return dir
+}
+
+// A corpus with no tokenscripts directory (the pre-token fixture shape) must
+// still validate card rows: the token folder is optional.
+func TestDiagnosedMissingTokenScripts(t *testing.T) {
+	corpus := tempCardsCorpus(t)
+	file := tempRegister(t, "Alpha")
+	var out strings.Builder
+	bad, err := checkDiagnosed(file, corpus, &out)
+	if err != nil {
+		t.Fatalf("missing tokenscripts/ is not a corpus error: %v", err)
+	}
+	if bad != 0 {
+		t.Fatalf("%d bad row(s):\n%s", bad, out.String())
+	}
+}
+
+// A missing cardsfolder is one corpus error, not an "unknown card" per row:
+// a wrong -cards path must fail at the root.
+func TestDiagnosedMissingCardsFolder(t *testing.T) {
+	corpus := t.TempDir() // deliberately no cardsfolder/
+	file := tempRegister(t, "Alpha")
+	var out strings.Builder
+	if _, err := checkDiagnosed(file, corpus, &out); err == nil {
+		t.Fatalf("missing cardsfolder accepted; output:\n%s", out.String())
+	} else if !strings.Contains(err.Error(), "cardsfolder") {
+		t.Fatalf("corpus error %q does not name cardsfolder", err)
 	}
 }

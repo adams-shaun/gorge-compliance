@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -45,8 +46,9 @@ func runDiagnosed(args []string) error {
 // "<file>:<row>: <reason>" line per error to w. It returns the number of bad
 // rows; a read or corpus error is returned separately.
 func checkDiagnosed(file, cardsDir string, w io.Writer) (int, error) {
-	folder := filepath.Join(cardsDir, "cardsfolder")
-	names, err := diagnosedCardNames(folder)
+	cardFolder := filepath.Join(cardsDir, "cardsfolder")
+	tokenFolder := filepath.Join(cardsDir, "tokenscripts")
+	names, err := diagnosedCardNames(cardsDir)
 	if err != nil {
 		return 0, err
 	}
@@ -101,7 +103,7 @@ func checkDiagnosed(file, cardsDir string, w io.Writer) (int, error) {
 			report(row, "bad cr %q (want NNN or NNN.NNx)", cr)
 		}
 		if !names[card] {
-			report(row, "unknown card %q (no Name: under %s)", card, folder)
+			report(row, "unknown card %q (no Name: under %s or %s)", card, cardFolder, tokenFolder)
 		}
 		if upstream == "" && ticket == "" {
 			report(row, "needs an upstream URL or a ticket id")
@@ -110,11 +112,46 @@ func checkDiagnosed(file, cardsDir string, w io.Writer) (int, error) {
 	return len(badRows), nil
 }
 
-// diagnosedCardNames walks cardsfolder once and returns every card's Name:
-// value, including alternate faces, so a register row names a card the corpus
-// actually has.
-func diagnosedCardNames(folder string) (map[string]bool, error) {
+// diagnosedCardNames indexes the names a register row may use. A row normally
+// names a card (cardsfolder, including alternate faces). It may also name a
+// token object with the farm's "token:" spelling ("token:Blood Token"): the
+// farm attributes a primary difference to the object its last step named, and
+// that object is a token when the step activated or attacked with one. Both a
+// token script's own name and a copied card's name can be that object, so every
+// indexed name gets the token spelling too.
+func diagnosedCardNames(cardsDir string) (map[string]bool, error) {
+	cards, err := diagnosedNames(filepath.Join(cardsDir, "cardsfolder"), false)
+	if err != nil {
+		return nil, err
+	}
+	tokens, err := diagnosedNames(filepath.Join(cardsDir, "tokenscripts"), true)
+	if err != nil {
+		return nil, err
+	}
 	names := map[string]bool{}
+	for name := range cards {
+		names[name] = true
+		names["token:"+name] = true
+	}
+	for name := range tokens {
+		names["token:"+name] = true
+	}
+	return names, nil
+}
+
+// diagnosedNames indexes the Name: values under folder, including alternate
+// faces. A missing folder is empty, not an error, only when optional is set:
+// a corpus may legitimately have no tokenscripts directory. A missing
+// cardsfolder is always an error, so a wrong -cards path stays a corpus error
+// instead of turning every row into an "unknown card".
+func diagnosedNames(folder string, optional bool) (map[string]bool, error) {
+	names := map[string]bool{}
+	if _, err := os.Stat(folder); err != nil {
+		if optional && errors.Is(err, fs.ErrNotExist) {
+			return names, nil
+		}
+		return nil, fmt.Errorf("cards: %w", err)
+	}
 	err := filepath.WalkDir(folder, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
