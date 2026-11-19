@@ -2,6 +2,7 @@ package lower
 
 import (
 	"fmt"
+	"slices"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
@@ -81,55 +82,89 @@ func TestLowerFundsResolveTimePayment(t *testing.T) {
 // TestLowerFundingTapCarriesSpend: the funding taps of a resolve-time payment
 // replay the activations gorge's planner fired to fund it, and each
 // activation's own cost is pool mana gorge spent doing so. The recorder puts
-// the election entry's whole spend — the activation's own cost (an Azorius
-// Signet's {1}, paid here with a floating U) followed by the resolve-time
-// charge itself — on the trigger_cost_pay entry, so the funding path must
-// split it the way lowerGroup splits a mana-window ask's: the first units the
-// activation's own Cost$ names ride the tap step that activation is lowered
-// as (the only step kind any follower reads a payment from — oraclegen's
-// Payment is "the pool mana a cast or activate step must spend"), and the
-// rest is the resolve-time charge, which the follower engine pays from its
-// floating pool at the resolve step, so spending it early would leave the
+// the election entry's whole spend — the funding activations' own costs (an
+// Azorius Signet's {1}, paid here with a floating U), in activation order,
+// followed by the resolve-time charge itself — on the trigger_cost_pay entry,
+// so the funding path must split it the way lowerGroup splits a mana-window
+// ask's: each activation's own Cost$ units ride the tap step that activation
+// is lowered as (the only step kind any follower reads a payment from —
+// oraclegen's Payment is "the pool mana a cast or activate step must spend"),
+// and the rest is the resolve-time charge, which the follower engine pays from
+// its floating pool at the resolve step, so spending it early would leave the
 // pool short of exactly those units at the resolve's checkpoint. Dropping the
-// whole spend instead (the old empty-pay pushFunding) replayed a pool the
-// live game never had: the follower paid the Signet's {1} with its own split.
+// whole spend instead (the old empty-pay pushFunding) replayed a pool the live
+// game never had: the follower paid the Signet's {1} with its own split.
+//
+// An election's commit can fund the payment with several activations, so the
+// per-record split must follow activation order: one entry's whole spend is
+// not one activation's.
 func TestLowerFundingTapCarriesSpend(t *testing.T) {
 	reg := cards.NewRegistry()
+	for _, name := range []string{"Azorius Signet", "Dimir Signet"} {
+		reg.Add(&cards.Card{Faces: []*cards.Face{{
+			Name:      name,
+			Abilities: []*cards.SA{{Params: map[string]string{"Cost": "1 T"}}},
+		}}})
+	}
 	reg.Add(&cards.Card{Faces: []*cards.Face{{
-		Name:      "Azorius Signet",
-		Abilities: []*cards.SA{{Params: map[string]string{"Cost": "1 T"}}},
+		Name:      "Island",
+		Abilities: []*cards.SA{{Params: map[string]string{"Cost": "T"}}},
 	}}})
 	pass := game.Entry{Kind: "priority", Seat: 0, Picks: []game.Pick{{Kind: "pass"}}, StackTop: 1}
 	sig := game.ManaRec{Obj: 9, Name: "Azorius Signet", Ability: 0, Ref: "p0:Azorius Signet", Player: 0}
-	ask := func(spent string) game.Entry {
+	dimir := game.ManaRec{Obj: 10, Name: "Dimir Signet", Ability: 0, Ref: "p0:Dimir Signet", Player: 0}
+	island := game.ManaRec{Obj: 11, Name: "Island", Ability: 0, Ref: "p0:Island", Player: 0}
+	ask := func(mana []game.ManaRec, spent string) game.Entry {
 		return game.Entry{
 			Kind: "choose_n", Seat: 0,
 			Picks: []game.Pick{{Kind: "trigger_cost_pay", Obj: 7, Ref: "p0:Glorious Attendant"}},
-			Mana:  []game.ManaRec{sig}, Spent: spent,
+			Mana:  mana, Spent: spent,
 		}
 	}
 	for _, tc := range []struct {
 		name  string
+		mana  []game.ManaRec
 		spent string
-		want  string
+		want  []string
 	}{
-		{"the activation's own cost is not dropped", "U", "U"},
-		{"the resolve-time charge stays with the resolve", "UU", "U"},
-		{"a free or unspent activation pays nothing", "", ""},
+		{"the activation's own cost is not dropped", []game.ManaRec{sig}, "U", []string{"U"}},
+		{"the resolve-time charge stays with the resolve", []game.ManaRec{sig}, "UU", []string{"U"}},
+		{"a free or unspent activation pays nothing", []game.ManaRec{sig}, "", []string{""}},
+		{
+			"the paid activation keeps its cost when a free land follows",
+			[]game.ManaRec{sig, island}, "UU", []string{"U", ""},
+		},
+		{
+			"a free activation before a paid one does not take its cost",
+			[]game.ManaRec{island, sig}, "U", []string{"", "U"},
+		},
+		{
+			"each paid activation gets its own cost",
+			[]game.ManaRec{sig, dimir}, "UU", []string{"U", "U"},
+		},
+		{
+			"a charge after two paid activations stays with the resolve",
+			[]game.ManaRec{sig, dimir}, "UUU", []string{"U", "U"},
+		},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			var l Lowered
 			l.StepEntry = []int{}
-			fund := l.fundingTaps(reg, seatMap{}, []game.Entry{pass, ask(tc.spent)}, 0, 2, nil, 0, false, false)
+			fund := l.fundingTaps(reg, seatMap{}, []game.Entry{pass, ask(tc.mana, tc.spent)}, 0, 2, nil, 0, false, false)
 			if fund.refused {
 				t.Fatal("funding refused")
 			}
-			if len(fund.taps) != 1 || fund.taps[0].Card != "p0:Azorius Signet" {
-				t.Fatalf("taps = %+v, want one Azorius Signet activation", fund.taps)
+			if len(fund.taps) != len(tc.mana) {
+				t.Fatalf("taps = %+v, want one per mana record", fund.taps)
+			}
+			for k, mr := range tc.mana {
+				if fund.taps[k].Card != mr.Ref {
+					t.Errorf("tap %d = %q, want %q (activation order)", k, fund.taps[k].Card, mr.Ref)
+				}
 			}
 			l.pushFunding(fund)
-			if len(l.Item.Payment) != 1 || l.Item.Payment[0] != tc.want {
-				t.Errorf("funding tap payment = %v, want [%q] (the activation's own spend)", l.Item.Payment, tc.want)
+			if !slices.Equal(l.Item.Payment, tc.want) {
+				t.Errorf("funding tap payments = %v, want %v (each activation's own spend)", l.Item.Payment, tc.want)
 			}
 		})
 	}

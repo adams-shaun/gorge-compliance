@@ -458,14 +458,15 @@ func (l *Lowered) fundingTaps(reg *cards.Registry, m seatMap, entries []game.Ent
 	}
 	var mana []game.ManaRec
 	// fundSpend is one isResolvePay entry's recorded spend: the pool mana its
-	// funding activations cost, followed by the resolve-time charge itself
-	// (the recorder flushes the commit's whole spend onto the election's own
-	// entry), and the index in mana of the entry's last record — the tap step
-	// its own cost belongs on, the same per-entry rule lowerGroup applies to
-	// a mana-window ask.
+	// funding activations cost in activation order, followed by the
+	// resolve-time charge itself (the recorder flushes the commit's whole
+	// spend onto the election's own entry), and the index in mana of the
+	// entry's first record. The election's commit can fire several funding
+	// activations (`resPayAutoStep` runs the planner's activations one at a
+	// time), so the spend is split per record, in activation order.
 	type fundSpend struct {
 		recs  []game.ManaRec
-		last  int
+		first int
 		spent string
 	}
 	var spends []fundSpend
@@ -473,9 +474,10 @@ func (l *Lowered) fundingTaps(reg *cards.Registry, m seatMap, entries []game.Ent
 		if !isResolvePay(e) {
 			continue
 		}
+		first := len(mana)
 		mana = append(mana, e.Mana...)
 		if len(e.Mana) > 0 && e.Spent != "" {
-			spends = append(spends, fundSpend{e.Mana, len(mana) - 1, e.Spent})
+			spends = append(spends, fundSpend{e.Mana, first, e.Spent})
 		}
 	}
 	if len(mana) == 0 {
@@ -502,21 +504,28 @@ func (l *Lowered) fundingTaps(reg *cards.Registry, m seatMap, entries []game.Ent
 	if why != nil {
 		return fail
 	}
-	// Each entry's spend: the first units its funding activations' own costs
-	// name (a Signet's {1}) ride the tap step that activation is lowered as —
-	// the only step kind a follower reads a payment from (oraclegen's Payment
-	// is "the pool mana a cast or activate step must spend"), so a follower
-	// that honours Item.Payment pays the recorded split there. The rest is
-	// the resolve-time charge itself: the follower engine pays it from its
-	// floating pool at the resolve step, so spending it early would leave the
-	// pool short of exactly those units at the resolve's checkpoint.
+	// Each entry's spend is one flush: its funding activations' own costs in
+	// activation order (a Signet's {1}), then the resolve-time charge. Walk
+	// the records in that order and give each the mana units its own Cost$
+	// names, taken from the front of what remains; that prefix rides the tap
+	// step the activation is lowered as — the only step kind a follower
+	// reads a payment from (oraclegen's Payment is "the pool mana a cast or
+	// activate step must spend"), so a follower that honours Item.Payment
+	// pays the recorded split there. Whatever remains is the resolve-time
+	// charge itself: the follower engine pays it from its floating pool at
+	// the resolve step, so spending it early would leave the pool short of
+	// exactly those units at the resolve's checkpoint.
 	pay := make([]string, len(taps))
 	for _, sp := range spends {
-		n := manaCostUnits(reg, sp.recs)
-		if n > len(sp.spent) {
-			n = len(sp.spent)
+		rest := sp.spent
+		for k, mr := range sp.recs {
+			n := manaCostUnit(reg, mr)
+			if n > len(rest) {
+				n = len(rest)
+			}
+			pay[sp.first+k] += rest[:n]
+			rest = rest[n:]
 		}
-		pay[sp.last] += sp.spent[:n]
 	}
 	openPass := func(k int) bool {
 		return k >= 0 && isPass(entries[k]) && entries[k].Seat == payer && entries[k].StackTop != 0
@@ -1149,19 +1158,26 @@ func manaAsk(e game.Entry) *game.Pick {
 	return nil
 }
 
-// manaCostUnits is how many pool units the mana abilities of an entry cost,
-// read from each ability's Cost$ (the tap, sacrifice, discard and life parts
-// are not mana). A source the registry cannot tell contributes zero: its
-// spend stays with the decision's, where the final flush put it.
-func manaCostUnits(reg *cards.Registry, mana []game.ManaRec) int {
+// manaCostUnit is how many pool units one mana ability activation costs, read
+// from its Cost$ (the tap, sacrifice, discard and life parts are not mana). A
+// source the registry cannot tell contributes zero: its spend stays with the
+// decision's, where the final flush put it.
+func manaCostUnit(reg *cards.Registry, mr game.ManaRec) int {
 	if reg == nil {
 		return 0
 	}
+	if sa := manaSA(reg, mr); sa != nil {
+		return int(rules.ParseCost(sa.Params["Cost"]).CMC())
+	}
+	return 0
+}
+
+// manaCostUnits is how many pool units the mana abilities of an entry cost:
+// the sum of their own costs (see manaCostUnit).
+func manaCostUnits(reg *cards.Registry, mana []game.ManaRec) int {
 	n := 0
 	for _, mr := range mana {
-		if sa := manaSA(reg, mr); sa != nil {
-			n += int(rules.ParseCost(sa.Params["Cost"]).CMC())
-		}
+		n += manaCostUnit(reg, mr)
 	}
 	return n
 }
