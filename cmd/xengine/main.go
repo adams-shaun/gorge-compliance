@@ -6,8 +6,8 @@
 //	xengine play -set S [-chunk C] [-games K] [-seed N] [-windows] [-tape-turns 1,2,4,8] [-ledger L.tsv] [-random 'S1 S2'] [-dirac] [-pool FILE [-pool-filter FILE]] [-decks DIR] [-out DIR]
 //	xengine diff -play DIR -engine xmage|forge -rows ROWS.jsonl -out DIR2 [-only ID]
 //	xengine cov  -ledger A.tsv [-ledger B.tsv ...] [-sets FDN,BLB] [-sub BASE.tsv] [-missing] [-write OUT.tsv]
-//	xengine diagnosed -check [-file oracle/xengine/diagnosed] [-cards .cards]
-//	xengine diagnosed -split [-file oracle/xengine/diagnosed]
+//	xengine diagnosed -check [-file oracle/xengine/diagnosed.tsv] [-cards .cards]
+//	xengine diagnosed -split [-file oracle/xengine/diagnosed.tsv]
 //	xengine calib -play DIR -diff DIR2 -engine xmage|forge
 //	xengine xprep -play DIR -out xitems.jsonl [-manifests DIR]
 //	xengine adjudicate -play DIR -xmage DIFF_X -forge DIFF_F -out DIR3 [-ledger DIR] [-forge-ref REF12] [-phase DIFF_P [-phase-rows ROWS]]

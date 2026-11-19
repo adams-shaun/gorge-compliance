@@ -32,22 +32,26 @@ const (
 	// headroom before the next split.
 	diagnosedShardTarget = diagnosedMaxBytes / 2
 
-	// diagnosedActiveName is the shard the farm's report.py appends to and the
-	// last shard in register order. The other shards are shard-NNN.tsv.
+	// diagnosedActiveName is the active shard of a directory register
+	// (shard-NNN.tsv plus active.tsv). The committed file-plus-archive
+	// layout keeps the same role under the farm's existing append path:
+	// oracle/xengine/diagnosed.tsv is the active shard and
+	// oracle/xengine/diagnosed/shard-NNN.tsv are its archives.
 	diagnosedActiveName = "active.tsv"
 )
 
 var (
-	diagnosedKinds = []string{"FX|G", "G|F|X", "GF|X", "GX|F", "G|F|–", "diverge"}
-	diagnosedWrong = []string{"X", "F", "G", "harness"}
-	diagnosedCR    = regexp.MustCompile(`^\d{3}(\.\d+[a-z]?)?$`)
+	diagnosedKinds   = []string{"FX|G", "G|F|X", "GF|X", "GX|F", "G|F|–", "diverge"}
+	diagnosedWrong   = []string{"X", "F", "G", "harness"}
+	diagnosedCR      = regexp.MustCompile(`^\d{3}(\.\d+[a-z]?)?$`)
+	diagnosedShardRE = regexp.MustCompile(`^shard-[0-9]+\.tsv$`)
 )
 
 func runDiagnosed(args []string) error {
 	fl := flag.NewFlagSet("diagnosed", flag.ExitOnError)
-	check := fl.Bool("check", false, "validate every row of every shard")
-	split := fl.Bool("split", false, "repack the shard directory to the 1 MiB cap")
-	file := fl.String("file", "oracle/xengine/diagnosed", "register shard directory, or one TSV")
+	check := fl.Bool("check", false, "validate every row of the active shard and its archive")
+	split := fl.Bool("split", false, "repack the active shard and its archive under the 1 MiB cap")
+	file := fl.String("file", "oracle/xengine/diagnosed.tsv", "active register TSV; archive shards live in the sibling directory")
 	cards := fl.String("cards", ".cards", "corpus dir")
 	fl.Parse(args)
 	switch {
@@ -70,9 +74,10 @@ func runDiagnosed(args []string) error {
 
 // checkDiagnosed validates file against the register rules, printing one
 // "<file>:<row>: <reason>" line per error to w. It returns the number of bad
-// rows; a read or corpus error is returned separately. file is either one TSV
-// or a shard directory; every shard must have the header, every shard must fit
-// the committed-file cap, and the duplicate key check spans all shards.
+// rows; a read or corpus error is returned separately. file is either one TSV,
+// or the active TSV of a file-plus-archive register, or a shard directory;
+// every shard must have the header, every shard must fit the committed-file
+// cap, and the duplicate key check spans all shards.
 func checkDiagnosed(file, cardsDir string, w io.Writer) (int, error) {
 	cardFolder := filepath.Join(cardsDir, "cardsfolder")
 	tokenFolder := filepath.Join(cardsDir, "tokenscripts")
@@ -150,19 +155,79 @@ func checkDiagnosed(file, cardsDir string, w io.Writer) (int, error) {
 	return len(badRows), nil
 }
 
-// diagnosedShards lists the files that make up a register. A path that is one
-// file is a one-shard register (the checker's fixtures); a directory is read
-// in deterministic shard order, with active.tsv last because that is the shard
-// the farm appends to and the one -split repacks last.
+// diagnosedShards lists the files that make up a register, in register order.
+//
+// The committed layout is a file beside a sibling archive directory:
+// oracle/xengine/diagnosed.tsv is the active shard (the farm's unchanged append
+// target) and oracle/xengine/diagnosed/ holds shard-NNN.tsv. The archive shards
+// are read in numeric order and the active file last. A directory path is the
+// directory register form: shard-NNN.tsv in numeric order followed by
+// active.tsv. A bare file with no sibling archive directory is the one-shard
+// register the checker's fixtures use.
+//
+// Every *.tsv in a register directory must be a canonical name. An unexpected
+// *.tsv is an error, never a shard, so a stray backup or note cannot be folded
+// into the register or removed by -split.
 func diagnosedShards(file string) ([]string, error) {
 	info, err := os.Stat(file)
 	if err != nil {
 		return nil, err
 	}
-	if !info.IsDir() {
+	if info.IsDir() {
+		names, err := diagnosedDirShards(file, true)
+		if err != nil {
+			return nil, err
+		}
+		if len(names) == 0 {
+			return nil, fmt.Errorf("%s: no *.tsv shards", file)
+		}
+		shards := make([]string, len(names))
+		for i, name := range names {
+			shards[i] = filepath.Join(file, name)
+		}
+		return shards, nil
+	}
+
+	archive := diagnosedArchiveDir(file)
+	if archive == "" {
 		return []string{file}, nil
 	}
-	entries, err := os.ReadDir(file)
+	archiveInfo, err := os.Stat(archive)
+	switch {
+	case errors.Is(err, fs.ErrNotExist):
+		return []string{file}, nil
+	case err != nil:
+		return nil, err
+	case !archiveInfo.IsDir():
+		return nil, fmt.Errorf("%s: archive path is not a directory", archive)
+	}
+	names, err := diagnosedDirShards(archive, false)
+	if err != nil {
+		return nil, err
+	}
+	shards := make([]string, 0, len(names)+1)
+	for _, name := range names {
+		shards = append(shards, filepath.Join(archive, name))
+	}
+	return append(shards, file), nil
+}
+
+// diagnosedArchiveDir is the sibling directory that holds the archive shards
+// for an active file: oracle/xengine/diagnosed.tsv -> oracle/xengine/diagnosed.
+// A path without a .tsv suffix has no separate archive directory.
+func diagnosedArchiveDir(file string) string {
+	ext := filepath.Ext(file)
+	if !strings.EqualFold(ext, ".tsv") {
+		return ""
+	}
+	return strings.TrimSuffix(file, ext)
+}
+
+// diagnosedDirShards lists the canonical shard names in dir: shard-NNN.tsv in
+// numeric order, then active.tsv when allowActive is set. Any other *.tsv is
+// an error rather than an absorbed shard.
+func diagnosedDirShards(dir string, allowActive bool) ([]string, error) {
+	entries, err := os.ReadDir(dir)
 	if err != nil {
 		return nil, err
 	}
@@ -171,39 +236,36 @@ func diagnosedShards(file string) ([]string, error) {
 		if e.IsDir() || !strings.EqualFold(filepath.Ext(e.Name()), ".tsv") {
 			continue
 		}
-		names = append(names, e.Name())
-	}
-	if len(names) == 0 {
-		return nil, fmt.Errorf("%s: no *.tsv shards", file)
+		name := e.Name()
+		if _, ok := diagnosedShardIndex(name); !ok && !(allowActive && name == diagnosedActiveName) {
+			want := "shard-NNN.tsv"
+			if allowActive {
+				want = diagnosedActiveName + " or " + want
+			}
+			return nil, fmt.Errorf("%s: unexpected %q (a register directory holds only %s)", dir, name, want)
+		}
+		names = append(names, name)
 	}
 	sort.Slice(names, func(i, j int) bool {
 		if (names[i] == diagnosedActiveName) != (names[j] == diagnosedActiveName) {
 			return names[j] == diagnosedActiveName // active last
 		}
-		ni, iok := diagnosedShardIndex(names[i])
-		nj, jok := diagnosedShardIndex(names[j])
-		switch {
-		case iok && jok:
-			if ni != nj {
-				return ni < nj
-			}
-		case iok != jok:
-			return iok // numbered shards before an unrecognised TSV
+		ni, _ := diagnosedShardIndex(names[i])
+		nj, _ := diagnosedShardIndex(names[j])
+		if ni != nj {
+			return ni < nj
 		}
 		return names[i] < names[j]
 	})
-	shards := make([]string, len(names))
-	for i, name := range names {
-		shards[i] = filepath.Join(file, name)
-	}
-	return shards, nil
+	return names, nil
 }
 
-// diagnosedShardIndex reads the NNN of a shard-NNN.tsv name. The checker sorts
-// numbered shards numerically, not by the spelling of the width, so the layout
-// keeps its order past shard-999.
+// diagnosedShardIndex reads the NNN of a canonical shard-NNN.tsv name. The
+// checker sorts numbered shards numerically, not by the spelling of the width,
+// so the layout keeps its order past shard-999; a name that is not exactly
+// shard-<digits>.tsv is not a shard.
 func diagnosedShardIndex(name string) (int, bool) {
-	if !strings.HasPrefix(name, "shard-") || !strings.HasSuffix(name, ".tsv") {
+	if !diagnosedShardRE.MatchString(name) {
 		return 0, false
 	}
 	n, err := strconv.Atoi(strings.TrimSuffix(strings.TrimPrefix(name, "shard-"), ".tsv"))
@@ -213,24 +275,30 @@ func diagnosedShardIndex(name string) (int, bool) {
 	return n, true
 }
 
-// splitDiagnosed rewrites the shards of a register directory so each is at
-// most target bytes, header included, preserving the register's row order.
-// All but the last shard become shard-NNN.tsv; the last is always active.tsv,
-// the farm's append target, so an append grows only that file until the next
-// split. Every row must fit one shard under the hard cap, even if it is larger
-// than target.
-func splitDiagnosed(dir string, target int) error {
-	info, err := os.Stat(dir)
+// splitDiagnosed rewrites a register so each file is at most target bytes,
+// header included, preserving the register's row order. All but the last shard
+// become shard-NNN.tsv archives; the last is always the active shard: active.tsv
+// in a directory register, or the -file itself in the committed
+// file-plus-archive layout (oracle/xengine/diagnosed.tsv, the farm's unchanged
+// append target). Rows are packed before anything is written, so a bad header,
+// a stray *.tsv or a row that cannot fit the hard cap leaves the register
+// untouched.
+func splitDiagnosed(file string, target int) error {
+	info, err := os.Stat(file)
 	if err != nil {
 		return err
 	}
-	if !info.IsDir() {
-		return fmt.Errorf("%s: -split needs a shard directory", dir)
+	dirForm := info.IsDir()
+	activePath := file
+	archiveDir := diagnosedArchiveDir(file)
+	if dirForm {
+		activePath = filepath.Join(file, diagnosedActiveName)
+		archiveDir = file
 	}
 	if target <= len(diagnosedHeader)+1 || target > diagnosedMaxBytes {
 		return fmt.Errorf("split target %d is outside (%d, %d]", target, len(diagnosedHeader)+1, diagnosedMaxBytes)
 	}
-	shards, err := diagnosedShards(dir)
+	shards, err := diagnosedShards(file)
 	if err != nil {
 		return err
 	}
@@ -268,25 +336,33 @@ func splitDiagnosed(dir string, target int) error {
 	}
 	packed = append(packed, cur)
 
-	want := map[string]bool{}
+	type outShard struct {
+		path string
+		data []byte
+	}
+	out := make([]outShard, 0, len(packed))
 	for i, b := range packed {
-		name := fmt.Sprintf("shard-%03d.tsv", i)
-		if i == len(packed)-1 {
-			name = diagnosedActiveName
+		path := activePath
+		if i < len(packed)-1 {
+			path = filepath.Join(archiveDir, fmt.Sprintf("shard-%03d.tsv", i))
 		}
-		want[name] = true
-		path := filepath.Join(dir, name)
-		if err := writeAtomic(path, b); err != nil {
+		out = append(out, outShard{path: path, data: b})
+	}
+
+	want := make(map[string]bool, len(out))
+	for _, shard := range out {
+		want[shard.path] = true
+		if err := writeAtomic(shard.path, shard.data); err != nil {
 			return err
 		}
 		// writeAtomic creates a 0600 temp file; register shards are ordinary
 		// committed data, so give them the usual read mode.
-		if err := os.Chmod(path, 0o644); err != nil {
+		if err := os.Chmod(shard.path, 0o644); err != nil {
 			return err
 		}
 	}
 	for _, shard := range shards {
-		if want[filepath.Base(shard)] {
+		if want[shard] {
 			continue
 		}
 		if err := os.Remove(shard); err != nil {
