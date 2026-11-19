@@ -20,6 +20,7 @@ const (
 	HarnessUnmapped = "answer-unmapped"
 	HarnessChance   = "chance-misaligned"
 	HarnessSetup    = "setup-inexpressible"
+	HarnessIntent   = "intent-invalid"
 )
 
 // chanceHarness classifies an engine error: a planner failure is the
@@ -27,6 +28,23 @@ const (
 func chanceHarness(err error) string {
 	if strings.Contains(err.Error(), "hypothetical") {
 		return HarnessChance
+	}
+	return ""
+}
+
+// submitHarness classifies a SubmitHypothetical failure for the intent the
+// follower built. A planner failure is its chance alignment. Otherwise the
+// posed decision's own wire contract (decision.Decision.Validate, the first
+// fence in rules.Engine.Submit) is the re-derivation: if it refuses the
+// intent, the follower constructed choices the engine never offered, so the
+// fence is the follower's construction, not a rule the engine applied. Any
+// other engine error is gorge's.
+func submitHarness(d *decision.Decision, in decision.Intent, err error) string {
+	if h := chanceHarness(err); h != "" {
+		return h
+	}
+	if d != nil && d.Validate(in) != nil {
+		return HarnessIntent
 	}
 	return ""
 }
@@ -460,7 +478,7 @@ func (f *follower) run(max int) {
 			return
 		}
 		if err := f.e.SubmitHypothetical(in); err != nil {
-			f.hard(WhatError, d, Divergence{Line: e.Line, Detail: "submit: " + err.Error(), Harness: chanceHarness(err), Cards: f.entryCards(e)})
+			f.hard(WhatError, d, Divergence{Line: e.Line, Detail: "submit: " + err.Error(), Harness: submitHarness(d, in, err), Cards: f.entryCards(e)})
 			return
 		}
 		f.res.Decisions++
