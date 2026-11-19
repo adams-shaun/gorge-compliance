@@ -68,7 +68,18 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //   - A card ref's ordinal ("p0:Wastes#27") counts gorge's object order,
 //     which the deal shuffles. Name and owner are the identity; the driver
 //     resolves within the candidates Forge offers, which are one zone.
-//   - Decisions are exported verbatim. pay_<C>, pay_generic and pay_life are
+//   - An untap election (resume "untap") is exported with the exact offered
+//     object of each pick (pick_idx into option_refs), so a same-named copy
+//     is named, not just its name. A pick of a permanent that is already
+//     untapped at the decision's step is a legal no-op in gorge (CR 701.26b:
+//     only a tapped permanent can be untapped), but Forge's UntapEffect
+//     filters its candidates to canUntap, so the object is not offered and
+//     the driver's name fallback would untap a different same-named
+//     permanent instead. The no-op pick is dropped; when none remain and the
+//     ask is "up to" (min 0), the decision becomes an empty choose_n, which
+//     the driver consumes as "untap nothing", exactly as gorge did.
+//   - Except for the untap rewrite above, decisions are exported verbatim.
+//     pay_<C>, pay_generic and pay_life are
 //     pick kinds of gorge's hybrid/Phyrexian pip ask, and a mana-ability
 //     "activate" pick is a payment-window choice; Forge asks neither, so the
 //     driver does not count them as leftover. A "Choose a mana ability of
@@ -206,6 +217,7 @@ func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 	sha := gate.ItemSHA(it)
 	decisions = forgeDropNamedManaAbilityDecisions(reg, it, g, forgeDropDeclarationDecisions(it, decisions))
 	decisions = forgeExploreAsYesNo(decisions)
+	decisions = forgeUntapNoOps(g, decisions)
 	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, decisions)
 	if graveyardOrder {
 		decisions = forgeGraveyardOrderDecisions(it, g, decisions)
@@ -371,6 +383,184 @@ func forgeExplorePick(d rules.OracleDecision) (string, bool) {
 		return "no", true
 	}
 	return "", false
+}
+
+// forgeUntapNoOps rewrites every untap election for the Forge driver: a pick
+// is renamed to the exact object its option offered, and a pick that names a
+// permanent already untapped in the checkpoint entering the decision's step
+// is dropped as a no-op. If every pick is a no-op and the ask is "up to"
+// (min 0), the decision becomes an empty object choice, which the driver
+// consumes and answers with no card -- the same result as gorge's no-op.
+//
+// Gorge's untap ask (UntapUpTo$/UntapExactly$) offers every candidate,
+// tapped or not (engine/effects/untap.go), so an untapped pick is legal but
+// does nothing (CR 701.26b: only a tapped permanent can be untapped). Forge's
+// UntapEffect filters its list to canUntap, so that object is not among the
+// candidates the driver offers. The driver's card-ref resolution then falls
+// back to "another <name> (gorge's ordinal names a different copy)" and
+// untaps a different same-named permanent (xe:RAND:0:7:w14, Frantic Search:
+// the base Island is untapped and a different Island was untapped). The
+// request cannot carry Forge's filtered candidate list, so the no-op is
+// encoded as the empty answer the ask's min 0 already allows.
+//
+// The option identity is read from pick_idx/option_refs, the same candidate
+// list Forge sees: a bare pick ref ("p0:Island") may name the wrong copy when
+// several are offered, while the option's ref names the exact one. A pick the
+// checkpoint does not list, or an exact ask (min > 0) whose every pick is a
+// no-op, is left as it is: dropping a real or required choice is worse than
+// the fallback. The input slice is not modified; a list with no untap
+// election is returned as is.
+func forgeUntapNoOps(g rules.OracleResult, ds []rules.OracleDecision) []rules.OracleDecision {
+	var out []rules.OracleDecision
+	for i, d := range ds {
+		if !isUntapElection(d) {
+			continue
+		}
+		next, changed := forgeDropUntappedPicks(d, g)
+		if !changed {
+			continue
+		}
+		if out == nil {
+			out = append([]rules.OracleDecision(nil), ds...)
+		}
+		out[i] = next
+	}
+	if out == nil {
+		return ds
+	}
+	return out
+}
+
+// isUntapElection reports whether d is gorge's "untap up to/exactly N"
+// election: a choose_n with resume "untap" whose picks all chose the engine's
+// "untap" option. The untap-step "keep it tapped?" election has no resume
+// kind, and a TapOrUntap target election resumes "taporuntap", so neither is
+// rewritten.
+func isUntapElection(d rules.OracleDecision) bool {
+	if d.Kind != "choose_n" || d.Resume != "untap" || len(d.Picks) == 0 || len(d.Picks) != len(d.PickRefs) {
+		return false
+	}
+	for _, k := range d.PickKinds {
+		if k != "untap" {
+			return false
+		}
+	}
+	return true
+}
+
+// forgeDropUntappedPicks returns an untap election with its already-untapped
+// picks removed and each kept pick ref replaced by the exact offered object,
+// and whether anything changed. A pick the checkpoint does not list keeps its
+// recorded ref: the state is not known, and dropping a real choice is worse
+// than an inexact one. An exact ask (min > 0) whose every pick is a no-op is
+// left unchanged, because an empty answer would be illegal.
+func forgeDropUntappedPicks(d rules.OracleDecision, g rules.OracleResult) (rules.OracleDecision, bool) {
+	if d.Step < 0 || d.Step >= len(g.Snapshots) {
+		return d, false
+	}
+	tapped := make(map[string]bool, len(g.Snapshots[d.Step].Permanents))
+	for _, p := range g.Snapshots[d.Step].Permanents {
+		tapped[p.Ref] = p.Tapped
+	}
+	refs := make([]string, len(d.PickRefs))
+	keep := make([]bool, len(d.PickRefs))
+	dropped := 0
+	for k := range d.PickRefs {
+		ref := untapPickRef(d, k)
+		refs[k] = ref
+		if t, known := tapped[ref]; known && !t {
+			dropped++
+			continue
+		}
+		keep[k] = true
+	}
+	if dropped == 0 {
+		changed := false
+		for k := range refs {
+			if refs[k] != d.PickRefs[k] {
+				changed = true
+				break
+			}
+		}
+		if !changed {
+			return d, false
+		}
+	}
+	if dropped == len(d.PickRefs) && d.Min > 0 {
+		return d, false
+	}
+	return filterUntapPicks(d, keep, refs), true
+}
+
+// untapPickRef is pick k's exact offered object: the option its pick_idx
+// names when option_refs is parallel to the whole option list (it is for an
+// untap ask, whose every option is an object), else the recorded ref.
+func untapPickRef(d rules.OracleDecision, k int) string {
+	if k < len(d.PickIdx) && d.Options > 0 && d.Options == len(d.OptionRefs) {
+		if i := d.PickIdx[k]; i >= 0 && i < len(d.OptionRefs) && d.OptionRefs[i] != "" {
+			return d.OptionRefs[i]
+		}
+	}
+	if k < len(d.PickRefs) {
+		return d.PickRefs[k]
+	}
+	return ""
+}
+
+// filterUntapPicks returns d with the parallel pick slices filtered by keep;
+// refs replaces each kept pick's ref with its exact offered object. A slice
+// that is not parallel to PickRefs is left alone, and an emptied pick list is
+// emptied in every slice so the driver's isEmptyChoice sees a declined ask
+// (kind choose_n, no picks, no pick kinds).
+func filterUntapPicks(d rules.OracleDecision, keep []bool, refs []string) rules.OracleDecision {
+	n := len(d.PickRefs)
+	filterStrings := func(s []string) []string {
+		if len(s) == 0 || len(s) != n {
+			return s
+		}
+		out := make([]string, 0, len(s))
+		for k, v := range s {
+			if keep[k] {
+				out = append(out, v)
+			}
+		}
+		return out
+	}
+	d.Picks = filterStrings(d.Picks)
+	d.PickKinds = filterStrings(d.PickKinds)
+	d.PickRefs = filterStrings(append([]string(nil), refs...))
+	if len(d.ObjectPicks) == n {
+		// The driver's DecisionQueue.refs() prefers pick_refs only when it
+		// contains every object_picks entry; keep the two parallel and exact.
+		out := make([]string, 0, n)
+		for k := range d.ObjectPicks {
+			if keep[k] {
+				out = append(out, refs[k])
+			}
+		}
+		d.ObjectPicks = out
+	} else {
+		d.ObjectPicks = filterStrings(d.ObjectPicks)
+	}
+	if len(d.PickRefsInexact) == n {
+		out := make([]bool, 0, n)
+		for k, v := range d.PickRefsInexact {
+			if keep[k] {
+				out = append(out, v)
+			}
+		}
+		d.PickRefsInexact = out
+	}
+	if len(d.PickIdx) == n {
+		out := make([]int, 0, n)
+		for k, v := range d.PickIdx {
+			if keep[k] {
+				out = append(out, v)
+			}
+		}
+		d.PickIdx = out
+	}
+	return d
 }
 
 // forgeDropNamedManaAbilityDecisions removes gorge's "Choose a mana ability of
