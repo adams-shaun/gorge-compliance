@@ -587,31 +587,79 @@ func TestLowerActivateCarriesPayment(t *testing.T) {
 // step. The old group aggregate put the whole seven units on the last paid
 // step, so gorge replayed a pool split the live game never had (URRRR against
 // Forge's UURRR).
+//
+// The recorder flushes the decision's final payment onto the latest entry, so
+// in the measured shape Nin's cost sits on the group's last mana tap (the
+// Island that completed the window), not on the Nin priority entry. The
+// lowering must leave the tap ask's own activation cost on its tap step and
+// put the remainder on the decision's.
 func TestLowerPerEntryManaSpend(t *testing.T) {
 	const ref = "p0:Nin, the Pain Artist"
+	reg := cards.NewRegistry()
+	reg.Add(&cards.Card{Faces: []*cards.Face{{
+		Name:      "Ferrous Lake",
+		Abilities: []*cards.SA{{Params: map[string]string{"Cost": "1 T"}}},
+	}}})
 	nin := game.Entry{
 		Kind: "priority", Seat: 0,
 		Picks: []game.Pick{{Kind: "ability", Ability: 0, Ref: ref}},
-		Spent: "UURRRR",
 	}
 	// The mana window ask that activated the lake to fund the cost above: its
 	// own commit paid the {1} with the floating U, and its rec is what the
 	// lowering lowers as the tap step ahead of Nin.
-	ferrous := game.Entry{
+	ferrous := func(spent string) game.Entry {
+		return game.Entry{
+			Kind: "choose_n", Seat: 0,
+			Picks: []game.Pick{{Kind: "activate", Obj: 9, Ref: "p0:Ferrous Lake"}},
+			Mana:  []game.ManaRec{{Obj: 9, Name: "Ferrous Lake", Ability: 0, Ref: "p0:Ferrous Lake", Player: 0}},
+			Spent: spent,
+		}
+	}
+	// A free tap (a basic Island) that completed the window: its entry is the
+	// last ask, so the recorder flushed Nin's whole payment onto it.
+	island := game.Entry{
 		Kind: "choose_n", Seat: 0,
-		Picks: []game.Pick{{Kind: "activate", Obj: 9, Ref: "p0:Ferrous Lake"}},
-		Mana:  []game.ManaRec{{Obj: 9, Name: "Ferrous Lake", Ability: 0, Ref: "p0:Ferrous Lake", Player: 0}},
-		Spent: "U",
+		Picks: []game.Pick{{Kind: "activate", Obj: 10, Ref: "p0:Island"}},
+		Mana:  []game.ManaRec{{Obj: 10, Name: "Island", Ability: 0, Ref: "p0:Island", Player: 0}},
+		Spent: "UURRRR",
 	}
-	steps, _, pay, _, why := lowerGroup(nil, seatMap{}, []game.Entry{nin, ferrous})
-	if why != nil {
-		t.Fatalf("lowerGroup: %s", why.reason)
-	}
-	if len(steps) != 2 || steps[0].Card != "p0:Ferrous Lake" || steps[1].Card != ref {
-		t.Fatalf("steps = %+v, want Ferrous Lake tap then %s", steps, ref)
-	}
-	if len(pay) != len(steps) || pay[0] != "U" || pay[1] != "UURRRR" {
-		t.Errorf("payments = %v, want [\"U\" \"UURRRR\"] (each step its own commit's spend)", pay)
+	for _, tc := range []struct {
+		name  string
+		group []game.Entry
+		want  []string
+	}{
+		{
+			name:  "last mana ask carries the decision's payment",
+			group: []game.Entry{nin, ferrous("U"), island},
+			want:  []string{"U", "", "UURRRR"},
+		},
+		{
+			name:  "last ask is itself a paid activation",
+			group: []game.Entry{nin, ferrous("UU")},
+			want:  []string{"U", "U"},
+		},
+		{
+			name: "last ask is a paid activation's colour pick",
+			group: []game.Entry{nin, func() game.Entry {
+				e := ferrous("UU")
+				e.Picks = []game.Pick{{Kind: "mana", Obj: 9, Ref: "p0:Ferrous Lake", Label: "Add U"}}
+				return e
+			}()},
+			want: []string{"U", "U"},
+		},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			steps, _, pay, _, why := lowerGroup(reg, seatMap{}, tc.group)
+			if why != nil {
+				t.Fatalf("lowerGroup: %s", why.reason)
+			}
+			if len(steps) != len(tc.want) || steps[len(steps)-1].Card != ref {
+				t.Fatalf("steps = %+v, want %d steps ending in %s", steps, len(tc.want), ref)
+			}
+			if len(pay) != len(steps) || !slices.Equal(pay, tc.want) {
+				t.Errorf("payments = %v, want %v (each step its own commit's spend)", pay, tc.want)
+			}
+		})
 	}
 }
 

@@ -12,6 +12,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/effects"
+	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/engine/state"
 )
 
@@ -1005,14 +1006,25 @@ func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Ste
 	// every step is a record's tap step and the records sit at their own
 	// step indexes; for a cast or ability the last step is the decision, so
 	// only the indexes before it are taps.
+	//
+	// parentPays marks a decision whose own cost is paid only after its asks
+	// are answered (a cast or an ability). The recorder flushes that final
+	// payment onto the latest entry, so in a mana window it lands on the
+	// group's last tap ask, not on the decision: the last mana ask's Spent
+	// can then hold its own activation's cost followed by the decision's.
+	// The activation's part is the mana units its Cost$ names (T, sacrifice
+	// and the other non-mana parts are not mana); the remainder stays with
+	// the decision.
 	allTaps := en.Kind == "priority" && len(en.Picks) == 1 && en.Picks[0].Kind == "activate"
 	tapLimit := len(steps)
 	if !allTaps {
 		tapLimit--
 	}
+	parentPays := paysAfterAsks(en)
 	var decSpent string
 	type deferPay struct {
 		obj   state.ObjID
+		start int
 		spent string
 	}
 	var deferred []deferPay
@@ -1023,24 +1035,35 @@ func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Ste
 		}
 		last := recAt[k] + len(e.Mana) - 1
 		if pk := manaAsk(e); pk != nil {
+			own, rest := e.Spent, ""
+			if k == len(g)-1 && parentPays {
+				n := manaCostUnits(reg, e.Mana)
+				if n > len(own) {
+					n = len(own)
+				}
+				own, rest = own[:n], own[n:]
+			}
 			switch {
 			case len(e.Mana) > 0 && last < tapLimit:
-				pay[last] += e.Spent
+				pay[last] += own
 				claimed[last] = true
+				decSpent += rest
 			case len(e.Mana) > 0:
-				decSpent += e.Spent
+				decSpent += own + rest
 			default:
-				deferred = append(deferred, deferPay{pk.Obj, e.Spent})
+				deferred = append(deferred, deferPay{pk.Obj, recAt[k], own + rest})
 			}
 			continue
 		}
 		decSpent += e.Spent
 	}
 	// The deferred spends: the first unclaimed tap step of a record of that
-	// object, in activation order, so a source activated twice gives each
-	// activation its own.
+	// object at or after the ask's own position, in activation order, so a
+	// source activated twice gives each activation its own (an earlier free
+	// activation's record cannot be claimed by a later paid one).
 	for _, d := range deferred {
-		for i, mr := range mana {
+		for i := d.start; i < len(mana); i++ {
+			mr := mana[i]
 			if i >= tapLimit || claimed[i] || mr.Obj != d.obj {
 				continue
 			}
@@ -1071,13 +1094,42 @@ func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Ste
 }
 
 // manaAsk is the pick of an entry whose commit is part of a mana activation:
-// the "activate <source> for mana" window ask, or the priority decision that
-// activated a mana ability directly. nil when the commit is not one.
+// the "activate <source> for mana" window ask, the priority decision that
+// activated a mana ability directly, or the colour pick of a source whose
+// record this entry carries. nil when the commit is not one.
 func manaAsk(e game.Entry) *game.Pick {
-	if len(e.Picks) != 1 || e.Picks[0].Kind != "activate" {
+	if len(e.Picks) != 1 {
 		return nil
 	}
-	return &e.Picks[0]
+	pk := &e.Picks[0]
+	switch pk.Kind {
+	case "activate":
+		return pk
+	case "mana":
+		for _, mr := range e.Mana {
+			if mr.Obj == pk.Obj {
+				return pk
+			}
+		}
+	}
+	return nil
+}
+
+// manaCostUnits is how many pool units the mana abilities of an entry cost,
+// read from each ability's Cost$ (the tap, sacrifice, discard and life parts
+// are not mana). A source the registry cannot tell contributes zero: its
+// spend stays with the decision's, where the final flush put it.
+func manaCostUnits(reg *cards.Registry, mana []game.ManaRec) int {
+	if reg == nil {
+		return 0
+	}
+	n := 0
+	for _, mr := range mana {
+		if sa := manaSA(reg, mr); sa != nil {
+			n += int(rules.ParseCost(sa.Params["Cost"]).CMC())
+		}
+	}
+	return n
 }
 
 // isPaidStep reports whether a lowered step pays a cost from its controller's
