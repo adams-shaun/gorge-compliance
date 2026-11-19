@@ -26,15 +26,24 @@ var (
 
 // Canonical reports the canonical P/M label of a power/toughness counter kind
 // and whether kind is one at all. Case and interior spaces are ignored, as
-// the engine's own counter-kind normalisation folds them.
+// the engine's own counter-kind normalisation folds them. A component too
+// large for int reports ok=false so the caller keeps its fallback: folding it
+// to P0 could collide with a different counter kind.
 func Canonical(kind string) (string, bool) {
 	k := strings.ReplaceAll(strings.ToLower(kind), " ", "")
-	var pow, tough pair
-	if m := gorgeKind.FindStringSubmatch(k); m != nil {
-		pow, tough = parse(m[1], m[2]), parse(m[3], m[4])
-	} else if m := printedKind.FindStringSubmatch(k); m != nil {
-		pow, tough = parse(m[1], m[2]), parse(m[3], m[4])
-	} else {
+	m := gorgeKind.FindStringSubmatch(k)
+	if m == nil {
+		m = printedKind.FindStringSubmatch(k)
+	}
+	if m == nil {
+		return kind, false
+	}
+	pow, ok := parse(m[1], m[2])
+	if !ok {
+		return kind, false
+	}
+	tough, ok := parse(m[3], m[4])
+	if !ok {
 		return kind, false
 	}
 	return pow.label() + tough.label(), true
@@ -47,9 +56,12 @@ type pair struct {
 	n   int
 }
 
-func parse(sign, digits string) pair {
-	n, _ := strconv.Atoi(digits)
-	return pair{neg: sign == "m" || sign == "-", n: n}
+func parse(sign, digits string) (pair, bool) {
+	n, err := strconv.Atoi(digits)
+	if err != nil || n < 0 {
+		return pair{}, false
+	}
+	return pair{neg: sign == "m" || sign == "-", n: n}, true
 }
 
 // label renders the component; a zero is "P0" whichever sign was written.

@@ -71,10 +71,13 @@ type PermDigest struct {
 	AttachedTo string           `json:"attached_to,omitempty"` // name, or "pN" for a player
 }
 
-// normCounter is rules.normCounter (oracle_run.go): the snapshot's counter
-// vocabulary. The P/T-counter fold lives in internal/ptcounter so the
-// comparator (oraclediff) and this digest agree on every power/toughness
-// counter, not just ±1/±1; other kinds upper-case as before.
+// normCounter folds a counter kind to the digest label: every
+// power/toughness counter goes through internal/ptcounter's canonical P/M
+// vocabulary (so a "-0/-1" counter is always "P0M1"), every other kind
+// upper-cases as rules.normCounter does (oracle_run.go). Both digest builders
+// must use it -- DigestOfGame through counterMap, DigestOfSnapshot through
+// normCounters -- or the two disagree on the key for the same counter and
+// lower.SelfCheck reports a phantom gap.
 func normCounter(k string) string {
 	if c, ok := ptcounter.Canonical(k); ok {
 		return c
@@ -284,7 +287,7 @@ func DigestOfSnapshot(s rules.OracleSnapshot) Digest {
 	for _, p := range s.Permanents {
 		d.Field = append(d.Field, PermDigest{
 			Name: p.Name, Controller: p.Controller, Owner: p.Owner, Token: p.Token, Tapped: p.Tapped,
-			PT: p.PT, Damage: p.Damage, Counters: copyCounters(p.Counters), AttachedTo: refName(p.AttachedTo),
+			PT: p.PT, Damage: p.Damage, Counters: normCounters(p.Counters), AttachedTo: refName(p.AttachedTo),
 		})
 	}
 	sortField(d.Field)
@@ -346,6 +349,34 @@ func sortedNonEmpty(x []string) []string {
 	}
 	sort.Strings(x)
 	return x
+}
+
+// normCounters is copyCounters for a permanent's counters: it folds each kind
+// through normCounter and merges kinds that fold together, dropping zero
+// amounts the way counterMap does. The snapshot stores a "-0/-1" counter as
+// "M0M1" while the live digest canonicalises it to "P0M1"; without this fold
+// DigestOfSnapshot and DigestOfGame disagree, and lower.SelfCheck reports a
+// phantom field[i].counters gap. Player counters and commander tallies are
+// not P/T counters, so they stay verbatim (copyCounters).
+func normCounters(m map[string]int32) map[string]int32 {
+	if len(m) == 0 {
+		return nil
+	}
+	out := make(map[string]int32, len(m))
+	for k, v := range m {
+		if v != 0 {
+			out[normCounter(k)] += v
+		}
+	}
+	for k, n := range out {
+		if n == 0 {
+			delete(out, k)
+		}
+	}
+	if len(out) == 0 {
+		return nil
+	}
+	return out
 }
 
 // copyCounters copies a snapshot's counter map, dropping zero amounts: a zero
