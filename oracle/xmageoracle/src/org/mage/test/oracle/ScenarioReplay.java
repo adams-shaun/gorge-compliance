@@ -2418,13 +2418,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** The setup's per-seat "tapped_after_untap" and "speed" (gorge's runner emits
-     * the same SpeedChange events when it places the cards). Runs inside the
+     * the same SpeedChange events when it places the cards), followed by one
+     * continuous-effects pass over the finished setup board. Runs inside the
      * "setup" checkpoint, before the first snapshot, because a speed needs a live
      * game. The setup "counters" are not here: placeSetupCounters seeds them
      * before start(). */
     private void applySetupState(Game g) {
         JsonObject setup = sc0.has("setup") ? sc0.getAsJsonObject("setup") : new JsonObject();
-        boolean changed = false;
         for (int i = 0; i < seats; i++) {
             if (!setup.has("p" + i)) {
                 continue;
@@ -2446,20 +2446,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 for (int k = 1; k < s.get("speed").getAsInt(); k++) {
                     pl.increaseSpeed(g);
                 }
-                changed = true;
             }
         }
-        if (changed) {
-            // A counter-gated static -- a Spacecraft's StationLevelAbility, "has
-            // indestructible as long as it has a divinity counter on it" -- is a
-            // ContinuousEffect whose condition reads the source's counters when
-            // XMage last applied effects, which was before these setup adds.
-            // addCounters does not itself recompute, and the snapshot below reads
-            // the stale set, so XMage would show the card still uncounted (no P/T,
-            // no keyword) where gorge shows it live. Apply once with the counters
-            // in place, exactly as the game loop does at the start of a step.
-            g.applyEffects();
-        }
+        // Setup state is written without the events the game loop reacts to:
+        // addCard's tapped placement and setTapped here flip a tap flag,
+        // placeSetupCounters writes counters straight on, and a speed is a
+        // player write. A conditional static -- Scoria Cat's "+3/+3 as long as
+        // you control no untapped lands" -- is a ContinuousEffect whose
+        // condition is read when effects are applied, so without this pass the
+        // first snapshot reports the pre-setup P/T where gorge reports the live
+        // value (CR 611.3a). Apply unconditionally: one pass per scenario is
+        // cheap, and a hand-maintained "something changed" flag missed the tap
+        // arm (and would miss the next setup kind).
+        g.applyEffects();
     }
 
     /** The pre-start hook that seeds every seat's setup "counters" (card name ->
