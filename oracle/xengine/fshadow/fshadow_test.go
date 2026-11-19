@@ -426,6 +426,45 @@ func TestTargetGroupsOneChoicePerGroup(t *testing.T) {
 	}
 }
 
+// TestInvalidIntentIsHarness: a submit-time wire rejection is a follower
+// construction bug, not a gorge class. The farm cmdr4 s148 finding was a
+// Decision.Validate refusal (two target options of one charm-mode group),
+// which only the follower's mapping could have built; it must carry a
+// harness reason so adjudicate files it as the follower's, and a legal
+// intent whose submit fails for an engine reason must stay a gorge
+// finding. The fence is pure, so no shadow log is needed.
+func TestInvalidIntentIsHarness(t *testing.T) {
+	d := &decision.Decision{Seq: 7, Player: 0, Kind: decision.KTarget, Min: 2, Max: 2,
+		Options: []decision.Option{
+			{Index: 0, Kind: "card", Obj: 2, Group: "charm-mode-0"},
+			{Index: 1, Kind: "card", Obj: 3, Group: "charm-mode-0"},
+			{Index: 2, Kind: "card", Obj: 2, Group: "charm-mode-1"},
+			{Index: 3, Kind: "card", Obj: 3, Group: "charm-mode-1"},
+		}}
+	in := decision.Intent{Seq: 7, Player: 0, Choices: []int{0, 1}}
+	err := d.Validate(in)
+	if err == nil || !strings.Contains(err.Error(), `mutually exclusive (group "charm-mode-0")`) {
+		t.Fatalf("fixture is not wire-invalid: %v", err)
+	}
+	dv := Divergence{What: WhatError, Detail: "submit: " + err.Error(), Harness: submitHarness(d, in, err)}
+	if dv.Harness != HarnessIntent || dv.Harness == "" {
+		t.Fatalf("divergence %+v: want harness %q, not a gorge class", dv, HarnessIntent)
+	}
+
+	// A legal intent (one option per group) that Submit refuses for an
+	// engine-side reason stays a gorge finding.
+	ok := decision.Intent{Seq: 7, Player: 0, Choices: []int{0, 2}}
+	if err := d.Validate(ok); err != nil {
+		t.Fatalf("fixture legal intent rejected: %v", err)
+	}
+	if got := submitHarness(d, ok, fmt.Errorf("engine broke")); got != "" {
+		t.Fatalf("legal intent classified %q, want a gorge finding", got)
+	}
+	if got := submitHarness(d, ok, fmt.Errorf("hypothetical chance planner draw 3: x")); got != HarnessChance {
+		t.Fatalf("planner failure classified %q, want %q", got, HarnessChance)
+	}
+}
+
 // Item 3: a priority action "other" has no gorge mapping: a harness finding,
 // not a crash.
 func TestPriorityOtherIsHarness(t *testing.T) {
