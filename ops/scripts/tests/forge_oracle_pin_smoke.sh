@@ -25,9 +25,17 @@ FREF=1111111111111111111111111111111111111111
 OREF=2222222222222222222222222222222222222222
 BIN=$TMP/bin
 LOG=$TMP/calls.log
-mkdir -p "$BIN" "$TMP/root" "$TMP/clone/.git" "$TMP/clone/forge-gui/res" "$TMP/clone/forge-oracle/src/main/java/forge/oracle" "$TMP/jdk/bin"
+mkdir -p "$BIN" "$TMP/root" "$TMP/clone/.git" "$TMP/clone/forge-gui/res" \
+	"$TMP/clone/forge-oracle/src/main/java/forge/oracle" "$TMP/clone/forge-core/src/main/java/forge/util" "$TMP/jdk/bin"
 echo 'class A {}' > "$TMP/clone/forge-oracle/src/main/java/forge/oracle/A.java"
 echo '/stub/forge-core.jar' > "$TMP/root/cp.txt"
+# The run script refuses a ref without the step-scoped die force, so the stub
+# trees carry the four source markers it checks. A negative case below drops
+# ForcedDieRandom.java from a third tree to prove the refusal.
+echo 'class ForcedDieRandom { int nextInt(int bound) { return 0; } }' > "$TMP/clone/forge-oracle/src/main/java/forge/oracle/ForcedDieRandom.java"
+echo 'class ForgeEngine { Object r = new ForcedDieRandom(); }' > "$TMP/clone/forge-oracle/src/main/java/forge/oracle/ForgeEngine.java"
+echo 'class StepMachine { void f() { dice.arm(0); } }' > "$TMP/clone/forge-oracle/src/main/java/forge/oracle/StepMachine.java"
+echo 'class MyRandom { int f() { return delegate.nextInt(bound); } }' > "$TMP/clone/forge-core/src/main/java/forge/util/MyRandom.java"
 
 # git: answers only what the scripts ask, driven by STUB_* variables.
 cat > "$BIN/git" <<'STUB'
@@ -153,8 +161,12 @@ check "  ...with pinned runtime res and ref" \
 	$(/usr/bin/grep -qF "runtime res=$TMP/clone/forge-gui/res ref=$OREF" "$LOG" && echo 0 || echo 1)
 
 # 6. FORGE_ORACLE_SRC replays a candidate worktree under its own HEAD, in its own class dir.
-mkdir -p "$TMP/cand/forge-gui/res" "$TMP/cand/forge-oracle/src/main/java/forge/oracle"
+mkdir -p "$TMP/cand/forge-gui/res" "$TMP/cand/forge-oracle/src/main/java/forge/oracle" "$TMP/cand/forge-core/src/main/java/forge/util"
 echo 'class C {}' > "$TMP/cand/forge-oracle/src/main/java/forge/oracle/C.java"
+echo 'class ForcedDieRandom { int nextInt(int bound) { return 0; } }' > "$TMP/cand/forge-oracle/src/main/java/forge/oracle/ForcedDieRandom.java"
+echo 'class ForgeEngine { Object r = new ForcedDieRandom(); }' > "$TMP/cand/forge-oracle/src/main/java/forge/oracle/ForgeEngine.java"
+echo 'class StepMachine { void f() { dice.arm(0); } }' > "$TMP/cand/forge-oracle/src/main/java/forge/oracle/StepMachine.java"
+echo 'class MyRandom { int f() { return delegate.nextInt(bound); } }' > "$TMP/cand/forge-core/src/main/java/forge/util/MyRandom.java"
 : > "$LOG"
 CREF=3333333333333333333333333333333333333333
 check "candidate HEAD differs from the pinned ref (precondition)" $([ "$CREF" != "$OREF" ] && echo 0 || echo 1)
@@ -165,6 +177,20 @@ check "  ...using candidate res, HEAD and absolute tmpdir" \
 	$(/usr/bin/grep -qF "runtime res=$TMP/cand/forge-gui/res ref=$CREF cwd=$TMP/java-tmp" "$LOG" && /usr/bin/grep -qF -- "-Djava.io.tmpdir=$TMP/java-tmp" "$LOG" && echo 0 || echo 1)
 out=$(FORGE_ORACLE_SRC=$TMP/cand/forge-oracle STUB_TOP=$TMP/cand STUB_HEAD=$CREF STUB_ANCESTOR=1 "$RUN" --compile 2>&1); rc=$?
 check "FORGE_ORACLE_SRC is still pin-checked (exit 2)" $((rc == 2 ? 0 : 1)) "rc=$rc $out"
+
+# 7. a driver ref without the recorded-die force is refused before any build,
+# so a pin bump cannot silently roll Forge's own die.
+NOD=$TMP/nofdr
+mkdir -p "$NOD/forge-gui/res" "$NOD/forge-oracle/src/main/java/forge/oracle" "$NOD/forge-core/src/main/java/forge/util"
+echo 'class D {}' > "$NOD/forge-oracle/src/main/java/forge/oracle/D.java"
+echo 'class ForgeEngine { Object r = new ForcedDieRandom(); }' > "$NOD/forge-oracle/src/main/java/forge/oracle/ForgeEngine.java"
+echo 'class StepMachine { void f() { dice.arm(0); } }' > "$NOD/forge-oracle/src/main/java/forge/oracle/StepMachine.java"
+echo 'class MyRandom { int f() { return delegate.nextInt(bound); } }' > "$NOD/forge-core/src/main/java/forge/util/MyRandom.java"
+: > "$LOG"
+out=$(FORGE_ORACLE_SRC=$NOD/forge-oracle FORGE_ORACLE_CLASSES=$TMP/nofdr-classes FORGE_ORACLE_TMP=$TMP/nofdr-tmp STUB_TOP=$NOD STUB_HEAD=$CREF "$RUN" --compile 2>&1); rc=$?
+check "run refuses a driver without the step-scoped die force (exit 2)" \
+	$([ "$rc" = 2 ] && has "$out" "no step-scoped die force" && echo 0 || echo 1) "rc=$rc $out"
+reached; check "  ...before javac, java or scope" $((! $? ))
 
 [ "$fails" = 0 ] && echo "forge_oracle_pin_smoke: all passed" || echo "forge_oracle_pin_smoke: $fails FAILED"
 exit $((fails != 0))

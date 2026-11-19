@@ -3,7 +3,10 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"os"
+	"path/filepath"
 	"reflect"
+	"regexp"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
@@ -48,5 +51,47 @@ func TestForgeRolledDie(t *testing.T) {
 	const want = `"die_rolls":[{"step":1,"seat":0,"sides":6,"natural":3,"result":3}]`
 	if !bytes.Contains(b, []byte(want)) {
 		t.Fatalf("request JSON lost the forced roll:\n%s", b)
+	}
+}
+
+// forgeOracleDieRollRef is the driver commit the die-roll contract was run
+// against: 7f287e888f adds ForcedDieRandom, d2939e9b61 makes MyRandom forward
+// the bounded draw to it, and the current FORGE_ORACLE_REF (2c9710b2) contains
+// both. TestForgeRolledDie only sees the Go request and stays green if the pin
+// is reverted to 0958a1aca2, where Forge rolls its own d6 again; this pin check
+// is the repo-side half. A bump must re-run the pinned driver's
+// ForcedDieRollTest and update the constant deliberately.
+const forgeOracleDieRollRef = "2c9710b20af85bba52fb15548b148c3b940910f9"
+
+// TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
+// pin moves off the commit whose forced-die behaviour was verified. It reads
+// the committed Makefile rather than the environment: the pin is what a pass
+// resolves when FORGE_ORACLE_REF is unset.
+func TestForgeOracleRefPinsForcedDieRoll(t *testing.T) {
+	// go test runs in the package directory. Walk up rather than using
+	// runtime.Caller: test-targets builds with -trimpath, so the caller path
+	// is the import path, not a file on disk.
+	dir, err := os.Getwd()
+	if err != nil {
+		t.Fatal(err)
+	}
+	var b []byte
+	for {
+		b, err = os.ReadFile(filepath.Join(dir, "Makefile"))
+		if err == nil {
+			break
+		}
+		parent := filepath.Dir(dir)
+		if parent == dir {
+			t.Fatalf("no Makefile above %s: %v", dir, err)
+		}
+		dir = parent
+	}
+	m := regexp.MustCompile(`(?m)^FORGE_ORACLE_REF\s*\?=\s*(\S+)`).FindSubmatch(b)
+	if m == nil {
+		t.Fatalf("%s/Makefile has no FORGE_ORACLE_REF default", dir)
+	}
+	if got := string(m[1]); got != forgeOracleDieRollRef {
+		t.Fatalf("FORGE_ORACLE_REF = %s, want %s: re-run the pinned driver's ForcedDieRollTest and update forgeOracleDieRollRef deliberately", got, forgeOracleDieRollRef)
 	}
 }
