@@ -67,12 +67,25 @@ func xmageGrantedKeywordPrefix(line string) (string, bool) {
 		}
 		return head + " " + cost, true
 	case "TypeCycling":
-		_, rest, _ := strings.Cut(param, ":")
+		// Forge's TypeCycling:Sliver:3 mints the printed word XMage's
+		// CyclingAbility carries in its rule text ("Slivercycling {3}"), not
+		// the keyword head. typeCyclingWord is the same spelling the printed
+		// path (keywordPrefix) matches against the Oracle line, and XMage
+		// capitalises the printed word at the start of the rule.
+		typ, rest, _ := strings.Cut(param, ":")
+		word := typeCyclingWord(typ)
+		if word == "" {
+			return "", false
+		}
+		if word[0] >= 'a' && word[0] <= 'z' {
+			word = strings.ToUpper(word[:1]) + word[1:]
+		}
+		prefix := word + "cycling"
 		cost, ok := xmageForgeManaCost(strings.TrimSpace(rest))
 		if !ok {
-			return head, true
+			return prefix, true
 		}
-		return head + " " + cost, true
+		return prefix + " " + cost, true
 	case "Crew", "Saddle":
 		if fields := strings.Fields(param); len(fields) > 0 {
 			return head + " " + fields[0], true

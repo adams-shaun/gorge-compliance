@@ -170,3 +170,67 @@ func TestNeutralGrantedAbility(t *testing.T) {
 		t.Errorf("keyword = %q, want none", a.Keyword)
 	}
 }
+
+// TestForgeExportGrantedAbilityIgnoresUnrelatedSameTextCard: an unrelated
+// card that prints the same SpellDescription (Vengeful Firebrand prints
+// "CARDNAME gets +1/+0 until end of turn.") is not a grant source for
+// Dalakos. Resolution is by the grant relationship, not the text, so it must
+// neither shadow the granted pump nor leave forge/neutral with no answer.
+// The old every-card scan found two distinct lines and silently fell back to
+// Dalakos's printed {T} ability.
+func TestForgeExportGrantedAbilityIgnoresUnrelatedSameTextCard(t *testing.T) {
+	for _, zone := range []string{"battlefield", "hand", "graveyard"} {
+		t.Run(zone, func(t *testing.T) {
+			reg := testutil.CorpusRegistry(t)
+			it := dalakosGrantedItem()
+			seat := it.Scenario.Setup["p0"]
+			switch zone {
+			case "battlefield":
+				seat.Battlefield = append(seat.Battlefield, "Vengeful Firebrand")
+			case "hand":
+				seat.Hand = append(seat.Hand, "Vengeful Firebrand")
+			case "graveyard":
+				seat.Graveyard = append(seat.Graveyard, "Vengeful Firebrand")
+			}
+			it.Scenario.Setup["p0"] = seat
+			g := replayItem(t, reg, it)
+			rq := forgeBuildRequest(reg, it, g, oraclegen.CastDivisions(reg, it.Scenario, g), false)
+			got, ok := rq.Abilities["2"]
+			if !ok {
+				t.Fatalf("no exported line for step 2 with an unrelated same-text card in the %s: %v", zone, rq.Abilities)
+			}
+			if got != dragonMantlePumpLine {
+				t.Errorf("step 2 line = %q, want the granted pump %q (not the printed index)", got, dragonMantlePumpLine)
+			}
+			c := census{}
+			n := neutralFor(reg, rq, g, c)
+			a, ok := n.Ability["2"]
+			if !ok {
+				t.Fatalf("no neutral ability for step 2 with an unrelated same-text card in the %s (census %v)", zone, map[string]int(c))
+			}
+			if a.Cost != "{R}" || !a.Granted {
+				t.Errorf("neutral step 2 = %+v, want the granted {R} pump", a)
+			}
+		})
+	}
+}
+
+// TestForgeExportOmitsUnresolvedGrantedLabel: a label-bearing granted step
+// whose grant does not resolve must be omitted, never exported as the printed
+// ability its aliased AbilityIndex points at. Here Dragon Mantle is absent, so
+// step 2's pump label has no grant source.
+func TestForgeExportOmitsUnresolvedGrantedLabel(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	it := dalakosGrantedItem()
+	seat := it.Scenario.Setup["p0"]
+	seat.Battlefield = []string{"Island", "Mountain", dalakosName}
+	seat.Attached = nil
+	it.Scenario.Setup["p0"] = seat
+	lines := forgeAbilityLines(reg, it, rules.OracleResult{})
+	if line, ok := lines["2"]; ok {
+		t.Fatalf("step 2 exported %q for an unresolved granted label, want omitted (never the printed index's %q)", line, dalakosPrintedManaLine)
+	}
+	if _, ok := lines["0"]; !ok {
+		t.Errorf("step 0 (Island mana, no grant label) lost its printed line: %v", lines)
+	}
+}
