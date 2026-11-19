@@ -117,7 +117,12 @@ To add a scenario, see [scenarios/README.md](scenarios/README.md).
 | `make xengine-sweep SETS=FDN CHUNKS=1 GAMES=2` | Full-game differential sweep | both builds |
 | `make pr DRY=1` | Print the pull request `make pr` would open | `gh` |
 
-Blame verdicts land in `oracle/xengine/diagnosed.tsv`, checked by `xengine diagnosed -check`.
+Blame verdicts land in the size-bounded register checked by `xengine diagnosed -check`. The farm's
+`report.py` append path is unchanged: it appends rows to `oracle/xengine/diagnosed.tsv`, the active
+shard, then runs `xengine diagnosed -split`, which packs `oracle/xengine/diagnosed/shard-NNN.tsv`
+archives in the sibling directory and keeps the active file last. `-check` reads the active file and
+its archive, enforces the duplicate `(kind, set, card, field)` key across all shards, and fails if
+any register file is over the 1,048,576-byte committed-file cap.
 
 ## Layout
 
