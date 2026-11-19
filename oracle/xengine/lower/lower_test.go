@@ -549,6 +549,35 @@ func TestLowerCastCarriesPayment(t *testing.T) {
 	})
 }
 
+// TestLowerActivateCarriesPayment: a mana ability activation's own cost is paid
+// from the pool the same way a spell's is. Gorge offers it as the option kind
+// "activate" (not "cast"/"ability"), and the recorder puts the units it spent in
+// the group's Spent; the activation step must carry them so a follower that
+// honours Item.Payment pays the recorded split. The measured shape is Azorius
+// Signet ({1}, {T}: Add {W}{U}) spending a floating W for the generic {1} while
+// the pool held WU (Supreme Commander, CR 107.4b): XMage otherwise auto-pays U.
+func TestLowerActivateCarriesPayment(t *testing.T) {
+	const ref = "p0:Azorius Signet"
+	obj := stateID(7)
+	group := []game.Entry{{
+		Kind:  "priority",
+		Seat:  0,
+		Picks: []game.Pick{{Kind: "activate", Obj: obj, Ref: ref}},
+		Mana:  []game.ManaRec{{Obj: obj, Name: "Azorius Signet", Ability: 0, Ref: ref}},
+		Spent: "W",
+	}}
+	steps, _, pay, _, why := lowerGroup(nil, seatMap{}, group)
+	if why != nil {
+		t.Fatalf("lowerGroup: %s", why.reason)
+	}
+	if len(steps) != 1 || steps[0].Op != "activate" || steps[0].Card != ref {
+		t.Fatalf("steps = %+v, want one activate of %s", steps, ref)
+	}
+	if len(pay) != len(steps) || pay[0] != "W" {
+		t.Errorf("activation payment = %v, want [\"W\"] (the mana the log spent)", pay)
+	}
+}
+
 // TestLowerDropsRefusedCast: a cast or activation the live game left the whole
 // state unchanged on did not happen, so it is not a replayable step. A refused
 // Spree cast is the measured shape (xe:OTJ:0:2:w3): the card stays in hand,
