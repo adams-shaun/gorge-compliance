@@ -320,6 +320,34 @@ func TestDiagnosedCheckFileArchiveOrder(t *testing.T) {
 	}
 }
 
+// Passing the archive directory on its own still covers the whole register:
+// its sibling active file is read last, and a split rewrites that file rather
+// than creating an active.tsv inside the archive.
+func TestDiagnosedCheckArchiveDirIncludesActive(t *testing.T) {
+	root := t.TempDir()
+	active := filepath.Join(root, "diagnosed.tsv")
+	row := "GF|X\tFDN\tAlpha\tcast\tX\t601.2\tevidence\thttps://example.com/1\t"
+	writeShard(t, root, "diagnosed.tsv", diagnosedHeader+"\n"+row+"\n")
+	archive := filepath.Join(root, "diagnosed")
+	writeShard(t, archive, "shard-000.tsv", diagnosedHeader+"\n")
+	shards, err := diagnosedShards(archive)
+	if err != nil {
+		t.Fatalf("archive directory register: %v", err)
+	}
+	if shards[len(shards)-1] != active {
+		t.Fatalf("last shard is %q, want the sibling active file %q (all: %v)", shards[len(shards)-1], active, shards)
+	}
+	if err := splitDiagnosed(archive, 4096); err != nil {
+		t.Fatalf("split via archive directory: %v", err)
+	}
+	if b, err := os.ReadFile(active); err != nil || !strings.Contains(string(b), row) {
+		t.Fatalf("sibling active file was not kept: %q, %v", b, err)
+	}
+	if _, err := os.Stat(filepath.Join(archive, diagnosedActiveName)); !os.IsNotExist(err) {
+		t.Fatalf("split created %s inside the archive directory: %v", diagnosedActiveName, err)
+	}
+}
+
 // diagnosedRows builds n valid register rows in order.
 func diagnosedRows(n int) []string {
 	rows := make([]string, 0, n)

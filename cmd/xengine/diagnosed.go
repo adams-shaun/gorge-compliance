@@ -160,10 +160,12 @@ func checkDiagnosed(file, cardsDir string, w io.Writer) (int, error) {
 // The committed layout is a file beside a sibling archive directory:
 // oracle/xengine/diagnosed.tsv is the active shard (the farm's unchanged append
 // target) and oracle/xengine/diagnosed/ holds shard-NNN.tsv. The archive shards
-// are read in numeric order and the active file last. A directory path is the
-// directory register form: shard-NNN.tsv in numeric order followed by
-// active.tsv. A bare file with no sibling archive directory is the one-shard
-// register the checker's fixtures use.
+// are read in numeric order and the active file last. A directory path without
+// active.tsv is that same archive half, so its sibling .tsv is included as the
+// active shard; a directory with active.tsv is the directory register form
+// (shard-NNN.tsv in numeric order followed by active.tsv). A bare file with no
+// sibling archive directory is the one-shard register the checker's fixtures
+// use.
 //
 // Every *.tsv in a register directory must be a canonical name. An unexpected
 // *.tsv is an error, never a shard, so a stray backup or note cannot be folded
@@ -178,12 +180,34 @@ func diagnosedShards(file string) ([]string, error) {
 		if err != nil {
 			return nil, err
 		}
-		if len(names) == 0 {
-			return nil, fmt.Errorf("%s: no *.tsv shards", file)
-		}
 		shards := make([]string, len(names))
 		for i, name := range names {
 			shards[i] = filepath.Join(file, name)
+		}
+		if len(names) == 0 {
+			sibling, ok, err := diagnosedSiblingActive(file)
+			if err != nil {
+				return nil, err
+			}
+			if !ok {
+				return nil, fmt.Errorf("%s: no *.tsv shards", file)
+			}
+			return []string{sibling}, nil
+		}
+		for _, name := range names {
+			if name == diagnosedActiveName {
+				return shards, nil // directory register form
+			}
+		}
+		// An archive directory passed on its own: include the sibling active
+		// file so -check and -split cover the whole register rather than only
+		// the archives.
+		sibling, ok, err := diagnosedSiblingActive(file)
+		if err != nil {
+			return nil, err
+		}
+		if ok {
+			shards = append(shards, sibling)
 		}
 		return shards, nil
 	}
@@ -210,6 +234,23 @@ func diagnosedShards(file string) ([]string, error) {
 		shards = append(shards, filepath.Join(archive, name))
 	}
 	return append(shards, file), nil
+}
+
+// diagnosedSiblingActive returns dir+".tsv" when it is the active file of an
+// archive directory. It is the path report.py appends to for a register stored
+// as oracle/xengine/diagnosed.tsv plus oracle/xengine/diagnosed/.
+func diagnosedSiblingActive(dir string) (string, bool, error) {
+	sibling := strings.TrimSuffix(dir, string(filepath.Separator)) + ".tsv"
+	info, err := os.Stat(sibling)
+	switch {
+	case errors.Is(err, fs.ErrNotExist):
+		return "", false, nil
+	case err != nil:
+		return "", false, err
+	case info.IsDir():
+		return "", false, nil
+	}
+	return sibling, true, nil
 }
 
 // diagnosedArchiveDir is the sibling directory that holds the archive shards
@@ -280,9 +321,10 @@ func diagnosedShardIndex(name string) (int, bool) {
 // become shard-NNN.tsv archives; the last is always the active shard: active.tsv
 // in a directory register, or the -file itself in the committed
 // file-plus-archive layout (oracle/xengine/diagnosed.tsv, the farm's unchanged
-// append target). Rows are packed before anything is written, so a bad header,
-// a stray *.tsv or a row that cannot fit the hard cap leaves the register
-// untouched.
+// append target). Passing the archive directory itself is the same as passing
+// its sibling active file. Rows are packed before anything is written, so a bad
+// header, a stray *.tsv or a row that cannot fit the hard cap leaves the
+// register untouched.
 func splitDiagnosed(file string, target int) error {
 	info, err := os.Stat(file)
 	if err != nil {
@@ -292,8 +334,19 @@ func splitDiagnosed(file string, target int) error {
 	activePath := file
 	archiveDir := diagnosedArchiveDir(file)
 	if dirForm {
-		activePath = filepath.Join(file, diagnosedActiveName)
 		archiveDir = file
+		activePath = filepath.Join(file, diagnosedActiveName)
+		if _, err := os.Stat(activePath); err == nil {
+			// Directory register form: the active shard is dir/active.tsv.
+		} else if !errors.Is(err, fs.ErrNotExist) {
+			return err
+		} else if sibling, ok, err := diagnosedSiblingActive(file); err != nil {
+			return err
+		} else if ok {
+			// Archive directory passed on its own: rewrite the sibling active
+			// file instead of creating a second active shard in the archive.
+			activePath = sibling
+		}
 	}
 	if target <= len(diagnosedHeader)+1 || target > diagnosedMaxBytes {
 		return fmt.Errorf("split target %d is outside (%d, %d]", target, len(diagnosedHeader)+1, diagnosedMaxBytes)
