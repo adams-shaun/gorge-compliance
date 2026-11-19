@@ -430,6 +430,21 @@ func setPicker(reg *cards.Registry, manifests, set string, led *cov.Ledger, opts
 	if opts.XMage {
 		fmt.Printf("xmage spelling: %d card(s) of %s left out of the decks, %d candidates\n", decks.ExcludedXMage(skips), set, len(cands))
 	}
+	if parent, ok := decks.ParentSets[set]; ok && decks.Pairable(cands) != nil {
+		// A bonus-sheet set too small to deal alone: its decks hold its own cards and its
+		// parent's, and the game is still recorded under the child's code. No dirac table
+		// holds cards of two sets, so with -dirac every such game reads not_applicable.
+		pc, _, perr := decks.CandidatesWith(reg, manifests, parent, opts)
+		if perr != nil {
+			return nil, perr
+		}
+		cands = decks.WithParent(cands, pc)
+		if err := decks.Pairable(cands); err != nil {
+			return nil, fmt.Errorf("set %s with parent %s: %w", set, parent, err)
+		}
+		fmt.Printf("xengine: set %s deals with parent %s: %d candidates, each deck holds up to %d %s cards\n", set, parent, len(cands), decks.MinChild, set)
+		return func(int, uint64) ([]decks.Card, *cov.Ledger, string) { return cands, led, "" }, nil
+	}
 	table := ""
 	if tables != nil {
 		if cands, err = diracCandidates(tables, set, cands); err != nil {
