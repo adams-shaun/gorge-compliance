@@ -63,6 +63,141 @@ func checkDiagnosedFile(t *testing.T, name string) (string, error) {
 	return out, runErr
 }
 
+// writeShard writes one TSV shard of a register directory.
+func writeShard(t *testing.T, dir, name, body string) {
+	t.Helper()
+	if err := os.MkdirAll(dir, 0o755); err != nil {
+		t.Fatalf("make shard dir: %v", err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, name), []byte(body), 0o644); err != nil {
+		t.Fatalf("write shard %s: %v", name, err)
+	}
+}
+
+func TestDiagnosedCheckShards(t *testing.T) {
+	dir := t.TempDir()
+	writeShard(t, dir, "shard-000.tsv", diagnosedHeader+"\n"+
+		"FX|G\tFDN\tAlpha\tcast\tX\t601.2a\tevidence\thttps://example.com/1\t\n")
+	writeShard(t, dir, diagnosedActiveName, diagnosedHeader+"\n"+
+		"GF|X\tBLB\tAlpha\tstatic:haste\tF\t604.2\tevidence\t\tcompliance-diagnosed-register\n")
+	var out strings.Builder
+	bad, err := checkDiagnosed(dir, diagnosedCorpus(t), &out)
+	if err != nil {
+		t.Fatalf("shard directory rejected: %v\n%s", err, out.String())
+	}
+	if bad != 0 {
+		t.Fatalf("%d bad row(s):\n%s", bad, out.String())
+	}
+}
+
+func TestDiagnosedCheckCrossShardDuplicate(t *testing.T) {
+	dir := t.TempDir()
+	row := "GF|X\tFDN\tAlpha\tcast\tX\t601.2\tevidence\thttps://example.com/1\t\n"
+	writeShard(t, dir, "shard-000.tsv", diagnosedHeader+"\n"+row)
+	writeShard(t, dir, diagnosedActiveName, diagnosedHeader+"\n"+row)
+	var out strings.Builder
+	bad, err := checkDiagnosed(dir, diagnosedCorpus(t), &out)
+	if err != nil {
+		t.Fatalf("duplicate shard directory: %v", err)
+	}
+	if bad != 1 {
+		t.Fatalf("%d bad row(s), want the duplicate only:\n%s", bad, out.String())
+	}
+	want := filepath.Join(dir, diagnosedActiveName) + ":2: duplicate (kind, set, card, field)"
+	if !strings.Contains(out.String(), want) {
+		t.Fatalf("output missing %q:\n%s", want, out.String())
+	}
+}
+
+func TestDiagnosedCheckCap(t *testing.T) {
+	dir := t.TempDir()
+	row := "GF|X\tFDN\tAlpha\tcast\tX\t601.2\t" + strings.Repeat("x", diagnosedMaxBytes) +
+		"\thttps://example.com/1\t\n"
+	writeShard(t, dir, diagnosedActiveName, diagnosedHeader+"\n"+row)
+	var out strings.Builder
+	bad, err := checkDiagnosed(dir, diagnosedCorpus(t), &out)
+	if err != nil {
+		t.Fatalf("over-cap register: %v", err)
+	}
+	if bad != 1 {
+		t.Fatalf("%d bad row(s), want the shard cap only:\n%s", bad, out.String())
+	}
+	want := fmt.Sprintf("over the %d-byte cap", diagnosedMaxBytes)
+	if !strings.Contains(out.String(), want) {
+		t.Fatalf("output missing %q:\n%s", want, out.String())
+	}
+}
+
+// A split repacks every shard under the target, ends with the active append
+// target, and preserves the row order across shards.
+func TestDiagnosedCheckSplit(t *testing.T) {
+	dir := t.TempDir()
+	var rows []string
+	for i := 0; i < 20; i++ {
+		rows = append(rows, fmt.Sprintf(
+			"GF|X\tFDN\tAlpha\tcast%d\tX\t601.2\tevidence-%s\thttps://example.com/%d\t",
+			i, strings.Repeat("e", 40), i))
+	}
+	writeShard(t, dir, "shard-000.tsv", diagnosedHeader+"\n"+strings.Join(rows[:10], "\n")+"\n")
+	writeShard(t, dir, diagnosedActiveName, diagnosedHeader+"\n"+strings.Join(rows[10:], "\n")+"\n")
+	const target = 400
+	if err := splitDiagnosed(dir, target); err != nil {
+		t.Fatalf("split: %v", err)
+	}
+	shards, err := diagnosedShards(dir)
+	if err != nil {
+		t.Fatalf("split shards: %v", err)
+	}
+	if got := filepath.Base(shards[len(shards)-1]); got != diagnosedActiveName {
+		t.Fatalf("last shard is %q, want %q", got, diagnosedActiveName)
+	}
+	var got []string
+	for _, shard := range shards {
+		b, err := os.ReadFile(shard)
+		if err != nil {
+			t.Fatalf("read split shard: %v", err)
+		}
+		if len(b) > target {
+			t.Errorf("%s is %d bytes, over the %d-byte target", shard, len(b), target)
+		}
+		lines := strings.Split(strings.TrimSuffix(string(b), "\n"), "\n")
+		if len(lines) == 0 || lines[0] != diagnosedHeader {
+			t.Errorf("%s: header is %q", shard, lines[0])
+			continue
+		}
+		got = append(got, lines[1:]...)
+	}
+	if strings.Join(got, "\n") != strings.Join(rows, "\n") {
+		t.Fatalf("split changed the register rows:\ngot  %q\nwant %q", got, rows)
+	}
+	var out strings.Builder
+	if bad, err := checkDiagnosed(dir, diagnosedCorpus(t), &out); err != nil || bad != 0 {
+		t.Fatalf("split register invalid: %v, %d bad row(s)\n%s", err, bad, out.String())
+	}
+}
+
+// Shards sort by their numeric index (so shard-1000 follows shard-999), with
+// active.tsv last because it is the append target.
+func TestDiagnosedCheckShardOrder(t *testing.T) {
+	dir := t.TempDir()
+	for _, name := range []string{"shard-1000.tsv", "shard-999.tsv", "zzz.tsv", diagnosedActiveName} {
+		writeShard(t, dir, name, "")
+	}
+	shards, err := diagnosedShards(dir)
+	if err != nil {
+		t.Fatalf("shard order: %v", err)
+	}
+	want := []string{"shard-999.tsv", "shard-1000.tsv", "zzz.tsv", diagnosedActiveName}
+	if len(shards) != len(want) {
+		t.Fatalf("got %v, want %v", shards, want)
+	}
+	for i := range want {
+		if filepath.Base(shards[i]) != want[i] {
+			t.Fatalf("shard %d is %q, want %q (all: %v)", i, filepath.Base(shards[i]), want[i], shards)
+		}
+	}
+}
+
 func TestDiagnosedCheckValid(t *testing.T) {
 	out, err := checkDiagnosedFile(t, "valid.tsv")
 	if err != nil {

@@ -36,9 +36,9 @@ func TestCardOfSkipsLeftSourceLabel(t *testing.T) {
 		t.Fatalf("cardOf = %q, want no card", got)
 	}
 	// A sourceless trigger (CR 725.2) is not a card either. The Grave
-	// Venerations row in diagnosed.tsv has exactly this shape: the empty
-	// source must be skipped without swallowing the separator and the label
-	// that follows it.
+	// Venerations row in the diagnosed register has exactly this shape: the
+	// empty source must be skipped without swallowing the separator and the
+	// label that follows it.
 	f.Gorge = "[ability:@p0, ability:Grave Venerations@p0]"
 	f.Other = f.Gorge
 	if got := cardOf(it, f); got != "Grave Venerations" {
