@@ -92,8 +92,7 @@
      "eq": 1
     }
    ],
-   "xmage": "BalancingActTest#test_Normal",
-   "known_bug": "XP[balance-no-resolver]: Balancing Act's SP$ Balance (and its Zone$ Hand sub-ability) resolves as nothing (p1 battlefield 6, want 4); the DB$ Balance API has no resolver in gorge (no Balance effect handler registered in effects, same cause as BalanceTest), CR 701.21, 701.9, verified at gorge 981b98963b."
+   "xmage": "BalancingActTest#test_Normal"
   },
   {
    "name": "test-discard-simultaneously-rielle",
@@ -286,8 +285,7 @@
      "eq": 3
     }
    ],
-   "xmage": "BalancingActTest#test_ZeroCardsInHand",
-   "known_bug": "XP[balance-no-resolver]: Balancing Act's SP$ Balance (and its Zone$ Hand sub-ability) resolves as nothing (p1 hand 3, want 0); the DB$ Balance API has no resolver in gorge (no Balance effect handler registered in effects, same cause as BalanceTest), CR 701.21, 701.9, verified at gorge 981b98963b."
+   "xmage": "BalancingActTest#test_ZeroCardsInHand"
   }
  ]
 }

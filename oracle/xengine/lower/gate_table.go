@@ -67,6 +67,8 @@ var gameTable = map[string]entry{
 	"ExtraPhases":         isRefused("pending extra phases are not placeable"),
 	"CombatsThisTurn":     isDerived("zero until combat begins; recounted"),
 	"MainPhasesThisTurn":  isDerived("main phases begun this turn; recounted from the window's own main phase"),
+	"UpkeepsThisTurn":     isIgnored("upkeep steps begun this turn; read only by the FirstUpkeep$ trigger gate at the upkeep step itself, which is over at a main-phase cut"),
+	"ReverseTurnOrder":    isRefused("a reversed turn order (Aeon Engine's ReverseTurnOrder effect) is not placeable; false in every ordinary game, so only an Aeon Engine game refuses"),
 	"DayNight":            isRefused("the day/night designation (CR 731) is not placeable"),
 	"PrevTurnSpells":      isIgnored("meaningful only when DayNight is set, which is refused"),
 	"ControlCombatOnly":   isRefused("a controlled player (CR 720) is not placeable"),
