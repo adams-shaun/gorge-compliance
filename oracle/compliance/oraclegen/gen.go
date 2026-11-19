@@ -1587,6 +1587,22 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = append(as, XAnswer{d.Seat, "choice", "yes"})
 				break
 			}
+			if phyrexianLifePicks(d) {
+				// XMage asks "Pay 2 life instead of {X} (phyrexian cost)?"
+				// before it will pay a Phyrexian pip (AbilityImpl
+				// .handlePhyrexianCosts at CR 601.2b; ManaCostsImpl
+				// .handlePhyrexianManaCosts for a cost paid later), so a
+				// recorded life face is a chooseUse "yes", not payment UI.
+				// Keyed on the engine's pay_life option kind, so every
+				// source of the ask takes it (cast, activate, triggered
+				// cost, K'rrik's PayLifeInsteadOf grant). A hybrid or
+				// twobrid face (pay_W/pay_generic) is still paid from the
+				// pool without a question and keeps the payment() skip.
+				for range d.Picks {
+					as = append(as, XAnswer{d.Seat, "choice", "yes"})
+				}
+				break
+			}
 			if payment(d.Picks) {
 				// Hybrid/phyrexian halves are payment UI; XMage pays from
 				// the pool without asking.
@@ -1884,6 +1900,17 @@ func forcedSingleOption(d rules.OracleDecision) bool {
 		// so TestPlayer reports "Can't find ability" (Saddle/Crew with one
 		// untapped creature left). The decision's picks are object identities,
 		// not the single-option LABEL asks this predicate exists for.
+		return false
+	}
+	if phyrexianLifePicks(d) {
+		// The life face of a Phyrexian pip is XMage's chooseUse ("Pay 2
+		// life instead of {R}?"), and XMage poses it even when gorge's
+		// feasibility gate offered ONLY that face: a cast with no coloured
+		// mana (Gut Shot's {R/P}, Dismember's {B/P}{B/P}) records
+		// Options == 1. Dropping the one-option ask leaves the driver's
+		// queue empty, and its starved-ask arm answers no -- the opposite
+		// of gorge's recorded pick. Every other payment face (pay_W,
+		// pay_generic) is still dropped by the final Options check.
 		return false
 	}
 	if announcesX(d) {
@@ -2828,6 +2855,24 @@ func payment(picks []string) bool {
 		// "Pay 1: Add W" is a costed mana ability's colour pick, a real
 		// XMage colour dialog, not a hybrid/phyrexian payment half.
 		if _, colour := manaColourLabel(p); colour {
+			return false
+		}
+	}
+	return true
+}
+
+// phyrexianLifePicks reports whether every pick is the two-life face of a
+// Phyrexian pip (the engine's pay_life option, from pay.ManaAsk's
+// announcement or a triggered cost's pipAsk). It is the ONE payment face
+// XMage poses as a chooseUse ("Pay 2 life instead of {X}?"), so the generator
+// must script it; every other flexible face (pay_W/pay_generic) is paid from
+// the pool without a question.
+func phyrexianLifePicks(d rules.OracleDecision) bool {
+	if len(d.Picks) == 0 {
+		return false
+	}
+	for k := range d.Picks {
+		if pickKind(d, k) != "pay_life" {
 			return false
 		}
 	}

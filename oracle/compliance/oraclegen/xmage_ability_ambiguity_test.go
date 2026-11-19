@@ -16,12 +16,24 @@ func TestXMageAbilityResolvesCountMismatchShapes(t *testing.T) {
 		card string
 		want map[int]string
 	}{
+		// The Oracle prints {G} before {2}{G}{G}{G}; Forge lists the
+		// overrun A:AB$ first. Ordinal pairing swapped the two prefixes.
+		{"Ezuri, Renegade Leader", map[int]string{0: "{2}{G}{G}{G}", 1: "{G}"}},
 		// STATION / LEVEL sections grant abilities Forge keeps in an SVar.
 		{"Evendo, Waking Haven", map[int]string{0: "{T}"}},
 		{"Brimstone Mage", map[int]string{0: "Level up {3}{R}"}},
 		{"Under-Construction Skyscraper", map[int]string{0: "{T}", 1: "Level up {1}"}},
 		// "Max speed —" lines have no AB.
 		{"Mutant Surveyor", map[int]string{0: "{2}"}},
+		// Two {T} lines whose effects differ. Forge drops the repeated "spell"
+		// ("Dragon or Omen spell") and writes a stale period inside an
+		// alternative ("Add {W}. or {U}."), so effect normalisation is what
+		// separates them, not their shared cost.
+		{"Maelstrom of the Spirit Dragon", map[int]string{0: "{T}: Add {C}.", 1: "{T}: Add one", 2: "{4}, {T}, Sacrifice {this}"}},
+		{"Thalakos Lowlands", map[int]string{0: "{T}: Add {C}.", 1: "{T}: Add {W}"}},
+		// One line and one AB, but Forge spells the per-target {R} as X, so
+		// the line derives no candidate and only the bijection pairs it.
+		{"Goblin Polka Band", map[int]string{0: "{2}, {T}, Pay {R} for each target"}},
 		// Printed without the space after the cost colon.
 		{"Alaundo the Seer", map[int]string{0: "{T}"}},
 		{"Argoth, Sanctum of Nature", map[int]string{0: "{T}", 1: "{2}{G}{G}, {T}"}},

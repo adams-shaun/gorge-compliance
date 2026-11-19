@@ -293,8 +293,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // other cast a leading Yes belongs to a later ask and is left queued.
     private boolean optionalCostCast = false;
     // A cast step with cast_mode "alternative": gorge elected the first
-    // alternative cost (Leyline of Mutation's grant). XMage poses that as its
-    // alternative-cost key menu; the generator's leading "Yes" picks key 1.
+    // alternative cost (Leyline of Mutation's grant, Land Grant's reveal).
+    // XMage poses that as its alternative-cost key menu. The mode itself is
+    // the election, so the menu is answered with key 1 even when the
+    // generator queued no answer (the cost is on the card, not a gorge
+    // decision); an older "Yes" shape is rewritten to the same key.
     private boolean alternativeCostCast = false;
     // A cast step with cast_mode "conspired" or "casualty": gorge elected the
     // spell's (often granted) copy cost -- Raiding Schemes' conspire,
@@ -369,6 +372,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // unusable units) fall back, so no later ask in the step reaches
             // TestPlayer in manual mode with no choice.
             if (payment != null) {
+                // A recorded coloured tap can be the unit a still-unpaid
+                // forced pip needs while the plan has no letter of that
+                // colour: gorge tapped the creature for that pip, and the
+                // plan's other letters paid everything else. Take the tap
+                // before nextPaymentColour's drop-a-letter fallback would
+                // spend a pool unit the recorded cast kept.
+                if (takeRecordedTapForForcedPip(unpaid, game)) {
+                    return playQueuedTapPayment(ability, unpaid, promptText, game);
+                }
                 String next = nextPaymentColour(ability, unpaid, game);
                 if (next != null) {
                     // TestPlayer.playMana consumes choices.get(0). This step's
@@ -394,16 +406,51 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // The recorded plan is spent and the step's next answer is
                     // gorge's improvise/convoke tap. Stay in manual payment so
                     // TestPlayer takes the special action it now names.
-                    try {
-                        return super.playMana(ability, unpaid, promptText, game);
-                    } finally {
-                        convokeColour = null;
-                    }
+                    return playQueuedTapPayment(ability, unpaid, promptText, game);
                 } else {
                     fallBackToAutoPayment();
                 }
             }
             return super.playMana(ability, unpaid, promptText, game);
+        }
+
+        /** Take the recorded tap special action the queue now names, clearing
+         * the one-shot convoke colour answer on either return path. */
+        private boolean playQueuedTapPayment(Ability ability, ManaCost unpaid,
+                String promptText, Game game) {
+            try {
+                return super.playMana(ability, unpaid, promptText, game);
+            } finally {
+                convokeColour = null;
+            }
+        }
+
+        /** Whether the still-unpaid cost forces a WUBRG pip the recorded plan
+         * has no letter for, and the recorded payment tap at the front of the
+         * choice queue pays exactly that colour. Such a tap is the recorded
+         * unit for the pip: queue its special action and let playMana take it,
+         * so assignPayment consumes the added unit and the pool unit the plan
+         * intended to keep survives. A "for 1" tap does not qualify (it is the
+         * generic contribution, and the plan-exhausted path below takes it);
+         * neither does a tap for a colour no unpaid pip forces. */
+        private boolean takeRecordedTapForForcedPip(ManaCost unpaid, Game game) {
+            if (getChoices().isEmpty()) {
+                return false;
+            }
+            String[] pick = tapPaymentPick(getChoices().get(0));
+            if (pick == null || "1".equals(pick[1])) {
+                return false;
+            }
+            char colour = pick[1].charAt(0);
+            if (payment.indexOf(colour) >= 0) {
+                return false;
+            }
+            Mana forced = new Mana();
+            collectDue(unpaid, forced, new ArrayList<HybridManaCost>());
+            if (forced.get(manaType(colour)) <= 0) {
+                return false;
+            }
+            return queueTapPaymentAction(game);
         }
 
         /** The colour XMage's convoke effect is to be answered with when it
@@ -800,6 +847,35 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return !getChoices().isEmpty() && (getChoices().get(0).equals("Yes") || getChoices().get(0).equals("No"));
         }
 
+        /** XMage's Phyrexian cost prompts: AbilityImpl.handlePhyrexianCosts
+         * ("... (phyrexian cost)?" at CR 601.2b), ManaCostsImpl
+         * .handlePhyrexianManaCosts ("...?" while a cost is paid) and
+         * AbilityImpl.handlePhyrexianLikeEffects (K'rrik's PayLifeInsteadOf
+         * grant, "... (pay life cost)?"). All three ask whether to pay two
+         * life instead of a pip, and only these three use this wording. */
+        static boolean phyrexianAsk(String message) {
+            return message != null && message.startsWith("Pay 2 life instead of ");
+        }
+
+        /** Whether a Phyrexian ask must be declined because the step queued
+         * no boolean for it. The generator scripts "yes" only for a recorded
+         * pay_life face, so a starved ask means gorge paid the pip's mana
+         * face: answer no WITHOUT consuming the step's next answer.
+         * TestPlayer would otherwise stop the replay at "Missing CHOICE def"
+         * before the cost can be paid from the pool (Blinding Souleater's
+         * {W/P} activation). A queued Yes/No is left for TestPlayer, which
+         * consumes it as the recorded life-face answer. */
+        static boolean phyrexianStarved(String message, List<String> choices) {
+            if (!phyrexianAsk(message)) {
+                return false;
+            }
+            if (choices.isEmpty()) {
+                return true;
+            }
+            String head = choices.get(0);
+            return !head.equals("Yes") && !head.equals("No");
+        }
+
         /**
          * The yes/no asks a plain cast step implies. gorge's cast-resolve
          * scenario casts for the mana cost only, so each of these is answered
@@ -816,6 +892,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
          */
         @Override
         public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
+            if (phyrexianStarved(message, getChoices())) {
+                return false;
+            }
             if (source instanceof LeylineAbility) {
                 return false;
             }
@@ -917,16 +996,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return super.choose(outcome, choice, game);
         }
 
-        /** Rewrites the generator's leading "Yes" into key "1", the first
-         * alternative cost (gorge's AltCostIndex-1 election), when the menu is
-         * XMage's alternative-cost choice. Returns whether it did. */
+        /** Elects the first alternative cost (gorge's AltCostIndex-1 choice)
+         * when the menu is XMage's alternative-cost key choice. The item's
+         * cast_mode is the election, so key "1" is queued even when the
+         * generator queued no answer (a plain alternative cast on the card
+         * itself, e.g. Land Grant); a generator that queued "Yes" gets the
+         * same key. Returns whether the menu was this one. */
         static boolean alternativeCostKey(String message, List<String> choices) {
-            if (message == null || !message.endsWith("choose an alternative cost")
-                    && !message.equals("Choose an alternative cost")
-                    || choices.isEmpty() || !"Yes".equals(choices.get(0))) {
+            if (message == null || !message.toLowerCase(java.util.Locale.ROOT)
+                    .endsWith("choose an alternative cost")) {
                 return false;
             }
-            choices.set(0, "1");
+            if (choices.isEmpty()) {
+                choices.add("1");
+            } else {
+                choices.set(0, "1");
+            }
             return true;
         }
 
@@ -2418,13 +2503,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** The setup's per-seat "tapped_after_untap" and "speed" (gorge's runner emits
-     * the same SpeedChange events when it places the cards). Runs inside the
+     * the same SpeedChange events when it places the cards), followed by one
+     * continuous-effects pass over the finished setup board. Runs inside the
      * "setup" checkpoint, before the first snapshot, because a speed needs a live
      * game. The setup "counters" are not here: placeSetupCounters seeds them
      * before start(). */
     private void applySetupState(Game g) {
         JsonObject setup = sc0.has("setup") ? sc0.getAsJsonObject("setup") : new JsonObject();
-        boolean changed = false;
         for (int i = 0; i < seats; i++) {
             if (!setup.has("p" + i)) {
                 continue;
@@ -2446,20 +2531,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 for (int k = 1; k < s.get("speed").getAsInt(); k++) {
                     pl.increaseSpeed(g);
                 }
-                changed = true;
             }
         }
-        if (changed) {
-            // A counter-gated static -- a Spacecraft's StationLevelAbility, "has
-            // indestructible as long as it has a divinity counter on it" -- is a
-            // ContinuousEffect whose condition reads the source's counters when
-            // XMage last applied effects, which was before these setup adds.
-            // addCounters does not itself recompute, and the snapshot below reads
-            // the stale set, so XMage would show the card still uncounted (no P/T,
-            // no keyword) where gorge shows it live. Apply once with the counters
-            // in place, exactly as the game loop does at the start of a step.
-            g.applyEffects();
-        }
+        // Setup state is written without the events the game loop reacts to:
+        // addCard's tapped placement and setTapped here flip a tap flag,
+        // placeSetupCounters writes counters straight on, and a speed is a
+        // player write. A conditional static -- Scoria Cat's "+3/+3 as long as
+        // you control no untapped lands" -- is a ContinuousEffect whose
+        // condition is read when effects are applied, so without this pass the
+        // first snapshot reports the pre-setup P/T where gorge reports the live
+        // value (CR 611.3a). Apply unconditionally: one pass per scenario is
+        // cheap, and a hand-maintained "something changed" flag missed the tap
+        // arm (and would miss the next setup kind).
+        g.applyEffects();
     }
 
     /** The pre-start hook that seeds every seat's setup "counters" (card name ->
@@ -3270,10 +3354,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // the card's ordinary SpellAbility, played by name. TestPlayer's
                 // "Cast <name>" search runs over Zone.ALL, so it finds it.
                 || mode.equals("mayplay")
-                // "alternative": an alternative cost another permanent grants
-                // (Leyline of Mutation's {W}{U}{B}{R}{G}). XMage poses it as
-                // its own yes/no while casting, which the generator scripts
-                // from gorge's election, so the step is a plain cast here.
+                // "alternative": the first alternative cost, whether the card
+                // carries it itself (Land Grant's reveal) or another permanent
+                // grants it (Leyline of Mutation's {W}{U}{B}{R}{G}). XMage
+                // poses its alternative-cost key menu during the cast; the
+                // mode is the election, so ScriptedChoicePlayer queues key 1
+                // there and the step is otherwise a plain cast.
                 || mode.equals("alternative")
                 || mode.equals("prepared_copy")
                 // "adventure_alt" / "omen_alt": the cast of an Adventure or
