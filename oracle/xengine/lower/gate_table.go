@@ -172,6 +172,7 @@ var objectTable = map[string]entry{
 	"MergedCards":                  isRefused("a merged permanent is not placeable"),
 	"EnteredThisTurn":              isRefused("an object that entered this turn; a battlefield permanent always refuses (power-up cost reads it with no script word); off the battlefield it is live only when a card names a turnEntryReaders word; the drawn card (library->hand) is exempt"),
 	"PushMonarchSeq":               isRefused("monarch-change sequence stamp taken at push; setup cannot restate it"),
+	"StartedTurnUntapped":          isRefused("tapped status as this turn began, stamped by the TurnChange fold on every battlefield object; live only when a card in the game names the startedTheTurnUntapped filter word (Rasputin Dreamweaver), the one reader (effects/filter.go)"),
 	"EnteredFrom":                  isIgnored("provenance of EnteredThisTurn, which is refused when set"),
 	"WasDealtDamageThisTurn":       isRefused("this-turn damage record"),
 	"DealtDamageThisTurnHere":      isRefused("this-turn record that this object dealt damage; setup cannot restate it"),
