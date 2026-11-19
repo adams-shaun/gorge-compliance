@@ -13,7 +13,7 @@ index d2396a4c..cecbf065 100644
  // arms with a spell gate, the controller in Whose and the type in the card
  // filter (kernel btSpellSrcOK). An Ability source sets SrcAbility instead
 diff --git a/dirac/kop/triggers.go b/dirac/kop/triggers.go
-index dbdf2327..76240270 100644
+index dbdf2327..db13ac7e 100644
 --- a/dirac/kop/triggers.go
 +++ b/dirac/kop/triggers.go
 @@ -290,9 +290,10 @@ const TrigNValiant int16 = 1
@@ -30,6 +30,17 @@ index dbdf2327..76240270 100644
  const TrigNSrcSpell int16 = 4
  
  // TrigNSrcAbility in Trigger.N of a TrigBecomesTarget watcher (non-Valiant):
+@@ -300,8 +301,8 @@ const TrigNSrcSpell int16 = 4
+ // controller is gated by Whose (gorge becomesTargetMatches ValidSource$
+ // Ability, Ability.YouCtrl, Ability.OppCtrl). Loki, God of Mischief's
+ // "an ability you control" is WhoseYou beside this marker; the bare Spell
+-// form above stays the any-stack-object base. Kernel trig_becomestarget.go
+-// btSrcOK.
++// form above requires a spell stack entry (CR 112.1), while SpellAbility
++// stays the union base. Kernel trig_becomestarget.go btSrcOK.
+ const TrigNSrcAbility int16 = 5
+ 
+ // TrigNSrcCtrl in Trigger.N of a TrigBecomesTarget watcher (non-Valiant)
 diff --git a/dirac/oracle/becomestarget_spellsource_lockstep_test.go b/dirac/oracle/becomestarget_spellsource_lockstep_test.go
 index decf5718..b0762e12 100644
 --- a/dirac/oracle/becomestarget_spellsource_lockstep_test.go
@@ -199,10 +210,10 @@ index ff539eda..91c43e6f 100644
 +	cmpResult("predicate SpellAbility on an ability", ps.Evaluate("SpellAbility", g, ability, SpecContext{}), PredicateYes)
 +}
 diff --git a/engine/effects/filter.go b/engine/effects/filter.go
-index c43ef5d7..fd2bc9ed 100644
+index c43ef5d7..1617785d 100644
 --- a/engine/effects/filter.go
 +++ b/engine/effects/filter.go
-@@ -2829,7 +2829,7 @@ func matchesBase(g *state.Game, base string, o *state.Object, sc SpecContext) bo
+@@ -2829,15 +2829,16 @@ func matchesBase(g *state.Game, base string, o *state.Object, sc SpecContext) bo
  		// depends on.
  		return o.Face() != nil && o.Face().IsPermanent()
  	case matchesBaseSpell:
@@ -211,7 +222,20 @@ index c43ef5d7..fd2bc9ed 100644
  	case matchesBaseSpellAbility:
  		// Forge's SpellAbility base (ValidSource$ SpellAbility.OppCtrl on the
  		// "becomes the target of a spell or ability" family -- Thunderbreak
-@@ -2845,6 +2845,21 @@ func matchesBase(g *state.Game, base string, o *state.Object, sc SpecContext) bo
+ 		// Regent and 51 more files): any spell or ability object on the stack.
+-		// The shared filter draws the Spell/SpellAbility line by zone alone;
+-		// the card-spell-only distinction TargetType$ Spell draws
+-		// (engine/rules/stack.go's stack kind tokens) is that machinery's own, not
+-		// this one's.
++		// Spell (above) requires a spell stack entry and rejects an ability
++		// (CR 112.1, 113.3b); SpellAbility is the union base and keeps the
++		// zone-only reading. The card-spell-only distinction TargetType$ Spell
++		// draws (engine/rules/stack.go's stack kind tokens) is that
++		// machinery's own, not this one's.
+ 		return o.Zone == state.ZStack
+ 	case matchesBaseOutlaw, matchesBaseHistoric:
+ 		return batchWordBase(matchesBaseCodes.Code(string(base)), o, sc)
+@@ -2845,6 +2846,21 @@ func matchesBase(g *state.Game, base string, o *state.Object, sc SpecContext) bo
  	return hasTypeCtx(o, base, sc)
  }
  
@@ -253,6 +277,46 @@ index 74c300e5..bc839c2f 100644
  	case cbBatchWord:
  		base := a.base
  		for {
+diff --git a/engine/effects/filter_is_targeting_test.go b/engine/effects/filter_is_targeting_test.go
+index 79d74590..223283e2 100644
+--- a/engine/effects/filter_is_targeting_test.go
++++ b/engine/effects/filter_is_targeting_test.go
+@@ -212,14 +212,15 @@ func TestSpellIsTargetingBaseQualifiedOnly(t *testing.T) {
+ 	}
+ }
+ 
+-// TestSpellIsTargetingAbilityOnStack pins the SpellAbility half of the form
+-// against a real ability-classified stack object: positive and negative
++// TestSpellIsTargetingAbilityOnStack pins the Spell/SpellAbility split of the
++// form against a real ability-classified stack object: positive and negative
+ // cases through the SHARED matcher (not the condition gate), so the
+ // SpellAbility spelling the previous round left untested is now exercised.
+ //
+-// The intended distinction from Spell is a base check, not a different
+-// answer: matchesBase draws the shared Spell/SpellAbility line by ZONE alone
+-// (both require a stack object), while the condition gate (conditions.go's
++// The distinction is the RULE, not a different answer: CR 112.1 makes a spell
++// a card on the stack, while an activated ability is not a spell (CR 113.3b).
++// SpellAbility is Forge's union base and admits the ability; Spell requires a
++// spell stack entry and rejects it. The condition gate (conditions.go's
+ // isSpellTargetingPresent) deliberately BYPASSES the base because a
+ // triggering spell may already have left the stack. The shared matcher keeps
+ // the base, so an off-stack object with the same targets fails closed.
+@@ -251,10 +252,10 @@ func TestSpellIsTargetingAbilityOnStack(t *testing.T) {
+ 	if !MatchesSpecCtx(g, "SpellAbility.IsTargeting Valid Creature", ability.ID, sc) {
+ 		t.Fatal("an ability targeting a creature must match the target spec")
+ 	}
+-	// The Spell spelling answers the same on the same stack object -- the
+-	// shared base line is zone-only, documented above.
+-	if !MatchesSpecCtx(g, "Spell.IsTargeting Valid Creature", ability.ID, sc) {
+-		t.Fatal("the Spell spelling must answer a stack object the same way")
++	// CR 112.1/113.3b: the Spell spelling requires a spell stack entry, so an
++	// ability must NOT match it; SpellAbility, Forge's union base, still does.
++	if MatchesSpecCtx(g, "Spell.IsTargeting Valid Creature", ability.ID, sc) {
++		t.Fatal("the Spell spelling must reject an ability stack object (CR 112.1, 113.3b)")
+ 	}
+ 	// A non-matching target fails.
+ 	ability.Targets = []state.Target{{Obj: id["myLand"]}}
 diff --git a/engine/rules/farm_giggling_skitterspike_test.go b/engine/rules/farm_giggling_skitterspike_test.go
 new file mode 100644
 index 00000000..0c67d196
