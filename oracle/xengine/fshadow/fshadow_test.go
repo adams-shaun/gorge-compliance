@@ -947,3 +947,30 @@ func TestOptionalTriggerWithoutALogLineAnsweredByDefault(t *testing.T) {
 		t.Error("trigger_optional is not an unlogged kind: a snapshot past it would compare gorge's pre-answer state")
 	}
 }
+
+// TestTriggerOrderWithoutALogLineAnsweredByDefault is the farm cmdr4 repro
+// (FRA-s27490217 pod 2749021700, offset 557): gorge asks a seat to order its
+// simultaneously triggered abilities (KTriggerOrder, CR 603.3b) where Forge's
+// next log line is the next seat's priority ask, because Forge's recorder
+// writes no ask for a trigger order (its AI orders the stack itself). The
+// follower used to stop with kind "trigger_order seat 2" against "priority
+// seat 0"; it now answers the offered order and consumes no line.
+func TestTriggerOrderWithoutALogLineAnsweredByDefault(t *testing.T) {
+	prio := parseAsk(t, `{"t":"ask","n":442,"seat":0,"turn":5,"step":"main1","kind":"priority","answer":{"action":"pass"}}`)
+	d := &decision.Decision{Seq: 9, Player: 2, Kind: decision.KTriggerOrder, Min: 3, Max: 3,
+		Options: []decision.Option{{Index: 0, Kind: "trigger"}, {Index: 1, Kind: "trigger"}, {Index: 2, Kind: "trigger"}}}
+	f := &follower{log: &Log{}}
+	in, ok := f.answer(d, Entry{Line: 557, T: TAsk, Ask: prio})
+	if !ok || f.res.Hard != nil {
+		t.Fatalf("hard divergence %+v", f.res.Hard)
+	}
+	if !reflect.DeepEqual(in.Choices, []int{0, 1, 2}) || in.Seq != 9 || in.Player != 2 {
+		t.Errorf("intent %+v, want the offered order", in)
+	}
+	if f.pos != 0 || f.res.Orders != 1 || f.res.Asks != 0 {
+		t.Errorf("pos %d orders %d asks %d, want the log line left unconsumed", f.pos, f.res.Orders, f.res.Asks)
+	}
+	if !unloggedKind(decision.KTriggerOrder) {
+		t.Error("trigger_order is not an unlogged kind: a snapshot past it would compare gorge's pre-answer state")
+	}
+}
