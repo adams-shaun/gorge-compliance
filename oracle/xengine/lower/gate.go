@@ -456,6 +456,11 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 			return true
 		}
 		return false
+	case typ == "Object" && name == "StartedTurnUntapped":
+		// The TurnChange fold stamps it on every untapped battlefield object, so
+		// it is set in nearly every mid-game cut; its only reader is the
+		// startedTheTurnUntapped filter word.
+		return v.Bool() && o.Zone == state.ZBattlefield && w.gameMentions("startedTheTurnUntapped")
 	case typ == "Game" && name == "EnteredLastTurn":
 		// One turn of history, read only through Count$LastTurnEntered_*
 		// (Ephara, God of the Polis; count_body_heads.go evalEnteredHead).
