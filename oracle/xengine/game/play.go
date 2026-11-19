@@ -522,6 +522,8 @@ func (r *recorder) pickOf(e *rules.Engine, o decision.Option) Pick {
 		AltCost: o.AltCostIndex, Attacker: o.Attacker, Player: int(o.Player), Battle: o.Battle,
 		Label: o.Label, Ref: r.refs.refOf(e, o.Obj), AttackerRef: r.refs.refOf(e, o.Attacker),
 		BattleRef: r.refs.refOf(e, o.Battle),
+		SVar:      o.SVar, Keyword: o.Keyword,
+		GrantSource: o.GrantSource, GainedSource: o.GainedSource, GainedIdx: o.GainedIdx,
 	}
 }
 

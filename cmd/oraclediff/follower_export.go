@@ -431,6 +431,18 @@ func neutralFor(reg *cards.Registry, rq forgeRequest, g rules.OracleResult, c ce
 			continue
 		}
 		c.add("ability.steps")
+		if st.Ability != "" {
+			// A granted/gained step names the engine's offered label;
+			// its identity is not the printed index's ability.
+			if sa, ok := resolveGrantedStepAbility(reg, it, st); ok {
+				if a, ok := neutralGrantedAbilityOf(sa, c); ok {
+					n.Ability[strconv.Itoa(i)] = a
+				}
+			} else {
+				c.add("ability.omit:granted_unresolved")
+			}
+			continue
+		}
 		f := forgeAbilityFace(reg, it, st, g, i)
 		if f == nil {
 			c.add("ability.omit:face_unresolved")
@@ -519,6 +531,28 @@ func neutralAbilityOf(f *cards.Face, k int, c census) (neutralAbility, bool) {
 		a.Ordinal = &ord
 		c.add("ability.ordinal")
 	}
+	neutralAbilityBody(sa, class, &a, c)
+	return a, true
+}
+
+// neutralGrantedAbilityOf is a granted/gained ability by class, cost, text
+// and production, with no ordinal: the ability is not on the recipient's
+// face, so no face-relative ordinal exists.
+func neutralGrantedAbilityOf(sa *cards.SA, c census) (neutralAbility, bool) {
+	class, why := abilityClass(sa)
+	if class == "" {
+		c.add("ability.omit:" + why)
+		return neutralAbility{}, false
+	}
+	a := neutralAbility{Class: class}
+	c.add("ability.class")
+	c.add("ability.ordinal_omit:granted")
+	neutralAbilityBody(sa, class, &a, c)
+	return a, true
+}
+
+// neutralAbilityBody fills a's cost, text and production from sa's class.
+func neutralAbilityBody(sa *cards.SA, class string, a *neutralAbility, c census) {
 	if cost, ok := neutralCost(sa.ParamStr(cards.PKCost)); ok {
 		a.Cost = cost
 		c.add("ability.cost")
@@ -545,7 +579,6 @@ func neutralAbilityOf(f *cards.Face, k int, c census) (neutralAbility, bool) {
 			c.add("ability.produces_omit:unmodelled")
 		}
 	}
-	return a, true
 }
 
 // tilde replaces Forge's CARDNAME self-reference with "~".

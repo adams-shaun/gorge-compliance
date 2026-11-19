@@ -982,6 +982,15 @@ func prefixes(reg *cards.Registry, it oraclegen.Item) ([]string, *Refusal) {
 		if st.AbilityIndex == nil {
 			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q by label %q, which names no ability index", i, st.Card, st.Ability)
 		}
+		// A granted/gained/keyword-granted ability's step carries the
+		// engine's offered label beside the index; the index there aliases
+		// the printed ability 0 (or is -1), so the printed face's XMage
+		// text would activate the wrong ability. The granted body has no
+		// printed-face rule text to select by, so the step refuses rather
+		// than shipping the printed ability's prefix.
+		if st.Ability != "" {
+			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q by granted-ability label %q, which has no XMage rule text", i, st.Card, st.Ability)
+		}
 		c, face, ok := stepCard(reg, it, st)
 		if !ok {
 			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q, which is no corpus card", i, st.Card)
