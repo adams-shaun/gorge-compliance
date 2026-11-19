@@ -4,16 +4,16 @@
   "author": "Oracle + CR only",
   "scenarios": [
     {
-      "name": "no-graveyard-activity-still-triggers-and-draws",
+      "name": "no-graveyard-activity-still-triggers-and-does-nothing",
       "cr": ["603.4"],
-      "why": "The 'if you've cast a spell from a graveyard or activated an ability of a card in a graveyard this turn' clause follows the draw effect, not the trigger condition, so it is not an intervening-if (CR 603.4 final sentence): the ability triggers at EVERY end step and the 2020-11-10 ruling says so; the condition is checked only as the draw resolves.",
-      "setup": {"p0": {"battlefield": ["Laboratory Drudge"]}, "p1": {}},
+      "why": "The 'if you've cast a spell from a graveyard or activated an ability of a card in a graveyard this turn' clause follows the draw effect, not the trigger condition, so it is not an intervening-if (CR 603.4 final sentence): the ability triggers at EVERY end step and the 2020-11-10 ruling says so. With no graveyard cast or graveyard-card activation this turn the condition is false as the ability resolves, so the ability does nothing and no card is drawn: hand size stays 0.",
+      "setup": {"p0": {"battlefield": ["Laboratory Drudge"], "library_top": ["Grizzly Bears"]}, "p1": {}},
       "steps": [
         {"op": "pass_to", "step": "end", "active": "p0", "expect": [{"trigger_on_stack": "p0:Laboratory Drudge", "want": true}]},
         {"op": "resolve"}
       ],
       "expect": [
-        {"hand_size": {"p0": 1}}
+        {"hand_size": {"p0": 0}}
       ]
     },
     {
