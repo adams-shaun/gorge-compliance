@@ -297,14 +297,18 @@ var (
 // cardOf names the card of the diverging step: the card cast or activated.
 // A step with no card (a pass during which a trigger fired) falls back to the
 // first stack object or non-token permanent the diverging values name, the
-// trigger's source.
+// trigger's source. The comparator's left-battlefield stand-in is skipped: it
+// labels a source that left the battlefield (CR 113.7a, 603.10a), so it is a
+// display value rather than a card, and the next object is the attribution.
 func cardOf(item oraclegen.Item, f classify.Finding) string {
 	if f.Step >= 0 && f.Step < len(item.Steps) && item.Steps[f.Step].Card != "" {
 		return item.Steps[f.Step].Card
 	}
 	for _, v := range []string{f.Gorge, f.Other} {
-		if m := stackName.FindStringSubmatch(v); m != nil {
-			return m[1]
+		for _, m := range stackName.FindAllStringSubmatch(v, -1) {
+			if m[1] != "" && !oraclediff.IsLeftSourceLabel(m[1]) {
+				return m[1]
+			}
 		}
 		for _, m := range permName.FindAllStringSubmatch(v, -1) {
 			if m[1] != "token" {
