@@ -122,6 +122,10 @@ type Result struct {
 	// OptionalDecider$ trigger) the log has no line for, which the follower
 	// answered by default (yes).
 	Optionals int `json:"optionals,omitempty"`
+	// Orders counts the trigger-order decisions (CR 603.3b: a seat's
+	// simultaneously triggered abilities) the log has no line for, which the
+	// follower answered by default (the offered order).
+	Orders int `json:"orders,omitempty"`
 	// End is how the follow finished: "end" (the log's end line matched),
 	// "unfinished" (Forge stopped the game early), "log" (the log ran out
 	// first), "cap" or "divergence".
@@ -343,7 +347,7 @@ func at(turn int, step string) int {
 // unloggedKind reports whether Forge's recorder writes no ask line for a
 // decision of kind k, so the follower answers it by default (answer).
 func unloggedKind(k decision.Kind) bool {
-	return k == decision.KChoose || k == decision.KModes || k == decision.KArrange || k == decision.KTriggerOptional
+	return k == decision.KChoose || k == decision.KModes || k == decision.KArrange || k == decision.KTriggerOptional || k == decision.KTriggerOrder
 }
 
 // snapAheadOfUnlogged reports whether snapshot entry e describes a point past
@@ -522,6 +526,17 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// decline -- and consume no line; Forge's real choice, if it
 		// differs, shows at the next snapshot.
 		f.res.Optionals++
+		return firstMin(d), true
+	}
+	if d.Kind == decision.KTriggerOrder {
+		// Forge's recorder logs no trigger order (its controller orders the
+		// stack through a hook that writes no ask line), so the next line
+		// belongs to a later decision (farm cmdr4: gorge "trigger_order seat
+		// 2" against Forge's "priority seat 0"). Answer by default -- the
+		// offered order, a full permutation as Min == Max == len(Options) --
+		// and consume no line; Forge's real order, if it differs, shows at
+		// the next stack snapshot.
+		f.res.Orders++
 		return firstMin(d), true
 	}
 	if d.Kind == decision.KChoose {
