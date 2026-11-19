@@ -4817,6 +4817,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 + ", priority " + priority + "; since the last checkpoint the stack lost " + departed + ")";
     }
 
+    /** A forced resolution (waitStackResolved) happens inside a TestPlayer
+     * action, before the game loop's next checkStateAndTriggered. A checkpoint
+     * queued in the same priority would otherwise snapshot the pre-SBA board:
+     * an Aura whose bearer an exile-instead replacement removed (Bleed Dry,
+     * Gnashing of Teeth) is still on the battlefield, and its CR 704.5m move
+     * waits for the next priority. Queue the game's own check after the
+     * resolution, ahead of the checkpoint, so every forced-resolution site
+     * snapshots what a real priority grant would see (CR 117.5, 704.3). */
+    private void settleForCheckpoint(TestPlayer p) {
+        runCode("settle the state a forced resolution left", turn, phase, p,
+                (info, pl, g) -> g.checkStateAndTriggered());
+    }
+
     private void queuePassCommands(int stepIdx) {
         // Most pass commands run on the active seat: seat 0 for every shape
         // but the active seat 1's own p1-first pair (isActiveP1Pair).
@@ -4842,6 +4855,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     break;
                 case CMD_WAIT_RESOLVE_ONE:
                     waitStackResolved(turn, phase, active, true);
+                    settleForCheckpoint(active);
                     // The pair resolves the stack's top object, so a cast
                     // step's spell has left the stack: a later cast that
                     // names it targets its permanent, not a spell that will
@@ -5027,7 +5041,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // (the answers are consumed by that resolution).
                     // A pair's deferred resolution waits on the active seat,
                     // the seat that queued the pair (queuePassCommands).
-                    waitStackResolved(turn, phase, isOp(steps(sc0), stepIdx - 1, "pass") ? seat(activeSeat) : p, true);
+                    TestPlayer waiter = isOp(steps(sc0), stepIdx - 1, "pass") ? seat(activeSeat) : p;
+                    waitStackResolved(turn, phase, waiter, true);
+                    settleForCheckpoint(waiter);
                     dropLastCast();
                     return;
                 }
@@ -5444,6 +5460,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             case "resolve":
                 // gorge's resolve op passes priority until the stack is empty.
                 waitStackResolved(turn, phase, p);
+                settleForCheckpoint(p);
                 // waitStackResolved empties the stack, so every cast recorded
                 // on it is gone. A later cast targeting one of those names is
                 // targeting the permanent (the setup alias still names it),
