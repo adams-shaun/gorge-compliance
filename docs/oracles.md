@@ -139,6 +139,15 @@ so CR 603.6 (from memory) leaves nothing to trigger, but both followers fire Eer
 `.oracle-build/xengine/seed1/SUMMARY.md`. A sweep resumes where it stopped. It needs `jq`, and
 waits while two or more JVMs are running.
 
+**Blame register:** a re-verified divergence that is not a gorge rule defect is recorded in the
+split register under `oracle/xengine/diagnosed.tsv` and `oracle/xengine/diagnosed/`, so no committed
+file is over the 1 MiB cap. The farm's `report.py` append path is unchanged: it appends rows to
+`oracle/xengine/diagnosed.tsv`, the active (last) shard, then runs `xengine diagnosed -split`, which
+packs `oracle/xengine/diagnosed/shard-NNN.tsv` archives in the sibling directory and rewrites the
+active file last. `xengine diagnosed -check` validates the active file and every archive shard, the
+shared header, the duplicate `(kind, set, card, field)` key across shards, and each file's size
+against 1,048,576 bytes.
+
 **dirac as a fourth side:** with `XENGINE_DIRAC=1` the decks hold only cards the set's dirac table
 plays, and each game is played in lockstep between gorge and dirac (`dirac/oracle`) under the explore
 policy before being replayed as the sweep's game, so the windows lowered from it are the positions dirac
