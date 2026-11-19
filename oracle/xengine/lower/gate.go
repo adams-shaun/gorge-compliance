@@ -456,6 +456,10 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 			return true
 		}
 		return false
+	case typ == "Game" && name == "EnteredLastTurn":
+		// One turn of history, read only through Count$LastTurnEntered_*
+		// (Ephara, God of the Polis; count_body_heads.go evalEnteredHead).
+		return v.Len() > 0 && w.gameMentions("LastTurnEntered")
 	case typ == "Game" && name == "ResolvedThisTurn":
 		return v.Len() > 0 && w.gameMentions("ResolvedThisTurn")
 	case typ == "Player" && name == "AttackedSeatsLastTurn":
