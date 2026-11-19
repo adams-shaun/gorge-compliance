@@ -1,0 +1,215 @@
+diff --git a/engine/effects/effect.go b/engine/effects/effect.go
+index 2fb2e7f0..844245d7 100644
+--- a/engine/effects/effect.go
++++ b/engine/effects/effect.go
+@@ -416,6 +416,16 @@ func effEffect(h Host, c *Ctx, sa *cards.SA) {
+ 			}
+ 			odSuffix = "|OD=" + optionalSpec
+ 		}
++		// Static$ True rides the decode-safe "|ST" slot on every Effect
++		// Triggers$ registration, exactly as the AB$ DelayedTrigger path does
++		// (delayedtrigger_params.go): rules resolves a static-marked delayed
++		// registration inline at fire time instead of minting a stack object
++		// (static_trigger.go). Without the marker Exhaustion's Mode$ Phase
++		// self-exile becomes an ability on the stack (CR 611.2a, 603.7).
++		staticSuffix := ""
++		if tl.Static {
++			staticSuffix = "|ST"
++		}
+ 		if tr.Mode == "BecomeMonarch" {
+ 			// Palace Jailer's one-shot command-zone promise. It is CONSUMED
+ 			// by its own firing, not retired by a turn ceiling, and its
+@@ -568,7 +578,7 @@ func effEffect(h Host, c *Ctx, sa *cards.SA) {
+ 			for _, owner := range owners {
+ 				h.Emit(events.Event{Kind: events.DelayedRegister, Obj: c.Source,
+ 					Player: owner, Step: h.Game().Step, Counter: exec,
+-					IDs: encodeRemembered(regIDs), Text: tr.Mode + ":" + regTrigger + expiry + odSuffix + efMarker + cnSuffix + ccSuffix})
++					IDs: encodeRemembered(regIDs), Text: tr.Mode + ":" + regTrigger + expiry + odSuffix + staticSuffix + efMarker + cnSuffix + ccSuffix})
+ 			}
+ 			registered = true
+ 		case cards.TriggerPhase:
+@@ -618,6 +628,7 @@ func effEffect(h Host, c *Ctx, sa *cards.SA) {
+ 			if tl.FirstCombat {
+ 				text += "|1C"
+ 			}
++			text += staticSuffix
+ 			// A prevention rider's delayed counter body (Sacred Boon) reads the
+ 			// amount this application prevented as Count$TriggerRememberAmount;
+ 			// "|RN=" rides last so the decode strips it first.
+@@ -672,7 +683,7 @@ func effEffect(h Host, c *Ctx, sa *cards.SA) {
+ 			for _, owner := range owners {
+ 				h.Emit(events.Event{Kind: events.DelayedRegister, Obj: c.Source,
+ 					Player: owner, Step: h.Game().Step, Counter: exec,
+-					IDs: encodeRemembered(eventIDs), Text: tr.Mode + ":" + name + expiry + odSuffix + efMarker + cnSuffix + ccSuffix})
++					IDs: encodeRemembered(eventIDs), Text: tr.Mode + ":" + name + expiry + odSuffix + staticSuffix + efMarker + cnSuffix + ccSuffix})
+ 			}
+ 			registered = true
+ 		}
+diff --git a/engine/effects/effect_params.go b/engine/effects/effect_params.go
+index e6d65bbb..40e51346 100644
+--- a/engine/effects/effect_params.go
++++ b/engine/effects/effect_params.go
+@@ -237,7 +237,7 @@ func readEffectTriggerLine(tr *cards.Trigger) effectTriggerLine {
+ 		OptionalDecider: strings.TrimSpace(tr.ParamStr(cards.PKOptionalDecider)),
+ 		ThisTurn:        strings.TrimSpace(tr.ParamStr(cards.PKThisTurn)),
+ 		OneOff:          isTrue(tr.ParamStr(cards.PKOneOff)),
+-		Static:          strings.TrimSpace(tr.ParamStr(cards.PKStatic)) != "",
++		Static:          isTrue(tr.ParamStr(cards.PKStatic)),
+ 		Phase:           tr.ParamStr(cards.PKPhase),
+ 		ValidPlayer:     strings.TrimSpace(tr.ParamStr(cards.PKValidPlayer)),
+ 		FirstCombat:     isTrue(tr.ParamStr(cards.PKFirstCombat)),
+diff --git a/engine/effects/effect_static_trigger_marker_test.go b/engine/effects/effect_static_trigger_marker_test.go
+new file mode 100644
+index 00000000..d8f46194
+--- /dev/null
++++ b/engine/effects/effect_static_trigger_marker_test.go
+@@ -0,0 +1,62 @@
++package effects
++
++import (
++	"strings"
++	"testing"
++
++	"github.com/adams-shaun/gorge/engine/cards"
++	"github.com/adams-shaun/gorge/engine/events"
++	"github.com/adams-shaun/gorge/engine/state"
++)
++
++// TestEffectTriggersCarryStaticMarker pins the STATIC$ TRUE registration
++// marker on every api:Effect Triggers$ arm. Forge marks a body
++// `Static$ True` when its Execute is bookkeeping: rules resolves it inline at
++// fire time (static_trigger.go) instead of minting a stack object
++// (Exhaustion's "don't untap" duration ends at the untap step, CR 611.2a;
++// Kor Dirge's self-exile fires when the imprinted creature leaves, CR 603.7).
++// The marker must ride the decode-safe "|ST" slot (events.Apply strips it
++// after |EF and before |1C=), on the Mode$ Phase arm and on both event arms.
++// A future `Static$ False` body must NOT be marked static.
++func TestEffectTriggersCarryStaticMarker(t *testing.T) {
++	src := "Name:T\nTypes:Sorcery\n" +
++		"A:SP$ Effect | Duration$ Permanent | Triggers$ Phar PharFalse Evt EvtSpell\n" +
++		"SVar:Phar:Mode$ Phase | Phase$ Untap | Execute$ X | Static$ True\n" +
++		"SVar:PharFalse:Mode$ Phase | Phase$ End of Turn | Execute$ X | Static$ False\n" +
++		"SVar:Evt:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ X | Static$ True\n" +
++		"SVar:EvtSpell:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ X | Static$ True\n" +
++		"SVar:X:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile\n" +
++		"Oracle:x\n"
++	c, d := cards.ParseBytes("t.txt", []byte(src))
++	if len(d) != 0 {
++		t.Fatalf("diags: %v", d)
++	}
++	c.Link()
++	h := newHost(t, 2)
++	h.g.AddObject(c, 0)
++	h.g.Step = state.StepMain1
++	Resolve(h, &Ctx{Source: 1, Controller: 0}, c.Faces[0].Abilities[0])
++
++	for _, tc := range []struct {
++		prefix, why string
++		static      bool
++	}{
++		{"Untap", "Mode$ Phase (Static$ True)", true},
++		{"End of Turn", "Mode$ Phase (Static$ False)", false},
++		{"ChangesZone:", "the TriggerChangesZone event arm", true},
++		{"SpellCast:", "the TriggerSpellCast event arm", true},
++	} {
++		var text string
++		for _, ev := range h.log {
++			if ev.Kind == events.DelayedRegister && strings.HasPrefix(ev.Text, tc.prefix) {
++				text = ev.Text
++			}
++		}
++		if text == "" {
++			t.Fatalf("%s: no DelayedRegister emitted; log %+v", tc.why, h.log)
++		}
++		if got := strings.Contains(text, "|ST"); got != tc.static {
++			t.Errorf("%s: registration %q carries |ST = %v, want %v", tc.why, text, got, tc.static)
++		}
++	}
++}
+diff --git a/engine/rules/farm_exhaustion_test.go b/engine/rules/farm_exhaustion_test.go
+new file mode 100644
+index 00000000..64643fd9
+--- /dev/null
++++ b/engine/rules/farm_exhaustion_test.go
+@@ -0,0 +1,67 @@
++package rules
++
++import (
++	"fmt"
++	"testing"
++
++	"github.com/adams-shaun/gorge/testkit/testutil"
++)
++
++// TestFarmExhaustion pins the SUP farm windows where the only differing field
++// is `stack` (SUP-s127-supp xe:RAND:0:10:w15 @ step 21 pass, xe:RAND:3:13:w18
++// @ step 32 pass, xe:RAND:3:4:w5 @ step 18 pass): gorge
++// [ability:Exhaustion@p0] vs xmage [] and forge [].
++//
++// Exhaustion is "Creatures and lands target opponent controls don't untap
++// during their next untap step." That is one continuous effect whose stated
++// duration ends with that untap step: CR 611.2a "A continuous effect generated
++// by the resolution of a spell or ability lasts as long as stated by the spell
++// or ability creating it (such as 'until end of turn')." It is not a delayed
++// triggered ability: CR 603.7 "An effect may create a delayed triggered
++// ability that can do something at a later time. A delayed triggered ability
++// will contain 'when,' 'whenever,' or 'at,' although that word won't usually
++// begin the ability." Exhaustion's text has no such clause.
++func TestFarmExhaustion(t *testing.T) {
++	t.Parallel()
++	reg := testutil.CorpusRegistry(t)
++	const sc = `{"name":"farm exhaustion SUP-s127-supp xe:RAND_0_10_w15","turn":1,` +
++		`"cr":["611.2a","603.7"],"why":"inline",` +
++		`"setup":{"p0":{"hand":["Exhaustion"]},` +
++		`"p1":{"battlefield":["Grizzly Bears"],"tapped":["Grizzly Bears"]}},` +
++		`"steps":[` +
++		`{"op":"cast","seat":0,"card":"p0:Exhaustion","mana":"CCU","targets":["p1"]},` +
++		`{"op":"pass","seat":0},{"op":"pass","seat":1},` +
++		`{"op":"pass_to","seat":0,"step":"upkeep","active":"p1"}]}`
++	res, err := RunOracleScenarioJSON(reg, []byte(sc))
++	if err != nil {
++		t.Fatalf("run: %v", err)
++	}
++	if len(res.Fails) != 0 {
++		t.Fatalf("scenario failed: %v", res.Fails)
++	}
++	var snap *OracleSnapshot
++	for i := range res.Snapshots {
++		if res.Snapshots[i].Checkpoint == "step 3 (pass_to)" {
++			snap = &res.Snapshots[i]
++		}
++	}
++	if snap == nil {
++		t.Fatalf("no pass_to snapshot: %d snapshots", len(res.Snapshots))
++	}
++	var bear *OracleSnapPerm
++	for i := range snap.Permanents {
++		if snap.Permanents[i].Controller == 1 && snap.Permanents[i].Name == "Grizzly Bears" {
++			bear = &snap.Permanents[i]
++		}
++	}
++	if bear == nil || !bear.Tapped {
++		t.Fatalf("precondition: p1's Grizzly Bears tapped=%v, want true through its next untap step", bear != nil && bear.Tapped)
++	}
++	var stack []string
++	for _, it := range snap.Stack {
++		stack = append(stack, it.Kind+":"+it.Source)
++	}
++	if len(stack) != 0 {
++		t.Fatalf("stack at p1's upkeep = %v, want []: Forge and XMage keep the Exhaustion duration bookkeeping off the stack (CR 611.2a, 603.7)", fmt.Sprint(stack))
++	}
++}
+diff --git a/engine/rules/untap_denial_effect_test.go b/engine/rules/untap_denial_effect_test.go
+index 9c5fab82..4cbb2a19 100644
+--- a/engine/rules/untap_denial_effect_test.go
++++ b/engine/rules/untap_denial_effect_test.go
+@@ -90,6 +90,9 @@ func TestUntapDenialEffectsHoldTheNamedPermanents(t *testing.T) {
+ 			}
+ 			want := []bool{tc.heldCreature, tc.heldArtifact, tc.heldLand}
+ 			driveToStepAny(t, e, 2, 1, state.StepUpkeep)
++			if len(e.G.Stack) != 0 {
++				t.Errorf("%s: stack at the untap step = %v, want [] (the Static$ True phase body resolves inline)", tc.name, e.G.Stack)
++			}
+ 			for i, id := range ids {
+ 				if got := e.G.Obj(id).Tapped; got != want[i] {
+ 					t.Errorf("%s: permanent %d tapped after the first untap step = %v, want %v", tc.name, i, got, want[i])
