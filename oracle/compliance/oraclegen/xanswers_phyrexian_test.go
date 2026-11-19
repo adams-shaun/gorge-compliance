@@ -1,12 +1,14 @@
 package oraclegen
 
 import (
+	"encoding/json"
 	"os"
 	"reflect"
 	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
 // A recorded pay_life pick is XMage's Phyrexian chooseUse ("Pay 2 life instead
@@ -24,6 +26,16 @@ func TestXAnswersPhyrexian(t *testing.T) {
 			Options: 2, Min: 1, Max: 1, Picks: []string{"Pay 2 life"}, PickIdx: []int{1},
 			PickRefs: []string{"Pay 2 life"}, PickKinds: []string{"pay_life"}, Via: "answer"}
 	}
+	// lifeOnly is the shape the committed corpus actually records when the
+	// pool has no coloured mana: gorge's feasibility gate trims the menu to
+	// the single life face (Gut Shot's {R/P}, Dismember's {B/P}{B/P},
+	// K'rrik's {B/P} payments). forcedSingleOption used to drop that ask
+	// before the pay_life branch, so XMage got no queued boolean at all.
+	lifeOnly := func(step int) rules.OracleDecision {
+		return rules.OracleDecision{Step: step, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+			Options: 1, Min: 1, Max: 1, Picks: []string{"Pay 2 life"}, PickIdx: []int{0},
+			PickRefs: []string{"Pay 2 life"}, PickKinds: []string{"pay_life"}, Via: "answer"}
+	}
 	// An activation (step 2) and a cast (step 0): XMage poses the same ask at
 	// 601.2b for both, and a triggered cost pays through ManaCostsImpl's
 	// later prompt with the same recorded kind.
@@ -34,6 +46,8 @@ func TestXAnswersPhyrexian(t *testing.T) {
 	}{
 		{"activate", life(2), [][]XAnswer{nil, nil, {{0, "choice", "yes"}}, nil}},
 		{"cast", life(0), [][]XAnswer{{{0, "choice", "yes"}}, nil, nil}},
+		{"activate life-only", lifeOnly(2), [][]XAnswer{nil, nil, {{0, "choice", "yes"}}, nil}},
+		{"cast life-only", lifeOnly(0), [][]XAnswer{{{0, "choice", "yes"}}, nil, nil}},
 	} {
 		if got := xanswers([]rules.OracleDecision{c.d}, len(c.want), nil, nil); !reflect.DeepEqual(got, c.want) {
 			t.Errorf("%s pay_life: xanswers = %#v, want %#v", c.name, got, c.want)
@@ -90,5 +104,85 @@ func TestXAnswersPhyrexian(t *testing.T) {
 		if !strings.Contains(java, want) {
 			t.Errorf("ScenarioReplay.ScriptedChoicePlayer lost its Phyrexian chooseUse arm: missing %q", want)
 		}
+	}
+}
+
+// TestXAnswersPhyrexianCorpus pins the generator against the committed Oracle
+// corpus, not a hand-built decision: the feasibility gate trims a Phyrexian
+// cast's menu to the ONE life face when the pool has no coloured mana, so the
+// real recorded shape is Options == 1, not the two-option activation row.
+// Each recorded pay_life pick must reach XAnswersForScenario as one "yes".
+func TestXAnswersPhyrexianCorpus(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	for _, c := range []struct {
+		path     string
+		scenario string
+		pips     int
+	}{
+		{"../../../scenarios/oracle/spell-conditional/gut-shot.json", "life-only-pays-two-life", 1},
+		{"../../../scenarios/oracle/cost-modifier/krrik-son-of-yawgmoth.json", "phyrexian-symbols-paid-with-life", 3},
+		{"../../../scenarios/oracle/cost-modifier/dismember.json", "both-pips-paid-with-life", 2},
+	} {
+		t.Run(c.scenario, func(t *testing.T) {
+			raw, err := os.ReadFile(c.path)
+			if err != nil {
+				t.Fatal(err)
+			}
+			var file struct {
+				Scenarios []json.RawMessage `json:"scenarios"`
+			}
+			if err := json.Unmarshal(raw, &file); err != nil {
+				t.Fatal(err)
+			}
+			var body []byte
+			var sc Scenario
+			for _, r := range file.Scenarios {
+				var got Scenario
+				if err := json.Unmarshal(r, &got); err != nil {
+					t.Fatal(err)
+				}
+				if got.Name == c.scenario {
+					body, sc = r, got
+					break
+				}
+			}
+			if body == nil {
+				t.Fatalf("%s: scenario %q not found", c.path, c.scenario)
+			}
+			res, err := rules.RunOracleScenarioJSON(reg, body)
+			if err != nil {
+				t.Fatalf("run %s: %v (fails %v)", c.scenario, err, res.Fails)
+			}
+			recorded, oneOption := 0, true
+			lifeSteps := map[int]int{}
+			for _, d := range res.Decisions {
+				if !phyrexianLifePicks(d) {
+					continue
+				}
+				recorded += len(d.Picks)
+				lifeSteps[d.Step] += len(d.Picks)
+				oneOption = oneOption && d.Options == 1
+			}
+			if recorded != c.pips {
+				t.Fatalf("scenario records %d pay_life picks, want %d", recorded, c.pips)
+			}
+			if !oneOption {
+				t.Fatalf("a recorded pay_life pick has Options != 1; this test pins the life-only shape and the corpus no longer has one")
+			}
+			got := 0
+			for step, as := range XAnswersForScenario(reg, res, sc, nil, nil) {
+				if lifeSteps[step] == 0 {
+					continue
+				}
+				for _, a := range as {
+					if a.Kind == "choice" && a.Value == "yes" {
+						got++
+					}
+				}
+			}
+			if got != c.pips {
+				t.Fatalf("XAnswersForScenario scripts %d yes on the pay_life steps for %d recorded life picks; each Phyrexian ask needs one", got, c.pips)
+			}
+		})
 	}
 }

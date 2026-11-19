@@ -1902,6 +1902,17 @@ func forcedSingleOption(d rules.OracleDecision) bool {
 		// not the single-option LABEL asks this predicate exists for.
 		return false
 	}
+	if phyrexianLifePicks(d) {
+		// The life face of a Phyrexian pip is XMage's chooseUse ("Pay 2
+		// life instead of {R}?"), and XMage poses it even when gorge's
+		// feasibility gate offered ONLY that face: a cast with no coloured
+		// mana (Gut Shot's {R/P}, Dismember's {B/P}{B/P}) records
+		// Options == 1. Dropping the one-option ask leaves the driver's
+		// queue empty, and its starved-ask arm answers no -- the opposite
+		// of gorge's recorded pick. Every other payment face (pay_W,
+		// pay_generic) is still dropped by the final Options check.
+		return false
+	}
 	if announcesX(d) {
 		// An X announcement is always posed (XMage's announceXMana), even
 		// when the available mana leaves one legal value: an "{X}{X}, {T}"
