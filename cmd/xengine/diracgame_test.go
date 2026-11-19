@@ -37,8 +37,12 @@ func TestDiracGameEvery(t *testing.T) {
 func TestPlayDiracSwapsRecorded(t *testing.T) {
 	testutil.CorpusRegistry(t) // skips without the corpus
 	out := t.TempDir()
-	if err := runPlay([]string{"-cards", "../../.cards", "-manifests", manifestDir, "-set", "OTJ", "-chunk", "0",
-		"-games", "2", "-seed", "1", "-dirac", "-out", out}); err != nil {
+	err := runPlay([]string{"-cards", "../../.cards", "-manifests", manifestDir, "-set", "OTJ", "-chunk", "0",
+		"-games", "2", "-seed", "1", "-dirac", "-out", out})
+	if dside.NoTables(err) {
+		t.Skip(err) // CI has the corpus but not the dirac synthetic tables
+	}
+	if err != nil {
 		t.Fatal(err)
 	}
 	var swaps []swapRow
