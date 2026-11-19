@@ -64,6 +64,29 @@ git -C "$top" diff --quiet HEAD -- forge-gui/res/cardsfolder forge-gui/res/token
 [ -z "$(git -C "$top" ls-files --others -- forge-gui/res/cardsfolder forge-gui/res/tokenscripts)" ] || die "$top has untracked scripts under forge-gui/res/{cardsfolder,tokenscripts}"
 [ -d "$top/forge-gui/res" ] || die "no $top/forge-gui/res"
 [ -d "$src/src/main/java" ] || die "no driver source at $src/src/main/java"
+
+# item.die_rolls is only honoured when the driver has the step-scoped force
+# (ForcedDieRandom, armed by StepMachine) and MyRandom forwards the bounded
+# draw RollDiceEffect makes to it. A driver with either half missing silently
+# rolls its own die: Ebony Fly animates to 5/5 where gorge has 3/3. Check the
+# source at the ref about to run, so a pin bump cannot lose the force without
+# this failing before a scenario is replayed.
+fdr=$src/src/main/java/forge/oracle/ForcedDieRandom.java
+if [ ! -f "$fdr" ] || ! grep -q 'class ForcedDieRandom' "$fdr"; then
+  die "$ref has no step-scoped die force ($fdr); FORGE_ORACLE_REF predates item.die_rolls"
+fi
+for f in "$src/src/main/java/forge/oracle/ForgeEngine.java:new ForcedDieRandom" \
+         "$src/src/main/java/forge/oracle/StepMachine.java:dice.arm("; do
+  file=${f%%:*}; want=${f#*:}
+  if [ ! -f "$file" ] || ! grep -qF "$want" "$file"; then
+    die "$ref does not wire the forced die ($file lacks \"$want\"); FORGE_ORACLE_REF predates item.die_rolls"
+  fi
+done
+mymy=$top/forge-core/src/main/java/forge/util/MyRandom.java
+if [ ! -f "$mymy" ] || ! grep -qF 'delegate.nextInt(bound)' "$mymy"; then
+  die "$ref does not forward nextInt(bound) ($mymy); FORGE_ORACLE_REF predates item.die_rolls"
+fi
+
 [ -s "$root/cp.txt" ] || die "no $root/cp.txt; run make forge-oracle-setup"
 [ -x "$jdk/bin/javac" ] || die "no JDK at $jdk"
 
