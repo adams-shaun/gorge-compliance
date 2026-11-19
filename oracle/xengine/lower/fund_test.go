@@ -7,6 +7,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -74,5 +75,62 @@ func TestLowerFundsResolveTimePayment(t *testing.T) {
 	}
 	if unfunded > 0 {
 		t.Errorf("%d funding taps were not lowered ahead of the payer's pass: %v", unfunded, gaps)
+	}
+}
+
+// TestLowerFundingTapCarriesSpend: the funding taps of a resolve-time payment
+// replay the activations gorge's planner fired to fund it, and each
+// activation's own cost is pool mana gorge spent doing so. The recorder puts
+// the election entry's whole spend — the activation's own cost (an Azorius
+// Signet's {1}, paid here with a floating U) followed by the resolve-time
+// charge itself — on the trigger_cost_pay entry, so the funding path must
+// split it the way lowerGroup splits a mana-window ask's: the first units the
+// activation's own Cost$ names ride the tap step that activation is lowered
+// as (the only step kind any follower reads a payment from — oraclegen's
+// Payment is "the pool mana a cast or activate step must spend"), and the
+// rest is the resolve-time charge, which the follower engine pays from its
+// floating pool at the resolve step, so spending it early would leave the
+// pool short of exactly those units at the resolve's checkpoint. Dropping the
+// whole spend instead (the old empty-pay pushFunding) replayed a pool the
+// live game never had: the follower paid the Signet's {1} with its own split.
+func TestLowerFundingTapCarriesSpend(t *testing.T) {
+	reg := cards.NewRegistry()
+	reg.Add(&cards.Card{Faces: []*cards.Face{{
+		Name:      "Azorius Signet",
+		Abilities: []*cards.SA{{Params: map[string]string{"Cost": "1 T"}}},
+	}}})
+	pass := game.Entry{Kind: "priority", Seat: 0, Picks: []game.Pick{{Kind: "pass"}}, StackTop: 1}
+	sig := game.ManaRec{Obj: 9, Name: "Azorius Signet", Ability: 0, Ref: "p0:Azorius Signet", Player: 0}
+	ask := func(spent string) game.Entry {
+		return game.Entry{
+			Kind: "choose_n", Seat: 0,
+			Picks: []game.Pick{{Kind: "trigger_cost_pay", Obj: 7, Ref: "p0:Glorious Attendant"}},
+			Mana:  []game.ManaRec{sig}, Spent: spent,
+		}
+	}
+	for _, tc := range []struct {
+		name  string
+		spent string
+		want  string
+	}{
+		{"the activation's own cost is not dropped", "U", "U"},
+		{"the resolve-time charge stays with the resolve", "UU", "U"},
+		{"a free or unspent activation pays nothing", "", ""},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			var l Lowered
+			l.StepEntry = []int{}
+			fund := l.fundingTaps(reg, seatMap{}, []game.Entry{pass, ask(tc.spent)}, 0, 2, nil, 0, false, false)
+			if fund.refused {
+				t.Fatal("funding refused")
+			}
+			if len(fund.taps) != 1 || fund.taps[0].Card != "p0:Azorius Signet" {
+				t.Fatalf("taps = %+v, want one Azorius Signet activation", fund.taps)
+			}
+			l.pushFunding(fund)
+			if len(l.Item.Payment) != 1 || l.Item.Payment[0] != tc.want {
+				t.Errorf("funding tap payment = %v, want [%q] (the activation's own spend)", l.Item.Payment, tc.want)
+			}
+		})
 	}
 }
