@@ -26,7 +26,7 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
-# Forge oracle driver commit (fork, branch oracle-harness-setup-backface): a descendant of
+# Forge oracle driver commit (fork, branch oracle-untap-upto-noop-pick): a descendant of
 # FORGE_REF with identical script trees.
 # d2939e9b61 = 7f287e888f (below) + MyRandom's counting wrapper forwards bounded
 # nextInt(bound) to the supplied generator: at 7f287e888f the wrapper routed it through
@@ -48,7 +48,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # back face instead of staying in hand (CR 307.4, 712.8f; Sea Gate Restoration // Sea Gate, Reborn
 # and every such modal DFC); the entering face's own replacements apply, and a back-face Saga keeps
 # its entry lore and chapter I. Same cardsfolder and tokenscripts trees as FORGE_REF 418ba5215f.
-FORGE_ORACLE_REF ?= 2c9710b20af85bba52fb15548b148c3b940910f9
+# b33362f600 = 2c9710b20a + an up-to object pick that Forge does not offer is
+# consumed as a no-op instead of falling back to the AI or binding it to a
+# same-named sibling: UntapEffect offers only permanents that can untap
+# (forge-game/.../UntapEffect.java:116-119), so Peregrine Drake's recorded
+# untap of an already-untapped Island stays a no-op (CR 608.2d, 701.26b) and
+# p0:Island#5 stays tapped. The same helper answers every object pick, so a
+# tap/untap/sacrifice/discard up-to pick absent from Forge's candidates can no
+# longer change the board. Same cardsfolder and tokenscripts trees as
+# FORGE_REF 418ba5215f.
+FORGE_ORACLE_REF ?= b33362f6004458d1509a7f44a87dcbe279f56040
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
