@@ -2,6 +2,7 @@ package decks
 
 import (
 	"fmt"
+	"math/bits"
 	"reflect"
 	"sort"
 	"strings"
@@ -191,16 +192,19 @@ func declaredSets(t *testing.T) []string {
 }
 
 // wantUnreachable pins, per declared set at this gorge pin, how many
-// candidates fit no feasible colour pair (so no deck can hold them). Sets in
+// candidates fit no feasible colour pair or triple (so no deck can hold them). Sets in
 // wantInfeasible have no feasible pair at all and are absent here.
 var wantUnreachable = map[string]int{
-	"BLB": 1, "DFT": 8, "DSK": 3, "ECL": 6, "EOE": 1, "FDN": 0, "FIN": 6, "FRA": 13,
-	"LCI": 0, "MSH": 24, "OTJ": 17, "SOS": 2, "TLA": 0, "WOE": 0,
+	"BLB": 0, "DFT": 8, "DSK": 3, "ECL": 6, "EOE": 1, "FDN": 0, "FIN": 6, "FRA": 13,
+	"LCI": 0, "MKM": 0, "MSH": 24, "OTJ": 17, "SOS": 2, "TDM": 4, "TLA": 0, "WOE": 0,
 }
 
 // wantInfeasible are the declared sets with no colour pair holding 23 eligible
-// candidates: Pair cannot build decks for them, callers skip them.
-var wantInfeasible = []string{"BIG", "HOB", "MKM", "SPM", "TDM", "TMT"}
+// candidates in any colour pair or (with a three-colour candidate) triple: Pair
+// cannot build decks for them, callers skip them. MKM and TDM left the list when
+// the rotation gained the shards and wedges; BIG deals with its parent
+// (ParentSets), the rest have fewer than 23 candidates in any colours.
+var wantInfeasible = []string{"BIG", "HOB", "SPM", "TMT"}
 
 func TestPairableAllDeclaredSets(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
@@ -337,5 +341,169 @@ func TestCandidatesNamed(t *testing.T) {
 	got, skips := CandidatesNamed(reg, []string{"Grizzly Bears", "No Such Card"}, Options{})
 	if len(got) != 1 || got[0].Name != "Grizzly Bears" || len(skips) != 1 || skips[0].Reason != "not in corpus" {
 		t.Fatalf("candidates %v, skips %v", got, skips)
+	}
+}
+
+// maskOf is the colour mask of a deck's colour letters.
+func maskOf(colours string) uint8 {
+	var m uint8
+	for _, l := range colours {
+		m |= 1 << strings.IndexRune("WUBRG", l)
+	}
+	return m
+}
+
+// TestThreeColourDeal: a set with three-colour candidates rotates through the
+// shards and wedges too, so over 200 games every three-colour card and tri-land
+// the set's triples can hold is in some deck, and each three-colour deck keeps
+// the 23 spells + 17 basics shape inside its colours.
+func TestThreeColourDeal(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	cands, _, err := Candidates(reg, manifestDir, "TDM")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := Pairable(cands); err != nil {
+		t.Fatal(err)
+	}
+	_, unreach := Reachable(cands)
+	unr := map[string]bool{}
+	for _, n := range unreach {
+		unr[n] = true
+	}
+	want := map[string]bool{}
+	for _, c := range cands {
+		if bits.OnesCount8(c.Identity) == 3 && !unr[c.Name] {
+			want[c.Name] = true
+		}
+	}
+	if len(want) < 5 {
+		t.Fatalf("only %d reachable three-colour TDM candidates", len(want))
+	}
+	byName := map[string]Card{}
+	for _, c := range cands {
+		byName[c.Name] = c
+	}
+	seen := map[string]bool{}
+	triples := map[string]bool{}
+	for g := 0; g < 200; g++ {
+		for _, d := range Pair(cands, nil, "TDM", 0, g, 1) {
+			m := maskOf(d.Colours)
+			if len(d.Cards) != deckSize {
+				t.Fatalf("%s: %d cards", d.Name, len(d.Cards))
+			}
+			if bits.OnesCount8(m) == 3 {
+				triples[d.Colours] = true
+			}
+			basics := 0
+			for _, n := range d.Cards {
+				c, ok := byName[n]
+				if !ok {
+					basics++
+					continue
+				}
+				seen[n] = true
+				if c.Identity&^m != 0 {
+					t.Errorf("%s: %s identity %05b outside %s", d.Name, n, c.Identity, d.Colours)
+				}
+			}
+			if basics != basicCount {
+				t.Errorf("%s: %d basics, want %d", d.Name, basics, basicCount)
+			}
+		}
+	}
+	for n := range want {
+		if !seen[n] {
+			t.Errorf("three-colour card %s was never dealt in 200 games", n)
+		}
+	}
+	// TDM's feasible combinations at this pin: the triples with 23 eligible cards.
+	wantTriples := 0
+	for _, f := range FeasiblePairs(cands) {
+		if len(f) == 3 {
+			wantTriples++
+		}
+	}
+	if got, want := len(triples), wantTriples; got != want || want == 0 {
+		t.Errorf("%d three-colour combinations dealt, want all %d feasible: %v", got, want, triples)
+	}
+	// A set with no three-colour candidate keeps the pairs alone.
+	_, fd := fdn(t)
+	for g := 0; g < 20; g++ {
+		for _, d := range Pair(fd, nil, "FDN", 0, g, 1) {
+			if len(d.Colours) != 2 {
+				t.Errorf("FDN deck %s is not two-colour", d.Name)
+			}
+		}
+	}
+}
+
+// TestParentSetDeal: BIG cannot make decks alone, but dealt with its parent every
+// deck holds at least 8 BIG cards (all it has in the deck's colours when fewer),
+// and every BIG card its colours allow is dealt within 200 games.
+func TestParentSetDeal(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	big, _, err := Candidates(reg, manifestDir, "BIG")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if Pairable(big) == nil {
+		t.Fatal("BIG is feasible alone: it needs no parent")
+	}
+	parent := ParentSets["BIG"]
+	if parent != "OTJ" {
+		t.Fatalf("BIG parent %q", parent)
+	}
+	pc, _, err := Candidates(reg, manifestDir, parent)
+	if err != nil {
+		t.Fatal(err)
+	}
+	pool := WithParent(big, pc)
+	if err := Pairable(pool); err != nil {
+		t.Fatal(err)
+	}
+	_, unreach := Reachable(pool)
+	unr := map[string]bool{}
+	for _, n := range unreach {
+		unr[n] = true
+	}
+	isBig := map[string]Card{}
+	for _, c := range big {
+		isBig[c.Name] = c
+	}
+	seen := map[string]bool{}
+	for g := 0; g < 200; g++ {
+		for _, d := range Pair(pool, nil, "BIG", 0, g, 1) {
+			if len(d.Cards) != deckSize || !strings.HasPrefix(d.Name, "BIG-c0-") {
+				t.Fatalf("deck %s: %d cards", d.Name, len(d.Cards))
+			}
+			m := maskOf(d.Colours)
+			avail, got := 0, 0
+			for _, c := range big {
+				if c.Identity&^m == 0 {
+					avail++
+				}
+			}
+			for _, n := range d.Cards {
+				if _, ok := isBig[n]; ok {
+					got++
+					seen[n] = true
+				}
+			}
+			if got < min(MinChild, avail) {
+				t.Errorf("%s: %d BIG cards, want at least %d (%d fit %s)", d.Name, got, min(MinChild, avail), avail, d.Colours)
+			}
+		}
+	}
+	if len(unr) == len(pool) {
+		t.Fatal("no card of the BIG+OTJ pool is reachable")
+	}
+	if len(seen) == 0 {
+		t.Error("no BIG card was dealt in 200 games")
+	}
+	for n := range isBig {
+		if !seen[n] && !unr[n] {
+			t.Errorf("BIG card %s never dealt in 200 games", n)
+		}
 	}
 }
