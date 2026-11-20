@@ -442,6 +442,25 @@ func TestSchemaDirCannotSmuggle(t *testing.T) {
 	}
 }
 
+// schema/writers.tsv is the one config file allowed under schema/, and even
+// it has a fixed shape so it cannot hold arbitrary data.
+func TestWritersConfig(t *testing.T) {
+	s := loadReal(t)
+	root := validTree(t, s, Public)
+	write(t, root, "schema/writers.tsv", "#carddb-writers v1\nwriter\tsla_hours\ncatalogue\t24\n")
+	if vs, err := Validate(s, root, Public); err != nil || len(vs) != 0 {
+		t.Fatalf("writers config: %v %v", err, msgs(vs))
+	}
+	if vs, err := Boundary(s, root); err != nil || len(vs) != 0 {
+		t.Fatalf("writers config boundary: %v %v", err, msgs(vs))
+	}
+	write(t, root, "schema/writers.tsv", "#carddb-writers v1\nwriter\tsla_hours\ncatalogue\tzero\n")
+	vs, err := Validate(s, root, Public)
+	mustFail(t, vs, err, "sla_hours")
+	vs, err = Boundary(s, root)
+	mustFail(t, vs, err, "sla_hours")
+}
+
 // realDecl is the committed declaration file of a table.
 func realDecl(t *testing.T, table string) string {
 	t.Helper()

@@ -7,6 +7,14 @@
   fetch [--private]                       gh release download carddb-latest
   init [--private]                        clone the data branch, or create it
   validate|boundary [--scope S] [--tree DIR]   the Python mirror of the Go checks
+  card <name|oracle_id>                   every fact for one card
+  search <fts> [--legal F] [--status K=V] [--set S] [--label L] [--marked]
+  blockers --format F [--engine E] [--by printings|decks]
+  proven [--format F] [--level C2]        the certification-pinned proven view
+  deck <id> [--history]                   a private deck
+  freshness [--tick]                      writer SLAs, publish/asset age, unresolved, branch size
+  sql '<select>'                          read-only SQL
+  export <view> --tsv                     deterministic TSV of a table or view
 Exit status: 0 ok, 1 violations or a failed merge/publish, 2 usage or I/O error.
 """
 import argparse
@@ -16,6 +24,7 @@ import sys
 from . import build as build_mod
 from . import fetch as fetch_mod
 from . import merge as merge_mod
+from . import query as query_mod
 from . import shard
 from .boundary import boundary_tree
 from .schema import PRIVATE, PUBLIC, SchemaError, load_schema, repo_root
@@ -52,6 +61,50 @@ def _parser():
         p = sub.add_parser(v)
         p.add_argument("--scope", default=PUBLIC, choices=(PUBLIC, PRIVATE))
         p.add_argument("--tree", help="tree to check (default: the clone)")
+    read = (
+        ("card", (("ref", {}),)),
+        ("search", (("query", {}),)),
+        ("blockers", ()),
+        ("proven", ()),
+        ("deck", (("deck_id", {}),)),
+        ("freshness", ()),
+        ("sql", (("query", {}),)),
+        ("export", (("view", {}),)),
+    )
+    for name, positionals in read:
+        p = sub.add_parser(name, help=query_mod.__doc__.split("\n")[0])
+        for pname, kw in positionals:
+            p.add_argument(pname, **kw)
+        p.add_argument("--db", help="built SQLite file (default $CARDDB_HOME/carddb[-private].sqlite)")
+        p.add_argument("--private", action="store_true", help="use the private build")
+    p = sub.choices["search"]
+    p.add_argument("--legal", metavar="FORMAT")
+    p.add_argument("--status", action="append", metavar="COL=VALUE")
+    p.add_argument("--set", metavar="SET")
+    p.add_argument("--label", metavar="LABEL")
+    p.add_argument("--marked", action="store_true")
+    p.add_argument("--limit", type=int)
+    p = sub.choices["blockers"]
+    p.add_argument("--format", required=True, metavar="FORMAT")
+    p.add_argument("--engine", help="dirac, gorge, proven or cert:<level>")
+    p.add_argument("--by", choices=("printings", "decks"), default=None,
+                   help="rank by printings (public default) or real decks (private default)")
+    p.add_argument("--limit", type=int, default=50)
+    p = sub.choices["proven"]
+    p.add_argument("--format", metavar="FORMAT")
+    p.add_argument("--level", default="C2", choices=query_mod.LEVEL_ORDER)
+    p = sub.choices["deck"]
+    p.add_argument("--history", action="store_true")
+    p = sub.choices["freshness"]
+    p.add_argument("--tick", action="store_true", help="print only `!!` lines")
+    p.add_argument("--public-dir", help="the data branch clone (default $CARDDB_HOME/public|private)")
+    p.add_argument("--asset-meta", help="carddb-latest metadata JSON (default $CARDDB_HOME/carddb-latest.json)")
+    p.add_argument("--sla", help="writer SLA file (default the schema directory's writers.tsv)")
+    p.add_argument("--now", help="ISO date or timestamp to judge ages at (default $CARDDB_NOW or now)")
+    p.add_argument("--max-pack-mb", type=float, default=300.0)
+    p.add_argument("--unresolved-baseline", type=int)
+    p = sub.choices["export"]
+    p.add_argument("--tsv", action="store_true")
     return ap
 
 
@@ -79,6 +132,15 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
     try:
         schema = load_schema(args.schema)
         kind = PRIVATE if getattr(args, "private", False) else PUBLIC
+        if args.verb in query_mod.VERBS:
+            if args.verb == "freshness":
+                return query_mod.run_freshness(args, schema, stdout)
+            db = args.db or query_mod.default_db(args.home, args.private)
+            conn, meta = query_mod.connect(db)
+            try:
+                return query_mod.run(args, conn, schema, meta, stdout)
+            finally:
+                conn.close()
         if args.verb == "merge-driver":
             try:
                 merge_mod.run_driver(schema, args.base, args.ours, args.theirs, args.path)
@@ -143,6 +205,9 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
     except ValidationError as e:
         print("carddb %s: invalid:\n%s" % (args.verb, e), file=stderr)
         return 1
+    except query_mod.QueryError as e:
+        print("carddb %s: %s" % (args.verb, e), file=stderr)
+        return e.code
     except (StoreError, SchemaError) as e:
         print("carddb %s: %s" % (args.verb, e), file=stderr)
         return 1 if isinstance(e, GitError) and args.verb == "publish" else 2

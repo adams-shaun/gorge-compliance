@@ -1,0 +1,43 @@
+oracle_id	ab000000000000000000000000000000
+name	Lightning Bolt
+layout	normal
+mana_cost	{R}
+mana_value	1
+type_line	Instant
+colors	R
+color_identity	R
+keywords	NULL
+-- printings
+printing_id	set_code	collector_number	rarity	released
+p-a1	lea	161	common	1993-08-05
+p-a2	2ed	161	common	1993-12-01
+-- legality
+format	status
+modern	legal
+-- status
+level	verdict	gorge_pin	measured	writer
+A	agree	8f7095353a64	2026-11-19	loop
+-- evidence
+source	ref	outcome	writer
+oracle	scen-1	agree	ci
+-- xledger
+tier	state	note
+T1	agree	fixture
+-- cert
+level	declared	writer
+C2	2026-11-19	certification
+-- labels
+label	origin
+burn	derived
+-- curated_labels
+label	note
+staple	format fixture
+-- curated_game_changers
+added
+2023-01-01
+-- curated_bracket_flags
+flag
+mass-land-denial
+-- curated_relations
+relation	other_oracle_id
+combos_with	cd222222222222222222222222222222

@@ -226,7 +226,10 @@ class Fetch(Base):
             with zstd.open(asset + ".zst", "wb") as f:
                 f.write(payload)
         gh = os.path.join(d, "gh")
-        write(gh, '#!/bin/sh\necho "$@" > "%s/gh.args"\n'
+        write(gh, '#!/bin/sh\n'
+                  'if [ "$1" = release ] && [ "$2" = view ]; then '
+                  'echo \'{"publishedAt":"2026-11-19T00:00:00Z"}\'; exit 0; fi\n'
+                  'echo "$@" > "%s/gh.args"\n'
                   'while [ $# -gt 0 ]; do case "$1" in --dir) dir="$2";; esac; shift; done\n'
                   'cp "%s"%s "$dir/carddb.sqlite%s"\n' % (self.tmp, asset, ".zst" if zst else "", ".zst" if zst else ""))
         os.chmod(gh, os.stat(gh).st_mode | stat.S_IEXEC)
@@ -245,7 +248,10 @@ class Fetch(Base):
                     self.assertEqual(f.read(), payload)
                 args = read(os.path.join(self.tmp, "gh.args"))
                 self.assertIn("release download carddb-latest --repo adams-shaun/gorge-compliance", args)
-                self.assertEqual(os.listdir(home), ["carddb.sqlite"])  # the temp dir is gone
+                self.assertEqual(sorted(os.listdir(home)), ["carddb-latest.json", "carddb.sqlite"])
+                meta = json.loads(read(os.path.join(home, "carddb-latest.json")))
+                self.assertEqual(meta["published_at"], "2026-11-19T00:00:00Z")
+                self.assertEqual(meta["tag"], "carddb-latest")
                 shutil_rm = __import__("shutil").rmtree
                 shutil_rm(os.path.join(self.tmp, "bin"))
 

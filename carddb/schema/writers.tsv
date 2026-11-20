@@ -1,0 +1,14 @@
+#carddb-writers v1
+writer	sla_hours	tables	doc
+catalogue	36	cards,printings,sets,legality	MTGJSON catalogue (CDB-03), nightly
+compliance	36	status	compliance CI status writer (CDB-16), nightly
+gorge-pin	12	status,evidence,cards	gorge pin-follow, every 3 h
+farm	6	xledger,evidence,status	xengine-hunt farm tick
+hunt	6	evidence	deals and game evidence from the hunt
+evloop	2	evidence	lockstep/evloop evidence, every cycle
+certification	24	cert,cert_sets	set certification job
+scryfall	36	text,tags,edhrec	private daily fetch
+values	168	values,labels_private	research value labels
+decklib	168	decks	deck source import
+labels	36	labels	rule-derived public labels
+resolve	168	_meta/unresolved	name-resolution misses

@@ -8,7 +8,7 @@ import datetime
 import os
 import re
 
-from .schema import EMPTY, PRIVATE, PUBLIC, is_schema_decl, is_schema_path
+from .schema import EMPTY, PRIVATE, PUBLIC, is_schema_aux, is_schema_decl, is_schema_path
 
 _INT = re.compile(r"^-?(0|[1-9][0-9]*)$")
 _DATE = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
@@ -124,8 +124,45 @@ def _clip(s):
 
 
 SHARD_PREFIX = "#carddb "
-NOT_DECL_MSG = ("not a schema declaration: only schema/VERSION and schema/v<N>/<table>.tsv (identical to the "
-                "trusted schema's declaration of that table) may live at or under schema/")
+NOT_DECL_MSG = ("not a schema declaration: only schema/VERSION, schema/v<N>/<table>.tsv (identical to the "
+                "trusted schema's declaration of that table) and schema/writers.tsv may live at or under schema/")
+def writers_violations(rel, text):
+    """Violations of the schema's writer SLA file. The one non-declaration under schema/ is a fixed
+    shape too, so it cannot become a place to park arbitrary (private) data."""
+    out = []
+
+    def add(line, msg):
+        out.append("%s:%d: %s" % (rel, line, msg) if line > 0 else "%s: %s" % (rel, msg))
+
+    if text == "":
+        add(0, "empty file")
+        return out
+    if not text.endswith("\n"):
+        add(0, "does not end with a newline")
+    lines = (text[:-1] if text.endswith("\n") else text).split("\n")
+    if not re.fullmatch(r"#carddb-writers v[1-9][0-9]*", lines[0]):
+        add(1, "first line %r is not `#carddb-writers v<N>`" % _clip(lines[0]))
+        return out
+    if len(lines) < 2:
+        add(0, "no column header line")
+        return out
+    header = lines[1].split("\t")
+    if any(h == "" for h in header):
+        add(2, "empty column name")
+    if header.count("writer") != 1 or header.count("sla_hours") != 1:
+        add(2, "columns need exactly one writer and one sla_hours")
+        return out
+    w, h = header.index("writer"), header.index("sla_hours")
+    for i, line in enumerate(lines[2:], 3):
+        cells = line.split("\t")
+        if len(cells) != len(header):
+            add(i, "%d cells, want %d" % (len(cells), len(header)))
+            continue
+        if cells[w] == "":
+            add(i, "empty writer")
+        if not re.fullmatch(r"[1-9][0-9]*", cells[h]):
+            add(i, "sla_hours %r is not a positive int" % _clip(cells[h]))
+    return out
 
 
 def is_data_file(rel):
@@ -146,8 +183,11 @@ def tree_files(root):
 
 def validate_file(schema, scope, rel, text):
     """Violations of one file of a tree, as Go's Validate reports them for a file that stands alone:
-    a schema/ file must be a declaration, a non-.tsv file must not claim to be a shard, a .tsv is validated."""
+    a schema/ file must be a declaration (writers.tsv is the one config exception), a non-.tsv file
+    must not claim to be a shard, a .tsv is validated."""
     if is_schema_path(rel):
+        if is_schema_aux(rel):
+            return writers_violations(rel, text)
         return [] if is_schema_decl(schema, rel, text) else ["%s: %s" % (rel, NOT_DECL_MSG)]
     if not rel.endswith(".tsv"):
         return ["%s:1: carddb shard must be a .tsv file" % rel] if text.startswith(SHARD_PREFIX) else []

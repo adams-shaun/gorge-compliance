@@ -1,13 +1,15 @@
 """The public boundary (a port of internal/carddb/boundary.go, every file kind).
 
 Nothing private, nothing with a banned field name, no Forge-script-shaped
-line may reach a public tree. Only a real schema declaration may live under
-schema/ (it names private columns, so it is exempt from the field checks).
+line may reach a public tree. Only a real schema declaration (it names private
+columns, so it is exempt from the field checks) and the fixed-shape
+schema/writers.tsv config may live under schema/.
 """
 import re
 
-from .schema import PRIVATE, PRIVATE_TABLE_NAMES, forbidden_field, is_schema_decl, is_schema_path
-from .shard import NOT_DECL_MSG, parse_shard_header
+from .schema import (PRIVATE, PRIVATE_TABLE_NAMES, forbidden_field, is_schema_aux,
+                     is_schema_decl, is_schema_path)
+from .shard import NOT_DECL_MSG, parse_shard_header, writers_violations
 
 _FORGE_LINE = re.compile(r"^A:|^SVar:|^T:Mode\$|^S:Mode\$|\$ [A-Z]")
 _JSON_FIELD = re.compile(r'(?i)"(oracle_text|price[a-z0-9_]*|prims|tagger|edhrec[a-z0-9_]*|value[a-z0-9_]*)"\s*:')
@@ -26,7 +28,10 @@ def boundary_text(schema, rel, text):
         out.append("%s:%d: %s" % (rel, line, msg) if line > 0 else "%s: %s" % (rel, msg))
 
     decl = False
-    if is_schema_path(rel):
+    aux = is_schema_aux(rel)
+    if aux:
+        out += writers_violations(rel, text)
+    if is_schema_path(rel) and not aux:
         decl = is_schema_decl(schema, rel, text)
         if not decl:
             add(0, NOT_DECL_MSG)
@@ -53,7 +58,7 @@ def boundary_text(schema, rel, text):
             add(ln, "Forge-script-shaped line (pattern %s)" % _FORGE_LINE.pattern)
         if decl and rel == "schema/VERSION" and (ln > 1 or not re.fullmatch(r"[0-9]+", line)):
             add(ln, "schema/VERSION must hold only the version number")
-        if data and ((is_tsv and ln == 1) or (not is_tsv and line.startswith(_SHARD_PREFIX))):
+        if data and not aux and ((is_tsv and ln == 1) or (not is_tsv and line.startswith(_SHARD_PREFIX))):
             table, cols_at = _header_table(schema, ln, line, add), ln + 1
         elif data and ln == cols_at:
             _column_violations(schema, table, line, lambda m, ln=ln: add(ln, m))
