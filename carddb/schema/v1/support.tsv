@@ -1,0 +1,9 @@
+#carddb-schema support v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	cards.oracle_id
+engine	string	yes	yes	public	Engine the row is about: xmage or forge
+status	string	yes	no	public	listed, unfinished or lacks_card; failing is the farm writer's override (CDB-14) and is preserved by a later compliance run
+pin	string	yes	no	public	Commit the status is measured at
+why	string	no	no	public	One-line reason for the status
+measured	date	yes	no	public	Date measured, YYYY-MM-DD
+writer	string	no	no	public	Program that wrote the row (ci, cert, loop); breaks a merge tie after the timestamp: ci > cert > loop

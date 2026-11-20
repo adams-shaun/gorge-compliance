@@ -7,6 +7,8 @@
   proven [--db FILE] [--format F]         cards certification has proven (C2/C3), as tsv, json or count
   fetch [--private]                       gh release download carddb-latest
   init [--private]                        clone the data branch, or create it
+  compliance [--repo DIR] [--source ID] [--version V] [--measured DATE]
+                                        XMage manifests + FORGE_ORACLE_REF -> support rows
   validate|boundary [--scope S] [--tree DIR]   the Python mirror of the Go checks
 Exit status: 0 ok, 1 violations or a failed merge/publish, 2 usage or I/O error.
 """
@@ -15,6 +17,7 @@ import os
 import sys
 
 from . import build as build_mod
+from . import compliance as compliance_mod
 from . import fetch as fetch_mod
 from . import merge as merge_mod
 from . import query
@@ -53,6 +56,14 @@ def _parser():
     p.add_argument("--format", choices=("tsv", "json", "count"), default="tsv")
     p = sub.add_parser("init")
     p.add_argument("--private", action="store_true")
+    p = sub.add_parser("compliance")
+    p.add_argument("--repo", help="gorge-compliance checkout holding oracle/compliance/manifests and Makefile"
+                                 " (default: the checkout)")
+    p.add_argument("--source", help="writer id recorded in _meta/writers (default ci)")
+    p.add_argument("--version", help="writer version recorded in _meta/writers")
+    p.add_argument("--measured", metavar="YYYY-MM-DD",
+                   help="the support rows' measured date (default $CARDDB_NOW, else today UTC);"
+                        " pass it (or CARDDB_NOW) in CI so reruns stay byte-identical")
     for v in ("validate", "boundary"):
         p = sub.add_parser(v)
         p.add_argument("--scope", default=PUBLIC, choices=(PUBLIC, PRIVATE))
@@ -109,6 +120,15 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
         if args.verb == "init":
             Store(kind, home=args.home, schema=schema).init()
             print("carddb init: ok (%s)" % os.path.join(carddb_home(args.home), kind), file=stdout)
+            return 0
+        if args.verb == "compliance":
+            pub = Store(PUBLIC, home=args.home, schema=schema)
+            if not pub.exists():
+                raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
+            changed, counts = compliance_mod.run(pub, repo=args.repo, writer=args.source or "ci",
+                                                 version=args.version, ran=args.measured)
+            parts = " ".join("%s:%s=%d" % (e, s, n) for (e, s), n in sorted(counts.items()))
+            print("carddb compliance: %d rows changed; %s" % (changed, parts), file=stdout)
             return 0
         if args.verb == "fetch":
             print(fetch_mod.fetch(private=kind == PRIVATE, home=args.home), file=stdout)
