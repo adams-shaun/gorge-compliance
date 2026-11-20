@@ -48,11 +48,13 @@ var declHeaderLine = strings.Join(schemaHeader, "\t")
 
 // IsSchemaDecl reports whether the file at rel, whose whole content is b, is
 // a declaration of the schema s: schema/VERSION holding exactly s.Version, or
-// schema/v<s.Version>/<table>.tsv for a table s declares, whose first line is
-// exactly `#carddb-schema <table> v<N>` (table taken from the path) and whose
-// second line is the declaration column header. Anything else (a table s does
-// not declare, another version, a free-text first line) is not a declaration.
-// The remaining lines are row-checked by Boundary.
+// schema/v<s.Version>/<table>.tsv for a table s declares, whose content is
+// exactly the declaration s itself holds for that table (the
+// `#carddb-schema <table> v<N>` line, the column header, and one row per
+// declared column). Anything else (a table s does not declare, another
+// version, a free-text line, an added, dropped or altered column row) is not
+// a declaration, so a tree's own schema can never advertise a column the
+// trusted schema s does not.
 func IsSchemaDecl(s *Schema, rel string, b []byte) bool {
 	if rel == SchemaDir+"/VERSION" {
 		n, err := strconv.Atoi(strings.TrimSuffix(string(b), "\n"))
@@ -62,19 +64,28 @@ func IsSchemaDecl(s *Schema, rel string, b []byte) bool {
 	if m == nil || m[1] != strconv.Itoa(s.Version) || s.Tables[m[2]] == nil {
 		return false
 	}
-	lines := strings.SplitN(string(b), "\n", 3)
-	return len(lines) >= 2 &&
-		lines[0] == fmt.Sprintf("%s%s v%d", schemaDeclHeader, m[2], s.Version) &&
-		lines[1] == declHeaderLine
+	return strings.TrimSuffix(string(b), "\n") == declText(s.Tables[m[2]], s.Version)
+}
+
+// declText renders a table's schema declaration file, without the final
+// newline: the form parseSchemaFile reads.
+func declText(t *Table, version int) string {
+	yn := func(b bool) string {
+		if b {
+			return "yes"
+		}
+		return "no"
+	}
+	lines := []string{fmt.Sprintf("%s%s v%d", schemaDeclHeader, t.Name, version), declHeaderLine}
+	for _, c := range t.Columns {
+		lines = append(lines, strings.Join([]string{c.Name, c.Type, yn(c.Required), yn(c.Key), c.Visibility, c.Doc}, "\t"))
+	}
+	return strings.Join(lines, "\n")
 }
 
 // shardPrefix opens the first line of every data shard (and of any file that
 // claims to be one, whatever its extension).
 const shardPrefix = "#carddb "
-
-// declRowCells is the width of every line of a schema declaration table
-// (name type required key visibility doc).
-const declRowCells = 6
 
 // treeFiles lists the regular files of a tree, slash-separated and relative,
 // in lexical order. .git is skipped.
@@ -105,7 +116,7 @@ func treeFiles(tree string) ([]string, error) {
 
 func isSchemaPath(rel string) bool { return rel == SchemaDir || strings.HasPrefix(rel, SchemaDir+"/") }
 
-const notDeclMsg = "not a schema declaration: only schema/VERSION and schema/v<N>/<table>.tsv (opening `#carddb-schema <table> v<N>`) may live at or under schema/"
+const notDeclMsg = "not a schema declaration: only schema/VERSION and schema/v<N>/<table>.tsv (identical to the trusted schema's declaration of that table) may live at or under schema/"
 
 // pathHoldsTable reports whether rel is a legal location for a shard of table.
 func pathHoldsTable(rel, table string) bool {

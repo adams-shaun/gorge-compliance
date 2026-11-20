@@ -333,12 +333,15 @@ func TestForgeLineFails(t *testing.T) {
 func TestBoundaryOtherShapes(t *testing.T) {
 	s := loadReal(t)
 	for name, tc := range map[string]struct{ rel, body, want string }{
-		"private table by path": {"prims/a.tsv", "#carddb cards v1\nx\n", `path names private table "prims"`},
-		"banned file name":      {"price_history.tsv", "#carddb cards v1\nx\n", `path names forbidden field "price_history"`},
-		"json field":            {"export.jsonl", "{\"name\":\"a\",\"oracle_text\":\"b\"}\n", `field "oracle_text" is forbidden`},
-		"json price field":      {"export.json", "  \"price_usd\": 3,\n", `field "price_usd" is forbidden`},
-		"tsv without header":    {"plain.tsv", "a\tb\n", "not a carddb shard"},
-		"private table by name": {"x/tags.tsv", "#carddb tags v1\noracle_id\ttag\n", `private table "tags"`},
+		"private table by path":   {"prims/a.tsv", "#carddb cards v1\nx\n", `path names private table "prims"`},
+		"banned file name, json":  {"oracle_text.json", "{}\n", `path names forbidden field "oracle_text"`},
+		"banned file name, md":    {"notes/tagger.md", "x\n", `path names forbidden field "tagger"`},
+		"banned file name, prims": {"prims.json", "{}\n", `path names private table "prims"`},
+		"banned file name":        {"price_history.tsv", "#carddb cards v1\nx\n", `path names forbidden field "price_history"`},
+		"json field":              {"export.jsonl", "{\"name\":\"a\",\"oracle_text\":\"b\"}\n", `field "oracle_text" is forbidden`},
+		"json price field":        {"export.json", "  \"price_usd\": 3,\n", `field "price_usd" is forbidden`},
+		"tsv without header":      {"plain.tsv", "a\tb\n", "not a carddb shard"},
+		"private table by name":   {"x/tags.tsv", "#carddb tags v1\noracle_id\ttag\n", `private table "tags"`},
 		// no banned path component, no banned column, no column line: only the
 		// `#carddb decks v1` header can catch this
 		"private table by header": {"x/data.tsv", "#carddb decks v1\n", `private table "decks"`},
@@ -381,6 +384,20 @@ func TestSchemaDirCannotSmuggle(t *testing.T) {
 		"json":                   {"schema/export.json", "{\"oracle_text\":\"x\"}\n"},
 		"VERSION with extras":    {"schema/VERSION", "1\nDraw a card.\n"},
 		"root file named schema": {"schema", leak},
+		// the same, at a path the schema does declare: the whole declaration is
+		// compared with the trusted schema's, so each of these is refused
+		"declared path, free-text first line": {"schema/v1/cards.tsv", "#carddb-schema THIS IS THE ORACLE TEXT OF A CARD\n" + decl6},
+		"declared path, prefix only":          {"schema/v1/cards.tsv", "#carddb-schema "},
+		"declared path, wrong table":          {"schema/v1/cards.tsv", "#carddb-schema sets v1\n" + decl6},
+		"declared path, wrong version":        {"schema/v1/cards.tsv", "#carddb-schema cards v2\n" + decl6},
+		// a real declaration plus one row the trusted schema does not hold
+		"added public banned row": {"schema/v1/cards.tsv", realDecl(t, "cards") + "oracle_text\tstring\tno\tno\tpublic\tOracle rules text\n"},
+		"added price row":         {"schema/v1/cards.tsv", realDecl(t, "cards") + "price_usd\tstring\tno\tno\tpublic\tx\n"},
+		"added prims row":         {"schema/v1/sets.tsv", realDecl(t, "sets") + "prims\tstring\tno\tno\tpublic\tx\n"},
+		"added private row":       {"schema/v1/cards.tsv", realDecl(t, "cards") + "curator_secret\tstring\tno\tno\tprivate\tx\n"},
+		"added innocuous public":  {"schema/v1/cards.tsv", realDecl(t, "cards") + "extra\tstring\tno\tno\tpublic\tx\n"},
+		"visibility flipped":      {"schema/v1/cards.tsv", strings.Replace(realDecl(t, "cards"), "\tpublic\t", "\tprivate\t", 1)},
+		"dropped row":             {"schema/v1/sets.tsv", realDecl(t, "sets")[:strings.LastIndex(strings.TrimSuffix(realDecl(t, "sets"), "\n"), "\n")+1]},
 		// the first line is judged whole, not by its prefix
 		"prefix only":            {"schema/v1/leak.tsv", "#carddb-schema "},
 		"prefix + free text":     {"schema/v1/leak.tsv", "#carddb-schema THIS IS THE ORACLE TEXT OF A CARD\n" + decl6},
@@ -416,7 +433,23 @@ func TestSchemaDirCannotSmuggle(t *testing.T) {
 	copyTree(t, realSchema, filepath.Join(root, SchemaDir))
 	write(t, root, "schema/v1/sets.tsv", read(t, root, "schema/v1/sets.tsv")+"Draw a card.\n")
 	vs, err := Boundary(s, root)
-	mustFail(t, vs, err, "schema declaration line has 1 cells, want 6")
+	mustFail(t, vs, err, "not a schema declaration")
+	// the unmodified schema directory still passes
+	root = validTree(t, s, Public)
+	copyTree(t, realSchema, filepath.Join(root, SchemaDir))
+	if vs, err := Boundary(s, root); err != nil || len(vs) != 0 {
+		t.Fatalf("real schema dir: %v %v", err, msgs(vs))
+	}
+}
+
+// realDecl is the committed declaration file of a table.
+func realDecl(t *testing.T, table string) string {
+	t.Helper()
+	b, err := os.ReadFile(filepath.Join(realSchema, "v1", table+".tsv"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	return string(b)
 }
 
 // The committed curated files hold a header and no rows; with one example row

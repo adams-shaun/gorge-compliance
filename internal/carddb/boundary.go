@@ -35,11 +35,10 @@ var jsonFieldRe = regexp.MustCompile(`(?i)"(oracle_text|price[a-z0-9_]*|prims|ta
 // Boundary checks that the tree (everything under it but .git) holds nothing
 // that must not be published: no private table or column, no field with a
 // banned name, no Forge-script-shaped line in any file. Real schema
-// declarations (IsSchemaDecl: a table the schema declares, with its exact
-// header lines) name private tables and columns, so they are exempt from the
-// table and field checks (not from the Forge-line scan, and each of their
-// lines must be a six-cell declaration row); any other file at or under
-// SchemaDir is refused outright.
+// declarations (IsSchemaDecl: a table the trusted schema declares, whose
+// whole content equals that declaration) name private tables and columns, so
+// they are exempt from the table and field checks (not from the Forge-line
+// scan); any other file at or under SchemaDir is refused outright.
 func Boundary(s *Schema, tree string) ([]Violation, error) {
 	files, err := treeFiles(tree)
 	if err != nil {
@@ -83,11 +82,17 @@ func boundaryFile(s *Schema, rel string, r io.Reader) ([]Violation, error) {
 	isTSV := strings.HasSuffix(rel, ".tsv")
 	isJSON := strings.HasSuffix(rel, ".json") || strings.HasSuffix(rel, ".jsonl")
 	if data {
-		for _, comp := range strings.Split(strings.TrimSuffix(rel, ".tsv"), "/") {
-			if privateTableNames[comp] {
-				add(0, "path names private table %q", comp)
-			} else if ForbiddenField(comp) {
-				add(0, "path names forbidden field %q", comp)
+		for _, comp := range strings.Split(rel, "/") {
+			// a component is judged on its stem, whatever the extension
+			stem := strings.TrimSuffix(comp, filepath.Ext(comp))
+			for _, n := range []string{stem, comp} {
+				if privateTableNames[n] {
+					add(0, "path names private table %q", n)
+					break
+				} else if ForbiddenField(n) {
+					add(0, "path names forbidden field %q", n)
+					break
+				}
 			}
 		}
 	}
@@ -101,9 +106,6 @@ func boundaryFile(s *Schema, rel string, r io.Reader) ([]Violation, error) {
 			}
 			if decl && rel == SchemaDir+"/VERSION" && (ln > 1 || !schemaVersionRe.MatchString(line)) {
 				add(ln, "schema/VERSION must hold only the version number")
-			}
-			if decl && ln > 1 && rel != SchemaDir+"/VERSION" && strings.Count(line, "\t")+1 != declRowCells {
-				add(ln, "schema declaration line has %d cells, want %d", strings.Count(line, "\t")+1, declRowCells)
 			}
 			// a .tsv is a shard from its first line; any other file is one
 			// from the first line that opens like a shard header
