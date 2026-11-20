@@ -1268,13 +1268,51 @@ func arrangeEmpty(d rules.OracleDecision) bool {
 // recorded coin-flip results (rules.OracleResult.Flips): a drive-window flip
 // (step < 0) queues on the setup family, a step flip leads its own step's
 // answer stream, each as the XMage flip token the choice queue consumes.
-// digSources, when given, resolves a Dig decision's step to its source card's
-// IR (DestinationZone2); it is how xanswersForScenario tells the exile family
-// from the battlefield/graveyard one. Callers with no scenario/snapshots omit
-// it and keep the historical shape-only routing.
-func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, castSteps map[int]bool, setup map[string]Seat, flips []rules.OracleFlip, digSources ...map[int]digSource) [][]XAnswer {
+// The callers with a scenario pass one xanswersExtra: digs resolves a Dig
+// decision's step to its source card's IR (DestinationZone2), how
+// xanswersForScenario tells the exile family from the battlefield/graveyard
+// one, and pips carries the per-step flexible-pip plan (phyrexianPipPlan) so
+// a step that pays an earlier pip with mana and a later one with life scripts
+// each of XMage's per-pip asks positionally instead of one flat yes.
+// Callers with no scenario/snapshots omit it and keep the historical
+// shape-only routing.
+func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, castSteps map[int]bool, setup map[string]Seat, flips []rules.OracleFlip, extras ...xanswersExtra) [][]XAnswer {
+	var digSources map[int]digSource
+	var pipPlans map[int][]pipAsk
+	for _, ex := range extras {
+		if digSources == nil {
+			digSources = ex.digs
+		}
+		if pipPlans == nil {
+			pipPlans = ex.pips
+		}
+	}
 	out := make([][]XAnswer, steps)
 	any := false
+	// The plan's pip decisions: the ordinal of each pip decision among its
+	// step's pip decisions (the cost order XMage asks them in) and whether the
+	// plan covers that ordinal. A covered decision is scripted from the plan;
+	// an uncovered one (no plan for the step, a mis-derived cost) keeps the
+	// historical single-yes/skip behaviour.
+	pipPlanned := make([]bool, len(ds))
+	pipOrdinal := make([]int, len(ds))
+	seenPips := map[int]int{}
+	for i, d := range ds {
+		pipOrdinal[i] = -1
+		if !isPipDecision(d) {
+			continue
+		}
+		plan, ok := pipPlans[d.Step]
+		if !ok {
+			continue
+		}
+		k := seenPips[d.Step]
+		seenPips[d.Step]++
+		pipOrdinal[i] = k
+		if k < len(plan) && plan[k].asks {
+			pipPlanned[i] = true
+		}
+	}
 	// A step whose card name is then searched for (Ancient Vendetta's "choose
 	// a card name. Search ... for cards with that name"): XMage poses the name
 	// dialog however narrowly gorge offered it, and the search must find it.
@@ -1288,7 +1326,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			modal[d.Step] = true
 		}
 	}
-	routing := newAnswerRouting(ds, digSources...)
+	routing := newAnswerRouting(ds, digSources)
 	// Trigger-order name answers are demoted back to the inert text form when
 	// the step also scripts other asks (see the trigger_order case).
 	var trigSpans []*trigSpan
@@ -1392,7 +1430,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			any = true
 			continue
 		}
-		if forcedSingleOption(d) && !forcedChoicePosed(ds, i) && !announcesSacrificeX(ds, i) {
+		if forcedSingleOption(d) && !pipPlanned[i] && !forcedChoicePosed(ds, i) && !announcesSacrificeX(ds, i) {
 			// A forced one-option ask: XMage does not pose it. A forced
 			// target-kind pick is the exception -- one legal opponent is still
 			// a chooseTarget XMage asks for -- and so is a mode ask, which
@@ -1587,6 +1625,17 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// (TriggerCostMana), and a blight/raw-mana label is excluded
 				// by nonManaTriggerCostPay, so each keeps its own route.
 				as = append(as, XAnswer{d.Seat, "choice", "yes"})
+				break
+			}
+			if pipPlanned[i] {
+				// A plan-covered pip: XMage poses this pip's own "Pay 2 life
+				// instead of ... ?" chooseUse at its cost-order position
+				// (handlePhyrexianCosts/handlePhyrexianManaCosts, printed
+				// pips then granted ones, both engines in AnnouncePip order),
+				// so the answer is this pip's recorded face, not a shared
+				// yes: a mana-face pip scripts no and a life-face one yes
+				// (dismember's pip1-mana/pip2-life mixed step).
+				as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[pipPlans[d.Step][pipOrdinal[i]].life]})
 				break
 			}
 			if phyrexianLifePicks(d) {

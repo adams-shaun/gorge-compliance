@@ -107,6 +107,114 @@ func TestXAnswersPhyrexian(t *testing.T) {
 	}
 }
 
+// TestXAnswersPhyrexianMixedFaces pins the per-pip answer plan: a step that
+// pays its FIRST phyrexian pip with mana and its SECOND with life must script
+// each pip ask's own boolean in cost order (no then yes), not one flat yes
+// that lands on the earlier mana-face ask. The corpus scenario is Dismember's
+// mixed row; the plan is derived from the corpus cost ({1}{B/P}{B/P}), whose
+// two AnnouncePip pips match the two recorded pip decisions.
+func TestXAnswersPhyrexianMixedFaces(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	path, name := "../../../scenarios/oracle/cost-modifier/dismember.json", "one-pip-with-mana-one-with-life"
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var file struct {
+		Scenarios []json.RawMessage `json:"scenarios"`
+	}
+	if err := json.Unmarshal(raw, &file); err != nil {
+		t.Fatal(err)
+	}
+	var body []byte
+	var sc Scenario
+	for _, r := range file.Scenarios {
+		var got Scenario
+		if err := json.Unmarshal(r, &got); err != nil {
+			t.Fatal(err)
+		}
+		if got.Name == name {
+			body, sc = r, got
+			break
+		}
+	}
+	if body == nil {
+		t.Fatalf("%s: scenario %q not found", path, name)
+	}
+	res, err := rules.RunOracleScenarioJSON(reg, body)
+	if err != nil {
+		t.Fatalf("run %s: %v (fails %v)", name, err, res.Fails)
+	}
+	// The recording: two pip decisions on the cast step, both faces offered
+	// for both pips (the pool is mana-sufficient, as XMage's castability
+	// check requires): pip one picked the mana face, pip two the life face.
+	var pips []rules.OracleDecision
+	for _, d := range res.Decisions {
+		if isPipDecision(d) {
+			pips = append(pips, d)
+		}
+	}
+	if len(pips) != 2 || pips[0].Step != 1 || pips[1].Step != 1 {
+		t.Fatalf("recorded %d pip decisions (%+v), want two on the cast step 1", len(pips), pips)
+	}
+	if k := pickKind(pips[0], 0); k != "pay_B" || pips[0].Options != 2 {
+		t.Fatalf("pip one pick kind %q options %d, want pay_B with both faces offered", k, pips[0].Options)
+	}
+	if k := pickKind(pips[1], 0); k != "pay_life" || pips[1].Options != 2 {
+		t.Fatalf("pip two pick kind %q options %d, want pay_life with both faces offered", k, pips[1].Options)
+	}
+	// The derived plan mirrors the faces in cost order: pip one is a mana
+	// face XMage also asks (both faces affordable), pip two the life face.
+	plan := phyrexianPipPlan(reg, res, sc)
+	wantPlan := map[int][]pipAsk{1: {{asks: true, life: false}, {asks: true, life: true}}}
+	if !reflect.DeepEqual(plan, wantPlan) {
+		t.Fatalf("phyrexianPipPlan = %#v, want %#v", plan, wantPlan)
+	}
+	// End to end: the cast step's choice stream is the positional pair, and
+	// no other step carries a leftover boolean.
+	out := XAnswersForScenario(reg, res, sc, nil, nil)
+	want := []XAnswer{{0, "choice", "no"}, {0, "choice", "yes"}}
+	if !reflect.DeepEqual(out[1], want) {
+		t.Fatalf("XAnswersForScenario step 1 = %#v, want %#v", out[1], want)
+	}
+	for step, as := range out {
+		if step == 1 {
+			continue
+		}
+		for _, a := range as {
+			if a.Kind == "choice" {
+				t.Fatalf("step %d scripts an unexpected choice %#v", step, a)
+			}
+		}
+	}
+}
+
+// TestXAnswersPhyrexianPlanFallback pins the mis-derivation guards: a plan is
+// only built when the re-derived cost's AnnouncePip count matches the
+// recorded pip decisions, and a step without a life-face pip decision never
+// gets one (its no-yes shape is already exact).
+func TestXAnswersPhyrexianPlanFallback(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sc := Scenario{Steps: []Step{{Op: "mana"}, {Op: "cast", Card: "p0:Dismember", Targets: []string{"p1:Grizzly Bears"}}}}
+	// One pip decision for a two-pip cost: the count guard refuses the plan.
+	one := rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+		Options: 2, Min: 1, Max: 1, Picks: []string{"Pay B"}, PickIdx: []int{0},
+		PickRefs: []string{"Pay B"}, PickKinds: []string{"pay_B"}, Via: "answer"}
+	if plan := phyrexianPipPlan(reg, rules.OracleResult{Decisions: []rules.OracleDecision{one}}, sc); plan != nil {
+		t.Fatalf("one pip decision for a two-pip cost derived a plan %#v; the count guard must fall back", plan)
+	}
+	// A mana-face-only step (both pips paid with mana) needs no plan: XMage
+	// asks each pip and the historical routing (or nothing) covers it.
+	noLife := []rules.OracleDecision{
+		one, {Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+			Options: 2, Min: 1, Max: 1, Picks: []string{"Pay B"}, PickIdx: []int{0},
+			PickRefs: []string{"Pay B"}, PickKinds: []string{"pay_B"}, Via: "answer"},
+	}
+	if plan := phyrexianPipPlan(reg, rules.OracleResult{Decisions: noLife}, sc); plan != nil {
+		t.Fatalf("a mana-face-only step derived a plan %#v; only a life-face pip needs one", plan)
+	}
+}
+
 // TestXAnswersPhyrexianCorpus pins the generator against the committed Oracle
 // corpus, not a hand-built decision: the feasibility gate trims a Phyrexian
 // cast's menu to the ONE life face when the pool has no coloured mana, so the

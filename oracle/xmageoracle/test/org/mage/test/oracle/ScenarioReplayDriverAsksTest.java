@@ -272,5 +272,16 @@ public final class ScenarioReplayDriverAsksTest {
                 "the step's next non-boolean answer is not consumed");
         check(!(Boolean) adapter("phyrexianStarved", two, "Choose a color", new ArrayList<String>()),
                 "another ask is untouched");
+        // Mixed faces: the generator scripts one boolean per pip in cost
+        // order (mana pip first, life pip second), so the queue holds
+        // [No, Yes]. Neither ask may be starved -- the driver leaves the
+        // queue alone and TestPlayer consumes the head per ask: the first
+        // ask takes the mana pip's No, the second the life pip's Yes.
+        List<String> pair = new ArrayList<>(Arrays.asList("No", "Yes"));
+        check(!(Boolean) adapter("phyrexianStarved", two, ask, pair),
+                "a queued [No, Yes] pair must not starve the first pip ask");
+        check(!(Boolean) adapter("phyrexianStarved", two, ask, pair.subList(1, 2)),
+                "the remaining life-pip Yes must not starve the second pip ask");
+        check(pair.size() == 2, "the starved check never consumes or reorders the queue");
     }
 }
