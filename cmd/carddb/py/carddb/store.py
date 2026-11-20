@@ -47,6 +47,16 @@ def carddb_home(home=None):
                            or os.path.join(os.path.expanduser("~"), ".local", "share", "carddb"))
 
 
+# The release metadata is per scope: a private fetch must not overwrite the
+# public carddb-latest.json (freshness would report the other release's age).
+ASSET_META = "carddb-latest.json"
+PRIVATE_ASSET_META = "carddb-private-latest.json"
+
+
+def asset_meta_path(home=None, private=False):
+    return os.path.join(carddb_home(home), PRIVATE_ASSET_META if private else ASSET_META)
+
+
 def today(ran=None):
     ran = ran or os.environ.get("CARDDB_NOW")
     if ran:
