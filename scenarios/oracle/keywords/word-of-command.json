@@ -1,0 +1,78 @@
+{
+ "card": "Word of Command",
+ "family": "keywords",
+ "author": "Oracle + CR only",
+ "oracle_sha": "25c8d7bd1a21",
+ "scenarios": [
+  {
+   "name": "controlled-player-plays-the-chosen-card-with-their-own-lands",
+   "cr": [
+    "723.2",
+    "723.5",
+    "723.7",
+    "701.18"
+   ],
+   "why": "Oracle: look at target opponent's hand and choose a card; you control that player until the spell finishes resolving; the player plays that card if able, and may activate only mana abilities of lands they control. p0 casts Word of Command on p1, choosing Grizzly Bears from p1's hand; p1, controlled by p0, casts it paying {1}{G} from their own Forests. Grizzly Bears ends on the battlefield under p1's control and both of p1's Forests are tapped.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Word of Command"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Grizzly Bears",
+      "Mountain"
+     ],
+     "battlefield": [
+      "Forest",
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Word of Command",
+     "mana": "BB",
+     "targets": [
+      "p1"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "Continue"
+       ]
+      },
+      {
+       "kind": "choose",
+       "pick": [
+        "p1:Grizzly Bears"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "battlefield"
+    },
+    {
+     "card": "p1:Forest",
+     "zone": "battlefield",
+     "tapped": true
+    },
+    {
+     "card": "p1:Mountain",
+     "zone": "hand"
+    }
+   ]
+  }
+ ]
+}
