@@ -126,7 +126,7 @@
      "601.2b",
      "118.12a"
     ],
-    "why": "The two {B/P} pips are separate asks: paying the first with {B} and the second with 2 life spends two mana and 2 life. The replay must answer each pip's own dialog -- one no (first pip) and one yes (second) -- in cost order; the pool is mana-sufficient so XMage offers the cast.",
+    "why": "The two {B/P} pips are separate asks: paying the first with {B} and the second with 2 life spends two mana and 2 life, leaving pool B at 18 life. Both pips are the same {B/P}, so the final snapshot is order-symmetric -- the pre-fix flat yes lands here too; the per-ask position (a no for the mana face, then a yes for the life face) is pinned by TestXAnswersPhyrexianMixedFaces, not by this replay.",
     "setup": {
      "p0": {
       "hand": [
@@ -179,6 +179,11 @@
      {
       "life": {
        "p0": 18
+      }
+     },
+     {
+      "pool": {
+       "p0": "B"
       }
      }
     ]

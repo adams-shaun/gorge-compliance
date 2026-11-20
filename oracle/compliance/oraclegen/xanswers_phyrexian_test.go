@@ -215,6 +215,49 @@ func TestXAnswersPhyrexianPlanFallback(t *testing.T) {
 	}
 }
 
+// TestXAnswersPhyrexianManaFaceWithoutLifeFace pins that a mana-face pip whose
+// life face gorge did not offer records no scripted boolean, even when another
+// step in the same run pays a life pip and so builds a plan. The recorded menu
+// size is the source of truth: Options == 1 on a one-colour pip means the life
+// face was not offered (a payer below 2 life or a CantPayLife static), and
+// XMage's chooseUse is gated on PayLifeCost.canPay, so it never poses that
+// ask. A scripted "no" would be a spurious queue head any later ask in the
+// step could consume.
+func TestXAnswersPhyrexianManaFaceWithoutLifeFace(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	// Two Gut Shot casts ({R/P}, one pip each): step 1 records the life face
+	// (its gate trimmed the menu to that one option), step 3 a mana face whose
+	// life face was not offered.
+	sc := Scenario{Steps: []Step{
+		{Op: "mana"},
+		{Op: "cast", Card: "p0:Gut Shot"},
+		{Op: "resolve"},
+		{Op: "cast", Card: "p0:Gut Shot"},
+	}}
+	life := rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+		Options: 1, Min: 1, Max: 1, Picks: []string{"Pay 2 life"}, PickIdx: []int{0},
+		PickRefs: []string{"Pay 2 life"}, PickKinds: []string{"pay_life"}, Via: "answer"}
+	mana := rules.OracleDecision{Step: 3, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+		Options: 1, Min: 1, Max: 1, Picks: []string{"Pay R"}, PickIdx: []int{0},
+		PickRefs: []string{"Pay R"}, PickKinds: []string{"pay_R"}, Via: "answer"}
+	res := rules.OracleResult{Decisions: []rules.OracleDecision{life, mana}}
+	plan := phyrexianPipPlan(reg, res, sc)
+	wantPlan := map[int][]pipAsk{
+		1: {{asks: true, life: true}},
+		3: {{asks: false, life: false}},
+	}
+	if !reflect.DeepEqual(plan, wantPlan) {
+		t.Fatalf("phyrexianPipPlan = %#v, want %#v", plan, wantPlan)
+	}
+	out := xanswersSetup(res.Decisions, len(sc.Steps), nil, nil, nil, nil, xanswersExtra{pips: plan})
+	if want := []XAnswer{{0, "choice", "yes"}}; !reflect.DeepEqual(out[1], want) {
+		t.Fatalf("life step scripts %#v, want %#v", out[1], want)
+	}
+	if len(out[3]) != 0 {
+		t.Fatalf("unasked mana face scripts %#v; XMage poses no ask when the life face was not offered", out[3])
+	}
+}
+
 // TestXAnswersPhyrexianCorpus pins the generator against the committed Oracle
 // corpus, not a hand-built decision: the feasibility gate trims a Phyrexian
 // cast's menu to the ONE life face when the pool has no coloured mana, so the

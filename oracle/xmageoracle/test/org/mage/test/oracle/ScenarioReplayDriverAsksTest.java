@@ -274,14 +274,20 @@ public final class ScenarioReplayDriverAsksTest {
                 "another ask is untouched");
         // Mixed faces: the generator scripts one boolean per pip in cost
         // order (mana pip first, life pip second), so the queue holds
-        // [No, Yes]. Neither ask may be starved -- the driver leaves the
-        // queue alone and TestPlayer consumes the head per ask: the first
-        // ask takes the mana pip's No, the second the life pip's Yes.
+        // [No, Yes]. The positional guarantee is the generator's, pinned
+        // end-to-end by the Go test TestXAnswersPhyrexianMixedFaces (reverting
+        // its wiring reproduces the swap). This block only pins the driver
+        // side: the starvation check must leave the pair intact, so TestPlayer
+        // consumes the mana pip's No then the life pip's Yes.
         List<String> pair = new ArrayList<>(Arrays.asList("No", "Yes"));
         check(!(Boolean) adapter("phyrexianStarved", two, ask, pair),
-                "a queued [No, Yes] pair must not starve the first pip ask");
-        check(!(Boolean) adapter("phyrexianStarved", two, ask, pair.subList(1, 2)),
-                "the remaining life-pip Yes must not starve the second pip ask");
-        check(pair.size() == 2, "the starved check never consumes or reorders the queue");
+                "the mana pip's queued No must not starve the first ask");
+        check("No".equals(pair.get(0)), "the starvation check leaves the first ask's answer at the head");
+        List<String> rest = new ArrayList<>(pair.subList(1, pair.size()));
+        check(!(Boolean) adapter("phyrexianStarved", two, ask, rest),
+                "the life pip's queued Yes must not starve the second ask");
+        check("Yes".equals(rest.get(0)), "the second ask still sees the life pip's Yes");
+        check(pair.size() == 2 && rest.size() == 1,
+                "the starvation check never consumes or reorders the queue");
     }
 }

@@ -10,12 +10,15 @@ import (
 // pipAsk is one flexible cost pip (CR 601.2b) of a cast or activate step, in
 // AnnouncePip order (hybrid, then twobrid, then phyrexian, then hybrid-
 // phyrexian). asks is whether XMage poses the pip's "Pay 2 life instead of
-// ..." chooseUse at all: XMage asks every printed phyrexian pip, a granted
-// {B/P} pip (K'rrik's PayLifeInsteadOf), and a mana-face pip whose life face
-// gorge offered as one of two options; it never asks a hybrid or twobrid pip.
-// life is whether gorge's recorded face is the two-life face (pay_life) --
-// otherwise the pip was paid with mana (pay_<colour>/pay_generic) and XMage's
-// boolean answer is no.
+// ..." chooseUse at all: a recorded life face always asks, and a mana face
+// asks only when gorge's recorded decision offered the life face too (its
+// option count is wider than the pip's colour faces). XMage's ask is gated on
+// PayLifeCost.canPay, so a mana face whose life face gorge's feasibility gate
+// dropped (fewer than 2 life, a CantPayLife static) is never posed and must
+// not script a boolean. Hybrid and twobrid pips have no life face and never
+// ask. life is whether gorge's recorded face is the two-life face (pay_life)
+// -- otherwise the pip was paid with mana (pay_<colour>/pay_generic) and
+// XMage's boolean answer is no.
 //
 // Per-pip identity is what the flat yes/no answer queue cannot carry: when a
 // step pays an earlier pip with mana and a later one with life, the queue's
@@ -115,12 +118,26 @@ func stepPipPlan(reg *cards.Registry, sc Scenario, step int, ds []rules.OracleDe
 	}
 	plan := make([]pipAsk, len(ds))
 	for i, d := range ds {
-		for _, alt := range pay.AnnouncePip(c, i) {
-			if alt.Life > 0 {
-				plan[i] = pipAsk{asks: true, life: pickKind(d, 0) == "pay_life"}
-				break
+		alts := pay.AnnouncePip(c, i)
+		life := pickKind(d, 0) == "pay_life"
+		// The offered menu, not the printed pip, decides whether XMage asks:
+		// ManaAsk drops an infeasible face and deduplicates a repeated colour,
+		// so d.Options is the menu's size. The pip's colour faces are every
+		// alternative that is not the life face; a mana pick was offered the
+		// life face exactly when the menu is wider than those. A life face
+		// always asks (gorge recorded it as the chosen payment, so it was
+		// offered), including the one-option shape its gate trims to.
+		colours := map[byte]struct{}{}
+		hasLife := false
+		for _, alt := range alts {
+			switch {
+			case alt.Life > 0:
+				hasLife = true
+			case alt.Color != 0:
+				colours[alt.Color] = struct{}{}
 			}
 		}
+		plan[i] = pipAsk{asks: life || hasLife && d.Options > len(colours), life: life}
 	}
 	return plan, true
 }
@@ -155,6 +172,11 @@ func stepPipCost(reg *cards.Registry, sc Scenario, step int) (pay.Cost, bool) {
 	}
 	if face == nil {
 		face = c.Faces[0]
+	}
+	if face == nil {
+		// The corpus can carry a nil face (a split or meld half without one,
+		// the same shape adopt/tickets.go guards): there is no cost to read.
+		return pay.Cost{}, false
 	}
 	var raw string
 	if st.Op == "cast" {
