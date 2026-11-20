@@ -99,7 +99,7 @@
    "cr": [
     "702.22c"
    ],
-   "why": "A band is any number of attacking creatures with banding and up to one without (702.22c). Kjeldoran Warrior (banding), Grizzly Bears and Hill Giant (neither has banding) attack; the Warrior takes the Bears into its band, which is then full of non-banding creatures, so the Giant attacks alone. p1's Grizzly Bears block the Warrior and so block p0's Bears too (702.22h); the attacking player p0 divides the blocker's 2 damage (702.22k) and puts it on the Warrior, which dies while p0's Bears take none. The Giant is unblocked: p1 loses 3.",
+   "why": "A band is any number of attacking creatures with banding and up to one without (702.22c). Kjeldoran Warrior (banding), Grizzly Bears and Hill Giant (neither has banding) attack; the Warrior takes the Bears into its band, which is then full of non-banding creatures, so the Giant attacks alone. p1's Grizzly Bears block the Warrior and so block p0's Bears too (702.22h); the attacking player p0 divides the blocker's 2 damage (702.22k) and puts it on the Warrior, which dies while p0's Bears take none. The Warrior's 1 and p0's Bears' 2 damage, both dealt to the one blocker, kill p1's Grizzly Bears (2/2). The Giant is unblocked: p1 loses 3.",
    "setup": {
     "p0": {
      "battlefield": [
@@ -171,6 +171,10 @@
      "card": "p0:Grizzly Bears",
      "zone": "battlefield",
      "damage": 0
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "graveyard"
     },
     {
      "life": {

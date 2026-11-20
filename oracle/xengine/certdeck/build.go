@@ -213,17 +213,14 @@ func (b *Builder) Build(target string, needs []Need) (*Plan, error) {
 	if selfMask == 0 {
 		selfMask = 1 << (rankKey(name, "colour") % 5)
 	} else {
-		selfMask = b.widen(name, selfMask, selfNeeds)
+		selfMask = b.widen(name, selfMask, selfNeeds, tf, tcopies(tf))
 	}
 	snow, lands := false, false
 	for _, n := range selfNeeds {
 		snow = snow || n.Class == Snow
 		lands = lands || n.Class == Lands
 	}
-	copies := 4
-	if tf.f.IsLegendary() {
-		copies = 1
-	}
+	copies := tcopies(tf)
 	self, err := b.assemble(name, name, selfMask, selfNeeds, map[*cards.Card]int{tc: copies}, snow, lands)
 	if err != nil {
 		return nil, err
@@ -596,15 +593,30 @@ func (b *Builder) opponentColours(target string, selfMask uint8, needs []Need) u
 	})
 }
 
-// minReach is how many playable suppliers a deck's colours must hold for need n
-// before they count as reaching it: one, except banding, which needs three: the
-// target itself is a candidate when it has banding, and BandingCopies is met by
-// the target's four copies and two cards of two.
-func minReach(n Need) int {
-	if n.Class == Banding {
-		return 3
+// tcopies is how many copies of the target its deck holds.
+func tcopies(tf *facts) int {
+	if tf.f.IsLegendary() {
+		return 1
 	}
-	return 1
+	return 4
+}
+
+// minReach is how many playable suppliers a deck's colours must hold for need n
+// before they count as reaching it: one, except banding. Banding is met by
+// copies (BandingCopies), at enablerCopies a supplier, and the target's own
+// copies count when it has banding; reach counts the target as a supplier too.
+// A banding target (four copies) needs two others besides itself; a card that
+// only grants or reads banding needs four suppliers, and one legendary with
+// banding four others.
+func minReach(n Need, tf *facts, copies int) int {
+	if n.Class != Banding {
+		return 1
+	}
+	own, self := 0, 0
+	if supplies(tf, n) {
+		own, self = copies, 1
+	}
+	return (BandingCopies-own+enablerCopies-1)/enablerCopies + self
 }
 
 // reach is how many playable cards of mask supply need n, counted up to six.
@@ -624,13 +636,13 @@ func (b *Builder) reach(salt string, n Need, mask uint8) int {
 // playable supplier inside it (a Time Lord land is blue; every Time Lord is
 // two colours): the colour that reaches the unmet needs best, ties to the
 // lowest hash. A deck that already reaches every need keeps the identity.
-func (b *Builder) widen(salt string, mask uint8, needs []Need) uint8 {
+func (b *Builder) widen(salt string, mask uint8, needs []Need, tf *facts, copies int) uint8 {
 	var unmet []Need
 	for _, n := range needs {
 		if n.Class == LandType && basicIndex(n.Arg) >= 0 {
 			continue // the mana base's
 		}
-		if b.reach(salt, n, mask) < minReach(n) {
+		if b.reach(salt, n, mask) < minReach(n, tf, copies) {
 			unmet = append(unmet, n)
 		}
 	}

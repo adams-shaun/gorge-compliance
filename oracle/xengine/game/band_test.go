@@ -1,6 +1,7 @@
 package game
 
 import (
+	"bytes"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
@@ -50,5 +51,26 @@ func TestBandsForm(t *testing.T) {
 	}
 	if accepted == 0 || declined == 0 {
 		t.Errorf("band asks: %d accepted, %d declined over six games, want some of each", accepted, declined)
+	}
+}
+
+// A game with no banding creature plays exactly as the bare explore bot plays
+// it: bandBot only answers a band ask, and stays a heuristic.BoardSeat so the
+// runner still hands the bot its board and not a projected View.
+func TestBandBotLeavesOtherGamesAlone(t *testing.T) {
+	reg, pairs := fdnPairs(t, 2)
+	for i, p := range pairs {
+		seed := uint64(100 + i)
+		with, err := play(t, reg, p, seed, Options{Set: "FDN"}).Bytes()
+		if err != nil {
+			t.Fatal(err)
+		}
+		bare, err := play(t, reg, p, seed, Options{Set: "FDN", plainSeats: true}).Bytes()
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !bytes.Equal(with, bare) {
+			t.Errorf("pair %d: the tape with bandBot seats differs from the bare bot's (%d vs %d bytes)", i, len(with), len(bare))
+		}
 	}
 }

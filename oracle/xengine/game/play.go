@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
+	"github.com/adams-shaun/gorge/bots/botpolicy"
 	"github.com/adams-shaun/gorge/bots/heuristic"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/decision"
@@ -43,6 +44,9 @@ type Options struct {
 	// earlier game of the same decks and seed. The explore bots play on from
 	// where it ends.
 	Script []decision.Intent
+	// plainSeats seats the bare explore bot where Play seats a bandBot (a test
+	// compares the two on a game with no band).
+	plainSeats bool
 }
 
 // scripted answers from a shared script, then as its explore bot does. It holds the
@@ -77,6 +81,8 @@ type bandBot struct {
 	seat int
 }
 
+var _ heuristic.BoardSeat = bandBot{}
+
 func (b bandBot) WantsPaymentActions() bool { return b.bot.WantsPaymentActions() }
 
 // bandAsk is whether d is a band declaration ask: a choose whose option 0 is
@@ -85,8 +91,22 @@ func bandAsk(d decision.Decision) bool {
 	return d.Kind == decision.KChoose && len(d.Options) > 1 && d.Options[0].Kind == "band"
 }
 
+// Decide is the View path (a scripted seat's, which wraps the bot).
 func (b bandBot) Decide(ctx context.Context, v view.View, d decision.Decision) (decision.Intent, error) {
 	in, err := b.bot.Decide(ctx, v, d)
+	return b.band(d, in, err)
+}
+
+// DecideBoard keeps the bot a heuristic.BoardSeat: without it the runner
+// projects a full View for every decision of every game, banding or not, and
+// the bot answers from that in place of its board path.
+func (b bandBot) DecideBoard(ctx context.Context, brd botpolicy.Board, d decision.Decision) (decision.Intent, error) {
+	in, err := b.bot.DecideBoard(ctx, brd, d)
+	return b.band(d, in, err)
+}
+
+// band replaces the bot's answer to a band ask, and only to a band ask.
+func (b bandBot) band(d decision.Decision, in decision.Intent, err error) (decision.Intent, error) {
 	if err != nil || !bandAsk(d) {
 		return in, err
 	}
@@ -153,7 +173,11 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 		dk = append(dk, cs)
 		names[i] = fmt.Sprintf("%s-%d", d.Colours, i)
 		t.Decks[i] = Deck{Name: d.Name, Colours: d.Colours, Cards: append([]string{}, d.Cards...), Commander: d.Commander}
-		bot := bandBot{bot: heuristic.NewExploreBot(seed ^ (0x9e3779b97f4a7c15 * uint64(i+1))).EnableAutoPayMana(), seed: seed, seat: i}
+		hb := heuristic.NewExploreBot(seed ^ (0x9e3779b97f4a7c15 * uint64(i+1))).EnableAutoPayMana()
+		var bot seatBot = bandBot{bot: hb, seed: seed, seat: i}
+		if opt.plainSeats {
+			bot = hb
+		}
 		seats[i] = bot
 		if len(script) > 0 {
 			seats[i] = scripted{bot: bot, script: &script}
