@@ -3,20 +3,27 @@
 The `carddb` data branch is the source; this module only touches GitHub
 releases. It is deliberately a pure planner plus a thin `gh` wrapper:
 
-  * `carddb-latest` is the floating release. Its `carddb.sqlite.zst` asset is
-    replaced (`gh release upload --clobber`) on every run.
+  * `carddb-latest` is the floating release. Its `carddb.sqlite.zst` asset and
+    `carddb-latest.json` metadata are replaced (`gh release upload --clobber`)
+    on every run.
   * one dated `carddb-YYYY-MM-DD` release per ISO week (the Monday) keeps a
-    stable snapshot; rerunning the same week replaces that week's asset.
+    stable snapshot; rerunning the same week replaces that week's asset. It
+    carries the SQLite asset only: the `carddb-latest.json` beside it would
+    describe `carddb-latest`, not the weekly release.
   * dated releases older than `--keep-weeks` (12) are pruned, except the newest
     one in each calendar quarter: the quarterly snapshots stay, the weekly
     noise does not.
   * `--dry-run` prints every mutating `gh` command and calls none of them. The
     read-only `gh release view/list` calls still run so the plan is accurate;
-    when `gh` is absent the plan simply has no existing releases.
+    when `gh` is absent the plan simply has no existing releases. A real run
+    that cannot list the releases fails loudly instead of skipping the prune.
+  * a branch over the `--max-pack-mb` D7 budget is refused before any release
+    mutation, so an over-budget branch cannot ship as if it were within budget.
 
 Dates come from `--now` / `CARDDB_NOW`, else the data branch tip's commit date;
-the workflow passes the pushed commit's date. Sorting is by the date in the
-tag, so the same releases and the same budget always give the same plan.
+the workflow passes the pushed commit's date (or the data tip's date for a
+schedule/dispatch). Sorting is by the date in the tag, so the same releases and
+the same budget always give the same plan.
 """
 import datetime
 import hashlib
@@ -102,17 +109,20 @@ def _gh(gh, args, dry_run=False, capture=False, out=None):
 
 
 def _releases(gh, repo):
-    """The release tags gh reports, or [] when gh cannot answer."""
+    """The release tags gh reports, or None when it could not answer.
+
+    None is distinct from [] (no releases): the caller must not treat a
+    failed `gh release list` as "nothing to prune" in a real run."""
     p = _gh(gh, ["release", "list", "--repo", repo, "--limit", "200", "--json", "tagName"],
             capture=True)
     if p is None:
-        return []
+        return None
     try:
         doc = json.loads(p.stdout)
     except ValueError:
-        return []
+        return None
     if not isinstance(doc, list):
-        return []
+        return None
     return sorted(str(r.get("tagName")) for r in doc
                   if isinstance(r, dict) and r.get("tagName"))
 
@@ -199,23 +209,23 @@ def run(store, db, assets=None, repo=None, gh=None, now=None, dry_run=False,
     for asset in assets:
         if not os.path.isfile(asset):
             raise StoreError("release: no asset at %s" % asset)
-    meta = os.path.join(os.path.dirname(os.path.abspath(db)), "carddb-latest.json")
-    write_meta(meta, store, assets[0], now, packed, budget_mib)
-    assets.append(meta)
-
     print("carddb release: data branch packed %.1f MiB (budget %d MiB)" % (packed, int(budget_mib)),
           file=out)
     if packed > budget_mib:
-        print("!! carddb release: data branch packed %.1f MiB exceeds the D7 budget of %d MiB" %
-              (packed, int(budget_mib)), file=out)
+        raise StoreError(
+            "release: data branch packed %.1f MiB exceeds the D7 budget of %d MiB; "
+            "refusing to publish the release" % (packed, int(budget_mib)))
+    meta = os.path.join(os.path.dirname(os.path.abspath(db)), "carddb-latest.json")
+    write_meta(meta, store, assets[0], now, packed, budget_mib)
+    latest_assets = list(assets) + [meta]
 
     created_latest = _ensure(gh, repo, LATEST_TAG, "carddb latest",
                              "Machine-updated carddb SQLite asset (carddb branch @%s)." % _data_rev(store),
                              dry_run, out)
-    _upload(gh, repo, LATEST_TAG, assets, dry_run, out)
+    _upload(gh, repo, LATEST_TAG, latest_assets, dry_run, out)
     print("carddb release: %s %s (%s%s)" % (
         "planned" if dry_run else ("created and uploaded" if created_latest else "uploaded"),
-        LATEST_TAG, ", ".join(os.path.basename(a) for a in assets),
+        LATEST_TAG, ", ".join(os.path.basename(a) for a in latest_assets),
         " [dry-run]" if dry_run else ""), file=out)
 
     week = None
@@ -225,13 +235,24 @@ def run(store, db, assets=None, repo=None, gh=None, now=None, dry_run=False,
         created_weekly = _ensure(gh, repo, week, "carddb weekly snapshot %s" % week[7:],
                                  "carddb SQLite snapshot for the week of %s." % week[7:],
                                  dry_run, out)
+        # The weekly release carries the asset only. A `carddb-latest.json`
+        # there would say "tag": "carddb-latest" about a dated snapshot.
         _upload(gh, repo, week, assets, dry_run, out)
-        print("carddb release: %s %s%s" % (
+        print("carddb release: %s %s (%s%s)" % (
             "planned" if dry_run else ("created and uploaded" if created_weekly else "uploaded"), week,
+            ", ".join(os.path.basename(a) for a in assets),
             " [dry-run]" if dry_run else ""), file=out)
 
     tags = _releases(gh, repo)
-    pruned = plan_prune(tags, now, keep_weeks) if tags else []
+    if tags is None:
+        message = ("release: cannot list the existing releases (gh release list failed); "
+                   "refusing to skip the prune silently")
+        if not dry_run:
+            raise StoreError(message)
+        print("!! " + message, file=out)
+        pruned = []
+    else:
+        pruned = plan_prune(tags, now, keep_weeks)
     for tag in pruned:
         _gh(gh, ["release", "delete", tag, "--repo", repo, "--yes", "--cleanup-tag"],
             dry_run=dry_run, out=out)
@@ -242,7 +263,7 @@ def run(store, db, assets=None, repo=None, gh=None, now=None, dry_run=False,
 
 
 def size_rows(store, now, budget_mib=BUDGET_MIB):
-    """The `_meta/size` rows for the branch's current packfile and the D7 budget."""
+    """The `_meta/size` rows for the branch's object store and the D7 budget."""
     packed = packed_mib(store.dir)
     if packed is None:
         raise StoreError("size: cannot measure the packed size of %s" % store.dir)

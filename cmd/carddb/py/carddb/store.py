@@ -65,21 +65,27 @@ def today(ran=None):
 
 
 def packed_mib(directory):
-    """The packed size of a git clone in MiB (`git count-objects -v` size-pack), or None.
+    """The object-store size of a git clone in MiB (`count-objects` size + size-pack), or None.
 
-    The one measurement `freshness`, `size` and `release` report: a data branch's
-    budget is the size of its packfile, not the working tree or the loose objects
-    a not-yet-published run has staged."""
+    The one measurement `freshness`, `size` and `release` report. A data branch's
+    D7 budget covers everything a clone of it downloads, not just the last
+    packfile: a fresh CI clone holds the published history in a pack while the
+    writers' new blobs stay loose until a fetch or repack. Counting only
+    `size-pack` reported 0 on the first publish and lagged one run behind
+    afterwards. Measuring both is deterministic and needs no repack, so it is
+    safe to call before and after a publish."""
     p = subprocess.run(["git", "-C", directory, "count-objects", "-v"], capture_output=True, text=True)
     if p.returncode != 0:
         return None
+    total_kib, found = 0, False
     for line in p.stdout.splitlines():
-        if line.startswith("size-pack:"):
+        if line.startswith(("size:", "size-pack:")):
             try:
-                return int(line.split(":", 1)[1].strip()) / 1024.0
+                total_kib += int(line.split(":", 1)[1].strip())
             except ValueError:
                 return None
-    return None
+            found = True
+    return total_kib / 1024.0 if found else None
 
 
 def gorge12(root=None):

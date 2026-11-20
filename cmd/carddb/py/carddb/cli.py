@@ -10,7 +10,7 @@
   init [--private]                        clone the data branch, or create it
   compliance [--repo DIR] [--source ID] [--version V] [--measured DATE]
                                         XMage manifests + FORGE_ORACLE_REF -> support rows
-  size [--measured DATE]                  report the branch packfile into _meta/size (D7 budget)
+  size [--measured DATE]                  report the branch object store into _meta/size (D7 budget)
   release [--dry-run]                     upload carddb-latest, the weekly dated release, prune
   validate|boundary [--scope S] [--tree DIR]   the Python mirror of the Go checks
   card <name|oracle_id>                   every fact for one card
@@ -277,13 +277,18 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
             if not pub.exists():
                 raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
             packed, rows = release_mod.size_rows(pub, args.measured, args.max_pack_mb)
+            # The measurement date size_rows chose (--measured, CARDDB_NOW or the
+            # data tip's date) is also the writers row's date: one deterministic
+            # date per run, not a `measured` from the tip and a `ran` from the
+            # wall clock.
             changed = pub.put("_meta/size", rows, writer=args.source, version=args.version,
-                              ran=args.measured, replace=True)
+                              ran=rows[0]["measured"], replace=True)
             print("carddb size: data branch packed %.1f MiB (budget %d MiB); %d row(s) changed" % (
                 packed, int(args.max_pack_mb), changed), file=stdout)
             if packed > args.max_pack_mb:
-                print("!! carddb size: packed %.1f MiB exceeds the D7 budget of %d MiB" % (
-                    packed, int(args.max_pack_mb)), file=stdout)
+                print("carddb size: packed %.1f MiB exceeds the D7 budget of %d MiB; "
+                      "refusing to publish" % (packed, int(args.max_pack_mb)), file=stderr)
+                return 1
             return 0
         if args.verb == "release":
             pub = Store(PUBLIC, home=args.home, schema=schema)
