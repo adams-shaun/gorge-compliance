@@ -118,6 +118,75 @@
      }
     }
    ]
-  }
- ]
-}
+  },
+   {
+    "name": "one-pip-with-mana-one-with-life",
+    "cr": [
+     "107.4f",
+     "601.2b",
+     "118.12a"
+    ],
+    "why": "The two {B/P} pips are separate asks: paying the first with {B} and the second with 2 life spends two mana and 2 life, leaving pool B at 18 life. Both pips are the same {B/P}, so the final snapshot is order-symmetric -- the pre-fix flat yes lands here too; the per-ask position (a no for the mana face, then a yes for the life face) is pinned by TestXAnswersPhyrexianMixedFaces, not by this replay.",
+    "setup": {
+     "p0": {
+      "hand": [
+       "Dismember"
+      ]
+     },
+     "p1": {
+      "battlefield": [
+       "Grizzly Bears"
+      ]
+     }
+    },
+    "steps": [
+     {
+      "op": "mana",
+      "seat": 0,
+      "mana": "BBB"
+     },
+     {
+      "op": "cast",
+      "seat": 0,
+      "card": "p0:Dismember",
+      "targets": [
+       "p1:Grizzly Bears"
+      ],
+      "answers": [
+       {
+        "kind": "choose",
+        "pick": [
+         "Pay B"
+        ]
+       },
+       {
+        "kind": "choose",
+        "pick": [
+         "Pay 2 life"
+        ]
+       }
+      ]
+     },
+     {
+      "op": "resolve"
+     }
+    ],
+    "expect": [
+     {
+      "card": "p1:Grizzly Bears",
+      "zone": "graveyard"
+     },
+     {
+      "life": {
+       "p0": 18
+      }
+     },
+     {
+      "pool": {
+       "p0": "B"
+      }
+     }
+    ]
+   }
+  ]
+ }
