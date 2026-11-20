@@ -4,6 +4,7 @@
   publish [--bulk] [--private]            commit what is staged, rebase, push
   merge-driver %O %A %B %P                git's merge driver (registered by the tool itself)
   build [--private] [--text FILE]         SQLite from the shards
+  proven [--db FILE] [--format F]         cards certification has proven (C2/C3), as tsv, json or count
   fetch [--private]                       gh release download carddb-latest
   init [--private]                        clone the data branch, or create it
   validate|boundary [--scope S] [--tree DIR]   the Python mirror of the Go checks
@@ -16,6 +17,7 @@ import sys
 from . import build as build_mod
 from . import fetch as fetch_mod
 from . import merge as merge_mod
+from . import query
 from . import shard
 from .boundary import boundary_tree
 from .schema import PRIVATE, PUBLIC, SchemaError, load_schema, repo_root
@@ -46,6 +48,9 @@ def _parser():
     p.add_argument("--src-dir", help="read curated files and committed sources from this directory instead of a git ref")
     p = sub.add_parser("fetch")
     p.add_argument("--private", action="store_true")
+    p = sub.add_parser("proven")
+    p.add_argument("--db", help="built carddb SQLite file (default: read cert from the public clone)")
+    p.add_argument("--format", choices=("tsv", "json", "count"), default="tsv")
     p = sub.add_parser("init")
     p.add_argument("--private", action="store_true")
     for v in ("validate", "boundary"):
@@ -127,6 +132,11 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
                 revs["private_rev"] = priv.git("rev-parse", "HEAD").stdout.strip()[:12]
             build_mod.build(out, schema, pub.dir, priv.dir if priv else None, committed, args.text, revs)
             print(out, file=stdout)
+            return 0
+        if args.verb == "proven":
+            rows = (query.proven_from_db(args.db) if args.db
+                    else query.proven_from_store(Store(PUBLIC, home=args.home, schema=schema)))
+            print(query.format_proven(rows, args.format), end="", file=stdout)
             return 0
         if args.verb in ("validate", "boundary"):
             root = args.tree or Store(PUBLIC, home=args.home, schema=schema).dir

@@ -23,7 +23,7 @@ import sqlite3
 import subprocess
 import tarfile
 
-from . import shard
+from . import query, shard
 from .boundary import boundary_tree
 from .norm import name_keys
 from .schema import PRIVATE, PUBLIC, repo_root
@@ -36,7 +36,7 @@ DIAGNOSED = "oracle/xengine/diagnosed.tsv"
 SOURCE_PATHS = [CURATED_PREFIX.rstrip("/"), MANIFEST_PREFIX.rstrip("/"), DIAGNOSED]
 
 _SQL_TYPES = {"string": "TEXT", "list": "TEXT", "date": "TEXT", "int": "INTEGER", "bool": "INTEGER"}
-_INDEXED = ("oracle_id", "set_code", "name", "format", "level", "status", "label", "tier", "source")
+_INDEXED = ("oracle_id", "norm_name", "set_code", "name", "format", "level", "status", "label", "tier", "source")
 
 SOURCE_DDL = [
     "CREATE TABLE src_manifest_sets (code TEXT NOT NULL, name TEXT, released TEXT, set_type TEXT, "
@@ -269,6 +269,7 @@ def _derived(conn, schema, texts):
             row.append(by_oid.get(oid, ""))
         conn.execute("INSERT INTO card_fts VALUES (%s)" % ",".join("?" * len(row)), row)
     conn.execute("CREATE INDEX idx_card_names_oracle_id ON card_names (oracle_id)")
+    conn.execute(query.PROVEN_VIEW_SQL)
 
 
 def dump_text(conn):

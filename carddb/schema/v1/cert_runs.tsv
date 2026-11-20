@@ -1,0 +1,22 @@
+#carddb-schema cert_runs v1
+name	type	required	key	visibility	doc
+run_id	string	yes	yes	private	Deterministic run id for one certloop measure, unique per run
+t	string	yes	no	private	Run time, UTC ISO-8601
+gorge_sha	string	yes	no	private	Gorge commit the run measured at
+corpus_pin	string	yes	no	private	Forge corpus pin (FORGE_REF) the run measured at
+deal_set	string	no	no	private	Set the deal cursor was on; - when none
+cert_set	string	no	no	private	Set the certify cursor was on; - when none
+sets_certified	int	yes	no	private	Sets certified at the run's target level
+sets_total	int	yes	no	private	Sets in the certification order
+cards	int	yes	no	private	cert rows in the run
+c0	int	yes	no	private	Cards at C0 in the run
+c1	int	yes	no	private	Cards at C1 in the run
+c2	int	yes	no	private	Cards at C2 in the run
+c3	int	yes	no	private	Cards at C3 in the run
+excluded	int	yes	no	private	Cards excluded from certification in the run
+open	int	yes	no	private	Cards with an open difference in the run
+diagnosed	int	yes	no	private	Cards with a diagnosed difference in the run
+farm_games_6h	int	yes	no	private	Farm games ended in the six hours before the run
+events	int	yes	no	private	cert_events rows the run wrote
+decision	string	yes	no	private	Run decision: ok, stalled(<why>) or stop
+detail	string	no	no	private	One-line detail for the run
