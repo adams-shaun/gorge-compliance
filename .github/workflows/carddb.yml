@@ -25,6 +25,8 @@
 # Release assets (see cmd/carddb/py/carddb/release.py):
 #   `carddb-latest`            floating release; carddb.sqlite.zst is replaced
 #   `carddb-YYYY-MM-DD`        one snapshot per ISO week (the Monday)
+#   carddb-parquet.tar.gz      one .parquet per SQLite table + MANIFEST.json
+#                              (the CI-only pyarrow export), on both releases
 #   older than 12 weeks        pruned except the newest release per quarter
 #   carddb-latest.json         data_rev, gorge_pin, packed_mib, budget, sha256;
 #                              latest only, never on a dated weekly release
@@ -225,7 +227,8 @@ jobs:
         run: |
           set -euo pipefail
           for f in cmd/carddb/main.py cmd/carddb/py/carddb/compliance.py \
-                   cmd/carddb/py/carddb/release.py carddb/schema/v1/_meta/size.tsv \
+                   cmd/carddb/py/carddb/release.py cmd/carddb/py/parquet_export.py \
+                   carddb/schema/v1/_meta/size.tsv \
                    oracle/compliance/manifests Makefile; do
             if [ ! -e "$f" ]; then
               echo "::error::the writer ref has no $f: promote the carddb change to main before publishing the carddb branch"
@@ -322,12 +325,28 @@ jobs:
           command -v zstd >/dev/null || { echo "::error::zstd is not installed"; exit 1; }
           zstd --no-mtime -T1 -19 -q -f -o "$RUNNER_TEMP/carddb.sqlite.zst" "$RUNNER_TEMP/carddb.sqlite"
           ls -l "$RUNNER_TEMP/carddb.sqlite" "$RUNNER_TEMP/carddb.sqlite.zst"
+      - name: Export the per-table Parquet (pyarrow, CI-only)
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          # pyarrow is a CI-only dependency: the carddb tool is stdlib only and
+          # never imports it; the exporter is the only place that does. The
+          # version is pinned so the parquet bytes are the same on every run,
+          # and a venv keeps it out of the system python.
+          python3 -m venv "$RUNNER_TEMP/pyarrow-venv"
+          "$RUNNER_TEMP/pyarrow-venv/bin/pip" install --quiet --disable-pip-version-check \
+            "pyarrow==21.0.0"
+          "$RUNNER_TEMP/pyarrow-venv/bin/python" -I cmd/carddb/py/parquet_export.py \
+            --db "$RUNNER_TEMP/carddb.sqlite" --out "$RUNNER_TEMP/carddb-parquet.tar.gz"
+          ls -l "$RUNNER_TEMP/carddb-parquet.tar.gz"
       - name: Publish the release
         working-directory: tool
         run: |
           set -euo pipefail
           args=(--repo "$GITHUB_REPOSITORY" --db "$RUNNER_TEMP/carddb.sqlite" \
-                --asset "$RUNNER_TEMP/carddb.sqlite.zst" --now "$RELEASE_DATE" --keep-weeks 12)
+                --asset "$RUNNER_TEMP/carddb.sqlite.zst" \
+                --asset "$RUNNER_TEMP/carddb-parquet.tar.gz" \
+                --now "$RELEASE_DATE" --keep-weeks 12)
           if [ "$DRY_RUN" = "true" ]; then
             python3 -I cmd/carddb/main.py release "${args[@]}" --dry-run
           else
@@ -343,5 +362,8 @@ jobs:
             echo "- release date: ${RELEASE_DATE:-unknown}"
             if [ -f "$RUNNER_TEMP/carddb.sqlite.zst" ]; then
               echo "- asset: $(du -h "$RUNNER_TEMP/carddb.sqlite.zst" | cut -f1) compressed"
+            fi
+            if [ -f "$RUNNER_TEMP/carddb-parquet.tar.gz" ]; then
+              echo "- parquet: $(du -h "$RUNNER_TEMP/carddb-parquet.tar.gz" | cut -f1)"
             fi
           } >> "$GITHUB_STEP_SUMMARY"

@@ -299,9 +299,15 @@ class Workflow(Base):
         by_name = {s.get("name"): s for s in steps}
         names = [s.get("name", "") for s in steps]
         joined = "\n".join(names + [s.get("run", "") for s in steps]).lower()
-        for want in ("catalogue", "compliance", "build", "compress", "release"):
+        for want in ("catalogue", "compliance", "build", "compress", "parquet", "release"):
             self.assertIn(want, joined)
         self.assertIn("dry_run", joined)
+
+        # The per-table Parquet archive is a release asset: the export step
+        # pins its CI-only pyarrow, and the release step ships the archive.
+        export_step = by_name["Export the per-table Parquet (pyarrow, CI-only)"]
+        self.assertIn("pyarrow==", export_step["run"])
+        self.assertIn("carddb-parquet.tar.gz", export_step["run"])
 
         # The dry-run guarantee is structural: the publish step is skipped
         # exactly on dry_run, and the release step has a real dry-run branch.
@@ -310,6 +316,7 @@ class Workflow(Base):
         self.assertIn('if [ "$DRY_RUN" = "true" ]', release_step)
         self.assertIn("--dry-run", release_step)
         self.assertIn("else", release_step)
+        self.assertIn("carddb-parquet.tar.gz", release_step)
 
         # No wall clock reaches a generated report: schedule/dispatch date from
         # the data tip, and the debounce from the push event, not the commit.
