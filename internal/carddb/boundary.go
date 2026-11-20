@@ -33,9 +33,11 @@ var jsonFieldRe = regexp.MustCompile(`(?i)"(oracle_text|price[a-z0-9_]*|prims|ta
 
 // Boundary checks that the tree (everything under it but .git) holds nothing
 // that must not be published: no private table or column, no field with a
-// banned name, no Forge-script-shaped line in any file. The schema directory
-// (SchemaDir) declares private tables by name, so it is exempt from the
-// table and field checks but not from the Forge-line scan.
+// banned name, no Forge-script-shaped line in any file. Real schema
+// declarations (IsSchemaDecl) name private tables and columns, so they are
+// exempt from the table and field checks (not from the Forge-line scan, and
+// each of their lines must be a six-cell declaration row); any other file at
+// or under SchemaDir is refused outright.
 func Boundary(s *Schema, tree string) ([]Violation, error) {
 	files, err := treeFiles(tree)
 	if err != nil {
@@ -61,7 +63,13 @@ func Boundary(s *Schema, tree string) ([]Violation, error) {
 func boundaryFile(s *Schema, rel string, r io.Reader) ([]Violation, error) {
 	var out []Violation
 	add := func(line int, f string, a ...any) { out = append(out, Violation{rel, line, fmt.Sprintf(f, a...)}) }
-	data := !isSchemaPath(rel)
+	br := bufio.NewReaderSize(r, 1<<16)
+	head, _ := br.Peek(len(schemaDeclHeader))
+	decl := isSchemaPath(rel) && IsSchemaDecl(rel, head)
+	if isSchemaPath(rel) && !decl {
+		add(0, notDeclMsg)
+	}
+	data := !decl
 	isTSV := strings.HasSuffix(rel, ".tsv")
 	isJSON := strings.HasSuffix(rel, ".json") || strings.HasSuffix(rel, ".jsonl")
 	if data {
@@ -74,13 +82,18 @@ func boundaryFile(s *Schema, rel string, r io.Reader) ([]Violation, error) {
 		}
 	}
 	table := ""
-	br := bufio.NewReaderSize(r, 1<<16)
 	for ln := 1; ; ln++ {
 		line, err := br.ReadString('\n')
 		if len(line) > 0 {
 			line = strings.TrimRight(line, "\r\n")
 			if forgeLineRe.MatchString(line) {
 				add(ln, "Forge-script-shaped line (pattern %s)", forgeLineRe)
+			}
+			if decl && rel == SchemaDir+"/VERSION" && (ln > 1 || !schemaVersionRe.MatchString(line)) {
+				add(ln, "schema/VERSION must hold only the version number")
+			}
+			if decl && ln > 1 && rel != SchemaDir+"/VERSION" && strings.Count(line, "\t")+1 != declRowCells {
+				add(ln, "schema declaration line has %d cells, want %d", strings.Count(line, "\t")+1, declRowCells)
 			}
 			if data && isTSV && ln == 1 {
 				table = headerTable(s, rel, line, add)

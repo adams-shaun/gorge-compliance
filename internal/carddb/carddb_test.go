@@ -176,7 +176,7 @@ func TestCellSyntaxFails(t *testing.T) {
 		"bad date":         {"a\tn\t2026-13-02\tcore\t-\n", "not a YYYY-MM-DD date"},
 		"too few cells":    {"a\tn\n", "2 cells, want 5"},
 		"invalid UTF-8":    {"a\tn\xff\t2026-01-02\tcore\t-\n", "not valid UTF-8"},
-		"optional dash ok": {"", ""},
+		"optional dash ok": {"a\tn\t2026-01-02\tcore\t-\n", ""},
 	} {
 		root := t.TempDir()
 		write(t, root, "sets.tsv", hdr+tc.row)
@@ -333,12 +333,15 @@ func TestForgeLineFails(t *testing.T) {
 func TestBoundaryOtherShapes(t *testing.T) {
 	s := loadReal(t)
 	for name, tc := range map[string]struct{ rel, body, want string }{
-		"private table by path":   {"prims/a.tsv", "#carddb cards v1\nx\n", `path names private table "prims"`},
-		"banned file name":        {"price_history.tsv", "#carddb cards v1\nx\n", `path names forbidden field "price_history"`},
-		"json field":              {"export.jsonl", "{\"name\":\"a\",\"oracle_text\":\"b\"}\n", `field "oracle_text" is forbidden`},
-		"json price field":        {"export.json", "  \"price_usd\": 3,\n", `field "price_usd" is forbidden`},
-		"tsv without header":      {"plain.tsv", "a\tb\n", "not a carddb shard"},
-		"private table by name":   {"x/tags.tsv", "#carddb tags v1\noracle_id\ttag\n", `private table "tags"`},
+		"private table by path": {"prims/a.tsv", "#carddb cards v1\nx\n", `path names private table "prims"`},
+		"banned file name":      {"price_history.tsv", "#carddb cards v1\nx\n", `path names forbidden field "price_history"`},
+		"json field":            {"export.jsonl", "{\"name\":\"a\",\"oracle_text\":\"b\"}\n", `field "oracle_text" is forbidden`},
+		"json price field":      {"export.json", "  \"price_usd\": 3,\n", `field "price_usd" is forbidden`},
+		"tsv without header":    {"plain.tsv", "a\tb\n", "not a carddb shard"},
+		"private table by name": {"x/tags.tsv", "#carddb tags v1\noracle_id\ttag\n", `private table "tags"`},
+		// no banned path component, no banned column, no column line: only the
+		// `#carddb decks v1` header can catch this
+		"private table by header": {"x/data.tsv", "#carddb decks v1\n", `private table "decks"`},
 		"banned column, no table": {"y.tsv", "#carddb unknown v1\noracle_id\tedhrec_rank\n", `field "edhrec_rank" is forbidden`},
 	} {
 		root := validTree(t, s, Public)
@@ -357,6 +360,39 @@ func TestBoundaryOtherShapes(t *testing.T) {
 	if vs, err := Validate(s, root, Public); err != nil || len(vs) != 0 {
 		t.Fatalf("schema dir validate: %v %v", err, msgs(vs))
 	}
+}
+
+// The schema directory is exempt only for real declarations: anything else at
+// or under it, or a root file named `schema`, is refused by both commands.
+func TestSchemaDirCannotSmuggle(t *testing.T) {
+	s := loadReal(t)
+	leak := "#carddb text v1\noracle_id\toracle_text\nabc\tDraw a card.\n"
+	for name, tc := range map[string]struct{ rel, body string }{
+		"nested shard":           {"schema/notes/leak.tsv", leak},
+		"shard under v1":         {"schema/v1/leak.tsv", leak},
+		"decl path, no header":   {"schema/v1/text2.tsv", "name\ttype\trequired\tkey\tvisibility\tdoc\n"},
+		"non-tsv":                {"schema/v1/notes.txt", "Draw a card.\n"},
+		"json":                   {"schema/export.json", "{\"oracle_text\":\"x\"}\n"},
+		"VERSION with extras":    {"schema/VERSION", "1\nDraw a card.\n"},
+		"root file named schema": {"schema", leak},
+	} {
+		root := validTree(t, s, Public)
+		write(t, root, tc.rel, tc.body)
+		vs, err := Validate(s, root, Public)
+		if err != nil || !strings.Contains(msgs(vs), "not a schema declaration") {
+			t.Errorf("%s: validate: %v %q", name, err, msgs(vs))
+		}
+		vs, err = Boundary(s, root)
+		if err != nil || len(vs) == 0 {
+			t.Errorf("%s: boundary passed: %v %q", name, err, msgs(vs))
+		}
+	}
+	// a declaration with a free-form line is refused by the boundary
+	root := validTree(t, s, Public)
+	copyTree(t, realSchema, filepath.Join(root, SchemaDir))
+	write(t, root, "schema/v1/sets.tsv", read(t, root, "schema/v1/sets.tsv")+"Draw a card.\n")
+	vs, err := Boundary(s, root)
+	mustFail(t, vs, err, "schema declaration line has 1 cells, want 6")
 }
 
 // The committed curated files hold a header and no rows; with one example row

@@ -32,9 +32,13 @@ never committed.
 The carddb data set (carddb/, cmd/carddb, internal/carddb) is derived from
 MTGJSON (https://mtgjson.com), distributed under the MIT License (full text
 below): card, printing, set and legality facts are taken from MTGJSON at the
-version recorded in the data set's _meta/sources table. Card rules (Oracle)
-text, prices, tagger tags and EDHREC data are never part of it: the public
-boundary check (cmd/carddb boundary) fails on any of them.
+version recorded in the data set's _meta/sources table. The schema has
+no public field for card rules (Oracle) text, prices, tagger tags or EDHREC
+data, and the public boundary check (cmd/carddb boundary) rejects any public
+table, column, field or path named for them, any file under schema/ that is not
+a schema declaration, and any Forge-script-shaped line. It checks names and
+shapes, not the values of free-form cells; the data set's writers are
+responsible for what they put in public columns.
 
 Fan Content Policy: this project is unofficial Fan Content permitted under the
 Wizards of the Coast Fan Content Policy. Not approved/endorsed by Wizards.

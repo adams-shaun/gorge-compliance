@@ -6,11 +6,19 @@
 #                  hold nothing private or Forge-shaped.
 #   push to the `carddb` branch: the published data branch (orphan, like
 #                  docs-data) must validate and pass the boundary. The checker
-#                  and the schema are taken from main, not from the branch
-#                  under test, so a bad push cannot loosen its own check.
+#                  and the schema are built from `main`, not from the pushed
+#                  branch, so a push cannot swap in a looser checker or schema.
 #
-# A workflow file runs from the branch that was pushed, so the `carddb` branch
-# must carry a copy of this file for the push trigger to fire.
+# Limits of that guarantee:
+#  - A workflow file runs from the branch that was pushed, so the steps
+#    themselves come from the pushed `carddb` branch. Protect the `carddb`
+#    branch (no direct pushes; only the publisher identity) so the steps
+#    cannot be edited on the way in; this workflow only pins the checker.
+#  - `main` must already contain cmd/carddb and carddb/schema, i.e. this
+#    change must be promoted develop -> main BEFORE the first publish to
+#    `carddb`. The "Build the checker" step fails loudly otherwise.
+#  - The `carddb` branch must carry a copy of this file for the push trigger
+#    to fire.
 name: carddb
 
 on:
@@ -55,7 +63,12 @@ jobs:
           cache: false
       - name: Build the checker
         working-directory: tool
-        run: go build -trimpath -o ../carddb-bin ./cmd/carddb
+        run: |
+          if [ ! -d cmd/carddb ] || [ ! -d carddb/schema ]; then
+            echo "::error::the checker ref has no cmd/carddb or carddb/schema: promote the carddb change to main before publishing the carddb branch"
+            exit 1
+          fi
+          go build -trimpath -o ../carddb-bin ./cmd/carddb
       - name: Pick the tree
         id: tree
         run: |

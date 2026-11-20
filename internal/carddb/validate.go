@@ -29,9 +29,33 @@ func (v Violation) String() string {
 }
 
 // SchemaDir is the top-level directory of a tree that holds the schema
-// itself (declarations, not data): validate skips it, and the boundary check
-// does not read its private table declarations as private data.
+// itself (declarations, not data). Only real declarations are exempt from the
+// data checks (see IsSchemaDecl); any other file at or under it is refused,
+// so the directory cannot be used to smuggle private data into a public tree.
 const SchemaDir = "schema"
+
+// schemaDeclHeader opens every schema declaration table.
+const schemaDeclHeader = "#carddb-schema "
+
+var (
+	schemaDeclPathRe = regexp.MustCompile(`^schema/v[0-9]+/.+\.tsv$`)
+	schemaVersionRe  = regexp.MustCompile(`^[0-9]+\n?$`)
+)
+
+// IsSchemaDecl reports whether the file at rel with leading bytes head is a
+// schema declaration: schema/VERSION holding just a number, or
+// schema/v<N>/**/<table>.tsv opening with `#carddb-schema `. head must hold
+// at least the first len(schemaDeclHeader) bytes of the file (or all of it).
+func IsSchemaDecl(rel string, head []byte) bool {
+	if rel == SchemaDir+"/VERSION" {
+		return schemaVersionRe.Match(head)
+	}
+	return schemaDeclPathRe.MatchString(rel) && strings.HasPrefix(string(head), schemaDeclHeader)
+}
+
+// declRowCells is the width of every line of a schema declaration table
+// (name type required key visibility doc).
+const declRowCells = 6
 
 // treeFiles lists the regular files of a tree, slash-separated and relative,
 // in lexical order. .git is skipped.
@@ -61,6 +85,8 @@ func treeFiles(tree string) ([]string, error) {
 }
 
 func isSchemaPath(rel string) bool { return rel == SchemaDir || strings.HasPrefix(rel, SchemaDir+"/") }
+
+const notDeclMsg = "not a schema declaration: only schema/VERSION and schema/v<N>/<table>.tsv (opening `#carddb-schema <table> v<N>`) may live at or under schema/"
 
 // pathHoldsTable reports whether rel is a legal location for a shard of table.
 func pathHoldsTable(rel, table string) bool {
@@ -92,12 +118,19 @@ func Validate(s *Schema, tree, scope string) ([]Violation, error) {
 	var out []Violation
 	keys := map[string]map[string]string{} // table -> key -> "path:line"
 	for _, rel := range files {
-		if isSchemaPath(rel) || !strings.HasSuffix(rel, ".tsv") {
+		inSchema := isSchemaPath(rel)
+		if !inSchema && !strings.HasSuffix(rel, ".tsv") {
 			continue
 		}
 		b, err := os.ReadFile(filepath.Join(tree, filepath.FromSlash(rel)))
 		if err != nil {
 			return nil, err
+		}
+		if inSchema {
+			if !IsSchemaDecl(rel, b) {
+				out = append(out, Violation{rel, 0, notDeclMsg})
+			}
+			continue
 		}
 		out = append(out, validateShard(s, scope, rel, b, keys)...)
 	}
