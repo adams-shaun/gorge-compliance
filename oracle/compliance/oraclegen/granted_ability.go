@@ -48,51 +48,89 @@ func GrantedAbilityLabel(recipient string, sa *cards.SA) string {
 	return recipient + ": " + sa.ParamStr(cards.PKSpellDescription)
 }
 
-// ResolveActivatedAbility returns the granted/gained/keyword-granted ability
-// activate step i names, or false when the step is a printed ability (or names
-// no ability). A step lowered before the grant identity existed carries no
-// label; its recorded activate pick in g.Transcript still names the offered
-// option, so the same resolution covers a pre-fix item without a re-lowering.
+// ActivatedAbilityKind is how an activate step names its ability. The three
+// outcomes matter: an unresolved granted pick must fail closed, while a
+// printed pick keeps the AbilityIndex path. Collapsing the first two into
+// "not granted" is what exported a granted step's aliased printed ability.
+type ActivatedAbilityKind int
+
+const (
+	// ActivatedPrinted: the step names Face.Abilities[*Step.AbilityIndex].
+	ActivatedPrinted ActivatedAbilityKind = iota
+	// ActivatedGranted: the step names the granted/gained/keyword ability
+	// ResolveActivatedAbility returned.
+	ActivatedGranted
+	// ActivatedGrantedUnresolved: the step names a granted/gained/keyword
+	// ability that cannot be uniquely resolved. Exporters must omit or
+	// refuse the step, never export the aliased printed index.
+	ActivatedGrantedUnresolved
+)
+
+// ResolveActivatedAbility returns what activate step i names and how the
+// exporters must treat it. A printed pick returns ActivatedPrinted; a granted,
+// gained or keyword-granted pick returns ActivatedGranted with its ability; a
+// granted pick the board cannot resolve uniquely returns
+// ActivatedGrantedUnresolved, so no caller can silently fall back to the
+// aliased printed index.
+//
+// A step lowered before the grant identity existed carries no label; its
+// recorded activate pick in g.Transcript still names the offered option, so
+// the same resolution covers a pre-fix item without a re-lowering.
 //
 // Two candidates with the same label but different script lines are
-// ambiguous and count as none, so an export never depends on scan order.
-func ResolveActivatedAbility(reg *cards.Registry, it Item, i int, st Step, g rules.OracleResult) (*cards.SA, bool) {
+// ambiguous and count as none, so an export never depends on scan order. Two
+// genuine grants that print the SAME SpellDescription cannot be told apart by
+// the no-pin-bump path (the item carries no per-step grant fields, and the
+// engine label is the same text): such a pick is ActivatedGrantedUnresolved,
+// losing the step rather than guessing a printed line.
+func ResolveActivatedAbility(reg *cards.Registry, it Item, i int, st Step, g rules.OracleResult) (*cards.SA, ActivatedAbilityKind) {
 	if st.Op != "activate" || st.Card == "" {
-		return nil, false
+		return nil, ActivatedPrinted
 	}
+	labelled := st.Ability != ""
 	label := st.Ability
-	if label == "" {
+	if !labelled {
 		// The pre-fix recovery reads a recorded pick for an index-named
 		// step; a step with neither anchor names no ability.
 		if st.AbilityIndex == nil {
-			return nil, false
+			return nil, ActivatedPrinted
 		}
 		label = recordedActivateLabel(g, i, st.Card)
 		if label == "" {
-			return nil, false
+			return nil, ActivatedPrinted
 		}
 		// A pre-fix printed step's recorded pick is the printed ability's own
-		// label. Treat it as printed, not as a grant that happens to carry the
-		// same text, so neutral identities keep their ordinal.
-		if sa, ok := printedStepAbility(reg, it, i, st, g); ok &&
-			GrantedAbilityLabel(stepLabelName(reg, it, i, st, g), sa) == label {
-			return nil, false
+		// label, including the alternate-cost suffix. Treat it as printed, not
+		// as a grant that happens to carry the same text, so neutral
+		// identities keep their ordinal.
+		if printedStepLabelMatches(reg, it, i, st, g, label) {
+			return nil, ActivatedPrinted
 		}
 	}
 	recipient := stepLabelName(reg, it, i, st, g)
 	// Every granted offer's label starts with the recipient's live face name
-	// (the face-down form is "Face-down creature"). A label that does not is a
-	// special action or another option kind with no grant identity, and the
-	// full candidate scan can be skipped.
+	// (the face-down form is "Face-down creature"). A label-bearing step is a
+	// granted pick by construction (lowerPriority writes the label only for a
+	// grant identity), so a label it cannot place is unresolved, never
+	// printed. A pre-fix label that does not start with the recipient is
+	// another option kind and keeps the index path.
 	prefix := recipient + ": "
 	if !strings.HasPrefix(label, prefix) {
-		return nil, false
+		if labelled {
+			return nil, ActivatedGrantedUnresolved
+		}
+		return nil, ActivatedPrinted
 	}
 	found := grantedCandidates(reg, it, i, st, g, recipient, label)
 	if len(found) != 1 {
-		return nil, false
+		// A pre-fix label that reaches the grant scan is either a grant or a
+		// printed ability whose offer label the printed comparison above did
+		// not recognise. Failing open would export the aliased printed index,
+		// the exact wrong line this resolver exists to remove, so both cases
+		// fail closed.
+		return nil, ActivatedGrantedUnresolved
 	}
-	return found[0], true
+	return found[0], ActivatedGranted
 }
 
 // grantedCandidates returns every distinct activated ability the board can
@@ -274,10 +312,10 @@ func stepLabelName(reg *cards.Registry, it Item, i int, st Step, g rules.OracleR
 	return oraclediffRefName(st.Card)
 }
 
-// printedStepAbility is the ability Face.Abilities[*st.AbilityIndex] the step
-// names when the setup or the entering snapshot resolves the recipient face.
-// It is nil for a token whose face has no such index or a step with no index.
-func printedStepAbility(reg *cards.Registry, it Item, i int, st Step, g rules.OracleResult) (*cards.SA, bool) {
+// printedStepFace is the face Face.Abilities[*st.AbilityIndex] resolves
+// against when the setup or the entering snapshot names the recipient, or nil
+// for a step with no index or a card that does not resolve.
+func printedStepFace(reg *cards.Registry, it Item, i int, st Step, g rules.OracleResult) (*cards.Face, bool) {
 	if st.AbilityIndex == nil {
 		return nil, false
 	}
@@ -287,7 +325,7 @@ func printedStepAbility(reg *cards.Registry, it Item, i int, st Step, g rules.Or
 	}
 	perm, found := stepSnapshotPerm(st.Card, i, g)
 	c := refCard(reg, it, st.Card, perm, found)
-	if c == nil {
+	if c == nil || len(c.Faces) == 0 {
 		return nil, false
 	}
 	face := c.Faces[0]
@@ -309,7 +347,33 @@ func printedStepAbility(reg *cards.Registry, it Item, i int, st Step, g rules.Or
 	if k >= len(face.Abilities) || face.Abilities[k] == nil {
 		return nil, false
 	}
-	return face.Abilities[k], true
+	return face, true
+}
+
+// printedStepLabelMatches reports whether a pre-fix recorded pick is the
+// printed ability's own offered label, including the alternate-cost suffix the
+// printed offer loop appends. The engine labels a printed offer with the
+// ability's own face name; the live name is also accepted so a copy effect
+// that changed the permanent's name does not turn a printed pick into a
+// granted one.
+func printedStepLabelMatches(reg *cards.Registry, it Item, i int, st Step, g rules.OracleResult, label string) bool {
+	face, ok := printedStepFace(reg, it, i, st, g)
+	if !ok {
+		return false
+	}
+	sa := face.Abilities[*st.AbilityIndex]
+	desc := sa.ParamStr(cards.PKSpellDescription)
+	names := []string{face.Name, stepLabelName(reg, it, i, st, g)}
+	for _, name := range names {
+		if name == "" {
+			continue
+		}
+		base := name + ": " + desc
+		if label == base || label == base+" (alternate cost)" {
+			return true
+		}
+	}
+	return false
 }
 
 func stepSnapshotPerm(ref string, i int, g rules.OracleResult) (rules.OracleSnapPerm, bool) {
@@ -331,10 +395,14 @@ type cardFacts struct {
 	types        []string
 	colors       string
 	counters     map[string]int32
+	keywords     []string
 	ctrl         int
 	owner        int
 	token        bool
 	faceDown     bool
+	tapped       bool
+	attacking    bool
+	blocking     bool
 	hasEquipment bool
 	hasAura      bool
 }
@@ -384,7 +452,9 @@ func (p *grantedPoolCard) facts() cardFacts {
 func permFacts(perm rules.OracleSnapPerm, c *cards.Card) cardFacts {
 	return cardFacts{
 		card: c, types: perm.Types, colors: perm.Colors, counters: perm.Counters,
-		ctrl: perm.Controller, owner: perm.Owner, token: perm.Token, faceDown: perm.FaceDown,
+		keywords: perm.Keywords, ctrl: perm.Controller, owner: perm.Owner,
+		token: perm.Token, faceDown: perm.FaceDown, tapped: perm.Tapped,
+		attacking: perm.Attacking, blocking: perm.Blocking,
 	}
 }
 
@@ -614,15 +684,19 @@ func zoneAllows(raw string, zone state.Zone) bool {
 func staticAffectsRecipient(st cards.Static, src *grantedPoolCard, rec grantRecipient) bool {
 	spec := strings.TrimSpace(st.ParamStr(cards.PKAffected))
 	if spec == "" {
-		return true
+		// Forge omits Affected$ on a self-only static (layers.go reads the
+		// same default): the grant reaches its own source card, not every
+		// card in the pool. Treating the absent filter as "everything" put
+		// unrelated cards into the candidate set.
+		spec = "Card.Self"
 	}
 	return filtersCard(spec, rec.facts, src.card, rec.attached, src.ctrl())
 }
 
-// filtersCard evaluates a Forge filter spec against one card's facts. Filters
-// the exporter cannot read are treated as satisfied, so a legitimate grant is
-// never dropped; the type and controller words that decide the common
-// "Creatures you control" grants are evaluated exactly.
+// filtersCard evaluates a Forge filter spec against one card's facts. A
+// predicate the exporter cannot read fails the alternative closed: accepting
+// it would put a card the filter may not reach into the candidate set, which
+// can turn a resolvable grant into a false ambiguity or pick the wrong line.
 func filtersCard(spec string, facts cardFacts, self *cards.Card, attached map[*cards.Card]bool, you int) bool {
 	for _, alt := range splitFilterAlternatives(spec) {
 		if alt == "" {
@@ -647,7 +721,9 @@ func splitFilterAlternatives(spec string) []string {
 	return out
 }
 
-// filterAlternativeMatches evaluates one "+"-joined conjunction.
+// filterAlternativeMatches evaluates one "+"-joined conjunction. Every token
+// must be understood; an unreadable positive or negated predicate fails the
+// alternative closed (see filtersCard).
 func filterAlternativeMatches(alt string, facts cardFacts, self *cards.Card, attached map[*cards.Card]bool, you int) bool {
 	for _, part := range strings.Split(alt, "+") {
 		for _, tok := range strings.Split(part, ".") {
@@ -656,12 +732,14 @@ func filterAlternativeMatches(alt string, facts cardFacts, self *cards.Card, att
 				continue
 			}
 			if neg, ok := strings.CutPrefix(tok, "!"); ok {
-				if filterTokenMatches(neg, facts, self, attached, you) {
+				match, known := filterTokenMatch(neg, facts, self, attached, you)
+				if !known || match {
 					return false
 				}
 				continue
 			}
-			if !filterTokenMatches(tok, facts, self, attached, you) {
+			match, known := filterTokenMatch(tok, facts, self, attached, you)
+			if !known || !match {
 				return false
 			}
 		}
@@ -669,55 +747,81 @@ func filterAlternativeMatches(alt string, facts cardFacts, self *cards.Card, att
 	return true
 }
 
-// filterTokenMatches evaluates one filter word. Characteristic tests the
-// exporter can answer are exact; a predicate it cannot read is accepted so a
-// legitimate grant is not withheld.
-func filterTokenMatches(tok string, facts cardFacts, self *cards.Card, attached map[*cards.Card]bool, you int) bool {
+// filterTokenMatch evaluates one filter word. known is false for a predicate
+// the exporter cannot read; the caller then fails the alternative closed
+// rather than guessing it satisfied.
+func filterTokenMatch(tok string, facts cardFacts, self *cards.Card, attached map[*cards.Card]bool, you int) (match, known bool) {
 	switch strings.ToLower(tok) {
 	case "card", "permanent", "any":
-		return true
+		return true, true
 	case "self":
-		return self != nil && facts.card == self
+		return self != nil && facts.card == self, true
 	case "other":
-		return self == nil || facts.card != self
+		return self == nil || facts.card != self, true
 	case "enchantedby", "equippedby", "attachedby":
-		return self != nil && attached[self]
+		return self != nil && attached[self], true
 	case "youctrl":
-		return facts.ctrl == you
+		return facts.ctrl == you, true
 	case "youown":
-		return facts.owner == you
+		return facts.owner == you, true
 	case "youdontown":
-		return facts.owner != you
+		return facts.owner != you, true
 	case "equipped":
-		return facts.hasEquipment
+		return facts.hasEquipment, true
 	case "enchanted":
-		return facts.hasAura
+		return facts.hasAura, true
+	case "modified":
+		return len(facts.counters) > 0 || facts.hasEquipment || facts.hasAura, true
+	case "hascounters":
+		return len(facts.counters) > 0, true
 	case "token":
-		return facts.token
+		return facts.token, true
 	case "nontoken":
-		return !facts.token
+		return !facts.token, true
 	case "facedown", "isfacedown":
-		return facts.faceDown
+		return facts.faceDown, true
+	case "tapped":
+		return facts.tapped, true
+	case "untapped":
+		return !facts.tapped, true
+	case "attacking":
+		return facts.attacking, true
+	case "blocking":
+		return facts.blocking, true
 	case "multicolor":
-		return len(facts.colors) > 1
+		return len(facts.colors) > 1, true
 	case "monocolor":
-		return len(facts.colors) == 1
-	case "kicked", "iscommander", "isremembered", "chosencolor", "chosentype", "hasyect":
-		return true
+		return len(facts.colors) == 1, true
 	}
 	if n, kind, ok := parseCounterSpec(tok); ok {
-		return int(facts.counters[kind]) >= n
+		return int(facts.counters[kind]) >= n, true
 	}
 	if isColorWord(tok) {
 		if strings.EqualFold(tok, "colorless") {
-			return facts.colors == ""
+			return facts.colors == "", true
 		}
-		return strings.Contains(strings.ToUpper(facts.colors), strings.ToUpper(tok[:1]))
+		return strings.Contains(strings.ToUpper(facts.colors), strings.ToUpper(tok[:1])), true
 	}
 	if isFilterTypeWord(tok) {
-		return containsFold(facts.types, tok)
+		return containsFold(facts.types, tok), true
 	}
-	return true
+	if kw, ok := filterKeywordWord(tok); ok {
+		return containsFold(facts.keywords, kw), true
+	}
+	return false, false
+}
+
+// filterKeywordWord reads Forge's with<Keyword>/without<Keyword> filter
+// predicates against the live keyword list. The prefix is case-insensitive;
+// the keyword itself is compared fold-insensitively by containsFold.
+func filterKeywordWord(tok string) (string, bool) {
+	lower := strings.ToLower(tok)
+	for _, prefix := range []string{"with", "without"} {
+		if rest, ok := strings.CutPrefix(lower, prefix); ok && rest != "" {
+			return tok[len(prefix):], true
+		}
+	}
+	return "", false
 }
 
 // isColorWord reports whether tok names a colour a filter can test. The

@@ -1001,7 +1001,8 @@ func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]s
 		if st.Op != "activate" {
 			continue
 		}
-		if sa, ok := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); ok {
+		switch sa, kind := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); kind {
+		case oraclegen.ActivatedGranted:
 			p, ok := oraclegen.XMageGrantedAbilityPrefix(sa, abilitySourceName(st))
 			if !ok {
 				return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q by granted-ability label %q, whose XMage rule text is unknown", i, st.Card, st.Ability)
@@ -1011,6 +1012,8 @@ func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]s
 			}
 			out[i] = p
 			continue
+		case oraclegen.ActivatedGrantedUnresolved:
+			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q by a granted-ability label that resolves to no unique grant", i, st.Card)
 		}
 		if st.Ability != "" {
 			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q by granted-ability label %q, which resolves to no grant", i, st.Card, st.Ability)

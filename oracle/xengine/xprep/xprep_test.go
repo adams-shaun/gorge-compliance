@@ -1202,3 +1202,39 @@ func TestPrepareBattlefieldModalTriggerMode(t *testing.T) {
 		t.Fatalf("mode answer = %q, want printed mode %d (xmage_answers %+v)", got, want, it.XAnswers)
 	}
 }
+
+// TestPrefixesRefusesUnresolvedUnlabelledGrant: a pre-fix step (no
+// Step.Ability) whose recorded pick is a granted ability the recovery cannot
+// disambiguate must refuse. Falling through to the printed index would ship
+// Dalakos's "{T}" mana text for Dragon Mantle's granted "{R}" pump.
+func TestPrefixesRefusesUnresolvedUnlabelledGrant(t *testing.T) {
+	const card = "Dalakos, Crafter of Wonders"
+	reg := testutil.CorpusRegistry(t)
+	zero := 0
+	it := oraclegen.Item{
+		ID: "xe:test:dalakos-two-grants",
+		Scenario: oraclegen.Scenario{
+			Setup: map[string]oraclegen.Seat{"p0": {
+				Battlefield:      []string{"Island", "Mountain", card, "Dragon Mantle", "Draconic Destiny"},
+				TappedAfterUntap: []string{card},
+				Attached: []oraclegen.SetupAttach{
+					{Card: "Dragon Mantle", To: "p0:" + card},
+					{Card: "Draconic Destiny", To: "p0:" + card},
+				},
+				Library: []string{"Plains", "Plains", "Plains", "Plains", "Plains"},
+			}},
+			Steps: []oraclegen.Step{
+				{Op: "activate", Seat: 0, Card: "p0:Island", AbilityIndex: &zero},
+				{Op: "activate", Seat: 0, Card: "p0:Mountain", AbilityIndex: &zero},
+				{Op: "activate", Seat: 0, Card: "p0:" + card, AbilityIndex: &zero},
+			},
+		},
+	}
+	g, err := rules.RunOracleScenarioJSON(reg, it.Raw())
+	if err != nil || len(g.Fails) != 0 {
+		t.Fatalf("gorge replay: err %v fails %v", err, g.Fails)
+	}
+	if _, ref := prefixes(reg, it, g); ref == nil || ref.Reason != ReasonAbilityUnknown {
+		t.Fatalf("prefixes did not refuse an ambiguous unlabelled grant: %+v", ref)
+	}
+}

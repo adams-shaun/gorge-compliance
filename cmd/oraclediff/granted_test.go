@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
@@ -233,4 +234,57 @@ func TestForgeExportOmitsUnresolvedGrantedLabel(t *testing.T) {
 	if _, ok := lines["0"]; !ok {
 		t.Errorf("step 0 (Island mana, no grant label) lost its printed line: %v", lines)
 	}
+}
+
+// dalakosTwoGrantItem is the pre-fix shape the reviewer reproduced: Dalakos
+// carries two Auras whose granted pumps share the same SpellDescription
+// ("CARDNAME gets +1/+0 until end of turn.") but cost {R} and {1}. The tape
+// predates Step.Ability, so the step records only the aliased printed index 0;
+// the label is identical for both grants, so the recovery cannot choose one.
+func dalakosTwoGrantItem() oraclegen.Item {
+	it := dalakosGrantedItem()
+	seat := it.Scenario.Setup["p0"]
+	seat.Battlefield = append(seat.Battlefield, "Draconic Destiny")
+	seat.Attached = append(seat.Attached, oraclegen.SetupAttach{Card: "Draconic Destiny", To: "p0:" + dalakosName})
+	it.Scenario.Setup["p0"] = seat
+	it.Steps[2].Ability = ""
+	return it
+}
+
+// TestForgeExportOmitsUnresolvedUnlabelledGrant is the reviewer's MAJOR: a
+// pre-fix item carries no Step.Ability label, and two genuine grants with the
+// same text are ambiguous. Both forge and neutral must omit the step rather
+// than fall back to the aliased printed ability (Dalakos's {T} mana line).
+func TestForgeExportOmitsUnresolvedUnlabelledGrant(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	it := dalakosTwoGrantItem()
+	g := replayItem(t, reg, it)
+	if !hasTranscriptLine(g.Transcript, "Dalakos, Crafter of Wonders: CARDNAME gets +1/+0 until end of turn.") {
+		t.Fatalf("fixture did not activate a granted pump; transcript %q", g.Transcript)
+	}
+	lines := forgeAbilityLines(reg, it, g)
+	if line, ok := lines["2"]; ok {
+		t.Fatalf("step 2 exported %q for an ambiguous unlabelled grant, want omitted (never the printed index's %q)", line, dalakosPrintedManaLine)
+	}
+	if _, ok := lines["0"]; !ok {
+		t.Errorf("step 0 (Island mana) lost its printed line: %v", lines)
+	}
+	c := census{}
+	n := neutralFor(reg, forgeBuildRequest(reg, it, g, nil, false), g, c)
+	if a, ok := n.Ability["2"]; ok {
+		t.Fatalf("neutral step 2 = %+v for an ambiguous unlabelled grant, want omitted", a)
+	}
+	if c["ability.omit:granted_unresolved"] == 0 {
+		t.Errorf("neutral did not count the omitted grant: %v", map[string]int(c))
+	}
+}
+
+// hasTranscriptLine reports whether the runner's transcript contains line.
+func hasTranscriptLine(lines []string, line string) bool {
+	for _, l := range lines {
+		if strings.Contains(l, line) {
+			return true
+		}
+	}
+	return false
 }

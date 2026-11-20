@@ -439,11 +439,17 @@ func neutralFor(reg *cards.Registry, rq forgeRequest, g rules.OracleResult, c ce
 		c.add("ability.steps")
 		// Resolve the grant identity before the printed index: a granted
 		// step's index aliases a printed one, and a pre-fix item carries no
-		// Step.Ability label but does carry gorge's recorded pick.
-		if sa, ok := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); ok {
+		// Step.Ability label but does carry gorge's recorded pick. An
+		// unresolved granted pick is omitted even when the pre-fix step has
+		// no label: the aliased printed index is not its identity.
+		switch sa, kind := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); kind {
+		case oraclegen.ActivatedGranted:
 			if a, ok := neutralGrantedAbilityOf(sa, c); ok {
 				n.Ability[strconv.Itoa(i)] = a
 			}
+			continue
+		case oraclegen.ActivatedGrantedUnresolved:
+			c.add("ability.omit:granted_unresolved")
 			continue
 		}
 		if st.Ability != "" {

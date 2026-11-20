@@ -610,7 +610,7 @@ func forgeDropNamedManaAbilityDecisions(reg *cards.Registry, it oraclegen.Item, 
 		if st.Op != "activate" || st.AbilityIndex == nil || st.Card == "" {
 			continue
 		}
-		if _, granted := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); granted {
+		if _, kind := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); kind != oraclegen.ActivatedPrinted {
 			continue
 		}
 		if st.Ability != "" {
@@ -709,10 +709,14 @@ func forgeAbilityLines(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 		// A granted/gained/keyword step's identity is its grant, not the
 		// printed index (which aliases printed ability 0 for an SVar
 		// grant); a pre-fix item with no label is resolved from gorge's
-		// recorded pick. A printed pick returns false and keeps the
-		// index-only path byte-identical.
-		if sa, ok := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); ok {
+		// recorded pick. A printed pick keeps the index-only path
+		// byte-identical; an unresolved granted pick is omitted even when
+		// the pre-fix step carries no label.
+		switch sa, kind := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); kind {
+		case oraclegen.ActivatedGranted:
 			lines[strconv.Itoa(i)] = sa.Line
+			continue
+		case oraclegen.ActivatedGrantedUnresolved:
 			continue
 		}
 		if st.Ability != "" {
