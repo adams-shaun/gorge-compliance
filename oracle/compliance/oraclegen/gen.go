@@ -1418,6 +1418,21 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			// if it shares the step, so it is scripted below regardless.
 			continue
 		}
+		if as, ok := bandAnswers(d); ok {
+			// A band declaration (CR 702.22c) is the pair of asks XMage's
+			// Combat.handleBanding poses: a chooseUse "Form a band ...?" for
+			// each member, then a TargetControlledPermanent pick of that
+			// member. Gorge records one KChoose per accepted member or
+			// decline, so an accepted object pick is yes + its ref and the
+			// decline label is no. The generic choice route would queue the
+			// gorge label, which chooseUse cannot read (it wants Yes/No) and
+			// which would then be consumed by the target pick.
+			if len(as) > 0 {
+				out[d.Step] = append(out[d.Step], as...)
+				any = true
+			}
+			continue
+		}
 		if as, owned := routing.route(i); owned {
 			if len(as) > 0 {
 				out[d.Step] = append(out[d.Step], as...)
@@ -2614,6 +2629,56 @@ func yesNo(d rules.OracleDecision) (string, bool) {
 		}
 	}
 	return "", false
+}
+
+// bandAnswers scripts a band declaration for XMage's Combat.handleBanding:
+// a chooseUse for each member, then that member's card selection. Gorge records
+// one band pick per accepted member ("pN:<creature>") and one per decline (the
+// "No more creatures in <leader>'s band" label), so the pick's shape, not its
+// label text, decides the answer. Keyed on the engine pick kind "band": the next
+// band-declaration flavour (a future "bands with other") takes the same route
+// without another label census.
+//
+// The member is a kind "choice", not "target": XMage reaches the band's
+// TargetControlledPermanent through Target.choose -> Player.choose, whose
+// TestPlayer answer is makeChoose on the CHOICE queue. A "target" answer would
+// go to the separate targets queue that chooseTarget reads, and makeChoose
+// would consume the next band's yes/no instead (measured: "Found wrong choice
+// command ... No ... Select an attacking creature to band with").
+//
+// The member value is the same-name-aware object choice, not the raw scenario
+// ref. XMage's band target filters out the leader, so a plain name is unique
+// among the remaining candidates; a raw ref is not. When two same-name copies
+// attack, registerAliases can bind a scenario ref to the copy that is the
+// current leader (its occurrence count follows battlefield iteration, not
+// setup order), and the target then selects nothing: measured on the SC15
+// certdecks as "Found wrong choice command (invalid target ...):
+// @p0:Kjeldoran Warrior ... selected 0, more possible 2" for the second
+// copy's band ask. disambiguatedObjectChoice keeps the exact-ref alias for a
+// genuinely ambiguous same-name pick and the plain name otherwise.
+func bandAnswers(d rules.OracleDecision) ([]XAnswer, bool) {
+	if len(d.PickKinds) == 0 {
+		return nil, false
+	}
+	for _, kind := range d.PickKinds {
+		if kind != "band" {
+			return nil, false
+		}
+	}
+	as := make([]XAnswer, 0, len(d.Picks)*2)
+	for k := range d.Picks {
+		ref := ""
+		if k < len(d.PickRefs) {
+			ref = d.PickRefs[k]
+		}
+		if isScenarioRefShaped(ref) {
+			member := disambiguatedObjectChoice(d, k, oraclediffRefName(ref))
+			as = append(as, XAnswer{d.Seat, "choice", "yes"}, XAnswer{d.Seat, "choice", member})
+			continue
+		}
+		as = append(as, XAnswer{d.Seat, "choice", "no"})
+	}
+	return as, true
 }
 
 // loneTriggerCostDecline is a triggered-cost ask offered with only its
