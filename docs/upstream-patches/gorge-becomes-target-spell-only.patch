@@ -1,0 +1,376 @@
+diff --git a/dirac/kgen/lower_bt_source.go b/dirac/kgen/lower_bt_source.go
+index d2396a4c..cecbf065 100644
+--- a/dirac/kgen/lower_bt_source.go
++++ b/dirac/kgen/lower_bt_source.go
+@@ -110,7 +110,8 @@ func (lc *lowerCtx) btTargetList(tr *lTrigger, alts []string) (*lFilter, error)
+ 
+ // lowerBTSpellSource lowers a BecomesTarget line whose ValidSource$ is a
+ // stack form (gorge becomesTargetSourceMatches reads the targeting stack
+-// object as an ordinary filter whose Spell base is any stack object) over
++// object as an ordinary filter whose Spell base is a card on the stack,
++// CR 112.1) over
+ // ValidTarget$ Card.Self, one filter or a comma list of filters: the watcher
+ // arms with a spell gate, the controller in Whose and the type in the card
+ // filter (kernel btSpellSrcOK). An Ability source sets SrcAbility instead
+diff --git a/dirac/kop/triggers.go b/dirac/kop/triggers.go
+index dbdf2327..db13ac7e 100644
+--- a/dirac/kop/triggers.go
++++ b/dirac/kop/triggers.go
+@@ -290,9 +290,10 @@ const TrigNValiant int16 = 1
+ // the targeting stack entry's controller is gated by Whose (WhoseYou /
+ // WhoseOpp / WhoseAny) and, when Filter2 is set, its card (gorge
+ // becomesTargetMatches ValidSource$ Spell, Spell.YouCtrl, Spell.OppCtrl,
+-// Spell.Aura, Instant,Sorcery). The bare Spell base is any stack object, an
+-// ability included, as in gorge's matchesBaseSpell; a type word needs a
+-// spell. Kernel trig_becomestarget.go btSpellSrcOK.
++// Spell.Aura, Instant,Sorcery). Every spelling requires a spell stack entry:
++// a spell is a card on the stack (CR 112.1), while an ability is not a spell
++// (CR 113.3b/c). Gorge's matchesBaseSpell draws the same line; a type word
++// adds its card filter. Kernel trig_becomestarget.go btSpellSrcOK.
+ const TrigNSrcSpell int16 = 4
+ 
+ // TrigNSrcAbility in Trigger.N of a TrigBecomesTarget watcher (non-Valiant):
+@@ -300,8 +301,8 @@ const TrigNSrcSpell int16 = 4
+ // controller is gated by Whose (gorge becomesTargetMatches ValidSource$
+ // Ability, Ability.YouCtrl, Ability.OppCtrl). Loki, God of Mischief's
+ // "an ability you control" is WhoseYou beside this marker; the bare Spell
+-// form above stays the any-stack-object base. Kernel trig_becomestarget.go
+-// btSrcOK.
++// form above requires a spell stack entry (CR 112.1), while SpellAbility
++// stays the union base. Kernel trig_becomestarget.go btSrcOK.
+ const TrigNSrcAbility int16 = 5
+ 
+ // TrigNSrcCtrl in Trigger.N of a TrigBecomesTarget watcher (non-Valiant)
+diff --git a/dirac/oracle/becomestarget_spellsource_lockstep_test.go b/dirac/oracle/becomestarget_spellsource_lockstep_test.go
+index decf5718..b0762e12 100644
+--- a/dirac/oracle/becomestarget_spellsource_lockstep_test.go
++++ b/dirac/oracle/becomestarget_spellsource_lockstep_test.go
+@@ -16,9 +16,9 @@ import (
+ // Sliver (Spell.OppCtrl: an opponent's spell) beside targeted spells and
+ // Prodigal Sorcerer's activated ping on both sides. Gorge's
+ // becomesTargetSourceMatches reads the ValidSource$ against the targeting
+-// stack object; gorge's bare Spell base is any object on the stack
+-// (effects matchesBaseSpell), so Prodigal Sorcerer's ping fires Labyrinth
+-// Guardian too, while Spell.YouCtrl / Spell.OppCtrl gate on the controller.
++// stack object; the bare Spell base is a card on the stack (CR 112.1), so
++// Prodigal Sorcerer's ping (an ability, CR 113.3b) does NOT fire Labyrinth
++// Guardian, while Spell.YouCtrl / Spell.OppCtrl add the controller gate.
+ // The expected answer at every decision is gorge's.
+ var kbtssDeck = []cardset.Entry{
+ 	{Name: "Labyrinth Guardian", Count: 3}, {Name: "Stormchaser Drake", Count: 3},
+@@ -212,12 +212,12 @@ func TestBecomesTargetSpellSourceLockstep(t *testing.T) {
+ 	// the gates themselves, read off gorge's pushes: Spell.YouCtrl never
+ 	// fires for an opponent's targeting, Spell.OppCtrl never for the
+ 	// controller's own, and each fires for the side it names
+-	for _, k := range []string{"Stormchaser Drake|spell|opp", "Stormchaser Drake|ability|opp", "Opaline Sliver|spell|own"} {
++	for _, k := range []string{"Labyrinth Guardian|ability|opp", "Stormchaser Drake|spell|opp", "Stormchaser Drake|ability|opp", "Opaline Sliver|spell|own"} {
+ 		if st.push[k] != 0 {
+ 			t.Errorf("%q pushed %d triggers, want 0", k, st.push[k])
+ 		}
+ 	}
+-	for _, k := range []string{"Labyrinth Guardian|spell|opp", "Labyrinth Guardian|ability|opp", "Stormchaser Drake|spell|own", "Opaline Sliver|spell|opp"} {
++	for _, k := range []string{"Labyrinth Guardian|spell|opp", "Stormchaser Drake|spell|own", "Opaline Sliver|spell|opp"} {
+ 		if st.push[k] == 0 {
+ 			t.Errorf("%q pushed no trigger", k)
+ 		}
+diff --git a/dirac/trig_becomestarget.go b/dirac/trig_becomestarget.go
+index ca9795b0..972390e3 100644
+--- a/dirac/trig_becomestarget.go
++++ b/dirac/trig_becomestarget.go
+@@ -223,20 +223,28 @@ func (s *State) btSpellTarget(k *prep, o Obj, e *stackEntry) {
+ 	})
+ }
+ 
+-// btSpellSrcOK is the source gate of a ValidSource$ Spell form. Gorge's bare
+-// Spell base (effects matchesBaseSpell) is any object on the stack, so an
+-// ability or a triggered ability targeting the permanent matches it too;
++// btSpellSrcOK is the source gate of a ValidSource$ Spell form. A spell is a
++// card on the stack (CR 112.1), while an activated or triggered ability is not
++// a spell (CR 113.3b/c), so every Spell spelling requires a spell stack entry.
+ // Spell.YouCtrl compares the stack object's controller with the listener's,
+ // and a type word (Spell.Aura, Instant,Sorcery) reads the object's card face,
+ // which only a spell has.
+ func (s *State) btSpellSrcOK(k *prep, l trigListener, a *kop.Ability, e *stackEntry) bool {
++	// A spell is a card on the stack (CR 112.1); an activated or triggered
++	// ability is not a spell (CR 113.3b/c). Every TrigNSrcSpell spelling --
++	// the bare Spell base, Spell.YouCtrl/.OppCtrl (Whose), and the typed
++	// forms (Filter2) -- therefore requires a spell stack entry. Gorge's
++	// effects.matchesBaseSpell draws the same line.
++	if e.kind != seSpell {
++		return false
++	}
+ 	if a.Trig.Whose == kop.WhoseYou && e.ctrl != l.ctrl {
+ 		return false
+ 	}
+ 	if a.Trig.Filter2 == 0 {
+ 		return true
+ 	}
+-	return e.kind == seSpell && s.matchCardAt(k, a.Trig.Filter2, e.card, e.ctrl, l.ctrl, e.obj)
++	return s.matchCardAt(k, a.Trig.Filter2, e.card, e.ctrl, l.ctrl, e.obj)
+ }
+ 
+ // DebugSrcCtrlListener is the lockstep mutation of kop.TrigNSrcCtrl: the
+diff --git a/dirac/trig_becomestarget_spellsource_test.go b/dirac/trig_becomestarget_spellsource_test.go
+new file mode 100644
+index 00000000..c012814f
+--- /dev/null
++++ b/dirac/trig_becomestarget_spellsource_test.go
+@@ -0,0 +1,27 @@
++package dirac
++
++import (
++	"testing"
++
++	"github.com/adams-shaun/gorge/dirac/kop"
++)
++
++// TestBecomesTargetSpellSourceExcludesAbilities pins the dirac half of the
++// CR 112.1/113.3 line: a bare ValidSource$ Spell gate admits a card on the
++// stack and rejects an ability stack entry, while SpellAbility keeps the
++// ability reading through TrigNSrcCtrl/TrigNSrcAbility. The lockstep twin is
++// TestBecomesTargetSpellSourceLockstep in dirac/oracle.
++func TestBecomesTargetSpellSourceExcludesAbilities(t *testing.T) {
++	s := &State{}
++	k := &prep{}
++	a := &kop.Ability{}
++	a.Trig.N = kop.TrigNSrcSpell
++	a.Trig.Whose = kop.WhoseAny
++	l := trigListener{}
++	if !s.btSpellSrcOK(k, l, a, &stackEntry{kind: seSpell}) {
++		t.Error("a spell stack entry did not pass the bare Spell gate")
++	}
++	if s.btSpellSrcOK(k, l, a, &stackEntry{kind: seAbility}) {
++		t.Error("an ability stack entry passed the bare Spell gate (CR 112.1, 113.3)")
++	}
++}
+diff --git a/engine/effects/compiled_predicate.go b/engine/effects/compiled_predicate.go
+index f5d62868..2f798500 100644
+--- a/engine/effects/compiled_predicate.go
++++ b/engine/effects/compiled_predicate.go
+@@ -417,7 +417,7 @@ func matchesCompiledBase(base predicateBase, o *state.Object, sc *SpecContext) b
+ 		// spell it is while it is still in its origin zone, so a printed
+ 		// ValidAfterStack$ Spell.<...> grant is not refused by the compiled
+ 		// sidecar with a definite No.
+-		matched = o.Zone == state.ZStack || sc.AsStack
++		matched = (o.Zone == state.ZStack || sc.AsStack) && spellStackObject(o)
+ 	case predicateBaseSpellAbility:
+ 		matched = o.Zone == state.ZStack
+ 	case predicateBaseType:
+diff --git a/engine/effects/compiled_predicate_asstack_test.go b/engine/effects/compiled_predicate_asstack_test.go
+index ff539eda..91c43e6f 100644
+--- a/engine/effects/compiled_predicate_asstack_test.go
++++ b/engine/effects/compiled_predicate_asstack_test.go
+@@ -1,6 +1,10 @@
+ package effects
+ 
+-import "testing"
++import (
++	"testing"
++
++	"github.com/adams-shaun/gorge/engine/state"
++)
+ 
+ // TestCompiledPredicateSpellBaseHonoursAsStack: the compiled sidecar must not
+ // answer a definite No for a Spell base the textual matcher accepts under the
+@@ -35,3 +39,36 @@ func TestCompiledPredicateSpellBaseHonoursAsStack(t *testing.T) {
+ 		t.Errorf("Evaluate(SpellAbility) with AsStack = %v, want PredicateNo", got)
+ 	}
+ }
++
++// TestSpellBaseAgreesAcrossTextualAndCompiledArms: CR 112.1 makes a spell a
++// card on the stack, and CR 113.3b/c make an activated or triggered ability
++// something else. The textual matcher and both compiled spell matchers must
++// answer the same way: Spell admits the spell and rejects the ability;
++// SpellAbility -- Forge's union base -- admits the ability.
++func TestSpellBaseAgreesAcrossTextualAndCompiledArms(t *testing.T) {
++	g, _ := board(t)
++	ps := CompilePredicatePrograms([]string{"Spell", "SpellAbility"})
++	spell := &state.Object{ID: 1, Zone: state.ZStack, StackKind: state.StackKindSpell, StackKindKnown: true}
++	ability := &state.Object{ID: 2, Zone: state.ZStack, StackKind: state.StackKindActivated, StackKindKnown: true}
++	cmp := func(name string, got, want bool) {
++		t.Helper()
++		if got != want {
++			t.Errorf("%s = %v, want %v", name, got, want)
++		}
++	}
++	cmp("textual Spell on a spell", matchesBase(g, "Spell", spell, SpecContext{}), true)
++	cmp("textual Spell on an ability", matchesBase(g, "Spell", ability, SpecContext{}), false)
++	cmp("textual SpellAbility on an ability", matchesBase(g, "SpellAbility", ability, SpecContext{}), true)
++	cmp("compiled Spell on a spell", compiledMatch(compileSpec("Spell"), g, spell, &SpecContext{}), true)
++	cmp("compiled Spell on an ability", compiledMatch(compileSpec("Spell"), g, ability, &SpecContext{}), false)
++	cmp("compiled SpellAbility on an ability", compiledMatch(compileSpec("SpellAbility"), g, ability, &SpecContext{}), true)
++	cmpResult := func(name string, got, want PredicateResult) {
++		t.Helper()
++		if got != want {
++			t.Errorf("%s = %v, want %v", name, got, want)
++		}
++	}
++	cmpResult("predicate Spell on a spell", ps.Evaluate("Spell", g, spell, SpecContext{}), PredicateYes)
++	cmpResult("predicate Spell on an ability", ps.Evaluate("Spell", g, ability, SpecContext{}), PredicateNo)
++	cmpResult("predicate SpellAbility on an ability", ps.Evaluate("SpellAbility", g, ability, SpecContext{}), PredicateYes)
++}
+diff --git a/engine/effects/filter.go b/engine/effects/filter.go
+index c43ef5d7..1617785d 100644
+--- a/engine/effects/filter.go
++++ b/engine/effects/filter.go
+@@ -2829,15 +2829,16 @@ func matchesBase(g *state.Game, base string, o *state.Object, sc SpecContext) bo
+ 		// depends on.
+ 		return o.Face() != nil && o.Face().IsPermanent()
+ 	case matchesBaseSpell:
+-		return o.Zone == state.ZStack || sc.AsStack
++		return (o.Zone == state.ZStack || sc.AsStack) && spellStackObject(o)
+ 	case matchesBaseSpellAbility:
+ 		// Forge's SpellAbility base (ValidSource$ SpellAbility.OppCtrl on the
+ 		// "becomes the target of a spell or ability" family -- Thunderbreak
+ 		// Regent and 51 more files): any spell or ability object on the stack.
+-		// The shared filter draws the Spell/SpellAbility line by zone alone;
+-		// the card-spell-only distinction TargetType$ Spell draws
+-		// (engine/rules/stack.go's stack kind tokens) is that machinery's own, not
+-		// this one's.
++		// Spell (above) requires a spell stack entry and rejects an ability
++		// (CR 112.1, 113.3b); SpellAbility is the union base and keeps the
++		// zone-only reading. The card-spell-only distinction TargetType$ Spell
++		// draws (engine/rules/stack.go's stack kind tokens) is that
++		// machinery's own, not this one's.
+ 		return o.Zone == state.ZStack
+ 	case matchesBaseOutlaw, matchesBaseHistoric:
+ 		return batchWordBase(matchesBaseCodes.Code(string(base)), o, sc)
+@@ -2845,6 +2846,21 @@ func matchesBase(g *state.Game, base string, o *state.Object, sc SpecContext) bo
+ 	return hasTypeCtx(o, base, sc)
+ }
+ 
++// spellStackObject reports whether o is a spell on the stack, as opposed to
++// an ability object. CR 112.1: "A spell is a card on the stack"; an activated
++// or triggered ability is not a card (CR 113.3b, 113.3c). The stamped stack
++// kind is authoritative when an event minted the object; a legacy or manually
++// constructed object falls back to its printed face, which only a card has.
++func spellStackObject(o *state.Object) bool {
++	if o == nil {
++		return false
++	}
++	if o.StackKindKnown {
++		return o.StackKind == state.StackKindSpell
++	}
++	return o.Face() != nil
++}
++
+ // batchWordBase dispatches batch-word bases through their shared evaluators.
+ func batchWordBase(code matchesBaseCode, o *state.Object, sc SpecContext) bool {
+ 	switch code {
+diff --git a/engine/effects/filter_compiled.go b/engine/effects/filter_compiled.go
+index 74c300e5..bc839c2f 100644
+--- a/engine/effects/filter_compiled.go
++++ b/engine/effects/filter_compiled.go
+@@ -405,7 +405,14 @@ func compiledBaseMatch(g *state.Game, a *compiledAlt, o *state.Object, sc *SpecC
+ 	case cbPermanentCard:
+ 		m = o.Face() != nil && o.Face().IsPermanent()
+ 	case cbSpell:
+-		m = o.Zone == state.ZStack || (a.base == "Spell" && sc.AsStack)
++		// cbSpell serves BOTH spellings: Spell is a card on the stack (and a
++		// derived AsStack cast announcement); SpellAbility is any stack
++		// object, so it must keep admitting abilities (CR 112.1, 113.3).
++		if a.base == "Spell" {
++			m = (o.Zone == state.ZStack || sc.AsStack) && spellStackObject(o)
++		} else {
++			m = o.Zone == state.ZStack
++		}
+ 	case cbBatchWord:
+ 		base := a.base
+ 		for {
+diff --git a/engine/effects/filter_is_targeting_test.go b/engine/effects/filter_is_targeting_test.go
+index 79d74590..223283e2 100644
+--- a/engine/effects/filter_is_targeting_test.go
++++ b/engine/effects/filter_is_targeting_test.go
+@@ -212,14 +212,15 @@ func TestSpellIsTargetingBaseQualifiedOnly(t *testing.T) {
+ 	}
+ }
+ 
+-// TestSpellIsTargetingAbilityOnStack pins the SpellAbility half of the form
+-// against a real ability-classified stack object: positive and negative
++// TestSpellIsTargetingAbilityOnStack pins the Spell/SpellAbility split of the
++// form against a real ability-classified stack object: positive and negative
+ // cases through the SHARED matcher (not the condition gate), so the
+ // SpellAbility spelling the previous round left untested is now exercised.
+ //
+-// The intended distinction from Spell is a base check, not a different
+-// answer: matchesBase draws the shared Spell/SpellAbility line by ZONE alone
+-// (both require a stack object), while the condition gate (conditions.go's
++// The distinction is the RULE, not a different answer: CR 112.1 makes a spell
++// a card on the stack, while an activated ability is not a spell (CR 113.3b).
++// SpellAbility is Forge's union base and admits the ability; Spell requires a
++// spell stack entry and rejects it. The condition gate (conditions.go's
+ // isSpellTargetingPresent) deliberately BYPASSES the base because a
+ // triggering spell may already have left the stack. The shared matcher keeps
+ // the base, so an off-stack object with the same targets fails closed.
+@@ -251,10 +252,10 @@ func TestSpellIsTargetingAbilityOnStack(t *testing.T) {
+ 	if !MatchesSpecCtx(g, "SpellAbility.IsTargeting Valid Creature", ability.ID, sc) {
+ 		t.Fatal("an ability targeting a creature must match the target spec")
+ 	}
+-	// The Spell spelling answers the same on the same stack object -- the
+-	// shared base line is zone-only, documented above.
+-	if !MatchesSpecCtx(g, "Spell.IsTargeting Valid Creature", ability.ID, sc) {
+-		t.Fatal("the Spell spelling must answer a stack object the same way")
++	// CR 112.1/113.3b: the Spell spelling requires a spell stack entry, so an
++	// ability must NOT match it; SpellAbility, Forge's union base, still does.
++	if MatchesSpecCtx(g, "Spell.IsTargeting Valid Creature", ability.ID, sc) {
++		t.Fatal("the Spell spelling must reject an ability stack object (CR 112.1, 113.3b)")
+ 	}
+ 	// A non-matching target fails.
+ 	ability.Targets = []state.Target{{Obj: id["myLand"]}}
+diff --git a/engine/rules/farm_giggling_skitterspike_test.go b/engine/rules/farm_giggling_skitterspike_test.go
+new file mode 100644
+index 00000000..0c67d196
+--- /dev/null
++++ b/engine/rules/farm_giggling_skitterspike_test.go
+@@ -0,0 +1,51 @@
++package rules
++
++import (
++	"testing"
++
++	"github.com/adams-shaun/gorge/engine/events"
++	"github.com/adams-shaun/gorge/engine/state"
++	"github.com/adams-shaun/gorge/testkit/testutil"
++)
++
++func TestFarmGigglingSkitterspike(t *testing.T) {
++	t.Parallel()
++	reg := testutil.CorpusRegistry(t)
++	spikeCard := mustCorpusCard(t, reg, "Giggling Skitterspike")
++	trig := corpusTriggerMode(t, spikeCard, "BecomesTarget")
++	if got := trig.Params["ValidSource"]; got != "Spell" {
++		t.Fatalf("corpus fixture drift: Skitterspike's ValidSource$ = %q, want Spell", got)
++	}
++
++	// Leg 1: an ACTIVATED ability targeting Skitterspike must not trigger it.
++	e, ids := becomesTargetOnceBoard(t, reg,
++		[]string{"Giggling Skitterspike", "Prodigal Pyromancer"}, nil)
++	spike, pyro := ids["Giggling Skitterspike"], ids["Prodigal Pyromancer"]
++	e.G.Active, e.G.Priority = 0, 0
++	e.askPriority(0)
++	opt := abilityOption(t, e, pyro, 0)
++	submitChoices(t, e, opt.Index)
++	submitChoices(t, e, targetOptionIdx(t, e, spike))
++	passUntilStackEmpty(t, e, 40)
++	if n := skitterspikeTriggerPushes(e, spike); n != 0 {
++		t.Fatalf("Prodigal Pyromancer's activated ability pushed Skitterspike's becomes-target trigger %d time(s), want 0 (CR 112.1, 113.3b, 115.1c: an ability is not a spell)", n)
++	}
++
++	// Leg 2 (positive control): a SPELL targeting Skitterspike does trigger it.
++	e2, ids2 := targetingBoard(t, reg,
++		[]string{"Giggling Skitterspike"},
++		[]string{"Lightning Strike"})
++	spike2, strike := ids2["Giggling Skitterspike"], ids2["Lightning Strike"]
++	e2.G.Players[1].Pool[state.MR] = 3
++	castStrikeAt(t, e2, strike, spike2, 1)
++	passUntilStackEmpty(t, e2, 40)
++	pushes := 0
++	for _, ev := range e2.L.Events {
++		if ev.Kind == events.TriggerPush && ev.Obj == spike2 {
++			pushes++
++		}
++	}
++	if pushes == 0 {
++		t.Fatal("Lightning Strike targeting Skitterspike pushed no becomes-target trigger, want at least one (CR 112.1: a card on the stack is a spell)")
++	}
++}
