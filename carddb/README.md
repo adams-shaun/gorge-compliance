@@ -26,3 +26,49 @@ CI (`.github/workflows/carddb.yml`) runs both on PRs touching `carddb/**` and on
 pushes to the `carddb` branch.
 
 The data derives from MTGJSON (MIT); see NOTICE.
+
+## The tool (Python, stdlib only)
+
+`cmd/carddb/main.py` is the write path and the builder; `go run ./cmd/carddb` stays
+the validate/boundary checker CI runs. Run it as `python3 -I cmd/carddb/main.py <verb>`;
+the Python API is `import carddb` with `cmd/carddb/py` on the path.
+
+| verb | does |
+|---|---|
+| `init [--private]` | clone `$CARDDB_HOME/public` (branch `carddb`) or `private` (`carddb-private`), or create the orphan branch when the remote has none |
+| `put TABLE [--source ID] [--version V] < rows.tsv` | flock, merge rows by key into the touched shards, validate + boundary, update `_meta/writers`, `git add`. stdin: a column-name line then rows. A rerun changes no byte. `carddb.put(table, rows, writer=...)` is the API |
+| `publish [--bulk] [--private]` | one commit `carddb: <writers> <n> rows @<gorge12>`, rebase onto the remote branch, push fast-forward; refuses over 50000 changed lines without `--bulk`; no-op when nothing is staged |
+| `merge-driver %O %A %B %P` | the git driver `*.tsv merge=carddb` (registered in each clone's config) |
+| `build [--private] [--text FILE]` | SQLite from the shards + curated files + committed sources read from `origin/main` (`--ref`, or `--src-dir`) |
+| `fetch [--private]` | `gh release download carddb-latest` into `$CARDDB_HOME` |
+| `validate`, `boundary` | the Python mirror of the Go checks (a parity test keeps them in step) |
+
+Env: `CARDDB_HOME` (default `~/.local/share/carddb`), `CARDDB_PUBLIC_REMOTE` (default the
+GitHub repo), `CARDDB_PRIVATE_REMOTE` (four-yay, required for the private store),
+`CARDDB_WRITER`, `CARDDB_WRITER_VERSION`. Tests: `make carddb-test`.
+
+Shard paths: a table keyed on `oracle_id` shards on its first two hex digits (`x:<sha1>`
+pseudo ids on `x` + two digits), `printings` by set, every other table is one file. A key lives in
+one shard only: a `put` that re-homes a printing (another `set_code`) removes the old copy and deletes
+a shard it empties, and `put`, `publish` and `build` all refuse a tree whose table holds a key in two
+shards (the Go validator's rule, checked across the whole table, not per file).
+
+`status`, `cert`, `cert_sets` and `evidence` carry a `writer` column: `put` stamps every row that has
+none with its `--source`/`writer=`, and a rerun by a lower-priority writer does not overwrite a row a
+higher one wrote with the same data.
+
+Merge rule (a conflict never reaches a human): per key against the common ancestor; a key both
+sides changed differently resolves by the newer timestamp column (`measured_at`, else
+`measured`, `declared`, `ran`, `retrieved`: the first the table has), then the writer priority
+(`ci` > `cert` > `loop`, from the row's `writer` column), then the greater row
+bytes, so both clones converge. A modify beats a delete. The merged file is re-validated.
+
+`validate` and `boundary` (this tool's Python verbs, and the Go ones) walk every file but `.git`:
+a shard behind another extension is refused, `schema/` may hold only the schema's own declarations.
+
+The SQLite file: one table per schema table (`/` and `-` become `_`), `card_names`
+(norm_name -> oracle_id), `card_fts` (FTS5 over name, type_line, keywords, labels; plus Oracle
+text with `--text`, which writes `carddb-text.sqlite`, never the published file),
+`src_manifest_*` and `src_diagnosed` (the committed sources) and `build_meta`. The FTS `keywords`
+column is `cards.keywords`; a `--ref` that lacks one of the committed source paths (origin/main
+before the curated tree was promoted) just has none of those inputs.

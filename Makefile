@@ -80,6 +80,7 @@ help:
 	@echo "  make test-one PKG=./p RUN=TestX — one capped, corpus-checked test run with one verdict line"
 	@echo "  make pr [PR_BASE=main] [DRY=1] — open/refresh a GitHub PR with a generated change overview"
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
+	@echo "  make carddb-test    — the carddb tool's Python tests (cmd/carddb/py/tests; git + python3 only, no network)"
 	@echo "  make oracle-audit   — the hand Oracle-text audit + XMage ports (audit/; ORACLE_RUN=<Card> to filter)"
 	@echo "  make compliance-status — per-set/per-format compliance status (oracle/compliance/status.md, never committed) + ratchet check"
 	@echo "  make compliance-sets — both levels over every printed set -> .coverage/compliance-sets.md"
@@ -145,6 +146,12 @@ phase-preflight:
 
 boundary:
 	GORGE_TEST_WRAPPER=1 go test -count=1 ./internal/boundary/
+
+# carddb-test runs the Python carddb tool's tests (put, publish, merge driver, build, fetch);
+# CARDDB_UPDATE_GOLDEN=1 rewrites cmd/carddb/py/tests/golden after a deliberate schema change.
+.PHONY: carddb-test
+carddb-test:
+	python3 -I -m unittest discover -s cmd/carddb/py/tests -t cmd/carddb/py
 
 # oracle-audit runs both scenario corpora through gorge's runner: the hand
 # Oracle-text audit (scenarios/oracle plus gorge's residual
