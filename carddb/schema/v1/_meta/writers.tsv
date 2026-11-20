@@ -1,0 +1,6 @@
+#carddb-schema _meta/writers v1
+name	type	required	key	visibility	doc
+writer	string	yes	yes	public	Name of the program that wrote a table
+table	string	yes	yes	public	Table written
+version	string	yes	no	public	Writer version or commit
+ran	date	yes	no	public	Date of the run, YYYY-MM-DD

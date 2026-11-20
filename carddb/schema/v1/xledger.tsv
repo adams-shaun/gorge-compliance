@@ -1,0 +1,6 @@
+#carddb-schema xledger v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	cards.oracle_id
+tier	string	yes	yes	public	mtgish ledger tier: T1..T4
+state	string	yes	no	public	Ledger state of the card in the tier
+note	string	no	no	public	Free-form one-line note

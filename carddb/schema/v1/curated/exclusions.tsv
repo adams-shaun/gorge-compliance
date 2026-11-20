@@ -1,0 +1,4 @@
+#carddb-schema curated/exclusions v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	cards.oracle_id excluded from the data set
+reason	string	yes	no	public	Why the card is excluded

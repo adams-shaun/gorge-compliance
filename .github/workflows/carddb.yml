@@ -1,0 +1,70 @@
+# carddb: the schema validator and the public-boundary check (cmd/carddb,
+# internal/carddb) over the carddb tree.
+#
+#   pull request   touching carddb/** (or the checker itself): the committed
+#                  carddb/ tree (schema + curated inputs) must validate and
+#                  hold nothing private or Forge-shaped.
+#   push to the `carddb` branch: the published data branch (orphan, like
+#                  docs-data) must validate and pass the boundary. The checker
+#                  and the schema are taken from main, not from the branch
+#                  under test, so a bad push cannot loosen its own check.
+#
+# A workflow file runs from the branch that was pushed, so the `carddb` branch
+# must carry a copy of this file for the push trigger to fire.
+name: carddb
+
+on:
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'carddb/**'
+      - 'cmd/carddb/**'
+      - 'internal/carddb/**'
+      - '.github/workflows/carddb.yml'
+  push:
+    branches: [carddb]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: carddb-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  GOWORK: 'off'
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      # the checker and schema: this PR's head, or main for a push to carddb
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'push' && 'main' || github.sha }}
+          path: tool
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: github.event_name == 'push'
+        with:
+          path: data
+          persist-credentials: false
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: tool/go.mod
+          cache: false
+      - name: Build the checker
+        working-directory: tool
+        run: go build -trimpath -o ../carddb-bin ./cmd/carddb
+      - name: Pick the tree
+        id: tree
+        run: |
+          if [ "${{ github.event_name }}" = push ]; then
+            echo "dir=$GITHUB_WORKSPACE/data" >> "$GITHUB_OUTPUT"
+          else
+            echo "dir=$GITHUB_WORKSPACE/tool/carddb" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Validate the shards
+        run: ./carddb-bin validate -schema tool/carddb/schema -scope public -tree "${{ steps.tree.outputs.dir }}"
+      - name: Public boundary
+        run: ./carddb-bin boundary -schema tool/carddb/schema -tree "${{ steps.tree.outputs.dir }}"

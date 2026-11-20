@@ -1,0 +1,5 @@
+#carddb-schema cert v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	cards.oracle_id
+level	string	yes	no	public	Declared certification level
+declared	date	yes	no	public	Date declared, YYYY-MM-DD

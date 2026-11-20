@@ -1,0 +1,142 @@
+package carddb
+
+import (
+	"bufio"
+	"fmt"
+	"io"
+	"os"
+	"path/filepath"
+	"regexp"
+	"strings"
+)
+
+// privateTableNames are tables that are never published, named here as well
+// as in the schema so the boundary holds even against a schema that was
+// edited to call one public.
+var privateTableNames = map[string]bool{
+	"text": true, "tags": true, "edhrec": true, "prims": true,
+	"values": true, "labels_private": true, "decks": true,
+}
+
+// forbiddenFieldRe names the fields no public tree may carry, in any table.
+var forbiddenFieldRe = regexp.MustCompile(`(?i)^(oracle_text|price.*|prims|tagger|edhrec.*|value.*)$`)
+
+// ForbiddenField reports whether name is a field the public boundary bans.
+func ForbiddenField(name string) bool { return forbiddenFieldRe.MatchString(name) }
+
+// forgeLineRe is the shape of a Forge card-script line (Forge is GPL-3.0;
+// none may reach a public tree).
+var forgeLineRe = regexp.MustCompile(`^A:|^SVar:|^T:Mode\$|^S:Mode\$|\$ [A-Z]`)
+
+// jsonFieldRe finds a banned field used as a JSON key in a .json/.jsonl file.
+var jsonFieldRe = regexp.MustCompile(`(?i)"(oracle_text|price[a-z0-9_]*|prims|tagger|edhrec[a-z0-9_]*|value[a-z0-9_]*)"\s*:`)
+
+// Boundary checks that the tree (everything under it but .git) holds nothing
+// that must not be published: no private table or column, no field with a
+// banned name, no Forge-script-shaped line in any file. The schema directory
+// (SchemaDir) declares private tables by name, so it is exempt from the
+// table and field checks but not from the Forge-line scan.
+func Boundary(s *Schema, tree string) ([]Violation, error) {
+	files, err := treeFiles(tree)
+	if err != nil {
+		return nil, err
+	}
+	var out []Violation
+	for _, rel := range files {
+		abs := filepath.Join(tree, filepath.FromSlash(rel))
+		f, err := os.Open(abs)
+		if err != nil {
+			return nil, err
+		}
+		vs, err := boundaryFile(s, rel, f)
+		f.Close()
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, vs...)
+	}
+	return out, nil
+}
+
+func boundaryFile(s *Schema, rel string, r io.Reader) ([]Violation, error) {
+	var out []Violation
+	add := func(line int, f string, a ...any) { out = append(out, Violation{rel, line, fmt.Sprintf(f, a...)}) }
+	data := !isSchemaPath(rel)
+	isTSV := strings.HasSuffix(rel, ".tsv")
+	isJSON := strings.HasSuffix(rel, ".json") || strings.HasSuffix(rel, ".jsonl")
+	if data {
+		for _, comp := range strings.Split(strings.TrimSuffix(rel, ".tsv"), "/") {
+			if privateTableNames[comp] {
+				add(0, "path names private table %q", comp)
+			} else if ForbiddenField(comp) {
+				add(0, "path names forbidden field %q", comp)
+			}
+		}
+	}
+	table := ""
+	br := bufio.NewReaderSize(r, 1<<16)
+	for ln := 1; ; ln++ {
+		line, err := br.ReadString('\n')
+		if len(line) > 0 {
+			line = strings.TrimRight(line, "\r\n")
+			if forgeLineRe.MatchString(line) {
+				add(ln, "Forge-script-shaped line (pattern %s)", forgeLineRe)
+			}
+			if data && isTSV && ln == 1 {
+				table = headerTable(s, rel, line, add)
+			} else if data && isTSV && ln == 2 {
+				columnViolations(s, table, line, func(f string, a ...any) { add(ln, f, a...) })
+			}
+			if data && isJSON {
+				if m := jsonFieldRe.FindStringSubmatch(line); m != nil {
+					add(ln, "field %q is forbidden in a public tree", m[1])
+				}
+			}
+		}
+		if err == io.EOF {
+			return out, nil
+		}
+		if err != nil {
+			return nil, err
+		}
+	}
+}
+
+// headerTable checks the `#carddb` line of a data shard and returns the
+// table it names ("" when the line is not a shard header).
+func headerTable(s *Schema, rel, line string, add func(int, string, ...any)) string {
+	table, _, ok := ParseShardHeader(line)
+	if !ok {
+		add(1, "not a carddb shard: first line %q is not `#carddb <table> v<N>`", clip(line))
+		return ""
+	}
+	if privateTableNames[table] {
+		add(1, "private table %q", table)
+	} else if t := s.Tables[table]; t != nil && t.IsPrivate() {
+		add(1, "private table %q", table)
+	}
+	return table
+}
+
+// columnViolations checks a shard's column-header line: no banned field name,
+// no column the schema declares private for the table.
+func columnViolations(s *Schema, table, line string, add func(string, ...any)) {
+	var t *Table
+	if table != "" {
+		t = s.Tables[table]
+	}
+	for _, name := range strings.Split(line, "\t") {
+		if ForbiddenField(name) {
+			add("field %q is forbidden in a public tree", name)
+			continue
+		}
+		if t == nil {
+			continue
+		}
+		for _, c := range t.Columns {
+			if c.Name == name && c.Visibility == Private {
+				add("column %q of table %q is private", name, table)
+			}
+		}
+	}
+}

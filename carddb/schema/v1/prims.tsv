@@ -1,0 +1,4 @@
+#carddb-schema prims v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	private	cards.oracle_id
+prims	string	yes	no	private	Primitive decomposition
