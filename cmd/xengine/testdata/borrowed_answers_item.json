@@ -1,0 +1,228 @@
+{
+ "id": "xe:RAND:2:7:w16",
+ "card": "",
+ "template": "xengine-window",
+ "payment": [
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "RRGGGG",
+  "",
+  "",
+  "",
+  "",
+  ""
+ ],
+ "name": "xengine window RAND-c2-g7-0-BG vs RAND-c2-g7-1-RG turn 16",
+ "turn": 1,
+ "cr": [],
+ "why": "One turn of a recorded gorge game between two explore bots, replayed from its first precombat main phase.",
+ "setup": {
+  "p0": {
+   "battlefield": [
+    "Forest",
+    "Forest",
+    "Forest",
+    "Mountain",
+    "Forest",
+    "Mountain",
+    "Dusyut Earthcarver",
+    "Mountain",
+    "Titan of Industry"
+   ],
+   "hand": [
+    "Warbriar Blessing",
+    "Mountain",
+    "Weirding Wood",
+    "Follow the Lumarets",
+    "Wakanda Forever!",
+    "Forest"
+   ],
+   "graveyard": [
+    "Krosan Tusker",
+    "Trudge Garden"
+   ],
+   "library_top": [
+    "Mountain",
+    "Forest",
+    "Apex Devastator",
+    "Forest",
+    "Cankerbloom",
+    "Bristling Boar",
+    "Annoyed Altisaur",
+    "Spore Swarm",
+    "Mountain",
+    "Forest",
+    "Mountain",
+    "Gilanra, Caller of Wirewood",
+    "New Frontiers",
+    "Canopy Surge",
+    "Voracious Hydra",
+    "Exploration",
+    "Stonehoof Chieftain",
+    "Planar Engineering",
+    "Thunderfoot Baloth",
+    "Forest",
+    "First Contact",
+    "Shroofus Sproutsire",
+    "Forest"
+   ],
+   "counters": {
+    "Dusyut Earthcarver": {
+     "P1P1": 3
+    }
+   },
+   "life": 14
+  },
+  "p1": {
+   "battlefield": [
+    "Forest",
+    "Forest",
+    "Forest",
+    "Wall of Roots",
+    "Swamp",
+    "Saber Ants",
+    "Forest",
+    "Vitu-Ghazi Inspector",
+    "Genesis Device",
+    "Swamp"
+   ],
+   "tapped": [
+    "Swamp"
+   ],
+   "tapped_after_untap": [
+    "Forest#3",
+    "Forest#4"
+   ],
+   "hand": [
+    "Web of Life and Destiny",
+    "Species 8472"
+   ],
+   "graveyard": [
+    "New Frontiers",
+    "Giant Spider",
+    "Warbriar Blessing"
+   ],
+   "library_top": [
+    "Forest",
+    "Wildgrowth Archaic",
+    "Walker of the Grove",
+    "Veteran Explorer",
+    "Swamp",
+    "Lignify",
+    "Crashing Footfalls",
+    "Swamp",
+    "Elven Riders",
+    "Yuna's Decision",
+    "Enlarge",
+    "Swamp",
+    "Forest",
+    "Annoyed Altisaur",
+    "Swamp",
+    "Cankerbloom",
+    "Forest",
+    "Swamp",
+    "Spore Swarm",
+    "Forest",
+    "Forest",
+    "Dr. Leonard \"Bones\" McCoy",
+    "Fangren Marauder",
+    "Forest",
+    "Shroofus Sproutsire"
+   ],
+   "life": 18
+  }
+ },
+ "steps": [
+  {
+   "op": "play",
+   "seat": 0,
+   "card": "p0:Forest#5"
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest#2",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest#3",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest#4",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Mountain#2",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Mountain#3",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest#5",
+   "ability_index": 0
+  },
+  {
+   "op": "cast",
+   "seat": 0,
+   "card": "p0:Wakanda Forever!"
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest",
+   "answers": [
+    {
+     "kind": "choose",
+     "pick": [
+      "p0:Mountain#5"
+     ]
+    },
+    {
+     "kind": "choose",
+     "pick": [
+      "p0:Forest#6"
+     ]
+    }
+   ],
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Mountain",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Mountain#5",
+   "ability_index": 0
+  }
+ ]
+}
