@@ -152,7 +152,17 @@ bytes, so both clones converge. A modify beats a delete. The merged file is re-v
 `triggers_unmeasured` counts, `scen_level`, `oracle_audit`, `open_deltas`,
 `diagnosed_deltas`, `tickets`, `why` and `witness` (`k=v;` entries). `cert_sets` is the
 job's per-set row. Both carry the `gorge_sha` and `corpus_pin` they were measured at and a
-`measured` date; git history is the pin history. `cert_events` and `cert_runs` are
+`measured` date; git history is the pin history. `cert_sets` also carries the docs site's per-set status (CDB-37), written by the `ci`
+writer's `carddb ingest status` from `oraclediff status -all -json` output: `printed`, the Level A
+columns `a_*` and Level B columns `b_*` (counts, `bucket=n;` problem buckets, declared claims) and the
+`status_*` stamps (date, compliance commit, gorge pin, FORGE_REF, `ratchet_failures`). A set the
+certification job has not written gets a minimal `queued` row (`paper`/`playable` from the status; the
+`new_paper`, `reprints`, `excluded`, `c0`..`c3` and `open` counts are empty); a certified set keeps its
+certification columns and gains only the status ones. `put` replaces a whole row, so the certification
+writer must read the row back and carry the `a_*`, `b_*`, `printed` and `status_*` columns it did not
+measure. `carddb docs-status --db carddb.sqlite --out DIR` turns the built asset back into the
+`status-A.jsonl`, `status-B.jsonl` and `meta.json` shapes gorge's `scripts/docs_sets.py` reads; this
+replaced the force-pushed `docs-data` branch. `cert_events` and `cert_runs` are
 private-only (`--private`) partitions for the job's exact event and run counts.
 
 `validate` and `boundary` (this tool's Python verbs, and the Go ones) walk every file but `.git`:

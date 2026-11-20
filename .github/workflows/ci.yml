@@ -159,7 +159,7 @@ jobs:
       github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'pull_request' && github.base_ref == 'main')
     runs-on: ubuntu-24.04
-    # Writes the docs-data branch (below); everything else here only reads, so
+    # Writes the carddb data branch (below); everything else here only reads, so
     # the checkouts leave no token on disk for a pull request's code to find.
     permissions:
       contents: write
@@ -197,10 +197,13 @@ jobs:
           test -s gorge/.cards/cards.lock || { echo "no .cards corpus: every corpus test would skip"; exit 1; }
           grep -q "${{ steps.cpin.outputs.forge_ref }}" gorge/.cards/cards.lock || { echo ".cards is not at FORGE_REF"; cat gorge/.cards/cards.lock; exit 1; }
           ln -sfn ../gorge/.cards gorge-compliance/.cards
-      # gorge's docs site renders its per-set support table from these files
-      # (gorge docs.yml fetches the docs-data branch, scripts/docs_sets.py
-      # renders it). Level A covers every committed set; Level B only the
-      # sets with a printed card list, which are the ones it is defined for.
+      # gorge's docs site renders its per-set support table from this status.
+      # It no longer travels as files on a docs-data branch: the next step folds
+      # it into the cert_sets columns of the carddb data branch, and the docs
+      # build reads them from the carddb-latest release asset (`carddb
+      # docs-status` turns the asset back into these three files for
+      # scripts/docs_sets.py). Level A covers every committed set; Level B only
+      # the sets with a printed card list, which are the ones it is defined for.
       #
       # oraclediff exits 3 when a ratchet failed over a complete measurement
       # (it takes a built binary to see that: `go run` reports every failure as
@@ -211,34 +214,42 @@ jobs:
         working-directory: gorge-compliance
         shell: bash
         run: |
-          mkdir -p ../docs-data
+          mkdir -p ../status-data
           go build -trimpath -o ../oraclediff ./cmd/oraclediff
           measure() {
             local rc=0
             ../oraclediff status -all -json -procs 4 "$@" 2>> ../measure.err || rc=$?
             [ "$rc" = 0 ] || [ "$rc" = 3 ] || { cat ../measure.err; exit "$rc"; }
           }
-          measure -level A > ../docs-data/status-A.jsonl
-          sets=$(python3 -c 'import json,sys; print(",".join(r["set"] for r in map(json.loads, open(sys.argv[1])) if r.get("printed")))' ../docs-data/status-A.jsonl)
-          measure -level B -sets "$sets" > ../docs-data/status-B.jsonl
+          measure -level A > ../status-data/status-A.jsonl
+          sets=$(python3 -c 'import json,sys; print(",".join(r["set"] for r in map(json.loads, open(sys.argv[1])) if r.get("printed")))' ../status-data/status-A.jsonl)
+          measure -level B -sets "$sets" > ../status-data/status-B.jsonl
           cat ../measure.err
           failures=$(grep -c '^RATCHET FAIL' ../measure.err || true)
-          cat > ../docs-data/meta.json <<EOF
+          cat > ../status-data/meta.json <<EOF
           {"commit": "$(git rev-parse --short=9 HEAD)", "gorge_pin": "$(cat GORGE_PIN)", "forge_ref": "${{ steps.cpin.outputs.forge_ref }}", "date": "$(date -u +%F)", "ratchet_failures": $failures}
           EOF
-      # One force-pushed commit on an orphan branch: the data's history is not
-      # worth keeping, only its latest state.
-      - name: Publish the docs-data branch
+      # The data branch keeps its history (git is the pin history); a rerun with the
+      # same measurement changes no byte and pushes nothing. A push made with the
+      # run's token does not start the carddb workflow, so the nightly carddb run
+      # (04:23 UTC) builds the SQLite and replaces the carddb-latest asset.
+      - name: Fold the status into cert_sets on the carddb branch
         id: publish
         if: github.ref == 'refs/heads/main'
-        working-directory: docs-data
+        working-directory: gorge-compliance
+        shell: bash
+        env:
+          CARDDB_PUBLIC_REMOTE: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+          GIT_TERMINAL_PROMPT: '0'
         run: |
-          git init -q -b docs-data
-          git config user.name "github-actions[bot]"
-          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add status-A.jsonl status-B.jsonl meta.json
-          git commit -q -m "docs-data: compliance status $(date -u +%F)"
-          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" docs-data:docs-data
+          set -euo pipefail
+          export CARDDB_HOME="$RUNNER_TEMP/carddb"
+          python3 -I cmd/carddb/main.py init
+          python3 -I cmd/carddb/main.py ingest status --source ci \
+            --version "$(git rev-parse --short=12 HEAD)" \
+            --status-a ../status-data/status-A.jsonl --status-b ../status-data/status-B.jsonl \
+            --meta ../status-data/meta.json
+          python3 -I cmd/carddb/main.py publish
       - name: Compliance status and ratchet
         working-directory: gorge-compliance
         shell: bash
@@ -255,7 +266,7 @@ jobs:
         run: |
           {
             echo "## Compliance failed at gorge ${{ needs.pin.outputs.ref }}"
-            echo "docs-data publish: ${{ steps.publish.outcome }}"
+            echo "cert_sets status publish: ${{ steps.publish.outcome }}"
             echo '```'
             grep -E '^RATCHET FAIL|^oraclediff:' compliance-status.log || true
             echo '```'
