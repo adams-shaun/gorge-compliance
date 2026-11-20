@@ -123,7 +123,7 @@ _PREFERRED_SECTIONS = (
 
 def _section_order(conn):
     present = [t for t in _PREFERRED_SECTIONS if _has_table(conn, t)]
-    known = set(present) | {"cards", "card_names", "card_fts", "build_meta"}
+    known = set(present) | {"cards", "card_names", "card_fts", "proven", "build_meta"}
     rest = [t for t in _tables(conn)
             if t not in known and not t.startswith("src_") and not t.startswith("card_fts_")
             and not t.startswith("_meta_") and "oracle_id" in _columns(conn, t)]
@@ -257,7 +257,7 @@ def _level_at_least(level):
 
 def _proven_sql(level="C2"):
     levels = _level_at_least(level)
-    return ("SELECT c.oracle_id, c.name, c.type_line, c.mana_value, cert.level, cert.declared "
+    return ("SELECT c.oracle_id, c.name, c.type_line, c.mana_value, cert.level, cert.measured "
             "FROM cards c JOIN cert ON cert.oracle_id=c.oracle_id WHERE cert.level IN (%s)" %
             ", ".join("?" * len(levels))), list(levels)
 
@@ -332,8 +332,8 @@ def run_proven(conn, args, out):
         params.append(args.format)
     sql += " ORDER BY c.name, c.oracle_id"
     rows = _rows(conn, sql, params)
-    _emit(out, ("oracle_id", "name", "type_line", "mana_value", "level", "declared"),
-          [(r["oracle_id"], r["name"], r["type_line"], r["mana_value"], r["level"], r["declared"])
+    _emit(out, ("oracle_id", "name", "type_line", "mana_value", "level", "measured"),
+          [(r["oracle_id"], r["name"], r["type_line"], r["mana_value"], r["level"], r["measured"])
            for r in rows])
 
 
@@ -667,8 +667,8 @@ def run_export(conn, args, schema, meta, out):
         sql, params = _proven_sql()
         rows = _rows(conn, sql + " ORDER BY c.name, c.oracle_id", params)
         print(head, file=out)
-        _emit(out, ("oracle_id", "name", "type_line", "mana_value", "level", "declared"),
-              [(r["oracle_id"], r["name"], r["type_line"], r["mana_value"], r["level"], r["declared"])
+        _emit(out, ("oracle_id", "name", "type_line", "mana_value", "level", "measured"),
+              [(r["oracle_id"], r["name"], r["type_line"], r["mana_value"], r["level"], r["measured"])
                for r in rows])
         return 0
     table = _export_table(conn, args.view, schema)
@@ -703,3 +703,64 @@ def _run(args, conn, schema, meta, out):
     if args.verb == "export":
         return run_export(conn, args, schema, meta, out)
     raise QueryError("%s: not a read verb" % args.verb)
+
+
+# -------------------------------------------------- certification view
+
+PROVEN_LEVELS = ("C2", "C3")
+
+# The columns `carddb proven` prints by default: what a caller needs to act on
+# the row, without the long witness text.
+PROVEN_COLUMNS = ("oracle_id", "norm_name", "name", "level", "first_set", "released", "refs", "measured")
+
+PROVEN_VIEW_SQL = ("CREATE VIEW proven AS SELECT * FROM cert WHERE level IN ('C2', 'C3') "
+                   "AND (exclusion IS NULL OR exclusion = '-')")
+
+
+def is_proven(row):
+    """A cert row counts as proven when it reached C2 or C3 and is not excluded."""
+    return row.get("level") in PROVEN_LEVELS and row.get("exclusion") in (None, "", "-")
+
+
+def proven_rows(rows):
+    """The proven subset of cert rows, sorted by oracle_id then norm_name."""
+    return sorted((r for r in rows if is_proven(r)), key=lambda r: (r.get("oracle_id") or "",
+                                                                     r.get("norm_name") or ""))
+
+
+def proven_from_store(store):
+    if not store.exists():
+        raise StoreError("no public clone at %s: run `carddb init`" % store.dir)
+    return proven_rows(store.rows("cert"))
+
+
+def proven_from_db(path):
+    """The built file's `proven` view as row dicts, in a stable order."""
+    if not os.path.isfile(path):
+        raise StoreError("no built carddb file at %s: run `carddb build`" % path)
+    conn = sqlite3.connect(path)
+    try:
+        conn.execute("PRAGMA query_only=ON")
+        cur = conn.execute("SELECT * FROM proven ORDER BY oracle_id, norm_name")
+        names = [d[0] for d in cur.description]
+        return [dict(zip(names, r)) for r in cur]
+    except sqlite3.DatabaseError as e:
+        raise StoreError("%s: %s" % (path, e))
+    finally:
+        conn.close()
+
+
+def _proven_cell(v):
+    return "-" if v is None or v == "" else str(v)
+
+
+def format_proven(rows, kind="tsv"):
+    """Render proven rows as tsv (default), json or count. Deterministic."""
+    if kind == "count":
+        return "%d\n" % len(rows)
+    if kind == "json":
+        return json.dumps([{c: (None if r.get(c) in (None, "", "-") else r.get(c)) for c in PROVEN_COLUMNS}
+                           for r in rows], sort_keys=True) + "\n"
+    lines = ["\t".join(PROVEN_COLUMNS)]
+    lines += ["\t".join(_proven_cell(r.get(c)) for c in PROVEN_COLUMNS) for r in rows]
+    return "\n".join(lines) + "\n"

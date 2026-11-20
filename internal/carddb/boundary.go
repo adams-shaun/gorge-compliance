@@ -17,6 +17,7 @@ import (
 var privateTableNames = map[string]bool{
 	"text": true, "tags": true, "edhrec": true, "prims": true,
 	"values": true, "labels_private": true, "decks": true,
+	"cert_events": true, "cert_runs": true,
 }
 
 // forbiddenFieldRe names the fields no public tree may carry, in any table.

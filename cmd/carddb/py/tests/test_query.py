@@ -10,6 +10,7 @@ from carddb.boundary import boundary_tree
 from carddb.store import Store
 
 from .helpers import Base, GOLDEN, OID_A, OID_B, OID_C, ROOT, git
+from .test_cert import cert_row
 
 UPDATE = os.environ.get("CARDDB_UPDATE_GOLDEN") == "1"
 
@@ -106,8 +107,8 @@ class Query(Base):
              "measured": "2026-11-19", "writer": "loop"},
         ], writer="loop")
         self.a.put("cert", [
-            {"oracle_id": OID_A, "level": "C2", "declared": "2026-11-19", "writer": "certification"},
-            {"oracle_id": OID_B, "level": "C1", "declared": "2026-11-19", "writer": "certification"},
+            cert_row(OID_A, "Lightning Bolt", "C2", measured="2026-11-19"),
+            cert_row(OID_B, "Fire // Ice", "C1", measured="2026-11-19"),
         ], writer="certification")
         self.a.put("labels", [
             {"oracle_id": OID_A, "label": "burn", "origin": "derived"},

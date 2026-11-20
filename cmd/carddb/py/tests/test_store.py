@@ -320,8 +320,11 @@ class Merge(Base):
         """Same measured date, different verdicts: the writer column decides, whatever the verdict bytes say."""
         for table, row in (("status", lambda v, w: [OID_A, "A", v, "pin", "2026-11-19", w]),
                            ("evidence", lambda v, w: [OID_A, "oracle", "s1", v, w]),
-                           ("cert", lambda v, w: [OID_A, v, "2026-11-19", w])):
-            hi, lo = ("agree", "diverge") if table != "cert" else ("A", "B")
+                           ("cert", lambda v, w: [OID_A, "lightning bolt", "Lightning Bolt", "pin", "pin",
+                                                  "-", "-", "lea", "1993-08-05", v, "-", "-",
+                                                  "1", "1", "1", "1", "0", "0", "B", "ok",
+                                                  "0", "0", "-", "-", "-", "2026-11-19", w])):
+            hi, lo = ("agree", "diverge") if table != "cert" else ("C2", "C0")
             for winner, loser in (("ci", "loop"), ("ci", "cert"), ("cert", "loop")):
                 with self.subTest(table=table, winner=winner, loser=loser):
                     w, l = row(lo, winner), row(hi, loser)  # the loser's value sorts later than the winner's
