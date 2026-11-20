@@ -2,16 +2,22 @@
 
 Ported from four-yay tools/deckbuild/deckdb.py load_engines: a corpus card is
 xmage-listed, xmage-unfinished or xmage-lacks_card from the manifests, and
-forge-listed for every corpus card (Forge covers the whole corpus; the farm's
-failing overrides are a separate writer and merge on top by the newer
-`measured` date, then the writer priority).
+forge-listed for every corpus card (Forge covers the whole corpus).
+
+Matching is on the card's front face (norm_name, like deckdb's nn): listed
+first, then unfinished. The farm's failing overrides (CDB-14, writer `farm`)
+live in the same table at the same keys; a compliance run never overwrites a
+failing row, it leaves it for the farm writer to refresh. For a reproducible
+`measured` date, the caller passes `ran` (the CLI's --measured) or sets
+CARDDB_NOW; without one the run is dated today (UTC) and a rerun on another
+day restamps the rows.
 """
 import glob
 import json
 import os
 import subprocess
 
-from .norm import name_keys, norm_name
+from .norm import norm_name
 from .schema import repo_root
 from .store import StoreError, today
 
@@ -21,10 +27,15 @@ LACKS_CARD_WHY = "no XMage manifest lists it"
 
 def forge_oracle_ref(makefile):
     """FORGE_ORACLE_REF from the Makefile (deckdb.py:434-437), first 10 hex."""
-    with open(makefile, encoding="utf-8") as f:
-        for line in f:
-            if line.startswith("FORGE_ORACLE_REF"):
-                return line.split("=", 1)[1].strip()[:10]
+    try:
+        with open(makefile, encoding="utf-8") as f:
+            for line in f:
+                if line.startswith("FORGE_ORACLE_REF"):
+                    if "=" not in line:
+                        raise StoreError("compliance: %s: FORGE_ORACLE_REF line has no '='" % makefile)
+                    return line.split("=", 1)[1].strip()[:10]
+    except OSError as e:
+        raise StoreError("compliance: %s: %s" % (makefile, e))
     raise StoreError("compliance: %s has no FORGE_ORACLE_REF line" % makefile)
 
 
@@ -49,6 +60,7 @@ def load_manifests(mdir):
         except (OSError, ValueError) as e:
             raise StoreError("compliance: %s: %s" % (fn, e))
         unf = {norm_name(n) for n in m.get("unfinished") or []}
+        unf.discard("")  # a name that normalises to nothing (e.g. `_____`) cannot be matched
         unfinished |= unf
         for c in m.get("cards") or []:
             n = c.get("name") or ""
@@ -60,17 +72,16 @@ def load_manifests(mdir):
 
 
 def support_rows(cards, listed, unfinished, xmage_pin, forge_pin, measured):
-    """One xmage row and one forge row per corpus card (deckdb.py:460-482): a card
-    is unfinished when its front face is in a manifest's unfinished list, listed
-    when any of its faces is listed, else lacks_card; forge is listed for every
-    corpus card."""
+    """One xmage row and one forge row per corpus card (deckdb.py:486-491): matched
+    on the card's front face (norm_name, deckdb's nn) — listed first, then
+    unfinished, else lacks_card; forge is listed for every corpus card."""
     rows = []
     for oid, name in cards:
-        keys = name_keys(name)
-        if keys[0] in unfinished:
-            st, why = "unfinished", UNFINISHED_WHY
-        elif any(k in listed for k in keys):
+        nn = norm_name(name)
+        if nn in listed:
             st, why = "listed", ""
+        elif nn in unfinished:
+            st, why = "unfinished", UNFINISHED_WHY
         else:
             st, why = "lacks_card", LACKS_CARD_WHY
         rows.append({"oracle_id": oid, "engine": "xmage", "status": st, "pin": xmage_pin,
@@ -90,6 +101,10 @@ def run(store, repo=None, writer="ci", version=None, ran=None):
     xmage_pin = compliance_rev(repo)
     forge_pin = forge_oracle_ref(os.path.join(repo, "Makefile"))
     rows = support_rows(store.cards(), listed, unfinished, xmage_pin, forge_pin, today(ran))
+    failing = {(r["oracle_id"], r["engine"]) for r in store.rows("support")
+               if r["status"] == "failing"}
+    if failing:
+        rows = [r for r in rows if (r["oracle_id"], r["engine"]) not in failing]
     counts = {}
     for r in rows:
         counts[(r["engine"], r["status"])] = counts.get((r["engine"], r["status"]), 0) + 1
