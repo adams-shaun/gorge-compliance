@@ -23,7 +23,12 @@ const (
 	baseLands       = 17
 	extraLands      = 2 // a Lands need
 	enablerCopies   = 2
-	fillerMaxCMC    = 5
+	// BandingCopies is the creatures with banding a Banding need puts in the
+	// target deck, the target's own copies included: a band forms only when
+	// two or more attackers are offered it (CR 702.22c-d), and a random bot
+	// that is offered the choice takes it about half the time.
+	BandingCopies = 8
+	fillerMaxCMC  = 5
 )
 
 var (
@@ -277,6 +282,42 @@ func (b *Builder) assemble(target, salt string, mask uint8, needs []Need, fixed 
 		lists[i] = b.candidates(salt, n, mask)
 	}
 	slots, next := 0, make([]int, len(needs))
+	// A Banding need is met by copies, not a card a round: the creatures with
+	// banding the deck already holds (the target's own copies) count, and
+	// candidates are taken until BandingCopies are in.
+	for i, n := range needs {
+		if n.Class != Banding {
+			continue
+		}
+		have := 0
+		for c, k := range chosen {
+			if b.facts(c).f.IsCreature() && b.facts(c).f.HasKeyword("Banding") {
+				have += k
+			}
+		}
+		for _, cd := range lists[i] {
+			if have >= BandingCopies || slots >= MaxEnablerSlots {
+				break
+			}
+			c := cd.c
+			if exclude[c] || !b.playable(c) {
+				continue
+			}
+			cp := enablerCopies
+			if b.facts(c).f.IsLegendary() {
+				cp = 1
+			}
+			if left := MaxEnablerSlots - slots; cp > left {
+				cp = left
+			}
+			exclude[c] = true
+			chosen[c] = cp
+			slots += cp
+			have += cp
+			d.Provided[n.String()] = append(d.Provided[n.String()], b.facts(c).name)
+		}
+		lists[i] = nil
+	}
 	for progress := true; progress && slots < MaxEnablerSlots; {
 		progress = false
 		for i, n := range needs {
@@ -555,6 +596,17 @@ func (b *Builder) opponentColours(target string, selfMask uint8, needs []Need) u
 	})
 }
 
+// minReach is how many playable suppliers a deck's colours must hold for need n
+// before they count as reaching it: one, except banding, which needs three: the
+// target itself is a candidate when it has banding, and BandingCopies is met by
+// the target's four copies and two cards of two.
+func minReach(n Need) int {
+	if n.Class == Banding {
+		return 3
+	}
+	return 1
+}
+
 // reach is how many playable cards of mask supply need n, counted up to six.
 func (b *Builder) reach(salt string, n Need, mask uint8) int {
 	k := 0
@@ -578,7 +630,7 @@ func (b *Builder) widen(salt string, mask uint8, needs []Need) uint8 {
 		if n.Class == LandType && basicIndex(n.Arg) >= 0 {
 			continue // the mana base's
 		}
-		if b.reach(salt, n, mask) == 0 {
+		if b.reach(salt, n, mask) < minReach(n) {
 			unmet = append(unmet, n)
 		}
 	}
@@ -715,6 +767,9 @@ func supplies(x *facts, n Need) bool {
 		return basicIndex(n.Arg) < 0 && f.IsLand() && !f.IsBasic() && x.has(n.Arg)
 	case Bodies:
 		return f.IsCreature() && x.cmc <= 3
+	case Banding:
+		// Keyword banding only: "bands with other" (702.22b) is not in gorge.
+		return f.IsCreature() && x.cmc <= 4 && f.HasKeyword("Banding")
 	case Life:
 		return nonLand && x.api("GainLife", func(u unit) bool { return u.p["Defined"] == "" || u.p["Defined"] == "You" }) && x.cmc <= 4
 	case Artifacts:

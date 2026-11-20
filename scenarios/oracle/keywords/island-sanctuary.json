@@ -1,0 +1,64 @@
+{
+ "card": "Island Sanctuary",
+ "family": "keywords",
+ "author": "Oracle + CR only",
+ "oracle_sha": "7839d3e7fda8",
+ "scenarios": [
+  {
+   "name": "skipping-the-draw-protects-from-non-flying-attackers",
+   "cr": [
+    "614.1a",
+    "504.1",
+    "508.1b",
+    "702.14c"
+   ],
+   "why": "Oracle: if you would draw a card during your draw step, instead you may skip that draw; if you do, until your next turn you can't be attacked except by creatures with flying and/or islandwalk. p0 controls Island Sanctuary and skips the draw in p0's own draw step; on p1's turn p1's Grizzly Bears may not attack p0, while Wind Drake (flying) may.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Island Sanctuary"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears",
+      "Wind Drake"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "draw",
+     "active": "p0"
+    },
+    {
+     "op": "pass_to",
+     "decision": "attackers",
+     "active": "p1",
+     "answers": [
+      {
+       "kind": "replacement",
+       "pick": [
+        "Yes \u2014 apply the replacement"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "can_attack": {
+      "attacker": "p1:Wind Drake"
+     }
+    },
+    {
+     "can_attack": {
+      "attacker": "p1:Grizzly Bears"
+     },
+     "want": false
+    }
+   ]
+  }
+ ]
+}

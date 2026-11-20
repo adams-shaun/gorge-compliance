@@ -34,6 +34,7 @@ const (
 	Enchantments = "enchantments" // control N enchantments
 	Lands        = "lands"        // control N lands: ramp and a longer mana base
 	LandType     = "landtype"     // Arg: a land type the card names (Forest, Desert): basics of it, or lands with it
+	Banding      = "banding"      // the card is, grants or reads banding (CR 702.22): at least BandingCopies creatures with banding
 
 	OppAttackers = "opp-attackers" // the card blocks: attackers to block
 	OppBlockers  = "opp-blockers"  // the card attacks: blockers to attack into
@@ -49,7 +50,7 @@ var classOrder = map[string]int{}
 
 func init() {
 	for i, c := range []string{Snow, Type, Counters, Token, Graveyard, Equipment, Aura, Bodies, Life,
-		Artifacts, Enchantments, Lands, LandType, OppAttackers, OppBlockers, OppTargets, OppType, OppLandType, OppBurn} {
+		Artifacts, Enchantments, Lands, LandType, Banding, OppAttackers, OppBlockers, OppTargets, OppType, OppLandType, OppBurn} {
 		classOrder[c] = i
 	}
 }
@@ -495,6 +496,14 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 		if wantAura {
 			add(Aura, "")
 		}
+	}
+	// Banding (CR 702.22) forms bands only when several attackers with banding
+	// attack together, and its damage rules (702.22j-k) bite only when a band
+	// is blocked or blocks: the other side needs creatures on both sides of
+	// combat.
+	if strings.Contains(oracle, "banding") || strings.Contains(oracle, "bands with other") {
+		add(Banding, "")
+		blocks, attacks = true, true
 	}
 	if blocks {
 		add(OppAttackers, "")

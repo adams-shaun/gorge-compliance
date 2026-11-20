@@ -48,8 +48,57 @@ type Options struct {
 // scripted answers from a shared script, then as its explore bot does. It holds the
 // bot in a field: an embedded bot's DecideBoard would answer in Decide's place.
 type scripted struct {
-	bot    *heuristic.Bot
+	bot    seatBot
 	script *[]decision.Intent
+}
+
+// seatBot is an explore seat: the bot, or the bot with its band answers made.
+type seatBot interface {
+	seat.Seat
+	WantsPaymentActions() bool
+}
+
+// bandBot is an explore bot that forms bands. gorge's explore bot answers every
+// band declaration (CR 702.22c: one Min 1 / Max 1 choose per banding attacker,
+// option 0 "no more creatures in this band") with option 0, so no band ever
+// attacked in a recorded game. bandBot lets the bot decide first (its random
+// stream is spent exactly as before) and then replaces its answer to a band
+// ask with one picked from a hash of the seed, seat and decision number: every
+// option, the decline included, is as likely as any other, so a band of two
+// forms half the time it is offered one candidate and grows on each re-ask.
+// Nothing else is touched, and a game with no banding creature plays exactly as
+// it did.
+//
+// The bot is a field, not embedded: an embedded bot's DecideBoard would answer
+// in Decide's place (as in scripted).
+type bandBot struct {
+	bot  *heuristic.Bot
+	seed uint64
+	seat int
+}
+
+func (b bandBot) WantsPaymentActions() bool { return b.bot.WantsPaymentActions() }
+
+// bandAsk is whether d is a band declaration ask: a choose whose option 0 is
+// the decline and whose others are the creatures that may join the band.
+func bandAsk(d decision.Decision) bool {
+	return d.Kind == decision.KChoose && len(d.Options) > 1 && d.Options[0].Kind == "band"
+}
+
+func (b bandBot) Decide(ctx context.Context, v view.View, d decision.Decision) (decision.Intent, error) {
+	in, err := b.bot.Decide(ctx, v, d)
+	if err != nil || !bandAsk(d) {
+		return in, err
+	}
+	// splitmix64 of seed, seat and decision: no ambient randomness.
+	x := b.seed ^ uint64(b.seat+1)*0x9e3779b97f4a7c15 ^ d.Seq*0xbf58476d1ce4e5b9
+	x ^= x >> 30
+	x *= 0xbf58476d1ce4e5b9
+	x ^= x >> 27
+	x *= 0x94d049bb133111eb
+	x ^= x >> 31
+	in.Choices = []int{int(x % uint64(len(d.Options)))}
+	return in, nil
 }
 
 func (s scripted) WantsPaymentActions() bool { return s.bot.WantsPaymentActions() }
@@ -104,7 +153,7 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 		dk = append(dk, cs)
 		names[i] = fmt.Sprintf("%s-%d", d.Colours, i)
 		t.Decks[i] = Deck{Name: d.Name, Colours: d.Colours, Cards: append([]string{}, d.Cards...), Commander: d.Commander}
-		bot := heuristic.NewExploreBot(seed ^ (0x9e3779b97f4a7c15 * uint64(i+1))).EnableAutoPayMana()
+		bot := bandBot{bot: heuristic.NewExploreBot(seed ^ (0x9e3779b97f4a7c15 * uint64(i+1))).EnableAutoPayMana(), seed: seed, seat: i}
 		seats[i] = bot
 		if len(script) > 0 {
 			seats[i] = scripted{bot: bot, script: &script}

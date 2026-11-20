@@ -359,6 +359,52 @@ func TestCertdeckNeeds(t *testing.T) {
 		}
 	}
 
+	// A banding creature (CR 702.22) derives the banding need, and every one
+	// gorge plays gets a target deck with at least BandingCopies creatures with
+	// banding (its own copies included), whatever its colour (Timber Wolves
+	// and Nalathni Dragon are green and red, and widen to white), plus an
+	// opponent with attackers and blockers: a band's damage rules apply when it
+	// is blocked or blocks.
+	banders := 0
+	for _, c := range reg.AllCards() {
+		if len(c.Faces) == 0 || !c.Faces[0].IsCreature() || !c.Faces[0].HasKeyword("Banding") || !b.Playable(c) {
+			continue
+		}
+		name := c.Faces[0].Name
+		p := certdeckPlan(t, b, name)
+		banders++
+		for _, n := range []certdeck.Need{{Class: certdeck.Banding}, {Class: certdeck.OppAttackers}, {Class: certdeck.OppBlockers}} {
+			if !hasNeed(p, n) {
+				t.Errorf("%s needs %v, want %v", name, p.Needs, n)
+			}
+		}
+		cnt := map[string]int{}
+		for _, e := range p.Self.File.Cards {
+			cnt[e.Name] = e.Count
+		}
+		have := cnt[name]
+		for _, n := range p.Self.Provided["banding"] {
+			if f := face(n); !f.IsCreature() || !f.HasKeyword("Banding") {
+				t.Errorf("%s: banding provider %s is not a creature with banding", name, n)
+			}
+			have += cnt[n]
+		}
+		if have < certdeck.BandingCopies {
+			t.Errorf("%s (deck %s): %d creatures with banding, want at least %d", name, p.Self.Colours, have, certdeck.BandingCopies)
+		}
+		if n := enablerCopies(p.Self); n > certdeck.MaxEnablerSlots {
+			t.Errorf("%s: %d enabler copies, want at most %d", name, n, certdeck.MaxEnablerSlots)
+		}
+	}
+	if banders < 20 {
+		t.Errorf("only %d banding creatures are playable, want at least 20 of the 24 printed", banders)
+	}
+	// A card that grants banding (Banding Sliver) or reads it gets the class
+	// too, and -need names it.
+	if ns, err := certdeck.ParseNeeds("banding", tc0(t, reg, "Camel"), b.Types()); err != nil || len(ns) != 1 || ns[0].Class != certdeck.Banding || ns[0].Arg != "" {
+		t.Errorf("ParseNeeds banding = %v, %v", ns, err)
+	}
+
 	// A split card is refused with the reason (XMage lists "Cut // Ribbons"
 	// and play -decks -xmage skips a deck that names the front face).
 	if _, err := b.Build("Cut", nil); err == nil || !strings.Contains(err.Error(), "XMage spells") {
@@ -478,4 +524,13 @@ func TestCertdeckPlayable(t *testing.T) {
 			t.Errorf("%s: %d decks, %v, skipped %v, summary %q", name, len(ds), err, info.Skipped, info)
 		}
 	}
+}
+
+func tc0(t *testing.T, reg *cards.Registry, name string) *cards.Card {
+	t.Helper()
+	c, ok := reg.Lookup(name)
+	if !ok {
+		t.Fatalf("%s is not in the corpus", name)
+	}
+	return c
 }
