@@ -218,6 +218,47 @@ func basicIndex(t string) int {
 
 func isLandType(t string) bool { return basicIndex(t) >= 0 || otherLandTypes[t] }
 
+// compoundTypes are subtypes of two words ("Time Lord"). The corpus prints
+// each word as a type of its own, a filter spells them with a space, and both
+// would split into two words: they are carried as one word joined by a hyphen.
+var compoundTypes = []string{"Time Lord"}
+
+// TypeWords is a face's type line with each compound subtype as one word.
+func TypeWords(types []string) []string {
+	out := make([]string, 0, len(types))
+	for i := 0; i < len(types); i++ {
+		joined := false
+		for _, c := range compoundTypes {
+			a, b, _ := strings.Cut(c, " ")
+			if types[i] == a && i+1 < len(types) && types[i+1] == b {
+				out = append(out, a+"-"+b)
+				i++
+				joined = true
+				break
+			}
+		}
+		if !joined {
+			out = append(out, types[i])
+		}
+	}
+	return out
+}
+
+// namedX is a card-name predicate ("namedCommand Tower", "!namedNikara, Lair
+// Scavenger"): the words after it are a card's name, not a type. A name may
+// hold ", "; a bare comma starts the next filter of a list.
+var namedX = regexp.MustCompile(`!?(?:named|sameName)(?:[^+.,|]|, )*`)
+
+// filterText is a card filter with its card names removed and its compound
+// types joined, ready to split into words.
+func filterText(v string) string {
+	v = namedX.ReplaceAllString(v, "")
+	for _, c := range compoundTypes {
+		v = strings.ReplaceAll(v, c, strings.ReplaceAll(c, " ", "-"))
+	}
+	return v
+}
+
 // CreatureTypes is every creature subtype some corpus card prints.
 func CreatureTypes(reg *cards.Registry) map[string]bool {
 	out := map[string]bool{}
@@ -226,7 +267,7 @@ func CreatureTypes(reg *cards.Registry) map[string]bool {
 			if !f.HasTypeWord("Creature") {
 				continue
 			}
-			for _, t := range f.Types {
+			for _, t := range TypeWords(f.Types) {
 				if !coreTypes[t] && !notCreatureTypes[t] {
 					out[t] = true
 				}
@@ -236,8 +277,16 @@ func CreatureTypes(reg *cards.Registry) map[string]bool {
 	return out
 }
 
+// choiceKeys are Valid* parameters that hold a list of choices or an enum, not
+// a card filter: ChooseType's ValidTypes$ lists the types a player may name.
+var choiceKeys = map[string]bool{"ValidTypes": true, "ValidChoices": true, "ValidMessage": true,
+	"ValidKeyword": true, "ValidMode": true, "ValidZone": true, "ValidDestination": true, "ValidSides": true}
+
 // validKey is a parameter whose value is a card filter.
 func validKey(k string) bool {
+	if descriptionKey(k) || choiceKeys[k] {
+		return false
+	}
 	return strings.HasPrefix(k, "Valid") || strings.HasPrefix(k, "Affected") || k == "ChangeType" ||
 		k == "Count" || strings.HasPrefix(k, "Present") || strings.HasPrefix(k, "IsPresent")
 }
@@ -250,7 +299,7 @@ var counterCostX = regexp.MustCompile(`(?:SubCounter|RemoveAnyCounter)<[0-9X]+/(
 
 // descriptionKey is a parameter that holds English text, not a filter.
 func descriptionKey(k string) bool {
-	return strings.HasSuffix(k, "Description") || strings.HasSuffix(k, "Prompt") || k == "Name"
+	return strings.HasSuffix(k, "Description") || strings.HasSuffix(k, "Desc") || strings.HasSuffix(k, "Prompt") || k == "Name"
 }
 
 // Derive reads the needs of c from its script parameters and Oracle text. types
@@ -364,7 +413,8 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 			// A replacement's filter names what it applies to, not what the card
 			// needs to control (Winding Constrictor's Artifact.YouCtrl).
 			counts := !tgt && !u.repl()
-			for _, tok := range wordSplit.Split(v, -1) {
+			vf := filterText(v)
+			for _, tok := range wordSplit.Split(vf, -1) {
 				opp := strings.Contains(v, "OppCtrl") || strings.Contains(v, "Opponent")
 				switch {
 				case tok == "token" || tok == "Token" || tok == "Tokens":
@@ -399,7 +449,7 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 			}
 			if tgt {
 				opp := !strings.Contains(v, "YouCtrl")
-				for _, tok := range wordSplit.Split(v, -1) {
+				for _, tok := range wordSplit.Split(vf, -1) {
 					switch tok {
 					case "Creature":
 						if opp {

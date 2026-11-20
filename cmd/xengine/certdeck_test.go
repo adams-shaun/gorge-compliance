@@ -289,6 +289,62 @@ func TestCertdeckNeeds(t *testing.T) {
 		}
 	}
 
+	// A card name in a filter is not a type: Detention Sphere's
+	// "!namedDetention Sphere" is not the Sphere land type, nor is "namedCommand
+	// Tower" the Tower one, "namedNikara, Lair Scavenger" the Lair one, or
+	// "namedPower Plant Worker" the Plant creature type.
+	for _, c := range []struct{ card, class, arg string }{
+		{"Detention Sphere", certdeck.LandType, "Sphere"},
+		{"Tower Winder", certdeck.LandType, "Tower"},
+		{"Yannik, Scavenging Sentinel", certdeck.LandType, "Lair"},
+		{"Tower Worker", certdeck.Type, "Plant"},
+	} {
+		p := certdeckPlan(t, b, c.card)
+		if hasNeed(p, certdeck.Need{Class: c.class, Arg: c.arg}) {
+			t.Errorf("%s derives %s:%s from a card name in a filter (needs %v)", c.card, c.class, c.arg, p.Needs)
+		}
+		if n := deckCount(p.Self.File, func(s string) bool { return strings.Contains(s, c.arg) && s != p.Target }); n > 0 && c.class == certdeck.LandType {
+			t.Errorf("%s deck holds %d cards named for %s", c.card, n, c.arg)
+		}
+	}
+
+	// ChooseType's ValidTypes$ is a list of choices, not a filter: the card
+	// derives no creature-type need from it.
+	p = certdeckPlan(t, b, "Eclipsed Realms")
+	for _, n := range p.Needs {
+		if n.Class == certdeck.Type || n.Class == certdeck.OppType {
+			t.Errorf("Eclipsed Realms derives %v from a ChooseType list", n)
+		}
+	}
+
+	// "Time Lord" is one creature type the corpus prints as two words.
+	p = certdeckPlan(t, b, "Trenzalore Clocktower")
+	if !hasNeed(p, certdeck.Need{Class: certdeck.Type, Arg: "Time-Lord"}) {
+		t.Errorf("Trenzalore Clocktower needs %v, want type:Time-Lord", p.Needs)
+	}
+	for _, n := range p.Needs {
+		if n.Arg == "Time" || n.Arg == "Lord" {
+			t.Errorf("Trenzalore Clocktower derives %v, want the one type Time-Lord", n)
+		}
+	}
+	if len(p.Self.Provided["type:Time-Lord"]) == 0 {
+		t.Errorf("no Time Lord in the Trenzalore Clocktower deck: %v %s", p.Self.Provided, p.Self.Colours)
+	}
+
+	// A colourless target plays the colours that supply what it needs (the
+	// Halflings of Hobbit Hole are not red).
+	p = certdeckPlan(t, b, "Hobbit Hole")
+	if len(p.Self.Provided["type:Halfling"]) == 0 {
+		t.Errorf("Hobbit Hole deck (%s) holds no Halfling; needs %v", p.Self.Colours, p.Needs)
+	}
+
+	// Whatever a deck provides for a land type is a land that has it.
+	for _, target := range []string{"Arid Mesa", "Krosan Verge", "Detention Sphere", "Command Tower"} {
+		p := certdeckPlan(t, b, target)
+		assertLandTypeProviders(t, b, target, p.Self)
+		assertLandTypeProviders(t, b, target, p.Opponent)
+	}
+
 	// The twelve enabler slots are a cap: no deck, on either side, holds more
 	// than twelve copies of cards picked for a need (Candles of Leng held 13).
 	for _, target := range []string{"Candles of Leng", "Icehide Troll", "Elvish Archdruid", "Kor Spiritdancer", "Hardened Scales", "Treasure Cruise"} {
@@ -322,6 +378,31 @@ func TestCertdeckNeeds(t *testing.T) {
 	}
 	if _, err := certdeck.ParseNeeds("snow,bogus", tc, b.Types()); err == nil || !strings.Contains(err.Error(), "bogus") {
 		t.Errorf("ParseNeeds bogus = %v", err)
+	}
+}
+
+// assertLandTypeProviders: every card provided for a landtype need is a land
+// with that subtype (or the basic of it, for a basic type).
+func assertLandTypeProviders(t *testing.T, b *certdeck.Builder, target string, d certdeck.Deck) {
+	t.Helper()
+	for _, k := range sortedProvidedKeys(d) {
+		arg, ok := strings.CutPrefix(k, "landtype:")
+		if !ok {
+			if arg, ok = strings.CutPrefix(k, "opp-landtype:"); !ok {
+				continue
+			}
+		}
+		for _, name := range d.Provided[k] {
+			c, ok := b.Reg.Lookup(name)
+			if !ok {
+				t.Errorf("%s: %s provider %q is not in the corpus", target, k, name)
+				continue
+			}
+			f := c.Faces[0]
+			if !f.IsLand() || (!f.HasTypeWord(arg) && !strings.HasSuffix(name, arg)) {
+				t.Errorf("%s: %s provider %q is not a land with that type (types %v)", target, k, name, f.Types)
+			}
+		}
 	}
 }
 
@@ -386,6 +467,8 @@ func TestCertdeckPlayable(t *testing.T) {
 				t.Errorf("%s: need %v has no provider in its deck", name, n)
 			}
 		}
+		assertLandTypeProviders(t, b, name, plan.Self)
+		assertLandTypeProviders(t, b, name, plan.Opponent)
 		dir := t.TempDir()
 		if err := writeCertdeckPlan(dir, plan); err != nil {
 			t.Fatal(err)

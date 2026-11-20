@@ -86,7 +86,7 @@ func (b *Builder) facts(c *cards.Card) *facts {
 	}
 	f := c.Faces[0]
 	x := &facts{c: c, f: f, name: f.Name, cmc: int(f.Cmc()), identity: c.ColourIdentity(), subtypes: map[string]bool{}}
-	for _, t := range f.Types {
+	for _, t := range TypeWords(f.Types) {
 		x.subtypes[t] = true
 	}
 	b.cache[c] = x
@@ -192,9 +192,6 @@ func (b *Builder) Build(target string, needs []Need) (*Plan, error) {
 	if selfMask == 0 { // a colourless card plays the colours of the basics it names
 		selfMask = landTypeColours(needs, LandType)
 	}
-	if selfMask == 0 {
-		selfMask = 1 << (rankKey(name, "colour") % 5)
-	}
 	var selfNeeds, oppNeeds []Need
 	for _, n := range needs {
 		if OppSide(n.Class) {
@@ -202,6 +199,16 @@ func (b *Builder) Build(target string, needs []Need) (*Plan, error) {
 		} else {
 			selfNeeds = append(selfNeeds, n)
 		}
+	}
+	if selfMask == 0 && len(selfNeeds) > 0 {
+		// A colourless card plays the pair of colours that best supplies what
+		// it needs (Hobbit Hole's Halflings), as the opponent's deck does.
+		selfMask = b.bestPair(name, name, "self-pair", 0, selfNeeds, nil)
+	}
+	if selfMask == 0 {
+		selfMask = 1 << (rankKey(name, "colour") % 5)
+	} else {
+		selfMask = b.widen(name, selfMask, selfNeeds)
 	}
 	snow, lands := false, false
 	for _, n := range selfNeeds {
@@ -430,9 +437,30 @@ func (b *Builder) assemble(target, salt string, mask uint8, needs []Need, fixed 
 // apportion splits n lands over the colours of mask in proportion to pips
 // (largest remainder; ties go to the colour earlier in WUBRG), every colour of
 // the mask getting at least one.
+//
+// It never returns more than n lands: with fewer lands than colours the n
+// colours with the most pips get one each (ties earlier in WUBRG).
 func apportion(pips [5]int, mask uint8, n int) [5]int {
 	var w [5]int
-	total := 0
+	total, colours := 0, 0
+	for i := 0; i < 5; i++ {
+		if mask&(1<<i) != 0 {
+			colours++
+		}
+	}
+	if n < colours {
+		var out [5]int
+		for ; n > 0; n-- {
+			best := -1
+			for i := 0; i < 5; i++ {
+				if mask&(1<<i) != 0 && out[i] == 0 && (best < 0 || pips[i] > pips[best]) {
+					best = i
+				}
+			}
+			out[best] = 1
+		}
+		return out
+	}
 	for i := 0; i < 5; i++ {
 		if mask&(1<<i) != 0 {
 			w[i] = pips[i]
@@ -516,6 +544,70 @@ func landTypeColours(needs []Need, class string) uint8 {
 // slots it can use), ties and an empty need list broken by a hash of the
 // target, and never the target deck's own mask when another pair does as well.
 func (b *Builder) opponentColours(target string, selfMask uint8, needs []Need) uint8 {
+	return b.bestPair(target, "opponent\x00"+target, "opp-pair", selfMask, needs, func(p uint8) int {
+		n := 0
+		for i := range colourLetters {
+			if landTypeColours(needs, OppLandType)&(1<<i) != 0 && p&(1<<i) != 0 {
+				n += 6 // the basics it must hold are this colour's
+			}
+		}
+		return n
+	})
+}
+
+// reach is how many playable cards of mask supply need n, counted up to six.
+func (b *Builder) reach(salt string, n Need, mask uint8) int {
+	k := 0
+	for _, c := range b.candidates(salt, n, mask) {
+		if b.playable(c.c) {
+			if k++; k >= 6 {
+				break
+			}
+		}
+	}
+	return k
+}
+
+// widen adds one colour to the target's identity when a need it derives has no
+// playable supplier inside it (a Time Lord land is blue; every Time Lord is
+// two colours): the colour that reaches the unmet needs best, ties to the
+// lowest hash. A deck that already reaches every need keeps the identity.
+func (b *Builder) widen(salt string, mask uint8, needs []Need) uint8 {
+	var unmet []Need
+	for _, n := range needs {
+		if n.Class == LandType && basicIndex(n.Arg) >= 0 {
+			continue // the mana base's
+		}
+		if b.reach(salt, n, mask) == 0 {
+			unmet = append(unmet, n)
+		}
+	}
+	if len(unmet) == 0 {
+		return mask
+	}
+	best, bestScore, bestTie := mask, 0, uint64(0)
+	for i := 0; i < 5; i++ {
+		m := mask | 1<<i
+		if m == mask {
+			continue
+		}
+		score := 0
+		for _, n := range unmet {
+			score += b.reach(salt, n, m)
+		}
+		tie := rankKey(salt, "widen"+maskLetters(m))
+		if score > bestScore || (score == bestScore && score > 0 && tie < bestTie) {
+			best, bestScore, bestTie = m, score, tie
+		}
+	}
+	return best
+}
+
+// bestPair is the colour pair of the ten with the most candidates for needs
+// (candidates ranked under salt, each need counted up to six), minus one for
+// avoid; bonus adds a pair's own score. Ties go to the lowest hash of target
+// and tieSalt.
+func (b *Builder) bestPair(target, salt, tieSalt string, avoid uint8, needs []Need, bonus func(uint8) int) uint8 {
 	var pairs []uint8
 	for a := 0; a < 5; a++ {
 		for c := a + 1; c < 5; c++ {
@@ -524,7 +616,7 @@ func (b *Builder) opponentColours(target string, selfMask uint8, needs []Need) u
 	}
 	lists := make([][]cand, len(needs))
 	for i, n := range needs {
-		lists[i] = b.candidates("opponent\x00"+target, n, 31)
+		lists[i] = b.candidates(salt, n, 31)
 	}
 	best, bestScore, bestTie := pairs[0], -1, uint64(0)
 	for _, p := range pairs {
@@ -540,15 +632,13 @@ func (b *Builder) opponentColours(target string, selfMask uint8, needs []Need) u
 			}
 			score += n
 		}
-		for i := range colourLetters {
-			if landTypeColours(needs, OppLandType)&(1<<i) != 0 && p&(1<<i) != 0 {
-				score += 6 // the basics it must hold are this colour's
-			}
+		if bonus != nil {
+			score += bonus(p)
 		}
-		if p == selfMask {
+		if p == avoid {
 			score--
 		}
-		tie := rankKey(target, "opp-pair"+maskLetters(p))
+		tie := rankKey(target, tieSalt+maskLetters(p))
 		if score > bestScore || (score == bestScore && tie < bestTie) {
 			best, bestScore, bestTie = p, score, tie
 		}
