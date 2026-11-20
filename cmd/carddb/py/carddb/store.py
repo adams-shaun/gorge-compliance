@@ -64,6 +64,24 @@ def today(ran=None):
     return datetime.datetime.now(datetime.timezone.utc).date().isoformat()
 
 
+def packed_mib(directory):
+    """The packed size of a git clone in MiB (`git count-objects -v` size-pack), or None.
+
+    The one measurement `freshness`, `size` and `release` report: a data branch's
+    budget is the size of its packfile, not the working tree or the loose objects
+    a not-yet-published run has staged."""
+    p = subprocess.run(["git", "-C", directory, "count-objects", "-v"], capture_output=True, text=True)
+    if p.returncode != 0:
+        return None
+    for line in p.stdout.splitlines():
+        if line.startswith("size-pack:"):
+            try:
+                return int(line.split(":", 1)[1].strip()) / 1024.0
+            except ValueError:
+                return None
+    return None
+
+
 def gorge12(root=None):
     """First 12 hex digits of the pinned gorge commit (GORGE_PIN)."""
     env = os.environ.get("CARDDB_GORGE_PIN")

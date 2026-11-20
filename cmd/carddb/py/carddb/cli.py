@@ -10,6 +10,8 @@
   init [--private]                        clone the data branch, or create it
   compliance [--repo DIR] [--source ID] [--version V] [--measured DATE]
                                         XMage manifests + FORGE_ORACLE_REF -> support rows
+  size [--measured DATE]                  report the branch packfile into _meta/size (D7 budget)
+  release [--dry-run]                     upload carddb-latest, the weekly dated release, prune
   validate|boundary [--scope S] [--tree DIR]   the Python mirror of the Go checks
   card <name|oracle_id>                   every fact for one card
   search <fts> [--legal F] [--status K=V] [--set S] [--label L] [--marked]
@@ -31,11 +33,12 @@ from . import compliance as compliance_mod
 from . import fetch as fetch_mod
 from . import merge as merge_mod
 from . import query as query_mod
+from . import release as release_mod
 from . import shard
 from .boundary import boundary_tree
 from .schema import PRIVATE, PUBLIC, SchemaError, load_schema, repo_root
 from .shard import ValidationError
-from .store import GitError, Store, StoreError, carddb_home, gorge12
+from .store import GitError, Store, StoreError, carddb_home, gorge12, packed_mib
 
 
 def _parser():
@@ -79,6 +82,24 @@ def _parser():
     p.add_argument("--measured", metavar="YYYY-MM-DD",
                    help="the support rows' measured date (default $CARDDB_NOW, else today UTC);"
                         " pass it (or CARDDB_NOW) in CI so reruns stay byte-identical")
+    p = sub.add_parser("size")
+    p.add_argument("--source", default="ci", help="writer id recorded in _meta/writers (default ci)")
+    p.add_argument("--version", help="writer version recorded in _meta/writers")
+    p.add_argument("--measured", metavar="YYYY-MM-DD",
+                   help="the _meta/size measured date (default $CARDDB_NOW, else today UTC)")
+    p.add_argument("--max-pack-mb", type=float, default=300.0, help="the D7 packed-size budget (default 300)")
+    p = sub.add_parser("release")
+    p.add_argument("--repo", help="owner/name of the release repo (default $GITHUB_REPOSITORY or the public repo)")
+    p.add_argument("--db", help="built SQLite file (default $CARDDB_HOME/carddb.sqlite)")
+    p.add_argument("--asset", action="append", metavar="FILE",
+                   help="asset to upload; repeatable (default <db>.zst when it exists, else <db>)")
+    p.add_argument("--now", metavar="YYYY-MM-DD", help="release week and prune date (default $CARDDB_NOW)")
+    p.add_argument("--gh", help="gh executable (default $CARDDB_GH or gh)")
+    p.add_argument("--dry-run", action="store_true", help="build the plan and print mutating gh commands; upload nothing")
+    p.add_argument("--no-weekly", action="store_true", help="do not create the dated weekly release")
+    p.add_argument("--keep-weeks", type=int, default=12, help="weeks of dated releases to keep (default 12)")
+    p.add_argument("--max-pack-mb", type=float, default=300.0,
+                   help="the D7 packed-size budget to report (default 300)")
     for v in ("validate", "boundary"):
         p = sub.add_parser(v)
         p.add_argument("--scope", default=PUBLIC, choices=(PUBLIC, PRIVATE))
@@ -244,8 +265,32 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
             revs["public_rev"] = pub.git("rev-parse", "HEAD").stdout.strip()[:12]
             if priv:
                 revs["private_rev"] = priv.git("rev-parse", "HEAD").stdout.strip()[:12]
+            packed = packed_mib(pub.dir)
+            revs["packed_budget_mib"] = str(int(release_mod.BUDGET_MIB))
+            if packed is not None:
+                revs["packed_mib"] = "%.1f" % packed
             build_mod.build(out, schema, pub.dir, priv.dir if priv else None, committed, args.text, revs)
             print(out, file=stdout)
+            return 0
+        if args.verb == "size":
+            pub = Store(PUBLIC, home=args.home, schema=schema)
+            if not pub.exists():
+                raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
+            packed, rows = release_mod.size_rows(pub, args.measured, args.max_pack_mb)
+            changed = pub.put("_meta/size", rows, writer=args.source, version=args.version,
+                              ran=args.measured, replace=True)
+            print("carddb size: data branch packed %.1f MiB (budget %d MiB); %d row(s) changed" % (
+                packed, int(args.max_pack_mb), changed), file=stdout)
+            if packed > args.max_pack_mb:
+                print("!! carddb size: packed %.1f MiB exceeds the D7 budget of %d MiB" % (
+                    packed, int(args.max_pack_mb)), file=stdout)
+            return 0
+        if args.verb == "release":
+            pub = Store(PUBLIC, home=args.home, schema=schema)
+            db = args.db or os.path.join(carddb_home(args.home), "carddb.sqlite")
+            release_mod.run(pub, db, assets=args.asset, repo=args.repo, gh=args.gh,
+                            now=args.now, dry_run=args.dry_run, keep_weeks=args.keep_weeks,
+                            budget_mib=args.max_pack_mb, weekly=not args.no_weekly, out=stdout)
             return 0
         if args.verb in ("validate", "boundary"):
             root = args.tree or Store(PUBLIC, home=args.home, schema=schema).dir

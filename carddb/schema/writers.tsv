@@ -2,7 +2,7 @@
 writer	sla_hours	tables	doc
 catalogue	36	cards,printings,sets,legality	MTGJSON catalogue (CDB-03), nightly
 compliance	36	status	compliance CI status writer (CDB-16), nightly
-ci	12	status,evidence,cards	alias of compliance: writer id status/evidence rows carry (CDB-16), every 3 h
+ci	12	status,evidence,cards,_meta/size	alias of compliance: writer id status/evidence and branch-size rows carry (CDB-16, CDB-04), every 3 h
 gorge-pin	12	status,evidence,cards	gorge pin-follow, every 3 h
 farm	6	xledger,evidence,status	xengine-hunt farm tick
 hunt	6	evidence	deals and game evidence from the hunt

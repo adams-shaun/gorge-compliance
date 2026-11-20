@@ -22,6 +22,7 @@ CREATE INDEX idx_src_manifest_cards_set_code ON src_manifest_cards (set_code);
 CREATE INDEX "idx_status_level" ON "status" ("level");
 CREATE INDEX "idx_support_status" ON "support" ("status");
 CREATE INDEX "idx_xledger_tier" ON "xledger" ("tier");
+CREATE TABLE "_meta_size" ("metric" TEXT NOT NULL, "amount" INTEGER NOT NULL, "unit" TEXT NOT NULL, "measured" TEXT NOT NULL, PRIMARY KEY ("metric")) WITHOUT ROWID;
 CREATE TABLE "_meta_sources" ("source" TEXT NOT NULL, "version" TEXT NOT NULL, "retrieved" TEXT NOT NULL, "licence" TEXT NOT NULL, PRIMARY KEY ("source")) WITHOUT ROWID;
 CREATE TABLE "_meta_unresolved" ("kind" TEXT NOT NULL, "ref" TEXT NOT NULL, "reason" TEXT NOT NULL, PRIMARY KEY ("kind", "ref")) WITHOUT ROWID;
 CREATE TABLE "_meta_writers" ("writer" TEXT NOT NULL, "table" TEXT NOT NULL, "version" TEXT NOT NULL, "ran" TEXT NOT NULL, PRIMARY KEY ("writer", "table")) WITHOUT ROWID;

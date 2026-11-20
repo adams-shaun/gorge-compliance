@@ -14,6 +14,9 @@ curated inputs it is built from.
 - `schema/writers.tsv`: the registered writer ids and their SLA hours (columns `writer
   sla_hours tables doc`). `carddb freshness` compares it with `_meta/writers`; it is
   the one non-declaration the validators allow under `schema/`, and its shape is checked.
+- `_meta/size.tsv`: the branch packfile measurement (`branch_packed_mib`) and the
+  D7 budget (`budget_mib`), written before each publish. The same measurement is
+  what the release reports and `freshness` checks.
 
 A shard is `#carddb <table> v<N>`, a column-header line, then rows sorted
 bytewise by the key columns with unique keys. A cell is never empty (`-` is
@@ -27,8 +30,30 @@ go run ./cmd/carddb boundary -tree carddb       # nothing private or Forge-shape
 
 `validate -scope private` accepts the private tables and columns too (a tree
 that is never published). Exit status 0 clean, 1 violations, 2 usage/I-O error.
-CI (`.github/workflows/carddb.yml`) runs both on PRs touching `carddb/**` and on
-pushes to the `carddb` branch.
+CI (`.github/workflows/carddb.yml`) runs both on PRs touching `carddb/**`, on
+pushes to the `carddb` branch, nightly and on dispatch.
+
+## Write path and releases
+
+A push to `carddb` waits out a two-hour quiet period (one concurrency group; a
+later push cancels the wait), then CI runs the catalogue ingest (CDB-03) and
+the compliance status writer (CDB-16) from `main`, records the branch's packed
+size in `_meta/size`, and `carddb publish` commits the result. The same path
+runs nightly at 04:23 UTC and on `workflow_dispatch`; the dispatch input
+`dry_run` builds and packs the SQLite but neither publishes the data branch nor
+touches a release.
+
+The release has two shapes: `carddb-latest` keeps the floating
+`carddb.sqlite.zst`, replaced in place, and `carddb-YYYY-MM-DD` keeps one
+snapshot per ISO week. Dated releases older than 12 weeks are pruned except the
+newest release of each quarter. `carddb-latest.json` travels beside the asset
+with the data revision, gorge pin, packed size and sha256.
+
+**Branch protection (operator setting).** Protect `carddb` with require linear
+history and fast-forward only; the only pushers are the GitHub Actions token
+and the publisher deploy key. The workflow refreshes the branch's own copy of
+`.github/workflows/carddb.yml` from `main` on every publish, so that copy
+cannot drift.
 
 The data derives from MTGJSON (MIT); see NOTICE.
 
@@ -49,6 +74,8 @@ the Python API is `import carddb` with `cmd/carddb/py` on the path.
 | `proven [--db FILE] [--format tsv\|json\|count]` | the cards certification has proven (cert level C2 or C3, not excluded), from the clone or a built file's `proven` view |
 | `fetch [--private]` | `gh release download carddb-latest` into `$CARDDB_HOME`, and record `carddb-latest.json` (public) or `carddb-private-latest.json` (`--private`) (`published_at`, `unresolved`) for `freshness` |
 | `compliance [--repo DIR] [--source ID] [--measured DATE]` | the compliance status writer: XMage manifests (`oracle/compliance/manifests/*.json`) + `FORGE_ORACLE_REF` -> `support` rows (xmage listed/unfinished/lacks_card; forge listed per corpus card), writer `ci` by default; existing `failing` rows (the farm override, CDB-14) are preserved; pass `--measured` (or set `CARDDB_NOW`) in CI for byte-identical reruns |
+| `size [--measured DATE] [--max-pack-mb 300]` | record the branch packfile in `_meta/size` (`branch_packed_mib`, `budget_mib`) for the D7 budget; prints the same number `freshness` checks |
+| `release [--dry-run] [--asset FILE ...] [--now DATE]` | upload the built asset to `carddb-latest` (`--clobber`), create/refresh this ISO week's `carddb-YYYY-MM-DD` release, prune dated releases older than 12 weeks except the newest per quarter; `--dry-run` prints every mutating `gh` command and uploads nothing |
 | `validate`, `boundary` | the Python mirror of the Go checks (a parity test keeps them in step) |
 | `card <name\|oracle_id>` | every fact for one card: identity, printings, legality, status/evidence, cert, labels and relations (+ the private overlay's tables when the build has them) |
 | `search <fts> [--legal F] [--status K=V] [--set S] [--label L] [--marked]` | FTS5 over the built file, with legality/status/set/label filters |
