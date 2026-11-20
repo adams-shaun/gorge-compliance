@@ -32,9 +32,20 @@ public final class ScenarioReplaySameNameChoiceTest {
                         case "isToken": return token;
                         case "getCreateOrder": return order;
                         // The target fixtures run XMage's own filter/possible
-                        // set over this proxy, which asks these.
+                        // set over this proxy, which asks these; the combat
+                        // tests also let TestPlayer's name-command path see a
+                        // legal attacker when a revert leaves commands queued.
                         case "isPhasedIn": return true;
                         case "isCopy": return false;
+                        case "isControlledBy": return controller.equals(args[0]);
+                        case "getCardType": return List.of(mage.constants.CardType.CREATURE);
+                        case "isCreature": return true;
+                        case "isTapped": return false;
+                        case "isAttacking": return false;
+                        case "hasSummoningSickness": return false;
+                        case "getMaxBlocks": return 1;
+                        case "getBlocking": return 0;
+                        case "canAttack": return true;
                         case "getExpansionSetCode": return "TST";
                         default: throw new AssertionError("unexpected call " + method);
                     }
@@ -144,6 +155,9 @@ public final class ScenarioReplaySameNameChoiceTest {
         set(owner, ScenarioReplay.class, "gorgeName", "");
         set(owner, ScenarioReplay.class, "xmageName", "");
         set(owner, ScenarioReplay.class, "backFaceNames", new LinkedHashMap<String, String>());
+        set(owner, ScenarioReplay.class, "frontCounts", new LinkedHashMap<String, Integer>());
+        set(owner, ScenarioReplay.class, "setupNames", new LinkedHashMap<UUID, String>());
+        set(owner, ScenarioReplay.class, "placedNames", new LinkedHashMap<UUID, String>());
         return owner;
     }
 
@@ -282,6 +296,7 @@ public final class ScenarioReplaySameNameChoiceTest {
         Permanent card2 = object(own, false, 21);
         Permanent token = object(own, true, 22);
         Permanent token2 = object(own, true, 23);
+        Permanent hero = object(own, false, 24, "Benalish Hero");
         mage.game.permanent.Battlefield board = new mage.game.permanent.Battlefield();
         board.addPermanent(card2);
         board.addPermanent(token2);
@@ -312,18 +327,23 @@ public final class ScenarioReplaySameNameChoiceTest {
                 "attack batch declared the recorded token and card exactly, got " + computer.attackers);
         check(player.getActions().isEmpty(), "attack batch removed both queued name commands");
 
-        // Two same-name setup cards: the step's ref order must be the exact
-        // declaration order, not the highest-index-first order the name
-        // commands need. A band's leader follows declaration order, so the
-        // first copy stays the raw "@p0:Grizzly Bears" member instead of
-        // becoming the leader the band target filters out.
+        // Two same-name setup cards, and no token under the name: the
+        // pre-existing exact path only fired for a token/card collision, so
+        // this case pins the broadening to same-name cards. The step's ref
+        // order must be the exact declaration order, not the
+        // highest-index-first order the name commands need. A band's leader
+        // follows declaration order, so the first copy stays the raw
+        // "@p0:Grizzly Bears" member instead of becoming the leader.
         computer.attackers.clear();
         PlayerAction secondCardAttack = action("attack:Grizzly Bears:1");
         PlayerAction firstCardAttack = action("attack:Grizzly Bears");
         player.addAction(secondCardAttack);
         player.addAction(firstCardAttack);
+        mage.game.permanent.Battlefield cardBoard = new mage.game.permanent.Battlefield();
+        cardBoard.addPermanent(card);
+        cardBoard.addPermanent(card2);
         RecordingCombat sameNameCombat = new RecordingCombat(own);
-        Game sameNameGame = game(board, sameNameCombat, 1);
+        Game sameNameGame = game(cardBoard, sameNameCombat, 1);
         ((List<Object>) get(owner, ScenarioReplay.class, "exactAttacks")).add(attackBatch(
                 1, 0, 1, List.of("p0:Grizzly Bears", "p0:Grizzly Bears#2"),
                 List.of(firstCardAttack, secondCardAttack)));
@@ -331,6 +351,34 @@ public final class ScenarioReplaySameNameChoiceTest {
         check(computer.attackers.equals(List.of(card.getId(), card2.getId())),
                 "same-name attack batch declared the step's order, got " + computer.attackers);
         check(player.getActions().isEmpty(), "same-name attack batch removed both queued name commands");
+
+        // Mixed batch: a unique attacker declared before a same-name pair.
+        // The exact path must declare every resolvable ref in step order, not
+        // jump the same-name pair ahead of the unique attacker and consume
+        // that attacker's recorded band answer.
+        computer.attackers.clear();
+        player.addAlias("p0:Benalish Hero", hero.getId());
+        ((Map<String, String>) get(owner, ScenarioReplay.class, "refAlias"))
+                .put("p0:Benalish Hero", "@p0:Benalish Hero");
+        mage.game.permanent.Battlefield mixedBoard = new mage.game.permanent.Battlefield();
+        mixedBoard.addPermanent(card);
+        mixedBoard.addPermanent(hero);
+        mixedBoard.addPermanent(card2);
+        PlayerAction heroAttack = action("attack:Benalish Hero");
+        PlayerAction mixedSecond = action("attack:Grizzly Bears:1");
+        PlayerAction mixedFirst = action("attack:Grizzly Bears");
+        player.addAction(heroAttack);
+        player.addAction(mixedSecond);
+        player.addAction(mixedFirst);
+        RecordingCombat mixedCombat = new RecordingCombat(own);
+        Game mixedGame = game(mixedBoard, mixedCombat, 1);
+        ((List<Object>) get(owner, ScenarioReplay.class, "exactAttacks")).add(attackBatch(
+                1, 0, 1, List.of("p0:Benalish Hero", "p0:Grizzly Bears", "p0:Grizzly Bears#2"),
+                List.of(heroAttack, mixedFirst, mixedSecond)));
+        player.selectAttackers(mixedGame, own);
+        check(computer.attackers.equals(List.of(hero.getId(), card.getId(), card2.getId())),
+                "mixed attack batch declared every ref in step order, got " + computer.attackers);
+        check(player.getActions().isEmpty(), "mixed attack batch removed every queued name command");
 
         // Block: the token is the blocker in one pair and the attacker in the
         // other. Both sides resolve through the same helper.
@@ -613,37 +661,85 @@ public final class ScenarioReplaySameNameChoiceTest {
         System.out.println("PASS inline $target= token refs resolve live through addTargets");
     }
 
-    /** Two same-name setup copies in scenario build order are ranked #1, #2
-     * by creation order even though XMage's battlefield iteration sees the
-     * second one first. registerAliases walks that ordered list through
-     * bindSetupObject, so this is the whole setup-ref computation without a
-     * game or card database. */
-    private static void setupAliasOrdering() {
-        UUID own = UUID.randomUUID(), other = UUID.randomUUID();
+    /** Drive the production registerAliases, not just its ordering helper: a
+     * battlefield that iterates the second-created same-name copy first must
+     * still bind "#1" to the first-created one. A revert to walking
+     * getAllPermanents() directly binds the wrong copy and fails here. */
+    private static void setupAliasOrdering() throws Exception {
+        ScenarioReplay owner = newOwner();
+        org.mage.test.player.TestPlayer playerA = scripted(owner, new RecordingComputerPlayer("PlayerA"));
+        org.mage.test.player.TestPlayer playerB = scripted(owner, new RecordingComputerPlayer("PlayerB"));
+        seat(owner, "playerA", playerA);
+        seat(owner, "playerB", playerB);
+        set(owner, ScenarioReplay.class, "seats", 2);
+        UUID own = playerA.getId(), other = playerB.getId();
         String name = "Kjeldoran Warrior";
         Permanent first = object(own, false, 1, name);
         Permanent leader = object(own, false, 2, name);
         Permanent bystander = object(own, false, 3, "Garrison Griffin");
         Permanent opponent = object(other, false, 4, name);
-        List<Permanent> battlefield = List.of(leader, opponent, bystander, first);
-        List<Permanent> ordered = ScenarioReplay.battlefieldInCreationOrder(battlefield, own);
-        equal(3, ordered.size());
-        chosen(first, ordered.get(0));
-        chosen(leader, ordered.get(1));
-        chosen(bystander, ordered.get(2));
-        Map<String, Integer> counts = new LinkedHashMap<>();
-        Map<String, Integer> scenarioCounts = new LinkedHashMap<>();
-        Map<String, Integer> frontCounts = new LinkedHashMap<>();
-        Map<String, String> refAlias = new LinkedHashMap<>();
-        Map<String, UUID> bound = new LinkedHashMap<>();
-        for (Permanent permanent : ordered) {
-            ScenarioReplay.bindSetupObject(0, permanent.getName(), name, name, counts,
-                    scenarioCounts, frontCounts, permanent.getId(), refAlias, bound::put);
+        mage.game.permanent.Battlefield board = new mage.game.permanent.Battlefield();
+        // Deliberately not creation order.
+        board.addPermanent(leader);
+        board.addPermanent(opponent);
+        board.addPermanent(bystander);
+        board.addPermanent(first);
+        java.lang.reflect.Method register = ScenarioReplay.class.getDeclaredMethod("registerAliases", Game.class);
+        register.setAccessible(true);
+        register.invoke(owner, aliasGame(board));
+        // registerAliases binds every seat's alias table, so either seat can
+        // answer an ask about the other's object.
+        for (org.mage.test.player.TestPlayer player : List.of(playerA, playerB)) {
+            equal(first.getId(), player.getAliasByName("p0:" + name));
+            equal(leader.getId(), player.getAliasByName("p0:" + name + "#2"));
+            equal(bystander.getId(), player.getAliasByName("p0:Garrison Griffin"));
+            equal(opponent.getId(), player.getAliasByName("p1:" + name));
         }
-        equal(first.getId(), bound.get("p0:" + name));
-        equal(leader.getId(), bound.get("p0:" + name + "#2"));
-        equal("@p0:" + name, refAlias.get("p0:" + name));
-        System.out.println("PASS setup aliases rank same-name copies by creation order");
+        System.out.println("PASS registerAliases binds same-name setup refs in creation order");
+    }
+
+    /** The step lowering must queue highest-index-first (XMage's name command
+     * ranks untapped creatures) while the exact batch keeps the step's own
+     * ref order. Reverting the reorder fails the refs assertion; reverting the
+     * queue order fails the queued assertion. */
+    private static void attackBatchOrdering() {
+        List<String> refs = List.of("p0:Kjeldoran Warrior", "p0:Kjeldoran Warrior#2",
+                "p0:Garrison Griffin");
+        List<String> names = List.of("Kjeldoran Warrior", "Kjeldoran Warrior:1", "Garrison Griffin");
+        List<String> queued = new ArrayList<>();
+        Map<String, PlayerAction> byName = new LinkedHashMap<>();
+        ScenarioReplay.ExactAttackBatch batch = ScenarioReplay.lowerAttackBatch(7, 0, 1, names, refs, name -> {
+            queued.add(name);
+            PlayerAction action = new PlayerAction("combat", 7,
+                    mage.constants.PhaseStep.DECLARE_ATTACKERS, "attack:" + name);
+            byName.put(name, action);
+            return action;
+        });
+        equal(List.of("Kjeldoran Warrior:1", "Kjeldoran Warrior", "Garrison Griffin"), queued);
+        equal(refs, batch.refs);
+        equal(7, batch.turn);
+        equal(0, batch.seat);
+        equal(1, batch.defenderSeat);
+        check(batch.actions.get(0) == byName.get("Kjeldoran Warrior"),
+                "first exact action is the first copy's command");
+        check(batch.actions.get(1) == byName.get("Kjeldoran Warrior:1"),
+                "second exact action is the #2 command");
+        check(batch.actions.get(2) == byName.get("Garrison Griffin"),
+                "third exact action is the unique command");
+        System.out.println("PASS attack batch queues highest-index-first but keeps step order for exact declarations");
+    }
+
+    /** The game registerAliases reads: its battlefield and an empty exile.
+     * The players' hand, graveyard and library are real empty zones. */
+    private static Game aliasGame(mage.game.permanent.Battlefield board) {
+        return (Game) Proxy.newProxyInstance(Game.class.getClassLoader(),
+                new Class<?>[]{Game.class}, (proxy, method, args) -> {
+                    switch (method.getName()) {
+                        case "getBattlefield": return board;
+                        case "getExile": return new mage.game.Exile();
+                        default: throw new AssertionError("unexpected game call " + method);
+                    }
+                });
     }
 
     public static void main(String[] args) throws Exception {
@@ -669,6 +765,7 @@ public final class ScenarioReplaySameNameChoiceTest {
         chosen(null, ScenarioReplay.tokenChoice("p0:token:Grizzly Bears#2", own, List.of(second)));
         System.out.println("PASS exact token choice is creation-ordered, controller-scoped and live");
         setupAliasOrdering();
+        attackBatchOrdering();
         combatRefs();
         exactCombatBatches();
         liveMatcher();
