@@ -1,0 +1,47 @@
+oracle_id	ab000000000000000000000000000000
+name	Lightning Bolt
+layout	normal
+mana_cost	{R}
+mana_value	1
+type_line	Instant
+colors	R
+color_identity	R
+keywords	NULL
+oracle_sha	NULL
+first_released	NULL
+first_set	NULL
+paper	NULL
+-- printings
+printing_id	set_code	collector_number	rarity	released
+p-a1	lea	161	common	1993-08-05
+p-a2	2ed	161	common	1993-12-01
+-- legality
+format	status
+modern	legal
+-- status
+level	verdict	gorge_pin	measured	writer
+A	agree	8f7095353a64	2026-11-19	loop
+-- evidence
+source	ref	outcome	writer
+oracle	scen-1	agree	ci
+-- xledger
+tier	state	note
+T1	agree	fixture
+-- cert
+norm_name	name	gorge_sha	corpus_pin	script_sha	oracle_sha	first_set	released	level	exclusion	refs	keys_total	keys_used	keys_compared	keys_agreed	keys_unreachable	triggers_unmeasured	scen_level	oracle_audit	open_deltas	diagnosed_deltas	tickets	why	witness	measured	writer
+lightning bolt	Lightning Bolt	8f7095353a64	418ba5215f	aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa	bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb	lea	1993-08-05	C2	NULL	FX	3	3	3	3	0	0	B	ok	0	0	NULL	NULL	f0/a0=item=1;seed=2	2026-11-19	certification
+-- labels
+label	origin
+burn	derived
+-- curated_labels
+label	note
+staple	format fixture
+-- curated_game_changers
+added	source	cited
+2023-01-01	https://example.test/wotc	2025-02-11
+-- curated_bracket_flags
+flag	source	cited
+mass-land-denial	https://example.test/wotc	2025-02-11
+-- curated_relations
+relation	other_oracle_id
+combos_with	cd222222222222222222222222222222

@@ -5,9 +5,20 @@
   publish [--bulk] [--private]            commit what is staged, rebase, push
   merge-driver %O %A %B %P                git's merge driver (registered by the tool itself)
   build [--private] [--text FILE]         SQLite from the shards
+  proven [--db FILE] [--format F]         cards certification has proven (C2/C3), as tsv, json or count
   fetch [--private]                       gh release download carddb-latest
   init [--private]                        clone the data branch, or create it
+  compliance [--repo DIR] [--source ID] [--version V] [--measured DATE]
+                                        XMage manifests + FORGE_ORACLE_REF -> support rows
   validate|boundary [--scope S] [--tree DIR]   the Python mirror of the Go checks
+  card <name|oracle_id>                   every fact for one card
+  search <fts> [--legal F] [--status K=V] [--set S] [--label L] [--marked]
+  blockers --format F [--engine E] [--by printings|decks]
+  proven [--format F] [--level C2]        the certification-pinned proven view
+  deck <id>                               a private deck
+  freshness [--tick]                      writer SLAs, publish/asset age, unresolved, branch size
+  sql '<select>'                          read-only SQL
+  export <view> --tsv                     deterministic TSV of a table or view
 Exit status: 0 ok, 1 violations or a failed merge/publish, 2 usage or I/O error.
 """
 import argparse
@@ -16,8 +27,10 @@ import sys
 
 from . import build as build_mod
 from . import catalogue as catalogue_mod
+from . import compliance as compliance_mod
 from . import fetch as fetch_mod
 from . import merge as merge_mod
+from . import query as query_mod
 from . import shard
 from .boundary import boundary_tree
 from .schema import PRIVATE, PUBLIC, SchemaError, load_schema, repo_root
@@ -58,10 +71,60 @@ def _parser():
     p.add_argument("--private", action="store_true")
     p = sub.add_parser("init")
     p.add_argument("--private", action="store_true")
+    p = sub.add_parser("compliance")
+    p.add_argument("--repo", help="gorge-compliance checkout holding oracle/compliance/manifests and Makefile"
+                                 " (default: the checkout)")
+    p.add_argument("--source", help="writer id recorded in _meta/writers (default ci)")
+    p.add_argument("--version", help="writer version recorded in _meta/writers")
+    p.add_argument("--measured", metavar="YYYY-MM-DD",
+                   help="the support rows' measured date (default $CARDDB_NOW, else today UTC);"
+                        " pass it (or CARDDB_NOW) in CI so reruns stay byte-identical")
     for v in ("validate", "boundary"):
         p = sub.add_parser(v)
         p.add_argument("--scope", default=PUBLIC, choices=(PUBLIC, PRIVATE))
         p.add_argument("--tree", help="tree to check (default: the clone)")
+    read = (
+        ("card", (("ref", {}),)),
+        ("search", (("query", {}),)),
+        ("blockers", ()),
+        ("proven", ()),
+        ("deck", (("deck_id", {}),)),
+        ("freshness", ()),
+        ("sql", (("query", {}),)),
+        ("export", (("view", {}),)),
+    )
+    for name, positionals in read:
+        p = sub.add_parser(name, help=query_mod.__doc__.split("\n")[0])
+        for pname, kw in positionals:
+            p.add_argument(pname, **kw)
+        p.add_argument("--db", help="built SQLite file (default $CARDDB_HOME/carddb[-private].sqlite)")
+        p.add_argument("--private", action="store_true", help="use the private build")
+    p = sub.choices["search"]
+    p.add_argument("--legal", metavar="FORMAT")
+    p.add_argument("--status", action="append", metavar="COL=VALUE")
+    p.add_argument("--set", metavar="SET")
+    p.add_argument("--label", metavar="LABEL")
+    p.add_argument("--marked", action="store_true")
+    p.add_argument("--limit", type=int)
+    p = sub.choices["blockers"]
+    p.add_argument("--format", required=True, metavar="FORMAT")
+    p.add_argument("--engine", help="dirac, gorge, proven or cert:<level>")
+    p.add_argument("--by", choices=("printings", "decks"), default=None,
+                   help="rank by printings (public default) or real decks (private default)")
+    p.add_argument("--limit", type=int, default=50)
+    p = sub.choices["proven"]
+    p.add_argument("--format", metavar="FORMAT")
+    p.add_argument("--level", default="C2", choices=query_mod.LEVEL_ORDER)
+    p = sub.choices["freshness"]
+    p.add_argument("--tick", action="store_true", help="print only `!!` lines")
+    p.add_argument("--public-dir", help="the data branch clone (default $CARDDB_HOME/public|private)")
+    p.add_argument("--asset-meta", help="release metadata JSON (default $CARDDB_HOME/carddb[-private]-latest.json)")
+    p.add_argument("--sla", help="writer SLA file (default the schema directory's writers.tsv)")
+    p.add_argument("--now", help="ISO date or timestamp to judge ages at (default $CARDDB_NOW or now)")
+    p.add_argument("--max-pack-mb", type=float, default=300.0)
+    p.add_argument("--unresolved-baseline", type=int)
+    p = sub.choices["export"]
+    p.add_argument("--tsv", action="store_true")
     return ap
 
 
@@ -89,6 +152,22 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
     try:
         schema = load_schema(args.schema)
         kind = PRIVATE if getattr(args, "private", False) else PUBLIC
+        if args.verb == "proven" and args.format in (None, "tsv", "json", "count"):
+            # The certification view over the clone (or a built file's `proven`
+            # view); any other --format is a legality filter over the built cards.
+            rows = (query_mod.proven_from_db(args.db) if args.db
+                    else query_mod.proven_from_store(Store(PUBLIC, home=args.home, schema=schema)))
+            print(query_mod.format_proven(rows, args.format), end="", file=stdout)
+            return 0
+        if args.verb in query_mod.VERBS:
+            if args.verb == "freshness":
+                return query_mod.run_freshness(args, schema, stdout)
+            db = args.db or query_mod.default_db(args.home, args.private)
+            conn, meta = query_mod.connect(db)
+            try:
+                return query_mod.run(args, conn, schema, meta, stdout)
+            finally:
+                conn.close()
         if args.verb == "merge-driver":
             try:
                 merge_mod.run_driver(schema, args.base, args.ours, args.theirs, args.path)
@@ -136,6 +215,15 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
             Store(kind, home=args.home, schema=schema).init()
             print("carddb init: ok (%s)" % os.path.join(carddb_home(args.home), kind), file=stdout)
             return 0
+        if args.verb == "compliance":
+            pub = Store(PUBLIC, home=args.home, schema=schema)
+            if not pub.exists():
+                raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
+            changed, counts = compliance_mod.run(pub, repo=args.repo, writer=args.source or "ci",
+                                                 version=args.version, ran=args.measured)
+            parts = " ".join("%s:%s=%d" % (e, s, n) for (e, s), n in sorted(counts.items()))
+            print("carddb compliance: %d rows changed; %s" % (changed, parts), file=stdout)
+            return 0
         if args.verb == "fetch":
             print(fetch_mod.fetch(private=kind == PRIVATE, home=args.home), file=stdout)
             return 0
@@ -174,6 +262,9 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
     except ValidationError as e:
         print("carddb %s: invalid:\n%s" % (args.verb, e), file=stderr)
         return 1
+    except query_mod.QueryError as e:
+        print("carddb %s: %s" % (args.verb, e), file=stderr)
+        return e.code
     except (StoreError, SchemaError) as e:
         print("carddb %s: %s" % (args.verb, e), file=stderr)
         return 1 if isinstance(e, GitError) and args.verb == "publish" else 2

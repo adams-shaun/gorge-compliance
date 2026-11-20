@@ -36,7 +36,7 @@ DIAGNOSED = "oracle/xengine/diagnosed.tsv"
 SOURCE_PATHS = [CURATED_PREFIX.rstrip("/"), MANIFEST_PREFIX.rstrip("/"), DIAGNOSED]
 
 _SQL_TYPES = {"string": "TEXT", "list": "TEXT", "date": "TEXT", "int": "INTEGER", "bool": "INTEGER"}
-_INDEXED = ("oracle_id", "set_code", "name", "format", "level", "status", "label", "tier", "source")
+_INDEXED = ("oracle_id", "norm_name", "set_code", "name", "format", "level", "status", "label", "tier", "source")
 
 SOURCE_DDL = [
     "CREATE TABLE src_manifest_sets (code TEXT NOT NULL, name TEXT, released TEXT, set_type TEXT, "
@@ -275,6 +275,10 @@ def _derived(conn, schema, texts):
             row.append(by_oid.get(oid, ""))
         conn.execute("INSERT INTO card_fts VALUES (%s)" % ",".join("?" * len(row)), row)
     conn.execute("CREATE INDEX idx_card_names_oracle_id ON card_names (oracle_id)")
+    # Imported here: query imports this module for `q`/`sql_name`, so a
+    # module-level import would be circular.
+    from .query import PROVEN_VIEW_SQL
+    conn.execute(PROVEN_VIEW_SQL)
 
 
 def dump_text(conn):

@@ -6,11 +6,14 @@ curated inputs it is built from.
 - `schema/VERSION`, `schema/v<N>/<table>.tsv`: the schema. One file per table,
   columns `name type required key visibility doc`. Types: `string int bool date
   list`. Tables whose every column is `private` (text, tags, edhrec, prims,
-  values, labels_private, decks) are declared so the boundary can name them and
-  are never published.
+  values, labels_private, decks, cert_events, cert_runs) are declared so the
+  boundary can name them and are never published.
 - `curated/*.tsv`: human-maintained inputs. `game-changers` and `bracket-flags` are
   seeded from the published WotC lists with a `source` URL and `cited` date per row;
   a human reviews a change to them.
+- `schema/writers.tsv`: the registered writer ids and their SLA hours (columns `writer
+  sla_hours tables doc`). `carddb freshness` compares it with `_meta/writers`; it is
+  the one non-declaration the validators allow under `schema/`, and its shape is checked.
 
 A shard is `#carddb <table> v<N>`, a column-header line, then rows sorted
 bytewise by the key columns with unique keys. A cell is never empty (`-` is
@@ -43,8 +46,24 @@ the Python API is `import carddb` with `cmd/carddb/py` on the path.
 | `publish [--bulk] [--private]` | one commit `carddb: <writers> <n> rows @<gorge12>`, rebase onto the remote branch, push fast-forward; refuses over 50000 changed lines without `--bulk`; no-op when nothing is staged |
 | `merge-driver %O %A %B %P` | the git driver `*.tsv merge=carddb` (registered in each clone's config) |
 | `build [--private] [--text FILE]` | SQLite from the shards + curated files + committed sources read from this checkout's `HEAD` (`--ref`, or `--src-dir`) |
-| `fetch [--private]` | `gh release download carddb-latest` into `$CARDDB_HOME` |
+| `proven [--db FILE] [--format tsv\|json\|count]` | the cards certification has proven (cert level C2 or C3, not excluded), from the clone or a built file's `proven` view |
+| `fetch [--private]` | `gh release download carddb-latest` into `$CARDDB_HOME`, and record `carddb-latest.json` (public) or `carddb-private-latest.json` (`--private`) (`published_at`, `unresolved`) for `freshness` |
+| `compliance [--repo DIR] [--source ID] [--measured DATE]` | the compliance status writer: XMage manifests (`oracle/compliance/manifests/*.json`) + `FORGE_ORACLE_REF` -> `support` rows (xmage listed/unfinished/lacks_card; forge listed per corpus card), writer `ci` by default; existing `failing` rows (the farm override, CDB-14) are preserved; pass `--measured` (or set `CARDDB_NOW`) in CI for byte-identical reruns |
 | `validate`, `boundary` | the Python mirror of the Go checks (a parity test keeps them in step) |
+| `card <name\|oracle_id>` | every fact for one card: identity, printings, legality, status/evidence, cert, labels and relations (+ the private overlay's tables when the build has them) |
+| `search <fts> [--legal F] [--status K=V] [--set S] [--label L] [--marked]` | FTS5 over the built file, with legality/status/set/label filters |
+| `blockers --format F [--engine E] [--by printings\|decks]` | legal cards that are not covered, ranked by printings (public default) or real-deck counts (private default); digital and non-tournament-only cards are skipped |
+| `proven [--format F] [--level C2]` | cards whose `cert` level is at least the requested level (the cert-pinned proven view) |
+| `deck <id>` | a private deck's cards |
+| `freshness [--tick]` | writer SLAs from `schema/writers.tsv`, publish age, `carddb-latest` age, unresolved growth and packed data-branch size; `--tick` prints only `!!` lines |
+| `sql '<select>'` | read-only SQL (the file is opened `mode=ro` + `query_only`; only SELECT/WITH/EXPLAIN is accepted) |
+| `export <view> --tsv` | deterministic TSV naming the view and asset version (schema + gorge pin) |
+
+Read verbs take `--db FILE` (default `$CARDDB_HOME/carddb.sqlite`, or
+`carddb-private.sqlite` with `--private`) and open the file read-only. `freshness`
+also accepts `--asset-meta FILE` (default `$CARDDB_HOME/carddb-latest.json`, or `carddb-private-latest.json` with `--private`; keys
+`published_at` and optional `unresolved`), `--sla FILE`, `--now` and
+`--public-dir`.
 
 Catalogue rows: `cards` holds one row per `oracle_id` and the newest printing's
 mana cost, type line, colours and keywords; `legality` is one row per
@@ -83,12 +102,22 @@ sides changed differently resolves by the newer timestamp column (`measured_at`,
 (`ci` > `cert` > `loop`, from the row's `writer` column), then the greater row
 bytes, so both clones converge. A modify beats a delete. The merged file is re-validated.
 
+`cert` is the certification job's per-card current row (one row per `oracle_id`, named by
+`norm_name`): the level C0..C3, any exclusion, the agreeing `refs`, the `keys_*` and
+`triggers_unmeasured` counts, `scen_level`, `oracle_audit`, `open_deltas`,
+`diagnosed_deltas`, `tickets`, `why` and `witness` (`k=v;` entries). `cert_sets` is the
+job's per-set row. Both carry the `gorge_sha` and `corpus_pin` they were measured at and a
+`measured` date; git history is the pin history. `cert_events` and `cert_runs` are
+private-only (`--private`) partitions for the job's exact event and run counts.
+
 `validate` and `boundary` (this tool's Python verbs, and the Go ones) walk every file but `.git`:
-a shard behind another extension is refused, `schema/` may hold only the schema's own declarations.
+a shard behind another extension is refused, `schema/` may hold only the schema's own declarations
+plus the fixed-shape `schema/writers.tsv` config.
 
 The SQLite file: one table per schema table (`/` and `-` become `_`), `card_names`
 (norm_name -> oracle_id), `card_fts` (FTS5 over name, type_line, keywords, labels; plus Oracle
 text with `--text`, which writes `carddb-text.sqlite`, never the published file),
-`src_manifest_*` and `src_diagnosed` (the committed sources) and `build_meta`. The FTS `keywords`
+`src_manifest_*` and `src_diagnosed` (the committed sources), `proven` (the `cert` rows at
+C2/C3 with no exclusion) and `build_meta`. The FTS `keywords`
 column is `cards.keywords`; a `--ref` that lacks one of the committed source paths
 just has none of those inputs.

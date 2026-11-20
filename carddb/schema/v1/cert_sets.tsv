@@ -1,6 +1,24 @@
 #carddb-schema cert_sets v1
 name	type	required	key	visibility	doc
-set_code	string	yes	yes	public	sets.set_code
-level	string	yes	no	public	Declared certification level of the set
-declared	date	yes	no	public	Date declared, YYYY-MM-DD
+set_code	string	yes	yes	public	sets.set_code; the row is the set's current certification
+gorge_sha	string	yes	no	public	Gorge commit the set was measured at
+corpus_pin	string	yes	no	public	Forge corpus pin (FORGE_REF) the set was measured at
+released	date	no	no	public	Release date of the set, YYYY-MM-DD
+set_type	string	no	no	public	Set type (core, expansion, ...)
+paper	int	yes	no	public	Paper cards in the set, reprints included
+new_paper	int	yes	no	public	Paper cards first printed in the set
+reprints	int	yes	no	public	Paper cards reprinted in the set
+playable	int	yes	no	public	Paper cards gorge compiles
+excluded	int	yes	no	public	Cards excluded from certification with a cause
+c0	int	yes	no	public	Cards at C0
+c1	int	yes	no	public	Cards at C1
+c2	int	yes	no	public	Cards at C2
+c3	int	yes	no	public	Cards at C3
+open	int	yes	no	public	Cards with an open difference
+level	string	no	no	public	Highest Ck the set is certified at: C0..C3; - when not certified
+state	string	yes	no	public	Set state: queued, dealing, triage, certified, blocked or regressed
+cursor	string	no	no	public	Cursor holding the set: deal, cert or -
+entered	date	no	no	public	Date the set entered its current state, YYYY-MM-DD
+certified	date	no	no	public	Date the set reached its current level, YYYY-MM-DD
+measured	date	yes	no	public	Date the row was measured, YYYY-MM-DD; the merge tie-break timestamp
 writer	string	no	no	public	Program that wrote the row (ci, cert, loop); breaks a merge tie after the timestamp: ci > cert > loop

@@ -19,7 +19,8 @@ _FORBIDDEN_FIELD = re.compile(r"^(oracle_text|price.*|prims|tagger|edhrec.*|valu
 # Tables that are never published, named here as well as in the schema so the
 # boundary holds against a schema edited to call one public (boundary.go).
 PRIVATE_TABLE_NAMES = frozenset(
-    ["text", "tags", "edhrec", "prims", "values", "labels_private", "decks"])
+    ["text", "tags", "edhrec", "prims", "values", "labels_private", "decks",
+     "cert_events", "cert_runs"])
 
 
 class SchemaError(Exception):
@@ -82,6 +83,12 @@ def is_schema_decl(schema, rel, text):
         return False
     body = text[:-1] if text.endswith("\n") else text
     return body == decl_text(schema.tables[m.group(2)], schema.version)
+
+
+def is_schema_aux(rel):
+    """internal/carddb IsSchemaAux: schema/writers.tsv, the writer SLA registry. The one file under
+    schema/ that is neither VERSION nor a table declaration; freshness reads it, the validators allow it."""
+    return rel == SCHEMA_DIR + "/writers.tsv"
 
 
 class Schema:

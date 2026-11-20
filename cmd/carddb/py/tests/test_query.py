@@ -1,0 +1,511 @@
+import json
+import os
+import sqlite3
+import unittest
+
+from carddb import build as build_mod
+from carddb import query as query_mod
+from carddb import shard
+from carddb.boundary import boundary_tree
+from carddb.store import Store
+
+from .helpers import Base, GOLDEN, OID_A, OID_B, OID_C, ROOT, git
+from .test_cert import cert_row
+
+UPDATE = os.environ.get("CARDDB_UPDATE_GOLDEN") == "1"
+
+OID_D = "de" + "3" * 30
+OID_E = "ef" + "4" * 30
+OID_F = "f0" + "5" * 30
+
+CURATED = {
+    "labels": [{"oracle_id": OID_A, "label": "staple", "note": "format fixture"}],
+    "game-changers": [{"oracle_id": OID_A, "added": "2023-01-01", "source": "https://example.test/wotc",
+                       "cited": "2025-02-11"}],
+    "bracket-flags": [{"oracle_id": OID_A, "flag": "mass-land-denial", "source": "https://example.test/wotc",
+                       "cited": "2025-02-11"}],
+    "exclusions": [{"oracle_id": OID_E, "reason": "ante"}],
+    "relations": [{"oracle_id": OID_A, "relation": "combos_with", "other_oracle_id": OID_C}],
+}
+
+
+def write(path, text):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
+
+
+def read(path):
+    with open(path, encoding="utf-8") as f:
+        return f.read()
+
+
+class Query(Base):
+    """One fixture build, then every read verb against it."""
+
+    def setUp(self):
+        super().setUp()
+        for k, v in {
+            "GIT_AUTHOR_NAME": "carddb", "GIT_AUTHOR_EMAIL": "carddb@localhost",
+            "GIT_COMMITTER_NAME": "carddb", "GIT_COMMITTER_EMAIL": "carddb@localhost",
+            "GIT_AUTHOR_DATE": "2026-11-19T00:00:00+00:00",
+            "GIT_COMMITTER_DATE": "2026-11-19T00:00:00+00:00",
+            "GIT_CONFIG_GLOBAL": os.devnull,
+        }.items():
+            old = os.environ.get(k)
+            os.environ[k] = v
+            self.addCleanup(lambda k=k, old=old: os.environ.pop(k, None)
+                            if old is None else os.environ.__setitem__(k, old))
+        self.home = os.path.join(self.tmp, "a")
+        self.a = self.machine("a", init=True)
+
+        self.a.put("cards", [
+            {"oracle_id": OID_A, "name": "Lightning Bolt", "layout": "normal", "mana_cost": "{R}",
+             "mana_value": 1, "type_line": "Instant", "colors": ["R"], "color_identity": ["R"]},
+            {"oracle_id": OID_B, "name": "Fire // Ice", "layout": "split",
+             "mana_cost": "{1}{R} // {1}{U}", "mana_value": 4, "type_line": "Instant // Instant",
+             "colors": ["R", "U"], "color_identity": ["R", "U"]},
+            {"oracle_id": OID_C, "name": "Dáin Ironfoot", "layout": "normal", "mana_cost": "{3}{R}",
+             "mana_value": 4, "type_line": "Legendary Creature — Dwarf Warrior", "colors": ["R"],
+             "color_identity": ["R"], "keywords": ["Haste", "Double strike"]},
+            {"oracle_id": OID_D, "name": "Digital Only", "layout": "normal", "mana_cost": "{1}{U}",
+             "mana_value": 1, "type_line": "Instant", "colors": ["U"], "color_identity": ["U"]},
+            {"oracle_id": OID_E, "name": "Fun Card", "layout": "normal", "mana_cost": "{1}{G}",
+             "mana_value": 1, "type_line": "Instant", "colors": ["G"], "color_identity": ["G"]},
+            {"oracle_id": OID_F, "name": "No Printing", "layout": "normal", "mana_cost": "{1}",
+             "mana_value": 1, "type_line": "Artifact"},
+        ], writer="catalogue")
+        self.a.put("sets", [
+            {"set_code": "lea", "name": "Limited Edition Alpha", "release_date": "1993-08-05",
+             "set_type": "core"},
+            {"set_code": "2ed", "name": "Unlimited Edition", "release_date": "1993-12-01",
+             "set_type": "core"},
+            {"set_code": "alch", "name": "Alchemy", "release_date": "2020-01-01", "set_type": "alchemy"},
+            {"set_code": "funny", "name": "Funny", "release_date": "2020-01-01", "set_type": "funny"},
+        ], writer="catalogue")
+        self.a.put("printings", [
+            {"printing_id": "p-a1", "oracle_id": OID_A, "set_code": "lea", "collector_number": "161",
+             "rarity": "common", "released": "1993-08-05"},
+            {"printing_id": "p-a2", "oracle_id": OID_A, "set_code": "2ed", "collector_number": "161",
+             "rarity": "common", "released": "1993-12-01"},
+            {"printing_id": "p-b1", "oracle_id": OID_B, "set_code": "lea", "collector_number": "162",
+             "rarity": "uncommon", "released": "1993-08-05"},
+            {"printing_id": "p-c1", "oracle_id": OID_C, "set_code": "lea", "collector_number": "163",
+             "rarity": "rare", "released": "1993-08-05"},
+            {"printing_id": "p-d1", "oracle_id": OID_D, "set_code": "alch", "collector_number": "1",
+             "rarity": "common", "released": "2020-01-01"},
+            {"printing_id": "p-e1", "oracle_id": OID_E, "set_code": "funny", "collector_number": "1",
+             "rarity": "common", "released": "2020-01-01"},
+        ], writer="catalogue")
+        self.a.put("legality", [
+            {"oracle_id": oid, "format": "modern", "status": status}
+            for oid, status in ((OID_A, "legal"), (OID_B, "banned"), (OID_C, "legal"),
+                                (OID_D, "legal"), (OID_E, "legal"), (OID_F, "legal"))
+        ], writer="catalogue")
+        self.a.put("status", [
+            {"oracle_id": OID_A, "level": "A", "verdict": "agree", "gorge_pin": "8f7095353a64",
+             "measured": "2026-11-19", "writer": "loop"},
+            {"oracle_id": OID_B, "level": "B", "verdict": "diverge", "gorge_pin": "8f7095353a64",
+             "measured": "2026-11-19", "writer": "loop"},
+        ], writer="loop")
+        self.a.put("cert", [
+            cert_row(OID_A, "Lightning Bolt", "C2", measured="2026-11-19"),
+            cert_row(OID_B, "Fire // Ice", "C1", measured="2026-11-19"),
+        ], writer="certification")
+        self.a.put("labels", [
+            {"oracle_id": OID_A, "label": "burn", "origin": "derived"},
+            {"oracle_id": OID_C, "label": "ramp", "origin": "derived"},
+        ], writer="labels")
+        self.a.put("evidence", [
+            {"oracle_id": OID_A, "source": "oracle", "ref": "scen-1", "outcome": "agree", "writer": "ci"},
+        ], writer="ci")
+        self.a.put("xledger", [
+            {"oracle_id": OID_A, "tier": "T1", "state": "agree", "note": "fixture"},
+        ], writer="farm")
+        self.a.put("_meta/unresolved", [
+            {"kind": "card", "ref": "Mystery Card", "reason": "no card of this name; pseudo id x:1"},
+        ], writer="resolve")
+
+        self.sla = os.path.join(self.tmp, "writers.tsv")
+        write(self.sla, "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n" + "".join(
+            "%s\t%d\tcards\tfixture\n" % (w, 24 if w == "catalogue" else 1000)
+            for w in ("catalogue", "certification", "ci", "farm", "labels", "loop", "resolve")))
+        self.asset = os.path.join(self.tmp, "carddb-latest.json")
+        write(self.asset, json.dumps({"published_at": "2026-11-19T00:00:00Z", "unresolved": 1}) + "\n")
+
+        src = os.path.join(self.tmp, "src")
+        for table, rows in CURATED.items():
+            cols = list(rows[0])
+            write(os.path.join(src, "carddb/curated", table + ".tsv"),
+                  "#carddb curated/%s v1\n%s\n" % (table, "\t".join(cols)) +
+                  "".join("\t".join(str(r[c]) for c in cols) + "\n" for r in rows))
+        write(os.path.join(src, "oracle/xengine/diagnosed.tsv"),
+              "kind\tset\tcard\tfield\twrong\tcr\tevidence\tupstream\tticket\n")
+        committed = build_mod.read_committed(directory=src)
+
+        self.pub = os.path.join(self.tmp, "carddb.sqlite")
+        build_mod.build(self.pub, self.schema, self.a.dir, None, committed,
+                        revs={"gorge_pin": "8f7095353a64"})
+        self.priv = os.path.join(self.tmp, "carddb-private.sqlite")
+        os.environ["CARDDB_PRIVATE_REMOTE"] = os.path.join(self.tmp, "private.git")
+        self.addCleanup(os.environ.pop, "CARDDB_PRIVATE_REMOTE", None)
+        git("init", "--bare", "--quiet", os.environ["CARDDB_PRIVATE_REMOTE"])
+        p = Store("private", home=self.home, schema=self.schema).init()
+        p.put("decks", [{"deck_id": "d1", "oracle_id": OID_A, "count": 4},
+                        {"deck_id": "d1", "oracle_id": OID_C, "count": 2},
+                        {"deck_id": "d2", "oracle_id": OID_A, "count": 4}], writer="decklib")
+        p.put("text", [{"oracle_id": OID_A, "oracle_text": "Deals 3 damage to any target."}],
+              writer="scryfall")
+        p.put("tags", [{"oracle_id": OID_A, "tag": "removal", "tagger": "t"}], writer="scryfall")
+        p.put("edhrec", [{"oracle_id": OID_A, "edhrec_rank": 42}], writer="scryfall")
+        p.put("prims", [{"oracle_id": OID_A, "prims": "api:damage"}], writer="scryfall")
+        p.put("values", [{"oracle_id": OID_A, "value": "1.50"}], writer="values")
+        p.put("labels_private", [{"oracle_id": OID_A, "label": "cedh", "note": "fixture"}],
+              writer="values")
+        build_mod.build(self.priv, self.schema, self.a.dir, p.dir, committed,
+                        revs={"gorge_pin": "8f7095353a64"})
+
+    def run_cli(self, *args, private=False):
+        db = self.priv if private else self.pub
+        argv = list(args) + ["--db", db] + (["--private"] if private else [])
+        return self.cli(self.home, *argv)
+
+    def golden(self, name, text):
+        path = os.path.join(GOLDEN, name)
+        if UPDATE:
+            write(path, text)
+        self.assertEqual(text, read(path), "golden %s differs (CARDDB_UPDATE_GOLDEN=1 rewrites it)" % name)
+
+    def test_card(self):
+        r = self.run_cli("card", "lightning bolt")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_card.txt", r.stdout)
+        r = self.run_cli("card", "Lightning Bolt", private=True)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_card_private.txt", r.stdout)
+
+    def test_search(self):
+        r = self.run_cli("search", "dwarf")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_search.txt", r.stdout)
+        self.assertIn("Dáin Ironfoot", r.stdout)
+        for args, want in (
+            (("bolt", "--legal", "modern", "--set", "lea", "--status", "level=A"), "Lightning Bolt"),
+            (("burn", "--label", "burn"), "Lightning Bolt"),
+            (("bolt", "--label", "role:burn"), "Lightning Bolt"),
+            (("bolt", "--legal", "legacy"), None),
+        ):
+            r = self.run_cli("search", *args)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            if want:
+                self.assertIn(want, r.stdout)
+            else:
+                self.assertEqual(len(r.stdout.splitlines()), 1)  # the column header only
+        r = self.run_cli("search", "bolt", "--status", "engine=gorge")
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("no column", r.stderr)
+
+    def test_blockers(self):
+        r = self.run_cli("blockers", "--format", "modern")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_blockers.txt", r.stdout)
+        self.assertNotIn("Digital Only", r.stdout)
+        self.assertNotIn("Fun Card", r.stdout)
+        r = self.run_cli("blockers", "--format", "modern", "--engine", "proven")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_blockers_proven.txt", r.stdout)
+        r = self.run_cli("blockers", "--format", "modern", "--by", "decks", private=True)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_blockers_decks.txt", r.stdout)
+        r = self.run_cli("blockers", "--format", "modern", private=True)  # private default: decks
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(r.stdout, read(os.path.join(GOLDEN, "query_blockers_decks.txt")))
+        r = self.run_cli("blockers", "--format", "modern", "--engine", "gorge")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn("Dáin Ironfoot", r.stdout)
+        self.assertNotIn("Lightning Bolt", r.stdout)  # it has an agreeing status row
+        r = self.run_cli("blockers", "--format", "modern", "--by", "decks")
+        self.assertEqual(r.returncode, 1, r.stderr)
+
+    def test_proven(self):
+        r = self.run_cli("proven", "--format", "modern")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_proven.txt", r.stdout)
+        self.assertNotIn("Fire // Ice", r.stdout)  # C1 is below the C2 proven level
+
+    def test_deck(self):
+        r = self.run_cli("deck", "d1", private=True)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_deck.txt", r.stdout)
+        r = self.run_cli("deck", "d1")  # the public build has no decks table
+        self.assertEqual(r.returncode, 1, r.stderr)
+
+    def test_freshness(self):
+        base = ("freshness", "--public-dir", os.path.join(self.home, "public"),
+                "--asset-meta", self.asset, "--sla", self.sla)
+        r = self.run_cli(*base, "--now", "2026-11-19T00:00:00Z")
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.golden("query_freshness.txt", r.stdout)
+        r = self.run_cli(*base, "--now", "2026-11-21T12:00:00Z", "--tick",
+                         "--unresolved-baseline", "0")
+        self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+        self.assertTrue(all(line.startswith("!! ") for line in r.stdout.splitlines()))
+        self.golden("query_freshness_tick.txt", r.stdout)
+
+    def test_freshness_reads_the_clone_without_a_build(self):
+        r = self.cli(self.home, "freshness", "--public-dir", os.path.join(self.home, "public"),
+                     "--asset-meta", self.asset, "--sla", self.sla, "--now", "2026-11-19T00:00:00Z")
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("writer catalogue ran 2026-11-19", r.stdout)
+
+    def test_sql(self):
+        r = self.run_cli("sql", "SELECT name, mana_value FROM cards ORDER BY name")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_sql.txt", r.stdout)
+        for bad in ("DELETE FROM cards", "UPDATE cards SET name='x'", "PRAGMA user_version",
+                    "SELECT 1; DELETE FROM cards"):
+            with self.subTest(bad):
+                r = self.run_cli("sql", bad)
+                self.assertEqual(r.returncode, 2, r.stdout + r.stderr)
+                self.assertIn("sql:", r.stderr)
+        c = sqlite3.connect(self.pub)
+        self.addCleanup(c.close)
+        self.assertEqual(c.execute("SELECT count(*) FROM cards").fetchone()[0], 6)
+
+    def test_export(self):
+        r = self.run_cli("export", "cards", "--tsv")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_export_cards.txt", r.stdout)
+        r = self.run_cli("export", "proven", "--tsv")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_export_proven.txt", r.stdout)
+        r = self.run_cli("export", "curated/labels", "--tsv")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn("staple", r.stdout)
+        r = self.run_cli("export", "cards")
+        self.assertEqual(r.returncode, 2, r.stderr)
+
+    def test_missing_database_and_unknown_view(self):
+        r = self.cli(self.home, "card", "Lightning Bolt", "--db", os.path.join(self.tmp, "nope.sqlite"))
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("no built database", r.stderr)
+        r = self.run_cli("export", "nope", "--tsv")
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("unknown view", r.stderr)
+
+    def test_writers_config_is_allowed_under_schema(self):
+        good = ("#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n"
+                "catalogue\t24\tcards\tfixture\n")
+        files = [("schema/writers.tsv", good)]
+        self.assertEqual(shard.validate_tree(self.schema, "public", files), [])
+        self.assertEqual(boundary_tree(self.schema, files), [])
+        real = list(shard.tree_files(os.path.join(ROOT, "carddb")))
+        self.assertEqual(shard.validate_tree(self.schema, "public", real), [])
+        self.assertEqual(boundary_tree(self.schema, real), [])
+        bad = [("schema/writers.tsv", "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n"
+                "catalogue\tzero\tcards\tfixture\n")]
+        self.assertTrue(shard.validate_tree(self.schema, "public", bad))
+        self.assertTrue(boundary_tree(self.schema, bad))
+
+    def test_writers_shape_is_fixed(self):
+        # The one non-declaration under schema/ cannot grow a column, so it
+        # cannot park oracle_text (or a private table) under schema/.
+        header = "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n"
+        bad = {
+            "extra-forbidden-column": header.replace("\tdoc\n", "\toracle_text\n")
+            + "catalogue\t24\tDraw a card.\tfixture\n",
+            "extra-private-table-column": header.replace("\tdoc\n", "\ttext\n")
+            + "catalogue\t24\tprivate text\tfixture\n",
+            "over-wide-header": header.replace("\tdoc\n", "\tdoc\textra\n")
+            + "catalogue\t24\tcards\tfixture\tmore\n",
+            "missing-doc": "#carddb-writers v1\nwriter\tsla_hours\ttables\ncatalogue\t24\tcards\n",
+            "duplicate-writer": header + "catalogue\t24\tcards\ta\ncatalogue\t36\tcards\tb\n",
+            "plus-sla": header + "catalogue\t+24\tcards\tfixture\n",
+            "leading-zero-sla": header + "catalogue\t01\tcards\tfixture\n",
+            "huge-sla": header + "catalogue\t999999999999999999999\tcards\tfixture\n",
+        }
+        for name, text in bad.items():
+            with self.subTest(name):
+                files = [("schema/writers.tsv", text)]
+                self.assertTrue(shard.validate_tree(self.schema, "public", files), name)
+                self.assertTrue(boundary_tree(self.schema, files), name)
+                path = os.path.join(self.tmp, name + ".tsv")
+                write(path, text)
+                with self.assertRaises(query_mod.QueryError):
+                    query_mod.load_writers(path)
+
+    def test_writer_sla_parser(self):
+        self.assertEqual(query_mod.load_writers(self.sla)["catalogue"], 24)
+        committed = query_mod.load_writers(os.path.join(ROOT, "carddb", "schema", "writers.tsv"))
+        # ids the schema declarations and merge driver actually write
+        self.assertTrue({"ci", "cert", "loop"} <= set(committed), sorted(committed))
+        bad = os.path.join(self.tmp, "bad-writers.tsv")
+        write(bad, "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\ncatalogue\tzero\tcards\tfixture\n")
+        with self.assertRaises(query_mod.QueryError):
+            query_mod.load_writers(bad)
+
+    def test_malformed_inputs_are_clean_errors(self):
+        # A valid-JSON non-object asset metadata is "no metadata", not an
+        # AttributeError traceback.
+        bad_meta = os.path.join(self.tmp, "list-asset.json")
+        write(bad_meta, "[]\n")
+        r = self.run_cli("freshness", "--public-dir", os.path.join(self.home, "public"),
+                         "--asset-meta", bad_meta, "--sla", self.sla,
+                         "--now", "2026-11-19T00:00:00Z")
+        self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+        self.assertNotIn("Traceback", r.stderr)
+        self.assertIn("no carddb-latest metadata", r.stdout)
+
+        # A missing SLA file is the tool's clean error.
+        r = self.run_cli("freshness", "--public-dir", os.path.join(self.home, "public"),
+                         "--asset-meta", self.asset, "--sla", os.path.join(self.tmp, "nope.tsv"),
+                         "--now", "2026-11-19T00:00:00Z")
+        self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+        self.assertNotIn("Traceback", r.stderr)
+        self.assertIn("cannot read writer SLA file", r.stdout)
+
+        # A cell past Python's int-conversion limit is a violation, not a traceback.
+        huge = os.path.join(self.tmp, "huge-sla.tsv")
+        write(huge, "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\ncatalogue\t1" + "0" * 5000
+              + "\tcards\tfixture\n")
+        files = [("schema/writers.tsv", shard.read_text(huge))]
+        self.assertTrue(shard.validate_tree(self.schema, "public", files))
+        r = self.run_cli("freshness", "--public-dir", os.path.join(self.home, "public"),
+                         "--asset-meta", self.asset, "--sla", huge, "--now", "2026-11-19T00:00:00Z")
+        self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+        self.assertNotIn("Traceback", r.stderr)
+        self.assertIn("out of range", r.stdout)
+
+    def test_writers_file_is_read_like_the_validators_read_it(self):
+        # One text for validate_tree and load_writers: whatever the validators
+        # accept the consumer accepts, and the other way round.
+        header = "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n"
+        cases = {
+            "lone-cr-in-cell": (header + "catalogue\t24\tcards\ta\rb\n").encode(),
+            "invalid-utf8": (header + "catalogue\t24\tcards\t").encode() + b"\xff\n",
+            "crlf": (header + "catalogue\t24\tcards\tfixture\n").replace("\n", "\r\n").encode(),
+        }
+        for name, raw in cases.items():
+            with self.subTest(name):
+                path = os.path.join(self.tmp, name + ".tsv")
+                with open(path, "wb") as f:
+                    f.write(raw)
+                rel = [("schema/writers.tsv", shard.read_text(path))]
+                validators_ok = not shard.validate_tree(self.schema, "public", rel)
+                self.assertEqual(validators_ok, not boundary_tree(self.schema, rel), name)
+                try:
+                    query_mod.load_writers(path)
+                    consumer_ok = True
+                except query_mod.QueryError:
+                    consumer_ok = False
+                self.assertEqual(validators_ok, consumer_ok, name)
+                if consumer_ok:
+                    r = self.run_cli("freshness", "--public-dir", os.path.join(self.home, "public"),
+                                     "--asset-meta", self.asset, "--sla", path,
+                                     "--now", "2026-11-19T00:00:00Z")
+                    self.assertNotIn("Traceback", r.stderr)
+
+        # Metadata for the other scope is refused rather than used as this
+        # scope's age/baseline.
+        other_meta = os.path.join(self.tmp, "private-asset.json")
+        write(other_meta, json.dumps({"scope": "private",
+                                      "published_at": "2026-11-19T00:00:00Z"}) + "\n")
+        r = self.run_cli("freshness", "--public-dir", os.path.join(self.home, "public"),
+                         "--asset-meta", other_meta, "--sla", self.sla,
+                         "--now", "2026-11-19T00:00:00Z")
+        self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+        self.assertIn("metadata is for scope 'private', want 'public'", r.stdout)
+        self.assertIn("no carddb-latest metadata", r.stdout)
+
+    def test_freshness_public_build_needs_only_public_writers(self):
+        # A realistic public store: a row for every public-capable writer, one id
+        # of each alias pair, nothing from the private-only writers.
+        reg = query_mod.load_registry(os.path.join(ROOT, "carddb", "schema", "writers.tsv"))
+        self.assertTrue({"scryfall", "values", "decklib"} <= set(reg))
+        aliases = query_mod._alias_groups(reg)
+        self.assertEqual({w: h for w, h in aliases.items() if w != h},
+                         {"ci": "compliance", "cert": "certification", "loop": "evloop"})
+        home = os.path.join(self.tmp, "public-only")
+        os.makedirs(home)
+        pub = Store("public", home=home, schema=self.schema)
+        pub.init()
+        public_writers = [w for w in sorted(reg)
+                          if w not in aliases or aliases[w] == w
+                          if any(t not in query_mod.PRIVATE_TABLE_NAMES for t in reg[w][1])]
+        self.assertNotIn("scryfall", public_writers)
+        pub.put("_meta/writers", [{"writer": w, "table": "_meta/writers", "version": "t",
+                                   "ran": "2026-11-19"} for w in public_writers])
+        write(os.path.join(home, "carddb-latest.json"),
+              json.dumps({"scope": "public", "published_at": "2026-11-19T00:00:00Z",
+                          "unresolved": 1}) + "\n")
+        args = ("freshness", "--public-dir", pub.dir, "--now", "2026-11-19T00:00:00Z")
+        r = self.cli(home, *args)
+        self.assertNotIn("no _meta/writers row", r.stdout)
+        self.assertNotIn("Traceback", r.stderr)
+        # the one alias id recorded in place of its job name still satisfies the job
+        for dropped, alias in (("compliance", "ci"), ("certification", "cert"), ("evloop", "loop")):
+            rows = [{"writer": alias if w == dropped else w, "table": "_meta/writers",
+                     "version": "t", "ran": "2026-11-19"} for w in public_writers]
+            h2 = os.path.join(self.tmp, "alias-" + alias)
+            os.makedirs(h2)
+            p2 = Store("public", home=h2, schema=self.schema)
+            p2.init()
+            p2.put("_meta/writers", rows)
+            write(os.path.join(h2, "carddb-latest.json"),
+                  json.dumps({"scope": "public", "published_at": "2026-11-19T00:00:00Z"}) + "\n")
+            r = self.cli(h2, "freshness", "--public-dir", p2.dir, "--now", "2026-11-19T00:00:00Z")
+            self.assertNotIn("no _meta/writers row", r.stdout, alias)
+        # a public writer that never ran is still flagged
+        rows = [{"writer": w, "table": "_meta/writers", "version": "t", "ran": "2026-11-19"}
+                for w in public_writers if w != "catalogue"]
+        h3 = os.path.join(self.tmp, "missing")
+        os.makedirs(h3)
+        p3 = Store("public", home=h3, schema=self.schema)
+        p3.init()
+        p3.put("_meta/writers", rows)
+        r = self.cli(h3, "freshness", "--public-dir", p3.dir, "--now", "2026-11-19T00:00:00Z")
+        self.assertIn("!! writer catalogue has no _meta/writers row", r.stdout)
+        self.assertNotIn("writer scryfall has no", r.stdout)
+
+    def test_freshness_uses_the_committed_registry_and_scope_metadata(self):
+        # No --sla and no --asset-meta: the default path loads the committed
+        # registry and each scope's own metadata file.
+        sla = query_mod.load_writers(os.path.join(ROOT, "carddb", "schema", "writers.tsv"))
+        home = os.path.join(self.tmp, "registry")
+        os.makedirs(home)
+        priv_remote = os.path.join(self.tmp, "private-registry.git")
+        git("init", "--bare", "--quiet", priv_remote)
+        old = os.environ.get("CARDDB_PRIVATE_REMOTE")
+        os.environ["CARDDB_PRIVATE_REMOTE"] = priv_remote
+
+        def restore():
+            if old is None:
+                os.environ.pop("CARDDB_PRIVATE_REMOTE", None)
+            else:
+                os.environ["CARDDB_PRIVATE_REMOTE"] = old
+        self.addCleanup(restore)
+        pub = Store("public", home=home, schema=self.schema)
+        pub.init()
+        priv = Store("private", home=home, schema=self.schema)
+        priv.init()
+        rows = [{"writer": w, "table": "_meta/writers", "version": "test", "ran": "2026-11-19"}
+                for w in sorted(sla)]
+        pub.put("_meta/writers", rows)
+        priv.put("_meta/writers", rows)
+        write(os.path.join(home, "carddb-latest.json"),
+              json.dumps({"scope": "public", "published_at": "2026-11-18T00:00:00Z",
+                          "unresolved": 1}) + "\n")
+        write(os.path.join(home, "carddb-private-latest.json"),
+              json.dumps({"scope": "private", "published_at": "2026-11-19T00:00:00Z",
+                          "unresolved": 0}) + "\n")
+
+        public = self.cli(home, "freshness", "--public-dir", pub.dir, "--now", "2026-11-19T00:00:00Z")
+        self.assertNotIn("not registered", public.stdout)
+        self.assertNotIn("no _meta/writers row", public.stdout)
+        self.assertIn("writer ci ran 2026-11-19", public.stdout)
+        self.assertIn("carddb-latest 24.0h old (SLA 6h)", public.stdout)
+
+        private = self.cli(home, "freshness", "--private", "--public-dir", priv.dir,
+                           "--now", "2026-11-19T00:00:00Z")
+        self.assertNotIn("not registered", private.stdout)
+        self.assertIn("carddb-private-latest 0.0h old (SLA 6h)", private.stdout)
