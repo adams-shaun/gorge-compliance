@@ -1,0 +1,340 @@
+{
+ "card": "Benalish Hero",
+ "family": "keywords",
+ "author": "Oracle + CR only",
+ "oracle_sha": "c34c855aa9c3",
+ "scenarios": [
+  {
+   "name": "band-blocked-as-a-group-attacker-divides-blocker-damage",
+   "cr": [
+    "702.22c",
+    "702.22h",
+    "702.22k",
+    "510.1d"
+   ],
+   "why": "Oracle: bands are blocked as a group, and if a creature with banding you control is being blocked by a creature, you (not its controller) divide that creature's combat damage. Benalish Hero (1/1, banding) and Grizzly Bears (2/2) attack as a band; Hill Giant (3/3) blocks only the Bears and so blocks the Hero too (702.22h). Hill Giant's 3 damage is divided by the active player p0 (702.22k), who puts all 3 on the Hero: the Hero dies, the Bears take none, and the Giant takes 1 + 2 = 3 and dies. Neither attacker is unblocked, so p1 loses no life.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Benalish Hero",
+      "Grizzly Bears"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Hill Giant"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Benalish Hero",
+      "p0:Grizzly Bears"
+     ],
+     "defender": "p1",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Grizzly Bears"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "seat": 1,
+     "blocks": [
+      [
+       "p1:Hill Giant",
+       "p0:Grizzly Bears"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "seat": 0,
+     "step": "end",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "3 to Benalish Hero,0 to Grizzly Bears"
+       ],
+       "seat": 0
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Benalish Hero",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "card": "p1:Hill Giant",
+     "zone": "graveyard"
+    },
+    {
+     "life": {
+      "p1": 20
+     }
+    }
+   ]
+  },
+  {
+   "name": "no-band-declared-blocker-blocks-one-attacker-only",
+   "cr": [
+    "702.22c",
+    "510.1c",
+    "510.2"
+   ],
+   "why": "A band exists only if the attacking player declares it (702.22c). With the same board but no band declared, Hill Giant blocks the Grizzly Bears alone: the Hero is unblocked and deals 1 to p1, the Giant assigns all 3 to its one blocked creature (510.1d) and kills the Bears, and the Bears' 2 damage leaves the Giant alive.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Benalish Hero",
+      "Grizzly Bears"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Hill Giant"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Benalish Hero",
+      "p0:Grizzly Bears"
+     ],
+     "defender": "p1",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "No more creatures in Benalish Hero's band"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "seat": 1,
+     "blocks": [
+      [
+       "p1:Hill Giant",
+       "p0:Grizzly Bears"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "seat": 0,
+     "step": "end"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Benalish Hero",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p1:Hill Giant",
+     "zone": "battlefield",
+     "damage": 2
+    },
+    {
+     "life": {
+      "p1": 19
+     }
+    }
+   ]
+  },
+  {
+   "name": "blocked-by-banding-creature-defender-divides-attackers-damage",
+   "cr": [
+    "702.22j",
+    "510.1c"
+   ],
+   "why": "Oracle: if a creature with banding you control is blocking a creature, you divide that creature's combat damage, not its controller. Hill Giant (3/3) attacks and is blocked by Benalish Hero (1/1, banding) and Grizzly Bears (2/2). The defending player p1, not the Giant's controller, divides the Giant's 3 damage (702.22j); p1 puts all 3 on the Hero. The Hero dies, the Bears take none, and the Giant takes 1 + 2 = 3 and dies.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Hill Giant"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Benalish Hero",
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Hill Giant"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "seat": 1,
+     "blocks": [
+      [
+       "p1:Benalish Hero",
+       "p0:Hill Giant"
+      ],
+      [
+       "p1:Grizzly Bears",
+       "p0:Hill Giant"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "seat": 0,
+     "step": "end",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "3 to Benalish Hero,0 to Grizzly Bears"
+       ],
+       "seat": 1
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Benalish Hero",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "card": "p0:Hill Giant",
+     "zone": "graveyard"
+    },
+    {
+     "life": {
+      "p1": 20
+     }
+    }
+   ]
+  },
+  {
+   "name": "blocked-without-banding-controller-assigns-damage",
+   "cr": [
+    "702.22j",
+    "510.1c"
+   ],
+   "why": "The exception of 702.22j applies only when a blocker has banding. Hill Giant (3/3) is blocked by Grizzly Bears (2/2) and Hill Giant (3/3) of p1, neither with banding, so the active player p0 divides the attacker's damage as 510.1c says (the ordinary rule): all 3 to the blocking Bears. The Bears die; p1's Giant takes none; p0's Giant takes 2 + 3 = 5 and dies.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Hill Giant"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears",
+      "Hill Giant"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Hill Giant"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "seat": 1,
+     "blocks": [
+      [
+       "p1:Grizzly Bears",
+       "p0:Hill Giant"
+      ],
+      [
+       "p1:Hill Giant",
+       "p0:Hill Giant"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "seat": 0,
+     "step": "end",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "3 to Grizzly Bears,0 to Hill Giant"
+       ],
+       "seat": 0
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p1:Hill Giant",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "card": "p0:Hill Giant",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

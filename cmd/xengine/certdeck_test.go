@@ -359,6 +359,89 @@ func TestCertdeckNeeds(t *testing.T) {
 		}
 	}
 
+	// A banding creature (CR 702.22) derives the banding need, and every one
+	// gorge plays gets a target deck with at least eight creatures with
+	// banding (its own copies included), whatever its colour (Timber Wolves
+	// and Nalathni Dragon are green and red, and widen to white), plus an
+	// opponent with attackers and blockers: a band's damage rules apply when it
+	// is blocked or blocks. The floor is the brief's literal 8, not the
+	// implementation's constant.
+	if certdeck.BandingCopies != 8 {
+		t.Errorf("BandingCopies = %d, want 8", certdeck.BandingCopies)
+	}
+	bandCreatures := func(p *certdeck.Plan) int {
+		cnt := map[string]int{}
+		for _, e := range p.Self.File.Cards {
+			cnt[e.Name] = e.Count
+		}
+		n := 0
+		for name, k := range cnt {
+			if f := face(name); f.IsCreature() && f.HasKeyword("Banding") {
+				n += k
+			}
+		}
+		return n
+	}
+	banders := 0
+	for _, c := range reg.AllCards() {
+		if len(c.Faces) == 0 || !c.Faces[0].IsCreature() || !c.Faces[0].HasKeyword("Banding") || !b.Playable(c) {
+			continue
+		}
+		name := c.Faces[0].Name
+		p := certdeckPlan(t, b, name)
+		banders++
+		for _, n := range []certdeck.Need{{Class: certdeck.Banding}, {Class: certdeck.OppAttackers}, {Class: certdeck.OppBlockers}} {
+			if !hasNeed(p, n) {
+				t.Errorf("%s needs %v, want %v", name, p.Needs, n)
+			}
+		}
+		for _, n := range p.Self.Provided["banding"] {
+			if f := face(n); !f.IsCreature() || !f.HasKeyword("Banding") {
+				t.Errorf("%s: banding provider %s is not a creature with banding", name, n)
+			}
+		}
+		if have := bandCreatures(p); have < 8 {
+			t.Errorf("%s (deck %s): %d creatures with banding, want at least 8", name, p.Self.Colours, have)
+		}
+		if n := enablerCopies(p.Self); n > certdeck.MaxEnablerSlots {
+			t.Errorf("%s: %d enabler copies, want at most %d", name, n, certdeck.MaxEnablerSlots)
+		}
+	}
+	// 24 creatures print banding at this pin; gorge refuses Mishra's War Machine.
+	if banders != 23 {
+		t.Errorf("%d banding creatures are playable, want 23 (24 printed, minus Mishra's War Machine)", banders)
+	}
+	// A card that grants banding (Banding Sliver) or reads it (Camel's text
+	// names banding too) is no banding creature, so it has none of its own
+	// copies to count: its deck still holds eight creatures with banding.
+	granters := 0
+	for _, c := range reg.AllCards() {
+		if len(c.Faces) == 0 || !b.Playable(c) || (c.Faces[0].IsCreature() && c.Faces[0].HasKeyword("Banding")) {
+			continue
+		}
+		needs, err := certdeck.ParseNeeds("auto", c, b.Types())
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !hasNeed(&certdeck.Plan{Needs: needs}, certdeck.Need{Class: certdeck.Banding}) {
+			continue
+		}
+		granters++
+		p := certdeckPlan(t, b, c.Faces[0].Name)
+		if have := bandCreatures(p); have < 8 {
+			t.Errorf("%s (grants or reads banding; deck %s): %d creatures with banding, want at least 8", c.Faces[0].Name, p.Self.Colours, have)
+		}
+		if n := enablerCopies(p.Self); n > certdeck.MaxEnablerSlots {
+			t.Errorf("%s: %d enabler copies, want at most %d", c.Faces[0].Name, n, certdeck.MaxEnablerSlots)
+		}
+	}
+	if granters == 0 {
+		t.Error("no card that grants or reads banding derives the banding need")
+	}
+	if ns, err := certdeck.ParseNeeds("banding", tc0(t, reg, "Camel"), b.Types()); err != nil || len(ns) != 1 || ns[0].Class != certdeck.Banding || ns[0].Arg != "" {
+		t.Errorf("ParseNeeds banding = %v, %v", ns, err)
+	}
+
 	// A split card is refused with the reason (XMage lists "Cut // Ribbons"
 	// and play -decks -xmage skips a deck that names the front face).
 	if _, err := b.Build("Cut", nil); err == nil || !strings.Contains(err.Error(), "XMage spells") {
@@ -478,4 +561,13 @@ func TestCertdeckPlayable(t *testing.T) {
 			t.Errorf("%s: %d decks, %v, skipped %v, summary %q", name, len(ds), err, info.Skipped, info)
 		}
 	}
+}
+
+func tc0(t *testing.T, reg *cards.Registry, name string) *cards.Card {
+	t.Helper()
+	c, ok := reg.Lookup(name)
+	if !ok {
+		t.Fatalf("%s is not in the corpus", name)
+	}
+	return c
 }

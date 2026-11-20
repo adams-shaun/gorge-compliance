@@ -1,0 +1,6 @@
+{
+ "card": "Power Surge",
+ "rows": {
+  "damages-a-player-by-their-untapped-lands-at-the-start-of-their-turn": "Oracle: at each player's upkeep Power Surge deals damage equal to the untapped lands that player controlled at the beginning of the turn. Observed: p1 (two untapped Mountains, two tapped Forests at turn start) stays at 20 life through p1's upkeep to main phase. Corroborated: XMage (4142596) and Forge (build ae39d91530) both leave p1 at 18. The script's count NumPowerSurgeLands has no reader in gorge; Forge reads it (forge-game AbilityUtils, Player, PhaseHandler) and counts at the turn's start."
+ }
+}

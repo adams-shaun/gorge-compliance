@@ -1,0 +1,187 @@
+{
+ "card": "Kjeldoran Warrior",
+ "family": "keywords",
+ "author": "Oracle + CR only",
+ "oracle_sha": "c34c855aa9c3",
+ "scenarios": [
+  {
+   "name": "two-banding-creatures-form-a-band-blocked-as-a-group",
+   "cr": [
+    "702.22c",
+    "702.22h",
+    "702.22k"
+   ],
+   "why": "Oracle: any creatures with banding can attack in a band. Kjeldoran Warrior and Benalish Hero (both 1/1, banding) attack as a band; Hill Giant (3/3) blocks only the Warrior, and so blocks the Hero too (702.22h). The attacking player p0 divides the Giant's 3 damage (702.22k) and puts all 3 on the Warrior: the Warrior dies, the Hero takes none. The two attackers deal 2 damage to the Giant, which lives, and p1 loses no life.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Kjeldoran Warrior",
+      "Benalish Hero"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Hill Giant"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Kjeldoran Warrior",
+      "p0:Benalish Hero"
+     ],
+     "defender": "p1",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Benalish Hero"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "seat": 1,
+     "blocks": [
+      [
+       "p1:Hill Giant",
+       "p0:Kjeldoran Warrior"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "seat": 0,
+     "step": "end",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "3 to Kjeldoran Warrior,0 to Benalish Hero"
+       ],
+       "seat": 0
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Kjeldoran Warrior",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Benalish Hero",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "card": "p1:Hill Giant",
+     "zone": "battlefield",
+     "damage": 2
+    },
+    {
+     "life": {
+      "p1": 20
+     }
+    }
+   ]
+  },
+  {
+   "name": "band-needs-banding-and-at-most-one-plain-creature",
+   "cr": [
+    "702.22c"
+   ],
+   "why": "A band is any number of attacking creatures with banding and up to one without (702.22c). Kjeldoran Warrior (banding), Grizzly Bears and Hill Giant (neither has banding) attack; the Warrior takes the Bears into its band, which is then full of non-banding creatures, so the Giant attacks alone. p1's Grizzly Bears block the Warrior and so block p0's Bears too (702.22h); the attacking player p0 divides the blocker's 2 damage (702.22k) and puts it on the Warrior, which dies while p0's Bears take none. The Warrior's 1 and p0's Bears' 2 damage, both dealt to the one blocker, kill p1's Grizzly Bears (2/2). The Giant is unblocked: p1 loses 3.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Kjeldoran Warrior",
+      "Grizzly Bears",
+      "Hill Giant"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Kjeldoran Warrior",
+      "p0:Grizzly Bears",
+      "p0:Hill Giant"
+     ],
+     "defender": "p1",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Grizzly Bears"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "seat": 1,
+     "blocks": [
+      [
+       "p1:Grizzly Bears",
+       "p0:Kjeldoran Warrior"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "seat": 0,
+     "step": "end",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "2 to Kjeldoran Warrior,0 to Grizzly Bears"
+       ],
+       "seat": 0
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Kjeldoran Warrior",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "life": {
+      "p1": 17
+     }
+    }
+   ]
+  }
+ ]
+}
