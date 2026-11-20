@@ -15,6 +15,7 @@
 //	xengine pool -set S [-legal FORMAT -mtgjson S.json.gz] [-out FILE]
 //	xengine followers
 //	xengine fshadow -log GAME.jsonl [-out DIR] [-game ID] [-max-decisions N]
+//	xengine certdeck -cards .cards -target "<name>" [-need auto|<class,...>] -out DIR
 //
 // play writes DIR/tapes/*.json (every game's tape), DIR/items.jsonl (the
 // follower input: only the items whose lowering gorge's own runner
@@ -67,7 +68,7 @@ const DefaultRoot = ".oracle-build/xengine"
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|diagnosed|calib|xprep|adjudicate|sweep-plan|pool|followers|fshadow [flags]")
+		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|diagnosed|calib|xprep|adjudicate|sweep-plan|pool|followers|fshadow|certdeck [flags]")
 		os.Exit(2)
 	}
 	var err error
@@ -94,8 +95,10 @@ func main() {
 		err = runFollowers(os.Args[2:])
 	case "fshadow":
 		err = runFShadow(os.Args[2:])
+	case "certdeck":
+		err = runCertdeck(os.Args[2:])
 	default:
-		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, diagnosed, calib, xprep, adjudicate, sweep-plan, pool, followers or fshadow)", os.Args[1])
+		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, diagnosed, calib, xprep, adjudicate, sweep-plan, pool, followers, fshadow or certdeck)", os.Args[1])
 	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "xengine:", err)
