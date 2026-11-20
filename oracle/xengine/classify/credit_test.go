@@ -39,7 +39,7 @@ func TestUsesCreditsBackFace(t *testing.T) {
 		Kind: "priority",
 		Mana: []game.ManaRec{{Name: "Kazandu Valley", Card: "Kazandu Mammoth", Face: 1, Ability: 0}},
 	}, {
-		Kind: "priority",
+		Kind:  "priority",
 		Picks: []game.Pick{{Kind: "ability", Ref: "p0:Kazandu Valley", Card: "Kazandu Mammoth", Face: 1, Ability: 0}},
 	}, {
 		Kind:     "priority",
