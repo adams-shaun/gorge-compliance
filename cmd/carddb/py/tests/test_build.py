@@ -135,13 +135,12 @@ class Build(Base):
         self.assertTrue(any(k.startswith("oracle/compliance/manifests/") for k in names))
 
     def test_default_ref_tolerates_a_ref_without_the_curated_tree(self):
-        """origin/main before the curated tree was promoted: the sources it lacks are simply absent."""
+        """A checkout whose HEAD has no curated tree: the sources it lacks are simply absent."""
         repo = os.path.join(self.tmp, "checkout")
         write(os.path.join(repo, "oracle/xengine/diagnosed.tsv"), "kind\tset\tcard\tfield\twrong\tcr\tevidence\tupstream\tticket\n")
         git("init", "--quiet", "-b", "main", repo)
         git("add", "-A", cwd=repo)
         git("-c", "user.name=t", "-c", "user.email=t@t", "commit", "--quiet", "-m", "x", cwd=repo)
-        git("update-ref", "refs/remotes/origin/main", "HEAD", cwd=repo)
         got = build_mod.read_committed(repo=repo)  # the default ref
         self.assertEqual(sorted(got), ["oracle/xengine/diagnosed.tsv"])
         with self.assertRaises(store_mod.StoreError):
@@ -152,17 +151,20 @@ class Build(Base):
         build_mod.build(out, self.schema, a.dir, None, got)
         self.assertEqual(self.conn(out).execute("SELECT count(*) FROM curated_labels").fetchone()[0], 0)
 
-    def test_cli_build_defaults_to_origin_main(self):
+    def test_default_ref_is_the_checkout_head(self):
+        self.assertEqual(sorted(build_mod.read_committed(repo=ROOT)),
+                         sorted(build_mod.read_committed(repo=ROOT, ref="HEAD")))
+
+    def test_cli_build_defaults_to_the_checkout_head(self):
         a, _ = self.fixture()
-        if git("rev-parse", "--verify", "--quiet", "origin/main^{commit}", cwd=ROOT).strip() == "":
-            self.skipTest("no origin/main in this checkout")
-        decl = git("show", "origin/main:carddb/schema/v1/curated/game-changers.tsv", cwd=ROOT)
-        if "\tsource\t" not in decl:
-            # the curated schema grows on develop first; origin/main gets it when
-            # develop is promoted, so a develop checkout cannot build from it yet.
-            self.skipTest("origin/main predates the curated citation columns; promote develop to main")
-        r = self.cli(os.path.join(self.tmp, "a"), "build", "--out", os.path.join(self.tmp, "cli.sqlite"))
-        self.assertEqual(r.returncode, 0, r.stderr)
+        out = os.path.join(self.tmp, "cli.sqlite")
+        r = self.cli(os.path.join(self.tmp, "a"), "build", "--out", out)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertTrue(os.path.isfile(out))
+        # the citation columns are on this branch's HEAD; building it must not need main
+        head = build_mod.read_committed(repo=ROOT, ref="HEAD")
+        want = len([l for l in head["carddb/curated/game-changers.tsv"].decode("utf-8").splitlines()[2:] if l])
+        self.assertEqual(self.conn(out).execute("SELECT count(*) FROM curated_game_changers").fetchone()[0], want)
 
     def test_a_key_in_two_shards_is_a_validation_error_not_an_integrity_error(self):
         a, committed = self.fixture()

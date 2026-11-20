@@ -87,7 +87,7 @@ class Catalogue(Base):
         home = os.path.join(self.tmp, "m1")
         r = self.ingest(home)
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-        self.assertIn("5 cards, 6 printings, 4 sets, 66 legality rows, 4 faces", r.stdout)
+        self.assertIn("6 cards, 9 printings, 7 sets, 69 legality rows, 6 faces", r.stdout)
         self.assertIn("cross-check 0 manifest set(s): 0 mismatch(es)", r.stdout)
         got = shards(self.clone(home))
         self.golden(got)
@@ -95,10 +95,19 @@ class Catalogue(Base):
         for text in fixture_texts():
             self.assertNotIn(text, joined)
         self.assertNotIn("oracle_text", joined)
-        # a full sha256, from the same normalised text the audit's 12-hex digest prefixes
-        digest = hashlib.sha256(b"Lightning Bolt deals 3 damage to any target.").hexdigest()
-        self.assertIn("\t" + digest + "\t", joined)
-        self.assertRegex(digest, r"^[0-9a-f]{64}$")
+        # full sha256 values computed independently of normalise_text: the single-face
+        # card, a split card's face join, a same-name DFC's face join, and a CRLF text
+        # with one trailing newline
+        self.assertIn("\t" + hashlib.sha256(
+            b"Lightning Bolt deals 3 damage to any target.").hexdigest() + "\t", joined)
+        self.assertIn("\t" + hashlib.sha256(
+            b"Fire deals 2 damage divided as you choose among one or two targets.\n//\n"
+            b"Tap target permanent.\nDraw a card.").hexdigest() + "\t", joined)
+        self.assertIn("\t" + hashlib.sha256(
+            b"Whenever a player wins a coin flip, draw a card.\n//\n"
+            b"Whenever a player loses a coin flip, scry 1.").hexdigest() + "\t", joined)
+        self.assertIn("\t" + hashlib.sha256(
+            b"Flying\nVigilance (Attacking doesn't cause this creature to tap.)").hexdigest() + "\t", joined)
         # MDFC and split keep both faces' cost/type/PT, but no Oracle text
         faces = read(os.path.join(self.clone(home), "faces", "ae.tsv"))
         self.assertIn("\ta\t{1}{R}\tInstant\t-\t-", faces)
@@ -115,16 +124,44 @@ class Catalogue(Base):
         # first printing facts
         bolt = read(os.path.join(self.clone(home), "cards", "44.tsv"))
         self.assertIn("\t1993-08-05\tlea\ttrue", bolt)
+        # a child set's parent is stored in the same case as set_code, so the link joins
+        sets = read(os.path.join(self.clone(home), "sets.tsv"))
+        head = sets.splitlines()[1].split("\t")
+        rows = [dict(zip(head, l.split("\t"))) for l in sets.splitlines()[2:] if l]
+        codes = {r["set_code"] for r in rows}
+        self.assertIn("p10e", codes)
+        parent = next(r for r in rows if r["set_code"] == "p10e")["parent_code"]
+        self.assertEqual(parent, "10e")
+        for r in rows:
+            if r["parent_code"] != "-":
+                self.assertIn(r["parent_code"], codes, r)
+        # a same-name DFC keeps both faces: the face key is the side, not the face name
+        same = read(os.path.join(self.clone(home), "faces", "bb.tsv"))
+        same_rows = [l for l in same.splitlines() if l.startswith("bb")]
+        self.assertEqual(len(same_rows), 2, same)
+        self.assertIn("\ta\t{3}{U}\tLegendary Creature — Human Wizard\t1\t3", same)
+        self.assertIn("\tb\t-\tLegendary Creature — Human Wizard\t2\t4", same)
 
     def test_rerun_changes_no_byte(self):
         home = os.path.join(self.tmp, "m1")
         r = self.ingest(home)
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
         before = shards(self.clone(home))
+        os.environ["CARDDB_NOW"] = "2026-11-20"  # a different ambient day must not change a byte
         r = self.cli(home, "ingest", "catalogue", "--mtgjson", FIXTURE, "--manifests", self.empty_manifests())
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
         self.assertIn("(0 rows changed)", r.stdout)
         self.assertEqual(shards(self.clone(home)), before)
+
+    def test_same_input_under_two_ambient_dates_is_byte_identical(self):
+        trees = []
+        for i, day in enumerate(("2026-11-19", "2026-11-20")):
+            os.environ["CARDDB_NOW"] = day
+            home = os.path.join(self.tmp, "d%d" % i)
+            r = self.ingest(home)
+            self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+            trees.append(shards(self.clone(home)))
+        self.assertEqual(trees[0], trees[1])
 
     def test_cross_check_reports_and_does_not_overwrite(self):
         home = os.path.join(self.tmp, "m1")
@@ -151,6 +188,20 @@ class Catalogue(Base):
         after = {fn: read(os.path.join(manifests, fn)) for fn in sorted(os.listdir(manifests))}
         self.assertEqual(after, before)
 
+    def test_cross_check_normalises_alternate_art_number(self):
+        home = os.path.join(self.tmp, "m1")
+        manifests = os.path.join(self.tmp, "manifests")
+        os.makedirs(manifests)
+        p10e = {"code": "P10E", "name": "Tenth Edition Promos", "released": "2007-07-13", "set_type": "PROMO",
+                "xmage_ref": "x", "cards": [
+                    {"name": "Lightning Bolt", "numbers": ["161*"], "rarity": "COMMON"},
+                ]}
+        write(os.path.join(manifests, "P10E.json"), json.dumps(p10e) + "\n")
+        r = self.ingest(home, manifests=manifests)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        # MTGJSON writes the alternate-art marker as ★, the manifests write *: same printing
+        self.assertIn("cross-check 1 manifest set(s): 0 mismatch(es)", r.stdout)
+
     def test_curated_lists_cite_wotc_per_row(self):
         for name in ("game-changers", "bracket-flags"):
             path = os.path.join(ROOT, "carddb", "curated", name + ".tsv")
@@ -171,7 +222,7 @@ class Catalogue(Base):
             f.write(read(FIXTURE))
         r = self.ingest(home, fixture=path)
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-        self.assertIn("5 cards, 6 printings, 4 sets, 66 legality rows, 4 faces", r.stdout)
+        self.assertIn("6 cards, 9 printings, 7 sets, 69 legality rows, 6 faces", r.stdout)
 
     def test_digital_only_card_has_no_paper_printing(self):
         home = os.path.join(self.tmp, "m1")

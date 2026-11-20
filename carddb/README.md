@@ -42,7 +42,7 @@ the Python API is `import carddb` with `cmd/carddb/py` on the path.
 | `ingest catalogue --mtgjson FILE` | MTGJSON AllPrintings (plain or `.json.gz`) -> the `cards`, `printings`, `sets`, `legality` and `faces` tables as a full snapshot, then cross-check every `oracle/compliance/manifests/*.json` set card list (reported, never overwritten). No Oracle text is written: `cards.oracle_sha` is the full sha256 of the normalised text. `--manifests DIR` (empty disables) and `--source ID` override the defaults |
 | `publish [--bulk] [--private]` | one commit `carddb: <writers> <n> rows @<gorge12>`, rebase onto the remote branch, push fast-forward; refuses over 50000 changed lines without `--bulk`; no-op when nothing is staged |
 | `merge-driver %O %A %B %P` | the git driver `*.tsv merge=carddb` (registered in each clone's config) |
-| `build [--private] [--text FILE]` | SQLite from the shards + curated files + committed sources read from `origin/main` (`--ref`, or `--src-dir`) |
+| `build [--private] [--text FILE]` | SQLite from the shards + curated files + committed sources read from this checkout's `HEAD` (`--ref`, or `--src-dir`) |
 | `fetch [--private]` | `gh release download carddb-latest` into `$CARDDB_HOME` |
 | `validate`, `boundary` | the Python mirror of the Go checks (a parity test keeps them in step) |
 
@@ -87,5 +87,5 @@ The SQLite file: one table per schema table (`/` and `-` become `_`), `card_name
 (norm_name -> oracle_id), `card_fts` (FTS5 over name, type_line, keywords, labels; plus Oracle
 text with `--text`, which writes `carddb-text.sqlite`, never the published file),
 `src_manifest_*` and `src_diagnosed` (the committed sources) and `build_meta`. The FTS `keywords`
-column is `cards.keywords`; a `--ref` that lacks one of the committed source paths (origin/main
-before the curated tree was promoted) just has none of those inputs.
+column is `cards.keywords`; a `--ref` that lacks one of the committed source paths
+just has none of those inputs.

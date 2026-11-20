@@ -195,7 +195,7 @@
      "number": "39",
      "power": "4",
      "rarity": "uncommon",
-     "text": "Flying\nVigilance (Attacking doesn't cause this creature to tap.)",
+     "text": "Flying\r\nVigilance (Attacking doesn't cause this creature to tap.)\r\n",
      "toughness": "4",
      "type": "Creature — Angel",
      "uuid": "52b0a40b-22db-5632-8ca7-a1c55bc68195"
@@ -506,6 +506,147 @@
    "name": "Zendikar Rising",
    "releaseDate": "2020-09-25",
    "type": "expansion"
+  },
+  "10E": {
+   "cards": [
+    {
+     "availability": [
+      "paper"
+     ],
+     "colorIdentity": [
+      "R"
+     ],
+     "colors": [
+      "R"
+     ],
+     "identifiers": {
+      "scryfallOracleId": "4457ed35-7c10-48c8-9776-456485fdf070"
+     },
+     "layout": "normal",
+     "legalities": {
+      "commander": "Legal",
+      "legacy": "Legal",
+      "vintage": "Legal"
+     },
+     "manaCost": "{R}",
+     "manaValue": 1.0,
+     "name": "Lightning Bolt",
+     "number": "161",
+     "rarity": "common",
+     "text": "Lightning Bolt deals 3 damage to any target.",
+     "type": "Instant",
+     "uuid": "6a1e5e4e-0000-4000-8000-0000000000aa"
+    }
+   ],
+   "code": "10E",
+   "name": "Tenth Edition",
+   "releaseDate": "2007-07-13",
+   "type": "core"
+  },
+  "P10E": {
+   "cards": [
+    {
+     "availability": [
+      "paper"
+     ],
+     "colorIdentity": [
+      "R"
+     ],
+     "colors": [
+      "R"
+     ],
+     "identifiers": {
+      "scryfallOracleId": "4457ed35-7c10-48c8-9776-456485fdf070"
+     },
+     "layout": "normal",
+     "legalities": {
+      "commander": "Legal",
+      "legacy": "Legal",
+      "vintage": "Legal"
+     },
+     "manaCost": "{R}",
+     "manaValue": 1.0,
+     "name": "Lightning Bolt",
+     "number": "161\u2605",
+     "rarity": "common",
+     "text": "Lightning Bolt deals 3 damage to any target.",
+     "type": "Instant",
+     "uuid": "6a1e5e4e-0000-4000-8000-0000000000ab"
+    }
+   ],
+   "code": "P10E",
+   "name": "Tenth Edition Promos",
+   "parentCode": "10E",
+   "releaseDate": "2007-07-13",
+   "type": "promo"
+  },
+  "SLD": {
+   "cards": [
+    {
+     "availability": [
+      "paper"
+     ],
+     "colorIdentity": [
+      "U"
+     ],
+     "colors": [
+      "U"
+     ],
+     "faceName": "Zndrsplt, Eye of Wisdom",
+     "identifiers": {
+      "scryfallOracleId": "bb000000-0000-4000-8000-000000000000"
+     },
+     "layout": "modal_dfc",
+     "legalities": {
+      "commander": "Legal",
+      "legacy": "Legal",
+      "vintage": "Legal"
+     },
+     "manaCost": "{3}{U}",
+     "manaValue": 4.0,
+     "name": "Zndrsplt, Eye of Wisdom // Zndrsplt, Eye of Wisdom",
+     "number": "173",
+     "otherFaceIds": [
+      "bb000000-0000-4000-8000-00000000000b"
+     ],
+     "power": "1",
+     "rarity": "mythic",
+     "side": "a",
+     "text": "Whenever a player wins a coin flip, draw a card.",
+     "toughness": "3",
+     "type": "Legendary Creature \u2014 Human Wizard",
+     "uuid": "bb000000-0000-4000-8000-00000000000a"
+    },
+    {
+     "availability": [
+      "paper"
+     ],
+     "colorIdentity": [
+      "U"
+     ],
+     "colors": [
+      "U"
+     ],
+     "faceName": "Zndrsplt, Eye of Wisdom",
+     "layout": "modal_dfc",
+     "name": "Zndrsplt, Eye of Wisdom // Zndrsplt, Eye of Wisdom",
+     "number": "173",
+     "otherFaceIds": [
+      "bb000000-0000-4000-8000-00000000000a"
+     ],
+     "power": "2",
+     "rarity": "mythic",
+     "side": "b",
+     "text": "Whenever a player loses a coin flip, scry 1.",
+     "toughness": "4",
+     "type": "Legendary Creature \u2014 Human Wizard",
+     "uuid": "bb000000-0000-4000-8000-00000000000b"
+    }
+   ],
+   "code": "SLD",
+   "name": "Secret Lair Drop",
+   "releaseDate": "2021-06-21",
+   "type": "promo"
   }
  },
  "meta": {

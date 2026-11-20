@@ -52,7 +52,7 @@ def _parser():
     p.add_argument("--private", action="store_true")
     p.add_argument("--text", metavar="FILE", help="Scryfall oracle-cards or MTGJSON AtomicCards file: adds Oracle text to FTS (never published)")
     p.add_argument("--out", help="output file")
-    p.add_argument("--ref", default="origin/main", help="ref of the checkout to read curated files and committed sources from")
+    p.add_argument("--ref", default="HEAD", help="ref of the checkout to read curated files and committed sources from")
     p.add_argument("--src-dir", help="read curated files and committed sources from this directory instead of a git ref")
     p = sub.add_parser("fetch")
     p.add_argument("--private", action="store_true")

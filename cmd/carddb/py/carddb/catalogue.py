@@ -2,8 +2,11 @@
 
 The published catalogue never carries Oracle text.  A card row keeps
 `oracle_sha`, the full sha256 (lowercase hex) of the normalised Oracle text:
-each face's text with CRLF/CR folded to LF and its trailing newline removed,
-faces joined by "\\n//\\n" -- the same shape gorge's oracletext.Digest hashes.
+each face's text with CRLF/CR folded to LF and trailing newlines removed,
+faces joined by "\\n//\\n" -- the same face-join shape gorge's
+oracletext.Digest uses.  It is not the same value as gorge's digest: that
+hashes Text(f) verbatim (only unescaping literal "\\n"), so MTGJSON text with a
+trailing newline or CRLF produces a different digest here.
 Faces carry only the printed cost, type line and P/T.
 
 `ingest` writes a full snapshot: every catalogue table is replaced by the
@@ -78,6 +81,12 @@ def _date(value):
 
 def _str(value):
     return "-" if value is None or value == "" else str(value)
+
+
+def _set_code(value):
+    """A set code in the published spelling: lower-case, '-' when absent."""
+    code = _str(value)
+    return "-" if code == "-" else code.lower()
 
 
 def _list(value):
@@ -198,7 +207,7 @@ def build_catalogue(data):
         s = data[key]
         if not isinstance(s, dict):
             raise StoreError("MTGJSON set %r is not an object" % key)
-        code = str(s.get("code") or key).lower()
+        code = _set_code(s.get("code") or key)
         if code in seen_sets:
             raise StoreError("MTGJSON set code %s appears twice" % code)
         seen_sets.add(code)
@@ -210,7 +219,7 @@ def build_catalogue(data):
             "name": _str(s.get("name") or code),
             "release_date": release,
             "set_type": _str(s.get("type")),
-            "parent_code": _str(s.get("parentCode")),
+            "parent_code": _set_code(s.get("parentCode")),
         })
         cards = s.get("cards") or []
         if not isinstance(cards, list):
@@ -327,7 +336,7 @@ def cross_check(directory, data):
     for key in sorted(data):
         s = data[key]
         if isinstance(s, dict):
-            sets[str(s.get("code") or key).lower()] = s
+            sets[_set_code(s.get("code") or key)] = s
     manifests = []
     for fn in sorted(os.listdir(directory)):
         if not fn.endswith(".json"):
@@ -342,8 +351,8 @@ def cross_check(directory, data):
             raise StoreError("%s: not a set manifest (code/cards)" % path)
         manifests.append(m)
     lines = []
-    for m in sorted(manifests, key=lambda x: str(x["code"]).lower()):
-        code = str(m["code"]).lower()
+    for m in sorted(manifests, key=lambda x: _set_code(x["code"])):
+        code = _set_code(m["code"])
         label = code.upper()
         s = sets.get(code)
         if s is None:
@@ -402,14 +411,17 @@ def ingest(path, store=None, manifests_dir=None, writer="mtgjson", version=None)
     del data  # the rows are the snapshot; release the 4+ GB AllPrintings document before writing
     store = store or Store(PUBLIC)
     ver = version or str(meta["version"])
+    # The snapshot's own date, never the wall clock: the same AllPrintings file must
+    # produce byte-identical shards, _meta/writers included, on any run date.
+    ran = meta["date"]
     changed = 0
     for table in CATALOGUE_TABLES:
-        changed += store.put(table, tables[table], writer=writer, version=ver, replace=True)
+        changed += store.put(table, tables[table], writer=writer, version=ver, ran=ran, replace=True)
     changed += store.put("_meta/sources", [{
         "source": "mtgjson",
         "version": ver,
         "retrieved": meta["date"],
         "licence": "MIT",
-    }], writer=writer, version=ver)
+    }], writer=writer, version=ver, ran=ran)
     return Summary(tables={k: len(v) for k, v in tables.items()}, changed=changed,
                    mismatches=mismatches, checked=checked, meta=meta)
