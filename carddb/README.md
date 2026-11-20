@@ -160,9 +160,11 @@ certification job has not written gets a minimal `queued` row (`paper`/`playable
 `new_paper`, `reprints`, `excluded`, `c0`..`c3` and `open` counts are empty); a certified set keeps its
 certification columns and gains only the status ones. `put` replaces a whole row, so the certification
 writer must read the row back and carry the `a_*`, `b_*`, `printed` and `status_*` columns it did not
-measure. `carddb docs-status --db carddb.sqlite --out DIR` turns the built asset back into the
+measure. A set a later measurement no longer covers has its status columns cleared (and a `queued` row only the status writer made is
+deleted), so the export is a snapshot of the newest measurement. `carddb docs-status --db carddb.sqlite --out DIR` turns the built asset back into the
 `status-A.jsonl`, `status-B.jsonl` and `meta.json` shapes gorge's `scripts/docs_sets.py` reads; this
-replaced the force-pushed `docs-data` branch. `cert_events` and `cert_runs` are
+replaces the force-pushed `docs-data` branch, which CI keeps writing beside the fold until a gorge docs build has gone green on the
+asset (CDB-37b), then drops. `cert_events` and `cert_runs` are
 private-only (`--private`) partitions for the job's exact event and run counts.
 
 `validate` and `boundary` (this tool's Python verbs, and the Go ones) walk every file but `.git`:

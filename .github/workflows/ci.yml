@@ -229,8 +229,22 @@ jobs:
           cat > ../status-data/meta.json <<EOF
           {"commit": "$(git rev-parse --short=9 HEAD)", "gorge_pin": "$(cat GORGE_PIN)", "forge_ref": "${{ steps.cpin.outputs.forge_ref }}", "date": "$(date -u +%F)", "ratchet_failures": $failures}
           EOF
-      # The data branch keeps its history (git is the pin history); a rerun with the
-      # same measurement changes no byte and pushes nothing. A push made with the
+      # One force-pushed commit on an orphan branch: the data's history is not
+      # worth keeping, only its latest state. Retired by CDB-37b.
+      - name: Publish the docs-data branch
+        id: docs_data
+        if: github.ref == 'refs/heads/main'
+        working-directory: status-data
+        run: |
+          git init -q -b docs-data
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add status-A.jsonl status-B.jsonl meta.json
+          git commit -q -m "docs-data: compliance status $(date -u +%F)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" docs-data:docs-data
+      # The data branch keeps its history (git is the pin history). The writer
+      # date is the measurement's own (CARDDB_NOW), so a rerun of the same
+      # measurement changes no byte and pushes nothing. A push made with the
       # run's token does not start the carddb workflow, so the nightly carddb run
       # (04:23 UTC) builds the SQLite and replaces the carddb-latest asset.
       - name: Fold the status into cert_sets on the carddb branch
@@ -244,6 +258,7 @@ jobs:
         run: |
           set -euo pipefail
           export CARDDB_HOME="$RUNNER_TEMP/carddb"
+          export CARDDB_NOW="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["date"])' ../status-data/meta.json)"
           python3 -I cmd/carddb/main.py init
           python3 -I cmd/carddb/main.py ingest status --source ci \
             --version "$(git rev-parse --short=12 HEAD)" \
@@ -266,6 +281,7 @@ jobs:
         run: |
           {
             echo "## Compliance failed at gorge ${{ needs.pin.outputs.ref }}"
+            echo "docs-data publish: ${{ steps.docs_data.outcome }}"
             echo "cert_sets status publish: ${{ steps.publish.outcome }}"
             echo '```'
             grep -E '^RATCHET FAIL|^oraclediff:' compliance-status.log || true

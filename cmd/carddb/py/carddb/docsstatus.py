@@ -135,8 +135,34 @@ def status_rows(a, b, meta, existing=None):
     return rows
 
 
+# Every status column the fold writes: cleared on a set that has dropped out of the measurement.
+STATUS_COLUMNS = (("printed", "a_declared", "a_buckets", "b_declared", "b_buckets", "status_date", "status_commit",
+                   "status_gorge", "status_forge_ref", "ratchet_failures")
+                  + tuple(c for _, c in _A_INTS) + tuple(c for _, c in _B_INTS))
+# Certification columns a status-only `queued` row leaves empty; a row with any of them is the cert job's.
+_CERT_ONLY = ("new_paper", "reprints", "excluded", "c0", "c1", "c2", "c3", "open", "level", "cursor", "entered",
+              "certified")
+
+
+def uncovered_rows(existing, folded):
+    """The existing rows of sets outside the measurement, as dicts, to pass back with replace: a row with
+    status columns has them cleared (so the export is a snapshot of the newest measurement, as docs-data
+    was), and a `queued` row only the status writer made is left out, which deletes it."""
+    keep = []
+    for code in sorted(set(existing) - set(folded)):
+        row = {k: (None if v == "-" else v) for k, v in existing[code].items()}
+        if row.get("status_date") is not None:
+            if row.get("state") == "queued" and all(row.get(c) is None for c in _CERT_ONLY):
+                continue
+            for c in STATUS_COLUMNS:
+                row[c] = None
+        keep.append(row)
+    return keep
+
+
 def run(store, status_a, status_b, meta_path, writer="ci", version=None, ran=None):
-    """Fold the status files into cert_sets. -> (rows changed, sets folded)."""
+    """Fold the status files into cert_sets: a set the measurement covers gains the status columns, a set it
+    no longer covers loses them. -> (rows changed, sets folded)."""
     a = load_status(status_a)
     if not a:
         raise StoreError("docs-status: %s holds no Level A rows" % status_a)
@@ -144,7 +170,9 @@ def run(store, status_a, status_b, meta_path, writer="ci", version=None, ran=Non
     meta = load_meta(meta_path)
     existing = {r["set_code"]: r for r in store.rows("cert_sets")}
     rows = status_rows(a, b, meta, existing)
-    changed = store.put("cert_sets", rows, writer=writer, version=version, ran=ran or today())
+    others = uncovered_rows(existing, set(a))
+    # replace: a status-only row of a dropped set goes; every other row is passed back as it was read
+    changed = store.put("cert_sets", rows + others, writer=writer, version=version, ran=ran or today(), replace=True)
     return changed, len(rows)
 
 

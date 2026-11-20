@@ -74,6 +74,34 @@ class DocsStatus(Base):
         docsstatus.run(a, fa, None, fm)
         self.assertEqual({r["set_code"]: r for r in a.rows("cert_sets")}["lea"]["b_cards"], "-")
 
+    def test_a_set_dropped_from_the_measurement_loses_its_status(self):
+        a = self.machine("a", init=True)
+        a.put("cert_sets", [cert_set_row("2xm")], writer="cert")
+        fa, fb, fm = self.files()
+        docsstatus.run(a, fa, fb, fm)
+        rows = {r["set_code"]: r for r in a.rows("cert_sets")}
+        self.assertEqual(set(rows), {"lea", "2xm"})
+        self.assertEqual(rows["2xm"]["a_cards"], "5")
+        a2 = write(self.tmp, "A2.jsonl", jsonl(A_LINES[1:]))  # lea dropped (status-only row), 2xm stays
+        fm2 = write(self.tmp, "m2.json", json.dumps(dict(META, date="2026-11-21")))
+        docsstatus.run(a, a2, None, fm2)
+        rows = {r["set_code"]: r for r in a.rows("cert_sets")}
+        self.assertEqual(set(rows), {"2xm"})  # the queued status-only lea row is gone
+        a3 = write(self.tmp, "A3.jsonl", jsonl(A_LINES[:1]))  # 2xm dropped: the certified row stays, status cleared
+        fm3 = write(self.tmp, "m3.json", json.dumps(dict(META, date="2026-11-22")))
+        docsstatus.run(a, a3, None, fm3)
+        rows = {r["set_code"]: r for r in a.rows("cert_sets")}
+        self.assertEqual(set(rows), {"lea", "2xm"})
+        x = rows["2xm"]
+        self.assertEqual((x["state"], x["c3"]), ("certified", "3"))
+        for c in docsstatus.STATUS_COLUMNS:
+            self.assertEqual(x[c], "-", c)
+        db = os.path.join(self.tmp, "stale.sqlite")
+        build_mod.build(db, self.schema, a.dir, None, {})
+        out = os.path.join(self.tmp, "stale")
+        self.assertEqual(docsstatus.export(db, out), (1, 0))
+        self.assertEqual([json.loads(l)["set"] for l in read(os.path.join(out, "status-A.jsonl")).splitlines()], ["lea"])
+
     def test_bad_inputs(self):
         a = self.machine("a", init=True)
         fa, fb, fm = self.files(meta=dict(META, commit="not hex"))
