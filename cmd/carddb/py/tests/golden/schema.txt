@@ -18,6 +18,7 @@ CREATE INDEX idx_src_diagnosed_card ON src_diagnosed (card);
 CREATE INDEX idx_src_manifest_cards_name ON src_manifest_cards (name);
 CREATE INDEX idx_src_manifest_cards_set_code ON src_manifest_cards (set_code);
 CREATE INDEX "idx_status_level" ON "status" ("level");
+CREATE INDEX "idx_support_status" ON "support" ("status");
 CREATE INDEX "idx_xledger_tier" ON "xledger" ("tier");
 CREATE TABLE "_meta_sources" ("source" TEXT NOT NULL, "version" TEXT NOT NULL, "retrieved" TEXT NOT NULL, "licence" TEXT NOT NULL, PRIMARY KEY ("source")) WITHOUT ROWID;
 CREATE TABLE "_meta_unresolved" ("kind" TEXT NOT NULL, "ref" TEXT NOT NULL, "reason" TEXT NOT NULL, PRIMARY KEY ("kind", "ref")) WITHOUT ROWID;
@@ -42,5 +43,6 @@ CREATE TABLE src_diagnosed (kind TEXT, set_code TEXT, card TEXT, field TEXT, wro
 CREATE TABLE src_manifest_cards (set_code TEXT NOT NULL, name TEXT NOT NULL, numbers TEXT, rarity TEXT);
 CREATE TABLE src_manifest_sets (code TEXT NOT NULL, name TEXT, released TEXT, set_type TEXT, xmage_ref TEXT, PRIMARY KEY (code)) WITHOUT ROWID;
 CREATE TABLE "status" ("oracle_id" TEXT NOT NULL, "level" TEXT NOT NULL, "verdict" TEXT NOT NULL, "gorge_pin" TEXT NOT NULL, "measured" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id", "level")) WITHOUT ROWID;
+CREATE TABLE "support" ("oracle_id" TEXT NOT NULL, "engine" TEXT NOT NULL, "status" TEXT NOT NULL, "pin" TEXT NOT NULL, "why" TEXT, "measured" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id", "engine")) WITHOUT ROWID;
 CREATE TABLE "xledger" ("oracle_id" TEXT NOT NULL, "tier" TEXT NOT NULL, "state" TEXT NOT NULL, "note" TEXT, PRIMARY KEY ("oracle_id", "tier")) WITHOUT ROWID;
 CREATE VIEW proven AS SELECT * FROM cert WHERE level IN ('C2', 'C3') AND (exclusion IS NULL OR exclusion = '-');
