@@ -1,0 +1,62 @@
+{
+ "card": "Mana Drain",
+ "family": "keywords",
+ "author": "Oracle + CR only",
+ "oracle_sha": "89e9be05b9bf",
+ "scenarios": [
+  {
+   "name": "counters-target-spell",
+   "cr": [
+    "701.6a",
+    "608.2b"
+   ],
+   "why": "Oracle: Counter target spell. p0 casts Grizzly Bears and p1 responds with Mana Drain targeting it: the Bears are countered and put into their owner's graveyard instead of resolving.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Grizzly Bears"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Mana Drain"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Grizzly Bears",
+     "mana": "CG"
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Mana Drain",
+     "mana": "UU",
+     "targets": [
+      "p0:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p1:Mana Drain",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

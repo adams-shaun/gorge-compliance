@@ -1,0 +1,109 @@
+{
+ "card": "Lich",
+ "family": "keywords",
+ "author": "Oracle + CR only",
+ "oracle_sha": "8edad2053507",
+ "scenarios": [
+  {
+   "name": "enters-lose-life-equal-to-life-total-but-stay-in-the-game",
+   "cr": [
+    "614.1c",
+    "119.1",
+    "704.5a",
+    "104.3b"
+   ],
+   "why": "Oracle: As Lich enters, you lose life equal to your life total; you don't lose the game for having 0 or less life. p0 (20 life) casts Lich: the 'as enters' event is a replacement (614.1c) so p0 loses 20 life as it enters, reaching 0, and the second static keeps the state-based action 704.5a from ending the game. Lich stays on the battlefield and p0 is still in the game with 0 life.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Lich"
+     ]
+    },
+    "p1": {}
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Lich",
+     "mana": "BBBB"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Lich",
+     "zone": "battlefield"
+    },
+    {
+     "life": {
+      "p0": 0,
+      "p1": 20
+     }
+    }
+   ]
+  },
+  {
+   "name": "life-gain-draws-cards-instead",
+   "cr": [
+    "614.1a",
+    "119.3",
+    "121.1"
+   ],
+   "why": "Oracle: If you would gain life, draw that many cards instead. p0 casts Lich (losing all 20 life as it enters), then Angel's Mercy ('You gain 7 life'): with Lich on the battlefield p0 draws 7 cards instead of gaining life, so p0's life stays 0 and p0 holds the 7 cards from the library.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Lich",
+      "Angel's Mercy"
+     ],
+     "library": [
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains"
+     ]
+    },
+    "p1": {}
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Lich",
+     "mana": "BBBB"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Angel's Mercy",
+     "mana": "CCWW"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 0
+     }
+    },
+    {
+     "hand_size": {
+      "p0": 7
+     }
+    }
+   ]
+  }
+ ]
+}

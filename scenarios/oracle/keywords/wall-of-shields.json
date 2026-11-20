@@ -1,0 +1,124 @@
+{
+ "card": "Wall of Shields",
+ "family": "keywords",
+ "author": "Oracle + CR only",
+ "oracle_sha": "8bfeeb81563f",
+ "scenarios": [
+  {
+   "name": "banding-blocker-lets-defender-divide-attackers-damage",
+   "cr": [
+    "702.22j",
+    "510.1c",
+    "702.3b"
+   ],
+   "why": "Oracle: if any creatures with banding you control are blocking a creature, you divide that creature's combat damage, not its controller. Wall of Shields (0/4, defender, banding) and Grizzly Bears (2/2) block Hill Giant (3/3). The defending player p1 divides the Giant's 3 damage and puts all of it on the Wall (which has 4 toughness and survives); the Bears take none and deal 2, so the Giant, with 2 damage, survives. A blocking Wall deals 0 and needs no division.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Hill Giant"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Wall of Shields",
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Hill Giant"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "seat": 1,
+     "blocks": [
+      [
+       "p1:Wall of Shields",
+       "p0:Hill Giant"
+      ],
+      [
+       "p1:Grizzly Bears",
+       "p0:Hill Giant"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "seat": 0,
+     "step": "end",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "3 to Wall of Shields,0 to Grizzly Bears"
+       ],
+       "seat": 1
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Wall of Shields",
+     "zone": "battlefield",
+     "damage": 3
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "card": "p0:Hill Giant",
+     "zone": "battlefield",
+     "damage": 2
+    }
+   ]
+  },
+  {
+   "name": "defender-cannot-attack",
+   "cr": [
+    "702.3b"
+   ],
+   "why": "Defender (Oracle: this creature can't attack): Wall of Shields is never offered as an attacker, so it cannot be put in a band either.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Wall of Shields",
+      "Grizzly Bears"
+     ]
+    },
+    "p1": {}
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "decision": "attackers"
+    }
+   ],
+   "expect": [
+    {
+     "can_attack": {
+      "attacker": "p0:Grizzly Bears"
+     }
+    },
+    {
+     "can_attack": {
+      "attacker": "p0:Wall of Shields"
+     },
+     "want": false
+    }
+   ]
+  }
+ ]
+}
