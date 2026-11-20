@@ -57,7 +57,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # tap/untap/sacrifice/discard up-to pick absent from Forge's candidates can no
 # longer change the board. Same cardsfolder and tokenscripts trees as
 # FORGE_REF 418ba5215f.
-FORGE_ORACLE_REF ?= b33362f6004458d1509a7f44a87dcbe279f56040
+# 0c48550344 = b33362f600 + a merge of Card-Forge/forge master 9db1009ef8 (fork branch gorge, ff076d4432).
+# MyRandom keeps the driver's bounded-draw forwarding on upstream's per-stream counter. Same
+# cardsfolder and tokenscripts trees as FORGE_REF ff076d4432 (gorge pin must carry that FORGE_REF).
+FORGE_ORACLE_REF ?= 0c48550344b9de1a9f035d69223c6b463700aa5c
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
