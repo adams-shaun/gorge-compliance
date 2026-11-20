@@ -4,16 +4,18 @@ Card-name lists for `xengine play -pool FILE` (and `XENGINE_POOL` in
 `scripts/xengine-sweep.sh`). A pool replaces the deck source: the decks are
 drawn from its cards alone, through the same filter as a set (gorge fully
 supports the card, basics left out; with `-xmage`, no card XMage spells other
-than the corpus) and the same 23-spell, 17-basic, two-colour pair builder,
-weighted against the ledger as `-set` is. `-set` still names the run in the
-item ids. `-pool` cannot be combined with `-random`, `-forge-only` or `-dirac`
-(each picks the cards another way; a dirac table holds one set, a pool is not
-one), and play says so. `-pool-filter FILE` drops the names it lists (cards a
-follower refuses); a filter name the corpus does not know is reported, not an
-error, since one filter may serve several pools.
+than the corpus) and the same 23-spell, 17-basic builder, weighted against the
+ledger as `-set` is. Without an identity header the builder rotates the 10
+colour pairs (and the triples a three-colour candidate needs), as `-set` does;
+with one (below) every deck is that identity alone. `-set` still names the run
+in the item ids. `-pool` cannot be combined with `-random`, `-forge-only` or
+`-dirac` (each picks the cards another way; a dirac table holds one set, a
+pool is not one), and play says so. `-pool-filter FILE` drops the names it
+lists (cards a follower refuses); a filter name the corpus does not know is
+reported, not an error, since one filter may serve several pools.
 
 Each run writes `<out>/pool.json`: the pool's and filter's path and sha256,
-and how many names each step left out.
+the pool's identity when it has one, and how many names each step left out.
 
 ## Format
 
@@ -22,6 +24,18 @@ face of a multi-face card. Everything from `#` on is a comment; blank lines are
 skipped. A name the corpus does not know is an error that lists every such
 name: a pool is committed, and a misspelling must not shrink it in silence.
 Names only: never Oracle text.
+
+A pool may carry suppq.py's identity header:
+
+    # supp <IDENTITY> tier=<t> targets=<n>
+
+`<IDENTITY>` is one to five distinct WUBRG letters in WUBRG order (`WU`,
+`WUB`, ..., `WUBRG`). Every deck is then that identity: its spells fit the
+identity and its 17 basics are its colours (three or more colours split
+evenly). A pool name whose gorge colour identity does not fit the header is
+left out and counted in `pool.json`, not dealt: suppq derives the header from
+the Forge script by approximation and gorge computes its own. A pool with no
+`# supp` header keeps the set builder's rotation.
 
 ## Pools
 

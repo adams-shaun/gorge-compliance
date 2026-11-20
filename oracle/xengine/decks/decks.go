@@ -1,6 +1,7 @@
-// Package decks builds the two-colour Standard-set decks the xengine sweep
-// plays: Candidates picks the cards of a set gorge fully supports, Pair draws
-// two 40-card decks from them, weighted toward the least-exercised cards.
+// Package decks builds the Standard-set decks the xengine sweep plays:
+// Candidates picks the cards of a set gorge fully supports, Pair draws two
+// 40-card decks from them, weighted toward the least-exercised cards, and
+// PairIdentity draws both decks of one colour identity for a -pool header.
 package decks
 
 import (
@@ -33,12 +34,18 @@ type Card struct {
 // "duplicate of X" and (Options.XMage only) "xmage_spelling".
 type Skip struct{ Card, Reason string }
 
+// ReasonOutsideIdentity is the skip of a -pool name whose colour identity does
+// not fit the pool's "# supp <IDENTITY>" header. suppq.py computes the identity
+// from a Forge script by approximation; gorge computes its own, so a name the
+// header does not cover is left out and counted, not dealt.
+const ReasonOutsideIdentity = "outside_identity"
+
 // Deck is one deck: Cards is sorted, basics repeated. Pair builds 40-card set
 // decks, a Commander deck has 100 cards, and play -decks deals fixed lists of
 // any size.
 type Deck struct {
 	Name    string
-	Colours string // the colour letters (two, or three for a three-colour deck) in WUBRG order, e.g. "WU"; a Commander or fixed deck's identity ("C" colourless)
+	Colours string // the colour identity's letters in WUBRG order, e.g. "WU", "WUB" or "WUBRG"; a Commander or fixed deck's identity ("C" colourless)
 	Cards   []string
 	// Commander is the commander's corpus spelling (front face name), "" for a
 	// constructed deck.
@@ -246,6 +253,42 @@ func (p colourCombo) letters() string {
 	return s
 }
 
+// ParseIdentity reads a colour identity ("W", "WU", ..., "WUBRG") into a
+// cards.Colour* mask: one to five distinct WUBRG letters in WUBRG order. It is
+// the grammar of a -pool "# supp <IDENTITY>" header.
+func ParseIdentity(s string) (uint8, error) {
+	if s == "" {
+		return 0, fmt.Errorf("empty colour identity")
+	}
+	var m uint8
+	last := -1
+	for _, r := range s {
+		i := strings.IndexRune("WUBRG", r)
+		if i < 0 {
+			return 0, fmt.Errorf("%q: %q is not a WUBRG colour", s, r)
+		}
+		if i <= last {
+			return 0, fmt.Errorf("%q: colours must be in WUBRG order, each once", s)
+		}
+		last = i
+		m |= 1 << i
+	}
+	return m, nil
+}
+
+// comboOf is the colour combination of an identity mask: its colours in WUBRG
+// order. A mask with no colours (colourless) has an empty combination; a pool
+// header always names at least one.
+func comboOf(m uint8) colourCombo {
+	var p colourCombo
+	for i := range colourLetters {
+		if m&(1<<i) != 0 {
+			p = append(p, i)
+		}
+	}
+	return p
+}
+
 func eligible(cands []Card, p colourCombo) []Card {
 	var out []Card
 	for _, c := range cands {
@@ -371,29 +414,72 @@ func Pair(cands []Card, led *cov.Ledger, set string, chunk, game int, seed uint6
 			panic(fmt.Sprintf("decks.Pair: %s: %v", set, Pairable(cands)))
 		}
 		p := combos[pi]
-		spells := drawDeck(eligible(cands, p), led, rng)
-		var pips [5]int
-		names := make([]string, 0, deckSize)
-		for _, s := range spells {
-			names = append(names, s.Name)
-			for _, ci := range p {
-				pips[ci] += s.Pips[ci]
-			}
-		}
-		for j, k := range basicSplit(p, pips) {
-			for ; k > 0; k-- {
-				names = append(names, basicNames[p[j]])
-			}
-		}
-		sort.Strings(names)
-		colours := p.letters()
-		out[i] = Deck{Name: fmt.Sprintf("%s-c%d-g%d-%d-%s", set, chunk, game, i, colours), Colours: colours, Cards: names}
+		out[i] = deckOf(cands, p, led, rng, fmt.Sprintf("%s-c%d-g%d-%d-%s", set, chunk, game, i, p.letters()))
 	}
 	return out
 }
 
+// PairableIdentity is nil when PairIdentity can build decks of identity from
+// cands, else an error naming how many eligible candidates that identity has.
+// Callers check it before PairIdentity, which panics when it is not nil.
+func PairableIdentity(cands []Card, identity uint8) error {
+	p := comboOf(identity)
+	if n := len(eligible(cands, p)); n < spellCount {
+		return fmt.Errorf("no %s deck has %d eligible candidates (%d candidates; %s has %d)", p.letters(), spellCount, len(cands), p.letters(), n)
+	}
+	return nil
+}
+
+// PairIdentity is Pair for a pool whose "# supp" header names one colour
+// identity: both decks are that identity, every spell fits it and the 17
+// basics are its colours. Identity may name one to five colours. It is a pure
+// function of the same inputs as Pair plus identity, and panics when
+// PairableIdentity(cands, identity) is not nil: that is a caller bug.
+func PairIdentity(cands []Card, led *cov.Ledger, set string, chunk, game int, seed uint64, identity uint8) [2]Deck {
+	if led == nil {
+		led = cov.New()
+	}
+	if err := PairableIdentity(cands, identity); err != nil {
+		panic(fmt.Sprintf("decks.PairIdentity: %s: %v", set, err))
+	}
+	var tsv bytes.Buffer
+	led.WriteTSV(&tsv)
+	h := sha256.New()
+	fmt.Fprintf(h, "%s\x00%d\x00%d\x00%d\x00%02x\x00", set, chunk, game, seed, identity)
+	h.Write(tsv.Bytes())
+	sum := h.Sum(nil)
+	rng := rand.New(rand.NewPCG(binary.LittleEndian.Uint64(sum[:8]), binary.LittleEndian.Uint64(sum[8:16])))
+	p := comboOf(identity)
+	var out [2]Deck
+	for i := range out {
+		out[i] = deckOf(cands, p, led, rng, fmt.Sprintf("%s-c%d-g%d-%d-%s", set, chunk, game, i, p.letters()))
+	}
+	return out
+}
+
+// deckOf builds one deck of colour combination p: spellCount spells drawn from
+// cands against led with rng, then basicCount basics of p's colours.
+func deckOf(cands []Card, p colourCombo, led *cov.Ledger, rng *rand.Rand, name string) Deck {
+	spells := drawDeck(eligible(cands, p), led, rng)
+	var pips [5]int
+	names := make([]string, 0, deckSize)
+	for _, s := range spells {
+		names = append(names, s.Name)
+		for _, ci := range p {
+			pips[ci] += s.Pips[ci]
+		}
+	}
+	for j, k := range basicSplit(p, pips) {
+		for ; k > 0; k-- {
+			names = append(names, basicNames[p[j]])
+		}
+	}
+	sort.Strings(names)
+	return Deck{Name: name, Colours: p.letters(), Cards: names}
+}
+
 // basicSplit is the basicCount basics per colour of p: a pair splits by pips
-// (at least minBasic each), a triple evenly.
+// (at least minBasic each), three or more colours split evenly.
 func basicSplit(p colourCombo, pips [5]int) []int {
 	if len(p) == 2 {
 		pa, pb := pips[p[0]], pips[p[1]]
