@@ -1,0 +1,12 @@
+#carddb-schema cert_events v1
+name	type	required	key	visibility	doc
+event_id	string	yes	yes	private	Deterministic event id (certloop makes it from the row), unique per change
+t	string	yes	no	private	Event time, UTC ISO-8601
+norm_name	string	no	no	private	Normalised card name; - for a set-level event
+set_code	string	no	no	private	set code the event belongs to; - for a card-level event
+event	string	yes	no	private	What happened: certified, regressed, excluded, recheck or demoted
+from_level	string	no	no	private	Level before the event; - when it had none
+to_level	string	no	no	private	Level after the event; - when it has none
+gorge_sha	string	yes	no	private	Gorge commit the event was measured at
+corpus_pin	string	yes	no	private	Forge corpus pin (FORGE_REF) the event was measured at
+detail	string	no	no	private	One-line detail (ticket id, witness item, cursor move)

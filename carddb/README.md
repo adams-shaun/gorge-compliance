@@ -6,8 +6,8 @@ curated inputs it is built from.
 - `schema/VERSION`, `schema/v<N>/<table>.tsv`: the schema. One file per table,
   columns `name type required key visibility doc`. Types: `string int bool date
   list`. Tables whose every column is `private` (text, tags, edhrec, prims,
-  values, labels_private, decks) are declared so the boundary can name them and
-  are never published.
+  values, labels_private, decks, cert_events, cert_runs) are declared so the
+  boundary can name them and are never published.
 - `curated/*.tsv`: human-maintained inputs (header only until populated).
 
 A shard is `#carddb <table> v<N>`, a column-header line, then rows sorted
@@ -40,6 +40,7 @@ the Python API is `import carddb` with `cmd/carddb/py` on the path.
 | `publish [--bulk] [--private]` | one commit `carddb: <writers> <n> rows @<gorge12>`, rebase onto the remote branch, push fast-forward; refuses over 50000 changed lines without `--bulk`; no-op when nothing is staged |
 | `merge-driver %O %A %B %P` | the git driver `*.tsv merge=carddb` (registered in each clone's config) |
 | `build [--private] [--text FILE]` | SQLite from the shards + curated files + committed sources read from `origin/main` (`--ref`, or `--src-dir`) |
+| `proven [--db FILE] [--format tsv\|json\|count]` | the cards certification has proven (cert level C2 or C3, not excluded), from the clone or a built file's `proven` view |
 | `fetch [--private]` | `gh release download carddb-latest` into `$CARDDB_HOME` |
 | `validate`, `boundary` | the Python mirror of the Go checks (a parity test keeps them in step) |
 
@@ -63,12 +64,21 @@ sides changed differently resolves by the newer timestamp column (`measured_at`,
 (`ci` > `cert` > `loop`, from the row's `writer` column), then the greater row
 bytes, so both clones converge. A modify beats a delete. The merged file is re-validated.
 
+`cert` is the certification job's per-card current row (one row per `oracle_id`, named by
+`norm_name`): the level C0..C3, any exclusion, the agreeing `refs`, the `keys_*` and
+`triggers_unmeasured` counts, `scen_level`, `oracle_audit`, `open_deltas`,
+`diagnosed_deltas`, `tickets`, `why` and `witness` (`k=v;` entries). `cert_sets` is the
+job's per-set row. Both carry the `gorge_sha` and `corpus_pin` they were measured at and a
+`measured` date; git history is the pin history. `cert_events` and `cert_runs` are
+private-only (`--private`) partitions for the job's exact event and run counts.
+
 `validate` and `boundary` (this tool's Python verbs, and the Go ones) walk every file but `.git`:
 a shard behind another extension is refused, `schema/` may hold only the schema's own declarations.
 
 The SQLite file: one table per schema table (`/` and `-` become `_`), `card_names`
 (norm_name -> oracle_id), `card_fts` (FTS5 over name, type_line, keywords, labels; plus Oracle
 text with `--text`, which writes `carddb-text.sqlite`, never the published file),
-`src_manifest_*` and `src_diagnosed` (the committed sources) and `build_meta`. The FTS `keywords`
+`src_manifest_*` and `src_diagnosed` (the committed sources), `proven` (the `cert` rows at
+C2/C3 with no exclusion) and `build_meta`. The FTS `keywords`
 column is `cards.keywords`; a `--ref` that lacks one of the committed source paths (origin/main
 before the curated tree was promoted) just has none of those inputs.
