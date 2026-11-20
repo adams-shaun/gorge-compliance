@@ -1,6 +1,29 @@
 #carddb-schema cert v1
 name	type	required	key	visibility	doc
-oracle_id	string	yes	yes	public	cards.oracle_id
-level	string	yes	no	public	Declared certification level
-declared	date	yes	no	public	Date declared, YYYY-MM-DD
+oracle_id	string	yes	yes	public	cards.oracle_id; the row is the card's current certification
+norm_name	string	yes	no	public	Normalised card name (carddb norm_name), for joins on the card name
+name	string	yes	no	public	Card name, identification only
+gorge_sha	string	yes	no	public	Gorge commit the certification was measured at
+corpus_pin	string	yes	no	public	Forge corpus pin (FORGE_REF) the certification was measured at
+script_sha	string	no	no	public	sha256 of the card's Forge script at the corpus pin; a reprint keeps the level until it changes
+oracle_sha	string	no	no	public	sha256 of the normalised Scryfall Oracle text; an errata re-check trigger
+first_set	string	no	no	public	Set code of the card's first printing
+released	date	no	no	public	Release date of the first printing, YYYY-MM-DD
+level	string	no	no	public	Certification level: C0 playable, C1 exercised, C2 agreed, C3 certified; - below C0
+exclusion	string	no	no	public	Why the card is not certified: ante, dexterity, subgame, nonpaper, ...; - when not excluded
+refs	string	no	no	public	References that agreed: FX (Forge and XMage), X (XMage only), F (Forge only; XMage lacks the card)
+keys_total	int	yes	no	public	Ability keys on every face
+keys_used	int	yes	no	public	Ability keys used in a clean cross-engine game
+keys_compared	int	yes	no	public	Ability keys used inside a compared window
+keys_agreed	int	yes	no	public	Ability keys used inside a compared window where the references agreed
+keys_unreachable	int	yes	no	public	Ability keys random play and certification decks still cannot reach
+triggers_unmeasured	int	yes	no	public	Triggered keys the farm tape does not credit yet (the page says triggers unmeasured)
+scen_level	string	no	no	public	Compliance scenario level for the card: A, B or -
+oracle_audit	string	no	no	public	Oracle-text audit of the Forge script: ok, diff or -
+open_deltas	int	yes	no	public	Open differences on any evidence row at this pin
+diagnosed_deltas	int	yes	no	public	Differences with a diagnosed cause (CR or upstream citation)
+tickets	string	no	no	public	Comma-separated ticket ids naming the remaining work
+why	string	no	no	public	One-line reason the card is below the next level
+witness	string	no	no	public	One agreeing witness per certified key as k=v; entries (item id, seed, ...)
+measured	date	yes	no	public	Date the row was measured, YYYY-MM-DD; the merge tie-break timestamp
 writer	string	no	no	public	Program that wrote the row (ci, cert, loop); breaks a merge tie after the timestamp: ci > cert > loop
