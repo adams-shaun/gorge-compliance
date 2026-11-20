@@ -1,6 +1,7 @@
 package classify
 
 import (
+	"cmp"
 	"sort"
 	"strconv"
 	"strings"
@@ -20,9 +21,12 @@ type Use struct{ Card, Key string }
 // ability key of each ability it activated or mana ability it fired (read
 // from the entry's Mana records, so an auto-paid cast's taps count). With
 // genesis set, the mana abilities fired before the first decision count too.
-// A key a card does not have (a face other than the front, a mana ability
-// of a gained kind) is not credited, and neither is a triggered ability: the
-// tape does not record triggers.
+// Each trigger the entry put on the stack (Entry.Triggers, read from gorge's
+// TriggerPush events) credits its f<face>/t<i> key; an ability pick or mana
+// record credits f<face>/a<i> for the face it was activated on (Pick.Face,
+// ManaRec.Face: 0 when absent). A key a card does not have (a mana ability of
+// a gained kind, a granted trigger) is not credited. A trigger counts toward
+// the window that holds the entry whose commit put it on the stack.
 func Uses(reg *cards.Registry, t *game.Tape, lo, hi int, genesis bool) map[Use]int {
 	out := map[Use]int{}
 	add := func(name, want string) {
@@ -41,10 +45,14 @@ func Uses(reg *cards.Registry, t *game.Tape, lo, hi int, genesis bool) map[Use]i
 			}
 		}
 	}
+	// key is the f<face>/<kind><i> key a recorded source exercised.
+	key := func(kind string, face, i int) string {
+		return "f" + strconv.Itoa(face) + "/" + kind + strconv.Itoa(i)
+	}
 	mana := func(ms []game.ManaRec) {
 		for _, m := range ms {
 			if m.Ability >= 0 && m.Name != "" {
-				add(m.Name, "f0/a"+strconv.Itoa(m.Ability))
+				add(cmp.Or(m.Card, m.Name), key("a", m.Face, m.Ability))
 			}
 		}
 	}
@@ -63,11 +71,14 @@ func Uses(reg *cards.Registry, t *game.Tape, lo, hi int, genesis bool) map[Use]i
 				case "cast", "play_land":
 					add(name, "")
 				case "ability":
-					add(name, "f0/a"+strconv.Itoa(p.Ability))
+					add(cmp.Or(p.Card, name), key("a", p.Face, p.Ability))
 				}
 			}
 		}
 		mana(e.Mana)
+		for _, tr := range e.Triggers {
+			add(tr.Name, key("t", tr.Face, tr.Index))
+		}
 	}
 	return out
 }
