@@ -2837,11 +2837,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
             Map<String, Integer> counts = new HashMap<>();
             Map<String, Integer> scenarioCounts = new HashMap<>();
             List<mage.MageObject> objs = new ArrayList<>();
-            for (Permanent perm : g.getBattlefield().getAllPermanents()) {
-                if (pl.getId().equals(perm.getControllerId())) {
-                    objs.add(perm);
-                }
-            }
+            // Battlefield first, in the order build() dealt the setup cards
+            // (creation order), then the other zones in add()'s zone order.
+            objs.addAll(battlefieldInCreationOrder(g.getBattlefield().getAllPermanents(), pl.getId()));
             for (Card c : pl.getHand().getCards(g)) objs.add(c);
             for (Card c : pl.getGraveyard().getCards(g)) objs.add(c);
             for (Card c : g.getExile().getAllCards(g)) {
@@ -2903,14 +2901,32 @@ public class ScenarioReplay extends CardTestPlayerBase {
             wanted = Integer.parseInt(ref.substring(hash + 1));
         }
         List<Permanent> candidates = new ArrayList<>();
-        for (Permanent permanent : battlefield) {
-            if (permanent.isToken() && controller.equals(permanent.getControllerId())
+        for (Permanent permanent : battlefieldInCreationOrder(battlefield, controller)) {
+            if (permanent.isToken()
                     && permanent.getName().toLowerCase(java.util.Locale.ROOT).contains(wantedName)) {
                 candidates.add(permanent);
             }
         }
-        candidates.sort(java.util.Comparator.comparingInt(Permanent::getCreateOrder));
         return wanted > 0 && wanted <= candidates.size() ? candidates.get(wanted - 1) : null;
+    }
+
+    /** The controller's battlefield permanents in setup/creation order.
+     * A scenario's "#k" ranks same-name objects by the order they were dealt
+     * or entered, not by whatever order the battlefield happens to iterate,
+     * so binding by iteration can give a same-name ref the wrong copy.
+     * Permanent.getCreateOrder is that order, the same key tokenChoice has
+     * always used. One helper so every battlefield ref rank (setup aliases, a
+     * post-setup answer, a named setup permanent, an activate source) orders
+     * identically. */
+    static List<Permanent> battlefieldInCreationOrder(Iterable<Permanent> battlefield, UUID controller) {
+        List<Permanent> ordered = new ArrayList<>();
+        for (Permanent permanent : battlefield) {
+            if (controller.equals(permanent.getControllerId())) {
+                ordered.add(permanent);
+            }
+        }
+        ordered.sort(java.util.Comparator.comparingInt(Permanent::getCreateOrder));
+        return ordered;
     }
 
     /** The seat index of a scenario ref: "p1:Forest#2" -> 1. */
@@ -2981,11 +2997,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
             int seen = 0;
             List<mage.MageObject> objs = new ArrayList<>();
             Player pl = seat(seatIndex);
-            for (Permanent perm : currentGame.getBattlefield().getAllPermanents()) {
-                if (pl.getId().equals(perm.getControllerId())) {
-                    objs.add(perm);
-                }
-            }
+            // Same creation order registerAliases binds setup refs in, so a
+            // post-setup non-token ref's "#k" counts the copies alike.
+            objs.addAll(battlefieldInCreationOrder(currentGame.getBattlefield().getAllPermanents(),
+                    pl.getId()));
             for (Card c : pl.getHand().getCards(currentGame)) objs.add(c);
             for (Card c : pl.getGraveyard().getCards(currentGame)) objs.add(c);
             for (Card c : currentGame.getExile().getAllCards(currentGame)) {
@@ -3456,9 +3471,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return token;
         }
         int seen = 0;
-        for (Permanent perm : g.getBattlefield().getAllPermanents()) {
-            if (perm.getControllerId().equals(seat(seatIndex).getId())
-                    && setupName(perm).equals(name)) {
+        for (Permanent perm : battlefieldInCreationOrder(g.getBattlefield().getAllPermanents(),
+                seat(seatIndex).getId())) {
+            if (setupName(perm).equals(name)) {
                 if (++seen == wanted) {
                     return perm;
                 }
@@ -4231,9 +4246,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         }
         List<ManaSource> battlefield = new ArrayList<>();
-        for (Permanent perm : g.getBattlefield().getAllPermanents()) {
-            if (perm.getControllerId().equals(p.getId()) && !seen.contains(perm.getId())
-                    && matchesRef(perm, front, live)) {
+        for (Permanent perm : battlefieldInCreationOrder(g.getBattlefield().getAllPermanents(), p.getId())) {
+            if (!seen.contains(perm.getId()) && matchesRef(perm, front, live)) {
                 battlefield.add(new ManaSource(perm, Zone.BATTLEFIELD));
             }
         }
@@ -5102,6 +5116,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
                 ExactAttackBatch exact = new ExactAttackBatch(turn, seatIdx, seatOf(str(st, "defender")));
                 List<String> refs = new ArrayList<>(keptRefs);
+                Map<String, PlayerAction> actionByRef = new LinkedHashMap<>();
                 for (String name : attackCommandOrder(keptNames)) {
                     // The ordered names are a permutation of keptNames, so
                     // each has one ref left; duplicates are interchangeable
@@ -5119,8 +5134,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     String ref = refs.remove(at);
                     int before = p.getActions().size();
                     attack(turn, p, name, seat(exact.defenderSeat));
+                    actionByRef.put(ref, p.getActions().get(before));
+                }
+                // Keep the step's own order for exact declarations below:
+                // same-name duplicates declared highest-index-first only so
+                // the name commands consume the right copy. A band's leader
+                // follows declaration order, so replaying the scenario's order
+                // keeps a raw "@ref" member from naming the leader.
+                for (String ref : keptRefs) {
                     exact.refs.add(ref);
-                    exact.actions.add(p.getActions().get(before));
+                    exact.actions.add(actionByRef.get(ref));
                 }
                 if (!exact.refs.isEmpty()) {
                     exactAttacks.add(exact);
@@ -6211,11 +6234,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
 
     /**
      * Replace a name-only attacker command with an exact declaration when the
-     * controlling seat has both a token and a card of that name. XMage's
-     * "Name:k" command ranks the two kinds together and takes whichever it
-     * finds first, so it can declare the card when the scenario recorded the
-     * token (and the reverse). This runs at the engine's declaration point,
-     * after a token created earlier in the turn is on the battlefield.
+     * controlling seat has both a token and a card of that name, or when the
+     * step declares two same-name cards. XMage's "Name:k" command ranks the
+     * two kinds together and takes whichever it finds first, so it can declare
+     * the card when the scenario recorded the token (and the reverse). It also
+     * has to name the highest-index duplicate first, which reverses the step's
+     * order; a band's leader follows declaration order, so the exact path
+     * declares the batch in the step's own order and a raw "@ref" member never
+     * names the leader. This runs at the engine's declaration point, after a
+     * token created earlier in the turn is on the battlefield.
      */
     private void applyExactAttackers(TestPlayer player, Game game) {
         for (java.util.Iterator<ExactAttackBatch> it = exactAttacks.iterator(); it.hasNext();) {
@@ -6224,23 +6251,47 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 continue;
             }
             it.remove();
+            Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
+            Map<String, List<String>> byBaseName = new LinkedHashMap<>();
+            for (String ref : batch.refs) {
+                byBaseName.computeIfAbsent(battlefieldName(ref), k -> new ArrayList<>()).add(ref);
+            }
+            Map<String, Permanent> exactByRef = new HashMap<>();
+            Map<String, Boolean> sameNameExactable = new HashMap<>();
+            for (Map.Entry<String, List<String>> group : byBaseName.entrySet()) {
+                boolean all = group.getValue().size() > 1;
+                for (String ref : group.getValue()) {
+                    Permanent exact = combatPermanent(ref, battlefieldName(ref), player.getId(), game);
+                    exactByRef.put(ref, exact);
+                    if (exact == null) {
+                        all = false;
+                    }
+                }
+                sameNameExactable.put(group.getKey(), all);
+            }
             for (int i = 0; i < batch.refs.size(); i++) {
                 String ref = batch.refs.get(i);
                 String name = battlefieldName(ref);
-                Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
-                Permanent exact = combatPermanent(ref, name, player.getId(), game);
+                Permanent exact = exactByRef.get(ref);
                 if (exact != null && game.getCombat().getAttackers().contains(exact.getId())) {
                     // XMage's checkAttackRequirements declared this forced
                     // attacker itself; the recorded command is satisfied.
                     player.getActions().remove(batch.actions.get(i));
                     continue;
                 }
-                if (!combatRefAmbiguous(name, player.getId(), battlefield)) {
+                boolean ambiguous = combatRefAmbiguous(name, player.getId(), battlefield);
+                if (!ambiguous && !sameNameExactable.getOrDefault(name, false)) {
                     continue;
                 }
                 player.getActions().remove(batch.actions.get(i));
                 if (exact == null) {
-                    throw new IllegalArgumentException("attack ref " + ref + " is not on the battlefield");
+                    if (ambiguous) {
+                        throw new IllegalArgumentException("attack ref " + ref + " is not on the battlefield");
+                    }
+                    // A same-name step whose other copies cannot be resolved
+                    // exactly keeps its name commands: no better than before,
+                    // and never a half-exact declaration order.
+                    continue;
                 }
                 player.declareAttacker(exact.getId(), seat(batch.defenderSeat).getId(), game, false);
                 if (!game.getCombat().getAttackers().contains(exact.getId())) {

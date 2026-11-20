@@ -312,6 +312,26 @@ public final class ScenarioReplaySameNameChoiceTest {
                 "attack batch declared the recorded token and card exactly, got " + computer.attackers);
         check(player.getActions().isEmpty(), "attack batch removed both queued name commands");
 
+        // Two same-name setup cards: the step's ref order must be the exact
+        // declaration order, not the highest-index-first order the name
+        // commands need. A band's leader follows declaration order, so the
+        // first copy stays the raw "@p0:Grizzly Bears" member instead of
+        // becoming the leader the band target filters out.
+        computer.attackers.clear();
+        PlayerAction secondCardAttack = action("attack:Grizzly Bears:1");
+        PlayerAction firstCardAttack = action("attack:Grizzly Bears");
+        player.addAction(secondCardAttack);
+        player.addAction(firstCardAttack);
+        RecordingCombat sameNameCombat = new RecordingCombat(own);
+        Game sameNameGame = game(board, sameNameCombat, 1);
+        ((List<Object>) get(owner, ScenarioReplay.class, "exactAttacks")).add(attackBatch(
+                1, 0, 1, List.of("p0:Grizzly Bears", "p0:Grizzly Bears#2"),
+                List.of(firstCardAttack, secondCardAttack)));
+        player.selectAttackers(sameNameGame, own);
+        check(computer.attackers.equals(List.of(card.getId(), card2.getId())),
+                "same-name attack batch declared the step's order, got " + computer.attackers);
+        check(player.getActions().isEmpty(), "same-name attack batch removed both queued name commands");
+
         // Block: the token is the blocker in one pair and the attacker in the
         // other. Both sides resolve through the same helper.
         PlayerAction cardBlocks = action("block:Grizzly Bears$Grizzly Bears");
@@ -593,6 +613,39 @@ public final class ScenarioReplaySameNameChoiceTest {
         System.out.println("PASS inline $target= token refs resolve live through addTargets");
     }
 
+    /** Two same-name setup copies in scenario build order are ranked #1, #2
+     * by creation order even though XMage's battlefield iteration sees the
+     * second one first. registerAliases walks that ordered list through
+     * bindSetupObject, so this is the whole setup-ref computation without a
+     * game or card database. */
+    private static void setupAliasOrdering() {
+        UUID own = UUID.randomUUID(), other = UUID.randomUUID();
+        String name = "Kjeldoran Warrior";
+        Permanent first = object(own, false, 1, name);
+        Permanent leader = object(own, false, 2, name);
+        Permanent bystander = object(own, false, 3, "Garrison Griffin");
+        Permanent opponent = object(other, false, 4, name);
+        List<Permanent> battlefield = List.of(leader, opponent, bystander, first);
+        List<Permanent> ordered = ScenarioReplay.battlefieldInCreationOrder(battlefield, own);
+        equal(3, ordered.size());
+        chosen(first, ordered.get(0));
+        chosen(leader, ordered.get(1));
+        chosen(bystander, ordered.get(2));
+        Map<String, Integer> counts = new LinkedHashMap<>();
+        Map<String, Integer> scenarioCounts = new LinkedHashMap<>();
+        Map<String, Integer> frontCounts = new LinkedHashMap<>();
+        Map<String, String> refAlias = new LinkedHashMap<>();
+        Map<String, UUID> bound = new LinkedHashMap<>();
+        for (Permanent permanent : ordered) {
+            ScenarioReplay.bindSetupObject(0, permanent.getName(), name, name, counts,
+                    scenarioCounts, frontCounts, permanent.getId(), refAlias, bound::put);
+        }
+        equal(first.getId(), bound.get("p0:" + name));
+        equal(leader.getId(), bound.get("p0:" + name + "#2"));
+        equal("@p0:" + name, refAlias.get("p0:" + name));
+        System.out.println("PASS setup aliases rank same-name copies by creation order");
+    }
+
     public static void main(String[] args) throws Exception {
         UUID own = UUID.randomUUID(), other = UUID.randomUUID();
         Permanent original = object(own, false, 1);
@@ -615,6 +668,7 @@ public final class ScenarioReplaySameNameChoiceTest {
         chosen(second, ScenarioReplay.tokenChoice("p0:token:Grizzly Bears", own, List.of(second)));
         chosen(null, ScenarioReplay.tokenChoice("p0:token:Grizzly Bears#2", own, List.of(second)));
         System.out.println("PASS exact token choice is creation-ordered, controller-scoped and live");
+        setupAliasOrdering();
         combatRefs();
         exactCombatBatches();
         liveMatcher();
