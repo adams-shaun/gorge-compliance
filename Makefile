@@ -57,16 +57,19 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # tap/untap/sacrifice/discard up-to pick absent from Forge's candidates can no
 # longer change the board. Same cardsfolder and tokenscripts trees as
 # FORGE_REF 418ba5215f.
-# f8e1f161c3 = b33362f600 + a play/cast that happens while a spell resolves
+# 2aff202bc9 = b33362f600 + a play/cast that happens while a spell resolves
 # pays from the sidecar's named decider's own sources when the pool is short:
 # Word of Command's Play of the chosen card (CR 723.2, 723.5a, 723.7, 701.18b)
 # and every Play with Controller$ TargetedPlayer/TriggeredPlayer that casts
 # during its own resolution (Spell Queller's RememberedOwner cast). The resolve
 # arm arms the decider from its "play" decision and the payment hook activates
 # that player's own mana abilities in zone order; Forge's CantBeActivated
-# statics still filter them. A cast with no such decision keeps paying from the
-# recorded pool. Same cardsfolder and tokenscripts trees as FORGE_REF 418ba5215f.
-FORGE_ORACLE_REF ?= f8e1f161c37a188662c2bd2e6a524c5b8b95914d
+# statics still filter them. The hook consumes the play decision on both the
+# shortfall and the pool-covered paths, so a recorded play that the pool
+# already pays for cannot leave a leftover decision. A cast with no such
+# decision keeps paying from the recorded pool. Same cardsfolder and
+# tokenscripts trees as FORGE_REF 418ba5215f.
+FORGE_ORACLE_REF ?= 2aff202bc94b9d508e5dfe2b97617c4ad98f81aa
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
