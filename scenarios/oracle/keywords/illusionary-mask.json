@@ -1,0 +1,63 @@
+{
+ "card": "Illusionary Mask",
+ "family": "keywords",
+ "author": "Oracle + CR only",
+ "oracle_sha": "d864c9193498",
+ "scenarios": [
+  {
+   "name": "casts-a-creature-card-face-down-as-a-two-two",
+   "cr": [
+    "708.4",
+    "708.2",
+    "601.2",
+    "307.1"
+   ],
+   "why": "Oracle: {X}: choose a creature card in your hand whose mana cost could be paid by some or all of the mana spent on {X}; you may cast it face down as a 2/2 creature spell without paying its mana cost; activate only as a sorcery. p0 activates Illusionary Mask paying {R}{R}{R}{R} for X = 4 and chooses Hill Giant ({3}{R}, mana value 4): the Giant enters face down as a 2/2 with no abilities rather than a 3/3.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Illusionary Mask"
+     ],
+     "hand": [
+      "Hill Giant"
+     ]
+    },
+    "p1": {}
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Illusionary Mask",
+     "mana": "RRRR",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "X = 4"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "modes",
+       "pick": [
+        "p0:Hill Giant"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Hill Giant",
+     "zone": "battlefield",
+     "pt": "2/2"
+    }
+   ]
+  }
+ ]
+}
