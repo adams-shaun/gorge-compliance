@@ -12,7 +12,7 @@
     "723.7",
     "701.18"
    ],
-   "why": "Oracle: look at target opponent's hand and choose a card; you control that player until the spell finishes resolving; the player plays that card if able, and may activate only mana abilities of lands they control. p0 casts Word of Command on p1, choosing Grizzly Bears from p1's hand; p1, controlled by p0, casts it paying {1}{G} from their own Forests. Grizzly Bears ends on the battlefield under p1's control and both of p1's Forests are tapped.",
+   "why": "Oracle: look at target opponent's hand and choose a card; you control that player until the spell finishes resolving; the player plays that card if able, and may activate only mana abilities of lands they control. p0 casts Word of Command on p1, choosing Grizzly Bears from p1's hand; p1, controlled by p0, casts it paying {1}{G}: p1 is given priority and taps their own two Forests for mana. Grizzly Bears ends on the battlefield under p1's control and both of p1's Forests are tapped.",
    "setup": {
     "p0": {
      "hand": [
@@ -39,6 +39,20 @@
      "targets": [
       "p1"
      ]
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "activate",
+     "seat": 1,
+     "card": "p1:Forest"
+    },
+    {
+     "op": "activate",
+     "seat": 1,
+     "card": "p1:Forest#2"
     },
     {
      "op": "resolve",
