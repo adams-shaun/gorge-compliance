@@ -11,7 +11,7 @@
   search <fts> [--legal F] [--status K=V] [--set S] [--label L] [--marked]
   blockers --format F [--engine E] [--by printings|decks]
   proven [--format F] [--level C2]        the certification-pinned proven view
-  deck <id> [--history]                   a private deck
+  deck <id>                               a private deck
   freshness [--tick]                      writer SLAs, publish/asset age, unresolved, branch size
   sql '<select>'                          read-only SQL
   export <view> --tsv                     deterministic TSV of a table or view
@@ -93,8 +93,6 @@ def _parser():
     p = sub.choices["proven"]
     p.add_argument("--format", metavar="FORMAT")
     p.add_argument("--level", default="C2", choices=query_mod.LEVEL_ORDER)
-    p = sub.choices["deck"]
-    p.add_argument("--history", action="store_true")
     p = sub.choices["freshness"]
     p.add_argument("--tick", action="store_true", help="print only `!!` lines")
     p.add_argument("--public-dir", help="the data branch clone (default $CARDDB_HOME/public|private)")

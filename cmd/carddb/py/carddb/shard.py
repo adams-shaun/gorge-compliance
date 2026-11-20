@@ -137,13 +137,14 @@ _SLA_HOURS = re.compile(r"^[1-9][0-9]*$")
 _WRITERS_HEADER_RE = re.compile(r"#carddb-writers v[1-9][0-9]*")
 
 
-def parse_writers(rel, text):
+def parse_writers(rel, text, registry=None):
     """(writers {writer: sla_hours}, violations) of schema/writers.tsv.
 
     One parser for the validators (validate_tree) and the consumer
     (query.load_writers), so a file one of them accepts cannot make the other
     fail: the strict header, the strict positive-int SLA and the duplicate-writer
-    rule are enforced in exactly one place."""
+    rule are enforced in exactly one place. When registry is a dict it also gets
+    {writer: (sla_hours, (table, ...), doc)} for each accepted row."""
     out, writers, first_line = [], {}, {}
 
     def add(line, msg):
@@ -190,11 +191,17 @@ def parse_writers(rel, text):
         if not _SLA_HOURS.fullmatch(cell):
             add(i, "sla_hours %r is not a strict positive int" % _clip(cell))
             continue
-        hours = int(cell)
-        if hours > WRITERS_MAX_SLA_HOURS:
+        # Bound the digit count before int(): a huge cell would hit Python's
+        # int-conversion limit (a ValueError), where Go's ParseInt just says
+        # out of range. No leading zeros, so more digits than the max is over.
+        if len(cell) > len(str(WRITERS_MAX_SLA_HOURS)) or int(cell) > WRITERS_MAX_SLA_HOURS:
             add(i, "sla_hours %r is out of range" % _clip(cell))
             continue
-        writers[writer] = hours
+        writers[writer] = int(cell)
+        if registry is not None:
+            registry[writer] = (writers[writer],
+                                tuple(t for t in cells[header.index("tables")].split(",") if t),
+                                cells[header.index("doc")])
     return writers, out
 
 
@@ -209,6 +216,13 @@ def is_data_file(rel):
     return rel.endswith(".tsv") and not is_schema_path(rel)
 
 
+def read_text(path):
+    """A file's text exactly as the tree validators read it (UTF-8 with undecodable
+    bytes kept, no newline translation), so every consumer of one file sees one text."""
+    with open(path, encoding="utf-8", errors="surrogateescape", newline="") as f:
+        return f.read()
+
+
 def tree_files(root):
     """(rel, text) of every regular file under root but .git, in lexical path order (Go's treeFiles)."""
     for dp, dn, fns in os.walk(root):
@@ -216,8 +230,7 @@ def tree_files(root):
         for fn in sorted(fns):
             p = os.path.join(dp, fn)
             if os.path.isfile(p) and not os.path.islink(p):
-                with open(p, encoding="utf-8", errors="surrogateescape", newline="") as f:
-                    yield os.path.relpath(p, root).replace(os.sep, "/"), f.read()
+                yield os.path.relpath(p, root).replace(os.sep, "/"), read_text(p)
 
 
 def validate_file(schema, scope, rel, text):

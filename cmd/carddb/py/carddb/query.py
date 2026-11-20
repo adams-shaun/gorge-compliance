@@ -9,7 +9,7 @@ function of the file it read.
   search <fts>                FTS5 search with legality/status/set/label filters
   blockers --format F         legal cards that are not covered, ranked
   proven [--format F]         the certification-pinned proven view
-  deck <id> [--history]       a private deck's cards
+  deck <id>                   a private deck's cards
   freshness [--tick]          writer SLAs, publish/asset age, unresolved growth, branch size
   sql '<select>'              read-only SQL
   export <view> --tsv         a deterministic TSV of a table or view
@@ -23,8 +23,8 @@ from datetime import datetime, timezone
 
 from .build import q, sql_name
 from .norm import norm_name
-from .schema import PRIVATE, PUBLIC
-from .shard import parse_writers
+from .schema import PRIVATE, PRIVATE_TABLE_NAMES, PUBLIC
+from .shard import parse_writers, read_text
 from .store import Store, StoreError, asset_meta_path, carddb_home
 
 VERBS = ("card", "search", "blockers", "proven", "deck", "freshness", "sql", "export")
@@ -342,8 +342,6 @@ def run_proven(conn, args, out):
 def run_deck(conn, args, out):
     if not _has_table(conn, "decks"):
         raise QueryError("deck: private only; this build has no decks table", 1)
-    if args.history:
-        raise QueryError("deck: this build has no deck history table", 1)
     rows = _rows(conn, "SELECT d.oracle_id, c.name, d.count FROM decks d "
                        "LEFT JOIN cards c ON c.oracle_id=d.oracle_id WHERE d.deck_id=? ORDER BY d.oracle_id",
                  (args.deck_id,))
@@ -381,20 +379,51 @@ def _hours(now, then):
     return max(0.0, (now - then).total_seconds() / 3600.0)
 
 
-def load_writers(path):
-    """{writer: sla_hours} from carddb/schema/writers.tsv.
+def load_registry(path):
+    """{writer: (sla_hours, tables, doc)} from carddb/schema/writers.tsv.
 
-    Parsed by the same strict parser the validators use, so a file CI accepts
-    cannot make freshness fail (or the other way round)."""
+    Read as the tree validators read it and parsed by the same strict parser,
+    so a file CI accepts cannot make freshness fail (or the other way round)."""
     try:
-        with open(path, encoding="utf-8") as f:
-            text = f.read()
-    except (OSError, UnicodeDecodeError) as e:
+        text = read_text(path)
+    except OSError as e:
         raise QueryError("freshness: cannot read writer SLA file %s: %s" % (path, e))
-    writers, violations = parse_writers(path, text)
+    registry = {}
+    _writers, violations = parse_writers(path, text, registry)
     if violations:
         raise QueryError(violations[0])
-    return writers
+    return registry
+
+
+def load_writers(path):
+    """{writer: sla_hours} from carddb/schema/writers.tsv."""
+    return {w: v[0] for w, v in load_registry(path).items()}
+
+
+_ALIAS_DOC = re.compile(r"^alias of ([^ ,;:]+)")
+
+
+def _alias_groups(registry):
+    """{writer: group head}. A writer whose doc starts `alias of W` (W registered)
+    is another id for the same job as W: a build that records either one has run
+    the job, so the group needs one _meta/writers row, not one per id."""
+    head = {}
+    for w in registry:
+        m = _ALIAS_DOC.match(registry[w][2])
+        head[w] = m.group(1) if m and m.group(1) in registry and m.group(1) != w else w
+    return head
+
+
+def _expected(tables, private, from_build):
+    """Whether this scope's _meta/writers should hold a row for a writer that
+    writes `tables`. A public build has no private table, so a writer of only
+    private tables never records a row there. A private clone holds only the
+    private tables; a private build also carries the public data."""
+    if not tables:
+        return True
+    if not private:
+        return any(t not in PRIVATE_TABLE_NAMES for t in tables)
+    return from_build or any(t in PRIVATE_TABLE_NAMES for t in tables)
 
 
 def _git(public_dir, *args):
@@ -466,7 +495,9 @@ def run_freshness(args, schema, out):
     db = args.db or default_db(args.home, private)
     conn = store = None
     if os.path.isfile(db):
-        conn, _meta = connect(db)
+        conn, build_meta = connect(db)
+        # The file says which scope it was built for; trust that over the flag.
+        private = build_meta.get("scope", PRIVATE if private else PUBLIC) == PRIVATE
     else:
         store = Store(PRIVATE if private else PUBLIC, home=args.home, schema=schema)
         if not store.exists():
@@ -484,23 +515,34 @@ def run_freshness(args, schema, out):
         sla_path = args.sla or os.path.join(schema.root, "writers.tsv")
         sla_error = None
         try:
-            sla = load_writers(sla_path)
+            registry = load_registry(sla_path)
+            sla = {w: v[0] for w, v in registry.items()}
         except QueryError as e:
-            sla, sla_error = {}, str(e)
+            registry, sla, sla_error = {}, {}, str(e)
 
         lines = []
 
         def line(fail, text):
-            lines.append((fail, text))
+            # A writer id may carry undecodable bytes (the registry is read as the
+            # validators read it): print them escaped, never crash on output.
+            lines.append((fail, text.encode("utf-8", "backslashreplace").decode("utf-8")))
 
         registered = sorted(set(sla) | set(by_writer))
         if sla_error:
             line(True, sla_error)
+        group = _alias_groups(registry)
+        recorded = {group.get(w, w) for w in by_writer}
         for writer in registered:
             if writer not in sla:
                 line(True, "writer %s is not registered in schema/writers.tsv" % writer)
                 continue
             if writer not in by_writer:
+                if group[writer] in recorded:
+                    continue  # another id of the same job has a row
+                if group[writer] != writer:
+                    continue  # an alias is reported once, under its job's name
+                if not _expected(registry[writer][1], private, conn is not None):
+                    continue  # this scope never holds this writer's tables
                 line(True, "writer %s has no _meta/writers row" % writer)
                 continue
             age = _hours(now, _midnight(by_writer[writer]))

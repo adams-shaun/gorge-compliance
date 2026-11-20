@@ -353,19 +353,54 @@ class Query(Base):
         self.assertNotIn("Traceback", r.stderr)
         self.assertIn("no carddb-latest metadata", r.stdout)
 
-        # Invalid UTF-8 in the SLA file is the tool's clean error too.
-        bad_sla = os.path.join(self.tmp, "bad-utf8.tsv")
-        with open(bad_sla, "wb") as f:
-            f.write(b"#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n"
-                    b"catalogue\t24\tcards\t\xff\n")
-        with self.assertRaises(query_mod.QueryError):
-            query_mod.load_writers(bad_sla)
+        # A missing SLA file is the tool's clean error.
         r = self.run_cli("freshness", "--public-dir", os.path.join(self.home, "public"),
-                         "--asset-meta", self.asset, "--sla", bad_sla,
+                         "--asset-meta", self.asset, "--sla", os.path.join(self.tmp, "nope.tsv"),
                          "--now", "2026-11-19T00:00:00Z")
         self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
         self.assertNotIn("Traceback", r.stderr)
         self.assertIn("cannot read writer SLA file", r.stdout)
+
+        # A cell past Python's int-conversion limit is a violation, not a traceback.
+        huge = os.path.join(self.tmp, "huge-sla.tsv")
+        write(huge, "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\ncatalogue\t1" + "0" * 5000
+              + "\tcards\tfixture\n")
+        files = [("schema/writers.tsv", shard.read_text(huge))]
+        self.assertTrue(shard.validate_tree(self.schema, "public", files))
+        r = self.run_cli("freshness", "--public-dir", os.path.join(self.home, "public"),
+                         "--asset-meta", self.asset, "--sla", huge, "--now", "2026-11-19T00:00:00Z")
+        self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+        self.assertNotIn("Traceback", r.stderr)
+        self.assertIn("out of range", r.stdout)
+
+    def test_writers_file_is_read_like_the_validators_read_it(self):
+        # One text for validate_tree and load_writers: whatever the validators
+        # accept the consumer accepts, and the other way round.
+        header = "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n"
+        cases = {
+            "lone-cr-in-cell": (header + "catalogue\t24\tcards\ta\rb\n").encode(),
+            "invalid-utf8": (header + "catalogue\t24\tcards\t").encode() + b"\xff\n",
+            "crlf": (header + "catalogue\t24\tcards\tfixture\n").replace("\n", "\r\n").encode(),
+        }
+        for name, raw in cases.items():
+            with self.subTest(name):
+                path = os.path.join(self.tmp, name + ".tsv")
+                with open(path, "wb") as f:
+                    f.write(raw)
+                rel = [("schema/writers.tsv", shard.read_text(path))]
+                validators_ok = not shard.validate_tree(self.schema, "public", rel)
+                self.assertEqual(validators_ok, not boundary_tree(self.schema, rel), name)
+                try:
+                    query_mod.load_writers(path)
+                    consumer_ok = True
+                except query_mod.QueryError:
+                    consumer_ok = False
+                self.assertEqual(validators_ok, consumer_ok, name)
+                if consumer_ok:
+                    r = self.run_cli("freshness", "--public-dir", os.path.join(self.home, "public"),
+                                     "--asset-meta", self.asset, "--sla", path,
+                                     "--now", "2026-11-19T00:00:00Z")
+                    self.assertNotIn("Traceback", r.stderr)
 
         # Metadata for the other scope is refused rather than used as this
         # scope's age/baseline.
@@ -378,6 +413,56 @@ class Query(Base):
         self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
         self.assertIn("metadata is for scope 'private', want 'public'", r.stdout)
         self.assertIn("no carddb-latest metadata", r.stdout)
+
+    def test_freshness_public_build_needs_only_public_writers(self):
+        # A realistic public store: a row for every public-capable writer, one id
+        # of each alias pair, nothing from the private-only writers.
+        reg = query_mod.load_registry(os.path.join(ROOT, "carddb", "schema", "writers.tsv"))
+        self.assertTrue({"scryfall", "values", "decklib"} <= set(reg))
+        aliases = query_mod._alias_groups(reg)
+        self.assertEqual({w: h for w, h in aliases.items() if w != h},
+                         {"ci": "compliance", "cert": "certification", "loop": "evloop"})
+        home = os.path.join(self.tmp, "public-only")
+        os.makedirs(home)
+        pub = Store("public", home=home, schema=self.schema)
+        pub.init()
+        public_writers = [w for w in sorted(reg)
+                          if w not in aliases or aliases[w] == w
+                          if any(t not in query_mod.PRIVATE_TABLE_NAMES for t in reg[w][1])]
+        self.assertNotIn("scryfall", public_writers)
+        pub.put("_meta/writers", [{"writer": w, "table": "_meta/writers", "version": "t",
+                                   "ran": "2026-11-19"} for w in public_writers])
+        write(os.path.join(home, "carddb-latest.json"),
+              json.dumps({"scope": "public", "published_at": "2026-11-19T00:00:00Z",
+                          "unresolved": 1}) + "\n")
+        args = ("freshness", "--public-dir", pub.dir, "--now", "2026-11-19T00:00:00Z")
+        r = self.cli(home, *args)
+        self.assertNotIn("no _meta/writers row", r.stdout)
+        self.assertNotIn("Traceback", r.stderr)
+        # the one alias id recorded in place of its job name still satisfies the job
+        for dropped, alias in (("compliance", "ci"), ("certification", "cert"), ("evloop", "loop")):
+            rows = [{"writer": alias if w == dropped else w, "table": "_meta/writers",
+                     "version": "t", "ran": "2026-11-19"} for w in public_writers]
+            h2 = os.path.join(self.tmp, "alias-" + alias)
+            os.makedirs(h2)
+            p2 = Store("public", home=h2, schema=self.schema)
+            p2.init()
+            p2.put("_meta/writers", rows)
+            write(os.path.join(h2, "carddb-latest.json"),
+                  json.dumps({"scope": "public", "published_at": "2026-11-19T00:00:00Z"}) + "\n")
+            r = self.cli(h2, "freshness", "--public-dir", p2.dir, "--now", "2026-11-19T00:00:00Z")
+            self.assertNotIn("no _meta/writers row", r.stdout, alias)
+        # a public writer that never ran is still flagged
+        rows = [{"writer": w, "table": "_meta/writers", "version": "t", "ran": "2026-11-19"}
+                for w in public_writers if w != "catalogue"]
+        h3 = os.path.join(self.tmp, "missing")
+        os.makedirs(h3)
+        p3 = Store("public", home=h3, schema=self.schema)
+        p3.init()
+        p3.put("_meta/writers", rows)
+        r = self.cli(h3, "freshness", "--public-dir", p3.dir, "--now", "2026-11-19T00:00:00Z")
+        self.assertIn("!! writer catalogue has no _meta/writers row", r.stdout)
+        self.assertNotIn("writer scryfall has no", r.stdout)
 
     def test_freshness_uses_the_committed_registry_and_scope_metadata(self):
         # No --sla and no --asset-meta: the default path loads the committed

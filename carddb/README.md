@@ -43,20 +43,20 @@ the Python API is `import carddb` with `cmd/carddb/py` on the path.
 | `publish [--bulk] [--private]` | one commit `carddb: <writers> <n> rows @<gorge12>`, rebase onto the remote branch, push fast-forward; refuses over 50000 changed lines without `--bulk`; no-op when nothing is staged |
 | `merge-driver %O %A %B %P` | the git driver `*.tsv merge=carddb` (registered in each clone's config) |
 | `build [--private] [--text FILE]` | SQLite from the shards + curated files + committed sources read from `origin/main` (`--ref`, or `--src-dir`) |
-| `fetch [--private]` | `gh release download carddb-latest` into `$CARDDB_HOME`, and record `carddb-latest.json` (`published_at`, `unresolved`) for `freshness` |
+| `fetch [--private]` | `gh release download carddb-latest` into `$CARDDB_HOME`, and record `carddb-latest.json` (public) or `carddb-private-latest.json` (`--private`) (`published_at`, `unresolved`) for `freshness` |
 | `validate`, `boundary` | the Python mirror of the Go checks (a parity test keeps them in step) |
 | `card <name\|oracle_id>` | every fact for one card: identity, printings, legality, status/evidence, cert, labels and relations (+ the private overlay's tables when the build has them) |
 | `search <fts> [--legal F] [--status K=V] [--set S] [--label L] [--marked]` | FTS5 over the built file, with legality/status/set/label filters |
 | `blockers --format F [--engine E] [--by printings\|decks]` | legal cards that are not covered, ranked by printings (public default) or real-deck counts (private default); digital and non-tournament-only cards are skipped |
 | `proven [--format F] [--level C2]` | cards whose `cert` level is at least the requested level (the cert-pinned proven view) |
-| `deck <id> [--history]` | a private deck's cards (`--history` needs a deck-history table) |
+| `deck <id>` | a private deck's cards |
 | `freshness [--tick]` | writer SLAs from `schema/writers.tsv`, publish age, `carddb-latest` age, unresolved growth and packed data-branch size; `--tick` prints only `!!` lines |
 | `sql '<select>'` | read-only SQL (the file is opened `mode=ro` + `query_only`; only SELECT/WITH/EXPLAIN is accepted) |
 | `export <view> --tsv` | deterministic TSV naming the view and asset version (schema + gorge pin) |
 
 Read verbs take `--db FILE` (default `$CARDDB_HOME/carddb.sqlite`, or
 `carddb-private.sqlite` with `--private`) and open the file read-only. `freshness`
-also accepts `--asset-meta FILE` (default `$CARDDB_HOME/carddb-latest.json`, keys
+also accepts `--asset-meta FILE` (default `$CARDDB_HOME/carddb-latest.json`, or `carddb-private-latest.json` with `--private`; keys
 `published_at` and optional `unresolved`), `--sla FILE`, `--now` and
 `--public-dir`.
 
