@@ -67,6 +67,98 @@ func IsSchemaDecl(s *Schema, rel string, b []byte) bool {
 	return strings.TrimSuffix(string(b), "\n") == declText(s.Tables[m[2]], s.Version)
 }
 
+// IsSchemaAux reports whether rel is the schema's non-declaration config
+// file: schema/writers.tsv, the writer SLA registry freshness reads. It is
+// the only file under schema/ that is neither VERSION nor a table
+// declaration; keeping it here lets the writer ratchet and the data branch
+// share one path without letting arbitrary files under schema/.
+func IsSchemaAux(rel string) bool { return rel == SchemaDir+"/writers.tsv" }
+
+var (
+	writersHeaderRe = regexp.MustCompile(`^#carddb-writers v[1-9][0-9]*$`)
+	// writersColumns is the one fixed shape of schema/writers.tsv. Comparing
+	// the header exactly keeps the one non-declaration under schema/ from
+	// growing a column (or a column named oracle_text / a private table) to
+	// park data the public boundary refuses.
+	writersColumns = []string{"writer", "sla_hours", "tables", "doc"}
+	// A strict positive int, the same rule query.py's load_writers enforces:
+	// no leading +, no leading zero, no value beyond int64.
+	writersSLARe = regexp.MustCompile(`^[1-9][0-9]*$`)
+)
+
+// validateWriters checks schema/writers.tsv's fixed shape, so the one
+// non-declaration allowed under schema/ cannot become a place to park
+// arbitrary (possibly private) data.
+func validateWriters(rel string, b []byte) []Violation {
+	var out []Violation
+	add := func(line int, f string, a ...any) { out = append(out, Violation{rel, line, fmt.Sprintf(f, a...)}) }
+	if len(b) == 0 {
+		add(0, "empty file")
+		return out
+	}
+	if b[len(b)-1] != '\n' {
+		add(0, "does not end with a newline")
+	}
+	lines := strings.Split(strings.TrimSuffix(string(b), "\n"), "\n")
+	if !writersHeaderRe.MatchString(lines[0]) {
+		add(1, "first line %q is not `#carddb-writers v<N>`", clip(lines[0]))
+		return out
+	}
+	if len(lines) < 2 {
+		add(0, "no column header line")
+		return out
+	}
+	header := strings.Split(lines[1], "\t")
+	for _, name := range header {
+		if name == "" {
+			add(2, "empty column name")
+		} else if privateTableNames[name] {
+			add(2, "column %q names a private table", name)
+		} else if ForbiddenField(name) {
+			add(2, "column %q is a forbidden field", name)
+		}
+	}
+	if len(header) != len(writersColumns) {
+		add(2, "columns must be exactly %s", strings.Join(writersColumns, ", "))
+		return out
+	}
+	for i := range header {
+		if header[i] != writersColumns[i] {
+			add(2, "columns must be exactly %s", strings.Join(writersColumns, ", "))
+			return out
+		}
+	}
+	w, h := 0, 1
+	seen := map[string]int{}
+	for i, line := range lines[2:] {
+		ln := i + 3
+		cells := strings.Split(line, "\t")
+		if len(cells) != len(header) {
+			add(ln, "%d cells, want %d", len(cells), len(header))
+			continue
+		}
+		writer := cells[w]
+		if writer == "" {
+			add(ln, "empty writer")
+			continue
+		}
+		if first, ok := seen[writer]; ok {
+			add(ln, "duplicate writer %q (first at line %d)", writer, first)
+			continue
+		}
+		seen[writer] = ln
+		cell := cells[h]
+		if !writersSLARe.MatchString(cell) {
+			add(ln, "sla_hours %q is not a strict positive int", clip(cell))
+			continue
+		}
+		if n, err := strconv.ParseInt(cell, 10, 64); err != nil || n < 1 {
+			add(ln, "sla_hours %q is out of range", clip(cell))
+		}
+	}
+	return out
+}
+
 // declText renders a table's schema declaration file, without the final
 // newline: the form parseSchemaFile reads.
 func declText(t *Table, version int) string {
@@ -116,7 +208,7 @@ func treeFiles(tree string) ([]string, error) {
 
 func isSchemaPath(rel string) bool { return rel == SchemaDir || strings.HasPrefix(rel, SchemaDir+"/") }
 
-const notDeclMsg = "not a schema declaration: only schema/VERSION and schema/v<N>/<table>.tsv (identical to the trusted schema's declaration of that table) may live at or under schema/"
+const notDeclMsg = "not a schema declaration: only schema/VERSION, schema/v<N>/<table>.tsv (identical to the trusted schema's declaration of that table) and schema/writers.tsv may live at or under schema/"
 
 // pathHoldsTable reports whether rel is a legal location for a shard of table.
 func pathHoldsTable(rel, table string) bool {
@@ -166,6 +258,10 @@ func Validate(s *Schema, tree, scope string) ([]Violation, error) {
 			return nil, err
 		}
 		if inSchema {
+			if IsSchemaAux(rel) {
+				out = append(out, validateWriters(rel, b)...)
+				continue
+			}
 			if !IsSchemaDecl(s, rel, b) {
 				out = append(out, Violation{rel, 0, notDeclMsg})
 			}

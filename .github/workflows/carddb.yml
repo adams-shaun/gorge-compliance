@@ -1,24 +1,33 @@
 # carddb: the schema validator and the public-boundary check (cmd/carddb,
-# internal/carddb) over the carddb tree.
+# internal/carddb) over the carddb tree, and the compliance status writer that
+# fills the `support` shards on the data branch.
 #
 #   pull request   touching carddb/** (or the checker itself): the committed
 #                  carddb/ tree (schema + curated inputs) must validate and
 #                  hold nothing private or Forge-shaped.
 #   push to the `carddb` branch: the published data branch (orphan, like
-#                  docs-data) must validate and pass the boundary. The checker
-#                  and the schema are built from `main`, not from the pushed
-#                  branch, so a push cannot swap in a looser checker or schema.
+#                  docs-data) must validate and pass the boundary, then
+#                  `carddb compliance` writes the support/ shards from the
+#                  XMage manifests and FORGE_ORACLE_REF and `carddb publish`
+#                  commits them back. The checker, the schema and the writer
+#                  are built from `main`, not from the pushed branch, so a
+#                  push cannot swap in a looser checker, schema or writer.
 #
 # Limits of that guarantee:
 #  - A workflow file runs from the branch that was pushed, so the steps
 #    themselves come from the pushed `carddb` branch. Protect the `carddb`
 #    branch (no direct pushes; only the publisher identity) so the steps
 #    cannot be edited on the way in; this workflow only pins the checker.
-#  - `main` must already contain cmd/carddb and carddb/schema, i.e. this
-#    change must be promoted develop -> main BEFORE the first publish to
-#    `carddb`. The "Build the checker" step fails loudly otherwise.
+#  - `main` must already contain cmd/carddb (including the compliance writer)
+#    and carddb/schema, i.e. this change must be promoted develop -> main
+#    BEFORE the first publish to `carddb`. The checker and writer guards fail
+#    loudly otherwise.
 #  - The `carddb` branch must carry a copy of this file for the push trigger
 #    to fire.
+#  - The writer needs `contents: write`; it is a separate `publish` job so the
+#    pull-request path never holds a write token. Its `--measured` date is the
+#    pushed commit's date, not the wall clock, so re-running the same push
+#    changes no byte.
 name: carddb
 
 on:
@@ -81,3 +90,51 @@ jobs:
         run: ./carddb-bin validate -schema tool/carddb/schema -scope public -tree "${{ steps.tree.outputs.dir }}"
       - name: Public boundary
         run: ./carddb-bin boundary -schema tool/carddb/schema -tree "${{ steps.tree.outputs.dir }}"
+
+  # The writer runs from `main` (its manifests, Makefile and schema), after the
+  # pushed tree has validated and passed the boundary. It is a separate job so
+  # the pull-request path never holds a write token.
+  publish:
+    needs: check
+    if: github.event_name == 'push' && github.event.deleted != true
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    env:
+      # init clones the public data branch and publish pushes back with the
+      # run's token (masked in the log). CARDDB_HOME is set in the step from
+      # RUNNER_TEMP, which (unlike the runner context) job-level env has.
+      CARDDB_PUBLIC_REMOTE: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+      GIT_TERMINAL_PROMPT: '0'
+      # The pushed commit's date, not the wall clock: re-running the same push
+      # is byte-identical (carddb README, `compliance --measured`).
+      RUN_DATE: ${{ github.event.head_commit.timestamp }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: tool
+          persist-credentials: false
+      - name: Compliance status writer on the data branch
+        working-directory: tool
+        shell: bash
+        run: |
+          set -euo pipefail
+          export CARDDB_HOME="$RUNNER_TEMP/carddb"
+          if [ ! -f cmd/carddb/main.py ] || [ ! -f cmd/carddb/py/carddb/compliance.py ] \
+             || [ ! -d oracle/compliance/manifests ] || [ ! -f Makefile ]; then
+            echo "::error::the checker ref has no carddb compliance writer, manifests or Makefile: promote the carddb change to main before publishing the carddb branch"
+            exit 1
+          fi
+          measured=${RUN_DATE%%T*}
+          case "$measured" in
+            [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]) ;;
+            *) echo "::error::cannot read the pushed commit's date from RUN_DATE=$RUN_DATE"; exit 1 ;;
+          esac
+          version=$(git rev-parse --short=12 HEAD)
+          python3 -I cmd/carddb/main.py init
+          python3 -I cmd/carddb/main.py compliance --repo "$GITHUB_WORKSPACE/tool" \
+            --source ci --measured "$measured" --version "$version"
+          # The first fill adds one xmage and one forge row per corpus card,
+          # above the 50000-line guard for an accidental bulk change.
+          python3 -I cmd/carddb/main.py publish --bulk

@@ -1,6 +1,6 @@
 {
  "card": "Mana Drain",
  "rows": {
-  "adds-colourless-mana-equal-to-the-countered-spells-mana-value": "Oracle: at the beginning of your next main phase, add {C} equal to the countered spell's mana value. Observed: after Mana Drain counters Grizzly Bears (mana value 2) p1 has an empty pool and an empty stack at the first priority of p1's next precombat main phase. Corroborated: XMage (4142596) and Forge (build ae39d91530) both show the delayed trigger on the stack and p1 holding {C}{C} after it resolves."
+  "adds-colourless-mana-equal-to-the-countered-spells-mana-value": "Oracle: at the beginning of your next main phase, add {C} equal to the countered spell's mana value (CR 603.7, 106.1b, 202.3). Observed: after Mana Drain counters Grizzly Bears (mana value 2), the delayed trigger adds no mana at p1's next precombat main phase; after the delayed trigger resolves (the scenario's resolve step) p1's pool is still empty. Corroborated: XMage (4142596) and Forge (build ae39d91530) both show the delayed trigger on the stack at that main phase and p1 holding {C}{C} after it resolves."
  }
 }

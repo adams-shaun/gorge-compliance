@@ -1,9 +1,11 @@
 """fetch: gh release download carddb-latest into CARDDB_HOME."""
+import json
 import os
+import sqlite3
 import subprocess
 import tempfile
 
-from .store import StoreError, carddb_home
+from .store import StoreError, asset_meta_path, carddb_home
 
 TAG = "carddb-latest"
 PUBLIC_REPO = "adams-shaun/gorge-compliance"
@@ -23,6 +25,32 @@ def _unzstd(src, dst):
             if not b:
                 break
             w.write(b)
+
+
+def _published_at(gh, repo, tag):
+    """The release's publishedAt, or None when gh cannot answer (fetch still succeeds)."""
+    p = subprocess.run([gh, "release", "view", tag, "--repo", repo, "--json", "publishedAt"],
+                       capture_output=True, text=True)
+    if p.returncode != 0:
+        return None
+    try:
+        doc = json.loads(p.stdout)
+    except ValueError:
+        return None
+    if not isinstance(doc, dict):
+        return None
+    return doc.get("publishedAt") or None
+
+
+def _unresolved(path):
+    try:
+        conn = sqlite3.connect("file:%s?mode=ro" % os.path.abspath(path), uri=True)
+        try:
+            return conn.execute("SELECT COUNT(*) FROM _meta_unresolved").fetchone()[0]
+        finally:
+            conn.close()
+    except (OSError, sqlite3.Error):
+        return None
 
 
 def fetch(private=False, home=None, repo=None, tag=TAG):
@@ -53,4 +81,17 @@ def fetch(private=False, home=None, repo=None, tag=TAG):
             raise StoreError("release %s of %s has no asset %s[.zst]" % (tag, repo, name))
         dest = os.path.join(home, name)
         os.replace(out, dest)
+    published = _published_at(gh, repo, tag)
+    if published:
+        meta = {"tag": tag, "repo": repo, "scope": "private" if private else "public",
+                "published_at": published}
+        unresolved = _unresolved(dest)
+        if unresolved is not None:
+            meta["unresolved"] = unresolved
+        path = asset_meta_path(home, private)
+        tmp = path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(meta, f, sort_keys=True)
+            f.write("\n")
+        os.replace(tmp, path)
     return dest
