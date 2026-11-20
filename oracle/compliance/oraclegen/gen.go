@@ -1418,6 +1418,21 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			// if it shares the step, so it is scripted below regardless.
 			continue
 		}
+		if as, ok := bandAnswers(d); ok {
+			// A band declaration (CR 702.22c) is the pair of asks XMage's
+			// Combat.handleBanding poses: a chooseUse "Form a band ...?" for
+			// each member, then a TargetControlledPermanent pick of that
+			// member. Gorge records one KChoose per accepted member or
+			// decline, so an accepted object pick is yes + its ref and the
+			// decline label is no. The generic choice route would queue the
+			// gorge label, which chooseUse cannot read (it wants Yes/No) and
+			// which would then be consumed by the target pick.
+			if len(as) > 0 {
+				out[d.Step] = append(out[d.Step], as...)
+				any = true
+			}
+			continue
+		}
 		if as, owned := routing.route(i); owned {
 			if len(as) > 0 {
 				out[d.Step] = append(out[d.Step], as...)
@@ -2614,6 +2629,46 @@ func yesNo(d rules.OracleDecision) (string, bool) {
 		}
 	}
 	return "", false
+}
+
+// bandAnswers scripts a band declaration for XMage's Combat.handleBanding:
+// a chooseUse for each member, then that member's card selection. Gorge records
+// one band pick per accepted member ("pN:<creature>") and one per decline (the
+// "No more creatures in <leader>'s band" label), so the pick's shape, not its
+// label text, decides the answer. Keyed on the engine pick kind "band": the next
+// band-declaration flavour (a future "bands with other") takes the same route
+// without another label census.
+//
+// The member is a kind "choice", not "target": XMage reaches the band's
+// TargetControlledPermanent through Target.choose -> Player.choose, whose
+// TestPlayer answer is makeChoose on the CHOICE queue. The driver turns a
+// scenario ref in a "choice" value into its bound alias (aliasChoiceValue), so
+// the same-name @ref binding still selects exactly one creature. A "target"
+// answer would go to the separate targets queue that chooseTarget reads, and
+// makeChoose would consume the next band's yes/no instead (measured: "Found
+// wrong choice command ... No ... Select an attacking creature to band with").
+func bandAnswers(d rules.OracleDecision) ([]XAnswer, bool) {
+	if len(d.PickKinds) == 0 {
+		return nil, false
+	}
+	for _, kind := range d.PickKinds {
+		if kind != "band" {
+			return nil, false
+		}
+	}
+	as := make([]XAnswer, 0, len(d.Picks)*2)
+	for k := range d.Picks {
+		ref := ""
+		if k < len(d.PickRefs) {
+			ref = d.PickRefs[k]
+		}
+		if isScenarioRefShaped(ref) {
+			as = append(as, XAnswer{d.Seat, "choice", "yes"}, XAnswer{d.Seat, "choice", ref})
+			continue
+		}
+		as = append(as, XAnswer{d.Seat, "choice", "no"})
+	}
+	return as, true
 }
 
 // loneTriggerCostDecline is a triggered-cost ask offered with only its
