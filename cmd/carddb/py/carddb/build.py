@@ -65,7 +65,9 @@ def read_committed(repo=None, ref="HEAD", directory=None):
 
     The default ref is the checkout's own HEAD, the same tree the schema is read
     from: a branch that adds a curated column must be able to build itself before
-    it is promoted.  Pass --ref origin/main (or --src-dir) to build from another tree."""
+    it is promoted.  Pass --ref <ref> (or --src-dir) to build from another tree; that tree
+    must carry the curated schema this checkout expects (a ref from before the
+    citation columns fails validation, e.g. origin/main until this branch lands)."""
     out = {}
     if directory:
         for p in SOURCE_PATHS:

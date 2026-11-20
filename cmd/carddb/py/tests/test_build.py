@@ -152,8 +152,8 @@ class Build(Base):
         self.assertEqual(self.conn(out).execute("SELECT count(*) FROM curated_labels").fetchone()[0], 0)
 
     def test_default_ref_is_the_checkout_head(self):
-        self.assertEqual(sorted(build_mod.read_committed(repo=ROOT)),
-                         sorted(build_mod.read_committed(repo=ROOT, ref="HEAD")))
+        # the same files with the same bytes, not merely the same names
+        self.assertEqual(build_mod.read_committed(repo=ROOT), build_mod.read_committed(repo=ROOT, ref="HEAD"))
 
     def test_cli_build_defaults_to_the_checkout_head(self):
         a, _ = self.fixture()

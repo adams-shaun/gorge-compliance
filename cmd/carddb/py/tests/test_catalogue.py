@@ -87,7 +87,7 @@ class Catalogue(Base):
         home = os.path.join(self.tmp, "m1")
         r = self.ingest(home)
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-        self.assertIn("6 cards, 9 printings, 7 sets, 69 legality rows, 6 faces", r.stdout)
+        self.assertIn("9 cards, 12 printings, 8 sets, 78 legality rows, 6 faces", r.stdout)
         self.assertIn("cross-check 0 manifest set(s): 0 mismatch(es)", r.stdout)
         got = shards(self.clone(home))
         self.golden(got)
@@ -141,6 +141,25 @@ class Catalogue(Base):
         self.assertEqual(len(same_rows), 2, same)
         self.assertIn("\ta\t{3}{U}\tLegendary Creature — Human Wizard\t1\t3", same)
         self.assertIn("\tb\t-\tLegendary Creature — Human Wizard\t2\t4", same)
+        # a meld set is three cards, not two two-faced ones: the result is its own card
+        # row with its own oracle_sha, and the components carry no faces
+        emn = [l.split("\t") for l in read(os.path.join(self.clone(home), "cards", "e0.tsv")).splitlines()[2:] if l]
+        by_name = {r[1]: r for r in emn}
+        self.assertEqual(sorted(by_name), ["Brisela, Voice of Nightmares", "Bruna, the Fading Light",
+                                           "Gisela, the Broken Blade"])
+        self.assertEqual(len({r[0] for r in emn}), 3)
+        brisela = by_name["Brisela, Voice of Nightmares"]
+        self.assertEqual(brisela[2], "meld")
+        self.assertEqual(brisela[5], "Legendary Creature — Eldrazi Angel")
+        self.assertEqual(by_name["Gisela, the Broken Blade"][5], "Legendary Creature — Angel Horror")
+        self.assertEqual(brisela[9], hashlib.sha256(
+            b"Flying, first strike, vigilance, lifelink\n"
+            b"Your opponents can't cast spells with mana value 3 or less.").hexdigest())
+        self.assertEqual(by_name["Gisela, the Broken Blade"][9], hashlib.sha256(
+            b"Flying, first strike, lifelink\n(Melds with Bruna, the Fading Light.)").hexdigest())
+        self.assertFalse(os.path.exists(os.path.join(self.clone(home), "faces", "e0.tsv")))
+        emn_printings = read(os.path.join(self.clone(home), "printings", "emn.tsv"))
+        self.assertIn("\t28b\t", emn_printings)
 
     def test_rerun_changes_no_byte(self):
         home = os.path.join(self.tmp, "m1")
@@ -152,6 +171,24 @@ class Catalogue(Base):
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
         self.assertIn("(0 rows changed)", r.stdout)
         self.assertEqual(shards(self.clone(home)), before)
+
+    def test_a_changed_snapshot_stamps_the_snapshot_date_not_the_ambient_one(self):
+        home = os.path.join(self.tmp, "m1")
+        r = self.ingest(home)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        with open(FIXTURE, encoding="utf-8") as f:
+            fixture = json.load(f)
+        fixture["data"]["LEA"]["cards"][0]["rarity"] = "mythic"  # a real data change: printings is rewritten
+        path = os.path.join(self.tmp, "changed.json")
+        write(path, json.dumps(fixture) + "\n")
+        os.environ["CARDDB_NOW"] = "2026-11-20"
+        r = self.cli(home, "ingest", "catalogue", "--mtgjson", path, "--manifests", self.empty_manifests())
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertNotIn("(0 rows changed)", r.stdout)
+        got = shards(self.clone(home))
+        self.assertNotEqual(got["printings/lea.tsv"], read(os.path.join(GOLDEN_DIR, "printings", "lea.tsv")))
+        self.assertIn("mtgjson\tprintings\t5.3.0+20261119\t2026-11-19", got["_meta/writers.tsv"])
+        self.assertNotIn("2026-11-20", "\n".join(got.values()))
 
     def test_same_input_under_two_ambient_dates_is_byte_identical(self):
         trees = []
@@ -222,7 +259,7 @@ class Catalogue(Base):
             f.write(read(FIXTURE))
         r = self.ingest(home, fixture=path)
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-        self.assertIn("6 cards, 9 printings, 7 sets, 69 legality rows, 6 faces", r.stdout)
+        self.assertIn("9 cards, 12 printings, 8 sets, 78 legality rows, 6 faces", r.stdout)
 
     def test_digital_only_card_has_no_paper_printing(self):
         home = os.path.join(self.tmp, "m1")
@@ -253,23 +290,52 @@ class Catalogue(Base):
         home = os.path.join(self.tmp, "m1")
         r = self.ingest(home)
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        clone = self.clone(home)
+        self.assertIn("\tmodern\tlegal", read(os.path.join(clone, "legality", "44.tsv")))
         with open(FIXTURE, encoding="utf-8") as f:
             fixture = json.load(f)
+        # a format turns not_legal on the printing the card row is built from (M10, the newest)
+        for c in fixture["data"]["M10"]["cards"]:
+            c["legalities"]["modern"] = "Not Legal"
+        path = os.path.join(self.tmp, "turned.json")
+        write(path, json.dumps(fixture) + "\n")
+        r = self.ingest(home, fixture=path)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        legality = read(os.path.join(clone, "legality", "44.tsv"))
+        self.assertNotIn("\tmodern\t", legality)
+        self.assertIn("\tcommander\tlegal", legality)
+        self.assertTrue(os.path.exists(os.path.join(clone, "printings", "m10.tsv")))
+        # and a printing disappears
         del fixture["data"]["M10"]  # no second Lightning Bolt printing
-        for c in fixture["data"]["LEA"]["cards"]:
-            if c["name"] == "Lightning Bolt":
-                c["legalities"]["modern"] = "Not Legal"
         path = os.path.join(self.tmp, "smaller.json")
         write(path, json.dumps(fixture) + "\n")
         r = self.ingest(home, fixture=path)
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-        clone = self.clone(home)
         self.assertFalse(os.path.exists(os.path.join(clone, "printings", "m10.tsv")))
-        legality = read(os.path.join(clone, "legality", "44.tsv"))
-        self.assertNotIn("\tmodern\t", legality)
-        self.assertIn("\tcommander\tlegal", legality)
         self.assertTrue(os.path.exists(os.path.join(clone, "cards", "44.tsv")))  # still printed in LEA
         self.assertNotIn("m10", read(os.path.join(clone, "printings", "lea.tsv")))
+
+    def test_cross_check_finds_meld_cards_by_name_and_number(self):
+        home = os.path.join(self.tmp, "m1")
+        manifests = os.path.join(self.tmp, "manifests")
+        os.makedirs(manifests)
+        emn = {"code": "EMN", "name": "Eldritch Moon", "released": "2016-07-22", "set_type": "EXPANSION",
+               "xmage_ref": "x", "cards": [
+                   {"name": "Gisela, the Broken Blade", "numbers": ["28"], "rarity": "MYTHIC"},
+                   {"name": "Bruna, the Fading Light", "numbers": ["15"], "rarity": "MYTHIC"},
+                   {"name": "Brisela, Voice of Nightmares", "numbers": ["28b"], "rarity": "MYTHIC"},
+               ]}
+        write(os.path.join(manifests, "EMN.json"), json.dumps(emn) + "\n")
+        r = self.ingest(home, manifests=manifests)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        # the meld result is a card of MTGJSON: neither absent nor an extra, numbers agree
+        self.assertIn("cross-check 1 manifest set(s): 0 mismatch(es)", r.stdout)
+        # a manifest without the meld result reports it as a MTGJSON extra
+        emn["cards"].pop()
+        write(os.path.join(manifests, "EMN.json"), json.dumps(emn) + "\n")
+        r = self.cli(home, "ingest", "catalogue", "--mtgjson", FIXTURE, "--manifests", manifests)
+        self.assertIn("manifest EMN: 1 card(s) in MTGJSON but not in the manifest: Brisela, Voice of Nightmares",
+                      r.stdout)
 
 
 if __name__ == "__main__":

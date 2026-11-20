@@ -53,7 +53,10 @@ cost/type/P-T only (no Oracle text); `printings` holds one row per physical
 printing (the front-face MTGJSON uuid); `sets` carries the release date used by
 `first_released`/`first_set`, and `paper` says whether any printing's
 `availability` includes `paper`. A full ingest removes a stale row when a
-format turns `not_legal` or a printing disappears.
+format turns `not_legal` or a printing disappears. A meld set is three cards, not
+two two-faced ones: each component and the meld result (the `side: b` entry, e.g.
+Brisela, Voice of Nightmares) is its own `cards` row and its own printing, and none
+of them has a `faces` row; a transform or MDFC back face is a face, never a card.
 
 `carddb/curated/game-changers.tsv` and `bracket-flags.tsv` carry the WotC URL
 and date per row (`source`, `cited`) and are seeded from the published list;

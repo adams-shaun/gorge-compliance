@@ -114,8 +114,30 @@ def _front(card):
     return card.get("side") in (None, "", "a")
 
 
+def _meld(card):
+    """Meld components (side a) and the meld result (side b) are separate cards, not faces."""
+    return card.get("layout") == "meld"
+
+
+def _starts_card(card):
+    """A card entry that is its own catalogue card: a front, or a meld result."""
+    return _front(card) or (_meld(card) and card.get("side") == "b")
+
+
+def _card_name(card):
+    """The card's own name: a meld card is named alone, not with its meld partner."""
+    if _meld(card):
+        return _str(card.get("faceName") or card.get("name"))
+    return _str(card.get("name") or card.get("faceName"))
+
+
 def _group(card, by_uuid):
-    """Every face of one printing, front first by side."""
+    """Every face of one printing, front first by side.
+
+    A meld card is a face of nothing: Gisela and Bruna are each one face, and
+    Brisela, the meld result, is a card of its own (one oracle_id, no faces)."""
+    if _meld(card):
+        return [card]
     ids = [card.get("uuid")] + [x for x in (card.get("otherFaceIds") or [])]
     faces, seen = [], set()
     for uuid in ids:
@@ -226,7 +248,7 @@ def build_catalogue(data):
             raise StoreError("MTGJSON set %s: cards is not a list" % key)
         by_uuid = {c.get("uuid"): c for c in cards if c.get("uuid")}
         for c in cards:
-            if not _front(c):
+            if not _starts_card(c):
                 continue
             oid = (c.get("identifiers") or {}).get("scryfallOracleId")
             uuid = c.get("uuid")
@@ -241,7 +263,7 @@ def build_catalogue(data):
                 first[oid] = (row_key, release, code)
             paper[oid] = paper.get(oid, False) or paper_here
             rec = {
-                "name": _str(c.get("name") or c.get("faceName")),
+                "name": _card_name(c),
                 "layout": _str(c.get("layout") or "normal"),
                 "mana_cost": _combined(faces, "manaCost"),
                 "mana_value": int(round(float(c.get("manaValue") or 0))),
@@ -360,8 +382,6 @@ def cross_check(directory, data):
             continue
         aliases, manifest = {}, {}
         for c in s.get("cards") or []:
-            if not _front(c):
-                continue
             names = _aliases(c)
             number = _number_key(_str(c.get("number")))
             for n in names:
@@ -374,7 +394,7 @@ def cross_check(directory, data):
         # an extra is a physical printing whose card has no alias in the manifest
         extra = []
         for c in s.get("cards") or []:
-            if not _front(c):
+            if not _starts_card(c):
                 continue
             keys = {_name_key(n) for n in _aliases(c) if n}
             if keys and not (keys & set(manifest)):
