@@ -1,0 +1,297 @@
+"""parquet_export: the CI-only per-table Parquet release asset.
+
+Everything but the parquet bytes is tested without pyarrow: the object
+selection (structural: virtual tables, their shadow tables and sqlite's own
+objects are out, the `proven` view is in), the declared-type mapping and the
+deterministic ordering. With pyarrow installed the exporter runs against a
+real built file (and a hand-built one with edge shapes) and the archive is
+checked for content and byte-determinism; without it those tests skip.
+"""
+import gzip
+import hashlib
+import json
+import os
+import sqlite3
+import subprocess
+import sys
+import tarfile
+import unittest
+
+from carddb import build as build_mod
+
+import parquet_export
+
+from .helpers import Base, OID_A, OID_B, OID_C
+from .test_build import write
+
+SCRIPT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "parquet_export.py"))
+
+
+def has_pyarrow():
+    try:
+        import pyarrow  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+
+def read_archive(path):
+    """{member: bytes} of a tar.gz."""
+    out = {}
+    with tarfile.open(path, mode="r:gz") as tf:
+        for m in tf.getmembers():
+            out[m.name] = tf.extractfile(m).read()
+    return out
+
+
+def read_parquet(blob):
+    import io
+    import pyarrow.parquet as pq
+    return pq.read_table(io.BytesIO(blob))
+
+
+def sha(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def edge_db(path):
+    """A hand-built file with the shapes the exporter must survive: NULLs, a
+    WITHOUT ROWID table, a rowid table with no keys, a view, an FTS5 table and
+    sqlite's own objects (via ANALYZE)."""
+    conn = sqlite3.connect(path)
+    conn.executescript("""
+        CREATE TABLE keys (a TEXT NOT NULL, b INTEGER, c REAL, PRIMARY KEY (a, b)) WITHOUT ROWID;
+        INSERT INTO keys VALUES ('beta', 2, 2.5), ('alpha', 1, NULL), ('alpha', 0, -0.5);
+        CREATE TABLE loose (a TEXT, b BLOB, d INTEGER);
+        INSERT INTO loose VALUES ('x', x'00ff', NULL), ('y', NULL, 7), ('a', x'01', NULL);
+        CREATE VIEW pick AS SELECT a FROM keys WHERE c IS NOT NULL;
+        CREATE VIRTUAL TABLE card_fts USING fts5(body);
+        INSERT INTO card_fts VALUES ('hello'), ('world');
+    """)
+    conn.execute("ANALYZE")
+    conn.commit()
+    conn.close()
+    return path
+
+
+class Selection(Base):
+    """data_objects picks by sqlite_master shape, not by a name list."""
+
+    def test_virtual_shadows_internal_out_views_in(self):
+        p = edge_db(os.path.join(self.tmp, "edge.sqlite"))
+        conn = sqlite3.connect(p)
+        self.addCleanup(conn.close)
+        self.assertEqual(parquet_export.data_objects(conn),
+                         [("table", "keys"), ("table", "loose"), ("view", "pick")])
+
+    def test_the_objects_of_a_built_file(self):
+        a, committed = built_fixture(self)
+        out = os.path.join(self.tmp, "carddb.sqlite")
+        build_mod.build(out, self.schema, a.dir, None, committed)
+        conn = sqlite3.connect(out)
+        self.addCleanup(conn.close)
+        objs = parquet_export.data_objects(conn)
+        names = [n for _k, n in objs]
+        self.assertIn("proven", names)
+        self.assertIn("card_names", names)
+        self.assertIn("build_meta", names)
+        for t in ("cards", "printings", "sets", "legality", "labels", "status",
+                  "src_manifest_sets", "src_manifest_cards", "src_diagnosed"):
+            self.assertIn(t, names)
+        self.assertNotIn("card_fts", names)
+        self.assertFalse(any(n.startswith("card_fts_") for n in names))
+        self.assertEqual(names, sorted(names))
+
+    def test_columns_and_order(self):
+        p = edge_db(os.path.join(self.tmp, "edge.sqlite"))
+        conn = sqlite3.connect(p)
+        self.addCleanup(conn.close)
+        self.assertEqual(parquet_export.columns(conn, "keys"),
+                         [("a", "TEXT", 1), ("b", "INTEGER", 2), ("c", "REAL", 0)])
+        self.assertEqual(parquet_export.columns(conn, "loose"),
+                         [("a", "TEXT", 0), ("b", "BLOB", 0), ("d", "INTEGER", 0)])
+        self.assertEqual(parquet_export.order_by(conn, "keys", parquet_export.columns(conn, "keys"), "table"),
+                         '"a", "b"')
+        self.assertEqual(parquet_export.order_by(conn, "loose", parquet_export.columns(conn, "loose"), "table"),
+                         "rowid")
+        self.assertEqual(parquet_export.order_by(conn, "pick", parquet_export.columns(conn, "pick"), "view"),
+                         '"a"')
+
+    def test_unknown_declared_type_fails_loudly(self):
+        self.assertEqual(parquet_export.parquet_type("TEXT"), "string")
+        self.assertEqual(parquet_export.parquet_type("integer"), "int64")
+        self.assertEqual(parquet_export.parquet_type("REAL"), "float64")
+        self.assertEqual(parquet_export.parquet_type("BLOB"), "binary")
+        with self.assertRaises(parquet_export.ExportError):
+            parquet_export.parquet_type("NUMERIC")
+        with self.assertRaises(parquet_export.ExportError):
+            parquet_export.parquet_type("")
+
+
+class CiOnly(unittest.TestCase):
+    def test_the_carddb_runtime_never_touches_pyarrow(self):
+        """pyarrow is a CI-only dependency: the carddb package and the launcher
+        must not import it, and the only importer is this exporter."""
+        py = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
+        offenders = [os.path.join(dp, fn)
+                     for dp, _dn, fns in os.walk(os.path.join(py, "carddb")) for fn in fns
+                     if fn.endswith(".py")]
+        offenders.append(os.path.join(os.path.dirname(py), "main.py"))
+        for p in sorted(offenders):
+            with open(p, encoding="utf-8") as f:
+                text = f.read()
+            self.assertNotIn("pyarrow", text, p)
+            self.assertNotIn("parquet_export", text, p)
+
+
+class BuiltFixture:
+    """A real built carddb.sqlite from the standard small fixture."""
+
+    def build(self):
+        a, committed = built_fixture(self)
+        out = os.path.join(self.tmp, "carddb.sqlite")
+        build_mod.build(out, self.schema, a.dir, None, committed)
+        return out
+
+
+def built_fixture(self):
+    a = self.machine("a", init=True)
+    a.put("cards", [
+        {"oracle_id": OID_B, "name": "Fire // Ice", "layout": "split", "mana_cost": "{1}{R} // {1}{U}",
+         "mana_value": 4, "type_line": "Instant // Instant", "colors": ["R", "U"], "color_identity": ["R", "U"]},
+        {"oracle_id": OID_A, "name": "Lightning Bolt", "layout": "normal", "mana_cost": "{R}", "mana_value": 1,
+         "type_line": "Instant", "colors": ["R"], "color_identity": ["R"]},
+        {"oracle_id": OID_C, "name": "Dáin Ironfoot", "layout": "normal", "mana_cost": "{3}{R}", "mana_value": 4,
+         "type_line": "Legendary Creature — Dwarf Warrior", "colors": ["R"], "color_identity": ["R"]},
+    ], writer="mtgjson")
+    a.put("sets", [{"set_code": "lea", "name": "Limited Edition Alpha", "release_date": "1993-08-05",
+                    "set_type": "core"}], writer="mtgjson")
+    a.put("printings", [{"printing_id": "p-1", "oracle_id": OID_A, "set_code": "lea",
+                         "collector_number": "161", "rarity": "common", "released": "1993-08-05"}],
+          writer="mtgjson")
+    src = os.path.join(self.tmp, "src")
+    write(os.path.join(src, "carddb/curated/labels.tsv"),
+          "#carddb curated/labels v1\noracle_id\tlabel\tnote\n%s\tstaple\t-\n" % OID_A)
+    write(os.path.join(src, "oracle/xengine/diagnosed.tsv"),
+          "kind\tset\tcard\tfield\twrong\tcr\tevidence\tupstream\tticket\n"
+          "diverge\tLEA\tLightning Bolt\tp0.hand\tharness\t307.4\twhy\t\txe-1\n")
+    return a, build_mod.read_committed(directory=src)
+
+
+@unittest.skipUnless(has_pyarrow(), "pyarrow is not installed")
+class Archive(BuiltFixture, Base):
+    def test_round_trip_and_determinism(self):
+        import pyarrow
+
+        db = self.build()
+        out = os.path.join(self.tmp, "carddb-parquet.tar.gz")
+        manifest = parquet_export.export(db, out)
+
+        self.assertEqual(manifest["asset"], "carddb-parquet.tar.gz")
+        names = [t["name"] for t in manifest["tables"]]
+        self.assertEqual(names, sorted(names))
+        self.assertIn("proven", names)
+        self.assertNotIn("card_fts", names)
+        members = read_archive(out)
+        self.assertEqual(sorted(members), ["MANIFEST.json"] + [n + ".parquet" for n in names])
+        self.assertEqual(json.loads(members["MANIFEST.json"].decode()), manifest)
+        conn = sqlite3.connect(db)
+        self.addCleanup(conn.close)
+        for t in manifest["tables"]:
+            want = conn.execute('SELECT count(*) FROM "%s"' % t["name"]).fetchone()[0]
+            self.assertEqual(t["rows"], want, t["name"])
+            self.assertEqual(hashlib.sha256(members[t["name"] + ".parquet"]).hexdigest(), t["sha256"])
+        # typed columns, deterministic order (schema tables: PRIMARY KEY order)
+        cards = read_parquet(members["cards.parquet"])
+        self.assertEqual(cards.column("oracle_id").to_pylist(),
+                         sorted(cards.column("oracle_id").to_pylist()))
+        self.assertEqual(cards.schema.field("mana_value").type, pyarrow.int64())
+        self.assertEqual(cards.schema.field("name").type, pyarrow.string())
+        # deterministic: same db, same bytes (the manifest names the asset, so
+        # the second export goes to the same path and the first is copied);
+        # a changed db, different bytes
+        copy = os.path.join(self.tmp, "first.tar.gz")
+        os.replace(out, copy)
+        out2 = os.path.join(self.tmp, "carddb-parquet.tar.gz")
+        parquet_export.export(db, out2)
+        self.assertEqual(sha(copy), sha(out2))
+        conn.execute("INSERT INTO build_meta VALUES ('extra', 'row')")
+        conn.commit()
+        conn.close()
+        out3 = os.path.join(self.tmp, "changed.tar.gz")
+        parquet_export.export(db, out3)
+        self.assertNotEqual(sha(out), sha(out3))
+
+    def test_edge_shapes_round_trip(self):
+        import pyarrow
+
+        p = edge_db(os.path.join(self.tmp, "edge.sqlite"))
+        out = os.path.join(self.tmp, "edge.tar.gz")
+        manifest = parquet_export.export(p, out)
+        self.assertEqual([t["name"] for t in manifest["tables"]], ["keys", "loose", "pick"])
+        members = read_archive(out)
+        keys = read_parquet(members["keys.parquet"])
+        # declared-key order ('a', then 'b'), NULLs are parquet nulls
+        self.assertEqual(keys.column("a").to_pylist(), ["alpha", "alpha", "beta"])
+        self.assertEqual(keys.column("b").to_pylist(), [0, 1, 2])
+        self.assertEqual(keys.column("c").to_pylist(), [-0.5, None, 2.5])
+        self.assertEqual(keys.schema.field("c").type, pyarrow.float64())
+        loose = read_parquet(members["loose.parquet"])
+        self.assertEqual(loose.schema.field("b").type, pyarrow.binary())
+        self.assertEqual(loose.column("b").to_pylist(), [b"\x00\xff", None, b"\x01"])
+        self.assertEqual(loose.column("d").to_pylist(), [None, 7, None])
+        pick = read_parquet(members["pick.parquet"])
+        self.assertEqual(pick.column("a").to_pylist(), ["alpha", "beta"])
+
+    def test_cli(self):
+        db = self.build()
+        out = os.path.join(self.tmp, "out.tar.gz")
+        # python3 -I would drop PYTHONPATH (and so pyarrow), so the child is
+        # run with -I off and PYTHONPATH pointed at the pyarrow this test
+        # imported; when there is none the test skips.
+        env = dict(os.environ)
+        env.pop("PYTHONPATH", None)
+        try:
+            import pyarrow
+            env["PYTHONPATH"] = os.path.dirname(os.path.dirname(os.path.abspath(pyarrow.__file__)))
+        except ImportError:
+            self.skipTest("pyarrow is not installed")
+        r = subprocess.run([sys.executable, SCRIPT, "--db", db, "--out", out],
+                           capture_output=True, text=True, env=env)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("carddb parquet:", r.stdout)
+        self.assertTrue(os.path.isfile(out))
+        r = subprocess.run([sys.executable, SCRIPT, "--db", db, "--out", out, "--list"],
+                           capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("view\tproven", r.stdout)
+        r = subprocess.run([sys.executable, SCRIPT, "--db", os.path.join(self.tmp, "nope.sqlite"),
+                            "--out", out], capture_output=True, text=True)
+        self.assertEqual(r.returncode, 2, r.stdout + r.stderr)
+        r = subprocess.run([sys.executable, SCRIPT, "--db", db,
+                            "--out", os.path.join(self.tmp, "x.parquet")],
+                           capture_output=True, text=True)
+        self.assertEqual(r.returncode, 2, r.stdout + r.stderr)
+
+
+@unittest.skipUnless(has_pyarrow(), "pyarrow is not installed")
+class GzipMeta(Base):
+    def test_the_archive_has_zeroed_metadata(self):
+        out = os.path.join(self.tmp, "edge.tar.gz")
+        parquet_export.export(edge_db(os.path.join(self.tmp, "edge.sqlite")), out)
+        with open(out, "rb") as f:
+            header = f.read(10)
+        self.assertEqual(int.from_bytes(header[4:8], "little"), 0)  # gzip mtime: no wall clock
+        self.assertEqual(header[8] & 8, 0)  # no gzip name field
+        with tarfile.open(out, mode="r:gz") as tf:
+            for m in tf.getmembers():
+                self.assertEqual(m.mtime, 0)
+                self.assertEqual((m.uid, m.gid, m.uname, m.gname), (0, 0, "", ""))
+
+
+if __name__ == "__main__":
+    unittest.main()

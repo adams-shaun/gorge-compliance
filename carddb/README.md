@@ -52,7 +52,20 @@ The release has two shapes: `carddb-latest` keeps the floating
 snapshot per ISO week. Dated releases older than 12 weeks are pruned except the
 newest release of each quarter. `carddb-latest.json` travels beside the asset
 with the data revision, gorge pin, packed size and sha256; only the latest
-release carries it, so a weekly asset cannot masquerade as the latest.
+release carries it, so a weekly asset cannot masquerade as the latest. Both
+releases also carry `carddb-parquet.tar.gz`: one `.parquet` per ordinary table
+of the built file (the schema tables, `card_names`, `build_meta`, the `src_*`
+sources and the `proven` view; FTS5 and sqlite's own objects are excluded),
+plus a `MANIFEST.json` naming each object's rows, columns and sha256. Columns
+are typed from the declared SQLite types (INTEGER int64, REAL float64, TEXT
+string, BLOB binary) and rows are written in key order, so rerunning the export
+on the same build gives the same bytes.
+
+`cmd/carddb/py/parquet_export.py` is the writer. pyarrow is a CI-only
+dependency: it is pinned (`pyarrow==21.0.0`) and installed in a throwaway venv
+by the workflow step that runs the export, and the exporter — standalone, it
+never imports the `carddb` package and is never imported by it — fails loudly
+when pyarrow is missing. The carddb tool itself stays stdlib only.
 
 **Branch protection (operator setting).** Protect `carddb` with require linear
 history and fast-forward only; the only pushers are the GitHub Actions token

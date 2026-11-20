@@ -5,7 +5,8 @@ releases. It is deliberately a pure planner plus a thin `gh` wrapper:
 
   * `carddb-latest` is the floating release. Its `carddb.sqlite.zst` asset and
     `carddb-latest.json` metadata are replaced (`gh release upload --clobber`)
-    on every run.
+    on every run. Extra `--asset`s ride along (the workflow also passes the
+    CI-only per-table Parquet archive, `carddb-parquet.tar.gz`).
   * one dated `carddb-YYYY-MM-DD` release per ISO week (the Monday) keeps a
     stable snapshot; rerunning the same week replaces that week's asset. It
     carries the SQLite asset only: the `carddb-latest.json` beside it would
