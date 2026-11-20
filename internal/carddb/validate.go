@@ -2,6 +2,7 @@ package carddb
 
 import (
 	"fmt"
+	"io"
 	"io/fs"
 	"os"
 	"path/filepath"
@@ -38,20 +39,38 @@ const SchemaDir = "schema"
 const schemaDeclHeader = "#carddb-schema "
 
 var (
-	schemaDeclPathRe = regexp.MustCompile(`^schema/v[0-9]+/.+\.tsv$`)
+	schemaDeclPathRe = regexp.MustCompile(`^schema/v([0-9]+)/(.+)\.tsv$`)
 	schemaVersionRe  = regexp.MustCompile(`^[0-9]+\n?$`)
 )
 
-// IsSchemaDecl reports whether the file at rel with leading bytes head is a
-// schema declaration: schema/VERSION holding just a number, or
-// schema/v<N>/**/<table>.tsv opening with `#carddb-schema `. head must hold
-// at least the first len(schemaDeclHeader) bytes of the file (or all of it).
-func IsSchemaDecl(rel string, head []byte) bool {
+// declHeaderLine is the column line every schema declaration table carries.
+var declHeaderLine = strings.Join(schemaHeader, "\t")
+
+// IsSchemaDecl reports whether the file at rel, whose whole content is b, is
+// a declaration of the schema s: schema/VERSION holding exactly s.Version, or
+// schema/v<s.Version>/<table>.tsv for a table s declares, whose first line is
+// exactly `#carddb-schema <table> v<N>` (table taken from the path) and whose
+// second line is the declaration column header. Anything else (a table s does
+// not declare, another version, a free-text first line) is not a declaration.
+// The remaining lines are row-checked by Boundary.
+func IsSchemaDecl(s *Schema, rel string, b []byte) bool {
 	if rel == SchemaDir+"/VERSION" {
-		return schemaVersionRe.Match(head)
+		n, err := strconv.Atoi(strings.TrimSuffix(string(b), "\n"))
+		return schemaVersionRe.Match(b) && err == nil && n == s.Version
 	}
-	return schemaDeclPathRe.MatchString(rel) && strings.HasPrefix(string(head), schemaDeclHeader)
+	m := schemaDeclPathRe.FindStringSubmatch(rel)
+	if m == nil || m[1] != strconv.Itoa(s.Version) || s.Tables[m[2]] == nil {
+		return false
+	}
+	lines := strings.SplitN(string(b), "\n", 3)
+	return len(lines) >= 2 &&
+		lines[0] == fmt.Sprintf("%s%s v%d", schemaDeclHeader, m[2], s.Version) &&
+		lines[1] == declHeaderLine
 }
+
+// shardPrefix opens the first line of every data shard (and of any file that
+// claims to be one, whatever its extension).
+const shardPrefix = "#carddb "
 
 // declRowCells is the width of every line of a schema declaration table
 // (name type required key visibility doc).
@@ -119,7 +138,16 @@ func Validate(s *Schema, tree, scope string) ([]Violation, error) {
 	keys := map[string]map[string]string{} // table -> key -> "path:line"
 	for _, rel := range files {
 		inSchema := isSchemaPath(rel)
-		if !inSchema && !strings.HasSuffix(rel, ".tsv") {
+		isTSV := strings.HasSuffix(rel, ".tsv")
+		if !inSchema && !isTSV {
+			// a shard hidden behind another extension is still a shard
+			claims, err := claimsShard(filepath.Join(tree, filepath.FromSlash(rel)))
+			if err != nil {
+				return nil, err
+			}
+			if claims {
+				out = append(out, Violation{rel, 1, "carddb shard must be a .tsv file"})
+			}
 			continue
 		}
 		b, err := os.ReadFile(filepath.Join(tree, filepath.FromSlash(rel)))
@@ -127,7 +155,7 @@ func Validate(s *Schema, tree, scope string) ([]Violation, error) {
 			return nil, err
 		}
 		if inSchema {
-			if !IsSchemaDecl(rel, b) {
+			if !IsSchemaDecl(s, rel, b) {
 				out = append(out, Violation{rel, 0, notDeclMsg})
 			}
 			continue
@@ -135,6 +163,18 @@ func Validate(s *Schema, tree, scope string) ([]Violation, error) {
 		out = append(out, validateShard(s, scope, rel, b, keys)...)
 	}
 	return out, nil
+}
+
+// claimsShard reports whether the file's first line opens like a shard header.
+func claimsShard(path string) (bool, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		return false, err
+	}
+	defer f.Close()
+	buf := make([]byte, len(shardPrefix))
+	n, _ := io.ReadFull(f, buf)
+	return string(buf[:n]) == shardPrefix, nil
 }
 
 func validateShard(s *Schema, scope, rel string, b []byte, keys map[string]map[string]string) []Violation {

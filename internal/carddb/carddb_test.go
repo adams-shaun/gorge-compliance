@@ -342,6 +342,11 @@ func TestBoundaryOtherShapes(t *testing.T) {
 		// no banned path component, no banned column, no column line: only the
 		// `#carddb decks v1` header can catch this
 		"private table by header": {"x/data.tsv", "#carddb decks v1\n", `private table "decks"`},
+		// a private shard under another extension is still a shard
+		"private table, .txt":     {"x/data.txt", "#carddb text v1\noracle_id\toracle_text\n", `private table "text"`},
+		"private table, no ext":   {"x/data", "#carddb decks v1\n", `private table "decks"`},
+		"private table, .TSV":     {"x/data.TSV", "#carddb decks v1\n", `private table "decks"`},
+		"banned column, .txt":     {"x/data.txt", "#carddb unknown v1\noracle_id\tedhrec_rank\n", `field "edhrec_rank" is forbidden`},
 		"banned column, no table": {"y.tsv", "#carddb unknown v1\noracle_id\tedhrec_rank\n", `field "edhrec_rank" is forbidden`},
 	} {
 		root := validTree(t, s, Public)
@@ -366,6 +371,7 @@ func TestBoundaryOtherShapes(t *testing.T) {
 // or under it, or a root file named `schema`, is refused by both commands.
 func TestSchemaDirCannotSmuggle(t *testing.T) {
 	s := loadReal(t)
+	decl6 := "name\ttype\trequired\tkey\tvisibility\tdoc\nfoo\tstring\tyes\tyes\tprivate\tnote\n"
 	leak := "#carddb text v1\noracle_id\toracle_text\nabc\tDraw a card.\n"
 	for name, tc := range map[string]struct{ rel, body string }{
 		"nested shard":           {"schema/notes/leak.tsv", leak},
@@ -375,6 +381,15 @@ func TestSchemaDirCannotSmuggle(t *testing.T) {
 		"json":                   {"schema/export.json", "{\"oracle_text\":\"x\"}\n"},
 		"VERSION with extras":    {"schema/VERSION", "1\nDraw a card.\n"},
 		"root file named schema": {"schema", leak},
+		// the first line is judged whole, not by its prefix
+		"prefix only":            {"schema/v1/leak.tsv", "#carddb-schema "},
+		"prefix + free text":     {"schema/v1/leak.tsv", "#carddb-schema THIS IS THE ORACLE TEXT OF A CARD\n" + decl6},
+		"prefix + wrong table":   {"schema/v1/leak.tsv", "#carddb-schema cards v1\n" + decl6},
+		"prefix + wrong version": {"schema/v1/leak.tsv", "#carddb-schema leak v2\n" + decl6},
+		// well-formed, but a table the schema does not declare
+		"undeclared table":  {"schema/v1/evil.tsv", "#carddb-schema evil v1\n" + decl6},
+		"other version dir": {"schema/v2/cards.tsv", "#carddb-schema cards v2\n" + decl6},
+		"VERSION mismatch":  {"schema/VERSION", "2\n"},
 	} {
 		root := validTree(t, s, Public)
 		write(t, root, tc.rel, tc.body)
@@ -385,6 +400,15 @@ func TestSchemaDirCannotSmuggle(t *testing.T) {
 		vs, err = Boundary(s, root)
 		if err != nil || len(vs) == 0 {
 			t.Errorf("%s: boundary passed: %v %q", name, err, msgs(vs))
+		}
+	}
+	// Validate refuses a shard hiding behind another extension
+	for _, rel := range []string{"x/data.txt", "x/data", "x/data.TSV"} {
+		root := validTree(t, s, Public)
+		write(t, root, rel, "#carddb text v1\nx\n")
+		vs, err := Validate(s, root, Public)
+		if err != nil || len(vs) == 0 {
+			t.Errorf("validate %s passed: %v %q", rel, err, msgs(vs))
 		}
 	}
 	// a declaration with a free-form line is refused by the boundary
