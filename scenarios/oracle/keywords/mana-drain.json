@@ -57,6 +57,66 @@
      "zone": "graveyard"
     }
    ]
+  },
+  {
+   "name": "adds-colourless-mana-equal-to-the-countered-spells-mana-value",
+   "cr": [
+    "603.7",
+    "106.1b",
+    "202.3"
+   ],
+   "why": "Oracle: at the beginning of your next main phase, add an amount of {C} equal to that spell's mana value. p1 counters p0's Grizzly Bears (mana value 2): at the beginning of p1's next main phase (turn 2's precombat main phase) the delayed trigger resolves and p1 adds {C}{C}, which stay in the pool for the rest of the phase.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Grizzly Bears"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Mana Drain"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Grizzly Bears",
+     "mana": "CG"
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Mana Drain",
+     "mana": "UU",
+     "targets": [
+      "p0:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "pool": {
+      "p1": "CC"
+     }
+    }
+   ]
   }
  ]
 }
