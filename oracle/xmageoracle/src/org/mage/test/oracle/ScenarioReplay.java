@@ -2836,18 +2836,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             TestPlayer pl = seat(i);
             Map<String, Integer> counts = new HashMap<>();
             Map<String, Integer> scenarioCounts = new HashMap<>();
-            List<mage.MageObject> objs = new ArrayList<>();
-            for (Permanent perm : g.getBattlefield().getAllPermanents()) {
-                if (pl.getId().equals(perm.getControllerId())) {
-                    objs.add(perm);
-                }
-            }
-            for (Card c : pl.getHand().getCards(g)) objs.add(c);
-            for (Card c : pl.getGraveyard().getCards(g)) objs.add(c);
-            for (Card c : g.getExile().getAllCards(g)) {
-                if (pl.getId().equals(c.getOwnerId())) objs.add(c);
-            }
-            for (Card c : pl.getLibrary().getCards(g)) objs.add(c);
+            List<mage.MageObject> objs = aliasObjectsInZoneOrder(g, pl);
             for (mage.MageObject o : objs) {
                 bindSetupObject(i, setupName(o), gorgeName, xmageName, counts, scenarioCounts,
                         frontCounts, o.getId(), refAlias, (ref, objId) -> {
@@ -2911,6 +2900,41 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         candidates.sort(java.util.Comparator.comparingInt(Permanent::getCreateOrder));
         return wanted > 0 && wanted <= candidates.size() ? candidates.get(wanted - 1) : null;
+    }
+
+    /** The controller's battlefield permanents in setup/creation order.
+     * A scenario's "#k" ranks same-name objects by the order they were dealt
+     * or entered, not by whatever order the battlefield happens to iterate,
+     * so binding by iteration can give a same-name ref the wrong copy.
+     * Permanent.getCreateOrder is that order, the same key tokenChoice has
+     * always used. */
+    static List<Permanent> battlefieldInCreationOrder(Iterable<Permanent> battlefield, UUID controller) {
+        List<Permanent> ordered = new ArrayList<>();
+        for (Permanent permanent : battlefield) {
+            if (controller.equals(permanent.getControllerId())) {
+                ordered.add(permanent);
+            }
+        }
+        ordered.sort(java.util.Comparator.comparingInt(Permanent::getCreateOrder));
+        return ordered;
+    }
+
+    /** The objects a scenario ref is ranked among, in the order build() added
+     * them: battlefield first in setup/creation order, then hand, graveyard,
+     * exile and library in add()'s zone order. registerAliases and
+     * bindOneAlias both bind through this one list so a setup ref and a
+     * post-setup answer with the same "#k" can never disagree about which
+     * same-name object the rank names. */
+    static List<mage.MageObject> aliasObjectsInZoneOrder(Game g, Player pl) {
+        List<mage.MageObject> objs = new ArrayList<>();
+        objs.addAll(battlefieldInCreationOrder(g.getBattlefield().getAllPermanents(), pl.getId()));
+        for (Card c : pl.getHand().getCards(g)) objs.add(c);
+        for (Card c : pl.getGraveyard().getCards(g)) objs.add(c);
+        for (Card c : g.getExile().getAllCards(g)) {
+            if (pl.getId().equals(c.getOwnerId())) objs.add(c);
+        }
+        for (Card c : pl.getLibrary().getCards(g)) objs.add(c);
+        return objs;
     }
 
     /** The seat index of a scenario ref: "p1:Forest#2" -> 1. */
@@ -2978,20 +3002,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (hash >= 0 && ref.substring(hash + 1).matches("[0-9]+")) {
                 wanted = Integer.parseInt(ref.substring(hash + 1));
             }
-            int seen = 0;
-            List<mage.MageObject> objs = new ArrayList<>();
-            Player pl = seat(seatIndex);
-            for (Permanent perm : currentGame.getBattlefield().getAllPermanents()) {
-                if (pl.getId().equals(perm.getControllerId())) {
-                    objs.add(perm);
-                }
-            }
-            for (Card c : pl.getHand().getCards(currentGame)) objs.add(c);
-            for (Card c : pl.getGraveyard().getCards(currentGame)) objs.add(c);
-            for (Card c : currentGame.getExile().getAllCards(currentGame)) {
-                if (pl.getId().equals(c.getOwnerId())) objs.add(c);
-            }
-            for (Card c : pl.getLibrary().getCards(currentGame)) objs.add(c);
+            // The same creation-ordered list registerAliases binds setup refs
+            // in, so a post-setup non-token ref's "#k" counts the copies alike.
+            List<mage.MageObject> objs = aliasObjectsInZoneOrder(currentGame, seat(seatIndex));
             // objs is already scoped to the ref's seat, so "p1:<name>" never
             // binds a same-named card another seat owns.
             match = refRankChoice(ref, objs, this::setupName);
@@ -5100,28 +5113,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         kept++;
                     }
                 }
-                ExactAttackBatch exact = new ExactAttackBatch(turn, seatIdx, seatOf(str(st, "defender")));
-                List<String> refs = new ArrayList<>(keptRefs);
-                for (String name : attackCommandOrder(keptNames)) {
-                    // The ordered names are a permutation of keptNames, so
-                    // each has one ref left; duplicates are interchangeable
-                    // here because the batch resolves the ref exactly.
-                    int at = -1;
-                    for (int i = 0; i < refs.size(); i++) {
-                        if (combatName(refs.get(i)).equals(name)) {
-                            at = i;
-                            break;
-                        }
-                    }
-                    if (at < 0) {
-                        throw new IllegalStateException("no attack ref lowered to command " + name);
-                    }
-                    String ref = refs.remove(at);
-                    int before = p.getActions().size();
-                    attack(turn, p, name, seat(exact.defenderSeat));
-                    exact.refs.add(ref);
-                    exact.actions.add(p.getActions().get(before));
-                }
+                int defenderSeat = seatOf(str(st, "defender"));
+                ExactAttackBatch exact = lowerAttackBatch(turn, seatIdx, defenderSeat, keptNames, keptRefs,
+                        name -> {
+                            int before = p.getActions().size();
+                            attack(turn, p, name, seat(defenderSeat));
+                            return p.getActions().get(before);
+                        });
                 if (!exact.refs.isEmpty()) {
                     exactAttacks.add(exact);
                 }
@@ -6181,7 +6179,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
 
     /** One attack step's queued commands: the scenario refs they were
      * lowered from and the PlayerAction each command added. */
-    private static final class ExactAttackBatch {
+    static final class ExactAttackBatch {
         final int turn;
         final int seat;
         final int defenderSeat;
@@ -6210,12 +6208,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /**
-     * Replace a name-only attacker command with an exact declaration when the
-     * controlling seat has both a token and a card of that name. XMage's
-     * "Name:k" command ranks the two kinds together and takes whichever it
-     * finds first, so it can declare the card when the scenario recorded the
-     * token (and the reverse). This runs at the engine's declaration point,
-     * after a token created earlier in the turn is on the battlefield.
+     * Replace name-only attacker commands with exact declarations when the
+     * controlling seat has both a token and a card of a name, or when the step
+     * declares two same-name cards. XMage's "Name:k" command ranks the two
+     * kinds together and takes whichever it finds first, so it can declare the
+     * card when the scenario recorded the token (and the reverse). It also has
+     * to name the highest-index duplicate first, which reverses the step's
+     * order; a band's leader and XMage's combat asks follow declaration order.
+     *
+     * <p>Once a batch needs exact declarations, every ref of that batch that
+     * resolves is declared exactly, in the step's own order, not just the
+     * same-name group: declaring the group before a unique earlier attacker
+     * would still put it first in XMage's declaration order and consume that
+     * attacker's recorded answer. Only a ref that cannot be resolved (and is
+     * not ambiguous) keeps its name command, for the superclass to consume.
+     * This runs at the engine's declaration point, after a token created
+     * earlier in the turn is on the battlefield.
      */
     private void applyExactAttackers(TestPlayer player, Game game) {
         for (java.util.Iterator<ExactAttackBatch> it = exactAttacks.iterator(); it.hasNext();) {
@@ -6224,24 +6232,50 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 continue;
             }
             it.remove();
+            Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
+            Map<String, Integer> groupSize = new LinkedHashMap<>();
+            Map<String, Boolean> groupExactable = new LinkedHashMap<>();
+            Map<String, Permanent> exactByRef = new HashMap<>();
+            for (String ref : batch.refs) {
+                String name = battlefieldName(ref);
+                Permanent exact = combatPermanent(ref, name, player.getId(), game);
+                exactByRef.put(ref, exact);
+                groupSize.merge(name, 1, Integer::sum);
+                groupExactable.merge(name, exact != null, (all, one) -> all && one);
+            }
+            boolean exactNeeded = false;
+            for (String ref : batch.refs) {
+                String name = battlefieldName(ref);
+                if (combatRefAmbiguous(name, player.getId(), battlefield)
+                        || (groupSize.get(name) > 1 && groupExactable.get(name))) {
+                    exactNeeded = true;
+                    break;
+                }
+            }
+            if (!exactNeeded) {
+                // No ambiguity and no fully-resolvable same-name group: the
+                // name commands keep the behaviour every other step has.
+                continue;
+            }
             for (int i = 0; i < batch.refs.size(); i++) {
                 String ref = batch.refs.get(i);
                 String name = battlefieldName(ref);
-                Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
-                Permanent exact = combatPermanent(ref, name, player.getId(), game);
+                Permanent exact = exactByRef.get(ref);
                 if (exact != null && game.getCombat().getAttackers().contains(exact.getId())) {
                     // XMage's checkAttackRequirements declared this forced
                     // attacker itself; the recorded command is satisfied.
                     player.getActions().remove(batch.actions.get(i));
                     continue;
                 }
-                if (!combatRefAmbiguous(name, player.getId(), battlefield)) {
+                if (exact == null) {
+                    if (combatRefAmbiguous(name, player.getId(), battlefield)) {
+                        throw new IllegalArgumentException("attack ref " + ref + " is not on the battlefield");
+                    }
+                    // Genuinely unresolvable: leave its name command to the
+                    // superclass rather than half-declaring the batch.
                     continue;
                 }
                 player.getActions().remove(batch.actions.get(i));
-                if (exact == null) {
-                    throw new IllegalArgumentException("attack ref " + ref + " is not on the battlefield");
-                }
                 player.declareAttacker(exact.getId(), seat(batch.defenderSeat).getId(), game, false);
                 if (!game.getCombat().getAttackers().contains(exact.getId())) {
                     throw new IllegalArgumentException("attack ref " + ref + " was not declared (battlefield: "
@@ -6396,6 +6430,42 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         }
         return out;
+    }
+
+    /** Queue one attack step's name commands and build its exact batch.
+     * The commands are queued in {@link #attackCommandOrder} because a
+     * "Name:k" command ranks untapped creatures and declaring the first copy
+     * removes it; the batch's refs stay in the step's own order, which is the
+     * order a band's leader and XMage's combat asks follow. Static so the
+     * driver test can pin both orders without a player. */
+    static ExactAttackBatch lowerAttackBatch(int turn, int seat, int defenderSeat,
+            List<String> keptNames, List<String> keptRefs,
+            java.util.function.Function<String, PlayerAction> queue) {
+        ExactAttackBatch exact = new ExactAttackBatch(turn, seat, defenderSeat);
+        PlayerAction[] actions = new PlayerAction[keptRefs.size()];
+        boolean[] queued = new boolean[keptNames.size()];
+        for (String name : attackCommandOrder(keptNames)) {
+            // The ordered names are a permutation of keptNames, so each name
+            // still has one unqueued position; duplicates are interchangeable
+            // here because the batch resolves the ref exactly.
+            int at = -1;
+            for (int i = 0; i < keptNames.size(); i++) {
+                if (!queued[i] && keptNames.get(i).equals(name)) {
+                    at = i;
+                    break;
+                }
+            }
+            if (at < 0) {
+                throw new IllegalStateException("no attack ref lowered to command " + name);
+            }
+            queued[at] = true;
+            actions[at] = queue.apply(name);
+        }
+        for (int i = 0; i < keptRefs.size(); i++) {
+            exact.refs.add(keptRefs.get(i));
+            exact.actions.add(actions[i]);
+        }
+        return exact;
     }
 
     /** "Goblin Token:1" -> "Goblin Token"; a name with no index unchanged. */
