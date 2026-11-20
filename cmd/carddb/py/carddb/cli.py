@@ -17,10 +17,10 @@ from . import build as build_mod
 from . import fetch as fetch_mod
 from . import merge as merge_mod
 from . import shard
-from .boundary import boundary_text
+from .boundary import boundary_tree
 from .schema import PRIVATE, PUBLIC, SchemaError, load_schema, repo_root
 from .shard import ValidationError
-from .store import GitError, Store, StoreError, carddb_home, gorge12, tree_shards
+from .store import GitError, Store, StoreError, carddb_home, gorge12
 
 
 def _parser():
@@ -130,12 +130,9 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
             return 0
         if args.verb in ("validate", "boundary"):
             root = args.tree or Store(PUBLIC, home=args.home, schema=schema).dir
-            viol = []
-            for rel, text in tree_shards(root):
-                if args.verb == "validate":
-                    viol += shard.validate_shard(schema, args.scope, rel, text)
-                else:
-                    viol += boundary_text(schema, rel, text)
+            files = list(shard.tree_files(root))
+            viol = (shard.validate_tree(schema, args.scope, files) if args.verb == "validate"
+                    else boundary_tree(schema, files))
             for v in viol:
                 print(v, file=stdout)
             if viol:

@@ -18,8 +18,22 @@ def legality(oid, fmt, status):
     return {"oracle_id": oid, "format": fmt, "status": status}
 
 
-def status(oid, verdict, measured):
-    return {"oracle_id": oid, "level": "A", "verdict": verdict, "gorge_pin": "8f7095353a64", "measured": measured}
+def status(oid, verdict, measured, writer=None):
+    row = {"oracle_id": oid, "level": "A", "verdict": verdict, "gorge_pin": "8f7095353a64", "measured": measured}
+    if writer:
+        row["writer"] = writer
+    return row
+
+
+def printing(pid, oid, set_code):
+    return {"printing_id": pid, "oracle_id": oid, "set_code": set_code, "collector_number": "1",
+            "rarity": "common", "released": "1993-08-05"}
+
+
+def run_go(verb, tree, *extra):
+    go = shutil.which("go")
+    return subprocess.run([go, "run", "./cmd/carddb", verb, "-schema", "carddb/schema", "-tree", tree] + list(extra),
+                          cwd=ROOT, capture_output=True, text=True, env=dict(os.environ, GOWORK="off"))
 
 
 class Put(Base):
@@ -91,6 +105,73 @@ class Put(Base):
         store_mod.Store("public", home=home, schema=self.schema).init()
         n = carddb.put("legality", [legality(OID_A, "modern", "legal")], writer="loop", home=home)
         self.assertEqual(n, 1)
+
+    def test_put_stamps_the_writer_and_a_lower_writer_does_not_flip_the_row(self):
+        a = self.machine("a", init=True)
+        a.put("status", [status(OID_A, "agree", "2026-11-19")], writer="ci")
+        path = os.path.join(a.dir, "status", "ab.tsv")
+        self.assertTrue(read(path).splitlines()[2].endswith("\t2026-11-19\tci"), read(path))
+        before = self.snapshot(a.dir)
+        self.assertEqual(a.put("status", [status(OID_A, "agree", "2026-11-19")], writer="loop"), 0)  # ci stays
+        self.assertEqual(self.snapshot(a.dir), before)
+        self.assertEqual(a.put("status", [status(OID_A, "agree", "2026-11-19", writer="ci")], writer="loop"), 0)
+        b = self.machine("b", init=True)
+        b.put("status", [status(OID_A, "agree", "2026-11-19")], writer="loop")
+        self.assertEqual(b.put("status", [status(OID_A, "agree", "2026-11-19")], writer="ci"), 1)  # ci takes over
+        self.assertTrue(read(os.path.join(b.dir, "status", "ab.tsv")).splitlines()[2].endswith("\tci"))
+
+    def test_a_printing_that_changes_set_moves_and_the_go_checker_agrees(self):
+        a = self.machine("a", init=True)
+        a.put("printings", [printing("p1", OID_A, "lea"), printing("p2", OID_B, "lea")], writer="mtgjson")
+        self.assertEqual(a.put("printings", [printing("p1", OID_A, "neo")], writer="mtgjson"), 1)
+        self.assertNotIn("p1", read(os.path.join(a.dir, "printings", "lea.tsv")))
+        self.assertIn("p2", read(os.path.join(a.dir, "printings", "lea.tsv")))
+        self.assertIn("p1", read(os.path.join(a.dir, "printings", "neo.tsv")))
+        # moving the last row out removes the emptied shard instead of leaving a header-only file
+        a.put("printings", [printing("p2", OID_B, "neo")], writer="mtgjson")
+        self.assertFalse(os.path.exists(os.path.join(a.dir, "printings", "lea.tsv")))
+        self.assertEqual(a.put("printings", [printing("p1", OID_A, "neo"), printing("p2", OID_B, "neo")],
+                               writer="mtgjson"), 0)  # rerun: no byte changes
+        # the same key in one batch under two sets: the last row wins, one copy
+        a.put("printings", [printing("p3", OID_C, "lea"), printing("p3", OID_C, "m21")], writer="mtgjson")
+        self.assertFalse(os.path.exists(os.path.join(a.dir, "printings", "lea.tsv")))
+        self.assertIn("p3", read(os.path.join(a.dir, "printings", "m21.tsv")))
+        if shutil.which("go"):
+            for verb in ("validate", "boundary"):
+                p = run_go(verb, a.dir)
+                self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+
+    def test_a_printing_in_two_shards_is_refused_everywhere_the_go_checker_refuses_it(self):
+        a = self.machine("a", init=True)
+        a.put("printings", [printing("p1", OID_A, "lea")], writer="mtgjson")
+        a.publish()
+        # a hand-staged copy under another set (and one under an upper-cased set code)
+        for stem in ("neo", "LEA"):
+            text = read(os.path.join(a.dir, "printings", "lea.tsv")).replace("\tlea\t", "\t%s\t" % stem)
+            with open(os.path.join(a.dir, "printings", stem + ".tsv"), "w", encoding="utf-8") as f:
+                f.write(text)
+        git("add", "-A", cwd=a.dir)
+        with self.assertRaises(ValidationError) as cm:
+            a.publish()
+        self.assertIn("duplicate key (p1)", str(cm.exception))
+        self.assertIn("first at printings/", str(cm.exception))
+        self.assertEqual(git("ls-tree", "-r", "--name-only", "origin/carddb", cwd=a.dir).count("neo.tsv"), 0)
+        if shutil.which("go"):
+            p = run_go("validate", a.dir)
+            self.assertEqual(p.returncode, 1)
+            self.assertIn("duplicate key (p1)", p.stdout)
+
+    def test_clones_that_home_one_printing_in_two_sets_cannot_publish_a_broken_tree(self):
+        a = self.machine("a", init=True)
+        b = self.machine("b")
+        a.put("printings", [printing("p1", OID_A, "lea")], writer="mtgjson")
+        b.put("printings", [printing("p1", OID_A, "neo")], writer="mtgjson")
+        self.assertTrue(a.publish()["pushed"])
+        with self.assertRaises(ValidationError):  # b rebases onto a's tree: two homes for p1
+            b.publish()
+        remote = git("ls-tree", "-r", "--name-only", "origin/carddb", cwd=a.dir)
+        self.assertIn("printings/lea.tsv", remote)
+        self.assertNotIn("printings/neo.tsv", remote)
 
     def test_go_validator_accepts_the_tool_output(self):
         go = shutil.which("go")
@@ -217,9 +298,9 @@ class Merge(Base):
         return merge_mod.merge_texts(self.schema, table + "/ab.tsv", r(base), r(ours), r(theirs))
 
     def test_commutative_idempotent(self):
-        x = [OID_A, "A", "agree", "pin", "2026-11-18"]
-        y = [OID_A, "A", "diverge", "pin", "2026-11-19"]
-        z = [OID_B, "A", "agree", "pin", "2026-11-17"]
+        x = [OID_A, "A", "agree", "pin", "2026-11-18", "loop"]
+        y = [OID_A, "A", "diverge", "pin", "2026-11-19", "loop"]
+        z = [OID_B, "A", "agree", "pin", "2026-11-17", "loop"]
         self.assertEqual(self.merge([], [x, z], [y]), self.merge([], [y], [x, z]))
         self.assertIn("diverge", self.merge([], [x], [y]))
         self.assertNotIn("agree", self.merge([], [x], [y]))
@@ -228,12 +309,54 @@ class Merge(Base):
         self.assertEqual(merged.count("\n"), 4)
 
     def test_tie_breaks_on_bytes_and_modify_beats_delete(self):
-        x = [OID_A, "A", "agree", "pin", "2026-11-19"]
-        y = [OID_A, "A", "zzz", "pin", "2026-11-19"]
+        x = [OID_A, "A", "agree", "pin", "2026-11-19", "ci"]
+        y = [OID_A, "A", "zzz", "pin", "2026-11-19", "ci"]
         self.assertEqual(self.merge([], [x], [y]), self.merge([], [y], [x]))
         self.assertIn("zzz", self.merge([], [x], [y]))
         self.assertIn("zzz", self.merge([x], [], [y]))
         self.assertEqual(self.merge([x], [], [x]).count("\n"), 2)  # a clean delete stays deleted
+
+    def test_ci_beats_cert_beats_loop_on_the_real_schema(self):
+        """Same measured date, different verdicts: the writer column decides, whatever the verdict bytes say."""
+        for table, row in (("status", lambda v, w: [OID_A, "A", v, "pin", "2026-11-19", w]),
+                           ("evidence", lambda v, w: [OID_A, "oracle", "s1", v, w]),
+                           ("cert", lambda v, w: [OID_A, v, "2026-11-19", w])):
+            hi, lo = ("agree", "diverge") if table != "cert" else ("A", "B")
+            for winner, loser in (("ci", "loop"), ("ci", "cert"), ("cert", "loop")):
+                with self.subTest(table=table, winner=winner, loser=loser):
+                    w, l = row(lo, winner), row(hi, loser)  # the loser's value sorts later than the winner's
+                    # for status "diverge" < "agree" is false: pick so the loser has the greater bytes
+                    if "\t".join(l) < "\t".join(w):
+                        w, l = row(hi, winner), row(lo, loser)
+                    self.assertGreater("\t".join(l), "\t".join(w))  # bytes alone would pick the loser
+                    for a, b in ((w, l), (l, w)):
+                        merged = self.merge([], [a], [b], table=table)
+                        self.assertIn("\t" + winner, merged.split("\n")[2], merged)
+                        self.assertEqual(merged.count("\n"), 3)
+
+    def test_newer_measured_still_beats_a_higher_writer(self):
+        old_ci = [OID_A, "A", "agree", "pin", "2026-11-18", "ci"]
+        new_loop = [OID_A, "A", "diverge", "pin", "2026-11-19", "loop"]
+        self.assertIn("loop", self.merge([], [old_ci], [new_loop]).split("\n")[2])
+        self.assertIn("loop", self.merge([], [new_loop], [old_ci]).split("\n")[2])
+
+    def test_ci_wins_between_racing_clones_whatever_the_push_order(self):
+        for first in ("a", "b"):
+            with self.subTest(first=first):
+                git("init", "--bare", "--quiet", self.remote + first)
+                os.environ["CARDDB_PUBLIC_REMOTE"] = self.remote + first
+                a = self.machine("a" + first, init=True)
+                b = self.machine("b" + first)
+                a.put("status", [status(OID_A, "diverge", "2026-11-19")], writer="loop")  # loop's bytes sort later
+                b.put("status", [status(OID_A, "agree", "2026-11-19")], writer="ci")
+                for m in ((a, b) if first == "a" else (b, a)):
+                    self.assertTrue(m.publish()["pushed"])
+                a.publish(), b.publish()
+                for m in (a, b):
+                    m.git("pull", "--quiet", "--ff-only", "origin", "carddb")
+                self.assertEqual(self.snapshot(a.dir), self.snapshot(b.dir))
+                row = read(os.path.join(a.dir, "status", "ab.tsv")).split("\n")[2]
+                self.assertTrue(row.endswith("agree\t8f7095353a64\t2026-11-19\tci"), row)
 
     def test_writer_priority_column(self):
         cols = merge_mod.TIMESTAMP_COLUMNS

@@ -48,15 +48,27 @@ GitHub repo), `CARDDB_PRIVATE_REMOTE` (four-yay, required for the private store)
 `CARDDB_WRITER`, `CARDDB_WRITER_VERSION`. Tests: `make carddb-test`.
 
 Shard paths: a table keyed on `oracle_id` shards on its first two hex digits (`x:<sha1>`
-pseudo ids on `x` + two digits), `printings` by set, every other table is one file.
+pseudo ids on `x` + two digits), `printings` by set, every other table is one file. A key lives in
+one shard only: a `put` that re-homes a printing (another `set_code`) removes the old copy and deletes
+a shard it empties, and `put`, `publish` and `build` all refuse a tree whose table holds a key in two
+shards (the Go validator's rule, checked across the whole table, not per file).
+
+`status`, `cert`, `cert_sets` and `evidence` carry a `writer` column: `put` stamps every row that has
+none with its `--source`/`writer=`, and a rerun by a lower-priority writer does not overwrite a row a
+higher one wrote with the same data.
 
 Merge rule (a conflict never reaches a human): per key against the common ancestor; a key both
 sides changed differently resolves by the newer timestamp column (`measured_at`, else
 `measured`, `declared`, `ran`, `retrieved`: the first the table has), then the writer priority
-(`ci` > `cert` > `loop`, from the table's `writer` column when it has one), then the greater row
+(`ci` > `cert` > `loop`, from the row's `writer` column), then the greater row
 bytes, so both clones converge. A modify beats a delete. The merged file is re-validated.
+
+`validate` and `boundary` (this tool's Python verbs, and the Go ones) walk every file but `.git`:
+a shard behind another extension is refused, `schema/` may hold only the schema's own declarations.
 
 The SQLite file: one table per schema table (`/` and `-` become `_`), `card_names`
 (norm_name -> oracle_id), `card_fts` (FTS5 over name, type_line, keywords, labels; plus Oracle
 text with `--text`, which writes `carddb-text.sqlite`, never the published file),
-`src_manifest_*` and `src_diagnosed` (the committed sources) and `build_meta`.
+`src_manifest_*` and `src_diagnosed` (the committed sources) and `build_meta`. The FTS `keywords`
+column is `cards.keywords`; a `--ref` that lacks one of the committed source paths (origin/main
+before the curated tree was promoted) just has none of those inputs.

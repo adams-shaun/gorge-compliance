@@ -19,6 +19,7 @@ import sys
 
 from . import shard
 from .boundary import boundary_text
+from .merge import WRITER_PRIORITY
 from .schema import PRIVATE, PUBLIC, SchemaError, load_schema, repo_root
 from .shard import ValidationError
 
@@ -65,18 +66,38 @@ def gorge12(root=None):
         return "unknown"
 
 
+def _shard_column(table):
+    """The column a table's rows are sharded on, None for a one-file table."""
+    names = {c.name for c in table.columns}
+    if table.name == "printings" and "set_code" in names:
+        return "set_code"
+    kcols = [c for c in table.columns if c.key]
+    if kcols and kcols[0].name == "oracle_id":
+        return "oracle_id"
+    return None
+
+
+def placement_follows_key(table):
+    """True when a row's shard is a function of its key, so one key can live in one shard only.
+    False for a table sharded on a column outside its key (printings by set_code): there a put
+    can re-home a key, and uniqueness has to be checked across all the table's shards."""
+    col = _shard_column(table)
+    return col is None or col in {c.name for c in table.columns if c.key}
+
+
 def shard_rel(table, cells):
     """Path, relative to the clone, of the shard that holds a row of table.
 
     A table whose first key is oracle_id shards on the first two hex digits of
     the id (x:<sha1> pseudo ids on `x` + two digits); printings shard by set;
     every other table is one file."""
-    cols = table.columns
-    kcols = [c for c in cols if c.key]
-    by_name = {c.name: i for i, c in enumerate(cols)}
-    if table.name == "printings" and "set_code" in by_name:
+    col = _shard_column(table)
+    if col is None:
+        return table.name + ".tsv"
+    by_name = {c.name: i for i, c in enumerate(table.columns)}
+    if col == "set_code":
         stem = cells[by_name["set_code"]]
-    elif kcols and kcols[0].name == "oracle_id":
+    else:
         oid = cells[by_name["oracle_id"]]
         if oid.startswith("x:"):
             stem = "x" + oid[2:4]
@@ -84,8 +105,6 @@ def shard_rel(table, cells):
             stem = oid[:2]
         else:
             stem = "other"
-    else:
-        return table.name + ".tsv"
     if not _SAFE_STEM.match(stem):
         raise ValidationError(["%s: %r cannot name a shard file" % (table.name, stem)])
     return "%s/%s.tsv" % (table.name, stem)
@@ -228,23 +247,29 @@ class Store:
     # ---- validation ---------------------------------------------------
 
     def _check_paths(self, paths):
-        """Validate (and, for a public store, boundary-check) files of the clone. Raises ValidationError."""
-        viol = []
+        """Validate (and, for a public store, boundary-check) files of the clone, and the keys the touched
+        tables' shards hold across files. Raises ValidationError."""
+        viol, tables = [], set()
         for rel in sorted(paths):
             p = os.path.join(self.dir, rel)
             if not os.path.isfile(p):
                 continue
-            with open(p, encoding="utf-8", newline="") as f:
+            with open(p, encoding="utf-8", errors="surrogateescape", newline="") as f:
                 text = f.read()
             viol += self._check_text(rel, text)
+            if shard.is_data_file(rel):
+                hdr = shard.parse_shard_header(text.split("\n", 1)[0])
+                if hdr:
+                    tables.add(hdr[0])
+        if tables:
+            files = [(rel, text) for rel, text in tree_shards(self.dir)
+                     if (shard.parse_shard_header(text.split("\n", 1)[0]) or ("",))[0] in tables]
+            viol += shard.cross_shard_duplicates(self.schema, self.kind, files)
         if viol:
             raise ValidationError(viol)
 
     def _check_text(self, rel, text):
-        viol = []
-        data = rel.endswith(".tsv") and not rel.startswith((".github/", "schema/"))
-        if data:
-            viol += shard.validate_shard(self.schema, self.kind, rel, text)
+        viol = shard.validate_file(self.schema, self.kind, rel, text)
         if self.kind == PUBLIC:
             viol += boundary_text(self.schema, rel, text)
         return viol
@@ -262,7 +287,7 @@ class Store:
                 name, "private" if t.is_private() else "public", "private" if t.is_private() else "public"))
         return t
 
-    def _cells(self, table, rows, raw):
+    def _cells(self, table, rows, raw, writer):
         cols = table.scope_columns(self.kind)
         names = [c.name for c in cols]
         out = []
@@ -278,46 +303,122 @@ class Store:
                 if len(vals) != len(names):
                     raise ValidationError(["%s: row has %d cells, want %d (%s)" % (
                         table.name, len(vals), len(names), " ".join(names))])
+            if "writer" in names:  # a row carries who wrote it: the merge driver ranks writers on it
+                w = names.index("writer")
+                if vals[w] in (None, "", "-"):
+                    vals[w] = writer
             if raw:
                 out.append(["-" if v is None or v == "" else str(v) for v in vals])
             else:
                 out.append([shard.escape_cell(v) for v in vals])
         return cols, out
 
-    def _plan(self, table, cols, rows):
-        """(plan {rel: text}, changed row count) of merging rows (cells) into table's shards."""
-        kidx = shard.key_indexes(cols)
-        by_shard = {}
+    def _table_shards(self, table):
+        """Paths (relative to the clone) of the shard files that exist for table."""
+        out = []
+        flat = table.name + ".tsv"
+        if os.path.isfile(os.path.join(self.dir, flat)):
+            out.append(flat)
+        root = os.path.join(self.dir, table.name)
+        for dp, dn, fns in os.walk(root):
+            dn.sort()
+            out += [os.path.relpath(os.path.join(dp, fn), self.dir).replace(os.sep, "/")
+                    for fn in sorted(fns) if fn.endswith(".tsv")]
+        return out
+
+    def _read_shard(self, table, cols, kidx, rel):
+        """(text or None, {key: row}) of one shard of table as it is on disk."""
+        path = os.path.join(self.dir, rel)
+        if not os.path.isfile(path):
+            return None, {}
+        with open(path, encoding="utf-8", newline="") as f:
+            text = f.read()
+        try:
+            hdr, head, rows = shard.parse_text(text)
+        except ValueError as e:
+            raise ValidationError(["%s: %s" % (rel, e)])
+        if hdr != shard.shard_header(table.name, self.schema.version) or head != [c.name for c in cols]:
+            raise ValidationError(["%s: existing shard header does not match the schema (%r)" % (rel, hdr)])
+        out = {}
         for r in rows:
-            by_shard.setdefault(self._shard_rel_scoped(table, cols, r), {})[shard.row_key(r, kidx)] = r
-        plan, changed = {}, 0
-        for rel in sorted(by_shard):
-            path = os.path.join(self.dir, rel)
-            old = {}
-            old_text = None
-            if os.path.isfile(path):
-                with open(path, encoding="utf-8", newline="") as f:
-                    old_text = f.read()
-                try:
-                    hdr, head, old_rows = shard.parse_text(old_text)
-                except ValueError as e:
-                    raise ValidationError(["%s: %s" % (rel, e)])
-                if hdr != shard.shard_header(table.name, self.schema.version) or head != [c.name for c in cols]:
-                    raise ValidationError(["%s: existing shard header does not match the schema (%r)" % (rel, hdr)])
-                for orow in old_rows:
-                    if len(orow) != len(cols):
-                        raise ValidationError(["%s: existing row has %d cells, want %d" % (rel, len(orow), len(cols))])
-                    old[shard.row_key(orow, kidx)] = orow
-            merged = dict(old)
-            for k, r in by_shard[rel].items():
-                if old.get(k) != r:
-                    changed += 1
-                merged[k] = r
-            text = shard.render(table.name, self.schema.version, [c.name for c in cols],
-                                [merged[k] for k in sorted(merged)])
+            if len(r) != len(cols):
+                raise ValidationError(["%s: existing row has %d cells, want %d" % (rel, len(r), len(cols))])
+            out[shard.row_key(r, kidx)] = r
+        return text, out
+
+    @staticmethod
+    def _writer_tie(cols, old, new):
+        """True when new differs from old in the writer column only and old's writer ranks at least as
+        high: a lower-priority rerun must not flip the row back and forth."""
+        names = [c.name for c in cols]
+        if "writer" not in names:
+            return False
+        w = names.index("writer")
+        if old[:w] + old[w + 1:] != new[:w] + new[w + 1:]:
+            return False
+        return WRITER_PRIORITY.get(old[w], 0) >= WRITER_PRIORITY.get(new[w], 0)
+
+    def _plan(self, table, cols, rows):
+        """(plan {rel: text, or None to delete the file}, changed row count) of merging rows (cells) into
+        table's shards. A key keeps one home: when a row lands in a different shard than the one that holds
+        its key (a table sharded outside its key), the old copy goes."""
+        kidx = shard.key_indexes(cols)
+        incoming = {}  # key -> (rel, row); the last row of a key in the batch wins
+        for r in rows:
+            incoming[shard.row_key(r, kidx)] = (self._shard_rel_scoped(table, cols, r), r)
+        state = {}  # rel -> [old text, {key: row}]
+
+        def load(rel):
+            if rel not in state:
+                state[rel] = list(self._read_shard(table, cols, kidx, rel))
+            return state[rel][1]
+
+        changed, touched = 0, {rel for rel, _ in incoming.values()}
+        homes = None  # key -> shards holding it; only a table whose shard is not a function of its key needs it
+        if not placement_follows_key(table):
+            homes = {}
+            for rel in self._table_shards(table):
+                for k in load(rel):
+                    homes.setdefault(k, set()).add(rel)
+        for k in sorted(incoming):
+            rel, r = incoming[k]
+            if homes is not None:
+                for other in sorted(homes.get(k, ())):
+                    if other != rel:  # the key leaves its old shard
+                        del state[other][1][k]
+                        touched.add(other)
+                homes[k] = {rel}
+            d = load(rel)
+            old = d.get(k)
+            if old is not None and self._writer_tie(cols, old, r):
+                continue
+            if old != r:
+                changed += 1
+            d[k] = r
+        plan = {}
+        for rel in sorted(touched):
+            old_text, d = state[rel] if rel in state else (None, {})
+            if not d:
+                if old_text is not None:
+                    plan[rel] = None
+                continue
+            text = shard.render(table.name, self.schema.version, [c.name for c in cols], [d[k] for k in sorted(d)])
             if text != old_text:
                 plan[rel] = text
         return plan, changed
+
+    def _cross_shard_check(self, table, plan):
+        """Violations of key uniqueness across all of table's shards as they would be after plan."""
+        files = {}
+        for rel in self._table_shards(table):
+            with open(os.path.join(self.dir, rel), encoding="utf-8", errors="surrogateescape", newline="") as f:
+                files[rel] = f.read()
+        for rel, text in plan.items():
+            if text is None:
+                files.pop(rel, None)
+            elif rel.startswith(table.name + "/") or rel == table.name + ".tsv":
+                files[rel] = text
+        return shard.cross_shard_duplicates(self.schema, self.kind, files.items())
 
     def _shard_rel_scoped(self, table, cols, cells):
         # a table with columns hidden in this scope: place by the visible cells
@@ -339,7 +440,7 @@ class Store:
         rows = list(rows)
         self.ensure()
         with self.lock():
-            cols, cells = self._cells(table, rows, raw)
+            cols, cells = self._cells(table, rows, raw, writer)
             plan, changed = self._plan(table, cols, cells)
             if plan and table_name != "_meta/writers":
                 wt = self.schema.tables["_meta/writers"]
@@ -350,13 +451,20 @@ class Store:
                 plan.update(wplan)
             viol = []
             for rel, text in sorted(plan.items()):
-                viol += self._check_text(rel, text)
+                if text is not None:
+                    viol += self._check_text(rel, text)
+            if not placement_follows_key(table):
+                viol += self._cross_shard_check(table, plan)
             if viol:
                 raise ValidationError(viol)
             for rel, text in plan.items():
-                _atomic_write(os.path.join(self.dir, rel), text)
+                if text is None:
+                    with contextlib.suppress(FileNotFoundError):
+                        os.remove(os.path.join(self.dir, rel))
+                else:
+                    _atomic_write(os.path.join(self.dir, rel), text)
             if plan:
-                self.git("add", "--", *sorted(plan))
+                self.git("add", "-A", "--", *sorted(plan))
                 with open(os.path.join(self.dir, ".git", LEDGER), "a", encoding="utf-8") as f:
                     f.write("%s\t%s\t%d\n" % (writer, table_name, changed))
         return changed

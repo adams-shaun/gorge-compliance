@@ -38,7 +38,8 @@ class Build(Base):
             {"oracle_id": OID_A, "name": "Lightning Bolt", "layout": "normal", "mana_cost": "{R}", "mana_value": 1,
              "type_line": "Instant", "colors": ["R"], "color_identity": ["R"]},
             {"oracle_id": OID_C, "name": "Dáin Ironfoot", "layout": "normal", "mana_cost": "{3}{R}", "mana_value": 4,
-             "type_line": "Legendary Creature — Dwarf Warrior", "colors": ["R"], "color_identity": ["R"]},
+             "type_line": "Legendary Creature — Dwarf Warrior", "colors": ["R"], "color_identity": ["R"],
+             "keywords": ["Haste", "Double strike"]},
         ], writer="mtgjson")
         a.put("sets", [{"set_code": "lea", "name": "Limited Edition Alpha", "release_date": "1993-08-05",
                         "set_type": "core"}], writer="mtgjson")
@@ -98,6 +99,9 @@ class Build(Base):
         self.assertEqual(conn.execute("SELECT oracle_id FROM card_fts WHERE card_fts MATCH 'lightning'").fetchall(), [(OID_A,)])
         self.assertEqual(conn.execute("SELECT oracle_id FROM card_fts WHERE card_fts MATCH 'labels:staple'").fetchall(), [(OID_A,)])
         self.assertEqual(conn.execute("SELECT oracle_id FROM card_fts WHERE card_fts MATCH 'dwarf'").fetchall(), [(OID_C,)])
+        self.assertEqual(conn.execute("SELECT oracle_id FROM card_fts WHERE card_fts MATCH 'keywords:haste'").fetchall(), [(OID_C,)])
+        self.assertEqual(conn.execute("SELECT oracle_id FROM card_fts WHERE card_fts MATCH 'keywords:double AND keywords:strike'").fetchall(), [(OID_C,)])
+        self.assertEqual(conn.execute("SELECT oracle_id FROM card_fts WHERE card_fts MATCH 'keywords:lightning'").fetchall(), [])
         self.assertEqual(conn.execute("SELECT oracle_id FROM card_names WHERE norm_name='ice'").fetchall(), [(OID_B,)])
         cols = [r[1] for r in conn.execute("PRAGMA table_info(card_fts)")]
         self.assertEqual(cols, ["oracle_id", "name", "type_line", "keywords", "labels"])
@@ -129,6 +133,48 @@ class Build(Base):
         self.assertIn("carddb/curated/labels.tsv", names)
         self.assertIn("oracle/xengine/diagnosed.tsv", names)
         self.assertTrue(any(k.startswith("oracle/compliance/manifests/") for k in names))
+
+    def test_default_ref_tolerates_a_ref_without_the_curated_tree(self):
+        """origin/main before the curated tree was promoted: the sources it lacks are simply absent."""
+        repo = os.path.join(self.tmp, "checkout")
+        write(os.path.join(repo, "oracle/xengine/diagnosed.tsv"), "kind\tset\tcard\tfield\twrong\tcr\tevidence\tupstream\tticket\n")
+        git("init", "--quiet", "-b", "main", repo)
+        git("add", "-A", cwd=repo)
+        git("-c", "user.name=t", "-c", "user.email=t@t", "commit", "--quiet", "-m", "x", cwd=repo)
+        git("update-ref", "refs/remotes/origin/main", "HEAD", cwd=repo)
+        got = build_mod.read_committed(repo=repo)  # the default ref
+        self.assertEqual(sorted(got), ["oracle/xengine/diagnosed.tsv"])
+        with self.assertRaises(store_mod.StoreError):
+            build_mod.read_committed(repo=repo, ref="origin/nope")
+        # and a whole build runs from it
+        a, _ = self.fixture()
+        out = os.path.join(self.tmp, "carddb.sqlite")
+        build_mod.build(out, self.schema, a.dir, None, got)
+        self.assertEqual(self.conn(out).execute("SELECT count(*) FROM curated_labels").fetchone()[0], 0)
+
+    def test_cli_build_defaults_to_origin_main(self):
+        a, _ = self.fixture()
+        r = self.cli(os.path.join(self.tmp, "a"), "build", "--out", os.path.join(self.tmp, "cli.sqlite"))
+        if git("rev-parse", "--verify", "--quiet", "origin/main^{commit}", cwd=ROOT).strip() == "":
+            self.skipTest("no origin/main in this checkout")
+        self.assertEqual(r.returncode, 0, r.stderr)
+
+    def test_a_key_in_two_shards_is_a_validation_error_not_an_integrity_error(self):
+        a, committed = self.fixture()
+        p = os.path.join(a.dir, "printings", "lea.tsv")
+        write(os.path.join(a.dir, "printings", "neo.tsv"), read(p).replace("\tlea\t", "\tneo\t"))
+        with self.assertRaises(carddb.ValidationError) as cm:
+            build_mod.build(os.path.join(self.tmp, "x.sqlite"), self.schema, a.dir, None, committed)
+        self.assertIn("duplicate key (p-1)", str(cm.exception))
+
+    def test_a_hidden_shard_or_stray_schema_file_refuses_the_build(self):
+        for rel, text in (("hidden.txt", "#carddb legality v1\noracle_id\tformat\tstatus\n"),
+                          ("schema/v1/leak.tsv", "#carddb-schema x v1\n")):
+            with self.subTest(rel):
+                a, committed = self.fixture()
+                write(os.path.join(a.dir, rel), text)
+                with self.assertRaises(carddb.ValidationError):
+                    build_mod.build(os.path.join(self.tmp, "x.sqlite"), self.schema, a.dir, None, committed)
 
     def test_private_build(self):
         a, committed = self.fixture()

@@ -54,33 +54,64 @@ class Cli(Base):
 
 
 class GoParity(Base):
-    """The Python validator and boundary agree with internal/carddb on malformed shards."""
+    """The Python validator and boundary agree with internal/carddb (the oracle) on trees: each case is a
+    list of (path, text) files; a case is clean ("ok", "real schema decl") or both sides refuse it."""
 
-    CASES = {
-        "ok": ("legality/ab.tsv", "#carddb legality v1\noracle_id\tformat\tstatus\nab1\tmodern\tlegal\nab2\tmodern\tlegal\n"),
-        "unsorted": ("legality/ab.tsv", "#carddb legality v1\noracle_id\tformat\tstatus\nab2\tmodern\tlegal\nab1\tmodern\tlegal\n"),
-        "dup": ("legality/ab.tsv", "#carddb legality v1\noracle_id\tformat\tstatus\nab1\tmodern\tlegal\nab1\tmodern\tlegal\n"),
-        "empty cell": ("legality/ab.tsv", "#carddb legality v1\noracle_id\tformat\tstatus\nab1\tmodern\t\n"),
-        "bad int": ("cards/ab.tsv", "#carddb cards v1\noracle_id\tname\tlayout\tmana_cost\tmana_value\ttype_line\tcolors\tcolor_identity\nab1\tn\tnormal\t-\tx\tt\t-\t-\n"),
-        "wrong path": ("elsewhere.tsv", "#carddb legality v1\noracle_id\tformat\tstatus\nab1\tmodern\tlegal\n"),
-        "private table": ("text/ab.tsv", "#carddb text v1\noracle_id\n"),
-        "extra column": ("legality/ab.tsv", "#carddb legality v1\noracle_id\tformat\tstatus\tprice\nab1\tmodern\tlegal\t1\n"),
-        "forge line": ("xledger/ab.tsv", "#carddb xledger v1\noracle_id\ttier\tstate\tnote\nab1\tT1\tx\tSVar:X$ Y\n"),
-        "no newline": ("legality/ab.tsv", "#carddb legality v1\noracle_id\tformat\tstatus\nab1\tmodern\tlegal"),
-        "bad date": ("sets.tsv", "#carddb sets v1\nset_code\tname\trelease_date\tset_type\tparent_code\nlea\tn\t1993-13-45\tcore\t-\n"),
-    }
+    HDR = "#carddb printings v1\nprinting_id\toracle_id\tset_code\tcollector_number\trarity\treleased\n"
+    LEG = "#carddb legality v1\noracle_id\tformat\tstatus\n"
+    CLEAN = ("ok", "real schema decl")
+
+    @classmethod
+    def cases(cls):
+        def one(rel, text):
+            return [(rel, text)]
+        def decl(rel):
+            with open(os.path.join(ROOT, "carddb", rel), encoding="utf-8") as f:
+                return rel, f.read()
+        return {
+            "ok": one("legality/ab.tsv", cls.LEG + "ab1\tmodern\tlegal\nab2\tmodern\tlegal\n"),
+            "unsorted": one("legality/ab.tsv", cls.LEG + "ab2\tmodern\tlegal\nab1\tmodern\tlegal\n"),
+            "dup": one("legality/ab.tsv", cls.LEG + "ab1\tmodern\tlegal\nab1\tmodern\tlegal\n"),
+            "empty cell": one("legality/ab.tsv", cls.LEG + "ab1\tmodern\t\n"),
+            "bad int": one("cards/ab.tsv", "#carddb cards v1\noracle_id\tname\tlayout\tmana_cost\tmana_value\ttype_line\tcolors\tcolor_identity\tkeywords\nab1\tn\tnormal\t-\tx\tt\t-\t-\t-\n"),
+            "wrong path": one("elsewhere.tsv", cls.LEG + "ab1\tmodern\tlegal\n"),
+            "private table": one("text/ab.tsv", "#carddb text v1\noracle_id\n"),
+            "extra column": one("legality/ab.tsv", cls.LEG.rstrip("\n") + "\tprice\nab1\tmodern\tlegal\t1\n"),
+            "forge line": one("xledger/ab.tsv", "#carddb xledger v1\noracle_id\ttier\tstate\tnote\nab1\tT1\tx\tSVar:X$ Y\n"),
+            "no newline": one("legality/ab.tsv", cls.LEG + "ab1\tmodern\tlegal"),
+            "bad date": one("sets.tsv", "#carddb sets v1\nset_code\tname\trelease_date\tset_type\tparent_code\nlea\tn\t1993-13-45\tcore\t-\n"),
+            # a key two shards both hold (printings shard by set, keyed by printing id)
+            "dup across shards": [("printings/lea.tsv", cls.HDR + "p1\tab1\tlea\t1\tcommon\t-\n"),
+                                  ("printings/neo.tsv", cls.HDR + "p1\tab1\tneo\t1\tcommon\t-\n")],
+            "dup across case-variant shards": [("printings/lea.tsv", cls.HDR + "p1\tab1\tlea\t1\tcommon\t-\n"),
+                                               ("printings/LEA.tsv", cls.HDR + "p1\tab1\tLEA\t1\tcommon\t-\n")],
+            "distinct keys across shards": [("printings/lea.tsv", cls.HDR + "p1\tab1\tlea\t1\tcommon\t-\n"),
+                                            ("printings/neo.tsv", cls.HDR + "p2\tab1\tneo\t1\tcommon\t-\n")],
+            # a shard behind another extension, a forbidden key in a json file
+            "hidden shard": one("hidden.txt", cls.LEG + "ab1\tmodern\tlegal\n"),
+            "forbidden json key": one("notes.json", '{\n  "oracle_text": "x"\n}\n'),
+            "forge line in a txt": one("notes.txt", "A:AB$ Draw | Cost$ 1\n"),
+            # schema/: the real declarations are exempt, anything else is refused
+            "real schema decl": [decl("schema/VERSION"), decl("schema/v1/cards.tsv"), decl("schema/v1/tags.tsv")],
+            "stray schema file": one("schema/v1/leak.tsv", "#carddb-schema cards v1\n"),
+            "altered schema decl": [("schema/v1/cards.tsv", decl("schema/v1/cards.tsv")[1] + "extra\tstring\tno\tno\tpublic\tx\n")],
+            "schema dir holds a shard": one("schema/legality.tsv", cls.LEG + "ab1\tmodern\tlegal\n"),
+        }
 
     def test_same_verdict(self):
         go = shutil.which("go")
         if go is None:
             self.skipTest("no go")
         from carddb import shard
-        from carddb.boundary import boundary_text
-        for name, (rel, text) in sorted(self.CASES.items()):
+        from carddb.boundary import boundary_tree
+        for name, files in sorted(self.cases().items()):
             with self.subTest(name):
                 tree = os.path.join(self.tmp, name.replace(" ", "_"))
-                write(os.path.join(tree, rel), text)
-                py = bool(shard.validate_shard(self.schema, "public", rel, text)) or bool(boundary_text(self.schema, rel, text))
+                for rel, text in files:
+                    write(os.path.join(tree, rel), text)
+                on_disk = list(shard.tree_files(tree))
+                self.assertEqual(sorted(rel for rel, _ in on_disk), sorted(rel for rel, _ in files))
+                py = bool(shard.validate_tree(self.schema, "public", on_disk)) or bool(boundary_tree(self.schema, on_disk))
                 gos = []
                 for verb in ("validate", "boundary"):
                     p = subprocess.run([go, "run", "./cmd/carddb", verb, "-schema", "carddb/schema", "-tree", tree],
@@ -88,4 +119,8 @@ class GoParity(Base):
                     self.assertIn(p.returncode, (0, 1), p.stderr)
                     gos.append(p.returncode == 1)
                 self.assertEqual(py, any(gos), "%s: python %s, go validate/boundary %s" % (name, py, gos))
-                self.assertEqual(py, name != "ok")
+                self.assertEqual(py, name not in self.CLEAN + ("distinct keys across shards",))
+                # the python verbs a human runs give the Go exit status per verb
+                for verb, want in zip(("validate", "boundary"), gos):
+                    r = self.cli(os.path.join(self.tmp, "h"), verb, "--tree", tree)
+                    self.assertEqual(r.returncode == 1, want, "%s: carddb %s: %s%s" % (name, verb, r.stdout, r.stderr))

@@ -55,6 +55,35 @@ class Table:
         return [c.name for c in self.scope_columns(scope) if c.key]
 
 
+SCHEMA_DIR = "schema"
+_SCHEMA_DECL_PATH = re.compile(r"^schema/v([0-9]+)/(.+)\.tsv$")
+
+
+def is_schema_path(rel):
+    return rel == SCHEMA_DIR or rel.startswith(SCHEMA_DIR + "/")
+
+
+def decl_text(table, version):
+    """A table's schema declaration file, without the final newline (the form _parse_schema_file reads)."""
+    yn = lambda b: "yes" if b else "no"
+    lines = ["#carddb-schema %s v%d" % (table.name, version), "\t".join(SCHEMA_HEADER)]
+    for c in table.columns:
+        lines.append("\t".join([c.name, c.type, yn(c.required), yn(c.key), c.visibility, c.doc]))
+    return "\n".join(lines)
+
+
+def is_schema_decl(schema, rel, text):
+    """internal/carddb IsSchemaDecl: is the file at rel, whose whole content is text, a declaration of schema?
+    schema/VERSION holding exactly the version, or schema/v<N>/<table>.tsv equal to the schema's own declaration."""
+    if rel == SCHEMA_DIR + "/VERSION":
+        return re.fullmatch(r"[0-9]+\n?", text) is not None and int(text.rstrip("\n")) == schema.version
+    m = _SCHEMA_DECL_PATH.match(rel)
+    if m is None or m.group(1) != str(schema.version) or m.group(2) not in schema.tables:
+        return False
+    body = text[:-1] if text.endswith("\n") else text
+    return body == decl_text(schema.tables[m.group(2)], schema.version)
+
+
 class Schema:
     def __init__(self, version, tables, root):
         self.version = version

@@ -24,11 +24,11 @@ import subprocess
 import tarfile
 
 from . import shard
-from .boundary import boundary_text
+from .boundary import boundary_tree
 from .norm import name_keys
 from .schema import PRIVATE, PUBLIC, repo_root
 from .shard import ValidationError
-from .store import StoreError, carddb_home, tree_shards
+from .store import StoreError, carddb_home
 
 CURATED_PREFIX = "carddb/curated/"
 MANIFEST_PREFIX = "oracle/compliance/manifests/"
@@ -75,14 +75,19 @@ def read_committed(repo=None, ref="origin/main", directory=None):
                         out[p + "/" + fn] = f.read()
         return out
     repo = repo or repo_root()
-    proc = subprocess.run(["git", "-C", repo, "archive", "--format=tar", ref, "--"] + SOURCE_PATHS,
-                          capture_output=True)
-    if proc.returncode != 0:
-        raise StoreError("git archive %s: %s" % (ref, proc.stderr.decode("utf-8", "replace").strip()))
-    with tarfile.open(fileobj=io.BytesIO(proc.stdout), mode="r:") as tf:
-        for m in tf.getmembers():
-            if m.isfile():
-                out[m.name] = tf.extractfile(m).read()
+    git = lambda *a: subprocess.run(["git", "-C", repo] + list(a), capture_output=True)
+    if git("rev-parse", "--verify", "--quiet", ref + "^{commit}").returncode != 0:
+        raise StoreError("%s: no such ref in %s (git fetch it, or pass --ref / --src-dir)" % (ref, repo))
+    for path in SOURCE_PATHS:  # one archive per path: a ref that lacks one (origin/main before the curated tree
+        if git("cat-file", "-e", "%s:%s" % (ref, path)).returncode != 0:  # was promoted) just has no such inputs
+            continue
+        proc = git("archive", "--format=tar", ref, "--", path)
+        if proc.returncode != 0:
+            raise StoreError("git archive %s %s: %s" % (ref, path, proc.stderr.decode("utf-8", "replace").strip()))
+        with tarfile.open(fileobj=io.BytesIO(proc.stdout), mode="r:") as tf:
+            for m in tf.getmembers():
+                if m.isfile():
+                    out[m.name] = tf.extractfile(m).read()
     return out
 
 
@@ -93,21 +98,23 @@ def _decode(rel, b):
         raise ValidationError(["%s: not valid UTF-8" % rel])
 
 
-def _load_shards(schema, scope, shards, public_boundary):
-    """shards: iterable of (rel, text) -> {table: [row dicts]}, validating each."""
-    tables, viol = {}, []
-    for rel, text in shards:
-        v = shard.validate_shard(schema, scope, rel, text)
-        if public_boundary:
-            v += boundary_text(schema, rel, text)
-        if v:
-            viol += v
-            continue
-        hdr, head, rows = shard.parse_text(text)
-        name = shard.parse_shard_header(hdr)[0]
-        tables.setdefault(name, []).extend(dict(zip(head, r)) for r in rows)
+def _load_shards(schema, scope, files, public_boundary):
+    """files: iterable of (rel, text) of a whole tree -> {table: [row dicts]}.
+
+    Every file is validated as Go's Validate does (a hidden shard, a stray schema/ file), keys are checked
+    across a table's shards, and a public tree is boundary-checked; any violation refuses the build."""
+    files = sorted(files)
+    viol = shard.validate_tree(schema, scope, files)
+    if public_boundary:
+        viol += boundary_tree(schema, files)
     if viol:
         raise ValidationError(viol)
+    tables = {}
+    for rel, text in files:
+        if shard.is_data_file(rel):
+            hdr, head, rows = shard.parse_text(text)
+            name = shard.parse_shard_header(hdr)[0]
+            tables.setdefault(name, []).extend(dict(zip(head, r)) for r in rows)
     return tables
 
 
@@ -183,8 +190,8 @@ def build(out, schema, public_dir, private_dir=None, committed=None, text_file=N
     private = private_dir is not None
     if text_file and os.path.basename(out) == "carddb.sqlite":
         raise StoreError("a build with Oracle text is never the published file: name it carddb-text.sqlite")
-    pub = _load_shards(schema, PUBLIC, tree_shards(public_dir), True)
-    over = _load_shards(schema, PRIVATE, tree_shards(private_dir), False) if private else {}
+    pub = _load_shards(schema, PUBLIC, shard.tree_files(public_dir), True)
+    over = _load_shards(schema, PRIVATE, shard.tree_files(private_dir), False) if private else {}
     cur_shards = [(k[len("carddb/"):], _decode(k, v)) for k, v in sorted(committed.items())
                   if k.startswith(CURATED_PREFIX) and k.endswith(".tsv")]
     cur = _load_shards(schema, PUBLIC, cur_shards, True)

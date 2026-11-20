@@ -5,9 +5,10 @@ bytewise by the key columns, keys unique. A cell is never empty (`-` is the
 empty value) and never holds a tab, newline or CR.
 """
 import datetime
+import os
 import re
 
-from .schema import EMPTY, PRIVATE, PUBLIC
+from .schema import EMPTY, PRIVATE, PUBLIC, is_schema_decl, is_schema_path
 
 _INT = re.compile(r"^-?(0|[1-9][0-9]*)$")
 _DATE = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
@@ -122,10 +123,82 @@ def _clip(s):
     return s[:60] + "..." if len(s) > 60 else s
 
 
+SHARD_PREFIX = "#carddb "
+NOT_DECL_MSG = ("not a schema declaration: only schema/VERSION and schema/v<N>/<table>.tsv (identical to the "
+                "trusted schema's declaration of that table) may live at or under schema/")
+
+
+def is_data_file(rel):
+    """A data shard is a .tsv outside schema/ (internal/carddb Validate)."""
+    return rel.endswith(".tsv") and not is_schema_path(rel)
+
+
+def tree_files(root):
+    """(rel, text) of every regular file under root but .git, in lexical path order (Go's treeFiles)."""
+    for dp, dn, fns in os.walk(root):
+        dn[:] = sorted(d for d in dn if d != ".git")
+        for fn in sorted(fns):
+            p = os.path.join(dp, fn)
+            if os.path.isfile(p) and not os.path.islink(p):
+                with open(p, encoding="utf-8", errors="surrogateescape", newline="") as f:
+                    yield os.path.relpath(p, root).replace(os.sep, "/"), f.read()
+
+
+def validate_file(schema, scope, rel, text):
+    """Violations of one file of a tree, as Go's Validate reports them for a file that stands alone:
+    a schema/ file must be a declaration, a non-.tsv file must not claim to be a shard, a .tsv is validated."""
+    if is_schema_path(rel):
+        return [] if is_schema_decl(schema, rel, text) else ["%s: %s" % (rel, NOT_DECL_MSG)]
+    if not rel.endswith(".tsv"):
+        return ["%s:1: carddb shard must be a .tsv file" % rel] if text.startswith(SHARD_PREFIX) else []
+    return validate_shard(schema, scope, rel, text)
+
+
+def cross_shard_duplicates(schema, scope, files):
+    """Violations for a key that two different shards of one table both hold (validate_shard sees one
+    file at a time; Go's Validate keeps one key map per table over the whole tree).
+
+    files: iterable of (rel, text), any order; only data shards of a table the scope may hold count.
+    A duplicate inside one file is validate_shard's to report."""
+    out, seen = [], {}
+    for rel, text in sorted(files):
+        if not is_data_file(rel) or not text.endswith("\n"):
+            continue
+        lines = text[:-1].split("\n")
+        hdr = parse_shard_header(lines[0])
+        t = schema.tables.get(hdr[0]) if hdr else None
+        if t is None or (scope != PRIVATE and t.is_private()) or len(lines) < 2:
+            continue
+        cols = t.scope_columns(scope)
+        if lines[1].split("\t") != [c.name for c in cols]:
+            continue
+        kidx = key_indexes(cols)
+        keys = seen.setdefault(t.name, {})
+        for i, l in enumerate(lines[2:]):
+            cells = l.split("\t")
+            if "\r" in l or len(cells) != len(cols) or any(check_cell(c, v) for c, v in zip(cols, cells)):
+                continue  # validate_shard reports it; it registers no key
+            key = tuple(cells[j] for j in kidx)
+            at = keys.get(key)
+            if at is None:
+                keys[key] = (rel, i + 3)
+            elif at[0] != rel:
+                out.append("%s:%d: duplicate key (%s), first at %s:%d" % (rel, i + 3, ", ".join(key), at[0], at[1]))
+    return out
+
+
+def validate_tree(schema, scope, files):
+    """All violations of a tree's files (rel, text): per file, then keys duplicated across shards."""
+    files = sorted(files)
+    out = []
+    for rel, text in files:
+        out += validate_file(schema, scope, rel, text)
+    return out + cross_shard_duplicates(schema, scope, files)
+
+
 def validate_shard(schema, scope, rel, text):
-    """Violations (strings `path:line: msg`) of one shard, as Go's validateShard
-    reports them for a shard that stands alone (cross-shard duplicate keys cannot
-    occur: the shard path is a function of the key)."""
+    """Violations (strings `path:line: msg`) of one shard, as Go's validateShard reports them for a shard
+    that stands alone. Keys that two shards of a table share are cross_shard_duplicates'."""
     out = []
 
     def add(line, msg):

@@ -3,7 +3,8 @@
 Rows merge per key against the common ancestor. A key both sides changed
 differently resolves by, in order: the newer timestamp column (measured_at,
 else measured, declared, ran, retrieved: the first the table has), the writer
-priority (ci > cert > loop, from the table's `writer` column when it has one),
+priority (ci > cert > loop, from the row's `writer` column: status, cert, cert_sets and evidence
+carry one, and put stamps it with the writer that put the row),
 then the greater row bytes. The last step makes the merge commutative and
 idempotent, so two clones that merge in either order converge on one file.
 A modify beats a delete.

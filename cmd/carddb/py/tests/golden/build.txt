@@ -23,15 +23,15 @@ CREATE TABLE "_meta_writers" ("writer" TEXT NOT NULL, "table" TEXT NOT NULL, "ve
 CREATE TABLE build_meta (key TEXT NOT NULL, value TEXT NOT NULL, PRIMARY KEY (key)) WITHOUT ROWID;
 CREATE VIRTUAL TABLE card_fts USING fts5(oracle_id UNINDEXED, name, type_line, keywords, labels, tokenize='porter unicode61');
 CREATE TABLE card_names (norm_name TEXT NOT NULL, oracle_id TEXT NOT NULL, name TEXT NOT NULL, PRIMARY KEY (norm_name, oracle_id)) WITHOUT ROWID;
-CREATE TABLE "cards" ("oracle_id" TEXT NOT NULL, "name" TEXT NOT NULL, "layout" TEXT NOT NULL, "mana_cost" TEXT, "mana_value" INTEGER NOT NULL, "type_line" TEXT NOT NULL, "colors" TEXT, "color_identity" TEXT, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
-CREATE TABLE "cert" ("oracle_id" TEXT NOT NULL, "level" TEXT NOT NULL, "declared" TEXT NOT NULL, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
-CREATE TABLE "cert_sets" ("set_code" TEXT NOT NULL, "level" TEXT NOT NULL, "declared" TEXT NOT NULL, PRIMARY KEY ("set_code")) WITHOUT ROWID;
+CREATE TABLE "cards" ("oracle_id" TEXT NOT NULL, "name" TEXT NOT NULL, "layout" TEXT NOT NULL, "mana_cost" TEXT, "mana_value" INTEGER NOT NULL, "type_line" TEXT NOT NULL, "colors" TEXT, "color_identity" TEXT, "keywords" TEXT, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
+CREATE TABLE "cert" ("oracle_id" TEXT NOT NULL, "level" TEXT NOT NULL, "declared" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
+CREATE TABLE "cert_sets" ("set_code" TEXT NOT NULL, "level" TEXT NOT NULL, "declared" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("set_code")) WITHOUT ROWID;
 CREATE TABLE "curated_bracket_flags" ("oracle_id" TEXT NOT NULL, "flag" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "flag")) WITHOUT ROWID;
 CREATE TABLE "curated_exclusions" ("oracle_id" TEXT NOT NULL, "reason" TEXT NOT NULL, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
 CREATE TABLE "curated_game_changers" ("oracle_id" TEXT NOT NULL, "added" TEXT NOT NULL, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
 CREATE TABLE "curated_labels" ("oracle_id" TEXT NOT NULL, "label" TEXT NOT NULL, "note" TEXT, PRIMARY KEY ("oracle_id", "label")) WITHOUT ROWID;
 CREATE TABLE "curated_relations" ("oracle_id" TEXT NOT NULL, "relation" TEXT NOT NULL, "other_oracle_id" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "relation", "other_oracle_id")) WITHOUT ROWID;
-CREATE TABLE "evidence" ("oracle_id" TEXT NOT NULL, "source" TEXT NOT NULL, "ref" TEXT NOT NULL, "outcome" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "source", "ref")) WITHOUT ROWID;
+CREATE TABLE "evidence" ("oracle_id" TEXT NOT NULL, "source" TEXT NOT NULL, "ref" TEXT NOT NULL, "outcome" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id", "source", "ref")) WITHOUT ROWID;
 CREATE TABLE "labels" ("oracle_id" TEXT NOT NULL, "label" TEXT NOT NULL, "origin" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "label")) WITHOUT ROWID;
 CREATE TABLE "legality" ("oracle_id" TEXT NOT NULL, "format" TEXT NOT NULL, "status" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "format")) WITHOUT ROWID;
 CREATE TABLE "printings" ("printing_id" TEXT NOT NULL, "oracle_id" TEXT NOT NULL, "set_code" TEXT NOT NULL, "collector_number" TEXT NOT NULL, "rarity" TEXT NOT NULL, "released" TEXT, PRIMARY KEY ("printing_id")) WITHOUT ROWID;
@@ -39,7 +39,7 @@ CREATE TABLE "sets" ("set_code" TEXT NOT NULL, "name" TEXT NOT NULL, "release_da
 CREATE TABLE src_diagnosed (kind TEXT, set_code TEXT, card TEXT, field TEXT, wrong TEXT, cr TEXT, evidence TEXT, upstream TEXT, ticket TEXT);
 CREATE TABLE src_manifest_cards (set_code TEXT NOT NULL, name TEXT NOT NULL, numbers TEXT, rarity TEXT);
 CREATE TABLE src_manifest_sets (code TEXT NOT NULL, name TEXT, released TEXT, set_type TEXT, xmage_ref TEXT, PRIMARY KEY (code)) WITHOUT ROWID;
-CREATE TABLE "status" ("oracle_id" TEXT NOT NULL, "level" TEXT NOT NULL, "verdict" TEXT NOT NULL, "gorge_pin" TEXT NOT NULL, "measured" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "level")) WITHOUT ROWID;
+CREATE TABLE "status" ("oracle_id" TEXT NOT NULL, "level" TEXT NOT NULL, "verdict" TEXT NOT NULL, "gorge_pin" TEXT NOT NULL, "measured" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id", "level")) WITHOUT ROWID;
 CREATE TABLE "xledger" ("oracle_id" TEXT NOT NULL, "tier" TEXT NOT NULL, "state" TEXT NOT NULL, "note" TEXT, PRIMARY KEY ("oracle_id", "tier")) WITHOUT ROWID;
 -- rows _meta_sources
 -- rows _meta_unresolved
@@ -57,16 +57,16 @@ text	no
 -- rows card_fts
 ab000000000000000000000000000000	Lightning Bolt	Instant		burn staple
 ab111111111111111111111111111111	Fire // Ice	Instant // Instant		
-cd222222222222222222222222222222	Dáin Ironfoot	Legendary Creature — Dwarf Warrior		
+cd222222222222222222222222222222	Dáin Ironfoot	Legendary Creature — Dwarf Warrior	Haste Double strike	
 -- rows card_names
 dain ironfoot	cd222222222222222222222222222222	Dáin Ironfoot
 fire	ab111111111111111111111111111111	Fire // Ice
 ice	ab111111111111111111111111111111	Fire // Ice
 lightning bolt	ab000000000000000000000000000000	Lightning Bolt
 -- rows cards
-ab000000000000000000000000000000	Lightning Bolt	normal	{R}	1	Instant	R	R
-ab111111111111111111111111111111	Fire // Ice	split	{1}{R} // {1}{U}	4	Instant // Instant	R,U	R,U
-cd222222222222222222222222222222	Dáin Ironfoot	normal	{3}{R}	4	Legendary Creature — Dwarf Warrior	R	R
+ab000000000000000000000000000000	Lightning Bolt	normal	{R}	1	Instant	R	R	NULL
+ab111111111111111111111111111111	Fire // Ice	split	{1}{R} // {1}{U}	4	Instant // Instant	R,U	R,U	NULL
+cd222222222222222222222222222222	Dáin Ironfoot	normal	{3}{R}	4	Legendary Creature — Dwarf Warrior	R	R	Haste,Double strike
 -- rows cert
 -- rows cert_sets
 -- rows curated_bracket_flags
@@ -95,5 +95,5 @@ LEA	Lightning Bolt	161,161*	COMMON
 2ED	Unlimited Edition	1993-08-05	CORE	abc
 LEA	Limited Edition Alpha	1993-08-05	CORE	abc
 -- rows status
-ab000000000000000000000000000000	A	agree	8f7095353a64	2026-11-19
+ab000000000000000000000000000000	A	agree	8f7095353a64	2026-11-19	loop
 -- rows xledger
