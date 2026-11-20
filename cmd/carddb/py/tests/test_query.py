@@ -124,8 +124,8 @@ class Query(Base):
         ], writer="resolve")
 
         self.sla = os.path.join(self.tmp, "writers.tsv")
-        write(self.sla, "#carddb-writers v1\nwriter\tsla_hours\n" + "".join(
-            "%s\t%d\n" % (w, 24 if w == "catalogue" else 1000)
+        write(self.sla, "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n" + "".join(
+            "%s\t%d\tcards\tfixture\n" % (w, 24 if w == "catalogue" else 1000)
             for w in ("catalogue", "certification", "ci", "farm", "labels", "loop", "resolve")))
         self.asset = os.path.join(self.tmp, "carddb-latest.json")
         write(self.asset, json.dumps({"published_at": "2026-11-19T00:00:00Z", "unresolved": 1}) + "\n")
@@ -291,19 +291,133 @@ class Query(Base):
         self.assertIn("unknown view", r.stderr)
 
     def test_writers_config_is_allowed_under_schema(self):
-        files = [("schema/writers.tsv", "#carddb-writers v1\nwriter\tsla_hours\ncatalogue\t24\n")]
+        good = ("#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n"
+                "catalogue\t24\tcards\tfixture\n")
+        files = [("schema/writers.tsv", good)]
         self.assertEqual(shard.validate_tree(self.schema, "public", files), [])
         self.assertEqual(boundary_tree(self.schema, files), [])
         real = list(shard.tree_files(os.path.join(ROOT, "carddb")))
         self.assertEqual(shard.validate_tree(self.schema, "public", real), [])
         self.assertEqual(boundary_tree(self.schema, real), [])
-        bad = [("schema/writers.tsv", "#carddb-writers v1\nwriter\tsla_hours\ncatalogue\tzero\n")]
+        bad = [("schema/writers.tsv", "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n"
+                "catalogue\tzero\tcards\tfixture\n")]
         self.assertTrue(shard.validate_tree(self.schema, "public", bad))
         self.assertTrue(boundary_tree(self.schema, bad))
 
+    def test_writers_shape_is_fixed(self):
+        # The one non-declaration under schema/ cannot grow a column, so it
+        # cannot park oracle_text (or a private table) under schema/.
+        header = "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n"
+        bad = {
+            "extra-forbidden-column": header.replace("\tdoc\n", "\toracle_text\n")
+            + "catalogue\t24\tDraw a card.\tfixture\n",
+            "extra-private-table-column": header.replace("\tdoc\n", "\ttext\n")
+            + "catalogue\t24\tprivate text\tfixture\n",
+            "over-wide-header": header.replace("\tdoc\n", "\tdoc\textra\n")
+            + "catalogue\t24\tcards\tfixture\tmore\n",
+            "missing-doc": "#carddb-writers v1\nwriter\tsla_hours\ttables\ncatalogue\t24\tcards\n",
+            "duplicate-writer": header + "catalogue\t24\tcards\ta\ncatalogue\t36\tcards\tb\n",
+            "plus-sla": header + "catalogue\t+24\tcards\tfixture\n",
+            "leading-zero-sla": header + "catalogue\t01\tcards\tfixture\n",
+            "huge-sla": header + "catalogue\t999999999999999999999\tcards\tfixture\n",
+        }
+        for name, text in bad.items():
+            with self.subTest(name):
+                files = [("schema/writers.tsv", text)]
+                self.assertTrue(shard.validate_tree(self.schema, "public", files), name)
+                self.assertTrue(boundary_tree(self.schema, files), name)
+                path = os.path.join(self.tmp, name + ".tsv")
+                write(path, text)
+                with self.assertRaises(query_mod.QueryError):
+                    query_mod.load_writers(path)
+
     def test_writer_sla_parser(self):
         self.assertEqual(query_mod.load_writers(self.sla)["catalogue"], 24)
+        committed = query_mod.load_writers(os.path.join(ROOT, "carddb", "schema", "writers.tsv"))
+        # ids the schema declarations and merge driver actually write
+        self.assertTrue({"ci", "cert", "loop"} <= set(committed), sorted(committed))
         bad = os.path.join(self.tmp, "bad-writers.tsv")
-        write(bad, "#carddb-writers v1\nwriter\tsla_hours\ncatalogue\tzero\n")
+        write(bad, "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\ncatalogue\tzero\tcards\tfixture\n")
         with self.assertRaises(query_mod.QueryError):
             query_mod.load_writers(bad)
+
+    def test_malformed_inputs_are_clean_errors(self):
+        # A valid-JSON non-object asset metadata is "no metadata", not an
+        # AttributeError traceback.
+        bad_meta = os.path.join(self.tmp, "list-asset.json")
+        write(bad_meta, "[]\n")
+        r = self.run_cli("freshness", "--public-dir", os.path.join(self.home, "public"),
+                         "--asset-meta", bad_meta, "--sla", self.sla,
+                         "--now", "2026-11-19T00:00:00Z")
+        self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+        self.assertNotIn("Traceback", r.stderr)
+        self.assertIn("no carddb-latest metadata", r.stdout)
+
+        # Invalid UTF-8 in the SLA file is the tool's clean error too.
+        bad_sla = os.path.join(self.tmp, "bad-utf8.tsv")
+        with open(bad_sla, "wb") as f:
+            f.write(b"#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n"
+                    b"catalogue\t24\tcards\t\xff\n")
+        with self.assertRaises(query_mod.QueryError):
+            query_mod.load_writers(bad_sla)
+        r = self.run_cli("freshness", "--public-dir", os.path.join(self.home, "public"),
+                         "--asset-meta", self.asset, "--sla", bad_sla,
+                         "--now", "2026-11-19T00:00:00Z")
+        self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+        self.assertNotIn("Traceback", r.stderr)
+        self.assertIn("cannot read writer SLA file", r.stdout)
+
+        # Metadata for the other scope is refused rather than used as this
+        # scope's age/baseline.
+        other_meta = os.path.join(self.tmp, "private-asset.json")
+        write(other_meta, json.dumps({"scope": "private",
+                                      "published_at": "2026-11-19T00:00:00Z"}) + "\n")
+        r = self.run_cli("freshness", "--public-dir", os.path.join(self.home, "public"),
+                         "--asset-meta", other_meta, "--sla", self.sla,
+                         "--now", "2026-11-19T00:00:00Z")
+        self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+        self.assertIn("metadata is for scope 'private', want 'public'", r.stdout)
+        self.assertIn("no carddb-latest metadata", r.stdout)
+
+    def test_freshness_uses_the_committed_registry_and_scope_metadata(self):
+        # No --sla and no --asset-meta: the default path loads the committed
+        # registry and each scope's own metadata file.
+        sla = query_mod.load_writers(os.path.join(ROOT, "carddb", "schema", "writers.tsv"))
+        home = os.path.join(self.tmp, "registry")
+        os.makedirs(home)
+        priv_remote = os.path.join(self.tmp, "private-registry.git")
+        git("init", "--bare", "--quiet", priv_remote)
+        old = os.environ.get("CARDDB_PRIVATE_REMOTE")
+        os.environ["CARDDB_PRIVATE_REMOTE"] = priv_remote
+
+        def restore():
+            if old is None:
+                os.environ.pop("CARDDB_PRIVATE_REMOTE", None)
+            else:
+                os.environ["CARDDB_PRIVATE_REMOTE"] = old
+        self.addCleanup(restore)
+        pub = Store("public", home=home, schema=self.schema)
+        pub.init()
+        priv = Store("private", home=home, schema=self.schema)
+        priv.init()
+        rows = [{"writer": w, "table": "_meta/writers", "version": "test", "ran": "2026-11-19"}
+                for w in sorted(sla)]
+        pub.put("_meta/writers", rows)
+        priv.put("_meta/writers", rows)
+        write(os.path.join(home, "carddb-latest.json"),
+              json.dumps({"scope": "public", "published_at": "2026-11-18T00:00:00Z",
+                          "unresolved": 1}) + "\n")
+        write(os.path.join(home, "carddb-private-latest.json"),
+              json.dumps({"scope": "private", "published_at": "2026-11-19T00:00:00Z",
+                          "unresolved": 0}) + "\n")
+
+        public = self.cli(home, "freshness", "--public-dir", pub.dir, "--now", "2026-11-19T00:00:00Z")
+        self.assertNotIn("not registered", public.stdout)
+        self.assertNotIn("no _meta/writers row", public.stdout)
+        self.assertIn("writer ci ran 2026-11-19", public.stdout)
+        self.assertIn("carddb-latest 24.0h old (SLA 6h)", public.stdout)
+
+        private = self.cli(home, "freshness", "--private", "--public-dir", priv.dir,
+                           "--now", "2026-11-19T00:00:00Z")
+        self.assertNotIn("not registered", private.stdout)
+        self.assertIn("carddb-private-latest 0.0h old (SLA 6h)", private.stdout)

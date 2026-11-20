@@ -98,7 +98,7 @@ def _parser():
     p = sub.choices["freshness"]
     p.add_argument("--tick", action="store_true", help="print only `!!` lines")
     p.add_argument("--public-dir", help="the data branch clone (default $CARDDB_HOME/public|private)")
-    p.add_argument("--asset-meta", help="carddb-latest metadata JSON (default $CARDDB_HOME/carddb-latest.json)")
+    p.add_argument("--asset-meta", help="release metadata JSON (default $CARDDB_HOME/carddb[-private]-latest.json)")
     p.add_argument("--sla", help="writer SLA file (default the schema directory's writers.tsv)")
     p.add_argument("--now", help="ISO date or timestamp to judge ages at (default $CARDDB_NOW or now)")
     p.add_argument("--max-pack-mb", type=float, default=300.0)

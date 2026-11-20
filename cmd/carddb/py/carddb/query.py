@@ -24,7 +24,8 @@ from datetime import datetime, timezone
 from .build import q, sql_name
 from .norm import norm_name
 from .schema import PRIVATE, PUBLIC
-from .store import Store, StoreError, carddb_home
+from .shard import parse_writers
+from .store import Store, StoreError, asset_meta_path, carddb_home
 
 VERBS = ("card", "search", "blockers", "proven", "deck", "freshness", "sql", "export")
 
@@ -381,37 +382,19 @@ def _hours(now, then):
 
 
 def load_writers(path):
-    """{writer: sla_hours} from carddb/schema/writers.tsv."""
+    """{writer: sla_hours} from carddb/schema/writers.tsv.
+
+    Parsed by the same strict parser the validators use, so a file CI accepts
+    cannot make freshness fail (or the other way round)."""
     try:
         with open(path, encoding="utf-8") as f:
             text = f.read()
-    except OSError as e:
+    except (OSError, UnicodeDecodeError) as e:
         raise QueryError("freshness: cannot read writer SLA file %s: %s" % (path, e))
-    lines = text.rstrip("\n").split("\n")
-    if len(lines) < 2 or not lines[0].startswith("#carddb-writers "):
-        raise QueryError("%s: first line must be `#carddb-writers v1`" % path)
-    header = lines[1].split("\t")
-    if "writer" not in header or "sla_hours" not in header:
-        raise QueryError("%s: columns need writer and sla_hours" % path)
-    out = {}
-    for ln, line in enumerate(lines[2:], 3):
-        cells = line.split("\t")
-        if len(cells) != len(header):
-            raise QueryError("%s:%d: %d cells, want %d" % (path, ln, len(cells), len(header)))
-        row = dict(zip(header, cells))
-        writer = row["writer"]
-        if not writer:
-            raise QueryError("%s:%d: empty writer" % (path, ln))
-        if writer in out:
-            raise QueryError("%s:%d: duplicate writer %r" % (path, ln, writer))
-        try:
-            hours = int(row["sla_hours"])
-        except ValueError:
-            raise QueryError("%s:%d: sla_hours %r is not an int" % (path, ln, row["sla_hours"]))
-        if hours < 1:
-            raise QueryError("%s:%d: sla_hours must be at least 1" % (path, ln))
-        out[writer] = hours
-    return out
+    writers, violations = parse_writers(path, text)
+    if violations:
+        raise QueryError(violations[0])
+    return writers
 
 
 def _git(public_dir, *args):
@@ -447,12 +430,15 @@ def _packed_mib(public_dir):
 def _asset_meta(path):
     try:
         with open(path, encoding="utf-8") as f:
-            return json.load(f)
+            meta = json.load(f)
     except (OSError, ValueError):
         return None
+    return meta if isinstance(meta, dict) else None
 
 
 def _asset_time(meta):
+    if not isinstance(meta, dict):
+        return None
     raw = meta.get("published_at") or meta.get("fetched_at")
     if not raw:
         return None
@@ -522,8 +508,20 @@ def run_freshness(args, schema, out):
             line(fail, "writer %s ran %s (%.1fh, SLA %dh)" %
                  (writer, by_writer[writer], age, sla[writer]))
 
-        meta = _asset_meta(args.asset_meta) if args.asset_meta else _asset_meta(
-            os.path.join(carddb_home(args.home), "carddb-latest.json"))
+        # Each scope has its own release metadata file (store.asset_meta_path),
+        # and the file records its scope: a private fetch can never be read as
+        # the public release's age (or the other way round).
+        meta_name = "carddb-private-latest" if private else "carddb-latest"
+        if args.asset_meta:
+            meta = _asset_meta(args.asset_meta)
+        else:
+            meta = _asset_meta(asset_meta_path(args.home, private))
+        if meta is not None:
+            want_scope = PRIVATE if private else PUBLIC
+            got_scope = meta.get("scope")
+            if got_scope is not None and got_scope != want_scope:
+                line(True, "%s metadata is for scope %r, want %r" % (meta_name, got_scope, want_scope))
+                meta = None
         baseline = None
         if args.unresolved_baseline is not None:
             baseline = args.unresolved_baseline
@@ -547,15 +545,15 @@ def run_freshness(args, schema, out):
             line(fail, "publish %.1fh old (SLA 2h)" % age)
 
         if meta is None:
-            line(True, "no carddb-latest metadata")
+            line(True, "no %s metadata" % meta_name)
         else:
             asset = _asset_time(meta)
             if asset is None:
-                line(True, "carddb-latest metadata has no published_at")
+                line(True, "%s metadata has no published_at" % meta_name)
             else:
                 age = _hours(now, asset)
                 fail = age > 6
-                line(fail, "carddb-latest %.1fh old (SLA 6h)" % age)
+                line(fail, "%s %.1fh old (SLA 6h)" % (meta_name, age))
 
         packed = _packed_mib(public_dir)
         if packed is None:

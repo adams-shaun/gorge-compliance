@@ -74,7 +74,17 @@ func IsSchemaDecl(s *Schema, rel string, b []byte) bool {
 // share one path without letting arbitrary files under schema/.
 func IsSchemaAux(rel string) bool { return rel == SchemaDir+"/writers.tsv" }
 
-var writersHeaderRe = regexp.MustCompile(`^#carddb-writers v[1-9][0-9]*$`)
+var (
+	writersHeaderRe = regexp.MustCompile(`^#carddb-writers v[1-9][0-9]*$`)
+	// writersColumns is the one fixed shape of schema/writers.tsv. Comparing
+	// the header exactly keeps the one non-declaration under schema/ from
+	// growing a column (or a column named oracle_text / a private table) to
+	// park data the public boundary refuses.
+	writersColumns = []string{"writer", "sla_hours", "tables", "doc"}
+	// A strict positive int, the same rule query.py's load_writers enforces:
+	// no leading +, no leading zero, no value beyond int64.
+	writersSLARe = regexp.MustCompile(`^[1-9][0-9]*$`)
+)
 
 // validateWriters checks schema/writers.tsv's fixed shape, so the one
 // non-declaration allowed under schema/ cannot become a place to park
@@ -99,22 +109,27 @@ func validateWriters(rel string, b []byte) []Violation {
 		return out
 	}
 	header := strings.Split(lines[1], "\t")
-	w, h, wc, hc := -1, -1, 0, 0
-	for i, name := range header {
+	for _, name := range header {
 		if name == "" {
 			add(2, "empty column name")
-		}
-		if name == "writer" {
-			w, wc = i, wc+1
-		}
-		if name == "sla_hours" {
-			h, hc = i, hc+1
+		} else if privateTableNames[name] {
+			add(2, "column %q names a private table", name)
+		} else if ForbiddenField(name) {
+			add(2, "column %q is a forbidden field", name)
 		}
 	}
-	if wc != 1 || hc != 1 {
-		add(2, "columns need exactly one writer and one sla_hours")
+	if len(header) != len(writersColumns) {
+		add(2, "columns must be exactly %s", strings.Join(writersColumns, ", "))
 		return out
 	}
+	for i := range header {
+		if header[i] != writersColumns[i] {
+			add(2, "columns must be exactly %s", strings.Join(writersColumns, ", "))
+			return out
+		}
+	}
+	w, h := 0, 1
+	seen := map[string]int{}
 	for i, line := range lines[2:] {
 		ln := i + 3
 		cells := strings.Split(line, "\t")
@@ -122,11 +137,23 @@ func validateWriters(rel string, b []byte) []Violation {
 			add(ln, "%d cells, want %d", len(cells), len(header))
 			continue
 		}
-		if cells[w] == "" {
+		writer := cells[w]
+		if writer == "" {
 			add(ln, "empty writer")
+			continue
 		}
-		if n, err := strconv.Atoi(cells[h]); err != nil || n < 1 {
-			add(ln, "sla_hours %q is not a positive int", clip(cells[h]))
+		if first, ok := seen[writer]; ok {
+			add(ln, "duplicate writer %q (first at line %d)", writer, first)
+			continue
+		}
+		seen[writer] = ln
+		cell := cells[h]
+		if !writersSLARe.MatchString(cell) {
+			add(ln, "sla_hours %q is not a strict positive int", clip(cell))
+			continue
+		}
+		if n, err := strconv.ParseInt(cell, 10, 64); err != nil || n < 1 {
+			add(ln, "sla_hours %q is out of range", clip(cell))
 		}
 	}
 	return out

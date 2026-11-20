@@ -8,7 +8,8 @@ import datetime
 import os
 import re
 
-from .schema import EMPTY, PRIVATE, PUBLIC, is_schema_aux, is_schema_decl, is_schema_path
+from .schema import (EMPTY, PRIVATE, PRIVATE_TABLE_NAMES, PUBLIC, forbidden_field,
+                     is_schema_aux, is_schema_decl, is_schema_path)
 
 _INT = re.compile(r"^-?(0|[1-9][0-9]*)$")
 _DATE = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
@@ -126,43 +127,81 @@ def _clip(s):
 SHARD_PREFIX = "#carddb "
 NOT_DECL_MSG = ("not a schema declaration: only schema/VERSION, schema/v<N>/<table>.tsv (identical to the "
                 "trusted schema's declaration of that table) and schema/writers.tsv may live at or under schema/")
-def writers_violations(rel, text):
-    """Violations of the schema's writer SLA file. The one non-declaration under schema/ is a fixed
-    shape too, so it cannot become a place to park arbitrary (private) data."""
-    out = []
+
+# The one fixed shape of schema/writers.tsv. The header is compared exactly,
+# so the one non-declaration under schema/ cannot grow a column (or a column
+# named oracle_text / a private table) to park data the boundary refuses.
+WRITERS_HEADER = ("writer", "sla_hours", "tables", "doc")
+WRITERS_MAX_SLA_HOURS = (1 << 63) - 1
+_SLA_HOURS = re.compile(r"^[1-9][0-9]*$")
+_WRITERS_HEADER_RE = re.compile(r"#carddb-writers v[1-9][0-9]*")
+
+
+def parse_writers(rel, text):
+    """(writers {writer: sla_hours}, violations) of schema/writers.tsv.
+
+    One parser for the validators (validate_tree) and the consumer
+    (query.load_writers), so a file one of them accepts cannot make the other
+    fail: the strict header, the strict positive-int SLA and the duplicate-writer
+    rule are enforced in exactly one place."""
+    out, writers, first_line = [], {}, {}
 
     def add(line, msg):
         out.append("%s:%d: %s" % (rel, line, msg) if line > 0 else "%s: %s" % (rel, msg))
 
     if text == "":
         add(0, "empty file")
-        return out
+        return writers, out
     if not text.endswith("\n"):
         add(0, "does not end with a newline")
     lines = (text[:-1] if text.endswith("\n") else text).split("\n")
-    if not re.fullmatch(r"#carddb-writers v[1-9][0-9]*", lines[0]):
+    if not _WRITERS_HEADER_RE.fullmatch(lines[0]):
         add(1, "first line %r is not `#carddb-writers v<N>`" % _clip(lines[0]))
-        return out
+        return writers, out
     if len(lines) < 2:
         add(0, "no column header line")
-        return out
+        return writers, out
     header = lines[1].split("\t")
-    if any(h == "" for h in header):
-        add(2, "empty column name")
-    if header.count("writer") != 1 or header.count("sla_hours") != 1:
-        add(2, "columns need exactly one writer and one sla_hours")
-        return out
+    for name in header:
+        if name == "":
+            add(2, "empty column name")
+        elif name in PRIVATE_TABLE_NAMES:
+            add(2, "column %r names a private table" % name)
+        elif forbidden_field(name):
+            add(2, "column %r is a forbidden field" % name)
+    if tuple(header) != WRITERS_HEADER:
+        add(2, "columns must be exactly %s" % ", ".join(WRITERS_HEADER))
+        return writers, out
     w, h = header.index("writer"), header.index("sla_hours")
     for i, line in enumerate(lines[2:], 3):
         cells = line.split("\t")
         if len(cells) != len(header):
             add(i, "%d cells, want %d" % (len(cells), len(header)))
             continue
-        if cells[w] == "":
+        writer = cells[w]
+        if writer == "":
             add(i, "empty writer")
-        if not re.fullmatch(r"[1-9][0-9]*", cells[h]):
-            add(i, "sla_hours %r is not a positive int" % _clip(cells[h]))
-    return out
+            continue
+        if writer in first_line:
+            add(i, "duplicate writer %r (first at line %d)" % (writer, first_line[writer]))
+            continue
+        first_line[writer] = i
+        cell = cells[h]
+        if not _SLA_HOURS.fullmatch(cell):
+            add(i, "sla_hours %r is not a strict positive int" % _clip(cell))
+            continue
+        hours = int(cell)
+        if hours > WRITERS_MAX_SLA_HOURS:
+            add(i, "sla_hours %r is out of range" % _clip(cell))
+            continue
+        writers[writer] = hours
+    return writers, out
+
+
+def writers_violations(rel, text):
+    """Violations of the schema's writer SLA file. The one non-declaration under schema/ is a fixed
+    shape too, so it cannot become a place to park arbitrary (private) data."""
+    return parse_writers(rel, text)[1]
 
 
 def is_data_file(rel):

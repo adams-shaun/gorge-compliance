@@ -228,10 +228,14 @@ class Fetch(Base):
         gh = os.path.join(d, "gh")
         write(gh, '#!/bin/sh\n'
                   'if [ "$1" = release ] && [ "$2" = view ]; then '
-                  'echo \'{"publishedAt":"2026-11-19T00:00:00Z"}\'; exit 0; fi\n'
+                  'case "$5" in *private*) echo \'{"publishedAt":"2026-11-20T00:00:00Z"}\';; '
+                  '*) echo \'{"publishedAt":"2026-11-19T00:00:00Z"}\';; esac; exit 0; fi\n'
                   'echo "$@" > "%s/gh.args"\n'
                   'while [ $# -gt 0 ]; do case "$1" in --dir) dir="$2";; esac; shift; done\n'
-                  'cp "%s"%s "$dir/carddb.sqlite%s"\n' % (self.tmp, asset, ".zst" if zst else "", ".zst" if zst else ""))
+                  'cp "%s"%s "$dir/carddb.sqlite%s"\n'
+                  'cp "%s"%s "$dir/carddb-private.sqlite%s"\n' % (
+                      self.tmp, asset, ".zst" if zst else "", ".zst" if zst else "",
+                      asset, ".zst" if zst else "", ".zst" if zst else ""))
         os.chmod(gh, os.stat(gh).st_mode | stat.S_IEXEC)
         os.environ["CARDDB_GH"] = gh
         self.addCleanup(os.environ.pop, "CARDDB_GH", None)
@@ -252,8 +256,31 @@ class Fetch(Base):
                 meta = json.loads(read(os.path.join(home, "carddb-latest.json")))
                 self.assertEqual(meta["published_at"], "2026-11-19T00:00:00Z")
                 self.assertEqual(meta["tag"], "carddb-latest")
+                self.assertEqual(meta["scope"], "public")
                 shutil_rm = __import__("shutil").rmtree
                 shutil_rm(os.path.join(self.tmp, "bin"))
+
+    def test_fetch_keeps_scope_metadata_separate(self):
+        self.stub_gh(b"SQLite format 3\x00 fake", False)
+        home = os.path.join(self.tmp, "both")
+        self.assertEqual(fetch_mod.fetch(home=home), os.path.join(home, "carddb.sqlite"))
+        self.assertEqual(fetch_mod.fetch(private=True, repo="me/private", home=home),
+                         os.path.join(home, "carddb-private.sqlite"))
+        self.assertEqual(sorted(os.listdir(home)),
+                         ["carddb-latest.json", "carddb-private-latest.json",
+                          "carddb-private.sqlite", "carddb.sqlite"])
+        pub = json.loads(read(os.path.join(home, "carddb-latest.json")))
+        priv = json.loads(read(os.path.join(home, "carddb-private-latest.json")))
+        self.assertEqual((pub["scope"], pub["published_at"]), ("public", "2026-11-19T00:00:00Z"))
+        self.assertEqual((priv["scope"], priv["published_at"]), ("private", "2026-11-20T00:00:00Z"))
+
+    def test_fetch_ignores_non_object_release_json(self):
+        d = os.path.join(self.tmp, "bin-non-object")
+        os.makedirs(d)
+        gh = os.path.join(d, "gh")
+        write(gh, "#!/bin/sh\necho '[]'\n")
+        os.chmod(gh, os.stat(gh).st_mode | stat.S_IEXEC)
+        self.assertIsNone(fetch_mod._published_at(gh, "x/y", "carddb-latest"))
 
     def test_private_needs_a_repo(self):
         with self.assertRaises(store_mod.StoreError):

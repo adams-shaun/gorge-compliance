@@ -5,11 +5,10 @@ import sqlite3
 import subprocess
 import tempfile
 
-from .store import StoreError, carddb_home
+from .store import StoreError, asset_meta_path, carddb_home
 
 TAG = "carddb-latest"
 PUBLIC_REPO = "adams-shaun/gorge-compliance"
-META = "carddb-latest.json"
 
 
 def _unzstd(src, dst):
@@ -35,9 +34,12 @@ def _published_at(gh, repo, tag):
     if p.returncode != 0:
         return None
     try:
-        return json.loads(p.stdout).get("publishedAt") or None
+        doc = json.loads(p.stdout)
     except ValueError:
         return None
+    if not isinstance(doc, dict):
+        return None
+    return doc.get("publishedAt") or None
 
 
 def _unresolved(path):
@@ -81,11 +83,12 @@ def fetch(private=False, home=None, repo=None, tag=TAG):
         os.replace(out, dest)
     published = _published_at(gh, repo, tag)
     if published:
-        meta = {"tag": tag, "repo": repo, "published_at": published}
+        meta = {"tag": tag, "repo": repo, "scope": "private" if private else "public",
+                "published_at": published}
         unresolved = _unresolved(dest)
         if unresolved is not None:
             meta["unresolved"] = unresolved
-        path = os.path.join(home, META)
+        path = asset_meta_path(home, private)
         tmp = path + ".tmp"
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump(meta, f, sort_keys=True)
