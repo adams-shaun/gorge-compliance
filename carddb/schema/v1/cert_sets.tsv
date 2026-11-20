@@ -6,19 +6,40 @@ corpus_pin	string	yes	no	public	Forge corpus pin (FORGE_REF) the set was measure
 released	date	no	no	public	Release date of the set, YYYY-MM-DD
 set_type	string	no	no	public	Set type (core, expansion, ...)
 paper	int	yes	no	public	Paper cards in the set, reprints included
-new_paper	int	yes	no	public	Paper cards first printed in the set
-reprints	int	yes	no	public	Paper cards reprinted in the set
+new_paper	int	no	no	public	Paper cards first printed in the set; empty when only the status writer has measured the set
+reprints	int	no	no	public	Paper cards reprinted in the set; empty when only the status writer has measured the set
 playable	int	yes	no	public	Paper cards gorge compiles
-excluded	int	yes	no	public	Cards excluded from certification with a cause
-c0	int	yes	no	public	Cards at C0
-c1	int	yes	no	public	Cards at C1
-c2	int	yes	no	public	Cards at C2
-c3	int	yes	no	public	Cards at C3
-open	int	yes	no	public	Cards with an open difference
+excluded	int	no	no	public	Cards excluded from certification with a cause; empty when only the status writer has measured the set
+c0	int	no	no	public	Cards at C0; empty when only the status writer has measured the set
+c1	int	no	no	public	Cards at C1; empty when only the status writer has measured the set
+c2	int	no	no	public	Cards at C2; empty when only the status writer has measured the set
+c3	int	no	no	public	Cards at C3; empty when only the status writer has measured the set
+open	int	no	no	public	Cards with an open difference; empty when only the status writer has measured the set
 level	string	no	no	public	Highest Ck the set is certified at: C0..C3; - when not certified
 state	string	yes	no	public	Set state: queued, dealing, triage, certified, blocked or regressed
 cursor	string	no	no	public	Cursor holding the set: deal, cert or -
 entered	date	no	no	public	Date the set entered its current state, YYYY-MM-DD
 certified	date	no	no	public	Date the set reached its current level, YYYY-MM-DD
 measured	date	yes	no	public	Date the row was measured, YYYY-MM-DD; the merge tie-break timestamp
+printed	bool	no	no	public	Set has a printed Oracle card list (Level B is defined for it); from oraclediff status
+a_declared	string	no	no	public	Level A claim declared in oracle/compliance/declared.json, if any
+a_cards	int	no	no	public	Level A: cards the claim covers
+a_outstanding	int	no	no	public	Level A: outstanding problems
+a_problem_cards	int	no	no	public	Level A: distinct cards with at least one problem
+a_xmage_verified	int	no	no	public	Level A: passing cards verified against XMage
+a_forge_only	int	no	no	public	Level A: passing cards verified against Forge only
+a_hand	int	no	no	public	Level A: passing cards passed by a hand-authored scenario
+a_non_tournament	int	no	no	public	Level A: outstanding problems on non-tournament cards
+a_buckets	string	no	no	public	Level A: problem counts by bucket, `bucket=n;` entries
+b_declared	string	no	no	public	Level B claim declared in oracle/compliance/declared.json, if any
+b_cards	int	no	no	public	Level B: cards the claim covers; empty for a set without a printed list
+b_outstanding	int	no	no	public	Level B: outstanding problems
+b_problem_cards	int	no	no	public	Level B: distinct cards with at least one problem
+b_non_tournament	int	no	no	public	Level B: outstanding problems on non-tournament cards
+b_buckets	string	no	no	public	Level B: problem counts by bucket, `bucket=n;` entries
+status_date	date	no	no	public	Date the status columns were measured, YYYY-MM-DD
+status_commit	string	no	no	public	gorge-compliance commit the status columns were measured at
+status_gorge	string	no	no	public	Gorge commit (GORGE_PIN) the status columns were measured at
+status_forge_ref	string	no	no	public	Forge corpus ref (FORGE_REF) the status columns were measured at
+ratchet_failures	int	no	no	public	Ratchet checks the status measurement failed
 writer	string	no	no	public	Program that wrote the row (ci, cert, loop); breaks a merge tie after the timestamp: ci > cert > loop

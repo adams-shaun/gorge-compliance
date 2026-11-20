@@ -2,6 +2,9 @@
 
   put TABLE [--source ID] [--version V]   rows from stdin: TSV, first line the column names
   ingest catalogue --mtgjson FILE         MTGJSON AllPrintings -> the catalogue tables, full snapshot
+  ingest status --status-a FILE --meta FILE [--status-b FILE]
+                                        oraclediff status output -> cert_sets status columns (docs site data)
+  docs-status --db FILE --out DIR         built SQLite -> status-A.jsonl, status-B.jsonl, meta.json for the docs build
   publish [--bulk] [--private]            commit what is staged, rebase, push
   merge-driver %O %A %B %P                git's merge driver (registered by the tool itself)
   build [--private] [--text FILE]         SQLite from the shards
@@ -30,6 +33,7 @@ import sys
 from . import build as build_mod
 from . import catalogue as catalogue_mod
 from . import compliance as compliance_mod
+from . import docsstatus as docsstatus_mod
 from . import fetch as fetch_mod
 from . import merge as merge_mod
 from . import query as query_mod
@@ -51,13 +55,20 @@ def _parser():
     p.add_argument("--source", help="writer id recorded in _meta/writers (default $CARDDB_WRITER or cli)")
     p.add_argument("--version", help="writer version recorded in _meta/writers")
     p = sub.add_parser("ingest")
-    p.add_argument("source", choices=("catalogue",))
-    p.add_argument("--mtgjson", required=True, metavar="FILE", help="MTGJSON AllPrintings.json or .json.gz")
+    p.add_argument("source", choices=("catalogue", "status"))
+    p.add_argument("--mtgjson", metavar="FILE", help="catalogue: MTGJSON AllPrintings.json or .json.gz")
+    p.add_argument("--status-a", metavar="FILE", help="status: `oraclediff status -all -json -level A` output")
+    p.add_argument("--status-b", metavar="FILE", help="status: the Level B output (optional)")
+    p.add_argument("--meta", metavar="FILE",
+                   help="status: meta.json {commit, gorge_pin, forge_ref, date, ratchet_failures}")
     p.add_argument("--manifests", metavar="DIR",
                    help="set manifests to cross-check (default %s; empty disables)" % catalogue_mod.MANIFEST_DIR)
     p.add_argument("--source", dest="writer",
                    help="writer id recorded in _meta/writers (default mtgjson)")
     p.add_argument("--version", help="writer version recorded in _meta/writers (default MTGJSON meta.version)")
+    p = sub.add_parser("docs-status")
+    p.add_argument("--db", required=True, metavar="FILE", help="built carddb.sqlite")
+    p.add_argument("--out", required=True, metavar="DIR", help="directory for status-A.jsonl, status-B.jsonl, meta.json")
     p = sub.add_parser("publish")
     p.add_argument("--bulk", action="store_true", help="allow more than 50000 changed lines")
     p.add_argument("--private", action="store_true")
@@ -203,7 +214,23 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
                                                               version=args.version, raw=True)
             print("carddb put %s: %d rows changed" % (args.table, n), file=stdout)
             return 0
+        if args.verb == "docs-status":
+            na, nb = docsstatus_mod.export(args.db, args.out)
+            print("carddb docs-status: %d Level A set(s), %d Level B set(s) -> %s" % (na, nb, args.out), file=stdout)
+            return 0
+        if args.verb == "ingest" and args.source == "status":
+            if not args.status_a or not args.meta:
+                raise StoreError("ingest status needs --status-a and --meta")
+            pub = Store(PUBLIC, home=args.home, schema=schema)
+            if not pub.exists():
+                raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
+            changed, n = docsstatus_mod.run(pub, args.status_a, args.status_b, args.meta,
+                                            writer=args.writer or "ci", version=args.version)
+            print("carddb ingest status: %d set(s) folded into cert_sets (%d rows changed)" % (n, changed), file=stdout)
+            return 0
         if args.verb == "ingest":
+            if not args.mtgjson:
+                raise StoreError("ingest catalogue needs --mtgjson")
             manifests = args.manifests
             if manifests is None:
                 manifests = os.path.join(repo_root(), catalogue_mod.MANIFEST_DIR)
