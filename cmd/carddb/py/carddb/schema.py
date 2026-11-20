@@ -85,6 +85,12 @@ def is_schema_decl(schema, rel, text):
     return body == decl_text(schema.tables[m.group(2)], schema.version)
 
 
+def is_schema_aux(rel):
+    """internal/carddb IsSchemaAux: schema/writers.tsv, the writer SLA registry. The one file under
+    schema/ that is neither VERSION nor a table declaration; freshness reads it, the validators allow it."""
+    return rel == SCHEMA_DIR + "/writers.tsv"
+
+
 class Schema:
     def __init__(self, version, tables, root):
         self.version = version

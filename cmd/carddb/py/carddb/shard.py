@@ -8,7 +8,8 @@ import datetime
 import os
 import re
 
-from .schema import EMPTY, PRIVATE, PUBLIC, is_schema_decl, is_schema_path
+from .schema import (EMPTY, PRIVATE, PRIVATE_TABLE_NAMES, PUBLIC, forbidden_field,
+                     is_schema_aux, is_schema_decl, is_schema_path)
 
 _INT = re.compile(r"^-?(0|[1-9][0-9]*)$")
 _DATE = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
@@ -124,13 +125,102 @@ def _clip(s):
 
 
 SHARD_PREFIX = "#carddb "
-NOT_DECL_MSG = ("not a schema declaration: only schema/VERSION and schema/v<N>/<table>.tsv (identical to the "
-                "trusted schema's declaration of that table) may live at or under schema/")
+NOT_DECL_MSG = ("not a schema declaration: only schema/VERSION, schema/v<N>/<table>.tsv (identical to the "
+                "trusted schema's declaration of that table) and schema/writers.tsv may live at or under schema/")
+
+# The one fixed shape of schema/writers.tsv. The header is compared exactly,
+# so the one non-declaration under schema/ cannot grow a column (or a column
+# named oracle_text / a private table) to park data the boundary refuses.
+WRITERS_HEADER = ("writer", "sla_hours", "tables", "doc")
+WRITERS_MAX_SLA_HOURS = (1 << 63) - 1
+_SLA_HOURS = re.compile(r"^[1-9][0-9]*$")
+_WRITERS_HEADER_RE = re.compile(r"#carddb-writers v[1-9][0-9]*")
+
+
+def parse_writers(rel, text, registry=None):
+    """(writers {writer: sla_hours}, violations) of schema/writers.tsv.
+
+    One parser for the validators (validate_tree) and the consumer
+    (query.load_writers), so a file one of them accepts cannot make the other
+    fail: the strict header, the strict positive-int SLA and the duplicate-writer
+    rule are enforced in exactly one place. When registry is a dict it also gets
+    {writer: (sla_hours, (table, ...), doc)} for each accepted row."""
+    out, writers, first_line = [], {}, {}
+
+    def add(line, msg):
+        out.append("%s:%d: %s" % (rel, line, msg) if line > 0 else "%s: %s" % (rel, msg))
+
+    if text == "":
+        add(0, "empty file")
+        return writers, out
+    if not text.endswith("\n"):
+        add(0, "does not end with a newline")
+    lines = (text[:-1] if text.endswith("\n") else text).split("\n")
+    if not _WRITERS_HEADER_RE.fullmatch(lines[0]):
+        add(1, "first line %r is not `#carddb-writers v<N>`" % _clip(lines[0]))
+        return writers, out
+    if len(lines) < 2:
+        add(0, "no column header line")
+        return writers, out
+    header = lines[1].split("\t")
+    for name in header:
+        if name == "":
+            add(2, "empty column name")
+        elif name in PRIVATE_TABLE_NAMES:
+            add(2, "column %r names a private table" % name)
+        elif forbidden_field(name):
+            add(2, "column %r is a forbidden field" % name)
+    if tuple(header) != WRITERS_HEADER:
+        add(2, "columns must be exactly %s" % ", ".join(WRITERS_HEADER))
+        return writers, out
+    w, h = header.index("writer"), header.index("sla_hours")
+    for i, line in enumerate(lines[2:], 3):
+        cells = line.split("\t")
+        if len(cells) != len(header):
+            add(i, "%d cells, want %d" % (len(cells), len(header)))
+            continue
+        writer = cells[w]
+        if writer == "":
+            add(i, "empty writer")
+            continue
+        if writer in first_line:
+            add(i, "duplicate writer %r (first at line %d)" % (writer, first_line[writer]))
+            continue
+        first_line[writer] = i
+        cell = cells[h]
+        if not _SLA_HOURS.fullmatch(cell):
+            add(i, "sla_hours %r is not a strict positive int" % _clip(cell))
+            continue
+        # Bound the digit count before int(): a huge cell would hit Python's
+        # int-conversion limit (a ValueError), where Go's ParseInt just says
+        # out of range. No leading zeros, so more digits than the max is over.
+        if len(cell) > len(str(WRITERS_MAX_SLA_HOURS)) or int(cell) > WRITERS_MAX_SLA_HOURS:
+            add(i, "sla_hours %r is out of range" % _clip(cell))
+            continue
+        writers[writer] = int(cell)
+        if registry is not None:
+            registry[writer] = (writers[writer],
+                                tuple(t for t in cells[header.index("tables")].split(",") if t),
+                                cells[header.index("doc")])
+    return writers, out
+
+
+def writers_violations(rel, text):
+    """Violations of the schema's writer SLA file. The one non-declaration under schema/ is a fixed
+    shape too, so it cannot become a place to park arbitrary (private) data."""
+    return parse_writers(rel, text)[1]
 
 
 def is_data_file(rel):
     """A data shard is a .tsv outside schema/ (internal/carddb Validate)."""
     return rel.endswith(".tsv") and not is_schema_path(rel)
+
+
+def read_text(path):
+    """A file's text exactly as the tree validators read it (UTF-8 with undecodable
+    bytes kept, no newline translation), so every consumer of one file sees one text."""
+    with open(path, encoding="utf-8", errors="surrogateescape", newline="") as f:
+        return f.read()
 
 
 def tree_files(root):
@@ -140,14 +230,16 @@ def tree_files(root):
         for fn in sorted(fns):
             p = os.path.join(dp, fn)
             if os.path.isfile(p) and not os.path.islink(p):
-                with open(p, encoding="utf-8", errors="surrogateescape", newline="") as f:
-                    yield os.path.relpath(p, root).replace(os.sep, "/"), f.read()
+                yield os.path.relpath(p, root).replace(os.sep, "/"), read_text(p)
 
 
 def validate_file(schema, scope, rel, text):
     """Violations of one file of a tree, as Go's Validate reports them for a file that stands alone:
-    a schema/ file must be a declaration, a non-.tsv file must not claim to be a shard, a .tsv is validated."""
+    a schema/ file must be a declaration (writers.tsv is the one config exception), a non-.tsv file
+    must not claim to be a shard, a .tsv is validated."""
     if is_schema_path(rel):
+        if is_schema_aux(rel):
+            return writers_violations(rel, text)
         return [] if is_schema_decl(schema, rel, text) else ["%s: %s" % (rel, NOT_DECL_MSG)]
     if not rel.endswith(".tsv"):
         return ["%s:1: carddb shard must be a .tsv file" % rel] if text.startswith(SHARD_PREFIX) else []

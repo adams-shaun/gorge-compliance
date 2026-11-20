@@ -442,6 +442,37 @@ func TestSchemaDirCannotSmuggle(t *testing.T) {
 	}
 }
 
+// schema/writers.tsv is the one config file allowed under schema/, and even
+// it has a fixed shape so it cannot hold arbitrary data.
+func TestWritersConfig(t *testing.T) {
+	s := loadReal(t)
+	root := validTree(t, s, Public)
+	header := "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n"
+	write(t, root, "schema/writers.tsv", header+"catalogue\t24\tcards\tfixture\n")
+	if vs, err := Validate(s, root, Public); err != nil || len(vs) != 0 {
+		t.Fatalf("writers config: %v %v", err, msgs(vs))
+	}
+	if vs, err := Boundary(s, root); err != nil || len(vs) != 0 {
+		t.Fatalf("writers config boundary: %v %v", err, msgs(vs))
+	}
+	for _, tc := range []struct{ name, body, want string }{
+		{"zero", header + "catalogue\tzero\tcards\tfixture\n", "strict positive int"},
+		{"plus", header + "catalogue\t+24\tcards\tfixture\n", "strict positive int"},
+		{"leading zero", header + "catalogue\t01\tcards\tfixture\n", "strict positive int"},
+		{"huge", header + "catalogue\t999999999999999999999\tcards\tfixture\n", "out of range"},
+		{"duplicate", header + "catalogue\t24\tcards\ta\ncatalogue\t36\tcards\tb\n", "duplicate writer"},
+		{"forbidden column", "#carddb-writers v1\nwriter\tsla_hours\ttables\toracle_text\ncatalogue\t24\tcards\tx\n", "forbidden field"},
+		{"private column", "#carddb-writers v1\nwriter\tsla_hours\ttables\ttext\ncatalogue\t24\tcards\tx\n", "private table"},
+		{"over wide", "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\textra\ncatalogue\t24\tcards\tfixture\tmore\n", "columns must be exactly"},
+	} {
+		write(t, root, "schema/writers.tsv", tc.body)
+		vs, err := Validate(s, root, Public)
+		mustFail(t, vs, err, tc.want)
+		vs, err = Boundary(s, root)
+		mustFail(t, vs, err, tc.want)
+	}
+}
+
 // realDecl is the committed declaration file of a table.
 func realDecl(t *testing.T, table string) string {
 	t.Helper()

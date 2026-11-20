@@ -9,6 +9,9 @@ curated inputs it is built from.
   values, labels_private, decks, cert_events, cert_runs) are declared so the
   boundary can name them and are never published.
 - `curated/*.tsv`: human-maintained inputs (header only until populated).
+- `schema/writers.tsv`: the registered writer ids and their SLA hours (columns `writer
+  sla_hours tables doc`). `carddb freshness` compares it with `_meta/writers`; it is
+  the one non-declaration the validators allow under `schema/`, and its shape is checked.
 
 A shard is `#carddb <table> v<N>`, a column-header line, then rows sorted
 bytewise by the key columns with unique keys. A cell is never empty (`-` is
@@ -41,9 +44,23 @@ the Python API is `import carddb` with `cmd/carddb/py` on the path.
 | `merge-driver %O %A %B %P` | the git driver `*.tsv merge=carddb` (registered in each clone's config) |
 | `build [--private] [--text FILE]` | SQLite from the shards + curated files + committed sources read from `origin/main` (`--ref`, or `--src-dir`) |
 | `proven [--db FILE] [--format tsv\|json\|count]` | the cards certification has proven (cert level C2 or C3, not excluded), from the clone or a built file's `proven` view |
-| `fetch [--private]` | `gh release download carddb-latest` into `$CARDDB_HOME` |
+| `fetch [--private]` | `gh release download carddb-latest` into `$CARDDB_HOME`, and record `carddb-latest.json` (public) or `carddb-private-latest.json` (`--private`) (`published_at`, `unresolved`) for `freshness` |
 | `compliance [--repo DIR] [--source ID] [--measured DATE]` | the compliance status writer: XMage manifests (`oracle/compliance/manifests/*.json`) + `FORGE_ORACLE_REF` -> `support` rows (xmage listed/unfinished/lacks_card; forge listed per corpus card), writer `ci` by default; existing `failing` rows (the farm override, CDB-14) are preserved; pass `--measured` (or set `CARDDB_NOW`) in CI for byte-identical reruns |
 | `validate`, `boundary` | the Python mirror of the Go checks (a parity test keeps them in step) |
+| `card <name\|oracle_id>` | every fact for one card: identity, printings, legality, status/evidence, cert, labels and relations (+ the private overlay's tables when the build has them) |
+| `search <fts> [--legal F] [--status K=V] [--set S] [--label L] [--marked]` | FTS5 over the built file, with legality/status/set/label filters |
+| `blockers --format F [--engine E] [--by printings\|decks]` | legal cards that are not covered, ranked by printings (public default) or real-deck counts (private default); digital and non-tournament-only cards are skipped |
+| `proven [--format F] [--level C2]` | cards whose `cert` level is at least the requested level (the cert-pinned proven view) |
+| `deck <id>` | a private deck's cards |
+| `freshness [--tick]` | writer SLAs from `schema/writers.tsv`, publish age, `carddb-latest` age, unresolved growth and packed data-branch size; `--tick` prints only `!!` lines |
+| `sql '<select>'` | read-only SQL (the file is opened `mode=ro` + `query_only`; only SELECT/WITH/EXPLAIN is accepted) |
+| `export <view> --tsv` | deterministic TSV naming the view and asset version (schema + gorge pin) |
+
+Read verbs take `--db FILE` (default `$CARDDB_HOME/carddb.sqlite`, or
+`carddb-private.sqlite` with `--private`) and open the file read-only. `freshness`
+also accepts `--asset-meta FILE` (default `$CARDDB_HOME/carddb-latest.json`, or `carddb-private-latest.json` with `--private`; keys
+`published_at` and optional `unresolved`), `--sla FILE`, `--now` and
+`--public-dir`.
 
 Env: `CARDDB_HOME` (default `~/.local/share/carddb`), `CARDDB_PUBLIC_REMOTE` (default the
 GitHub repo), `CARDDB_PRIVATE_REMOTE` (four-yay, required for the private store),
@@ -74,7 +91,8 @@ job's per-set row. Both carry the `gorge_sha` and `corpus_pin` they were measure
 private-only (`--private`) partitions for the job's exact event and run counts.
 
 `validate` and `boundary` (this tool's Python verbs, and the Go ones) walk every file but `.git`:
-a shard behind another extension is refused, `schema/` may hold only the schema's own declarations.
+a shard behind another extension is refused, `schema/` may hold only the schema's own declarations
+plus the fixed-shape `schema/writers.tsv` config.
 
 The SQLite file: one table per schema table (`/` and `-` become `_`), `card_names`
 (norm_name -> oracle_id), `card_fts` (FTS5 over name, type_line, keywords, labels; plus Oracle

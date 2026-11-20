@@ -39,7 +39,8 @@ var jsonFieldRe = regexp.MustCompile(`(?i)"(oracle_text|price[a-z0-9_]*|prims|ta
 // declarations (IsSchemaDecl: a table the trusted schema declares, whose
 // whole content equals that declaration) name private tables and columns, so
 // they are exempt from the table and field checks (not from the Forge-line
-// scan); any other file at or under SchemaDir is refused outright.
+// scan). The one config file, schema/writers.tsv, is allowed but its fixed
+// shape is checked; any other file at or under SchemaDir is refused outright.
 func Boundary(s *Schema, tree string) ([]Violation, error) {
 	files, err := treeFiles(tree)
 	if err != nil {
@@ -66,17 +67,22 @@ func boundaryFile(s *Schema, rel string, r io.Reader) ([]Violation, error) {
 	var out []Violation
 	add := func(line int, f string, a ...any) { out = append(out, Violation{rel, line, fmt.Sprintf(f, a...)}) }
 	decl := false
+	aux := IsSchemaAux(rel)
 	if isSchemaPath(rel) {
-		// a declaration is judged on its whole first lines, not a prefix
 		b, err := io.ReadAll(r)
 		if err != nil {
 			return nil, err
 		}
-		decl = IsSchemaDecl(s, rel, b)
+		if aux {
+			out = append(out, validateWriters(rel, b)...)
+		} else {
+			// a declaration is judged on its whole first lines, not a prefix
+			decl = IsSchemaDecl(s, rel, b)
+		}
 		r = bytes.NewReader(b)
 	}
 	br := bufio.NewReaderSize(r, 1<<16)
-	if isSchemaPath(rel) && !decl {
+	if isSchemaPath(rel) && !decl && !aux {
 		add(0, notDeclMsg)
 	}
 	data := !decl
@@ -110,7 +116,7 @@ func boundaryFile(s *Schema, rel string, r io.Reader) ([]Violation, error) {
 			}
 			// a .tsv is a shard from its first line; any other file is one
 			// from the first line that opens like a shard header
-			if data && ((isTSV && ln == 1) || (!isTSV && strings.HasPrefix(line, shardPrefix))) {
+			if data && !aux && ((isTSV && ln == 1) || (!isTSV && strings.HasPrefix(line, shardPrefix))) {
 				table, colsAt = headerTable(s, ln, line, add), ln+1
 			} else if data && ln == colsAt {
 				columnViolations(s, table, line, func(f string, a ...any) { add(ln, f, a...) })

@@ -23,7 +23,7 @@ import sqlite3
 import subprocess
 import tarfile
 
-from . import query, shard
+from . import shard
 from .boundary import boundary_tree
 from .norm import name_keys
 from .schema import PRIVATE, PUBLIC, repo_root
@@ -269,7 +269,10 @@ def _derived(conn, schema, texts):
             row.append(by_oid.get(oid, ""))
         conn.execute("INSERT INTO card_fts VALUES (%s)" % ",".join("?" * len(row)), row)
     conn.execute("CREATE INDEX idx_card_names_oracle_id ON card_names (oracle_id)")
-    conn.execute(query.PROVEN_VIEW_SQL)
+    # Imported here: query imports this module for `q`/`sql_name`, so a
+    # module-level import would be circular.
+    from .query import PROVEN_VIEW_SQL
+    conn.execute(PROVEN_VIEW_SQL)
 
 
 def dump_text(conn):
