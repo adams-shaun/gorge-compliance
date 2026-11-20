@@ -29,7 +29,7 @@ func runCertdeck(args []string) error {
 	dir := fs.String("cards", ".cards", "corpus dir")
 	manifests := fs.String("manifests", "oracle/compliance/manifests", "set manifests dir (the cards XMage lists, under the spelling it uses)")
 	target := fs.String("target", "", "the card to certify (required)")
-	need := fs.String("need", "auto", "auto, or comma-separated classes (class or class:arg): snow, type:Elf, counters[:P1P1], token[:treasure], graveyard, equipment, aura, bodies, life[:gain|total], artifacts, enchantments, lands, opp-attackers, opp-blockers, opp-targets:creature|artifact|enchantment|planeswalker|land|spell, opp-type:Elf, opp-burn")
+	need := fs.String("need", "auto", "auto, or comma-separated classes (class or class:arg): snow, type:Elf, counters[:P1P1], token[:treasure], graveyard, equipment, aura, bodies, life[:gain|total], artifacts, enchantments, lands, landtype:Forest, opp-attackers, opp-blockers, opp-targets:creature|artifact|enchantment|planeswalker|land|spell, opp-type:Elf, opp-landtype:Island, opp-burn")
 	out := fs.String("out", "", "output dir (required): target.json and opponent.json")
 	fs.Parse(args)
 	if *target == "" || *out == "" {

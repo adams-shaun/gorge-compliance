@@ -33,11 +33,13 @@ const (
 	Artifacts    = "artifacts"    // control N artifacts
 	Enchantments = "enchantments" // control N enchantments
 	Lands        = "lands"        // control N lands: ramp and a longer mana base
+	LandType     = "landtype"     // Arg: a land type the card names (Forest, Desert): basics of it, or lands with it
 
 	OppAttackers = "opp-attackers" // the card blocks: attackers to block
 	OppBlockers  = "opp-blockers"  // the card attacks: blockers to attack into
 	OppTargets   = "opp-targets"   // Arg: creature, artifact, enchantment, planeswalker, land or spell
 	OppType      = "opp-type"      // Arg: a creature type the card targets or counts on the other side
+	OppLandType  = "opp-landtype"  // Arg: a land type the card reads on the other side (Island): basics of it
 	OppBurn      = "opp-burn"      // damage that moves the target deck's life total
 )
 
@@ -47,7 +49,7 @@ var classOrder = map[string]int{}
 
 func init() {
 	for i, c := range []string{Snow, Type, Counters, Token, Graveyard, Equipment, Aura, Bodies, Life,
-		Artifacts, Enchantments, Lands, OppAttackers, OppBlockers, OppTargets, OppType, OppBurn} {
+		Artifacts, Enchantments, Lands, LandType, OppAttackers, OppBlockers, OppTargets, OppType, OppLandType, OppBurn} {
 		classOrder[c] = i
 	}
 }
@@ -88,8 +90,12 @@ func sortNeeds(ns []Need) []Need {
 type unit struct {
 	api, mode string
 	trigger   bool
+	event     string // a replacement effect's Event$
 	p         map[string]string
 }
+
+// repl is whether u is a replacement effect.
+func (u unit) repl() bool { return u.event != "" }
 
 // parseLine reads "DB$ Mill | Defined$ You | ..." or "Count$Valid Land.YouCtrl".
 func parseLine(s string) unit {
@@ -130,7 +136,7 @@ func unitsOf(c *cards.Card) []unit {
 			us = append(us, unit{mode: s.Mode, p: s.Params})
 		}
 		for _, r := range f.Repls {
-			us = append(us, unit{p: r.Params})
+			us = append(us, unit{event: r.Event, p: r.Params})
 		}
 		names := make([]string, 0, len(f.SVars))
 		for k := range f.SVars {
@@ -178,6 +184,40 @@ var coreTypes = map[string]bool{
 	"Ongoing": true, "Token": true,
 }
 
+// notCreatureTypes are subtypes of the other card types: a land (Forest,
+// Desert), an artifact (Equipment, Treasure), an enchantment (Aura, Saga) or a
+// spell (Arcane, Adventure). A Land Creature or an Artifact Creature prints
+// them next to its creature types and they must not read as creature types.
+var notCreatureTypes = map[string]bool{
+	"Plains": true, "Island": true, "Swamp": true, "Mountain": true, "Forest": true,
+	"Desert": true, "Gate": true, "Lair": true, "Locus": true, "Mine": true, "Power-Plant": true,
+	"Tower": true, "Cave": true, "Sphere": true, "Urza's": true,
+	"Equipment": true, "Vehicle": true, "Fortification": true, "Contraption": true, "Treasure": true,
+	"Food": true, "Clue": true, "Blood": true, "Gold": true, "Powerstone": true, "Map": true, "Junk": true,
+	"Aura": true, "Saga": true, "Curse": true, "Shrine": true, "Class": true, "Case": true, "Room": true,
+	"Background": true, "Role": true, "Arcane": true, "Trap": true, "Adventure": true, "Lesson": true,
+	"Siege": true, "Spacecraft": true, "Attraction": true,
+}
+
+// basicLandTypes are the five basic land types, in WUBRG order.
+var basicLandTypes = [5]string{"Plains", "Island", "Swamp", "Mountain", "Forest"}
+
+// otherLandTypes are the land subtypes a card may name that have no basic land.
+var otherLandTypes = map[string]bool{"Desert": true, "Gate": true, "Lair": true, "Locus": true, "Mine": true,
+	"Power-Plant": true, "Tower": true, "Cave": true, "Sphere": true, "Urza's": true}
+
+// basicIndex is the WUBRG index of a basic land type, or -1.
+func basicIndex(t string) int {
+	for i, b := range basicLandTypes {
+		if b == t {
+			return i
+		}
+	}
+	return -1
+}
+
+func isLandType(t string) bool { return basicIndex(t) >= 0 || otherLandTypes[t] }
+
 // CreatureTypes is every creature subtype some corpus card prints.
 func CreatureTypes(reg *cards.Registry) map[string]bool {
 	out := map[string]bool{}
@@ -187,7 +227,7 @@ func CreatureTypes(reg *cards.Registry) map[string]bool {
 				continue
 			}
 			for _, t := range f.Types {
-				if !coreTypes[t] {
+				if !coreTypes[t] && !notCreatureTypes[t] {
 					out[t] = true
 				}
 			}
@@ -202,6 +242,17 @@ func validKey(k string) bool {
 		k == "Count" || strings.HasPrefix(k, "Present") || strings.HasPrefix(k, "IsPresent")
 }
 
+// counterCostX reads a cost that removes counters from another object:
+// "SubCounter<1/P1P1/Creature.YouCtrl/a creature you control>". A cost with no
+// third field (or a self one) removes the card's own counters, a loyalty or
+// charge cost, and needs no partner.
+var counterCostX = regexp.MustCompile(`(?:SubCounter|RemoveAnyCounter)<[0-9X]+/([A-Za-z0-9]+)/([^/>]+)`)
+
+// descriptionKey is a parameter that holds English text, not a filter.
+func descriptionKey(k string) bool {
+	return strings.HasSuffix(k, "Description") || strings.HasSuffix(k, "Prompt") || k == "Name"
+}
+
 // Derive reads the needs of c from its script parameters and Oracle text. types
 // is CreatureTypes(reg). The result is sorted and has no duplicates.
 func Derive(c *cards.Card, types map[string]bool) []Need {
@@ -214,6 +265,7 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 	add := func(class, arg string) { ns = append(ns, Need{class, arg}) }
 
 	isEquipment, isAura := false, false
+	delve := false
 	for _, f := range c.Faces {
 		if f.HasTypeWord("Equipment") {
 			isEquipment = true
@@ -221,6 +273,8 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 		if f.HasTypeWord("Aura") {
 			isAura = true
 		}
+		// Delve, escape and dredge read the graveyard like a count does.
+		delve = delve || f.HasKeyword("Delve") || f.HasKeyword("Escape") || f.HasKeyword("Dredge")
 	}
 
 	if strings.Contains(oracle, "snow") || strings.Contains(oracle, "{s}") {
@@ -230,6 +284,7 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 	counterArg := ""
 	tokenKind := ""
 	var lifeGain, lifeTotal, graveyard, wantArt, wantEnch, wantLand, mentionsToken bool
+	var wantEquip, wantAura bool
 	var blocks, attacks bool
 	for _, u := range us {
 		if u.trigger {
@@ -244,8 +299,19 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 				counterArg = firstNonEmpty(counterArg, "P1P1")
 			}
 		}
-		if u.api == "Proliferate" || u.api == "MoveCounter" {
+		switch {
+		case u.event == "AddCounter" || u.event == "RemoveCounter":
+			// A counter replacement with no ValidCounterType (Winding
+			// Constrictor) reads every kind: the commonest stands in.
 			counterArg = firstNonEmpty(counterArg, "P1P1")
+		case u.event == "CreateToken":
+			mentionsToken = true
+		}
+		if u.api == "Proliferate" || u.api == "MoveCounter" || u.api == "ReplaceCounter" {
+			counterArg = firstNonEmpty(counterArg, "P1P1")
+		}
+		if u.api == "ReplaceToken" {
+			mentionsToken = true
 		}
 		if u.api == "Counter" || u.api == "CounterAbility" {
 			add(OppTargets, "spell")
@@ -254,6 +320,18 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 			v := u.p[k]
 			if k == "CounterType" && u.api != "PutCounter" && u.api != "PutCounterAll" {
 				counterArg = firstNonEmpty(counterArg, v)
+			}
+			if k == "ValidCounterType" {
+				counterArg = firstNonEmpty(counterArg, firstField(v))
+			}
+			if k == "Cost" {
+				if m := counterCostX.FindStringSubmatch(v); m != nil && m[1] != "LOYALTY" &&
+					!strings.HasPrefix(m[2], "CARDNAME") && !strings.HasPrefix(m[2], "Card.Self") {
+					counterArg = firstNonEmpty(counterArg, m[1])
+				}
+			}
+			if strings.HasPrefix(k, "ValidToken") {
+				mentionsToken = true
 			}
 			if validKey(k) && (strings.Contains(v, "ounters") || strings.Contains(v, "CardCounters")) {
 				arg := "P1P1"
@@ -265,6 +343,17 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 			if strings.Contains(v, "LifeTotal") || strings.Contains(k, "LifeTotal") {
 				lifeTotal = true
 			}
+			if !descriptionKey(k) {
+				// "Equipped"/"Enchanted" read the permanent a card is attached to:
+				// a card that is not itself one reads it for a partner.
+				for _, tok := range wordSplit.Split(v, -1) {
+					if l := strings.ToLower(tok); strings.HasPrefix(l, "equipped") {
+						wantEquip = true
+					} else if strings.HasPrefix(l, "enchanted") {
+						wantAura = true
+					}
+				}
+			}
 			if !validKey(k) {
 				continue
 			}
@@ -272,22 +361,36 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 				graveyard = true
 			}
 			tgt := strings.HasPrefix(k, "ValidTgts")
+			// A replacement's filter names what it applies to, not what the card
+			// needs to control (Winding Constrictor's Artifact.YouCtrl).
+			counts := !tgt && !u.repl()
 			for _, tok := range wordSplit.Split(v, -1) {
+				opp := strings.Contains(v, "OppCtrl") || strings.Contains(v, "Opponent")
 				switch {
-				case tok == "token":
+				case tok == "token" || tok == "Token" || tok == "Tokens":
 					mentionsToken = true
 				case tok == "Artifact":
-					wantArt = wantArt || (!tgt && strings.Contains(v, "YouCtrl"))
+					wantArt = wantArt || (counts && strings.Contains(v, "YouCtrl"))
 				case tok == "Enchantment":
-					wantEnch = wantEnch || (!tgt && strings.Contains(v, "YouCtrl"))
+					wantEnch = wantEnch || (counts && strings.Contains(v, "YouCtrl"))
 				case tok == "Land":
-					wantLand = wantLand || (!tgt && strings.Contains(v, "YouCtrl"))
+					wantLand = wantLand || (counts && strings.Contains(v, "YouCtrl"))
+				case tok == "Aura":
+					wantAura = wantAura || !tgt
+				case tok == "Equipment":
+					wantEquip = wantEquip || !tgt
+				case isLandType(tok):
+					// A land type names lands (a fetch, an untap), whoever's; only an
+					// explicit opposing filter puts the need on the other side.
+					if opp {
+						add(OppLandType, tok)
+					} else {
+						add(LandType, tok)
+					}
 				case tokenKinds[tok]:
 					tokenKind = firstNonEmpty(tokenKind, strings.ToLower(tok))
 				case types[tok]:
-					opp := strings.Contains(v, "OppCtrl") || strings.Contains(v, "Opponent") ||
-						(tgt && !strings.Contains(v, "YouCtrl"))
-					if opp {
+					if opp || (tgt && !strings.Contains(v, "YouCtrl")) {
 						add(OppType, tok)
 					} else {
 						add(Type, tok)
@@ -316,8 +419,8 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 			add(OppTargets, "spell")
 		}
 	}
-	if strings.Contains(oracle, "in your graveyard") || strings.Contains(oracle, "delirium") ||
-		strings.Contains(oracle, "threshold") || strings.Contains(oracle, "cards in your graveyard") {
+	if delve || strings.Contains(oracle, "in your graveyard") || strings.Contains(oracle, "from your graveyard") ||
+		strings.Contains(oracle, "delirium") || strings.Contains(oracle, "threshold") {
 		graveyard = true
 	}
 	if graveyard {
@@ -336,10 +439,10 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 	case isEquipment || isAura:
 		add(Bodies, "")
 	default:
-		if strings.Contains(oracle, "equipped") || strings.Contains(oracle, "equipment") {
+		if wantEquip {
 			add(Equipment, "")
 		}
-		if strings.Contains(oracle, "enchanted") || strings.Contains(oracle, " aura") {
+		if wantAura {
 			add(Aura, "")
 		}
 	}
@@ -366,6 +469,12 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 		add(Lands, "")
 	}
 	return sortNeeds(ns)
+}
+
+// firstField is the first of a comma-separated list ("P1P1,M1M1").
+func firstField(v string) string {
+	f, _, _ := strings.Cut(v, ",")
+	return strings.TrimSpace(f)
 }
 
 var lifeThresholdX = regexp.MustCompile(`\d+ or (more|less|fewer) life|life total is|your life total|have \d+ or more life`)
@@ -407,7 +516,7 @@ func ParseNeeds(spec string, c *cards.Card, types map[string]bool) ([]Need, erro
 		if class == Life && arg == "total" {
 			ns = append(ns, Need{OppBurn, ""})
 		}
-		if (class == Type || class == OppType || class == OppTargets) && arg == "" {
+		if (class == Type || class == OppType || class == OppTargets || class == LandType || class == OppLandType) && arg == "" {
 			return nil, &UnknownNeedError{part + " (needs :arg)"}
 		}
 	}

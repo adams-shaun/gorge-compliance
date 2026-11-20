@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
+	"math/bits"
 	"sort"
 	"strings"
 
@@ -174,7 +175,10 @@ func (b *Builder) Build(target string, needs []Need) (*Plan, error) {
 	if xm, ok := b.Sp.XMage(b.Reg, name); !ok {
 		return nil, fmt.Errorf("certdeck: XMage lists no card %q", name)
 	} else if xm != name {
-		return nil, fmt.Errorf("certdeck: XMage spells %q as %q", name, xm)
+		// A split, adventure or Room card: XMage lists it under every face
+		// ("Cut // Ribbons") and `play -decks -xmage` skips a deck that names
+		// the front face alone, so no deck can seat it there.
+		return nil, fmt.Errorf("certdeck: XMage spells %q as %q (a multi-face card is skipped by play -decks -xmage)", name, xm)
 	}
 	if needs == nil {
 		needs = Derive(tc, b.types)
@@ -185,6 +189,9 @@ func (b *Builder) Build(target string, needs []Need) (*Plan, error) {
 
 	// The target deck.
 	selfMask := tf.identity
+	if selfMask == 0 { // a colourless card plays the colours of the basics it names
+		selfMask = landTypeColours(needs, LandType)
+	}
 	if selfMask == 0 {
 		selfMask = 1 << (rankKey(name, "colour") % 5)
 	}
@@ -254,7 +261,12 @@ func (b *Builder) assemble(target, salt string, mask uint8, needs []Need, fixed 
 
 	// Round-robin over the needs, a candidate at a time.
 	lists := make([][]cand, len(needs))
+	var forced [5]int // basics a land-type need puts in the mana base
 	for i, n := range needs {
+		if (n.Class == LandType || n.Class == OppLandType) && basicIndex(n.Arg) >= 0 {
+			forced[basicIndex(n.Arg)] = 1
+			continue
+		}
 		lists[i] = b.candidates(salt, n, mask)
 	}
 	slots, next := 0, make([]int, len(needs))
@@ -273,6 +285,9 @@ func (b *Builder) assemble(target, salt string, mask uint8, needs []Need, fixed 
 				cp := enablerCopies
 				if b.facts(c).f.IsLegendary() {
 					cp = 1
+				}
+				if left := MaxEnablerSlots - slots; cp > left {
+					cp = left // the last slot of the twelve takes one copy, not two
 				}
 				exclude[c] = true
 				chosen[c] = cp
@@ -368,6 +383,33 @@ func (b *Builder) assemble(target, salt string, mask uint8, needs []Need, fixed 
 	for c, n := range chosen {
 		entries[b.facts(c).name] += n
 	}
+	// A land-type need (a fetch land's Mountain, an untap-a-Forest) holds basics
+	// of that type whatever the colours, up to six each.
+	nForced := 0
+	for _, f := range forced {
+		nForced += f
+	}
+	if nForced > 0 {
+		per := (lands - bits.OnesCount8(mask)) / nForced
+		if per > 6 {
+			per = 6
+		}
+		if per < 1 {
+			per = 1
+		}
+		for i := range forced {
+			if forced[i] > 0 {
+				forced[i] = per
+				lands -= per
+				entries[basics[i]] += per
+			}
+		}
+		for _, n := range needs {
+			if (n.Class == LandType || n.Class == OppLandType) && basicIndex(n.Arg) >= 0 {
+				d.Provided[n.String()] = []string{basics[basicIndex(n.Arg)]}
+			}
+		}
+	}
 	for i, n := range apportion(pips, mask, lands) {
 		if n > 0 {
 			entries[basics[i]] += n
@@ -416,7 +458,7 @@ func apportion(pips [5]int, mask uint8, n int) [5]int {
 		rems = append(rems, rem{i, n * w[i] % total})
 	}
 	sort.SliceStable(rems, func(a, b int) bool { return rems[a].r > rems[b].r })
-	for k := 0; left != 0 && len(rems) > 0; k++ {
+	for k := 0; left != 0 && len(rems) > 0 && k < 4*len(rems)*(n+1); k++ {
 		r := rems[k%len(rems)]
 		if left > 0 {
 			out[r.i]++
@@ -455,6 +497,20 @@ func manaPips(cost string) [5]int {
 	return p
 }
 
+// landTypeColours is the colours of the basic land types the needs of class
+// name (LandType or OppLandType).
+func landTypeColours(needs []Need, class string) uint8 {
+	var m uint8
+	for _, n := range needs {
+		if n.Class == class {
+			if i := basicIndex(n.Arg); i >= 0 {
+				m |= 1 << i
+			}
+		}
+	}
+	return m
+}
+
 // opponentColours is the colour pair for the opponent's deck: the pair of the
 // ten that has the most candidates for its needs (each need counted up to the
 // slots it can use), ties and an empty need list broken by a hash of the
@@ -483,6 +539,11 @@ func (b *Builder) opponentColours(target string, selfMask uint8, needs []Need) u
 				}
 			}
 			score += n
+		}
+		for i := range colourLetters {
+			if landTypeColours(needs, OppLandType)&(1<<i) != 0 && p&(1<<i) != 0 {
+				score += 6 // the basics it must hold are this colour's
+			}
 		}
 		if p == selfMask {
 			score--
@@ -535,8 +596,11 @@ func supplies(x *facts, n Need) bool {
 	case Type, OppType:
 		return f.IsCreature() && x.has(n.Arg)
 	case Counters:
-		return nonLand && x.api("PutCounter", func(u unit) bool { return u.p["CounterType"] == n.Arg }) &&
-			!x.api("PutCounter", func(u unit) bool { return u.p["Defined"] == "Opponent" })
+		puts := func(u unit) bool { return u.p["CounterType"] == n.Arg && u.p["Defined"] != "Opponent" }
+		if p, ok := f.KeywordParam("etbCounter"); ok && strings.HasPrefix(p, n.Arg+":") {
+			return nonLand
+		}
+		return nonLand && (x.api("PutCounter", puts) || x.api("PutCounterAll", puts))
 	case Token:
 		return nonLand && x.api("Token", func(u unit) bool {
 			if o := u.p["TokenOwner"]; o == "Opponent" || o == "Targeted" {
@@ -551,7 +615,14 @@ func supplies(x *facts, n Need) bool {
 	case Equipment:
 		return x.has("Equipment") && x.cmc <= 3
 	case Aura:
-		return x.has("Aura") && x.cmc <= 3 && f.HasKeyword("Enchant:Creature")
+		// K:Enchant:Creature: the head is Enchant, the parameter what it enchants.
+		p, _ := f.KeywordParam("Enchant")
+		return x.has("Aura") && x.cmc <= 3 && strings.Contains(p, "Creature") &&
+			!strings.Contains(p, "OppCtrl") && !strings.Contains(p, "Opponent")
+	case LandType, OppLandType:
+		// A basic land type is the mana base's (see assemble); another land
+		// type is a land that has it.
+		return basicIndex(n.Arg) < 0 && f.IsLand() && !f.IsBasic() && x.has(n.Arg)
 	case Bodies:
 		return f.IsCreature() && x.cmc <= 3
 	case Life:

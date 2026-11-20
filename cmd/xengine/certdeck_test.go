@@ -61,6 +61,39 @@ func deckCount(f deck.File, pred func(name string) bool) int {
 	return n
 }
 
+// enablerCopies is the copies a deck holds of cards picked for a need: the
+// provided cards, each counted once, excluding the basic lands a land-type
+// need names (those are the mana base's).
+func enablerCopies(d certdeck.Deck) int {
+	cnt := map[string]int{}
+	for _, e := range d.File.Cards {
+		cnt[e.Name] = e.Count
+	}
+	seen := map[string]bool{}
+	total := 0
+	for _, k := range sortedProvidedKeys(d) {
+		if strings.HasPrefix(k, "landtype:") || strings.HasPrefix(k, "opp-landtype:") {
+			continue
+		}
+		for _, n := range d.Provided[k] {
+			if !seen[n] {
+				seen[n] = true
+				total += cnt[n]
+			}
+		}
+	}
+	return total
+}
+
+func sortedProvidedKeys(d certdeck.Deck) []string {
+	ks := make([]string, 0, len(d.Provided))
+	for k := range d.Provided {
+		ks = append(ks, k)
+	}
+	sort.Strings(ks)
+	return ks
+}
+
 // The need classes a card's script and Oracle text imply decide what its two
 // decks hold, and the same corpus and target give byte-identical files.
 func TestCertdeckNeeds(t *testing.T) {
@@ -168,6 +201,114 @@ func TestCertdeckNeeds(t *testing.T) {
 		}
 	}
 
+	// The five classes the brief names that read other keys than the obvious:
+	// each card derives its need and the deck holds a provider for it.
+	for _, tc := range []struct {
+		card string
+		need certdeck.Need
+	}{
+		{"Kor Spiritdancer", certdeck.Need{Class: certdeck.Aura}},
+		{"Hardened Scales", certdeck.Need{Class: certdeck.Counters, Arg: "P1P1"}},     // R:Event$ AddCounter | ValidCounterType$
+		{"Corpsejack Menace", certdeck.Need{Class: certdeck.Counters, Arg: "P1P1"}},   // DB$ ReplaceCounter
+		{"Winding Constrictor", certdeck.Need{Class: certdeck.Counters, Arg: "P1P1"}}, // no counter type at all
+		{"Korozda Gorgon", certdeck.Need{Class: certdeck.Counters, Arg: "P1P1"}},      // Cost$ SubCounter<1/P1P1/Creature.YouCtrl/...>
+		{"Anointed Procession", certdeck.Need{Class: certdeck.Token}},                 // R:Event$ CreateToken
+		{"Doubling Season", certdeck.Need{Class: certdeck.Token}},
+		{"Treasure Cruise", certdeck.Need{Class: certdeck.Graveyard}}, // K:Delve
+		{"Gurmag Angler", certdeck.Need{Class: certdeck.Graveyard}},
+	} {
+		p := certdeckPlan(t, b, tc.card)
+		if !hasNeed(p, tc.need) {
+			t.Errorf("%s needs %v, want %v", tc.card, p.Needs, tc.need)
+			continue
+		}
+		if len(p.Self.Provided[tc.need.String()]) == 0 {
+			t.Errorf("%s: no provider for %v", tc.card, tc.need)
+		}
+	}
+	// The aura is in the deck file, and is an Aura that enchants a creature.
+	p = certdeckPlan(t, b, "Kor Spiritdancer")
+	if auras := p.Self.Provided["aura"]; len(auras) == 0 {
+		t.Errorf("Kor Spiritdancer has no auras: %v", p.Self.Provided)
+	} else {
+		inDeck := map[string]bool{}
+		for _, e := range p.Self.File.Cards {
+			inDeck[e.Name] = true
+		}
+		for _, n := range auras {
+			if f := face(n); !f.HasTypeWord("Aura") || !inDeck[n] {
+				t.Errorf("aura %s: Aura %v in target.json %v", n, f.HasTypeWord("Aura"), inDeck[n])
+			}
+		}
+	}
+	// A replacement's Artifact.YouCtrl is what it applies to, not a need to control artifacts.
+	if p := certdeckPlan(t, b, "Winding Constrictor"); hasNeed(p, certdeck.Need{Class: certdeck.Artifacts}) {
+		t.Errorf("Winding Constrictor needs %v: the replacement filter is no artifacts need", p.Needs)
+	}
+	// The card's own name is no Aura mention.
+	if p := certdeckPlan(t, b, "Aura of Silence"); hasNeed(p, certdeck.Need{Class: certdeck.Aura}) {
+		t.Errorf("Aura of Silence needs %v: its name is no aura need", p.Needs)
+	}
+
+	// A land type is a land's, not a creature's: a fetch land names the basics
+	// it fetches and the deck holds them; an untap-a-Forest creature wants Forests.
+	for _, tc := range []struct {
+		card   string
+		basics []string
+	}{
+		{"Arid Mesa", []string{"Mountain", "Plains"}},
+		{"Bloodstained Mire", []string{"Swamp", "Mountain"}},
+		{"Krosan Verge", []string{"Forest", "Plains"}},
+		{"Arbor Elf", []string{"Forest"}},
+	} {
+		p := certdeckPlan(t, b, tc.card)
+		for _, n := range p.Needs {
+			if n.Class == certdeck.Type || n.Class == certdeck.OppType {
+				t.Errorf("%s derives creature need %v from a land type", tc.card, n)
+			}
+		}
+		for _, basic := range tc.basics {
+			if !hasNeed(p, certdeck.Need{Class: certdeck.LandType, Arg: basic}) {
+				t.Errorf("%s needs %v, want landtype:%s", tc.card, p.Needs, basic)
+			}
+			if n := deckCount(p.Self.File, func(s string) bool { return s == basic }); n < 4 {
+				t.Errorf("%s: %d %s in the target deck, want at least 4", tc.card, n, basic)
+			}
+		}
+	}
+	// Land Creatures (Jasconian Isle, Gobland, Dryad Arbor) print land types
+	// next to their creature types; the creature types keep the creature ones.
+	for _, lt := range []string{"Plains", "Island", "Swamp", "Mountain", "Forest", "Desert"} {
+		if b.Types()[lt] {
+			t.Errorf("CreatureTypes holds the land type %s", lt)
+		}
+	}
+	for _, ct := range []string{"Fish", "Goblin", "Dryad"} {
+		if !b.Types()[ct] {
+			t.Errorf("CreatureTypes lost the creature type %s", ct)
+		}
+	}
+
+	// The twelve enabler slots are a cap: no deck, on either side, holds more
+	// than twelve copies of cards picked for a need (Candles of Leng held 13).
+	for _, target := range []string{"Candles of Leng", "Icehide Troll", "Elvish Archdruid", "Kor Spiritdancer", "Hardened Scales", "Treasure Cruise"} {
+		p := certdeckPlan(t, b, target)
+		for _, side := range []struct {
+			name string
+			d    certdeck.Deck
+		}{{"target", p.Self}, {"opponent", p.Opponent}} {
+			if n := enablerCopies(side.d); n > certdeck.MaxEnablerSlots {
+				t.Errorf("%s %s deck holds %d enabler copies, want at most %d", target, side.name, n, certdeck.MaxEnablerSlots)
+			}
+		}
+	}
+
+	// A split card is refused with the reason (XMage lists "Cut // Ribbons"
+	// and play -decks -xmage skips a deck that names the front face).
+	if _, err := b.Build("Cut", nil); err == nil || !strings.Contains(err.Error(), "XMage spells") {
+		t.Errorf("Build(Cut) = %v, want the XMage spelling refusal", err)
+	}
+
 	// A legendary target is one copy.
 	p = certdeckPlan(t, b, "Ashaya, Soul of the Wild")
 	if n := deckCount(p.Self.File, func(s string) bool { return s == p.Target }); n != 1 {
@@ -184,9 +325,11 @@ func TestCertdeckNeeds(t *testing.T) {
 	}
 }
 
-// The decks of 20 sampled cards with a partner need (spread over the classes,
-// in name order) all load under play -decks, with XMage's spellings checked,
-// and none is skipped.
+// The decks of 20 distinct sampled cards with a partner need (spread over the
+// classes, in name order) all load under play -decks, with XMage's spellings
+// checked, none is skipped, and every need a card derives has a card in the
+// deck that supplies it. (No list of the stuck cards is in the repo: the
+// sample is every playable card whose script derives a need.)
 func TestCertdeckPlayable(t *testing.T) {
 	reg, b := certdeckBuilder(t)
 	byClass := map[string][]string{}
@@ -198,6 +341,11 @@ func TestCertdeckPlayable(t *testing.T) {
 		if len(ns) == 0 {
 			continue
 		}
+		// A counter type no other card puts (a card's own TIME or UNITY
+		// counters) has no partner to supply; certdeck reports it UNMET.
+		if ns[0].Class == certdeck.Counters && ns[0].Arg != "P1P1" {
+			continue
+		}
 		byClass[ns[0].Class] = append(byClass[ns[0].Class], c.Faces[0].Name)
 	}
 	classes := make([]string, 0, len(byClass))
@@ -206,29 +354,40 @@ func TestCertdeckPlayable(t *testing.T) {
 		classes = append(classes, k)
 	}
 	sort.Strings(classes)
+	seen := map[string]bool{}
 	var sample []string
-	for i := 0; len(sample) < 20 && len(classes) > 0; i++ {
+	for i := 0; len(sample) < 20 && i < 1000; i++ {
 		for _, k := range classes {
-			if l := byClass[k]; len(l) > 0 && len(sample) < 20 {
-				sample = append(sample, l[(i*7919)%len(l)])
+			l := byClass[k]
+			if len(l) == 0 || len(sample) == 20 {
+				continue
+			}
+			if n := l[(i*7919)%len(l)]; !seen[n] {
+				seen[n] = true
+				sample = append(sample, n)
 			}
 		}
 	}
 	if len(sample) != 20 {
-		t.Fatalf("sampled %d cards, want 20 (classes %v)", len(sample), classes)
+		t.Fatalf("sampled %d distinct cards, want 20 (classes %v)", len(sample), classes)
 	}
 	sp, err := decks.LoadSpellings(manifestDir)
 	if err != nil {
 		t.Fatal(err)
 	}
-	seen := map[string]bool{}
 	for _, name := range sample {
-		if seen[name] {
-			continue
+		plan := certdeckPlan(t, b, name)
+		for _, n := range plan.Needs {
+			d := plan.Self
+			if certdeck.OppSide(n.Class) {
+				d = plan.Opponent
+			}
+			if len(d.Provided[n.String()]) == 0 {
+				t.Errorf("%s: need %v has no provider in its deck", name, n)
+			}
 		}
-		seen[name] = true
 		dir := t.TempDir()
-		if err := writeCertdeckPlan(dir, certdeckPlan(t, b, name)); err != nil {
+		if err := writeCertdeckPlan(dir, plan); err != nil {
 			t.Fatal(err)
 		}
 		ds, info, err := loadDeckDir(reg, dir, sp)
