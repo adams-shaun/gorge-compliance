@@ -1,0 +1,71 @@
+{
+ "card": "Animate Dead",
+ "family": "keywords",
+ "author": "Oracle + CR only",
+ "oracle_sha": "64f8459aa105",
+ "scenarios": [
+  {
+   "name": "returns-an-opponents-creature-under-your-control-with-minus-one-power",
+   "cr": [
+    "303.4f",
+    "603.6a",
+    "613.4c",
+    "110.2a"
+   ],
+   "why": "Oracle: Enchant creature card in a graveyard. When Animate Dead enters, return enchanted creature card to the battlefield under your control and attach Animate Dead to it; enchanted creature gets -1/-0. p0 casts it on Hill Giant (3/3) in p1's graveyard: the Giant returns under p0's control as a 2/3 with Animate Dead attached, on p0's battlefield.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Animate Dead"
+     ]
+    },
+    "p1": {
+     "graveyard": [
+      "Hill Giant"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Animate Dead",
+     "mana": "CB",
+     "targets": [
+      "p1:Hill Giant"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Hill Giant",
+     "zone": "battlefield",
+     "pt": "2/3"
+    },
+    {
+     "card": "p0:Animate Dead",
+     "zone": "battlefield"
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Hill Giant"
+     },
+     "eq": 1
+    },
+    {
+     "count": {
+      "seat": 1,
+      "zone": "battlefield",
+      "name": "Hill Giant"
+     },
+     "eq": 0
+    }
+   ]
+  }
+ ]
+}

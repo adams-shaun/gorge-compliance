@@ -1,0 +1,54 @@
+{
+ "card": "Library of Leng",
+ "family": "keywords",
+ "author": "Oracle + CR only",
+ "oracle_sha": "e75c3cd8abb3",
+ "scenarios": [
+  {
+   "name": "no-maximum-hand-size",
+   "cr": [
+    "402.2",
+    "514.1"
+   ],
+   "why": "Oracle: You have no maximum hand size. p0 ends the turn with nine cards in hand and so would discard two at the cleanup step (514.1); with Library of Leng on the battlefield p0 discards none and keeps all nine.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Library of Leng"
+     ],
+     "hand": [
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains"
+     ]
+    },
+    "p1": {}
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "end",
+     "active": "p1"
+    }
+   ],
+   "expect": [
+    {
+     "hand_size": {
+      "p0": 9
+     }
+    },
+    {
+     "graveyard_size": {
+      "p0": 0
+     }
+    }
+   ]
+  }
+ ]
+}
