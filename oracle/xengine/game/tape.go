@@ -97,6 +97,9 @@ type Entry struct {
 	Payment  string    `json:"payment,omitempty"`
 	Announce string    `json:"announce,omitempty"`
 	Mana     []ManaRec `json:"mana,omitempty"`
+	// Triggers are the triggered abilities committing this intent put on the
+	// stack, in log order (see Trig). Followers never read it.
+	Triggers []Trig `json:"triggers,omitempty"`
 	// Spent is the pool mana the commit actually spent, as WUBRGC letters
 	// in the engine's emission order: one letter per unit. The engine logs a
 	// negative ManaAdd per spent unit (plain, tagged or snow Counter), which
@@ -201,7 +204,12 @@ type Pick struct {
 	// the oracle runner's scenario refs do ("p0:Forest#2", "p1:token:Soldier"),
 	// in the live game's seat numbering, as of the moment the decision was
 	// posed. Empty when the object has no ref (or the field is unset).
-	Ref         string `json:"ref,omitempty"`
+	Ref string `json:"ref,omitempty"`
+	// Card and Face name an "ability" pick's source when it is not on its
+	// front face: the card's front-face name and the live face index the
+	// Ability index counts in. Absent for a front face.
+	Card        string `json:"card,omitempty"`
+	Face        int    `json:"face,omitempty"`
 	AttackerRef string `json:"attacker_ref,omitempty"`
 	BattleRef   string `json:"battle_ref,omitempty"`
 }
@@ -217,10 +225,28 @@ type ManaRec struct {
 	Ability int         `json:"ability"`
 	// Ref is the source's runner ref when the ability fired (see Pick.Ref).
 	Ref string `json:"ref,omitempty"`
+	// Card and Face name the source when it is not on its front face: the
+	// card's front-face name (Name is the live face's) and the live face
+	// index Ability counts in. Absent for a front face (see Pick.Card).
+	Card string `json:"card,omitempty"`
+	Face int    `json:"face,omitempty"`
 	// Produced is the mana the activation added, as WUBRGC letters in the
 	// order they were added (best effort: read from the ManaAdd events logged
 	// before the next activation or decision).
 	Produced string `json:"produced,omitempty"`
+}
+
+// Trig is one triggered ability that went on the stack: a TriggerPush event
+// of gorge's log. Name is the source card's front-face name (the registry
+// key), Face its face index in the card's Faces and Index the index into that
+// face's Triggers, the numbering cov.Inventory keys use (f<Face>/t<Index>). A
+// trigger whose source is a copy or a merged pile, or that the log does not
+// pin to a printed line, is not recorded. Obj is the source object.
+type Trig struct {
+	Obj   state.ObjID `json:"obj"`
+	Name  string      `json:"name"`
+	Face  int         `json:"face,omitempty"`
+	Index int         `json:"index"`
 }
 
 // Outcome is how the game ended. Stall is "" for a finished game, otherwise

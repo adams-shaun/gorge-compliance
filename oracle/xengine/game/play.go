@@ -208,6 +208,8 @@ type recorder struct {
 	rollScan  int    // how far of e.L.Events the die rolls were read
 	manaScan  int    // how far of e.L.Events the open mana record's Produced was read
 	spendScan int    // how far of e.L.Events the spent mana was read
+	trigScan  int    // how far of e.L.Events the trigger pushes were read
+	trigs     []Trig // triggers put on the stack since the last flush
 	spent     string // pool mana spent since the last flush, one letter per unit
 	refs      *refBinder
 	started   bool     // Starter is set
@@ -230,6 +232,7 @@ func (r *recorder) setup(e *rules.Engine) {
 			}
 		}
 		rec.Ref = r.refs.refOf(e, source)
+		rec.Card, rec.Face = backFace(e.G.Obj(source))
 		r.closeMana(e)
 		r.mana = append(r.mana, rec)
 		r.manaScan = len(e.L.Events)
@@ -273,6 +276,11 @@ func (r *recorder) flush(e *rules.Engine) {
 			r.rolls = append(r.rolls, Roll{Seat: int(roller), Sides: int(sides), Natural: int(natural), Result: int(result)})
 		}
 	}
+	for ; r.trigScan < len(evs); r.trigScan++ {
+		if t, ok := trigOf(e, evs[r.trigScan]); ok {
+			r.trigs = append(r.trigs, t)
+		}
+	}
 	seat := -1
 	if n := len(r.t.Entries); n > 0 {
 		seat = r.t.Entries[n-1].Seat
@@ -300,10 +308,57 @@ func (r *recorder) flush(e *rules.Engine) {
 	if n := len(r.t.Entries); n > 0 {
 		last := &r.t.Entries[n-1]
 		last.Mana, last.Spent, last.RNG, last.Flips, last.Rolls = r.mana, r.spent, draws, r.flips, r.rolls
+		last.Triggers = r.trigs
 	} else {
 		r.t.GenesisMana, r.t.GenesisRNG = r.mana, draws
 	}
-	r.mana, r.spent, r.flips, r.rolls = nil, "", nil, nil
+	r.mana, r.spent, r.flips, r.rolls, r.trigs = nil, "", nil, nil, nil
+}
+
+// trigOf reads one log event as a trigger push: Amount names the trigger's
+// face and index (events.TriggerPushFaceAmount). It reports false for any
+// other event, and for a push it cannot pin to a printed line of a registered
+// card: a copy's face, a merged pile's under-card, a left-copy trigger, or
+// the layer-granted Dethrone sentinel.
+func trigOf(e *rules.Engine, ev events.Event) (Trig, bool) {
+	if ev.Kind != events.TriggerPush {
+		return Trig{}, false
+	}
+	src := e.G.Obj(ev.Obj)
+	if src == nil || src.Card == nil || len(src.Card.Faces) == 0 || src.Card.Faces[0] == nil ||
+		src.CopyFace != nil || len(src.MergedCards) > 0 {
+		return Trig{}, false
+	}
+	code, idx, ok := events.MergedTriggerIndexes(ev.Amount)
+	if !ok {
+		return Trig{}, false
+	}
+	front, _, _ := events.MergedTriggerIndexes(events.TriggerPushFaceAmount(0, 0))
+	left, _, _ := events.MergedTriggerIndexes(events.TriggerPushLeftCopyAmount(0))
+	face := code
+	switch code {
+	case 0: // a plain index names the live face
+		face = int(src.FaceIdx)
+	case front:
+		face = 0
+	case left:
+		return Trig{}, false
+	}
+	if face >= len(src.Card.Faces) {
+		return Trig{}, false
+	}
+	return Trig{Obj: ev.Obj, Name: src.Card.Faces[0].Name, Face: face, Index: idx}, true
+}
+
+// backFace is the front-face name and live face index of an object showing a
+// face other than its card's front, "" and 0 otherwise (and for a copy, whose
+// face is not the card's).
+func backFace(o *state.Object) (string, int) {
+	if o == nil || o.Card == nil || o.FaceIdx == 0 || o.CopyFace != nil ||
+		len(o.Card.Faces) == 0 || o.Card.Faces[0] == nil {
+		return "", 0
+	}
+	return o.Card.Faces[0].Name, int(o.FaceIdx)
 }
 
 // flipStatics is which seats controlled the coin-flip statics when one
@@ -517,7 +572,7 @@ func (r *recorder) submit(e *rules.Engine, seatIdx int, d *decision.Decision, in
 }
 
 func (r *recorder) pickOf(e *rules.Engine, o decision.Option) Pick {
-	return Pick{
+	p := Pick{
 		Index: o.Index, Kind: o.Kind, Obj: o.Obj, Ability: o.Ability, Mode: o.Mode,
 		AltCost: o.AltCostIndex, Attacker: o.Attacker, Player: int(o.Player), Battle: o.Battle,
 		Label: o.Label, Ref: r.refs.refOf(e, o.Obj), AttackerRef: r.refs.refOf(e, o.Attacker),
@@ -525,6 +580,10 @@ func (r *recorder) pickOf(e *rules.Engine, o decision.Option) Pick {
 		SVar:      o.SVar, Keyword: o.Keyword,
 		GrantSource: o.GrantSource, GainedSource: o.GainedSource, GainedIdx: o.GainedIdx,
 	}
+	if o.Kind == "ability" && e != nil {
+		p.Card, p.Face = backFace(e.G.Obj(o.Obj))
+	}
+	return p
 }
 
 // actionPick is the cast a payment action names: its base priority option
