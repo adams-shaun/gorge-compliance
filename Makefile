@@ -26,8 +26,8 @@ MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
-# Forge oracle driver commit (fork, branch oracle-untap-upto-noop-pick): a descendant of
-# FORGE_REF with identical script trees.
+# Forge oracle driver commit (fork, branch oracle-controlled-player-mana, based on
+# oracle-untap-upto-noop-pick): a descendant of FORGE_REF with identical script trees.
 # d2939e9b61 = 7f287e888f (below) + MyRandom's counting wrapper forwards bounded
 # nextInt(bound) to the supplied generator: at 7f287e888f the wrapper routed it through
 # next(bits), which calls the delegate's UNBOUNDED nextInt(), so ForcedDieRandom.nextInt(bound)
@@ -57,7 +57,19 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # tap/untap/sacrifice/discard up-to pick absent from Forge's candidates can no
 # longer change the board. Same cardsfolder and tokenscripts trees as
 # FORGE_REF 418ba5215f.
-FORGE_ORACLE_REF ?= b33362f6004458d1509a7f44a87dcbe279f56040
+# 2aff202bc9 = b33362f600 + a play/cast that happens while a spell resolves
+# pays from the sidecar's named decider's own sources when the pool is short:
+# Word of Command's Play of the chosen card (CR 723.2, 723.5a, 723.7, 701.18b)
+# and every Play with Controller$ TargetedPlayer/TriggeredPlayer that casts
+# during its own resolution (Spell Queller's RememberedOwner cast). The resolve
+# arm arms the decider from its "play" decision and the payment hook activates
+# that player's own mana abilities in zone order; Forge's CantBeActivated
+# statics still filter them. The hook consumes the play decision on both the
+# shortfall and the pool-covered paths, so a recorded play that the pool
+# already pays for cannot leave a leftover decision. A cast with no such
+# decision keeps paying from the recorded pool. Same cardsfolder and
+# tokenscripts trees as FORGE_REF 418ba5215f.
+FORGE_ORACLE_REF ?= 2aff202bc94b9d508e5dfe2b97617c4ad98f81aa
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
