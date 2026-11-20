@@ -1,0 +1,6 @@
+#carddb-schema evidence v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	cards.oracle_id
+source	string	yes	yes	public	Reference the evidence comes from (oracle, xmage, forge, mtgish)
+ref	string	yes	yes	public	Scenario or test id within the source
+outcome	string	yes	no	public	Outcome: agree, diverge, unconsumed

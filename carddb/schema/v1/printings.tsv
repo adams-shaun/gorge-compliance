@@ -1,0 +1,8 @@
+#carddb-schema printings v1
+name	type	required	key	visibility	doc
+printing_id	string	yes	yes	public	MTGJSON printing uuid
+oracle_id	string	yes	no	public	cards.oracle_id of the card printed
+set_code	string	yes	no	public	sets.set_code
+collector_number	string	yes	no	public	Collector number as printed
+rarity	string	yes	no	public	common, uncommon, rare, mythic, special, bonus
+released	date	no	no	public	Release date of this printing, YYYY-MM-DD

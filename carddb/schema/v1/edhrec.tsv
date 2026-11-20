@@ -1,0 +1,4 @@
+#carddb-schema edhrec v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	private	cards.oracle_id
+edhrec_rank	int	no	no	private	EDHREC rank

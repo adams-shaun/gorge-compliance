@@ -1,0 +1,5 @@
+#carddb-schema decks v1
+name	type	required	key	visibility	doc
+deck_id	string	yes	yes	private	Deck id
+oracle_id	string	yes	yes	private	cards.oracle_id
+count	int	yes	no	private	Copies

@@ -1,0 +1,7 @@
+#carddb-schema sets v1
+name	type	required	key	visibility	doc
+set_code	string	yes	yes	public	Lower-case set code
+name	string	yes	no	public	Set name
+release_date	date	yes	no	public	Set release date, YYYY-MM-DD
+set_type	string	yes	no	public	Set type (core, expansion, masters, ...)
+parent_code	string	no	no	public	Parent set code, for a child set

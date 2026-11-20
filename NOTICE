@@ -29,6 +29,22 @@ it is never vendored or committed. Its card data (derived from MTGJSON, MIT) is
 downloaded at run time into PHASE_ORACLE_DIR, outside the repository, and is
 never committed.
 
+The carddb data set (carddb/, cmd/carddb, internal/carddb) is derived from
+MTGJSON (https://mtgjson.com), distributed under the MIT License (full text
+below): card, printing, set and legality facts are taken from MTGJSON at the
+version recorded in the data set's _meta/sources table. The schema has
+no public field for card rules (Oracle) text, prices, tagger tags or EDHREC
+data, and the public boundary check (cmd/carddb boundary) rejects any public
+table, column, field or path named for them, any file under schema/ that is not
+a schema declaration, and any Forge-script-shaped line. It checks names and
+shapes, not the values of free-form cells; the data set's writers are
+responsible for what they put in public columns.
+
+Fan Content Policy: this project is unofficial Fan Content permitted under the
+Wizards of the Coast Fan Content Policy. Not approved/endorsed by Wizards.
+Portions of the materials used are property of Wizards of the Coast.
+(c) Wizards of the Coast LLC.
+
 Forge (https://github.com/Card-Forge/forge) card scripts, token scripts and
 every Forge artifact are GPL-3.0 and are NEVER committed to this repository.
 The corpus is read at run time from a gitignored .cards link to gorge's
@@ -71,6 +87,30 @@ mtgish (https://github.com/i5jb/mtgish):
   MIT License
 
   Copyright (c) 2018 - 2026 mtgish team
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+MTGJSON (https://mtgjson.com):
+
+  MIT License
+
+  Copyright (c) 2016 - 2026 the MTGJSON contributors
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal

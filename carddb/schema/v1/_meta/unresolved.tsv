@@ -1,0 +1,5 @@
+#carddb-schema _meta/unresolved v1
+name	type	required	key	visibility	doc
+kind	string	yes	yes	public	What could not be resolved (card, printing, set)
+ref	string	yes	yes	public	The unresolved reference
+reason	string	yes	no	public	Why it is unresolved

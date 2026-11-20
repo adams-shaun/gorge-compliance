@@ -1,0 +1,10 @@
+#carddb-schema cards v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	Oracle id (MTGJSON identifiers.scryfallOracleId); one row per card
+name	string	yes	no	public	Card name, identification only
+layout	string	yes	no	public	Card layout (normal, split, transform, ...)
+mana_cost	string	no	no	public	Printed mana cost, e.g. {2}{U}{U}
+mana_value	int	yes	no	public	Mana value
+type_line	string	yes	no	public	Type line
+colors	list	no	no	public	Colour letters, comma separated
+color_identity	list	no	no	public	Colour identity letters, comma separated

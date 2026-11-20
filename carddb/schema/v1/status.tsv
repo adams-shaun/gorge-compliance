@@ -1,0 +1,7 @@
+#carddb-schema status v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	cards.oracle_id
+level	string	yes	yes	public	Compliance level: A or B
+verdict	string	yes	no	public	Verdict at the pin
+gorge_pin	string	yes	no	public	gorge commit the verdict is measured at
+measured	date	yes	no	public	Date measured, YYYY-MM-DD

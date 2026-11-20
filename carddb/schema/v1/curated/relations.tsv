@@ -1,0 +1,5 @@
+#carddb-schema curated/relations v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	cards.oracle_id
+relation	string	yes	yes	public	Relation kind (reprint-of, companion-of, ...)
+other_oracle_id	string	yes	yes	public	cards.oracle_id of the related card

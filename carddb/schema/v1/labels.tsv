@@ -1,0 +1,5 @@
+#carddb-schema labels v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	cards.oracle_id
+label	string	yes	yes	public	Label name
+origin	string	yes	no	public	Where the label came from (curated, derived)
