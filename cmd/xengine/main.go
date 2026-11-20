@@ -15,6 +15,7 @@
 //	xengine pool -set S [-legal FORMAT -mtgjson S.json.gz] [-out FILE]
 //	xengine followers
 //	xengine fshadow -log GAME.jsonl [-out DIR] [-game ID] [-max-decisions N]
+//	xengine certdeck -cards .cards -target "<name>" [-need auto|<class,...>] -out DIR
 //
 // play writes DIR/tapes/*.json (every game's tape), DIR/items.jsonl (the
 // follower input: only the items whose lowering gorge's own runner
@@ -23,7 +24,7 @@
 // (the ledger with Exercised credited); -tape-turns N,... adds each tape cut
 // at the end of turn N (id ...:tape:t<N>); -random draws the decks across sets, ignoring
 // the ledger; -pool FILE draws them from a card list alone (DIR/pool.json records
-// the pool and -pool-filter used); -decks DIR plays two different fixed deck
+// the pool, its "# supp" identity and -pool-filter used); -decks DIR plays two different fixed deck
 // files of DIR per game, main deck only (DIR/decks.json records each deck, its
 // sha256 and whether it is playable or why not); -dirac plays each game a dirac table holds in lockstep first and replays
 // gorge's answers as the game, with DIR/dirac.jsonl saying how each went. diff compares a follower's rows with
@@ -67,7 +68,7 @@ const DefaultRoot = ".oracle-build/xengine"
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|diagnosed|calib|xprep|adjudicate|sweep-plan|pool|followers|fshadow [flags]")
+		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|diagnosed|calib|xprep|adjudicate|sweep-plan|pool|followers|fshadow|certdeck [flags]")
 		os.Exit(2)
 	}
 	var err error
@@ -94,8 +95,10 @@ func main() {
 		err = runFollowers(os.Args[2:])
 	case "fshadow":
 		err = runFShadow(os.Args[2:])
+	case "certdeck":
+		err = runCertdeck(os.Args[2:])
 	default:
-		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, diagnosed, calib, xprep, adjudicate, sweep-plan, pool, followers or fshadow)", os.Args[1])
+		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, diagnosed, calib, xprep, adjudicate, sweep-plan, pool, followers, fshadow or certdeck)", os.Args[1])
 	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "xengine:", err)

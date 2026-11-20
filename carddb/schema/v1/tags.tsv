@@ -1,0 +1,5 @@
+#carddb-schema tags v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	private	cards.oracle_id
+tag	string	yes	yes	private	Tagger tag
+tagger	string	no	no	private	Tagger source

@@ -1,0 +1,6 @@
+#carddb-schema _meta/sources v1
+name	type	required	key	visibility	doc
+source	string	yes	yes	public	Upstream source name
+version	string	yes	no	public	Version or commit of the source
+retrieved	date	yes	no	public	Date retrieved, YYYY-MM-DD
+licence	string	yes	no	public	SPDX licence id of the source data

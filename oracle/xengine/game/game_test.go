@@ -598,3 +598,24 @@ func TestMarkFlipDrawsDoubler(t *testing.T) {
 		t.Fatalf("doubler changed in the entry: %+v, want one draw", changed[0])
 	}
 }
+
+// TestPlayRecordsTriggers: a played game's tape carries the triggered
+// abilities that went on the stack, each naming a real f<face>/t<i> line of a
+// card in a deck.
+func TestPlayRecordsTriggers(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	tp := play(t, reg, pairs[0], 1, Options{})
+	n := 0
+	for _, e := range tp.Entries {
+		for _, tr := range e.Triggers {
+			n++
+			c, ok := reg.Lookup(tr.Name)
+			if !ok || tr.Face >= len(c.Faces) || tr.Index >= len(c.Faces[tr.Face].Triggers) {
+				t.Errorf("trigger %+v names no printed trigger", tr)
+			}
+		}
+	}
+	if n == 0 {
+		t.Error("a whole game recorded no triggered ability")
+	}
+}
