@@ -175,8 +175,10 @@ type Step struct {
 	// Ability selects an `activate` option by its label (the runner's
 	// oracleStep.Ability): a special action the engine offers under its own
 	// option kind, such as a Room's "Unlock <door name>", has no IR ability
-	// index. Empty on every existing step, so existing items are
-	// byte-identical.
+	// index; a granted, gained or keyword-granted activated ability (an
+	// AddAbilities$/AddAbility$/GainsAbilitiesOf$/AddKeyword$ grant) has an
+	// index that aliases a printed one, so the lowering writes the engine's
+	// offered option label beside it. Empty on every other step.
 	Ability string `json:"ability,omitempty"`
 	// A scenario step may move a card into a zone; the move op stamps the
 	// object as having entered this turn (a board-history target such as

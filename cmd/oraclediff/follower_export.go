@@ -119,8 +119,14 @@ type neutralAbility struct {
 	// Ordinal is the ability's 0-based index among the face's abilities of
 	// the same class, in script order. Left out for an ability a keyword
 	// line mints (Equip, Cycling, ...): its place in the Oracle text is not
-	// the script's, so Keyword names it instead.
+	// the script's, so Keyword names it instead. Also left out for a
+	// granted/gained ability, which is not on the recipient's face at all;
+	// Granted marks that case.
 	Ordinal *int `json:"ordinal,omitempty"`
+	// Granted marks a granted, gained or keyword-granted ability: the step
+	// names it by the engine's offered label (Step.Ability), not by the
+	// recipient face's printed index, so it has no face-relative ordinal.
+	Granted bool `json:"granted,omitempty"`
 	// Keyword is the keyword line ("Equip:2") a minted ability comes from.
 	Keyword string `json:"keyword,omitempty"`
 	// Cost is the activation cost: mana symbols braced and run together
@@ -431,6 +437,25 @@ func neutralFor(reg *cards.Registry, rq forgeRequest, g rules.OracleResult, c ce
 			continue
 		}
 		c.add("ability.steps")
+		// Resolve the grant identity before the printed index: a granted
+		// step's index aliases a printed one, and a pre-fix item carries no
+		// Step.Ability label but does carry gorge's recorded pick. An
+		// unresolved granted pick is omitted even when the pre-fix step has
+		// no label: the aliased printed index is not its identity.
+		switch sa, kind := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); kind {
+		case oraclegen.ActivatedGranted:
+			if a, ok := neutralGrantedAbilityOf(sa, c); ok {
+				n.Ability[strconv.Itoa(i)] = a
+			}
+			continue
+		case oraclegen.ActivatedGrantedUnresolved:
+			c.add("ability.omit:granted_unresolved")
+			continue
+		}
+		if st.Ability != "" {
+			c.add("ability.omit:granted_unresolved")
+			continue
+		}
 		f := forgeAbilityFace(reg, it, st, g, i)
 		if f == nil {
 			c.add("ability.omit:face_unresolved")
@@ -519,6 +544,28 @@ func neutralAbilityOf(f *cards.Face, k int, c census) (neutralAbility, bool) {
 		a.Ordinal = &ord
 		c.add("ability.ordinal")
 	}
+	neutralAbilityBody(sa, class, &a, c)
+	return a, true
+}
+
+// neutralGrantedAbilityOf is a granted/gained ability by class, cost, text
+// and production, with no ordinal: the ability is not on the recipient's
+// face, so no face-relative ordinal exists.
+func neutralGrantedAbilityOf(sa *cards.SA, c census) (neutralAbility, bool) {
+	class, why := abilityClass(sa)
+	if class == "" {
+		c.add("ability.omit:" + why)
+		return neutralAbility{}, false
+	}
+	a := neutralAbility{Class: class, Granted: true}
+	c.add("ability.class")
+	c.add("ability.ordinal_omit:granted")
+	neutralAbilityBody(sa, class, &a, c)
+	return a, true
+}
+
+// neutralAbilityBody fills a's cost, text and production from sa's class.
+func neutralAbilityBody(sa *cards.SA, class string, a *neutralAbility, c census) {
 	if cost, ok := neutralCost(sa.ParamStr(cards.PKCost)); ok {
 		a.Cost = cost
 		c.add("ability.cost")
@@ -545,7 +592,6 @@ func neutralAbilityOf(f *cards.Face, k int, c census) (neutralAbility, bool) {
 			c.add("ability.produces_omit:unmodelled")
 		}
 	}
-	return a, true
 }
 
 // tilde replaces Forge's CARDNAME self-reference with "~".
