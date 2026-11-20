@@ -211,14 +211,18 @@ class Archive(BuiltFixture, Base):
                          sorted(cards.column("oracle_id").to_pylist()))
         self.assertEqual(cards.schema.field("mana_value").type, pyarrow.int64())
         self.assertEqual(cards.schema.field("name").type, pyarrow.string())
-        # deterministic: same db, same bytes (the manifest names the asset, so
-        # the second export goes to the same path and the first is copied);
-        # a changed db, different bytes
-        copy = os.path.join(self.tmp, "first.tar.gz")
-        os.replace(out, copy)
-        out2 = os.path.join(self.tmp, "carddb-parquet.tar.gz")
+        # deterministic: same db, same parquet bytes even to a different
+        # basename (the gzip header must not name the output path; only the
+        # manifest's asset field, which is designed to name the archive,
+        # differs); a changed db, different bytes
+        out2 = os.path.join(self.tmp, "other-name.tar.gz")
         parquet_export.export(db, out2)
-        self.assertEqual(sha(copy), sha(out2))
+        m1, m2 = read_archive(out), read_archive(out2)
+        j1 = json.loads(m1.pop("MANIFEST.json").decode())
+        j2 = json.loads(m2.pop("MANIFEST.json").decode())
+        self.assertEqual(m1, m2)
+        j2["asset"] = j1["asset"]
+        self.assertEqual(j1, j2)
         conn.execute("INSERT INTO build_meta VALUES ('extra', 'row')")
         conn.commit()
         conn.close()
@@ -286,7 +290,7 @@ class GzipMeta(Base):
         with open(out, "rb") as f:
             header = f.read(10)
         self.assertEqual(int.from_bytes(header[4:8], "little"), 0)  # gzip mtime: no wall clock
-        self.assertEqual(header[8] & 8, 0)  # no gzip name field
+        self.assertEqual(header[3], 0)  # FLG: no FNAME field naming the output
         with tarfile.open(out, mode="r:gz") as tf:
             for m in tf.getmembers():
                 self.assertEqual(m.mtime, 0)

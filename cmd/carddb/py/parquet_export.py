@@ -148,7 +148,9 @@ def _sha256(path):
 def _tar_gz(out, work):
     """A deterministic gzip tar of work/: sorted members, zeroed metadata, mtime 0."""
     with open(out, "wb") as raw:
-        with gzip.GzipFile(fileobj=raw, mode="wb", compresslevel=9, mtime=0) as gz:
+        # filename="" so the gzip header carries no FNAME field: the bytes
+        # depend on the db alone, not on the output path.
+        with gzip.GzipFile(fileobj=raw, mode="wb", compresslevel=9, mtime=0, filename="") as gz:
             with tarfile.open(fileobj=gz, mode="w", format=tarfile.GNU_FORMAT) as tf:
                 for fn in sorted(os.listdir(work)):
                     p = os.path.join(work, fn)
@@ -168,33 +170,35 @@ def _ro_conn(db):
     return conn
 
 
-def export(db, out, batch=BATCH, out_=None):
+def export(db, out, batch=BATCH):
     """The archive at out from the built file db. -> the manifest document."""
     if not os.path.isfile(db):
         raise ExportError("no built database at %s" % db)
-    work = (out_ or out) + ".work"
+    work = out + ".work"
     shutil.rmtree(work, ignore_errors=True)
     os.makedirs(work, exist_ok=True)
-    conn = _ro_conn(db)
     try:
-        tables = data_objects(conn)
-        if not tables:
-            raise ExportError("%s has no ordinary tables to export" % db)
-        entries = []
-        for kind, name in tables:
-            p = os.path.join(work, name + ".parquet")
-            rows, cols = write_object(conn, name, kind, p, batch)
-            entries.append({"kind": kind, "name": name, "rows": rows, "sha256": _sha256(p),
-                            "columns": [{"name": n, "type": t} for n, t in cols]})
-        manifest = {"asset": os.path.basename(out), "tables": entries}
-        mpath = os.path.join(work, "MANIFEST.json")
-        with open(mpath, "w", encoding="utf-8") as f:
-            json.dump(manifest, f, sort_keys=True)
-            f.write("\n")
-        _tar_gz(out, work)
+        conn = _ro_conn(db)
+        try:
+            tables = data_objects(conn)
+            if not tables:
+                raise ExportError("%s has no ordinary tables to export" % db)
+            entries = []
+            for kind, name in tables:
+                p = os.path.join(work, name + ".parquet")
+                rows, cols = write_object(conn, name, kind, p, batch)
+                entries.append({"kind": kind, "name": name, "rows": rows, "sha256": _sha256(p),
+                                "columns": [{"name": n, "type": t} for n, t in cols]})
+            manifest = {"asset": os.path.basename(out), "tables": entries}
+            mpath = os.path.join(work, "MANIFEST.json")
+            with open(mpath, "w", encoding="utf-8") as f:
+                json.dump(manifest, f, sort_keys=True)
+                f.write("\n")
+            _tar_gz(out, work)
+        finally:
+            conn.close()
     finally:
-        conn.close()
-    shutil.rmtree(work, ignore_errors=True)
+        shutil.rmtree(work, ignore_errors=True)
     return manifest
 
 
