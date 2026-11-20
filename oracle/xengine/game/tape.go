@@ -166,6 +166,15 @@ type Roll struct {
 // missing field is index 0, as in gorge), Attacker the attacked creature of a
 // block option, Player the defending or targeted seat, Battle the attacked
 // battle/planeswalker.
+//
+// SVar, GrantSource, GainedSource, GainedIdx and Keyword carry a granted or
+// gained ability's identity (decision.Option's same-named anchors, mirrored
+// from decision to tape): the option is not the card's printed
+// Face.Abilities[Ability] — for an SVar grant Ability is the zero value, for a
+// keyword grant it is -1 — so the lowering and the follower exporters need
+// the grant identity (and the offered Label beside it) to name the right
+// ability. Absent on every printed-ability pick, so existing tapes
+// serialise byte-identically.
 type Pick struct {
 	Index    int         `json:"index"`
 	Kind     string      `json:"kind"`
@@ -177,6 +186,17 @@ type Pick struct {
 	Player   int         `json:"player"`
 	Battle   state.ObjID `json:"battle,omitempty"`
 	Label    string      `json:"label,omitempty"`
+	SVar     string      `json:"svar,omitempty"`
+	Keyword  string      `json:"keyword,omitempty"`
+	// GrantSource, GainedSource and GainedIdx are the decision.Option
+	// anchors of an SVar-granted (AddAbilities$/AddAbility$) and a
+	// gained (GainsAbilitiesOf$) ability: the grantor object and, for a
+	// gained ability, the index into its face's Abilities. Zero-valued
+	// on every other option. Keyword is the derived keyword line
+	// ("Cycling:1 U") a layer-6 AddKeyword$ grant offered.
+	GrantSource  state.ObjID `json:"grant_source,omitempty"`
+	GainedSource state.ObjID `json:"gained_source,omitempty"`
+	GainedIdx    int         `json:"gained_idx,omitempty"`
 	// Ref, AttackerRef and BattleRef name Obj, Attacker and Battle the way
 	// the oracle runner's scenario refs do ("p0:Forest#2", "p1:token:Soldier"),
 	// in the live game's seat numbering, as of the moment the decision was

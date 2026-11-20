@@ -123,7 +123,7 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 	if why != "" {
 		return it, refuse(it.ID, ReasonModeCollision, "%s", why)
 	}
-	abilities, ref := prefixes(reg, it)
+	abilities, ref := prefixes(reg, it, g)
 	if ref != nil {
 		return it, ref
 	}
@@ -740,6 +740,21 @@ func refName(ref string) (string, bool) {
 	return n, n != ""
 }
 
+// abilitySourceName is the face name an activate step's card ref names,
+// including a token ref's face ("p0:token:Soldier#2" -> "Soldier"). It is the
+// sourceName XMageGrantedAbilityPrefix rewrites a self-referential cost with.
+func abilitySourceName(st oraclegen.Step) string {
+	n := st.Card
+	if i := strings.IndexByte(n, ':'); i >= 2 && n[0] == 'p' && strings.Trim(n[1:i], "0123456789") == "" {
+		n = n[i+1:]
+	}
+	n = strings.TrimPrefix(n, "token:")
+	if j := strings.LastIndexByte(n, '#'); j >= 0 && j+1 < len(n) && strings.Trim(n[j+1:], "0123456789") == "" {
+		n = n[:j]
+	}
+	return n
+}
+
 // CardNames is every card name the item's setup and steps hold, sorted: the
 // names a follower must have in its card database. A player ref, a token ref
 // ("pN:token:Name") and an ability ref are not cards.
@@ -950,7 +965,14 @@ func modeNumbers(reg *cards.Registry, it oraclegen.Item, ds []rules.OracleDecisi
 // of every activate step's ability and of a cast step that is the Plot special
 // action, and "" elsewhere (nil when no step carries one). An activate step
 // whose prefix is unknown is a Refusal.
-func prefixes(reg *cards.Registry, it oraclegen.Item) ([]string, *Refusal) {
+//
+// A granted/gained/keyword-granted step is resolved through the same
+// oraclegen.ResolveActivatedAbility forge-export and the neutral exporter use,
+// and its prefix is derived from the resolved *cards.SA: the printed face's
+// XMage text would select the wrong ability (the index aliases printed 0 for
+// an SVar grant). A step whose label resolves to no grant still refuses rather
+// than shipping the printed prefix.
+func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]string, *Refusal) {
 	type key struct {
 		card string
 		face int
@@ -978,6 +1000,23 @@ func prefixes(reg *cards.Registry, it oraclegen.Item) ([]string, *Refusal) {
 		}
 		if st.Op != "activate" {
 			continue
+		}
+		switch sa, kind := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); kind {
+		case oraclegen.ActivatedGranted:
+			p, ok := oraclegen.XMageGrantedAbilityPrefix(sa, abilitySourceName(st))
+			if !ok {
+				return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q by granted-ability label %q, whose XMage rule text is unknown", i, st.Card, st.Ability)
+			}
+			if out == nil {
+				out = make([]string, len(it.Steps))
+			}
+			out[i] = p
+			continue
+		case oraclegen.ActivatedGrantedUnresolved:
+			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q by a granted-ability label that resolves to no unique grant", i, st.Card)
+		}
+		if st.Ability != "" {
+			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q by granted-ability label %q, which resolves to no grant", i, st.Card, st.Ability)
 		}
 		if st.AbilityIndex == nil {
 			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q by label %q, which names no ability index", i, st.Card, st.Ability)

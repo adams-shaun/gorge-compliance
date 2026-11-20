@@ -1228,7 +1228,20 @@ func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.Ma
 			return append(taps, oraclegen.Step{Op: "cast", Seat: seat, Card: m.ref(pk.Ref), CastMode: mode}), nil
 		}
 		k := pk.Ability
-		return append(taps, oraclegen.Step{Op: "activate", Seat: seat, Card: m.ref(pk.Ref), AbilityIndex: &k}), nil
+		st := oraclegen.Step{Op: "activate", Seat: seat, Card: m.ref(pk.Ref), AbilityIndex: &k}
+		// A granted, gained or keyword-granted ability's pick is not the
+		// card's printed Face.Abilities[k] (for an SVar grant k aliases
+		// printed index 0, for a keyword grant k is -1), so the step also
+		// carries the engine's offered label: the runner matches it with
+		// oracleLabelMatches beside the index, and the follower exporters
+		// resolve the ability by it instead of exporting the printed
+		// index's line (Dalakos's {T} mana ability aliasing Dragon
+		// Mantle's granted {R} pump). The label is the engine's own text,
+		// so a printed pick keeps its index-only step byte-identical.
+		if pk.SVar != "" || pk.Keyword != "" || pk.GrantSource != 0 || pk.GainedSource != 0 {
+			st.Ability = pk.Label
+		}
+		return append(taps, st), nil
 	case "activate":
 		// "Activate <card> for mana": the entry's own mana record is the
 		// ability, which the runner finds by its index.

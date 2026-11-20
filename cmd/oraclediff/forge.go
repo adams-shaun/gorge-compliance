@@ -600,7 +600,20 @@ func forgeDropNamedManaAbilityDecisions(reg *cards.Registry, it oraclegen.Item, 
 	}
 	named := map[int]namedManaAbility{}
 	for i, st := range it.Steps {
+		// A granted step's ability is resolved by its grant identity, not
+		// the printed index's ability: dropping a wheel decision against
+		// the printed face could only drop the WRONG wheel. Resolve first
+		// so a pre-fix item (no Step.Ability label) is covered too. A
+		// label-bearing step that does not resolve is still not a printed
+		// mana activation, so it is skipped rather than anchored on the
+		// aliased index.
 		if st.Op != "activate" || st.AbilityIndex == nil || st.Card == "" {
+			continue
+		}
+		if _, kind := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); kind != oraclegen.ActivatedPrinted {
+			continue
+		}
+		if st.Ability != "" {
 			continue
 		}
 		if f := forgeAbilityFace(reg, it, st, g, i); f != nil {
@@ -684,9 +697,31 @@ func (a namedManaAbility) drops(d rules.OracleDecision) bool {
 // and the Forge result cache stays valid. A step that still does not resolve
 // is left out: the driver then falls back to its own matching rather than
 // trusting a wrong line.
+//
+// A label-bearing step names a granted/gained/keyword option; its aliased
+// AbilityIndex must never be exported as the printed ability. If the grant
+// does not resolve, the step is omitted (fail closed) instead of falling
+// back to the printed index -- the silent wrong export this resolver exists
+// to remove.
 func forgeAbilityLines(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) map[string]string {
 	lines := map[string]string{}
 	for i, st := range it.Steps {
+		// A granted/gained/keyword step's identity is its grant, not the
+		// printed index (which aliases printed ability 0 for an SVar
+		// grant); a pre-fix item with no label is resolved from gorge's
+		// recorded pick. A printed pick keeps the index-only path
+		// byte-identical; an unresolved granted pick is omitted even when
+		// the pre-fix step carries no label.
+		switch sa, kind := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); kind {
+		case oraclegen.ActivatedGranted:
+			lines[strconv.Itoa(i)] = sa.Line
+			continue
+		case oraclegen.ActivatedGrantedUnresolved:
+			continue
+		}
+		if st.Ability != "" {
+			continue
+		}
 		if f := forgeAbilityFace(reg, it, st, g, i); f != nil {
 			line, _ := abilityLine(f, *st.AbilityIndex)
 			lines[strconv.Itoa(i)] = line

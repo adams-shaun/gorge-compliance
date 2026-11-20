@@ -296,7 +296,8 @@ present, and a field that can't be derived is left out, never guessed.
 | Field | Meaning |
 |---|---|
 | `class` | `mana`, `activated`, `loyalty` or `intrinsic_mana` (a basic land's CR 305.6 ability) |
-| `ordinal` | 0-based position among the card face's abilities **of the same class**, in script order. Absent for an ability made from a keyword line |
+| `ordinal` | 0-based position among the card face's abilities **of the same class**, in script order. Absent for an ability made from a keyword line and for a granted ability (`granted` is set) |
+| `granted` | `true` when the step names a granted, gained or keyword-granted ability by its engine label rather than by the recipient face's printed index. Such an ability is not on the recipient's face, so it has no `ordinal`; identify it by `class`, `cost` and `text` instead |
 | `keyword` | For an ability made from a keyword line, the keyword and its cost, for example `"Equip:1"`. Its position in the Oracle text isn't known, so it has no ordinal |
 | `cost` | Normalised: mana symbols braced and run together (`{2}{W}`), then `{T}` or `{Q}`, loyalty as `+N` or `-N`, other parts in Forge's spelling with `~` for the card's name, joined with `, ` |
 | `text` | The ability's description, with `~`. Absent for `intrinsic_mana` |
@@ -308,6 +309,7 @@ Real examples from an FDN sweep:
 {"class": "intrinsic_mana", "ordinal": 0, "cost": "{T}", "produces": "W"}
 {"class": "activated", "ordinal": 0, "cost": "{T}, AddCounter<1/PAGE>", "text": "Scry 1."}
 {"class": "activated", "keyword": "Equip:1", "cost": "{1}", "text": "Equip 1"}
+{"class": "activated", "granted": true, "cost": "{R}", "text": "~ gets +1/+0 until end of turn."}
 ```
 
 Match the class and ordinal first, then check the text. Forge script order follows the Oracle text for
