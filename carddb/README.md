@@ -8,7 +8,9 @@ curated inputs it is built from.
   list`. Tables whose every column is `private` (text, tags, edhrec, prims,
   values, labels_private, decks, cert_events, cert_runs) are declared so the
   boundary can name them and are never published.
-- `curated/*.tsv`: human-maintained inputs (header only until populated).
+- `curated/*.tsv`: human-maintained inputs. `game-changers` and `bracket-flags` are
+  seeded from the published WotC lists with a `source` URL and `cited` date per row;
+  a human reviews a change to them.
 - `schema/writers.tsv`: the registered writer ids and their SLA hours (columns `writer
   sla_hours tables doc`). `carddb freshness` compares it with `_meta/writers`; it is
   the one non-declaration the validators allow under `schema/`, and its shape is checked.
@@ -39,10 +41,11 @@ the Python API is `import carddb` with `cmd/carddb/py` on the path.
 | verb | does |
 |---|---|
 | `init [--private]` | clone `$CARDDB_HOME/public` (branch `carddb`) or `private` (`carddb-private`), or create the orphan branch when the remote has none |
-| `put TABLE [--source ID] [--version V] < rows.tsv` | flock, merge rows by key into the touched shards, validate + boundary, update `_meta/writers`, `git add`. stdin: a column-name line then rows. A rerun changes no byte. `carddb.put(table, rows, writer=...)` is the API |
+| `put TABLE [--source ID] [--version V] < rows.tsv` | flock, merge rows by key into the touched shards, validate + boundary, update `_meta/writers`, `git add`. stdin: a column-name line then rows. A rerun changes no byte. `carddb.put(table, rows, writer=...)` is the API; `replace=True` writes a full snapshot (keys the batch does not name are deleted) |
+| `ingest catalogue --mtgjson FILE` | MTGJSON AllPrintings (plain or `.json.gz`) -> the `cards`, `printings`, `sets`, `legality` and `faces` tables as a full snapshot, then cross-check every `oracle/compliance/manifests/*.json` set card list (reported, never overwritten). No Oracle text is written: `cards.oracle_sha` is the full sha256 of the normalised text. `--manifests DIR` (empty disables) and `--source ID` override the defaults |
 | `publish [--bulk] [--private]` | one commit `carddb: <writers> <n> rows @<gorge12>`, rebase onto the remote branch, push fast-forward; refuses over 50000 changed lines without `--bulk`; no-op when nothing is staged |
 | `merge-driver %O %A %B %P` | the git driver `*.tsv merge=carddb` (registered in each clone's config) |
-| `build [--private] [--text FILE]` | SQLite from the shards + curated files + committed sources read from `origin/main` (`--ref`, or `--src-dir`) |
+| `build [--private] [--text FILE]` | SQLite from the shards + curated files + committed sources read from this checkout's `HEAD` (`--ref`, or `--src-dir`) |
 | `proven [--db FILE] [--format tsv\|json\|count]` | the cards certification has proven (cert level C2 or C3, not excluded), from the clone or a built file's `proven` view |
 | `fetch [--private]` | `gh release download carddb-latest` into `$CARDDB_HOME`, and record `carddb-latest.json` (public) or `carddb-private-latest.json` (`--private`) (`published_at`, `unresolved`) for `freshness` |
 | `compliance [--repo DIR] [--source ID] [--measured DATE]` | the compliance status writer: XMage manifests (`oracle/compliance/manifests/*.json`) + `FORGE_ORACLE_REF` -> `support` rows (xmage listed/unfinished/lacks_card; forge listed per corpus card), writer `ci` by default; existing `failing` rows (the farm override, CDB-14) are preserved; pass `--measured` (or set `CARDDB_NOW`) in CI for byte-identical reruns |
@@ -61,6 +64,23 @@ Read verbs take `--db FILE` (default `$CARDDB_HOME/carddb.sqlite`, or
 also accepts `--asset-meta FILE` (default `$CARDDB_HOME/carddb-latest.json`, or `carddb-private-latest.json` with `--private`; keys
 `published_at` and optional `unresolved`), `--sla FILE`, `--now` and
 `--public-dir`.
+
+Catalogue rows: `cards` holds one row per `oracle_id` and the newest printing's
+mana cost, type line, colours and keywords; `legality` is one row per
+(oracle_id, format) except `not_legal`; `faces` holds the multi-face
+cost/type/P-T only (no Oracle text); `printings` holds one row per physical
+printing (the front-face MTGJSON uuid); `sets` carries the release date used by
+`first_released`/`first_set`, and `paper` says whether any printing's
+`availability` includes `paper`. A full ingest removes a stale row when a
+format turns `not_legal` or a printing disappears. A meld set is three cards, not
+two two-faced ones: each component and the meld result (the `side: b` entry, e.g.
+Brisela, Voice of Nightmares) is its own `cards` row and its own printing, and none
+of them has a `faces` row; a transform or MDFC back face is a face, never a card.
+
+`carddb/curated/game-changers.tsv` and `bracket-flags.tsv` carry the WotC URL
+and date per row (`source`, `cited`) and are seeded from the published list;
+a human reviews a change to them before it merges. The citation is data, not
+a live fetch: bump it with the list.
 
 Env: `CARDDB_HOME` (default `~/.local/share/carddb`), `CARDDB_PUBLIC_REMOTE` (default the
 GitHub repo), `CARDDB_PRIVATE_REMOTE` (four-yay, required for the private store),
@@ -99,5 +119,5 @@ The SQLite file: one table per schema table (`/` and `-` become `_`), `card_name
 text with `--text`, which writes `carddb-text.sqlite`, never the published file),
 `src_manifest_*` and `src_diagnosed` (the committed sources), `proven` (the `cert` rows at
 C2/C3 with no exclusion) and `build_meta`. The FTS `keywords`
-column is `cards.keywords`; a `--ref` that lacks one of the committed source paths (origin/main
-before the curated tree was promoted) just has none of those inputs.
+column is `cards.keywords`; a `--ref` that lacks one of the committed source paths
+just has none of those inputs.

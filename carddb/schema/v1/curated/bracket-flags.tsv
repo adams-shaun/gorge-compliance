@@ -2,3 +2,5 @@
 name	type	required	key	visibility	doc
 oracle_id	string	yes	yes	public	cards.oracle_id
 flag	string	yes	yes	public	Commander bracket flag (mass-land-denial, extra-turn, ...)
+source	string	yes	no	public	URL of the WotC list this row is cited from
+cited	date	yes	no	public	Date of the cited WotC list

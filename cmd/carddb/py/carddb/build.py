@@ -3,8 +3,8 @@
 Inputs
   the public clone's shards                          ($CARDDB_HOME/public)
   with --private, the private clone's shards         ($CARDDB_HOME/private)
-  curated files and committed sources, read from `origin/main` of the compliance
-  checkout (carddb/curated/*, oracle/compliance/manifests/*.json,
+  curated files and committed sources, read from this checkout's `HEAD`
+  (carddb/curated/*, oracle/compliance/manifests/*.json,
   oracle/xengine/diagnosed.tsv), or from a directory laid out the same way
 
 Output (one table per schema table; `/` and `-` in a name become `_`):
@@ -60,8 +60,14 @@ def q(ident):
     return '"%s"' % ident
 
 
-def read_committed(repo=None, ref="origin/main", directory=None):
-    """{repo-relative path: bytes} of the curated files and committed sources."""
+def read_committed(repo=None, ref="HEAD", directory=None):
+    """{repo-relative path: bytes} of the curated files and committed sources.
+
+    The default ref is the checkout's own HEAD, the same tree the schema is read
+    from: a branch that adds a curated column must be able to build itself before
+    it is promoted.  Pass --ref <ref> (or --src-dir) to build from another tree; that tree
+    must carry the curated schema this checkout expects (a ref from before the
+    citation columns fails validation, e.g. origin/main until this branch lands)."""
     out = {}
     if directory:
         for p in SOURCE_PATHS:
@@ -78,8 +84,8 @@ def read_committed(repo=None, ref="origin/main", directory=None):
     git = lambda *a: subprocess.run(["git", "-C", repo] + list(a), capture_output=True)
     if git("rev-parse", "--verify", "--quiet", ref + "^{commit}").returncode != 0:
         raise StoreError("%s: no such ref in %s (git fetch it, or pass --ref / --src-dir)" % (ref, repo))
-    for path in SOURCE_PATHS:  # one archive per path: a ref that lacks one (origin/main before the curated tree
-        if git("cat-file", "-e", "%s:%s" % (ref, path)).returncode != 0:  # was promoted) just has no such inputs
+    for path in SOURCE_PATHS:  # one archive per path: a ref that lacks one just has no such inputs
+        if git("cat-file", "-e", "%s:%s" % (ref, path)).returncode != 0:
             continue
         proc = git("archive", "--format=tar", ref, "--", path)
         if proc.returncode != 0:

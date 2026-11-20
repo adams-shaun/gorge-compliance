@@ -1,6 +1,7 @@
 """carddb command line (python3 -I cmd/carddb/main.py <verb>).
 
   put TABLE [--source ID] [--version V]   rows from stdin: TSV, first line the column names
+  ingest catalogue --mtgjson FILE         MTGJSON AllPrintings -> the catalogue tables, full snapshot
   publish [--bulk] [--private]            commit what is staged, rebase, push
   merge-driver %O %A %B %P                git's merge driver (registered by the tool itself)
   build [--private] [--text FILE]         SQLite from the shards
@@ -25,6 +26,7 @@ import os
 import sys
 
 from . import build as build_mod
+from . import catalogue as catalogue_mod
 from . import compliance as compliance_mod
 from . import fetch as fetch_mod
 from . import merge as merge_mod
@@ -45,6 +47,14 @@ def _parser():
     p.add_argument("table")
     p.add_argument("--source", help="writer id recorded in _meta/writers (default $CARDDB_WRITER or cli)")
     p.add_argument("--version", help="writer version recorded in _meta/writers")
+    p = sub.add_parser("ingest")
+    p.add_argument("source", choices=("catalogue",))
+    p.add_argument("--mtgjson", required=True, metavar="FILE", help="MTGJSON AllPrintings.json or .json.gz")
+    p.add_argument("--manifests", metavar="DIR",
+                   help="set manifests to cross-check (default %s; empty disables)" % catalogue_mod.MANIFEST_DIR)
+    p.add_argument("--source", dest="writer",
+                   help="writer id recorded in _meta/writers (default mtgjson)")
+    p.add_argument("--version", help="writer version recorded in _meta/writers (default MTGJSON meta.version)")
     p = sub.add_parser("publish")
     p.add_argument("--bulk", action="store_true", help="allow more than 50000 changed lines")
     p.add_argument("--private", action="store_true")
@@ -55,7 +65,7 @@ def _parser():
     p.add_argument("--private", action="store_true")
     p.add_argument("--text", metavar="FILE", help="Scryfall oracle-cards or MTGJSON AtomicCards file: adds Oracle text to FTS (never published)")
     p.add_argument("--out", help="output file")
-    p.add_argument("--ref", default="origin/main", help="ref of the checkout to read curated files and committed sources from")
+    p.add_argument("--ref", default="HEAD", help="ref of the checkout to read curated files and committed sources from")
     p.add_argument("--src-dir", help="read curated files and committed sources from this directory instead of a git ref")
     p = sub.add_parser("fetch")
     p.add_argument("--private", action="store_true")
@@ -171,6 +181,27 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
             n = Store(k, home=args.home, schema=schema).put(args.table, _read_rows(stdin), writer=args.source,
                                                               version=args.version, raw=True)
             print("carddb put %s: %d rows changed" % (args.table, n), file=stdout)
+            return 0
+        if args.verb == "ingest":
+            manifests = args.manifests
+            if manifests is None:
+                manifests = os.path.join(repo_root(), catalogue_mod.MANIFEST_DIR)
+            elif manifests == "":
+                manifests = None
+            summary = catalogue_mod.ingest(
+                args.mtgjson, Store(PUBLIC, home=args.home, schema=schema), manifests,
+                writer=args.writer or "mtgjson", version=args.version)
+            print("carddb ingest catalogue: %d cards, %d printings, %d sets, %d legality rows, %d faces "
+                  "(%d rows changed)" % (
+                      summary.tables["cards"], summary.tables["printings"], summary.tables["sets"],
+                      summary.tables["legality"], summary.tables["faces"], summary.changed), file=stdout)
+            if manifests is None:
+                print("carddb ingest catalogue: cross-check skipped (no manifest directory)", file=stdout)
+            else:
+                print("carddb ingest catalogue: cross-check %d manifest set(s): %d mismatch(es); "
+                      "manifests unchanged" % (summary.checked, len(summary.mismatches)), file=stdout)
+                for line in summary.mismatches:
+                    print(line, file=stdout)
             return 0
         if args.verb == "publish":
             r = Store(kind, home=args.home, schema=schema).publish(bulk=args.bulk)
