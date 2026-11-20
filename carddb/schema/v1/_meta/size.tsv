@@ -1,0 +1,6 @@
+#carddb-schema _meta/size v1
+name	type	required	key	visibility	doc
+metric	string	yes	yes	public	What is measured (branch_packed_mib, budget_mib)
+amount	int	yes	no	public	The measurement in the unit named below
+unit	string	yes	no	public	Unit of the measurement
+measured	date	yes	no	public	Date of the measurement, YYYY-MM-DD
