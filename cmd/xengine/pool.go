@@ -67,22 +67,69 @@ func parseNameList(b []byte) []string {
 	return out
 }
 
-// listFile is a name list read from disk and the sha256 of its bytes.
+// listFile is a name list read from disk and the sha256 of its bytes. A pool
+// may also carry a "# supp <IDENTITY>" header (suppq.py writes one): Identity
+// is it in WUBRG order, "" when the file has none.
 type listFile struct {
-	Path   string `json:"path"`
-	SHA256 string `json:"sha256"`
-	Names  int    `json:"names"`
-	names  []string
+	Path     string `json:"path"`
+	SHA256   string `json:"sha256"`
+	Names    int    `json:"names"`
+	Identity string `json:"identity,omitempty"`
+	names    []string
+	identity uint8
 }
 
-func readListFile(path string) (listFile, error) {
+func readListFile(path string) (listFile, error) { return readNameList(path, false) }
+
+// readPoolFile is readListFile plus the pool's identity header. Only a pool
+// reads it: a filter file's comments never narrow a deck's colours.
+func readPoolFile(path string) (listFile, error) { return readNameList(path, true) }
+
+func readNameList(path string, withIdentity bool) (listFile, error) {
 	b, err := os.ReadFile(path)
 	if err != nil {
 		return listFile{}, err
 	}
 	sum := sha256.Sum256(b)
 	names := parseNameList(b)
-	return listFile{Path: path, SHA256: hex.EncodeToString(sum[:]), Names: len(names), names: names}, nil
+	lf := listFile{Path: path, SHA256: hex.EncodeToString(sum[:]), Names: len(names), names: names}
+	if withIdentity {
+		ident, mask, err := suppIdentity(b)
+		if err != nil {
+			return listFile{}, fmt.Errorf("%s: %w", path, err)
+		}
+		lf.Identity, lf.identity = ident, mask
+	}
+	return lf, nil
+}
+
+// suppIdentity is the identity of a pool's "# supp <IDENTITY>" header, with its
+// cards.Colour* mask, or "", 0 when the pool has no such header. suppq writes
+// "# supp WU tier=0 targets=5": the first word after "supp" is the identity. A
+// second, different identity is an error rather than a silent choice.
+func suppIdentity(b []byte) (string, uint8, error) {
+	var ident string
+	var mask uint8
+	for _, l := range strings.Split(string(b), "\n") {
+		t := strings.TrimSpace(l)
+		if !strings.HasPrefix(t, "#") {
+			continue
+		}
+		f := strings.Fields(strings.TrimSpace(strings.TrimPrefix(t, "#")))
+		if len(f) < 2 || !strings.EqualFold(f[0], "supp") {
+			continue
+		}
+		val := strings.ToUpper(f[1])
+		m, err := decks.ParseIdentity(val)
+		if err != nil {
+			return "", 0, fmt.Errorf("# supp %s: %w", f[1], err)
+		}
+		if ident != "" && val != ident {
+			return "", 0, fmt.Errorf("conflicting # supp headers %q and %q", ident, val)
+		}
+		ident, mask = val, m
+	}
+	return ident, mask, nil
 }
 
 // poolInfo is DIR/pool.json of a -pool run: which pool and filter the decks
@@ -105,9 +152,10 @@ type poolInfo struct {
 // the corpus (any manifest's spelling, decks.Spellings) is left out too, as
 // -set -xmage leaves it out. A pool name the corpus does not know is an error
 // naming every one: a pool is a committed list, and a misspelling must not
-// shrink it in silence.
+// shrink it in silence. A pool whose "# supp <IDENTITY>" header names colours
+// keeps only cards of that identity and builds decks of it alone.
 func poolCandidates(reg *cards.Registry, manifests, poolPath, filterPath string, xmage bool) ([]decks.Card, poolInfo, error) {
-	pool, err := readListFile(poolPath)
+	pool, err := readPoolFile(poolPath)
 	if err != nil {
 		return nil, poolInfo{}, err
 	}
@@ -167,8 +215,23 @@ func poolCandidates(reg *cards.Registry, manifests, poolPath, filterPath string,
 		}
 		cands = kept
 	}
+	if pool.identity != 0 {
+		kept := cands[:0:0]
+		for _, c := range cands {
+			if c.Identity&^pool.identity != 0 {
+				info.Skipped[decks.ReasonOutsideIdentity]++
+				continue
+			}
+			kept = append(kept, c)
+		}
+		cands = kept
+	}
 	info.Candidates = len(cands)
-	if err := decks.Pairable(cands); err != nil {
+	if pool.identity != 0 {
+		if err := decks.PairableIdentity(cands, pool.identity); err != nil {
+			return nil, info, fmt.Errorf("-pool %s: %w", poolPath, err)
+		}
+	} else if err := decks.Pairable(cands); err != nil {
 		return nil, info, fmt.Errorf("-pool %s: %w", poolPath, err)
 	}
 	return cands, info, nil
@@ -184,6 +247,9 @@ func poolPicker(cands []decks.Card, led *cov.Ledger) picker {
 // String is the one-line summary play prints.
 func (p poolInfo) String() string {
 	s := fmt.Sprintf("pool %s (sha256 %.12s): %d names, %d candidates", p.Pool.Path, p.Pool.SHA256, p.Pool.Names, p.Candidates)
+	if p.Pool.Identity != "" {
+		s += fmt.Sprintf(", identity %s", p.Pool.Identity)
+	}
 	keys := make([]string, 0, len(p.Skipped))
 	for k := range p.Skipped {
 		keys = append(keys, k)

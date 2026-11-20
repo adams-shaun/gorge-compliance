@@ -191,6 +191,7 @@ func runPlay(args []string) error {
 	} else {
 		var pick picker
 		var pinfo *poolInfo
+		var poolIdentity uint8
 		if *pool != "" {
 			cands, info, perr := poolCandidates(reg, *manifests, *pool, *poolFilter, *xmage)
 			if perr != nil {
@@ -198,6 +199,7 @@ func runPlay(args []string) error {
 			}
 			fmt.Println(info)
 			pick, pinfo = poolPicker(cands, led), &info
+			poolIdentity = info.Pool.identity
 		} else if *random != "" {
 			var extra []decks.Card
 			if *forgeOnly != "" {
@@ -226,7 +228,11 @@ func runPlay(args []string) error {
 				return err
 			}
 		}
-		deal = pickDealer(pick, *set, *chunk, *seed)
+		if poolIdentity != 0 {
+			deal = identityDealer(pick, *set, *chunk, *seed, poolIdentity)
+		} else {
+			deal = pickDealer(pick, *set, *chunk, *seed)
+		}
 		if swapRec != nil {
 			deal = swapDealer(deal, tables, *set, *chunk, swapRec)
 		}
@@ -317,6 +323,17 @@ func pickDealer(pick picker, set string, chunk int, seed uint64) dealer {
 	return func(g int) ([]decks.Deck, string) {
 		cands, led, table := pick(g, gameSeed(seed, chunk, g))
 		p := decks.Pair(cands, led, set, chunk, g, seed)
+		return p[:], table
+	}
+}
+
+// identityDealer deals from a picker's candidates with decks.PairIdentity: a
+// -pool whose "# supp" header names its colours builds every deck of that
+// identity alone.
+func identityDealer(pick picker, set string, chunk int, seed uint64, identity uint8) dealer {
+	return func(g int) ([]decks.Deck, string) {
+		cands, led, table := pick(g, gameSeed(seed, chunk, g))
+		p := decks.PairIdentity(cands, led, set, chunk, g, seed, identity)
 		return p[:], table
 	}
 }
