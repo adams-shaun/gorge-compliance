@@ -1,7 +1,9 @@
 import json
 import os
+import shutil
 import sqlite3
 import stat
+import subprocess
 import unittest
 
 import carddb
@@ -224,14 +226,20 @@ class Resolve(Base):
 class Fetch(Base):
     def stub_gh(self, payload, zst):
         d = os.path.join(self.tmp, "bin")
-        os.makedirs(d)
+        os.makedirs(d, exist_ok=True)
         asset = os.path.join(self.tmp, "asset")
         with open(asset, "wb") as f:
             f.write(payload)
         if zst:
-            from compression import zstd
-            with zstd.open(asset + ".zst", "wb") as f:
-                f.write(payload)
+            try:
+                from compression import zstd  # Python 3.14+
+            except ImportError:
+                if not shutil.which("zstd"):
+                    self.skipTest("no compression.zstd and no zstd CLI")
+                subprocess.run(["zstd", "-q", "-f", "-o", asset + ".zst", asset], check=True)
+            else:
+                with zstd.open(asset + ".zst", "wb") as f:
+                    f.write(payload)
         gh = os.path.join(d, "gh")
         write(gh, '#!/bin/sh\n'
                   'if [ "$1" = release ] && [ "$2" = view ]; then '
