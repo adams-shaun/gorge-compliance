@@ -467,6 +467,19 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return v.Len() > 0 && w.gameMentions("LastTurnEntered")
 	case typ == "Game" && name == "ResolvedThisTurn":
 		return v.Len() > 0 && w.gameMentions("ResolvedThisTurn")
+	case typ == "Game" && name == "MaxDistinctOnStackThisTurn":
+		// The event-folded per-turn high-water mark of distinct stack sources;
+		// its only reader is the Count$MaxDistinctOnStack head (Geometric
+		// Weird, count_history_heads.go), so a game with no card naming it
+		// does not depend on the tally.
+		return v.Int() > 0 && w.gameMentions("MaxDistinctOnStack")
+	case typ == "Object" && name == "RegeneratedThisTurn":
+		// The event-folded per-turn regeneration tally (CR 701.19); its only
+		// reader is the Count$RegeneratedThisTurn head (Spiny Starfish,
+		// count_history_heads.go), and the fold zeroes it when the object
+		// changes zone, so a game with no card naming it does not depend on
+		// the tally.
+		return v.Int() > 0 && w.gameMentions("RegeneratedThisTurn")
 	case typ == "Player" && name == "SearchedLibraryThisTurn":
 		// Set by any completed library search (CR 701.23), so it is live in
 		// cuts after a search; its only reader is the Count$SearchedLibrary.<spec>
