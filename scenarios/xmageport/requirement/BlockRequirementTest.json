@@ -261,8 +261,7 @@
      }
     }
    ],
-   "xmage": "BlockRequirementTest#testOkkBlocking",
-   "known_bug": "XP[cant-block-unless-greater-power-unmodelled]: Okk's K:CARDNAME can't block unless a creature with greater power also blocks. has no handling in validateBlockers, so Okk alone is accepted as a blocker of Hill Giant and kills it (Hill Giant battlefield 0, want 1; p1 life 20, want 17), CR 509.1b, verified at gorge c3b957bf36."
+   "xmage": "BlockRequirementTest#testOkkBlocking"
   },
   {
    "name": "test-slayers-cleaver",

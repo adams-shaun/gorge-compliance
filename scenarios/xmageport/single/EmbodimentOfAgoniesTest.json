@@ -52,8 +52,7 @@
      "pt": "5/5"
     }
    ],
-   "xmage": "EmbodimentOfAgoniesTest#testHybridAndPhyrexian",
-   "known_bug": "XP[exact-mana-cost-graveyard-absent]: Embodiment of Agonies enters 0/0 instead of 5/5: its Count$ExactManaCostGraveyard Card.nonLand+YouOwn is absent from the count vocabulary, so X=0 and no +1/+1 counters are added (effects EvalCount/etbCounter), CR 202.3, 614.1c, verified at gorge 981b98963b."
+   "xmage": "EmbodimentOfAgoniesTest#testHybridAndPhyrexian"
   },
   {
    "name": "test-empty-mana-costs",
@@ -156,8 +155,7 @@
      "pt": "2/2"
     }
    ],
-   "xmage": "EmbodimentOfAgoniesTest#testXCosts",
-   "known_bug": "XP[exact-mana-cost-graveyard-absent]: Embodiment of Agonies enters 0/0 instead of 2/2: Count$ExactManaCostGraveyard (Lightning Bolt {R} and Fireball {X}{R} are distinct) is not implemented, so X=0 (effects EvalCount/etbCounter), CR 202.3, 614.1c, verified at gorge 981b98963b."
+   "xmage": "EmbodimentOfAgoniesTest#testXCosts"
   }
  ]
 }

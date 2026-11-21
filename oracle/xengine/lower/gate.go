@@ -467,6 +467,12 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return v.Len() > 0 && w.gameMentions("LastTurnEntered")
 	case typ == "Game" && name == "ResolvedThisTurn":
 		return v.Len() > 0 && w.gameMentions("ResolvedThisTurn")
+	case typ == "Player" && name == "SearchedLibraryThisTurn":
+		// Set by any completed library search (CR 701.23), so it is live in
+		// cuts after a search; its only reader is the Count$SearchedLibrary.<spec>
+		// head (Archive Trap, count_history_heads.go), so a game with no card
+		// naming SearchedLibrary does not depend on the watcher.
+		return v.Bool() && w.gameMentions("SearchedLibrary")
 	case typ == "Player" && name == "AttackedSeatsLastTurn":
 		// The record of the seat's last completed turn is set by any attack, so
 		// it is non-zero in most mid-game cuts; its only readers are the
