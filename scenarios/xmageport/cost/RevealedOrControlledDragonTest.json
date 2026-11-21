@@ -53,8 +53,7 @@
      }
     }
    ],
-   "xmage": "RevealedOrControlledDragonTest#noDragon",
-   "known_bug": "XP[count-presence-dragon-unmodelled]: Draconic Roar's DBDamageController is gated by ConditionCheckSVar$ Count$Presence_Dragon.1.0, a head the effects evaluator does not model (Count$Presence_Dragon.1.0 is read only as a replacement-check body in engine/rules replacement_match.go), and the unknown condition fails open: with no Dragon revealed or controlled the Roar still deals 3 to the creature's controller (p1 life 17, want 20), CR 601.2b, 608.2c, verified at gorge c3b957bf36."
+   "xmage": "RevealedOrControlledDragonTest#noDragon"
   },
   {
    "name": "control-dragon",
@@ -309,8 +308,7 @@
      }
     }
    ],
-   "xmage": "RevealedOrControlledDragonTest#testRoarFalse",
-   "known_bug": "XP[count-presence-dragon-unmodelled]: same cause as noDragon with the Roar aimed at p0's own Silvercoat Lion: the 3 damage to the controller is dealt with no Dragon (p0 life 17, want 20), CR 601.2b, 608.2c, verified at gorge c3b957bf36."
+   "xmage": "RevealedOrControlledDragonTest#testRoarFalse"
   },
   {
    "name": "test-orator-battlefield",
@@ -365,8 +363,7 @@
      }
     }
    ],
-   "xmage": "RevealedOrControlledDragonTest#testOratorBattlefield",
-   "known_bug": "XP[count-presence-dragon-unmodelled]: Orator of Ojutai's intervening-if CheckSVar$ Count$Presence_Dragon.1.0 (a Shivan Dragon on the battlefield as it is cast) is not modelled, and here the unknown condition fails closed, so the enters trigger never draws (p0 hand size 0, want 1), CR 603.4, 601.2b, verified at gorge c3b957bf36."
+   "xmage": "RevealedOrControlledDragonTest#testOratorBattlefield"
   },
   {
    "name": "test-orator-false",

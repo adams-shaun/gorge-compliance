@@ -56,12 +56,12 @@ func TestForgeRolledDie(t *testing.T) {
 
 // forgeOracleDieRollRef is the driver commit the die-roll contract was run
 // against: 7f287e888f adds ForcedDieRandom, d2939e9b61 makes MyRandom forward
-// the bounded draw to it, and the current FORGE_ORACLE_REF (b33362f6) contains
-// both. TestForgeRolledDie only sees the Go request and stays green if the pin
+// the bounded draw to it, and the current FORGE_ORACLE_REF (2aff202bc9 = b33362f600 plus
+// a resolution-time payment hook that does not touch dice) contains both. TestForgeRolledDie only sees the Go request and stays green if the pin
 // is reverted to 0958a1aca2, where Forge rolls its own d6 again; this pin check
 // is the repo-side half. A bump must re-run the pinned driver's
 // ForcedDieRollTest and update the constant deliberately.
-const forgeOracleDieRollRef = "b33362f6004458d1509a7f44a87dcbe279f56040"
+const forgeOracleDieRollRef = "2aff202bc94b9d508e5dfe2b97617c4ad98f81aa"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
