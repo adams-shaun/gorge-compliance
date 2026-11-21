@@ -25,7 +25,7 @@ from .build import q, sql_name
 from .norm import norm_name
 from .schema import PRIVATE, PRIVATE_TABLE_NAMES, PUBLIC
 from .shard import parse_writers, read_text
-from .store import Store, StoreError, asset_meta_path, carddb_home
+from .store import Store, StoreError, asset_meta_path, carddb_home, packed_mib
 
 VERBS = ("card", "search", "blockers", "proven", "deck", "freshness", "sql", "export")
 
@@ -443,19 +443,6 @@ def _publish_time(public_dir):
         return None
 
 
-def _packed_mib(public_dir):
-    out = _git(public_dir, "count-objects", "-v")
-    if out is None:
-        return None
-    for line in out.splitlines():
-        if line.startswith("size-pack:"):
-            try:
-                return int(line.split(":", 1)[1].strip()) / 1024.0
-            except ValueError:
-                return None
-    return None
-
-
 def _asset_meta(path):
     try:
         with open(path, encoding="utf-8") as f:
@@ -597,7 +584,7 @@ def run_freshness(args, schema, out):
                 fail = age > 6
                 line(fail, "%s %.1fh old (SLA 6h)" % (meta_name, age))
 
-        packed = _packed_mib(public_dir)
+        packed = packed_mib(public_dir)
         if packed is None:
             line(True, "packed size unavailable")
         else:

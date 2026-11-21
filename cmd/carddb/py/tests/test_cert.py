@@ -68,7 +68,11 @@ class CertWriter(Base):
         self.assertEqual(sets, [
             "set_code", "gorge_sha", "corpus_pin", "released", "set_type", "paper", "new_paper",
             "reprints", "playable", "excluded", "c0", "c1", "c2", "c3", "open", "level", "state",
-            "cursor", "entered", "certified", "measured", "writer"])
+            "cursor", "entered", "certified", "measured",
+            "printed", "a_declared", "a_cards", "a_outstanding", "a_problem_cards", "a_xmage_verified",
+            "a_forge_only", "a_hand", "a_non_tournament", "a_buckets", "b_declared", "b_cards", "b_outstanding",
+            "b_problem_cards", "b_non_tournament", "b_buckets", "status_date", "status_commit", "status_gorge",
+            "status_forge_ref", "ratchet_failures", "writer"])
         for private in ("cert_events", "cert_runs"):
             self.assertTrue(self.schema.tables[private].is_private(), private)
 

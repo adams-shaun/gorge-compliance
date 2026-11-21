@@ -9,3 +9,7 @@ type_line	string	yes	no	public	Type line
 colors	list	no	no	public	Colour letters, comma separated
 color_identity	list	no	no	public	Colour identity letters, comma separated
 keywords	list	no	no	public	Keyword abilities, comma separated (MTGJSON keywords)
+oracle_sha	string	no	no	public	Full sha256 (lowercase hex) of the normalised Oracle text (faces joined by //); no text is stored
+first_released	date	no	no	public	Earliest paper printing's release date
+first_set	string	no	no	public	sets.set_code of the earliest paper printing
+paper	bool	no	no	public	Printed on paper: any printing's availability includes paper

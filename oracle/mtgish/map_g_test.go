@@ -218,3 +218,31 @@ func TestGorgeMustBeBlockedByTwoKeyword(t *testing.T) {
 		t.Errorf("effects %q", got)
 	}
 }
+
+// TestGorgeRestrictionKeywordHeads: gorge's dense heads for the attack/block
+// restriction sentences are the static rules mtgish writes, not keywords.
+func TestGorgeRestrictionKeywordHeads(t *testing.T) {
+	for _, c := range []struct{ head, rule string }{
+		{"MustBeBlockedByOne", "rule:mustbeblockedbyexactlyonedefender"},
+		{"CanOnlyAttackAlone", "rule:canonlyattackalone"},
+		{"CantAttackUnlessGreaterPower", "rule:cantattackunlessanothercreatureattacks"},
+		{"CantAttackUnlessBlackOrGreen", "rule:cantattackunlessanothercreatureattacks"},
+		{"CantBlockUnlessGreaterPower", "rule:cantblockunlessanotherdefender"},
+		{"CantAttackUnlessTwoOthers", "rule:cantattackunlessanumberofothercreatureattacks"},
+		{"CantBlockUnlessTwoOthers", "rule:cantblockunlessotherdefenders"},
+	} {
+		t.Run(c.head, func(t *testing.T) {
+			f := &cards.Face{Name: "Test Card", Types: []string{"Creature"}, Keywords: []string{c.head}}
+			s := gorgeFace("Test Card", f, TypeIndex{})
+			if len(s.Keywords) != 0 {
+				t.Errorf("keywords %v, want none", s.Keywords)
+			}
+			if got, want := shapes(s), "static"; got != want {
+				t.Fatalf("abilities %q, want %q", got, want)
+			}
+			if got := strings.Join(s.Abilities[0].Effects, " "); got != c.rule {
+				t.Errorf("effects %q, want %q", got, c.rule)
+			}
+		})
+	}
+}

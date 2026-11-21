@@ -1,6 +1,10 @@
 """carddb command line (python3 -I cmd/carddb/main.py <verb>).
 
   put TABLE [--source ID] [--version V]   rows from stdin: TSV, first line the column names
+  ingest catalogue --mtgjson FILE         MTGJSON AllPrintings -> the catalogue tables, full snapshot
+  ingest status --status-a FILE --meta FILE [--status-b FILE]
+                                        oraclediff status output -> cert_sets status columns (docs site data)
+  docs-status --db FILE --out DIR         built SQLite -> status-A.jsonl, status-B.jsonl, meta.json for the docs build
   publish [--bulk] [--private]            commit what is staged, rebase, push
   merge-driver %O %A %B %P                git's merge driver (registered by the tool itself)
   build [--private] [--text FILE]         SQLite from the shards
@@ -9,6 +13,8 @@
   init [--private]                        clone the data branch, or create it
   compliance [--repo DIR] [--source ID] [--version V] [--measured DATE]
                                         XMage manifests + FORGE_ORACLE_REF -> support rows
+  size [--measured DATE]                  report the branch object store into _meta/size (D7 budget)
+  release [--dry-run]                     upload carddb-latest, the weekly dated release, prune
   validate|boundary [--scope S] [--tree DIR]   the Python mirror of the Go checks
   card <name|oracle_id>                   every fact for one card
   search <fts> [--legal F] [--status K=V] [--set S] [--label L] [--marked]
@@ -25,15 +31,18 @@ import os
 import sys
 
 from . import build as build_mod
+from . import catalogue as catalogue_mod
 from . import compliance as compliance_mod
+from . import docsstatus as docsstatus_mod
 from . import fetch as fetch_mod
 from . import merge as merge_mod
 from . import query as query_mod
+from . import release as release_mod
 from . import shard
 from .boundary import boundary_tree
 from .schema import PRIVATE, PUBLIC, SchemaError, load_schema, repo_root
 from .shard import ValidationError
-from .store import GitError, Store, StoreError, carddb_home, gorge12
+from .store import GitError, Store, StoreError, carddb_home, gorge12, packed_mib
 
 
 def _parser():
@@ -45,6 +54,21 @@ def _parser():
     p.add_argument("table")
     p.add_argument("--source", help="writer id recorded in _meta/writers (default $CARDDB_WRITER or cli)")
     p.add_argument("--version", help="writer version recorded in _meta/writers")
+    p = sub.add_parser("ingest")
+    p.add_argument("source", choices=("catalogue", "status"))
+    p.add_argument("--mtgjson", metavar="FILE", help="catalogue: MTGJSON AllPrintings.json or .json.gz")
+    p.add_argument("--status-a", metavar="FILE", help="status: `oraclediff status -all -json -level A` output")
+    p.add_argument("--status-b", metavar="FILE", help="status: the Level B output (optional)")
+    p.add_argument("--meta", metavar="FILE",
+                   help="status: meta.json {commit, gorge_pin, forge_ref, date, ratchet_failures}")
+    p.add_argument("--manifests", metavar="DIR",
+                   help="set manifests to cross-check (default %s; empty disables)" % catalogue_mod.MANIFEST_DIR)
+    p.add_argument("--source", dest="writer",
+                   help="writer id recorded in _meta/writers (default mtgjson)")
+    p.add_argument("--version", help="writer version recorded in _meta/writers (default MTGJSON meta.version)")
+    p = sub.add_parser("docs-status")
+    p.add_argument("--db", required=True, metavar="FILE", help="built carddb.sqlite")
+    p.add_argument("--out", required=True, metavar="DIR", help="directory for status-A.jsonl, status-B.jsonl, meta.json")
     p = sub.add_parser("publish")
     p.add_argument("--bulk", action="store_true", help="allow more than 50000 changed lines")
     p.add_argument("--private", action="store_true")
@@ -55,7 +79,7 @@ def _parser():
     p.add_argument("--private", action="store_true")
     p.add_argument("--text", metavar="FILE", help="Scryfall oracle-cards or MTGJSON AtomicCards file: adds Oracle text to FTS (never published)")
     p.add_argument("--out", help="output file")
-    p.add_argument("--ref", default="origin/main", help="ref of the checkout to read curated files and committed sources from")
+    p.add_argument("--ref", default="HEAD", help="ref of the checkout to read curated files and committed sources from")
     p.add_argument("--src-dir", help="read curated files and committed sources from this directory instead of a git ref")
     p = sub.add_parser("fetch")
     p.add_argument("--private", action="store_true")
@@ -69,6 +93,24 @@ def _parser():
     p.add_argument("--measured", metavar="YYYY-MM-DD",
                    help="the support rows' measured date (default $CARDDB_NOW, else today UTC);"
                         " pass it (or CARDDB_NOW) in CI so reruns stay byte-identical")
+    p = sub.add_parser("size")
+    p.add_argument("--source", default="ci", help="writer id recorded in _meta/writers (default ci)")
+    p.add_argument("--version", help="writer version recorded in _meta/writers")
+    p.add_argument("--measured", metavar="YYYY-MM-DD",
+                   help="the _meta/size measured date (default $CARDDB_NOW, else today UTC)")
+    p.add_argument("--max-pack-mb", type=float, default=300.0, help="the D7 packed-size budget (default 300)")
+    p = sub.add_parser("release")
+    p.add_argument("--repo", help="owner/name of the release repo (default $GITHUB_REPOSITORY or the public repo)")
+    p.add_argument("--db", help="built SQLite file (default $CARDDB_HOME/carddb.sqlite)")
+    p.add_argument("--asset", action="append", metavar="FILE",
+                   help="asset to upload; repeatable (default <db>.zst when it exists, else <db>)")
+    p.add_argument("--now", metavar="YYYY-MM-DD", help="release week and prune date (default $CARDDB_NOW)")
+    p.add_argument("--gh", help="gh executable (default $CARDDB_GH or gh)")
+    p.add_argument("--dry-run", action="store_true", help="build the plan and print mutating gh commands; upload nothing")
+    p.add_argument("--no-weekly", action="store_true", help="do not create the dated weekly release")
+    p.add_argument("--keep-weeks", type=int, default=12, help="weeks of dated releases to keep (default 12)")
+    p.add_argument("--max-pack-mb", type=float, default=300.0,
+                   help="the D7 packed-size budget to report (default 300)")
     for v in ("validate", "boundary"):
         p = sub.add_parser(v)
         p.add_argument("--scope", default=PUBLIC, choices=(PUBLIC, PRIVATE))
@@ -172,6 +214,43 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
                                                               version=args.version, raw=True)
             print("carddb put %s: %d rows changed" % (args.table, n), file=stdout)
             return 0
+        if args.verb == "docs-status":
+            na, nb = docsstatus_mod.export(args.db, args.out)
+            print("carddb docs-status: %d Level A set(s), %d Level B set(s) -> %s" % (na, nb, args.out), file=stdout)
+            return 0
+        if args.verb == "ingest" and args.source == "status":
+            if not args.status_a or not args.meta:
+                raise StoreError("ingest status needs --status-a and --meta")
+            pub = Store(PUBLIC, home=args.home, schema=schema)
+            if not pub.exists():
+                raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
+            changed, n = docsstatus_mod.run(pub, args.status_a, args.status_b, args.meta,
+                                            writer=args.writer or "ci", version=args.version)
+            print("carddb ingest status: %d set(s) folded into cert_sets (%d rows changed)" % (n, changed), file=stdout)
+            return 0
+        if args.verb == "ingest":
+            if not args.mtgjson:
+                raise StoreError("ingest catalogue needs --mtgjson")
+            manifests = args.manifests
+            if manifests is None:
+                manifests = os.path.join(repo_root(), catalogue_mod.MANIFEST_DIR)
+            elif manifests == "":
+                manifests = None
+            summary = catalogue_mod.ingest(
+                args.mtgjson, Store(PUBLIC, home=args.home, schema=schema), manifests,
+                writer=args.writer or "mtgjson", version=args.version)
+            print("carddb ingest catalogue: %d cards, %d printings, %d sets, %d legality rows, %d faces "
+                  "(%d rows changed)" % (
+                      summary.tables["cards"], summary.tables["printings"], summary.tables["sets"],
+                      summary.tables["legality"], summary.tables["faces"], summary.changed), file=stdout)
+            if manifests is None:
+                print("carddb ingest catalogue: cross-check skipped (no manifest directory)", file=stdout)
+            else:
+                print("carddb ingest catalogue: cross-check %d manifest set(s): %d mismatch(es); "
+                      "manifests unchanged" % (summary.checked, len(summary.mismatches)), file=stdout)
+                for line in summary.mismatches:
+                    print(line, file=stdout)
+            return 0
         if args.verb == "publish":
             r = Store(kind, home=args.home, schema=schema).publish(bulk=args.bulk)
             if r is None:
@@ -213,8 +292,37 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
             revs["public_rev"] = pub.git("rev-parse", "HEAD").stdout.strip()[:12]
             if priv:
                 revs["private_rev"] = priv.git("rev-parse", "HEAD").stdout.strip()[:12]
+            packed = packed_mib(pub.dir)
+            revs["packed_budget_mib"] = str(int(release_mod.BUDGET_MIB))
+            if packed is not None:
+                revs["packed_mib"] = "%.1f" % packed
             build_mod.build(out, schema, pub.dir, priv.dir if priv else None, committed, args.text, revs)
             print(out, file=stdout)
+            return 0
+        if args.verb == "size":
+            pub = Store(PUBLIC, home=args.home, schema=schema)
+            if not pub.exists():
+                raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
+            packed, rows = release_mod.size_rows(pub, args.measured, args.max_pack_mb)
+            # The measurement date size_rows chose (--measured, CARDDB_NOW or the
+            # data tip's date) is also the writers row's date: one deterministic
+            # date per run, not a `measured` from the tip and a `ran` from the
+            # wall clock.
+            changed = pub.put("_meta/size", rows, writer=args.source, version=args.version,
+                              ran=rows[0]["measured"], replace=True)
+            print("carddb size: data branch packed %.1f MiB (budget %d MiB); %d row(s) changed" % (
+                packed, int(args.max_pack_mb), changed), file=stdout)
+            if packed > args.max_pack_mb:
+                print("carddb size: packed %.1f MiB exceeds the D7 budget of %d MiB; "
+                      "refusing to publish" % (packed, int(args.max_pack_mb)), file=stderr)
+                return 1
+            return 0
+        if args.verb == "release":
+            pub = Store(PUBLIC, home=args.home, schema=schema)
+            db = args.db or os.path.join(carddb_home(args.home), "carddb.sqlite")
+            release_mod.run(pub, db, assets=args.asset, repo=args.repo, gh=args.gh,
+                            now=args.now, dry_run=args.dry_run, keep_weeks=args.keep_weeks,
+                            budget_mib=args.max_pack_mb, weekly=not args.no_weekly, out=stdout)
             return 0
         if args.verb in ("validate", "boundary"):
             root = args.tree or Store(PUBLIC, home=args.home, schema=schema).dir

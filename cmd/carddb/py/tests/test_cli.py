@@ -73,7 +73,7 @@ class GoParity(Base):
             "unsorted": one("legality/ab.tsv", cls.LEG + "ab2\tmodern\tlegal\nab1\tmodern\tlegal\n"),
             "dup": one("legality/ab.tsv", cls.LEG + "ab1\tmodern\tlegal\nab1\tmodern\tlegal\n"),
             "empty cell": one("legality/ab.tsv", cls.LEG + "ab1\tmodern\t\n"),
-            "bad int": one("cards/ab.tsv", "#carddb cards v1\noracle_id\tname\tlayout\tmana_cost\tmana_value\ttype_line\tcolors\tcolor_identity\tkeywords\nab1\tn\tnormal\t-\tx\tt\t-\t-\t-\n"),
+            "bad int": one("cards/ab.tsv", "#carddb cards v1\noracle_id\tname\tlayout\tmana_cost\tmana_value\ttype_line\tcolors\tcolor_identity\tkeywords\toracle_sha\tfirst_released\tfirst_set\tpaper\nab1\tn\tnormal\t-\tx\tt\t-\t-\t-\t-\t-\t-\tfalse\n"),
             "wrong path": one("elsewhere.tsv", cls.LEG + "ab1\tmodern\tlegal\n"),
             "private table": one("text/ab.tsv", "#carddb text v1\noracle_id\n"),
             "extra column": one("legality/ab.tsv", cls.LEG.rstrip("\n") + "\tprice\nab1\tmodern\tlegal\t1\n"),

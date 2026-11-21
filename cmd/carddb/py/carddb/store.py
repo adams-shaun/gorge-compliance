@@ -64,6 +64,30 @@ def today(ran=None):
     return datetime.datetime.now(datetime.timezone.utc).date().isoformat()
 
 
+def packed_mib(directory):
+    """The object-store size of a git clone in MiB (`count-objects` size + size-pack), or None.
+
+    The one measurement `freshness`, `size` and `release` report. A data branch's
+    D7 budget covers everything a clone of it downloads, not just the last
+    packfile: a fresh CI clone holds the published history in a pack while the
+    writers' new blobs stay loose until a fetch or repack. Counting only
+    `size-pack` reported 0 on the first publish and lagged one run behind
+    afterwards. Measuring both is deterministic and needs no repack, so it is
+    safe to call before and after a publish."""
+    p = subprocess.run(["git", "-C", directory, "count-objects", "-v"], capture_output=True, text=True)
+    if p.returncode != 0:
+        return None
+    total_kib, found = 0, False
+    for line in p.stdout.splitlines():
+        if line.startswith(("size:", "size-pack:")):
+            try:
+                total_kib += int(line.split(":", 1)[1].strip())
+            except ValueError:
+                return None
+            found = True
+    return total_kib / 1024.0 if found else None
+
+
 def gorge12(root=None):
     """First 12 hex digits of the pinned gorge commit (GORGE_PIN)."""
     env = os.environ.get("CARDDB_GORGE_PIN")
@@ -368,10 +392,11 @@ class Store:
             return False
         return WRITER_PRIORITY.get(old[w], 0) >= WRITER_PRIORITY.get(new[w], 0)
 
-    def _plan(self, table, cols, rows):
+    def _plan(self, table, cols, rows, replace=False):
         """(plan {rel: text, or None to delete the file}, changed row count) of merging rows (cells) into
         table's shards. A key keeps one home: when a row lands in a different shard than the one that holds
-        its key (a table sharded outside its key), the old copy goes."""
+        its key (a table sharded outside its key), the old copy goes. replace drops every existing key of the
+        table that the batch does not name, so a full catalogue ingest cannot leave a stale row behind."""
         kidx = shard.key_indexes(cols)
         incoming = {}  # key -> (rel, row); the last row of a key in the batch wins
         for r in rows:
@@ -384,12 +409,18 @@ class Store:
             return state[rel][1]
 
         changed, touched = 0, {rel for rel, _ in incoming.values()}
-        homes = None  # key -> shards holding it; only a table whose shard is not a function of its key needs it
-        if not placement_follows_key(table):
+        homes = None  # key -> shards holding it; a table whose shard is not a function of its key, or a replace
+        if replace or not placement_follows_key(table):
             homes = {}
             for rel in self._table_shards(table):
                 for k in load(rel):
                     homes.setdefault(k, set()).add(rel)
+        if replace:
+            for k in sorted(set(homes) - set(incoming)):
+                for rel in sorted(homes[k]):
+                    del state[rel][1][k]
+                    touched.add(rel)
+                changed += 1
         for k in sorted(incoming):
             rel, r = incoming[k]
             if homes is not None:
@@ -438,11 +469,12 @@ class Store:
             full[idx[c.name]] = v
         return shard_rel(table, full)
 
-    def put(self, table_name, rows, writer=None, version=None, raw=False, ran=None):
+    def put(self, table_name, rows, writer=None, version=None, raw=False, ran=None, replace=False):
         """Merge rows into table_name's shards, validate, write, `git add`. -> rows changed.
 
         rows: dicts (column -> value) or sequences in column order. A rerun with the
-        same rows changes no byte, writers.tsv included."""
+        same rows changes no byte, writers.tsv included. replace also deletes every
+        existing key of the table that rows does not name (a full snapshot writer)."""
         writer = writer or os.environ.get("CARDDB_WRITER") or "cli"
         if not _WRITER.match(writer):
             raise StoreError("writer %r is not a valid writer name" % writer)
@@ -451,7 +483,7 @@ class Store:
         self.ensure()
         with self.lock():
             cols, cells = self._cells(table, rows, raw, writer)
-            plan, changed = self._plan(table, cols, cells)
+            plan, changed = self._plan(table, cols, cells, replace=replace)
             if plan and table_name != "_meta/writers":
                 wt = self.schema.tables["_meta/writers"]
                 wcols = wt.scope_columns(self.kind)

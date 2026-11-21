@@ -6,6 +6,8 @@ CREATE INDEX "idx_cert_level" ON "cert" ("level");
 CREATE INDEX "idx_cert_name" ON "cert" ("name");
 CREATE INDEX "idx_cert_norm_name" ON "cert" ("norm_name");
 CREATE INDEX "idx_cert_sets_level" ON "cert_sets" ("level");
+CREATE INDEX "idx_curated_bracket_flags_source" ON "curated_bracket_flags" ("source");
+CREATE INDEX "idx_curated_game_changers_source" ON "curated_game_changers" ("source");
 CREATE INDEX "idx_curated_labels_label" ON "curated_labels" ("label");
 CREATE INDEX "idx_evidence_source" ON "evidence" ("source");
 CREATE INDEX "idx_labels_label" ON "labels" ("label");
@@ -20,21 +22,23 @@ CREATE INDEX idx_src_manifest_cards_set_code ON src_manifest_cards (set_code);
 CREATE INDEX "idx_status_level" ON "status" ("level");
 CREATE INDEX "idx_support_status" ON "support" ("status");
 CREATE INDEX "idx_xledger_tier" ON "xledger" ("tier");
+CREATE TABLE "_meta_size" ("metric" TEXT NOT NULL, "amount" INTEGER NOT NULL, "unit" TEXT NOT NULL, "measured" TEXT NOT NULL, PRIMARY KEY ("metric")) WITHOUT ROWID;
 CREATE TABLE "_meta_sources" ("source" TEXT NOT NULL, "version" TEXT NOT NULL, "retrieved" TEXT NOT NULL, "licence" TEXT NOT NULL, PRIMARY KEY ("source")) WITHOUT ROWID;
 CREATE TABLE "_meta_unresolved" ("kind" TEXT NOT NULL, "ref" TEXT NOT NULL, "reason" TEXT NOT NULL, PRIMARY KEY ("kind", "ref")) WITHOUT ROWID;
 CREATE TABLE "_meta_writers" ("writer" TEXT NOT NULL, "table" TEXT NOT NULL, "version" TEXT NOT NULL, "ran" TEXT NOT NULL, PRIMARY KEY ("writer", "table")) WITHOUT ROWID;
 CREATE TABLE build_meta (key TEXT NOT NULL, value TEXT NOT NULL, PRIMARY KEY (key)) WITHOUT ROWID;
 CREATE VIRTUAL TABLE card_fts USING fts5(oracle_id UNINDEXED, name, type_line, keywords, labels, tokenize='porter unicode61');
 CREATE TABLE card_names (norm_name TEXT NOT NULL, oracle_id TEXT NOT NULL, name TEXT NOT NULL, PRIMARY KEY (norm_name, oracle_id)) WITHOUT ROWID;
-CREATE TABLE "cards" ("oracle_id" TEXT NOT NULL, "name" TEXT NOT NULL, "layout" TEXT NOT NULL, "mana_cost" TEXT, "mana_value" INTEGER NOT NULL, "type_line" TEXT NOT NULL, "colors" TEXT, "color_identity" TEXT, "keywords" TEXT, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
+CREATE TABLE "cards" ("oracle_id" TEXT NOT NULL, "name" TEXT NOT NULL, "layout" TEXT NOT NULL, "mana_cost" TEXT, "mana_value" INTEGER NOT NULL, "type_line" TEXT NOT NULL, "colors" TEXT, "color_identity" TEXT, "keywords" TEXT, "oracle_sha" TEXT, "first_released" TEXT, "first_set" TEXT, "paper" INTEGER, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
 CREATE TABLE "cert" ("oracle_id" TEXT NOT NULL, "norm_name" TEXT NOT NULL, "name" TEXT NOT NULL, "gorge_sha" TEXT NOT NULL, "corpus_pin" TEXT NOT NULL, "script_sha" TEXT, "oracle_sha" TEXT, "first_set" TEXT, "released" TEXT, "level" TEXT, "exclusion" TEXT, "refs" TEXT, "keys_total" INTEGER NOT NULL, "keys_used" INTEGER NOT NULL, "keys_compared" INTEGER NOT NULL, "keys_agreed" INTEGER NOT NULL, "keys_unreachable" INTEGER NOT NULL, "triggers_unmeasured" INTEGER NOT NULL, "scen_level" TEXT, "oracle_audit" TEXT, "open_deltas" INTEGER NOT NULL, "diagnosed_deltas" INTEGER NOT NULL, "tickets" TEXT, "why" TEXT, "witness" TEXT, "measured" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
-CREATE TABLE "cert_sets" ("set_code" TEXT NOT NULL, "gorge_sha" TEXT NOT NULL, "corpus_pin" TEXT NOT NULL, "released" TEXT, "set_type" TEXT, "paper" INTEGER NOT NULL, "new_paper" INTEGER NOT NULL, "reprints" INTEGER NOT NULL, "playable" INTEGER NOT NULL, "excluded" INTEGER NOT NULL, "c0" INTEGER NOT NULL, "c1" INTEGER NOT NULL, "c2" INTEGER NOT NULL, "c3" INTEGER NOT NULL, "open" INTEGER NOT NULL, "level" TEXT, "state" TEXT NOT NULL, "cursor" TEXT, "entered" TEXT, "certified" TEXT, "measured" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("set_code")) WITHOUT ROWID;
-CREATE TABLE "curated_bracket_flags" ("oracle_id" TEXT NOT NULL, "flag" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "flag")) WITHOUT ROWID;
+CREATE TABLE "cert_sets" ("set_code" TEXT NOT NULL, "gorge_sha" TEXT NOT NULL, "corpus_pin" TEXT NOT NULL, "released" TEXT, "set_type" TEXT, "paper" INTEGER NOT NULL, "new_paper" INTEGER, "reprints" INTEGER, "playable" INTEGER NOT NULL, "excluded" INTEGER, "c0" INTEGER, "c1" INTEGER, "c2" INTEGER, "c3" INTEGER, "open" INTEGER, "level" TEXT, "state" TEXT NOT NULL, "cursor" TEXT, "entered" TEXT, "certified" TEXT, "measured" TEXT NOT NULL, "printed" INTEGER, "a_declared" TEXT, "a_cards" INTEGER, "a_outstanding" INTEGER, "a_problem_cards" INTEGER, "a_xmage_verified" INTEGER, "a_forge_only" INTEGER, "a_hand" INTEGER, "a_non_tournament" INTEGER, "a_buckets" TEXT, "b_declared" TEXT, "b_cards" INTEGER, "b_outstanding" INTEGER, "b_problem_cards" INTEGER, "b_non_tournament" INTEGER, "b_buckets" TEXT, "status_date" TEXT, "status_commit" TEXT, "status_gorge" TEXT, "status_forge_ref" TEXT, "ratchet_failures" INTEGER, "writer" TEXT, PRIMARY KEY ("set_code")) WITHOUT ROWID;
+CREATE TABLE "curated_bracket_flags" ("oracle_id" TEXT NOT NULL, "flag" TEXT NOT NULL, "source" TEXT NOT NULL, "cited" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "flag")) WITHOUT ROWID;
 CREATE TABLE "curated_exclusions" ("oracle_id" TEXT NOT NULL, "reason" TEXT NOT NULL, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
-CREATE TABLE "curated_game_changers" ("oracle_id" TEXT NOT NULL, "added" TEXT NOT NULL, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
+CREATE TABLE "curated_game_changers" ("oracle_id" TEXT NOT NULL, "added" TEXT NOT NULL, "source" TEXT NOT NULL, "cited" TEXT NOT NULL, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
 CREATE TABLE "curated_labels" ("oracle_id" TEXT NOT NULL, "label" TEXT NOT NULL, "note" TEXT, PRIMARY KEY ("oracle_id", "label")) WITHOUT ROWID;
 CREATE TABLE "curated_relations" ("oracle_id" TEXT NOT NULL, "relation" TEXT NOT NULL, "other_oracle_id" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "relation", "other_oracle_id")) WITHOUT ROWID;
 CREATE TABLE "evidence" ("oracle_id" TEXT NOT NULL, "source" TEXT NOT NULL, "ref" TEXT NOT NULL, "outcome" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id", "source", "ref")) WITHOUT ROWID;
+CREATE TABLE "faces" ("oracle_id" TEXT NOT NULL, "face" TEXT NOT NULL, "mana_cost" TEXT, "type_line" TEXT NOT NULL, "power" TEXT, "toughness" TEXT, PRIMARY KEY ("oracle_id", "face")) WITHOUT ROWID;
 CREATE TABLE "labels" ("oracle_id" TEXT NOT NULL, "label" TEXT NOT NULL, "origin" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "label")) WITHOUT ROWID;
 CREATE TABLE "legality" ("oracle_id" TEXT NOT NULL, "format" TEXT NOT NULL, "status" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "format")) WITHOUT ROWID;
 CREATE TABLE "printings" ("printing_id" TEXT NOT NULL, "oracle_id" TEXT NOT NULL, "set_code" TEXT NOT NULL, "collector_number" TEXT NOT NULL, "rarity" TEXT NOT NULL, "released" TEXT, PRIMARY KEY ("printing_id")) WITHOUT ROWID;
@@ -46,6 +50,7 @@ CREATE TABLE "status" ("oracle_id" TEXT NOT NULL, "level" TEXT NOT NULL, "verdic
 CREATE TABLE "support" ("oracle_id" TEXT NOT NULL, "engine" TEXT NOT NULL, "status" TEXT NOT NULL, "pin" TEXT NOT NULL, "why" TEXT, "measured" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id", "engine")) WITHOUT ROWID;
 CREATE TABLE "xledger" ("oracle_id" TEXT NOT NULL, "tier" TEXT NOT NULL, "state" TEXT NOT NULL, "note" TEXT, PRIMARY KEY ("oracle_id", "tier")) WITHOUT ROWID;
 CREATE VIEW proven AS SELECT * FROM cert WHERE level IN ('C2', 'C3') AND (exclusion IS NULL OR exclusion = '-');
+-- rows _meta_size
 -- rows _meta_sources
 -- rows _meta_unresolved
 -- rows _meta_writers
@@ -69,9 +74,9 @@ fire	ab111111111111111111111111111111	Fire // Ice
 ice	ab111111111111111111111111111111	Fire // Ice
 lightning bolt	ab000000000000000000000000000000	Lightning Bolt
 -- rows cards
-ab000000000000000000000000000000	Lightning Bolt	normal	{R}	1	Instant	R	R	NULL
-ab111111111111111111111111111111	Fire // Ice	split	{1}{R} // {1}{U}	4	Instant // Instant	R,U	R,U	NULL
-cd222222222222222222222222222222	Dáin Ironfoot	normal	{3}{R}	4	Legendary Creature — Dwarf Warrior	R	R	Haste,Double strike
+ab000000000000000000000000000000	Lightning Bolt	normal	{R}	1	Instant	R	R	NULL	NULL	NULL	NULL	NULL
+ab111111111111111111111111111111	Fire // Ice	split	{1}{R} // {1}{U}	4	Instant // Instant	R,U	R,U	NULL	NULL	NULL	NULL	NULL
+cd222222222222222222222222222222	Dáin Ironfoot	normal	{3}{R}	4	Legendary Creature — Dwarf Warrior	R	R	Haste,Double strike	NULL	NULL	NULL	NULL
 -- rows cert
 -- rows cert_sets
 -- rows curated_bracket_flags
@@ -82,6 +87,7 @@ cd222222222222222222222222222222	ante
 ab000000000000000000000000000000	staple	NULL
 -- rows curated_relations
 -- rows evidence
+-- rows faces
 -- rows labels
 ab000000000000000000000000000000	burn	derived
 -- rows legality

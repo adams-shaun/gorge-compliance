@@ -483,8 +483,8 @@ func realDecl(t *testing.T, table string) string {
 	return string(b)
 }
 
-// The committed curated files hold a header and no rows; with one example row
-// each they validate against the schema.
+// The committed curated files may hold seeded rows; an empty one gets one
+// example row, and every tree still validates against the schema.
 func TestCuratedFiles(t *testing.T) {
 	s := loadReal(t)
 	cur := "../../carddb/curated"
@@ -508,11 +508,13 @@ func TestCuratedFiles(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		if n := strings.Count(string(b), "\n"); n != 2 {
-			t.Errorf("%s: %d lines, want header + column line only", e.Name(), n)
+		body := string(b)
+		if n := strings.Count(body, "\n"); n < 2 {
+			t.Errorf("%s: %d lines, want at least the header and column line", e.Name(), n)
+		} else if n == 2 { // a header-only curated file: add one example row
+			body += strings.Split(shard(s.Tables["curated/"+name], Public, 1), "\n")[2] + "\n"
 		}
-		example := strings.Split(shard(s.Tables["curated/"+name], Public, 1), "\n")[2]
-		write(t, root, "curated/"+e.Name(), string(b)+example+"\n")
+		write(t, root, "curated/"+e.Name(), body)
 	}
 	if strings.Join(got, ",") != strings.Join(want, ",") {
 		t.Fatalf("curated files %v, want %v", got, want)

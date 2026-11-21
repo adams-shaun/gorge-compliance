@@ -20,8 +20,10 @@ OID_F = "f0" + "5" * 30
 
 CURATED = {
     "labels": [{"oracle_id": OID_A, "label": "staple", "note": "format fixture"}],
-    "game-changers": [{"oracle_id": OID_A, "added": "2023-01-01"}],
-    "bracket-flags": [{"oracle_id": OID_A, "flag": "mass-land-denial"}],
+    "game-changers": [{"oracle_id": OID_A, "added": "2023-01-01", "source": "https://example.test/wotc",
+                       "cited": "2025-02-11"}],
+    "bracket-flags": [{"oracle_id": OID_A, "flag": "mass-land-denial", "source": "https://example.test/wotc",
+                       "cited": "2025-02-11"}],
     "exclusions": [{"oracle_id": OID_E, "reason": "ante"}],
     "relations": [{"oracle_id": OID_A, "relation": "combos_with", "other_oracle_id": OID_C}],
 }

@@ -1,0 +1,8 @@
+#carddb-schema faces v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	cards.oracle_id
+face	string	yes	yes	public	Face side (a, b, ...) in card order
+mana_cost	string	no	no	public	Printed mana cost of this face
+type_line	string	yes	no	public	Type line of this face
+power	string	no	no	public	Power of this face
+toughness	string	no	no	public	Toughness of this face
