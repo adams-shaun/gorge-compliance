@@ -467,6 +467,16 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return v.Len() > 0 && w.gameMentions("LastTurnEntered")
 	case typ == "Game" && name == "ResolvedThisTurn":
 		return v.Len() > 0 && w.gameMentions("ResolvedThisTurn")
+	case typ == "Game" && name == "MaxDistinctOnStackThisTurn":
+		// Event-folded high-water mark of distinct sources on the stack this
+		// turn; its only reader is the Count$MaxDistinctOnStack head (Geometric
+		// Weird, count_history_heads.go).
+		return v.Int() > 0 && w.gameMentions("MaxDistinctOnStack")
+	case typ == "Object" && name == "RegeneratedThisTurn":
+		// Event-folded per-turn regeneration tally; its only reader is the
+		// Count$RegeneratedThisTurn head (Spiny Starfish), and a zone change
+		// resets it (CR 400.7), so only a battlefield permanent can be live.
+		return v.Int() > 0 && o.Zone == state.ZBattlefield && w.gameMentions("RegeneratedThisTurn")
 	case typ == "Player" && name == "SearchedLibraryThisTurn":
 		// Set by any completed library search (CR 701.23), so it is live in
 		// cuts after a search; its only reader is the Count$SearchedLibrary.<spec>
