@@ -467,6 +467,13 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return v.Len() > 0 && w.gameMentions("LastTurnEntered")
 	case typ == "Game" && name == "ResolvedThisTurn":
 		return v.Len() > 0 && w.gameMentions("ResolvedThisTurn")
+	case typ == "Game" && name == "MaxDistinctOnStackThisTurn":
+		// A per-turn high-water mark (Count$MaxDistinctOnStack, Geometric
+		// Weird), raised by every push, so it is non-zero in most mid-game
+		// cuts; its only reader is the count_history_heads.go head of the same
+		// name, so a game with no card naming MaxDistinctOnStack does not
+		// depend on the fold.
+		return v.Int() != 0 && w.gameMentions("MaxDistinctOnStack")
 	case typ == "Player" && name == "SearchedLibraryThisTurn":
 		// Set by any completed library search (CR 701.23), so it is live in
 		// cuts after a search; its only reader is the Count$SearchedLibrary.<spec>
