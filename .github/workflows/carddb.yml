@@ -1,0 +1,369 @@
+# carddb: validate the data tree, write the catalogue and compliance shards,
+# publish them, and release the built SQLite.
+#
+#   pull request   touching carddb/** (or the checker itself): the committed
+#                  carddb/ tree (schema + curated inputs) must validate and
+#                  hold nothing private or Forge-shaped; the workflow lints.
+#   push to        the published data branch: after a two-hour quiet period
+#   `carddb`       measured from the push event (not the commit's authored
+#                  time) the catalogue (CDB-03) and compliance-status (CDB-16)
+#                  writers run from `main`, `carddb publish` commits their
+#                  shards, and the built asset is uploaded to the
+#                  `carddb-latest` release. A new push cancels the waiting run
+#                  (one concurrency group), so a burst of data commits produces
+#                  one publish.
+#   nightly        the same write path without the debounce, so a quiet branch
+#   (04:23 UTC)    still gets a fresh catalogue, support rows and release.
+#   dispatch       the same path; `dry_run=true` builds and packs but neither
+#                  publishes the data branch nor creates, uploads or deletes a
+#                  release.
+#
+# The run's date is never the wall clock: a push uses `HEAD_TS`, a
+# schedule/dispatch the data tip's date, so the same inputs rerun on another day
+# produce byte-identical shards and release metadata.
+#
+# Release assets (see cmd/carddb/py/carddb/release.py):
+#   `carddb-latest`            floating release; carddb.sqlite.zst is replaced
+#   `carddb-YYYY-MM-DD`        one snapshot per ISO week (the Monday)
+#   carddb-parquet.tar.gz      one .parquet per SQLite table + MANIFEST.json
+#                              (the CI-only pyarrow export), on both releases
+#   older than 12 weeks        pruned except the newest release per quarter
+#   carddb-latest.json         data_rev, gorge_pin, packed_mib, budget, sha256;
+#                              latest only, never on a dated weekly release
+#
+# The `_meta/size` shard records the branch's object-store size (D7 budget
+# 300 MiB); `carddb freshness` reads the same measurement. Over the budget the
+# `size` step fails before `publish`, so the branch cannot ship over-budget.
+#
+# Limits of the write-path guarantee:
+#  - A workflow file runs from the branch that was pushed, so the steps
+#    themselves come from the pushed `carddb` branch. Protect the `carddb`
+#    branch (Settings -> Branches -> `carddb`: require linear history and
+#    fast-forward only; allow only the Actions token and the publisher deploy
+#    key to push), so the steps cannot be edited on the way in; this workflow
+#    also pins the checker, writer and release tool to `main`, and refreshes
+#    the branch's own copy of this file on every publish.
+#  - `main` must already contain cmd/carddb (including the compliance, size and
+#    release writers), carddb/schema and the manifests, i.e. this change must
+#    be promoted develop -> main BEFORE the first publish to `carddb`.
+#  - The `carddb` branch must carry a copy of this file for the push trigger
+#    to fire; the first `carddb init` creates it and each publish refreshes it.
+#  - The write job needs `contents: write`; it is separate from the
+#    pull-request check so that path never holds a write token.
+name: carddb
+
+on:
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'carddb/**'
+      - 'cmd/carddb/**'
+      - 'internal/carddb/**'
+      - '.github/workflows/carddb.yml'
+  push:
+    branches: [carddb]
+  schedule:
+    - cron: '23 4 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: build and pack the SQLite without publishing the data branch or uploading a release
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+# One write path; pull requests get their own group. A newer push cancels the
+# older waiting run, which is the two-hour debounce.
+concurrency:
+  group: carddb-${{ github.event.pull_request.number || 'data' }}
+  cancel-in-progress: true
+
+env:
+  GOWORK: 'off'
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint the workflow (actionlint when present, else a YAML parse)
+        run: |
+          set -euo pipefail
+          if command -v actionlint >/dev/null 2>&1; then
+            actionlint .github/workflows/carddb.yml
+            echo "actionlint: ok"
+          elif python3 -c 'import yaml' >/dev/null 2>&1; then
+            python3 -c 'import yaml; d = yaml.safe_load(open(".github/workflows/carddb.yml", encoding="utf-8")); assert isinstance(d, dict) and "jobs" in d; print("yaml parse: ok (%d job(s))" % len(d["jobs"]))'
+          elif command -v ruby >/dev/null 2>&1; then
+            ruby -ryaml -e 'd = YAML.load_file(".github/workflows/carddb.yml"); abort("not a workflow") unless d.is_a?(Hash) && d["jobs"]; puts "yaml parse: ok (#{d["jobs"].size} job(s))"'
+          else
+            echo "::error::no actionlint, PyYAML or ruby available to lint .github/workflows/carddb.yml"
+            exit 1
+          fi
+
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      # the checker and schema: this PR's head, or main for a data publication
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.sha || 'main' }}
+          path: tool
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: github.event_name != 'pull_request'
+        with:
+          ref: carddb
+          path: data
+          persist-credentials: false
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: tool/go.mod
+          cache: false
+      - name: Build the checker
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          if [ ! -d cmd/carddb ] || [ ! -d carddb/schema ]; then
+            echo "::error::the checker ref has no cmd/carddb or carddb/schema: promote the carddb change to main before publishing the carddb branch"
+            exit 1
+          fi
+          go build -trimpath -o ../carddb-bin ./cmd/carddb
+      - name: carddb tool tests (release planner and dry run)
+        working-directory: tool
+        run: make carddb-test
+      - name: Pick the tree
+        id: tree
+        run: |
+          if [ "${GITHUB_EVENT_NAME}" = pull_request ]; then
+            echo "dir=$GITHUB_WORKSPACE/tool/carddb" >> "$GITHUB_OUTPUT"
+          else
+            echo "dir=$GITHUB_WORKSPACE/data" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Validate the shards
+        run: ./carddb-bin validate -schema tool/carddb/schema -scope public -tree "${{ steps.tree.outputs.dir }}"
+      - name: Public boundary
+        run: ./carddb-bin boundary -schema tool/carddb/schema -tree "${{ steps.tree.outputs.dir }}"
+
+  # The debounce is a real quiet period, not a cron approximation: a push waits
+  # two hours from the push event (not from the commit's authored timestamp, so
+  # pushing an older commit still waits), and the next push cancels it through
+  # the concurrency group. The survivor checks that it still owns the tip.
+  ready:
+    needs: check
+    if: github.event_name == 'push' && github.event.deleted != true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 135
+    outputs:
+      stale: ${{ steps.tip.outputs.stale }}
+    steps:
+      - name: Wait two hours from the push
+        env:
+          # repository.pushed_at is the push event's time; head_commit.timestamp
+          # is the commit's, which can be hours older and would shorten (or
+          # erase) the quiet period.
+          PUSHED_AT: ${{ github.event.repository.pushed_at }}
+        run: |
+          set -euo pipefail
+          now=$(date -u +%s)
+          if [ -n "$PUSHED_AT" ]; then
+            start=$(date -u -d "$PUSHED_AT" +%s)
+          else
+            start=$now  # no push time in the payload: wait from now
+          fi
+          target=$(( start + 7200 ))
+          wait=$(( target - now ))
+          if [ "$wait" -gt 0 ]; then
+            echo "waiting ${wait}s for the carddb branch to stop moving"
+            sleep "$wait"
+          fi
+      - name: The newest push owns the publish
+        id: tip
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          head=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/carddb" --jq .object.sha)
+          if [ "$head" = "$GITHUB_SHA" ]; then
+            echo "stale=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "stale=true" >> "$GITHUB_OUTPUT"
+            echo "superseded by $head; the newer run publishes"
+          fi
+
+  # The writers run from `main` (the tool, schema and manifests), after the data
+  # tree has validated and passed the boundary. It is a separate job so the
+  # pull-request path never holds a write token.
+  publish:
+    needs: [check, ready, lint]
+    if: |
+      always() && github.event_name != 'pull_request' && needs.check.result == 'success' &&
+      needs.lint.result == 'success' &&
+      (needs.ready.result == 'skipped' ||
+       (needs.ready.result == 'success' && needs.ready.outputs.stale != 'true'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    env:
+      # init clones the public data branch and publish pushes back with the
+      # run's token (masked in the log). CARDDB_HOME is set from RUNNER_TEMP in
+      # the init step, which (unlike the runner context) job-level env cannot.
+      CARDDB_PUBLIC_REMOTE: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+      GIT_TERMINAL_PROMPT: '0'
+      GH_TOKEN: ${{ github.token }}
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+      HEAD_TS: ${{ github.event.head_commit.timestamp }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: tool
+          persist-credentials: false
+      - name: Guard the writer ref
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          for f in cmd/carddb/main.py cmd/carddb/py/carddb/compliance.py \
+                   cmd/carddb/py/carddb/release.py cmd/carddb/py/parquet_export.py \
+                   carddb/schema/v1/_meta/size.tsv \
+                   oracle/compliance/manifests Makefile; do
+            if [ ! -e "$f" ]; then
+              echo "::error::the writer ref has no $f: promote the carddb change to main before publishing the carddb branch"
+              exit 1
+            fi
+          done
+      - name: Clone the data branch and fix the run's date
+        working-directory: tool
+        shell: bash
+        run: |
+          set -euo pipefail
+          export CARDDB_HOME="$RUNNER_TEMP/carddb"
+          echo "CARDDB_HOME=$CARDDB_HOME" >> "$GITHUB_ENV"
+          python3 -I cmd/carddb/main.py init
+          # The pushed commit's date, not the wall clock: re-running the same
+          # push is byte-identical. A schedule/dispatch has no head commit, so
+          # it uses the data branch tip's date (the same fallback release.py
+          # uses); a wall-clock date would rewrite the shards and the release
+          # metadata when the same inputs were rerun on another day.
+          if [ "${GITHUB_EVENT_NAME}" = push ]; then
+            measured=${HEAD_TS%%T*}
+          else
+            measured=$(git -C "$CARDDB_HOME/public" log -1 --format=%cs)
+          fi
+          case "$measured" in
+            [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]) ;;
+            *) echo "::error::cannot read the run date (HEAD_TS=$HEAD_TS, data tip=$measured)"; exit 1 ;;
+          esac
+          echo "MEASURED=$measured" >> "$GITHUB_ENV"
+          echo "RELEASE_DATE=$measured" >> "$GITHUB_ENV"
+          # Any writer that falls back to CARDDB_NOW gets the same date.
+          echo "CARDDB_NOW=$measured" >> "$GITHUB_ENV"
+          echo "TOOL_REV=$(git rev-parse --short=12 HEAD)" >> "$GITHUB_ENV"
+      # The carddb branch runs its own copy of this workflow. Refreshing it from
+      # main on every publish is the structural fix for a stale copy: the next
+      # workflow change reaches the branch with the data commit that follows it.
+      - name: Refresh the branch's workflow copy
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          data="$CARDDB_HOME/public"
+          install -D -m 644 .github/workflows/carddb.yml "$data/.github/workflows/carddb.yml"
+          git -C "$data" add .github/workflows/carddb.yml
+      - name: Fetch AllPrintings
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 --retry-delay 5 -o "$RUNNER_TEMP/AllPrintings.json.gz" \
+            https://mtgjson.com/api/v5/AllPrintings.json.gz
+      # CDB-03's ingest json.load()s the whole decompressed AllPrintings (4+ GB,
+      # roughly 2.5x that as Python objects). A standard runner that cannot hold
+      # it dies with an opaque OOM; fail first with the size and the requirement.
+      - name: Preflight the AllPrintings memory budget
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          gz="$RUNNER_TEMP/AllPrintings.json.gz"
+          bytes=$(gzip -dc "$gz" | wc -c)
+          need_kb=$(( bytes / 1024 * 5 / 2 ))
+          avail_kb=$(awk '/^MemAvailable:/ {print $2}' /proc/meminfo)
+          echo "AllPrintings: $((bytes / 1024 / 1024)) MiB decompressed, need about $((need_kb / 1024)) MiB, $((avail_kb / 1024)) MiB available"
+          if [ "$avail_kb" -lt "$need_kb" ]; then
+            echo "::error::AllPrintings ingest needs about $((need_kb / 1024)) MiB but only $((avail_kb / 1024)) MiB is available: use a larger runner"
+            exit 1
+          fi
+      - name: Catalogue ingest (CDB-03)
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          python3 -I cmd/carddb/main.py ingest catalogue --mtgjson "$RUNNER_TEMP/AllPrintings.json.gz"
+      - name: Compliance status writer (CDB-16)
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          python3 -I cmd/carddb/main.py compliance --repo "$GITHUB_WORKSPACE/tool" \
+            --source ci --measured "$MEASURED" --version "$TOOL_REV"
+      - name: Report the packed size into _meta/size
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          python3 -I cmd/carddb/main.py size --measured "$MEASURED" --version "$TOOL_REV" --max-pack-mb 300
+      - name: Publish the data branch
+        if: env.DRY_RUN != 'true'
+        working-directory: tool
+        run: python3 -I cmd/carddb/main.py publish --bulk
+      - name: Build the SQLite
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          python3 -I cmd/carddb/main.py build --out "$RUNNER_TEMP/carddb.sqlite"
+      - name: Compress the SQLite
+        run: |
+          set -euo pipefail
+          command -v zstd >/dev/null || { echo "::error::zstd is not installed"; exit 1; }
+          zstd --no-mtime -T1 -19 -q -f -o "$RUNNER_TEMP/carddb.sqlite.zst" "$RUNNER_TEMP/carddb.sqlite"
+          ls -l "$RUNNER_TEMP/carddb.sqlite" "$RUNNER_TEMP/carddb.sqlite.zst"
+      - name: Export the per-table Parquet (pyarrow, CI-only)
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          # pyarrow is a CI-only dependency: the carddb tool is stdlib only and
+          # never imports it; the exporter is the only place that does. The
+          # version is pinned so the parquet bytes are the same on every run,
+          # and a venv keeps it out of the system python.
+          python3 -m venv "$RUNNER_TEMP/pyarrow-venv"
+          "$RUNNER_TEMP/pyarrow-venv/bin/pip" install --quiet --disable-pip-version-check \
+            "pyarrow==21.0.0"
+          "$RUNNER_TEMP/pyarrow-venv/bin/python" -I cmd/carddb/py/parquet_export.py \
+            --db "$RUNNER_TEMP/carddb.sqlite" --out "$RUNNER_TEMP/carddb-parquet.tar.gz"
+          ls -l "$RUNNER_TEMP/carddb-parquet.tar.gz"
+      - name: Publish the release
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          args=(--repo "$GITHUB_REPOSITORY" --db "$RUNNER_TEMP/carddb.sqlite" \
+                --asset "$RUNNER_TEMP/carddb.sqlite.zst" \
+                --asset "$RUNNER_TEMP/carddb-parquet.tar.gz" \
+                --now "$RELEASE_DATE" --keep-weeks 12)
+          if [ "$DRY_RUN" = "true" ]; then
+            python3 -I cmd/carddb/main.py release "${args[@]}" --dry-run
+          else
+            python3 -I cmd/carddb/main.py release "${args[@]}"
+          fi
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### carddb publish (${GITHUB_EVENT_NAME})"
+            echo "- commit: ${GITHUB_SHA:0:12}"
+            echo "- dry run: ${DRY_RUN:-false}"
+            echo "- release date: ${RELEASE_DATE:-unknown}"
+            if [ -f "$RUNNER_TEMP/carddb.sqlite.zst" ]; then
+              echo "- asset: $(du -h "$RUNNER_TEMP/carddb.sqlite.zst" | cut -f1) compressed"
+            fi
+            if [ -f "$RUNNER_TEMP/carddb-parquet.tar.gz" ]; then
+              echo "- parquet: $(du -h "$RUNNER_TEMP/carddb-parquet.tar.gz" | cut -f1)"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
