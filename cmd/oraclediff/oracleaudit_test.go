@@ -195,6 +195,65 @@ func TestOracleAuditExportCollision(t *testing.T) {
 	}
 }
 
+// TestOracleAuditMultiFacedLookup: a multi-faced card resolves to its own
+// joined "A // B" row even when an unrelated bare "A" row (a theme card or a
+// token) exists, and a meld-style "X // X" empty row still never hides the
+// real bare "X" row.
+func TestOracleAuditMultiFacedLookup(t *testing.T) {
+	dir := t.TempDir()
+	card := filepath.Join(dir, "cardsfolder", "t")
+	if err := os.MkdirAll(card, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	split := "Name:Zed\nManaCost:R\nTypes:Sorcery\nAlternateMode:Split\nOracle:Draw a card.\n\nALTERNATE\n\n" +
+		"Name:Quux\nManaCost:G\nTypes:Sorcery\nOracle:Gain 2 life.\n"
+	meld := "Name:Mox Meld\nManaCost:B\nTypes:Instant\nOracle:Destroy target creature.\n"
+	for name, src := range map[string]string{"zed_quux.txt": split, "mox_meld.txt": meld} {
+		if err := os.WriteFile(filepath.Join(card, name), []byte(src), 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	themeRow := "Zed\tx\t(Theme color: {B})\n"
+	splitRow := "Zed // Quux\tx\tDraw a card.\\nGain 2 life.\n"
+	meldReal := "Mox Meld\tx\tDestroy target creature.\n"
+	meldEmpty := "Mox Meld // Mox Meld\tx\t\\n\n"
+	for _, tc := range []struct{ name, rows, card, want string }{
+		{"split-theme-first", themeRow + splitRow, "Zed", "ok"},
+		{"split-theme-last", splitRow + themeRow, "Zed", "ok"},
+		{"split-changed", themeRow + "Zed // Quux\tx\tDraw 2 cards.\\nGain 2 life.\n", "Zed", "diff"},
+		{"meld-real-first", meldReal + meldEmpty, "Mox Meld", "ok"},
+		{"meld-empty-first", meldEmpty + meldReal, "Mox Meld", "ok"},
+		{"split-only-empty", "Zed // Quux\tx\t\\n\n", "Zed", "empty"},
+	} {
+		exp := filepath.Join(dir, tc.name+".tsv")
+		out := filepath.Join(dir, tc.name+".out.tsv")
+		if err := os.WriteFile(exp, []byte(tc.rows), 0o644); err != nil {
+			t.Fatal(err)
+		}
+		if err := runOracleAudit(dir, exp, out, "", ""); err != nil {
+			t.Fatal(err)
+		}
+		b, _ := os.ReadFile(out)
+		got := ""
+		for _, l := range strings.Split(strings.TrimSpace(string(b)), "\n") {
+			if f := strings.Split(l, "\t"); len(f) == 4 && f[0] == tc.card {
+				got = f[1]
+			}
+		}
+		if got != tc.want {
+			t.Errorf("%s: %s verdict %q, want %q (out %q)", tc.name, tc.card, got, tc.want, string(b))
+		}
+	}
+}
+
+// TestOracleAuditFoldSelfRefsEmptyName: an empty or blank face name must not
+// panic the fold.
+func TestOracleAuditFoldSelfRefsEmptyName(t *testing.T) {
+	if got := foldSelfRefs("Draw  a card.", []string{"", "  "}); got != "Draw a card." {
+		t.Errorf("got %q", got)
+	}
+}
+
 // TestOracleAuditFoldSelfRefs: Scryfall's "this creature" / short-name
 // rewording folds to the same text as the full name.
 func TestOracleAuditFoldSelfRefs(t *testing.T) {

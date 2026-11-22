@@ -213,7 +213,7 @@ func main() {
 		oracle := fs.String("oracle", "", "deckdb cards.oracle_text export TSV: name\\tsha\\ttext")
 		out := fs.String("out", "", "audit TSV: card\\tverdict\\tscript_sha\\toracle_sha")
 		scenarios := fs.String("scenarios", "scenarios/oracle", "hand scenario dir for the oracle_sha staleness check (empty: skip)")
-		stale := fs.String("stale", "", "write stale scenario rows here (card\\tfile\\trecorded\\tcurrent)")
+		stale := fs.String("stale", "", "write stale scenario rows here (card\\tfile\\treason\\trecorded\\tcurrent)")
 		fs.Parse(os.Args[2:])
 		err = runOracleAudit(*dir, *oracle, *out, *scenarios, *stale)
 	default:

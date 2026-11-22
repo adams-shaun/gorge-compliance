@@ -107,8 +107,7 @@ func fullKey(name string) string {
 // X), and between two equally empty or non-empty rows the smaller full key
 // wins, so the choice never depends on the file's row order.
 func (e *oracleExport) better(a, b string) bool {
-	ae := strings.TrimSpace(normaliseOracleText(e.full[a].text, "")) == ""
-	be := strings.TrimSpace(normaliseOracleText(e.full[b].text, "")) == ""
+	ae, be := emptyRow(e.full[a]), emptyRow(e.full[b])
 	if ae != be {
 		return !ae
 	}
@@ -159,13 +158,37 @@ func loadOracleExport(path string) (*oracleExport, error) {
 	return ex, nil
 }
 
-// find returns the export row for a card, and its full key. Exact full names
-// are tried before the front-face fallback, so X never resolves to X // X.
+// emptyRow reports whether the row carries no text once normalised (a "\\n"
+// row, a reminder-only theme row).
+func emptyRow(r oracleExportRow) bool {
+	return strings.TrimSpace(normaliseOracleText(r.text, "")) == ""
+}
+
+// find returns the export row for a card, and its full key. keys is in
+// priority order (for a multi-faced card: the joined "A // B" name, the front
+// name, then the other faces). Exact full names are tried before the
+// front-face fallback. Among the exact hits the first one with text wins, so
+// neither an empty "X // X" row hides the real X, nor an unrelated bare "A"
+// row (a theme card or token) hides the real "A // B"; only when every exact
+// hit is empty is the first of them returned.
 func (e *oracleExport) find(keys []string) (oracleExportRow, string, bool) {
+	var first oracleExportRow
+	firstKey := ""
 	for _, k := range keys {
-		if row, ok := e.full[fullKey(k)]; ok {
-			return row, fullKey(k), true
+		fk := fullKey(k)
+		row, ok := e.full[fk]
+		if !ok {
+			continue
 		}
+		if !emptyRow(row) {
+			return row, fk, true
+		}
+		if firstKey == "" {
+			first, firstKey = row, fk
+		}
+	}
+	if firstKey != "" {
+		return first, firstKey, true
 	}
 	for _, k := range keys {
 		if fk, ok := e.short[cards.NormalizeName(k)]; ok {
@@ -187,7 +210,9 @@ func foldSelfRefs(text string, names []string) string {
 	for _, n := range names {
 		short := strings.SplitN(n, ",", 2)[0]
 		if short == n {
-			short = strings.Fields(n + " ")[0] // "Zurgo Bellstriker" -> "Zurgo"
+			if f := strings.Fields(n); len(f) > 0 {
+				short = f[0] // "Zurgo Bellstriker" -> "Zurgo"
+			}
 		}
 		for _, v := range []string{n, short} {
 			if len(v) >= 4 && !seen[v] {
@@ -297,8 +322,8 @@ func runOracleAudit(dir, exportPath, outPath, scenariosDir, stalePath string) er
 			for _, f := range c.Faces {
 				full = append(full, f.Name)
 			}
-			lookup = append(lookup, strings.Join(full, " // "))
-			lookup = append(lookup, full...)
+			// Joined name first, then the front name and the other faces.
+			lookup = append([]string{strings.Join(full, " // ")}, full...)
 		}
 		if exp, fk, ok := export.find(lookup); ok {
 			var scriptText, oracleText string
