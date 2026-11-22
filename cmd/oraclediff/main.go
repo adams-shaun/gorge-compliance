@@ -13,6 +13,7 @@
 //	oraclediff status [-cards .cards] -set S | -all [-out status.md] [-write-ratchet] [-json]
 //	oraclediff sets  [-cards .cards] [-out FILE] [-level A,B|A|B] [-sets S,...] [-procs N] [-json]
 //	oraclediff tickets [-cards .cards] [-out DIR] [-min-cards 10] [-any-in FORMAT] [-json]
+//	oraclediff oracle-audit [-cards .cards] -oracle <tsv> -out <tsv> [-scenarios DIR] [-stale <tsv]
 //
 // status exits 3 when it finished measuring and a ratchet failed, and 1 when
 // the measurement itself failed. `go run` reports both as 1.
@@ -206,6 +207,15 @@ func main() {
 		card := fs.String("card", "", "card whose scenarios to replay in gorge")
 		fs.Parse(os.Args[2:])
 		err = runShow(*dir, *scen, *card)
+	case "oracle-audit":
+		fs := flag.NewFlagSet("oracle-audit", flag.ExitOnError)
+		dir := fs.String("cards", ".cards", "corpus dir")
+		oracle := fs.String("oracle", "", "deckdb cards.oracle_text export TSV: name\\tsha\\ttext")
+		out := fs.String("out", "", "audit TSV: card\\tverdict\\tscript_sha\\toracle_sha")
+		scenarios := fs.String("scenarios", "scenarios/oracle", "hand scenario dir for the oracle_sha staleness check (empty: skip)")
+		stale := fs.String("stale", "", "write stale scenario rows here (card\\tfile\\trecorded\\tcurrent)")
+		fs.Parse(os.Args[2:])
+		err = runOracleAudit(*dir, *oracle, *out, *scenarios, *stale)
 	default:
 		usage()
 	}
@@ -220,7 +230,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: oraclediff gen|plan|diff|forge-export|forge-diff|follower-diff|follower-export|forge-verdicts|adjudicate|status|sets|rule|triage|refreeze|impact|tickets|show ...")
+	fmt.Fprintln(os.Stderr, "usage: oraclediff gen|plan|diff|forge-export|forge-diff|follower-diff|follower-export|forge-verdicts|adjudicate|status|sets|rule|triage|refreeze|impact|tickets|show|oracle-audit ...")
 	os.Exit(2)
 }
 
