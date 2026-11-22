@@ -467,12 +467,25 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return v.Len() > 0 && w.gameMentions("LastTurnEntered")
 	case typ == "Game" && name == "ResolvedThisTurn":
 		return v.Len() > 0 && w.gameMentions("ResolvedThisTurn")
+	case typ == "Game" && name == "MaxDistinctOnStackThisTurn":
+		// Raised by every stack push, so it is live in most mid-game cuts; its
+		// only readers are the Count$/Value$MaxDistinctOnStack heads (Geometric
+		// Weird, count_history_heads.go), so a game with no card naming
+		// MaxDistinctOnStack does not depend on the tally.
+		return v.Int() > 0 && w.gameMentions("MaxDistinctOnStack")
 	case typ == "Player" && name == "SearchedLibraryThisTurn":
 		// Set by any completed library search (CR 701.23), so it is live in
 		// cuts after a search; its only reader is the Count$SearchedLibrary.<spec>
 		// head (Archive Trap, count_history_heads.go), so a game with no card
 		// naming SearchedLibrary does not depend on the watcher.
 		return v.Bool() && w.gameMentions("SearchedLibrary")
+	case typ == "Object" && name == "RegeneratedThisTurn":
+		// Set by a regeneration replacement (CR 701.19), so it is live in cuts
+		// after a regeneration; its only reader is the Count$/Value$
+		// RegeneratedThisTurn head (Spiny Starfish, count_history_heads.go), so
+		// a game with no card naming RegeneratedThisTurn does not depend on
+		// the tally.
+		return v.Int() > 0 && w.gameMentions("RegeneratedThisTurn")
 	case typ == "Player" && name == "AttackedSeatsLastTurn":
 		// The record of the seat's last completed turn is set by any attack, so
 		// it is non-zero in most mid-game cuts; its only readers are the
