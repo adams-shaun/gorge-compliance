@@ -74,6 +74,7 @@ var gameTable = map[string]entry{
 	"ControlCombatOnly":          isRefused("a controlled player (CR 720) is not placeable"),
 	"EndStepsThisTurn":           isDerived("zero until the end step begins; recounted"),
 	"ResolvedThisTurn":           isRefused("per-ability resolution tally of this turn (Count$ResolvedThisTurn); setup cannot restate it; live only when some card in the game mentions ResolvedThisTurn"),
+	"MaxDistinctOnStackThisTurn": isRefused("the turn's distinct-sources-on-stack high-water mark (Count$MaxDistinctOnStack, Geometric Weird); setup cannot restate it; live only when some card in the game mentions MaxDistinctOnStack"),
 	"Monarch":                    isIgnored("meaningful only when HasMonarch, which is refused"),
 	"HasMonarch":                 isRefused("monarch is not placeable"),
 	"MonarchSeq":                 isRefused("count of MonarchChange events (CR 724); monarch is not placeable and setup cannot restate the history"),
@@ -94,7 +95,6 @@ var gameTable = map[string]entry{
 	"DelayedNext":                isIgnored("delayed-trigger id allocator"),
 	"Entered":                    isRefused("zone entries of this turn; live only when a card in the game names a reader (turnEntryReaders); exempt: the draw step's library->hand entries and card-less objects (abilities)"),
 	"EnteredLastTurn":            isRefused("the previous turn's zone entries (the TurnChange fold rotates Entered into it); live only when a card in the game names the Count$LastTurnEntered reader; setup cannot restate it"),
-	"MaxDistinctOnStackThisTurn": isRefused("this turn's high-water mark of distinct stack identities (Geometric Weird's Count$MaxDistinctOnStack; apply_stack_mark folds it); setup cannot restate it; live only when a card in the game mentions the count head"),
 }
 
 // playerTable is state.Player.
@@ -189,9 +189,9 @@ var objectTable = map[string]entry{
 	"AcqTurn":                      isRefused("turn stamp: live only when it names the cut's turn (came under control this turn)"),
 	"AcqStep":                      isIgnored("step half of AcqTurn"),
 	"ActivatedThisTurn":            isRefused("activation count of this turn; only the ActivationLimit gates read it, so live only on a face that has one"),
+	"RegeneratedThisTurn":          isRefused("regeneration count of this turn (CR 701.19, Count$RegeneratedThisTurn); setup cannot restate it; live only when some card in the game mentions RegeneratedThisTurn"),
 	"AttacksThisTurn":              isRefused("attack count of this turn"),
 	"ExertedThisTurn":              isRefused("exert of this turn"),
-	"RegeneratedThisTurn":          isRefused("this turn's regeneration tally (CR 701.19, Spiny Starfish's Count$RegeneratedThisTurn); setup cannot restate it; live only when a card in the game mentions the count head"),
 	"ExertSkipUntap":               isRefused("exert state that skips an untap"),
 	"CantUntapNextStep":            isRefused("a pending untap skip"),
 	"EnlistedTurn":                 isRefused("turn stamp: live only when it names the cut's turn"),
