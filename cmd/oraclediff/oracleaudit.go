@@ -86,15 +86,44 @@ type oracleExportRow struct {
 	text string
 }
 
+// oracleExport indexes the export two ways. full is keyed by the exact
+// normalised full name ("a // b", every face kept), so a single-faced card
+// never shares a key with a same-front-face multi-faced row. short is keyed by
+// cards.NormalizeName (front face only); it is the fallback for names the
+// export spells differently, and maps to the key of the row that won it.
+type oracleExport struct {
+	full  map[string]oracleExportRow
+	short map[string]string
+}
+
+// fullKey is the exact-name key: lower-cased, whitespace folded, the " // "
+// separator kept.
+func fullKey(name string) string {
+	return strings.Join(strings.Fields(strings.ToLower(name)), " ")
+}
+
+// better reports whether row a beats row b for one short key: a row with text
+// beats an empty one (an "X // X" row with text "\n" must never hide the real
+// X), and between two equally empty or non-empty rows the smaller full key
+// wins, so the choice never depends on the file's row order.
+func (e *oracleExport) better(a, b string) bool {
+	ae := strings.TrimSpace(normaliseOracleText(e.full[a].text, "")) == ""
+	be := strings.TrimSpace(normaliseOracleText(e.full[b].text, "")) == ""
+	if ae != be {
+		return !ae
+	}
+	return a < b
+}
+
 // loadOracleExport reads the exported TSV (name \t sha256 \t normalised
-// text; the text carries no raw newlines) keyed by normalised name.
-func loadOracleExport(path string) (map[string]oracleExportRow, error) {
+// text; the text carries no raw newlines).
+func loadOracleExport(path string) (*oracleExport, error) {
 	f, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer f.Close()
-	rows := map[string]oracleExportRow{}
+	ex := &oracleExport{full: map[string]oracleExportRow{}, short: map[string]string{}}
 	sc := bufio.NewScanner(f)
 	sc.Buffer(make([]byte, 0, 64*1024), 1024*1024)
 	line := 0
@@ -108,9 +137,75 @@ func loadOracleExport(path string) (map[string]oracleExportRow, error) {
 		if len(parts) != 3 || parts[0] == "" {
 			return nil, fmt.Errorf("%s:%d: want name\tsha\ttext, got %d fields", path, line, len(parts))
 		}
-		rows[cards.NormalizeName(parts[0])] = oracleExportRow{name: parts[0], sha: parts[1], text: parts[2]}
+		fk := fullKey(parts[0])
+		if old, dup := ex.full[fk]; dup && old.text != parts[2] {
+			// The same exact name twice: keep the longer text, ties by
+			// text order, independent of file order.
+			if len(old.text) > len(parts[2]) || (len(old.text) == len(parts[2]) && old.text < parts[2]) {
+				continue
+			}
+		}
+		ex.full[fk] = oracleExportRow{name: parts[0], sha: parts[1], text: parts[2]}
 	}
-	return rows, sc.Err()
+	if err := sc.Err(); err != nil {
+		return nil, err
+	}
+	for fk := range ex.full {
+		sk := cards.NormalizeName(ex.full[fk].name)
+		if cur, ok := ex.short[sk]; !ok || ex.better(fk, cur) {
+			ex.short[sk] = fk
+		}
+	}
+	return ex, nil
+}
+
+// find returns the export row for a card, and its full key. Exact full names
+// are tried before the front-face fallback, so X never resolves to X // X.
+func (e *oracleExport) find(keys []string) (oracleExportRow, string, bool) {
+	for _, k := range keys {
+		if row, ok := e.full[fullKey(k)]; ok {
+			return row, fullKey(k), true
+		}
+	}
+	for _, k := range keys {
+		if fk, ok := e.short[cards.NormalizeName(k)]; ok {
+			return e.full[fk], fk, true
+		}
+	}
+	return oracleExportRow{}, "", false
+}
+
+// selfRefRe matches Scryfall's 2025 self-reference wording.
+var selfRefRe = regexp.MustCompile(`(?i)\bthis (creature|card|land|artifact|enchantment|permanent|spell|planeswalker|token|vehicle|saga|equipment|aura|battle|class|siege|case|attraction|object)\b`)
+
+// foldSelfRefs maps every self-reference to one token: each face name, its
+// part before a comma ("Zurgo Bellstriker" -> "Zurgo"), and "this <type>".
+// Longest names first so a full name is not eaten by its own short form.
+func foldSelfRefs(text string, names []string) string {
+	var pats []string
+	seen := map[string]bool{}
+	for _, n := range names {
+		short := strings.SplitN(n, ",", 2)[0]
+		if short == n {
+			short = strings.Fields(n + " ")[0] // "Zurgo Bellstriker" -> "Zurgo"
+		}
+		for _, v := range []string{n, short} {
+			if len(v) >= 4 && !seen[v] {
+				seen[v] = true
+				pats = append(pats, v)
+			}
+		}
+	}
+	sort.Slice(pats, func(i, j int) bool {
+		if len(pats[i]) != len(pats[j]) {
+			return len(pats[i]) > len(pats[j])
+		}
+		return pats[i] < pats[j]
+	})
+	for _, p := range pats {
+		text = strings.ReplaceAll(text, p, "SELFREF")
+	}
+	return strings.Join(strings.Fields(selfRefRe.ReplaceAllString(text, "SELFREF")), " ")
 }
 
 // scriptDigest is the digest of the corpus card's compiled Oracle text: every
@@ -134,7 +229,7 @@ func exportDigest(row oracleExportRow, name string) (string, string) {
 }
 
 // oracleAuditRow is one output line: card \t verdict \t script_sha \t
-// oracle_sha. Verdict is ok, diff or missing.
+// oracle_sha. Verdict is ok, diff, missing or empty.
 type oracleAuditRow struct {
 	card      string
 	verdict   string
@@ -186,7 +281,7 @@ func runOracleAudit(dir, exportPath, outPath, scenariosDir, stalePath string) er
 
 	names := oracleAuditNames(reg)
 	rows := make([]oracleAuditRow, 0, len(names))
-	nOK, nDiff, nMissing, nEmpty := 0, 0, 0, 0
+	nOK, nDiff, nMissing, nEmpty, nDiffFolded := 0, 0, 0, 0, 0
 	matched := map[string]bool{}
 	for _, name := range names {
 		c, ok := reg.Lookup(name)
@@ -205,24 +300,29 @@ func runOracleAudit(dir, exportPath, outPath, scenariosDir, stalePath string) er
 			lookup = append(lookup, strings.Join(full, " // "))
 			lookup = append(lookup, full...)
 		}
-		for _, key := range lookup {
-			if exp, ok := export[cards.NormalizeName(key)]; ok {
-				row.scriptSHA, _ = scriptDigest(c)
-				row.oracleSHA, _ = exportDigest(exp, name)
-				switch {
-				case row.scriptSHA == row.oracleSHA:
-					row.verdict = "ok"
-					nOK++
-				case strings.TrimSpace(normaliseOracleText(exp.text, name)) == "":
-					row.verdict = "empty"
-					nEmpty++
-				default:
-					row.verdict = "diff"
-					nDiff++
+		if exp, fk, ok := export.find(lookup); ok {
+			var scriptText, oracleText string
+			row.scriptSHA, scriptText = scriptDigest(c)
+			row.oracleSHA, oracleText = exportDigest(exp, name)
+			switch {
+			case row.scriptSHA == row.oracleSHA:
+				row.verdict = "ok"
+				nOK++
+			case strings.TrimSpace(oracleText) == "":
+				row.verdict = "empty"
+				nEmpty++
+			default:
+				row.verdict = "diff"
+				nDiff++
+				names := make([]string, 0, len(c.Faces))
+				for _, f := range c.Faces {
+					names = append(names, f.Name)
 				}
-				matched[cards.NormalizeName(key)] = true
-				break
+				if foldSelfRefs(scriptText, names) != foldSelfRefs(oracleText, names) {
+					nDiffFolded++
+				}
 			}
+			matched[fk] = true
 		}
 		if row.verdict == "missing" {
 			row.scriptSHA, _ = scriptDigest(c)
@@ -231,7 +331,7 @@ func runOracleAudit(dir, exportPath, outPath, scenariosDir, stalePath string) er
 		rows = append(rows, row)
 	}
 	nOrphan := 0
-	for key := range export {
+	for key := range export.full {
 		if !matched[key] {
 			nOrphan++
 		}
@@ -253,8 +353,8 @@ func runOracleAudit(dir, exportPath, outPath, scenariosDir, stalePath string) er
 		}
 	}
 
-	fmt.Fprintf(sum, "oracle-audit: %d cards: %d ok, %d diff, %d missing, %d empty, %d export rows no corpus card matched\n",
-		len(rows), nOK, nDiff, nMissing, nEmpty, nOrphan)
+	fmt.Fprintf(sum, "oracle-audit: %d cards: %d ok, %d diff (%d still differ once self-references are folded), %d missing, %d empty, %d export rows no corpus card matched\n",
+		len(rows), nOK, nDiff, nDiffFolded, nMissing, nEmpty, nOrphan)
 	if nDiff > 0 {
 		var b strings.Builder
 		shown := 0

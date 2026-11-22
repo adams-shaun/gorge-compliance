@@ -157,3 +157,54 @@ func TestOracleAuditStaleScenario(t *testing.T) {
 		t.Errorf("ok verdict: got %v, want only the script-stale file", got)
 	}
 }
+
+// TestOracleAuditExportCollision: the export holds both "X" (the real text)
+// and "X // X" (empty), as it does for ~2.4k real cards. In either row order
+// the card compares ok or diff, never empty, and the verdict is identical.
+func TestOracleAuditExportCollision(t *testing.T) {
+	dir := t.TempDir()
+	card := filepath.Join(dir, "cardsfolder", "t")
+	if err := os.MkdirAll(card, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	src := "Name:Test Push\nManaCost:B\nTypes:Instant\nOracle:Destroy target creature.\n"
+	if err := os.WriteFile(filepath.Join(card, "test_push.txt"), []byte(src), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	real := "Test Push\tdeadbeef\tDestroy target creature.\n"
+	empty := "Test Push // Test Push\tdeadbeef\t\\n\n"
+	for _, tc := range []struct{ name, rows, want string }{
+		{"real-first", real + empty, "ok"},
+		{"empty-first", empty + real, "ok"},
+		{"changed-real-first", "Test Push\tx\tDestroy target permanent.\n" + empty, "diff"},
+		{"changed-empty-first", empty + "Test Push\tx\tDestroy target permanent.\n", "diff"},
+	} {
+		exp := filepath.Join(dir, tc.name+".tsv")
+		out := filepath.Join(dir, tc.name+".out.tsv")
+		if err := os.WriteFile(exp, []byte(tc.rows), 0o644); err != nil {
+			t.Fatal(err)
+		}
+		if err := runOracleAudit(dir, exp, out, "", ""); err != nil {
+			t.Fatal(err)
+		}
+		b, _ := os.ReadFile(out)
+		f := strings.Split(strings.TrimSpace(string(b)), "\t")
+		if len(f) != 4 || f[0] != "Test Push" || f[1] != tc.want {
+			t.Errorf("%s: row %q, want verdict %s", tc.name, string(b), tc.want)
+		}
+	}
+}
+
+// TestOracleAuditFoldSelfRefs: Scryfall's "this creature" / short-name
+// rewording folds to the same text as the full name.
+func TestOracleAuditFoldSelfRefs(t *testing.T) {
+	names := []string{"Zurgo Bellstriker"}
+	a := foldSelfRefs("Zurgo Bellstriker can't block. Zurgo attacks.", names)
+	b := foldSelfRefs("This creature can't block. This creature attacks.", names)
+	if a != b {
+		t.Errorf("fold %q != %q", a, b)
+	}
+	if foldSelfRefs("Draw 2 cards.", names) == foldSelfRefs("Draw 3 cards.", names) {
+		t.Error("fold hid a number change")
+	}
+}
