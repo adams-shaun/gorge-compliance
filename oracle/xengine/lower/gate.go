@@ -456,6 +456,12 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 			return true
 		}
 		return false
+	case typ == "Object" && name == "RegeneratedThisTurn":
+		// Stamped by the regeneration fold, cleared at TurnChange and on a zone
+		// change; its only reader is the Count$RegeneratedThisTurn head
+		// (Spiny Starfish, count_history_heads.go), so a game with no card
+		// naming RegeneratedThisTurn does not depend on it.
+		return v.Int() > 0 && w.gameMentions("RegeneratedThisTurn")
 	case typ == "Object" && name == "StartedTurnUntapped":
 		// The TurnChange fold stamps it on every untapped battlefield object, so
 		// it is set in nearly every mid-game cut; its only reader is the
@@ -467,6 +473,12 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return v.Len() > 0 && w.gameMentions("LastTurnEntered")
 	case typ == "Game" && name == "ResolvedThisTurn":
 		return v.Len() > 0 && w.gameMentions("ResolvedThisTurn")
+	case typ == "Game" && name == "MaxDistinctOnStackThisTurn":
+		// This turn's stack high-water mark, raised by pushes and cleared at
+		// TurnChange; its only reader is the Count$MaxDistinctOnStack head
+		// (Geometric Weird, count_history_heads.go), so a game with no card
+		// naming MaxDistinctOnStack does not depend on it.
+		return v.Int() > 0 && w.gameMentions("MaxDistinctOnStack")
 	case typ == "Player" && name == "SearchedLibraryThisTurn":
 		// Set by any completed library search (CR 701.23), so it is live in
 		// cuts after a search; its only reader is the Count$SearchedLibrary.<spec>
