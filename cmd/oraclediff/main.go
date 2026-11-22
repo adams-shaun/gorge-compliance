@@ -13,7 +13,7 @@
 //	oraclediff status [-cards .cards] -set S | -all [-out status.md] [-write-ratchet] [-json]
 //	oraclediff sets  [-cards .cards] [-out FILE] [-level A,B|A|B] [-sets S,...] [-procs N] [-json]
 //	oraclediff tickets [-cards .cards] [-out DIR] [-min-cards 10] [-any-in FORMAT] [-json]
-//	oraclediff oracle-audit [-cards .cards] -oracle <tsv> -out <tsv> [-scenarios DIR] [-stale <tsv]
+//	oraclediff oracle-audit [-cards .cards] -oracle <tsv> -out <tsv> [-scenarios DIR] [-stale <tsv>]
 //
 // status exits 3 when it finished measuring and a ratchet failed, and 1 when
 // the measurement itself failed. `go run` reports both as 1.

@@ -126,14 +126,34 @@ func TestOracleAuditStaleScenario(t *testing.T) {
 	noSHA := filepath.Join(scn, "keywords", "noshatest-push.json")
 	writeScenario(noSHA, "")
 
-	got, err := staleOracleScenarios(reg, scn)
+	got, checked, err := staleOracleScenarios(reg, scn, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if scenarioFilesChecked != 3 {
-		t.Errorf("checked %d scenario files, want 3", scenarioFilesChecked)
+	if checked != 3 {
+		t.Errorf("checked %d scenario files, want 3", checked)
 	}
-	if len(got) != 1 || got[0].file != staleFile || got[0].recorded != "000000000000" || got[0].current != current || got[0].card != "Test Push" {
+	if len(got) != 1 || got[0].file != staleFile || got[0].recorded != "000000000000" || got[0].current != current || got[0].card != "Test Push" || got[0].reason != "script" {
 		t.Errorf("stale report %v, want only %s", got, staleFile)
+	}
+
+	// The corpus sha still matches, but the current Oracle text (the export)
+	// differs from the script: every scenario with a recorded sha is stale,
+	// the one without a sha is not.
+	verdicts := map[string]oracleAuditRow{"Test Push": {card: "Test Push", verdict: "diff", scriptSHA: "aaaaaaaaaaaa", oracleSHA: "bbbbbbbbbbbb"}}
+	got, _, err = staleOracleScenarios(reg, scn, verdicts)
+	if err != nil {
+		t.Fatal(err)
+	}
+	reasons := map[string]string{}
+	for _, s := range got {
+		reasons[s.file] = s.reason
+	}
+	if len(got) != 2 || reasons[fresh] != "export" || reasons[staleFile] != "script" {
+		t.Errorf("with a diff verdict got %v, want fresh=export stale=script", got)
+	}
+	verdicts["Test Push"] = oracleAuditRow{verdict: "ok"}
+	if got, _, _ = staleOracleScenarios(reg, scn, verdicts); len(got) != 1 {
+		t.Errorf("ok verdict: got %v, want only the script-stale file", got)
 	}
 }

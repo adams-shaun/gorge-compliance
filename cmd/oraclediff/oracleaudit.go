@@ -4,9 +4,11 @@ package main
 // (cards.Face.Oracle, read from the corpus's Forge scripts) with the current
 // Oracle text (the deckdb cards.oracle_text export, one TSV row per card:
 // name \t sha256 \t text). A script that lags an erratum shows as diff. It also
-// checks every hand scenario's recorded oracle_sha against the corpus and
-// reports the stale ones, so a re-derived text never silently re-judges
-// scenarios written against text nobody read.
+// checks every hand scenario against the current text and reports the stale
+// ones: a scenario is stale when its recorded oracle_sha no longer matches the
+// corpus script's text, or when the card's script lags the current Oracle text
+// (verdict diff), so a re-derived text never silently re-judges scenarios
+// written against text nobody read.
 //
 //	oraclediff oracle-audit [-cards .cards] -oracle <tsv> -out <tsv> [-scenarios scenarios/oracle] [-stale <tsv>]
 //
@@ -14,7 +16,8 @@ package main
 // (parenthesised) stripped, the Forge placeholders CARDNAME and ~ mapped to
 // the card's name, quote characters folded to ASCII, whitespace folded, and a
 // multi-faced card's faces joined in order. Verdicts: ok (equal), diff
-// (unequal), missing (the export has no row for the card). Output carries
+// (unequal), missing (the export has no row for the card), empty (the export
+// row carries no text although the script does: no data, not errata lag). Output carries
 // names, hashes and verdicts only -- never script or Oracle text (the GPL
 // boundary); both digests are the first 12 hex digits of the sha256 of the
 // normalised text.
@@ -166,18 +169,25 @@ func runOracleAudit(dir, exportPath, outPath, scenariosDir, stalePath string) er
 	}
 
 	var w io.Writer = os.Stdout
+	var outFile *os.File
 	if outPath != "-" {
 		f, err := os.Create(outPath)
 		if err != nil {
 			return err
 		}
-		defer f.Close()
+		outFile = f
 		w = bufio.NewWriter(f)
+	}
+	// Summary lines go to stderr when the TSV itself is on stdout.
+	var sum io.Writer = os.Stdout
+	if outPath == "-" {
+		sum = os.Stderr
 	}
 
 	names := oracleAuditNames(reg)
 	rows := make([]oracleAuditRow, 0, len(names))
-	nOK, nDiff, nMissing := 0, 0, 0
+	nOK, nDiff, nMissing, nEmpty := 0, 0, 0, 0
+	matched := map[string]bool{}
 	for _, name := range names {
 		c, ok := reg.Lookup(name)
 		if !ok {
@@ -199,14 +209,18 @@ func runOracleAudit(dir, exportPath, outPath, scenariosDir, stalePath string) er
 			if exp, ok := export[cards.NormalizeName(key)]; ok {
 				row.scriptSHA, _ = scriptDigest(c)
 				row.oracleSHA, _ = exportDigest(exp, name)
-				if row.scriptSHA == row.oracleSHA {
+				switch {
+				case row.scriptSHA == row.oracleSHA:
 					row.verdict = "ok"
 					nOK++
-				} else {
+				case strings.TrimSpace(normaliseOracleText(exp.text, name)) == "":
+					row.verdict = "empty"
+					nEmpty++
+				default:
 					row.verdict = "diff"
 					nDiff++
 				}
-				delete(export, cards.NormalizeName(key))
+				matched[cards.NormalizeName(key)] = true
 				break
 			}
 		}
@@ -216,19 +230,31 @@ func runOracleAudit(dir, exportPath, outPath, scenariosDir, stalePath string) er
 		}
 		rows = append(rows, row)
 	}
-	nOrphan := len(export)
+	nOrphan := 0
+	for key := range export {
+		if !matched[key] {
+			nOrphan++
+		}
+	}
+	verdicts := make(map[string]oracleAuditRow, len(rows))
 
 	for _, row := range rows {
 		fmt.Fprintf(w, "%s\t%s\t%s\t%s\n", row.card, row.verdict, row.scriptSHA, row.oracleSHA)
+		verdicts[row.card] = row
 	}
 	if bf, isBuf := w.(*bufio.Writer); isBuf {
 		if err := bf.Flush(); err != nil {
 			return err
 		}
 	}
+	if outFile != nil {
+		if err := outFile.Close(); err != nil {
+			return err
+		}
+	}
 
-	fmt.Printf("oracle-audit: %d cards: %d ok, %d diff, %d missing, %d export rows no corpus card matched\n",
-		len(rows), nOK, nDiff, nMissing, nOrphan)
+	fmt.Fprintf(sum, "oracle-audit: %d cards: %d ok, %d diff, %d missing, %d empty, %d export rows no corpus card matched\n",
+		len(rows), nOK, nDiff, nMissing, nEmpty, nOrphan)
 	if nDiff > 0 {
 		var b strings.Builder
 		shown := 0
@@ -242,13 +268,13 @@ func runOracleAudit(dir, exportPath, outPath, scenariosDir, stalePath string) er
 		if shown == 20 {
 			b.WriteString("... (see the -out file for the rest)\n")
 		}
-		fmt.Print(b.String())
+		fmt.Fprint(sum, b.String())
 	}
 
 	if scenariosDir == "" {
 		return nil
 	}
-	stale, err := staleOracleScenarios(reg, scenariosDir)
+	stale, checked, err := staleOracleScenarios(reg, scenariosDir, verdicts)
 	if err != nil {
 		return err
 	}
@@ -257,31 +283,30 @@ func runOracleAudit(dir, exportPath, outPath, scenariosDir, stalePath string) er
 		if err != nil {
 			return err
 		}
-		defer f.Close()
 		bw := bufio.NewWriter(f)
 		for _, s := range stale {
-			fmt.Fprintf(bw, "%s\t%s\t%s\t%s\n", s.card, s.file, s.recorded, s.current)
+			fmt.Fprintf(bw, "%s\t%s\t%s\t%s\t%s\n", s.card, s.file, s.reason, s.recorded, s.current)
 		}
 		if err := bw.Flush(); err != nil {
+			f.Close()
+			return err
+		}
+		if err := f.Close(); err != nil {
 			return err
 		}
 	}
-	fmt.Printf("oracle-audit: %d scenario files checked, %d stale\n", scenarioFilesChecked, len(stale))
+	fmt.Fprintf(sum, "oracle-audit: %d scenario files checked, %d stale\n", checked, len(stale))
 	for _, s := range stale {
-		fmt.Printf("stale %s (%s): recorded %s, corpus %s: re-derive the scenarios\n", s.card, s.file, s.recorded, s.current)
+		fmt.Fprintf(sum, "stale %s (%s): %s: recorded %s, now %s: re-derive the scenarios\n", s.card, s.file, s.reason, s.recorded, s.current)
 	}
 	return nil
 }
-
-// scenarioFilesChecked counts the scenario files the last staleOracleScenarios
-// call read, for the summary line. Package state only because the count is
-// reported next to the stale list it belongs to; nothing else reads it.
-var scenarioFilesChecked int
 
 // staleScenario is one stale hand-scenario file.
 type staleScenario struct {
 	card     string
 	file     string
+	reason   string // "script" (oracle_sha != corpus digest) or "export" (script lags the current text)
 	recorded string
 	current  string
 }
@@ -292,11 +317,19 @@ type scenarioOracleHead struct {
 	OracleSHA string `json:"oracle_sha"`
 }
 
-// staleOracleScenarios compares every scenario file's oracle_sha against the
-// digest of the card's current corpus text (oracletext.Digest, the same
-// ratchet audit's TestOracleAudit applies) and returns the stale ones sorted
-// by file.
-func staleOracleScenarios(reg *cards.Registry, dir string) ([]staleScenario, error) {
+// staleOracleScenarios returns, sorted by file, the scenario files written
+// against text that is no longer current, and how many files it read. A file
+// is stale for one of two reasons:
+//
+//   - reason "script": its oracle_sha differs from the digest of the card's
+//     corpus text (oracletext.Digest, the ratchet TestOracleAudit applies);
+//   - reason "export": the sha still matches the corpus script, but the audit
+//     verdict for the card is diff, i.e. the script itself lags the current
+//     Oracle text, so the scenario was authored against outdated text.
+//     recorded is the scenario's oracle_sha, current the export digest.
+//
+// verdicts is the audit row per primary card name.
+func staleOracleScenarios(reg *cards.Registry, dir string, verdicts map[string]oracleAuditRow) ([]staleScenario, int, error) {
 	var stale []staleScenario
 	checked := 0
 	err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
@@ -323,16 +356,12 @@ func staleOracleScenarios(reg *cards.Registry, dir string) ([]staleScenario, err
 			return fmt.Errorf("%s: card %q not in the corpus", path, head.Card)
 		}
 		if current := oracletext.Digest(c); head.OracleSHA != current {
-			stale = append(stale, staleScenario{
-				card:     head.Card,
-				file:     path,
-				recorded: head.OracleSHA,
-				current:  current,
-			})
+			stale = append(stale, staleScenario{card: head.Card, file: path, reason: "script", recorded: head.OracleSHA, current: current})
+		} else if v, ok := verdicts[c.Faces[0].Name]; ok && v.verdict == "diff" {
+			stale = append(stale, staleScenario{card: head.Card, file: path, reason: "export", recorded: head.OracleSHA, current: v.oracleSHA})
 		}
 		return nil
 	})
 	sort.Slice(stale, func(i, j int) bool { return stale[i].file < stale[j].file })
-	scenarioFilesChecked = checked
-	return stale, err
+	return stale, checked, err
 }
