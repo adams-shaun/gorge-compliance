@@ -74,6 +74,7 @@ var gameTable = map[string]entry{
 	"ControlCombatOnly":          isRefused("a controlled player (CR 720) is not placeable"),
 	"EndStepsThisTurn":           isDerived("zero until the end step begins; recounted"),
 	"ResolvedThisTurn":           isRefused("per-ability resolution tally of this turn (Count$ResolvedThisTurn); setup cannot restate it; live only when some card in the game mentions ResolvedThisTurn"),
+	"MaxDistinctOnStackThisTurn": isRefused("the turn's distinct-sources-on-stack high-water mark (Count$MaxDistinctOnStack, Geometric Weird); setup cannot restate it; live only when some card in the game mentions MaxDistinctOnStack"),
 	"Monarch":                    isIgnored("meaningful only when HasMonarch, which is refused"),
 	"HasMonarch":                 isRefused("monarch is not placeable"),
 	"MonarchSeq":                 isRefused("count of MonarchChange events (CR 724); monarch is not placeable and setup cannot restate the history"),
@@ -94,7 +95,6 @@ var gameTable = map[string]entry{
 	"DelayedNext":                isIgnored("delayed-trigger id allocator"),
 	"Entered":                    isRefused("zone entries of this turn; live only when a card in the game names a reader (turnEntryReaders); exempt: the draw step's library->hand entries and card-less objects (abilities)"),
 	"EnteredLastTurn":            isRefused("the previous turn's zone entries (the TurnChange fold rotates Entered into it); live only when a card in the game names the Count$LastTurnEntered reader; setup cannot restate it"),
-	"MaxDistinctOnStackThisTurn": isRefused("the turn's high-water mark of distinct stack sources (Geometric Weird's Count$MaxDistinctOnStack); this-turn history setup cannot restate; live only when some card in the game mentions MaxDistinctOnStack"),
 }
 
 // playerTable is state.Player.
@@ -173,7 +173,6 @@ var objectTable = map[string]entry{
 	"AtEOTTrigBody":                isRefused("an end-of-turn trigger body is not placeable"),
 	"MergedCards":                  isRefused("a merged permanent is not placeable"),
 	"EnteredThisTurn":              isRefused("an object that entered this turn; a battlefield permanent always refuses (power-up cost reads it with no script word); off the battlefield it is live only when a card names a turnEntryReaders word; the drawn card (library->hand) is exempt"),
-	"RegeneratedThisTurn":          isRefused("the times this permanent regenerated this turn (Spiny Starfish's Count$RegeneratedThisTurn); this-turn tally setup cannot restate; live only when some card in the game mentions RegeneratedThisTurn"),
 	"PushMonarchSeq":               isRefused("monarch-change sequence stamp taken at push; setup cannot restate it"),
 	"StartedTurnUntapped":          isRefused("tapped status as this turn began, stamped by the TurnChange fold on every battlefield object; live only when a card in the game names the startedTheTurnUntapped filter word (Rasputin Dreamweaver), the one reader (effects/filter.go)"),
 	"EnteredFrom":                  isIgnored("provenance of EnteredThisTurn, which is refused when set"),
@@ -190,6 +189,7 @@ var objectTable = map[string]entry{
 	"AcqTurn":                      isRefused("turn stamp: live only when it names the cut's turn (came under control this turn)"),
 	"AcqStep":                      isIgnored("step half of AcqTurn"),
 	"ActivatedThisTurn":            isRefused("activation count of this turn; only the ActivationLimit gates read it, so live only on a face that has one"),
+	"RegeneratedThisTurn":          isRefused("regeneration count of this turn (CR 701.19, Count$RegeneratedThisTurn); setup cannot restate it; live only when some card in the game mentions RegeneratedThisTurn"),
 	"AttacksThisTurn":              isRefused("attack count of this turn"),
 	"ExertedThisTurn":              isRefused("exert of this turn"),
 	"ExertSkipUntap":               isRefused("exert state that skips an untap"),
