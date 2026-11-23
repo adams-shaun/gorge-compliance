@@ -64,7 +64,9 @@ impl Board {
                 self.state.objects.get(&id).filter(|o| o.incarnation == inc).map(|_| id)
             }
             Ref::Token { seat, sub, ord } => {
-                let sub = sub.to_lowercase();
+                // gorge and Forge spell a token "Clue Token"; phase names it by its type ("Clue", CR 111.4).
+                let lowered = sub.to_lowercase();
+                let sub = lowered.strip_suffix(" token").map(str::trim).filter(|s| !s.is_empty()).unwrap_or(&lowered).to_string();
                 self.state
                     .battlefield
                     .iter()
@@ -112,8 +114,8 @@ fn check_supported(req: &Request) -> Result<(), Stop> {
     }
     for i in 0..2 {
         let seat = item.seat(i).expect("seat 0 and 1");
-        if seat.speed != 0 {
-            return Err(harness("speed setup unsupported"));
+        if !(0..=4).contains(&seat.speed) {
+            return Err(harness(format!("speed {} out of range", seat.speed)));
         }
         if !seat.command.is_empty() {
             return Err(harness("command setup unsupported"));
@@ -363,6 +365,12 @@ pub fn run(db: &CardDatabase, req: &Request, rb: &mut RowBuilder) -> Result<Boar
         let life = i32::try_from(life).map_err(|_| harness(format!("life {life} out of range")))?;
         // Direct write: no life-gained/lost history.
         state.players[seat].life = life;
+        // CR 702.179b: no speed until set; gorge's 0 is none. Written directly like life: phase has no
+        // debug action for it, and the snapshot carries no speed, only its later effects.
+        state.players[seat].speed = match req.item.seat(seat).expect("seat 0 and 1").speed {
+            0 => None,
+            n => u8::try_from(n).ok(),
+        };
     }
     // Raw placement leaves no history: no "entered this turn", no summoning sickness.
     for id in state.battlefield.iter().copied().collect::<Vec<_>>() {
@@ -554,6 +562,8 @@ mod tests {
         assert!(s.stack.is_empty());
         // A token ref resolves by name substring.
         assert!(b.resolve(&Ref::parse("p1:token:soldier").unwrap()).is_some());
+        // The corpus spelling "Soldier Token" names the same object (phase drops the suffix).
+        assert!(b.resolve(&Ref::parse("p1:token:Soldier Token").unwrap()).is_some());
         assert!(b.resolve(&Ref::parse("p0:token:soldier").unwrap()).is_none());
         // A stem missing from neutral.token is a harness row.
         let (out, _) = go(r#"{"id":"t","setup":{"p0":{"tokens":[{"script":"nope"}]}}}"#);
@@ -606,7 +616,7 @@ mod tests {
         for (json, msg) in [
             (r#"{"id":"t","turn":3}"#, "phase follower: scenario turn 3 unsupported"),
             (r#"{"id":"t","players":4}"#, "phase follower: scenario players 4 unsupported"),
-            (r#"{"id":"t","setup":{"p0":{"speed":1}}}"#, "phase follower: speed setup unsupported"),
+            (r#"{"id":"t","setup":{"p0":{"speed":5}}}"#, "phase follower: speed 5 out of range"),
             (r#"{"id":"t","setup":{"p1":{"command":["X"]}}}"#, "phase follower: command setup unsupported"),
             (r#"{"id":"t","setup":{"p1":{"sideboard":["X"]}}}"#, "phase follower: sideboard setup unsupported"),
             (r#"{"id":"t","setup":{"p1":{"mana":{"G":2}}}}"#, "phase follower: mana setup unsupported"),
@@ -616,6 +626,12 @@ mod tests {
             assert_eq!(out.err(), Some(Stop::Harness(msg.to_string())), "{json}");
             assert!(rb.snapshots.is_empty());
         }
+    }
+
+    #[test]
+    fn setup_speed_is_written_directly() {
+        let (b, _, _) = setup(r#"{"id":"t","setup":{"p0":{"speed":2}}}"#);
+        assert_eq!((b.state.players[0].speed, b.state.players[1].speed), (Some(2), None));
     }
 
     #[test]

@@ -158,12 +158,17 @@ fn perm_snap(
     for (kind, n) in obj.counters.iter().filter(|(_, n)| **n > 0) {
         *counters.entry(vocab::counter_kind(&kind.as_str())).or_insert(0i64) += i64::from(*n);
     }
+    // CR 702.73a: gorge writes a Changeling's creature types as the one marker `allcreaturetypes`;
+    // phase lists the printed subtype (Shapeshifter) before layers run and every type after.
+    let changeling = obj.has_keyword(&engine::types::Keyword::Changeling);
+    let subtypes = ct.subtypes.iter().filter(|t| !(changeling && (state.all_creature_types.contains(t) || *t == "Shapeshifter")));
     let types: Vec<String> = ct
         .core_types
         .iter()
         .map(ToString::to_string)
         .chain(ct.supertypes.iter().map(ToString::to_string))
-        .chain(ct.subtypes.iter().cloned())
+        .chain(subtypes.cloned())
+        .chain(changeling.then(|| "allcreaturetypes".to_string()))
         .collect();
     let colors: String = obj.color.iter().map(|c| color_letter(*c)).collect();
     let mut keywords: Vec<String> = obj.keywords.iter().map(ToString::to_string).collect();
@@ -292,6 +297,17 @@ mod tests {
     fn snap(state: &mut GameState) -> Snapshot {
         flush_layers(state);
         snapshot(state, "setup", &NameMap::default())
+    }
+
+    #[test]
+    fn snapshot_changeling_types_are_the_marker() {
+        let mut state = new_state();
+        add(&mut state, "Three Tree Mascot", 0, Zone::Battlefield);
+        let s = snap(&mut state);
+        let p = &s.permanents[0];
+        assert!(p.types.iter().any(|t| t == "allcreaturetypes"), "{:?}", p.types);
+        assert!(!p.types.iter().any(|t| t == "Shapeshifter" || t == "Elf"), "{:?}", p.types);
+        assert!(p.types.iter().any(|t| t == "Artifact") && p.types.iter().any(|t| t == "Creature"));
     }
 
     #[test]
