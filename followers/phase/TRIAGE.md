@@ -41,3 +41,11 @@ gorge does not log the decision.
   never offered) is a harness row, `cast_mode X not honoured`, not a silent plain cast.
   `adventure_alt` and `omen_alt` from hand answer phase's `CastOffer` face prompt. No FDN-commons
   item exercises any of these.
+- Prompt arms added for `EquipTarget` (gorge's target decision), `CrewVehicle` (the `tapcost` pick),
+  `TopOrBottomChoice` (the `changezone_alternative` ask), `ManifestDreadChoice` (the
+  `manifest_dread` pick), `ReplacementChoice` of kind `OptionalBranch` (the `unless_pay` or yes/no
+  decision; 0 accepts, 1 declines) and `DiscardChoice`/`DiscardToHandSize`/`ConniveDiscard` (gorge's
+  `Discard <card>` mode decisions, one per card). Still unsupported, a strict miss that names the
+  prompt: `ReplacementChoice` of kind `Order` or `SearchFoundDestination` (gorge logs neither); the
+  Prowler-style "enter as a copy" replacement (gorge's `clone` pick, `resume` `etb`) is not mapped,
+  nor the `CopyTargetChoice` that follows it.
