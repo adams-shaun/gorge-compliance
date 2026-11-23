@@ -19,7 +19,9 @@
   card <name|oracle_id>                   every fact for one card
   search <fts> [--legal F] [--status K=V] [--set S] [--label L] [--marked]
   blockers --format F [--engine E] [--by printings|decks]
-  proven [--format F] [--level C2]        the certification-pinned proven view
+  proven [--format F] [--level C2] [--by cert|keys]   the certification-pinned proven view; --by keys: per-key proof
+  need [--format F] [--limit N]           owed and diverged ability keys, most valuable cards first
+  proof --set S                           per-set key proof report
   deck <id>                               a private deck
   freshness [--tick]                      writer SLAs, publish/asset age, unresolved, branch size
   sql '<select>'                          read-only SQL
@@ -120,6 +122,8 @@ def _parser():
         ("search", (("query", {}),)),
         ("blockers", ()),
         ("proven", ()),
+        ("need", ()),
+        ("proof", ()),
         ("deck", (("deck_id", {}),)),
         ("freshness", ()),
         ("sql", (("query", {}),)),
@@ -147,6 +151,13 @@ def _parser():
     p = sub.choices["proven"]
     p.add_argument("--format", metavar="FORMAT")
     p.add_argument("--level", default="C2", choices=query_mod.LEVEL_ORDER)
+    p.add_argument("--by", default="cert", choices=("cert", "keys"),
+                   help="cert (default): the cert table's proven view; keys: every ability key proven")
+    p = sub.choices["need"]
+    p.add_argument("--format", metavar="FORMAT")
+    p.add_argument("--limit", type=int, default=50)
+    p = sub.choices["proof"]
+    p.add_argument("--set", required=True, metavar="SET")
     p = sub.choices["freshness"]
     p.add_argument("--tick", action="store_true", help="print only `!!` lines")
     p.add_argument("--public-dir", help="the data branch clone (default $CARDDB_HOME/public|private)")
@@ -184,7 +195,7 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
     try:
         schema = load_schema(args.schema)
         kind = PRIVATE if getattr(args, "private", False) else PUBLIC
-        if args.verb == "proven" and args.format in (None, "tsv", "json", "count"):
+        if args.verb == "proven" and args.by == "cert" and args.format in (None, "tsv", "json", "count"):
             # The certification view over the clone (or a built file's `proven`
             # view); any other --format is a legality filter over the built cards.
             rows = (query_mod.proven_from_db(args.db) if args.db

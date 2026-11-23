@@ -52,6 +52,20 @@ func TestParseSetClassOldHeader(t *testing.T) {
 	}
 }
 
+// XMage's Conflux class declares buildDate(2009, 0, 31): GregorianCalendar(2009, -1, 31), i.e. 2008-12-31. The
+// release date is normalized the way XMage computes it, never printed as "2009-00-31" (carddb refuses that date).
+func TestParseSetClassNormalizesBuildDate(t *testing.T) {
+	src := `super("Conflux", "CON", ExpansionSet.buildDate(2009, 0, 31), SetType.EXPANSION);
+        cards.add(new SetCardInfo("Noble Hierarch", 87, Rarity.RARE, mage.cards.n.NobleHierarch.class));`
+	m, err := ParseSetClass([]byte(src), "r")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if m.Released != "2008-12-31" {
+		t.Fatalf("released %q, want 2008-12-31", m.Released)
+	}
+}
+
 func TestParseSetClassUnescapesNames(t *testing.T) {
 	src := `super("Unhinged", "UNH", ExpansionSet.buildDate(2004, 11, 19), SetType.JOKE_SET);
         cards.add(new SetCardInfo("\"Ach! Hans, Run!\"", 116, Rarity.RARE, mage.cards.a.AchHansRun.class));

@@ -11,6 +11,7 @@
 //	xengine calib -play DIR -diff DIR2 -engine xmage|forge
 //	xengine xprep -play DIR -out xitems.jsonl [-manifests DIR]
 //	xengine adjudicate -play DIR -xmage DIFF_X -forge DIFF_F -out DIR3 [-ledger DIR] [-forge-ref REF12] [-phase DIFF_P [-phase-rows ROWS]]
+//	xengine keyproof -play DIR -xmage DIFF_X -forge DIFF_F -adjudicate DIR3 [-phase DIFF_P] [-classes oracle/xengine/diagnosed-classes.tsv] -measured YYYY-MM-DD -out DIR4
 //	xengine sweep-plan -root DIR -sets 'FDN BLB' -chunks N [-stale] [-force]
 //	xengine pool -set S [-legal FORMAT -mtgjson S.json.gz] [-out FILE]
 //	xengine followers
@@ -48,7 +49,10 @@
 // items one follower diverged on a three-way pattern (oraclediff.ThreeWay) from both followers' diffs, writes DIR3/findings.jsonl,
 // patterns.tsv, notes.md and a tickets/<cluster>.md draft per gorge_suspect cluster; -ledger adds the compact ledger shards; -phase adds
 // phase.rs as a fourth column (DIR3/fourway.jsonl and patterns4.tsv: oraclediff.NWay over G, F, P and X, with a card phase lacks marked
-// unsupported, "P?", never a disagreement). Follower output is never committed: it goes outside the
+// unsupported, "P?", never a disagreement); -classes (default oracle/xengine/diagnosed-classes.tsv) labels the findings whose card-independent
+// signature a diagnosed class matches (Row.Diagnosed). keyproof turns a play, its two diffs and its adjudication into per-key proof
+// (DIR4/keyproof.tsv: one row per card key, agreed by FX, X or F, or diverged by a signature, diagnosed by a class row, or owed), the
+// handoff.tsv of undiagnosed signatures with sigs/<sig>.tsv, and witness.jsonl, one line per agreeing item. Follower output is never committed: it goes outside the
 // repository or under the gitignored .oracle-build/.
 package main
 
@@ -68,7 +72,7 @@ const DefaultRoot = ".oracle-build/xengine"
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|diagnosed|calib|xprep|adjudicate|sweep-plan|pool|followers|fshadow|certdeck [flags]")
+		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|diagnosed|calib|xprep|adjudicate|keyproof|sweep-plan|pool|followers|fshadow|certdeck [flags]")
 		os.Exit(2)
 	}
 	var err error
@@ -87,6 +91,8 @@ func main() {
 		err = runXprep(os.Args[2:])
 	case "adjudicate":
 		err = runAdjudicate(os.Args[2:])
+	case "keyproof":
+		err = runKeyproof(os.Args[2:])
 	case "sweep-plan":
 		err = runSweepPlan(os.Args[2:])
 	case "pool":
@@ -98,7 +104,7 @@ func main() {
 	case "certdeck":
 		err = runCertdeck(os.Args[2:])
 	default:
-		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, diagnosed, calib, xprep, adjudicate, sweep-plan, pool, followers, fshadow or certdeck)", os.Args[1])
+		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, diagnosed, calib, xprep, adjudicate, keyproof, sweep-plan, pool, followers, fshadow or certdeck)", os.Args[1])
 	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "xengine:", err)
