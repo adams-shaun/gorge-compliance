@@ -49,3 +49,9 @@ gorge does not log the decision.
   prompt: `ReplacementChoice` of kind `Order` or `SearchFoundDestination` (gorge logs neither); the
   Prowler-style "enter as a copy" replacement (gorge's `clone` pick, `resume` `etb`) is not mapped,
   nor the `CopyTargetChoice` that follows it.
+- Keyword activations `ability_action` maps: `Equip`, `Crew`, `Saddle` (empty selection starts the
+  announcement), `Cycling` and `TypeCycling` (phase's hand-zone ability tagged `Cycling`, told apart
+  by its effect: a draw or a library search) and `Class:<level>:...` (the `SetClassLevel` ability of
+  that level). A card with two cycling abilities of the same kind is a harness row (`several
+  cycling abilities`), not a guess. The `SaddleMount` prompt that follows has no answer arm yet (a
+  strict miss that names it); every other keyword stays `keyword ability X unsupported`.

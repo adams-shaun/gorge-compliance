@@ -654,6 +654,56 @@ impl Machine<'_> {
         }
     }
 
+    /// CR 702.29a / CR 702.29e: the hand-zone cycling ability of `id` (`typed` = a typecycling one,
+    /// whose effect is a library search; a plain one draws). phase synthesises it from the keyword,
+    /// whether printed or granted, and tags it `Cycling`.
+    fn cycling_action(&mut self, id: ObjectId, typed: bool) -> Result<GameAction, Stop> {
+        use engine::types::ability::{AbilityTag, Effect};
+        let i = self.step;
+        let mut found = engine::game::casting::activated_ability_definitions(self.state(), id)
+            .into_iter()
+            .filter(|(_, def)| {
+                def.ability_tag == Some(AbilityTag::Cycling)
+                    && def.activation_zone == Some(Zone::Hand)
+                    && matches!(def.effect.as_ref(), Effect::SearchLibrary { .. }) == typed
+            })
+            .map(|(index, _)| index);
+        let kind = if typed { "typecycling" } else { "cycling" };
+        match (found.next(), found.next()) {
+            (Some(index), None) => {
+                Ok(GameAction::ActivateAbility { source_id: id, ability_index: index, payment_mode: CastPaymentMode::Manual })
+            }
+            (None, _) => Err(unmatched(i, format!("{} has no {kind} ability in hand", self.state().objects[&id].name))),
+            (Some(_), Some(_)) => Err(unmatched(i, format!("{} has several {kind} abilities", self.state().objects[&id].name))),
+        }
+    }
+
+    /// CR 716.2: the activated "Level N" ability of the Class `id`; gorge's keyword line is
+    /// `Class:<level>:<cost>:...`, and phase's ability sets that class level.
+    fn class_level_action(&mut self, id: ObjectId, keyword: &str) -> Result<GameAction, Stop> {
+        use engine::types::ability::Effect;
+        let i = self.step;
+        let level: u64 = keyword
+            .split(':')
+            .nth(1)
+            .and_then(|l| l.trim().parse().ok())
+            .ok_or_else(|| unmatched(i, format!("Class keyword {keyword:?} names no level")))?;
+        let obj = &self.state().objects[&id];
+        let mut found = obj
+            .abilities
+            .iter()
+            .enumerate()
+            .filter(|(_, a)| matches!(a.effect.as_ref(), Effect::SetClassLevel { level: l } if u64::from(*l) == level))
+            .map(|(index, _)| index);
+        match (found.next(), found.next()) {
+            (Some(index), None) => {
+                Ok(GameAction::ActivateAbility { source_id: id, ability_index: index, payment_mode: CastPaymentMode::Manual })
+            }
+            (None, _) => Err(unmatched(i, format!("{} has no level {level} ability", obj.name))),
+            (Some(_), Some(_)) => Err(unmatched(i, format!("{} has several level {level} abilities", obj.name))),
+        }
+    }
+
     /// The action activating the non-mana ability `ability` of `id`.
     fn ability_action(&mut self, id: ObjectId, ability: &NeutralAbility) -> Result<GameAction, Stop> {
         let i = self.step;
@@ -662,6 +712,12 @@ impl Machine<'_> {
             return match base {
                 "Equip" => Ok(GameAction::Equip { equipment_id: id, target_id: id }),
                 "Crew" => Ok(GameAction::CrewVehicle { vehicle_id: id, creature_ids: Vec::new() }),
+                // CR 702.171a: like Crew, the empty selection starts the announcement; phase then
+                // asks `SaddleMount` for the creatures tapped.
+                "Saddle" => Ok(GameAction::SaddleMount { mount_id: id, creature_ids: Vec::new() }),
+                "Cycling" => self.cycling_action(id, false),
+                "TypeCycling" => self.cycling_action(id, true),
+                "Class" => self.class_level_action(id, kw),
                 other => Err(unmatched(i, format!("keyword ability {other} unsupported"))),
             };
         }
@@ -1018,6 +1074,72 @@ mod tests {
         assert!(tapped.permanents.iter().find(|p| p.name == "Forest").unwrap().tapped);
         assert_eq!((cast.stack.len(), cast.players[0].pool.as_str()), (1, ""));
         assert_eq!(on_bf(resolved, 0, "Llanowar Elves"), 1);
+    }
+
+    /// The row of a hand-written request that must stop, as its error text.
+    fn stop_text(json: &str) -> String {
+        match go(json).0.err() {
+            Some(Stop::Harness(m)) | Some(Stop::StrictMiss(m)) => m,
+            other => panic!("expected a stop, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn ability_action_cycling_discards_and_draws() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Lonely Sandbar"]}},
+            "steps":[{"op":"mana","seat":0,"mana":"U"},
+                     {"op":"activate","seat":0,"card":"p0:Lonely Sandbar","ability_index":1}]},
+            "neutral":{"ability":{"1":{"class":"activated","keyword":"Cycling:U","cost":"{U}"}}}}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 1 (activate)");
+        assert_eq!(s.stack.len(), 1, "the cycling draw is on the stack");
+        assert_eq!(s.players[0].graveyard, ["Lonely Sandbar"], "cycling discards the card as its cost");
+    }
+
+    #[test]
+    fn ability_action_typecycling_searches() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Ash Barrens"]}},
+            "steps":[{"op":"mana","seat":0,"mana":"G"},
+                     {"op":"activate","seat":0,"card":"p0:Ash Barrens","ability_index":1}]},
+            "neutral":{"ability":{"1":{"class":"activated","keyword":"TypeCycling:Basic:1","cost":"{1}"}}}}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.stack.len(), 1, "the typecycling search is on the stack");
+        assert_eq!(s.players[0].graveyard, ["Ash Barrens"]);
+    }
+
+    #[test]
+    fn ability_action_cycling_kinds_do_not_cross() {
+        // A plain Cycling line never picks the typecycling ability, nor the reverse.
+        let m = stop_text(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Ash Barrens"]}},
+            "steps":[{"op":"mana","seat":0,"mana":"G"},{"op":"activate","seat":0,"card":"p0:Ash Barrens","ability_index":1}]},
+            "neutral":{"ability":{"1":{"class":"activated","keyword":"Cycling:1"}}}}"#);
+        assert!(m.contains("Ash Barrens has no cycling ability in hand"), "{m}");
+    }
+
+    #[test]
+    fn ability_action_saddle_starts_the_announcement() {
+        // Two creatures can saddle, so phase raises the SaddleMount prompt: the action was issued.
+        // Answering it is the answer arms' business; here only that the keyword is no longer refused.
+        let m = stop_text(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Bridled Bighorn","Grizzly Bears","Runeclaw Bear"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Bridled Bighorn","ability_index":0}]},
+            "neutral":{"ability":{"0":{"class":"activated","keyword":"Saddle:2"}}}}"#);
+        assert!(!m.contains("unsupported") || m.contains("SaddleMount"), "{m}");
+        assert!(m.contains("SaddleMount"), "{m}");
+    }
+
+    #[test]
+    fn ability_action_class_level_up() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Cleric Class"]}},
+            "steps":[{"op":"mana","seat":0,"mana":"3W"},
+                     {"op":"activate","seat":0,"card":"p0:Cleric Class","ability_index":1}]},
+            "neutral":{"ability":{"1":{"class":"activated","keyword":"Class:2:3 W:AddTrigger$ TriggerLife","cost":"{3}{W}"}}}}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.stack.len(), 1, "the level-up ability is on the stack");
+        // Level 3 is not yet reachable; asking for it names the missing level, not "unsupported".
+        let m = stop_text(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Cleric Class"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Cleric Class","ability_index":1}]},
+            "neutral":{"ability":{"0":{"class":"activated","keyword":"Class:9:3 W:x"}}}}"#);
+        assert!(m.contains("no level 9 ability") || m.contains("no neutral.ability"), "{m}");
     }
 
     #[test]
