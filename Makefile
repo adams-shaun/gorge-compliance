@@ -69,7 +69,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # already pays for cannot leave a leftover decision. A cast with no such
 # decision keeps paying from the recorded pool. Same cardsfolder and
 # tokenscripts trees as FORGE_REF 418ba5215f.
-FORGE_ORACLE_REF ?= 2aff202bc94b9d508e5dfe2b97617c4ad98f81aa
+# 95020b95d4 = the fork's master: the oracle driver re-picked onto upstream (every driver
+# commit of 2aff202bc9, which it carries as a cherry-pick) merged with the fork's gorge branch
+# (ff076d4432 = Card-Forge/forge master 9db1009ef8 plus the card-script fixes). A descendant of
+# FORGE_REF ff076d4432 with identical cardsfolder and tokenscripts trees.
+FORGE_ORACLE_REF ?= 95020b95d46da3de728abf02e6d7c07a3860ac5c
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
