@@ -224,6 +224,7 @@ var objectTable = map[string]entry{
 	"PushSourceZoneGen":            isRefused("an ability object lives only on the stack"),
 	"CloneLayers":                  isRefused("a copy effect's locked faces (CR 707.2); setup cannot place a clone"),
 	"CloneSeq":                     isIgnored("numbers CloneLayers; carries nothing without them"),
+	"EmergedToughness":             isIgnored("CR 702.119 Emerge: toughness of the sacrificed creature, a pay-time cast record read at entry (Count$Emerged, Adipose Offspring); it resets when the object changes zone and is zero for any non-emerged cast and any copy"),
 	"GrantedBy":                    isRefused("a granted ability object"),
 	"StackKind":                    isRefused("stack-object kind"),
 	"StackKindKnown":               isRefused("stack-object kind"),
