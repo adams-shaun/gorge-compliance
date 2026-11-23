@@ -1,0 +1,421 @@
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"os"
+	"path/filepath"
+	"regexp"
+	"sort"
+	"strconv"
+	"strings"
+
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
+	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/rules"
+)
+
+// startFormat is the format tag of a start file.
+const startFormat = "xproof-start-1"
+
+// startDeckSize is the size a seat's deck is filled to with basics.
+const startDeckSize = 40
+
+// startFile is one xproof start: a scripted position (gorge's
+// rules.Config.Start) for one card's one key, and how many games to play on
+// from it.
+type startFile struct {
+	Format   string `json:"format"`
+	Card     string `json:"card"`
+	Key      string `json:"key"`
+	Players  int    `json:"players"`
+	Active   int    `json:"active"`
+	MaxTurns int    `json:"max_turns"`
+	Setup    struct {
+		P0 startSeat `json:"p0"`
+		P1 startSeat `json:"p1"`
+	} `json:"setup"`
+	Filler string      `json:"filler"`
+	Seeds  int         `json:"seeds"`
+	Focus  *startFocus `json:"focus"`
+}
+
+// startSeat is one seat's position, as card names.
+type startSeat struct {
+	Hand        []string       `json:"hand"`
+	Battlefield []string       `json:"battlefield"`
+	Graveyard   []string       `json:"graveyard"`
+	Exile       []string       `json:"exile"`
+	Library     []string       `json:"library"`
+	Tapped      []string       `json:"tapped"`
+	Counters    []startCounter `json:"counters"`
+	Life        *int32         `json:"life"`
+}
+
+type startCounter struct {
+	Card string `json:"card"`
+	Kind string `json:"kind"`
+	N    int32  `json:"n"`
+}
+
+// startFocus overrides the defaults of the focus seat (focusOf).
+type startFocus struct {
+	Seat    *int   `json:"seat"`
+	Card    string `json:"card"`
+	Kind    string `json:"kind"`
+	Ability int    `json:"ability"`
+}
+
+// startFlagErr is the error of -start given with a flag it does not combine
+// with, or without -set.
+func startFlagErr(set, random, pool, decksDir string, dirac, windows bool, tapeTurns, format, forgeOnly string) error {
+	if set == "" {
+		return errors.New("-start needs -set (it names the item ids)")
+	}
+	for _, f := range []struct {
+		name string
+		on   bool
+	}{
+		{"-random", random != ""}, {"-pool", pool != ""}, {"-decks", decksDir != ""}, {"-dirac", dirac},
+		{"-windows", windows}, {"-tape-turns", tapeTurns != ""}, {"-format", format != ""}, {"-forge-only", forgeOnly != ""},
+	} {
+		if f.on {
+			return fmt.Errorf("-start plays scripted positions: it cannot be combined with %s", f.name)
+		}
+	}
+	return nil
+}
+
+// startFiles is the start files of paths: a file as it is, a directory as its
+// *.json files in sorted order.
+func startFiles(paths []string) ([]string, error) {
+	var out []string
+	for _, p := range paths {
+		st, err := os.Stat(p)
+		if err != nil {
+			return nil, err
+		}
+		if !st.IsDir() {
+			out = append(out, p)
+			continue
+		}
+		m, err := filepath.Glob(filepath.Join(p, "*.json"))
+		if err != nil {
+			return nil, err
+		}
+		sort.Strings(m)
+		out = append(out, m...)
+	}
+	if len(out) == 0 {
+		return nil, errors.New("-start: no start file")
+	}
+	return out, nil
+}
+
+func readStartFile(path string) (*startFile, error) {
+	b, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	dec := json.NewDecoder(bytes.NewReader(b))
+	dec.DisallowUnknownFields()
+	var f startFile
+	if err := dec.Decode(&f); err != nil {
+		return nil, fmt.Errorf("%s: %w", path, err)
+	}
+	switch {
+	case f.Format != startFormat:
+		return nil, fmt.Errorf("%s: format %q, want %q", path, f.Format, startFormat)
+	case f.Card == "" || f.Key == "":
+		return nil, fmt.Errorf("%s: card and key are required", path)
+	case f.Players != 2:
+		return nil, fmt.Errorf("%s: players: only 2", path)
+	case f.Active != 0 && f.Active != 1:
+		return nil, fmt.Errorf("%s: active %d, want 0 or 1", path, f.Active)
+	case f.MaxTurns < 0:
+		return nil, fmt.Errorf("%s: max_turns %d", path, f.MaxTurns)
+	case f.Seeds < 1:
+		return nil, fmt.Errorf("%s: seeds %d, want >= 1", path, f.Seeds)
+	case f.Filler != "basics":
+		return nil, fmt.Errorf("%s: filler %q, want \"basics\"", path, f.Filler)
+	}
+	return &f, nil
+}
+
+var keyFA = regexp.MustCompile(`^f(\d+)/a(\d+)$`)
+
+// focusOf is the focus the file names, or its defaults: the first seat listing
+// the card, the card, and the action its key names.
+func (f *startFile) focusOf() (game.Focus, error) {
+	var out game.Focus
+	seats := [2]startSeat{f.Setup.P0, f.Setup.P1}
+	out.Seat = -1
+	for i, s := range seats {
+		if out.Seat < 0 && s.lists(f.Card) {
+			out.Seat = i
+		}
+	}
+	out.Card = f.Card
+	switch m := keyFA.FindStringSubmatch(f.Key); {
+	case m != nil:
+		out.Kind = "ability"
+		out.Ability, _ = strconv.Atoi(m[2])
+	case f.Key == "cast":
+		out.Kind = "cast"
+	case f.Key == "land":
+		out.Kind = "land"
+	}
+	if o := f.Focus; o != nil {
+		if o.Seat != nil {
+			out.Seat = *o.Seat
+		}
+		if o.Card != "" {
+			out.Card = o.Card
+		}
+		if o.Kind != "" {
+			out.Kind, out.Ability = o.Kind, o.Ability
+		}
+	}
+	if out.Seat < 0 || out.Seat > 1 {
+		return out, fmt.Errorf("focus seat %d: no seat lists %q", out.Seat, f.Card)
+	}
+	return out, nil
+}
+
+// lists reports whether any zone of the seat names card.
+func (s startSeat) lists(card string) bool {
+	for _, z := range [][]string{s.Hand, s.Battlefield, s.Graveyard, s.Exile, s.Library} {
+		for _, n := range z {
+			if n == card {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+var nonSlug = regexp.MustCompile(`[^a-z0-9]+`)
+
+// startID is xs:<SET>:<slug>:<keyid>:s<n>.
+func startID(set, card, key string, n int) string {
+	slug := strings.Trim(nonSlug.ReplaceAllString(strings.ToLower(card), "-"), "-")
+	keyid := strings.NewReplacer("/", "", "#", "").Replace(key)
+	return fmt.Sprintf("xs:%s:%s:%s:s%d", set, slug, keyid, n)
+}
+
+// startDeck is a seat's deck and its scripted position: the listed cards in
+// the order hand, battlefield, graveyard, exile, library, then basics to 40.
+func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules.StartSeat, error) {
+	var d decks.Deck
+	var ss rules.StartSeat
+	d.Name = name
+	var bf []int
+	var frontCost []string
+	add := func(names []string, into *[]int, bfZone bool) error {
+		for _, n := range names {
+			c, ok := reg.Lookup(n)
+			if !ok || len(c.Faces) == 0 {
+				return fmt.Errorf("start %s: card %q not found", name, n)
+			}
+			*into = append(*into, len(d.Cards))
+			if bfZone {
+				bf = append(bf, len(d.Cards))
+			}
+			d.Cards = append(d.Cards, c.Faces[0].Name)
+			frontCost = append(frontCost, c.Faces[0].ManaCost)
+		}
+		return nil
+	}
+	for _, z := range []struct {
+		names []string
+		into  *[]int
+		bf    bool
+	}{{s.Hand, &ss.Hand, false}, {s.Battlefield, &ss.Battlefield, true}, {s.Graveyard, &ss.Graveyard, false}, {s.Exile, &ss.Exile, false}, {s.Library, &ss.Library, false}} {
+		if err := add(z.names, z.into, z.bf); err != nil {
+			return d, ss, err
+		}
+	}
+	bind := func(card string, used map[int]bool) (int, error) {
+		for _, i := range bf {
+			if d.Cards[i] == card && !used[i] {
+				used[i] = true
+				return i, nil
+			}
+		}
+		return 0, fmt.Errorf("start %s: no battlefield copy of %q left to bind", name, card)
+	}
+	tapped, counted := map[int]bool{}, map[int]bool{}
+	for _, n := range s.Tapped {
+		i, err := bind(n, tapped)
+		if err != nil {
+			return d, ss, err
+		}
+		ss.Tapped = append(ss.Tapped, i)
+	}
+	for _, c := range s.Counters {
+		i, err := bind(c.Card, counted)
+		if err != nil {
+			return d, ss, err
+		}
+		ss.Counters = append(ss.Counters, rules.StartCounter{Card: i, Kind: c.Kind, N: c.N})
+	}
+	// gorge applies counters in the order given: the caller sorts by (Card, Kind).
+	sort.SliceStable(ss.Counters, func(a, b int) bool {
+		x, y := ss.Counters[a], ss.Counters[b]
+		return x.Card < y.Card || x.Card == y.Card && x.Kind < y.Kind
+	})
+	ss.Life = s.Life
+	// Filler: the colours of the listed cards' front-face costs, WUBRG order,
+	// one basic each round robin; Plains when there is no coloured symbol.
+	var colours string
+	for _, l := range "WUBRG" {
+		for _, cost := range frontCost {
+			if hasShardLetter(cost, byte(l)) {
+				colours += string(l)
+				break
+			}
+		}
+	}
+	if colours == "" {
+		colours = "W"
+	}
+	basic := map[byte]string{'W': "Plains", 'U': "Island", 'B': "Swamp", 'R': "Mountain", 'G': "Forest"}
+	for i := 0; len(d.Cards) < startDeckSize; i++ {
+		d.Cards = append(d.Cards, basic[colours[i%len(colours)]])
+	}
+	d.Colours = colours
+	return d, ss, nil
+}
+
+// hasShardLetter reports whether the Forge mana cost has a shard with the
+// colour letter l (a hybrid shard "W/U" has both).
+func hasShardLetter(cost string, l byte) bool {
+	for _, shard := range strings.Fields(cost) {
+		for _, part := range strings.Split(shard, "/") {
+			if len(part) == 1 && part[0] == l {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// spanFile is the tape file of a span: its self-check tape, cut where the
+// lowering stopped when it did, else whole. (windowFile keeps turn 1 only.)
+func spanFile(l lower.Lowered) *game.Tape {
+	n := len(l.Against.Entries)
+	if l.Truncated != "" {
+		n = min(n, l.TruncatedAt)
+	}
+	t := *l.Against
+	t.Entries = l.Against.Entries[:n:n]
+	return &t
+}
+
+// playStart plays every start file of paths (see startFiles) and writes the
+// items, gorge rows, lowering log, exercised ledger and tapes of the games into
+// out, as play does. set names the item ids; xmage says XMage replays them.
+func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool) error {
+	files, err := startFiles(paths)
+	if err != nil {
+		return err
+	}
+	var items, gorge, lowerLog bytes.Buffer
+	exercised := cov.New()
+	hist := map[string]int{}
+	em := &emitter{out: out, items: &items, gorge: &gorge, lowerLog: &lowerLog, hist: hist}
+	games := 0
+	for _, path := range files {
+		f, err := readStartFile(path)
+		if err != nil {
+			return err
+		}
+		focus, err := f.focusOf()
+		if err != nil {
+			return fmt.Errorf("%s: %w", path, err)
+		}
+		d0, s0, err := startDeck(reg, "start-p0", f.Setup.P0)
+		if err != nil {
+			return fmt.Errorf("%s: %w", path, err)
+		}
+		d1, s1, err := startDeck(reg, "start-p1", f.Setup.P1)
+		if err != nil {
+			return fmt.Errorf("%s: %w", path, err)
+		}
+		pair := []decks.Deck{d0, d1}
+		for _, d := range pair {
+			for _, n := range d.Cards {
+				if c, ok := reg.Lookup(n); ok {
+					exercised.Seed(n, c)
+				}
+			}
+		}
+		// Seed s is the first seed after seed s-1 that names the active seat as
+		// the starter (rules.SeedForStarter): seed 1's is the brief's, and no two
+		// of a file's games share a seed, which SeedForStarter(s, ...) alone
+		// would give them (seeds 1 and 2 both resolve to 2 for seat 0).
+		next := uint64(1)
+		for s := 1; s <= f.Seeds; s++ {
+			games++
+			id := startID(set, f.Card, f.Key, s)
+			name := fmt.Sprintf("xproof start %s %s seed %d", f.Card, f.Key, s)
+			opt := game.Options{Set: set, Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}, Focus: &focus}
+			if f.MaxTurns > 0 {
+				// max_turns is the turns played: the engine's watchdog stalls
+				// the game as the turn after them begins.
+				opt.MaxTurns = f.MaxTurns + 1
+			}
+			seed := rules.SeedForStarter(next, 2, f.Active)
+			next = seed + 1
+			l, reasons, tp, err := lower.Span(reg, pair, seed, opt, xmage, id, name)
+			if err != nil || tp == nil {
+				row := lowerRow{ID: id, Step: -1, Status: statusPlayError, Field: "play", Gorge: fmt.Sprint(err)}
+				b, _ := jsonl(row)
+				lowerLog.Write(b)
+				hist[row.Status]++
+				continue
+			}
+			for u, n := range classify.Uses(reg, tp, 0, len(tp.Entries)-1, true) {
+				exercised.Add(u.Card, u.Key, cov.Counts{Exercised: n})
+			}
+			if len(reasons) > 0 {
+				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: reasons})
+				if err != nil {
+					return err
+				}
+				lowerLog.Write(b)
+				hist[statusRefused]++
+				continue
+			}
+			if err := em.emit(l, spanFile(l), lower.CheckWindow(reg, l)); err != nil {
+				return err
+			}
+		}
+	}
+	var tsv bytes.Buffer
+	if err := exercised.WriteTSV(&tsv); err != nil {
+		return err
+	}
+	for _, f := range []struct {
+		name string
+		b    []byte
+	}{
+		{"items.jsonl", items.Bytes()}, {"gorge.jsonl", gorge.Bytes()},
+		{"lower.jsonl", lowerLog.Bytes()}, {"exercised.tsv", tsv.Bytes()},
+	} {
+		if err := writeAtomic(filepath.Join(out, f.name), f.b); err != nil {
+			return err
+		}
+	}
+	fmt.Printf("played %d games into %s\n", games, out)
+	for _, s := range sortedKeys(hist) {
+		fmt.Printf("  %-14s %d\n", s, hist[s])
+	}
+	return nil
+}

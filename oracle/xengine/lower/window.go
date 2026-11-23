@@ -17,6 +17,10 @@ import (
 // WindowTemplate is the item template of a lowered window.
 const WindowTemplate = "xengine-window"
 
+// SpanTemplate is the item template of a lowered span: a game from a scripted
+// start (xproof), lowered from turn 1's first main phase to the end of the tape.
+const SpanTemplate = "xproof-start"
+
 // Refusal is a turn whose window was not lowered, and why: every reason that
 // applies, sorted.
 type Refusal struct {
@@ -66,7 +70,7 @@ func Windows(reg *cards.Registry, pair []decks.Deck, seed uint64, opt game.Optio
 			refused = append(refused, Refusal{ID: id, Turn: c.Turn, Reasons: []string{reasonSpeedLatch}})
 			continue
 		}
-		l, err := lowerWindow(reg, t, c, id)
+		l, err := lowerWindow(reg, t, c, id, windowEnd(t, c), false)
 		if err != nil {
 			return nil, nil, t, err
 		}
@@ -88,7 +92,7 @@ func (c *cut) refusalReasons(reg *cards.Registry, t *game.Tape, id string) []str
 	if len(c.Reasons) != 1 || c.Reasons[0] != reasonSagaEntry {
 		return c.Reasons
 	}
-	l, err := lowerWindow(reg, t, c, id)
+	l, err := lowerWindow(reg, t, c, id, windowEnd(t, c), false)
 	if err != nil {
 		return c.Reasons
 	}
@@ -128,12 +132,12 @@ func (c *cut) setupSpeedLatch() bool {
 }
 
 // windowTape is the tape a window's self-check holds it to: the entries from the
-// cut to the first entry of the next turn (the digest the last step is checked
+// cut to the first entry of the next turn (end is windowEnd's, or the tape's
+// length for a span, which has no next turn) (the digest the last step is checked
 // against), with the turn numbers rebased so the cut is turn 1 and every ref
 // the way the window's setup binds it. The window's own entries are the ones of
 // its turn; the last one is only read for its digest.
-func windowTape(t *game.Tape, c *cut) *game.Tape {
-	end := windowEnd(t, c)
+func windowTape(t *game.Tape, c *cut, end int) *game.Tape {
 	hi := min(end+1, len(t.Entries))
 	wt := &game.Tape{Format: t.Format, Set: t.Set, Seed: t.Seed, Decks: t.Decks, Open: make([]game.Opening, len(t.Decks)), Entries: make([]game.Entry, 0, hi-c.Entry)}
 	rebase := c.Turn - 1
@@ -183,12 +187,19 @@ func (c *cut) remap(id state.ObjID, live string) string {
 }
 
 // item is the window's scenario, with the seats relabelled by m.
-func (c *cut) item(m seatMap, id, name string) oraclegen.Item {
+func (c *cut) item(m seatMap, id, name string) oraclegen.Item { return c.itemOf(m, id, name, false) }
+
+// itemOf is item, or with span the item of a span (SpanTemplate).
+func (c *cut) itemOf(m seatMap, id, name string, span bool) oraclegen.Item {
+	why, tmpl := "One turn of a recorded gorge game between two explore bots, replayed from its first precombat main phase.", WindowTemplate
+	if span {
+		why, tmpl = "A gorge game from a scripted start, played on by explore bots and a focus seat, replayed from turn 1's first main phase.", SpanTemplate
+	}
 	sc := oraclegen.Scenario{
 		Name:  name,
 		Turn:  1,
 		CR:    []string{},
-		Why:   "One turn of a recorded gorge game between two explore bots, replayed from its first precombat main phase.",
+		Why:   why,
 		Setup: map[string]oraclegen.Seat{},
 	}
 	for s := range c.Setup {
@@ -212,7 +223,7 @@ func (c *cut) item(m seatMap, id, name string) oraclegen.Item {
 	for k := 0; k < len(c.Answers); k++ {
 		sc.SetupAnswers = append(sc.SetupAnswers, c.Answers[m.seat(k)]...)
 	}
-	it := oraclegen.Item{ID: id, Template: WindowTemplate, Scenario: sc}
+	it := oraclegen.Item{ID: id, Template: tmpl, Scenario: sc}
 	if c.Commander {
 		it.Scenario.Format = oraclegen.FormatCommander
 		it.Compare = []string{oraclediff.CompareCommand}
@@ -220,13 +231,19 @@ func (c *cut) item(m seatMap, id, name string) oraclegen.Item {
 	return it
 }
 
-func lowerWindow(reg *cards.Registry, t *game.Tape, c *cut, id string) (Lowered, error) {
-	wt := windowTape(t, c)
-	n := windowEnd(t, c) - c.Entry
+// lowerWindow lowers the tape's entries from the cut to end (exclusive). A
+// window passes windowEnd; a span (span true, named by name) passes the tape's
+// length.
+func lowerWindow(reg *cards.Registry, t *game.Tape, c *cut, id string, end int, span bool) (Lowered, error) {
+	return lowerFrom(reg, t, c, id, end, span, fmt.Sprintf("xengine window %s vs %s turn %d", deckNameOf(t, 0), deckNameOf(t, 1), c.Turn))
+}
+
+func lowerFrom(reg *cards.Registry, t *game.Tape, c *cut, id string, end int, span bool, name string) (Lowered, error) {
+	wt := windowTape(t, c, end)
+	n := end - c.Entry
 	m := seatMap{swap: c.Active == 1, rngOK: true}
-	name := fmt.Sprintf("xengine window %s vs %s turn %d", deckNameOf(t, 0), deckNameOf(t, 1), c.Turn)
 	l := Lowered{
-		Item: c.item(m, id, name),
+		Item: c.itemOf(m, id, name, span),
 		Swap: m.swap, StepEntry: []int{}, Against: wt,
 	}
 	l.Item.Steps = []oraclegen.Step{}
@@ -240,7 +257,7 @@ func lowerWindow(reg *cards.Registry, t *game.Tape, c *cut, id string) (Lowered,
 	l.Prelude = len(c.Attach)
 	// A window ends at the last entry of its turn; the entry after it only
 	// serves as the digest the last step is checked against.
-	stalled := windowEnd(t, c) == len(t.Entries) && t.Outcome.Stall != ""
+	stalled := end == len(t.Entries) && t.Outcome.Stall != ""
 	l.lowerEntries(reg, m, wt.Entries[:n], 0, stalled)
 	l.markDieRolls(m, wt.Entries[:n])
 	l.compactPayment()
