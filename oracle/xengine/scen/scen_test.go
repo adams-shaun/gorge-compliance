@@ -1,0 +1,223 @@
+package scen
+
+import (
+	"bytes"
+	"encoding/json"
+	"reflect"
+	"testing"
+
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
+	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/testkit/testutil"
+)
+
+const manifests = "../../compliance/manifests"
+
+func testBuilder(t *testing.T) (*cards.Registry, *certdeck.Builder) {
+	t.Helper()
+	reg := testutil.CorpusRegistry(t)
+	sp, err := decks.LoadSpellings(manifests)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return reg, certdeck.NewBuilder(reg, sp)
+}
+
+func rep(name string, n int) []string {
+	var out []string
+	for i := 0; i < n; i++ {
+		out = append(out, name)
+	}
+	return out
+}
+
+func cat(parts ...[]string) []string {
+	var out []string
+	for _, p := range parts {
+		out = append(out, p...)
+	}
+	return out
+}
+
+type want struct {
+	path, reason string
+	// check, for a start result, asserts the file's placements.
+	check func(t *testing.T, f *StartFile)
+}
+
+func focusIs(t *testing.T, f *StartFile, seat int, card, kind string, ability int) {
+	t.Helper()
+	if f.Focus == nil || f.Focus.Seat == nil {
+		t.Fatalf("focus missing a seat: %+v", f.Focus)
+	}
+	if *f.Focus.Seat != seat || f.Focus.Card != card || f.Focus.Kind != kind || f.Focus.Ability != ability {
+		t.Errorf("focus = seat %d %q %q ability %d, want seat %d %q %q ability %d",
+			*f.Focus.Seat, f.Focus.Card, f.Focus.Kind, f.Focus.Ability, seat, card, kind, ability)
+	}
+}
+
+func listIs(t *testing.T, what string, got, want []string) {
+	t.Helper()
+	if len(got) == 0 && len(want) == 0 {
+		return
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("%s = %v, want %v", what, got, want)
+	}
+}
+
+// Needs certdeck.Derive returns for the fixture cards (printed from Derive and
+// Build at this pin): Thornvault Forager [type:Squirrel graveyard] (enabler
+// Frog-Squirrels); Crypt Feaster [graveyard opp-blockers] (enabler Shifting
+// Wall on p1); Banner of Kinship [counters:FELLOWSHIP]; every other fixture
+// card none.
+func TestScenFixtures(t *testing.T) {
+	reg, b := testBuilder(t)
+	rows := []struct {
+		card, key string
+		auto      want
+		start     want
+	}{
+		{"Thornvault Forager", "f0/a2", want{path: "steps"}, want{path: "start", check: func(t *testing.T, f *StartFile) {
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, cat([]string{"Thornvault Forager"}, rep("Forest", 4), []string{"Frog-Squirrels"}))
+			listIs(t, "p0 graveyard", f.Setup.P0.Graveyard, rep("Forest", 7))
+			focusIs(t, f, 0, "Thornvault Forager", "ability", 2)
+		}}},
+		{"Thornvault Forager", "f0/a1", want{path: "steps"}, want{path: "refused", reason: "steps-needed:cost:Forage"}},
+		{"Llanowar Elves", "f0/a0", want{path: "steps"}, want{path: "start", check: func(t *testing.T, f *StartFile) {
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Llanowar Elves"})
+			focusIs(t, f, 0, "Llanowar Elves", "ability", 0)
+		}}},
+		{"Inspiring Overseer", "f0/t0", want{path: "start", check: overseer}, want{path: "start", check: overseer}},
+		{"Crypt Feaster", "f0/t0", want{path: "steps"}, want{path: "start", check: func(t *testing.T, f *StartFile) {
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Crypt Feaster"})
+			listIs(t, "p0 graveyard", f.Setup.P0.Graveyard, rep("Swamp", 7))
+			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, []string{"Shifting Wall"})
+			focusIs(t, f, 0, "Crypt Feaster", "attack", 0)
+		}}},
+		{"Phyrexian Arena", "f0/t0", want{path: "steps"}, want{path: "start", check: func(t *testing.T, f *StartFile) {
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Phyrexian Arena"})
+			if f.Active != 1 || f.MaxTurns != 2 {
+				t.Errorf("active %d max_turns %d, want 1 and 2", f.Active, f.MaxTurns)
+			}
+		}}},
+		{"Gleaming Barrier", "f0/t0", want{path: "steps"}, want{path: "start", check: func(t *testing.T, f *StartFile) {
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Gleaming Barrier"})
+			listIs(t, "p1 hand", f.Setup.P1.Hand, []string{"Murder"})
+			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, rep("Swamp", 3))
+			focusIs(t, f, 1, "Murder", "cast", 0)
+			if f.Active != 1 {
+				t.Errorf("active %d, want 1", f.Active)
+			}
+		}}},
+		{"Scoured Barrens", "land", want{path: "start", check: barrens}, want{path: "start", check: barrens}},
+		{"Aggressive Mammoth", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "no-generator:static"}},
+		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "refused", reason: "no-generator:combat"}},
+		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "as-enters"}},
+		{"Gatekeeper of Malakir", "f0/t0", want{path: "refused", reason: "history:kicked"}, want{path: "refused", reason: "history:kicked"}},
+	}
+	for _, r := range rows {
+		for _, prefer := range []string{"auto", "start"} {
+			w := r.auto
+			if prefer == "start" {
+				w = r.start
+			}
+			t.Run(r.card+"/"+r.key+"/"+prefer, func(t *testing.T) {
+				res, err := Generate(reg, b, r.card, r.key, Options{Prefer: prefer})
+				if err != nil {
+					t.Fatal(err)
+				}
+				if res.Path != w.path || res.Reason != w.reason {
+					t.Fatalf("path %q reason %q, want %q %q", res.Path, res.Reason, w.path, w.reason)
+				}
+				switch res.Path {
+				case "steps":
+					if res.Steps == nil || res.Steps.ID == "" || res.Start != nil {
+						t.Fatalf("steps result malformed: %+v", res)
+					}
+				case "start":
+					if res.Start == nil || res.Steps != nil {
+						t.Fatalf("start result malformed: %+v", res)
+					}
+					if w.check != nil {
+						w.check(t, res.Start)
+					}
+				}
+			})
+		}
+	}
+}
+
+func overseer(t *testing.T, f *StartFile) {
+	listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Inspiring Overseer"})
+	listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, rep("Plains", 3))
+	focusIs(t, f, 0, "Inspiring Overseer", "cast", 0)
+}
+
+func barrens(t *testing.T, f *StartFile) {
+	listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Scoured Barrens"})
+	focusIs(t, f, 0, "Scoured Barrens", "land", 0)
+}
+
+// fixtureKeys are the start-path rows of the fixture table.
+var fixtureKeys = [][2]string{
+	{"Thornvault Forager", "f0/a2"}, {"Llanowar Elves", "f0/a0"}, {"Inspiring Overseer", "f0/t0"},
+	{"Crypt Feaster", "f0/t0"}, {"Phyrexian Arena", "f0/t0"}, {"Gleaming Barrier", "f0/t0"}, {"Scoured Barrens", "land"},
+}
+
+// A start result marshals to bytes the strict decoder accepts and that decode
+// back to the same file.
+func TestScenStartFileRoundTrip(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, k := range fixtureKeys {
+		res, err := Generate(reg, b, k[0], k[1], Options{Prefer: "start"})
+		if err != nil || res.Path != PathStart {
+			t.Fatalf("%v: %+v %v", k, res, err)
+		}
+		raw, err := res.Start.Marshal()
+		if err != nil {
+			t.Fatal(err)
+		}
+		back, err := DecodeStartFile(raw)
+		if err != nil {
+			t.Fatalf("%v: %v\n%s", k, err, raw)
+		}
+		if !reflect.DeepEqual(back, res.Start) {
+			t.Errorf("%v: round trip differs:\n%+v\n%+v", k, back, res.Start)
+		}
+	}
+	if _, err := DecodeStartFile([]byte(`{"format":"xproof-start-2","card":"A","key":"cast"}`)); err == nil {
+		t.Error("a foreign format decoded")
+	}
+	if _, err := DecodeStartFile([]byte(`{"format":"xproof-start-1","card":"A","key":"cast","bogus":1}`)); err == nil {
+		t.Error("an unknown field decoded")
+	}
+}
+
+// Two Generate calls give identical bytes, for a start and a steps result.
+func TestScenDeterministic(t *testing.T) {
+	reg, b := testBuilder(t)
+	gen := func(card, key, prefer string) []byte {
+		res, err := Generate(reg, b, card, key, Options{Prefer: prefer, Set: "FDN"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		raw, err := json.Marshal(res)
+		if err != nil {
+			t.Fatal(err)
+		}
+		return raw
+	}
+	for _, k := range append([][2]string{{"Thornvault Forager", "f0/a1"}, {"Banner of Kinship", "static#0.0"}}, fixtureKeys...) {
+		for _, prefer := range []string{"auto", "start"} {
+			if a, c := gen(k[0], k[1], prefer), gen(k[0], k[1], prefer); !bytes.Equal(a, c) {
+				t.Errorf("%v %s differs between calls", k, prefer)
+			}
+		}
+	}
+	res, _ := Generate(reg, b, "Llanowar Elves", "f0/a0", Options{Set: "FDN"})
+	if res.Steps == nil || res.Steps.ID != "xs:FDN:llanowar-elves:f0a0:steps" {
+		t.Errorf("steps id: %+v", res.Steps)
+	}
+}
