@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 import sqlite3
 import unittest
 
@@ -275,6 +276,32 @@ class Query(Base):
         r = self.run_cli("need", private=True)  # the edhrec tier-3 path over a private build
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertEqual(r.stdout, self.run_cli("need").stdout)
+
+    def test_need_edhrec_rank_only_orders_tier_three(self):
+        # Bolt (tier 2, edhrec rank 42, released first) and Dain (tier 2, no edhrec, released later)
+        # both owe a key: the edhrec rank must not push Bolt behind Dain.
+        db = os.path.join(self.tmp, "need-rank.sqlite")
+        shutil.copy(self.priv, db)
+        conn = sqlite3.connect(db)
+        cols = [r[1] for r in conn.execute("PRAGMA table_info(keyproof)")]
+        row = keyproof_row(OID_A, "f0/a1", "owed", desc="Forage", reason="no-generator")
+        conn.execute("INSERT INTO keyproof (%s) VALUES (%s)" % (
+            ",".join('"%s"' % c for c in cols), ",".join("?" * len(cols))), [row[c] for c in cols])
+        conn.execute("UPDATE cards SET first_released=? WHERE oracle_id=?", ("1993-08-05", OID_A))
+        conn.execute("UPDATE cards SET first_released=? WHERE oracle_id=?", ("2000-01-01", OID_C))
+        conn.commit()
+        conn.close()
+        r = self.cli(self.home, "need", "--db", db, "--private")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        rows = [l.split("\t") for l in r.stdout.splitlines()[1:]]
+        self.assertEqual([(x[0], x[2]) for x in rows],
+                         [("2", "Lightning Bolt"), ("2", "Dáin Ironfoot"), ("4", "Fire // Ice")], r.stdout)
+
+    def test_proven_by_keys_rejects_output_formats(self):
+        for fmt in ("tsv", "json", "count"):
+            r = self.run_cli("proven", "--by", "keys", "--format", fmt)
+            self.assertNotEqual(r.returncode, 0, fmt)
+            self.assertIn("legality format", r.stderr)
 
     def test_proof(self):
         r = self.run_cli("proof", "--set", "lea")

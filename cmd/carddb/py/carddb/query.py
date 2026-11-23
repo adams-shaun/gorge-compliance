@@ -346,7 +346,9 @@ def run_proven_keys(conn, args, out):
     """Cards whose every non-excluded ability key agrees or is diagnosed (the proven_keys view)."""
     if not _has_table(conn, "proven_keys"):
         raise QueryError("proven: this build has no keyproof table")
-    sql = ("SELECT c.oracle_id, c.name, c.type_line, c.mana_value, k.keys, k.agreed, k.diagnosed "
+    if args.format in ("tsv", "json", "count"):
+        raise QueryError("proven --by keys: --format is a legality format, not %r" % args.format)
+    sql =("SELECT c.oracle_id, c.name, c.type_line, c.mana_value, k.keys, k.agreed, k.diagnosed "
            "FROM proven_keys c JOIN keyproof_cards k ON k.oracle_id=c.oracle_id WHERE 1=1")
     params = []
     if args.format:
@@ -373,11 +375,14 @@ def _tier_sql(conn, fmt=None, only=None):
     rank = "0"
     if _has_table(conn, "edhrec"):
         whens.append("WHEN EXISTS (SELECT 1 FROM edhrec e WHERE e.oracle_id=c.oracle_id) THEN 3")
-        rank = ("CASE WHEN EXISTS (SELECT 1 FROM edhrec e WHERE e.oracle_id=c.oracle_id) "
-                "THEN (SELECT MIN(e.edhrec_rank) FROM edhrec e WHERE e.oracle_id=c.oracle_id) ELSE 0 END")
-    sql = ("SELECT c.oracle_id AS oracle_id, CASE %s ELSE 4 END AS tier, %s AS rank FROM cards c "
+        rank = "(SELECT MIN(e.edhrec_rank) FROM edhrec e WHERE e.oracle_id=c.oracle_id)"
+    # rank only counts inside tier 3: an edhrec row on a tier 1/2/4/5 card must not reorder it
+    sql = ("SELECT t0.oracle_id AS oracle_id, t0.tier AS tier, "
+           "CASE WHEN t0.tier=3 THEN %s ELSE 0 END AS rank FROM "
+           "(SELECT c.oracle_id AS oracle_id, CASE %s ELSE 4 END AS tier FROM cards c "
            "WHERE c.oracle_id IN (SELECT oracle_id FROM keyproof) "
-           "AND c.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions)" % (" ".join(whens), rank))
+           "AND c.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions)" % (
+               rank.replace("c.oracle_id", "t0.oracle_id"), " ".join(whens)))
     if fmt:
         sql += (" AND EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id "
                 "AND l.format=? AND l.status='legal')")
@@ -385,7 +390,7 @@ def _tier_sql(conn, fmt=None, only=None):
     if only is not None:
         sql += " AND c.oracle_id IN (SELECT value FROM json_each(?))"
         params.append(json.dumps(only))
-    return sql, params
+    return sql + ") t0", params
 
 
 _NEED_ORDER = "t.tier, t.rank, c.first_released IS NULL, c.first_released, c.name, c.oracle_id"
