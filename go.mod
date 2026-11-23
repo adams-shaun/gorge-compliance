@@ -5,4 +5,4 @@ go 1.25.8
 // The gorge revision the coverage targets are measured against is GORGE_PIN
 // (docs/PINNING.md); the require below is that commit's pseudo-version.
 
-require github.com/adams-shaun/gorge v0.0.0-20261122234004-c1c8a0b7e4fe
+require github.com/adams-shaun/gorge v0.0.0-20261123023456-d9c5aacb21ea
