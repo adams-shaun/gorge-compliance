@@ -58,6 +58,9 @@ type Row struct {
 	GXField string `json:"gx_field,omitempty"`
 	GFField string `json:"gf_field,omitempty"`
 	FXField string `json:"fx_field,omitempty"`
+	// Diagnosed is the Sig of the class-register row (diagnosed-classes.tsv)
+	// that matches the item's signature; empty when none does.
+	Diagnosed string `json:"diagnosed,omitempty"`
 }
 
 // Finding is a Row with the values and repro the change draft quotes.
