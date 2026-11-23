@@ -36,6 +36,7 @@ func runAdjudicate(args []string) error {
 	cardsDir := fs.String("cards", ".cards", "with -fshadow: corpus dir, for each implicated card's IR (its primitive and paper factor)")
 	setManifests := fs.String("set-manifests", "oracle/compliance/manifests", "with -fshadow: the committed set manifests (a card printed only in an Un- set ranks as digital)")
 	gorgeSrc := fs.String("gorge-src", "", "with -fshadow: the gorge module dir, for the briefs' handler file:function (default `go list -m` of gorge)")
+	classesPath := fs.String("classes", DefaultClasses, "the diagnosed-classes register: findings a row matches are labelled diagnosed (findings.jsonl); a header-only file changes nothing")
 	fs.Parse(args)
 	if *out == "" || (*fshadow == "" && (*playDir == "" || *xDiff == "" || *fDiff == "")) {
 		return fmt.Errorf("adjudicate needs -out and either -play, -xmage and -forge, or -fshadow")
@@ -82,6 +83,21 @@ func runAdjudicate(args []string) error {
 		return err
 	}
 	res := adjudicate.Run(in)
+	if *playDir != "" {
+		classes, err := adjudicate.ReadClasses(*classesPath)
+		if err != nil {
+			return err
+		}
+		if len(classes) > 0 {
+			reg, err := loadReg(*cardsDir)
+			if err != nil {
+				return fmt.Errorf("-cards %s: %v", *cardsDir, err)
+			}
+			if err := diagnoseFindings(reg, *playDir, &res, classes); err != nil {
+				return err
+			}
+		}
+	}
 	if err := adjudicate.Write(*out, res); err != nil {
 		return err
 	}
