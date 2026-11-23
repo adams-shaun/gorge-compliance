@@ -7,6 +7,7 @@ import (
 	"regexp"
 	"sort"
 	"strconv"
+	"time"
 )
 
 // Manifest is one set's card list, taken from an XMage set class at a pinned
@@ -119,8 +120,12 @@ func ParseSetClass(src []byte, xmageRef string) (Manifest, error) {
 	y, _ := strconv.Atoi(string(h[3]))
 	mo, _ := strconv.Atoi(string(h[4]))
 	d, _ := strconv.Atoi(string(h[5]))
+	// XMage's buildDate(y, m, d) is new GregorianCalendar(y, m-1, d): a 1-based month, normalized leniently, so
+	// Conflux's buildDate(2009, 0, 31) is 2008-12-31. time.Date normalizes the same way; printing the fields as
+	// written gave "2009-00-31", which carddb's cert_sets fold refuses (nightly ci red 11-21..11-23).
+	rel := time.Date(y, time.Month(mo), d, 0, 0, 0, 0, time.UTC).Format("2006-01-02")
 	m := Manifest{
-		Code: string(h[2]), Name: name, Released: fmt.Sprintf("%04d-%02d-%02d", y, mo, d),
+		Code: string(h[2]), Name: name, Released: rel,
 		SetType: string(h[6]), XMageRef: xmageRef,
 	}
 	all := anyCardRe.FindAllIndex(src, -1)
