@@ -21,6 +21,19 @@ const WindowTemplate = "xengine-window"
 // start (xproof), lowered from turn 1's first main phase to the end of the tape.
 const SpanTemplate = "xproof-start"
 
+// IsRecorded reports whether template names an item lowered from a recorded
+// game (a tape, a window or a span): its steps are tape entries, so a follower
+// that cannot replay a tape entry as-is rewrites them. Every consumer that
+// branches on "is this a recorded game" goes through here, so a new recorded
+// template is added to this one list.
+func IsRecorded(template string) bool {
+	switch template {
+	case Template, WindowTemplate, SpanTemplate:
+		return true
+	}
+	return false
+}
+
 // Refusal is a turn whose window was not lowered, and why: every reason that
 // applies, sorted.
 type Refusal struct {

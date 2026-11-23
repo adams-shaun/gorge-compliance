@@ -192,8 +192,10 @@ func TestXengineForgeExportEmptyDeclaration(t *testing.T) {
 			t.Fatalf("the input item's step %d was mutated: %+v", i, steps[i])
 		}
 	}
-	if g := forgeDeclarations(mk(lower.WindowTemplate)); g.Steps[1].Op != "pass_to" {
-		t.Errorf("window item not rewritten: %+v", g.Steps[1])
+	for _, tmpl := range []string{lower.WindowTemplate, lower.SpanTemplate} {
+		if g := forgeDeclarations(mk(tmpl)); g.Steps[1].Op != "pass_to" {
+			t.Errorf("%s item not rewritten: %+v", tmpl, g.Steps[1])
+		}
 	}
 	for i, st := range forgeDeclarations(mk("other")).Steps {
 		if st.Op != ops[i] {
@@ -254,6 +256,9 @@ func TestForgeDropsDeclarationDecisions(t *testing.T) {
 	want := []rules.OracleDecision{ds[1], ds[3]}
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("decisions %+v, want %+v", got, want)
+	}
+	if g := forgeDropDeclarationDecisions(mk(lower.SpanTemplate), ds); !reflect.DeepEqual(g, want) {
+		t.Errorf("span decisions %+v, want %+v", g, want)
 	}
 	if len(ds) != 5 || ds[0].Kind != "attackers" {
 		t.Errorf("the input decisions were mutated: %+v", ds)
