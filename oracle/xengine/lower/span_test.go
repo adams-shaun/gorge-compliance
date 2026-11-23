@@ -52,6 +52,8 @@ func TestSpanThornvault(t *testing.T) {
 		// the game ends at the turn watchdog, after every entry the tape has
 		t.Logf("truncated %q at %d of %d entries", l.Truncated, l.TruncatedAt, len(tp.Entries))
 	}
+	// not focus evidence: the explore bot activates Forager on its own in this
+	// fixture; the focus is covered by game.TestFocus*
 	activated := false
 	for _, s := range l.Item.Steps {
 		activated = activated || s.Op == "activate" && s.Card == "p0:Thornvault Forager"

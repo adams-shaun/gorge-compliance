@@ -45,7 +45,7 @@ func Span(reg *cards.Registry, pair []decks.Deck, seed uint64, opt game.Options,
 		return Lowered{}, []string{reasonNoTurn1Cut}, t, nil
 	}
 	if len(c.Reasons) > 0 {
-		return Lowered{}, c.Reasons, t, nil
+		return Lowered{}, c.refusalReasons(reg, t, id, len(t.Entries), true), t, nil
 	}
 	if c.setupSpeedLatch() {
 		return Lowered{}, []string{reasonSpeedLatch}, t, nil

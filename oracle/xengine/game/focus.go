@@ -13,7 +13,10 @@ import (
 	"github.com/adams-shaun/gorge/engine/view"
 )
 
-// Focus is the seat that takes the one action an xproof item exists for.
+// Focus is the seat that takes the one action an xproof item exists for. The
+// seat acts at its first chance from turn 1's first precombat main priority on
+// (an earlier action, an upkeep activation, would be missing from the span a
+// start item replays, so a key usable only before main 1 cannot be focused).
 type Focus struct {
 	Seat    int
 	Card    string // front-face name of the focus card
@@ -30,6 +33,11 @@ type focusState struct {
 	objs map[state.ObjID]bool
 	done bool
 }
+
+// focusSeen, when set (by a test), is handed each Play's focusState as it is
+// made, so the test can read what the Setup hook found and whether the focus
+// acted. It is nil outside tests.
+var focusSeen func(*focusState)
 
 // read fills the focus objects: every object of the focus seat, in any zone,
 // whose front face is the focus card.

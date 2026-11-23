@@ -170,6 +170,9 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 	var fst *focusState
 	if opt.Focus != nil {
 		fst = &focusState{f: *opt.Focus, objs: map[state.ObjID]bool{}}
+		if focusSeen != nil {
+			focusSeen(fst)
+		}
 	}
 	for i, d := range pair {
 		cs := make([]*cards.Card, 0, len(d.Cards))

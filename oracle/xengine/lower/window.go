@@ -63,7 +63,7 @@ func Windows(reg *cards.Registry, pair []decks.Deck, seed uint64, opt game.Optio
 	for _, c := range cuts {
 		id := windowID(t, c.Turn)
 		if len(c.Reasons) > 0 {
-			refused = append(refused, Refusal{ID: id, Turn: c.Turn, Reasons: c.refusalReasons(reg, t, id)})
+			refused = append(refused, Refusal{ID: id, Turn: c.Turn, Reasons: c.refusalReasons(reg, t, id, windowEnd(t, c), false)})
 			continue
 		}
 		if c.setupSpeedLatch() {
@@ -88,11 +88,14 @@ func Windows(reg *cards.Registry, pair []decks.Deck, seed uint64, opt game.Optio
 // chapters whatever they say) reports the setup drive's own unscripted asks
 // when it has any, since those name the decision the cut cannot state. The
 // window is refused either way; a probe that cannot run keeps the Saga reason.
-func (c *cut) refusalReasons(reg *cards.Registry, t *game.Tape, id string) []string {
+//
+// end and span are the lowering's own (windowEnd and false for a window, the
+// tape's length and true for a span), so the probe lowers what would have been.
+func (c *cut) refusalReasons(reg *cards.Registry, t *game.Tape, id string, end int, span bool) []string {
 	if len(c.Reasons) != 1 || c.Reasons[0] != reasonSagaEntry {
 		return c.Reasons
 	}
-	l, err := lowerWindow(reg, t, c, id, windowEnd(t, c), false)
+	l, err := lowerWindow(reg, t, c, id, end, span)
 	if err != nil {
 		return c.Reasons
 	}

@@ -36,6 +36,8 @@ func TestPlayStartThornvault(t *testing.T) {
 			t.Errorf("%s: p0 battlefield %v, want Thornvault Forager and 4 Forest", it.ID, bf)
 		}
 		for _, s := range it.Steps {
+			// not focus evidence: the explore bot activates Forager on its own in this
+			// fixture; the focus is covered by oracle/xengine/game TestFocus*
 			if s.Op == "activate" && strings.HasSuffix(s.Card, ":Thornvault Forager") {
 				activated[it.ID] = true
 			}

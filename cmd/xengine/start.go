@@ -227,6 +227,9 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 			if bfZone {
 				bf = append(bf, len(d.Cards))
 			}
+			// the front face: a start naming a double-faced card by its back face
+			// places it front-up, and a transformed focus card stops matching the
+			// focus (BackFace starts are XP11)
 			d.Cards = append(d.Cards, c.Faces[0].Name)
 			frontCost = append(frontCost, c.Faces[0].ManaCost)
 		}
