@@ -684,7 +684,8 @@ impl Machine<'_> {
             let ours = normalise(text, &obj.name, corpus);
             // Equal, or one contains the other (phase may omit or add cost text); never when either is empty.
             let loose = !ours.is_empty() && !theirs.is_empty() && (theirs.contains(&ours) || ours.contains(&theirs));
-            if !(theirs == ours || loose) {
+            // phase leaves some descriptions empty; the ordinal alone matched then.
+            if !(theirs == ours || loose || theirs.is_empty()) {
                 return Err(unmatched(i, format!("phase ability {theirs:?} is not {ours:?}")));
             }
         }
@@ -898,7 +899,36 @@ fn normalise(text: &str, name: &str, corpus: &str) -> String {
             t = t.replace(n, "~");
         }
     }
-    t.split_whitespace().collect::<Vec<_>>().join(" ").trim_end_matches('.').to_lowercase()
+    let t = strip_reminder(&t);
+    // gorge keeps the card's own "~" where phase writes "this creature" (or another type word).
+    const SELF: [&str; 9] = ["creature", "permanent", "artifact", "enchantment", "land", "aura", "equipment", "vehicle", "planeswalker"];
+    let mut words: Vec<String> = t.split_whitespace().map(str::to_lowercase).collect();
+    let mut i = 0;
+    while i + 1 < words.len() {
+        let next = words[i + 1].trim_end_matches(|c: char| !c.is_alphanumeric()).to_string();
+        if words[i] == "this" && SELF.contains(&next.as_str()) {
+            let tail = words[i + 1][next.len()..].to_string();
+            words[i] = format!("~{tail}");
+            words.remove(i + 1);
+        }
+        i += 1;
+    }
+    words.join(" ").trim_end_matches('.').to_string()
+}
+
+/// `text` without its parenthesised reminder text (phase appends it to a keyword action's description).
+fn strip_reminder(text: &str) -> String {
+    let mut out = String::with_capacity(text.len());
+    let mut depth = 0usize;
+    for c in text.chars() {
+        match c {
+            '(' => depth += 1,
+            ')' if depth > 0 => depth -= 1,
+            _ if depth == 0 => out.push(c),
+            _ => {}
+        }
+    }
+    out
 }
 
 #[cfg(test)]
@@ -913,6 +943,15 @@ mod tests {
             let path = std::env::var("PHASE_CARD_DATA").expect("PHASE_CARD_DATA: run make phase-follower-test");
             crate::load_db(&path).expect("load card data")
         })
+    }
+
+    #[test]
+    fn normalise_ignores_reminder_text_and_self_wording() {
+        let theirs = normalise("{4}, {T}: Surveil 1", "Wand", "Wand");
+        let ours = normalise("Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)", "Wand", "Wand");
+        assert!(theirs.contains(&ours), "{theirs:?} {ours:?}");
+        assert!(normalise("{1}: Wand gets +1/+1 until end of turn", "Wand", "Wand").contains(&normalise("This creature gets +1/+1 until end of turn.", "Wand", "Wand")));
+        assert_eq!(normalise("Return this Aura to its owner's hand", "Wand", "Wand"), normalise("Return ~ to its owner's hand", "Wand", "Wand"));
     }
 
     /// Setup plus steps for a hand-written request: the outcome and the row builder.
