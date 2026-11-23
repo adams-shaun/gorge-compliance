@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 import sqlite3
 import unittest
 
@@ -17,6 +18,20 @@ UPDATE = os.environ.get("CARDDB_UPDATE_GOLDEN") == "1"
 OID_D = "de" + "3" * 30
 OID_E = "ef" + "4" * 30
 OID_F = "f0" + "5" * 30
+
+GORGE = "8f7095353a64"
+
+
+def keyproof_row(oid, key, state, **kw):
+    row = {
+        "oracle_id": oid, "key": key, "desc": "-", "state": state, "reason": "-", "refs": "-",
+        "source": "-", "agree_items": 0, "diff_items": 0, "witness": "-", "sig": "-", "cite": "-",
+        "ticket": "-", "gorge_sha": GORGE, "corpus_pin": "-", "script_sha": "-", "xmage_ref": "-",
+        "forge_ref": "-", "measured": "2026-11-23", "writer": "xproof",
+    }
+    row.update(kw)
+    return row
+
 
 CURATED = {
     "labels": [{"oracle_id": OID_A, "label": "staple", "note": "format fixture"}],
@@ -112,6 +127,17 @@ class Query(Base):
             cert_row(OID_A, "Lightning Bolt", "C2", measured="2026-11-19"),
             cert_row(OID_B, "Fire // Ice", "C1", measured="2026-11-19"),
         ], writer="certification")
+        self.a.put("keyproof", [
+            keyproof_row(OID_A, "cast", "agreed", desc="Mana", refs="FX", source="scen", agree_items=2),
+            keyproof_row(OID_A, "f0/a0", "agreed", desc="Damage", refs="X", source="start", agree_items=1,
+                         witness="xs:LEA:lightning-bolt:f0a0:s1"),
+            keyproof_row(OID_B, "cast", "agreed", desc="Mana", refs="FX", source="scen", agree_items=2),
+            keyproof_row(OID_B, "f1/a0", "owed", desc="Forage", reason="no-generator"),
+            keyproof_row(OID_C, "cast", "diverged", desc="Mana", diff_items=3, sig="a1b2c3d4e5f6",
+                         ticket="xp-a1b2c3d4e5f6"),
+            keyproof_row(OID_C, "combat#0.attack", "diagnosed", sig="a1b2c3d4e5f6", cite="CR 702.4b"),
+            keyproof_row(OID_E, "cast", "owed", desc="Mana", reason="no-generator"),
+        ], writer="xproof")
         self.a.put("labels", [
             {"oracle_id": OID_A, "label": "burn", "origin": "derived"},
             {"oracle_id": OID_C, "label": "ramp", "origin": "derived"},
@@ -129,7 +155,7 @@ class Query(Base):
         self.sla = os.path.join(self.tmp, "writers.tsv")
         write(self.sla, "#carddb-writers v1\nwriter\tsla_hours\ttables\tdoc\n" + "".join(
             "%s\t%d\tcards\tfixture\n" % (w, 24 if w == "catalogue" else 1000)
-            for w in ("catalogue", "certification", "ci", "farm", "labels", "loop", "resolve")))
+            for w in ("catalogue", "certification", "ci", "farm", "labels", "loop", "resolve", "xproof")))
         self.asset = os.path.join(self.tmp, "carddb-latest.json")
         write(self.asset, json.dumps({"published_at": "2026-11-19T00:00:00Z", "unresolved": 1}) + "\n")
 
@@ -232,6 +258,63 @@ class Query(Base):
         self.assertEqual(r.returncode, 0, r.stderr)
         self.golden("query_proven.txt", r.stdout)
         self.assertNotIn("Fire // Ice", r.stdout)  # C1 is below the C2 proven level
+
+    def test_need(self):
+        r = self.run_cli("need")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_need.txt", r.stdout)
+        self.assertIn("Dáin Ironfoot", r.stdout)
+        self.assertIn("Fire // Ice", r.stdout)
+        self.assertNotIn("Fun Card", r.stdout)  # curated exclusion
+        self.assertNotIn("Lightning Bolt", r.stdout)  # every key agreed
+        r = self.run_cli("need", "--format", "modern")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_need_modern.txt", r.stdout)
+        self.assertNotIn("Fire // Ice", r.stdout)  # banned in modern
+        r = self.run_cli("need", "--limit", "1")
+        self.assertEqual(len(r.stdout.splitlines()), 2, r.stdout)  # header and one row
+        r = self.run_cli("need", private=True)  # the edhrec tier-3 path over a private build
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(r.stdout, self.run_cli("need").stdout)
+
+    def test_need_edhrec_rank_only_orders_tier_three(self):
+        # Bolt (tier 2, edhrec rank 42, released first) and Dain (tier 2, no edhrec, released later)
+        # both owe a key: the edhrec rank must not push Bolt behind Dain.
+        db = os.path.join(self.tmp, "need-rank.sqlite")
+        shutil.copy(self.priv, db)
+        conn = sqlite3.connect(db)
+        cols = [r[1] for r in conn.execute("PRAGMA table_info(keyproof)")]
+        row = keyproof_row(OID_A, "f0/a1", "owed", desc="Forage", reason="no-generator")
+        conn.execute("INSERT INTO keyproof (%s) VALUES (%s)" % (
+            ",".join('"%s"' % c for c in cols), ",".join("?" * len(cols))), [row[c] for c in cols])
+        conn.execute("UPDATE cards SET first_released=? WHERE oracle_id=?", ("1993-08-05", OID_A))
+        conn.execute("UPDATE cards SET first_released=? WHERE oracle_id=?", ("2000-01-01", OID_C))
+        conn.commit()
+        conn.close()
+        r = self.cli(self.home, "need", "--db", db, "--private")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        rows = [l.split("\t") for l in r.stdout.splitlines()[1:]]
+        self.assertEqual([(x[0], x[2]) for x in rows],
+                         [("2", "Lightning Bolt"), ("2", "Dáin Ironfoot"), ("4", "Fire // Ice")], r.stdout)
+
+    def test_proven_by_keys_rejects_output_formats(self):
+        for fmt in ("tsv", "json", "count"):
+            r = self.run_cli("proven", "--by", "keys", "--format", fmt)
+            self.assertNotEqual(r.returncode, 0, fmt)
+            self.assertIn("legality format", r.stderr)
+
+    def test_proof(self):
+        r = self.run_cli("proof", "--set", "lea")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_proof.txt", r.stdout)
+        r = self.run_cli("proof", "--set", "LEA")
+        self.assertEqual(r.stdout, self.run_cli("proof", "--set", "lea").stdout)
+        r = self.run_cli("proven", "--by", "keys")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.golden("query_proven_keys.txt", r.stdout)
+        self.assertIn("Lightning Bolt", r.stdout)
+        self.assertNotIn("Dáin Ironfoot", r.stdout)
+        self.assertNotIn("Fun Card", r.stdout)
 
     def test_deck(self):
         r = self.run_cli("deck", "d1", private=True)
