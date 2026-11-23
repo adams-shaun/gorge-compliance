@@ -1,0 +1,204 @@
+// Package scen turns one owed ability key (a card and a cov key) into a
+// scenario: a scripted-steps item (the level-B shape every follower replays)
+// where a level-B template serves the key, else an xproof-start-1 file
+// (`xengine play -start`), else a named refusal. Generator reach, the share of
+// owed keys some recipe can set up, is xproof's first throughput limit; Census
+// measures it.
+package scen
+
+import (
+	"fmt"
+	"regexp"
+	"strconv"
+	"strings"
+
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/levelb"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen/templates"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
+	"github.com/adams-shaun/gorge/engine/cards"
+)
+
+// Result paths.
+const (
+	PathSteps   = "steps"
+	PathStart   = "start"
+	PathRefused = "refused"
+)
+
+// Options tunes Generate.
+type Options struct {
+	Prefer     string          // "auto" (default) or "start"
+	Set        string          // names ids; default "SCEN"
+	PhaseLacks map[string]bool // cards phase.rs refuses; nil = unknown (treated as lacking)
+}
+
+// Result is what Generate built: exactly one of Steps, Start or a Reason.
+type Result struct {
+	Path   string          // "steps", "start" or "refused"
+	Reason string          // refusal reason
+	Start  *StartFile      // the xproof-start-1 document
+	Steps  *oraclegen.Item // the scripted-steps item
+}
+
+func refuse(reason string) (Result, error) { return Result{Path: PathRefused, Reason: reason}, nil }
+
+var keyRE = regexp.MustCompile(`^f(\d+)/([at])(\d+)$`)
+
+// historyTokens are the parameter values placement cannot fake: the game state
+// they read is history, not position.
+var historyTokens = []string{"kicked", "castfrom", "wascast", "thisturnentered", "enteredthisturn"}
+
+// Keys is every key Generate accepts for c: cov.Keys plus the level-B
+// static and combat requirement keys.
+func Keys(c *cards.Card) []string {
+	var out []string
+	for _, k := range cov.Keys(c) {
+		out = append(out, k.ID)
+	}
+	for _, r := range levelb.Requirements(c) {
+		if r.Family == "static" || r.Family == "combat" {
+			out = append(out, r.Key)
+		}
+	}
+	return out
+}
+
+// Family names the recipe family of key: cast, land, activate, trigger,
+// static or combat.
+func Family(key string) string {
+	switch {
+	case key == "cast" || key == "land":
+		return key
+	case strings.HasPrefix(key, "static#"):
+		return "static"
+	case strings.HasPrefix(key, "combat#"):
+		return "combat"
+	}
+	if m := keyRE.FindStringSubmatch(key); m != nil {
+		if m[2] == "a" {
+			return "activate"
+		}
+		return "trigger"
+	}
+	return "?"
+}
+
+// Generate builds the scenario that exercises key of card.
+func Generate(reg *cards.Registry, b *certdeck.Builder, card, key string, opt Options) (Result, error) {
+	if opt.Prefer == "" {
+		opt.Prefer = "auto"
+	}
+	if opt.Prefer != "auto" && opt.Prefer != "start" {
+		return Result{}, fmt.Errorf("scen: prefer %q, want auto or start", opt.Prefer)
+	}
+	if opt.Set == "" {
+		opt.Set = "SCEN"
+	}
+	c, ok := reg.Lookup(card)
+	if !ok || len(c.Faces) == 0 {
+		return Result{}, fmt.Errorf("scen: %q is not in the corpus", card)
+	}
+	known := false
+	for _, k := range Keys(c) {
+		if k == key {
+			known = true
+		}
+	}
+	if !known {
+		return Result{}, fmt.Errorf("scen: %q has no key %q", card, key)
+	}
+	// Not sent: Forge alone is weak evidence for gorge, which shares Forge's
+	// scripts, so a card XMage does not list needs phase.rs to vouch for it.
+	if !b.Sp.Lists(reg, card) && (opt.PhaseLacks == nil || opt.PhaseLacks[card]) {
+		return refuse("not-sent")
+	}
+	fam := Family(key)
+	m := keyRE.FindStringSubmatch(key)
+	var face *cards.Face
+	var params map[string]string
+	var sa *cards.SA
+	var trig *cards.Trigger
+	if m != nil {
+		fi, _ := strconv.Atoi(m[1])
+		idx, _ := strconv.Atoi(m[3])
+		if fi >= len(c.Faces) {
+			return Result{}, fmt.Errorf("scen: %q key %q: no face %d", card, key, fi)
+		}
+		face = c.Faces[fi]
+		if m[2] == "a" {
+			if idx >= len(face.Abilities) {
+				return Result{}, fmt.Errorf("scen: %q key %q: no such ability", card, key)
+			}
+			sa = face.Abilities[idx]
+			params = sa.Params
+		} else {
+			if idx >= len(face.Triggers) {
+				return Result{}, fmt.Errorf("scen: %q key %q: no such trigger", card, key)
+			}
+			trig = &face.Triggers[idx]
+			params = trig.Params
+		}
+	}
+	if tok := historyToken(params); tok != "" {
+		return refuse("history:" + tok)
+	}
+	if opt.Prefer == "auto" {
+		if it, ok := steps(reg, b, c, card, key, m, opt); ok {
+			return Result{Path: PathSteps, Steps: it}, nil
+		}
+	}
+	return recipe(reg, b, c, card, key, fam, m, sa, trig, opt)
+}
+
+func historyToken(params map[string]string) string {
+	for _, tok := range historyTokens {
+		for _, v := range params {
+			if strings.Contains(strings.ToLower(v), tok) {
+				return tok
+			}
+		}
+	}
+	return ""
+}
+
+// reqKey is the level-B requirement key of a cov key ("" for cast and land).
+func reqKey(key string, m []string) string {
+	switch {
+	case m != nil && m[2] == "a":
+		return "activate#" + m[1] + "." + m[3]
+	case m != nil:
+		return "trigger#" + m[1] + "." + m[3]
+	case strings.HasPrefix(key, "static#") || strings.HasPrefix(key, "combat#"):
+		return key
+	}
+	return ""
+}
+
+// steps is the template path: the level-B requirement serving key, when a
+// template builds it and level A does not already settle it.
+func steps(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key string, m []string, opt Options) (*oraclegen.Item, bool) {
+	rk := reqKey(key, m)
+	if rk == "" {
+		return nil, false
+	}
+	for _, req := range levelb.Requirements(c) {
+		if req.Key != rk {
+			continue
+		}
+		if req.Gap != "" || req.CoveredByA {
+			return nil, false
+		}
+		it, skip := templates.GenerateB(reg, card, req)
+		if skip != nil {
+			return nil, false
+		}
+		it.ID = fmt.Sprintf("xs:%s:%s:%s:steps", opt.Set, Slug(card), KeyID(key))
+		if xm, ok := b.Sp.XMage(reg, card); ok && xm != card && it.XMageName == "" {
+			it.XMageName = xm
+		}
+		return &it, true
+	}
+	return nil, false
+}
