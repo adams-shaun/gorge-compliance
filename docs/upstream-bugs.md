@@ -126,3 +126,33 @@ Lifecraft Engine after an animation is the same shape: Forge's older Card-Forge/
 | Card-Forge/forge#12724, PR #12725 | Homesickness, Mind Spiral, Sygg's Command | the stun `PutCounter` has `Defined$ ParentTarget`, which `getDefinedPlayers` also resolves to the player targeted earlier in the chain, so that player gets a stun counter (Oracle text: only the tapped creature). Fix `Defined$ TargetedCard`, branch `fix/homesickness-mind-spiral-stun` (b2f70dde46, off master 6d4a175d9e); not on `gorge` yet. Harness row SOS-s104 xe:RAND:3:17:w14 |
 
 Our fork, adams-shaun/forge, branch `gorge`, carries that fix.
+
+## phase.rs
+
+Pin: engine `b14f974787d8`, card data `d0ffa159dcde97c7` (`followers/phase/PHASE_PIN`); source read at that pin (cargo checkout, `crates/engine/src`). Rows come from the follower leg on metal2, 2026-11-19 to 2026-11-23: 723k items sent, 243k agree, 15.7k diverge, 19.1k `phase_skips_attack_step`; four-way patterns by `xengine adjudicate -phase` (`GFX|P` 10.6k, `G|P F- X-` 2.2k, `GF|P X-` 1.5k, `GX|FP` 0.5k). Counts below are `fourway.jsonl` rows over 5,070 chunks, so one root cause counts once per window that opens on it. Nothing here is filed.
+
+Status `suspect` means the four-way pattern and a window repro name it and the harness is not yet ruled out; `confirmed` needs all three tests at the top of this file. No row is confirmed yet. Window ids are `<chunk dir under /scratch/phase/out>/<id>`; a chunk's `phase.jsonl.zst` and `diff-phase.verdicts.jsonl` hold the full row.
+
+### Suspect
+
+| Class | What phase does (Forge, XMage, gorge agree) | Rule | Count | Repro | Status |
+|---|---|---|---|---|---|
+| "loses all other creature types" Auras keep types: Honest Work, Witness Protection, Mysterio's Phantasm family | After the Aura resolves, the creature is `[citizen creature human soldier]` / `[bear citizen creature]` / `[citizen creature illusion villain]`; the three others have `[citizen creature]`. The card data is right (`SetCardTypes`, `RemoveAllSubtypes{Creature}`, `AddSubtype Citizen`), so the layer order in `game/layers.rs` (`RemoveAllSubtypes` at ~12817) is the suspect | CR 205.1a, 613.1d | about 250 `GFX|P`/`GF|P` windows (Humble Merchant 110, Mysterio's Phantasm 55, Legitimate Businessperson 38) | `TLA-s201-rand__2/xe:RAND:2:5:w11`; also `followers/phase/TRIAGE.md` (Witness Protection, step 1) | suspect |
+| Declare attackers step with no creature able to attack gets no priority | Phase begins the step (its own `steps_started_this_turn` counts it) and gives no priority; gorge and XMage give it (`G\|P F- X-` 1.0k, `GF\|P X-` 0.9k, `GFX\|P` 3.2k; with Forge also skipping `GX\|FP`) | CR 508.1, 117.3a (priority at the start of each step), 508.8 skips only blockers and damage | about 5.1k step rows | `DFT-s347-rand__2/xe:RAND:2:17:w1` (gorge `declare-attackers`, phase `end-combat`); in-tree handled as `phase_skips_attack_step` where the step is empty | suspect, may be settled by reading CR 508 against Forge's rule |
+| Combat damage step skipped when every attacker has left combat | Phase goes to end of combat; gorge, XMage have a damage step with nothing to deal (Forge skips too: `GX\|FP` 526, `FP\|G X-` 50, `G\|P F- X-` 154) | CR 510.1, 506.4 | about 730 | `TMT-s288-rand__2/xe:RAND:2:16:w11`, `SOS-s218-rand__3/xe:RAND:3:15:tape` | suspect |
+| Stun counter kept (Jessica Jones, Private Eye) | gorge/Forge/XMage: creature stays tapped, stun counter removed; phase: untapped, counter kept (step `18 (pass)`) | CR 122.1g | 26 | `MSH-s233-rand__2/xe:RAND:2:16:w10` | suspect |
+| Case of the Shattered Pact, Spider-UK, Pests of Honor, Blood Hustler: trigger on the stack that the others do not have (or one fewer) | the extra `ability:<card>@p0` sits on phase's stack at the pass; `Blood Hustler` has one where the others have two | CR 603.2 (each event triggers once per ability) | 126, 89, 42, 28 | `MKM-s109__0/xe:RAND:0:18:w12`, `SPM-s194-rand__1/xe:RAND:1:1:w21`, `WOE-s236-rand__1/xe:RAND:1:7:w15`, `OTJ-s300-rand__1/xe:RAND:1:10:w13` | suspect; the sample row of the first ends with a harness stop at step 13, so read the full row before filing |
+| `p1.life` differs by 1 to 3 at the pass | e.g. gorge 18, phase 16 | none named | 494 `GFX\|P` | `TMT-s288-rand__2/xe:RAND:2:5:w12`, `MSH-s158-rand__1/xe:RAND:1:12:w5` | suspect, no cause read |
+| Equipment mana abilities leave mana in the pool (`p0.pool` U, W, R, G where the others have empty) | Gold Pan, Goldvein Pick, Well-Worn Spatula, Thinking Cap, Lavaspur Boots, Improvised Arsenal | CR 106.4 (mana empties at the end of each step) | 230 + 62 | `FIN-s131-rand__3/xe:RAND:3:4:w8`, `FDN-s272-rand__1/xe:RAND:1:12:w10` | suspect; may be our mana-source step (harness) |
+
+### Forge-alone and XMage-alone patterns (phase with the majority)
+
+`FPX|G` (gorge odd one out, 28 rows): `counters=SHIELD=1` on River Boa, Black Poplar Shaman, Revered Dead, Horned Troll; Forge, XMage and phase show none. See "Gorge suspects" below. `GXP|F`, `GFP|X`, `GP|X F-` are 0, 16 and 9 rows with an empty field (no diff recorded). `FP|G X-` (50) is the combat-damage class above.
+
+### Gorge suspects (gorge is the odd one out)
+
+| Class | Pattern | Count | Repro |
+|---|---|---|---|
+| SHIELD counter present only in gorge | `FPX\|G` | 28 | `SUP-s159-supp__3/xe:RAND:3:2:w7` (Black Poplar Shaman), `SUP-s331-supp__0/xe:RAND:0:8:w11` (River Boa) |
+| Donatello, Way with Machines is `[creature legendary turtle]` in gorge, Forge and XMage; phase has `[creature legendary mutant ninja turtle]` (the printed types) | `GFX\|P` | 34 | `TMT-s347-rand__3/xe:RAND:3:18:w10`; either gorge, Forge and XMage all lose Mutant Ninja because of a type-setting effect or phase is right: read the window before calling it phase |
+| Honest Work on a Vehicle: Aura attached to a different object than in gorge | `GX\|FP` | 1 | `TLA-s280-rand__0/xe:RAND:0:18:w13` |
