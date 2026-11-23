@@ -1,0 +1,22 @@
+#carddb-schema keyproof v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	cards.oracle_id
+key	string	yes	yes	public	Ability key: cast, land, f<face>/a<i>, f<face>/t<i>, static#<face>.<i>, combat#<face>.attack, combat#<face>.block
+desc	string	no	no	public	API or trigger Mode of the key (Mana/Forage, ChangesZone), for grouping
+state	string	yes	no	public	agreed, diagnosed, diverged, owed or excluded
+reason	string	no	no	public	Owed reason (no-generator, harness, not-sent, rng, refused:<why>) or exclusion cause; - otherwise
+refs	string	no	no	public	Engines behind an agreement: FX, X or F, each with +P when phase.rs agreed
+source	string	no	no	public	scen (level-B verdict), game (farm window), start (xproof start item), steps (xproof scripted-steps item)
+agree_items	int	no	no	public	Agreeing items on the key at this pin
+diff_items	int	no	no	public	Diverging items on the key at this pin
+witness	string	no	no	public	One agreeing item id per engine with its seed, e.g. xs:BLB:thornvault-forager:f0a2:s2
+sig	string	no	no	public	Class signature (sha12) when diverged or diagnosed
+cite	string	no	no	public	CR rule or upstream-bugs.md row for a diagnosed key
+ticket	string	no	no	public	Open ticket ids, comma-separated
+gorge_sha	string	yes	no	public	gorge commit the state was measured at
+corpus_pin	string	no	no	public	Forge corpus pin (FORGE_REF)
+script_sha	string	no	no	public	Digest of the card's Forge script; keeps evidence across reprints
+xmage_ref	string	no	no	public	XMage commit of the follower
+forge_ref	string	no	no	public	Forge oracle driver commit
+measured	date	yes	no	public	Date measured, YYYY-MM-DD; the merge tie-break timestamp
+writer	string	no	no	public	Program that wrote the row (xproof)

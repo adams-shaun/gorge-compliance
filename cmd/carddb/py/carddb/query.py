@@ -8,7 +8,9 @@ function of the file it read.
   card <name|oracle_id>       every fact for one card
   search <fts>                FTS5 search with legality/status/set/label filters
   blockers --format F         legal cards that are not covered, ranked
-  proven [--format F]         the certification-pinned proven view
+  proven [--format F] [--by keys]  the certification-pinned proven view; --by keys: every key proven
+  need [--format F] [--limit N]    owed and diverged ability keys, most valuable cards first
+  proof --set S               per-set key proof: cards, keys, proven, signatures, top owed
   deck <id>                   a private deck's cards
   freshness [--tick]          writer SLAs, publish/asset age, unresolved growth, branch size
   sql '<select>'              read-only SQL
@@ -27,7 +29,7 @@ from .schema import PRIVATE, PRIVATE_TABLE_NAMES, PUBLIC
 from .shard import parse_writers, read_text
 from .store import Store, StoreError, asset_meta_path, carddb_home, packed_mib
 
-VERBS = ("card", "search", "blockers", "proven", "deck", "freshness", "sql", "export")
+VERBS = ("card", "search", "blockers", "proven", "need", "proof", "deck", "freshness", "sql", "export")
 
 # A printing in one of these set types never makes a card tournament-legal.
 # MTGJSON's set type is the only paper/digital marker the v1 schema carries;
@@ -114,7 +116,7 @@ def _limit(n, verb):
 # ---------------------------------------------------------------- card
 
 _PREFERRED_SECTIONS = (
-    "printings", "legality", "status", "evidence", "xledger", "cert",
+    "printings", "legality", "status", "evidence", "xledger", "cert", "keyproof",
     "labels", "curated_labels", "curated_game_changers", "curated_bracket_flags",
     "curated_exclusions", "curated_relations", "decks", "text", "tags",
     "edhrec", "prims", "values", "labels_private",
@@ -123,7 +125,8 @@ _PREFERRED_SECTIONS = (
 
 def _section_order(conn):
     present = [t for t in _PREFERRED_SECTIONS if _has_table(conn, t)]
-    known = set(present) | {"cards", "card_names", "card_fts", "proven", "build_meta"}
+    known = set(present) | {"cards", "card_names", "card_fts", "proven", "proven_keys", "keyproof_cards",
+                              "build_meta"}
     rest = [t for t in _tables(conn)
             if t not in known and not t.startswith("src_") and not t.startswith("card_fts_")
             and not t.startswith("_meta_") and "oracle_id" in _columns(conn, t)]
@@ -323,6 +326,8 @@ def run_blockers(conn, args, out):
 # -------------------------------------------------------------- proven
 
 def run_proven(conn, args, out):
+    if getattr(args, "by", None) == "keys":
+        return run_proven_keys(conn, args, out)
     if not _has_table(conn, "cert"):
         raise QueryError("proven: this build has no cert table")
     sql, params = _proven_sql(args.level)
@@ -335,6 +340,149 @@ def run_proven(conn, args, out):
     _emit(out, ("oracle_id", "name", "type_line", "mana_value", "level", "measured"),
           [(r["oracle_id"], r["name"], r["type_line"], r["mana_value"], r["level"], r["measured"])
            for r in rows])
+
+
+def run_proven_keys(conn, args, out):
+    """Cards whose every non-excluded ability key agrees or is diagnosed (the proven_keys view)."""
+    if not _has_table(conn, "proven_keys"):
+        raise QueryError("proven: this build has no keyproof table")
+    sql = ("SELECT c.oracle_id, c.name, c.type_line, c.mana_value, k.keys, k.agreed, k.diagnosed "
+           "FROM proven_keys c JOIN keyproof_cards k ON k.oracle_id=c.oracle_id WHERE 1=1")
+    params = []
+    if args.format:
+        sql += (" AND EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id "
+                "AND l.format=? AND l.status='legal')")
+        params.append(args.format)
+    sql += " ORDER BY c.name, c.oracle_id"
+    _emit(out, ("oracle_id", "name", "type_line", "mana_value", "keys", "agreed", "diagnosed"),
+          [tuple(r) for r in _rows(conn, sql, params)])
+
+
+# ---------------------------------------------------------------- need
+
+def _tier_sql(conn, fmt=None, only=None):
+    """(sql, params): one row per card with keyproof rows and not curated-excluded,
+    columns oracle_id, tier (1 best .. 5 last) and rank (edhrec_rank inside tier 3, else 0).
+    `only` is a list of oracle ids to restrict to; `fmt` keeps cards legal in that format."""
+    legal = ("EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id AND l.status='legal' "
+             "AND l.format IN (%s))")
+    whens = ["WHEN (%s) OR substr(c.name,1,2)='A-' THEN 5" % ("NOT " + _eligible_sql()),
+             "WHEN " + legal % "'standard'" + " THEN 1",
+             "WHEN " + legal % "'pioneer','modern'" + " THEN 2"]
+    params = list(NON_TOURNAMENT_SET_TYPES)
+    rank = "0"
+    if _has_table(conn, "edhrec"):
+        whens.append("WHEN EXISTS (SELECT 1 FROM edhrec e WHERE e.oracle_id=c.oracle_id) THEN 3")
+        rank = ("CASE WHEN EXISTS (SELECT 1 FROM edhrec e WHERE e.oracle_id=c.oracle_id) "
+                "THEN (SELECT MIN(e.edhrec_rank) FROM edhrec e WHERE e.oracle_id=c.oracle_id) ELSE 0 END")
+    sql = ("SELECT c.oracle_id AS oracle_id, CASE %s ELSE 4 END AS tier, %s AS rank FROM cards c "
+           "WHERE c.oracle_id IN (SELECT oracle_id FROM keyproof) "
+           "AND c.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions)" % (" ".join(whens), rank))
+    if fmt:
+        sql += (" AND EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id "
+                "AND l.format=? AND l.status='legal')")
+        params.append(fmt)
+    if only is not None:
+        sql += " AND c.oracle_id IN (SELECT value FROM json_each(?))"
+        params.append(json.dumps(only))
+    return sql, params
+
+
+_NEED_ORDER = "t.tier, t.rank, c.first_released IS NULL, c.first_released, c.name, c.oracle_id"
+
+
+def run_need(conn, args, out):
+    if not _has_table(conn, "keyproof") or not _has_table(conn, "curated_exclusions"):
+        raise QueryError("need: this build has no keyproof table")
+    limit = _limit(args.limit, "need")
+    tier, params = _tier_sql(conn, args.format)
+    sql = ("SELECT t.tier, c.oracle_id, c.name, k.\"key\", k.\"desc\", k.state, k.reason, k.sig "
+           "FROM (%s) t JOIN cards c ON c.oracle_id=t.oracle_id "
+           "JOIN keyproof k ON k.oracle_id=c.oracle_id WHERE k.state IN ('owed','diverged') "
+           "ORDER BY %s, k.\"key\"" % (tier, _NEED_ORDER))
+    if limit is not None:
+        sql += " LIMIT ?"
+        params.append(limit)
+    _emit(out, ("tier", "oracle_id", "name", "key", "desc", "state", "reason", "sig"),
+          [tuple(r) for r in _rows(conn, sql, params)])
+
+
+# --------------------------------------------------------------- proof
+
+def _dash(v):
+    return "-" if v is None or v == "" else str(v)
+
+
+def _section(out, name, columns, rows):
+    print("# %s" % name, file=out)
+    _emit(out, columns, rows)
+
+
+def run_proof(conn, args, out):
+    if not _has_table(conn, "keyproof") or not _has_table(conn, "curated_exclusions"):
+        raise QueryError("proof: this build has no keyproof table")
+    paper = [r[0] for r in _rows(
+        conn, "SELECT c.oracle_id FROM cards c WHERE c.oracle_id IN (SELECT p.oracle_id FROM printings p "
+              "WHERE lower(p.set_code)=lower(?)) AND %s ORDER BY c.oracle_id" % _eligible_sql(),
+        [args.set] + list(NON_TOURNAMENT_SET_TYPES))]
+    js = json.dumps(paper)
+    curated = {r[0]: _dash(r[1]) for r in _rows(
+        conn, "SELECT oracle_id, reason FROM curated_exclusions WHERE oracle_id IN "
+              "(SELECT value FROM json_each(?))", (js,))}
+    keys = _rows(conn, 'SELECT oracle_id, "key", state, reason, refs, sig, ticket FROM keyproof '
+                       "WHERE oracle_id IN (SELECT value FROM json_each(?)) ORDER BY oracle_id, \"key\"", (js,))
+    by_card = {}
+    for r in keys:
+        by_card.setdefault(r["oracle_id"], []).append(r)
+
+    excluded = {}  # oracle_id -> reason
+    for oid, rows in by_card.items():
+        if oid in curated:
+            excluded[oid] = curated[oid]
+        elif all(r["state"] == "excluded" for r in rows):
+            excluded[oid] = min(_dash(r["reason"]) for r in rows)
+    _section(out, "cards", ("paper", "supported", "excluded"), [(len(paper), len(by_card), len(excluded))])
+    counts = {}
+    for reason in excluded.values():
+        counts[reason] = counts.get(reason, 0) + 1
+    _section(out, "excluded", ("reason", "cards"), sorted(counts.items()))
+
+    live = [r for oid, rows in sorted(by_card.items()) if oid not in excluded
+            for r in rows if r["state"] != "excluded"]
+    state = lambda s: sum(1 for r in live if r["state"] == s)  # noqa: E731
+    agreed = [r for r in live if r["state"] == "agreed"]
+    refs = lambda ref: sum(1 for r in agreed if _dash(r["refs"]).replace("+P", "") == ref)  # noqa: E731
+    _section(out, "keys", ("total", "agreed", "agreed_FX", "agreed_X", "agreed_F", "diagnosed", "diverged",
+                           "owed"),
+             [(len(live), len(agreed), refs("FX"), refs("X"), refs("F"), state("diagnosed"),
+               state("diverged"), state("owed"))])
+    owed = {}
+    for r in live:
+        if r["state"] == "owed":
+            owed[_dash(r["reason"])] = owed.get(_dash(r["reason"]), 0) + 1
+    _section(out, "owed", ("reason", "keys"), sorted(owed.items()))
+
+    proven = _rows(conn, "SELECT COUNT(*) FROM keyproof_cards WHERE proven=1 AND oracle_id IN "
+                         "(SELECT value FROM json_each(?))", (js,))[0][0]
+    _section(out, "proven", ("cards",), [(proven,)])
+
+    sigs = {}
+    for r in live:
+        if r["state"] in ("diverged", "diagnosed") and _dash(r["sig"]) != "-":
+            e = sigs.setdefault(r["sig"], [0, set(), set()])
+            e[0] += 1
+            e[1].add(r["oracle_id"])
+            e[2].update(t.strip() for t in _dash(r["ticket"]).split(",") if t.strip() not in ("", "-"))
+    _section(out, "signatures", ("sig", "keys", "cards", "ticket"),
+             [(sig, n, len(cards), ",".join(sorted(t)) or "-")
+              for sig, (n, cards, t) in sorted(sigs.items(), key=lambda kv: (-kv[1][0], kv[0]))])
+
+    live_oids = [oid for oid in paper if oid in by_card and oid not in excluded]
+    tier, params = _tier_sql(conn, only=live_oids)
+    sql = ("SELECT t.tier, c.name, COUNT(*) AS n FROM (%s) t JOIN cards c ON c.oracle_id=t.oracle_id "
+           "JOIN keyproof k ON k.oracle_id=c.oracle_id WHERE k.state='owed' "
+           "GROUP BY c.oracle_id ORDER BY %s LIMIT 20" % (tier, _NEED_ORDER))
+    _section(out, "top owed", ("tier", "name", "owed_keys"), [tuple(r) for r in _rows(conn, sql, params)])
 
 
 # ---------------------------------------------------------------- deck
@@ -683,6 +831,10 @@ def _run(args, conn, schema, meta, out):
         return run_blockers(conn, args, out) or 0
     if args.verb == "proven":
         return run_proven(conn, args, out) or 0
+    if args.verb == "need":
+        return run_need(conn, args, out) or 0
+    if args.verb == "proof":
+        return run_proof(conn, args, out) or 0
     if args.verb == "deck":
         return run_deck(conn, args, out) or 0
     if args.verb == "sql":
@@ -702,6 +854,21 @@ PROVEN_COLUMNS = ("oracle_id", "norm_name", "name", "level", "first_set", "relea
 
 PROVEN_VIEW_SQL = ("CREATE VIEW proven AS SELECT * FROM cert WHERE level IN ('C2', 'C3') "
                    "AND (exclusion IS NULL OR exclusion = '-')")
+
+
+# Per-key proof (xproof). A card is proven when it is not curated-excluded, at least one key
+# agrees or is diagnosed, and every key that is not `excluded` agrees or is diagnosed.
+KEYPROOF_CARDS_VIEW_SQL = (
+    "CREATE VIEW keyproof_cards AS SELECT k.oracle_id AS oracle_id, COUNT(*) AS keys, "
+    "SUM(k.state='agreed') AS agreed, SUM(k.state='diagnosed') AS diagnosed, "
+    "SUM(k.state='diverged') AS diverged, SUM(k.state='owed') AS owed, SUM(k.state='excluded') AS excluded, "
+    "CASE WHEN k.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions) "
+    "AND SUM(k.state IN ('agreed','diagnosed'))>0 "
+    "AND SUM(k.state NOT IN ('agreed','diagnosed','excluded'))=0 THEN 1 ELSE 0 END AS proven "
+    "FROM keyproof k GROUP BY k.oracle_id")
+
+PROVEN_KEYS_VIEW_SQL = ("CREATE VIEW proven_keys AS SELECT c.* FROM cards c "
+                        "JOIN keyproof_cards k USING (oracle_id) WHERE k.proven = 1")
 
 
 def is_proven(row):
