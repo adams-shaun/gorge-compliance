@@ -24,7 +24,8 @@ use engine::ai_support::AiDecisionContract;
 use engine::types::ability::{AdditionalCost, TargetRef};
 use engine::types::actions::{AlternativeCastDecision, GameAction, UnlessCostBranch};
 use engine::types::game_state::{
-    AlternativeCastKeyword, CastOfferKind, CastingVariant, GameState, ManaChoice, ManaChoicePrompt, TargetSelectionSlot, WaitingFor,
+    AlternativeCastKeyword, CastOfferKind, CastingVariant, GameState, ManaChoice, ManaChoicePrompt, ReplacementChoiceKind,
+    TargetSelectionSlot, WaitingFor,
 };
 use engine::types::identifiers::ObjectId;
 use engine::types::mana::ManaType;
@@ -254,6 +255,11 @@ fn card_of(cur: &Cursor, d: &Decision, i: usize, cards: &[ObjectId], used: &[Obj
         .filter(|p| !p.is_empty())
         .or_else(|| d.object_picks.get(i).map(|r| follower_proto::refs::ref_name(r)))
         .unwrap_or("");
+    // A discard logged as a mode pick is labelled `Discard <card>`.
+    let name = match d.pick_kinds.get(i).map(String::as_str) {
+        Some("discard") => name.strip_prefix("Discard ").unwrap_or(name),
+        _ => name,
+    };
     cards.iter().copied().find(|id| {
         !used.contains(id)
             && state.objects.get(id).is_some_and(|o| {
@@ -694,6 +700,51 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
             or_forced(state, wf, cur, a)
         }
 
+        // Keyword activations (`ability_action` starts them; these answer what follows).
+        // gorge logs the equip target as a target decision and the crew as the `tapcost` pick of
+        // the creatures tapped.
+        WaitingFor::EquipTarget { equipment_id, valid_targets, .. } => {
+            let board = cur.board;
+            let refs = cur.queue.take_target_refs(cur.step as i32, 1, |r| {
+                matches!(target_of(board, r), Some(TargetRef::Object(id)) if valid_targets.contains(&id))
+            });
+            let a = refs.first().and_then(|r| match target_of(board, r) {
+                Some(TargetRef::Object(target_id)) => {
+                    Some(offered(state, wf, GameAction::Equip { equipment_id: *equipment_id, target_id }, cur))
+                }
+                _ => None,
+            });
+            or_forced(state, wf, cur, a)
+        }
+        WaitingFor::CrewVehicle { vehicle_id, eligible_creatures, .. } => {
+            let a = take(cur, is_tap_cost).map(|d| crew_answer(state, wf, *vehicle_id, eligible_creatures, &d, cur));
+            or_forced(state, wf, cur, a)
+        }
+
+        // CR 401.4 / CR 701.62a: gorge's library-position ask (`primary` = top, or `bottom`) and its
+        // manifest-dread pick of one of the top two cards.
+        WaitingFor::TopOrBottomChoice { .. } => {
+            let a = take(cur, is_library_position)
+                .map(|d| offered(state, wf, GameAction::ChooseTopOrBottom { top: !picks_bottom(&d) }, cur));
+            or_forced(state, wf, cur, a)
+        }
+        WaitingFor::ManifestDreadChoice { cards, .. } => {
+            let a = take(cur, is_manifest_dread).map(|d| match cards_of(cur, &d, cards).as_slice() {
+                [id] => offered(state, wf, GameAction::SelectCards { cards: vec![*id] }, cur),
+                other => Err(miss(wf, cur, &format!("gorge picked {} card(s), phase manifests one", other.len()))),
+            });
+            or_forced(state, wf, cur, a)
+        }
+
+        // CR 616.1: a single "you may" replacement is two branches, 0 accepts and 1 declines. gorge
+        // logs the payment form as its `unless_pay` decision (or a plain yes/no). The ordering and
+        // found-card-destination kinds are decisions gorge does not log: they only ever force.
+        WaitingFor::ReplacementChoice { kind: ReplacementChoiceKind::OptionalBranch, .. } => {
+            let a = take(cur, is_unless_pay)
+                .map(|d| offered(state, wf, GameAction::ChooseReplacement { index: if pays_unless(&d) { 0 } else { 1 } }, cur));
+            or_forced(state, wf, cur, a)
+        }
+
         // Combat. The declarations are the step machine's (`pass_to`/`attack`/`block` stop at the
         // prompt and apply the step's own lists), so the answerer is never asked.
         WaitingFor::DeclareAttackers { .. } | WaitingFor::DeclareBlockers { .. } => {
@@ -771,8 +822,6 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
         | WaitingFor::ExploreChoice { .. }
         | WaitingFor::ReturnAsAuraTarget { .. }
         | WaitingFor::ChooseTokenHost { .. }
-        | WaitingFor::EquipTarget { .. }
-        | WaitingFor::CrewVehicle { .. }
         | WaitingFor::StationTarget { .. }
         | WaitingFor::SaddleMount { .. }
         | WaitingFor::RippleRevealChoice { .. }
@@ -792,7 +841,6 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
         | WaitingFor::HeroEventChoice { .. }
         | WaitingFor::DrawnThisTurnTopdeckChoice { .. }
         | WaitingFor::LearnChoice { .. }
-        | WaitingFor::ManifestDreadChoice { .. }
         | WaitingFor::BetweenGamesSideboard { .. }
         | WaitingFor::BetweenGamesChoosePlayDraw { .. }
         | WaitingFor::OpponentGuess { .. }
@@ -822,7 +870,6 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
         | WaitingFor::ManaAbilityManaPayment { .. }
         | WaitingFor::CollectEvidenceChoice { .. }
         | WaitingFor::HarmonizeTapChoice { .. }
-        | WaitingFor::TopOrBottomChoice { .. }
         | WaitingFor::PopulateChoice { .. }
         | WaitingFor::ClashChooseOpponent { .. }
         | WaitingFor::ChooseFromZoneOpponentChooser { .. }
@@ -977,6 +1024,66 @@ fn colour_word(t: ManaType) -> String {
     .to_string()
 }
 
+/// A `choose_n` whose picks are all the cost's tapped permanents (`tapcost`): the crew, or the
+/// creature tapped for a tap-another cost.
+fn is_tap_cost(d: &Decision) -> bool {
+    d.kind == "choose_n" && !d.pick_kinds.is_empty() && d.pick_kinds.iter().all(|k| k == "tapcost")
+}
+
+/// The crew answer: the creatures gorge tapped, as the candidate phase offers for that same set
+/// (phase's candidates are the subsets whose crew power reaches the Crew N). A pick that finds no
+/// eligible creature, or a set phase does not offer, is a strict miss.
+fn crew_answer(
+    state: &GameState,
+    wf: &WaitingFor,
+    vehicle: ObjectId,
+    eligible: &[ObjectId],
+    d: &Decision,
+    cur: &mut Cursor,
+) -> Result<Answer, Stop> {
+    let mut tapped = cards_of(cur, d, eligible);
+    let named = d.picks.len().max(d.pick_refs.len()).max(d.object_picks.len());
+    if tapped.is_empty() || tapped.len() != named {
+        return Err(miss(wf, cur, &format!("gorge tapped {named} creature(s), {} of them among phase's eligible", tapped.len())));
+    }
+    tapped.sort();
+    let Some(owner) = wf.acting_player() else { return Err(miss(wf, cur, "")) };
+    let candidates = AiDecisionContract::issue(state, owner).candidates;
+    if candidates.is_empty() {
+        // A prompt phase does not enumerate: the engine's own validation stands in.
+        return ok(GameAction::CrewVehicle { vehicle_id: vehicle, creature_ids: tapped });
+    }
+    let same_set = |ids: &[ObjectId]| {
+        let mut ids = ids.to_vec();
+        ids.sort();
+        ids == tapped
+    };
+    match candidates.into_iter().find(|c| matches!(&c.action, GameAction::CrewVehicle { creature_ids, .. } if same_set(creature_ids))) {
+        Some(c) => ok(c.action),
+        None => Err(miss(wf, cur, "the creatures gorge tapped are not a crew phase offers")),
+    }
+}
+
+/// gorge's top-or-bottom library position ask (`changezone_alternative`): a `primary` option
+/// (`top`, or `second from top`) and `bottom`.
+fn is_library_position(d: &Decision) -> bool {
+    d.kind == "choose_n" && d.resume == "changezone_alternative"
+}
+
+fn picks_bottom(d: &Decision) -> bool {
+    d.pick_kinds.first().is_some_and(|k| k == "bottom") || d.picks.first().is_some_and(|p| p.trim().eq_ignore_ascii_case("bottom"))
+}
+
+fn is_manifest_dread(d: &Decision) -> bool {
+    d.kind == "choose_n" && (d.resume == "manifest_dread" || d.pick_kinds.iter().any(|k| k == "manifest_dread"))
+}
+
+/// A discard logged as a `mode` decision whose pick is `Discard <card>` (one decision per card),
+/// the other shape besides the object-choice `choose_n`.
+fn is_discard_mode(d: &Decision) -> bool {
+    d.kind == "mode" && d.resume == "discard" && d.pick_kinds.iter().any(|k| k == "discard")
+}
+
 /// A card-picking prompt (`SelectCards`): gorge's object choice (refs first, then same name); a
 /// pick that finds no card is dropped, so a search that finds nothing answers empty. `top` is
 /// for prompts whose picks may also be an arrangement. `lo..=hi` is the count phase takes
@@ -993,7 +1100,11 @@ fn pick_cards(
     cur: &mut Cursor,
 ) -> Result<Answer, Stop> {
     let lo = if up_to { lo } else { hi.min(cards.len()) };
-    let picked = take(cur, |d| is_object_choice(d) || (arrangement_too && is_arrange(d)));
+    let discarding = matches!(
+        wf,
+        WaitingFor::DiscardChoice { .. } | WaitingFor::DiscardToHandSize { .. } | WaitingFor::ConniveDiscard { .. }
+    );
+    let picked = take(cur, |d| is_object_choice(d) || (arrangement_too && is_arrange(d)) || (discarding && is_discard_mode(d)));
     let picked = match picked {
         Some(d) => Some(d),
         // An explicit empty choice, when the prompt allows taking nothing.
@@ -1003,7 +1114,18 @@ fn pick_cards(
         None => None,
     };
     let Some(d) = picked else { return forced(state, wf, cur) };
-    let ids = cards_of(cur, &d, cards);
+    let mut ids = cards_of(cur, &d, cards);
+    if is_discard_mode(&d) {
+        // One decision per card discarded: take the rest of this prompt's.
+        while ids.len() < hi {
+            let Some(next) = take(cur, is_discard_mode) else { break };
+            for id in cards_of(cur, &next, cards) {
+                if !ids.contains(&id) {
+                    ids.push(id);
+                }
+            }
+        }
+    }
     if ids.len() > hi || ids.len() < lo {
         return Err(miss(wf, cur, &format!("gorge picked {} card(s), phase takes {lo}..={hi}", ids.len())));
     }
@@ -1249,5 +1371,193 @@ mod tests {
         let (s, rb) = last(&bolt("Lightning Strike", "1R", "", &format!("{BEARS_TARGET},{BEARS_TARGET}")));
         assert_eq!(bf(&s, 1, "Grizzly Bears"), 0);
         assert!(rb.leftover.as_deref().is_some_and(|l| l.contains("target")), "{:?}", rb.leftover);
+    }
+
+    // ---- prompt kinds that used to end the row on a strict miss ---------------------------------
+
+    fn miss_of(out: Result<(), Stop>) -> String {
+        match out.err() {
+            Some(Stop::StrictMiss(m)) => m,
+            other => panic!("expected a strict miss, got {other:?}"),
+        }
+    }
+
+    fn perm<'a>(s: &'a Snapshot, seat: i64, name: &str) -> &'a follower_proto::row::PermSnap {
+        s.permanents.iter().find(|p| p.controller == seat && p.name == name).unwrap_or_else(|| panic!("no {name} for p{seat}"))
+    }
+
+    fn equip_request(decisions: &str) -> String {
+        format!(
+            r#"{{"id":"t","item":{{"id":"t","setup":{{"p0":{{"battlefield":["Plains","Leonin Scimitar","Grizzly Bears","Runeclaw Bear"]}}}},
+              "steps":[{{"op":"activate","seat":0,"card":"p0:Plains","ability_index":0}},
+                       {{"op":"activate","seat":0,"card":"p0:Leonin Scimitar","ability_index":0}},
+                       {{"op":"resolve","seat":0}}]}},
+              "neutral":{{"ability":{{"0":{{"class":"intrinsic_mana","produces":"W"}},"1":{{"class":"activated","keyword":"Equip:1"}}}}}},
+              "gorge_decisions":[{decisions}]}}"#
+        )
+    }
+
+    #[test]
+    fn answer_equip_target_by_ref() {
+        let target = |name: &str| {
+            format!(
+                r#"{{"step":1,"seat":0,"kind":"target","picks":["{name} (a)"],"pick_refs":["p0:{name}"],"object_picks":["p0:{name}"],"pick_kinds":["permanent"],"gorge_kind":"target"}}"#
+            )
+        };
+        let (s, rb) = last(&equip_request(&target("Runeclaw Bear")));
+        assert_eq!(perm(&s, 0, "Runeclaw Bear").attached_to, None, "equipment is the attached one");
+        assert_eq!(perm(&s, 0, "Leonin Scimitar").attached_to.as_deref(), Some("Runeclaw Bear"), "{:?}", rb.notes);
+        assert_eq!(rb.leftover, None);
+        // The other creature takes it when gorge picked that one.
+        let (s, _) = last(&equip_request(&target("Grizzly Bears")));
+        assert_eq!(perm(&s, 0, "Leonin Scimitar").attached_to.as_deref(), Some("Grizzly Bears"));
+        // No decision with two legal creatures: a strict miss that names the prompt.
+        let (out, _) = go(&equip_request(""));
+        assert_eq!(miss_of(out), "Missing EquipTarget answer at step 1");
+        // A target phase does not offer (a land) is a miss, never a substitute.
+        let (out, _) = go(&equip_request(&target("Plains")));
+        assert_eq!(miss_of(out), "Missing EquipTarget answer at step 1");
+    }
+
+    fn crew_request(decisions: &str) -> String {
+        format!(
+            r#"{{"id":"t","item":{{"id":"t","setup":{{"p0":{{"battlefield":["Smuggler's Copter","Grizzly Bears","Runeclaw Bear"]}}}},
+              "steps":[{{"op":"activate","seat":0,"card":"p0:Smuggler's Copter","ability_index":0}},
+                       {{"op":"resolve","seat":0}}]}},
+              "neutral":{{"ability":{{"0":{{"class":"activated","keyword":"Crew:1"}}}}}},
+              "gorge_decisions":[{decisions}]}}"#
+        )
+    }
+
+    #[test]
+    fn answer_crew_vehicle_by_tapcost_picks() {
+        let tap = |name: &str| {
+            format!(
+                r#"{{"step":0,"seat":0,"kind":"choose_n","picks":["{name}"],"pick_refs":["p0:{name}"],"object_picks":["p0:{name}"],"pick_kinds":["tapcost"],"gorge_kind":"choose"}}"#
+            )
+        };
+        let (s, rb) = last(&crew_request(&tap("Runeclaw Bear")));
+        assert!(perm(&s, 0, "Runeclaw Bear").tapped, "the crew was tapped; notes {:?}", rb.notes);
+        assert!(!perm(&s, 0, "Grizzly Bears").tapped);
+        assert_eq!(rb.leftover, None);
+        let (s, _) = last(&crew_request(&tap("Grizzly Bears")));
+        assert!(perm(&s, 0, "Grizzly Bears").tapped && !perm(&s, 0, "Runeclaw Bear").tapped);
+        // No decision, two legal crew: a miss naming the prompt.
+        let (out, _) = go(&crew_request(""));
+        assert_eq!(miss_of(out), "Missing CrewVehicle answer at step 0");
+        // A pick that names no eligible creature (a land) is a miss, never a substitute.
+        let (out, _) = go(&crew_request(r#"{"step":0,"seat":0,"kind":"choose_n","picks":["Island"],"pick_refs":["p0:Island"],"pick_kinds":["tapcost"]}"#));
+        assert_eq!(miss_of(out), "Missing CrewVehicle answer at step 0: gorge tapped 1 creature(s), 0 of them among phase's eligible");
+    }
+
+    /// Mind Rot at p1 with a hand of three: gorge logs each discard as a `mode` decision whose
+    /// pick is `Discard <card>` (resume `discard`), one decision per card.
+    fn mind_rot(discards: &str) -> String {
+        format!(
+            r#"{{"id":"t","item":{{"id":"t","setup":{{"p0":{{"hand":["Mind Rot"]}},"p1":{{"hand":["Forest","Island","Mountain"]}}}},
+              "steps":[{{"op":"cast","seat":0,"card":"p0:Mind Rot","mana":"2B"}},{{"op":"resolve","seat":0}}]}},
+              "gorge_decisions":[{PLAYER_TARGET}{discards}]}}"#
+        )
+    }
+
+    fn discard_mode(card: &str) -> String {
+        format!(
+            r#",{{"step":1,"seat":1,"kind":"mode","picks":["Discard {card}"],"pick_refs":["p1:{card}"],"object_picks":["p1:{card}"],"pick_kinds":["discard"],"resume":"discard","gorge_kind":"modes"}}"#
+        )
+    }
+
+    #[test]
+    fn answer_discard_from_mode_shaped_decisions() {
+        let (s, rb) = last(&mind_rot(&format!("{}{}", discard_mode("Island"), discard_mode("Forest"))));
+        let mut gy = s.players[1].graveyard.clone();
+        gy.sort();
+        assert_eq!(gy, vec!["Forest".to_string(), "Island".to_string()], "notes {:?}", rb.notes);
+        assert_eq!(s.players[1].hand, vec!["Mountain".to_string()]);
+        assert_eq!(rb.leftover, None);
+        // One decision for a two-card discard: phase wants two, so the miss says how many gorge took.
+        let (out, _) = go(&mind_rot(&discard_mode("Island")));
+        assert_eq!(miss_of(out), "Missing DiscardChoice answer at step 1: gorge picked 1 card(s), phase takes 2..=2");
+    }
+
+    fn voyage(decision: &str) -> String {
+        format!(
+            r#"{{"id":"t","item":{{"id":"t","setup":{{"p0":{{"hand":["Uncharted Voyage"],"library_top":["Swamp"]}},"p1":{{"battlefield":["Grizzly Bears"],"library_top":["Forest","Island"]}}}},
+              "steps":[{{"op":"cast","seat":0,"card":"p0:Uncharted Voyage","mana":"3U"}},{{"op":"resolve","seat":0}}]}},
+              "gorge_decisions":[{BEARS_TARGET}{decision},{KEEP_SWAMP}]}}"#
+        )
+    }
+
+    /// The spell's own "Surveil 1" (p0's library): the Swamp stays on top.
+    const KEEP_SWAMP: &str = r#"{"step":1,"seat":0,"kind":"order","gorge_kind":"arrange","picks":["Swamp"],"pick_refs":["p0:Swamp"],"pick_kinds":["bottom"],"resume":"arrange"}"#;
+
+    #[test]
+    fn answer_top_or_bottom_from_library_position_ask() {
+        // gorge's ask: a `primary` option labelled `top`, then `bottom`.
+        let top = r#",{"step":1,"seat":0,"kind":"choose_n","picks":["top"],"pick_refs":["top"],"pick_kinds":["primary"],"resume":"changezone_alternative","gorge_kind":"choose"}"#;
+        let bottom = r#",{"step":1,"seat":0,"kind":"choose_n","picks":["bottom"],"pick_refs":["bottom"],"pick_kinds":["bottom"],"resume":"changezone_alternative","gorge_kind":"choose"}"#;
+        let (s, rb) = last(&voyage(top));
+        assert_eq!(s.players[1].library_top.first().map(String::as_str), Some("Grizzly Bears"), "notes {:?}", rb.notes);
+        assert_eq!(rb.leftover, None);
+        let (s, _) = last(&voyage(bottom));
+        assert_eq!(s.players[1].library_top.first().map(String::as_str), Some("Forest"));
+        assert!(!s.players[1].library_top.contains(&"Grizzly Bears".to_string()), "the bottom is past the top five: {:?}", s.players[1].library_top);
+        assert_eq!(bf(&s, 1, "Grizzly Bears"), 0);
+        // No decision: both answers are open, so a miss.
+        let (out, _) = go(&voyage(""));
+        assert_eq!(miss_of(out), "Missing TopOrBottomChoice answer at step 1");
+    }
+
+    fn dread(decision: &str) -> String {
+        format!(
+            r#"{{"id":"t","item":{{"id":"t","setup":{{"p0":{{"hand":["Manifest Dread"],"library_top":["Forest","Island","Mountain"]}}}},
+              "steps":[{{"op":"cast","seat":0,"card":"p0:Manifest Dread","mana":"1G"}},{{"op":"resolve","seat":0}}]}},
+              "gorge_decisions":[{decision}]}}"#
+        )
+    }
+
+    #[test]
+    fn answer_manifest_dread_pick() {
+        let pick = |c: &str| {
+            format!(
+                r#"{{"step":1,"seat":0,"kind":"choose_n","picks":["{c}"],"pick_refs":["p0:{c}"],"object_picks":["p0:{c}"],"pick_kinds":["manifest_dread"],"resume":"manifest_dread","gorge_kind":"choose"}}"#
+            )
+        };
+        // The picked card is manifested (face down); the other of the top two goes to the graveyard.
+        let (s, rb) = last(&dread(&pick("Island")));
+        assert!(s.players[0].graveyard.contains(&"Forest".to_string()), "{:?} {:?}", s.players[0].graveyard, rb.notes);
+        assert!(!s.players[0].graveyard.contains(&"Island".to_string()));
+        assert_eq!(s.permanents.iter().filter(|p| p.controller == 0 && p.face_down).count(), 1);
+        assert_eq!(rb.leftover, None);
+        let (s, _) = last(&dread(&pick("Forest")));
+        assert!(s.players[0].graveyard.contains(&"Island".to_string()));
+        // No decision: a miss naming the prompt.
+        let (out, _) = go(&dread(""));
+        assert_eq!(miss_of(out), "Missing ManifestDreadChoice answer at step 1");
+    }
+
+    fn passage(decision: &str) -> String {
+        format!(
+            r#"{{"id":"t","item":{{"id":"t","setup":{{"p0":{{"hand":["Multiversal Passage"]}}}},
+              "steps":[{{"op":"play","seat":0,"card":"p0:Multiversal Passage"}}]}},
+              "gorge_decisions":[{{"step":0,"seat":0,"kind":"choose_n","picks":["Forest"],"pick_refs":["Forest"],"pick_kinds":["type"],"resume":"choosetype","gorge_kind":"choose"}}{decision}]}}"#
+        )
+    }
+
+    #[test]
+    fn answer_replacement_choice_optional_payment() {
+        // "Enters tapped unless you pay 2 life": phase poses it as an optional replacement
+        // (index 0 accepts, 1 declines); gorge's `unless_pay` mode decision names the pick.
+        let pay = r#",{"step":0,"seat":0,"kind":"mode","picks":["Pay 2 life"],"pick_refs":["p0:Multiversal Passage"],"object_picks":["p0:Multiversal Passage"],"pick_kinds":["mode"],"resume":"unless_pay","gorge_kind":"modes"}"#;
+        let decline = pay.replace("Pay 2 life", "Don't pay");
+        let (s, rb) = last(&passage(pay));
+        assert_eq!(s.players[0].life, 18, "paid; notes {:?}", rb.notes);
+        assert!(!perm(&s, 0, "Multiversal Passage").tapped);
+        assert_eq!(rb.leftover, None);
+        let (s, _) = last(&passage(&decline));
+        assert_eq!(s.players[0].life, 20);
+        assert!(perm(&s, 0, "Multiversal Passage").tapped);
+        // No decision: both answers are open, so a miss naming the prompt.
+        let (out, _) = go(&passage(""));
+        assert_eq!(miss_of(out), "Missing ReplacementChoice answer at step 0");
     }
 }
