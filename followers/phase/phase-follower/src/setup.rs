@@ -2,10 +2,12 @@
 //! up to p0's first main-1 priority and take the `setup` snapshot.
 //!
 //! Cards are placed with phase's production debug actions, never `GameScenario`/`add_real_card`
-//! (those run the real entry pipeline, so an enters-tapped land would enter tapped and
-//! enters-with-counters would add counters). Raw placement means: no ETB triggers, no entry
-//! replacements, no summoning sickness; a planeswalker or battle still arrives with its printed
-//! loyalty/defense. Life is written directly (`DebugAction::SetLife` is a real life-change event
+//! (those run the real entry pipeline, so an enters-tapped land would enter tapped and fire its
+//! ETB triggers). Raw placement means: no ETB triggers, no tapped/life entry replacements, no
+//! summoning sickness; a planeswalker or battle still arrives with its printed loyalty/defense.
+//! The card's own enters-with counters and as-enters choices are then carried over from a trial
+//! entry on a cloned state (`Builder::entry_effects`), as gorge's setup keeps those replacements.
+//! Life is written directly (`DebugAction::SetLife` is a real life-change event
 //! and would leave "life gained/lost this turn" behind).
 //!
 //! Turn 1 is started with phase's own `start_game_skip_mulligan` (turn 1, p0 active, untap step,
@@ -197,9 +199,80 @@ impl Builder<'_> {
         Ok(())
     }
 
+    /// Give the raw-placed `id` (a card named `name`) what its own entry gives it: the enters-with
+    /// counters (CR 122.6) and the as-enters choices (CR 614.12, a chosen colour). gorge's setup
+    /// keeps the ordinary move, so the card's entry replacements run; phase's raw placement skips
+    /// them. The real entry is replayed on a throwaway clone of the state (its triggers, tapped
+    /// state, life gain and stack die with the clone) and only the counters and chosen attributes
+    /// are carried over, so setup still fires no trigger the scenario did not ask for.
+    fn entry_effects(&mut self, seat: u8, name: &str, id: ObjectId) -> Result<(), Stop> {
+        let faces = phase_faces(self.db, name).map_err(|_| Stop::Harness(format!("phase lacks card: {name}")))?;
+        let mut trial = self.board.state.clone();
+        let first = trial.next_object_id;
+        create_debug_cards(
+            &mut trial,
+            DebugCardCreateRequest {
+                actor: PlayerId(0),
+                source: debug_card_entry_source(self.db, faces[0]),
+                owner: PlayerId(seat),
+                zone: Zone::Battlefield,
+                count: 1,
+                attach_to: None,
+                run_etb: true,
+                nonlegendary: false,
+                creation_kind: DebugCardCreationKind::Card,
+            },
+        )
+        .map_err(|e| harness(format!("cannot trial the entry of {name}: {e:?}")))?;
+        // An as-enters choice parks the entry: answer it with its first option (gorge's setup
+        // drive answers a parked placement the same default way).
+        for _ in 0..8 {
+            match trial.waiting_for.clone() {
+                WaitingFor::Priority { .. } => break,
+                WaitingFor::NamedChoice { player, options, .. } if !options.is_empty() => {
+                    apply(&mut trial, player, GameAction::ChooseOption { choice: options[0].clone() })
+                        .map_err(|e| harness(format!("{name}: entry choice failed: {e:?}")))?;
+                }
+                // An entry prompt this does not answer (Furycalm Snarl's reveal, a Devour sacrifice):
+                // keep the raw placement rather than guess (TRIAGE.md).
+                _ => return Ok(()),
+            }
+        }
+        if !matches!(trial.waiting_for, WaitingFor::Priority { .. }) {
+            return Ok(());
+        }
+        let Some(entered) = trial.objects.get(&ObjectId(first)) else {
+            return Err(harness(format!("{name}: trial entry created no object")));
+        };
+        if entered.zone != Zone::Battlefield {
+            return Ok(());
+        }
+        let chosen = entered.chosen_attributes.clone();
+        // Counters the trial holds beyond the raw placement's own (printed loyalty/defense stay
+        // as placed, never doubled).
+        let have = self.board.state.objects[&id].counters.clone();
+        let mut delta = Vec::new();
+        for (kind, n) in &entered.counters {
+            let extra = i64::from(*n) - i64::from(have.get(kind).copied().unwrap_or(0));
+            if extra > 0 {
+                delta.push((kind.clone(), i32::try_from(extra).map_err(|_| harness("entry counter count out of range"))?));
+            }
+        }
+        // Counter kinds sorted so the emitted order never depends on map iteration.
+        delta.sort_by_key(|(k, _)| format!("{k:?}"));
+        for (counter_type, delta) in delta {
+            self.debug(DebugAction::ModifyCounters { object_id: id, counter_type, delta })?;
+        }
+        if let Some(o) = self.board.state.objects.get_mut(&id) {
+            o.chosen_attributes = chosen;
+        }
+        Ok(())
+    }
+
     fn battlefield(&mut self, seat: u8, s: &Seat) -> Result<(), Stop> {
         for name in &s.battlefield {
             let id = self.place(seat, name, Zone::Battlefield)?;
+            self.entry_effects(seat, name, id)?;
             if let Some(counters) = s.counters.get(name) {
                 self.add_counters(id, counters)?;
             }
@@ -526,6 +599,26 @@ mod tests {
     }
 
     #[test]
+    fn setup_entry_counters_without_listed_counters() {
+        // Dockworker Drone enters with a +1/+1 counter; the scenario lists none, the card's own stay.
+        let (_, s, _) = setup(r#"{"id":"t","setup":{"p0":{"battlefield":["Dockworker Drone"]}}}"#);
+        let drone = perms(&s, 0, "Dockworker Drone");
+        assert_eq!(drone.len(), 1);
+        assert_eq!(drone[0].counters.get("P1P1"), Some(&1), "{:?}", drone[0].counters);
+        assert!(s.stack.is_empty(), "{:?}", s.stack);
+    }
+
+    #[test]
+    fn setup_entry_choice_is_kept() {
+        // Caged Sun: "As this artifact enters, choose a color." Raw placement lost the choice.
+        let (b, s, _) = setup(r#"{"id":"t","setup":{"p0":{"battlefield":["Caged Sun"]}}}"#);
+        assert!(s.stack.is_empty(), "{:?}", s.stack);
+        let id = b.state.battlefield.iter().copied().find(|id| b.names.by_object.get(id).is_some_and(|n| n == "Caged Sun"));
+        let sun = &b.state.objects[&id.expect("Caged Sun placed")];
+        assert!(!sun.chosen_attributes.is_empty());
+    }
+
+    #[test]
     fn setup_counters_added_to_entry() {
         // Kalonian Hydra enters with four +1/+1 counters; raw placement adds none, the listed ones
         // are added on top, on every placement of the name.
@@ -534,7 +627,7 @@ mod tests {
                 "p1":{"battlefield":["Grizzly Bears","Grizzly Bears"],"counters":{"Grizzly Bears":{"P1P1":1,"LOYALTY":3}}}}}"#,
         );
         let hydra = perms(&s, 0, "Kalonian Hydra");
-        assert_eq!(hydra[0].counters.get("P1P1"), Some(&2));
+        assert_eq!(hydra[0].counters.get("P1P1"), Some(&6));
         let bears = perms(&s, 1, "Grizzly Bears");
         assert_eq!(bears.len(), 2);
         for b in bears {

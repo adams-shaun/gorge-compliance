@@ -55,3 +55,10 @@ gorge does not log the decision.
   that level). A card with two cycling abilities of the same kind is a harness row (`several
   cycling abilities`), not a guess. The `SaddleMount` prompt that follows has no answer arm yet (a
   strict miss that names it); every other keyword stays `keyword ability X unsupported`.
+- Setup entry effects: a battlefield placement gets the card's own enters-with counters and
+  as-enters choices (`Builder::entry_effects`: the real entry replayed on a cloned state, counters
+  and `chosen_attributes` carried over; a choice prompt is answered with its first option). Still
+  not applied: a card whose entry parks on any other prompt (Furycalm Snarl's reveal, Devour) keeps
+  the raw placement, and a "when this enters ... choose a color" TRIGGER is not run (Puca's Eye's
+  chosen colour: phase models it as an ETB trigger, not an entry replacement, and replaying it
+  would draw a card), so those rows stay GFX|P until phase gets an entry-only hook.
