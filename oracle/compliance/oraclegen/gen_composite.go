@@ -118,6 +118,14 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			}
 		}
 	}
+	tapFirst := map[int]bool{}
+	for _, d := range ds {
+		if d.Resume == "taporuntap" {
+			if _, done := tapFirst[d.Step]; !done {
+				tapFirst[d.Step] = tapThenUntapStep(sc, res.Snapshots, d.Step)
+			}
+		}
+	}
 	// XMage asks the "card ORDER to put … from the TOP" dialog only for a
 	// hand_move whose effect is implemented with anyOrder=true. Verify that
 	// per resolving source instead of scripting the answers for every top
@@ -128,7 +136,7 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			orderAsks[i] = true
 		}
 	}
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, snaps: res.Snapshots, orderAsks: orderAsks})
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, tapThenUntap: tapFirst, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that
