@@ -152,10 +152,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19cede61-1982-47d1-9e0e-49ac6de00798	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19cede61-1982-47d1-9e0e-49ac6de00798	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19cede61-1982-47d1-9e0e-49ac6de00798	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19cf5798-4600-4a66-b1c7-de77bde157d0	cast	cast-resolve	agreed	-	X	scen	1	0	Tablet of Discovery/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+19cf5798-4600-4a66-b1c7-de77bde157d0	cast	cast	agreed	-	X	start	1	0	x:xs:XP:tablet-of-discovery:f0t0:s2	-	-	-	5437c1394672	-	5c4f71686ce9	-	-	2026-11-24	xproof
 19cf5798-4600-4a66-b1c7-de77bde157d0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tablet of Discovery/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19cf5798-4600-4a66-b1c7-de77bde157d0	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Tablet of Discovery/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-19cf5798-4600-4a66-b1c7-de77bde157d0	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19cf5798-4600-4a66-b1c7-de77bde157d0	f0/t0	ChangesZone	agreed	-	X	start	1	0	x:xs:XP:tablet-of-discovery:f0t0:s2	-	-	-	5437c1394672	-	5c4f71686ce9	-	-	2026-11-24	xproof
 19d11ca8-a95b-4e6e-a71f-8f9d06c580fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19d11ca8-a95b-4e6e-a71f-8f9d06c580fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19d5eb29-2d35-44e7-afa1-3ba8d812ed41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -187,8 +187,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19edde54-153f-46b8-8a8d-a20fdef0667f	cast	cast-resolve	agreed	-	FX	scen	2	0	Captain James T. Kirk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19edde54-153f-46b8-8a8d-a20fdef0667f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19edde54-153f-46b8-8a8d-a20fdef0667f	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19ef0329-08de-4835-8079-2e791e19f3a6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19ef0329-08de-4835-8079-2e791e19f3a6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19ef0329-08de-4835-8079-2e791e19f3a6	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+19ef0329-08de-4835-8079-2e791e19f3a6	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 19f233b2-8be6-4172-abf9-b132fc3393d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
