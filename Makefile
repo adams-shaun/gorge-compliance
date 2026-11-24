@@ -210,6 +210,22 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (2 tests: both answers) pins it; the full driver suite (148 tests, including ForcedDieRollTest) is green. Driver-only
 # change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-unleash-replacement.
+# 14070cbbac4 = c873c2c9399 plus the zero-candidate Optional$ hidden ChangeZone decline (xproof decision_shape: Bruna, Light of
+# Alabaster, 4 items). ZoneAuras ("any number of Aura cards that could enchant it from your hand and/or graveyard", ChangeNum$
+# CountAuras) asks "Search your hand and graveyard?" with no Aura card there; gorge, a choice of zero cards, logs no ask, so the
+# confirm was an unanswered strict miss. ScriptedController.confirmAction answers no when no yes/no is queued for the seat and
+# nothing can move. ZeroCandidateConfirmTest (2 tests) pinned it; efdbea5198 below fixes its candidate filter and cancel handling.
+# The full driver suite (150 tests, including ForcedDieRollTest) was green on it. Driver-only change; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-zero-candidate-confirm.
+# efdbea5198 = 14070cbbac4 plus the two findings on that decline: the candidate scan now uses ChangeZoneEffect's own filter
+# (AbilityUtils.filterListByType, with an EACH ... & ... type split per part) instead of Card.isValid on the raw ChangeType$,
+# so EACH (Michelangelo, Improviser; Yuna's Decision) and Triggered.sameName (Verdant Succession) keep their strict miss when
+# a candidate is present; and Forge's "Cancel Search" ChangeZoneGeneral prompt (the effect's post-pick cancel loop, not the
+# Optional$ gate) is excluded, so with no search carry in flight -- including after a recorded empty pick -- it stays a
+# strict miss instead of answering no and making the effect loop. The origin check now precedes the ChangeNum$ shortcut, so
+# Battlefield/Stack origins are never declined. ZeroCandidateConfirmTest (4 tests) pins it; the full driver suite (152 tests,
+# including ForcedDieRollTest) is green. Driver-only change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# Fork branch fix/xp-forge-driver-zero-candidate-confirm.
 # 08b8a9ba5d9 = 1bb3cb16bb9 plus Delve's exile picks (CR 702.66a; xproof harness: Dig Through Time, Empty the Pits,
 # Dead Drop). gorge poses the picks as one choose whose every pick kind is "exile"; Forge's CostAdjustment asks
 # chooseCardsToDelve, which returned an empty collection, so the generic mana stayed unpaid and the cast was refused.
@@ -247,7 +263,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # of copies and the venture dungeon pick), so the pinned driver keeps both answers. The merge adds no file of its own and
 # leaves cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-primal-surge-empty-dig.
-FORGE_ORACLE_REF ?= 051f555862737c69c8e0e05cd7a8130a3da0124f
+# 1eef2a952a = the clean merge of efdbea5198 (the zero-candidate Optional$ hidden ChangeZone decline) and 051f555862
+# (the Primal Surge empty-dig engine fix plus the trigger-order tie of copies and the venture dungeon pick), so the pinned
+# driver keeps all of them. The merge adds no file of its own and leaves cardsfolder/tokenscripts unchanged (same as
+# FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-zero-candidate-confirm.
+FORGE_ORACLE_REF ?= 1eef2a952a4ed7f2bcb786fcf655b2fe7d8ee18b
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
