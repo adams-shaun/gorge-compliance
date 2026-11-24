@@ -43,9 +43,12 @@ const (
 	// The decision is setup state alone: the tape may show no in-window fall
 	// (the setup LifeChange is the trigger) and cannot show the speed.
 	reasonSpeedLatch = "setup_speed_latch"
-	// reasonCountersEntry is a battlefield card whose entry counter grant is
-	// dynamic (K:etbCounter with an X/Count$ amount): the placement re-runs the
-	// grant, so setup cannot know how many counters to add on top of it.
+	// reasonCountersEntry is a battlefield permanent whose counter state setup
+	// cannot restate: an entry counter grant that is dynamic (K:etbCounter with
+	// an X/Count$ amount), so the placement re-runs the grant and setup cannot
+	// know how many counters to add on top of it; or a gorge internal counter
+	// marker (the regeneration "Shield", CR 701.19a, is a replacement effect,
+	// not a counter) that the live digest omits and a scenario cannot place.
 	reasonCountersEntry = "counters_entry_unrestatable"
 	// reasonEntryTap is a non-active seat's UNTAPPED battlefield card whose
 	// placement runs an "enters tapped" replacement. The runner's placement
@@ -1104,16 +1107,44 @@ func sortedMapKeys(m map[string]int32) []string {
 	return out
 }
 
+// hasInternalCounterMarker reports whether o carries a nonzero gorge internal
+// counter marker (the regeneration "Shield", "Deathtouched", the
+// cumulative-upkeep paid marker). These ride Object.Counters because the engine
+// has no per-object status field, but they are not counters: the live digest
+// drops them (game.counterMap), a live regeneration shield is a replacement
+// effect (CR 701.19a) rather than state setup can place, and a placement that
+// copied the marker would mint a real CR 122.1c shield counter the live game
+// never had. Every lowering path that turns Object.Counters into scenario
+// counters goes through this helper, so a marker the state helper learns next
+// is covered here too. A zero amount is not state (a spent marker leaves its
+// entry behind) and is ignored.
+func hasInternalCounterMarker(o *state.Object) bool {
+	for _, ct := range o.Counters {
+		if ct.N != 0 && state.InternalCounterMarker(ct.Kind) {
+			return true
+		}
+	}
+	return false
+}
+
 // setupCounters is the counters setup must ADD to o's placement: what o carries
 // less what a fresh copy of the card enters with (a planeswalker's printed
 // loyalty), which the runner's counters field is added to. A kind the card
 // carries fewer of than it enters with comes out negative, which setup cannot
 // say. The second return is false when the entry grant is dynamic and so cannot
 // be restated: the placement re-runs the grant (CR 614.1c), but how many
-// counters it makes is known only at that entry.
+// counters it makes is known only at that entry. It is also false when o
+// carries a nonzero internal counter marker: the marker is not a counter and a
+// live regeneration shield is state setup cannot restate.
 func setupCounters(o *state.Object) (map[string]int32, bool) {
 	net := map[string]int32{}
+	if hasInternalCounterMarker(o) {
+		return net, false
+	}
 	for _, ct := range o.Counters {
+		if state.InternalCounterMarker(ct.Kind) {
+			continue // zero amount: nothing to add
+		}
 		net[ct.Kind] += ct.N
 	}
 	for _, gr := range events.EntryCounterGrants(&state.Object{Card: o.Card, FaceIdx: o.FaceIdx}, false) {
