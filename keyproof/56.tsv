@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56035e66-e730-436d-8de2-4ded7fd1b51e	cast	cast-resolve	agreed	-	FX	scen	2	0	Lashwhip Predator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 56035e66-e730-436d-8de2-4ded7fd1b51e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lashwhip Predator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 56035e66-e730-436d-8de2-4ded7fd1b51e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lashwhip Predator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-56035e66-e730-436d-8de2-4ded7fd1b51e	static#0.0	static#0.0	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+56035e66-e730-436d-8de2-4ded7fd1b51e	static#0.0	static#0.0	owed	refused:no-generator:static	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 5604c475-6e01-4e9d-b4e6-8e8d72874581	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:briarpack-alpha:cast:s1,f:xs:XP:briarpack-alpha:cast:s1	-	-	-	d864b561c9cb	-	09bd8e40f959	-	-	2026-11-24	xproof
 5604c475-6e01-4e9d-b4e6-8e8d72874581	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:briarpack-alpha:cast:s1,f:xs:XP:briarpack-alpha:cast:s1	-	-	-	d864b561c9cb	-	09bd8e40f959	-	-	2026-11-24	xproof
 5604f04e-fd72-41bf-906f-eb89d4a3475d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56edd306-8676-49c4-b3c3-5ff840536c3a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 56f1a16a-9f41-41fb-b580-c200bca27cd6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56f1a16a-9f41-41fb-b580-c200bca27cd6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-56f3f1b4-c36a-41f3-95a1-45e9d7e74cf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sedraxis-alchemist:f0t0:s1,f:xs:XP:sedraxis-alchemist:f0t0:s1	-	-	-	8c0bd19283bb	-	25f9505706c5	-	-	2026-11-24	xproof
+56f3f1b4-c36a-41f3-95a1-45e9d7e74cf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sedraxis-alchemist:f0t0:s1,f:xs:XP:sedraxis-alchemist:f0t0:s1	-	-	-	23b491658465	-	25f9505706c5	-	-	2026-11-24	xproof
 56f3f1b4-c36a-41f3-95a1-45e9d7e74cf9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56f5ed8d-ef53-4766-9ef3-1e24a10e267b	cast	cast-resolve	agreed	-	X	scen	1	0	Buried Treasure/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 56f5ed8d-ef53-4766-9ef3-1e24a10e267b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Buried Treasure/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

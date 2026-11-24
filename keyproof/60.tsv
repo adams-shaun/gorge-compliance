@@ -1,9 +1,9 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-60043b87-6008-4cfa-9d8f-6ee6e3f70766	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	26bb340d37cf	-	-	2026-11-24	xproof
+60043b87-6008-4cfa-9d8f-6ee6e3f70766	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:delivery-moogle:cast:s1,f:xs:XP:delivery-moogle:cast:s1	-	-	-	23b491658465	-	26bb340d37cf	-	-	2026-11-24	xproof
 60043b87-6008-4cfa-9d8f-6ee6e3f70766	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Delivery Moogle/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 60043b87-6008-4cfa-9d8f-6ee6e3f70766	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Delivery Moogle/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-60043b87-6008-4cfa-9d8f-6ee6e3f70766	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	26bb340d37cf	-	-	2026-11-24	xproof
+60043b87-6008-4cfa-9d8f-6ee6e3f70766	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:delivery-moogle:cast:s1,f:xs:XP:delivery-moogle:cast:s1	-	-	-	23b491658465	-	26bb340d37cf	-	-	2026-11-24	xproof
 600a8c9e-e158-4fff-8c4d-c3a1bfd006e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 600b9ab8-36dc-4f02-b48c-091348d132ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 600b9ab8-36dc-4f02-b48c-091348d132ac	f0/t0	NULL	owed	refused:no-generator:trigger:LifeLost	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -152,8 +152,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60b36821-0fad-423c-98c4-f64d991719f3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60b36821-0fad-423c-98c4-f64d991719f3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:graypelt-refuge:f0t0:s1,f:xs:XP:graypelt-refuge:f0t0:s1	-	-	-	8a1b1a193ec0	-	513be254222f	-	-	2026-11-24	xproof
 60b36821-0fad-423c-98c4-f64d991719f3	land	land	agreed	-	FX	start	2	0	x:xs:XP:graypelt-refuge:f0t0:s1,f:xs:XP:graypelt-refuge:f0t0:s1	-	-	-	8a1b1a193ec0	-	513be254222f	-	-	2026-11-24	xproof
-60b45aa2-42cb-4eda-bdd6-20128fb0c530	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-60b45aa2-42cb-4eda-bdd6-20128fb0c530	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+60b45aa2-42cb-4eda-bdd6-20128fb0c530	f0/a0	Mana	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	78a22ebf0a7b	-	-	2026-11-24	xproof
+60b45aa2-42cb-4eda-bdd6-20128fb0c530	land	land	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	78a22ebf0a7b	-	-	2026-11-24	xproof
 60b6bd93-3eb3-4b81-bc4d-1e3351ee2e64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:soul-salvage:cast:s1,f:xs:XP:soul-salvage:cast:s1	-	-	-	d864b561c9cb	-	fa6227c9d53b	-	-	2026-11-24	xproof
 60ba93eb-39e6-4af2-9c66-cd38f72daff2	cast	cast-resolve	agreed	-	X	scen	1	0	Savannah Lions/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 60bac6e8-0c72-4665-9b01-d07c99dd1716	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oakheart-dryads:f0t0:s1,f:xs:XP:oakheart-dryads:f0t0:s1	-	-	-	d864b561c9cb	-	cd507da075c0	-	-	2026-11-24	xproof

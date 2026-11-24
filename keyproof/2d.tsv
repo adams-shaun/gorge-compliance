@@ -82,8 +82,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2d91cf05-fc39-4d76-8c95-62738b57e0a0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2d92a035-dd7a-4426-a8c0-f04e0b836dad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d92a035-dd7a-4426-a8c0-f04e0b836dad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2d961997-4f5f-4ce2-b062-11411147e2f7	cast	cast-resolve	agreed	-	FX	scen	2	0	Sun-Spider, Nimble Webber/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2d961997-4f5f-4ce2-b062-11411147e2f7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+2d961997-4f5f-4ce2-b062-11411147e2f7	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sun-spider-nimble-webber:f0t0:s2,f:xs:XP:sun-spider-nimble-webber:f0t0:s2	-	-	-	23b491658465	-	71dac25b3c90	-	-	2026-11-24	xproof
+2d961997-4f5f-4ce2-b062-11411147e2f7	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sun-spider-nimble-webber:f0t0:s2,f:xs:XP:sun-spider-nimble-webber:f0t0:s2	-	-	-	23b491658465	-	71dac25b3c90	-	-	2026-11-24	xproof
 2d961997-4f5f-4ce2-b062-11411147e2f7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Sun-Spider, Nimble Webber/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2d9663be-c466-4191-85e2-a69ce0965432	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d9663be-c466-4191-85e2-a69ce0965432	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,7 +128,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2dd3a6f7-65a9-4157-9ad9-13a885ebe927	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2dd3a6f7-65a9-4157-9ad9-13a885ebe927	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2dd50d7f-941f-4deb-a15c-ee2357844c35	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2dd61a72-6478-471d-bb74-33adda530176	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2dd61a72-6478-471d-bb74-33adda530176	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	4043cc0751e4	-	-	2026-11-24	xproof
 2dd61a72-6478-471d-bb74-33adda530176	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2dda5011-aaa1-48d0-afa8-76998278ab75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2dda5011-aaa1-48d0-afa8-76998278ab75	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:elf-replica:f0a0:s1,f:xs:XP:elf-replica:f0a0:s1	-	-	-	d864b561c9cb	-	58afd481f697	-	-	2026-11-24	xproof

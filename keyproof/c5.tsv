@@ -12,8 +12,8 @@ c51078d9-a53a-49ae-9658-2bc00cce2b81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c5126d6e-969c-4034-98e3-f8653163346f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5173332-68ad-456e-ad85-dd7475464d94	cast	cast-resolve	agreed	-	FX	scen	2	0	South Pole Voyager/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c5173332-68ad-456e-ad85-dd7475464d94	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c51a0ccb-220d-46f6-9813-62f2d36356a5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c51a0ccb-220d-46f6-9813-62f2d36356a5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c51a0ccb-220d-46f6-9813-62f2d36356a5	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	7ab39ee5fa25	-	-	2026-11-24	xproof
+c51a0ccb-220d-46f6-9813-62f2d36356a5	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	7ab39ee5fa25	-	-	2026-11-24	xproof
 c51b0667-a24e-44c0-bc95-bf61b393f3cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c51b0667-a24e-44c0-bc95-bf61b393f3cf	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c51c429d-d8d7-40d6-9760-72c26acaed42	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -52,7 +52,7 @@ c53ba31a-ba27-4e17-9a92-311acb1cab29	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 c53ba31a-ba27-4e17-9a92-311acb1cab29	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:myr-battlesphere:f0t1:s1,f:xs:XP:myr-battlesphere:f0t1:s1	-	-	-	d864b561c9cb	-	6235d73a8ba2	-	-	2026-11-24	xproof
 c53c75a0-c248-4e76-8d28-f7e53b2dcc49	cast	cast-resolve	agreed	-	X	scen	1	0	Deadly Complication/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c53d6d3e-64e3-48b9-afab-3bde3164888f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c53d958a-f660-4d2e-87cd-87702f973b3a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghostly-dancers:f0t0:s1,f:xs:XP:ghostly-dancers:f0t0:s1	-	-	-	9ee19e8250ce	-	d66fc14f9e4b	-	-	2026-11-24	xproof
+c53d958a-f660-4d2e-87cd-87702f973b3a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghostly-dancers:f0t0:s1,f:xs:XP:ghostly-dancers:f0t0:s1	-	-	-	23b491658465	-	d66fc14f9e4b	-	-	2026-11-24	xproof
 c53d958a-f660-4d2e-87cd-87702f973b3a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ghostly Dancers/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c53d958a-f660-4d2e-87cd-87702f973b3a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ghostly Dancers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c53d958a-f660-4d2e-87cd-87702f973b3a	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof

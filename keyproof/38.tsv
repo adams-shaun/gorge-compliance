@@ -98,10 +98,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3871cad2-e793-4c41-ac79-f84cbc2634a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nantuko-shaman:f0t0:s1,f:xs:XP:nantuko-shaman:f0t0:s1	-	-	-	23b491658465	-	d4d8f32180b2	-	-	2026-11-24	xproof
 3871cad2-e793-4c41-ac79-f84cbc2634a5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3875aef0-3102-4fbf-be90-e4139f7a2348	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-387b12b1-d8f5-487b-972f-5303b23eed5a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	553f18ed81ec	-	-	2026-11-24	xproof
+387b12b1-d8f5-487b-972f-5303b23eed5a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dusyut-earthcarver:cast:s1,f:xs:XP:dusyut-earthcarver:cast:s1	-	-	-	23b491658465	-	553f18ed81ec	-	-	2026-11-24	xproof
 387b12b1-d8f5-487b-972f-5303b23eed5a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dusyut Earthcarver/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 387b12b1-d8f5-487b-972f-5303b23eed5a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dusyut Earthcarver/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-387b12b1-d8f5-487b-972f-5303b23eed5a	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	553f18ed81ec	-	-	2026-11-24	xproof
+387b12b1-d8f5-487b-972f-5303b23eed5a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dusyut-earthcarver:cast:s1,f:xs:XP:dusyut-earthcarver:cast:s1	-	-	-	23b491658465	-	553f18ed81ec	-	-	2026-11-24	xproof
 387b6b07-a283-412d-94c3-f7f1dc76e858	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 388168b3-ec68-4af2-b88c-6a5ec88c15f6	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ayara-first-of-locthwain:cast:s1,f:xs:XP:ayara-first-of-locthwain:cast:s1	-	-	-	ae86f6029288	-	62057d940a86	-	-	2026-11-24	xproof
 388168b3-ec68-4af2-b88c-6a5ec88c15f6	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -161,8 +161,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38e1ab26-95f9-43dd-9bda-13c7d8ba47ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38e274e2-bd04-48de-a1df-44f0ee987ba8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38e274e2-bd04-48de-a1df-44f0ee987ba8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38e36eb0-f3a9-42d7-9223-417d23e434fa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38e36eb0-f3a9-42d7-9223-417d23e434fa	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38e36eb0-f3a9-42d7-9223-417d23e434fa	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	53c8dca83382	-	-	2026-11-24	xproof
+38e36eb0-f3a9-42d7-9223-417d23e434fa	f0/a0	Destroy	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	53c8dca83382	-	-	2026-11-24	xproof
 38e43d06-33f1-4672-b0be-b0ea8bf36291	cast	cast	agreed	-	F	start	2	0	f:xs:XP:roil-s-retribution:cast:s1	-	-	-	d864b561c9cb	-	f9fa7407fce1	-	-	2026-11-24	xproof
 38e64b15-47c0-4453-a51e-a53c1aebc8d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38e64b15-47c0-4453-a51e-a53c1aebc8d0	f0/a0	MustBlock	agreed	-	F	start	2	0	f:xs:XP:sisters-of-stone-death:f0a1:s1	-	-	-	9ee19e8250ce	-	905c1edfaaea	-	-	2026-11-24	xproof

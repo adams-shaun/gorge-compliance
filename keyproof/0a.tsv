@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a0d25a8-4f28-453b-9270-4d449fe0ca65	cast	cast-resolve	agreed	-	FX	scen	2	0	Helga, Skittish Seer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a0d25a8-4f28-453b-9270-4d449fe0ca65	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Helga, Skittish Seer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a0d25a8-4f28-453b-9270-4d449fe0ca65	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Helga, Skittish Seer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0a0ea69d-6753-4222-8eee-d2bd73c7ff87	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0a0ea69d-6753-4222-8eee-d2bd73c7ff87	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Hag of Mage's Doom"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 0a11a3a8-ee5f-4caf-bf84-c8248e07c825	cast	cast	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	a650d22c57fa	-	-	2026-11-24	xproof
 0a147009-a57c-4ac1-ab81-d8bd8b737631	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:scourge-of-valkas:cast:s1,f:xs:XP:scourge-of-valkas:cast:s1	-	-	-	d864b561c9cb	-	1b84f806da00	-	-	2026-11-24	xproof
 0a147009-a57c-4ac1-ab81-d8bd8b737631	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-valkas:f0a0:s1,f:xs:XP:scourge-of-valkas:f0a0:s1	-	-	-	d864b561c9cb	-	1b84f806da00	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a7d0d1f-a5ac-4db9-860c-9fcbe3fd9e71	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:alpha-deathclaw:cast:s1,f:xs:XP:alpha-deathclaw:cast:s1	-	-	-	8c0bd19283bb	-	9f0b213492bc	-	-	2026-11-24	xproof
 0a7d0d1f-a5ac-4db9-860c-9fcbe3fd9e71	f0/t1	BecomeMonstrous	agreed	-	FX	start	2	0	x:xs:XP:alpha-deathclaw:f0a0:s1,f:xs:XP:alpha-deathclaw:f0a0:s1	-	-	-	8c0bd19283bb	-	9f0b213492bc	-	-	2026-11-24	xproof
 0a7d6489-b239-4ce8-aea3-7b5d0e436f70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a836332-5905-4afa-a442-47d0bcf8acea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:timin-youthful-geist:f0t1:s1,f:xs:XP:timin-youthful-geist:f0t1:s1	-	-	-	8c0bd19283bb	-	4640626fcddb	-	-	2026-11-24	xproof
+0a836332-5905-4afa-a442-47d0bcf8acea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:timin-youthful-geist:f0t1:s1,f:xs:XP:timin-youthful-geist:f0t1:s1	-	-	-	23b491658465	-	4640626fcddb	-	-	2026-11-24	xproof
 0a836332-5905-4afa-a442-47d0bcf8acea	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0a836332-5905-4afa-a442-47d0bcf8acea	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a8511b9-ed7d-4e33-9c2f-96b9a4c535e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a994401-d37c-4e30-9410-422e7ae5a715	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a994401-d37c-4e30-9410-422e7ae5a715	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:warped-tusker:cast:s1,f:xs:XP:warped-tusker:cast:s1	-	-	-	ae86f6029288	-	fef606e0d58a	-	-	2026-11-24	xproof
 0a994401-d37c-4e30-9410-422e7ae5a715	f0/t1	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-0aa2ab46-c5ad-462b-b441-dbbc4b2c3532	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omnivorous-flytrap:f0t0:s1,f:xs:XP:omnivorous-flytrap:f0t0:s1	-	-	-	9ee19e8250ce	-	5e6d7a8e8981	-	-	2026-11-24	xproof
+0aa2ab46-c5ad-462b-b441-dbbc4b2c3532	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omnivorous-flytrap:f0t0:s1,f:xs:XP:omnivorous-flytrap:f0t0:s1	-	-	-	23b491658465	-	5e6d7a8e8981	-	-	2026-11-24	xproof
 0aa2ab46-c5ad-462b-b441-dbbc4b2c3532	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 0aa2ab46-c5ad-462b-b441-dbbc4b2c3532	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Omnivorous Flytrap/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0aa556a6-66aa-42f1-ba41-0001e10c20a4	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	b30cc7bf7506	-	-	2026-11-24	xproof

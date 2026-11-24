@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c195485-83f9-424f-854a-50c4f5b04182	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thranduil's Company/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c1d3e9e-213e-492a-ad5a-91139d70bc0f	cast	cast-resolve	agreed	-	X	scen	1	0	Fishing Pole/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fishing Pole/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:cast:s1,f:xs:XP:flailing-soldier:cast:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:f0a0:s1,f:xs:XP:flailing-soldier:f0a0:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:f0a1:s1,f:xs:XP:flailing-soldier:f0a1:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
@@ -92,8 +92,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c72e6d2-bbb0-42de-b465-438d584cbddc	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Raphael, Tough Turtle/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c73ef77-ae58-401f-8747-538c4cd075d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c73ef77-ae58-401f-8747-538c4cd075d0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c75623c-59f4-4449-ab43-9d1225185ad9	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	b1615f8e411b	-	-	2026-11-24	xproof
-2c75623c-59f4-4449-ab43-9d1225185ad9	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	b1615f8e411b	-	-	2026-11-24	xproof
+2c75623c-59f4-4449-ab43-9d1225185ad9	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rottenmouth-viper:cast:s1,f:xs:XP:rottenmouth-viper:cast:s1	-	-	-	23b491658465	-	b1615f8e411b	-	-	2026-11-24	xproof
+2c75623c-59f4-4449-ab43-9d1225185ad9	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rottenmouth-viper:cast:s1,f:xs:XP:rottenmouth-viper:cast:s1	-	-	-	23b491658465	-	b1615f8e411b	-	-	2026-11-24	xproof
 2c75623c-59f4-4449-ab43-9d1225185ad9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Rottenmouth Viper/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c75623c-59f4-4449-ab43-9d1225185ad9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rottenmouth Viper/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c769dfc-79be-4fcb-840c-b72cafdd0a23	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rapid-decay:cast:s1,f:xs:XP:rapid-decay:cast:s1	-	-	-	5f2128bf97e4	-	f50016c8caf9	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	a9e1ff31a01f	-	-	2026-11-24	xproof
 2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t1	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	a9e1ff31a01f	-	-	2026-11-24	xproof
 2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t2	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kroxa-titan-of-death-s-hunger:f0t2:s1,f:xs:XP:kroxa-titan-of-death-s-hunger:f0t2:s1	-	-	-	ae86f6029288	-	a9e1ff31a01f	-	-	2026-11-24	xproof
-2cb37c66-bba4-4f90-9134-6b738462457e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2cb37c66-bba4-4f90-9134-6b738462457e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	4a30966f9302	-	-	2026-11-24	xproof
 2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	161171aae5a6	-	-	2026-11-24	xproof
 2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2cb95721-56c8-4008-8055-579a5a97fc8b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cdbfda3-98fc-4108-b551-c7049168924e	f0/a1	activate#0.1	agreed	-	X	scen	1	0	White Lotus Hideout/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cdbfda3-98fc-4108-b551-c7049168924e	f0/a2	activate#0.2	agreed	-	X	scen	1	0	White Lotus Hideout/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cdbfda3-98fc-4108-b551-c7049168924e	land	play-land	agreed	-	X	scen	1	0	White Lotus Hideout/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2cdc1d82-30dc-4f0a-af20-33dde90269b1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:starforged-sword:f0t0:s1,f:xs:XP:starforged-sword:f0t0:s1	-	-	-	9ee19e8250ce	-	95f0fa42370f	-	-	2026-11-24	xproof
+2cdc1d82-30dc-4f0a-af20-33dde90269b1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:starforged-sword:f0t0:s1,f:xs:XP:starforged-sword:f0t0:s1	-	-	-	23b491658465	-	95f0fa42370f	-	-	2026-11-24	xproof
 2cdc1d82-30dc-4f0a-af20-33dde90269b1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Starforged Sword/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cdc1d82-30dc-4f0a-af20-33dde90269b1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 2cdc1d82-30dc-4f0a-af20-33dde90269b1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Starforged Sword/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

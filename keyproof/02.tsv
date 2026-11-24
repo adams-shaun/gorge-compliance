@@ -161,10 +161,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02b6900b-219f-4832-8f93-6ef27ee76c0c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:impulsivity:f0t0:s1,f:xs:XP:impulsivity:f0t0:s1	-	-	-	8c0bd19283bb	-	05c619664c88	-	-	2026-11-24	xproof
 02b91673-48f0-44ad-b7dd-5ee81affbd67	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02b91673-48f0-44ad-b7dd-5ee81affbd67	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02b91673-48f0-44ad-b7dd-5ee81affbd67	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02bd033c-684f-420d-b8d0-5e7ebf161af3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02bd033c-684f-420d-b8d0-5e7ebf161af3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02bd033c-684f-420d-b8d0-5e7ebf161af3	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02b91673-48f0-44ad-b7dd-5ee81affbd67	land	land	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	2428ac97696f	-	-	2026-11-24	xproof
+02bd033c-684f-420d-b8d0-5e7ebf161af3	f0/a0	Mana	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	457cb925f2b9	-	-	2026-11-24	xproof
+02bd033c-684f-420d-b8d0-5e7ebf161af3	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	457cb925f2b9	-	-	2026-11-24	xproof
+02bd033c-684f-420d-b8d0-5e7ebf161af3	land	land	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	457cb925f2b9	-	-	2026-11-24	xproof
 02be0b99-d40b-4287-989b-12eb2701115c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02be0b99-d40b-4287-989b-12eb2701115c	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 02bff648-fbad-4d61-ab09-93993a5fda58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -208,6 +208,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02f8ec49-f490-408b-a76e-58e160a5a5a7	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:marsh-flitter:f0t0:s1,f:xs:XP:marsh-flitter:f0t0:s1	-	-	-	d864b561c9cb	-	575f09ccf7c6	-	-	2026-11-24	xproof
 02f8ec49-f490-408b-a76e-58e160a5a5a7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:marsh-flitter:f0t0:s1,f:xs:XP:marsh-flitter:f0t0:s1	-	-	-	d864b561c9cb	-	575f09ccf7c6	-	-	2026-11-24	xproof
 02fde433-955d-49df-bd72-270b6feac9e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02ffacbf-8d1d-4e87-b11a-0e2a46c0cba6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02ffacbf-8d1d-4e87-b11a-0e2a46c0cba6	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	b355fe829191	-	-	2026-11-24	xproof
 02ffacbf-8d1d-4e87-b11a-0e2a46c0cba6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02ffacbf-8d1d-4e87-b11a-0e2a46c0cba6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02ffacbf-8d1d-4e87-b11a-0e2a46c0cba6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof

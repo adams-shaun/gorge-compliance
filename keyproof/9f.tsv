@@ -62,14 +62,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9f53b691-da24-4264-a2a0-d0b95a385963	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 9f560b83-32d4-4bb4-a956-8f5db18599db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:banisher-priest:f0t0:s1,f:xs:XP:banisher-priest:f0t0:s1	-	-	-	d864b561c9cb	-	2cff2b5c6055	-	-	2026-11-24	xproof
 9f560b83-32d4-4bb4-a956-8f5db18599db	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:banisher-priest:f0t0:s1,f:xs:XP:banisher-priest:f0t0:s1	-	-	-	d864b561c9cb	-	2cff2b5c6055	-	-	2026-11-24	xproof
-9f5b9547-a1e7-4348-a3e8-860c2db264cc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9f5b9547-a1e7-4348-a3e8-860c2db264cc	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	53b931a91f1e	-	-	2026-11-24	xproof
 9f63ab29-b86e-4337-b9dd-2b35c8415f90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9f679093-86a0-4211-8491-de1f6d81c483	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9f679093-86a0-4211-8491-de1f6d81c483	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flight-spellbomb:f0t0:s1,f:xs:XP:flight-spellbomb:f0t0:s1	-	-	-	d864b561c9cb	-	c01456f0ac74	-	-	2026-11-24	xproof
 9f679093-86a0-4211-8491-de1f6d81c483	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:flight-spellbomb:f0t0:s1,f:xs:XP:flight-spellbomb:f0t0:s1	-	-	-	d864b561c9cb	-	c01456f0ac74	-	-	2026-11-24	xproof
 9f693483-f4df-497a-a6c7-fc269fc60ea8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unexplained-vision:cast:s1,f:xs:XP:unexplained-vision:cast:s1	-	-	-	ae86f6029288	-	778ca1253607	-	-	2026-11-24	xproof
 9f6d6e90-7462-46e5-bf2f-725b4badc394	cast	cast-resolve	agreed	-	X	scen	1	0	Gathering Stone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-9f6d6e90-7462-46e5-bf2f-725b4badc394	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+9f6d6e90-7462-46e5-bf2f-725b4badc394	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 9f6d6e90-7462-46e5-bf2f-725b4badc394	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Gathering Stone/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9f6d6e90-7462-46e5-bf2f-725b4badc394	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gathering Stone/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9f6ea9fe-eee5-4dca-a34e-c66d3e218716	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,8 +142,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9fdad42a-9db5-4d91-9e80-9d5ce19038b8	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Blacksmith's Talent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9fdad42a-9db5-4d91-9e80-9d5ce19038b8	static#0.0	static#0.0	agreed	-	X	scen	1	0	Blacksmith's Talent/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9fdd445a-c8e1-4309-9d74-374676fcac1d	cast	cast-resolve	agreed	-	X	scen	1	0	Mutinous Massacre/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9fddede8-927c-4dbc-a0fe-d47194c55e1a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9fddede8-927c-4dbc-a0fe-d47194c55e1a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9fddede8-927c-4dbc-a0fe-d47194c55e1a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	c82731d118d6	-	-	2026-11-24	xproof
+9fddede8-927c-4dbc-a0fe-d47194c55e1a	f0/a0	PumpAll	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	c82731d118d6	-	-	2026-11-24	xproof
 9fe1f3ef-2c30-4ccc-9a67-5349e98e2502	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:song-of-freyalise:cast:s1,f:xs:XP:song-of-freyalise:cast:s1	-	-	-	d864b561c9cb	-	9a80e17df5cc	-	-	2026-11-24	xproof
 9fe57d74-0394-4263-a1b1-da9773b485a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:double-negative:cast:s1,f:xs:XP:double-negative:cast:s1	-	-	-	8a1b1a193ec0	-	d2c174016d3e	-	-	2026-11-24	xproof
 9fe77f70-85cf-4a18-9451-2fad4c341f07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

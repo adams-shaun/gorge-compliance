@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a6ed882-ea6c-4dc2-8614-541e4a56b43c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:netherborn-phalanx:f0t0:s1,f:xs:XP:netherborn-phalanx:f0t0:s1	-	-	-	64a08ba7d913	-	0115c3083bbc	-	-	2026-11-24	xproof
 1a6ed882-ea6c-4dc2-8614-541e4a56b43c	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1a6ed882-ea6c-4dc2-8614-541e4a56b43c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:netherborn-phalanx:f0t0:s1,f:xs:XP:netherborn-phalanx:f0t0:s1	-	-	-	64a08ba7d913	-	0115c3083bbc	-	-	2026-11-24	xproof
-1a77d08b-c876-468f-84e4-1669bec2676a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1a77d08b-c876-468f-84e4-1669bec2676a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	2f148b272569	-	-	2026-11-24	xproof
 1a77d08b-c876-468f-84e4-1669bec2676a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a7e0e55-41c3-4fd8-b718-55b59b5cab90	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:liliana-s-specter:cast:s1,f:xs:XP:liliana-s-specter:cast:s1	-	-	-	77494c1ce129	-	971170483e26	-	-	2026-11-24	xproof
 1a7e0e55-41c3-4fd8-b718-55b59b5cab90	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:liliana-s-specter:cast:s1,f:xs:XP:liliana-s-specter:cast:s1	-	-	-	77494c1ce129	-	971170483e26	-	-	2026-11-24	xproof
@@ -109,10 +109,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a9607a2-58cb-4bb8-b454-4813528221f8	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1a9607a2-58cb-4bb8-b454-4813528221f8	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1a9607a2-58cb-4bb8-b454-4813528221f8	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-1a9bfe76-6c74-4393-b04e-461422a29ddb	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	018d002084df	-	-	2026-11-24	xproof
+1a9bfe76-6c74-4393-b04e-461422a29ddb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:fang-druid-summoner:cast:s1,f:xs:XP:fang-druid-summoner:cast:s1	-	-	-	23b491658465	-	018d002084df	-	-	2026-11-24	xproof
 1a9bfe76-6c74-4393-b04e-461422a29ddb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fang-Druid Summoner/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a9bfe76-6c74-4393-b04e-461422a29ddb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fang-Druid Summoner/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1a9bfe76-6c74-4393-b04e-461422a29ddb	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	018d002084df	-	-	2026-11-24	xproof
+1a9bfe76-6c74-4393-b04e-461422a29ddb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:fang-druid-summoner:cast:s1,f:xs:XP:fang-druid-summoner:cast:s1	-	-	-	23b491658465	-	018d002084df	-	-	2026-11-24	xproof
 1aa1cf50-ee79-4bef-826b-5f1a9e1aa1a5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aa1e34c-b2ff-4750-9e73-5707a8f49bfb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aa1e34c-b2ff-4750-9e73-5707a8f49bfb	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof

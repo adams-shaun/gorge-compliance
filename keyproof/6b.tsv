@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6b071146-2f83-4fda-a55a-46fcb74e6f28	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6b071146-2f83-4fda-a55a-46fcb74e6f28	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6b071146-2f83-4fda-a55a-46fcb74e6f28	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-6b087ae1-1412-4dd9-9b96-3b45be52d386	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	cdc0358369b4	-	-	2026-11-24	xproof
-6b087ae1-1412-4dd9-9b96-3b45be52d386	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	cdc0358369b4	-	-	2026-11-24	xproof
+6b087ae1-1412-4dd9-9b96-3b45be52d386	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sourbread-auntie:cast:s1,f:xs:XP:sourbread-auntie:cast:s1	-	-	-	23b491658465	-	cdc0358369b4	-	-	2026-11-24	xproof
+6b087ae1-1412-4dd9-9b96-3b45be52d386	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sourbread-auntie:cast:s1,f:xs:XP:sourbread-auntie:cast:s1	-	-	-	23b491658465	-	cdc0358369b4	-	-	2026-11-24	xproof
 6b08f344-1ff5-4d04-a435-d3a1c5e4211b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b08f344-1ff5-4d04-a435-d3a1c5e4211b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b08f344-1ff5-4d04-a435-d3a1c5e4211b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -45,9 +45,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6b2ffdb8-3681-4d64-ac03-8c860082e60e	cast	cast-resolve	agreed	-	FX	scen	2	0	Ripclaw Wrangler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6b2ffdb8-3681-4d64-ac03-8c860082e60e	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Ripclaw Wrangler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6b2ffdb8-3681-4d64-ac03-8c860082e60e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6b30e368-a22b-46c8-8b81-8b2bf1718e1f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6b30e368-a22b-46c8-8b81-8b2bf1718e1f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6b30e368-a22b-46c8-8b81-8b2bf1718e1f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6b30e368-a22b-46c8-8b81-8b2bf1718e1f	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	9a001ce4bc23	-	-	2026-11-24	xproof
+6b30e368-a22b-46c8-8b81-8b2bf1718e1f	f0/a0	Token	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	9a001ce4bc23	-	-	2026-11-24	xproof
+6b30e368-a22b-46c8-8b81-8b2bf1718e1f	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	9a001ce4bc23	-	-	2026-11-24	xproof
 6b315dc3-c330-4b30-b6ad-4da12ccf6ca3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b336228-92c0-4f14-a479-1f97aaeae018	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b336228-92c0-4f14-a479-1f97aaeae018	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

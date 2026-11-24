@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 e802442e-6a78-4c15-9034-fc8872470208	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e802442e-6a78-4c15-9034-fc8872470208	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:exultant-cultist:f0t0:s1,f:xs:XP:exultant-cultist:f0t0:s1	-	-	-	d864b561c9cb	-	17b541cdf24c	-	-	2026-11-24	xproof
 e802bf11-d3c7-4aad-8e85-99b39ff50d70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e802bf11-d3c7-4aad-8e85-99b39ff50d70	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	2	0	x:xs:XP:gourmand-s-talent:f0a1:s1,f:xs:XP:gourmand-s-talent:f0a1:s1	-	-	-	8c0bd19283bb	-	f64d11246f5c	-	-	2026-11-24	xproof
+e802bf11-d3c7-4aad-8e85-99b39ff50d70	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	1	0	x:xs:XP:gourmand-s-talent:f0a1:s1,f:xs:XP:gourmand-s-talent:f0a1:s1	-	-	-	23b491658465	-	f64d11246f5c	-	-	2026-11-24	xproof
 e802bf11-d3c7-4aad-8e85-99b39ff50d70	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e802bf11-d3c7-4aad-8e85-99b39ff50d70	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e802bf11-d3c7-4aad-8e85-99b39ff50d70	f0/t1	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -67,8 +67,8 @@ e8434c77-10df-4456-af27-acb95d624189	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e844ded0-821a-4378-8f58-bf1e1c0269d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e84837bd-4f94-43e1-876e-d82cae6ee247	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e84837bd-4f94-43e1-876e-d82cae6ee247	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:behind-the-scenes:f0a0:s1,f:xs:XP:behind-the-scenes:f0a0:s1	-	-	-	d864b561c9cb	-	b6aca5a37237	-	-	2026-11-24	xproof
-e8492964-e4ff-480c-9350-656e8c71b816	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e8492964-e4ff-480c-9350-656e8c71b816	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e8492964-e4ff-480c-9350-656e8c71b816	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	b81b5c947982	-	-	2026-11-24	xproof
+e8492964-e4ff-480c-9350-656e8c71b816	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	b81b5c947982	-	-	2026-11-24	xproof
 e84d146a-1c67-49df-b062-622794e45c42	cast	cast-resolve	agreed	-	X	scen	1	0	Zack Fair/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e84d146a-1c67-49df-b062-622794e45c42	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Zack Fair/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e84f1727-ce01-44be-aebf-8a0c4e032c9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -182,7 +182,7 @@ e8cfb24a-7e52-4e39-a9e1-969b4a65b62e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e8d0accc-b320-4c07-8a71-a09db860351e	cast	cast-resolve	agreed	-	X	scen	1	0	Vaultborn Tyrant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e8d0accc-b320-4c07-8a71-a09db860351e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Vaultborn Tyrant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e8d0accc-b320-4c07-8a71-a09db860351e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Vaultborn Tyrant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-e8d0accc-b320-4c07-8a71-a09db860351e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+e8d0accc-b320-4c07-8a71-a09db860351e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 e8d0accc-b320-4c07-8a71-a09db860351e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Vaultborn Tyrant/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e8d0eafe-540a-4b2e-a989-e98ff3c31105	cast	cast-resolve	agreed	-	FX	scen	2	0	Take Up the Shield/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e8d12d8e-afd2-438b-b121-5911fca479f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-driver:f0t0:s1,f:xs:XP:phyrexian-driver:f0t0:s1	-	-	-	5f2128bf97e4	-	c8b60b984194	-	-	2026-11-24	xproof
