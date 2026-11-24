@@ -103,7 +103,19 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # order (dig/hideaway bottom) is consumed though its order is unobservable, so it is not a leftover. Driver-only change; same
 # trees as FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-unmapped-asks, rebased onto ff2049dc97 so the MayPlay
 # land-play fix is kept beside the zone-election/endure/order fix.
-FORGE_ORACLE_REF ?= cda262a7efd4394466fc3daf74c30f7fee6cf530
+# f01192ae90 = cda262a7ef + the scripted controller maps the four asks gorge records but Forge poses differently:
+# remove-any-type counters (CountersRemoveEffect's chooseCounterType then the params chooseNumber; gorge's one choose_n per
+# counter removed is the amount), Blight as a one-creature cost pick, a lone Separator$/Chooser$ as a forced entity (not an
+# object pick), and gorge's twopiles_pick as chooseCardsPile. The params chooseBinary overload is overridden too, so it cannot
+# fall through to PlayerControllerAi. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
+# fix/xp-forge-driver-counter-blight-piles, based on cda262a7ef.
+# c92f40d4f49 = f01192ae90 + the params chooseNumber branches on the ask's API: only RemoveCounter's per-counter
+# kind election takes the counter picks, while CountersPutEffect's UpTo$/SplitAmount$ number (gorge resume
+# counter_upto) keeps the four-argument path, so an up-to put answers the recorded amount instead of 0. A
+# counter_upto regression fixture/test covers it, and the params chooseBinary comment now states the miss it
+# really records. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
+# fix/xp-forge-driver-counter-blight-piles.
+FORGE_ORACLE_REF ?= c92f40d4f4920abbf59ddb0f8dbebb971283f3e3
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
