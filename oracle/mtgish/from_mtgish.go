@@ -290,7 +290,7 @@ func (m *mtgishNorm) rule(r any) {
 		// One static per rule: scripts write "can't attack or block" as
 		// two statics, one per restriction mode.
 		for _, x := range list(argN(r, 1)) {
-			m.ability(Ability{Kind: "static", Effects: []string{ruleToken(variantOf(x))}})
+			m.ability(Ability{Kind: "static", Effects: []string{p3aEachRuleToken(v, argN(r, 0), variantOf(x))}})
 		}
 		return
 	case v == "CastEffect" && (strings.HasPrefix(variantOf(rawArgs(r)), "AdditionalCastingCost") ||
