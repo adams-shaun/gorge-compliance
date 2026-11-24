@@ -1,0 +1,106 @@
+diff --git a/engine/effects/count_ref_property.go b/engine/effects/count_ref_property.go
+index 37c0783e..43ff6bc2 100644
+--- a/engine/effects/count_ref_property.go
++++ b/engine/effects/count_ref_property.go
+@@ -185,9 +185,15 @@ func evalRefProperty(h Host, c *Ctx, expr string, depth int) (int32, bool) {
+ 					}
+ 				}
+ 			}
+-		case (ref == "TriggerObjectsCards" || ref == "TriggerRemembered") && prop == "GreatestCardManaCost":
+-			// TriggerRemembered: Ill-Timed Explosion's reflexive "X is the
+-			// highest mana value among the discarded cards".
++		case prop == "GreatestCardManaCost":
++			// Greatest-of, never summed, like GreatestCardPower below.
++			// Property-scoped, not ref-scoped: every ref that reaches this
++			// switch was already resolved to its referent set by refTargets,
++			// so one case serves the plain Remembered carriers (Alexander,
++			// Ship's Fool; Heretic's Punishment; The Kenriths' Royal Funeral)
++			// as well as TriggerObjectsCards (Amzu, Swarm's Hunger; Diabolic
++			// Formula) and TriggerRemembered (Ill-Timed Explosion's reflexive
++			// "X is the highest mana value among the discarded cards").
+ 			if f != nil && int32(objectManaValue(h.Game(), o)) > n {
+ 				n = int32(objectManaValue(h.Game(), o))
+ 			}
+diff --git a/engine/effects/remembered_greatest_manacost_test.go b/engine/effects/remembered_greatest_manacost_test.go
+new file mode 100644
+index 00000000..dc254b4c
+--- /dev/null
++++ b/engine/effects/remembered_greatest_manacost_test.go
+@@ -0,0 +1,26 @@
++package effects
++
++import (
++	"testing"
++
++	"github.com/adams-shaun/gorge/engine/state"
++)
++
++// TestRememberedGreatestCardManaCost pins the plain Remembered$GreatestCardManaCost
++// read (Alexander, Ship's Fool's X). refTargets has already resolved the ref to
++// its referent set before evalRefProperty's switch; the property, not the ref
++// name, decides the aggregate. At the pin the case is gated to
++// TriggerObjectsCards / TriggerRemembered, so this body hit the switch's default
++// and returned (0, false); the caller degraded to zero.
++func TestRememberedGreatestCardManaCost(t *testing.T) {
++	h := newHost(t, 2)
++	air := mkCard(t, "Name:Air Elemental\nManaCost:3 U U\nTypes:Creature Elemental\nPT:4/4\nOracle:x\n")
++	bears := mkCard(t, "Name:Grizzly Bears\nManaCost:1 G\nTypes:Creature Bear\nPT:2/2\nOracle:x\n")
++	ao := h.g.AddObject(air, 0)
++	bo := h.g.AddObject(bears, 1)
++	c := &Ctx{Source: ao.ID, Controller: 0, Remembered: []state.Target{{Obj: ao.ID}, {Obj: bo.ID}}}
++	got, ok := EvalCountOK(h, c, "Remembered$GreatestCardManaCost")
++	if got != 5 || !ok {
++		t.Fatalf("Remembered$GreatestCardManaCost = %d, ok=%v; want 5, true", got, ok)
++	}
++}
+diff --git a/engine/rules/farm_alexander_ships_fool_test.go b/engine/rules/farm_alexander_ships_fool_test.go
+new file mode 100644
+index 00000000..ec715df7
+--- /dev/null
++++ b/engine/rules/farm_alexander_ships_fool_test.go
+@@ -0,0 +1,45 @@
++package rules
++
++import (
++	"testing"
++
++	"github.com/adams-shaun/gorge/testkit/testutil"
++)
++
++// TestFarmAlexanderShipsFool is a constructed scenario for the SUP-s356-supp
++// p1.life windows (not a replay): p0 activates Alexander's {T} ability, each
++// player reveals and draws the scripted top card, and X is the greatest mana
++// value among the revealed cards (CR 608.2c; Air Elemental is 5). At
++// GORGE_PIN 5437c13946 the plain Remembered$GreatestCardManaCost ref falls
++// through evalRefProperty's ref-gated case, so the damage is 0 and p1 stays at
++// 20; Forge deals 5.
++func TestFarmAlexanderShipsFool(t *testing.T) {
++	t.Parallel()
++	reg := testutil.CorpusRegistry(t)
++	sc := `{
++	  "name": "farm-alexander-ships-fool-sup-s356",
++	  "turn": 1,
++	  "cr": ["608.2c"],
++	  "why": "Alexander reveals Air Elemental (MV 5) and Grizzly Bears (MV 2); X must be 5, so the random opponent takes 5",
++	  "setup": {
++	    "p0": {"battlefield": ["Alexander, Ship's Fool"], "library_top": ["Air Elemental", "Forest", "Forest"], "life": 20},
++	    "p1": {"library_top": ["Grizzly Bears", "Island", "Island"], "life": 20}
++	  },
++	  "steps": [
++	    {"op": "activate", "seat": 0, "card": "p0:Alexander, Ship's Fool", "ability_index": 0},
++	    {"op": "pass", "seat": 0},
++	    {"op": "pass", "seat": 1}
++	  ]
++	}`
++	res, err := RunOracleScenarioJSON(reg, []byte(sc))
++	if err != nil {
++		t.Fatalf("run: %v", err)
++	}
++	if len(res.Fails) != 0 {
++		t.Fatalf("scenario failed: %v", res.Fails)
++	}
++	last := res.Snapshots[len(res.Snapshots)-1]
++	if got := last.Players[1].Life; got != 15 {
++		t.Fatalf("p1.life at %q = %d, want 15 (20 - Air Elemental's mana value 5)", last.Checkpoint, got)
++	}
++}
