@@ -304,7 +304,8 @@ fn stack_entry(state: &GameState, ids: &Ids, viewer: PlayerId, e: &engine::types
 }
 
 /// The observation `viewer` is allowed to see of `state`.
-pub fn observation(state: &GameState, viewer: PlayerId, ids: &Ids) -> Value {
+pub fn observation(state: &GameState, viewer: PlayerId, ids: &Ids, looks: &[(ObjectId, &'static str)]) -> Value {
+    let known = known(state, ids, viewer, looks);
     let filtered = filter_state_for_viewer(state, viewer);
     let state = &filtered;
     let (mut atk, mut blk) = (BTreeSet::new(), BTreeSet::new());
@@ -326,7 +327,7 @@ pub fn observation(state: &GameState, viewer: PlayerId, ids: &Ids) -> Value {
         "day_night": match state.day_night { None => "none", Some(DayNight::Day) => "day", Some(DayNight::Night) => "night" },
         "players": state.players.iter().map(|p| player(state, ids, viewer, p, &atk, &blk)).collect::<Vec<_>>(),
         "stack": state.stack.iter().rev().map(|e| stack_entry(state, ids, viewer, e)).collect::<Vec<_>>(),
-        "pending_triggers": pending_triggers(state, ids, viewer), "known": [],
+        "pending_triggers": pending_triggers(state, ids, viewer), "known": known,
     });
     let obs = scrub_refs(obs);
     report_duplicate_ids(state, &obs);
@@ -346,6 +347,7 @@ fn scrub_refs(mut obs: Value) -> Value {
         }
     }
     ids.extend(obs["stack"].as_array().into_iter().flatten().filter_map(|r| r["object_id"].as_str().map(str::to_string)));
+    ids.extend(obs["known"].as_array().into_iter().flatten().filter_map(|r| r["object_id"].as_str().map(str::to_string)));
     let shown = |r: &Value| r["object_id"].as_str().is_some_and(|id| ids.contains(id));
     for p in obs["players"].as_array_mut().into_iter().flatten() {
         for z in zones {
@@ -369,6 +371,30 @@ fn scrub_refs(mut obs: Value) -> Value {
         list.retain(|t| shown(&t["source"]));
     }
     obs
+}
+
+/// The library cards this decision lets the viewer see (`looked_at`, `searching`), in the spec's order
+/// (owner, zone, name, position, how, id). A card the viewer may not read is left out.
+fn known(state: &GameState, ids: &Ids, viewer: PlayerId, looks: &[(ObjectId, &'static str)]) -> Vec<Value> {
+    let mut rows: Vec<((String, String, Option<u64>, String, String), Value)> = Vec::new();
+    for (id, how) in looks {
+        let Some(o) = state.objects.get(id) else { continue };
+        if o.zone != Zone::Library || !readable(state, viewer, *id) {
+            continue;
+        }
+        let top = (*how != "searching")
+            .then(|| state.players.iter().find(|p| p.id == o.owner).and_then(|p| p.library.iter().position(|x| x == id)).map(|n| n as u64))
+            .flatten();
+        let oid = ids.object(viewer, *id, o.incarnation, "library");
+        let key = (seat(o.owner).to_string(), o.name.clone(), top, (*how).to_string(), oid.clone());
+        rows.push((
+            key,
+            json!({"owner_seat": seat(o.owner), "zone": "library", "card_name": o.name, "object_id": oid,
+                "position_from_top": top, "position_from_bottom": Value::Null, "how": how}),
+        ));
+    }
+    rows.sort_by(|a, b| a.0.cmp(&b.0));
+    rows.into_iter().map(|(_, v)| v).collect()
 }
 
 /// A diagnostic, not a filter: every object id must appear once in an observation (V4). A repeat is
@@ -396,5 +422,8 @@ fn report_duplicate_ids(state: &GameState, obs: &Value) {
     }
     for r in obs["stack"].as_array().into_iter().flatten() {
         each(r, "stack");
+    }
+    for r in obs["known"].as_array().into_iter().flatten() {
+        each(r, "known");
     }
 }

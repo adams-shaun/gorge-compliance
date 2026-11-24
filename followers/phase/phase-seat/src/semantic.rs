@@ -53,6 +53,10 @@ pub const DECISION_KINDS: &[&str] = &[
     "order_pick",
     "declare_attack",
     "declare_block",
+    "choose_spell_mode",
+    "choose_option",
+    "finish_selection",
+    "arrange_card",
 ];
 
 /// Build one `semantic`. Panics on a kind or field set that is not in [`KINDS`]: that is a bug in the
@@ -162,6 +166,15 @@ pub fn order_pick(source: Option<Value>, purpose: &str, item: Value, position: u
     make("order_pick", json!({"source": source, "purpose": purpose, "item": item, "position": position, "count": count}))
 }
 
+#[allow(clippy::too_many_arguments)]
+pub fn arrange_card(source: Option<Value>, purpose: &str, card: Value, index: u32, count: u32, destination: &str) -> Value {
+    make(
+        "arrange_card",
+        json!({"source": source, "purpose": purpose, "card": card, "card_index": index, "card_count": count,
+            "destination": destination}),
+    )
+}
+
 pub fn optional_cost(source: Value, cost: &str, pay: bool) -> Value {
     make("optional_cost", json!({"source": source, "cost": cost, "pay": pay}))
 }
@@ -202,15 +215,12 @@ mod tests {
             finish_selection(None, "discard", 1),
             optional_cost(o.clone(), "kicker", true),
             order_pick(None, "mulligan_bottom", json!({"object": o}), 0, 1),
+            arrange_card(None, "scry", o.clone(), 0, 2, "top"),
         ];
-        // Every advertised kind has a builder; the builders also cover kinds `game` does not ask yet
-        // (`choose_option`, `choose_spell_mode`, `finish_selection`), which stay unadvertised.
+        // Every advertised kind has a builder that the table accepts.
         let built: std::collections::BTreeSet<&str> = all.iter().map(|v| v["kind"].as_str().unwrap()).collect();
         for k in DECISION_KINDS {
             assert!(built.contains(k), "{k} is advertised but no builder is tested");
-        }
-        for k in ["choose_option", "choose_spell_mode", "finish_selection"] {
-            assert!(built.contains(k) && !DECISION_KINDS.contains(&k), "{k} is built but not advertised");
         }
     }
 

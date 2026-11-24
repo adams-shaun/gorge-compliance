@@ -71,13 +71,27 @@ enum Effect {
 enum Sub {
     Attack(Option<AttackTarget>),
     Block(Option<ObjectId>),
-    Card(ObjectId),
+    /// An item (a card, or a mode index) of the open selection.
+    Pick(usize),
+    /// Stop picking (a variable selection that has met its minimum).
+    Finish,
+    /// Scry/surveil: the next card goes to this destination.
+    Dest(&'static str),
+    /// Scry/surveil placement, or trigger order: this item (card index, trigger index) is next.
+    Place(usize),
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-enum CardsFor {
-    Discard,
+/// What a selection's picks mean to phase.
+#[derive(Clone, Debug)]
+enum SelKind {
+    /// `select_object` of cards under this purpose; answered with `SelectCards`.
+    Cards(&'static str),
+    /// London bottom: `order_pick` `mulligan_bottom`; answered with `SelectCards`.
     MulliganBottom,
+    /// `choose_spell_mode` over `count` modes; answered with `SelectModes`.
+    Modes(u32),
+    /// `select_object` `legend_rule`; answered with `ChooseLegend`.
+    Legend,
 }
 
 enum Plan {
@@ -92,11 +106,28 @@ enum Plan {
         targets: HashMap<ObjectId, Vec<ObjectId>>,
         picks: Vec<(ObjectId, ObjectId)>,
     },
-    Cards {
-        pool: Vec<ObjectId>,
-        picks: Vec<ObjectId>,
-        count: usize,
-        what: CardsFor,
+    /// `min..=max` picks of `items`. A fixed selection (`min == max`) is one group of `max` substeps;
+    /// a variable one is a group of one substep per pick (the spec's rule), the picks so far kept in
+    /// `Live::carry` between groups.
+    Select {
+        kind: SelKind,
+        source: Option<ObjectId>,
+        items: Vec<usize>,
+        picks: Vec<usize>,
+        max: usize,
+    },
+    /// Scry or surveil: one `arrange_card` per card (top-down), then `n - 1` `order_pick`s.
+    Arrange {
+        purpose: &'static str,
+        other: &'static str,
+        cards: Vec<ObjectId>,
+        chosen: Vec<&'static str>,
+        placed: Vec<usize>,
+    },
+    /// Trigger order: one `order_pick` per position but the last, which is implied.
+    Order {
+        items: Vec<Value>,
+        placed: Vec<usize>,
     },
 }
 
@@ -127,6 +158,12 @@ struct Live {
     steps: u64,
     max_decisions: u64,
     max_steps: u64,
+    /// Picks made so far in the open variable selection (one group per pick).
+    carry: Vec<usize>,
+    /// Library cards this decision lets the seat look at or search (the observation's `known`).
+    looks: Vec<(ObjectId, &'static str)>,
+    /// The context purpose of the substep being asked, when it has one.
+    purpose: Option<&'static str>,
 }
 
 pub struct PhaseBackend {
@@ -228,15 +265,15 @@ impl PhaseBackend {
         let source = match &live.state.waiting_for {
             WaitingFor::TargetSelection { pending_cast, .. }
             | WaitingFor::OptionalCostChoice { pending_cast, .. }
-            | WaitingFor::ChooseXValue { pending_cast, .. } => object_ref(&live.state, &live.ids, who, pending_cast.object_id),
+            | WaitingFor::ChooseXValue { pending_cast, .. } => shown_ref(&live.state, &live.ids, who, pending_cast.object_id),
             _ => None,
         };
         Outcome::Decision(json!({
             "acting_seat": seat(who), "seat_step": live.seat_steps[s],
             "group": {"group_id": live.groups[s], "substep_index": index, "substep_count": total},
             "context": {"kind": if family == Family::Priority { "priority" } else { "choice" },
-                "source": source, "purpose": null, "text": null, "rewind": false},
-            "observation": observation(&live.state, who, &live.ids),
+                "source": source, "purpose": live.purpose, "text": null, "rewind": false},
+            "observation": observation(&live.state, who, &live.ids, &live.looks),
             "candidates": cands, "extensions": {},
         }))
     }
@@ -292,6 +329,8 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
     let mut cands: Vec<Cand> = Vec::new();
     let mut actor = None;
     let w = live.state.waiting_for.clone();
+    live.looks.clear();
+    live.purpose = None;
     match (&w, family) {
         (WaitingFor::Priority { player }, Family::Priority) => {
             let who = *player;
@@ -328,7 +367,9 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
             live.acting = e.player;
             if let MulliganDecisionPhase::BottomCards { count, .. } = e.phase {
                 let hand: Vec<ObjectId> = live.state.players[usize::from(e.player.0)].hand.iter().copied().collect();
-                return cards_group(live, e.player, hand, usize::from(count), CardsFor::MulliganBottom);
+                let n = usize::from(count);
+                let spec = PoolSpec::cards(e.player, hand, n, n, SelKind::MulliganBottom, None);
+                return select_group(live, spec);
             }
             let hand = live.state.players[usize::from(e.player.0)].hand.len() as u32;
             for (keep, choice) in [(true, MulliganChoice::Keep), (false, MulliganChoice::Mulligan)] {
@@ -454,11 +495,128 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 });
             }
         }
-        (WaitingFor::DiscardToHandSize { player, count, cards }, Family::DiscardToHand) => {
+        (
+            WaitingFor::DiscardToHandSize { .. }
+            | WaitingFor::DiscardChoice { .. }
+            | WaitingFor::RevealChoice { .. }
+            | WaitingFor::SearchChoice { .. }
+            | WaitingFor::EffectZoneChoice { .. }
+            | WaitingFor::PayCost { .. }
+            | WaitingFor::ChooseLegend { .. },
+            Family::Pool,
+        ) => {
+            let spec = pool_spec(&w)?;
+            live.acting = spec.who;
+            return select_group(live, spec);
+        }
+        (WaitingFor::ModeChoice { player, modal, pending_cast, unavailable_modes }, Family::Modes) => {
             live.acting = *player;
-            let mut pool = cards.clone();
-            pool.sort();
-            return cards_group(live, *player, pool, *count, CardsFor::Discard);
+            if modal.allow_repeat_modes {
+                return Err(Stop::Halt("unsupported_modal", "a mode that may be chosen more than once".into()));
+            }
+            let items: Vec<usize> = (0..modal.mode_count).filter(|i| !unavailable_modes.contains(i)).collect();
+            let spec = PoolSpec {
+                who: *player,
+                items,
+                min: modal.min_choices,
+                max: modal.max_choices,
+                kind: SelKind::Modes(modal.mode_count as u32),
+                source: Some(pending_cast.object_id),
+            };
+            return select_group(live, spec);
+        }
+        (WaitingFor::OrderTriggers { player, triggers }, Family::OrderTriggers) => {
+            live.acting = *player;
+            let n = triggers.len();
+            if n <= 1 {
+                apply_now(live, *player, GameAction::OrderTriggers { order: (0..n).collect() })?;
+                return Ok(Built::Applied);
+            }
+            if live.group.is_none() {
+                let mut seen: BTreeMap<String, u32> = BTreeMap::new();
+                let items = triggers
+                    .iter()
+                    .map(|t| {
+                        let source = shown_ref(&live.state, &live.ids, *player, t.source_id);
+                        let mut item = json!({"source": source, "source_name": t.source_name, "ability_index": null,
+                            "event_objects": [], "instance": 0, "label": null});
+                        let n = seen.entry(canonical(&item)).or_insert(0);
+                        item["instance"] = json!(*n);
+                        *n += 1;
+                        json!({"trigger": item})
+                    })
+                    .collect();
+                live.group = Some(Group { total: n - 1, index: 0, plan: Plan::Order { items, placed: vec![] } });
+            }
+            let g = live.group.as_ref().expect("group");
+            let Plan::Order { items, placed } = &g.plan else { return Err(Stop::Halt("followup_mismatch", "order group".into())) };
+            for (i, item) in items.iter().enumerate().filter(|(i, _)| !placed.contains(i)) {
+                cands.push(Cand {
+                    semantic: sem::order_pick(None, "triggers", item.clone(), placed.len() as u32, n as u32),
+                    effect: Effect::Sub(Sub::Place(i)),
+                });
+            }
+            cands.sort_by_key(|c| canonical(&c.semantic["item"]));
+        }
+        (WaitingFor::ScryChoice { player, cards } | WaitingFor::SurveilChoice { player, cards }, Family::Arrange) => {
+            live.acting = *player;
+            let (purpose, other) = if matches!(w, WaitingFor::ScryChoice { .. }) { ("scry", "bottom") } else { ("surveil", "graveyard") };
+            let n = cards.len();
+            if n == 0 {
+                apply_now(live, *player, GameAction::SelectCards { cards: vec![] })?;
+                return Ok(Built::Applied);
+            }
+            if live.group.is_none() {
+                live.group = Some(Group {
+                    total: 2 * n - 1,
+                    index: 0,
+                    plan: Plan::Arrange { purpose, other, cards: cards.clone(), chosen: vec![], placed: vec![] },
+                });
+            }
+            live.looks = cards.iter().map(|c| (*c, "looked_at")).collect();
+            let g = live.group.as_ref().expect("group");
+            let Plan::Arrange { purpose, other, cards, chosen, placed } = &g.plan else {
+                return Err(Stop::Halt("followup_mismatch", "arrange group".into()));
+            };
+            let refs: Vec<Option<Value>> = cards.iter().map(|c| viewer(live, *player, *c)).collect();
+            if refs.iter().any(Option::is_none) {
+                return Err(Stop::Halt("unresolvable_source", "a looked-at card".into()));
+            }
+            let refs: Vec<Value> = refs.into_iter().flatten().collect();
+            if chosen.len() < n {
+                let i = chosen.len();
+                for dst in ["top", *other] {
+                    cands.push(Cand {
+                        semantic: sem::arrange_card(None, purpose, refs[i].clone(), i as u32, n as u32, dst),
+                        effect: Effect::Sub(Sub::Dest(dst)),
+                    });
+                }
+            } else {
+                live.purpose = Some("arrangement");
+                // The cards sent to `top` are placed first, then the rest; the rest's order is phase's own
+                // (the offered order), so one candidate is posed for each of its picks.
+                let (dst, rest_only) = if (0..n).any(|i| chosen[i] == "top" && !placed.contains(&i)) { ("top", false) } else { (*other, true) };
+                let mut unplaced: Vec<usize> = (0..n).filter(|i| chosen[*i] == dst && !placed.contains(i)).collect();
+                if rest_only {
+                    unplaced.truncate(1);
+                }
+                for i in unplaced {
+                    cands.push(Cand {
+                        semantic: sem::order_pick(None, "arrangement", json!({"object": refs[i]}), placed.len() as u32, n as u32),
+                        effect: Effect::Sub(Sub::Place(i)),
+                    });
+                }
+                cands.sort_by_key(|c| hidden_key(&c.semantic["item"]["object"]));
+            }
+        }
+        (WaitingFor::TopOrBottomChoice { player, .. }, Family::TopOrBottom) => {
+            live.acting = *player;
+            for (i, (label, top)) in [("top", true), ("bottom", false)].into_iter().enumerate() {
+                cands.push(Cand {
+                    semantic: sem::choose_option(None, "top_or_bottom", i as u32, 2, Some(label)),
+                    effect: Effect::Act(GameAction::ChooseTopOrBottom { top }),
+                });
+            }
         }
         _ => return Err(Stop::Halt("followup_mismatch", format!("{:?} for {family:?}", classify(&w).0))),
     }
@@ -470,37 +628,160 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
     Ok(Built::Decision)
 }
 
-/// `count` picks over `pool`, one `select_object` (discard) or `order_pick` (mulligan bottom) per substep.
-fn cards_group(live: &mut Live, who: PlayerId, pool: Vec<ObjectId>, count: usize, what: CardsFor) -> Result<Built, Stop> {
-    if count == 0 || pool.is_empty() {
-        let action = match what {
-            CardsFor::Discard | CardsFor::MulliganBottom => GameAction::SelectCards { cards: vec![] },
-        };
-        apply_now(live, who, action)?;
+/// What a pool selection asks: who picks, from which items, how many, and what the picks mean.
+struct PoolSpec {
+    who: PlayerId,
+    /// Object ids (as numbers), or mode indices for [`SelKind::Modes`].
+    items: Vec<usize>,
+    min: usize,
+    max: usize,
+    kind: SelKind,
+    source: Option<ObjectId>,
+}
+
+impl PoolSpec {
+    fn cards(who: PlayerId, pool: Vec<ObjectId>, min: usize, max: usize, kind: SelKind, source: Option<ObjectId>) -> Self {
+        PoolSpec { who, items: pool.into_iter().map(|c| c.0 as usize).collect(), min, max, kind, source }
+    }
+}
+
+/// The selection a `WaitingFor` of the pool family asks.
+fn pool_spec(w: &WaitingFor) -> Result<PoolSpec, Stop> {
+    use engine::types::game_state::PayCostKind;
+    let cards = |who: &PlayerId, pool: &[ObjectId], min: usize, max: usize, purpose: &'static str, src: Option<ObjectId>| {
+        Ok(PoolSpec::cards(*who, pool.to_vec(), min, max, SelKind::Cards(purpose), src))
+    };
+    match w {
+        WaitingFor::DiscardToHandSize { player, count, cards: pool } => cards(player, pool, *count, *count, "discard", None),
+        WaitingFor::DiscardChoice { player, count, cards: pool, source_id, up_to, .. } => {
+            cards(player, pool, if *up_to { 0 } else { *count }, *count, "discard", Some(*source_id))
+        }
+        WaitingFor::RevealChoice { player, cards: pool, optional, .. } => cards(player, pool, usize::from(!*optional), 1, "reveal", None),
+        WaitingFor::SearchChoice { player, cards: pool, count, up_to, allows_partial_find, constraint, .. } => {
+            let partial = *up_to || *allows_partial_find || constraint.permits_partial_find();
+            cards(player, pool, if partial { 0 } else { *count }, *count, "search", None)
+        }
+        WaitingFor::EffectZoneChoice { player, cards: pool, count, min_count, up_to, source_id, effect_kind, .. } => {
+            let purpose = match format!("{effect_kind:?}").as_str() {
+                "Sacrifice" => "sacrifice",
+                "Discard" => "discard",
+                "Destroy" => "destroy",
+                _ => "other",
+            };
+            cards(player, pool, if *up_to { *min_count } else { *count }, *count, purpose, Some(*source_id))
+        }
+        WaitingFor::PayCost { player, kind, choices, count, min_count, resume } => {
+            let manaability = matches!(resume, engine::types::game_state::CostResume::ManaAbility { .. });
+            match kind {
+                PayCostKind::Discard => cards(player, choices, *count, *count, "discard", None),
+                PayCostKind::ReturnToHand => cards(player, choices, *count, *count, "return_to_hand", None),
+                PayCostKind::Reveal { shared_quality: None } => cards(player, choices, *count, *count, "reveal", None),
+                PayCostKind::Sacrifice => cards(player, choices, if manaability { *count } else { *min_count }, *count, "sacrifice", None),
+                PayCostKind::ExileFromZone { .. } => cards(player, choices, *min_count, *count, "exile", None),
+                other => Err(Stop::Halt("unsupported_pay_cost", format!("{other:?}").split([' ', '{', '(']).next().unwrap_or("?").to_string())),
+            }
+        }
+        WaitingFor::ChooseLegend { player, candidates, .. } => Ok(PoolSpec::cards(*player, candidates.clone(), 1, 1, SelKind::Legend, None)),
+        other => Err(Stop::Halt("followup_mismatch", format!("{} is not a pool", classify(other).0))),
+    }
+}
+
+/// A ref the observation lists as a record, or `None` (V4: every referenced id is a record).
+fn shown_ref(state: &GameState, ids: &Ids, viewer: PlayerId, id: ObjectId) -> Option<Value> {
+    let r = object_ref(state, ids, viewer, id)?;
+    let listed = match r["zone"].as_str()? {
+        "battlefield" | "graveyard" | "exile" | "command" | "stack" => true,
+        "hand" => r["owner_seat"] == seat(viewer),
+        _ => false,
+    };
+    listed.then_some(r)
+}
+
+/// V5: candidates that name a hidden-zone card come in (card_name, object_id) order.
+fn hidden_key(r: &Value) -> (String, String) {
+    (r["card_name"].as_str().unwrap_or("").to_string(), r["object_id"].as_str().unwrap_or("").to_string())
+}
+
+fn selection_action(kind: &SelKind, picks: &[usize]) -> GameAction {
+    match kind {
+        SelKind::Cards(_) | SelKind::MulliganBottom => GameAction::SelectCards { cards: picks.iter().map(|i| ObjectId(*i as u64)).collect() },
+        SelKind::Modes(_) => GameAction::SelectModes { indices: picks.to_vec() },
+        SelKind::Legend => GameAction::ChooseLegend { keep: ObjectId(picks[0] as u64) },
+    }
+}
+
+/// Open (or continue) a `min..=max` selection over `spec.items`.
+fn select_group(live: &mut Live, spec: PoolSpec) -> Result<Built, Stop> {
+    let max = spec.max.min(spec.items.len());
+    let min = spec.min.min(max);
+    if max == 0 || spec.items.len() <= min {
+        // Nothing to choose: no pick can be made, or every item must be picked.
+        let all = if max == 0 { vec![] } else { spec.items.clone() };
+        if matches!(spec.kind, SelKind::Legend) && all.is_empty() {
+            return Err(Stop::Halt("dead_end", "legend rule with no candidate".into()));
+        }
+        live.carry.clear();
+        apply_now(live, spec.who, selection_action(&spec.kind, &all))?;
         return Ok(Built::Applied);
     }
-    let count = count.min(pool.len());
+    let cards = !matches!(spec.kind, SelKind::Modes(_));
+    if cards {
+        live.looks = spec
+            .items
+            .iter()
+            .map(|i| ObjectId(*i as u64))
+            .filter(|id| live.state.objects.get(id).is_some_and(|o| o.zone == engine::types::zones::Zone::Library))
+            .map(|id| (id, "searching"))
+            .collect();
+    }
+    let fixed = min == max;
     if live.group.is_none() {
-        live.group = Some(Group { total: count, index: 0, plan: Plan::Cards { pool, picks: vec![], count, what } });
+        let picks = if fixed { vec![] } else { live.carry.clone() };
+        live.group = Some(Group {
+            total: if fixed { max } else { 1 },
+            index: 0,
+            plan: Plan::Select { kind: spec.kind.clone(), source: spec.source, items: spec.items.clone(), picks, max },
+        });
     }
     let g = live.group.as_ref().expect("group");
-    let Plan::Cards { pool, picks, count, what } = &g.plan else { return Err(Stop::Halt("followup_mismatch", "card group".into())) };
-    let mut cands = Vec::new();
-    let mut rest: Vec<ObjectId> = pool.iter().copied().filter(|c| !picks.contains(c)).collect();
-    rest.sort();
-    for c in rest {
-        let Some(r) = object_ref(&live.state, &live.ids, who, c) else { continue };
-        let semantic = match what {
-            CardsFor::Discard => {
-                sem::select_object(None, "discard", sem::target_object(r), picks.len() as u32, *count as u32, *count as u32)
-            }
-            CardsFor::MulliganBottom => sem::order_pick(None, "mulligan_bottom", json!({"object": r}), picks.len() as u32, *count as u32),
-        };
-        cands.push(Cand { semantic, effect: Effect::Sub(Sub::Card(c)) });
+    let Plan::Select { kind, source, items, picks, .. } = &g.plan else {
+        return Err(Stop::Halt("followup_mismatch", "selection group".into()));
+    };
+    let who = spec.who;
+    let src = source.and_then(|id| shown_ref(&live.state, &live.ids, who, id));
+    if matches!(kind, SelKind::Modes(_)) && src.is_none() {
+        return Err(Stop::Halt("unresolvable_source", "mode source".into()));
     }
-    cands.sort_by_key(|c| canonical(&c.semantic));
+    let mut rows: Vec<((String, String), Cand)> = Vec::new();
+    for &it in items.iter().filter(|i| !picks.contains(i)) {
+        let (key, semantic) = if let SelKind::Modes(count) = kind {
+            let s = sem::choose_spell_mode(src.clone().expect("mode source"), it as u32, *count, picks.len() as u32, min as u32, max as u32);
+            ((String::new(), format!("{it:08}")), s)
+        } else {
+            let Some(r) = object_ref(&live.state, &live.ids, who, ObjectId(it as u64)) else { continue };
+            let key = hidden_key(&r);
+            let s = match kind {
+                SelKind::Cards(p) => sem::select_object(src.clone(), p, sem::target_object(r), picks.len() as u32, min as u32, max as u32),
+                SelKind::Legend => sem::select_object(None, "legend_rule", sem::target_object(r), picks.len() as u32, 1, 1),
+                SelKind::MulliganBottom => sem::order_pick(None, "mulligan_bottom", json!({"object": r}), picks.len() as u32, max as u32),
+                SelKind::Modes(_) => unreachable!("handled above"),
+            };
+            (key, s)
+        };
+        rows.push((key, Cand { semantic, effect: Effect::Sub(Sub::Pick(it)) }));
+    }
+    rows.sort_by(|a, b| a.0.cmp(&b.0));
+    let mut cands: Vec<Cand> = rows.into_iter().map(|(_, c)| c).collect();
+    if !fixed && picks.len() >= min {
+        let purpose = match kind {
+            SelKind::Cards(p) => p,
+            SelKind::Modes(_) => "modes",
+            SelKind::Legend | SelKind::MulliganBottom => "other",
+        };
+        cands.push(Cand { semantic: sem::finish_selection(src.clone(), purpose, picks.len() as u32), effect: Effect::Sub(Sub::Finish) });
+    }
     if cands.is_empty() {
-        return Err(Stop::Halt("dead_end", "no cards left to pick".into()));
+        return Err(Stop::Halt("dead_end", "no item left to pick".into()));
     }
     live.actor = who;
     live.cands = cands;
@@ -521,7 +802,8 @@ fn targets(
         return Err(Stop::Halt("unresolvable_source", "target source".into()));
     };
     let legal = if selection.current_legal_targets.is_empty() { &s.legal_targets } else { &selection.current_legal_targets };
-    let chosen = selection.selected_slots.iter().filter(|t| t.is_some()).count() as u32;
+    // Every slot takes one target: the count within the slot (V1: below `maximum`) is 0.
+    let chosen = 0u32;
     let min = u32::from(!s.optional);
     for t in legal {
         let target = match t {
@@ -597,6 +879,9 @@ impl Backend for PhaseBackend {
             steps: 0,
             max_decisions: r.max_decisions,
             max_steps: r.max_steps,
+            carry: vec![],
+            looks: vec![],
+            purpose: None,
         });
         Ok(self.pose())
     }
@@ -612,6 +897,7 @@ impl Backend for PhaseBackend {
         let applied = match effect {
             Effect::Act(a) => {
                 live.group = None;
+                live.carry.clear();
                 live.groups[who.0 as usize] += 1;
                 live.decisions += 1;
                 apply_now(live, actor, a)
@@ -625,9 +911,11 @@ impl Backend for PhaseBackend {
     }
 }
 
-/// Record one substep; when the group is complete, apply the whole declaration.
+/// Record one substep; when the group is complete, apply the whole declaration (a variable selection
+/// that is not full yet is kept in `carry` instead, and its next pick is a new group).
 fn step_group(live: &mut Live, who: PlayerId, actor: PlayerId, sub: Sub) -> Result<(), Stop> {
     let g = live.group.as_mut().ok_or_else(|| Stop::Halt("followup_mismatch", "substep with no group".into()))?;
+    let mut finished = false;
     match (&mut g.plan, sub) {
         (Plan::Attack { creatures, picks, .. }, Sub::Attack(t)) => {
             if let Some(t) = t {
@@ -639,20 +927,59 @@ fn step_group(live: &mut Live, who: PlayerId, actor: PlayerId, sub: Sub) -> Resu
                 picks.push((blockers[g.index], a));
             }
         }
-        (Plan::Cards { picks, .. }, Sub::Card(c)) => picks.push(c),
+        (Plan::Select { picks, .. }, Sub::Pick(it)) => picks.push(it),
+        (Plan::Select { .. }, Sub::Finish) => {
+            finished = true;
+            g.index = g.total.saturating_sub(1);
+        }
+        (Plan::Arrange { chosen, .. }, Sub::Dest(d)) => chosen.push(d),
+        (Plan::Arrange { cards, placed, .. }, Sub::Place(i)) => {
+            placed.push(i);
+            if placed.len() + 1 == cards.len() {
+                // The last card of the arrangement is implied: top's, then the rest's.
+                let rest: Vec<usize> = (0..cards.len()).filter(|c| !placed.contains(c)).collect();
+                debug_assert_eq!(rest.len(), 1);
+                placed.extend(rest);
+            }
+        }
+        (Plan::Order { items, placed }, Sub::Place(i)) => {
+            placed.push(i);
+            if placed.len() + 1 == items.len() {
+                let rest: Vec<usize> = (0..items.len()).filter(|c| !placed.contains(c)).collect();
+                placed.extend(rest);
+            }
+        }
         _ => return Err(Stop::Halt("followup_mismatch", "substep does not fit its group".into())),
+    }
+    // A one-card arrangement has no ordering substep: the single card is placed by its destination.
+    if let Plan::Arrange { cards, chosen, placed, .. } = &mut g.plan {
+        if cards.len() == 1 && chosen.len() == 1 && placed.is_empty() {
+            placed.push(0);
+        }
     }
     g.index += 1;
     if g.index < g.total {
         return Ok(());
     }
     let g = live.group.take().expect("group");
+    live.groups[who.0 as usize] += 1;
+    live.decisions += 1;
     let action = match g.plan {
         Plan::Attack { picks, .. } => GameAction::DeclareAttackers { attacks: picks, bands: vec![] },
         Plan::Block { picks, .. } => GameAction::DeclareBlockers { assignments: picks },
-        Plan::Cards { picks, .. } => GameAction::SelectCards { cards: picks },
+        Plan::Select { kind, picks, max, .. } => {
+            if !finished && picks.len() < max {
+                live.carry = picks;
+                return Ok(());
+            }
+            live.carry.clear();
+            selection_action(&kind, &picks)
+        }
+        Plan::Arrange { cards, chosen, placed, .. } => {
+            let top: Vec<ObjectId> = placed.iter().filter(|i| chosen[**i] == "top").map(|i| cards[*i]).collect();
+            GameAction::SelectCards { cards: top }
+        }
+        Plan::Order { placed, .. } => GameAction::OrderTriggers { order: placed },
     };
-    live.groups[who.0 as usize] += 1;
-    live.decisions += 1;
     apply_now(live, actor, action)
 }

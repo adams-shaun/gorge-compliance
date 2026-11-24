@@ -27,8 +27,18 @@ pub enum Family {
     OptionalCost,
     /// `ChooseXValue`: the value of X.
     ChooseX,
-    /// `DiscardToHandSize`: `count` cards, one pick per substep.
-    DiscardToHand,
+    /// A pick of `min..=max` cards from a pool, one `select_object` per pick: `DiscardToHandSize`,
+    /// `DiscardChoice`, `RevealChoice`, `SearchChoice`, `EffectZoneChoice`, the simple `PayCost` kinds
+    /// and `ChooseLegend`.
+    Pool,
+    /// `ModeChoice`: `choose_spell_mode` picks.
+    Modes,
+    /// `OrderTriggers`: `order_pick` triggers.
+    OrderTriggers,
+    /// `ScryChoice`, `SurveilChoice`: `arrange_card` per looked-at card, then `order_pick` arrangement.
+    Arrange,
+    /// `TopOrBottomChoice`: `choose_option` top or bottom.
+    TopOrBottom,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -67,7 +77,7 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::GameOver { .. } => ("GameOver", Pose::Terminal),
         WaitingFor::ReplacementChoice { .. } => ("ReplacementChoice", Pose::Unposed),
         WaitingFor::EntryControllerChoice { .. } => ("EntryControllerChoice", Pose::Unposed),
-        WaitingFor::OrderTriggers { .. } => ("OrderTriggers", Pose::Unposed),
+        WaitingFor::OrderTriggers { .. } => ("OrderTriggers", Pose::Posed(Family::OrderTriggers)),
         WaitingFor::CopyTargetChoice { .. } => ("CopyTargetChoice", Pose::Unposed),
         WaitingFor::ExploreChoice { .. } => ("ExploreChoice", Pose::Unposed),
         WaitingFor::ReturnAsAuraTarget { .. } => ("ReturnAsAuraTarget", Pose::Unposed),
@@ -76,7 +86,7 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::CrewVehicle { .. } => ("CrewVehicle", Pose::Unposed),
         WaitingFor::StationTarget { .. } => ("StationTarget", Pose::Unposed),
         WaitingFor::SaddleMount { .. } => ("SaddleMount", Pose::Unposed),
-        WaitingFor::ScryChoice { .. } => ("ScryChoice", Pose::Unposed),
+        WaitingFor::ScryChoice { .. } => ("ScryChoice", Pose::Posed(Family::Arrange)),
         WaitingFor::RippleRevealChoice { .. } => ("RippleRevealChoice", Pose::Unposed),
         WaitingFor::RippleBottomOrder { .. } => ("RippleBottomOrder", Pose::Unposed),
         WaitingFor::RevealUntilBottomOrder { .. } => ("RevealUntilBottomOrder", Pose::Unposed),
@@ -87,9 +97,9 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::DieKeepChoice { .. } => ("DieKeepChoice", Pose::Unposed),
         WaitingFor::DigChoice { .. } => ("DigChoice", Pose::Unposed),
         WaitingFor::DigRestSplitChoice { .. } => ("DigRestSplitChoice", Pose::Unposed),
-        WaitingFor::SurveilChoice { .. } => ("SurveilChoice", Pose::Unposed),
-        WaitingFor::RevealChoice { .. } => ("RevealChoice", Pose::Unposed),
-        WaitingFor::SearchChoice { .. } => ("SearchChoice", Pose::Unposed),
+        WaitingFor::SurveilChoice { .. } => ("SurveilChoice", Pose::Posed(Family::Arrange)),
+        WaitingFor::RevealChoice { .. } => ("RevealChoice", Pose::Posed(Family::Pool)),
+        WaitingFor::SearchChoice { .. } => ("SearchChoice", Pose::Posed(Family::Pool)),
         WaitingFor::SearchPartitionChoice { .. } => ("SearchPartitionChoice", Pose::Unposed),
         WaitingFor::OutsideGameChoice { .. } => ("OutsideGameChoice", Pose::Unposed),
         WaitingFor::ChooseFromZoneChoice { .. } => ("ChooseFromZoneChoice", Pose::Unposed),
@@ -98,9 +108,9 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::SpellCopyOrderChoice { .. } => ("SpellCopyOrderChoice", Pose::Unposed),
         WaitingFor::ChooseOneOfBranch { .. } => ("ChooseOneOfBranch", Pose::Unposed),
         WaitingFor::ConniveDiscard { .. } => ("ConniveDiscard", Pose::Unposed),
-        WaitingFor::DiscardChoice { .. } => ("DiscardChoice", Pose::Unposed),
+        WaitingFor::DiscardChoice { .. } => ("DiscardChoice", Pose::Posed(Family::Pool)),
         WaitingFor::HeroEventChoice { .. } => ("HeroEventChoice", Pose::Unposed),
-        WaitingFor::EffectZoneChoice { .. } => ("EffectZoneChoice", Pose::Unposed),
+        WaitingFor::EffectZoneChoice { .. } => ("EffectZoneChoice", Pose::Posed(Family::Pool)),
         WaitingFor::DrawnThisTurnTopdeckChoice { .. } => ("DrawnThisTurnTopdeckChoice", Pose::Unposed),
         WaitingFor::LearnChoice { .. } => ("LearnChoice", Pose::Unposed),
         WaitingFor::ManifestDreadChoice { .. } => ("ManifestDreadChoice", Pose::Unposed),
@@ -111,8 +121,8 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::OpponentGuess { .. } => ("OpponentGuess", Pose::Unposed),
         WaitingFor::SpellbookDraft { .. } => ("SpellbookDraft", Pose::Unposed),
         WaitingFor::DamageSourceChoice { .. } => ("DamageSourceChoice", Pose::Unposed),
-        WaitingFor::ModeChoice { .. } => ("ModeChoice", Pose::Unposed),
-        WaitingFor::DiscardToHandSize { .. } => ("DiscardToHandSize", Pose::Posed(Family::DiscardToHand)),
+        WaitingFor::ModeChoice { .. } => ("ModeChoice", Pose::Posed(Family::Modes)),
+        WaitingFor::DiscardToHandSize { .. } => ("DiscardToHandSize", Pose::Posed(Family::Pool)),
         WaitingFor::OptionalCostChoice { .. } => ("OptionalCostChoice", Pose::Posed(Family::OptionalCost)),
         WaitingFor::ChooseGiftRecipient { .. } => ("ChooseGiftRecipient", Pose::Unposed),
         WaitingFor::SpliceOffer { .. } => ("SpliceOffer", Pose::Unposed),
@@ -147,7 +157,7 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::ChooseDungeon { .. } => ("ChooseDungeon", Pose::Unposed),
         WaitingFor::ChooseDungeonRoom { .. } => ("ChooseDungeonRoom", Pose::Unposed),
         WaitingFor::SpecializeColor { .. } => ("SpecializeColor", Pose::Unposed),
-        WaitingFor::PayCost { .. } => ("PayCost", Pose::Unposed),
+        WaitingFor::PayCost { .. } => ("PayCost", Pose::Posed(Family::Pool)),
         WaitingFor::ActivationCostOneOfChoice { .. } => ("ActivationCostOneOfChoice", Pose::Unposed),
         WaitingFor::CostTypeChoice { .. } => ("CostTypeChoice", Pose::Unposed),
         WaitingFor::BlightChoice { .. } => ("BlightChoice", Pose::Unposed),
@@ -158,7 +168,7 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::HarmonizeTapChoice { .. } => ("HarmonizeTapChoice", Pose::Unposed),
         WaitingFor::RevealUntilKeptChoice { .. } => ("RevealUntilKeptChoice", Pose::Unposed),
         WaitingFor::RepeatDecision { .. } => ("RepeatDecision", Pose::Unposed),
-        WaitingFor::TopOrBottomChoice { .. } => ("TopOrBottomChoice", Pose::Unposed),
+        WaitingFor::TopOrBottomChoice { .. } => ("TopOrBottomChoice", Pose::Posed(Family::TopOrBottom)),
         WaitingFor::PopulateChoice { .. } => ("PopulateChoice", Pose::Unposed),
         WaitingFor::ClashChooseOpponent { .. } => ("ClashChooseOpponent", Pose::Unposed),
         WaitingFor::ChooseFromZoneOpponentChooser { .. } => ("ChooseFromZoneOpponentChooser", Pose::Unposed),
@@ -171,7 +181,7 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::SeparatePilesChoice { .. } => ("SeparatePilesChoice", Pose::Unposed),
         WaitingFor::SecretAgendaChoice { .. } => ("SecretAgendaChoice", Pose::Unposed),
         WaitingFor::CompanionReveal { .. } => ("CompanionReveal", Pose::Unposed),
-        WaitingFor::ChooseLegend { .. } => ("ChooseLegend", Pose::Unposed),
+        WaitingFor::ChooseLegend { .. } => ("ChooseLegend", Pose::Posed(Family::Pool)),
         WaitingFor::CommanderZoneChoice { .. } => ("CommanderZoneChoice", Pose::Unposed),
         WaitingFor::BattleProtectorChoice { .. } => ("BattleProtectorChoice", Pose::Unposed),
         WaitingFor::ProliferateChoice { .. } => ("ProliferateChoice", Pose::Unposed),
@@ -212,7 +222,7 @@ mod tests {
         let src = include_str!("waiting.rs");
         let body = src.split("pub fn classify").nth(1).unwrap().split("#[cfg(test)]").next().unwrap();
         let posed = body.lines().filter(|l| l.trim_start().starts_with("WaitingFor::") && l.contains("Pose::Posed(")).count();
-        assert_eq!(posed, 11);
+        assert_eq!(posed, 22);
         let terminal = body.lines().filter(|l| l.trim_start().starts_with("WaitingFor::") && l.contains("Pose::Terminal")).count();
         assert_eq!(terminal, 1);
     }
