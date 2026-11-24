@@ -154,3 +154,22 @@ func TestSearchZoneElectionScriptsPerZone(t *testing.T) {
 		}
 	}
 }
+
+// A waterbend {X} cost is one VariableManaCost announce: forgeCostSymbols
+// already reads Waterbend<X> as {X}, so the non-mana variable-cost walk must not
+// count the same token again.
+func TestActivationXAnnounceCountWaterbendIsOne(t *testing.T) {
+	for _, tc := range []struct {
+		cost string
+		want int
+	}{
+		{"Waterbend<X>", 1},
+		{"Waterbend<3>", 0},
+		{"X 1", 1},
+		{"X Discard<X/Card>", 2},
+	} {
+		if got := activationXAnnounceCount(tc.cost); got != tc.want {
+			t.Errorf("activationXAnnounceCount(%q) = %d, want %d", tc.cost, got, tc.want)
+		}
+	}
+}
