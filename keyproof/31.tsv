@@ -31,12 +31,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 311f38a6-f68f-4d30-bc4e-62339f1e0d88	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 311f38a6-f68f-4d30-bc4e-62339f1e0d88	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3121eecd-5f8a-408f-8b2d-75e13aa8a1ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31265357-5ecb-4d83-80ff-1795b1dfdecb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gutless-plunderer:f0t0:s1,f:xs:XP:gutless-plunderer:f0t0:s1	-	-	-	25696bf19d5b	-	6ed8d1b476d6	-	-	2026-11-24	xproof
+31265357-5ecb-4d83-80ff-1795b1dfdecb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gutless-plunderer:f0t0:s1,f:xs:XP:gutless-plunderer:f0t0:s1	-	-	-	64a08ba7d913	-	6ed8d1b476d6	-	-	2026-11-24	xproof
 31265357-5ecb-4d83-80ff-1795b1dfdecb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gutless Plunderer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31265357-5ecb-4d83-80ff-1795b1dfdecb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gutless Plunderer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31265357-5ecb-4d83-80ff-1795b1dfdecb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 31279757-499a-4d52-aa81-76b6f1983b53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3127ae9b-a7a7-43ec-89d7-688f8445b33d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:garruk-s-uprising:f0t0:s1,f:xs:XP:garruk-s-uprising:f0t0:s1	-	-	-	25696bf19d5b	-	c4ae9db808ee	-	-	2026-11-24	xproof
+3127ae9b-a7a7-43ec-89d7-688f8445b33d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:garruk-s-uprising:f0t0:s1,f:xs:XP:garruk-s-uprising:f0t0:s1	-	-	-	64a08ba7d913	-	c4ae9db808ee	-	-	2026-11-24	xproof
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Garruk's Uprising/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Garruk's Uprising/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31d4d8ce-36ba-4297-8c7a-34a83ba25255	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31d4d8ce-36ba-4297-8c7a-34a83ba25255	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31d4d8ce-36ba-4297-8c7a-34a83ba25255	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31d572b8-2c5e-4819-b2a6-e7ef90872d9e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+31d572b8-2c5e-4819-b2a6-e7ef90872d9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bounteous-kirin:cast:s1,f:xs:XP:bounteous-kirin:cast:s1	-	-	-	64a08ba7d913	-	0ff30cda4580	-	-	2026-11-24	xproof
 31d572b8-2c5e-4819-b2a6-e7ef90872d9e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31d8c2c4-3309-4eee-a704-f760f381f080	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31d9a771-09ae-4cd4-bd19-6012f839a9e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31f15274-301b-47c5-ba19-0ced04520878	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wayfarer-s-bauble:cast:s1,f:xs:XP:wayfarer-s-bauble:cast:s1	-	-	-	25696bf19d5b	-	c609a4e2c8c6	-	-	2026-11-24	xproof
 31f15274-301b-47c5-ba19-0ced04520878	f0/a0	ChangeZone	agreed	-	FX	start	3	0	x:xs:XP:ambrosia-whiteheart:cast:s2,f:xs:XP:ambrosia-whiteheart:cast:s2	-	-	-	5437c1394672	-	c609a4e2c8c6	-	-	2026-11-24	xproof
 31f32afa-5b2a-4218-ae7b-642e1cac3911	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31f3a9f3-881e-4dc9-b71d-5d1fc86477bf	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	bbfcde54140c	-	-	2026-11-24	xproof
+31f3a9f3-881e-4dc9-b71d-5d1fc86477bf	cast	cast	owed	harness	-	start	0	0	-	-	-	-	64a08ba7d913	-	bbfcde54140c	-	-	2026-11-24	xproof
 31f3d37f-e613-427f-b34c-cc87611ea078	cast	cast-resolve	agreed	-	X	scen	1	0	Muse Seeker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31f3d37f-e613-427f-b34c-cc87611ea078	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Muse Seeker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31f54f88-85a6-43f4-a6de-fb6ef5f0c38d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
