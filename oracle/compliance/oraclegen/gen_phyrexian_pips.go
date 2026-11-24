@@ -50,6 +50,10 @@ type xanswersExtra struct {
 	forage map[int][]string
 	// ownBounce marks the steps that pose an own-bounce hidden pick.
 	ownBounce map[int]bool
+	// bolster marks the decisions whose counter_pick is a Bolster tie
+	// election, which XMage's BolsterEffect asks through chooseTarget
+	// (bolster_pick.go).
+	bolster map[int]bool
 	// snaps is the gorge result's checkpoints: the destination of a
 	// hand_move/library_placement decision is not a field, so the answer
 	// router re-derives a top placement from the after-step library top.

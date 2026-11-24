@@ -1318,11 +1318,15 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var searchZones map[int]searchZoneAsk
 	var forage map[int][]string
 	var ownBounce map[int]bool
+	var bolster map[int]bool
 	var snaps []rules.OracleSnapshot
 	var orderAsks map[int]bool
 	for _, ex := range extras {
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
+		}
+		if bolster == nil {
+			bolster = ex.bolster
 		}
 		if forage == nil {
 			forage = ex.forage
@@ -1851,7 +1855,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = append(as, XAnswer{d.Seat, "choice", JoinedChoice(d)})
 			} else {
 				for k, label := range d.Picks {
-					switch pickQueue(d, k, label) {
+					switch pickQueue(d, k, label, bolster[i]) {
 					case "skip":
 						// XMage resolves this pick inside its computer player (a
 						// library search) or pays it from the pool (a mana-tapping
@@ -3840,8 +3844,13 @@ func twoPilesPileAnswer(d rules.OracleDecision) string {
 // pickQueue is xmQueue for the k-th pick, except that a search of ANOTHER
 // player's library (Ancient Vendetta's "search target opponent's ... library")
 // reaches XMage's choice queue: only a search of your own library is the
-// TargetCardInLibrary target ask (measured on the std pass).
-func pickQueue(d rules.OracleDecision, k int, label string) string {
+// TargetCardInLibrary target ask (measured on the std pass). bolster marks
+// the decision as a Bolster tie election, whose counter_pick XMage asks
+// through chooseTarget (bolster_pick.go).
+func pickQueue(d rules.OracleDecision, k int, label string, bolster bool) string {
+	if bolster && pickKind(d, k) == "counter_pick" {
+		return "target"
+	}
 	if d.Retarget {
 		// A ChangeTargets redirect (Bolt Bend) is XMage's chooseTarget:
 		// the new target rides the target queue even though gorge poses it
