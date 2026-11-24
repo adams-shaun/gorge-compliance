@@ -347,6 +347,8 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # form's entity pick (the lone Equipment the lone-forced shortcut consumes) is remembered as that attachment's yes. Test
 # UnmappedAsksJoinDirectionAttachTest (5 tests, five fixtures/unmapped requests); full driver suite 177 tests. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-number-direction-attach.
+# d0f16bee2e0 = the merge of a4fa8d45a56 and fef74c5308f, carrying all three fixes (the OddsOrEvens binary,
+# the repeated-mode/NICKNAME/zero-option driver work and the Myriad-only AtEOT guard).
 # a4fa8d45a56 = the merge of 65c6664d90 and a445a858b2, carrying both fixes.
 # 65c6664d90 = d1b608ce5d plus the ChooseEvenOddEffect binary: chooseBinary(OddsOrEvens), true = Odd, now takes gorge's
 # choose_n whose pick kind is odd/even/evenodd -- Extinction Event's resolution ask `choose_n[odd] [odd]` and Gollum, Riddle
@@ -355,6 +357,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # unmapped binary kind still misses loudly. OddsOrEvensBinaryTest replays both exported requests; the full driver suite is
 # 179 tests. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-odd-even-binary.
+# 0c4ca7afb3d = d1b608ce5d plus three matching gaps from xproof clusters xpt-7553d8f4, xpt-7852725e, xpt-b0865a52 and
+# xpt-a3ee64aa. CR 700.2d: ScriptedController.chooseModeForAbility passes allowRepeat to StepMachine.chooseModes, which
+# binds a mode already in the answer again (Verdant Confluence [Return, Search, Return], Wretched Confluence [draw x3]).
+# CR 603.3b: StepMachine.norm folds the raw NICKNAME token and the host's short name (before the first comma) to one
+# placeholder, so Uro's sacrifice and draw ETB triggers bind in gorge's order. CR 608.2c/700.2: pickObjects with zero
+# options consumes only an explicit empty answer that is next, leaving Dawnbreak Reclaimer's p1 ChoosePlayer pick queued;
+# the following Optional ChangeZoneAll with nothing remembered answers no like the zero-candidate ChangeZone gate.
+# Test RepeatModesNicknameZeroPickTest (4 tests, four fixtures/repeat-modes-nickname-zeropick requests), run by
+# scripts/forge-oracle-test-repeat-modes-nickname-zeropick.sh; full driver suite (181 tests) green on it. Driver-only;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick.
 # a445a858b2 = d1b608ce5d (the 177-test driver) plus the Myriad-only AtEOT empty-set guard: the fork's Myriad fix (f30d448731) made
 # SpellAbilityEffect.registerDelayedTrigger return on an empty card set for every AtEOT caller, which dropped the delayed
 # trigger CR 603.7a creates for an unconditional "exile it at the beginning of the next end step" (Mordor on the March with
@@ -363,7 +375,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # fails on d1b608ce5d and passes after; MyriadNoTokensCreatesNoDelayedTriggerTest still passes; the driver suite (177 tests) passes on
 # the patched forge-game. cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-mordor-empty-delayed-trigger-on-d1b6
 # (the 8653216df2 commit cherry-picked onto d1b608ce5d, so the Join Forces / LeftOrRight / Attach mappings stay).
-FORGE_ORACLE_REF ?= a4fa8d45a56b654c900c4f05b3ebdffba8c9b8fd
+# d0f16bee2e0 = the clean merge of a4fa8d45a56 and fef74c5308f: they touch disjoint files (the OddsOrEvens and
+# repeat-mode driver work vs the forge-game guard), so the pin keeps all three fixes; die-roll code is unchanged.
+# fef74c5308f = the clean merge of 0c4ca7afb3d and a445a858b2: the repeated-mode/NICKNAME/zero-option driver work and the
+# forge-game Myriad-only AtEOT guard touch disjoint files, so the pin keeps both. Driver and die-roll code are unchanged from
+# 0c4ca7afb3d; MordorOnTheMarchNothingExiledTest and MyriadNoTokensCreatesNoDelayedTriggerTest keep the a445a858b2 evidence.
+# Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick-merge.
+FORGE_ORACLE_REF ?= d0f16bee2e018d35874a0a8838491c1af1b02b82
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
