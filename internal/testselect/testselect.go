@@ -48,6 +48,7 @@ var verdictProducerPrefixes = []string{
 	"oracle/xmageoracle/",
 	"cmd/oraclediff/",
 	"cmd/compliance/",
+	"oracle/validation/oracle/", // full-replay.sh, std-write.sh: write verdict rows
 }
 
 // verdictProducerFiles are the regen recipe's scripts and the build file that
@@ -63,6 +64,9 @@ var verdictProducerFiles = map[string]bool{
 	"scripts/compliance-pass.sh":    true,
 	"scripts/xmage-oracle-run.sh":   true,
 	"scripts/xmage-oracle-setup.sh": true,
+	"scripts/forge-pass.sh":         true, // --verdicts writes Forge-only rows
+	"scripts/forge-oracle-run.sh":   true,
+	"scripts/forge-oracle-setup.sh": true,
 }
 
 // Packages returns the Go test packages for changed repo-relative paths.

@@ -43,10 +43,12 @@ OUT=
 ERR=
 
 # run ARGS... — run the wrapper in the fixture repo with the stubs on PATH.
+# GOWORK is cleared so the log is the same under CI (GOWORK=off) and locally;
 # RUN_PATH overrides PATH; STUB_MB, STUB_MB_RC and STUB_GO_RC reach the stubs.
 run() {
 	: > "$LOG"
 	( cd "$REPO" && env \
+		GOWORK= \
 		PATH="${RUN_PATH:-$TMP/bin:$PATH}" \
 		STUB_LOG="$LOG" \
 		STUB_MB="${STUB_MB:-deadbeef}" \

@@ -118,6 +118,11 @@ func TestVerdictPipelineChangesSelectRatchetPackages(t *testing.T) {
 		"scripts/compliance-pass.sh",
 		"scripts/xmage-oracle-run.sh",
 		"scripts/xmage-oracle-setup.sh",
+		"scripts/forge-pass.sh",
+		"scripts/forge-oracle-run.sh",
+		"scripts/forge-oracle-setup.sh",
+		"oracle/validation/oracle/full-replay.sh",
+		"oracle/validation/oracle/std-write.sh",
 	}
 	for _, p := range paths {
 		t.Run(strings.ReplaceAll(p, "/", "_"), func(t *testing.T) {
