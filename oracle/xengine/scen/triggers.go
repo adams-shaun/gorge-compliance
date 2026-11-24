@@ -477,3 +477,48 @@ func combatStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 	f.Focus = &StartFocus{Seat: seatPtr(0), Card: attacker, Kind: "attack"}
 	return ""
 }
+
+// Targeting carriers: Murder ({1}{B}{B} instant, destroy target creature) is
+// the opponent's spell that targets the card, and the first of ownTargeters
+// the corpus plays its controller's: "target creature you control", so a
+// creature a need placed for the opponent is never the target.
+const oppTargeter = "Murder"
+
+var ownTargeters = []string{"Ranger's Guile", "Blossoming Defense"}
+
+// targetStart is "whenever this becomes the target of a spell or ability"
+// (BecomesTarget on Card.Self): ward (Ward True) and an OppCtrl source are
+// the opponent casting Murder at the card on its turn, valiant and a YouCtrl
+// source the card's controller casting Ranger's Guile (target creature you
+// control) at it. The card is a creature on the battlefield, its seat's only
+// one unless a need places another.
+func targetStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile) string {
+	none := "no-generator:trigger:BecomesTarget"
+	if trig.Params["ValidTarget"] != "Card.Self" || !face.IsCreature() {
+		return none
+	}
+	caster, spells := 1, []string{oppTargeter}
+	switch src := trig.Params["ValidSource"]; {
+	case trig.Params["Ward"] == "True" || src == "SpellAbility.OppCtrl" || src == "Card.OppCtrl":
+	case src == "SpellAbility.YouCtrl" || src == "Card.YouCtrl":
+		caster, spells = 0, ownTargeters
+	default:
+		return none + ":source"
+	}
+	spell := ""
+	for _, n := range spells {
+		if c, ok := reg.Lookup(n); ok && b.Playable(c) {
+			spell = n
+			break
+		}
+	}
+	if spell == "" {
+		return none + ":source"
+	}
+	f.Setup.P0.Battlefield = []string{card}
+	seats := [2]*StartSeat{&f.Setup.P0, &f.Setup.P1}
+	castCarrier(reg, seats[caster], spell)
+	f.Active = caster
+	f.Focus = &StartFocus{Seat: seatPtr(caster), Card: spell, Kind: "cast"}
+	return ""
+}

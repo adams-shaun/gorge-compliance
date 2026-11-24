@@ -623,3 +623,16 @@ func TestStartCombat(t *testing.T) {
 			focusCard: "Memnite", focusKind: "attack"},
 	})
 }
+
+// TestStartBecomesTarget: ward is the opponent casting Murder at the card on
+// its turn, valiant the card's controller casting Ranger's Guile (target
+// creature you control, so an opposing creature a need placed is never the
+// target).
+func TestStartBecomesTarget(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Heartfire Hero", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"}, p0BF: []string{"Heartfire Hero", "Forest"},
+			focusCard: "Ranger's Guile", focusKind: "cast"},
+		{card: "Armored Armadillo", key: "f0/t0", active: 1, maxTurns: 1, p0BF: []string{"Armored Armadillo"},
+			p1Hand: []string{"Murder"}, p1BF: rep("Swamp", 3), focusSeat: 1, focusCard: "Murder", focusKind: "cast"},
+	})
+}

@@ -257,6 +257,10 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			if why := combatStart(reg, b, face, card, trig, f); why != "" {
 				return refuse(why)
 			}
+		case "BecomesTarget":
+			if why := targetStart(reg, b, face, card, trig, f); why != "" {
+				return refuse(why)
+			}
 		case "Attacks":
 			p0.Battlefield = []string{card}
 			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "attack"}
