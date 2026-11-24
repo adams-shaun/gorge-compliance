@@ -522,3 +522,22 @@ func targetStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 	f.Focus = &StartFocus{Seat: seatPtr(caster), Card: spell, Kind: "cast"}
 	return ""
 }
+
+// lifeStart is "whenever you gain life" (LifeGained, ValidPlayer You): the
+// card on the battlefield and Chaplain's Blessing ({W} sorcery, you gain 5
+// life) cast on its controller's turn.
+func lifeStart(reg *cards.Registry, b *certdeck.Builder, card string, trig *cards.Trigger, f *StartFile) string {
+	none := "no-generator:trigger:LifeGained"
+	if vp := trig.Params["ValidPlayer"]; vp != "You" || trig.Params["TriggerZones"] != "Battlefield" || trig.Params["OpponentTurn"] != "" {
+		return none
+	}
+	const spell = "Chaplain's Blessing"
+	c, ok := reg.Lookup(spell)
+	if !ok || !b.Playable(c) {
+		return none
+	}
+	f.Setup.P0.Battlefield = []string{card}
+	castCarrier(reg, &f.Setup.P0, spell)
+	f.Focus = &StartFocus{Seat: seatPtr(0), Card: spell, Kind: "cast"}
+	return ""
+}

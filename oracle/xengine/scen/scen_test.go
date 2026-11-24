@@ -636,3 +636,13 @@ func TestStartBecomesTarget(t *testing.T) {
 			p1Hand: []string{"Murder"}, p1BF: rep("Swamp", 3), focusSeat: 1, focusCard: "Murder", focusKind: "cast"},
 	})
 }
+
+// TestStartLifeGained: "whenever you gain life" is Chaplain's Blessing ({W}
+// sorcery, gain 5 life) cast, and the life:gain need's enabler (Zuran Orb)
+// is dropped: the carrier is the lifegain.
+func TestStartLifeGained(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Drogskol Reaver", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Chaplain's Blessing"}, p0BF: []string{"Drogskol Reaver", "Plains"},
+			focusCard: "Chaplain's Blessing", focusKind: "cast"},
+	})
+}

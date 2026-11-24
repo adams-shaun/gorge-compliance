@@ -261,6 +261,10 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			if why := targetStart(reg, b, face, card, trig, f); why != "" {
 				return refuse(why)
 			}
+		case "LifeGained":
+			if why := lifeStart(reg, b, card, trig, f); why != "" {
+				return refuse(why)
+			}
 		case "Attacks":
 			p0.Battlefield = []string{card}
 			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "attack"}
@@ -290,9 +294,18 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		}
 	}
 	// Needs the start's own line already meets, or must not: a combat-damage
-	// start's attack must connect (no blocker).
+	// start's attack must connect (no blocker), and a lifegain start's carrier
+	// is the lifegain.
 	skip := func(n certdeck.Need) bool {
-		return trig != nil && (trig.Mode == "DamageDone" || trig.Mode == "DamageDoneOnce") && n.Class == certdeck.OppBlockers
+		switch {
+		case trig == nil:
+			return false
+		case trig.Mode == "DamageDone" || trig.Mode == "DamageDoneOnce":
+			return n.Class == certdeck.OppBlockers
+		case trig.Mode == "LifeGained":
+			return n.Class == certdeck.Life && n.Arg == "gain"
+		}
+		return false
 	}
 	if why, err := placeNeeds(reg, b, c, card, generic, skip, f); err != nil || why != "" {
 		if err != nil {
