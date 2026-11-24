@@ -525,15 +525,25 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * choose_n pick per exiled card, the bare card name; the ask's
          * trailing [choice_skip] is the Done option) at the front of the
          * choice queue into XMage's Delve special mana action: the choice
-         * becomes "Delve" and the exiled graveyard cards go to the front of
-         * the target queue, which the action's exile-from-graveyard target
-         * reads. Taken only when a controlled special action whose rule
-         * starts with "Delve" lists a card of the front answer's name among
-         * its legal (graveyard) targets; false (nothing queued) otherwise. */
+         * becomes that action's own rule text (TestPlayer's manual branch
+         * takes the action whose rule starts with the choice, and the Delve
+         * rule leads with its cost, "Exile a card from your graveyard: Delve
+         * (...)", so no short "Delve" key matches) and the exiled graveyard
+         * cards follow it on the choice queue: the exile cost's target is a
+         * Cost target, which TestPlayer asks through its choice queue (the
+         * target queue only feeds an ability's own targets). The action takes at most
+         * the cost target's maximum cards per activation (one in manual
+         * payment); further recorded picks stay queued for the next payment
+         * cycle, where XMage re-adds the action, as gorge re-poses its ask
+         * per pick. Taken only when the Delve special action lists a card of
+         * the front answer's name among its legal (graveyard) targets; false
+         * (nothing queued) otherwise. */
         private boolean queueDelveAction(Game game,
                 java.util.Collection<mage.abilities.SpecialAction> actions) {
             for (mage.abilities.SpecialAction action : actions) {
-                if (!action.getRule(true).startsWith("Delve")
+                // The class is the stable identity: the rule text leads with
+                // the exile cost, so it never starts with "Delve".
+                if (!"DelveSpecialAction".equals(action.getClass().getSimpleName())
                         || !action.canActivate(getId(), game).canActivate()) {
                     continue;
                 }
@@ -547,7 +557,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 Set<UUID> legal = target.possibleTargets(getId(), action, game);
                 List<String> picked = new ArrayList<>();
                 Set<UUID> used = new java.util.HashSet<>();
-                while (picked.size() < getChoices().size() && used.size() < legal.size()) {
+                while (picked.size() < getChoices().size() && used.size() < legal.size()
+                        && picked.size() < target.getMaxNumberOfTargets()) {
                     String name = getChoices().get(picked.size());
                     UUID found = null;
                     for (UUID id : legal) {
@@ -572,14 +583,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 if (!getChoices().isEmpty() && TestPlayer.CHOICE_SKIP.equals(getChoices().get(0))) {
                     getChoices().remove(0);
                 }
-                getChoices().add(0, "Delve");
+                getChoices().add(0, action.getRule(true));
                 for (int i = 0; i < picked.size(); i++) {
-                    getTargets().add(i, picked.get(i));
+                    getChoices().add(1 + i, picked.get(i));
                 }
                 if (target.getMaxNumberOfTargets() > picked.size() && legal.size() > picked.size()) {
-                    // The action takes up to one card per generic mana and
-                    // asks again while more can be chosen: close the ask.
-                    getTargets().add(picked.size(), TestPlayer.TARGET_SKIP);
+                    // The cost target takes up to one card per generic mana
+                    // and asks again while more can be chosen: close the ask.
+                    getChoices().add(1 + picked.size(), TestPlayer.CHOICE_SKIP);
                 }
                 convokeColour = null;
                 return true;

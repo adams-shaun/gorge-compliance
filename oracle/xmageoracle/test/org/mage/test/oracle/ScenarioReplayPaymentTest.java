@@ -66,11 +66,17 @@ public final class ScenarioReplayPaymentTest {
     }
 
     private static ScriptedPayment newPlayer(Game game) throws Exception {
+        return newPlayer(game, null);
+    }
+
+    /** With a real driver as the player's owner, for tests that run a cost's
+     * target ask (the player's choose reads the owner's cast flags). */
+    private static ScriptedPayment newPlayer(Game game, ScenarioReplay owner) throws Exception {
         Class<?> cls = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
         Constructor<?> ctor = cls.getDeclaredConstructor(TestComputerPlayer.class, ScenarioReplay.class);
         ctor.setAccessible(true);
         TestPlayer p = (TestPlayer) ctor.newInstance(
-                new TestComputerPlayer("A", RangeOfInfluence.ONE), null);
+                new TestComputerPlayer("A", RangeOfInfluence.ONE), owner);
         game.addPlayer(p, new Deck());
         return new ScriptedPayment(p);
     }
@@ -425,18 +431,30 @@ public final class ScenarioReplayPaymentTest {
         return card.getId();
     }
 
-    /** A Delve-shaped special action (rule text "Delve (...)", a graveyard
-     * target) with the recorded exile pick, the bare card name gorge's
-     * choose_n records, at the front of the choice queue: the hook must
-     * translate it to the action's choice key and the card to its target,
-     * not return false and leave the pick for auto-payment to ignore. A name
+    /** The real Delve special action for a cost with its generic unpaid, built
+     * the way the cast's payment cycle builds it. */
+    private static mage.abilities.SpecialAction delveAction(Game game, TestPlayer p, String cost) {
+        ManaCostsImpl<ManaCost> costs = new ManaCostsImpl<>(cost);
+        SpellAbility spell = new SpellAbility(costs, "Delve test");
+        spell.setControllerId(p.getId());
+        new mage.abilities.keyword.DelveAbility(false).addSpecialAction(spell, game, costs);
+        return game.getState().getSpecialActions().getControlledBy(p.getId(), true)
+                .values().iterator().next();
+    }
+
+    /** The recorded Delve exile pick, the bare card name gorge's choose_n
+     * records, at the front of the choice queue with the ask's trailing
+     * [choice_skip]: the hook must translate it to the Delve action's choice
+     * key (its own rule text: TestPlayer matches special actions by rule
+     * prefix and the Delve rule leads with its exile cost) and the card to
+     * its target, and activating that action must exile the card. A name
      * outside the graveyard, or no Delve action, must queue nothing. */
     private static void testDelveExilePickIsTakenAsSpecialAction() throws Exception {
         Game game = game();
-        ScriptedPayment sp = newPlayer(game);
+        ScriptedPayment sp = newPlayer(game, new ScenarioReplay());
         TestPlayer p = sp.player;
         p.updateRange(game);
-        addToGraveyard(game, p, "Grave Strength");
+        UUID strength = addToGraveyard(game, p, "Grave Strength");
         addToGraveyard(game, p, "Other Card");
         Method queue = p.getClass().getDeclaredMethod("queueTapPaymentAction", Game.class);
         queue.setAccessible(true);
@@ -446,12 +464,7 @@ public final class ScenarioReplayPaymentTest {
         equal(false, queue.invoke(p, game));
         equal("[Grave Strength]", p.getChoices().toString());
         p.getChoices().clear();
-        // The real Delve special action, built the way the cast's payment
-        // cycle builds it for {1}{B}{B}{B}{B} with the generic unpaid.
-        ManaCostsImpl<ManaCost> costs = new ManaCostsImpl<>("{1}{B}{B}{B}{B}");
-        SpellAbility spell = new SpellAbility(costs, "Delve test");
-        spell.setControllerId(p.getId());
-        new mage.abilities.keyword.DelveAbility().addSpecialAction(spell, game, costs);
+        mage.abilities.SpecialAction action = delveAction(game, p, "{1}{B}{B}{B}{B}");
         // A name that is no graveyard card queues nothing.
         p.addChoice("Not In Graveyard");
         equal(false, queue.invoke(p, game));
@@ -460,16 +473,66 @@ public final class ScenarioReplayPaymentTest {
         p.addChoice("Grave Strength");
         p.addChoice(TestPlayer.CHOICE_SKIP);
         equal(true, queue.invoke(p, game));
-        equal("[Delve]", p.getChoices().toString());
-        equal("[Grave Strength]", p.getTargets().toString());
+        equal("[" + action.getRule(true) + ", Grave Strength]", p.getChoices().toString());
+        equal("[]", p.getTargets().toString());
+        // The key is one TestPlayer's manual special-action branch takes.
+        if (!action.getRule(true).startsWith(p.getChoices().get(0))) {
+            throw new AssertionError("choice key is not a rule prefix");
+        }
+        // TestPlayer's manual branch drops the key, then activates the action,
+        // whose exile cost reads the queued name from the choice queue. (activate, not
+        // activateAbility: resolving Delve's effect needs the spell on the
+        // stack, and the cost payment is what exiles the card.)
+        p.getChoices().remove(0);
+        action.setControllerId(p.getId());
+        equal(true, action.activate(game, false));
+        equal(false, p.getGraveyard().contains(strength));
         sp.end();
-        System.out.println("PASS a delve exile pick becomes the special action's choice key and target");
+        System.out.println("PASS a delve exile pick becomes the special action's choice key and card name");
+    }
+
+    /** A shortfall of two with two recorded picks: XMage's manual payment
+     * takes one graveyard card per activation, so the hook consumes one pick
+     * and leaves the second queued for the next payment cycle (gorge re-poses
+     * its ask per pick) rather than queueing a name no target ask takes. */
+    private static void testDelveTwoPicksTakeOnePerActivation() throws Exception {
+        Game game = game();
+        ScriptedPayment sp = newPlayer(game, new ScenarioReplay());
+        TestPlayer p = sp.player;
+        p.updateRange(game);
+        UUID first = addToGraveyard(game, p, "Grave Strength");
+        UUID second = addToGraveyard(game, p, "Other Card");
+        Method queue = p.getClass().getDeclaredMethod("queueTapPaymentAction", Game.class);
+        queue.setAccessible(true);
+        sp.begin("");
+        mage.abilities.SpecialAction action = delveAction(game, p, "{2}{B}");
+        p.addChoice("Grave Strength");
+        p.addChoice("Other Card");
+        p.addChoice(TestPlayer.CHOICE_SKIP);
+        equal(true, queue.invoke(p, game));
+        equal("[" + action.getRule(true) + ", Grave Strength, Other Card, " + TestPlayer.CHOICE_SKIP + "]",
+                p.getChoices().toString());
+        equal("[]", p.getTargets().toString());
+        p.getChoices().remove(0);
+        action.setControllerId(p.getId());
+        equal(true, action.activate(game, false));
+        equal(false, p.getGraveyard().contains(first));
+        equal(true, p.getGraveyard().contains(second));
+        // Next cycle: the action is re-added and takes the second pick.
+        equal("[Other Card, " + TestPlayer.CHOICE_SKIP + "]", p.getChoices().toString());
+        game.getState().getSpecialActions().clear();
+        mage.abilities.SpecialAction again = delveAction(game, p, "{1}{B}");
+        equal(true, queue.invoke(p, game));
+        equal("[" + again.getRule(true) + ", Other Card]", p.getChoices().toString());
+        sp.end();
+        System.out.println("PASS a delve action takes one recorded pick per activation");
     }
 
     public static void main(String[] args) throws Exception {
         testTapPaymentPickParsing();
         testImproviseTapIsTakenAsSpecialAction();
         testDelveExilePickIsTakenAsSpecialAction();
+        testDelveTwoPicksTakeOnePerActivation();
         testRecordedSplit();
         testGorgeSplit();
         testRunCodeRecordedPayment();
