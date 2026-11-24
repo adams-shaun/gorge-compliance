@@ -1,0 +1,23 @@
+Priority: 2
+Kind: defect
+
+# xengine lowering drops Delve exile picks: XMage keeps the graveyard cards and Forge refuses the cast
+
+## Symptom
+
+SUP-s293-supp window `xe:RAND:2:16:w16` (farm row 2026-11-20T07:34:51Z), step 5 (cast): p0 casts Empty the Pits (`K:Delve`, X X B B B B). gorge p0.graveyard is `[]`, XMage's is `[Grave Strength]`; the Forge follower reports `harness: step 5 (cast) p0:Empty the Pits was not put on the stack (cost unpaid, no legal target, or Forge refused it)`.
+
+## Root cause
+
+CR 702.66a: "Delve is a static ability that functions while the spell with delve is on the stack. 'Delve' means 'For each generic mana in this spell's total cost, you may exile a card from your graveyard rather than pay that mana.'" Gorge poses the exile as a KChoose of kind "exile" (gorge module, decision package, KChoose doc) and prices it in gorge's cast payment plan (rules package, cast_paymentplan.go). XMage models Delve as a special mana-payment action (mage-fork `DelveAbility.addSpecialAction`, a `DelveSpecialAction` with an `ExileFromGraveCost`); the driver at oracle/xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java:483-490 activates only the "Improvise" and "Convoke" special actions, and no file under oracle/xmageoracle, oracle/xengine/lower or scripts mentions Delve. So the gorge pick is never replayed. Recorded as a (c) harness row in oracle/xengine/diagnosed.tsv (`blame|diverge|p0.graveyard|Empty the Pits`).
+
+## Workspace facts
+
+- XMage driver: oracle/xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java:467-520 (Improvise/Convoke special-action lowering, the pattern to extend with a "Delve" key whose target is the picked graveyard cards).
+- Forge driver: scripts/forge-oracle-run.sh and the Forge replay in cmd/oraclediff/forge*.go; the exile pick must pay the generic cost before the cast.
+- The farm repro dir was pruned; build a fixture by hand: p0 graveyard [Grave Strength], hand [Empty the Pits], cast with X=0 delving the one card.
+
+## Done means
+
+- [ ] a fixture casting Empty the Pits with a Delve exile replays on XMage with an empty graveyard: `make xmage-driver-tests` (operator-run; needs the out-of-tree build)
+- [ ] the same fixture's cast reaches the stack on Forge: `make smoke`
