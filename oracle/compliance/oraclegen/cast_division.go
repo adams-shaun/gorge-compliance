@@ -37,8 +37,11 @@ func castDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult) []r
 // those never posed a damage_split before -- except the XMage answer path
 // below, which always marks them), the cast-time "divide" ask is
 // removed and a "damage_split" decision carrying the announced shares is
-// inserted at the head of the step the spell resolves in, where gorge used to
-// pose it. Every other decision list is returned unchanged.
+// inserted: in the Forge view at the cast step, right after the root target
+// ask (the Forge driver allocates the division while targeting and takes it by
+// exact step); in the XMage view at the head of the step the spell resolves
+// in, where gorge used to pose it. Every other decision list is returned
+// unchanged.
 //
 // xmage is the XMage script's view. A cast whose targets travel in the step's
 // answers (a lowered xproof item) scripts that root target ask itself, at the
@@ -116,7 +119,15 @@ func castDivisionsFor(reg *cards.Registry, sc Scenario, res rules.OracleResult, 
 		default:
 			continue
 		}
-		split := rules.OracleDecision{Step: resolveStepOf(sc, res.Snapshots, k), Seat: t.Seat,
+		// The Forge driver allocates the division while the spell is
+		// cast (CR 601.2d), at the cast step, and takes it by exact step.
+		// The XMage view keeps the resolve step, where gorge used to pose
+		// the split.
+		splitStep := k
+		if xmage {
+			splitStep = resolveStepOf(sc, res.Snapshots, k)
+		}
+		split := rules.OracleDecision{Step: splitStep, Seat: t.Seat,
 			Kind: "choose_n", GorgeKind: "choose", Resume: "damage_split", Via: "cast division",
 			Options: n, Picks: []string{}, PickIdx: []int{}, PickRefs: []string{}}
 		for x, s := range shares {
@@ -144,6 +155,13 @@ func castDivisionsFor(reg *cards.Registry, sc Scenario, res rules.OracleResult, 
 		inserted := false
 		for x, d := range src {
 			if x == j {
+				continue
+			}
+			if !xmage && x == i {
+				// Forge: right after the root target ask, where the
+				// division ask sat.
+				next = append(next, d, split)
+				inserted = true
 				continue
 			}
 			if !inserted && d.Step >= split.Step && x > i {

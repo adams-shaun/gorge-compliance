@@ -349,6 +349,50 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** Whether the replay followed a recorded pass position (turn/step/active seat). */
     private boolean followedPassPosition = false;
 
+    /** Index of the one rule a trigger-order key picks by wording, or -1.
+     * Returns -1 when some rule already prefix-matches the key verbatim (then
+     * TestPlayer's own match is the answer) and when zero or several rules
+     * match after normalisation. */
+    static int triggerKeyMatch(String key, List<String> rules, String sourceName) {
+        for (String rule : rules) {
+            if (rule.startsWith(key)) {
+                return -1;
+            }
+        }
+        String want = triggerKeyForm(key, sourceName);
+        if (want.endsWith(".")) {
+            want = want.substring(0, want.length() - 1).trim();
+        }
+        if (want.isEmpty()) {
+            return -1;
+        }
+        int found = -1;
+        for (int i = 0; i < rules.size(); i++) {
+            if (triggerKeyForm(rules.get(i), sourceName).startsWith(want)) {
+                if (found >= 0) {
+                    return -1;
+                }
+                found = i;
+            }
+        }
+        return found;
+    }
+
+    /** Rule text folded for a wording-tolerant prefix match: markup dropped,
+     * lower case, the source's name as "{this}", whitespace collapsed, and a
+     * leading "when " / "whenever " as one token. */
+    static String triggerKeyForm(String text, String sourceName) {
+        String t = text.replaceAll("<[^<>]*>", "").toLowerCase(java.util.Locale.ROOT);
+        if (sourceName != null && !sourceName.isEmpty()) {
+            t = t.replace(sourceName.toLowerCase(java.util.Locale.ROOT), "{this}");
+        }
+        t = t.replaceAll("\\s+", " ").trim();
+        if (t.startsWith("whenever ")) {
+            t = "when " + t.substring("whenever ".length());
+        }
+        return t;
+    }
+
     /** TestPlayer normally delegates these library decisions directly to its AI,
      * bypassing the scripted target/choice queues. Route them through this player. */
     private static final class ScriptedChoicePlayer extends TestPlayer {
@@ -391,6 +435,36 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 getManaPool().setAutoPayment(autoPaymentBefore);
                 autoPaymentBefore = null;
             }
+        }
+
+        /** A same-source trigger-order key spelled in Forge's wording.
+         * TestPlayer matches the head choice with
+         * ability.toString().startsWith(choice) only; the generator's key is
+         * Forge's TriggerDescription$, which words the same trigger "When ..."
+         * where XMage prints "Whenever ..." (Hero of Oxid Ridge) and ends the
+         * key at a period where XMage's text continues (Nefarox's "sacrifices
+         * a creature of their choice."). An unmatched head is a strict
+         * "Missing CHOICE def" there. When the head prefix-matches no ability,
+         * take the one ability whose normalised rule starts with the
+         * normalised key (CR 603.3b: the controller's pick); none or several
+         * matching keeps TestPlayer's own handling. */
+        @Override
+        public mage.abilities.TriggeredAbility chooseTriggeredAbility(
+                List<mage.abilities.TriggeredAbility> abilities, Game game) {
+            if (!getChoices().isEmpty()) {
+                String choice = getChoices().get(0);
+                List<String> rules = new ArrayList<>();
+                for (mage.abilities.TriggeredAbility ability : abilities) {
+                    rules.add(ability.toString());
+                }
+                String name = abilities.isEmpty() ? "" : abilities.get(0).getSourceObject(game).getName();
+                int at = triggerKeyMatch(choice, rules, name);
+                if (at >= 0) {
+                    getChoices().remove(0);
+                    return abilities.get(at);
+                }
+            }
+            return super.chooseTriggeredAbility(abilities, game);
         }
 
         /** Run only the queued commands of the current phase occurrence.
@@ -4223,7 +4297,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** Whether a cast step's cast_mode is one this driver elects: Bargain,
      * "optionalcost", "kicked" (the single Kicker ask; kicked1/kicked2/kickedboth/
      * multikicked pose per-kicker asks in order and stay rejected), the face-down Disguise/Morph/Megamorph casts, the "plot" and
-     * "suspend" special actions, a graveyard "flashback" cast, and a "mayplay" cast of a card a
+     * "suspend" and "foretell" special actions, a graveyard "flashback" cast, and a "mayplay" cast of a card a
      * play-from-exile permission (Reckless Impulse) reaches are wired
      * ("plot_cast", the later cast of a plotted card, is not); so are the
      * "adventure_alt"/"omen_alt" casts of an Adventure or Omen half, whose
@@ -4239,6 +4313,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // "suspend": Suspend from hand (CR 702.62a) is a special action
                 // (CR 116.2f), XMage's SuspendAbility, activated like Plot.
                 || mode.equals("suspend")
+                // "foretell": Foretell from hand (CR 702.143a) is a special
+                // action (CR 116.2h), XMage's ForetellAbility, activated like Plot.
+                || mode.equals("foretell")
                 // "mayplay": the card is in exile (or wherever a play-from-exile
                 // permission reaches) rather than hand, but the cast itself is
                 // the card's ordinary SpellAbility, played by name. TestPlayer's
@@ -6568,6 +6645,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         throw new IllegalArgumentException("suspend step " + stepIdx + " has no xmage_ability");
                     }
                     activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), suspendText, stepIdx));
+                    return;
+                }
+                // "foretell" is XMage's Foretell special action from the hand
+                // (ForetellAbility is a SpecialAction with usesStack false,
+                // CR 116.2h): it pays {2} and exiles the card face down, no
+                // cast and no stack. Activated by its rule-text prefix
+                // "Foretell {cost}" like XMage's own foretell tests, scoped to
+                // the step's card so another foretell card in hand cannot be
+                // picked.
+                if ("foretell".equals(castMode)) {
+                    String foretellText = xabilityAt(stepIdx);
+                    if (foretellText.isEmpty()) {
+                        throw new IllegalArgumentException("foretell step " + stepIdx + " has no xmage_ability");
+                    }
+                    activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), foretellText, stepIdx));
                     return;
                 }
                 // "flashback" is the cast of a graveyard card for its
