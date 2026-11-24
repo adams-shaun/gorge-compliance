@@ -242,6 +242,28 @@ func TestXAnswersQueueRoutingShapes(t *testing.T) {
 			want: []XAnswer{{0, "choice", "White"}},
 		},
 		{
+			// A resolution-time "choose a colour" (Midvast Protector's ETB,
+			// Sygg, River Guide's protection grant) records the pick as the
+			// bare word; XMage's ChoiceColor key is the capitalised NAME.
+			name: "choose a color: white maps to White",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "choosecolor", Options: 5, Max: 1, Picks: []string{"white"}, PickRefs: []string{"white"}, PickIdx: []int{0}, PickKinds: []string{"color"}, First: "white"},
+			want: []XAnswer{{0, "choice", "White"}},
+		},
+		{
+			// A transcript written before PickKinds existed identifies the
+			// same ask by its ChooseColor resume kind.
+			name: "legacy choose a color: white maps to White",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "choosecolor", Options: 5, Max: 1, Picks: []string{"white"}, PickRefs: []string{"white"}, PickIdx: []int{0}, First: "white"},
+			want: []XAnswer{{0, "choice", "White"}},
+		},
+		{
+			// The rewrite is gated on the option KIND, not the word: an object
+			// whose name happens to be a colour word keeps its label.
+			name: "object named Red is not a colour choice",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Options: 2, Max: 1, Picks: []string{"Red"}, PickRefs: []string{"p0:Red"}, OptionRefs: []string{"p0:Red"}, PickIdx: []int{0}, PickKinds: []string{"card"}},
+			want: []XAnswer{{0, "choice", "Red"}},
+		},
+		{
 			// A cast-fallback mana TAP is paid from the pool, not asked.
 			name: "mana tap cost: skipped as payment()",
 			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Options: 2, Max: 1, Picks: []string{"Pay 3 life"}, PickRefs: []string{"Pay 3 life"}, PickIdx: []int{0}, PickKinds: []string{"mana"}},

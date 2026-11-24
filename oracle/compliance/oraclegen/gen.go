@@ -1461,7 +1461,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		if d.Step < 0 {
 			switch {
 			case IsSetupChoice(d):
-				setupAnswers = append(setupAnswers, XAnswer{d.Seat, "setup_choice", d.Picks[0]})
+				pick := d.Picks[0]
+				if colour, ok := bareColourLabel(d, 0); ok {
+					pick = colour
+				}
+				setupAnswers = append(setupAnswers, XAnswer{d.Seat, "setup_choice", pick})
 				any = true
 			case isSetupNumber(d):
 				a, _ := SetupNumberChoice(d)
@@ -1862,6 +1866,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					// for an unlabelled object pick is the object's name.
 					if label == "" && k < len(d.PickRefs) {
 						label = oraclediffRefName(d.PickRefs[k])
+					}
+					if colour, ok := bareColourLabel(d, k); ok {
+						label = colour
 					}
 					label = disambiguatedObjectChoice(d, k, label)
 					if colour, ok := manaColourLabel(label); ok {
@@ -3242,6 +3249,42 @@ func manaColourLabel(label string) (string, bool) {
 	return "", false
 }
 
+// bareColourLabel maps a bare colour word ("white", any case) to the
+// capitalised colour name XMage's colour chooser shows ("White"). XMage's
+// ChoiceColor keys are the names, while a resolution-time "choose a colour"
+// decision records the picked option's label, which can reach a transcript as
+// the bare word (Midvast Protector's ETB, Sygg, River Guide's protection
+// grant). The gate is the engine's option KIND "color" -- the fixed WUBRG list
+// every colour ask builds -- never the label text, so a card or object named
+// "Red" is an object pick and keeps its label. A transcript written before
+// PickKinds existed falls back to the ChooseColor resume kind, whose option
+// list is the same fixed colour list.
+func bareColourLabel(d rules.OracleDecision, k int) (string, bool) {
+	if k < 0 || k >= len(d.Picks) {
+		return "", false
+	}
+	if k < len(d.PickKinds) && d.PickKinds[k] != "" {
+		if d.PickKinds[k] != "color" {
+			return "", false
+		}
+	} else if d.Resume != "choosecolor" {
+		return "", false
+	}
+	switch strings.ToLower(strings.TrimSpace(d.Picks[k])) {
+	case "white":
+		return "White", true
+	case "blue":
+		return "Blue", true
+	case "black":
+		return "Black", true
+	case "red":
+		return "Red", true
+	case "green":
+		return "Green", true
+	}
+	return "", false
+}
+
 // colourPickCount counts the picks of a decision that name a single mana
 // colour (a mana ability's colour option, with or without a cost prefix).
 // When every pick of a multi-pick decision is such an option, XMage models
@@ -3604,13 +3647,17 @@ func ExactRefAlias(d rules.OracleDecision, k int) string {
 // JoinedChoice is the one "^"-joined answer XAnswersForScenario scripts for a
 // multi-pick decision that one makeChoose dialog consumes: each pick spelled as
 // XMage's dialog lists it (a same-name object by its exact ref, a mana colour
-// by its colour name). Callers that drop or match that answer use it, so they
-// see the same spelling the scenario carries.
+// by its colour name, a bare colour word by its capitalised colour name).
+// Callers that drop or match that answer use it, so they see the same spelling
+// the scenario carries.
 func JoinedChoice(d rules.OracleDecision) string {
 	labels := make([]string, 0, len(d.Picks))
 	for k, label := range d.Picks {
 		if label == "" && k < len(d.PickRefs) {
 			label = oraclediffRefName(d.PickRefs[k])
+		}
+		if colour, ok := bareColourLabel(d, k); ok {
+			label = colour
 		}
 		label = disambiguatedObjectChoice(d, k, label)
 		if colour, ok := manaColourLabel(label); ok {
