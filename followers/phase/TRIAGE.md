@@ -62,3 +62,20 @@ gorge does not log the decision.
   the raw placement, and a "when this enters ... choose a color" TRIGGER is not run (Puca's Eye's
   chosen colour: phase models it as an ETB trigger, not an entry replacement, and replaying it
   would draw a card), so those rows stay GFX|P until phase gets an entry-only hook.
+
+## Filed upstream
+
+The fork's issue tracker is disabled (`adams-shaun/phase` has issues off), so a finding is filed
+against upstream `phase-rs/phase`; the `oracle` branch is the upstream `b14f974` commit at the pin.
+One link per finding.
+
+- [phase-rs/phase#11310](https://github.com/phase-rs/phase/issues/11310) — Cat Collector +
+  Dazzling Angel, `phase-seat` replay seeds 0-2 over gorge's `fdn-limited` decks: Cat Collector's
+  "Whenever you gain life for the first time during each of your turns" trigger loses its
+  first-life-gain-of-your-turn limit and re-triggers on Dazzling Angel's life gain, so the game
+  never ends (turn 8 for seed 0; the stack refills with fresh Cat Collector and Dazzling Angel
+  `triggered_ability` entries). Root cause: `strip_first_time_each_turn_qualifier` in
+  `crates/phase-parser/src/parser/oracle_trigger.rs` recognizes `"for the first time each turn"`
+  and `"for the first time during each of their turns"` but not the `"your"` wording; the card data
+  carries `confirmed_misparse: dropped_qualifier`. Tale of Katara and Toph prints the same wording
+  and is covered by the same fix.
