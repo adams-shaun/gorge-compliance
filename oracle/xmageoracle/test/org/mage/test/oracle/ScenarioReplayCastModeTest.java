@@ -342,7 +342,33 @@ public final class ScenarioReplayCastModeTest {
         System.out.println("PASS suspendFromHandExilesWithTimeCounters: Lotus Bloom is in exile with 3 time counters, stack empty");
     }
 
+    /** CR 702.143a / 116.2h: Foretell from hand is a special action, not a
+     * cast. gorge records it as a cast step with cast_mode "foretell"; XMage's
+     * ForetellAbility pays {2} (the GG payment is two Forests) and exiles the
+     * card face down, with nothing on the stack. */
+    private static void foretellFromHandExilesFaceDown() throws Exception {
+        equal("true", castModeSupported("foretell"), "foretell cast_mode");
+        JsonObject sc = JsonParser.parseString("{name:'Struggle for Skemfar',card:'Struggle for Skemfar',"
+                + "setup:{p0:{hand:['Struggle for Skemfar'],battlefield:['Forest','Forest','Forest','Forest']}},"
+                + "steps:[{op:'cast',seat:0,card:'p0:Struggle for Skemfar',cast_mode:'foretell',mana:'GG'},{op:'pass',seat:0}],"
+                + "xmage_ability:['Foretell {G}',''],xmage_answers:[[],[]],"
+                + "xmage_pos:[null,{turn:1,step:'main1',active:0}]}").getAsJsonObject();
+        ScenarioReplay replay = new ScenarioReplay();
+        JsonObject res = replay.replayOnce(sc, false);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("foretell replay failed: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        JsonObject p0 = last.getAsJsonArray("players").get(0).getAsJsonObject();
+        equal(1, count(p0, "exile", "Struggle for Skemfar"), "Struggle for Skemfar is in exile: " + last);
+        equal(0, count(p0, "hand", "Struggle for Skemfar"), "Struggle for Skemfar left the hand: " + last);
+        equal(0, last.getAsJsonArray("stack").size(), "foretell does not use the stack: " + last);
+        System.out.println("PASS foretellFromHandExilesFaceDown: Struggle for Skemfar is in exile foretold, stack empty");
+    }
+
     public static void main(String[] args) throws Exception {
+        foretellFromHandExilesFaceDown();
         suspendFromHandExilesWithTimeCounters();
         warpedCast();
         mayplayPicksTheNamedCopy();

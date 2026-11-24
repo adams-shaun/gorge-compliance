@@ -1,0 +1,126 @@
+diff --git a/Mage.Tests/src/test/java/org/mage/test/combat/AttackerRemovedCombatStepsTest.java b/Mage.Tests/src/test/java/org/mage/test/combat/AttackerRemovedCombatStepsTest.java
+new file mode 100644
+index 0000000000..5333bf2842
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/combat/AttackerRemovedCombatStepsTest.java
+@@ -0,0 +1,39 @@
++package org.mage.test.combat;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * CR 508.8: "If no creatures are declared as attackers or put onto the
++ * battlefield attacking, skip the declare blockers and combat damage steps."
++ * <p>
++ * A creature that was declared as an attacker and then left combat does not
++ * un-declare the attack, so both steps still happen with priority.
++ */
++public class AttackerRemovedCombatStepsTest extends CardTestPlayerBase {
++
++    @Test
++    public void testOnlyAttackerSacrificedStillGetsBlockersAndDamageSteps() {
++        // Whenever Daemogoth Titan attacks or blocks, sacrifice a creature.
++        addCard(Zone.BATTLEFIELD, playerA, "Daemogoth Titan"); // 11/10
++
++        attack(1, playerA, "Daemogoth Titan", playerB);
++        // Its own attack trigger resolves before blockers; it is the only creature.
++        setChoice(playerA, "Daemogoth Titan");
++
++        // The steps must still run even though no attacker is left. A skipped step
++        // leaves these checks queued and the test fails on the unused actions.
++        checkGraveyardCount("titan sacrificed by its trigger", 1, PhaseStep.DECLARE_BLOCKERS, playerA, "Daemogoth Titan", 1);
++        checkLife("declare blockers step still has priority", 1, PhaseStep.DECLARE_BLOCKERS, playerB, 20);
++        checkLife("combat damage step still has priority", 1, PhaseStep.COMBAT_DAMAGE, playerB, 20);
++
++        setStrictChooseMode(true);
++        setStopAt(1, PhaseStep.END_TURN);
++        execute();
++
++        assertGraveyardCount(playerA, "Daemogoth Titan", 1);
++        assertLife(playerB, 20);
++    }
++}
+diff --git a/Mage/src/main/java/mage/game/combat/Combat.java b/Mage/src/main/java/mage/game/combat/Combat.java
+index b33e25f12f..115d8aea53 100644
+--- a/Mage/src/main/java/mage/game/combat/Combat.java
++++ b/Mage/src/main/java/mage/game/combat/Combat.java
+@@ -74,6 +74,10 @@ public class Combat implements Serializable, Copyable<Combat> {
+     private int maxAttackers = Integer.MIN_VALUE;
+ 
+     private final HashSet<UUID> attackersTappedByAttack = new HashSet<>();
++    // CR 508.8: whether any creature was declared as an attacker or put onto the
++    // battlefield attacking this combat. A creature that later leaves combat does
++    // not clear it; only the next combat's clear() does.
++    private boolean attackersDeclared = false;
+ 
+     public Combat() {
+         this.useToughnessForDamage = false;
+@@ -104,6 +108,7 @@ public class Combat implements Serializable, Copyable<Combat> {
+         }
+         this.maxAttackers = combat.maxAttackers;
+         this.attackersTappedByAttack.addAll(combat.attackersTappedByAttack);
++        this.attackersDeclared = combat.attackersDeclared;
+     }
+ 
+     public List<CombatGroup> getGroups() {
+@@ -194,6 +199,7 @@ public class Combat implements Serializable, Copyable<Combat> {
+         creaturesForcedToAttack.clear();
+         maxAttackers = Integer.MIN_VALUE;
+         attackersTappedByAttack.clear();
++        attackersDeclared = false;
+     }
+ 
+     public String getValue() {
+@@ -1587,6 +1593,7 @@ public class Combat implements Serializable, Copyable<Combat> {
+         newGroup.attackers.add(attackerId);
+         attacker.setAttacking(new MageObjectReference(defenderId, game));
+         groups.add(newGroup);
++        attackersDeclared = true;
+         return true;
+     }
+ 
+@@ -1785,6 +1792,15 @@ public class Combat implements Serializable, Copyable<Combat> {
+         return groups.isEmpty() || getAttackers().isEmpty();
+     }
+ 
++    /**
++     * CR 508.8: no creature was declared as an attacker or put onto the battlefield
++     * attacking this combat. Unlike {@link #noAttackers()}, a declared attacker that
++     * later left combat (sacrificed, destroyed, removed) does not make this true.
++     */
++    public boolean noAttackersDeclared() {
++        return !attackersDeclared;
++    }
++
+     public boolean isPlaneswalkerAttacked(UUID defenderId, Game game) {
+         for (CombatGroup group : groups) {
+             if (group.isDefenderIsPermanent()) {
+diff --git a/Mage/src/main/java/mage/game/turn/CombatDamageStep.java b/Mage/src/main/java/mage/game/turn/CombatDamageStep.java
+index 967397d45e..d5e4aa9b29 100644
+--- a/Mage/src/main/java/mage/game/turn/CombatDamageStep.java
++++ b/Mage/src/main/java/mage/game/turn/CombatDamageStep.java
+@@ -40,7 +40,7 @@ public class CombatDamageStep extends Step {
+     @Override
+     public boolean skipStep(Game game, UUID activePlayerId) {
+         // 508.8
+-        if (game.getCombat().noAttackers()) {
++        if (game.getCombat().noAttackersDeclared()) {
+             return true;
+         }
+         // 510.4
+diff --git a/Mage/src/main/java/mage/game/turn/DeclareBlockersStep.java b/Mage/src/main/java/mage/game/turn/DeclareBlockersStep.java
+index 063670ed7b..13b7693b9f 100644
+--- a/Mage/src/main/java/mage/game/turn/DeclareBlockersStep.java
++++ b/Mage/src/main/java/mage/game/turn/DeclareBlockersStep.java
+@@ -25,7 +25,7 @@ public class DeclareBlockersStep extends Step {
+ 
+     @Override
+     public boolean skipStep(Game game, UUID activePlayerId) {
+-        if (game.getCombat().noAttackers()) {
++        if (game.getCombat().noAttackersDeclared()) {
+             return true;
+         }
+         return super.skipStep(game, activePlayerId);

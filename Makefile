@@ -36,15 +36,19 @@ GO_TEST_FLAGS ?= -p=2
 # 228d8a4bd9 = 7aeb547a86 + fork branch fix/champion-sacx-zero ("Sacrifice X other creatures": the cost's maximum X counted the
 # source itself, so Champion of Stray Souls alone could announce X = 1 and an unscripted announce then failed the activation
 # for want of a graveyard target; CR 601.2b/602.2b), ChampionOfStraySoulsTest.
-# de422bfc17 = 228d8a4bd9 + fork PR #22: TRK's Play Booster collation (the set still carried the
-# spoiler-period `// this.enablePlayBooster(276)` waiver, so VerifyCardDataTest failed the set check
-# "wrong booster settings (set must have boosters, but it does not)"), HML 56 Sengir Autocrat as Rare
-# (mtgjson, Scryfall and upstream master agree; the same Verify run reported the stale Uncommon once
-# the mtgjson snapshot updated), and surefire failIfNoSpecifiedTests=false so a targeted
-# `mvn -pl Mage.Verify -am test -Dtest=VerifyCardDataTest` reaches Mage.Verify instead of failing in
-# a dependency module with no matching test. Set metadata and test-runner config only: no card
-# behaviour, so the manifests are unchanged.
-XMAGE_REF  ?= de422bfc17b47038c93ca89e966ddb8d87bc8c0e
+# ec270409d0 = 228d8a4bd9 + fork #21 (declare blockers and combat damage are skipped only when no creature was
+# declared as an attacker or put onto the battlefield attacking; a declared attacker that later leaves combat does not
+# un-declare the attack, CR 508.8: Daemogoth Titan's own attack trigger sacrifices it, Duergar Assailant sacrifices
+# itself to its damage ability). Fork branch fix/attacker-removed-combat-steps, AttackerRemovedCombatStepsTest.
+# f07513ff8f = ec270409d0 + fork PR #22 (re-stacked on the #21 pin so both are carried): TRK's Play Booster
+# collation (the set still carried the spoiler-period `// this.enablePlayBooster(276)` waiver, so
+# VerifyCardDataTest failed the set check "wrong booster settings (set must have boosters, but it does not)"),
+# HML 56 Sengir Autocrat as Rare (mtgjson, Scryfall and upstream master agree; the same Verify run reported the
+# stale Uncommon once the mtgjson snapshot updated), and surefire failIfNoSpecifiedTests=false so a targeted
+# `mvn -pl Mage.Verify -am test -Dtest=VerifyCardDataTest` reaches Mage.Verify instead of failing in a dependency
+# module with no matching test. Set metadata and test-runner config only: no card behaviour, so the manifests are
+# unchanged.
+XMAGE_REF  ?= f07513ff8f240a6765eee368cc7452c421a5eafb
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -320,6 +324,8 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # Chapel; Turntimber, Serpentine Wood paying 3 life), which fails on 2bf0a1cb36 with "has no land play"; the merge keeps the
 # SBA and modal tests (full driver suite 170 tests, 168 + SbaGraveyardOrderTest's 2). Driver-only change;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-mdfc-land-face.
+# Its ancestry also carries cd13258c4b7 (the folded optional-trigger confirm: a non-Mandatory Cost$ body answers yes from
+# gorge's unconsumed X/object pick, else no; FoldedOptionalConfirmTest), so the pinned driver keeps that fix too.
 FORGE_ORACLE_REF ?= 147dd2f00fc5dd087d88490bb6afde5b34bc8cb1
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 

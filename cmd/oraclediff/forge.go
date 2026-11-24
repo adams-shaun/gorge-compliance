@@ -64,7 +64,8 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     not a field: it is its own decision AFTER the target ask, a
 //     "choose_n" with resume "damage_split" (for a spell gorge announces the
 //     division at cast, CR 601.2d, and oraclegen.CastDivisions restores the
-//     decision at the step the spell resolves in), whose options are the chosen
+//     decision at the cast step, right after the target ask, where the driver
+//     allocates it), whose options are the chosen
 //     targets in order (pick_refs) and whose pick_idx repeats a target's
 //     index once per point it receives. min == max == the total. The target
 //     ask's own "divided" is the literal total only for a triggered ability

@@ -75,6 +75,10 @@ type answerRouting struct {
 	// answers (search_zone_source.go). An absent index is an unknown effect
 	// shape and stays unscripted rather than answering the wrong prompt.
 	searchZones map[int]searchZoneAsk
+	// sources maps a decision's step to the cards resolving or acting there
+	// (stepSourceNames), for the face-keyed XMage dialog tables. A nil map
+	// (a shape-only caller) matches no face.
+	sources map[int][]string
 }
 
 func newAnswerRouting(ds []rules.OracleDecision, digSources ...map[int]digSource) *answerRouting {
@@ -718,6 +722,17 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// which no chooseUse reads (Clone, Sakashima the Impostor, Sculpting
 		// Steel).
 		return cloneAnswers(d), true
+	case unleashDecision(d):
+		// CR 702.98a's as-enters election is XMage's chooseUse "Unleash
+		// <name>?"; the gorge label would be left queued, strict-missing
+		// "Missing CHOICE def ... Message: Unleash" (Carnival Hellsteed).
+		return append(as, XAnswer{d.Seat, "choice", unleashAnswer(d)}), true
+	case dredgeDecision(d):
+		// XMage's DredgeAbility is chooseUse "Dredge <card>?" (CR 702.52a).
+		return append(as, XAnswer{d.Seat, "choice", dredgeAnswer(d)}), true
+	case r.booleanDialogAnswer(i) != "":
+		// A two-face pick XMage asks as a chooseUse (xmageBooleanDialogFaces).
+		return append(as, XAnswer{d.Seat, "choice", r.booleanDialogAnswer(i)}), true
 	case r.playBool[i]:
 		// The redundant trigger-level half of a single "may cast": the Play
 		// decision that follows carries the one boolean XMage asks.
@@ -776,6 +791,16 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 			answer = "yes"
 		}
 		return append(as, XAnswer{d.Seat, "choice", answer}), true
+	case r.digMayOwned(i):
+		// A may-Dig XMage asks as chooseUse then chooseTarget
+		// (xmageDigMayAskFaces).
+		as2, _ := r.digMayAnswers(i)
+		return append(as, as2...), true
+	case r.digChoiceOwned(i):
+		// A look-and-pick XMage asks as player.choose, the CHOICE queue
+		// (xmageDigChoiceFaces).
+		as2, _ := r.digChoiceAnswers(i)
+		return append(as, as2...), true
 	case d.Resume == "dig" && len(d.Picks) == 1 && digBottomName(d.Picks[0]) != "":
 		// XMage's bottom pick is a card selection by name, not gorge's label.
 		return append(as, XAnswer{d.Seat, "choice", digBottomName(d.Picks[0])}), true
@@ -789,6 +814,10 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// "Missing TARGET def ... TargetCard", the choice-queue answer left
 		// unused and the AI choosing the card gorge did not).
 		return append(as, XAnswer{d.Seat, "target", r.digTargetAnswer(i)}), true
+	case r.optionalBounceChoiceAnswer(i) != "":
+		// The "you may return a <permanent> you control" form of the own
+		// bounce: player.choose, the CHOICE queue (Tazeem Raptor).
+		return append(as, XAnswer{d.Seat, "choice", r.optionalBounceChoiceAnswer(i)}), true
 	case r.ownBounceTargetAnswer(i) != "":
 		// "Return a permanent you control to its owner's hand" (Kor Skyfisher,
 		// the Karoos): XMage's ReturnToHandChosenControlledPermanentEffect asks

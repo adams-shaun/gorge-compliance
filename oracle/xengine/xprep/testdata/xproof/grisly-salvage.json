@@ -1,0 +1,194 @@
+{
+ "name": "xproof start Grisly Salvage cast seed 2",
+ "turn": 1,
+ "setup": {
+  "p0": {
+   "battlefield": [
+    "Swamp",
+    "Forest"
+   ],
+   "hand": [
+    "Grisly Salvage"
+   ],
+   "library_top": [
+    "Forest",
+    "Swamp",
+    "Forest",
+    "Swamp",
+    "Forest",
+    "Swamp",
+    "Forest",
+    "Swamp",
+    "Forest",
+    "Swamp",
+    "Forest",
+    "Swamp",
+    "Swamp",
+    "Forest",
+    "Swamp",
+    "Swamp",
+    "Swamp",
+    "Swamp",
+    "Swamp",
+    "Swamp",
+    "Forest",
+    "Swamp",
+    "Forest",
+    "Forest",
+    "Swamp",
+    "Swamp",
+    "Swamp",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Swamp",
+    "Swamp",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest"
+   ],
+   "life": 20
+  },
+  "p1": {
+   "library_top": [
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains"
+   ],
+   "life": 20
+  }
+ },
+ "steps": [
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Swamp",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest",
+   "ability_index": 0
+  },
+  {
+   "op": "cast",
+   "seat": 0,
+   "card": "p0:Grisly Salvage"
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "play",
+   "seat": 0,
+   "card": "p0:Forest#2",
+   "answers": [
+    {
+     "kind": "choose",
+     "pick": [
+      "p0:Forest#2"
+     ]
+    }
+   ]
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest#2",
+   "ability_index": 0
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  }
+ ]
+}

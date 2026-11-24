@@ -365,6 +365,37 @@ func TestPrefixesSuspendCast(t *testing.T) {
 	}
 }
 
+// TestPrefixesForetellCast: a cast step whose cast_mode is "foretell" is
+// XMage's ForetellAbility special action (CR 702.143a, 116.2h), so it carries
+// the "Foretell {cost}" rule-text prefix the driver activates it by; Struggle
+// for Skemfar prints K:Foretell:G.
+func TestPrefixesForetellCast(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	it := oraclegen.Item{
+		ID: "xe:test:foretell-cast",
+		Scenario: oraclegen.Scenario{
+			Steps: []oraclegen.Step{
+				{Op: "cast", Seat: 0, Card: "p0:Struggle for Skemfar", CastMode: "foretell"},
+				{Op: "pass", Seat: 0},
+				{Op: "cast", Seat: 0, Card: "p0:Struggle for Skemfar"},
+			},
+		},
+	}
+	got, ref := prefixes(reg, it, rules.OracleResult{})
+	if ref != nil {
+		t.Fatalf("prefixes refused: %+v", ref)
+	}
+	if len(got) != len(it.Steps) {
+		t.Fatalf("prefixes = %q, want %d entries (one per step)", got, len(it.Steps))
+	}
+	if want := "Foretell {G}"; got[0] != want {
+		t.Fatalf("foretell step prefix = %q, want %q", got[0], want)
+	}
+	if got[1] != "" || got[2] != "" {
+		t.Errorf("pass/ordinary cast prefixes = %q, %q, want empty", got[1], got[2])
+	}
+}
+
 // TestPrefixesGrantedAbility: an activate step that names a granted ability by
 // its engine label resolves through the shared grant resolver and carries that
 // ability's own XMage prefix, not the printed index's "{T}" mana text. This is
