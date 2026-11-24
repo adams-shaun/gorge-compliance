@@ -85,7 +85,11 @@ func TestForgeRolledDie(t *testing.T) {
 // 0c4ca7afb3d = d1b608ce5d plus repeated Confluence modes, the NICKNAME trigger-order label and the zero-option
 // card ask (ScriptedController/StepMachine/DecisionQueue only), die-roll code unchanged, the full driver suite
 // (181 tests, including ForcedDieRollTest) re-run green on it.
-const forgeOracleDieRollRef = "0c4ca7afb3db5fcffbe8cc855724a9135d3f1c40"
+// a445a858b2 = d1b608ce5d plus the Myriad-only AtEOT empty-set guard (forge-game SpellAbilityEffect/CardFactoryUtil, driver and
+// die-roll code unchanged), the full driver suite (177 tests, including ForcedDieRollTest) re-run green on it.
+// fef74c5308f = the clean merge of 0c4ca7afb3d and a445a858b2: the two fixes touch disjoint files (forge-oracle driver vs
+// forge-game), so the pin keeps both; die-roll and driver code are unchanged from 0c4ca7afb3d.
+const forgeOracleDieRollRef = "fef74c5308f45d65a91207186c2a06ef3e976294"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

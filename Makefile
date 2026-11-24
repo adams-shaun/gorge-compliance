@@ -48,7 +48,11 @@ GO_TEST_FLAGS ?= -p=2
 # `mvn -pl Mage.Verify -am test -Dtest=VerifyCardDataTest` reaches Mage.Verify instead of failing in a dependency
 # module with no matching test. Set metadata and test-runner config only: no card behaviour, so the manifests are
 # unchanged.
-XMAGE_REF  ?= f07513ff8f240a6765eee368cc7452c421a5eafb
+# 464e1a6b23 = f07513ff8f merged with fork gorge c259b72036 (which carries #22's three commits, so the merge adds only):
+# fork #23 (Volatile Arsonist's attack trigger damages each chosen target, not only the creature slot, CR 601.2c:
+# EachTargetPointer, VolatileArsonistTest) and fork #24 (Artifact Ward is its three Oracle abilities, not protection
+# from artifacts, so artifact Equipment stays attached, CR 702.16d: ArtifactWardTest). Fork branch pin/xmage-ref-arsonist-ward.
+XMAGE_REF  ?= 464e1a6b239e2443efa0e5cf7a22613d36870b5b
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -353,7 +357,19 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # Test RepeatModesNicknameZeroPickTest (4 tests, four fixtures/repeat-modes-nickname-zeropick requests), run by
 # scripts/forge-oracle-test-repeat-modes-nickname-zeropick.sh; full driver suite (181 tests) green on it. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick.
-FORGE_ORACLE_REF ?= 0c4ca7afb3db5fcffbe8cc855724a9135d3f1c40
+# a445a858b2 = d1b608ce5d (the 177-test driver) plus the Myriad-only AtEOT empty-set guard: the fork's Myriad fix (f30d448731) made
+# SpellAbilityEffect.registerDelayedTrigger return on an empty card set for every AtEOT caller, which dropped the delayed
+# trigger CR 603.7a creates for an unconditional "exile it at the beginning of the next end step" (Mordor on the March with
+# no creature card to exile; the Devastating Onslaught X=0 / Foggy Swamp Visions class). The guard now needs AtEOTNeedsCard$ True,
+# which only CardFactoryUtil's Myriad trigger carries (CR 702.116a). xproof cluster xpt-0eb9c20e. MordorOnTheMarchNothingExiledTest
+# fails on d1b608ce5d and passes after; MyriadNoTokensCreatesNoDelayedTriggerTest still passes; the driver suite (177 tests) passes on
+# the patched forge-game. cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-mordor-empty-delayed-trigger-on-d1b6
+# (the 8653216df2 commit cherry-picked onto d1b608ce5d, so the Join Forces / LeftOrRight / Attach mappings stay).
+# fef74c5308f = the clean merge of 0c4ca7afb3d and a445a858b2: the repeated-mode/NICKNAME/zero-option driver work and the
+# forge-game Myriad-only AtEOT guard touch disjoint files, so the pin keeps both. Driver and die-roll code are unchanged from
+# 0c4ca7afb3d; MordorOnTheMarchNothingExiledTest and MyriadNoTokensCreatesNoDelayedTriggerTest keep the a445a858b2 evidence.
+# Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick-merge.
+FORGE_ORACLE_REF ?= fef74c5308f45d65a91207186c2a06ef3e976294
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
