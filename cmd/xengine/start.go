@@ -278,8 +278,14 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 		}
 	}
 	bind := func(card string, used map[int]bool) (int, error) {
+		// d.Cards holds front-face names, so resolve the listed name the same
+		// way add did: a double-faced card is listed as "A // B" or by its back.
+		want := card
+		if c, ok := reg.Lookup(card); ok && len(c.Faces) > 0 {
+			want = c.Faces[0].Name
+		}
 		for _, i := range bf {
-			if d.Cards[i] == card && !used[i] {
+			if d.Cards[i] == want && !used[i] {
 				used[i] = true
 				return i, nil
 			}
