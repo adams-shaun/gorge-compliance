@@ -80,7 +80,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 665e52f1-901b-49a1-bfbd-ee38bdee8983	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 665f3e52-c536-481b-8b29-fe68f08d1fdf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crypt-angel:f0t0:s1,f:xs:XP:crypt-angel:f0t0:s1	-	-	-	5f2128bf97e4	-	7e64a17937a2	-	-	2026-11-24	xproof
 665f3e52-c536-481b-8b29-fe68f08d1fdf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:crypt-angel:f0t0:s1,f:xs:XP:crypt-angel:f0t0:s1	-	-	-	5f2128bf97e4	-	7e64a17937a2	-	-	2026-11-24	xproof
-6662968e-ca9e-454c-be44-24ad10e43d3e	cast	cast-resolve	agreed	-	X	scen	1	0	Unstoppable Slasher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:unstoppable-slasher:cast:s1,f:xs:XP:unstoppable-slasher:cast:s1	-	-	-	23b491658465	-	3d2ffb4319cc	-	-	2026-11-24	xproof
 6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Unstoppable Slasher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Unstoppable Slasher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Unstoppable Slasher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -188,7 +188,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66e37011-f3d2-41ed-8e09-7bba9464e8c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66e37011-f3d2-41ed-8e09-7bba9464e8c3	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:coretapper:f0a0:s1,f:xs:XP:coretapper:f0a0:s1	-	-	-	d864b561c9cb	-	aa6f595cd8fd	-	-	2026-11-24	xproof
 66e37011-f3d2-41ed-8e09-7bba9464e8c3	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:coretapper:f0a0:s1,f:xs:XP:coretapper:f0a0:s1	-	-	-	d864b561c9cb	-	aa6f595cd8fd	-	-	2026-11-24	xproof
-66e74e8f-036e-4b26-a4a8-2365891765bc	cast	cast-resolve	agreed	-	X	scen	1	0	Flourishing Bloom-Kin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+66e74e8f-036e-4b26-a4a8-2365891765bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flourishing-bloom-kin:cast:s1,f:xs:XP:flourishing-bloom-kin:cast:s1	-	-	-	23b491658465	-	3538b0e8db28	-	-	2026-11-24	xproof
 66e74e8f-036e-4b26-a4a8-2365891765bc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Flourishing Bloom-Kin/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66e74e8f-036e-4b26-a4a8-2365891765bc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Flourishing Bloom-Kin/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66e7a760-2b2f-4af9-983c-300c657beaaf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
