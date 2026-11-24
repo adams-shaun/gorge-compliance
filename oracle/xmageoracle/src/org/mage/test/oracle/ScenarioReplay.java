@@ -5587,6 +5587,124 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return pos.has(key) && pos.get(key).getAsBoolean();
     }
 
+    /** The number of seats the scenario's steps name, at least two. */
+    static int seatCount(JsonArray steps) {
+        int seats = 2;
+        for (int i = 0; i < steps.size(); i++) {
+            seats = Math.max(seats, seatOfStep(steps, i) + 1);
+        }
+        return seats;
+    }
+
+    /** Whether the pass at {@code index} completes a round of passes since
+     * the last action, step entry or resolution (CR 117.4): every player
+     * passed with no action in between. The round restarts at a step entry (a
+     * different step name, or a full round ending a same-named step such as an
+     * additional end step) and at a resolution, which hands priority back to
+     * the active seat. The round's last pass is not assumed to be the
+     * non-active seat's: an action can leave it with the active seat. */
+    static boolean passesInSuccession(JsonArray steps, int index, int seats) {
+        if (index < 0 || !isOp(steps, index, "pass")) {
+            return false;
+        }
+        int round = 0;
+        int prev = -1;
+        for (int i = 0; i <= index; i++) {
+            if (!isOp(steps, i, "pass")) {
+                // An action breaks the round; the last position still names
+                // the step the action was taken in.
+                round = 0;
+                continue;
+            }
+            if (!isPassRun(steps, i)) {
+                // A pass with no position cannot be placed; legacy passes have
+                // no recorded run at all. Count it and keep the last position.
+                round++;
+                continue;
+            }
+            JsonObject pos = steps.get(i).getAsJsonObject().getAsJsonObject("xpos");
+            boolean entry = prev < 0
+                    ? posFlag(pos, "moved")
+                    : !sameStep(steps.get(prev).getAsJsonObject().getAsJsonObject("xpos"), pos);
+            if (entry) {
+                // The pass entered a new step instance: it closed the previous
+                // step's round and is not part of the new step's round.
+                round = 0;
+                prev = i;
+                if (i == index) {
+                    return false;
+                }
+                continue;
+            }
+            round++;
+            boolean closes = !posFlag(pos, "resolves") && round >= Math.max(seats, 2);
+            if (i == index) {
+                return closes;
+            }
+            if (closes || posFlag(pos, "resolves")) {
+                // The next pass is either in a fresh step instance (a closing
+                // pass) or after a resolution handed priority back.
+                round = 0;
+            }
+            prev = i;
+        }
+        return false;
+    }
+
+    /** passesInSuccession for a caller with no game seat count to hand. */
+    static boolean passesInSuccession(JsonArray steps, int index) {
+        return passesInSuccession(steps, index, seatCount(steps));
+    }
+
+    /** Whether two positions name the same turn and step. */
+    private static boolean sameStep(JsonObject a, JsonObject b) {
+        return a.has("turn") && b.has("turn")
+                && a.get("turn").getAsInt() == b.get("turn").getAsInt()
+                && a.has("step") && b.has("step")
+                && a.get("step").getAsString().equals(b.get("step").getAsString());
+    }
+
+    /** The last positioned pass before {@code index}, or -1. */
+    private static int previousPassPosition(JsonArray steps, int index) {
+        for (int i = index - 1; i >= 0; i--) {
+            if (isPassRun(steps, i)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /** Whether the recorded pass at {@code index} enters a new step instance:
+     * a different turn or step name, or a pass that completes a full round of
+     * passes for a same-named step (an additional end step, CR 500.9). The
+     * round is re-derived from the step sequence rather than from the recorded
+     * {@code moved} bit: a pass that follows an action is not in the round
+     * that ends a step (CR 117.4), even when a stale item records a move
+     * there, and the closing pass of a round can be the active seat's, even
+     * when a stale item does not record the move. */
+    static boolean passEntersNewStep(JsonArray steps, int index, int seats) {
+        if (!isPassRun(steps, index)) {
+            return false;
+        }
+        JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
+        int prev = previousPassPosition(steps, index);
+        if (prev < 0) {
+            // The first position of the run: only an explicit move can enter a
+            // second occurrence of the setup step (typically main 1).
+            return posFlag(pos, "moved");
+        }
+        JsonObject before = steps.get(prev).getAsJsonObject().getAsJsonObject("xpos");
+        if (!sameStep(before, pos)) {
+            return true;
+        }
+        return passesInSuccession(steps, index, seats);
+    }
+
+    /** passEntersNewStep for a caller with no game seat count to hand. */
+    static boolean passEntersNewStep(JsonArray steps, int index) {
+        return passEntersNewStep(steps, index, seatCount(steps));
+    }
+
     /** Copy the item's xmage_pos entries (parallel to the steps, null for a
      * step that is no pass) onto their steps as "xpos". They ride beside the
      * steps because gorge's runner rejects unknown per-step fields. */
@@ -5611,11 +5729,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * of the step's first priority, so a checkpoint taken in that step already
      * shows the creatures attacking (blocking). Null for any other pass. */
     static PhaseStep declarationAhead(JsonArray steps, int index) {
-        if (!isPassRun(steps, index)) {
+        return declarationAhead(steps, index, seatCount(steps));
+    }
+
+    static PhaseStep declarationAhead(JsonArray steps, int index, int seats) {
+        if (!passEntersNewStep(steps, index, seats)) {
             return null;
         }
         JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
-        if (!posFlag(pos, "moved") || !pos.has("step")) {
+        if (!pos.has("step")) {
             return null;
         }
         String at = pos.get("step").getAsString();
@@ -5681,13 +5803,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * made in the same step, if it is an action of the other seat, starts by
      * yielding priority to that seat (the lone-handoff recipe). */
     static List<String> passRunCommands(JsonArray steps, int index, int activeSeat) {
+        return passRunCommands(steps, index, activeSeat, seatCount(steps));
+    }
+
+    static List<String> passRunCommands(JsonArray steps, int index, int activeSeat, int seats) {
         List<String> cmds = new ArrayList<>();
         if (isPassRun(steps, index - 1) && !isOp(steps, index, "pass")) {
             JsonObject prev = steps.get(index - 1).getAsJsonObject();
             JsonObject pos = prev.getAsJsonObject("xpos");
             String op = str(steps.get(index).getAsJsonObject(), "op");
             boolean acts = op.equals("cast") || op.equals("activate") || op.equals("play");
-            if (acts && !posFlag(pos, "moved") && !posFlag(pos, "resolves")
+            if (acts && !passEntersNewStep(steps, index - 1, seats) && !posFlag(pos, "resolves")
                     && seatOfStep(steps, index - 1) == activeSeat && seatOfStep(steps, index) != activeSeat) {
                 cmds.add(CMD_YIELD_PRIORITY);
             }
@@ -5730,12 +5856,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** Move the replay's turn, step and active seat to where gorge stood after
-     * a pass of a recorded game: the steps that follow are queued there. */
-    private void followPassPosition(JsonObject pos) {
+     * a pass of a recorded game: the steps that follow are queued there. The
+     * occurrence advances only when the pass really entered a new step
+     * instance (passEntersNewStep): counting a handoff pass as one hides its
+     * checkpoint at an occurrence XMage never starts. */
+    private void followPassPosition(JsonArray steps, int index) {
+        JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
         turn = pos.get("turn").getAsInt();
         phase = phaseOfGorgeStep(pos.get("step").getAsString());
         activeSeat = pos.get("active").getAsInt();
-        enterQueuedStep(turn, phase, posFlag(pos, "moved"));
+        enterQueuedStep(turn, phase, passEntersNewStep(steps, index, seats));
         attackAdvancedTurn = false;
         followedPassPosition = true;
     }
@@ -5831,9 +5961,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * step's checkpoint. Pairs and handoffs need the active player to be
      * seat 0; the active seat 1's own lone pass queues nothing. */
     static List<String> passCommands(JsonArray steps, int index, int activeSeat) {
+        return passCommands(steps, index, activeSeat, seatCount(steps));
+    }
+
+    static List<String> passCommands(JsonArray steps, int index, int activeSeat, int seats) {
         List<String> cmds = new ArrayList<>();
         if (isPassRun(steps, index) || isPassRun(steps, index - 1)) {
-            return passRunCommands(steps, index, activeSeat);
+            return passRunCommands(steps, index, activeSeat, seats);
         }
         if (isActiveOwnPass(steps, index, activeSeat)) {
             return cmds;
@@ -5974,7 +6108,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         // CMD_PASS_OWN_PRIORITY is the exception: it runs on the passing
         // non-active seat, not the active seat that carries the checkpoints.
         TestPlayer active = seat(activeSeat);
-        for (String cmd : passCommands(steps(sc0), stepIdx, activeSeat)) {
+        for (String cmd : passCommands(steps(sc0), stepIdx, activeSeat, seats)) {
             switch (cmd) {
                 case CMD_REQUIRE_STACK:
                     if (!requireStackIsStrict(steps(sc0), stepIdx)) {
@@ -6603,8 +6737,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // Validated here; its XMage commands are queued around the
                 // checkpoint by queuePassCommands, which the replay loop runs before this step.
                 if (passAction(steps(sc0), stepIdx, activeSeat) == PASS_RUN) {
-                    followPassPosition(st.getAsJsonObject("xpos"));
-                    PhaseStep declaration = declarationAhead(steps(sc0), stepIdx);
+                    followPassPosition(steps(sc0), stepIdx);
+                    PhaseStep declaration = declarationAhead(steps(sc0), stepIdx, seats);
                     if (declaration != null) {
                         // The checkpoint is taken at the last priority before the
                         // declaration and reports the declaration step; the
