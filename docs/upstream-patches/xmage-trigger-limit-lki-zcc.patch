@@ -1,0 +1,103 @@
+diff --git a/Mage/src/main/java/mage/abilities/TriggeredAbilityImpl.java b/Mage/src/main/java/mage/abilities/TriggeredAbilityImpl.java
+--- a/Mage/src/main/java/mage/abilities/TriggeredAbilityImpl.java
++++ b/Mage/src/main/java/mage/abilities/TriggeredAbilityImpl.java
+@@ -11,6 +11,7 @@
+ import mage.game.events.BatchEvent;
+ import mage.game.events.GameEvent;
+ import mage.game.events.ZoneChangeEvent;
++import mage.game.permanent.Permanent;
+ import mage.game.permanent.PermanentToken;
+ import mage.players.Player;
+ import mage.util.CardUtil;
+@@ -80,23 +81,34 @@
+ 
+     // Used for triggers with a per-turn limit.
+     private String getKeyLastTurnTriggered(Game game) {
+-        return CardUtil.getCardZoneString(
+-                "lastTurnTriggered|" + getOriginalId(), getSourceId(), game
+-        );
++        return getLimitKey("lastTurnTriggered|" + getOriginalId(), game);
+     }
+ 
+     // Used for triggers with a per-turn limit.
+     private String getKeyLastTurnTriggeredCount(Game game) {
+-        return CardUtil.getCardZoneString(
+-                "lastTurnTriggeredCount|" + getOriginalId(), getSourceId(), game
+-        );
++        return getLimitKey("lastTurnTriggeredCount|" + getOriginalId(), game);
+     }
+ 
+     // Used for triggers with a per-game limit.
+     private String getKeyGameTriggeredCount(Game game) {
+-        return CardUtil.getCardZoneString(
+-                "gameTriggeredCount|" + getOriginalId(), getSourceId(), game
+-        );
++        return getLimitKey("gameTriggeredCount|" + getOriginalId(), game);
++    }
++
++    /**
++     * State key of a trigger limit. A battlefield ability whose source has just
++     * left the battlefield and that looks back in time (CR 603.10a) is still
++     * the ability that triggered before the move, so it is keyed by the
++     * zone change counter of the permanent it is on (last known information),
++     * not by the counter the card has now.
++     */
++    private String getLimitKey(String text, Game game) {
++        if (getZone() == Zone.BATTLEFIELD) {
++            Permanent permanent = game.getPermanentOrLKIBattlefield(getSourceId());
++            if (permanent != null) {
++                return CardUtil.getObjectZoneString(text, getSourceId(), game, permanent.getZoneChangeCounter(game), false);
++            }
++        }
++        return CardUtil.getCardZoneString(text, getSourceId(), game);
+     }
+ 
+     private void updateTurnCount(Game game) {
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/trk/GrandNagusZekTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/trk/GrandNagusZekTest.java
+new file mode 100644
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/trk/GrandNagusZekTest.java
+@@ -0,0 +1,43 @@
++package org.mage.test.cards.single.trk;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * Grand Nagus Zek (TRK): "Whenever another creature dies, create a Treasure
++ * token. This ability triggers only once each turn."
++ *
++ * CR 603.10a: leaves-the-battlefield abilities look back in time, so Zek
++ * triggers for creatures that die at the same time as it does. CR 603.2: the
++ * once-each-turn limit counts the triggerings of this one ability, and Zek
++ * dying does not make it a different ability.
++ */
++public class GrandNagusZekTest extends CardTestPlayerBase {
++
++    @Test
++    public void testDiesWithAnotherCreatureAfterTriggeringDoesNotTriggerAgain() {
++        setStrictChooseMode(true);
++        addCard(Zone.BATTLEFIELD, playerA, "Grand Nagus Zek"); // 1/1, +1/+1 per Treasure
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
++        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear");
++        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
++        addCard(Zone.HAND, playerB, "Lightning Bolt");
++        addCard(Zone.HAND, playerB, "Fiery Cannonade");
++
++        // the Bears die: Zek triggers (first time this turn), one Treasure, Zek is 2/2
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Grizzly Bears");
++        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
++        // 2 damage to each non-Pirate creature: Zek (2/2) and Runeclaw Bear die together
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Fiery Cannonade");
++
++        setStopAt(1, PhaseStep.BEGIN_COMBAT);
++        execute();
++
++        assertGraveyardCount(playerA, "Grand Nagus Zek", 1);
++        assertGraveyardCount(playerA, "Runeclaw Bear", 1);
++        // the ability triggered only once this turn
++        assertPermanentCount(playerA, "Treasure Token", 1);
++    }
++}
