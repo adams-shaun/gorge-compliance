@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33005c63-fe9f-4051-b781-eacf1ca5eec6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33005c63-fe9f-4051-b781-eacf1ca5eec6	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33017203-233e-498e-806e-94b1dccf5c35	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33042d12-f08b-4b3e-b106-c424ef868c13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blade-of-the-swarm:f0t0:s1,f:xs:XP:blade-of-the-swarm:f0t0:s1	-	-	-	16ec2936189a	-	02d86f15e0cb	-	-	2026-11-24	xproof
+33042d12-f08b-4b3e-b106-c424ef868c13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blade-of-the-swarm:f0t0:s1,f:xs:XP:blade-of-the-swarm:f0t0:s1	-	-	-	0984227a67dd	-	02d86f15e0cb	-	-	2026-11-24	xproof
 33042d12-f08b-4b3e-b106-c424ef868c13	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 330e109c-1885-4946-9edc-895408519b3d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 330e109c-1885-4946-9edc-895408519b3d	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,8 +139,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33b31fb0-71ce-408a-a256-2a5a3b085cb6	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Case of the Filched Falcon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33b31fb0-71ce-408a-a256-2a5a3b085cb6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:case-of-the-filched-falcon:f0t0:s1,f:xs:XP:case-of-the-filched-falcon:f0t0:s1	-	-	-	5437c1394672	-	602832f8bf19	-	-	2026-11-24	xproof
 33b31fb0-71ce-408a-a256-2a5a3b085cb6	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Case of the Filched Falcon/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-33b6555e-035d-4241-a341-a9b9139ca6f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thornplate-intimidator:f0t1:s1,f:xs:XP:thornplate-intimidator:f0t1:s1	-	-	-	16ec2936189a	-	d4ff25ff11bb	-	-	2026-11-24	xproof
-33b6555e-035d-4241-a341-a9b9139ca6f0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thornplate-intimidator:f0t1:s1,f:xs:XP:thornplate-intimidator:f0t1:s1	-	-	-	16ec2936189a	-	d4ff25ff11bb	-	-	2026-11-24	xproof
+33b6555e-035d-4241-a341-a9b9139ca6f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thornplate-intimidator:f0t1:s1,f:xs:XP:thornplate-intimidator:f0t1:s1	-	-	-	0984227a67dd	-	d4ff25ff11bb	-	-	2026-11-24	xproof
+33b6555e-035d-4241-a341-a9b9139ca6f0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thornplate-intimidator:f0t1:s1,f:xs:XP:thornplate-intimidator:f0t1:s1	-	-	-	0984227a67dd	-	d4ff25ff11bb	-	-	2026-11-24	xproof
 33b6555e-035d-4241-a341-a9b9139ca6f0	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 33b9b3bd-33ca-46f3-b8bb-a978bc3d1085	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Temple of Deceit/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33b9b3bd-33ca-46f3-b8bb-a978bc3d1085	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Temple of Deceit/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
