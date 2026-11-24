@@ -188,6 +188,12 @@ func filterCostFixturesX(tok string, x int) []string {
 			// generic "card" stand-ins, which XMage's named target rejects.
 			return nil
 		}
+		if clause == "cardname" {
+			// CARDNAME is the source itself (CR 118.3: the cost is paid by
+			// the source here, no other card is chosen): no fixture, no
+			// choice answer.
+			return nil
+		}
 		switch {
 		case strings.HasPrefix(clause, "permanent.other"):
 			candidates = append(candidates, permanentCostFixtures(clause)...)
