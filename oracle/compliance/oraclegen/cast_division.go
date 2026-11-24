@@ -46,7 +46,11 @@ func castDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult) []r
 // one) stays beside it, so dividedTargetAnswers emits one "<ref>^X=<share>" per
 // target from the two; no split is inserted. The Forge
 // contract keeps the root ask unmarked (the driver sums the split), so the
-// Forge callers pass false.
+// Forge callers pass false. The Forge view inserts no split for a lone target
+// whose division gorge filled without an ask: the driver consumes a split only
+// when Forge poses a division, and Forge never asks for a one-target
+// allocation, so restoring the forced lone-target division would leave it
+// unconsumed.
 func castDivisionsFor(reg *cards.Registry, sc Scenario, res rules.OracleResult, xmage bool) []rules.OracleDecision {
 	ds := res.Decisions
 	if reg == nil {
@@ -72,6 +76,15 @@ func castDivisionsFor(reg *cards.Registry, sc Scenario, res rules.OracleResult, 
 		t := src[i]
 		n := len(t.PickRefs)
 		j := divideAsk(src, i)
+		if !xmage && n == 1 && j < 0 {
+			// A lone target takes the whole total and has one legal
+			// division (CR 601.2d), so gorge asks nothing. Forge does
+			// not pose a division for one target either, so a
+			// synthesized Forge split would be a decision its driver
+			// can never consume. The XMage view still needs the root
+			// ask's share (marked below).
+			continue
+		}
 		shares := make([]int, n)
 		for x := range shares {
 			shares[x] = 1
