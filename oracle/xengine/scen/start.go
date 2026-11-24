@@ -62,6 +62,9 @@ type StartFocus struct {
 	Card    string `json:"card,omitempty"`
 	Kind    string `json:"kind,omitempty"`
 	Ability int    `json:"ability"`
+	// Mode, for a cast focus, is the cast option's payment kind ("kicked"):
+	// a key reading "if it was kicked" is reached by the kicked cast itself.
+	Mode string `json:"mode,omitempty"`
 }
 
 // Marshal is the file's bytes: indented JSON and a final newline.

@@ -74,6 +74,7 @@ type startFocus struct {
 	Card    string `json:"card"`
 	Kind    string `json:"kind"`
 	Ability int    `json:"ability"`
+	Mode    string `json:"mode"`
 }
 
 // startFlagErr is the error of -start given with a flag it does not combine
@@ -203,7 +204,7 @@ func (f *startFile) focusOf() (game.Focus, error) {
 			out.Card = o.Card
 		}
 		if o.Kind != "" {
-			out.Kind, out.Ability = o.Kind, o.Ability
+			out.Kind, out.Ability, out.Mode = o.Kind, o.Ability, o.Mode
 		}
 	}
 	if out.Seat < 0 || out.Seat > 1 {
