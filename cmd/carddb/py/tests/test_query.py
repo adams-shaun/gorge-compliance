@@ -18,6 +18,7 @@ UPDATE = os.environ.get("CARDDB_UPDATE_GOLDEN") == "1"
 OID_D = "de" + "3" * 30
 OID_E = "ef" + "4" * 30
 OID_F = "f0" + "5" * 30
+OID_G = "ab" + "6" * 30
 
 GORGE = "8f7095353a64"
 
@@ -116,6 +117,9 @@ class Query(Base):
             {"oracle_id": oid, "format": "modern", "status": status}
             for oid, status in ((OID_A, "legal"), (OID_B, "banned"), (OID_C, "legal"),
                                 (OID_D, "legal"), (OID_E, "legal"), (OID_F, "legal"))
+        ] + [
+            # Fire // Ice is legal somewhere (so tier 4, not tier 5) but banned in modern.
+            {"oracle_id": OID_B, "format": "legacy", "status": "legal"},
         ], writer="catalogue")
         self.a.put("status", [
             {"oracle_id": OID_A, "level": "A", "verdict": "agree", "gorge_pin": "8f7095353a64",
@@ -296,6 +300,34 @@ class Query(Base):
         rows = [l.split("\t") for l in r.stdout.splitlines()[1:]]
         self.assertEqual([(x[0], x[2]) for x in rows],
                          [("2", "Lightning Bolt"), ("2", "Dáin Ironfoot"), ("4", "Fire // Ice")], r.stdout)
+
+    def test_need_legal_nowhere_is_tier_five(self):
+        # Mise is printed in a funny set and a promo set, so the all-non-tournament rule does not
+        # reach it; no legality row says legal in any format, so it cannot be tier 1-4. Fire // Ice
+        # is legal in legacy (tier 4), and Mise must rank after it.
+        db = os.path.join(self.tmp, "need-legal-nowhere.sqlite")
+        shutil.copy(self.priv, db)
+        conn = sqlite3.connect(db)
+        conn.execute("INSERT INTO cards (oracle_id, name, layout, mana_value, type_line) "
+                     "VALUES (?,?,?,?,?)", (OID_G, "Mise", "normal", 1, "Instant"))
+        conn.execute("INSERT INTO sets (set_code, name, release_date, set_type) "
+                     "VALUES (?,?,?,?)", ("promo", "Promo", "2020-01-01", "promo"))
+        conn.executemany("INSERT INTO printings (printing_id, oracle_id, set_code, collector_number, "
+                         "rarity, released) VALUES (?,?,?,?,?,?)", [
+                             ("p-g1", OID_G, "funny", "2", "rare", "2020-01-01"),
+                             ("p-g2", OID_G, "promo", "1", "rare", "2020-01-01"),
+                         ])
+        cols = [r[1] for r in conn.execute("PRAGMA table_info(keyproof)")]
+        row = keyproof_row(OID_G, "cast", "owed", desc="Mana", reason="no-generator")
+        conn.execute("INSERT INTO keyproof (%s) VALUES (%s)" % (
+            ",".join('"%s"' % c for c in cols), ",".join("?" * len(cols))), [row[c] for c in cols])
+        conn.commit()
+        conn.close()
+        r = self.cli(self.home, "need", "--db", db, "--private")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        rows = [l.split("\t") for l in r.stdout.splitlines()[1:]]
+        self.assertEqual([(x[0], x[2]) for x in rows],
+                         [("2", "Dáin Ironfoot"), ("4", "Fire // Ice"), ("5", "Mise")], r.stdout)
 
     def test_proven_by_keys_rejects_output_formats(self):
         for fmt in ("tsv", "json", "count"):

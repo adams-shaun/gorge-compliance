@@ -252,6 +252,14 @@ def _eligible_sql():
             "HAVING SUM(CASE WHEN lower(COALESCE(s.set_type,'')) IN (%s) THEN 1 ELSE 0 END)=COUNT(*))" % marks)
 
 
+def _legal_somewhere_sql():
+    """The card has at least one legality row with status legal: it is legal in some format.
+
+    A promo printing of an Un-set card keeps it out of the all-non-tournament tier-5 rule even
+    though no format lists it as legal; the need tier reads this, not the printing set types."""
+    return ("EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id AND l.status='legal')")
+
+
 def _level_at_least(level):
     if level not in LEVEL_ORDER:
         raise QueryError("proven: level must be one of %s, got %r" % (", ".join(LEVEL_ORDER), level))
@@ -368,10 +376,15 @@ def _tier_sql(conn, fmt=None, only=None):
     `only` is a list of oracle ids to restrict to; `fmt` keeps cards legal in that format."""
     legal = ("EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id AND l.status='legal' "
              "AND l.format IN (%s))")
-    whens = ["WHEN (%s) OR substr(c.name,1,2)='A-' THEN 5" % ("NOT " + _eligible_sql()),
-             "WHEN " + legal % "'standard'" + " THEN 1",
-             "WHEN " + legal % "'pioneer','modern'" + " THEN 2"]
+    whens = ["WHEN (%s) OR substr(c.name,1,2)='A-' THEN 5" % ("NOT " + _eligible_sql())]
     params = list(NON_TOURNAMENT_SET_TYPES)
+    if _has_table(conn, "legality"):
+        # Tiers 1-4 are only for cards legal in at least one format. A promo reprint of an Un-set
+        # card is not made legal by a printing outside NON_TOURNAMENT_SET_TYPES when no legality
+        # row says legal.
+        whens.append("WHEN NOT %s THEN 5" % _legal_somewhere_sql())
+    whens.extend(["WHEN " + legal % "'standard'" + " THEN 1",
+                  "WHEN " + legal % "'pioneer','modern'" + " THEN 2"])
     rank = "0"
     if _has_table(conn, "edhrec"):
         whens.append("WHEN EXISTS (SELECT 1 FROM edhrec e WHERE e.oracle_id=c.oracle_id) THEN 3")
