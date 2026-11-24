@@ -39,7 +39,11 @@ func certdeckBuilder(t *testing.T) (*cards.Registry, *certdeck.Builder) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	return reg, certdeck.NewBuilder(reg, sp)
+	b := certdeck.NewBuilder(reg, sp)
+	if err := b.UseForgeEditions("../../oracle/xengine/certdeck/testdata/editions"); err != nil {
+		t.Fatal(err)
+	}
+	return reg, b
 }
 
 func hasNeed(p *certdeck.Plan, n certdeck.Need) bool {
@@ -170,7 +174,7 @@ func TestCertdeckNeeds(t *testing.T) {
 		var files [2]map[string][]byte
 		for i := range files {
 			out := t.TempDir()
-			if err := runCertdeck([]string{"-cards", "../../.cards", "-manifests", manifestDir, "-target", target, "-out", out}); err != nil {
+			if err := runCertdeck([]string{"-cards", "../../.cards", "-manifests", manifestDir, "-forge-editions", "../../oracle/xengine/certdeck/testdata/editions", "-target", target, "-out", out}); err != nil {
 				t.Fatal(err)
 			}
 			files[i] = map[string][]byte{}

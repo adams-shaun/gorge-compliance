@@ -62,6 +62,10 @@ type Builder struct {
 	types map[string]bool
 	cache map[*cards.Card]*facts
 	ok    map[*cards.Card]bool
+	// forge, when set by UseForgeEditions, is the pinned Forge card DB's
+	// exclusion set (see forge_editions.go). It filters enablers, bearers and
+	// filler, never the focus card.
+	forge *forgeEditions
 }
 
 // NewBuilder is a Builder over reg and sp. Both are required: an enabler must
@@ -145,6 +149,9 @@ func (b *Builder) playableSlow(c *cards.Card) bool {
 		return false
 	}
 	if !(f.IsCreature() || f.IsInstant() || f.IsSorcery() || f.IsArtifact() || f.IsEnchantment() || f.IsPlaneswalker() || f.IsLand()) {
+		return false
+	}
+	if b.forge != nil && b.forge.excluded(f.Name) {
 		return false
 	}
 	if xm, ok := b.Sp.XMage(b.Reg, f.Name); !ok || xm != f.Name {

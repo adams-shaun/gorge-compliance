@@ -7,13 +7,19 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
+// forgeEditionsFixture is synthetic editions in Forge's format, not a copy of
+// Forge's (GPL) editions: it names the three Mystery Booster 2 playtest cards
+// and a handful of legal cards, enough to prove the command wires the filter.
+const forgeEditionsFixture = "../../oracle/xengine/certdeck/testdata/editions"
+
 func scenArgs(extra ...string) []string {
-	return append([]string{"-cards", "../../.cards", "-manifests", manifestDir}, extra...)
+	return append([]string{"-cards", "../../.cards", "-manifests", manifestDir, "-forge-editions", forgeEditionsFixture}, extra...)
 }
 
 func TestScenCLI(t *testing.T) {
@@ -103,4 +109,56 @@ func scenTSVRows(t *testing.T, path string) [][]string {
 		rows = append(rows, strings.Split(l, "\t"))
 	}
 	return rows
+}
+
+// TestScenForgeFilteredStarts is the pinned repro: the four xproof focus cards
+// whose starts held a Mystery Booster 2 playtest card the Forge card DB filters
+// (Indicate for Remove Soul and Deflection, Mox Poison for Retract, Gobland for
+// Devoted Retainer). The filtered pool must make each start name some other
+// enabler, or none.
+func TestScenForgeFilteredStarts(t *testing.T) {
+	testutil.CorpusRegistry(t)
+	out := t.TempDir()
+	filtered := map[string]bool{"Indicate": true, "Mox Poison": true, "Gobland": true}
+	for _, card := range []string{"Remove Soul", "Deflection", "Retract", "Devoted Retainer"} {
+		if err := runScen(scenArgs("-card", card, "-key", "cast", "-set", "XP", "-out", out)); err != nil {
+			t.Fatalf("%s: %v", card, err)
+		}
+		raw, err := os.ReadFile(filepath.Join(out, scen.Slug(card)+"-cast.start.json"))
+		if err != nil {
+			t.Fatalf("%s: %v", card, err)
+		}
+		f, err := scen.DecodeStartFile(raw)
+		if err != nil {
+			t.Fatalf("%s: %v\n%s", card, err, raw)
+		}
+		lists := map[string][]string{
+			"p0 hand": f.Setup.P0.Hand, "p0 battlefield": f.Setup.P0.Battlefield,
+			"p0 graveyard": f.Setup.P0.Graveyard, "p0 exile": f.Setup.P0.Exile, "p0 library": f.Setup.P0.Library,
+			"p1 hand": f.Setup.P1.Hand, "p1 battlefield": f.Setup.P1.Battlefield,
+			"p1 graveyard": f.Setup.P1.Graveyard, "p1 exile": f.Setup.P1.Exile, "p1 library": f.Setup.P1.Library,
+		}
+		for where, names := range lists {
+			for _, name := range names {
+				if filtered[name] {
+					t.Errorf("%s start names %q in %s; the Forge card DB filters it", card, name, where)
+				}
+			}
+		}
+	}
+}
+
+// With no editions given or found the command fails rather than building an
+// unfiltered pool; "none" opts out explicitly.
+func TestUseForgeEditionsRequiresEditions(t *testing.T) {
+	for _, k := range []string{"FORGE_ORACLE_EDITIONS", "FORGE_ORACLE_SRC", "FORGE_ORACLE_CLONE", "FORGE_ORACLE_DIR"} {
+		t.Setenv(k, t.TempDir())
+	}
+	t.Chdir(t.TempDir())
+	if err := useForgeEditions(&certdeck.Builder{}, ""); err == nil {
+		t.Error("useForgeEditions(\"\") with no editions anywhere = nil, want an error")
+	}
+	if err := useForgeEditions(&certdeck.Builder{}, "none"); err != nil {
+		t.Errorf("useForgeEditions(none) = %v, want nil", err)
+	}
 }
