@@ -496,6 +496,14 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		// attackedBySourceThisTurn player property (Port Razer), so a game with
 		// no card naming it does not depend on the record.
 		return v.Uint() != 0 && w.gameMentions("attackedBySourceThisTurn")
+	case typ == "Object" && name == "DealtDamageToPlayersThisTurnHere":
+		// The per-seat damage record (CR 120.1) is set by the DamageProvenance
+		// fold and cleared at TurnChange and on leaving the battlefield; setup
+		// cannot restate which player the object damaged. Its only reader is
+		// Forge's dealtDamageToOppThisTurn filter word (corpus carriers
+		// Dunerider Outlaw and Whirling Dervish), so a game with no card naming
+		// that word does not depend on the record.
+		return v.Uint() != 0 && w.gameMentions("dealtDamageToOppThisTurn")
 	case typ == "Object" && name == "ExiledCards":
 		if selfExile(o) {
 			w.why[reasonSelfExile] = true
