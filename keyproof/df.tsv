@@ -51,10 +51,10 @@ df4b5f7b-9d83-49b1-bd5e-77d0652eb34c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 df4ef2f8-2591-4be3-b905-4f9ff9c538ea	cast	cast-resolve	agreed	-	FX	scen	2	0	The Crystal's Chosen/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 df516046-7f83-4d64-aa0d-d687631d919a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df516046-7f83-4d64-aa0d-d687631d919a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-df54b79d-f31d-4582-86c0-1d34ec77be0f	cast	cast-resolve	agreed	-	X	scen	1	0	Does Machines/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+df54b79d-f31d-4582-86c0-1d34ec77be0f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:does-machines:f0t0:s2,f:xs:XP:does-machines:f0t0:s2	-	-	-	267e485f6204	-	942ef21c02f6	-	-	2026-11-24	xproof
 df54b79d-f31d-4582-86c0-1d34ec77be0f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Does Machines/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 df54b79d-f31d-4582-86c0-1d34ec77be0f	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Does Machines/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-df54b79d-f31d-4582-86c0-1d34ec77be0f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+df54b79d-f31d-4582-86c0-1d34ec77be0f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:does-machines:f0t0:s2,f:xs:XP:does-machines:f0t0:s2	-	-	-	267e485f6204	-	942ef21c02f6	-	-	2026-11-24	xproof
 df54b79d-f31d-4582-86c0-1d34ec77be0f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Does Machines/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 df54b79d-f31d-4582-86c0-1d34ec77be0f	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Does Machines/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 df555f60-2164-49dc-be67-00aca9eb0d45	cast	cast-resolve	agreed	-	FX	scen	2	0	Minecart Daredevil/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -192,7 +192,7 @@ dfeaec62-ca77-46dc-8eae-f627a5e1c02a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 dfeb239b-8904-4ef0-9a91-edc901b0c49a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dfeb239b-8904-4ef0-9a91-edc901b0c49a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dfec65a0-6fb6-463d-aa62-e84a427db217	cast	cast-resolve	agreed	-	X	scen	1	0	Arahbo, the First Fang/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dfec65a0-6fb6-463d-aa62-e84a427db217	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
+dfec65a0-6fb6-463d-aa62-e84a427db217	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 dfec65a0-6fb6-463d-aa62-e84a427db217	static#0.0	static#0.0	agreed	-	X	scen	1	0	Arahbo, the First Fang/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dfed42b8-b35e-4c70-9e75-25a4da158e76	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dfed42b8-b35e-4c70-9e75-25a4da158e76	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
