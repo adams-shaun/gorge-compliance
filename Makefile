@@ -120,6 +120,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # counter_upto regression fixture/test covers it, and the params chooseBinary comment now states the miss it
 # really records. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
 # fix/xp-forge-driver-counter-blight-piles.
+# ff02f60e839 = c92f40d4f49 + the three forced / out-of-window asks xproof found. chooseCardsToDiscardUnlessType
+# asks min..min when no unless-type card is in hand, so Alpharael's two-card hand is taken as the forced discard
+# (the old lower bound of 1 read it as 1..2 over two options); pickObjects answers a 0..0 ask with the empty pick,
+# so Death Cloud cast with X = 0 sacrifices none of its Swamps instead of missing at 3 options; and miss() notes and
+# answers asks that arrive after the last step's priority, when the following pass resolves a spell the last step
+# left on the stack (Coil and Catch's discard after the Marang item ends). ForcedAskTest replays the three xproof
+# requests in strict mode. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
+# fix/xp-forge-driver-forced-tail-asks, based on c92f40d4f49.
 # 19b0c2902c5 = c92f40d4f49 + the scripted controller pays a Phyrexian pip with 2 life (CR 107.4f, 118.3b) when gorge
 # recorded a pay_life pick: applyManaToCost takes the step's pay_life picks first (payPhyrexian + payLife(2)), then the
 # recorded spend and the pool; a pip with no pay_life pick stays a mana pip. Before, Vault Skirge's {B/P} stayed unpaid and the
@@ -135,7 +143,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # f789f1e46fb = the merge of 8b2a5e3141f (this lone-mode/library-order fix) and 19b0c2902c5 (the Phyrexian life
 # payment fix), both children of c92f40d4f49; the merge is clean and the full driver suite (126 tests, including
 # PhyrexianLifePaymentTest and LoneModeLibraryOrderTest) is green on it. Fork branch fix/xp-forge-driver-lone-mode-library-order.
-FORGE_ORACLE_REF ?= f789f1e46fb61b039a82d0a7ad89920da676cf97
+# 14f1f8537c = ff02f60e839 + 19b0c2902c5: the forced-tail branch merged with the Phyrexian life payment, so the pinned
+# driver keeps both fixes (the branch had been based on c92f40d4f49, before the Phyrexian fix landed on develop). The
+# merge is clean and changes no file of its own; cardsfolder/tokenscripts are unchanged (same as FORGE_REF ff076d4432).
+# Fork branch fix/xp-forge-driver-forced-tail-asks.
+# f822c4bfccdd = the clean merge of f789f1e46fb (the lone-mode/library-order fix plus the Phyrexian life payment)
+# and 14f1f8537c (the forced-tail fix plus the Phyrexian life payment), so the pinned driver keeps all three fixes.
+# The merge changes no file of its own; cardsfolder/tokenscripts are unchanged (same as FORGE_REF ff076d4432).
+# The full driver suite (129 tests, including ForcedAskTest, PhyrexianLifePaymentTest and LoneModeLibraryOrderTest)
+# is green on it. Fork branch fix/xp-forge-driver-lone-mode-library-order.
+FORGE_ORACLE_REF ?= f822c4bfccddc6d41ce163a4131878aeb8386d17
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
