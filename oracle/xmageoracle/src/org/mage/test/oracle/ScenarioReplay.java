@@ -477,11 +477,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 return false;
             }
             String[] pick = tapPaymentPick(getChoices().get(0));
-            if (pick == null) {
-                return false;
-            }
             Map<UUID, mage.abilities.SpecialAction> actions =
                     game.getState().getSpecialActions().getControlledBy(getId(), true);
+            if (pick == null) {
+                // Not a tap: the bare card name of a recorded Delve exile
+                // pick (CR 702.66a), or nothing this hook translates.
+                return queueDelveAction(game, actions.values());
+            }
             for (mage.abilities.SpecialAction action : actions.values()) {
                 String rule = action.getRule(true);
                 String key = rule.startsWith("Improvise") ? "Improvise"
@@ -514,6 +516,72 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     getTargets().add(1, TestPlayer.TARGET_SKIP);
                 }
                 convokeColour = "Convoke".equals(key) ? tapPaymentColourName(pick[1]) : null;
+                return true;
+            }
+            return false;
+        }
+
+        /** Translate gorge's recorded Delve exile picks (CR 702.66a: one
+         * choose_n pick per exiled card, the bare card name; the ask's
+         * trailing [choice_skip] is the Done option) at the front of the
+         * choice queue into XMage's Delve special mana action: the choice
+         * becomes "Delve" and the exiled graveyard cards go to the front of
+         * the target queue, which the action's exile-from-graveyard target
+         * reads. Taken only when a controlled special action whose rule
+         * starts with "Delve" lists a card of the front answer's name among
+         * its legal (graveyard) targets; false (nothing queued) otherwise. */
+        private boolean queueDelveAction(Game game,
+                java.util.Collection<mage.abilities.SpecialAction> actions) {
+            for (mage.abilities.SpecialAction action : actions) {
+                if (!action.getRule(true).startsWith("Delve")
+                        || !action.canActivate(getId(), game).canActivate()) {
+                    continue;
+                }
+                // The exile target sits on the action or on its exile cost.
+                mage.target.Targets targets = action.getTargets().isEmpty()
+                        ? action.getCosts().getTargets() : action.getTargets();
+                if (targets.isEmpty()) {
+                    continue;
+                }
+                mage.target.Target target = targets.get(0);
+                Set<UUID> legal = target.possibleTargets(getId(), action, game);
+                List<String> picked = new ArrayList<>();
+                Set<UUID> used = new java.util.HashSet<>();
+                while (picked.size() < getChoices().size() && used.size() < legal.size()) {
+                    String name = getChoices().get(picked.size());
+                    UUID found = null;
+                    for (UUID id : legal) {
+                        if (!used.contains(id)
+                                && hasObjectTargetNameOrAlias(game.getCard(id), name)) {
+                            found = id;
+                            break;
+                        }
+                    }
+                    if (found == null) {
+                        break;
+                    }
+                    used.add(found);
+                    picked.add(name);
+                }
+                if (picked.isEmpty()) {
+                    continue;
+                }
+                for (int i = 0; i < picked.size(); i++) {
+                    getChoices().remove(0);
+                }
+                if (!getChoices().isEmpty() && TestPlayer.CHOICE_SKIP.equals(getChoices().get(0))) {
+                    getChoices().remove(0);
+                }
+                getChoices().add(0, "Delve");
+                for (int i = 0; i < picked.size(); i++) {
+                    getTargets().add(i, picked.get(i));
+                }
+                if (target.getMaxNumberOfTargets() > picked.size() && legal.size() > picked.size()) {
+                    // The action takes up to one card per generic mana and
+                    // asks again while more can be chosen: close the ask.
+                    getTargets().add(picked.size(), TestPlayer.TARGET_SKIP);
+                }
+                convokeColour = null;
                 return true;
             }
             return false;

@@ -400,9 +400,76 @@ public final class ScenarioReplayPaymentTest {
         System.out.println("PASS an improvise tap pick becomes the special action's choice key and target");
     }
 
+    /** A plain card with a given name, enough to sit in a graveyard. */
+    private static final class NamedCard extends mage.cards.CardImpl {
+        NamedCard(UUID ownerId, String name) {
+            super(ownerId, new mage.cards.CardSetInfo(name, "TST", "1", mage.constants.Rarity.COMMON),
+                    new mage.constants.CardType[] {mage.constants.CardType.SORCERY}, "{B}");
+        }
+
+        private NamedCard(NamedCard card) {
+            super(card);
+        }
+
+        @Override
+        public NamedCard copy() {
+            return new NamedCard(this);
+        }
+    }
+
+    private static UUID addToGraveyard(Game game, TestPlayer p, String name) {
+        mage.cards.Card card = new NamedCard(p.getId(), name);
+        game.loadCards(new java.util.HashSet<>(java.util.Collections.singleton(card)), p.getId());
+        game.getState().setZone(card.getId(), mage.constants.Zone.GRAVEYARD);
+        p.getGraveyard().add(card);
+        return card.getId();
+    }
+
+    /** A Delve-shaped special action (rule text "Delve (...)", a graveyard
+     * target) with the recorded exile pick, the bare card name gorge's
+     * choose_n records, at the front of the choice queue: the hook must
+     * translate it to the action's choice key and the card to its target,
+     * not return false and leave the pick for auto-payment to ignore. A name
+     * outside the graveyard, or no Delve action, must queue nothing. */
+    private static void testDelveExilePickIsTakenAsSpecialAction() throws Exception {
+        Game game = game();
+        ScriptedPayment sp = newPlayer(game);
+        TestPlayer p = sp.player;
+        p.updateRange(game);
+        addToGraveyard(game, p, "Grave Strength");
+        addToGraveyard(game, p, "Other Card");
+        Method queue = p.getClass().getDeclaredMethod("queueTapPaymentAction", Game.class);
+        queue.setAccessible(true);
+        // No Delve action yet: nothing to take, nothing consumed.
+        sp.begin("");
+        p.addChoice("Grave Strength");
+        equal(false, queue.invoke(p, game));
+        equal("[Grave Strength]", p.getChoices().toString());
+        p.getChoices().clear();
+        // The real Delve special action, built the way the cast's payment
+        // cycle builds it for {1}{B}{B}{B}{B} with the generic unpaid.
+        ManaCostsImpl<ManaCost> costs = new ManaCostsImpl<>("{1}{B}{B}{B}{B}");
+        SpellAbility spell = new SpellAbility(costs, "Delve test");
+        spell.setControllerId(p.getId());
+        new mage.abilities.keyword.DelveAbility().addSpecialAction(spell, game, costs);
+        // A name that is no graveyard card queues nothing.
+        p.addChoice("Not In Graveyard");
+        equal(false, queue.invoke(p, game));
+        equal("[Not In Graveyard]", p.getChoices().toString());
+        p.getChoices().clear();
+        p.addChoice("Grave Strength");
+        p.addChoice(TestPlayer.CHOICE_SKIP);
+        equal(true, queue.invoke(p, game));
+        equal("[Delve]", p.getChoices().toString());
+        equal("[Grave Strength]", p.getTargets().toString());
+        sp.end();
+        System.out.println("PASS a delve exile pick becomes the special action's choice key and target");
+    }
+
     public static void main(String[] args) throws Exception {
         testTapPaymentPickParsing();
         testImproviseTapIsTakenAsSpecialAction();
+        testDelveExilePickIsTakenAsSpecialAction();
         testRecordedSplit();
         testGorgeSplit();
         testRunCodeRecordedPayment();
