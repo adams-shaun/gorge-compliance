@@ -963,6 +963,14 @@ func zoneMovingShuffle(reg *cards.Registry, entries []game.Entry, j int) bool {
 // seatHeld reports whether seat's pre-shuffle digest lists name in a zone a
 // library shuffle does not move: hand, graveyard, exile or command. The deck's
 // own order is the engine's, but a card the seat already held stays put.
+//
+// The comparison is by name: a Digest carries names, not the setup-bound refs
+// ("p0:Island#2") the runner resolves, so a hand holding a different object of
+// the same name is not distinguished. Closing that would need the setup
+// binder's refs, which the tape does not carry; a span that could expose it
+// either stops at the window's rng cut (a shuffle-plus-draw entry) or has
+// every same-name object interchangeable to the digest, and the self-check
+// still rejects a step the runner cannot offer.
 func seatHeld(d game.Digest, seat int, name string) bool {
 	for _, p := range d.Players {
 		if p.Seat != seat {

@@ -76,15 +76,36 @@ func TestSpanWeftwalkingETBShuffleSelfChecks(t *testing.T) {
 	}}
 	l := spanShape(t, reg, pair, start, startGameSeed(0, 1), "Weftwalking",
 		"xs:XP:weftwalking:f0t0:s1", "xproof start Weftwalking f0/t0 seed 1")
-	if !l.HasRNG {
-		t.Fatalf("HasRNG false: the ETB shuffle did not lower")
+	// The shuffle moved the hand and graveyard in and then drew seven, so its
+	// surplus does not match a pure library shuffle: the window's rng cut
+	// stops it before the play. Either cut satisfies the brief (the item must
+	// not carry the exact drawn object); accept both so the test does not pin
+	// which guard fires first.
+	shuffleAt := -1
+	for i, e := range l.Against.Entries {
+		if e.RNG > 0 && !rngAccounted(e) {
+			shuffleAt = i
+			break
+		}
 	}
-	if want := unsupported("shuffled_ref").reason; l.Truncated != want {
-		t.Fatalf("truncated %q at %d, want %q (the play after the shuffle must be cut)", l.Truncated, l.TruncatedAt, want)
+	if shuffleAt < 0 {
+		t.Fatalf("no unaccounted RNG entry in the lowered tape: the ETB shuffle did not lower")
 	}
+	switch l.Truncated {
+	case ReasonRNG, unsupported("shuffled_ref").reason:
+	default:
+		t.Fatalf("truncated %q at %d, want %q (a random shuffle the runner cannot reproduce) or %q (the play after it)",
+			l.Truncated, l.TruncatedAt, ReasonRNG, unsupported("shuffled_ref").reason)
+	}
+	// The write-up's failure is a later play naming Island#34, an object the
+	// runner's seeded draw may not have put in hand. No play or cast after the
+	// shuffle entry may survive.
 	for i, st := range l.Item.Steps {
-		if st.Op == "play" && l.StepEntry[i] >= 0 {
-			t.Fatalf("play step %d (%s) survived the shuffle: the runner may not offer the live object", i, st.Card)
+		if l.StepEntry[i] <= shuffleAt {
+			continue
+		}
+		if st.Op == "play" || st.Op == "cast" {
+			t.Fatalf("play/cast step %d (%s) survives after shuffle entry %d: the runner may not offer the live object", i, st.Card, shuffleAt)
 		}
 	}
 }
