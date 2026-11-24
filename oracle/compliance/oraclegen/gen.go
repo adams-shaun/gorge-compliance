@@ -280,6 +280,23 @@ type DieRoll struct {
 	Result  int `json:"result,omitempty"`
 }
 
+// CoinFlip is one coin flip an item's step makes. Step is the scenario step
+// whose action (or resolution) flipped it, Seat the flipper and Win whether
+// the flip was won (heads). Forced marks a flip a FlipCoinMod static turned
+// heads without a draw (Edgar, King of Figaro): the follower reproduces it
+// through the same static, so a driver that forces results skips it. Draws is
+// how many results the flip takes from the follower's generator: absent for
+// the ordinary one, 2 under a FlipCoinDoubler static (Krark's Thumb). The
+// list is flat and in log order, so a step that flips several coins (Mana
+// Clash's repeat loop) keeps every one.
+type CoinFlip struct {
+	Step   int  `json:"step"`
+	Seat   int  `json:"seat"`
+	Win    bool `json:"win"`
+	Forced bool `json:"forced,omitempty"`
+	Draws  int  `json:"draws,omitempty"`
+}
+
 // ThreeSeats is Scenario.Players for a multiplayer scenario: p0 and two
 // opponents, so one opponent can lose the game while it goes on (CR 800.4a).
 const ThreeSeats = 3
@@ -370,6 +387,14 @@ type Item struct {
 	// before running the step. Empty for every item that rolls no die, so
 	// existing item bytes are unchanged.
 	DieRolls []DieRoll `json:"die_rolls,omitempty"`
+	// CoinFlips is every coin flip the item's steps made, in log order. Like
+	// DieRolls it is an Item field, never a Step one, so Raw() never sends it
+	// to gorge's runner. A Forge driver must force each result before running
+	// the step (its FlipCoinEffect flips from its own seeded stream, so a card
+	// like Mana Clash loops a different number of times); XMage already
+	// scripts the runner's flips through xmage_answers (kind "flip"). Empty
+	// for every item that flips no coin, so existing item bytes are unchanged.
+	CoinFlips []CoinFlip `json:"coin_flips,omitempty"`
 	// Ignore names snapshot fields the comparison leaves out for this
 	// scenario: library_top after the card shuffles a library.
 	Ignore []string `json:"ignore,omitempty"`
@@ -442,6 +467,15 @@ func (it *Item) CutSteps(n int) {
 			}
 		}
 		it.DieRolls = out
+	}
+	if len(it.CoinFlips) > 0 {
+		var out []CoinFlip
+		for _, f := range it.CoinFlips {
+			if f.Step < n {
+				out = append(out, f)
+			}
+		}
+		it.CoinFlips = out
 	}
 }
 

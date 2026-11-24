@@ -129,6 +129,14 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     sends it to gorge's runner, and it is not a gorge decision: Forge poses
 //     no decision for a die, so exporting it in gorge_decisions would be an
 //     unconsumed leftover.
+//   - item.coin_flips lists every coin flip a step made (step, seat, win,
+//     forced, draws), in log order. Forge's FlipCoinEffect takes its result
+//     from MyRandom's nextBoolean, so a driver must force each result before
+//     running that step or it flips from its own stream and a card like Mana
+//     Clash (1 damage per tails, repeat until both heads) loops a different
+//     number of times. A forced flip (a FlipCoinMod static) takes no result
+//     from the generator and a doubled flip takes two. Like die_rolls it is an
+//     Item field, never sent to gorge's runner, and not a gorge decision.
 //   - abilities is keyed by the decimal step index.
 //   - library_top is not compared when a seat's setup names library cards
 //     (see forgeIgnore).
