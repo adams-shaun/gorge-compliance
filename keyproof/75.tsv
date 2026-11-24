@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75b235d3-595a-4859-be45-9559d8445db5	land	play-land	agreed	-	X	scen	1	0	Selesnya Guildgate/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 75b2da25-e551-4add-a252-6d4789366b5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75b2dd64-a2f5-4032-a19f-5b485dc44b16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75b39a67-6720-482f-935a-c142ca0f7891	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+75b39a67-6720-482f-935a-c142ca0f7891	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seed-the-land:cast:s1,f:xs:XP:seed-the-land:cast:s1	-	-	-	64a08ba7d913	-	73a5675b135b	-	-	2026-11-24	xproof
 75b39a67-6720-482f-935a-c142ca0f7891	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 75bf0f27-9df1-4ab4-97a8-94bb3223bdf9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75bf0f27-9df1-4ab4-97a8-94bb3223bdf9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
