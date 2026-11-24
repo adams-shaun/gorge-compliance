@@ -476,6 +476,11 @@ func activationXAnnounceCount(cost string) int {
 			// Source-counter removal reuses the mana X.
 			continue
 		}
+		if strings.EqualFold(head, "Waterbend") {
+			// Waterbend<X> is itself the {X} forgeCostSymbols counted: XMage
+			// asks it once, through getAmount (Katara, Water Tribe's Hope).
+			continue
+		}
 		n++
 	}
 	return n
