@@ -128,7 +128,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # left on the stack (Coil and Catch's discard after the Marang item ends). ForcedAskTest replays the three xproof
 # requests in strict mode. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
 # fix/xp-forge-driver-forced-tail-asks, based on c92f40d4f49.
-FORGE_ORACLE_REF ?= ff02f60e839df95e90f5241ebf10a423ed0f50ff
+# 19b0c2902c5 = c92f40d4f49 + the scripted controller pays a Phyrexian pip with 2 life (CR 107.4f, 118.3b) when gorge
+# recorded a pay_life pick: applyManaToCost takes the step's pay_life picks first (payPhyrexian + payLife(2)), then the
+# recorded spend and the pool; a pip with no pay_life pick stays a mana pip. Before, Vault Skirge's {B/P} stayed unpaid and the
+# cast was refused. PhyrexianLifePaymentTest covers Vault Skirge and Immolating Souleater. Driver-only change; same trees as
+# FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-phyrexian-life.
+# 14f1f8537c = ff02f60e839 + 19b0c2902c5: the forced-tail branch merged with the Phyrexian life payment, so the pinned
+# driver keeps both fixes (the branch had been based on c92f40d4f49, before the Phyrexian fix landed on develop). The
+# merge is clean and changes no file of its own; cardsfolder/tokenscripts are unchanged (same as FORGE_REF ff076d4432).
+# Fork branch fix/xp-forge-driver-forced-tail-asks.
+FORGE_ORACLE_REF ?= 14f1f8537c496b6fee453023a4af3fe3ee672508
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
