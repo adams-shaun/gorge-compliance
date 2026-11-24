@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f02aa99-481c-4089-8f7c-cfe7eaa7dda0	static#0.0	static#0.0	agreed	-	X	scen	1	0	Improvised Arsenal/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f07a2e6-692b-4d8c-9ecf-4d94b03706a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f07a2e6-692b-4d8c-9ecf-4d94b03706a0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f0c055f-f614-44b0-9374-c53541f89185	cast	cast-resolve	agreed	-	FX	scen	2	0	White Widow, Free Agent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4f0c055f-f614-44b0-9374-c53541f89185	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:white-widow-free-agent:f0t0:s2,f:xs:XP:white-widow-free-agent:f0t0:s2	-	-	-	5437c1394672	-	26bc8dbd5249	-	-	2026-11-24	xproof
 4f0c055f-f614-44b0-9374-c53541f89185	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f0ec90b-e5a0-49bd-8fa0-9be6ba259a62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f10b164-6d36-4935-92e7-53be73ac4c8a	cast	cast-resolve	agreed	-	X	scen	1	0	Orbital Plunge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -88,9 +88,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f66d82a-492f-4638-9f77-190d4a33ad7f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f69d2f9-c16a-4752-9026-794a29d73af8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4f69d2f9-c16a-4752-9026-794a29d73af8	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
