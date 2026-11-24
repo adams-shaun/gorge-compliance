@@ -153,3 +153,25 @@ func (r *answerRouting) ownBounceTargetAnswer(i int) string {
 	}
 	return targetPickValue(d, 0, oraclediffRefName(d.PickRefs[0]))
 }
+
+// optionalBounceChoiceAnswer is the CHOICE-queue answer for an own-bounce pick
+// that follows its trigger's own "you may" confirmation (Tazeem Raptor's "you
+// may return a land you control to its owner's hand": OptionalDecider$ on the
+// trigger, the same mandatory ChangeZone body as Kor Skyfisher's). XMage's
+// optional form asks the pick as an up-to TargetControlledPermanent through
+// player.choose (TestPlayer.makeChoose, the CHOICE queue; measured "Missing
+// CHOICE def ... Select up to one land you control" with the TARGET answer
+// left over), where the mandatory form is chooseTarget. "" for any other
+// decision.
+func (r *answerRouting) optionalBounceChoiceAnswer(i int) string {
+	d := r.ds[i]
+	if i == 0 || !ownBounceShape(d) || !r.ownBounce[d.Step] || hiddenPickUnanswerable(d) {
+		return ""
+	}
+	prev := r.ds[i-1]
+	if !sameAsker(prev, d) || prev.Kind != "yesno" || prev.GorgeKind != "trigger_optional" ||
+		prev.Resume != "optional" || pickKind(prev, 0) != "yes" {
+		return ""
+	}
+	return disambiguatedObjectChoice(d, 0, oraclediffRefName(d.PickRefs[0]))
+}

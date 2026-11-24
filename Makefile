@@ -36,7 +36,11 @@ GO_TEST_FLAGS ?= -p=2
 # 228d8a4bd9 = 7aeb547a86 + fork branch fix/champion-sacx-zero ("Sacrifice X other creatures": the cost's maximum X counted the
 # source itself, so Champion of Stray Souls alone could announce X = 1 and an unscripted announce then failed the activation
 # for want of a graveyard target; CR 601.2b/602.2b), ChampionOfStraySoulsTest.
-XMAGE_REF  ?= 228d8a4bd9b6df6771fa49a8d2e7782b102d8178
+# ec270409d0 = 228d8a4bd9 + fork #21 (declare blockers and combat damage are skipped only when no creature was
+# declared as an attacker or put onto the battlefield attacking; a declared attacker that later leaves combat does not
+# un-declare the attack, CR 508.8: Daemogoth Titan's own attack trigger sacrifices it, Duergar Assailant sacrifices
+# itself to its damage ability). Fork branch fix/attacker-removed-combat-steps, AttackerRemovedCombatStepsTest.
+XMAGE_REF  ?= ec270409d072a1432533559a250cee7cf4977a3c
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
