@@ -17,7 +17,8 @@ GO_TEST_FLAGS ?= -p=2
 # is pinned to. XMage is MIT; nothing from it is a build dependency.
 # 7a68b79c92 = 4142596fb7 + fork PRs #11 (enters-tapped sets tapped without a TappedEvent: Attentive Sunscribe) and #12 (a
 # static ability's conditional Custom/WhileControlled effect is not discarded on a false condition, CR 611.3a: Undercover Skrull).
-XMAGE_REF  ?= 7a68b79c9284918baacc0622e13843afdf2632b7
+# 33704ee4fe = 7a68b79c92 + fork PR #13 (Hellfire deals 3 when no creature died, X = 0, CR 608.2c).
+XMAGE_REF  ?= 33704ee4fef60b9d2729fe24975832b9eee66a10
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
