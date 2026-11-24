@@ -165,9 +165,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6dcdd313-6df7-4d44-a4cb-0346a4fdb4e1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Jeskai Devotee/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6dd1f375-e8f2-4725-8fbd-9750c4860820	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6dd5782d-2d1a-4d6b-8381-e15d0d5be24f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6dd71453-63ec-4f4c-87d2-34d207398b9a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6dd71453-63ec-4f4c-87d2-34d207398b9a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6dd71453-63ec-4f4c-87d2-34d207398b9a	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+6dd71453-63ec-4f4c-87d2-34d207398b9a	cast	cast	agreed	-	X	start	4	0	x:xs:XP:lathnu-hellion:cast:s1	-	-	-	fc71ca68c5ac	-	0931fddbc146	-	-	2026-11-24	xproof
+6dd71453-63ec-4f4c-87d2-34d207398b9a	f0/t0	ChangesZone	agreed	-	X	start	4	0	x:xs:XP:lathnu-hellion:cast:s1	-	-	-	fc71ca68c5ac	-	0931fddbc146	-	-	2026-11-24	xproof
+6dd71453-63ec-4f4c-87d2-34d207398b9a	f0/t1	Phase	agreed	-	X	start	4	0	x:xs:XP:lathnu-hellion:cast:s1	-	-	-	fc71ca68c5ac	-	0931fddbc146	-	-	2026-11-24	xproof
 6dd887be-484b-4ecc-8c02-8cce7e43ec89	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reaver-drone:cast:s1,f:xs:XP:reaver-drone:cast:s1	-	-	-	d864b561c9cb	-	0be463feec20	-	-	2026-11-24	xproof
 6dd887be-484b-4ecc-8c02-8cce7e43ec89	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6dd8ba09-f117-4514-9e09-f9f9f5fb5025	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -210,5 +210,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6dff1d15-604f-4eea-9b7a-0c0ba6afbbac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:meticulous-excavation:cast:s1,f:xs:XP:meticulous-excavation:cast:s1	-	-	-	ae86f6029288	-	1ec71e8208a6	-	-	2026-11-24	xproof
 6dff1d15-604f-4eea-9b7a-0c0ba6afbbac	f0/a0	Branch	agreed	-	FX	start	2	0	x:xs:XP:meticulous-excavation:f0a0:s1,f:xs:XP:meticulous-excavation:f0a0:s1	-	-	-	ae86f6029288	-	1ec71e8208a6	-	-	2026-11-24	xproof
 6dff1def-5b94-40c8-a942-dea8743ab47c	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6dff1def-5b94-40c8-a942-dea8743ab47c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6dff1def-5b94-40c8-a942-dea8743ab47c	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:nirkana-revenant:f0a0:s1,f:xs:XP:nirkana-revenant:f0a0:s1	-	-	-	fc71ca68c5ac	-	936c6ade49d7	-	-	2026-11-24	xproof
 6dff1def-5b94-40c8-a942-dea8743ab47c	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
