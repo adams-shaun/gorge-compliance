@@ -48,7 +48,11 @@ GO_TEST_FLAGS ?= -p=2
 # `mvn -pl Mage.Verify -am test -Dtest=VerifyCardDataTest` reaches Mage.Verify instead of failing in a dependency
 # module with no matching test. Set metadata and test-runner config only: no card behaviour, so the manifests are
 # unchanged.
-XMAGE_REF  ?= f07513ff8f240a6765eee368cc7452c421a5eafb
+# 464e1a6b23 = f07513ff8f merged with fork gorge c259b72036 (which carries #22's three commits, so the merge adds only):
+# fork #23 (Volatile Arsonist's attack trigger damages each chosen target, not only the creature slot, CR 601.2c:
+# EachTargetPointer, VolatileArsonistTest) and fork #24 (Artifact Ward is its three Oracle abilities, not protection
+# from artifacts, so artifact Equipment stays attached, CR 702.16d: ArtifactWardTest). Fork branch pin/xmage-ref-arsonist-ward.
+XMAGE_REF  ?= 464e1a6b239e2443efa0e5cf7a22613d36870b5b
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
