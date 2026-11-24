@@ -135,7 +135,7 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 		return it, refuse(it.ID, ReasonRetarget, "%s", why)
 	}
 	it.Scenario = sc
-	g.Decisions = oraclegen.RetimeEntryTargets(sc.Steps, g.Snapshots, playStepUnlessPays(sc.Steps, g.Decisions))
+	g.Decisions = oraclegen.RetimeEntryTargets(sc.Steps, g.Snapshots, keepTokenLooks(playStepUnlessPays(sc.Steps, g.Decisions)))
 	it.XAnswers = oraclegen.XAnswersForScenario(reg, g, sc, modes, castSteps)
 	if len(it.XAnswers) == 0 {
 		// Nothing to script: still one (empty) entry per step, as the
@@ -560,6 +560,49 @@ func playStepUnlessPays(steps []oraclegen.Step, ds []rules.OracleDecision) []rul
 		}
 		// xanswersSetup's yesno branch emits choice "yes" for a "Pay ..." pick.
 		d.Kind = "yesno"
+	}
+	return out
+}
+
+// keepTokenLooks rewrites every surveil/scry arrange whose looked-at cards are
+// all tokens to the keep-all answer. A token that left the battlefield cannot
+// move to another zone (CR 111.8), so gorge's pick over it moves nothing:
+// binning the token is the same final state as keeping it. The followers do
+// not share that state. Vanish from Sight's "owner puts it on top, then
+// surveil 1" leaves gorge looking at the token with the card under it still
+// in the library, while a follower that drops the token on arrival looks at
+// that card instead, so a scripted bin (the token's name, found nowhere in the
+// look) is unmatched and the follower falls back to its own choice and bins the
+// card under the token. Keep-all is the one answer that is the gorge outcome in
+// both readings. Selecting by "every option is a token" instead of by card
+// keeps the next token-on-top card covered.
+func keepTokenLooks(ds []rules.OracleDecision) []rules.OracleDecision {
+	out := append([]rules.OracleDecision(nil), ds...)
+	for i := range out {
+		d := &out[i]
+		if d.GorgeKind != "arrange" || d.Min != 0 || d.Options < 1 ||
+			(d.ArrangeKind != "graveyard" && d.ArrangeKind != "bottom") ||
+			len(d.OptionRefs) != d.Options || len(d.ArrangeLabels) != d.Options ||
+			len(d.PickIdx) == d.Options {
+			continue
+		}
+		allTokens := true
+		for _, ref := range d.OptionRefs {
+			if !strings.Contains(ref, ":token:") {
+				allTokens = false
+				break
+			}
+		}
+		if !allTokens {
+			continue
+		}
+		d.Picks = slices.Clone(d.ArrangeLabels)
+		d.PickRefs = slices.Clone(d.OptionRefs)
+		d.ObjectPicks = slices.Clone(d.OptionRefs)
+		d.PickIdx = make([]int, d.Options)
+		for k := range d.PickIdx {
+			d.PickIdx[k] = k
+		}
 	}
 	return out
 }
