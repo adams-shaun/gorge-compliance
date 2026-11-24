@@ -2,12 +2,14 @@ package main
 
 import (
 	"encoding/json"
+	"os"
 	"path/filepath"
 	"slices"
 	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -151,6 +153,43 @@ func TestStartDeckRefusesFieldBlocked(t *testing.T) {
 		}
 		if _, _, err := startDeck(reg, "start-p0", startSeat{Hand: []string{n}}); err != nil {
 			t.Errorf("%s in hand: %v", n, err)
+		}
+	}
+}
+
+// TestStartSeedBase: seed_base moves where a start file's seed search
+// starts, so a retried key plays new games; absent, the games are those of
+// seed_base 1, as before the field.
+func TestStartSeedBase(t *testing.T) {
+	dir := t.TempDir()
+	write := func(name, extra string) *startFile {
+		t.Helper()
+		p := filepath.Join(dir, name)
+		body := `{"format":"xproof-start-1","card":"Llanowar Elves","key":"f0/a0","players":2,"active":0,` +
+			`"max_turns":1,"setup":{"p0":{"battlefield":["Llanowar Elves"]},"p1":{}},"filler":"basics","seeds":3` + extra + `}`
+		if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+			t.Fatal(err)
+		}
+		f, err := readStartFile(p)
+		if err != nil {
+			t.Fatal(err)
+		}
+		return f
+	}
+	def, one, later := write("a.json", ""), write("b.json", `,"seed_base":1`), write("c.json", `,"seed_base":1000`)
+	d, o, l := def.gameSeeds(), one.gameSeeds(), later.gameSeeds()
+	if !slices.Equal(d, o) {
+		t.Errorf("absent seed_base seeds %v, seed_base 1 seeds %v: want equal", d, o)
+	}
+	if len(d) != 3 || len(l) != 3 {
+		t.Fatalf("seeds %v / %v, want 3 each", d, l)
+	}
+	for i, s := range l {
+		if s < 1000 || (i > 0 && s <= l[i-1]) || rules.SeedForStarter(s, 2, 0) != s {
+			t.Errorf("seed_base 1000 seeds %v: want increasing, >= 1000, each starting seat 0", l)
+		}
+		if slices.Contains(d, s) {
+			t.Errorf("seed_base 1000 replays seed %d of the default %v", s, d)
 		}
 	}
 }
