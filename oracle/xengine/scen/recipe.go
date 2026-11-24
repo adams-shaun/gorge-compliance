@@ -198,7 +198,15 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		if r, ok := onBF(); ok {
 			return r, nil
 		}
-		return refuse("no-generator:" + fam)
+		var why string
+		if fam == "combat" {
+			why = combatKeyStart(reg, c, card, key, f)
+		} else {
+			why = staticKeyStart(reg, b, c, card, key, f)
+		}
+		if why != "" {
+			return refuse(why)
+		}
 	case "activate", "trigger":
 		if m[1] != "0" {
 			return refuse("no-generator:face")

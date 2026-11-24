@@ -118,8 +118,9 @@ func TestScenFixtures(t *testing.T) {
 			}
 		}}},
 		{"Scoured Barrens", "land", want{path: "start", check: barrens}, want{path: "start", check: barrens}},
-		{"Aggressive Mammoth", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "no-generator:static"}},
-		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "refused", reason: "no-generator:combat"}},
+		{"Aggressive Mammoth", "static#0.0", want{path: "steps"}, want{path: "start", check: mammothStatic}},
+		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "start", check: sentryBlock}},
+		{"Magnigoth Sentry", "combat#0.attack", want{path: "steps"}, want{path: "start", check: sentryAttack}},
 		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "as-enters"}},
 		{"Gatekeeper of Malakir", "f0/t0", want{path: "start", check: gatekeeper}, want{path: "start", check: gatekeeper}},
 	}
@@ -159,6 +160,37 @@ func overseer(t *testing.T, f *StartFile) {
 	listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Inspiring Overseer"})
 	listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, rep("Plains", 3))
 	focusIs(t, f, 0, "Inspiring Overseer", "cast", 0)
+}
+
+// mammothStatic: "other creatures you control have trample" reads a second
+// creature, which the start places beside the card; no action is forced.
+func mammothStatic(t *testing.T, f *StartFile) {
+	if len(f.Setup.P0.Battlefield) != 2 || f.Setup.P0.Battlefield[0] != "Aggressive Mammoth" || f.Setup.P0.Battlefield[1] == "Aggressive Mammoth" {
+		t.Errorf("p0 battlefield = %v, want the Mammoth and one other permanent", f.Setup.P0.Battlefield)
+	}
+	if f.Focus != nil && f.Focus.Kind != "" {
+		t.Errorf("focus %+v, want no forced action", f.Focus)
+	}
+}
+
+// sentryAttack: the card attacks into the fixture blocker.
+func sentryAttack(t *testing.T, f *StartFile) {
+	listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Magnigoth Sentry"})
+	listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, []string{"Grizzly Bears"})
+	focusIs(t, f, 0, "Magnigoth Sentry", "attack", 0)
+	if f.Active != 0 {
+		t.Errorf("active %d, want 0", f.Active)
+	}
+}
+
+// sentryBlock: the opponent is active and its fixture attacks the card.
+func sentryBlock(t *testing.T, f *StartFile) {
+	listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Magnigoth Sentry"})
+	listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, []string{"Grizzly Bears"})
+	focusIs(t, f, 1, "Grizzly Bears", "attack", 0)
+	if f.Active != 1 {
+		t.Errorf("active %d, want 1", f.Active)
+	}
 }
 
 func barrens(t *testing.T, f *StartFile) {
@@ -645,4 +677,23 @@ func TestStartLifeGained(t *testing.T) {
 		{card: "Drogskol Reaver", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Chaplain's Blessing"}, p0BF: []string{"Drogskol Reaver", "Plains"},
 			focusCard: "Chaplain's Blessing", focusKind: "cast"},
 	})
+}
+
+// TestStartCombatStaticRefusals: a combat or static key a start cannot set up
+// is refused by a reason narrower than "no-generator:static"/"combat".
+func TestStartCombatStaticRefusals(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range [][3]string{
+		{"Karn, Argent Defender", "static#0.0", "no-generator:static:DisableTriggers"},
+		{"Academy Wall", "combat#0.attack", "no-generator:combat:defender"},
+		{"Holy Strength", "static#0.0", "no-generator:static:attached"},
+	} {
+		res, err := Generate(reg, b, r[0], r[1], Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != PathRefused || res.Reason != r[2] {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", r[0], r[1], res.Path, res.Reason, r[2])
+		}
+	}
 }
