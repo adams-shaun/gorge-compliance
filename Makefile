@@ -29,7 +29,11 @@ GO_TEST_FLAGS ?= -p=2
 # with no red spent the ETB haste trigger does not go on the stack at all, where the plain trigger plus a
 # ConditionalContinuousEffect put it there and read the condition only at resolution). Gorge now also carries
 # the b964ce92f0 ancestry, so the pin is a commit on the gorge branch itself.
-XMAGE_REF  ?= 3481be1d2b4641a072c61a50aae461f4f03c4340
+# 7aeb547a86 = 3481be1d2b + fork #20 (an "X target ..." spell whose count can be 0 is playable with no candidate for
+# its blueprint target, CR 601.2b/601.2c: Death Denied with no creature card in its controller's graveyard, X = 0;
+# the same gap covered every TargetsCountAdjuster user with a min-1 blueprint). Fork branch fix/xtargets-x-zero,
+# DeathDeniedTest.
+XMAGE_REF  ?= 7aeb547a86c8f783684b6565d7e60172f828d941
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -203,7 +207,8 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # kind unleash, "Enter with a +1/+1 counter" and "Enter without a counter"; Forge builds Unleash as an Optional$ ETB
 # replacement and asks confirmReplacementEffect, which the scripted controller now answers from that pick (the counter is
 # yes, the other label or an empty pick is no) instead of missing and leaving the pick unconsumed. UnleashReplacementTest
-# (2 tests) pins it. Driver-only change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# (2 tests: both answers) pins it; the full driver suite (148 tests, including ForcedDieRollTest) is green. Driver-only
+# change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-unleash-replacement.
 # 08b8a9ba5d9 = 1bb3cb16bb9 plus Delve's exile picks (CR 702.66a; xproof harness: Dig Through Time, Empty the Pits,
 # Dead Drop). gorge poses the picks as one choose whose every pick kind is "exile"; Forge's CostAdjustment asks
