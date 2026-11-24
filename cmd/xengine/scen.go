@@ -26,7 +26,6 @@ func runScen(args []string) error {
 	prefer := fs.String("prefer", "auto", "auto (a scripted-steps item where a template serves the key) or start (always a start file)")
 	set := fs.String("set", "SCEN", "names the item ids; with -census, the manifest to measure")
 	census := fs.Bool("census", false, "measure every key of every card of manifest -set: writes reach.tsv and summary.tsv")
-	lacks := fs.String("phase-lacks", "", "a file of card names phase.rs refuses, one a line (make phase-preflight output); without it every unlisted-by-XMage card is refused not-sent")
 	out := fs.String("out", "", "output dir (required)")
 	fs.Parse(args)
 	if *out == "" {
@@ -55,16 +54,6 @@ func runScen(args []string) error {
 	}
 	b := certdeck.NewBuilder(reg, sp)
 	opt := scen.Options{Prefer: *prefer, Set: *set}
-	if *lacks != "" {
-		lf, err := readListFile(*lacks)
-		if err != nil {
-			return err
-		}
-		opt.PhaseLacks = map[string]bool{}
-		for _, n := range lf.names {
-			opt.PhaseLacks[n] = true
-		}
-	}
 	if err := os.MkdirAll(*out, 0o755); err != nil {
 		return err
 	}
