@@ -1231,10 +1231,71 @@ public class ScenarioReplay extends CardTestPlayerBase {
             List<PlayerAction> hidden = hideOtherOccurrences(occurrence);
             try {
                 owner.applyExactBlockers(this, game);
+                dropAutoDeclaredBlocks(game);
                 super.selectBlockers(source, game, defendingPlayerId);
             } finally {
                 getActions().addAll(hidden);
             }
+        }
+
+        /** XMage's combat declares a "blocks this turn if able" blocker itself
+         * before it asks this player, and TestPlayer.selectBlockers throws
+         * "already blocking the maximum amount of creatures" for a queued block
+         * command on top of such a block. gorge records the same pair (the
+         * requirement forces it, CR 509.1c), so drop each queued block command
+         * of this turn whose blocker already blocks that attacker. A pair XMage
+         * did not declare stays queued and keeps TestPlayer's own error. */
+        private void dropAutoDeclaredBlocks(Game game) {
+            UUID attackingPlayer = game.getCombat().getAttackingPlayerId();
+            if (attackingPlayer == null) {
+                return;
+            }
+            for (PlayerAction action : new ArrayList<>(getActions())) {
+                if (action.getTurnNum() != game.getTurnNum() || !action.getAction().startsWith("block:")) {
+                    continue;
+                }
+                String command = action.getAction().substring("block:".length());
+                if (command.startsWith(TestPlayer.BLOCK_SKIP)) {
+                    continue;
+                }
+                String[] groups = command.split("\\$");
+                if (groups.length != 2) {
+                    continue;
+                }
+                Permanent blocker = namedCombatPermanent(groups[0], getId(), null, game);
+                Permanent attacker = namedCombatPermanent(groups[1], attackingPlayer, game.getCombat().getAttackers(), game);
+                if (blocker == null || attacker == null) {
+                    continue;
+                }
+                mage.game.combat.CombatGroup group = game.getCombat().findGroup(attacker.getId());
+                if (group != null && group.getBlockers().contains(blocker.getId())) {
+                    getActions().remove(action);
+                }
+            }
+        }
+
+        /** TestPlayer's name command ("Name" or "Name:k", k the zero-based
+         * index among the controller's matches in battlefield order) resolved
+         * against the live battlefield; attackers only, when `attacking` is
+         * given. Null when nothing matches. */
+        private static Permanent namedCombatPermanent(String command, UUID controller,
+                java.util.Collection<UUID> attacking, Game game) {
+            String name = combatBaseName(command);
+            int index = combatIndex(command);
+            mage.filter.predicate.mageobject.NamePredicate matches =
+                    new mage.filter.predicate.mageobject.NamePredicate(name, true);
+            int seen = 0;
+            for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
+                if (!controller.equals(permanent.getControllerId()) || !permanent.isPhasedIn()
+                        || (attacking != null && !attacking.contains(permanent.getId()))
+                        || !matches.apply(permanent, game)) {
+                    continue;
+                }
+                if (seen++ == index) {
+                    return permanent;
+                }
+            }
+            return null;
         }
 
         // Tokens may be created after scripted() queues an answer. Resolve a
@@ -7183,8 +7244,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     throw new IllegalArgumentException("block " + blockerRef + " -> " + attackerRef
                             + " names no live permanent (battlefield: " + battlefieldListing() + ")");
                 }
-                player.declareBlocker(player.getId(), blocker.getId(), attacker.getId(), game);
                 mage.game.combat.CombatGroup group = game.getCombat().findGroup(attacker.getId());
+                if (group != null && group.getBlockers().contains(blocker.getId())) {
+                    // XMage already declared this pair from a block requirement.
+                    continue;
+                }
+                player.declareBlocker(player.getId(), blocker.getId(), attacker.getId(), game);
+                group = game.getCombat().findGroup(attacker.getId());
                 if (group == null || !group.getBlockers().contains(blocker.getId())) {
                     throw new IllegalArgumentException("block " + blockerRef + " -> " + attackerRef
                             + " was not declared (battlefield: " + battlefieldListing() + ")");
