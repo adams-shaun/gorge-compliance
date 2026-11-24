@@ -54,8 +54,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48533a2d-1bdb-40a6-939e-9c8337e0dc5a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sleep-with-the-fishes:f0t0:s1,f:xs:XP:sleep-with-the-fishes:f0t0:s1	-	-	-	d864b561c9cb	-	43ac9f6e6001	-	-	2026-11-24	xproof
 48533a2d-1bdb-40a6-939e-9c8337e0dc5a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sleep-with-the-fishes:f0t0:s1,f:xs:XP:sleep-with-the-fishes:f0t0:s1	-	-	-	d864b561c9cb	-	43ac9f6e6001	-	-	2026-11-24	xproof
 4854a41e-db49-462f-ae57-0ba4005bae75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4854a41e-db49-462f-ae57-0ba4005bae75	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4854a41e-db49-462f-ae57-0ba4005bae75	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4854a41e-db49-462f-ae57-0ba4005bae75	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+4854a41e-db49-462f-ae57-0ba4005bae75	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cacophony-scamp:f0t1:s1,f:xs:XP:cacophony-scamp:f0t1:s1	-	-	-	ae86f6029288	-	a0d689269e13	-	-	2026-11-24	xproof
 4854f836-2247-43c3-adbc-1d1ee5eaf120	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4854f836-2247-43c3-adbc-1d1ee5eaf120	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 485cfaca-9348-418b-a751-2ecb19f3f210	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -74,8 +74,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c4603be-d71a-4d33-b62c-04ead1987dbe	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	G'raha Tia/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c4603be-d71a-4d33-b62c-04ead1987dbe	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	G'raha Tia/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c4603be-d71a-4d33-b62c-04ead1987dbe	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	G'raha Tia/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0c460bdd-460b-4312-9ed2-32f3809a7d36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c460bdd-460b-4312-9ed2-32f3809a7d36	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c460bdd-460b-4312-9ed2-32f3809a7d36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:combat-thresher:f0t0:s1,f:xs:XP:combat-thresher:f0t0:s1	-	-	-	ae86f6029288	-	a00023e70d43	-	-	2026-11-24	xproof
+0c460bdd-460b-4312-9ed2-32f3809a7d36	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:combat-thresher:f0t0:s1,f:xs:XP:combat-thresher:f0t0:s1	-	-	-	ae86f6029288	-	a00023e70d43	-	-	2026-11-24	xproof
 0c4bc9ea-a5fd-4f44-96a1-5448eee228c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c4e0e46-77f1-4ff6-afbc-1a67feceedfb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c4e2c90-c17b-42cc-b4d7-cf75970fbe90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -130,8 +130,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c952586-e522-4982-bebd-96f1db73053d	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tourach-dread-cantor:f0t1:s1,f:xs:XP:tourach-dread-cantor:f0t1:s1	-	-	-	d864b561c9cb	-	207fa265a1ee	-	-	2026-11-24	xproof
 0c978da4-9caa-4b4b-be52-889677962ec9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c978da4-9caa-4b4b-be52-889677962ec9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c97aea7-c997-45b4-a044-84fb5c07a021	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c97aea7-c997-45b4-a044-84fb5c07a021	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c97aea7-c997-45b4-a044-84fb5c07a021	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aerie-auxiliary:f0t0:s1,f:xs:XP:aerie-auxiliary:f0t0:s1	-	-	-	ae86f6029288	-	5e4ac128a98a	-	-	2026-11-24	xproof
+0c97aea7-c997-45b4-a044-84fb5c07a021	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aerie-auxiliary:f0t0:s1,f:xs:XP:aerie-auxiliary:f0t0:s1	-	-	-	ae86f6029288	-	5e4ac128a98a	-	-	2026-11-24	xproof
 0c9e3e6a-0bab-4619-b135-d2dbe824b1f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c9e3e6a-0bab-4619-b135-d2dbe824b1f0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c9e3e6a-0bab-4619-b135-d2dbe824b1f0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

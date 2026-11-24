@@ -9,10 +9,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f0c8c60-96f1-4b26-a9f6-386e1cec517d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f0e8fd5-9db9-4507-a42f-cb99080b89e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f0fa785-37ab-46a8-9ec0-6f8b29576d93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f0fa785-37ab-46a8-9ec0-6f8b29576d93	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f0fa785-37ab-46a8-9ec0-6f8b29576d93	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5f0fa785-37ab-46a8-9ec0-6f8b29576d93	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f0fa785-37ab-46a8-9ec0-6f8b29576d93	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f0fa785-37ab-46a8-9ec0-6f8b29576d93	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f0fa785-37ab-46a8-9ec0-6f8b29576d93	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+5f0fa785-37ab-46a8-9ec0-6f8b29576d93	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5f12134c-d626-4a5e-8653-700681a491fc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancient-silverback:cast:s1,f:xs:XP:ancient-silverback:cast:s1	-	-	-	25696bf19d5b	-	8c4b896fd387	-	-	2026-11-24	xproof
 5f12134c-d626-4a5e-8653-700681a491fc	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:ancient-silverback:f0a0:s1,f:xs:XP:ancient-silverback:f0a0:s1	-	-	-	d864b561c9cb	-	8c4b896fd387	-	-	2026-11-24	xproof
 5f12f665-f083-48ae-b61a-541051c996ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -159,7 +159,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5fba553e-81b9-419b-aa20-b2a7cfcd042b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fba553e-81b9-419b-aa20-b2a7cfcd042b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fc09704-56cf-4e47-bd96-27ac34434941	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5fc09704-56cf-4e47-bd96-27ac34434941	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5fc09704-56cf-4e47-bd96-27ac34434941	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hoarding-recluse:f0t0:s1,f:xs:XP:hoarding-recluse:f0t0:s1	-	-	-	ae86f6029288	-	bd8e9db8f2cc	-	-	2026-11-24	xproof
 5fc1f04a-2c39-4b3a-b62e-6e30c3d8a583	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fc1f04a-2c39-4b3a-b62e-6e30c3d8a583	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fc1f04a-2c39-4b3a-b62e-6e30c3d8a583	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -182,7 +182,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5fdde593-54cb-4186-974b-df4383f7efe2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fdff691-686d-4ce0-bd12-eea676a648b4	cast	cast-resolve	agreed	-	X	scen	1	0	Xindi Surveyors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5fdff691-686d-4ce0-bd12-eea676a648b4	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-5fe07a76-f261-4f16-8a15-571bed707261	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5fe07a76-f261-4f16-8a15-571bed707261	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sigarda-font-of-blessings:cast:s1,f:xs:XP:sigarda-font-of-blessings:cast:s1	-	-	-	ae86f6029288	-	25681c9d0021	-	-	2026-11-24	xproof
 5fe13418-c63c-4f3c-9a42-7ab06949e3cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fe29c25-a7ad-4c79-a5a5-da1bbc832141	cast	cast-resolve	agreed	-	X	scen	1	0	Season of the Bold/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5fe2ed67-55a6-4816-910f-0e3c38ea06a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

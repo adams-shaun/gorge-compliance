@@ -5,9 +5,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 67114cbb-cbf4-4250-a5e9-e1c4bc5841f6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 671209d5-8b56-4ce7-94a0-d770d698c0df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 671209d5-8b56-4ce7-94a0-d770d698c0df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-67158085-4807-4f0e-8599-c55ec7ec252e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-67158085-4807-4f0e-8599-c55ec7ec252e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-67158085-4807-4f0e-8599-c55ec7ec252e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+67158085-4807-4f0e-8599-c55ec7ec252e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:skyfisher-spider:cast:s1,f:xs:XP:skyfisher-spider:cast:s1	-	-	-	ae86f6029288	-	e6bf392a8400	-	-	2026-11-24	xproof
+67158085-4807-4f0e-8599-c55ec7ec252e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:skyfisher-spider:cast:s1,f:xs:XP:skyfisher-spider:cast:s1	-	-	-	ae86f6029288	-	e6bf392a8400	-	-	2026-11-24	xproof
+67158085-4807-4f0e-8599-c55ec7ec252e	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skyfisher-spider:f0t1:s1,f:xs:XP:skyfisher-spider:f0t1:s1	-	-	-	ae86f6029288	-	e6bf392a8400	-	-	2026-11-24	xproof
 67175889-02f9-4ad8-a9ab-11db44328b67	cast	cast-resolve	agreed	-	FX	scen	2	0	Green Goblin, Revenant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 67175889-02f9-4ad8-a9ab-11db44328b67	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Green Goblin, Revenant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 67175889-02f9-4ad8-a9ab-11db44328b67	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Green Goblin, Revenant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6754753d-790e-4a95-a150-76741c4a02d4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67554654-e751-4679-9e92-f3588525ae4f	cast	cast-resolve	agreed	-	X	scen	1	0	Enter the Enigma/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6755a7af-5b55-4245-a777-27e69979479b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6755a7af-5b55-4245-a777-27e69979479b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6755a7af-5b55-4245-a777-27e69979479b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:lattice-blade-mantis:f0t0:s1,f:xs:XP:lattice-blade-mantis:f0t0:s1	-	-	-	ae86f6029288	-	ab5af6bb4a2d	-	-	2026-11-24	xproof
 675a0eff-4da0-45cd-9371-fca96c313f4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 675a0eff-4da0-45cd-9371-fca96c313f4c	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PJ21.json	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 675ed28e-4328-4638-aaad-3f47e5c7895f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 67ab82de-1167-42f5-90bd-21c63edcc712	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67ab82de-1167-42f5-90bd-21c63edcc712	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67af9477-82b2-459e-8c09-b9a93a1d1c94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-67afcfef-3f0c-4823-b690-01732f28a005	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+67afcfef-3f0c-4823-b690-01732f28a005	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:revive-the-shire:cast:s1,f:xs:XP:revive-the-shire:cast:s1	-	-	-	ae86f6029288	-	8913eaf806a2	-	-	2026-11-24	xproof
 67b2cd0c-ecc8-4129-b1ac-820c9924190c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:duskmantle-house-of-shadow:land:s1,f:xs:XP:duskmantle-house-of-shadow:land:s1	-	-	-	64a08ba7d913	-	3db38776f7fc	-	-	2026-11-24	xproof
 67b2cd0c-ecc8-4129-b1ac-820c9924190c	f0/a1	Mill	agreed	-	FX	start	2	0	x:xs:XP:duskmantle-house-of-shadow:f0a1:s1,f:xs:XP:duskmantle-house-of-shadow:f0a1:s1	-	-	-	d864b561c9cb	-	3db38776f7fc	-	-	2026-11-24	xproof
 67b2cd0c-ecc8-4129-b1ac-820c9924190c	land	land	agreed	-	FX	start	2	0	x:xs:XP:duskmantle-house-of-shadow:land:s1,f:xs:XP:duskmantle-house-of-shadow:land:s1	-	-	-	64a08ba7d913	-	3db38776f7fc	-	-	2026-11-24	xproof

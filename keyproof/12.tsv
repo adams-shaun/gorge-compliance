@@ -23,9 +23,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1216900e-93e3-41a4-b354-9c81938639c2	cast	cast-resolve	agreed	-	FX	scen	2	0	Vren, the Relentless/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1216900e-93e3-41a4-b354-9c81938639c2	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Vren, the Relentless/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1216900e-93e3-41a4-b354-9c81938639c2	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Vren, the Relentless/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-12172602-89db-4c8b-b752-4f8380896589	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12172602-89db-4c8b-b752-4f8380896589	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12172602-89db-4c8b-b752-4f8380896589	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+12172602-89db-4c8b-b752-4f8380896589	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marauding-dreadship:f0t0:s1,f:xs:XP:marauding-dreadship:f0t0:s1	-	-	-	ae86f6029288	-	bcb8a99839b8	-	-	2026-11-24	xproof
+12172602-89db-4c8b-b752-4f8380896589	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+12172602-89db-4c8b-b752-4f8380896589	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:marauding-dreadship:f0t0:s1,f:xs:XP:marauding-dreadship:f0t0:s1	-	-	-	ae86f6029288	-	bcb8a99839b8	-	-	2026-11-24	xproof
 1219e330-01ac-405a-b75a-dd4298598167	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 121a1efa-03f2-4b5f-8e72-539de028457e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:towering-wave-mystic:cast:s1,f:xs:XP:towering-wave-mystic:cast:s1	-	-	-	ae86f6029288	-	537a7d39f272	-	-	2026-11-24	xproof
 121a1efa-03f2-4b5f-8e72-539de028457e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -69,13 +69,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 123d2b6e-114e-4767-860d-50790382ca4a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 12401ad1-b5c9-43dc-9389-04aaf5db8b26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12401ad1-b5c9-43dc-9389-04aaf5db8b26	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1244902e-1a4e-4d3c-9a55-9be4602e3d2d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1244902e-1a4e-4d3c-9a55-9be4602e3d2d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:colossal-dreadmask:f0t0:s1,f:xs:XP:colossal-dreadmask:f0t0:s1	-	-	-	ae86f6029288	-	34cf271b3422	-	-	2026-11-24	xproof
 1244902e-1a4e-4d3c-9a55-9be4602e3d2d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1244902e-1a4e-4d3c-9a55-9be4602e3d2d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1244902e-1a4e-4d3c-9a55-9be4602e3d2d	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:colossal-dreadmask:f0t0:s1,f:xs:XP:colossal-dreadmask:f0t0:s1	-	-	-	ae86f6029288	-	34cf271b3422	-	-	2026-11-24	xproof
 1245b165-e26f-4839-8468-2e95148fc6f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1245b165-e26f-4839-8468-2e95148fc6f6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-124c3af4-8545-479a-b44c-446da1c8b535	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-124c3af4-8545-479a-b44c-446da1c8b535	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+124c3af4-8545-479a-b44c-446da1c8b535	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:woodcaller-automaton:cast:s1,f:xs:XP:woodcaller-automaton:cast:s1	-	-	-	ae86f6029288	-	3d63630769fb	-	-	2026-11-24	xproof
+124c3af4-8545-479a-b44c-446da1c8b535	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:woodcaller-automaton:cast:s1,f:xs:XP:woodcaller-automaton:cast:s1	-	-	-	ae86f6029288	-	3d63630769fb	-	-	2026-11-24	xproof
 124c8663-21f3-4cd8-a060-9d04be35c43f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 124cf15a-587a-4f1f-a943-f462072f2098	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 124fea1b-c0e9-4e56-b026-82dddee0d36e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -92,7 +92,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1264da2f-4767-4bec-b4ed-1c625ac3cf95	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dromoka-s-gift:cast:s1,f:xs:XP:dromoka-s-gift:cast:s1	-	-	-	d864b561c9cb	-	9357180527c8	-	-	2026-11-24	xproof
 12654457-3aae-4046-a976-8e41c3f78927	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mist-raven:f0t0:s1,f:xs:XP:mist-raven:f0t0:s1	-	-	-	d864b561c9cb	-	0a2b01e02b77	-	-	2026-11-24	xproof
 12654457-3aae-4046-a976-8e41c3f78927	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mist-raven:f0t0:s1,f:xs:XP:mist-raven:f0t0:s1	-	-	-	d864b561c9cb	-	0a2b01e02b77	-	-	2026-11-24	xproof
-126679aa-f150-4949-8566-12d223af3960	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+126679aa-f150-4949-8566-12d223af3960	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inspired-inventor:f0t0:s1,f:xs:XP:inspired-inventor:f0t0:s1	-	-	-	ae86f6029288	-	50656d4ed93e	-	-	2026-11-24	xproof
 126679aa-f150-4949-8566-12d223af3960	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 126844f5-3a95-48cb-80f2-d7e4b0005350	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1269f7dc-a5d6-48e9-8887-b581ce38c204	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

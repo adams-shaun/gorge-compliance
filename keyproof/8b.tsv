@@ -146,8 +146,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ba0e831-054a-4e01-92ed-2845bd2fa12f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ba0e831-054a-4e01-92ed-2845bd2fa12f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ba24644-8dff-4f1e-a96a-7361baf46b5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ba24644-8dff-4f1e-a96a-7361baf46b5a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ba24644-8dff-4f1e-a96a-7361baf46b5a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ba24644-8dff-4f1e-a96a-7361baf46b5a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+8ba24644-8dff-4f1e-a96a-7361baf46b5a	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8ba2a7ad-a09b-4f52-9c76-c70510dc4feb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ba2f559-f9bd-48ef-9fef-6dffe768f4ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ba2f559-f9bd-48ef-9fef-6dffe768f4ed	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -198,8 +198,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8be11473-6edf-4f45-b541-11858655fb5f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8be46af9-1b70-4da9-b16d-869c3831dc99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8be62f5c-0ab2-4869-97a2-d8a69a3fde95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8be62f5c-0ab2-4869-97a2-d8a69a3fde95	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8be62f5c-0ab2-4869-97a2-d8a69a3fde95	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8be62f5c-0ab2-4869-97a2-d8a69a3fde95	f0/a0	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+8be62f5c-0ab2-4869-97a2-d8a69a3fde95	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:frodo-sauron-s-bane:f0a1:s1,f:xs:XP:frodo-sauron-s-bane:f0a1:s1	-	-	-	ae86f6029288	-	edbf1e1559ab	-	-	2026-11-24	xproof
 8beaaf55-e05d-49c3-9320-c222c4d8ad12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8beccaff-d30f-4164-a264-cb7119cee4f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8beccaff-d30f-4164-a264-cb7119cee4f1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

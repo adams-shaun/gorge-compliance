@@ -33,7 +33,7 @@ c52eaa87-9251-4a47-83fd-04e582ade612	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Wil
 c52eaa87-9251-4a47-83fd-04e582ade612	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Willowrush Verge/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c52eaa87-9251-4a47-83fd-04e582ade612	land	play-land	agreed	-	FX	scen	2	0	Willowrush Verge/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c52fc8a1-43c6-41f8-b010-03be7c89ef1d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c52fc8a1-43c6-41f8-b010-03be7c89ef1d	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c52fc8a1-43c6-41f8-b010-03be7c89ef1d	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c531801c-acf0-45ae-a112-054cc5ccb6ed	cast	cast-resolve	agreed	-	X	scen	1	0	Burrog Banemaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c531801c-acf0-45ae-a112-054cc5ccb6ed	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Burrog Banemaker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c531801c-acf0-45ae-a112-054cc5ccb6ed	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Burrog Banemaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -73,7 +73,7 @@ c551ba63-2a74-439d-8996-d566e2efbd5f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 c552bd73-ce75-40fd-9d80-9e90b6f45274	cast	cast-resolve	agreed	-	X	scen	1	0	Flamebraider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 c552bd73-ce75-40fd-9d80-9e90b6f45274	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Flamebraider/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 c554ae68-0201-4958-aa63-8159911acb50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c554ae68-0201-4958-aa63-8159911acb50	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c554ae68-0201-4958-aa63-8159911acb50	f0/a0	NULL	owed	refused:steps-needed:cost:GP	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c5577514-d2af-4904-9f94-b472228c6e3d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5577514-d2af-4904-9f94-b472228c6e3d	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 c5577514-d2af-4904-9f94-b472228c6e3d	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -181,7 +181,7 @@ c5f92560-dc82-4bd2-ae6b-4c3942d458b7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c5f92560-dc82-4bd2-ae6b-4c3942d458b7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stomp-and-howl:cast:s1,f:xs:XP:stomp-and-howl:cast:s1	-	-	-	16ec2936189a	-	19db2356e968	-	-	2026-11-24	xproof
 c5fa1631-8685-49e1-baad-86ef72a9499c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5fa1631-8685-49e1-baad-86ef72a9499c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c5fa1631-8685-49e1-baad-86ef72a9499c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c5fa1631-8685-49e1-baad-86ef72a9499c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-fireleaper:f0t0:s1,f:xs:XP:goblin-fireleaper:f0t0:s1	-	-	-	ae86f6029288	-	78c16ac0338b	-	-	2026-11-24	xproof
 c5fc8e7c-a87e-4586-a13c-d30e0a3aafbf	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Avengers Tower/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c5fc8e7c-a87e-4586-a13c-d30e0a3aafbf	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Avengers Tower/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c5fc8e7c-a87e-4586-a13c-d30e0a3aafbf	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Avengers Tower/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

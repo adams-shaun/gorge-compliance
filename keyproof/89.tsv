@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 89560e1c-b7fb-46b7-955e-647e3ae9091b	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:thunder-totem:f0a1:s1,f:xs:XP:thunder-totem:f0a1:s1	-	-	-	d864b561c9cb	-	768bedb87ab7	-	-	2026-11-24	xproof
 8957f7c2-040c-4048-9f21-efa7c97682b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8958a6fe-76ef-45e3-8522-6bc13486b447	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8958a6fe-76ef-45e3-8522-6bc13486b447	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8958a6fe-76ef-45e3-8522-6bc13486b447	f0/t0	NULL	owed	refused:no-generator:trigger:Scry	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8959a147-75b1-4f4a-a699-cb354ff55e59	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 895a0e00-20a9-44f8-9215-66edcdf016b7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 895a0e00-20a9-44f8-9215-66edcdf016b7	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -127,9 +127,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 89a2fab8-b074-42aa-a871-d9c5de2d0895	cast	cast-resolve	agreed	-	X	scen	1	0	Ordinary Bear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 89a3a6a3-e5f9-4e28-8372-99219db3f976	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 89a3a6a3-e5f9-4e28-8372-99219db3f976	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-89a59a6d-e9d4-405c-8518-4da86dae30d1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-89a59a6d-e9d4-405c-8518-4da86dae30d1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-89a59a6d-e9d4-405c-8518-4da86dae30d1	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+89a59a6d-e9d4-405c-8518-4da86dae30d1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:norn-s-inquisitor:cast:s1,f:xs:XP:norn-s-inquisitor:cast:s1	-	-	-	ae86f6029288	-	b370a309e3be	-	-	2026-11-24	xproof
+89a59a6d-e9d4-405c-8518-4da86dae30d1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:norn-s-inquisitor:cast:s1,f:xs:XP:norn-s-inquisitor:cast:s1	-	-	-	ae86f6029288	-	b370a309e3be	-	-	2026-11-24	xproof
+89a59a6d-e9d4-405c-8518-4da86dae30d1	f0/t1	NULL	owed	refused:no-generator:trigger:Transformed	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 89a6e876-0b00-4671-9652-766fd7ef9bf2	cast	cast-resolve	agreed	-	X	scen	1	0	The Theorist, Jace Beleren/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 89a6e876-0b00-4671-9652-766fd7ef9bf2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Theorist, Jace Beleren/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 89a6e876-0b00-4671-9652-766fd7ef9bf2	f0/a1	activate#0.1	agreed	-	X	scen	1	0	The Theorist, Jace Beleren/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 89b24b5f-d837-4274-8877-8ff7dc2708ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 89b24b5f-d837-4274-8877-8ff7dc2708ba	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 89b88a6c-92be-43eb-9de4-f79cc75c6d90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-89b88a6c-92be-43eb-9de4-f79cc75c6d90	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+89b88a6c-92be-43eb-9de4-f79cc75c6d90	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 89b9efc8-d1cd-4b2a-acf3-4f0dd1629167	cast	cast-resolve	agreed	-	X	scen	1	0	Moopsy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 89b9efc8-d1cd-4b2a-acf3-4f0dd1629167	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 89bd056d-8f5b-4d0e-b80a-58a984e21100	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

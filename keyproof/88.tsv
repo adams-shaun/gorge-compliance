@@ -54,14 +54,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8847b057-8896-4c72-a11f-3c183b1cc60e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88485575-e491-4ab7-a020-e52dd92ae085	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 884d08bf-7e97-40cc-864e-445ae0bd1646	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-884d08bf-7e97-40cc-864e-445ae0bd1646	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+884d08bf-7e97-40cc-864e-445ae0bd1646	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 88522a0f-5377-4522-97f4-4148bef954af	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bolg-of-the-north:f0t0:s1,f:xs:XP:bolg-of-the-north:f0t0:s1	-	-	-	25696bf19d5b	-	cbbe5c83c071	-	-	2026-11-24	xproof
 88522a0f-5377-4522-97f4-4148bef954af	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bolg-of-the-north:f0t0:s1,f:xs:XP:bolg-of-the-north:f0t0:s1	-	-	-	25696bf19d5b	-	cbbe5c83c071	-	-	2026-11-24	xproof
 8854222e-590f-4fc0-b5d7-bf3d986b8507	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8854222e-590f-4fc0-b5d7-bf3d986b8507	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 885630a8-c43b-4804-acd6-14a7c7321d73	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8859a692-d107-4de2-9110-4681fc2761c7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8859a692-d107-4de2-9110-4681fc2761c7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8859a692-d107-4de2-9110-4681fc2761c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glissa-sunslayer:cast:s1,f:xs:XP:glissa-sunslayer:cast:s1	-	-	-	ae86f6029288	-	6d3ea2666a90	-	-	2026-11-24	xproof
+8859a692-d107-4de2-9110-4681fc2761c7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 885c47cb-64fb-4c83-a9ca-4f2eecb7d3e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 885d68de-db97-4c9e-bb44-8e561a482dde	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fae-offering:cast:s1,f:xs:XP:fae-offering:cast:s1	-	-	-	d864b561c9cb	-	1516cc8c5d9f	-	-	2026-11-24	xproof
 885d68de-db97-4c9e-bb44-8e561a482dde	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -73,9 +73,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8866272d-89cb-478c-82ae-20e1d510eab7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8866d33e-8159-4e10-8b11-914c12a0918f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 887614f9-f12f-47bc-ae56-1438cd7cad10	cast	cast-resolve	agreed	-	FX	scen	2	0	There's Coffee in that Nebula/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-88777fc0-286d-47fc-8e94-1e289b4964c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-88777fc0-286d-47fc-8e94-1e289b4964c4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-88777fc0-286d-47fc-8e94-1e289b4964c4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+88777fc0-286d-47fc-8e94-1e289b4964c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:horn-of-gondor:f0t0:s1,f:xs:XP:horn-of-gondor:f0t0:s1	-	-	-	ae86f6029288	-	d85d65468336	-	-	2026-11-24	xproof
+88777fc0-286d-47fc-8e94-1e289b4964c4	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:horn-of-gondor:f0a0:s1,f:xs:XP:horn-of-gondor:f0a0:s1	-	-	-	ae86f6029288	-	d85d65468336	-	-	2026-11-24	xproof
+88777fc0-286d-47fc-8e94-1e289b4964c4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:horn-of-gondor:f0t0:s1,f:xs:XP:horn-of-gondor:f0t0:s1	-	-	-	ae86f6029288	-	d85d65468336	-	-	2026-11-24	xproof
 887a9f2f-17b4-4a20-a464-9665cde6f293	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tangle-angler:cast:s1,f:xs:XP:tangle-angler:cast:s1	-	-	-	d864b561c9cb	-	7ecebae4d931	-	-	2026-11-24	xproof
 887a9f2f-17b4-4a20-a464-9665cde6f293	f0/a0	MustBlock	agreed	-	FX	start	2	0	x:xs:XP:tangle-angler:f0a0:s1,f:xs:XP:tangle-angler:f0a0:s1	-	-	-	d864b561c9cb	-	7ecebae4d931	-	-	2026-11-24	xproof
 887de1fc-8fbd-472a-bcf2-4f36ea9376d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

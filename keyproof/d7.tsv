@@ -29,9 +29,9 @@ d72031e1-c8cf-4e57-b15b-6a5eaacff1e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d72031e1-c8cf-4e57-b15b-6a5eaacff1e2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:selhoff-occultist:f0t0:s1,f:xs:XP:selhoff-occultist:f0t0:s1	-	-	-	d864b561c9cb	-	1faf4d639188	-	-	2026-11-24	xproof
 d72489b5-a213-4bd8-a519-8caeb1acea5f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:renegade-reaper:f0t0:s1,f:xs:XP:renegade-reaper:f0t0:s1	-	-	-	d864b561c9cb	-	f05f0c1efc4a	-	-	2026-11-24	xproof
 d72489b5-a213-4bd8-a519-8caeb1acea5f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:renegade-reaper:f0t0:s1,f:xs:XP:renegade-reaper:f0t0:s1	-	-	-	d864b561c9cb	-	f05f0c1efc4a	-	-	2026-11-24	xproof
-d72b57e5-1c6e-4f02-968f-7e2dd24f0d3c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d72b57e5-1c6e-4f02-968f-7e2dd24f0d3c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d72b57e5-1c6e-4f02-968f-7e2dd24f0d3c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d72b57e5-1c6e-4f02-968f-7e2dd24f0d3c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boromir-warden-of-the-tower:cast:s1,f:xs:XP:boromir-warden-of-the-tower:cast:s1	-	-	-	ae86f6029288	-	55a39475acf7	-	-	2026-11-24	xproof
+d72b57e5-1c6e-4f02-968f-7e2dd24f0d3c	f0/a0	PumpAll	agreed	-	FX	start	3	0	x:xs:XP:boromir-warden-of-the-tower:cast:s1,f:xs:XP:boromir-warden-of-the-tower:cast:s1	-	-	-	ae86f6029288	-	55a39475acf7	-	-	2026-11-24	xproof
+d72b57e5-1c6e-4f02-968f-7e2dd24f0d3c	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d72b8254-3df8-431b-955a-ec2aea493e2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d7315b3b-6e5d-4d28-a503-bfae1daf6c43	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:verix-bladewing:f0t0:s1,f:xs:XP:verix-bladewing:f0t0:s1	-	-	-	d864b561c9cb	-	72eac25f73c9	-	-	2026-11-24	xproof
 d7315b3b-6e5d-4d28-a503-bfae1daf6c43	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:verix-bladewing:f0t0:s1,f:xs:XP:verix-bladewing:f0t0:s1	-	-	-	d864b561c9cb	-	72eac25f73c9	-	-	2026-11-24	xproof
@@ -91,8 +91,8 @@ d7721c5e-b3c5-45c8-b757-935603dfe44b	f0/t0	NULL	owed	refused:no-generator:trigge
 d7721c5e-b3c5-45c8-b757-935603dfe44b	f0/t1	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d772b16b-31db-48aa-8bb6-da32f45eebe4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d777e428-cc50-40b1-a241-41576d2575d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quirion-beastcaller:cast:s1,f:xs:XP:quirion-beastcaller:cast:s1	-	-	-	d864b561c9cb	-	cc3165674ca5	-	-	2026-11-24	xproof
-d777e428-cc50-40b1-a241-41576d2575d1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d777e428-cc50-40b1-a241-41576d2575d1	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d777e428-cc50-40b1-a241-41576d2575d1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+d777e428-cc50-40b1-a241-41576d2575d1	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:quirion-beastcaller:f0t1:s1,f:xs:XP:quirion-beastcaller:f0t1:s1	-	-	-	ae86f6029288	-	cc3165674ca5	-	-	2026-11-24	xproof
 d7798312-657c-4f4a-9e2d-906284caf50f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d7798312-657c-4f4a-9e2d-906284caf50f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d77d1895-ce02-4302-87c9-649e852fd0ea	cast	cast-resolve	agreed	-	FX	scen	2	0	Captain Kathryn Janeway/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

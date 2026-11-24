@@ -14,8 +14,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92045f6c-9ec2-4bf0-826c-e21ef253011c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92045f6c-9ec2-4bf0-826c-e21ef253011c	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:aethergeode-miner:f0t0:s1,f:xs:XP:aethergeode-miner:f0t0:s1	-	-	-	d864b561c9cb	-	f76cf360b3da	-	-	2026-11-24	xproof
 92045f6c-9ec2-4bf0-826c-e21ef253011c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:aethergeode-miner:f0t0:s1,f:xs:XP:aethergeode-miner:f0t0:s1	-	-	-	d864b561c9cb	-	f76cf360b3da	-	-	2026-11-24	xproof
-9204de14-cbb6-40e5-9dcc-44cce3723e8e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9204de14-cbb6-40e5-9dcc-44cce3723e8e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9204de14-cbb6-40e5-9dcc-44cce3723e8e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:galadhrim-guide:cast:s1,f:xs:XP:galadhrim-guide:cast:s1	-	-	-	ae86f6029288	-	f3be6cb5e220	-	-	2026-11-24	xproof
+9204de14-cbb6-40e5-9dcc-44cce3723e8e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:galadhrim-guide:cast:s1,f:xs:XP:galadhrim-guide:cast:s1	-	-	-	ae86f6029288	-	f3be6cb5e220	-	-	2026-11-24	xproof
 920684d0-aef3-4408-a66b-a0c9394c58f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 920684d0-aef3-4408-a66b-a0c9394c58f4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 920684d0-aef3-4408-a66b-a0c9394c58f4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -52,9 +52,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9221b29b-9351-4f70-9af4-8b9a33b43138	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9221b29b-9351-4f70-9af4-8b9a33b43138	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9221b29b-9351-4f70-9af4-8b9a33b43138	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92225b59-4f39-4175-ad0d-88e96f4d906a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92225b59-4f39-4175-ad0d-88e96f4d906a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:galadhrim-bow:f0t0:s1,f:xs:XP:galadhrim-bow:f0t0:s1	-	-	-	ae86f6029288	-	f1b316c76cc2	-	-	2026-11-24	xproof
 92225b59-4f39-4175-ad0d-88e96f4d906a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92225b59-4f39-4175-ad0d-88e96f4d906a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92225b59-4f39-4175-ad0d-88e96f4d906a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:galadhrim-bow:f0t0:s1,f:xs:XP:galadhrim-bow:f0t0:s1	-	-	-	ae86f6029288	-	f1b316c76cc2	-	-	2026-11-24	xproof
 92226fd2-ad93-4722-89a0-ca88ea03e1b4	cast	cast-resolve	agreed	-	X	scen	1	0	Eumidian Terrabotanist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92226fd2-ad93-4722-89a0-ca88ea03e1b4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Eumidian Terrabotanist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9223488e-5206-4d43-90ef-387189dcee16	cast	cast-resolve	agreed	-	FX	scen	2	0	Suki, Kyoshi Warrior/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -106,8 +106,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92512acd-bf1e-4133-93cd-6c6af5affb95	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 925775c6-b6d2-4793-a363-bd5aca871aa8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foxfire-oak:cast:s1,f:xs:XP:foxfire-oak:cast:s1	-	-	-	8a1b1a193ec0	-	0d8b43ffbcc1	-	-	2026-11-24	xproof
 925775c6-b6d2-4793-a363-bd5aca871aa8	f0/a0	NULL	owed	refused:steps-needed:cost:RG	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-9259e918-ace5-4f13-9035-d8bc8c820d25	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9259e918-ace5-4f13-9035-d8bc8c820d25	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9259e918-ace5-4f13-9035-d8bc8c820d25	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:march-from-the-black-gate:cast:s1,f:xs:XP:march-from-the-black-gate:cast:s1	-	-	-	ae86f6029288	-	fb82c4144069	-	-	2026-11-24	xproof
+9259e918-ace5-4f13-9035-d8bc8c820d25	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:march-from-the-black-gate:cast:s1,f:xs:XP:march-from-the-black-gate:cast:s1	-	-	-	ae86f6029288	-	fb82c4144069	-	-	2026-11-24	xproof
 9259e918-ace5-4f13-9035-d8bc8c820d25	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 925b3d1b-98cd-44f5-8aa0-e2b17df2808a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:take-inventory:cast:s1,f:xs:XP:take-inventory:cast:s1	-	-	-	d864b561c9cb	-	e3f5d1c629ca	-	-	2026-11-24	xproof
 925cacdc-6d09-4fbd-9258-9f0539da180c	cast	cast-resolve	agreed	-	X	scen	1	0	Thrór's Map/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -122,7 +122,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9268d369-173e-4325-98f6-348beeb8ba62	cast	cast-resolve	agreed	-	FX	scen	2	0	Galuf's Final Act/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 926d52a5-4db1-46ce-9567-17c28bf56ae7	cast	cast-resolve	agreed	-	X	scen	1	0	Weftstalker Ardent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 926d52a5-4db1-46ce-9567-17c28bf56ae7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Weftstalker Ardent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9270eb03-4600-40cc-83a5-ea987d5d4978	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9270eb03-4600-40cc-83a5-ea987d5d4978	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gix-s-command:cast:s1,f:xs:XP:gix-s-command:cast:s1	-	-	-	ae86f6029288	-	f5b99f64452b	-	-	2026-11-24	xproof
 9275108c-7eaf-4edd-aa6d-e5263d5ac7fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9277b680-a146-4d4f-9649-39cddafdb585	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9277b680-a146-4d4f-9649-39cddafdb585	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,8 +151,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9294d4d3-0df0-4070-9261-06f15b758a0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stolen-goods:cast:s1,f:xs:XP:stolen-goods:cast:s1	-	-	-	d864b561c9cb	-	e8e2bc023ced	-	-	2026-11-24	xproof
 9297e50f-f8a5-4793-b64d-a119404f94ce	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 929c231a-12d9-4f1a-9849-64a8b5a65f20	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-929c67aa-49ff-4401-85e8-76990fe1a369	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-929c67aa-49ff-4401-85e8-76990fe1a369	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+929c67aa-49ff-4401-85e8-76990fe1a369	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:basilica-shepherd:f0t0:s1,f:xs:XP:basilica-shepherd:f0t0:s1	-	-	-	ae86f6029288	-	66e7bf78d691	-	-	2026-11-24	xproof
+929c67aa-49ff-4401-85e8-76990fe1a369	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:basilica-shepherd:f0t0:s1,f:xs:XP:basilica-shepherd:f0t0:s1	-	-	-	ae86f6029288	-	66e7bf78d691	-	-	2026-11-24	xproof
 92a0aa44-0ef7-4e6f-8288-7c33067c5fd1	cast	cast-resolve	agreed	-	FX	scen	2	0	Theorix Metamage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92a0aa44-0ef7-4e6f-8288-7c33067c5fd1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Theorix Metamage/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92a5e50d-8477-4654-9c1b-219e4fe3c5ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

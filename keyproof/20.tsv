@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 20129459-a386-41eb-899d-1aede3427300	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20129459-a386-41eb-899d-1aede3427300	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2013a774-e6ab-4f2d-a84f-fd277a637d7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-20150b58-a442-472c-8191-b44581322eeb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+20150b58-a442-472c-8191-b44581322eeb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mass-production:cast:s1,f:xs:XP:mass-production:cast:s1	-	-	-	ae86f6029288	-	22f80ee27881	-	-	2026-11-24	xproof
 2015f455-988e-444c-93df-23fab179ef87	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2017d355-403a-4408-9779-94d1125e373f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2017d355-403a-4408-9779-94d1125e373f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -23,9 +23,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 201b8936-18f4-4881-a1d4-c308cf3832bf	f1/a0	activate#1.0	agreed	-	X	scen	1	0	The Legend of Kuruk/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 201b8936-18f4-4881-a1d4-c308cf3832bf	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	The Legend of Kuruk/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 201c8de7-9675-475b-8f9e-7b1935234488	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-202091b2-9e08-47c1-9099-628b21d8ac12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-202091b2-9e08-47c1-9099-628b21d8ac12	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-202091b2-9e08-47c1-9099-628b21d8ac12	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+202091b2-9e08-47c1-9099-628b21d8ac12	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:electrozoa:f0t0:s1,f:xs:XP:electrozoa:f0t0:s1	-	-	-	ae86f6029288	-	81c74c63a920	-	-	2026-11-24	xproof
+202091b2-9e08-47c1-9099-628b21d8ac12	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:electrozoa:f0t0:s1,f:xs:XP:electrozoa:f0t0:s1	-	-	-	ae86f6029288	-	81c74c63a920	-	-	2026-11-24	xproof
+202091b2-9e08-47c1-9099-628b21d8ac12	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 20283c4a-f1f0-42f0-bc08-6da87474426b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Breeding Pool/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20283c4a-f1f0-42f0-bc08-6da87474426b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Breeding Pool/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20283c4a-f1f0-42f0-bc08-6da87474426b	land	play-land	agreed	-	X	scen	1	0	Breeding Pool/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -173,7 +173,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 20f3388f-0931-4a09-bcda-96deb01e1787	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cuboid Colony/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20f3388f-0931-4a09-bcda-96deb01e1787	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cuboid Colony/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20f3388f-0931-4a09-bcda-96deb01e1787	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cuboid Colony/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-20f3bc44-c7fa-4d5a-adb9-2dd1d2d66ffe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+20f3bc44-c7fa-4d5a-adb9-2dd1d2d66ffe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sardian-cliffstomper:cast:s1,f:xs:XP:sardian-cliffstomper:cast:s1	-	-	-	ae86f6029288	-	5ec3d1cf0431	-	-	2026-11-24	xproof
 20f92504-d03c-437e-9814-b25ee384b3ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20f92504-d03c-437e-9814-b25ee384b3ba	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20f92504-d03c-437e-9814-b25ee384b3ba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

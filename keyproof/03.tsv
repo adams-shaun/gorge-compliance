@@ -124,9 +124,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0396ef40-3774-4684-9971-160aaccf6ac6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03973bad-1b3c-4488-a23e-232b192c95cc	cast	cast-resolve	agreed	-	FX	scen	2	0	The Duras Sisters/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03973bad-1b3c-4488-a23e-232b192c95cc	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-0399b932-2a59-471c-828e-2b16614e0dae	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0399b932-2a59-471c-828e-2b16614e0dae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flywheel-racer:cast:s1,f:xs:XP:flywheel-racer:cast:s1	-	-	-	ae86f6029288	-	d4d5ec8804b7	-	-	2026-11-24	xproof
 0399b932-2a59-471c-828e-2b16614e0dae	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0399b932-2a59-471c-828e-2b16614e0dae	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0399b932-2a59-471c-828e-2b16614e0dae	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 03a0f7ac-de8a-43cf-be15-07d31e9d6188	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03a3f54e-9289-4d99-beab-bfa0988a050e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guardian-gladewalker:f0t0:s1,f:xs:XP:guardian-gladewalker:f0t0:s1	-	-	-	d864b561c9cb	-	70ac72c1edba	-	-	2026-11-24	xproof
 03a3f54e-9289-4d99-beab-bfa0988a050e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:guardian-gladewalker:f0t0:s1,f:xs:XP:guardian-gladewalker:f0t0:s1	-	-	-	d864b561c9cb	-	70ac72c1edba	-	-	2026-11-24	xproof
@@ -188,8 +188,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03f04c2c-1036-497e-8b13-06c61b0b0ba6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Territorial Bruntar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03f5946b-e000-4b39-a49f-1c31668b51bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:autumn-s-veil:cast:s1,f:xs:XP:autumn-s-veil:cast:s1	-	-	-	d864b561c9cb	-	2c0c7bc58127	-	-	2026-11-24	xproof
 03f5c566-825c-4c46-9c01-a2f9b1e70a13	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03f5c566-825c-4c46-9c01-a2f9b1e70a13	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03f5c566-825c-4c46-9c01-a2f9b1e70a13	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+03f5c566-825c-4c46-9c01-a2f9b1e70a13	f0/a1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+03f5c566-825c-4c46-9c01-a2f9b1e70a13	f0/a2	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 03f5c566-825c-4c46-9c01-a2f9b1e70a13	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03f96c23-de0b-4b85-81f8-febc850aa621	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03f96c23-de0b-4b85-81f8-febc850aa621	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

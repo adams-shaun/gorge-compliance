@@ -62,7 +62,7 @@ bc681ecf-2a52-4782-9a47-90f5a9f435d8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Symb
 bc681ecf-2a52-4782-9a47-90f5a9f435d8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Symbiote Spider-Man/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bc6f4f73-e10c-44ae-926d-9e5f6ddc14be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc6f4f73-e10c-44ae-926d-9e5f6ddc14be	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bc6f4f73-e10c-44ae-926d-9e5f6ddc14be	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bc6f4f73-e10c-44ae-926d-9e5f6ddc14be	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 bc71ebf6-2056-41f7-be35-b2e5c34afa99	f0/a0	Mana	agreed	-	FX	start	16	0	x:xs:XP:cloudspire-skycycle:f0t0:s2,f:xs:XP:cloudspire-skycycle:f0t0:s2	-	-	-	e07cf3a05ba5	-	7b72280280cf	-	-	2026-11-24	xproof
 bc71ebf6-2056-41f7-be35-b2e5c34afa99	land	land	agreed	-	FX	start	2	0	x:xs:XP:ghostly-dancers:f0t0:s2,f:xs:XP:ghostly-dancers:f0t0:s2	-	-	-	e07cf3a05ba5	-	7b72280280cf	-	-	2026-11-24	xproof
 bc72d463-8818-4c19-bd5a-f47841d1adb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -122,9 +122,9 @@ bca3f496-ce2a-4715-ae47-5641c33d629e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 bca4d45d-cae4-46f3-b5ac-22fbac59fe56	cast	cast-resolve	agreed	-	X	scen	1	0	Tal Shiar Analyst/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bca4d45d-cae4-46f3-b5ac-22fbac59fe56	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 bca4d45d-cae4-46f3-b5ac-22fbac59fe56	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-bca9f65e-ea7a-4b8d-ab0f-c2672fa967f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bca9f65e-ea7a-4b8d-ab0f-c2672fa967f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mandibular-kite:f0t0:s1,f:xs:XP:mandibular-kite:f0t0:s1	-	-	-	ae86f6029288	-	9444f49c8a6c	-	-	2026-11-24	xproof
 bca9f65e-ea7a-4b8d-ab0f-c2672fa967f0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bca9f65e-ea7a-4b8d-ab0f-c2672fa967f0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bca9f65e-ea7a-4b8d-ab0f-c2672fa967f0	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:mandibular-kite:f0t0:s1,f:xs:XP:mandibular-kite:f0t0:s1	-	-	-	ae86f6029288	-	9444f49c8a6c	-	-	2026-11-24	xproof
 bcad5b83-5513-4455-a9c9-716281505eaa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bcad5b83-5513-4455-a9c9-716281505eaa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bcae7f20-b601-4669-b3a7-c32ed0c6b9d3	cast	cast-resolve	agreed	-	X	scen	1	0	Korvold and the Noble Thief/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -135,8 +135,8 @@ bcb5af89-a304-4de0-86af-b3f4cfabafc4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 bcb5af89-a304-4de0-86af-b3f4cfabafc4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bcbaef07-1d5b-457b-b373-77d3a2884b39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bcbaef07-1d5b-457b-b373-77d3a2884b39	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bcbb318d-0ebc-48a2-afd7-69cf5351893d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bcbb318d-0ebc-48a2-afd7-69cf5351893d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bcbb318d-0ebc-48a2-afd7-69cf5351893d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glistener-seer:cast:s1,f:xs:XP:glistener-seer:cast:s1	-	-	-	ae86f6029288	-	5b372da01b67	-	-	2026-11-24	xproof
+bcbb318d-0ebc-48a2-afd7-69cf5351893d	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 bcbdeccc-2baa-4158-bf87-8b88e7a19248	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gloom-pangolin:cast:s1,f:xs:XP:gloom-pangolin:cast:s1	-	-	-	ae86f6029288	-	c1db44dc8ee1	-	-	2026-11-24	xproof
 bcbe879a-4609-4493-bd7d-47c26d27e83c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:bandit-s-talent:f0t0:s2,f:xs:XP:bandit-s-talent:f0t0:s2	-	-	-	e07cf3a05ba5	-	463bbe0d7c34	-	-	2026-11-24	xproof
 bcbe879a-4609-4493-bd7d-47c26d27e83c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bandit's Talent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -145,8 +145,8 @@ bcbe879a-4609-4493-bd7d-47c26d27e83c	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 bcbe879a-4609-4493-bd7d-47c26d27e83c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Bandit's Talent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bcbe879a-4609-4493-bd7d-47c26d27e83c	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Bandit's Talent/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bcbef58b-0c16-40f2-9b5c-14dfcc00f5e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bcbef58b-0c16-40f2-9b5c-14dfcc00f5e5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bcbef58b-0c16-40f2-9b5c-14dfcc00f5e5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bcbef58b-0c16-40f2-9b5c-14dfcc00f5e5	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:furnace-gremlin:f0a0:s1,f:xs:XP:furnace-gremlin:f0a0:s1	-	-	-	ae86f6029288	-	012a3b4e3bb5	-	-	2026-11-24	xproof
+bcbef58b-0c16-40f2-9b5c-14dfcc00f5e5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:furnace-gremlin:f0t0:s1,f:xs:XP:furnace-gremlin:f0t0:s1	-	-	-	ae86f6029288	-	012a3b4e3bb5	-	-	2026-11-24	xproof
 bcc53728-3f6e-48cf-a042-393a2d8098fc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bcc7e32a-9cf9-4fdf-a0a4-e90ae42f1353	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bcc8ce61-a881-42be-ab2c-64351d17f9f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

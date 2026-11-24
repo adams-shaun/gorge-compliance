@@ -43,8 +43,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c23ae3a-108f-4a09-b89f-8c43c33dd144	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c23ae3a-108f-4a09-b89f-8c43c33dd144	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c26c796-26ec-41f7-b9ca-58f4eb935c47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c27b7cd-dcbf-45a7-9e15-a6d8dfd3a087	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c27b7cd-dcbf-45a7-9e15-a6d8dfd3a087	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c27b7cd-dcbf-45a7-9e15-a6d8dfd3a087	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cruel-grimnarch:f0t0:s1,f:xs:XP:cruel-grimnarch:f0t0:s1	-	-	-	ae86f6029288	-	5352326ba419	-	-	2026-11-24	xproof
+4c27b7cd-dcbf-45a7-9e15-a6d8dfd3a087	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cruel-grimnarch:f0t0:s1,f:xs:XP:cruel-grimnarch:f0t0:s1	-	-	-	ae86f6029288	-	5352326ba419	-	-	2026-11-24	xproof
 4c27ba61-6812-4dd7-8efc-65435a8df7b5	cast	cast-resolve	agreed	-	X	scen	1	0	Hellcat, Undying Vigilante/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c27ba61-6812-4dd7-8efc-65435a8df7b5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hellcat, Undying Vigilante/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c297085-5ec1-4d29-9a8e-1785c016ce09	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -57,11 +57,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c2e84dc-b4f5-4eca-af07-1c53a1caae7c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ravine Raider/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c2e84dc-b4f5-4eca-af07-1c53a1caae7c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ravine Raider/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c2e84dc-b4f5-4eca-af07-1c53a1caae7c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ravine Raider/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c35f41a-55e4-49ca-b211-f57d7b1b90f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c35f41a-55e4-49ca-b211-f57d7b1b90f6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c35f41a-55e4-49ca-b211-f57d7b1b90f6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c3745ff-6e1e-4660-abe6-1a30611ec00c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c3745ff-6e1e-4660-abe6-1a30611ec00c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c35f41a-55e4-49ca-b211-f57d7b1b90f6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goldwarden-s-helm:f0t0:s1,f:xs:XP:goldwarden-s-helm:f0t0:s1	-	-	-	ae86f6029288	-	a3cbe98f7dcb	-	-	2026-11-24	xproof
+4c35f41a-55e4-49ca-b211-f57d7b1b90f6	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:goldwarden-s-helm:f0a0:s1,f:xs:XP:goldwarden-s-helm:f0a0:s1	-	-	-	ae86f6029288	-	a3cbe98f7dcb	-	-	2026-11-24	xproof
+4c35f41a-55e4-49ca-b211-f57d7b1b90f6	f0/t0	ChangesZone/For Mirrodin	agreed	-	FX	start	2	0	x:xs:XP:goldwarden-s-helm:f0t0:s1,f:xs:XP:goldwarden-s-helm:f0t0:s1	-	-	-	ae86f6029288	-	a3cbe98f7dcb	-	-	2026-11-24	xproof
+4c3745ff-6e1e-4660-abe6-1a30611ec00c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:weakstone-s-subjugation:f0t0:s1,f:xs:XP:weakstone-s-subjugation:f0t0:s1	-	-	-	ae86f6029288	-	139d288b12d5	-	-	2026-11-24	xproof
+4c3745ff-6e1e-4660-abe6-1a30611ec00c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:weakstone-s-subjugation:f0t0:s1,f:xs:XP:weakstone-s-subjugation:f0t0:s1	-	-	-	ae86f6029288	-	139d288b12d5	-	-	2026-11-24	xproof
 4c376349-1a50-4215-8a40-f702da81eb7b	cast	cast-resolve	agreed	-	X	scen	1	0	Invasive Maneuvers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c3ad545-b375-44a7-a24e-58baacc4e4b6	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:annie-joins-up:f0t0:s2,f:xs:XP:annie-joins-up:f0t0:s2	-	-	-	267e485f6204	-	6cf25f02e38a	-	-	2026-11-24	xproof
 4c3ad545-b375-44a7-a24e-58baacc4e4b6	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:annie-joins-up:f0t0:s2,f:xs:XP:annie-joins-up:f0t0:s2	-	-	-	267e485f6204	-	6cf25f02e38a	-	-	2026-11-24	xproof
@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c62dce6-dc1f-4d2d-95dd-295810ada6a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:messenger-drake:f0t0:s1,f:xs:XP:messenger-drake:f0t0:s1	-	-	-	d864b561c9cb	-	d38c3e4777e5	-	-	2026-11-24	xproof
 4c64feae-95d7-426d-9e42-d3b0841d2054	cast	cast-resolve	agreed	-	FX	scen	2	0	Goblin Boarders/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c66e0ca-2d8a-4f68-ad15-55d75959d6e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c66e0ca-2d8a-4f68-ad15-55d75959d6e8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c66e0ca-2d8a-4f68-ad15-55d75959d6e8	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 4c67292a-7fcc-4646-8a06-99a7b4b3e005	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c67292a-7fcc-4646-8a06-99a7b4b3e005	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c67359d-5590-4eb0-827e-b411967ee238	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -151,9 +151,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ccc91f2-4d6e-4d64-b438-3d8b4361040a	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 4cd096ac-dd67-4208-a3ad-8e6061b442c6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plague-mare:f0t0:s1,f:xs:XP:plague-mare:f0t0:s1	-	-	-	d864b561c9cb	-	d7f00b4582f3	-	-	2026-11-24	xproof
 4cd096ac-dd67-4208-a3ad-8e6061b442c6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:plague-mare:f0t0:s1,f:xs:XP:plague-mare:f0t0:s1	-	-	-	d864b561c9cb	-	d7f00b4582f3	-	-	2026-11-24	xproof
-4cd4c6da-a84e-4cba-893b-799a7cb5c411	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4cd4c6da-a84e-4cba-893b-799a7cb5c411	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragonwing-glider:f0t0:s1,f:xs:XP:dragonwing-glider:f0t0:s1	-	-	-	ae86f6029288	-	30594d46906d	-	-	2026-11-24	xproof
 4cd4c6da-a84e-4cba-893b-799a7cb5c411	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4cd4c6da-a84e-4cba-893b-799a7cb5c411	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4cd4c6da-a84e-4cba-893b-799a7cb5c411	f0/t0	ChangesZone/For Mirrodin	agreed	-	FX	start	2	0	x:xs:XP:dragonwing-glider:f0t0:s1,f:xs:XP:dragonwing-glider:f0t0:s1	-	-	-	ae86f6029288	-	30594d46906d	-	-	2026-11-24	xproof
 4cd6ad78-7441-4dd7-b486-d9575e8e0947	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4cd6ad78-7441-4dd7-b486-d9575e8e0947	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4cd9b48e-5774-4a1c-857f-9f4a92db9b41	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jori-en-ruin-diver:cast:s1,f:xs:XP:jori-en-ruin-diver:cast:s1	-	-	-	d864b561c9cb	-	d5357d897daa	-	-	2026-11-24	xproof

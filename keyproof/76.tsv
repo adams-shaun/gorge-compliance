@@ -92,8 +92,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 766c2c67-d1ee-44ff-b9bb-355361646ef1	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 766c2c67-d1ee-44ff-b9bb-355361646ef1	f0/t1	ClassLevelGained/Class	agreed	-	FX	start	2	0	x:xs:XP:warlock-class:f0a1:s1,f:xs:XP:warlock-class:f0a1:s1	-	-	-	d864b561c9cb	-	3cb33f2a8f4a	-	-	2026-11-24	xproof
 766c2c67-d1ee-44ff-b9bb-355361646ef1	f0/t2	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-766c3528-2c5c-4e92-aa85-b1e0e115d491	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-766c3528-2c5c-4e92-aa85-b1e0e115d491	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+766c3528-2c5c-4e92-aa85-b1e0e115d491	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venomous-brutalizer:f0t0:s1,f:xs:XP:venomous-brutalizer:f0t0:s1	-	-	-	ae86f6029288	-	e5af5a9dfa67	-	-	2026-11-24	xproof
+766c3528-2c5c-4e92-aa85-b1e0e115d491	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:venomous-brutalizer:f0t0:s1,f:xs:XP:venomous-brutalizer:f0t0:s1	-	-	-	ae86f6029288	-	e5af5a9dfa67	-	-	2026-11-24	xproof
 766c8a68-9c51-44ea-903c-1f5cb30941d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 766c8a68-9c51-44ea-903c-1f5cb30941d1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 766e277c-983e-488c-a885-c03c3c0d3357	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viashino-firstblade:f0t0:s1,f:xs:XP:viashino-firstblade:f0t0:s1	-	-	-	d864b561c9cb	-	cf92a7b9b48c	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76c2e0b4-d4fa-4e98-b363-0a76eb481304	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 76c7a339-015b-4074-8e10-14d52b784f9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76c97e3d-a9be-4ed7-a2ef-f97870d8f58a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76c97e3d-a9be-4ed7-a2ef-f97870d8f58a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76c97e3d-a9be-4ed7-a2ef-f97870d8f58a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 76ca315a-4979-4fda-8d3f-b7f4e5d3a622	cast	cast-resolve	agreed	-	X	scen	1	0	Inspired Ultimatum/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 76cb1912-3791-44b8-b594-b92dab21bafc	cast	cast-resolve	agreed	-	X	scen	1	0	Tannuk, Memorial Ensign/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76cb1912-3791-44b8-b594-b92dab21bafc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tannuk, Memorial Ensign/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

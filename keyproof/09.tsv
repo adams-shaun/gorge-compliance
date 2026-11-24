@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 090018e0-4dcb-4b3c-b4e0-7ba62de0484d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-090018e0-4dcb-4b3c-b4e0-7ba62de0484d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+090018e0-4dcb-4b3c-b4e0-7ba62de0484d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 09027657-bc9a-4702-88c1-e5b3534ad188	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09038989-3c1f-4426-a150-e0a9374f34c3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09070db6-01f6-4a8a-b167-a7825e6959f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -82,8 +82,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0956bc16-ff04-4e96-8059-ef62afa2405f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0956bc16-ff04-4e96-8059-ef62afa2405f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0956bc16-ff04-4e96-8059-ef62afa2405f	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0956c0f5-ff1d-43d5-88de-4c2d603cf798	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0956c0f5-ff1d-43d5-88de-4c2d603cf798	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0956c0f5-ff1d-43d5-88de-4c2d603cf798	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:koilos-roc:f0t0:s1,f:xs:XP:koilos-roc:f0t0:s1	-	-	-	ae86f6029288	-	c5a62c9685ec	-	-	2026-11-24	xproof
+0956c0f5-ff1d-43d5-88de-4c2d603cf798	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:koilos-roc:f0t0:s1,f:xs:XP:koilos-roc:f0t0:s1	-	-	-	ae86f6029288	-	c5a62c9685ec	-	-	2026-11-24	xproof
 095f8dac-15b8-4c28-ae33-6dc71152bcc7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 095f8dac-15b8-4c28-ae33-6dc71152bcc7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09618da4-6e2d-4047-96d7-0576c0754e7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:end-the-festivities:cast:s1,f:xs:XP:end-the-festivities:cast:s1	-	-	-	ae86f6029288	-	f5d92a3bdf62	-	-	2026-11-24	xproof

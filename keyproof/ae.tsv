@@ -45,8 +45,8 @@ ae32c0a5-0874-4cab-9a24-29fa572f3193	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ae37dd07-2926-4801-b89d-3ffad9f0f575	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae3da0be-2a3f-498a-8854-73d0a5526ec2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae3e5c80-6a6a-4781-a7b9-4d63357ffa3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ae3e5c80-6a6a-4781-a7b9-4d63357ffa3b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ae3e5c80-6a6a-4781-a7b9-4d63357ffa3b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ae3e5c80-6a6a-4781-a7b9-4d63357ffa3b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+ae3e5c80-6a6a-4781-a7b9-4d63357ffa3b	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eldrazi-repurposer:f0t1:s1,f:xs:XP:eldrazi-repurposer:f0t1:s1	-	-	-	ae86f6029288	-	e11f664d6cf8	-	-	2026-11-24	xproof
 ae42fa8a-b0f6-43dc-a4c6-e2531890ca3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae42fa8a-b0f6-43dc-a4c6-e2531890ca3a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ae45b04e-c52d-45e1-a752-0b76f64d7c8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -56,9 +56,9 @@ ae4a18ec-70a3-4d21-b9e5-b13ab4901600	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 ae4a18ec-70a3-4d21-b9e5-b13ab4901600	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ae4a18ec-70a3-4d21-b9e5-b13ab4901600	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae4fe5e0-408d-4398-84d7-a901b836df2a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ae50be07-c8bc-45db-b47d-701c5d9ee633	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ae50be07-c8bc-45db-b47d-701c5d9ee633	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ae50be07-c8bc-45db-b47d-701c5d9ee633	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ae50be07-c8bc-45db-b47d-701c5d9ee633	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frodo-determined-hero:f0t0:s1,f:xs:XP:frodo-determined-hero:f0t0:s1	-	-	-	ae86f6029288	-	c65829205988	-	-	2026-11-24	xproof
+ae50be07-c8bc-45db-b47d-701c5d9ee633	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:frodo-determined-hero:f0t0:s1,f:xs:XP:frodo-determined-hero:f0t0:s1	-	-	-	ae86f6029288	-	c65829205988	-	-	2026-11-24	xproof
+ae50be07-c8bc-45db-b47d-701c5d9ee633	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:frodo-determined-hero:f0t1:s1,f:xs:XP:frodo-determined-hero:f0t1:s1	-	-	-	ae86f6029288	-	c65829205988	-	-	2026-11-24	xproof
 ae58e71c-b617-404f-a5dc-5e6a487f2675	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae5b9251-2e2d-4e12-b4b4-da051683f970	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae5cf0da-bea8-4ba7-9fb3-0fcb076257ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,9 +125,9 @@ aea98950-536e-451d-bd25-ae6e3e459ffb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 aeaae9cc-f30f-4d7e-86f3-3132ef47e987	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:molten-birth:cast:s1,f:xs:XP:molten-birth:cast:s1	-	-	-	d864b561c9cb	-	8dfcc6b8fad1	-	-	2026-11-24	xproof
 aead53ef-ffcf-4ae2-ab81-40aa9627adc9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aead53ef-ffcf-4ae2-ab81-40aa9627adc9	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-aeaf3ce8-6bdf-4a90-8b81-cdbce0f3bb12	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+aeaf3ce8-6bdf-4a90-8b81-cdbce0f3bb12	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:mirran-banesplitter:cast:s1,f:xs:XP:mirran-banesplitter:cast:s1	-	-	-	ae86f6029288	-	feda31fce0c2	-	-	2026-11-24	xproof
 aeaf3ce8-6bdf-4a90-8b81-cdbce0f3bb12	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aeaf3ce8-6bdf-4a90-8b81-cdbce0f3bb12	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+aeaf3ce8-6bdf-4a90-8b81-cdbce0f3bb12	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:mirran-banesplitter:cast:s1,f:xs:XP:mirran-banesplitter:cast:s1	-	-	-	ae86f6029288	-	feda31fce0c2	-	-	2026-11-24	xproof
 aeb6cb00-e8bd-4610-aa39-29663d9c9160	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aeb9a2e6-ad11-4e2c-81d0-caf279d31ece	cast	cast-resolve	agreed	-	X	scen	1	0	Turtle Van/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 aeb9a2e6-ad11-4e2c-81d0-caf279d31ece	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Turtle Van/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -53,8 +53,8 @@ b74082da-435c-4e45-9424-1188ad7ef5b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b74082da-435c-4e45-9424-1188ad7ef5b3	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:joraga-auxiliary:f0a0:s1,f:xs:XP:joraga-auxiliary:f0a0:s1	-	-	-	d864b561c9cb	-	e08d133f32dc	-	-	2026-11-24	xproof
 b74992b8-2857-403b-88cf-f2718873571a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b74992b8-2857-403b-88cf-f2718873571a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b749e9e4-0f2a-4157-8cca-facd6b48157f	cast	cast-resolve	agreed	-	X	scen	1	0	Proft's Eidetic Memory/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b749e9e4-0f2a-4157-8cca-facd6b48157f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b749e9e4-0f2a-4157-8cca-facd6b48157f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:proft-s-eidetic-memory:f0t0:s1,f:xs:XP:proft-s-eidetic-memory:f0t0:s1	-	-	-	ae86f6029288	-	ed6b5baf4cfe	-	-	2026-11-24	xproof
+b749e9e4-0f2a-4157-8cca-facd6b48157f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:proft-s-eidetic-memory:f0t0:s1,f:xs:XP:proft-s-eidetic-memory:f0t0:s1	-	-	-	ae86f6029288	-	ed6b5baf4cfe	-	-	2026-11-24	xproof
 b749e9e4-0f2a-4157-8cca-facd6b48157f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Proft's Eidetic Memory/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b749e9e4-0f2a-4157-8cca-facd6b48157f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Proft's Eidetic Memory/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b74c072d-77ac-460d-9d9c-75b25874f58b	cast	cast-resolve	agreed	-	FX	scen	2	0	Captain Mar-Vell, Space-Born/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -84,8 +84,8 @@ b75e667a-1ceb-445a-acf4-ae1fd2dae9e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b75fb789-6a78-4d23-b872-7627b478fb6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b75ffa62-a291-44d7-a950-b50c8394e066	cast	cast-resolve	agreed	-	X	scen	1	0	Deepmuck Desperado/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b75ffa62-a291-44d7-a950-b50c8394e066	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Deepmuck Desperado/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b7618312-6835-4851-9651-b5402001b3b0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b7618312-6835-4851-9651-b5402001b3b0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b7618312-6835-4851-9651-b5402001b3b0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:swiftgear-drake:cast:s1,f:xs:XP:swiftgear-drake:cast:s1	-	-	-	ae86f6029288	-	54fe09f7186a	-	-	2026-11-24	xproof
+b7618312-6835-4851-9651-b5402001b3b0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:swiftgear-drake:cast:s1,f:xs:XP:swiftgear-drake:cast:s1	-	-	-	ae86f6029288	-	54fe09f7186a	-	-	2026-11-24	xproof
 b7639d86-4c7c-423f-8b13-fde3086d3cbb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b7639d86-4c7c-423f-8b13-fde3086d3cbb	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b76566a9-f998-4a20-b073-4b60862843c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dismiss-into-dream:cast:s1,f:xs:XP:dismiss-into-dream:cast:s1	-	-	-	d864b561c9cb	-	789bcf546d14	-	-	2026-11-24	xproof

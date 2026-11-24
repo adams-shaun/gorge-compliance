@@ -42,10 +42,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 382d18a2-438e-4ae7-a83f-1658ef1f9b07	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hidden Grotto/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 382d18a2-438e-4ae7-a83f-1658ef1f9b07	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hidden Grotto/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 382d18a2-438e-4ae7-a83f-1658ef1f9b07	land	play-land	agreed	-	X	scen	1	0	Hidden Grotto/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-38347ab3-ae43-4d10-b665-8520ace0eb76	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38347ab3-ae43-4d10-b665-8520ace0eb76	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38347ab3-ae43-4d10-b665-8520ace0eb76	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38347ab3-ae43-4d10-b665-8520ace0eb76	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38347ab3-ae43-4d10-b665-8520ace0eb76	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-filigree-sylex:cast:s1,f:xs:XP:the-filigree-sylex:cast:s1	-	-	-	ae86f6029288	-	afb20ed17803	-	-	2026-11-24	xproof
+38347ab3-ae43-4d10-b665-8520ace0eb76	f0/a0	PutCounter	agreed	-	FX	start	3	0	x:xs:XP:the-filigree-sylex:cast:s2,f:xs:XP:the-filigree-sylex:cast:s2	-	-	-	ae86f6029288	-	afb20ed17803	-	-	2026-11-24	xproof
+38347ab3-ae43-4d10-b665-8520ace0eb76	f0/a1	DestroyAll	agreed	-	FX	start	3	0	x:xs:XP:the-filigree-sylex:cast:s1,f:xs:XP:the-filigree-sylex:cast:s1	-	-	-	ae86f6029288	-	afb20ed17803	-	-	2026-11-24	xproof
+38347ab3-ae43-4d10-b665-8520ace0eb76	f0/a2	NULL	owed	refused:steps-needed:cost:RemoveAnyCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3834d3b0-9b66-465a-a8dc-22875a819fd9	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:emancipation-angel:cast:s1,f:xs:XP:emancipation-angel:cast:s1	-	-	-	d864b561c9cb	-	365b161d3927	-	-	2026-11-24	xproof
 3834d3b0-9b66-465a-a8dc-22875a819fd9	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:emancipation-angel:cast:s1,f:xs:XP:emancipation-angel:cast:s1	-	-	-	d864b561c9cb	-	365b161d3927	-	-	2026-11-24	xproof
 3835cb81-b6e4-4be8-9d49-8307ddc2e1a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,8 +152,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38c83332-2d21-450c-ae97-34109b565f59	land	land	agreed	-	FX	start	2	0	x:xs:XP:tyrite-sanctum:land:s1,f:xs:XP:tyrite-sanctum:land:s1	-	-	-	d864b561c9cb	-	d68ad3271123	-	-	2026-11-24	xproof
 38cfe4a0-6ead-435b-9f86-928205c0a52c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38cfe4a0-6ead-435b-9f86-928205c0a52c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-38d2176c-1a1e-4030-9c63-e28ba4a69b6d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38d2176c-1a1e-4030-9c63-e28ba4a69b6d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38d2176c-1a1e-4030-9c63-e28ba4a69b6d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dune-mover:cast:s1,f:xs:XP:dune-mover:cast:s1	-	-	-	ae86f6029288	-	34a524f4a790	-	-	2026-11-24	xproof
+38d2176c-1a1e-4030-9c63-e28ba4a69b6d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dune-mover:cast:s1,f:xs:XP:dune-mover:cast:s1	-	-	-	ae86f6029288	-	34a524f4a790	-	-	2026-11-24	xproof
 38d9401e-2840-455d-8478-8c976588d4ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38ddbe0b-07ef-4cdf-ad6c-cd8b8ba6d206	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38e0a1d0-2a4c-4510-9610-abea7fa1de7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

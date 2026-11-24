@@ -53,13 +53,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b4b21ed-c24e-4038-83fb-bd7f3c3426cd	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Emberheart Challenger/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b4e1163-09aa-4597-9a41-e1e384975056	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b4e1163-09aa-4597-9a41-e1e384975056	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b4e1163-09aa-4597-9a41-e1e384975056	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5b4e1163-09aa-4597-9a41-e1e384975056	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5b51958d-533a-45e4-aac1-3c157670978b	cast	cast-resolve	agreed	-	FX	scen	2	0	Sibsig Appraiser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b51958d-533a-45e4-aac1-3c157670978b	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b5524f7-3c68-4c7b-be1b-745ffcad8006	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b5524f7-3c68-4c7b-be1b-745ffcad8006	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b5b9390-bb3a-4f71-809a-cfe2a6566b59	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b5b9390-bb3a-4f71-809a-cfe2a6566b59	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5b5b9390-bb3a-4f71-809a-cfe2a6566b59	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sarinth-greatwurm:cast:s1,f:xs:XP:sarinth-greatwurm:cast:s1	-	-	-	ae86f6029288	-	160742d3020f	-	-	2026-11-24	xproof
+5b5b9390-bb3a-4f71-809a-cfe2a6566b59	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5b5bf1fa-6502-4790-b66b-f0f8504ebc7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b5dece6-b1e0-4844-bbf9-3b44008ffa70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b5ef43b-13fd-4461-8d2d-18be65e9a790	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ichor-wellspring:f0t0:s1,f:xs:XP:ichor-wellspring:f0t0:s1	-	-	-	d864b561c9cb	-	18b5e9cca727	-	-	2026-11-24	xproof
@@ -105,8 +105,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b8e8ef2-2f04-4485-ae12-08f52dac81a2	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 5b8f0cdf-572d-4025-b930-79291f7c35be	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5b919920-b1b6-499b-a7fe-c630778a7831	cast	cast-resolve	agreed	-	X	scen	1	0	Valley Rally/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b95a5ed-a6b2-4044-9273-2021d27794e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blight-sickle:cast:s1,f:xs:XP:blight-sickle:cast:s1	-	-	-	8a1b1a193ec0	-	1ccf25142767	-	-	2026-11-24	xproof
 5b95a5ed-a6b2-4044-9273-2021d27794e9	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:blight-sickle:f0a0:s1	-	-	-	8a1b1a193ec0	-	1ccf25142767	-	-	2026-11-24	xproof

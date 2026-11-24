@@ -8,8 +8,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 900b9409-9c16-414d-8674-2ea42c2415a1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Magmakin Artillerist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 900b9409-9c16-414d-8674-2ea42c2415a1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Magmakin Artillerist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 900b9409-9c16-414d-8674-2ea42c2415a1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Magmakin Artillerist/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-90109cb4-1e16-4d54-9332-b5fb1e71042c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90109cb4-1e16-4d54-9332-b5fb1e71042c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+90109cb4-1e16-4d54-9332-b5fb1e71042c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ravenous-necrotitan:f0t0:s1,f:xs:XP:ravenous-necrotitan:f0t0:s1	-	-	-	ae86f6029288	-	5f6eeae406f6	-	-	2026-11-24	xproof
+90109cb4-1e16-4d54-9332-b5fb1e71042c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ravenous-necrotitan:f0t0:s1,f:xs:XP:ravenous-necrotitan:f0t0:s1	-	-	-	ae86f6029288	-	5f6eeae406f6	-	-	2026-11-24	xproof
 9013214f-c066-4a09-871f-e9f8396f38a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stream-of-consciousness:cast:s1,f:xs:XP:stream-of-consciousness:cast:s1	-	-	-	64a08ba7d913	-	be380f2fb7cd	-	-	2026-11-24	xproof
 9017da9a-2cd5-42fe-a82d-63c34e952344	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9017da9a-2cd5-42fe-a82d-63c34e952344	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -174,9 +174,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 90f4ec87-d33d-46c1-8cc7-3e7ad3f8ad70	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90f54959-2c9b-4b8a-84c9-d6893eb43553	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90f9440a-0bf8-46eb-9cfa-16fb88a217d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90fa1303-ad1c-46da-a4d6-4b29ea49b7ca	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90fa1303-ad1c-46da-a4d6-4b29ea49b7ca	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+90fa1303-ad1c-46da-a4d6-4b29ea49b7ca	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sculpted-perfection:cast:s1,f:xs:XP:sculpted-perfection:cast:s1	-	-	-	ae86f6029288	-	70d04a567506	-	-	2026-11-24	xproof
+90fa1303-ad1c-46da-a4d6-4b29ea49b7ca	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sculpted-perfection:cast:s1,f:xs:XP:sculpted-perfection:cast:s1	-	-	-	ae86f6029288	-	70d04a567506	-	-	2026-11-24	xproof
 90fd82e8-f638-4ba4-a03c-a30d46f93a39	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90fdfba8-f29e-44f9-91d2-7bf3c458a9c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90fdfba8-f29e-44f9-91d2-7bf3c458a9c1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90fdfba8-f29e-44f9-91d2-7bf3c458a9c1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+90fdfba8-f29e-44f9-91d2-7bf3c458a9c1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

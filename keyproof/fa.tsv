@@ -64,7 +64,7 @@ fa4417e5-229a-4465-9bc5-0b3d6209b4a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gob
 fa44fa48-d270-4f0f-b672-d63e1c1942ce	cast	cast-resolve	agreed	-	X	scen	1	0	Glimpse the Core/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa46ced5-b701-4aa3-b4a1-36fb15b80696	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa4755c2-e573-45c3-bd6a-61b2b35fbd24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flame-discharge:cast:s1,f:xs:XP:flame-discharge:cast:s1	-	-	-	d864b561c9cb	-	08d554682354	-	-	2026-11-24	xproof
-fa47c190-d66a-41b0-aa08-21036cda4223	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fa47c190-d66a-41b0-aa08-21036cda4223	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:charge-of-the-mites:cast:s1,f:xs:XP:charge-of-the-mites:cast:s1	-	-	-	ae86f6029288	-	89af21ea40c7	-	-	2026-11-24	xproof
 fa482ded-b24c-4f9e-948e-d0620e907b8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:surreal-memoir:cast:s1,f:xs:XP:surreal-memoir:cast:s1	-	-	-	d864b561c9cb	-	fa3c0ed3d818	-	-	2026-11-24	xproof
 fa4ad622-5021-44fe-92af-0de115059eb6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa4ad622-5021-44fe-92af-0de115059eb6	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:lavakin-brawler:f0t0:s1,f:xs:XP:lavakin-brawler:f0t0:s1	-	-	-	d864b561c9cb	-	32ff08eb1260	-	-	2026-11-24	xproof
@@ -76,8 +76,8 @@ fa4ed027-6e18-4a87-9845-e13f274d9994	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 fa4f22b2-7fe4-4f7f-8afd-32add76d740d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa4f22b2-7fe4-4f7f-8afd-32add76d740d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa519a46-11ab-4ab8-9286-904ce2746c03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fa519a46-11ab-4ab8-9286-904ce2746c03	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fa519a46-11ab-4ab8-9286-904ce2746c03	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fa519a46-11ab-4ab8-9286-904ce2746c03	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+fa519a46-11ab-4ab8-9286-904ce2746c03	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:forgehammer-centurion:f0t1:s1,f:xs:XP:forgehammer-centurion:f0t1:s1	-	-	-	ae86f6029288	-	b53ba6bcaa2e	-	-	2026-11-24	xproof
 fa55177c-ba65-4113-9c05-2d63318cf7c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa55177c-ba65-4113-9c05-2d63318cf7c5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa55177c-ba65-4113-9c05-2d63318cf7c5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ fa6d05a1-3df4-4751-b1a0-8d9693faec73	land	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 fa6d7d68-34e3-4ff6-ae6c-36848974555a	cast	cast-resolve	agreed	-	X	scen	1	0	Wickerfolk Thresher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa6d7d68-34e3-4ff6-ae6c-36848974555a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wickerfolk Thresher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa6e2a47-a8cb-4224-ae3e-f61c90477285	cast	cast-resolve	agreed	-	X	scen	1	0	Tragic Slip/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-fa6fa2f5-eb9b-402e-82f4-e0a8d30df245	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fa6fa2f5-eb9b-402e-82f4-e0a8d30df245	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mishra-s-juggernaut:cast:s1,f:xs:XP:mishra-s-juggernaut:cast:s1	-	-	-	ae86f6029288	-	4246c41e1912	-	-	2026-11-24	xproof
 fa6fa2f5-eb9b-402e-82f4-e0a8d30df245	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa70903d-3c8b-49f7-8817-f708b5ba250f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa71db44-5181-4c51-8b24-7fbedf36e3ca	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

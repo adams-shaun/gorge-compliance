@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 f2000fb8-39c6-4ad6-a020-5245faaa1eba	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fire Nation Palace/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f2000fb8-39c6-4ad6-a020-5245faaa1eba	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Fire Nation Palace/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f2000fb8-39c6-4ad6-a020-5245faaa1eba	land	play-land	agreed	-	X	scen	1	0	Fire Nation Palace/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f2025f2e-c931-48dd-af21-8f0a591befb4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f2025f2e-c931-48dd-af21-8f0a591befb4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:escape-from-orthanc:cast:s1,f:xs:XP:escape-from-orthanc:cast:s1	-	-	-	ae86f6029288	-	901e72b81fb3	-	-	2026-11-24	xproof
 f202712d-7cd1-47aa-9664-526a884a1be2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arrogant-outlaw:f0t0:s1,f:xs:XP:arrogant-outlaw:f0t0:s1	-	-	-	d864b561c9cb	-	069490988825	-	-	2026-11-24	xproof
 f202712d-7cd1-47aa-9664-526a884a1be2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f203671b-76f7-4be0-80a9-826fbb450fe7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -114,7 +114,7 @@ f29f4c73-5e5c-4341-8582-2873fbe5c5a3	f0/a1	NULL	owed	refused:steps-needed:cost:S
 f29f4c73-5e5c-4341-8582-2873fbe5c5a3	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f2a54e85-dd8b-462c-a811-c9553dc349a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2a54e85-dd8b-462c-a811-c9553dc349a5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f2a6dc8d-3c98-44ae-aff0-b838d7aee0b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f2a6dc8d-3c98-44ae-aff0-b838d7aee0b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sandstalker-moloch:f0t0:s1,f:xs:XP:sandstalker-moloch:f0t0:s1	-	-	-	ae86f6029288	-	aae6d7158c31	-	-	2026-11-24	xproof
 f2a6dc8d-3c98-44ae-aff0-b838d7aee0b7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2b284cd-fa12-4ba1-b297-80105bb48fde	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2b284cd-fa12-4ba1-b297-80105bb48fde	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -184,4 +184,4 @@ f2f8847d-17a8-4c26-8a7a-1bb6c02f2b39	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 f2f8847d-17a8-4c26-8a7a-1bb6c02f2b39	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2fcef65-4873-4b1f-a257-b8648097c990	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2ffc999-609f-4424-8d40-ebc042357a40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f2ffc999-609f-4424-8d40-ebc042357a40	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f2ffc999-609f-4424-8d40-ebc042357a40	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:powerstone-engineer:f0t0:s1,f:xs:XP:powerstone-engineer:f0t0:s1	-	-	-	ae86f6029288	-	780f984fa157	-	-	2026-11-24	xproof

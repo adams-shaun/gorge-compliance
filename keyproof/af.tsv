@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 af029853-cfb0-403b-af51-141ba02ae2e4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af029853-cfb0-403b-af51-141ba02ae2e4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af03149b-9307-443c-aefa-69bda52607ba	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-af05cc39-725b-4535-919a-ddbcb89c2210	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af05cc39-725b-4535-919a-ddbcb89c2210	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:molten-rebuke:cast:s1,f:xs:XP:molten-rebuke:cast:s1	-	-	-	ae86f6029288	-	8b922058e130	-	-	2026-11-24	xproof
 af06a811-7a57-4f68-9d87-7903e043f36d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af08dae2-ba32-4a34-b8c1-b49d45ce0b6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af08dae2-ba32-4a34-b8c1-b49d45ce0b6b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -35,7 +35,7 @@ af224f6f-cedd-498f-a08e-7be0db5a11b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 af2275ea-1085-4145-aa6b-36924d53d88a	cast	cast-resolve	agreed	-	X	scen	1	0	School Daze/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af22ed78-7054-4f5c-84ab-2a274c3d47fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af22ed78-7054-4f5c-84ab-2a274c3d47fb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af22ed78-7054-4f5c-84ab-2a274c3d47fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af22ed78-7054-4f5c-84ab-2a274c3d47fb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 af231505-bd2e-4499-9fd5-f761dde2ecef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af231505-bd2e-4499-9fd5-f761dde2ecef	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 af27761d-88df-4d4f-a366-d55ed62d1d33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -96,7 +96,7 @@ af6e4c3e-0276-4f72-9a70-25868fe8bba5	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf
 af6e4c3e-0276-4f72-9a70-25868fe8bba5	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af6e4c3e-0276-4f72-9a70-25868fe8bba5	f0/a1	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af753429-c121-4957-b768-8bed43dc06cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af753429-c121-4957-b768-8bed43dc06cb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af753429-c121-4957-b768-8bed43dc06cb	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 af762373-e159-4a36-83b5-a82b8b16fa41	cast	cast-resolve	agreed	-	FX	scen	2	0	Marshal of the Lost/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af762373-e159-4a36-83b5-a82b8b16fa41	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Marshal of the Lost/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af762373-e159-4a36-83b5-a82b8b16fa41	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Marshal of the Lost/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 464df46a-079b-47c1-95e7-930160abef2f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 464df46a-079b-47c1-95e7-930160abef2f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 464df46a-079b-47c1-95e7-930160abef2f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46515251-2172-4b0a-81ac-4c0120b73360	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+46515251-2172-4b0a-81ac-4c0120b73360	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fanged-flames:cast:s1,f:xs:XP:fanged-flames:cast:s1	-	-	-	ae86f6029288	-	e1bc4518019e	-	-	2026-11-24	xproof
 46537bac-b1eb-4c02-ba43-6c6b16c7729c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46569712-1f28-41cb-81be-fd938408c71f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46570366-5e58-40b7-b725-833321a3b7b1	cast	cast-resolve	agreed	-	X	scen	1	0	Niv-Mizzet, Guildpact/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46779609-4fa7-4fd2-b5b4-7d4d749339e6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 467c526a-02a7-405d-98de-c632ea83519b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:you-find-some-prisoners:cast:s1,f:xs:XP:you-find-some-prisoners:cast:s1	-	-	-	ae86f6029288	-	1ce1e92c934f	-	-	2026-11-24	xproof
 467c9fe6-d1d3-4242-bc0c-e522b4f21d56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-467c9fe6-d1d3-4242-bc0c-e522b4f21d56	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+467c9fe6-d1d3-4242-bc0c-e522b4f21d56	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclaredOneTarget	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 467d6acb-9a3c-433f-836d-54e0e670b7d0	cast	cast-resolve	agreed	-	X	scen	1	0	Head of the Homestead/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 467d6acb-9a3c-433f-836d-54e0e670b7d0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 467e22c3-6107-40ff-afc7-5960710c970b	cast	cast-resolve	agreed	-	FX	scen	2	0	Adamant Will/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46c3a69a-4984-40b0-905f-4b0762c7ad72	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46c404c3-636a-4945-a61c-62f013a9c50f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46c404c3-636a-4945-a61c-62f013a9c50f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46c727cb-1f47-4775-8af4-0230ef53966b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+46c727cb-1f47-4775-8af4-0230ef53966b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:brainsurge:cast:s1	-	-	-	ae86f6029288	-	a17defc7e310	-	-	2026-11-24	xproof
 46c77100-ab2e-43eb-b1cb-c22ed114213e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46c77100-ab2e-43eb-b1cb-c22ed114213e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46c77100-ab2e-43eb-b1cb-c22ed114213e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

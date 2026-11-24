@@ -42,9 +42,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f278970-201d-4a93-b038-cc7218f2ac57	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:pondering-mage:cast:s1,f:xs:XP:pondering-mage:cast:s1	-	-	-	d864b561c9cb	-	e58629d16b91	-	-	2026-11-24	xproof
 3f27988b-0863-4cc1-8eb9-83bd0cd8561c	cast	cast-resolve	agreed	-	FX	scen	2	0	Mage Tower Referee/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f27988b-0863-4cc1-8eb9-83bd0cd8561c	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Mage Tower Referee/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3f285781-ee03-4a58-a85e-a33f5efffc9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f285781-ee03-4a58-a85e-a33f5efffc9d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f285781-ee03-4a58-a85e-a33f5efffc9d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f285781-ee03-4a58-a85e-a33f5efffc9d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:static-net:f0t0:s1,f:xs:XP:static-net:f0t0:s1	-	-	-	ae86f6029288	-	875f05ab614a	-	-	2026-11-24	xproof
+3f285781-ee03-4a58-a85e-a33f5efffc9d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:static-net:f0t0:s1,f:xs:XP:static-net:f0t0:s1	-	-	-	ae86f6029288	-	875f05ab614a	-	-	2026-11-24	xproof
+3f285781-ee03-4a58-a85e-a33f5efffc9d	f0/t1	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:static-net:f0t0:s1,f:xs:XP:static-net:f0t0:s1	-	-	-	ae86f6029288	-	875f05ab614a	-	-	2026-11-24	xproof
 3f336198-2425-447a-88b4-9be21ef7e90a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f3439e1-75ce-482d-881f-836492dca6e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f3439e1-75ce-482d-881f-836492dca6e9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f4d6f91-95ad-4687-8899-5a21a0abb49e	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3f4d6f91-95ad-4687-8899-5a21a0abb49e	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3f4dd9e2-6460-413e-a3b8-96b20bf57f8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f4dd9e2-6460-413e-a3b8-96b20bf57f8b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f4dd9e2-6460-413e-a3b8-96b20bf57f8b	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3f4e300a-ec5c-42f3-a97b-d58e62abe22b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f4e300a-ec5c-42f3-a97b-d58e62abe22b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3f4e300a-ec5c-42f3-a97b-d58e62abe22b	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f8a8650-0e38-4926-8f48-526351e6a863	cast	cast-resolve	agreed	-	X	scen	1	0	Zaffai and the Tempests/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f8a8650-0e38-4926-8f48-526351e6a863	static#0.0	static#0.0	agreed	-	X	scen	1	0	Zaffai and the Tempests/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f8b189e-775c-41ad-839a-153a3200c708	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f8b189e-775c-41ad-839a-153a3200c708	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f8b189e-775c-41ad-839a-153a3200c708	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3f8e5ff1-af89-427e-924c-19a44f9a3788	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f8e5ff1-af89-427e-924c-19a44f9a3788	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3f8f0ce9-d2ce-45cc-9fbf-0e2819b07a3e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kor-celebrant:f0t0:s1,f:xs:XP:kor-celebrant:f0t0:s1	-	-	-	ae86f6029288	-	74ce83345846	-	-	2026-11-24	xproof

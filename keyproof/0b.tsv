@@ -24,8 +24,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b2481d6-97a0-4f92-b7e5-3451863fd7fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b2481d6-97a0-4f92-b7e5-3451863fd7fb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b2481d6-97a0-4f92-b7e5-3451863fd7fb	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0b2481d6-97a0-4f92-b7e5-3451863fd7fb	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0b2a59a3-cf87-48fe-99e2-4c2063119b55	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0b2481d6-97a0-4f92-b7e5-3451863fd7fb	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+0b2a59a3-cf87-48fe-99e2-4c2063119b55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gixian-skullflayer:cast:s1,f:xs:XP:gixian-skullflayer:cast:s1	-	-	-	ae86f6029288	-	537f055d303c	-	-	2026-11-24	xproof
 0b2a59a3-cf87-48fe-99e2-4c2063119b55	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b2b7d04-73f3-43f6-86e0-fa00cbbc6469	cast	cast-resolve	agreed	-	FX	scen	2	0	Jeskai Monument/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0b2b7d04-73f3-43f6-86e0-fa00cbbc6469	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Jeskai Monument/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -85,9 +85,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b67c4e2-f88b-4e01-85a1-9d5f5b8db13b	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b67c4e2-f88b-4e01-85a1-9d5f5b8db13b	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b67dff0-5bb7-44fe-a72b-d3b1a6c0ee72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0b683611-e46f-4105-b336-014d1556c8de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0b683611-e46f-4105-b336-014d1556c8de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haunt-of-the-dead-marshes:f0t0:s1,f:xs:XP:haunt-of-the-dead-marshes:f0t0:s1	-	-	-	ae86f6029288	-	d0de2eba7a98	-	-	2026-11-24	xproof
 0b683611-e46f-4105-b336-014d1556c8de	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0b683611-e46f-4105-b336-014d1556c8de	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0b683611-e46f-4105-b336-014d1556c8de	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:haunt-of-the-dead-marshes:f0t0:s1,f:xs:XP:haunt-of-the-dead-marshes:f0t0:s1	-	-	-	ae86f6029288	-	d0de2eba7a98	-	-	2026-11-24	xproof
 0b68594c-0146-4f0d-b569-8bcf443514aa	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b68594c-0146-4f0d-b569-8bcf443514aa	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b6c74a7-d7d3-4c05-84b1-bcb580bb476f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

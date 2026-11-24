@@ -11,9 +11,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f0bad22-a3f5-4b2b-96bf-ff1473e2262d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f0d797e-d897-453d-92b6-a90e1a548dc5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f0d797e-d897-453d-92b6-a90e1a548dc5	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-2f0dec6c-797f-4dc3-9994-066c00cbf1a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f0dec6c-797f-4dc3-9994-066c00cbf1a4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:infernal-captor:cast:s1,f:xs:XP:infernal-captor:cast:s1	-	-	-	ae86f6029288	-	c6be95e1128d	-	-	2026-11-24	xproof
+2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:infernal-captor:cast:s1,f:xs:XP:infernal-captor:cast:s1	-	-	-	ae86f6029288	-	c6be95e1128d	-	-	2026-11-24	xproof
 2f1019df-3e76-446c-ba33-f9dfe56b10bf	cast	cast-resolve	agreed	-	X	scen	1	0	Merfolk Cave-Diver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f1019df-3e76-446c-ba33-f9dfe56b10bf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Merfolk Cave-Diver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f109125-b743-4ecf-84da-690d8e8ddf9c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -108,11 +108,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f65f16f-c6c2-48f0-b556-63cf7d162000	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f6a5278-23bf-47b2-a2b9-dfff7d96f3dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f6a5278-23bf-47b2-a2b9-dfff7d96f3dd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f6c21a1-d618-497c-bfde-c0f2e1014d99	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f6c21a1-d618-497c-bfde-c0f2e1014d99	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sylvok-battle-chair:cast:s1,f:xs:XP:sylvok-battle-chair:cast:s1	-	-	-	ae86f6029288	-	f89090e3cf64	-	-	2026-11-24	xproof
 2f6c21a1-d618-497c-bfde-c0f2e1014d99	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f6c21a1-d618-497c-bfde-c0f2e1014d99	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f6d129c-e6ad-4f35-b8b1-56a101fdd5db	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f6d129c-e6ad-4f35-b8b1-56a101fdd5db	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f6c21a1-d618-497c-bfde-c0f2e1014d99	f0/t0	ChangesZone/For Mirrodin	agreed	-	FX	start	4	0	x:xs:XP:sylvok-battle-chair:cast:s1,f:xs:XP:sylvok-battle-chair:cast:s1	-	-	-	ae86f6029288	-	f89090e3cf64	-	-	2026-11-24	xproof
+2f6d129c-e6ad-4f35-b8b1-56a101fdd5db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:symmetry-matrix:cast:s1,f:xs:XP:symmetry-matrix:cast:s1	-	-	-	ae86f6029288	-	032cb584818b	-	-	2026-11-24	xproof
+2f6d129c-e6ad-4f35-b8b1-56a101fdd5db	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 2f6e9ab8-6951-4c5f-bcde-0e96e0fe87f2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f6e9ab8-6951-4c5f-bcde-0e96e0fe87f2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f6f49a4-f2ea-4147-a6d3-69cf875c302e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -161,7 +161,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f959c67-2b0b-4ba8-a8aa-90c25a3806ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f959c67-2b0b-4ba8-a8aa-90c25a3806ec	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2f990b54-fbf3-4949-85bb-9ba39710e72a	cast	cast-resolve	agreed	-	X	scen	1	0	Dive Down/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f995678-c315-4afe-845b-8c8ae863de6e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f995678-c315-4afe-845b-8c8ae863de6e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tower-worker:cast:s1,f:xs:XP:tower-worker:cast:s1	-	-	-	ae86f6029288	-	08832024953f	-	-	2026-11-24	xproof
 2f995678-c315-4afe-845b-8c8ae863de6e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f9a5e7c-f463-4773-bf67-a07339ce9b5d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f9de785-a80a-4356-a4b4-0e0243e8ea2d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -242,7 +242,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2fdeb920-2e48-4308-9517-743eec219c04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fe0ebf5-52ed-4e92-9b93-81e9ae564439	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2feca0cd-6bd3-4e19-8cfd-81d7bd1118ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2feca0cd-6bd3-4e19-8cfd-81d7bd1118ee	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2feca0cd-6bd3-4e19-8cfd-81d7bd1118ee	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 2fecfbef-e521-4025-94ea-451c9abde3de	cast	cast-resolve	agreed	-	FX	scen	2	0	Doctor Octopus, Master Planner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2fecfbef-e521-4025-94ea-451c9abde3de	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Doctor Octopus, Master Planner/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2fecfbef-e521-4025-94ea-451c9abde3de	static#0.0	static#0.0	agreed	-	X	scen	1	0	Doctor Octopus, Master Planner/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

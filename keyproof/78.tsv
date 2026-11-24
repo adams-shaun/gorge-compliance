@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 785ef850-4cd7-4e7d-88f2-7b6368c91a9c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 785ef850-4cd7-4e7d-88f2-7b6368c91a9c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 785f55bb-d47c-470c-94d4-95f69055e35f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-785f55bb-d47c-470c-94d4-95f69055e35f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-785f55bb-d47c-470c-94d4-95f69055e35f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+785f55bb-d47c-470c-94d4-95f69055e35f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ria-ivor-bane-of-bladehold:f0t1:s1,f:xs:XP:ria-ivor-bane-of-bladehold:f0t1:s1	-	-	-	ae86f6029288	-	748cad0f0221	-	-	2026-11-24	xproof
+785f55bb-d47c-470c-94d4-95f69055e35f	f0/t1	Attacks/Battle cry	agreed	-	FX	start	2	0	x:xs:XP:ria-ivor-bane-of-bladehold:f0t1:s1,f:xs:XP:ria-ivor-bane-of-bladehold:f0t1:s1	-	-	-	ae86f6029288	-	748cad0f0221	-	-	2026-11-24	xproof
 786afd52-0eae-4453-b1bd-cffc21699849	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 786b2028-cf24-4f00-b1d6-05b94e78d617	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 786b2028-cf24-4f00-b1d6-05b94e78d617	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 789899eb-3a33-4a41-b6b5-5e2f55a9af51	cast	cast-resolve	agreed	-	X	scen	1	0	The Chase Is On/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 789b6a61-656e-40c0-be78-9c89c4ecfb0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 789b6a61-656e-40c0-be78-9c89c4ecfb0b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:smoldering-efreet:f0t0:s1,f:xs:XP:smoldering-efreet:f0t0:s1	-	-	-	d864b561c9cb	-	b5330e623ea4	-	-	2026-11-24	xproof
-789b7af5-ac15-40b6-b5b7-f3fcdcfb52e1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+789b7af5-ac15-40b6-b5b7-f3fcdcfb52e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrun-breaker-of-silence:cast:s1,f:xs:XP:thrun-breaker-of-silence:cast:s1	-	-	-	ae86f6029288	-	674383c08741	-	-	2026-11-24	xproof
 789bf406-38f0-4888-b2ff-c4a95ac79283	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-the-defiler:cast:s1,f:xs:XP:rakdos-the-defiler:cast:s1	-	-	-	16ec2936189a	-	80f5491ec5ce	-	-	2026-11-24	xproof
 789bf406-38f0-4888-b2ff-c4a95ac79283	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 789bf406-38f0-4888-b2ff-c4a95ac79283	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -159,12 +159,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78d5ce34-f160-4925-a4ce-25a3546d97c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78d5f882-5d17-4228-b9b5-d460ab2bef08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78d5f882-5d17-4228-b9b5-d460ab2bef08	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-78d710ea-fbf5-4855-b874-b53478bf4a87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-78d710ea-fbf5-4855-b874-b53478bf4a87	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-78d710ea-fbf5-4855-b874-b53478bf4a87	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-78d74d6a-e1aa-4d70-92c3-b5338959d2fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-78d74d6a-e1aa-4d70-92c3-b5338959d2fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-78d74d6a-e1aa-4d70-92c3-b5338959d2fb	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+78d710ea-fbf5-4855-b874-b53478bf4a87	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thran-spider:f0t0:s1,f:xs:XP:thran-spider:f0t0:s1	-	-	-	ae86f6029288	-	9ccde584bf49	-	-	2026-11-24	xproof
+78d710ea-fbf5-4855-b874-b53478bf4a87	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:thran-spider:f0a0:s1,f:xs:XP:thran-spider:f0a0:s1	-	-	-	ae86f6029288	-	9ccde584bf49	-	-	2026-11-24	xproof
+78d710ea-fbf5-4855-b874-b53478bf4a87	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thran-spider:f0t0:s1,f:xs:XP:thran-spider:f0t0:s1	-	-	-	ae86f6029288	-	9ccde584bf49	-	-	2026-11-24	xproof
+78d74d6a-e1aa-4d70-92c3-b5338959d2fb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:horned-stoneseeker:f0t0:s1,f:xs:XP:horned-stoneseeker:f0t0:s1	-	-	-	ae86f6029288	-	b6524698de71	-	-	2026-11-24	xproof
+78d74d6a-e1aa-4d70-92c3-b5338959d2fb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:horned-stoneseeker:f0t0:s1,f:xs:XP:horned-stoneseeker:f0t0:s1	-	-	-	ae86f6029288	-	b6524698de71	-	-	2026-11-24	xproof
+78d74d6a-e1aa-4d70-92c3-b5338959d2fb	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 78d9faff-2ad9-4cf9-a239-27c50435d007	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78d9faff-2ad9-4cf9-a239-27c50435d007	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 78db3190-59bc-4033-95bc-32d8ed872b6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

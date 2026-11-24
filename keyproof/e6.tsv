@@ -10,8 +10,8 @@ e6088c23-a660-4d2c-b633-1c6cb1a59ebe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e6088c23-a660-4d2c-b633-1c6cb1a59ebe	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e60a9e8d-0be4-4d08-a03a-af9f9e2be65b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lore-broker:cast:s1,f:xs:XP:lore-broker:cast:s1	-	-	-	64a08ba7d913	-	01c2d1026548	-	-	2026-11-24	xproof
 e60a9e8d-0be4-4d08-a03a-af9f9e2be65b	f0/a0	Draw	agreed	-	F	start	2	0	f:xs:XP:lore-broker:f0a0:s1	-	-	-	d864b561c9cb	-	01c2d1026548	-	-	2026-11-24	xproof
-e60b23ba-2258-4da1-b873-452ee215846b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e60b23ba-2258-4da1-b873-452ee215846b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e60b23ba-2258-4da1-b873-452ee215846b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:fallaji-vanguard:cast:s1,f:xs:XP:fallaji-vanguard:cast:s1	-	-	-	ae86f6029288	-	17b4332f91bc	-	-	2026-11-24	xproof
+e60b23ba-2258-4da1-b873-452ee215846b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:fallaji-vanguard:cast:s1,f:xs:XP:fallaji-vanguard:cast:s1	-	-	-	ae86f6029288	-	17b4332f91bc	-	-	2026-11-24	xproof
 e60b6b71-eea8-42b3-81e2-c8fb1af5e218	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e60b6b71-eea8-42b3-81e2-c8fb1af5e218	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e6108735-8370-4611-ad59-d7da7fd0323f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sure-footed-infiltrator:cast:s1,f:xs:XP:sure-footed-infiltrator:cast:s1	-	-	-	ae86f6029288	-	0afe62b0e6ee	-	-	2026-11-24	xproof
@@ -113,8 +113,8 @@ e6991ab8-36f7-40c4-ad37-06e847d92664	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 e699d140-eb13-4f15-aecb-85c76e8b1b14	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e69a6fee-c4c0-4b31-8899-6e0935a6cded	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e69a8970-3ead-479d-860a-26ed65f9c846	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e69a8970-3ead-479d-860a-26ed65f9c846	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e69a8970-3ead-479d-860a-26ed65f9c846	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e69a8970-3ead-479d-860a-26ed65f9c846	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+e69a8970-3ead-479d-860a-26ed65f9c846	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e69b8388-1311-427f-9300-42badd5338ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e69b8388-1311-427f-9300-42badd5338ff	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e69b8388-1311-427f-9300-42badd5338ff	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -209,7 +209,7 @@ e6f95e3a-61a6-40a9-8070-ffd2767764ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e6f95e3a-61a6-40a9-8070-ffd2767764ad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6fb4f0d-ce49-4913-a2ef-88365e4916cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6fd0c7c-b164-4cf1-8910-0f8e680b2213	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e6fd0c7c-b164-4cf1-8910-0f8e680b2213	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e6fd0c7c-b164-4cf1-8910-0f8e680b2213	f0/a0	NULL	owed	refused:steps-needed:cost:WP	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e6fd0c7c-b164-4cf1-8910-0f8e680b2213	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e6fd0c7c-b164-4cf1-8910-0f8e680b2213	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e6fd0c7c-b164-4cf1-8910-0f8e680b2213	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e6fd55f2-7e26-469c-a44a-ea2eb90e19a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:memory-deluge:cast:s1,f:xs:XP:memory-deluge:cast:s1	-	-	-	d864b561c9cb	-	0bfcdad03c10	-	-	2026-11-24	xproof

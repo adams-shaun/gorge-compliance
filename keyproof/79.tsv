@@ -35,8 +35,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 792da586-a687-428c-a10e-75431249df5b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Rayblade Trooper/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 792e1072-00bf-4f63-b956-5f20cdf09f11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 792e1072-00bf-4f63-b956-5f20cdf09f11	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-792f8235-f23b-4858-bdd4-c7a186b7a470	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-792f8235-f23b-4858-bdd4-c7a186b7a470	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+792f8235-f23b-4858-bdd4-c7a186b7a470	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arcane-proxy:f0t0:s1,f:xs:XP:arcane-proxy:f0t0:s1	-	-	-	ae86f6029288	-	bde1d1ace9e9	-	-	2026-11-24	xproof
+792f8235-f23b-4858-bdd4-c7a186b7a470	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arcane-proxy:f0t0:s1,f:xs:XP:arcane-proxy:f0t0:s1	-	-	-	ae86f6029288	-	bde1d1ace9e9	-	-	2026-11-24	xproof
 79301ae1-8c9c-4723-be21-dc27e1646f35	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79301ae1-8c9c-4723-be21-dc27e1646f35	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skyline-cascade:f0t0:s1,f:xs:XP:skyline-cascade:f0t0:s1	-	-	-	d864b561c9cb	-	c4e8e338b124	-	-	2026-11-24	xproof
 79301ae1-8c9c-4723-be21-dc27e1646f35	land	land	agreed	-	FX	start	2	0	x:xs:XP:skyline-cascade:f0t0:s1,f:xs:XP:skyline-cascade:f0t0:s1	-	-	-	d864b561c9cb	-	c4e8e338b124	-	-	2026-11-24	xproof
@@ -149,8 +149,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79bf98c8-1169-477d-838e-2ebc0fa396dc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79bfef02-3586-424a-aff9-a6ec0d4f1135	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79bfef02-3586-424a-aff9-a6ec0d4f1135	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79c90a68-1c31-4e16-be53-1304132da80f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79c90a68-1c31-4e16-be53-1304132da80f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+79c90a68-1c31-4e16-be53-1304132da80f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sigiled-sentinel:f0t0:s1,f:xs:XP:sigiled-sentinel:f0t0:s1	-	-	-	ae86f6029288	-	7c49f7385265	-	-	2026-11-24	xproof
+79c90a68-1c31-4e16-be53-1304132da80f	f0/t0	ChangesZone/Backup	agreed	-	FX	start	2	0	x:xs:XP:sigiled-sentinel:f0t0:s1,f:xs:XP:sigiled-sentinel:f0t0:s1	-	-	-	ae86f6029288	-	7c49f7385265	-	-	2026-11-24	xproof
 79cd09e8-d738-47c0-9473-b6281bec6935	cast	cast-resolve	agreed	-	X	scen	1	0	Goblin Surprise/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 79cf9c52-56e0-4237-a595-ec07824e5eed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79cf9c52-56e0-4237-a595-ec07824e5eed	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

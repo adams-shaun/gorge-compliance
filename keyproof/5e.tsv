@@ -122,8 +122,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e961d15-5972-4e4b-9385-1cd7cd7c6bbe	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e968bf3-8d83-480b-81a4-98883cafd04f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e99497f-7c73-49ae-88b3-78d5d74ba9ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5e99497f-7c73-49ae-88b3-78d5d74ba9ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5e99497f-7c73-49ae-88b3-78d5d74ba9ea	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5e99497f-7c73-49ae-88b3-78d5d74ba9ea	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+5e99497f-7c73-49ae-88b3-78d5d74ba9ea	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5e99ba3b-dc2b-4c3c-84ce-228d4772cfee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ryusei-the-falling-star:cast:s1,f:xs:XP:ryusei-the-falling-star:cast:s1	-	-	-	64a08ba7d913	-	209c4ad55f8b	-	-	2026-11-24	xproof
 5e99ba3b-dc2b-4c3c-84ce-228d4772cfee	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 5ea0e3a5-9c38-4da4-98a6-41c14be512d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

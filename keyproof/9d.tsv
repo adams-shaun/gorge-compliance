@@ -22,8 +22,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d18253d-a38e-48a4-80bf-aa8fe5283584	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d1c3ec1-00a4-4890-93a3-e3cf137ca7e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d1c3ec1-00a4-4890-93a3-e3cf137ca7e4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hobbling-zombie:f0t0:s1,f:xs:XP:hobbling-zombie:f0t0:s1	-	-	-	d864b561c9cb	-	b7e1fd60cf12	-	-	2026-11-24	xproof
-9d1f232c-e904-46f6-a4b7-24ca2ede711c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d1f232c-e904-46f6-a4b7-24ca2ede711c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d1f232c-e904-46f6-a4b7-24ca2ede711c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loran-disciple-of-history:f0t0:s1,f:xs:XP:loran-disciple-of-history:f0t0:s1	-	-	-	ae86f6029288	-	3e7a3fab24ad	-	-	2026-11-24	xproof
+9d1f232c-e904-46f6-a4b7-24ca2ede711c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loran-disciple-of-history:f0t0:s1,f:xs:XP:loran-disciple-of-history:f0t0:s1	-	-	-	ae86f6029288	-	3e7a3fab24ad	-	-	2026-11-24	xproof
 9d1f9036-a466-46b6-ab7c-2de487876978	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:countless-gears-renegade:f0t0:s1,f:xs:XP:countless-gears-renegade:f0t0:s1	-	-	-	d864b561c9cb	-	90cca20714df	-	-	2026-11-24	xproof
 9d1f9036-a466-46b6-ab7c-2de487876978	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d2460c3-8eeb-4f35-b6f6-748c478664c7	cast	cast-resolve	agreed	-	X	scen	1	0	Enduring Curiosity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d546a53-5beb-40f5-b358-377810c8a75d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d57cda6-9042-44bd-9785-38de9487ff85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d581188-ce80-494e-bd38-f411e1f4efb5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d581188-ce80-494e-bd38-f411e1f4efb5	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d581188-ce80-494e-bd38-f411e1f4efb5	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 9d586c74-b1dd-4fcb-a24a-c703d250fa63	cast	cast-resolve	agreed	-	FX	scen	2	0	Seismic Sense/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9d5917d5-4fb3-4f37-9278-e08c1f73aae5	cast	cast-resolve	agreed	-	X	scen	1	0	Forensic Gadgeteer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9d5917d5-4fb3-4f37-9278-e08c1f73aae5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Forensic Gadgeteer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -101,8 +101,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d687287-7b3f-48c8-b5df-0d7550b9ad66	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d6a10c6-5d39-49c6-b50d-8fc5b8ddcd77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d6a9a37-a245-4503-baeb-9488553798ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d6a9a37-a245-4503-baeb-9488553798ab	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d6a9a37-a245-4503-baeb-9488553798ab	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d6a9a37-a245-4503-baeb-9488553798ab	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+9d6a9a37-a245-4503-baeb-9488553798ab	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gixian-puppeteer:f0t1:s1,f:xs:XP:gixian-puppeteer:f0t1:s1	-	-	-	ae86f6029288	-	7e7c3b8be647	-	-	2026-11-24	xproof
 9d6ab594-aea9-4f13-8802-f3794ee45425	cast	cast-resolve	agreed	-	X	scen	1	0	Torgal, A Fine Hound/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9d6ab594-aea9-4f13-8802-f3794ee45425	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Torgal, A Fine Hound/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9d6ab594-aea9-4f13-8802-f3794ee45425	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Torgal, A Fine Hound/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -168,8 +168,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9dd674a7-becf-4106-b53f-bca88426d92d	cast	cast-resolve	agreed	-	FX	scen	2	0	Zimone, Paradox Sculptor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9dd674a7-becf-4106-b53f-bca88426d92d	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Zimone, Paradox Sculptor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9dd674a7-becf-4106-b53f-bca88426d92d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Zimone, Paradox Sculptor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9dd755a5-0bef-4bde-92fa-14ef2a1a1410	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9dd755a5-0bef-4bde-92fa-14ef2a1a1410	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9dd755a5-0bef-4bde-92fa-14ef2a1a1410	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dunland-crebain:f0t0:s1,f:xs:XP:dunland-crebain:f0t0:s1	-	-	-	ae86f6029288	-	f99ffe5c4709	-	-	2026-11-24	xproof
+9dd755a5-0bef-4bde-92fa-14ef2a1a1410	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dunland-crebain:f0t0:s1,f:xs:XP:dunland-crebain:f0t0:s1	-	-	-	ae86f6029288	-	f99ffe5c4709	-	-	2026-11-24	xproof
 9dd7f27a-e862-47d7-9158-034cf4d353b8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ddc5a06-b4e1-459a-9e39-7cd1aa994fe1	cast	cast-resolve	agreed	-	X	scen	1	0	Helix Pinnacle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9ddc5a06-b4e1-459a-9e39-7cd1aa994fe1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Helix Pinnacle/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

@@ -89,8 +89,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7a75d565-b0a7-46bf-94a0-c9255c8abd6d	cast	cast-resolve	agreed	-	X	scen	1	0	The Key to the Vault/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7a75d565-b0a7-46bf-94a0-c9255c8abd6d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Key to the Vault/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7a75d565-b0a7-46bf-94a0-c9255c8abd6d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Key to the Vault/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7a7789e5-f2ac-49b2-943e-7d49e4727fb6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a7789e5-f2ac-49b2-943e-7d49e4727fb6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7a7789e5-f2ac-49b2-943e-7d49e4727fb6	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:gift-of-strands:cast:s1,f:xs:XP:gift-of-strands:cast:s1	-	-	-	ae86f6029288	-	65881b9a8718	-	-	2026-11-24	xproof
+7a7789e5-f2ac-49b2-943e-7d49e4727fb6	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:gift-of-strands:cast:s1,f:xs:XP:gift-of-strands:cast:s1	-	-	-	ae86f6029288	-	65881b9a8718	-	-	2026-11-24	xproof
 7a7d9887-3cc4-4fb9-9109-1315903ace45	cast	cast-resolve	agreed	-	FX	scen	2	0	Confusticate and Bebother/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7a7f37a3-9e99-4d3d-b705-b074fb3e9b3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a82c183-1561-4276-9a75-6bbb9c2bee2e	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -109,9 +109,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7a951bd7-4f7d-44ea-9c2f-fe2f6b2f5289	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a9942cd-32ac-4cc9-8840-3fe6b092d0b8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a9d13b3-3823-463a-acd9-8b7a9d5e121f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a9fa906-b43e-4d98-b134-5936d3085851	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a9fa906-b43e-4d98-b134-5936d3085851	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a9fa906-b43e-4d98-b134-5936d3085851	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7a9fa906-b43e-4d98-b134-5936d3085851	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+7a9fa906-b43e-4d98-b134-5936d3085851	f0/a0	NULL	owed	refused:steps-needed:cost:WP	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+7a9fa906-b43e-4d98-b134-5936d3085851	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 7aa31280-12c3-479d-a6dd-f1c669043083	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7aa5db50-5057-45fd-bce9-fb4a5e874263	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:astral-drift:cast:s1,f:xs:XP:astral-drift:cast:s1	-	-	-	d864b561c9cb	-	56b92e5d0aed	-	-	2026-11-24	xproof
 7aa5db50-5057-45fd-bce9-fb4a5e874263	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:astral-drift:cast:s2,f:xs:XP:astral-drift:cast:s2	-	-	-	d864b561c9cb	-	56b92e5d0aed	-	-	2026-11-24	xproof
@@ -119,7 +119,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7aa5db50-5057-45fd-bce9-fb4a5e874263	f0/t1	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7aac51ef-ae03-4a9e-9a48-46223787f291	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7aad0a80-cf7b-4224-8e72-d611e0be3383	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7aae0a3d-8882-4485-a126-f06ea6593dcb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7aae0a3d-8882-4485-a126-f06ea6593dcb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:titania-s-command:cast:s1,f:xs:XP:titania-s-command:cast:s1	-	-	-	ae86f6029288	-	475eb6a683c4	-	-	2026-11-24	xproof
 7aae54a6-3011-4867-b5ee-21a2111aecc6	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:tunnel-surveyor:f0t0:s2,f:xs:XP:tunnel-surveyor:f0t0:s2	-	-	-	e07cf3a05ba5	-	1dc08bc9b439	-	-	2026-11-24	xproof
 7aae54a6-3011-4867-b5ee-21a2111aecc6	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:tunnel-surveyor:f0t0:s2,f:xs:XP:tunnel-surveyor:f0t0:s2	-	-	-	e07cf3a05ba5	-	1dc08bc9b439	-	-	2026-11-24	xproof
 7ab18e48-f935-405b-8658-b49052d20529	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clash-of-realities:cast:s1,f:xs:XP:clash-of-realities:cast:s1	-	-	-	64a08ba7d913	-	cb213b027fcc	-	-	2026-11-24	xproof

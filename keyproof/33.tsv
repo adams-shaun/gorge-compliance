@@ -107,9 +107,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 339bddf5-a8fb-46d3-877e-b0441ca8a597	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 339bddf5-a8fb-46d3-877e-b0441ca8a597	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 339c39d9-7e10-458e-b602-4f0550840436	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-339c39d9-7e10-458e-b602-4f0550840436	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+339c39d9-7e10-458e-b602-4f0550840436	f0/a0	Token	agreed	-	FX	start	4	0	x:xs:XP:platoon-dispenser:f0a0:s1,f:xs:XP:platoon-dispenser:f0a0:s1	-	-	-	ae86f6029288	-	e52b8eeaccfb	-	-	2026-11-24	xproof
 339c39d9-7e10-458e-b602-4f0550840436	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-339c39d9-7e10-458e-b602-4f0550840436	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+339c39d9-7e10-458e-b602-4f0550840436	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 339f5334-b65a-445a-a016-20e997e0b4bb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mistrise Village/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 339f5334-b65a-445a-a016-20e997e0b4bb	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Mistrise Village/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 339f5334-b65a-445a-a016-20e997e0b4bb	land	play-land	agreed	-	X	scen	1	0	Mistrise Village/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -197,9 +197,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33ee23bc-6327-4a54-a704-dfd83be36bb5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33ee23bc-6327-4a54-a704-dfd83be36bb5	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33eefb22-51a6-4630-9bd2-0895997f6f33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33ef3d51-845d-460b-97a0-95e7591cf466	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33ef3d51-845d-460b-97a0-95e7591cf466	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33ef3d51-845d-460b-97a0-95e7591cf466	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+33ef3d51-845d-460b-97a0-95e7591cf466	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gnawing-vermin:f0t0:s1,f:xs:XP:gnawing-vermin:f0t0:s1	-	-	-	ae86f6029288	-	7f3e236fc961	-	-	2026-11-24	xproof
+33ef3d51-845d-460b-97a0-95e7591cf466	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gnawing-vermin:f0t0:s1,f:xs:XP:gnawing-vermin:f0t0:s1	-	-	-	ae86f6029288	-	7f3e236fc961	-	-	2026-11-24	xproof
+33ef3d51-845d-460b-97a0-95e7591cf466	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gnawing-vermin:f0t1:s1,f:xs:XP:gnawing-vermin:f0t1:s1	-	-	-	ae86f6029288	-	7f3e236fc961	-	-	2026-11-24	xproof
 33f29fcb-c9ea-4d81-afa2-5c9575b4d58e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33f29fcb-c9ea-4d81-afa2-5c9575b4d58e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 33f2c6cb-f864-4bee-b365-aedf33fbedf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

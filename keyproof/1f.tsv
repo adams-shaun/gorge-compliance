@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f861517-ac53-4218-b62e-35e971098b6d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f861517-ac53-4218-b62e-35e971098b6d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f874f7f-b959-4de5-a5db-e65a90ac2f9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f874f7f-b959-4de5-a5db-e65a90ac2f9d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f874f7f-b959-4de5-a5db-e65a90ac2f9d	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1f8d387e-e4bb-4e76-a173-f46f7b107b95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f8d387e-e4bb-4e76-a173-f46f7b107b95	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1f8d4d5f-e82f-45f3-823e-1bb6b536eb18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grand-arbiter-augustin-iv:cast:s1,f:xs:XP:grand-arbiter-augustin-iv:cast:s1	-	-	-	16ec2936189a	-	6714b31fec21	-	-	2026-11-24	xproof
@@ -169,9 +169,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fd00656-83ba-4feb-b089-224007936b99	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mockingbird, Ace Agent/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fd00656-83ba-4feb-b089-224007936b99	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mockingbird, Ace Agent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fd00656-83ba-4feb-b089-224007936b99	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mockingbird, Ace Agent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1fd04d9e-cf89-49ba-a932-5d278f65bf77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1fd04d9e-cf89-49ba-a932-5d278f65bf77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirran-bardiche:f0t0:s1,f:xs:XP:mirran-bardiche:f0t0:s1	-	-	-	ae86f6029288	-	70b23bf38a28	-	-	2026-11-24	xproof
 1fd04d9e-cf89-49ba-a932-5d278f65bf77	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1fd04d9e-cf89-49ba-a932-5d278f65bf77	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1fd04d9e-cf89-49ba-a932-5d278f65bf77	f0/t0	ChangesZone/For Mirrodin	agreed	-	FX	start	2	0	x:xs:XP:mirran-bardiche:f0t0:s1,f:xs:XP:mirran-bardiche:f0t0:s1	-	-	-	ae86f6029288	-	70b23bf38a28	-	-	2026-11-24	xproof
 1fd729f6-27ea-4b07-81f0-885f2c0c00eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fd754fd-c053-4638-b379-46d903357b01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fd78bf7-43ba-4e09-834b-14bfc1fd9d0d	cast	cast-resolve	agreed	-	X	scen	1	0	Reverberating Summons/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

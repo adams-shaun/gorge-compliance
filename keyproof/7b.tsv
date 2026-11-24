@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b0767b8-b504-456e-93bd-218502f73b3d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b094a2b-2b69-4a9b-9829-c1aabc53f75e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:solidarity:cast:s1,f:xs:XP:solidarity:cast:s1	-	-	-	25696bf19d5b	-	72beaf0db38a	-	-	2026-11-24	xproof
 7b0b05a0-0be4-498f-be54-8d68b818f90a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b0d7e62-0287-454a-8702-b0bfa7b41245	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b0d7e62-0287-454a-8702-b0bfa7b41245	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:minas-tirith:f0a1:s1,f:xs:XP:minas-tirith:f0a1:s1	-	-	-	ae86f6029288	-	89fc0748db3c	-	-	2026-11-24	xproof
 7b0d7e62-0287-454a-8702-b0bfa7b41245	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b0d7e62-0287-454a-8702-b0bfa7b41245	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b0d9139-b3ad-4065-9b55-aeeda8950bee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b389f2b-fddc-46fb-85d5-4470565323f3	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7b3c0d89-55ed-43d7-a00a-7b060857ec4e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b3c0d89-55ed-43d7-a00a-7b060857ec4e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b3c0d89-55ed-43d7-a00a-7b060857ec4e	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b3c0d89-55ed-43d7-a00a-7b060857ec4e	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 7b3d364d-6581-43de-a80a-d5b07f5d21ed	cast	cast-resolve	agreed	-	FX	scen	2	0	Venus, Torn Between Worlds/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b3d364d-6581-43de-a80a-d5b07f5d21ed	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Venus, Torn Between Worlds/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b3d364d-6581-43de-a80a-d5b07f5d21ed	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Venus, Torn Between Worlds/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9e006a4b-8dde-4416-8cb4-8401562d0fd5	f0/a1	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 9e006a4b-8dde-4416-8cb4-8401562d0fd5	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e0461e7-ccc4-413b-be80-83311be46861	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9e0461e7-ccc4-413b-be80-83311be46861	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9e0461e7-ccc4-413b-be80-83311be46861	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:golden-tail-trainer:f0t0:s1,f:xs:XP:golden-tail-trainer:f0t0:s1	-	-	-	ae86f6029288	-	899a937051e2	-	-	2026-11-24	xproof
 9e0c5919-aed6-4d98-85c8-2658be78bdf0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-splicer:f0t0:s1,f:xs:XP:master-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	c0063fb7e714	-	-	2026-11-24	xproof
 9e0c5919-aed6-4d98-85c8-2658be78bdf0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:master-splicer:f0t0:s1,f:xs:XP:master-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	c0063fb7e714	-	-	2026-11-24	xproof
 9e0c66e9-7d2b-46bd-890e-886d0c029d1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -140,12 +140,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ea747cf-5d04-4aa7-bdc3-8145860cd1ba	land	play-land	agreed	-	X	scen	1	0	Elegant Parlor/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ea87566-43da-4ebd-a904-ae8b8830c3a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ea87566-43da-4ebd-a904-ae8b8830c3a2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ea87566-43da-4ebd-a904-ae8b8830c3a2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9ea87566-43da-4ebd-a904-ae8b8830c3a2	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ashnod-s-harvester:f0t0:s1,f:xs:XP:ashnod-s-harvester:f0t0:s1	-	-	-	ae86f6029288	-	93288a69ecef	-	-	2026-11-24	xproof
 9eaadbbc-818b-4c21-9d4b-1bba48504d38	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:springjack-pasture:f0a0:s1,f:xs:XP:springjack-pasture:f0a0:s1	-	-	-	8a1b1a193ec0	-	956c1c956682	-	-	2026-11-24	xproof
 9eaadbbc-818b-4c21-9d4b-1bba48504d38	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:springjack-pasture:f0a1:s1,f:xs:XP:springjack-pasture:f0a1:s1	-	-	-	8a1b1a193ec0	-	956c1c956682	-	-	2026-11-24	xproof
 9eaadbbc-818b-4c21-9d4b-1bba48504d38	f0/a2	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 9eaadbbc-818b-4c21-9d4b-1bba48504d38	land	land	agreed	-	FX	start	2	0	x:xs:XP:springjack-pasture:land:s1,f:xs:XP:springjack-pasture:land:s1	-	-	-	8a1b1a193ec0	-	956c1c956682	-	-	2026-11-24	xproof
-9eaca93d-6c3d-4489-8652-b575a4cd931f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9eaca93d-6c3d-4489-8652-b575a4cd931f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unleash-shell:cast:s1,f:xs:XP:unleash-shell:cast:s1	-	-	-	ae86f6029288	-	ae9014bfc4ef	-	-	2026-11-24	xproof
 9eb58db8-7934-485c-8606-fb1a6cc60d42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9eb7f301-b9b6-48c3-9dad-e7df9cc15355	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9eb7f301-b9b6-48c3-9dad-e7df9cc15355	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:civic-gardener:f0t0:s1,f:xs:XP:civic-gardener:f0t0:s1	-	-	-	d864b561c9cb	-	bbf7a4f7941b	-	-	2026-11-24	xproof

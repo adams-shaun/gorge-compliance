@@ -98,10 +98,10 @@ f36e316d-c0ad-414d-8cf0-b1c9ea779e03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bat
 f36e316d-c0ad-414d-8cf0-b1c9ea779e03	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:battleflight-eagle:f0t0:s1,f:xs:XP:battleflight-eagle:f0t0:s1	-	-	-	d864b561c9cb	-	a2671f1ff059	-	-	2026-11-24	xproof
 f371cdaf-7ab8-4555-8c96-61dfbf8c0179	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f371cdaf-7ab8-4555-8c96-61dfbf8c0179	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f376f4c6-4526-4ae3-a84a-e8ea50fe78b6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f376f4c6-4526-4ae3-a84a-e8ea50fe78b6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f376f4c6-4526-4ae3-a84a-e8ea50fe78b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:depth-charge-colossus:cast:s1,f:xs:XP:depth-charge-colossus:cast:s1	-	-	-	ae86f6029288	-	c762fb5cff29	-	-	2026-11-24	xproof
+f376f4c6-4526-4ae3-a84a-e8ea50fe78b6	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:depth-charge-colossus:f0a0:s1,f:xs:XP:depth-charge-colossus:f0a0:s1	-	-	-	ae86f6029288	-	c762fb5cff29	-	-	2026-11-24	xproof
 f3817f63-7bde-46c5-93cb-b4756f5f821e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f3817f63-7bde-46c5-93cb-b4756f5f821e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f3817f63-7bde-46c5-93cb-b4756f5f821e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 f3838ff1-5403-4f3f-8531-36029c13fcfc	cast	cast-resolve	agreed	-	X	scen	1	0	Riptide Gearhulk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f3838ff1-5403-4f3f-8531-36029c13fcfc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Riptide Gearhulk/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f3838ff1-5403-4f3f-8531-36029c13fcfc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Riptide Gearhulk/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -178,8 +178,8 @@ f3d3ed94-f32c-4a67-8e2a-765e454a80df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 f3d3ed94-f32c-4a67-8e2a-765e454a80df	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f3d48efa-910a-4872-a5b1-a353c5dbce99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f3d48efa-910a-4872-a5b1-a353c5dbce99	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f3d48efa-910a-4872-a5b1-a353c5dbce99	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f3d48efa-910a-4872-a5b1-a353c5dbce99	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f3d48efa-910a-4872-a5b1-a353c5dbce99	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+f3d48efa-910a-4872-a5b1-a353c5dbce99	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 f3d4e48e-5f98-44a6-ad5c-a1c068aa01eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f3d935cd-d582-464a-a13b-bb84a53da4a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flameskull:cast:s1,f:xs:XP:flameskull:cast:s1	-	-	-	d864b561c9cb	-	7ca6747150a8	-	-	2026-11-24	xproof
 f3d935cd-d582-464a-a13b-bb84a53da4a1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:flameskull:f0t0:s1,f:xs:XP:flameskull:f0t0:s1	-	-	-	d864b561c9cb	-	7ca6747150a8	-	-	2026-11-24	xproof

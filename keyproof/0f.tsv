@@ -183,9 +183,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0fe6c042-1182-4392-8938-fee36149d74f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Baron Helmut Zemo/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0fe6c042-1182-4392-8938-fee36149d74f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Baron Helmut Zemo/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0fe76004-b2f4-4b11-abce-75fd76f68b4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fea3406-e5c7-4d5c-9890-6f1bc04a7cb8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fea3406-e5c7-4d5c-9890-6f1bc04a7cb8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fea3406-e5c7-4d5c-9890-6f1bc04a7cb8	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0fea3406-e5c7-4d5c-9890-6f1bc04a7cb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brandywine-farmer:f0t0:s1,f:xs:XP:brandywine-farmer:f0t0:s1	-	-	-	ae86f6029288	-	c600dac78bb7	-	-	2026-11-24	xproof
+0fea3406-e5c7-4d5c-9890-6f1bc04a7cb8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:brandywine-farmer:f0t0:s1,f:xs:XP:brandywine-farmer:f0t0:s1	-	-	-	ae86f6029288	-	c600dac78bb7	-	-	2026-11-24	xproof
+0fea3406-e5c7-4d5c-9890-6f1bc04a7cb8	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 0feacc7c-b93e-4322-bc8b-b3c19006128e	cast	cast-resolve	agreed	-	X	scen	1	0	Sandbender Scavengers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0feacc7c-b93e-4322-bc8b-b3c19006128e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sandbender Scavengers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0feacc7c-b93e-4322-bc8b-b3c19006128e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sandbender Scavengers/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -201,8 +201,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ff9c0cc-4fb3-4117-9a8e-5b51f62306c4	cast	cast-resolve	agreed	-	FX	scen	2	0	The Ruinous Wrecking Crew/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ff9c0cc-4fb3-4117-9a8e-5b51f62306c4	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 0ffce5e0-6b1d-4d1a-9318-1a1a219df532	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ffce5e0-6b1d-4d1a-9318-1a1a219df532	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ffce5e0-6b1d-4d1a-9318-1a1a219df532	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0ffce5e0-6b1d-4d1a-9318-1a1a219df532	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+0ffce5e0-6b1d-4d1a-9318-1a1a219df532	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 0ffe9c8b-e0cb-4a29-bc14-649dbec5d1f3	cast	cast-resolve	agreed	-	X	scen	1	0	Point the Way/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ffe9c8b-e0cb-4a29-bc14-649dbec5d1f3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Point the Way/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ffeec93-89d7-42c2-8abf-802e9f6dc992	cast	cast-resolve	agreed	-	FX	scen	2	0	Fate of the Sun-Cryst/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

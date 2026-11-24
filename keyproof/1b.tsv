@@ -113,9 +113,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b817184-4965-4186-bfa9-6d9cf198050e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crossroads-candleguide:f0t0:s1,f:xs:XP:crossroads-candleguide:f0t0:s1	-	-	-	d864b561c9cb	-	58b0f89dd395	-	-	2026-11-24	xproof
 1b817184-4965-4186-bfa9-6d9cf198050e	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b817184-4965-4186-bfa9-6d9cf198050e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:crossroads-candleguide:f0t0:s1,f:xs:XP:crossroads-candleguide:f0t0:s1	-	-	-	d864b561c9cb	-	58b0f89dd395	-	-	2026-11-24	xproof
-1b82312c-f748-4c36-8934-ecbcfc10cc7d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b82312c-f748-4c36-8934-ecbcfc10cc7d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b82312c-f748-4c36-8934-ecbcfc10cc7d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1b82312c-f748-4c36-8934-ecbcfc10cc7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:denethor-ruling-steward:cast:s1,f:xs:XP:denethor-ruling-steward:cast:s1	-	-	-	ae86f6029288	-	70bc388ffff2	-	-	2026-11-24	xproof
+1b82312c-f748-4c36-8934-ecbcfc10cc7d	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+1b82312c-f748-4c36-8934-ecbcfc10cc7d	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1b882a0e-0ede-4d1a-bd1a-9b7cffbcde8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b885600-def1-4b2c-a6cb-02df34d58a1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b885600-def1-4b2c-a6cb-02df34d58a1b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b8c4cbe-b2fc-4d52-9382-1e03c40003be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nissa-s-zendikon:cast:s1,f:xs:XP:nissa-s-zendikon:cast:s1	-	-	-	ae86f6029288	-	106684cc611e	-	-	2026-11-24	xproof
 1b8c4cbe-b2fc-4d52-9382-1e03c40003be	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1b8de1c5-1e23-4c84-bc5a-a14853ad8c7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b8de1c5-1e23-4c84-bc5a-a14853ad8c7a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1b8de1c5-1e23-4c84-bc5a-a14853ad8c7a	f0/t0	NULL	owed	refused:no-generator:trigger:Scry	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1b94a11b-21b0-4465-a520-69608f022fb4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b94a11b-21b0-4465-a520-69608f022fb4	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1b94ee87-a2f4-47f1-9fc7-4a167cad1b3b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:shinestriker:f0t0:s2,f:xs:XP:shinestriker:f0t0:s2	-	-	-	267e485f6204	-	150c5e494485	-	-	2026-11-24	xproof

@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 29233aa4-3fa0-4074-ad0f-c8e7101052f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29263d48-cb28-478b-a99e-5a18dbc924f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29263d48-cb28-478b-a99e-5a18dbc924f0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-292cd535-916e-486e-b0cc-ecdb9477287d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+292cd535-916e-486e-b0cc-ecdb9477287d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:proud-pack-rhino:f0t0:s1,f:xs:XP:proud-pack-rhino:f0t0:s1	-	-	-	ae86f6029288	-	2a3af9fbdf06	-	-	2026-11-24	xproof
 292cd535-916e-486e-b0cc-ecdb9477287d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 292e7135-8804-43f2-a486-51ef97b83f77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29326487-6d95-40a8-9bcc-f94ada4e27c3	cast	cast-resolve	agreed	-	X	scen	1	0	Slavering Branchsnapper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -77,8 +77,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2962fe4c-bf48-454b-8a6b-0f8253352ae8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:spelunking:cast:s2	-	-	-	5437c1394672	-	ec04eafbc0c4	-	-	2026-11-24	xproof
 2962fe4c-bf48-454b-8a6b-0f8253352ae8	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:spelunking:cast:s2	-	-	-	5437c1394672	-	ec04eafbc0c4	-	-	2026-11-24	xproof
 29646827-7b69-48c5-8273-4e66076e2384	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2965bae9-0d2b-42e1-b735-01ea57a72409	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2965bae9-0d2b-42e1-b735-01ea57a72409	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2965bae9-0d2b-42e1-b735-01ea57a72409	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:tangled-skyline:cast:s1,f:xs:XP:tangled-skyline:cast:s1	-	-	-	ae86f6029288	-	ffbcd626bf75	-	-	2026-11-24	xproof
+2965bae9-0d2b-42e1-b735-01ea57a72409	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:tangled-skyline:cast:s1,f:xs:XP:tangled-skyline:cast:s1	-	-	-	ae86f6029288	-	ffbcd626bf75	-	-	2026-11-24	xproof
 296c4d2b-e41c-416b-807e-5b4db638ec57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 296dcc57-5651-4cb1-b89c-fcdd3f5311bd	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 296de325-cc1a-4cfa-a72d-80a2a5e18d10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -100,12 +100,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2975590d-6a5b-41e5-8a3b-e9325e71226a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2975590d-6a5b-41e5-8a3b-e9325e71226a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2976f47b-9626-4934-bcee-7ee7f57944c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2976f47b-9626-4934-bcee-7ee7f57944c3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2976f47b-9626-4934-bcee-7ee7f57944c3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:scrappy-bruiser:f0t0:s1,f:xs:XP:scrappy-bruiser:f0t0:s1	-	-	-	ae86f6029288	-	c18b5c6fd4d1	-	-	2026-11-24	xproof
 2977aae2-225d-4f3f-8bf7-535f542a7391	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29781b19-0917-4d8f-abe3-df0b7e96d8a6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29781b19-0917-4d8f-abe3-df0b7e96d8a6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2978ba77-c0ce-4411-99c7-ef05dd602c8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2978ba77-c0ce-4411-99c7-ef05dd602c8d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2978ba77-c0ce-4411-99c7-ef05dd602c8d	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:battlefield-butcher:f0a0:s1,f:xs:XP:battlefield-butcher:f0a0:s1	-	-	-	ae86f6029288	-	85ac0a006fe6	-	-	2026-11-24	xproof
 297c2ddf-6d2d-4ed4-ab37-716514d5e3b6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 297c2ddf-6d2d-4ed4-ab37-716514d5e3b6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29863706-fa4e-49ed-9f40-69ae503abba3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-shortcutter:f0t0:s1,f:xs:XP:goblin-shortcutter:f0t0:s1	-	-	-	8a1b1a193ec0	-	0dd92650d5bb	-	-	2026-11-24	xproof

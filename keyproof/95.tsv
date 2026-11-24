@@ -87,8 +87,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 957ba875-b8d4-48e2-bbd7-993694a936f3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9584a8ae-2aba-42b8-8983-0467d6bd5698	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brilliant-restoration:cast:s1,f:xs:XP:brilliant-restoration:cast:s1	-	-	-	d864b561c9cb	-	2f7db5075469	-	-	2026-11-24	xproof
 958628af-243c-4eb0-8620-5d483b6da768	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9587bdb3-fb6a-47c0-898d-404bf60fcb6b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9587bdb3-fb6a-47c0-898d-404bf60fcb6b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9587bdb3-fb6a-47c0-898d-404bf60fcb6b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	36722f811f7f	-	-	2026-11-24	xproof
+9587bdb3-fb6a-47c0-898d-404bf60fcb6b	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	36722f811f7f	-	-	2026-11-24	xproof
 9588a7fd-bbe5-4a81-9a7e-d8e8f6c0537d	cast	cast-resolve	agreed	-	X	scen	1	0	Candy Grapple/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 958c2a27-9fb1-42b4-a0ef-296584763a98	cast	cast-resolve	agreed	-	X	scen	1	0	Stiltzkin, Moogle Merchant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 958c2a27-9fb1-42b4-a0ef-296584763a98	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stiltzkin, Moogle Merchant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -103,9 +103,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95921d1e-0487-4274-b797-8652e94fc4bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95921d1e-0487-4274-b797-8652e94fc4bc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95921d1e-0487-4274-b797-8652e94fc4bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9594b8e0-a176-447a-a52e-e1a77175b748	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9594b8e0-a176-447a-a52e-e1a77175b748	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9594b8e0-a176-447a-a52e-e1a77175b748	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9594b8e0-a176-447a-a52e-e1a77175b748	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:supply-drop:cast:s1,f:xs:XP:supply-drop:cast:s1	-	-	-	ae86f6029288	-	795658badf0f	-	-	2026-11-24	xproof
+9594b8e0-a176-447a-a52e-e1a77175b748	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:supply-drop:f0a0:s1,f:xs:XP:supply-drop:f0a0:s1	-	-	-	ae86f6029288	-	795658badf0f	-	-	2026-11-24	xproof
+9594b8e0-a176-447a-a52e-e1a77175b748	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:supply-drop:cast:s1,f:xs:XP:supply-drop:cast:s1	-	-	-	ae86f6029288	-	795658badf0f	-	-	2026-11-24	xproof
 9597c974-6120-43a7-9ad3-7e4fddc8c9f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9597c974-6120-43a7-9ad3-7e4fddc8c9f5	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 959acb66-84ca-4535-bca2-ad591895735e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:niv-mizzet-the-firemind:cast:s1,f:xs:XP:niv-mizzet-the-firemind:cast:s1	-	-	-	77494c1ce129	-	f1f41d4ededb	-	-	2026-11-24	xproof
@@ -126,8 +126,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95ab1529-0de0-416a-82b4-c5ed9276a9b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95ab1529-0de0-416a-82b4-c5ed9276a9b4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95ac482c-c6ad-49b4-937e-460241ae355f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-95ac482c-c6ad-49b4-937e-460241ae355f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-95ac482c-c6ad-49b4-937e-460241ae355f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+95ac482c-c6ad-49b4-937e-460241ae355f	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:mishra-s-research-desk:f0a1:s1,f:xs:XP:mishra-s-research-desk:f0a1:s1	-	-	-	ae86f6029288	-	4d2e79d1a5ce	-	-	2026-11-24	xproof
+95ac482c-c6ad-49b4-937e-460241ae355f	f0/a1	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:mishra-s-research-desk:f0a1:s1,f:xs:XP:mishra-s-research-desk:f0a1:s1	-	-	-	ae86f6029288	-	4d2e79d1a5ce	-	-	2026-11-24	xproof
 95b10ca7-7360-4da5-bd93-686ae3051833	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95b10ca7-7360-4da5-bd93-686ae3051833	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95b20721-1af9-4f3f-a39b-7cd1d4ce0b20	cast	cast-resolve	agreed	-	X	scen	1	0	Selvala, Eager Trailblazer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

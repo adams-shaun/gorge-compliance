@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31932df4-0be8-45c4-8b22-84119d9c20ba	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 31932df4-0be8-45c4-8b22-84119d9c20ba	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3194fe3d-57d3-4dab-ab39-3778b75150fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3194fe3d-57d3-4dab-ab39-3778b75150fa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3194fe3d-57d3-4dab-ab39-3778b75150fa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3196e1f4-7f94-4eb6-ae2b-ed11ba392552	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 319b4715-c3eb-49bf-b8d2-4d41e601ebe4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 319b4715-c3eb-49bf-b8d2-4d41e601ebe4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -163,8 +163,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31d572b8-2c5e-4819-b2a6-e7ef90872d9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bounteous-kirin:cast:s1,f:xs:XP:bounteous-kirin:cast:s1	-	-	-	64a08ba7d913	-	0ff30cda4580	-	-	2026-11-24	xproof
 31d572b8-2c5e-4819-b2a6-e7ef90872d9e	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 31d8c2c4-3309-4eee-a704-f760f381f080	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31d9a771-09ae-4cd4-bd19-6012f839a9e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31d9a771-09ae-4cd4-bd19-6012f839a9e8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+31d9a771-09ae-4cd4-bd19-6012f839a9e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stone-retrieval-unit:f0t0:s1,f:xs:XP:stone-retrieval-unit:f0t0:s1	-	-	-	ae86f6029288	-	4b1e93cd1bae	-	-	2026-11-24	xproof
+31d9a771-09ae-4cd4-bd19-6012f839a9e8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stone-retrieval-unit:f0t0:s1,f:xs:XP:stone-retrieval-unit:f0t0:s1	-	-	-	ae86f6029288	-	4b1e93cd1bae	-	-	2026-11-24	xproof
 31e3f39f-8b18-4316-984f-4d57d2d480ca	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 31e3f39f-8b18-4316-984f-4d57d2d480ca	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 31e3f39f-8b18-4316-984f-4d57d2d480ca	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

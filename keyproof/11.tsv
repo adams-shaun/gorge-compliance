@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 118cf682-a532-42e9-8d91-6ce6f0d31ace	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 118cf682-a532-42e9-8d91-6ce6f0d31ace	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 118f2cb6-2af9-4acc-b386-a8e8dded5793	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-118f2cb6-2af9-4acc-b386-a8e8dded5793	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+118f2cb6-2af9-4acc-b386-a8e8dded5793	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 11932191-4b19-49b1-bfe4-abb7b83b2e59	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 11932191-4b19-49b1-bfe4-abb7b83b2e59	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 11932191-4b19-49b1-bfe4-abb7b83b2e59	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -174,7 +174,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11e2f581-7c3c-4f2f-877f-e41540ab967e	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Expedited Inheritance/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11e50e35-bf4b-4089-b0c9-360d9c014584	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11e50e35-bf4b-4089-b0c9-360d9c014584	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11e637b4-6ce0-4514-98d6-02a2d073f73b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11e637b4-6ce0-4514-98d6-02a2d073f73b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:blue-sun-s-twilight:cast:s1	-	-	-	ae86f6029288	-	f4edd1605dc0	-	-	2026-11-24	xproof
 11e84e48-0f18-41b6-9f2a-30c64aecf9a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11e84e48-0f18-41b6-9f2a-30c64aecf9a7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11eb31d9-cbcb-4ec5-abab-dfa646addbba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

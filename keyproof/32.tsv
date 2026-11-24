@@ -86,7 +86,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32654ffa-b869-4f8b-a153-4242e8f9d92e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3269f589-00fc-4f0b-8693-656f2ab0670d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3269f589-00fc-4f0b-8693-656f2ab0670d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3269f589-00fc-4f0b-8693-656f2ab0670d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3269f589-00fc-4f0b-8693-656f2ab0670d	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 326adf88-3f6d-4bc2-aafa-dd55c6c95784	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-baron-of-vizkopa:cast:s1,f:xs:XP:blood-baron-of-vizkopa:cast:s1	-	-	-	d864b561c9cb	-	e542ed23ab1d	-	-	2026-11-24	xproof
 326ba371-124c-4949-a048-3a0c8962e567	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 326ba371-124c-4949-a048-3a0c8962e567	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 329f6e2e-6c37-4e98-bd45-bd252f1a2bd9	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 329fcb1e-7066-46c5-ba27-20ed2b18c1ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 32a8ca5f-0170-4f5d-97cd-63e2b74fd653	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32a8ca5f-0170-4f5d-97cd-63e2b74fd653	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 32a9dac0-247e-42d5-bfd3-465043515e12	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

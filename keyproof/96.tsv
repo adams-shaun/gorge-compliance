@@ -92,7 +92,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9676da93-1e17-4f6c-b610-a242b78c71ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sensor-splicer:f0t0:s1,f:xs:XP:sensor-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	2f33f5433881	-	-	2026-11-24	xproof
 9676da93-1e17-4f6c-b610-a242b78c71ab	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sensor-splicer:f0t0:s1,f:xs:XP:sensor-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	2f33f5433881	-	-	2026-11-24	xproof
 967897db-a34b-493c-bd48-04e2650902d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-967897db-a34b-493c-bd48-04e2650902d2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+967897db-a34b-493c-bd48-04e2650902d2	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:jor-kadeen-first-goldwarden:f0t0:s1,f:xs:XP:jor-kadeen-first-goldwarden:f0t0:s1	-	-	-	ae86f6029288	-	e59bd7682b79	-	-	2026-11-24	xproof
 967c2c79-7e49-448d-8d30-b2eb08b21d0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 967cf377-ae26-464d-85ac-8448b5a911f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 967cf377-ae26-464d-85ac-8448b5a911f7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96c65faf-859c-4436-a551-5538409a9792	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96c67950-df59-430c-94fd-234086c6c8f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96c96842-42c2-4aa3-95e2-6186d4ab5693	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96c96842-42c2-4aa3-95e2-6186d4ab5693	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96c96842-42c2-4aa3-95e2-6186d4ab5693	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:old-man-willow:f0t0:s1,f:xs:XP:old-man-willow:f0t0:s1	-	-	-	ae86f6029288	-	71d273a4abd1	-	-	2026-11-24	xproof
 96cc63af-69d1-4493-b241-0cb244a9e48a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:firebender-ascension:f0t0:s2,f:xs:XP:firebender-ascension:f0t0:s2	-	-	-	267e485f6204	-	0231424836ef	-	-	2026-11-24	xproof
 96cc63af-69d1-4493-b241-0cb244a9e48a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:firebender-ascension:f0t0:s2,f:xs:XP:firebender-ascension:f0t0:s2	-	-	-	267e485f6204	-	0231424836ef	-	-	2026-11-24	xproof
 96cc63af-69d1-4493-b241-0cb244a9e48a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Firebender Ascension/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -185,8 +185,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96e6d220-87db-4dab-abaa-e80c9577d89a	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Gossip's Talent/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e7e4c8-f66d-4327-aee6-85da648418f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maximize-velocity:cast:s1,f:xs:XP:maximize-velocity:cast:s1	-	-	-	d864b561c9cb	-	88b9bacb4e2a	-	-	2026-11-24	xproof
 96e8210a-a547-431d-8146-7399ec20c591	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96ebcd8b-ae3c-47b0-b895-bfc9848713e5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96ebcd8b-ae3c-47b0-b895-bfc9848713e5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96ebcd8b-ae3c-47b0-b895-bfc9848713e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gimli-counter-of-kills:cast:s1,f:xs:XP:gimli-counter-of-kills:cast:s1	-	-	-	ae86f6029288	-	1e255fcb47ef	-	-	2026-11-24	xproof
+96ebcd8b-ae3c-47b0-b895-bfc9848713e5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 96eea161-8af0-452f-b992-576efdf58d88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96eea161-8af0-452f-b992-576efdf58d88	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96ef0bd9-4abb-49af-8744-0b2ad595a393	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

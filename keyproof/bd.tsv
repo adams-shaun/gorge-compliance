@@ -18,7 +18,7 @@ bd0c0e85-ff24-46c9-a547-4f633355c131	static#0.0	static#0.0	agreed	-	X	scen	1	0	G
 bd0e22d1-4789-406d-9293-3ade30365b32	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd0e22d1-4789-406d-9293-3ade30365b32	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd0e22d1-4789-406d-9293-3ade30365b32	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd101a9b-4c1e-44c8-b9ef-cd79c4d28f36	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd101a9b-4c1e-44c8-b9ef-cd79c4d28f36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tawnos-s-tinkering:cast:s1,f:xs:XP:tawnos-s-tinkering:cast:s1	-	-	-	ae86f6029288	-	2cff0b679ddb	-	-	2026-11-24	xproof
 bd104c7e-311e-4b03-98d3-5f20f3a99d26	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:liliana-s-mastery:f0t0:s1,f:xs:XP:liliana-s-mastery:f0t0:s1	-	-	-	d864b561c9cb	-	9fc8866a0237	-	-	2026-11-24	xproof
 bd104c7e-311e-4b03-98d3-5f20f3a99d26	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:liliana-s-mastery:f0t0:s1,f:xs:XP:liliana-s-mastery:f0t0:s1	-	-	-	d864b561c9cb	-	9fc8866a0237	-	-	2026-11-24	xproof
 bd13392e-e72a-4dbb-ba9d-68f68e47e30e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:law-rune-enforcer:cast:s1,f:xs:XP:law-rune-enforcer:cast:s1	-	-	-	d864b561c9cb	-	2dfb433fcf8f	-	-	2026-11-24	xproof
@@ -138,8 +138,8 @@ bd940cab-d23a-44bf-ab96-8aa1dcd3f0ff	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 bd940cab-d23a-44bf-ab96-8aa1dcd3f0ff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd95c832-9ae9-404a-a2bc-0760a5b9ff56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd9ab645-d8ed-4cdd-8d8e-53383b5501ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd9b3009-f389-4831-b250-80c4bb8f25e5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd9b3009-f389-4831-b250-80c4bb8f25e5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd9b3009-f389-4831-b250-80c4bb8f25e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:petrifying-meddler:cast:s1,f:xs:XP:petrifying-meddler:cast:s1	-	-	-	ae86f6029288	-	3bc9f0b3f686	-	-	2026-11-24	xproof
+bd9b3009-f389-4831-b250-80c4bb8f25e5	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:petrifying-meddler:cast:s1,f:xs:XP:petrifying-meddler:cast:s1	-	-	-	ae86f6029288	-	3bc9f0b3f686	-	-	2026-11-24	xproof
 bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:oblivion-ring:cast:s1,f:xs:XP:oblivion-ring:cast:s1	-	-	-	d864b561c9cb	-	10edb9ae1050	-	-	2026-11-24	xproof
 bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:oblivion-ring:cast:s1,f:xs:XP:oblivion-ring:cast:s1	-	-	-	d864b561c9cb	-	10edb9ae1050	-	-	2026-11-24	xproof
 bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ bd9d3a70-faed-4bc6-97d8-1601b36cdb21	cast	NULL	owed	refused:scen failed: xengine
 bd9d3a70-faed-4bc6-97d8-1601b36cdb21	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Quill-Blade Laureate/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd9d3a70-faed-4bc6-97d8-1601b36cdb21	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Quill-Blade Laureate/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd9d761f-79cc-4082-8375-51af582f1472	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd9d761f-79cc-4082-8375-51af582f1472	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd9d761f-79cc-4082-8375-51af582f1472	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd9d761f-79cc-4082-8375-51af582f1472	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+bd9d761f-79cc-4082-8375-51af582f1472	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 bd9e416a-89b3-4912-be9b-49fce6a93dc9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:manalith:cast:s1,f:xs:XP:manalith:cast:s1	-	-	-	d864b561c9cb	-	6f337277afdb	-	-	2026-11-24	xproof
 bd9e416a-89b3-4912-be9b-49fce6a93dc9	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:manalith:f0a0:s2,f:xs:XP:manalith:f0a0:s2	-	-	-	d864b561c9cb	-	6f337277afdb	-	-	2026-11-24	xproof
 bd9f2c84-0589-4ffe-9bff-ea74be4f77a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

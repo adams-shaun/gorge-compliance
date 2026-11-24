@@ -105,8 +105,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 569a65fb-e35f-4388-ab49-f57be46b4889	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 569da5d3-6af2-4021-a464-b30ebaaf6fa0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56a55f45-2cc6-407d-b212-5619c98456d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-56a55f45-2cc6-407d-b212-5619c98456d9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-56a55f45-2cc6-407d-b212-5619c98456d9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+56a55f45-2cc6-407d-b212-5619c98456d9	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+56a55f45-2cc6-407d-b212-5619c98456d9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 56a60fcb-f9b7-438f-9221-eaca8fb2649b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valor-in-akros:cast:s1,f:xs:XP:valor-in-akros:cast:s1	-	-	-	d864b561c9cb	-	236200703f80	-	-	2026-11-24	xproof
 56a60fcb-f9b7-438f-9221-eaca8fb2649b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 56a80bd3-b81b-428d-96e1-f03ab6199cf3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

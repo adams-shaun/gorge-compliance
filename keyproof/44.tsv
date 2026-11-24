@@ -55,8 +55,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 44443716-8356-40cd-a879-35264b29108c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Scheming Silvertongue/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44443716-8356-40cd-a879-35264b29108c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Scheming Silvertongue/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 444493a6-0f90-4847-9619-4ea8fbf7cf6f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4446e59c-29f7-4722-92be-2625c1d3dab9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4446e59c-29f7-4722-92be-2625c1d3dab9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4446e59c-29f7-4722-92be-2625c1d3dab9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eagle-of-deliverance:f0t0:s1,f:xs:XP:eagle-of-deliverance:f0t0:s1	-	-	-	ae86f6029288	-	65d1e60074ae	-	-	2026-11-24	xproof
+4446e59c-29f7-4722-92be-2625c1d3dab9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eagle-of-deliverance:f0t0:s1,f:xs:XP:eagle-of-deliverance:f0t0:s1	-	-	-	ae86f6029288	-	65d1e60074ae	-	-	2026-11-24	xproof
 444d50dd-a44a-42db-bbf6-d0978e3bd6a3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 444d50dd-a44a-42db-bbf6-d0978e3bd6a3	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:riptide-laboratory:f0a1:s1,f:xs:XP:riptide-laboratory:f0a1:s1	-	-	-	25696bf19d5b	-	7162948c071e	-	-	2026-11-24	xproof
 444d50dd-a44a-42db-bbf6-d0978e3bd6a3	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -146,8 +146,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 449db6bf-d766-4d09-a7bd-9c45b3d4c4c3	cast	cast-resolve	agreed	-	FX	scen	2	0	Bone-Cairn Butcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 449db6bf-d766-4d09-a7bd-9c45b3d4c4c3	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Bone-Cairn Butcher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 449db6bf-d766-4d09-a7bd-9c45b3d4c4c3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bone-Cairn Butcher/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-449ed4b4-9e1e-4181-9090-af91802eba49	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-449ed4b4-9e1e-4181-9090-af91802eba49	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+449ed4b4-9e1e-4181-9090-af91802eba49	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coastal-bulwark:cast:s1,f:xs:XP:coastal-bulwark:cast:s1	-	-	-	ae86f6029288	-	9144c5ab2e85	-	-	2026-11-24	xproof
+449ed4b4-9e1e-4181-9090-af91802eba49	f0/a0	Surveil	agreed	-	FX	start	2	0	x:xs:XP:coastal-bulwark:f0a0:s1,f:xs:XP:coastal-bulwark:f0a0:s1	-	-	-	ae86f6029288	-	9144c5ab2e85	-	-	2026-11-24	xproof
 44a10a63-be9c-4f1d-aad6-b5337112bda5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44a10a63-be9c-4f1d-aad6-b5337112bda5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44a10a63-be9c-4f1d-aad6-b5337112bda5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

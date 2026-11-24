@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9a133991-8a7a-4bfd-b0ae-d76433450c03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9a133991-8a7a-4bfd-b0ae-d76433450c03	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9a1412db-45ad-46ea-8f12-a85d203113d8	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9a1622a5-c982-407b-a158-7b8ad9238aac	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9a1622a5-c982-407b-a158-7b8ad9238aac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:searing-barb:cast:s1,f:xs:XP:searing-barb:cast:s1	-	-	-	ae86f6029288	-	4114b09ada83	-	-	2026-11-24	xproof
 9a17452d-3adb-42ec-99f8-0083740cefa0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arborea-pegasus:f0t0:s1,f:xs:XP:arborea-pegasus:f0t0:s1	-	-	-	d864b561c9cb	-	3769ec10d06e	-	-	2026-11-24	xproof
 9a17452d-3adb-42ec-99f8-0083740cefa0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arborea-pegasus:f0t0:s1,f:xs:XP:arborea-pegasus:f0t0:s1	-	-	-	d864b561c9cb	-	3769ec10d06e	-	-	2026-11-24	xproof
 9a18fb98-796a-43b1-8157-e3afca53a1c0	cast	cast-resolve	agreed	-	FX	scen	2	0	Eject/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -101,9 +101,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ab0820b-4f5f-47b3-8fa9-43f802aed275	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 9ab101c2-215b-4736-873a-4a1ef6666b6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9abeb38c-2243-424c-bfbc-87aa45b6ea4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9abf9a0e-8e7d-406b-a01d-d4870b30134e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9abf9a0e-8e7d-406b-a01d-d4870b30134e	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9abf9a0e-8e7d-406b-a01d-d4870b30134e	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9abf9a0e-8e7d-406b-a01d-d4870b30134e	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:the-shire:f0a0:s1,f:xs:XP:the-shire:f0a0:s1	-	-	-	ae86f6029288	-	6dddc8f9a387	-	-	2026-11-24	xproof
+9abf9a0e-8e7d-406b-a01d-d4870b30134e	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+9abf9a0e-8e7d-406b-a01d-d4870b30134e	land	land	agreed	-	FX	start	2	0	x:xs:XP:the-shire:land:s1,f:xs:XP:the-shire:land:s1	-	-	-	ae86f6029288	-	6dddc8f9a387	-	-	2026-11-24	xproof
 9ac20f38-adc4-40a9-95c9-bbdc689b928b	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 9ac2dcb6-dacc-4fcb-b820-9fc6744ec503	cast	cast-resolve	agreed	-	X	scen	1	0	Nettle Guard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ac2dcb6-dacc-4fcb-b820-9fc6744ec503	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Nettle Guard/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9acfec0d-05a0-4b28-a883-e6863f1cb773	cast	cast-resolve	agreed	-	FX	scen	2	0	Mistmeadow Council/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9acfec0d-05a0-4b28-a883-e6863f1cb773	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9acfec0d-05a0-4b28-a883-e6863f1cb773	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mistmeadow Council/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-9ad01fb2-2ba7-447a-a5ef-e57d46421635	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ad01fb2-2ba7-447a-a5ef-e57d46421635	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9ad01fb2-2ba7-447a-a5ef-e57d46421635	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marshal-of-zhalfir:cast:s1,f:xs:XP:marshal-of-zhalfir:cast:s1	-	-	-	ae86f6029288	-	2d6a2d5044cb	-	-	2026-11-24	xproof
+9ad01fb2-2ba7-447a-a5ef-e57d46421635	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:marshal-of-zhalfir:f0a0:s1,f:xs:XP:marshal-of-zhalfir:f0a0:s1	-	-	-	ae86f6029288	-	2d6a2d5044cb	-	-	2026-11-24	xproof
 9ad114d8-2123-4267-b30b-6f4e755bb0de	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ad114d8-2123-4267-b30b-6f4e755bb0de	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ad114d8-2123-4267-b30b-6f4e755bb0de	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -138,8 +138,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ad730b5-8950-4215-9319-387e2970dd22	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Exemplar of Light/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ad730b5-8950-4215-9319-387e2970dd22	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Exemplar of Light/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ad730b5-8950-4215-9319-387e2970dd22	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Exemplar of Light/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9ad903c5-1528-44d6-b4b6-f05a2399d91f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ad903c5-1528-44d6-b4b6-f05a2399d91f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9ad903c5-1528-44d6-b4b6-f05a2399d91f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:quickbeam-upstart-ent:cast:s1,f:xs:XP:quickbeam-upstart-ent:cast:s1	-	-	-	ae86f6029288	-	625f22947e04	-	-	2026-11-24	xproof
+9ad903c5-1528-44d6-b4b6-f05a2399d91f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:quickbeam-upstart-ent:cast:s1,f:xs:XP:quickbeam-upstart-ent:cast:s1	-	-	-	ae86f6029288	-	625f22947e04	-	-	2026-11-24	xproof
 9ad956c8-71d3-436f-961e-e2dfc1d2ca70	cast	cast-resolve	agreed	-	FX	scen	2	0	Rust Harvester/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ad956c8-71d3-436f-961e-e2dfc1d2ca70	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rust Harvester/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ad956c8-71d3-436f-961e-e2dfc1d2ca70	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rust Harvester/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

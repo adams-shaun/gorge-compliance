@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a44e4e7-dfa2-427b-bbff-11c398fa60bb	f0/a1	PutCounterAll	agreed	-	FX	start	2	0	x:xs:XP:gavony-township:f0a1:s1,f:xs:XP:gavony-township:f0a1:s1	-	-	-	d864b561c9cb	-	a87385b75a08	-	-	2026-11-24	xproof
 8a44e4e7-dfa2-427b-bbff-11c398fa60bb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a4d505e-b884-4b8b-93d5-495992f3858e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a4d505e-b884-4b8b-93d5-495992f3858e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a4d505e-b884-4b8b-93d5-495992f3858e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8a50b8f7-1af8-4e00-9734-66a87e05cc6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a515f67-f868-494b-8bd7-de63fe14477b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plunder:cast:s1,f:xs:XP:plunder:cast:s1	-	-	-	9ee19e8250ce	-	646826c64d72	-	-	2026-11-24	xproof
 8a5259cc-224d-4748-b764-63ad0e4e02f1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -80,7 +80,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a5e17a0-6f3c-49ed-b328-ed90a46ed6c5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Burdened Stoneback/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 8a5e925f-320d-4bb7-9374-0384e7ac41e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a628875-96c8-4a28-aaff-99fd99ae778e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a628875-96c8-4a28-aaff-99fd99ae778e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a628875-96c8-4a28-aaff-99fd99ae778e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8a64cf8e-ae7f-4697-93fc-9c946eb1088b	cast	cast-resolve	agreed	-	FX	scen	2	0	Delta Bloodflies/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a64cf8e-ae7f-4697-93fc-9c946eb1088b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Delta Bloodflies/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a64cf8e-ae7f-4697-93fc-9c946eb1088b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Delta Bloodflies/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -178,15 +178,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ac23863-0aa7-41bc-b9b7-c5f0566172cf	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:nightveil-sprite:f0t0:s1,f:xs:XP:nightveil-sprite:f0t0:s1	-	-	-	d864b561c9cb	-	054672847f2c	-	-	2026-11-24	xproof
 8ac43884-9f03-4945-98ea-c744d0403f32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ace3c6b-b2b3-4cd1-9828-dcb9ba5b71ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ace9425-fcdd-45b0-abf0-1a7d601de25e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ace9425-fcdd-45b0-abf0-1a7d601de25e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slimefoot-s-survey:cast:s1,f:xs:XP:slimefoot-s-survey:cast:s1	-	-	-	ae86f6029288	-	ffee344f696f	-	-	2026-11-24	xproof
 8ad2ecd5-2d50-4a54-a672-335d7e636a5a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ad2ecd5-2d50-4a54-a672-335d7e636a5a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ad2ecd5-2d50-4a54-a672-335d7e636a5a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ad4f2fe-6d98-4279-a331-3817d40ae46d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seismic-assault:cast:s1,f:xs:XP:seismic-assault:cast:s1	-	-	-	25696bf19d5b	-	7a3999045d87	-	-	2026-11-24	xproof
 8ad4f2fe-6d98-4279-a331-3817d40ae46d	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 8ad7fdd2-bff5-4434-a3f9-1f5ce0ed573b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ad7fdd2-bff5-4434-a3f9-1f5ce0ed573b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ad7fdd2-bff5-4434-a3f9-1f5ce0ed573b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ad7fdd2-bff5-4434-a3f9-1f5ce0ed573b	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:urza-powerstone-prodigy:f0a0:s1,f:xs:XP:urza-powerstone-prodigy:f0a0:s1	-	-	-	ae86f6029288	-	036fbfcf9fe4	-	-	2026-11-24	xproof
+8ad7fdd2-bff5-4434-a3f9-1f5ce0ed573b	f0/t0	NULL	owed	refused:no-generator:trigger:DiscardedAll	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8ad91015-db7f-43ea-97c9-bf2bf5656858	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ad91015-db7f-43ea-97c9-bf2bf5656858	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ad91f64-ccab-4edc-bd54-b2ee9267d614	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

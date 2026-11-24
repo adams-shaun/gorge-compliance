@@ -35,7 +35,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6022608a-6cf2-45bd-adec-63211710a5ed	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	White Auracite/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6022608a-6cf2-45bd-adec-63211710a5ed	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6024cb2d-a6e7-4adc-8b34-7f4e0cac16ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6024cb2d-a6e7-4adc-8b34-7f4e0cac16ce	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6024cb2d-a6e7-4adc-8b34-7f4e0cac16ce	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:third-path-savant:f0a0:s1,f:xs:XP:third-path-savant:f0a0:s1	-	-	-	ae86f6029288	-	e0c9594192cc	-	-	2026-11-24	xproof
 6025ce2f-d527-457c-866c-cb5c119d0bf4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:karstoderm:cast:s1,f:xs:XP:karstoderm:cast:s1	-	-	-	25696bf19d5b	-	1074693d50a1	-	-	2026-11-24	xproof
 6025ce2f-d527-457c-866c-cb5c119d0bf4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 602b30a0-ecf3-4639-a512-ee020675e432	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:facevaulter:cast:s1,f:xs:XP:facevaulter:cast:s1	-	-	-	d864b561c9cb	-	aaab807a8014	-	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60957bfd-2460-429a-a7a7-d99424946f83	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60957bfd-2460-429a-a7a7-d99424946f83	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 60963292-2dee-4b1c-9c1c-c35cf8ea3496	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reverence:cast:s1,f:xs:XP:reverence:cast:s1	-	-	-	64a08ba7d913	-	9420922c1b80	-	-	2026-11-24	xproof
-6096b221-7b6e-4528-8b5d-8ad0fcef3fba	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6096b221-7b6e-4528-8b5d-8ad0fcef3fba	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6096b221-7b6e-4528-8b5d-8ad0fcef3fba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gitaxian-raptor:cast:s1,f:xs:XP:gitaxian-raptor:cast:s1	-	-	-	ae86f6029288	-	0b10e8b1b06e	-	-	2026-11-24	xproof
+6096b221-7b6e-4528-8b5d-8ad0fcef3fba	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:gitaxian-raptor:cast:s1,f:xs:XP:gitaxian-raptor:cast:s1	-	-	-	ae86f6029288	-	0b10e8b1b06e	-	-	2026-11-24	xproof
 6098ba4b-ebfe-48da-a33d-b94c021ac559	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6098ba4b-ebfe-48da-a33d-b94c021ac559	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 609c3b1c-d9ad-4616-b685-52b85528fde8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
