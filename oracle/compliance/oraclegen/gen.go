@@ -1279,7 +1279,11 @@ func arrangeEmpty(d rules.OracleDecision) bool {
 func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, castSteps map[int]bool, setup map[string]Seat, flips []rules.OracleFlip, extras ...xanswersExtra) [][]XAnswer {
 	var digSources map[int]digSource
 	var pipPlans map[int][]pipAsk
+	var ownBounce map[int]bool
 	for _, ex := range extras {
+		if ownBounce == nil {
+			ownBounce = ex.ownBounce
+		}
 		if digSources == nil {
 			digSources = ex.digs
 		}
@@ -1327,6 +1331,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 	}
 	routing := newAnswerRouting(ds, digSources)
+	if ownBounce != nil {
+		routing.ownBounce = ownBounce
+	}
 	// Trigger-order name answers are demoted back to the inert text form when
 	// the step also scripts other asks (see the trigger_order case).
 	var trigSpans []*trigSpan
