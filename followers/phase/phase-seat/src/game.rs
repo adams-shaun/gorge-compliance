@@ -26,7 +26,10 @@ use engine::game::deck_loading::{load_and_hydrate_decks, resolve_deck_list, Deck
 use engine::game::{apply, start_game_skip_mulligan, start_game_with_starting_player};
 use engine::types::ability::TargetRef;
 use engine::types::actions::{GameAction, MulliganChoice};
-use engine::types::game_state::{GameState, MulliganDecisionPhase, WaitingFor};
+use engine::types::game_state::{
+    GameState, ManaChoice, ManaChoiceContext, ManaChoicePrompt, MulliganDecisionPhase, WaitingFor,
+};
+use engine::types::mana::ManaType;
 use engine::types::identifiers::ObjectId;
 use engine::types::player::PlayerId;
 #[cfg(feature = "house-ai")]
@@ -472,6 +475,58 @@ fn truncated(reason: &str, decisions: u64) -> Outcome {
         "reason": reason, "decision_count": decisions}))
 }
 
+/// The protocol's colour word, or `None` when the prompt asks for colourless mana (which the
+/// `choose_color` vocabulary does not name; that candidate is posed as `choose_option`).
+fn color_word(color: ManaType) -> Option<&'static str> {
+    match color {
+        ManaType::White => Some("white"),
+        ManaType::Blue => Some("blue"),
+        ManaType::Black => Some("black"),
+        ManaType::Red => Some("red"),
+        ManaType::Green => Some("green"),
+        ManaType::Colorless => None,
+    }
+}
+
+/// A short, deterministic label for a mana type (a combination's label is its symbols).
+fn mana_label(color: ManaType) -> &'static str {
+    match color {
+        ManaType::White => "W",
+        ManaType::Blue => "U",
+        ManaType::Black => "B",
+        ManaType::Red => "R",
+        ManaType::Green => "G",
+        ManaType::Colorless => "C",
+    }
+}
+
+/// Every `count`-length sequence over `options`, in `options` order, capped at `cap` so a wide
+/// "one mana of any combination" prompt cannot enumerate without bound.
+fn mana_combinations(count: usize, options: &[ManaType], cap: usize) -> Vec<Vec<ManaType>> {
+    if count == 0 {
+        return vec![vec![]];
+    }
+    if options.is_empty() {
+        return vec![];
+    }
+    let mut out = vec![vec![]];
+    for _ in 0..count {
+        let mut next = Vec::new();
+        'prefixes: for prefix in &out {
+            for &o in options {
+                let mut v = prefix.clone();
+                v.push(o);
+                next.push(v);
+                if next.len() >= cap {
+                    break 'prefixes;
+                }
+            }
+        }
+        out = next;
+    }
+    out
+}
+
 enum Built {
     /// `live.cands` holds the pending decision.
     Decision,
@@ -497,7 +552,18 @@ fn house_answer(live: &mut Live, h: &mut House) -> Result<(), Stop> {
 }
 
 fn apply_now(live: &mut Live, actor: PlayerId, action: GameAction) -> Result<(), Stop> {
-    apply(&mut live.state, actor, action).map(|_| ()).map_err(|e| Stop::Halt("submit_rejected", format!("{e:?}")))
+    let waiting = classify(&live.state.waiting_for).0;
+    let action_detail: String = format!("{action:?}").chars().take(600).collect();
+    apply(&mut live.state, actor, action)
+        .map(|_| ())
+        .map_err(|e| Stop::Halt("submit_rejected", format!("{waiting}: {e:?}: {action_detail}")))
+}
+
+/// Whether phase accepts `action` now. Probed on a copy: a candidate phase would reject must not
+/// be offered, and the copy is dropped without touching the live game (no RNG leak into it).
+fn applies(state: &GameState, actor: PlayerId, action: GameAction) -> bool {
+    let mut probe = state.clone();
+    apply(&mut probe, actor, action).is_ok()
 }
 
 /// Fill `live.cands` for `family`, or settle the prompt when there is nothing to choose.
@@ -695,17 +761,9 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 });
             }
         }
-        (
-            WaitingFor::DiscardToHandSize { .. }
-            | WaitingFor::DiscardChoice { .. }
-            | WaitingFor::RevealChoice { .. }
-            | WaitingFor::SearchChoice { .. }
-            | WaitingFor::EffectZoneChoice { .. }
-            | WaitingFor::DigChoice { .. }
-            | WaitingFor::PayCost { .. }
-            | WaitingFor::ChooseLegend { .. },
-            Family::Pool,
-        ) => {
+        // Every pool prompt is one `pool_spec` arm: a variant that classifies as `Pool` and is
+        // missing there is a `followup_mismatch`, never a silent fall-through.
+        (_, Family::Pool) => {
             let spec = pool_spec(&w)?;
             live.acting = spec.who;
             return select_group(live, spec);
@@ -904,6 +962,104 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 });
             }
         }
+        (WaitingFor::EquipTarget { player, equipment_id, valid_targets }, Family::Attach) => {
+            live.acting = *player;
+            let Some(src) = viewer(live, *player, *equipment_id) else {
+                return Err(Stop::Halt("unresolvable_source", format!("equipment {}", equipment_id.0)));
+            };
+            for t in valid_targets {
+                if let Some(r) = viewer(live, *player, *t) {
+                    cands.push(Cand {
+                        semantic: sem::select_object(Some(src.clone()), "attach", sem::target_object(r), 0, 1, 1),
+                        effect: Effect::Act(GameAction::Equip { equipment_id: *equipment_id, target_id: *t }),
+                    });
+                }
+            }
+            cands.sort_by_key(|c| canonical(&c.semantic));
+        }
+        (WaitingFor::ChooseManaColor { player, choice, context }, Family::ManaColor) => {
+            live.acting = *player;
+            let source = match context {
+                ManaChoiceContext::ManaAbility(p) => viewer(live, *player, p.source_id),
+                ManaChoiceContext::ResolvingEffect(a) => viewer(live, *player, a.source_id),
+            };
+            match choice {
+                ManaChoicePrompt::SingleColor { options } => {
+                    for (i, color) in options.iter().enumerate() {
+                        let (semantic, choice) = match color_word(*color) {
+                            Some(word) => (
+                                sem::choose_color(source.clone(), "mana", word),
+                                ManaChoice::SingleColor(*color),
+                            ),
+                            None => (
+                                sem::choose_option(source.clone(), "effect_option", i as u32, options.len() as u32, Some(mana_label(*color))),
+                                ManaChoice::SingleColor(*color),
+                            ),
+                        };
+                        cands.push(Cand { semantic, effect: Effect::Act(GameAction::ChooseManaColor { choice, count: 1 }) });
+                    }
+                }
+                ManaChoicePrompt::Combination { options } => {
+                    for (i, combo) in options.iter().enumerate() {
+                        let label = combo.iter().map(|c| mana_label(*c)).collect::<Vec<_>>().join("");
+                        cands.push(Cand {
+                            semantic: sem::choose_option(source.clone(), "effect_option", i as u32, options.len() as u32, Some(label.as_str())),
+                            effect: Effect::Act(GameAction::ChooseManaColor { choice: ManaChoice::Combination(combo.clone()), count: 1 }),
+                        });
+                    }
+                }
+                ManaChoicePrompt::AnyCombination { count, options } => {
+                    let combos = mana_combinations(*count, options, 256);
+                    for (i, combo) in combos.iter().enumerate() {
+                        let label = combo.iter().map(|c| mana_label(*c)).collect::<Vec<_>>().join("");
+                        cands.push(Cand {
+                            semantic: sem::choose_option(source.clone(), "effect_option", i as u32, combos.len() as u32, Some(label.as_str())),
+                            effect: Effect::Act(GameAction::ChooseManaColor { choice: ManaChoice::Combination(combo.clone()), count: 1 }),
+                        });
+                    }
+                }
+            }
+            cands.sort_by_key(|c| canonical(&c.semantic));
+        }
+        (WaitingFor::UnlessPayment { player, pending_effect, .. }, Family::Unless) => {
+            live.acting = *player;
+            let Some(src) = viewer(live, *player, pending_effect.source_id) else {
+                return Err(Stop::Halt("unresolvable_source", "unless payment source".into()));
+            };
+            for pay in [false, true] {
+                // Paying is only a legal candidate when phase accepts it; declining always is.
+                if pay && !applies(&live.state, *player, GameAction::PayUnlessCost { pay }) {
+                    continue;
+                }
+                cands.push(Cand {
+                    semantic: sem::optional_cost(src.clone(), "unless_payment", pay),
+                    effect: Effect::Act(GameAction::PayUnlessCost { pay }),
+                });
+            }
+        }
+        (WaitingFor::ChooseOneOfBranch { player, source_id, branches, branch_descriptions, .. }, Family::Branch) => {
+            live.acting = *player;
+            let source = viewer(live, *player, *source_id);
+            for i in 0..branches.len() {
+                let label = branch_descriptions.get(i).map(String::as_str);
+                cands.push(Cand {
+                    semantic: sem::choose_option(source.clone(), "effect_option", i as u32, branches.len() as u32, label),
+                    effect: Effect::Act(GameAction::ChooseBranch { index: i }),
+                });
+            }
+        }
+        (WaitingFor::ReplacementChoice { player, candidate_count, candidates, .. }, Family::Replacement) => {
+            live.acting = *player;
+            let count = (*candidate_count as u32).max(2);
+            for i in 0..*candidate_count {
+                let source = candidates.get(i).and_then(|c| viewer(live, *player, c.source_id));
+                let affected = source.clone().map(sem::target_object).unwrap_or_else(|| sem::target_player(seat(*player)));
+                cands.push(Cand {
+                    semantic: sem::choose_replacement(affected, "other", source, i as u32, count),
+                    effect: Effect::Act(GameAction::ChooseReplacement { index: i }),
+                });
+            }
+        }
         _ => return Err(Stop::Halt("followup_mismatch", format!("{:?} for {family:?}", classify(&w).0))),
     }
     if cands.is_empty() {
@@ -973,6 +1129,18 @@ fn pool_spec(w: &WaitingFor) -> Result<PoolSpec, Stop> {
             let _ = looked;
             cards(player, selectable_cards, if *up_to { 0 } else { max }, max, "other", *source_id)
         }
+        WaitingFor::ChooseFromZoneChoice { player, cards: pool, count, up_to, source_id, .. } => {
+            cards(player, pool, if *up_to { 0 } else { *count }, *count, "other", Some(*source_id))
+        }
+        WaitingFor::MultiTargetSelection { player, legal_targets, min_targets, max_targets, pending_ability } => {
+            cards(player, legal_targets, *min_targets, *max_targets, "other", Some(pending_ability.source_id))
+        }
+        WaitingFor::BeholdChoice { player, choices } => cards(player, choices, 1, 1, "reveal", None),
+        WaitingFor::EmpowerJaceChoice { player, source_id, choices, .. } => cards(player, choices, 1, 1, "other", Some(*source_id)),
+        WaitingFor::SpellCopyOrderChoice { player, source_id, choices } => cards(player, choices, 1, 1, "other", Some(*source_id)),
+        WaitingFor::WardDiscardChoice { player, cards: pool, .. } => cards(player, pool, 1, 1, "discard", None),
+        WaitingFor::WardSacrificeChoice { player, permanents, .. } => cards(player, permanents, 1, 1, "sacrifice", None),
+        WaitingFor::UnlessBounceChoice { player, permanents, .. } => cards(player, permanents, 1, 1, "return_to_hand", None),
         WaitingFor::ChooseLegend { player, candidates, .. } => Ok(PoolSpec::cards(*player, candidates.clone(), 1, 1, SelKind::Legend, None)),
         other => Err(Stop::Halt("followup_mismatch", format!("{} is not a pool", classify(other).0))),
     }

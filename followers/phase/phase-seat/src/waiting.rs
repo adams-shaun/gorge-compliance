@@ -29,7 +29,8 @@ pub enum Family {
     ChooseX,
     /// A pick of `min..=max` cards from a pool, one `select_object` per pick: `DiscardToHandSize`,
     /// `DiscardChoice`, `RevealChoice`, `SearchChoice`, `EffectZoneChoice`, `DigChoice`, the simple
-    /// `PayCost` kinds and `ChooseLegend`.
+    /// `PayCost` kinds, `ChooseLegend`, `ChooseFromZoneChoice`, `MultiTargetSelection`, the one-pick
+    /// `BeholdChoice`, `EmpowerJaceChoice` and `SpellCopyOrderChoice`, and the ward/bounce choices.
     Pool,
     /// `ModeChoice`: `choose_spell_mode` picks.
     Modes,
@@ -39,6 +40,16 @@ pub enum Family {
     Arrange,
     /// `TopOrBottomChoice`: `choose_option` top or bottom.
     TopOrBottom,
+    /// `EquipTarget`: `select_object` `attach` per legal creature.
+    Attach,
+    /// `ChooseManaColor`: `choose_color` (`mana`) per colour, `choose_option` for a combination.
+    ManaColor,
+    /// `UnlessPayment`: `optional_cost` `unless_payment` pay or decline.
+    Unless,
+    /// `ChooseOneOfBranch`: `choose_option` per resolution-time branch.
+    Branch,
+    /// `ReplacementChoice`: `choose_replacement` per candidate replacement effect.
+    Replacement,
     /// `AssignCombatDamage`: the host divides it (`combat_damage_assignment: "engine_order"`): lethal to
     /// each blocker in phase's order, the rest to the last blocker (or to the defender with trample). No
     /// decision is posed.
@@ -85,14 +96,14 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::ExertChoice { .. } => ("ExertChoice", Pose::Unposed),
         WaitingFor::EnlistChoice { .. } => ("EnlistChoice", Pose::Unposed),
         WaitingFor::GameOver { .. } => ("GameOver", Pose::Terminal),
-        WaitingFor::ReplacementChoice { .. } => ("ReplacementChoice", Pose::Unposed),
+        WaitingFor::ReplacementChoice { .. } => ("ReplacementChoice", Pose::Posed(Family::Replacement)),
         WaitingFor::EntryControllerChoice { .. } => ("EntryControllerChoice", Pose::Unposed),
         WaitingFor::OrderTriggers { .. } => ("OrderTriggers", Pose::Posed(Family::OrderTriggers)),
         WaitingFor::CopyTargetChoice { .. } => ("CopyTargetChoice", Pose::Unposed),
         WaitingFor::ExploreChoice { .. } => ("ExploreChoice", Pose::Unposed),
         WaitingFor::ReturnAsAuraTarget { .. } => ("ReturnAsAuraTarget", Pose::Unposed),
         WaitingFor::ChooseTokenHost { .. } => ("ChooseTokenHost", Pose::Unposed),
-        WaitingFor::EquipTarget { .. } => ("EquipTarget", Pose::Unposed),
+        WaitingFor::EquipTarget { .. } => ("EquipTarget", Pose::Posed(Family::Attach)),
         WaitingFor::CrewVehicle { .. } => ("CrewVehicle", Pose::Unposed),
         WaitingFor::StationTarget { .. } => ("StationTarget", Pose::Unposed),
         WaitingFor::SaddleMount { .. } => ("SaddleMount", Pose::Unposed),
@@ -112,11 +123,11 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::SearchChoice { .. } => ("SearchChoice", Pose::Posed(Family::Pool)),
         WaitingFor::SearchPartitionChoice { .. } => ("SearchPartitionChoice", Pose::Unposed),
         WaitingFor::OutsideGameChoice { .. } => ("OutsideGameChoice", Pose::Unposed),
-        WaitingFor::ChooseFromZoneChoice { .. } => ("ChooseFromZoneChoice", Pose::Unposed),
-        WaitingFor::BeholdChoice { .. } => ("BeholdChoice", Pose::Unposed),
-        WaitingFor::EmpowerJaceChoice { .. } => ("EmpowerJaceChoice", Pose::Unposed),
-        WaitingFor::SpellCopyOrderChoice { .. } => ("SpellCopyOrderChoice", Pose::Unposed),
-        WaitingFor::ChooseOneOfBranch { .. } => ("ChooseOneOfBranch", Pose::Unposed),
+        WaitingFor::ChooseFromZoneChoice { .. } => ("ChooseFromZoneChoice", Pose::Posed(Family::Pool)),
+        WaitingFor::BeholdChoice { .. } => ("BeholdChoice", Pose::Posed(Family::Pool)),
+        WaitingFor::EmpowerJaceChoice { .. } => ("EmpowerJaceChoice", Pose::Posed(Family::Pool)),
+        WaitingFor::SpellCopyOrderChoice { .. } => ("SpellCopyOrderChoice", Pose::Posed(Family::Pool)),
+        WaitingFor::ChooseOneOfBranch { .. } => ("ChooseOneOfBranch", Pose::Posed(Family::Branch)),
         WaitingFor::ConniveDiscard { .. } => ("ConniveDiscard", Pose::Unposed),
         WaitingFor::DiscardChoice { .. } => ("DiscardChoice", Pose::Posed(Family::Pool)),
         WaitingFor::HeroEventChoice { .. } => ("HeroEventChoice", Pose::Unposed),
@@ -145,7 +156,7 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::CipherEncodeChoice { .. } => ("CipherEncodeChoice", Pose::Unposed),
         WaitingFor::CastingVariantChoice { .. } => ("CastingVariantChoice", Pose::Unposed),
         WaitingFor::ChoosePermanentTypeSlot { .. } => ("ChoosePermanentTypeSlot", Pose::Unposed),
-        WaitingFor::MultiTargetSelection { .. } => ("MultiTargetSelection", Pose::Unposed),
+        WaitingFor::MultiTargetSelection { .. } => ("MultiTargetSelection", Pose::Posed(Family::Pool)),
         WaitingFor::AbilityModeChoice { .. } => ("AbilityModeChoice", Pose::Posed(Family::Modes)),
         WaitingFor::OptionalEffectChoice { .. } => ("OptionalEffectChoice", Pose::Posed(Family::OptionalEffect)),
         WaitingFor::ResolutionOptionalPaymentChoice { .. } => ("ResolutionOptionalPaymentChoice", Pose::Unposed),
@@ -157,11 +168,11 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::RespondToShortcut { .. } => ("RespondToShortcut", Pose::Unposed),
         WaitingFor::PrecastCopyShortcutOffer { .. } => ("PrecastCopyShortcutOffer", Pose::Unposed),
         WaitingFor::RespondToPrecastCopyShortcut { .. } => ("RespondToPrecastCopyShortcut", Pose::Unposed),
-        WaitingFor::UnlessPayment { .. } => ("UnlessPayment", Pose::Unposed),
+        WaitingFor::UnlessPayment { .. } => ("UnlessPayment", Pose::Posed(Family::Unless)),
         WaitingFor::UnlessPaymentChooseCost { .. } => ("UnlessPaymentChooseCost", Pose::Unposed),
-        WaitingFor::WardDiscardChoice { .. } => ("WardDiscardChoice", Pose::Unposed),
-        WaitingFor::WardSacrificeChoice { .. } => ("WardSacrificeChoice", Pose::Unposed),
-        WaitingFor::UnlessBounceChoice { .. } => ("UnlessBounceChoice", Pose::Unposed),
+        WaitingFor::WardDiscardChoice { .. } => ("WardDiscardChoice", Pose::Posed(Family::Pool)),
+        WaitingFor::WardSacrificeChoice { .. } => ("WardSacrificeChoice", Pose::Posed(Family::Pool)),
+        WaitingFor::UnlessBounceChoice { .. } => ("UnlessBounceChoice", Pose::Posed(Family::Pool)),
         WaitingFor::ChooseRingBearer { .. } => ("ChooseRingBearer", Pose::Unposed),
         WaitingFor::ChooseRoomDoor { .. } => ("ChooseRoomDoor", Pose::Unposed),
         WaitingFor::ChooseDungeon { .. } => ("ChooseDungeon", Pose::Unposed),
@@ -173,7 +184,7 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::BlightChoice { .. } => ("BlightChoice", Pose::Unposed),
         WaitingFor::PayManaAbilityMana { .. } => ("PayManaAbilityMana", Pose::Unposed),
         WaitingFor::ManaAbilityManaPayment { .. } => ("ManaAbilityManaPayment", Pose::Unposed),
-        WaitingFor::ChooseManaColor { .. } => ("ChooseManaColor", Pose::Unposed),
+        WaitingFor::ChooseManaColor { .. } => ("ChooseManaColor", Pose::Posed(Family::ManaColor)),
         WaitingFor::CollectEvidenceChoice { .. } => ("CollectEvidenceChoice", Pose::Unposed),
         WaitingFor::HarmonizeTapChoice { .. } => ("HarmonizeTapChoice", Pose::Unposed),
         WaitingFor::RevealUntilKeptChoice { .. } => ("RevealUntilKeptChoice", Pose::Unposed),
@@ -232,7 +243,7 @@ mod tests {
         let src = include_str!("waiting.rs");
         let body = src.split("pub fn classify").nth(1).unwrap().split("#[cfg(test)]").next().unwrap();
         let posed = body.lines().filter(|l| l.trim_start().starts_with("WaitingFor::") && l.contains("Pose::Posed(")).count();
-        assert_eq!(posed, 27);
+        assert_eq!(posed, 40);
         let terminal = body.lines().filter(|l| l.trim_start().starts_with("WaitingFor::") && l.contains("Pose::Terminal")).count();
         assert_eq!(terminal, 1);
     }
