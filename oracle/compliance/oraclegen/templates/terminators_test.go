@@ -145,4 +145,3 @@ func hasAnswer(xans [][]oraclegen.XAnswer, step int, kind, value string) bool {
 	}
 	return false
 }
-
