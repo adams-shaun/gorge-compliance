@@ -1846,7 +1846,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// answer instead of a false divergence (CR 608.2d).
 				break
 			}
-			if len(d.Picks) > 1 && !bolster[i] && allChoiceQueue(d) {
+			if len(d.Picks) > 1 && allChoiceQueue(d) {
 				// One makeChoose dialog consumes ONE definition, whose own
 				// parser splits on '^' into the multi-card selection (Dig's
 				// "put two of them into your hand", a discard-two). Emitting

@@ -23,8 +23,14 @@ import (
 // first, a trigger by its printed index, an activation by the preceding
 // activate step), with the step's own cast/activate card as the fallback. The
 // resolved ability's effect chain must carry PutCounter's Bolster$ parameter.
-// This is structural, not card- or label-based: every Bolster carrier takes
-// this route, while a Support$ pick and a bare Choices$/Chooser$ pick stay on
+// The source is read as the permanent's DISPLAYED card (bolsterSourceRef): a
+// copy (Clone, Spark Double) keeps the original's bound ref on the stack while
+// its face is the copied card. This is structural, not card- or label-based:
+// every Bolster carrier that names Bolster$ on its own printed face (a spell,
+// an activated ability or a trigger, including a copied one) takes this
+// route. A bolster ability GRANTED by another card (Gleam of Authority's
+// AddAbility$ ABBolster) lives in the grantor's SVar, not the recipient's
+// face, and is not seen here. A Support$ pick and a bare Choices$/Chooser$ pick stay on
 // the choice queue -- XMage poses those through Player.choose/makeChoose
 // (or, for Support, as a target declared when the ability goes on the stack,
 // not as a resolution-time pick).
@@ -37,7 +43,7 @@ func bolsterTiePick(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapsh
 	// card resolves: that is the object resolving while the ask is posed.
 	if d.Step < len(snaps) {
 		for _, o := range snaps[d.Step].Stack {
-			bolsters, resolved := bolsterOnStackObject(reg, sc, d.Step, o)
+			bolsters, resolved := bolsterOnStackObject(reg, sc, snaps[d.Step], d.Step, o)
 			if resolved {
 				return bolsters
 			}
@@ -59,12 +65,15 @@ func bolsterTiePick(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapsh
 }
 
 // bolsterOnStackObject reports whether one stack entry's source ability is a
-// Bolster effect, and whether its source card resolved at all.
-func bolsterOnStackObject(reg *cards.Registry, sc Scenario, step int, o rules.OracleSnapStack) (bolsters, resolved bool) {
+// Bolster effect, and whether its source card resolved at all. The abilities
+// are read off the source's displayed card (bolsterSourceRef); the scenario's
+// activate steps still name the object by its bound ref (o.Source).
+func bolsterOnStackObject(reg *cards.Registry, sc Scenario, snap rules.OracleSnapshot, step int, o rules.OracleSnapStack) (bolsters, resolved bool) {
 	if reg == nil || o.Source == "" {
 		return false, false
 	}
-	if _, ok := reg.Lookup(oraclediffRefName(o.Source)); !ok {
+	src := bolsterSourceRef(reg, snap, o.Source)
+	if _, ok := reg.Lookup(oraclediffRefName(src)); !ok {
 		return false, false
 	}
 	switch o.Kind {
@@ -72,16 +81,16 @@ func bolsterOnStackObject(reg *cards.Registry, sc Scenario, step int, o rules.Or
 		if o.Trigger != "" {
 			idx, err := strconv.Atoi(o.Trigger)
 			if err != nil {
-				return bolsterOnCard(reg, o.Source), true
+				return bolsterOnCard(reg, src), true
 			}
-			return bolsterAtTrigger(reg, o.Source, idx), true
+			return bolsterAtTrigger(reg, src, idx), true
 		}
-		if sa := bolsterActivatedSA(reg, sc, step, o.Source); sa != nil {
+		if sa := bolsterActivatedSA(reg, sc, step, o.Source, src); sa != nil {
 			return bolsterInChain(sa), true
 		}
-		return bolsterOnCard(reg, o.Source), true
+		return bolsterOnCard(reg, src), true
 	case "spell":
-		return bolsterSpellOnCard(reg, o.Source), true
+		return bolsterSpellOnCard(reg, src), true
 	}
 	return false, false
 }
@@ -89,18 +98,20 @@ func bolsterOnStackObject(reg *cards.Registry, sc Scenario, step int, o rules.Or
 // bolsterActivatedSA resolves the activated ability a stack object names
 // through the most recent activate step for that source, the same activation
 // identity digSourceForStep uses.
-func bolsterActivatedSA(reg *cards.Registry, sc Scenario, step int, source string) *cards.SA {
+// source is the stack object's bound ref (what the activate step names); face
+// is the displayed card whose printed abilities the step's index counts into.
+func bolsterActivatedSA(reg *cards.Registry, sc Scenario, step int, source, face string) *cards.SA {
 	for i := step - 1; i >= 0 && i < len(sc.Steps); i-- {
 		st := sc.Steps[i]
 		if st.Op != "activate" || st.Card != source || st.AbilityIndex == nil {
 			continue
 		}
-		c, ok := reg.Lookup(oraclediffRefName(source))
+		c, ok := reg.Lookup(oraclediffRefName(face))
 		if !ok {
 			return nil
 		}
 		idx := *st.AbilityIndex
-		for _, f := range digFaces(c, source) {
+		for _, f := range digFaces(c, face) {
 			if f != nil && idx >= 0 && idx < len(f.Abilities) {
 				return f.Abilities[idx]
 			}
@@ -108,6 +119,31 @@ func bolsterActivatedSA(reg *cards.Registry, sc Scenario, step int, source strin
 		return nil
 	}
 	return nil
+}
+
+// bolsterSourceRef names the card whose printed abilities a stack object runs.
+// A copy permanent (Clone, Spark Double) keeps the original's bound ref in the
+// stack snapshot while its displayed face is the copied card, so the source
+// permanent's Name in the same snapshot is the authority; a ref with no
+// resolvable permanent (a spell, a left-the-battlefield source, a face-down
+// permanent whose Name is not a card) keeps its own ref.
+func bolsterSourceRef(reg *cards.Registry, snap rules.OracleSnapshot, ref string) string {
+	for _, p := range snap.Permanents {
+		if p.Ref != ref || p.Name == "" {
+			continue
+		}
+		if oraclediffRefName(ref) == p.Name {
+			return ref
+		}
+		// The seat prefix is irrelevant to the lookup; "p0:" keeps a name
+		// that itself contains a colon from being split by oraclediffRefName.
+		face := "p0:" + p.Name
+		if _, ok := reg.Lookup(oraclediffRefName(face)); ok {
+			return face
+		}
+		return ref
+	}
+	return ref
 }
 
 func bolsterAtTrigger(reg *cards.Registry, ref string, idx int) bool {
