@@ -14,11 +14,12 @@ func CastDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult) []r
 	return castDivisions(reg, sc, res)
 }
 
+// castDivisions is castDivisionsFor for the Forge contract (xmage false).
 func castDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult) []rules.OracleDecision {
 	return castDivisionsFor(reg, sc, res, false)
 }
 
-// castDivisions restores the "damage_split" decision a divided spell's
+// castDivisionsFor restores the "damage_split" decision a divided spell's
 // shares travel in. Since gorge cr-g04 (CR 601.2d) a spell announces its
 // DividedAsYouChoose$ division while it is cast: gorge asks only when the
 // division is free (two or more targets and more points than targets), as a

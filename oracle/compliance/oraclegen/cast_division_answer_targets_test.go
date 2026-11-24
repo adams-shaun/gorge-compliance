@@ -14,7 +14,7 @@ import (
 // divided spell's shares must still be scripted as "<ref>^X=<share>" (XMage's
 // TargetAmount): a bare "target p1" fails with "Must be target amount".
 
-func dividedAnswerTargets(t *testing.T, raw string) []string {
+func dividedAnswerTargets(t *testing.T, raw string, wantDivide bool) []string {
 	t.Helper()
 	reg := twinBoltRegistry(t)
 	res, err := rules.RunOracleScenarioJSON(reg, []byte(raw))
@@ -32,7 +32,7 @@ func dividedAnswerTargets(t *testing.T, raw string) []string {
 	if root < 0 || res.Decisions[root].Via != "answer" {
 		t.Fatalf("precondition: the cast's root target ask is not via answer: %+v", res.Decisions)
 	}
-	if len(res.Decisions) > 0 && strings.Contains(raw, "Serra Angel") && divideAsk(res.Decisions, root) < 0 {
+	if wantDivide && divideAsk(res.Decisions, root) < 0 {
 		t.Fatalf("precondition: gorge posed no cast-time division ask for two targets: %+v", res.Decisions)
 	}
 	var got []string
@@ -52,7 +52,7 @@ func TestDividedCastLoneTargetFromAnswersScriptsShare(t *testing.T) {
     {"op": "cast", "seat": 0, "card": "p0:Arc Lightning", "mana": "CCR", "answers": [{"kind": "target", "pick": ["p1"]}]},
     {"op": "resolve"}
   ]
-}`)
+}`, false)
 	want := []string{"target p1^X=3"}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("lone answer target: got %v want %v", got, want)
@@ -67,7 +67,7 @@ func TestDividedCastTwoTargetsFromAnswersScriptsShares(t *testing.T) {
     {"op": "cast", "seat": 0, "card": "p0:Arc Lightning", "mana": "CCR", "answers": [{"kind": "target", "pick": ["p1:Grizzly Bears", "p1:Serra Angel"]}]},
     {"op": "resolve"}
   ]
-}`)
+}`, true)
 	want := []string{"target p1:Grizzly Bears^X=2", "target p1:Serra Angel^X=1"}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("two answer targets: got %v want %v", got, want)
