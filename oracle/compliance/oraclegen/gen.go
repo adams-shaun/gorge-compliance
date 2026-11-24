@@ -1636,6 +1636,17 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					as = append(as, XAnswer{d.Seat, "choice", d.Picks[k]})
 					continue
 				}
+				if m, ok := modeNumberFor(d, k, modes); ok && m == ModeKWChoiceQueue {
+					// A Pump KWChoice$ ("gains your choice of ..."): XMage's
+					// GainsChoiceOfAbilitiesEffect asks ONE ChoiceImpl over the
+					// candidate keyword abilities' rule texts, read from the
+					// CHOICE queue by label, never the numeric mode queue
+					// (Lunar Avenger measured: "Missing CHOICE def ... Choose an
+					// ability to gain", mode 1 left unused). The rule text is
+					// the keyword name in lower case.
+					as = append(as, XAnswer{d.Seat, "choice", xmageKeywordRuleText(d.Picks[k])})
+					continue
+				}
 				if m, ok := modeNumberFor(d, k, modes); ok && (m == ModeYesQueue || m == ModeNoQueue) {
 					// A two-way GenericChoice XMage asks as chooseUse: a
 					// Timetwister-style per-player "may shuffle" (Turtles in
@@ -2676,14 +2687,24 @@ const (
 	ModeNoQueue  = -2
 )
 
+// ModeKWChoiceQueue is the sentinel for a Pump KWChoice$ pick ("gains your
+// choice of X, Y or Z"). XMage's GainsChoiceOfAbilitiesEffect builds one
+// ChoiceImpl over the candidate abilities' RULE TEXTS and reads it from the
+// CHOICE queue by label; the numeric mode queue never consumes that answer
+// (measured on Lunar Avenger: "Missing CHOICE def ... Choose an ability to
+// gain", with the scripted mode 1 left unused). Negative like the other queue
+// sentinels, so it never collides with a real 1-based charm position.
+const ModeKWChoiceQueue = -3
+
 // modeNumbers maps each charm mode's label (as gorge's mode decision
 // shows it) to its 1-based position in its Choices$ list, for every Charm
 // on the face -- the spell's own and any modal trigger's. It ALSO carries
-// every DB$ GenericChoice | SetChosenMode$ True label, mapped to the
-// ModeChoiceQueue sentinel: those picks are the same "mode" decision kind
-// to gorge but a different XMage queue, and no in-band discriminator on the
-// decision separates them (a mid-resolution Charm shares Resume "modes"),
-// so the face shape is the authority.
+// every DB$ GenericChoice | SetChosenMode$ True label and every source-proven
+// Pump KWChoice$ label, mapped to the ModeChoiceQueue / ModeKWChoiceQueue
+// sentinels: those picks are the same "mode" decision kind to gorge but a
+// different XMage queue, and no in-band discriminator on the decision
+// separates them (a mid-resolution Charm shares Resume "modes"), so the face
+// shape is the authority.
 // printedMaxPrefix marks the ModeNumbers entries that carry a charm's PRINTED
 // maximum rather than a mode number (see printedMaxKey).
 const printedMaxPrefix = "\x00printed_max\x00"
@@ -2839,6 +2860,17 @@ func modeNumbers(f *cards.Face) map[string]int {
 	for _, label := range choiceDialogLabels(f) {
 		if _, taken := out[label]; !taken {
 			out[label] = ModeChoiceQueue
+		}
+	}
+	// A Pump KWChoice$ ("gains your choice of X, Y or Z") is XMage's
+	// GainsChoiceOfAbilitiesEffect: one ChoiceImpl over the candidate
+	// abilities' RULE TEXTS, read from the CHOICE queue by label
+	// (choice_dialog.go). The answer is the keyword's lower-case rule text,
+	// not gorge's KWChoice$ spelling ("Flying" -> "flying", "Rampage:3" ->
+	// "rampage 3"), so it gets its own sentinel.
+	for _, label := range kwChoiceDialogLabels(f) {
+		if _, taken := out[label]; !taken {
+			out[label] = ModeKWChoiceQueue
 		}
 	}
 	for _, sa := range f.Abilities {
