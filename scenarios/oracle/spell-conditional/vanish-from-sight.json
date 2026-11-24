@@ -1,0 +1,44 @@
+{
+  "card": "Vanish from Sight",
+  "family": "spell-conditional",
+  "oracle_sha": "081f0dfdbf0b",
+  "author": "Oracle + CR only",
+  "scenarios": [
+    {
+      "name": "token-put-on-top-is-the-card-surveil-looks-at",
+      "cr": ["111.8", "701.25a", "704.5d"],
+      "why": "The owner puts the targeted Soldier token on top of their library; a token that left the battlefield cannot move again and stays in its zone until state-based actions are checked (CR 111.8), so the surveil that follows looks at that token, not at the Plains under it. Binning it leaves the token where it is and the Plains in the library.",
+      "setup": {
+        "p0": {"hand": ["Vanish from Sight", "Raise the Alarm"], "library_top": ["Plains", "Mountain"]}
+      },
+      "steps": [
+        {"op": "cast", "seat": 0, "card": "p0:Raise the Alarm", "mana": "CW"},
+        {"op": "resolve"},
+        {"op": "cast", "seat": 0, "card": "p0:Vanish from Sight", "mana": "CCCU", "targets": ["p0:token:Soldier"]},
+        {"op": "resolve", "answers": [{"kind": "any", "pick": ["top"]}, {"kind": "arrange", "pick": []}]}
+      ],
+      "expect": [
+        {"card": "p0:Plains", "zone": "library"},
+        {"card": "p0:Vanish from Sight", "zone": "graveyard"}
+      ]
+    },
+    {
+      "name": "token-put-on-the-bottom-leaves-the-top-card-to-surveil",
+      "cr": ["111.8", "701.25a"],
+      "why": "The owner puts the token on the bottom, so the surveil looks at the Plains on top; binning it puts the Plains into the graveyard.",
+      "setup": {
+        "p0": {"hand": ["Vanish from Sight", "Raise the Alarm"], "library_top": ["Plains", "Mountain"]}
+      },
+      "steps": [
+        {"op": "cast", "seat": 0, "card": "p0:Raise the Alarm", "mana": "CW"},
+        {"op": "resolve"},
+        {"op": "cast", "seat": 0, "card": "p0:Vanish from Sight", "mana": "CCCU", "targets": ["p0:token:Soldier"]},
+        {"op": "resolve", "answers": [{"kind": "any", "pick": ["bottom"]}, {"kind": "arrange", "pick": []}]}
+      ],
+      "expect": [
+        {"card": "p0:Plains", "zone": "graveyard"},
+        {"card": "p0:Vanish from Sight", "zone": "graveyard"}
+      ]
+    }
+  ]
+}
