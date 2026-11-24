@@ -1291,6 +1291,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         }
                     }
                 }
+                if (target.getMinNumberOfTargets() == 0 && !getChoices().isEmpty()) {
+                    UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+                    List<UUID> candidates = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
+                    candidates.removeIf(target::contains);
+                    Boolean may = mayPrefix(getChoices(), getTargets(), !candidates.isEmpty(), answer -> {
+                        for (UUID id : candidates) {
+                            mage.MageObject o = game.getObject(id);
+                            if (o != null && hasObjectTargetNameOrAlias(o, answer)) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    });
+                    if (Boolean.FALSE.equals(may)) {
+                        return false;
+                    }
+                }
                 if (forcedChoose(target, source, game)) {
                     return true;
                 }
@@ -1300,6 +1317,45 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 askTarget = previousTarget;
                 askSource = previousSource;
             }
+        }
+
+        /**
+         * A "you may" that XMage poses as ONE up-to-one choose, with no
+         * chooseUse before it (Ambrosia Whiteheart's "you may return another
+         * permanent you control", Spelunking's "you may put a land card from
+         * your hand onto the battlefield"), while gorge asks the may and then
+         * the pick and the generator scripts the may as a leading "Yes"/"No"
+         * on the choice queue. makeChoose would pop it as a target name. For
+         * an ask with candidates whose queue head is a boolean: "No" is taken
+         * (and the declined pair's "[target_skip]" with it) and the pick is
+         * declined (FALSE); "Yes" is taken and the pick follows (TRUE) -- on
+         * the choice queue already, or moved there from the target queue when
+         * the choice head names no candidate. Null means the ask is no such
+         * may and the queues are untouched.
+         */
+        static Boolean mayPrefix(List<String> choices, List<String> targets, boolean hasCandidates,
+                java.util.function.Predicate<String> namesCandidate) {
+            if (!hasCandidates || choices.isEmpty()) {
+                return null;
+            }
+            String head = choices.get(0);
+            if (head.equals("No")) {
+                choices.remove(0);
+                if (!targets.isEmpty() && TestPlayer.TARGET_SKIP.equals(targets.get(0))) {
+                    targets.remove(0);
+                }
+                return Boolean.FALSE;
+            }
+            if (!head.equals("Yes")) {
+                return null;
+            }
+            choices.remove(0);
+            boolean pickOnChoices = !choices.isEmpty()
+                    && (TestPlayer.CHOICE_SKIP.equals(choices.get(0)) || namesCandidate.test(choices.get(0)));
+            if (!pickOnChoices && !targets.isEmpty() && !TestPlayer.TARGET_SKIP.equals(targets.get(0))) {
+                choices.add(0, targets.remove(0));
+            }
+            return Boolean.TRUE;
         }
 
         /** Takes every candidate of a choose ask that has no choice in it:
@@ -1733,7 +1789,30 @@ public class ScenarioReplay extends CardTestPlayerBase {
                             target.possibleTargets(target.getAffectedAbilityControllerId(this.getId()), source, game, cards))) {
                 return false;
             }
+            if (target instanceof mage.target.common.TargetCardInLibrary
+                    && shortSearchStop(getTargets(), target.isRequired(),
+                            target.getMinNumberOfTargets(), target.getMaxNumberOfTargets())) {
+                // A search for cards with a stated quality need not find them
+                // all (CR 701.23b): XMage leaves the target not required, but
+                // TestPlayer rejects a skip on a fixed-count ask. Close the
+                // selection with what is chosen. isChosen stays false below
+                // the stated count, so the result is the pick count itself:
+                // TargetCardInLibrary stops on a true result with nothing new
+                // selected and the effect then takes the short selection.
+                getTargets().remove(0);
+                target.setSkipChoice(true);
+                return target.getSize() > 0;
+            }
             return super.chooseTarget(outcome, cards, target, source, game);
+        }
+
+        /** Whether the target queue's head is a skip that closes a library
+         * search XMage allows to fall short (not required) although its count
+         * is fixed (min == max), the one shape TestPlayer's skip assertion
+         * refuses. */
+        static boolean shortSearchStop(List<String> targets, boolean required, int min, int max) {
+            return !targets.isEmpty() && TestPlayer.TARGET_SKIP.equals(targets.get(0))
+                    && !required && min == max;
         }
 
         /**
