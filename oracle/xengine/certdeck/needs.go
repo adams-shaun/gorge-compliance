@@ -162,10 +162,51 @@ func unitsOf(c *cards.Card) []unit {
 // opponent's permanent (Honest Work enchants a creature an opponent controls;
 // Mabel targets another creature), else 0 for the card's own counters, a
 // replacement or a cost. It follows Defined$/ValidTgts (with the target of the
-// chain a SubAbility runs in), never the card's deck.
+// chain a SubAbility runs in), never the card's deck. A need whose only bearer
+// is a player is CounterPlayer's, not a seat's.
 func CounterSeat(c *cards.Card) int {
+	for _, sc := range counterScopes(c) {
+		if sc.permanent {
+			return sc.seat
+		}
+	}
+	return 0
+}
+
+// CounterPlayer reports whether a counters need is read from a player's own
+// counters (poison, rad, experience, energy; CR 122.1) and no permanent can
+// stand in for it. Forge's Defined$ Player/Opponent/You and ValidTgts$
+// Player/Opponent name the player, while OppCtrl names a permanent; a start
+// seeds counters only on battlefield cards (rules.StartSeat has no
+// player-counter field), so scen refuses such a key by name rather than
+// silently placing its counter on a permanent the removal never reads.
+func CounterPlayer(c *cards.Card) bool {
+	player := false
+	for _, sc := range counterScopes(c) {
+		if sc.permanent {
+			return false
+		}
+		player = player || sc.player
+	}
+	return player
+}
+
+// counterScope is what one counter-moving unit reads. permanent and seat say
+// where a placed counter can be exercised (a battlefield card; seat 1 is the
+// other player's); player marks a player's own counters, which no placed
+// permanent can stand in for.
+type counterScope struct {
+	permanent bool
+	player    bool
+	seat      int
+}
+
+// counterScopes classifies every counter-moving unit of c, in script order. It
+// is the one walk CounterSeat and CounterPlayer share, so the next selector
+// kind is added once, in scopeOfFilter or the switch below, and both follow it.
+func counterScopes(c *cards.Card) []counterScope {
 	if c == nil {
-		return 0
+		return nil
 	}
 	enchantOpp := false
 	for _, f := range c.Faces {
@@ -180,6 +221,7 @@ func CounterSeat(c *cards.Card) int {
 			targets = append(targets, v)
 		}
 	}
+	var out []counterScope
 	for _, u := range us {
 		if !counterMover(u) {
 			continue
@@ -187,13 +229,25 @@ func CounterSeat(c *cards.Card) int {
 		def := strings.ToLower(strings.TrimSpace(u.p["Defined"]))
 		switch {
 		case def == "self" || def == "cardname" || strings.Contains(def, "youctrl") || strings.Contains(def, "youown"):
-			continue // the card's own counters (or a creature you control)
-		case strings.Contains(def, "oppctrl") || strings.Contains(def, "opponent"):
-			return 1
+			out = append(out, counterScope{permanent: true}) // the card's own counters (or a creature you control)
+			continue
+		case strings.Contains(def, "oppctrl"):
+			out = append(out, counterScope{permanent: true, seat: 1})
+			continue
+		case strings.HasPrefix(def, "valid "):
+			out = append(out, scopeOfFilter(strings.TrimSpace(strings.TrimPrefix(def, "valid "))))
+			continue
+		case playerSelector(def) || strings.Contains(def, "opponent"):
+			// "Opponent" is the player; the permanent selector is OppCtrl,
+			// above.
+			out = append(out, counterScope{player: true, seat: playerSeat(def)})
+			continue
 		case def == "enchanted":
+			seat := 0
 			if enchantOpp {
-				return 1
+				seat = 1
 			}
+			out = append(out, counterScope{permanent: true, seat: seat})
 			continue
 		}
 		if u.api == "MoveCounter" {
@@ -206,33 +260,50 @@ func CounterSeat(c *cards.Card) int {
 				src = u.p["ValidSource"]
 			}
 			if src != "" {
-				if l := strings.ToLower(src); strings.Contains(l, "oppctrl") || strings.Contains(l, "opponent") {
-					return 1
-				} else if strings.EqualFold(src, "ParentTarget") {
-					if opponentFilter(u.prevTarget) {
-						return 1
+				l := strings.ToLower(src)
+				switch {
+				case playerSelector(l):
+					out = append(out, counterScope{player: true, seat: playerSeat(l)})
+				case strings.EqualFold(src, "ParentTarget"):
+					// The parent target may name a player's counters too.
+					prev := strings.ToLower(strings.TrimSpace(u.prevTarget))
+					if playerSelector(prev) {
+						out = append(out, counterScope{player: true, seat: playerSeat(prev)})
+					} else {
+						seat := 0
+						if opponentFilter(u.prevTarget) {
+							seat = 1
+						}
+						out = append(out, counterScope{permanent: true, seat: seat})
 					}
+				case strings.Contains(l, "oppctrl") || strings.Contains(l, "opponent"):
+					out = append(out, counterScope{permanent: true, seat: 1})
+				default:
+					// Self, Creature, Creature.YouCtrl, ...: the card's own.
+					out = append(out, counterScope{permanent: true})
 				}
-				continue // Self, Creature.YouCtrl, ...: the card's own
+				continue
 			}
 		}
 		if u.api == "RemoveCounterAll" {
 			// Removing from all matching permanents reaches the card's own
-			// ones too, so the start's own side exercises it.
-			if v := strings.ToLower(u.p["ValidCards"]); v != "" &&
-				(strings.Contains(v, "oppctrl") || strings.Contains(v, "opponent")) {
-				return 1
+			// ones too, so the start's own side exercises it; only an explicit
+			// opposing or player filter moves it off seat 0.
+			v := u.p["ValidCards"]
+			sc := scopeOfFilter(v)
+			if l := strings.ToLower(v); v != "" && !sc.player &&
+				!strings.Contains(l, "oppctrl") && !strings.Contains(l, "opponent") {
+				sc.seat = 0
 			}
+			out = append(out, sc)
 			continue
 		}
 		if v := u.p["ValidTgts"]; v != "" {
-			if opponentFilter(v) {
-				return 1
-			}
+			out = append(out, scopeOfFilter(v))
 			continue
 		}
 		switch {
-		case def == "targeted", def == "valid", strings.HasPrefix(def, "valid "), def == "remembered", def == "chosencard":
+		case def == "targeted", def == "valid", def == "remembered", def == "chosencard":
 			target := u.target
 			if target == "" {
 				for _, v := range targets {
@@ -242,12 +313,74 @@ func CounterSeat(c *cards.Card) int {
 					}
 				}
 			}
-			if target != "" && opponentFilter(target) {
-				return 1
+			if target != "" {
+				out = append(out, scopeOfFilter(target))
+				continue
 			}
 		}
+		// A cost, a replacement or an unlinked selector: the card's own.
+		out = append(out, counterScope{permanent: true})
+	}
+	return out
+}
+
+// playerSelector reports whether a Defined$/Source$ value names a player rather
+// than a permanent the player controls. "Opponent"/"Player"/"You" are players;
+// OppCtrl is a permanent (handled before this).
+func playerSelector(def string) bool {
+	switch def {
+	case "player", "players", "opponent", "opponents", "you", "each", "eachplayer",
+		"all", "allplayers", "any", "thisplayer", "thatplayer", "targetplayer",
+		"targetedplayer", "triggeredplayer":
+		return true
+	}
+	return false
+}
+
+// playerSeat is the seat a player selector names: 1 for an opponent, else 0.
+// It is only informational when the counters are a player's.
+func playerSeat(def string) int {
+	if strings.Contains(def, "opponent") {
+		return 1
 	}
 	return 0
+}
+
+// playerAlternative reports whether one comma-separated alternative of a card
+// filter names a player ("Player", "Opponent", "Player.IsRemembered") rather
+// than a permanent ("Creature", "Permanent.ControlledBy You"). The first
+// filter word decides: a controller qualifier later in the alternative is not
+// the bearer.
+func playerAlternative(alt string) bool {
+	first, _, _ := strings.Cut(strings.TrimSpace(alt), ".")
+	switch strings.ToLower(first) {
+	case "player", "players", "opponent", "opponents", "you", "eachplayer", "allplayers":
+		return true
+	}
+	return false
+}
+
+// scopeOfFilter classifies a counter target filter: a player alternative is a
+// player's counters (which a start cannot seed), a non-player alternative is a
+// permanent. "Permanent,Opponent" is both: the permanent branch is enough, so
+// one placed counter exercises the removal. A filter with no controller
+// restriction reads as another player's permanent (opponentFilter).
+func scopeOfFilter(v string) counterScope {
+	var sc counterScope
+	for _, alt := range strings.Split(filterText(v), ",") {
+		if playerAlternative(alt) {
+			sc.player = true
+			if strings.Contains(strings.ToLower(alt), "opponent") {
+				sc.seat = 1
+			}
+			continue
+		}
+		sc.permanent = true
+		if opponentFilter(alt) {
+			sc.seat = 1
+		}
+	}
+	return sc
 }
 
 // counterMover reports whether u removes or moves counters from a permanent:
