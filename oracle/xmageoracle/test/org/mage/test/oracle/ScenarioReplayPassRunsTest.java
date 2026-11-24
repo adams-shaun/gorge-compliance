@@ -3,16 +3,26 @@ package org.mage.test.oracle;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import mage.constants.PhaseStep;
 import mage.game.Game;
 
-/** No database or game: pins how the driver follows the runs of priority
- * passes of a recorded game (an xengine tape or window), where the steps carry
- * the position gorge reached after each pass (xmage_pos). Run
- * scripts/xmage-oracle-test-pass-runs.sh; the replay itself is a real replay. */
+/** Pins how the driver follows the runs of priority passes of a recorded game
+ * (an xengine tape or window), where the steps carry the position gorge
+ * reached after each pass (xmage_pos). The unit checks need no database; with
+ * the fixture directory argument, the Rebuff the Wicked s2 row is also replayed
+ * end to end. Run scripts/xmage-oracle-test-pass-runs.sh. */
 public final class ScenarioReplayPassRunsTest {
     private static void check(boolean condition, String message) {
         if (!condition) {
@@ -136,6 +146,150 @@ public final class ScenarioReplayPassRunsTest {
                 "an additional same-named step still begins at a round of passes");
     }
 
+    /** The active seat's closing pass of a split additional end step is the
+     * round's last (CR 117.4/500.9) and begins the next end step even when a
+     * stale item recorded no move there. The split handoff before it does not
+     * begin an instance. */
+    private static void splitAdditionalEndStepAdvancesOnClosingSeatPass() {
+        String steps = "{steps:[{op:'pass',seat:0},{op:'activate',seat:1,card:'p1:Plains'},"
+                + "{op:'pass',seat:1},{op:'pass',seat:0}],";
+        JsonArray stale = ScenarioReplay.steps(item(steps + "xmage_pos:["
+                + "{turn:1,step:'end',active:0},{turn:1,step:'end',active:0},"
+                + "{turn:1,step:'end',active:0,moved:true},"
+                + "{turn:1,step:'end',active:0}]}"));
+        check(!ScenarioReplay.passEntersNewStep(stale, 2),
+                "the split handoff in an additional end step stays in the same instance");
+        check(ScenarioReplay.passEntersNewStep(stale, 3),
+                "the active seat's closing pass begins the next end step");
+        JsonArray fixed = ScenarioReplay.steps(item(steps + "xmage_pos:["
+                + "{turn:1,step:'end',active:0},{turn:1,step:'end',active:0},"
+                + "{turn:1,step:'end',active:0},"
+                + "{turn:1,step:'end',active:0,moved:true}]}"));
+        check(!ScenarioReplay.passEntersNewStep(fixed, 2),
+                "the corrected position keeps the split handoff in its instance");
+        check(ScenarioReplay.passEntersNewStep(fixed, 3),
+                "the corrected position advances at the closing pass");
+    }
+
+    /** A first-strike combat whose round is split by the opponent's mana
+     * ability: the active seat's closing pass ends the first damage step even
+     * though the active seat takes it, and the next pass stays in the regular
+     * damage step. */
+    private static void splitFirstStrikeClosesAtRoundEnd() {
+        JsonArray steps = ScenarioReplay.steps(item("{steps:["
+                + "{op:'pass',seat:0},{op:'pass',seat:1},{op:'pass',seat:0},"
+                + "{op:'activate',seat:1,card:'p1:Plains'},{op:'pass',seat:1},{op:'pass',seat:0},"
+                + "{op:'pass',seat:0},{op:'pass',seat:1},{op:'pass',seat:0},{op:'pass',seat:1}],"
+                + "xmage_pos:[{turn:1,step:'first-strike-damage',active:0,moved:true},"
+                + "{turn:1,step:'first-strike-damage',active:0,resolves:true},"
+                + "{turn:1,step:'first-strike-damage',active:0},null,"
+                + "{turn:1,step:'first-strike-damage',active:0},"
+                + "{turn:1,step:'combat-damage',active:0,moved:true},"
+                + "{turn:1,step:'combat-damage',active:0},"
+                + "{turn:1,step:'end-combat',active:0,moved:true},"
+                + "{turn:1,step:'end-combat',active:0},"
+                + "{turn:2,step:'upkeep',active:1,moved:true}]}"));
+        check(!ScenarioReplay.passEntersNewStep(steps, 1),
+                "the pass that resolves the trigger does not begin a step");
+        check(!ScenarioReplay.passEntersNewStep(steps, 2),
+                "the first pass after the resolution is not the round's last");
+        check(!ScenarioReplay.passEntersNewStep(steps, 4),
+                "the split handoff stays in the first damage step");
+        check(ScenarioReplay.passEntersNewStep(steps, 5),
+                "the active seat's closing pass ends the first damage step");
+        check(!ScenarioReplay.passEntersNewStep(steps, 6),
+                "the next pass stays in the regular damage step");
+        check(ScenarioReplay.phaseOfGorgeStep("combat-damage") == PhaseStep.COMBAT_DAMAGE,
+                "the regular damage step is a distinct XMage step");
+    }
+
+    /** The round size comes from the game's seats, not from the seats the
+     * steps happen to name: a two-pass run in a three-seat game is not a full
+     * round, so the handoff after it still yields priority. */
+    private static void roundSizeUsesResolvedSeats() {
+        JsonArray steps = ScenarioReplay.steps(item("{steps:["
+                + "{op:'pass',seat:1},{op:'pass',seat:0},{op:'activate',seat:1,card:'p1:Plains'}],"
+                + "xmage_pos:[{turn:1,step:'end',active:0},"
+                + "{turn:1,step:'end',active:0,moved:true},null]}"));
+        check(!ScenarioReplay.passEntersNewStep(steps, 1, 3),
+                "two passes are not a full round with three seats");
+        check(ScenarioReplay.passEntersNewStep(steps, 1, 2),
+                "two passes are a full round with two seats");
+        check(ScenarioReplay.passCommands(steps, 2, 0, 3)
+                .contains(ScenarioReplay.CMD_YIELD_PRIORITY),
+                "the three-seat handoff still yields priority");
+        check(!ScenarioReplay.passCommands(steps, 2, 0, 2)
+                .contains(ScenarioReplay.CMD_YIELD_PRIORITY),
+                "a closed round has no handoff to yield");
+    }
+
+    private static void equal(Object want, Object got, String what) {
+        if (!want.equals(got)) {
+            throw new AssertionError(what + ": expected " + want + ", got " + got);
+        }
+    }
+
+    private static void noHarness(JsonObject res, String what) {
+        if (res.has("harness") && !res.get("harness").isJsonNull()) {
+            throw new AssertionError(what + " harness: " + res.get("harness").getAsString());
+        }
+        if (res.has("error") && !res.get("error").isJsonNull()) {
+            throw new AssertionError(what + " error: " + res.get("error").getAsString());
+        }
+    }
+
+    private static JsonObject replay(JsonObject sc) throws Exception {
+        StringWriter out = new StringWriter();
+        int n;
+        try (BufferedReader in = new BufferedReader(new StringReader(sc.toString()));
+             PrintWriter writer = new PrintWriter(out)) {
+            n = ScenarioReplay.replayLines(new ScenarioReplay(), in, writer);
+        }
+        equal(1, n, "scenario rows");
+        return JsonParser.parseString(out.toString().trim()).getAsJsonObject();
+    }
+
+    private static List<String> snapshotSteps(JsonObject res) {
+        List<String> steps = new ArrayList<>();
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        for (int i = 0; i < snaps.size(); i++) {
+            steps.add(snaps.get(i).getAsJsonObject().get("step").getAsString());
+        }
+        return steps;
+    }
+
+    /** The Rebuff the Wicked s2 row end to end: the split pass stays in main 1
+     * (so its checkpoint is consumed, not left over), and the active seat's
+     * next pass reaches begin-combat. Both the corrected xmage_pos and an
+     * older item's stale moved:true on the split pass replay clean. */
+    private static void replayPassPairSplitByOpponentManaAbility(Path dir) throws Exception {
+        String line = new String(Files.readAllBytes(
+                dir.resolve("rebuff-pass-pair-mana-split.jsonl")), StandardCharsets.UTF_8).trim();
+        JsonObject corrected = JsonParser.parseString(line).getAsJsonObject();
+        JsonObject stale = corrected.deepCopy();
+        JsonArray stalePos = stale.getAsJsonArray("xmage_pos").deepCopy();
+        stalePos.get(2).getAsJsonObject().addProperty("moved", true);
+        stale.add("xmage_pos", stalePos);
+
+        List<String> want = Arrays.asList("PRECOMBAT_MAIN", "PRECOMBAT_MAIN", "PRECOMBAT_MAIN",
+                "PRECOMBAT_MAIN", "BEGIN_COMBAT");
+        for (JsonObject sc : Arrays.asList(stale, corrected)) {
+            JsonObject res = replay(sc);
+            noHarness(res, "Rebuff pass pair split by the opponent's mana ability");
+            equal(want.size(), res.getAsJsonArray("snapshots").size(), "snapshot count");
+            equal(want, snapshotSteps(res), "snapshot steps");
+            JsonArray snaps = res.getAsJsonArray("snapshots");
+            // The split pass does not end main 1: p1's mana stays in the pool
+            // until the active seat's next pass ends the step.
+            equal("PRECOMBAT_MAIN", snaps.get(3).getAsJsonObject().get("step").getAsString(),
+                    "split pass step");
+            equal("W", snaps.get(3).getAsJsonObject().getAsJsonArray("players").get(1)
+                    .getAsJsonObject().get("pool").getAsString(), "split pass pool");
+            equal("", snaps.get(4).getAsJsonObject().getAsJsonArray("players").get(1)
+                    .getAsJsonObject().get("pool").getAsString(), "step end pool");
+        }
+    }
+
     /** A declaration-ahead checkpoint stands after a step end, which empties
      * every mana pool through XMage's own emptyManaPools; an ordinary
      * checkpoint keeps the pool XMage shows. */
@@ -161,7 +315,7 @@ public final class ScenarioReplayPassRunsTest {
         check(calls[0] == 2, "an ordinary checkpoint keeps the pool XMage shows");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // Three passes in a row: p0 passes (priority goes to p1, same step),
         // p1 passes (both passed on an empty stack: begin-combat), p0 passes
         // again. The legacy classifier throws "unsupported pass sequence".
@@ -240,9 +394,15 @@ public final class ScenarioReplayPassRunsTest {
         check(ScenarioReplay.passAction(pair, 0) == ScenarioReplay.PASS_PAIR_FIRST, "legacy pair first");
         check(ScenarioReplay.passAction(pair, 1) == ScenarioReplay.PASS_PAIR_SECOND, "legacy pair second");
         passPairSplitByOpponentManaAbilityAdvancesStep();
+        splitAdditionalEndStepAdvancesOnClosingSeatPass();
+        splitFirstStrikeClosesAtRoundEnd();
+        roundSizeUsesResolvedSeats();
         declTiming();
         emptyStackPair();
         declarationStepEnd();
+        if (args.length > 0) {
+            replayPassPairSplitByOpponentManaAbility(Paths.get(args[0]));
+        }
         System.out.println("ScenarioReplayPassRunsTest ok");
     }
 }
