@@ -221,3 +221,48 @@ func TestScenDeterministic(t *testing.T) {
 		t.Errorf("steps id: %+v", res.Steps)
 	}
 }
+
+// TestStartEnablersOffBattlefield: an enabler that cannot be a permanent on
+// the battlefield (an instant, a sorcery, an unattached Aura) is listed in its
+// side's hand. Listed on the battlefield, gorge left Path to Exile there and
+// dropped Strange Augmentation from the library, while Forge put both in hand,
+// so every such start diverged at setup (xp-setup-extra-hand-card).
+func TestStartEnablersOffBattlefield(t *testing.T) {
+	reg, b := testBuilder(t)
+	rows := []struct {
+		card, key            string
+		p0Hand, p0BF, p1Hand []string
+	}{
+		{"Beza, the Bounding Spring", "cast",
+			[]string{"Beza, the Bounding Spring", "Path to Exile"},
+			cat(rep("Plains", 4), []string{"Fountain of Youth"}),
+			[]string{"Taste of Blood"}},
+		{"Lord Skitter's Blessing", "f0/t0",
+			[]string{"Lord Skitter's Blessing", "Strange Augmentation"},
+			rep("Swamp", 2), nil},
+	}
+	for _, r := range rows {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			listIs(t, "p0 hand", f.Setup.P0.Hand, r.p0Hand)
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, r.p0BF)
+			listIs(t, "p1 hand", f.Setup.P1.Hand, r.p1Hand)
+			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, nil)
+			for _, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
+				for _, n := range bf {
+					c, _ := reg.Lookup(n)
+					if why := FieldBlock(c.Faces[0]); why != "" {
+						t.Errorf("%s listed on the battlefield: %s", n, why)
+					}
+				}
+			}
+		})
+	}
+}
