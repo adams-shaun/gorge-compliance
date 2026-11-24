@@ -149,11 +149,16 @@ reached; check "  ...before javac, java or scope" $((! $? ))
 # 4b. --preflight: on a good pin, the names the pinned cardsfolder cannot
 # resolve, one grep pass, before any javac, java or scope. The three names
 # the xengine farm caught as Forge harness "Couldn't find a card" stay
-# refused here; Grizzly Bears is resolved.
-mkdir -p "$TMP/clone/forge-gui/res/cardsfolder/g"
+# refused here; Grizzly Bears is resolved; so are the split names "Fire //
+# Ice" (a split card) and "Bonecrusher Giant // Stomp" (an adventure), whose
+# card files hold one Name: line per face — the joined name is never a Name
+# line, and a split with a missing face ("Fire // Gobland") is refused.
+mkdir -p "$TMP/clone/forge-gui/res/cardsfolder/g" "$TMP/clone/forge-gui/res/cardsfolder/f" "$TMP/clone/forge-gui/res/cardsfolder/b"
 printf 'Name:Grizzly Bears\nOracle:Grizzly Bears is a bear.\n' > "$TMP/clone/forge-gui/res/cardsfolder/g/grizzly_bears.txt"
+printf 'Name:Fire\nName:Ice\nOracle:Fire deals 2 damage.\n' > "$TMP/clone/forge-gui/res/cardsfolder/f/fire_ice.txt"
+printf 'Name:Bonecrusher Giant\nName:Stomp\nOracle:Bonecrusher Giant deals 4 damage.\n' > "$TMP/clone/forge-gui/res/cardsfolder/b/bonecrusher_giant.txt"
 : > "$LOG"
-printf 'Grizzly Bears\nGobland\nIndicate\nMox Poison\n' > "$TMP/names.txt"
+printf 'Grizzly Bears\nGobland\nIndicate\nMox Poison\nFire // Ice\nBonecrusher Giant // Stomp\nFire // Gobland\n' > "$TMP/names.txt"
 out=$("$RUN" --preflight "$TMP/names.txt" 2>"$TMP/pf.err"); rc=$?
 tab=$'\t'
 check "preflight exits 0 on a good pin" $((rc == 0 ? 0 : 1)) "rc=$rc $(cat "$TMP/pf.err")"
@@ -161,7 +166,13 @@ check "  ...refusing Gobland, Indicate and Mox Poison" \
 	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Gobland${tab}not in the pinned cardsfolder" &&
 		printf '%s\n' "$out" | /usr/bin/grep -qxF "Indicate${tab}not in the pinned cardsfolder" &&
 		printf '%s\n' "$out" | /usr/bin/grep -qxF "Mox Poison${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
+check "  ...refusing a split whose face the pin lacks (Fire // Gobland)" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Fire // Gobland${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
 check "  ...and keeping the card the pin resolves" $(printf '%s\n' "$out" | /usr/bin/grep -q "Grizzly Bears" && echo 1 || echo 0) "$out"
+check "  ...and the split names the pin's per-face Name lines resolve" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -q "Fire // Ice" && echo 1 || echo 0) "$out"
+check "     ...including the adventure" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -q "Bonecrusher Giant // Stomp" && echo 1 || echo 0) "$out"
 reached; check "  ...before javac, java or scope" $((! $? ))
 
 # 5. run with a good pin: javac once per source sha, java with the pinned env.

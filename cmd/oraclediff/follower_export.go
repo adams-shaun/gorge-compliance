@@ -297,31 +297,7 @@ func followerExport(reg *cards.Registry, fl follower.Follower, runner, scen, out
 		return st, err
 	}
 	st.Items, st.Asked, st.Lacking = asked.Items, asked.Asked, asked.Lacking
-
-	of, err := os.Create(out)
-	if err != nil {
-		return st, err
-	}
-	defer of.Close()
-	pf, err := os.Create(prepPath)
-	if err != nil {
-		return st, err
-	}
-	defer pf.Close()
-	w, pw := bufio.NewWriter(of), bufio.NewWriter(pf)
-	for i, it := range items {
-		why := refuseReasons(itemNames[i], lacks)
-		var line []byte
-		if len(why) > 0 {
-			st.Refused++
-			line, err = json.Marshal(xprep.Refusal{ID: it.ID, Reason: fl.Name + "_lacks_card", Detail: strings.Join(why, "; ")})
-			if err != nil {
-				return st, err
-			}
-			pw.Write(line)
-			pw.WriteByte('\n')
-			continue
-		}
+	st.Sent, st.Refused, err = exportItems(items, itemNames, lacks, fl.Name, out, prepPath, func(it oraclegen.Item) ([]byte, error) {
 		// A follower's queue has no consumer for the Forge-only
 		// "graveyard_order" role, so it is not written here: an unasked
 		// decision would become an unconsumed leftover and turn a clean row
@@ -336,24 +312,61 @@ func followerExport(reg *cards.Registry, fl follower.Follower, runner, scen, out
 				st.Census.add("attack_window_passes.items")
 			}
 		}
-		line, err = json.Marshal(fr)
-		if err != nil {
-			return st, err
+		return json.Marshal(fr)
+	})
+	return st, err
+}
+
+// exportItems writes the two files of one follower export: out, one request
+// line per item the preflight did not refuse, in input order, and prepPath,
+// one xprep.Refusal row (reason <engine>_lacks_card) per refused item, where
+// request builds an item's request line (a marshal error fails the whole
+// export, leaving the files short). It returns the sent and refused counts.
+// Both forge-export and follower-export go through here, so the refusal
+// format cannot drift between them.
+func exportItems(items []oraclegen.Item, itemNames [][]string, lacks map[string]string, engine, out, prepPath string, request func(oraclegen.Item) ([]byte, error)) (sent, refused int, err error) {
+	of, err := os.Create(out)
+	if err != nil {
+		return 0, 0, err
+	}
+	defer of.Close()
+	pf, err := os.Create(prepPath)
+	if err != nil {
+		return 0, 0, err
+	}
+	defer pf.Close()
+	w, pw := bufio.NewWriter(of), bufio.NewWriter(pf)
+	for i, it := range items {
+		why := refuseReasons(itemNames[i], lacks)
+		var line []byte
+		if len(why) > 0 {
+			refused++
+			line, err = json.Marshal(xprep.Refusal{ID: it.ID, Reason: engine + "_lacks_card", Detail: strings.Join(why, "; ")})
+			if err != nil {
+				return 0, 0, err
+			}
+			pw.Write(line)
+			pw.WriteByte('\n')
+			continue
 		}
-		st.Sent++
+		line, err = request(it)
+		if err != nil {
+			return 0, 0, err
+		}
+		sent++
 		w.Write(line)
 		w.WriteByte('\n')
 	}
 	if err := w.Flush(); err != nil {
-		return st, err
+		return 0, 0, err
 	}
 	if err := pw.Flush(); err != nil {
-		return st, err
+		return 0, 0, err
 	}
 	if err := pf.Close(); err != nil {
-		return st, err
+		return 0, 0, err
 	}
-	return st, of.Close()
+	return sent, refused, of.Close()
 }
 
 // playerRef matches a bare player ref ("p0"), which xprep.CardNames passes

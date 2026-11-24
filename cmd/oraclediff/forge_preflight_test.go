@@ -100,7 +100,11 @@ func TestForgeExportRefusesUnknownCard(t *testing.T) {
 
 // TestForgeExportDefaultRunner: runForgeExport's -runner defaults to the
 // registry's runner for forge, so the sweep's forge lane and a manual
-// forge-export both preflight through forge-oracle-run.sh.
+// forge-export both preflight through forge-oracle-run.sh — and an explicit
+// -runner overrides it, as forge-pass.sh and follower-check.sh now pass one.
+// The defaulting is exercised for real: run from a temporary directory,
+// where the relative default "scripts/forge-oracle-run.sh" does not exist,
+// so the preflight exec's failure names the runner that was used.
 func TestForgeExportDefaultRunner(t *testing.T) {
 	fl, ok := follower.Lookup("forge")
 	if !ok {
@@ -111,5 +115,50 @@ func TestForgeExportDefaultRunner(t *testing.T) {
 	}
 	if fl.Prep != follower.PrepForgeExport {
 		t.Errorf("forge prep = %v, want PrepForgeExport", fl.Prep)
+	}
+
+	repo, err := filepath.Abs(filepath.Join("..", ".."))
+	if err != nil {
+		t.Fatal(err)
+	}
+	// runForgeExport loads its own registry from -cards; without the corpus
+	// there is nothing to default for.
+	cards := filepath.Join(repo, ".cards")
+	if _, err := os.Stat(cards); err != nil {
+		t.Skipf("no .cards corpus at %s: run make fetch-cards compile-cards", cards)
+	}
+	// The fake fixture, resolved before the cwd moves to the temp directory.
+	fake, err := filepath.Abs(filepath.Join(followerFixtures, "preflight.sh"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	tmp := t.TempDir()
+	t.Chdir(tmp)
+	scen := filepath.Join(tmp, "items.jsonl")
+	if err := os.WriteFile(scen, nil, 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	// No -runner: the default (the registry's runner, relative to the
+	// repository root) is used, and from this cwd it cannot be executed —
+	// the error must name it.
+	out := filepath.Join(tmp, "forge-req.jsonl")
+	if err = runForgeExport([]string{"-cards", cards, "-scenarios", scen, "-out", out}); err == nil ||
+		!strings.Contains(err.Error(), "scripts/forge-oracle-run.sh --preflight") {
+		t.Fatalf("default runner error = %v, want one naming scripts/forge-oracle-run.sh --preflight", err)
+	}
+
+	// An explicit -runner wins: the fake fixture answers, the export runs,
+	// and with an empty scenario file it writes an empty request file.
+	out2 := filepath.Join(tmp, "forge-req2.jsonl")
+	if err := runForgeExport([]string{"-cards", cards, "-scenarios", scen, "-out", out2, "-runner", fake}); err != nil {
+		t.Fatalf("explicit -runner: %v", err)
+	}
+	req, err := os.ReadFile(out2)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(req) != 0 {
+		t.Errorf("explicit runner wrote %d request bytes for 0 items, want 0", len(req))
 	}
 }

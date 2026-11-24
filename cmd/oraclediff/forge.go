@@ -45,7 +45,6 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/follower"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
-	"github.com/adams-shaun/gorge-compliance/oracle/xengine/xprep"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/engine/rules/pay"
@@ -222,50 +221,11 @@ func forgeExportRefusing(reg *cards.Registry, fl follower.Follower, runner, scen
 		return st, err
 	}
 	st.Items, st.Asked, st.Lacking = asked.Items, asked.Asked, asked.Lacking
-
-	of, err := os.Create(out)
-	if err != nil {
-		return st, err
-	}
-	defer of.Close()
-	pf, err := os.Create(prepPath)
-	if err != nil {
-		return st, err
-	}
-	defer pf.Close()
-	w, pw := bufio.NewWriter(of), bufio.NewWriter(pf)
-	for i, it := range items {
-		why := refuseReasons(itemNames[i], lacks)
-		var line []byte
-		if len(why) > 0 {
-			st.Refused++
-			line, err = json.Marshal(xprep.Refusal{ID: it.ID, Reason: fl.Name + "_lacks_card", Detail: strings.Join(why, "; ")})
-			if err != nil {
-				return st, err
-			}
-			pw.Write(line)
-			pw.WriteByte('\n')
-			continue
-		}
+	st.Sent, st.Refused, err = exportItems(items, itemNames, lacks, fl.Name, out, prepPath, func(it oraclegen.Item) ([]byte, error) {
 		rq, _ := forgeExportItem(reg, it, true)
-		line, err = json.Marshal(rq)
-		if err != nil {
-			return st, err
-		}
-		st.Sent++
-		w.Write(line)
-		w.WriteByte('\n')
-	}
-	if err := w.Flush(); err != nil {
-		return st, err
-	}
-	if err := pw.Flush(); err != nil {
-		return st, err
-	}
-	if err := pf.Close(); err != nil {
-		return st, err
-	}
-	return st, of.Close()
+		return json.Marshal(rq)
+	})
+	return st, err
 }
 
 // forgeExport writes one request line per scenario Item, in input order.

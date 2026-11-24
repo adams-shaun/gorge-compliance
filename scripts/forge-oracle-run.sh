@@ -13,8 +13,11 @@
 #   --preflight   print NAME<TAB>REASON on stdout for each name in NAMES.txt
 #                 the pinned Forge cannot resolve as a card (the protocol
 #                 cmd/oraclediff/follower_export.go drives): a name whose
-#                 Name: line is in no cardsfolder card file. One grep pass
-#                 over the pinned cardsfolder; no javac, no JVM, no lock.
+#                 Name: line is in no cardsfolder card file; a split card
+#                 name ("Fire // Ice") whose every face's Name: line is in
+#                 none either (Forge's card files hold one Name: line per
+#                 face, so the joined name is never a Name line). One grep
+#                 pass over the pinned cardsfolder; no javac, no JVM, no lock.
 #
 # Overrides:
 #   FORGE_ORACLE_SRC      the forge-oracle project dir to compile and replay (a
@@ -77,9 +80,12 @@ git -C "$top" diff --quiet HEAD -- forge-gui/res/cardsfolder forge-gui/res/token
 # The preflight protocol owns stdout (the pin check printed its verdict on
 # stderr): a name the pinned Forge cannot resolve as a card is one whose
 # Name: line is in no cardsfolder card file — exactly the setup the driver
-# fails with "Couldn't find a card" for, before it replays a step. The
-# pinned cardsfolder lags the corpus, so forge-export refuses such an item
-# instead of replaying it into a harness row.
+# fails with "Couldn't find a card" for, before it replays a step. A split
+# card name ("Fire // Ice") resolves when every face's Name: line is in the
+# cardsfolder, since Forge's card files hold one Name: line per face and no
+# file holds the joined "Name:Fire // Ice" line. The pinned cardsfolder lags
+# the corpus, so forge-export refuses such an item instead of replaying it
+# into a harness row.
 if [ "$mode" = preflight ]; then
   [ -r "$names" ] || die "cannot read $names"
   cardsfolder=$top/forge-gui/res/cardsfolder
@@ -89,14 +95,44 @@ if [ "$mode" = preflight ]; then
   while IFS= read -r n; do
     [ -n "$n" ] || continue
     printf 'Name:%s\n' "$n" >> "$pats"
+    case "$n" in
+    *" // "*)
+      face=${n%%" // "*}; rest=${n#*" // "}
+      while :; do
+        printf 'Name:%s\n' "$face" >> "$pats"
+        case "$rest" in
+        *" // "*) face=${rest%%" // "*}; rest=${rest#*" // "} ;;
+        *) printf 'Name:%s\n' "$rest" >> "$pats"; break ;;
+        esac
+      done ;;
+    esac
   done < "$names"
   # One fixed-string whole-line pass over the cardsfolder; the matched Name
-  # lines, sorted, are the asked names the pin resolves (both faces of a
-  # double-faced card are Name lines of one file).
+  # lines, sorted, are the asked names (and, for a split name, its faces)
+  # the pin resolves (both faces of a double-faced card are Name lines of
+  # one file).
   hits=$(grep -rhx -F -f "$pats" "$cardsfolder" 2>/dev/null | sort -u || true)
+  # every_face_in_hits NAME: 0 when each face of the split name NAME has its
+  # Name: line in $hits.
+  every_face_in_hits() {
+    local rest=$1 face
+    while :; do
+      face=${rest%%" // "*}
+      grep -qxF "Name:$face" <<<"$hits" || return 1
+      case "$rest" in
+      *" // "*) rest=${rest#*" // "} ;;
+      *) return 0 ;;
+      esac
+    done
+  }
   while IFS= read -r n; do
     [ -n "$n" ] || continue
-    grep -qxF "Name:$n" <<<"$hits" || printf '%s\t%s\n' "$n" "not in the pinned cardsfolder"
+    if grep -qxF "Name:$n" <<<"$hits"; then continue; fi
+    case "$n" in
+    *" // "*)
+      if every_face_in_hits "$n"; then continue; fi ;;
+    esac
+    printf '%s\t%s\n' "$n" "not in the pinned cardsfolder"
   done < "$names"
   exit 0
 fi

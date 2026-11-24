@@ -34,6 +34,7 @@ cat >"$BIN/go" <<'STUB'
 printf '#name\trunner\tprep\tjvm\trunner_env\tmem_env\twait_env\n'
 printf 'xmage\tscripts/xmage.sh\txprep\ttrue\tXENGINE_XMAGE_RUNNER\tXENGINE_XMAGE_MEM\tXENGINE_XMAGE_WAIT\n'
 printf 'phase\tscripts/phase.sh\tfollower-export\tfalse\tXENGINE_PHASE_RUNNER\tXENGINE_PHASE_MEM\tXENGINE_PHASE_WAIT\n'
+printf 'forge\tscripts/forge-oracle-run.sh\tforge-export\tfalse\tXENGINE_FORGE_RUNNER\tXENGINE_FORGE_MEM\tXENGINE_FORGE_WAIT\n'
 STUB
 # oraclediff stub: gen writes 6 items (cards A..F, each with a step and a payment);
 # follower-export sends all but F (F is a refusal); follower-diff marks the first
@@ -50,10 +51,11 @@ gen)
 		printf '{"id":"s:%s","card":"%s","setup":{},"steps":[{"op":"pass"}],"payment":{"x":1}}\n' "$c" "$c"
 	done >"${o[out]}"
 	;;
-follower-export)
+follower-export | forge-export)
+	eng=${o[engine]:-forge}
 	echo "$sub engine=${o[engine]} runner=${o[runner]}" >>"$LOG"
 	grep -v '"card":"F"' "${o[scenarios]}" >"${o[out]}" || true
-	grep '"card":"F"' "${o[scenarios]}" >"$(dirname "${o[out]}")/${o[engine]}-prep.jsonl" || true
+	grep '"card":"F"' "${o[scenarios]}" >"$(dirname "${o[out]}")/$eng-prep.jsonl" || true
 	;;
 follower-diff)
 	n=0
@@ -75,12 +77,13 @@ chmod +x "$BIN"/*
 
 cc() { # args...: one check run
 	XENGINE_GO=$BIN/go XENGINE_SCOPE=none XENGINE_ORACLEDIFF=$BIN/oraclediff XENGINE_PHASE_RUNNER=$BIN/runner \
+		XENGINE_FORGE_RUNNER=$BIN/runner \
 		"$CHECK" "$@" 2>&1
 }
 runs() { /usr/bin/grep -c '^runner' "$LOG" || true; }
 
 out=$(cc nosuch --out "$TMP/o0"); rc=$?
-check "unknown engine exits 2" '[ "$rc" = 2 ] && has "$out" "unknown follower nosuch (want one of: xmage phase)"' "rc=$rc $out"
+check "unknown engine exits 2" '[ "$rc" = 2 ] && has "$out" "unknown follower nosuch (want one of: xmage phase forge)"' "rc=$rc $out"
 out=$(cc xmage --out "$TMP/o0"); rc=$?
 check "xprep engine exits 2" '[ "$rc" = 2 ] && has "$out" "prep xprep"' "rc=$rc $out"
 out=$(cc phase --out "$ROOT/.follower-check-smoke-out"); rc=$?
@@ -94,6 +97,15 @@ check "summary line" 'has "$out" "follower-check: phase set=XYZ items=6 refused=
 check "SUMMARY.txt has the status histogram" '/usr/bin/grep -q "AGREE 3" "$O/SUMMARY.txt" && /usr/bin/grep -q "DIVERGE 2" "$O/SUMMARY.txt" && /usr/bin/grep -q " 2 life" "$O/SUMMARY.txt"' "$(cat "$O/SUMMARY.txt" 2>/dev/null)"
 check "plain: steps and payment kept" '[ "$(jq -c ".steps|length" "$O/items.jsonl" | sort -u)" = 1 ] && jq -e "has(\"payment\")" "$O/items.jsonl" >/dev/null'
 check "runner got the env override and the prep the runner path" '/usr/bin/grep -q "follower-export engine=phase runner=$BIN/runner" "$LOG"' "$(cat "$LOG")"
+
+# Forge (forge-export): the same runner is passed to the preflight with
+# -runner, and the refusals land in forge-prep.jsonl.
+O=$TMP/o1f; : >"$LOG"
+out=$(cc forge --set XYZ --out "$O"); rc=$?
+check "forge run exits 0" '[ "$rc" = 0 ]' "rc=$rc $out"
+check "forge summary line" 'has "$out" "follower-check: forge set=XYZ items=6 refused=1 sent=5 rows=5"' "$out"
+check "forge: -runner passed to the forge-export preflight" '/usr/bin/grep -q "forge-export engine= runner=$BIN/runner" "$LOG"' "$(cat "$LOG")"
+check "forge: refusal rows in forge-prep.jsonl" '[ "$(wc -l <"$O/forge-prep.jsonl")" = 1 ]' "$(cat "$O/forge-prep.jsonl" 2>/dev/null)"
 
 # --setup-only, --pool (comments, blanks), --limit.
 printf '# pool\nB\n\nD # inline\nZ\n' >"$TMP/pool.txt"
