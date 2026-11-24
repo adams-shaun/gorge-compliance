@@ -1154,7 +1154,32 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
                 return object != null && chosen != null && chosen.getId().equals(object.getId());
             }
-            return super.hasObjectTargetNameOrAlias(object, value);
+            if (super.hasObjectTargetNameOrAlias(object, value)) {
+                return true;
+            }
+            // A face-down permanent (CR 708.2a: a manifested or cloaked
+            // creature has no name) never matches the card name the scenario
+            // ref carries. The face-down state arises mid-window (manifest
+            // dread, cloak), after the steps are queued, so it is matched
+            // here against the LIVE game: the ref names the card that became
+            // the face-down creature (equip target, sacrifice-cost pick).
+            if (choiceGame != null && object instanceof Permanent) {
+                mage.cards.Card underlying = choiceGame.getCard(object.getId());
+                return namesFaceDownCard(((Permanent) object).isFaceDown(choiceGame),
+                        underlying == null ? null : underlying.getName(), value);
+            }
+            return false;
+        }
+
+        /** True when a face-down permanent is the one a scenario ref names:
+         * the queued value is the card's plain XMage-spelled name, never an
+         * "@" alias or a bracketed test command, and equals the name of the
+         * card that sits face down. A face-up permanent is never matched
+         * here (its own name already answered the base's comparison). */
+        static boolean namesFaceDownCard(boolean faceDown, String underlyingName, String value) {
+            return faceDown && underlyingName != null && value != null
+                    && !value.startsWith("@") && !value.startsWith("[")
+                    && underlyingName.equals(value);
         }
 
         @Override

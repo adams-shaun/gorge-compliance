@@ -46,13 +46,14 @@ public final class ScenarioReplayDriverAsksTest {
         gameOverLeftovers();
         mixedMustAttack();
         faceDownAttacker();
+        manifestedFaceDownTarget();
         declinedDig();
         alternativeCast();
         promisedGift();
         replacementOrder();
         phyrexianLife();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
-                + " face-down attacker, declined dig, alternative cast, promised gift, replacement order,"
+                + " face-down attacker, manifested face-down target, declined dig, alternative cast, promised gift, replacement order,"
                 + " phyrexian life");
     }
 
@@ -182,6 +183,26 @@ public final class ScenarioReplayDriverAsksTest {
                 "precondition: TestPlayer maps the command back to the empty face-down name");
         check(ScenarioReplay.turnsFaceUp("Turn face up") && ScenarioReplay.turnsFaceUp("Megamorph {1}{G}: turn this face up")
                 && !ScenarioReplay.turnsFaceUp("{T}: Add {G}."), "only a turn-face-up activation clears the face-down name");
+    }
+
+    /** DSK Conductive Machete / Dissection Tools: a manifest-dread creature
+     * (CR 708.2a: no name) is made mid-window, so its ref, "Mountain", cannot
+     * be queued as the face-down test command. TestPlayer's name search
+     * (equip target, sacrifice-cost pick) compares the queued value to the
+     * empty face-down name and never matches, so the driver's override matches
+     * the face-down permanent by the card that sits under it. */
+    private static void manifestedFaceDownTarget() throws Exception {
+        Class<?>[] types = {boolean.class, String.class, String.class};
+        check((Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "Mountain"),
+                "the face-down Mountain is the ref's permanent");
+        check(!(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "Forest"),
+                "another card's name does not match the face-down permanent");
+        check(!(Boolean) adapter("namesFaceDownCard", types, false, "Mountain", "Mountain"),
+                "a face-up permanent is answered by the base name comparison, not here");
+        check(!(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "@p0:Mountain#2")
+                        && !(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", ScenarioReplay.faceDownCombatName())
+                        && !(Boolean) adapter("namesFaceDownCard", types, true, null, "Mountain"),
+                "an alias, a test command and an unknown card are left to the base");
     }
 
     /** (f) FIN Choco trigger#0.0: the generator's decline pair ("No" +
