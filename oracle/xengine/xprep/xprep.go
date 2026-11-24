@@ -944,6 +944,15 @@ func modeNumbers(reg *cards.Registry, it oraclegen.Item, ds []rules.OracleDecisi
 			}
 			sort.Strings(labels)
 			for _, k := range labels {
+				if oraclegen.IsPrintedMaxKey(k) {
+					// A printed maximum is not a mode number: two cards that
+					// share a label may print different maxima, and the first
+					// owner's stays (a stepped card is added before bystanders).
+					if _, seen := into[k]; !seen {
+						into[k] = m[k]
+					}
+					continue
+				}
 				if prev, seen := into[k]; seen && prev != m[k] {
 					return fmt.Sprintf("mode %q is %d on %s and %d on %s", k, prev, who[k], m[k], n), false
 				}

@@ -1628,9 +1628,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				}
 				as = append(as, XAnswer{d.Seat, "mode", fmt.Sprint(n)})
 			}
-			if d.Max > len(d.Picks) {
-				// XMage keeps choosing modes up to Max; stop it with the mode
-				// queue's skip token (including when gorge picked none).
+			if max(d.Max, printedModeMax(d, modes)) > len(d.Picks) {
+				// XMage keeps choosing modes up to Max -- the printed CharmNum
+				// when gorge clamped Max to the modes it could offer (Sentinel
+				// of Lost Lore); stop it with the mode queue's skip token
+				// (including when gorge picked none).
 				as = append(as, XAnswer{d.Seat, "mode", "[mode_skip]"})
 			}
 		case "yesno":
@@ -2631,6 +2633,47 @@ const (
 // to gorge but a different XMage queue, and no in-band discriminator on the
 // decision separates them (a mid-resolution Charm shares Resume "modes"),
 // so the face shape is the authority.
+// printedMaxPrefix marks the ModeNumbers entries that carry a charm's PRINTED
+// maximum rather than a mode number (see printedMaxKey).
+const printedMaxPrefix = "\x00printed_max\x00"
+
+// printedMaxKey is the ModeNumbers key under which a charm mode label carries
+// its printed CharmNum$ (stored negated, so the value can never be mistaken
+// for a 1-based mode number or a queue sentinel). gorge clamps a mode
+// decision's Max to the modes it can offer (CR 700.2a), but XMage's
+// Modes.choose keeps asking up to the printed maximum, so the closing
+// mode skip must be keyed on the printed bound. The label is the only handle
+// a decision gives back to its card, hence one entry per mode label.
+func printedMaxKey(label string) string { return printedMaxPrefix + label }
+
+// IsPrintedMaxKey reports whether a ModeNumbers key is a printed-maximum
+// entry rather than a mode label.
+func IsPrintedMaxKey(k string) bool { return strings.HasPrefix(k, printedMaxPrefix) }
+
+// printedCharmMax is the literal CharmNum$ of a non-repeating Charm (0 when
+// absent, non-literal or repeatable: those keep the decision's own Max).
+func printedCharmMax(params map[string]string) int {
+	if strings.EqualFold(strings.TrimSpace(params["CanRepeatModes"]), "True") {
+		return 0
+	}
+	n, err := strconv.Atoi(strings.TrimSpace(params["CharmNum"]))
+	if err != nil || n < 2 {
+		return 0
+	}
+	return n
+}
+
+// printedModeMax is the printed maximum XMage will loop a mode ask to for the
+// decision's picked cards (0 when none of the picks carries one).
+func printedModeMax(d rules.OracleDecision, modes map[string]int) int {
+	for _, label := range d.Picks {
+		if n, ok := modes[printedMaxKey(label)]; ok && n < 0 {
+			return -n
+		}
+	}
+	return 0
+}
+
 func modeNumbers(f *cards.Face) map[string]int {
 	out := map[string]int{}
 	// A ChoiceRestriction$ Charm (Zuko, Conflicted's "choose one that hasn't
@@ -2641,16 +2684,21 @@ func modeNumbers(f *cards.Face) map[string]int {
 	// {R}), not the second printed one. Such a charm's labels stay out of the
 	// map, so the answer falls to the pick's 1-based position in the offered
 	// list -- the number XMage's chooseMode reads.
-	addCharm := func(choices, restriction string) {
+	addCharm := func(choices, restriction string, params map[string]string) {
 		if restriction != "" {
 			return
 		}
+		printed := printedCharmMax(params)
 		for i, name := range strings.Split(choices, ",") {
 			name = strings.TrimSpace(name)
 			if name == "" {
 				continue
 			}
-			out[effects.CharmModeLabel(cards.ResolveSVar(f.SVars, name), name)] = i + 1
+			label := effects.CharmModeLabel(cards.ResolveSVar(f.SVars, name), name)
+			out[label] = i + 1
+			if printed > 0 {
+				out[printedMaxKey(label)] = -printed
+			}
 		}
 	}
 	for _, body := range f.SVars {
@@ -2733,13 +2781,13 @@ func modeNumbers(f *cards.Face) map[string]int {
 	}
 	for _, sa := range f.Abilities {
 		if sa.API == "Charm" {
-			addCharm(sa.Params["Choices"], sa.Params["ChoiceRestriction"])
+			addCharm(sa.Params["Choices"], sa.Params["ChoiceRestriction"], sa.Params)
 		}
 	}
 	for _, body := range f.SVars {
 		if strings.Contains(body, "Charm") {
 			if c := svarParams(body)["Choices"]; c != "" {
-				addCharm(c, svarParams(body)["ChoiceRestriction"])
+				addCharm(c, svarParams(body)["ChoiceRestriction"], svarParams(body))
 			}
 		}
 	}
