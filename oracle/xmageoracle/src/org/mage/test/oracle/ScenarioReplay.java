@@ -1008,6 +1008,45 @@ public class ScenarioReplay extends CardTestPlayerBase {
                             && f.getDeclaringClass().getSimpleName().equals(simpleName)));
         }
 
+        /**
+         * The answer to a yes/no a trigger poses while it resolves, when the
+         * step queued no Yes/No for it: gorge folded the may into the body's
+         * pick or cost (CR 603.5: the choice is made as the trigger resolves,
+         * and a may with one legal outcome changes nothing), so it logged the
+         * pick alone -- or nothing at all when there was nothing to pick (an
+         * empty hand for "put a Soldier card from your hand ...", X = 0 for
+         * "tap X untapped Myr ..."). XMage asks the may regardless: the
+         * trigger's own "Use ability?" (TriggeredAbilityImpl.resolve) and the
+         * effect's own "Put ... from your hand?". A queued pick (a name on
+         * the choice or target queue) means gorge went ahead: yes, the pick is
+         * left for the body's own ask. No pick, or a skip gorge logged for the
+         * declined pick (taken off the queue with the decline, as mayPrefix
+         * does), means no. Null when the ask is not posed by a resolving
+         * trigger, or a scripted Yes/No heads the choice queue and TestPlayer
+         * consumes it.
+         */
+        static Boolean foldedOptionalAnswer(boolean triggerResolves, List<String> choices,
+                List<String> targets) {
+            if (!triggerResolves) {
+                return null;
+            }
+            if (!choices.isEmpty() && (choices.get(0).equals("Yes") || choices.get(0).equals("No"))) {
+                return null;
+            }
+            boolean choicePick = !choices.isEmpty() && !TestPlayer.CHOICE_SKIP.equals(choices.get(0));
+            boolean targetPick = !targets.isEmpty() && !TestPlayer.TARGET_SKIP.equals(targets.get(0));
+            if (choicePick || targetPick) {
+                return Boolean.TRUE;
+            }
+            if (!choices.isEmpty()) {
+                choices.remove(0);
+            }
+            if (!targets.isEmpty()) {
+                targets.remove(0);
+            }
+            return Boolean.FALSE;
+        }
+
         /** The opponent a promised Gift goes to: in this two-seat harness the
          * only opponent, named on the choice queue the way makeChoose reads a
          * player, unless the scenario scripted a pick of its own. Null when
@@ -1087,6 +1126,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * "optionalcost" cast its leading "Yes" -- gorge elected the cost, so
          * XMage pays it too; an either-or
          * additional cost (OrCost) takes the cost gorge recorded for the step.
+         * A yes/no a resolving trigger poses with no Yes/No queued is
+         * answered from gorge's folded pick (foldedOptionalAnswer).
          * Every other ask stays with the scripted queue.
          */
         @Override
@@ -1156,6 +1197,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // placement below, exactly as oracleRun.build's post-placement
                 // LifeChange does.
                 return true;
+            }
+            Boolean folded = foldedOptionalAnswer(source instanceof mage.abilities.TriggeredAbility
+                    && askedBy(mage.abilities.TriggeredAbilityImpl.class, "resolve"), getChoices(), getTargets());
+            if (folded != null) {
+                return folded;
             }
             return super.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
         }
