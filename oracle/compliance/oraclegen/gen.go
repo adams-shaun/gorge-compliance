@@ -1551,14 +1551,18 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					// A paid unless cost whose components are OBJECT picks
 					// (Sac<, Discard<, Exile<, tapXType<, ...) is two asks in
 					// XMage: the boolean chooseUse "Pay the cost?", then the
-					// cost's own target asks. The engine records the boolean
-					// as the mode above and the picks as the following
-					// "unless_cost" choice. Answer the boolean yes here; the
-					// picks are scripted on the target queue by the
-					// unless_cost branch below. Leaving the paid pick as the
-					// ordinary mode answer instead queues the picks as alias
-					// choices, which chooseUse's assertAliasSupportInChoices
-					// rejects outright (Primeval Force, Rathi Dragon).
+					// cost's own target group, which XMage poses as a
+					// Player.choose -> makeChoose over the CHOICE queue (not
+					// the target queue: SacrificeTargetCost.pay ->
+					// TargetImpl.choose). The engine records the boolean as
+					// the mode here and the picks as the following
+					// "unless_cost" choose_n, which the ordinary choose_n
+					// route below already joins into one aliased choice.
+					// Answer the boolean yes here so chooseUse consumes
+					// it; leaving the paid pick as the mode answer queued the
+					// alias choice at chooseUse's head, which
+					// assertAliasSupportInChoices rejects (Primeval Force,
+					// Rathi Dragon).
 					as = append(as, XAnswer{d.Seat, "choice", "yes"})
 					break
 				}
@@ -1625,27 +1629,6 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[yes]})
 		case "choose_n":
-			if d.Resume == "unless_cost" {
-				// The object picks of a paid UnlessCost$ (engine
-				// pay/unlessflow.go's askUnlessPicks is the only producer of
-				// ResumeKind "unless_cost"). Every cost component -- a
-				// sacrifice, a discard, an exile, a tap, a return, a behold,
-				// a reveal, a counter, a blight, waterbend, evidence -- is
-				// chosen through XMage's cost target ask (SacrificeTargetCost,
-				// DiscardTargetCost, ExileTargetCost, TapTargetCost, ...),
-				// which is the target queue and supports aliases; the
-				// boolean chooseUse that precedes it is answered yes by the
-				// unless_pay branch above. Routing these picks as choices
-				// instead puts an alias on the makeChoose queue where the
-				// chooseUse reads it (Primeval Force, Rathi Dragon).
-				for k, label := range d.Picks {
-					as = append(as, XAnswer{d.Seat, "target", targetPickValue(d, k, label)})
-				}
-				if d.Max > len(d.Picks) {
-					as = append(as, XAnswer{d.Seat, "target", "[target_skip]"})
-				}
-				break
-			}
 			if d.Resume == "search_zones" {
 				// gorge's CR 701.23 "and/or" zone choice (cr-g51, Say Its
 				// Name's "search your graveyard, hand, and/or library"): one
