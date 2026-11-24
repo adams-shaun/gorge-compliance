@@ -289,20 +289,31 @@ public final class ScenarioReplayDriverAsksTest {
                 "a lone No (Oko's chooseUse) is kept");
     }
 
-    /** (g) DSK Leyline of Mutation static#0.0 and Land Grant's own cost:
-     * cast_mode "alternative" is the election, so the first alternative is
-     * key 1 whether the generator queued a leading "Yes" or nothing at all
-     * (Land Grant's cost is on the card, not a gorge decision). */
+    /** (g) DSK Leyline of Mutation static#0.0, Land Grant's own cost and Mine
+     * Collapse's sacrifice cost: cast_mode "alternative" is the election, so
+     * the first alternative is key 1 whether the generator queued a leading
+     * "Yes" or nothing at all (Land Grant's cost is on the card, not a gorge
+     * decision). A real pick queued for the elected cost (Mine Collapse's
+     * Mountain) must stay behind the key: the key is inserted ahead of it, not
+     * written over it. */
     private static void alternativeCast() throws Exception {
         check(ScenarioReplay.castModeSupported("alternative"), "alternative cast_mode must be elected");
         check(!ScenarioReplay.castModeSupported("kickedboth"), "an unwired cast_mode is still rejected");
         Class<?>[] types = {String.class, List.class};
         List<String> choices = new ArrayList<>(Collections.singletonList("Yes"));
         check((Boolean) adapter("alternativeCostKey", types, "You may choose an alternative cost", choices)
-                && choices.get(0).equals("1"), "Yes -> key 1: " + choices);
+                && choices.equals(Collections.singletonList("1")), "Yes -> key 1: " + choices);
         List<String> queuedNone = new ArrayList<>();
         check((Boolean) adapter("alternativeCostKey", types, "Choose an alternative cost", queuedNone)
                 && queuedNone.equals(Collections.singletonList("1")), "no answer -> key 1: " + queuedNone);
+        List<String> sacrificePick = new ArrayList<>(Collections.singletonList("@p0:Mountain"));
+        check((Boolean) adapter("alternativeCostKey", types, "You may choose an alternative cost", sacrificePick)
+                && sacrificePick.equals(Arrays.asList("1", "@p0:Mountain")),
+                "a real pick stays behind key 1: " + sacrificePick);
+        List<String> decline = new ArrayList<>(Collections.singletonList("Cast with no alternative cost"));
+        check((Boolean) adapter("alternativeCostKey", types, "You may choose an alternative cost", decline)
+                && decline.equals(Collections.singletonList("1")),
+                "the plain-cast decline is replaced by key 1: " + decline);
         List<String> other = new ArrayList<>(Collections.singletonList("Yes"));
         check(!(Boolean) adapter("alternativeCostKey", types, "Choose a creature type", other) && other.get(0).equals("Yes"),
                 "another key menu is untouched");

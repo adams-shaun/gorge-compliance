@@ -1331,7 +1331,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (choices.isEmpty()) {
                 choices.add("1");
             } else {
-                choices.set(0, "1");
+                // Replace only the election itself: a scripted "Yes", or the
+                // plain cast's "Cast with no alternative cost" decline queued
+                // above. Any other head is a real answer for a later ask on
+                // the same cast (Mine Collapse's sacrifice pick); overwriting
+                // it left that answer to be consumed by the cost's target ask.
+                String head = choices.get(0);
+                if (head.equals("Yes") || head.equals("Cast with no alternative cost")) {
+                    choices.set(0, "1");
+                } else {
+                    choices.add(0, "1");
+                }
             }
             return true;
         }
@@ -6642,11 +6652,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     faceDownRefs.add(str(st, "card"));
                 }
                 List<String> tg = targets(st);
-                if (!warpedCast && hasAlternativeSourceCost(cardName)) {
+                if (!warpedCast && !alternativeCostCast && hasAlternativeSourceCost(cardName)) {
                     // A plain cast step: gorge paid the mana cost, so decline
                     // the alternative cost (evoke, impending, dash, ...)
                     // XMage offers through its "Cast with no alternative
-                    // cost" choice, rather than leave it to the AI.
+                    // cost" choice, rather than leave it to the AI. An
+                    // "alternative" step already elected the cost through the
+                    // key menu (alternativeCostKey); queuing a decline there
+                    // left it for the elected cost's own target ask.
                     setChoice(p, "Cast with no alternative cost");
                 }
                 List<Integer> skips = castTargetSkipsAt(stepIdx, cardName, tg.size());

@@ -232,6 +232,45 @@ public final class ScenarioReplayCastModeTest {
                 + " untapped and is on the stack");
     }
 
+    /** Mine Collapse's alternative cost is a sacrifice, not a mana cost.
+     * cast_mode "alternative" elects XMage's key 1 and the step's queued
+     * "@p0:Mountain" is that cost's own target. The key election must be
+     * inserted ahead of the pick, not written over it: overwriting it left
+     * the stale "Cast with no alternative cost" decline for the sacrifice
+     * ask, which fails as a wrong choice and sacrifices nothing. */
+    private static void mineCollapseAlternativeSacrifice() throws Exception {
+        equal("true", castModeSupported("alternative"), "alternative cast_mode");
+        JsonObject sc = JsonParser.parseString("{name:'Mine Collapse',card:'Mine Collapse',"
+                + "setup:{p0:{battlefield:['Mountain','Mountain','Mountain','Mountain'],"
+                + "hand:['Mine Collapse']},p1:{battlefield:['Grizzly Bears']}},"
+                + "xmage_answers:[[{seat:0,kind:'choice',value:'@p0:Mountain'}]],"
+                + "steps:[{op:'cast',seat:0,card:'p0:Mine Collapse',cast_mode:'alternative',"
+                + "targets:['p1:Grizzly Bears']}]}").getAsJsonObject();
+        JsonObject res = new ScenarioReplay().replayOnce(sc, false);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("alternative Mine Collapse replay failed: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        equal(1, count(last, "stack", "Mine Collapse"), "Mine Collapse is on the stack: " + last);
+        JsonObject p0 = last.getAsJsonArray("players").get(0).getAsJsonObject();
+        equal(1, count(p0, "graveyard", "Mountain"), "one Mountain was sacrificed: " + last);
+        int mountains = 0;
+        for (JsonElement e : last.getAsJsonArray("permanents")) {
+            JsonObject o = e.getAsJsonObject();
+            if (!"Mountain".equals(o.get("name").getAsString())) {
+                continue;
+            }
+            mountains++;
+            if (o.has("tapped") && o.get("tapped").getAsBoolean()) {
+                throw new AssertionError("the alternative cost tapped a Mountain for mana: " + last);
+            }
+        }
+        equal(3, mountains, "the other Mountains stayed on the battlefield: " + last);
+        System.out.println("PASS alternative Mine Collapse sacrifices the scripted Mountain, taps no land,"
+                + " and is on the stack");
+    }
+
     private static String mayplayCastObject(String mode, String alias, String castName, String refSpelling,
             String card) throws Exception {
         java.lang.reflect.Method m = ScenarioReplay.class.getDeclaredMethod("mayplayCastObject",
@@ -343,6 +382,10 @@ public final class ScenarioReplayCastModeTest {
         // cast_mode "alternative" on the card's own cost: the generator queues
         // no answer, so the driver must elect XMage's first alternative itself.
         landGrantAlternativeCost();
+        // ... and when the elected alternative cost has its own scripted pick
+        // (Mine Collapse sacrifices a Mountain), the key election must not
+        // overwrite that pick.
+        mineCollapseAlternativeSacrifice();
 
         // Guards the list's ordinary behaviour: no mode is the plain cast.
         equal("true", castModeSupported(""), "absent cast_mode");
