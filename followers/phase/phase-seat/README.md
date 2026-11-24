@@ -30,6 +30,12 @@ payment the pool covers, else `activate_mana_ability` per source, or cancel); mo
 `order_pick`); top or bottom; and pool picks of `min..=max` cards (`DiscardToHandSize`, `DiscardChoice`,
 `RevealChoice`, `SearchChoice`, `EffectZoneChoice`, `DigChoice`, the simple `PayCost` kinds, `ChooseLegend`).
 
+The seat declares the **manual** mana surface (no `engine_autopay`) and rewrites every contract
+cast/activation to `CastPaymentMode::Manual`, so phase never auto-taps. phase computes an auto-payment's
+cost before the target is final, so a target-dependent cost (Luminous Rebuke's {1} discount for a tapped
+target) used to fail a legal target choice as `Cannot pay mana cost`; the payment is now asked after the
+cost is final.
+
 `AssignCombatDamage` is host-answered, not posed (`combat_damage_assignment: "engine_order"`): lethal to each
 blocker in phase's order, the rest to the last blocker, or to the defender under trample. Damage modes other
 than `Normal` and trample over a planeswalker halt as `unsupported_damage_mode`.

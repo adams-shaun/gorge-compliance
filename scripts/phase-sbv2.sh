@@ -15,9 +15,11 @@
 #   scripts/phase-sbv2.sh --compile    # build only; prints "phase-seat=<path> ref=<sha12>+<hash16>"
 #   scripts/phase-sbv2.sh --selftest   # build, then a hello / malformed-line exchange
 #
-# -decks DIR is the catalog (gorge deck JSON, catalog_id = file stem), the flag xclient appends when
-# the hello lists no catalog deck; PHASE_SBV2_DECKS is the default. With neither the catalog is
-# empty. -source-revision REV is reported as engine.source_revision.
+# -decks DIR is the catalog (gorge deck JSON, catalog_id = file stem); PHASE_SBV2_DECKS is the
+# default. With neither, ten decks are generated from the committed FDN-commons pool and the pinned
+# card data under the out-of-tree root (decks-<hash16>), so a host that would otherwise inject its
+# own bundled decks gets only cards phase replays. PHASE_SBV2_DECKS=none serves no catalog.
+# -source-revision REV is reported as engine.source_revision.
 #
 # Environment (defaults as in scripts/phase-oracle-run.sh; these override):
 #   FOLLOWERS_CACHE, PHASE_ORACLE_DIR, PHASE_FOLLOWER_DIR, CARGO
@@ -69,6 +71,30 @@ bscope=()
 if [ "$mode" = compile ]; then
 	echo "phase-seat=$bin ref=$ref"
 	exit 0
+fi
+
+# The catalog a host that injects its own decks would otherwise be given: xclient writes four-yay's
+# bundled FDN lists and relaunches with -decks when the hello lists none, and those lists carry cards
+# phase does not replay (Tinybones, Bauble Burglar). A generated catalog from the committed pool keeps
+# every served card replayable; the generation is deterministic and cached per pin.
+if [ "$decks" = none ]; then
+	decks=
+elif [ -z "$decks" ]; then
+	decks=$root/decks-$hash16
+	if [ ! -d "$decks" ]; then
+		pool=$here/oracle/xengine/pools/fdn-commons.txt
+		if [ -f "$pool" ] && [ -f "$data" ] && command -v python3 >/dev/null 2>&1; then
+			tmp=$decks.tmp.$$
+			if python3 "$here/scripts/phase-sbv2-decks.py" "$pool" "$data" "$tmp" 10 1>&2; then
+				# mv -T: a concurrent generator that loses the race leaves the winner's directory alone.
+				mv -T "$tmp" "$decks" 2>/dev/null || rm -rf "$tmp"
+			else
+				rm -rf "$tmp"
+				echo "phase-sbv2: no default catalog (phase-sbv2-decks.py failed); serving none" >&2
+			fi
+		fi
+		[ -d "$decks" ] || decks=
+	fi
 fi
 
 export RUST_MIN_STACK=16777216

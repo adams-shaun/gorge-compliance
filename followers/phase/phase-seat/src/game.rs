@@ -22,7 +22,7 @@ use engine::game::deck_loading::{load_and_hydrate_decks, resolve_deck_list, Deck
 use engine::game::{apply, start_game_skip_mulligan, start_game_with_starting_player};
 use engine::types::ability::TargetRef;
 use engine::types::actions::{GameAction, MulliganChoice};
-use engine::types::game_state::{GameState, MulliganDecisionPhase, WaitingFor};
+use engine::types::game_state::{CastPaymentMode, GameState, MulliganDecisionPhase, WaitingFor};
 use engine::types::identifiers::ObjectId;
 use engine::types::player::PlayerId;
 use serde_json::{json, Value};
@@ -212,7 +212,7 @@ impl PhaseBackend {
         let (sha, data) = pin.split_once('+').unwrap_or((pin, "unknown"));
         let identity = json!({
             "name": "phase",
-            "version": format!("phase-{pin}/phase-seat-0.1.0/autopay"),
+            "version": format!("phase-{pin}/phase-seat-0.1.0/manual"),
             "rules_snapshot_id": format!("phase/{sha}"),
             "card_pool_identity": format!("phase-card-data/{data}"),
             "source_revision": source_revision,
@@ -422,6 +422,28 @@ fn apply_now(live: &mut Live, actor: PlayerId, action: GameAction) -> Result<(),
     apply(&mut live.state, actor, action).map(|_| ()).map_err(|e| Stop::Halt("submit_rejected", format!("{e:?}")))
 }
 
+/// Force an `AiDecisionContract` cast/activation onto the manual payment surface.
+///
+/// The contract's actions default to `Auto`, which lets phase tap its own sources. phase computes that
+/// auto-payment's cost before the target is final, so a legal target that changes the cost (Luminous
+/// Rebuke costs {1} less for a tapped target) leaves the engine one mana short and the target choice
+/// fails with `ActionNotAllowed("Cannot pay mana cost")`. The seat poses `ManaPayment` itself, so the
+/// payment is asked for after the cost is final and the host chooses the sources.
+fn manual(action: &GameAction) -> GameAction {
+    match action {
+        GameAction::CastSpell { object_id, card_id, targets, .. } => GameAction::CastSpell {
+            object_id: *object_id,
+            card_id: *card_id,
+            targets: targets.clone(),
+            payment_mode: CastPaymentMode::Manual,
+        },
+        GameAction::ActivateAbility { source_id, ability_index, .. } => {
+            GameAction::ActivateAbility { source_id: *source_id, ability_index: *ability_index, payment_mode: CastPaymentMode::Manual }
+        }
+        other => other.clone(),
+    }
+}
+
 /// Fill `live.cands` for `family`, or settle the prompt when there is nothing to choose.
 fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, Stop> {
     let viewer = |live: &Live, p: PlayerId, id: ObjectId| shown_ref(&live.state, &live.ids, p, id);
@@ -454,7 +476,7 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 };
                 if let Some(s) = sem {
                     if seen.insert(canonical(&s)) {
-                        cands.push(Cand { semantic: s, effect: Effect::Act(c.action.clone()) });
+                        cands.push(Cand { semantic: s, effect: Effect::Act(manual(&c.action)) });
                     }
                 }
             }
@@ -745,8 +767,9 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
         (WaitingFor::ManaPayment { player, .. }, Family::ManaPayment) => {
             let who = *player;
             live.acting = who;
-            // The profile declares `engine_autopay`: a payment the pool already covers is finished by the
-            // engine (phase's own confirm), not asked. Probed on a copy, since a short pool is refused.
+            // The profile is the manual surface: this seat asks every payment. A payment the pool already
+            // covers is finished by the engine (phase's own confirm), so probe it on a copy (a short pool
+            // is refused) and skip the question.
             let mut probe = live.state.clone();
             if apply(&mut probe, who, GameAction::PassPriority).is_ok() {
                 live.state = probe;
@@ -765,7 +788,7 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                         Some(src) => {
                             let semantic = sem::activate_mana_ability(src, *ability_index as u32, None, None);
                             if seen.insert(canonical(&semantic)) {
-                                cands.push(Cand { semantic, effect: Effect::Act(c.action.clone()) });
+                                cands.push(Cand { semantic, effect: Effect::Act(manual(&c.action)) });
                             }
                         }
                         // A legal mana ability whose source the viewer cannot name is never silently
