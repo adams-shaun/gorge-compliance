@@ -83,7 +83,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # FORGE_REF ff076d4432 with identical cardsfolder and tokenscripts trees.
 # becb01adc6 = 95020b95d4 + setup tokens' keyword counters grant their keyword (Card.setCounters(Multiset) once;
 # keyword counters resolve before custom ones: Zombie Druid LIFELINK, Alesha's Legacy). Same trees as FORGE_REF ff076d4432.
-FORGE_ORACLE_REF ?= becb01adc693ea955cbb19cf9217c04d18d1a947
+# 0791efdeb1 = becb01adc6 + each recorded coin flip result forced on its step (ForcedDieRandom arms item.coin_flips
+# beside the die rolls: nextBoolean returns the recorded result, a forced flip takes no draw, a doubled flip one per
+# result; MyRandom's CountingRandom forwards nextBoolean). Same trees as FORGE_REF ff076d4432.
+FORGE_ORACLE_REF ?= 0791efdeb19566b8e36391f3eaceaafc7a4894cd
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
