@@ -610,3 +610,16 @@ func TestStartCosts(t *testing.T) {
 		t.Errorf("Liliana: counters %+v, want %+v", f.Setup.P0.Counters, want)
 	}
 }
+
+// TestStartCombat: an attack trigger is the card (or Memnite, for a
+// noncreature card such as a Vehicle) attacking, on the battlefield since
+// the turn began; a combat-damage start drops the opp-blockers need, so the
+// attack connects.
+func TestStartCombat(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Dragon Mage", key: "f0/t0", maxTurns: 1, p0BF: []string{"Dragon Mage"}, focusCard: "Dragon Mage", focusKind: "attack"},
+		// the opp-blockers need places a wall: "whenever you attack" fires blocked or not
+		{card: "Boosted Sloop", key: "f0/t0", maxTurns: 1, p0BF: []string{"Boosted Sloop", "Memnite"}, p1BF: []string{"Shield Sphere"},
+			focusCard: "Memnite", focusKind: "attack"},
+	})
+}

@@ -253,6 +253,10 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			if why := spellStart(reg, b, face, card, generic, trig, f); why != "" {
 				return refuse(why)
 			}
+		case "DamageDone", "AttackersDeclared":
+			if why := combatStart(reg, b, face, card, trig, f); why != "" {
+				return refuse(why)
+			}
 		case "Attacks":
 			p0.Battlefield = []string{card}
 			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "attack"}
@@ -281,8 +285,11 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			}
 		}
 	}
-	// Needs the start's own line already meets, or must not (none yet).
-	skip := func(certdeck.Need) bool { return false }
+	// Needs the start's own line already meets, or must not: a combat-damage
+	// start's attack must connect (no blocker).
+	skip := func(n certdeck.Need) bool {
+		return trig != nil && (trig.Mode == "DamageDone" || trig.Mode == "DamageDoneOnce") && n.Class == certdeck.OppBlockers
+	}
 	if why, err := placeNeeds(reg, b, c, card, generic, skip, f); err != nil || why != "" {
 		if err != nil {
 			return Result{}, err

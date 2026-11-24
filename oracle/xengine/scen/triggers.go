@@ -409,3 +409,71 @@ func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 	}
 	return ""
 }
+
+// attackCarrier is the creature that attacks for the card: the card itself
+// when it is a creature the filter takes (an empty filter takes any), else
+// a carrier creature (carrierPool) the filter takes, placed on seat 0's
+// battlefield beside it.
+func attackCarrier(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, filter string, f *StartFile) string {
+	if face.IsCreature() {
+		if filter == "" {
+			return card
+		}
+		for _, a := range parseFilter(filter) {
+			if a.known && !a.other && a.ctrl != ctrlOpp && a.test(face) {
+				return card
+			}
+		}
+	}
+	if filter == "" {
+		filter = "Creature.YouCtrl"
+	}
+	name, s := filterCarrier(reg, b, card, filter, (*cards.Face).IsCreature)
+	if name == "" || s != 0 {
+		return ""
+	}
+	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, name)
+	return name
+}
+
+// combatStart is a trigger an attack fires: "whenever this deals combat
+// damage to a player" (DamageDone, CombatDamage) and "whenever you attack"
+// (AttackersDeclared). The card is on the battlefield since the turn began
+// (no summoning sickness) and the attacker (attackCarrier) attacks a seat
+// with no creatures, so the damage is dealt.
+func combatStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile) string {
+	none := "no-generator:trigger:" + trig.Mode
+	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
+		return none
+	}
+	var filter string
+	switch trig.Mode {
+	case "DamageDone":
+		vt := trig.Params["ValidTarget"]
+		if trig.Params["CombatDamage"] != "True" || vt != "Player" && vt != "Opponent" {
+			return none
+		}
+		filter = trig.Params["ValidSource"]
+		if selfCard(trig) || filter == "Card.Self" {
+			if !face.IsCreature() {
+				return none + ":noncreature"
+			}
+			filter = ""
+		}
+	case "AttackersDeclared":
+		if ap := trig.Params["AttackingPlayer"]; ap != "" && ap != "You" {
+			return none
+		}
+		if trig.Params["ValidAttackersAmount"] != "" {
+			return none + ":amount"
+		}
+		filter = trig.Params["ValidAttackers"]
+	}
+	f.Setup.P0.Battlefield = []string{card}
+	attacker := attackCarrier(reg, b, face, card, filter, f)
+	if attacker == "" {
+		return none + ":filter"
+	}
+	f.Focus = &StartFocus{Seat: seatPtr(0), Card: attacker, Kind: "attack"}
+	return ""
+}
