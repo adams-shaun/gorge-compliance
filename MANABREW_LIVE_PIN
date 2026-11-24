@@ -1,0 +1,10 @@
+# Pin for scripts/manabrew-live-run.sh: the ManaBrew tree whose manabrew-server and
+# self-hosted-node a live game runs on. KEY=VALUE, no quoting, '#' comments.
+# Bumping REF changes what every live transcript is a statement about.
+#
+# REF is upstream dadee731 (on origin/main of MANABREW_LIVE_REPO), so a fresh box can fetch it. It is
+# deliberately NOT the oracle driver's MANABREW_ORACLE_REF (8684462a6522, a local-only `oracle` branch
+# carrying engine patches a live game does not need); manabrew-server and self-hosted-node are
+# byte-identical between the two. self-hosted-node/src/config.rs:141 has SELF_HOSTED_NODE_BOT_ENABLED here.
+MANABREW_LIVE_REPO=https://github.com/witchesofthehill/manabrew
+MANABREW_LIVE_REF=dadee731dc1c850f910411acc1b5cc6bb73253ac
