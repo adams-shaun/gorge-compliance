@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b18cfad-a1cf-46c2-bcdd-7762c13d50e5	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Thornvault Forager/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b18cfad-a1cf-46c2-bcdd-7762c13d50e5	f0/a2	activate#0.2	agreed	-	FX	scen	2	0	Thornvault Forager/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b1a59db-0ffc-490b-a881-c8192f3747db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b1f0b78-806f-4a7d-809b-d2bc60cf1b01	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b1f0b78-806f-4a7d-809b-d2bc60cf1b01	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrill-of-the-hunt:cast:s1,f:xs:XP:thrill-of-the-hunt:cast:s1	-	-	-	9ee19e8250ce	-	024c1efcfe6d	-	-	2026-11-24	xproof
 7b238254-51b4-4e68-a8c6-93ab1180012e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b238254-51b4-4e68-a8c6-93ab1180012e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b2a32ca-ef5b-40a5-acf7-aefac1d09e5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,8 +105,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b89b7d2-c724-4d5d-9f0b-7d3302ad1168	cast	cast-resolve	agreed	-	X	scen	1	0	Agate Assault/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b8f1458-c638-4907-9363-f7cc22d04605	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b8f1458-c638-4907-9363-f7cc22d04605	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b8f4879-578e-40e4-863a-41d0c32c6bdd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b8f4879-578e-40e4-863a-41d0c32c6bdd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b8f4879-578e-40e4-863a-41d0c32c6bdd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mogg-war-marshal:f0t0:s1,f:xs:XP:mogg-war-marshal:f0t0:s1	-	-	-	9ee19e8250ce	-	1003c33b3578	-	-	2026-11-24	xproof
+7b8f4879-578e-40e4-863a-41d0c32c6bdd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mogg-war-marshal:f0t0:s1,f:xs:XP:mogg-war-marshal:f0t0:s1	-	-	-	9ee19e8250ce	-	1003c33b3578	-	-	2026-11-24	xproof
 7b8f4879-578e-40e4-863a-41d0c32c6bdd	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b8f4879-578e-40e4-863a-41d0c32c6bdd	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b92ac54-3883-48cf-b01e-be9797dc1649	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

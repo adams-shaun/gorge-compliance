@@ -12,8 +12,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 380d8d64-9aec-4656-b5b8-d336ebf803c8	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Draconautics Engineer/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 380e9992-b5d2-4fbe-a8c3-c37220846e0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 380ea3b6-8eb4-466a-8680-ce5cfed9b8c4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38132f50-9e2d-433b-9f2f-9bd0a7925b68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38132f50-9e2d-433b-9f2f-9bd0a7925b68	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38132f50-9e2d-433b-9f2f-9bd0a7925b68	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ivory-giant:f0t0:s1,f:xs:XP:ivory-giant:f0t0:s1	-	-	-	9ee19e8250ce	-	4fce3b04624d	-	-	2026-11-24	xproof
+38132f50-9e2d-433b-9f2f-9bd0a7925b68	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ivory-giant:f0t0:s1,f:xs:XP:ivory-giant:f0t0:s1	-	-	-	9ee19e8250ce	-	4fce3b04624d	-	-	2026-11-24	xproof
 381539ce-fc05-4855-80da-b0807a7c07c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 381539ce-fc05-4855-80da-b0807a7c07c2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3819daab-fe35-4f99-9282-47bd05c7fcd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38462d26-f252-4055-9f1a-59bc3ab2c75e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38503d34-f4f9-4eeb-9b1e-4fec1df921b3	cast	cast-resolve	agreed	-	X	scen	1	0	An Unexpected Party/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 38503d34-f4f9-4eeb-9b1e-4fec1df921b3	static#0.0	static#0.0	agreed	-	X	scen	1	0	An Unexpected Party/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38515f89-348b-4cf3-b7bd-1f6fe4ce2fba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38517711-e570-4337-b269-addcf8bfdd74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38530399-d2c9-4445-92ba-14c5cd438055	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38530399-d2c9-4445-92ba-14c5cd438055	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38530399-d2c9-4445-92ba-14c5cd438055	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 38530399-d2c9-4445-92ba-14c5cd438055	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 38538aff-b6f9-4c30-992e-7fd78da3c44a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38538aff-b6f9-4c30-992e-7fd78da3c44a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 386c5895-9713-4c28-9ba8-8ca0caa06c13	static#0.1	static#0.1	agreed	-	X	scen	1	0	Gate Colossus/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 386faeef-f5cc-4ef9-b8cb-6ef06b33cbd0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 386faeef-f5cc-4ef9-b8cb-6ef06b33cbd0	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3871cad2-e793-4c41-ac79-f84cbc2634a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3871cad2-e793-4c41-ac79-f84cbc2634a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nantuko-shaman:f0t0:s1,f:xs:XP:nantuko-shaman:f0t0:s1	-	-	-	9ee19e8250ce	-	d4d8f32180b2	-	-	2026-11-24	xproof
 3871cad2-e793-4c41-ac79-f84cbc2634a5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3875aef0-3102-4fbf-be90-e4139f7a2348	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 387b12b1-d8f5-487b-972f-5303b23eed5a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	553f18ed81ec	-	-	2026-11-24	xproof

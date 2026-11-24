@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 155e01a1-5809-4be9-ad38-c11553a4a723	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dual-Sun Adepts/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 155e01a1-5809-4be9-ad38-c11553a4a723	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dual-Sun Adepts/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1566af29-bd7b-41bb-a589-499348fbd32c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1566af29-bd7b-41bb-a589-499348fbd32c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1566af29-bd7b-41bb-a589-499348fbd32c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 15687ee3-3cdb-4a8f-a726-46b73bceb792	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15687ee3-3cdb-4a8f-a726-46b73bceb792	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15692698-ef57-4672-bf76-5fe4a00c693a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	77494c1ce129	-	44bfa4c768e9	-	-	2026-11-24	xproof

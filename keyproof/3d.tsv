@@ -50,8 +50,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d416f83-32b8-4dad-8e4d-3acd182bbe44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d416f83-32b8-4dad-8e4d-3acd182bbe44	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d416f83-32b8-4dad-8e4d-3acd182bbe44	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d416f83-32b8-4dad-8e4d-3acd182bbe44	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+3d416f83-32b8-4dad-8e4d-3acd182bbe44	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 3d416f83-32b8-4dad-8e4d-3acd182bbe44	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 3d4a7dd3-9258-4bd1-adc4-08f0205e196a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dwynen-s-elite:f0t0:s2,f:xs:XP:dwynen-s-elite:f0t0:s2	-	-	-	e07cf3a05ba5	-	3071cbc0d02e	-	-	2026-11-24	xproof
 3d4a7dd3-9258-4bd1-adc4-08f0205e196a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:dwynen-s-elite:f0t0:s2,f:xs:XP:dwynen-s-elite:f0t0:s2	-	-	-	e07cf3a05ba5	-	3071cbc0d02e	-	-	2026-11-24	xproof
@@ -205,8 +205,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3dee768a-612c-4960-bad2-2fe5b83a70c3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Yuna, Hope of Spira/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3dee768a-612c-4960-bad2-2fe5b83a70c3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Yuna, Hope of Spira/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3df0a392-bcc1-4456-bd6e-d044bcc83a16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 3df11e5c-19aa-441c-a889-6b40eb3fdabf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3df49c4d-a285-4826-824e-b742b0deed3a	cast	cast-resolve	agreed	-	X	scen	1	0	Confounding Riddle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3df4eb80-e8dd-4a9e-bd8a-b4b23fb9de6c	cast	cast-resolve	agreed	-	X	scen	1	0	Psychic Whorl/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

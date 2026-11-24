@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16923d37-bac0-4e6a-bd02-f3aa9360deeb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16923d37-bac0-4e6a-bd02-f3aa9360deeb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16923d37-bac0-4e6a-bd02-f3aa9360deeb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-169429d8-aa98-46a8-8681-521c65dafbb4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+169429d8-aa98-46a8-8681-521c65dafbb4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:needlepeak-spider:cast:s1,f:xs:XP:needlepeak-spider:cast:s1	-	-	-	9ee19e8250ce	-	08113fcadd97	-	-	2026-11-24	xproof
 169705c3-32c1-4628-b108-c37ca5f27e24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169705c3-32c1-4628-b108-c37ca5f27e24	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169728d6-7820-4a6d-a815-70714ad3e887	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -196,4 +196,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16fb84e1-0bc7-469c-bd73-40747be56d9e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16fe0abe-04fa-4023-8ee0-043a076e78bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16fe1f04-9bbf-43a3-ab14-395fdf4a3a43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16fe1f04-9bbf-43a3-ab14-395fdf4a3a43	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16fe1f04-9bbf-43a3-ab14-395fdf4a3a43	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof

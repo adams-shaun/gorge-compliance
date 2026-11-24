@@ -87,9 +87,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11809d9b-30f3-49d5-9119-e45b4de044c8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:knight-luminary:f0t0:s2,f:xs:XP:knight-luminary:f0t0:s2	-	-	-	267e485f6204	-	377f6a1d1bd3	-	-	2026-11-24	xproof
 11809d9b-30f3-49d5-9119-e45b4de044c8	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:knight-luminary:f0t0:s2,f:xs:XP:knight-luminary:f0t0:s2	-	-	-	267e485f6204	-	377f6a1d1bd3	-	-	2026-11-24	xproof
 11838086-db2f-4588-ae18-4129c9e2b67d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11838086-db2f-4588-ae18-4129c9e2b67d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11838086-db2f-4588-ae18-4129c9e2b67d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11838086-db2f-4588-ae18-4129c9e2b67d	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11838086-db2f-4588-ae18-4129c9e2b67d	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+11838086-db2f-4588-ae18-4129c9e2b67d	f0/t1	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+11838086-db2f-4588-ae18-4129c9e2b67d	f0/t2	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 1189b5d5-ca8f-4b4e-a5f1-91122a485cf3	cast	cast-resolve	agreed	-	FX	scen	2	0	Boundary Lands Ranger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1189b5d5-ca8f-4b4e-a5f1-91122a485cf3	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Boundary Lands Ranger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 118c4be1-2204-4133-a80e-990ef96c7e35	cast	cast-resolve	agreed	-	X	scen	1	0	Lithobraking/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11b7ee78-fca6-4b34-93e4-e60492583d50	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Agrus Kos, Spirit of Justice/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11b969f2-ff68-4c9e-b3f3-839736084303	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11b969f2-ff68-4c9e-b3f3-839736084303	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11b969f2-ff68-4c9e-b3f3-839736084303	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11b969f2-ff68-4c9e-b3f3-839736084303	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 11ba27f4-decf-4447-9808-0d58844655cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11ba27f4-decf-4447-9808-0d58844655cf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11bf211c-95a3-4e7f-bd08-13f979d54e73	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

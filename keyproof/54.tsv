@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 540693f3-985c-4a4a-945c-c957c5aad395	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Arbiter of Woe/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 540693f3-985c-4a4a-945c-c957c5aad395	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 540d1878-7afe-48a5-8b40-3dd1b06a024a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-540d1878-7afe-48a5-8b40-3dd1b06a024a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+540d1878-7afe-48a5-8b40-3dd1b06a024a	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 540e1371-baa9-412f-a17a-22ea833ea3e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 541744d9-449d-420a-a5a1-2fffba18450f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 541744d9-449d-420a-a5a1-2fffba18450f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -187,4 +187,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54f8acb1-58f3-49d1-bff8-c1b578245936	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54f8acb1-58f3-49d1-bff8-c1b578245936	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54fc373e-157f-4157-b7dd-74d689f4c0f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54fc373e-157f-4157-b7dd-74d689f4c0f9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+54fc373e-157f-4157-b7dd-74d689f4c0f9	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
