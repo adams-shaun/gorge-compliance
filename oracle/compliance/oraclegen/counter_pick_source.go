@@ -19,7 +19,8 @@ import (
 // fallback when the snapshot does not resolve it; onStack is false for that
 // fallback, so a caller needing the announcement step does not read a
 // synthesized object as a real stack entry.
-func counterPickSource(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapshot, d rules.OracleDecision, match func(*cards.SA) bool) (obj rules.OracleSnapStack, matched, onStack bool) {
+func counterPickSource(reg *cards.Registry, sc Scenario, g rules.OracleResult, d rules.OracleDecision, match func(*cards.SA) bool) (obj rules.OracleSnapStack, matched, onStack bool) {
+	snaps := g.Snapshots
 	if reg == nil || match == nil || d.Step < 0 {
 		return rules.OracleSnapStack{}, false, false
 	}
@@ -44,7 +45,7 @@ func counterPickSource(reg *cards.Registry, sc Scenario, snaps []rules.OracleSna
 					}
 					return o, counterPickAtTrigger(reg, src, idx, match), true
 				}
-				if sa := counterPickActivatedSA(reg, sc, d.Step, o.Source, src); sa != nil {
+				if sa := counterPickActivatedSA(reg, sc, g, d.Step, o.Source, src); sa != nil {
 					return o, counterPickInChain(sa, match), true
 				}
 				return o, counterPickOnCard(reg, src, match), true
@@ -78,10 +79,26 @@ func counterPickSource(reg *cards.Registry, sc Scenario, snaps []rules.OracleSna
 // identity digSourceForStep uses. source is the stack object's bound ref (what
 // the activate step names); face is the displayed card whose printed abilities
 // the step's index counts into.
-func counterPickActivatedSA(reg *cards.Registry, sc Scenario, step int, source, face string) *cards.SA {
+//
+// A step that names a granted, gained or keyword-granted ability (Gleam of
+// Authority's AddAbility$ ABBolster) carries an AbilityIndex that aliases a
+// printed one, or none at all, so it is resolved first through
+// ResolveActivatedAbility. An unresolved grant fails closed to no SA: the
+// printed index must never stand in for it.
+func counterPickActivatedSA(reg *cards.Registry, sc Scenario, g rules.OracleResult, step int, source, face string) *cards.SA {
+	it := Item{Scenario: Scenario{Setup: sc.Setup}}
 	for i := step - 1; i >= 0 && i < len(sc.Steps); i-- {
 		st := sc.Steps[i]
-		if st.Op != "activate" || st.Card != source || st.AbilityIndex == nil {
+		if st.Op != "activate" || st.Card != source {
+			continue
+		}
+		switch sa, kind := ResolveActivatedAbility(reg, it, i, st, g); kind {
+		case ActivatedGranted:
+			return sa
+		case ActivatedGrantedUnresolved:
+			return nil
+		}
+		if st.AbilityIndex == nil {
 			continue
 		}
 		c, ok := reg.Lookup(oraclediffRefName(face))

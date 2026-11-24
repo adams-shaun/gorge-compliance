@@ -47,12 +47,15 @@ func TestTerrapactIntimidatorChoiceAnswersOnTheYesNoQueue(t *testing.T) {
 // independently of xmageChooseUseFaces' polarity values, so the census below
 // compares the map against something other than itself.
 var xmageChooseUseTrueLabel = map[string]string{
+	"abundant harvest":          "Land",
 	"bane, lord of darkness":    "CARDNAME's controller draws a card.",
 	"combustible gearhulk":      "CARDNAME's controller draws three cards.",
 	"covenant of minds":         "You may choose to put those cards into that player's hand.",
 	"decoy gambit":              "CARDNAME's controller draws a card.",
 	"distant memories":          "Yes",
 	"inspirit, flagship vessel": "Put a +1/+1 counter on target artifact.",
+	"multiform wonder":          "-2/+2",
+	"spark of creativity":       "CARDNAME deals damage to target creature.",
 	"liar's pendulum":           "A card with the chosen name is in that player's hand.",
 	"palantír of orthanc":       "CARDNAME's controller draws a card.",
 	"sin prodder":               "Yes (take damage)",
@@ -94,7 +97,7 @@ func TestDecoyGambitDrawIsYesReturnIsNo(t *testing.T) {
 // XMage-source proof (see choice_dialog.go).
 func TestChooseUseFacesModeNumbersCensus(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
-	if len(xmageChooseUseFaces) != 11 || len(xmageChooseUseTrueLabel) != 11 {
+	if len(xmageChooseUseFaces) != 14 || len(xmageChooseUseTrueLabel) != 14 {
 		t.Fatalf("xmageChooseUseFaces has %d entries, true-label table %d; adding one needs an XMage-source proof (see its comment)",
 			len(xmageChooseUseFaces), len(xmageChooseUseTrueLabel))
 	}

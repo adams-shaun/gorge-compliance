@@ -19,21 +19,24 @@ import (
 //
 // The source is resolved by counterPickSource (counter_pick_source.go): the
 // stack snapshot at the decision's own step is the authority, with the step's
-// own cast/activate card as the fallback. The resolved ability's effect chain
-// must carry PutCounter's Bolster$ parameter. This is structural, not card- or
-// label-based: every Bolster carrier that names Bolster$ on its own printed
-// face (a spell, an activated ability or a trigger, including a copied one)
-// takes this route. A bolster ability GRANTED by another card (Gleam of
-// Authority's AddAbility$ ABBolster) lives in the grantor's SVar, not the
-// recipient's face, and is not seen here. A Support$ pick is XMage's target at
-// the source's ANNOUNCEMENT, not at resolution, and takes the separate
-// support_pick.go route; a bare Choices$/Chooser$ pick stays on the choice
-// queue.
-func bolsterTiePick(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapshot, d rules.OracleDecision) bool {
+// own cast/activate card as the fallback, each source read as its displayed
+// card (a copy keeps the original's bound ref on the stack). The resolved
+// ability's effect chain must carry PutCounter's Bolster$ parameter. This is
+// structural, not card- or label-based: every Bolster carrier that names
+// Bolster$ on its own printed face (a spell, an activated ability or a
+// trigger, including a copied one) takes this route. A bolster ability
+// GRANTED by another card (Gleam of Authority's AddAbility$ ABBolster) lives
+// in the grantor's SVar, not the recipient's face: the activate step is
+// resolved through ResolveActivatedAbility, the resolver every other
+// granted-ability routing uses, so the SA it names is the granted body
+// whatever grants it. A Support$ pick is XMage's target at the source's
+// ANNOUNCEMENT, not at resolution, and takes the separate support_pick.go
+// route; a bare Choices$/Chooser$ pick stays on the choice queue.
+func bolsterTiePick(reg *cards.Registry, sc Scenario, g rules.OracleResult, d rules.OracleDecision) bool {
 	if reg == nil || d.Step < 0 || pickKind(d, 0) != "counter_pick" {
 		return false
 	}
-	_, matched, _ := counterPickSource(reg, sc, snaps, d, bolsterMatch)
+	_, matched, _ := counterPickSource(reg, sc, g, d, bolsterMatch)
 	return matched
 }
 

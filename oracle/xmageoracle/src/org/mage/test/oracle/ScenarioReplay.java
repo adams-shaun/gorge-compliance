@@ -35,6 +35,7 @@ import mage.cards.CardWithSpellOption;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.DoubleFacedCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -1230,8 +1231,36 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * own answer and stays for TestPlayer; a non-empty sideboard still asks
          * because the card may be chosen. */
         static boolean unanswerableWishAsk(String message, boolean sideboardEmpty, List<String> choices) {
+            // The plain wish ("Put a card you own from outside the game ...")
+            // and the filtered one (Burning, Cunning, Glittering, Golden and
+            // Living Wish: "Reveal a <filter> card you own from outside the
+            // game and put it into your hand?") are the same candidate-free
+            // ask over an empty sideboard.
             if (message == null || !sideboardEmpty
-                    || !message.startsWith("Put a card you own from outside the game")) {
+                    || !(message.startsWith("Put a card you own from outside the game")
+                    || message.startsWith("Reveal ")
+                    && message.endsWith(" card you own from outside the game and put it into your hand?"))) {
+                return false;
+            }
+            if (!choices.isEmpty()) {
+                String head = choices.get(0);
+                if (head.equals("Yes") || head.equals("No")) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /** An unscripted "Put a <kind> card from your hand onto the battlefield?"
+         * chooseUse (Elvish Piper, Terrain Generator, Dragon Arch, Metathran
+         * Aerostat) over an EMPTY hand has no candidate and gorge records no
+         * decision for it, yet XMage asks the may before it looks at the hand.
+         * Decline it rather than strict-miss. A queued Yes/No is the
+         * generator's own answer and stays for TestPlayer; a non-empty hand
+         * still asks because the filter may admit one of its cards. */
+        static boolean unanswerableHandPutAsk(String message, boolean handEmpty, List<String> choices) {
+            if (message == null || !handEmpty || !message.startsWith("Put ")
+                    || !message.endsWith(" from your hand onto the battlefield?")) {
                 return false;
             }
             if (!choices.isEmpty()) {
@@ -1267,6 +1296,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // own from outside the game into your hand") the prompt has no
                 // candidate and gorge records no decision, so decline it rather
                 // than let strict mode stop at "Missing CHOICE def".
+                return false;
+            }
+            if (unanswerableHandPutAsk(message, getHand().isEmpty(), getChoices())) {
                 return false;
             }
             if (phyrexianStarved(message, getChoices())) {
@@ -1709,6 +1741,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         headNamesCandidate = true;
                         break;
                     }
+                    // A player candidate is no MageObject: a TargetOpponent's
+                    // lone opponent (ClashEffect's "an opponent to clash
+                    // with") is named by the player's own name, the answer
+                    // the generator scripted for the controller's pick.
+                    Player candidate = game.getPlayer(id);
+                    if (candidate != null && candidate.getName().equals(head)) {
+                        headNamesCandidate = true;
+                        break;
+                    }
                 }
             }
             if (!forcedPick(target.getMinNumberOfTargets() - target.getSize(), candidates.size(), head, headNamesCandidate)) {
@@ -1734,6 +1775,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
             choiceGame = game;
             boolean declined = declinePairToChoiceSkip(target.getMinNumberOfTargets(), getChoices(), getTargets());
             try {
+                if (forcedChooseCards(cards, target, source, game)) {
+                    return true;
+                }
                 return super.choose(outcome, cards, target, source, game);
             } finally {
                 if (declined && !getChoices().isEmpty() && TestPlayer.CHOICE_SKIP.equals(getChoices().get(0))) {
@@ -1744,6 +1788,40 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
                 choiceGame = previous;
             }
+        }
+
+        /** The choose(Cards, TargetCard) twin of forcedChoose: a look-and-pick
+         * whose every remaining card is needed (Moment of Truth's last card of
+         * three, Skyclave Plunder's three of three, Expressive Iteration's
+         * last exile) is no decision gorge records, yet XMage asks it, so
+         * the cards are taken here unless the choice queue's head is a name
+         * for one of them or a skip. */
+        private boolean forcedChooseCards(Cards cards, mage.target.TargetCard target, Ability source, Game game) {
+            UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+            List<UUID> candidates = new ArrayList<>();
+            for (UUID id : target.possibleTargets(abilityControllerId, source, game, cards)) {
+                if (!target.contains(id)) {
+                    candidates.add(id);
+                }
+            }
+            String head = getChoices().isEmpty() ? null : getChoices().get(0);
+            boolean headNamesCandidate = false;
+            if (head != null) {
+                for (UUID id : candidates) {
+                    mage.MageObject o = game.getObject(id);
+                    if (o != null && hasObjectTargetNameOrAlias(o, head)) {
+                        headNamesCandidate = true;
+                        break;
+                    }
+                }
+            }
+            if (!forcedPick(target.getMinNumberOfTargets() - target.getSize(), candidates.size(), head, headNamesCandidate)) {
+                return false;
+            }
+            for (UUID id : candidates) {
+                target.add(id, game);
+            }
+            return true;
         }
 
         /** The generator scripts a declined pick as a pair -- "No" on the
@@ -6895,7 +6973,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             case "play": {
                 String playRef = str(st, "card");
-                String landName = xmageSpelling(refName(playRef));
+                // A land play of a modal DFC with a nonland front enters its
+                // land back (CR 712.12, 305.1), and XMage's PlayLandAbility
+                // reads "Play <back face>"; naming the front finds nothing.
+                String landName = playLandName(xmageSpelling(refName(playRef)));
                 String playAlias = refAlias.get(playRef);
                 if (playAlias == null) {
                     playUnaliasedLand(p, playRef, landName);
@@ -7382,6 +7463,35 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         });
         return "@" + key + " " + text;
+    }
+
+    /**
+     * The name XMage's land-play command must carry for a card: a modal
+     * double-faced card whose left half is not a land and whose right half
+     * is enters that right half on a land play (CR 712.12, 305.1), and the
+     * PlayLandAbility reads "Play <right half>". A land-front modal DFC (a
+     * Pathway) and every plain land keep the name the ref spells.
+     *
+     * Card-based and package-private so a contract test can pin the rule
+     * without the card repository (which needs H2); the name-based overload
+     * resolves the ref's card through CardRepository at queue time.
+     */
+    static String playLandName(Card card, String fallback) {
+        if (card instanceof ModalDoubleFacedCard) {
+            ModalDoubleFacedCard mdfc = (ModalDoubleFacedCard) card;
+            if (!mdfc.getLeftHalfCard().isLand() && mdfc.getRightHalfCard().isLand()) {
+                return mdfc.getRightHalfCard().getName();
+            }
+        }
+        return fallback;
+    }
+
+    /** The XMage land-play name for the named card, or the name unchanged
+     * when the card repository cannot resolve it. */
+    private static String playLandName(String name) {
+        CardInfo info = CardRepository.instance.findCard(name);
+        Card card = info == null ? null : info.createCard();
+        return playLandName(card, name);
     }
 
     /**

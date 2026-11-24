@@ -42,11 +42,12 @@ type supportAnswers struct {
 // resolved inside the decision's own step never shows in a checkpoint (the
 // generated cast-resolve shape): only its permanent spell does, and the answers
 // stay on that step (supportSpellTrigger).
-func supportPick(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapshot, d rules.OracleDecision) (supportAnswers, bool) {
+func supportPick(reg *cards.Registry, sc Scenario, g rules.OracleResult, d rules.OracleDecision) (supportAnswers, bool) {
+	snaps := g.Snapshots
 	if reg == nil || d.Step < 0 || d.Resume != "counter_pick" {
 		return supportAnswers{}, false
 	}
-	obj, matched, onStack := counterPickSource(reg, sc, snaps, d, supportMatch)
+	obj, matched, onStack := counterPickSource(reg, sc, g, d, supportMatch)
 	step := d.Step
 	switch {
 	case !matched:
