@@ -207,6 +207,12 @@ and systemd user scopes (`systemd-run --user`), which also cap the JVMs when the
 XMage's JDK, so build XMage first. Passes start a JVM per batch; on a shared machine, set
 `HEAVY_LOCK` to whatever serialises heavy jobs there (`scripts/heavy-lock.sh` has the interface).
 
+`MEASURE.md` in the XMage build directory names the `XMAGE_REF` the tree was built from; a replay
+against a tree built at another ref measures that ref, not the one in the Makefile. After an
+`XMAGE_REF` bump, re-run `make xmage-oracle-setup` before any replay, and check the farm kit's
+prebuilt `kit/xmage-oracle.tar.zst` was refreshed with it (the kit build must rebuild that
+tarball on the bump, not only the gorge and compliance tarballs).
+
 ### The XMage seat engine (`scripts/xmage-sbv2.sh`)
 
 Not an oracle: SpellBench upstream's XMage engine, which poses every seat decision over the v2 protocol so a

@@ -1322,7 +1322,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var bolster map[int]bool
 	var snaps []rules.OracleSnapshot
 	var orderAsks map[int]bool
+	var sources map[int][]string
 	for _, ex := range extras {
+		if sources == nil {
+			sources = ex.sources
+		}
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
 		}
@@ -1410,6 +1414,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	if searchZones != nil {
 		routing.searchZones = searchZones
 	}
+	routing.sources = sources
 	searchZoneSuppress := searchZoneRedundantBooleans(ds, searchZones)
 	// RemoveCounter's CounterType$ Any/All election is one per-counter run of
 	// KChoose picks in gorge but one multi-amount dialog in XMage: fold the

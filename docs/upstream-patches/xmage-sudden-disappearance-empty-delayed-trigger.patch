@@ -1,0 +1,158 @@
+diff --git a/Mage.Sets/src/mage/cards/l/LaezelsAcrobatics.java b/Mage.Sets/src/mage/cards/l/LaezelsAcrobatics.java
+index 6a0cb27..d25aa04 100644
+--- a/Mage.Sets/src/mage/cards/l/LaezelsAcrobatics.java
++++ b/Mage.Sets/src/mage/cards/l/LaezelsAcrobatics.java
+@@ -88,9 +88,16 @@ class LaezelsAcrobaticsEffect extends RollDieWithResultTableEffect {
+                 }
+             }
+             game.processAction();
+-            Effect effect = new ExileReturnBattlefieldNextEndStepTargetEffect();
+-            effect.setTargetPointer(new FixedTargets(toFlicker, game));
+-            effect.apply(game, source);
++            if (toFlicker.isEmpty()) {
++                // CR 603.7a: the delayed return ability is created even when no creature was exiled.
++                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
++                effect.setTargetPointer(new FixedTargets(new CardsImpl(), game));
++                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
++            } else {
++                Effect effect = new ExileReturnBattlefieldNextEndStepTargetEffect();
++                effect.setTargetPointer(new FixedTargets(toFlicker, game));
++                effect.apply(game, source);
++            }
+         }
+         return true;
+     }
+diff --git a/Mage.Sets/src/mage/cards/s/SuddenDisappearance.java b/Mage.Sets/src/mage/cards/s/SuddenDisappearance.java
+index c3e2fe5..30868d1 100644
+--- a/Mage.Sets/src/mage/cards/s/SuddenDisappearance.java
++++ b/Mage.Sets/src/mage/cards/s/SuddenDisappearance.java
+@@ -1,9 +1,11 @@
+ package mage.cards.s;
+ 
+ import mage.abilities.Ability;
++import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+ import mage.abilities.effects.Effect;
+ import mage.abilities.effects.OneShotEffect;
+ import mage.abilities.effects.common.ExileReturnBattlefieldNextEndStepTargetEffect;
++import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+ import mage.cards.CardImpl;
+ import mage.cards.CardSetInfo;
+ import mage.cards.Cards;
+@@ -61,7 +63,12 @@ class SuddenDisappearanceEffect extends OneShotEffect {
+         }
+         Cards targets = new CardsImpl(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENTS_NON_LAND, player.getId(), game));
+         if (targets.isEmpty()) {
+-            return false;
++            // CR 603.7a: the delayed return ability is created whenever this effect resolves, even when
++            // the player controls no nonland permanent; it then returns nothing.
++            Effect returnEffect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true);
++            returnEffect.setTargetPointer(new FixedTargets(new CardsImpl(), game));
++            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnEffect), source);
++            return true;
+         }
+         Effect effect = new ExileReturnBattlefieldNextEndStepTargetEffect().returnExiledOnly(true);
+         effect.setTargetPointer(new FixedTargets(targets, game));
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/SuddenDisappearanceTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/SuddenDisappearanceTest.java
+new file mode 100644
+index 0000000..311fec0
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/SuddenDisappearanceTest.java
+@@ -0,0 +1,57 @@
++package org.mage.test.cards.single;
++
++import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Assert;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * CR 603.7a: the resolving spell creates the delayed "return the exiled cards" ability
++ * whether or not anything was exiled; with nothing exiled it triggers and returns nothing.
++ */
++public class SuddenDisappearanceTest extends CardTestPlayerBase {
++
++    private static final String disappearance = "Sudden Disappearance";
++
++    @Test
++    public void test_DelayedReturnTriggerWhenTargetPlayerControlsNothing() {
++        setStrictChooseMode(true);
++
++        addCard(Zone.HAND, playerA, disappearance);
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
++        // playerB controls only lands, no nonland permanents
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, disappearance, playerB);
++
++        runCode("delayed return trigger at the beginning of the next end step", 1, PhaseStep.END_TURN, playerA,
++                (info, player, game) -> {
++                    Assert.assertEquals("one delayed ability on the stack", 1, game.getStack().size());
++                    Assert.assertTrue("the delayed return ability is on the stack",
++                            game.getStack().getFirstOrNull().getStackAbility() instanceof AtTheBeginOfNextEndStepDelayedTriggeredAbility);
++                });
++
++        setStopAt(1, PhaseStep.END_TURN);
++        execute();
++
++        assertExileCount(playerB, 0);
++    }
++
++    @Test
++    public void test_ReturnsExiledPermanentsAtEndStep() {
++        addCard(Zone.HAND, playerA, disappearance);
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
++        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, disappearance, playerB);
++
++        checkExileCount("bears exiled", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Grizzly Bears", 1);
++
++        setStopAt(2, PhaseStep.UPKEEP);
++        execute();
++
++        assertPermanentCount(playerB, "Grizzly Bears", 1);
++        assertExileCount(playerB, 0);
++    }
++}
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/clb/LaezelsAcrobaticsTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/clb/LaezelsAcrobaticsTest.java
+index c6ea9a9..72b638c 100644
+--- a/Mage.Tests/src/test/java/org/mage/test/cards/single/clb/LaezelsAcrobaticsTest.java
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/clb/LaezelsAcrobaticsTest.java
+@@ -1,7 +1,9 @@
+ package org.mage.test.cards.single.clb;
+ 
++import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+ import mage.constants.PhaseStep;
+ import mage.constants.Zone;
++import org.junit.Assert;
+ import org.junit.Test;
+ import org.mage.test.serverside.base.CardTestPlayerBase;
+ 
+@@ -90,4 +92,26 @@ public class LaezelsAcrobaticsTest extends CardTestPlayerBase {
+         assertLife(playerB, 20);
+     }
+ 
++    // CR 603.7a: with no nontoken creature to exile, the delayed return ability is still created
++    // by the 10-20 result and goes on the stack at the beginning of the end step.
++    @Test
++    public void testRollHighNoCreatures() {
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
++        addCard(Zone.HAND, playerA, acrobatics);
++
++        setDieRollResult(playerA, 10);
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, acrobatics);
++
++        runCode("delayed return trigger at the beginning of the next end step", 1, PhaseStep.END_TURN, playerA,
++                (info, player, game) -> {
++                    Assert.assertEquals("one delayed ability on the stack", 1, game.getStack().size());
++                    Assert.assertTrue("the delayed return ability is on the stack",
++                            game.getStack().getFirstOrNull().getStackAbility() instanceof AtTheBeginOfNextEndStepDelayedTriggeredAbility);
++                });
++
++        setStrictChooseMode(true);
++        setStopAt(1, PhaseStep.END_TURN);
++        execute();
++    }
++
+ }

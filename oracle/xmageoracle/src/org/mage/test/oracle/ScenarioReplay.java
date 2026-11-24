@@ -350,6 +350,50 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** Whether the replay followed a recorded pass position (turn/step/active seat). */
     private boolean followedPassPosition = false;
 
+    /** Index of the one rule a trigger-order key picks by wording, or -1.
+     * Returns -1 when some rule already prefix-matches the key verbatim (then
+     * TestPlayer's own match is the answer) and when zero or several rules
+     * match after normalisation. */
+    static int triggerKeyMatch(String key, List<String> rules, String sourceName) {
+        for (String rule : rules) {
+            if (rule.startsWith(key)) {
+                return -1;
+            }
+        }
+        String want = triggerKeyForm(key, sourceName);
+        if (want.endsWith(".")) {
+            want = want.substring(0, want.length() - 1).trim();
+        }
+        if (want.isEmpty()) {
+            return -1;
+        }
+        int found = -1;
+        for (int i = 0; i < rules.size(); i++) {
+            if (triggerKeyForm(rules.get(i), sourceName).startsWith(want)) {
+                if (found >= 0) {
+                    return -1;
+                }
+                found = i;
+            }
+        }
+        return found;
+    }
+
+    /** Rule text folded for a wording-tolerant prefix match: markup dropped,
+     * lower case, the source's name as "{this}", whitespace collapsed, and a
+     * leading "when " / "whenever " as one token. */
+    static String triggerKeyForm(String text, String sourceName) {
+        String t = text.replaceAll("<[^<>]*>", "").toLowerCase(java.util.Locale.ROOT);
+        if (sourceName != null && !sourceName.isEmpty()) {
+            t = t.replace(sourceName.toLowerCase(java.util.Locale.ROOT), "{this}");
+        }
+        t = t.replaceAll("\\s+", " ").trim();
+        if (t.startsWith("whenever ")) {
+            t = "when " + t.substring("whenever ".length());
+        }
+        return t;
+    }
+
     /** TestPlayer normally delegates these library decisions directly to its AI,
      * bypassing the scripted target/choice queues. Route them through this player. */
     private static final class ScriptedChoicePlayer extends TestPlayer {
@@ -392,6 +436,36 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 getManaPool().setAutoPayment(autoPaymentBefore);
                 autoPaymentBefore = null;
             }
+        }
+
+        /** A same-source trigger-order key spelled in Forge's wording.
+         * TestPlayer matches the head choice with
+         * ability.toString().startsWith(choice) only; the generator's key is
+         * Forge's TriggerDescription$, which words the same trigger "When ..."
+         * where XMage prints "Whenever ..." (Hero of Oxid Ridge) and ends the
+         * key at a period where XMage's text continues (Nefarox's "sacrifices
+         * a creature of their choice."). An unmatched head is a strict
+         * "Missing CHOICE def" there. When the head prefix-matches no ability,
+         * take the one ability whose normalised rule starts with the
+         * normalised key (CR 603.3b: the controller's pick); none or several
+         * matching keeps TestPlayer's own handling. */
+        @Override
+        public mage.abilities.TriggeredAbility chooseTriggeredAbility(
+                List<mage.abilities.TriggeredAbility> abilities, Game game) {
+            if (!getChoices().isEmpty()) {
+                String choice = getChoices().get(0);
+                List<String> rules = new ArrayList<>();
+                for (mage.abilities.TriggeredAbility ability : abilities) {
+                    rules.add(ability.toString());
+                }
+                String name = abilities.isEmpty() ? "" : abilities.get(0).getSourceObject(game).getName();
+                int at = triggerKeyMatch(choice, rules, name);
+                if (at >= 0) {
+                    getChoices().remove(0);
+                    return abilities.get(at);
+                }
+            }
+            return super.chooseTriggeredAbility(abilities, game);
         }
 
         /** Run only the queued commands of the current phase occurrence.
@@ -604,6 +678,40 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return false;
         }
 
+        /** Expand the front choice when oraclegen joined a multi-pick choose
+         * with "^" (JoinedChoice): each segment is one pick, resolved the way
+         * the single-answer path resolves a value (an "@ref" alias is bound
+         * and kept, a bare ref becomes its alias, a plain label is unchanged).
+         * Null when the front choice is not joined, so callers can use the
+         * queue as the pick list unchanged. */
+        private List<String> joinedChoiceSegments() {
+            if (getChoices().isEmpty()) {
+                return null;
+            }
+            String front = getChoices().get(0);
+            if (front == null || front.indexOf('^') < 0) {
+                return null;
+            }
+            List<String> segments = new ArrayList<>();
+            for (String segment : front.split("\\^")) {
+                segments.add(resolveDelvePick(segment));
+            }
+            return segments;
+        }
+
+        /** One "^" segment of a joined answer as the choice queue would hold
+         * it on its own: strip the "@" alias marker to find the ref, then let
+         * the answer path bind it and map it to its target spelling (an
+         * already-aliased ref comes back as its alias). A non-ref label is
+         * unchanged. */
+        private String resolveDelvePick(String segment) {
+            String ref = segment.startsWith("@") ? segment.substring(1) : segment;
+            if (owner != null && isScenarioRef(ref)) {
+                return owner.aliasChoiceValue(ref);
+            }
+            return segment;
+        }
+
         /** Translate gorge's recorded Delve exile picks (CR 702.66a: one
          * choose_n pick per exiled card, the bare card name; the ask's
          * trailing [choice_skip] is the Done option) at the front of the
@@ -620,9 +728,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * cycle, where XMage re-adds the action, as gorge re-poses its ask
          * per pick. Taken only when the Delve special action lists a card of
          * the front answer's name among its legal (graveyard) targets; false
-         * (nothing queued) otherwise. */
+         * (nothing queued) otherwise.
+         * <p>
+         * oraclegen scripts a multi-pick choose as ONE makeChoose answer, with
+         * its picks joined by "^" (see JoinedChoice in gen.go). The front
+         * answer is expanded into its individual picks before matching, and
+         * the picks this activation cannot take stay on the queue as separate
+         * entries for the next payment cycle. */
         private boolean queueDelveAction(Game game,
                 java.util.Collection<mage.abilities.SpecialAction> actions) {
+            // A joined answer is still one queue entry until a Delve action
+            // accepts a pick: only commit the split once something matched, so
+            // a non-Delve front answer is left exactly as it was.
+            List<String> joined = joinedChoiceSegments();
             for (mage.abilities.SpecialAction action : actions) {
                 // The class is the stable identity: the rule text leads with
                 // the exile cost, so it never starts with "Delve".
@@ -638,11 +756,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
                 mage.target.Target target = targets.get(0);
                 Set<UUID> legal = target.possibleTargets(getId(), action, game);
+                List<String> picks = joined != null ? joined : getChoices();
                 List<String> picked = new ArrayList<>();
                 Set<UUID> used = new java.util.HashSet<>();
-                while (picked.size() < getChoices().size() && used.size() < legal.size()
+                while (picked.size() < picks.size() && used.size() < legal.size()
                         && picked.size() < target.getMaxNumberOfTargets()) {
-                    String name = getChoices().get(picked.size());
+                    String name = picks.get(picked.size());
                     UUID found = null;
                     for (UUID id : legal) {
                         if (!used.contains(id)
@@ -659,6 +778,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
                 if (picked.isEmpty()) {
                     continue;
+                }
+                if (joined != null) {
+                    // Replace the one joined answer with its picks now that the
+                    // action has taken some: the leading picks are removed
+                    // below, so the rest remain queued one per entry for the
+                    // next payment cycle.
+                    getChoices().remove(0);
+                    for (int i = joined.size() - 1; i >= 0; i--) {
+                        getChoices().add(0, joined.get(i));
+                    }
                 }
                 for (int i = 0; i < picked.size(); i++) {
                     getChoices().remove(0);
@@ -1102,8 +1231,36 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * own answer and stays for TestPlayer; a non-empty sideboard still asks
          * because the card may be chosen. */
         static boolean unanswerableWishAsk(String message, boolean sideboardEmpty, List<String> choices) {
+            // The plain wish ("Put a card you own from outside the game ...")
+            // and the filtered one (Burning, Cunning, Glittering, Golden and
+            // Living Wish: "Reveal a <filter> card you own from outside the
+            // game and put it into your hand?") are the same candidate-free
+            // ask over an empty sideboard.
             if (message == null || !sideboardEmpty
-                    || !message.startsWith("Put a card you own from outside the game")) {
+                    || !(message.startsWith("Put a card you own from outside the game")
+                    || message.startsWith("Reveal ")
+                    && message.endsWith(" card you own from outside the game and put it into your hand?"))) {
+                return false;
+            }
+            if (!choices.isEmpty()) {
+                String head = choices.get(0);
+                if (head.equals("Yes") || head.equals("No")) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /** An unscripted "Put a <kind> card from your hand onto the battlefield?"
+         * chooseUse (Elvish Piper, Terrain Generator, Dragon Arch, Metathran
+         * Aerostat) over an EMPTY hand has no candidate and gorge records no
+         * decision for it, yet XMage asks the may before it looks at the hand.
+         * Decline it rather than strict-miss. A queued Yes/No is the
+         * generator's own answer and stays for TestPlayer; a non-empty hand
+         * still asks because the filter may admit one of its cards. */
+        static boolean unanswerableHandPutAsk(String message, boolean handEmpty, List<String> choices) {
+            if (message == null || !handEmpty || !message.startsWith("Put ")
+                    || !message.endsWith(" from your hand onto the battlefield?")) {
                 return false;
             }
             if (!choices.isEmpty()) {
@@ -1139,6 +1296,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // own from outside the game into your hand") the prompt has no
                 // candidate and gorge records no decision, so decline it rather
                 // than let strict mode stop at "Missing CHOICE def".
+                return false;
+            }
+            if (unanswerableHandPutAsk(message, getHand().isEmpty(), getChoices())) {
                 return false;
             }
             if (phyrexianStarved(message, getChoices())) {
@@ -1277,7 +1437,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (choices.isEmpty()) {
                 choices.add("1");
             } else {
-                choices.set(0, "1");
+                // Replace only the election itself: a scripted "Yes", or the
+                // plain cast's "Cast with no alternative cost" decline queued
+                // above. Any other head is a real answer for a later ask on
+                // the same cast (Mine Collapse's sacrifice pick); overwriting
+                // it left that answer to be consumed by the cost's target ask.
+                String head = choices.get(0);
+                if (head.equals("Yes") || head.equals("Cast with no alternative cost")) {
+                    choices.set(0, "1");
+                } else {
+                    choices.add(0, "1");
+                }
             }
             return true;
         }
@@ -1570,6 +1740,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         headNamesCandidate = true;
                         break;
                     }
+                    // A player candidate is no MageObject: a TargetOpponent's
+                    // lone opponent (ClashEffect's "an opponent to clash
+                    // with") is named by the player's own name, the answer
+                    // the generator scripted for the controller's pick.
+                    Player candidate = game.getPlayer(id);
+                    if (candidate != null && candidate.getName().equals(head)) {
+                        headNamesCandidate = true;
+                        break;
+                    }
                 }
             }
             if (!forcedPick(target.getMinNumberOfTargets() - target.getSize(), candidates.size(), head, headNamesCandidate)) {
@@ -1715,6 +1894,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
             choiceGame = game;
             boolean declined = declinePairToChoiceSkip(target.getMinNumberOfTargets(), getChoices(), getTargets());
             try {
+                if (forcedChooseCards(cards, target, source, game)) {
+                    return true;
+                }
                 return super.choose(outcome, cards, target, source, game);
             } finally {
                 if (declined && !getChoices().isEmpty() && TestPlayer.CHOICE_SKIP.equals(getChoices().get(0))) {
@@ -1725,6 +1907,40 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
                 choiceGame = previous;
             }
+        }
+
+        /** The choose(Cards, TargetCard) twin of forcedChoose: a look-and-pick
+         * whose every remaining card is needed (Moment of Truth's last card of
+         * three, Skyclave Plunder's three of three, Expressive Iteration's
+         * last exile) is no decision gorge records, yet XMage asks it, so
+         * the cards are taken here unless the choice queue's head is a name
+         * for one of them or a skip. */
+        private boolean forcedChooseCards(Cards cards, mage.target.TargetCard target, Ability source, Game game) {
+            UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+            List<UUID> candidates = new ArrayList<>();
+            for (UUID id : target.possibleTargets(abilityControllerId, source, game, cards)) {
+                if (!target.contains(id)) {
+                    candidates.add(id);
+                }
+            }
+            String head = getChoices().isEmpty() ? null : getChoices().get(0);
+            boolean headNamesCandidate = false;
+            if (head != null) {
+                for (UUID id : candidates) {
+                    mage.MageObject o = game.getObject(id);
+                    if (o != null && hasObjectTargetNameOrAlias(o, head)) {
+                        headNamesCandidate = true;
+                        break;
+                    }
+                }
+            }
+            if (!forcedPick(target.getMinNumberOfTargets() - target.getSize(), candidates.size(), head, headNamesCandidate)) {
+                return false;
+            }
+            for (UUID id : candidates) {
+                target.add(id, game);
+            }
+            return true;
         }
 
         /** The generator scripts a declined pick as a pair -- "No" on the
@@ -4310,7 +4526,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** Whether a cast step's cast_mode is one this driver elects: Bargain,
      * "optionalcost", "kicked" (the single Kicker ask; kicked1/kicked2/kickedboth/
      * multikicked pose per-kicker asks in order and stay rejected), the face-down Disguise/Morph/Megamorph casts, the "plot" and
-     * "suspend" special actions, a graveyard "flashback" cast, and a "mayplay" cast of a card a
+     * "suspend" and "foretell" special actions, a graveyard "flashback" cast, and a "mayplay" cast of a card a
      * play-from-exile permission (Reckless Impulse) reaches are wired
      * ("plot_cast", the later cast of a plotted card, is not); so are the
      * "adventure_alt"/"omen_alt" casts of an Adventure or Omen half, whose
@@ -4326,6 +4542,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // "suspend": Suspend from hand (CR 702.62a) is a special action
                 // (CR 116.2f), XMage's SuspendAbility, activated like Plot.
                 || mode.equals("suspend")
+                // "foretell": Foretell from hand (CR 702.143a) is a special
+                // action (CR 116.2h), XMage's ForetellAbility, activated like Plot.
+                || mode.equals("foretell")
                 // "mayplay": the card is in exile (or wherever a play-from-exile
                 // permission reaches) rather than hand, but the cast itself is
                 // the card's ordinary SpellAbility, played by name. TestPlayer's
@@ -4540,30 +4759,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         }
         super.addCard(gameZone, player, setCode.isEmpty() ? cardName : setCode + "-" + cardName, count, tapped);
-    }
-
-    /** The name XMage gives a land play of the named card: "Play <name>".
-     * A modal DFC played as a land enters with a land face up (CR 712.12),
-     * and XMage puts its PlayLandAbility on that half under the half's own
-     * name, so a nonland front (Glasspool Mimic) plays by its land back
-     * (Glasspool Shore). Any other card keeps its name. */
-    private static String landPlayName(String name) {
-        CardInfo info = CardRepository.instance.findCard(name, true);
-        return landFaceName(info == null ? null : info.createCard(), name);
-    }
-
-    /** landPlayName's rule on a created card: the right half's name when c
-     * is a modal DFC whose left half is not a land and whose right half is;
-     * otherwise name. */
-    static String landFaceName(Card c, String name) {
-        if (c instanceof ModalDoubleFacedCard) {
-            Card left = ((ModalDoubleFacedCard) c).getLeftHalfCard();
-            Card right = ((ModalDoubleFacedCard) c).getRightHalfCard();
-            if (!left.isLand() && right.isLand()) {
-                return right.getName();
-            }
-        }
-        return name;
     }
 
     /** The front half of a split/Room card's "A // B" name, or the name
@@ -6681,6 +6876,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), suspendText, stepIdx));
                     return;
                 }
+                // "foretell" is XMage's Foretell special action from the hand
+                // (ForetellAbility is a SpecialAction with usesStack false,
+                // CR 116.2h): it pays {2} and exiles the card face down, no
+                // cast and no stack. Activated by its rule-text prefix
+                // "Foretell {cost}" like XMage's own foretell tests, scoped to
+                // the step's card so another foretell card in hand cannot be
+                // picked.
+                if ("foretell".equals(castMode)) {
+                    String foretellText = xabilityAt(stepIdx);
+                    if (foretellText.isEmpty()) {
+                        throw new IllegalArgumentException("foretell step " + stepIdx + " has no xmage_ability");
+                    }
+                    activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), foretellText, stepIdx));
+                    return;
+                }
                 // "flashback" is the cast of a graveyard card for its
                 // flashback cost. XMage offers it as a separate SpellAbility
                 // named "Flashback <cost>" (CastFromGraveyardAbility), picked
@@ -6763,11 +6973,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     faceDownRefs.add(str(st, "card"));
                 }
                 List<String> tg = targets(st);
-                if (!warpedCast && hasAlternativeSourceCost(cardName)) {
+                if (!warpedCast && !alternativeCostCast && hasAlternativeSourceCost(cardName)) {
                     // A plain cast step: gorge paid the mana cost, so decline
                     // the alternative cost (evoke, impending, dash, ...)
                     // XMage offers through its "Cast with no alternative
-                    // cost" choice, rather than leave it to the AI.
+                    // cost" choice, rather than leave it to the AI. An
+                    // "alternative" step already elected the cost through the
+                    // key menu (alternativeCostKey); queuing a decline there
+                    // left it for the elected cost's own target ask.
                     setChoice(p, "Cast with no alternative cost");
                 }
                 List<Integer> skips = castTargetSkipsAt(stepIdx, cardName, tg.size());
@@ -6911,7 +7124,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             case "play": {
                 String playRef = str(st, "card");
-                String landName = landPlayName(xmageSpelling(refName(playRef)));
+                // A land play of a modal DFC with a nonland front enters its
+                // land back (CR 712.12, 305.1), and XMage's PlayLandAbility
+                // reads "Play <back face>"; naming the front finds nothing.
+                String landName = playLandName(xmageSpelling(refName(playRef)));
                 String playAlias = refAlias.get(playRef);
                 if (playAlias == null) {
                     playUnaliasedLand(p, playRef, landName);
@@ -7398,6 +7614,35 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         });
         return "@" + key + " " + text;
+    }
+
+    /**
+     * The name XMage's land-play command must carry for a card: a modal
+     * double-faced card whose left half is not a land and whose right half
+     * is enters that right half on a land play (CR 712.12, 305.1), and the
+     * PlayLandAbility reads "Play <right half>". A land-front modal DFC (a
+     * Pathway) and every plain land keep the name the ref spells.
+     *
+     * Card-based and package-private so a contract test can pin the rule
+     * without the card repository (which needs H2); the name-based overload
+     * resolves the ref's card through CardRepository at queue time.
+     */
+    static String playLandName(Card card, String fallback) {
+        if (card instanceof ModalDoubleFacedCard) {
+            ModalDoubleFacedCard mdfc = (ModalDoubleFacedCard) card;
+            if (!mdfc.getLeftHalfCard().isLand() && mdfc.getRightHalfCard().isLand()) {
+                return mdfc.getRightHalfCard().getName();
+            }
+        }
+        return fallback;
+    }
+
+    /** The XMage land-play name for the named card, or the name unchanged
+     * when the card repository cannot resolve it. */
+    private static String playLandName(String name) {
+        CardInfo info = CardRepository.instance.findCard(name);
+        Card card = info == null ? null : info.createCard();
+        return playLandName(card, name);
     }
 
     /**

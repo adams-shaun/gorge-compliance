@@ -199,7 +199,16 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 			seats[i] = scripted{bot: bot, script: &script}
 		}
 	}
-	cfg := rules.Config{Names: names, Decks: dk, Tokens: reg.Tokens, Seed: seed, NameUniverse: reg.Universe(), Start: opt.Start}
+	// The live game and the oracle runner must offer the same card names: the
+	// runner scopes a scenario's name asks to its seated cards (gorge's
+	// oracleNameUniverse), so a name this game picks outside them can never be
+	// replayed. NamedCorpus stays the whole registry for the derived
+	// vocabularies and "copy the card named N", exactly as the runner wires it.
+	cfg := rules.Config{
+		Names: names, Decks: dk, Tokens: reg.Tokens, Seed: seed,
+		NamedCorpus: reg.Universe(), NameUniverse: decks.NameUniverse(dk),
+		Start: opt.Start,
+	}
 	anyCmdr, allCmdr := false, true
 	for _, d := range pair {
 		anyCmdr = anyCmdr || d.Commander != ""

@@ -111,6 +111,11 @@ func (w *walker) tokenScript(o *state.Object) string {
 func (w *walker) checkToken(o *state.Object) {
 	stem := w.tokenScript(o)
 	switch {
+	case hasInternalCounterMarker(o):
+		// The token counters field cannot carry a live regeneration shield
+		// (CR 701.19a) or another engine marker: the live digest drops the
+		// marker and a placement would mint a real counter instead.
+		w.why[reasonCountersEntry] = true
 	case o.IsCopy || stem == "" || o.FaceDown || o.FaceIdx != 0:
 		w.why[reasonTokenUnscripted] = true
 	case o.ChosenColor != "":
@@ -153,7 +158,7 @@ func (w *walker) placeTokens(c *cut, toks [2][]*state.Object) {
 			c.Refs[o.ID] = fmt.Sprintf("p%d:%s", s, ref)
 			tok := oraclegen.SetupToken{Script: w.tokenScript(o)}
 			for _, ct := range o.Counters {
-				if ct.N <= 0 {
+				if ct.N <= 0 || state.InternalCounterMarker(ct.Kind) {
 					continue
 				}
 				if tok.Counters == nil {

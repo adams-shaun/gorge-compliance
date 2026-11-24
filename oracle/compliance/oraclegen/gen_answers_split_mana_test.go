@@ -147,7 +147,8 @@ func twinBoltRegistry(t *testing.T) *cards.Registry {
 // DividedAsYouChoose$ 2) at two distinct creatures. gorge announces that
 // forced one-each division at cast without an ask (CR 601.2d), so
 // castDivisions restores the damage_split decision carrying the two chosen
-// targets at the resolve step, and XAnswersForScenario turns it into two "^X="
+// targets at the cast step (the Forge contract: the driver takes it while
+// targeting), and XAnswersForScenario turns it into two "^X="
 // target answers.
 func TestXAnswersTwinBoltEndToEnd(t *testing.T) {
 	reg := twinBoltRegistry(t)
@@ -184,8 +185,8 @@ func TestXAnswersTwinBoltEndToEnd(t *testing.T) {
 	if split == nil {
 		t.Fatalf("no damage_split decision restored; decisions: %+v", ds)
 	}
-	if split.Step != 1 {
-		t.Errorf("damage_split at step %d, want the resolve step 1", split.Step)
+	if split.Step != 0 {
+		t.Errorf("damage_split at step %d, want the cast step 0", split.Step)
 	}
 	if split.Kind != "choose_n" || split.Min != 2 || split.Max != 2 {
 		t.Fatalf("split shape = kind %q min %d max %d, want choose_n 2 2", split.Kind, split.Min, split.Max)
@@ -283,7 +284,7 @@ func TestXAnswersDesolationOfSmaugEndToEnd(t *testing.T) {
 // TestCastDivisionsArcLightningAsked: Arc Lightning (3 damage divided among
 // one, two or three targets) at two creatures leaves one free point, so gorge
 // poses the CR 601.2d division ask while casting (a choose whose picks are
-// "divide" options). castDivisions folds that ask into the resolve step's
+// "divide" options). castDivisions folds that ask into the cast step's
 // damage_split (2 to the picked target, 1 to the other) and drops the ask, so
 // no stray choice answer reaches XMage.
 func TestCastDivisionsArcLightningAsked(t *testing.T) {
