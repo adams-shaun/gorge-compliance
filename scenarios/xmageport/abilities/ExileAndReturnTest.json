@@ -97,7 +97,7 @@
     }
    ],
    "xmage": "ExileAndReturnTest#testExileAndReturn",
-   "known_bug": "XP[tawnos-coffin-return-not-fired]: since gorge b1ccf82b29 Tawnos's Coffin's {3},{T} activation exiles the target (CR 701.13a) but the Effect-carried return triggers (Mode$ ChangesZone Origin$ Battlefield ValidCard$ Card.EffectSource, and Mode$ Untaps, both Execute$ TrigReturn ChangeZone Defined$ Imprinted Exile>Battlefield) never return it when the Coffin untaps or leaves the battlefield (p1 Silvercoat Lion battlefield 0, want 1), CR 603.7 and 610.3, verified at gorge 23b726edbb. These scenarios passed at fc71ca68c5 only because the exile was a no-op."
+   "known_bug": "XP[effect-return-after-coffin-exile-missing]: since gorge b1ccf82b29 anchors ChangeZoneAll Targeted.Self (tawnoss_coffin.txt DBExile), Tawnos's Coffin really exiles Silvercoat Lion, but the api:Effect's return half (TrigReturn: ChangeZone Defined$ Imprinted Exile->Battlefield Tapped$ True WithNotedCounters$ True, fired by the LeavesPlay / Untaps triggers with ValidCard$ Card.EffectSource) never brings it back, so the Coffin untapping in its controller's untap step returns nothing (p1 battlefield Silvercoat Lion 0, want 1), CR 701.13a, 603.6c, verified at gorge 23b4916584 (the scenarios passed at fc71ca68c5 only because the exile did nothing)."
   },
   {
    "name": "test-exile-and-return-with-counters",
@@ -232,7 +232,7 @@
     }
    ],
    "xmage": "ExileAndReturnTest#testExileAndReturnWithCounters",
-   "known_bug": "XP[tawnos-coffin-return-not-fired]: since gorge b1ccf82b29 Tawnos's Coffin's {3},{T} activation exiles the target (CR 701.13a) but the Effect-carried return triggers (Mode$ ChangesZone Origin$ Battlefield ValidCard$ Card.EffectSource, and Mode$ Untaps, both Execute$ TrigReturn ChangeZone Defined$ Imprinted Exile>Battlefield) never return it when the Coffin untaps or leaves the battlefield (p1 Silvercoat Lion battlefield 0, want 1), CR 603.7 and 610.3, verified at gorge 23b726edbb. These scenarios passed at fc71ca68c5 only because the exile was a no-op."
+   "known_bug": "XP[effect-return-after-coffin-exile-missing]: since gorge b1ccf82b29 anchors ChangeZoneAll Targeted.Self (tawnoss_coffin.txt DBExile), Tawnos's Coffin really exiles Silvercoat Lion, but the api:Effect's return half (TrigReturn: ChangeZone Defined$ Imprinted Exile->Battlefield Tapped$ True WithNotedCounters$ True, fired by the LeavesPlay / Untaps triggers with ValidCard$ Card.EffectSource) never brings it back, so the Coffin untapping returns nothing, so the Battlegrowth +1/+1 counters are not restored either (p1 battlefield Silvercoat Lion 0, want 1), CR 701.13a, 603.6c, verified at gorge 23b4916584 (the scenarios passed at fc71ca68c5 only because the exile did nothing)."
   },
   {
    "name": "test-exile-and-return-if-tawnos-left-battlefield",
@@ -354,7 +354,7 @@
     }
    ],
    "xmage": "ExileAndReturnTest#testExileAndReturnIfTawnosLeftBattlefield",
-   "known_bug": "XP[tawnos-coffin-return-not-fired]: since gorge b1ccf82b29 Tawnos's Coffin's {3},{T} activation exiles the target (CR 701.13a) but the Effect-carried return triggers (Mode$ ChangesZone Origin$ Battlefield ValidCard$ Card.EffectSource, and Mode$ Untaps, both Execute$ TrigReturn ChangeZone Defined$ Imprinted Exile>Battlefield) never return it when the Coffin untaps or leaves the battlefield (p1 Silvercoat Lion battlefield 0, want 1), CR 603.7 and 610.3, verified at gorge 23b726edbb. These scenarios passed at fc71ca68c5 only because the exile was a no-op."
+   "known_bug": "XP[effect-return-after-coffin-exile-missing]: since gorge b1ccf82b29 anchors ChangeZoneAll Targeted.Self (tawnoss_coffin.txt DBExile), Tawnos's Coffin really exiles Silvercoat Lion, but the api:Effect's return half (TrigReturn: ChangeZone Defined$ Imprinted Exile->Battlefield Tapped$ True WithNotedCounters$ True, fired by the LeavesPlay / Untaps triggers with ValidCard$ Card.EffectSource) never brings it back, so the Coffin leaving the battlefield to Disenchant returns nothing (p1 battlefield Silvercoat Lion 0, want 1), CR 701.13a, 603.6c, verified at gorge 23b4916584 (the scenarios passed at fc71ca68c5 only because the exile did nothing)."
   }
  ]
 }

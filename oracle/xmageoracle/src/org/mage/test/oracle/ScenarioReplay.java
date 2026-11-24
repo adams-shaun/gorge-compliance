@@ -118,6 +118,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
     private static final PhaseStep MAIN = PhaseStep.PRECOMBAT_MAIN;
 
     private final List<JsonObject> snaps = new ArrayList<>();
+    // The cards the unscripted search auto-pick took, in ask order. Test hook:
+    // the pick only answers a trailing ask, which no checkpoint compares, so
+    // the stored regression must assert the funnel itself and the card it
+    // gathered rather than a board snapshot.
+    private final List<String> searchPicks = new ArrayList<>();
     // The step a cast/resolve/checkpoint is registered at. MAIN until an
     // attack or block op moves the scenario into combat; gorge plays the
     // cast in the declare-attackers (attacking-only) or declare-blockers
@@ -2376,11 +2381,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
 
         /** The cards-list overload TargetCardInLibrary.choose (every library
-         * search) reaches. The same two unscripted-ask rules as the plain
-         * Target funnel apply here: an ask with no legal candidate is
-         * declined at any minimum rather than failing "Missing TARGET def",
-         * and a lone legal candidate is taken because gorge settles it without
-         * a decision. Every other ask is the base's. */
+         * search) reaches. The unscripted-ask rules of the plain Target funnel
+         * apply here: an ask with no legal candidate is declined at any
+         * minimum rather than failing "Missing TARGET def", and a lone legal
+         * candidate is taken because gorge settles it without a decision. A
+         * short search closes on its skip, and a single-pick search with many
+         * legal cards gathers the first one only in the trailing play
+         * ({@link #searchPickChoice}). Every other ask is the base's. */
         @Override
         public boolean chooseTarget(Outcome outcome, Cards cards, mage.target.TargetCard target, Ability source, Game game) {
             if (target instanceof mage.target.common.TargetCardInLibrary) {
@@ -2390,6 +2397,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         !getTargets().isEmpty() && TestPlayer.TARGET_SKIP.equals(getTargets().get(0)))) {
                     return false;
                 }
+                // A skip that closes a short search is the ask's own answer,
+                // even when the library happens to offer one legal card: run
+                // it before the lone-target rule, or the driver would take
+                // the card and leave the skip queued for a later ask (CR
+                // 701.23b closes the search on the skip).
+                if (shortSearchStop(getTargets(), target.isRequired(),
+                        target.getMinNumberOfTargets(), target.getMaxNumberOfTargets())) {
+                    // A search for cards with a stated quality need not find them
+                    // all (CR 701.23b): XMage leaves the target not required, but
+                    // TestPlayer rejects a skip on a fixed-count ask. Close the
+                    // selection with what is chosen. isChosen stays false below
+                    // the stated count, so the result is the pick count itself:
+                    // TargetCardInLibrary stops on a true result with nothing new
+                    // selected and the effect then takes the short selection.
+                    getTargets().remove(0);
+                    target.setSkipChoice(true);
+                    return target.getSize() > 0;
+                }
                 if (target.getSize() < target.getMaxNumberOfTargets()) {
                     UUID lone = unscriptedLoneTarget(target, possible, game);
                     if (lone != null) {
@@ -2397,20 +2422,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         return true;
                     }
                 }
-            }
-            if (target instanceof mage.target.common.TargetCardInLibrary
-                    && shortSearchStop(getTargets(), target.isRequired(),
-                            target.getMinNumberOfTargets(), target.getMaxNumberOfTargets())) {
-                // A search for cards with a stated quality need not find them
-                // all (CR 701.23b): XMage leaves the target not required, but
-                // TestPlayer rejects a skip on a fixed-count ask. Close the
-                // selection with what is chosen. isChosen stays false below
-                // the stated count, so the result is the pick count itself:
-                // TargetCardInLibrary stops on a true result with nothing new
-                // selected and the effect then takes the short selection.
-                getTargets().remove(0);
-                target.setSkipChoice(true);
-                return target.getSize() > 0;
+                UUID searchPick = searchPickChoice(getTargets(),
+                        libraryCandidates(cards, possible, target),
+                        target.getMaxNumberOfTargets() == 1,
+                        skipCanCloseAsk(target),
+                        owner.pastLastCheckpoint(),
+                        (id, answer) -> hasObjectTargetNameOrAlias(game.getObject(id), answer));
+                if (searchPick != null) {
+                    mage.MageObject picked = game.getObject(searchPick);
+                    owner.searchPicks.add(picked == null ? "?" : picked.getName());
+                    target.addTarget(searchPick, source, game);
+                    return true;
+                }
             }
             return super.chooseTarget(outcome, cards, target, source, game);
         }
@@ -2422,6 +2445,67 @@ public class ScenarioReplay extends CardTestPlayerBase {
         static boolean shortSearchStop(List<String> targets, boolean required, int min, int max) {
             return !targets.isEmpty() && TestPlayer.TARGET_SKIP.equals(targets.get(0))
                     && !required && min == max;
+        }
+
+        /** The card an unscripted library search gathers, or null to leave
+         * the ask to the base player. A search is not a decision gorge
+         * always records when the item's cut ends before it: the stored
+         * Gladiolus Amicitia ETB (32 legal lands) scripts no card name, yet
+         * XMage poses the mandatory TargetCardInLibrary ask and strict mode
+         * stops with "Missing TARGET def". {@link #libraryCandidates}
+         * supplies the legal cards in the order XMage presents them, so its
+         * first entry is a deterministic pick rather than a set iteration
+         * order.
+         *
+         * Only an ask in the trailing play -- after every scenario checkpoint
+         * was captured ({@link #pastLastCheckpoint}) -- is answered here. A
+         * search inside the compared window is a real gorge decision: the
+         * driver cannot infer which card was taken, so inventing one would
+         * compare a made-up board (and could hide a generator/cut gap). Such
+         * an ask stays the base's strict miss and the caller reruns loose.
+         *
+         * Only a single-pick ask is answered: a multi-pick search's count is
+         * a decision of its own and must stay scripted. A queued answer of
+         * this ask's own -- a front skip that can close it, or any entry
+         * naming a candidate (the base scans the whole visible queue) -- goes
+         * to the base; an answer for a later ask does not stop the pick. This
+         * is the role-based rule for the whole TargetCardInLibrary family,
+         * not a list of search cards. */
+        static UUID searchPickChoice(List<String> targetQueue, List<UUID> candidates,
+                boolean singlePick, boolean skipClosesAsk, boolean trailingPlay,
+                BiPredicate<UUID, String> namesCandidate) {
+            if (!trailingPlay || !singlePick || candidates.isEmpty()) {
+                return null;
+            }
+            if (!targetQueue.isEmpty() && TestPlayer.TARGET_SKIP.equals(targetQueue.get(0)) && skipClosesAsk) {
+                return null;
+            }
+            for (String answer : targetQueue) {
+                for (UUID id : candidates) {
+                    if (namesCandidate.test(id, answer)) {
+                        return null;
+                    }
+                }
+            }
+            return candidates.get(0);
+        }
+
+        /** The target's unchosen legal cards in the order the search ask
+         * presents them. TargetCardInLibrary.choose sorts the searchable
+         * library by card name into the Cards it passes here, and CardsImpl
+         * is a LinkedHashSet, so this iteration is that presentation order. */
+        static List<UUID> libraryCandidates(Cards cards, java.util.Collection<UUID> possible,
+                mage.target.Target target) {
+            List<UUID> out = new ArrayList<>();
+            if (cards == null) {
+                return out;
+            }
+            for (UUID id : cards) {
+                if (possible.contains(id) && !target.contains(id)) {
+                    out.add(id);
+                }
+            }
+            return out;
         }
 
         /**
@@ -3079,6 +3163,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return steps > 0 && snapshots == steps + 1;
     }
 
+    /** Whether every scenario checkpoint has been captured, so the replay is
+     * now in the trailing play past gorge's last checkpoint. An unscripted
+     * decision taken here is outside the compared window; before it, the
+     * decision is part of the item and the driver must not invent an answer.
+     * Snapshots are the setup snapshot plus one per captured step. */
+    boolean pastLastCheckpoint() {
+        return snaps.size() >= steps(sc0).size() + 1;
+    }
+
+    /** The cards the search auto-pick took, in ask order (test hook). */
+    List<String> searchPicks() {
+        return searchPicks;
+    }
+
     // Match encoding/json's *int field: absent/null defaults to 1; otherwise
     // require an integer JSON number. Gson's getAsInt truncates fractions and
     // wraps oversized numbers, potentially replaying a different turn.
@@ -3122,6 +3220,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             res.add("id", sc.get("id"));
         }
         snaps.clear();
+        searchPicks.clear();
         boolean endTurnScenario = false;
         // Preserve the exact actions each step queues (including mana and
         // combat sub-actions), not just its final checkpoint.
@@ -4317,10 +4416,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * base object, and is wiped when the adjuster runs mid-cast; the chooser
      * then asks again and the TestPlayer fails "Missing TARGET def". A queued
      * target is read by that later ask, so these casts take the queue route.
+     * A {@code ForEachPlayerTargetsAdjuster} does the same ({@code adjustTargets}
+     * clears, then adds one copy of the blueprint per player or opponent): Mass
+     * Mutiny's inline target was wiped and its "up to one" per-opponent copy,
+     * min 0, was closed with nothing picked, so the spell resolved untargeted.
      */
     static boolean replacesCastTargets(Ability ability) {
-        return ability != null
-                && ability.getTargetAdjuster() instanceof mage.target.targetadjustment.ConditionalTargetAdjuster;
+        if (ability == null) {
+            return false;
+        }
+        mage.target.targetadjustment.TargetAdjuster adjuster = ability.getTargetAdjuster();
+        return adjuster instanceof mage.target.targetadjustment.ConditionalTargetAdjuster
+                || adjuster instanceof mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
     }
 
     /** The card's spell ability, or null when the name does not resolve. */
