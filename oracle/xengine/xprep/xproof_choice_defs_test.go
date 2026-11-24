@@ -60,6 +60,18 @@ func TestXProofChoiceDefs(t *testing.T) {
 		// The opponent's hand is empty: gorge's Optional$ confirmation has no
 		// pick after it and XMage asks nothing, so only the target remains.
 		{"severance-priest", 5, []oraclegen.XAnswer{{Seat: 0, Kind: "target", Value: "p1"}}},
+		// A paid sacrifice unless cost: chooseUse "Pay the cost?" is yes, then
+		// the cost's sacrifice group is one makeChoose over the choice queue
+		// (SacrificeTargetCost.pay -> TargetImpl.choose), answered as one
+		// aliased choice. The pick must not be the head of chooseUse's queue.
+		{"primeval-force", 9, []oraclegen.XAnswer{
+			{Seat: 0, Kind: "choice", Value: "yes"},
+			{Seat: 0, Kind: "choice", Value: "@p0:Forest^@p0:Forest#2^@p0:Forest#3"},
+		}},
+		{"rathi-dragon", 8, []oraclegen.XAnswer{
+			{Seat: 0, Kind: "choice", Value: "yes"},
+			{Seat: 0, Kind: "choice", Value: "@p0:Mountain^@p0:Mountain#2"},
+		}},
 	} {
 		t.Run(tc.file, func(t *testing.T) {
 			raw, err := os.ReadFile("testdata/xproof/" + tc.file + ".json")
