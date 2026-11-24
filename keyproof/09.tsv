@@ -140,12 +140,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09a400bd-83f1-4fac-a218-64c9f041874f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09a688c1-21f6-4c7d-a6bd-aedc0d76a671	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09a70ae8-3859-4a09-901d-dce063fa3b5f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09a70ae8-3859-4a09-901d-dce063fa3b5f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09a70ae8-3859-4a09-901d-dce063fa3b5f	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09a70ae8-3859-4a09-901d-dce063fa3b5f	f0/a1	Destroy	agreed	-	FX	start	6	0	x:xs:XP:wasteland:f0a0:s1,f:xs:XP:wasteland:f0a0:s1	-	-	-	5f2128bf97e4	-	60c558303c1f	-	-	2026-11-24	xproof
+09a70ae8-3859-4a09-901d-dce063fa3b5f	land	land	agreed	-	FX	start	2	0	x:xs:XP:wasteland:land:s1,f:xs:XP:wasteland:land:s1	-	-	-	5f2128bf97e4	-	60c558303c1f	-	-	2026-11-24	xproof
 09aeea91-b1dc-443f-a509-4758f052c0a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09aeea91-b1dc-443f-a509-4758f052c0a7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09b41783-0583-4486-99e8-3f8a11ae37fd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09b41783-0583-4486-99e8-3f8a11ae37fd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09b41783-0583-4486-99e8-3f8a11ae37fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chime-of-night:cast:s1,f:xs:XP:chime-of-night:cast:s1	-	-	-	5f2128bf97e4	-	ac4c0ca7d3c7	-	-	2026-11-24	xproof
+09b41783-0583-4486-99e8-3f8a11ae37fd	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 09b4fba6-d943-49e4-9f9e-a74fcbabe83f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09b4fba6-d943-49e4-9f9e-a74fcbabe83f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09b4fba6-d943-49e4-9f9e-a74fcbabe83f	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

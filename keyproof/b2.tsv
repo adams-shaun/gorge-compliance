@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-b20302d9-eb45-4895-9597-cf3af1abce56	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b20302d9-eb45-4895-9597-cf3af1abce56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brimstone-dragon:cast:s1,f:xs:XP:brimstone-dragon:cast:s1	-	-	-	5f2128bf97e4	-	6b46f6371547	-	-	2026-11-24	xproof
 b20671e6-d740-4ef6-b408-bf8a0465c0da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:legion-conquistador:f0t0:s1,f:xs:XP:legion-conquistador:f0t0:s1	-	-	-	d864b561c9cb	-	f0b5b7791222	-	-	2026-11-24	xproof
 b20671e6-d740-4ef6-b408-bf8a0465c0da	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:legion-conquistador:f0t0:s1,f:xs:XP:legion-conquistador:f0t0:s1	-	-	-	d864b561c9cb	-	f0b5b7791222	-	-	2026-11-24	xproof
 b206d3bc-1203-4f00-997e-5da706346a24	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hand-of-emrakul:cast:s1	-	-	-	d864b561c9cb	-	73a4432c2149	-	-	2026-11-24	xproof
@@ -24,7 +24,7 @@ b21c99b3-b975-4428-9c9a-326ded2fa8dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tem
 b21c99b3-b975-4428-9c9a-326ded2fa8dc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:temporary-lockdown:f0t0:s1,f:xs:XP:temporary-lockdown:f0t0:s1	-	-	-	ae86f6029288	-	888a38f1f30c	-	-	2026-11-24	xproof
 b21d6482-1b3a-47e6-98a5-3067f5f3818b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b22080d6-a9ed-4bdd-a604-058e0e3e9463	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b22080d6-a9ed-4bdd-a604-058e0e3e9463	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b22080d6-a9ed-4bdd-a604-058e0e3e9463	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 b221939c-93e7-4ffc-b995-5b67e173ee15	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b2223f1c-e607-43e0-86dd-5e3225330066	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b2252471-01ca-4d58-aa99-4ab0aa5eae12	cast	cast-resolve	agreed	-	X	scen	1	0	Stormcatch Mentor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

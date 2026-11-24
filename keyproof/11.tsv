@@ -111,8 +111,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1199a252-3c7c-4ae4-b063-dc132bfbea2f	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 119af12a-b767-4408-9bb5-72a6d0ec63d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 119af12a-b767-4408-9bb5-72a6d0ec63d1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-119d719d-e965-45b4-9bc9-ac03211b10c2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-119d719d-e965-45b4-9bc9-ac03211b10c2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+119d719d-e965-45b4-9bc9-ac03211b10c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:survival-of-the-fittest:cast:s1,f:xs:XP:survival-of-the-fittest:cast:s1	-	-	-	5f2128bf97e4	-	ead941687c6b	-	-	2026-11-24	xproof
+119d719d-e965-45b4-9bc9-ac03211b10c2	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 119d9671-61ba-4629-89b1-f94bdec5cb74	cast	cast-resolve	agreed	-	FX	scen	2	0	Chimil, the Inner Sun/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 119d9671-61ba-4629-89b1-f94bdec5cb74	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Chimil, the Inner Sun/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11a163cc-ade3-4b55-b50e-3b3bf7e1962c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,10 +178,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11e84e48-0f18-41b6-9f2a-30c64aecf9a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11e84e48-0f18-41b6-9f2a-30c64aecf9a7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11eb31d9-cbcb-4ec5-abab-dfa646addbba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11eb31d9-cbcb-4ec5-abab-dfa646addbba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11eb31d9-cbcb-4ec5-abab-dfa646addbba	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 11ed8209-2184-4416-a8f0-72de00599574	cast	cast-resolve	agreed	-	X	scen	1	0	Glen Elendra's Answer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 11f17f85-ca97-4551-838f-7cb32f0e5f10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11f17f85-ca97-4551-838f-7cb32f0e5f10	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11f17f85-ca97-4551-838f-7cb32f0e5f10	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 11f1d2b7-0c2b-40df-bf90-3c55b23449af	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11f1d2b7-0c2b-40df-bf90-3c55b23449af	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11f21b50-b4b6-449e-a66a-eedd2920ed93	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:squad-commander:cast:s1,f:xs:XP:squad-commander:cast:s1	-	-	-	ae86f6029288	-	e5c11b6738b0	-	-	2026-11-24	xproof

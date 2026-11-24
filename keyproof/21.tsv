@@ -35,13 +35,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 212fdb7c-1c7e-4eed-b1ed-bcc14a425da8	cast	cast-resolve	agreed	-	X	scen	1	0	Lita, Little Orphan Amphibian/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 212fdb7c-1c7e-4eed-b1ed-bcc14a425da8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lita, Little Orphan Amphibian/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 21338b71-37f5-4121-9b84-565025ebcd17	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-21338b71-37f5-4121-9b84-565025ebcd17	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-21338b71-37f5-4121-9b84-565025ebcd17	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+21338b71-37f5-4121-9b84-565025ebcd17	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+21338b71-37f5-4121-9b84-565025ebcd17	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 2138533a-d33c-477a-9765-7369d1ec30b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2138533a-d33c-477a-9765-7369d1ec30b0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 213b0814-f768-4408-9cb7-6f5960bcbb7a	cast	cast-resolve	agreed	-	FX	scen	2	0	Terminal Criticism/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-213fbbdd-f1bc-4bba-9124-7b26e9a706c8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-213fbbdd-f1bc-4bba-9124-7b26e9a706c8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+213fbbdd-f1bc-4bba-9124-7b26e9a706c8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-lackey:cast:s1,f:xs:XP:goblin-lackey:cast:s1	-	-	-	5f2128bf97e4	-	b9939deea407	-	-	2026-11-24	xproof
+213fbbdd-f1bc-4bba-9124-7b26e9a706c8	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 2141b48d-5a04-40dd-a76b-457ac06b56c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2141b48d-5a04-40dd-a76b-457ac06b56c2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2143f413-7baa-4fd6-a7ca-32f52bfa553f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 21e3895b-f6b6-48af-9161-71b422818004	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21e3895b-f6b6-48af-9161-71b422818004	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21e90420-aedb-4a84-ba57-d5eae497b09b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-21e90420-aedb-4a84-ba57-d5eae497b09b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+21e90420-aedb-4a84-ba57-d5eae497b09b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 21e9e1a9-5d6d-473e-adab-6a1e8e2b0ebd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21ea9501-9a0f-43a3-a2cc-e9648325c45e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woebringer-demon:cast:s1,f:xs:XP:woebringer-demon:cast:s1	-	-	-	77494c1ce129	-	b9d16a77d41e	-	-	2026-11-24	xproof
 21ea9501-9a0f-43a3-a2cc-e9648325c45e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:woebringer-demon:cast:s1,f:xs:XP:woebringer-demon:cast:s1	-	-	-	77494c1ce129	-	b9d16a77d41e	-	-	2026-11-24	xproof

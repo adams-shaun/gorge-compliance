@@ -62,9 +62,9 @@ c14bd133-ff17-48b3-a1c8-56c93d8c6e43	f0/a0	NULL	owed	refused:steps-needed:cost:E
 c14e422b-6412-45ce-8e82-d47ba61557a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c14f973e-b2b0-4d22-87f6-c37f7eb92864	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c14f973e-b2b0-4d22-87f6-c37f7eb92864	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:lowland-oaf:f0a0:s1,f:xs:XP:lowland-oaf:f0a0:s1	-	-	-	d864b561c9cb	-	9f796651921f	-	-	2026-11-24	xproof
-c152b677-5e75-43da-be1d-876b7b83e2f4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c152b677-5e75-43da-be1d-876b7b83e2f4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c152b677-5e75-43da-be1d-876b7b83e2f4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c152b677-5e75-43da-be1d-876b7b83e2f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:corrupt-official:cast:s1,f:xs:XP:corrupt-official:cast:s1	-	-	-	5f2128bf97e4	-	1847b5029e05	-	-	2026-11-24	xproof
+c152b677-5e75-43da-be1d-876b7b83e2f4	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:corrupt-official:f0a0:s1,f:xs:XP:corrupt-official:f0a0:s1	-	-	-	5f2128bf97e4	-	1847b5029e05	-	-	2026-11-24	xproof
+c152b677-5e75-43da-be1d-876b7b83e2f4	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 c153e202-1d93-4044-b457-b8ebd5b36ec3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c153e202-1d93-4044-b457-b8ebd5b36ec3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c15bb7eb-aaaa-4468-9641-8f706d6137e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -102,7 +102,7 @@ c174dcbb-03a0-439c-b3d8-ed61bd46dc67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:art
 c178953c-3888-4edd-9d0c-265bd82b1d24	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c178953c-3888-4edd-9d0c-265bd82b1d24	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c1795e9c-31c9-4892-a796-7656e09257b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c1795e9c-31c9-4892-a796-7656e09257b3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c1795e9c-31c9-4892-a796-7656e09257b3	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 c17b9e5b-58b6-4ccf-8283-945ba77429e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c17d4818-5825-4bff-8fc5-5fd740cc0c70	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enduring-bondwarden:f0t1:s1,f:xs:XP:enduring-bondwarden:f0t1:s1	-	-	-	ae86f6029288	-	d396623c3b50	-	-	2026-11-24	xproof
 c17d4818-5825-4bff-8fc5-5fd740cc0c70	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:enduring-bondwarden:f0t0:s1,f:xs:XP:enduring-bondwarden:f0t0:s1	-	-	-	ae86f6029288	-	d396623c3b50	-	-	2026-11-24	xproof

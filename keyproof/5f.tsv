@@ -100,8 +100,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f6aa548-0ab3-451f-b291-10cac3f3ea1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f6aa548-0ab3-451f-b291-10cac3f3ea1a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f71c09a-47fb-4bb2-9329-78f5bb195e5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f71c09a-47fb-4bb2-9329-78f5bb195e5d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f71f205-9551-416a-bba6-55bc65d11c85	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f71c09a-47fb-4bb2-9329-78f5bb195e5d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+5f71f205-9551-416a-bba6-55bc65d11c85	cast	cast	agreed	-	X	start	2	0	x:xs:XP:goblin-berserker:cast:s1	-	-	-	5f2128bf97e4	-	43012e9bb72c	-	-	2026-11-24	xproof
 5f73fd4e-0d24-4daa-8d82-73c0cf7f801d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f7a4ffb-83f7-46e5-b0a7-c8b068af6969	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blazethorn-scarecrow:cast:s1,f:xs:XP:blazethorn-scarecrow:cast:s1	-	-	-	8a1b1a193ec0	-	ec8023386322	-	-	2026-11-24	xproof
 5f7c6fa9-4208-4dc8-a75b-9586200d8e19	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:attended-socialite:cast:s1,f:xs:XP:attended-socialite:cast:s1	-	-	-	d864b561c9cb	-	253cc839b7e7	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5fa86b45-1d5b-42df-8811-6a10903f3039	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5faa9e54-1cc4-48c0-bbfa-a495087c36d6	cast	cast-resolve	agreed	-	X	scen	1	0	Zimone's Experiment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5fab0d9c-ccf7-4c6a-94b4-959be139dad8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5fab0d9c-ccf7-4c6a-94b4-959be139dad8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5fab0d9c-ccf7-4c6a-94b4-959be139dad8	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:goblin-general:f0t0:s1,f:xs:XP:goblin-general:f0t0:s1	-	-	-	5f2128bf97e4	-	be7cf5d239db	-	-	2026-11-24	xproof
 5fac139a-07d3-4e6c-98e3-d98b199f7a6f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:young-pyromancer:cast:s1,f:xs:XP:young-pyromancer:cast:s1	-	-	-	d864b561c9cb	-	396be64e1346	-	-	2026-11-24	xproof
 5fac139a-07d3-4e6c-98e3-d98b199f7a6f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5facb256-b993-43f8-b971-b3a59a7434bf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

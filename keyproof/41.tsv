@@ -124,8 +124,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 417e798d-9ca6-4cd0-adb4-f61d3becb201	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 41820f91-27cf-41c0-bb5e-9adf6845a6a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 41820f91-27cf-41c0-bb5e-9adf6845a6a4	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-4187fd6d-5660-4ea7-a9dd-402487ec8721	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4187fd6d-5660-4ea7-a9dd-402487ec8721	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4187fd6d-5660-4ea7-a9dd-402487ec8721	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:veiled-apparition:cast:s1,f:xs:XP:veiled-apparition:cast:s1	-	-	-	5f2128bf97e4	-	f0bb6be73fb2	-	-	2026-11-24	xproof
+4187fd6d-5660-4ea7-a9dd-402487ec8721	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 418be12f-b40a-4018-86c1-98c9000a999a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moroii:cast:s1,f:xs:XP:moroii:cast:s1	-	-	-	64a08ba7d913	-	aff2cce337f0	-	-	2026-11-24	xproof
 418be12f-b40a-4018-86c1-98c9000a999a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 41960d32-ddb5-42be-94b2-3a2e77ca148d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:omen-of-the-sea:cast:s1,f:xs:XP:omen-of-the-sea:cast:s1	-	-	-	ae86f6029288	-	d65e6472c33a	-	-	2026-11-24	xproof
@@ -147,7 +147,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 41b1d850-2fda-490b-a4f6-0d9bfb37103c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 41b2876f-0217-4552-9fad-f12f1824d06f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 41b2876f-0217-4552-9fad-f12f1824d06f	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-41b46aa5-6091-4bc4-8d17-d2c6b5fe1c5e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+41b46aa5-6091-4bc4-8d17-d2c6b5fe1c5e	cast	cast	agreed	-	X	start	2	0	x:xs:XP:kyren-legate:cast:s1	-	-	-	5f2128bf97e4	-	08bbd0a12ff0	-	-	2026-11-24	xproof
 41b49a8e-09c5-4fd1-95f9-e5a51ce24f69	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lavafume-invoker:cast:s1,f:xs:XP:lavafume-invoker:cast:s1	-	-	-	d864b561c9cb	-	c9c77e09728f	-	-	2026-11-24	xproof
 41b49a8e-09c5-4fd1-95f9-e5a51ce24f69	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:lavafume-invoker:f0a0:s1,f:xs:XP:lavafume-invoker:f0a0:s1	-	-	-	d864b561c9cb	-	c9c77e09728f	-	-	2026-11-24	xproof
 41b929ad-0c44-4e50-84d3-13b318035543	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,8 +180,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 41f3acbf-6092-435f-a5af-4d80dd6e1aef	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:raff-weatherlight-stalwart:f0a0:s1,f:xs:XP:raff-weatherlight-stalwart:f0a0:s1	-	-	-	d864b561c9cb	-	6c4d422a4654	-	-	2026-11-24	xproof
 41f3acbf-6092-435f-a5af-4d80dd6e1aef	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 41f53bb5-8a62-4e6b-b9c3-5aa530a036bc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-41f58e06-5ce0-4b2d-a280-5bb3b6c56dfe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-41f58e06-5ce0-4b2d-a280-5bb3b6c56dfe	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+41f58e06-5ce0-4b2d-a280-5bb3b6c56dfe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fog-of-gnats:cast:s1,f:xs:XP:fog-of-gnats:cast:s1	-	-	-	5f2128bf97e4	-	baeac97f9a52	-	-	2026-11-24	xproof
+41f58e06-5ce0-4b2d-a280-5bb3b6c56dfe	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:fog-of-gnats:f0a0:s1,f:xs:XP:fog-of-gnats:f0a0:s1	-	-	-	5f2128bf97e4	-	baeac97f9a52	-	-	2026-11-24	xproof
 41f6d6d9-3fe5-44b0-904d-1cb90d36f2b6	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rampaging-spiketail:f0t0:s1,f:xs:XP:rampaging-spiketail:f0t0:s1	-	-	-	e07cf3a05ba5	-	f8fe86e5d5a1	-	-	2026-11-24	xproof
 41f6d6d9-3fe5-44b0-904d-1cb90d36f2b6	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:rampaging-spiketail:f0t0:s2,f:xs:XP:rampaging-spiketail:f0t0:s2	-	-	-	e07cf3a05ba5	-	f8fe86e5d5a1	-	-	2026-11-24	xproof
 41f6d6d9-3fe5-44b0-904d-1cb90d36f2b6	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rampaging-spiketail:f0t0:s1,f:xs:XP:rampaging-spiketail:f0t0:s1	-	-	-	e07cf3a05ba5	-	f8fe86e5d5a1	-	-	2026-11-24	xproof

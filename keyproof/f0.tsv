@@ -4,7 +4,7 @@ f009ef70-d718-45cf-bb22-e560484bbfe5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f00dc657-4695-497d-aad3-af7b6a3ccf94	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fortifying-provisions:f0t0:s1,f:xs:XP:fortifying-provisions:f0t0:s1	-	-	-	ae86f6029288	-	ca2008af890f	-	-	2026-11-24	xproof
 f00dc657-4695-497d-aad3-af7b6a3ccf94	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fortifying-provisions:f0t0:s1,f:xs:XP:fortifying-provisions:f0t0:s1	-	-	-	ae86f6029288	-	ca2008af890f	-	-	2026-11-24	xproof
 f00dd41d-4b11-491a-9e7b-12245092ab77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f00dd41d-4b11-491a-9e7b-12245092ab77	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f00dd41d-4b11-491a-9e7b-12245092ab77	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 f0140f00-5414-493b-962d-33312d49f6ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haze-of-pollen:cast:s1,f:xs:XP:haze-of-pollen:cast:s1	-	-	-	d864b561c9cb	-	768de572e7ac	-	-	2026-11-24	xproof
 f0140f00-5414-493b-962d-33312d49f6ea	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f014b1a1-20ef-475c-bf83-f1a82e68ab97	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:fiery-fall:cast:s1,f:xs:XP:fiery-fall:cast:s1	-	-	-	8a1b1a193ec0	-	88466860137f	-	-	2026-11-24	xproof
@@ -63,8 +63,8 @@ f064a39e-ebb3-47b5-bd06-f39b02b95eaf	cast	cast-resolve	agreed	-	X	scen	1	0	Thous
 f064a39e-ebb3-47b5-bd06-f39b02b95eaf	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thousand Moons Infantry/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f064e5e3-4772-4f6d-b8fa-4f36d4fcdb42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f064e5e3-4772-4f6d-b8fa-4f36d4fcdb42	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f066174a-a959-4365-920f-c04506d94a5a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f066174a-a959-4365-920f-c04506d94a5a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f066174a-a959-4365-920f-c04506d94a5a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spirit-en-kor:cast:s1,f:xs:XP:spirit-en-kor:cast:s1	-	-	-	5f2128bf97e4	-	c4d5a4399aed	-	-	2026-11-24	xproof
+f066174a-a959-4365-920f-c04506d94a5a	f0/a0	Effect	agreed	-	FX	start	4	0	x:xs:XP:spirit-en-kor:cast:s1,f:xs:XP:spirit-en-kor:cast:s1	-	-	-	5f2128bf97e4	-	c4d5a4399aed	-	-	2026-11-24	xproof
 f068a0f3-48bc-4d5d-be79-c23c0be11c27	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f068a0f3-48bc-4d5d-be79-c23c0be11c27	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f0691d46-5bf4-4617-8a0a-19d17afb7219	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:starlight-snare:f0t0:s2,f:xs:XP:starlight-snare:f0t0:s2	-	-	-	e07cf3a05ba5	-	d2bf86def995	-	-	2026-11-24	xproof
@@ -171,4 +171,4 @@ f0f83ab8-6185-4139-b41e-a11500036915	combat#0.block	combat#0.block	agreed	-	X	sc
 f0f83ab8-6185-4139-b41e-a11500036915	static#0.0	static#0.0	agreed	-	X	scen	1	0	Glitch Ghost Surveyor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f0fd78bb-cb83-4dfa-a910-0334d225f87c	cast	cast-resolve	agreed	-	X	scen	1	0	Attack-in-the-Box/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f0fd78bb-cb83-4dfa-a910-0334d225f87c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Attack-in-the-Box/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f0ff2c1c-702d-406b-a426-4282117afe8e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f0ff2c1c-702d-406b-a426-4282117afe8e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:righteous-fury:cast:s1,f:xs:XP:righteous-fury:cast:s1	-	-	-	5f2128bf97e4	-	72b39a7fc161	-	-	2026-11-24	xproof

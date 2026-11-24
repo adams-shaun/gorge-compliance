@@ -102,8 +102,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2976f47b-9626-4934-bcee-7ee7f57944c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2976f47b-9626-4934-bcee-7ee7f57944c3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:scrappy-bruiser:f0t0:s1,f:xs:XP:scrappy-bruiser:f0t0:s1	-	-	-	ae86f6029288	-	c18b5c6fd4d1	-	-	2026-11-24	xproof
 2977aae2-225d-4f3f-8bf7-535f542a7391	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29781b19-0917-4d8f-abe3-df0b7e96d8a6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29781b19-0917-4d8f-abe3-df0b7e96d8a6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+29781b19-0917-4d8f-abe3-df0b7e96d8a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-gardener:cast:s1,f:xs:XP:goblin-gardener:cast:s1	-	-	-	5f2128bf97e4	-	2288b9b8d02f	-	-	2026-11-24	xproof
+29781b19-0917-4d8f-abe3-df0b7e96d8a6	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:goblin-gardener:f0t0:s1,f:xs:XP:goblin-gardener:f0t0:s1	-	-	-	5f2128bf97e4	-	2288b9b8d02f	-	-	2026-11-24	xproof
 2978ba77-c0ce-4411-99c7-ef05dd602c8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2978ba77-c0ce-4411-99c7-ef05dd602c8d	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:battlefield-butcher:f0a0:s1,f:xs:XP:battlefield-butcher:f0a0:s1	-	-	-	ae86f6029288	-	85ac0a006fe6	-	-	2026-11-24	xproof
 297c2ddf-6d2d-4ed4-ab37-716514d5e3b6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 29c23fd7-0ac4-46af-8ecd-92b726575252	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lecturing Scornmage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 29cb8f47-7bb5-4881-98ef-59fc858cf9d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29cb8f47-7bb5-4881-98ef-59fc858cf9d7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29cb8f47-7bb5-4881-98ef-59fc858cf9d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+29cb8f47-7bb5-4881-98ef-59fc858cf9d7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 29cd8a7c-108a-43d1-af63-f603a27c24f2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29cd8a7c-108a-43d1-af63-f603a27c24f2	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29d828fa-a813-48f6-8dcb-43f6047b88a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

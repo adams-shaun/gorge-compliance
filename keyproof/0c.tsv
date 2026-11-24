@@ -38,7 +38,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c25f6b1-8fb3-4406-9605-0282d2dbbcec	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c25f6b1-8fb3-4406-9605-0282d2dbbcec	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c26ab0d-80f6-4e5b-9d0e-af17c1519583	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:march-of-the-multitudes:cast:s1,f:xs:XP:march-of-the-multitudes:cast:s1	-	-	-	d864b561c9cb	-	5f99ea933c49	-	-	2026-11-24	xproof
-0c2841bb-038c-4fbf-8360-bc0a1522b58d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c2841bb-038c-4fbf-8360-bc0a1522b58d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:exploration:cast:s1,f:xs:XP:exploration:cast:s1	-	-	-	5f2128bf97e4	-	3de08235bc61	-	-	2026-11-24	xproof
 0c2a9131-f3d7-4f71-8bcc-3c169574b2e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chandra-flamecaller:cast:s1,f:xs:XP:chandra-flamecaller:cast:s1	-	-	-	d864b561c9cb	-	54002e7e65a5	-	-	2026-11-24	xproof
 0c2a9131-f3d7-4f71-8bcc-3c169574b2e3	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0c2a9131-f3d7-4f71-8bcc-3c169574b2e3	f0/a1	Discard	agreed	-	FX	start	2	0	x:xs:XP:chandra-flamecaller:cast:s1,f:xs:XP:chandra-flamecaller:cast:s1	-	-	-	d864b561c9cb	-	54002e7e65a5	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c4e2c90-c17b-42cc-b4d7-cf75970fbe90	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c4e2c90-c17b-42cc-b4d7-cf75970fbe90	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c4e2c90-c17b-42cc-b4d7-cf75970fbe90	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c4e64d1-cdcf-4e96-8bf4-ed1414f6ad62	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c4e64d1-cdcf-4e96-8bf4-ed1414f6ad62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:counterintelligence:cast:s1,f:xs:XP:counterintelligence:cast:s1	-	-	-	5f2128bf97e4	-	040ffc22abba	-	-	2026-11-24	xproof
 0c572396-4e53-4c86-9b04-f41341dcea05	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crucible-of-fire:cast:s1,f:xs:XP:crucible-of-fire:cast:s1	-	-	-	8a1b1a193ec0	-	47cba6731798	-	-	2026-11-24	xproof
 0c595dc4-3692-424e-8699-9e8e663b32cc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c595dc4-3692-424e-8699-9e8e663b32cc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -169,7 +169,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0cc38d20-5ae8-413a-9f26-ff13cd92f24c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0cc5aaa1-07bf-4872-ac72-303cef9fb143	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragon-mantle:f0t0:s1,f:xs:XP:dragon-mantle:f0t0:s1	-	-	-	d864b561c9cb	-	2ff49cdaa2e4	-	-	2026-11-24	xproof
 0cc5aaa1-07bf-4872-ac72-303cef9fb143	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dragon-mantle:f0t0:s1,f:xs:XP:dragon-mantle:f0t0:s1	-	-	-	d864b561c9cb	-	2ff49cdaa2e4	-	-	2026-11-24	xproof
-0cc6d683-366f-4ae4-be60-20ad9621fdaf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0cc6d683-366f-4ae4-be60-20ad9621fdaf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stroke-of-genius:cast:s1,f:xs:XP:stroke-of-genius:cast:s1	-	-	-	5f2128bf97e4	-	f3c00baec471	-	-	2026-11-24	xproof
 0cc89c15-5a48-4998-b6df-21791b6ed9a3	cast	cast-resolve	agreed	-	FX	scen	2	0	Roughshod Duo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0cc89c15-5a48-4998-b6df-21791b6ed9a3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Roughshod Duo/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0cc89c15-5a48-4998-b6df-21791b6ed9a3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Roughshod Duo/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -130,8 +130,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0aa2ab46-c5ad-462b-b441-dbbc4b2c3532	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 0aa2ab46-c5ad-462b-b441-dbbc4b2c3532	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Omnivorous Flytrap/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0aa556a6-66aa-42f1-ba41-0001e10c20a4	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	b30cc7bf7506	-	-	2026-11-24	xproof
-0aa7bd6a-0a8d-4413-a9e8-b7a459300841	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0aa7bd6a-0a8d-4413-a9e8-b7a459300841	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0aa7bd6a-0a8d-4413-a9e8-b7a459300841	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keldon-vandals:f0t0:s1,f:xs:XP:keldon-vandals:f0t0:s1	-	-	-	5f2128bf97e4	-	06f68a3c500e	-	-	2026-11-24	xproof
+0aa7bd6a-0a8d-4413-a9e8-b7a459300841	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keldon-vandals:f0t0:s1,f:xs:XP:keldon-vandals:f0t0:s1	-	-	-	5f2128bf97e4	-	06f68a3c500e	-	-	2026-11-24	xproof
 0aa7bd6a-0a8d-4413-a9e8-b7a459300841	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0aa875dc-89ae-4e7a-b10d-aadde8e2b95c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0aa9ee99-69a8-452b-a0d5-001384bdff3c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-dead:f0t0:s1,f:xs:XP:omen-of-the-dead:f0t0:s1	-	-	-	ae86f6029288	-	2d67311212a5	-	-	2026-11-24	xproof
@@ -169,8 +169,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ace32d6-7261-447c-9ee2-e03febaab91b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ad27d0e-b6c3-4c3f-a389-285d889b6a65	cast	cast-resolve	agreed	-	X	scen	1	0	Ballyrush Banneret/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ad27d0e-b6c3-4c3f-a389-285d889b6a65	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ballyrush Banneret/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0ad3b788-eb3d-4876-9c89-893429595e0e	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ad3b788-eb3d-4876-9c89-893429595e0e	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0ad3b788-eb3d-4876-9c89-893429595e0e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:scrap:cast:s1,f:xs:XP:scrap:cast:s1	-	-	-	5f2128bf97e4	-	e8e80c52d6f6	-	-	2026-11-24	xproof
+0ad3b788-eb3d-4876-9c89-893429595e0e	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:scrap:cast:s2,f:xs:XP:scrap:cast:s2	-	-	-	5f2128bf97e4	-	e8e80c52d6f6	-	-	2026-11-24	xproof
 0ad44727-41c3-471c-b038-1bf43c5f296a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ad44727-41c3-471c-b038-1bf43c5f296a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:core-prowler:f0t0:s1,f:xs:XP:core-prowler:f0t0:s1	-	-	-	d864b561c9cb	-	52657c616ef4	-	-	2026-11-24	xproof
 0ad557fc-6b7e-4f7e-b060-e3c8ec8acf6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

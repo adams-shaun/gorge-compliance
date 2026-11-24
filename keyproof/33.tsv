@@ -1,9 +1,9 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 33005c63-fe9f-4051-b781-eacf1ca5eec6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33005c63-fe9f-4051-b781-eacf1ca5eec6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33005c63-fe9f-4051-b781-eacf1ca5eec6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33005c63-fe9f-4051-b781-eacf1ca5eec6	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+33005c63-fe9f-4051-b781-eacf1ca5eec6	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+33005c63-fe9f-4051-b781-eacf1ca5eec6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+33005c63-fe9f-4051-b781-eacf1ca5eec6	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 33017203-233e-498e-806e-94b1dccf5c35	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eidolon-of-rhetoric:cast:s1,f:xs:XP:eidolon-of-rhetoric:cast:s1	-	-	-	d864b561c9cb	-	6f09ad3dc3bb	-	-	2026-11-24	xproof
 33042d12-f08b-4b3e-b106-c424ef868c13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blade-of-the-swarm:f0t0:s1,f:xs:XP:blade-of-the-swarm:f0t0:s1	-	-	-	9ee19e8250ce	-	02d86f15e0cb	-	-	2026-11-24	xproof
 33042d12-f08b-4b3e-b106-c424ef868c13	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof

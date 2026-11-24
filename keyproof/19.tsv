@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19a11c33-269a-45d3-86c7-827965053f26	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 19a2f0a0-9e68-4982-a5f5-b77d805befd7	cast	cast-resolve	agreed	-	X	scen	1	0	Demonic Pact/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19a2f0a0-9e68-4982-a5f5-b77d805befd7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Demonic Pact/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-19a32e29-45ec-433e-9cb4-b2c32cac8f80	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beastbond-outcaster:f0t0:s1,f:xs:XP:beastbond-outcaster:f0t0:s1	-	-	-	ae86f6029288	-	a829239b252e	-	-	2026-11-24	xproof
+19a32e29-45ec-433e-9cb4-b2c32cac8f80	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beastbond-outcaster:f0t0:s1,f:xs:XP:beastbond-outcaster:f0t0:s1	-	-	-	5f2128bf97e4	-	a829239b252e	-	-	2026-11-24	xproof
 19a32e29-45ec-433e-9cb4-b2c32cac8f80	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a39cc5-2134-4dee-932c-81389806c57b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a3c505-b180-47cc-bef3-9e807a8a4a3d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19dc29a7-8ccc-4e54-829b-86cc102b082d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tin Street Gossip/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19dc29a7-8ccc-4e54-829b-86cc102b082d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tin Street Gossip/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19dc29a7-8ccc-4e54-829b-86cc102b082d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tin Street Gossip/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-19e09405-3294-4f98-a18f-60cf0a8a2e4e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19e09405-3294-4f98-a18f-60cf0a8a2e4e	cast	cast	agreed	-	X	start	2	0	x:xs:XP:granite-grip:cast:s1	-	-	-	5f2128bf97e4	-	e4429f3bd842	-	-	2026-11-24	xproof
 19e483e7-a0a5-4164-a5ea-dab51c07a3d7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:hero-of-the-nyxborn:cast:s1,f:xs:XP:hero-of-the-nyxborn:cast:s1	-	-	-	ae86f6029288	-	ac75632a0909	-	-	2026-11-24	xproof
 19e483e7-a0a5-4164-a5ea-dab51c07a3d7	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:hero-of-the-nyxborn:cast:s1,f:xs:XP:hero-of-the-nyxborn:cast:s1	-	-	-	ae86f6029288	-	ac75632a0909	-	-	2026-11-24	xproof
 19e483e7-a0a5-4164-a5ea-dab51c07a3d7	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -192,7 +192,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19f233b2-8be6-4172-abf9-b132fc3393d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a2	Pump	agreed	-	FX	start	2	0	x:xs:XP:morphling:f0a2:s1,f:xs:XP:morphling:f0a2:s1	-	-	-	5f2128bf97e4	-	bba924555f0b	-	-	2026-11-24	xproof
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a3	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a4	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f23d9e-0c05-4028-9c64-60b9a20020f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gleam-of-battle:cast:s1,f:xs:XP:gleam-of-battle:cast:s1	-	-	-	d864b561c9cb	-	5b7d0401b4da	-	-	2026-11-24	xproof

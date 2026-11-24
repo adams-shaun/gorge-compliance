@@ -58,8 +58,8 @@ ef4d5fb3-70a3-433d-a9d3-18b2beb8d79f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 ef5248d4-4cd1-447c-bdcc-78a09a67d923	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:granite-gargoyle:cast:s1,f:xs:XP:granite-gargoyle:cast:s1	-	-	-	ae86f6029288	-	e67b911a965d	-	-	2026-11-24	xproof
 ef5248d4-4cd1-447c-bdcc-78a09a67d923	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:granite-gargoyle:f0a0:s1,f:xs:XP:granite-gargoyle:f0a0:s1	-	-	-	ae86f6029288	-	e67b911a965d	-	-	2026-11-24	xproof
 ef574346-1d98-447d-acb6-4d8d53c5f651	cast	cast-resolve	agreed	-	X	scen	1	0	Tumbleweed Rising/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ef577d7d-7a24-4bd3-b86b-f69e37bb2ce7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ef577d7d-7a24-4bd3-b86b-f69e37bb2ce7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ef577d7d-7a24-4bd3-b86b-f69e37bb2ce7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wu-scout:f0t0:s1,f:xs:XP:wu-scout:f0t0:s1	-	-	-	5f2128bf97e4	-	e4be08090529	-	-	2026-11-24	xproof
+ef577d7d-7a24-4bd3-b86b-f69e37bb2ce7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wu-scout:f0t0:s1,f:xs:XP:wu-scout:f0t0:s1	-	-	-	5f2128bf97e4	-	e4be08090529	-	-	2026-11-24	xproof
 ef5ad351-6167-4e3a-a9cd-3ae22ec8d638	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ef5d7b38-b782-4fb0-b6cd-3da36995ab39	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 ef5d7b38-b782-4fb0-b6cd-3da36995ab39	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -190,7 +190,7 @@ efee0ca0-0897-4972-99c4-432561b6e9f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 efee89a6-b730-45b6-bb84-33de0f25ad47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 efee89a6-b730-45b6-bb84-33de0f25ad47	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 efef2d33-5354-4fce-880e-cb91fa60f730	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-efef2d33-5354-4fce-880e-cb91fa60f730	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+efef2d33-5354-4fce-880e-cb91fa60f730	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 efefb339-bb7c-4b26-abed-8434f955122b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eff690a7-c2c7-4750-894c-0667d3151165	cast	cast-resolve	agreed	-	FX	scen	2	0	Jeskai Brushmaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eff690a7-c2c7-4750-894c-0667d3151165	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Jeskai Brushmaster/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

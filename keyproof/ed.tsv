@@ -6,7 +6,7 @@ ed04f170-a4d9-4151-b4ae-1200d523dc6b	f0/t0	NULL	owed	refused:no-generator:trigge
 ed06b85a-e85f-47c4-ba90-1664e69a338f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ed06b85a-e85f-47c4-ba90-1664e69a338f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ed076c39-9bfc-424a-8ce8-8572f7c0de73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ed076c39-9bfc-424a-8ce8-8572f7c0de73	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ed076c39-9bfc-424a-8ce8-8572f7c0de73	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 ed0cf504-c365-4486-92bc-c329b83b99d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ed0cf504-c365-4486-92bc-c329b83b99d0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ed0cf504-c365-4486-92bc-c329b83b99d0	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -169,7 +169,7 @@ edd3a3ea-6bde-408c-8b16-85ed3cc312b2	cast	cast-resolve	agreed	-	X	scen	1	0	Iguan
 edd3a3ea-6bde-408c-8b16-85ed3cc312b2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Iguana Parrot/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 edd3a3ea-6bde-408c-8b16-85ed3cc312b2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Iguana Parrot/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 edd3a3ea-6bde-408c-8b16-85ed3cc312b2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Iguana Parrot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-edd4741b-3ee6-421a-8bac-d60736755356	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+edd4741b-3ee6-421a-8bac-d60736755356	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:discordant-dirge:cast:s1,f:xs:XP:discordant-dirge:cast:s1	-	-	-	5f2128bf97e4	-	d1e1181c57d1	-	-	2026-11-24	xproof
 edd4741b-3ee6-421a-8bac-d60736755356	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 edd4741b-3ee6-421a-8bac-d60736755356	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 edd5b228-f19f-4b27-8b92-75545389da14	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ ede92fb6-dfd6-40b4-b58f-af1f7a155efc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ede92fb6-dfd6-40b4-b58f-af1f7a155efc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 edea104c-b563-4fae-9e74-82164a8e090b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ededbdae-d9dc-4206-9335-d7158f2d7700	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-edf25cbe-fa28-44ca-b4be-1d2312e4f6ac	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+edf25cbe-fa28-44ca-b4be-1d2312e4f6ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-patrol:cast:s1,f:xs:XP:goblin-patrol:cast:s1	-	-	-	5f2128bf97e4	-	8698c44f331c	-	-	2026-11-24	xproof
 edf25cbe-fa28-44ca-b4be-1d2312e4f6ac	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 edf304b8-523e-4233-8d77-1d45d33cbb86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 edf429a8-6a4d-4d2a-b0ca-c0c72a0698a3	cast	cast-resolve	agreed	-	FX	scen	2	0	Grim Reaper, Lethal Legionnaire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

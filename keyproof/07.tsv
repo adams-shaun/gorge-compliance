@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0798eb13-83f1-4b7c-b537-83a9da2915a6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 07995092-af6c-43b8-b30b-17e020ead37c	cast	cast-resolve	agreed	-	X	scen	1	0	Thunderous Debut/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0799df10-b489-4f79-bf98-7a0c500b46a1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0799df10-b489-4f79-bf98-7a0c500b46a1	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0799df10-b489-4f79-bf98-7a0c500b46a1	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 0799df10-b489-4f79-bf98-7a0c500b46a1	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 079b1f07-6910-491b-83ba-5ec41260f32d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 079d4698-dc11-4d29-91b6-725d78dfb75d	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 07e15387-f346-4fa0-b556-d1c52d4acc07	static#0.0	static#0.0	agreed	-	X	scen	1	0	Sab-Sunen, Luxa Embodied/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07e15387-f346-4fa0-b556-d1c52d4acc07	static#0.1	static#0.1	agreed	-	X	scen	1	0	Sab-Sunen, Luxa Embodied/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07eb70cf-e6af-4924-a00d-bdf2c6ba78e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-07eb70cf-e6af-4924-a00d-bdf2c6ba78e1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+07eb70cf-e6af-4924-a00d-bdf2c6ba78e1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:angel-of-fury:f0t0:s1,f:xs:XP:angel-of-fury:f0t0:s1	-	-	-	5f2128bf97e4	-	e6504743a374	-	-	2026-11-24	xproof
 07f62413-92cc-4f44-a827-a7c3a7318602	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 07f62413-92cc-4f44-a827-a7c3a7318602	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 07fb2903-b239-43d0-864b-c4437b7a5230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

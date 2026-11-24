@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d873e1d-4fac-42c4-bb31-77e76099e1ef	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3d8aae86-266f-4bfd-a058-0fe12b5ea354	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d8aae86-266f-4bfd-a058-0fe12b5ea354	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d8aae86-266f-4bfd-a058-0fe12b5ea354	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d8aae86-266f-4bfd-a058-0fe12b5ea354	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 3d8ac41c-0566-48b2-a744-39db2f72272c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d8dfd57-7d26-4a3b-a9c3-33077c85b3db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d8dfd57-7d26-4a3b-a9c3-33077c85b3db	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3db40361-5f55-417e-a7cd-7e360cc91b4d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Chainsaw/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3db40361-5f55-417e-a7cd-7e360cc91b4d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Chainsaw/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3db407ec-da4b-4b25-b613-e45c164ffe86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3db407ec-da4b-4b25-b613-e45c164ffe86	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3db407ec-da4b-4b25-b613-e45c164ffe86	f0/t0	Attacks	agreed	-	F	start	2	0	f:xs:XP:cho-arrim-bruiser:f0t0:s1	-	-	-	5f2128bf97e4	-	a64613357150	-	-	2026-11-24	xproof
 3db8466c-864f-48ba-b617-f2c863dfdcbd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dc225a2-61b6-4ac9-a86b-df0c2b0b3898	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dc225a2-61b6-4ac9-a86b-df0c2b0b3898	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

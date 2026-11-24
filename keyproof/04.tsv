@@ -43,8 +43,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0431b67e-ce09-4009-ba5b-9fd41e6f1df4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0431b67e-ce09-4009-ba5b-9fd41e6f1df4	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:elder-of-laurels:f0a0:s1,f:xs:XP:elder-of-laurels:f0a0:s1	-	-	-	d864b561c9cb	-	cec03dfabfd5	-	-	2026-11-24	xproof
 0432e07d-baf6-4c20-8646-08338c7dc950	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0439df39-0324-4110-b3f4-4a32393021de	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0439df39-0324-4110-b3f4-4a32393021de	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0439df39-0324-4110-b3f4-4a32393021de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghitu-war-cry:cast:s1,f:xs:XP:ghitu-war-cry:cast:s1	-	-	-	5f2128bf97e4	-	139446dfeab5	-	-	2026-11-24	xproof
+0439df39-0324-4110-b3f4-4a32393021de	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:ghitu-war-cry:f0a0:s1,f:xs:XP:ghitu-war-cry:f0a0:s1	-	-	-	5f2128bf97e4	-	139446dfeab5	-	-	2026-11-24	xproof
 043d8dee-379f-4706-ad47-0bb562717007	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:earth-cult-elemental:cast:s1,f:xs:XP:earth-cult-elemental:cast:s1	-	-	-	d864b561c9cb	-	588216236146	-	-	2026-11-24	xproof
 043d8dee-379f-4706-ad47-0bb562717007	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:earth-cult-elemental:cast:s1,f:xs:XP:earth-cult-elemental:cast:s1	-	-	-	d864b561c9cb	-	588216236146	-	-	2026-11-24	xproof
 043dd2e5-21e4-49b9-90b2-831e587b2238	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0498ea14-53d9-4655-a616-0ff3cf73de4e	f0/a0	Mana	agreed	-	FX	start	3	0	x:xs:XP:foundry-of-the-consuls:f0a0:s1,f:xs:XP:foundry-of-the-consuls:f0a0:s1	-	-	-	d864b561c9cb	-	869b59a751a1	-	-	2026-11-24	xproof
 0498ea14-53d9-4655-a616-0ff3cf73de4e	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:foundry-of-the-consuls:f0a1:s1,f:xs:XP:foundry-of-the-consuls:f0a1:s1	-	-	-	d864b561c9cb	-	869b59a751a1	-	-	2026-11-24	xproof
 0498ea14-53d9-4655-a616-0ff3cf73de4e	land	land	agreed	-	FX	start	2	0	x:xs:XP:foundry-of-the-consuls:land:s1,f:xs:XP:foundry-of-the-consuls:land:s1	-	-	-	d864b561c9cb	-	869b59a751a1	-	-	2026-11-24	xproof
-049d1fb2-cce7-40e7-a633-e84cf9782d89	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+049d1fb2-cce7-40e7-a633-e84cf9782d89	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:donate:cast:s1,f:xs:XP:donate:cast:s1	-	-	-	5f2128bf97e4	-	97e0bcb50fc0	-	-	2026-11-24	xproof
 049d2e18-8fa9-44d9-8618-f675592cb624	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 049d8b06-db90-4b9c-8195-d987b3ef1005	cast	cast-resolve	agreed	-	FX	scen	2	0	Courier of Comestibles/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 049d8b06-db90-4b9c-8195-d987b3ef1005	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04c4250e-014a-4067-80e8-4134069354f7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Flesh Burrower/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04c4250e-014a-4067-80e8-4134069354f7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Flesh Burrower/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04c7bb20-6e40-4e79-a0ec-ced920d3491e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04c7bb20-6e40-4e79-a0ec-ced920d3491e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04c7bb20-6e40-4e79-a0ec-ced920d3491e	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 04c7f4fe-2098-4311-866d-6733c08d5178	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04c7f4fe-2098-4311-866d-6733c08d5178	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04c7f4fe-2098-4311-866d-6733c08d5178	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -181,8 +181,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04cc5292-a485-4bb8-a143-9364229d480f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04cc5292-a485-4bb8-a143-9364229d480f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04cc9177-1ffc-4ac8-a64d-7995b4f33d23	cast	cast-resolve	agreed	-	X	scen	1	0	Spry and Mighty/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-04cc9d99-69a9-499b-91bc-f2f30d217bdd	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04cc9d99-69a9-499b-91bc-f2f30d217bdd	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04cc9d99-69a9-499b-91bc-f2f30d217bdd	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:lay-waste:cast:s1,f:xs:XP:lay-waste:cast:s1	-	-	-	5f2128bf97e4	-	a7671ef3c1e5	-	-	2026-11-24	xproof
+04cc9d99-69a9-499b-91bc-f2f30d217bdd	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:lay-waste:cast:s2,f:xs:XP:lay-waste:cast:s2	-	-	-	5f2128bf97e4	-	a7671ef3c1e5	-	-	2026-11-24	xproof
 04cf02dc-f053-414e-87d8-1537f25bcbf4	cast	cast	owed	harness	-	start	0	0	-	-	-	-	9ee19e8250ce	-	912b158c5ac0	-	-	2026-11-24	xproof
 04cf02dc-f053-414e-87d8-1537f25bcbf4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04cffc41-05da-45fb-82da-2c4d4108c7e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nightsquad-commando:f0t0:s1,f:xs:XP:nightsquad-commando:f0t0:s1	-	-	-	ae86f6029288	-	12bf6fe6ec82	-	-	2026-11-24	xproof
@@ -198,8 +198,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04dcda3b-3401-4523-8b97-b700a14feb36	cast	cast-resolve	agreed	-	X	scen	1	0	Gallant Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04dcda3b-3401-4523-8b97-b700a14feb36	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Gallant Strike/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04dce348-be42-443a-a88d-c47436ba2ec4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04dd449f-ff3a-4ed7-8241-244d58b371dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04dd449f-ff3a-4ed7-8241-244d58b371dc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04dd449f-ff3a-4ed7-8241-244d58b371dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-settler:f0t0:s1,f:xs:XP:goblin-settler:f0t0:s1	-	-	-	5f2128bf97e4	-	61f5033d24e4	-	-	2026-11-24	xproof
+04dd449f-ff3a-4ed7-8241-244d58b371dc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-settler:f0t0:s1,f:xs:XP:goblin-settler:f0t0:s1	-	-	-	5f2128bf97e4	-	61f5033d24e4	-	-	2026-11-24	xproof
 04dd9395-847b-46f7-a669-9b0df89d01ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ready-to-rumble:cast:s1,f:xs:XP:ready-to-rumble:cast:s1	-	-	-	d864b561c9cb	-	ed4dc79d252a	-	-	2026-11-24	xproof
 04e2afbe-0c08-42bc-93e6-662066a958bf	cast	cast-resolve	agreed	-	X	scen	1	0	Deadly Cover-Up/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04e2afbe-0c08-42bc-93e6-662066a958bf	static#0.0	static#0.0	agreed	-	X	scen	1	0	Deadly Cover-Up/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

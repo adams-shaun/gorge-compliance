@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 420290d9-7bb9-4e5a-82ec-c777152ccc72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 420290d9-7bb9-4e5a-82ec-c777152ccc72	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 420290d9-7bb9-4e5a-82ec-c777152ccc72	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:urn-of-godfire:f0a1:s1,f:xs:XP:urn-of-godfire:f0a1:s1	-	-	-	ae86f6029288	-	65a88e8fa52a	-	-	2026-11-24	xproof
-42081a57-b521-45c2-928d-0a0a4641818d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-fleet-spy:f0t0:s1,f:xs:XP:storm-fleet-spy:f0t0:s1	-	-	-	ae86f6029288	-	2f817346b7bf	-	-	2026-11-24	xproof
+42081a57-b521-45c2-928d-0a0a4641818d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-fleet-spy:f0t0:s1,f:xs:XP:storm-fleet-spy:f0t0:s1	-	-	-	5f2128bf97e4	-	2f817346b7bf	-	-	2026-11-24	xproof
 42081a57-b521-45c2-928d-0a0a4641818d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 420aaa77-f429-4f3d-a73e-91dc25cb38db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tainted-observer:cast:s1,f:xs:XP:tainted-observer:cast:s1	-	-	-	ae86f6029288	-	ea80e9b30369	-	-	2026-11-24	xproof
 420aaa77-f429-4f3d-a73e-91dc25cb38db	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -127,14 +127,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42b2c6d0-e0da-41b0-8876-f17dbe5db79a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42b2c6d0-e0da-41b0-8876-f17dbe5db79a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42b2db4c-4a1d-436f-9eeb-53a04db46c58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42b44108-4a03-4333-bf5a-e42493f4d5e4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+42b44108-4a03-4333-bf5a-e42493f4d5e4	cast	cast	agreed	-	F	start	2	0	f:xs:XP:outmaneuver:cast:s1	-	-	-	5f2128bf97e4	-	06f91d7b478b	-	-	2026-11-24	xproof
 42b8aa14-10bc-4bd6-88d9-4bb287eadd19	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42b8aa14-10bc-4bd6-88d9-4bb287eadd19	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42b8aa14-10bc-4bd6-88d9-4bb287eadd19	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42bb6537-fa54-43b7-84f2-dea41adc35fd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+42bb6537-fa54-43b7-84f2-dea41adc35fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dauthi-warlord:cast:s1,f:xs:XP:dauthi-warlord:cast:s1	-	-	-	5f2128bf97e4	-	de1ed74e1225	-	-	2026-11-24	xproof
 42bb7ea9-f6e4-4551-8d93-3b1eae84b865	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42bbef66-967b-4922-8b2e-e57d1b8244bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42bbef66-967b-4922-8b2e-e57d1b8244bb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+42bbef66-967b-4922-8b2e-e57d1b8244bb	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 42bc33dd-3bba-462d-b272-2e8bd58c649e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42bc33dd-3bba-462d-b272-2e8bd58c649e	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 42bf259d-4bb9-49c3-b4ec-223dca62f4d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

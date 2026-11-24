@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 764f6412-c4ff-4eec-9a9d-870661f97f8b	static#0.1	static#0.1	agreed	-	X	scen	1	0	Fblthp, Lost on the Range/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 764f6412-c4ff-4eec-9a9d-870661f97f8b	static#0.2	static#0.2	agreed	-	X	scen	1	0	Fblthp, Lost on the Range/static#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 765017e5-b43d-4c77-a9a9-0fcf0c0cd098	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-765017e5-b43d-4c77-a9a9-0fcf0c0cd098	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+765017e5-b43d-4c77-a9a9-0fcf0c0cd098	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:soltari-champion:f0t0:s1,f:xs:XP:soltari-champion:f0t0:s1	-	-	-	5f2128bf97e4	-	56218f5c12ad	-	-	2026-11-24	xproof
 76558381-c4ae-4bc3-8c7b-fa0b717f0282	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slash-panther:cast:s1,f:xs:XP:slash-panther:cast:s1	-	-	-	d864b561c9cb	-	378c092c6049	-	-	2026-11-24	xproof
 765863c8-1be0-4bb1-9e9c-db7701cffde3	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:lonely-sandbar:f0a0:s1,f:xs:XP:lonely-sandbar:f0a0:s1	-	-	-	d864b561c9cb	-	84fc937d1c19	-	-	2026-11-24	xproof
 765863c8-1be0-4bb1-9e9c-db7701cffde3	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,9 +128,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 768c78f3-f09c-4b77-974d-514925e8df5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76905904-b3e4-44ee-bfcb-e518f0815af5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76905904-b3e4-44ee-bfcb-e518f0815af5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7694887a-2f3b-4ef1-b598-f3323f018ef4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7694887a-2f3b-4ef1-b598-f3323f018ef4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7694887a-2f3b-4ef1-b598-f3323f018ef4	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7694887a-2f3b-4ef1-b598-f3323f018ef4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grafted-skullcap:cast:s1,f:xs:XP:grafted-skullcap:cast:s1	-	-	-	5f2128bf97e4	-	59e5ec3c29f0	-	-	2026-11-24	xproof
+7694887a-2f3b-4ef1-b598-f3323f018ef4	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+7694887a-2f3b-4ef1-b598-f3323f018ef4	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:grafted-skullcap:cast:s1,f:xs:XP:grafted-skullcap:cast:s1	-	-	-	5f2128bf97e4	-	59e5ec3c29f0	-	-	2026-11-24	xproof
 7695b61a-8d44-44b1-9783-ea3114111c3e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-healer:cast:s1,f:xs:XP:master-healer:cast:s1	-	-	-	25696bf19d5b	-	d7c4c9868427	-	-	2026-11-24	xproof
 7695b61a-8d44-44b1-9783-ea3114111c3e	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:master-healer:f0a0:s1,f:xs:XP:master-healer:f0a0:s1	-	-	-	d864b561c9cb	-	d7c4c9868427	-	-	2026-11-24	xproof
 7695ef41-fa58-4890-b3fe-de5751831d8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76b7e1ee-43f0-4b56-822a-71b064c9201b	cast	cast-resolve	agreed	-	X	scen	1	0	Dathon and Picard at El-Adrel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76bbd280-dcbc-43b3-a8a1-603443b2ccaa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76bbd280-dcbc-43b3-a8a1-603443b2ccaa	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76c02534-35e3-4950-b4b3-90c679cdf6a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76c02534-35e3-4950-b4b3-90c679cdf6a7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76c02534-35e3-4950-b4b3-90c679cdf6a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-commando:f0t0:s1,f:xs:XP:goblin-commando:f0t0:s1	-	-	-	5f2128bf97e4	-	8aab3353bd61	-	-	2026-11-24	xproof
+76c02534-35e3-4950-b4b3-90c679cdf6a7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-commando:f0t0:s1,f:xs:XP:goblin-commando:f0t0:s1	-	-	-	5f2128bf97e4	-	8aab3353bd61	-	-	2026-11-24	xproof
 76c036df-44f5-4021-b7fc-656147351341	cast	cast-resolve	agreed	-	X	scen	1	0	Key to the Side-Door/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76c036df-44f5-4021-b7fc-656147351341	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Key to the Side-Door/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76c036df-44f5-4021-b7fc-656147351341	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Key to the Side-Door/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

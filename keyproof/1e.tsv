@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1eb64899-8865-48cc-bd58-529b1294ec99	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1eb64899-8865-48cc-bd58-529b1294ec99	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1eb6c28d-ebac-4016-ad07-c90081ee4983	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1eb6c28d-ebac-4016-ad07-c90081ee4983	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1eb6c28d-ebac-4016-ad07-c90081ee4983	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-monitor:f0a0:s1,f:xs:XP:phyrexian-monitor:f0a0:s1	-	-	-	5f2128bf97e4	-	2d27aeefec21	-	-	2026-11-24	xproof
 1eb88d87-e024-47fe-bd63-0eac69c106f6	cast	cast	agreed	-	F	start	2	0	f:xs:XP:petals-of-insight:cast:s1	-	-	-	64a08ba7d913	-	23dd755e5f1a	-	-	2026-11-24	xproof
 1eb89059-b691-431d-bcda-ab8aa14c67c8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:veteran-cathar:cast:s1,f:xs:XP:veteran-cathar:cast:s1	-	-	-	d864b561c9cb	-	b9d2cb0f4a1f	-	-	2026-11-24	xproof
 1eb89059-b691-431d-bcda-ab8aa14c67c8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:veteran-cathar:f0a0:s1,f:xs:XP:veteran-cathar:f0a0:s1	-	-	-	d864b561c9cb	-	b9d2cb0f4a1f	-	-	2026-11-24	xproof
@@ -170,8 +170,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ed2d8e0-462b-468e-8fd3-1f3c6d99fb8a	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1ed63322-f877-4f1c-90bd-e1adb3668d6d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vectis-dominator:cast:s1,f:xs:XP:vectis-dominator:cast:s1	-	-	-	8a1b1a193ec0	-	26133765b586	-	-	2026-11-24	xproof
 1ed63322-f877-4f1c-90bd-e1adb3668d6d	f0/a0	Tap	agreed	-	F	start	2	0	f:xs:XP:vectis-dominator:f0a0:s1	-	-	-	8a1b1a193ec0	-	26133765b586	-	-	2026-11-24	xproof
-1ed662d7-65b9-4024-a892-c4559fb6aaf9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ed662d7-65b9-4024-a892-c4559fb6aaf9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ed662d7-65b9-4024-a892-c4559fb6aaf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:talas-researcher:cast:s1,f:xs:XP:talas-researcher:cast:s1	-	-	-	5f2128bf97e4	-	6a5e583d08ea	-	-	2026-11-24	xproof
+1ed662d7-65b9-4024-a892-c4559fb6aaf9	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:talas-researcher:f0a0:s1,f:xs:XP:talas-researcher:f0a0:s1	-	-	-	5f2128bf97e4	-	6a5e583d08ea	-	-	2026-11-24	xproof
 1ed9e351-0000-4b75-8ecb-d15bd88df68a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ed9e351-0000-4b75-8ecb-d15bd88df68a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ed9e351-0000-4b75-8ecb-d15bd88df68a	f0/t1	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

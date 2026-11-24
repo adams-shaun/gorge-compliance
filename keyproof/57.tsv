@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57828973-df3d-4288-988d-147a3016120e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57831c07-6915-4579-b3e1-de93a3664444	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-surveyor:f0t0:s1,f:xs:XP:aven-surveyor:f0t0:s1	-	-	-	ae86f6029288	-	93275a7448b6	-	-	2026-11-24	xproof
 57831c07-6915-4579-b3e1-de93a3664444	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5783e71e-2497-4241-9d1a-8bced4745b1d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5783e71e-2497-4241-9d1a-8bced4745b1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:battle-squadron:cast:s1,f:xs:XP:battle-squadron:cast:s1	-	-	-	5f2128bf97e4	-	64eb9ff11adf	-	-	2026-11-24	xproof
 5783facf-d26e-4aae-a753-b9dc553361c1	cast	cast-resolve	agreed	-	FX	scen	2	0	Mosswood Dreadknight/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5783facf-d26e-4aae-a753-b9dc553361c1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mosswood Dreadknight/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5783facf-d26e-4aae-a753-b9dc553361c1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mosswood Dreadknight/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -120,7 +120,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57b37df5-fee4-4720-931f-f0cb0a8b338c	land	play-land	agreed	-	X	scen	1	0	Orzhov Guildgate/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57b3f7fc-1812-4134-a645-6cef48a8aa71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57b4da3f-361a-4cbe-b77f-190ec33eefd8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57b4da3f-361a-4cbe-b77f-190ec33eefd8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57b4da3f-361a-4cbe-b77f-190ec33eefd8	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 57b4da3f-361a-4cbe-b77f-190ec33eefd8	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57b75be4-9229-4a48-a59e-a0f812f38637	cast	cast-resolve	agreed	-	X	scen	1	0	Diplomatic Relations/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57b86d5c-3269-44bc-a838-3c5439d820d9	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:mirrorpool:f0a1:s1,f:xs:XP:mirrorpool:f0a1:s1	-	-	-	ae86f6029288	-	4c974fd0f9dc	-	-	2026-11-24	xproof
@@ -195,7 +195,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57fdf496-c31e-4a3b-a8a6-4f053b808267	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twisted-reflection:cast:s1,f:xs:XP:twisted-reflection:cast:s1	-	-	-	d864b561c9cb	-	9bd9f9b62696	-	-	2026-11-24	xproof
 57fe5c94-ee93-45c6-bf7e-89d177d0fe70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57fe5c94-ee93-45c6-bf7e-89d177d0fe70	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57fe5c94-ee93-45c6-bf7e-89d177d0fe70	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57fe5c94-ee93-45c6-bf7e-89d177d0fe70	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 57fe941c-a830-4570-afe2-18f93c7a7b84	cast	cast-resolve	agreed	-	X	scen	1	0	Obliterating Bolt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57ffb558-3a1c-43ea-a79c-bcfacad22ca4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57ffb558-3a1c-43ea-a79c-bcfacad22ca4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

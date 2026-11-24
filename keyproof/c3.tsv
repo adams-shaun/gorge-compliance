@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 c3006be3-a796-4238-95dd-1e8e47c063b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c304777a-39a9-4a2a-8cec-8116afb34c5b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c304777a-39a9-4a2a-8cec-8116afb34c5b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c304777a-39a9-4a2a-8cec-8116afb34c5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thalakos-deceiver:cast:s1,f:xs:XP:thalakos-deceiver:cast:s1	-	-	-	5f2128bf97e4	-	548d1f71d197	-	-	2026-11-24	xproof
+c304777a-39a9-4a2a-8cec-8116afb34c5b	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 c30e89fa-8993-468d-b2ee-093c3950f520	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c30e8efb-d097-4388-8d5c-1037ccc29fba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c30e8efb-d097-4388-8d5c-1037ccc29fba	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -43,7 +43,7 @@ c34c17c7-3827-49a2-be25-67f44fdfe150	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c34cf404-729d-46ef-8661-1095e5581766	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c34dec60-031a-4cd3-b2e5-db7a02a34d96	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sudden-reclamation:cast:s1	-	-	-	d864b561c9cb	-	eac99425031e	-	-	2026-11-24	xproof
 c35111ce-4325-4547-b954-08275a268060	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c35111ce-4325-4547-b954-08275a268060	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c35111ce-4325-4547-b954-08275a268060	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 c351a325-42cb-43ad-8648-c204e2317b50	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malach-of-the-dawn:cast:s1,f:xs:XP:malach-of-the-dawn:cast:s1	-	-	-	9ee19e8250ce	-	5bc2737d20cf	-	-	2026-11-24	xproof
 c351a325-42cb-43ad-8648-c204e2317b50	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:malach-of-the-dawn:f0a0:s1,f:xs:XP:malach-of-the-dawn:f0a0:s1	-	-	-	d864b561c9cb	-	5bc2737d20cf	-	-	2026-11-24	xproof
 c35540ad-9ab1-4be9-b97d-603813394a26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ c3ead850-3f22-4edb-ac96-40abbdf27905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c3ead850-3f22-4edb-ac96-40abbdf27905	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c3f83115-398f-4738-9bf2-b37bd363e9f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c3f841c4-6e12-46fc-802a-3025182e7ff4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c3f841c4-6e12-46fc-802a-3025182e7ff4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c3f841c4-6e12-46fc-802a-3025182e7ff4	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 c3fb2829-64f2-4795-b815-edcc5bbbc360	cast	cast-resolve	agreed	-	X	scen	1	0	Guardian of the Halls/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c3fb2829-64f2-4795-b815-edcc5bbbc360	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Guardian of the Halls/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c3fb2829-64f2-4795-b815-edcc5bbbc360	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Guardian of the Halls/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

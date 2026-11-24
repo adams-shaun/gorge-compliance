@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c741801-bfa5-4ff6-bf06-8d5edc06388d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c75234b-e367-46da-8454-be4315f9b9de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:precinct-captain:cast:s1,f:xs:XP:precinct-captain:cast:s1	-	-	-	d864b561c9cb	-	8ca897043d05	-	-	2026-11-24	xproof
 3c75234b-e367-46da-8454-be4315f9b9de	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-3c756eda-4fc1-4766-99be-32d8c9f35262	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c756eda-4fc1-4766-99be-32d8c9f35262	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sword-of-the-chosen:cast:s1,f:xs:XP:sword-of-the-chosen:cast:s1	-	-	-	5f2128bf97e4	-	810f653a9073	-	-	2026-11-24	xproof
 3c756eda-4fc1-4766-99be-32d8c9f35262	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c76bb90-92fb-428b-8e94-def4cf4b6f2d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:izzet-cluestone:cast:s1,f:xs:XP:izzet-cluestone:cast:s1	-	-	-	d864b561c9cb	-	5b11434e1683	-	-	2026-11-24	xproof
 3c76bb90-92fb-428b-8e94-def4cf4b6f2d	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:izzet-cluestone:cast:s1,f:xs:XP:izzet-cluestone:cast:s1	-	-	-	d864b561c9cb	-	5b11434e1683	-	-	2026-11-24	xproof
@@ -122,9 +122,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c87ea85-ca29-45a7-b5b2-758c62898b0a	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c87ea85-ca29-45a7-b5b2-758c62898b0a	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c87ea85-ca29-45a7-b5b2-758c62898b0a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c880ac2-0b22-4f7e-a55a-381de235e971	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c880ac2-0b22-4f7e-a55a-381de235e971	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c880ac2-0b22-4f7e-a55a-381de235e971	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c880ac2-0b22-4f7e-a55a-381de235e971	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:spined-fluke:cast:s1,f:xs:XP:spined-fluke:cast:s1	-	-	-	5f2128bf97e4	-	3b4d312ca7db	-	-	2026-11-24	xproof
+3c880ac2-0b22-4f7e-a55a-381de235e971	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:spined-fluke:f0a0:s1,f:xs:XP:spined-fluke:f0a0:s1	-	-	-	5f2128bf97e4	-	3b4d312ca7db	-	-	2026-11-24	xproof
+3c880ac2-0b22-4f7e-a55a-381de235e971	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:spined-fluke:cast:s1,f:xs:XP:spined-fluke:cast:s1	-	-	-	5f2128bf97e4	-	3b4d312ca7db	-	-	2026-11-24	xproof
 3c88108e-d983-427a-9b85-b9cdd2d5083b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c889b2e-380a-4bc4-8d56-5fb12bc7c78b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nyxathid:cast:s1,f:xs:XP:nyxathid:cast:s1	-	-	-	8a1b1a193ec0	-	843b4f80eedf	-	-	2026-11-24	xproof
 3c8a6c58-f4af-4809-af86-a931313fa71e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:finishing-blow:cast:s1,f:xs:XP:finishing-blow:cast:s1	-	-	-	ae86f6029288	-	3a5cfa6a5175	-	-	2026-11-24	xproof

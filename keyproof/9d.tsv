@@ -36,8 +36,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d293b69-12b7-4b50-a0a7-c4f493dee30b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d293b69-12b7-4b50-a0a7-c4f493dee30b	f0/a2	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:ally-encampment:f0a2:s1,f:xs:XP:ally-encampment:f0a2:s1	-	-	-	d864b561c9cb	-	a5a6e45b311f	-	-	2026-11-24	xproof
 9d293b69-12b7-4b50-a0a7-c4f493dee30b	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d2ad65f-fba0-45e9-a5e6-bec63a9db979	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d2ad65f-fba0-45e9-a5e6-bec63a9db979	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d2ad65f-fba0-45e9-a5e6-bec63a9db979	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:predatory-nightstalker:f0t0:s1,f:xs:XP:predatory-nightstalker:f0t0:s1	-	-	-	5f2128bf97e4	-	a891db17362d	-	-	2026-11-24	xproof
+9d2ad65f-fba0-45e9-a5e6-bec63a9db979	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:predatory-nightstalker:f0t0:s1,f:xs:XP:predatory-nightstalker:f0t0:s1	-	-	-	5f2128bf97e4	-	a891db17362d	-	-	2026-11-24	xproof
 9d2aea05-f55c-4355-950f-bfdc4e985e80	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d2b9f3b-9ba1-4f28-8cd9-490803190e24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:march-from-the-tomb:cast:s1,f:xs:XP:march-from-the-tomb:cast:s1	-	-	-	d864b561c9cb	-	6f528d21cec4	-	-	2026-11-24	xproof
 9d2bfbb2-84df-4d7c-9989-7f5577f90d97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -120,7 +120,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d954def-0045-4860-b154-cb64b6835fe0	f0/a0	Draw	agreed	-	F	start	2	0	f:xs:XP:grave-shell-scarab:f0a0:s1	-	-	-	d864b561c9cb	-	0f77a8cac631	-	-	2026-11-24	xproof
 9d95d173-5c7f-4e0c-bcdc-9b90fcd7339b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d973df5-b2e8-4af8-8379-0f8282e1e62a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d973df5-b2e8-4af8-8379-0f8282e1e62a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d973df5-b2e8-4af8-8379-0f8282e1e62a	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 9d9b52b2-2edc-4f7f-a8d9-e024b1398847	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d9b52b2-2edc-4f7f-a8d9-e024b1398847	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9d9b52b2-2edc-4f7f-a8d9-e024b1398847	f1/t1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

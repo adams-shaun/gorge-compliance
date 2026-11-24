@@ -39,7 +39,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 682eb224-cab4-4829-810b-72e63a9ceb5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6832f9e2-294a-44a2-8af9-eb16ccfdfc36	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6832f9e2-294a-44a2-8af9-eb16ccfdfc36	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-683775ac-481e-4c26-ab2f-5d2813af0268	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sentinel-of-lost-lore:f0t0:s1,f:xs:XP:sentinel-of-lost-lore:f0t0:s1	-	-	-	ae86f6029288	-	9e6721ef2361	-	-	2026-11-24	xproof
+683775ac-481e-4c26-ab2f-5d2813af0268	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sentinel-of-lost-lore:f0t0:s1,f:xs:XP:sentinel-of-lost-lore:f0t0:s1	-	-	-	5f2128bf97e4	-	9e6721ef2361	-	-	2026-11-24	xproof
 683775ac-481e-4c26-ab2f-5d2813af0268	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683a06b6-af77-440f-81b9-8958597a7324	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683a06b6-af77-440f-81b9-8958597a7324	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68865793-daeb-4c55-80cb-12853f9f96c4	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:amoeboid-changeling:f0a1:s1,f:xs:XP:amoeboid-changeling:f0a1:s1	-	-	-	d864b561c9cb	-	f425497029bd	-	-	2026-11-24	xproof
 6886e39a-4044-4c33-a94d-8144a6d1e624	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68879437-bbe2-4e99-b17b-ddec30bfd3d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68879437-bbe2-4e99-b17b-ddec30bfd3d0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68879437-bbe2-4e99-b17b-ddec30bfd3d0	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 6889a555-6fde-4728-9cf2-715f0730efb7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:imperial-aerosaur:f0t0:s1,f:xs:XP:imperial-aerosaur:f0t0:s1	-	-	-	d864b561c9cb	-	7e6d024e6bc1	-	-	2026-11-24	xproof
 6889a555-6fde-4728-9cf2-715f0730efb7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:imperial-aerosaur:f0t0:s1,f:xs:XP:imperial-aerosaur:f0t0:s1	-	-	-	d864b561c9cb	-	7e6d024e6bc1	-	-	2026-11-24	xproof
 688a0b7d-bf00-45ab-ab3f-9d19f52f019a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68d4d753-5e53-48a6-8ba2-56020893c239	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:junkyard-genius:cast:s1,f:xs:XP:junkyard-genius:cast:s1	-	-	-	d864b561c9cb	-	f0efc2a225b6	-	-	2026-11-24	xproof
 68d4d753-5e53-48a6-8ba2-56020893c239	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 68d4d753-5e53-48a6-8ba2-56020893c239	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:junkyard-genius:cast:s1,f:xs:XP:junkyard-genius:cast:s1	-	-	-	d864b561c9cb	-	f0efc2a225b6	-	-	2026-11-24	xproof
-68d7fafd-15f4-46fe-8233-09c3c873d1a1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68d7fafd-15f4-46fe-8233-09c3c873d1a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crosswinds:cast:s1,f:xs:XP:crosswinds:cast:s1	-	-	-	5f2128bf97e4	-	763347087a29	-	-	2026-11-24	xproof
 68d84ffa-5bd0-4ed9-a987-6cef13095438	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:avatar-of-might:cast:s1,f:xs:XP:avatar-of-might:cast:s1	-	-	-	25696bf19d5b	-	0b5ed2bc0599	-	-	2026-11-24	xproof
 68df4c46-513a-4d75-9d4b-ac95d45be255	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68e0b691-f332-4b0a-8173-bb8a48b463a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:excavation-mole:f0t0:s1,f:xs:XP:excavation-mole:f0t0:s1	-	-	-	ae86f6029288	-	0402a628d6c7	-	-	2026-11-24	xproof
@@ -220,4 +220,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68fc3611-8d82-4f87-ab50-603790a27455	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gruul-nodorog:cast:s1,f:xs:XP:gruul-nodorog:cast:s1	-	-	-	64a08ba7d913	-	9b93a58ae2ec	-	-	2026-11-24	xproof
 68fc3611-8d82-4f87-ab50-603790a27455	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 68fc55b9-55cc-4caf-a052-b44ddc0b346f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68fc55b9-55cc-4caf-a052-b44ddc0b346f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68fc55b9-55cc-4caf-a052-b44ddc0b346f	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:wu-longbowman:f0a0:s1,f:xs:XP:wu-longbowman:f0a0:s1	-	-	-	5f2128bf97e4	-	cfad26f5d1d9	-	-	2026-11-24	xproof

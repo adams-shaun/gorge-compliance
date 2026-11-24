@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 917652c7-ac12-4cd7-ab2d-f2260a620d02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91770dc7-3de3-458f-a240-6540455fe05f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91770dc7-3de3-458f-a240-6540455fe05f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91770dc7-3de3-458f-a240-6540455fe05f	f0/a1	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:d-avenant-healer:f0a0:s1,f:xs:XP:d-avenant-healer:f0a0:s1	-	-	-	ae86f6029288	-	9ad6fedef5b2	-	-	2026-11-24	xproof
+91770dc7-3de3-458f-a240-6540455fe05f	f0/a1	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:d-avenant-healer:f0a0:s1,f:xs:XP:d-avenant-healer:f0a0:s1	-	-	-	5f2128bf97e4	-	9ad6fedef5b2	-	-	2026-11-24	xproof
 9178253e-0d89-450d-a93b-ed4765e945db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 917aef2b-0e6d-460e-8745-8da8423d1592	cast	cast-resolve	agreed	-	X	scen	1	0	Riverwheel Sweep/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9180f77f-c288-4a24-a35d-a16270b3d737	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -179,7 +179,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91e33674-b13a-41de-8998-4b57016ae42f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e3f057-c24f-42b5-8525-74b44bdefc83	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e3f057-c24f-42b5-8525-74b44bdefc83	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-91e49e8e-575f-43c8-9263-a8568697e7f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rictus-robber:f0t0:s1,f:xs:XP:rictus-robber:f0t0:s1	-	-	-	ae86f6029288	-	fc2a776ff044	-	-	2026-11-24	xproof
+91e49e8e-575f-43c8-9263-a8568697e7f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rictus-robber:f0t0:s1,f:xs:XP:rictus-robber:f0t0:s1	-	-	-	5f2128bf97e4	-	fc2a776ff044	-	-	2026-11-24	xproof
 91e49e8e-575f-43c8-9263-a8568697e7f4	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e6fb47-59e4-4616-b8dd-3a7e30070074	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e6fb47-59e4-4616-b8dd-3a7e30070074	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -188,8 +188,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91ebedb5-cb5f-4c58-ad30-6c6b0a106aa0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frogtosser-banneret:cast:s1,f:xs:XP:frogtosser-banneret:cast:s1	-	-	-	d864b561c9cb	-	26cac847c7d9	-	-	2026-11-24	xproof
 91edef61-2487-405c-a3ec-67a814dfeff2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91edef61-2487-405c-a3ec-67a814dfeff2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91f36a03-6031-4834-98ee-20b36cdf5569	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91f36a03-6031-4834-98ee-20b36cdf5569	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91f36a03-6031-4834-98ee-20b36cdf5569	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jeweled-torque:cast:s1,f:xs:XP:jeweled-torque:cast:s1	-	-	-	5f2128bf97e4	-	0d04ade93875	-	-	2026-11-24	xproof
+91f36a03-6031-4834-98ee-20b36cdf5569	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 91f410c5-4313-462f-8d21-da63988d919f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91f410c5-4313-462f-8d21-da63988d919f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91f410c5-4313-462f-8d21-da63988d919f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -72,8 +72,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17492186-9814-4c41-8111-1f000a96c212	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hobbit Hole/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17492186-9814-4c41-8111-1f000a96c212	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hobbit Hole/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17492186-9814-4c41-8111-1f000a96c212	land	play-land	agreed	-	X	scen	1	0	Hobbit Hole/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-174cf7cd-3e8c-4f90-abc1-a78a0ce832d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-174cf7cd-3e8c-4f90-abc1-a78a0ce832d2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+174cf7cd-3e8c-4f90-abc1-a78a0ce832d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shu-soldier-farmers:f0t0:s1,f:xs:XP:shu-soldier-farmers:f0t0:s1	-	-	-	5f2128bf97e4	-	c84107452355	-	-	2026-11-24	xproof
+174cf7cd-3e8c-4f90-abc1-a78a0ce832d2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shu-soldier-farmers:f0t0:s1,f:xs:XP:shu-soldier-farmers:f0t0:s1	-	-	-	5f2128bf97e4	-	c84107452355	-	-	2026-11-24	xproof
 174dfb7f-fe1e-4089-80c4-1788a9307263	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 174dfb7f-fe1e-4089-80c4-1788a9307263	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1750cf0a-0709-4f02-90ea-572ff88a37a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17916cf9-1e6c-41bd-96ce-2b050d828838	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:cursed-courtier:f0t0:s2,f:xs:XP:cursed-courtier:f0t0:s2	-	-	-	e07cf3a05ba5	-	a9940b40be12	-	-	2026-11-24	xproof
 17917b7a-2b2b-4a96-a21e-10cd91375660	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17917b7a-2b2b-4a96-a21e-10cd91375660	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17969b71-9612-45ff-b789-1c033f832154	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17969b71-9612-45ff-b789-1c033f832154	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alaborn-trooper:cast:s1,f:xs:XP:alaborn-trooper:cast:s1	-	-	-	5f2128bf97e4	-	086733170d64	-	-	2026-11-24	xproof
 179cc807-5150-4513-88b2-73cb05009b7d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 179cc807-5150-4513-88b2-73cb05009b7d	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 17a34f8d-a80f-4331-8be5-06cbb9d10d7b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17b60106-a4c7-410a-8ac3-ec8e74e29a7c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17b60106-a4c7-410a-8ac3-ec8e74e29a7c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17b60106-a4c7-410a-8ac3-ec8e74e29a7c	land	land	agreed	-	FX	start	2	0	x:xs:XP:mystic-sanctuary:f0t0:s1,f:xs:XP:mystic-sanctuary:f0t0:s1	-	-	-	ae86f6029288	-	e48806a4fd96	-	-	2026-11-24	xproof
-17b7b7e4-4ae8-495d-bf0c-d18697f250ea	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17b7b7e4-4ae8-495d-bf0c-d18697f250ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:serra-s-liturgy:cast:s1,f:xs:XP:serra-s-liturgy:cast:s1	-	-	-	5f2128bf97e4	-	124dd816ff90	-	-	2026-11-24	xproof
 17b7b7e4-4ae8-495d-bf0c-d18697f250ea	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17b7b7e4-4ae8-495d-bf0c-d18697f250ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17bcd92b-1826-4a36-9048-49e5e65a12fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -200,8 +200,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17e00d6e-c57d-48ea-a1a1-0c1097083851	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17e00d6e-c57d-48ea-a1a1-0c1097083851	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 17e11f0c-4ac7-4060-9e0b-27cd5c151e50	cast	cast-resolve	agreed	-	X	scen	1	0	Zoyowa's Justice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-17e4085e-af44-4ba8-af05-ccfe4b35f96a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17e4085e-af44-4ba8-af05-ccfe4b35f96a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17e4085e-af44-4ba8-af05-ccfe4b35f96a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:temple-acolyte:f0t0:s1,f:xs:XP:temple-acolyte:f0t0:s1	-	-	-	5f2128bf97e4	-	fb7c39e1655a	-	-	2026-11-24	xproof
+17e4085e-af44-4ba8-af05-ccfe4b35f96a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:temple-acolyte:f0t0:s1,f:xs:XP:temple-acolyte:f0t0:s1	-	-	-	5f2128bf97e4	-	fb7c39e1655a	-	-	2026-11-24	xproof
 17e7212e-69d8-4014-af98-447baed2cae7	cast	cast-resolve	agreed	-	X	scen	1	0	Fblthp, Impossibly Lost/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17e7212e-69d8-4014-af98-447baed2cae7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fblthp, Impossibly Lost/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17e74c4b-435c-469e-a9a4-32bf0cb7634c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ravenous-sailback:f0t0:s1,f:xs:XP:ravenous-sailback:f0t0:s1	-	-	-	ae86f6029288	-	f4e7687e944e	-	-	2026-11-24	xproof

@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 724bc69c-cd09-4ff8-91e7-70500b9474e1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:frilled-mystic:cast:s1,f:xs:XP:frilled-mystic:cast:s1	-	-	-	d864b561c9cb	-	b331cbdf7fbb	-	-	2026-11-24	xproof
 724bc69c-cd09-4ff8-91e7-70500b9474e1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:frilled-mystic:cast:s1,f:xs:XP:frilled-mystic:cast:s1	-	-	-	d864b561c9cb	-	b331cbdf7fbb	-	-	2026-11-24	xproof
 724c29a2-1783-401e-887c-2189afd5a944	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:meditation-puzzle:cast:s1,f:xs:XP:meditation-puzzle:cast:s1	-	-	-	d864b561c9cb	-	14e0a3e59678	-	-	2026-11-24	xproof
-724c8a20-bfb3-4c63-8cfa-5ad4c72ebe2f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+724c8a20-bfb3-4c63-8cfa-5ad4c72ebe2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fugue:cast:s1,f:xs:XP:fugue:cast:s1	-	-	-	5f2128bf97e4	-	bd4d90e5a538	-	-	2026-11-24	xproof
 724d8247-33b1-42bf-a827-7b66e45504c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 724f3d2f-0513-4efd-961f-56a7ea7b5731	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 724f3d2f-0513-4efd-961f-56a7ea7b5731	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -94,9 +94,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 726d9d2c-736a-4852-9938-a0f50d8fd89f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marionette-apprentice:f0t1:s1,f:xs:XP:marionette-apprentice:f0t1:s1	-	-	-	ae86f6029288	-	2d0dcd47e98b	-	-	2026-11-24	xproof
 726d9d2c-736a-4852-9938-a0f50d8fd89f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 726d9d2c-736a-4852-9938-a0f50d8fd89f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-726fe7a4-49b3-4b67-9d8c-6b334d0fd915	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-726fe7a4-49b3-4b67-9d8c-6b334d0fd915	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-726fe7a4-49b3-4b67-9d8c-6b334d0fd915	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+726fe7a4-49b3-4b67-9d8c-6b334d0fd915	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spike-hatcher:cast:s1,f:xs:XP:spike-hatcher:cast:s1	-	-	-	5f2128bf97e4	-	7346581ef612	-	-	2026-11-24	xproof
+726fe7a4-49b3-4b67-9d8c-6b334d0fd915	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+726fe7a4-49b3-4b67-9d8c-6b334d0fd915	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 7270b5b6-a571-4e6d-91de-03f7cc035b3c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:eye-of-malcator:cast:s1,f:xs:XP:eye-of-malcator:cast:s1	-	-	-	ae86f6029288	-	9c4435ca975c	-	-	2026-11-24	xproof
 7270b5b6-a571-4e6d-91de-03f7cc035b3c	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:eye-of-malcator:cast:s1,f:xs:XP:eye-of-malcator:cast:s1	-	-	-	ae86f6029288	-	9c4435ca975c	-	-	2026-11-24	xproof
 7270b5b6-a571-4e6d-91de-03f7cc035b3c	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

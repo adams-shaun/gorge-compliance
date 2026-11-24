@@ -75,7 +75,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8652d88f-edca-4235-b942-6e7467608de8	f0/t0	ChangesZone/Backup	agreed	-	FX	start	2	0	x:xs:XP:boon-bringer-valkyrie:f0t0:s1,f:xs:XP:boon-bringer-valkyrie:f0t0:s1	-	-	-	ae86f6029288	-	89182b1d7d9c	-	-	2026-11-24	xproof
 8652fa06-33dc-4fe5-90cb-83cbfe5c681b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86541bba-7db8-4893-addf-8a4a42168ce4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86541bba-7db8-4893-addf-8a4a42168ce4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86541bba-7db8-4893-addf-8a4a42168ce4	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 8656291d-8de7-4341-b1ee-0fcd65d629a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cloistered-telepath:f0t0:s1,f:xs:XP:cloistered-telepath:f0t0:s1	-	-	-	25696bf19d5b	-	f970be6b3a8b	-	-	2026-11-24	xproof
 8656291d-8de7-4341-b1ee-0fcd65d629a4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cloistered-telepath:f0t0:s1,f:xs:XP:cloistered-telepath:f0t0:s1	-	-	-	25696bf19d5b	-	f970be6b3a8b	-	-	2026-11-24	xproof
 8656a32b-eb95-402b-9daf-0b6d876b4b13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:titanoth-rex:cast:s1,f:xs:XP:titanoth-rex:cast:s1	-	-	-	ae86f6029288	-	0a58b0fe6d53	-	-	2026-11-24	xproof
@@ -249,9 +249,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86fb1fc1-7784-4c94-a80c-21ad87e50fc4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86fb1fc1-7784-4c94-a80c-21ad87e50fc4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86fb1fc1-7784-4c94-a80c-21ad87e50fc4	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86fb3749-37d6-48a6-8524-71e996850307	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86fb3749-37d6-48a6-8524-71e996850307	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86fb3749-37d6-48a6-8524-71e996850307	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86fb3749-37d6-48a6-8524-71e996850307	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:high-market:f0a0:s2,f:xs:XP:high-market:f0a0:s2	-	-	-	5f2128bf97e4	-	980bc9fda57e	-	-	2026-11-24	xproof
+86fb3749-37d6-48a6-8524-71e996850307	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+86fb3749-37d6-48a6-8524-71e996850307	land	land	agreed	-	FX	start	2	0	x:xs:XP:high-market:land:s1,f:xs:XP:high-market:land:s1	-	-	-	5f2128bf97e4	-	980bc9fda57e	-	-	2026-11-24	xproof
 86fd4652-a629-429a-bf95-0b8724708a71	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86fd4652-a629-429a-bf95-0b8724708a71	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86fd4652-a629-429a-bf95-0b8724708a71	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

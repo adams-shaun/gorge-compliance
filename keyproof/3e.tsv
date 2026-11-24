@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e7879d5-62ea-4c9a-9fc0-659d70f3a8e1	cast	cast-resolve	agreed	-	FX	scen	2	0	Unscrupulous Agent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3e7879d5-62ea-4c9a-9fc0-659d70f3a8e1	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e792338-4a21-4a06-ad94-39931118e06c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e792338-4a21-4a06-ad94-39931118e06c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3e792338-4a21-4a06-ad94-39931118e06c	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:ghitu-fire-eater:f0a0:s1,f:xs:XP:ghitu-fire-eater:f0a0:s1	-	-	-	5f2128bf97e4	-	1ca773c606e0	-	-	2026-11-24	xproof
 3e7df01c-75af-440d-97fd-1b1b794281b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e7df01c-75af-440d-97fd-1b1b794281b9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e7f67d6-db12-4034-b8e3-9c9d401c8f57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -156,8 +156,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3edf9201-265f-4cd9-b27b-8073bf1a4cf2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3edf9201-265f-4cd9-b27b-8073bf1a4cf2	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ee07899-e6d6-4dcf-8596-4d2420690d7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ee07899-e6d6-4dcf-8596-4d2420690d7c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ee2060a-5152-4a53-8183-cbd642e4cc29	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ee07899-e6d6-4dcf-8596-4d2420690d7c	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+3ee2060a-5152-4a53-8183-cbd642e4cc29	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodcurdling-scream:cast:s1,f:xs:XP:bloodcurdling-scream:cast:s1	-	-	-	5f2128bf97e4	-	3a12a7806395	-	-	2026-11-24	xproof
 3ee65210-547f-4375-8f9a-3484d963339f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:scourge-devil:cast:s1,f:xs:XP:scourge-devil:cast:s1	-	-	-	8a1b1a193ec0	-	dbb61d289875	-	-	2026-11-24	xproof
 3ee65210-547f-4375-8f9a-3484d963339f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ee65210-547f-4375-8f9a-3484d963339f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:scourge-devil:cast:s1,f:xs:XP:scourge-devil:cast:s1	-	-	-	8a1b1a193ec0	-	dbb61d289875	-	-	2026-11-24	xproof

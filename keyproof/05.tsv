@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 056c3b7d-b603-40b8-8404-18c2eb7e7129	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:staggershock:cast:s1,f:xs:XP:staggershock:cast:s1	-	-	-	77494c1ce129	-	e16cddf3d1a3	-	-	2026-11-24	xproof
 057729d0-f7ed-465b-91aa-fb2c6d6612b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 057e1cfc-d528-49e1-a386-9fb1edc1d135	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-057e1cfc-d528-49e1-a386-9fb1edc1d135	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+057e1cfc-d528-49e1-a386-9fb1edc1d135	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 057fa60b-10b0-4612-be0d-157076c82241	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:choke:cast:s1,f:xs:XP:choke:cast:s1	-	-	-	25696bf19d5b	-	6e8f28ebdc9b	-	-	2026-11-24	xproof
 058062c7-071b-4b14-903d-ae8d2876b37f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 058062c7-071b-4b14-903d-ae8d2876b37f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05c5ee65-651b-4bfb-b57f-305026507135	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:colossification:f0t0:s2,f:xs:XP:colossification:f0t0:s2	-	-	-	e07cf3a05ba5	-	76424a63274c	-	-	2026-11-24	xproof
 05c5ee65-651b-4bfb-b57f-305026507135	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:colossification:f0t0:s2,f:xs:XP:colossification:f0t0:s2	-	-	-	e07cf3a05ba5	-	76424a63274c	-	-	2026-11-24	xproof
 05c5ee65-651b-4bfb-b57f-305026507135	static#0.0	static#0.0	agreed	-	X	scen	1	0	Colossification/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-05c62f91-2a5b-4cba-8e66-78fb370ea409	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05c62f91-2a5b-4cba-8e66-78fb370ea409	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flaming-sword:cast:s1,f:xs:XP:flaming-sword:cast:s1	-	-	-	5f2128bf97e4	-	fbd8c9e5f7ad	-	-	2026-11-24	xproof
 05c7d88d-c081-411b-a530-969b5816d792	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05d0b904-a680-4f2f-aaa1-e227a7fe7e79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05d0b904-a680-4f2f-aaa1-e227a7fe7e79	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

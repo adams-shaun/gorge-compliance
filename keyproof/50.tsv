@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5005df36-a100-492d-89b9-e221793cfb56	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tempest Hart/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 500663c1-390c-4598-b614-4168c4f7debe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hedge-troll:cast:s1,f:xs:XP:hedge-troll:cast:s1	-	-	-	d864b561c9cb	-	d62bd7f1d5d1	-	-	2026-11-24	xproof
 500663c1-390c-4598-b614-4168c4f7debe	f0/a0	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:hedge-troll:cast:s1,f:xs:XP:hedge-troll:cast:s1	-	-	-	d864b561c9cb	-	d62bd7f1d5d1	-	-	2026-11-24	xproof
-50090188-651d-4402-968f-3f6bf9276029	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+50090188-651d-4402-968f-3f6bf9276029	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kyren-negotiations:cast:s1,f:xs:XP:kyren-negotiations:cast:s1	-	-	-	5f2128bf97e4	-	d6972ec0b2b5	-	-	2026-11-24	xproof
 50090188-651d-4402-968f-3f6bf9276029	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 500a17a0-8332-414c-9c3a-7157a7800887	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keensight-mentor:f0t0:s1,f:xs:XP:keensight-mentor:f0t0:s1	-	-	-	ae86f6029288	-	c1834bf17587	-	-	2026-11-24	xproof
 500a17a0-8332-414c-9c3a-7157a7800887	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -28,9 +28,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 501580b9-692c-4804-be34-012a25ba8adf	cast	cast	agreed	-	F	start	2	0	f:xs:XP:way-of-the-wildspeaker:f0t0:s1	-	-	-	25696bf19d5b	-	a547856fc3cb	-	-	2026-11-24	xproof
 501580b9-692c-4804-be34-012a25ba8adf	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:way-of-the-wildspeaker:f0t0:s1	-	-	-	25696bf19d5b	-	a547856fc3cb	-	-	2026-11-24	xproof
 501580b9-692c-4804-be34-012a25ba8adf	static#0.0	static#0.0	agreed	-	X	scen	1	0	Way of the Wildspeaker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5017c07d-8ad5-4ee2-91d3-974811cdff75	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5017c07d-8ad5-4ee2-91d3-974811cdff75	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5017c07d-8ad5-4ee2-91d3-974811cdff75	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5017c07d-8ad5-4ee2-91d3-974811cdff75	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fortitude:cast:s1,f:xs:XP:fortitude:cast:s1	-	-	-	5f2128bf97e4	-	e48c954ace21	-	-	2026-11-24	xproof
+5017c07d-8ad5-4ee2-91d3-974811cdff75	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:fortitude:cast:s1,f:xs:XP:fortitude:cast:s1	-	-	-	5f2128bf97e4	-	e48c954ace21	-	-	2026-11-24	xproof
+5017c07d-8ad5-4ee2-91d3-974811cdff75	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 5020628c-5e47-4a83-89c3-7bf5726e69ad	cast	cast-resolve	agreed	-	X	scen	1	0	Ruinous Rampage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 502230fb-3a7a-439c-adfa-f7820deacf87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 502230fb-3a7a-439c-adfa-f7820deacf87	f0/t0	Attacks	agreed	-	X	start	4	0	x:xs:XP:momentum-rumbler:f0t0:s1	-	-	-	ae86f6029288	-	df07b40545e6	-	-	2026-11-24	xproof
@@ -63,7 +63,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 503ddd47-4b0c-4a2a-b77a-fb321044b438	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 503ddd47-4b0c-4a2a-b77a-fb321044b438	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50402103-14ea-49b0-8e66-d2b7f7a69a41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5041dbc4-d01d-4f0a-b5c5-6e1df0976340	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5041dbc4-d01d-4f0a-b5c5-6e1df0976340	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bog-smugglers:cast:s1,f:xs:XP:bog-smugglers:cast:s1	-	-	-	5f2128bf97e4	-	863ea779df02	-	-	2026-11-24	xproof
 5045cfc3-ea63-4e0d-bf6a-bdeaf841ae3c	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5045cfc3-ea63-4e0d-bf6a-bdeaf841ae3c	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50463946-1ce3-4ff0-ad68-2fb87adbe2fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,7 +145,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50ab0194-c7dc-4f11-abc0-1a82393cc42e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pawpatch Recruit/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ab0194-c7dc-4f11-abc0-1a82393cc42e	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Pawpatch Recruit/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ab0194-c7dc-4f11-abc0-1a82393cc42e	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50ace222-57f1-477f-9e06-155d7b403512	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:realm-scorcher-hellkite:f0t0:s1,f:xs:XP:realm-scorcher-hellkite:f0t0:s1	-	-	-	ae86f6029288	-	7910b3692eb6	-	-	2026-11-24	xproof
+50ace222-57f1-477f-9e06-155d7b403512	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:realm-scorcher-hellkite:f0t0:s1,f:xs:XP:realm-scorcher-hellkite:f0t0:s1	-	-	-	5f2128bf97e4	-	7910b3692eb6	-	-	2026-11-24	xproof
 50ace222-57f1-477f-9e06-155d7b403512	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Realm-Scorcher Hellkite/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ace222-57f1-477f-9e06-155d7b403512	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Realm-Scorcher Hellkite/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ace222-57f1-477f-9e06-155d7b403512	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Realm-Scorcher Hellkite/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -181,12 +181,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50c97054-77c9-4446-9a41-e4f8877b887d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Forum Necroscribe/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50cee3ac-cba0-4abb-babf-de1928b1590e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50cee3ac-cba0-4abb-babf-de1928b1590e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50cf702b-5647-415e-b9a8-56fa0e50da6d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50cf702b-5647-415e-b9a8-56fa0e50da6d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+50cf702b-5647-415e-b9a8-56fa0e50da6d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:colos-yearling:cast:s1,f:xs:XP:colos-yearling:cast:s1	-	-	-	5f2128bf97e4	-	7ab093b7f7ed	-	-	2026-11-24	xproof
+50cf702b-5647-415e-b9a8-56fa0e50da6d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:colos-yearling:f0a0:s1,f:xs:XP:colos-yearling:f0a0:s1	-	-	-	5f2128bf97e4	-	7ab093b7f7ed	-	-	2026-11-24	xproof
 50d0d870-fe3d-44a2-ad6e-93307a1fb468	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50d0d870-fe3d-44a2-ad6e-93307a1fb468	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50d33663-5d83-4e3c-9ed7-074fe29a9fc8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50d33663-5d83-4e3c-9ed7-074fe29a9fc8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+50d33663-5d83-4e3c-9ed7-074fe29a9fc8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cartographer:f0t0:s1,f:xs:XP:cartographer:f0t0:s1	-	-	-	5f2128bf97e4	-	08de24661129	-	-	2026-11-24	xproof
+50d33663-5d83-4e3c-9ed7-074fe29a9fc8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cartographer:f0t0:s1,f:xs:XP:cartographer:f0t0:s1	-	-	-	5f2128bf97e4	-	08de24661129	-	-	2026-11-24	xproof
 50d6cadc-07e4-479e-90f4-e3a20f769bab	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Susur Secundi, Void Altar/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50d6cadc-07e4-479e-90f4-e3a20f769bab	land	play-land	agreed	-	X	scen	1	0	Susur Secundi, Void Altar/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50d6cadc-07e4-479e-90f4-e3a20f769bab	static#0.0	static#0.0	agreed	-	X	scen	1	0	Susur Secundi, Void Altar/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

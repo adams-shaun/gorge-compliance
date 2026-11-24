@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-1600b361-9298-49f0-8925-4c1aad363e1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1600b361-9298-49f0-8925-4c1aad363e1b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1600b361-9298-49f0-8925-4c1aad363e1b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keldon-champion:f0t0:s1,f:xs:XP:keldon-champion:f0t0:s1	-	-	-	5f2128bf97e4	-	b512747e834a	-	-	2026-11-24	xproof
+1600b361-9298-49f0-8925-4c1aad363e1b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keldon-champion:f0t0:s1,f:xs:XP:keldon-champion:f0t0:s1	-	-	-	5f2128bf97e4	-	b512747e834a	-	-	2026-11-24	xproof
 1600b361-9298-49f0-8925-4c1aad363e1b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1601e553-31c2-4e04-9f0c-bc17e49eeff7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1601e553-31c2-4e04-9f0c-bc17e49eeff7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16cb916d-bb19-42ec-9a01-969e9d067b40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16cb916d-bb19-42ec-9a01-969e9d067b40	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 16cd0b90-f70c-4efa-b252-8de8784ef9a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16cdba97-73cf-44ba-9d64-f27009b829f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:troublemaker-ouphe:f0t0:s1,f:xs:XP:troublemaker-ouphe:f0t0:s1	-	-	-	ae86f6029288	-	643fed0b62da	-	-	2026-11-24	xproof
+16cdba97-73cf-44ba-9d64-f27009b829f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:troublemaker-ouphe:f0t0:s1,f:xs:XP:troublemaker-ouphe:f0t0:s1	-	-	-	5f2128bf97e4	-	643fed0b62da	-	-	2026-11-24	xproof
 16cdba97-73cf-44ba-9d64-f27009b829f8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16cf1cf9-6900-406c-a5b4-0e5750f530e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16d0aea2-4ca4-4a9d-8674-2863e085f514	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -194,6 +194,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16f93781-6740-40c7-a727-7911beac4e74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16fb84e1-0bc7-469c-bd73-40747be56d9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-handservant:cast:s1,f:xs:XP:elvish-handservant:cast:s1	-	-	-	d864b561c9cb	-	1c9be972253b	-	-	2026-11-24	xproof
 16fb84e1-0bc7-469c-bd73-40747be56d9e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-16fe0abe-04fa-4023-8ee0-043a076e78bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16fe0abe-04fa-4023-8ee0-043a076e78bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:squall:cast:s1,f:xs:XP:squall:cast:s1	-	-	-	5f2128bf97e4	-	0e472ec11309	-	-	2026-11-24	xproof
 16fe1f04-9bbf-43a3-ab14-395fdf4a3a43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16fe1f04-9bbf-43a3-ab14-395fdf4a3a43	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof

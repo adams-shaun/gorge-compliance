@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23140c6f-c674-4d13-9b78-bce0ffcb981f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Melek, Reforged Researcher/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23140c6f-c674-4d13-9b78-bce0ffcb981f	static#0.1	static#0.1	agreed	-	X	scen	1	0	Melek, Reforged Researcher/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2315b044-bfd2-40dd-a73e-4cf064b36999	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2315b044-bfd2-40dd-a73e-4cf064b36999	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2315b044-bfd2-40dd-a73e-4cf064b36999	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 2317a33f-665e-4cbc-bb5c-16b912ac2eef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2317a33f-665e-4cbc-bb5c-16b912ac2eef	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:angel-of-condemnation:f0a0:s1,f:xs:XP:angel-of-condemnation:f0a0:s1	-	-	-	d864b561c9cb	-	a226ab4ec5ec	-	-	2026-11-24	xproof
 2317a33f-665e-4cbc-bb5c-16b912ac2eef	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23b2de61-a29c-4a32-b38c-408c723727ce	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Agency Outfitter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23b2de61-a29c-4a32-b38c-408c723727ce	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Agency Outfitter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23b2de61-a29c-4a32-b38c-408c723727ce	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23b36aef-961f-4a78-9652-8594ad73102e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+23b36aef-961f-4a78-9652-8594ad73102e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plow-under:cast:s1,f:xs:XP:plow-under:cast:s1	-	-	-	5f2128bf97e4	-	7ec1fa7d6971	-	-	2026-11-24	xproof
 23b518ab-561f-4551-8270-082cde99b993	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23b7fd18-3129-448f-881f-947ba988f98d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23bbd091-f6ff-4514-97aa-42c08164b4eb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

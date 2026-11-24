@@ -80,8 +80,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 3260bede-d78d-41a6-8fe1-95ce14a2ba8c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32638d03-c101-42f0-8a4b-8c6290257a28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32638d03-c101-42f0-8a4b-8c6290257a28	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32638d03-c101-42f0-8a4b-8c6290257a28	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32638d03-c101-42f0-8a4b-8c6290257a28	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+32638d03-c101-42f0-8a4b-8c6290257a28	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 32654ffa-b869-4f8b-a153-4242e8f9d92e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32654ffa-b869-4f8b-a153-4242e8f9d92e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3269f589-00fc-4f0b-8693-656f2ab0670d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -163,8 +163,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32d9fd98-142b-41d2-b8f0-40ae1d4cb991	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32d9fd98-142b-41d2-b8f0-40ae1d4cb991	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32dc847a-d8e9-4bc5-aa73-dfe69ff330a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32dc847a-d8e9-4bc5-aa73-dfe69ff330a2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32dc847a-d8e9-4bc5-aa73-dfe69ff330a2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32dc847a-d8e9-4bc5-aa73-dfe69ff330a2	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+32dc847a-d8e9-4bc5-aa73-dfe69ff330a2	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 32dce35e-182d-41be-9fb2-b0738d0781b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	cast	cast-resolve	agreed	-	X	scen	1	0	Gruff Triplets/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gruff Triplets/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

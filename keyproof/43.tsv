@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43306a78-85b5-4df4-a018-75dd75aa8997	cast	cast-resolve	agreed	-	X	scen	1	0	Heroes' Hangout/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43355ac4-bf8c-48f6-a322-fafbc9d132d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:talrand-s-invocation:cast:s1,f:xs:XP:talrand-s-invocation:cast:s1	-	-	-	d864b561c9cb	-	99881fc3dd21	-	-	2026-11-24	xproof
 4337f35b-baab-4640-9e1c-05f61c49bbdd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4337f35b-baab-4640-9e1c-05f61c49bbdd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4337f35b-baab-4640-9e1c-05f61c49bbdd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 4339f621-8502-4433-a37a-654591ca1b43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 433a2880-d989-4c40-99fa-0896de341b88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aether-meltdown:f0t0:s1,f:xs:XP:aether-meltdown:f0t0:s1	-	-	-	d864b561c9cb	-	d70b13f3f62f	-	-	2026-11-24	xproof
 433a2880-d989-4c40-99fa-0896de341b88	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aether-meltdown:f0t0:s1,f:xs:XP:aether-meltdown:f0t0:s1	-	-	-	d864b561c9cb	-	d70b13f3f62f	-	-	2026-11-24	xproof
@@ -53,7 +53,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 433e92d2-899a-4eed-98b9-80de5d25494b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43402a6c-9fba-4a80-90b3-14bac05c574b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4344abeb-47ab-4638-b50f-dd502f14c1af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4344abeb-47ab-4638-b50f-dd502f14c1af	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4344abeb-47ab-4638-b50f-dd502f14c1af	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 4345c359-b9d6-43c8-997f-e00746e6e318	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:genesis-hydra:cast:s1,f:xs:XP:genesis-hydra:cast:s1	-	-	-	d864b561c9cb	-	7222dd5bbadf	-	-	2026-11-24	xproof
 4345c359-b9d6-43c8-997f-e00746e6e318	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:genesis-hydra:cast:s1,f:xs:XP:genesis-hydra:cast:s1	-	-	-	d864b561c9cb	-	7222dd5bbadf	-	-	2026-11-24	xproof
 434807c5-5948-4181-a46c-2c834d0a2f0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

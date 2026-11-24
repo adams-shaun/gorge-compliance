@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7779525d-080d-4669-bb65-af532bf0983e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7779525d-080d-4669-bb65-af532bf0983e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7779e3be-5c3d-454f-88c1-9c0a97ebff09	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7779e3be-5c3d-454f-88c1-9c0a97ebff09	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7779e3be-5c3d-454f-88c1-9c0a97ebff09	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 777b8ec4-a783-4297-96b7-4f200d0eb734	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77828ebf-58d2-4aca-ae6f-0efa50d5d640	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77828ebf-58d2-4aca-ae6f-0efa50d5d640	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -190,8 +190,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77e319da-d782-4258-bf0e-626755e5adc9	cast	cast-resolve	agreed	-	X	scen	1	0	Kalastria Highborn/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 77e319da-d782-4258-bf0e-626755e5adc9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kalastria Highborn/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 77e5e7e3-b97b-4953-9df4-1aee509fbf2a	cast	cast-resolve	agreed	-	X	scen	1	0	Giantfall/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-77e604fe-d6ca-495f-ba22-a7d8ba88c8b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77e604fe-d6ca-495f-ba22-a7d8ba88c8b5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77e604fe-d6ca-495f-ba22-a7d8ba88c8b5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:corrupt-eunuchs:f0t0:s1,f:xs:XP:corrupt-eunuchs:f0t0:s1	-	-	-	5f2128bf97e4	-	4ad82a37550f	-	-	2026-11-24	xproof
+77e604fe-d6ca-495f-ba22-a7d8ba88c8b5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:corrupt-eunuchs:f0t0:s1,f:xs:XP:corrupt-eunuchs:f0t0:s1	-	-	-	5f2128bf97e4	-	4ad82a37550f	-	-	2026-11-24	xproof
 77eafe49-b9c5-461d-89c5-cec217dd2974	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77eb2374-44a0-4383-b229-edc116c7d835	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loxodon-restorer:f0t0:s1,f:xs:XP:loxodon-restorer:f0t0:s1	-	-	-	d864b561c9cb	-	a1ac321b4093	-	-	2026-11-24	xproof
 77eb2374-44a0-4383-b229-edc116c7d835	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loxodon-restorer:f0t0:s1,f:xs:XP:loxodon-restorer:f0t0:s1	-	-	-	d864b561c9cb	-	a1ac321b4093	-	-	2026-11-24	xproof

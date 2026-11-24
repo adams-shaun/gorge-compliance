@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d5bc31c-f4a1-4a59-b466-0347ddbbc7fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d5bc31c-f4a1-4a59-b466-0347ddbbc7fb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d5e32b1-1a2d-4b3d-80f2-f8c688b90587	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d5f0a1c-88e0-4603-97af-8ed47766812e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d5f0a1c-88e0-4603-97af-8ed47766812e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fanning-the-flames:cast:s1,f:xs:XP:fanning-the-flames:cast:s1	-	-	-	5f2128bf97e4	-	2f61807a8ce4	-	-	2026-11-24	xproof
 1d5ff280-7f4d-4801-aefd-9b6e6b1f2818	cast	cast-resolve	agreed	-	FX	scen	2	0	Ajani, Caller of the Pride/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d5ff280-7f4d-4801-aefd-9b6e6b1f2818	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Ajani, Caller of the Pride/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d5ff280-7f4d-4801-aefd-9b6e6b1f2818	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Ajani, Caller of the Pride/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -125,8 +125,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d9aeaaa-66f6-41cb-9bac-162d6fd8662c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d9aeaaa-66f6-41cb-9bac-162d6fd8662c	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d9b94af-3bfa-4257-8347-675468f0b0e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shenanigans:cast:s1,f:xs:XP:shenanigans:cast:s1	-	-	-	d864b561c9cb	-	899c2a8ca262	-	-	2026-11-24	xproof
-1d9bd0a5-3ba0-44e5-9cb3-966f6b9dc14a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d9bd0a5-3ba0-44e5-9cb3-966f6b9dc14a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d9bd0a5-3ba0-44e5-9cb3-966f6b9dc14a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ravenous-baboons:cast:s1,f:xs:XP:ravenous-baboons:cast:s1	-	-	-	5f2128bf97e4	-	2b1f688ebb24	-	-	2026-11-24	xproof
+1d9bd0a5-3ba0-44e5-9cb3-966f6b9dc14a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:ravenous-baboons:cast:s1,f:xs:XP:ravenous-baboons:cast:s1	-	-	-	5f2128bf97e4	-	2b1f688ebb24	-	-	2026-11-24	xproof
 1d9d8028-d946-4245-ae0c-7508023f619a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d9d8028-d946-4245-ae0c-7508023f619a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1da10d5c-36a8-473f-a5d4-782ad61d8057	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1dd6df3f-eac4-4f30-b832-4a3f3a97632f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dd7d11b-e3f3-4886-b412-0c085187869c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1de0b522-f12a-4597-9d5f-9a246443487e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1de0b522-f12a-4597-9d5f-9a246443487e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1de0b522-f12a-4597-9d5f-9a246443487e	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 1de17747-27e8-40bb-b6f7-6d5402d4705c	cast	cast-resolve	agreed	-	FX	scen	2	0	Earth Rumble Wrestlers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1de17747-27e8-40bb-b6f7-6d5402d4705c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Earth Rumble Wrestlers/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1de17747-27e8-40bb-b6f7-6d5402d4705c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Earth Rumble Wrestlers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

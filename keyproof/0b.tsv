@@ -80,7 +80,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b65050d-a9cd-4b6c-9114-af89bfa6682f	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:simic-cluestone:cast:s1,f:xs:XP:simic-cluestone:cast:s1	-	-	-	d864b561c9cb	-	12cd5399a394	-	-	2026-11-24	xproof
 0b65050d-a9cd-4b6c-9114-af89bfa6682f	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:simic-cluestone:f0a1:s1,f:xs:XP:simic-cluestone:f0a1:s1	-	-	-	d864b561c9cb	-	12cd5399a394	-	-	2026-11-24	xproof
 0b6625cb-4177-45bd-ba99-2af43dfd6f46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0b6625cb-4177-45bd-ba99-2af43dfd6f46	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0b6625cb-4177-45bd-ba99-2af43dfd6f46	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 0b67c4e2-f88b-4e01-85a1-9d5f5b8db13b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b67c4e2-f88b-4e01-85a1-9d5f5b8db13b	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b67c4e2-f88b-4e01-85a1-9d5f5b8db13b	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b9a4e06-b21d-4cbe-906f-9dbd08dbe5d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b9a4e06-b21d-4cbe-906f-9dbd08dbe5d3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b9b8e60-51eb-4d4a-95c1-48ca5b8153df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0b9b8e60-51eb-4d4a-95c1-48ca5b8153df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0b9b8e60-51eb-4d4a-95c1-48ca5b8153df	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 0b9bb0d7-4139-46b6-a058-2f79be64aef2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kitesail-cleric:f0t0:s1,f:xs:XP:kitesail-cleric:f0t0:s1	-	-	-	ae86f6029288	-	d4573af7de15	-	-	2026-11-24	xproof
 0b9bb0d7-4139-46b6-a058-2f79be64aef2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kitesail-cleric:f0t0:s1,f:xs:XP:kitesail-cleric:f0t0:s1	-	-	-	ae86f6029288	-	d4573af7de15	-	-	2026-11-24	xproof
 0ba134d8-ee7d-48ec-8dc6-57942b8e9261	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,8 +183,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0bc58096-7925-4870-bb95-58cce51ea8e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0bc7f093-bef0-4f1a-852c-4b75ebf54838	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arcane-signet:cast:s1,f:xs:XP:arcane-signet:cast:s1	-	-	-	ae86f6029288	-	7ca813f9d7bb	-	-	2026-11-24	xproof
 0bc7f093-bef0-4f1a-852c-4b75ebf54838	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:arcane-signet:cast:s1,f:xs:XP:arcane-signet:cast:s1	-	-	-	ae86f6029288	-	7ca813f9d7bb	-	-	2026-11-24	xproof
-0bd67481-6bd9-48d6-92bd-8933b5ea1eae	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0bd67481-6bd9-48d6-92bd-8933b5ea1eae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0bd67481-6bd9-48d6-92bd-8933b5ea1eae	cast	cast	agreed	-	F	start	2	0	f:xs:XP:peregrine-drake:f0t0:s1	-	-	-	5f2128bf97e4	-	01b84b8db3ee	-	-	2026-11-24	xproof
+0bd67481-6bd9-48d6-92bd-8933b5ea1eae	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:peregrine-drake:f0t0:s1	-	-	-	5f2128bf97e4	-	01b84b8db3ee	-	-	2026-11-24	xproof
 0bd7fd12-a0b7-4b4e-8a33-cace6e6bd6d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oath-of-liliana:f0t0:s1,f:xs:XP:oath-of-liliana:f0t0:s1	-	-	-	d864b561c9cb	-	4055dc9afb4d	-	-	2026-11-24	xproof
 0bd7fd12-a0b7-4b4e-8a33-cace6e6bd6d1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oath-of-liliana:f0t0:s1,f:xs:XP:oath-of-liliana:f0t0:s1	-	-	-	d864b561c9cb	-	4055dc9afb4d	-	-	2026-11-24	xproof
 0bd7fd12-a0b7-4b4e-8a33-cace6e6bd6d1	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

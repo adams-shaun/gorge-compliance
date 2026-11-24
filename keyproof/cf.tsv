@@ -1,13 +1,13 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 cf02b774-2b3a-4459-bf59-e5d291691e77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cf0799f3-ef64-4fcc-924a-5265e52c9727	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cf0799f3-ef64-4fcc-924a-5265e52c9727	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:impending-disaster:cast:s1,f:xs:XP:impending-disaster:cast:s1	-	-	-	5f2128bf97e4	-	bd0060e4d908	-	-	2026-11-24	xproof
 cf0799f3-ef64-4fcc-924a-5265e52c9727	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf082161-47ff-46b9-926d-3fa5e5727861	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf082161-47ff-46b9-926d-3fa5e5727861	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf082161-47ff-46b9-926d-3fa5e5727861	f0/a1	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:abuna-acolyte:f0a1:s1,f:xs:XP:abuna-acolyte:f0a1:s1	-	-	-	d864b561c9cb	-	658af513c99c	-	-	2026-11-24	xproof
 cf0936ea-2741-43a4-ad6a-a1258b54945b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cf0936ea-2741-43a4-ad6a-a1258b54945b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cf0936ea-2741-43a4-ad6a-a1258b54945b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aura-thief:f0t0:s1,f:xs:XP:aura-thief:f0t0:s1	-	-	-	5f2128bf97e4	-	1218c19387bf	-	-	2026-11-24	xproof
 cf09b0af-3cf1-4486-8f65-8cfd2410314a	cast	cast-resolve	agreed	-	X	scen	1	0	Deathmark/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cf0a15f5-5f41-4eea-81f7-02059b9586a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf0a15f5-5f41-4eea-81f7-02059b9586a2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -193,7 +193,7 @@ cfdef803-6f7a-4055-8d51-8e8c60953928	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 cfe4d707-41b3-4897-b13a-dcae8f1f3350	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cfe82e0f-7ac0-4de3-b1b3-a2d519b00bbd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blast-of-genius:cast:s1,f:xs:XP:blast-of-genius:cast:s1	-	-	-	d864b561c9cb	-	553133c369ca	-	-	2026-11-24	xproof
 cfec9d17-2d11-4b89-8b30-84bd25a38466	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cfec9d17-2d11-4b89-8b30-84bd25a38466	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cfec9d17-2d11-4b89-8b30-84bd25a38466	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-masons:f0t0:s1,f:xs:XP:goblin-masons:f0t0:s1	-	-	-	5f2128bf97e4	-	5aa7a712615a	-	-	2026-11-24	xproof
 cfee4ba9-3cf2-4e8b-a4a7-21974828cd54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cff1b9bb-2a4c-4522-94a4-a674f942e376	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cff434e1-e567-4a80-8dc5-593d70b0f348	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

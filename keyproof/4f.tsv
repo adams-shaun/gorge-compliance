@@ -50,8 +50,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f452ce7-1166-4810-afed-ea5e156a6f52	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aurelia's Vindicator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f452ce7-1166-4810-afed-ea5e156a6f52	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Aurelia's Vindicator/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f452ce7-1166-4810-afed-ea5e156a6f52	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Aurelia's Vindicator/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4f484927-0e8e-493d-93bc-ed190965dad9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f484927-0e8e-493d-93bc-ed190965dad9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4f484927-0e8e-493d-93bc-ed190965dad9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:transmogrifying-licid:cast:s1,f:xs:XP:transmogrifying-licid:cast:s1	-	-	-	5f2128bf97e4	-	50685c8bc57a	-	-	2026-11-24	xproof
+4f484927-0e8e-493d-93bc-ed190965dad9	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:transmogrifying-licid:f0a0:s1,f:xs:XP:transmogrifying-licid:f0a0:s1	-	-	-	5f2128bf97e4	-	50685c8bc57a	-	-	2026-11-24	xproof
 4f4a3c9e-80c4-4fa1-940d-2c57065901a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enchanted-carriage:f0t0:s1,f:xs:XP:enchanted-carriage:f0t0:s1	-	-	-	ae86f6029288	-	443fcf4215d1	-	-	2026-11-24	xproof
 4f4a3c9e-80c4-4fa1-940d-2c57065901a3	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:enchanted-carriage:f0t0:s1,f:xs:XP:enchanted-carriage:f0t0:s1	-	-	-	ae86f6029288	-	443fcf4215d1	-	-	2026-11-24	xproof
 4f4a3c9e-80c4-4fa1-940d-2c57065901a3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:enchanted-carriage:f0t0:s1,f:xs:XP:enchanted-carriage:f0t0:s1	-	-	-	ae86f6029288	-	443fcf4215d1	-	-	2026-11-24	xproof
@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f5da665-e880-4325-a9e2-6fc4ca1d807a	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4f5da665-e880-4325-a9e2-6fc4ca1d807a	f1/t1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4f5eaf5a-dd52-4d48-91b5-d48763d13159	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f5eaf5a-dd52-4d48-91b5-d48763d13159	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4f5eaf5a-dd52-4d48-91b5-d48763d13159	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:vigilant-drake:f0a0:s1,f:xs:XP:vigilant-drake:f0a0:s1	-	-	-	5f2128bf97e4	-	918bfa1f2d5a	-	-	2026-11-24	xproof
 4f5ebbb8-f49b-488f-bb85-888aaa918bdd	cast	cast-resolve	agreed	-	FX	scen	2	0	Gumdrop Poisoner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f5ebbb8-f49b-488f-bb85-888aaa918bdd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gumdrop Poisoner/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f5ebbb8-f49b-488f-bb85-888aaa918bdd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gumdrop Poisoner/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -136,8 +136,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fa23be3-a192-45ab-bdf6-646d4be305e1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fa2c9cb-106c-482c-9ba7-5bba2ea9e4a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fa2c9cb-106c-482c-9ba7-5bba2ea9e4a3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fa30e29-94c1-4537-bebd-dc7124e4ef71	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fa30e29-94c1-4537-bebd-dc7124e4ef71	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4fa30e29-94c1-4537-bebd-dc7124e4ef71	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silent-attendant:cast:s1,f:xs:XP:silent-attendant:cast:s1	-	-	-	5f2128bf97e4	-	724cc0aeff19	-	-	2026-11-24	xproof
+4fa30e29-94c1-4537-bebd-dc7124e4ef71	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:silent-attendant:f0a0:s1,f:xs:XP:silent-attendant:f0a0:s1	-	-	-	5f2128bf97e4	-	724cc0aeff19	-	-	2026-11-24	xproof
 4fa826ca-d361-4391-ad0d-989ebcfa4a91	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Kavaron, Memorial World/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fa826ca-d361-4391-ad0d-989ebcfa4a91	land	play-land	agreed	-	X	scen	1	0	Kavaron, Memorial World/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fa826ca-d361-4391-ad0d-989ebcfa4a91	static#0.0	static#0.0	agreed	-	X	scen	1	0	Kavaron, Memorial World/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -187,7 +187,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fd567cb-0b8e-41dd-a2b7-87a196de294a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fd567cb-0b8e-41dd-a2b7-87a196de294a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fd6d9af-4d53-4e10-bc23-672454803099	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fd6d9af-4d53-4e10-bc23-672454803099	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4fd6d9af-4d53-4e10-bc23-672454803099	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:copper-gnomes:f0a0:s1,f:xs:XP:copper-gnomes:f0a0:s1	-	-	-	5f2128bf97e4	-	2b3e00f054be	-	-	2026-11-24	xproof
 4fd74a8c-a4e7-4988-ae02-9a73ab6ec89e	cast	cast-resolve	agreed	-	X	scen	1	0	Pictures of Spider-Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fd74a8c-a4e7-4988-ae02-9a73ab6ec89e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Pictures of Spider-Man/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fd74a8c-a4e7-4988-ae02-9a73ab6ec89e	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

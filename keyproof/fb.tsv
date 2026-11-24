@@ -41,7 +41,7 @@ fb41ea1d-3491-4193-a390-8eb202fbae12	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 fb42bade-4bbc-4119-b6cc-71695fe43dd9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fb430640-81b6-4720-84d6-b8ec3af6a2c3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fb431500-152c-4524-b76b-de62922ff57f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fb431500-152c-4524-b76b-de62922ff57f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fb431500-152c-4524-b76b-de62922ff57f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 fb46b300-8a39-40d2-8bc7-31b90c822e22	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fb46b300-8a39-40d2-8bc7-31b90c822e22	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fb46b300-8a39-40d2-8bc7-31b90c822e22	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -65,8 +65,8 @@ fb5e53cf-e12e-469b-b9ea-9debc967e77e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:obe
 fb5e53cf-e12e-469b-b9ea-9debc967e77e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oberth-class-starship:f0t0:s1,f:xs:XP:oberth-class-starship:f0t0:s1	-	-	-	25696bf19d5b	-	99fedfa4dc19	-	-	2026-11-24	xproof
 fb5e8b8c-bad2-45bb-abb4-2ed454525749	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fb5e8b8c-bad2-45bb-abb4-2ed454525749	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-fb5fea4a-1b04-45c6-a207-e2e8493ea968	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fb5fea4a-1b04-45c6-a207-e2e8493ea968	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fb5fea4a-1b04-45c6-a207-e2e8493ea968	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:xun-yu-wei-advisor:cast:s1,f:xs:XP:xun-yu-wei-advisor:cast:s1	-	-	-	5f2128bf97e4	-	16a3b16434b3	-	-	2026-11-24	xproof
+fb5fea4a-1b04-45c6-a207-e2e8493ea968	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:xun-yu-wei-advisor:f0a0:s1,f:xs:XP:xun-yu-wei-advisor:f0a0:s1	-	-	-	5f2128bf97e4	-	16a3b16434b3	-	-	2026-11-24	xproof
 fb60739e-1dc3-481d-a056-ad72e665c680	cast	cast-resolve	agreed	-	X	scen	1	0	Rite of Replication/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fb683e18-50b8-4821-9a1a-86c6dea63ac9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:temur-war-shaman:f0t0:s1,f:xs:XP:temur-war-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	505e521988b5	-	-	2026-11-24	xproof
 fb683e18-50b8-4821-9a1a-86c6dea63ac9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:temur-war-shaman:f0t0:s1,f:xs:XP:temur-war-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	505e521988b5	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ fbdffef0-9119-4650-9f92-58e8a664db6f	f0/t0	Attacks	agreed	-	FX	start	1	0	x:xs:XP
 fbe190eb-fd4b-40e7-9a17-48c96b60f653	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbe190eb-fd4b-40e7-9a17-48c96b60f653	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 fbe25c32-db20-464c-a0ed-d90e75b111a9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fbe61f74-1b3c-4e12-8758-7029872c9ff1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fbe61f74-1b3c-4e12-8758-7029872c9ff1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:exhume:cast:s1,f:xs:XP:exhume:cast:s1	-	-	-	5f2128bf97e4	-	e1d3c5ea85cf	-	-	2026-11-24	xproof
 fbed6f1a-e224-413c-b13e-3555caaef02a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orator-of-ojutai:f0t0:s1,f:xs:XP:orator-of-ojutai:f0t0:s1	-	-	-	ae86f6029288	-	e23d7c27e5e7	-	-	2026-11-24	xproof
 fbed6f1a-e224-413c-b13e-3555caaef02a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbf074b2-d650-43b2-b8b8-d7a778dfd27e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jokulmorder:f0t0:s1,f:xs:XP:jokulmorder:f0t0:s1	-	-	-	0984227a67dd	-	38d37488016d	-	-	2026-11-24	xproof
@@ -189,7 +189,7 @@ fbf2653e-9cc4-442f-bc73-6e2ba6e067cb	cast	cast-resolve	agreed	-	X	scen	1	0	Early
 fbf4ce62-26f1-4886-952a-efdc1f4946b6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbf4ce62-26f1-4886-952a-efdc1f4946b6	f0/a0	NULL	owed	refused:steps-needed:cost:WU	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 fbf7a7f4-9915-4a53-84b3-e55e9f487323	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fbf7a7f4-9915-4a53-84b3-e55e9f487323	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fbf7a7f4-9915-4a53-84b3-e55e9f487323	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 fbf8fdf5-0d7d-41a3-a6b9-27bb7a644c20	cast	cast	agreed	-	F	start	4	0	f:xs:XP:geothermal-kami:cast:s1	-	-	-	d864b561c9cb	-	7d380ca333ef	-	-	2026-11-24	xproof
 fbf8fdf5-0d7d-41a3-a6b9-27bb7a644c20	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:geothermal-kami:cast:s1	-	-	-	d864b561c9cb	-	7d380ca333ef	-	-	2026-11-24	xproof
 fbf9f8c5-849f-45d5-8129-5fc683c21a04	cast	cast-resolve	agreed	-	X	scen	1	0	Fury/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

@@ -10,8 +10,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35044f8a-c8e0-41ae-ba61-43109e51f7e8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 35064a72-c052-496f-8f1a-6dbc5e617d3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35064a72-c052-496f-8f1a-6dbc5e617d3f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35069cdb-e5bd-4224-a1a8-b329054e003b	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35069cdb-e5bd-4224-a1a8-b329054e003b	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35069cdb-e5bd-4224-a1a8-b329054e003b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rejuvenate:cast:s1,f:xs:XP:rejuvenate:cast:s1	-	-	-	5f2128bf97e4	-	a0f70ef6a759	-	-	2026-11-24	xproof
+35069cdb-e5bd-4224-a1a8-b329054e003b	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:rejuvenate:cast:s2,f:xs:XP:rejuvenate:cast:s2	-	-	-	5f2128bf97e4	-	a0f70ef6a759	-	-	2026-11-24	xproof
 3508fd7d-ca02-47f9-8b0a-525f7bde4f57	cast	cast-resolve	agreed	-	FX	scen	2	0	Hulk, Gamma Goliath/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3508fd7d-ca02-47f9-8b0a-525f7bde4f57	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hulk, Gamma Goliath/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3508fd7d-ca02-47f9-8b0a-525f7bde4f57	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hulk, Gamma Goliath/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 357ed28b-899f-404b-94ff-6fb2ef81d87b	f0/a1	Effect	agreed	-	FX	start	2	0	x:xs:XP:alchemist-s-refuge:f0a1:s1,f:xs:XP:alchemist-s-refuge:f0a1:s1	-	-	-	d864b561c9cb	-	f73ba1d13442	-	-	2026-11-24	xproof
 357ed28b-899f-404b-94ff-6fb2ef81d87b	land	land	agreed	-	FX	start	2	0	x:xs:XP:alchemist-s-refuge:land:s1,f:xs:XP:alchemist-s-refuge:land:s1	-	-	-	d864b561c9cb	-	f73ba1d13442	-	-	2026-11-24	xproof
 35826db0-b6ff-47b5-be16-c5b878d9e842	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35826db0-b6ff-47b5-be16-c5b878d9e842	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35826db0-b6ff-47b5-be16-c5b878d9e842	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 358297cd-4a9f-48e2-aaa5-131b0849f8dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 358297cd-4a9f-48e2-aaa5-131b0849f8dc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 358297cd-4a9f-48e2-aaa5-131b0849f8dc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

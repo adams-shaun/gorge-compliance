@@ -97,8 +97,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65681a2a-8395-4390-845f-9be974994dcb	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6568859d-b96d-4015-84da-1a8960752737	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6568859d-b96d-4015-84da-1a8960752737	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-656afde2-cdf3-4907-a0fc-7ac93f5d3e03	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-656afde2-cdf3-4907-a0fc-7ac93f5d3e03	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+656afde2-cdf3-4907-a0fc-7ac93f5d3e03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-over-matter:cast:s1,f:xs:XP:mind-over-matter:cast:s1	-	-	-	5f2128bf97e4	-	9e3aadaa9ccd	-	-	2026-11-24	xproof
+656afde2-cdf3-4907-a0fc-7ac93f5d3e03	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 656fc672-efa5-484a-b5e8-eac262331439	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sage-of-days:cast:s2	-	-	-	5437c1394672	-	778f0dd6c514	-	-	2026-11-24	xproof
 656fc672-efa5-484a-b5e8-eac262331439	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:sage-of-days:cast:s2	-	-	-	5437c1394672	-	778f0dd6c514	-	-	2026-11-24	xproof
 657243dd-e479-4f4b-99d2-09b55d833a35	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65756e6d-9825-4ed6-91c4-79f1e3bd4ae5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65779f3b-7fc5-4847-99d7-78f697d34c3d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6579bb00-3886-447b-a265-3e72e98bbe2c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6579bb00-3886-447b-a265-3e72e98bbe2c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6579bb00-3886-447b-a265-3e72e98bbe2c	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 657a4500-4b47-4c78-945b-a7791af7d10e	cast	cast-resolve	agreed	-	X	scen	1	0	Adelbert Steiner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 657a4500-4b47-4c78-945b-a7791af7d10e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Adelbert Steiner/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 657a4500-4b47-4c78-945b-a7791af7d10e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Adelbert Steiner/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

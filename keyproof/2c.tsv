@@ -31,9 +31,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c1d3e9e-213e-492a-ad5a-91139d70bc0f	cast	cast-resolve	agreed	-	X	scen	1	0	Fishing Pole/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fishing Pole/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:cast:s1,f:xs:XP:flailing-soldier:cast:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
+2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:f0a0:s1,f:xs:XP:flailing-soldier:f0a0:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
+2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:f0a1:s1,f:xs:XP:flailing-soldier:f0a1:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
 2c22af49-c6ef-4de6-bb84-6b3e99879148	cast	cast-resolve	agreed	-	X	scen	1	0	Steer Clear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c232056-9dd6-4a78-be08-3bff19daa88d	cast	cast-resolve	agreed	-	X	scen	1	0	Embereth Veteran/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c232056-9dd6-4a78-be08-3bff19daa88d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Embereth Veteran/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -96,15 +96,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c75623c-59f4-4449-ab43-9d1225185ad9	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	b1615f8e411b	-	-	2026-11-24	xproof
 2c75623c-59f4-4449-ab43-9d1225185ad9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Rottenmouth Viper/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c75623c-59f4-4449-ab43-9d1225185ad9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rottenmouth Viper/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c769dfc-79be-4fcb-840c-b72cafdd0a23	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c769dfc-79be-4fcb-840c-b72cafdd0a23	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c769dfc-79be-4fcb-840c-b72cafdd0a23	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rapid-decay:cast:s1,f:xs:XP:rapid-decay:cast:s1	-	-	-	5f2128bf97e4	-	f50016c8caf9	-	-	2026-11-24	xproof
+2c769dfc-79be-4fcb-840c-b72cafdd0a23	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:rapid-decay:cast:s2,f:xs:XP:rapid-decay:cast:s2	-	-	-	5f2128bf97e4	-	f50016c8caf9	-	-	2026-11-24	xproof
 2c7818f4-a818-4603-9af1-05aee2d56ec8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c7818f4-a818-4603-9af1-05aee2d56ec8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c7818f4-a818-4603-9af1-05aee2d56ec8	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c7c42e1-b097-4443-aa02-1f1dfcbb9732	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c80fc55-86a0-403e-82ce-09ee03095d8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c85c9ea-c3fd-4981-a65c-4405bd87764e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c85c9ea-c3fd-4981-a65c-4405bd87764e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c85c9ea-c3fd-4981-a65c-4405bd87764e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 2c89cf19-8dc6-422e-bbf8-4dd5a399c630	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c89cf19-8dc6-422e-bbf8-4dd5a399c630	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c89cf19-8dc6-422e-bbf8-4dd5a399c630	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c96ab90-155b-4bf4-acc9-65a2f0cd3189	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Capital City/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c96ab90-155b-4bf4-acc9-65a2f0cd3189	land	play-land	agreed	-	X	scen	1	0	Capital City/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c99d52d-f909-4494-aeee-937ae779fd4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c99d52d-f909-4494-aeee-937ae779fd4a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c99d52d-f909-4494-aeee-937ae779fd4a	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 2c9bf40b-ddcb-4f46-a81e-56b91dfc784f	cast	cast-resolve	agreed	-	X	scen	1	0	Poison the Waters/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ca270f1-a8a2-438f-9321-2c653165f3e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ca270f1-a8a2-438f-9321-2c653165f3e4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
