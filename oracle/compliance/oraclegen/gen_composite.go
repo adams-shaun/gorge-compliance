@@ -83,6 +83,31 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 	}
 	collapseRoomLock(ds)
 	unposeCollectEvidenceDeclines(reg, ds)
+	// A Support pick is a counter_pick in gorge but a TARGET on XMage's spell
+	// or triggered ability: SupportEffect/SupportAbility declare it when the
+	// object is announced, so its answers belong on the cast/announcement step
+	// rather than the resolution step (support_pick.go). On a cast step the
+	// support target is the spell ability's FIRST target, so an inline
+	// Step.Targets preset would fill that slot and make XMage skip its own "up
+	// to" ask entirely; clear the preset and let every target of the cast or
+	// activation come from the answer queue, support answers first. The
+	// Scenario value shares its Steps slice with the caller, so the cleared
+	// preset is what the item serializes.
+	supports := map[int]supportAnswers{}
+	for i, d := range ds {
+		sa, ok := supportPick(reg, sc, res, d)
+		if !ok {
+			continue
+		}
+		supports[i] = sa
+		if sa.step >= 0 && sa.step < len(sc.Steps) &&
+			(sc.Steps[sa.step].Op == "cast" || sc.Steps[sa.step].Op == "activate") {
+			sc.Steps[sa.step].Targets = nil
+			if castSteps != nil {
+				delete(castSteps, sa.step)
+			}
+		}
+	}
 	if castSteps == nil {
 		castSteps = stepsWithOwnTargets(sc)
 	}
@@ -145,7 +170,7 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			sources[d.Step] = stepSourceNames(sc, res.Snapshots, d.Step)
 		}
 	}
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, bolster: bolsters, snaps: res.Snapshots, orderAsks: orderAsks})
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, bolster: bolsters, supports: supports, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that

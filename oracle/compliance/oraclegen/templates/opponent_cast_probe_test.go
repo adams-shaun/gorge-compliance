@@ -34,14 +34,18 @@ func TestOracleOpponentCastProbe(t *testing.T) {
 				t.Fatalf("opponent-cast scenario does not play through: ok=%v fails=%v", ok, result.Fails)
 			}
 			if name == "Wrecking Gecko" {
-				declined := false
+				// An unless-pay (ward) is XMage's boolean chooseUse
+				// (unlessPolarity in gen.go), so the opponent's ward payment
+				// is scripted as an explicit yes/no choice from seat 1, not a
+				// mode answer.
+				answered := false
 				for _, answers := range it.XAnswers {
 					for _, answer := range answers {
-						declined = declined || (answer.Kind == "mode" && answer.Value == "[mode_skip]")
+						answered = answered || (answer.Seat == 1 && answer.Kind == "choice" && (answer.Value == "yes" || answer.Value == "no"))
 					}
 				}
-				if !declined {
-					t.Fatalf("precondition: ward payment was not explicitly declined: answers=%+v decisions=%+v", it.XAnswers, result.Decisions)
+				if !answered {
+					t.Fatalf("precondition: ward payment was not explicitly answered: answers=%+v decisions=%+v", it.XAnswers, result.Decisions)
 				}
 			}
 		})
