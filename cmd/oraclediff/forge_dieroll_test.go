@@ -82,7 +82,9 @@ func TestForgeRolledDie(t *testing.T) {
 // d1b608ce5d = 9e368ca172 plus the Join Forces number announce, LeftOrRight binary and Optional Attach confirm
 // (ScriptedController/StepMachine only), die-roll code unchanged, the full driver suite (177 tests, including
 // ForcedDieRollTest) re-run green on it.
-const forgeOracleDieRollRef = "d1b608ce5db3e73ea9c4a0cd98aa2e8514d2625f"
+// a445a858b2 = d1b608ce5d plus the Myriad-only AtEOT empty-set guard (forge-game SpellAbilityEffect/CardFactoryUtil, driver and
+// die-roll code unchanged), the full driver suite (177 tests, including ForcedDieRollTest) re-run green on it.
+const forgeOracleDieRollRef = "a445a858b22f5cc4939359f471d712eb497178c1"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
