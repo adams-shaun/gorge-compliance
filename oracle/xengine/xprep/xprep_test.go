@@ -813,8 +813,9 @@ func TestStackLost(t *testing.T) {
 }
 
 // TestPlayStepUnlessPays: a land played as a step answers the as-enters "pay
-// 2 life?" on XMage's CHOICE queue. The same paid cost on a pass step keeps its
-// numeric mode answer, and a decline or a play-step modal ETB is untouched.
+// 2 life?" on XMage's CHOICE queue. The generic router answers every paid
+// unless cost the same way, so a pass-step payment is also "choice yes", while
+// a decline or a play-step modal ETB is untouched.
 func TestPlayStepUnlessPays(t *testing.T) {
 	play := oraclegen.Step{Op: "play", Seat: 0, Card: "p0:Sacred Foundry"}
 	pass := oraclegen.Step{Op: "pass", Seat: 0}
@@ -856,7 +857,7 @@ func TestPlayStepUnlessPays(t *testing.T) {
 			"pass step paid",
 			[]oraclegen.Step{play, pass},
 			passPaid,
-			[][]oraclegen.XAnswer{nil, {{Seat: 0, Kind: "mode", Value: "1"}}},
+			[][]oraclegen.XAnswer{nil, {{Seat: 0, Kind: "choice", Value: "yes"}}},
 		},
 		{
 			"play step modal ETB",
