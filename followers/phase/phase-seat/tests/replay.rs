@@ -104,10 +104,12 @@ fn the_same_seed_and_answers_replay_byte_for_byte() {
     std::thread::Builder::new().stack_size(64 << 20).spawn(run).expect("thread").join().expect("replay thread");
 }
 
-/// A Mascot's any-colour mana ability must not halt the game at `ChooseManaColor`, and the payment
-/// path must not loop to the decision cap. The policy prefers casting and activating the Mascot, then
-/// plays on. The assertion is the terminal outcome, which the old two-run replay test could not make:
-/// a halted or capped game replays byte-for-byte and still passes.
+/// A game from a Three Tree Mascot deck must end at a natural terminal: not halted on an unposed mana
+/// prompt, not looping to the decision cap. The assertion is the terminal outcome, which the two-run
+/// replay test cannot make (a halted or capped game replays byte-for-byte and still passes). The policy
+/// takes a Mascot activation when one is offered; phase offers mana abilities only inside a payment,
+/// which the seat settles itself, so the game may never reach the any-colour prompt. That prompt is
+/// guarded structurally by `waiting::tests::every_mana_ability_follow_up_is_posed`, not by this game.
 #[test]
 fn a_mascot_game_reaches_a_natural_terminal() {
     let Some(data) = std::env::var("PHASE_CARD_DATA").ok().filter(|v| !v.is_empty()) else {
