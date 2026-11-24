@@ -53,6 +53,7 @@ pub const DECISION_KINDS: &[&str] = &[
     "order_pick",
     "declare_attack",
     "declare_block",
+    "activate_mana_ability",
     "choose_spell_mode",
     "choose_option",
     "finish_selection",
@@ -102,6 +103,13 @@ pub fn cast_spell(source: Value, method: Option<&str>) -> Value {
 
 pub fn activate_ability(source: Value, ability_index: u32) -> Value {
     make("activate_ability", json!({"source": source, "ability_index": ability_index}))
+}
+
+pub fn activate_mana_ability(source: Value, ability_index: u32, mana_choice: Option<&str>, cost_target: Option<Value>) -> Value {
+    make(
+        "activate_mana_ability",
+        json!({"source": source, "ability_index": ability_index, "mana_choice": mana_choice, "cost_target": cost_target}),
+    )
 }
 
 pub fn mulligan(hand_size: u32, taken: u32, keep: bool) -> Value {
@@ -202,6 +210,7 @@ mod tests {
             play_land(o.clone(), 0),
             cast_spell(o.clone(), Some("normal")),
             activate_ability(o.clone(), 0),
+            activate_mana_ability(o.clone(), 0, Some("G"), None),
             mulligan(7, 0, true),
             declare_attack(o.clone(), Some(target_player("p1"))),
             declare_block(o.clone(), None),

@@ -30,7 +30,7 @@ use serde_json::{json, Value};
 use crate::json::canonical;
 use crate::semantic as sem;
 use crate::server::{Backend, CatalogDeck, Outcome, Reset};
-use crate::view::{object_ref, observation, seat, Ids};
+use crate::view::{looked_ref, mana_letter, object_ref, observation, seat, spell_entry, Ids};
 use crate::waiting::{classify, Family, Pose};
 
 /// Counts of what the host could not pose. Printed to stderr when the process ends.
@@ -164,6 +164,8 @@ struct Live {
     looks: Vec<(ObjectId, &'static str)>,
     /// The context purpose of the substep being asked, when it has one.
     purpose: Option<&'static str>,
+    /// Diagnostics only: per seat, the ids last shown and the ids that have left (V7).
+    shown: [(std::collections::BTreeMap<String, String>, std::collections::BTreeSet<String>); 2],
 }
 
 pub struct PhaseBackend {
@@ -240,6 +242,8 @@ impl PhaseBackend {
                 Pose::Unposed => {
                     *self.census.engine_errors.entry(name.to_string()).or_insert(0) += 1;
                     eprintln!("phase-seat: engine_error unmapped_decision {name}");
+                    let detail = format!("{:?} pending_cast_cost={:?} pool={:?}", live.state.waiting_for, live.state.pending_cast.as_ref().map(|c| &c.cost), live.state.players.iter().map(|p| p.mana_pool.units().count()).collect::<Vec<_>>());
+                    eprintln!("phase-seat: detail {}", detail.chars().take(700).collect::<String>());
                     return self.halt("unmapped_decision", name);
                 }
                 Pose::Posed(f) => f,
@@ -268,12 +272,14 @@ impl PhaseBackend {
             | WaitingFor::ChooseXValue { pending_cast, .. } => shown_ref(&live.state, &live.ids, who, pending_cast.object_id),
             _ => None,
         };
+        let observation = observation(&live.state, who, &live.ids, &live.looks);
+        diagnose(live, who, &observation, &cands);
         Outcome::Decision(json!({
             "acting_seat": seat(who), "seat_step": live.seat_steps[s],
             "group": {"group_id": live.groups[s], "substep_index": index, "substep_count": total},
             "context": {"kind": if family == Family::Priority { "priority" } else { "choice" },
                 "source": source, "purpose": live.purpose, "text": null, "rewind": false},
-            "observation": observation(&live.state, who, &live.ids, &live.looks),
+            "observation": observation,
             "candidates": cands, "extensions": {},
         }))
     }
@@ -303,6 +309,57 @@ impl PhaseBackend {
     }
 }
 
+/// Diagnostics on stderr, never a filter: what the host's validator would refuse (a candidate that names an
+/// object the observation does not list, V4; an id that comes back after it left, V7).
+fn diagnose(live: &mut Live, who: PlayerId, obs: &Value, cands: &[Value]) {
+    fn ids(v: &Value, out: &mut std::collections::BTreeMap<String, String>, zone: &str) {
+        match v {
+            Value::Object(m) => {
+                if let Some(id) = m.get("object_id").and_then(Value::as_str) {
+                    out.insert(id.to_string(), format!("{} {zone}", m.get("card_name").map_or("?".to_string(), |n| n.to_string())));
+                    return;
+                }
+                for (k, x) in m {
+                    ids(x, out, k);
+                }
+            }
+            Value::Array(a) => a.iter().for_each(|x| ids(x, out, zone)),
+            _ => {}
+        }
+    }
+    let mut now = std::collections::BTreeMap::new();
+    for p in obs["players"].as_array().into_iter().flatten() {
+        for z in ["hand", "battlefield", "graveyard", "exile", "command"] {
+            ids(&p[z], &mut now, z);
+        }
+    }
+    ids(&obs["stack"], &mut now, "stack");
+    ids(&obs["known"], &mut now, "known");
+    let waiting = classify(&live.state.waiting_for).0;
+    for c in cands {
+        let mut refs = std::collections::BTreeMap::new();
+        ids(&c["semantic"], &mut refs, "candidate");
+        for (id, what) in refs {
+            if !now.contains_key(&id) {
+                eprintln!("phase-seat: diagnose V4 {waiting}: candidate {} names {id} ({what}), not in the observation", c["semantic"]["kind"]);
+            }
+        }
+    }
+    let (prev, departed) = &mut live.shown[who.0 as usize];
+    for (id, what) in &now {
+        if departed.contains(id) {
+            eprintln!("phase-seat: diagnose V7 {waiting}: {id} ({what}) returned after leaving; it was last shown as {}", prev.get(id).map_or("?", String::as_str));
+        }
+    }
+    for (id, what) in prev.iter() {
+        if !now.contains_key(id) {
+            departed.insert(id.clone());
+            let _ = what;
+        }
+    }
+    *prev = now;
+}
+
 fn truncated(reason: &str, decisions: u64) -> Outcome {
     Outcome::Terminal(json!({"outcome": "truncated", "classification": "truncated", "winner": null,
         "reason": reason, "decision_count": decisions}))
@@ -325,7 +382,7 @@ fn apply_now(live: &mut Live, actor: PlayerId, action: GameAction) -> Result<(),
 
 /// Fill `live.cands` for `family`, or settle the prompt when there is nothing to choose.
 fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, Stop> {
-    let viewer = |live: &Live, p: PlayerId, id: ObjectId| object_ref(&live.state, &live.ids, p, id);
+    let viewer = |live: &Live, p: PlayerId, id: ObjectId| shown_ref(&live.state, &live.ids, p, id);
     let mut cands: Vec<Cand> = Vec::new();
     let mut actor = None;
     let w = live.state.waiting_for.clone();
@@ -509,8 +566,17 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
             live.acting = spec.who;
             return select_group(live, spec);
         }
-        (WaitingFor::ModeChoice { player, modal, pending_cast, unavailable_modes }, Family::Modes) => {
+        (
+            WaitingFor::ModeChoice { player, modal, unavailable_modes, .. }
+            | WaitingFor::AbilityModeChoice { player, modal, unavailable_modes, .. },
+            Family::Modes,
+        ) => {
             live.acting = *player;
+            let source = match &w {
+                WaitingFor::ModeChoice { pending_cast, .. } => pending_cast.object_id,
+                WaitingFor::AbilityModeChoice { source_id, .. } => *source_id,
+                _ => unreachable!("matched above"),
+            };
             if modal.allow_repeat_modes {
                 return Err(Stop::Halt("unsupported_modal", "a mode that may be chosen more than once".into()));
             }
@@ -521,7 +587,7 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 min: modal.min_choices,
                 max: modal.max_choices,
                 kind: SelKind::Modes(modal.mode_count as u32),
-                source: Some(pending_cast.object_id),
+                source: Some(source),
             };
             return select_group(live, spec);
         }
@@ -567,6 +633,7 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 return Ok(Built::Applied);
             }
             if live.group.is_none() {
+                live.ids.open_look();
                 live.group = Some(Group {
                     total: 2 * n - 1,
                     index: 0,
@@ -578,7 +645,7 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
             let Plan::Arrange { purpose, other, cards, chosen, placed } = &g.plan else {
                 return Err(Stop::Halt("followup_mismatch", "arrange group".into()));
             };
-            let refs: Vec<Option<Value>> = cards.iter().map(|c| viewer(live, *player, *c)).collect();
+            let refs: Vec<Option<Value>> = cards.iter().map(|c| looked_ref(&live.state, &live.ids, *c, *player)).collect();
             if refs.iter().any(Option::is_none) {
                 return Err(Stop::Halt("unresolvable_source", "a looked-at card".into()));
             }
@@ -608,6 +675,58 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 }
                 cands.sort_by_key(|c| hidden_key(&c.semantic["item"]["object"]));
             }
+        }
+        (WaitingFor::ManaPayment { player, .. }, Family::ManaPayment) => {
+            let who = *player;
+            live.acting = who;
+            // The profile declares `engine_autopay`: a payment the pool already covers is finished by the
+            // engine (phase's own confirm), not asked. Probed on a copy, since a short pool is refused.
+            let mut probe = live.state.clone();
+            if apply(&mut probe, who, GameAction::PassPriority).is_ok() {
+                live.state = probe;
+                return Ok(Built::Applied);
+            }
+            live.purpose = Some("mana_payment");
+            let spell = live.state.pending_cast.as_ref().and_then(|c| shown_ref(&live.state, &live.ids, who, c.object_id));
+            let Some(spell) = spell else { return Err(Stop::Halt("unresolvable_source", "the spell being paid for".into())) };
+            let contract = AiDecisionContract::issue(&live.state, who);
+            let mut seen = std::collections::BTreeSet::new();
+            for c in &contract.candidates {
+                let GameAction::TapLandForMana { selection } = &c.action else {
+                    let d = format!("{:?}", c.action);
+                    let name = d.split(|ch: char| !ch.is_alphanumeric()).next().unwrap_or("?").to_string();
+                    if name != "PassPriority" && name != "CancelCast" {
+                        *census.unmapped_actions.entry(name).or_insert(0) += 1;
+                    }
+                    continue;
+                };
+                let Some(src) = shown_ref(&live.state, &live.ids, who, selection.source.object_id) else { continue };
+                let semantic = sem::activate_mana_ability(src, selection.ability_index.unwrap_or(0) as u32, Some(mana_letter(selection.mana_type)), None);
+                if seen.insert(canonical(&semantic)) {
+                    cands.push(Cand { semantic, effect: Effect::Act(c.action.clone()) });
+                }
+            }
+            cands.sort_by_key(|c| canonical(&c.semantic));
+            actor = Some(contract.authorized_actor);
+            // Declining to pay is always offered (V9): it withdraws the cast.
+            cands.push(Cand { semantic: sem::optional_cost(spell, "other", false), effect: Effect::Act(GameAction::CancelCast) });
+        }
+        (WaitingFor::ManaSourceSelection { player, options, .. }, Family::ManaSource) => {
+            live.acting = *player;
+            live.purpose = Some("mana_payment");
+            let spell = live.state.pending_cast.as_ref().and_then(|c| shown_ref(&live.state, &live.ids, *player, c.object_id));
+            let Some(spell) = spell else { return Err(Stop::Halt("unresolvable_source", "the spell being paid for".into())) };
+            let mut seen = std::collections::BTreeSet::new();
+            for o in options {
+                let Some(src) = shown_ref(&live.state, &live.ids, *player, o.source.object_id) else { continue };
+                let semantic = sem::activate_mana_ability(src, o.ability_index.unwrap_or(0) as u32, Some(mana_letter(o.mana_type)), None);
+                if seen.insert(canonical(&semantic)) {
+                    cands.push(Cand { semantic, effect: Effect::Act(GameAction::ActivateManaSource { selection: o.clone() }) });
+                }
+            }
+            cands.sort_by_key(|c| canonical(&c.semantic));
+            // Declining to choose a source is always offered (V9).
+            cands.push(Cand { semantic: sem::optional_cost(spell, "other", false), effect: Effect::Act(GameAction::BackToManaPayment) });
         }
         (WaitingFor::TopOrBottomChoice { player, .. }, Family::TopOrBottom) => {
             live.acting = *player;
@@ -690,7 +809,9 @@ fn pool_spec(w: &WaitingFor) -> Result<PoolSpec, Stop> {
 fn shown_ref(state: &GameState, ids: &Ids, viewer: PlayerId, id: ObjectId) -> Option<Value> {
     let r = object_ref(state, ids, viewer, id)?;
     let listed = match r["zone"].as_str()? {
-        "battlefield" | "graveyard" | "exile" | "command" | "stack" => true,
+        "battlefield" | "graveyard" | "exile" | "command" => true,
+        // The stack lists the spells on it; a spell phase is resolving is off it.
+        "stack" => spell_entry(state, id).is_some(),
         "hand" => r["owner_seat"] == seat(viewer),
         _ => false,
     };
@@ -730,12 +851,22 @@ fn select_group(live: &mut Live, spec: PoolSpec) -> Result<Built, Stop> {
             .items
             .iter()
             .map(|i| ObjectId(*i as u64))
-            .filter(|id| live.state.objects.get(id).is_some_and(|o| o.zone == engine::types::zones::Zone::Library))
-            .map(|id| (id, "searching"))
+            .filter_map(|id| {
+                let o = live.state.objects.get(&id)?;
+                match o.zone {
+                    engine::types::zones::Zone::Library => Some((id, "searching")),
+                    engine::types::zones::Zone::Hand if o.owner != spec.who => Some((id, "revealed")),
+                    _ => None,
+                }
+            })
             .collect();
     }
     let fixed = min == max;
     if live.group.is_none() {
+        if !live.looks.is_empty() {
+            live.ids.open_look();
+            // The refs below are minted after the new look opens; `looks` stays the same list.
+        }
         let picks = if fixed { vec![] } else { live.carry.clone() };
         live.group = Some(Group {
             total: if fixed { max } else { 1 },
@@ -758,7 +889,12 @@ fn select_group(live: &mut Live, spec: PoolSpec) -> Result<Built, Stop> {
             let s = sem::choose_spell_mode(src.clone().expect("mode source"), it as u32, *count, picks.len() as u32, min as u32, max as u32);
             ((String::new(), format!("{it:08}")), s)
         } else {
-            let Some(r) = object_ref(&live.state, &live.ids, who, ObjectId(it as u64)) else { continue };
+            // A card in a library is only in view while it is looked at (a `known` entry); anything else
+            // must be one of the observation's records.
+            let id = ObjectId(it as u64);
+            let looked = live.looks.iter().any(|(l, _)| *l == id);
+            let r = if looked { looked_ref(&live.state, &live.ids, id, who) } else { shown_ref(&live.state, &live.ids, who, id) };
+            let Some(r) = r else { continue };
             let key = hidden_key(&r);
             let s = match kind {
                 SelKind::Cards(p) => sem::select_object(src.clone(), p, sem::target_object(r), picks.len() as u32, min as u32, max as u32),
@@ -781,7 +917,12 @@ fn select_group(live: &mut Live, spec: PoolSpec) -> Result<Built, Stop> {
         cands.push(Cand { semantic: sem::finish_selection(src.clone(), purpose, picks.len() as u32), effect: Effect::Sub(Sub::Finish) });
     }
     if cands.is_empty() {
-        return Err(Stop::Halt("dead_end", "no item left to pick".into()));
+        let zones: Vec<String> = items
+            .iter()
+            .take(6)
+            .map(|i| live.state.objects.get(&ObjectId(*i as u64)).map_or("gone".to_string(), |o| format!("{} {:?} owner {}", o.name, o.zone, o.owner.0)))
+            .collect();
+        return Err(Stop::Halt("dead_end", format!("no item left to pick in {}: {} items, picks {:?}, who {}: {zones:?}", classify(&live.state.waiting_for).0, items.len(), picks, who.0)));
     }
     live.actor = who;
     live.cands = cands;
@@ -798,7 +939,7 @@ fn targets(
 ) -> Result<(), Stop> {
     let slot = selection.current_slot;
     let Some(s) = slots.get(slot) else { return Err(Stop::Halt("dead_end", "target slot out of range".into())) };
-    let Some(src) = source.and_then(|id| object_ref(&live.state, &live.ids, who, id)) else {
+    let Some(src) = source.and_then(|id| shown_ref(&live.state, &live.ids, who, id)) else {
         return Err(Stop::Halt("unresolvable_source", "target source".into()));
     };
     let legal = if selection.current_legal_targets.is_empty() { &s.legal_targets } else { &selection.current_legal_targets };
@@ -808,7 +949,7 @@ fn targets(
     for t in legal {
         let target = match t {
             TargetRef::Player(p) => sem::target_player(seat(*p)),
-            TargetRef::Object(o) => match object_ref(&live.state, &live.ids, who, *o) {
+            TargetRef::Object(o) => match shown_ref(&live.state, &live.ids, who, *o) {
                 Some(r) => sem::target_object(r),
                 None => continue,
             },
@@ -882,6 +1023,7 @@ impl Backend for PhaseBackend {
             carry: vec![],
             looks: vec![],
             purpose: None,
+            shown: Default::default(),
         });
         Ok(self.pose())
     }

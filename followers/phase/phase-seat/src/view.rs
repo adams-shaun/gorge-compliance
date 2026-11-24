@@ -30,17 +30,26 @@ use crate::json::{hex, hmac_sha256};
 /// Derives the per-viewer object ids of one game from its `game_secret`.
 pub struct Ids {
     key: [u8; 32],
+    /// Which look the library cards in view belong to: a card looked at or searched for is a new object
+    /// to the seat each time (V7), so its id carries the look's number.
+    look: std::cell::Cell<u64>,
 }
 
 impl Ids {
     pub fn new(game_secret: &[u8; 32]) -> Self {
-        Ids { key: hmac_sha256(game_secret, b"spellbench/v2/object-id") }
+        Ids { key: hmac_sha256(game_secret, b"spellbench/v2/object-id"), look: std::cell::Cell::new(0) }
     }
 
     /// `zone` is the zone the observation shows the object in: a spell is on the stack while phase
     /// still lists its card in a hand, and the zone change is a new object to the validator (V7).
+    /// A new look opens: the library cards it shows get ids no earlier look used.
+    pub fn open_look(&self) {
+        self.look.set(self.look.get() + 1);
+    }
+
     pub fn object(&self, viewer: PlayerId, id: ObjectId, incarnation: u64, zone: &str) -> String {
-        let m = format!("{}:{}:{}:{}", viewer.0, id.0, incarnation, zone);
+        let look = if matches!(zone, "library" | "hand-revealed") { self.look.get() } else { 0 };
+        let m = format!("{}:{}:{}:{}:{}", viewer.0, id.0, incarnation, zone, look);
         format!("o-{}", hex(&hmac_sha256(&self.key, m.as_bytes())[..8]))
     }
 }
@@ -88,7 +97,7 @@ fn word(s: &str) -> String {
     s.chars().filter(|c| !matches!(c, '\'' | '\u{2019}')).map(|c| if c == ' ' || c == '-' { '_' } else { c.to_ascii_lowercase() }).collect()
 }
 
-fn mana_letter(t: ManaType) -> &'static str {
+pub fn mana_letter(t: ManaType) -> &'static str {
     match t {
         ManaType::White => "W",
         ManaType::Blue => "U",
@@ -121,7 +130,7 @@ fn readable(state: &GameState, viewer: PlayerId, id: ObjectId) -> bool {
 
 /// The stack entry of a spell whose card is `id`. Phase pushes the entry while the card is still in
 /// its hand list (targets and costs are chosen after), so the stack decides where the card is.
-fn spell_entry(state: &GameState, id: ObjectId) -> Option<&engine::types::game_state::StackEntry> {
+pub(crate) fn spell_entry(state: &GameState, id: ObjectId) -> Option<&engine::types::game_state::StackEntry> {
     state.stack.iter().find(|e| e.id == id && matches!(e.kind, StackEntryKind::Spell { .. }))
 }
 
@@ -135,6 +144,15 @@ pub fn object_ref(state: &GameState, ids: &Ids, viewer: PlayerId, id: ObjectId) 
         None => (o.controller, zone_word(o.zone)),
     };
     Some(crate::semantic::object_ref(&ids.object(viewer, id, o.incarnation, zone), name, seat(o.owner), seat(controller), zone))
+}
+
+/// The ref of a card the seat is looking at (a library card looked at or searched, or a card of the
+/// other hand it was shown): named, whatever zone it is in. Its `known` entry says the same.
+pub fn looked_ref(state: &GameState, ids: &Ids, id: ObjectId, viewer: PlayerId) -> Option<Value> {
+    let o = state.objects.get(&id)?;
+    let zone = zone_word(o.zone);
+    let tag = if o.zone == Zone::Hand { "hand-revealed" } else { zone };
+    Some(crate::semantic::object_ref(&ids.object(viewer, id, o.incarnation, tag), Some(&o.name), seat(o.owner), seat(o.controller), zone))
 }
 
 fn characteristics(state: &GameState, viewer: PlayerId, id: ObjectId) -> Value {
@@ -376,20 +394,25 @@ fn scrub_refs(mut obs: Value) -> Value {
 /// The library cards this decision lets the viewer see (`looked_at`, `searching`), in the spec's order
 /// (owner, zone, name, position, how, id). A card the viewer may not read is left out.
 fn known(state: &GameState, ids: &Ids, viewer: PlayerId, looks: &[(ObjectId, &'static str)]) -> Vec<Value> {
-    let mut rows: Vec<((String, String, Option<u64>, String, String), Value)> = Vec::new();
+    let mut rows: Vec<((String, String, String, Option<u64>, String, String), Value)> = Vec::new();
     for (id, how) in looks {
         let Some(o) = state.objects.get(id) else { continue };
-        if o.zone != Zone::Library || !readable(state, viewer, *id) {
-            continue;
-        }
-        let top = (*how != "searching")
-            .then(|| state.players.iter().find(|p| p.id == o.owner).and_then(|p| p.library.iter().position(|x| x == id)).map(|n| n as u64))
-            .flatten();
-        let oid = ids.object(viewer, *id, o.incarnation, "library");
-        let key = (seat(o.owner).to_string(), o.name.clone(), top, (*how).to_string(), oid.clone());
+        // A library card looked at or searched, or a card of another seat's hand shown to the viewer.
+        let (zone, top) = match o.zone {
+            Zone::Library if readable(state, viewer, *id) => (
+                "library",
+                (*how != "searching")
+                    .then(|| state.players.iter().find(|p| p.id == o.owner).and_then(|p| p.library.iter().position(|x| x == id)).map(|n| n as u64))
+                    .flatten(),
+            ),
+            Zone::Hand if o.owner != viewer => ("hand", None),
+            _ => continue,
+        };
+        let oid = ids.object(viewer, *id, o.incarnation, if zone == "hand" { "hand-revealed" } else { zone });
+        let key = (seat(o.owner).to_string(), zone.to_string(), o.name.clone(), top, (*how).to_string(), oid.clone());
         rows.push((
             key,
-            json!({"owner_seat": seat(o.owner), "zone": "library", "card_name": o.name, "object_id": oid,
+            json!({"owner_seat": seat(o.owner), "zone": zone, "card_name": o.name, "object_id": oid,
                 "position_from_top": top, "position_from_bottom": Value::Null, "how": how}),
         ));
     }

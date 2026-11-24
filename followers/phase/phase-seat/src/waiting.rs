@@ -39,6 +39,10 @@ pub enum Family {
     Arrange,
     /// `TopOrBottomChoice`: `choose_option` top or bottom.
     TopOrBottom,
+    /// `ManaPayment`: finish a payment the pool covers, else `activate_mana_ability` per source or cancel.
+    ManaPayment,
+    /// `ManaSourceSelection`: `activate_mana_ability` per source, or back to the payment.
+    ManaSource,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -62,8 +66,8 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::EntryAttackTargetChoice { .. } => ("EntryAttackTargetChoice", Pose::Unposed),
         WaitingFor::MulliganDecision { .. } => ("MulliganDecision", Pose::Posed(Family::Mulligan)),
         WaitingFor::OpeningHandBottomCards { .. } => ("OpeningHandBottomCards", Pose::Unposed),
-        WaitingFor::ManaPayment { .. } => ("ManaPayment", Pose::Unposed),
-        WaitingFor::ManaSourceSelection { .. } => ("ManaSourceSelection", Pose::Unposed),
+        WaitingFor::ManaPayment { .. } => ("ManaPayment", Pose::Posed(Family::ManaPayment)),
+        WaitingFor::ManaSourceSelection { .. } => ("ManaSourceSelection", Pose::Posed(Family::ManaSource)),
         WaitingFor::AssistChoosePlayer { .. } => ("AssistChoosePlayer", Pose::Unposed),
         WaitingFor::AssistPayment { .. } => ("AssistPayment", Pose::Unposed),
         WaitingFor::ChooseXValue { .. } => ("ChooseXValue", Pose::Posed(Family::ChooseX)),
@@ -136,7 +140,7 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::CastingVariantChoice { .. } => ("CastingVariantChoice", Pose::Unposed),
         WaitingFor::ChoosePermanentTypeSlot { .. } => ("ChoosePermanentTypeSlot", Pose::Unposed),
         WaitingFor::MultiTargetSelection { .. } => ("MultiTargetSelection", Pose::Unposed),
-        WaitingFor::AbilityModeChoice { .. } => ("AbilityModeChoice", Pose::Unposed),
+        WaitingFor::AbilityModeChoice { .. } => ("AbilityModeChoice", Pose::Posed(Family::Modes)),
         WaitingFor::OptionalEffectChoice { .. } => ("OptionalEffectChoice", Pose::Posed(Family::OptionalEffect)),
         WaitingFor::ResolutionOptionalPaymentChoice { .. } => ("ResolutionOptionalPaymentChoice", Pose::Unposed),
         WaitingFor::PairChoice { .. } => ("PairChoice", Pose::Unposed),
@@ -222,7 +226,7 @@ mod tests {
         let src = include_str!("waiting.rs");
         let body = src.split("pub fn classify").nth(1).unwrap().split("#[cfg(test)]").next().unwrap();
         let posed = body.lines().filter(|l| l.trim_start().starts_with("WaitingFor::") && l.contains("Pose::Posed(")).count();
-        assert_eq!(posed, 22);
+        assert_eq!(posed, 25);
         let terminal = body.lines().filter(|l| l.trim_start().starts_with("WaitingFor::") && l.contains("Pose::Terminal")).count();
         assert_eq!(terminal, 1);
     }
