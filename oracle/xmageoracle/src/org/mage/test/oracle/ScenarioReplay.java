@@ -7209,13 +7209,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /**
-     * Replace name-only attacker commands with exact declarations when the
-     * controlling seat has both a token and a card of a name, or when the step
-     * declares two same-name cards. XMage's "Name:k" command ranks the two
-     * kinds together and takes whichever it finds first, so it can declare the
-     * card when the scenario recorded the token (and the reverse). It also has
-     * to name the highest-index duplicate first, which reverses the step's
-     * order; a band's leader and XMage's combat asks follow declaration order.
+     * Replace name-only attacker commands with exact declarations when a
+     * command could name a different object than the recorded ref: the
+     * controlling seat has a token and a card of one name, the step declares
+     * a repeat of a name, a ref carries a later "#k" ordinal than its first
+     * live copy, or the seat controls more than one live same-name permanent
+     * (a tapped, summoning-sick or already-attacking duplicate is not in
+     * XMage's "Name:k" rank, while the ref's ordinal counts every copy). It
+     * also has to name the highest-index duplicate first, which reverses the
+     * step's order; a band's leader and XMage's combat asks follow declaration
+     * order.
      *
      * <p>Once a batch needs exact declarations, every ref of that batch that
      * resolves is declared exactly, in the step's own order, not just the
@@ -7234,27 +7237,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             it.remove();
             Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
-            Map<String, Integer> groupSize = new LinkedHashMap<>();
-            Map<String, Boolean> groupExactable = new LinkedHashMap<>();
             Map<String, Permanent> exactByRef = new HashMap<>();
             for (String ref : batch.refs) {
-                String name = battlefieldName(ref);
-                Permanent exact = combatPermanent(ref, name, player.getId(), game);
-                exactByRef.put(ref, exact);
-                groupSize.merge(name, 1, Integer::sum);
-                groupExactable.merge(name, exact != null, (all, one) -> all && one);
+                exactByRef.put(ref, combatPermanent(ref, battlefieldName(ref), player.getId(), game));
             }
             boolean exactNeeded = false;
             for (String ref : batch.refs) {
                 String name = battlefieldName(ref);
                 if (combatRefAmbiguous(name, player.getId(), battlefield)
-                        || (groupSize.get(name) > 1 && groupExactable.get(name))) {
+                        || (exactByRef.get(ref) != null
+                                && combatNameUnreliable(ref, name, player.getId(), battlefield))) {
                     exactNeeded = true;
                     break;
                 }
             }
             if (!exactNeeded) {
-                // No ambiguity and no fully-resolvable same-name group: the
+                // Every name command still names its recorded object: the
                 // name commands keep the behaviour every other step has.
                 continue;
             }
@@ -7287,10 +7285,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /**
-     * The blocker counterpart of applyExactAttackers. Either side of a
-     * recorded [blocker, attacker] pair can be the token that shares its name
-     * with a card, so both refs are resolved exactly and the pair is declared
-     * directly instead of lowering either to a name.
+     * The blocker counterpart of applyExactAttackers. Both sides of a
+     * recorded [blocker, attacker] pair are resolved exactly and declared
+     * directly instead of lowered to a name when either name command could
+     * name the wrong object: the seat controls more than one same-name
+     * permanent (a token beside a card, or a live duplicate whose rank the
+     * command's filter shifts), or a ref carries a later "#k" ordinal than
+     * its first live copy. The blocker command ranks every controlled
+     * permanent of the name; the attacker command ranks only the currently
+     * attacking ones, so a same-name non-attacker shifts its index too.
      */
     private void applyExactBlockers(TestPlayer player, Game game) {
         UUID attackerId = game.getCombat().getAttackingPlayerId();
@@ -7309,13 +7312,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String blockerName = battlefieldName(blockerRef);
                 String attackerName = battlefieldName(attackerRef);
                 Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
-                if (!combatRefAmbiguous(blockerName, player.getId(), battlefield)
-                        && !combatRefAmbiguous(attackerName, attackerId, battlefield)) {
+                Permanent blocker = combatPermanent(blockerRef, blockerName, player.getId(), game);
+                Permanent attacker = combatPermanent(attackerRef, attackerName, attackerId, game);
+                boolean exactNeeded = combatRefAmbiguous(blockerName, player.getId(), battlefield)
+                        || combatRefAmbiguous(attackerName, attackerId, battlefield)
+                        || (blocker != null
+                                && combatNameUnreliable(blockerRef, blockerName, player.getId(), battlefield))
+                        || (attacker != null
+                                && combatNameUnreliable(attackerRef, attackerName, attackerId, battlefield));
+                if (!exactNeeded) {
                     continue;
                 }
                 player.getActions().remove(batch.actions.get(i));
-                Permanent blocker = combatPermanent(blockerRef, blockerName, player.getId(), game);
-                Permanent attacker = combatPermanent(attackerRef, attackerName, attackerId, game);
                 if (blocker == null || attacker == null) {
                     throw new IllegalArgumentException("block " + blockerRef + " -> " + attackerRef
                             + " names no live permanent (battlefield: " + battlefieldListing() + ")");
@@ -7402,6 +7410,33 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         }
         return token && card;
+    }
+
+    /** Whether XMage's name-only combat command may name a different object
+     * than the recorded ref. The command ranks the permanents that currently
+     * match its own filter: the attack command ranks untapped, non-sick
+     * creatures of the name, while a block's attacker side ranks only the
+     * currently attacking ones. The driver's "#k" is instead the scenario
+     * object's setup ordinal across zones. The two ranks agree only for the
+     * first ordinal when the seat controls exactly one live permanent of the
+     * name; a duplicate (tapped, already attacking, phased out, or on the
+     * token/card side of the same name) shifts XMage's index, and a later
+     * ordinal can outlive the earlier copies. Resolving the ref to its bound
+     * object is the only exact answer, so the caller declares it directly. */
+    static boolean combatNameUnreliable(String ref, String name, UUID controller,
+            Iterable<Permanent> battlefield) {
+        if (refOrdinal(ref) > 1) {
+            return true;
+        }
+        int sameName = 0;
+        for (Permanent permanent : battlefield) {
+            if (controller.equals(permanent.getControllerId())
+                    && CardUtil.haveSameNames(permanent.getName(), name, true)
+                    && ++sameName > 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Whether an activation's XMage text turns its permanent face up

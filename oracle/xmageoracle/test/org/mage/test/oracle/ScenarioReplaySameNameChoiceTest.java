@@ -22,6 +22,14 @@ public final class ScenarioReplaySameNameChoiceTest {
     }
 
     private static Permanent object(UUID controller, boolean token, int order, String name) {
+        return object(controller, token, order, name, false, false);
+    }
+
+    /** A fixture permanent with the live tap/attack state the combat commands
+     * rank on. Tapped copies are what made XMage's "Name:k" index of a
+     * same-name attacker diverge from the driver's setup ordinal. */
+    private static Permanent object(UUID controller, boolean token, int order, String name,
+            boolean tapped, boolean attacking) {
         UUID id = UUID.randomUUID();
         return (Permanent) Proxy.newProxyInstance(Permanent.class.getClassLoader(),
                 new Class<?>[]{Permanent.class}, (proxy, method, args) -> {
@@ -40,12 +48,12 @@ public final class ScenarioReplaySameNameChoiceTest {
                         case "isControlledBy": return controller.equals(args[0]);
                         case "getCardType": return List.of(mage.constants.CardType.CREATURE);
                         case "isCreature": return true;
-                        case "isTapped": return false;
-                        case "isAttacking": return false;
+                        case "isTapped": return tapped;
+                        case "isAttacking": return attacking;
                         case "hasSummoningSickness": return false;
                         case "getMaxBlocks": return 1;
                         case "getBlocking": return 0;
-                        case "canAttack": return true;
+                        case "canAttack": return !tapped && !attacking;
                         case "getExpansionSetCode": return "TST";
                         default: throw new AssertionError("unexpected call " + method);
                     }
@@ -248,6 +256,9 @@ public final class ScenarioReplaySameNameChoiceTest {
                         case "getBattlefield": return board;
                         case "getCombat": return combat;
                         case "getTurnNum": return turn;
+                        // Reached only by a strict miss's diagnostic; this
+                        // stub game has no turn step, which it only null-checks.
+                        case "getStep": return null;
                         default: throw new AssertionError("unexpected game call " + method);
                     }
                 });
@@ -400,6 +411,94 @@ public final class ScenarioReplaySameNameChoiceTest {
                 "block batch registered both declarations with the combat group");
         check(player.getActions().isEmpty(), "block batch removed both queued name commands");
         System.out.println("PASS exact attack/block batches declare token:/card refs and consume their commands");
+    }
+
+    /** Life and Limb makes p0's five Forests 1/1 Saproling creatures. Four
+     * were tapped for the mana to cast it, so only the fifth is an untapped
+     * creature. XMage's "Name:k" attack command ranks only untapped creatures,
+     * while the recorded ref's "#5" ranks all five same-name permanents:
+     * "Forest:4" names nothing and the recorded attacker is a strict miss.
+     * The exact batch must resolve the bound object and declare it. */
+    @SuppressWarnings("unchecked")
+    private static void attackWithUntappedFifthForestAfterFourTapped() throws Exception {
+        ScenarioReplay owner = newOwner();
+        RecordingComputerPlayer computer = new RecordingComputerPlayer("PlayerA");
+        org.mage.test.player.TestPlayer player = scripted(owner, computer);
+        seat(owner, "playerA", player);
+        seat(owner, "playerB", player);
+        UUID own = player.getId();
+        String name = "Forest";
+        List<Permanent> forests = new ArrayList<>();
+        mage.game.permanent.Battlefield board = new mage.game.permanent.Battlefield();
+        for (int i = 1; i <= 5; i++) {
+            // The first four were tapped to pay for Life and Limb.
+            Permanent forest = object(own, false, 40 + i, name, i <= 4, false);
+            forests.add(forest);
+            board.addPermanent(forest);
+        }
+        Map<String, String> refAlias = (Map<String, String>) get(owner, ScenarioReplay.class, "refAlias");
+        for (int i = 1; i <= 5; i++) {
+            String ref = "p0:" + name + (i == 1 ? "" : "#" + i);
+            refAlias.put(ref, "@" + ref);
+            player.addAlias(ref, forests.get(i - 1).getId());
+        }
+        PlayerAction attack = action("attack:Forest:4");
+        player.addAction(attack);
+        RecordingCombat combat = new RecordingCombat(own);
+        Game game = game(board, combat, 1);
+        ((List<Object>) get(owner, ScenarioReplay.class, "exactAttacks")).add(attackBatch(
+                1, 0, 1, List.of("p0:Forest#5"), List.of(attack)));
+        // Strict mode is the reported failure: a name command that finds no
+        // attacker must fail rather than quietly declare nothing.
+        set(player, org.mage.test.player.TestPlayer.class, "strictChooseMode", true);
+        player.selectAttackers(game, own);
+        check(computer.attackers.equals(List.of(forests.get(4).getId())),
+                "the untapped fifth Forest was the recorded attacker, got " + computer.attackers);
+        check(player.getActions().isEmpty(), "the Forest:4 name command was consumed by the exact declaration");
+        System.out.println("PASS a same-name attacker past four tapped copies is declared exactly, not by rank");
+    }
+
+    /** The blocker mirror: p0 controls two Grizzly Bears but only the second
+     * is attacking. XMage ranks a block's attacker among the currently
+     * attacking same-name creatures, so "Grizzly Bears:1" names nothing.
+     * The pair must be declared from the bound objects. */
+    @SuppressWarnings("unchecked")
+    private static void blockSecondOfTwoSameNameAttackers() throws Exception {
+        ScenarioReplay owner = newOwner();
+        RecordingComputerPlayer computer = new RecordingComputerPlayer("PlayerA");
+        org.mage.test.player.TestPlayer player = scripted(owner, computer);
+        seat(owner, "playerA", player);
+        seat(owner, "playerB", player);
+        UUID own = player.getId();
+        Permanent hero = object(own, false, 50, "Benalish Hero");
+        Permanent idle = object(own, false, 51, "Grizzly Bears");
+        Permanent attacking = object(own, false, 52, "Grizzly Bears", true, true);
+        mage.game.permanent.Battlefield board = new mage.game.permanent.Battlefield();
+        board.addPermanent(hero);
+        board.addPermanent(idle);
+        board.addPermanent(attacking);
+        Map<String, String> refAlias = (Map<String, String>) get(owner, ScenarioReplay.class, "refAlias");
+        for (String ref : List.of("p0:Benalish Hero", "p0:Grizzly Bears", "p0:Grizzly Bears#2")) {
+            refAlias.put(ref, "@" + ref);
+        }
+        player.addAlias("p0:Benalish Hero", hero.getId());
+        player.addAlias("p0:Grizzly Bears", idle.getId());
+        player.addAlias("p0:Grizzly Bears#2", attacking.getId());
+        PlayerAction block = action("block:Benalish Hero$Grizzly Bears:1");
+        player.addAction(block);
+        RecordingCombat combat = new RecordingCombat(own);
+        combat.attackers.add(attacking.getId());
+        Game game = game(board, combat, 1);
+        ((List<Object>) get(owner, ScenarioReplay.class, "exactBlocks")).add(blockBatch(
+                1, 0, List.of("p0:Benalish Hero"), List.of("p0:Grizzly Bears#2"),
+                List.of(block)));
+        player.selectBlockers(null, game, own);
+        check(computer.blockers.equals(List.of(hero.getId())),
+                "the recorded blocker was declared exactly, got " + computer.blockers);
+        check(combat.group().getBlockers().contains(hero.getId()),
+                "the exact block registered with the attacking group");
+        check(player.getActions().isEmpty(), "the Grizzly Bears:1 name command was consumed");
+        System.out.println("PASS a blocker naming the second attacking same-name copy is declared exactly");
     }
 
     /** Sisters of Stone Death forces a block: XMage declares it before asking
@@ -812,6 +911,8 @@ public final class ScenarioReplaySameNameChoiceTest {
         attackBatchOrdering();
         combatRefs();
         exactCombatBatches();
+        attackWithUntappedFifthForestAfterFourTapped();
+        blockSecondOfTwoSameNameAttackers();
         autoDeclaredBlock();
         liveMatcher();
         tokenTargetName();
