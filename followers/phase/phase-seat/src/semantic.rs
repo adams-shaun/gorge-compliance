@@ -47,10 +47,7 @@ pub const DECISION_KINDS: &[&str] = &[
     "finish_target_selection",
     "choose_boolean",
     "choose_number",
-    "choose_option",
-    "choose_spell_mode",
     "select_object",
-    "finish_selection",
     "optional_cost",
     "mulligan",
     "order_pick",
@@ -206,12 +203,15 @@ mod tests {
             optional_cost(o.clone(), "kicker", true),
             order_pick(None, "mulligan_bottom", json!({"object": o}), 0, 1),
         ];
-        // The advertised set is exactly the set the builders cover.
-        let mut kinds: Vec<&str> = all.iter().map(|v| v["kind"].as_str().unwrap()).collect();
-        kinds.sort_unstable();
-        let mut want = DECISION_KINDS.to_vec();
-        want.sort_unstable();
-        assert_eq!(kinds, want);
+        // Every advertised kind has a builder; the builders also cover kinds `game` does not ask yet
+        // (`choose_option`, `choose_spell_mode`, `finish_selection`), which stay unadvertised.
+        let built: std::collections::BTreeSet<&str> = all.iter().map(|v| v["kind"].as_str().unwrap()).collect();
+        for k in DECISION_KINDS {
+            assert!(built.contains(k), "{k} is advertised but no builder is tested");
+        }
+        for k in ["choose_option", "choose_spell_mode", "finish_selection"] {
+            assert!(built.contains(k) && !DECISION_KINDS.contains(&k), "{k} is built but not advertised");
+        }
     }
 
     #[test]
