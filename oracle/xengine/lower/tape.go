@@ -213,6 +213,35 @@ func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 	return l, nil
 }
 
+// withoutTriggeredMana is entries with every triggered mana record (see
+// game.ManaRec.Triggered) dropped. The lowering indexes an entry's records
+// against its tap steps, spend and funding, one step per record; a triggered
+// record has no step, so it is removed once here, ahead of all of them,
+// instead of in each. The mana it adds is the tap's own outcome (CR 605.4a):
+// the follower gets it from the tap step, and the recorded spend is split by
+// the Cost$ of the activated records, which a triggered record has none of.
+// entries is not modified; the same slice returns when nothing is dropped.
+func withoutTriggeredMana(entries []game.Entry) []game.Entry {
+	var out []game.Entry
+	for i, e := range entries {
+		if !slices.ContainsFunc(e.Mana, func(mr game.ManaRec) bool { return mr.Triggered }) {
+			if out != nil {
+				out[i] = e
+			}
+			continue
+		}
+		if out == nil {
+			out = slices.Clone(entries)
+		}
+		e.Mana = slices.DeleteFunc(slices.Clone(e.Mana), func(mr game.ManaRec) bool { return mr.Triggered })
+		out[i] = e
+	}
+	if out == nil {
+		return entries
+	}
+	return out
+}
+
 // compactPayment leaves Payment nil when no step recorded any spend, so an
 // item with no payment keeps its pre-payment bytes (the field is a parallel
 // array, not a sparse map, and omitempty must omit the all-empty slice).
@@ -228,6 +257,7 @@ func (l *Lowered) compactPayment() {
 // lowerEntries lowers entries[first:] into l's steps. stalled marks entries
 // that end in a watchdog, not a game end or the end of a window.
 func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.Entry, first int, stalled bool) {
+	entries = withoutTriggeredMana(entries)
 	// A pass that posed asks owes its answers to the next step created; the
 	// pass is not final until that step exists, so its place is kept.
 	var owed []oraclegen.Answer
@@ -1557,6 +1587,11 @@ func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.Ma
 func manaTaps(reg *cards.Registry, m seatMap, mana []game.ManaRec) ([]oraclegen.Step, *truncation) {
 	var out []oraclegen.Step
 	for _, mr := range mana {
+		if mr.Triggered {
+			// No step of its own: a triggered mana ability resolves with the
+			// tap that triggered it (CR 605.1b, 605.4a), in the follower too.
+			continue
+		}
 		if mr.Ref == "" {
 			return nil, &truncation{ReasonUnbindableRef}
 		}
