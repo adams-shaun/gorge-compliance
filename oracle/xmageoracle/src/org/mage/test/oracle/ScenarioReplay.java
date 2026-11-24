@@ -477,11 +477,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 return false;
             }
             String[] pick = tapPaymentPick(getChoices().get(0));
-            if (pick == null) {
-                return false;
-            }
             Map<UUID, mage.abilities.SpecialAction> actions =
                     game.getState().getSpecialActions().getControlledBy(getId(), true);
+            if (pick == null) {
+                // Not a tap: the bare card name of a recorded Delve exile
+                // pick (CR 702.66a), or nothing this hook translates.
+                return queueDelveAction(game, actions.values());
+            }
             for (mage.abilities.SpecialAction action : actions.values()) {
                 String rule = action.getRule(true);
                 String key = rule.startsWith("Improvise") ? "Improvise"
@@ -514,6 +516,83 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     getTargets().add(1, TestPlayer.TARGET_SKIP);
                 }
                 convokeColour = "Convoke".equals(key) ? tapPaymentColourName(pick[1]) : null;
+                return true;
+            }
+            return false;
+        }
+
+        /** Translate gorge's recorded Delve exile picks (CR 702.66a: one
+         * choose_n pick per exiled card, the bare card name; the ask's
+         * trailing [choice_skip] is the Done option) at the front of the
+         * choice queue into XMage's Delve special mana action: the choice
+         * becomes that action's own rule text (TestPlayer's manual branch
+         * takes the action whose rule starts with the choice, and the Delve
+         * rule leads with its cost, "Exile a card from your graveyard: Delve
+         * (...)", so no short "Delve" key matches) and the exiled graveyard
+         * cards follow it on the choice queue: the exile cost's target is a
+         * Cost target, which TestPlayer asks through its choice queue (the
+         * target queue only feeds an ability's own targets). The action takes at most
+         * the cost target's maximum cards per activation (one in manual
+         * payment); further recorded picks stay queued for the next payment
+         * cycle, where XMage re-adds the action, as gorge re-poses its ask
+         * per pick. Taken only when the Delve special action lists a card of
+         * the front answer's name among its legal (graveyard) targets; false
+         * (nothing queued) otherwise. */
+        private boolean queueDelveAction(Game game,
+                java.util.Collection<mage.abilities.SpecialAction> actions) {
+            for (mage.abilities.SpecialAction action : actions) {
+                // The class is the stable identity: the rule text leads with
+                // the exile cost, so it never starts with "Delve".
+                if (!"DelveSpecialAction".equals(action.getClass().getSimpleName())
+                        || !action.canActivate(getId(), game).canActivate()) {
+                    continue;
+                }
+                // The exile target sits on the action or on its exile cost.
+                mage.target.Targets targets = action.getTargets().isEmpty()
+                        ? action.getCosts().getTargets() : action.getTargets();
+                if (targets.isEmpty()) {
+                    continue;
+                }
+                mage.target.Target target = targets.get(0);
+                Set<UUID> legal = target.possibleTargets(getId(), action, game);
+                List<String> picked = new ArrayList<>();
+                Set<UUID> used = new java.util.HashSet<>();
+                while (picked.size() < getChoices().size() && used.size() < legal.size()
+                        && picked.size() < target.getMaxNumberOfTargets()) {
+                    String name = getChoices().get(picked.size());
+                    UUID found = null;
+                    for (UUID id : legal) {
+                        if (!used.contains(id)
+                                && hasObjectTargetNameOrAlias(game.getCard(id), name)) {
+                            found = id;
+                            break;
+                        }
+                    }
+                    if (found == null) {
+                        break;
+                    }
+                    used.add(found);
+                    picked.add(name);
+                }
+                if (picked.isEmpty()) {
+                    continue;
+                }
+                for (int i = 0; i < picked.size(); i++) {
+                    getChoices().remove(0);
+                }
+                if (!getChoices().isEmpty() && TestPlayer.CHOICE_SKIP.equals(getChoices().get(0))) {
+                    getChoices().remove(0);
+                }
+                getChoices().add(0, action.getRule(true));
+                for (int i = 0; i < picked.size(); i++) {
+                    getChoices().add(1 + i, picked.get(i));
+                }
+                if (target.getMaxNumberOfTargets() > picked.size() && legal.size() > picked.size()) {
+                    // The cost target takes up to one card per generic mana
+                    // and asks again while more can be chosen: close the ask.
+                    getChoices().add(1 + picked.size(), TestPlayer.CHOICE_SKIP);
+                }
+                convokeColour = null;
                 return true;
             }
             return false;
@@ -1105,12 +1184,61 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         }
                     }
                 }
+                if (forcedChoose(target, source, game)) {
+                    return true;
+                }
                 return super.choose(outcome, target, source, game);
             } finally {
                 choiceGame = previous;
                 askTarget = previousTarget;
                 askSource = previousSource;
             }
+        }
+
+        /** Takes every candidate of a choose ask that has no choice in it:
+         * each legal object must be chosen (at most as many candidates as
+         * picks still needed), so the outcome is the rules' alone. gorge
+         * records no decision for such an ask (Abyssal Gorestalker's "each
+         * player sacrifices two creatures" over its controller's lone
+         * creature, Wick's "a Snail you control" with one Snail, the one
+         * sacrificeable object behind an accepted "you may sacrifice"), so
+         * nothing is scripted and strict mode stopped at "Missing CHOICE
+         * def". A queue head that names a candidate is this ask's own
+         * answer and is left to the base player. */
+        private boolean forcedChoose(mage.target.Target target, Ability source, Game game) {
+            UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+            List<UUID> candidates = new ArrayList<>();
+            for (UUID id : target.possibleTargets(abilityControllerId, source, game)) {
+                if (!target.contains(id)) {
+                    candidates.add(id);
+                }
+            }
+            String head = getChoices().isEmpty() ? null : getChoices().get(0);
+            boolean headNamesCandidate = false;
+            if (head != null) {
+                for (UUID id : candidates) {
+                    mage.MageObject o = game.getObject(id);
+                    if (o != null && hasObjectTargetNameOrAlias(o, head)) {
+                        headNamesCandidate = true;
+                        break;
+                    }
+                }
+            }
+            if (!forcedPick(target.getMinNumberOfTargets() - target.getSize(), candidates.size(), head, headNamesCandidate)) {
+                return false;
+            }
+            for (UUID id : candidates) {
+                target.add(id, game);
+            }
+            return true;
+        }
+
+        /** Whether a choose ask is forced: it still needs picks, every
+         * candidate is needed to meet them, and the choice queue's head is not
+         * an answer for it (a candidate's name, or a skip). */
+        static boolean forcedPick(int needed, int candidates, String head, boolean headNamesCandidate) {
+            return needed > 0 && candidates > 0 && candidates <= needed && !headNamesCandidate
+                    && !TestPlayer.CHOICE_SKIP.equals(head);
         }
 
         @Override
@@ -1249,20 +1377,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                         new FilterCard("card" + (cards.size() == 1 ? "" : "s") + " to PUT on the BOTTOM of your library (Scry)"));
                 Cards selected = scriptedLibrarySelection(cards, game);
+                boolean placed = selected != null;
                 if (selected == null && nothingScripted(getChoices(), getTargets())) {
                     // Gorge recorded no arrange decision, so nothing was
                     // scripted: keep every looked-at card where it is.
                     selected = new CardsImpl();
+                    placed = true;
                 } else if (selected == null) {
                     chooseTarget(Outcome.Benefit, cards, target, source, game);
                     selected = new CardsImpl(target.getTargets());
                 }
-                putCardsOnBottomOfLibrary(selected, game, source, true);
+                cards.removeAll(selected);
+                if (placed) {
+                    placeArranged(selected, cards, game, source);
+                } else {
+                    putCardsOnBottomOfLibrary(selected, game, source, true);
+                }
                 if (!selected.isEmpty()) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SCRY_TO_BOTTOM, getId(), source, getId(), selected.size()));
                 }
-                cards.removeAll(selected);
-                putCardsOnTopOfLibrary(cards, game, source, true);
+                if (!placed) {
+                    putCardsOnTopOfLibrary(cards, game, source, true);
+                }
             }
             game.fireEvent(new GameEvent(GameEvent.EventType.SCRIED, getId(), source, getId(), event.getAmount(), true));
             return true;
@@ -1283,10 +1419,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                         new FilterCard("card" + (cards.size() == 1 ? "" : "s") + " to PUT into your GRAVEYARD (Surveil)"));
                 Cards selected = scriptedLibrarySelection(cards, game);
+                boolean placed = selected != null;
                 if (selected == null && nothingScripted(getChoices(), getTargets())) {
                     // Gorge recorded no arrange decision, so nothing was
                     // scripted: keep every looked-at card where it is.
                     selected = new CardsImpl();
+                    placed = true;
                 } else if (selected == null) {
                     chooseTarget(Outcome.Benefit, cards, target, source, game);
                     selected = new CardsImpl(target.getTargets());
@@ -1295,11 +1433,48 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     graveyard.addAllCards(moveCardsToGraveyardWithInfo(selected.getCards(game), source, game, Zone.LIBRARY));
                 }
                 cards.removeAll(selected);
-                putCardsOnTopOfLibrary(cards, game, source, true);
+                if (placed) {
+                    placeArranged(new CardsImpl(), cards, game, source);
+                } else {
+                    putCardsOnTopOfLibrary(cards, game, source, true);
+                }
                 top.addAll(cards);
             }
             game.fireEvent(new GameEvent(GameEvent.EventType.SURVEILED, getId(), source, getId(), event.getAmount(), true));
             return Player.SurveilResult.surveil(graveyard, top);
+        }
+
+        /** Puts a scripted arrange's piles back without XMage's ORDER asks.
+         * The scripted selection already fixed both orders, exactly as
+         * gorge's KArrange answer does (rules.arrangeAnswerRecord): pile B
+         * goes to the bottom in the order given, its last card bottommost,
+         * and pile A goes back on top in the order given, its first card
+         * topmost. XMage's putCardsOn{Bottom,Top}OfLibrary with anyOrder
+         * would ask "card ORDER to put on the ..." once per card but the
+         * last, an ask gorge never poses because its one answer carried the
+         * order, so strict mode stopped there (Candy Trail's scry 2 sending
+         * both cards to the bottom). */
+        private void placeArranged(Cards bottom, Cards top, Game game, Ability source) {
+            for (UUID id : new ArrayList<>(bottom)) {
+                Card card = game.getCard(id);
+                if (card != null) {
+                    putCardsOnBottomOfLibrary(card, game, source);
+                }
+            }
+            for (UUID id : arrangedTopMoves(new ArrayList<>(top))) {
+                Card card = game.getCard(id);
+                if (card != null) {
+                    putCardsOnTopOfLibrary(card, game, source, false);
+                }
+            }
+        }
+
+        /** The order to move pile A onto the library one card at a time so
+         * its first card ends topmost: last first. */
+        static <T> List<T> arrangedTopMoves(List<T> topFirst) {
+            List<T> moves = new ArrayList<>(topFirst);
+            java.util.Collections.reverse(moves);
+            return moves;
         }
 
         /** Whether the scenario scripted nothing at all for the player: both
@@ -2040,6 +2215,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return harnessRow(sc, true, t);
         }
         String h = res.has("harness") ? res.get("harness").getAsString() : "";
+        if (h.contains("Missing") && h.contains("def for turn")
+                && trailingStrictMiss(res.getAsJsonArray("snapshots").size(), steps(sc).size())) {
+            // Every checkpoint was captured under strict mode before XMage
+            // posed the unscripted ask: the driver plays on past gorge's last
+            // checkpoint (to the stop step), and an ask there -- a trigger
+            // the window's last pass lets resolve -- is outside the item.
+            // gorge stopped with that decision pending and unlogged, so
+            // there is no answer to script and nothing compares it. The
+            // strict snapshots are the row; the miss is kept for diagnosis.
+            res.remove("harness");
+            res.addProperty("trailing_miss", h.length() > 300 ? h.substring(0, 300) : h);
+            return res;
+        }
         if (h.contains("Missing") && h.contains("def for turn")) {
             JsonObject loose;
             try {
@@ -2051,6 +2239,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return loose;
         }
         return res;
+    }
+
+    /** Whether a strict run that stopped at an unscripted ask had already
+     * captured every checkpoint: the setup snapshot plus one per step. */
+    static boolean trailingStrictMiss(int snapshots, int steps) {
+        return steps > 0 && snapshots == steps + 1;
     }
 
     // Match encoding/json's *int field: absent/null defaults to 1; otherwise

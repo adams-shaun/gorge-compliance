@@ -32,10 +32,12 @@ echo '/stub/forge-core.jar' > "$TMP/root/cp.txt"
 # The run script refuses a ref without the step-scoped die force, so the stub
 # trees carry the four source markers it checks. A negative case below drops
 # ForcedDieRandom.java from a third tree to prove the refusal.
-echo 'class ForcedDieRandom { int nextInt(int bound) { return 0; } }' > "$TMP/clone/forge-oracle/src/main/java/forge/oracle/ForcedDieRandom.java"
+echo 'class ForcedDieRandom { int nextInt(int bound) { return 0; } void arm(int step) { req.coinFlips(step); } }' > "$TMP/clone/forge-oracle/src/main/java/forge/oracle/ForcedDieRandom.java"
 echo 'class ForgeEngine { Object r = new ForcedDieRandom(); }' > "$TMP/clone/forge-oracle/src/main/java/forge/oracle/ForgeEngine.java"
+echo 'class Request { String coin_flips; }' > "$TMP/clone/forge-oracle/src/main/java/forge/oracle/Request.java"
+echo 'class ScriptedController { boolean call(StepMachine m) { return m.req.coinFlips(m.step()).isEmpty(); } }' > "$TMP/clone/forge-oracle/src/main/java/forge/oracle/ScriptedController.java"
 echo 'class StepMachine { void f() { dice.arm(0); } }' > "$TMP/clone/forge-oracle/src/main/java/forge/oracle/StepMachine.java"
-echo 'class MyRandom { int f() { return delegate.nextInt(bound); } }' > "$TMP/clone/forge-core/src/main/java/forge/util/MyRandom.java"
+echo 'class MyRandom { int f() { return delegate.nextInt(bound); } boolean g() { return delegate.nextBoolean(); } }' > "$TMP/clone/forge-core/src/main/java/forge/util/MyRandom.java"
 
 # git: answers only what the scripts ask, driven by STUB_* variables.
 cat > "$BIN/git" <<'STUB'
@@ -144,6 +146,35 @@ out=$(STUB_UNTRACKED=forge-gui/res/tokenscripts/extra.txt "$RUN" --compile 2>&1)
 check "run refuses untracked runtime scripts" $([ "$rc" = 2 ] && has "$out" "untracked scripts" && echo 0 || echo 1) "rc=$rc $out"
 reached; check "  ...before javac, java or scope" $((! $? ))
 
+# 4b. --preflight: on a good pin, the names the pinned cardsfolder cannot
+# resolve, one grep pass, before any javac, java or scope. The three names
+# the xengine farm caught as Forge harness "Couldn't find a card" stay
+# refused here; Grizzly Bears is resolved; so are the split names "Fire //
+# Ice" (a split card) and "Bonecrusher Giant // Stomp" (an adventure), whose
+# card files hold one Name: line per face — the joined name is never a Name
+# line, and a split with a missing face ("Fire // Gobland") is refused.
+mkdir -p "$TMP/clone/forge-gui/res/cardsfolder/g" "$TMP/clone/forge-gui/res/cardsfolder/f" "$TMP/clone/forge-gui/res/cardsfolder/b"
+printf 'Name:Grizzly Bears\nOracle:Grizzly Bears is a bear.\n' > "$TMP/clone/forge-gui/res/cardsfolder/g/grizzly_bears.txt"
+printf 'Name:Fire\nName:Ice\nOracle:Fire deals 2 damage.\n' > "$TMP/clone/forge-gui/res/cardsfolder/f/fire_ice.txt"
+printf 'Name:Bonecrusher Giant\nName:Stomp\nOracle:Bonecrusher Giant deals 4 damage.\n' > "$TMP/clone/forge-gui/res/cardsfolder/b/bonecrusher_giant.txt"
+: > "$LOG"
+printf 'Grizzly Bears\nGobland\nIndicate\nMox Poison\nFire // Ice\nBonecrusher Giant // Stomp\nFire // Gobland\n' > "$TMP/names.txt"
+out=$("$RUN" --preflight "$TMP/names.txt" 2>"$TMP/pf.err"); rc=$?
+tab=$'\t'
+check "preflight exits 0 on a good pin" $((rc == 0 ? 0 : 1)) "rc=$rc $(cat "$TMP/pf.err")"
+check "  ...refusing Gobland, Indicate and Mox Poison" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Gobland${tab}not in the pinned cardsfolder" &&
+		printf '%s\n' "$out" | /usr/bin/grep -qxF "Indicate${tab}not in the pinned cardsfolder" &&
+		printf '%s\n' "$out" | /usr/bin/grep -qxF "Mox Poison${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
+check "  ...refusing a split whose face the pin lacks (Fire // Gobland)" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Fire // Gobland${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
+check "  ...and keeping the card the pin resolves" $(printf '%s\n' "$out" | /usr/bin/grep -q "Grizzly Bears" && echo 1 || echo 0) "$out"
+check "  ...and the split names the pin's per-face Name lines resolve" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -q "Fire // Ice" && echo 1 || echo 0) "$out"
+check "     ...including the adventure" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -q "Bonecrusher Giant // Stomp" && echo 1 || echo 0) "$out"
+reached; check "  ...before javac, java or scope" $((! $? ))
+
 # 5. run with a good pin: javac once per source sha, java with the pinned env.
 : > "$LOG"
 out=$("$RUN" --compile 2>&1); rc=$?
@@ -163,10 +194,12 @@ check "  ...with pinned runtime res and ref" \
 # 6. FORGE_ORACLE_SRC replays a candidate worktree under its own HEAD, in its own class dir.
 mkdir -p "$TMP/cand/forge-gui/res" "$TMP/cand/forge-oracle/src/main/java/forge/oracle" "$TMP/cand/forge-core/src/main/java/forge/util"
 echo 'class C {}' > "$TMP/cand/forge-oracle/src/main/java/forge/oracle/C.java"
-echo 'class ForcedDieRandom { int nextInt(int bound) { return 0; } }' > "$TMP/cand/forge-oracle/src/main/java/forge/oracle/ForcedDieRandom.java"
+echo 'class ForcedDieRandom { int nextInt(int bound) { return 0; } void arm(int step) { req.coinFlips(step); } }' > "$TMP/cand/forge-oracle/src/main/java/forge/oracle/ForcedDieRandom.java"
 echo 'class ForgeEngine { Object r = new ForcedDieRandom(); }' > "$TMP/cand/forge-oracle/src/main/java/forge/oracle/ForgeEngine.java"
 echo 'class StepMachine { void f() { dice.arm(0); } }' > "$TMP/cand/forge-oracle/src/main/java/forge/oracle/StepMachine.java"
-echo 'class MyRandom { int f() { return delegate.nextInt(bound); } }' > "$TMP/cand/forge-core/src/main/java/forge/util/MyRandom.java"
+echo 'class Request { String coin_flips; }' > "$TMP/cand/forge-oracle/src/main/java/forge/oracle/Request.java"
+echo 'class ScriptedController { boolean call(StepMachine m) { return m.req.coinFlips(m.step()).isEmpty(); } }' > "$TMP/cand/forge-oracle/src/main/java/forge/oracle/ScriptedController.java"
+echo 'class MyRandom { int f() { return delegate.nextInt(bound); } boolean g() { return delegate.nextBoolean(); } }' > "$TMP/cand/forge-core/src/main/java/forge/util/MyRandom.java"
 : > "$LOG"
 CREF=3333333333333333333333333333333333333333
 check "candidate HEAD differs from the pinned ref (precondition)" $([ "$CREF" != "$OREF" ] && echo 0 || echo 1)
@@ -185,11 +218,35 @@ mkdir -p "$NOD/forge-gui/res" "$NOD/forge-oracle/src/main/java/forge/oracle" "$N
 echo 'class D {}' > "$NOD/forge-oracle/src/main/java/forge/oracle/D.java"
 echo 'class ForgeEngine { Object r = new ForcedDieRandom(); }' > "$NOD/forge-oracle/src/main/java/forge/oracle/ForgeEngine.java"
 echo 'class StepMachine { void f() { dice.arm(0); } }' > "$NOD/forge-oracle/src/main/java/forge/oracle/StepMachine.java"
-echo 'class MyRandom { int f() { return delegate.nextInt(bound); } }' > "$NOD/forge-core/src/main/java/forge/util/MyRandom.java"
+echo 'class MyRandom { int f() { return delegate.nextInt(bound); } boolean g() { return delegate.nextBoolean(); } }' > "$NOD/forge-core/src/main/java/forge/util/MyRandom.java"
 : > "$LOG"
 out=$(FORGE_ORACLE_SRC=$NOD/forge-oracle FORGE_ORACLE_CLASSES=$TMP/nofdr-classes FORGE_ORACLE_TMP=$TMP/nofdr-tmp STUB_TOP=$NOD STUB_HEAD=$CREF "$RUN" --compile 2>&1); rc=$?
 check "run refuses a driver without the step-scoped die force (exit 2)" \
 	$([ "$rc" = 2 ] && has "$out" "no step-scoped die force" && echo 0 || echo 1) "rc=$rc $out"
+reached; check "  ...before javac, java or scope" $((! $? ))
+
+# 8. a driver ref without the recorded-coin force is refused before any build,
+# so a pin bump cannot silently flip Forge's own coin.
+NOC=$TMP/nocoin
+mkdir -p "$NOC/forge-gui/res" "$NOC/forge-oracle/src/main/java/forge/oracle" "$NOC/forge-core/src/main/java/forge/util"
+echo 'class E {}' > "$NOC/forge-oracle/src/main/java/forge/oracle/E.java"
+echo 'class ForcedDieRandom { int nextInt(int bound) { return 0; } }' > "$NOC/forge-oracle/src/main/java/forge/oracle/ForcedDieRandom.java"
+echo 'class ForgeEngine { Object r = new ForcedDieRandom(); }' > "$NOC/forge-oracle/src/main/java/forge/oracle/ForgeEngine.java"
+echo 'class StepMachine { void f() { dice.arm(0); } }' > "$NOC/forge-oracle/src/main/java/forge/oracle/StepMachine.java"
+echo 'class MyRandom { int f() { return delegate.nextInt(bound); } }' > "$NOC/forge-core/src/main/java/forge/util/MyRandom.java"
+: > "$LOG"
+out=$(FORGE_ORACLE_SRC=$NOC/forge-oracle FORGE_ORACLE_CLASSES=$TMP/nocoin-classes FORGE_ORACLE_TMP=$TMP/nocoin-tmp STUB_TOP=$NOC STUB_HEAD=$CREF "$RUN" --compile 2>&1); rc=$?
+check "run refuses a driver that does not read item.coin_flips (exit 2)" \
+	$([ "$rc" = 2 ] && has "$out" "does not read item.coin_flips" && echo 0 || echo 1) "rc=$rc $out"
+reached; check "  ...before javac, java or scope" $((! $? ))
+# Request with the reader but a ForcedDieRandom that never arms it is a
+# different refusal, naming the wiring half.
+echo 'class Request { String coin_flips; }' > "$NOC/forge-oracle/src/main/java/forge/oracle/Request.java"
+echo 'class ScriptedController { boolean call(StepMachine m) { return m.req.coinFlips(m.step()).isEmpty(); } }' > "$NOC/forge-oracle/src/main/java/forge/oracle/ScriptedController.java"
+: > "$LOG"
+out=$(FORGE_ORACLE_SRC=$NOC/forge-oracle FORGE_ORACLE_CLASSES=$TMP/nocoin-classes FORGE_ORACLE_TMP=$TMP/nocoin-tmp STUB_TOP=$NOC STUB_HEAD=$CREF "$RUN" --compile 2>&1); rc=$?
+check "run refuses a driver that never arms the coin force (exit 2)" \
+	$([ "$rc" = 2 ] && has "$out" "does not wire the coin force" && echo 0 || echo 1) "rc=$rc $out"
 reached; check "  ...before javac, java or scope" $((! $? ))
 
 [ "$fails" = 0 ] && echo "forge_oracle_pin_smoke: all passed" || echo "forge_oracle_pin_smoke: $fails FAILED"
