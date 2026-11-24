@@ -354,7 +354,16 @@ func completeModalTrigger(reg *cards.Registry, it *oraclegen.Item, sc oraclegen.
 	for j := range span {
 		span[j].Step = last
 	}
-	add := oraclegen.XAnswers(span, len(sc.Steps), pm)[last]
+	// The span's decisions are retimed onto the window's last step so their
+	// answers lead it, but the checkpoint that proves a top library placement
+	// still belongs to the continuation step (len(sc.Steps)). Reindex that
+	// one snapshot onto the retimed step; without it the router would have no
+	// destination evidence and would not reverse a top arrange.
+	spanSnaps := make([]rules.OracleSnapshot, len(sc.Steps)+1)
+	if after := len(sc.Steps) + 1; after < len(res.Snapshots) {
+		spanSnaps[last+1] = res.Snapshots[after]
+	}
+	add := oraclegen.XAnswersWithSnapshots(span, len(sc.Steps), pm, spanSnaps)[last]
 	if len(add) == 0 || add[0].Kind != "mode" {
 		return refuse(it.ID, ReasonModalTrigger, "%s: gorge's continuation decided no mode for the trigger", p.card)
 	}
@@ -935,6 +944,15 @@ func modeNumbers(reg *cards.Registry, it oraclegen.Item, ds []rules.OracleDecisi
 			}
 			sort.Strings(labels)
 			for _, k := range labels {
+				if oraclegen.IsPrintedMaxKey(k) {
+					// A printed maximum is not a mode number: two cards that
+					// share a label may print different maxima, and the first
+					// owner's stays (a stepped card is added before bystanders).
+					if _, seen := into[k]; !seen {
+						into[k] = m[k]
+					}
+					continue
+				}
 				if prev, seen := into[k]; seen && prev != m[k] {
 					return fmt.Sprintf("mode %q is %d on %s and %d on %s", k, prev, who[k], m[k], n), false
 				}

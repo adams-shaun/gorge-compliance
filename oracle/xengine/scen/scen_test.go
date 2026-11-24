@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"reflect"
+	"slices"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
@@ -349,5 +350,68 @@ func TestStartHistoryAndCounters(t *testing.T) {
 				t.Errorf("p0 counters %+v, want %+v", f.Setup.P0.Counters, r.counters)
 			}
 		})
+	}
+}
+
+// TestStartPlayerCounters: a counters need whose removal reads a player
+// (Final Act's "each opponent loses all counters", Survivor's Med Kit's
+// RadAway on a player) cannot be seeded by a start file, which places counters
+// only on battlefield cards (rules.StartSeat has no player-counter field). The
+// key is refused by name instead of putting the counter on a permanent the
+// removal never reads. Two permanent-counter cards still get a placed
+// permanent on the seat their removal reads.
+func TestStartPlayerCounters(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, tc := range []struct{ card, key string }{
+		{"Final Act", "cast"},
+		{"Survivor's Med Kit", "f0/a0"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Reason != reasonPlayerCounters {
+				t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, reasonPlayerCounters)
+			}
+		})
+	}
+	for _, tc := range []struct{ card, key string }{
+		{"Honest Work", "f0/t0"},
+		{"Mabel, Bitter Recluse", "f0/t0"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			cs := res.Start.Setup.P1.Counters
+			if len(cs) != 1 || cs[0].Kind != "P1P1" || !slices.Contains(res.Start.Setup.P1.Battlefield, cs[0].Card) {
+				t.Errorf("p1 counters %+v on battlefield %v, want one P1P1 on a placed permanent",
+					cs, res.Start.Setup.P1.Battlefield)
+			}
+		})
+	}
+}
+
+// TestScenUnlistedByXMageIsGenerated: a card no XMage manifest lists is still
+// generated, not refused not-sent. Forge is the reference oracle (operator
+// 11-24): the XMage leg marks the item not_sent and keyproof credits a Forge
+// agreement refs F. The refusal owed about a fifth of each xproof cycle.
+func TestScenUnlistedByXMageIsGenerated(t *testing.T) {
+	reg, b := testBuilder(t)
+	const card = "Croakid Amphibonaut"
+	if b.Sp.Lists(reg, card) {
+		t.Fatalf("%s is listed by an XMage manifest now: pick another unlisted card", card)
+	}
+	res, err := Generate(reg, b, card, "cast", Options{Set: "SCEN"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path == "refused" {
+		t.Errorf("%s cast refused %q, want a steps or start scenario", card, res.Reason)
 	}
 }

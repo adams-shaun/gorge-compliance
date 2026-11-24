@@ -17,9 +17,9 @@
 //	xengine pool -set S [-legal FORMAT -mtgjson S.json.gz] [-out FILE]
 //	xengine followers
 //	xengine fshadow -log GAME.jsonl [-out DIR] [-game ID] [-max-decisions N]
-//	xengine certdeck -cards .cards -target "<name>" [-need auto|<class,...>] -out DIR
-//	xengine scen -card C -key K [-prefer auto|start] [-set S] [-phase-lacks FILE] -out DIR
-//	xengine scen -census -set S [-prefer auto|start] [-phase-lacks FILE] -out DIR
+//	xengine certdeck -cards .cards -target "<name>" [-need auto|<class,...>] [-forge-editions DIR] -out DIR
+//	xengine scen -card C -key K [-prefer auto|start] [-set S] [-forge-editions DIR] -out DIR
+//	xengine scen -census -set S [-prefer auto|start] [-forge-editions DIR] -out DIR
 //
 // play writes DIR/tapes/*.json (every game's tape), DIR/items.jsonl (the
 // follower input: only the items whose lowering gorge's own runner

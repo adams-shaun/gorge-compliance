@@ -140,11 +140,17 @@ reached; check "  ...before javac, java or scope" $((! $? ))
 out=$(STUB_DIFF=1 "$RUN" "$TMP/in.jsonl" "$TMP/out.jsonl" 2>&1); rc=$?
 check "run refuses edited scripts under forge-gui/res (exit 2)" $([ "$rc" = 2 ] && has "$out" "uncommitted changes" && echo 0 || echo 1) "rc=$rc $out"
 reached; check "  ...before javac, java or scope" $((! $? ))
+# The preflight's verdict is read off the editions too, so an edited or
+# untracked edition must fail the same guard as a card script.
+check "  ...the dirty guard covers forge-gui/res/editions" \
+	$(/usr/bin/grep -q 'diff --quiet HEAD -- .*forge-gui/res/editions' "$LOG" && echo 0 || echo 1) "$(/usr/bin/grep 'diff --quiet' "$LOG")"
 
 : > "$LOG"
 out=$(STUB_UNTRACKED=forge-gui/res/tokenscripts/extra.txt "$RUN" --compile 2>&1); rc=$?
 check "run refuses untracked runtime scripts" $([ "$rc" = 2 ] && has "$out" "untracked scripts" && echo 0 || echo 1) "rc=$rc $out"
 reached; check "  ...before javac, java or scope" $((! $? ))
+check "  ...the untracked guard covers forge-gui/res/editions" \
+	$(/usr/bin/grep -q 'ls-files --others -- .*forge-gui/res/editions' "$LOG" && echo 0 || echo 1) "$(/usr/bin/grep 'ls-files' "$LOG")"
 
 # 4b. --preflight: on a good pin, the names the pinned cardsfolder cannot
 # resolve, one grep pass, before any javac, java or scope. The three names
@@ -152,28 +158,79 @@ reached; check "  ...before javac, java or scope" $((! $? ))
 # refused here; Grizzly Bears is resolved; so are the split names "Fire //
 # Ice" (a split card) and "Bonecrusher Giant // Stomp" (an adventure), whose
 # card files hold one Name: line per face — the joined name is never a Name
-# line, and a split with a missing face ("Fire // Gobland") is refused.
-mkdir -p "$TMP/clone/forge-gui/res/cardsfolder/g" "$TMP/clone/forge-gui/res/cardsfolder/f" "$TMP/clone/forge-gui/res/cardsfolder/b"
+# line, and a split with a missing face ("Fire // Nonesuch") is refused.
+mkdir -p "$TMP/clone/forge-gui/res/cardsfolder/g" "$TMP/clone/forge-gui/res/cardsfolder/f" "$TMP/clone/forge-gui/res/cardsfolder/b" "$TMP/clone/forge-gui/res/cardsfolder/k" "$TMP/clone/forge-gui/res/cardsfolder/c"
 printf 'Name:Grizzly Bears\nOracle:Grizzly Bears is a bear.\n' > "$TMP/clone/forge-gui/res/cardsfolder/g/grizzly_bears.txt"
 printf 'Name:Fire\nName:Ice\nOracle:Fire deals 2 damage.\n' > "$TMP/clone/forge-gui/res/cardsfolder/f/fire_ice.txt"
 printf 'Name:Bonecrusher Giant\nName:Stomp\nOracle:Bonecrusher Giant deals 4 damage.\n' > "$TMP/clone/forge-gui/res/cardsfolder/b/bonecrusher_giant.txt"
+# A Funny edition names a split card by its joined name and an adventure by its
+# main face (Forge keys a COMBINE card as "main // other" and an
+# adventure/MDFC by its main face). Both have card files with a Name: line per
+# face, so the old cardsfolder-only check passed them and the driver then threw
+# "Couldn't find a card".
+printf 'AlternateMode:Split\nName:Knowing\nOracle:Draw three cards.\n\nALTERNATE\n\nName:Half the Battle\nOracle:Search.\n' > "$TMP/clone/forge-gui/res/cardsfolder/k/knowing_half_the_battle.txt"
+printf 'AlternateMode:Adventure\nName:Curious Pair\nOracle:Create a Food token.\n\nALTERNATE\n\nName:Treats to Share\nOracle:Create a Food token.\n' > "$TMP/clone/forge-gui/res/cardsfolder/c/curious_pair.txt"
+# The cardsfolder is not the card DB: Forge's StaticData drops every card named
+# in a Funny or silver-border edition outside its [eternal] section, and the
+# driver then fails "Couldn't find a card" though the card file exists. Gobland
+# and Mox Poison have a card file and only a Mystery Booster 2 playtest row;
+# Indicate is in a silver-border set; Mardu Outrider has a file and an MB2
+# [eternal] row (a legal reprint, kept); Plains is a basic land in a Funny set
+# (kept). Lines carry the real file's shapes: collector number, rarity, @artist.
+mkdir -p "$TMP/clone/forge-gui/res/editions" "$TMP/clone/forge-gui/res/cardsfolder/m" "$TMP/clone/forge-gui/res/cardsfolder/i" "$TMP/clone/forge-gui/res/cardsfolder/p"
+printf 'Name:Gobland\nOracle:Gobland.\n' > "$TMP/clone/forge-gui/res/cardsfolder/g/gobland.txt"
+printf 'Name:Mox Poison\nOracle:Mox.\n' > "$TMP/clone/forge-gui/res/cardsfolder/m/mox_poison.txt"
+printf 'Name:Indicate\nOracle:Indicate.\n' > "$TMP/clone/forge-gui/res/cardsfolder/i/indicate.txt"
+printf 'Name:Mardu Outrider\nOracle:Outrider.\n' > "$TMP/clone/forge-gui/res/cardsfolder/m/mardu_outrider.txt"
+printf 'Name:Plains\nOracle:Plains.\n' > "$TMP/clone/forge-gui/res/cardsfolder/p/plains.txt"
+printf '[metadata]\nCode=MB2\nName=Mystery Booster 2\nType=Funny\n\n[eternal]\n1 R Mardu Outrider @Evan Shipard\n\n[cards]\nF563 R Gobland @Anik Sikder\nF608 R Mox Poison @Dan Frazier\n300 L Plains @Someone\nRZ15 R Knowing // Half the Battle @\n1 C Curious Pair @Artist\n\n[tokens]\n1 Goblin\n' > "$TMP/clone/forge-gui/res/editions/Mystery Booster 2.txt"
+printf '[metadata]\nCode=UNH\nName=Unhinged\nType=Expansion\nBorder=Silver\n\n[cards]\n1 C Indicate @Artist\n' > "$TMP/clone/forge-gui/res/editions/Unhinged.txt"
+printf '[metadata]\nCode=M10\nName=Magic 2010\nType=Core\n\n[cards]\n1 C Grizzly Bears @Artist\n' > "$TMP/clone/forge-gui/res/editions/Magic 2010.txt"
 : > "$LOG"
-printf 'Grizzly Bears\nGobland\nIndicate\nMox Poison\nFire // Ice\nBonecrusher Giant // Stomp\nFire // Gobland\n' > "$TMP/names.txt"
+printf 'Grizzly Bears\nGobland\nIndicate\nMox Poison\nFire // Ice\nBonecrusher Giant // Stomp\nKnowing // Half the Battle\nCurious Pair // Treats to Share\nFire // Nonesuch\nMardu Outrider\nPlains\nNo Such Card\n' > "$TMP/names.txt"
 out=$("$RUN" --preflight "$TMP/names.txt" 2>"$TMP/pf.err"); rc=$?
 tab=$'\t'
 check "preflight exits 0 on a good pin" $((rc == 0 ? 0 : 1)) "rc=$rc $(cat "$TMP/pf.err")"
-check "  ...refusing Gobland, Indicate and Mox Poison" \
-	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Gobland${tab}not in the pinned cardsfolder" &&
-		printf '%s\n' "$out" | /usr/bin/grep -qxF "Indicate${tab}not in the pinned cardsfolder" &&
-		printf '%s\n' "$out" | /usr/bin/grep -qxF "Mox Poison${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
-check "  ...refusing a split whose face the pin lacks (Fire // Gobland)" \
-	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Fire // Gobland${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
+filt="in the pinned cardsfolder but filtered from Forge's card DB (Funny/Silver-border edition card)"
+check "  ...refusing Gobland, Indicate and Mox Poison (a card file the DB filters)" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Gobland${tab}${filt}" &&
+		printf '%s\n' "$out" | /usr/bin/grep -qxF "Indicate${tab}${filt}" &&
+		printf '%s\n' "$out" | /usr/bin/grep -qxF "Mox Poison${tab}${filt}" && echo 0 || echo 1) "$out"
+check "  ...refusing a name with no card file" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "No Such Card${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
+check "  ...keeping an [eternal] reprint and a basic land of a Funny set" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -q -e "Mardu Outrider" -e "^Plains" && echo 1 || echo 0) "$out"
+check "  ...refusing a split whose face the pin lacks (Fire // Nonesuch)" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Fire // Nonesuch${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
 check "  ...and keeping the card the pin resolves" $(printf '%s\n' "$out" | /usr/bin/grep -q "Grizzly Bears" && echo 1 || echo 0) "$out"
 check "  ...and the split names the pin's per-face Name lines resolve" \
 	$(printf '%s\n' "$out" | /usr/bin/grep -q "Fire // Ice" && echo 1 || echo 0) "$out"
 check "     ...including the adventure" \
 	$(printf '%s\n' "$out" | /usr/bin/grep -q "Bonecrusher Giant // Stomp" && echo 1 || echo 0) "$out"
+check "  ...refusing a split a Funny edition names joined (Knowing // Half the Battle)" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Knowing // Half the Battle${tab}${filt}" && echo 0 || echo 1) "$out"
+check "  ...refusing an adventure whose main face a Funny edition names (Curious Pair)" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Curious Pair // Treats to Share${tab}${filt}" && echo 0 || echo 1) "$out"
 reached; check "  ...before javac, java or scope" $((! $? ))
+
+# The StaticData filter is the reason the preflight reads the editions: a tree
+# without them cannot answer, so the preflight refuses instead of falling back
+# to the old cardsfolder-only answer. A symlinked editions dir must still be
+# read (find -H).
+mv "$TMP/clone/forge-gui/res/editions" "$TMP/clone/forge-gui/res/editions.real"
+ln -s editions.real "$TMP/clone/forge-gui/res/editions"
+out=$("$RUN" --preflight "$TMP/names.txt" 2>&1); rc=$?
+check "preflight follows a symlinked editions dir" \
+	$([ "$rc" = 0 ] && printf '%s\n' "$out" | /usr/bin/grep -qxF "Gobland${tab}${filt}" && echo 0 || echo 1) "rc=$rc $out"
+rm "$TMP/clone/forge-gui/res/editions"
+mv "$TMP/clone/forge-gui/res/editions.real" "$TMP/clone/forge-gui/res/editions"
+mv "$TMP/clone/forge-gui/res/editions" "$TMP/clone/forge-gui/res/editions.away"
+: > "$LOG"
+out=$("$RUN" --preflight "$TMP/names.txt" 2>&1); rc=$?
+check "preflight refuses a tree without editions (exit 2, not a silent skip)" \
+	$([ "$rc" = 2 ] && has "$out" "needs the pinned editions" && echo 0 || echo 1) "rc=$rc $out"
+reached; check "  ...before javac, java or scope" $((! $? ))
+mv "$TMP/clone/forge-gui/res/editions.away" "$TMP/clone/forge-gui/res/editions"
 
 # 5. run with a good pin: javac once per source sha, java with the pinned env.
 : > "$LOG"

@@ -27,6 +27,7 @@ const (
 	ReasonAttackNonPlayer = "attack_nonplayer" // an attack at a planeswalker or battle
 	ReasonUnbindableRef   = "unbindable_ref"   // an object the runner cannot name
 	ReasonLogOnlyCast     = "log_only_cast:"   // a window cast only the event log entitled
+	ReasonRNG             = "rng"              // an engine draw that is neither a recorded outcome nor a library shuffle
 	ReasonStall           = "stall"            // the tape ends in a watchdog, not a game end
 	ReasonUnsupported     = "unsupported_kind:"
 )
@@ -243,6 +244,39 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 		}
 		return true
 	}
+	// shuffleZone is the pre-action digest of the latest entry whose engine
+	// draws are not accounted for (a shuffle or a random pick), and
+	// shuffleMoved the card names that entry's own picks named (a search puts
+	// the fetched card in hand before the shuffle). The runner's seeded RNG
+	// cannot land where the live game did (CR 701.24a), so a later play or cast
+	// that names a card the shuffle could have drawn into hand cannot be
+	// replayed; one the seat already held at the shuffle, or one this
+	// resolution fetched, is still there.
+	var shuffleZone *game.Digest
+	shuffleMoved := map[string]bool{}
+	// shuffleZones is true when the shuffle also moves cards into the library
+	// (Weftwalking: "shuffle your hand and graveyard into your library"), so a
+	// card the seat held beforehand is not safe either: the live game shuffled
+	// it away and every redraw is the runner's own.
+	shuffleZones := false
+	// passes is the live game's consecutive priority passes since its last
+	// reset, which the digest does not carry: a resolution, a step advance or
+	// any other priority action resets it to zero. -1 means a resolve step hid
+	// the exact count; an unknown non-zero count is never safe to drop across.
+	passes := 0
+	counted := func(op string, taps bool) {
+		if taps || op != "pass" {
+			passes = 0
+			return
+		}
+		if passes < 0 {
+			return
+		}
+		passes++
+		if passes >= 2 {
+			passes = 0
+		}
+	}
 	for i := first; i < len(entries); {
 		j := i + 1
 		for j < len(entries) && isAsk(entries[j]) {
@@ -257,6 +291,20 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 			l.refuse(i, why, owedAt, owedSteps)
 			return
 		}
+		// A play or cast after an unaccounted shuffle names the live game's
+		// exact object ("p0:Island#34"). The runner's seeded shuffle draws a
+		// different Island into the hand, so the step it names is not offered
+		// (Weftwalking: "play p0:Island#34 not offered" while seven Play Island
+		// options were offered). Cutting here keeps every emitted step
+		// replayable and lets the followers use the prefix.
+		if shuffleZone != nil && groupsDependOnShuffle(entries[i:j], *shuffleZone, shuffleMoved, shuffleZones) {
+			l.refuse(i, unsupported("shuffled_ref"), owedAt, owedSteps)
+			return
+		}
+		if d, moved, ok := groupShuffle(entries[i:j]); ok {
+			shuffleZone, shuffleMoved = &d, moved
+			shuffleZones = zoneMovingShuffle(reg, entries, j)
+		}
 		if len(owed) == 0 && len(steps) > 0 && quiet(entries[i:j]) {
 			if isPaidStep(steps[len(steps)-1].Op) {
 				if next, ok := l.afterEntry(j, entries); ok &&
@@ -266,6 +314,15 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 					// and the stack unchanged on did not happen: it is not a
 					// replayable step (a refused Spree cast, for example). A
 					// real action pushes an object, so the stack top changes.
+					// Committing it still reset the pass count the digest
+					// cannot show, so dropping it is only safe when the count
+					// is already zero; otherwise the next pass would look like
+					// the second in the chain and advance the step early
+					// (Hypnotic Sprite's refused cast).
+					if passes != 0 {
+						l.refuse(i, unsupported("pass_chain"), owedAt, owedSteps)
+						return
+					}
 					i = j
 					continue
 				}
@@ -318,20 +375,30 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 				l.Item.Payment = append(l.Item.Payment, payments...)
 			}
 			l.pushFunding(fund)
+			if fund.before {
+				passes = 1 // the funding tap reset the count before the pass it precedes
+			}
 			l.Item.Steps = append(l.Item.Steps, *resolve)
 			l.StepEntry = append(l.StepEntry, resolveEnd-1)
 			l.Item.Payment = append(l.Item.Payment, "")
 			l.markShuffles(m, entries[i:resolveEnd], len(l.Item.Steps)-1)
+			// The resolve op passes priority and may answer several consecutive
+			// passes; the count it leaves is not recoverable from its steps.
+			passes = -1
 			i = resolveEnd
 			continue
 		}
 		l.pushFunding(fund)
+		if fund.before {
+			passes = 1 // the funding tap reset the count before the pass it precedes
+		}
 		if steps[mainStep].Op == "pass" && len(answers) > 0 && !settlesTwice(entries[i:j]) {
 			owed, owedAt, owedSteps = answers, i, len(l.Item.Steps)
 		} else if len(answers) > 0 {
 			attach(&steps[mainStep], answers, entries[i:j])
 		}
 		stepEntry[mainStep] = j - 1
+		counted(steps[mainStep].Op, len(steps) > 1 || len(fund.taps) > 0 && !fund.before)
 		l.markShuffles(m, entries[i:j], len(l.Item.Steps)+mainStep)
 		l.Item.Steps = append(l.Item.Steps, steps...)
 		l.StepEntry = append(l.StepEntry, stepEntry...)
@@ -756,6 +823,17 @@ func attach(st *oraclegen.Step, answers []oraclegen.Answer, group []game.Entry) 
 	}
 }
 
+// recordedDraws is the number of engine draws an entry's recorded outcomes
+// account for: one per die roll, and every flip's own count (0 for a flip a
+// FlipCoinMod static forced, 2 under a FlipCoinDoubler static).
+func recordedDraws(e game.Entry) uint64 {
+	draws := uint64(len(e.Rolls))
+	for _, f := range e.Flips {
+		draws += f.DrawCount()
+	}
+	return draws
+}
+
 // rngAccounted reports whether every engine draw an entry consumed is one
 // the tape records explicitly: a die roll or a coin flip. A die or an
 // ordinary flip consumes one draw (gorge's rng.IntN); a FlipCoinMod static
@@ -763,14 +841,176 @@ func attach(st *oraclegen.Step, answers []oraclegen.Answer, group []game.Entry) 
 // static (Krark's Thumb) makes coinResult draw twice for one flip
 // (Flip.DrawCount). RNG must equal the rolls plus every flip's recorded draw
 // count. A surplus draw is a shuffle or a random pick the runner's seeded RNG
-// cannot land where the live game did. One shared test keeps the three gates
-// (answersOf, resolveSpanLowerable, a window's HasRNG) from drifting apart.
-func rngAccounted(e game.Entry) bool {
-	draws := uint64(len(e.Rolls))
-	for _, f := range e.Flips {
-		draws += f.DrawCount()
+// cannot land where the live game did. One shared test keeps the gates
+// (answersOf, resolveSpanLowerable, a window's RNG cut) from drifting apart.
+func rngAccounted(e game.Entry) bool { return e.RNG == recordedDraws(e) }
+
+// rngShuffle reports whether e's surplus draws are a library shuffle. gorge's
+// only random operation that consumes more than one value is the Fisher-Yates
+// Shuffle over one seat's library (rules.rng.Shuffle), which draws
+// len(library)-1 values; after is the digest of the state the entry left, so a
+// seat's library_count names the size of the library it shuffled, and e.Digest
+// (taken before the intent) must show the top of that same library moved.
+// Every other surplus draw -- Crystalline Giant's random counter kind, a
+// random discard, a random target -- draws for the pick it made, and that
+// outcome can land on the board rather than only in the library order a
+// window's HasRNG leaves out. A shuffle that also drew or moved a card after
+// its pass no longer matches the count and is cut too: the window loses a
+// step, never agreement.
+func rngShuffle(e game.Entry, after game.Digest) bool {
+	draws := recordedDraws(e)
+	if e.RNG <= draws {
+		return false
 	}
-	return e.RNG == draws
+	surplus := e.RNG - draws
+	for i, p := range after.Players {
+		if p.LibraryCount <= 1 || surplus != uint64(p.LibraryCount-1) {
+			continue
+		}
+		// A shuffle reorders the library, so the top five cannot stay put. A
+		// matching count with an unchanged top is a pick that drew the same
+		// number as a shuffle would (a one-draw pick at a two-card library),
+		// not a shuffle, and must be cut.
+		if i < len(e.Digest.Players) && !slices.Equal(e.Digest.Players[i].LibraryTop, p.LibraryTop) {
+			return true
+		}
+	}
+	return false
+}
+
+// groupShuffle reports a group that consumed engine randomness the tape does
+// not account for, with the state before its decision and the card names its
+// own picks named. answersOf's rng gate is bypassed in a window or span, so
+// the group is lowered; the runner's seeded order is still its own.
+func groupShuffle(g []game.Entry) (game.Digest, map[string]bool, bool) {
+	shuffles := false
+	for _, e := range g {
+		if e.RNG > 0 && !rngAccounted(e) {
+			shuffles = true
+			break
+		}
+	}
+	if !shuffles || len(g) == 0 {
+		return game.Digest{}, nil, false
+	}
+	moved := map[string]bool{}
+	for _, e := range g {
+		for _, p := range e.Picks {
+			if n := refName(p.Ref); n != "" {
+				moved[n] = true
+			}
+		}
+	}
+	return g[0].Digest, moved, true
+}
+
+// groupsDependOnShuffle reports a group whose play or cast names a card the
+// shuffle could have moved into hand. A card the seat already held at a pure
+// library shuffle, or one this resolution moved (a search puts the fetched
+// card into hand before it shuffles), is still there in the runner; a card
+// drawn after the shuffle is the runner's own draw (CR 701.24a), so the live
+// object it names may not be in hand. zones says the shuffle also moved the
+// hand/graveyard into the library, which invalidates every held card.
+func groupsDependOnShuffle(g []game.Entry, before game.Digest, moved map[string]bool, zones bool) bool {
+	if len(g) == 0 {
+		return false
+	}
+	for _, p := range g[0].Picks {
+		if p.Kind != "play_land" && p.Kind != "cast" {
+			continue
+		}
+		seat, name := refSeatName(p.Ref)
+		if name == "" || !moved[name] && (zones || !seatHeld(before, seat, name)) {
+			return true
+		}
+	}
+	return false
+}
+
+// zoneMovingShuffle reports whether a trigger recorded up to entry j shuffles
+// cards from a non-library zone into its owner's library, so the shuffle moved
+// cards the pre-shuffle digest still lists as held. The trigger's own SA chain
+// carries the parsed parameters (Origin$, Destination$, Shuffle$), not a text
+// heuristic.
+func zoneMovingShuffle(reg *cards.Registry, entries []game.Entry, j int) bool {
+	if reg == nil {
+		return false
+	}
+	for k := 0; k < j && k < len(entries); k++ {
+		for _, tr := range entries[k].Triggers {
+			c, ok := reg.Lookup(tr.Name)
+			if !ok || tr.Face < 0 || tr.Face >= len(c.Faces) {
+				continue
+			}
+			f := c.Faces[tr.Face]
+			if tr.Index < 0 || tr.Index >= len(f.Triggers) {
+				continue
+			}
+			for sa := f.Triggers[tr.Index].Effect; sa != nil; sa = sa.Sub {
+				if !strings.EqualFold(sa.Params["Shuffle"], "True") ||
+					!strings.Contains(sa.Params["Destination"], "Library") {
+					continue
+				}
+				if o := sa.Params["Origin"]; strings.Contains(o, "Hand") || strings.Contains(o, "Graveyard") {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
+// seatHeld reports whether seat's pre-shuffle digest lists name in a zone a
+// library shuffle does not move: hand, graveyard, exile or command. The deck's
+// own order is the engine's, but a card the seat already held stays put.
+//
+// The comparison is by name: a Digest carries names, not the setup-bound refs
+// ("p0:Island#2") the runner resolves, so a hand holding a different object of
+// the same name is not distinguished. Closing that would need the setup
+// binder's refs, which the tape does not carry; a span that could expose it
+// either stops at the window's rng cut (a shuffle-plus-draw entry) or has
+// every same-name object interchangeable to the digest, and the self-check
+// still rejects a step the runner cannot offer.
+func seatHeld(d game.Digest, seat int, name string) bool {
+	for _, p := range d.Players {
+		if p.Seat != seat {
+			continue
+		}
+		for _, z := range [][]string{p.Hand, p.Graveyard, p.Exile, p.Command} {
+			if slices.Contains(z, name) {
+				return true
+			}
+		}
+		return false
+	}
+	return false
+}
+
+// refName is the card name in a runner ref ("p1:Island#34" -> "Island").
+func refName(r string) string {
+	_, name := refSeatName(r)
+	return name
+}
+
+// refSeatName splits a runner card ref into its owner seat and card name. ok is
+// false for an empty or non-seat ref.
+func refSeatName(r string) (seat int, name string) {
+	if len(r) < 3 || r[0] != 'p' {
+		return 0, ""
+	}
+	i := strings.IndexByte(r, ':')
+	if i < 2 {
+		return 0, ""
+	}
+	n, err := strconv.Atoi(r[1:i])
+	if err != nil {
+		return 0, ""
+	}
+	name = r[i+1:]
+	if j := strings.IndexByte(name, '#'); j >= 0 {
+		name = name[:j]
+	}
+	return n, name
 }
 
 // answersOf is the entries' asks as answers, in tape order; the first entry

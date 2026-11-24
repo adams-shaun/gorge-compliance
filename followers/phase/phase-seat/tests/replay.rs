@@ -44,7 +44,9 @@ fn play(b: &mut PhaseBackend, r: &Reset, policy: u64, cap: usize) -> Vec<String>
     out
 }
 
-fn run() {
+/// `house`: `None` plays both seats from the policy; `Some((seat, difficulty))` has the backend answer
+/// that seat itself, so the policy only ever sees the other one.
+fn run(house: Option<(u8, &str)>) {
     // An empty value is "unset" (the Makefile passes `PHASE_SEAT_DECKS=` when it finds no catalog).
     let set = |k: &str| std::env::var(k).ok().filter(|v| !v.is_empty());
     let (Some(data), Some(decks)) = (set("PHASE_CARD_DATA"), set("PHASE_SEAT_DECKS")) else {
@@ -54,7 +56,17 @@ fn run() {
     let db = CardDatabase::from_export(std::path::Path::new(&data)).expect("card data");
     let catalog = load_decks(std::path::Path::new(&decks)).expect("decks");
     assert!(catalog.len() >= 2, "need two catalog decks");
-    let mut backend = PhaseBackend::new(db, catalog.clone(), "test+test", None);
+    let backend = PhaseBackend::new(db, catalog.clone(), "test+test", None);
+    #[cfg(feature = "house-ai")]
+    let mut backend = match house {
+        Some((seat, difficulty)) => backend.with_house(seat, difficulty),
+        None => backend,
+    };
+    #[cfg(not(feature = "house-ai"))]
+    let mut backend = {
+        assert!(house.is_none(), "a house seat needs the house-ai feature");
+        backend
+    };
     let (mut longest, mut terminal, mut played) = (0, 0, 0);
     // PHASE_SEAT_SEEDS="2,3" narrows the seeds; PHASE_SEAT_ONCE=1 plays each once (no comparison).
     let only: Option<Vec<u8>> = std::env::var("PHASE_SEAT_SEEDS").ok().filter(|v| !v.is_empty()).map(|v| v.split(',').filter_map(|x| x.trim().parse().ok()).collect());
@@ -79,6 +91,15 @@ fn run() {
         };
         let a = play(&mut backend, &r, 0x9e37_79b9_7f4a_7c15 ^ u64::from(seed), 4000);
         eprintln!("replay: seed {seed}: {} lines, last: {}", a.len(), a.last().map_or(String::new(), |l| l.chars().take(160).collect()));
+        if house.is_some() {
+            // The house seat is never posed, and a house game never halts.
+            let seat = format!("\"acting_seat\":\"p{}\"", 1 - house.map_or(0, |h| h.0));
+            let other = format!("\"acting_seat\":\"p{}\"", house.map_or(0, |h| h.0));
+            assert!(a.iter().all(|l| !l.contains(&other)), "seed {seed}: the house seat was posed to the client");
+            assert!(a.iter().any(|l| l.contains(&seat)), "seed {seed}: the agent seat was never posed");
+            let last = a.last().expect("a transcript");
+            assert!(!last.contains("halted"), "seed {seed}: the house game halted: {last}");
+        }
         if !a.last().is_some_and(|l| l.contains("\"outcome\"")) {
             // A game that did not end: show how it was going (is it a priority-pass loop?).
             for l in &a[a.len().saturating_sub(3)..] {
@@ -98,10 +119,29 @@ fn run() {
     eprintln!("replay: {played} seeds {}; longest {longest} lines; {terminal} ended", if once { "played once" } else { "identical twice over" });
 }
 
+fn on_big_stack(f: impl FnOnce() + Send + 'static) {
+    // The engine's stack needs are above a test thread's default.
+    std::thread::Builder::new().stack_size(64 << 20).spawn(f).expect("thread").join().expect("replay thread");
+}
+
 #[test]
 fn the_same_seed_and_answers_replay_byte_for_byte() {
-    // The engine's stack needs are above a test thread's default.
-    std::thread::Builder::new().stack_size(64 << 20).spawn(run).expect("thread").join().expect("replay thread");
+    // PHASE_SEAT_HOUSE=p0|p1 (with the house-ai feature) runs this same test with that seat answered by phase-ai.
+    let house = std::env::var("PHASE_SEAT_HOUSE").ok().filter(|v| !v.is_empty()).map(|v| match v.as_str() {
+        "p0" => 0u8,
+        "p1" => 1,
+        _ => panic!("PHASE_SEAT_HOUSE={v}: want p0 or p1"),
+    });
+    on_big_stack(move || run(house.map(|s| (s, "medium"))));
+}
+
+/// The same replay with phase-ai answering seat p1 at medium: one `game_secret` and the p0 answers
+/// still give the same transcript byte for byte, p1 is never posed, and no game halts.
+#[cfg(feature = "house-ai")]
+#[test]
+#[allow(non_snake_case)]
+fn TestHouseSeatReplaysByteForByte() {
+    on_big_stack(|| run(Some((1, "medium"))));
 }
 
 /// A game from a Three Tree Mascot deck must end at a natural terminal: not halted on an unposed mana

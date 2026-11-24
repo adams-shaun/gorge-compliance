@@ -66,11 +66,14 @@ func TestTriggerOrderSourcelessFallsBackToText(t *testing.T) {
 }
 
 // TestTriggerOrderSharedStepKeepsInertText pins the demotion: when the step
-// also scripts other asks, the order's answers stay the old inert rule text.
-// A plain name is consumable by any later makeChoose XMage poses, so a
-// leftover one (the order ask XMage posed at another point than gorge
-// recorded) derails them; the text form is not consumable. Measured:
-// Baron Strucker/static#0.0 replays agree only with the text form.
+// also scripts other asks, the order's answers are not source names. A plain
+// name is consumable by any later makeChoose XMage poses, so a leftover one
+// (the order ask XMage posed at another point than gorge recorded) derails
+// them (measured: Baron Strucker/static#0.0 HARNESSes under the name form).
+// The demotion is XMage's rule-text keys (xmageTriggerOrderKeys), one per pick
+// but the last: like the old verbatim text they name no object, and unlike it
+// they match the order ask, which strict mode requires (xproof: Clement, the
+// Worrywort's "Missing CHOICE def ... Triggered list" under the text form).
 func TestTriggerOrderSharedStepKeepsInertText(t *testing.T) {
 	order := triggerOrderDecision(1, "p0:Adrenaline Jockey", "p0:Rangers' Refueler")
 	order.Picks[1] = "Source: When this enters, do another thing."
@@ -81,10 +84,10 @@ func TestTriggerOrderSharedStepKeepsInertText(t *testing.T) {
 	got := XAnswers([]rules.OracleDecision{target, order}, 2, nil)
 	want := [][]XAnswer{
 		nil,
-		{{0, "target", "Wastes"}, {0, "choice", "When this enters, do a thing."}, {0, "choice", "When this enters, do another thing."}},
+		{{0, "target", "Wastes"}, {0, "choice", "When this enters, do a thing."}},
 	}
 	if !reflect.DeepEqual(got, want) {
-		t.Fatalf("XAnswers = %#v, want %#v (shared step keeps the inert text form)", got, want)
+		t.Fatalf("XAnswers = %#v, want %#v (shared step demotes to the rule-text keys)", got, want)
 	}
 }
 
@@ -109,7 +112,7 @@ func TestTriggerOrderSharedStepIdenticalTextKeepsName(t *testing.T) {
 }
 
 // TestTriggerOrderSpansKeepDecisionOrder pins the in-place demotion: the
-// demoted text answers sit exactly where the name answers would have been, so
+// demoted key answers sit exactly where the name answers would have been, so
 // the answer queue keeps gorge's decision order.
 func TestTriggerOrderSpansKeepDecisionOrder(t *testing.T) {
 	target := rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
@@ -120,7 +123,7 @@ func TestTriggerOrderSpansKeepDecisionOrder(t *testing.T) {
 	got := XAnswers([]rules.OracleDecision{order, target}, 2, nil)
 	want := [][]XAnswer{
 		nil,
-		{{0, "choice", "When this enters, do a thing."}, {0, "choice", "When this enters, do another thing."}, {0, "target", "Wastes"}},
+		{{0, "choice", "When this enters, do a thing."}, {0, "target", "Wastes"}},
 	}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("XAnswers = %#v, want %#v", got, want)

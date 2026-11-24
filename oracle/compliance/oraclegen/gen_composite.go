@@ -82,6 +82,7 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 		}
 	}
 	collapseRoomLock(ds)
+	unposeCollectEvidenceDeclines(reg, ds)
 	if castSteps == nil {
 		castSteps = stepsWithOwnTargets(sc)
 	}
@@ -103,6 +104,12 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			digs[d.Step] = src
 		}
 	}
+	casts := map[int]bool{}
+	for i, st := range sc.Steps {
+		if st.Op == "cast" && !castXSizesCost(reg, st.Card) {
+			casts[i] = true
+		}
+	}
 	bounces := map[int]bool{}
 	for _, d := range ds {
 		if ownBounceShape(d) {
@@ -111,7 +118,17 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			}
 		}
 	}
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), ownBounce: bounces})
+	// XMage asks the "card ORDER to put … from the TOP" dialog only for a
+	// hand_move whose effect is implemented with anyOrder=true. Verify that
+	// per resolving source instead of scripting the answers for every top
+	// batch: Brainstorm and Dream Cache auto-top without any order ask.
+	orderAsks := map[int]bool{}
+	for i, d := range ds {
+		if HandMoveBatch(d) && HandMoveOrderAsk(reg, sc, res.Snapshots, d) {
+			orderAsks[i] = true
+		}
+	}
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that
@@ -263,4 +280,133 @@ func withoutDividedActivations(castSteps map[int]bool, ds []rules.OracleDecision
 		return castSteps
 	}
 	return out
+}
+
+// unposeCollectEvidenceDeclines clears CostPosed on a decline-only triggered
+// collect evidence cost ("you may collect evidence 4" over a graveyard short
+// of it: Surveillance Monitor, Izoni, Center of the Web). gorge's runner marks
+// such a decline posed (rules.xmageAlwaysAsksCost reads collect evidence as a
+// priceable cost with no non-mana component), but XMage's CollectEvidenceCost
+// has a real canPay, so DoIfCostPaid poses no chooseUse and a scripted "no"
+// is left over: "(Choices of PlayerA) Count are not equal (found [No])".
+// The decision names its source by ref; a source whose triggers pay no
+// CollectEvidence cost keeps the runner's mark.
+func unposeCollectEvidenceDeclines(reg *cards.Registry, ds []rules.OracleDecision) {
+	if reg == nil {
+		return
+	}
+	for i := range ds {
+		d := &ds[i]
+		if !loneTriggerCostDecline(*d) {
+			continue
+		}
+		ref := ""
+		switch {
+		case len(d.ObjectPicks) > 0:
+			ref = d.ObjectPicks[0]
+		case len(d.PickRefs) > 0:
+			ref = d.PickRefs[0]
+		}
+		if ref == "" {
+			continue
+		}
+		if c, ok := reg.Lookup(oraclediffRefName(ref)); ok && triggerCollectsEvidence(c) {
+			d.CostPosed = false
+		}
+	}
+}
+
+// triggerCollectsEvidence reports whether any face's triggered ability (or a
+// sub-ability it chains to) pays a CollectEvidence cost.
+func triggerCollectsEvidence(c *cards.Card) bool {
+	for _, f := range c.Faces {
+		for _, t := range f.Triggers {
+			for sa := t.Effect; sa != nil; sa = sa.Sub {
+				if strings.HasPrefix(strings.TrimSpace(sa.Params["Cost"]), "CollectEvidence") ||
+					strings.Contains(sa.Params["Cost"], " CollectEvidence") {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
+// forageExiles maps each accepted forage election (a trigger_cost_pay pick
+// labelled "Forage") to the three cards its exile arm moved from the payer's
+// graveyard to exile on the decision's step. gorge exiles the top three
+// graveyard cards without posing a pick (rules' forageSettle), so the
+// checkpoint is the only record of which cards; XMage asks them
+// ("TargetCardInYourGraveyard: Select cards from your graveyard (selected 0
+// of 3, min 3)", Bushy Bodyguard) and strict-missed with nothing scripted. A
+// step that moved any other number of cards (the Food arm, a second exile on
+// the step) is left unscripted rather than guessed.
+func forageExiles(ds []rules.OracleDecision, snaps []rules.OracleSnapshot) map[int][]string {
+	var out map[int][]string
+	for i, d := range ds {
+		if len(d.Picks) != 1 || pickKind(d, 0) != "trigger_cost_pay" || !strings.EqualFold(strings.TrimSpace(d.Picks[0]), "Forage") {
+			continue
+		}
+		if d.Step < 0 || d.Step+1 >= len(snaps) || d.Seat < 0 ||
+			d.Seat >= len(snaps[d.Step].Players) || d.Seat >= len(snaps[d.Step+1].Players) {
+			continue
+		}
+		before, after := snaps[d.Step].Players[d.Seat], snaps[d.Step+1].Players[d.Seat]
+		exiled := addedNames(before.Exile, after.Exile)
+		left := addedNames(after.Graveyard, before.Graveyard)
+		if len(exiled) != 3 || !sameNames(exiled, left) {
+			continue
+		}
+		if out == nil {
+			out = map[int][]string{}
+		}
+		out[i] = exiled
+	}
+	return out
+}
+
+// addedNames is the multiset difference next - old, in next's order.
+func addedNames(old, next []string) []string {
+	counts := map[string]int{}
+	for _, n := range old {
+		counts[n]++
+	}
+	var added []string
+	for _, n := range next {
+		if counts[n] > 0 {
+			counts[n]--
+			continue
+		}
+		added = append(added, n)
+	}
+	return added
+}
+
+// sameNames reports whether a and b hold the same names, ignoring order.
+func sameNames(a, b []string) bool {
+	return len(a) == len(b) && len(addedNames(a, b)) == 0
+}
+
+// castXSizesCost reports a spell whose X also sizes a non-mana part of its
+// cost (Abandon Hope's "Cost$ X 1 B Discard<X/Card>"). XMage bounds such an X
+// by that part (an empty hand leaves only X = 0) and TestPlayer.announceX
+// returns a fixed X unasked, so a forced announce there stays unscripted
+// (castAnnouncesX): a scripted "X=0" was left over (Geometer's Arthropod and
+// Matterbending Mage, casting Abandon Hope with an empty hand).
+func castXSizesCost(reg *cards.Registry, ref string) bool {
+	if reg == nil || ref == "" {
+		return false
+	}
+	c, ok := reg.Lookup(oraclediffRefName(ref))
+	if !ok {
+		return false
+	}
+	for _, f := range c.Faces {
+		for _, sa := range f.Abilities {
+			if sa.Kind == "SP" && strings.Contains(sa.Params["Cost"], "<X") {
+				return true
+			}
+		}
+	}
+	return false
 }

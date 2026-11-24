@@ -18,7 +18,14 @@ GO_TEST_FLAGS ?= -p=2
 # 7a68b79c92 = 4142596fb7 + fork PRs #11 (enters-tapped sets tapped without a TappedEvent: Attentive Sunscribe) and #12 (a
 # static ability's conditional Custom/WhileControlled effect is not discarded on a false condition, CR 611.3a: Undercover Skrull).
 # 33704ee4fe = 7a68b79c92 + fork PR #13 (Hellfire deals 3 when no creature died, X = 0, CR 608.2c).
-XMAGE_REF  ?= 33704ee4fef60b9d2729fe24975832b9eee66a10
+# fdde07931f = b34a6018 (fork gorge) + fork PR #18 (the imprinted mana value X cost adjuster reads X = 0, not
+# Integer.MAX_VALUE, when nothing is imprinted, CR 107.3c: Soul Foundry, Elite Arcanist, Prototype Portal).
+# b964ce92f0 = fdde07931f + the playable check credits the untapped artifacts and creatures that can pay a
+# Waterbend {X} cost's generic mana (CR 701.67a; CR 701.67b caps it to the minimum X part): Katara, Water Tribe's Hope
+# with an empty pool, Waterbend {X}, X = 1, tapping Katara herself. Only WaterbendXCost with a minimum X above 0 is
+# credited (the three spells with a Waterbend {X} cost have minimum X 0 and are unchanged; a fixed WaterbendCost
+# already offers a {0} option). Fork branch fix/waterbend-playable, WaterbendTest.testXFromEmptyPool.
+XMAGE_REF  ?= b964ce92f0274faef1c3b2395b74a8f91c5bcf61
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -87,7 +94,33 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # 0791efdeb1 = becb01adc6 + each recorded coin flip result forced on its step (ForcedDieRandom arms item.coin_flips
 # beside the die rolls: nextBoolean returns the recorded result, a forced flip takes no draw, a doubled flip one per
 # result; MyRandom's CountingRandom forwards nextBoolean). Same trees as FORGE_REF ff076d4432.
-FORGE_ORACLE_REF ?= 0791efdeb19566b8e36391f3eaceaafc7a4894cd
+# 963576e5d2 = 96acdef442 (compliance #432's pin: the fork's master + gorge branch, re-synced 11-24) + the scripted controller
+# consumes gorge's waterbend_generic tap picks (Forge asks for waterbend taps through chooseCardsForConvokeOrImprovise, which took
+# only convoke*/improvise* kinds: Katara's Waterbend {X} paid from an empty pool and was refused). Driver-only change; same trees
+# as FORGE_REF ff076d4432. Fork branch fix/waterbend-tap-pick-driver.
+# ff2049dc97 = 963576e5d2 + landFor plays a land from outside the hand through the copy a MayPlay static grants (Ka-Zar's
+# library top, the card Irascible Wolverine / Kulrath Zealot / Crimson Operative exile, Tablet of Discovery's milled card):
+# the card's own land ability plays only from the hand, so the play did nothing ("step N (play) p0:<land> was not played").
+# Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch fix/land-play-mayplay.
+# cda262a7ef = ff2049dc97 + the scripted controller answers gorge's OriginAlternative$ zone election: one choose_n over zones
+# becomes Forge's initial "search the library?" confirm plus one confirm per alternative zone, and the Optional$ search_confirm is
+# left for Forge's later ChangeZoneGeneral gate; Endure's endure_counters/endure_spirit map to yes/no; and a same-name library
+# order (dig/hideaway bottom) is consumed though its order is unobservable, so it is not a leftover. Driver-only change; same
+# trees as FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-unmapped-asks, rebased onto ff2049dc97 so the MayPlay
+# land-play fix is kept beside the zone-election/endure/order fix.
+# f01192ae90 = cda262a7ef + the scripted controller maps the four asks gorge records but Forge poses differently:
+# remove-any-type counters (CountersRemoveEffect's chooseCounterType then the params chooseNumber; gorge's one choose_n per
+# counter removed is the amount), Blight as a one-creature cost pick, a lone Separator$/Chooser$ as a forced entity (not an
+# object pick), and gorge's twopiles_pick as chooseCardsPile. The params chooseBinary overload is overridden too, so it cannot
+# fall through to PlayerControllerAi. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
+# fix/xp-forge-driver-counter-blight-piles, based on cda262a7ef.
+# c92f40d4f49 = f01192ae90 + the params chooseNumber branches on the ask's API: only RemoveCounter's per-counter
+# kind election takes the counter picks, while CountersPutEffect's UpTo$/SplitAmount$ number (gorge resume
+# counter_upto) keeps the four-argument path, so an up-to put answers the recorded amount instead of 0. A
+# counter_upto regression fixture/test covers it, and the params chooseBinary comment now states the miss it
+# really records. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
+# fix/xp-forge-driver-counter-blight-piles.
+FORGE_ORACLE_REF ?= c92f40d4f4920abbf59ddb0f8dbebb971283f3e3
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

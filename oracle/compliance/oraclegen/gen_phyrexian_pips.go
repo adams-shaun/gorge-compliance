@@ -33,8 +33,23 @@ type pipAsk struct {
 type xanswersExtra struct {
 	digs map[int]digSource
 	pips map[int][]pipAsk
+	// casts is the set of the scenario's cast step indices: a forced X
+	// announcement on one is still posed by XMage (castAnnouncesX).
+	casts map[int]bool
+	// forage maps a forage election's decision index to the graveyard
+	// cards its exile arm took (forageExiles).
+	forage map[int][]string
 	// ownBounce marks the steps that pose an own-bounce hidden pick.
 	ownBounce map[int]bool
+	// snaps is the gorge result's checkpoints: the destination of a
+	// hand_move/library_placement decision is not a field, so the answer
+	// router re-derives a top placement from the after-step library top.
+	snaps []rules.OracleSnapshot
+	// orderAsks marks the hand_move decisions whose effect XMage implements
+	// with an explicit "card ORDER to put … from the TOP" dialog. A self
+	// put-back (Brainstorm, Dream Cache) auto-tops without that ask, so its
+	// order answers would be left queued for the next dialog.
+	orderAsks map[int]bool
 }
 
 // isPipDecision reports whether d is one of gorge's ManaAsk pip decisions

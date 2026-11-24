@@ -45,6 +45,11 @@ if [ "${1:-}" != "--smoke" ]; then
     git clone --filter=blob:none https://github.com/magefree/mage.git "$root/mage"
   fi
   git -C "$root/mage" fetch -q origin
+  # The pin may be a fork-only commit (adams-shaun/mage fix branches, not on magefree/mage):
+  # fetch the fork too, so a fresh clone resolves it. XMAGE_FORK_URL overrides the remote.
+  fork_url=${XMAGE_FORK_URL:-https://github.com/adams-shaun/mage.git}
+  git -C "$root/mage" remote get-url fork >/dev/null 2>&1 || git -C "$root/mage" remote add fork "$fork_url"
+  git -C "$root/mage" fetch -q fork
   git -C "$root/mage" checkout -q "$ref"
   start=$(date +%s)
   ( cd "$root/mage" && MAVEN_OPTS=-Xmx3g "${scope[@]}" /usr/bin/time -v -o "$root/build.time" \

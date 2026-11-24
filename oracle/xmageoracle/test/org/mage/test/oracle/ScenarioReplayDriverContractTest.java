@@ -584,7 +584,8 @@ public final class ScenarioReplayDriverContractTest {
                 "optionalcost cast_mode was not accepted");
         check(castModeSupported("plot").equals("true"), "plot cast_mode was not accepted");
         check(castModeSupported("plot_cast").equals("false"), "plot_cast cast_mode must stay unsupported");
-        check(castModeSupported("kicked").equals("false"), "kicked cast_mode must stay unsupported");
+        check(castModeSupported("kicked").equals("true"), "kicked cast_mode was not accepted");
+        check(castModeSupported("kickedboth").equals("false"), "kickedboth cast_mode must stay unsupported");
         check(castModeSupported("adventure_alt").equals("true"), "adventure_alt cast_mode was not accepted");
         check(castModeSupported("omen_alt").equals("true"), "omen_alt cast_mode was not accepted");
         check(castModeSupported("warped").equals("true"), "warped cast_mode was not accepted");

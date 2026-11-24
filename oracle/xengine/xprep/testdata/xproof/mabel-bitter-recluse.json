@@ -1,0 +1,147 @@
+{
+ "name": "xproof start Mabel, Bitter Recluse f0/t0 seed 1",
+ "turn": 1,
+ "setup": {
+  "p0": {
+   "battlefield": [
+    "Swamp",
+    "Wall of Stone"
+   ],
+   "hand": [
+    "Mabel, Bitter Recluse"
+   ],
+   "library_top": [
+    "Swamp",
+    "Mountain",
+    "Swamp",
+    "Swamp",
+    "Mountain",
+    "Swamp",
+    "Swamp",
+    "Mountain",
+    "Swamp",
+    "Mountain",
+    "Swamp",
+    "Swamp"
+   ],
+   "counters": {
+    "Wall of Stone": {
+     "P1P1": 1
+    }
+   },
+   "life": 20
+  },
+  "p1": {
+   "battlefield": [
+    "Ajani Resolute"
+   ],
+   "graveyard": [
+    "Shifting Wall"
+   ],
+   "library_top": [
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains"
+   ],
+   "life": 20
+  }
+ },
+ "steps": [
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Swamp",
+   "ability_index": 0
+  },
+  {
+   "op": "cast",
+   "seat": 0,
+   "card": "p0:Mabel, Bitter Recluse"
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "resolve",
+   "seat": 0,
+   "answers": [
+    {
+     "kind": "target",
+     "pick": [
+      "p1:Ajani Resolute"
+     ]
+    },
+    {
+     "kind": "choose",
+     "pick": [
+      "LOYALTY"
+     ]
+    },
+    {
+     "kind": "choose",
+     "pick": [
+      "LOYALTY"
+     ]
+    }
+   ]
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  }
+ ]
+}

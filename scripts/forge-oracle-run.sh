@@ -16,8 +16,15 @@
 #                 Name: line is in no cardsfolder card file; a split card
 #                 name ("Fire // Ice") whose every face's Name: line is in
 #                 none either (Forge's card files hold one Name: line per
-#                 face, so the joined name is never a Name line). One grep
-#                 pass over the pinned cardsfolder; no javac, no JVM, no lock.
+#                 face, so the joined name is never a Name line); and a name
+#                 whose card file exists but which Forge's card DB filters
+#                 (named anywhere in a Type=Funny or Border=Silver edition
+#                 outside [eternal], as Gobland is: driver "Couldn't find a
+#                 card"); this includes a split/adventure card named jointly
+#                 ("Knowing // Half the Battle", "Curious Pair // Treats to
+#                 Share") when the joined name or its first face is filtered.
+#                 One grep pass over the pinned cardsfolder and one awk pass
+#                 over its editions; no javac, no JVM, no lock.
 #
 # Overrides:
 #   FORGE_ORACLE_SRC      the forge-oracle project dir to compile and replay (a
@@ -72,9 +79,9 @@ else
   src=$top/forge-oracle
 fi
 "$here/scripts/forge-oracle-setup.sh" --check-pin "$ref" "$top" >&2
-git -C "$top" diff --quiet HEAD -- forge-gui/res/cardsfolder forge-gui/res/tokenscripts || die "$top has uncommitted changes under forge-gui/res/{cardsfolder,tokenscripts}"
+git -C "$top" diff --quiet HEAD -- forge-gui/res/cardsfolder forge-gui/res/tokenscripts forge-gui/res/editions || die "$top has uncommitted changes under forge-gui/res/{cardsfolder,tokenscripts,editions}"
 # Untracked (even ignored) scripts are loaded too, but git diff cannot see them.
-[ -z "$(git -C "$top" ls-files --others -- forge-gui/res/cardsfolder forge-gui/res/tokenscripts)" ] || die "$top has untracked scripts under forge-gui/res/{cardsfolder,tokenscripts}"
+[ -z "$(git -C "$top" ls-files --others -- forge-gui/res/cardsfolder forge-gui/res/tokenscripts forge-gui/res/editions)" ] || die "$top has untracked scripts under forge-gui/res/{cardsfolder,tokenscripts,editions}"
 [ -d "$top/forge-gui/res" ] || die "no $top/forge-gui/res"
 
 # The preflight protocol owns stdout (the pin check printed its verdict on
@@ -125,14 +132,63 @@ if [ "$mode" = preflight ]; then
       esac
     done
   }
+  # The cardsfolder is not the card DB: the driver's StaticData is built with
+  # loadNonLegalCards=false, which drops (StaticData's funnyCards/filtered) every
+  # card NAMED in a Type=Funny or Border=Silver edition's card sections other
+  # than [eternal] (the legal reprints), basic lands excepted. Such a card has
+  # its cardsfolder file and still fails SetupBuilder.create's getCard with
+  # "Couldn't find a card" (Gobland, Indicate and Mox Poison: Mystery Booster 2
+  # playtest rows). StaticData always loads the editions, so a tree without
+  # them cannot answer the preflight; refuse rather than silently skip the
+  # filter (find -H so an editions dir reached through a symlink still counts).
+  editions=$top/forge-gui/res/editions
+  [ -d "$editions" ] || die "no $editions; the preflight's card-DB filter needs the pinned editions"
+  funny=$(find -H "$editions" -maxdepth 1 -name '*.txt' -print0 | sort -z | xargs -r0 awk '
+    FNR == 1 { if (n) flush(); n = 0; sec = ""; funny = 0 }
+    function flush(  i) { if (funny) for (i = 1; i <= n; i++) print names[i] }
+    /^\[/ { sec = $0; gsub(/^\[|\][ \t\r]*$/, "", sec); next }
+    sec == "metadata" {
+      k = $0; sub(/=.*/, "", k); v = $0; sub(/^[^=]*=/, "", v); sub(/\r$/, "", v)
+      k = tolower(k); v = tolower(v)
+      if ((k == "type" && v == "funny") || (k == "border" && v == "silver")) funny = 1
+      next
+    }
+    sec ~ /^(cards|special slot|precon product|borderless|etched|showcase|full art|extended art|alternate art|retro frame|buy a box|promo|prerelease promo|bundle|box topper|jumpstart|rebalanced|conjured|scheme|printsheets)$/ {
+      line = $0; sub(/\r$/, "", line); sub(/ @.*$/, "", line); sub(/ \$\{.*$/, "", line)
+      if (line == "") next
+      m = split(line, w, " ")
+      if (m >= 3 && w[1] ~ /^.?[0-9A-Z-]+[^ ]*$/ && w[2] ~ /^[SCURML]$/) sub(/^[^ ]+ [SCURML] /, "", line)
+      else if (m >= 2 && w[1] ~ /^[SCURML]$/) sub(/^[SCURML] /, "", line)
+      if (line ~ /^(Snow-Covered )?(Plains|Island|Swamp|Mountain|Forest|Wastes)$/) next
+      names[++n] = line
+    }
+    END { flush() }
+  ' | sort -u)
+  # funny_has NAME: 0 when NAME is one of the edition names StaticData filters.
+  funny_has() { [ -n "$funny" ] && grep -qxF -e "$1" <<<"$funny"; }
   while IFS= read -r n; do
     [ -n "$n" ] || continue
-    if grep -qxF "Name:$n" <<<"$hits"; then continue; fi
-    case "$n" in
-    *" // "*)
-      if every_face_in_hits "$n"; then continue; fi ;;
-    esac
-    printf '%s\t%s\n' "$n" "not in the pinned cardsfolder"
+    # A name resolves when its own Name: line is in the cardsfolder, or (a
+    # split/adventure name, which Forge never stores as a joined Name: line)
+    # when every face's Name: line is.
+    if ! grep -qxF "Name:$n" <<<"$hits"; then
+      case "$n" in
+      *" // "*)
+        every_face_in_hits "$n" || { printf '%s\t%s\n' "$n" "not in the pinned cardsfolder"; continue; } ;;
+      *)
+        printf '%s\t%s\n' "$n" "not in the pinned cardsfolder"; continue ;;
+      esac
+    fi
+    # Every resolved name goes through this one card-DB filter, so a split or
+    # adventure name cannot skip it. Forge keys a COMBINE (split) card as the
+    # joined "main // other" (CardRules.getPreInitName), and an adventure/MDFC
+    # by its main face; the editions list each the same way, but the corpus
+    # names both jointly. Refuse when the joined name or its first face is in
+    # the filtered set.
+    first=${n%%" // "*}
+    if funny_has "$n" || { [ "$first" != "$n" ] && funny_has "$first"; }; then
+      printf '%s\t%s\n' "$n" "in the pinned cardsfolder but filtered from Forge's card DB (Funny/Silver-border edition card)"
+    fi
   done < "$names"
   exit 0
 fi

@@ -294,6 +294,9 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 		ss.Tapped = append(ss.Tapped, i)
 	}
 	for _, c := range s.Counters {
+		if err := startCounterKindError(c.Kind); err != nil {
+			return d, ss, fmt.Errorf("start %s: %w", name, err)
+		}
 		i, err := bind(c.Card, counted)
 		if err != nil {
 			return d, ss, err
@@ -326,6 +329,18 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 	}
 	d.Colours = colours
 	return d, ss, nil
+}
+
+// startCounterKindError is why kind cannot be seeded, or nil: a wildcard
+// ("All", "Any") or a Forge placeholder ("EachFromSource", "ExistingCounter")
+// names kinds rather than one, and the followers cannot apply it (Honest
+// Work's CounterType$ All was seeded literally before certdeck normalised it).
+func startCounterKindError(kind string) error {
+	switch strings.ToLower(strings.TrimSpace(kind)) {
+	case "", "all", "any", "eachfromsource", "existingcounter":
+		return fmt.Errorf("counter kind %q is not a counter kind", kind)
+	}
+	return nil
 }
 
 // hasShardLetter reports whether the Forge mana cost has a shard with the

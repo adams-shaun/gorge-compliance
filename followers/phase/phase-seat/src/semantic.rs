@@ -45,8 +45,10 @@ pub const DECISION_KINDS: &[&str] = &[
     "activate_ability",
     "choose_target",
     "finish_target_selection",
+    "choose_color",
     "choose_boolean",
     "choose_number",
+    "choose_replacement",
     "select_object",
     "optional_cost",
     "mulligan",
@@ -139,6 +141,18 @@ pub fn choose_boolean(source: Option<Value>, purpose: &str, value: bool) -> Valu
     make("choose_boolean", json!({"source": source, "purpose": purpose, "value": value}))
 }
 
+pub fn choose_color(source: Option<Value>, purpose: &str, color: &str) -> Value {
+    make("choose_color", json!({"source": source, "purpose": purpose, "color": color}))
+}
+
+pub fn choose_replacement(affected: Value, event: &str, replacement_source: Option<Value>, index: u32, count: u32) -> Value {
+    make(
+        "choose_replacement",
+        json!({"affected": affected, "event": event, "replacement_source": replacement_source,
+            "replacement_index": index, "replacement_count": count}),
+    )
+}
+
 pub fn choose_number(source: Option<Value>, purpose: &str, value: i64, min: i64, max: i64) -> Value {
     make("choose_number", json!({"source": source, "purpose": purpose, "value": value, "minimum": min, "maximum": max}))
 }
@@ -216,7 +230,9 @@ mod tests {
             choose_target(o.clone(), 0, target_player("p1"), 0, 1, 1),
             finish_target_selection(o.clone(), 0, 1),
             choose_boolean(None, "optional_effect", true),
+            choose_color(Some(o.clone()), "mana", "green"),
             choose_number(Some(o.clone()), "x_value", 1, 0, 3),
+            choose_replacement(target_object(o.clone()), "other", Some(o.clone()), 0, 2),
             choose_option(None, "named_choice", 0, 2, Some("a")),
             choose_spell_mode(o.clone(), 0, 2, 0, 1, 1),
             select_object(None, "discard", target_object(o.clone()), 0, 1, 1),
