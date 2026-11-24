@@ -133,11 +133,26 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # recorded spend and the pool; a pip with no pay_life pick stays a mana pip. Before, Vault Skirge's {B/P} stayed unpaid and the
 # cast was refused. PhyrexianLifePaymentTest covers Vault Skirge and Immolating Souleater. Driver-only change; same trees as
 # FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-phyrexian-life.
+# 8b2a5e3141f = c92f40d4f49 + two logged gorge decisions the driver never consumed: a forced GenericChoice mode
+# (ChooseGenericEffect drops every choice whose UnlessCost the chooser cannot pay and still calls
+# chooseSpellAbilitiesForEffect with the survivors, so Forge asks nothing while gorge logs the one-option mode)
+# and a different-name library order (dig/hideaway bottom, library placement: orderCards missed every
+# non-graveyard order instead of answering it from the card-order picks, with the graveyard pin kept separate).
+# Both shapes have a forge-export fixture replayed by LoneModeLibraryOrderTest. Driver-only change; same trees
+# as FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-lone-mode-library-order.
+# f789f1e46fb = the merge of 8b2a5e3141f (this lone-mode/library-order fix) and 19b0c2902c5 (the Phyrexian life
+# payment fix), both children of c92f40d4f49; the merge is clean and the full driver suite (126 tests, including
+# PhyrexianLifePaymentTest and LoneModeLibraryOrderTest) is green on it. Fork branch fix/xp-forge-driver-lone-mode-library-order.
 # 14f1f8537c = ff02f60e839 + 19b0c2902c5: the forced-tail branch merged with the Phyrexian life payment, so the pinned
 # driver keeps both fixes (the branch had been based on c92f40d4f49, before the Phyrexian fix landed on develop). The
 # merge is clean and changes no file of its own; cardsfolder/tokenscripts are unchanged (same as FORGE_REF ff076d4432).
 # Fork branch fix/xp-forge-driver-forced-tail-asks.
-FORGE_ORACLE_REF ?= 14f1f8537c496b6fee453023a4af3fe3ee672508
+# f822c4bfccdd = the clean merge of f789f1e46fb (the lone-mode/library-order fix plus the Phyrexian life payment)
+# and 14f1f8537c (the forced-tail fix plus the Phyrexian life payment), so the pinned driver keeps all three fixes.
+# The merge changes no file of its own; cardsfolder/tokenscripts are unchanged (same as FORGE_REF ff076d4432).
+# The full driver suite (129 tests, including ForcedAskTest, PhyrexianLifePaymentTest and LoneModeLibraryOrderTest)
+# is green on it. Fork branch fix/xp-forge-driver-lone-mode-library-order.
+FORGE_ORACLE_REF ?= f822c4bfccddc6d41ce163a4131878aeb8386d17
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
