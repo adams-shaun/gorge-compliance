@@ -300,6 +300,10 @@ var (
 	stackName = regexp.MustCompile(`(?:ability|spell):([^@]*)@`)
 )
 
+// CardOf is cardOf, for keyproof's Forge-only rows (an item adjudicate does not
+// take because XMage could not answer it).
+func CardOf(item oraclegen.Item, f classify.Finding) string { return cardOf(item, f) }
+
 // cardOf names the card of the diverging step: the card cast or activated.
 // A step with no card (a pass during which a trigger fired) falls back to the
 // first stack object or non-token permanent the diverging values name, the
