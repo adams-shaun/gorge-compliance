@@ -87,8 +87,12 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     puts on the bottom append, leaving the first pick above the second), and
 //     a batch with no paired alternative in the same step is left alone. Only
 //     the parallel pick arrays reverse; the label fields stay.
-//   - Except for the untap and top hand_move rewrites above, decisions are
-//     exported verbatim.
+//   - A surveil/scry arrange whose looked-at cards are all tokens (Vanish from
+//     Sight puts a token on top, then surveils 1) is exported with picks naming
+//     the cards now on top of the seat's library, so Forge keeps what it looks
+//     at (see forgeTokenLooks).
+//   - Except for the untap, top hand_move and token-look rewrites above,
+//     decisions are exported verbatim.
 //     pay_<C>, pay_generic and pay_life are
 //     pick kinds of gorge's hybrid/Phyrexian pip ask, and a mana-ability
 //     "activate" pick is a payment-window choice; Forge asks neither, so the
@@ -241,6 +245,7 @@ func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, decisions)
 	if forgeDriver {
 		decisions = forgeLibraryTopOrder(decisions)
+		decisions = forgeTokenLooks(g, decisions)
 		decisions = forgeGraveyardOrderDecisions(it, g, decisions)
 	} else {
 		decisions = forgeDropGraveyardOrderDecisions(decisions)
