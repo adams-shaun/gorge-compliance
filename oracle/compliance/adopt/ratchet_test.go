@@ -125,7 +125,7 @@ func TestCertificationRatchet(t *testing.T) {
 	// replay's to clear, not a defect to fix. Emitted on every run (go test
 	// prints it only for a failing test), so a non-stale problem leaves no
 	// stale-only verdict and the gate fails closed.
-	t.Logf("GORGE-CERT-RESULT %s %s", t.Name(), ratchetVerdict(measured, fails))
+	logCertResult(t, measured, fails)
 	for _, f := range fails {
 		t.Error(f)
 	}
@@ -139,15 +139,23 @@ func TestCertificationRatchet(t *testing.T) {
 	}
 }
 
-// ratchetVerdict classifies TestCertificationRatchet's failure for the
-// a merge gate's stale-only classifier: "clean"
-// (no fail), "stale-only" (every fail is a set's outstanding GROWTH and that
-// set's problems are ALL stale verdicts, a moved scenario sha a host XMage
-// replay clears), or "mixed" (any other fail -- a set no longer committed, a
-// declared level that shrank, a committed set missing from the ratchet, a
-// floor not recorded -- or a growth on a set with a non-stale problem: a real
-// regression the gate must still fail). A structural ratchet fail must never
-// read as stale-only just because the measured sets happen to be stale.
+// ratchetVerdict classifies a certification ratchet's failure for a merge
+// gate's stale-only classifier: "clean" (no fail), "stale-only" (every fail is
+// a set's outstanding GROWTH and that set's problems are ALL stale verdicts, a
+// moved scenario sha a host XMage replay clears), or "mixed" (any other fail --
+// a set no longer committed, a declared level that shrank, a committed set
+// missing from the ratchet, a floor not recorded -- or a growth on a set with a
+// non-stale problem: a real regression the gate must still fail). Both the
+// level-A and level-B ratchet chunks call it, so it accepts either growth
+// wording; a structural ratchet fail must never read as stale-only just
+// because the measured sets happen to be stale.
+// logCertResult emits the one GORGE-CERT-RESULT line a merge gate's stale-only
+// classifier reads; the level-A and level-B ratchet tests both go through it.
+func logCertResult(t testing.TB, measured []SetStatus, fails []string) {
+	t.Helper()
+	t.Logf("GORGE-CERT-RESULT %s %s", t.Name(), ratchetVerdict(measured, fails))
+}
+
 func ratchetVerdict(measured []SetStatus, fails []string) string {
 	if len(fails) == 0 {
 		return "clean"
@@ -157,8 +165,8 @@ func ratchetVerdict(measured []SetStatus, fails []string) string {
 		bySet[s.Set] = s
 	}
 	for _, f := range fails {
-		set, rest, ok := strings.Cut(f, ": ")
-		if !ok || !strings.Contains(rest, " outstanding, ratchet ") {
+		set, ok := ratchetGrowthSet(f)
+		if !ok {
 			return "mixed"
 		}
 		s, ok := bySet[set]
@@ -167,4 +175,20 @@ func ratchetVerdict(measured []SetStatus, fails []string) string {
 		}
 	}
 	return "stale-only"
+}
+
+// ratchetGrowthSet returns the set a per-set outstanding-growth failure names.
+// CheckRatchet spells it " outstanding, ratchet " at level A and CheckRatchetB
+// " outstanding at level B, ratchet "; any other failure (a structural ratchet
+// fail, or a growth guard's wording this does not know) is not a growth.
+func ratchetGrowthSet(f string) (string, bool) {
+	set, rest, ok := strings.Cut(f, ": ")
+	if !ok {
+		return "", false
+	}
+	if strings.Contains(rest, " outstanding, ratchet ") ||
+		strings.Contains(rest, " outstanding at level B, ratchet ") {
+		return set, true
+	}
+	return "", false
 }
