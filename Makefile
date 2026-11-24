@@ -48,7 +48,13 @@ GO_TEST_FLAGS ?= -p=2
 # `mvn -pl Mage.Verify -am test -Dtest=VerifyCardDataTest` reaches Mage.Verify instead of failing in a dependency
 # module with no matching test. Set metadata and test-runner config only: no card behaviour, so the manifests are
 # unchanged.
-XMAGE_REF  ?= f07513ff8f240a6765eee368cc7452c421a5eafb
+# 9bb2f33757 = f07513ff8f + fork PR #25 (re-stacked on the #22 pin so it is carried: "if a card is exiled with it" is an
+# intervening-if, CR 603.4. Redemptor Dreadnought's attack trigger and Evercoat Ursine's combat-damage trigger went on
+# the stack with nothing exiled with the permanent and read the exile zone only at resolution; both now use
+# .withInterveningIf with a condition reading the source's exile zone). Fork branch pin/redemptor-iif; the card fix
+# itself is fix/redemptor-dreadnought-intervening-if, RedemptorDreadnoughtTest and EvercoatUrsineTest. Card behaviour
+# change only for those two cards, so the manifests are unchanged.
+XMAGE_REF  ?= 9bb2f3375798753494802357b464df5e22da05e1
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
