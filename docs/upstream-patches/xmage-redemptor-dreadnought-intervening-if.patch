@@ -1,0 +1,256 @@
+diff --git a/Mage.Sets/src/mage/cards/e/EvercoatUrsine.java b/Mage.Sets/src/mage/cards/e/EvercoatUrsine.java
+index 683ccc2766..2199ff67da 100644
+--- a/Mage.Sets/src/mage/cards/e/EvercoatUrsine.java
++++ b/Mage.Sets/src/mage/cards/e/EvercoatUrsine.java
+@@ -2,7 +2,9 @@ package mage.cards.e;
+ 
+ import java.util.UUID;
+ import mage.MageInt;
++import mage.abilities.Ability;
+ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
++import mage.abilities.condition.Condition;
+ import mage.abilities.effects.common.HideawayPlayEffect;
+ import mage.constants.SubType;
+ import mage.abilities.keyword.TrampleAbility;
+@@ -10,6 +12,10 @@ import mage.abilities.keyword.HideawayAbility;
+ import mage.cards.CardImpl;
+ import mage.cards.CardSetInfo;
+ import mage.constants.CardType;
++import mage.game.ExileZone;
++import mage.game.Game;
++import mage.game.permanent.Permanent;
++import mage.util.CardUtil;
+ 
+ /**
+  *
+@@ -36,7 +42,8 @@ public final class EvercoatUrsine extends CardImpl {
+ 
+         // Whenever Evercoat Ursine deals combat damage to a player, if there are cards exiled with it, you may play
+         // one of them without paying its mana cost.
+-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new HideawayPlayEffect(true)));
++        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new HideawayPlayEffect(true))
++                .withInterveningIf(EvercoatUrsineCondition.instance));
+     }
+ 
+     private EvercoatUrsine(final EvercoatUrsine card) {
+@@ -48,3 +55,31 @@ public final class EvercoatUrsine extends CardImpl {
+         return new EvercoatUrsine(this);
+     }
+ }
++
++/**
++ * "if there are cards exiled with it" is an intervening-if (CR 603.4): with nothing exiled with the
++ * permanent the ability must not trigger at all. Reads the zone HideawayPlayEffect reads at resolution.
++ */
++enum EvercoatUrsineCondition implements Condition {
++    instance;
++
++    @Override
++    public boolean apply(Game game, Ability source) {
++        // the trigger-check ability has no stack-moment zcc yet (0): read the permanent's own
++        int zcc = source.getStackMomentSourceZCC();
++        if (zcc == 0) {
++            Permanent permanent = source.getSourcePermanentOrLKI(game);
++            if (permanent == null) {
++                return false;
++            }
++            zcc = permanent.getZoneChangeCounter(game);
++        }
++        ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zcc));
++        return exile != null && !exile.isEmpty();
++    }
++
++    @Override
++    public String toString() {
++        return "there are cards exiled with it";
++    }
++}
+diff --git a/Mage.Sets/src/mage/cards/r/RedemptorDreadnought.java b/Mage.Sets/src/mage/cards/r/RedemptorDreadnought.java
+index ca611d5c44..7c36ac59ac 100644
+--- a/Mage.Sets/src/mage/cards/r/RedemptorDreadnought.java
++++ b/Mage.Sets/src/mage/cards/r/RedemptorDreadnought.java
+@@ -5,6 +5,7 @@ import mage.MageObject;
+ import mage.abilities.Ability;
+ import mage.abilities.common.AttacksTriggeredAbility;
+ import mage.abilities.common.SimpleStaticAbility;
++import mage.abilities.condition.Condition;
+ import mage.abilities.costs.common.ExileFromGraveCost;
+ import mage.abilities.effects.OneShotEffect;
+ import mage.abilities.effects.common.InfoEffect;
+@@ -51,7 +52,8 @@ public final class RedemptorDreadnought extends CardImpl {
+         this.addAbility(TrampleAbility.getInstance());
+ 
+         // Plasma Incinerator -- Whenever Redemptor Dreadnought attacks, if a card is exiled with it, it gets +X/+X until end of turn, where X is the power of the exiled card.
+-        this.addAbility(new AttacksTriggeredAbility(new RedemptorDreadnoughtEffect()).withFlavorWord("Plasma Incinerator"));
++        this.addAbility(new AttacksTriggeredAbility(new RedemptorDreadnoughtEffect())
++                .withInterveningIf(RedemptorDreadnoughtCondition.instance).withFlavorWord("Plasma Incinerator"));
+ 
+     }
+ 
+@@ -65,11 +67,40 @@ public final class RedemptorDreadnought extends CardImpl {
+     }
+ }
+ 
++/**
++ * "if a card is exiled with it" is an intervening-if (CR 603.4): with nothing exiled with the
++ * permanent the ability must not trigger at all. Reads the same exile zone the cost wrote to and the
++ * effect reads at resolution (the permanent's zcc is one above the spell's).
++ */
++enum RedemptorDreadnoughtCondition implements Condition {
++    instance;
++
++    @Override
++    public boolean apply(Game game, Ability source) {
++        // the trigger-check ability has no stack-moment zcc yet (0): read the permanent's own
++        int zcc = source.getStackMomentSourceZCC();
++        if (zcc == 0) {
++            Permanent permanent = source.getSourcePermanentOrLKI(game);
++            if (permanent == null) {
++                return false;
++            }
++            zcc = permanent.getZoneChangeCounter(game);
++        }
++        ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zcc - 1));
++        return exile != null && !exile.isEmpty();
++    }
++
++    @Override
++    public String toString() {
++        return "a card is exiled with it";
++    }
++}
++
+ class RedemptorDreadnoughtEffect extends OneShotEffect {
+ 
+     RedemptorDreadnoughtEffect() {
+         super(Outcome.BoostCreature);
+-        staticText = "if a card is exiled with it, it gets +X/+X until end of turn, where X is the power of the exiled card";
++        staticText = "it gets +X/+X until end of turn, where X is the power of the exiled card";
+     }
+ 
+     private RedemptorDreadnoughtEffect(final RedemptorDreadnoughtEffect effect) {
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/EvercoatUrsineTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/EvercoatUrsineTest.java
+new file mode 100644
+index 0000000000..9be7112a5b
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/EvercoatUrsineTest.java
+@@ -0,0 +1,50 @@
++package org.mage.test.cards.single;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * Evercoat Ursine {4}{G} 6/5, Trample, Hideaway 3 (twice)
++ * Whenever Evercoat Ursine deals combat damage to a player, if there are cards exiled with it,
++ * you may play one of them without paying its mana cost.
++ * <p>
++ * "if there are cards exiled with it" is an intervening-if (CR 603.4).
++ */
++public class EvercoatUrsineTest extends CardTestPlayerBase {
++
++    private static final String ursine = "Evercoat Ursine";
++
++    @Test
++    public void testNothingExiledDoesNotTrigger() {
++        addCard(Zone.BATTLEFIELD, playerA, ursine, 1); // never cast, no hideaway ran: nothing exiled with it
++
++        attack(1, playerA, ursine, playerB);
++        checkStackSize("no trigger when nothing is exiled with it", 1, PhaseStep.COMBAT_DAMAGE, playerA, 0);
++
++        setStopAt(1, PhaseStep.END_TURN);
++        setStrictChooseMode(true);
++        execute();
++
++        assertLife(playerB, 20 - 6);
++    }
++
++    @Test
++    public void testHideawayExiledCardTriggers() {
++        addCard(Zone.HAND, playerA, ursine, 1);
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
++        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 8);
++        skipInitShuffling();
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ursine);
++
++        attack(3, playerA, ursine, playerB);
++        checkStackSize("trigger when cards are exiled with it", 3, PhaseStep.COMBAT_DAMAGE, playerA, 1);
++
++        setStopAt(3, PhaseStep.END_TURN);
++        execute();
++
++        assertLife(playerB, 20 - 6);
++    }
++}
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/_40k/RedemptorDreadnoughtTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/_40k/RedemptorDreadnoughtTest.java
+index f74f3bfa4e..6534506223 100644
+--- a/Mage.Tests/src/test/java/org/mage/test/cards/single/_40k/RedemptorDreadnoughtTest.java
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/_40k/RedemptorDreadnoughtTest.java
+@@ -32,6 +32,43 @@ public class RedemptorDreadnoughtTest extends CardTestPlayerBase {
+         assertPowerToughness(playerA, redemptor, 4, 4);
+     }
+ 
++    @Test
++    public void testAttackNothingExiledDoesNotTrigger() {
++        // Intervening-if (CR 603.4): with no card exiled with it, the ability does not trigger at all.
++        addCard(Zone.BATTLEFIELD, playerA, redemptor, 1); // never cast, nothing exiled with it
++        addCard(Zone.GRAVEYARD, playerA, ghoul, 1);
++
++        attack(1, playerA, redemptor, playerB);
++        checkStackSize("no trigger when nothing is exiled with it", 1, PhaseStep.DECLARE_ATTACKERS, playerA, 0);
++
++        setStopAt(1, PhaseStep.END_TURN);
++        setStrictChooseMode(true);
++        execute();
++
++        assertGraveyardCount(playerA, ghoul, 1);
++        assertPowerToughness(playerA, redemptor, 4, 4);
++    }
++
++    @Test
++    public void testCastNoAdditionalCostThenAttackDoesNotTrigger() {
++        addCard(Zone.HAND, playerA, redemptor, 1);
++        addCard(Zone.GRAVEYARD, playerA, ghoul, 1);
++        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 5);
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, redemptor);
++        setChoice(playerA, TestPlayer.CHOICE_SKIP); // choose not to exile anything
++
++        attack(3, playerA, redemptor, playerB);
++        checkStackSize("no trigger when nothing is exiled with it", 3, PhaseStep.DECLARE_ATTACKERS, playerA, 0);
++
++        setStopAt(3, PhaseStep.END_TURN);
++        setStrictChooseMode(true);
++        execute();
++
++        assertGraveyardCount(playerA, ghoul, 1);
++        assertPowerToughness(playerA, redemptor, 4, 4);
++    }
++
+     @Test
+     public void testCastAdditionalCostAndTrigger() {
+         addCard(Zone.HAND, playerA, redemptor, 1);
+@@ -42,6 +79,7 @@ public class RedemptorDreadnoughtTest extends CardTestPlayerBase {
+         setChoice(playerA, ghoul); // exile Warpath Ghoul
+ 
+         attack(3, playerA, redemptor, playerB);
++        checkStackSize("trigger when a card is exiled with it", 3, PhaseStep.DECLARE_ATTACKERS, playerA, 1);
+ 
+         setStopAt(3, PhaseStep.END_TURN);
+         setStrictChooseMode(true);
+diff --git a/Mage/src/main/java/mage/abilities/effects/common/HideawayPlayEffect.java b/Mage/src/main/java/mage/abilities/effects/common/HideawayPlayEffect.java
+index 9dbcfb8aac..88502e7ce9 100644
+--- a/Mage/src/main/java/mage/abilities/effects/common/HideawayPlayEffect.java
++++ b/Mage/src/main/java/mage/abilities/effects/common/HideawayPlayEffect.java
+@@ -32,7 +32,7 @@ public class HideawayPlayEffect extends OneShotEffect {
+         super(Outcome.Benefit);
+         this.playOne = playOne;
+         if (playOne) {
+-            staticText = "if there are cards exiled with it, you may play one of them without paying its mana cost";
++            staticText = "you may play one of them without paying its mana cost";
+         } else {
+             staticText = "you may play the exiled card without paying its mana cost";
+         }
