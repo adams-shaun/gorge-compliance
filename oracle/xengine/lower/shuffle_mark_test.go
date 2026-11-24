@@ -34,3 +34,32 @@ func TestMarkShuffles(t *testing.T) {
 		}
 	}
 }
+
+// TestGroupsDependOnShuffle: a play or cast after a shuffle is replayable only
+// when the seat already held the card at the shuffle (a library shuffle does
+// not move the hand) or the shuffling resolution fetched it (a search puts the
+// card in hand before the shuffle). A card drawn after the shuffle is the
+// runner's own draw (CR 701.24a), so naming the live object is not.
+func TestGroupsDependOnShuffle(t *testing.T) {
+	held := game.Digest{Players: []game.PlayerDigest{{Seat: 0, Hand: []string{"Island"}}}}
+	empty := game.Digest{Players: []game.PlayerDigest{{Seat: 0}}}
+	play := func(ref string) []game.Entry {
+		return []game.Entry{{Kind: "priority", Picks: []game.Pick{{Kind: "play_land", Ref: ref}}}}
+	}
+	cast := func(ref string) []game.Entry {
+		return []game.Entry{{Kind: "priority", Picks: []game.Pick{{Kind: "cast", Ref: ref}}}}
+	}
+	if groupsDependOnShuffle(play("p0:Island#2"), held, nil) {
+		t.Error("a card the seat held at the shuffle was cut")
+	}
+	if !groupsDependOnShuffle(play("p0:Island#2"), empty, nil) {
+		t.Error("a card drawn after the shuffle was not cut")
+	}
+	if groupsDependOnShuffle(cast("p0:Forest"), empty, map[string]bool{"Forest": true}) {
+		t.Error("a card the shuffling resolution fetched was cut")
+	}
+	// A pass names no card and cannot depend on the shuffle.
+	if groupsDependOnShuffle([]game.Entry{{Kind: "priority", Picks: []game.Pick{{Kind: "pass"}}}}, empty, nil) {
+		t.Error("a pass was treated as a shuffled card ref")
+	}
+}

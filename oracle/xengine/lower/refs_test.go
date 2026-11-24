@@ -67,3 +67,32 @@ func TestLowerPlayStepUnlessAnswer(t *testing.T) {
 	}
 	t.Fatalf("no step 0 (play) snapshot")
 }
+
+// TestPickStringDividePlayer: a CR 601.2d division option over a player carries
+// no object (the engine keys it by Option.Player) and its label is the live
+// game's seat-facing name ("W-1"), which the runner's a/b seats do not offer.
+// The seat is the one spelling both engines agree on.
+func TestPickStringDividePlayer(t *testing.T) {
+	for _, tc := range []struct {
+		name string
+		m    seatMap
+		p    game.Pick
+		want string
+	}{
+		{"player 1", seatMap{}, game.Pick{Kind: "divide", Player: 1, Label: "W-1"}, "p1"},
+		{"player 0", seatMap{}, game.Pick{Kind: "divide", Player: 0, Label: "R-0"}, "p0"},
+		{"swapped seats", seatMap{swap: true}, game.Pick{Kind: "divide", Player: 1, Label: "W-1"}, "p0"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			got, ok := tc.m.pickString(tc.p)
+			if !ok || got != tc.want {
+				t.Fatalf("pickString(%+v) = %q, %v; want %q, true", tc.p, got, ok, tc.want)
+			}
+		})
+	}
+	// A divide over a permanent still names the object, not its owner.
+	p := game.Pick{Kind: "divide", Obj: 42, Player: 0, Label: "Grizzly Bears", Ref: "p0:Grizzly Bears"}
+	if got, ok := (seatMap{}).pickString(p); !ok || got != "p0:Grizzly Bears" {
+		t.Fatalf("divide over an object = %q, %v; want the ref", got, ok)
+	}
+}

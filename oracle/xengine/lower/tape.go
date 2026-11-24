@@ -244,6 +244,34 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 		}
 		return true
 	}
+	// shuffleZone is the pre-action digest of the latest entry whose engine
+	// draws are not accounted for (a shuffle or a random pick), and
+	// shuffleMoved the card names that entry's own picks named (a search puts
+	// the fetched card in hand before the shuffle). The runner's seeded RNG
+	// cannot land where the live game did (CR 701.24a), so a later play or cast
+	// that names a card the shuffle could have drawn into hand cannot be
+	// replayed; one the seat already held at the shuffle, or one this
+	// resolution fetched, is still there.
+	var shuffleZone *game.Digest
+	shuffleMoved := map[string]bool{}
+	// passes is the live game's consecutive priority passes since its last
+	// reset, which the digest does not carry: a resolution, a step advance or
+	// any other priority action resets it to zero. -1 means a resolve step hid
+	// the exact count; an unknown non-zero count is never safe to drop across.
+	passes := 0
+	counted := func(op string, taps bool) {
+		if taps || op != "pass" {
+			passes = 0
+			return
+		}
+		if passes < 0 {
+			return
+		}
+		passes++
+		if passes >= 2 {
+			passes = 0
+		}
+	}
 	for i := first; i < len(entries); {
 		j := i + 1
 		for j < len(entries) && isAsk(entries[j]) {
@@ -258,6 +286,19 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 			l.refuse(i, why, owedAt, owedSteps)
 			return
 		}
+		// A play or cast after an unaccounted shuffle names the live game's
+		// exact object ("p0:Island#34"). The runner's seeded shuffle draws a
+		// different Island into the hand, so the step it names is not offered
+		// (Weftwalking: "play p0:Island#34 not offered" while seven Play Island
+		// options were offered). Cutting here keeps every emitted step
+		// replayable and lets the followers use the prefix.
+		if shuffleZone != nil && groupsDependOnShuffle(entries[i:j], *shuffleZone, shuffleMoved) {
+			l.refuse(i, unsupported("shuffled_ref"), owedAt, owedSteps)
+			return
+		}
+		if d, moved, ok := groupShuffle(entries[i:j]); ok {
+			shuffleZone, shuffleMoved = &d, moved
+		}
 		if len(owed) == 0 && len(steps) > 0 && quiet(entries[i:j]) {
 			if isPaidStep(steps[len(steps)-1].Op) {
 				if next, ok := l.afterEntry(j, entries); ok &&
@@ -267,6 +308,15 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 					// and the stack unchanged on did not happen: it is not a
 					// replayable step (a refused Spree cast, for example). A
 					// real action pushes an object, so the stack top changes.
+					// Committing it still reset the pass count the digest
+					// cannot show, so dropping it is only safe when the count
+					// is already zero; otherwise the next pass would look like
+					// the second in the chain and advance the step early
+					// (Hypnotic Sprite's refused cast).
+					if passes != 0 {
+						l.refuse(i, unsupported("pass_chain"), owedAt, owedSteps)
+						return
+					}
 					i = j
 					continue
 				}
@@ -319,20 +369,30 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 				l.Item.Payment = append(l.Item.Payment, payments...)
 			}
 			l.pushFunding(fund)
+			if fund.before {
+				passes = 1 // the funding tap reset the count before the pass it precedes
+			}
 			l.Item.Steps = append(l.Item.Steps, *resolve)
 			l.StepEntry = append(l.StepEntry, resolveEnd-1)
 			l.Item.Payment = append(l.Item.Payment, "")
 			l.markShuffles(m, entries[i:resolveEnd], len(l.Item.Steps)-1)
+			// The resolve op passes priority and may answer several consecutive
+			// passes; the count it leaves is not recoverable from its steps.
+			passes = -1
 			i = resolveEnd
 			continue
 		}
 		l.pushFunding(fund)
+		if fund.before {
+			passes = 1 // the funding tap reset the count before the pass it precedes
+		}
 		if steps[mainStep].Op == "pass" && len(answers) > 0 && !settlesTwice(entries[i:j]) {
 			owed, owedAt, owedSteps = answers, i, len(l.Item.Steps)
 		} else if len(answers) > 0 {
 			attach(&steps[mainStep], answers, entries[i:j])
 		}
 		stepEntry[mainStep] = j - 1
+		counted(steps[mainStep].Op, len(steps) > 1 || len(fund.taps) > 0 && !fund.before)
 		l.markShuffles(m, entries[i:j], len(l.Item.Steps)+mainStep)
 		l.Item.Steps = append(l.Item.Steps, steps...)
 		l.StepEntry = append(l.StepEntry, stepEntry...)
@@ -810,6 +870,99 @@ func rngShuffle(e game.Entry, after game.Digest) bool {
 		}
 	}
 	return false
+}
+
+// groupShuffle reports a group that consumed engine randomness the tape does
+// not account for, with the state before its decision and the card names its
+// own picks named. answersOf's rng gate is bypassed in a window or span, so
+// the group is lowered; the runner's seeded order is still its own.
+func groupShuffle(g []game.Entry) (game.Digest, map[string]bool, bool) {
+	shuffles := false
+	for _, e := range g {
+		if e.RNG > 0 && !rngAccounted(e) {
+			shuffles = true
+			break
+		}
+	}
+	if !shuffles || len(g) == 0 {
+		return game.Digest{}, nil, false
+	}
+	moved := map[string]bool{}
+	for _, e := range g {
+		for _, p := range e.Picks {
+			if n := refName(p.Ref); n != "" {
+				moved[n] = true
+			}
+		}
+	}
+	return g[0].Digest, moved, true
+}
+
+// groupsDependOnShuffle reports a group whose play or cast names a card the
+// shuffle could have drawn from the shuffled library into hand. A card the
+// seat already held at the shuffle, or one this resolution moved (a search
+// puts the fetched card into hand before it shuffles), is still there in the
+// runner; a card drawn after the shuffle is the runner's own draw (CR
+// 701.24a), so the live object it names may not be in hand.
+func groupsDependOnShuffle(g []game.Entry, before game.Digest, moved map[string]bool) bool {
+	if len(g) == 0 {
+		return false
+	}
+	for _, p := range g[0].Picks {
+		if p.Kind != "play_land" && p.Kind != "cast" {
+			continue
+		}
+		seat, name := refSeatName(p.Ref)
+		if name == "" || !seatHeld(before, seat, name) && !moved[name] {
+			return true
+		}
+	}
+	return false
+}
+
+// seatHeld reports whether seat's pre-shuffle digest lists name in a zone a
+// library shuffle does not move: hand, graveyard, exile or command. The deck's
+// own order is the engine's, but a card the seat already held stays put.
+func seatHeld(d game.Digest, seat int, name string) bool {
+	for _, p := range d.Players {
+		if p.Seat != seat {
+			continue
+		}
+		for _, z := range [][]string{p.Hand, p.Graveyard, p.Exile, p.Command} {
+			if slices.Contains(z, name) {
+				return true
+			}
+		}
+		return false
+	}
+	return false
+}
+
+// refName is the card name in a runner ref ("p1:Island#34" -> "Island").
+func refName(r string) string {
+	_, name := refSeatName(r)
+	return name
+}
+
+// refSeatName splits a runner card ref into its owner seat and card name. ok is
+// false for an empty or non-seat ref.
+func refSeatName(r string) (seat int, name string) {
+	if len(r) < 3 || r[0] != 'p' {
+		return 0, ""
+	}
+	i := strings.IndexByte(r, ':')
+	if i < 2 {
+		return 0, ""
+	}
+	n, err := strconv.Atoi(r[1:i])
+	if err != nil {
+		return 0, ""
+	}
+	name = r[i+1:]
+	if j := strings.IndexByte(name, '#'); j >= 0 {
+		name = name[:j]
+	}
+	return n, name
 }
 
 // answersOf is the entries' asks as answers, in tape order; the first entry
