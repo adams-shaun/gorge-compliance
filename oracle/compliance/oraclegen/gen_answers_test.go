@@ -427,6 +427,9 @@ func TestXMQueueCensus(t *testing.T) {
 		kind, label, want string
 	}{
 		{"search", "Wastes", "target"},
+		// The kind-level fallback for the open-ended group exile costs;
+		// pickQueue's fixed-size gate sends a counted exile cost to the
+		// choice queue (TestExileCostFixedSizeRidesChoiceQueue).
 		{"exilecost", "Wastes", "target"},
 		{"trigger_cost_pay", "Pay {2}", "skip"},
 		{"mana", "Pay 3 life", "skip"},
@@ -535,5 +538,47 @@ func TestLoneNamePickIsScripted(t *testing.T) {
 				t.Fatalf("XAnswers = %#v, want %#v", got, want)
 			}
 		})
+	}
+}
+
+// TestExileCostFixedSizeRidesChoiceQueue pins the shape gate for a fixed-size
+// exile cost: XMage pays ExileFromGraveCost/ExileTargetCost/ExileFromHandCost
+// with getTargets().choose -> player.choose, which TestPlayer serves from
+// makeChoose (the CHOICE queue). A multi-card selection is one makeChoose
+// dialog, so its picks are joined with '^'. An open-ended (1+) group exile
+// keeps the target fallback its template re-scripts.
+func TestExileCostFixedSizeRidesChoiceQueue(t *testing.T) {
+	single := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", Min: 1, Max: 1,
+		Picks: []string{"Forest"}, PickIdx: []int{0}, PickRefs: []string{"p0:Forest"},
+		ObjectPicks: []string{"p0:Forest"}, PickKinds: []string{"exilecost"}}
+	if got := pickQueue(single, 0, "Forest", false); got != "choice" {
+		t.Fatalf("fixed exile pick queue = %q, want choice", got)
+	}
+	if got := routed(t, []rules.OracleDecision{single}, 1); !reflect.DeepEqual(got, []XAnswer{{0, "choice", "Forest"}}) {
+		t.Fatalf("fixed exile pick answers = %v", got)
+	}
+	multi := single
+	multi.Min, multi.Max = 2, 2
+	multi.Picks = []string{"Forest", "Island"}
+	multi.PickIdx = []int{0, 1}
+	multi.PickRefs = []string{"p0:Forest", "p0:Island"}
+	multi.ObjectPicks = []string{"p0:Forest", "p0:Island"}
+	multi.PickKinds = []string{"exilecost", "exilecost"}
+	if !allChoiceQueue(multi) {
+		t.Fatal("a fixed-size two-card exile cost is one makeChoose dialog")
+	}
+	if got := routed(t, []rules.OracleDecision{multi}, 1); !reflect.DeepEqual(got, []XAnswer{{0, "choice", "Forest^Island"}}) {
+		t.Fatalf("fixed two-card exile answers = %v", got)
+	}
+	group := single
+	group.Min, group.Max = 1, 3
+	group.Options = 2
+	group.Picks = []string{"Forest", "Island"}
+	group.PickIdx = []int{0, 1}
+	group.PickRefs = []string{"p0:Forest", "p0:Island"}
+	group.ObjectPicks = []string{"p0:Forest", "p0:Island"}
+	group.PickKinds = []string{"exilecost", "exilecost"}
+	if got := pickQueue(group, 0, "Forest", false); got != "target" {
+		t.Fatalf("open group exile pick queue = %q, want the target fallback", got)
 	}
 }

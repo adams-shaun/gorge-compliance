@@ -2404,13 +2404,15 @@ func modeNumberFor(d rules.OracleDecision, k int, modes map[string]int) (int, bo
 
 // allChoiceQueue reports whether every pick in a decision reaches XMage's
 // choice queue (makeChoose). A decision with a target or skipped pick is not
-// one makeChoose dialog and must not be joined with '^'.
+// one makeChoose dialog and must not be joined with '^'. It asks pickQueue,
+// the same per-pick route the answer emission uses, so a shape-gated route
+// (a fixed-size exile cost) is joined exactly like a kind-level choice.
 func allChoiceQueue(d rules.OracleDecision) bool {
 	if d.Retarget {
 		return false
 	}
 	for k, label := range d.Picks {
-		if xmQueue(pickKind(d, k), label) != "choice" {
+		if pickQueue(d, k, label, false) != "choice" {
 			return false
 		}
 	}
@@ -3110,12 +3112,21 @@ func pickKind(d rules.OracleDecision, k int) string {
 // label text, is the authority -- the mechanism the census test pins.
 func xmQueue(kind, label string) string {
 	switch kind {
-	case "search", "exilecost":
-		// A library search (TargetCardInLibrary) and an exile-from-graveyard
-		// cost (TargetCardInYourGraveyard) are answered from the target
+	case "search":
+		// A library search (TargetCardInLibrary) is answered from the target
 		// queue: measured on the std pass, 47 search carriers (Shared Roots,
-		// Nature's Rhythm, Solemn Simulacrum, ...) and Feed the Cycle /
-		// Soaring Stoneglider agree only with a target answer.
+		// Nature's Rhythm, Solemn Simulacrum, ...) agree only with a target
+		// answer.
+		return "target"
+	case "exilecost":
+		// A fixed-size exile COST is not a TargetXxx target selection:
+		// ExileFromGraveCost/ExileTargetCost/ExileFromHandCost pay with
+		// getTargets().choose() -> TargetImpl.choose -> player.choose, which
+		// TestPlayer serves from makeChoose, the CHOICE queue (Ludevic's
+		// ExileXFromYourGraveCost left a target answer unused). pickQueue
+		// routes that shape; the open-ended group exile costs keep the target
+		// queue here and are re-scripted by activate_group_exile.go. The
+		// census pins this kind-level fallback.
 		return "target"
 	case "trigger_cost_pay", "trigger_cost_pay_manual":
 		return "skip"
@@ -3934,6 +3945,16 @@ func pickQueue(d rules.OracleDecision, k int, label string, bolster bool) string
 		// as a choose ask, so a "choice" answer is never consumed and the
 		// original target survives.
 		return "target"
+	}
+	if pickKind(d, k) == "exilecost" && d.Min > 0 && d.Min == d.Max {
+		// A fixed-size exile cost is a real TargetCard selection paid through
+		// Target.choose (makeChoose, the CHOICE queue), however few cards are
+		// legal: ExileXFromYourGraveCost's singleton ExileFromGraveCost, an
+		// OrCost's "exile two cards from your graveyard" arm, and
+		// ExileTargetCost/ExileFromHandCost all pay that way. An open-ended
+		// (1+) group exile keeps xmQueue's target fallback and the template's
+		// own catalogue/choice re-script.
+		return "choice"
 	}
 	q := xmQueue(pickKind(d, k), label)
 	if q == "target" && pickKind(d, k) == "search" && k < len(d.PickRefs) {

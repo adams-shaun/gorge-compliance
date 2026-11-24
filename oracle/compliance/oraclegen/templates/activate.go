@@ -749,11 +749,37 @@ func addActivationCostAnswers(answers [][]oraclegen.XAnswer, step int, cost, nam
 		case "ExileFromGrave", "ExileCtrlOrGrave", "CollectEvidence", "Exile":
 			// A self-named grave exile (Say Its Name's "two other cards
 			// named Say Its Name") gets no catalogue answer: gorge's observed
-			// exilecost picks already ride XMage's target queue (xmQueue).
+			// exilecost picks already ride XMage's choice queue (pickQueue).
 			// Its companion "exile this card" token gets none either: a stray
 			// choice is consumed first by that named target and rejected.
 			if head == "ExileFromGrave" && selfZoneCost(tok) && hasNamedSelfExile(cost, name) {
 				break
+			}
+			// Craft's material is the one exile cost XMage answers from the
+			// TARGET queue (costAnswerKind), so the generic routing's choice
+			// answer is superseded here, not duplicated. Use the observed
+			// material pick when there is one (the same ref the routing
+			// emitted) and the catalogue fixture only when gorge paid it
+			// silently.
+			if head == "ExileCtrlOrGrave" && craftCost(cost) {
+				observed := false
+				for _, d := range decisions {
+					if d.Step != step || d.Seat != 0 || d.Kind != "choose_n" {
+						continue
+					}
+					for i, kind := range d.PickKinds {
+						if kind != "exilecost" {
+							continue
+						}
+						observed = true
+						if i < len(d.Picks) {
+							picks = append(picks, observedCostPick(d, i))
+						}
+					}
+				}
+				if observed {
+					break
+				}
 			}
 			picks = activationCostFixturesX(tok, xv)
 		case "SubCounter", "RemoveAnyCounter":
@@ -836,6 +862,13 @@ func addActivationCostAnswers(answers [][]oraclegen.XAnswer, step int, cost, nam
 		}
 		kind := costAnswerKind(cost, head)
 		for _, pick := range picks {
+			if kind == "target" {
+				// The cost's own answer kind is authoritative: a generic
+				// routing answer for the same object on the choice queue
+				// (Craft material's exilecost pick) is superseded, never left
+				// to be consumed by a later dialog.
+				answers[step] = dropChoiceForCostTarget(answers[step], 0, pick)
+			}
 			if isTokenPick(pick) {
 				// Token picks repeat (one answer per token), so they
 				// bypass the dedupe below.
@@ -863,6 +896,32 @@ func addActivationCostAnswers(answers [][]oraclegen.XAnswer, step int, cost, nam
 		answers[step] = append(answers[step], oraclegen.XAnswer{Seat: 0, Kind: "choice", Value: "X=" + strconv.Itoa(n)})
 	}
 	addTapXTypeAnswers(answers, step, cost, decisions)
+}
+
+// dropChoiceForCostTarget removes the choice answer the generic routing emits
+// for a cost the template answers from the TARGET queue (Craft material).
+// It matches the pick's plain name and an @alias form, so a same-name copy's
+// alias is superseded too.
+func dropChoiceForCostTarget(as []oraclegen.XAnswer, seat int, name string) []oraclegen.XAnswer {
+	if name == "" {
+		return as
+	}
+	for i, a := range as {
+		if a.Seat != seat || a.Kind != "choice" {
+			continue
+		}
+		v := strings.TrimPrefix(a.Value, "@")
+		if j := strings.IndexByte(v, '#'); j >= 0 {
+			v = v[:j]
+		}
+		if j := strings.IndexByte(v, ':'); j >= 0 {
+			v = v[j+1:]
+		}
+		if strings.EqualFold(v, name) {
+			return append(as[:i], as[i+1:]...)
+		}
+	}
+	return as
 }
 
 // dropPlainNameAnswer removes the plain-name choice XAnswersForScenario emits
