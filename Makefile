@@ -20,7 +20,11 @@ GO_TEST_FLAGS ?= -p=2
 # 33704ee4fe = 7a68b79c92 + fork PR #13 (Hellfire deals 3 when no creature died, X = 0, CR 608.2c).
 # fdde07931f = b34a6018 (fork gorge) + fork PR #18 (the imprinted mana value X cost adjuster reads X = 0, not
 # Integer.MAX_VALUE, when nothing is imprinted, CR 107.3c: Soul Foundry, Elite Arcanist, Prototype Portal).
-XMAGE_REF  ?= fdde07931f5255721711a9f1ccfd991edcc269b8
+# 269f91f2cf = fdde07931f + the playable check credits the untapped artifacts and creatures that can pay a
+# waterbend cost's generic mana (CR 701.67a; CR 701.67b caps it to the waterbend part): Katara, Water Tribe's Hope
+# with an empty pool, Waterbend {X}, X = 1, tapping Katara herself; also WaterbendersRestoration, CrashingWave and
+# FoggySwampVisions. Fork branch fix/waterbend-playable, WaterbendTest.testXFromEmptyPool.
+XMAGE_REF  ?= 269f91f2cf70edd21ab76dc2547cacebf3f1550d
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage

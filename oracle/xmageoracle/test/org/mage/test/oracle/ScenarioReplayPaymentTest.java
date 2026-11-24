@@ -372,7 +372,34 @@ public final class ScenarioReplayPaymentTest {
         colour.setAccessible(true);
         equal("Red", colour.invoke(null, "R"));
         equal("Colorless", colour.invoke(null, "1"));
+        Method waterbend = cls.getDeclaredMethod("waterbendTapName", String.class);
+        waterbend.setAccessible(true);
+        equal("Katara, Water Tribe's Hope", waterbend.invoke(null, "Tap Katara, Water Tribe's Hope to waterbend for 1"));
+        equal("Ally Token", waterbend.invoke(null, "Tap Ally Token to waterbend for 1"));
+        for (String no : new String[] {"Tap Elves for mana", "Tap  to waterbend for 1", "Island", null}) {
+            if (waterbend.invoke(null, no) != null) {
+                throw new AssertionError("label parsed as a waterbend tap: " + no);
+            }
+        }
         System.out.println("PASS payment-tap labels parse to the permanent and its contribution");
+    }
+
+    private static void testWaterbendXInference() {
+        com.google.gson.JsonArray taps = new com.google.gson.JsonArray();
+        com.google.gson.JsonObject tap = new com.google.gson.JsonObject();
+        tap.addProperty("seat", 0);
+        tap.addProperty("kind", "choice");
+        tap.addProperty("value", "Tap Katara, Water Tribe's Hope to waterbend for 1");
+        taps.add(tap);
+        equal(1, ScenarioReplay.waterbendXFromAnswers(taps, ""));
+        equal(3, ScenarioReplay.waterbendXFromAnswers(taps, "UU"));
+        com.google.gson.JsonArray explicit = new com.google.gson.JsonArray();
+        com.google.gson.JsonObject amount = new com.google.gson.JsonObject();
+        amount.addProperty("kind", "amount");
+        amount.addProperty("value", "4");
+        explicit.add(amount);
+        equal(0, ScenarioReplay.waterbendXFromAnswers(explicit, ""));
+        System.out.println("PASS a waterbend X comes from its tap picks and pool spend, not an explicit amount");
     }
 
     /** An improvise-shaped special action (rule text "Improvise (...)", an
@@ -530,6 +557,7 @@ public final class ScenarioReplayPaymentTest {
 
     public static void main(String[] args) throws Exception {
         testTapPaymentPickParsing();
+        testWaterbendXInference();
         testImproviseTapIsTakenAsSpecialAction();
         testDelveExilePickIsTakenAsSpecialAction();
         testDelveTwoPicksTakeOnePerActivation();
