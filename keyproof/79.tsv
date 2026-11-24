@@ -33,8 +33,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 792da586-a687-428c-a10e-75431249df5b	cast	cast-resolve	agreed	-	FX	scen	2	0	Rayblade Trooper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 792da586-a687-428c-a10e-75431249df5b	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 792da586-a687-428c-a10e-75431249df5b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Rayblade Trooper/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-792e1072-00bf-4f63-b956-5f20cdf09f11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-792e1072-00bf-4f63-b956-5f20cdf09f11	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+792e1072-00bf-4f63-b956-5f20cdf09f11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-recruiter:f0t0:s1,f:xs:XP:goblin-recruiter:f0t0:s1	-	-	-	ea3140b6974b	-	6dd46c2db893	-	-	2026-11-24	xproof
+792e1072-00bf-4f63-b956-5f20cdf09f11	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-recruiter:f0t0:s1,f:xs:XP:goblin-recruiter:f0t0:s1	-	-	-	ea3140b6974b	-	6dd46c2db893	-	-	2026-11-24	xproof
 792f8235-f23b-4858-bdd4-c7a186b7a470	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arcane-proxy:f0t0:s1,f:xs:XP:arcane-proxy:f0t0:s1	-	-	-	ae86f6029288	-	bde1d1ace9e9	-	-	2026-11-24	xproof
 792f8235-f23b-4858-bdd4-c7a186b7a470	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arcane-proxy:f0t0:s1,f:xs:XP:arcane-proxy:f0t0:s1	-	-	-	ae86f6029288	-	bde1d1ace9e9	-	-	2026-11-24	xproof
 79301ae1-8c9c-4723-be21-dc27e1646f35	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -97,8 +97,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7972d118-c105-4b33-8c3b-ec85da538471	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7975cb9d-d37e-44f8-9614-86d2ad453c35	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chainer-s-edict:cast:s1,f:xs:XP:chainer-s-edict:cast:s1	-	-	-	fc71ca68c5ac	-	afacc2ca576f	-	-	2026-11-24	xproof
 79770e65-740a-44c7-bea2-a24e6a722c22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79791c7f-dd33-406a-8c2e-6b722abd5161	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79791c7f-dd33-406a-8c2e-6b722abd5161	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+79791c7f-dd33-406a-8c2e-6b722abd5161	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:broken-fall:cast:s1,f:xs:XP:broken-fall:cast:s1	-	-	-	ea3140b6974b	-	07e3117d0c23	-	-	2026-11-24	xproof
+79791c7f-dd33-406a-8c2e-6b722abd5161	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 7979bf83-5091-4e62-8885-ca1833a97306	cast	cast-resolve	agreed	-	X	scen	1	0	Choco, Seeker of Paradise/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7979bf83-5091-4e62-8885-ca1833a97306	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Choco, Seeker of Paradise/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7979bf83-5091-4e62-8885-ca1833a97306	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Choco, Seeker of Paradise/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79bf98c8-1169-477d-838e-2ebc0fa396dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79bf98c8-1169-477d-838e-2ebc0fa396dc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79bfef02-3586-424a-aff9-a6ec0d4f1135	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79bfef02-3586-424a-aff9-a6ec0d4f1135	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+79bfef02-3586-424a-aff9-a6ec0d4f1135	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 79c90a68-1c31-4e16-be53-1304132da80f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sigiled-sentinel:f0t0:s1,f:xs:XP:sigiled-sentinel:f0t0:s1	-	-	-	ae86f6029288	-	7c49f7385265	-	-	2026-11-24	xproof
 79c90a68-1c31-4e16-be53-1304132da80f	f0/t0	ChangesZone/Backup	agreed	-	FX	start	2	0	x:xs:XP:sigiled-sentinel:f0t0:s1,f:xs:XP:sigiled-sentinel:f0t0:s1	-	-	-	ae86f6029288	-	7c49f7385265	-	-	2026-11-24	xproof
 79cd09e8-d738-47c0-9473-b6281bec6935	cast	cast-resolve	agreed	-	X	scen	1	0	Goblin Surprise/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

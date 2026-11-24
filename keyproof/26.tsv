@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2650d2d5-576e-4b9a-95ac-0f5307f1580f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2650d2d5-576e-4b9a-95ac-0f5307f1580f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26516566-c837-428d-bc81-582c74da2c28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-265204a9-0ce2-4a0a-a9ea-8537cd94b079	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-265204a9-0ce2-4a0a-a9ea-8537cd94b079	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+265204a9-0ce2-4a0a-a9ea-8537cd94b079	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pentagram-of-the-ages:cast:s1,f:xs:XP:pentagram-of-the-ages:cast:s1	-	-	-	ea3140b6974b	-	60a6acc0f9b2	-	-	2026-11-24	xproof
+265204a9-0ce2-4a0a-a9ea-8537cd94b079	f0/a0	ChooseSource	agreed	-	FX	start	2	0	x:xs:XP:pentagram-of-the-ages:f0a0:s1,f:xs:XP:pentagram-of-the-ages:f0a0:s1	-	-	-	ea3140b6974b	-	60a6acc0f9b2	-	-	2026-11-24	xproof
 265236d1-d96c-4424-835e-a0fe91c41170	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2659c0ea-9ae0-4be3-b9f7-5a38230815ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2659c0ea-9ae0-4be3-b9f7-5a38230815ad	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -86,8 +86,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2692dd66-c200-4d0b-9427-30deaa2342ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2692dd66-c200-4d0b-9427-30deaa2342ab	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 26957a44-6155-4688-a850-a3b49b011a9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26957a44-6155-4688-a850-a3b49b011a9f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26957a44-6155-4688-a850-a3b49b011a9f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+26957a44-6155-4688-a850-a3b49b011a9f	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+26957a44-6155-4688-a850-a3b49b011a9f	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 26966ecb-15d3-47e5-ab63-e38510c87ecc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2699005b-a471-429f-a9d8-fbf2077ee2fd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2699005b-a471-429f-a9d8-fbf2077ee2fd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

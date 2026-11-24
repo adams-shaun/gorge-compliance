@@ -18,8 +18,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4916773d-5ccb-48ff-8aa3-09771ae88e81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49199997-65cd-4cb9-bdd6-74c93c1f6b5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 491c6f69-9b75-4d5d-b41f-a14b2fbfdd07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-491c6f69-9b75-4d5d-b41f-a14b2fbfdd07	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-491c6f69-9b75-4d5d-b41f-a14b2fbfdd07	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+491c6f69-9b75-4d5d-b41f-a14b2fbfdd07	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+491c6f69-9b75-4d5d-b41f-a14b2fbfdd07	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 4920492e-c210-4d99-ace9-184d65e697f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4920492e-c210-4d99-ace9-184d65e697f5	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 492108b7-f831-4739-925f-c3a419859c52	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 495348d7-bc11-4209-8b0f-72db2e6c6993	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 495348d7-bc11-4209-8b0f-72db2e6c6993	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4954181c-cb46-4cac-adc3-2c8b7693a211	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4954181c-cb46-4cac-adc3-2c8b7693a211	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4954181c-cb46-4cac-adc3-2c8b7693a211	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:abyssal-gatekeeper:f0t0:s1,f:xs:XP:abyssal-gatekeeper:f0t0:s1	-	-	-	ea3140b6974b	-	6a2bd8fc9426	-	-	2026-11-24	xproof
 49554441-bb48-4829-b8d6-55e687a6c2e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:declaration-in-stone:cast:s1,f:xs:XP:declaration-in-stone:cast:s1	-	-	-	d864b561c9cb	-	db991ef382ad	-	-	2026-11-24	xproof
 4957c166-9734-4ba0-a4b9-2a248c0ff38f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4957c166-9734-4ba0-a4b9-2a248c0ff38f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:avenging-huntbonder:f0t0:s1,f:xs:XP:avenging-huntbonder:f0t0:s1	-	-	-	78d0801f2bf1	-	a351dffa96ad	-	-	2026-11-24	xproof

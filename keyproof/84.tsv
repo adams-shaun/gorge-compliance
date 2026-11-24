@@ -50,8 +50,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 842e3835-fff3-4684-bfd1-e7064a1fd2e6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 842e3835-fff3-4684-bfd1-e7064a1fd2e6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8432729e-5fd4-4661-8b79-e41b1d03eb7b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:travel-preparations:cast:s1,f:xs:XP:travel-preparations:cast:s1	-	-	-	d864b561c9cb	-	bca7d3132372	-	-	2026-11-24	xproof
-8434bdb1-286b-484e-904e-946d074614e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8434bdb1-286b-484e-904e-946d074614e7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8434bdb1-286b-484e-904e-946d074614e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emberwilde-caliph:cast:s1,f:xs:XP:emberwilde-caliph:cast:s1	-	-	-	ea3140b6974b	-	b9b3200e3015	-	-	2026-11-24	xproof
+8434bdb1-286b-484e-904e-946d074614e7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 843c8485-21b8-45ef-9a0c-4967f07278bb	cast	cast-resolve	agreed	-	X	scen	1	0	Trick Shot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 843f3373-b8ef-416c-9163-aa1aa6b4a51d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greataxe:cast:s1,f:xs:XP:greataxe:cast:s1	-	-	-	d864b561c9cb	-	9fc32ba6b9cc	-	-	2026-11-24	xproof
 843f3373-b8ef-416c-9163-aa1aa6b4a51d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,8 +135,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 84b08b55-0623-4202-98c6-1756d3c1bb8f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bandit's Haul/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84b08b55-0623-4202-98c6-1756d3c1bb8f	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Bandit's Haul/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84b08b55-0623-4202-98c6-1756d3c1bb8f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bandit's Haul/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-84b1d4e1-ca8a-4eed-b5c4-364876938aee	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-84b1d4e1-ca8a-4eed-b5c4-364876938aee	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+84b1d4e1-ca8a-4eed-b5c4-364876938aee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:harmattan-efreet:cast:s1,f:xs:XP:harmattan-efreet:cast:s1	-	-	-	ea3140b6974b	-	c00c47ea6df4	-	-	2026-11-24	xproof
+84b1d4e1-ca8a-4eed-b5c4-364876938aee	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:harmattan-efreet:f0a0:s1,f:xs:XP:harmattan-efreet:f0a0:s1	-	-	-	ea3140b6974b	-	c00c47ea6df4	-	-	2026-11-24	xproof
 84b28100-ad70-4a78-b557-99f5ef6126a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84b55e6b-5ce3-49af-95fe-46c029e0260c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84b55e6b-5ce3-49af-95fe-46c029e0260c	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:goblin-diplomats:f0a0:s1,f:xs:XP:goblin-diplomats:f0a0:s1	-	-	-	d864b561c9cb	-	2c167f24b0db	-	-	2026-11-24	xproof

@@ -38,8 +38,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4734b73e-104c-4b25-ab52-0145f361c9d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4734b73e-104c-4b25-ab52-0145f361c9d1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 473c9f27-2091-4d87-b279-64b3662c9af8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-473c9f27-2091-4d87-b279-64b3662c9af8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-473c9f27-2091-4d87-b279-64b3662c9af8	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+473c9f27-2091-4d87-b279-64b3662c9af8	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+473c9f27-2091-4d87-b279-64b3662c9af8	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 473da1b6-232b-4428-a66d-30262246b47a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emeria-shepherd:cast:s1,f:xs:XP:emeria-shepherd:cast:s1	-	-	-	d864b561c9cb	-	0c8605c3f753	-	-	2026-11-24	xproof
 473da1b6-232b-4428-a66d-30262246b47a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4741d842-12e6-4a8c-96b1-9e68c7074874	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

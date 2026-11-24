@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b8b5812-73bd-453e-bdff-aad1fafa9226	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Samurai's Katana/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b8b5812-73bd-453e-bdff-aad1fafa9226	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:samurai-s-katana:f0t0:s2,f:xs:XP:samurai-s-katana:f0t0:s2	-	-	-	267e485f6204	-	83d460dc4b80	-	-	2026-11-24	xproof
 9b8b5812-73bd-453e-bdff-aad1fafa9226	static#0.0	static#0.0	agreed	-	X	scen	1	0	Samurai's Katana/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9b8c44a0-82ef-4beb-a762-c2a2a21380f3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9b8c44a0-82ef-4beb-a762-c2a2a21380f3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omen:cast:s1,f:xs:XP:omen:cast:s1	-	-	-	ea3140b6974b	-	4ebc17446f0d	-	-	2026-11-24	xproof
 9b8d9236-0452-4509-aca4-a53a399fff85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b8d9236-0452-4509-aca4-a53a399fff85	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b8d9236-0452-4509-aca4-a53a399fff85	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9bdc1e63-1cf9-4ddb-a7d5-f2a2eb91bdfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bdc1e63-1cf9-4ddb-a7d5-f2a2eb91bdfd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 9bdc79c9-c8b0-4db1-89d9-0ca7920b6576	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9bdc79c9-c8b0-4db1-89d9-0ca7920b6576	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9bdc79c9-c8b0-4db1-89d9-0ca7920b6576	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 9bdd68e7-7787-4579-a128-09e78fdbf0e2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:berg-strider:cast:s1,f:xs:XP:berg-strider:cast:s1	-	-	-	d864b561c9cb	-	b6c92624a0bc	-	-	2026-11-24	xproof
 9bdd68e7-7787-4579-a128-09e78fdbf0e2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:berg-strider:cast:s1,f:xs:XP:berg-strider:cast:s1	-	-	-	d864b561c9cb	-	b6c92624a0bc	-	-	2026-11-24	xproof
 9bdd6fea-d436-412b-a7b7-bbdba73dc986	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

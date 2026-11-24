@@ -33,9 +33,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 953a2bd3-5bca-41fc-8785-66b2d7fa381a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mai, Scornful Striker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 953a2bd3-5bca-41fc-8785-66b2d7fa381a	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Mai, Scornful Striker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 953bdefa-4639-4524-af5c-5055d1289f40	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-953bdefa-4639-4524-af5c-5055d1289f40	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+953bdefa-4639-4524-af5c-5055d1289f40	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 9542bd7f-bb99-4b59-a4e3-b88ed9f798bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9542bd7f-bb99-4b59-a4e3-b88ed9f798bf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9542bd7f-bb99-4b59-a4e3-b88ed9f798bf	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	ea3140b6974b	-	703eaea90aaa	-	-	2026-11-24	xproof
 9545f126-062f-4410-a362-e16255a128d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9545f126-062f-4410-a362-e16255a128d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9545f126-062f-4410-a362-e16255a128d6	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95630a83-3699-4340-b3e5-17e81db1b82f	cast	cast-resolve	agreed	-	X	scen	1	0	Hydro-Channeler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95630a83-3699-4340-b3e5-17e81db1b82f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hydro-Channeler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95630a83-3699-4340-b3e5-17e81db1b82f	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hydro-Channeler/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-956381ba-6d37-4a8a-846c-bad79222dbee	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+956381ba-6d37-4a8a-846c-bad79222dbee	cast	cast	agreed	-	F	start	2	0	f:xs:XP:force-of-will:cast:s1	-	-	-	ea3140b6974b	-	3c26f51d29fd	-	-	2026-11-24	xproof
 95649140-7978-4684-a1f1-af771e1d345a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:nephalia-moondrakes:cast:s1,f:xs:XP:nephalia-moondrakes:cast:s1	-	-	-	d864b561c9cb	-	e961fed6a8e7	-	-	2026-11-24	xproof
 95649140-7978-4684-a1f1-af771e1d345a	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 95649140-7978-4684-a1f1-af771e1d345a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:nephalia-moondrakes:cast:s1,f:xs:XP:nephalia-moondrakes:cast:s1	-	-	-	d864b561c9cb	-	e961fed6a8e7	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95a08f25-8d44-4704-a4d1-a098bf010932	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 95a0ca48-d924-47f4-86ed-42c673ee778c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95a0ca48-d924-47f4-86ed-42c673ee778c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-95a2802a-2621-40c3-84f8-51e8aad7b6f0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+95a2802a-2621-40c3-84f8-51e8aad7b6f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancestral-memories:cast:s1,f:xs:XP:ancestral-memories:cast:s1	-	-	-	ea3140b6974b	-	1e6391e233a5	-	-	2026-11-24	xproof
 95a53dd7-76dc-46f1-8833-fafd02ba49c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95a5e444-39f6-4f42-a83f-befa76350bc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95a5e444-39f6-4f42-a83f-befa76350bc1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

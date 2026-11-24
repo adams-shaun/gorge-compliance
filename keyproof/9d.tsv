@@ -53,8 +53,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d302e2a-d852-4878-ac9d-d51d9924144b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d3136da-3efa-4103-9d35-8da87d318544	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glarewielder:f0t0:s1,f:xs:XP:glarewielder:f0t0:s1	-	-	-	d864b561c9cb	-	6b6f1e5c419b	-	-	2026-11-24	xproof
 9d3136da-3efa-4103-9d35-8da87d318544	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:glarewielder:f0t0:s1,f:xs:XP:glarewielder:f0t0:s1	-	-	-	d864b561c9cb	-	6b6f1e5c419b	-	-	2026-11-24	xproof
-9d32da71-60e5-4eb3-97ca-ae76e2f5df57	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d32da71-60e5-4eb3-97ca-ae76e2f5df57	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d32da71-60e5-4eb3-97ca-ae76e2f5df57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wand-of-denial:cast:s1,f:xs:XP:wand-of-denial:cast:s1	-	-	-	ea3140b6974b	-	d13296a7c097	-	-	2026-11-24	xproof
+9d32da71-60e5-4eb3-97ca-ae76e2f5df57	f0/a0	PeekAndReveal	agreed	-	FX	start	4	0	x:xs:XP:wand-of-denial:cast:s1,f:xs:XP:wand-of-denial:cast:s1	-	-	-	ea3140b6974b	-	d13296a7c097	-	-	2026-11-24	xproof
 9d341ed4-4f9b-40df-9bd9-3bfeaf0fe595	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:abominable-treefolk:cast:s1,f:xs:XP:abominable-treefolk:cast:s1	-	-	-	d864b561c9cb	-	8a09d1634f64	-	-	2026-11-24	xproof
 9d341ed4-4f9b-40df-9bd9-3bfeaf0fe595	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:abominable-treefolk:cast:s1,f:xs:XP:abominable-treefolk:cast:s1	-	-	-	d864b561c9cb	-	8a09d1634f64	-	-	2026-11-24	xproof
 9d3931a2-baba-4e6e-b923-44df00900e51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d4372f0-eedf-4897-9f03-f96fb14ac4a6	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 9d4372f0-eedf-4897-9f03-f96fb14ac4a6	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 9d437391-d476-4976-8714-6a1d3185ab52	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d437391-d476-4976-8714-6a1d3185ab52	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d437391-d476-4976-8714-6a1d3185ab52	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 9d448c85-9c93-4e9e-8aa0-0035fc94112e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d49cef5-8f9c-46cd-aa5e-7861fc1dcaa4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d49cef5-8f9c-46cd-aa5e-7861fc1dcaa4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9dd674a7-becf-4106-b53f-bca88426d92d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Zimone, Paradox Sculptor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9dd755a5-0bef-4bde-92fa-14ef2a1a1410	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dunland-crebain:f0t0:s1,f:xs:XP:dunland-crebain:f0t0:s1	-	-	-	ae86f6029288	-	f99ffe5c4709	-	-	2026-11-24	xproof
 9dd755a5-0bef-4bde-92fa-14ef2a1a1410	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dunland-crebain:f0t0:s1,f:xs:XP:dunland-crebain:f0t0:s1	-	-	-	ae86f6029288	-	f99ffe5c4709	-	-	2026-11-24	xproof
-9dd7f27a-e862-47d7-9158-034cf4d353b8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9dd7f27a-e862-47d7-9158-034cf4d353b8	cast	cast	agreed	-	X	start	2	0	x:xs:XP:fireblast:cast:s1	-	-	-	ea3140b6974b	-	d742326e49e5	-	-	2026-11-24	xproof
 9ddc5a06-b4e1-459a-9e39-7cd1aa994fe1	cast	cast-resolve	agreed	-	X	scen	1	0	Helix Pinnacle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9ddc5a06-b4e1-459a-9e39-7cd1aa994fe1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Helix Pinnacle/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9ddc5a06-b4e1-459a-9e39-7cd1aa994fe1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

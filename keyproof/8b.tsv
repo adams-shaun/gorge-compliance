@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b8c0285-424f-4a82-bfb6-17752cfa71dd	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:izzet-keyrune:cast:s1,f:xs:XP:izzet-keyrune:cast:s1	-	-	-	d864b561c9cb	-	340a4c26f5ac	-	-	2026-11-24	xproof
 8b8c0285-424f-4a82-bfb6-17752cfa71dd	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:izzet-keyrune:f0a1:s1,f:xs:XP:izzet-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	340a4c26f5ac	-	-	2026-11-24	xproof
 8b8c0285-424f-4a82-bfb6-17752cfa71dd	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:izzet-keyrune:f0a1:s1,f:xs:XP:izzet-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	340a4c26f5ac	-	-	2026-11-24	xproof
-8b8d4ae0-0d18-4f06-a883-0edff494d06b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8b8d4ae0-0d18-4f06-a883-0edff494d06b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orcish-settlers:cast:s1,f:xs:XP:orcish-settlers:cast:s1	-	-	-	ea3140b6974b	-	84734566d43a	-	-	2026-11-24	xproof
 8b8d4ae0-0d18-4f06-a883-0edff494d06b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b9043d3-a1c6-4f49-9c49-ef78bbfbd4ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b9043d3-a1c6-4f49-9c49-ef78bbfbd4ac	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,8 +139,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b9734c1-7185-40f6-8582-9f87109e3a09	cast	cast-resolve	agreed	-	X	scen	1	0	Far Fortune, End Boss/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b9734c1-7185-40f6-8582-9f87109e3a09	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Far Fortune, End Boss/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b9734c1-7185-40f6-8582-9f87109e3a09	static#0.0	static#0.0	agreed	-	X	scen	1	0	Far Fortune, End Boss/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8b983a46-580f-4a94-8ef3-5253e503148e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b983a46-580f-4a94-8ef3-5253e503148e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8b983a46-580f-4a94-8ef3-5253e503148e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:femeref-enchantress:cast:s1,f:xs:XP:femeref-enchantress:cast:s1	-	-	-	ea3140b6974b	-	e6eacde5fb6e	-	-	2026-11-24	xproof
+8b983a46-580f-4a94-8ef3-5253e503148e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 8b9918c3-1135-4c63-991f-f0a38340a33b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b9918c3-1135-4c63-991f-f0a38340a33b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ba0e831-054a-4e01-92ed-2845bd2fa12f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

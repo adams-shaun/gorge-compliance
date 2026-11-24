@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3aa83ed2-f48b-4ce6-a614-2c54ddf50538	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aa83ed2-f48b-4ce6-a614-2c54ddf50538	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aab67bb-f287-4aa6-a3c5-e850b22dfff6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3aab67bb-f287-4aa6-a3c5-e850b22dfff6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3aab67bb-f287-4aa6-a3c5-e850b22dfff6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 3aab84f2-731c-4079-9623-0b0c433442c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aab84f2-731c-4079-9623-0b0c433442c3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aab84f2-731c-4079-9623-0b0c433442c3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -213,7 +213,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ae4b679-2e3c-4f60-bcf4-b279917cdc54	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ae4b679-2e3c-4f60-bcf4-b279917cdc54	f0/a1	NULL	owed	refused:steps-needed:cost:UB	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3aeb28ac-8ed2-4a90-a631-d84361ac6acc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3aeb28ac-8ed2-4a90-a631-d84361ac6acc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3aeb28ac-8ed2-4a90-a631-d84361ac6acc	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:zirilan-of-the-claw:f0a0:s1,f:xs:XP:zirilan-of-the-claw:f0a0:s1	-	-	-	ea3140b6974b	-	ea75ff211f2d	-	-	2026-11-24	xproof
 3aeba3c2-5517-4870-8802-29b0fa70ffae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3af03c99-d215-477b-ba49-51f4e87907ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rapacious-one:cast:s1,f:xs:XP:rapacious-one:cast:s1	-	-	-	d864b561c9cb	-	48925bed856b	-	-	2026-11-24	xproof
 3af03c99-d215-477b-ba49-51f4e87907ff	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

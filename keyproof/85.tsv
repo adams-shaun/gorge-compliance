@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 8505f9a6-a510-43f9-a96d-b840b353e144	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8505f9a6-a510-43f9-a96d-b840b353e144	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:goblin-rimerunner:f0a1:s1,f:xs:XP:goblin-rimerunner:f0a1:s1	-	-	-	5f2128bf97e4	-	2ebb98b5bb53	-	-	2026-11-24	xproof
+8505f9a6-a510-43f9-a96d-b840b353e144	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:goblin-rimerunner:f0a1:s1,f:xs:XP:goblin-rimerunner:f0a1:s1	-	-	-	ea3140b6974b	-	2ebb98b5bb53	-	-	2026-11-24	xproof
 8505f9a6-a510-43f9-a96d-b840b353e144	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 850a8369-94ab-43b6-8cfe-286e3623b19d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 850bb6f7-48d3-4d65-9220-b0bec5ee6b64	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 852657c0-18a4-4b28-b9ae-7728acdb5044	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 85292bfb-32d7-449e-9ebb-5be828e8ecf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85292bfb-32d7-449e-9ebb-5be828e8ecf6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-852b6e19-4594-41ea-9267-0911df643af5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+852b6e19-4594-41ea-9267-0911df643af5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ekundu-griffin:cast:s1,f:xs:XP:ekundu-griffin:cast:s1	-	-	-	ea3140b6974b	-	5a989d70e7fa	-	-	2026-11-24	xproof
 852bd598-6e48-43c8-9211-740ae9e0c42e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 852c38fe-8bfa-420b-b961-7b91af9b38d1	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 852c38fe-8bfa-420b-b961-7b91af9b38d1	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -106,8 +106,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 857d94f7-113c-45a4-a88a-5d087347d57f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leonin-shikari:cast:s1,f:xs:XP:leonin-shikari:cast:s1	-	-	-	25696bf19d5b	-	6dd009ee5641	-	-	2026-11-24	xproof
 857db7e0-254a-4920-a71d-9bab6555342f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 857db7e0-254a-4920-a71d-9bab6555342f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-857f9a8d-ba77-4afd-922d-994f66e478ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-857f9a8d-ba77-4afd-922d-994f66e478ef	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+857f9a8d-ba77-4afd-922d-994f66e478ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyknite:f0t0:s1,f:xs:XP:pyknite:f0t0:s1	-	-	-	ea3140b6974b	-	551b5387fb9a	-	-	2026-11-24	xproof
+857f9a8d-ba77-4afd-922d-994f66e478ef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pyknite:f0t0:s1,f:xs:XP:pyknite:f0t0:s1	-	-	-	ea3140b6974b	-	551b5387fb9a	-	-	2026-11-24	xproof
 857febd9-cdd7-4f8e-a852-d88084b0cfbc	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 857febd9-cdd7-4f8e-a852-d88084b0cfbc	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 857febd9-cdd7-4f8e-a852-d88084b0cfbc	land	land	agreed	-	FX	start	2	0	x:xs:XP:underground-river:land:s1,f:xs:XP:underground-river:land:s1	-	-	-	25696bf19d5b	-	1df0d3e33fd2	-	-	2026-11-24	xproof

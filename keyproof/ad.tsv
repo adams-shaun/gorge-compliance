@@ -2,8 +2,8 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 ad0070db-6454-41cb-861f-8f5b8fc2a3b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad01df89-29fe-44c7-a133-91425f8ff09c	cast	cast-resolve	agreed	-	FX	scen	2	0	Fake Your Own Death/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ad07cb55-cc4f-40be-b16a-bd3d3ca94249	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ad07cb55-cc4f-40be-b16a-bd3d3ca94249	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ad07cb55-cc4f-40be-b16a-bd3d3ca94249	cast	cast	agreed	-	F	start	4	0	f:xs:XP:pillaging-horde:cast:s1	-	-	-	ea3140b6974b	-	72fd5c98b683	-	-	2026-11-24	xproof
+ad07cb55-cc4f-40be-b16a-bd3d3ca94249	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:pillaging-horde:cast:s1	-	-	-	ea3140b6974b	-	72fd5c98b683	-	-	2026-11-24	xproof
 ad08952a-bcae-41d6-8093-c18535dad7d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:necrogenesis:cast:s1,f:xs:XP:necrogenesis:cast:s1	-	-	-	8a1b1a193ec0	-	3ff10bdd9450	-	-	2026-11-24	xproof
 ad08952a-bcae-41d6-8093-c18535dad7d5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad08ad3a-bc58-43da-b7f3-4a478132da8a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -31,7 +31,7 @@ ad1712d8-809f-410c-8b91-ffe6fb8a69a1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Azor
 ad1712d8-809f-410c-8b91-ffe6fb8a69a1	land	play-land	agreed	-	X	scen	1	0	Azorius Guildgate/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ad172d4e-febf-4844-9544-861d03e27ab5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad1d8eca-e3bf-479f-a442-bcd8c31bfe7f	cast	cast-resolve	agreed	-	X	scen	1	0	I'm a Doctor, Not a . . ./cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ad218276-a44b-4a61-8e42-26a27929bbbb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ad218276-a44b-4a61-8e42-26a27929bbbb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alluring-scent:cast:s1,f:xs:XP:alluring-scent:cast:s1	-	-	-	ea3140b6974b	-	7a50c432933b	-	-	2026-11-24	xproof
 ad225ec2-ff3a-48f6-81a7-dfdd1b75e1f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad225ec2-ff3a-48f6-81a7-dfdd1b75e1f7	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ad2793f3-a36f-4a09-a38f-eb98ce0a2b79	cast	cast-resolve	agreed	-	FX	scen	2	0	The Witch's Vanity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -160,8 +160,8 @@ adcf571f-c465-44c6-8941-48313810e732	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 adcf571f-c465-44c6-8941-48313810e732	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 add02a36-8811-438b-a8e1-f5c8a8146b4e	cast	cast-resolve	agreed	-	X	scen	1	0	Samut, Hazoret's Champion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 add02a36-8811-438b-a8e1-f5c8a8146b4e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Samut, Hazoret's Champion/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-add18787-2329-4355-a524-66fefda8d06e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-add18787-2329-4355-a524-66fefda8d06e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+add18787-2329-4355-a524-66fefda8d06e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cloudchaser-eagle:f0t0:s1,f:xs:XP:cloudchaser-eagle:f0t0:s1	-	-	-	ea3140b6974b	-	6db830130f1a	-	-	2026-11-24	xproof
+add18787-2329-4355-a524-66fefda8d06e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cloudchaser-eagle:f0t0:s1,f:xs:XP:cloudchaser-eagle:f0t0:s1	-	-	-	ea3140b6974b	-	6db830130f1a	-	-	2026-11-24	xproof
 add500e1-8eeb-45d7-a10d-2fae2cc69233	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:soul-of-new-phyrexia:cast:s1,f:xs:XP:soul-of-new-phyrexia:cast:s1	-	-	-	d864b561c9cb	-	02046d18b308	-	-	2026-11-24	xproof
 add500e1-8eeb-45d7-a10d-2fae2cc69233	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:soul-of-new-phyrexia:f0a0:s1,f:xs:XP:soul-of-new-phyrexia:f0a0:s1	-	-	-	d864b561c9cb	-	02046d18b308	-	-	2026-11-24	xproof
 add500e1-8eeb-45d7-a10d-2fae2cc69233	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -175,13 +175,13 @@ ade82acb-80c0-4033-aa02-4fa3d69aad69	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:
 ade898df-14a5-460b-94f6-1f3f74d3ff95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ade898df-14a5-460b-94f6-1f3f74d3ff95	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ade8f21a-a7bb-4bd9-a7f2-9fa3060ff1e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ade8f21a-a7bb-4bd9-a7f2-9fa3060ff1e8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ade8f21a-a7bb-4bd9-a7f2-9fa3060ff1e8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 ade8fc6f-efaa-4a24-96d8-99ef5026cd74	cast	cast-resolve	agreed	-	X	scen	1	0	Nashi, Searcher in the Dark/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ade8fc6f-efaa-4a24-96d8-99ef5026cd74	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Nashi, Searcher in the Dark/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ade8fc6f-efaa-4a24-96d8-99ef5026cd74	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Nashi, Searcher in the Dark/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ade8fc6f-efaa-4a24-96d8-99ef5026cd74	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nashi, Searcher in the Dark/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-adea6cb4-1e74-4137-9c80-1dde004a6b26	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-adea6cb4-1e74-4137-9c80-1dde004a6b26	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+adea6cb4-1e74-4137-9c80-1dde004a6b26	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:village-elder:cast:s1,f:xs:XP:village-elder:cast:s1	-	-	-	ea3140b6974b	-	f07308a74781	-	-	2026-11-24	xproof
+adea6cb4-1e74-4137-9c80-1dde004a6b26	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 adea7db6-634c-4c5d-be40-264b4acffc53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 adea7db6-634c-4c5d-be40-264b4acffc53	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 adf59918-a021-4b4e-b672-d82be960726e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

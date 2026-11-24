@@ -18,9 +18,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8110fe69-c66c-4e2c-86ee-dcc8dc9a13d1	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8110fe69-c66c-4e2c-86ee-dcc8dc9a13d1	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 811c6f52-03cb-49a9-a3c7-7f4ae40e7155	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-811c6f52-03cb-49a9-a3c7-7f4ae40e7155	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+811c6f52-03cb-49a9-a3c7-7f4ae40e7155	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 81229e0a-8413-40cf-8087-9d580cbb21c3	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-8126e60b-cf3d-4bf0-bfb5-f1e914d3e20e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8126e60b-cf3d-4bf0-bfb5-f1e914d3e20e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dregs-of-sorrow:cast:s1,f:xs:XP:dregs-of-sorrow:cast:s1	-	-	-	ea3140b6974b	-	6865a3356431	-	-	2026-11-24	xproof
 812701c3-c9b7-4877-bf2e-c37e0f551c45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 812bf52c-37f5-41c9-8a69-009fddbafb3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 812df594-75af-494f-be09-5f9633aca46a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:deepway-navigator:f0t0:s2,f:xs:XP:deepway-navigator:f0t0:s2	-	-	-	267e485f6204	-	b4cd5a789a1d	-	-	2026-11-24	xproof

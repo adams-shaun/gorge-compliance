@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 73010421-374f-458e-aa88-248ef8ae4f8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73016220-2436-4072-96dd-65c0cb05fff4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+73016220-2436-4072-96dd-65c0cb05fff4	cast	cast	agreed	-	X	start	2	0	x:xs:XP:spirit-of-the-night:cast:s1	-	-	-	ea3140b6974b	-	1d5967a3f3b6	-	-	2026-11-24	xproof
 730809d7-cb8c-495c-8972-7e85b967358e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:field-surgeon:cast:s1,f:xs:XP:field-surgeon:cast:s1	-	-	-	5f2128bf97e4	-	d08ac856759c	-	-	2026-11-24	xproof
 730809d7-cb8c-495c-8972-7e85b967358e	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:field-surgeon:cast:s1,f:xs:XP:field-surgeon:cast:s1	-	-	-	5f2128bf97e4	-	d08ac856759c	-	-	2026-11-24	xproof
 73089a39-a2f6-4aa2-a058-e6551475153d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sanguine-bond:cast:s1,f:xs:XP:sanguine-bond:cast:s1	-	-	-	8a1b1a193ec0	-	4ee12bdc202e	-	-	2026-11-24	xproof
@@ -178,8 +178,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73dc28a7-37ac-4b16-aa00-967c9c44d979	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Baylen, the Haymaker/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73e2d8aa-3a23-4458-8cae-e9209a102197	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73e2d8aa-3a23-4458-8cae-e9209a102197	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-73ea2949-5812-478d-8f09-00743ce4d40f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73ea2949-5812-478d-8f09-00743ce4d40f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+73ea2949-5812-478d-8f09-00743ce4d40f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ingenious-thief:f0t0:s1,f:xs:XP:ingenious-thief:f0t0:s1	-	-	-	ea3140b6974b	-	8d7ed14ab42d	-	-	2026-11-24	xproof
+73ea2949-5812-478d-8f09-00743ce4d40f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ingenious-thief:f0t0:s1,f:xs:XP:ingenious-thief:f0t0:s1	-	-	-	ea3140b6974b	-	8d7ed14ab42d	-	-	2026-11-24	xproof
 73ea32e4-72c5-42ee-8ed5-21dee83d7eec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73eacb1f-3d35-4ead-bead-f85e6cfc17ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hail-storm:cast:s1,f:xs:XP:hail-storm:cast:s1	-	-	-	25696bf19d5b	-	e30956c160a2	-	-	2026-11-24	xproof
 73eaf40a-abc6-486a-958d-374ed6111173	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roilmage-s-trick:cast:s1,f:xs:XP:roilmage-s-trick:cast:s1	-	-	-	d864b561c9cb	-	4f9a94ec1ae6	-	-	2026-11-24	xproof

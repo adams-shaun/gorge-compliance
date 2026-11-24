@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 993b7b94-ed06-422d-9c7e-52a74ce9d045	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Derelict Attic/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 993b92f4-4160-4171-9e67-90dc935030fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cleansing-wildfire:cast:s1,f:xs:XP:cleansing-wildfire:cast:s1	-	-	-	ae86f6029288	-	686ecc4932c4	-	-	2026-11-24	xproof
 993e41e6-0643-4a1f-8ada-b7a4aae486d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-993e41e6-0643-4a1f-8ada-b7a4aae486d9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+993e41e6-0643-4a1f-8ada-b7a4aae486d9	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 99419378-8a23-44f3-aebe-e62d6e20e877	cast	cast-resolve	agreed	-	X	scen	1	0	Mysterio's Phantasm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99419378-8a23-44f3-aebe-e62d6e20e877	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mysterio's Phantasm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99419378-8a23-44f3-aebe-e62d6e20e877	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mysterio's Phantasm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -89,9 +89,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99587b7a-cbd0-4ade-b517-50aaf0635fb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99587b7a-cbd0-4ade-b517-50aaf0635fb1	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 9962a9cc-6e9f-461e-a9d3-8c28ec34caf1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9963b6a9-d715-430e-9b5e-576fb688d944	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9963b6a9-d715-430e-9b5e-576fb688d944	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9963b6a9-d715-430e-9b5e-576fb688d944	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9963b6a9-d715-430e-9b5e-576fb688d944	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:locust-swarm:cast:s1,f:xs:XP:locust-swarm:cast:s1	-	-	-	ea3140b6974b	-	998787fa53d4	-	-	2026-11-24	xproof
+9963b6a9-d715-430e-9b5e-576fb688d944	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:locust-swarm:f0a0:s1,f:xs:XP:locust-swarm:f0a0:s1	-	-	-	ea3140b6974b	-	998787fa53d4	-	-	2026-11-24	xproof
+9963b6a9-d715-430e-9b5e-576fb688d944	f0/a1	Untap	agreed	-	FX	start	2	0	x:xs:XP:locust-swarm:f0a1:s1,f:xs:XP:locust-swarm:f0a1:s1	-	-	-	ea3140b6974b	-	998787fa53d4	-	-	2026-11-24	xproof
 99642419-ab24-4770-9f1c-84d2806441b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99642419-ab24-4770-9f1c-84d2806441b5	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 9965d9c5-2ebf-4a6c-930e-55c5890979be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thought-vessel:cast:s1,f:xs:XP:thought-vessel:cast:s1	-	-	-	78d0801f2bf1	-	708bce2742e7	-	-	2026-11-24	xproof

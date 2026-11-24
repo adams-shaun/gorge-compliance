@@ -46,7 +46,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09342fd7-3dad-431e-8b87-de8a9287e757	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09342fd7-3dad-431e-8b87-de8a9287e757	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0935377b-384f-4e4c-9fbb-8d2a7d5dc280	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0935377b-384f-4e4c-9fbb-8d2a7d5dc280	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0935377b-384f-4e4c-9fbb-8d2a7d5dc280	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:dwarven-miner:f0a0:s1,f:xs:XP:dwarven-miner:f0a0:s1	-	-	-	ea3140b6974b	-	bdd05751dc28	-	-	2026-11-24	xproof
 0935faa2-fb90-48db-8a92-906ba0f374c7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Restless Vinestalk/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0935faa2-fb90-48db-8a92-906ba0f374c7	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Restless Vinestalk/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0935faa2-fb90-48db-8a92-906ba0f374c7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Restless Vinestalk/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -128,8 +128,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09955b4b-6052-4c27-8b63-9548482b3c5c	cast	cast-resolve	agreed	-	X	scen	1	0	Heritage Reclamation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0996d48a-f92a-4aaf-b8a3-f7ec8ff986ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magma-rift:cast:s1,f:xs:XP:magma-rift:cast:s1	-	-	-	8a1b1a193ec0	-	6ab22a66b671	-	-	2026-11-24	xproof
 0998768a-1632-4da1-8310-352582501c4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-099a5835-da6c-4e03-ad3e-aeb448897fed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-099a5835-da6c-4e03-ad3e-aeb448897fed	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+099a5835-da6c-4e03-ad3e-aeb448897fed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:owl-familiar:f0t0:s1,f:xs:XP:owl-familiar:f0t0:s1	-	-	-	ea3140b6974b	-	c72043c06872	-	-	2026-11-24	xproof
+099a5835-da6c-4e03-ad3e-aeb448897fed	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:owl-familiar:f0t0:s1,f:xs:XP:owl-familiar:f0t0:s1	-	-	-	ea3140b6974b	-	c72043c06872	-	-	2026-11-24	xproof
 099b8d2c-b482-48dd-b6bc-dedf546d66c5	cast	cast-resolve	agreed	-	FX	scen	2	0	Marang River Regent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 099b8d2c-b482-48dd-b6bc-dedf546d66c5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Marang River Regent/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 099b8d2c-b482-48dd-b6bc-dedf546d66c5	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Marang River Regent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09a400bd-83f1-4fac-a218-64c9f041874f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09a688c1-21f6-4c7d-a6bd-aedc0d76a671	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09a70ae8-3859-4a09-901d-dce063fa3b5f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09a70ae8-3859-4a09-901d-dce063fa3b5f	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:wasteland:f0a0:s1,f:xs:XP:wasteland:f0a0:s1	-	-	-	78d0801f2bf1	-	60c558303c1f	-	-	2026-11-24	xproof
+09a70ae8-3859-4a09-901d-dce063fa3b5f	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:quirion-druid:f0a0:s1,f:xs:XP:quirion-druid:f0a0:s1	-	-	-	ea3140b6974b	-	60c558303c1f	-	-	2026-11-24	xproof
 09a70ae8-3859-4a09-901d-dce063fa3b5f	land	land	agreed	-	FX	start	2	0	x:xs:XP:wasteland:land:s1,f:xs:XP:wasteland:land:s1	-	-	-	5f2128bf97e4	-	60c558303c1f	-	-	2026-11-24	xproof
 09aeea91-b1dc-443f-a509-4758f052c0a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09aeea91-b1dc-443f-a509-4758f052c0a7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

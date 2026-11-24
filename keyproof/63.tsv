@@ -5,8 +5,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63018d1c-f7fb-44c8-bcd2-292e74ab5b54	f0/t0	ChangesZone/For Mirrodin	agreed	-	FX	start	4	0	x:xs:XP:hexgold-hoverwings:cast:s1,f:xs:XP:hexgold-hoverwings:cast:s1	-	-	-	ae86f6029288	-	9970aba19a34	-	-	2026-11-24	xproof
 630b1685-d0c9-4d94-97dc-70058fb52e5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 630b1685-d0c9-4d94-97dc-70058fb52e5d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63136274-df97-49ae-9efe-1385410e744b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63136274-df97-49ae-9efe-1385410e744b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+63136274-df97-49ae-9efe-1385410e744b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primal-order:cast:s1,f:xs:XP:primal-order:cast:s1	-	-	-	ea3140b6974b	-	a46e30794225	-	-	2026-11-24	xproof
+63136274-df97-49ae-9efe-1385410e744b	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:primal-order:cast:s1,f:xs:XP:primal-order:cast:s1	-	-	-	ea3140b6974b	-	a46e30794225	-	-	2026-11-24	xproof
 6317d45a-fe02-4879-b515-bc5327ecb5ae	cast	cast-resolve	agreed	-	FX	scen	2	0	Wispdrinker Vampire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6317d45a-fe02-4879-b515-bc5327ecb5ae	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wispdrinker Vampire/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6317d45a-fe02-4879-b515-bc5327ecb5ae	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wispdrinker Vampire/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 635c0a7d-d832-4c10-a5f0-9cde19152cbb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:kavu-howler:cast:s1,f:xs:XP:kavu-howler:cast:s1	-	-	-	fc71ca68c5ac	-	28987b6662b9	-	-	2026-11-24	xproof
 635cc10e-ca25-49a2-af44-3b064263a254	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 635cc10e-ca25-49a2-af44-3b064263a254	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-635cc10e-ca25-49a2-af44-3b064263a254	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+635cc10e-ca25-49a2-af44-3b064263a254	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:elixir-of-vitality:f0a1:s1,f:xs:XP:elixir-of-vitality:f0a1:s1	-	-	-	ea3140b6974b	-	f00d14477811	-	-	2026-11-24	xproof
 635dda8c-3761-4c87-8723-8cd09878516b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 635dda8c-3761-4c87-8723-8cd09878516b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 635fe908-6f58-4c9e-ac55-0775a7c6f278	cast	cast-resolve	agreed	-	FX	scen	2	0	Angel of Vitality/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -74,7 +74,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 635fe908-6f58-4c9e-ac55-0775a7c6f278	static#0.0	static#0.0	agreed	-	X	scen	1	0	Angel of Vitality/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63604320-68de-415e-b1f9-dd0f85c5d8a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63625b26-3a19-4c3c-b18a-91247bb2a40c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lignify:cast:s1,f:xs:XP:lignify:cast:s1	-	-	-	d864b561c9cb	-	da5d40f10ebf	-	-	2026-11-24	xproof
-6365aba1-78d3-416c-89cd-9449578eedbf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6365aba1-78d3-416c-89cd-9449578eedbf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:touch-of-brilliance:cast:s1,f:xs:XP:touch-of-brilliance:cast:s1	-	-	-	ea3140b6974b	-	5c66061e9104	-	-	2026-11-24	xproof
 63686c6b-9051-4002-aa8e-da8a3021330f	cast	cast-resolve	agreed	-	X	scen	1	0	Lifecreed Duo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63686c6b-9051-4002-aa8e-da8a3021330f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lifecreed Duo/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63686c6b-9051-4002-aa8e-da8a3021330f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lifecreed Duo/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 636ed3e3-c31d-403a-a3e7-03e01350ce4f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mardu-woe-reaper:f0t0:s1,f:xs:XP:mardu-woe-reaper:f0t0:s1	-	-	-	d864b561c9cb	-	71242f06444b	-	-	2026-11-24	xproof
 63701aa6-d3b8-4af2-96a4-2dec27d6a661	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:frilled-mystic:cast:s1,f:xs:XP:frilled-mystic:cast:s1	-	-	-	d864b561c9cb	-	c4a3dacdb39a	-	-	2026-11-24	xproof
 6373c66d-edfc-44cb-af2a-2273e0ba53e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6373c66d-edfc-44cb-af2a-2273e0ba53e0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6373c66d-edfc-44cb-af2a-2273e0ba53e0	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 63765157-e2ba-4cec-9501-8a405259de5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unfathomable-truths:cast:s1,f:xs:XP:unfathomable-truths:cast:s1	-	-	-	ae86f6029288	-	90aa68039ddc	-	-	2026-11-24	xproof
 63788566-e25a-44bb-bb55-197e1b93b3e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trading-post:cast:s1,f:xs:XP:trading-post:cast:s1	-	-	-	d864b561c9cb	-	2802dd185944	-	-	2026-11-24	xproof
 63788566-e25a-44bb-bb55-197e1b93b3e8	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -129,7 +129,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63afc3d1-7653-476e-838f-fc18d4a62a21	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63afc3d1-7653-476e-838f-fc18d4a62a21	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63b0538e-aa94-4e23-adf1-704cbf5bc3e5	cast	cast-resolve	agreed	-	X	scen	1	0	Brass's Bounty/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-63bc0a02-0d6c-4a00-8b17-1b024f830219	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+63bc0a02-0d6c-4a00-8b17-1b024f830219	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stone-spirit:cast:s1,f:xs:XP:stone-spirit:cast:s1	-	-	-	ea3140b6974b	-	36763767aa10	-	-	2026-11-24	xproof
 63bfb9ca-d9d5-4c17-be39-82eb115bc20c	cast	cast-resolve	agreed	-	X	scen	1	0	Lavaspur Boots/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63bfb9ca-d9d5-4c17-be39-82eb115bc20c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lavaspur Boots/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63bfb9ca-d9d5-4c17-be39-82eb115bc20c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lavaspur Boots/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -12,11 +12,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d174448-52f5-4439-9586-3abc5af940d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d174448-52f5-4439-9586-3abc5af940d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d194882-ca37-49bb-ac9f-a751c53850a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bribery:cast:s1,f:xs:XP:bribery:cast:s1	-	-	-	25696bf19d5b	-	b7fd98e445b3	-	-	2026-11-24	xproof
-6d1a9d06-028f-487a-b490-27100c128ea3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6d1a9d06-028f-487a-b490-27100c128ea3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:precognition:cast:s1,f:xs:XP:precognition:cast:s1	-	-	-	ea3140b6974b	-	5696af180027	-	-	2026-11-24	xproof
 6d1a9d06-028f-487a-b490-27100c128ea3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d1d53e3-60ee-40a1-89a5-0648760cd83f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6d1f8073-4da2-4abc-abb4-2053c4a40bbf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6d1f8073-4da2-4abc-abb4-2053c4a40bbf	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6d1f8073-4da2-4abc-abb4-2053c4a40bbf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fyndhorn-brownie:cast:s1,f:xs:XP:fyndhorn-brownie:cast:s1	-	-	-	ea3140b6974b	-	957d007f8406	-	-	2026-11-24	xproof
+6d1f8073-4da2-4abc-abb4-2053c4a40bbf	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:fyndhorn-brownie:f0a0:s1,f:xs:XP:fyndhorn-brownie:f0a0:s1	-	-	-	ea3140b6974b	-	957d007f8406	-	-	2026-11-24	xproof
 6d243164-e21d-46c5-943e-9a2eb759c742	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:tomebound-lich:cast:s1,f:xs:XP:tomebound-lich:cast:s1	-	-	-	d864b561c9cb	-	e847672c4a3e	-	-	2026-11-24	xproof
 6d243164-e21d-46c5-943e-9a2eb759c742	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:tomebound-lich:cast:s1,f:xs:XP:tomebound-lich:cast:s1	-	-	-	d864b561c9cb	-	e847672c4a3e	-	-	2026-11-24	xproof
 6d243164-e21d-46c5-943e-9a2eb759c742	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -163,7 +163,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6dcdd313-6df7-4d44-a4cb-0346a4fdb4e1	cast	cast-resolve	agreed	-	FX	scen	2	0	Jeskai Devotee/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6dcdd313-6df7-4d44-a4cb-0346a4fdb4e1	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Jeskai Devotee/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6dcdd313-6df7-4d44-a4cb-0346a4fdb4e1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Jeskai Devotee/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6dd1f375-e8f2-4725-8fbd-9750c4860820	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6dd1f375-e8f2-4725-8fbd-9750c4860820	cast	cast	agreed	-	X	start	2	0	x:xs:XP:heart-sliver:cast:s1	-	-	-	ea3140b6974b	-	999fcf3415c1	-	-	2026-11-24	xproof
 6dd5782d-2d1a-4d6b-8381-e15d0d5be24f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6dd71453-63ec-4f4c-87d2-34d207398b9a	cast	cast	agreed	-	X	start	4	0	x:xs:XP:lathnu-hellion:cast:s1	-	-	-	fc71ca68c5ac	-	0931fddbc146	-	-	2026-11-24	xproof
 6dd71453-63ec-4f4c-87d2-34d207398b9a	f0/t0	ChangesZone	agreed	-	X	start	4	0	x:xs:XP:lathnu-hellion:cast:s1	-	-	-	fc71ca68c5ac	-	0931fddbc146	-	-	2026-11-24	xproof

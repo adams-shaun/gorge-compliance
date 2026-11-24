@@ -132,8 +132,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6cbe76c6-2b64-4389-b5f9-0b221cd92312	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 6cbefcba-0c1c-48fd-9b78-905ed61aae1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6cbefcba-0c1c-48fd-9b78-905ed61aae1e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6cc07a7e-e70c-45c5-83c5-a2704e57dbc5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6cc07a7e-e70c-45c5-83c5-a2704e57dbc5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6cc07a7e-e70c-45c5-83c5-a2704e57dbc5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:uktabi-orangutan:f0t0:s1,f:xs:XP:uktabi-orangutan:f0t0:s1	-	-	-	ea3140b6974b	-	afcc93d2b2b2	-	-	2026-11-24	xproof
+6cc07a7e-e70c-45c5-83c5-a2704e57dbc5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:uktabi-orangutan:f0t0:s1,f:xs:XP:uktabi-orangutan:f0t0:s1	-	-	-	ea3140b6974b	-	afcc93d2b2b2	-	-	2026-11-24	xproof
 6cc47c8e-9154-4517-940d-d1a7f35e5677	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pale-rider-of-trostad:f0t0:s1,f:xs:XP:pale-rider-of-trostad:f0t0:s1	-	-	-	d864b561c9cb	-	f88fe3ef8d61	-	-	2026-11-24	xproof
 6cc47c8e-9154-4517-940d-d1a7f35e5677	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pale-rider-of-trostad:f0t0:s1,f:xs:XP:pale-rider-of-trostad:f0t0:s1	-	-	-	d864b561c9cb	-	f88fe3ef8d61	-	-	2026-11-24	xproof
 6cc99047-91dc-4ef2-99f3-65932b82ca31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6ccca5c2-66c3-495a-8d9e-1a9805569e52	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Etched Cornfield/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6ccca5c2-66c3-495a-8d9e-1a9805569e52	land	play-land	agreed	-	X	scen	1	0	Etched Cornfield/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6cccf44e-c05e-4239-b643-54b559c98552	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6cccf44e-c05e-4239-b643-54b559c98552	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6cccf44e-c05e-4239-b643-54b559c98552	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:charging-paladin:f0t0:s1,f:xs:XP:charging-paladin:f0t0:s1	-	-	-	ea3140b6974b	-	bec42b3c7a1f	-	-	2026-11-24	xproof
 6ccf72ee-a86a-4b13-9e76-e308d0d28523	cast	cast-resolve	agreed	-	X	scen	1	0	Rainveil Rejuvenator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6ccf72ee-a86a-4b13-9e76-e308d0d28523	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rainveil Rejuvenator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6ccf72ee-a86a-4b13-9e76-e308d0d28523	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,8 +151,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6cd58a88-6434-4c55-bf93-a739b5ed9bc1	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6cd6b56d-d69e-4144-a6c7-8c066629435b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6cd6b56d-d69e-4144-a6c7-8c066629435b	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-6cd8cf2a-972f-41b7-ab0c-b4953accc2fe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6cd8cf2a-972f-41b7-ab0c-b4953accc2fe	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6cd8cf2a-972f-41b7-ab0c-b4953accc2fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:folk-of-the-pines:cast:s1,f:xs:XP:folk-of-the-pines:cast:s1	-	-	-	ea3140b6974b	-	74f4122f05cd	-	-	2026-11-24	xproof
+6cd8cf2a-972f-41b7-ab0c-b4953accc2fe	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:folk-of-the-pines:f0a0:s1,f:xs:XP:folk-of-the-pines:f0a0:s1	-	-	-	ea3140b6974b	-	74f4122f05cd	-	-	2026-11-24	xproof
 6cdc6548-cb32-437f-850a-9002542ad3d5	cast	cast-resolve	agreed	-	X	scen	1	0	Memories Returning/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6ce24851-70d2-416c-8733-78928b4eee74	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wailing-ghoul:cast:s1,f:xs:XP:wailing-ghoul:cast:s1	-	-	-	d864b561c9cb	-	ad22e0679445	-	-	2026-11-24	xproof
 6ce24851-70d2-416c-8733-78928b4eee74	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wailing-ghoul:cast:s1,f:xs:XP:wailing-ghoul:cast:s1	-	-	-	d864b561c9cb	-	ad22e0679445	-	-	2026-11-24	xproof

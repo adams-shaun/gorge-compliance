@@ -64,8 +64,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b553ed4-12eb-4a53-8e1f-d47ec92b1d65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b553ed4-12eb-4a53-8e1f-d47ec92b1d65	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b553ed4-12eb-4a53-8e1f-d47ec92b1d65	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-1b57c480-e2c5-44cd-820f-e208041bfd18	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b57c480-e2c5-44cd-820f-e208041bfd18	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1b57c480-e2c5-44cd-820f-e208041bfd18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dauthi-mercenary:cast:s1,f:xs:XP:dauthi-mercenary:cast:s1	-	-	-	ea3140b6974b	-	b2ede18747be	-	-	2026-11-24	xproof
+1b57c480-e2c5-44cd-820f-e208041bfd18	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:dauthi-mercenary:f0a0:s1,f:xs:XP:dauthi-mercenary:f0a0:s1	-	-	-	ea3140b6974b	-	b2ede18747be	-	-	2026-11-24	xproof
 1b57e9f8-68af-4f83-9062-6d715857dcef	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rakshasa-gravecaller:cast:s1,f:xs:XP:rakshasa-gravecaller:cast:s1	-	-	-	d864b561c9cb	-	74178cdbc6d9	-	-	2026-11-24	xproof
 1b57e9f8-68af-4f83-9062-6d715857dcef	f0/t0	Exploited	agreed	-	FX	start	4	0	x:xs:XP:rakshasa-gravecaller:cast:s1,f:xs:XP:rakshasa-gravecaller:cast:s1	-	-	-	d864b561c9cb	-	74178cdbc6d9	-	-	2026-11-24	xproof
 1b57e9f8-68af-4f83-9062-6d715857dcef	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:rakshasa-gravecaller:cast:s1,f:xs:XP:rakshasa-gravecaller:cast:s1	-	-	-	d864b561c9cb	-	74178cdbc6d9	-	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1bd5e51f-f9a5-4eb7-bda2-957310602c20	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:davriel-rogue-shadowmage:cast:s1,f:xs:XP:davriel-rogue-shadowmage:cast:s1	-	-	-	d864b561c9cb	-	4fb20e25e0af	-	-	2026-11-24	xproof
 1bd70be6-752c-4ecb-a3e8-2bacec4b94fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1bda7f60-f986-455b-9d56-bbd494e27c17	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1bda7f60-f986-455b-9d56-bbd494e27c17	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1bda7f60-f986-455b-9d56-bbd494e27c17	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 1bde8eaa-9beb-4529-b540-5e0155c09713	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1be13ede-98f8-497e-800c-03e5802932b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1be13ede-98f8-497e-800c-03e5802932b3	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

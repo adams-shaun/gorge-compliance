@@ -7,7 +7,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9103f01f-e60b-4cda-9102-edc4aef74cc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9103f01f-e60b-4cda-9102-edc4aef74cc3	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 910488bf-66ab-415e-973b-1262b2ab7454	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-910488bf-66ab-415e-973b-1262b2ab7454	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+910488bf-66ab-415e-973b-1262b2ab7454	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:marble-diamond:f0a0:s2,f:xs:XP:marble-diamond:f0a0:s2	-	-	-	ea3140b6974b	-	3c1c07f8878f	-	-	2026-11-24	xproof
 9107ece7-a263-4203-ab09-069193cc4902	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9107ece7-a263-4203-ab09-069193cc4902	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9107ece7-a263-4203-ab09-069193cc4902	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -40,8 +40,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91320daf-f69c-4350-b0fc-4bb37a6904b1	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Restless Anchorage/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91320daf-f69c-4350-b0fc-4bb37a6904b1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Restless Anchorage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91320daf-f69c-4350-b0fc-4bb37a6904b1	land	play-land	agreed	-	X	scen	1	0	Restless Anchorage/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9132d7e6-7190-45e1-9c57-8fe2e5d0f2f2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9132d7e6-7190-45e1-9c57-8fe2e5d0f2f2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9132d7e6-7190-45e1-9c57-8fe2e5d0f2f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venom-eddie-brock:cast:s1,f:xs:XP:venom-eddie-brock:cast:s1	-	-	-	ea3140b6974b	-	625c64a1a918	-	-	2026-11-24	xproof
+9132d7e6-7190-45e1-9c57-8fe2e5d0f2f2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 91363d71-eef0-48e8-9a68-8f363ff2790e	cast	cast-resolve	agreed	-	X	scen	1	0	Tend the Sprigs/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 913672bc-cc88-4964-a331-7dbce40f2bda	cast	cast-resolve	agreed	-	X	scen	1	0	Barret Wallace/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 913672bc-cc88-4964-a331-7dbce40f2bda	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Barret Wallace/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 917652c7-ac12-4cd7-ab2d-f2260a620d02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91770dc7-3de3-458f-a240-6540455fe05f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91770dc7-3de3-458f-a240-6540455fe05f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91770dc7-3de3-458f-a240-6540455fe05f	f0/a1	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:d-avenant-healer:f0a0:s1,f:xs:XP:d-avenant-healer:f0a0:s1	-	-	-	5f2128bf97e4	-	9ad6fedef5b2	-	-	2026-11-24	xproof
+91770dc7-3de3-458f-a240-6540455fe05f	f0/a1	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:d-avenant-healer:f0a0:s1,f:xs:XP:d-avenant-healer:f0a0:s1	-	-	-	ea3140b6974b	-	9ad6fedef5b2	-	-	2026-11-24	xproof
 9178253e-0d89-450d-a93b-ed4765e945db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 917aef2b-0e6d-460e-8745-8da8423d1592	cast	cast-resolve	agreed	-	X	scen	1	0	Riverwheel Sweep/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9180f77f-c288-4a24-a35d-a16270b3d737	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91babc5f-ebeb-4894-8c35-b0f60249cb80	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Quintorius Kand/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91babc5f-ebeb-4894-8c35-b0f60249cb80	f0/a2	activate#0.2	agreed	-	FX	scen	2	0	Quintorius Kand/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91babc5f-ebeb-4894-8c35-b0f60249cb80	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Quintorius Kand/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-91c0a76e-3992-437f-b85a-97b0b4adbb84	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91c0a76e-3992-437f-b85a-97b0b4adbb84	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lava-flow:cast:s1,f:xs:XP:lava-flow:cast:s1	-	-	-	ea3140b6974b	-	a9385c3b3c50	-	-	2026-11-24	xproof
 91c2f488-2b49-4499-8d5d-c1aff73a4b57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shattered-dreams:cast:s1,f:xs:XP:shattered-dreams:cast:s1	-	-	-	25696bf19d5b	-	19023dc926aa	-	-	2026-11-24	xproof
 91c380f6-2c41-48b7-9f07-104e8659e397	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:adanto-vanguard:cast:s1,f:xs:XP:adanto-vanguard:cast:s1	-	-	-	d864b561c9cb	-	de8d487a0b9d	-	-	2026-11-24	xproof
 91c380f6-2c41-48b7-9f07-104e8659e397	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:adanto-vanguard:cast:s1,f:xs:XP:adanto-vanguard:cast:s1	-	-	-	d864b561c9cb	-	de8d487a0b9d	-	-	2026-11-24	xproof
@@ -179,7 +179,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91e33674-b13a-41de-8998-4b57016ae42f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e3f057-c24f-42b5-8525-74b44bdefc83	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e3f057-c24f-42b5-8525-74b44bdefc83	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-91e49e8e-575f-43c8-9263-a8568697e7f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rictus-robber:f0t0:s1,f:xs:XP:rictus-robber:f0t0:s1	-	-	-	5f2128bf97e4	-	fc2a776ff044	-	-	2026-11-24	xproof
+91e49e8e-575f-43c8-9263-a8568697e7f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rictus-robber:f0t0:s1,f:xs:XP:rictus-robber:f0t0:s1	-	-	-	ea3140b6974b	-	fc2a776ff044	-	-	2026-11-24	xproof
 91e49e8e-575f-43c8-9263-a8568697e7f4	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e6fb47-59e4-4616-b8dd-3a7e30070074	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e6fb47-59e4-4616-b8dd-3a7e30070074	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

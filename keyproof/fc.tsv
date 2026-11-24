@@ -9,8 +9,8 @@ fc0707c7-d504-4ccf-a0d2-3eb6e26e7a57	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 fc0707c7-d504-4ccf-a0d2-3eb6e26e7a57	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc070e97-73ac-4028-9432-ff2012f2e778	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc071117-08aa-47c3-ae4a-4b6c630befa3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fc0907eb-a3fc-40ef-950d-b05aee9d5da7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fc0907eb-a3fc-40ef-950d-b05aee9d5da7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fc0907eb-a3fc-40ef-950d-b05aee9d5da7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leering-gargoyle:cast:s1,f:xs:XP:leering-gargoyle:cast:s1	-	-	-	ea3140b6974b	-	4bf9087775ba	-	-	2026-11-24	xproof
+fc0907eb-a3fc-40ef-950d-b05aee9d5da7	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:leering-gargoyle:f0a0:s1,f:xs:XP:leering-gargoyle:f0a0:s1	-	-	-	ea3140b6974b	-	4bf9087775ba	-	-	2026-11-24	xproof
 fc0abdf3-3a88-4cb2-ba79-35fcaebbf7d2	cast	cast-resolve	agreed	-	FX	scen	2	0	Wail of War/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fc1020b7-086e-41d6-a9ae-1c6c72cf820c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc1020b7-086e-41d6-a9ae-1c6c72cf820c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -72,8 +72,8 @@ fc71710a-8294-4370-89da-7ab1c2b38d19	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fc71710a-8294-4370-89da-7ab1c2b38d19	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 fc71710a-8294-4370-89da-7ab1c2b38d19	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 fc728cd7-2b5b-45f3-896a-a45648bcb61d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fc728cd7-2b5b-45f3-896a-a45648bcb61d	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fc728cd7-2b5b-45f3-896a-a45648bcb61d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fc728cd7-2b5b-45f3-896a-a45648bcb61d	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:baron-sengir:f0a0:s1,f:xs:XP:baron-sengir:f0a0:s1	-	-	-	ea3140b6974b	-	b77405722d54	-	-	2026-11-24	xproof
+fc728cd7-2b5b-45f3-896a-a45648bcb61d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 fc734a75-93bf-448b-b347-810ae835fe49	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archangel-s-light:cast:s1,f:xs:XP:archangel-s-light:cast:s1	-	-	-	d864b561c9cb	-	0df1610996fb	-	-	2026-11-24	xproof
 fc759e09-34b2-4004-8474-a6500dd1280c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc759e09-34b2-4004-8474-a6500dd1280c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -186,7 +186,7 @@ fcdfe9d5-2743-4d3e-ab57-bf0f96beaa15	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Aclaz
 fcdfe9d5-2743-4d3e-ab57-bf0f96beaa15	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Aclazotz, Deepest Betrayal/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fcdfe9d5-2743-4d3e-ab57-bf0f96beaa15	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Aclazotz, Deepest Betrayal/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fcdfe9d5-2743-4d3e-ab57-bf0f96beaa15	f1/a1	activate#1.1	agreed	-	X	scen	1	0	Aclazotz, Deepest Betrayal/activate#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fce29dd8-23b1-465c-a977-526f716dc8f6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fce29dd8-23b1-465c-a977-526f716dc8f6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragon-mask:cast:s1,f:xs:XP:dragon-mask:cast:s1	-	-	-	ea3140b6974b	-	773bbd28d7ca	-	-	2026-11-24	xproof
 fce29dd8-23b1-465c-a977-526f716dc8f6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fce335fb-bc67-4fa4-8d38-097f2a661332	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fce68545-c31d-4dc2-9f1b-aadf924a07d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

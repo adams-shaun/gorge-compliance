@@ -80,8 +80,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a620d20-f14e-43d0-8e57-c2a197e2ec51	land	land	agreed	-	FX	start	2	0	x:xs:XP:urza-s-factory:land:s1,f:xs:XP:urza-s-factory:land:s1	-	-	-	77494c1ce129	-	f7032dcf6c4d	-	-	2026-11-24	xproof
 5a647f28-6e26-4262-8593-d582e0a691f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a647f28-6e26-4262-8593-d582e0a691f7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a647f28-6e26-4262-8593-d582e0a691f7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a647f28-6e26-4262-8593-d582e0a691f7	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a647f28-6e26-4262-8593-d582e0a691f7	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+5a647f28-6e26-4262-8593-d582e0a691f7	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 5a651557-ce08-46ba-aecd-0e4fbfdef3c0	cast	cast-resolve	agreed	-	X	scen	1	0	Bile-Vial Boggart/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5a651557-ce08-46ba-aecd-0e4fbfdef3c0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bile-Vial Boggart/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5a66802a-76f9-4a31-a776-24110dcfca64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -101,7 +101,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a73d439-bd78-42e1-90ae-eedd30536881	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a73d439-bd78-42e1-90ae-eedd30536881	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5a747256-4215-4334-98ab-0c2e4ed92e47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a747256-4215-4334-98ab-0c2e4ed92e47	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a747256-4215-4334-98ab-0c2e4ed92e47	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 5a775f50-20f8-4a8f-868c-8907305bfad6	cast	cast	agreed	-	F	start	2	0	f:xs:XP:zoraline-cosmos-caller:cast:s2	-	-	-	5437c1394672	-	381cfa7b02c8	-	-	2026-11-24	xproof
 5a775f50-20f8-4a8f-868c-8907305bfad6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Zoraline, Cosmos Caller/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a775f50-20f8-4a8f-868c-8907305bfad6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Zoraline, Cosmos Caller/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -205,8 +205,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5adc9d0d-3393-4d91-be85-1f9dd344698b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5adcd0cb-9305-4e77-a117-31e9dca5c96d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5adcd0cb-9305-4e77-a117-31e9dca5c96d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-5ae03181-a436-4bad-be3a-6c9f6c0ed4d6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ae03181-a436-4bad-be3a-6c9f6c0ed4d6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5ae03181-a436-4bad-be3a-6c9f6c0ed4d6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undying-beast:cast:s1,f:xs:XP:undying-beast:cast:s1	-	-	-	ea3140b6974b	-	b861e071795c	-	-	2026-11-24	xproof
+5ae03181-a436-4bad-be3a-6c9f6c0ed4d6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:undying-beast:f0t0:s1,f:xs:XP:undying-beast:f0t0:s1	-	-	-	ea3140b6974b	-	b861e071795c	-	-	2026-11-24	xproof
 5af48f87-7b94-44de-90e3-91f10ced00d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:efficient-construction:cast:s1,f:xs:XP:efficient-construction:cast:s1	-	-	-	d864b561c9cb	-	12d2ae78c920	-	-	2026-11-24	xproof
 5af48f87-7b94-44de-90e3-91f10ced00d3	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5af729e8-8a40-4991-8270-612e377451de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wick-the-whorled-mind:cast:s2,f:xs:XP:wick-the-whorled-mind:cast:s2	-	-	-	5437c1394672	-	e7ea7064298a	-	-	2026-11-24	xproof

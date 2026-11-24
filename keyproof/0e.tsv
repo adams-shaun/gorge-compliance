@@ -56,8 +56,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e4d2fbc-1b34-4501-9022-8ea800cb2d24	f0/a0	DealDamage	agreed	-	F	start	2	0	f:xs:XP:talon-of-pain:cast:s1	-	-	-	25696bf19d5b	-	d5a37abf2d96	-	-	2026-11-24	xproof
 0e4d2fbc-1b34-4501-9022-8ea800cb2d24	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0e564f52-94fb-4c44-926f-0eebedc7d4c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cached-defenses:cast:s1,f:xs:XP:cached-defenses:cast:s1	-	-	-	d864b561c9cb	-	36dd31abef04	-	-	2026-11-24	xproof
-0e5a5cee-d068-42cf-bf58-8e1360720be0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0e5a5cee-d068-42cf-bf58-8e1360720be0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0e5a5cee-d068-42cf-bf58-8e1360720be0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fireslinger:cast:s1,f:xs:XP:fireslinger:cast:s1	-	-	-	ea3140b6974b	-	91f685ad30e3	-	-	2026-11-24	xproof
+0e5a5cee-d068-42cf-bf58-8e1360720be0	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:fireslinger:f0a0:s1,f:xs:XP:fireslinger:f0a0:s1	-	-	-	ea3140b6974b	-	91f685ad30e3	-	-	2026-11-24	xproof
 0e5b40dc-debf-48a1-8398-5ea00b5a5166	cast	cast-resolve	agreed	-	X	scen	1	0	Sazh Katzroy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e5b40dc-debf-48a1-8398-5ea00b5a5166	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 0e5b40dc-debf-48a1-8398-5ea00b5a5166	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sazh Katzroy/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e8adf34-0834-4027-9cda-18df69239e2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e8adf34-0834-4027-9cda-18df69239e2b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0e8ae1f7-8926-414a-8434-db0b0f877505	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0e8ae1f7-8926-414a-8434-db0b0f877505	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0e8ae1f7-8926-414a-8434-db0b0f877505	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 0e91a873-a680-4ca2-b073-26aa39376d77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e91a873-a680-4ca2-b073-26aa39376d77	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e969a27-1609-4ab4-b0db-46b1af8066a9	cast	cast-resolve	agreed	-	X	scen	1	0	Unflinching Courage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -141,9 +141,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ebec97e-3cb1-41e2-a693-0febb5623016	cast	cast-resolve	agreed	-	X	scen	1	0	Harmonious Grovestrider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ebec97e-3cb1-41e2-a693-0febb5623016	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Harmonious Grovestrider/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ebec97e-3cb1-41e2-a693-0febb5623016	static#0.0	static#0.0	agreed	-	X	scen	1	0	Harmonious Grovestrider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0ec153ee-2a91-4196-9105-212dd1864aea	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ec153ee-2a91-4196-9105-212dd1864aea	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ec153ee-2a91-4196-9105-212dd1864aea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0ec153ee-2a91-4196-9105-212dd1864aea	cast	cast	agreed	-	F	start	4	0	f:xs:XP:hecatomb:cast:s1	-	-	-	ea3140b6974b	-	de628f8e88c5	-	-	2026-11-24	xproof
+0ec153ee-2a91-4196-9105-212dd1864aea	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+0ec153ee-2a91-4196-9105-212dd1864aea	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:hecatomb:cast:s1	-	-	-	ea3140b6974b	-	de628f8e88c5	-	-	2026-11-24	xproof
 0ec54683-a65c-461d-862e-585b6499d6a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:burn-down-the-house:cast:s1,f:xs:XP:burn-down-the-house:cast:s1	-	-	-	d864b561c9cb	-	d1aaae21ef3e	-	-	2026-11-24	xproof
 0ec58835-de2d-4064-89a9-f92db80bc276	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ec58835-de2d-4064-89a9-f92db80bc276	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

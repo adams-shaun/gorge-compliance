@@ -107,8 +107,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45682055-d02a-450c-a41d-aa67162ff015	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Kolodin, Triumph Caster/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45682055-d02a-450c-a41d-aa67162ff015	static#0.0	static#0.0	agreed	-	X	scen	1	0	Kolodin, Triumph Caster/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45687a24-e8cb-4864-8721-410eb8320aab	cast	cast-resolve	agreed	-	FX	scen	2	0	Gold Rush/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-456bbc0e-a648-481f-b37e-9996029556bd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-456bbc0e-a648-481f-b37e-9996029556bd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+456bbc0e-a648-481f-b37e-9996029556bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crypt-cobra:cast:s1,f:xs:XP:crypt-cobra:cast:s1	-	-	-	ea3140b6974b	-	9d18b12bdf45	-	-	2026-11-24	xproof
+456bbc0e-a648-481f-b37e-9996029556bd	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 456dbec4-1b0e-48c4-abae-5c8205651872	cast	cast-resolve	agreed	-	X	scen	1	0	Interdimensional Web Watch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 456dbec4-1b0e-48c4-abae-5c8205651872	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Interdimensional Web Watch/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 456dbec4-1b0e-48c4-abae-5c8205651872	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4576cc5b-7b3a-41a7-9b84-acadf2d4adf5	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 4576cc5b-7b3a-41a7-9b84-acadf2d4adf5	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 457705c9-5b0c-4c3a-89dd-80286fac6a6c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-457705c9-5b0c-4c3a-89dd-80286fac6a6c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+457705c9-5b0c-4c3a-89dd-80286fac6a6c	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 45773715-3f46-4671-b633-bf087e892e26	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45773715-3f46-4671-b633-bf087e892e26	f0/a1	Scry	agreed	-	FX	start	2	0	x:xs:XP:lorehold-campus:f0a1:s1,f:xs:XP:lorehold-campus:f0a1:s1	-	-	-	d864b561c9cb	-	fdd42faf9434	-	-	2026-11-24	xproof
 45773715-3f46-4671-b633-bf087e892e26	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

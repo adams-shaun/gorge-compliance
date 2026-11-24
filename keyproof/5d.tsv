@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d24fb6b-7176-407c-b917-6c88a6da40df	cast	cast-resolve	agreed	-	X	scen	1	0	Nezumi Linkbreaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d24fb6b-7176-407c-b917-6c88a6da40df	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nezumi Linkbreaker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d258409-28d3-4eac-9f1a-3e494db818bf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d258409-28d3-4eac-9f1a-3e494db818bf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d258409-28d3-4eac-9f1a-3e494db818bf	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 5d2a9859-1353-4431-9343-f5999450acd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d2acd3e-4782-42e3-bcd5-80f8b439cc28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d2acd3e-4782-42e3-bcd5-80f8b439cc28	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d520476-740a-4005-801e-472b24fa6497	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 5d520dd4-7986-41fa-ab94-9226da751668	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:djeru-with-eyes-open:f0t0:s1,f:xs:XP:djeru-with-eyes-open:f0t0:s1	-	-	-	d864b561c9cb	-	a6f2dc5be24c	-	-	2026-11-24	xproof
 5d520dd4-7986-41fa-ab94-9226da751668	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:djeru-with-eyes-open:f0t0:s1,f:xs:XP:djeru-with-eyes-open:f0t0:s1	-	-	-	d864b561c9cb	-	a6f2dc5be24c	-	-	2026-11-24	xproof
-5d575b78-3d7b-4860-abc3-e99e429279a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mine-raider:f0t0:s1,f:xs:XP:mine-raider:f0t0:s1	-	-	-	5f2128bf97e4	-	16a2818a7867	-	-	2026-11-24	xproof
+5d575b78-3d7b-4860-abc3-e99e429279a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mine-raider:f0t0:s1,f:xs:XP:mine-raider:f0t0:s1	-	-	-	ea3140b6974b	-	16a2818a7867	-	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mine Raider/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mine Raider/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d936655-8e46-4e30-8f9c-4fa1a4d34a17	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d936655-8e46-4e30-8f9c-4fa1a4d34a17	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d9431de-7cf0-43d4-9b86-e0ef4a7756f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d9431de-7cf0-43d4-9b86-e0ef4a7756f9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d9431de-7cf0-43d4-9b86-e0ef4a7756f9	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 5d950fd4-8956-4b1a-ab0f-ab31bcffce4e	cast	cast-resolve	agreed	-	X	scen	1	0	Callous Inspector/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d950fd4-8956-4b1a-ab0f-ab31bcffce4e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Callous Inspector/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d950fd4-8956-4b1a-ab0f-ab31bcffce4e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Callous Inspector/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

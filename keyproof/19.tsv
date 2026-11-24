@@ -101,7 +101,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19797dd6-6f48-47bc-a9ac-84d4acad3fa5	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 19797dd6-6f48-47bc-a9ac-84d4acad3fa5	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 197fd850-0a08-4e82-9249-a8d719436f77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1980ca2e-a415-4de1-ac30-7055507e82a2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1980ca2e-a415-4de1-ac30-7055507e82a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampiric-feast:cast:s1,f:xs:XP:vampiric-feast:cast:s1	-	-	-	ea3140b6974b	-	f2491d54bdcb	-	-	2026-11-24	xproof
 1983478a-cedb-4053-adab-ac5f1a163296	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:glint-nest-crane:cast:s1,f:xs:XP:glint-nest-crane:cast:s1	-	-	-	d864b561c9cb	-	a12d13fc1b3b	-	-	2026-11-24	xproof
 1983478a-cedb-4053-adab-ac5f1a163296	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:glint-nest-crane:cast:s1,f:xs:XP:glint-nest-crane:cast:s1	-	-	-	d864b561c9cb	-	a12d13fc1b3b	-	-	2026-11-24	xproof
 19845456-3d96-48a4-89fa-9b8e583774c9	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Man 2099/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19a11c33-269a-45d3-86c7-827965053f26	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 19a2f0a0-9e68-4982-a5f5-b77d805befd7	cast	cast-resolve	agreed	-	X	scen	1	0	Demonic Pact/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19a2f0a0-9e68-4982-a5f5-b77d805befd7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Demonic Pact/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-19a32e29-45ec-433e-9cb4-b2c32cac8f80	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beastbond-outcaster:f0t0:s1,f:xs:XP:beastbond-outcaster:f0t0:s1	-	-	-	5f2128bf97e4	-	a829239b252e	-	-	2026-11-24	xproof
+19a32e29-45ec-433e-9cb4-b2c32cac8f80	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beastbond-outcaster:f0t0:s1,f:xs:XP:beastbond-outcaster:f0t0:s1	-	-	-	ea3140b6974b	-	a829239b252e	-	-	2026-11-24	xproof
 19a32e29-45ec-433e-9cb4-b2c32cac8f80	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a39cc5-2134-4dee-932c-81389806c57b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a3c505-b180-47cc-bef3-9e807a8a4a3d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lore-seeker:cast:s1,f:xs:XP:lore-seeker:cast:s1	-	-	-	78d0801f2bf1	-	afcb2620ecd4	-	-	2026-11-24	xproof

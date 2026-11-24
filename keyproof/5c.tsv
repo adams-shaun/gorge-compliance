@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c151e3b-fcf2-4adb-a60b-9eff0c360705	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Arcane Amphisbaena/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5c151e3b-fcf2-4adb-a60b-9eff0c360705	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Arcane Amphisbaena/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5c151e3b-fcf2-4adb-a60b-9eff0c360705	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:arcane-amphisbaena:f0t0:s1	-	-	-	25696bf19d5b	-	8ffd18ced4e7	-	-	2026-11-24	xproof
-5c19db44-0eae-4d22-9bf4-7e6cdc6b9d8f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5c19db44-0eae-4d22-9bf4-7e6cdc6b9d8f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:energy-bolt:cast:s1,f:xs:XP:energy-bolt:cast:s1	-	-	-	ea3140b6974b	-	279b3a3ab328	-	-	2026-11-24	xproof
 5c22447b-7a7f-4a27-8d3b-1bb664ea94c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c22447b-7a7f-4a27-8d3b-1bb664ea94c3	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5c22447b-7a7f-4a27-8d3b-1bb664ea94c3	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c7f02ad-1daf-4d1a-bef0-0b2064f9b67e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c7f02ad-1daf-4d1a-bef0-0b2064f9b67e	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5c80d39e-f3af-4d24-bca0-19f0bd0f5082	cast	cast-resolve	agreed	-	X	scen	1	0	Heat Shimmer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-5c828a5e-10ae-4f63-86fd-2f160af43cc3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5c828a5e-10ae-4f63-86fd-2f160af43cc3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dismiss:cast:s1,f:xs:XP:dismiss:cast:s1	-	-	-	ea3140b6974b	-	75d5c5bdd3bf	-	-	2026-11-24	xproof
 5c84d8da-2bfb-4618-89a0-7d9ed604e854	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c84d8da-2bfb-4618-89a0-7d9ed604e854	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c87e2fa-77f1-4978-b25f-f14d227301d1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cf18398-9552-415e-a61f-2c149e35ec3d	cast	cast-resolve	agreed	-	X	scen	1	0	Zuko's Exile/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5cf1d7c3-6ebe-440b-88c8-33b7f6aa0d7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cf1d7c3-6ebe-440b-88c8-33b7f6aa0d7c	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5cf28c04-76af-4eb8-9969-366dc8e04690	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5cf28c04-76af-4eb8-9969-366dc8e04690	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warrior-s-charge:cast:s1,f:xs:XP:warrior-s-charge:cast:s1	-	-	-	ea3140b6974b	-	fdb869b6781b	-	-	2026-11-24	xproof
 5cf3727b-eb7b-414e-982c-3acf4c05ddf1	cast	cast-resolve	agreed	-	X	scen	1	0	Shady Informant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5cf3727b-eb7b-414e-982c-3acf4c05ddf1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Shady Informant/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5cf4d98e-f2f4-435b-a633-990b2e654f3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

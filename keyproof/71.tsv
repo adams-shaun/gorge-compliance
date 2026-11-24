@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7126772a-d586-4859-81ec-46bbe9d1a678	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rumbling-sentry:f0t0:s1,f:xs:XP:rumbling-sentry:f0t0:s1	-	-	-	ae86f6029288	-	ef007227827e	-	-	2026-11-24	xproof
 7126772a-d586-4859-81ec-46bbe9d1a678	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rumbling-sentry:f0t0:s1,f:xs:XP:rumbling-sentry:f0t0:s1	-	-	-	ae86f6029288	-	ef007227827e	-	-	2026-11-24	xproof
 7127fc35-600c-4397-8c01-5327d3c4944b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7127fc35-600c-4397-8c01-5327d3c4944b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7127fc35-600c-4397-8c01-5327d3c4944b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 7129bdec-83e0-4c1e-a87b-ac0da1a714b3	cast	cast-resolve	agreed	-	X	scen	1	0	Dauntless Dismantler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7129bdec-83e0-4c1e-a87b-ac0da1a714b3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dauntless Dismantler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 712d7eb4-4044-4852-a5da-57635d3086b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 71766a05-62a5-4839-b9bf-f5dcde710251	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7177361a-f86f-4a50-b517-229cb1eaac07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reservoir-walker:f0t0:s1,f:xs:XP:reservoir-walker:f0t0:s1	-	-	-	d864b561c9cb	-	1981c664bcfe	-	-	2026-11-24	xproof
 7177361a-f86f-4a50-b517-229cb1eaac07	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:reservoir-walker:f0t0:s1,f:xs:XP:reservoir-walker:f0t0:s1	-	-	-	d864b561c9cb	-	1981c664bcfe	-	-	2026-11-24	xproof
-7179c2c5-c59c-4793-a3b5-28d26d755157	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7179c2c5-c59c-4793-a3b5-28d26d755157	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:paradigm-shift:cast:s1,f:xs:XP:paradigm-shift:cast:s1	-	-	-	ea3140b6974b	-	8610a040acb0	-	-	2026-11-24	xproof
 717bbb9d-0a5b-4979-a24b-9d54aac7657a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shriekmaw:f0t0:s1,f:xs:XP:shriekmaw:f0t0:s1	-	-	-	d864b561c9cb	-	3b9529e16171	-	-	2026-11-24	xproof
 717bbb9d-0a5b-4979-a24b-9d54aac7657a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shriekmaw:f0t0:s1,f:xs:XP:shriekmaw:f0t0:s1	-	-	-	d864b561c9cb	-	3b9529e16171	-	-	2026-11-24	xproof
 717c6beb-81c6-43ed-aab0-aedfc1cbac33	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Lake-town/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

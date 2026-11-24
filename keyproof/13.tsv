@@ -90,8 +90,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 137b5708-50a9-4f4c-84e6-9043be9f1989	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anathemancer:f0t0:s1,f:xs:XP:anathemancer:f0t0:s1	-	-	-	8a1b1a193ec0	-	dfdd649d0d34	-	-	2026-11-24	xproof
 137b5708-50a9-4f4c-84e6-9043be9f1989	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 137b5708-50a9-4f4c-84e6-9043be9f1989	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:anathemancer:f0t0:s1,f:xs:XP:anathemancer:f0t0:s1	-	-	-	8a1b1a193ec0	-	dfdd649d0d34	-	-	2026-11-24	xproof
-137e0ad2-e10a-4327-86a3-5ac7bc7fc469	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-137e0ad2-e10a-4327-86a3-5ac7bc7fc469	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+137e0ad2-e10a-4327-86a3-5ac7bc7fc469	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raging-spirit:cast:s1,f:xs:XP:raging-spirit:cast:s1	-	-	-	ea3140b6974b	-	19d386627b06	-	-	2026-11-24	xproof
+137e0ad2-e10a-4327-86a3-5ac7bc7fc469	f0/a0	Animate	agreed	-	F	start	2	0	f:xs:XP:raging-spirit:f0a0:s1	-	-	-	ea3140b6974b	-	19d386627b06	-	-	2026-11-24	xproof
 137e3974-74e1-4941-8597-10aeba6cac37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 137e3974-74e1-4941-8597-10aeba6cac37	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1380f0cc-e875-46ec-a802-c6684bf3965c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -197,13 +197,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13f63240-a6bb-4333-a3dd-818725c6fb73	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:abhorrent-overlord:f0t0:s1,f:xs:XP:abhorrent-overlord:f0t0:s1	-	-	-	d864b561c9cb	-	94a35dd9c94e	-	-	2026-11-24	xproof
 13f63240-a6bb-4333-a3dd-818725c6fb73	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13f63b98-40b0-499b-bb5d-640b95a6ea1c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13f69c70-dc93-4983-b649-d91b22633eb9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13f69c70-dc93-4983-b649-d91b22633eb9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jolt:cast:s1,f:xs:XP:jolt:cast:s1	-	-	-	ea3140b6974b	-	442ddbcd6b0c	-	-	2026-11-24	xproof
 13f6f960-ef79-4f2c-8874-90fe9e77099e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ground-seal:f0t0:s1,f:xs:XP:ground-seal:f0t0:s1	-	-	-	25696bf19d5b	-	72f9d83d0b05	-	-	2026-11-24	xproof
 13f6f960-ef79-4f2c-8874-90fe9e77099e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ground-seal:f0t0:s1,f:xs:XP:ground-seal:f0t0:s1	-	-	-	25696bf19d5b	-	72f9d83d0b05	-	-	2026-11-24	xproof
 13f9a845-d0e9-4790-99e0-b857204ad1da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13f9a845-d0e9-4790-99e0-b857204ad1da	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 13fb5413-0057-4022-84da-2c90ce065ed1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13fb5413-0057-4022-84da-2c90ce065ed1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13fb5413-0057-4022-84da-2c90ce065ed1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 13fbd525-c9ee-4bd6-b269-94fb264024b6	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gohn, Town of Ruin/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13fbd525-c9ee-4bd6-b269-94fb264024b6	land	play-land	agreed	-	X	scen	1	0	Gohn, Town of Ruin/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13fd7ca6-c278-409f-a9c4-57f16051ffce	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:starling-aerial-ally:f0t0:s2,f:xs:XP:starling-aerial-ally:f0t0:s2	-	-	-	267e485f6204	-	e1bcd026b2d7	-	-	2026-11-24	xproof

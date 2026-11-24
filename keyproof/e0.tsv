@@ -87,7 +87,7 @@ e05f1a43-16ce-4e88-b0ad-2202efb25516	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Nort
 e05f1a43-16ce-4e88-b0ad-2202efb25516	land	play-land	agreed	-	X	scen	1	0	Northampton Farm/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e05f23ba-f2b2-4c40-83fa-8defce3cb978	cast	cast-resolve	agreed	-	FX	scen	2	0	The Coming of Galactus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e05f3236-dc82-4353-87ab-d26ae7caa0e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e05f3236-dc82-4353-87ab-d26ae7caa0e7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e05f3236-dc82-4353-87ab-d26ae7caa0e7	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 e060bf7a-f266-40b4-9772-e243dcbf965b	cast	cast-resolve	agreed	-	FX	scen	2	0	Dreams of Laguna/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e0610ab1-88d3-4502-84b7-3a08d0170167	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0610ab1-88d3-4502-84b7-3a08d0170167	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ e0b15374-b4f6-48e0-8477-4eb5d5c2a938	cast	cast-resolve	agreed	-	FX	scen	2	0	Squa
 e0b15374-b4f6-48e0-8477-4eb5d5c2a938	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Squad Rallier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e0b3cfc1-68d4-46a8-9ae4-71bdb9c87889	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0b3cfc1-68d4-46a8-9ae4-71bdb9c87889	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e0b3cfc1-68d4-46a8-9ae4-71bdb9c87889	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e0b3cfc1-68d4-46a8-9ae4-71bdb9c87889	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:order-of-the-white-shield:f0a1:s1,f:xs:XP:order-of-the-white-shield:f0a1:s1	-	-	-	ea3140b6974b	-	546773982874	-	-	2026-11-24	xproof
 e0b5b3af-af89-4b91-8b55-947ec095d6f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0bdfbb4-3060-4492-bd9b-0c47e719400a	cast	cast-resolve	agreed	-	X	scen	1	0	Jumbo Cactuar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e0bdfbb4-3060-4492-bd9b-0c47e719400a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Jumbo Cactuar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -171,9 +171,9 @@ e0cef79c-ad47-4cbc-9d73-a913e487ccb7	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:g
 e0cef79c-ad47-4cbc-9d73-a913e487ccb7	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e0cef79c-ad47-4cbc-9d73-a913e487ccb7	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e0d221da-16cd-4399-830f-eecc9a0912eb	cast	cast-resolve	agreed	-	X	scen	1	0	Broadcast Takeover/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e0d638d2-2c5b-415c-95e7-74bf8d88794f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e0d638d2-2c5b-415c-95e7-74bf8d88794f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e0d638d2-2c5b-415c-95e7-74bf8d88794f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e0d638d2-2c5b-415c-95e7-74bf8d88794f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:freyalise-s-charm:cast:s1,f:xs:XP:freyalise-s-charm:cast:s1	-	-	-	ea3140b6974b	-	53e288e1397f	-	-	2026-11-24	xproof
+e0d638d2-2c5b-415c-95e7-74bf8d88794f	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:freyalise-s-charm:f0a0:s1,f:xs:XP:freyalise-s-charm:f0a0:s1	-	-	-	ea3140b6974b	-	53e288e1397f	-	-	2026-11-24	xproof
+e0d638d2-2c5b-415c-95e7-74bf8d88794f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 e0d78210-ba85-439f-bf1f-92ef80b6030d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0d78210-ba85-439f-bf1f-92ef80b6030d	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 e0de0121-6185-45c5-9d88-a415b07347e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

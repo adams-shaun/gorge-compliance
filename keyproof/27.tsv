@@ -92,9 +92,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 277ff122-2d6e-441e-9ec1-980cdb393982	f0/t0	Attacks/Exalted	agreed	-	FX	start	2	0	x:xs:XP:sigiled-behemoth:f0t0:s1,f:xs:XP:sigiled-behemoth:f0t0:s1	-	-	-	8a1b1a193ec0	-	c13911bc9cd0	-	-	2026-11-24	xproof
 278574f6-e083-461b-8bac-52ed51f0cf63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 278574f6-e083-461b-8bac-52ed51f0cf63	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
-2786f210-ec64-46ea-9a7f-b03759fb1dae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2786f210-ec64-46ea-9a7f-b03759fb1dae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2786f210-ec64-46ea-9a7f-b03759fb1dae	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2786f210-ec64-46ea-9a7f-b03759fb1dae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancestral-knowledge:f0t0:s1,f:xs:XP:ancestral-knowledge:f0t0:s1	-	-	-	ea3140b6974b	-	d5e09b254228	-	-	2026-11-24	xproof
+2786f210-ec64-46ea-9a7f-b03759fb1dae	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ancestral-knowledge:f0t0:s1,f:xs:XP:ancestral-knowledge:f0t0:s1	-	-	-	ea3140b6974b	-	d5e09b254228	-	-	2026-11-24	xproof
+2786f210-ec64-46ea-9a7f-b03759fb1dae	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 2786f210-ec64-46ea-9a7f-b03759fb1dae	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27882623-b5ad-49f2-b5ab-f0bdb93268a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 278b237e-9699-43eb-a03e-0b68eccc08b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -110,7 +110,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27a3aa64-1de7-4b0c-af23-52886e7d258a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:prismatic-undercurrents:f0t0:s2,f:xs:XP:prismatic-undercurrents:f0t0:s2	-	-	-	267e485f6204	-	ca440e55cedf	-	-	2026-11-24	xproof
 27a3aa64-1de7-4b0c-af23-52886e7d258a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:prismatic-undercurrents:f0t0:s2,f:xs:XP:prismatic-undercurrents:f0t0:s2	-	-	-	267e485f6204	-	ca440e55cedf	-	-	2026-11-24	xproof
 27a3aa64-1de7-4b0c-af23-52886e7d258a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Prismatic Undercurrents/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-27a3faa1-4f1a-4581-9e19-9265faa9c10b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27a3faa1-4f1a-4581-9e19-9265faa9c10b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:painful-memories:cast:s1,f:xs:XP:painful-memories:cast:s1	-	-	-	ea3140b6974b	-	dc27fa2788ca	-	-	2026-11-24	xproof
 27a4b633-5a62-4d8c-8cc6-44959c311de9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27a4b633-5a62-4d8c-8cc6-44959c311de9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27a66362-f2f5-4d46-9faf-a73752753304	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nimana-skydancer:f0t0:s1,f:xs:XP:nimana-skydancer:f0t0:s1	-	-	-	ae86f6029288	-	fdd925d5a846	-	-	2026-11-24	xproof

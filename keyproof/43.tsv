@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4339f621-8502-4433-a37a-654591ca1b43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 433a2880-d989-4c40-99fa-0896de341b88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aether-meltdown:f0t0:s1,f:xs:XP:aether-meltdown:f0t0:s1	-	-	-	d864b561c9cb	-	d70b13f3f62f	-	-	2026-11-24	xproof
 433a2880-d989-4c40-99fa-0896de341b88	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aether-meltdown:f0t0:s1,f:xs:XP:aether-meltdown:f0t0:s1	-	-	-	d864b561c9cb	-	d70b13f3f62f	-	-	2026-11-24	xproof
-433e86ce-df04-4182-bb63-ad2607d67dbd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+433e86ce-df04-4182-bb63-ad2607d67dbd	cast	cast	agreed	-	F	start	2	0	f:xs:XP:contagion:cast:s1	-	-	-	ea3140b6974b	-	e17a839580c4	-	-	2026-11-24	xproof
 433e92d2-899a-4eed-98b9-80de5d25494b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43402a6c-9fba-4a80-90b3-14bac05c574b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4344abeb-47ab-4638-b50f-dd502f14c1af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,8 +137,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43a2bd01-3fce-4191-a08a-1e379c7770b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43a2bd01-3fce-4191-a08a-1e379c7770b0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43a2bd01-3fce-4191-a08a-1e379c7770b0	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-43a515f2-b53a-4bb4-bb6e-0d79c9162359	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43a515f2-b53a-4bb4-bb6e-0d79c9162359	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+43a515f2-b53a-4bb4-bb6e-0d79c9162359	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:giant-caterpillar:cast:s1,f:xs:XP:giant-caterpillar:cast:s1	-	-	-	ea3140b6974b	-	66a31418e8ca	-	-	2026-11-24	xproof
+43a515f2-b53a-4bb4-bb6e-0d79c9162359	f0/a0	DelayedTrigger	agreed	-	FX	start	2	0	x:xs:XP:giant-caterpillar:f0a0:s1,f:xs:XP:giant-caterpillar:f0a0:s1	-	-	-	ea3140b6974b	-	66a31418e8ca	-	-	2026-11-24	xproof
 43a6de3e-152e-4af1-acec-53405742425c	cast	cast-resolve	agreed	-	X	scen	1	0	Otterball Antics/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43a86d36-9653-4498-a533-8b30b919cdbf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gift-of-paradise:f0t0:s1,f:xs:XP:gift-of-paradise:f0t0:s1	-	-	-	d864b561c9cb	-	182824033078	-	-	2026-11-24	xproof
 43a86d36-9653-4498-a533-8b30b919cdbf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gift-of-paradise:f0t0:s1,f:xs:XP:gift-of-paradise:f0t0:s1	-	-	-	d864b561c9cb	-	182824033078	-	-	2026-11-24	xproof

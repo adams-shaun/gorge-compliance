@@ -221,9 +221,9 @@ b9e4d34a-ba91-4ad6-b886-daeeda6c9498	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hol
 b9e4d34a-ba91-4ad6-b886-daeeda6c9498	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9e53414-c21f-4479-b8c1-8b36c3e6e006	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:civic-wayfinder:f0t0:s1,f:xs:XP:civic-wayfinder:f0t0:s1	-	-	-	64a08ba7d913	-	e47760e5d61b	-	-	2026-11-24	xproof
 b9e53414-c21f-4479-b8c1-8b36c3e6e006	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:civic-wayfinder:f0t0:s1,f:xs:XP:civic-wayfinder:f0t0:s1	-	-	-	64a08ba7d913	-	e47760e5d61b	-	-	2026-11-24	xproof
-b9e61e68-9dc8-4295-95dc-dd66a0907c8c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b9e61e68-9dc8-4295-95dc-dd66a0907c8c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b9e61e68-9dc8-4295-95dc-dd66a0907c8c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b9e61e68-9dc8-4295-95dc-dd66a0907c8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forsaken-wastes:cast:s1,f:xs:XP:forsaken-wastes:cast:s1	-	-	-	ea3140b6974b	-	c72c91598317	-	-	2026-11-24	xproof
+b9e61e68-9dc8-4295-95dc-dd66a0907c8c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:forsaken-wastes:cast:s1,f:xs:XP:forsaken-wastes:cast:s1	-	-	-	ea3140b6974b	-	c72c91598317	-	-	2026-11-24	xproof
+b9e61e68-9dc8-4295-95dc-dd66a0907c8c	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 b9e93832-93b7-409d-91aa-13757225824d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9e93832-93b7-409d-91aa-13757225824d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b9ea2e9c-a83b-40dd-ad52-b16d65989ba3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -233,6 +233,6 @@ b9ed0081-7eda-4ff9-ac2d-bcdc29a22d9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b9ed0081-7eda-4ff9-ac2d-bcdc29a22d9f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 b9f4f96b-6e54-4fe6-8df7-623e0fc72409	cast	cast-resolve	agreed	-	FX	scen	2	0	Mentor of the Meek/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b9f4f96b-6e54-4fe6-8df7-623e0fc72409	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Mentor of the Meek/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b9f63388-d1ac-4895-84c5-e5b1db187463	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b9f63388-d1ac-4895-84c5-e5b1db187463	cast	cast	agreed	-	F	start	2	0	f:xs:XP:essence-filter:cast:s1	-	-	-	ea3140b6974b	-	bb5fd9270f8c	-	-	2026-11-24	xproof
 b9fff42d-31cf-4edf-8353-4a3b996bb77b	cast	cast-resolve	agreed	-	X	scen	1	0	Meek Attack/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b9fff42d-31cf-4edf-8353-4a3b996bb77b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Meek Attack/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

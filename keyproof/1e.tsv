@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1e79b7bf-8a2d-4585-81d0-755dce78a4ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e79b7bf-8a2d-4585-81d0-755dce78a4ea	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1e7b075b-1c0f-4c44-a597-5c167a786cb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1e7b075b-1c0f-4c44-a597-5c167a786cb1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1e7b075b-1c0f-4c44-a597-5c167a786cb1	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 1e7bddbd-e448-4aea-9d18-b44bd45837c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vow-of-duty:cast:s1,f:xs:XP:vow-of-duty:cast:s1	-	-	-	78d0801f2bf1	-	ac19354f74ff	-	-	2026-11-24	xproof
 1e825298-7c99-40cc-81c9-280cc7ed98d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e825298-7c99-40cc-81c9-280cc7ed98d3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,13 +142,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ebafd78-269a-4974-88d2-e75b44b744c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ebafd78-269a-4974-88d2-e75b44b744c2	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1ebdc091-16d5-4803-821a-ac8c4696b5bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ebdc091-16d5-4803-821a-ac8c4696b5bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ebdc091-16d5-4803-821a-ac8c4696b5bc	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 1ebf2142-f171-40cd-8143-15f50084b707	cast	cast-resolve	agreed	-	X	scen	1	0	Koma, World-Eater/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ebf2142-f171-40cd-8143-15f50084b707	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Koma, World-Eater/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ebf2142-f171-40cd-8143-15f50084b707	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Koma, World-Eater/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ebf2142-f171-40cd-8143-15f50084b707	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Koma, World-Eater/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ebf2142-f171-40cd-8143-15f50084b707	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Koma, World-Eater/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1ec365f8-bfb8-416f-b4db-868a8f5d042a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ec365f8-bfb8-416f-b4db-868a8f5d042a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:chain-stasis:cast:s1	-	-	-	ea3140b6974b	-	903fb349b828	-	-	2026-11-24	xproof
 1ec39c8f-eb1e-4881-a749-0c188788b612	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:oath-of-ajani:cast:s1,f:xs:XP:oath-of-ajani:cast:s1	-	-	-	d864b561c9cb	-	7b8c937668ae	-	-	2026-11-24	xproof
 1ec39c8f-eb1e-4881-a749-0c188788b612	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:oath-of-ajani:cast:s1,f:xs:XP:oath-of-ajani:cast:s1	-	-	-	d864b561c9cb	-	7b8c937668ae	-	-	2026-11-24	xproof
 1ec63280-ae5b-4892-8854-de2d8127ea83	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:solstice-zealot:f0t0:s1,f:xs:XP:solstice-zealot:f0t0:s1	-	-	-	ae86f6029288	-	859ed956e632	-	-	2026-11-24	xproof

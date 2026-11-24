@@ -5,8 +5,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3902048e-b7bf-4676-be92-e590bc76c729	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3902048e-b7bf-4676-be92-e590bc76c729	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 390290b3-77cc-4180-8e6c-9cb808f6ac7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39050823-ccda-43c0-818d-d5db15d82b99	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39050823-ccda-43c0-818d-d5db15d82b99	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+39050823-ccda-43c0-818d-d5db15d82b99	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kjeldoran-frostbeast:cast:s1,f:xs:XP:kjeldoran-frostbeast:cast:s1	-	-	-	ea3140b6974b	-	bb5a3c94696a	-	-	2026-11-24	xproof
+39050823-ccda-43c0-818d-d5db15d82b99	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:kjeldoran-frostbeast:cast:s1,f:xs:XP:kjeldoran-frostbeast:cast:s1	-	-	-	ea3140b6974b	-	bb5a3c94696a	-	-	2026-11-24	xproof
 39068bf1-cae4-4ac9-82ef-4e81bf59446e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3909ff79-2103-407c-a812-a5a5a996fce2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3909ff79-2103-407c-a812-a5a5a996fce2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 395611fa-aec2-4c9e-92c3-70cf95cc00f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 395922cc-d524-4241-a7d8-9c7959f0b9db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3961ef7c-4eb4-482e-9cda-d49d6a29c5a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3961ef7c-4eb4-482e-9cda-d49d6a29c5a9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3961ef7c-4eb4-482e-9cda-d49d6a29c5a9	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:aurochs:f0t0:s1,f:xs:XP:aurochs:f0t0:s1	-	-	-	ea3140b6974b	-	7279f5e749e9	-	-	2026-11-24	xproof
 3963140c-da67-43e6-9514-fe9dc0a43c4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3963140c-da67-43e6-9514-fe9dc0a43c4d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 396564be-3747-49dd-98dc-afb81a375f18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -194,7 +194,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39d993be-30ad-4756-a494-fd8808d474c9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tigra, Feline Fury/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 39daa265-8d02-4449-9c45-ae8ec2b13e5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39e01990-9928-440c-a5c3-82aea29e2cd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39e01990-9928-440c-a5c3-82aea29e2cd0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+39e01990-9928-440c-a5c3-82aea29e2cd0	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:soltari-crusader:f0a0:s1,f:xs:XP:soltari-crusader:f0a0:s1	-	-	-	ea3140b6974b	-	ef9501cb8e4f	-	-	2026-11-24	xproof
 39e20898-cf01-48dc-8972-7ac500c3fa79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39e20898-cf01-48dc-8972-7ac500c3fa79	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 39e21a5a-b278-478a-854c-17695c0f6246	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

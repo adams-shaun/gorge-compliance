@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c5a7772-8358-4549-a583-f54246869e20	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-replica:cast:s1,f:xs:XP:goblin-replica:cast:s1	-	-	-	25696bf19d5b	-	f45aa971012f	-	-	2026-11-24	xproof
 0c5a7772-8358-4549-a583-f54246869e20	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:goblin-replica:f0a0:s1,f:xs:XP:goblin-replica:f0a0:s1	-	-	-	d864b561c9cb	-	f45aa971012f	-	-	2026-11-24	xproof
 0c67133b-be15-47d7-8cf6-79987a42044d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c67133b-be15-47d7-8cf6-79987a42044d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c67133b-be15-47d7-8cf6-79987a42044d	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:charging-bandits:f0t0:s1,f:xs:XP:charging-bandits:f0t0:s1	-	-	-	ea3140b6974b	-	3024bf714440	-	-	2026-11-24	xproof
 0c6a6587-2b3f-40d1-a5f2-06128da0d52e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c6c4921-c6cb-4b4b-ac9d-10ccc89a5d1d	cast	cast-resolve	agreed	-	X	scen	1	0	Water Tribe Captain/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c6c4921-c6cb-4b4b-ac9d-10ccc89a5d1d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Water Tribe Captain/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -124,12 +124,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c8cb2ec-5b58-497c-a6e7-2d25512d5a44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c936582-d4c0-4da8-bc7e-49da5a433939	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c93c418-e10b-4a6d-bddb-3b786bb6a928	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c93c418-e10b-4a6d-bddb-3b786bb6a928	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c93c418-e10b-4a6d-bddb-3b786bb6a928	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 0c952586-e522-4982-bebd-96f1db73053d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tourach-dread-cantor:f0t1:s1,f:xs:XP:tourach-dread-cantor:f0t1:s1	-	-	-	d864b561c9cb	-	207fa265a1ee	-	-	2026-11-24	xproof
 0c952586-e522-4982-bebd-96f1db73053d	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0c952586-e522-4982-bebd-96f1db73053d	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tourach-dread-cantor:f0t1:s1,f:xs:XP:tourach-dread-cantor:f0t1:s1	-	-	-	d864b561c9cb	-	207fa265a1ee	-	-	2026-11-24	xproof
-0c978da4-9caa-4b4b-be52-889677962ec9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c978da4-9caa-4b4b-be52-889677962ec9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c978da4-9caa-4b4b-be52-889677962ec9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:telim-tor-s-darts:cast:s1,f:xs:XP:telim-tor-s-darts:cast:s1	-	-	-	ea3140b6974b	-	09cbce62030b	-	-	2026-11-24	xproof
+0c978da4-9caa-4b4b-be52-889677962ec9	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:telim-tor-s-darts:f0a0:s1,f:xs:XP:telim-tor-s-darts:f0a0:s1	-	-	-	ea3140b6974b	-	09cbce62030b	-	-	2026-11-24	xproof
 0c97aea7-c997-45b4-a044-84fb5c07a021	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aerie-auxiliary:f0t0:s1,f:xs:XP:aerie-auxiliary:f0t0:s1	-	-	-	ae86f6029288	-	5e4ac128a98a	-	-	2026-11-24	xproof
 0c97aea7-c997-45b4-a044-84fb5c07a021	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aerie-auxiliary:f0t0:s1,f:xs:XP:aerie-auxiliary:f0t0:s1	-	-	-	ae86f6029288	-	5e4ac128a98a	-	-	2026-11-24	xproof
 0c9e3e6a-0bab-4619-b135-d2dbe824b1f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
