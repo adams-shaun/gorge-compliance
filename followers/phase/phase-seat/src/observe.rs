@@ -4,16 +4,18 @@
 use serde_json::{json, Value};
 
 /// The thirteen `ObservationFlags` (all required by the schema). What the projection in `view`
-/// fills is true; the rest are false and read `null`.
+/// fills is true; the rest are false and read `null`. The set is gorge's own profile (the one
+/// `xclient`'s validator holds every engine to): `full_name`, `known_cards`, `passed_seats`,
+/// `player_progress` and `stack_text` are the only false ones.
 pub const FLAGS: &[(&str, bool)] = &[
-    ("day_night", false),
-    ("designations", false),
-    ("exiled_by", false),
+    ("day_night", true),
+    ("designations", true),
+    ("exiled_by", true),
     ("full_name", false),
     ("keywords", true),
     ("known_cards", false),
     ("passed_seats", false),
-    ("pending_triggers", false),
+    ("pending_triggers", true),
     ("permanent_details", true),
     ("player_counters", true),
     ("player_progress", false),
