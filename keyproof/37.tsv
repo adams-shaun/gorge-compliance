@@ -129,7 +129,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 378a1d57-e2f1-4b84-9692-1564602e9e99	land	land	agreed	-	FX	start	2	0	x:xs:XP:dimir-aqueduct:f0t0:s1,f:xs:XP:dimir-aqueduct:f0t0:s1	-	-	-	d864b561c9cb	-	3c5c48fcebac	-	-	2026-11-24	xproof
 378a6203-0d47-4165-bdc2-43dfdfb4d15d	cast	cast-resolve	agreed	-	X	scen	1	0	Urgent Necropsy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 378a78d8-9001-4aa5-a66b-2aca27fa8180	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-378ae023-04d3-44cc-9248-3d787796ed6c	cast	cast-resolve	agreed	-	X	scen	1	0	Living Conundrum/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+378ae023-04d3-44cc-9248-3d787796ed6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:living-conundrum:cast:s1,f:xs:XP:living-conundrum:cast:s1	-	-	-	23b491658465	-	3c30c1c54a07	-	-	2026-11-24	xproof
 378ae023-04d3-44cc-9248-3d787796ed6c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Living Conundrum/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 378fcd0f-1096-4769-9149-55b4a889ff56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gargos-vicious-watcher:cast:s1,f:xs:XP:gargos-vicious-watcher:cast:s1	-	-	-	d864b561c9cb	-	b8f3a35daaf1	-	-	2026-11-24	xproof
 378fcd0f-1096-4769-9149-55b4a889ff56	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -188,16 +188,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37ec9b95-8c9a-4dd5-9ff2-3d6527984126	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hidden-blade:f0t0:s1,f:xs:XP:hidden-blade:f0t0:s1	-	-	-	ae86f6029288	-	b8e7b453053d	-	-	2026-11-24	xproof
 37ec9b95-8c9a-4dd5-9ff2-3d6527984126	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37ec9b95-8c9a-4dd5-9ff2-3d6527984126	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hidden-blade:f0t0:s1,f:xs:XP:hidden-blade:f0t0:s1	-	-	-	ae86f6029288	-	b8e7b453053d	-	-	2026-11-24	xproof
-37f2ec12-d703-40cd-a155-053ae2e4ddcc	cast	cast-resolve	agreed	-	X	scen	1	0	Granite Witness/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+37f2ec12-d703-40cd-a155-053ae2e4ddcc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:granite-witness:cast:s1,f:xs:XP:granite-witness:cast:s1	-	-	-	23b491658465	-	77ba9f6f7cc2	-	-	2026-11-24	xproof
 37f2ec12-d703-40cd-a155-053ae2e4ddcc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Granite Witness/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37f2ec12-d703-40cd-a155-053ae2e4ddcc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Granite Witness/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37f2ec12-d703-40cd-a155-053ae2e4ddcc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Granite Witness/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37f3733e-cc4e-4d84-b29b-d474f6e254a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37f3eda9-3242-4d62-846f-935543d8f4fd	cast	cast-resolve	agreed	-	X	scen	1	0	Adversary by Algorithm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-37f6bbb8-2136-4f03-966c-85d72180e71f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kylox-visionary-inventor:cast:s1,f:xs:XP:kylox-visionary-inventor:cast:s1	-	-	-	8c0bd19283bb	-	56d65faacdad	-	-	2026-11-24	xproof
+37f6bbb8-2136-4f03-966c-85d72180e71f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kylox-visionary-inventor:cast:s1,f:xs:XP:kylox-visionary-inventor:cast:s1	-	-	-	23b491658465	-	56d65faacdad	-	-	2026-11-24	xproof
 37f6bbb8-2136-4f03-966c-85d72180e71f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kylox, Visionary Inventor/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37f6bbb8-2136-4f03-966c-85d72180e71f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kylox, Visionary Inventor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-37f6bbb8-2136-4f03-966c-85d72180e71f	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:kylox-visionary-inventor:cast:s1,f:xs:XP:kylox-visionary-inventor:cast:s1	-	-	-	8c0bd19283bb	-	56d65faacdad	-	-	2026-11-24	xproof
+37f6bbb8-2136-4f03-966c-85d72180e71f	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:kylox-visionary-inventor:cast:s1,f:xs:XP:kylox-visionary-inventor:cast:s1	-	-	-	23b491658465	-	56d65faacdad	-	-	2026-11-24	xproof
 37f6bbb8-2136-4f03-966c-85d72180e71f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Kylox, Visionary Inventor/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37f82ad8-4f0b-4b17-abcc-03f43d4fdf1c	cast	cast-resolve	agreed	-	X	scen	1	0	Great Fierce Bee/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37f82ad8-4f0b-4b17-abcc-03f43d4fdf1c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Great Fierce Bee/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

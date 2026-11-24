@@ -61,14 +61,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 063884e0-1f5e-4be9-930b-e73895b2fa41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 063960e0-3f9c-4697-ba5e-81c56ac1b5d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rubblehulk:cast:s1,f:xs:XP:rubblehulk:cast:s1	-	-	-	d864b561c9cb	-	503865a9cb60	-	-	2026-11-24	xproof
 063960e0-3f9c-4697-ba5e-81c56ac1b5d2	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-0639bd82-084f-47d5-b158-05dfc29efa40	cast	cast-resolve	agreed	-	X	scen	1	0	No Witnesses/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0639bd82-084f-47d5-b158-05dfc29efa40	cast	cast	agreed	-	F	start	2	0	f:xs:XP:no-witnesses:cast:s1	-	-	-	23b491658465	-	9a2b487a1c16	-	-	2026-11-24	xproof
 063dd25b-d4b4-4e09-acae-8c52dcb40803	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Foot Headquarters/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 063dd25b-d4b4-4e09-acae-8c52dcb40803	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Foot Headquarters/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 063dd25b-d4b4-4e09-acae-8c52dcb40803	land	play-land	agreed	-	X	scen	1	0	Foot Headquarters/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 06413d87-d119-4c04-93d5-5ced7ad4a858	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06424141-2c26-4ee8-83c2-dac62e3d3540	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06424141-2c26-4ee8-83c2-dac62e3d3540	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0642fb0d-73cb-4989-852c-3233fe36c3b4	cast	cast-resolve	agreed	-	X	scen	1	0	Sharp-Eyed Rookie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0642fb0d-73cb-4989-852c-3233fe36c3b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sharp-eyed-rookie:cast:s1,f:xs:XP:sharp-eyed-rookie:cast:s1	-	-	-	23b491658465	-	7a9ca579c2b0	-	-	2026-11-24	xproof
 0642fb0d-73cb-4989-852c-3233fe36c3b4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sharp-Eyed Rookie/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0642fb0d-73cb-4989-852c-3233fe36c3b4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sharp-Eyed Rookie/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0642fb0d-73cb-4989-852c-3233fe36c3b4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sharp-Eyed Rookie/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06a158c6-7e36-49f8-a8e0-a7b7df5fd7ed	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06a2a50d-f54f-4eb7-9cf8-ce37d802794a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trusty-retriever:f0t0:s1,f:xs:XP:trusty-retriever:f0t0:s1	-	-	-	23b491658465	-	8e331fbf2547	-	-	2026-11-24	xproof
 06a2a50d-f54f-4eb7-9cf8-ce37d802794a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-06a37f16-c929-4b89-bf18-1b3f8f472eef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leering-onlooker:cast:s1,f:xs:XP:leering-onlooker:cast:s1	-	-	-	8c0bd19283bb	-	b20270971f52	-	-	2026-11-24	xproof
+06a37f16-c929-4b89-bf18-1b3f8f472eef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leering-onlooker:cast:s1,f:xs:XP:leering-onlooker:cast:s1	-	-	-	23b491658465	-	b20270971f52	-	-	2026-11-24	xproof
 06a37f16-c929-4b89-bf18-1b3f8f472eef	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Leering Onlooker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 06a37f16-c929-4b89-bf18-1b3f8f472eef	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Leering Onlooker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 06a37f16-c929-4b89-bf18-1b3f8f472eef	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Leering Onlooker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

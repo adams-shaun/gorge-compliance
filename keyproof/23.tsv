@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23102d8a-3a93-4e83-af5b-401c85ba9dbc	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:spikeshell-harrier:f0t0:s2,f:xs:XP:spikeshell-harrier:f0t0:s2	-	-	-	267e485f6204	-	59bc4369e05e	-	-	2026-11-24	xproof
 2313a3f9-3eac-4684-a25e-6a6ae445a723	cast	cast-resolve	agreed	-	X	scen	1	0	Veteran Guardmouse/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2313a3f9-3eac-4684-a25e-6a6ae445a723	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Veteran Guardmouse/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-23140c6f-c674-4d13-9b78-bce0ffcb981f	cast	cast-resolve	agreed	-	X	scen	1	0	Melek, Reforged Researcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+23140c6f-c674-4d13-9b78-bce0ffcb981f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:melek-reforged-researcher:cast:s1,f:xs:XP:melek-reforged-researcher:cast:s1	-	-	-	23b491658465	-	79b105ca9427	-	-	2026-11-24	xproof
 23140c6f-c674-4d13-9b78-bce0ffcb981f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Melek, Reforged Researcher/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23140c6f-c674-4d13-9b78-bce0ffcb981f	static#0.1	static#0.1	agreed	-	X	scen	1	0	Melek, Reforged Researcher/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2315b044-bfd2-40dd-a73e-4cf064b36999	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 234fb291-0b62-4092-9071-81311c71bd53	f0/a0	AnimateAll	agreed	-	F	start	2	0	f:xs:XP:katara-water-tribe-s-hope:f0t0:s1	-	-	-	23b491658465	-	97c5a01afd7f	-	-	2026-11-24	xproof
 234fb291-0b62-4092-9071-81311c71bd53	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:katara-water-tribe-s-hope:f0t0:s1	-	-	-	23b491658465	-	97c5a01afd7f	-	-	2026-11-24	xproof
 234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	f0/a0	Attach/Reconfigure	agreed	-	F	start	2	0	f:xs:XP:acquisition-octopus:f0a1:s1	-	-	-	8c0bd19283bb	-	d0708bc185ae	-	-	2026-11-24	xproof
+234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	f0/a0	Attach/Reconfigure	agreed	-	F	start	2	0	f:xs:XP:acquisition-octopus:f0a1:s1	-	-	-	23b491658465	-	d0708bc185ae	-	-	2026-11-24	xproof
 234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2351a9fa-17b5-41fc-93d0-34731d54f915	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

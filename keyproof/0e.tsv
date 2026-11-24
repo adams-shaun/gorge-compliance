@@ -94,10 +94,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e99efaf-6402-44c5-ae8b-1f5bb1b68333	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Red Herring/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e99efaf-6402-44c5-ae8b-1f5bb1b68333	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Red Herring/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e99efaf-6402-44c5-ae8b-1f5bb1b68333	static#0.0	static#0.0	agreed	-	X	scen	1	0	Red Herring/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0e9c7380-7584-43e6-8c31-5d1bb1685fe0	cast	cast-resolve	agreed	-	X	scen	1	0	Tolsimir, Midnight's Light/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0e9c7380-7584-43e6-8c31-5d1bb1685fe0	cast	cast	agreed	-	X	start	2	0	x:xs:XP:tolsimir-midnight-s-light:cast:s1	-	-	-	23b491658465	-	f2a96a56dfe5	-	-	2026-11-24	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tolsimir, Midnight's Light/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tolsimir, Midnight's Light/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0e9c7380-7584-43e6-8c31-5d1bb1685fe0	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Tolsimir, Midnight's Light/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0e9c7380-7584-43e6-8c31-5d1bb1685fe0	f0/t0	ChangesZone	agreed	-	X	start	2	0	x:xs:XP:tolsimir-midnight-s-light:cast:s1	-	-	-	23b491658465	-	f2a96a56dfe5	-	-	2026-11-24	xproof
+0e9c7380-7584-43e6-8c31-5d1bb1685fe0	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-midnight-s-light:f0t1:s1,f:xs:XP:tolsimir-midnight-s-light:f0t1:s1	-	-	-	23b491658465	-	f2a96a56dfe5	-	-	2026-11-24	xproof
 0e9d8e12-b9da-4452-a758-5caffd8a752e	cast	cast-resolve	agreed	-	FX	scen	2	0	Magitek Armor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e9d8e12-b9da-4452-a758-5caffd8a752e	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Magitek Armor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e9d8e12-b9da-4452-a758-5caffd8a752e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

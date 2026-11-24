@@ -33,7 +33,7 @@ cc319819-68f9-4c1e-8d60-25a5e3e50669	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:as
 cc33444e-da8c-4af5-b3ed-552e91b0e656	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sword-of-the-paruns:cast:s1,f:xs:XP:sword-of-the-paruns:cast:s1	-	-	-	77494c1ce129	-	f4c8e07078f4	-	-	2026-11-24	xproof
 cc33444e-da8c-4af5-b3ed-552e91b0e656	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 cc33444e-da8c-4af5-b3ed-552e91b0e656	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-cc3a6c83-a671-4ce8-b98e-434989fb6778	cast	cast-resolve	agreed	-	X	scen	1	0	Sanguine Savior/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cc3a6c83-a671-4ce8-b98e-434989fb6778	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sanguine-savior:cast:s1,f:xs:XP:sanguine-savior:cast:s1	-	-	-	23b491658465	-	1ff639fc0a51	-	-	2026-11-24	xproof
 cc3a6c83-a671-4ce8-b98e-434989fb6778	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sanguine Savior/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc3a6c83-a671-4ce8-b98e-434989fb6778	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sanguine Savior/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc3a6c83-a671-4ce8-b98e-434989fb6778	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sanguine Savior/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -133,8 +133,8 @@ ccaeabe1-42fa-4f29-bf80-d9b73498eec6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ccaeabe1-42fa-4f29-bf80-d9b73498eec6	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ccb0f59b-7947-4563-9e16-5d23246f4232	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ccb0f59b-7947-4563-9e16-5d23246f4232	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ccb1b532-92b8-4ebf-b3c2-fb5924b116f5	cast	cast-resolve	agreed	-	X	scen	1	0	Slimy Dualleech/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ccb1b532-92b8-4ebf-b3c2-fb5924b116f5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Slimy Dualleech/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ccb1b532-92b8-4ebf-b3c2-fb5924b116f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slimy-dualleech:cast:s1,f:xs:XP:slimy-dualleech:cast:s1	-	-	-	23b491658465	-	95438365a19e	-	-	2026-11-24	xproof
+ccb1b532-92b8-4ebf-b3c2-fb5924b116f5	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:slimy-dualleech:cast:s1,f:xs:XP:slimy-dualleech:cast:s1	-	-	-	23b491658465	-	95438365a19e	-	-	2026-11-24	xproof
 ccb2f92e-69c0-415c-81cd-52c384b3b233	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ccb2f92e-69c0-415c-81cd-52c384b3b233	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 ccb2f92e-69c0-415c-81cd-52c384b3b233	land	land	agreed	-	FX	start	2	0	x:xs:XP:rushwood-grove:land:s1,f:xs:XP:rushwood-grove:land:s1	-	-	-	5f2128bf97e4	-	e31d84bb58af	-	-	2026-11-24	xproof
@@ -188,8 +188,8 @@ ccf8d919-1399-4bef-94ac-04c67f122828	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ccfb612a-762d-41a7-bc3d-268c6abf8e85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ccfb8b4d-651c-418a-aa19-cb23105b3f2f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Meticulous Archive/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ccfb8b4d-651c-418a-aa19-cb23105b3f2f	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Meticulous Archive/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ccfb8b4d-651c-418a-aa19-cb23105b3f2f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Meticulous Archive/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ccfb8b4d-651c-418a-aa19-cb23105b3f2f	land	play-land	agreed	-	X	scen	1	0	Meticulous Archive/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ccfb8b4d-651c-418a-aa19-cb23105b3f2f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:meticulous-archive:f0t0:s1,f:xs:XP:meticulous-archive:f0t0:s1	-	-	-	23b491658465	-	4b4f20677daf	-	-	2026-11-24	xproof
+ccfb8b4d-651c-418a-aa19-cb23105b3f2f	land	land	agreed	-	FX	start	4	0	x:xs:XP:meticulous-archive:f0t0:s1,f:xs:XP:meticulous-archive:f0t0:s1	-	-	-	23b491658465	-	4b4f20677daf	-	-	2026-11-24	xproof
 ccfc74f7-bf32-4201-ad8f-f552ed7f96f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cazur-ruthless-stalker:f0t1:s1,f:xs:XP:cazur-ruthless-stalker:f0t1:s1	-	-	-	23b491658465	-	4966527037ce	-	-	2026-11-24	xproof
 ccfc74f7-bf32-4201-ad8f-f552ed7f96f8	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ccfc74f7-bf32-4201-ad8f-f552ed7f96f8	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

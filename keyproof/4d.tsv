@@ -11,8 +11,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4d0fa514-87fc-46ff-bf49-4cd332396978	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:scythe-tiger:cast:s1	-	-	-	8a1b1a193ec0	-	3a8491078a99	-	-	2026-11-24	xproof
 4d165c0f-3e40-45ad-92a1-53b13c07b34d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d165c0f-3e40-45ad-92a1-53b13c07b34d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-4d1885d1-212e-47ae-865f-e6dc4148ddf2	cast	cast-resolve	agreed	-	X	scen	1	0	Repeat Offender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4d1885d1-212e-47ae-865f-e6dc4148ddf2	f0/a0	Branch	agreed	-	FX	start	2	0	x:xs:XP:repeat-offender:f0a0:s1,f:xs:XP:repeat-offender:f0a0:s1	-	-	-	8c0bd19283bb	-	9f34ee423cb6	-	-	2026-11-24	xproof
+4d1885d1-212e-47ae-865f-e6dc4148ddf2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:repeat-offender:cast:s1,f:xs:XP:repeat-offender:cast:s1	-	-	-	23b491658465	-	9f34ee423cb6	-	-	2026-11-24	xproof
+4d1885d1-212e-47ae-865f-e6dc4148ddf2	f0/a0	Branch	agreed	-	FX	start	2	0	x:xs:XP:repeat-offender:f0a0:s1,f:xs:XP:repeat-offender:f0a0:s1	-	-	-	23b491658465	-	9f34ee423cb6	-	-	2026-11-24	xproof
 4d18bcba-a346-445e-a182-6cc30b7e066d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d18bcba-a346-445e-a182-6cc30b7e066d	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 4d19b4d1-49d1-44e9-a453-dcb08b5fa6e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trespassing-souleater:cast:s1,f:xs:XP:trespassing-souleater:cast:s1	-	-	-	d864b561c9cb	-	a6be5e6a731d	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4de340bf-eab6-4066-896d-7084a9c13c2d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4de71245-9d9b-44ca-9c13-37dc3dfbbcd5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4de71245-9d9b-44ca-9c13-37dc3dfbbcd5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4debd0e4-3bb6-4dd1-addc-08e4bda69d11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reckless-detective:cast:s1,f:xs:XP:reckless-detective:cast:s1	-	-	-	8c0bd19283bb	-	9a00c95095ed	-	-	2026-11-24	xproof
+4debd0e4-3bb6-4dd1-addc-08e4bda69d11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reckless-detective:cast:s1,f:xs:XP:reckless-detective:cast:s1	-	-	-	23b491658465	-	9a00c95095ed	-	-	2026-11-24	xproof
 4debd0e4-3bb6-4dd1-addc-08e4bda69d11	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Reckless Detective/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4dfad4ec-9695-4f3a-8269-4cc00c26204c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4dfad4ec-9695-4f3a-8269-4cc00c26204c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
