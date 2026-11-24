@@ -214,7 +214,17 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	default:
 		return refuse("no-generator")
 	}
-	if why, err := placeNeeds(b, c, card, generic, f); err != nil || why != "" {
+	for _, bf := range [][]string{p0.Battlefield, p1.Battlefield} {
+		for _, n := range bf {
+			if n != card {
+				continue
+			}
+			if why := FieldBlock(face); why != "" {
+				return refuse("battlefield:" + why)
+			}
+		}
+	}
+	if why, err := placeNeeds(reg, b, c, card, generic, f); err != nil || why != "" {
 		if err != nil {
 			return Result{}, err
 		}
@@ -223,10 +233,31 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	return Result{Path: PathStart, Start: f}, nil
 }
 
+// FieldBlock is why a start file cannot list face on the battlefield, or "":
+// an instant or sorcery is never a permanent (CR 304.4, 307.4), and an Aura
+// a start file places has no bearer (a start file has no attach), so it stays
+// where it is (CR 303.4g). Either way the engines disagree about where the
+// card ends up (gorge left Path to Exile on the battlefield and lost an
+// unattached Aura from the library; Forge put both in hand), so the setup
+// could never agree.
+func FieldBlock(face *cards.Face) string {
+	if !face.IsPermanent() {
+		return "not-a-permanent"
+	}
+	for _, t := range face.Types {
+		if strings.EqualFold(t, "Aura") {
+			return "aura-unattached"
+		}
+	}
+	return ""
+}
+
 // placeNeeds adds what certdeck.Derive says the card reads: graveyard fodder,
-// and the first enabler certdeck picks for each other need. A need StartSpec
+// and the first enabler certdeck picks for each other need, on its side's
+// battlefield, or in its side's hand when FieldBlock says it cannot be placed
+// there (an instant, a sorcery, an Aura: the side casts it). A need StartSpec
 // cannot place (tokens, counters) is a refusal.
-func placeNeeds(b *certdeck.Builder, c *cards.Card, card, generic string, f *StartFile) (string, error) {
+func placeNeeds(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, generic string, f *StartFile) (string, error) {
 	needs := certdeck.Derive(c, b.Types())
 	if len(needs) == 0 {
 		return "", nil
@@ -248,13 +279,32 @@ func placeNeeds(b *certdeck.Builder, c *cards.Card, card, generic string, f *Sta
 			}
 		case certdeck.OppSide(n.Class):
 			if got := plan.Opponent.Provided[n.String()]; len(got) > 0 {
-				f.Setup.P1.Battlefield = append(f.Setup.P1.Battlefield, got[0])
+				if err := placeEnabler(reg, &f.Setup.P1, got[0]); err != nil {
+					return "", err
+				}
 			}
 		default:
 			if got := plan.Self.Provided[n.String()]; len(got) > 0 {
-				f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, got[0])
+				if err := placeEnabler(reg, &f.Setup.P0, got[0]); err != nil {
+					return "", err
+				}
 			}
 		}
 	}
 	return "", nil
+}
+
+// placeEnabler lists an enabler on s's battlefield, or in s's hand when
+// FieldBlock refuses it the battlefield.
+func placeEnabler(reg *cards.Registry, s *StartSeat, name string) error {
+	c, ok := reg.Lookup(name)
+	if !ok || len(c.Faces) == 0 {
+		return fmt.Errorf("scen: enabler %q is not in the corpus", name)
+	}
+	if FieldBlock(c.Faces[0]) != "" {
+		s.Hand = append(s.Hand, name)
+		return nil
+	}
+	s.Battlefield = append(s.Battlefield, name)
+	return nil
 }
