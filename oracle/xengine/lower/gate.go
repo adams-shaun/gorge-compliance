@@ -11,6 +11,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/events"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/engine/state"
@@ -43,9 +44,12 @@ const (
 	// The decision is setup state alone: the tape may show no in-window fall
 	// (the setup LifeChange is the trigger) and cannot show the speed.
 	reasonSpeedLatch = "setup_speed_latch"
-	// reasonCountersEntry is a battlefield card whose entry counter grant is
-	// dynamic (K:etbCounter with an X/Count$ amount): the placement re-runs the
-	// grant, so setup cannot know how many counters to add on top of it.
+	// reasonCountersEntry is a battlefield permanent whose counter state setup
+	// cannot restate: an entry counter grant that is dynamic (K:etbCounter with
+	// an X/Count$ amount), so the placement re-runs the grant and setup cannot
+	// know how many counters to add on top of it; or a gorge internal counter
+	// marker (the regeneration "Shield", CR 701.19a, is a replacement effect,
+	// not a counter) that the live digest omits and a scenario cannot place.
 	reasonCountersEntry = "counters_entry_unrestatable"
 	// reasonEntryTap is a non-active seat's UNTAPPED battlefield card whose
 	// placement runs an "enters tapped" replacement. The runner's placement
@@ -283,6 +287,7 @@ func (w *walker) setupTriggers(c *cut) {
 	if !tapped && !counters && !gained && !lost {
 		return
 	}
+	grants := w.staticTriggerGrants()
 	for i := range w.g.Objs {
 		o := &w.g.Objs[i]
 		// A resolved ability parked off the stack is not a placed permanent
@@ -291,14 +296,11 @@ func (w *walker) setupTriggers(c *cut) {
 			continue
 		}
 		f := o.Face()
-		if f == nil {
-			continue
-		}
-		if counters && counterAddReplacement(f) {
+		if f != nil && counters && counterAddReplacement(f) {
 			w.why[reasonSetupCounterRepl] = true
 		}
-		for j := range f.Triggers {
-			switch f.Triggers[j].ModeKind() {
+		check := func(t *cards.Trigger) {
+			switch t.ModeKind() {
 			case cards.TriggerTaps, cards.TriggerTapAll:
 				if tapped {
 					w.why[reasonSetupTaps] = true
@@ -318,7 +320,79 @@ func (w *walker) setupTriggers(c *cut) {
 				}
 			}
 		}
+		if f != nil {
+			for j := range f.Triggers {
+				check(&f.Triggers[j])
+			}
+		}
+		// A static's AddTrigger$ grant is not on the affected object's face:
+		// it lives on the granting permanent, so the printed-trigger walk above
+		// misses it. Walk every battlefield static and apply the grant to the
+		// permanents its Affected$ names, through the same engine matcher the
+		// layer scan uses, then the same mode switch as a printed trigger.
+		for j := range grants {
+			if grants[j].affects(w, o) {
+				check(&grants[j].trigger)
+			}
+		}
 	}
+}
+
+// staticTriggerGrant is one trigger a battlefield static grants through
+// AddTrigger$: the SVar-parsed trigger body, the Affected$ spec it is granted
+// to, and the granting object. The spec's "you" is the granting permanent's
+// controller, exactly as engine/rules/layers.go's static scan reads it.
+type staticTriggerGrant struct {
+	trigger  cards.Trigger
+	affected string
+	source   state.ObjID
+	you      state.PlayerID
+}
+
+// staticTriggerGrants resolves every battlefield static's AddTrigger$ bodies,
+// including the "A & B" multi-name form cards.SplitGrantNames and the engine's
+// own layer scan read. The grant is only collected; staticTriggerGrant.affects
+// decides which permanents receive it. A body that fails to parse grants
+// nothing, the same fail-closed read the layer scan takes.
+func (w *walker) staticTriggerGrants() []staticTriggerGrant {
+	var out []staticTriggerGrant
+	for i := range w.g.Objs {
+		src := &w.g.Objs[i]
+		if src.Zone != state.ZBattlefield || src.Ability != nil {
+			continue
+		}
+		f := src.Face()
+		if f == nil {
+			continue
+		}
+		for si := range f.Statics {
+			st := &f.Statics[si]
+			if !strings.EqualFold(strings.TrimSpace(st.Mode), "Continuous") {
+				continue
+			}
+			raw := strings.TrimSpace(st.ParamStr(cards.PKAddTrigger))
+			if raw == "" {
+				continue
+			}
+			affected := strings.TrimSpace(st.ParamStr(cards.PKAffected))
+			if affected == "" {
+				affected = "Card.Self"
+			}
+			for _, name := range cards.SplitGrantNames(raw) {
+				if t, ok := cards.ParseTriggerLine(f.SVars[name]); ok {
+					out = append(out, staticTriggerGrant{
+						trigger: t, affected: affected, source: src.ID, you: src.Controller,
+					})
+				}
+			}
+		}
+	}
+	return out
+}
+
+// affects reports whether the granting static's Affected$ spec reaches o.
+func (g staticTriggerGrant) affects(w *walker, o *state.Object) bool {
+	return effects.MatchesSpecFrom(w.g, g.affected, o.ID, g.you, g.source)
 }
 
 // walker applies the field tables to the live state.
@@ -489,6 +563,21 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		// attackedYouTheirLastTurn player property (O-Kagachi, Avenge,
 		// Weathered Sentinels), so it is history no other card can see.
 		return v.Uint() != 0 && w.gameMentions("attackedYouTheirLastTurn")
+	case typ == "Object" && name == "AttackedPlayersThisTurn":
+		// Set for each player a creature was declared attacking this turn
+		// (CR 508.1b) and cleared at TurnChange and on leaving the battlefield;
+		// setup cannot restate the history. Its one reader is the
+		// attackedBySourceThisTurn player property (Port Razer), so a game with
+		// no card naming it does not depend on the record.
+		return v.Uint() != 0 && w.gameMentions("attackedBySourceThisTurn")
+	case typ == "Object" && name == "DealtDamageToPlayersThisTurnHere":
+		// The per-seat damage record (CR 120.1) is set by the DamageProvenance
+		// fold and cleared at TurnChange and on leaving the battlefield; setup
+		// cannot restate which player the object damaged. Its only reader is
+		// Forge's dealtDamageToOppThisTurn filter word (corpus carriers
+		// Dunerider Outlaw and Whirling Dervish), so a game with no card naming
+		// that word does not depend on the record.
+		return v.Uint() != 0 && w.gameMentions("dealtDamageToOppThisTurn")
 	case typ == "Object" && name == "ExiledCards":
 		if selfExile(o) {
 			w.why[reasonSelfExile] = true
@@ -1089,16 +1178,44 @@ func sortedMapKeys(m map[string]int32) []string {
 	return out
 }
 
+// hasInternalCounterMarker reports whether o carries a nonzero gorge internal
+// counter marker (the regeneration "Shield", "Deathtouched", the
+// cumulative-upkeep paid marker). These ride Object.Counters because the engine
+// has no per-object status field, but they are not counters: the live digest
+// drops them (game.counterMap), a live regeneration shield is a replacement
+// effect (CR 701.19a) rather than state setup can place, and a placement that
+// copied the marker would mint a real CR 122.1c shield counter the live game
+// never had. Every lowering path that turns Object.Counters into scenario
+// counters goes through this helper, so a marker the state helper learns next
+// is covered here too. A zero amount is not state (a spent marker leaves its
+// entry behind) and is ignored.
+func hasInternalCounterMarker(o *state.Object) bool {
+	for _, ct := range o.Counters {
+		if ct.N != 0 && state.InternalCounterMarker(ct.Kind) {
+			return true
+		}
+	}
+	return false
+}
+
 // setupCounters is the counters setup must ADD to o's placement: what o carries
 // less what a fresh copy of the card enters with (a planeswalker's printed
 // loyalty), which the runner's counters field is added to. A kind the card
 // carries fewer of than it enters with comes out negative, which setup cannot
 // say. The second return is false when the entry grant is dynamic and so cannot
 // be restated: the placement re-runs the grant (CR 614.1c), but how many
-// counters it makes is known only at that entry.
+// counters it makes is known only at that entry. It is also false when o
+// carries a nonzero internal counter marker: the marker is not a counter and a
+// live regeneration shield is state setup cannot restate.
 func setupCounters(o *state.Object) (map[string]int32, bool) {
 	net := map[string]int32{}
+	if hasInternalCounterMarker(o) {
+		return net, false
+	}
 	for _, ct := range o.Counters {
+		if state.InternalCounterMarker(ct.Kind) {
+			continue // zero amount: nothing to add
+		}
 		net[ct.Kind] += ct.N
 	}
 	for _, gr := range events.EntryCounterGrants(&state.Object{Card: o.Card, FaceIdx: o.FaceIdx}, false) {

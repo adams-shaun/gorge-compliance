@@ -64,7 +64,8 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     not a field: it is its own decision AFTER the target ask, a
 //     "choose_n" with resume "damage_split" (for a spell gorge announces the
 //     division at cast, CR 601.2d, and oraclegen.CastDivisions restores the
-//     decision at the step the spell resolves in), whose options are the chosen
+//     decision at the cast step, right after the target ask, where the driver
+//     allocates it), whose options are the chosen
 //     targets in order (pick_refs) and whose pick_idx repeats a target's
 //     index once per point it receives. min == max == the total. The target
 //     ask's own "divided" is the literal total only for a triggered ability
@@ -83,20 +84,34 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     ask is "up to" (min 0), the decision becomes an empty choose_n, which
 //     the driver consumes as "untap nothing", exactly as gorge did.
 //   - A multi-card hand -> library batch (resume "hand_move", every pick kind
-//     "hand_move") followed in the same step by its "changezone_alternative"
-//     pick is exported in reverse when that alternative is "top": Forge's
+//     "hand_move") that lands on top is exported in reverse: Forge's
 //     ChangeZoneEffect asks for one card at a time and puts each successive
 //     pick on top, so the last pick ends topmost and gorge's top-first order
-//     needs reversing. A "bottom" alternative needs no reversal (successive
-//     puts on the bottom append, leaving the first pick above the second), and
-//     a batch with no paired alternative in the same step is left alone. Only
-//     the parallel pick arrays reverse; the label fields stay.
+//     needs reversing. The top is re-derived from the checkpoint after the
+//     decision's step (oraclegen.LibraryTopPlacement), so a plain top-only
+//     put-back with no "changezone_alternative" (Stunted Growth, Brainstorm)
+//     is covered too; a following "top" alternative is the fallback when the
+//     checkpoint has no library top. A "bottom" placement needs no reversal
+//     (successive puts on the bottom append, leaving the first pick above the
+//     second). Only the parallel pick arrays reverse; the label fields stay.
+//   - A "library_placement" arrange that lands on top (Harmonic Convergence's
+//     "put all enchantments on top") is exported in reverse for the same
+//     reason: its picks are top-first and the driver places successive picks
+//     on top. A bottom arrangement keeps gorge's order. Like the hand_move
+//     batch, the direction is the after-step library top, not a card list.
 //   - A surveil/scry arrange whose looked-at cards are all tokens (Vanish from
 //     Sight puts a token on top, then surveils 1) is exported with picks naming
 //     the cards now on top of the seat's library, so Forge keeps what it looks
 //     at (see forgeTokenLooks).
-//   - Except for the untap, top hand_move and token-look rewrites above,
-//     decisions are exported verbatim.
+//   - A Soulbond pairing answer (resume "soulbond", the one pick kind "pair")
+//     names the creature Forge's BondEffect asks for by trigger half: the
+//     "another unpaired creature enters" half asks which SOURCE creature to
+//     pair with (ValidCards$ Creature.Self+!Paired) while gorge answered the
+//     entering partner it offered, so the pick is rewritten to the source;
+//     the "this creature enters" half already asks the partner and is left
+//     alone (see forgeSoulbondPairSource).
+//   - Except for the untap, top hand_move, token-look and Soulbond pair
+//     rewrites above, decisions are exported verbatim.
 //     pay_<C>, pay_generic and pay_life are
 //     pick kinds of gorge's hybrid/Phyrexian pip ask, and a mana-ability
 //     "activate" pick is a payment-window choice; Forge asks neither, so the
@@ -113,7 +128,7 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     triggered ability's cost; gift_decline declines a gift (gift_promise
 //     names the opponent in its label).
 //   - A cast step's cast_mode names a non-default cast option the driver
-//     must select: the plot special action, an Adventure or Omen half, a
+//     must select: the plot or suspend special action, an Adventure or Omen half, a
 //     modal back face, a warp cast, an optional cost paid at cast time
 //     ("optionalcost", kicked, buyback, entwined, offspring, replicated);
 //     empty is the ordinary cast. Modes outside xengine/classify's
@@ -294,8 +309,9 @@ func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 	decisions = forgeUntapNoOps(g, decisions)
 	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, decisions)
 	if forgeDriver {
-		decisions = forgeLibraryTopOrder(decisions)
+		decisions = forgeLibraryTopOrder(decisions, g.Snapshots)
 		decisions = forgeTokenLooks(g, decisions)
+		decisions = forgeSoulbondPairSource(reg, g, decisions)
 		decisions = forgeGraveyardOrderDecisions(it, g, decisions)
 	} else {
 		decisions = forgeDropGraveyardOrderDecisions(decisions)
@@ -788,12 +804,25 @@ func forgeAbilityLines(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 // forgeAbilityFace is the face whose Abilities[ability_index] step i names,
 // resolved as forgeAbilityLines documents, or nil when the step names no
 // ability or none resolves.
+//
+// A multi-face card can change face during the window without a setup
+// back_face entry: a modal DFC played as its land back face (CR 712.12) has
+// its front spell at the same printed index as the back land's mana ability.
+// The printed face would then resolve, but to the wrong ability, so for a
+// multi-face card the snapshot entering the step is consulted first: it names
+// the face that is actually up. A single-face card keeps the setup path, so an
+// already-emitted line never changes and the Forge result cache stays valid.
 func forgeAbilityFace(reg *cards.Registry, it oraclegen.Item, st oraclegen.Step, g rules.OracleResult, i int) *cards.Face {
 	if st.AbilityIndex == nil || st.Card == "" {
 		return nil
 	}
 	k := *st.AbilityIndex
 	c, ok := reg.Lookup(refCardName(st.Card))
+	if ok && len(c.Faces) > 1 {
+		if f := forgeSnapshotAbilityFace(reg, it, st, g, i); f != nil {
+			return f
+		}
+	}
 	if ok && len(c.Faces) > 0 {
 		face := 0
 		if seat, _, hasSeat := strings.Cut(st.Card, ":"); hasSeat {

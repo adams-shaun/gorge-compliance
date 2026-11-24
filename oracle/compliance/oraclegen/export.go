@@ -135,6 +135,17 @@ func XAnswers(ds []rules.OracleDecision, steps int, modes map[string]int) [][]XA
 	return xanswers(ds, steps, modes, nil)
 }
 
+// XAnswersWithSnapshots is XAnswers plus the gorge result's checkpoints. A
+// library_placement/hand_move destination is re-derived from the after-step
+// library top instead of guessed from the decision shape: a bottom placement
+// has the same shape as a top one. snaps must be indexed by scenario step (the
+// setup checkpoint at 0, the checkpoint after step n at n+1), the same layout
+// XAnswersForScenario receives; a decision whose step is rewritten for answer
+// routing must be given a snapshot slice rewritten the same way.
+func XAnswersWithSnapshots(ds []rules.OracleDecision, steps int, modes map[string]int, snaps []rules.OracleSnapshot) [][]XAnswer {
+	return xanswersSetup(ds, steps, modes, nil, nil, nil, xanswersExtra{snaps: snaps})
+}
+
 // ArrangeEmptyGraveyard reports whether an arrange decision sent every
 // looked-at card to the graveyard; XAnswers scripts one choice answer per
 // looked-at card for it, not one per decision.
@@ -151,6 +162,14 @@ func ChooseTargets(sc Scenario, ds []rules.OracleDecision) (Scenario, map[int]bo
 // castSteps is the set of cast step indices whose targets ChooseTargets took
 // from the cast; those target decisions travel through castSpell and are not
 // scripted a second time.
+//
+// A Support pick on a cast or activate step rewrites that step: its support
+// target is the ability's FIRST target, so an inline Step.Targets preset would
+// fill that slot and make XMage skip its own "up to N" ask. The preset is
+// cleared and the step leaves castSteps, so every one of the cast's targets is
+// scripted as a TARGET answer with the support answers first (support_pick.go).
+// The Steps slice is shared with the caller's scenario (the item the answers
+// are serialized with), so it sees the cleared preset.
 func XAnswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenario, modes map[string]int, castSteps map[int]bool) [][]XAnswer {
 	return xanswersForScenario(reg, res, sc, modes, castSteps)
 }

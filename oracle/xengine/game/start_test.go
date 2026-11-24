@@ -152,6 +152,21 @@ func TestFocusActUnit(t *testing.T) {
 		t.Errorf("second offer: choices %v, want the bot's [0]", in.Choices)
 	}
 
+	// Times 2: the action is taken at its first two offers, then the bot's
+	st = openState(Focus{Seat: 0, Card: "X", Kind: "cast", Times: 2}, 7, 8)
+	b = focusBot{st: st}
+	casts := focusDecision(decision.KPriority, stubOpt{Kind: "pass"}, stubOpt{Kind: "cast", Obj: 7})
+	if in, _ = b.act(casts, pass, nil); !slices.Equal(in.Choices, []int{1}) || st.done {
+		t.Errorf("times 2, first: choices %v done %v, want [1], still armed", in.Choices, st.done)
+	}
+	casts = focusDecision(decision.KPriority, stubOpt{Kind: "pass"}, stubOpt{Kind: "cast", Obj: 8})
+	if in, _ = b.act(casts, pass, nil); !slices.Equal(in.Choices, []int{1}) || !st.done {
+		t.Errorf("times 2, second: choices %v done %v, want [1] and done", in.Choices, st.done)
+	}
+	if in, _ = b.act(casts, pass, nil); !slices.Equal(in.Choices, []int{0}) {
+		t.Errorf("times 2, third: choices %v, want the bot's [0]", in.Choices)
+	}
+
 	// no matching option: defer and stay armed
 	st = openState(Focus{Seat: 0, Card: "X", Kind: "ability", Ability: 2}, 7)
 	b = focusBot{st: st}
@@ -167,6 +182,38 @@ func TestFocusActUnit(t *testing.T) {
 	in, _ = b.act(focusDecision(decision.KPriority, stubOpt{Kind: "pass"}, ab(7, 2)), pass, nil)
 	if !slices.Equal(in.Choices, []int{0}) || st.done {
 		t.Errorf("upkeep: choices %v done %v, want deferred", in.Choices, st.done)
+	}
+
+	// before main 1 the focus seat passes in place of the bot's play (a mana
+	// tap that would empty before main 1); another seat keeps its answer
+	st = openState(Focus{Seat: 0, Card: "X", Kind: "cast"}, 7)
+	st.e.G.Step = state.StepUpkeep
+	b = focusBot{st: st}
+	tap := decision.Intent{Choices: []int{1}}
+	up := focusDecision(decision.KPriority, stubOpt{Kind: "ability", Obj: 3}, stubOpt{Kind: "pass"})
+	if in, _ = b.act(up, tap, nil); !slices.Equal(in.Choices, []int{1}) || st.done {
+		t.Errorf("upkeep hold: choices %v done %v, want the pass [1], still armed", in.Choices, st.done)
+	}
+	tap = decision.Intent{Choices: []int{0}}
+	if in, _ = b.act(up, tap, nil); !slices.Equal(in.Choices, []int{1}) {
+		t.Errorf("upkeep hold: choices %v, want the pass [1] over the bot's tap [0]", in.Choices)
+	}
+	up.Player = 1
+	if in, _ = b.act(up, tap, nil); !slices.Equal(in.Choices, []int{0}) {
+		t.Errorf("upkeep, other seat: choices %v, want the bot's [0]", in.Choices)
+	}
+
+	// a kicked focus takes only the kicked cast option
+	st = openState(Focus{Seat: 0, Card: "X", Kind: "cast", Mode: "kicked"}, 7)
+	b = focusBot{st: st}
+	d = focusDecision(decision.KPriority, stubOpt{Kind: "pass"}, stubOpt{Kind: "cast", Obj: 7}, stubOpt{Kind: "cast", Obj: 7, Mode: "kicked"})
+	if in, _ = b.act(d, pass, nil); !slices.Equal(in.Choices, []int{2}) || !st.done {
+		t.Errorf("kicked: choices %v done %v, want [2] and done", in.Choices, st.done)
+	}
+	st = openState(Focus{Seat: 0, Card: "X", Kind: "cast", Mode: "kicked"}, 7)
+	b = focusBot{st: st}
+	if in, _ = b.act(focusDecision(decision.KPriority, stubOpt{Kind: "pass"}, stubOpt{Kind: "cast", Obj: 7}), pass, nil); !slices.Equal(in.Choices, []int{0}) || st.done {
+		t.Errorf("kicked, unkicked offer only: choices %v done %v, want the bot's [0], still armed", in.Choices, st.done)
 	}
 
 	// a bot error is returned untouched
@@ -193,5 +240,37 @@ func TestFocusActUnit(t *testing.T) {
 		if !slices.Equal(in.Choices, []int{2}) || !st.done {
 			t.Errorf("%s: choices %v done %v, want [2] and done", c.kind, in.Choices, st.done)
 		}
+	}
+}
+
+// A kicked cast focus is never a planned payment: the focus taps its lands
+// until the kicked option is offered, then casts it, and the gate on
+// "if it was kicked" opens (the tape holds the kicked cast and its target).
+func TestFocusKickedCast(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	d0 := decks.Deck{Name: "p0", Colours: "B", Cards: []string{"Gatekeeper of Malakir", "Swamp", "Swamp", "Swamp"}}
+	d1 := decks.Deck{Name: "p1", Colours: "W"}
+	for len(d0.Cards) < 40 {
+		d0.Cards = append(d0.Cards, "Swamp")
+	}
+	for len(d1.Cards) < 40 {
+		d1.Cards = append(d1.Cards, "Plains")
+	}
+	start := &rules.StartSpec{Seats: []rules.StartSeat{{Hand: []int{0}, Battlefield: []int{1, 2, 3}}, {}}}
+	opt := Options{Set: "XP", MaxTurns: 2, Start: start, Focus: &Focus{Seat: 0, Card: "Gatekeeper of Malakir", Kind: "cast", Mode: "kicked"}}
+	tp := play(t, reg, [2]decks.Deck{d0, d1}, rules.SeedForStarter(1, 2, 0), opt)
+	kicked := false
+	for _, e := range tp.Entries {
+		for _, p := range e.Picks {
+			if e.Seat == 0 && p.Kind == "cast" && p.Ref == "p0:Gatekeeper of Malakir" {
+				if p.Mode != "kicked" {
+					t.Fatalf("Gatekeeper cast in mode %q, want kicked", p.Mode)
+				}
+				kicked = true
+			}
+		}
+	}
+	if !kicked {
+		t.Fatal("the focus never cast Gatekeeper of Malakir")
 	}
 }

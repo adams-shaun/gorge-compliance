@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/decision"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -209,7 +210,11 @@ func (f *follower) setup() error {
 	if mulligans > 0 && h.FreeMulligan {
 		mulligans++
 	}
-	cfg := rules.Config{Seed: h.Seed, Tokens: f.reg.Tokens, NameUniverse: f.reg.Universe(), Mulligans: mulligans}
+	// The live game and this replay must offer the same card names: scope the
+	// name asks to the seated decks (decks.NameUniverse, the shape gorge's
+	// oracleNameUniverse builds) and keep NamedCorpus whole for the derived
+	// vocabularies and "copy the card named N", as the live game does.
+	cfg := rules.Config{Seed: h.Seed, Tokens: f.reg.Tokens, NamedCorpus: f.reg.Universe(), Mulligans: mulligans}
 	next := state.ObjID(1)
 	for _, s := range h.Seats {
 		cs := make([]*cards.Card, 0, len(s.Cards))
@@ -232,6 +237,7 @@ func (f *follower) setup() error {
 		cfg.Names = append(cfg.Names, s.Name)
 		cfg.Decks = append(cfg.Decks, cs)
 	}
+	cfg.NameUniverse = decks.NameUniverse(cfg.Decks)
 	switch h.GameFormat {
 	case "", "constructed":
 	case "commander":
@@ -399,6 +405,41 @@ func snapAheadOfUnlogged(e Entry, gorge int, d *decision.Decision) bool {
 	return e.Snap != nil && unloggedKind(d.Kind) && at(int(e.Snap.Snapshot.Turn), e.Snap.Snapshot.Step) > gorge
 }
 
+// snapPrecedesOwnDeclaration reports whether snapshot entry e is Forge's
+// mid-declaration snapshot of a combat declaration step: the recorder writes
+// it after the declaration set the attacking/blocking flags but before the
+// declaration's tap, and the ask line (next, the matching attack or block ask
+// of the same step) follows it. CR 508.1f taps the attackers and 508.1k marks
+// them attacking in one turn-based action, so that state is no rules-legal
+// checkpoint and gorge, still at its pending declaration decision, has no
+// counterpart for it. A snapshot with no declared creature is the
+// pre-declaration state and still compares; the follower skips only this one; the next step's snapshot carries
+// the post-declaration combat state.
+func snapPrecedesOwnDeclaration(e, next Entry, gorge int, d *decision.Decision) bool {
+	if e.Snap == nil || next.Ask == nil {
+		return false
+	}
+	s := e.Snap.Snapshot
+	if at(int(s.Turn), s.Step) != gorge {
+		return false
+	}
+	declared := false
+	switch {
+	case d.Kind == decision.KAttackers && s.Step == "declare-attackers" && next.Ask.Kind == KindAttack:
+		for _, p := range s.Permanents {
+			declared = declared || p.Attacking
+		}
+	case d.Kind == decision.KBlockers && s.Step == "declare-blockers" && next.Ask.Kind == KindBlock:
+		for _, p := range s.Permanents {
+			declared = declared || p.Blocking
+		}
+	}
+	if !declared {
+		return false // a pre-declaration snapshot still compares
+	}
+	return next.Ask.Turn == int(s.Turn) && next.Ask.Step == s.Step
+}
+
 func (f *follower) gorgeAt() int { return at(int(f.e.G.Turn), f.e.G.Step.String()) }
 
 func (f *follower) run(max int) {
@@ -442,6 +483,11 @@ func (f *follower) run(max int) {
 			}
 			if pend := f.e.Pending(); pend != nil && snapAheadOfUnlogged(e, f.gorgeAt(), pend) {
 				break
+			}
+			if pend := f.e.Pending(); pend != nil && f.pos+1 < len(f.log.Entries) && snapPrecedesOwnDeclaration(e, f.log.Entries[f.pos+1], f.gorgeAt(), pend) {
+				f.res.SkippedSnaps++
+				f.pos++
+				continue
 			}
 			if !f.compareSnap(e) {
 				return

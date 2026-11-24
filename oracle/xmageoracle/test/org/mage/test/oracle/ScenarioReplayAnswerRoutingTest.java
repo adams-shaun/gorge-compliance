@@ -149,9 +149,9 @@ public final class ScenarioReplayAnswerRoutingTest {
     }
 
     private static void scripted(RecordingDriver d, JsonArray as) throws Exception {
-        Method m = ScenarioReplay.class.getDeclaredMethod("scripted", JsonArray.class);
+        Method m = ScenarioReplay.class.getDeclaredMethod("scripted", JsonArray.class, String.class, boolean.class);
         m.setAccessible(true);
-        m.invoke(d, as);
+        m.invoke(d, as, "", false);
     }
 
     /** Calls the driver's setup-answer queueing on a scenario whose first

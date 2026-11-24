@@ -18,7 +18,37 @@ GO_TEST_FLAGS ?= -p=2
 # 7a68b79c92 = 4142596fb7 + fork PRs #11 (enters-tapped sets tapped without a TappedEvent: Attentive Sunscribe) and #12 (a
 # static ability's conditional Custom/WhileControlled effect is not discarded on a false condition, CR 611.3a: Undercover Skrull).
 # 33704ee4fe = 7a68b79c92 + fork PR #13 (Hellfire deals 3 when no creature died, X = 0, CR 608.2c).
-XMAGE_REF  ?= 33704ee4fef60b9d2729fe24975832b9eee66a10
+# fdde07931f = b34a6018 (fork gorge) + fork PR #18 (the imprinted mana value X cost adjuster reads X = 0, not
+# Integer.MAX_VALUE, when nothing is imprinted, CR 107.3c: Soul Foundry, Elite Arcanist, Prototype Portal).
+# b964ce92f0 = fdde07931f + the playable check credits the untapped artifacts and creatures that can pay a
+# Waterbend {X} cost's generic mana (CR 701.67a; CR 701.67b caps it to the minimum X part): Katara, Water Tribe's Hope
+# with an empty pool, Waterbend {X}, X = 1, tapping Katara herself. Only WaterbendXCost with a minimum X above 0 is
+# credited (the three spells with a Waterbend {X} cost have minimum X 0 and are unchanged; a fixed WaterbendCost
+# already offers a {0} option). Fork branch fix/waterbend-playable, WaterbendTest.testXFromEmptyPool.
+# 3481be1d2b = b964ce92f0 + fork #19 (Gruul Scrapper's "if {R} was spent to cast it" is an intervening-if, CR 603.4:
+# with no red spent the ETB haste trigger does not go on the stack at all, where the plain trigger plus a
+# ConditionalContinuousEffect put it there and read the condition only at resolution). Gorge now also carries
+# the b964ce92f0 ancestry, so the pin is a commit on the gorge branch itself.
+# 7aeb547a86 = 3481be1d2b + fork #20 (an "X target ..." spell whose count can be 0 is playable with no candidate for
+# its blueprint target, CR 601.2b/601.2c: Death Denied with no creature card in its controller's graveyard, X = 0;
+# the same gap covered every TargetsCountAdjuster user with a min-1 blueprint). Fork branch fix/xtargets-x-zero,
+# DeathDeniedTest.
+# 228d8a4bd9 = 7aeb547a86 + fork branch fix/champion-sacx-zero ("Sacrifice X other creatures": the cost's maximum X counted the
+# source itself, so Champion of Stray Souls alone could announce X = 1 and an unscripted announce then failed the activation
+# for want of a graveyard target; CR 601.2b/602.2b), ChampionOfStraySoulsTest.
+# ec270409d0 = 228d8a4bd9 + fork #21 (declare blockers and combat damage are skipped only when no creature was
+# declared as an attacker or put onto the battlefield attacking; a declared attacker that later leaves combat does not
+# un-declare the attack, CR 508.8: Daemogoth Titan's own attack trigger sacrifices it, Duergar Assailant sacrifices
+# itself to its damage ability). Fork branch fix/attacker-removed-combat-steps, AttackerRemovedCombatStepsTest.
+# f07513ff8f = ec270409d0 + fork PR #22 (re-stacked on the #21 pin so both are carried): TRK's Play Booster
+# collation (the set still carried the spoiler-period `// this.enablePlayBooster(276)` waiver, so
+# VerifyCardDataTest failed the set check "wrong booster settings (set must have boosters, but it does not)"),
+# HML 56 Sengir Autocrat as Rare (mtgjson, Scryfall and upstream master agree; the same Verify run reported the
+# stale Uncommon once the mtgjson snapshot updated), and surefire failIfNoSpecifiedTests=false so a targeted
+# `mvn -pl Mage.Verify -am test -Dtest=VerifyCardDataTest` reaches Mage.Verify instead of failing in a dependency
+# module with no matching test. Set metadata and test-runner config only: no card behaviour, so the manifests are
+# unchanged.
+XMAGE_REF  ?= f07513ff8f240a6765eee368cc7452c421a5eafb
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -31,7 +61,7 @@ XMAGE_SBV2_DIR ?= .oracle-build/xmage-sbv2
 # The mtgish commit the card-definition cross-check reads its data at
 # (oracle/mtgish/MTGISH.lock holds the same ref and the files' sha256).
 # mtgish is MIT; its data carries Oracle text and is never committed.
-MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
+MTGISH_REF ?= 1553384c9a970a02514b337db9c86697313530e8
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
@@ -87,7 +117,233 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # 0791efdeb1 = becb01adc6 + each recorded coin flip result forced on its step (ForcedDieRandom arms item.coin_flips
 # beside the die rolls: nextBoolean returns the recorded result, a forced flip takes no draw, a doubled flip one per
 # result; MyRandom's CountingRandom forwards nextBoolean). Same trees as FORGE_REF ff076d4432.
-FORGE_ORACLE_REF ?= 0791efdeb19566b8e36391f3eaceaafc7a4894cd
+# 963576e5d2 = 96acdef442 (compliance #432's pin: the fork's master + gorge branch, re-synced 11-24) + the scripted controller
+# consumes gorge's waterbend_generic tap picks (Forge asks for waterbend taps through chooseCardsForConvokeOrImprovise, which took
+# only convoke*/improvise* kinds: Katara's Waterbend {X} paid from an empty pool and was refused). Driver-only change; same trees
+# as FORGE_REF ff076d4432. Fork branch fix/waterbend-tap-pick-driver.
+# ff2049dc97 = 963576e5d2 + landFor plays a land from outside the hand through the copy a MayPlay static grants (Ka-Zar's
+# library top, the card Irascible Wolverine / Kulrath Zealot / Crimson Operative exile, Tablet of Discovery's milled card):
+# the card's own land ability plays only from the hand, so the play did nothing ("step N (play) p0:<land> was not played").
+# Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch fix/land-play-mayplay.
+# cda262a7ef = ff2049dc97 + the scripted controller answers gorge's OriginAlternative$ zone election: one choose_n over zones
+# becomes Forge's initial "search the library?" confirm plus one confirm per alternative zone, and the Optional$ search_confirm is
+# left for Forge's later ChangeZoneGeneral gate; Endure's endure_counters/endure_spirit map to yes/no; and a same-name library
+# order (dig/hideaway bottom) is consumed though its order is unobservable, so it is not a leftover. Driver-only change; same
+# trees as FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-unmapped-asks, rebased onto ff2049dc97 so the MayPlay
+# land-play fix is kept beside the zone-election/endure/order fix.
+# f01192ae90 = cda262a7ef + the scripted controller maps the four asks gorge records but Forge poses differently:
+# remove-any-type counters (CountersRemoveEffect's chooseCounterType then the params chooseNumber; gorge's one choose_n per
+# counter removed is the amount), Blight as a one-creature cost pick, a lone Separator$/Chooser$ as a forced entity (not an
+# object pick), and gorge's twopiles_pick as chooseCardsPile. The params chooseBinary overload is overridden too, so it cannot
+# fall through to PlayerControllerAi. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
+# fix/xp-forge-driver-counter-blight-piles, based on cda262a7ef.
+# c92f40d4f49 = f01192ae90 + the params chooseNumber branches on the ask's API: only RemoveCounter's per-counter
+# kind election takes the counter picks, while CountersPutEffect's UpTo$/SplitAmount$ number (gorge resume
+# counter_upto) keeps the four-argument path, so an up-to put answers the recorded amount instead of 0. A
+# counter_upto regression fixture/test covers it, and the params chooseBinary comment now states the miss it
+# really records. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
+# fix/xp-forge-driver-counter-blight-piles.
+# ff02f60e839 = c92f40d4f49 + the three forced / out-of-window asks xproof found. chooseCardsToDiscardUnlessType
+# asks min..min when no unless-type card is in hand, so Alpharael's two-card hand is taken as the forced discard
+# (the old lower bound of 1 read it as 1..2 over two options); pickObjects answers a 0..0 ask with the empty pick,
+# so Death Cloud cast with X = 0 sacrifices none of its Swamps instead of missing at 3 options; and miss() notes and
+# answers asks that arrive after the last step's priority, when the following pass resolves a spell the last step
+# left on the stack (Coil and Catch's discard after the Marang item ends). ForcedAskTest replays the three xproof
+# requests in strict mode. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
+# fix/xp-forge-driver-forced-tail-asks, based on c92f40d4f49.
+# 19b0c2902c5 = c92f40d4f49 + the scripted controller pays a Phyrexian pip with 2 life (CR 107.4f, 118.3b) when gorge
+# recorded a pay_life pick: applyManaToCost takes the step's pay_life picks first (payPhyrexian + payLife(2)), then the
+# recorded spend and the pool; a pip with no pay_life pick stays a mana pip. Before, Vault Skirge's {B/P} stayed unpaid and the
+# cast was refused. PhyrexianLifePaymentTest covers Vault Skirge and Immolating Souleater. Driver-only change; same trees as
+# FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-phyrexian-life.
+# 8b2a5e3141f = c92f40d4f49 + two logged gorge decisions the driver never consumed: a forced GenericChoice mode
+# (ChooseGenericEffect drops every choice whose UnlessCost the chooser cannot pay and still calls
+# chooseSpellAbilitiesForEffect with the survivors, so Forge asks nothing while gorge logs the one-option mode)
+# and a different-name library order (dig/hideaway bottom, library placement: orderCards missed every
+# non-graveyard order instead of answering it from the card-order picks, with the graveyard pin kept separate).
+# Both shapes have a forge-export fixture replayed by LoneModeLibraryOrderTest. Driver-only change; same trees
+# as FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-lone-mode-library-order.
+# f789f1e46fb = the merge of 8b2a5e3141f (this lone-mode/library-order fix) and 19b0c2902c5 (the Phyrexian life
+# payment fix), both children of c92f40d4f49; the merge is clean and the full driver suite (126 tests, including
+# PhyrexianLifePaymentTest and LoneModeLibraryOrderTest) is green on it. Fork branch fix/xp-forge-driver-lone-mode-library-order.
+# 14f1f8537c = ff02f60e839 + 19b0c2902c5: the forced-tail branch merged with the Phyrexian life payment, so the pinned
+# driver keeps both fixes (the branch had been based on c92f40d4f49, before the Phyrexian fix landed on develop). The
+# merge is clean and changes no file of its own; cardsfolder/tokenscripts are unchanged (same as FORGE_REF ff076d4432).
+# Fork branch fix/xp-forge-driver-forced-tail-asks.
+# f822c4bfccdd = the clean merge of f789f1e46fb (the lone-mode/library-order fix plus the Phyrexian life payment)
+# and 14f1f8537c (the forced-tail fix plus the Phyrexian life payment), so the pinned driver keeps all three fixes.
+# The merge changes no file of its own; cardsfolder/tokenscripts are unchanged (same as FORGE_REF ff076d4432).
+# The full driver suite (129 tests, including ForcedAskTest, PhyrexianLifePaymentTest and LoneModeLibraryOrderTest)
+# is green on it. Fork branch fix/xp-forge-driver-lone-mode-library-order.
+# 11936833e46 = f822c4bfccdd + cast_mode "suspend" (CR 702.62a, 116.2f): Suspend from hand is a special action that
+# uses no stack. StepMachine.spellForMode picks the card's Suspend ability (the non-spell ability built for
+# K:Suspend:N:cost) and checkActed accepts it when the card is in exile with a time counter, noting the count, instead
+# of insisting the card be on the stack ("was not put on the stack"). SuspendFromHandTest replays Lotus Bloom's xproof
+# request in strict mode; the full driver suite (130 tests) is green on it. Driver-only change; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-suspend-cast-mode.
+# cd13258c4b7 = 11936833e46 + the optional-trigger confirm gorge folded into the body's Cost$ election (CR 603.5): a
+# trigger whose body has a non-Mandatory Cost$ ("you may tap X untapped Myr") gets no logged yes/no when the cost is
+# forced (X = 0), yet Forge's OptionalDecider confirms anyway. ScriptedController.confirmTrigger now answers yes when
+# gorge logged an unconsumed X or object pick for the seat in the step, else no (noted); a trigger that is not
+# cost-folded still strict-misses. FoldedOptionalConfirmTest pins it (driver suite 134 tests, 132 green plus the two
+# ForcedDieRollTest/LoneModeLibraryOrderTest cases that also fail on 11936833e46 in the borrowed build). Driver-only
+# change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-folded-optional-confirm.
+# 7d2c3206368c = the merge of 348d2b59493d (the three optional asks xproof found) and cd13258c4b7 (the folded
+# optional-trigger confirm above), so the pinned driver keeps both fixes. 348d2b59493d: an Optional$ sacrifice's
+# yes/no (SacrificeEffect asks confirmAction before choosePermanentsToSacrifice; gorge logs the whole 0..N pick as one
+# choose_n, so a non-empty pick answers yes and stays queued for the pick, an empty pick answers no and is
+# consumed, and a SacValid$ Self sacrifice consumes its pick at the confirm), a TapOrUntap binary (gorge's
+# taporuntap/taporuntapall decisions, true means tap), and a later unless-payer once one has paid
+# (AbilityUtils.handleUnlessCost asks every payer with alreadyPaid; gorge asks each payer only until one pays, so
+# a later seat with no decision declines without a miss). On top of it (02db800b3): an EMPTY tap-or-untap answer
+# reads as tap (gorge's taporuntap contract), and an Optional$ + StrictAmount$ sacrifice (Giant Opportunity) reads
+# its yes/no from gorge's sacrifice_optional mode ask, consumed at the confirm, the exact pick left for
+# choosePermanentsToSacrifice. OptionalAskTest (6 tests) and FoldedOptionalConfirmTest (4) pin them; the full driver
+# suite (140 tests, including ForcedDieRollTest) is green on the merge. Driver-only change; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-optional-asks.
+# ed6016bfebb6 = 7d2c3206368c plus the clash placement ask (xproof decision_shape: Adder-Staff Boggart, Release the
+# Ants, Titan's Revenge, Gilt-Leaf Ambush, Recross the Paths, Woodland Guidance). CR 701.30a: gorge asks each clashing
+# player once, a 1-of-2 pick (resume clash_placement, option kinds top/bottom); Forge's ClashEffect asks
+# willPutCardOnTop (true means top), which the scripted controller now answers from that pick instead of missing.
+# ClashPlacementTest (2 tests: bottom/bottom, and top for one seat with bottom for the other) pins it; the full driver
+# suite (142 tests, including ForcedDieRollTest) is green. Driver-only change; cardsfolder/tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-clash-placement.
+# 1bb3cb16bb9 = ed6016bfebb6 plus Dredge's replacement confirm (xproof decision_shape: Grave-Shell Scarab). CR 702.52a:
+# gorge asks once per draw as a mode decision (resume dredge) over every graveyard dredger plus the ordinary draw; Forge
+# builds Dredge as an Optional$ replacement and asks chooseSingleReplacementEffect (several dredgers) then
+# confirmReplacementEffect, which the scripted controller now answers from that pick instead of missing. A dredge pick
+# naming another host is declined without consuming it, and the ordinary draw is consumed only on the last dredger, so
+# several dredgers all get the same no. DredgeReplacementTest (4 tests) pins it. Driver-only change;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-dredge-replacement.
+# c873c2c9399 = 1bb3cb16bb9 plus Unleash's optional ETB replacement confirm (xproof decision_shape: Dead Reveler and the other
+# Unleash cards). CR 702.98a: gorge asks the controller once as a choose_n (resume etb) whose two options both have pick
+# kind unleash, "Enter with a +1/+1 counter" and "Enter without a counter"; Forge builds Unleash as an Optional$ ETB
+# replacement and asks confirmReplacementEffect, which the scripted controller now answers from that pick (the counter is
+# yes, the other label or an empty pick is no) instead of missing and leaving the pick unconsumed. UnleashReplacementTest
+# (2 tests: both answers) pins it; the full driver suite (148 tests, including ForcedDieRollTest) is green. Driver-only
+# change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-unleash-replacement.
+# 14070cbbac4 = c873c2c9399 plus the zero-candidate Optional$ hidden ChangeZone decline (xproof decision_shape: Bruna, Light of
+# Alabaster, 4 items). ZoneAuras ("any number of Aura cards that could enchant it from your hand and/or graveyard", ChangeNum$
+# CountAuras) asks "Search your hand and graveyard?" with no Aura card there; gorge, a choice of zero cards, logs no ask, so the
+# confirm was an unanswered strict miss. ScriptedController.confirmAction answers no when no yes/no is queued for the seat and
+# nothing can move. ZeroCandidateConfirmTest (2 tests) pinned it; efdbea5198 below fixes its candidate filter and cancel handling.
+# The full driver suite (150 tests, including ForcedDieRollTest) was green on it. Driver-only change; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-zero-candidate-confirm.
+# efdbea5198 = 14070cbbac4 plus the two findings on that decline: the candidate scan now uses ChangeZoneEffect's own filter
+# (AbilityUtils.filterListByType, with an EACH ... & ... type split per part) instead of Card.isValid on the raw ChangeType$,
+# so EACH (Michelangelo, Improviser; Yuna's Decision) and Triggered.sameName (Verdant Succession) keep their strict miss when
+# a candidate is present; and Forge's "Cancel Search" ChangeZoneGeneral prompt (the effect's post-pick cancel loop, not the
+# Optional$ gate) is excluded, so with no search carry in flight -- including after a recorded empty pick -- it stays a
+# strict miss instead of answering no and making the effect loop. The origin check now precedes the ChangeNum$ shortcut, so
+# Battlefield/Stack origins are never declined. ZeroCandidateConfirmTest (4 tests) pins it; the full driver suite (152 tests,
+# including ForcedDieRollTest) is green. Driver-only change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# Fork branch fix/xp-forge-driver-zero-candidate-confirm.
+# 08b8a9ba5d9 = 1bb3cb16bb9 plus Delve's exile picks (CR 702.66a; xproof harness: Dig Through Time, Empty the Pits,
+# Dead Drop). gorge poses the picks as one choose whose every pick kind is "exile"; Forge's CostAdjustment asks
+# chooseCardsToDelve, which returned an empty collection, so the generic mana stayed unpaid and the cast was refused.
+# The driver consumes the ask, maps each pick to a distinct offered graveyard card (same-named copies one per pick) and
+# caps at the unpaid generic. DelvePicksTest (4 tests) pins it. Driver-only change; cardsfolder/tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-delve-picks.
+# f77c569808 = the clean merge of 08b8a9ba5d9 (Delve) and c873c2c939 (Unleash), so the pinned driver keeps both answers.
+# The Delve role is restricted to kind choose_n / gorge_kind choose: an arrange also uses "exile" as the destination of
+# its unpicked cards, so the bare pick-kind test could take the wrong ask. DelvePicksTest pins that boundary. The full
+# driver suite (152 tests, including ForcedDieRollTest, DelvePicksTest and UnleashReplacementTest) is green on the merge.
+# Driver-only change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-delve-picks.
+# 08e1ddd978 = f77c569808 plus the one forge-game engine fix for xproof decision_shape Primal Surge (4 items). DigEffect honoured
+# ForgetOtherRemembered only when something was dug; Primal Surge repeats while Remembered is a permanent, so on the pass over
+# the empty library the last Forest stayed Remembered (already on the battlefield) and DBChangeZone asked a spurious
+# "move Forest from exile" confirm (the 30th over a 29-Forest library; gorge stops at 29). The clear
+# now also runs when nothing is dug. Primal Surge is the only card pairing Dig with ForgetOtherRemembered. Driver tests: 153
+# (PrimalSurgeEmptyDigTest counts exactly 29 confirms; it fails without the engine change). cardsfolder/tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-primal-surge-empty-dig.
+# bdc90a6b94b = c873c2c9399 plus the trigger-order tie of copies (xproof decision_shape: Dromoka, the Eternal). CR 603.3b: with
+# two Dromoka triggers and Nadaar's venture simultaneous, gorge orders [Dromoka, Dromoka, Nadaar]; the two Dromoka triggers tie
+# on the label and are copies of one trigger, but orderTriggers tested sameEffect on ALL remaining triggers (Nadaar's included)
+# and strict-missed "binds no unique Forge trigger". It now tests only the triggers tied at the best score and takes the first
+# copy (their order is unobservable); a tie between different effects still misses. TriggerOrderTiedCopiesTest (2 tests) pins
+# both. The find's replay (dromoka-the-eternal.request.jsonl) also pins Nadaar's venture: once the order binds, Forge's
+# chooseSingleCardFace asks for the dungeon and gorge's choose_n[dungeon] pick (CR 701.49a) now answers it instead of going
+# unconsumed (a second strict miss the order miss had masked). The full driver suite (151 tests) is green. Driver-only change; cardsfolder/tokenscripts unchanged. Fork branch
+# fix/xp-forge-driver-trigger-order-tied-copies.
+# 41968040cb = the clean merge of f77c569808 (Delve + Unleash) and bdc90a6b94 (the trigger-order tie of copies and the
+# venture dungeon pick), so the pinned driver keeps both answers. The merged driver's full suite (155 tests, including
+# ForcedDieRollTest, TriggerOrderTiedCopiesTest, DelvePicksTest and UnleashReplacementTest) is green. Driver-only change;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-trigger-order-tied-copies.
+# 051f555862 = the clean merge of 08e1ddd978 (the Primal Surge empty-dig engine fix) and 41968040cb (the trigger-order tie
+# of copies and the venture dungeon pick), so the pinned driver keeps both answers. The merge adds no file of its own and
+# leaves cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-primal-surge-empty-dig.
+# 1eef2a952a = the clean merge of efdbea5198 (the zero-candidate Optional$ hidden ChangeZone decline) and 051f555862
+# (the Primal Surge empty-dig engine fix plus the trigger-order tie of copies and the venture dungeon pick), so the pinned
+# driver keeps all of them. The merge adds no file of its own and leaves cardsfolder/tokenscripts unchanged (same as
+# FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-zero-candidate-confirm.
+# c12c06bcef = 051f555862 plus the energy confirm inside a scripted unless-pay (xproof harness cluster "AI is not
+# supposed to reach this code": Die Young, Harnessed Lightning, Lathnu Hellion). gorge logs one unless_pay answer, which is
+# the payer's whole choice (CR 118.12); payCostToPreventEffect pays it through payCostDuringAbilityResolve, whose
+# non-mandatory CostPayEnergy part asks confirmPayment. ScriptedController.confirmPayment now answers yes while that
+# payment runs (every per-part confirm: energy, counters, discard, exile, shards) instead of missing and falling to
+# AiController.confirmPayment, which throws; a confirmPayment outside a scripted unless-pay still misses.
+# UnlessEnergyConfirmTest pins it (driver suite 158 tests green). Driver-only change; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-unless-energy-confirm.
+# 3494ec7d2b = the clean merge of c12c06bcef (the energy confirm above) and 1eef2a952a (the zero-candidate decline), so the
+# pinned driver keeps both. The merge adds no file of its own; driver suite 162 tests green (UnlessEnergyConfirmTest,
+# ZeroCandidateConfirmTest, ForcedDieRollTest). cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# Fork branch fix/xp-forge-driver-unless-energy-confirm.
+# 2bf0a1cb36 = 3494ec7d2b plus the one-card order pin: gorge logs a one-pick "order" decision for a look-at-the-top-card
+# put-back (DB$ RearrangeTopOfLibrary | NumCards$ 1: Dewdrop Spy, Merfolk Observer, Saheeli's Silverwing) while Forge calls
+# orderMoveToZoneList with one card, which ScriptedController returned at once, leaving the pin as a leftover (xproof
+# decision_shape strict_miss "unconsumed gorge decision(s): ... order[bottom] [Plains]"). A lone card now goes through
+# StepMachine.orderCards, which takes the order pin only when its pick names that card and otherwise leaves the queue
+# alone. LoneCardOrderTest pins it (driver suite 166 tests). Driver-only change; cardsfolder/tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-lone-card-order.
+# 37726abafb = 3494ec7d2b plus the state-based-action graveyard batch order: one SBA pass that moves cards from more than one of
+# noRegCreats / desCreats / sacrificeList now puts their union to the owners once (CR 704.3, 404.3) and dispatches each card down
+# its own path in that order; a single list keeps its existing path. `SbaGraveyardOrderTest` (forge-oracle) fails before with no
+# ask at all and passes after (Volcanic Salvo's 0/3 + 0-loyalty planeswalker). Production driver source unchanged (the commit adds
+# SbaGraveyardOrderTest); cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/forge-sba-graveyard-order.
+# c674c0977f = 37726abafb plus the later-pass fix: the union branch no longer sets the per-list ordered flags (a later pass in the same
+# checkStateEffects call with one multi-card list, e.g. two creatures at 0 toughness after a lord died in pass 0, still asks as before);
+# it remembers the ordered cards instead. The two-pass test laterPassWithOneMultiCardListStillAsks fails on 37726abafb and passes here.
+# c3b04cf264 = the clean merge of 2bf0a1cb36 (the one-card order pin) and c674c0977f (the SBA batch order), both branched from
+# 3494ec7d2b; the two touch disjoint files (forge-oracle's ScriptedController and StepMachine vs forge-game's GameAction), so the
+# pinned driver keeps both fixes. cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/forge-sba-graveyard-order.
+# 147dd2f00f = the clean merge of c3b04cf264 (the SBA graveyard batch order above) and ba5d908b14 (the modal DFC land back
+# face play: xproof harness "has no land play", 22 clusters, every modal DFC with a land back - Glasswing Grace,
+# Turntimber Symbiosis, Pinnacle Monk, Agadeem's Awakening, ...). CR 712.12: a player playing a modal DFC as a land
+# chooses one of its faces that's a land, and it enters with that face up. StepMachine.landFor scanned only
+# Card.getSpellAbilities(), the front state's, so a spell front exposed no land ability; with none, it now takes the land
+# ability of the Backside state of a modal card (an API scan, no card names), and LandAbility.resolve turns the card to
+# that face before the move so its entry choice ("Pay 3 life") is asked of the back face and read from gorge's pick. The
+# MayPlay branch (xp-forge-land-play-mayplay) is untouched. ba5d908b14 is 2bf0a1cb36 plus ModalLandPlayTest (Age-Graced
+# Chapel; Turntimber, Serpentine Wood paying 3 life), which fails on 2bf0a1cb36 with "has no land play"; the merge keeps the
+# SBA and modal tests (full driver suite 170 tests, 168 + SbaGraveyardOrderTest's 2). Driver-only change;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-mdfc-land-face.
+# Its ancestry also carries cd13258c4b7 (the folded optional-trigger confirm: a non-Mandatory Cost$ body answers yes from
+# gorge's unconsumed X/object pick, else no; FoldedOptionalConfirmTest), so the pinned driver keeps that fix too.
+# 9e368ca172 = 147dd2f00f plus the lone forced entity pick: ScriptedController.chooseSingleEntityForEffect's lone-option shortcut
+# (made for TwoPiles/ChangeZone Chooser$ asks gorge never logs) now consumes gorge's one-option pick when its single ref IS that
+# entity (StepMachine.takeLonePick). xproof cluster xpt-83c211ae: Benevolent Offering / Intellectual Offering / Akroan Horse
+# (ChoosePlayer over the one opponent, `choose_n[player]` x2 left over) and Cataclysmic Gearhulk (ChooseEach$ categories with the
+# Gearhulk as the lone artifact and creature, `choose_n[card]` x2 left over). LoneOpponentChoiceTest and EmptyCategoryChoiceTest
+# fail before with exactly those leftovers and pass after; UnmappedAskTest's two lone-Chooser tests (Curator of Destinies) still
+# pass; full driver suite 172 tests. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-lone-entity-consume.
+# d1b608ce5d = 9e368ca172 plus three asks the driver never mapped (xproof clusters xpt-110a8ad3, xpt-4d26982b, xpt-704ee28b,
+# xpt-b8ebd380): announceRequirements with a non-X title (Join Forces' ListTitle$ "amount of mana to pay": Alliance of Arms, Minds
+# Aglow, Shared Trauma, Mana-Charged Dragon) takes gorge's choose_n[number] pick per player (StepMachine.announceNumber, in min..max);
+# chooseBinary(LeftOrRight) (ChooseDirectionEffect: Mystic Barrier) takes gorge's choose_n[direction] pick, true = "left"; an
+# Optional$ Attach's per-attachment confirmAction(sa, null, "Do you want to attach X to Y?") is answered from gorge's one attachment
+# pick (resume attach_subset / attach_choice): yes for an attachment it names, no for the rest and for an empty pick, and the Choices$
+# form's entity pick (the lone Equipment the lone-forced shortcut consumes) is remembered as that attachment's yes. Test
+# UnmappedAsksJoinDirectionAttachTest (5 tests, five fixtures/unmapped requests); full driver suite 177 tests. Driver-only;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-number-direction-attach.
+FORGE_ORACLE_REF ?= d1b608ce5db3e73ea9c4a0cd98aa2e8514d2625f
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

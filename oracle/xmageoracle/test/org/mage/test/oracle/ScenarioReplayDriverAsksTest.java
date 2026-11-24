@@ -2,14 +2,26 @@ package org.mage.test.oracle;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+import mage.abilities.Ability;
 import mage.constants.EmptyNames;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import org.mage.test.player.TestPlayer;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /** No database or game: pins the driver asks. Each block names the Level B row it clears. Run
  * scripts/xmage-oracle-test-driver-asks.sh; the replay itself is a real replay. */
@@ -51,10 +63,17 @@ public final class ScenarioReplayDriverAsksTest {
         alternativeCast();
         promisedGift();
         replacementOrder();
+        loneForcedTarget();
+        dividedAmountUnscripted();
+        multiCandidateSearch();
         phyrexianLife();
+        wishDeclined();
+        optionalMultiCandidateTarget();
+        mandatoryChoosePickOnTargetQueue();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
                 + " face-down attacker, manifested face-down target, declined dig, alternative cast, promised gift, replacement order,"
-                + " phyrexian life");
+                + " lone forced target, divided amount, multi-candidate search, phyrexian life, wish decline, optional multi-candidate target,"
+                + " mandatory choose pick on the target queue");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
@@ -89,6 +108,134 @@ public final class ScenarioReplayDriverAsksTest {
                 "a head naming an effect's text is a scripted order");
         check((Boolean) adapter("replacementScripted", types, new ArrayList<>(Arrays.asList("Edgewall Inn*choose a color")), texts),
                 "TestPlayer's object*ability form is a scripted order");
+    }
+
+    /** Disruptive Stormbrood: an optional "up to one target artifact or
+     * enchantment" with two legal candidates. The generator scripts the
+     * decision gorge's own replay made (a decline's [target_skip] or a pick's
+     * name); the driver must not guess between them. An explicit skip and an
+     * explicit pick are both this ask's own answer and stay at the queue front
+     * for TestPlayer, an unscripted ask is not declared unscriptable (it stays
+     * the base's strict miss), and a skip queued for a LATER target object is
+     * hidden from this ask. */
+    private static void optionalMultiCandidateTarget() throws Exception {
+        Class<?>[] empty = {int.class, int.class, boolean.class};
+        check(!(Boolean) adapter("unscriptableEmptyAsk", empty, 0, 2, false),
+                "an optional ask with two candidates and no answer must not be auto-declined");
+        check(!(Boolean) adapter("unscriptableEmptyAsk", empty, 0, 2, true),
+                "an optional ask with two candidates and its own skip is the base's");
+        Class<?>[] hide = {List.class};
+        List<String> skip = new ArrayList<>(Collections.singletonList(TestPlayer.TARGET_SKIP));
+        check(((List<?>) adapter("hideAfterNextSkip", hide, skip)).isEmpty()
+                        && skip.equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
+                "an explicit skip stays at the front for this ask");
+        List<String> pick = new ArrayList<>(Collections.singletonList("Seal of Removal"));
+        check(((List<?>) adapter("hideAfterNextSkip", hide, pick)).isEmpty()
+                        && pick.equals(Collections.singletonList("Seal of Removal")),
+                "an explicit pick stays at the front for this ask");
+        List<String> laterSkip = new ArrayList<>(Arrays.asList("Seal of Removal", TestPlayer.TARGET_SKIP));
+        check(((List<?>) adapter("hideAfterNextSkip", hide, laterSkip))
+                        .equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
+                "a skip queued for a later target object is hidden from this ask");
+        check(laterSkip.equals(Collections.singletonList("Seal of Removal")),
+                "the explicit pick remains this ask's head answer");
+    }
+
+    /** Wayward Guide-Beast: a mandatory non-targeting choose of a controlled land whose pick the
+     * generator scripted on the TARGET queue moves to the CHOICE queue. */
+    private static void mandatoryChoosePickOnTargetQueue() throws Exception {
+        Class<?>[] types = {List.class, List.class, boolean.class, java.util.function.Predicate.class};
+        java.util.function.Predicate<String> lands = a -> a.equals("@p0:Mountain") || a.equals("@p0:Forest");
+        List<String> choices = new ArrayList<>();
+        List<String> targets = new ArrayList<>(Arrays.asList("@p0:Mountain", "Other"));
+        check((Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a target-queue pick naming a candidate moves");
+        check(choices.equals(Collections.singletonList("@p0:Mountain")) && targets.equals(Collections.singletonList("Other")),
+                "the pick leads the choice queue and leaves the target queue: " + choices + " " + targets);
+        choices = new ArrayList<>(Arrays.asList("@p0:Forest"));
+        targets = new ArrayList<>(Arrays.asList("@p0:Mountain"));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a choice head that names a candidate is this ask's own answer");
+        choices = new ArrayList<>();
+        targets = new ArrayList<>(Arrays.asList("Other"));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a target head naming no candidate stays");
+        targets = new ArrayList<>(Arrays.asList("@p0:Mountain"));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, false, lands),
+                "an ask with no candidates takes nothing");
+        choices = new ArrayList<>(Arrays.asList(TestPlayer.CHOICE_SKIP));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a choice skip is this ask's own answer");
+        // The helper alone is not the fix: pin that the choose(Outcome, Target...)
+        // override calls it, after the min-0 may handling and before forcedChoose,
+        // behind the role guards (a TargetPermanent ask that is not one of the
+        // source's own targets). Dropping the call or a guard would leave every
+        // check above passing while the strict replay fails again.
+        String src = System.getProperty("scenarioReplay.source");
+        check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
+        String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
+        int override = text.indexOf("public boolean choose(Outcome outcome, mage.target.Target target, Ability source, Game game)");
+        check(override >= 0, "ScriptedChoicePlayer must override choose(Outcome, Target, Ability, Game)");
+        int forced = text.indexOf("forcedChoose(target, source, game)", override);
+        int call = text.indexOf("movePickToChoices(", override);
+        check(call >= 0 && forced >= 0 && call < forced,
+                "ScriptedChoicePlayer.choose must call movePickToChoices before forcedChoose");
+        String guard = text.substring(Math.max(override, call - 1200), call);
+        check(guard.contains("getMinNumberOfTargets() > 0")
+                        && guard.contains("instanceof mage.target.TargetPermanent")
+                        && guard.contains("source.getTargets().contains(target)")
+                        && guard.contains("source.getTargets().contains(target.getOriginalTarget())"),
+                "the move must stay behind the mandatory / TargetPermanent / not-the-source's-own-target guards");
+    }
+
+    /** North Wind Avatar: WishEffect asks "Put a card you own from outside the
+     * game into your hand?" before it checks the sideboard. With none outside
+     * the game it has no candidate, so the driver declines an unscripted ask
+     * instead of strict-missing; a queued boolean or a non-empty sideboard is
+     * left to TestPlayer. The filter form with alsoFromExile can still have an
+     * exile candidate, so its wording is never declined. */
+    private static void wishDeclined() throws Exception {
+        String wish = "Put a card you own from outside the game into your hand?";
+        String coax = "Reveal an Eldrazi card you own from outside the game or choose a face-up Eldrazi card"
+                + " you own in exile. Put that card into your hand?";
+        Class<?>[] types = {String.class, boolean.class, List.class};
+        check((Boolean) adapter("unanswerableWishAsk", types, wish, true, new ArrayList<String>()),
+                "an empty sideboard's unscripted wish must be declined");
+        check(!(Boolean) adapter("unanswerableWishAsk", types, wish, false, new ArrayList<String>()),
+                "a non-empty sideboard still asks");
+        check(!(Boolean) adapter("unanswerableWishAsk", types, wish, true, new ArrayList<>(Arrays.asList("Yes"))),
+                "a queued yes is the generator's answer");
+        check(!(Boolean) adapter("unanswerableWishAsk", types, coax, true, new ArrayList<String>()),
+                "the alsoFromExile wording can still have an exile candidate and must ask");
+        String filtered = "Reveal a multicolored card you own from outside the game and put it into your hand?";
+        check((Boolean) adapter("unanswerableWishAsk", types, filtered, true, new ArrayList<String>()),
+                "an empty sideboard's filtered wish (Glittering Wish) must be declined");
+        check(!(Boolean) adapter("unanswerableWishAsk", types, filtered, false, new ArrayList<String>()),
+                "a filtered wish over a non-empty sideboard still asks");
+        check(!(Boolean) adapter("unanswerableWishAsk", types, "Draw a card?", true, new ArrayList<String>()),
+                "another chooseUse is untouched");
+        // Elvish Piper and its siblings: the same candidate-free ask over an
+        // empty hand.
+        String piper = "Put a creature card from your hand onto the battlefield?";
+        check((Boolean) adapter("unanswerableHandPutAsk", types, piper, true, new ArrayList<String>()),
+                "an empty hand's unscripted put-from-hand ask must be declined");
+        check(!(Boolean) adapter("unanswerableHandPutAsk", types, piper, false, new ArrayList<String>()),
+                "a non-empty hand still asks");
+        check(!(Boolean) adapter("unanswerableHandPutAsk", types, piper, true, new ArrayList<>(Arrays.asList("No"))),
+                "a queued no is the generator's answer");
+        check(!(Boolean) adapter("unanswerableHandPutAsk", types, "Draw a card?", true, new ArrayList<String>()),
+                "another chooseUse is untouched");
+        // The helper alone is not the fix: pin that the chooseUse override
+        // actually calls it. Dropping the call would leave every check above
+        // passing while the strict replay fails again.
+        String src = System.getProperty("scenarioReplay.source");
+        check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
+        String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
+        int override = text.indexOf("public boolean chooseUse(Outcome outcome");
+        check(override >= 0, "ScriptedChoicePlayer must override chooseUse");
+        int call = text.indexOf("unanswerableWishAsk(", override);
+        check(call >= 0 && call < override + 600,
+                "ScriptedChoicePlayer.chooseUse must call unanswerableWishAsk");
     }
 
     private static void activeSeatOnePair() {
@@ -251,20 +398,31 @@ public final class ScenarioReplayDriverAsksTest {
                 "a lone No (Oko's chooseUse) is kept");
     }
 
-    /** (g) DSK Leyline of Mutation static#0.0 and Land Grant's own cost:
-     * cast_mode "alternative" is the election, so the first alternative is
-     * key 1 whether the generator queued a leading "Yes" or nothing at all
-     * (Land Grant's cost is on the card, not a gorge decision). */
+    /** (g) DSK Leyline of Mutation static#0.0, Land Grant's own cost and Mine
+     * Collapse's sacrifice cost: cast_mode "alternative" is the election, so
+     * the first alternative is key 1 whether the generator queued a leading
+     * "Yes" or nothing at all (Land Grant's cost is on the card, not a gorge
+     * decision). A real pick queued for the elected cost (Mine Collapse's
+     * Mountain) must stay behind the key: the key is inserted ahead of it, not
+     * written over it. */
     private static void alternativeCast() throws Exception {
         check(ScenarioReplay.castModeSupported("alternative"), "alternative cast_mode must be elected");
-        check(!ScenarioReplay.castModeSupported("kicked"), "an unwired cast_mode is still rejected");
+        check(!ScenarioReplay.castModeSupported("kickedboth"), "an unwired cast_mode is still rejected");
         Class<?>[] types = {String.class, List.class};
         List<String> choices = new ArrayList<>(Collections.singletonList("Yes"));
         check((Boolean) adapter("alternativeCostKey", types, "You may choose an alternative cost", choices)
-                && choices.get(0).equals("1"), "Yes -> key 1: " + choices);
+                && choices.equals(Collections.singletonList("1")), "Yes -> key 1: " + choices);
         List<String> queuedNone = new ArrayList<>();
         check((Boolean) adapter("alternativeCostKey", types, "Choose an alternative cost", queuedNone)
                 && queuedNone.equals(Collections.singletonList("1")), "no answer -> key 1: " + queuedNone);
+        List<String> sacrificePick = new ArrayList<>(Collections.singletonList("@p0:Mountain"));
+        check((Boolean) adapter("alternativeCostKey", types, "You may choose an alternative cost", sacrificePick)
+                && sacrificePick.equals(Arrays.asList("1", "@p0:Mountain")),
+                "a real pick stays behind key 1: " + sacrificePick);
+        List<String> decline = new ArrayList<>(Collections.singletonList("Cast with no alternative cost"));
+        check((Boolean) adapter("alternativeCostKey", types, "You may choose an alternative cost", decline)
+                && decline.equals(Collections.singletonList("1")),
+                "the plain-cast decline is replaced by key 1: " + decline);
         List<String> other = new ArrayList<>(Collections.singletonList("Yes"));
         check(!(Boolean) adapter("alternativeCostKey", types, "Choose a creature type", other) && other.get(0).equals("Yes"),
                 "another key menu is untouched");
@@ -282,6 +440,140 @@ public final class ScenarioReplayDriverAsksTest {
                 "not a gift ask");
         check(adapter("giftOpponentChoice", types, true, Arrays.asList("PlayerB", "PlayerC"), new ArrayList<String>()) == null,
                 "two opponents is a real choice");
+    }
+
+    /** (k) Black Cat, Cunning Thief and Tishana's Tidebinder: a target ask
+     * whose only legal candidate gorge settled without a decision. Nothing is
+     * scripted for that ask, so the driver takes the lone candidate; a queued
+     * answer naming the candidate, or two candidates, keeps the base's strict
+     * reading. A front skip closes only an "up to" ask whose minimum is met:
+     * on a mandatory ask it belongs to a later ask and must stay queued while
+     * the lone candidate is taken. The override declarations are pinned here;
+     * scripts/xmage-oracle-test-driver-asks.sh additionally guards the funnel
+     * call sites, which reflection over a declared method cannot see. */
+    private static void loneForcedTarget() throws Exception {
+        Class<?> scripted = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
+        boolean declares = false;
+        for (Method method : scripted.getDeclaredMethods()) {
+            if (method.getName().equals("chooseTarget") && method.getParameterCount() == 4
+                    && method.getParameterTypes()[1].getName().equals("mage.target.Target")) {
+                declares = true;
+            }
+        }
+        check(declares, "ScriptedChoicePlayer must override chooseTarget to take a lone candidate"
+                + " (Black Cat, Cunning Thief's only opponent; Tishana's Tidebinder's only ability)");
+        Class<?>[] targetTypes = {mage.target.Target.class};
+        check(!(Boolean) adapter("skipCanCloseAsk", targetTypes, new mage.target.TargetPlayer(1, 1, false)),
+                "a mandatory 1/1 ask cannot be closed by a skip");
+        check((Boolean) adapter("skipCanCloseAsk", targetTypes, new mage.target.TargetPlayer(0, 1, false)),
+                "an optional 0/1 ask can be closed by a skip");
+        java.util.UUID bears = java.util.UUID.randomUUID();
+        java.util.UUID shock = java.util.UUID.randomUUID();
+        java.util.function.BiPredicate<java.util.UUID, String> byName =
+                (id, name) -> name.equals(id.equals(bears) ? "Grizzly Bears" : "Shock");
+        Class<?>[] types = {List.class, List.class, boolean.class, java.util.function.BiPredicate.class};
+        List<java.util.UUID> one = new ArrayList<>(Collections.singletonList(bears));
+        check(bears.equals(adapter("loneTargetChoice", types, new ArrayList<String>(), one, true, byName)),
+                "a lone candidate with nothing scripted was not taken");
+        check(bears.equals(adapter("loneTargetChoice", types,
+                        new ArrayList<>(Collections.singletonList("Island")), one, true, byName)),
+                "a lone candidate was lost to a later ask's queued answer");
+        check(adapter("loneTargetChoice", types,
+                        new ArrayList<>(Collections.singletonList("Grizzly Bears")), one, true, byName) == null,
+                "a queued answer naming the candidate was overridden");
+        check(adapter("loneTargetChoice", types,
+                        new ArrayList<>(Arrays.asList("Island", "Grizzly Bears")), one, true, byName) == null,
+                "a queued answer naming the candidate behind another ask's answer (index 1) was left"
+                        + " unconsumed: TestPlayer scans the whole queue, so the base must answer");
+        List<String> skip = new ArrayList<>(Collections.singletonList(TestPlayer.TARGET_SKIP));
+        check(adapter("loneTargetChoice", types, skip, one, true, byName) == null,
+                "a front skip was overridden on an ask it can close");
+        check(bears.equals(adapter("loneTargetChoice", types, skip, one, false, byName))
+                        && skip.equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
+                "a mandatory ask did not take its lone candidate and leave the later ask's skip queued");
+        check(adapter("loneTargetChoice", types, new ArrayList<String>(),
+                        Arrays.asList(bears, shock), true, byName) == null, "a two-candidate ask was guessed");
+        check(adapter("loneTargetChoice", types, new ArrayList<String>(),
+                        new ArrayList<java.util.UUID>(), true, byName) == null, "an empty candidate set produced a pick");
+    }
+
+    /** (l) Gladiolus Amicitia's ETB search: a mandatory single-pick library
+     * search with many legal cards and no scripted pick. In the trailing play
+     * -- after every checkpoint was captured, which is where the stored item
+     * poses it -- the driver gathers the first eligible card in the order
+     * XMage presents the search (name-sorted) instead of strict-missing
+     * "Missing TARGET def". The same ask INSIDE the compared window is a real
+     * decision the driver cannot infer, so it must not be guessed: the helper
+     * returns null and the strict miss is kept for the loose rerun. A queued
+     * answer naming a candidate, at any index (the base scans the whole
+     * queue), is the ask's own; a front skip that can close it is too. An
+     * answer for a later ask does not stop the pick, and a skip on a fixed
+     * min == max ask stays queued. A multi-pick search's count is a decision
+     * of its own, so it is never guessed. */
+    private static void multiCandidateSearch() throws Exception {
+        java.util.UUID forest = java.util.UUID.randomUUID();
+        java.util.UUID mountain = java.util.UUID.randomUUID();
+        java.util.UUID swamp = java.util.UUID.randomUUID();
+        java.util.function.BiPredicate<java.util.UUID, String> byName =
+                (id, name) -> name.equals(id.equals(forest) ? "Forest" : id.equals(mountain) ? "Mountain" : "Swamp");
+        Class<?>[] types = {List.class, List.class, boolean.class, boolean.class, boolean.class,
+            java.util.function.BiPredicate.class};
+        List<java.util.UUID> many = new ArrayList<>(Arrays.asList(forest, mountain, swamp));
+
+        check(forest.equals(adapter("searchPickChoice", types,
+                        new ArrayList<String>(), many, true, false, true, byName)),
+                "an unscripted multi-candidate single-pick search did not gather the first presented card");
+        check(adapter("searchPickChoice", types,
+                        new ArrayList<String>(), many, true, false, false, byName) == null,
+                "a search inside the compared window was guessed instead of keeping its strict miss");
+        check(forest.equals(adapter("searchPickChoice", types,
+                        new ArrayList<>(Collections.singletonList("Shock")), many, true, false, true, byName)),
+                "a later ask's queued answer stopped the search pick");
+        check(adapter("searchPickChoice", types,
+                        new ArrayList<>(Collections.singletonList("Mountain")), many, true, false, true, byName) == null,
+                "a queued answer naming a candidate was overridden");
+        check(adapter("searchPickChoice", types,
+                        new ArrayList<>(Arrays.asList("Shock", "Mountain")), many, true, false, true, byName) == null,
+                "a queued answer naming a candidate behind another ask's answer (index 1) was"
+                        + " overridden: TestPlayer scans the whole queue");
+        List<String> skip = new ArrayList<>(Collections.singletonList(TestPlayer.TARGET_SKIP));
+        check(adapter("searchPickChoice", types, skip, many, true, true, true, byName) == null,
+                "a front skip that can close the search was overridden");
+        check(forest.equals(adapter("searchPickChoice", types, skip, many, true, false, true, byName))
+                        && skip.equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
+                "a fixed search did not take its pick and leave the later ask's skip queued");
+        check(adapter("searchPickChoice", types, new ArrayList<String>(), many, false, false, true, byName) == null,
+                "a multi-pick search (count is its own decision) was guessed");
+        check(adapter("searchPickChoice", types, new ArrayList<String>(),
+                        new ArrayList<java.util.UUID>(), true, false, true, byName) == null,
+                "an empty search produced a pick");
+        // The helper alone is not the fix: a merge that drops the call from
+        // the TargetCardInLibrary funnel, or drops the trailing gate from the
+        // call, leaves every check above passing while the strict replay
+        // either fails again or compares an invented in-window board. Pin
+        // both the call site and the trailing predicate it passes.
+        String src = System.getProperty("scenarioReplay.source");
+        check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
+        String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
+        int call = text.indexOf("= searchPickChoice(");
+        check(call >= 0, "ScriptedChoicePlayer.chooseTarget(Cards, TargetCard) must call searchPickChoice"
+                + " for a TargetCardInLibrary ask");
+        check(text.indexOf("owner.pastLastCheckpoint()", call) > call,
+                "the search funnel must gate the pick on owner.pastLastCheckpoint(): an in-window"
+                        + " search is a real decision, not one to invent");
+        check(text.indexOf("boolean pastLastCheckpoint()") >= 0,
+                "ScenarioReplay.pastLastCheckpoint must exist to describe the trailing play");
+        // A front skip that closes a short search is the ask's own answer even
+        // when only one card is legal: the funnel must close the search before
+        // the lone-target rule, or it takes the card and leaves the skip
+        // queued (CR 701.23b).
+        int funnel = text.indexOf(
+                "public boolean chooseTarget(Outcome outcome, Cards cards, mage.target.TargetCard target");
+        int closeSkip = text.indexOf("if (shortSearchStop(", funnel);
+        int loneCall = text.indexOf("UUID lone = unscriptedLoneTarget(", funnel);
+        check(funnel >= 0 && closeSkip > funnel && loneCall > closeSkip,
+                "the TargetCardInLibrary funnel must handle shortSearchStop before the lone-target"
+                        + " rule: a skip it can close is not overridden");
     }
 
     /** (j) NPH Blinding Souleater's {W/P} activation: XMage asks "Pay 2 life
@@ -335,5 +627,230 @@ public final class ScenarioReplayDriverAsksTest {
         check("Yes".equals(rest.get(0)), "the second ask still sees the life pip's Yes");
         check(pair.size() == 2 && rest.size() == 1,
                 "the starvation check never consumes or reorders the queue");
+    }
+
+    /** (l) Ureni, the Song Unending's ETB: X damage divided among any number
+     * of target creatures and/or planeswalkers with two legal candidates and
+     * no scripted "^X=" answer. gorge settles that without a decision, so the
+     * driver deals the points evenly over every recipient the ask allows
+     * (the lone-candidate rule would stop at one) instead of stopping at
+     * "Missing TARGET def". The production chooseTargetAmount is driven over a
+     * synthetic TargetAmount so a merge that drops or reorders the shares
+     * fails here. A queued "name^X=n" answer at the head and a front skip that
+     * closes the ask stay the base's; a later ask's skip stays queued; a
+     * one-recipient ask with several candidates is a real target choice and
+     * is not guessed. */
+    private static void dividedAmountUnscripted() throws Exception {
+        Class<?>[] sharesTypes = {int.class, int.class};
+        check(Arrays.equals(new int[]{4, 4}, (int[]) adapter("evenShares", sharesTypes, 8, 2)),
+                "8 points over two candidates is not the even 4+4 split");
+        check(Arrays.equals(new int[]{4, 3}, (int[]) adapter("evenShares", sharesTypes, 7, 2)),
+                "the remainder must go to the earlier candidate");
+        check(Arrays.equals(new int[]{1, 1, 1}, (int[]) adapter("evenShares", sharesTypes, 3, 3)),
+                "3 points over three candidates is not one each");
+        check(Arrays.equals(new int[]{1, 1}, (int[]) adapter("evenShares", sharesTypes, 2, 5)),
+                "a 2-point ask cannot give five recipients one each");
+        check(((int[]) adapter("evenShares", sharesTypes, 0, 2)).length == 0,
+                "a zero amount must not ask for a recipient");
+        UUID a = UUID.randomUUID();
+        UUID b = UUID.randomUUID();
+        java.util.function.BiPredicate<UUID, String> amountName = (id, answer) -> {
+            int at = answer == null ? -1 : answer.indexOf("^X=");
+            return (id.equals(a) ? "Ajani Resolute" : "Ornithopter").equals(at >= 0 ? answer.substring(0, at) : answer);
+        };
+        Class<?>[] choiceTypes = {List.class, List.class, boolean.class, java.util.function.BiPredicate.class};
+        List<UUID> two = new ArrayList<>(Arrays.asList(a, b));
+        check((Boolean) adapter("unscriptedChoice", choiceTypes, new ArrayList<String>(), two, true, amountName),
+                "two candidates with no scripted amount must be answered");
+        check(!(Boolean) adapter("unscriptedChoice", choiceTypes,
+                        new ArrayList<>(Collections.singletonList("Ajani Resolute^X=2")), two, true, amountName),
+                "a scripted ^X= answer must be left for the base");
+        List<String> skip = new ArrayList<>(Collections.singletonList(TestPlayer.TARGET_SKIP));
+        check(!(Boolean) adapter("unscriptedChoice", choiceTypes, skip, two, true, amountName),
+                "a front skip that can close the ask must be left for the base");
+        check((Boolean) adapter("unscriptedChoice", choiceTypes, skip, two, false, amountName),
+                "a later ask's skip must not stop the inferred split");
+
+        // Production path. Two legal permanents (passed in reverse creation
+        // order), eight points, two slots.
+        Class<?> scripted = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
+        ScenarioReplay owner = (ScenarioReplay) unsafe().allocateInstance(ScenarioReplay.class);
+        Constructor<?> ctor = scripted.getDeclaredConstructor(
+                org.mage.test.player.TestComputerPlayer.class, ScenarioReplay.class);
+        ctor.setAccessible(true);
+        TestPlayer player = (TestPlayer) ctor.newInstance(
+                new org.mage.test.player.TestComputerPlayer("PlayerA", mage.constants.RangeOfInfluence.ALL), owner);
+        seat(owner, "playerA", player);
+        UUID own = player.getId();
+        Permanent earlier = amountPermanent(own, 1, "Ajani Resolute");
+        Permanent later = amountPermanent(own, 2, "Ornithopter");
+        Game game = amountGame(earlier, later);
+        List<UUID> reversed = Arrays.asList(later.getId(), earlier.getId());
+
+        // (1) Nothing scripted: 4+4, earlier-created first, queue untouched.
+        AmountTarget amount = new AmountTarget(8, 0, 2, reversed);
+        check(player.chooseTargetAmount(mage.constants.Outcome.Benefit, amount, null, game),
+                "chooseTargetAmount declined an unscripted multi-candidate divided ask");
+        check(amount.getTargets().size() == 2,
+                "the divided ask chose " + amount.getTargets().size() + " recipients, not 2");
+        check(amount.getTargets().get(0).equals(earlier.getId()),
+                "the earlier-created permanent must take the first share (stable order)");
+        check(amount.getTargetAmount(earlier.getId()) == 4 && amount.getTargetAmount(later.getId()) == 4,
+                "8 points must be dealt 4+4, got " + amount.getTargetAmount(earlier.getId())
+                        + "+" + amount.getTargetAmount(later.getId()));
+        check(player.getTargets().isEmpty(), "the inferred split left an answer queued");
+
+        // (2) A scripted "name^X=n" answer at the head is the base's: it
+        // takes the whole amount for the named candidate and consumes the entry.
+        player.getTargets().clear();
+        player.getTargets().add("Ornithopter^X=8");
+        amount = new AmountTarget(8, 0, 2, reversed);
+        check(player.chooseTargetAmount(mage.constants.Outcome.Benefit, amount, null, game),
+                "a scripted amount answer did not finish the ask");
+        check(amount.getTargets().size() == 1 && amount.getTargetAmount(later.getId()) == 8,
+                "the scripted 'Ornithopter^X=8' was overridden by an inferred split");
+        check(player.getTargets().isEmpty(), "the scripted amount answer was not consumed");
+
+        // (3) A front skip on an "up to" ask is the base's: it closes the ask
+        // with nothing chosen and is consumed.
+        player.getTargets().clear();
+        player.getTargets().add(TestPlayer.TARGET_SKIP);
+        amount = new AmountTarget(8, 0, 2, reversed);
+        check(!player.chooseTargetAmount(mage.constants.Outcome.Benefit, amount, null, game),
+                "a front skip on an up-to ask did not close it");
+        check(amount.getTargets().isEmpty() && player.getTargets().isEmpty(),
+                "the closing skip was overridden or left queued");
+
+        // (4) On a mandatory ask (min 1) a front skip belongs to a LATER ask:
+        // the split is inferred and the skip stays queued.
+        player.getTargets().clear();
+        player.getTargets().add(TestPlayer.TARGET_SKIP);
+        amount = new AmountTarget(8, 1, 2, reversed);
+        check(player.chooseTargetAmount(mage.constants.Outcome.Benefit, amount, null, game),
+                "a mandatory divided ask declined");
+        check(amount.getTargets().size() == 2 && player.getTargets().equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
+                "a later ask's skip was consumed or the split not inferred");
+
+        // (5) A ONE-recipient ask (max 1) with several candidates is a target
+        // choice, not a division: it must not silently take the first.
+        player.getTargets().clear();
+        amount = new AmountTarget(8, 1, 1, reversed);
+        boolean guessed;
+        try {
+            guessed = player.chooseTargetAmount(mage.constants.Outcome.Benefit, amount, null, game)
+                    || !amount.getTargets().isEmpty();
+        } catch (AssertionError strict) {
+            guessed = false;
+        }
+        check(!guessed && amount.getTargets().isEmpty(),
+                "a max-1 ask with two candidates and no answer silently took a target");
+    }
+
+    /** A divided-amount target with the Ureni shape: an amount, a
+     * minimum and maximum, and a fixed legal set. */
+    private static final class AmountTarget extends mage.target.TargetAmount {
+        private final Set<UUID> possible;
+
+        AmountTarget(int amount, int minTargets, int maxTargets, List<UUID> candidates) {
+            super(mage.abilities.dynamicvalue.common.StaticValue.get(amount), minTargets, maxTargets);
+            possible = new LinkedHashSet<>(candidates);
+            this.targetName = "creature";
+        }
+
+        @Override
+        public AmountTarget copy() {
+            return this;
+        }
+
+        @Override
+        public mage.filter.Filter getFilter() {
+            return mage.filter.StaticFilters.FILTER_PERMANENT;
+        }
+
+        @Override
+        public String getTargetedName(Game game) {
+            return "";
+        }
+
+        @Override
+        public boolean canChoose(UUID playerId, Ability source, Game game) {
+            return true;
+        }
+
+        @Override
+        public Set<UUID> possibleTargets(UUID controllerId, Ability source, Game game) {
+            return possible;
+        }
+
+        @Override
+        public boolean canTarget(UUID id, Ability source, Game game) {
+            return true;
+        }
+
+        @Override
+        public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+            return true;
+        }
+    }
+
+    private static Permanent amountPermanent(UUID controller, int order, String name) {
+        UUID id = UUID.randomUUID();
+        return (Permanent) Proxy.newProxyInstance(Permanent.class.getClassLoader(),
+                new Class<?>[]{Permanent.class}, (proxy, method, args) -> {
+                    switch (method.getName()) {
+                        case "getId": return id;
+                        case "getControllerId": return controller;
+                        case "getName": return name;
+                        case "getCreateOrder": return order;
+                        case "isToken": return false;
+                        case "isPhasedIn": return true;
+                        case "isCopy": return false;
+                        case "isFaceDown": return false;
+                        case "isControlledBy": return controller.equals(args[0]);
+                        case "getCardType": return List.of(mage.constants.CardType.CREATURE);
+                        case "isCreature": return true;
+                        case "isTapped": return false;
+                        case "getExpansionSetCode": return "TST";
+                        default: throw new AssertionError("unexpected permanent call " + method);
+                    }
+                });
+    }
+
+    private static Game amountGame(Permanent first, Permanent second) {
+        return (Game) Proxy.newProxyInstance(Game.class.getClassLoader(),
+                new Class<?>[]{Game.class}, (proxy, method, args) -> {
+                    switch (method.getName()) {
+                        case "getPermanent":
+                            return first.getId().equals(args[0]) ? first
+                                    : second.getId().equals(args[0]) ? second : null;
+                        case "getObject":
+                            return first.getId().equals(args[0]) ? first
+                                    : second.getId().equals(args[0]) ? second : null;
+                        case "getPlayer": return null;
+                        case "getCard": return null;
+                        case "getPlayers": return new LinkedHashMap<UUID, mage.players.Player>();
+                        case "isSimulation": return true;
+                        case "getRangeOfInfluence": return mage.constants.RangeOfInfluence.ALL;
+                        default: throw new AssertionError("unexpected game call " + method);
+                    }
+                });
+    }
+
+    private static void seat(ScenarioReplay owner, String field, TestPlayer player) throws Exception {
+        for (Class<?> c = ScenarioReplay.class; c != null; c = c.getSuperclass()) {
+            try {
+                java.lang.reflect.Field f = c.getDeclaredField(field);
+                f.setAccessible(true);
+                f.set(owner, player);
+                return;
+            } catch (NoSuchFieldException absent) { }
+        }
+        throw new AssertionError("no " + field + " field");
+    }
+
+    private static sun.misc.Unsafe unsafe() throws Exception {
+        java.lang.reflect.Field f = sun.misc.Unsafe.class.getDeclaredField("theUnsafe");
+        f.setAccessible(true);
+        return (sun.misc.Unsafe) f.get(null);
     }
 }

@@ -42,12 +42,16 @@ func TestTriggeredCostWindowRoutesToChooseUse(t *testing.T) {
 	if len(got) > 0 && len(got[0]) != 0 {
 		t.Fatalf("decline-only non-mana triggered cost answers = %v, want none", got[0])
 	}
-	// A non-mana cost's pay pick (Scuzzback Scrounger's blight) keeps the
-	// generic routing: XMage asks the blight target, not a chooseUse.
+	// A non-mana cost's pay pick (Scuzzback Scrounger's blight) is not the
+	// pure-mana route, but nonManaTriggerCostPay owns it: DoIfCostPaid asks its
+	// chooseUse, so the yes leads the blight target (Boggart Mischief).
 	blight := pay
 	blight.Picks, blight.First, blight.TriggerCostMana = []string{"Blight 1"}, "Blight 1", false
 	if triggerCostAnswer(blight) != "" {
-		t.Fatal("a blight cost's pay pick was scripted as a chooseUse")
+		t.Fatal("a blight cost's pay pick was scripted by the pure-mana route")
+	}
+	if !nonManaTriggerCostPay(blight) {
+		t.Fatal("a blight cost's pay pick must take the non-mana chooseUse route")
 	}
 	// A source tap NOT followed by a triggered cost's ask (a priority-time
 	// mana activation) keeps its ordinary mapping.

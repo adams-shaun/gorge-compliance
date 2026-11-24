@@ -539,6 +539,28 @@ func TestGateDeadTurnHistory(t *testing.T) {
 		t.Fatalf("(c2) read attack record: reasons %v, want field:Player.AttackedSeatsLastTurn", c.Reasons)
 	}
 
+	// (c3) the per-source attack record is live only when a card reads it.
+	e = base.Clone()
+	e.G.Objs[perm].AttackedPlayersThisTurn = 1 << 1
+	if c := capture(e, at, true); len(c.Reasons) != 0 {
+		t.Fatalf("(c3) unread per-source attack record: reasons %v, want none", c.Reasons)
+	}
+	plantCard(t, reg, e, "Port Razer")
+	if c := capture(e, at, true); !hasReason(c, "field:Object.AttackedPlayersThisTurn") {
+		t.Fatalf("(c3) read per-source attack record: reasons %v, want field:Object.AttackedPlayersThisTurn", c.Reasons)
+	}
+
+	// (c4) the per-seat damage record is live only when a card reads it.
+	e = base.Clone()
+	e.G.Objs[perm].DealtDamageToPlayersThisTurnHere = 1 << 1
+	if c := capture(e, at, true); len(c.Reasons) != 0 {
+		t.Fatalf("(c4) unread damage record: reasons %v, want none", c.Reasons)
+	}
+	plantCard(t, reg, e, "Dunerider Outlaw")
+	if c := capture(e, at, true); !hasReason(c, "field:Object.DealtDamageToPlayersThisTurnHere") {
+		t.Fatalf("(c4) read damage record: reasons %v, want field:Object.DealtDamageToPlayersThisTurnHere", c.Reasons)
+	}
+
 	// (d) a runtime SVar is live only when a card in the game names its key.
 	e = base.Clone()
 	e.G.Objs[perm].RuntimeSVars = map[string]int32{"AFLifeLost": 2}

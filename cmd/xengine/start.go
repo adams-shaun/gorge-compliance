@@ -42,9 +42,12 @@ type startFile struct {
 		P0 startSeat `json:"p0"`
 		P1 startSeat `json:"p1"`
 	} `json:"setup"`
-	Filler string      `json:"filler"`
-	Seeds  int         `json:"seeds"`
-	Focus  *startFocus `json:"focus"`
+	Filler string `json:"filler"`
+	Seeds  int    `json:"seeds"`
+	// SeedBase is where the file's seed search starts (0 or absent: 1), so a
+	// key retried in a later cycle plays new games, not the same Seeds again.
+	SeedBase uint64      `json:"seed_base"`
+	Focus    *startFocus `json:"focus"`
 }
 
 // startSeat is one seat's position, as card names.
@@ -71,6 +74,8 @@ type startFocus struct {
 	Card    string `json:"card"`
 	Kind    string `json:"kind"`
 	Ability int    `json:"ability"`
+	Mode    string `json:"mode"`
+	Times   int    `json:"times"`
 }
 
 // startFlagErr is the error of -start given with a flag it does not combine
@@ -149,6 +154,26 @@ func readStartFile(path string) (*startFile, error) {
 	return &f, nil
 }
 
+// gameSeeds is the seed of each of the file's Seeds games. Game s's is the
+// first seed after game s-1's that names the active seat as the starter
+// (rules.SeedForStarter), the search starting at seed_base (absent: 1, the
+// brief's), so no two of a file's games share a seed, which
+// SeedForStarter(s, ...) alone would give them (seeds 1 and 2 both resolve to
+// 2 for seat 0).
+func (f *startFile) gameSeeds() []uint64 {
+	next := f.SeedBase
+	if next == 0 {
+		next = 1
+	}
+	out := make([]uint64, 0, f.Seeds)
+	for range f.Seeds {
+		seed := rules.SeedForStarter(next, 2, f.Active)
+		out = append(out, seed)
+		next = seed + 1
+	}
+	return out
+}
+
 var keyFA = regexp.MustCompile(`^f(\d+)/a(\d+)$`)
 
 // focusOf is the focus the file names, or its defaults: the first seat listing
@@ -180,7 +205,7 @@ func (f *startFile) focusOf() (game.Focus, error) {
 			out.Card = o.Card
 		}
 		if o.Kind != "" {
-			out.Kind, out.Ability = o.Kind, o.Ability
+			out.Kind, out.Ability, out.Mode, out.Times = o.Kind, o.Ability, o.Mode, o.Times
 		}
 	}
 	if out.Seat < 0 || out.Seat > 1 {
@@ -270,6 +295,9 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 		ss.Tapped = append(ss.Tapped, i)
 	}
 	for _, c := range s.Counters {
+		if err := startCounterKindError(c.Kind); err != nil {
+			return d, ss, fmt.Errorf("start %s: %w", name, err)
+		}
 		i, err := bind(c.Card, counted)
 		if err != nil {
 			return d, ss, err
@@ -302,6 +330,18 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 	}
 	d.Colours = colours
 	return d, ss, nil
+}
+
+// startCounterKindError is why kind cannot be seeded, or nil: a wildcard
+// ("All", "Any") or a Forge placeholder ("EachFromSource", "ExistingCounter")
+// names kinds rather than one, and the followers cannot apply it (Honest
+// Work's CounterType$ All was seeded literally before certdeck normalised it).
+func startCounterKindError(kind string) error {
+	switch strings.ToLower(strings.TrimSpace(kind)) {
+	case "", "all", "any", "eachfromsource", "existingcounter":
+		return fmt.Errorf("counter kind %q is not a counter kind", kind)
+	}
+	return nil
 }
 
 // hasShardLetter reports whether the Forge mana cost has a shard with the
@@ -367,11 +407,7 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 				}
 			}
 		}
-		// Seed s is the first seed after seed s-1 that names the active seat as
-		// the starter (rules.SeedForStarter): seed 1's is the brief's, and no two
-		// of a file's games share a seed, which SeedForStarter(s, ...) alone
-		// would give them (seeds 1 and 2 both resolve to 2 for seat 0).
-		next := uint64(1)
+		seeds := f.gameSeeds()
 		for s := 1; s <= f.Seeds; s++ {
 			games++
 			id := startID(set, f.Card, f.Key, s)
@@ -382,8 +418,7 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 				// the game as the turn after them begins.
 				opt.MaxTurns = f.MaxTurns + 1
 			}
-			seed := rules.SeedForStarter(next, 2, f.Active)
-			next = seed + 1
+			seed := seeds[s-1]
 			l, reasons, tp, err := lower.Span(reg, pair, seed, opt, xmage, id, name)
 			if err != nil || tp == nil {
 				row := lowerRow{ID: id, Step: -1, Status: statusPlayError, Field: "play", Gorge: fmt.Sprint(err)}

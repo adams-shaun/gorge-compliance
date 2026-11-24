@@ -372,7 +372,42 @@ public final class ScenarioReplayPaymentTest {
         colour.setAccessible(true);
         equal("Red", colour.invoke(null, "R"));
         equal("Colorless", colour.invoke(null, "1"));
+        Method waterbend = cls.getDeclaredMethod("waterbendTapName", String.class);
+        waterbend.setAccessible(true);
+        equal("Katara, Water Tribe's Hope", waterbend.invoke(null, "Tap Katara, Water Tribe's Hope to waterbend for 1"));
+        equal("Ally Token", waterbend.invoke(null, "Tap Ally Token to waterbend for 1"));
+        for (String no : new String[] {"Tap Elves for mana", "Tap  to waterbend for 1", "Island", null}) {
+            if (waterbend.invoke(null, no) != null) {
+                throw new AssertionError("label parsed as a waterbend tap: " + no);
+            }
+        }
         System.out.println("PASS payment-tap labels parse to the permanent and its contribution");
+    }
+
+    private static void testWaterbendXInference() {
+        com.google.gson.JsonArray taps = new com.google.gson.JsonArray();
+        com.google.gson.JsonObject tap = new com.google.gson.JsonObject();
+        tap.addProperty("seat", 0);
+        tap.addProperty("kind", "choice");
+        tap.addProperty("value", "Tap Katara, Water Tribe's Hope to waterbend for 1");
+        taps.add(tap);
+        equal(1, ScenarioReplay.waterbendXFromAnswers(taps, ""));
+        equal(3, ScenarioReplay.waterbendXFromAnswers(taps, "UU"));
+        com.google.gson.JsonArray explicit = new com.google.gson.JsonArray();
+        com.google.gson.JsonObject amount = new com.google.gson.JsonObject();
+        amount.addProperty("kind", "amount");
+        amount.addProperty("value", "4");
+        explicit.add(amount);
+        equal(0, ScenarioReplay.waterbendXFromAnswers(explicit, ""));
+        com.google.gson.JsonArray explicitX = new com.google.gson.JsonArray();
+        com.google.gson.JsonObject xChoice = new com.google.gson.JsonObject();
+        xChoice.addProperty("seat", 0);
+        xChoice.addProperty("kind", "choice");
+        xChoice.addProperty("value", "X=1");
+        explicitX.add(xChoice);
+        explicitX.add(tap);
+        equal(0, ScenarioReplay.waterbendXFromAnswers(explicitX, ""));
+        System.out.println("PASS a waterbend X comes from its tap picks and pool spend, not an explicit amount");
     }
 
     /** An improvise-shaped special action (rule text "Improvise (...)", an
@@ -528,11 +563,60 @@ public final class ScenarioReplayPaymentTest {
         System.out.println("PASS a delve action takes one recorded pick per activation");
     }
 
+    /** oraclegen joins a multi-pick choose into ONE makeChoose answer
+     * ("Island^Island^Island"). The hook must split that answer before it
+     * matches a graveyard card, take one pick per manual payment activation
+     * (the Delve cost target's max is one while the pool is manual), and
+     * leave the picks it could not take as separate queue entries for the
+     * next payment cycle, never as a "^" entry no target ask consumes. */
+    private static void testDelveJoinedPicksAreSplit() throws Exception {
+        Game game = game();
+        ScriptedPayment sp = newPlayer(game, new ScenarioReplay());
+        TestPlayer p = sp.player;
+        p.updateRange(game);
+        List<UUID> picked = new java.util.ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            picked.add(addToGraveyard(game, p, "Island"));
+        }
+        Method queue = p.getClass().getDeclaredMethod("queueTapPaymentAction", Game.class);
+        queue.setAccessible(true);
+        sp.begin("");
+        p.addChoice("Island^Island^Island");
+        p.addChoice(TestPlayer.CHOICE_SKIP);
+        int cycles = 0;
+        while (!p.getChoices().isEmpty()) {
+            // The next payment cycle's Delve action, generic one so the cost
+            // target takes exactly one card per activation in manual mode.
+            game.getState().getSpecialActions().clear();
+            mage.abilities.SpecialAction action = delveAction(game, p, "{1}{B}");
+            equal(true, queue.invoke(p, game));
+            for (String choice : p.getChoices()) {
+                if (choice.indexOf('^') >= 0) {
+                    throw new AssertionError("joined choice left on queue: " + choice);
+                }
+            }
+            equal(action.getRule(true), p.getChoices().get(0));
+            p.getChoices().remove(0);
+            action.setControllerId(p.getId());
+            equal(true, action.activate(game, false));
+            cycles++;
+        }
+        equal(3, cycles);
+        for (UUID id : picked) {
+            equal(false, p.getGraveyard().contains(id));
+        }
+        equal("[]", p.getChoices().toString());
+        sp.end();
+        System.out.println("PASS a joined delve answer is split one pick per payment cycle");
+    }
+
     public static void main(String[] args) throws Exception {
         testTapPaymentPickParsing();
+        testWaterbendXInference();
         testImproviseTapIsTakenAsSpecialAction();
         testDelveExilePickIsTakenAsSpecialAction();
         testDelveTwoPicksTakeOnePerActivation();
+        testDelveJoinedPicksAreSplit();
         testRecordedSplit();
         testGorgeSplit();
         testRunCodeRecordedPayment();

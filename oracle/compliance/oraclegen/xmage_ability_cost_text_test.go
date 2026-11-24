@@ -59,6 +59,13 @@ func TestXMageAbilityCostSpelling(t *testing.T) {
 		// filter's message built from a literal name (GrandeurAbility's
 		// "another card named " + cardName; Say Its Name's filter).
 		{"Page, Loose Leaf", map[int]string{0: "{T}", 1: "<i>Grandeur</i> &mdash; Discard another card named Page, Loose Leaf"}},
+		// "{T}, Remove X time counters from Hourglass of the Lost and exile
+		// it": the exile is its own ExileSourceCost with setText("exile it"),
+		// joined with ", " and capitalised (xp-63c9f6c4).
+		{"Hourglass of the Lost", map[int]string{0: "{T}:", 1: "{T}, Remove X time counters from {this}, Exile it"}},
+		// Trenzalore's setText("and exile it") drops the comma, so the
+		// Oracle spelling is already XMage's.
+		{"Trenzalore Clocktower", map[int]string{0: "{T}", 1: "{1}{U}, {T}, Remove twelve time counters from {this} and exile it"}},
 		{"Say Its Name", map[int]string{1: "Exile this card and two other cards named Say Its Name from your graveyard"}},
 	} {
 		c, ok := reg.Lookup(tc.card)

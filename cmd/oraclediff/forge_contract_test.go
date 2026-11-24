@@ -74,6 +74,79 @@ func TestForgeExportCarriesDividedSplit(t *testing.T) {
 	}
 }
 
+// TestForgeExportDividedSplitAtCastStep: the Forge driver allocates a divided
+// cast's division while the spell is cast (CR 601.2d) and takes it by exact
+// step, so the "damage_split" carries the cast step and sits right after the
+// root target ask, not at the step the spell resolves in. Both shapes that
+// carry the targets are covered: a lowered xproof item's step answers (with a
+// cast-time "choose" division) and the generator's target list.
+func TestForgeExportDividedSplitAtCastStep(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	reqs, _ := exportInline(t, reg,
+		`{"id":"split-answer","card":"Violent Eruption","template":"cast-resolve","name":"x","cr":["601.2d"],"why":"divided cast from answers","setup":{"p0":{"battlefield":["Mountain","Mountain","Mountain","Mountain"],"hand":["Violent Eruption"]},"p1":{}},"steps":[{"op":"activate","seat":0,"card":"p0:Mountain","ability_index":0},{"op":"activate","seat":0,"card":"p0:Mountain#2","ability_index":0},{"op":"activate","seat":0,"card":"p0:Mountain#3","ability_index":0},{"op":"activate","seat":0,"card":"p0:Mountain#4","ability_index":0},{"op":"cast","seat":0,"card":"p0:Violent Eruption","answers":[{"kind":"target","pick":["p1","p0"]},{"kind":"choose","pick":["p1","p0"]}]},{"op":"pass","seat":0},{"op":"pass","seat":1}]}`,
+		`{"id":"split-target","card":"Twin Bolt","template":"cast-resolve","name":"y","cr":["601.2d"],"why":"divided cast from step targets","setup":{"p0":{"hand":["Twin Bolt"]},"p1":{"battlefield":["Grizzly Bears","Serra Angel"]}},"steps":[{"op":"cast","seat":0,"card":"p0:Twin Bolt","mana":"CR","targets":["p1:Grizzly Bears","p1:Serra Angel"]},{"op":"resolve","seat":0}]}`)
+	for _, rq := range reqs {
+		castStep := -1
+		for k, st := range rq.Item.Scenario.Steps {
+			if st.Op == "cast" {
+				castStep = k
+				break
+			}
+		}
+		if castStep < 0 {
+			t.Fatalf("%s: precondition: no cast step", rq.ID)
+		}
+		target, split := -1, -1
+		for i, d := range rq.GorgeDecisions {
+			switch {
+			case d.Kind == "target" && d.Step == castStep && target < 0:
+				target = i
+			case d.Resume == "damage_split":
+				if split >= 0 {
+					t.Errorf("%s: more than one damage_split: %+v", rq.ID, rq.GorgeDecisions)
+				}
+				split = i
+			}
+		}
+		if target < 0 || split < 0 {
+			t.Fatalf("%s: precondition: target ask %d, split %d in %+v", rq.ID, target, split, rq.GorgeDecisions)
+		}
+		if got := rq.GorgeDecisions[split].Step; got != castStep {
+			t.Errorf("%s: damage_split step = %d, want the cast step %d (the driver takes it by exact step)", rq.ID, got, castStep)
+		}
+		if split != target+1 {
+			t.Errorf("%s: damage_split at index %d, want right after the target ask at %d", rq.ID, split, target)
+		}
+	}
+}
+
+// TestForgeExportLoneTargetDivisionNoSplit: a DividedAsYouChoose$ spell cast
+// at one target has one legal division (CR 601.2d), so gorge asks nothing and
+// Forge poses no division either. The Forge contract must not synthesize the
+// forced lone-target "damage_split" its driver can never consume. Both shapes
+// that carry a cast's targets are covered: an xproof item's step answers and
+// the generator's target list.
+func TestForgeExportLoneTargetDivisionNoSplit(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	reqs, _ := exportInline(t, reg,
+		`{"id":"lone-answer","card":"Flames of the Firebrand","template":"cast-resolve","name":"x","cr":["601.2d"],"why":"lone divided target from answers","setup":{"p0":{"hand":["Flames of the Firebrand"]},"p1":{}},"steps":[{"op":"cast","seat":0,"card":"p0:Flames of the Firebrand","mana":"CCR","answers":[{"kind":"target","pick":["p1"]}]},{"op":"resolve","seat":0}]}`,
+		`{"id":"lone-target","card":"Forked Bolt","template":"cast-resolve","name":"y","cr":["601.2d"],"why":"lone divided target from a generator step","setup":{"p0":{"hand":["Forked Bolt"]},"p1":{}},"steps":[{"op":"cast","seat":0,"card":"p0:Forked Bolt","mana":"R","targets":["p1"]},{"op":"resolve","seat":0}]}`)
+	for _, rq := range reqs {
+		var lone bool
+		for _, d := range rq.GorgeDecisions {
+			if d.Resume == "damage_split" {
+				t.Errorf("%s: a lone-target divided cast exported a damage_split Forge never asks for: %+v", rq.ID, d)
+			}
+			if d.Kind == "target" && len(d.PickRefs) == 1 {
+				lone = true
+			}
+		}
+		if !lone {
+			t.Fatalf("%s: precondition: no lone root target ask in gorge_decisions: %+v", rq.ID, rq.GorgeDecisions)
+		}
+	}
+}
+
 // echoed adds a request_sha field to a Forge row, as the driver now does.
 func echoed(t *testing.T, row []byte, sha string) []byte {
 	t.Helper()

@@ -26,7 +26,7 @@ func graveyardOrderSnap(checkpoint string, gy []string) rules.OracleSnapshot {
 
 // graveyardOrderClass runs diff over a two-pass window whose p1 graveyard is
 // before after step 0 and gorge / other after step 1, and returns the class.
-func graveyardOrderClass(t *testing.T, before, gorgeGY, otherGY []string) string {
+func graveyardOrderClass(t *testing.T, op string, before, gorgeGY, otherGY []string) string {
 	t.Helper()
 	const id = "xe:T:0:0:w1"
 	playDir := t.TempDir()
@@ -36,8 +36,8 @@ func graveyardOrderClass(t *testing.T, before, gorgeGY, otherGY []string) string
 	snaps := func(last []string) []rules.OracleSnapshot {
 		return []rules.OracleSnapshot{
 			graveyardOrderSnap("setup", nil),
-			graveyardOrderSnap("step 0 (pass)", before),
-			graveyardOrderSnap("step 1 (pass)", last),
+			graveyardOrderSnap("step 0 ("+op+")", before),
+			graveyardOrderSnap("step 1 ("+op+")", last),
 		}
 	}
 	write := func(path string, v any) {
@@ -51,7 +51,7 @@ func graveyardOrderClass(t *testing.T, before, gorgeGY, otherGY []string) string
 		}
 	}
 	it := oraclegen.Item{ID: id, Template: lower.Template, Scenario: oraclegen.Scenario{
-		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "pass"}},
+		Steps: []oraclegen.Step{{Op: op}, {Op: op}},
 	}}
 	write(filepath.Join(playDir, "items.jsonl"), it)
 	write(filepath.Join(playDir, "xitems.jsonl"), it)
@@ -78,15 +78,20 @@ func graveyardOrderClass(t *testing.T, before, gorgeGY, otherGY []string) string
 	return verdictClasses(t, filepath.Join(out, "verdicts.jsonl"))[id]
 }
 
-// TestDiffGraveyardOrderSimultaneous: two cards that entered a graveyard in the
-// same step swap places and compare equal (CR 404.3); cards that entered in
-// different steps and swap places still differ.
+// TestDiffGraveyardOrderSimultaneous: two cards one cost payment moved to a
+// graveyard swap places and compare equal (CR 601.2h, 404.3); the same swap at a
+// pass step with nothing resolving is a harness order finding (the classify
+// tests cover a resolving spell's pile, which agrees), and cards that entered in different
+// steps and swap places still differ.
 func TestDiffGraveyardOrderSimultaneous(t *testing.T) {
 	a, b := "Akal Pakal, First Among Equals", "Poison Dart Frog"
-	if got := graveyardOrderClass(t, nil, []string{a, b}, []string{b, a}); got != classify.ClassHarness {
-		t.Fatalf("same-step arrivals swapped: class %q, want %q", got, classify.ClassHarness)
+	if got := graveyardOrderClass(t, "activate", nil, []string{a, b}, []string{b, a}); got != classify.ClassAgree {
+		t.Fatalf("one cost payment's arrivals swapped: class %q, want %q", got, classify.ClassAgree)
 	}
-	if got := graveyardOrderClass(t, []string{a}, []string{a, b}, []string{b, a}); got != classify.ClassDiverge {
+	if got := graveyardOrderClass(t, "pass", nil, []string{a, b}, []string{b, a}); got != classify.ClassHarness {
+		t.Fatalf("same-step arrivals swapped at a pass: class %q, want %q", got, classify.ClassHarness)
+	}
+	if got := graveyardOrderClass(t, "activate", []string{a}, []string{a, b}, []string{b, a}); got != classify.ClassDiverge {
 		t.Fatalf("different-step arrivals swapped: class %q, want %q", got, classify.ClassDiverge)
 	}
 }

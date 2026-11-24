@@ -1,0 +1,17 @@
+diff --git a/pom.xml b/pom.xml
+index 68b7f7f318..09dd2d351c 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -138,6 +138,12 @@
+                         </dependency>
+                     </dependencies>
+                     <configuration>
++                        <!-- A targeted `mvn -pl <module> -am test -Dtest=<Class>` walks the whole
++                             reactor; modules with no matching test must not fail the build. The
++                             full `mvn test` run has no -Dtest selector, so this changes nothing
++                             there. -->
++                        <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
++
+                         <!-- ******************** -->
+                         <!-- default plain report -->
+                         <!-- ******************** -->

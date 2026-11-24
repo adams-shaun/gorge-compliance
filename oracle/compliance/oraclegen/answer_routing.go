@@ -71,6 +71,17 @@ type answerRouting struct {
 	// ownBounce marks the steps whose hidden pick is an own-bounce effect
 	// (own_bounce_source.go): XMage reads that pick from the TARGET queue.
 	ownBounce map[int]bool
+	// searchZones maps a search_zones decision index to the XMage ask shape it
+	// answers (search_zone_source.go). An absent index is an unknown effect
+	// shape and stays unscripted rather than answering the wrong prompt.
+	searchZones map[int]searchZoneAsk
+	// tapThenUntap marks the steps whose TapOrUntap election comes from a
+	// face XMage asks "Tap X?" then "Untap X?" (tap_then_untap.go).
+	tapThenUntap map[int]bool
+	// sources maps a decision's step to the cards resolving or acting there
+	// (stepSourceNames), for the face-keyed XMage dialog tables. A nil map
+	// (a shape-only caller) matches no face.
+	sources map[int][]string
 }
 
 func newAnswerRouting(ds []rules.OracleDecision, digSources ...map[int]digSource) *answerRouting {
@@ -596,6 +607,9 @@ func digTakeShape(d rules.OracleDecision) bool {
 // shape-only fallback the unthreaded XAnswers callers rely on).
 func (r *answerRouting) digTargetAnswer(i int) string {
 	d := r.ds[i]
+	if a := r.digGraveyardTakeAnswer(i); a != "" {
+		return a
+	}
 	if !digTakeShape(d) {
 		return ""
 	}
@@ -619,6 +633,34 @@ func (r *answerRouting) digTargetAnswer(i int) string {
 	default:
 		return d.Picks[0]
 	}
+}
+
+// digGraveyardTakeAnswer is the target-queue answer for the take of a
+// fixed-size look of three or more whose rest goes to the graveyard, or ""
+// for any other decision. The step's source must resolve to Digs that agree on
+// a Graveyard second destination (digSource.known). XMage's
+// LookLibraryAndPickControllerEffect selects the taken cards (its first
+// destination, gorge's pick) through chooseTarget over a TargetCard, the
+// TARGET queue, however many it takes: measured on Sage of Days (look at
+// three, up to one back on top) and Polygraph Orb (look at four, two to hand),
+// whose choice-queue answers strict-missed "Missing TARGET def" and were left
+// over. Several picks are one "^"-joined target, which TestPlayer's
+// cards-list chooseTarget splits.
+func (r *answerRouting) digGraveyardTakeAnswer(i int) string {
+	d := r.ds[i]
+	if d.Resume != "dig" || len(d.Picks) == 0 || d.Options < 3 || len(d.Picks) >= d.Options {
+		return ""
+	}
+	for k, p := range d.Picks {
+		if pickKind(d, k) != "dig" || digBottomName(p) != "" {
+			return ""
+		}
+	}
+	src, ok := r.digSources[d.Step]
+	if !ok || !src.known || src.dynamic || !strings.EqualFold(src.second, "Graveyard") {
+		return ""
+	}
+	return strings.Join(d.Picks, "^")
 }
 
 // declinedChoice is a generic effect ask ("choose up to N") gorge answered
@@ -662,6 +704,38 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		return as, true
 	}
 	switch {
+	case d.Resume == "search_zones":
+		// gorge's CR 701.23 "and/or" election over the zones a search may
+		// use. XMage's SearchLibraryGraveyard* effects ask a chooseUse per
+		// zone, but the ask sequence depends on the card's XMage
+		// implementation (library then graveyard, the graveyard only on a
+		// library miss; some cards ask the graveyard first). searchZoneAsks
+		// resolves the source and only a proven library-first effect is
+		// mapped; an unproven or graveyard-first shape stays unscripted
+		// rather than answering the wrong prompt.
+		if ask, ok := r.searchZones[i]; ok {
+			return searchZoneAnswers(d, ask), true
+		}
+		return nil, true
+	case d.Resume == "etb" && len(d.Picks) == 1 && pickKind(d, 0) == "clone":
+		// An as-enters copy election. XMage's optional EntersBattlefieldEffect
+		// asks chooseUse "Use effect of <name>?" first: the decline ("Enter
+		// as itself") is "no", a copy pick is "yes" then the CopyPermanent
+		// target (CR 707.9). The old generic route scripted the pick's label,
+		// which no chooseUse reads (Clone, Sakashima the Impostor, Sculpting
+		// Steel).
+		return cloneAnswers(d), true
+	case unleashDecision(d):
+		// CR 702.98a's as-enters election is XMage's chooseUse "Unleash
+		// <name>?"; the gorge label would be left queued, strict-missing
+		// "Missing CHOICE def ... Message: Unleash" (Carnival Hellsteed).
+		return append(as, XAnswer{d.Seat, "choice", unleashAnswer(d)}), true
+	case dredgeDecision(d):
+		// XMage's DredgeAbility is chooseUse "Dredge <card>?" (CR 702.52a).
+		return append(as, XAnswer{d.Seat, "choice", dredgeAnswer(d)}), true
+	case r.booleanDialogAnswer(i) != "":
+		// A two-face pick XMage asks as a chooseUse (xmageBooleanDialogFaces).
+		return append(as, XAnswer{d.Seat, "choice", r.booleanDialogAnswer(i)}), true
 	case r.playBool[i]:
 		// The redundant trigger-level half of a single "may cast": the Play
 		// decision that follows carries the one boolean XMage asks.
@@ -698,6 +772,17 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// XMage still asks the cost's own pick (TargetCardInHand "discard
 		// cost", TargetSacrifice) through makeChoose, by name.
 		return append(as, XAnswer{d.Seat, "choice", oraclediffRefName(d.ObjectPicks[0])}), true
+	case r.emptyPoolConfirm(i):
+		// Forge's Optional$ confirmation gorge poses even over an empty pool
+		// (effects' hidden-pick and hand-move walks: "even when this player's
+		// eligible pool turns out empty"), accepted, with no pick after it:
+		// there was nothing to pick. XMage's effect asks only when it has a
+		// candidate (Specter of Mortality's "you may exile one or more
+		// creature cards" over a graveyard with none, Severance Priest's
+		// "you may choose a nonland card" from a target opponent's empty
+		// hand), so the "Yes" would be left over: "(Choices of PlayerA)
+		// Count are not equal".
+		return nil, true
 	case d.Resume == "hidden_pick_confirm" && len(d.Picks) == 1 && pickKind(d, 0) == "yes" && r.upToPickFollows(i):
 		// Forge's Optional$ confirmation before an "up to one" pick: XMage's
 		// ReturnCardChosenFromGraveyardEffect has the up-to-one target only.
@@ -709,6 +794,16 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 			answer = "yes"
 		}
 		return append(as, XAnswer{d.Seat, "choice", answer}), true
+	case r.digMayOwned(i):
+		// A may-Dig XMage asks as chooseUse then chooseTarget
+		// (xmageDigMayAskFaces).
+		as2, _ := r.digMayAnswers(i)
+		return append(as, as2...), true
+	case r.digChoiceOwned(i):
+		// A look-and-pick XMage asks as player.choose, the CHOICE queue
+		// (xmageDigChoiceFaces).
+		as2, _ := r.digChoiceAnswers(i)
+		return append(as, as2...), true
 	case d.Resume == "dig" && len(d.Picks) == 1 && digBottomName(d.Picks[0]) != "":
 		// XMage's bottom pick is a card selection by name, not gorge's label.
 		return append(as, XAnswer{d.Seat, "choice", digBottomName(d.Picks[0])}), true
@@ -722,6 +817,10 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// "Missing TARGET def ... TargetCard", the choice-queue answer left
 		// unused and the AI choosing the card gorge did not).
 		return append(as, XAnswer{d.Seat, "target", r.digTargetAnswer(i)}), true
+	case r.optionalBounceChoiceAnswer(i) != "":
+		// The "you may return a <permanent> you control" form of the own
+		// bounce: player.choose, the CHOICE queue (Tazeem Raptor).
+		return append(as, XAnswer{d.Seat, "choice", r.optionalBounceChoiceAnswer(i)}), true
 	case r.ownBounceTargetAnswer(i) != "":
 		// "Return a permanent you control to its owner's hand" (Kor Skyfisher,
 		// the Karoos): XMage's ReturnToHandChosenControlledPermanentEffect asks
@@ -735,6 +834,14 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// the pick's option index maps to the boolean (option 0, the
 		// state-changing choice, is yes). The label would be left unused and
 		// the AI would answer instead.
+		// A tap-then-untap face (Toils of Night and Day) asks two
+		// chooseUses instead (tapThenUntapChoices).
+		if r.tapThenUntap[d.Step] {
+			for _, v := range tapThenUntapChoices(d) {
+				as = append(as, XAnswer{d.Seat, "choice", v})
+			}
+			return as, true
+		}
 		return append(as, XAnswer{d.Seat, "choice", tapOrUntapChoice(d)}), true
 	case perPlayerTargetAsk(d) && len(d.Picks) == 0:
 		// A declined mid-resolution per-player target ask: XMage asks one
@@ -795,14 +902,76 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 	return nil, false
 }
 
+// searchZoneAnswers translates a proven library-first search_zones election
+// into XMage's SearchLibraryGraveyard* chooseUse sequence. XMage asks the
+// library first; it asks the graveyard only when the library search found no
+// card (cardFound == null), so a library hit scripts no graveyard boolean and
+// a library miss/decline scripts the graveyard election. nil means the
+// decision is not the exact two-zone pair.
+func searchZoneAnswers(d rules.OracleDecision, ask searchZoneAsk) []XAnswer {
+	if !ask.libraryFirst || d.Options != 2 || len(d.Picks) == 0 {
+		return nil
+	}
+	library, graveyard := false, false
+	for k, label := range d.Picks {
+		if pickKind(d, k) != "zone" {
+			return nil
+		}
+		switch label {
+		case "Search the library":
+			library = true
+		case "Search the graveyard":
+			graveyard = true
+		default:
+			return nil
+		}
+	}
+	yes := func(b bool) string {
+		if b {
+			return "yes"
+		}
+		return "no"
+	}
+	// The library chooseUse is always posed (a graveyard-only election
+	// answers no). The graveyard chooseUse is posed only when cardFound is
+	// still null, so a library hit consumes no graveyard answer.
+	as := []XAnswer{{d.Seat, "choice", yes(library)}}
+	if library && ask.libraryFound {
+		return as
+	}
+	return append(as, XAnswer{d.Seat, "choice", yes(graveyard)})
+}
+
+// cloneAnswers answers an as-enters copy election: XMage's optional
+// EntersBattlefieldEffect chooseUse takes "no" for gorge's "Enter as itself",
+// and "yes" for a copy pick, followed by the copied object. CopyPermanentEffect
+// selects that object through controller.choose(Outcome.Copy, target, source,
+// game), which TestPlayer serves from the CHOICE queue (makeChoose), not the
+// target queue, so the pick uses the same choice spelling as any other object
+// pick -- including the same-name alias discriminator.
+func cloneAnswers(d rules.OracleDecision) []XAnswer {
+	if strings.EqualFold(strings.TrimSpace(d.Picks[0]), "Enter as itself") {
+		return []XAnswer{{d.Seat, "choice", "no"}}
+	}
+	as := []XAnswer{{d.Seat, "choice", "yes"}}
+	if len(d.PickRefs) > 0 {
+		label := d.Picks[0]
+		if label == "" {
+			label = oraclediffRefName(d.PickRefs[0])
+		}
+		as = append(as, XAnswer{d.Seat, "choice", disambiguatedObjectChoice(d, 0, label)})
+	}
+	return as
+}
+
 // triggerCostAnswer is XMage's chooseUse answer to the pay/decline ask of a
 // triggered MANA cost ("you may pay {W}. If you do, ..."): "yes" for the pay
 // pick, "no" for the decline, "" for any other decision. XMage's
 // DoIfCostPaid poses that chooseUse for a mana cost even when it cannot be
-// paid (gorge then offers only the decline). A non-mana cost keeps the
-// generic routing: XMage checks canPay first (an unpayable forage is never
-// asked) and a blight goes straight to its creature target (measured:
-// Scuzzback Scrounger's "yes" met "Select a creature you control").
+// paid (gorge then offers only the decline). A non-mana cost (a discard, a
+// sacrifice, a blight, life or energy) is classified by
+// nonManaTriggerCostPay instead: DoIfCostPaid asks the same chooseUse whenever
+// its cost's canPay holds, and a blight's own creature pick follows the yes.
 func triggerCostAnswer(d rules.OracleDecision) string {
 	if d.Kind != "choose_n" || len(d.Picks) != 1 || !(d.TriggerCostMana || xOnlyCostPay(d)) {
 		return ""
@@ -819,22 +988,23 @@ func triggerCostAnswer(d rules.OracleDecision) string {
 // nonManaTriggerCostPay reports the pay side of a triggered optional cost that
 // is not a PURE mana payment ("you may discard a card. If you do, ...", "you
 // may pay 1 life. If you do, ...", "you may pay 2 energy. If you do, ...",
-// "you may pay 2 B and pay 1 life. If you do, ..."): XMage's DoIfCostPaid
-// poses its chooseUse whenever the cost can be paid, and gorge offers the pay
-// side only then. A pure mana pay is answered by triggerCostAnswer in the
-// routing pass. TriggerCostMana alone is not enough: the engine leaves it
-// false for an X cost ("Pay X", Wildborn Preserver), so the phrase itself is
-// also classified by manaPaymentLabel. A blight goes straight to its creature
-// target (Scuzzback Scrounger: a scripted "yes" met "Select a creature you
-// control") and is excluded. Only the engine's own pay pick scripts: a pick
-// with another kind never reaches this.
+// "you may pay 2 B and pay 1 life. If you do, ...", "you may blight 1. If you
+// do, ..."): XMage's DoIfCostPaid poses its chooseUse whenever the cost can be
+// paid, and gorge offers the pay side only then. BlightCost is one of those
+// costs (Boggart Mischief, Dream Seizer, Blighted Blackthorn, Sourbread Auntie):
+// its cost target is asked only after the chooseUse is accepted, so the yes
+// must lead the blight pick. A pure mana pay is answered by triggerCostAnswer
+// in the routing pass. TriggerCostMana alone is not enough: the engine leaves
+// it false for an X cost ("Pay X", Wildborn Preserver), so the phrase itself is
+// also classified by manaPaymentLabel. Only the engine's own pay pick scripts:
+// a pick with another kind never reaches this.
 func nonManaTriggerCostPay(d rules.OracleDecision) bool {
 	if d.Kind != "choose_n" || len(d.Picks) != 1 || d.TriggerCostMana || pickKind(d, 0) != "trigger_cost_pay" {
 		return false
 	}
 	l := strings.ToLower(strings.TrimSpace(d.Picks[0]))
 	switch {
-	case l == "", strings.HasPrefix(l, "blight"):
+	case l == "":
 		return false
 	case manaPaymentLabel(l):
 		return false
@@ -1019,6 +1189,61 @@ func (r *answerRouting) firstDigSeat(i int) int {
 		}
 	}
 	return r.ds[i].Seat
+}
+
+// emptyPoolConfirm reports an accepted Optional$ confirmation (effects'
+// "hidden_pick_confirm", or a "hand_move_confirm" over a hand the same step
+// targeted another player for) that no pick by the same asker follows in the
+// step: gorge found nothing to pick. A confirmation over the asker's own hand
+// is not one: XMage's PutCardFromHandOntoBattlefieldEffect asks its chooseUse
+// ("Put a land card from your hand onto the battlefield?") whatever the hand
+// holds (PuPu UFO, Akul the Unrepentant agree strict only with the "yes").
+func (r *answerRouting) emptyPoolConfirm(i int) bool {
+	d := r.ds[i]
+	if len(d.Picks) != 1 || pickKind(d, 0) != "yes" || r.laterAskSameStep(i) {
+		return false
+	}
+	switch d.Resume {
+	case "hidden_pick_confirm":
+		return true
+	case "hand_move_confirm":
+		return r.targetedOtherPlayer(i)
+	}
+	return false
+}
+
+// targetedOtherPlayer reports an earlier decision of the same asker in the
+// same step that targeted a player other than the asker ("target opponent
+// reveals their hand").
+func (r *answerRouting) targetedOtherPlayer(i int) bool {
+	d := r.ds[i]
+	for j := i - 1; j >= 0 && r.ds[j].Step == d.Step; j-- {
+		e := r.ds[j]
+		if e.Kind != "target" || !sameAsker(d, e) {
+			continue
+		}
+		for k, ref := range e.PickRefs {
+			if pickKind(e, k) == "player" && ref != seatRef(d.Seat) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// laterAskSameStep reports any later decision of the same asker in the same
+// step as decision i: the pick an accepted confirmation leads to, when there
+// was one to make.
+func (r *answerRouting) laterAskSameStep(i int) bool {
+	for _, n := range r.ds[i+1:] {
+		if n.Step != r.ds[i].Step {
+			break
+		}
+		if sameAsker(r.ds[i], n) {
+			return true
+		}
+	}
+	return false
 }
 
 // upToPickFollows reports an optional (Min 0) hidden pick by the same seat

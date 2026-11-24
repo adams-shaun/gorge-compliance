@@ -10,8 +10,8 @@ card	tier	field	gorge	mtgish	class	note
 Aang, Swift Savior	T3	targets	creature|spellx0..1	creature|spell	mtgish-bug	mtgish#3 up-to as exact
 Abandon Reason	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Abandon the Post	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
-Abigale, Eloquent First-Year	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Abomination, Terrifying Titan	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
+Absolver Thrull	T3	targets	-	enchantment	equivalent	script K:Haunt carries the enters trigger inside the keyword; mtgish spells it out as a TriggerA beside Haunt
 Abzan Charm	T3	targets	creature+creaturex0..1	creature+creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
 Ace, Fearless Rebel	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Ajani Steadfast	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
@@ -23,7 +23,7 @@ Aven Liberator	T3	targets	creature	-	mtgish-bug	mtgish#1 morph: first line dupli
 Azusa's Many Journeys [Likeness of the Seeker]	T3	targets	-	landx0..3	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
 Back for More	T3	targets	card-graveyard+creaturex0..1	card-graveyard+creature	mtgish-bug	mtgish#3 up-to as exact
 Bellowing Bruiser [Beat a Path]	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
-Blinding Beam	T3	targets	creature+creature+player	creature+creature	mtgish-bug	mtgish drops target player: creatures don't untap during target player's next untap step is encoded for all creatures
+Blind Hunter	T3	targets	-	player	equivalent	script K:Haunt carries the enters trigger inside the keyword; mtgish spells it out as a TriggerA beside Haunt
 Boros Battleshaper	T3	targets	creaturex0..1+creaturex0..1	creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Break Ties	T3	targets	artifact+card-graveyard+enchantment	artifact+enchantment	mtgish-bug	mtgish#1: exile-from-graveyard mode lost (capture reuse)
 Bumi's Feast Lecture	T3	targets	land	creature	mtgish-bug	mtgish#4: earthbend targets a creature (printed target land you control)
@@ -38,7 +38,6 @@ Cloud of Faeries	T3	targets	-	landx0..2	mtgish-bug	mtgish#4: untap up to N lands
 Cloudspire Skycycle	T3	targets	artifact|creature+artifact|creaturex0..1	artifact|creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
 Contagion	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
 Coordinated Assault	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
-Cost of Brilliance	T3	targets	creaturex0..1+player	creature+player	mtgish-bug	mtgish#3 up-to as exact
 Craig Boone, Novac Guard	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Cruel Alliance	T3	targets	creature+creature	creature	equivalent	teamwork instead: script two exclusive slots (X/Y 0 or 1); mtgish one
 Cutthroat Maneuver	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
@@ -53,7 +52,7 @@ Earth Rumble	T3	targets	creature+creaturex0..1+land	creature+creature+land	mtgis
 Elven Rite	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
 Entangling Trap	T3	targets	creature	-	equivalent	Forge splits one clash trigger into won/lost lines (Secondary)
 Everything Pizza	T3	targets	any+creaturex0..1+player	any+creature+player	mtgish-bug	mtgish#3 up-to as exact
-Favored Enemy	T3	targets	creature+creaturex0..1	-	mtgish-bug	mtgish#2 dropped capture: the ETB fight trigger is never emitted
+Exhumer Thrull	T3	targets	-	card-graveyard	equivalent	script K:Haunt carries the enters trigger inside the keyword; mtgish spells it out as a TriggerA beside Haunt
 Fear of Immobility	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Filigree Vector	T3	targets	artifactx0..*+creaturex0..*	creaturex0..*+creaturex0..*	mtgish-bug	mtgish#4: artifact slot encoded as creature
 Fracture	T3	targets	artifact|enchantment|planeswalker	artifact|enchantment|land	mtgish-bug	mtgish#4: Fracture targets a land instead of a planeswalker
@@ -77,7 +76,6 @@ Kiora, Master of the Depths	T3	targets	creaturex0..1+landx0..1	creaturex0..1+cre
 Kolaghan Stormsinger	T3	targets	creature	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost
 Lethal Protection	T3	targets	card-graveyardx0..1+creature	card-graveyard+creature	mtgish-bug	mtgish#3 up-to as exact
 Lively Dirge	T3	targets	-	card-graveyardx0..2	mtgish-bug	mtgish#4: target added where the text has none
-Lizard, Connors's Curse	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Markov Enforcer	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Meltstrider's Resolve	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Mischief and Mayhem	T3	targets	creaturex0..2	creature+creature	mtgish-bug	mtgish#3 up-to as exact
@@ -92,6 +90,7 @@ Novel Nunchaku	T3	targets	creature+creaturex0..1	creature+creature	mtgish-bug	mt
 Obuun, Mul Daya Ancestor	T3	targets	landx0..1	land	mtgish-bug	mtgish#3 up-to as exact
 Oko, Lorwyn Liege	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Ondu Knotmaster [Throw a Line]	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
+Orzhov Euthanist	T3	targets	-	creature	equivalent	script K:Haunt carries the enters trigger inside the keyword; mtgish spells it out as a TriggerA beside Haunt
 Palinchron	T3	targets	-	landx0..7	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
 Panic Attack	T3	targets	creaturex0..3	creature+creature+creature	mtgish-bug	mtgish#3 up-to as exact
 Peregrine Drake	T3	targets	-	landx0..5	mtgish-bug	mtgish#4: untap up to N lands encoded as targets (printed untargeted)
@@ -126,13 +125,11 @@ Terastodon	T3	targets	permanentx0..3	-	mtgish-bug	mtgish#3 up-to as exact
 The Balrog of Moria	T3	targets	creaturex0..*	creature	mtgish-bug	mtgish#3 up-to as exact
 The Boulder, Ready to Rumble	T3	targets	land	creature	mtgish-bug	mtgish#4: earthbend targets a creature (printed target land you control)
 The Doctor's Childhood Barn	T3	targets	permanentx0..*	permanent	mtgish-bug	mtgish#3 up-to as exact
-The Eagles Are Coming!	T3	targets	creature+creaturex0..*	creaturex0..*	equivalent	kicker instead: script slot per branch (one; any number); mtgish the kicked any-number slot
 The Earth Crystal	T3	targets	creature+creaturex0..1	creaturex0..*	mtgish-bug	mtgish#3: one-or-two distributed targets encoded with minimum 0
 The Legend of Kyoshi	T3	targets	land	creature	mtgish-bug	mtgish#4: earthbend targets a creature (printed target land you control)
 There Is No Refuge	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Thorn Mammoth	T3	targets	creaturex0..1	creature	mtgish-bug	mtgish#3 up-to as exact
 Tidal Control	T3	targets	spell	-	equivalent	script writes one ability per alternative cost (2 life or {2}); mtgish one
-Time Lord Regeneration	T3	targets	permanent	creature	equivalent	Time Lord is a creature type: a Time Lord permanent is a creature
 Tokka & Rahzar, Terrible Twos	T3	targets	-	player	mtgish-bug	mtgish#4: target added where the text has none
 Too Evil to Stay Dead	T3	targets	card-graveyard+card-graveyard	card-graveyard	equivalent	teamwork instead: script two exclusive slots (X/Y 0 or 1); mtgish one
 Toph, Earthbending Master	T3	targets	land	creature	mtgish-bug	mtgish#4: earthbend targets a creature (printed target land you control)

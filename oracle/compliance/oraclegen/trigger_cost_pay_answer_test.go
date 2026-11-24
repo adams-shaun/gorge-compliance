@@ -30,27 +30,27 @@ func TestTriggerCostPayScriptsYesBeforeDecline(t *testing.T) {
 	}
 }
 
-// A trigger-cost pay with NO cost_posed decline on its step stays skipped:
-// XMage's own AI answers its chooseUse, which the measured rows already agree
-// with. Scuzzback Scrounger's two blight pays are this shape, and scripting
-// them yes leaks a boolean onto the blight TARGET ask (verdict row
-// Scuzzback Scrounger/trigger#0.0/v1 HARNESSes "Found wrong choice command:
-// Yes ... Select a creature you control").
-func TestTriggerCostPayAloneStaysSkipped(t *testing.T) {
+// A blight trigger-cost pay with NO cost_posed decline on its step is still
+// XMage's DoIfCostPaid chooseUse: BlightCost.canPay holds (gorge offered the
+// pay side), DoIfCostPaid asks, and only then does BlightCost.doBlight ask for
+// the creature. Scripting the yes leads that creature pick instead of letting
+// the label shift onto the next ask (Boggart Mischief, Dream Seizer).
+func TestBlightTriggerCostPayAloneScriptsYes(t *testing.T) {
 	pay := rules.OracleDecision{Step: 2, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
 		Options: 2, Min: 1, Max: 1, Picks: []string{"Blight 1"},
 		PickRefs: []string{"p0:Scuzzback Scrounger"}, PickKinds: []string{"trigger_cost_pay"},
 		ObjectPicks: []string{"p0:Scuzzback Scrounger"}, Via: "answer"}
-	if got := xanswers([]rules.OracleDecision{pay}, 4, nil, nil); got != nil {
-		t.Fatalf("xanswers = %#v, want nothing scripted for a pay with no cost_posed decline", got)
+	got := xanswers([]rules.OracleDecision{pay}, 4, nil, nil)
+	want := [][]XAnswer{nil, nil, {{0, "choice", "yes"}}, nil}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("xanswers = %#v, want %#v", got, want)
 	}
 }
 
-// A cost_posed decline on a DIFFERENT step does not script this step's pay:
-// Grub's decline (step 0) and blight pay (step 1) are separate asks, and the
-// "no" cannot reach the pay's chooseUse. Scripting the pay here would only
-// shift the later answers.
-func TestTriggerCostPayInOtherStepThanDeclineStaysSkipped(t *testing.T) {
+// A cost_posed decline on a DIFFERENT step does not suppress this step's
+// blight pay: Grub's decline (step 0) and blight pay (step 1) are separate
+// asks; the pay has its own chooseUse and scripts yes.
+func TestBlightTriggerCostPayOtherStepThanDeclineScriptsYes(t *testing.T) {
 	pay := rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
 		Options: 2, Min: 1, Max: 1, Picks: []string{"Blight 2"},
 		PickRefs: []string{"p0:Grub, the Fat"}, PickKinds: []string{"trigger_cost_pay"},
@@ -60,7 +60,7 @@ func TestTriggerCostPayInOtherStepThanDeclineStaysSkipped(t *testing.T) {
 		PickRefs: []string{"p0:Grub, the Fat"}, PickKinds: []string{"trigger_cost_decline"},
 		CostPosed: true, ObjectPicks: []string{"p0:Grub, the Fat"}, Via: "answer"}
 	got := xanswers([]rules.OracleDecision{decline, pay}, 4, nil, nil)
-	want := [][]XAnswer{{{0, "choice", "no"}}, nil, nil, nil}
+	want := [][]XAnswer{{{0, "choice", "no"}}, {{0, "choice", "yes"}}, nil, nil}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("xanswers = %#v, want %#v", got, want)
 	}

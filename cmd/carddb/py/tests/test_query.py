@@ -18,6 +18,7 @@ UPDATE = os.environ.get("CARDDB_UPDATE_GOLDEN") == "1"
 OID_D = "de" + "3" * 30
 OID_E = "ef" + "4" * 30
 OID_F = "f0" + "5" * 30
+OID_G = "ab" + "6" * 30
 
 GORGE = "8f7095353a64"
 
@@ -116,6 +117,9 @@ class Query(Base):
             {"oracle_id": oid, "format": "modern", "status": status}
             for oid, status in ((OID_A, "legal"), (OID_B, "banned"), (OID_C, "legal"),
                                 (OID_D, "legal"), (OID_E, "legal"), (OID_F, "legal"))
+        ] + [
+            # Fire // Ice is legal somewhere (so tier 4, not tier 5) but banned in modern.
+            {"oracle_id": OID_B, "format": "legacy", "status": "legal"},
         ], writer="catalogue")
         self.a.put("status", [
             {"oracle_id": OID_A, "level": "A", "verdict": "agree", "gorge_pin": "8f7095353a64",
@@ -277,6 +281,31 @@ class Query(Base):
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertEqual(r.stdout, self.run_cli("need").stdout)
 
+    def test_need_recredit_lists_only_keys_one_engine_backs(self):
+        r = self.run_cli("need", "--recredit", "X")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        lines = r.stdout.splitlines()
+        self.assertEqual(lines[0], self.run_cli("need").stdout.splitlines()[0])  # same columns as need
+        rows = [l.split("\t") for l in lines[1:]]
+        # Bolt's f0/a0 is agreed by XMage alone; its FX cast and the owed/diverged keys are not listed
+        self.assertEqual([(x[2], x[3], x[5]) for x in rows], [("Lightning Bolt", "f0/a0", "agreed")], r.stdout)
+        r = self.run_cli("need", "--recredit", "FX", "--format", "modern")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(sorted((x.split("\t")[2], x.split("\t")[3]) for x in r.stdout.splitlines()[1:]),
+                         [("Lightning Bolt", "cast")], r.stdout)  # Fire // Ice is banned in modern
+        r = self.run_cli("need", "--recredit", "X+P")
+        self.assertNotEqual(r.returncode, 0)
+        # refs X+P (a P witness beside XMage) still counts as XMage alone
+        db = os.path.join(self.tmp, "need-recredit.sqlite")
+        shutil.copy(self.priv, db)
+        conn = sqlite3.connect(db)
+        conn.execute("UPDATE keyproof SET refs='X+P' WHERE oracle_id=? AND \"key\"='f0/a0'", (OID_A,))
+        conn.commit()
+        conn.close()
+        r = self.cli(self.home, "need", "--db", db, "--private", "--recredit", "X")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual([l.split("\t")[3] for l in r.stdout.splitlines()[1:]], ["f0/a0"], r.stdout)
+
     def test_need_edhrec_rank_only_orders_tier_three(self):
         # Bolt (tier 2, edhrec rank 42, released first) and Dain (tier 2, no edhrec, released later)
         # both owe a key: the edhrec rank must not push Bolt behind Dain.
@@ -296,6 +325,71 @@ class Query(Base):
         rows = [l.split("\t") for l in r.stdout.splitlines()[1:]]
         self.assertEqual([(x[0], x[2]) for x in rows],
                          [("2", "Lightning Bolt"), ("2", "Dáin Ironfoot"), ("4", "Fire // Ice")], r.stdout)
+
+    def test_need_legal_nowhere_is_tier_five(self):
+        # Mise is printed in a funny set and a promo set, so the all-non-tournament rule does not
+        # reach it; no legality row says legal in any format, so it cannot be tier 1-4. Fire // Ice
+        # is legal in legacy (tier 4), and Mise must rank after it.
+        db = os.path.join(self.tmp, "need-legal-nowhere.sqlite")
+        shutil.copy(self.priv, db)
+        conn = sqlite3.connect(db)
+        conn.execute("INSERT INTO cards (oracle_id, name, layout, mana_value, type_line) "
+                     "VALUES (?,?,?,?,?)", (OID_G, "Mise", "normal", 1, "Instant"))
+        conn.execute("INSERT INTO sets (set_code, name, release_date, set_type) "
+                     "VALUES (?,?,?,?)", ("promo", "Promo", "2020-01-01", "promo"))
+        conn.executemany("INSERT INTO printings (printing_id, oracle_id, set_code, collector_number, "
+                         "rarity, released) VALUES (?,?,?,?,?,?)", [
+                             ("p-g1", OID_G, "funny", "2", "rare", "2020-01-01"),
+                             ("p-g2", OID_G, "promo", "1", "rare", "2020-01-01"),
+                         ])
+        cols = [r[1] for r in conn.execute("PRAGMA table_info(keyproof)")]
+        row = keyproof_row(OID_G, "cast", "owed", desc="Mana", reason="no-generator")
+        conn.execute("INSERT INTO keyproof (%s) VALUES (%s)" % (
+            ",".join('"%s"' % c for c in cols), ",".join("?" * len(cols))), [row[c] for c in cols])
+        conn.commit()
+        conn.close()
+        r = self.cli(self.home, "need", "--db", db, "--private")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        rows = [l.split("\t") for l in r.stdout.splitlines()[1:]]
+        self.assertEqual([(x[0], x[2]) for x in rows],
+                         [("2", "Dáin Ironfoot"), ("4", "Fire // Ice"), ("5", "Mise")], r.stdout)
+
+    def test_need_restricted_only_is_legal_somewhere(self):
+        # Vintage and Old School report "restricted" for tournament-legal cards with a copy limit
+        # (the real catalogue has Black Lotus as vintage/oldschool restricted, no legal row), so a
+        # restricted-only card must stay tier 4, not join the legal-nowhere tier 5.
+        db = os.path.join(self.tmp, "need-restricted.sqlite")
+        shutil.copy(self.priv, db)
+        conn = sqlite3.connect(db)
+        conn.execute("DELETE FROM legality WHERE oracle_id=?", (OID_B,))
+        conn.execute("INSERT INTO legality (oracle_id, format, status) VALUES (?,?,?)",
+                     (OID_B, "vintage", "restricted"))
+        conn.commit()
+        conn.close()
+        r = self.cli(self.home, "need", "--db", db, "--private")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        rows = [l.split("\t") for l in r.stdout.splitlines()[1:]]
+        self.assertEqual([(x[0], x[2]) for x in rows],
+                         [("2", "Dáin Ironfoot"), ("4", "Fire // Ice")], r.stdout)
+        # The same shared predicate drives the format filters: a restricted card is selectable.
+        r = self.cli(self.home, "need", "--db", db, "--private", "--format", "vintage")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        rows = [l.split("\t") for l in r.stdout.splitlines()[1:]]
+        self.assertEqual([(x[0], x[2]) for x in rows], [("4", "Fire // Ice")], r.stdout)
+
+    def test_need_empty_legality_table_does_not_demote(self):
+        # A partial build with no legality shard still creates the table, but with no rows. That
+        # must not make every card "legal nowhere": without rows there is nothing proving it.
+        db = os.path.join(self.tmp, "need-empty-legality.sqlite")
+        shutil.copy(self.priv, db)
+        conn = sqlite3.connect(db)
+        conn.execute("DELETE FROM legality")
+        conn.commit()
+        conn.close()
+        r = self.cli(self.home, "need", "--db", db, "--private")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        rows = {x[2]: x[0] for x in (l.split("\t") for l in r.stdout.splitlines()[1:])}
+        self.assertEqual(rows, {"Dáin Ironfoot": "4", "Fire // Ice": "4"}, r.stdout)
 
     def test_proven_by_keys_rejects_output_formats(self):
         for fmt in ("tsv", "json", "count"):

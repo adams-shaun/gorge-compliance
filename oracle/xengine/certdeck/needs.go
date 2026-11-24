@@ -89,10 +89,12 @@ func sortNeeds(ns []Need) []Need {
 // unit is one parsed script line: an ability (API set), a trigger or static
 // (Mode set) or an SVar's right-hand side, as its $-parameters.
 type unit struct {
-	api, mode string
-	trigger   bool
-	event     string // a replacement effect's Event$
-	p         map[string]string
+	api, mode  string
+	trigger    bool
+	event      string // a replacement effect's Event$
+	p          map[string]string
+	target     string // the ValidTgts of this unit or the chain that reaches it
+	prevTarget string // the target of the unit before this one in the chain
 }
 
 // repl is whether u is a replacement effect.
@@ -119,19 +121,23 @@ func parseLine(s string) unit {
 // unitsOf is every unit of every face of c, in script order (SVars by name).
 func unitsOf(c *cards.Card) []unit {
 	var us []unit
-	var chain func(s *cards.SA)
-	chain = func(s *cards.SA) {
+	var chain func(s *cards.SA, target string)
+	chain = func(s *cards.SA, target string) {
 		for n := 0; s != nil && n < 8; s, n = s.Sub, n+1 {
-			us = append(us, unit{api: s.API, p: s.Params})
+			prev := target
+			if v := s.Params["ValidTgts"]; v != "" {
+				target = v
+			}
+			us = append(us, unit{api: s.API, p: s.Params, target: target, prevTarget: prev})
 		}
 	}
 	for _, f := range c.Faces {
 		for _, a := range f.Abilities {
-			chain(a)
+			chain(a, "")
 		}
 		for _, t := range f.Triggers {
 			us = append(us, unit{mode: t.Mode, trigger: true, p: t.Params})
-			chain(t.Effect)
+			chain(t.Effect, t.Params["ValidTgts"])
 		}
 		for _, s := range f.Statics {
 			us = append(us, unit{mode: s.Mode, p: s.Params})
@@ -149,6 +155,268 @@ func unitsOf(c *cards.Card) []unit {
 		}
 	}
 	return us
+}
+
+// CounterSeat is the seat (0 or 1) whose permanent a counters need puts its
+// counters on: 1 when the ability that removes or moves counters reads an
+// opponent's permanent (Honest Work enchants a creature an opponent controls;
+// Mabel targets another creature), else 0 for the card's own counters, a
+// replacement or a cost. It follows Defined$/ValidTgts (with the target of the
+// chain a SubAbility runs in), never the card's deck. A need whose only bearer
+// is a player is CounterPlayer's, not a seat's.
+func CounterSeat(c *cards.Card) int {
+	for _, sc := range counterScopes(c) {
+		if sc.permanent {
+			return sc.seat
+		}
+	}
+	return 0
+}
+
+// CounterPlayer reports whether a counters need is read from a player's own
+// counters (poison, rad, experience, energy; CR 122.1) and no permanent can
+// stand in for it. Forge's Defined$ Player/Opponent/You and ValidTgts$
+// Player/Opponent name the player, while OppCtrl names a permanent; a start
+// seeds counters only on battlefield cards (rules.StartSeat has no
+// player-counter field), so scen refuses such a key by name rather than
+// silently placing its counter on a permanent the removal never reads.
+func CounterPlayer(c *cards.Card) bool {
+	player := false
+	for _, sc := range counterScopes(c) {
+		if sc.permanent {
+			return false
+		}
+		player = player || sc.player
+	}
+	return player
+}
+
+// counterScope is what one counter-moving unit reads. permanent and seat say
+// where a placed counter can be exercised (a battlefield card; seat 1 is the
+// other player's); player marks a player's own counters, which no placed
+// permanent can stand in for.
+type counterScope struct {
+	permanent bool
+	player    bool
+	seat      int
+}
+
+// counterScopes classifies every counter-moving unit of c, in script order. It
+// is the one walk CounterSeat and CounterPlayer share, so the next selector
+// kind is added once, in scopeOfFilter or the switch below, and both follow it.
+func counterScopes(c *cards.Card) []counterScope {
+	if c == nil {
+		return nil
+	}
+	enchantOpp := false
+	for _, f := range c.Faces {
+		enchantOpp = enchantOpp || enchantsOpponent(f)
+	}
+	us := unitsOf(c)
+	// A unit the chain analysis did not reach (an unlinked SVar) falls back to
+	// the targets the card prints.
+	var targets []string
+	for _, u := range us {
+		if v := u.p["ValidTgts"]; v != "" {
+			targets = append(targets, v)
+		}
+	}
+	var out []counterScope
+	for _, u := range us {
+		if !counterMover(u) {
+			continue
+		}
+		def := strings.ToLower(strings.TrimSpace(u.p["Defined"]))
+		switch {
+		case def == "self" || def == "cardname" || strings.Contains(def, "youctrl") || strings.Contains(def, "youown"):
+			out = append(out, counterScope{permanent: true}) // the card's own counters (or a creature you control)
+			continue
+		case strings.Contains(def, "oppctrl"):
+			out = append(out, counterScope{permanent: true, seat: 1})
+			continue
+		case strings.HasPrefix(def, "valid "):
+			out = append(out, scopeOfFilter(strings.TrimSpace(strings.TrimPrefix(def, "valid "))))
+			continue
+		case playerSelector(def) || strings.Contains(def, "opponent"):
+			// "Opponent" is the player; the permanent selector is OppCtrl,
+			// above.
+			out = append(out, counterScope{player: true, seat: playerSeat(def)})
+			continue
+		case def == "enchanted":
+			seat := 0
+			if enchantOpp {
+				seat = 1
+			}
+			out = append(out, counterScope{permanent: true, seat: seat})
+			continue
+		}
+		if u.api == "MoveCounter" {
+			// The source, not the destination, carries the counter: the card's
+			// own permanent (Source$ Self, ValidSource$ Creature.YouCtrl) or,
+			// for Source$ ParentTarget, whatever the parent ability targets
+			// (Black Panther's land you control, Rikku's opponent's creature).
+			src := u.p["Source"]
+			if src == "" {
+				src = u.p["ValidSource"]
+			}
+			if src != "" {
+				l := strings.ToLower(src)
+				switch {
+				case playerSelector(l):
+					out = append(out, counterScope{player: true, seat: playerSeat(l)})
+				case strings.EqualFold(src, "ParentTarget"):
+					// The parent target may name a player's counters too.
+					prev := strings.ToLower(strings.TrimSpace(u.prevTarget))
+					if playerSelector(prev) {
+						out = append(out, counterScope{player: true, seat: playerSeat(prev)})
+					} else {
+						seat := 0
+						if opponentFilter(u.prevTarget) {
+							seat = 1
+						}
+						out = append(out, counterScope{permanent: true, seat: seat})
+					}
+				case strings.Contains(l, "oppctrl") || strings.Contains(l, "opponent"):
+					out = append(out, counterScope{permanent: true, seat: 1})
+				default:
+					// Self, Creature, Creature.YouCtrl, ...: the card's own.
+					out = append(out, counterScope{permanent: true})
+				}
+				continue
+			}
+		}
+		if u.api == "RemoveCounterAll" {
+			// Removing from all matching permanents reaches the card's own
+			// ones too, so the start's own side exercises it; only an explicit
+			// opposing or player filter moves it off seat 0.
+			v := u.p["ValidCards"]
+			sc := scopeOfFilter(v)
+			if l := strings.ToLower(v); v != "" && !sc.player &&
+				!strings.Contains(l, "oppctrl") && !strings.Contains(l, "opponent") {
+				sc.seat = 0
+			}
+			out = append(out, sc)
+			continue
+		}
+		if v := u.p["ValidTgts"]; v != "" {
+			out = append(out, scopeOfFilter(v))
+			continue
+		}
+		switch {
+		case def == "targeted", def == "valid", def == "remembered", def == "chosencard":
+			target := u.target
+			if target == "" {
+				for _, v := range targets {
+					if opponentFilter(v) {
+						target = v
+						break
+					}
+				}
+			}
+			if target != "" {
+				out = append(out, scopeOfFilter(target))
+				continue
+			}
+		}
+		// A cost, a replacement or an unlinked selector: the card's own.
+		out = append(out, counterScope{permanent: true})
+	}
+	return out
+}
+
+// playerSelector reports whether a Defined$/Source$ value names a player rather
+// than a permanent the player controls. "Opponent"/"Player"/"You" are players;
+// OppCtrl is a permanent (handled before this).
+func playerSelector(def string) bool {
+	switch def {
+	case "player", "players", "opponent", "opponents", "you", "each", "eachplayer",
+		"all", "allplayers", "any", "thisplayer", "thatplayer", "targetplayer",
+		"targetedplayer", "triggeredplayer":
+		return true
+	}
+	return false
+}
+
+// playerSeat is the seat a player selector names: 1 for an opponent, else 0.
+// It is only informational when the counters are a player's.
+func playerSeat(def string) int {
+	if strings.Contains(def, "opponent") {
+		return 1
+	}
+	return 0
+}
+
+// playerAlternative reports whether one comma-separated alternative of a card
+// filter names a player ("Player", "Opponent", "Player.IsRemembered") rather
+// than a permanent ("Creature", "Permanent.ControlledBy You"). The first
+// filter word decides: a controller qualifier later in the alternative is not
+// the bearer.
+func playerAlternative(alt string) bool {
+	first, _, _ := strings.Cut(strings.TrimSpace(alt), ".")
+	switch strings.ToLower(first) {
+	case "player", "players", "opponent", "opponents", "you", "eachplayer", "allplayers":
+		return true
+	}
+	return false
+}
+
+// scopeOfFilter classifies a counter target filter: a player alternative is a
+// player's counters (which a start cannot seed), a non-player alternative is a
+// permanent. "Permanent,Opponent" is both: the permanent branch is enough, so
+// one placed counter exercises the removal. A filter with no controller
+// restriction reads as another player's permanent (opponentFilter).
+func scopeOfFilter(v string) counterScope {
+	var sc counterScope
+	for _, alt := range strings.Split(filterText(v), ",") {
+		if playerAlternative(alt) {
+			sc.player = true
+			if strings.Contains(strings.ToLower(alt), "opponent") {
+				sc.seat = 1
+			}
+			continue
+		}
+		sc.permanent = true
+		if opponentFilter(alt) {
+			sc.seat = 1
+		}
+	}
+	return sc
+}
+
+// counterMover reports whether u removes or moves counters from a permanent:
+// the units whose bearer CounterSeat follows.
+func counterMover(u unit) bool {
+	switch u.api {
+	case "RemoveCounter", "RemoveCounterAll", "MoveCounter", "AddOrRemoveCounter":
+		return true
+	}
+	return u.event == "RemoveCounter"
+}
+
+// enchantsOpponent reports whether f is an Aura whose Enchant names an
+// opponent's permanent ("Creature.OppCtrl").
+func enchantsOpponent(f *cards.Face) bool {
+	p, ok := f.KeywordParam("Enchant")
+	if !ok {
+		return false
+	}
+	l := strings.ToLower(p)
+	return strings.Contains(l, "oppctrl") || strings.Contains(l, "opponent")
+}
+
+// opponentFilter reports whether a card filter names another player's
+// permanent. A filter with no controller restriction targets any player's
+// permanent, which certdeck deliberately places on the opponent's side even
+// when the card could target its own (a self-targeting "target creature" still
+// removes from a real permanent there); YouCtrl, YouOwn and Self name the
+// card's own.
+func opponentFilter(v string) bool {
+	l := strings.ToLower(v)
+	if l == "" || strings.Contains(l, "youctrl") || strings.Contains(l, "youown") ||
+		strings.Contains(l, "card.self") || strings.Contains(l, "cardname") {
+		return false
+	}
+	return true
 }
 
 // sortedKeys is m's keys in order: a unit's params are a map, and nothing
@@ -219,9 +487,10 @@ func basicIndex(t string) int {
 
 func isLandType(t string) bool { return basicIndex(t) >= 0 || otherLandTypes[t] }
 
-// compoundTypes are subtypes of two words ("Time Lord"). The corpus prints
-// each word as a type of its own, a filter spells them with a space, and both
-// would split into two words: they are carried as one word joined by a hyphen.
+// compoundTypes are subtypes of two words ("Time Lord"). A face carries one as
+// a single "Time Lord" word (gorge's CR 205.3m parse) or, in an older parse, as
+// each word of its own; a filter spells them with a space, and both would split
+// into two words: they are carried as one word joined by a hyphen.
 var compoundTypes = []string{"Time Lord"}
 
 // TypeWords is a face's type line with each compound subtype as one word.
@@ -231,6 +500,11 @@ func TypeWords(types []string) []string {
 		joined := false
 		for _, c := range compoundTypes {
 			a, b, _ := strings.Cut(c, " ")
+			if types[i] == c {
+				out = append(out, a+"-"+b)
+				joined = true
+				break
+			}
 			if types[i] == a && i+1 < len(types) && types[i+1] == b {
 				out = append(out, a+"-"+b)
 				i++
@@ -369,10 +643,22 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 		for _, k := range sortedKeys(u.p) {
 			v := u.p[k]
 			if k == "CounterType" && u.api != "PutCounter" && u.api != "PutCounterAll" {
-				counterArg = firstNonEmpty(counterArg, v)
+				if kind, ok := counterKindArg(v); ok {
+					counterArg = firstNonEmpty(counterArg, kind)
+				}
 			}
 			if k == "ValidCounterType" {
-				counterArg = firstNonEmpty(counterArg, firstField(v))
+				if kind, ok := counterKindArg(firstField(v)); ok {
+					counterArg = firstNonEmpty(counterArg, kind)
+				}
+			}
+			if k == "CounterNum" && u.api != "PutCounter" && u.api != "PutCounterAll" &&
+				strings.EqualFold(strings.TrimSpace(v), "All") && counterTypeKind(u) == "" {
+				// "remove all counters" names the amount, not the kind: it is
+				// still a counter need (Honest Work). The unit's own
+				// CounterType$/ValidCounterType$ wins; read as a set, because
+				// CounterNum sorts before CounterType in sortedKeys.
+				counterArg = firstNonEmpty(counterArg, "P1P1")
 			}
 			if k == "Cost" {
 				if m := counterCostX.FindStringSubmatch(v); m != nil && m[1] != "LOYALTY" &&
@@ -477,9 +763,7 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 	if graveyard {
 		add(Graveyard, "")
 	}
-	if counterArg == "Any" {
-		counterArg = "P1P1" // "a counter of any type": the commonest one stands in
-	}
+	counterArg = normalizeCounterKind(counterArg) // "Any"/"All": the commonest kind
 	if counterArg != "" {
 		add(Counters, counterArg)
 	}
@@ -528,6 +812,44 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 		add(Lands, "")
 	}
 	return sortNeeds(ns)
+}
+
+// counterKindArg normalizes a Forge counter type. "All" and "Any" name every
+// kind, not a kind (Honest Work, Mabel), so they are not counter kinds: a
+// wildcard reads as the commonest kind (CR 122.1). A blank value has none.
+func counterKindArg(v string) (string, bool) {
+	v = strings.TrimSpace(v)
+	if v == "" {
+		return "", false
+	}
+	switch strings.ToLower(v) {
+	case "all", "any":
+		return "P1P1", true
+	}
+	return v, true
+}
+
+// normalizeCounterKind is counterKindArg for a value that may be empty.
+func normalizeCounterKind(v string) string {
+	kind, _ := counterKindArg(v)
+	return kind
+}
+
+// counterTypeKind is the kind a unit names itself: its CounterType$ (unless it
+// puts counters) or the first field of its ValidCounterType$, or "" when it
+// names none. It reads the parameters as a set, so map order cannot choose
+// between them; a remove-all-counters unit with a named kind keeps that kind
+// instead of taking the CounterNum$ All stand-in (Witherscale Wurm's M1M1).
+func counterTypeKind(u unit) string {
+	if u.api != "PutCounter" && u.api != "PutCounterAll" {
+		if kind, ok := counterKindArg(u.p["CounterType"]); ok {
+			return kind
+		}
+	}
+	if kind, ok := counterKindArg(firstField(u.p["ValidCounterType"])); ok {
+		return kind
+	}
+	return ""
 }
 
 // firstField is the first of a comma-separated list ("P1P1,M1M1").

@@ -33,8 +33,46 @@ type pipAsk struct {
 type xanswersExtra struct {
 	digs map[int]digSource
 	pips map[int][]pipAsk
+	// casts is the set of the scenario's cast step indices: a forced X
+	// announcement on one is still posed by XMage (castAnnouncesX).
+	casts map[int]bool
+	// activates maps an activation step to the number of X announcements its
+	// costs pose. One is the mana {X}; a non-mana variable cost that announces
+	// its own X (Ludevic, Necrogenius's ExileXFromYourGraveCost) adds another.
+	// A counter-removal cost that reuses the mana X (Talon of Pain) does not.
+	activates map[int]int
+	// searchZones maps a search_zones decision index to the resolved XMage ask
+	// shape (search_zone_source.go). Absent means an unproven effect shape,
+	// which stays unscripted.
+	searchZones map[int]searchZoneAsk
+	// forage maps a forage election's decision index to the graveyard
+	// cards its exile arm took (forageExiles).
+	forage map[int][]string
 	// ownBounce marks the steps that pose an own-bounce hidden pick.
 	ownBounce map[int]bool
+	// tapThenUntap marks the steps whose TapOrUntap election is a
+	// tap-then-untap face's (tapThenUntapStep).
+	tapThenUntap map[int]bool
+	// bolster marks the decisions whose counter_pick is a Bolster tie
+	// election, which XMage's BolsterEffect asks through chooseTarget
+	// (bolster_pick.go).
+	bolster map[int]bool
+	// supports maps a Support counter_pick decision index to the target
+	// answers XMage asks at the source's announcement, not at resolution
+	// (support_pick.go). A present key is owned by that route.
+	supports map[int]supportAnswers
+	// snaps is the gorge result's checkpoints: the destination of a
+	// hand_move/library_placement decision is not a field, so the answer
+	// router re-derives a top placement from the after-step library top.
+	snaps []rules.OracleSnapshot
+	// orderAsks marks the hand_move decisions whose effect XMage implements
+	// with an explicit "card ORDER to put … from the TOP" dialog. A self
+	// put-back (Brainstorm, Dream Cache) auto-tops without that ask, so its
+	// order answers would be left queued for the next dialog.
+	orderAsks map[int]bool
+	// sources maps a decision step to the cards resolving or acting there
+	// (stepSourceNames); see answerRouting.sources.
+	sources map[int][]string
 }
 
 // isPipDecision reports whether d is one of gorge's ManaAsk pip decisions

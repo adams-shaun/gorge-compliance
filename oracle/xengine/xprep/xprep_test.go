@@ -253,6 +253,12 @@ func TestPrepareAbilityPrefixes(t *testing.T) {
 					}
 					continue
 				}
+				if st.Op == "cast" && strings.EqualFold(st.CastMode, "suspend") {
+					if len(it.XAbility) != len(it.Steps) || !strings.HasPrefix(got, "Suspend") {
+						t.Errorf("%s step %d suspends %s with xmage_ability %q", it.ID, i, st.Card, got)
+					}
+					continue
+				}
 				if got != "" {
 					t.Errorf("%s step %d (%s) has prefix %q", it.ID, i, st.Op, got)
 				}
@@ -325,6 +331,68 @@ func TestPrefixesPlotCast(t *testing.T) {
 	}
 	if got[2] != "" {
 		t.Errorf("ordinary cast step prefix = %q, want empty", got[2])
+	}
+}
+
+// TestPrefixesSuspendCast: a cast step whose cast_mode is "suspend" is XMage's
+// SuspendAbility special action (CR 702.62a, 116.2f), so it carries the
+// "Suspend N" rule-text prefix the driver activates it by; Lotus Bloom prints
+// K:Suspend:3:0.
+func TestPrefixesSuspendCast(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	it := oraclegen.Item{
+		ID: "xe:test:suspend-cast",
+		Scenario: oraclegen.Scenario{
+			Steps: []oraclegen.Step{
+				{Op: "cast", Seat: 0, Card: "p0:Lotus Bloom", CastMode: "suspend"},
+				{Op: "pass", Seat: 0},
+				{Op: "cast", Seat: 0, Card: "p0:Lotus Bloom"},
+			},
+		},
+	}
+	got, ref := prefixes(reg, it, rules.OracleResult{})
+	if ref != nil {
+		t.Fatalf("prefixes refused: %+v", ref)
+	}
+	if len(got) != len(it.Steps) {
+		t.Fatalf("prefixes = %q, want %d entries (one per step)", got, len(it.Steps))
+	}
+	if want := "Suspend 3"; got[0] != want {
+		t.Fatalf("suspend step prefix = %q, want %q", got[0], want)
+	}
+	if got[1] != "" || got[2] != "" {
+		t.Errorf("pass/ordinary cast prefixes = %q, %q, want empty", got[1], got[2])
+	}
+}
+
+// TestPrefixesForetellCast: a cast step whose cast_mode is "foretell" is
+// XMage's ForetellAbility special action (CR 702.143a, 116.2h), so it carries
+// the "Foretell {cost}" rule-text prefix the driver activates it by; Struggle
+// for Skemfar prints K:Foretell:G.
+func TestPrefixesForetellCast(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	it := oraclegen.Item{
+		ID: "xe:test:foretell-cast",
+		Scenario: oraclegen.Scenario{
+			Steps: []oraclegen.Step{
+				{Op: "cast", Seat: 0, Card: "p0:Struggle for Skemfar", CastMode: "foretell"},
+				{Op: "pass", Seat: 0},
+				{Op: "cast", Seat: 0, Card: "p0:Struggle for Skemfar"},
+			},
+		},
+	}
+	got, ref := prefixes(reg, it, rules.OracleResult{})
+	if ref != nil {
+		t.Fatalf("prefixes refused: %+v", ref)
+	}
+	if len(got) != len(it.Steps) {
+		t.Fatalf("prefixes = %q, want %d entries (one per step)", got, len(it.Steps))
+	}
+	if want := "Foretell {G}"; got[0] != want {
+		t.Fatalf("foretell step prefix = %q, want %q", got[0], want)
+	}
+	if got[1] != "" || got[2] != "" {
+		t.Errorf("pass/ordinary cast prefixes = %q, %q, want empty", got[1], got[2])
 	}
 }
 
@@ -444,6 +512,39 @@ func TestPassPositionsFirstStrikeDamage(t *testing.T) {
 			{"end-combat", true},
 		},
 	}, {
+		// The non-active seat's mana ability splits the round: the active
+		// seat's first pass only hands priority over, the activation is an
+		// action between the passes, and the active seat's following pass is
+		// still the round's last (CR 117.4), so it ends the first damage step
+		// even though the active seat takes it.
+		name:  "first striker, round split by the opponent's mana ability",
+		steps: []oraclegen.Step{pass(0), pass(1), pass(0), {Op: "activate", Seat: 1}, pass(1), pass(0), pass(0), pass(1), pass(0), pass(1)},
+		snaps: []rules.OracleSnapshot{
+			at("declare-blockers", striker, nil),
+			at("combat-damage", striker, trigger),
+			at("combat-damage", striker, trigger),
+			at("combat-damage", striker, nil),
+			{Turn: 1, Step: "combat-damage", Active: 0, Priority: 1, Permanents: striker},
+			{Turn: 1, Step: "combat-damage", Active: 0, Priority: 0, Permanents: striker},
+			{Turn: 1, Step: "combat-damage", Active: 0, Priority: 0, Permanents: striker},
+			{Turn: 1, Step: "combat-damage", Active: 0, Priority: 1, Permanents: striker},
+			{Turn: 1, Step: "end-combat", Active: 0, Priority: 0, Permanents: striker},
+			{Turn: 1, Step: "end-combat", Active: 0, Priority: 1, Permanents: striker},
+			{Turn: 2, Step: "upkeep", Active: 1, Priority: 1, Permanents: striker},
+		},
+		want: []want{
+			{oraclegen.StepFirstStrikeDamage, true},
+			{oraclegen.StepFirstStrikeDamage, false},
+			{oraclegen.StepFirstStrikeDamage, false},
+			{"", false},
+			{oraclegen.StepFirstStrikeDamage, false},
+			{"combat-damage", true},
+			{"combat-damage", false},
+			{"end-combat", true},
+			{"end-combat", false},
+			{"upkeep", true},
+		},
+	}, {
 		// The regular damage step pauses on an ask (damage division, an
 		// as-unblocked election) before priority is given, so the checkpoint
 		// after the ending pass still shows the non-active passer holding it.
@@ -473,6 +574,16 @@ func TestPassPositionsFirstStrikeDamage(t *testing.T) {
 			t.Fatalf("%s: %d positions, want %d", c.name, len(got), len(c.want))
 		}
 		for i, w := range c.want {
+			if w.step == "" {
+				if got[i] != nil {
+					t.Errorf("%s: step %d: position %+v, want none", c.name, i, *got[i])
+				}
+				continue
+			}
+			if got[i] == nil {
+				t.Errorf("%s: pass %d: no position, want %s moved=%v", c.name, i, w.step, w.moved)
+				continue
+			}
 			if got[i].Step != w.step || got[i].Moved != w.moved {
 				t.Errorf("%s: pass %d: %s moved=%v, want %s moved=%v", c.name, i, got[i].Step, got[i].Moved, w.step, w.moved)
 			}
@@ -558,6 +669,113 @@ func TestPassPositionsExtraStepSameName(t *testing.T) {
 	}
 }
 
+// TestPassPositionsExtraStepSplitByManaAbility: the active seat's pass of an
+// additional end step, split from the non-active seat's by the non-active
+// seat's mana ability, is the round's last pass and begins the next end step
+// (CR 500.9), even though it is the active seat that takes it. The split pass
+// only hands priority back, so it does not begin an instance.
+func TestPassPositionsExtraStepSplitByManaAbility(t *testing.T) {
+	at := func(prio int) rules.OracleSnapshot {
+		return rules.OracleSnapshot{
+			Turn: 1, Step: "end", Active: 0, Priority: prio,
+			Players: make([]rules.OracleSnapPlayer, 2),
+		}
+	}
+	pass := func(seat int) oraclegen.Step { return oraclegen.Step{Op: "pass", Seat: seat} }
+	steps := []oraclegen.Step{pass(0), {Op: "activate", Seat: 1}, pass(1), pass(0)}
+	snaps := []rules.OracleSnapshot{at(0), at(1), at(1), at(0), at(0)}
+	got := passPositions(steps, snaps)
+	want := []struct {
+		step  string
+		moved bool
+	}{
+		{"end", false},
+		{"", false},
+		{"end", false},
+		{"end", true},
+	}
+	if len(got) != len(steps) {
+		t.Fatalf("%d positions, want %d", len(got), len(steps))
+	}
+	for i, w := range want {
+		if w.step == "" {
+			if got[i] != nil {
+				t.Errorf("step %d (%s): position %+v, want none", i, steps[i].Op, *got[i])
+			}
+			continue
+		}
+		if got[i] == nil {
+			t.Errorf("step %d (%s): no position, want %s moved=%v", i, steps[i].Op, w.step, w.moved)
+			continue
+		}
+		if got[i].Step != w.step || got[i].Moved != w.moved {
+			t.Errorf("step %d (%s): %s moved=%v, want %s moved=%v",
+				i, steps[i].Op, got[i].Step, got[i].Moved, w.step, w.moved)
+		}
+	}
+}
+
+// TestPreparePassPositionsManaSplitPair: the Rebuff the Wicked s2 shape, where
+// the active seat passes, the other seat taps a land for mana and passes, and
+// the active seat passes again. The mana ability is an action between the two
+// passes, so they are not in succession (CR 117.4): the other seat's pass only
+// hands priority back to the active seat and the game is still in main1. The
+// active seat's next pass is the one that ends main1 and begins combat. The
+// split pass must therefore stay at main1 and not claim a new step instance,
+// or the driver hides its checkpoint at an occurrence XMage never starts; the
+// pass that closes the pair names begin-combat.
+func TestPreparePassPositionsManaSplitPair(t *testing.T) {
+	at := func(step string, prio int) rules.OracleSnapshot {
+		return rules.OracleSnapshot{
+			Turn: 1, Step: step, Active: 0, Priority: prio,
+			Players: make([]rules.OracleSnapPlayer, 2),
+		}
+	}
+	pass := func(seat int) oraclegen.Step { return oraclegen.Step{Op: "pass", Seat: seat} }
+	steps := []oraclegen.Step{
+		pass(0),
+		{Op: "activate", Seat: 1},
+		pass(1),
+		pass(0),
+	}
+	snaps := []rules.OracleSnapshot{
+		at("main1", 0),        // setup
+		at("main1", 1),        // p0 passes, p1 has priority
+		at("main1", 1),        // p1 taps a Plains for mana, keeping priority
+		at("main1", 0),        // p1 passes: p0 gets priority back, still main1
+		at("begin-combat", 0), // p0 passes: the pair ends main1
+	}
+	got := passPositions(steps, snaps)
+	want := []struct {
+		step  string
+		moved bool
+	}{
+		{"main1", false},
+		{"", false},
+		{"main1", false},
+		{"begin-combat", true},
+	}
+	if len(got) != len(want) {
+		t.Fatalf("%d positions, want %d", len(got), len(want))
+	}
+	for i, w := range want {
+		if w.step == "" {
+			if got[i] != nil {
+				t.Errorf("step %d (%s): position %+v, want none", i, steps[i].Op, *got[i])
+			}
+			continue
+		}
+		if got[i] == nil {
+			t.Errorf("step %d (%s): no position, want %s moved=%v", i, steps[i].Op, w.step, w.moved)
+			continue
+		}
+		if got[i].Step != w.step || got[i].Moved != w.moved {
+			t.Errorf("step %d (%s): %s moved=%v, want %s moved=%v",
+				i, steps[i].Op, got[i].Step, got[i].Moved, w.step, w.moved)
+		}
+	}
+}
+
 func TestPreparePassPositions(t *testing.T) {
 	_, _, ws, items := prepared(t, 2)
 	var moved, resolves int
@@ -626,8 +844,9 @@ func TestStackLost(t *testing.T) {
 }
 
 // TestPlayStepUnlessPays: a land played as a step answers the as-enters "pay
-// 2 life?" on XMage's CHOICE queue. The same paid cost on a pass step keeps its
-// numeric mode answer, and a decline or a play-step modal ETB is untouched.
+// 2 life?" on XMage's CHOICE queue. The generic router answers every paid
+// unless cost the same way, so a pass-step payment is also "choice yes", while
+// a decline or a play-step modal ETB is untouched.
 func TestPlayStepUnlessPays(t *testing.T) {
 	play := oraclegen.Step{Op: "play", Seat: 0, Card: "p0:Sacred Foundry"}
 	pass := oraclegen.Step{Op: "pass", Seat: 0}
@@ -669,7 +888,7 @@ func TestPlayStepUnlessPays(t *testing.T) {
 			"pass step paid",
 			[]oraclegen.Step{play, pass},
 			passPaid,
-			[][]oraclegen.XAnswer{nil, {{Seat: 0, Kind: "mode", Value: "1"}}},
+			[][]oraclegen.XAnswer{nil, {{Seat: 0, Kind: "choice", Value: "yes"}}},
 		},
 		{
 			"play step modal ETB",

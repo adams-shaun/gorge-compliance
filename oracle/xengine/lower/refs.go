@@ -69,6 +69,13 @@ func (m seatMap) pickString(p game.Pick) (s string, ok bool) {
 		// option 0 instead.
 		return p.Kind, !isRefLike(p.Kind)
 	}
+	if p.Kind == "divide" && p.Obj == 0 {
+		// CR 601.2d: a division option over a player carries no object (the
+		// engine keys it by Option.Player), so its label is the live game's
+		// seat-facing name ("W-1"), not the runner's seat. The runner matches
+		// a bare "pN" against such an option; the live label names no seat.
+		return m.player(p.Player), true
+	}
 	if p.Obj != 0 && p.Kind != "mana" {
 		// (A mana-colour wheel offers several options for one source: its
 		// label, "Add B", is what tells them apart.)

@@ -380,9 +380,11 @@ type Item struct {
 	// gorge's runner (which decodes steps with DisallowUnknownFields).
 	Payment []string `json:"payment,omitempty"`
 	// DieRolls is every die roll the item's steps made, in log order. It is
-	// an Item field, never a Step one, so Raw() never sends it to gorge's
-	// runner (which cannot force a roll at this pin). A follower that must
-	// not roll its own die reads it: XMage scripts each roll through
+	// an Item field, never a Step one. Raw() sends it to gorge's runner as the
+	// scenario's top-level die_rolls (gorge 9b1be11b19), which forces each
+	// natural result instead of drawing from its seeded generator (CR 706.2),
+	// so every Raw() caller replays the recorded roll. A follower that must
+	// not roll its own die reads it too: XMage scripts each roll through
 	// xmage_answers (kind "die"), and a Forge driver forces item.die_rolls
 	// before running the step. Empty for every item that rolls no die, so
 	// existing item bytes are unchanged.
@@ -431,9 +433,23 @@ type XAnswer struct {
 	Value string `json:"value"`
 }
 
-// Raw is the scenario alone, as gorge's runner decodes it.
-func (it Item) Raw() []byte {
-	b, _ := json.Marshal(it.Scenario)
+// Raw is the scenario plus the item's recorded die rolls, as gorge's runner
+// decodes it. It is the one helper for runner JSON that includes the tape, so a
+// caller that replays the item's steps forces the same rolls; a caller that
+// changes the step list must keep the tape's steps in range (or drop the tape). The runner fails a roll whose sides or seat disagree
+// with the engine's and one a step leaves unconsumed.
+func (it Item) Raw() []byte { return it.RawScenario(it.Scenario) }
+
+// RawScenario is Raw with sc in place of the item's scenario. A probe that
+// replays the item with retargeted or extended steps (xprep's retarget rerun,
+// pending-resolution and modal-trigger continuations) goes through here too, so
+// it forces the same die rolls. sc must keep every step a recorded roll is on,
+// or gorge's runner fails the unconsumed roll.
+func (it Item) RawScenario(sc Scenario) []byte {
+	b, _ := json.Marshal(struct {
+		Scenario
+		DieRolls []DieRoll `json:"die_rolls,omitempty"`
+	}{sc, it.DieRolls})
 	return b
 }
 
@@ -1313,10 +1329,35 @@ func arrangeEmpty(d rules.OracleDecision) bool {
 func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, castSteps map[int]bool, setup map[string]Seat, flips []rules.OracleFlip, extras ...xanswersExtra) [][]XAnswer {
 	var digSources map[int]digSource
 	var pipPlans map[int][]pipAsk
+	var casts map[int]bool
+	var activates map[int]int
+	var searchZones map[int]searchZoneAsk
+	var forage map[int][]string
 	var ownBounce map[int]bool
+	var tapThenUntap map[int]bool
+	var bolster map[int]bool
+	var supports map[int]supportAnswers
+	var snaps []rules.OracleSnapshot
+	var orderAsks map[int]bool
+	var sources map[int][]string
 	for _, ex := range extras {
+		if sources == nil {
+			sources = ex.sources
+		}
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
+		}
+		if tapThenUntap == nil {
+			tapThenUntap = ex.tapThenUntap
+		}
+		if bolster == nil {
+			bolster = ex.bolster
+		}
+		if supports == nil {
+			supports = ex.supports
+		}
+		if forage == nil {
+			forage = ex.forage
 		}
 		if digSources == nil {
 			digSources = ex.digs
@@ -1324,7 +1365,28 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		if pipPlans == nil {
 			pipPlans = ex.pips
 		}
+		if snaps == nil {
+			snaps = ex.snaps
+		}
+		if orderAsks == nil {
+			orderAsks = ex.orderAsks
+		}
+		if casts == nil {
+			casts = ex.casts
+		}
+		if activates == nil {
+			activates = ex.activates
+		}
+		if searchZones == nil {
+			searchZones = ex.searchZones
+		}
 	}
+	// A hand_move/library_placement goes top-first (reverse the answers for
+	// XMage's successive top asks) or bottom-first (keep them) by where the
+	// after-step checkpoint shows the picks, not by a list of cards. An
+	// explicit changezone_alternative "bottom" overrides a checkpoint that
+	// cannot tell a bottom-into-empty-library placement from a top one.
+	topPlacement := LibraryTopPlacements(ds, snaps)
 	out := make([][]XAnswer, steps)
 	any := false
 	// The plan's pip decisions: the ordinal of each pip decision among its
@@ -1351,15 +1413,8 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			pipPlanned[i] = true
 		}
 	}
-	// A step whose card name is then searched for (Ancient Vendetta's "choose
-	// a card name. Search ... for cards with that name"): XMage poses the name
-	// dialog however narrowly gorge offered it, and the search must find it.
-	namedSearch := map[int]bool{}
 	modal := map[int]bool{}
 	for _, d := range ds {
-		if pickKind(d, 0) == "search" {
-			namedSearch[d.Step] = true
-		}
 		if d.Kind == "mode" && d.Step >= 0 {
 			modal[d.Step] = true
 		}
@@ -1368,6 +1423,17 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	if ownBounce != nil {
 		routing.ownBounce = ownBounce
 	}
+	routing.tapThenUntap = tapThenUntap
+	if searchZones != nil {
+		routing.searchZones = searchZones
+	}
+	routing.sources = sources
+	searchZoneSuppress := searchZoneRedundantBooleans(ds, searchZones)
+	// RemoveCounter's CounterType$ Any/All election is one per-counter run of
+	// KChoose picks in gorge but one multi-amount dialog in XMage: fold the
+	// run into one "X=<n>" amount per kind message before the generic choice
+	// route scripts the raw kind labels (remove_counter_answers.go).
+	counterAnswers, counterOwned := foldRemoveCounterKindAnswers(ds, snaps)
 	// Trigger-order name answers are demoted back to the inert text form when
 	// the step also scripts other asks (see the trigger_order case).
 	var trigSpans []*trigSpan
@@ -1406,6 +1472,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	// flip resolves before the step's scripted dialogs re-read the queue;
 	// the measured rows script nothing else on the flip's step).
 	stepFlips := make([][]XAnswer, steps)
+	// Support target answers are collected apart because their step precedes
+	// the decision that poses them: the support target is the source's FIRST
+	// target, so it must lead its announcement step's target queue even when
+	// that step also scripts another target's answer (a support spell's
+	// sub-ability target). Prepending them after demoteTriggerOrderSpans keeps
+	// the trigger-order span indices valid.
+	supportLead := make([][]XAnswer, steps)
 	for _, f := range flips {
 		v := map[bool]string{true: "win", false: "lose"}[f.Win]
 		if f.Step < 0 {
@@ -1422,7 +1495,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		if d.Step < 0 {
 			switch {
 			case IsSetupChoice(d):
-				setupAnswers = append(setupAnswers, XAnswer{d.Seat, "setup_choice", d.Picks[0]})
+				pick := d.Picks[0]
+				if colour, ok := bareColourLabel(d, 0); ok {
+					pick = colour
+				}
+				setupAnswers = append(setupAnswers, XAnswer{d.Seat, "setup_choice", pick})
 				any = true
 			case isSetupNumber(d):
 				a, _ := SetupNumberChoice(d)
@@ -1449,6 +1526,21 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			continue
 		}
+		if searchZoneSuppress[i] {
+			// The mapped SearchLibraryGraveyard* effect folds the optional
+			// search choices into its own library chooseUse.
+			continue
+		}
+		if sa, ok := supports[i]; ok {
+			// XMage asks a Support pick as a target when the source is
+			// announced, not at the resolution step gorge recorded it on
+			// (support_pick.go). The answers lead the announcement step.
+			if sa.step >= 0 && sa.step < steps && len(sa.answers) > 0 {
+				supportLead[sa.step] = append(supportLead[sa.step], sa.answers...)
+				any = true
+			}
+			continue
+		}
 		folded := d.Via == "target" || (d.Kind == "target" && modal[d.Step])
 		if d.Step >= steps || (folded && d.Resume != "copy_targets" && castSteps[d.Step]) {
 			// A cast step's own targets reach XMage through castSpell; a
@@ -1457,6 +1549,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			// pick precedes it, so the runner records it Via "cast fallback").
 			// A copy's new-target election is never a cast step's targets even
 			// if it shares the step, so it is scripted below regardless.
+			continue
+		}
+		if counterOwned[i] {
+			if as := counterAnswers[i]; len(as) > 0 {
+				out[d.Step] = append(out[d.Step], as...)
+				any = true
+			}
 			continue
 		}
 		if as, ok := bandAnswers(d); ok {
@@ -1481,12 +1580,20 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			continue
 		}
-		if pickKind(d, 0) == "name" && namedSearch[d.Step] && len(d.Picks) == 1 {
+		if len(d.Picks) == 1 && hasNamePick(d) {
+			// XMage's "choose a card name" dialog always ranges over every
+			// card name in its pool (CR 201.3), so it is posed even when
+			// gorge's deck-scoped name universe offered a single option
+			// (Cabal Therapy, Phyrexian Revoker, Silverquill Silencer). The
+			// pick is that dialog's choice answer whether or not a named
+			// search follows (the Ancient Vendetta case), and it is never a
+			// forced one-option ask. Setup-time name choices keep their
+			// setup_choice queue above.
 			out[d.Step] = append(out[d.Step], XAnswer{d.Seat, "choice", d.Picks[0]})
 			any = true
 			continue
 		}
-		if forcedSingleOption(d) && !pipPlanned[i] && !forcedChoicePosed(ds, i) && !announcesSacrificeX(ds, i) {
+		if forcedSingleOption(d) && !pipPlanned[i] && !forcedChoicePosed(ds, i) && !announcesSacrificeX(ds, i) && !castAnnouncesX(d, casts) && !activationAnnouncesX(d, activates) {
 			// A forced one-option ask: XMage does not pose it. A forced
 			// target-kind pick is the exception -- one legal opponent is still
 			// a chooseTarget XMage asks for -- and so is a mode ask, which
@@ -1513,17 +1620,21 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[yes]})
 				break
 			}
-			if (d.Resume == "unless_pay" || d.Resume == "unless_decline") && unlessPolarity(d) == "no" {
+			if d.Resume == "unless_pay" || d.Resume == "unless_decline" {
 				// An unless-pay (UnlessCost$) is XMage's boolean chooseUse,
-				// not a mode ask; the engine models it as a one-option mode
-				// decision whose label is the decline ("Don't pay"). The
-				// driver routes only the literals "yes"/"no" to setChoice
-				// (boolean), so the raw label reaches setChoice(String) and
-				// never answers the ask (std3: Dispelling Exhale, Spectral
-				// Denial). Only the DECLINE is answered this way: a paid unless
-				// cost (Lithobraking, Rottenmouth Viper, Meathook Massacre II)
-				// agrees with XMage only as the ordinary mode pick below.
-				as = append(as, XAnswer{d.Seat, "choice", "no"})
+				// not a mode ask; the engine models it as a mode decision
+				// whose picked label is the cost paid or the decline ("Don't
+				// pay"). Every XMage unless-pays effect -- sacrifice, exile
+				// or tap the source, counter the spell, do the effect unless
+				// a player pays -- asks chooseUse for ANY payable cost, mana,
+				// life, energy or object components (the cost classes only
+				// differ in cost.canPay/pay). Answer the boolean from the
+				// pick: yes when gorge paid, no when it declined. An object
+				// cost's picks remain the following "unless_cost" choose_n,
+				// which the ordinary choose_n route below already joins into
+				// one aliased choice; leaving the paid pick as a numeric mode
+				// answer sends chooseUse to TestPlayer's AI instead.
+				as = append(as, XAnswer{d.Seat, "choice", unlessPolarity(d)})
 				break
 			}
 			if pickKind(d, 0) == "discard" || d.Resume == "discard" {
@@ -1559,10 +1670,29 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					as = append(as, XAnswer{d.Seat, "choice", d.Picks[k]})
 					continue
 				}
+				if m, ok := modeNumberFor(d, k, modes); ok && m == ModeKWChoiceQueue {
+					// A Pump KWChoice$ ("gains your choice of ..."): XMage's
+					// GainsChoiceOfAbilitiesEffect asks ONE ChoiceImpl over the
+					// candidate keyword abilities' rule texts, read from the
+					// CHOICE queue by label, never the numeric mode queue
+					// (Lunar Avenger measured: "Missing CHOICE def ... Choose an
+					// ability to gain", mode 1 left unused). The rule text is
+					// the keyword name in lower case.
+					as = append(as, XAnswer{d.Seat, "choice", xmageKeywordRuleText(d.Picks[k])})
+					continue
+				}
+				if m, ok := modeNumberFor(d, k, modes); ok && m == ModeKWBespokeChoiceQueue {
+					// A Pump KWChoice$ on a bespoke-dialog face (Angelic
+					// Skirmisher): the CHOICE queue by XMage's own label.
+					as = append(as, XAnswer{d.Seat, "choice", xmageBespokeChoiceLabel(d.Picks[k])})
+					continue
+				}
 				if m, ok := modeNumberFor(d, k, modes); ok && (m == ModeYesQueue || m == ModeNoQueue) {
-					// A Timetwister-style per-player "may shuffle" GenericChoice
-					// (Turtles in Time): XMage asks chooseUse, so the answer is
-					// yes/no for whichever seat chose.
+					// A two-way GenericChoice XMage asks as chooseUse: a
+					// Timetwister-style per-player "may shuffle" (Turtles in
+					// Time) or a source-proven xmageChooseUseFaces punisher
+					// (Terrapact Intimidator's targeted opponent). The answer
+					// is yes/no for whichever seat chose.
 					as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[m == ModeYesQueue]})
 					continue
 				}
@@ -1572,9 +1702,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				}
 				as = append(as, XAnswer{d.Seat, "mode", fmt.Sprint(n)})
 			}
-			if d.Max > len(d.Picks) {
-				// XMage keeps choosing modes up to Max; stop it with the mode
-				// queue's skip token (including when gorge picked none).
+			if max(d.Max, printedModeMax(d, modes)) > len(d.Picks) {
+				// XMage keeps choosing modes up to Max -- the printed CharmNum
+				// when gorge clamped Max to the modes it could offer (Sentinel
+				// of Lost Lore); stop it with the mode queue's skip token
+				// (including when gorge picked none).
 				as = append(as, XAnswer{d.Seat, "mode", "[mode_skip]"})
 			}
 		case "yesno":
@@ -1585,17 +1717,6 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[yes]})
 		case "choose_n":
-			if d.Resume == "search_zones" {
-				// gorge's CR 701.23 "and/or" zone choice (cr-g51, Say Its
-				// Name's "search your graveyard, hand, and/or library"): one
-				// multi-pick over the zones. XMage asks it as card-specific
-				// chooseUse prompts ("Search your graveyard?", "...hand?",
-				// "...library?"), which no zone label answers; a scripted
-				// label is instead consumed by an earlier cost target and
-				// fails the replay. Left unscripted, as it was before gorge
-				// posed the ask.
-				continue
-			}
 			if d.Resume == "changezone_dest_alt" {
 				// gorge's DestinationAlternative ask (Dina's Guidance's "put it
 				// into your hand or graveyard"). XMage asks it as a boolean
@@ -1635,7 +1756,10 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			if d.Resume == "twopiles_pick" && len(d.Picks) == 1 {
 				// The pile pick (Curator of Destinies, Fact or Fiction) is
 				// XMage's opponent.chooseUse("Face-down", "Face-up"), a
-				// boolean choice, never gorge's "First pile"/"Second pile"
+				// boolean choice (RevealAndSeparatePilesEffect's Steam
+				// Augury asks Player.choosePile instead; the driver's
+				// ScriptedChoicePlayer.choosePile reads the same Yes/No),
+				// never gorge's "First pile"/"Second pile"
 				// label (measured 2026-10-14: the label is "Found wrong
 				// choice command"). Taking pile A -- the separator's pile,
 				// the face-down pile XMage's TargetCard selected -- is the
@@ -1678,9 +1802,19 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// (Melded Moxite's "Discard a card and draw two cards?",
 				// Vampire Gourmand's "Sacrifice another creature and ...?").
 				// A pure mana pay is resolved earlier by triggerCostAnswer
-				// (TriggerCostMana), and a blight/raw-mana label is excluded
-				// by nonManaTriggerCostPay, so each keeps its own route.
+				// (TriggerCostMana); a raw-mana label that is not a pay kind
+				// stays excluded by nonManaTriggerCostPay. A blight cost is a
+				// non-mana cost like any other here: its creature pick follows
+				// the accepted chooseUse (Boggart Mischief).
 				as = append(as, XAnswer{d.Seat, "choice", "yes"})
+				if names := forage[i]; len(names) > 0 {
+					// The exile arm's three graveyard cards: XMage's
+					// ForageCost asks them through a TargetCardInYourGraveyard
+					// makeChoose once the chooseUse is accepted; gorge exiles
+					// them without an ask (forageSettle), so they come from
+					// the checkpoint.
+					as = append(as, XAnswer{d.Seat, "choice", strings.Join(names, "^")})
+				}
 				break
 			}
 			if pipPlanned[i] {
@@ -1726,7 +1860,14 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				continue
 			}
 			if len(d.Picks) == 1 && strings.HasPrefix(d.Picks[0], "X = ") {
-				as = append(as, XAnswer{d.Seat, "choice", "X=" + strings.TrimPrefix(d.Picks[0], "X = ")})
+				answer := XAnswer{d.Seat, "choice", "X=" + strings.TrimPrefix(d.Picks[0], "X = ")}
+				as = append(as, answer)
+				for n := 1; activationAnnouncesX(d, activates) && n < activates[d.Step]; n++ {
+					// XMage's VariableManaCost and a separate VariableCostImpl
+					// announce X independently (Ludevic, Necrogenius's mana
+					// {X} then ExileXFromYourGraveCost).
+					as = append(as, answer)
+				}
 				break
 			}
 			if len(d.Picks) == 1 && pickKind(d, 0) == "number" {
@@ -1765,7 +1906,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = append(as, XAnswer{d.Seat, "choice", JoinedChoice(d)})
 			} else {
 				for k, label := range d.Picks {
-					switch pickQueue(d, k, label) {
+					switch pickQueue(d, k, label, bolster[i]) {
 					case "skip":
 						// XMage resolves this pick inside its computer player (a
 						// library search) or pays it from the pool (a mana-tapping
@@ -1779,6 +1920,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					// for an unlabelled object pick is the object's name.
 					if label == "" && k < len(d.PickRefs) {
 						label = oraclediffRefName(d.PickRefs[k])
+					}
+					if colour, ok := bareColourLabel(d, k); ok {
+						label = colour
 					}
 					label = disambiguatedObjectChoice(d, k, label)
 					if colour, ok := manaColourLabel(label); ok {
@@ -1867,7 +2011,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					as = append(as, XAnswer{d.Seat, "choice", triggerOrderChoice(d, k)})
 				}
 				if len(as) > 0 {
-					pendingTrig = &trigSpan{step: d.Step, count: len(as), old: triggerOrderTextAnswers(d), textBlind: triggerOrderTextBlind(d)}
+					pendingTrig = &trigSpan{step: d.Step, count: len(as), old: demotedTriggerOrderAnswers(d), textBlind: triggerOrderTextBlind(d)}
 				}
 				break
 			}
@@ -1888,13 +2032,14 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				forcedOrder := d.Min == d.Max && d.Max == d.Options
 				// The producer, not the option Kind, decides which question the
 				// forced order answers: a full top reorder
-				// (effRearrangeTopOfLibrary) and a Dig all-to-bottom remainder
-				// both offer every card with Kind "bottom" (the reorder's pile
-				// B is empty), but they ask opposite orders. gorge's
-				// ResumeKind is what tells them apart: "arrange" is the top
-				// reorder, "dig_arrange" the bottom remainder.
-				fullTopReorder := d.Resume == "arrange" && d.ArrangeKind == "bottom" &&
-					len(d.Picks) == d.Options
+				// (effRearrangeTopOfLibrary), a CR 401.4 library_placement
+				// arrangement on top, and a Dig all-to-bottom remainder all
+				// offer every card with one shared Kind, but they ask opposite
+				// orders. gorge's ResumeKind plus the after-step library top
+				// (topPlacement) is what tells them apart.
+				fullTopReorder := FullTopReorder(d) ||
+					d.ArrangeKind == "library_placement" && topPlacement[i] &&
+						len(d.Picks) == d.Options
 				if forcedOrder && fullTopReorder {
 					// gorge's picks are the final top-first order, but XMage's
 					// putCardsOnTopOfLibrary asks only while more than one card
@@ -1903,6 +2048,18 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					// picks[0] is the topmost card and stays unnamed.
 					for k := len(d.Picks) - 1; k >= 1; k-- {
 						as = append(as, XAnswer{d.Seat, "choice", d.Picks[k]})
+					}
+				} else if forcedOrder && d.ArrangeKind == "dig_bottom" && len(d.Picks) > 0 {
+					// A Dig's all-to-bottom remainder: gorge's answer order is
+					// the bottom order, picks[0] highest. XMage's
+					// putCardsOnBottomOfLibrary asks "card ORDER to put on the
+					// BOTTOM" only while more than one card is left (last one
+					// chosen is bottommost) and places the final card unasked,
+					// so script the first N-1 picks: a scripted last pick was
+					// left over ("(Choices of PlayerA) Count are not equal
+					// (found [Forest])", Growing Rites of Itlimoc's four).
+					for _, label := range d.Picks[:len(d.Picks)-1] {
+						as = append(as, XAnswer{d.Seat, "choice", label})
 					}
 				} else if forcedOrder {
 					// A forced bottom order (Min == Max == Options) has no
@@ -1943,6 +2100,19 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		default:
 			continue
 		}
+		if topPlacement[i] && HandMoveBatch(d) && orderAsks[i] {
+			// XMage asks the hand selection first, then its "card ORDER to
+			// put … from the TOP" dialog N-1 times and auto-tops the card
+			// never named. The selection answer above already names all
+			// picks; the order answers follow it, last N-1 picks reversed,
+			// so picks[0] stays the unnamed topmost card. Only a verified
+			// order-dialog effect gets these answers: a self put-back
+			// (Brainstorm, Dream Cache) has no such ask, and an extra
+			// choice would derail the next dialog.
+			for k := len(d.Picks) - 1; k >= 1; k-- {
+				as = append(as, XAnswer{d.Seat, "choice", d.Picks[k]})
+			}
+		}
 		if len(as) > 0 {
 			if pendingTrig != nil {
 				pendingTrig.start = len(out[d.Step])
@@ -1964,6 +2134,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	// the inert text over them (dropping the scripted answers). Demoting on
 	// the unshifted list keeps the flips leading either way.
 	demoteTriggerOrderSpans(out, trigSpans)
+	for st := range supportLead {
+		if len(supportLead[st]) > 0 {
+			out[st] = append(supportLead[st], out[st]...)
+		}
+	}
 	for st, fs := range stepFlips {
 		if len(fs) > 0 {
 			out[st] = append(fs, out[st]...)
@@ -1985,6 +2160,21 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	return out
 }
 
+// hasNamePick reports whether any pick of d is the engine's card-name option
+// kind. XMage poses its card-name dialog over every name in its card pool
+// whatever universe the engine scoped the ask to (CR 201.3), so such an ask
+// always reaches the choice queue and is never a forced one-option fold. It
+// matches the pick KIND, not pick 0, so a name pick that moves position or
+// shares a decision with another pick cannot slip past.
+func hasNamePick(d rules.OracleDecision) bool {
+	for k := range d.Picks {
+		if pickKind(d, k) == "name" {
+			return true
+		}
+	}
+	return false
+}
+
 // forcedSingleOption reports a one-option ask XMage never poses: exactly one
 // legal answer (Min==Max==Options==1) that is not a target, order or mode ask.
 // A target pick is still a chooseTarget XMage asks for even with one legal
@@ -1997,6 +2187,13 @@ func forcedSingleOption(d rules.OracleDecision) bool {
 		// "you lose 4 life unless ..."): XMage does not pose it; the unless
 		// choice that follows is the real decision.
 		return true
+	}
+	if hasNamePick(d) {
+		// A card-name dialog is always posed over XMage's whole card pool
+		// (CR 201.3), however narrowly gorge's deck-scoped name universe
+		// scoped the ask (Cabal Therapy, Phyrexian Revoker, Silverquill
+		// Silencer). It is a real choice-queue ask, never a forced fold.
+		return false
 	}
 	if d.Kind == "target" || d.Kind == "order" || d.Kind == "mode" {
 		return false
@@ -2065,17 +2262,56 @@ func hasCostPick(d rules.OracleDecision) bool {
 // announcesX reports whether d is the single positive "X = <n>" announcement
 // of a cost that names X more than once ({X}{X}, the runner's XMulti mark).
 // XMage's unscripted announce does not pay the repeated X when the pool leaves
-// one legal value (Gogo's unspent CC), so it is scripted. A forced announce of
-// a single-X cost stays unscripted: XMage's default agrees there and the
-// committed rows (Saheeli's Lattice, The Enigma Jewel) would re-hash for
-// nothing. A forced announce that sizes a sacrifice cost is the exception
-// (announcesSacrificeX).
+// one legal value (Gogo's unspent CC), so it is scripted. A forced single-X
+// announce is owned by castAnnouncesX/activationAnnouncesX (a real
+// VariableManaCost step) or left to XMage's own default (a Craft keyword's
+// XMin count: Saheeli's Lattice, The Enigma Jewel). A forced announce that
+// sizes a sacrifice cost is the exception (announcesSacrificeX).
 func announcesX(d rules.OracleDecision) bool {
 	if !d.XMulti || len(d.Picks) != 1 || pickKind(d, 0) != "x" {
 		return false
 	}
 	n, err := strconv.Atoi(strings.TrimPrefix(d.Picks[0], "X = "))
 	return err == nil && n > 0 && strings.HasPrefix(d.Picks[0], "X = ")
+}
+
+// castAnnouncesX reports a forced "X = <n>" announcement made while casting a
+// spell (a cast step of the scenario). XMage announces a spell's X over 0..any
+// (VariableManaCost's max is unbounded; TestPlayer.announceX shows "(any
+// value)"), so it poses the ask however few values gorge's pool allowed: a
+// forced X = 0 cast with no spare mana (The Goose Mother, Lost in the Maze,
+// Meathook Massacre II's {X}{X}) strict-misses "Announce the value for {X}"
+// when it is left unscripted. A triggered cost's X stays with announcesX /
+// announcesSacrificeX/xTriggerCostGroup; nor is a spell whose X also sizes a
+// non-mana cost part (castXSizesCost: the step is left out of casts).
+func castAnnouncesX(d rules.OracleDecision, casts map[int]bool) bool {
+	return announcesXAtStep(d, casts)
+}
+
+// activationAnnouncesX reports the same forced "X = <n>" announcement on an
+// ACTIVATION whose own cost names {X} (Talon of Pain's "{X}, {T}, Remove X
+// charge counters": gorge offered only X = 0 with no charge counters, and
+// XMage's announceX still strict-missed "Announce the value for {X} (any
+// value)"). The mapped count is one per announcing cost: a VariableManaCost
+// and a separate VariableCostImpl each ask (Ludevic, Necrogenius's {X} plus
+// ExileXFromYourGraveCost), while a counter-removal cost that reuses the mana
+// X (Talon) counts once. Craft/XMin is a keyword, not an activation cost, and
+// stays out.
+func activationAnnouncesX(d rules.OracleDecision, activates map[int]int) bool {
+	return activates[d.Step] > 0 && announcesXShape(d)
+}
+
+// announcesXAtStep is the shared shape of a forced single-pick X announcement
+// on an owned step.
+func announcesXAtStep(d rules.OracleDecision, steps map[int]bool) bool {
+	return steps[d.Step] && announcesXShape(d)
+}
+
+// announcesXShape is the forced single-pick X announcement, never the forced
+// one-option label asks these predicates exist to protect.
+func announcesXShape(d rules.OracleDecision) bool {
+	return d.Kind == "choose_n" && len(d.Picks) == 1 && pickKind(d, 0) == "x" &&
+		strings.HasPrefix(d.Picks[0], "X = ")
 }
 
 // announcesSacrificeX reports a forced positive "X = <n>" announcement that
@@ -2489,24 +2725,85 @@ func tokenChoiceNames(f *cards.Face, choices string) []string {
 const ModeChoiceQueue = 0
 
 // ModeYesQueue and ModeNoQueue are the sentinels for the two labels of a
-// DB$ GenericChoice | AILogic$ Timetwister body (Turtles in Time): a per-player
-// "may shuffle your hand and graveyard" ask that XMage poses as
-// player.chooseUse (the yes/no choice queue), never as a mode. Choices$ lists
-// the yes label first, the no label second. Negative, so neither collides with
-// a real 1-based charm position nor with ModeChoiceQueue.
+// GenericChoice XMage poses as player.chooseUse (the yes/no choice queue),
+// never as a mode: a DB$ GenericChoice | AILogic$ Timetwister body (Turtles in
+// Time, a per-player "may shuffle your hand and graveyard" ask) and every
+// two-option face in xmageChooseUseFaces (choice_dialog.go, e.g. Terrapact
+// Intimidator's "target opponent may have you create two Lander tokens").
+// Choices$ lists the yes label first, the no label second. Negative, so
+// neither collides with a real 1-based charm position nor with
+// ModeChoiceQueue.
 const (
 	ModeYesQueue = -1
 	ModeNoQueue  = -2
 )
 
+// ModeKWChoiceQueue is the sentinel for a Pump KWChoice$ pick ("gains your
+// choice of X, Y or Z"). XMage's GainsChoiceOfAbilitiesEffect builds one
+// ChoiceImpl over the candidate abilities' RULE TEXTS and reads it from the
+// CHOICE queue by label; the numeric mode queue never consumes that answer
+// (measured on Lunar Avenger: "Missing CHOICE def ... Choose an ability to
+// gain", with the scripted mode 1 left unused). Negative like the other queue
+// sentinels, so it never collides with a real 1-based charm position.
+const ModeKWChoiceQueue = -3
+
+// ModeKWBespokeChoiceQueue is the sentinel for a Pump KWChoice$ pick on a face
+// whose XMage class builds its own Choice dialog with its own labels
+// (xmageKWChoiceBespokeFaces: Angelic Skirmisher's "Choose ability for your
+// creatures" over "First strike", "Vigilance", "Lifelink"). Still the CHOICE
+// queue, but the answer is the XMage label, not the keyword rule text.
+const ModeKWBespokeChoiceQueue = -4
+
 // modeNumbers maps each charm mode's label (as gorge's mode decision
 // shows it) to its 1-based position in its Choices$ list, for every Charm
 // on the face -- the spell's own and any modal trigger's. It ALSO carries
-// every DB$ GenericChoice | SetChosenMode$ True label, mapped to the
-// ModeChoiceQueue sentinel: those picks are the same "mode" decision kind
-// to gorge but a different XMage queue, and no in-band discriminator on the
-// decision separates them (a mid-resolution Charm shares Resume "modes"),
-// so the face shape is the authority.
+// every DB$ GenericChoice | SetChosenMode$ True label and every source-proven
+// Pump KWChoice$ label, mapped to the ModeChoiceQueue / ModeKWChoiceQueue
+// sentinels: those picks are the same "mode" decision kind to gorge but a
+// different XMage queue, and no in-band discriminator on the decision
+// separates them (a mid-resolution Charm shares Resume "modes"), so the face
+// shape is the authority.
+// printedMaxPrefix marks the ModeNumbers entries that carry a charm's PRINTED
+// maximum rather than a mode number (see printedMaxKey).
+const printedMaxPrefix = "\x00printed_max\x00"
+
+// printedMaxKey is the ModeNumbers key under which a charm mode label carries
+// its printed CharmNum$ (stored negated, so the value can never be mistaken
+// for a 1-based mode number or a queue sentinel). gorge clamps a mode
+// decision's Max to the modes it can offer (CR 700.2a), but XMage's
+// Modes.choose keeps asking up to the printed maximum, so the closing
+// mode skip must be keyed on the printed bound. The label is the only handle
+// a decision gives back to its card, hence one entry per mode label.
+func printedMaxKey(label string) string { return printedMaxPrefix + label }
+
+// IsPrintedMaxKey reports whether a ModeNumbers key is a printed-maximum
+// entry rather than a mode label.
+func IsPrintedMaxKey(k string) bool { return strings.HasPrefix(k, printedMaxPrefix) }
+
+// printedCharmMax is the literal CharmNum$ of a non-repeating Charm (0 when
+// absent, non-literal or repeatable: those keep the decision's own Max).
+func printedCharmMax(params map[string]string) int {
+	if strings.EqualFold(strings.TrimSpace(params["CanRepeatModes"]), "True") {
+		return 0
+	}
+	n, err := strconv.Atoi(strings.TrimSpace(params["CharmNum"]))
+	if err != nil || n < 2 {
+		return 0
+	}
+	return n
+}
+
+// printedModeMax is the printed maximum XMage will loop a mode ask to for the
+// decision's picked cards (0 when none of the picks carries one).
+func printedModeMax(d rules.OracleDecision, modes map[string]int) int {
+	for _, label := range d.Picks {
+		if n, ok := modes[printedMaxKey(label)]; ok && n < 0 {
+			return -n
+		}
+	}
+	return 0
+}
+
 func modeNumbers(f *cards.Face) map[string]int {
 	out := map[string]int{}
 	// A ChoiceRestriction$ Charm (Zuko, Conflicted's "choose one that hasn't
@@ -2517,16 +2814,21 @@ func modeNumbers(f *cards.Face) map[string]int {
 	// {R}), not the second printed one. Such a charm's labels stay out of the
 	// map, so the answer falls to the pick's 1-based position in the offered
 	// list -- the number XMage's chooseMode reads.
-	addCharm := func(choices, restriction string) {
+	addCharm := func(choices, restriction string, params map[string]string) {
 		if restriction != "" {
 			return
 		}
+		printed := printedCharmMax(params)
 		for i, name := range strings.Split(choices, ",") {
 			name = strings.TrimSpace(name)
 			if name == "" {
 				continue
 			}
-			out[effects.CharmModeLabel(cards.ResolveSVar(f.SVars, name), name)] = i + 1
+			label := effects.CharmModeLabel(cards.ResolveSVar(f.SVars, name), name)
+			out[label] = i + 1
+			if printed > 0 {
+				out[printedMaxKey(label)] = -printed
+			}
 		}
 	}
 	for _, body := range f.SVars {
@@ -2585,6 +2887,17 @@ func modeNumbers(f *cards.Face) map[string]int {
 			}
 		}
 	}
+	// A two-option GenericChoice XMage poses as ONE boolean chooseUse
+	// (choice_dialog.go): the first Choices$ label is the true branch and the
+	// second the false branch, answered yes/no on the CHOICE queue for the
+	// seat that chose (Terrapact Intimidator's targeted opponent). The seat
+	// is already the decision's Seat; only the queue and the value change.
+	if pairs, ok := chooseUseLabels(f); ok {
+		for _, pair := range pairs {
+			out[pair[0]] = ModeYesQueue
+			out[pair[1]] = ModeNoQueue
+		}
+	}
 	// The SetChosenMode labels first, so a real Charm mode of the same
 	// label (a corpus impossibility) would keep its numeric position below.
 	for _, body := range f.SVars {
@@ -2607,15 +2920,32 @@ func modeNumbers(f *cards.Face) map[string]int {
 			out[label] = ModeChoiceQueue
 		}
 	}
+	// A Pump KWChoice$ ("gains your choice of X, Y or Z") is XMage's
+	// GainsChoiceOfAbilitiesEffect: one ChoiceImpl over the candidate
+	// abilities' RULE TEXTS, read from the CHOICE queue by label
+	// (choice_dialog.go). The answer is the keyword's lower-case rule text,
+	// not gorge's KWChoice$ spelling ("Flying" -> "flying", "Rampage:3" ->
+	// "rampage 3"), so it gets its own sentinel.
+	for _, label := range kwChoiceDialogLabels(f) {
+		if _, taken := out[label]; !taken {
+			out[label] = ModeKWChoiceQueue
+		}
+	}
+	// The bespoke-dialog KWChoice$ faces: same queue, XMage's own labels.
+	for _, label := range kwChoiceBespokeLabels(f) {
+		if _, taken := out[label]; !taken {
+			out[label] = ModeKWBespokeChoiceQueue
+		}
+	}
 	for _, sa := range f.Abilities {
 		if sa.API == "Charm" {
-			addCharm(sa.Params["Choices"], sa.Params["ChoiceRestriction"])
+			addCharm(sa.Params["Choices"], sa.Params["ChoiceRestriction"], sa.Params)
 		}
 	}
 	for _, body := range f.SVars {
 		if strings.Contains(body, "Charm") {
 			if c := svarParams(body)["Choices"]; c != "" {
-				addCharm(c, svarParams(body)["ChoiceRestriction"])
+				addCharm(c, svarParams(body)["ChoiceRestriction"], svarParams(body))
 			}
 		}
 	}
@@ -2646,6 +2976,16 @@ func yesNo(d rules.OracleDecision) (string, bool) {
 		// promise a gift" first, so the promise is option 1).
 		return "yes", true
 	case "gift_decline":
+		return "no", true
+	case "endure_counters":
+		// Endure is XMage's chooseUse "Put N +1/+1 counters on
+		// <it> or create a N/N Spirit token?" (EndureSourceEffect.doEndure,
+		// true text "Add counters"); TestPlayer reads only Yes/No for a
+		// text-choice chooseUse ("Use Yes/No in unit tests for text
+		// choices"), so the label strict-missed (Dusyut Earthcarver,
+		// Inspirited Vanguard).
+		return "yes", true
+	case "endure_spirit":
 		return "no", true
 	case "altaddcost", "primary":
 		// An optional additional cost, a gift promise and a two-way
@@ -2901,6 +3241,27 @@ func triggerOrderTextAnswers(d rules.OracleDecision) []XAnswer {
 	return out
 }
 
+// demotedTriggerOrderAnswers is what a distinct-source trigger order demotes
+// to on a step that scripts other asks too: XMage's rule-text keys
+// (xmageTriggerOrderKeys) when the picks key apart, else the inert text form.
+// A key is consumed only by the trigger ask it steers (TestPlayer's
+// chooseTriggeredAbility matches getRule() by prefix) and names no object, so
+// no other makeChoose takes it, which is the reason names are demoted at all.
+// The verbatim text form is not inert in strict mode: the order ask finds no
+// match and stops the replay at "Missing CHOICE def ... Triggered list"
+// (Clement, the Worrywort beside Valley Mightcaller, whose step also scripts
+// Clement's target; Harvestrite Host beside Hinterland Sanctifier).
+func demotedTriggerOrderAnswers(d rules.OracleDecision) []XAnswer {
+	if keys, ok := xmageTriggerOrderKeys(d); ok {
+		out := make([]XAnswer, 0, len(keys))
+		for _, key := range keys {
+			out = append(out, XAnswer{d.Seat, "choice", key})
+		}
+		return out
+	}
+	return triggerOrderTextAnswers(d)
+}
+
 // demoteTriggerOrderSpans rewrites a step's trigger-order name answers back to
 // the inert text form when the step's answer list also carries other asks'
 // answers: a plain name is consumable by any later makeChoose (a target or
@@ -2980,6 +3341,42 @@ func manaColourLabel(label string) (string, bool) {
 	}
 	if strings.HasPrefix(label, "Add ") && len(label) == 5 {
 		return manaColour(label[4])
+	}
+	return "", false
+}
+
+// bareColourLabel maps a bare colour word ("white", any case) to the
+// capitalised colour name XMage's colour chooser shows ("White"). XMage's
+// ChoiceColor keys are the names, while a resolution-time "choose a colour"
+// decision records the picked option's label, which can reach a transcript as
+// the bare word (Midvast Protector's ETB, Sygg, River Guide's protection
+// grant). The gate is the engine's option KIND "color" -- the fixed WUBRG list
+// every colour ask builds -- never the label text, so a card or object named
+// "Red" is an object pick and keeps its label. A transcript written before
+// PickKinds existed falls back to the ChooseColor resume kind, whose option
+// list is the same fixed colour list.
+func bareColourLabel(d rules.OracleDecision, k int) (string, bool) {
+	if k < 0 || k >= len(d.Picks) {
+		return "", false
+	}
+	if k < len(d.PickKinds) && d.PickKinds[k] != "" {
+		if d.PickKinds[k] != "color" {
+			return "", false
+		}
+	} else if d.Resume != "choosecolor" {
+		return "", false
+	}
+	switch strings.ToLower(strings.TrimSpace(d.Picks[k])) {
+	case "white":
+		return "White", true
+	case "blue":
+		return "Blue", true
+	case "black":
+		return "Black", true
+	case "red":
+		return "Red", true
+	case "green":
+		return "Green", true
 	}
 	return "", false
 }
@@ -3346,13 +3743,17 @@ func ExactRefAlias(d rules.OracleDecision, k int) string {
 // JoinedChoice is the one "^"-joined answer XAnswersForScenario scripts for a
 // multi-pick decision that one makeChoose dialog consumes: each pick spelled as
 // XMage's dialog lists it (a same-name object by its exact ref, a mana colour
-// by its colour name). Callers that drop or match that answer use it, so they
-// see the same spelling the scenario carries.
+// by its colour name, a bare colour word by its capitalised colour name).
+// Callers that drop or match that answer use it, so they see the same spelling
+// the scenario carries.
 func JoinedChoice(d rules.OracleDecision) string {
 	labels := make([]string, 0, len(d.Picks))
 	for k, label := range d.Picks {
 		if label == "" && k < len(d.PickRefs) {
 			label = oraclediffRefName(d.PickRefs[k])
+		}
+		if colour, ok := bareColourLabel(d, k); ok {
+			label = colour
 		}
 		label = disambiguatedObjectChoice(d, k, label)
 		if colour, ok := manaColourLabel(label); ok {
@@ -3520,8 +3921,13 @@ func twoPilesPileAnswer(d rules.OracleDecision) string {
 // pickQueue is xmQueue for the k-th pick, except that a search of ANOTHER
 // player's library (Ancient Vendetta's "search target opponent's ... library")
 // reaches XMage's choice queue: only a search of your own library is the
-// TargetCardInLibrary target ask (measured on the std pass).
-func pickQueue(d rules.OracleDecision, k int, label string) string {
+// TargetCardInLibrary target ask (measured on the std pass). bolster marks
+// the decision as a Bolster tie election, whose counter_pick XMage asks
+// through chooseTarget (bolster_pick.go).
+func pickQueue(d rules.OracleDecision, k int, label string, bolster bool) string {
+	if bolster && pickKind(d, k) == "counter_pick" {
+		return "target"
+	}
 	if d.Retarget {
 		// A ChangeTargets redirect (Bolt Bend) is XMage's chooseTarget:
 		// the new target rides the target queue even though gorge poses it

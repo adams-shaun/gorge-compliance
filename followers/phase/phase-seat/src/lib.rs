@@ -1,6 +1,6 @@
 //! phase-seat: phase.rs (github.com/phase-rs/phase, MIT OR Apache-2.0, pinned by `../PHASE_PIN`) as a
 //! SpellBench v2 engine. The protocol layer ([`json`], [`server`], [`semantic`], [`observe`]) does not
-//! link the engine and is tested without it; the game host ([`waiting`], [`view`], [`game`]) is the
+//! link the engine and is tested without it ([`house`] parses `--house-seat`); the game host ([`waiting`], [`view`], [`game`]) is the
 //! `phase` feature (on by default).
 
 pub mod json;
@@ -20,3 +20,5 @@ pub mod game;
 pub mod view;
 #[cfg(feature = "phase")]
 pub mod waiting;
+
+pub mod house;

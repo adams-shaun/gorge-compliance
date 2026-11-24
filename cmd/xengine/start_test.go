@@ -2,12 +2,15 @@ package main
 
 import (
 	"encoding/json"
+	"os"
 	"path/filepath"
 	"slices"
 	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
+	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -151,6 +154,143 @@ func TestStartDeckRefusesFieldBlocked(t *testing.T) {
 		}
 		if _, _, err := startDeck(reg, "start-p0", startSeat{Hand: []string{n}}); err != nil {
 			t.Errorf("%s in hand: %v", n, err)
+		}
+	}
+}
+
+// TestStartSeedBase: seed_base moves where a start file's seed search
+// starts, so a retried key plays new games; absent, the games are those of
+// seed_base 1, as before the field.
+func TestStartSeedBase(t *testing.T) {
+	dir := t.TempDir()
+	write := func(name, extra string) *startFile {
+		t.Helper()
+		p := filepath.Join(dir, name)
+		body := `{"format":"xproof-start-1","card":"Llanowar Elves","key":"f0/a0","players":2,"active":0,` +
+			`"max_turns":1,"setup":{"p0":{"battlefield":["Llanowar Elves"]},"p1":{}},"filler":"basics","seeds":3` + extra + `}`
+		if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+			t.Fatal(err)
+		}
+		f, err := readStartFile(p)
+		if err != nil {
+			t.Fatal(err)
+		}
+		return f
+	}
+	def, one, later := write("a.json", ""), write("b.json", `,"seed_base":1`), write("c.json", `,"seed_base":1000`)
+	d, o, l := def.gameSeeds(), one.gameSeeds(), later.gameSeeds()
+	if !slices.Equal(d, o) {
+		t.Errorf("absent seed_base seeds %v, seed_base 1 seeds %v: want equal", d, o)
+	}
+	if len(d) != 3 || len(l) != 3 {
+		t.Fatalf("seeds %v / %v, want 3 each", d, l)
+	}
+	for i, s := range l {
+		if s < 1000 || (i > 0 && s <= l[i-1]) || rules.SeedForStarter(s, 2, 0) != s {
+			t.Errorf("seed_base 1000 seeds %v: want increasing, >= 1000, each starting seat 0", l)
+		}
+		if slices.Contains(d, s) {
+			t.Errorf("seed_base 1000 replays seed %d of the default %v", s, d)
+		}
+	}
+}
+
+// TestStartCounterBearer: the counters a start seeds follow the ability that
+// reads them. Honest Work enchants a creature an opponent controls (the p1
+// Kobolds of Kher Keep certdeck already places), and Mabel's removal targets
+// another creature or planeswalker; both counter needs are P1P1, not the
+// literal All/Any the followers refuse, and sit on the opponent's creature.
+func TestStartCounterBearer(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, tc := range []struct {
+		card, key string
+		seat      int
+		on        string
+	}{
+		{"Honest Work", "f0/t0", 1, "Kobolds of Kher Keep"},
+		{"Mabel, Bitter Recluse", "f0/t0", 1, "Shifting Wall"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, tc.card, tc.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			seats := [2]scen.StartSeat{res.Start.Setup.P0, res.Start.Setup.P1}
+			counters := seats[tc.seat].Counters
+			if len(counters) != 1 {
+				t.Fatalf("seat %d counters %+v, want one", tc.seat, counters)
+			}
+			got := counters[0]
+			if got.Kind != "P1P1" {
+				t.Errorf("counter kind %q, want P1P1", got.Kind)
+			}
+			if got.Card != tc.on {
+				t.Errorf("counter bearer %q, want %q", got.Card, tc.on)
+			}
+			if !slices.Contains(seats[tc.seat].Battlefield, got.Card) {
+				t.Errorf("counter bearer %q is not on seat %d's battlefield %v", got.Card, tc.seat, seats[tc.seat].Battlefield)
+			}
+			c, ok := reg.Lookup(got.Card)
+			if !ok || len(c.Faces) == 0 || !c.Faces[0].IsCreature() {
+				t.Errorf("counter bearer %q is not a creature", got.Card)
+			}
+			if other := seats[1-tc.seat].Counters; len(other) != 0 {
+				t.Errorf("seat %d counters %+v, want none", 1-tc.seat, other)
+			}
+		})
+	}
+}
+
+// TestStartCounterKindRefused: a start file that names a wildcard counter kind
+// ("All", "Any") is refused at validation, so the class of bug Honest Work
+// exposed cannot come back silently through a hand-written start.
+func TestStartCounterKindRefused(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	for _, kind := range []string{"All", "Any", "", "EachFromSource"} {
+		_, _, err := startDeck(reg, "start-p0", startSeat{
+			Battlefield: []string{"Wall of Stone"},
+			Counters:    []startCounter{{Card: "Wall of Stone", Kind: kind, N: 1}},
+		})
+		if err == nil || !strings.Contains(err.Error(), "is not a counter kind") {
+			t.Errorf("counter kind %q: err %v, want a refusal", kind, err)
+		}
+	}
+	if _, _, err := startDeck(reg, "start-p0", startSeat{
+		Battlefield: []string{"Wall of Stone"},
+		Counters:    []startCounter{{Card: "Wall of Stone", Kind: "P1P1", N: 1}},
+	}); err != nil {
+		t.Errorf("real counter kind refused: %v", err)
+	}
+}
+
+// TestStartFocusTimes: a start file's focus times reaches the game's focus
+// ("your second spell each turn": two casts), and absent it is zero (once).
+func TestStartFocusTimes(t *testing.T) {
+	dir := t.TempDir()
+	for _, tc := range []struct {
+		extra string
+		want  int
+	}{{"", 0}, {`,"times":2`, 2}} {
+		p := filepath.Join(dir, "f.json")
+		body := `{"format":"xproof-start-1","card":"Cori-Steel Cutter","key":"f0/t0","players":2,"active":0,"max_turns":1,` +
+			`"setup":{"p0":{"hand":["Memnite","Memnite"],"battlefield":["Cori-Steel Cutter"]},"p1":{}},"filler":"basics","seeds":1,` +
+			`"focus":{"seat":0,"card":"Memnite","kind":"cast","ability":0` + tc.extra + `}}`
+		if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+			t.Fatal(err)
+		}
+		f, err := readStartFile(p)
+		if err != nil {
+			t.Fatal(err)
+		}
+		fo, err := f.focusOf()
+		if err != nil {
+			t.Fatal(err)
+		}
+		if fo.Times != tc.want || fo.Card != "Memnite" || fo.Kind != "cast" {
+			t.Errorf("focus %+v, want Memnite cast times %d", fo, tc.want)
 		}
 	}
 }

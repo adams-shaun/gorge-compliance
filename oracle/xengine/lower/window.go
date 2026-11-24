@@ -278,21 +278,82 @@ func lowerFrom(reg *cards.Registry, t *game.Tape, c *cut, id string, end int, sp
 	l.markDieRolls(m, wt.Entries[:n])
 	l.markCoinFlips(m, wt.Entries[:n])
 	l.compactPayment()
-	for k, e := range wt.Entries[:n] {
-		if e.RNG > 0 && !rngAccounted(e) {
-			l.HasRNG = true
-			l.RNGStep = len(l.StepEntry)
-			for i, se := range l.StepEntry {
-				if i >= l.Prelude && se >= k {
-					l.RNGStep = i
-					break
-				}
-			}
-			l.Item.Ignore = []string{"library_top"}
-			break
+	limit := n
+	if l.Truncated != "" {
+		limit = min(limit, l.TruncatedAt)
+	}
+	for k, e := range wt.Entries[:limit] {
+		if e.RNG == 0 || rngAccounted(e) {
+			continue
 		}
+		// A window's last entry (and a span's final tape entry) has no after
+		// digest, so a draw there cannot be told from a shuffle: cut it. That
+		// fails safe (the item never carries the unpinned draw), where HasRNG
+		// would have carried it.
+		after, afterOK := game.Digest{}, k+1 < len(wt.Entries)
+		if afterOK {
+			after = wt.Entries[k+1].Digest
+		}
+		if afterOK && rngShuffle(e, after) {
+			if !l.HasRNG {
+				l.HasRNG = true
+				l.RNGStep = l.stepReaching(k)
+				l.Item.Ignore = []string{"library_top"}
+			}
+			continue
+		}
+		// A draw the tape cannot account for that is not a library shuffle:
+		// the runner's seeded RNG would land somewhere else, and the outcome
+		// can be visible on the board (Crystalline Giant's counter kind), not
+		// just in the library order HasRNG leaves out. Cut the window before
+		// the entry so neither a follower nor the self-check is handed it.
+		l.cutEntry(k, &truncation{ReasonRNG})
+		return l, nil
 	}
 	return l, nil
+}
+
+// stepReaching is the first step past the prelude whose StepEntry reaches tape
+// entry k, or len(StepEntry) when no step does.
+func (l *Lowered) stepReaching(k int) int {
+	for i := l.Prelude; i < len(l.StepEntry); i++ {
+		if l.StepEntry[i] >= k {
+			return i
+		}
+	}
+	return len(l.StepEntry)
+}
+
+// cutEntry keeps only the steps before the one carrying tape entry k: that
+// step and every later step go, and so do the group's mana taps (StepEntry -1)
+// that sit immediately before it. The cut is the first tape entry the lowering
+// did not replay.
+func (l *Lowered) cutEntry(k int, why *truncation) {
+	if l.Truncated != "" && l.TruncatedAt <= k {
+		return
+	}
+	at := l.stepReaching(k)
+	for at > l.Prelude && l.StepEntry[at-1] == -1 {
+		at--
+	}
+	l.drop(at)
+	l.stop(l.firstUnlowered(at), why)
+}
+
+// firstUnlowered is the first tape entry no kept step carries out once the
+// steps from at onward are dropped: the entry after the last kept step's last
+// entry, or the window's first lowered entry when no kept gameplay step
+// remains. A step's StepEntry is the last entry of its group (a pass with its
+// asks, or a resolve span), so a draw inside a group stops at the group's
+// first entry: entries from there on are not lowered, and TruncatedAt must
+// name that first entry rather than the draw's own.
+func (l *Lowered) firstUnlowered(at int) int {
+	for i := at - 1; i >= l.Prelude; i-- {
+		if l.StepEntry[i] >= 0 {
+			return l.StepEntry[i] + 1
+		}
+	}
+	return 0
 }
 
 // setupAnswerReasons is why the window's setup drive cannot place the cut: it
@@ -306,9 +367,7 @@ func lowerFrom(reg *cards.Registry, t *game.Tape, c *cut, id string, end int, sp
 // Goblin-town's chapter I discarding the active seat's hand). A probe that
 // cannot run is left to the self-check's own harness verdict.
 func setupAnswerReasons(reg *cards.Registry, it oraclegen.Item) []string {
-	probe := it
-	probe.Steps = nil
-	res, err := rules.RunOracleScenarioJSON(reg, probe.Raw())
+	res, err := rules.RunOracleScenarioJSON(reg, setupProbeRaw(it))
 	if err != nil {
 		return nil
 	}
@@ -325,6 +384,18 @@ func setupAnswerReasons(reg *cards.Registry, it oraclegen.Item) []string {
 		why[reasonSetupAnswer+d.Kind] = true
 	}
 	return sortedKeys(why)
+}
+
+// setupProbeRaw is the runner JSON of the setup-only probe: the item's
+// scenario with no gameplay steps. The recorded die rolls are gameplay rolls
+// on gameplay steps (markDieRolls never records a setup roll), so the probe
+// leaves them out: gorge's runner rejects a roll whose step is outside the
+// probe's zero-step range, and the guard would then be silently skipped.
+func setupProbeRaw(it oraclegen.Item) []byte {
+	probe := it
+	probe.Steps = nil
+	probe.DieRolls = nil
+	return probe.Raw()
 }
 
 // CheckWindow is SelfCheck for a window, against its own tape.

@@ -11,7 +11,6 @@
 package xprep
 
 import (
-	"encoding/json"
 	"fmt"
 	"reflect"
 	"regexp"
@@ -131,11 +130,12 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 		return it, refuse(it.ID, ReasonNoXMageCard, "%s", strings.Join(bad, "; "))
 	}
 	sc, castSteps := oraclegen.ChooseTargets(it.Scenario, g.Decisions)
-	if why := sameOutcome(reg, sc, g); why != "" {
+	if why := sameOutcome(reg, it, sc, g); why != "" {
 		return it, refuse(it.ID, ReasonRetarget, "%s", why)
 	}
 	it.Scenario = sc
 	g.Decisions = oraclegen.RetimeEntryTargets(sc.Steps, g.Snapshots, keepTokenLooks(playStepUnlessPays(sc.Steps, g.Decisions)))
+	g.Decisions = append(g.Decisions, pendingResolutionDecisions(reg, it, sc, g)...)
 	it.XAnswers = oraclegen.XAnswersForScenario(reg, g, sc, modes, castSteps)
 	if len(it.XAnswers) == 0 {
 		// Nothing to script: still one (empty) entry per step, as the
@@ -224,6 +224,76 @@ func addDieRollAnswers(answers [][]oraclegen.XAnswer, rolls []oraclegen.DieRoll,
 	return answers
 }
 
+// pendingResolutionDecisions returns the decisions a stack object poses when
+// it resolves only after the window's last checkpoint. A lowered window cut
+// after the pass that hands priority away leaves a spell (or an ability) on
+// the stack, so gorge's own result holds no decision for the enters trigger
+// that resolution puts on the stack; XMage runs on to the stop boundary and
+// asks it with nothing scripted ("Missing TARGET def", Disruptive Stormbrood's
+// "destroy up to one target artifact or enchantment"). The completion replays
+// the same scenario one priority round further through gorge's own runner and
+// retimes the asks it poses onto the window's last step, where the driver
+// still holds its queue. Nothing is guessed: an unwindowed resolution that
+// asks nothing adds nothing, and a continuation that fails leaves the old
+// strict miss in place rather than inventing an answer.
+func pendingResolutionDecisions(reg *cards.Registry, it oraclegen.Item, sc oraclegen.Scenario, g rules.OracleResult) []rules.OracleDecision {
+	if len(sc.Steps) == 0 || len(g.Snapshots) != len(sc.Steps)+1 {
+		return nil
+	}
+	last := len(sc.Steps) - 1
+	if sc.Steps[last].Op != "pass" || len(g.Snapshots[last+1].Stack) == 0 {
+		return nil
+	}
+	players := len(g.Snapshots[last+1].Players)
+	if players < 2 {
+		players = 2
+	}
+	steps := slices.Clone(sc.Steps)
+	seat := sc.Steps[last].Seat
+	for pass := 0; pass < players; pass++ {
+		seat = (seat + 1) % players
+		steps = append(steps, oraclegen.Step{Op: "pass", Seat: seat})
+		probe := sc
+		probe.Steps = steps
+		res, err := rules.RunOracleScenarioJSON(reg, it.RawScenario(probe))
+		if err != nil || len(res.Fails) > 0 || len(res.Snapshots) != len(steps)+1 {
+			return nil
+		}
+		// The pass moved the game on instead of resolving an object at the
+		// cut's own step: the driver's stop boundary is already past it, so a
+		// later step's trigger is not this window's ask.
+		after := res.Snapshots[len(res.Snapshots)-1]
+		if after.Turn != g.Snapshots[last+1].Turn || after.Step != g.Snapshots[last+1].Step {
+			return nil
+		}
+		var span []rules.OracleDecision
+		for _, d := range res.Decisions {
+			if d.Step >= len(sc.Steps) {
+				span = append(span, d)
+			}
+		}
+		if len(span) > 0 {
+			for _, d := range span {
+				if d.Kind == "mode" {
+					// A modal enters trigger's CR 603.3c mode choice is
+					// completeModalTrigger's: it also corrects a surveil look's
+					// queue, and its span carries the targets that follow. Leave
+					// that path alone instead of racing it with a mode answer.
+					return nil
+				}
+			}
+			for i := range span {
+				span[i].Step = last
+			}
+			return span
+		}
+		if len(after.Stack) == 0 {
+			return nil
+		}
+	}
+	return nil
+}
+
 // completeModalTrigger scripts the CR 603.3c mode choice of a modal enters
 // trigger whose resolution falls after the item's last checkpoint (and the
 // target, arrange and choice asks that mode opens). A lowered window cut at
@@ -300,11 +370,7 @@ func completeModalTrigger(reg *cards.Registry, it *oraclegen.Item, sc oraclegen.
 	probe.Steps = append(slices.Clone(sc.Steps), oraclegen.Step{
 		Op: "pass_to", Step: next, Active: fmt.Sprintf("p%d", g.Snapshots[len(g.Snapshots)-1].Active),
 	})
-	raw, err := json.Marshal(probe)
-	if err != nil {
-		return refuse(it.ID, ReasonModalTrigger, "%s: %v", p.card, err)
-	}
-	res, err := rules.RunOracleScenarioJSON(reg, raw)
+	res, err := rules.RunOracleScenarioJSON(reg, it.RawScenario(probe))
 	if err != nil {
 		return refuse(it.ID, ReasonModalTrigger, "%s: gorge could not continue the window: %v", p.card, err)
 	}
@@ -354,7 +420,16 @@ func completeModalTrigger(reg *cards.Registry, it *oraclegen.Item, sc oraclegen.
 	for j := range span {
 		span[j].Step = last
 	}
-	add := oraclegen.XAnswers(span, len(sc.Steps), pm)[last]
+	// The span's decisions are retimed onto the window's last step so their
+	// answers lead it, but the checkpoint that proves a top library placement
+	// still belongs to the continuation step (len(sc.Steps)). Reindex that
+	// one snapshot onto the retimed step; without it the router would have no
+	// destination evidence and would not reverse a top arrange.
+	spanSnaps := make([]rules.OracleSnapshot, len(sc.Steps)+1)
+	if after := len(sc.Steps) + 1; after < len(res.Snapshots) {
+		spanSnaps[last+1] = res.Snapshots[after]
+	}
+	add := oraclegen.XAnswersWithSnapshots(span, len(sc.Steps), pm, spanSnaps)[last]
 	if len(add) == 0 || add[0].Kind != "mode" {
 		return refuse(it.ID, ReasonModalTrigger, "%s: gorge's continuation decided no mode for the trigger", p.card)
 	}
@@ -544,11 +619,10 @@ func stepAfterPass(step string) (string, bool) {
 
 // playStepUnlessPays rewrites the paid as-enters "unless you pay" decision of a
 // land's play step to the yes/no shape XMage's TapSourceUnlessPaysEffect asks.
-// Gorge records it as a two-option mode decision, so the generic router emits a
-// numeric mode answer; the driver puts that on the MODE queue while the
-// as-enters ask reads the CHOICE queue (strict miss "Missing CHOICE def"). A
-// paid pass-step unless cost keeps its numeric mode answer, and a decline stays
-// a mode decision the generic router already scripts "choice no" for.
+// Gorge records it as a two-option mode decision; the generic router now emits
+// the boolean yes for every paid unless cost too, but this rewrite keeps the
+// play-step shape named locally and answers it the same way (a decline is
+// already "choice no" from the generic router).
 func playStepUnlessPays(steps []oraclegen.Step, ds []rules.OracleDecision) []rules.OracleDecision {
 	out := append([]rules.OracleDecision(nil), ds...)
 	for i := range out {
@@ -657,14 +731,19 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 	// run is the passes in succession on the current stack: every seat passing
 	// one after another resolves its top object (CR 117.4), which no snapshot
 	// diff can show when the resolution's own trigger stands in its place.
-	run := 0
+	// round is every pass in a row since the last action, step entry or
+	// resolution: only a full round of those passes can end a step (CR 117.4),
+	// and the pass that completes it need not be the non-active seat's when an
+	// action split the round.
+	run, round := 0, 0
 	for i, st := range steps {
 		if st.Op != "pass" {
 			out = append(out, nil)
-			run = 0
+			run, round = 0, 0
 			continue
 		}
 		any = true
+		round++
 		before, after := snaps[i], snaps[i+1]
 		moved := before.Turn != after.Turn || before.Step != after.Step
 		resolves := stackLost(before.Stack, after.Stack)
@@ -681,19 +760,30 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 		case moved:
 			inFirst = after.Step == stepCombatDamage && firstStrikerInCombat(before)
 		case inFirst:
-			// The non-active seat's pass on an empty stack ends the first
-			// damage step. Priority is not read here: the regular damage step
-			// can pause on a damage-division ask, an as-unblocked election or
-			// a state-based-action decision before priority is given, so the
-			// checkpoint still shows the passer holding it.
-			if len(before.Stack) == 0 && st.Seat != before.Active {
+			// The pass that completes the round on an empty stack ends the
+			// first damage step (CR 117.4): a mana ability between the passes
+			// only hands priority back, and the round's last pass can then be
+			// the active seat's. Priority is not read here: the regular damage
+			// step can pause on a damage-division ask, an as-unblocked
+			// election or a state-based-action decision before priority is
+			// given, so the checkpoint still shows the passer holding it.
+			if len(before.Stack) == 0 && round >= max(len(before.Players), 2) {
 				inFirst, moved = false, true
 			}
-		case newStepInstance(st, before, after):
+		case newStepInstance(before, after, round):
 			// The step name did not change, but the pass ended one step and
 			// began an additional one of the same name (CR 500.9), such as an
 			// extra end step.
 			moved = true
+		}
+		// A pass that entered a new step -- a turn or step change, the end of
+		// the first damage step, or an additional same-named step -- or
+		// resolved an object starts the next round: the new step gives
+		// priority to the active seat, and a resolution hands it back (CR
+		// 117.4). Without this reset, a normal round that ended one step would
+		// leave its passes counted in the next one.
+		if moved || resolves {
+			round = 0
 		}
 		step := after.Step
 		if inFirst {
@@ -711,17 +801,22 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 	return out
 }
 
-// newStepInstance is whether pass st, which left the turn and step name alone,
-// still ended the step (both seats passed in succession with an empty stack,
-// CR 500.2) and began a new step of the same name. The seat passing was not the
-// active one, so it was the last to pass, and priority is back with the active
-// seat as a fresh step gives it (CR 117.3a). A pass that merely hands priority
-// on leaves it with another seat, and a pass over a non-empty stack resolves
-// the top object (CR 117.4) and is the stack's business, not the step's.
-func newStepInstance(st oraclegen.Step, before, after rules.OracleSnapshot) bool {
-	return len(before.Stack) == 0 && !after.Over &&
+// newStepInstance is whether a pass that left the turn and step name alone
+// still ended the step and began a new step of the same name. Ending a step
+// needs a full round of passes with no action in between (CR 117.4), so round
+// counts the passes since the last action, step entry or resolution; a pass
+// that follows another player's action -- a mana ability while holding
+// priority, say -- only hands priority on and leaves the game in the same step
+// instance. The round's last pass is not assumed to be the non-active seat's:
+// an action can leave it with the active seat, which is still the last to pass
+// (the split pair's active pass). A pass over a non-empty stack resolves the
+// top object (CR 117.4) and is the stack's business, not the step's; a fresh
+// step gives priority to the active seat (CR 117.3a).
+func newStepInstance(before, after rules.OracleSnapshot, round int) bool {
+	return round >= max(len(before.Players), 2) &&
+		len(before.Stack) == 0 && !after.Over &&
 		before.Turn == after.Turn && before.Step == after.Step &&
-		st.Seat != before.Active && after.Priority == after.Active
+		after.Priority == after.Active
 }
 
 // stepCombatDamage is gorge's name for the combat damage step.
@@ -757,14 +852,10 @@ func stackLost(before, after []rules.OracleSnapStack) bool {
 	return false
 }
 
-// sameOutcome is "" when gorge's runner, given sc, ends in the snapshots g
-// holds, else what differs.
-func sameOutcome(reg *cards.Registry, sc oraclegen.Scenario, g rules.OracleResult) string {
-	b, err := json.Marshal(sc)
-	if err != nil {
-		return err.Error()
-	}
-	res, err := rules.RunOracleScenarioJSON(reg, b)
+// sameOutcome is "" when gorge's runner, given sc and the item's recorded die
+// rolls, ends in the snapshots g holds, else what differs.
+func sameOutcome(reg *cards.Registry, it oraclegen.Item, sc oraclegen.Scenario, g rules.OracleResult) string {
+	res, err := rules.RunOracleScenarioJSON(reg, it.RawScenario(sc))
 	switch {
 	case err != nil:
 		return "rerun: " + err.Error()
@@ -935,6 +1026,15 @@ func modeNumbers(reg *cards.Registry, it oraclegen.Item, ds []rules.OracleDecisi
 			}
 			sort.Strings(labels)
 			for _, k := range labels {
+				if oraclegen.IsPrintedMaxKey(k) {
+					// A printed maximum is not a mode number: two cards that
+					// share a label may print different maxima, and the first
+					// owner's stays (a stepped card is added before bystanders).
+					if _, seen := into[k]; !seen {
+						into[k] = m[k]
+					}
+					continue
+				}
 				if prev, seen := into[k]; seen && prev != m[k] {
 					return fmt.Sprintf("mode %q is %d on %s and %d on %s", k, prev, who[k], m[k], n), false
 				}
@@ -1016,8 +1116,8 @@ func modeNumbers(reg *cards.Registry, it oraclegen.Item, ds []rules.OracleDecisi
 }
 
 // prefixes is Item.XAbility: parallel to the steps, the XMage rule-text prefix
-// of every activate step's ability and of a cast step that is the Plot special
-// action, and "" elsewhere (nil when no step carries one). An activate step
+// of every activate step's ability and of a cast step that is the Plot,
+// Suspend or Foretell special action, and "" elsewhere (nil when no step carries one). An activate step
 // whose prefix is unknown is a Refusal.
 //
 // A granted/gained/keyword-granted step is resolved through the same
@@ -1048,6 +1148,45 @@ func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]s
 			if c, face, ok := stepCard(reg, it, st); ok {
 				if cost, ok := c.Faces[face].KeywordCostParam("Plot"); ok && cost != "" {
 					out[i] = "Plot " + xmageManaText(cost)
+				}
+			}
+			continue
+		}
+		// Suspend from hand is the same shape (CR 702.62a, 116.2f): gorge
+		// records the special action as a cast step with cast_mode "suspend"
+		// and XMage replays it as the SuspendAbility special action, selected
+		// by its rule-text prefix "Suspend N" (the time-counter count the
+		// Forge keyword K:Suspend:<N>:<cost> leads with, or "X"). XMage's own
+		// SuspendTest selects it by that prefix; the driver scopes the pick
+		// to the step's card.
+		if st.Op == "cast" && strings.EqualFold(st.CastMode, "suspend") {
+			if out == nil {
+				out = make([]string, len(it.Steps))
+			}
+			out[i] = "Suspend"
+			if c, face, ok := stepCard(reg, it, st); ok {
+				if param, ok := c.Faces[face].KeywordParam("Suspend"); ok {
+					if n, _, _ := strings.Cut(param, ":"); strings.TrimSpace(n) != "" {
+						out[i] = "Suspend " + strings.TrimSpace(n)
+					}
+				}
+			}
+			continue
+		}
+		// Foretell from hand is the same shape (CR 702.143a, 116.2h): a cast
+		// step with cast_mode "foretell", replayed as XMage's ForetellAbility
+		// special action, whose rule text leads "Foretell {cost}" (the Forge
+		// K:Foretell:<cost> keyword gives the cost). A face without one falls
+		// back to the bare "Foretell" prefix, which the driver scopes to the
+		// step's card.
+		if st.Op == "cast" && strings.EqualFold(st.CastMode, "foretell") {
+			if out == nil {
+				out = make([]string, len(it.Steps))
+			}
+			out[i] = "Foretell"
+			if c, face, ok := stepCard(reg, it, st); ok {
+				if cost, ok := c.Faces[face].KeywordCostParam("Foretell"); ok && cost != "" {
+					out[i] = "Foretell " + xmageManaText(cost)
 				}
 			}
 			continue

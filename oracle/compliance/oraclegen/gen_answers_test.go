@@ -57,10 +57,13 @@ func TestXAnswersQueueRoutingShapes(t *testing.T) {
 			want: []XAnswer{{0, "choice", "Swamp"}, {0, "choice", "Plains"}, {0, "choice", "Island"}},
 		},
 		{
-			// The all-to-bottom Dig remainder keeps gorge's answer order.
-			name: "arrange dig bottom remainder: picks in order",
+			// The all-to-bottom Dig remainder keeps gorge's answer order, but
+			// XMage's bottom loop asks N-1 times and places the last card
+			// unasked (xproof: Growing Rites of Itlimoc's fourth "Forest"
+			// was left over), so the last pick is not scripted.
+			name: "arrange dig bottom remainder: picks in order but the last",
 			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "order", GorgeKind: "arrange", Resume: "dig_arrange", ArrangeKind: "dig_bottom", Options: 4, Min: 4, Max: 4, Picks: []string{"Forest", "Island", "Plains", "Swamp"}, PickIdx: []int{0, 1, 2, 3}, PickKinds: []string{"dig_bottom", "dig_bottom", "dig_bottom", "dig_bottom"}},
-			want: []XAnswer{{0, "choice", "Forest"}, {0, "choice", "Island"}, {0, "choice", "Plains"}, {0, "choice", "Swamp"}},
+			want: []XAnswer{{0, "choice", "Forest"}, {0, "choice", "Island"}, {0, "choice", "Plains"}},
 		},
 		{
 			// One card: XMage's loop runs while cards.size() > 1, so it asks nothing.
@@ -239,6 +242,28 @@ func TestXAnswersQueueRoutingShapes(t *testing.T) {
 			want: []XAnswer{{0, "choice", "White"}},
 		},
 		{
+			// A resolution-time "choose a colour" (Midvast Protector's ETB,
+			// Sygg, River Guide's protection grant) records the pick as the
+			// bare word; XMage's ChoiceColor key is the capitalised NAME.
+			name: "choose a color: white maps to White",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "choosecolor", Options: 5, Max: 1, Picks: []string{"white"}, PickRefs: []string{"white"}, PickIdx: []int{0}, PickKinds: []string{"color"}, First: "white"},
+			want: []XAnswer{{0, "choice", "White"}},
+		},
+		{
+			// A transcript written before PickKinds existed identifies the
+			// same ask by its ChooseColor resume kind.
+			name: "legacy choose a color: white maps to White",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "choosecolor", Options: 5, Max: 1, Picks: []string{"white"}, PickRefs: []string{"white"}, PickIdx: []int{0}, First: "white"},
+			want: []XAnswer{{0, "choice", "White"}},
+		},
+		{
+			// The rewrite is gated on the option KIND, not the word: an object
+			// whose name happens to be a colour word keeps its label.
+			name: "object named Red is not a colour choice",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Options: 2, Max: 1, Picks: []string{"Red"}, PickRefs: []string{"p0:Red"}, OptionRefs: []string{"p0:Red"}, PickIdx: []int{0}, PickKinds: []string{"card"}},
+			want: []XAnswer{{0, "choice", "Red"}},
+		},
+		{
 			// A cast-fallback mana TAP is paid from the pool, not asked.
 			name: "mana tap cost: skipped as payment()",
 			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Options: 2, Max: 1, Picks: []string{"Pay 3 life"}, PickRefs: []string{"Pay 3 life"}, PickIdx: []int{0}, PickKinds: []string{"mana"}},
@@ -307,12 +332,23 @@ func TestXAnswersQueueRoutingShapes(t *testing.T) {
 // TestYesNoRequiresAnEngineBoolean proves yesNo accepts the engine's own
 // boolean kinds (yes/no) and the measured chooseUse families (optional
 // additional cost, gift, primary), and rejects every other labelled pick --
-// an endure or activation choice is a real makeChoose (measured: Dusyut
-// Earthcarver, Phantom Interference agree only with the label).
+// an activation choice is a real makeChoose (measured: Phantom Interference
+// agrees only with the label). Endure is XMage's text-choice chooseUse, which
+// TestPlayer answers only with Yes/No (xproof strict replay of Dusyut
+// Earthcarver: "Use Yes/No in unit tests for text choices"): counters are
+// yes, the Spirit no.
 func TestYesNoRequiresAnEngineBoolean(t *testing.T) {
 	valid := rules.OracleDecision{Options: 2, Picks: []string{"Yes"}, PickRefs: []string{"Yes"}, PickIdx: []int{0}, PickKinds: []string{"yes"}}
 	if got, ok := yesNo(valid); !ok || got != "yes" {
 		t.Fatalf("yesNo(exact yes) = %q, %v; want yes", got, ok)
+	}
+	counters := rules.OracleDecision{Options: 2, Picks: []string{"Put +1/+1 counters on it"}, PickRefs: []string{"p0:Dusyut Earthcarver"}, PickIdx: []int{0}, PickKinds: []string{"endure_counters"}}
+	if got, ok := yesNo(counters); !ok || got != "yes" {
+		t.Fatalf("yesNo(endure counters) = %q, %v; want yes", got, ok)
+	}
+	spirit := rules.OracleDecision{Options: 2, Picks: []string{"Create a Spirit"}, PickRefs: []string{"p0:Dusyut Earthcarver"}, PickIdx: []int{1}, PickKinds: []string{"endure_spirit"}}
+	if got, ok := yesNo(spirit); !ok || got != "no" {
+		t.Fatalf("yesNo(endure spirit) = %q, %v; want no", got, ok)
 	}
 	for name, d := range map[string]rules.OracleDecision{
 		"card type":     {Options: 2, Picks: []string{"Artifact"}, PickRefs: []string{"Artifact"}, PickIdx: []int{0}, PickKinds: []string{"type"}},
@@ -320,7 +356,6 @@ func TestYesNoRequiresAnEngineBoolean(t *testing.T) {
 		"empty label":   {Options: 2, Picks: []string{""}, PickRefs: []string{"p0:Wastes#27"}, PickIdx: []int{0}, PickKinds: []string{"card"}},
 		"legacy label":  {Options: 2, Picks: []string{"Yes — discard"}, PickRefs: []string{"Yes — discard"}, PickIdx: []int{0}},
 		"activate":      {Options: 2, Picks: []string{"Activate Llanowar Elves for mana"}, PickRefs: []string{"p0:Llanowar Elves"}, PickIdx: []int{0}, PickKinds: []string{"activate"}},
-		"endure":        {Options: 2, Picks: []string{"Put +1/+1 counters on it"}, PickRefs: []string{"p0:Dusyut Earthcarver"}, PickIdx: []int{0}, PickKinds: []string{"endure_counters"}},
 		"three options": {Options: 3, Picks: []string{"Yes"}, PickRefs: []string{"Yes"}, PickIdx: []int{0}, PickKinds: []string{"yes"}},
 		"two picks":     {Options: 2, Picks: []string{"Yes", "No"}, PickRefs: []string{"Yes", "No"}, PickIdx: []int{0, 1}, PickKinds: []string{"yes", "no"}},
 	} {
@@ -457,5 +492,48 @@ func TestNamedOpponentSearchUsesChoiceQueue(t *testing.T) {
 	want := [][]XAnswer{{{0, "choice", "Wastes"}, {0, "choice", "Wastes"}, {0, "choice", "[choice_skip]"}}}
 	if got := XAnswers(ds, 1, nil); !reflect.DeepEqual(got, want) {
 		t.Fatalf("XAnswers = %#v, want %#v", got, want)
+	}
+}
+
+// TestLoneNamePickIsScripted: a gameplay "choose a card name" ask whose
+// deck-scoped name universe left one option is still XMage's full card-name
+// dialog (CR 201.3 allows any name), so it is scripted as a choice answer and
+// never folded as a forced one-option ask. Cabal Therapy asks mid-resolution
+// (Resume "name"); Phyrexian Revoker asks as it enters (Resume "etb"), not as
+// a setup choice.
+func TestLoneNamePickIsScripted(t *testing.T) {
+	cases := []struct {
+		name string
+		d    rules.OracleDecision
+	}{
+		{
+			name: "Cabal Therapy resolution",
+			d: rules.OracleDecision{
+				Step: 4, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "name",
+				Options: 1, Min: 1, Max: 1,
+				Picks: []string{"Cabal Therapy"}, PickIdx: []int{0}, PickKinds: []string{"name"},
+			},
+		},
+		{
+			name: "Phyrexian Revoker enters",
+			d: rules.OracleDecision{
+				Step: 2, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "etb",
+				Options: 1, Min: 1, Max: 1,
+				Picks: []string{"Phyrexian Revoker"}, PickIdx: []int{0}, PickKinds: []string{"name"},
+			},
+		},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			if forcedSingleOption(c.d) {
+				t.Fatalf("forcedSingleOption(%+v) = true; a card-name dialog is always posed", c.d)
+			}
+			want := make([][]XAnswer, c.d.Step+1)
+			want[c.d.Step] = []XAnswer{{Seat: c.d.Seat, Kind: "choice", Value: c.d.Picks[0]}}
+			got := XAnswers([]rules.OracleDecision{c.d}, c.d.Step+1, nil)
+			if !reflect.DeepEqual(got, want) {
+				t.Fatalf("XAnswers = %#v, want %#v", got, want)
+			}
+		})
 	}
 }

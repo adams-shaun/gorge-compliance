@@ -15,15 +15,18 @@ const StartFormat = "xproof-start-1"
 // -start` plays on from, with one focus seat taking the action that exercises
 // the owed key.
 type StartFile struct {
-	Format   string      `json:"format"`
-	Card     string      `json:"card"`
-	Key      string      `json:"key"`
-	Players  int         `json:"players"`
-	Active   int         `json:"active"`
-	MaxTurns int         `json:"max_turns"`
-	Setup    StartSetup  `json:"setup"`
-	Filler   string      `json:"filler"`
-	Seeds    int         `json:"seeds"`
+	Format   string     `json:"format"`
+	Card     string     `json:"card"`
+	Key      string     `json:"key"`
+	Players  int        `json:"players"`
+	Active   int        `json:"active"`
+	MaxTurns int        `json:"max_turns"`
+	Setup    StartSetup `json:"setup"`
+	Filler   string     `json:"filler"`
+	Seeds    int        `json:"seeds"`
+	// SeedBase is where `xengine play -start` starts its seed search (0 or
+	// absent: 1): a retried key sets it to play new games.
+	SeedBase uint64      `json:"seed_base,omitempty"`
 	Focus    *StartFocus `json:"focus,omitempty"`
 }
 
@@ -59,6 +62,12 @@ type StartFocus struct {
 	Card    string `json:"card,omitempty"`
 	Kind    string `json:"kind,omitempty"`
 	Ability int    `json:"ability"`
+	// Mode, for a cast focus, is the cast option's payment kind ("kicked"):
+	// a key reading "if it was kicked" is reached by the kicked cast itself.
+	Mode string `json:"mode,omitempty"`
+	// Times is how many times the focus takes its action (0 or absent: once):
+	// "whenever you cast your second spell each turn" is two casts.
+	Times int `json:"times,omitempty"`
 }
 
 // Marshal is the file's bytes: indented JSON and a final newline.

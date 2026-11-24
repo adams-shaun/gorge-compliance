@@ -29,9 +29,8 @@ const (
 
 // Options tunes Generate.
 type Options struct {
-	Prefer     string          // "auto" (default) or "start"
-	Set        string          // names ids; default "SCEN"
-	PhaseLacks map[string]bool // cards phase.rs refuses; nil = unknown (treated as lacking)
+	Prefer string // "auto" (default) or "start"
+	Set    string // names ids; default "SCEN"
 }
 
 // Result is what Generate built: exactly one of Steps, Start or a Reason.
@@ -47,8 +46,15 @@ func refuse(reason string) (Result, error) { return Result{Path: PathRefused, Re
 var keyRE = regexp.MustCompile(`^f(\d+)/([at])(\d+)$`)
 
 // historyTokens are the parameter values placement cannot fake: the game state
-// they read is history, not position.
-var historyTokens = []string{"kicked", "castfrom", "wascast", "thisturnentered", "enteredthisturn"}
+// they read is history, not position. Earlier entries win (historyToken), so a
+// narrower cast history (cast from a zone, cast web-slinging) is named before
+// the plain "wascast" it contains.
+var historyTokens = []string{"kicked", "castfrom", "websling", "wascast", "thisturnentered", "enteredthisturn"}
+
+// castHistory are the history tokens the start's own line produces: the focus
+// casting the card itself from hand makes it "cast" (wascast, wasCastByYou),
+// and casting it kicked makes it "kicked" (recipe checks the focus is that cast).
+var castHistory = map[string]bool{"wascast": true, "kicked": true}
 
 // Keys is every key Generate accepts for c: cov.Keys plus the level-B
 // static and combat requirement keys.
@@ -109,11 +115,10 @@ func Generate(reg *cards.Registry, b *certdeck.Builder, card, key string, opt Op
 	if !known {
 		return Result{}, fmt.Errorf("scen: %q has no key %q", card, key)
 	}
-	// Not sent: Forge alone is weak evidence for gorge, which shares Forge's
-	// scripts, so a card XMage does not list needs phase.rs to vouch for it.
-	if !b.Sp.Lists(reg, card) && (opt.PhaseLacks == nil || opt.PhaseLacks[card]) {
-		return refuse("not-sent")
-	}
+	// A card XMage does not list is still generated: Forge is the reference
+	// oracle (operator 11-24), the XMage leg marks the item not_sent, and
+	// keyproof credits a Forge agreement with XMage silent (refs F). Refusing
+	// it here owed about a fifth of every xproof cycle's keys.
 	fam := Family(key)
 	m := keyRE.FindStringSubmatch(key)
 	var face *cards.Face
@@ -141,15 +146,16 @@ func Generate(reg *cards.Registry, b *certdeck.Builder, card, key string, opt Op
 			params = trig.Params
 		}
 	}
-	if tok := historyToken(params); tok != "" {
-		return refuse("history:" + tok)
+	hist := historyToken(params)
+	if hist != "" && !castHistory[hist] {
+		return refuse("history:" + hist)
 	}
-	if opt.Prefer == "auto" {
+	if opt.Prefer == "auto" && hist == "" {
 		if it, ok := steps(reg, b, c, card, key, m, opt); ok {
 			return Result{Path: PathSteps, Steps: it}, nil
 		}
 	}
-	return recipe(reg, b, c, card, key, fam, m, sa, trig, opt)
+	return recipe(reg, b, c, card, key, fam, m, sa, trig, hist, opt)
 }
 
 func historyToken(params map[string]string) string {
