@@ -49,17 +49,27 @@ func TestGroupsDependOnShuffle(t *testing.T) {
 	cast := func(ref string) []game.Entry {
 		return []game.Entry{{Kind: "priority", Picks: []game.Pick{{Kind: "cast", Ref: ref}}}}
 	}
-	if groupsDependOnShuffle(play("p0:Island#2"), held, nil) {
+	if groupsDependOnShuffle(play("p0:Island#2"), held, nil, false) {
 		t.Error("a card the seat held at the shuffle was cut")
 	}
-	if !groupsDependOnShuffle(play("p0:Island#2"), empty, nil) {
+	if !groupsDependOnShuffle(play("p0:Island#2"), empty, nil, false) {
 		t.Error("a card drawn after the shuffle was not cut")
 	}
-	if groupsDependOnShuffle(cast("p0:Forest"), empty, map[string]bool{"Forest": true}) {
+	if groupsDependOnShuffle(cast("p0:Forest"), empty, map[string]bool{"Forest": true}, false) {
 		t.Error("a card the shuffling resolution fetched was cut")
 	}
 	// A pass names no card and cannot depend on the shuffle.
-	if groupsDependOnShuffle([]game.Entry{{Kind: "priority", Picks: []game.Pick{{Kind: "pass"}}}}, empty, nil) {
+	if groupsDependOnShuffle([]game.Entry{{Kind: "priority", Picks: []game.Pick{{Kind: "pass"}}}}, empty, nil, false) {
 		t.Error("a pass was treated as a shuffled card ref")
+	}
+	// A shuffle that also moves the hand and graveyard (Weftwalking) can move
+	// a card the seat held, so held is not a safe spelling then.
+	if !groupsDependOnShuffle(play("p0:Island#2"), held, nil, true) {
+		t.Error("a held card was not cut after a zone-moving shuffle")
+	}
+	// The resolution's own fetch is still safe: it moved the card before the
+	// shuffle.
+	if groupsDependOnShuffle(cast("p0:Forest"), empty, map[string]bool{"Forest": true}, true) {
+		t.Error("a card the shuffling resolution fetched was cut after a zone-moving shuffle")
 	}
 }

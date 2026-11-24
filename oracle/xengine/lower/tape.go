@@ -254,6 +254,11 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 	// resolution fetched, is still there.
 	var shuffleZone *game.Digest
 	shuffleMoved := map[string]bool{}
+	// shuffleZones is true when the shuffle also moves cards into the library
+	// (Weftwalking: "shuffle your hand and graveyard into your library"), so a
+	// card the seat held beforehand is not safe either: the live game shuffled
+	// it away and every redraw is the runner's own.
+	shuffleZones := false
 	// passes is the live game's consecutive priority passes since its last
 	// reset, which the digest does not carry: a resolution, a step advance or
 	// any other priority action resets it to zero. -1 means a resolve step hid
@@ -292,12 +297,13 @@ func (l *Lowered) lowerEntries(reg *cards.Registry, m seatMap, entries []game.En
 		// (Weftwalking: "play p0:Island#34 not offered" while seven Play Island
 		// options were offered). Cutting here keeps every emitted step
 		// replayable and lets the followers use the prefix.
-		if shuffleZone != nil && groupsDependOnShuffle(entries[i:j], *shuffleZone, shuffleMoved) {
+		if shuffleZone != nil && groupsDependOnShuffle(entries[i:j], *shuffleZone, shuffleMoved, shuffleZones) {
 			l.refuse(i, unsupported("shuffled_ref"), owedAt, owedSteps)
 			return
 		}
 		if d, moved, ok := groupShuffle(entries[i:j]); ok {
 			shuffleZone, shuffleMoved = &d, moved
+			shuffleZones = zoneMovingShuffle(reg, entries, j)
 		}
 		if len(owed) == 0 && len(steps) > 0 && quiet(entries[i:j]) {
 			if isPaidStep(steps[len(steps)-1].Op) {
@@ -899,12 +905,13 @@ func groupShuffle(g []game.Entry) (game.Digest, map[string]bool, bool) {
 }
 
 // groupsDependOnShuffle reports a group whose play or cast names a card the
-// shuffle could have drawn from the shuffled library into hand. A card the
-// seat already held at the shuffle, or one this resolution moved (a search
-// puts the fetched card into hand before it shuffles), is still there in the
-// runner; a card drawn after the shuffle is the runner's own draw (CR
-// 701.24a), so the live object it names may not be in hand.
-func groupsDependOnShuffle(g []game.Entry, before game.Digest, moved map[string]bool) bool {
+// shuffle could have moved into hand. A card the seat already held at a pure
+// library shuffle, or one this resolution moved (a search puts the fetched
+// card into hand before it shuffles), is still there in the runner; a card
+// drawn after the shuffle is the runner's own draw (CR 701.24a), so the live
+// object it names may not be in hand. zones says the shuffle also moved the
+// hand/graveyard into the library, which invalidates every held card.
+func groupsDependOnShuffle(g []game.Entry, before game.Digest, moved map[string]bool, zones bool) bool {
 	if len(g) == 0 {
 		return false
 	}
@@ -913,8 +920,41 @@ func groupsDependOnShuffle(g []game.Entry, before game.Digest, moved map[string]
 			continue
 		}
 		seat, name := refSeatName(p.Ref)
-		if name == "" || !seatHeld(before, seat, name) && !moved[name] {
+		if name == "" || !moved[name] && (zones || !seatHeld(before, seat, name)) {
 			return true
+		}
+	}
+	return false
+}
+
+// zoneMovingShuffle reports whether a trigger recorded up to entry j shuffles
+// cards from a non-library zone into its owner's library, so the shuffle moved
+// cards the pre-shuffle digest still lists as held. The trigger's own SA chain
+// carries the parsed parameters (Origin$, Destination$, Shuffle$), not a text
+// heuristic.
+func zoneMovingShuffle(reg *cards.Registry, entries []game.Entry, j int) bool {
+	if reg == nil {
+		return false
+	}
+	for k := 0; k < j && k < len(entries); k++ {
+		for _, tr := range entries[k].Triggers {
+			c, ok := reg.Lookup(tr.Name)
+			if !ok || tr.Face < 0 || tr.Face >= len(c.Faces) {
+				continue
+			}
+			f := c.Faces[tr.Face]
+			if tr.Index < 0 || tr.Index >= len(f.Triggers) {
+				continue
+			}
+			for sa := f.Triggers[tr.Index].Effect; sa != nil; sa = sa.Sub {
+				if !strings.EqualFold(sa.Params["Shuffle"], "True") ||
+					!strings.Contains(sa.Params["Destination"], "Library") {
+					continue
+				}
+				if o := sa.Params["Origin"]; strings.Contains(o, "Hand") || strings.Contains(o, "Graveyard") {
+					return true
+				}
+			}
 		}
 	}
 	return false
