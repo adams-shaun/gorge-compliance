@@ -158,7 +158,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # of insisting the card be on the stack ("was not put on the stack"). SuspendFromHandTest replays Lotus Bloom's xproof
 # request in strict mode; the full driver suite (130 tests) is green on it. Driver-only change; cardsfolder/tokenscripts
 # unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-suspend-cast-mode.
-FORGE_ORACLE_REF ?= 11936833e46d6d3a6c7a70c5cfd48dea076ad0ed
+# cd13258c4b7 = 11936833e46 + the optional-trigger confirm gorge folded into the body's Cost$ election (CR 603.5): a
+# trigger whose body has a non-Mandatory Cost$ ("you may tap X untapped Myr") gets no logged yes/no when the cost is
+# forced (X = 0), yet Forge's OptionalDecider confirms anyway. ScriptedController.confirmTrigger now answers yes when
+# gorge logged an unconsumed X or object pick for the seat in the step, else no (noted); a trigger that is not
+# cost-folded still strict-misses. FoldedOptionalConfirmTest pins it (driver suite 134 tests, 132 green plus the two
+# ForcedDieRollTest/LoneModeLibraryOrderTest cases that also fail on 11936833e46 in the borrowed build). Driver-only
+# change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-folded-optional-confirm.
+FORGE_ORACLE_REF ?= cd13258c4b746ec75c35687c25d01c65d9ea5962
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
