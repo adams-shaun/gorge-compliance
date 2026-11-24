@@ -50,9 +50,16 @@ var verdictProducerPrefixes = []string{
 	"cmd/compliance/",
 }
 
-// verdictProducerFiles are the regen recipe's scripts. A change here can
-// change which scenarios are replayed or how a verdict is written.
+// verdictProducerFiles are the regen recipe's scripts and the build file that
+// pins its replay inputs. A change here can change which scenarios are
+// replayed, how a verdict is written, or which XMage replay produced it.
+//
+// Makefile is the whole class: it carries XMAGE_REF (the design names it as a
+// verdict-validity input: "the generator, gorge's head or XMAGE_REF changes"),
+// and it may carry another replay pin tomorrow. Treating the file as a producer
+// keeps a pin bump from running no tests, without a per-pin list to forget.
 var verdictProducerFiles = map[string]bool{
+	"Makefile":                      true,
 	"scripts/compliance-pass.sh":    true,
 	"scripts/xmage-oracle-run.sh":   true,
 	"scripts/xmage-oracle-setup.sh": true,

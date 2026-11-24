@@ -114,6 +114,7 @@ func TestVerdictPipelineChangesSelectRatchetPackages(t *testing.T) {
 		"oracle/xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java",
 		"cmd/oraclediff/main.go",
 		"cmd/compliance/main.go",
+		"Makefile",
 		"scripts/compliance-pass.sh",
 		"scripts/xmage-oracle-run.sh",
 		"scripts/xmage-oracle-setup.sh",

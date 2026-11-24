@@ -4,9 +4,10 @@
 # any ref; the script diffs its merge-base with HEAD, so a moved BASE does not
 # make another branch's commits look like this branch's changes.
 #
-# This is the selection the agentctl "go test (touched)" gate uses. It is a
-# tracked helper so the rule is unit-tested (internal/testselect) instead of
-# living inline in the operator's .agentctl/config.toml:
+# This is the tracked selection for the agentctl "go test (touched)" gate: the
+# gate's operator-owned config should call this script instead of keeping the
+# rule inline. The rule lives here so it is unit-tested (internal/testselect)
+# and smoke-tested (ops/scripts/tests/test_select_smoke.sh):
 #
 #   scripts/test-select.sh develop
 #
@@ -24,6 +25,18 @@ if [ -z "$base" ]; then
 	exit 2
 fi
 
+command -v git >/dev/null 2>&1 || {
+	echo "test-select: git not found on PATH" >&2
+	exit 2
+}
+command -v go >/dev/null 2>&1 || {
+	echo "test-select: go not found on PATH" >&2
+	exit 2
+}
+
 cd "$repo"
-mb=$(git merge-base "$base" "$head") || exit 2
-exec env GOWORK=off go run ./cmd/testselect -root . -base "$mb" -head "$head"
+mb=$(git merge-base -- "$base" "$head") || {
+	echo "test-select: no merge base for $base..$head" >&2
+	exit 2
+}
+env GOWORK=off go run ./cmd/testselect -root . -base "$mb" -head "$head" || exit 2

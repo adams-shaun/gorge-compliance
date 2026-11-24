@@ -535,6 +535,7 @@ smoke:
 	bash ops/scripts/tests/follower_check_smoke.sh
 	bash ops/scripts/tests/follower_sweep_smoke_smoke.sh
 	bash ops/scripts/tests/test_targets_smoke.sh
+	bash ops/scripts/tests/test_select_smoke.sh
 
 # xengine-sweep runs the chunked, resumable cross-engine sweep
 # (scripts/xengine-sweep.sh): SETS='FDN BLB' CHUNKS=4 GAMES=50. Heavy: it starts

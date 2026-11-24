@@ -1,7 +1,7 @@
 // Command testselect prints the Go test packages a pre-merge gate must run
 // for a set of changed files. It is the executable form of
-// internal/testselect; scripts/test-select.sh and the agentctl
-// "go test (touched)" gate call it.
+// internal/testselect; scripts/test-select.sh calls it, and the agentctl
+// "go test (touched)" gate is meant to call that script.
 //
 //	testselect -base "$(git merge-base origin/develop HEAD)"
 //	git diff --name-only origin/develop... | testselect
@@ -70,11 +70,15 @@ func changedFiles(root, base, head, files string) ([]string, error) {
 		defer f.Close()
 		return scanLines(f)
 	case base != "":
-		cmd := exec.Command("git", "-C", root, "diff", "--name-only", base, head)
+		// --no-renames is load-bearing: with rename detection on, a producer
+		// file moved out of its prefix appears only under its new path, so the
+		// ratchet packages the old path selected are silently dropped. The
+		// rename is still a change to the producer tree, so both sides count.
+		cmd := exec.Command("git", "-C", root, "diff", "--name-only", "--no-renames", base, head)
 		out, err := cmd.Output()
 		if err != nil {
 			if ee, ok := err.(*exec.ExitError); ok {
-				return nil, fmt.Errorf("git diff --name-only %s %s: %s", base, head, strings.TrimSpace(string(ee.Stderr)))
+				return nil, fmt.Errorf("git diff --name-only --no-renames %s %s: %s", base, head, strings.TrimSpace(string(ee.Stderr)))
 			}
 			return nil, err
 		}
