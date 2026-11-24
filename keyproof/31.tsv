@@ -31,12 +31,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 311f38a6-f68f-4d30-bc4e-62339f1e0d88	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 311f38a6-f68f-4d30-bc4e-62339f1e0d88	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3121eecd-5f8a-408f-8b2d-75e13aa8a1ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31265357-5ecb-4d83-80ff-1795b1dfdecb	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:gutless-plunderer:f0t0:s2,f:xs:XP:gutless-plunderer:f0t0:s2	-	-	-	e07cf3a05ba5	-	6ed8d1b476d6	-	-	2026-11-24	xproof
+31265357-5ecb-4d83-80ff-1795b1dfdecb	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:gutless-plunderer:f0t0:s2,f:xs:XP:gutless-plunderer:f0t0:s2	-	-	-	267e485f6204	-	6ed8d1b476d6	-	-	2026-11-24	xproof
 31265357-5ecb-4d83-80ff-1795b1dfdecb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gutless Plunderer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31265357-5ecb-4d83-80ff-1795b1dfdecb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gutless Plunderer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31265357-5ecb-4d83-80ff-1795b1dfdecb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31279757-499a-4d52-aa81-76b6f1983b53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3127ae9b-a7a7-43ec-89d7-688f8445b33d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:garruk-s-uprising:f0t0:s2,f:xs:XP:garruk-s-uprising:f0t0:s2	-	-	-	e07cf3a05ba5	-	c4ae9db808ee	-	-	2026-11-24	xproof
+3127ae9b-a7a7-43ec-89d7-688f8445b33d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:garruk-s-uprising:f0t0:s2,f:xs:XP:garruk-s-uprising:f0t0:s2	-	-	-	267e485f6204	-	c4ae9db808ee	-	-	2026-11-24	xproof
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Garruk's Uprising/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Garruk's Uprising/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31284a0b-9bd5-4186-bd27-6b16a3597e27	static#0.0	static#0.0	agreed	-	X	scen	1	0	Deathless Pilot/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 312a831a-5da9-4a22-9974-f2d90ae3eb75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 312be209-dba5-4e6c-938e-1287642f67d4	cast	cast-resolve	agreed	-	FX	scen	2	0	Hivespine Wolverine/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-312be209-dba5-4e6c-938e-1287642f67d4	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+312be209-dba5-4e6c-938e-1287642f67d4	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 312c7a7b-2084-42b0-9b13-0a6d3e43a73d	cast	cast-resolve	agreed	-	FX	scen	2	0	Camellia, the Seedmiser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 312c7a7b-2084-42b0-9b13-0a6d3e43a73d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Camellia, the Seedmiser/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 312c7a7b-2084-42b0-9b13-0a6d3e43a73d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Camellia, the Seedmiser/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -90,8 +90,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 317169b8-9014-48e6-862b-ca21b706846e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 317169b8-9014-48e6-862b-ca21b706846e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 317169b8-9014-48e6-862b-ca21b706846e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3173ca98-d46a-4de3-a95e-3eaad28d4017	cast	cast-resolve	agreed	-	X	scen	1	0	Omega, Heartless Evolution/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3173ca98-d46a-4de3-a95e-3eaad28d4017	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3173ca98-d46a-4de3-a95e-3eaad28d4017	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:omega-heartless-evolution:f0t0:s1,f:xs:XP:omega-heartless-evolution:f0t0:s1	-	-	-	267e485f6204	-	632c8d7529fd	-	-	2026-11-24	xproof
+3173ca98-d46a-4de3-a95e-3eaad28d4017	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:omega-heartless-evolution:f0t0:s1,f:xs:XP:omega-heartless-evolution:f0t0:s1	-	-	-	267e485f6204	-	632c8d7529fd	-	-	2026-11-24	xproof
 3178c1f9-f644-4926-ac9a-d40e4db79955	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sterling-hound:f0t0:s2,f:xs:XP:sterling-hound:f0t0:s2	-	-	-	e07cf3a05ba5	-	c0f4b9d92814	-	-	2026-11-24	xproof
 3178c1f9-f644-4926-ac9a-d40e4db79955	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31816924-1430-4581-86e8-325e2ca16217	cast	cast-resolve	agreed	-	X	scen	1	0	Agents of HYDRA/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

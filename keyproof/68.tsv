@@ -2,9 +2,9 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 6800d01c-345d-4932-a2a4-8df0fb1902f2	cast	cast-resolve	agreed	-	FX	scen	2	0	Magus of the Moon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 6800d01c-345d-4932-a2a4-8df0fb1902f2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Magus of the Moon/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-6804e329-800b-4aa4-9a00-b9a1f4b9537b	cast	cast-resolve	agreed	-	X	scen	1	0	Malboro/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6804e329-800b-4aa4-9a00-b9a1f4b9537b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Malboro/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6804e329-800b-4aa4-9a00-b9a1f4b9537b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6804e329-800b-4aa4-9a00-b9a1f4b9537b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:malboro:f0t0:s1,f:xs:XP:malboro:f0t0:s1	-	-	-	267e485f6204	-	f17ff7afee6a	-	-	2026-11-24	xproof
+6804e329-800b-4aa4-9a00-b9a1f4b9537b	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:malboro:f0t0:s2,f:xs:XP:malboro:f0t0:s2	-	-	-	267e485f6204	-	f17ff7afee6a	-	-	2026-11-24	xproof
+6804e329-800b-4aa4-9a00-b9a1f4b9537b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:malboro:f0t0:s1,f:xs:XP:malboro:f0t0:s1	-	-	-	267e485f6204	-	f17ff7afee6a	-	-	2026-11-24	xproof
 6807167a-e290-4259-940e-3cbbfa75d0a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6807167a-e290-4259-940e-3cbbfa75d0a1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 680a8e14-053f-4cde-a060-e1b36873cf14	cast	cast-resolve	agreed	-	X	scen	1	0	Rediscover the Way/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -39,7 +39,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 682eb224-cab4-4829-810b-72e63a9ceb5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6832f9e2-294a-44a2-8af9-eb16ccfdfc36	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6832f9e2-294a-44a2-8af9-eb16ccfdfc36	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-683775ac-481e-4c26-ab2f-5d2813af0268	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	9e6721ef2361	-	-	2026-11-24	xproof
+683775ac-481e-4c26-ab2f-5d2813af0268	cast	cast	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	9e6721ef2361	-	-	2026-11-24	xproof
 683775ac-481e-4c26-ab2f-5d2813af0268	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683a06b6-af77-440f-81b9-8958597a7324	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683a06b6-af77-440f-81b9-8958597a7324	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68418069-f615-40ef-ae0d-764192acae00	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Krenko, Mob Boss/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6845a62f-e0f1-448c-beeb-abac2dabd975	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6846448b-d5a0-4ae0-bb11-ea7fa6ed2558	cast	cast-resolve	agreed	-	X	scen	1	0	Haliya, Ascendant Cadet/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6846448b-d5a0-4ae0-bb11-ea7fa6ed2558	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6846448b-d5a0-4ae0-bb11-ea7fa6ed2558	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 6846448b-d5a0-4ae0-bb11-ea7fa6ed2558	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Haliya, Ascendant Cadet/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6846448b-d5a0-4ae0-bb11-ea7fa6ed2558	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Haliya, Ascendant Cadet/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 684b2026-1589-4f59-bd72-5795fae44c1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -120,8 +120,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6894345f-52a6-46e4-b278-0783087daee1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68954295-54e3-4303-a6bc-fc4547a4e3a3	cast	cast-resolve	agreed	-	X	scen	1	0	Llanowar Elves/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68954295-54e3-4303-a6bc-fc4547a4e3a3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Llanowar Elves/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-68957dca-df5c-4051-af22-407cb7e47200	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	ebb1d2576fee	-	-	2026-11-24	xproof
-68957dca-df5c-4051-af22-407cb7e47200	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	ebb1d2576fee	-	-	2026-11-24	xproof
+68957dca-df5c-4051-af22-407cb7e47200	cast	cast	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	ebb1d2576fee	-	-	2026-11-24	xproof
+68957dca-df5c-4051-af22-407cb7e47200	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	ebb1d2576fee	-	-	2026-11-24	xproof
 68957dca-df5c-4051-af22-407cb7e47200	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Meathook Massacre II/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68957dca-df5c-4051-af22-407cb7e47200	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Meathook Massacre II/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6895d7a2-264b-4731-9294-c02e1e220384	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

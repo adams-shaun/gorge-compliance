@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b44c005-6799-47fd-8b0d-7179b5281d78	cast	cast-resolve	agreed	-	X	scen	1	0	Galvanize/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b44cc9e-6ef0-4fee-b79a-3e34cb0a3407	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b55fb72-237d-4935-b645-8ebc6eb4140e	cast	cast-resolve	agreed	-	X	scen	1	0	Consuming Aberration/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9b55fb72-237d-4935-b645-8ebc6eb4140e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9b55fb72-237d-4935-b645-8ebc6eb4140e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 9b568c34-ba0a-44a7-a0ee-bee3a37b3396	cast	cast-resolve	agreed	-	X	scen	1	0	Lathril, Blade of the Elves/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b568c34-ba0a-44a7-a0ee-bee3a37b3396	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lathril, Blade of the Elves/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b568c34-ba0a-44a7-a0ee-bee3a37b3396	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lathril, Blade of the Elves/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -104,9 +104,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b87b4cd-4fb9-4bb3-b4c0-de1fcc6f44a2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b884dfd-59f4-45c0-bf1e-6ad9f5b58895	cast	cast-resolve	agreed	-	X	scen	1	0	Feldon's Cane/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b884dfd-59f4-45c0-bf1e-6ad9f5b58895	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Feldon's Cane/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9b8b5812-73bd-453e-bdff-aad1fafa9226	cast	cast-resolve	agreed	-	X	scen	1	0	Samurai's Katana/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9b8b5812-73bd-453e-bdff-aad1fafa9226	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:samurai-s-katana:f0t0:s2,f:xs:XP:samurai-s-katana:f0t0:s2	-	-	-	267e485f6204	-	83d460dc4b80	-	-	2026-11-24	xproof
 9b8b5812-73bd-453e-bdff-aad1fafa9226	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Samurai's Katana/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9b8b5812-73bd-453e-bdff-aad1fafa9226	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9b8b5812-73bd-453e-bdff-aad1fafa9226	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:samurai-s-katana:f0t0:s2,f:xs:XP:samurai-s-katana:f0t0:s2	-	-	-	267e485f6204	-	83d460dc4b80	-	-	2026-11-24	xproof
 9b8b5812-73bd-453e-bdff-aad1fafa9226	static#0.0	static#0.0	agreed	-	X	scen	1	0	Samurai's Katana/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b8c44a0-82ef-4beb-a762-c2a2a21380f3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b8d9236-0452-4509-aca4-a53a399fff85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,8 +176,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9be3e610-f6bf-4e79-87ca-79dde27945d0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9be3e610-f6bf-4e79-87ca-79dde27945d0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9be48462-2ec0-4d28-9977-f0232e8a1333	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9be5a350-c38e-425f-9d6a-8eb111132a89	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	5aac7b81680d	-	-	2026-11-24	xproof
-9be5a350-c38e-425f-9d6a-8eb111132a89	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	5aac7b81680d	-	-	2026-11-24	xproof
+9be5a350-c38e-425f-9d6a-8eb111132a89	cast	cast	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	5aac7b81680d	-	-	2026-11-24	xproof
+9be5a350-c38e-425f-9d6a-8eb111132a89	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	5aac7b81680d	-	-	2026-11-24	xproof
 9be5a350-c38e-425f-9d6a-8eb111132a89	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Surveillance Monitor/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9be8e04f-f87f-4477-93f3-c546e9b346f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9be8e04f-f87f-4477-93f3-c546e9b346f0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

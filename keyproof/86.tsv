@@ -110,8 +110,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 866fc4b9-f661-444b-b7fd-929814dbc69d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 867379cb-a084-4c84-97ee-557fb60814cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 867379cb-a084-4c84-97ee-557fb60814cd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86746a84-3e8a-44b4-8494-60cbee9816b5	cast	cast-resolve	agreed	-	X	scen	1	0	Galactic Wayfarer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-86746a84-3e8a-44b4-8494-60cbee9816b5	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86746a84-3e8a-44b4-8494-60cbee9816b5	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:galactic-wayfarer:f0t0:s2,f:xs:XP:galactic-wayfarer:f0t0:s2	-	-	-	267e485f6204	-	ee1dce67414b	-	-	2026-11-24	xproof
+86746a84-3e8a-44b4-8494-60cbee9816b5	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:galactic-wayfarer:f0t0:s2,f:xs:XP:galactic-wayfarer:f0t0:s2	-	-	-	267e485f6204	-	ee1dce67414b	-	-	2026-11-24	xproof
 8676e917-17dd-4047-99c4-402f2e909e16	cast	cast-resolve	agreed	-	X	scen	1	0	Shock Brigade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8676e917-17dd-4047-99c4-402f2e909e16	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Shock Brigade/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8676e917-17dd-4047-99c4-402f2e909e16	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shock Brigade/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -189,16 +189,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86cee7f0-0aac-46f1-8e4e-062fc398477e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86cee7f0-0aac-46f1-8e4e-062fc398477e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86d0ba9d-6972-4cbc-871d-3fb413565c45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86d2a45a-e452-4241-8ab4-28a2bb808ffa	cast	cast-resolve	agreed	-	FX	scen	2	0	Gaius van Baelsar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+86d2a45a-e452-4241-8ab4-28a2bb808ffa	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:gaius-van-baelsar:f0t0:s2,f:xs:XP:gaius-van-baelsar:f0t0:s2	-	-	-	267e485f6204	-	39f9582423ee	-	-	2026-11-24	xproof
 86d2a45a-e452-4241-8ab4-28a2bb808ffa	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86d3def3-53fa-4cad-bb25-d3275af1e3f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86d3def3-53fa-4cad-bb25-d3275af1e3f5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86d592e1-4b2d-4411-9370-48326cf55cf1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86d592e1-4b2d-4411-9370-48326cf55cf1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86d67952-19b8-4bb8-b7d7-b2751e86591c	cast	cast-resolve	agreed	-	X	scen	1	0	Gastal Thrillroller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+86d67952-19b8-4bb8-b7d7-b2751e86591c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:gastal-thrillroller:f0t0:s2,f:xs:XP:gastal-thrillroller:f0t0:s2	-	-	-	267e485f6204	-	049c967307c9	-	-	2026-11-24	xproof
 86d67952-19b8-4bb8-b7d7-b2751e86591c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gastal Thrillroller/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86d67952-19b8-4bb8-b7d7-b2751e86591c	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Gastal Thrillroller/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-86d67952-19b8-4bb8-b7d7-b2751e86591c	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86d67952-19b8-4bb8-b7d7-b2751e86591c	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:gastal-thrillroller:f0t0:s2,f:xs:XP:gastal-thrillroller:f0t0:s2	-	-	-	267e485f6204	-	049c967307c9	-	-	2026-11-24	xproof
 86d76078-9af3-45a7-90d6-72946afdc78b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86d76078-9af3-45a7-90d6-72946afdc78b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86d76078-9af3-45a7-90d6-72946afdc78b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

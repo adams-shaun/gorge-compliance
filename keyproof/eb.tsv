@@ -22,8 +22,8 @@ eb0d97a3-6494-4011-9f60-1b12b165a995	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 eb0d97a3-6494-4011-9f60-1b12b165a995	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eb0e6f63-2861-4392-ac0e-64380fbbd8ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eb0e6f63-2861-4392-ac0e-64380fbbd8ae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eb100b3b-bc3f-48f3-8f28-bb2d80225ea9	cast	cast-resolve	agreed	-	X	scen	1	0	Hour of Victory/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-eb100b3b-bc3f-48f3-8f28-bb2d80225ea9	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+eb100b3b-bc3f-48f3-8f28-bb2d80225ea9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hour-of-victory:f0t0:s2,f:xs:XP:hour-of-victory:f0t0:s2	-	-	-	267e485f6204	-	6cdb54b14182	-	-	2026-11-24	xproof
+eb100b3b-bc3f-48f3-8f28-bb2d80225ea9	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hour-of-victory:f0t0:s2,f:xs:XP:hour-of-victory:f0t0:s2	-	-	-	267e485f6204	-	6cdb54b14182	-	-	2026-11-24	xproof
 eb100b3b-bc3f-48f3-8f28-bb2d80225ea9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hour of Victory/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eb107601-f4ff-4504-9e3f-3de63b0d9e6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eb154ebb-d02f-405a-a557-3d5ec7648c42	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:harrier-strix:f0t0:s2,f:xs:XP:harrier-strix:f0t0:s2	-	-	-	e07cf3a05ba5	-	ae3a0a4c8d93	-	-	2026-11-24	xproof
@@ -96,8 +96,8 @@ eb77f7dc-e9e4-44ef-8616-9f4e737e8ca5	cast	cast-resolve	agreed	-	X	scen	1	0	Breec
 eb77f7dc-e9e4-44ef-8616-9f4e737e8ca5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Breeches, Brazen Plunderer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 eb77f7dc-e9e4-44ef-8616-9f4e737e8ca5	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Breeches, Brazen Plunderer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 eb77f7dc-e9e4-44ef-8616-9f4e737e8ca5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Breeches, Brazen Plunderer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-eb7a1f21-a66d-415b-8520-710b44890bb6	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	ce0e78518824	-	-	2026-11-24	xproof
-eb7a1f21-a66d-415b-8520-710b44890bb6	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+eb7a1f21-a66d-415b-8520-710b44890bb6	cast	cast	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	ce0e78518824	-	-	2026-11-24	xproof
+eb7a1f21-a66d-415b-8520-710b44890bb6	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	ce0e78518824	-	-	2026-11-24	xproof
 eb7a1f21-a66d-415b-8520-710b44890bb6	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Simulacrum Synthesizer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 eb7b1284-0b2c-4b6a-a389-b2b932838083	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eb7b1284-0b2c-4b6a-a389-b2b932838083	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -141,8 +141,8 @@ ebbcbaa4-9dc2-4098-b6a2-393375d86f16	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 ebbd5b9c-07ff-4b42-81c2-ba09539f3a42	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ebbea7a7-c990-43fa-8f67-a5da17fbbb10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ebbea7a7-c990-43fa-8f67-a5da17fbbb10	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ebbf84f7-d142-4de5-bfc1-ea86f082d733	cast	cast-resolve	agreed	-	X	scen	1	0	Possibility Technician/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ebbf84f7-d142-4de5-bfc1-ea86f082d733	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ebbf84f7-d142-4de5-bfc1-ea86f082d733	cast	cast	agreed	-	X	start	1	0	x:xs:XP:possibility-technician:f0t0:s2	-	-	-	267e485f6204	-	c0dcc633d7d2	-	-	2026-11-24	xproof
+ebbf84f7-d142-4de5-bfc1-ea86f082d733	f0/t0	ChangesZone	agreed	-	X	start	1	0	x:xs:XP:possibility-technician:f0t0:s2	-	-	-	267e485f6204	-	c0dcc633d7d2	-	-	2026-11-24	xproof
 ebc3ca0f-35eb-4606-90ab-eb64556f81fe	cast	cast-resolve	agreed	-	X	scen	1	0	Volatile Wanderglyph/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ebc3ca0f-35eb-4606-90ab-eb64556f81fe	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Volatile Wanderglyph/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ebc52f9a-ba0c-48ed-bb04-ed086efeb060	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

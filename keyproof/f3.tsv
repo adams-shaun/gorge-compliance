@@ -27,10 +27,10 @@ f3229980-994e-4492-be98-267b781614c1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 f325fd7a-dcae-4892-adf5-de9893a23ac5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f3264224-43a4-4c6b-b363-2d147687dfc1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f3264224-43a4-4c6b-b363-2d147687dfc1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f328012f-4696-47bb-ab43-247bdcb13f03	cast	cast-resolve	agreed	-	X	scen	1	0	Dragoon's Wyvern/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f328012f-4696-47bb-ab43-247bdcb13f03	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dragoon-s-wyvern:f0t0:s2,f:xs:XP:dragoon-s-wyvern:f0t0:s2	-	-	-	267e485f6204	-	dac0bbfa4c61	-	-	2026-11-24	xproof
 f328012f-4696-47bb-ab43-247bdcb13f03	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dragoon's Wyvern/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f328012f-4696-47bb-ab43-247bdcb13f03	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dragoon's Wyvern/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f328012f-4696-47bb-ab43-247bdcb13f03	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f328012f-4696-47bb-ab43-247bdcb13f03	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:dragoon-s-wyvern:f0t0:s2,f:xs:XP:dragoon-s-wyvern:f0t0:s2	-	-	-	267e485f6204	-	dac0bbfa4c61	-	-	2026-11-24	xproof
 f328dfb1-0737-478b-bd40-dfcb9a35e5a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f328dfb1-0737-478b-bd40-dfcb9a35e5a5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f328dfb1-0737-478b-bd40-dfcb9a35e5a5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -60,7 +60,7 @@ f3413f57-229e-49dd-a776-6905b80b2b12	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 f343b6f9-41c3-419b-a57c-a7b08603ef5c	cast	cast-resolve	agreed	-	X	scen	1	0	Shadow of the Goblin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f343b6f9-41c3-419b-a57c-a7b08603ef5c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Shadow of the Goblin/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f343b6f9-41c3-419b-a57c-a7b08603ef5c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Shadow of the Goblin/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f343b6f9-41c3-419b-a57c-a7b08603ef5c	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f343b6f9-41c3-419b-a57c-a7b08603ef5c	f0/t2	NULL	owed	refused:no-generator:trigger:LandPlayed	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 f343b6f9-41c3-419b-a57c-a7b08603ef5c	f0/t3	trigger#0.3	agreed	-	X	scen	1	0	Shadow of the Goblin/trigger#0.3/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f34b9bc4-7bfe-47fd-ba23-4eeeb46026eb	cast	cast-resolve	agreed	-	FX	scen	2	0	Lightning Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f34ba913-cf9a-48fe-b5fe-68bf504693b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

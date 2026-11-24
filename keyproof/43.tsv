@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-43037ef5-09e8-4881-beff-ed38cf7574c6	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43037ef5-09e8-4881-beff-ed38cf7574c6	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+43037ef5-09e8-4881-beff-ed38cf7574c6	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
+43037ef5-09e8-4881-beff-ed38cf7574c6	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 4304035c-c3e4-4a19-aa1f-92a83d8aed1f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4304035c-c3e4-4a19-aa1f-92a83d8aed1f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43057d84-b424-489c-abec-3fb4cb823d80	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -23,9 +23,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43192553-0db9-48ec-ae88-a2605a6608d8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 431c5b04-7387-4724-adfa-d1eb7874e79e	cast	cast-resolve	agreed	-	X	scen	1	0	Terrific Team-Up/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 431c5b04-7387-4724-adfa-d1eb7874e79e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Terrific Team-Up/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-431d6a2b-e22c-4921-a5f1-dd672f764f78	cast	cast-resolve	agreed	-	X	scen	1	0	Grim Bauble/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+431d6a2b-e22c-4921-a5f1-dd672f764f78	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:grim-bauble:f0t0:s2,f:xs:XP:grim-bauble:f0t0:s2	-	-	-	267e485f6204	-	7d24da05aa1c	-	-	2026-11-24	xproof
 431d6a2b-e22c-4921-a5f1-dd672f764f78	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Grim Bauble/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-431d6a2b-e22c-4921-a5f1-dd672f764f78	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+431d6a2b-e22c-4921-a5f1-dd672f764f78	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:grim-bauble:f0t0:s2,f:xs:XP:grim-bauble:f0t0:s2	-	-	-	267e485f6204	-	7d24da05aa1c	-	-	2026-11-24	xproof
 431e85e3-15e6-471b-ba71-6058394c9a96	cast	cast-resolve	agreed	-	X	scen	1	0	Captain Storm, Cosmium Raider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 431e85e3-15e6-471b-ba71-6058394c9a96	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Captain Storm, Cosmium Raider/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43257a85-2cbe-4931-9755-106808ab124a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43c69d19-c06c-470a-bdba-a0335ff2d655	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Floodpits Drowner/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43c69d19-c06c-470a-bdba-a0335ff2d655	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Floodpits Drowner/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43c69d19-c06c-470a-bdba-a0335ff2d655	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Floodpits Drowner/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-43c69d19-c06c-470a-bdba-a0335ff2d655	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+43c69d19-c06c-470a-bdba-a0335ff2d655	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 43c92618-0aae-41f8-aa39-393e5d6b5ff7	cast	cast-resolve	agreed	-	X	scen	1	0	Brazen Blademaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43c92618-0aae-41f8-aa39-393e5d6b5ff7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Brazen Blademaster/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43ccc568-2509-49b6-99d7-c56900d1565a	cast	cast-resolve	agreed	-	FX	scen	2	0	Daggerfang Duo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

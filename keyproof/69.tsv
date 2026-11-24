@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69266cb7-50eb-43d2-96d6-fc3c85be49f7	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Magus of the Library/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 69266cb7-50eb-43d2-96d6-fc3c85be49f7	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69288566-3015-45de-b391-6fe079865f0c	cast	cast-resolve	agreed	-	X	scen	1	0	Extraordinary Journey/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-69288566-3015-45de-b391-6fe079865f0c	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+69288566-3015-45de-b391-6fe079865f0c	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 69288566-3015-45de-b391-6fe079865f0c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Extraordinary Journey/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 692a6833-3014-42f6-b1ad-333bb3292c65	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 692babfa-9b74-415e-a560-abae4ccb006b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -86,10 +86,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 697b14c6-fe6a-4880-9cf2-b6602a52ca0b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Summoned Dromedary/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 697b14c6-fe6a-4880-9cf2-b6602a52ca0b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Summoned Dromedary/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 697b14c6-fe6a-4880-9cf2-b6602a52ca0b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Summoned Dromedary/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-697b8045-0edb-4f7b-a933-4d41ec2b53d5	cast	cast-resolve	agreed	-	X	scen	1	0	Dubious Delicacy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+697b8045-0edb-4f7b-a933-4d41ec2b53d5	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dubious-delicacy:f0t0:s2,f:xs:XP:dubious-delicacy:f0t0:s2	-	-	-	267e485f6204	-	9ddfc6bc3e1f	-	-	2026-11-24	xproof
 697b8045-0edb-4f7b-a933-4d41ec2b53d5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dubious Delicacy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 697b8045-0edb-4f7b-a933-4d41ec2b53d5	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Dubious Delicacy/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-697b8045-0edb-4f7b-a933-4d41ec2b53d5	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+697b8045-0edb-4f7b-a933-4d41ec2b53d5	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:dubious-delicacy:f0t0:s2,f:xs:XP:dubious-delicacy:f0t0:s2	-	-	-	267e485f6204	-	9ddfc6bc3e1f	-	-	2026-11-24	xproof
 697bcfe1-ecbf-42a1-bfc7-0766d48ca56b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 697bcfe1-ecbf-42a1-bfc7-0766d48ca56b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 697c851d-8475-479e-8783-cebdbe9a892d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

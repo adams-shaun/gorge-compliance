@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-3d01c351-6dbd-4d63-9843-3aa1a3c039a6	cast	cast-resolve	agreed	-	X	scen	1	0	Namazu Trader/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3d01c351-6dbd-4d63-9843-3aa1a3c039a6	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d01c351-6dbd-4d63-9843-3aa1a3c039a6	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:namazu-trader:f0t0:s2,f:xs:XP:namazu-trader:f0t0:s2	-	-	-	267e485f6204	-	ba1c15c5b79e	-	-	2026-11-24	xproof
+3d01c351-6dbd-4d63-9843-3aa1a3c039a6	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:namazu-trader:f0t0:s2,f:xs:XP:namazu-trader:f0t0:s2	-	-	-	267e485f6204	-	ba1c15c5b79e	-	-	2026-11-24	xproof
 3d01c351-6dbd-4d63-9843-3aa1a3c039a6	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Namazu Trader/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d02ee2f-b7bd-40b0-b9be-2420991b2be0	cast	cast-resolve	agreed	-	FX	scen	2	0	Abzan Devotee/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d02ee2f-b7bd-40b0-b9be-2420991b2be0	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Abzan Devotee/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -147,7 +147,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3db1ac09-e35a-4f50-97c4-f65dbc28daef	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3db40361-5f55-417e-a7cd-7e360cc91b4d	cast	cast-resolve	agreed	-	X	scen	1	0	Chainsaw/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3db40361-5f55-417e-a7cd-7e360cc91b4d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Chainsaw/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3db40361-5f55-417e-a7cd-7e360cc91b4d	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3db40361-5f55-417e-a7cd-7e360cc91b4d	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 3db40361-5f55-417e-a7cd-7e360cc91b4d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Chainsaw/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3db40361-5f55-417e-a7cd-7e360cc91b4d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Chainsaw/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3db407ec-da4b-4b25-b613-e45c164ffe86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -179,10 +179,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3dd2f3de-98cc-4263-bd16-b5803e48e892	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dd81e3e-e57a-4b6f-9043-bba0cebb3e90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dd81e3e-e57a-4b6f-9043-bba0cebb3e90	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3dd92eea-02ca-4e55-8f69-8c8059dd7ee6	cast	cast-resolve	agreed	-	X	scen	1	0	Professional Wrestler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3dd92eea-02ca-4e55-8f69-8c8059dd7ee6	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:professional-wrestler:f0t0:s2,f:xs:XP:professional-wrestler:f0t0:s2	-	-	-	267e485f6204	-	83f370f11486	-	-	2026-11-24	xproof
 3dd92eea-02ca-4e55-8f69-8c8059dd7ee6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Professional Wrestler/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3dd92eea-02ca-4e55-8f69-8c8059dd7ee6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Professional Wrestler/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3dd92eea-02ca-4e55-8f69-8c8059dd7ee6	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3dd92eea-02ca-4e55-8f69-8c8059dd7ee6	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:professional-wrestler:f0t0:s2,f:xs:XP:professional-wrestler:f0t0:s2	-	-	-	267e485f6204	-	83f370f11486	-	-	2026-11-24	xproof
 3dd92eea-02ca-4e55-8f69-8c8059dd7ee6	static#0.0	static#0.0	agreed	-	X	scen	1	0	Professional Wrestler/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3dda8d3d-89e2-4600-be8d-9b76b4f36e33	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dda8d3d-89e2-4600-be8d-9b76b4f36e33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 500a17a0-8332-414c-9c3a-7157a7800887	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 500a17a0-8332-414c-9c3a-7157a7800887	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 500a17a0-8332-414c-9c3a-7157a7800887	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-500ccb61-83b0-4b1f-ada6-65850ed5a825	cast	cast-resolve	agreed	-	FX	scen	2	0	Qutrub Forayer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+500ccb61-83b0-4b1f-ada6-65850ed5a825	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:qutrub-forayer:f0t0:s2,f:xs:XP:qutrub-forayer:f0t0:s2	-	-	-	267e485f6204	-	dbfb1e0dd088	-	-	2026-11-24	xproof
 500ccb61-83b0-4b1f-ada6-65850ed5a825	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 501109bb-3406-41d8-9433-a100e494f938	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 501109bb-3406-41d8-9433-a100e494f938	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -36,8 +36,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 502230fb-3a7a-439c-adfa-f7820deacf87	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 502230fb-3a7a-439c-adfa-f7820deacf87	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 502575f4-7c56-44bc-a77f-ae28d66c8e1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50261b9d-48f2-4bad-a35b-14f13b3cdd32	cast	cast-resolve	agreed	-	X	scen	1	0	Salt Road Packbeast/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-50261b9d-48f2-4bad-a35b-14f13b3cdd32	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+50261b9d-48f2-4bad-a35b-14f13b3cdd32	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:salt-road-packbeast:f0t0:s2,f:xs:XP:salt-road-packbeast:f0t0:s2	-	-	-	267e485f6204	-	5a6a01122d10	-	-	2026-11-24	xproof
+50261b9d-48f2-4bad-a35b-14f13b3cdd32	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:salt-road-packbeast:f0t0:s2,f:xs:XP:salt-road-packbeast:f0t0:s2	-	-	-	267e485f6204	-	5a6a01122d10	-	-	2026-11-24	xproof
 50261b9d-48f2-4bad-a35b-14f13b3cdd32	static#0.0	static#0.0	agreed	-	X	scen	1	0	Salt Road Packbeast/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50261dca-bfeb-40b3-95b6-9057491ef3ad	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5028dfe8-c505-4643-b493-760b1f19d47f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,7 +145,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50ab0194-c7dc-4f11-abc0-1a82393cc42e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pawpatch Recruit/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ab0194-c7dc-4f11-abc0-1a82393cc42e	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Pawpatch Recruit/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ab0194-c7dc-4f11-abc0-1a82393cc42e	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50ace222-57f1-477f-9e06-155d7b403512	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:realm-scorcher-hellkite:f0t0:s2,f:xs:XP:realm-scorcher-hellkite:f0t0:s2	-	-	-	e07cf3a05ba5	-	7910b3692eb6	-	-	2026-11-24	xproof
+50ace222-57f1-477f-9e06-155d7b403512	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:realm-scorcher-hellkite:f0t0:s2,f:xs:XP:realm-scorcher-hellkite:f0t0:s2	-	-	-	267e485f6204	-	7910b3692eb6	-	-	2026-11-24	xproof
 50ace222-57f1-477f-9e06-155d7b403512	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Realm-Scorcher Hellkite/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ace222-57f1-477f-9e06-155d7b403512	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Realm-Scorcher Hellkite/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ace222-57f1-477f-9e06-155d7b403512	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Realm-Scorcher Hellkite/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

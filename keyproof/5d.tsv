@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d520476-740a-4005-801e-472b24fa6497	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d520dd4-7986-41fa-ab94-9226da751668	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d520dd4-7986-41fa-ab94-9226da751668	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d575b78-3d7b-4860-abc3-e99e429279a1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mine-raider:f0t0:s2,f:xs:XP:mine-raider:f0t0:s2	-	-	-	e07cf3a05ba5	-	16a2818a7867	-	-	2026-11-24	xproof
+5d575b78-3d7b-4860-abc3-e99e429279a1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mine-raider:f0t0:s2,f:xs:XP:mine-raider:f0t0:s2	-	-	-	267e485f6204	-	16a2818a7867	-	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mine Raider/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mine Raider/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -120,11 +120,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d950fd4-8956-4b1a-ab0f-ab31bcffce4e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Callous Inspector/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d950fd4-8956-4b1a-ab0f-ab31bcffce4e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Callous Inspector/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d950fd4-8956-4b1a-ab0f-ab31bcffce4e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Callous Inspector/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d957045-acb2-4546-8c19-71511fd497ef	cast	cast-resolve	agreed	-	X	scen	1	0	Migrating Ketradon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5d957045-acb2-4546-8c19-71511fd497ef	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:migrating-ketradon:f0t0:s1,f:xs:XP:migrating-ketradon:f0t0:s1	-	-	-	267e485f6204	-	a7daca8a007b	-	-	2026-11-24	xproof
 5d957045-acb2-4546-8c19-71511fd497ef	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Migrating Ketradon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d957045-acb2-4546-8c19-71511fd497ef	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Migrating Ketradon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d957045-acb2-4546-8c19-71511fd497ef	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Migrating Ketradon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d957045-acb2-4546-8c19-71511fd497ef	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d957045-acb2-4546-8c19-71511fd497ef	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:migrating-ketradon:f0t0:s2,f:xs:XP:migrating-ketradon:f0t0:s2	-	-	-	267e485f6204	-	a7daca8a007b	-	-	2026-11-24	xproof
+5d957045-acb2-4546-8c19-71511fd497ef	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:migrating-ketradon:f0t0:s1,f:xs:XP:migrating-ketradon:f0t0:s1	-	-	-	267e485f6204	-	a7daca8a007b	-	-	2026-11-24	xproof
 5d95db27-53bb-4a20-9fb8-24998b03e767	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d96170f-14dd-496e-a485-bd3b9eedfe02	cast	cast-resolve	agreed	-	X	scen	1	0	Maddening Hex/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5d96840e-f9b3-4c86-8f59-f12e5736318f	cast	cast	agreed	-	X	start	1	0	x:xs:XP:voracious-greatshark:f0t0:s2	-	-	-	e07cf3a05ba5	-	0bb1a2700d20	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5db492f2-21c0-4eee-843a-509fa0d3a327	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5db9121d-934a-44f1-b178-b389c6595af7	cast	cast-resolve	agreed	-	X	scen	1	0	Rocket-Powered Goblin Glider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5db9121d-934a-44f1-b178-b389c6595af7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rocket-Powered Goblin Glider/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5db9121d-934a-44f1-b178-b389c6595af7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5db9121d-934a-44f1-b178-b389c6595af7	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 5db9121d-934a-44f1-b178-b389c6595af7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rocket-Powered Goblin Glider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5dba7746-c087-4ec1-92ca-ab9882dea24d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5dba7746-c087-4ec1-92ca-ab9882dea24d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

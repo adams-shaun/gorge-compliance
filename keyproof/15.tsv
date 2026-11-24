@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-15030c1d-7c0a-4273-a022-eb98d6c7a1ce	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:loan-shark:f0t0:s2,f:xs:XP:loan-shark:f0t0:s2	-	-	-	e07cf3a05ba5	-	d481f0d6aea9	-	-	2026-11-24	xproof
+15030c1d-7c0a-4273-a022-eb98d6c7a1ce	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:loan-shark:f0t0:s2,f:xs:XP:loan-shark:f0t0:s2	-	-	-	267e485f6204	-	d481f0d6aea9	-	-	2026-11-24	xproof
 15030c1d-7c0a-4273-a022-eb98d6c7a1ce	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15039c85-31e2-4a2b-82f8-2f8270ff9a00	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 150ab025-5cc3-4468-a724-bbba8838445d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -110,9 +110,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15bd8fa1-0858-4029-9973-e24c86e45af3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15bd8fa1-0858-4029-9973-e24c86e45af3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15c6837c-775b-4b4a-a2f7-9fd79215fa05	cast	cast-resolve	agreed	-	FX	scen	2	0	Gravkill/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-15c994b9-901a-46d6-804b-24560a14a481	cast	cast-resolve	agreed	-	X	scen	1	0	Seedship Broodtender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+15c994b9-901a-46d6-804b-24560a14a481	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:seedship-broodtender:f0t0:s2,f:xs:XP:seedship-broodtender:f0t0:s2	-	-	-	267e485f6204	-	5d320cd0a66f	-	-	2026-11-24	xproof
 15c994b9-901a-46d6-804b-24560a14a481	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Seedship Broodtender/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-15c994b9-901a-46d6-804b-24560a14a481	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+15c994b9-901a-46d6-804b-24560a14a481	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:seedship-broodtender:f0t0:s2,f:xs:XP:seedship-broodtender:f0t0:s2	-	-	-	267e485f6204	-	5d320cd0a66f	-	-	2026-11-24	xproof
 15cc068c-f424-433e-b165-8457c62a4b35	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15cc92c0-76ce-4b97-b1a2-a7d58bbfe857	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15cc92c0-76ce-4b97-b1a2-a7d58bbfe857	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

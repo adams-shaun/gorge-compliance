@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5432bd43-e92c-464b-9ad2-3515f3042799	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5432bd43-e92c-464b-9ad2-3515f3042799	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5432bd43-e92c-464b-9ad2-3515f3042799	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	4da4cfd16ff3	-	-	2026-11-24	xproof
-5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	4da4cfd16ff3	-	-	2026-11-24	xproof
+5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	cast	cast	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	4da4cfd16ff3	-	-	2026-11-24	xproof
+5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	4da4cfd16ff3	-	-	2026-11-24	xproof
 5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5437f560-7f61-4326-be8e-15d74bf4e6ec	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5437f560-7f61-4326-be8e-15d74bf4e6ec	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -93,9 +93,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5462cb38-7cd7-46e8-a273-35d0d1af45b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54634ef2-cb7a-4203-8e48-2733f8c3911b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54634ef2-cb7a-4203-8e48-2733f8c3911b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	cast	cast-resolve	agreed	-	FX	scen	2	0	Temur Monument/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:temur-monument:f0t0:s2,f:xs:XP:temur-monument:f0t0:s2	-	-	-	267e485f6204	-	1e8a1ad31d3a	-	-	2026-11-24	xproof
 5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Temur Monument/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:temur-monument:f0t0:s2,f:xs:XP:temur-monument:f0t0:s2	-	-	-	267e485f6204	-	1e8a1ad31d3a	-	-	2026-11-24	xproof
 546a217a-ac24-4fc0-97a8-424cfe1aafc0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 546a217a-ac24-4fc0-97a8-424cfe1aafc0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 546f037b-aea8-4c7a-9b66-373f1be0bac6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -155,8 +155,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54bfd255-cce6-4c67-8a18-2bc01400f4b6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54c18f09-5c5a-46e7-9f66-ff91bc12537c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54c18f09-5c5a-46e7-9f66-ff91bc12537c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54c2b3b3-e247-4146-8045-d49480b795f2	cast	cast-resolve	agreed	-	X	scen	1	0	Racers' Scoreboard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-54c2b3b3-e247-4146-8045-d49480b795f2	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+54c2b3b3-e247-4146-8045-d49480b795f2	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:racers-scoreboard:f0t0:s2,f:xs:XP:racers-scoreboard:f0t0:s2	-	-	-	267e485f6204	-	65381c98020b	-	-	2026-11-24	xproof
+54c2b3b3-e247-4146-8045-d49480b795f2	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:racers-scoreboard:f0t0:s2,f:xs:XP:racers-scoreboard:f0t0:s2	-	-	-	267e485f6204	-	65381c98020b	-	-	2026-11-24	xproof
 54c2b3b3-e247-4146-8045-d49480b795f2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Racers' Scoreboard/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 54c3d8ba-ee7c-4f15-8ee3-e5daf860b428	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54ca5904-9099-497a-9684-101656025487	cast	cast-resolve	agreed	-	X	scen	1	0	Terra, Magical Adept/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

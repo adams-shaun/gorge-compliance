@@ -47,8 +47,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8046981c-d68c-4fbb-a133-8037996c9d10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8046981c-d68c-4fbb-a133-8037996c9d10	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8049dbff-6b57-454a-a2e6-7e2ae39bb606	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8054092a-1940-4f4b-991d-81f4d384cdb1	cast	cast-resolve	agreed	-	X	scen	1	0	Hardlight Containment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8054092a-1940-4f4b-991d-81f4d384cdb1	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8054092a-1940-4f4b-991d-81f4d384cdb1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hardlight-containment:f0t0:s2,f:xs:XP:hardlight-containment:f0t0:s2	-	-	-	267e485f6204	-	260c5235ac63	-	-	2026-11-24	xproof
+8054092a-1940-4f4b-991d-81f4d384cdb1	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hardlight-containment:f0t0:s2,f:xs:XP:hardlight-containment:f0t0:s2	-	-	-	267e485f6204	-	260c5235ac63	-	-	2026-11-24	xproof
 8054092a-1940-4f4b-991d-81f4d384cdb1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hardlight Containment/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 80559618-9dd9-4987-b3bc-1a1b5537bbc5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 805d1f48-dd91-4034-b42c-3f1f1cb75cc9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,11 +67,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 806fc324-a17a-4e65-a9b6-d739c471c7f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 806fc324-a17a-4e65-a9b6-d739c471c7f8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 806fc324-a17a-4e65-a9b6-d739c471c7f8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8074afbf-190b-4a24-b939-cc559bdffe38	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	37e2be2455bc	-	-	2026-11-24	xproof
+8074afbf-190b-4a24-b939-cc559bdffe38	cast	cast	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	37e2be2455bc	-	-	2026-11-24	xproof
 8074afbf-190b-4a24-b939-cc559bdffe38	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Izoni, Center of the Web/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8074afbf-190b-4a24-b939-cc559bdffe38	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Izoni, Center of the Web/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8074afbf-190b-4a24-b939-cc559bdffe38	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Izoni, Center of the Web/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8074afbf-190b-4a24-b939-cc559bdffe38	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	37e2be2455bc	-	-	2026-11-24	xproof
+8074afbf-190b-4a24-b939-cc559bdffe38	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	37e2be2455bc	-	-	2026-11-24	xproof
 8074afbf-190b-4a24-b939-cc559bdffe38	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Izoni, Center of the Web/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 80788290-1569-4c7f-b263-b4da7b31a9d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 80788290-1569-4c7f-b263-b4da7b31a9d1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

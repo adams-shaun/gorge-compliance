@@ -135,8 +135,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b9f6a6e-c168-4732-b454-2272d56636da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b9f6a6e-c168-4732-b454-2272d56636da	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ba1f2c5-6456-4809-a563-fd5bd311869a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4ba4cb4b-f421-4abd-8fcf-a01174447790	cast	cast-resolve	agreed	-	X	scen	1	0	Selfcraft Mechan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4ba4cb4b-f421-4abd-8fcf-a01174447790	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4ba4cb4b-f421-4abd-8fcf-a01174447790	cast	cast	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	82e9204f823e	-	-	2026-11-24	xproof
+4ba4cb4b-f421-4abd-8fcf-a01174447790	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	267e485f6204	-	82e9204f823e	-	-	2026-11-24	xproof
 4ba5b3f6-503b-43e6-b66e-4f8c55cffed7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ba5b3f6-503b-43e6-b66e-4f8c55cffed7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ba5b3f6-503b-43e6-b66e-4f8c55cffed7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,7 +183,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4bccfa67-0c6f-42a1-b8d4-0842a8230d1e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rick Jones, Destined Sidekick/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4bcf4f12-470e-4f73-a19a-643a20084e16	cast	cast-resolve	agreed	-	X	scen	1	0	Night of the Sweets' Revenge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4bcf4f12-470e-4f73-a19a-643a20084e16	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Night of the Sweets' Revenge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4bcf4f12-470e-4f73-a19a-643a20084e16	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4bcf4f12-470e-4f73-a19a-643a20084e16	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 4bcf4f12-470e-4f73-a19a-643a20084e16	static#0.0	static#0.0	agreed	-	X	scen	1	0	Night of the Sweets' Revenge/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4bd1d079-314e-4fb5-9b43-c9c83e5528bc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4bd1d079-314e-4fb5-9b43-c9c83e5528bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -209,9 +209,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4bf308fc-a54e-4fba-b0fd-3bedb4db3b18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4bf308fc-a54e-4fba-b0fd-3bedb4db3b18	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4bf5402f-7bba-4c0c-aebd-1b231768f2b2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4bf589ed-58f8-40ad-bcee-50cb99da02ca	cast	cast-resolve	agreed	-	X	scen	1	0	Thief's Knife/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4bf589ed-58f8-40ad-bcee-50cb99da02ca	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:thief-s-knife:f0t0:s2,f:xs:XP:thief-s-knife:f0t0:s2	-	-	-	267e485f6204	-	a306b2d7921f	-	-	2026-11-24	xproof
 4bf589ed-58f8-40ad-bcee-50cb99da02ca	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thief's Knife/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4bf589ed-58f8-40ad-bcee-50cb99da02ca	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4bf589ed-58f8-40ad-bcee-50cb99da02ca	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:thief-s-knife:f0t0:s2,f:xs:XP:thief-s-knife:f0t0:s2	-	-	-	267e485f6204	-	a306b2d7921f	-	-	2026-11-24	xproof
 4bf589ed-58f8-40ad-bcee-50cb99da02ca	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thief's Knife/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4bf95747-4572-49b8-b892-87fe7f910252	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4bf95747-4572-49b8-b892-87fe7f910252	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -27,10 +27,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1135ebc3-9537-4341-956b-6e22d8be5f20	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Troyan, Gutsy Explorer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1135ebc3-9537-4341-956b-6e22d8be5f20	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Troyan, Gutsy Explorer/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11369d8b-6443-43c3-a60f-dd920a4e8c08	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1139ee31-cb6e-4ae6-a08b-252c46b2db97	cast	cast-resolve	agreed	-	X	scen	1	0	Lotusguard Disciple/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1139ee31-cb6e-4ae6-a08b-252c46b2db97	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:lotusguard-disciple:f0t0:s2,f:xs:XP:lotusguard-disciple:f0t0:s2	-	-	-	267e485f6204	-	cefc2a332b63	-	-	2026-11-24	xproof
 1139ee31-cb6e-4ae6-a08b-252c46b2db97	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lotusguard Disciple/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1139ee31-cb6e-4ae6-a08b-252c46b2db97	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lotusguard Disciple/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1139ee31-cb6e-4ae6-a08b-252c46b2db97	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1139ee31-cb6e-4ae6-a08b-252c46b2db97	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:lotusguard-disciple:f0t0:s2,f:xs:XP:lotusguard-disciple:f0t0:s2	-	-	-	267e485f6204	-	cefc2a332b63	-	-	2026-11-24	xproof
 113c3024-c3bd-4c3a-8c08-3828646d9ca2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 113c3024-c3bd-4c3a-8c08-3828646d9ca2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 113c3024-c3bd-4c3a-8c08-3828646d9ca2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1175d482-d8a2-467f-bc50-2f4b241966bb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Arashin Sunshield/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1175d482-d8a2-467f-bc50-2f4b241966bb	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11765eaf-87a1-48bd-90c1-7a5f21be5918	cast	cast-resolve	agreed	-	FX	scen	2	0	Roxanne, Starfall Savant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-11765eaf-87a1-48bd-90c1-7a5f21be5918	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11765eaf-87a1-48bd-90c1-7a5f21be5918	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 11765eaf-87a1-48bd-90c1-7a5f21be5918	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Roxanne, Starfall Savant/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11765eaf-87a1-48bd-90c1-7a5f21be5918	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Roxanne, Starfall Savant/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11776f73-f504-4f19-b5b6-2f58279f8b15	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -84,8 +84,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 117d89b2-b4c0-4421-a631-37810c0e0969	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 117d89b2-b4c0-4421-a631-37810c0e0969	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 117d89b2-b4c0-4421-a631-37810c0e0969	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11809d9b-30f3-49d5-9119-e45b4de044c8	cast	cast-resolve	agreed	-	X	scen	1	0	Knight Luminary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-11809d9b-30f3-49d5-9119-e45b4de044c8	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11809d9b-30f3-49d5-9119-e45b4de044c8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:knight-luminary:f0t0:s2,f:xs:XP:knight-luminary:f0t0:s2	-	-	-	267e485f6204	-	377f6a1d1bd3	-	-	2026-11-24	xproof
+11809d9b-30f3-49d5-9119-e45b4de044c8	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:knight-luminary:f0t0:s2,f:xs:XP:knight-luminary:f0t0:s2	-	-	-	267e485f6204	-	377f6a1d1bd3	-	-	2026-11-24	xproof
 11838086-db2f-4588-ae18-4129c9e2b67d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11838086-db2f-4588-ae18-4129c9e2b67d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11838086-db2f-4588-ae18-4129c9e2b67d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

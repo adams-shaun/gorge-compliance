@@ -29,10 +29,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1920254f-0f65-4426-aabc-f3807476b67b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 192603a4-720e-4c53-bee5-4f2826c1ed7f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 192603a4-720e-4c53-bee5-4f2826c1ed7f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-192dd1e2-b6c2-432a-a1b4-e52ff39b3db2	cast	cast-resolve	agreed	-	X	scen	1	0	News Helicopter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+192dd1e2-b6c2-432a-a1b4-e52ff39b3db2	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:news-helicopter:f0t0:s2,f:xs:XP:news-helicopter:f0t0:s2	-	-	-	267e485f6204	-	f7af9fdee9c5	-	-	2026-11-24	xproof
 192dd1e2-b6c2-432a-a1b4-e52ff39b3db2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	News Helicopter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 192dd1e2-b6c2-432a-a1b4-e52ff39b3db2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	News Helicopter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-192dd1e2-b6c2-432a-a1b4-e52ff39b3db2	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+192dd1e2-b6c2-432a-a1b4-e52ff39b3db2	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:news-helicopter:f0t0:s2,f:xs:XP:news-helicopter:f0t0:s2	-	-	-	267e485f6204	-	f7af9fdee9c5	-	-	2026-11-24	xproof
 192e150a-96b0-42d6-9d39-03d0bed61f41	cast	cast-resolve	agreed	-	FX	scen	2	0	Super Villain Lockup/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 192e150a-96b0-42d6-9d39-03d0bed61f41	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 192f3c8a-1120-4f7f-ae0f-fe9bde59cd08	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19a11c33-269a-45d3-86c7-827965053f26	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a2f0a0-9e68-4982-a5f5-b77d805befd7	cast	cast-resolve	agreed	-	X	scen	1	0	Demonic Pact/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19a2f0a0-9e68-4982-a5f5-b77d805befd7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Demonic Pact/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-19a32e29-45ec-433e-9cb4-b2c32cac8f80	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:beastbond-outcaster:f0t0:s2,f:xs:XP:beastbond-outcaster:f0t0:s2	-	-	-	e07cf3a05ba5	-	a829239b252e	-	-	2026-11-24	xproof
+19a32e29-45ec-433e-9cb4-b2c32cac8f80	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:beastbond-outcaster:f0t0:s2,f:xs:XP:beastbond-outcaster:f0t0:s2	-	-	-	267e485f6204	-	a829239b252e	-	-	2026-11-24	xproof
 19a32e29-45ec-433e-9cb4-b2c32cac8f80	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a39cc5-2134-4dee-932c-81389806c57b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a3c505-b180-47cc-bef3-9e807a8a4a3d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

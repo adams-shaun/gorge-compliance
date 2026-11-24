@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 582fdfbe-c5fe-45d0-b3ff-e66db5183725	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 582fdfbe-c5fe-45d0-b3ff-e66db5183725	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 583102f8-7232-4fbb-a715-087448536bb2	cast	cast-resolve	agreed	-	FX	scen	2	0	Drix Fatemaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-583102f8-7232-4fbb-a715-087448536bb2	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+583102f8-7232-4fbb-a715-087448536bb2	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 583102f8-7232-4fbb-a715-087448536bb2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Drix Fatemaker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58321467-41d6-4419-bcb2-cd3e60f677b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58321467-41d6-4419-bcb2-cd3e60f677b3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -89,10 +89,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 585511e1-4cca-4e70-963d-56f98ae49c29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 585511e1-4cca-4e70-963d-56f98ae49c29	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 585511e1-4cca-4e70-963d-56f98ae49c29	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-58582fac-4c42-4a1c-9ab1-4a892b500da4	cast	cast-resolve	agreed	-	X	scen	1	0	Quantum Riddler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+58582fac-4c42-4a1c-9ab1-4a892b500da4	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:quantum-riddler:f0t0:s2,f:xs:XP:quantum-riddler:f0t0:s2	-	-	-	267e485f6204	-	7e1392cb255b	-	-	2026-11-24	xproof
 58582fac-4c42-4a1c-9ab1-4a892b500da4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Quantum Riddler/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58582fac-4c42-4a1c-9ab1-4a892b500da4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Quantum Riddler/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-58582fac-4c42-4a1c-9ab1-4a892b500da4	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+58582fac-4c42-4a1c-9ab1-4a892b500da4	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:quantum-riddler:f0t0:s2,f:xs:XP:quantum-riddler:f0t0:s2	-	-	-	267e485f6204	-	7e1392cb255b	-	-	2026-11-24	xproof
 5859fd59-8732-414a-8932-007980af495d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5859fd59-8732-414a-8932-007980af495d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 585a1c82-8a6c-4770-be9c-3a4916b74a9f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

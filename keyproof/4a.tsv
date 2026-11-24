@@ -152,17 +152,17 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4acacdd2-a736-43a2-ad67-891b9bd124f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4acacdd2-a736-43a2-ad67-891b9bd124f8	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4acb6612-54e8-428d-acb6-c7259a5ad6a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4aceb786-960d-4719-9de8-79dffd491a51	cast	cast-resolve	agreed	-	X	scen	1	0	Bard's Bow/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4aceb786-960d-4719-9de8-79dffd491a51	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:bard-s-bow:f0t0:s2,f:xs:XP:bard-s-bow:f0t0:s2	-	-	-	267e485f6204	-	aa9903b69980	-	-	2026-11-24	xproof
 4aceb786-960d-4719-9de8-79dffd491a51	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bard's Bow/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4aceb786-960d-4719-9de8-79dffd491a51	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4aceb786-960d-4719-9de8-79dffd491a51	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:bard-s-bow:f0t0:s2,f:xs:XP:bard-s-bow:f0t0:s2	-	-	-	267e485f6204	-	aa9903b69980	-	-	2026-11-24	xproof
 4aceb786-960d-4719-9de8-79dffd491a51	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bard's Bow/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4ad09b75-6d7a-46c7-95a2-d7f90995fdd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ad09b75-6d7a-46c7-95a2-d7f90995fdd1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ad34f85-a185-458a-a7a1-eb60f7efce5b	cast	cast-resolve	agreed	-	X	scen	1	0	Brackish Blunder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4ad870b2-133c-4229-84a8-f91e4c62fcd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ad870b2-133c-4229-84a8-f91e4c62fcd0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4ad9c550-5605-4ffe-8e27-e9f2d9ada000	cast	cast-resolve	agreed	-	X	scen	1	0	Stormplain Detainment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4ad9c550-5605-4ffe-8e27-e9f2d9ada000	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4ad9c550-5605-4ffe-8e27-e9f2d9ada000	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stormplain-detainment:f0t0:s2,f:xs:XP:stormplain-detainment:f0t0:s2	-	-	-	267e485f6204	-	f581bad070cf	-	-	2026-11-24	xproof
+4ad9c550-5605-4ffe-8e27-e9f2d9ada000	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stormplain-detainment:f0t0:s2,f:xs:XP:stormplain-detainment:f0t0:s2	-	-	-	267e485f6204	-	f581bad070cf	-	-	2026-11-24	xproof
 4adc39dd-8de1-4298-947c-ff666ec3adeb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4adc39dd-8de1-4298-947c-ff666ec3adeb	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4adc39dd-8de1-4298-947c-ff666ec3adeb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
