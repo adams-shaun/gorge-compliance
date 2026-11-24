@@ -52,7 +52,14 @@ GO_TEST_FLAGS ?= -p=2
 # fork #23 (Volatile Arsonist's attack trigger damages each chosen target, not only the creature slot, CR 601.2c:
 # EachTargetPointer, VolatileArsonistTest) and fork #24 (Artifact Ward is its three Oracle abilities, not protection
 # from artifacts, so artifact Equipment stays attached, CR 702.16d: ArtifactWardTest). Fork branch pin/xmage-ref-arsonist-ward.
-XMAGE_REF  ?= 464e1a6b239e2443efa0e5cf7a22613d36870b5b
+# 791c9c554a = 464e1a6b23 + fork PR #25 (re-stacked on the #23/#24 pin so it is carried: "if a card is exiled with it"
+# is an intervening-if, CR 603.4. Redemptor Dreadnought's attack trigger and Evercoat Ursine's combat-damage trigger
+# went on the stack with nothing exiled with the permanent and read the exile zone only at resolution; both now use
+# .withInterveningIf with a condition reading the source's exile zone). Fork branch pin/redemptor-iif-464, the same
+# five-file change as 9bb2f33757; the card fix itself is fix/redemptor-dreadnought-intervening-if,
+# RedemptorDreadnoughtTest and EvercoatUrsineTest. Card behaviour change only for those two cards, so the manifests
+# are unchanged.
+XMAGE_REF  ?= 791c9c554a9db844bb91f6c52b4c2e0e7685a20d
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
