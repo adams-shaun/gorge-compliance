@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 937de7f3-7f7f-4fd4-8531-0b90a11815c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 937de7f3-7f7f-4fd4-8531-0b90a11815c8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 938b4e2c-88d9-4637-bc00-e228920c9a78	cast	cast-resolve	agreed	-	FX	scen	2	0	Murder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-938c03fc-8adf-4c7a-8ae1-eca8401f7a83	cast	cast-resolve	agreed	-	X	scen	1	0	Peerless Recycling/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+938c03fc-8adf-4c7a-8ae1-eca8401f7a83	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:peerless-recycling:cast:s1,f:xs:XP:peerless-recycling:cast:s1	-	-	-	23b491658465	-	4a0f716459b4	-	-	2026-11-24	xproof
 938c4f2e-6dda-4ac4-b50c-40dc165b4eaa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 938c4f2e-6dda-4ac4-b50c-40dc165b4eaa	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 938cc97f-3908-401e-94cd-32004aff1ef1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -108,8 +108,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9391f8ee-3435-400c-8a50-79a75de18a90	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:nefashu:f0t0:s1,f:xs:XP:nefashu:f0t0:s1	-	-	-	8c0bd19283bb	-	ce8e0fc1e110	-	-	2026-11-24	xproof
 939203ec-3de4-44d8-932e-63a32e5f2d47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93953926-a644-49bb-9b5a-4c8f19114c7e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Demolition Field/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-93953926-a644-49bb-9b5a-4c8f19114c7e	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Demolition Field/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-93953926-a644-49bb-9b5a-4c8f19114c7e	land	play-land	agreed	-	X	scen	1	0	Demolition Field/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+93953926-a644-49bb-9b5a-4c8f19114c7e	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:demolition-field:f0a1:s1,f:xs:XP:demolition-field:f0a1:s1	-	-	-	23b491658465	-	02a558c7d6a3	-	-	2026-11-24	xproof
+93953926-a644-49bb-9b5a-4c8f19114c7e	land	land	agreed	-	FX	start	2	0	x:xs:XP:demolition-field:land:s1,f:xs:XP:demolition-field:land:s1	-	-	-	23b491658465	-	02a558c7d6a3	-	-	2026-11-24	xproof
 939556c8-e363-4453-a624-ca52b151467e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 939556c8-e363-4453-a624-ca52b151467e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9396546c-d067-4ce3-9c3d-b62cca970b4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:asceticism:cast:s1,f:xs:XP:asceticism:cast:s1	-	-	-	d864b561c9cb	-	ae37e1c89622	-	-	2026-11-24	xproof

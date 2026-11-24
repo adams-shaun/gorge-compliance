@@ -27,9 +27,9 @@ a82842b8-cc2e-44fa-b869-7bccc16ca74f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ter
 a82842b8-cc2e-44fa-b869-7bccc16ca74f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 a82842b8-cc2e-44fa-b869-7bccc16ca74f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8287efd-23ca-498b-90f1-c76099919fa4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8291d04-240e-456b-8c86-1fb4eb460476	cast	cast-resolve	agreed	-	X	scen	1	0	Hylda's Crown of Winter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a8291d04-240e-456b-8c86-1fb4eb460476	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hylda-s-crown-of-winter:cast:s1,f:xs:XP:hylda-s-crown-of-winter:cast:s1	-	-	-	23b491658465	-	5815a4bf9076	-	-	2026-11-24	xproof
 a8291d04-240e-456b-8c86-1fb4eb460476	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hylda's Crown of Winter/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a8291d04-240e-456b-8c86-1fb4eb460476	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hylda's Crown of Winter/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a8291d04-240e-456b-8c86-1fb4eb460476	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:hylda-s-crown-of-winter:f0a1:s1,f:xs:XP:hylda-s-crown-of-winter:f0a1:s1	-	-	-	23b491658465	-	5815a4bf9076	-	-	2026-11-24	xproof
 a82c3860-4dd6-4ffd-aa8f-ab8df687db6c	cast	cast-resolve	agreed	-	FX	scen	2	0	Last Gasp/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a82d855c-50c8-43f2-99ba-a84fe84539c5	cast	cast-resolve	agreed	-	X	scen	1	0	The Ten Rings/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a82d855c-50c8-43f2-99ba-a84fe84539c5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Ten Rings/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ a8a8407c-d0e3-4311-82ed-1ab1f75159d9	cast	NULL	owed	refused:steps-needed:token	-
 a8a8407c-d0e3-4311-82ed-1ab1f75159d9	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a8a8407c-d0e3-4311-82ed-1ab1f75159d9	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hunter-s-talent:f0t0:s2,f:xs:XP:hunter-s-talent:f0t0:s2	-	-	-	e07cf3a05ba5	-	80ea1df0c26f	-	-	2026-11-24	xproof
-a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hunter's Talent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	4	0	x:xs:XP:hunter-s-talent:f0a0:s1,f:xs:XP:hunter-s-talent:f0a0:s1	-	-	-	23b491658465	-	80ea1df0c26f	-	-	2026-11-24	xproof
 a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hunter's Talent/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hunter-s-talent:f0t0:s2,f:xs:XP:hunter-s-talent:f0t0:s2	-	-	-	e07cf3a05ba5	-	80ea1df0c26f	-	-	2026-11-24	xproof
 a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Hunter's Talent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

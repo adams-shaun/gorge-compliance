@@ -38,10 +38,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3334b218-01e3-47a3-8a28-5cc2decbedea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:woodweaver-s-puzzleknot:f0t0:s1,f:xs:XP:woodweaver-s-puzzleknot:f0t0:s1	-	-	-	d864b561c9cb	-	3b042252cabf	-	-	2026-11-24	xproof
 333555d6-3fcc-4021-ab60-afc36d723877	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nacatl-outlander:cast:s1,f:xs:XP:nacatl-outlander:cast:s1	-	-	-	8a1b1a193ec0	-	6f0facb6595d	-	-	2026-11-24	xproof
 333745d9-e930-439b-94d6-3aeea2877f69	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-333c15c6-c8fd-4cdd-89d2-06b921edeb8b	cast	cast-resolve	agreed	-	X	scen	1	0	Rowan, Scion of War/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+333c15c6-c8fd-4cdd-89d2-06b921edeb8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rowan-scion-of-war:cast:s1,f:xs:XP:rowan-scion-of-war:cast:s1	-	-	-	23b491658465	-	9c3939d4e72a	-	-	2026-11-24	xproof
 333c15c6-c8fd-4cdd-89d2-06b921edeb8b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rowan, Scion of War/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 333c15c6-c8fd-4cdd-89d2-06b921edeb8b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rowan, Scion of War/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-333c15c6-c8fd-4cdd-89d2-06b921edeb8b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rowan, Scion of War/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+333c15c6-c8fd-4cdd-89d2-06b921edeb8b	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:rowan-scion-of-war:f0a0:s1,f:xs:XP:rowan-scion-of-war:f0a0:s1	-	-	-	23b491658465	-	9c3939d4e72a	-	-	2026-11-24	xproof
 333cc91b-01ab-4491-a993-d8304fc382c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33416979-2a3b-4184-818c-6a4e9ccb4580	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bramble-creeper:cast:s1,f:xs:XP:bramble-creeper:cast:s1	-	-	-	8a1b1a193ec0	-	8f9f7bb900d3	-	-	2026-11-24	xproof
 33416979-2a3b-4184-818c-6a4e9ccb4580	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bramble-creeper:f0t0:s1,f:xs:XP:bramble-creeper:f0t0:s1	-	-	-	8a1b1a193ec0	-	8f9f7bb900d3	-	-	2026-11-24	xproof
@@ -90,8 +90,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3384606b-7724-4584-89fa-fbe006d5de1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 338619f2-bb33-4988-bafe-7460f86acef8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:la-forge-perceptive-engineer:cast:s1,f:xs:XP:la-forge-perceptive-engineer:cast:s1	-	-	-	8c0bd19283bb	-	c136ecd60748	-	-	2026-11-24	xproof
 338619f2-bb33-4988-bafe-7460f86acef8	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:la-forge-perceptive-engineer:f0a0:s1,f:xs:XP:la-forge-perceptive-engineer:f0a0:s1	-	-	-	8c0bd19283bb	-	c136ecd60748	-	-	2026-11-24	xproof
-3386414c-32fa-40ae-9b30-dab976a158c1	cast	cast-resolve	agreed	-	X	scen	1	0	Vampire Gourmand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3386414c-32fa-40ae-9b30-dab976a158c1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vampire Gourmand/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3386414c-32fa-40ae-9b30-dab976a158c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampire-gourmand:cast:s1,f:xs:XP:vampire-gourmand:cast:s1	-	-	-	23b491658465	-	086bf1d56113	-	-	2026-11-24	xproof
+3386414c-32fa-40ae-9b30-dab976a158c1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:vampire-gourmand:f0t0:s1,f:xs:XP:vampire-gourmand:f0t0:s1	-	-	-	23b491658465	-	086bf1d56113	-	-	2026-11-24	xproof
 33869ba6-13e5-4e48-8963-92f7965648fb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:felidar-guardian:f0t0:s1,f:xs:XP:felidar-guardian:f0t0:s1	-	-	-	d864b561c9cb	-	b6c494c52151	-	-	2026-11-24	xproof
 33869ba6-13e5-4e48-8963-92f7965648fb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:felidar-guardian:f0t0:s1,f:xs:XP:felidar-guardian:f0t0:s1	-	-	-	d864b561c9cb	-	b6c494c52151	-	-	2026-11-24	xproof
 338747e8-bed8-4e60-8b19-5c2b80799477	cast	cast-resolve	agreed	-	X	scen	1	0	Soul Immolation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33c21ef1-33eb-447a-a318-a352f163a8a0	cast	cast-resolve	agreed	-	FX	scen	2	0	Joust Through/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33c3a6be-8cae-4de8-9d9b-43216d727e93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33c3a6be-8cae-4de8-9d9b-43216d727e93	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-33c3a81a-6cea-48c9-b966-67084d96e74f	cast	cast-resolve	agreed	-	X	scen	1	0	Osseous Sticktwister/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+33c3a81a-6cea-48c9-b966-67084d96e74f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:osseous-sticktwister:cast:s1,f:xs:XP:osseous-sticktwister:cast:s1	-	-	-	23b491658465	-	7750f9ce2205	-	-	2026-11-24	xproof
 33c3a81a-6cea-48c9-b966-67084d96e74f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Osseous Sticktwister/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33c3a81a-6cea-48c9-b966-67084d96e74f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Osseous Sticktwister/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33c3a81a-6cea-48c9-b966-67084d96e74f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Osseous Sticktwister/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -86,8 +86,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 876ac6f6-74de-4666-84c6-83d81f054723	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 876affb5-155d-4268-9e46-4437a9fbccc7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 876affb5-155d-4268-9e46-4437a9fbccc7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-876c9620-216c-45dd-b8a6-b9e0cba63e3d	cast	cast-resolve	agreed	-	X	scen	1	0	Contested Game Ball/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-876c9620-216c-45dd-b8a6-b9e0cba63e3d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Contested Game Ball/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+876c9620-216c-45dd-b8a6-b9e0cba63e3d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:contested-game-ball:cast:s1,f:xs:XP:contested-game-ball:cast:s1	-	-	-	23b491658465	-	95f2cf204d12	-	-	2026-11-24	xproof
+876c9620-216c-45dd-b8a6-b9e0cba63e3d	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:contested-game-ball:f0a0:s1,f:xs:XP:contested-game-ball:f0a0:s1	-	-	-	23b491658465	-	95f2cf204d12	-	-	2026-11-24	xproof
 876c9620-216c-45dd-b8a6-b9e0cba63e3d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Contested Game Ball/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8773c2ea-ef41-4403-bb52-07f0d70d9bbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clay-golem:cast:s1,f:xs:XP:clay-golem:cast:s1	-	-	-	8c0bd19283bb	-	596944c34acc	-	-	2026-11-24	xproof
 8773c2ea-ef41-4403-bb52-07f0d70d9bbe	f0/a0	NULL	owed	refused:steps-needed:cost:RollDice	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 87bd0fdb-c5b9-46ea-9858-1a870960351f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-87bedc9b-b4d2-41b6-b9f1-e1aeb8e75ec3	cast	cast-resolve	agreed	-	X	scen	1	0	Rootrider Faun/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+87bedc9b-b4d2-41b6-b9f1-e1aeb8e75ec3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rootrider-faun:cast:s1,f:xs:XP:rootrider-faun:cast:s1	-	-	-	23b491658465	-	49fc9009d343	-	-	2026-11-24	xproof
 87bedc9b-b4d2-41b6-b9f1-e1aeb8e75ec3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rootrider Faun/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87bedc9b-b4d2-41b6-b9f1-e1aeb8e75ec3	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Rootrider Faun/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87c1bd51-6a85-4a14-af7b-a5b02ab69d73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

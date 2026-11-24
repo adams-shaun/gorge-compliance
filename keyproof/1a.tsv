@@ -17,8 +17,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a2030cc-d7ee-4059-b2d7-fb95ea8e267b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gravedigger:f0t0:s1,f:xs:XP:gravedigger:f0t0:s1	-	-	-	25696bf19d5b	-	e1abd89f8a07	-	-	2026-11-24	xproof
 1a2030cc-d7ee-4059-b2d7-fb95ea8e267b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gravedigger:f0t0:s1,f:xs:XP:gravedigger:f0t0:s1	-	-	-	25696bf19d5b	-	e1abd89f8a07	-	-	2026-11-24	xproof
 1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hidden Nursery/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hidden Nursery/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961	land	play-land	agreed	-	X	scen	1	0	Hidden Nursery/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961	f0/a1	Discover	agreed	-	FX	start	2	0	x:xs:XP:hidden-nursery:f0a1:s1,f:xs:XP:hidden-nursery:f0a1:s1	-	-	-	23b491658465	-	92d7fd8f19c1	-	-	2026-11-24	xproof
+1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961	land	land	agreed	-	FX	start	2	0	x:xs:XP:hidden-nursery:land:s1,f:xs:XP:hidden-nursery:land:s1	-	-	-	23b491658465	-	92d7fd8f19c1	-	-	2026-11-24	xproof
 1a28a83a-de27-4aaa-b35f-1e7075fc1e43	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1a28a83a-de27-4aaa-b35f-1e7075fc1e43	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1a28a83a-de27-4aaa-b35f-1e7075fc1e43	land	play-land	agreed	-	X	scen	1	0	Subspace Anomaly/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a304703-6b48-4f3f-bd41-7f10ce0a751c	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1a33a5c2-5aa1-48e5-95a8-d52cdce980de	cast	cast-resolve	agreed	-	FX	scen	2	0	Rowdy Research/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a33a5c2-5aa1-48e5-95a8-d52cdce980de	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rowdy Research/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1a362e4d-6c02-4b67-ab63-c6622e505195	cast	cast-resolve	agreed	-	X	scen	1	0	Crossway Troublemakers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1a362e4d-6c02-4b67-ab63-c6622e505195	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crossway-troublemakers:cast:s1,f:xs:XP:crossway-troublemakers:cast:s1	-	-	-	23b491658465	-	62833c2c836c	-	-	2026-11-24	xproof
 1a362e4d-6c02-4b67-ab63-c6622e505195	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Crossway Troublemakers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a362e4d-6c02-4b67-ab63-c6622e505195	static#0.0	static#0.0	agreed	-	X	scen	1	0	Crossway Troublemakers/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a36d2a8-6117-4828-bbe2-bc63212d29d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

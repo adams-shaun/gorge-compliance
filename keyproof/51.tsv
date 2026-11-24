@@ -76,8 +76,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51545f6e-d0e3-4b4c-bc73-c731f85e26b0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fevered-suspicion:cast:s1,f:xs:XP:fevered-suspicion:cast:s1	-	-	-	8c0bd19283bb	-	747f1da3c399	-	-	2026-11-24	xproof
 51577a8b-28d6-4f9e-8d3f-6a1380270fab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51577a8b-28d6-4f9e-8d3f-6a1380270fab	f0/t0	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-bruiser:f0t0:s1,f:xs:XP:arcbound-bruiser:f0t0:s1	-	-	-	d864b561c9cb	-	5bfa0872a1b6	-	-	2026-11-24	xproof
-515c1604-59f0-45b4-91be-d2f20fdd3e1e	cast	cast-resolve	agreed	-	X	scen	1	0	Frostbridge Guard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-515c1604-59f0-45b4-91be-d2f20fdd3e1e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Frostbridge Guard/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+515c1604-59f0-45b4-91be-d2f20fdd3e1e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frostbridge-guard:cast:s1,f:xs:XP:frostbridge-guard:cast:s1	-	-	-	23b491658465	-	2574aaf0a962	-	-	2026-11-24	xproof
+515c1604-59f0-45b4-91be-d2f20fdd3e1e	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:frostbridge-guard:f0a0:s1,f:xs:XP:frostbridge-guard:f0a0:s1	-	-	-	23b491658465	-	2574aaf0a962	-	-	2026-11-24	xproof
 515c522f-51d5-4f6d-b9b1-ea3c7f6a378e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 515fb257-ec07-4978-af16-47a10a22ba3c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 515fb257-ec07-4978-af16-47a10a22ba3c	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51b9d8ea-b0df-4a57-804e-6d395e301242	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-dreadlord:cast:s1,f:xs:XP:elvish-dreadlord:cast:s1	-	-	-	8c0bd19283bb	-	f496400376ad	-	-	2026-11-24	xproof
 51b9d8ea-b0df-4a57-804e-6d395e301242	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 51b9d8ea-b0df-4a57-804e-6d395e301242	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elvish-dreadlord:f0t0:s1,f:xs:XP:elvish-dreadlord:f0t0:s1	-	-	-	8c0bd19283bb	-	f496400376ad	-	-	2026-11-24	xproof
-51bb6d3b-be6a-435d-8a80-0c0f0161892d	cast	cast-resolve	agreed	-	X	scen	1	0	Storyteller Pixie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+51bb6d3b-be6a-435d-8a80-0c0f0161892d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storyteller-pixie:cast:s1,f:xs:XP:storyteller-pixie:cast:s1	-	-	-	23b491658465	-	c752b0e50d03	-	-	2026-11-24	xproof
 51bb6d3b-be6a-435d-8a80-0c0f0161892d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Storyteller Pixie/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51bb6d3b-be6a-435d-8a80-0c0f0161892d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Storyteller Pixie/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51bb6d3b-be6a-435d-8a80-0c0f0161892d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Storyteller Pixie/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

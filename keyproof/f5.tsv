@@ -46,7 +46,7 @@ f53f33ed-5c8c-4835-bc5f-65a8acfa3f5b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:st
 f5430b0e-e77f-47b8-ae6d-30bcff4d7e35	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f5430b0e-e77f-47b8-ae6d-30bcff4d7e35	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f54573d1-9950-46c3-b8f1-cd6f081d62ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f545870d-b628-4acb-88c7-37c2d72a5a85	cast	cast-resolve	agreed	-	X	scen	1	0	Shatter the Oath/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f545870d-b628-4acb-88c7-37c2d72a5a85	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shatter-the-oath:cast:s1,f:xs:XP:shatter-the-oath:cast:s1	-	-	-	23b491658465	-	0a7f6d4b063c	-	-	2026-11-24	xproof
 f551093d-40b7-43ac-8023-4cfbb6c646da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f551093d-40b7-43ac-8023-4cfbb6c646da	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 f5511802-56fe-4922-83d2-ae723e1beab7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -113,9 +113,9 @@ f5bdf226-7a83-469b-bc49-87af388d9020	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f5bdf226-7a83-469b-bc49-87af388d9020	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f5bece93-afb3-4fa4-83a8-d7eaac032522	cast	cast-resolve	agreed	-	X	scen	1	0	Most Valuable Slayer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f5bece93-afb3-4fa4-83a8-d7eaac032522	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Most Valuable Slayer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f5bed085-bb7a-4250-9599-b2a8a95e6b6f	cast	cast-resolve	agreed	-	X	scen	1	0	Lord Skitter, Sewer King/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f5bed085-bb7a-4250-9599-b2a8a95e6b6f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lord Skitter, Sewer King/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f5bed085-bb7a-4250-9599-b2a8a95e6b6f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Lord Skitter, Sewer King/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f5bed085-bb7a-4250-9599-b2a8a95e6b6f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lord-skitter-sewer-king:cast:s1,f:xs:XP:lord-skitter-sewer-king:cast:s1	-	-	-	23b491658465	-	ca37c1fcbb52	-	-	2026-11-24	xproof
+f5bed085-bb7a-4250-9599-b2a8a95e6b6f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lord-skitter-sewer-king:cast:s1,f:xs:XP:lord-skitter-sewer-king:cast:s1	-	-	-	23b491658465	-	ca37c1fcbb52	-	-	2026-11-24	xproof
+f5bed085-bb7a-4250-9599-b2a8a95e6b6f	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:lord-skitter-sewer-king:cast:s1,f:xs:XP:lord-skitter-sewer-king:cast:s1	-	-	-	23b491658465	-	ca37c1fcbb52	-	-	2026-11-24	xproof
 f5c07218-c8bf-4990-a366-f3c065d0b30c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loyal-gryff:f0t0:s1,f:xs:XP:loyal-gryff:f0t0:s1	-	-	-	d864b561c9cb	-	255ad2c429ab	-	-	2026-11-24	xproof
 f5c07218-c8bf-4990-a366-f3c065d0b30c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loyal-gryff:f0t0:s1,f:xs:XP:loyal-gryff:f0t0:s1	-	-	-	d864b561c9cb	-	255ad2c429ab	-	-	2026-11-24	xproof
 f5c2b700-da52-4436-b234-e32ba7759e17	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

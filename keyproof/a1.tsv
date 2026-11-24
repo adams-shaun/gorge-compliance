@@ -94,7 +94,7 @@ a16f4b53-c8cf-45b0-89e7-507acd094a64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a171a01c-43f7-488a-870d-b1a9bcc501d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:faerie-harbinger:f0t0:s1,f:xs:XP:faerie-harbinger:f0t0:s1	-	-	-	d864b561c9cb	-	a710d9fc4c13	-	-	2026-11-24	xproof
 a171a01c-43f7-488a-870d-b1a9bcc501d1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:faerie-harbinger:f0t0:s1,f:xs:XP:faerie-harbinger:f0t0:s1	-	-	-	d864b561c9cb	-	a710d9fc4c13	-	-	2026-11-24	xproof
 a175de44-3a7e-4165-8f9a-8173c0df13d6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gatekeeper-gargoyle:cast:s1,f:xs:XP:gatekeeper-gargoyle:cast:s1	-	-	-	d864b561c9cb	-	9fab0a4bd3b9	-	-	2026-11-24	xproof
-a17633aa-b1a7-4ae5-b051-6747975d8a2f	cast	cast-resolve	agreed	-	X	scen	1	0	Sleep-Cursed Faerie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a17633aa-b1a7-4ae5-b051-6747975d8a2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sleep-cursed-faerie:cast:s1,f:xs:XP:sleep-cursed-faerie:cast:s1	-	-	-	23b491658465	-	3750862ba398	-	-	2026-11-24	xproof
 a17633aa-b1a7-4ae5-b051-6747975d8a2f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sleep-Cursed Faerie/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a17633aa-b1a7-4ae5-b051-6747975d8a2f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sleep-Cursed Faerie/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a17633aa-b1a7-4ae5-b051-6747975d8a2f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sleep-Cursed Faerie/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -143,8 +143,8 @@ a1bee68d-135b-4e30-8830-48a3315d13a9	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a1c6bd47-19ef-44f9-921a-e4ffa80b25e1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cinderslash-ravager:cast:s1,f:xs:XP:cinderslash-ravager:cast:s1	-	-	-	ae86f6029288	-	0176fb49390c	-	-	2026-11-24	xproof
 a1c6bd47-19ef-44f9-921a-e4ffa80b25e1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cinderslash-ravager:cast:s1,f:xs:XP:cinderslash-ravager:cast:s1	-	-	-	ae86f6029288	-	0176fb49390c	-	-	2026-11-24	xproof
 a1c7cd7a-0795-4135-b787-effeb981d95b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hidden Volcano/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a1c7cd7a-0795-4135-b787-effeb981d95b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hidden Volcano/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a1c7cd7a-0795-4135-b787-effeb981d95b	land	play-land	agreed	-	X	scen	1	0	Hidden Volcano/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a1c7cd7a-0795-4135-b787-effeb981d95b	f0/a1	Discover	agreed	-	FX	start	2	0	x:xs:XP:hidden-volcano:f0a1:s1,f:xs:XP:hidden-volcano:f0a1:s1	-	-	-	23b491658465	-	78f3bdc6a3b5	-	-	2026-11-24	xproof
+a1c7cd7a-0795-4135-b787-effeb981d95b	land	land	agreed	-	FX	start	2	0	x:xs:XP:hidden-volcano:land:s1,f:xs:XP:hidden-volcano:land:s1	-	-	-	23b491658465	-	78f3bdc6a3b5	-	-	2026-11-24	xproof
 a1c8b833-8c74-4f95-8a47-1dd41ef99361	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:delver-s-torch:cast:s1,f:xs:XP:delver-s-torch:cast:s1	-	-	-	d864b561c9cb	-	4fabd129ef36	-	-	2026-11-24	xproof
 a1c8b833-8c74-4f95-8a47-1dd41ef99361	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a1c8b833-8c74-4f95-8a47-1dd41ef99361	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -48,9 +48,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0935377b-384f-4e4c-9fbb-8d2a7d5dc280	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0935377b-384f-4e4c-9fbb-8d2a7d5dc280	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:dwarven-miner:f0a0:s1,f:xs:XP:dwarven-miner:f0a0:s1	-	-	-	ea3140b6974b	-	bdd05751dc28	-	-	2026-11-24	xproof
 0935faa2-fb90-48db-8a92-906ba0f374c7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Restless Vinestalk/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0935faa2-fb90-48db-8a92-906ba0f374c7	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Restless Vinestalk/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0935faa2-fb90-48db-8a92-906ba0f374c7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Restless Vinestalk/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0935faa2-fb90-48db-8a92-906ba0f374c7	land	play-land	agreed	-	X	scen	1	0	Restless Vinestalk/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0935faa2-fb90-48db-8a92-906ba0f374c7	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:restless-vinestalk:f0a1:s1,f:xs:XP:restless-vinestalk:f0a1:s1	-	-	-	23b491658465	-	f6b884ac86ca	-	-	2026-11-24	xproof
+0935faa2-fb90-48db-8a92-906ba0f374c7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:restless-vinestalk:f0a1:s1,f:xs:XP:restless-vinestalk:f0a1:s1	-	-	-	23b491658465	-	f6b884ac86ca	-	-	2026-11-24	xproof
+0935faa2-fb90-48db-8a92-906ba0f374c7	land	land	agreed	-	FX	start	2	0	x:xs:XP:restless-vinestalk:land:s1,f:xs:XP:restless-vinestalk:land:s1	-	-	-	23b491658465	-	f6b884ac86ca	-	-	2026-11-24	xproof
 09373283-a5c1-4d8e-ad25-19cd55b1e869	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:metallurgeon:cast:s1,f:xs:XP:metallurgeon:cast:s1	-	-	-	8a1b1a193ec0	-	901a3d6ef1e0	-	-	2026-11-24	xproof
 09373283-a5c1-4d8e-ad25-19cd55b1e869	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:metallurgeon:f0a0:s1,f:xs:XP:metallurgeon:f0a0:s1	-	-	-	8a1b1a193ec0	-	901a3d6ef1e0	-	-	2026-11-24	xproof
 09386931-59bd-481f-bccc-32e8a8abc0f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elephant-ambush:cast:s1,f:xs:XP:elephant-ambush:cast:s1	-	-	-	fc71ca68c5ac	-	2b65722297a3	-	-	2026-11-24	xproof
@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09650a76-05c4-40a0-b861-d146b3ba87d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09650a76-05c4-40a0-b861-d146b3ba87d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09650a76-05c4-40a0-b861-d146b3ba87d6	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09669283-eb14-46a2-b37a-51d7a52da891	cast	cast-resolve	agreed	-	X	scen	1	0	Requisition Raid/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+09669283-eb14-46a2-b37a-51d7a52da891	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:requisition-raid:cast:s1,f:xs:XP:requisition-raid:cast:s1	-	-	-	23b491658465	-	13c20fc81805	-	-	2026-11-24	xproof
 096a878e-cff0-430a-90b5-031ecb9bfe1b	cast	cast-resolve	agreed	-	FX	scen	2	0	Tam, Mindful First-Year/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 096a878e-cff0-430a-90b5-031ecb9bfe1b	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Tam, Mindful First-Year/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 096a878e-cff0-430a-90b5-031ecb9bfe1b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tam, Mindful First-Year/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

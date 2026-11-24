@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9900c771-ab81-415e-90a7-123c1bacfa83	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-iconoclast:f0t0:s1,f:xs:XP:yavimaya-iconoclast:f0t0:s1	-	-	-	ae86f6029288	-	826312fb7877	-	-	2026-11-24	xproof
 99024aa8-5687-4d38-8a4b-feef42d6c1ff	cast	cast-resolve	agreed	-	X	scen	1	0	Death Baron/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99024aa8-5687-4d38-8a4b-feef42d6c1ff	static#0.0	static#0.0	agreed	-	X	scen	1	0	Death Baron/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-990583ef-5bf4-4e14-a8f1-61d32c6a75df	cast	cast-resolve	agreed	-	X	scen	1	0	Flick a Coin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+990583ef-5bf4-4e14-a8f1-61d32c6a75df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flick-a-coin:cast:s1,f:xs:XP:flick-a-coin:cast:s1	-	-	-	23b491658465	-	84888625f645	-	-	2026-11-24	xproof
 990c0359-c2d6-4a3c-aa0b-1904da805e15	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 990c0359-c2d6-4a3c-aa0b-1904da805e15	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 990cd7de-66a2-4def-bf00-390b2682e995	cast	cast	agreed	-	F	start	2	0	f:xs:XP:vine-dryad:cast:s1	-	-	-	5f2128bf97e4	-	432a50528379	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9984d950-29dc-4d6b-8750-8d1bf86ea98f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:red-ghost-intangible-genius:cast:s1,f:xs:XP:red-ghost-intangible-genius:cast:s1	-	-	-	8c0bd19283bb	-	d90dd877806a	-	-	2026-11-24	xproof
 9984d950-29dc-4d6b-8750-8d1bf86ea98f	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9984d950-29dc-4d6b-8750-8d1bf86ea98f	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-99853d2e-2223-4c05-bbd7-0a746f8f810d	cast	cast-resolve	agreed	-	X	scen	1	0	Ingenious Leonin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+99853d2e-2223-4c05-bbd7-0a746f8f810d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ingenious-leonin:cast:s1,f:xs:XP:ingenious-leonin:cast:s1	-	-	-	23b491658465	-	11c77adae1d7	-	-	2026-11-24	xproof
 99853d2e-2223-4c05-bbd7-0a746f8f810d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ingenious Leonin/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99894900-771f-4fca-bebf-9f23ec4654c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:minister-of-inquiries:f0t0:s1,f:xs:XP:minister-of-inquiries:f0t0:s1	-	-	-	d864b561c9cb	-	98970fa2a21f	-	-	2026-11-24	xproof
 99894900-771f-4fca-bebf-9f23ec4654c2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99c3a315-db53-4292-9d31-1efd791d3a13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99c3a315-db53-4292-9d31-1efd791d3a13	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 99c5630e-cc04-4203-9006-3bc6a6807762	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:malamet-scythe:f0t0:s2,f:xs:XP:malamet-scythe:f0t0:s2	-	-	-	e07cf3a05ba5	-	ed8bcac0f0a4	-	-	2026-11-24	xproof
-99c5630e-cc04-4203-9006-3bc6a6807762	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Malamet Scythe/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+99c5630e-cc04-4203-9006-3bc6a6807762	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:malamet-scythe:f0a0:s1,f:xs:XP:malamet-scythe:f0a0:s1	-	-	-	23b491658465	-	ed8bcac0f0a4	-	-	2026-11-24	xproof
 99c5630e-cc04-4203-9006-3bc6a6807762	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:malamet-scythe:f0t0:s2,f:xs:XP:malamet-scythe:f0t0:s2	-	-	-	e07cf3a05ba5	-	ed8bcac0f0a4	-	-	2026-11-24	xproof
 99c5630e-cc04-4203-9006-3bc6a6807762	static#0.0	static#0.0	agreed	-	X	scen	1	0	Malamet Scythe/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99c70f4e-de8a-426d-99aa-17b2f87625ba	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Training Compound/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

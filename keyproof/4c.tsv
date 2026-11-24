@@ -101,8 +101,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c76db22-1992-448d-be4a-a9095420b8cc	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 4c77767a-8133-43bc-b7a5-09a73259d354	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Captivating Cave/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c77767a-8133-43bc-b7a5-09a73259d354	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Captivating Cave/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c77767a-8133-43bc-b7a5-09a73259d354	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Captivating Cave/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c77767a-8133-43bc-b7a5-09a73259d354	land	play-land	agreed	-	X	scen	1	0	Captivating Cave/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4c77767a-8133-43bc-b7a5-09a73259d354	f0/a2	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:captivating-cave:f0a2:s1,f:xs:XP:captivating-cave:f0a2:s1	-	-	-	23b491658465	-	421b5ce6b97e	-	-	2026-11-24	xproof
+4c77767a-8133-43bc-b7a5-09a73259d354	land	land	agreed	-	FX	start	2	0	x:xs:XP:captivating-cave:land:s1,f:xs:XP:captivating-cave:land:s1	-	-	-	23b491658465	-	421b5ce6b97e	-	-	2026-11-24	xproof
 4c7e091e-e3c1-446d-a442-4aacb3cdd575	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c7e6520-d179-4590-afdc-92eb2c0740a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c7e6520-d179-4590-afdc-92eb2c0740a6	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kolaghan-warmonger:f0t0:s1,f:xs:XP:kolaghan-warmonger:f0t0:s1	-	-	-	d864b561c9cb	-	ac08ef8c7bcf	-	-	2026-11-24	xproof
@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4cab6ea8-4a80-4b34-b758-7f2aa4d540e4	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4cb63198-29b5-4607-bd4a-f449807fb764	cast	cast-resolve	agreed	-	X	scen	1	0	Overzealous Muscle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4cb63198-29b5-4607-bd4a-f449807fb764	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Overzealous Muscle/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4cb86fb6-3e06-4c67-aee0-d5952178f664	cast	cast-resolve	agreed	-	X	scen	1	0	Nicanzil, Current Conductor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4cb86fb6-3e06-4c67-aee0-d5952178f664	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nicanzil-current-conductor:cast:s1,f:xs:XP:nicanzil-current-conductor:cast:s1	-	-	-	23b491658465	-	09315e070103	-	-	2026-11-24	xproof
 4cb86fb6-3e06-4c67-aee0-d5952178f664	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nicanzil, Current Conductor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4cb86fb6-3e06-4c67-aee0-d5952178f664	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Nicanzil, Current Conductor/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4cbbdebc-b807-4d7b-92dd-312637d2a5de	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof

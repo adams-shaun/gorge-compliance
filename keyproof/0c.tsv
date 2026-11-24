@@ -145,9 +145,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ca1f76d-ae77-490a-8b32-d30ad33afc2d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Apocalypse Runner/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ca1f76d-ae77-490a-8b32-d30ad33afc2d	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Apocalypse Runner/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Restless Spire/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Restless Spire/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Restless Spire/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9	land	play-land	agreed	-	X	scen	1	0	Restless Spire/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9	f0/a1	Animate	agreed	-	X	start	2	0	x:xs:XP:restless-spire:f0a1:s1	-	-	-	23b491658465	-	975fa5c07bd0	-	-	2026-11-24	xproof
+0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:restless-spire:f0a1:s1	-	-	-	23b491658465	-	975fa5c07bd0	-	-	2026-11-24	xproof
+0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9	land	land	agreed	-	FX	start	2	0	x:xs:XP:restless-spire:land:s1,f:xs:XP:restless-spire:land:s1	-	-	-	23b491658465	-	975fa5c07bd0	-	-	2026-11-24	xproof
 0caccec3-4942-499a-9434-0c94389afcf8	cast	cast-resolve	agreed	-	X	scen	1	0	Surgical Precision/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0caeb396-e574-4e80-a1f6-79988fe9ba19	cast	cast-resolve	agreed	-	X	scen	1	0	Rufus Shinra/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0caeb396-e574-4e80-a1f6-79988fe9ba19	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rufus Shinra/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -193,7 +193,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ce47c8b-1e1f-463f-94f0-35ca00be89e6	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:inferno-titan:f0a0:s1,f:xs:XP:inferno-titan:f0a0:s1	-	-	-	d864b561c9cb	-	e93be55cfeb9	-	-	2026-11-24	xproof
 0ce47c8b-1e1f-463f-94f0-35ca00be89e6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:inferno-titan:f0t0:s1,f:xs:XP:inferno-titan:f0t0:s1	-	-	-	d864b561c9cb	-	e93be55cfeb9	-	-	2026-11-24	xproof
 0ce47c8b-1e1f-463f-94f0-35ca00be89e6	f0/t1	Attacks	agreed	-	FX	start	4	0	x:xs:XP:inferno-titan:f0a0:s1,f:xs:XP:inferno-titan:f0a0:s1	-	-	-	d864b561c9cb	-	e93be55cfeb9	-	-	2026-11-24	xproof
-0ce678fa-6495-4857-b178-231c283b4514	cast	cast-resolve	agreed	-	X	scen	1	0	Basking Capybara/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0ce678fa-6495-4857-b178-231c283b4514	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:basking-capybara:cast:s1,f:xs:XP:basking-capybara:cast:s1	-	-	-	23b491658465	-	3c661bebfad6	-	-	2026-11-24	xproof
 0ce678fa-6495-4857-b178-231c283b4514	static#0.0	static#0.0	agreed	-	X	scen	1	0	Basking Capybara/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0cee5539-d10b-4de2-aee8-e02f0e24ac26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0cee5539-d10b-4de2-aee8-e02f0e24ac26	f0/t0	ChangesZone/Afterlife	agreed	-	FX	start	2	0	x:xs:XP:ministrant-of-obligation:f0t0:s1,f:xs:XP:ministrant-of-obligation:f0t0:s1	-	-	-	d864b561c9cb	-	344fe66035c8	-	-	2026-11-24	xproof

@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f0dec6c-797f-4dc3-9994-066c00cbf1a4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:infernal-captor:cast:s1,f:xs:XP:infernal-captor:cast:s1	-	-	-	ae86f6029288	-	c6be95e1128d	-	-	2026-11-24	xproof
 2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:infernal-captor:cast:s1,f:xs:XP:infernal-captor:cast:s1	-	-	-	ae86f6029288	-	c6be95e1128d	-	-	2026-11-24	xproof
-2f1019df-3e76-446c-ba33-f9dfe56b10bf	cast	cast-resolve	agreed	-	X	scen	1	0	Merfolk Cave-Diver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2f1019df-3e76-446c-ba33-f9dfe56b10bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:merfolk-cave-diver:cast:s1,f:xs:XP:merfolk-cave-diver:cast:s1	-	-	-	23b491658465	-	72a0303270cc	-	-	2026-11-24	xproof
 2f1019df-3e76-446c-ba33-f9dfe56b10bf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Merfolk Cave-Diver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f109125-b743-4ecf-84da-690d8e8ddf9c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ceaseless-conflict:cast:s1,f:xs:XP:ceaseless-conflict:cast:s1	-	-	-	8c0bd19283bb	-	bf9b394b9b5e	-	-	2026-11-24	xproof
 2f14e92d-307f-4854-b7ec-a2f6ce03dced	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f7305c1-51d2-4698-89d5-c64a57ecff80	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampire-revenant:cast:s1,f:xs:XP:vampire-revenant:cast:s1	-	-	-	d864b561c9cb	-	917acf3a12d4	-	-	2026-11-24	xproof
 2f796869-7350-4886-b210-cb5b9cb3e78a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:provisions-merchant:f0t0:s2,f:xs:XP:provisions-merchant:f0t0:s2	-	-	-	e07cf3a05ba5	-	759fb9ad13ac	-	-	2026-11-24	xproof
 2f796869-7350-4886-b210-cb5b9cb3e78a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:provisions-merchant:f0t0:s2,f:xs:XP:provisions-merchant:f0t0:s2	-	-	-	e07cf3a05ba5	-	759fb9ad13ac	-	-	2026-11-24	xproof
-2f796869-7350-4886-b210-cb5b9cb3e78a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Provisions Merchant/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2f796869-7350-4886-b210-cb5b9cb3e78a	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:provisions-merchant:f0t1:s1,f:xs:XP:provisions-merchant:f0t1:s1	-	-	-	23b491658465	-	759fb9ad13ac	-	-	2026-11-24	xproof
 2f7b46c1-3d82-4fd9-9882-589315cab47b	cast	cast-resolve	agreed	-	X	scen	1	0	Candlestick/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f7b46c1-3d82-4fd9-9882-589315cab47b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Candlestick/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f7b46c1-3d82-4fd9-9882-589315cab47b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Candlestick/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

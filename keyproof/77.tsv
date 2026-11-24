@@ -137,8 +137,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77af5e31-ac4d-4112-9138-e12abb5ce144	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spitting-slug:cast:s1,f:xs:XP:spitting-slug:cast:s1	-	-	-	25696bf19d5b	-	1cf45732f9b4	-	-	2026-11-24	xproof
 77af5e31-ac4d-4112-9138-e12abb5ce144	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 77af5e31-ac4d-4112-9138-e12abb5ce144	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-77b48b3c-c780-4c5b-90e6-33c5fd940c16	cast	cast-resolve	agreed	-	X	scen	1	0	Toadstool Admirer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-77b48b3c-c780-4c5b-90e6-33c5fd940c16	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Toadstool Admirer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+77b48b3c-c780-4c5b-90e6-33c5fd940c16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toadstool-admirer:cast:s1,f:xs:XP:toadstool-admirer:cast:s1	-	-	-	23b491658465	-	a02396fccefc	-	-	2026-11-24	xproof
+77b48b3c-c780-4c5b-90e6-33c5fd940c16	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:toadstool-admirer:f0a0:s1,f:xs:XP:toadstool-admirer:f0a0:s1	-	-	-	23b491658465	-	a02396fccefc	-	-	2026-11-24	xproof
 77b48b3c-c780-4c5b-90e6-33c5fd940c16	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Toadstool Admirer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 77b684b8-227b-40de-80b4-15d0e70914f4	cast	cast-resolve	agreed	-	X	scen	1	0	Undulating Witness/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 77b684b8-227b-40de-80b4-15d0e70914f4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Undulating Witness/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -187,8 +187,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81dcb85e-d61f-430b-9540-5a3bb1378d5a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81dd22f7-f6c6-4cf2-9744-b1d918dbcf9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81dd22f7-f6c6-4cf2-9744-b1d918dbcf9a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-81dda1a8-72ac-4e69-8367-4f72c445197c	cast	cast-resolve	agreed	-	X	scen	1	0	Disruptor Wanderglyph/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-81dda1a8-72ac-4e69-8367-4f72c445197c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Disruptor Wanderglyph/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+81dda1a8-72ac-4e69-8367-4f72c445197c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:disruptor-wanderglyph:cast:s1,f:xs:XP:disruptor-wanderglyph:cast:s1	-	-	-	23b491658465	-	56363319546e	-	-	2026-11-24	xproof
+81dda1a8-72ac-4e69-8367-4f72c445197c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:disruptor-wanderglyph:f0t0:s1,f:xs:XP:disruptor-wanderglyph:f0t0:s1	-	-	-	23b491658465	-	56363319546e	-	-	2026-11-24	xproof
 81de0cb1-6665-41eb-8dfc-bb30192e1359	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81e5c62c-5aed-41e2-8bd1-610022e880bd	cast	cast-resolve	agreed	-	FX	scen	2	0	Hellspur Brute/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 81e5c62c-5aed-41e2-8bd1-610022e880bd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hellspur Brute/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
