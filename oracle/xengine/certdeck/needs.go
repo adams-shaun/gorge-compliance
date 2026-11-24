@@ -487,9 +487,10 @@ func basicIndex(t string) int {
 
 func isLandType(t string) bool { return basicIndex(t) >= 0 || otherLandTypes[t] }
 
-// compoundTypes are subtypes of two words ("Time Lord"). The corpus prints
-// each word as a type of its own, a filter spells them with a space, and both
-// would split into two words: they are carried as one word joined by a hyphen.
+// compoundTypes are subtypes of two words ("Time Lord"). A face carries one as
+// a single "Time Lord" word (gorge's CR 205.3m parse) or, in an older parse, as
+// each word of its own; a filter spells them with a space, and both would split
+// into two words: they are carried as one word joined by a hyphen.
 var compoundTypes = []string{"Time Lord"}
 
 // TypeWords is a face's type line with each compound subtype as one word.
@@ -499,6 +500,11 @@ func TypeWords(types []string) []string {
 		joined := false
 		for _, c := range compoundTypes {
 			a, b, _ := strings.Cut(c, " ")
+			if types[i] == c {
+				out = append(out, a+"-"+b)
+				joined = true
+				break
+			}
 			if types[i] == a && i+1 < len(types) && types[i+1] == b {
 				out = append(out, a+"-"+b)
 				i++
