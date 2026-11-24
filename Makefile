@@ -33,11 +33,14 @@ GO_TEST_FLAGS ?= -p=2
 # its blueprint target, CR 601.2b/601.2c: Death Denied with no creature card in its controller's graveyard, X = 0;
 # the same gap covered every TargetsCountAdjuster user with a min-1 blueprint). Fork branch fix/xtargets-x-zero,
 # DeathDeniedTest.
-# 3a3f088f75 = 7aeb547a86 + fork #21 (declare blockers and combat damage are skipped only when no creature was
+# 228d8a4bd9 = 7aeb547a86 + fork branch fix/champion-sacx-zero ("Sacrifice X other creatures": the cost's maximum X counted the
+# source itself, so Champion of Stray Souls alone could announce X = 1 and an unscripted announce then failed the activation
+# for want of a graveyard target; CR 601.2b/602.2b), ChampionOfStraySoulsTest.
+# ec270409d0 = 228d8a4bd9 + fork #21 (declare blockers and combat damage are skipped only when no creature was
 # declared as an attacker or put onto the battlefield attacking; a declared attacker that later leaves combat does not
 # un-declare the attack, CR 508.8: Daemogoth Titan's own attack trigger sacrifices it, Duergar Assailant sacrifices
 # itself to its damage ability). Fork branch fix/attacker-removed-combat-steps, AttackerRemovedCombatStepsTest.
-XMAGE_REF  ?= 3a3f088f75af3707eb212914da4c0d93151d2f77
+XMAGE_REF  ?= ec270409d072a1432533559a250cee7cf4977a3c
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -302,7 +305,18 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # 3494ec7d2b; the two touch disjoint files (forge-oracle's ScriptedController and StepMachine vs forge-game's GameAction), so the
 # pinned driver keeps both fixes. cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/forge-sba-graveyard-order.
-FORGE_ORACLE_REF ?= c3b04cf264b992134477ae759417b4faf28baef3
+# 147dd2f00f = the clean merge of c3b04cf264 (the SBA graveyard batch order above) and ba5d908b14 (the modal DFC land back
+# face play: xproof harness "has no land play", 22 clusters, every modal DFC with a land back - Glasswing Grace,
+# Turntimber Symbiosis, Pinnacle Monk, Agadeem's Awakening, ...). CR 712.12: a player playing a modal DFC as a land
+# chooses one of its faces that's a land, and it enters with that face up. StepMachine.landFor scanned only
+# Card.getSpellAbilities(), the front state's, so a spell front exposed no land ability; with none, it now takes the land
+# ability of the Backside state of a modal card (an API scan, no card names), and LandAbility.resolve turns the card to
+# that face before the move so its entry choice ("Pay 3 life") is asked of the back face and read from gorge's pick. The
+# MayPlay branch (xp-forge-land-play-mayplay) is untouched. ba5d908b14 is 2bf0a1cb36 plus ModalLandPlayTest (Age-Graced
+# Chapel; Turntimber, Serpentine Wood paying 3 life), which fails on 2bf0a1cb36 with "has no land play"; the merge keeps the
+# SBA and modal tests (full driver suite 170 tests, 168 + SbaGraveyardOrderTest's 2). Driver-only change;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-mdfc-land-face.
+FORGE_ORACLE_REF ?= 147dd2f00fc5dd087d88490bb6afde5b34bc8cb1
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
