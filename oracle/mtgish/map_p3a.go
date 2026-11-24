@@ -1,6 +1,10 @@
 package mtgish
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/adams-shaun/gorge/engine/cards"
+)
 
 // Normaliser fixes for the actions and rules the mtgish head at 1553384
 // spells with new, more general constructors (a "puttable" operand where
@@ -45,6 +49,23 @@ func init() {
 	extAction["RevealCardsFromTheTopOfPlanarDeckUntilRevealNumberPlaneCardsAndPutAPlaneCardFromAmongOnTopAndTheRestOnBottomInARandomOrder"] = c1Tok(
 		"diguntil", "move:library>planardeck", "move:planardeck>planardeck", "move:planardeck>planardeck", "planeswalk")
 	extLayer["AddAbilityFromEachExiledHasable"] = func(any) []string { return []string{"grant:*"} }
+
+	// "As this enters, for each opponent, note the most prevalent creature
+	// type in their library" (Banescale Serpent): the ForEachPlayer
+	// spelling of NoteTheMostPrevalentCreaturTypeInAPlayersLibrary, a
+	// choice; the script's RepeatEach over a ChooseType Note$ True.
+	extEnter["ForEachPlayerRememberMostPrevalentCreatureTypesInTheirLibrary"] = fixedEnter("choose")
+	d2EnterAPIs["RepeatEach"] = p3aEnterRepeat
+}
+
+// p3aEnterRepeat maps an as-enters RepeatEach: the repeated sub-ability's
+// own as-enters effects.
+func p3aEnterRepeat(g *gorgeNorm, a *cards.SA) []string {
+	sub := cards.ResolveSVar(g.svars(), a.Params["RepeatSubAbility"])
+	if sub == nil {
+		return []string{unmapped("Enter.RepeatEach")}
+	}
+	return g.enterEffects(&cards.Repl{Params: map[string]string{}, With: sub})
 }
 
 // p3aMove maps a "put <puttables> into <dest>" action: one move per operand,
