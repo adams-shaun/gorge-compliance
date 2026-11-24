@@ -39,8 +39,8 @@ b326ccd5-8ad2-441c-9d73-82ee6390dd36	cast	cast-resolve	agreed	-	X	scen	1	0	Champ
 b326ccd5-8ad2-441c-9d73-82ee6390dd36	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Champion of the Path/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b326ccd5-8ad2-441c-9d73-82ee6390dd36	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Champion of the Path/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b326ccd5-8ad2-441c-9d73-82ee6390dd36	static#0.0	static#0.0	agreed	-	X	scen	1	0	Champion of the Path/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-b32a10ba-528c-4dc1-9828-b33f5d5a3091	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b32a10ba-528c-4dc1-9828-b33f5d5a3091	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b32a10ba-528c-4dc1-9828-b33f5d5a3091	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:druid-lyrist:cast:s1,f:xs:XP:druid-lyrist:cast:s1	-	-	-	fc71ca68c5ac	-	efb84cbb05ed	-	-	2026-11-24	xproof
+b32a10ba-528c-4dc1-9828-b33f5d5a3091	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:druid-lyrist:f0a0:s1,f:xs:XP:druid-lyrist:f0a0:s1	-	-	-	fc71ca68c5ac	-	efb84cbb05ed	-	-	2026-11-24	xproof
 b32a7b97-0883-4c9f-a23d-ad269efd8cc3	cast	cast-resolve	agreed	-	X	scen	1	0	Merciless Enforcers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b32a7b97-0883-4c9f-a23d-ad269efd8cc3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Merciless Enforcers/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b32a7b97-0883-4c9f-a23d-ad269efd8cc3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Merciless Enforcers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -80,9 +80,9 @@ b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6	f0/a0	Mana	agreed	-	FX	start	11	0	x:xs:XP:a
 b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6	land	land	agreed	-	FX	start	1	0	x:xs:XP:spineseeker-centipede:f0t0:s2,f:xs:XP:spineseeker-centipede:f0t0:s2	-	-	-	e07cf3a05ba5	-	9a574ea2a813	-	-	2026-11-24	xproof
 b353f0ab-266c-4448-b93b-fafb68b03765	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reverse-the-sands:cast:s1,f:xs:XP:reverse-the-sands:cast:s1	-	-	-	64a08ba7d913	-	f84d1856aa50	-	-	2026-11-24	xproof
 b3595359-0d40-495e-85da-6a56fbce7357	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b3595359-0d40-495e-85da-6a56fbce7357	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b35b3ea6-ae9c-4128-a47f-069d88ee49c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b35b3ea6-ae9c-4128-a47f-069d88ee49c2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b3595359-0d40-495e-85da-6a56fbce7357	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+b35b3ea6-ae9c-4128-a47f-069d88ee49c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tainted-well:f0t0:s1,f:xs:XP:tainted-well:f0t0:s1	-	-	-	fc71ca68c5ac	-	415ce908ae57	-	-	2026-11-24	xproof
+b35b3ea6-ae9c-4128-a47f-069d88ee49c2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tainted-well:f0t0:s1,f:xs:XP:tainted-well:f0t0:s1	-	-	-	fc71ca68c5ac	-	415ce908ae57	-	-	2026-11-24	xproof
 b35c1b30-c1dc-489f-bd79-ad6566fb9389	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b3601821-a0f5-4aac-b24e-25498a82d821	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b3601821-a0f5-4aac-b24e-25498a82d821	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ b3b00911-ece7-4484-bc36-f211ce72b6cc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 b3b23c58-0b7a-4fe4-a8e8-5320a7605724	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:bristling-hydra:cast:s1,f:xs:XP:bristling-hydra:cast:s1	-	-	-	d864b561c9cb	-	d0591034f3b2	-	-	2026-11-24	xproof
 b3b23c58-0b7a-4fe4-a8e8-5320a7605724	f0/a0	PutCounter	agreed	-	FX	start	4	0	x:xs:XP:bristling-hydra:cast:s1,f:xs:XP:bristling-hydra:cast:s1	-	-	-	d864b561c9cb	-	d0591034f3b2	-	-	2026-11-24	xproof
 b3b23c58-0b7a-4fe4-a8e8-5320a7605724	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:bristling-hydra:cast:s1,f:xs:XP:bristling-hydra:cast:s1	-	-	-	d864b561c9cb	-	d0591034f3b2	-	-	2026-11-24	xproof
-b3b4c21d-f8d7-455f-be46-d5eb909d54df	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b3b4c21d-f8d7-455f-be46-d5eb909d54df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:untamed-wilds:cast:s1,f:xs:XP:untamed-wilds:cast:s1	-	-	-	fc71ca68c5ac	-	dad15b100193	-	-	2026-11-24	xproof
 b3b5137d-0225-4dba-9231-d235ab0f137c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:novijen-heart-of-progress:land:s1,f:xs:XP:novijen-heart-of-progress:land:s1	-	-	-	16ec2936189a	-	bead3eefe010	-	-	2026-11-24	xproof
 b3b5137d-0225-4dba-9231-d235ab0f137c	f0/a1	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	16ec2936189a	-	-	-	-	2026-11-24	xproof
 b3b5137d-0225-4dba-9231-d235ab0f137c	land	land	agreed	-	FX	start	2	0	x:xs:XP:novijen-heart-of-progress:land:s1,f:xs:XP:novijen-heart-of-progress:land:s1	-	-	-	16ec2936189a	-	bead3eefe010	-	-	2026-11-24	xproof

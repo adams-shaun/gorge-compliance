@@ -126,8 +126,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0283bf5e-ddf2-4a4a-a7cf-d3e27eed7e7d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02847b0d-03a1-4e30-902e-60bdf6952c58	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02847b0d-03a1-4e30-902e-60bdf6952c58	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0285bd20-f49e-48f7-8c8c-960f9fbe4d34	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0285bd20-f49e-48f7-8c8c-960f9fbe4d34	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0285bd20-f49e-48f7-8c8c-960f9fbe4d34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guiltfeeder:cast:s1,f:xs:XP:guiltfeeder:cast:s1	-	-	-	fc71ca68c5ac	-	f28284553e8d	-	-	2026-11-24	xproof
+0285bd20-f49e-48f7-8c8c-960f9fbe4d34	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 0287d541-3f73-4c8b-9a77-87f99898758d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0287d541-3f73-4c8b-9a77-87f99898758d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 028d6812-55db-40df-9288-89c2e478c76c	cast	cast-resolve	agreed	-	X	scen	1	0	The Destruction of Praxis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0296d57e-e5b9-456f-bb21-eb584adefb4c	cast	cast-resolve	agreed	-	X	scen	1	0	Gollum, Silent Slinker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0296d57e-e5b9-456f-bb21-eb584adefb4c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gollum, Silent Slinker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0296d57e-e5b9-456f-bb21-eb584adefb4c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gollum, Silent Slinker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-029d08cb-da4d-4f4e-b667-62712af63260	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+029d08cb-da4d-4f4e-b667-62712af63260	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chain-of-plasma:cast:s1,f:xs:XP:chain-of-plasma:cast:s1	-	-	-	fc71ca68c5ac	-	7a9bb25a2bbb	-	-	2026-11-24	xproof
 02a506bd-203f-421c-b72e-e2ba77e922aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02a506bd-203f-421c-b72e-e2ba77e922aa	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 02a7d95a-0a45-4aa3-b5b8-01c0b36462d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -154,8 +154,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02b41d0e-82e7-4307-8cc4-8175ff78ea1f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Kiora of Fire and Ashes/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 02b41d0e-82e7-4307-8cc4-8175ff78ea1f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kiora-of-fire-and-ashes:f0t0:s1,f:xs:XP:kiora-of-fire-and-ashes:f0t0:s1	-	-	-	25696bf19d5b	-	44efad077510	-	-	2026-11-24	xproof
 02b5acf3-47cb-4d39-9307-e02656f1879b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:strategic-planning:cast:s1,f:xs:XP:strategic-planning:cast:s1	-	-	-	25696bf19d5b	-	7d10a17d5f0e	-	-	2026-11-24	xproof
-02b5ea0b-c0a3-4213-9064-e688190fca5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02b5ea0b-c0a3-4213-9064-e688190fca5e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02b5ea0b-c0a3-4213-9064-e688190fca5e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:screaming-seahawk:f0t0:s1,f:xs:XP:screaming-seahawk:f0t0:s1	-	-	-	fc71ca68c5ac	-	99b3faa76bcd	-	-	2026-11-24	xproof
+02b5ea0b-c0a3-4213-9064-e688190fca5e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:screaming-seahawk:f0t0:s1,f:xs:XP:screaming-seahawk:f0t0:s1	-	-	-	fc71ca68c5ac	-	99b3faa76bcd	-	-	2026-11-24	xproof
 02b6900b-219f-4832-8f93-6ef27ee76c0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02b6900b-219f-4832-8f93-6ef27ee76c0c	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02b6900b-219f-4832-8f93-6ef27ee76c0c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02d78e76-8151-4851-bb4e-e0a1fa98756f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02d998a6-0afd-4be1-a209-05618fcc43ea	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02da2145-0edb-44be-8622-360182a8c25a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02da2145-0edb-44be-8622-360182a8c25a	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02da2145-0edb-44be-8622-360182a8c25a	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 02dbb6f8-ef84-4156-87dc-34033e64fdb7	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02de8fa3-ac8d-47e5-b137-d5a0b7d8e951	cast	cast-resolve	agreed	-	FX	scen	2	0	Dragonstorm Forecaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 02de8fa3-ac8d-47e5-b137-d5a0b7d8e951	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Dragonstorm Forecaster/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

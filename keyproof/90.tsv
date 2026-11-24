@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 901eb916-f318-4a30-a43e-8e7f9eef358b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 901f0a8f-7462-4970-8d21-265c8c0188e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gift-of-fangs:cast:s1,f:xs:XP:gift-of-fangs:cast:s1	-	-	-	d864b561c9cb	-	b4f19d379fca	-	-	2026-11-24	xproof
 9023c530-f329-4301-8b24-4cf676194265	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9023c530-f329-4301-8b24-4cf676194265	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9023c530-f329-4301-8b24-4cf676194265	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 90249526-1875-450a-882d-bf6f6bfd37a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90249526-1875-450a-882d-bf6f6bfd37a6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90249526-1875-450a-882d-bf6f6bfd37a6	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -39,8 +39,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 902a7588-602c-456f-8250-c94f35e56d3a	f0/a0	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:norwood-priestess:f0a0:s1	-	-	-	5f2128bf97e4	-	0abe3c6f7dff	-	-	2026-11-24	xproof
 902b82fd-bb18-4833-b427-af8c9751f870	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 902e7d4b-7ab4-40b5-b3a5-c83ef604989a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-902e7d4b-7ab4-40b5-b3a5-c83ef604989a	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-902e7d4b-7ab4-40b5-b3a5-c83ef604989a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+902e7d4b-7ab4-40b5-b3a5-c83ef604989a	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:primal-boost:cast:s1,f:xs:XP:primal-boost:cast:s1	-	-	-	fc71ca68c5ac	-	6c2f6563afa7	-	-	2026-11-24	xproof
+902e7d4b-7ab4-40b5-b3a5-c83ef604989a	f0/t0	Cycled	agreed	-	FX	start	2	0	x:xs:XP:primal-boost:cast:s1,f:xs:XP:primal-boost:cast:s1	-	-	-	fc71ca68c5ac	-	6c2f6563afa7	-	-	2026-11-24	xproof
 902eb71f-62b3-40cb-816b-f6b7e92e91e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90379825-1894-4b79-bf72-445175e97ffb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90379825-1894-4b79-bf72-445175e97ffb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

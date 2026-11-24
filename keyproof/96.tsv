@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96a6a8d4-6077-470f-984e-b576a24557a2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96aab05a-49bc-418a-9980-f3322955de1e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96aab05a-49bc-418a-9980-f3322955de1e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96b3c4ff-b5f7-4315-9b39-2e2146ef10d1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96b3c4ff-b5f7-4315-9b39-2e2146ef10d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodland-druid:cast:s1,f:xs:XP:woodland-druid:cast:s1	-	-	-	fc71ca68c5ac	-	d1383c20104a	-	-	2026-11-24	xproof
 96b611e9-38cc-4326-bb38-73084e99e6f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96b87445-6362-4a17-91b2-cbf203fd03fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96b909ab-55f1-4cde-a675-2504de3da772	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cavalier-of-thorns:cast:s1,f:xs:XP:cavalier-of-thorns:cast:s1	-	-	-	d864b561c9cb	-	f5cb6973a316	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96e25887-e556-423a-8a69-0cd148216f6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96e25887-e556-423a-8a69-0cd148216f6a	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:dark-impostor:f0a0:s1,f:xs:XP:dark-impostor:f0a0:s1	-	-	-	d864b561c9cb	-	17bf155d7013	-	-	2026-11-24	xproof
 96e41850-04a9-47bf-98a7-4238b25b1824	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96e41850-04a9-47bf-98a7-4238b25b1824	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96e41850-04a9-47bf-98a7-4238b25b1824	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	cast	cast-resolve	agreed	-	FX	scen	2	0	Aang, at the Crossroads/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aang, at the Crossroads/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aang, at the Crossroads/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

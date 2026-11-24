@@ -106,8 +106,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 29781b19-0917-4d8f-abe3-df0b7e96d8a6	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:goblin-gardener:f0t0:s1,f:xs:XP:goblin-gardener:f0t0:s1	-	-	-	5f2128bf97e4	-	2288b9b8d02f	-	-	2026-11-24	xproof
 2978ba77-c0ce-4411-99c7-ef05dd602c8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2978ba77-c0ce-4411-99c7-ef05dd602c8d	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:battlefield-butcher:f0a0:s1,f:xs:XP:battlefield-butcher:f0a0:s1	-	-	-	ae86f6029288	-	85ac0a006fe6	-	-	2026-11-24	xproof
-297c2ddf-6d2d-4ed4-ab37-716514d5e3b6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-297c2ddf-6d2d-4ed4-ab37-716514d5e3b6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+297c2ddf-6d2d-4ed4-ab37-716514d5e3b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-turncoat:cast:s1,f:xs:XP:goblin-turncoat:cast:s1	-	-	-	fc71ca68c5ac	-	c1b993fe5b90	-	-	2026-11-24	xproof
+297c2ddf-6d2d-4ed4-ab37-716514d5e3b6	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:goblin-turncoat:cast:s1,f:xs:XP:goblin-turncoat:cast:s1	-	-	-	fc71ca68c5ac	-	c1b993fe5b90	-	-	2026-11-24	xproof
 29863706-fa4e-49ed-9f40-69ae503abba3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-shortcutter:f0t0:s1,f:xs:XP:goblin-shortcutter:f0t0:s1	-	-	-	8a1b1a193ec0	-	0dd92650d5bb	-	-	2026-11-24	xproof
 29863706-fa4e-49ed-9f40-69ae503abba3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-shortcutter:f0t0:s1,f:xs:XP:goblin-shortcutter:f0t0:s1	-	-	-	8a1b1a193ec0	-	0dd92650d5bb	-	-	2026-11-24	xproof
 2987c385-011a-4032-a516-a46d1e9dc9e8	cast	cast-resolve	agreed	-	FX	scen	2	0	Crib Swap/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 29f1484c-91b6-436a-a6be-3ab8b58c0fc1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Veteran Beastrider/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 29f22168-21aa-4ca9-ab72-b09396a12c76	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29f27482-724d-4c15-b177-13337246d007	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29f27482-724d-4c15-b177-13337246d007	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+29f27482-724d-4c15-b177-13337246d007	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:daru-encampment:f0a1:s1,f:xs:XP:daru-encampment:f0a1:s1	-	-	-	fc71ca68c5ac	-	c6420b0fa410	-	-	2026-11-24	xproof
 29f27482-724d-4c15-b177-13337246d007	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29f34e18-2102-4ded-912f-4ac3e9e6744c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29f34e18-2102-4ded-912f-4ac3e9e6744c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

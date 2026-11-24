@@ -33,7 +33,7 @@ bd1e93da-7524-4bdd-9738-accd76bda7f7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 bd1e93da-7524-4bdd-9738-accd76bda7f7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd269d87-5f72-4559-bf2b-270e2ebe6154	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd310727-1091-4474-8d9e-ce56f7dac7c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd310727-1091-4474-8d9e-ce56f7dac7c1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd310727-1091-4474-8d9e-ce56f7dac7c1	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 bd31487e-e95a-4d90-8c85-742aa83c3e90	cast	cast-resolve	agreed	-	X	scen	1	0	Grim Javelineer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd31487e-e95a-4d90-8c85-742aa83c3e90	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Grim Javelineer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd31c248-8b3f-4fa5-a639-19b0e37b15c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -69,15 +69,15 @@ bd4ad383-8c40-4dda-bc9c-ba8a001d6882	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bd4ad383-8c40-4dda-bc9c-ba8a001d6882	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd4c46a3-b723-4b35-9061-9a1dee7cc9d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd4c46a3-b723-4b35-9061-9a1dee7cc9d8	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:fulminator-mage:f0a0:s1,f:xs:XP:fulminator-mage:f0a0:s1	-	-	-	8a1b1a193ec0	-	ddb20b732cc6	-	-	2026-11-24	xproof
-bd4c9726-c7bb-4da4-99e5-e98d174d6a52	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd4c9726-c7bb-4da4-99e5-e98d174d6a52	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd4c9726-c7bb-4da4-99e5-e98d174d6a52	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:centaur-veteran:cast:s1,f:xs:XP:centaur-veteran:cast:s1	-	-	-	fc71ca68c5ac	-	e4fe03b22596	-	-	2026-11-24	xproof
+bd4c9726-c7bb-4da4-99e5-e98d174d6a52	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 bd513d9d-5aa2-4860-bd86-8b5d9430f133	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Jidoor, Aristocratic Capital/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd513d9d-5aa2-4860-bd86-8b5d9430f133	land	play-land	agreed	-	X	scen	1	0	Jidoor, Aristocratic Capital/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd5310df-2e6c-4584-9a5a-03d6d06b3c20	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-reckoning:cast:s1,f:xs:XP:blood-reckoning:cast:s1	-	-	-	d864b561c9cb	-	be0d30b8373f	-	-	2026-11-24	xproof
 bd5310df-2e6c-4584-9a5a-03d6d06b3c20	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd532f8d-789f-4ee1-a2f3-ae30e8282c76	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd532f8d-789f-4ee1-a2f3-ae30e8282c76	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd532f8d-789f-4ee1-a2f3-ae30e8282c76	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd532f8d-789f-4ee1-a2f3-ae30e8282c76	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:gempalm-polluter:cast:s2,f:xs:XP:gempalm-polluter:cast:s2	-	-	-	fc71ca68c5ac	-	0dd34b2fe7aa	-	-	2026-11-24	xproof
+bd532f8d-789f-4ee1-a2f3-ae30e8282c76	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:gempalm-polluter:cast:s1,f:xs:XP:gempalm-polluter:cast:s1	-	-	-	fc71ca68c5ac	-	0dd34b2fe7aa	-	-	2026-11-24	xproof
+bd532f8d-789f-4ee1-a2f3-ae30e8282c76	f0/t0	Cycled	agreed	-	FX	start	1	0	x:xs:XP:gempalm-polluter:cast:s1,f:xs:XP:gempalm-polluter:cast:s1	-	-	-	fc71ca68c5ac	-	0dd34b2fe7aa	-	-	2026-11-24	xproof
 bd55bcc4-f0c5-4c09-8b3b-2e25e9fbd9ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd55bcc4-f0c5-4c09-8b3b-2e25e9fbd9ee	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd575e82-99e7-44c7-ab93-d33f5678e1ad	cast	cast-resolve	agreed	-	FX	scen	2	0	Threadbind Clique/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -133,9 +133,9 @@ bd912666-f37f-4767-af6f-9e6d0fcccacf	f0/a1	NULL	owed	refused:scen failed: xengin
 bd912666-f37f-4767-af6f-9e6d0fcccacf	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd92cacd-c7d8-43a2-a261-ea4754fefdc5	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sage-s-reverie:cast:s1,f:xs:XP:sage-s-reverie:cast:s1	-	-	-	d864b561c9cb	-	66eea60787ca	-	-	2026-11-24	xproof
 bd92cacd-c7d8-43a2-a261-ea4754fefdc5	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sage-s-reverie:cast:s1,f:xs:XP:sage-s-reverie:cast:s1	-	-	-	d864b561c9cb	-	66eea60787ca	-	-	2026-11-24	xproof
-bd940cab-d23a-44bf-ab96-8aa1dcd3f0ff	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd940cab-d23a-44bf-ab96-8aa1dcd3f0ff	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd940cab-d23a-44bf-ab96-8aa1dcd3f0ff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd940cab-d23a-44bf-ab96-8aa1dcd3f0ff	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:scion-of-darkness:cast:s2,f:xs:XP:scion-of-darkness:cast:s2	-	-	-	fc71ca68c5ac	-	0b146ffd8958	-	-	2026-11-24	xproof
+bd940cab-d23a-44bf-ab96-8aa1dcd3f0ff	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:scion-of-darkness:cast:s1,f:xs:XP:scion-of-darkness:cast:s1	-	-	-	fc71ca68c5ac	-	0b146ffd8958	-	-	2026-11-24	xproof
+bd940cab-d23a-44bf-ab96-8aa1dcd3f0ff	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 bd95c832-9ae9-404a-a2bc-0760a5b9ff56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd9ab645-d8ed-4cdd-8d8e-53383b5501ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd9b3009-f389-4831-b250-80c4bb8f25e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:petrifying-meddler:cast:s1,f:xs:XP:petrifying-meddler:cast:s1	-	-	-	ae86f6029288	-	3bc9f0b3f686	-	-	2026-11-24	xproof
@@ -243,7 +243,7 @@ bdf476e5-1d57-4b17-b45b-d52fd75aadeb	land	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 bdf497b5-166f-46a7-8e18-ae0b8f97768c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bdf78365-5887-497e-af25-ca0cb731f35a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bdf78365-5887-497e-af25-ca0cb731f35a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:festering-mummy:f0t0:s1,f:xs:XP:festering-mummy:f0t0:s1	-	-	-	d864b561c9cb	-	b5e2260e8256	-	-	2026-11-24	xproof
-bdf80a55-b524-4d17-9be8-a0005403a0e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bdf80a55-b524-4d17-9be8-a0005403a0e7	cast	cast	agreed	-	F	start	2	0	f:xs:XP:cunning-wish:cast:s1	-	-	-	fc71ca68c5ac	-	30cf0d261252	-	-	2026-11-24	xproof
 bdfcf7df-8c06-4abe-af41-eccabb9fc2c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bdfcf7df-8c06-4abe-af41-eccabb9fc2c8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bdfe5809-17d4-4239-a9ee-6accdef99035	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	591c7dff94c4	-	-	2026-11-24	xproof

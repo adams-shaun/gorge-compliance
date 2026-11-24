@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83101ba8-a569-4827-8c53-9ca0dfcd59a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 831273d4-ced3-4659-b1f6-d5a0aeed3421	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83133f51-bfbd-4db5-9be0-f660e3b66435	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83134570-debe-4bc0-9656-2a16801a3592	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83134570-debe-4bc0-9656-2a16801a3592	cast	cast	agreed	-	F	start	2	0	f:xs:XP:turbulent-dreams:cast:s1	-	-	-	fc71ca68c5ac	-	82d49b3e0ffd	-	-	2026-11-24	xproof
 831487cf-a377-4c9b-920d-c5bc68f17f24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 831487cf-a377-4c9b-920d-c5bc68f17f24	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83157972-3a0b-40e2-a80a-7bfb2a8627ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8356b1fe-02f8-4bb9-bcdb-bb7454eb18ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:decorated-griffin:cast:s1,f:xs:XP:decorated-griffin:cast:s1	-	-	-	d864b561c9cb	-	f61d344142bb	-	-	2026-11-24	xproof
 8356b1fe-02f8-4bb9-bcdb-bb7454eb18ed	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:decorated-griffin:f0a0:s1,f:xs:XP:decorated-griffin:f0a0:s1	-	-	-	d864b561c9cb	-	f61d344142bb	-	-	2026-11-24	xproof
 83578de7-5488-4952-af47-8fe966897210	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83578de7-5488-4952-af47-8fe966897210	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83578de7-5488-4952-af47-8fe966897210	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 8358f65a-7572-430d-b4f0-4fba7a372bd9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8358f65a-7572-430d-b4f0-4fba7a372bd9	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 835abd35-27ea-45fe-b55d-25081c57bd4a	cast	cast-resolve	agreed	-	X	scen	1	0	Zero Point Ballad/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

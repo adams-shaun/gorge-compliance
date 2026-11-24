@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 233e3b4b-faaf-451d-8a2e-e9f5a6ced671	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Giant-Sized Flying Ant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 233e3b4b-faaf-451d-8a2e-e9f5a6ced671	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 23425b11-e40d-4f68-8903-3084ad45319f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23425b11-e40d-4f68-8903-3084ad45319f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+23425b11-e40d-4f68-8903-3084ad45319f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 2343ebff-edf4-4132-ad9e-7800f8014072	cast	cast-resolve	agreed	-	X	scen	1	0	Skycrash/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2343ebff-edf4-4132-ad9e-7800f8014072	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Skycrash/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2345b243-ed0d-4556-8017-d533db1fbc74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -81,8 +81,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23625877-b6db-480c-8885-a62b7d0457df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23643af9-00b7-45e1-8471-7031d08bbe30	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:strength-from-the-fallen:f0t0:s1,f:xs:XP:strength-from-the-fallen:f0t0:s1	-	-	-	d864b561c9cb	-	5055612c2814	-	-	2026-11-24	xproof
 23643af9-00b7-45e1-8471-7031d08bbe30	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:strength-from-the-fallen:f0t0:s1,f:xs:XP:strength-from-the-fallen:f0t0:s1	-	-	-	d864b561c9cb	-	5055612c2814	-	-	2026-11-24	xproof
-23669721-fe9e-49d7-9504-ae6164de723a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23669721-fe9e-49d7-9504-ae6164de723a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+23669721-fe9e-49d7-9504-ae6164de723a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:balthor-the-stout:cast:s1,f:xs:XP:balthor-the-stout:cast:s1	-	-	-	fc71ca68c5ac	-	b968f3d5b93d	-	-	2026-11-24	xproof
+23669721-fe9e-49d7-9504-ae6164de723a	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:balthor-the-stout:f0a0:s1,f:xs:XP:balthor-the-stout:f0a0:s1	-	-	-	fc71ca68c5ac	-	b968f3d5b93d	-	-	2026-11-24	xproof
 23674648-d1a0-437d-8a0b-4173c75b4507	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coursers-accord:cast:s1,f:xs:XP:coursers-accord:cast:s1	-	-	-	d864b561c9cb	-	0c93a87cb14e	-	-	2026-11-24	xproof
 236c4ff1-8c3f-4763-8df9-925021e65726	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valkyrie-s-sword:f0t0:s1,f:xs:XP:valkyrie-s-sword:f0t0:s1	-	-	-	d864b561c9cb	-	c7142e454382	-	-	2026-11-24	xproof
 236c4ff1-8c3f-4763-8df9-925021e65726	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 236f318e-9bd1-4eb0-8b19-af015b3a74ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 236f318e-9bd1-4eb0-8b19-af015b3a74ea	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 236fbf12-f908-4918-babb-1558e767cbe3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-236fbf12-f908-4918-babb-1558e767cbe3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+236fbf12-f908-4918-babb-1558e767cbe3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:vicious-kavu:f0t0:s1,f:xs:XP:vicious-kavu:f0t0:s1	-	-	-	fc71ca68c5ac	-	db084d6f475a	-	-	2026-11-24	xproof
 23714aed-0b26-4e21-b290-36c21815471c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23714aed-0b26-4e21-b290-36c21815471c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23714aed-0b26-4e21-b290-36c21815471c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

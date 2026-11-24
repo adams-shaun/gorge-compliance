@@ -73,8 +73,8 @@ bb7cebb7-a979-4879-b834-deab13f2a22c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	
 bb813ffa-2615-4177-a7fb-6e0dfb819fc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb813ffa-2615-4177-a7fb-6e0dfb819fc2	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 bb81aa50-49db-4743-85fc-6b4d9ed29bc6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bb81aa50-49db-4743-85fc-6b4d9ed29bc6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bb81aa50-49db-4743-85fc-6b4d9ed29bc6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bb81aa50-49db-4743-85fc-6b4d9ed29bc6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+bb81aa50-49db-4743-85fc-6b4d9ed29bc6	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 bb86849c-fdec-4ca5-a8c0-ed682d921759	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 bb86849c-fdec-4ca5-a8c0-ed682d921759	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 bb86849c-fdec-4ca5-a8c0-ed682d921759	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -124,9 +124,9 @@ bbc8c2b4-9949-416f-a722-b1645eff64d7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 bbc8c2b4-9949-416f-a722-b1645eff64d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bbc8c2b4-9949-416f-a722-b1645eff64d7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bbc990e4-1601-498f-9031-0cd663139367	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bbcd2045-cf51-4346-a561-ebae8ffdc181	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bbcd2045-cf51-4346-a561-ebae8ffdc181	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bbcd2045-cf51-4346-a561-ebae8ffdc181	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bbcd2045-cf51-4346-a561-ebae8ffdc181	cast	cast	agreed	-	FX	start	6	0	x:xs:XP:razing-snidd:cast:s1,f:xs:XP:razing-snidd:cast:s1	-	-	-	fc71ca68c5ac	-	54395b4fa33e	-	-	2026-11-24	xproof
+bbcd2045-cf51-4346-a561-ebae8ffdc181	f0/t0	ChangesZone	agreed	-	FX	start	6	0	x:xs:XP:razing-snidd:cast:s1,f:xs:XP:razing-snidd:cast:s1	-	-	-	fc71ca68c5ac	-	54395b4fa33e	-	-	2026-11-24	xproof
+bbcd2045-cf51-4346-a561-ebae8ffdc181	f0/t1	ChangesZone	agreed	-	FX	start	6	0	x:xs:XP:razing-snidd:cast:s1,f:xs:XP:razing-snidd:cast:s1	-	-	-	fc71ca68c5ac	-	54395b4fa33e	-	-	2026-11-24	xproof
 bbd0a2a4-f81b-4a6b-bc4d-d7e53dc51333	cast	cast-resolve	agreed	-	X	scen	1	0	She-Hulk, Jade Defender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bbd0a2a4-f81b-4a6b-bc4d-d7e53dc51333	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	She-Hulk, Jade Defender/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bbd0a2a4-f81b-4a6b-bc4d-d7e53dc51333	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	She-Hulk, Jade Defender/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 171150fb-dbe1-4a07-a7ac-5f45762a26b0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stockpiling-celebrant:f0t0:s2,f:xs:XP:stockpiling-celebrant:f0t0:s2	-	-	-	e07cf3a05ba5	-	477c4539b285	-	-	2026-11-24	xproof
 171150fb-dbe1-4a07-a7ac-5f45762a26b0	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stockpiling-celebrant:f0t0:s2,f:xs:XP:stockpiling-celebrant:f0t0:s2	-	-	-	e07cf3a05ba5	-	477c4539b285	-	-	2026-11-24	xproof
 17191fa9-e956-4f46-b541-465790125b6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17191fa9-e956-4f46-b541-465790125b6b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17191fa9-e956-4f46-b541-465790125b6b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 1720d38a-c3c1-4294-85c1-a91fc7179d6f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boon-of-the-wish-giver:cast:s1,f:xs:XP:boon-of-the-wish-giver:cast:s1	-	-	-	ae86f6029288	-	71e75fa09824	-	-	2026-11-24	xproof
 1720d38a-c3c1-4294-85c1-a91fc7179d6f	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1722d6d0-b435-4d4a-af33-21aab2199f6c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -61,9 +61,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 173e86f4-17f3-44f5-8073-78e7e2e12c4a	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:bitter-reunion:f0a0:s1,f:xs:XP:bitter-reunion:f0a0:s1	-	-	-	d864b561c9cb	-	f8cb1ba2d4c0	-	-	2026-11-24	xproof
 173e86f4-17f3-44f5-8073-78e7e2e12c4a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:bitter-reunion:cast:s1,f:xs:XP:bitter-reunion:cast:s1	-	-	-	d864b561c9cb	-	f8cb1ba2d4c0	-	-	2026-11-24	xproof
 173f2b8e-8072-4fdd-a469-8a1fb0bb6e64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-173f2b8e-8072-4fdd-a469-8a1fb0bb6e64	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17407b73-0dbe-4a71-84ec-3aaca9651f5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17407b73-0dbe-4a71-84ec-3aaca9651f5b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+173f2b8e-8072-4fdd-a469-8a1fb0bb6e64	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+17407b73-0dbe-4a71-84ec-3aaca9651f5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pygmy-kavu:f0t0:s1,f:xs:XP:pygmy-kavu:f0t0:s1	-	-	-	fc71ca68c5ac	-	76fb0c49ab92	-	-	2026-11-24	xproof
+17407b73-0dbe-4a71-84ec-3aaca9651f5b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pygmy-kavu:f0t0:s1,f:xs:XP:pygmy-kavu:f0t0:s1	-	-	-	fc71ca68c5ac	-	76fb0c49ab92	-	-	2026-11-24	xproof
 17415789-159e-43cf-93f8-9926405ee8f1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goliath-spider:cast:s1,f:xs:XP:goliath-spider:cast:s1	-	-	-	64a08ba7d913	-	7a8192482a74	-	-	2026-11-24	xproof
 17425a60-7554-4740-9455-976edd63c106	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hound-of-griselbrand:cast:s1,f:xs:XP:hound-of-griselbrand:cast:s1	-	-	-	d864b561c9cb	-	5b65212075a1	-	-	2026-11-24	xproof
 17425a60-7554-4740-9455-976edd63c106	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -75,9 +75,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 174cf7cd-3e8c-4f90-abc1-a78a0ce832d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shu-soldier-farmers:f0t0:s1,f:xs:XP:shu-soldier-farmers:f0t0:s1	-	-	-	5f2128bf97e4	-	c84107452355	-	-	2026-11-24	xproof
 174cf7cd-3e8c-4f90-abc1-a78a0ce832d2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shu-soldier-farmers:f0t0:s1,f:xs:XP:shu-soldier-farmers:f0t0:s1	-	-	-	5f2128bf97e4	-	c84107452355	-	-	2026-11-24	xproof
 174dfb7f-fe1e-4089-80c4-1788a9307263	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-174dfb7f-fe1e-4089-80c4-1788a9307263	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+174dfb7f-fe1e-4089-80c4-1788a9307263	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 1750cf0a-0709-4f02-90ea-572ff88a37a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1755b3d4-0e40-40c4-b913-0960d55d411b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1755b3d4-0e40-40c4-b913-0960d55d411b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phantom-tiger:cast:s1,f:xs:XP:phantom-tiger:cast:s1	-	-	-	fc71ca68c5ac	-	48d57236c59e	-	-	2026-11-24	xproof
 1758e102-22da-4cb3-98d5-76f7501d026d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gale-swooper:f0t0:s1,f:xs:XP:gale-swooper:f0t0:s1	-	-	-	ae86f6029288	-	7b17f47b90f2	-	-	2026-11-24	xproof
 1758e102-22da-4cb3-98d5-76f7501d026d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gale-swooper:f0t0:s1,f:xs:XP:gale-swooper:f0t0:s1	-	-	-	ae86f6029288	-	7b17f47b90f2	-	-	2026-11-24	xproof
 1759547a-52b3-4bae-817a-658a6fd047e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vhati-il-dal:cast:s1,f:xs:XP:vhati-il-dal:cast:s1	-	-	-	25696bf19d5b	-	96ee8acca929	-	-	2026-11-24	xproof
@@ -214,8 +214,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17f573c4-3ed4-453e-bfbe-4e42d54633e5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:treacherous-blessing:f0t0:s1,f:xs:XP:treacherous-blessing:f0t0:s1	-	-	-	ae86f6029288	-	fa2fdb213350	-	-	2026-11-24	xproof
 17f573c4-3ed4-453e-bfbe-4e42d54633e5	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 17f573c4-3ed4-453e-bfbe-4e42d54633e5	f0/t2	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-17f78719-d86a-4a00-b83f-7a06bec844f7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17f78719-d86a-4a00-b83f-7a06bec844f7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17f78719-d86a-4a00-b83f-7a06bec844f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pulsating-illusion:cast:s1,f:xs:XP:pulsating-illusion:cast:s1	-	-	-	fc71ca68c5ac	-	e0a500035575	-	-	2026-11-24	xproof
+17f78719-d86a-4a00-b83f-7a06bec844f7	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 17f8e8cb-cd1b-4d94-9efa-ce268e8e7096	cast	cast-resolve	agreed	-	X	scen	1	0	Water Wings/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17f930a9-64ee-46f9-8a7c-8877e532c94f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17fae94e-558f-449a-b30c-e3c37a068b79	cast	cast-resolve	agreed	-	FX	scen	2	0	Lightwheel Enhancements/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 064c3269-c012-4fc7-84c3-5f147a82a03c	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stalactite-dagger:f0t0:s2,f:xs:XP:stalactite-dagger:f0t0:s2	-	-	-	267e485f6204	-	8db1aeadc38d	-	-	2026-11-24	xproof
 064c3269-c012-4fc7-84c3-5f147a82a03c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Stalactite Dagger/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 064c5a14-c2f2-4b7a-8e0b-01b9995e8f89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-064c5a14-c2f2-4b7a-8e0b-01b9995e8f89	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+064c5a14-c2f2-4b7a-8e0b-01b9995e8f89	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 06548af1-4fda-435c-ac32-bbf7afafb34e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0659a5b0-9807-4e4c-8af3-b6e233051ad6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0659a5b0-9807-4e4c-8af3-b6e233051ad6	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -117,8 +117,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0679dcef-e1c3-4739-a769-18a4ffdcfde7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Akawalli, the Seething Tower/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0679dcef-e1c3-4739-a769-18a4ffdcfde7	static#0.1	static#0.1	agreed	-	X	scen	1	0	Akawalli, the Seething Tower/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0679dcef-e1c3-4739-a769-18a4ffdcfde7	static#0.2	static#0.2	agreed	-	X	scen	1	0	Akawalli, the Seething Tower/static#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-067b54e4-18f3-48e3-b824-3aba7fcf2408	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-067b54e4-18f3-48e3-b824-3aba7fcf2408	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+067b54e4-18f3-48e3-b824-3aba7fcf2408	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-apothecary:cast:s1,f:xs:XP:master-apothecary:cast:s1	-	-	-	fc71ca68c5ac	-	ceb6f2e9afec	-	-	2026-11-24	xproof
+067b54e4-18f3-48e3-b824-3aba7fcf2408	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:master-apothecary:cast:s1,f:xs:XP:master-apothecary:cast:s1	-	-	-	fc71ca68c5ac	-	ceb6f2e9afec	-	-	2026-11-24	xproof
 0684771f-46ea-40a3-b021-e98a7d7cd79d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 068b3692-411b-44d4-a7e9-005262760cfc	cast	cast-resolve	agreed	-	FX	scen	2	0	Sacrifice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 068b370f-a358-4244-8050-6c81680c55c7	cast	cast-resolve	agreed	-	X	scen	1	0	Stocking the Pantry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -130,8 +130,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 068cbbe3-43c3-425e-80ec-d1ce5c02ea9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06905dfb-b2df-4849-8848-fd3c964aa8c9	cast	cast-resolve	agreed	-	X	scen	1	0	Malamet Brawler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 06905dfb-b2df-4849-8848-fd3c964aa8c9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Malamet Brawler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-069862f9-f051-40cc-84f2-c0208873a34c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-069862f9-f051-40cc-84f2-c0208873a34c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+069862f9-f051-40cc-84f2-c0208873a34c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warped-researcher:cast:s1,f:xs:XP:warped-researcher:cast:s1	-	-	-	fc71ca68c5ac	-	830f1f86d501	-	-	2026-11-24	xproof
+069862f9-f051-40cc-84f2-c0208873a34c	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 069be6a0-9545-4fdc-ad40-957fe307db7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shivan-hellkite:cast:s1,f:xs:XP:shivan-hellkite:cast:s1	-	-	-	25696bf19d5b	-	5cf6b8687e8f	-	-	2026-11-24	xproof
 069be6a0-9545-4fdc-ad40-957fe307db7a	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:shivan-hellkite:f0a0:s1,f:xs:XP:shivan-hellkite:f0a0:s1	-	-	-	d864b561c9cb	-	5cf6b8687e8f	-	-	2026-11-24	xproof
 069c3c87-81a8-4d2a-ad2f-8d3243d0e3db	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

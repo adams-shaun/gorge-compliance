@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c9a2789-4b8c-4706-a95a-99561cd6d09c	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c9d814b-4257-47bc-a1df-c3480bc038ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c9f4fde-b96f-41bf-b214-f83511df1f8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5c9f4fde-b96f-41bf-b214-f83511df1f8e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5c9f4fde-b96f-41bf-b214-f83511df1f8e	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 5ca0f4f3-6133-4f53-9124-f63942796a07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ca0f4f3-6133-4f53-9124-f63942796a07	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ca4e8c4-8358-49be-bafb-85849bf9bd01	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -147,9 +147,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ce273f2-a865-4934-afd4-cf6d5c4f1a4f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:nylea-s-huntmaster:cast:s1,f:xs:XP:nylea-s-huntmaster:cast:s1	-	-	-	ae86f6029288	-	a39329d0de14	-	-	2026-11-24	xproof
 5ce273f2-a865-4934-afd4-cf6d5c4f1a4f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:nylea-s-huntmaster:cast:s1,f:xs:XP:nylea-s-huntmaster:cast:s1	-	-	-	ae86f6029288	-	a39329d0de14	-	-	2026-11-24	xproof
 5ce47fb9-4e4f-4419-af75-309d2743f5f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ce58279-7f1e-4ef7-a352-ecbaee31b6ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ce58279-7f1e-4ef7-a352-ecbaee31b6ff	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ce58279-7f1e-4ef7-a352-ecbaee31b6ff	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5ce58279-7f1e-4ef7-a352-ecbaee31b6ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nemata-grove-guardian:cast:s1,f:xs:XP:nemata-grove-guardian:cast:s1	-	-	-	fc71ca68c5ac	-	a3b26a2bd06d	-	-	2026-11-24	xproof
+5ce58279-7f1e-4ef7-a352-ecbaee31b6ff	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:nemata-grove-guardian:f0a0:s1,f:xs:XP:nemata-grove-guardian:f0a0:s1	-	-	-	fc71ca68c5ac	-	a3b26a2bd06d	-	-	2026-11-24	xproof
+5ce58279-7f1e-4ef7-a352-ecbaee31b6ff	f0/a1	PumpAll	agreed	-	FX	start	4	0	x:xs:XP:nemata-grove-guardian:cast:s1,f:xs:XP:nemata-grove-guardian:cast:s1	-	-	-	fc71ca68c5ac	-	a3b26a2bd06d	-	-	2026-11-24	xproof
 5ce7780d-8a32-44c2-b779-aae732f5b05d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cee3505-0291-4f1b-9e5f-2909a31acd8e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	63d8190eee8b	-	-	2026-11-24	xproof
 5cf069cf-3a10-4427-a02b-5405429b5652	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frostveil-ambush:cast:s1,f:xs:XP:frostveil-ambush:cast:s1	-	-	-	ae86f6029288	-	d65c39543dc8	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cf9002d-6c04-420b-8c3b-0a17f674bb09	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pillardrop-rescuer:f0t0:s1,f:xs:XP:pillardrop-rescuer:f0t0:s1	-	-	-	d864b561c9cb	-	1ea2506e2b29	-	-	2026-11-24	xproof
 5cf9002d-6c04-420b-8c3b-0a17f674bb09	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pillardrop-rescuer:f0t0:s1,f:xs:XP:pillardrop-rescuer:f0t0:s1	-	-	-	d864b561c9cb	-	1ea2506e2b29	-	-	2026-11-24	xproof
 5cf92fd4-7c0b-4d8e-92f1-53dc2e0476fc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5cf92fd4-7c0b-4d8e-92f1-53dc2e0476fc	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5cf92fd4-7c0b-4d8e-92f1-53dc2e0476fc	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:centaur-garden:f0a1:s1,f:xs:XP:centaur-garden:f0a1:s1	-	-	-	fc71ca68c5ac	-	557fabb71216	-	-	2026-11-24	xproof
 5cf92fd4-7c0b-4d8e-92f1-53dc2e0476fc	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cfd73ab-8509-4e4b-9704-68d8dad3b301	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:discontinuity:cast:s1,f:xs:XP:discontinuity:cast:s1	-	-	-	ae86f6029288	-	0f111bdf5277	-	-	2026-11-24	xproof
 5cfdfcac-57fb-4507-a97a-cccbac2d1327	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flayer-husk:f0t0:s1,f:xs:XP:flayer-husk:f0t0:s1	-	-	-	d864b561c9cb	-	78910b35ef9f	-	-	2026-11-24	xproof

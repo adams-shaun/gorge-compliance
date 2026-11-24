@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-4f66d82a-492f-4638-9f77-190d4a33ad7f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4f66d82a-492f-4638-9f77-190d4a33ad7f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kirtar-s-wrath:cast:s1,f:xs:XP:kirtar-s-wrath:cast:s1	-	-	-	fc71ca68c5ac	-	31e36fa706fc	-	-	2026-11-24	xproof
 4f69d2f9-c16a-4752-9026-794a29d73af8	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -184,8 +184,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fd3dafe-e6a4-49d5-950a-e2fcc77eda98	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fd493b3-63f9-4633-8f88-8755e489da32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fd493b3-63f9-4633-8f88-8755e489da32	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fd567cb-0b8e-41dd-a2b7-87a196de294a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fd567cb-0b8e-41dd-a2b7-87a196de294a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4fd567cb-0b8e-41dd-a2b7-87a196de294a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nantuko-tracer:f0t0:s1,f:xs:XP:nantuko-tracer:f0t0:s1	-	-	-	fc71ca68c5ac	-	8ff831d13f70	-	-	2026-11-24	xproof
+4fd567cb-0b8e-41dd-a2b7-87a196de294a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nantuko-tracer:f0t0:s1,f:xs:XP:nantuko-tracer:f0t0:s1	-	-	-	fc71ca68c5ac	-	8ff831d13f70	-	-	2026-11-24	xproof
 4fd6d9af-4d53-4e10-bc23-672454803099	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fd6d9af-4d53-4e10-bc23-672454803099	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:copper-gnomes:f0a0:s1,f:xs:XP:copper-gnomes:f0a0:s1	-	-	-	5f2128bf97e4	-	2b3e00f054be	-	-	2026-11-24	xproof
 4fd74a8c-a4e7-4988-ae02-9a73ab6ec89e	cast	cast-resolve	agreed	-	X	scen	1	0	Pictures of Spider-Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

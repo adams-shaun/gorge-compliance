@@ -61,14 +61,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 284db94d-e583-4355-89fd-6c0906f9d17e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 284db94d-e583-4355-89fd-6c0906f9d17e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 284db94d-e583-4355-89fd-6c0906f9d17e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28537019-3061-4efc-8e87-9bb805bf520f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+28537019-3061-4efc-8e87-9bb805bf520f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancient-spider:cast:s1,f:xs:XP:ancient-spider:cast:s1	-	-	-	fc71ca68c5ac	-	90e2f1a28878	-	-	2026-11-24	xproof
 28564d10-bfc5-4beb-b0e2-b9aa5c03f740	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dundoolin-weaver:f0t0:s1,f:xs:XP:dundoolin-weaver:f0t0:s1	-	-	-	9ee19e8250ce	-	adcdb93f085e	-	-	2026-11-24	xproof
 28564d10-bfc5-4beb-b0e2-b9aa5c03f740	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 2856844d-f727-48aa-8387-cb6079afb40c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2856844d-f727-48aa-8387-cb6079afb40c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 285ba9af-bdb8-4b31-b0c5-59aa40d4e3e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 285ba9af-bdb8-4b31-b0c5-59aa40d4e3e9	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-285c9f49-4aeb-468c-bb41-f5ccb5257e2b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+285c9f49-4aeb-468c-bb41-f5ccb5257e2b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-kavu:cast:s1,f:xs:XP:yavimaya-kavu:cast:s1	-	-	-	fc71ca68c5ac	-	4ca4e7f6a638	-	-	2026-11-24	xproof
 285fecb7-f872-454d-ac2f-bc5615c70cd8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 286213a8-ae53-4f97-9f81-e13bed462d0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28673657-f05f-4b0a-b80c-939773abdefb	cast	cast-resolve	agreed	-	X	scen	1	0	Gloryheath Lynx/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -118,8 +118,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2896f01d-003b-4d68-9d0a-64990ba59cbe	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2896f01d-003b-4d68-9d0a-64990ba59cbe	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 289e1a7c-b301-4395-baf8-e9a1c6d38aab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28a1e053-eb14-4fbf-afd1-bfb6117a839a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28a1e053-eb14-4fbf-afd1-bfb6117a839a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+28a1e053-eb14-4fbf-afd1-bfb6117a839a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:primoc-escapee:cast:s2,f:xs:XP:primoc-escapee:cast:s2	-	-	-	fc71ca68c5ac	-	db6b9fc88bc3	-	-	2026-11-24	xproof
+28a1e053-eb14-4fbf-afd1-bfb6117a839a	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:primoc-escapee:cast:s1,f:xs:XP:primoc-escapee:cast:s1	-	-	-	fc71ca68c5ac	-	db6b9fc88bc3	-	-	2026-11-24	xproof
 28a24aeb-1ede-4331-adae-6b2dfcd3e4da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28a2ad5b-d637-4634-8d4b-889e1fc88319	cast	cast-resolve	agreed	-	X	scen	1	0	Northern Air Temple/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 28a2ad5b-d637-4634-8d4b-889e1fc88319	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28e99c5f-a78a-4323-b5e9-1b43303acaf6	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 28ea1f58-3310-4cf1-a834-40f2cc3b6898	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28ea78dc-7ad6-4006-aaf8-4b25057ec019	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28ea78dc-7ad6-4006-aaf8-4b25057ec019	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+28ea78dc-7ad6-4006-aaf8-4b25057ec019	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 28eb696f-a42c-4444-8139-dfd62029e020	cast	cast-resolve	agreed	-	X	scen	1	0	Cautious Survivor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 28eb696f-a42c-4444-8139-dfd62029e020	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cautious Survivor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 28ebe75a-cddd-469b-be8a-286776b83388	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormcaller-s-boon:cast:s1,f:xs:XP:stormcaller-s-boon:cast:s1	-	-	-	8a1b1a193ec0	-	2f16556b2c1d	-	-	2026-11-24	xproof

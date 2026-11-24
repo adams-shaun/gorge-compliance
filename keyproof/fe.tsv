@@ -113,8 +113,8 @@ fe9f6825-597b-4d80-ab7c-f4ee4e824b6f	cast	cast-resolve	agreed	-	FX	scen	2	0	Summ
 fe9f6825-597b-4d80-ab7c-f4ee4e824b6f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Summon: Bahamut/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fe9f6825-597b-4d80-ab7c-f4ee4e824b6f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Summon: Bahamut/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fea32d4e-ceef-4954-a84d-e7e2509e4a13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firja-s-retribution:cast:s1,f:xs:XP:firja-s-retribution:cast:s1	-	-	-	d864b561c9cb	-	5efbc4df8370	-	-	2026-11-24	xproof
-fea4cb32-0329-4199-9abe-bff0cc45882a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fea4cb32-0329-4199-9abe-bff0cc45882a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fea4cb32-0329-4199-9abe-bff0cc45882a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:standstill:cast:s1,f:xs:XP:standstill:cast:s1	-	-	-	fc71ca68c5ac	-	bc196d242b9a	-	-	2026-11-24	xproof
+fea4cb32-0329-4199-9abe-bff0cc45882a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 fea60c45-cc36-4dd1-8475-23a9361e370d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:furnace-host-charger:cast:s2,f:xs:XP:furnace-host-charger:cast:s2	-	-	-	ae86f6029288	-	8b913a71e730	-	-	2026-11-24	xproof
 fea60c45-cc36-4dd1-8475-23a9361e370d	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:furnace-host-charger:cast:s1,f:xs:XP:furnace-host-charger:cast:s1	-	-	-	ae86f6029288	-	8b913a71e730	-	-	2026-11-24	xproof
 fea67446-f413-4a8c-b79a-49172e798fff	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ fee392d9-a961-4f41-81ba-ab1b87c931fa	f0/t0	NULL	owed	refused:scen failed: age ma
 fee392d9-a961-4f41-81ba-ab1b87c931fa	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 fee392d9-a961-4f41-81ba-ab1b87c931fa	f0/t2	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 fee53820-a17c-4f34-9971-581bf8e12fd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fee53820-a17c-4f34-9971-581bf8e12fd6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fee53820-a17c-4f34-9971-581bf8e12fd6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 fee680c6-afe2-4321-9d8a-8f81a612a53b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fee680c6-afe2-4321-9d8a-8f81a612a53b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fee680c6-afe2-4321-9d8a-8f81a612a53b	f0/a1	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

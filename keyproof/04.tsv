@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 042c01ec-9f1f-432b-bea9-d64d822cd91e	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	The Emperor of Palamecia/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 042cc9d9-ad13-401f-b2f5-c2f1558d7e44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 042e0533-faf4-475e-be7b-438d23c6e605	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-043192d8-6077-46c3-b43f-b7caf6762869	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+043192d8-6077-46c3-b43f-b7caf6762869	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 043192d8-6077-46c3-b43f-b7caf6762869	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 043192d8-6077-46c3-b43f-b7caf6762869	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0431b67e-ce09-4009-ba5b-9fd41e6f1df4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -77,7 +77,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04559759-1afd-4785-badc-c3416041f016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hallar-the-firefletcher:cast:s1,f:xs:XP:hallar-the-firefletcher:cast:s1	-	-	-	d864b561c9cb	-	3e845bb19eb0	-	-	2026-11-24	xproof
 04559759-1afd-4785-badc-c3416041f016	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0456ec64-2c81-4763-a352-8ff64a4c3d6b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04576b4d-2977-4cdf-b4a5-b0b47995e962	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04576b4d-2977-4cdf-b4a5-b0b47995e962	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-barbarian:cast:s1,f:xs:XP:yavimaya-barbarian:cast:s1	-	-	-	fc71ca68c5ac	-	4174c5b415b6	-	-	2026-11-24	xproof
 045a9d3d-c20d-427f-a77b-0bffc6f55526	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 045a9d3d-c20d-427f-a77b-0bffc6f55526	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 045b2b84-96bd-46fb-8aae-a33968e741c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mudbutton-torchrunner:cast:s1,f:xs:XP:mudbutton-torchrunner:cast:s1	-	-	-	d864b561c9cb	-	3aa251306595	-	-	2026-11-24	xproof
@@ -94,8 +94,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04669a6f-6299-465b-a26e-6cae37cdc081	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Plumecreed Escort/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04669a6f-6299-465b-a26e-6cae37cdc081	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0466f23c-d07c-4015-82d5-eab4b226f1ff	cast	cast-resolve	agreed	-	FX	scen	2	0	Amazing Acrobatics/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-04683bd7-b100-4fc8-8165-316c5508c255	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04683bd7-b100-4fc8-8165-316c5508c255	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04683bd7-b100-4fc8-8165-316c5508c255	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ebony-treefolk:cast:s1,f:xs:XP:ebony-treefolk:cast:s1	-	-	-	fc71ca68c5ac	-	203e1724355c	-	-	2026-11-24	xproof
+04683bd7-b100-4fc8-8165-316c5508c255	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:ebony-treefolk:f0a0:s1,f:xs:XP:ebony-treefolk:f0a0:s1	-	-	-	fc71ca68c5ac	-	203e1724355c	-	-	2026-11-24	xproof
 046923d6-2d58-42ce-afb8-886f4932e76c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 046add85-952f-46ac-974a-463d2a7d3fd4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-book-of-exalted-deeds:cast:s1,f:xs:XP:the-book-of-exalted-deeds:cast:s1	-	-	-	ae86f6029288	-	eca23948ef20	-	-	2026-11-24	xproof
 046add85-952f-46ac-974a-463d2a7d3fd4	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

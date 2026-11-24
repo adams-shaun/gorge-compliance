@@ -90,7 +90,7 @@ b0632f1b-14e5-4534-b2c5-af9d557fdcc0	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 b0672aa3-3207-4ff8-af8f-bdabacbb4d04	cast	cast-resolve	agreed	-	X	scen	1	0	Mechanical Mobster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b0672aa3-3207-4ff8-af8f-bdabacbb4d04	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b067aa04-5977-4371-85d1-78d2884df03f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b067aa04-5977-4371-85d1-78d2884df03f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b067aa04-5977-4371-85d1-78d2884df03f	f0/a0	Pump	agreed	-	X	start	2	0	x:xs:XP:emerald-dragonfly:f0a0:s1	-	-	-	fc71ca68c5ac	-	0d46bdb43762	-	-	2026-11-24	xproof
 b0695221-a61a-41e4-8195-3eeaaab2d969	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b0695221-a61a-41e4-8195-3eeaaab2d969	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b06c9a4b-f309-45b3-ae5b-0ce3f067a5cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -144,16 +144,16 @@ b095526e-94a4-416b-83de-d6271804ccf3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 b0967525-554b-41eb-b639-75fe36e0fe57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:destructive-force:cast:s1,f:xs:XP:destructive-force:cast:s1	-	-	-	d864b561c9cb	-	98e758d01b2c	-	-	2026-11-24	xproof
 b099fc54-cdbc-46cb-b4e4-7c2ca77b115b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plumb-the-forbidden:cast:s1,f:xs:XP:plumb-the-forbidden:cast:s1	-	-	-	ae86f6029288	-	f7815ee248a5	-	-	2026-11-24	xproof
 b099fc54-cdbc-46cb-b4e4-7c2ca77b115b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-b0a0c17b-87c8-4610-adca-5e7f5ced49f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b0a0c17b-87c8-4610-adca-5e7f5ced49f6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tidal-courier:f0t0:s1,f:xs:XP:tidal-courier:f0t0:s1	-	-	-	fc71ca68c5ac	-	f8e84cdd3471	-	-	2026-11-24	xproof
 b0a0c17b-87c8-4610-adca-5e7f5ced49f6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b0a0c17b-87c8-4610-adca-5e7f5ced49f6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b0a0c17b-87c8-4610-adca-5e7f5ced49f6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tidal-courier:f0t0:s1,f:xs:XP:tidal-courier:f0t0:s1	-	-	-	fc71ca68c5ac	-	f8e84cdd3471	-	-	2026-11-24	xproof
 b0a54050-3493-4ff6-8eca-e43b92c1f3d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b0a54050-3493-4ff6-8eca-e43b92c1f3d3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b0a54050-3493-4ff6-8eca-e43b92c1f3d3	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 b0a96e47-91da-43ee-93dd-f866721029c6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:khalni-gem:f0t0:s1,f:xs:XP:khalni-gem:f0t0:s1	-	-	-	8a1b1a193ec0	-	b3b9bf663041	-	-	2026-11-24	xproof
 b0a96e47-91da-43ee-93dd-f866721029c6	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:khalni-gem:f0t0:s1,f:xs:XP:khalni-gem:f0t0:s1	-	-	-	8a1b1a193ec0	-	b3b9bf663041	-	-	2026-11-24	xproof
 b0a96e47-91da-43ee-93dd-f866721029c6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:khalni-gem:f0t0:s1,f:xs:XP:khalni-gem:f0t0:s1	-	-	-	8a1b1a193ec0	-	b3b9bf663041	-	-	2026-11-24	xproof
 b0aaa4b1-5188-43a6-997d-7a9b2ad452bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b0aeeeb6-490c-4638-a4ad-498e4d85413e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b0aeeeb6-490c-4638-a4ad-498e4d85413e	cast	cast	agreed	-	F	start	2	0	f:xs:XP:urza-s-guilt:cast:s1	-	-	-	fc71ca68c5ac	-	6b763c726708	-	-	2026-11-24	xproof
 b0af0c54-2a59-4075-8543-d41ff20c4c87	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Wind-Scarred Crag/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b0af0c54-2a59-4075-8543-d41ff20c4c87	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wind-Scarred Crag/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b0af0c54-2a59-4075-8543-d41ff20c4c87	land	play-land	agreed	-	X	scen	1	0	Wind-Scarred Crag/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

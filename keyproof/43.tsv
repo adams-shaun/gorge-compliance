@@ -81,9 +81,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43674fdf-496f-42dc-8a0a-5c42a7c7d910	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nylea-god-of-the-hunt:cast:s1,f:xs:XP:nylea-god-of-the-hunt:cast:s1	-	-	-	d864b561c9cb	-	3494633d4a67	-	-	2026-11-24	xproof
 43674fdf-496f-42dc-8a0a-5c42a7c7d910	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4369adc8-d8e0-4d51-b2a9-7e4a8dfd9f8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4369adc8-d8e0-4d51-b2a9-7e4a8dfd9f8f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4369adc8-d8e0-4d51-b2a9-7e4a8dfd9f8f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 436f9a5d-ec26-4c88-9851-b88fe742fa67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-436f9a5d-ec26-4c88-9851-b88fe742fa67	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+436f9a5d-ec26-4c88-9851-b88fe742fa67	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 4371d5bc-1760-477b-822e-6d4999fb0a6b	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4371d5bc-1760-477b-822e-6d4999fb0a6b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4372205f-45e6-49c7-b1fd-13a41e20d4de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4377cc84-19d3-48e0-9588-d18b4fbf4e6d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 437b2dab-15e0-4b9a-a204-58622d37a3b3	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	48c06b70130d	-	-	2026-11-24	xproof
 437be0ad-2dd1-42c8-bf62-5af95228b2f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-437be0ad-2dd1-42c8-bf62-5af95228b2f8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+437be0ad-2dd1-42c8-bf62-5af95228b2f8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:haunted-angel:f0t0:s1,f:xs:XP:haunted-angel:f0t0:s1	-	-	-	fc71ca68c5ac	-	a0d624913852	-	-	2026-11-24	xproof
 437cfd16-94bc-43ba-afd8-e9e9d028a4ca	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43827acb-70cf-44a3-8560-e9f7330c835e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ardent-electromancer:f0t0:s1,f:xs:XP:ardent-electromancer:f0t0:s1	-	-	-	ae86f6029288	-	bdb134f1ea4f	-	-	2026-11-24	xproof
 43827acb-70cf-44a3-8560-e9f7330c835e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ardent-electromancer:f0t0:s1,f:xs:XP:ardent-electromancer:f0t0:s1	-	-	-	ae86f6029288	-	bdb134f1ea4f	-	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43a86d36-9653-4498-a533-8b30b919cdbf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gift-of-paradise:f0t0:s1,f:xs:XP:gift-of-paradise:f0t0:s1	-	-	-	d864b561c9cb	-	182824033078	-	-	2026-11-24	xproof
 43a86d36-9653-4498-a533-8b30b919cdbf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gift-of-paradise:f0t0:s1,f:xs:XP:gift-of-paradise:f0t0:s1	-	-	-	d864b561c9cb	-	182824033078	-	-	2026-11-24	xproof
 43abe1f3-7b92-411a-bf93-e158f949685c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43abe1f3-7b92-411a-bf93-e158f949685c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+43abe1f3-7b92-411a-bf93-e158f949685c	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 43abfce5-b1dd-4784-bb91-d57b2c28f6a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43abfce5-b1dd-4784-bb91-d57b2c28f6a6	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 43abfce5-b1dd-4784-bb91-d57b2c28f6a6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

@@ -29,9 +29,9 @@ a61f7653-4c55-472f-b37c-617b94d0fecd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a61f7653-4c55-472f-b37c-617b94d0fecd	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 a621ae15-122a-4e11-bfcf-11dfc09784c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a621ae15-122a-4e11-bfcf-11dfc09784c0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a628186d-b7d9-40a5-9ae2-fbc9d2a14c7c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a628186d-b7d9-40a5-9ae2-fbc9d2a14c7c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a628186d-b7d9-40a5-9ae2-fbc9d2a14c7c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a628186d-b7d9-40a5-9ae2-fbc9d2a14c7c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:worldgorger-dragon:cast:s1,f:xs:XP:worldgorger-dragon:cast:s1	-	-	-	fc71ca68c5ac	-	1a5d8b4d7813	-	-	2026-11-24	xproof
+a628186d-b7d9-40a5-9ae2-fbc9d2a14c7c	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:worldgorger-dragon:cast:s1,f:xs:XP:worldgorger-dragon:cast:s1	-	-	-	fc71ca68c5ac	-	1a5d8b4d7813	-	-	2026-11-24	xproof
+a628186d-b7d9-40a5-9ae2-fbc9d2a14c7c	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 a6297680-5d32-41e6-aaaf-b194e6be6b96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6297680-5d32-41e6-aaaf-b194e6be6b96	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:greenside-watcher:f0a0:s1,f:xs:XP:greenside-watcher:f0a0:s1	-	-	-	d864b561c9cb	-	41cf5c7f905d	-	-	2026-11-24	xproof
 a62e6cf4-1adb-4c28-b24b-91287bb23e96	cast	cast-resolve	agreed	-	X	scen	1	0	Geralf, the Fleshwright/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -179,7 +179,7 @@ a6d8f944-f516-49d7-9aa8-77b98e862d6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a6d8f944-f516-49d7-9aa8-77b98e862d6a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6d95d26-48d8-4a97-9a42-f492a61300c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6df9679-1e4c-4791-855b-28bc2fa35b49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a6df9679-1e4c-4791-855b-28bc2fa35b49	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a6df9679-1e4c-4791-855b-28bc2fa35b49	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:smokespew-invoker:f0a0:s1,f:xs:XP:smokespew-invoker:f0a0:s1	-	-	-	fc71ca68c5ac	-	b8eda1ccb4a9	-	-	2026-11-24	xproof
 a6e12be3-4166-4bd7-8254-e28b7c8588c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6e2d8bd-8fe7-4de0-af25-7ad3e9dcb81b	cast	cast-resolve	agreed	-	FX	scen	2	0	Harried Dronesmith/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a6e2d8bd-8fe7-4de0-af25-7ad3e9dcb81b	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Harried Dronesmith/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

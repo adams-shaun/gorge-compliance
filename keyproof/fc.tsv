@@ -47,7 +47,7 @@ fc46649d-9d84-4082-9d2d-fbb7ce91c6a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 fc467fe5-85ab-4c95-8d21-49096778b107	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc467fe5-85ab-4c95-8d21-49096778b107	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc467fe5-85ab-4c95-8d21-49096778b107	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fc4c969d-408c-46d1-8dba-fabecc2c30ce	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fc4c969d-408c-46d1-8dba-fabecc2c30ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:false-cure:cast:s1,f:xs:XP:false-cure:cast:s1	-	-	-	fc71ca68c5ac	-	b098898b8746	-	-	2026-11-24	xproof
 fc4f2cdb-966c-4576-8b37-b3d138f5710e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:god-eternal-rhonas:f0t0:s1,f:xs:XP:god-eternal-rhonas:f0t0:s1	-	-	-	d864b561c9cb	-	455cd5fd04c5	-	-	2026-11-24	xproof
 fc4f2cdb-966c-4576-8b37-b3d138f5710e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:god-eternal-rhonas:f0t0:s1,f:xs:XP:god-eternal-rhonas:f0t0:s1	-	-	-	d864b561c9cb	-	455cd5fd04c5	-	-	2026-11-24	xproof
 fc4f2cdb-966c-4576-8b37-b3d138f5710e	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -64,7 +64,7 @@ fc594e38-4297-44d4-b11b-3ab804cfcbdd	f0/t0	NULL	owed	refused:no-generator:trigge
 fc59aa9a-3abd-4479-a63e-ef0eeb35b5f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc59aa9a-3abd-4479-a63e-ef0eeb35b5f2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 fc5d3341-cbce-49e5-93cc-8add92479dca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fc5e42b5-4da2-4777-828b-138c0a5d234f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fc5e42b5-4da2-4777-828b-138c0a5d234f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fire-sprites:cast:s1,f:xs:XP:fire-sprites:cast:s1	-	-	-	fc71ca68c5ac	-	5df3961e00ae	-	-	2026-11-24	xproof
 fc5e42b5-4da2-4777-828b-138c0a5d234f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc6278e5-7eb1-4590-880e-fe9efa0ec4d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc6278e5-7eb1-4590-880e-fe9efa0ec4d9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -104,8 +104,8 @@ fc8ee6e1-a2e1-4033-a164-7968fc79dd27	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 fc90f74d-11f3-4bd4-b8a1-1cf2ffcd5b73	cast	cast-resolve	agreed	-	FX	scen	2	0	Mica, Reader of Ruins/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fc90f74d-11f3-4bd4-b8a1-1cf2ffcd5b73	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Mica, Reader of Ruins/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fc90f74d-11f3-4bd4-b8a1-1cf2ffcd5b73	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Mica, Reader of Ruins/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fc988ce3-0cad-41a5-8f13-656caca732df	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fc988ce3-0cad-41a5-8f13-656caca732df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fc988ce3-0cad-41a5-8f13-656caca732df	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:shivan-wurm:cast:s1,f:xs:XP:shivan-wurm:cast:s1	-	-	-	fc71ca68c5ac	-	ac7f61769160	-	-	2026-11-24	xproof
+fc988ce3-0cad-41a5-8f13-656caca732df	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:shivan-wurm:cast:s1,f:xs:XP:shivan-wurm:cast:s1	-	-	-	fc71ca68c5ac	-	ac7f61769160	-	-	2026-11-24	xproof
 fc9ec820-4245-4a96-b009-5308a818ca58	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Watery Grave/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fc9ec820-4245-4a96-b009-5308a818ca58	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Watery Grave/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fc9ec820-4245-4a96-b009-5308a818ca58	land	play-land	agreed	-	X	scen	1	0	Watery Grave/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ fcae4f9d-8f81-42f9-93a3-82a482851bdd	combat#0.attack	combat#0.attack	agreed	-	X	
 fcae4f9d-8f81-42f9-93a3-82a482851bdd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Moonstone Harbinger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fcae4f9d-8f81-42f9-93a3-82a482851bdd	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Moonstone Harbinger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fcae4f9d-8f81-42f9-93a3-82a482851bdd	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Moonstone Harbinger/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fcae9e87-50af-46b4-ab48-42ed92985e10	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fcae9e87-50af-46b4-ab48-42ed92985e10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lady-orca:cast:s1,f:xs:XP:lady-orca:cast:s1	-	-	-	fc71ca68c5ac	-	56a5085ed8a8	-	-	2026-11-24	xproof
 fcb03c54-5b9a-428d-bbf6-ef8977770c8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fcb0c7db-bd07-4c25-b7f8-b6c207e4f6be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fcb0c7db-bd07-4c25-b7f8-b6c207e4f6be	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

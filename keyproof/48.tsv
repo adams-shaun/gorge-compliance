@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 480454a0-fb10-432b-a963-8b0c0ffc6680	cast	cast	agreed	-	F	start	4	0	f:xs:XP:sepulchral-primordial:cast:s1	-	-	-	d864b561c9cb	-	b057e4ea6bfb	-	-	2026-11-24	xproof
 480454a0-fb10-432b-a963-8b0c0ffc6680	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:sepulchral-primordial:cast:s1	-	-	-	d864b561c9cb	-	b057e4ea6bfb	-	-	2026-11-24	xproof
 4804fc42-588c-487a-8ff7-bcc16749fc1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4804fc42-588c-487a-8ff7-bcc16749fc1f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4804fc42-588c-487a-8ff7-bcc16749fc1f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 48060406-dd5a-4df5-84e9-3e797f0248cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48060406-dd5a-4df5-84e9-3e797f0248cd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48090c64-f41a-447b-ad7a-54e3194f759b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -81,8 +81,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 487485a6-cf79-48c0-bea9-0ec6b3ee253c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 487485a6-cf79-48c0-bea9-0ec6b3ee253c	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 48792146-e20c-4d93-83af-f746069fc6f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48792146-e20c-4d93-83af-f746069fc6f1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48792146-e20c-4d93-83af-f746069fc6f1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48792146-e20c-4d93-83af-f746069fc6f1	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+48792146-e20c-4d93-83af-f746069fc6f1	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 4879c8f0-8832-4290-bc71-9838940f75cd	cast	cast-resolve	agreed	-	FX	scen	2	0	Valley Floodcaller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4879c8f0-8832-4290-bc71-9838940f75cd	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Valley Floodcaller/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4879c8f0-8832-4290-bc71-9838940f75cd	static#0.0	static#0.0	agreed	-	X	scen	1	0	Valley Floodcaller/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -127,7 +127,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48a773d0-c433-4463-b50f-b6d4604a042c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Abigale, Eloquent First-Year/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 48a773d0-c433-4463-b50f-b6d4604a042c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Abigale, Eloquent First-Year/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 48a773d0-c433-4463-b50f-b6d4604a042c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-48a830f1-8965-4f97-b3d8-ca98eab1ba33	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48a830f1-8965-4f97-b3d8-ca98eab1ba33	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 48a830f1-8965-4f97-b3d8-ca98eab1ba33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48a830f1-8965-4f97-b3d8-ca98eab1ba33	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48a909b6-e6ee-4148-8b50-b35f11bc065f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mizzium-meddler:f0t0:s1,f:xs:XP:mizzium-meddler:f0t0:s1	-	-	-	d864b561c9cb	-	ff7a88e18315	-	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48b891b6-3175-4864-bb98-af131098c557	cast	cast	agreed	-	F	start	2	0	f:xs:XP:fblthp-knows-the-way:f0t0:s1	-	-	-	25696bf19d5b	-	db44721f8283	-	-	2026-11-24	xproof
 48b891b6-3175-4864-bb98-af131098c557	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:fblthp-knows-the-way:f0t0:s1	-	-	-	25696bf19d5b	-	db44721f8283	-	-	2026-11-24	xproof
 48b891b6-3175-4864-bb98-af131098c557	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fblthp, Knows the Way/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-48b9c510-03ed-41cb-8c17-16110d447490	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48b9c510-03ed-41cb-8c17-16110d447490	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ramirez-depietro:cast:s1,f:xs:XP:ramirez-depietro:cast:s1	-	-	-	fc71ca68c5ac	-	6ebb6a6fe3d5	-	-	2026-11-24	xproof
 48bda7dd-d023-41e8-8c28-e0cfda0d07ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-cloudchaser:f0t0:s1,f:xs:XP:aven-cloudchaser:f0t0:s1	-	-	-	25696bf19d5b	-	22d846f6e63b	-	-	2026-11-24	xproof
 48bda7dd-d023-41e8-8c28-e0cfda0d07ca	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aven-cloudchaser:f0t0:s1,f:xs:XP:aven-cloudchaser:f0t0:s1	-	-	-	25696bf19d5b	-	22d846f6e63b	-	-	2026-11-24	xproof
 48c0cd06-465d-4901-bf23-948a003afc0b	cast	cast-resolve	agreed	-	X	scen	1	0	Honor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

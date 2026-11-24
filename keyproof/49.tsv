@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49a8ca54-30d3-42d3-b122-334d24805e1b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49aa87c7-034b-409d-b37f-50db6a42e533	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49b351d8-8b63-4f9e-a323-344ed35fdfff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49b351d8-8b63-4f9e-a323-344ed35fdfff	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+49b351d8-8b63-4f9e-a323-344ed35fdfff	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:elvish-hunter:f0a0:s1,f:xs:XP:elvish-hunter:f0a0:s1	-	-	-	fc71ca68c5ac	-	658d196e4dc4	-	-	2026-11-24	xproof
 49b689a3-9197-4a04-a62f-218b245d6e23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49b689a3-9197-4a04-a62f-218b245d6e23	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 49b689a3-9197-4a04-a62f-218b245d6e23	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49d149d6-de94-48cf-974b-6bb4a37ce77c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rangers' Aetherhive/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49d189dd-9ce7-434f-931b-7110cd5255e7	cast	cast-resolve	agreed	-	X	scen	1	0	Brave the Wilds/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49d44e89-b94e-43f7-a996-f50651df9264	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49d44e89-b94e-43f7-a996-f50651df9264	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+49d44e89-b94e-43f7-a996-f50651df9264	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 49d64ecb-3a4f-4013-9a34-8b1539a91e96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tezzeret-the-schemer:cast:s1,f:xs:XP:tezzeret-the-schemer:cast:s1	-	-	-	d864b561c9cb	-	fbac42267eaa	-	-	2026-11-24	xproof
 49d64ecb-3a4f-4013-9a34-8b1539a91e96	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 49d64ecb-3a4f-4013-9a34-8b1539a91e96	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:tezzeret-the-schemer:cast:s1,f:xs:XP:tezzeret-the-schemer:cast:s1	-	-	-	d864b561c9cb	-	fbac42267eaa	-	-	2026-11-24	xproof
@@ -198,7 +198,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49e43de3-460b-4562-aef6-da43bd56debc	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49e43de3-460b-4562-aef6-da43bd56debc	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49e70569-b0bc-4705-927e-eb1504925210	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49e70569-b0bc-4705-927e-eb1504925210	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+49e70569-b0bc-4705-927e-eb1504925210	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 49e9fba7-8465-4bbb-95db-73a7e149f494	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Maelstrom of the Spirit Dragon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49e9fba7-8465-4bbb-95db-73a7e149f494	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Maelstrom of the Spirit Dragon/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49e9fba7-8465-4bbb-95db-73a7e149f494	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Maelstrom of the Spirit Dragon/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -17,9 +17,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 390f1b56-264e-4336-83be-dc1fe79bfdcf	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3912d21e-1ebc-4a81-9dc9-f404248d564a	cast	cast-resolve	agreed	-	X	scen	1	0	Fire Elemental/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3913c7f2-86b7-4dd4-84a6-9bd4c1c66781	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3913c7f2-86b7-4dd4-84a6-9bd4c1c66781	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3913c7f2-86b7-4dd4-84a6-9bd4c1c66781	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3913c7f2-86b7-4dd4-84a6-9bd4c1c66781	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3913c7f2-86b7-4dd4-84a6-9bd4c1c66781	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:spiritmonger:f0a0:s1,f:xs:XP:spiritmonger:f0a0:s1	-	-	-	fc71ca68c5ac	-	c9002c1369b2	-	-	2026-11-24	xproof
+3913c7f2-86b7-4dd4-84a6-9bd4c1c66781	f0/a1	ChooseColor	agreed	-	FX	start	2	0	x:xs:XP:spiritmonger:f0a1:s1,f:xs:XP:spiritmonger:f0a1:s1	-	-	-	fc71ca68c5ac	-	c9002c1369b2	-	-	2026-11-24	xproof
+3913c7f2-86b7-4dd4-84a6-9bd4c1c66781	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 39144f72-789e-457a-a7e7-862f90c34e15	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39144f72-789e-457a-a7e7-862f90c34e15	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39144f72-789e-457a-a7e7-862f90c34e15	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -77,8 +77,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 394fae8f-3757-4e08-b97c-5d7c451f4e72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 394fae8f-3757-4e08-b97c-5d7c451f4e72	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3951f13e-f6dd-4d67-a088-23925baaf99b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sphinx-of-jwar-isle:cast:s1,f:xs:XP:sphinx-of-jwar-isle:cast:s1	-	-	-	8a1b1a193ec0	-	8bfdc85dfafe	-	-	2026-11-24	xproof
-3953fd17-03f4-4431-99b5-87dcac5a279d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3953fd17-03f4-4431-99b5-87dcac5a279d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3953fd17-03f4-4431-99b5-87dcac5a279d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:feral-thallid:cast:s1,f:xs:XP:feral-thallid:cast:s1	-	-	-	fc71ca68c5ac	-	569da5dc9a9d	-	-	2026-11-24	xproof
+3953fd17-03f4-4431-99b5-87dcac5a279d	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 3953fd17-03f4-4431-99b5-87dcac5a279d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 395611fa-aec2-4c9e-92c3-70cf95cc00f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 395922cc-d524-4241-a7d8-9c7959f0b9db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -173,7 +173,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39bfe194-1662-4c0e-a7c6-ea7764d29b65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39c10798-9dfc-47a2-9da3-b4038509aebe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39c4357b-6093-486b-8131-041a3f89af75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39c4357b-6093-486b-8131-041a3f89af75	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+39c4357b-6093-486b-8131-041a3f89af75	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 39c7d2cc-4fd1-4f1a-be1a-a6ae56d2356d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shaman-of-the-pack:f0t0:s1,f:xs:XP:shaman-of-the-pack:f0t0:s1	-	-	-	d864b561c9cb	-	a95aac0349ae	-	-	2026-11-24	xproof
 39c7d2cc-4fd1-4f1a-be1a-a6ae56d2356d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shaman-of-the-pack:f0t0:s1,f:xs:XP:shaman-of-the-pack:f0t0:s1	-	-	-	d864b561c9cb	-	a95aac0349ae	-	-	2026-11-24	xproof
 39c813e1-0e26-440a-b9bd-e781f7576b8b	cast	cast-resolve	agreed	-	X	scen	1	0	Bebop, Warthog Warrior/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

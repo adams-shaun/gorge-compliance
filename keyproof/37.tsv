@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37985fef-696e-4c6b-9a60-29c5051b5a25	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:volcanic-submersion:cast:s2,f:xs:XP:volcanic-submersion:cast:s2	-	-	-	8a1b1a193ec0	-	76e6ebc0304d	-	-	2026-11-24	xproof
 379ed4ec-8f2e-448b-9ed2-a3181e2f877e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 379ef166-a29f-4715-8ce4-9d7d567e4e91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-37a04d5a-9272-42bd-b448-c658375bbbc3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+37a04d5a-9272-42bd-b448-c658375bbbc3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cabal-conditioning:cast:s1,f:xs:XP:cabal-conditioning:cast:s1	-	-	-	fc71ca68c5ac	-	60b879f48ef1	-	-	2026-11-24	xproof
 37a1f340-10d5-407e-bf2b-cbbbb6cab985	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37a1f340-10d5-407e-bf2b-cbbbb6cab985	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37a2a31d-51e6-4c07-b4c2-b206ad40eb42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,8 +150,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37a55560-6e32-4f54-b9a8-fd157aea6eb5	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 37a5ab64-12e4-4aad-9a09-46a26fe9953b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37a5ab64-12e4-4aad-9a09-46a26fe9953b	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-37aae6d1-1de0-47d1-85dd-d4a6d9635c05	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-37aae6d1-1de0-47d1-85dd-d4a6d9635c05	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+37aae6d1-1de0-47d1-85dd-d4a6d9635c05	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:psionic-entity:cast:s1,f:xs:XP:psionic-entity:cast:s1	-	-	-	fc71ca68c5ac	-	f214ee104037	-	-	2026-11-24	xproof
+37aae6d1-1de0-47d1-85dd-d4a6d9635c05	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:psionic-entity:f0a0:s1,f:xs:XP:psionic-entity:f0a0:s1	-	-	-	fc71ca68c5ac	-	f214ee104037	-	-	2026-11-24	xproof
 37ad9318-6690-4a8d-bcea-9fcbca58769d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37b7f044-f57b-4d13-82be-46fd01f1dba6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:witherscale-wurm:cast:s1,f:xs:XP:witherscale-wurm:cast:s1	-	-	-	8a1b1a193ec0	-	f68efd647c02	-	-	2026-11-24	xproof
 37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof

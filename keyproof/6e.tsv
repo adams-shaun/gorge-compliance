@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e42e7dc-acd9-4125-a90d-75fd8da204b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greater-basilisk:cast:s1,f:xs:XP:greater-basilisk:cast:s1	-	-	-	d864b561c9cb	-	01f4e9a29d3c	-	-	2026-11-24	xproof
 6e460d39-0f18-4a2d-9c8d-3eaba301d285	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e48981b-8971-4b7c-ae05-29c7e4091a05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6e48981b-8971-4b7c-ae05-29c7e4091a05	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6e48981b-8971-4b7c-ae05-29c7e4091a05	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:time-elemental:cast:s1,f:xs:XP:time-elemental:cast:s1	-	-	-	fc71ca68c5ac	-	20a721f0c56d	-	-	2026-11-24	xproof
 6e4bf4ee-317e-4c31-b121-6efbc6ae4fcf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:invading-manticore:f0t0:s1,f:xs:XP:invading-manticore:f0t0:s1	-	-	-	d864b561c9cb	-	58058f379a57	-	-	2026-11-24	xproof
 6e4bf4ee-317e-4c31-b121-6efbc6ae4fcf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:invading-manticore:f0t0:s1,f:xs:XP:invading-manticore:f0t0:s1	-	-	-	d864b561c9cb	-	58058f379a57	-	-	2026-11-24	xproof
 6e51a0b2-e07f-4c9d-b055-dd1dcd2e29d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skilled-animator:f0t0:s1,f:xs:XP:skilled-animator:f0t0:s1	-	-	-	d864b561c9cb	-	f354c9fd0087	-	-	2026-11-24	xproof
@@ -113,8 +113,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6eb21aca-116e-427b-9e75-8adaee0cc62a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wormhole-serpent:cast:s1,f:xs:XP:wormhole-serpent:cast:s1	-	-	-	d864b561c9cb	-	68d314f7c0fe	-	-	2026-11-24	xproof
 6eb21aca-116e-427b-9e75-8adaee0cc62a	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:wormhole-serpent:f0a0:s1,f:xs:XP:wormhole-serpent:f0a0:s1	-	-	-	d864b561c9cb	-	68d314f7c0fe	-	-	2026-11-24	xproof
 6eb427e9-e679-4891-a29e-ea54b1935892	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6eb4b649-c578-4b29-8da1-7c757412bec0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6eb4b649-c578-4b29-8da1-7c757412bec0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6eb4b649-c578-4b29-8da1-7c757412bec0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frenetic-ogre:cast:s1,f:xs:XP:frenetic-ogre:cast:s1	-	-	-	fc71ca68c5ac	-	d9a1bd883eeb	-	-	2026-11-24	xproof
+6eb4b649-c578-4b29-8da1-7c757412bec0	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 6eb74f6e-1c9d-4caf-a0d8-fa472d435346	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6eb7a870-b626-4326-9e4c-45193f8ce138	cast	cast-resolve	agreed	-	X	scen	1	0	Hire a Crew/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6eb93545-a1a6-4447-82c5-421d8e9f023d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6ebfce76-82a2-4168-bd64-99cf16882dee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malakir-soothsayer:cast:s1,f:xs:XP:malakir-soothsayer:cast:s1	-	-	-	d864b561c9cb	-	c605dc02ca70	-	-	2026-11-24	xproof
 6ebfce76-82a2-4168-bd64-99cf16882dee	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6ec24c24-7e87-4c12-b94e-3cd5b184beb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6ec24c24-7e87-4c12-b94e-3cd5b184beb5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6ec24c24-7e87-4c12-b94e-3cd5b184beb5	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 6ec2794f-db1a-4448-a75e-ed7aff565378	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ec2a242-9068-4ee2-8ac8-8341cc570f56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ec2a242-9068-4ee2-8ac8-8341cc570f56	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

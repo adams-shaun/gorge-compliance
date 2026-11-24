@@ -38,7 +38,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8143642e-ce93-47f1-a601-3a4f5731e1d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 814679b4-51bd-4b07-a7b8-d3375d36ff45	cast	cast-resolve	agreed	-	FX	scen	2	0	Vincent's Limit Break/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8147a759-e387-48f6-9c1e-bb39622ed553	cast	cast-resolve	agreed	-	FX	scen	2	0	Sudden Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8148eaa4-6fde-41f2-9b87-ccfc4d8e822f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8148eaa4-6fde-41f2-9b87-ccfc4d8e822f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shield-wall:cast:s1,f:xs:XP:shield-wall:cast:s1	-	-	-	fc71ca68c5ac	-	1a13fbaf89b8	-	-	2026-11-24	xproof
 814a30dc-14e4-45cb-9320-b043e686b8ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 814b87fe-2a75-4ff2-8637-7e69e3fb285b	cast	cast-resolve	agreed	-	X	scen	1	0	Marauding Blight-Priest/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 814b87fe-2a75-4ff2-8637-7e69e3fb285b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Marauding Blight-Priest/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -121,8 +121,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81a38340-9558-49d3-8de6-d7d01babfd97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81a38340-9558-49d3-8de6-d7d01babfd97	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81a398ee-e534-43b7-88fe-45155d6aba3a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81a47019-1343-4a63-893a-0d8ba5e848d5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81a47019-1343-4a63-893a-0d8ba5e848d5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+81a47019-1343-4a63-893a-0d8ba5e848d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrull-retainer:cast:s1,f:xs:XP:thrull-retainer:cast:s1	-	-	-	fc71ca68c5ac	-	a0c3948781b8	-	-	2026-11-24	xproof
+81a47019-1343-4a63-893a-0d8ba5e848d5	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:thrull-retainer:cast:s1,f:xs:XP:thrull-retainer:cast:s1	-	-	-	fc71ca68c5ac	-	a0c3948781b8	-	-	2026-11-24	xproof
 81a51328-b995-4f3b-90bc-a20ae21dd254	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81a5ac8d-b904-4755-a5bc-650e95f4138f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81a602b6-a4f9-4534-a84e-2fa7556c2309	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -169,9 +169,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81c2913f-42b7-4cfa-adc0-b3416fbe2ec6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Desert Were-Worm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 81c2913f-42b7-4cfa-adc0-b3416fbe2ec6	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Desert Were-Worm/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 81c2913f-42b7-4cfa-adc0-b3416fbe2ec6	static#0.0	static#0.0	agreed	-	X	scen	1	0	Desert Were-Worm/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-81c40bd8-b989-41e8-9527-eae8fb87311d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81c40bd8-b989-41e8-9527-eae8fb87311d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81c40bd8-b989-41e8-9527-eae8fb87311d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+81c40bd8-b989-41e8-9527-eae8fb87311d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cavern-harpy:cast:s1,f:xs:XP:cavern-harpy:cast:s1	-	-	-	fc71ca68c5ac	-	c94a7c22a3d9	-	-	2026-11-24	xproof
+81c40bd8-b989-41e8-9527-eae8fb87311d	f0/a0	ChangeZone	agreed	-	FX	start	6	0	x:xs:XP:cavern-harpy:cast:s1,f:xs:XP:cavern-harpy:cast:s1	-	-	-	fc71ca68c5ac	-	c94a7c22a3d9	-	-	2026-11-24	xproof
+81c40bd8-b989-41e8-9527-eae8fb87311d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cavern-harpy:cast:s1,f:xs:XP:cavern-harpy:cast:s1	-	-	-	fc71ca68c5ac	-	c94a7c22a3d9	-	-	2026-11-24	xproof
 81c509b2-3164-47e9-94b3-bdba0487d2f1	cast	cast-resolve	agreed	-	X	scen	1	0	Valley Questcaller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 81c509b2-3164-47e9-94b3-bdba0487d2f1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Valley Questcaller/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 81c509b2-3164-47e9-94b3-bdba0487d2f1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Valley Questcaller/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

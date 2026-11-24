@@ -171,9 +171,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03e25120-b4e4-409e-8dbc-7574ea4c78d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03e25120-b4e4-409e-8dbc-7574ea4c78d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03e27ebd-6141-4002-b41f-0bf9d6ec2908	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03e27ebd-6141-4002-b41f-0bf9d6ec2908	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03e27ebd-6141-4002-b41f-0bf9d6ec2908	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03e27ebd-6141-4002-b41f-0bf9d6ec2908	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+03e27ebd-6141-4002-b41f-0bf9d6ec2908	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+03e27ebd-6141-4002-b41f-0bf9d6ec2908	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+03e27ebd-6141-4002-b41f-0bf9d6ec2908	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 03e356ae-f1e8-4730-8d2b-b9e2f32db915	cast	cast-resolve	agreed	-	X	scen	1	0	Mind Spiral/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03e59169-d8f8-40da-b5f7-645d16365e7b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03ebc100-68ac-4d53-adc2-d537212f7d31	cast	cast-resolve	agreed	-	X	scen	1	0	Venom Connoisseur/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

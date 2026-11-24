@@ -9,13 +9,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 72101185-4336-480a-b4d7-f8ceb0007a51	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Abomination, Terrifying Titan/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7211221d-d4d8-4bbe-9d2a-b82e005bfe8a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7211221d-d4d8-4bbe-9d2a-b82e005bfe8a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7215b1d9-eb8b-41bc-a7e2-1930d9cd5365	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7215b1d9-eb8b-41bc-a7e2-1930d9cd5365	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7215b1d9-eb8b-41bc-a7e2-1930d9cd5365	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fleeting-aven:cast:s1,f:xs:XP:fleeting-aven:cast:s1	-	-	-	fc71ca68c5ac	-	e8bfd7406cea	-	-	2026-11-24	xproof
+7215b1d9-eb8b-41bc-a7e2-1930d9cd5365	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 7215ca87-bbff-4c14-a1f5-de5ddd97c875	cast	cast-resolve	agreed	-	X	scen	1	0	Spitfire Lagac/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7215ca87-bbff-4c14-a1f5-de5ddd97c875	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spitfire Lagac/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7216f974-3c84-40ef-b904-82019900c204	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7216f974-3c84-40ef-b904-82019900c204	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-72177c93-ed1f-47bd-99a6-ad229a292d46	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+72177c93-ed1f-47bd-99a6-ad229a292d46	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 721aeedc-1de5-40d0-a04c-a2ebc056d06a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:neonate-s-rush:cast:s1,f:xs:XP:neonate-s-rush:cast:s1	-	-	-	d864b561c9cb	-	9e0533271469	-	-	2026-11-24	xproof
 721c3255-953c-49cd-a5dd-852c3d09eae4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 721e8249-ff1b-4c15-964b-4ba2a96beb75	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -55,8 +55,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7246638e-0361-40e3-8019-3c10210a593e	cast	cast-resolve	agreed	-	FX	scen	2	0	Karai, Future of the Foot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7246638e-0361-40e3-8019-3c10210a593e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Karai, Future of the Foot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7246d45b-2185-4cdd-981b-5419b7d52bce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7246e3a0-f8b7-4c1b-ae75-a1eb8990a728	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7246e3a0-f8b7-4c1b-ae75-a1eb8990a728	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7246e3a0-f8b7-4c1b-ae75-a1eb8990a728	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ashen-firebeast:cast:s1,f:xs:XP:ashen-firebeast:cast:s1	-	-	-	fc71ca68c5ac	-	909d8a38f441	-	-	2026-11-24	xproof
+7246e3a0-f8b7-4c1b-ae75-a1eb8990a728	f0/a0	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:ashen-firebeast:f0a0:s1,f:xs:XP:ashen-firebeast:f0a0:s1	-	-	-	fc71ca68c5ac	-	909d8a38f441	-	-	2026-11-24	xproof
 724700ad-1e4e-4cbc-af7f-0b3b87ed4bc8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:golden-ratio:cast:s1,f:xs:XP:golden-ratio:cast:s1	-	-	-	d864b561c9cb	-	a35976cf027d	-	-	2026-11-24	xproof
 724b4a59-9c69-4f2b-a436-72183c62f1ff	cast	cast-resolve	agreed	-	FX	scen	2	0	Nebula Dragon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 724b4a59-9c69-4f2b-a436-72183c62f1ff	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Nebula Dragon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -183,10 +183,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 72e0f7f2-1d04-4ea8-a6e8-4d6a13aae9c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72e0f7f2-1d04-4ea8-a6e8-4d6a13aae9c7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:desperate-sentry:f0t0:s1,f:xs:XP:desperate-sentry:f0t0:s1	-	-	-	d864b561c9cb	-	6fbdbd8fee7c	-	-	2026-11-24	xproof
 72e1a239-11a7-4dbe-b093-65d395e3ccc9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t3	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t3	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 72e2b883-a284-4ab6-8174-1ca289141a49	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72e61b73-980c-4ee4-b529-a367897620ec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shinen-of-fear-s-chill:cast:s1,f:xs:XP:shinen-of-fear-s-chill:cast:s1	-	-	-	64a08ba7d913	-	8b973a392acf	-	-	2026-11-24	xproof
 72e61b73-980c-4ee4-b529-a367897620ec	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof

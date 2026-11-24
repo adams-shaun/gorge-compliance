@@ -45,9 +45,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c2a9131-f3d7-4f71-8bcc-3c169574b2e3	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0c319f45-cb0f-4641-acd8-145768acb3fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c319f45-cb0f-4641-acd8-145768acb3fc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c31edd0-a471-4994-8209-b0a7370fc27b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c31edd0-a471-4994-8209-b0a7370fc27b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c31edd0-a471-4994-8209-b0a7370fc27b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c31edd0-a471-4994-8209-b0a7370fc27b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slithery-stalker:f0t0:s1,f:xs:XP:slithery-stalker:f0t0:s1	-	-	-	fc71ca68c5ac	-	e38f95489f3b	-	-	2026-11-24	xproof
+0c31edd0-a471-4994-8209-b0a7370fc27b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:slithery-stalker:f0t0:s1,f:xs:XP:slithery-stalker:f0t0:s1	-	-	-	fc71ca68c5ac	-	e38f95489f3b	-	-	2026-11-24	xproof
+0c31edd0-a471-4994-8209-b0a7370fc27b	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 0c34e962-99d9-4163-b852-4f61886546aa	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c34e962-99d9-4163-b852-4f61886546aa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c34e962-99d9-4163-b852-4f61886546aa	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -150,8 +150,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70b5eca0-c61b-4066-ae5f-90948912c04e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70b5eca0-c61b-4066-ae5f-90948912c04e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70b9497f-0dd6-4b66-9675-57c7041fe3c0	cast	cast-resolve	agreed	-	X	scen	1	0	Dream Harvest/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-70bb2690-653b-4787-bdd1-d1739a8ae545	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70bb2690-653b-4787-bdd1-d1739a8ae545	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+70bb2690-653b-4787-bdd1-d1739a8ae545	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:quirion-sentinel:cast:s1,f:xs:XP:quirion-sentinel:cast:s1	-	-	-	fc71ca68c5ac	-	ace031ec8b71	-	-	2026-11-24	xproof
+70bb2690-653b-4787-bdd1-d1739a8ae545	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:quirion-sentinel:cast:s1,f:xs:XP:quirion-sentinel:cast:s1	-	-	-	fc71ca68c5ac	-	ace031ec8b71	-	-	2026-11-24	xproof
 70bcec56-1485-4e4e-8fff-940d7b133c5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70bcec56-1485-4e4e-8fff-940d7b133c5d	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 70bea459-f6e9-411a-bd33-339bf95ea47a	cast	cast-resolve	agreed	-	X	scen	1	0	Marauding Sphinx/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -166,8 +166,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70cdd24a-8dc5-47b5-8729-9ebf486f4821	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70cdd24a-8dc5-47b5-8729-9ebf486f4821	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70d1caee-1c35-4fa3-bbc3-a7dcc226be90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70d1caee-1c35-4fa3-bbc3-a7dcc226be90	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70d1caee-1c35-4fa3-bbc3-a7dcc226be90	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+70d1caee-1c35-4fa3-bbc3-a7dcc226be90	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+70d1caee-1c35-4fa3-bbc3-a7dcc226be90	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 70d35dbd-1d91-4a2a-a643-6870d168f4f5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Adagia, Windswept Bastion/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70d35dbd-1d91-4a2a-a643-6870d168f4f5	land	play-land	agreed	-	X	scen	1	0	Adagia, Windswept Bastion/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70d35dbd-1d91-4a2a-a643-6870d168f4f5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Adagia, Windswept Bastion/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70ebd18a-c878-4a93-b7c4-3f7a2aa65f5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70ebd18a-c878-4a93-b7c4-3f7a2aa65f5e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70ecc25b-2004-4a3c-80c3-6d97bf0711eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70ecc25b-2004-4a3c-80c3-6d97bf0711eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+70ecc25b-2004-4a3c-80c3-6d97bf0711eb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:symbiotic-beast:f0t0:s1,f:xs:XP:symbiotic-beast:f0t0:s1	-	-	-	fc71ca68c5ac	-	3e8789f4c624	-	-	2026-11-24	xproof
 70ed2052-f03c-461d-b32a-8835c97c559f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70f26726-0373-4e50-a1de-37392ca94890	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70f26726-0373-4e50-a1de-37392ca94890	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

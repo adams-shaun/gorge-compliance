@@ -21,8 +21,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6b19377c-f178-49cb-95f8-fd3451acc7cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b19377c-f178-49cb-95f8-fd3451acc7cf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b19377c-f178-49cb-95f8-fd3451acc7cf	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6b1d178f-9713-4dcf-920b-ddf2c94cc427	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6b1d178f-9713-4dcf-920b-ddf2c94cc427	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6b1d178f-9713-4dcf-920b-ddf2c94cc427	cast	cast	owed	harness	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	b663c2f4e3ab	-	-	2026-11-24	xproof
+6b1d178f-9713-4dcf-920b-ddf2c94cc427	f0/t0	DamageDone	owed	harness	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	b663c2f4e3ab	-	-	2026-11-24	xproof
 6b1e4940-11ac-4d85-98f4-3f50d1060b96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gem-of-becoming:cast:s1,f:xs:XP:gem-of-becoming:cast:s1	-	-	-	d864b561c9cb	-	b66b254fae14	-	-	2026-11-24	xproof
 6b1e4940-11ac-4d85-98f4-3f50d1060b96	f0/a0	ChangeZone	agreed	-	FX	start	4	0	x:xs:XP:gem-of-becoming:cast:s1,f:xs:XP:gem-of-becoming:cast:s1	-	-	-	d864b561c9cb	-	b66b254fae14	-	-	2026-11-24	xproof
 6b1f750c-0f01-4b1c-ad8f-260e26fbbfea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,9 +137,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6badc583-fabb-4d63-b70c-e7380acafc23	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:roiling-dragonstorm:f0t0:s1,f:xs:XP:roiling-dragonstorm:f0t0:s1	-	-	-	e07cf3a05ba5	-	9de1feff2afd	-	-	2026-11-24	xproof
 6badc583-fabb-4d63-b70c-e7380acafc23	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:roiling-dragonstorm:f0t0:s1,f:xs:XP:roiling-dragonstorm:f0t0:s1	-	-	-	e07cf3a05ba5	-	9de1feff2afd	-	-	2026-11-24	xproof
 6badc583-fabb-4d63-b70c-e7380acafc23	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Roiling Dragonstorm/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6bb00a28-8b5a-4049-93b7-3db02de88aeb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6bb00a28-8b5a-4049-93b7-3db02de88aeb	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:forsaken-city:land:s1,f:xs:XP:forsaken-city:land:s1	-	-	-	fc71ca68c5ac	-	262e4f328393	-	-	2026-11-24	xproof
 6bb00a28-8b5a-4049-93b7-3db02de88aeb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6bb00a28-8b5a-4049-93b7-3db02de88aeb	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6bb00a28-8b5a-4049-93b7-3db02de88aeb	land	land	agreed	-	FX	start	2	0	x:xs:XP:forsaken-city:land:s1,f:xs:XP:forsaken-city:land:s1	-	-	-	fc71ca68c5ac	-	262e4f328393	-	-	2026-11-24	xproof
 6bb42689-b169-43cb-b787-f0e348063cd6	cast	cast-resolve	agreed	-	X	scen	1	0	D'Vana Tendi, Optimistic Ensign/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6bb42689-b169-43cb-b787-f0e348063cd6	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 6bb42689-b169-43cb-b787-f0e348063cd6	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

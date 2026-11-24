@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Monastery Messenger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Monastery Messenger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-3260bede-d78d-41a6-8fe1-95ce14a2ba8c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3260bede-d78d-41a6-8fe1-95ce14a2ba8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lava-blister:cast:s1,f:xs:XP:lava-blister:cast:s1	-	-	-	fc71ca68c5ac	-	6b795db96ab9	-	-	2026-11-24	xproof
 32638d03-c101-42f0-8a4b-8c6290257a28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32638d03-c101-42f0-8a4b-8c6290257a28	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 32638d03-c101-42f0-8a4b-8c6290257a28	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32b0fc43-b5ce-4869-a780-946289305e5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32b401e9-163f-4917-a728-fc63b25ef602	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32bb6d53-3b9e-4f13-a17e-46b564afd366	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32bb6d53-3b9e-4f13-a17e-46b564afd366	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32bb6d53-3b9e-4f13-a17e-46b564afd366	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 32c10a3e-85b0-49af-9b23-81d0b7e407df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32c84176-cf11-4010-b1cc-ed570a8c3e54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32c91719-f3dd-4cc7-9e32-7d5ccf18f07c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32e7385e-525e-4925-8cfd-bfea21fcd1bf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32e7befb-c083-4e17-aaeb-7247f317bbcf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32e915fb-3836-4bed-93b1-61c9c3951ad1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32e9aa23-fc0a-4b82-82f9-1659c304428c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32e9aa23-fc0a-4b82-82f9-1659c304428c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:careful-study:cast:s1,f:xs:XP:careful-study:cast:s1	-	-	-	fc71ca68c5ac	-	e2b6f653c087	-	-	2026-11-24	xproof
 32ea6b1c-d48e-4663-ad5c-d7f4a85450af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32ea6b1c-d48e-4663-ad5c-d7f4a85450af	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32ea6b1c-d48e-4663-ad5c-d7f4a85450af	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

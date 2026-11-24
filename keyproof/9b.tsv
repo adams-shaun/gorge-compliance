@@ -3,9 +3,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b00b4c2-d5c4-4cf7-bdcf-cd96297c4350	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b020aeb-7b27-43f2-9767-d93dae3d102a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b020aeb-7b27-43f2-9767-d93dae3d102a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b020aeb-7b27-43f2-9767-d93dae3d102a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b06cfae-1655-4b0e-a160-9b32f27c7c9a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b06cfae-1655-4b0e-a160-9b32f27c7c9a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9b020aeb-7b27-43f2-9767-d93dae3d102a	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+9b06cfae-1655-4b0e-a160-9b32f27c7c9a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pardic-collaborator:cast:s1,f:xs:XP:pardic-collaborator:cast:s1	-	-	-	fc71ca68c5ac	-	8a0d99d41f76	-	-	2026-11-24	xproof
+9b06cfae-1655-4b0e-a160-9b32f27c7c9a	f0/a0	Pump	agreed	-	X	start	2	0	x:xs:XP:pardic-collaborator:f0a0:s1	-	-	-	fc71ca68c5ac	-	8a0d99d41f76	-	-	2026-11-24	xproof
 9b06f2bf-146d-4b30-b467-e16f1a942253	cast	cast-resolve	agreed	-	X	scen	1	0	Dracogenesis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b06f2bf-146d-4b30-b467-e16f1a942253	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dracogenesis/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b084cd4-cc21-4f3a-9ac5-1e1160a31aa6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -62,8 +62,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b568c34-ba0a-44a7-a0ee-bee3a37b3396	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lathril, Blade of the Elves/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b568c34-ba0a-44a7-a0ee-bee3a37b3396	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lathril, Blade of the Elves/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b568c34-ba0a-44a7-a0ee-bee3a37b3396	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lathril, Blade of the Elves/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9b58e7fa-4259-4d6b-8b5d-33fb37fe489f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b58e7fa-4259-4d6b-8b5d-33fb37fe489f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9b58e7fa-4259-4d6b-8b5d-33fb37fe489f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shadowblood-egg:cast:s1,f:xs:XP:shadowblood-egg:cast:s1	-	-	-	fc71ca68c5ac	-	b8c86cd5ef4e	-	-	2026-11-24	xproof
+9b58e7fa-4259-4d6b-8b5d-33fb37fe489f	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:shadowblood-egg:f0a0:s1,f:xs:XP:shadowblood-egg:f0a0:s1	-	-	-	fc71ca68c5ac	-	b8c86cd5ef4e	-	-	2026-11-24	xproof
 9b598025-80a3-4144-be9a-863165161594	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b5a3765-943b-4925-b008-fc734b2934f7	cast	cast-resolve	agreed	-	FX	scen	2	0	Baseball Bat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b5a3765-943b-4925-b008-fc734b2934f7	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Baseball Bat/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -90,9 +90,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b7d037f-3269-4e3b-9744-a977acb69c67	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Incinerator of the Guilty/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b7d037f-3269-4e3b-9744-a977acb69c67	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Incinerator of the Guilty/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b7f1d05-707c-4ed3-9f0e-8ced1232c2ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b81aa32-e0f7-493f-92b8-85c2c46aef91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9b81aa32-e0f7-493f-92b8-85c2c46aef91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:icatian-moneychanger:f0t0:s1,f:xs:XP:icatian-moneychanger:f0t0:s1	-	-	-	fc71ca68c5ac	-	5e1183f4ef2d	-	-	2026-11-24	xproof
 9b81aa32-e0f7-493f-92b8-85c2c46aef91	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b81aa32-e0f7-493f-92b8-85c2c46aef91	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9b81aa32-e0f7-493f-92b8-85c2c46aef91	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:icatian-moneychanger:f0t0:s1,f:xs:XP:icatian-moneychanger:f0t0:s1	-	-	-	fc71ca68c5ac	-	5e1183f4ef2d	-	-	2026-11-24	xproof
 9b81aa32-e0f7-493f-92b8-85c2c46aef91	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b832f87-0bd5-47bd-ab9c-718bd9a6c441	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b832f87-0bd5-47bd-ab9c-718bd9a6c441	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,12 +125,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ba6cec6-97bf-4a83-9ffa-77e187d0945b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ba6cec6-97bf-4a83-9ffa-77e187d0945b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ba89c25-5302-414f-a2ec-436b8981999d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ba89c25-5302-414f-a2ec-436b8981999d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9ba89c25-5302-414f-a2ec-436b8981999d	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 9babcd0a-531f-417d-905e-b916a87112bb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cemetery-tampering:cast:s1,f:xs:XP:cemetery-tampering:cast:s1	-	-	-	d864b561c9cb	-	2dfa3566ee0d	-	-	2026-11-24	xproof
 9babcd0a-531f-417d-905e-b916a87112bb	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9babcd0a-531f-417d-905e-b916a87112bb	f0/t1	ChangesZone/Hideaway	agreed	-	FX	start	4	0	x:xs:XP:cemetery-tampering:cast:s1,f:xs:XP:cemetery-tampering:cast:s1	-	-	-	d864b561c9cb	-	2dfa3566ee0d	-	-	2026-11-24	xproof
 9bb1de3f-b6af-4ee2-b896-a05aae50e238	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9bb66d53-a83c-4313-91c3-4df09c248558	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9bb66d53-a83c-4313-91c3-4df09c248558	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vigilant-sentry:cast:s1,f:xs:XP:vigilant-sentry:cast:s1	-	-	-	fc71ca68c5ac	-	218b467ebc8d	-	-	2026-11-24	xproof
 9bb82829-05e8-4cdd-91e4-b837a620bfc8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bb8c54b-1228-4b7c-8651-52cb5b0f6e72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bbee1a5-2eb0-4fad-9524-4ad9cc5ca998	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

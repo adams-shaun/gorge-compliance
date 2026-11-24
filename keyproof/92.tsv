@@ -6,8 +6,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92019547-f6db-4ea6-8356-d0a90ace5662	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92019547-f6db-4ea6-8356-d0a90ace5662	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9203bee0-718a-4ede-9556-5521417c4080	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92042cad-09f5-464f-85ad-baad27e6d1eb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92042cad-09f5-464f-85ad-baad27e6d1eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92042cad-09f5-464f-85ad-baad27e6d1eb	cast	cast	agreed	-	F	start	4	0	f:xs:XP:prowling-pangolin:cast:s1	-	-	-	fc71ca68c5ac	-	e0cd91b2cf5e	-	-	2026-11-24	xproof
+92042cad-09f5-464f-85ad-baad27e6d1eb	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:prowling-pangolin:cast:s1	-	-	-	fc71ca68c5ac	-	e0cd91b2cf5e	-	-	2026-11-24	xproof
 920445ab-0ac2-4de7-bc1c-f5e58eb4424c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sangromancer:cast:s1,f:xs:XP:sangromancer:cast:s1	-	-	-	d864b561c9cb	-	31e074f577fc	-	-	2026-11-24	xproof
 920445ab-0ac2-4de7-bc1c-f5e58eb4424c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 920445ab-0ac2-4de7-bc1c-f5e58eb4424c	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -80,7 +80,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92381398-94f6-471f-874a-b5894e6f9487	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92382bdb-84cf-4456-8ca1-8a19badae7ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92382bdb-84cf-4456-8ca1-8a19badae7ad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92392467-a22f-4dd7-a0eb-393bef956dc0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92392467-a22f-4dd7-a0eb-393bef956dc0	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:cabal-pit:f0a1:s1,f:xs:XP:cabal-pit:f0a1:s1	-	-	-	fc71ca68c5ac	-	ae02fd0b2cb1	-	-	2026-11-24	xproof
 92392467-a22f-4dd7-a0eb-393bef956dc0	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92392467-a22f-4dd7-a0eb-393bef956dc0	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 923b2a1b-d7b6-439d-9681-c7ba88165c31	cast	cast-resolve	agreed	-	FX	scen	2	0	Hedge Whisperer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9285cdf1-ad25-4aee-a865-1bf0cc905183	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fear of the Dark/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9286ddc5-8151-4129-aaf6-2a2abe7047e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 928a7fbc-ba34-42a9-947e-0f3bf1cba152	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-928a7fbc-ba34-42a9-947e-0f3bf1cba152	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+928a7fbc-ba34-42a9-947e-0f3bf1cba152	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 928c62fe-9c4d-4e89-bd7a-0d3b6a81f393	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 928c62fe-9c4d-4e89-bd7a-0d3b6a81f393	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9290f549-3e5d-4e39-a20e-8be6b674abc7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jadecraft-artisan:f0t0:s1,f:xs:XP:jadecraft-artisan:f0t0:s1	-	-	-	d864b561c9cb	-	599ec3581a88	-	-	2026-11-24	xproof

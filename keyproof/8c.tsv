@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8cb6dbb5-9ea2-4c19-8173-148080fb898e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:reverent-hoplite:cast:s1,f:xs:XP:reverent-hoplite:cast:s1	-	-	-	ae86f6029288	-	a9fdd077a57d	-	-	2026-11-24	xproof
 8cb700bb-daa5-4a26-bb84-e22bc11bdaff	cast	cast-resolve	agreed	-	X	scen	1	0	Test of Identity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cbac2e8-5755-433b-9f42-7fd5c214aab3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8cbac2e8-5755-433b-9f42-7fd5c214aab3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8cbac2e8-5755-433b-9f42-7fd5c214aab3	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 8cbbb1f4-4654-4865-a14c-0c94cd5d8b19	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:no-way-out:cast:s1,f:xs:XP:no-way-out:cast:s1	-	-	-	d864b561c9cb	-	efa2297c0eaa	-	-	2026-11-24	xproof
 8cbc0fa4-4f62-47e1-90dc-c21d2682a493	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8cbc0fa4-4f62-47e1-90dc-c21d2682a493	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

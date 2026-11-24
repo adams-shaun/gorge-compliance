@@ -58,10 +58,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6155908a-0079-42c7-ae81-326a6faccb89	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trial-of-knowledge:f0t0:s1,f:xs:XP:trial-of-knowledge:f0t0:s1	-	-	-	d864b561c9cb	-	f2f9587b84c3	-	-	2026-11-24	xproof
 6155908a-0079-42c7-ae81-326a6faccb89	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:trial-of-knowledge:f0t0:s1,f:xs:XP:trial-of-knowledge:f0t0:s1	-	-	-	d864b561c9cb	-	f2f9587b84c3	-	-	2026-11-24	xproof
 6155908a-0079-42c7-ae81-326a6faccb89	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-615603bb-3899-4419-9444-e4b64c94a438	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+615603bb-3899-4419-9444-e4b64c94a438	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sunscape-familiar:cast:s1,f:xs:XP:sunscape-familiar:cast:s1	-	-	-	fc71ca68c5ac	-	9f63ea69eed5	-	-	2026-11-24	xproof
 6156bd59-d623-4612-8e86-b5228d5de750	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:howling-banshee:f0t0:s1,f:xs:XP:howling-banshee:f0t0:s1	-	-	-	8a1b1a193ec0	-	7dd1472ff026	-	-	2026-11-24	xproof
 6156bd59-d623-4612-8e86-b5228d5de750	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:howling-banshee:f0t0:s1,f:xs:XP:howling-banshee:f0t0:s1	-	-	-	8a1b1a193ec0	-	7dd1472ff026	-	-	2026-11-24	xproof
-6157ade6-9037-4339-869b-493fdee71dcf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6157ade6-9037-4339-869b-493fdee71dcf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:draco:cast:s1,f:xs:XP:draco:cast:s1	-	-	-	fc71ca68c5ac	-	35b10fb66018	-	-	2026-11-24	xproof
 6157ade6-9037-4339-869b-493fdee71dcf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 61586052-7d69-489c-84c4-0359228d131b	cast	cast-resolve	agreed	-	FX	scen	2	0	Gogo, Master of Mimicry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 61586052-7d69-489c-84c4-0359228d131b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gogo, Master of Mimicry/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -127,7 +127,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 61a41cf1-60cc-45ba-aa98-493c14e87d9d	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 61a6341e-0d36-44b6-8026-9c87c8ef61cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 61aa0e56-e8d9-4223-895f-e54cdc5a3f0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-61aa0e56-e8d9-4223-895f-e54cdc5a3f0f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+61aa0e56-e8d9-4223-895f-e54cdc5a3f0f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 61ab4548-5da9-4351-87e7-a3afc93d4bf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 61ab4548-5da9-4351-87e7-a3afc93d4bf5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 61ade140-5b11-4882-82e5-a075fc80b260	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 61d28182-498f-4bbc-bb7a-c5e1ef872dda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 61d2f269-8674-4429-a07c-59972afd9ede	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 61d2f269-8674-4429-a07c-59972afd9ede	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-61d2f269-8674-4429-a07c-59972afd9ede	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+61d2f269-8674-4429-a07c-59972afd9ede	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 61d94fe7-b559-4bd4-94a7-f4ed4c853b4b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:radha-heir-to-keld:cast:s1,f:xs:XP:radha-heir-to-keld:cast:s1	-	-	-	9ee19e8250ce	-	e08c53c8d522	-	-	2026-11-24	xproof
 61d94fe7-b559-4bd4-94a7-f4ed4c853b4b	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 61d94fe7-b559-4bd4-94a7-f4ed4c853b4b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:radha-heir-to-keld:f0a0:s1,f:xs:XP:radha-heir-to-keld:f0a0:s1	-	-	-	5f2128bf97e4	-	e08c53c8d522	-	-	2026-11-24	xproof

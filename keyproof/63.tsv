@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 632e2979-d88a-482e-9bb8-57b683c5310f	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Secret Tunnel/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 632e2979-d88a-482e-9bb8-57b683c5310f	land	play-land	agreed	-	X	scen	1	0	Secret Tunnel/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 632e2979-d88a-482e-9bb8-57b683c5310f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Secret Tunnel/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-632f1034-d2ad-432a-a79a-4bd1307be24a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+632f1034-d2ad-432a-a79a-4bd1307be24a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:planar-gate:cast:s1,f:xs:XP:planar-gate:cast:s1	-	-	-	fc71ca68c5ac	-	916e05a09fb3	-	-	2026-11-24	xproof
 63324e72-e580-456a-91be-766c9f07b7b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6332d6d3-1d77-486c-b040-02fc7225f245	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6332d6d3-1d77-486c-b040-02fc7225f245	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -61,8 +61,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 635b854d-de71-4c85-9755-8c97bf3cba36	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sweettooth-witch:f0t0:s2,f:xs:XP:sweettooth-witch:f0t0:s2	-	-	-	e07cf3a05ba5	-	782125d7fb33	-	-	2026-11-24	xproof
 635b854d-de71-4c85-9755-8c97bf3cba36	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sweettooth Witch/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 635b854d-de71-4c85-9755-8c97bf3cba36	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sweettooth-witch:f0t0:s2,f:xs:XP:sweettooth-witch:f0t0:s2	-	-	-	e07cf3a05ba5	-	782125d7fb33	-	-	2026-11-24	xproof
-635c0a7d-d832-4c10-a5f0-9cde19152cbb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-635c0a7d-d832-4c10-a5f0-9cde19152cbb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+635c0a7d-d832-4c10-a5f0-9cde19152cbb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:kavu-howler:cast:s1,f:xs:XP:kavu-howler:cast:s1	-	-	-	fc71ca68c5ac	-	28987b6662b9	-	-	2026-11-24	xproof
+635c0a7d-d832-4c10-a5f0-9cde19152cbb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:kavu-howler:cast:s1,f:xs:XP:kavu-howler:cast:s1	-	-	-	fc71ca68c5ac	-	28987b6662b9	-	-	2026-11-24	xproof
 635cc10e-ca25-49a2-af44-3b064263a254	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 635cc10e-ca25-49a2-af44-3b064263a254	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 635cc10e-ca25-49a2-af44-3b064263a254	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63d92a82-d77d-4c47-a49b-bde6a8c9dd8d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:setessan-petitioner:cast:s1,f:xs:XP:setessan-petitioner:cast:s1	-	-	-	ae86f6029288	-	9fc3a1e71427	-	-	2026-11-24	xproof
 63d92a82-d77d-4c47-a49b-bde6a8c9dd8d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:setessan-petitioner:cast:s1,f:xs:XP:setessan-petitioner:cast:s1	-	-	-	ae86f6029288	-	9fc3a1e71427	-	-	2026-11-24	xproof
 63d92baf-0007-4519-a5bc-d189448ea126	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63d92baf-0007-4519-a5bc-d189448ea126	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+63d92baf-0007-4519-a5bc-d189448ea126	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 63dd611e-1c36-4e5d-ba45-87c7f629cd54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63dd611e-1c36-4e5d-ba45-87c7f629cd54	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63dd611e-1c36-4e5d-ba45-87c7f629cd54	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

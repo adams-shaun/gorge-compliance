@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b7352e6-6508-491c-9935-426a6eebb429	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b74c8ac-9c19-45b0-935f-8630b8da4543	cast	cast-resolve	agreed	-	X	scen	1	0	Clockwork Percussionist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b74c8ac-9c19-45b0-935f-8630b8da4543	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Clockwork Percussionist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b78b672-7773-44c6-9a21-f89c058966ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b78b672-7773-44c6-9a21-f89c058966ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stratadon:cast:s1,f:xs:XP:stratadon:cast:s1	-	-	-	fc71ca68c5ac	-	1fd59877a089	-	-	2026-11-24	xproof
 3b7b166b-4329-4194-a9a7-f1fec7a92cec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b7b862a-7edd-4e96-b4b9-f7113b4c93f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b7ea3ac-ac0a-40aa-b743-d153e1c47d8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -198,8 +198,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bcc378c-4470-4757-a0d5-025a32c918ea	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sin, Spira's Punishment/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bcdf832-4ce2-4043-b46a-0c5fd7019fcd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:gryff-vanguard:cast:s1,f:xs:XP:gryff-vanguard:cast:s1	-	-	-	d864b561c9cb	-	ae06a0aace7c	-	-	2026-11-24	xproof
 3bcdf832-4ce2-4043-b46a-0c5fd7019fcd	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:gryff-vanguard:cast:s1,f:xs:XP:gryff-vanguard:cast:s1	-	-	-	d864b561c9cb	-	ae06a0aace7c	-	-	2026-11-24	xproof
-3bcead90-f7be-4fba-84e7-3d7c788a8b64	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3bcead90-f7be-4fba-84e7-3d7c788a8b64	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3bcead90-f7be-4fba-84e7-3d7c788a8b64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:living-airship:cast:s1,f:xs:XP:living-airship:cast:s1	-	-	-	fc71ca68c5ac	-	d6e42e7fb533	-	-	2026-11-24	xproof
+3bcead90-f7be-4fba-84e7-3d7c788a8b64	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:living-airship:f0a0:s1,f:xs:XP:living-airship:f0a0:s1	-	-	-	fc71ca68c5ac	-	d6e42e7fb533	-	-	2026-11-24	xproof
 3bcf090c-e890-4a9f-a8aa-6079e4ec9947	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bcf54f8-fcd7-4ec0-b011-92b367411cdb	cast	cast-resolve	agreed	-	X	scen	1	0	Stirring Honormancer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bcf54f8-fcd7-4ec0-b011-92b367411cdb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof

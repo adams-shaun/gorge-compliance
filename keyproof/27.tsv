@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 274c2781-f40a-49b4-a039-669739beaab6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 274c5367-f02e-44a0-be8a-5ed03c831bda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 274ce6b0-af29-4afc-873b-b4126a67bd81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-274ce6b0-af29-4afc-873b-b4126a67bd81	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+274ce6b0-af29-4afc-873b-b4126a67bd81	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 274d89b8-1e59-4992-9299-dc793b7f6752	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 274f8860-c8c3-4aeb-ba87-94a5139397d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2750451f-348e-452f-88d0-bc921c46e8cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -121,8 +121,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27a91ebd-39f4-432d-b6cc-cd86b4a3979a	cast	cast-resolve	agreed	-	X	scen	1	0	Coiling Rebirth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 27a9e0af-76f0-4910-9f93-2a3617b4e79a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27ad3e00-6ffb-48f7-8469-8868d066d1e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-27af77e5-6680-43d3-9202-40be9b5d14a0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-27af77e5-6680-43d3-9202-40be9b5d14a0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27af77e5-6680-43d3-9202-40be9b5d14a0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-wretched:cast:s1,f:xs:XP:the-wretched:cast:s1	-	-	-	fc71ca68c5ac	-	0c7bba691d49	-	-	2026-11-24	xproof
+27af77e5-6680-43d3-9202-40be9b5d14a0	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:the-wretched:cast:s1,f:xs:XP:the-wretched:cast:s1	-	-	-	fc71ca68c5ac	-	0c7bba691d49	-	-	2026-11-24	xproof
 27b047e3-0d41-45e2-98e9-9391d7923a1e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27b047e3-0d41-45e2-98e9-9391d7923a1e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27b4fee0-ae46-4d15-96cd-aff8f3009de8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27c37a8d-777a-400d-b096-bde195228ea8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scrivener:f0t0:s1,f:xs:XP:scrivener:f0t0:s1	-	-	-	5f2128bf97e4	-	6e9f6bfdc3f4	-	-	2026-11-24	xproof
 27c37a8d-777a-400d-b096-bde195228ea8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scrivener:f0t0:s1,f:xs:XP:scrivener:f0t0:s1	-	-	-	5f2128bf97e4	-	6e9f6bfdc3f4	-	-	2026-11-24	xproof
 27c3d7cd-f92e-4203-9fb5-f6b4776f6ffd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-27c3d7cd-f92e-4203-9fb5-f6b4776f6ffd	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27c3d7cd-f92e-4203-9fb5-f6b4776f6ffd	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 27c84ad1-1491-459b-bf8a-0146062084dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fiery-impulse:cast:s1,f:xs:XP:fiery-impulse:cast:s1	-	-	-	d864b561c9cb	-	f12b288f8a19	-	-	2026-11-24	xproof
 27c84b2e-fc66-45a6-a5ad-d3ef204d5077	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27c87371-697e-4ca6-a7f4-d99215d908bc	cast	cast-resolve	agreed	-	X	scen	1	0	Sun-Dappled Celebrant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

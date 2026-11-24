@@ -76,7 +76,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 715336f5-a708-488b-9f30-5702a9013af0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pia-nalaar:f0t0:s1,f:xs:XP:pia-nalaar:f0t0:s1	-	-	-	d864b561c9cb	-	285d41dba33f	-	-	2026-11-24	xproof
 7153bf15-53f8-445e-acbb-35b4f4b3d551	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 715b4a12-a392-411b-935b-7bd64a270421	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-715b4a12-a392-411b-935b-7bd64a270421	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+715b4a12-a392-411b-935b-7bd64a270421	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 715cb547-726f-4bc8-ad46-297d4dccb881	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 715cb547-726f-4bc8-ad46-297d4dccb881	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 715cb547-726f-4bc8-ad46-297d4dccb881	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -96,9 +96,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 71668016-cefb-43d2-a84c-47956cffd71e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7166bf81-05c2-457d-a0bb-a175175b8e79	cast	cast-resolve	agreed	-	X	scen	1	0	Wandering Musicians/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7166bf81-05c2-457d-a0bb-a175175b8e79	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wandering Musicians/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-717152c3-2082-49aa-9274-a1a6abe54b65	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-717152c3-2082-49aa-9274-a1a6abe54b65	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-717152c3-2082-49aa-9274-a1a6abe54b65	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+717152c3-2082-49aa-9274-a1a6abe54b65	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:chartooth-cougar:cast:s2,f:xs:XP:chartooth-cougar:cast:s2	-	-	-	fc71ca68c5ac	-	3f1f87edfc6c	-	-	2026-11-24	xproof
+717152c3-2082-49aa-9274-a1a6abe54b65	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:chartooth-cougar:cast:s2,f:xs:XP:chartooth-cougar:cast:s2	-	-	-	fc71ca68c5ac	-	3f1f87edfc6c	-	-	2026-11-24	xproof
+717152c3-2082-49aa-9274-a1a6abe54b65	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:chartooth-cougar:cast:s1,f:xs:XP:chartooth-cougar:cast:s1	-	-	-	fc71ca68c5ac	-	3f1f87edfc6c	-	-	2026-11-24	xproof
 71744428-65ae-42ac-893d-0802fd41e9b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71744428-65ae-42ac-893d-0802fd41e9b4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71766a05-62a5-4839-b9bf-f5dcde710251	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

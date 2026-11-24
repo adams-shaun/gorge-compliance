@@ -13,13 +13,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d15a06f-5471-48f2-8c4a-9b0886bef5af	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Obeka, Splitter of Seconds/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d15a06f-5471-48f2-8c4a-9b0886bef5af	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Obeka, Splitter of Seconds/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d15a06f-5471-48f2-8c4a-9b0886bef5af	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Obeka, Splitter of Seconds/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1d25b831-c1de-4f79-bbb3-1582eda96452	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d25b831-c1de-4f79-bbb3-1582eda96452	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:elvish-aberration:cast:s2,f:xs:XP:elvish-aberration:cast:s2	-	-	-	fc71ca68c5ac	-	b0baac464bde	-	-	2026-11-24	xproof
 1d25b831-c1de-4f79-bbb3-1582eda96452	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d25b831-c1de-4f79-bbb3-1582eda96452	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d25b831-c1de-4f79-bbb3-1582eda96452	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:elvish-aberration:cast:s1,f:xs:XP:elvish-aberration:cast:s1	-	-	-	fc71ca68c5ac	-	b0baac464bde	-	-	2026-11-24	xproof
 1d28ed9a-cc4e-48d9-a1a6-7504fc6cc56d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quag-vampires:cast:s1,f:xs:XP:quag-vampires:cast:s1	-	-	-	8a1b1a193ec0	-	687d42cf52b8	-	-	2026-11-24	xproof
-1d33d49f-ba12-4bf6-878b-04cee5d5b48d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d33d49f-ba12-4bf6-878b-04cee5d5b48d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d33d49f-ba12-4bf6-878b-04cee5d5b48d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d33d49f-ba12-4bf6-878b-04cee5d5b48d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treacherous-vampire:cast:s1,f:xs:XP:treacherous-vampire:cast:s1	-	-	-	fc71ca68c5ac	-	291e86ef77cc	-	-	2026-11-24	xproof
+1d33d49f-ba12-4bf6-878b-04cee5d5b48d	f0/t0	Attacks	agreed	-	F	start	2	0	f:xs:XP:treacherous-vampire:f0t0:s1	-	-	-	fc71ca68c5ac	-	291e86ef77cc	-	-	2026-11-24	xproof
+1d33d49f-ba12-4bf6-878b-04cee5d5b48d	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 1d34e78e-4fe9-44e1-88d3-a98fd64555a9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d34e78e-4fe9-44e1-88d3-a98fd64555a9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d3cfdd3-e16f-4955-9b81-0d6fc981c168	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -73,9 +73,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d6d0348-46ad-46ed-ae7b-d7510f0ebe70	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Genghis Frog/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d6d0348-46ad-46ed-ae7b-d7510f0ebe70	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Genghis Frog/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d6d0348-46ad-46ed-ae7b-d7510f0ebe70	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:genghis-frog:f0t0:s2,f:xs:XP:genghis-frog:f0t0:s2	-	-	-	267e485f6204	-	09aa3d173216	-	-	2026-11-24	xproof
-1d6f3934-d8f1-4758-b87a-8df8d7dc492c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d6f3934-d8f1-4758-b87a-8df8d7dc492c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d6f3934-d8f1-4758-b87a-8df8d7dc492c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d6f3934-d8f1-4758-b87a-8df8d7dc492c	cast	cast	agreed	-	FX	start	6	0	x:xs:XP:marsh-crocodile:cast:s1,f:xs:XP:marsh-crocodile:cast:s1	-	-	-	fc71ca68c5ac	-	4ee4a3e2894a	-	-	2026-11-24	xproof
+1d6f3934-d8f1-4758-b87a-8df8d7dc492c	f0/t0	ChangesZone	agreed	-	FX	start	6	0	x:xs:XP:marsh-crocodile:cast:s1,f:xs:XP:marsh-crocodile:cast:s1	-	-	-	fc71ca68c5ac	-	4ee4a3e2894a	-	-	2026-11-24	xproof
+1d6f3934-d8f1-4758-b87a-8df8d7dc492c	f0/t1	ChangesZone	agreed	-	FX	start	6	0	x:xs:XP:marsh-crocodile:cast:s1,f:xs:XP:marsh-crocodile:cast:s1	-	-	-	fc71ca68c5ac	-	4ee4a3e2894a	-	-	2026-11-24	xproof
 1d6f4573-d2f6-4771-a748-291846ef14b9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d6f4573-d2f6-4771-a748-291846ef14b9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d704c2f-cd24-4a04-a51a-da7984dcd358	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d789ccd-8192-41b1-a5bb-1e2174657698	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d79b7a8-2b4c-4893-afdb-879c74957288	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d79b7a8-2b4c-4893-afdb-879c74957288	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d7a4e9c-b3c9-421e-b5f4-82d51d7d5125	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d7a4e9c-b3c9-421e-b5f4-82d51d7d5125	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:temporal-spring:cast:s1,f:xs:XP:temporal-spring:cast:s1	-	-	-	fc71ca68c5ac	-	fb6588866116	-	-	2026-11-24	xproof
 1d7d340d-fe6f-4314-97ba-e0bf36a4ef6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greenhilt-trainee:cast:s1,f:xs:XP:greenhilt-trainee:cast:s1	-	-	-	d864b561c9cb	-	ec513a284500	-	-	2026-11-24	xproof
 1d7d340d-fe6f-4314-97ba-e0bf36a4ef6c	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d7d9404-cad6-4c1a-bd47-7a31ebb2791c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -148,8 +148,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34a85d7f-d4ea-4a0f-aa4c-bf0b0f4987bf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34a8a658-a5f6-406f-99d8-c32ea2e26202	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34ae5b49-f8bf-4aa8-bb62-92d6d3118b26	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	f63e95aad464	-	-	2026-11-24	xproof
-34b2f465-0b15-428a-a1c2-bcd41af07d01	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34b2f465-0b15-428a-a1c2-bcd41af07d01	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34b2f465-0b15-428a-a1c2-bcd41af07d01	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boneknitter:cast:s1,f:xs:XP:boneknitter:cast:s1	-	-	-	fc71ca68c5ac	-	1bc3bd1b4ca8	-	-	2026-11-24	xproof
+34b2f465-0b15-428a-a1c2-bcd41af07d01	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:boneknitter:f0a0:s1,f:xs:XP:boneknitter:f0a0:s1	-	-	-	fc71ca68c5ac	-	1bc3bd1b4ca8	-	-	2026-11-24	xproof
 34b36022-0d93-48cc-a2cc-90ca4d65dc31	cast	cast-resolve	agreed	-	FX	scen	2	0	Ghired, Mirror of the Wilds/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34b36022-0d93-48cc-a2cc-90ca4d65dc31	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ghired, Mirror of the Wilds/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34b90d3e-f48c-41ff-b3e4-5cab7a9cd597	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,8 +177,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34d0d070-fcaf-410e-a002-012cbe104fb7	cast	cast-resolve	agreed	-	X	scen	1	0	Moldering Gym/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34d0d070-fcaf-410e-a002-012cbe104fb7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Moldering Gym/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34d0d070-fcaf-410e-a002-012cbe104fb7	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Moldering Gym/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-34d112c3-cc2d-4428-bd7f-568bda61bd30	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34d112c3-cc2d-4428-bd7f-568bda61bd30	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34d112c3-cc2d-4428-bd7f-568bda61bd30	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:starstorm:cast:s1,f:xs:XP:starstorm:cast:s1	-	-	-	fc71ca68c5ac	-	3f1c6bf67ff2	-	-	2026-11-24	xproof
+34d112c3-cc2d-4428-bd7f-568bda61bd30	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 34d34f2c-06ff-4acf-8f2f-ff867774b777	cast	cast-resolve	agreed	-	X	scen	1	0	Most Decrepit Old Bird/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34d34f2c-06ff-4acf-8f2f-ff867774b777	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Most Decrepit Old Bird/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34d34f2c-06ff-4acf-8f2f-ff867774b777	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Most Decrepit Old Bird/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -211,7 +211,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34ef174e-1b3d-43d5-9f72-3d35befbdd7f	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Ojer Pakpatiq, Deepest Epoch/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34ef174e-1b3d-43d5-9f72-3d35befbdd7f	f1/a1	activate#1.1	agreed	-	X	scen	1	0	Ojer Pakpatiq, Deepest Epoch/activate#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34efa2fe-95ef-4a06-9a84-97f03ec68908	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34efa2fe-95ef-4a06-9a84-97f03ec68908	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34efa2fe-95ef-4a06-9a84-97f03ec68908	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 34f0beae-a8e2-4474-9f7f-4735d3f26863	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34f34409-326d-4994-a0ea-1a69aa278f03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34f34409-326d-4994-a0ea-1a69aa278f03	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

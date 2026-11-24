@@ -90,8 +90,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 94688e25-28cb-45aa-95ea-0d6f547cae57	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Matterbending Mage/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 94688e62-f39f-41fd-9309-f16b715ef724	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 946bba74-0951-408c-b06f-167739b10934	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-946d770f-0a59-415b-b334-8f7353b96046	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-946d770f-0a59-415b-b334-8f7353b96046	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+946d770f-0a59-415b-b334-8f7353b96046	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pardic-swordsmith:cast:s1,f:xs:XP:pardic-swordsmith:cast:s1	-	-	-	fc71ca68c5ac	-	0594c892d160	-	-	2026-11-24	xproof
+946d770f-0a59-415b-b334-8f7353b96046	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 9472c96a-2827-4af6-a6a1-b6749a5e9069	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94751968-e006-45d0-970b-0ed45d28e6cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94751968-e006-45d0-970b-0ed45d28e6cc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 94806688-329d-429d-8126-2c9187e71f54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94806688-329d-429d-8126-2c9187e71f54	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94806688-329d-429d-8126-2c9187e71f54	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9480e142-289a-439d-b6a5-2666fb0e5be3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9480e142-289a-439d-b6a5-2666fb0e5be3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:exotic-disease:cast:s1,f:xs:XP:exotic-disease:cast:s1	-	-	-	fc71ca68c5ac	-	1618fd3680e0	-	-	2026-11-24	xproof
 948217ac-289e-455f-8c7c-519aa75fa345	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94848b02-757c-456c-a12c-b0be193221d0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rosethorn-halberd:f0t0:s1,f:xs:XP:rosethorn-halberd:f0t0:s1	-	-	-	ae86f6029288	-	de350f0ce414	-	-	2026-11-24	xproof
 94848b02-757c-456c-a12c-b0be193221d0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 949e455d-6a9e-491a-892f-826cc8be0fd9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 949e455d-6a9e-491a-892f-826cc8be0fd9	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 949eb86a-94b2-4c9f-8040-f4ad8e1a7e33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-949eb86a-94b2-4c9f-8040-f4ad8e1a7e33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+949eb86a-94b2-4c9f-8040-f4ad8e1a7e33	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 94a16609-8529-4301-8a3d-47ced194f7cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94a16609-8529-4301-8a3d-47ced194f7cd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94a4f70a-8aac-412a-99f0-933e3ff87fe0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -19,8 +19,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 531e6ffb-28e0-4e8e-ad88-2f3a243789cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 531f78d5-5004-4b02-99c7-b390cb342fd9	cast	cast-resolve	agreed	-	X	scen	1	0	Make a Stand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5322a218-6a0c-4d86-835a-c87eb52aaf6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5322a218-6a0c-4d86-835a-c87eb52aaf6a	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5322a218-6a0c-4d86-835a-c87eb52aaf6a	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5322a218-6a0c-4d86-835a-c87eb52aaf6a	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:samite-archer:f0a0:s1,f:xs:XP:samite-archer:f0a0:s1	-	-	-	fc71ca68c5ac	-	e2283852718e	-	-	2026-11-24	xproof
+5322a218-6a0c-4d86-835a-c87eb52aaf6a	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:samite-archer:f0a1:s1,f:xs:XP:samite-archer:f0a1:s1	-	-	-	fc71ca68c5ac	-	e2283852718e	-	-	2026-11-24	xproof
 53231b31-fb3c-4b30-bfe9-0ee8e754247b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53231b31-fb3c-4b30-bfe9-0ee8e754247b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53231b31-fb3c-4b30-bfe9-0ee8e754247b	f0/a1	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 537a7af1-2b7e-4828-b645-7e34e86058d5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 537a7af1-2b7e-4828-b645-7e34e86058d5	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 537ebea5-f805-4f78-9151-58eb43c4a62d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-537ebea5-f805-4f78-9151-58eb43c4a62d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+537ebea5-f805-4f78-9151-58eb43c4a62d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 53807ded-5bbb-44a1-9c22-ffdd4b8523e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warm-welcome:cast:s1,f:xs:XP:warm-welcome:cast:s1	-	-	-	d864b561c9cb	-	db364f9f3130	-	-	2026-11-24	xproof
 538fa2e0-d225-4232-b243-38868b695e26	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alpha-authority:cast:s1,f:xs:XP:alpha-authority:cast:s1	-	-	-	d864b561c9cb	-	cfc6fb739afa	-	-	2026-11-24	xproof
 5390bb44-985e-473b-883e-c9562c06f210	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53b9a2cf-2e6e-4ce0-bb9f-f33fb27b7b5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53b9a2cf-2e6e-4ce0-bb9f-f33fb27b7b5e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 53bab610-1d27-4897-a4ad-cfecca82b811	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53bab610-1d27-4897-a4ad-cfecca82b811	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+53bab610-1d27-4897-a4ad-cfecca82b811	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 53bfe54e-9b97-4113-97d9-3c5dbc85e7cf	cast	cast-resolve	agreed	-	X	scen	1	0	Akal Pakal, First Among Equals/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 53bfe54e-9b97-4113-97d9-3c5dbc85e7cf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Akal Pakal, First Among Equals/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 53bfffae-b99e-44bd-8954-6cf236f93f26	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mnemonic-sphere:cast:s1,f:xs:XP:mnemonic-sphere:cast:s1	-	-	-	d864b561c9cb	-	e74d6db4e141	-	-	2026-11-24	xproof

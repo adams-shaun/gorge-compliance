@@ -105,11 +105,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7398c8b2-373a-41c7-ac6c-7329f5944462	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73992788-8084-459c-8375-9ccc8579c5d7	cast	cast-resolve	agreed	-	FX	scen	2	0	Succumb to the Cold/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 739ad367-a4ff-4779-8888-3c27f0f60253	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-739d93c4-8d7b-4a54-bb6e-1d283e333392	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-739d93c4-8d7b-4a54-bb6e-1d283e333392	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-739d93c4-8d7b-4a54-bb6e-1d283e333392	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73a1552e-bbfa-445e-8306-b347354c0364	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73a1552e-bbfa-445e-8306-b347354c0364	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+739d93c4-8d7b-4a54-bb6e-1d283e333392	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:aven-fateshaper:cast:s1,f:xs:XP:aven-fateshaper:cast:s1	-	-	-	fc71ca68c5ac	-	a66b67ef0dfc	-	-	2026-11-24	xproof
+739d93c4-8d7b-4a54-bb6e-1d283e333392	f0/a0	RearrangeTopOfLibrary	agreed	-	FX	start	2	0	x:xs:XP:aven-fateshaper:f0a0:s1,f:xs:XP:aven-fateshaper:f0a0:s1	-	-	-	fc71ca68c5ac	-	a66b67ef0dfc	-	-	2026-11-24	xproof
+739d93c4-8d7b-4a54-bb6e-1d283e333392	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:aven-fateshaper:cast:s1,f:xs:XP:aven-fateshaper:cast:s1	-	-	-	fc71ca68c5ac	-	a66b67ef0dfc	-	-	2026-11-24	xproof
+73a1552e-bbfa-445e-8306-b347354c0364	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:amugaba:cast:s1,f:xs:XP:amugaba:cast:s1	-	-	-	fc71ca68c5ac	-	a026c5ff133e	-	-	2026-11-24	xproof
+73a1552e-bbfa-445e-8306-b347354c0364	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 73a3b9a1-37a0-469a-9557-8c118a1ee78f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73a59b03-168e-472e-bbb1-cabd782ea014	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73a59b03-168e-472e-bbb1-cabd782ea014	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,7 +145,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73c0a809-fb0e-4773-a385-a6e32feb03cd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73c40477-7061-47db-af8f-2a5cf6c22c9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73c40477-7061-47db-af8f-2a5cf6c22c9b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73c40477-7061-47db-af8f-2a5cf6c22c9b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+73c40477-7061-47db-af8f-2a5cf6c22c9b	f0/a1	Tap	agreed	-	FX	start	2	0	x:xs:XP:nomad-decoy:f0a1:s1,f:xs:XP:nomad-decoy:f0a1:s1	-	-	-	fc71ca68c5ac	-	8d77c4f237d6	-	-	2026-11-24	xproof
 73c423b7-cab8-4e69-8070-9edbf96a6c2c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Boros Guildgate/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73c423b7-cab8-4e69-8070-9edbf96a6c2c	land	play-land	agreed	-	X	scen	1	0	Boros Guildgate/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73c44cf5-a601-4625-9550-e722fba2ec0b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:tanazir-quandrix:cast:s1,f:xs:XP:tanazir-quandrix:cast:s1	-	-	-	d864b561c9cb	-	aff31c558599	-	-	2026-11-24	xproof

@@ -16,8 +16,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:vivien-nature-s-avenger:cast:s1,f:xs:XP:vivien-nature-s-avenger:cast:s1	-	-	-	ae86f6029288	-	5eea77078287	-	-	2026-11-24	xproof
 5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-55159adc-36f0-4088-8930-5d9b45f76365	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-55159adc-36f0-4088-8930-5d9b45f76365	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+55159adc-36f0-4088-8930-5d9b45f76365	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:still-life:cast:s1,f:xs:XP:still-life:cast:s1	-	-	-	fc71ca68c5ac	-	3c36825ecc86	-	-	2026-11-24	xproof
+55159adc-36f0-4088-8930-5d9b45f76365	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:still-life:f0a0:s1,f:xs:XP:still-life:f0a0:s1	-	-	-	fc71ca68c5ac	-	3c36825ecc86	-	-	2026-11-24	xproof
 55187899-c445-48e9-80b9-235eaf42f803	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 551ac58e-3a27-4ee3-ac91-16873562c0bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 551e4356-5b1f-475c-a64b-9c50ea9b0368	cast	cast-resolve	agreed	-	X	scen	1	0	Boar-q-pine/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 552867ec-5741-4e34-813f-4aaf185661f7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 552867ec-5741-4e34-813f-4aaf185661f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scrapwork-rager:f0t0:s1,f:xs:XP:scrapwork-rager:f0t0:s1	-	-	-	d864b561c9cb	-	e2cff58b6a24	-	-	2026-11-24	xproof
 5528d0f1-4774-419f-ba1e-b2abdbce8735	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5528d0f1-4774-419f-ba1e-b2abdbce8735	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5528d0f1-4774-419f-ba1e-b2abdbce8735	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 552dcf9f-ff4a-4057-a93e-62f5527050c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 552f0163-a19d-4671-888f-044fc0354875	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5538d4cf-98eb-4e20-a9c1-42c7cdcad194	cast	cast-resolve	agreed	-	X	scen	1	0	Rattleback Apothecary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 55cec4bc-3de6-4c0d-a4cc-c5a30849fbda	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wildborn Preserver/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55cec4bc-3de6-4c0d-a4cc-c5a30849fbda	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wildborn Preserver/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55cec4bc-3de6-4c0d-a4cc-c5a30849fbda	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wildborn Preserver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-55d01851-2669-4552-b580-088e445ac30c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+55d01851-2669-4552-b580-088e445ac30c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:vengeful-dreams:cast:s1	-	-	-	fc71ca68c5ac	-	8326ad899585	-	-	2026-11-24	xproof
 55d1a788-fe9a-4e19-a524-6709f728ea28	cast	cast-resolve	agreed	-	FX	scen	2	0	Archaic's Agony/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55d8ac5b-622c-42a9-83dc-f2c1c6c2506f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kor-sanctifiers:f0t0:s1,f:xs:XP:kor-sanctifiers:f0t0:s1	-	-	-	8a1b1a193ec0	-	1e77eed03563	-	-	2026-11-24	xproof
 55d8ac5b-622c-42a9-83dc-f2c1c6c2506f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kor-sanctifiers:f0t0:s1,f:xs:XP:kor-sanctifiers:f0t0:s1	-	-	-	8a1b1a193ec0	-	1e77eed03563	-	-	2026-11-24	xproof
@@ -178,6 +178,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 55f3c721-e13a-406e-bc8e-d6cdc91ac477	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Authority of the Consuls/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55f7b005-31ea-4865-a8f3-460d15bed795	cast	cast-resolve	agreed	-	X	scen	1	0	Arc Reactor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55f7b005-31ea-4865-a8f3-460d15bed795	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Arc Reactor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-55f9a9a2-2842-4555-8b54-03aebc8d6fb8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-55f9a9a2-2842-4555-8b54-03aebc8d6fb8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+55f9a9a2-2842-4555-8b54-03aebc8d6fb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llawan-cephalid-empress:f0t0:s1,f:xs:XP:llawan-cephalid-empress:f0t0:s1	-	-	-	fc71ca68c5ac	-	a0dc35dba0a3	-	-	2026-11-24	xproof
+55f9a9a2-2842-4555-8b54-03aebc8d6fb8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:llawan-cephalid-empress:f0t0:s1,f:xs:XP:llawan-cephalid-empress:f0t0:s1	-	-	-	fc71ca68c5ac	-	a0dc35dba0a3	-	-	2026-11-24	xproof
 55fe5ec3-1c81-4e9d-9e4c-f68ce6d7c2de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

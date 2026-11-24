@@ -42,8 +42,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 602b30a0-ecf3-4639-a512-ee020675e432	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 602cce3e-7033-47d6-aec1-d755f234f270	cast	cast-resolve	agreed	-	X	scen	1	0	Adept Watershaper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 602cce3e-7033-47d6-aec1-d755f234f270	static#0.0	static#0.0	agreed	-	X	scen	1	0	Adept Watershaper/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-602e421e-afab-4488-8a52-af66b4fdce4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-602e421e-afab-4488-8a52-af66b4fdce4b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+602e421e-afab-4488-8a52-af66b4fdce4b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:noxious-ghoul:f0t0:s1,f:xs:XP:noxious-ghoul:f0t0:s1	-	-	-	fc71ca68c5ac	-	69a751b58c2f	-	-	2026-11-24	xproof
+602e421e-afab-4488-8a52-af66b4fdce4b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:noxious-ghoul:f0t0:s1,f:xs:XP:noxious-ghoul:f0t0:s1	-	-	-	fc71ca68c5ac	-	69a751b58c2f	-	-	2026-11-24	xproof
 6034e7c1-b3ec-4927-b517-f8e3ca87252e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6035303e-22b3-4b64-8160-1f46ae3dad55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6039b9b7-e49a-4ea3-887c-a17dd502d63f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -77,8 +77,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60555f06-dc85-4a34-ae3c-fc1cdb923be7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60555f06-dc85-4a34-ae3c-fc1cdb923be7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bolt-hound:f0t0:s1,f:xs:XP:bolt-hound:f0t0:s1	-	-	-	ae86f6029288	-	e4d092f039ba	-	-	2026-11-24	xproof
 605624ee-b7ca-4728-993f-e13b18cc57f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-605787fe-64e9-4de8-974a-473277b0ba2e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-605787fe-64e9-4de8-974a-473277b0ba2e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+605787fe-64e9-4de8-974a-473277b0ba2e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:face-of-fear:cast:s1,f:xs:XP:face-of-fear:cast:s1	-	-	-	fc71ca68c5ac	-	6da4c5251169	-	-	2026-11-24	xproof
+605787fe-64e9-4de8-974a-473277b0ba2e	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 605c1ee0-5e8a-4e0a-a99b-42a38873f822	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 605c1ee0-5e8a-4e0a-a99b-42a38873f822	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 605dd1b5-8946-4bd0-b31b-e99bf63a1bc4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

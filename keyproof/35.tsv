@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35044f8a-c8e0-41ae-ba61-43109e51f7e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35044f8a-c8e0-41ae-ba61-43109e51f7e8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 35064a72-c052-496f-8f1a-6dbc5e617d3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35064a72-c052-496f-8f1a-6dbc5e617d3f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35064a72-c052-496f-8f1a-6dbc5e617d3f	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 35069cdb-e5bd-4224-a1a8-b329054e003b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rejuvenate:cast:s1,f:xs:XP:rejuvenate:cast:s1	-	-	-	5f2128bf97e4	-	a0f70ef6a759	-	-	2026-11-24	xproof
 35069cdb-e5bd-4224-a1a8-b329054e003b	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:rejuvenate:cast:s2,f:xs:XP:rejuvenate:cast:s2	-	-	-	5f2128bf97e4	-	a0f70ef6a759	-	-	2026-11-24	xproof
 3508fd7d-ca02-47f9-8b0a-525f7bde4f57	cast	cast-resolve	agreed	-	FX	scen	2	0	Hulk, Gamma Goliath/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35426427-4268-4c8f-9fe1-270f2ce43d97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35426427-4268-4c8f-9fe1-270f2ce43d97	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 35453c9e-e1ae-4fe9-926d-75724deb0555	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35453c9e-e1ae-4fe9-926d-75724deb0555	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35453c9e-e1ae-4fe9-926d-75724deb0555	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:armor-thrull:f0a0:s1,f:xs:XP:armor-thrull:f0a0:s1	-	-	-	fc71ca68c5ac	-	3737a69dd78a	-	-	2026-11-24	xproof
 3548489b-053e-4f81-a0be-07422cbe357d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 354a7376-fb4b-424d-8964-93727302dccb	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:immersturm-skullcairn:f0a0:s1,f:xs:XP:immersturm-skullcairn:f0a0:s1	-	-	-	d864b561c9cb	-	0f4310e2a56f	-	-	2026-11-24	xproof
 354a7376-fb4b-424d-8964-93727302dccb	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:immersturm-skullcairn:f0a1:s1,f:xs:XP:immersturm-skullcairn:f0a1:s1	-	-	-	d864b561c9cb	-	0f4310e2a56f	-	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35b3ae1c-4116-49b0-89a9-7332fe9bbff0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Axebane Ferox/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 35b8fa77-4e85-418b-b335-cd1af127075c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35b8fa77-4e85-418b-b335-cd1af127075c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35b9f327-d1f6-47d1-aefa-6f70f407b4bc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35b9f327-d1f6-47d1-aefa-6f70f407b4bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35b9f327-d1f6-47d1-aefa-6f70f407b4bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:relic-bind:cast:s1,f:xs:XP:relic-bind:cast:s1	-	-	-	fc71ca68c5ac	-	7626b4fcf78a	-	-	2026-11-24	xproof
+35b9f327-d1f6-47d1-aefa-6f70f407b4bc	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 35ba0e70-da7c-4ed9-b8ec-7dd5c5ce110e	cast	cast-resolve	agreed	-	FX	scen	2	0	Eerie Interference/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 35bba442-1aec-4d33-b502-4c580d61644b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35bef4d3-4473-4265-86b0-f1393c82fd1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

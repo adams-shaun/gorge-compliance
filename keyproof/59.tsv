@@ -96,7 +96,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59674589-b174-4150-b8d6-30d25c5ead4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5967c3d3-2ef1-4496-b51c-23478fa77f09	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5967c3d3-2ef1-4496-b51c-23478fa77f09	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59681998-c395-4d37-a419-2a78cf894506	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+59681998-c395-4d37-a419-2a78cf894506	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treacherous-werewolf:cast:s1,f:xs:XP:treacherous-werewolf:cast:s1	-	-	-	fc71ca68c5ac	-	65efa0ba94eb	-	-	2026-11-24	xproof
 5972f426-4a51-4130-baf5-25407c1499f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5972f426-4a51-4130-baf5-25407c1499f1	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5972f426-4a51-4130-baf5-25407c1499f1	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,8 +151,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59c898d8-14f0-4645-84e7-aeedb2ee6c5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59c898d8-14f0-4645-84e7-aeedb2ee6c5e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 59cbed39-a07e-491e-a95a-adafe19eb652	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jace-s-ruse:cast:s1,f:xs:XP:jace-s-ruse:cast:s1	-	-	-	d864b561c9cb	-	3416af22550d	-	-	2026-11-24	xproof
-59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:narcissism:cast:s1,f:xs:XP:narcissism:cast:s1	-	-	-	fc71ca68c5ac	-	bc551a1bbb3a	-	-	2026-11-24	xproof
+59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59d22de5-e310-44d7-89cf-ef3529e40cef	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59d22de5-e310-44d7-89cf-ef3529e40cef	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

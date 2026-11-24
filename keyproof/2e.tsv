@@ -35,9 +35,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2e1b5ae6-a29d-4f37-a380-eebee6cdcbd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e1d5873-50e6-432a-b7a9-9f8d2632a0b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e1d5873-50e6-432a-b7a9-9f8d2632a0b9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e1deb7e-d40d-437e-b817-b66132d2d1d6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e1deb7e-d40d-437e-b817-b66132d2d1d6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e1deb7e-d40d-437e-b817-b66132d2d1d6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2e1deb7e-d40d-437e-b817-b66132d2d1d6	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:avarax:cast:s1,f:xs:XP:avarax:cast:s1	-	-	-	fc71ca68c5ac	-	3d1e46ff8978	-	-	2026-11-24	xproof
+2e1deb7e-d40d-437e-b817-b66132d2d1d6	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:avarax:f0a0:s1,f:xs:XP:avarax:f0a0:s1	-	-	-	fc71ca68c5ac	-	3d1e46ff8978	-	-	2026-11-24	xproof
+2e1deb7e-d40d-437e-b817-b66132d2d1d6	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:avarax:cast:s1,f:xs:XP:avarax:cast:s1	-	-	-	fc71ca68c5ac	-	3d1e46ff8978	-	-	2026-11-24	xproof
 2e29025e-6954-4fbd-933f-81c2309c704e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:monstrous-carabid:cast:s1,f:xs:XP:monstrous-carabid:cast:s1	-	-	-	8a1b1a193ec0	-	5dd49fdc834c	-	-	2026-11-24	xproof
 2e29025e-6954-4fbd-933f-81c2309c704e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e29efee-1eed-4bef-8574-0f6ff99d3cda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -191,7 +191,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ef4dfcf-7a53-49bc-aa19-f2796ebac3ae	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ef6f4d6-f755-4402-8339-2a9b6c86f96c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ef6f4d6-f755-4402-8339-2a9b6c86f96c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ef797ef-c05f-4309-85c7-1bd151dac3fa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2ef797ef-c05f-4309-85c7-1bd151dac3fa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:far-wanderings:cast:s1,f:xs:XP:far-wanderings:cast:s1	-	-	-	fc71ca68c5ac	-	6df1cdeb3964	-	-	2026-11-24	xproof
 2ef88214-f46d-473e-a55b-795a647e2f03	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Echoing Deeps/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ef88214-f46d-473e-a55b-795a647e2f03	land	play-land	agreed	-	X	scen	1	0	Echoing Deeps/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ef8ebc9-4f95-42f8-86e6-85eff0b8f021	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

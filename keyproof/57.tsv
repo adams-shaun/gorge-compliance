@@ -32,8 +32,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57276db8-9d8d-4587-ae88-dfdc44343f17	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	The Fire Crystal/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57276db8-9d8d-4587-ae88-dfdc44343f17	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Fire Crystal/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57276db8-9d8d-4587-ae88-dfdc44343f17	static#0.1	static#0.1	agreed	-	X	scen	1	0	The Fire Crystal/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-57296ea3-3c0d-49b7-bc08-0d0d8414e9ad	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57296ea3-3c0d-49b7-bc08-0d0d8414e9ad	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57296ea3-3c0d-49b7-bc08-0d0d8414e9ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nightscape-familiar:cast:s1,f:xs:XP:nightscape-familiar:cast:s1	-	-	-	fc71ca68c5ac	-	6af4f0665862	-	-	2026-11-24	xproof
+57296ea3-3c0d-49b7-bc08-0d0d8414e9ad	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:nightscape-familiar:f0a0:s1,f:xs:XP:nightscape-familiar:f0a0:s1	-	-	-	fc71ca68c5ac	-	6af4f0665862	-	-	2026-11-24	xproof
 572afa0f-9e82-4899-b622-a7554625b9f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 572afa0f-9e82-4899-b622-a7554625b9f4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 572afa0f-9e82-4899-b622-a7554625b9f4	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -100,8 +100,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 578e0577-0ad8-4bfb-a317-9684c508770a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 578e0577-0ad8-4bfb-a317-9684c508770a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 578e0577-0ad8-4bfb-a317-9684c508770a	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5791456c-7b3c-4e93-a6d1-94ab01858816	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5791456c-7b3c-4e93-a6d1-94ab01858816	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5791456c-7b3c-4e93-a6d1-94ab01858816	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:walking-dead:cast:s1,f:xs:XP:walking-dead:cast:s1	-	-	-	fc71ca68c5ac	-	0eab19d5e755	-	-	2026-11-24	xproof
+5791456c-7b3c-4e93-a6d1-94ab01858816	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:walking-dead:f0a0:s1,f:xs:XP:walking-dead:f0a0:s1	-	-	-	fc71ca68c5ac	-	0eab19d5e755	-	-	2026-11-24	xproof
 5791710d-c718-4f64-9c14-3668154716f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57927909-11a9-44ef-989d-1dcca1f6e23f	cast	cast-resolve	agreed	-	X	scen	1	0	Flight-Deck Coordinator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57927909-11a9-44ef-989d-1dcca1f6e23f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Flight-Deck Coordinator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -156,10 +156,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57d02dc8-e22e-4874-9f02-490a2528a28f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Mighty Thor, Jane Foster/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57d02dc8-e22e-4874-9f02-490a2528a28f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Mighty Thor, Jane Foster/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57d411c6-68d8-441d-885f-17412f6503c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57d411c6-68d8-441d-885f-17412f6503c2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57d411c6-68d8-441d-885f-17412f6503c2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57d411c6-68d8-441d-885f-17412f6503c2	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+57d411c6-68d8-441d-885f-17412f6503c2	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 57d8d656-ccbd-4deb-abf1-a7fde4e7d691	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57d93683-8739-49ef-856a-5a70f92d8763	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57d93683-8739-49ef-856a-5a70f92d8763	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:urborg-drake:cast:s1,f:xs:XP:urborg-drake:cast:s1	-	-	-	fc71ca68c5ac	-	3c1fd8db4d44	-	-	2026-11-24	xproof
 57de8fe7-3d1b-41cd-8354-38aff3d2d052	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vine-trellis:cast:s1,f:xs:XP:vine-trellis:cast:s1	-	-	-	25696bf19d5b	-	7ded36462d33	-	-	2026-11-24	xproof
 57de8fe7-3d1b-41cd-8354-38aff3d2d052	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:vine-trellis:f0a0:s1,f:xs:XP:vine-trellis:f0a0:s1	-	-	-	d864b561c9cb	-	7ded36462d33	-	-	2026-11-24	xproof
 57dfe4aa-1e9a-4891-851b-201edd1fc79c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

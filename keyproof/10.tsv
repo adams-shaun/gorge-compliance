@@ -44,7 +44,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10391bcb-0932-49a0-8d47-e06e3c10dd68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10391bcb-0932-49a0-8d47-e06e3c10dd68	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 103c6037-18ff-44d8-84a1-fd6bdb3040c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-103c6037-18ff-44d8-84a1-fd6bdb3040c5	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+103c6037-18ff-44d8-84a1-fd6bdb3040c5	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 103ca069-0bfe-4976-bee1-75406273875d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 103d9ad0-d655-4bd5-a899-e9f8869e333d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 103e0b63-fbde-4054-91f7-dd04b40b59ef	cast	cast-resolve	agreed	-	X	scen	1	0	Hemosymbic Mite/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -154,8 +154,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10ae611f-e56d-47c5-8b6e-d38d95208bba	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:indigo-faerie:f0a0:s1,f:xs:XP:indigo-faerie:f0a0:s1	-	-	-	8a1b1a193ec0	-	c130352d133d	-	-	2026-11-24	xproof
 10af9cd9-1700-48f9-97e1-61e239536fef	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 10af9cd9-1700-48f9-97e1-61e239536fef	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-10b0b60f-9976-41f9-855b-1786b6f86f55	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-10b0b60f-9976-41f9-855b-1786b6f86f55	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+10b0b60f-9976-41f9-855b-1786b6f86f55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-soultiller:cast:s1,f:xs:XP:elvish-soultiller:cast:s1	-	-	-	fc71ca68c5ac	-	e2858d293f1e	-	-	2026-11-24	xproof
+10b0b60f-9976-41f9-855b-1786b6f86f55	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elvish-soultiller:f0t0:s1,f:xs:XP:elvish-soultiller:f0t0:s1	-	-	-	fc71ca68c5ac	-	e2858d293f1e	-	-	2026-11-24	xproof
 10b8d4c7-7553-4d76-b643-d98b80701e13	cast	cast-resolve	agreed	-	X	scen	1	0	Gingerbrute/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10b8d4c7-7553-4d76-b643-d98b80701e13	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gingerbrute/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10b8d4c7-7553-4d76-b643-d98b80701e13	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Gingerbrute/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

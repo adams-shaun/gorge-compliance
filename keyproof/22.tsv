@@ -31,18 +31,18 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2224b6e0-c5ff-45d0-84e3-83758c5fc99f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22252186-15d0-468f-8cab-c74db9b71439	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22252186-15d0-468f-8cab-c74db9b71439	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2227bab2-36a0-47f1-a797-7b82323eca9d	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2227bab2-36a0-47f1-a797-7b82323eca9d	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2227bab2-36a0-47f1-a797-7b82323eca9d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2227bab2-36a0-47f1-a797-7b82323eca9d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:death-pulse:cast:s2,f:xs:XP:death-pulse:cast:s2	-	-	-	fc71ca68c5ac	-	b62a96f6f792	-	-	2026-11-24	xproof
+2227bab2-36a0-47f1-a797-7b82323eca9d	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:death-pulse:cast:s1,f:xs:XP:death-pulse:cast:s1	-	-	-	fc71ca68c5ac	-	b62a96f6f792	-	-	2026-11-24	xproof
+2227bab2-36a0-47f1-a797-7b82323eca9d	f0/t0	Cycled	agreed	-	FX	start	1	0	x:xs:XP:death-pulse:cast:s1,f:xs:XP:death-pulse:cast:s1	-	-	-	fc71ca68c5ac	-	b62a96f6f792	-	-	2026-11-24	xproof
 2230ec18-4dcf-435e-b495-1905cb94e8b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2230ec18-4dcf-435e-b495-1905cb94e8b8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2232c38e-49eb-4823-a325-2342a952db72	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2232c38e-49eb-4823-a325-2342a952db72	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2232c38e-49eb-4823-a325-2342a952db72	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2232c38e-49eb-4823-a325-2342a952db72	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:lava-zombie:cast:s1,f:xs:XP:lava-zombie:cast:s1	-	-	-	fc71ca68c5ac	-	2b3da60f5b57	-	-	2026-11-24	xproof
+2232c38e-49eb-4823-a325-2342a952db72	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:lava-zombie:f0a0:s1,f:xs:XP:lava-zombie:f0a0:s1	-	-	-	fc71ca68c5ac	-	2b3da60f5b57	-	-	2026-11-24	xproof
+2232c38e-49eb-4823-a325-2342a952db72	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:lava-zombie:cast:s1,f:xs:XP:lava-zombie:cast:s1	-	-	-	fc71ca68c5ac	-	2b3da60f5b57	-	-	2026-11-24	xproof
 2233c079-5ca6-4992-8bd2-84dbf9ed53a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2233c079-5ca6-4992-8bd2-84dbf9ed53a9	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-22374ec2-61b3-46eb-82ed-93bbb42403c4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-22374ec2-61b3-46eb-82ed-93bbb42403c4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+22374ec2-61b3-46eb-82ed-93bbb42403c4	cast	cast	agreed	-	F	start	4	0	f:xs:XP:minotaur-explorer:cast:s1	-	-	-	fc71ca68c5ac	-	ee41457f6d6b	-	-	2026-11-24	xproof
+22374ec2-61b3-46eb-82ed-93bbb42403c4	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:minotaur-explorer:cast:s1	-	-	-	fc71ca68c5ac	-	ee41457f6d6b	-	-	2026-11-24	xproof
 223794f2-67a3-4ab5-81c5-046c63307c6c	cast	cast-resolve	agreed	-	FX	scen	2	0	Seeker's Folly/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 223c97fb-dc96-41ba-be9d-bad9b5e4876f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:returned-centaur:f0t0:s1,f:xs:XP:returned-centaur:f0t0:s1	-	-	-	d864b561c9cb	-	10048ec39701	-	-	2026-11-24	xproof
 223c97fb-dc96-41ba-be9d-bad9b5e4876f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:returned-centaur:f0t0:s1,f:xs:XP:returned-centaur:f0t0:s1	-	-	-	d864b561c9cb	-	10048ec39701	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 229ecaa1-b3c9-44a1-8e7a-857ea5b8b0df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 229ecaa1-b3c9-44a1-8e7a-857ea5b8b0df	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22a189a9-e755-4cbb-b419-5ba2e5acbe1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-22a189a9-e755-4cbb-b419-5ba2e5acbe1b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+22a189a9-e755-4cbb-b419-5ba2e5acbe1b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 22a23706-a5fe-46f3-b845-6f58d558c723	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22a23706-a5fe-46f3-b845-6f58d558c723	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 22a33139-a730-4792-9dd5-2c0f99f96855	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vitu-ghazi-inspector:f0t0:s1,f:xs:XP:vitu-ghazi-inspector:f0t0:s1	-	-	-	5f2128bf97e4	-	7352c314e2f7	-	-	2026-11-24	xproof
@@ -135,8 +135,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 22c5187b-e3db-4221-a173-e3b83a581fca	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:stonehorn-chanter:f0a0:s1,f:xs:XP:stonehorn-chanter:f0a0:s1	-	-	-	d864b561c9cb	-	92280f76e084	-	-	2026-11-24	xproof
 22c53662-51b9-4a8c-8ec7-e8b456a268b7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22c53662-51b9-4a8c-8ec7-e8b456a268b7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-22c74e4b-b1fe-4a35-acd8-fa4840af3c06	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-22c74e4b-b1fe-4a35-acd8-fa4840af3c06	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+22c74e4b-b1fe-4a35-acd8-fa4840af3c06	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:famished-ghoul:cast:s1,f:xs:XP:famished-ghoul:cast:s1	-	-	-	fc71ca68c5ac	-	1a16eb8ed50c	-	-	2026-11-24	xproof
+22c74e4b-b1fe-4a35-acd8-fa4840af3c06	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:famished-ghoul:f0a0:s1,f:xs:XP:famished-ghoul:f0a0:s1	-	-	-	fc71ca68c5ac	-	1a16eb8ed50c	-	-	2026-11-24	xproof
 22c75ad5-237c-4dbd-bbc4-3058a3db408f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22c8c952-2713-418e-8259-aea09b4e740b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22c8c952-2713-418e-8259-aea09b4e740b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof

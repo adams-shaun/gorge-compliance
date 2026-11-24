@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1201c146-54af-4668-a544-cde3ece23f2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1201c146-54af-4668-a544-cde3ece23f2e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1203a80f-11ac-46ed-aa2a-5a6782b6303d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1203a80f-11ac-46ed-aa2a-5a6782b6303d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1203a80f-11ac-46ed-aa2a-5a6782b6303d	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 120446cc-f55b-40db-915d-2669c1083e56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12080ea9-0800-4601-b553-6711dd9f9806	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12080ea9-0800-4601-b553-6711dd9f9806	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12712419-a2a9-483d-a65a-2b727ae404ae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12712419-a2a9-483d-a65a-2b727ae404ae	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1275653f-de4e-4fe9-aad8-88555fa11680	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1275653f-de4e-4fe9-aad8-88555fa11680	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1275653f-de4e-4fe9-aad8-88555fa11680	f0/a1	Untap	agreed	-	FX	start	2	0	x:xs:XP:wirewood-lodge:f0a1:s1,f:xs:XP:wirewood-lodge:f0a1:s1	-	-	-	fc71ca68c5ac	-	ed22b6ce7053	-	-	2026-11-24	xproof
 1275653f-de4e-4fe9-aad8-88555fa11680	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 127795e6-3f0e-4318-95ad-ccb1912580ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ingot-chewer:f0t0:s1,f:xs:XP:ingot-chewer:f0t0:s1	-	-	-	d864b561c9cb	-	deef3ddf0ca5	-	-	2026-11-24	xproof
 127795e6-3f0e-4318-95ad-ccb1912580ac	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ingot-chewer:f0t0:s1,f:xs:XP:ingot-chewer:f0t0:s1	-	-	-	d864b561c9cb	-	deef3ddf0ca5	-	-	2026-11-24	xproof
@@ -219,8 +219,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12d91743-1ccb-4f2b-b2a9-1c2b34f7c8eb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 12d91743-1ccb-4f2b-b2a9-1c2b34f7c8eb	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Benevolent River Spirit/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12d91743-1ccb-4f2b-b2a9-1c2b34f7c8eb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Benevolent River Spirit/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-12da8ba3-ca60-44c8-8627-1b4af2a2c4a3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12da8ba3-ca60-44c8-8627-1b4af2a2c4a3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+12da8ba3-ca60-44c8-8627-1b4af2a2c4a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:voice-of-the-woods:cast:s1,f:xs:XP:voice-of-the-woods:cast:s1	-	-	-	fc71ca68c5ac	-	e61450d59c8d	-	-	2026-11-24	xproof
+12da8ba3-ca60-44c8-8627-1b4af2a2c4a3	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 12db6263-75c2-442f-a1a5-7af7915f8f9f	cast	cast-resolve	agreed	-	X	scen	1	0	Umbral Collar Zealot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12db6263-75c2-442f-a1a5-7af7915f8f9f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Umbral Collar Zealot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12e0321b-1cd7-4519-8929-3261cf11a1a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cleanup-crew:f0t0:s1,f:xs:XP:cleanup-crew:f0t0:s1	-	-	-	fc71ca68c5ac	-	d24cf4644c26	-	-	2026-11-24	xproof

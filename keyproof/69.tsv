@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69556f6c-c05b-4902-bac7-012f0ed81b75	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 69556f6c-c05b-4902-bac7-012f0ed81b75	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 69565f6e-2e23-4cd8-bd21-1283e06729a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69565f6e-2e23-4cd8-bd21-1283e06729a3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+69565f6e-2e23-4cd8-bd21-1283e06729a3	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 695661ac-6f50-4a0e-9831-a0e285bab4bf	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wild-celebrants:cast:s1,f:xs:XP:wild-celebrants:cast:s1	-	-	-	d864b561c9cb	-	d4fe84f3eafd	-	-	2026-11-24	xproof
 695661ac-6f50-4a0e-9831-a0e285bab4bf	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wild-celebrants:cast:s1,f:xs:XP:wild-celebrants:cast:s1	-	-	-	d864b561c9cb	-	d4fe84f3eafd	-	-	2026-11-24	xproof
 695a84b5-96b0-4e48-b615-15624efab3b7	cast	cast-resolve	agreed	-	X	scen	1	0	Focus the Mind/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -65,9 +65,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 696e7ddb-bdc7-40ee-bc5c-59e98f4a7401	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Restless Vents/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 696e7ddb-bdc7-40ee-bc5c-59e98f4a7401	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Restless Vents/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 696e7ddb-bdc7-40ee-bc5c-59e98f4a7401	land	play-land	agreed	-	FX	scen	2	0	Restless Vents/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-696ee797-0c32-4bff-8c3d-02d05835b138	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-696ee797-0c32-4bff-8c3d-02d05835b138	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-696ee797-0c32-4bff-8c3d-02d05835b138	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+696ee797-0c32-4bff-8c3d-02d05835b138	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:goblin-pyromancer:cast:s1,f:xs:XP:goblin-pyromancer:cast:s1	-	-	-	fc71ca68c5ac	-	95a68cac05c1	-	-	2026-11-24	xproof
+696ee797-0c32-4bff-8c3d-02d05835b138	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:goblin-pyromancer:cast:s1,f:xs:XP:goblin-pyromancer:cast:s1	-	-	-	fc71ca68c5ac	-	95a68cac05c1	-	-	2026-11-24	xproof
+696ee797-0c32-4bff-8c3d-02d05835b138	f0/t1	Phase	agreed	-	FX	start	4	0	x:xs:XP:goblin-pyromancer:cast:s1,f:xs:XP:goblin-pyromancer:cast:s1	-	-	-	fc71ca68c5ac	-	95a68cac05c1	-	-	2026-11-24	xproof
 696f554d-0485-48a5-9273-3f6fb7d16a5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 696f554d-0485-48a5-9273-3f6fb7d16a5d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 696fb1fa-5535-4f73-8235-ad4416dcfdd0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-battle-priest:f0t0:s1,f:xs:XP:aven-battle-priest:f0t0:s1	-	-	-	d864b561c9cb	-	3d54e05b15c5	-	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69ae765d-03c9-46d9-bdad-8e5936df9616	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 69af7bff-fb8c-4f59-88a1-6bfa87ba400a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69b1b0ec-9db0-48d1-a7b5-71281aca16fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69b409b3-fa16-4c79-8b46-215a7036ed46	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+69b409b3-fa16-4c79-8b46-215a7036ed46	land	land	agreed	-	FX	start	2	0	x:xs:XP:the-tabernacle-at-pendrell-vale:land:s1,f:xs:XP:the-tabernacle-at-pendrell-vale:land:s1	-	-	-	fc71ca68c5ac	-	9b8520ae3815	-	-	2026-11-24	xproof
 69b52907-8aff-4f2a-a391-7d1ab2669b5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:end-raze-forerunners:f0t0:s1,f:xs:XP:end-raze-forerunners:f0t0:s1	-	-	-	d864b561c9cb	-	b8fe0b438674	-	-	2026-11-24	xproof
 69b52907-8aff-4f2a-a391-7d1ab2669b5c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:end-raze-forerunners:f0t0:s1,f:xs:XP:end-raze-forerunners:f0t0:s1	-	-	-	d864b561c9cb	-	b8fe0b438674	-	-	2026-11-24	xproof
 69b5af09-b3e6-4abf-b62e-9199c4f43ba7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bravado:cast:s1,f:xs:XP:bravado:cast:s1	-	-	-	5f2128bf97e4	-	7850abc70003	-	-	2026-11-24	xproof

@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 135cc078-1c45-465e-b0b9-7168c89f56f4	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 135e6545-4ec5-4136-9019-3fda92052b7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 135e6545-4ec5-4136-9019-3fda92052b7a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-135eb851-3f2d-45c5-bfb9-49d1e6c98344	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+135eb851-3f2d-45c5-bfb9-49d1e6c98344	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:folk-medicine:cast:s1,f:xs:XP:folk-medicine:cast:s1	-	-	-	fc71ca68c5ac	-	ba146b767f3e	-	-	2026-11-24	xproof
 13613f6e-a6e4-4493-b029-8ec11610c29f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 136596a0-b179-40be-b42d-c0b992621c95	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 136596a0-b179-40be-b42d-c0b992621c95	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -119,7 +119,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 139b0fd5-8aa7-4b36-ab5d-cbf398381c6d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sun-blessed-mount:cast:s1,f:xs:XP:sun-blessed-mount:cast:s1	-	-	-	d864b561c9cb	-	e678c3e502ae	-	-	2026-11-24	xproof
 139b0fd5-8aa7-4b36-ab5d-cbf398381c6d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sun-blessed-mount:cast:s1,f:xs:XP:sun-blessed-mount:cast:s1	-	-	-	d864b561c9cb	-	e678c3e502ae	-	-	2026-11-24	xproof
 139fb542-89fd-4b9e-87e6-ec925bcca93a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13a884b5-8970-4d71-9082-a8b6c8db9a01	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13a884b5-8970-4d71-9082-a8b6c8db9a01	cast	cast	agreed	-	F	start	2	0	f:xs:XP:burning-wish:cast:s1	-	-	-	fc71ca68c5ac	-	953026403bb5	-	-	2026-11-24	xproof
 13a8b19b-23bd-4e45-81ff-23371665e4fc	cast	cast-resolve	agreed	-	X	scen	1	0	Requiem Monolith/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13a8b19b-23bd-4e45-81ff-23371665e4fc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Requiem Monolith/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13aa88a0-4b47-4012-ba50-002e51e637cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

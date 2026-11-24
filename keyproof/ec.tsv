@@ -79,7 +79,7 @@ ec7699e3-ce56-46e4-9e4d-5ed2bd5fca83	cast	-	owed	no-generator	-	game	0	0	-	-	-	-
 ec77d23b-0165-450d-9aae-73b755163753	cast	cast-resolve	agreed	-	FX	scen	2	0	Rat Colony/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ec77d23b-0165-450d-9aae-73b755163753	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rat Colony/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ec79255f-4b4d-4a0a-89d8-c59ba640275b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ec79255f-4b4d-4a0a-89d8-c59ba640275b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ec79255f-4b4d-4a0a-89d8-c59ba640275b	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 ec7a9e7f-742b-4344-983e-73372c6a1760	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghor-clan-rampager:cast:s1,f:xs:XP:ghor-clan-rampager:cast:s1	-	-	-	d864b561c9cb	-	ee5f3f277bb7	-	-	2026-11-24	xproof
 ec7a9e7f-742b-4344-983e-73372c6a1760	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ec7ae9ed-dc5b-47ed-a4ad-086f3c7c377c	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -167,9 +167,9 @@ ecda721d-ec5d-484b-a834-f4de96083b08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ecdae60b-c594-4e70-909b-83483104a42c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ecdfee75-15fd-41ea-89d4-4bfc1fa4d032	cast	cast	agreed	-	F	start	2	0	f:xs:XP:keeper-of-the-quiet-hour:f0t0:s1	-	-	-	25696bf19d5b	-	459b367cc67f	-	-	2026-11-24	xproof
 ecdfee75-15fd-41ea-89d4-4bfc1fa4d032	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:keeper-of-the-quiet-hour:f0t0:s1	-	-	-	25696bf19d5b	-	459b367cc67f	-	-	2026-11-24	xproof
-ece3e379-c586-48bd-8742-472b5deccc35	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ece3e379-c586-48bd-8742-472b5deccc35	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ece3e379-c586-48bd-8742-472b5deccc35	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ece3e379-c586-48bd-8742-472b5deccc35	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:solar-blast:cast:s2,f:xs:XP:solar-blast:cast:s2	-	-	-	fc71ca68c5ac	-	544c513fd988	-	-	2026-11-24	xproof
+ece3e379-c586-48bd-8742-472b5deccc35	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:solar-blast:cast:s1,f:xs:XP:solar-blast:cast:s1	-	-	-	fc71ca68c5ac	-	544c513fd988	-	-	2026-11-24	xproof
+ece3e379-c586-48bd-8742-472b5deccc35	f0/t0	Cycled	agreed	-	FX	start	1	0	x:xs:XP:solar-blast:cast:s1,f:xs:XP:solar-blast:cast:s1	-	-	-	fc71ca68c5ac	-	544c513fd988	-	-	2026-11-24	xproof
 ece77a64-8d99-430e-8407-bdb321828d63	cast	cast-resolve	agreed	-	FX	scen	2	0	Selfless Police Captain/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ece77a64-8d99-430e-8407-bdb321828d63	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Selfless Police Captain/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ece854f8-8c60-4f30-894f-2286d3dd61b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

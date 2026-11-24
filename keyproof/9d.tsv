@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d2460c3-8eeb-4f35-b6f6-748c478664c7	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Enduring Curiosity/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9d250088-d5f2-40ed-bdb7-a6decce0fb67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d277206-9156-4dc9-bdd2-9d9219787735	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d277206-9156-4dc9-bdd2-9d9219787735	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d277206-9156-4dc9-bdd2-9d9219787735	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:stonewood-invoker:f0a0:s1,f:xs:XP:stonewood-invoker:f0a0:s1	-	-	-	fc71ca68c5ac	-	32d758d842e7	-	-	2026-11-24	xproof
 9d293b69-12b7-4b50-a0a7-c4f493dee30b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d293b69-12b7-4b50-a0a7-c4f493dee30b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d293b69-12b7-4b50-a0a7-c4f493dee30b	f0/a2	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:ally-encampment:f0a2:s1,f:xs:XP:ally-encampment:f0a2:s1	-	-	-	d864b561c9cb	-	a5a6e45b311f	-	-	2026-11-24	xproof
@@ -44,8 +44,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d2bfbb2-84df-4d7c-9989-7f5577f90d97	f0/t0	Attacks/Battle cry	agreed	-	FX	start	2	0	x:xs:XP:loxodon-partisan:f0t0:s1,f:xs:XP:loxodon-partisan:f0t0:s1	-	-	-	d864b561c9cb	-	e8873c9a2d55	-	-	2026-11-24	xproof
 9d2d6479-531c-4ce1-b52b-00e36fa63b64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rancor:cast:s1,f:xs:XP:rancor:cast:s1	-	-	-	25696bf19d5b	-	d69b898a5767	-	-	2026-11-24	xproof
 9d2d6479-531c-4ce1-b52b-00e36fa63b64	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-9d2dd032-bcef-4d04-8836-1eaff1c56b98	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d2dd032-bcef-4d04-8836-1eaff1c56b98	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d2dd032-bcef-4d04-8836-1eaff1c56b98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:niall-silvain:cast:s1,f:xs:XP:niall-silvain:cast:s1	-	-	-	fc71ca68c5ac	-	ea28522e4329	-	-	2026-11-24	xproof
+9d2dd032-bcef-4d04-8836-1eaff1c56b98	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:niall-silvain:f0a0:s1,f:xs:XP:niall-silvain:f0a0:s1	-	-	-	fc71ca68c5ac	-	ea28522e4329	-	-	2026-11-24	xproof
 9d2e7099-dcd5-428f-a732-2a82b8d1dd1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d2e7422-397a-47d4-9a1e-1957c7db9a18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d2e7422-397a-47d4-9a1e-1957c7db9a18	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9da9248d-1201-447f-b6c2-2b64af4f71c4	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Earth King's Lieutenant/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9dadeecc-1d4b-4799-9ac9-4ca492006e46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9daed342-e773-43ec-a8e2-98126b505e8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9daed342-e773-43ec-a8e2-98126b505e8a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9daed342-e773-43ec-a8e2-98126b505e8a	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 9db5aa54-3deb-45ee-82a2-e88a4367c6d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9db71b76-eda7-49dd-af5a-3de18acb8ccb	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sultai-monument:f0t0:s2,f:xs:XP:sultai-monument:f0t0:s2	-	-	-	267e485f6204	-	bdb9846f21f9	-	-	2026-11-24	xproof
 9db71b76-eda7-49dd-af5a-3de18acb8ccb	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sultai Monument/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

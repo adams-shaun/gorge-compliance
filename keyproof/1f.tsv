@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f2d1de6-42e0-4f45-b43d-ce4980146469	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dawn's Light Archer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 1f2d6cf4-b8f4-440f-ac08-ca47ada868ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slobad-goblin-tinkerer:cast:s1,f:xs:XP:slobad-goblin-tinkerer:cast:s1	-	-	-	25696bf19d5b	-	30ecb73cfdf0	-	-	2026-11-24	xproof
 1f2d6cf4-b8f4-440f-ac08-ca47ada868ac	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-1f300320-ad98-4812-b34b-54885a86aee9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f300320-ad98-4812-b34b-54885a86aee9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ember-shot:cast:s1,f:xs:XP:ember-shot:cast:s1	-	-	-	fc71ca68c5ac	-	f0996cef1a1d	-	-	2026-11-24	xproof
 1f361ae9-98a2-40ff-a579-fa5b9f510df4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rotting-rats:cast:s1,f:xs:XP:rotting-rats:cast:s1	-	-	-	8a1b1a193ec0	-	1f5dbcacec17	-	-	2026-11-24	xproof
 1f361ae9-98a2-40ff-a579-fa5b9f510df4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f361ae9-98a2-40ff-a579-fa5b9f510df4	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rotting-rats:cast:s1,f:xs:XP:rotting-rats:cast:s1	-	-	-	8a1b1a193ec0	-	1f5dbcacec17	-	-	2026-11-24	xproof
@@ -99,8 +99,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f612df3-53b6-4317-9d63-1f903ee3f0c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f612df3-53b6-4317-9d63-1f903ee3f0c4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f64d70d-ea38-4419-be91-8b68aab3401e	cast	cast	agreed	-	F	start	2	0	f:xs:XP:pollen-lullaby:cast:s1	-	-	-	d864b561c9cb	-	f70bd2007962	-	-	2026-11-24	xproof
-1f696446-30ba-42ab-b4fc-ee9c956b0a62	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f696446-30ba-42ab-b4fc-ee9c956b0a62	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f696446-30ba-42ab-b4fc-ee9c956b0a62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orc-general:cast:s1,f:xs:XP:orc-general:cast:s1	-	-	-	fc71ca68c5ac	-	01441850dcd4	-	-	2026-11-24	xproof
+1f696446-30ba-42ab-b4fc-ee9c956b0a62	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 1f6bff6c-a2f0-4ed7-8169-acb4d31a7187	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mercurial-geists:cast:s1,f:xs:XP:mercurial-geists:cast:s1	-	-	-	d864b561c9cb	-	77c9e02de62c	-	-	2026-11-24	xproof
 1f6bff6c-a2f0-4ed7-8169-acb4d31a7187	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1f6fd5d9-d123-4986-a18b-206cc2dfb3f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

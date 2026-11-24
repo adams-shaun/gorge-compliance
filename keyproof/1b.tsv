@@ -117,8 +117,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b82312c-f748-4c36-8934-ecbcfc10cc7d	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1b82312c-f748-4c36-8934-ecbcfc10cc7d	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1b882a0e-0ede-4d1a-bd1a-9b7cffbcde8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b885600-def1-4b2c-a6cb-02df34d58a1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b885600-def1-4b2c-a6cb-02df34d58a1b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1b885600-def1-4b2c-a6cb-02df34d58a1b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shivan-emissary:f0t0:s1,f:xs:XP:shivan-emissary:f0t0:s1	-	-	-	fc71ca68c5ac	-	8f98bbda725c	-	-	2026-11-24	xproof
+1b885600-def1-4b2c-a6cb-02df34d58a1b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shivan-emissary:f0t0:s1,f:xs:XP:shivan-emissary:f0t0:s1	-	-	-	fc71ca68c5ac	-	8f98bbda725c	-	-	2026-11-24	xproof
 1b8870fd-2d8a-42af-8173-b747d8d4c04f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b8870fd-2d8a-42af-8173-b747d8d4c04f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b8870fd-2d8a-42af-8173-b747d8d4c04f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b9df437-6988-4ddc-80c4-893e11076067	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1b9ec782-0ba1-41f1-bc39-d3302494ecb3	cast	cast-resolve	agreed	-	X	scen	1	0	Bake into a Pie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1b9f9f5b-8712-4f00-90cb-1b7b9970eccc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ba36042-8902-4abb-a4ae-a8d26d81a0de	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ba36042-8902-4abb-a4ae-a8d26d81a0de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:planar-despair:cast:s1,f:xs:XP:planar-despair:cast:s1	-	-	-	fc71ca68c5ac	-	3ad96bc7559f	-	-	2026-11-24	xproof
 1ba45691-417b-4e6a-be45-6027e4f04599	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ba45691-417b-4e6a-be45-6027e4f04599	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1ba59349-a162-4444-b3e0-cddfc01ef03b	cast	cast-resolve	agreed	-	FX	scen	2	0	Rubblebelt Maverick/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -156,8 +156,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1baec770-0785-4cbc-be18-83572fd8e9c1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 1bb1ad32-9ce5-4f14-a408-e142ff30c679	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:scholar-of-the-ages:cast:s1,f:xs:XP:scholar-of-the-ages:cast:s1	-	-	-	d864b561c9cb	-	31712b0d321c	-	-	2026-11-24	xproof
 1bb1ad32-9ce5-4f14-a408-e142ff30c679	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:scholar-of-the-ages:cast:s1,f:xs:XP:scholar-of-the-ages:cast:s1	-	-	-	d864b561c9cb	-	31712b0d321c	-	-	2026-11-24	xproof
-1bb2b090-19a4-40d9-823a-671f6eaca9f9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1bb2b090-19a4-40d9-823a-671f6eaca9f9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1bb2b090-19a4-40d9-823a-671f6eaca9f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pardic-lancer:cast:s1,f:xs:XP:pardic-lancer:cast:s1	-	-	-	fc71ca68c5ac	-	ff01e64ca86a	-	-	2026-11-24	xproof
+1bb2b090-19a4-40d9-823a-671f6eaca9f9	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 1bb7009b-aeb0-4545-be4c-c8c5d723bcf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1bbcfbad-c4c5-4818-b73c-26d83f7fa22c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chilling-shade:cast:s1,f:xs:XP:chilling-shade:cast:s1	-	-	-	16ec2936189a	-	c4a615b27dce	-	-	2026-11-24	xproof
 1bbcfbad-c4c5-4818-b73c-26d83f7fa22c	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

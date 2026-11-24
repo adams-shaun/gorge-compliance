@@ -101,8 +101,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77897962-7d67-4fa8-858f-2f35a322d7c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77897962-7d67-4fa8-858f-2f35a322d7c6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77897962-7d67-4fa8-858f-2f35a322d7c6	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-778fb830-2d2b-4f81-a193-e6b652981695	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-778fb830-2d2b-4f81-a193-e6b652981695	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+778fb830-2d2b-4f81-a193-e6b652981695	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:disciple-of-kangee:cast:s1,f:xs:XP:disciple-of-kangee:cast:s1	-	-	-	fc71ca68c5ac	-	1b925610af86	-	-	2026-11-24	xproof
+778fb830-2d2b-4f81-a193-e6b652981695	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:disciple-of-kangee:f0a0:s1,f:xs:XP:disciple-of-kangee:f0a0:s1	-	-	-	fc71ca68c5ac	-	1b925610af86	-	-	2026-11-24	xproof
 7790bd6c-75e2-4abd-87ab-e1c15f1d53ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7790bd6c-75e2-4abd-87ab-e1c15f1d53ab	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fortress-cyclops:f0t0:s1,f:xs:XP:fortress-cyclops:f0t0:s1	-	-	-	d864b561c9cb	-	1943caf7283a	-	-	2026-11-24	xproof
 7790bd6c-75e2-4abd-87ab-e1c15f1d53ab	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -115,9 +115,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 779d3e58-de06-44be-98f8-f05f7711ecb2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 779fa24d-e9d2-475d-b3aa-dc0388b18307	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 779fa24d-e9d2-475d-b3aa-dc0388b18307	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-77a000de-76d9-44f8-9789-875aa9f576e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77a000de-76d9-44f8-9789-875aa9f576e7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77a000de-76d9-44f8-9789-875aa9f576e7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77a000de-76d9-44f8-9789-875aa9f576e7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wormfang-behemoth:cast:s1,f:xs:XP:wormfang-behemoth:cast:s1	-	-	-	fc71ca68c5ac	-	781761ea1722	-	-	2026-11-24	xproof
+77a000de-76d9-44f8-9789-875aa9f576e7	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wormfang-behemoth:cast:s1,f:xs:XP:wormfang-behemoth:cast:s1	-	-	-	fc71ca68c5ac	-	781761ea1722	-	-	2026-11-24	xproof
+77a000de-76d9-44f8-9789-875aa9f576e7	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 77a1958e-ee24-4305-9dad-da8372803be8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crushing-disappointment:cast:s1,f:xs:XP:crushing-disappointment:cast:s1	-	-	-	d864b561c9cb	-	23b3c217063b	-	-	2026-11-24	xproof
 77a5305a-2611-4a64-adb4-da131dcea233	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77a5305a-2611-4a64-adb4-da131dcea233	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:footlight-fiend:f0t0:s1,f:xs:XP:footlight-fiend:f0t0:s1	-	-	-	d864b561c9cb	-	fadb18d59584	-	-	2026-11-24	xproof
@@ -161,8 +161,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77bef290-7229-420a-a5c6-8c1b6fea63df	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77c14618-ced1-4a46-a7fd-06cb2f7f38ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77c7ba06-d247-421d-9e0c-54c3000c1b78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mogg-toady:cast:s1,f:xs:XP:mogg-toady:cast:s1	-	-	-	5f2128bf97e4	-	76ac39dd503b	-	-	2026-11-24	xproof
-77c923ac-98f1-437c-a711-8c265756e53b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77c923ac-98f1-437c-a711-8c265756e53b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77c923ac-98f1-437c-a711-8c265756e53b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unifying-theory:cast:s1,f:xs:XP:unifying-theory:cast:s1	-	-	-	fc71ca68c5ac	-	854457ebc497	-	-	2026-11-24	xproof
+77c923ac-98f1-437c-a711-8c265756e53b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 77c97dad-17cc-4a28-a48b-907c044d9034	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cantankerous-keepers:f0t0:s1,f:xs:XP:cantankerous-keepers:f0t0:s1	-	-	-	25696bf19d5b	-	0fdda7a20d40	-	-	2026-11-24	xproof
 77c97dad-17cc-4a28-a48b-907c044d9034	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cantankerous-keepers:f0t0:s1,f:xs:XP:cantankerous-keepers:f0t0:s1	-	-	-	25696bf19d5b	-	0fdda7a20d40	-	-	2026-11-24	xproof
 77c97dad-17cc-4a28-a48b-907c044d9034	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cantankerous Keepers/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

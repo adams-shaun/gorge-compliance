@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 445dd350-5165-4516-8669-9233f5558605	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 445dfef5-358e-49b1-880c-b30fc45f0a9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4460962e-c9cd-4cfd-b227-4278ee636206	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4460962e-c9cd-4cfd-b227-4278ee636206	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4460962e-c9cd-4cfd-b227-4278ee636206	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 44623693-51d6-49ad-8cd7-140505caf02f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44661108-d72f-4d02-9303-7e4b0ecf7e9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4469ff35-54ec-4ff5-bc19-3808ae0f711b	cast	cast-resolve	agreed	-	X	scen	1	0	Wildgrowth Archaic/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -109,8 +109,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 447f1cce-bbc5-473b-a838-34070f8fd2dc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 448037c0-20b5-4ca4-9d8f-2702b4697127	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 448396b8-b691-457a-8569-1282c3fca65a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-448396b8-b691-457a-8569-1282c3fca65a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-448396b8-b691-457a-8569-1282c3fca65a	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+448396b8-b691-457a-8569-1282c3fca65a	f0/a0	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:infected-vermin:f0a0:s1,f:xs:XP:infected-vermin:f0a0:s1	-	-	-	fc71ca68c5ac	-	4f3a6ce9f5d1	-	-	2026-11-24	xproof
+448396b8-b691-457a-8569-1282c3fca65a	f0/a1	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:infected-vermin:f0a1:s1,f:xs:XP:infected-vermin:f0a1:s1	-	-	-	fc71ca68c5ac	-	4f3a6ce9f5d1	-	-	2026-11-24	xproof
 4489a526-0e07-4d37-9e83-628f7eb256c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4489a526-0e07-4d37-9e83-628f7eb256c6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4489a526-0e07-4d37-9e83-628f7eb256c6	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -149,9 +149,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 449ed4b4-9e1e-4181-9090-af91802eba49	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coastal-bulwark:cast:s1,f:xs:XP:coastal-bulwark:cast:s1	-	-	-	ae86f6029288	-	9144c5ab2e85	-	-	2026-11-24	xproof
 449ed4b4-9e1e-4181-9090-af91802eba49	f0/a0	Surveil	agreed	-	FX	start	2	0	x:xs:XP:coastal-bulwark:f0a0:s1,f:xs:XP:coastal-bulwark:f0a0:s1	-	-	-	ae86f6029288	-	9144c5ab2e85	-	-	2026-11-24	xproof
 44a10a63-be9c-4f1d-aad6-b5337112bda5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-44a10a63-be9c-4f1d-aad6-b5337112bda5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-44a10a63-be9c-4f1d-aad6-b5337112bda5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-44a10a63-be9c-4f1d-aad6-b5337112bda5	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+44a10a63-be9c-4f1d-aad6-b5337112bda5	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+44a10a63-be9c-4f1d-aad6-b5337112bda5	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+44a10a63-be9c-4f1d-aad6-b5337112bda5	f0/t2	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 44b12ccc-81cb-4ec1-891e-4bf706e53aa4	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	3e4be48678d5	-	-	2026-11-24	xproof
 44b83535-fdbf-4307-bf53-ca20470a768d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44b83535-fdbf-4307-bf53-ca20470a768d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -84,8 +84,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 915b75d1-b5e3-4aca-a54c-beaccef0a2e4	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Innkeeper's Talent/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 915b75d1-b5e3-4aca-a54c-beaccef0a2e4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Innkeeper's Talent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 915b75d1-b5e3-4aca-a54c-beaccef0a2e4	static#0.0	static#0.0	agreed	-	X	scen	1	0	Innkeeper's Talent/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-915bd598-c3dd-4982-bdcc-5904a6f17436	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-915bd598-c3dd-4982-bdcc-5904a6f17436	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+915bd598-c3dd-4982-bdcc-5904a6f17436	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:verduran-emissary:cast:s1,f:xs:XP:verduran-emissary:cast:s1	-	-	-	fc71ca68c5ac	-	8a4eb56d9c2a	-	-	2026-11-24	xproof
+915bd598-c3dd-4982-bdcc-5904a6f17436	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:verduran-emissary:f0t0:s1,f:xs:XP:verduran-emissary:f0t0:s1	-	-	-	fc71ca68c5ac	-	8a4eb56d9c2a	-	-	2026-11-24	xproof
 915d70ac-46ce-41d0-a137-f17e7aaea87d	cast	cast-resolve	agreed	-	FX	scen	2	0	Wanderbrine Trapper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 915d70ac-46ce-41d0-a137-f17e7aaea87d	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Wanderbrine Trapper/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 91617de2-4aab-4efc-94a1-053dfaac3ae5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -207,6 +207,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91fceb34-0f2d-4392-be27-00dcd765637f	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91fd731c-e076-4f2d-9f22-872880c3cc3d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91fe1075-e170-4575-ae28-8d692f051637	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91fe1075-e170-4575-ae28-8d692f051637	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91fe1075-e170-4575-ae28-8d692f051637	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91fe1075-e170-4575-ae28-8d692f051637	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+91fe1075-e170-4575-ae28-8d692f051637	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 91fe1075-e170-4575-ae28-8d692f051637	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

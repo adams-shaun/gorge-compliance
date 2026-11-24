@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f32c581-4d4a-4873-8e4b-b95e13790481	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phantasmal-dragon:cast:s1,f:xs:XP:phantasmal-dragon:cast:s1	-	-	-	25696bf19d5b	-	a41217d86ab8	-	-	2026-11-24	xproof
 7f32c581-4d4a-4873-8e4b-b95e13790481	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 7f34f6b4-18ef-40d7-a599-5c29ba468b89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f34f6b4-18ef-40d7-a599-5c29ba468b89	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7f34f6b4-18ef-40d7-a599-5c29ba468b89	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 7f3f7fb0-da18-467b-bf57-2ded458fda4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f3f7fb0-da18-467b-bf57-2ded458fda4d	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 7f420633-901d-47f9-ae0f-0f5b0ea8359c	cast	cast-resolve	agreed	-	FX	scen	2	0	Burning Curiosity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f42a05c-9e6d-4cbc-92f1-4433cd22f149	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f43b15b-b5d4-4ec6-bd5b-9cf56b2a6bde	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f46839f-175d-4292-8057-c3e0da206075	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f46839f-175d-4292-8057-c3e0da206075	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7f46839f-175d-4292-8057-c3e0da206075	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 7f4b0233-a2b0-41a2-8448-2df1f845148c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f4b0233-a2b0-41a2-8448-2df1f845148c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f4ceca9-0f55-4fa6-8e64-befbc4303d4e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -63,7 +63,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f65178e-dd2e-44aa-a68f-f8694e0b250a	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 7f65178e-dd2e-44aa-a68f-f8694e0b250a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f67b8e0-fbbd-48ef-989d-690d44b70304	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f67b8e0-fbbd-48ef-989d-690d44b70304	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7f67b8e0-fbbd-48ef-989d-690d44b70304	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 7f691e0d-dac5-4d7e-8727-dd2cab9a7863	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f691e0d-dac5-4d7e-8727-dd2cab9a7863	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7f6ddfa2-31ba-4cb7-83e7-1f099e3e8dc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -118,8 +118,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fbb9547-a805-4768-8574-e283e64600a4	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:converter-beast:cast:s1,f:xs:XP:converter-beast:cast:s1	-	-	-	ae86f6029288	-	5357ec191efd	-	-	2026-11-24	xproof
 7fbb98cc-585c-4184-97f5-9b3d3ebdb1e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fbcd256-c132-406f-a490-df9709835504	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fbd5f69-f6b4-4ad7-8e9e-47a798324f6c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fbd5f69-f6b4-4ad7-8e9e-47a798324f6c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7fbd5f69-f6b4-4ad7-8e9e-47a798324f6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dirty-wererat:cast:s1,f:xs:XP:dirty-wererat:cast:s1	-	-	-	fc71ca68c5ac	-	90caf2118966	-	-	2026-11-24	xproof
+7fbd5f69-f6b4-4ad7-8e9e-47a798324f6c	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 7fbe9056-190f-40a1-bee9-59ebd6f981f5	cast	cast-resolve	agreed	-	X	scen	1	0	Origin of Spider-Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7fbf6afc-8a16-447b-bdef-b7d0b640f76c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wing-splicer:f0t0:s1,f:xs:XP:wing-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	a8f8276282cc	-	-	2026-11-24	xproof
 7fbf6afc-8a16-447b-bdef-b7d0b640f76c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wing-splicer:f0t0:s1,f:xs:XP:wing-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	a8f8276282cc	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fca595e-1902-40fd-a359-622caa612b6a	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fca595e-1902-40fd-a359-622caa612b6a	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fcc8aab-6f7b-4474-b4e4-58cf4a119b22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fcc8aab-6f7b-4474-b4e4-58cf4a119b22	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7fcc8aab-6f7b-4474-b4e4-58cf4a119b22	f0/a0	GainControl	agreed	-	FX	start	2	0	x:xs:XP:scarwood-bandits:f0a0:s1,f:xs:XP:scarwood-bandits:f0a0:s1	-	-	-	fc71ca68c5ac	-	d230f563cf1f	-	-	2026-11-24	xproof
 7fcf8faa-2c93-4dc8-aa56-6fc40340e212	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fd06710-0721-4e3e-90ed-d0ccecb1919a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fd2beb8-f823-4723-beec-e59b62127490	cast	cast-resolve	agreed	-	X	scen	1	0	Magda, the Hoardmaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
