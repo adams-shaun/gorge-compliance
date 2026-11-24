@@ -15,6 +15,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/adjudicate"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
@@ -417,13 +418,25 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 	type engines struct{ x, f, p bool }
 	who := map[string]engines{}
 
+	followerOnly := 0
 	for _, id := range ids {
 		item, ok := in.Items[id]
 		if !ok {
 			continue
 		}
 		xc, fc := in.XFind[id].Class, in.FFind[id].Class
-		if row, isDiv := diverging[id]; isDiv {
+		row, isDiv := diverging[id]
+		if !isDiv && fc == classify.ClassDiverge {
+			// Forge differs and adjudicate did not take the item (XMage could
+			// not answer it: decision_shape, rng, projection_gap ...). Forge is
+			// the reference, so it is a divergence all the same (G|F|–).
+			ff := in.FFind[id]
+			row = adjudicate.Row{ID: id, Card: adjudicate.CardOf(item, ff), Pattern: string(oraclediff.GorgeNoForgeNoX),
+				Label: adjudicate.LabelGorgeForgeOnly, XClass: xc, FClass: fc, GFField: ff.Field}
+			isDiv = true
+		}
+		xmageOnly := isDiv && forgeAgreed(row.Pattern)
+		if isDiv {
 			f, ok := adjudicate.Rebuild(in, row)
 			if !ok {
 				return fmt.Errorf("%s: in findings.jsonl but not in the play's items", id)
@@ -437,9 +450,6 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 			if c, hit := adjudicate.Match(classes, si); hit {
 				d.diagnosed, d.cite, d.ticket = true, cmp.Or(onlyIf(c.CR), c.Upstream), c.Ticket
 			}
-			for _, u := range uses {
-				keyOf(u).div[id] = d
-			}
 			if !d.diagnosed {
 				s := sigs[sig]
 				if s == nil {
@@ -448,7 +458,16 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 				}
 				s.items = append(s.items, kpSigItem{id: id, card: row.Card, steps: f.Steps, keys: uses})
 			}
-			continue
+			if !xmageOnly {
+				for _, u := range uses {
+					keyOf(u).div[id] = d
+				}
+				continue
+			}
+			// Forge agrees with gorge and XMage alone differs: the item
+			// credits its keys with refs F below, and its signature stays in
+			// handoff.tsv (pattern GF|X) as a follower-only finding.
+			followerOnly++
 		}
 		uses, ok, err := p.credited(item, id)
 		if err != nil {
@@ -463,7 +482,9 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 			refs, xa, fa = "FX", true, true
 		case xc == classify.ClassAgree && (fc == classify.ClassHarness || fc == classify.ClassTurnCap || fc == classify.ClassForgeSkipsDamageStep):
 			refs, xa = "X", true
-		case xc == classify.ClassXMageLacks && fc == classify.ClassAgree:
+		case fc == classify.ClassAgree && (xmageOnly || xmageSilent(xc)):
+			// Forge leads (operator 11-24): Forge agreeing credits the key when
+			// XMage could not answer, or answered differently (follower-only).
 			refs, fa = "F", true
 		}
 		if refs != "" {
@@ -483,11 +504,8 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 			continue
 		}
 		reason := "harness"
-		switch {
-		case xc == classify.ClassRNG || fc == classify.ClassRNG:
+		if xc == classify.ClassRNG || fc == classify.ClassRNG {
 			reason = "rng"
-		case xc == classify.ClassNotSent && fc == classify.ClassAgree:
-			reason = "not-sent"
 		}
 		for _, u := range uses {
 			keyOf(u).owed[id] = reason
@@ -622,8 +640,8 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 		}
 		files[filepath.Join("sigs", sig+".tsv")] = sb.Bytes()
 		h := handoff{sig: sig, pattern: s.input.Pattern, class: s.input.Follower, keys: len(keySet), cards: len(cardSet), items: len(s.items), prio: "P2"}
-		if s.input.Pattern == "FX|G" {
-			h.prio = "P1"
+		if forgeDiffers(s.input.Pattern) {
+			h.prio = "P1" // Forge differs from gorge: gorge-suspect, whatever XMage says
 		}
 		hand = append(hand, h)
 	}
@@ -668,8 +686,34 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 	for _, s := range []string{"agreed", "diverged", "diagnosed", "owed"} {
 		fmt.Printf(" %s=%d", s, hist[s])
 	}
-	fmt.Printf("; %d signature(s) to hand off, %d witness(es)\n", len(hand), len(witnesses))
+	fmt.Printf("; %d signature(s) to hand off, %d witness(es), %d XMage-only finding(s)\n", len(hand), len(witnesses), followerOnly)
 	return nil
+}
+
+// forgeAgreed reports a three-way pattern in which Forge agrees with gorge and
+// only XMage differs (GF|X, or GF|– when XMage's leg did not compare). Forge is
+// the reference oracle, so such an item credits its keys (refs F); every other
+// adjudicated pattern has Forge differing or silent and is never credited.
+func forgeAgreed(pattern string) bool {
+	return pattern == string(oraclediff.GorgeForgeX) || pattern == string(oraclediff.GorgeForgeNoX)
+}
+
+// forgeDiffers reports a three-way pattern in which Forge differs from gorge:
+// a gorge-suspect divergence (handoff P1) even when XMage agrees with gorge.
+func forgeDiffers(pattern string) bool {
+	switch oraclediff.Pattern(pattern) {
+	case oraclediff.ForgeXMageG, oraclediff.GorgeXMageF, oraclediff.AllDiffer, oraclediff.GorgeNoForgeNoX:
+		return true
+	}
+	return false
+}
+
+// xmageSilent reports an XMage class that says nothing about the item: XMage
+// neither agreed nor diverged (harness, not_sent, decision_shape, xmage_lacks,
+// rng ...). With Forge agreeing, the key is credited refs F. A lower_gap item
+// was never sent to either follower and is not one.
+func xmageSilent(xc string) bool {
+	return xc != classify.ClassAgree && xc != classify.ClassDiverge && xc != classify.ClassLowerGap
 }
 
 // onlyIf is "" for the "-" a register cell uses for nothing.
