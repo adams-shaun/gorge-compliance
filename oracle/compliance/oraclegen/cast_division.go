@@ -14,6 +14,10 @@ func CastDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult) []r
 	return castDivisions(reg, sc, res)
 }
 
+func castDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult) []rules.OracleDecision {
+	return castDivisionsFor(reg, sc, res, false)
+}
+
 // castDivisions restores the "damage_split" decision a divided spell's
 // shares travel in. Since gorge cr-g04 (CR 601.2d) a spell announces its
 // DividedAsYouChoose$ division while it is cast: gorge asks only when the
@@ -33,7 +37,16 @@ func CastDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult) []r
 // removed and a "damage_split" decision carrying the announced shares is
 // inserted at the head of the step the spell resolves in, where gorge used to
 // pose it. Every other decision list is returned unchanged.
-func castDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult) []rules.OracleDecision {
+//
+// xmage is the XMage script's view. A cast whose targets travel in the step's
+// answers (a lowered xproof item) scripts that root target ask itself, at the
+// cast step, so XMage's TargetAmount reads the shares there: the copied root
+// ask is marked Divided with the total, and the division ask (if gorge posed
+// one) stays beside it, so dividedTargetAnswers emits one "<ref>^X=<share>" per
+// target from the two; no split is inserted. The Forge
+// contract keeps the root ask unmarked (the driver sums the split), so the
+// Forge callers pass false.
+func castDivisionsFor(reg *cards.Registry, sc Scenario, res rules.OracleResult, xmage bool) []rules.OracleDecision {
 	ds := res.Decisions
 	if reg == nil {
 		return ds
@@ -94,6 +107,15 @@ func castDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult) []r
 			}
 		}
 		split.Min, split.Max = len(split.PickIdx), len(split.PickIdx)
+		if xmage && t.Via == "answer" {
+			// The root ask carries the shares itself (see above): mark it
+			// divided and leave the division ask where it is, which
+			// dividedTargetAnswers pairs with it; no split is inserted.
+			marked := append([]rules.OracleDecision(nil), src...)
+			marked[i].Divided = len(split.PickIdx)
+			out = marked
+			continue
+		}
 		next := make([]rules.OracleDecision, 0, len(src)+1)
 		inserted := false
 		for x, d := range src {
@@ -150,10 +172,14 @@ func spellDivision(reg *cards.Registry, name string) (string, int, bool) {
 }
 
 // castRootTarget is the index of cast step k's own root target ask: the
-// first target decision of that step answered from the step's target list.
+// first target decision of that step, answered from the step's target list
+// (via "target", the generator's shape) or from its answers (via "answer",
+// a lowered xproof item whose cast carries its targets as an answer). Only
+// that first ask is the cast's: a later trigger's target in the same step
+// follows it and is never taken.
 func castRootTarget(ds []rules.OracleDecision, k int) int {
 	for i, d := range ds {
-		if d.Step == k && d.Kind == "target" && d.Via == "target" && d.Resume == "" && d.Divided == 0 && len(d.PickRefs) > 0 {
+		if d.Step == k && d.Kind == "target" && (d.Via == "target" || d.Via == "answer") && d.Resume == "" && d.Divided == 0 && len(d.PickRefs) > 0 {
 			return i
 		}
 	}
