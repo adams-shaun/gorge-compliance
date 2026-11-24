@@ -7652,6 +7652,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             for (String ref : batch.refs) {
                 String name = battlefieldName(ref);
                 if (combatRefAmbiguous(name, player.getId(), battlefield)
+                        || combatNameStale(ref, exactByRef.get(ref), name)
                         || (exactByRef.get(ref) != null
                                 && combatNameUnreliable(ref, name, player.getId(), battlefield))) {
                     exactNeeded = true;
@@ -7723,6 +7724,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 Permanent attacker = combatPermanent(attackerRef, attackerName, attackerId, game);
                 boolean exactNeeded = combatRefAmbiguous(blockerName, player.getId(), battlefield)
                         || combatRefAmbiguous(attackerName, attackerId, battlefield)
+                        || combatNameStale(blockerRef, blocker, blockerName)
+                        || combatNameStale(attackerRef, attacker, attackerName)
                         || (blocker != null
                                 && combatNameUnreliable(blockerRef, blockerName, player.getId(), battlefield))
                         || (attacker != null
@@ -7780,6 +7783,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         }
         return null;
+    }
+
+    /** Whether the name command lowered for a ref no longer names its live
+     * permanent: a double-faced permanent that transformed mid-scenario
+     * (Ulvenwald Captive's "{5}{G}{G}: Transform" resolved before combat,
+     * CR 712.8, 701.28) keeps its object, but now carries the back face's
+     * name, and TestPlayer's name-only attack/block command, queued at
+     * script time with the front name, finds nothing. The ref still names
+     * the same object, so the batch declares it exactly. A face-down
+     * creature is named by its own test command, and a token ref by
+     * tokenChoice's own name rule; neither is stale here. */
+    boolean combatNameStale(String ref, Permanent live, String name) {
+        // faceDownRefs is null in a driver test that builds the replay
+        // without its constructor (ScenarioReplaySplitRoomTest).
+        return live != null && !ref.contains(":token:") && (faceDownRefs == null || !faceDownRefs.contains(ref))
+                && !CardUtil.haveSameNames(xmageSpelling(live.getName()), name, true);
     }
 
     /** combatPermanent for a live game: resolve a non-token ref through the
