@@ -298,6 +298,62 @@ type kpSigItem struct {
 
 const keyproofHeader = "card\toracle_id\tkey\tdesc\tstate\treason\trefs\tsource\tagree_items\tdiff_items\twitness\tsig\tcite\tticket\tgorge_sha\tcorpus_pin\tscript_sha\txmage_ref\tforge_ref\tmeasured\twriter"
 
+// kpTable writes keyproof.tsv: XP4's one row format, shared with
+// `xengine replay-witness`.
+type kpTable struct {
+	reg                                               *cards.Registry
+	cardsDir                                          string
+	gorgeSHA, corpusPin, xmageRef, forgeRef, measured string
+	shas                                              map[string]string
+	buf                                               bytes.Buffer
+}
+
+func newKpTable(reg *cards.Registry, a keyproofArgs) *kpTable {
+	t := &kpTable{reg: reg, cardsDir: a.Cards, gorgeSHA: dash(a.GorgeSHA), corpusPin: dash(a.CorpusPin),
+		xmageRef: dash(a.XRef), forgeRef: dash(a.FRef), measured: a.Measured, shas: map[string]string{}}
+	t.buf.WriteString(keyproofHeader + "\n")
+	return t
+}
+
+// desc is the coverage key's description ("-" when the card has no such key).
+func (t *kpTable) desc(u classify.Use) string {
+	desc := "-"
+	if c, ok := t.reg.Lookup(u.Card); ok {
+		for _, ck := range cov.Keys(c) {
+			if ck.ID == u.Key {
+				desc = ck.Desc
+			}
+		}
+	}
+	return desc
+}
+
+// scriptSHA is the first 12 hex of the card script's sha256 ("-" when unread).
+func (t *kpTable) scriptSHA(card string) string {
+	if s, ok := t.shas[card]; ok {
+		return s
+	}
+	s := "-"
+	if c, ok := t.reg.Lookup(card); ok {
+		for _, path := range []string{c.Path, filepath.Join(t.cardsDir, "cardsfolder", c.Path), filepath.Join(t.cardsDir, c.Path)} {
+			if b, err := os.ReadFile(path); err == nil {
+				h := sha256.Sum256(b)
+				s = hex.EncodeToString(h[:])[:12]
+				break
+			}
+		}
+	}
+	t.shas[card] = s
+	return s
+}
+
+func (t *kpTable) add(u classify.Use, state, reason, refs, source string, agree, diff int, witness, sig, cite, ticket string) {
+	cells := []string{u.Card, "-", u.Key, t.desc(u), state, reason, refs, source,
+		fmt.Sprint(agree), fmt.Sprint(diff), witness, sig, cite, ticket,
+		t.gorgeSHA, t.corpusPin, t.scriptSHA(u.Card), t.xmageRef, t.forgeRef, t.measured, "xproof"}
+	t.buf.WriteString(strings.Join(cells, "\t") + "\n")
+}
+
 func dash(s string) string {
 	if s == "" {
 		return "-"
@@ -449,37 +505,10 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 		}
 		return useList[i].Key < useList[j].Key
 	})
-	shas := map[string]string{}
-	scriptSHA := func(card string) string {
-		if s, ok := shas[card]; ok {
-			return s
-		}
-		s := "-"
-		if c, ok := reg.Lookup(card); ok {
-			for _, path := range []string{c.Path, filepath.Join(a.Cards, "cardsfolder", c.Path), filepath.Join(a.Cards, c.Path)} {
-				if b, err := os.ReadFile(path); err == nil {
-					h := sha256.Sum256(b)
-					s = hex.EncodeToString(h[:])[:12]
-					break
-				}
-			}
-		}
-		shas[card] = s
-		return s
-	}
-	var tsv bytes.Buffer
-	tsv.WriteString(keyproofHeader + "\n")
+	tab := newKpTable(reg, a)
 	hist := map[string]int{}
 	for _, u := range useList {
 		k := keys[u]
-		desc := "-"
-		if c, ok := reg.Lookup(u.Card); ok {
-			for _, ck := range cov.Keys(c) {
-				if ck.ID == u.Key {
-					desc = ck.Desc
-				}
-			}
-		}
 		state, reason, refs, witness, sig, cite, ticket := "", "-", "-", "-", "-", "-", "-"
 		var deciding string
 		var divIDs, diagIDs []string
@@ -563,10 +592,7 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 		case strings.HasPrefix(deciding, "xe:"):
 			source = "game"
 		}
-		cells := []string{u.Card, "-", u.Key, desc, state, reason, refs, source,
-			fmt.Sprint(len(k.agree)), fmt.Sprint(len(k.div)), witness, sig, cite, ticket,
-			dash(a.GorgeSHA), dash(a.CorpusPin), scriptSHA(u.Card), dash(a.XRef), dash(a.FRef), a.Measured, "xproof"}
-		tsv.WriteString(strings.Join(cells, "\t") + "\n")
+		tab.add(u, state, reason, refs, source, len(k.agree), len(k.div), witness, sig, cite, ticket)
 	}
 
 	// handoff.tsv and sigs/
@@ -625,7 +651,7 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 		}
 		wb.Write(b)
 	}
-	files["keyproof.tsv"] = tsv.Bytes()
+	files["keyproof.tsv"] = tab.buf.Bytes()
 	files["handoff.tsv"] = hb.Bytes()
 	files["witness.jsonl"] = wb.Bytes()
 	var names []string

@@ -10,6 +10,7 @@
 //	xengine diagnosed -split [-file oracle/xengine/diagnosed.tsv]
 //	xengine calib -play DIR -diff DIR2 -engine xmage|forge
 //	xengine xprep -play DIR -out xitems.jsonl [-manifests DIR]
+//	xengine replay-witness -witness FILE [-witness FILE ...] [-cards .cards] -measured YYYY-MM-DD [-gorge-sha SHA] -out DIR
 //	xengine adjudicate -play DIR -xmage DIFF_X -forge DIFF_F -out DIR3 [-ledger DIR] [-forge-ref REF12] [-phase DIFF_P [-phase-rows ROWS]]
 //	xengine keyproof -play DIR -xmage DIFF_X -forge DIFF_F -adjudicate DIR3 [-phase DIFF_P] [-classes oracle/xengine/diagnosed-classes.tsv] -measured YYYY-MM-DD -out DIR4
 //	xengine sweep-plan -root DIR -sets 'FDN BLB' -chunks N [-stale] [-force]
@@ -74,7 +75,7 @@ const DefaultRoot = ".oracle-build/xengine"
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|diagnosed|calib|xprep|adjudicate|keyproof|sweep-plan|pool|followers|fshadow|certdeck|scen [flags]")
+		fmt.Fprintln(os.Stderr, "usage: xengine play|diff|cov|diagnosed|calib|xprep|adjudicate|keyproof|replay-witness|sweep-plan|pool|followers|fshadow|certdeck|scen [flags]")
 		os.Exit(2)
 	}
 	var err error
@@ -95,6 +96,8 @@ func main() {
 		err = runAdjudicate(os.Args[2:])
 	case "keyproof":
 		err = runKeyproof(os.Args[2:])
+	case "replay-witness":
+		err = runReplayWitness(os.Args[2:])
 	case "sweep-plan":
 		err = runSweepPlan(os.Args[2:])
 	case "pool":
@@ -108,7 +111,7 @@ func main() {
 	case "certdeck":
 		err = runCertdeck(os.Args[2:])
 	default:
-		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, diagnosed, calib, xprep, adjudicate, keyproof, sweep-plan, pool, followers, fshadow or certdeck)", os.Args[1])
+		err = fmt.Errorf("unknown subcommand %q (want play, diff, cov, diagnosed, calib, xprep, adjudicate, keyproof, replay-witness, sweep-plan, pool, followers, fshadow or certdeck)", os.Args[1])
 	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "xengine:", err)
