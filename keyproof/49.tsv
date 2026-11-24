@@ -26,7 +26,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4924b3a4-a218-4783-8a4d-82361fdecc78	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4924b3a4-a218-4783-8a4d-82361fdecc78	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 4924b3a4-a218-4783-8a4d-82361fdecc78	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4927150d-7ff6-4232-b20e-d2ea245ac710	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:tectonic-edge:f0a1:s2,f:xs:XP:tectonic-edge:f0a1:s2	-	-	-	8c0bd19283bb	-	410467bb70d2	-	-	2026-11-24	xproof
+4927150d-7ff6-4232-b20e-d2ea245ac710	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:tectonic-edge:f0a1:s1,f:xs:XP:tectonic-edge:f0a1:s1	-	-	-	8c0bd19283bb	-	410467bb70d2	-	-	2026-11-24	xproof
 4927150d-7ff6-4232-b20e-d2ea245ac710	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4927150d-7ff6-4232-b20e-d2ea245ac710	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 492ba01e-c0fa-414c-95fd-df5b59212d2a	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -161,9 +161,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49bfecc3-6258-454e-a8fd-fc49098a0898	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pit Automaton/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49bfecc3-6258-454e-a8fd-fc49098a0898	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Pit Automaton/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49bfecc3-6258-454e-a8fd-fc49098a0898	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Pit Automaton/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-49c0aac5-d650-4ada-a194-3bf77f104bc1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ransom-note:cast:s1,f:xs:XP:ransom-note:cast:s1	-	-	-	8c0bd19283bb	-	be7d40c1ca22	-	-	2026-11-24	xproof
+49c0aac5-d650-4ada-a194-3bf77f104bc1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ransom-note:f0t0:s1,f:xs:XP:ransom-note:f0t0:s1	-	-	-	8c0bd19283bb	-	be7d40c1ca22	-	-	2026-11-24	xproof
 49c0aac5-d650-4ada-a194-3bf77f104bc1	f0/a0	Charm	agreed	-	FX	start	2	0	x:xs:XP:ransom-note:f0a0:s1,f:xs:XP:ransom-note:f0a0:s1	-	-	-	8c0bd19283bb	-	be7d40c1ca22	-	-	2026-11-24	xproof
-49c0aac5-d650-4ada-a194-3bf77f104bc1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:ransom-note:cast:s1,f:xs:XP:ransom-note:cast:s1	-	-	-	8c0bd19283bb	-	be7d40c1ca22	-	-	2026-11-24	xproof
+49c0aac5-d650-4ada-a194-3bf77f104bc1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ransom-note:f0t0:s1,f:xs:XP:ransom-note:f0t0:s1	-	-	-	8c0bd19283bb	-	be7d40c1ca22	-	-	2026-11-24	xproof
 49c47768-fcc7-4091-b06d-d8a2bd7d1cc9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crooked-scales:cast:s1,f:xs:XP:crooked-scales:cast:s1	-	-	-	5f2128bf97e4	-	f78cc44a563e	-	-	2026-11-24	xproof
 49c47768-fcc7-4091-b06d-d8a2bd7d1cc9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49c7b7c6-c8dc-4871-9103-b057d2034c3e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampire-sovereign:f0t0:s1,f:xs:XP:vampire-sovereign:f0t0:s1	-	-	-	d864b561c9cb	-	89a273c1f9be	-	-	2026-11-24	xproof
