@@ -18,7 +18,11 @@ GO_TEST_FLAGS ?= -p=2
 # 7a68b79c92 = 4142596fb7 + fork PRs #11 (enters-tapped sets tapped without a TappedEvent: Attentive Sunscribe) and #12 (a
 # static ability's conditional Custom/WhileControlled effect is not discarded on a false condition, CR 611.3a: Undercover Skrull).
 # 33704ee4fe = 7a68b79c92 + fork PR #13 (Hellfire deals 3 when no creature died, X = 0, CR 608.2c).
-XMAGE_REF  ?= 33704ee4fef60b9d2729fe24975832b9eee66a10
+# b34a601879 = the fork's gorge branch (6b07e46d8d + its earlier fixes) merged with fork PRs #10 (upstream to 4142596fb7 + Reassembling
+# Skeleton stale return), #2 (Pain 101 copied-effect target zcc), #6 (once-each-turn trigger limit across its own death: Grand Nagus Zek),
+# #8 (Biorganic Carapace player damage), #13 (Hellfire), #14 (Valiant own targeting only), #15 (Shields Up! on a Spacecraft creature),
+# #16 (Illumination LKI), #17 (Fight deals whole power, CR 701.14a); carries #11/#12 too. Every PR test green on this build.
+XMAGE_REF  ?= b34a601879ab8cdfa8b4107d672350ae6e6f638c
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -87,7 +91,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # 0791efdeb1 = becb01adc6 + each recorded coin flip result forced on its step (ForcedDieRandom arms item.coin_flips
 # beside the die rolls: nextBoolean returns the recorded result, a forced flip takes no draw, a doubled flip one per
 # result; MyRandom's CountingRandom forwards nextBoolean). Same trees as FORGE_REF ff076d4432.
-FORGE_ORACLE_REF ?= 0791efdeb19566b8e36391f3eaceaafc7a4894cd
+# 96acdef442 = 0791efdeb1 + the fork gorge PRs' engine fixes (branch wt/oracle-fork-sync-1124): #5 ChangeZone no shuffle when a
+# targeted graveyard-to-library ability chose no card (Turn the Earth), #7 PeekAndReveal clamp (Parker Luck), #9 Changeling and Devoid CDAs
+# kept under an immediate loses-all-abilities (Barkform Harvester, Emrakul's Messenger), #10 Myriad registers no empty end-of-combat
+# exile (Broodbirth Viper and kin) and ChangeZoneAll honours Shuffle$ False (Wakanda Forever!). The script-only PRs #6 (Nihil Spellbomb,
+# Declaration in Stone) and #8 (Vivien Reid, Sigarda, Sarkhan's Dragonfire) wait for gorge's FORGE_REF to move to the fork's gorge head.
+# Same trees as FORGE_REF ff076d4432.
+FORGE_ORACLE_REF ?= 96acdef44284b83670c3da9d17ab508e4691ace9
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
