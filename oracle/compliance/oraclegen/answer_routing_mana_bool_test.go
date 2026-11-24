@@ -131,15 +131,15 @@ func TestManaColourPickLeadsTriggerOrderSpan(t *testing.T) {
 	}
 
 	// A distinct-source span is not hoisted: its step keeps the shared-step
-	// demotion semantics (the name form is rewritten back to the inert text
-	// whenever the step scripts other asks, pre-existing behaviour).
+	// demotion semantics (the name form is rewritten to the rule-text keys
+	// whenever the step scripts other asks, demotedTriggerOrderAnswers).
 	distinct := order
 	distinct.PickRefs = []string{"p0:Ashling, Rimebound", "p0:Ashling, Rekindled"}
 	if !triggerOrderNamesDistinct(distinct) {
 		t.Fatal("fixture must have distinct source names")
 	}
 	got = XAnswers([]rules.OracleDecision{distinct, decline, col}, 3, nil)
-	want = [][]XAnswer{nil, nil, append(triggerOrderTextAnswers(distinct), XAnswer{0, "choice", "no"}, XAnswer{0, "choice", "White"})}
+	want = [][]XAnswer{nil, nil, append(demotedTriggerOrderAnswers(distinct), XAnswer{0, "choice", "no"}, XAnswer{0, "choice", "White"})}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("distinct-source span = %#v, want %#v", got, want)
 	}

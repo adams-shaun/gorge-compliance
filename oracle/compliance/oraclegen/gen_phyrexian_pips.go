@@ -33,6 +33,12 @@ type pipAsk struct {
 type xanswersExtra struct {
 	digs map[int]digSource
 	pips map[int][]pipAsk
+	// casts is the set of the scenario's cast step indices: a forced X
+	// announcement on one is still posed by XMage (castAnnouncesX).
+	casts map[int]bool
+	// forage maps a forage election's decision index to the graveyard
+	// cards its exile arm took (forageExiles).
+	forage map[int][]string
 }
 
 // isPipDecision reports whether d is one of gorge's ManaAsk pip decisions

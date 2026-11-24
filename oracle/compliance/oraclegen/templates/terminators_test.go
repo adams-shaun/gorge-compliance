@@ -1,7 +1,6 @@
 package templates
 
 import (
-	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
@@ -53,10 +52,13 @@ func TestGeneratedTerminatorsAndOptionalCosts(t *testing.T) {
 		},
 		{
 			// TDM Rakshasa's Bargain: one Dig decision's two card picks are
-			// ONE '^'-joined definition.
+			// ONE '^'-joined definition, on the TARGET queue: the look of four
+			// whose rest goes to the graveyard is XMage's
+			// LookLibraryAndPickControllerEffect chooseTarget
+			// (digGraveyardTakeAnswer; replayed strict-clean).
 			card: "Rakshasa's Bargain",
 			check: func(t *testing.T, it oraclegen.Item) {
-				if !hasJoined(it.XAnswers, 1, "Wastes^Wastes") {
+				if !hasAnswer(it.XAnswers, 1, "target", "Wastes^Wastes") {
 					t.Fatalf("joined dig pick missing: %+v", it.XAnswers)
 				}
 			},
@@ -144,11 +146,3 @@ func hasAnswer(xans [][]oraclegen.XAnswer, step int, kind, value string) bool {
 	return false
 }
 
-func hasJoined(xans [][]oraclegen.XAnswer, step int, joined string) bool {
-	for _, a := range stepAnswers(xans, step) {
-		if a.Kind == "choice" && strings.Contains(a.Value, "^") && a.Value == joined {
-			return true
-		}
-	}
-	return false
-}
