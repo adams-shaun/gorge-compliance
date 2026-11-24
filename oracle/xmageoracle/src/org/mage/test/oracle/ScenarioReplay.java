@@ -4416,10 +4416,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * base object, and is wiped when the adjuster runs mid-cast; the chooser
      * then asks again and the TestPlayer fails "Missing TARGET def". A queued
      * target is read by that later ask, so these casts take the queue route.
+     * A {@code ForEachPlayerTargetsAdjuster} does the same ({@code adjustTargets}
+     * clears, then adds one copy of the blueprint per player or opponent): Mass
+     * Mutiny's inline target was wiped and its "up to one" per-opponent copy,
+     * min 0, was closed with nothing picked, so the spell resolved untargeted.
      */
     static boolean replacesCastTargets(Ability ability) {
-        return ability != null
-                && ability.getTargetAdjuster() instanceof mage.target.targetadjustment.ConditionalTargetAdjuster;
+        if (ability == null) {
+            return false;
+        }
+        mage.target.targetadjustment.TargetAdjuster adjuster = ability.getTargetAdjuster();
+        return adjuster instanceof mage.target.targetadjustment.ConditionalTargetAdjuster
+                || adjuster instanceof mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
     }
 
     /** The card's spell ability, or null when the name does not resolve. */
