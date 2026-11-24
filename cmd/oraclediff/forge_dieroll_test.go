@@ -76,7 +76,9 @@ func TestForgeRolledDie(t *testing.T) {
 // This check only compares the Makefile pin to this constant; it cannot tell whether the
 // hash holds a fix. The behavioural evidence is the fork's LoneCardOrderTest (2bf0), SbaGraveyardOrderTest (c674)
 // and ModalLandPlayTest (ba5d), and that the pin resolves on origin is checked by scripts/forge-oracle-setup.sh (git ls-remote / --check-pin).
-const forgeOracleDieRollRef = "147dd2f00fc5dd087d88490bb6afde5b34bc8cb1"
+// 9e368ca172 = 147dd2f00f plus the lone forced entity pick (ScriptedController/StepMachine only), die-roll code unchanged,
+// the full driver suite (172 tests, including ForcedDieRollTest) re-run green on it.
+const forgeOracleDieRollRef = "9e368ca1724ffc266f8dd55cd34775c58d817fed"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
