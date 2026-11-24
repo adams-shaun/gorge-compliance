@@ -167,13 +167,16 @@ phase-follower-test:
 
 # The replay-determinism test needs a deck catalog; by default the two seeds that play to a natural end in
 # seconds (3 and 5) over gorge's fdn-limited decks, so `make phase-seat-test` can fail on a determinism break.
-# PHASE_SEAT_DECKS= (empty) skips it; PHASE_SEAT_SEEDS=0,1,2,3,4,5 is the full six-seed run (~12 min).
-PHASE_SEAT_DECKS ?= $(realpath $(GORGE_ROOT)/bots/spellbench/decks/fdn-limited)
+# A missing catalog is an error (a worktree whose ../gorge is not the checkout needs GORGE_ROOT=...), never a
+# silent skip; PHASE_SEAT_DECKS=none (or empty) skips the replay test on purpose.
+# PHASE_SEAT_SEEDS=0,1,2,3,4,5 is the full six-seed run (~12 min).
+PHASE_SEAT_DECKS ?= $(abspath $(GORGE_ROOT)/bots/spellbench/decks/fdn-limited)
 PHASE_SEAT_SEEDS ?= 3,5
 
 # phase-seat is the SpellBench v2 engine role over phase.rs (followers/phase/phase-seat; scripts/phase-sbv2.sh runs it).
 phase-seat-test:
-	systemd-run --user --scope -q -p MemoryMax=8G -p CPUQuota=400% env -C followers/phase CARGO_HOME=$(FOLLOWERS_CACHE)/cargo-home RUSTC=$(dir $(CARGO))rustc RUSTDOC=$(dir $(CARGO))rustdoc CARGO_TARGET_DIR=$(PHASE_ORACLE_DIR)/target PHASE_CARD_DATA=$(PHASE_ORACLE_DIR)/card-data-$(shell cut -d' ' -f2 followers/phase/PHASE_PIN).json PHASE_SEAT_DECKS=$(PHASE_SEAT_DECKS) PHASE_SEAT_SEEDS=$(PHASE_SEAT_SEEDS) RUST_MIN_STACK=16777216 $(CARGO) test --locked --profile follower -p phase-seat $(RUN)
+	@d='$(PHASE_SEAT_DECKS)'; if [ -n "$$d" ] && [ "$$d" != none ] && [ ! -d "$$d" ]; then echo "phase-seat-test: deck catalog '$$d' not found; set GORGE_ROOT=<gorge checkout> or PHASE_SEAT_DECKS=none to skip the replay test" >&2; exit 2; fi
+	systemd-run --user --scope -q -p MemoryMax=8G -p CPUQuota=400% env -C followers/phase CARGO_HOME=$(FOLLOWERS_CACHE)/cargo-home RUSTC=$(dir $(CARGO))rustc RUSTDOC=$(dir $(CARGO))rustdoc CARGO_TARGET_DIR=$(PHASE_ORACLE_DIR)/target PHASE_CARD_DATA=$(PHASE_ORACLE_DIR)/card-data-$(shell cut -d' ' -f2 followers/phase/PHASE_PIN).json PHASE_SEAT_DECKS=$(filter-out none,$(PHASE_SEAT_DECKS)) PHASE_SEAT_SEEDS=$(PHASE_SEAT_SEEDS) RUST_MIN_STACK=16777216 $(CARGO) test --locked --profile follower -p phase-seat $(RUN)
 
 # Builds the follower, then asks it which names of POOL it lacks. Comment and blank lines of the pool
 # are dropped; the names go through a temp file under .oracle-build/ (the protocol's NAMES.txt).

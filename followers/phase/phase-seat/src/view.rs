@@ -47,6 +47,13 @@ impl Ids {
         self.look.set(self.look.get() + 1);
     }
 
+    /// A new id for an object the seat saw leave and come back; `old` is the id it was minted under, `n` the
+    /// count of reissues so far in the game, so no two ids repeat.
+    pub fn reissue(&self, viewer: PlayerId, old: &str, n: u64) -> String {
+        let m = format!("reissue:{}:{}:{}", viewer.0, old, n);
+        format!("o-{}", hex(&hmac_sha256(&self.key, m.as_bytes())[..8]))
+    }
+
     pub fn object(&self, viewer: PlayerId, id: ObjectId, incarnation: u64, zone: &str) -> String {
         let look = if matches!(zone, "library" | "hand-revealed") { self.look.get() } else { 0 };
         let m = format!("{}:{}:{}:{}:{}", viewer.0, id.0, incarnation, zone, look);

@@ -166,6 +166,10 @@ struct Live {
     purpose: Option<&'static str>,
     /// Diagnostics only: per seat, the ids last shown and the ids that have left (V7).
     shown: [(std::collections::BTreeMap<String, String>, std::collections::BTreeSet<String>); 2],
+    /// Per seat: the id an object that left and came back is shown under now (V7: an id never returns).
+    alias: [std::collections::BTreeMap<String, String>; 2],
+    /// Reissued ids so far; each new id is derived from the old one and this count.
+    reissued: u64,
 }
 
 pub struct PhaseBackend {
@@ -274,14 +278,16 @@ impl PhaseBackend {
         };
         let observation = observation(&live.state, who, &live.ids, &live.looks);
         diagnose(live, who, &observation, &cands);
-        Outcome::Decision(json!({
+        let mut decision = json!({
             "acting_seat": seat(who), "seat_step": live.seat_steps[s],
             "group": {"group_id": live.groups[s], "substep_index": index, "substep_count": total},
             "context": {"kind": if family == Family::Priority { "priority" } else { "choice" },
                 "source": source, "purpose": live.purpose, "text": null, "rewind": false},
             "observation": observation,
             "candidates": cands, "extensions": {},
-        }))
+        });
+        reissue(live, who, &mut decision);
+        Outcome::Decision(decision)
     }
 
     fn terminal(&mut self) -> Outcome {
@@ -309,55 +315,91 @@ impl PhaseBackend {
     }
 }
 
-/// Diagnostics on stderr, never a filter: what the host's validator would refuse (a candidate that names an
-/// object the observation does not list, V4; an id that comes back after it left, V7).
-fn diagnose(live: &mut Live, who: PlayerId, obs: &Value, cands: &[Value]) {
-    fn ids(v: &Value, out: &mut std::collections::BTreeMap<String, String>, zone: &str) {
-        match v {
-            Value::Object(m) => {
-                if let Some(id) = m.get("object_id").and_then(Value::as_str) {
-                    out.insert(id.to_string(), format!("{} {zone}", m.get("card_name").map_or("?".to_string(), |n| n.to_string())));
-                    return;
-                }
-                for (k, x) in m {
-                    ids(x, out, k);
-                }
+/// The ids an observation shows, each with a short description (`zone` is the key the object sits under).
+fn shown_ids(v: &Value, out: &mut std::collections::BTreeMap<String, String>, zone: &str) {
+    match v {
+        Value::Object(m) => {
+            if let Some(id) = m.get("object_id").and_then(Value::as_str) {
+                out.insert(id.to_string(), format!("{} {zone}", m.get("card_name").map_or("?".to_string(), |n| n.to_string())));
+                return;
             }
-            Value::Array(a) => a.iter().for_each(|x| ids(x, out, zone)),
-            _ => {}
+            for (k, x) in m {
+                shown_ids(x, out, k);
+            }
         }
+        Value::Array(a) => a.iter().for_each(|x| shown_ids(x, out, zone)),
+        _ => {}
     }
+}
+
+/// The ids the seat's observation lists: the zones a viewer sees, the stack and the looked-at cards.
+fn observed_ids(obs: &Value) -> std::collections::BTreeMap<String, String> {
     let mut now = std::collections::BTreeMap::new();
     for p in obs["players"].as_array().into_iter().flatten() {
         for z in ["hand", "battlefield", "graveyard", "exile", "command"] {
-            ids(&p[z], &mut now, z);
+            shown_ids(&p[z], &mut now, z);
         }
     }
-    ids(&obs["stack"], &mut now, "stack");
-    ids(&obs["known"], &mut now, "known");
+    shown_ids(&obs["stack"], &mut now, "stack");
+    shown_ids(&obs["known"], &mut now, "known");
+    now
+}
+
+/// Diagnostics on stderr, never a filter: a candidate that names an object the observation does not list (V4).
+fn diagnose(live: &mut Live, _who: PlayerId, obs: &Value, cands: &[Value]) {
+    let now = observed_ids(obs);
     let waiting = classify(&live.state.waiting_for).0;
     for c in cands {
         let mut refs = std::collections::BTreeMap::new();
-        ids(&c["semantic"], &mut refs, "candidate");
+        shown_ids(&c["semantic"], &mut refs, "candidate");
         for (id, what) in refs {
             if !now.contains_key(&id) {
                 eprintln!("phase-seat: diagnose V4 {waiting}: candidate {} names {id} ({what}), not in the observation", c["semantic"]["kind"]);
             }
         }
     }
-    let (prev, departed) = &mut live.shown[who.0 as usize];
-    for (id, what) in &now {
-        if departed.contains(id) {
-            eprintln!("phase-seat: diagnose V7 {waiting}: {id} ({what}) returned after leaving; it was last shown as {}", prev.get(id).map_or("?", String::as_str));
+}
+
+/// V7: an object id that left the seat's view never comes back. A cancelled cast puts the card back in
+/// the hand it left (phase rolls the cast back), and any other rollback or return does the same; the
+/// object is then a new one to the seat, so it is shown under a fresh id from here on. `decision` is the
+/// whole decision (observation, candidates and context source), rewritten in place; the seat's ids are
+/// tracked by their first-minted form, so an alias is stable for as long as the object stays in view.
+fn reissue(live: &mut Live, who: PlayerId, decision: &mut Value) {
+    let s = who.0 as usize;
+    let now = observed_ids(&decision["observation"]);
+    let (prev, departed) = &mut live.shown[s];
+    for id in now.keys() {
+        if departed.remove(id) {
+            live.reissued += 1;
+            let fresh = live.ids.reissue(who, id, live.reissued);
+            live.alias[s].insert(id.clone(), fresh);
         }
     }
-    for (id, what) in prev.iter() {
+    for id in prev.keys() {
         if !now.contains_key(id) {
             departed.insert(id.clone());
-            let _ = what;
         }
     }
     *prev = now;
+    let alias = &live.alias[s];
+    if !alias.is_empty() {
+        rewrite_ids(decision, alias);
+    }
+}
+
+/// Replaces every string equal to an aliased id (ids sit under `object_id`).
+fn rewrite_ids(v: &mut Value, alias: &std::collections::BTreeMap<String, String>) {
+    match v {
+        Value::String(x) => {
+            if let Some(a) = alias.get(x.as_str()) {
+                *x = a.clone();
+            }
+        }
+        Value::Array(a) => a.iter_mut().for_each(|x| rewrite_ids(x, alias)),
+        Value::Object(m) => m.values_mut().for_each(|x| rewrite_ids(x, alias)),
+        _ => {}
+    }
 }
 
 fn truncated(reason: &str, decisions: u64) -> Outcome {
@@ -716,6 +758,17 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
             let contract = AiDecisionContract::issue(&live.state, who);
             let mut seen = std::collections::BTreeSet::new();
             for c in &contract.candidates {
+                // A mana ability that is not a land tap (a Treasure, a creature that taps for mana): the same
+                // `activate_mana_ability`, with no colour to name (the source's own ability makes it).
+                if let GameAction::ActivateAbility { source_id, ability_index, .. } = &c.action {
+                    if let Some(src) = shown_ref(&live.state, &live.ids, who, *source_id) {
+                        let semantic = sem::activate_mana_ability(src, *ability_index as u32, None, None);
+                        if seen.insert(canonical(&semantic)) {
+                            cands.push(Cand { semantic, effect: Effect::Act(c.action.clone()) });
+                        }
+                    }
+                    continue;
+                }
                 let GameAction::TapLandForMana { selection } = &c.action else {
                     let d = format!("{:?}", c.action);
                     let name = d.split(|ch: char| !ch.is_alphanumeric()).next().unwrap_or("?").to_string();
@@ -1057,6 +1110,8 @@ impl Backend for PhaseBackend {
             looks: vec![],
             purpose: None,
             shown: Default::default(),
+            alias: Default::default(),
+            reissued: 0,
         });
         Ok(self.pose())
     }
@@ -1157,4 +1212,35 @@ fn step_group(live: &mut Live, who: PlayerId, actor: PlayerId, sub: Sub) -> Resu
         Plan::Order { placed, .. } => GameAction::OrderTriggers { order: placed },
     };
     apply_now(live, actor, action)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// V7: an aliased id is replaced wherever it sits (observation, candidates, context source), and an id
+    /// that has no alias is left alone.
+    #[test]
+    fn rewrite_ids_replaces_every_occurrence_of_an_aliased_id() {
+        let mut alias = std::collections::BTreeMap::new();
+        alias.insert("o-old".to_string(), "o-new".to_string());
+        let mut v = json!({
+            "context": {"source": {"object_id": "o-old"}},
+            "observation": {"players": [{"hand": [{"object_id": "o-old"}, {"object_id": "o-keep"}]}]},
+            "candidates": [{"semantic": {"source": {"object_id": "o-old"}}}],
+        });
+        rewrite_ids(&mut v, &alias);
+        let s = canonical(&v);
+        assert!(!s.contains("o-old"), "{s}");
+        assert_eq!(s.matches("o-new").count(), 3);
+        assert_eq!(s.matches("o-keep").count(), 1);
+    }
+
+    #[test]
+    fn observed_ids_lists_the_viewers_zones_and_the_stack() {
+        let obs = json!({"players": [{"hand": [{"object_id": "a", "card_name": "X"}], "library": [{"object_id": "hidden"}]}],
+            "stack": [{"object_id": "s"}], "known": []});
+        let ids: Vec<String> = observed_ids(&obs).into_keys().collect();
+        assert_eq!(ids, vec!["a".to_string(), "s".to_string()]);
+    }
 }
