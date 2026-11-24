@@ -166,23 +166,29 @@ if [ "$mode" = preflight ]; then
   ' | sort -u)
   # funny_has NAME: 0 when NAME is one of the edition names StaticData filters.
   funny_has() { [ -n "$funny" ] && grep -qxF -e "$1" <<<"$funny"; }
-  # funny_face NAME: 0 when NAME is the first face of a joined "NAME // other"
-  # the filter drops. A scenario may name a split card by its bare first face
-  # (Knowing, for Knowing // Half the Battle); the editions list only the
-  # joined name, so funny_has alone never sees it.
-  # Forge's filter is exact on the joined name, so a bare name that is ALSO a
-  # standalone cardsfolder card (Bind, Smelt: Mystery Booster Playtest's
-  # "Bind // Liberate" and "Smelt // Herd // Saw" rows) still loads; only a
-  # bare name defined solely as a face of a multi-face file (an AlternateMode:
-  # line) is refused.
+  # funny_face NAME: 0 when a scenario's bare NAME can only be the first face
+  # of a split card the filter drops. A scenario may name a split by its bare
+  # first face (Knowing, for Knowing // Half the Battle); the editions list only
+  # the joined name, so funny_has alone never sees it.
+  # Decide from the card files, not a name prefix: Forge's filter is exact on
+  # the joined name, and a bare name can be defined by several files. Each file
+  # with a "Name:NAME" line is judged by its own joined name (its Name: lines in
+  # order, joined with " // "). The bare name is refused only when EVERY such
+  # file is a multi-face card whose first face is NAME and whose joined name is
+  # filtered. A standalone card (Bind beside the Funny "Bind // Liberate") or a
+  # legal split (Start // Finish beside the Funny "Start // Fire") still loads,
+  # so any one of those accepts the name.
   funny_face() {
     [ -n "$funny" ] || return 1
-    awk -v p="$1 // " 'index($0, p) == 1 { f = 1 } END { exit !f }' <<<"$funny" || return 1
-    local f
+    local f joined any=1
     while IFS= read -r f; do
       grep -q '^AlternateMode:' "$f" || return 1
-    done < <(grep -rlxF -e "Name:$1" "$cardsfolder" 2>/dev/null)
-    return 0
+      joined=$(awk '/^Name:/ { v = $0; sub(/^Name:/, "", v); sub(/\r$/, "", v); j = (j == "" ? v : j " // " v) } END { print j }' "$f")
+      [ "${joined%%" // "*}" = "$1" ] || return 1
+      funny_has "$joined" || return 1
+      any=0
+    done < <(grep -rlxF -e "Name:$1" "$cardsfolder" 2>/dev/null | sort)
+    return $any
   }
   while IFS= read -r n; do
     [ -n "$n" ] || continue
