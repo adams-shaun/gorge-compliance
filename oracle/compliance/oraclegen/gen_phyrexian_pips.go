@@ -54,6 +54,10 @@ type xanswersExtra struct {
 	// election, which XMage's BolsterEffect asks through chooseTarget
 	// (bolster_pick.go).
 	bolster map[int]bool
+	// supports maps a Support counter_pick decision index to the target
+	// answers XMage asks at the source's announcement, not at resolution
+	// (support_pick.go). A present key is owned by that route.
+	supports map[int]supportAnswers
 	// snaps is the gorge result's checkpoints: the destination of a
 	// hand_move/library_placement decision is not a field, so the answer
 	// router re-derives a top placement from the after-step library top.

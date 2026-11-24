@@ -1619,6 +1619,14 @@ func colourPicks(reg *cards.Registry, mr game.ManaRec) []string {
 	if sa == nil {
 		return nil
 	}
+	// A mana ability whose Produced$ sits on a DB$ Mana sub-ability (Empowered
+	// Autogenerator: AB$ PutCounter | SubAbility$ DBMana) carries the colour
+	// ask there; the head's own Params name no colour.
+	if !cards.IsManaAbilityAPI(sa.API) {
+		if sub := cards.ManaChainProduction(sa); sub != nil {
+			sa = sub
+		}
+	}
 	produced := effects.ManaOf(sa).Produced
 	if _, combo := effects.ComboColours(produced); combo {
 		var out []string
