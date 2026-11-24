@@ -603,6 +603,40 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return false;
         }
 
+        /** Expand the front choice when oraclegen joined a multi-pick choose
+         * with "^" (JoinedChoice): each segment is one pick, resolved the way
+         * the single-answer path resolves a value (an "@ref" alias is bound
+         * and kept, a bare ref becomes its alias, a plain label is unchanged).
+         * Null when the front choice is not joined, so callers can use the
+         * queue as the pick list unchanged. */
+        private List<String> joinedChoiceSegments() {
+            if (getChoices().isEmpty()) {
+                return null;
+            }
+            String front = getChoices().get(0);
+            if (front == null || front.indexOf('^') < 0) {
+                return null;
+            }
+            List<String> segments = new ArrayList<>();
+            for (String segment : front.split("\\^")) {
+                segments.add(resolveDelvePick(segment));
+            }
+            return segments;
+        }
+
+        /** One "^" segment of a joined answer as the choice queue would hold
+         * it on its own: strip the "@" alias marker to find the ref, then let
+         * the answer path bind it and map it to its target spelling (an
+         * already-aliased ref comes back as its alias). A non-ref label is
+         * unchanged. */
+        private String resolveDelvePick(String segment) {
+            String ref = segment.startsWith("@") ? segment.substring(1) : segment;
+            if (owner != null && isScenarioRef(ref)) {
+                return owner.aliasChoiceValue(ref);
+            }
+            return segment;
+        }
+
         /** Translate gorge's recorded Delve exile picks (CR 702.66a: one
          * choose_n pick per exiled card, the bare card name; the ask's
          * trailing [choice_skip] is the Done option) at the front of the
@@ -619,9 +653,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * cycle, where XMage re-adds the action, as gorge re-poses its ask
          * per pick. Taken only when the Delve special action lists a card of
          * the front answer's name among its legal (graveyard) targets; false
-         * (nothing queued) otherwise. */
+         * (nothing queued) otherwise.
+         * <p>
+         * oraclegen scripts a multi-pick choose as ONE makeChoose answer, with
+         * its picks joined by "^" (see JoinedChoice in gen.go). The front
+         * answer is expanded into its individual picks before matching, and
+         * the picks this activation cannot take stay on the queue as separate
+         * entries for the next payment cycle. */
         private boolean queueDelveAction(Game game,
                 java.util.Collection<mage.abilities.SpecialAction> actions) {
+            // A joined answer is still one queue entry until a Delve action
+            // accepts a pick: only commit the split once something matched, so
+            // a non-Delve front answer is left exactly as it was.
+            List<String> joined = joinedChoiceSegments();
             for (mage.abilities.SpecialAction action : actions) {
                 // The class is the stable identity: the rule text leads with
                 // the exile cost, so it never starts with "Delve".
@@ -637,11 +681,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
                 mage.target.Target target = targets.get(0);
                 Set<UUID> legal = target.possibleTargets(getId(), action, game);
+                List<String> picks = joined != null ? joined : getChoices();
                 List<String> picked = new ArrayList<>();
                 Set<UUID> used = new java.util.HashSet<>();
-                while (picked.size() < getChoices().size() && used.size() < legal.size()
+                while (picked.size() < picks.size() && used.size() < legal.size()
                         && picked.size() < target.getMaxNumberOfTargets()) {
-                    String name = getChoices().get(picked.size());
+                    String name = picks.get(picked.size());
                     UUID found = null;
                     for (UUID id : legal) {
                         if (!used.contains(id)
@@ -658,6 +703,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
                 if (picked.isEmpty()) {
                     continue;
+                }
+                if (joined != null) {
+                    // Replace the one joined answer with its picks now that the
+                    // action has taken some: the leading picks are removed
+                    // below, so the rest remain queued one per entry for the
+                    // next payment cycle.
+                    getChoices().remove(0);
+                    for (int i = joined.size() - 1; i >= 0; i--) {
+                        getChoices().add(0, joined.get(i));
+                    }
                 }
                 for (int i = 0; i < picked.size(); i++) {
                     getChoices().remove(0);
