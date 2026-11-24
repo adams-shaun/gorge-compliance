@@ -166,6 +166,11 @@ if [ "$mode" = preflight ]; then
   ' | sort -u)
   # funny_has NAME: 0 when NAME is one of the edition names StaticData filters.
   funny_has() { [ -n "$funny" ] && grep -qxF -e "$1" <<<"$funny"; }
+  # funny_face NAME: 0 when NAME is the first face of a joined "NAME // other"
+  # the filter drops. A scenario may name a split card by its bare first face
+  # (Knowing, for Knowing // Half the Battle); the editions list only the
+  # joined name, so funny_has alone never sees it.
+  funny_face() { [ -n "$funny" ] && awk -v p="$1 // " 'index($0, p) == 1 { f = 1 } END { exit !f }' <<<"$funny"; }
   while IFS= read -r n; do
     [ -n "$n" ] || continue
     # A name resolves when its own Name: line is in the cardsfolder, or (a
@@ -184,9 +189,11 @@ if [ "$mode" = preflight ]; then
     # joined "main // other" (CardRules.getPreInitName), and an adventure/MDFC
     # by its main face; the editions list each the same way, but the corpus
     # names both jointly. Refuse when the joined name or its first face is in
-    # the filtered set.
+    # the filtered set; a bare first face is refused when the filtered set
+    # holds a joined name that starts with it.
     first=${n%%" // "*}
-    if funny_has "$n" || { [ "$first" != "$n" ] && funny_has "$first"; }; then
+    if funny_has "$n" || { [ "$first" != "$n" ] && funny_has "$first"; } ||
+       { [ "$first" = "$n" ] && funny_face "$n"; }; then
       printf '%s\t%s\n' "$n" "in the pinned cardsfolder but filtered from Forge's card DB (Funny/Silver-border edition card)"
     fi
   done < "$names"

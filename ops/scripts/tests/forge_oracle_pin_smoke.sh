@@ -187,7 +187,7 @@ printf '[metadata]\nCode=MB2\nName=Mystery Booster 2\nType=Funny\n\n[eternal]\n1
 printf '[metadata]\nCode=UNH\nName=Unhinged\nType=Expansion\nBorder=Silver\n\n[cards]\n1 C Indicate @Artist\n' > "$TMP/clone/forge-gui/res/editions/Unhinged.txt"
 printf '[metadata]\nCode=M10\nName=Magic 2010\nType=Core\n\n[cards]\n1 C Grizzly Bears @Artist\n' > "$TMP/clone/forge-gui/res/editions/Magic 2010.txt"
 : > "$LOG"
-printf 'Grizzly Bears\nGobland\nIndicate\nMox Poison\nFire // Ice\nBonecrusher Giant // Stomp\nKnowing // Half the Battle\nCurious Pair // Treats to Share\nFire // Nonesuch\nMardu Outrider\nPlains\nNo Such Card\n' > "$TMP/names.txt"
+printf 'Grizzly Bears\nGobland\nIndicate\nMox Poison\nFire // Ice\nBonecrusher Giant // Stomp\nKnowing // Half the Battle\nKnowing\nCurious Pair // Treats to Share\nFire // Nonesuch\nMardu Outrider\nPlains\nNo Such Card\n' > "$TMP/names.txt"
 out=$("$RUN" --preflight "$TMP/names.txt" 2>"$TMP/pf.err"); rc=$?
 tab=$'\t'
 check "preflight exits 0 on a good pin" $((rc == 0 ? 0 : 1)) "rc=$rc $(cat "$TMP/pf.err")"
@@ -209,6 +209,8 @@ check "     ...including the adventure" \
 	$(printf '%s\n' "$out" | /usr/bin/grep -q "Bonecrusher Giant // Stomp" && echo 1 || echo 0) "$out"
 check "  ...refusing a split a Funny edition names joined (Knowing // Half the Battle)" \
 	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Knowing // Half the Battle${tab}${filt}" && echo 0 || echo 1) "$out"
+check "  ...refusing a split named by its bare first face (Knowing)" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Knowing${tab}${filt}" && echo 0 || echo 1) "$out"
 check "  ...refusing an adventure whose main face a Funny edition names (Curious Pair)" \
 	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Curious Pair // Treats to Share${tab}${filt}" && echo 0 || echo 1) "$out"
 reached; check "  ...before javac, java or scope" $((! $? ))

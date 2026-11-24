@@ -29,7 +29,7 @@ func TestForgeExportRefusesUnknownCard(t *testing.T) {
 	dir := t.TempDir()
 	namesCopy := filepath.Join(dir, "names-seen.txt")
 	t.Setenv("FAKE_NAMES_COPY", namesCopy)
-	t.Setenv("FAKE_REFUSE", "Gobland|Indicate|Mox Poison")
+	t.Setenv("FAKE_REFUSE", "Gobland|Indicate|Knowing|Mox Poison")
 	scen := filepath.Join(dir, "items.jsonl")
 	item := func(id, zone, card, other string) string {
 		s := `{"id":"` + id + `","card":"` + card + `","template":"hand","setup":{"p0":{"` + zone + `":["` + card + `"]}`
@@ -43,6 +43,7 @@ func TestForgeExportRefusesUnknownCard(t *testing.T) {
 	items := item("gob", "battlefield", "Gobland", "") +
 		item("ind", "hand", "Indicate", "") +
 		item("mox", "hand", "Mox Poison", "") +
+		item("know", "hand", "Knowing", "") +
 		item("shock", "hand", "Shock", "Grizzly Bears")
 	if err := os.WriteFile(scen, []byte(items), 0o644); err != nil {
 		t.Fatal(err)
@@ -52,11 +53,11 @@ func TestForgeExportRefusesUnknownCard(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if st.Items != 4 || st.Sent != 1 || st.Refused != 3 || st.Asked != 5 || st.Lacking != 3 {
-		t.Errorf("stats = %+v, want 4 items, 1 sent, 3 refused, 5 asked, 3 lacking", st)
+	if st.Items != 5 || st.Sent != 1 || st.Refused != 4 || st.Asked != 6 || st.Lacking != 4 {
+		t.Errorf("stats = %+v, want 5 items, 1 sent, 4 refused, 6 asked, 4 lacking", st)
 	}
 	names, _ := os.ReadFile(namesCopy)
-	if got, want := string(names), "Gobland\nGrizzly Bears\nIndicate\nMox Poison\nShock\n"; got != want {
+	if got, want := string(names), "Gobland\nGrizzly Bears\nIndicate\nKnowing\nMox Poison\nShock\n"; got != want {
 		t.Errorf("names file = %q, want %q", got, want)
 	}
 
@@ -76,6 +77,7 @@ func TestForgeExportRefusesUnknownCard(t *testing.T) {
 		{ID: "gob", Reason: "forge_lacks_card", Detail: "Gobland: not in the fake database"},
 		{ID: "ind", Reason: "forge_lacks_card", Detail: "Indicate: not in the fake database"},
 		{ID: "mox", Reason: "forge_lacks_card", Detail: "Mox Poison: not in the fake database"},
+		{ID: "know", Reason: "forge_lacks_card", Detail: "Knowing: not in the fake database"},
 	}
 	if !reflect.DeepEqual(ref, want) {
 		t.Errorf("prep rows = %+v, want %+v", ref, want)
