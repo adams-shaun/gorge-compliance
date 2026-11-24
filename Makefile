@@ -120,7 +120,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # counter_upto regression fixture/test covers it, and the params chooseBinary comment now states the miss it
 # really records. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
 # fix/xp-forge-driver-counter-blight-piles.
-FORGE_ORACLE_REF ?= c92f40d4f4920abbf59ddb0f8dbebb971283f3e3
+# ff02f60e839 = c92f40d4f49 + the three forced / out-of-window asks xproof found. chooseCardsToDiscardUnlessType
+# asks min..min when no unless-type card is in hand, so Alpharael's two-card hand is taken as the forced discard
+# (the old lower bound of 1 read it as 1..2 over two options); pickObjects answers a 0..0 ask with the empty pick,
+# so Death Cloud cast with X = 0 sacrifices none of its Swamps instead of missing at 3 options; and miss() notes and
+# answers asks that arrive after the last step's priority, when the following pass resolves a spell the last step
+# left on the stack (Coil and Catch's discard after the Marang item ends). ForcedAskTest replays the three xproof
+# requests in strict mode. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
+# fix/xp-forge-driver-forced-tail-asks, based on c92f40d4f49.
+FORGE_ORACLE_REF ?= ff02f60e839df95e90f5241ebf10a423ed0f50ff
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
