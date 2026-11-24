@@ -11,8 +11,8 @@ import (
 // that carries BOTH a recorded coin flip and a shared-step trigger order:
 // the flips prepend runs AFTER demoteTriggerOrderSpans, whose span start/count
 // were recorded against the loop's pre-prepend indices. A prepend first would
-// shift every span index onto the step's other answers and splice the inert
-// text over them -- the scripted target answer dropped, the unconsumable
+// shift every span index onto the step's other answers and splice the demoted
+// keys over them -- the scripted target answer dropped, the unconsumable
 // trigger-order names left live in its place.
 func TestFlipLeadsDemotedSharedStep(t *testing.T) {
 	order := triggerOrderDecision(1, "p0:Adrenaline Jockey", "p0:Rangers' Refueler")
@@ -37,7 +37,7 @@ func TestFlipLeadsDemotedSharedStep(t *testing.T) {
 	want := [][]XAnswer{
 		nil,
 		{{0, "flip", "win"}, {0, "target", "Wastes"},
-			{0, "choice", "When this enters, do a thing."}, {0, "choice", "When this enters, do another thing."}},
+			{0, "choice", "When this enters, do a thing."}},
 	}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("xanswersSetup = %#v, want %#v (flip leads; the scripted target survives the demote splice)", got, want)

@@ -57,10 +57,13 @@ func TestXAnswersQueueRoutingShapes(t *testing.T) {
 			want: []XAnswer{{0, "choice", "Swamp"}, {0, "choice", "Plains"}, {0, "choice", "Island"}},
 		},
 		{
-			// The all-to-bottom Dig remainder keeps gorge's answer order.
-			name: "arrange dig bottom remainder: picks in order",
+			// The all-to-bottom Dig remainder keeps gorge's answer order, but
+			// XMage's bottom loop asks N-1 times and places the last card
+			// unasked (xproof: Growing Rites of Itlimoc's fourth "Forest"
+			// was left over), so the last pick is not scripted.
+			name: "arrange dig bottom remainder: picks in order but the last",
 			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "order", GorgeKind: "arrange", Resume: "dig_arrange", ArrangeKind: "dig_bottom", Options: 4, Min: 4, Max: 4, Picks: []string{"Forest", "Island", "Plains", "Swamp"}, PickIdx: []int{0, 1, 2, 3}, PickKinds: []string{"dig_bottom", "dig_bottom", "dig_bottom", "dig_bottom"}},
-			want: []XAnswer{{0, "choice", "Forest"}, {0, "choice", "Island"}, {0, "choice", "Plains"}, {0, "choice", "Swamp"}},
+			want: []XAnswer{{0, "choice", "Forest"}, {0, "choice", "Island"}, {0, "choice", "Plains"}},
 		},
 		{
 			// One card: XMage's loop runs while cards.size() > 1, so it asks nothing.
@@ -307,12 +310,23 @@ func TestXAnswersQueueRoutingShapes(t *testing.T) {
 // TestYesNoRequiresAnEngineBoolean proves yesNo accepts the engine's own
 // boolean kinds (yes/no) and the measured chooseUse families (optional
 // additional cost, gift, primary), and rejects every other labelled pick --
-// an endure or activation choice is a real makeChoose (measured: Dusyut
-// Earthcarver, Phantom Interference agree only with the label).
+// an activation choice is a real makeChoose (measured: Phantom Interference
+// agrees only with the label). Endure is XMage's text-choice chooseUse, which
+// TestPlayer answers only with Yes/No (xproof strict replay of Dusyut
+// Earthcarver: "Use Yes/No in unit tests for text choices"): counters are
+// yes, the Spirit no.
 func TestYesNoRequiresAnEngineBoolean(t *testing.T) {
 	valid := rules.OracleDecision{Options: 2, Picks: []string{"Yes"}, PickRefs: []string{"Yes"}, PickIdx: []int{0}, PickKinds: []string{"yes"}}
 	if got, ok := yesNo(valid); !ok || got != "yes" {
 		t.Fatalf("yesNo(exact yes) = %q, %v; want yes", got, ok)
+	}
+	counters := rules.OracleDecision{Options: 2, Picks: []string{"Put +1/+1 counters on it"}, PickRefs: []string{"p0:Dusyut Earthcarver"}, PickIdx: []int{0}, PickKinds: []string{"endure_counters"}}
+	if got, ok := yesNo(counters); !ok || got != "yes" {
+		t.Fatalf("yesNo(endure counters) = %q, %v; want yes", got, ok)
+	}
+	spirit := rules.OracleDecision{Options: 2, Picks: []string{"Create a Spirit"}, PickRefs: []string{"p0:Dusyut Earthcarver"}, PickIdx: []int{1}, PickKinds: []string{"endure_spirit"}}
+	if got, ok := yesNo(spirit); !ok || got != "no" {
+		t.Fatalf("yesNo(endure spirit) = %q, %v; want no", got, ok)
 	}
 	for name, d := range map[string]rules.OracleDecision{
 		"card type":     {Options: 2, Picks: []string{"Artifact"}, PickRefs: []string{"Artifact"}, PickIdx: []int{0}, PickKinds: []string{"type"}},
@@ -320,7 +334,6 @@ func TestYesNoRequiresAnEngineBoolean(t *testing.T) {
 		"empty label":   {Options: 2, Picks: []string{""}, PickRefs: []string{"p0:Wastes#27"}, PickIdx: []int{0}, PickKinds: []string{"card"}},
 		"legacy label":  {Options: 2, Picks: []string{"Yes — discard"}, PickRefs: []string{"Yes — discard"}, PickIdx: []int{0}},
 		"activate":      {Options: 2, Picks: []string{"Activate Llanowar Elves for mana"}, PickRefs: []string{"p0:Llanowar Elves"}, PickIdx: []int{0}, PickKinds: []string{"activate"}},
-		"endure":        {Options: 2, Picks: []string{"Put +1/+1 counters on it"}, PickRefs: []string{"p0:Dusyut Earthcarver"}, PickIdx: []int{0}, PickKinds: []string{"endure_counters"}},
 		"three options": {Options: 3, Picks: []string{"Yes"}, PickRefs: []string{"Yes"}, PickIdx: []int{0}, PickKinds: []string{"yes"}},
 		"two picks":     {Options: 2, Picks: []string{"Yes", "No"}, PickRefs: []string{"Yes", "No"}, PickIdx: []int{0, 1}, PickKinds: []string{"yes", "no"}},
 	} {

@@ -115,7 +115,7 @@ func TestScenFixtures(t *testing.T) {
 		{"Aggressive Mammoth", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "no-generator:static"}},
 		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "refused", reason: "no-generator:combat"}},
 		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "as-enters"}},
-		{"Gatekeeper of Malakir", "f0/t0", want{path: "refused", reason: "history:kicked"}, want{path: "refused", reason: "history:kicked"}},
+		{"Gatekeeper of Malakir", "f0/t0", want{path: "start", check: gatekeeper}, want{path: "start", check: gatekeeper}},
 	}
 	for _, r := range rows {
 		for _, prefer := range []string{"auto", "start"} {
@@ -290,6 +290,63 @@ func TestStartForcedPlacements(t *testing.T) {
 						t.Errorf("%s listed on the battlefield: %s", n, why)
 					}
 				}
+			}
+		})
+	}
+}
+
+// gatekeeper: "if it was kicked" is met by the line itself, a kicked cast:
+// lands for {B}{B} and the kicker {B}, and the focus takes the kicked option.
+func gatekeeper(t *testing.T, f *StartFile) {
+	listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Gatekeeper of Malakir"})
+	listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, rep("Swamp", 3))
+	focusIs(t, f, 0, "Gatekeeper of Malakir", "cast", 0)
+	if f.Focus.Mode != "kicked" {
+		t.Errorf("focus mode %q, want kicked", f.Focus.Mode)
+	}
+}
+
+// TestStartHistoryAndCounters: a counters need is placed counters (on an inert
+// bearer when the card is not on the battlefield), a cast-history key is the
+// focus's own cast of the card from hand, and a narrower cast history the
+// line cannot produce stays refused by name.
+func TestStartHistoryAndCounters(t *testing.T) {
+	reg, b := testBuilder(t)
+	rows := []struct {
+		card, key, reason string
+		hand, bf          []string
+		counters          []StartCounter
+	}{
+		{card: "Badgermole", key: "f0/t0", hand: []string{"Badgermole"},
+			bf: cat(rep("Forest", 5), []string{"Wall of Stone"}), counters: []StartCounter{{Card: "Wall of Stone", Kind: "P1P1", N: 1}}},
+		{card: "North Wind Avatar", key: "f0/t0", hand: []string{"North Wind Avatar"},
+			bf: cat(rep("Island", 4), []string{"Mountain"})},
+		// "Card.wasCastByYou+Self": Self is not the first property
+		{card: "Weftwalking", key: "f0/t0", hand: []string{"Weftwalking"}, bf: rep("Island", 6)},
+		{card: "Spiders-Man, Heroic Horde", key: "f0/t0", reason: "history:websling"},
+		{card: "Rocket-Powered Goblin Glider", key: "f0/t0", reason: "history:castfrom"},
+	}
+	for _, r := range rows {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if r.reason != "" {
+				if res.Path != PathRefused || res.Reason != r.reason {
+					t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, r.reason)
+				}
+				return
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			focusIs(t, f, 0, r.card, "cast", 0)
+			listIs(t, "p0 hand", f.Setup.P0.Hand, r.hand)
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, r.bf)
+			if !reflect.DeepEqual(f.Setup.P0.Counters, r.counters) {
+				t.Errorf("p0 counters %+v, want %+v", f.Setup.P0.Counters, r.counters)
 			}
 		})
 	}

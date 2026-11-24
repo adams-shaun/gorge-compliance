@@ -596,6 +596,9 @@ func digTakeShape(d rules.OracleDecision) bool {
 // shape-only fallback the unthreaded XAnswers callers rely on).
 func (r *answerRouting) digTargetAnswer(i int) string {
 	d := r.ds[i]
+	if a := r.digGraveyardTakeAnswer(i); a != "" {
+		return a
+	}
 	if !digTakeShape(d) {
 		return ""
 	}
@@ -619,6 +622,34 @@ func (r *answerRouting) digTargetAnswer(i int) string {
 	default:
 		return d.Picks[0]
 	}
+}
+
+// digGraveyardTakeAnswer is the target-queue answer for the take of a
+// fixed-size look of three or more whose rest goes to the graveyard, or ""
+// for any other decision. The step's source must resolve to Digs that agree on
+// a Graveyard second destination (digSource.known). XMage's
+// LookLibraryAndPickControllerEffect selects the taken cards (its first
+// destination, gorge's pick) through chooseTarget over a TargetCard, the
+// TARGET queue, however many it takes: measured on Sage of Days (look at
+// three, up to one back on top) and Polygraph Orb (look at four, two to hand),
+// whose choice-queue answers strict-missed "Missing TARGET def" and were left
+// over. Several picks are one "^"-joined target, which TestPlayer's
+// cards-list chooseTarget splits.
+func (r *answerRouting) digGraveyardTakeAnswer(i int) string {
+	d := r.ds[i]
+	if d.Resume != "dig" || len(d.Picks) == 0 || d.Options < 3 || len(d.Picks) >= d.Options {
+		return ""
+	}
+	for k, p := range d.Picks {
+		if pickKind(d, k) != "dig" || digBottomName(p) != "" {
+			return ""
+		}
+	}
+	src, ok := r.digSources[d.Step]
+	if !ok || !src.known || src.dynamic || !strings.EqualFold(src.second, "Graveyard") {
+		return ""
+	}
+	return strings.Join(d.Picks, "^")
 }
 
 // declinedChoice is a generic effect ask ("choose up to N") gorge answered
@@ -698,6 +729,17 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// XMage still asks the cost's own pick (TargetCardInHand "discard
 		// cost", TargetSacrifice) through makeChoose, by name.
 		return append(as, XAnswer{d.Seat, "choice", oraclediffRefName(d.ObjectPicks[0])}), true
+	case r.emptyPoolConfirm(i):
+		// Forge's Optional$ confirmation gorge poses even over an empty pool
+		// (effects' hidden-pick and hand-move walks: "even when this player's
+		// eligible pool turns out empty"), accepted, with no pick after it:
+		// there was nothing to pick. XMage's effect asks only when it has a
+		// candidate (Specter of Mortality's "you may exile one or more
+		// creature cards" over a graveyard with none, Severance Priest's
+		// "you may choose a nonland card" from a target opponent's empty
+		// hand), so the "Yes" would be left over: "(Choices of PlayerA)
+		// Count are not equal".
+		return nil, true
 	case d.Resume == "hidden_pick_confirm" && len(d.Picks) == 1 && pickKind(d, 0) == "yes" && r.upToPickFollows(i):
 		// Forge's Optional$ confirmation before an "up to one" pick: XMage's
 		// ReturnCardChosenFromGraveyardEffect has the up-to-one target only.
@@ -1019,6 +1061,61 @@ func (r *answerRouting) firstDigSeat(i int) int {
 		}
 	}
 	return r.ds[i].Seat
+}
+
+// emptyPoolConfirm reports an accepted Optional$ confirmation (effects'
+// "hidden_pick_confirm", or a "hand_move_confirm" over a hand the same step
+// targeted another player for) that no pick by the same asker follows in the
+// step: gorge found nothing to pick. A confirmation over the asker's own hand
+// is not one: XMage's PutCardFromHandOntoBattlefieldEffect asks its chooseUse
+// ("Put a land card from your hand onto the battlefield?") whatever the hand
+// holds (PuPu UFO, Akul the Unrepentant agree strict only with the "yes").
+func (r *answerRouting) emptyPoolConfirm(i int) bool {
+	d := r.ds[i]
+	if len(d.Picks) != 1 || pickKind(d, 0) != "yes" || r.laterAskSameStep(i) {
+		return false
+	}
+	switch d.Resume {
+	case "hidden_pick_confirm":
+		return true
+	case "hand_move_confirm":
+		return r.targetedOtherPlayer(i)
+	}
+	return false
+}
+
+// targetedOtherPlayer reports an earlier decision of the same asker in the
+// same step that targeted a player other than the asker ("target opponent
+// reveals their hand").
+func (r *answerRouting) targetedOtherPlayer(i int) bool {
+	d := r.ds[i]
+	for j := i - 1; j >= 0 && r.ds[j].Step == d.Step; j-- {
+		e := r.ds[j]
+		if e.Kind != "target" || !sameAsker(d, e) {
+			continue
+		}
+		for k, ref := range e.PickRefs {
+			if pickKind(e, k) == "player" && ref != seatRef(d.Seat) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// laterAskSameStep reports any later decision of the same asker in the same
+// step as decision i: the pick an accepted confirmation leads to, when there
+// was one to make.
+func (r *answerRouting) laterAskSameStep(i int) bool {
+	for _, n := range r.ds[i+1:] {
+		if n.Step != r.ds[i].Step {
+			break
+		}
+		if sameAsker(r.ds[i], n) {
+			return true
+		}
+	}
+	return false
 }
 
 // upToPickFollows reports an optional (Min 0) hidden pick by the same seat

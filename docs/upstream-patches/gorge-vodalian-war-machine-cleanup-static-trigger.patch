@@ -1,0 +1,182 @@
+diff --git a/engine/rules/farm_vodalian_war_machine_test.go b/engine/rules/farm_vodalian_war_machine_test.go
+new file mode 100644
+index 00000000..686b7b47
+--- /dev/null
++++ b/engine/rules/farm_vodalian_war_machine_test.go
+@@ -0,0 +1,117 @@
++package rules
++
++import (
++	"testing"
++
++	"github.com/adams-shaun/gorge/engine/decision"
++	"github.com/adams-shaun/gorge/engine/state"
++	"github.com/adams-shaun/gorge/testkit/testutil"
++)
++
++// TestFarmVodalianWarMachine pins the SUP-s355-supp farm windows whose first
++// difference is `turn` at the end-of-turn transition: the primary-attributed
++// xe:RAND:2:1:w5, xe:RAND:2:10:w24, xe:RAND:3:16:w5/w7/w8/w9 and the primary
++// Teferi's Drake window xe:RAND:1:16:w9, plus the four unattributed siblings
++// xe:RAND:2:10:w10, xe:RAND:3:16:w6 and xe:RAND:4:4:w8/w10: gorge 1 vs forge
++// 2 on the cleanup pass. (The SUP-s370-supp Electryte row is a separate Port
++// Razer restriction defect, not this cleanup shape.)
++//
++// Vodalian War Machine's script carries a bookkeeping line
++// `T:Mode$ Phase | Phase$ Cleanup ... | Static$ True` that clears the Merfolk
++// it remembers. Forge marks a trigger Static$ True when its body is
++// bookkeeping and runs it at its event without a stack object
++// (TriggerHandler.runWaitingTrigger's isStatic arm); it is not a triggered
++// ability and cannot open a priority window. CR 514.3: "No player receives
++// priority during the cleanup step, so no spells can be cast and no abilities
++// can be activated. See rule 117.5." CR 514.3a only opens the window when a
++// state-based action is performed and/or a triggered ability is waiting. A
++// Static$ True registration is neither, so after the end step both players
++// pass and the next turn's upkeep begins.
++func TestFarmVodalianWarMachine(t *testing.T) {
++	t.Parallel()
++	reg := testutil.CorpusRegistry(t)
++	const sc = `{"name":"farm vodalian war machine SUP-s355-supp xe:RAND_2_1_w5","turn":1,` +
++		`"cr":["514.3","514.3a"],"why":"inline",` +
++		`"setup":{` +
++		`"p0":{"battlefield":["Vodalian War Machine"],` +
++		`"library_top":["Island","Island","Island","Island","Island"]},` +
++		`"p1":{"library_top":["Island","Island","Island","Island","Island"]}},` +
++		`"steps":[` +
++		`{"op":"pass_to","seat":0,"step":"end","active":"p0"},` +
++		`{"op":"pass","seat":0},` +
++		`{"op":"pass","seat":1}]}`
++	res, err := RunOracleScenarioJSON(reg, []byte(sc))
++	if err != nil {
++		t.Fatalf("run: %v", err)
++	}
++	if len(res.Fails) != 0 {
++		t.Fatalf("scenario failed: %v", res.Fails)
++	}
++	var snap *OracleSnapshot
++	for i := range res.Snapshots {
++		if res.Snapshots[i].Checkpoint == "step 2 (pass)" {
++			snap = &res.Snapshots[i]
++		}
++	}
++	if snap == nil {
++		t.Fatalf("no step 2 (pass) snapshot: %d snapshots", len(res.Snapshots))
++	}
++	if snap.Turn != 2 || snap.Step != "upkeep" || snap.Active != 1 {
++		t.Fatalf("after p1's end-step pass: turn %d step %s active %d, want turn 2 upkeep active 1: "+
++			"a Static$ True bookkeeping trigger is not a triggered ability, so no player receives "+
++			"priority in cleanup (CR 514.3, 514.3a)", snap.Turn, snap.Step, snap.Active)
++	}
++}
++
++// TestCleanupStaticTriggerPerformsStateBasedAction pins the interaction
++// between the cleanup step's off-stack static-trigger resolution and its
++// CR 514.3a state-based check. The static registration resolves inside the
++// drain (never on the stack), and the drain's post-placement checkStateBased
++// must still run for it: here the static body deals lethal damage to a
++// creature, so a state-based action is performed in that cleanup step and
++// the active player gets priority there (CR 514.3a) with the creature
++// already gone. The registration is ignored when deciding whether a trigger
++// is "waiting", but its resolution is not moved out of the drain.
++func TestCleanupStaticTriggerPerformsStateBasedAction(t *testing.T) {
++	t.Parallel()
++	const probe = "Name:Cleanup SBA Probe\nTypes:Creature Bear\nPT:2/2\n" +
++		"T:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Static$ True | Execute$ DbZap | TriggerDescription$ x\n" +
++		"SVar:DbZap:DB$ DealDamage | Defined$ Self | NumDmg$ 3\nOracle:x\n"
++	reg := testutil.CorpusRegistry(t)
++	e := corpusEngine(t, reg, nil, nil)
++	victimID := onBoard(t, e, 0, probe)
++	e.pending = nil
++	e.Advance()
++	turn := e.G.Turn
++	var cleanupPriority *decision.Decision
++	for i := 0; i < 400; i++ {
++		if e.G.Over {
++			t.Fatalf("game ended before the cleanup step")
++		}
++		d := e.Pending()
++		if d == nil {
++			e.Advance()
++			continue
++		}
++		if e.G.Turn != turn {
++			break
++		}
++		if d.Kind == decision.KPriority && e.G.Step == state.StepCleanup {
++			cleanupPriority = d
++			break
++		}
++		if d.Kind != decision.KPriority {
++			t.Fatalf("unexpected %s decision while driving to cleanup: %+v", d.Kind, d)
++		}
++		submitPass(t, e)
++	}
++	if cleanupPriority == nil {
++		t.Fatalf("no cleanup-step priority on turn %d after the static trigger's lethal damage (reached turn %d step %s): the CR 514.3a state-based check must follow the off-stack resolution", turn, e.G.Turn, e.G.Step)
++	}
++	if cleanupPriority.Player != e.G.Active {
++		t.Fatalf("cleanup-step priority held by seat %d, want the active player %d (CR 514.3a)", cleanupPriority.Player, e.G.Active)
++	}
++	if z := e.G.Obj(victimID).Zone; z != state.ZGraveyard {
++		t.Fatalf("the lethally damaged creature is in %s at the cleanup priority, want the graveyard: the static body's state-based action must be performed in this cleanup step", z)
++	}
++}
+diff --git a/engine/rules/static_trigger.go b/engine/rules/static_trigger.go
+index f91e696f..fd7a2d85 100644
+--- a/engine/rules/static_trigger.go
++++ b/engine/rules/static_trigger.go
+@@ -170,6 +170,31 @@ func (e *Engine) resolveStaticTriggers() bool {
+ 	return resolved
+ }
+ 
++// hasStackBoundPendingTrigger reports whether any queued trigger will be
++// put on the stack: a Static$ True registration whose body is provably
++// ask-free is resolved off the stack by resolveStaticTriggers and is not a
++// triggered ability waiting (CR 514.3a), so it does not count. Everything
++// else -- including a Static$ True body that may ask, which keeps the stack
++// path -- does.
++//
++// It shares staticTriggerLine and staticTriggerAskFree with
++// resolveStaticTriggers, so the registrations this predicate ignores are
++// exactly the ones the drain consumes off the stack; a new static shape is
++// classified in one place for both. The predicate only reads: it does not
++// pop, reorder or resolve anything, so it can be asked before the drain
++// (whose dropDepartedTriggers/dropSetupEntryTriggers preconditions must
++// still decide what is actually resolved).
++func (e *Engine) hasStackBoundPendingTrigger() bool {
++	for _, pt := range e.pendingTriggers {
++		line, svars, self, ok := e.staticTriggerLine(pt)
++		if ok && e.staticTriggerAskFree(pt, line, svars, self) {
++			continue
++		}
++		return true
++	}
++	return false
++}
++
+ // resolveStaticTrigger runs a static trigger's body inline, the way
+ // resolveTop runs a resolving stack object's: the body's SVar table is bound
+ // onto the pending context first, and the in-flight damage source names the
+diff --git a/engine/rules/turn.go b/engine/rules/turn.go
+index 49e448ae..9b3ac18a 100644
+--- a/engine/rules/turn.go
++++ b/engine/rules/turn.go
+@@ -1007,7 +1007,17 @@ func (e *Engine) finishCleanupStep() {
+ 	// priority even when it is removed at once (a modal trigger with no
+ 	// mode left to choose, CR 603.3c): CR 514.3a keys on the trigger being
+ 	// waiting, not on its still being on the stack.
+-	waiting := len(e.pendingTriggers) > 0
++	//
++	// A Static$ True registration whose body is provably ask-free is
++	// bookkeeping, not a triggered ability waiting for the stack: the
++	// drain resolves it off the stack (static_trigger.go) without ever
++	// placing it. Ask the side-effect-free form of that same judgement so
++	// the window is not opened by a registration the drain will consume.
++	// The resolution itself stays inside drainTriggers, where its
++	// preconditions and its post-placement state-based check still run: a
++	// static body that performs a state-based action (or ends the game)
++	// must reach the same CR 514.3a handling as any other queued trigger.
++	waiting := e.hasStackBoundPendingTrigger()
+ 	stopped, again := e.drainTriggers()
+ 	if stopped {
+ 		return
