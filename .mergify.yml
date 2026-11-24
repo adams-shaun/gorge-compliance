@@ -1,0 +1,25 @@
+# Mergify merge queue for pull requests to develop (operator 11-24: "setup mergify on the other 2 repos").
+# Mergify reads this file from the default branch (main). Every non-draft PR to develop is queued once its own
+# `ci-ok` passes (no label, no approval, like gorge). The queue re-checks it on top of develop and merges when `ci-ok`
+# is green there. Promote PRs (develop -> main) are not queued: the promote tooling owns them.
+# Remember that agentctl lands on the LOCAL develop; a PR merged here into origin/develop still has to be merged
+# into local develop (compliance-two-develops).
+queue_rules:
+  - name: default
+    queue_conditions:
+      - base=develop
+      - -draft
+      - check-success=ci-ok
+    merge_conditions:
+      - check-success=ci-ok
+    batch_size: 1
+    merge_method: merge
+
+pull_request_rules:
+  - name: queue every non-draft PR to develop
+    conditions:
+      - base=develop
+      - -draft
+    actions:
+      queue:
+        name: default
