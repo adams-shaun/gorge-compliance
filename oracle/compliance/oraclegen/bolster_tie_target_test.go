@@ -125,7 +125,7 @@ func TestBolsterTiePickResolvesCopiedSource(t *testing.T) {
 			Stack: []rules.OracleSnapStack{{Kind: "ability", Source: "p0:Clone", Trigger: "0"}}}}, false},
 	}
 	for _, c := range cases {
-		if got := bolsterTiePick(reg, sc, c.snaps, d); got != c.want {
+		if got := bolsterTiePick(reg, sc, rules.OracleResult{Snapshots: c.snaps}, d); got != c.want {
 			t.Errorf("%s: bolsterTiePick = %v, want %v", c.name, got, c.want)
 		}
 	}
