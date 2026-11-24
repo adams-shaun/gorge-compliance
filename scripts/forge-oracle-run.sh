@@ -166,6 +166,33 @@ if [ "$mode" = preflight ]; then
   ' | sort -u)
   # funny_has NAME: 0 when NAME is one of the edition names StaticData filters.
   funny_has() { [ -n "$funny" ] && grep -qxF -e "$1" <<<"$funny"; }
+  # funny_face NAME: 0 when a scenario's bare NAME can only be the first face
+  # of a split card the filter drops. A scenario may name a split by its bare
+  # first face (Knowing, for Knowing // Half the Battle); the editions list only
+  # the joined name, so funny_has alone never sees it.
+  # Decide from the card files, not a name prefix: Forge's filter is exact on
+  # the joined name, and a bare name can be defined by several files. Each file
+  # with a "Name:NAME" line is judged by its own joined name (its Name: lines in
+  # order, joined with " // "). The bare name is refused only when EVERY such
+  # file is a multi-face card whose first face is NAME and whose joined name is
+  # filtered. A standalone card (Bind beside the Funny "Bind // Liberate") or a
+  # legal split (Start // Finish beside the Funny "Start // Fire") still loads,
+  # so any one of those accepts the name.
+  funny_face() {
+    [ -n "$funny" ] || return 1
+    # Cheap prefilter: some filtered joined name must contain "NAME // " before
+    # the per-file cardsfolder scan below (one grep over every card file) runs.
+    grep -qF -e "$1 // " <<<"$funny" || return 1
+    local f joined any=1
+    while IFS= read -r f; do
+      grep -q '^AlternateMode:' "$f" || return 1
+      joined=$(awk '/^Name:/ { v = $0; sub(/^Name:/, "", v); sub(/\r$/, "", v); j = (j == "" ? v : j " // " v) } END { print j }' "$f")
+      [ "${joined%%" // "*}" = "$1" ] || return 1
+      funny_has "$joined" || return 1
+      any=0
+    done < <(grep -rlxF -e "Name:$1" "$cardsfolder" 2>/dev/null | sort)
+    return $any
+  }
   while IFS= read -r n; do
     [ -n "$n" ] || continue
     # A name resolves when its own Name: line is in the cardsfolder, or (a
@@ -184,9 +211,11 @@ if [ "$mode" = preflight ]; then
     # joined "main // other" (CardRules.getPreInitName), and an adventure/MDFC
     # by its main face; the editions list each the same way, but the corpus
     # names both jointly. Refuse when the joined name or its first face is in
-    # the filtered set.
+    # the filtered set; a bare first face is judged by funny_face's per-file
+    # rule (refused only when every card file defining it is a filtered split).
     first=${n%%" // "*}
-    if funny_has "$n" || { [ "$first" != "$n" ] && funny_has "$first"; }; then
+    if funny_has "$n" || { [ "$first" != "$n" ] && funny_has "$first"; } ||
+       { [ "$first" = "$n" ] && funny_face "$n"; }; then
       printf '%s\t%s\n' "$n" "in the pinned cardsfolder but filtered from Forge's card DB (Funny/Silver-border edition card)"
     fi
   done < "$names"
