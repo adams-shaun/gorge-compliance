@@ -170,7 +170,8 @@ func setupModeAnswers(d rules.OracleDecision, modes map[string]int) []XAnswer {
 			// pick through its CHOICE queue, showing the option LABEL.
 			out = append(out, XAnswer{d.Seat, "setup_choice", d.Picks[k]})
 		case ModeYesQueue, ModeNoQueue:
-			// A per-player "may shuffle" GenericChoice: XMage asks chooseUse.
+			// A two-way GenericChoice XMage asks as chooseUse (a per-player
+			// "may shuffle" or an xmageChooseUseFaces face).
 			out = append(out, XAnswer{d.Seat, "setup_choice", map[bool]string{true: "yes", false: "no"}[m == ModeYesQueue]})
 		default:
 			out = append(out, XAnswer{d.Seat, "setup_mode", fmt.Sprint(m)})

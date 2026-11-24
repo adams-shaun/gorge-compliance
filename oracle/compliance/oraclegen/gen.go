@@ -1616,9 +1616,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					continue
 				}
 				if m, ok := modeNumberFor(d, k, modes); ok && (m == ModeYesQueue || m == ModeNoQueue) {
-					// A Timetwister-style per-player "may shuffle" GenericChoice
-					// (Turtles in Time): XMage asks chooseUse, so the answer is
-					// yes/no for whichever seat chose.
+					// A two-way GenericChoice XMage asks as chooseUse: a
+					// Timetwister-style per-player "may shuffle" (Turtles in
+					// Time) or a source-proven xmageChooseUseFaces punisher
+					// (Terrapact Intimidator's targeted opponent). The answer
+					// is yes/no for whichever seat chose.
 					as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[m == ModeYesQueue]})
 					continue
 				}
@@ -2615,11 +2617,14 @@ func tokenChoiceNames(f *cards.Face, choices string) []string {
 const ModeChoiceQueue = 0
 
 // ModeYesQueue and ModeNoQueue are the sentinels for the two labels of a
-// DB$ GenericChoice | AILogic$ Timetwister body (Turtles in Time): a per-player
-// "may shuffle your hand and graveyard" ask that XMage poses as
-// player.chooseUse (the yes/no choice queue), never as a mode. Choices$ lists
-// the yes label first, the no label second. Negative, so neither collides with
-// a real 1-based charm position nor with ModeChoiceQueue.
+// GenericChoice XMage poses as player.chooseUse (the yes/no choice queue),
+// never as a mode: a DB$ GenericChoice | AILogic$ Timetwister body (Turtles in
+// Time, a per-player "may shuffle your hand and graveyard" ask) and every
+// two-option face in xmageChooseUseFaces (choice_dialog.go, e.g. Terrapact
+// Intimidator's "target opponent may have you create two Lander tokens").
+// Choices$ lists the yes label first, the no label second. Negative, so
+// neither collides with a real 1-based charm position nor with
+// ModeChoiceQueue.
 const (
 	ModeYesQueue = -1
 	ModeNoQueue  = -2
@@ -2755,6 +2760,17 @@ func modeNumbers(f *cards.Face) map[string]int {
 			default:
 				out[label] = ModeNoQueue
 			}
+		}
+	}
+	// A two-option GenericChoice XMage poses as ONE boolean chooseUse
+	// (choice_dialog.go): the first Choices$ label is the true branch and the
+	// second the false branch, answered yes/no on the CHOICE queue for the
+	// seat that chose (Terrapact Intimidator's targeted opponent). The seat
+	// is already the decision's Seat; only the queue and the value change.
+	if pairs, ok := chooseUseLabels(f); ok {
+		for _, pair := range pairs {
+			out[pair[0]] = ModeYesQueue
+			out[pair[1]] = ModeNoQueue
 		}
 	}
 	// The SetChosenMode labels first, so a real Charm mode of the same
