@@ -1393,15 +1393,8 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			pipPlanned[i] = true
 		}
 	}
-	// A step whose card name is then searched for (Ancient Vendetta's "choose
-	// a card name. Search ... for cards with that name"): XMage poses the name
-	// dialog however narrowly gorge offered it, and the search must find it.
-	namedSearch := map[int]bool{}
 	modal := map[int]bool{}
 	for _, d := range ds {
-		if pickKind(d, 0) == "search" {
-			namedSearch[d.Step] = true
-		}
 		if d.Kind == "mode" && d.Step >= 0 {
 			modal[d.Step] = true
 		}
@@ -1566,7 +1559,15 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			continue
 		}
-		if pickKind(d, 0) == "name" && namedSearch[d.Step] && len(d.Picks) == 1 {
+		if len(d.Picks) == 1 && hasNamePick(d) {
+			// XMage's "choose a card name" dialog always ranges over every
+			// card name in its pool (CR 201.3), so it is posed even when
+			// gorge's deck-scoped name universe offered a single option
+			// (Cabal Therapy, Phyrexian Revoker, Silverquill Silencer). The
+			// pick is that dialog's choice answer whether or not a named
+			// search follows (the Ancient Vendetta case), and it is never a
+			// forced one-option ask. Setup-time name choices keep their
+			// setup_choice queue above.
 			out[d.Step] = append(out[d.Step], XAnswer{d.Seat, "choice", d.Picks[0]})
 			any = true
 			continue
@@ -2139,6 +2140,21 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	return out
 }
 
+// hasNamePick reports whether any pick of d is the engine's card-name option
+// kind. XMage poses its card-name dialog over every name in its card pool
+// whatever universe the engine scoped the ask to (CR 201.3), so such an ask
+// always reaches the choice queue and is never a forced one-option fold. It
+// matches the pick KIND, not pick 0, so a name pick that moves position or
+// shares a decision with another pick cannot slip past.
+func hasNamePick(d rules.OracleDecision) bool {
+	for k := range d.Picks {
+		if pickKind(d, k) == "name" {
+			return true
+		}
+	}
+	return false
+}
+
 // forcedSingleOption reports a one-option ask XMage never poses: exactly one
 // legal answer (Min==Max==Options==1) that is not a target, order or mode ask.
 // A target pick is still a chooseTarget XMage asks for even with one legal
@@ -2151,6 +2167,13 @@ func forcedSingleOption(d rules.OracleDecision) bool {
 		// "you lose 4 life unless ..."): XMage does not pose it; the unless
 		// choice that follows is the real decision.
 		return true
+	}
+	if hasNamePick(d) {
+		// A card-name dialog is always posed over XMage's whole card pool
+		// (CR 201.3), however narrowly gorge's deck-scoped name universe
+		// scoped the ask (Cabal Therapy, Phyrexian Revoker, Silverquill
+		// Silencer). It is a real choice-queue ask, never a forced fold.
+		return false
 	}
 	if d.Kind == "target" || d.Kind == "order" || d.Kind == "mode" {
 		return false
