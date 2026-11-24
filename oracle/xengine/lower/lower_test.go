@@ -1082,6 +1082,26 @@ func TestColourPicksToken(t *testing.T) {
 	}
 }
 
+// TestColourPicksSubAbilityMana: Empowered Autogenerator's Produced$ Any sits
+// on a DB$ Mana sub-ability of its PutCounter head, and the colour ask must
+// still be answered with the live colour.
+func TestColourPicksSubAbilityMana(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	for _, c := range []struct {
+		name, produced string
+		want           []string
+	}{
+		{"Empowered Autogenerator", "RR", []string{"R"}},
+		{"Empowered Autogenerator", "", nil},
+		{"Treasure Token", "B", []string{"B"}},
+		{"Gold Token", "G", []string{"G"}},
+	} {
+		if got := colourPicks(reg, game.ManaRec{Name: c.name, Ability: 0, Produced: c.produced}); !reflect.DeepEqual(got, c.want) {
+			t.Errorf("colourPicks(%s, %q) = %v, want %v", c.name, c.produced, got, c.want)
+		}
+	}
+}
+
 // TestLowerTreasureTapColour plays a red/black pool that makes Treasure
 // tokens, lowers each game, and checks every Treasure tap step carries the
 // live colour and no cast fails as "not offered".
