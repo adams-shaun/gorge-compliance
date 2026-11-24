@@ -5722,6 +5722,68 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return isTapManaText(text);
     }
 
+    /** The abilities of the XMage token the setup table maps to a token
+     * name; empty for a name it does not map. A token is no card in the
+     * CardRepository, so this is the only script-time view of its rules. */
+    static List<Ability> tokenAbilities(String name) {
+        List<Ability> out = new ArrayList<>();
+        for (java.util.function.Supplier<mage.game.permanent.token.Token> make : SETUP_TOKENS.values()) {
+            mage.game.permanent.token.Token token = make.get();
+            if (token.getName().equals(name)) {
+                out.addAll(token.getAbilities());
+                return out;
+            }
+        }
+        return out;
+    }
+
+    /** Whether an XMage rule starts with a scenario ability prefix, reading
+     * the prefix's "{this}" as any self-reference XMage words a token's cost
+     * with ("this artifact", "this token", "this creature") or "{this}". */
+    static boolean tokenRuleStartsWith(String rule, String text) {
+        String[] parts = text.split("\\{this\\}", -1);
+        StringBuilder re = new StringBuilder();
+        for (int i = 0; i < parts.length; i++) {
+            if (i > 0) {
+                re.append("(?:\\{this\\}|this [a-z]+)");
+            }
+            re.append(java.util.regex.Pattern.quote(parts[i]));
+        }
+        return java.util.regex.Pattern.compile(re.toString(), java.util.regex.Pattern.CASE_INSENSITIVE)
+                .matcher(rule).lookingAt();
+    }
+
+    /** The XMage rule text a token activation selects by: the mapped token's
+     * one ability whose rule tokenRuleStartsWith the prefix. The prefix
+     * itself when the token is unmapped or no single rule matches. */
+    static String tokenAbilityText(String name, String text) {
+        String found = null;
+        for (Ability a : tokenAbilities(name)) {
+            String rule = a.toString();
+            if (!tokenRuleStartsWith(rule, text)) {
+                continue;
+            }
+            if (found != null && !found.equals(rule)) {
+                return text;
+            }
+            found = rule;
+        }
+        return found == null ? text : found;
+    }
+
+    /** isManaAbilityText for a token ref: the mapped XMage token's ability
+     * with that rule (a Treasure's "{T}, Sacrifice this artifact: Add one
+     * mana of any color" is a mana ability, CR 605.1a). A token the table
+     * does not map keeps the tap-for-mana text shape. */
+    static boolean isTokenManaAbilityText(String name, String text) {
+        for (Ability a : tokenAbilities(name)) {
+            if (a.toString().startsWith(text)) {
+                return a instanceof ActivatedManaAbilityImpl;
+            }
+        }
+        return isTapManaText(text);
+    }
+
     /** Queue a mana-ability activation on the step's own source.
      *
      * TestPlayer's manaActivate: command walks every available mana producer
@@ -5786,6 +5848,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * With no alias at all, battlefield then non-battlefield name matches
      * follow registerAliases' zone order. */
     private List<ManaSource> namedManaSources(Game g, Player p, String ref, String card, int stepIdx) {
+        if (ref.contains(":token:")) {
+            // A token's ref ranks the controller's live tokens of the name in
+            // creation order, as every other token ref (tokenChoice).
+            List<ManaSource> one = new ArrayList<>();
+            Permanent token = tokenChoice(ref, p.getId(), g.getBattlefield().getAllPermanents());
+            if (token != null) {
+                one.add(new ManaSource(token, Zone.BATTLEFIELD));
+            }
+            return one;
+        }
         UUID boundId = scenarioObjectId(g, p, ref);
         if (boundId != null) {
             Permanent bound = g.getPermanent(boundId);
@@ -7420,10 +7492,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 return;
             }
             case "activate": {
-                String text = xabilityAt(stepIdx);
-                if (text.isEmpty()) {
+                String printed = xabilityAt(stepIdx);
+                if (printed.isEmpty()) {
                     throw new IllegalArgumentException("activate step " + stepIdx + " has no xmage_ability");
                 }
+                // A token's self-reference is XMage's own wording ("Sacrifice
+                // this artifact" on a Treasure), not the "{this}" a card's
+                // rule text keeps: select by the mapped XMage token's rule.
+                String text = str(st, "card").contains(":token:")
+                        ? tokenAbilityText(battlefieldName(str(st, "card")), printed) : printed;
                 if (st.has("mana")) {
                     String mana = str(st, "mana");
                     runCode("mana " + mana, turn, phase, p, (info, pl, g) -> addPool(pl, g, mana));
@@ -7436,7 +7513,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 if (turnsFaceUp(text)) {
                     faceDownRefs.remove(str(st, "card"));
                 }
-                if (isManaAbilityText(card, text)) {
+                if (str(st, "card").contains(":token:") ? isTokenManaAbilityText(card, text)
+                        : isManaAbilityText(card, text)) {
                     Integer abilityIndex = st.has("ability_index") && st.get("ability_index").isJsonPrimitive()
                             ? st.get("ability_index").getAsInt() : null;
                     activateManaAbilityOnCard(stepIdx, p, str(st, "card"), card, text, abilityIndex);
@@ -7934,6 +8012,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
         String name = refName(ref);
         runCode("bind " + ref, turn, phase, p, (info, pl, g) -> {
             UUID setupId = alias == null ? null : p.getAliasByName(alias);
+            if (setupId == null && ref.contains(":token:")) {
+                // A token the window created has no setup alias: its ref's
+                // "#k" ranks the controller's live tokens of that name in
+                // creation order (tokenChoice), as every other token ref.
+                // A mana ability (a Treasure's) is not in getPlayable's list
+                // when nothing is being paid, so the live name scan below
+                // cannot find it; the token itself is the source.
+                Permanent token = tokenChoice(ref, p.getId(), g.getBattlefield().getAllPermanents());
+                if (token != null) {
+                    setupId = token.getId();
+                }
+            }
             UUID id = activationSourceId(p, g, name, text, setupId);
             if (id == null) {
                 id = setupId;

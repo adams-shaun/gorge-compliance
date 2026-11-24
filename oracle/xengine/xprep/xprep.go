@@ -885,6 +885,15 @@ func refName(ref string) (string, bool) {
 	return n, n != ""
 }
 
+// isTokenRef reports whether a scenario ref names a token ("p0:token:Treasure
+// Token#2").
+func isTokenRef(ref string) bool {
+	if i := strings.IndexByte(ref, ':'); i >= 2 && ref[0] == 'p' && strings.Trim(ref[1:i], "0123456789") == "" {
+		return strings.HasPrefix(ref[i+1:], "token:")
+	}
+	return false
+}
+
 // abilitySourceName is the face name an activate step's card ref names,
 // including a token ref's face ("p0:token:Soldier#2" -> "Soldier"). It is the
 // sourceName XMageGrantedAbilityPrefix rewrites a self-referential cost with.
@@ -1127,12 +1136,8 @@ func modeNumbers(reg *cards.Registry, it oraclegen.Item, ds []rules.OracleDecisi
 // an SVar grant). A step whose label resolves to no grant still refuses rather
 // than shipping the printed prefix.
 func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]string, *Refusal) {
-	type key struct {
-		card string
-		face int
-	}
-	cache := map[key]map[int]string{}
-	cached := map[key]string{}
+	cache := map[*cards.Face]map[int]string{}
+	cached := map[*cards.Face]string{}
 	var out []string
 	for i, st := range it.Steps {
 		// Plot is not an activate step: gorge offers it as a cast option
@@ -1214,27 +1219,37 @@ func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]s
 		if st.AbilityIndex == nil {
 			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q by label %q, which names no ability index", i, st.Card, st.Ability)
 		}
-		c, face, ok := stepCard(reg, it, st)
-		if !ok {
+		var f *cards.Face
+		if c, face, ok := stepCard(reg, it, st); ok {
+			f = c.Faces[face]
+		} else if isTokenRef(st.Card) {
+			// A token's activated ability is the one its creating effect's
+			// token script defines (CR 111.1, 111.4): resolve the ref to that
+			// compiled script and take its face's XMage text.
+			tf, ok := oraclegen.TokenStepFace(reg, it, i, st, g)
+			if !ok {
+				return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates token %q, which no compiled token script with an ability %d names", i, st.Card, *st.AbilityIndex)
+			}
+			f = tf
+		} else {
 			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q, which is no corpus card", i, st.Card)
 		}
-		k := key{c.Faces[0].Name, face}
-		m, have := cache[k]
+		m, have := cache[f]
 		if !have {
-			m, cached[k] = oraclegen.XMageAbility(c.Faces[face])
-			cache[k] = m
+			m, cached[f] = oraclegen.XMageAbility(f)
+			cache[f] = m
 		}
-		if why := cached[k]; why != "" {
-			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d: %s: %s", i, c.Faces[face].Name, why)
+		if why := cached[f]; why != "" {
+			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d: %s: %s", i, f.Name, why)
 		}
 		p := m[*st.AbilityIndex]
 		if p == "" {
-			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d: %s has no XMage text for ability %d", i, c.Faces[face].Name, *st.AbilityIndex)
+			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d: %s has no XMage text for ability %d", i, f.Name, *st.AbilityIndex)
 		}
 		if out == nil {
 			out = make([]string, len(it.Steps))
 		}
-		out[i] = comboColourPrefix(p, c.Faces[face], *st.AbilityIndex, st)
+		out[i] = comboColourPrefix(p, f, *st.AbilityIndex, st)
 	}
 	return out, nil
 }
