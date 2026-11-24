@@ -115,16 +115,21 @@ func scenTSVRows(t *testing.T, path string) [][]string {
 // whose starts held a Mystery Booster 2 playtest card the Forge card DB filters
 // (Indicate for Remove Soul and Deflection, Mox Poison for Retract, Gobland for
 // Devoted Retainer). The filtered pool must make each start name some other
-// enabler, or none.
+// enabler, or none. Remove Soul and Deflection target a spell on the stack, which
+// a start cannot hold at main 1 (start:needs-stack-target): they write no file.
 func TestScenForgeFilteredStarts(t *testing.T) {
 	testutil.CorpusRegistry(t)
 	out := t.TempDir()
 	filtered := map[string]bool{"Indicate": true, "Mox Poison": true, "Gobland": true}
+	stackTargets := map[string]bool{"Remove Soul": true, "Deflection": true}
 	for _, card := range []string{"Remove Soul", "Deflection", "Retract", "Devoted Retainer"} {
 		if err := runScen(scenArgs("-card", card, "-key", "cast", "-set", "XP", "-out", out)); err != nil {
 			t.Fatalf("%s: %v", card, err)
 		}
 		raw, err := os.ReadFile(filepath.Join(out, scen.Slug(card)+"-cast.start.json"))
+		if os.IsNotExist(err) && stackTargets[card] {
+			continue
+		}
 		if err != nil {
 			t.Fatalf("%s: %v", card, err)
 		}
