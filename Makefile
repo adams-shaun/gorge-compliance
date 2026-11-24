@@ -91,12 +91,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # consumes gorge's waterbend_generic tap picks (Forge asks for waterbend taps through chooseCardsForConvokeOrImprovise, which took
 # only convoke*/improvise* kinds: Katara's Waterbend {X} paid from an empty pool and was refused). Driver-only change; same trees
 # as FORGE_REF ff076d4432. Fork branch fix/waterbend-tap-pick-driver.
-# 3384230020 = 963576e5d2 + the scripted controller answers gorge's OriginAlternative$ zone election: one choose_n over zones
+# ff2049dc97 = 963576e5d2 + MayPlay: a land played from outside the hand is played through its MayPlay copy
+# (PR #438). Driver-only change; same trees as FORGE_REF ff076d4432.
+# f09aac4a4f = ff2049dc97 + the scripted controller answers gorge's OriginAlternative$ zone election: one choose_n over zones
 # becomes Forge's initial "search the library?" confirm plus one confirm per alternative zone, and the Optional$ search_confirm is
 # left for Forge's later ChangeZoneGeneral gate; Endure's endure_counters/endure_spirit map to yes/no; and a same-name library
 # order (dig/hideaway bottom) is consumed though its order is unobservable, so it is not a leftover. Driver-only change; same
-# trees as FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-unmapped-asks.
-FORGE_ORACLE_REF ?= 3384230020dc2f419623ce58d26714770065f53a
+# trees as FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-unmapped-asks, rebased onto ff2049dc97 so the MayPlay
+# land-play fix is kept beside the zone-election/endure/order fix.
+FORGE_ORACLE_REF ?= f09aac4a4ff1d20a1f04032c1bbce3435170918e
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
