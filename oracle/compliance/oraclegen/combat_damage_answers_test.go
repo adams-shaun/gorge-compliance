@@ -142,9 +142,7 @@ func TestCombatDamageAnswersTrampleAssignment(t *testing.T) {
 	if got := out[2]; len(got) != 2 || got[0] != (XAnswer{0, "amount", "2"}) {
 		t.Fatalf("trample assignment answers = %+v, want [amount 2] leading step 2", out[2])
 	}
-	// The Dig take is XMage's look-and-pick chooseTarget, the TARGET queue
-	// (digTargetAnswer), whatever the look's size.
-	if out[2][1] != (XAnswer{0, "target", "Wastes"}) {
+	if out[2][1] != (XAnswer{0, "choice", "Wastes"}) {
 		t.Fatalf("the step's own answers no longer follow the assignment: %+v", out[2])
 	}
 }

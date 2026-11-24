@@ -541,40 +541,24 @@ func agreeDigSecond(dests []string) (string, bool) {
 	return dests[0], true
 }
 
-// digTakeShape is a one-card Dig take: the decision is a Dig resumption that
-// picks exactly one offered card by name, whatever the look's size. (The
-// bottom-label form is a different dialog, owned by its own case.)
-func digTakeShape(d rules.OracleDecision) bool {
-	return d.Resume == "dig" && d.Min == 1 && d.Max == 1 && len(d.Picks) == 1 &&
-		d.Options >= 1 && digBottomName(d.Picks[0]) == ""
-}
-
 // digTargetAnswer is the target-queue answer for a Dig take, or "" when the
-// decision is not that shape. XMage's dialog (LookLibraryAndPickControllerEffect's
-// chooseTarget over a TargetCard, the TARGET queue) selects the FIRST
-// destination, however many cards the look offers: for the exile-second-
-// destination family (Ashiok, Wicked Manipulator; Karn, Scion of Urza) that is
-// the card to exile, the complement of gorge's pick (the card to hand), while
-// for every other family (Hit It!'s battlefield-tapped first destination,
-// graveyard second; Symbiote Spider-Man's "that many" look, hand first) it is
-// exactly gorge's pick. The complement is defined only for the two-card look
-// (digExileComplement); a look of any other size has no single complement, so
-// the exile family keeps no target answer there, and every other family keeps
-// gorge's pick. The source card's IR decides; a step with no resolved source
-// keeps the historical shape-only complement for a two-card look so the
-// unthreaded callers (XAnswers) are unchanged.
+// decision is not that shape. XMage's dialog selects the FIRST destination:
+// for the exile-second-destination family (Ashiok, Wicked Manipulator; Karn,
+// Scion of Urza) that is the card to exile, the complement of gorge's pick (the
+// card to hand), while for every other family (Hit It!'s battlefield-tapped
+// first destination, graveyard second) it is exactly gorge's pick. The source
+// card's IR decides; a step with no resolved source keeps the historical
+// shape-only complement so the unthreaded callers (XAnswers) are unchanged.
 func (r *answerRouting) digTargetAnswer(i int) string {
 	d := r.ds[i]
-	if !digTakeShape(d) {
+	complement := digExileComplement(d)
+	if complement == "" {
 		return ""
 	}
-	complement := digExileComplement(d)
 	src, ok := r.digSources[d.Step]
 	switch {
-	case !ok && complement != "":
-		return complement
 	case !ok:
-		return d.Picks[0]
+		return complement
 	case !src.known:
 		// Several Dig abilities disagree and no index narrowed them down.
 		// Keep gorge's own pick: the exile family is the exception.
