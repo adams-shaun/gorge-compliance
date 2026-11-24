@@ -166,7 +166,20 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # ForcedDieRollTest/LoneModeLibraryOrderTest cases that also fail on 11936833e46 in the borrowed build). Driver-only
 # change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-folded-optional-confirm.
-FORGE_ORACLE_REF ?= cd13258c4b746ec75c35687c25d01c65d9ea5962
+# 7d2c3206368c = the merge of 348d2b59493d (the three optional asks xproof found) and cd13258c4b7 (the folded
+# optional-trigger confirm above), so the pinned driver keeps both fixes. 348d2b59493d: an Optional$ sacrifice's
+# yes/no (SacrificeEffect asks confirmAction before choosePermanentsToSacrifice; gorge logs the whole 0..N pick as one
+# choose_n, so a non-empty pick answers yes and stays queued for the pick, an empty pick answers no and is
+# consumed, and a SacValid$ Self sacrifice consumes its pick at the confirm), a TapOrUntap binary (gorge's
+# taporuntap/taporuntapall decisions, true means tap), and a later unless-payer once one has paid
+# (AbilityUtils.handleUnlessCost asks every payer with alreadyPaid; gorge asks each payer only until one pays, so
+# a later seat with no decision declines without a miss). On top of it (02db800b3): an EMPTY tap-or-untap answer
+# reads as tap (gorge's taporuntap contract), and an Optional$ + StrictAmount$ sacrifice (Giant Opportunity) reads
+# its yes/no from gorge's sacrifice_optional mode ask, consumed at the confirm, the exact pick left for
+# choosePermanentsToSacrifice. OptionalAskTest (6 tests) and FoldedOptionalConfirmTest (4) pin them; the full driver
+# suite (140 tests, including ForcedDieRollTest) is green on the merge. Driver-only change; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-optional-asks.
+FORGE_ORACLE_REF ?= 7d2c3206368cb7aca59a1c2789839c953f986667
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
