@@ -18,7 +18,11 @@ GO_TEST_FLAGS ?= -p=2
 # 7a68b79c92 = 4142596fb7 + fork PRs #11 (enters-tapped sets tapped without a TappedEvent: Attentive Sunscribe) and #12 (a
 # static ability's conditional Custom/WhileControlled effect is not discarded on a false condition, CR 611.3a: Undercover Skrull).
 # 33704ee4fe = 7a68b79c92 + fork PR #13 (Hellfire deals 3 when no creature died, X = 0, CR 608.2c).
-XMAGE_REF  ?= 33704ee4fef60b9d2729fe24975832b9eee66a10
+# b34a601879 = the fork's gorge branch (6b07e46d8d + its earlier fixes) merged with fork PRs #10 (upstream to 4142596fb7 + Reassembling
+# Skeleton stale return), #2 (Pain 101 copied-effect target zcc), #6 (once-each-turn trigger limit across its own death: Grand Nagus Zek),
+# #8 (Biorganic Carapace player damage), #13 (Hellfire), #14 (Valiant own targeting only), #15 (Shields Up! on a Spacecraft creature),
+# #16 (Illumination LKI), #17 (Fight deals whole power, CR 701.14a); carries #11/#12 too. Every PR test green on this build.
+XMAGE_REF  ?= b34a601879ab8cdfa8b4107d672350ae6e6f638c
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
