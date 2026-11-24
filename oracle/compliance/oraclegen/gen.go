@@ -1390,6 +1390,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	if ownBounce != nil {
 		routing.ownBounce = ownBounce
 	}
+	// RemoveCounter's CounterType$ Any/All election is one per-counter run of
+	// KChoose picks in gorge but one multi-amount dialog in XMage: fold the
+	// run into one "X=<n>" amount per kind message before the generic choice
+	// route scripts the raw kind labels (remove_counter_answers.go).
+	counterAnswers, counterOwned := foldRemoveCounterKindAnswers(ds, snaps)
 	// Trigger-order name answers are demoted back to the inert text form when
 	// the step also scripts other asks (see the trigger_order case).
 	var trigSpans []*trigSpan
@@ -1479,6 +1484,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			// pick precedes it, so the runner records it Via "cast fallback").
 			// A copy's new-target election is never a cast step's targets even
 			// if it shares the step, so it is scripted below regardless.
+			continue
+		}
+		if counterOwned[i] {
+			if as := counterAnswers[i]; len(as) > 0 {
+				out[d.Step] = append(out[d.Step], as...)
+				any = true
+			}
 			continue
 		}
 		if as, ok := bandAnswers(d); ok {
