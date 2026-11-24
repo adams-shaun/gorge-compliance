@@ -76,14 +76,57 @@ func TestKWChoiceDialogScriptsKeywordRuleText(t *testing.T) {
 			t.Errorf("%q pick = %#v, want %#v", tc.label, got, want)
 		}
 	}
-	// A face outside the proven set keeps the numeric mode answer: its own
-	// XMage implementation is a different ask (Angelic Skirmisher).
-	other, ok := reg.Lookup("Angelic Skirmisher")
+	// A face outside the proven sets keeps the numeric mode answer: its XMage
+	// ask is a chooseUse or absent (Linvala, Eowyn).
+	for _, name := range []string{"Linvala, Shield of Sea Gate", "Eowyn, Lady of Rohan"} {
+		other, ok := reg.Lookup(name)
+		if !ok {
+			continue
+		}
+		for _, f := range other.Faces {
+			for label, m := range ModeNumbers(f) {
+				if m == ModeKWChoiceQueue || m == ModeKWBespokeChoiceQueue {
+					t.Fatalf("%s: unproven face label %q routed to a KWChoice dialog", f.Name, label)
+				}
+			}
+		}
+	}
+}
+
+// Angelic Skirmisher's XMage ask is a bespoke "Choose ability for your
+// creatures" Choice over "First strike", "Vigilance", "Lifelink": the pick
+// "First Strike" scripts {choice, "First strike"} and no numeric mode
+// (xpt-ae625e8f).
+func TestKWChoiceBespokeDialogScriptsXMageLabel(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	card, ok := reg.Lookup("Angelic Skirmisher")
 	if !ok {
 		t.Fatal("Angelic Skirmisher missing from the corpus")
 	}
-	if otherModes := ModeNumbers(other.Faces[0]); otherModes["First Strike"] == ModeKWChoiceQueue {
-		t.Fatalf("unproven face routed to the KWChoice dialog: %#v", otherModes)
+	modes := ModeNumbers(card.Faces[0])
+	labels := kwChoiceBespokeLabels(card.Faces[0])
+	if len(labels) != len(xmageKWChoiceBespokeFaces["angelic skirmisher"]) {
+		t.Fatalf("bespoke labels %v, table %v", labels, xmageKWChoiceBespokeFaces)
+	}
+	for _, label := range labels {
+		want, ok := xmageKWChoiceBespokeFaces["angelic skirmisher"][label]
+		if !ok {
+			t.Fatalf("label %q not in the XMage table", label)
+		}
+		if modes[label] != ModeKWBespokeChoiceQueue {
+			t.Fatalf("ModeNumbers[%q] = %d, want ModeKWBespokeChoiceQueue (%#v)", label, modes[label], modes)
+		}
+		d := rules.OracleDecision{Step: 1, Seat: 0, Kind: "mode", GorgeKind: "modes", Resume: "modes",
+			Options: 3, Min: 1, Max: 1, Picks: []string{label}, PickIdx: []int{0}, PickKinds: []string{"mode"},
+			PickRefs: []string{"p0:Angelic Skirmisher"}}
+		got := xanswers([]rules.OracleDecision{d}, 2, modes, nil)
+		wantA := [][]XAnswer{nil, {{Seat: 0, Kind: "choice", Value: want}}}
+		if !reflect.DeepEqual(got, wantA) {
+			t.Errorf("%q pick = %#v, want %#v", label, got, wantA)
+		}
+		if setup := setupModeAnswers(d, modes); len(setup) != 1 || setup[0].Kind != "setup_choice" || setup[0].Value != want {
+			t.Errorf("%q setup answer = %#v, want setup_choice %q", label, setup, want)
+		}
 	}
 }
 
