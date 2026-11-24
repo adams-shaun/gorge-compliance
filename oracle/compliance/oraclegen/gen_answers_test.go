@@ -494,3 +494,46 @@ func TestNamedOpponentSearchUsesChoiceQueue(t *testing.T) {
 		t.Fatalf("XAnswers = %#v, want %#v", got, want)
 	}
 }
+
+// TestLoneNamePickIsScripted: a gameplay "choose a card name" ask whose
+// deck-scoped name universe left one option is still XMage's full card-name
+// dialog (CR 201.3 allows any name), so it is scripted as a choice answer and
+// never folded as a forced one-option ask. Cabal Therapy asks mid-resolution
+// (Resume "name"); Phyrexian Revoker asks as it enters (Resume "etb"), not as
+// a setup choice.
+func TestLoneNamePickIsScripted(t *testing.T) {
+	cases := []struct {
+		name string
+		d    rules.OracleDecision
+	}{
+		{
+			name: "Cabal Therapy resolution",
+			d: rules.OracleDecision{
+				Step: 4, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "name",
+				Options: 1, Min: 1, Max: 1,
+				Picks: []string{"Cabal Therapy"}, PickIdx: []int{0}, PickKinds: []string{"name"},
+			},
+		},
+		{
+			name: "Phyrexian Revoker enters",
+			d: rules.OracleDecision{
+				Step: 2, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "etb",
+				Options: 1, Min: 1, Max: 1,
+				Picks: []string{"Phyrexian Revoker"}, PickIdx: []int{0}, PickKinds: []string{"name"},
+			},
+		},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			if forcedSingleOption(c.d) {
+				t.Fatalf("forcedSingleOption(%+v) = true; a card-name dialog is always posed", c.d)
+			}
+			want := make([][]XAnswer, c.d.Step+1)
+			want[c.d.Step] = []XAnswer{{Seat: c.d.Seat, Kind: "choice", Value: c.d.Picks[0]}}
+			got := XAnswers([]rules.OracleDecision{c.d}, c.d.Step+1, nil)
+			if !reflect.DeepEqual(got, want) {
+				t.Fatalf("XAnswers = %#v, want %#v", got, want)
+			}
+		})
+	}
+}
