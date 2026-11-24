@@ -2,8 +2,9 @@
 # Replay Gladiolus Amicitia's stored item: a mandatory 1..1 library search
 # with 32 legal lands and no scripted pick must gather the first eligible
 # card instead of stopping the play with "Missing TARGET def" (strict and
-# trailing). Requires the read-only XMage build, like the driver's other
-# javac checks.
+# trailing). The test also moves the search inside the compared window, where
+# the driver must keep the strict miss rather than invent a card. Requires the
+# read-only XMage build, like the driver's other javac checks.
 set -euo pipefail
 root=$(realpath -m "${XMAGE_ORACLE_DIR:-$(dirname "$0")/../.oracle-build/xmage}")
 out=$(realpath -m "${1:-.coverage/xmage-driver/gladiolus-search-driverout}")

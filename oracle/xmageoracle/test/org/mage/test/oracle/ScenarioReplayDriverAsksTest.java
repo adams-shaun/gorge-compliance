@@ -407,9 +407,13 @@ public final class ScenarioReplayDriverAsksTest {
     }
 
     /** (l) Gladiolus Amicitia's ETB search: a mandatory single-pick library
-     * search with many legal cards and no scripted pick. The driver gathers
-     * the first eligible card in the order XMage presents the search
-     * (name-sorted) instead of strict-missing "Missing TARGET def". A queued
+     * search with many legal cards and no scripted pick. In the trailing play
+     * -- after every checkpoint was captured, which is where the stored item
+     * poses it -- the driver gathers the first eligible card in the order
+     * XMage presents the search (name-sorted) instead of strict-missing
+     * "Missing TARGET def". The same ask INSIDE the compared window is a real
+     * decision the driver cannot infer, so it must not be guessed: the helper
+     * returns null and the strict miss is kept for the loose rerun. A queued
      * answer naming a candidate, at any index (the base scans the whole
      * queue), is the ask's own; a front skip that can close it is too. An
      * answer for a later ask does not stop the pick, and a skip on a fixed
@@ -421,42 +425,64 @@ public final class ScenarioReplayDriverAsksTest {
         java.util.UUID swamp = java.util.UUID.randomUUID();
         java.util.function.BiPredicate<java.util.UUID, String> byName =
                 (id, name) -> name.equals(id.equals(forest) ? "Forest" : id.equals(mountain) ? "Mountain" : "Swamp");
-        Class<?>[] types = {List.class, List.class, boolean.class, boolean.class, java.util.function.BiPredicate.class};
+        Class<?>[] types = {List.class, List.class, boolean.class, boolean.class, boolean.class,
+            java.util.function.BiPredicate.class};
         List<java.util.UUID> many = new ArrayList<>(Arrays.asList(forest, mountain, swamp));
 
         check(forest.equals(adapter("searchPickChoice", types,
-                        new ArrayList<String>(), many, true, false, byName)),
+                        new ArrayList<String>(), many, true, false, true, byName)),
                 "an unscripted multi-candidate single-pick search did not gather the first presented card");
+        check(adapter("searchPickChoice", types,
+                        new ArrayList<String>(), many, true, false, false, byName) == null,
+                "a search inside the compared window was guessed instead of keeping its strict miss");
         check(forest.equals(adapter("searchPickChoice", types,
-                        new ArrayList<>(Collections.singletonList("Shock")), many, true, false, byName)),
+                        new ArrayList<>(Collections.singletonList("Shock")), many, true, false, true, byName)),
                 "a later ask's queued answer stopped the search pick");
         check(adapter("searchPickChoice", types,
-                        new ArrayList<>(Collections.singletonList("Mountain")), many, true, false, byName) == null,
+                        new ArrayList<>(Collections.singletonList("Mountain")), many, true, false, true, byName) == null,
                 "a queued answer naming a candidate was overridden");
         check(adapter("searchPickChoice", types,
-                        new ArrayList<>(Arrays.asList("Shock", "Mountain")), many, true, false, byName) == null,
+                        new ArrayList<>(Arrays.asList("Shock", "Mountain")), many, true, false, true, byName) == null,
                 "a queued answer naming a candidate behind another ask's answer (index 1) was"
                         + " overridden: TestPlayer scans the whole queue");
         List<String> skip = new ArrayList<>(Collections.singletonList(TestPlayer.TARGET_SKIP));
-        check(adapter("searchPickChoice", types, skip, many, true, true, byName) == null,
+        check(adapter("searchPickChoice", types, skip, many, true, true, true, byName) == null,
                 "a front skip that can close the search was overridden");
-        check(forest.equals(adapter("searchPickChoice", types, skip, many, true, false, byName))
+        check(forest.equals(adapter("searchPickChoice", types, skip, many, true, false, true, byName))
                         && skip.equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
                 "a fixed search did not take its pick and leave the later ask's skip queued");
-        check(adapter("searchPickChoice", types, new ArrayList<String>(), many, false, false, byName) == null,
+        check(adapter("searchPickChoice", types, new ArrayList<String>(), many, false, false, true, byName) == null,
                 "a multi-pick search (count is its own decision) was guessed");
         check(adapter("searchPickChoice", types, new ArrayList<String>(),
-                        new ArrayList<java.util.UUID>(), true, false, byName) == null,
+                        new ArrayList<java.util.UUID>(), true, false, true, byName) == null,
                 "an empty search produced a pick");
         // The helper alone is not the fix: a merge that drops the call from
-        // the TargetCardInLibrary funnel leaves every check above passing
-        // while the strict replay fails again. Pin the call site.
+        // the TargetCardInLibrary funnel, or drops the trailing gate from the
+        // call, leaves every check above passing while the strict replay
+        // either fails again or compares an invented in-window board. Pin
+        // both the call site and the trailing predicate it passes.
         String src = System.getProperty("scenarioReplay.source");
         check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
         String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
         int call = text.indexOf("= searchPickChoice(");
         check(call >= 0, "ScriptedChoicePlayer.chooseTarget(Cards, TargetCard) must call searchPickChoice"
                 + " for a TargetCardInLibrary ask");
+        check(text.indexOf("owner.pastLastCheckpoint()", call) > call,
+                "the search funnel must gate the pick on owner.pastLastCheckpoint(): an in-window"
+                        + " search is a real decision, not one to invent");
+        check(text.indexOf("boolean pastLastCheckpoint()") >= 0,
+                "ScenarioReplay.pastLastCheckpoint must exist to describe the trailing play");
+        // A front skip that closes a short search is the ask's own answer even
+        // when only one card is legal: the funnel must close the search before
+        // the lone-target rule, or it takes the card and leaves the skip
+        // queued (CR 701.23b).
+        int funnel = text.indexOf(
+                "public boolean chooseTarget(Outcome outcome, Cards cards, mage.target.TargetCard target");
+        int closeSkip = text.indexOf("if (shortSearchStop(", funnel);
+        int loneCall = text.indexOf("UUID lone = unscriptedLoneTarget(", funnel);
+        check(funnel >= 0 && closeSkip > funnel && loneCall > closeSkip,
+                "the TargetCardInLibrary funnel must handle shortSearchStop before the lone-target"
+                        + " rule: a skip it can close is not overridden");
     }
 
     /** (j) NPH Blinding Souleater's {W/P} activation: XMage asks "Pay 2 life
