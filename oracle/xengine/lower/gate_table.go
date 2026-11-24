@@ -178,7 +178,7 @@ var objectTable = map[string]entry{
 	"EnteredFrom":                      isIgnored("provenance of EnteredThisTurn, which is refused when set"),
 	"WasDealtDamageThisTurn":           isRefused("this-turn damage record"),
 	"DealtDamageThisTurnHere":          isRefused("this-turn record that this object dealt damage; setup cannot restate it"),
-	"DealtDamageToPlayersThisTurnHere": isRefused("this-turn per-seat record that this object dealt damage to players (the DamageProvenance fold; TurnChange and a zone change clear it); setup cannot restate the damage history"),
+	"DealtDamageToPlayersThisTurnHere": isRefused("this-turn per-seat record that this object dealt damage to players (the DamageProvenance fold; TurnChange and a zone change clear it); setup cannot restate the damage history; live only when a card in the game names the dealtDamageToOppThisTurn filter word (Dunerider Outlaw, Whirling Dervish)"),
 	"Intensity":                        isRefused("perpetual intensity an Alchemy card accumulated; setup places the printed starting intensity only"),
 	"WasDealtExcessDamageThisTurn":     isRefused("this-turn damage record"),
 	"DamageReceivedThisTurn":           isRefused("this-turn damage record"),
