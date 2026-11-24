@@ -31,9 +31,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 861c5374-a8e7-4684-9a1b-e6ce3b98e4a2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 861e427f-cbb4-4ed5-8356-747ac638ac34	cast	cast-resolve	agreed	-	X	scen	1	0	Whiskervale Forerunner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 861e427f-cbb4-4ed5-8356-747ac638ac34	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Whiskervale Forerunner/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-861eb7d7-7616-4620-a4fd-4b8c3bf00dd1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Promising Vein/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+861eb7d7-7616-4620-a4fd-4b8c3bf00dd1	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:promising-vein:f0a0:s2,f:xs:XP:promising-vein:f0a0:s2	-	-	-	8c0bd19283bb	-	e6fcdf98c675	-	-	2026-11-24	xproof
 861eb7d7-7616-4620-a4fd-4b8c3bf00dd1	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Promising Vein/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-861eb7d7-7616-4620-a4fd-4b8c3bf00dd1	land	play-land	agreed	-	X	scen	1	0	Promising Vein/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+861eb7d7-7616-4620-a4fd-4b8c3bf00dd1	land	land	agreed	-	FX	start	2	0	x:xs:XP:promising-vein:land:s1,f:xs:XP:promising-vein:land:s1	-	-	-	8c0bd19283bb	-	e6fcdf98c675	-	-	2026-11-24	xproof
 861f0b1c-3b37-4d38-9232-e42565247076	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 861fa80d-99e0-4332-a2b8-5aa959fd41a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86214b4c-a3ad-4372-b5fe-8f742a7a3d4c	cast	cast-resolve	agreed	-	X	scen	1	0	Reverent Howl/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 864c7575-4589-416c-b143-310d5ef238c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 864c81e4-d612-4939-b4df-4b125cb8cdf2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 864d9db7-34ca-4440-8d6d-096f9eddedd4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:surge-engine:cast:s1,f:xs:XP:surge-engine:cast:s1	-	-	-	d864b561c9cb	-	297c1233c2c4	-	-	2026-11-24	xproof
-864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a0	Animate	agreed	-	FX	start	4	0	x:xs:XP:surge-engine:f0a1:s1,f:xs:XP:surge-engine:f0a1:s1	-	-	-	23b491658465	-	297c1233c2c4	-	-	2026-11-24	xproof
+864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:surge-engine:f0a1:s1,f:xs:XP:surge-engine:f0a1:s1	-	-	-	8c0bd19283bb	-	297c1233c2c4	-	-	2026-11-24	xproof
 864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 864fc52a-e9f4-4254-901e-b949d96b34eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

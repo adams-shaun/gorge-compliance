@@ -48,8 +48,8 @@ bf3e3004-4133-4542-9ee3-2fb98e759ffa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spr
 bf3e3004-4133-4542-9ee3-2fb98e759ffa	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:sprite-noble:f0a0:s1,f:xs:XP:sprite-noble:f0a0:s1	-	-	-	d864b561c9cb	-	04893331abbd	-	-	2026-11-24	xproof
 bf3ff6ff-eb0e-4d0a-99cb-c377622ae640	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bf3ff6ff-eb0e-4d0a-99cb-c377622ae640	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:rampaging-classmate:f0t0:s1,f:xs:XP:rampaging-classmate:f0t0:s1	-	-	-	8c0bd19283bb	-	27d897c9b08e	-	-	2026-11-24	xproof
-bf4268e6-170a-445b-b215-718f7494ae28	cast	cast	agreed	-	X	start	1	0	x:xs:XP:volley-veteran:f0t0:s2	-	-	-	e07cf3a05ba5	-	07e34f4e4e7a	-	-	2026-11-24	xproof
-bf4268e6-170a-445b-b215-718f7494ae28	f0/t0	ChangesZone	agreed	-	X	start	1	0	x:xs:XP:volley-veteran:f0t0:s2	-	-	-	e07cf3a05ba5	-	07e34f4e4e7a	-	-	2026-11-24	xproof
+bf4268e6-170a-445b-b215-718f7494ae28	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:volley-veteran:cast:s1,f:xs:XP:volley-veteran:cast:s1	-	-	-	8c0bd19283bb	-	07e34f4e4e7a	-	-	2026-11-24	xproof
+bf4268e6-170a-445b-b215-718f7494ae28	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:volley-veteran:cast:s1,f:xs:XP:volley-veteran:cast:s1	-	-	-	8c0bd19283bb	-	07e34f4e4e7a	-	-	2026-11-24	xproof
 bf44b9b7-180c-4d8c-a410-9561e4c8fb9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bf44b9b7-180c-4d8c-a410-9561e4c8fb9b	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 bf526a0d-65cc-445f-b2b8-19a2cfdd836b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -84,8 +84,8 @@ bf6ea336-6a4d-4653-acdd-f09af0b9f0e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vio
 bf71c210-8fef-4eda-a943-8c52cbae6159	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bf71cca7-be71-4429-9cb6-1eb34ff847eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jolrael-s-favor:cast:s1,f:xs:XP:jolrael-s-favor:cast:s1	-	-	-	5f2128bf97e4	-	ac5ddc78793c	-	-	2026-11-24	xproof
 bf71cca7-be71-4429-9cb6-1eb34ff847eb	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-bf75a3d1-f184-4b48-a913-21caee1db084	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Izzet Guildgate/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-bf75a3d1-f184-4b48-a913-21caee1db084	land	play-land	agreed	-	X	scen	1	0	Izzet Guildgate/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+bf75a3d1-f184-4b48-a913-21caee1db084	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:izzet-guildgate:f0a0:s2,f:xs:XP:izzet-guildgate:f0a0:s2	-	-	-	8c0bd19283bb	-	552cef79d539	-	-	2026-11-24	xproof
+bf75a3d1-f184-4b48-a913-21caee1db084	land	land	agreed	-	FX	start	2	0	x:xs:XP:izzet-guildgate:land:s1,f:xs:XP:izzet-guildgate:land:s1	-	-	-	8c0bd19283bb	-	552cef79d539	-	-	2026-11-24	xproof
 bf76ba01-e06f-4451-a4b4-cf548b43eafc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bf76ba01-e06f-4451-a4b4-cf548b43eafc	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 bf7710cb-70cb-42fb-b840-cc4f385daa7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

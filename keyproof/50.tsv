@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 507ffc26-6c45-4167-9e0d-3c88b065720a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 508189e1-9cef-4f9c-8ff1-078c99a0f603	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sunken Citadel/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 508189e1-9cef-4f9c-8ff1-078c99a0f603	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Sunken Citadel/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-508189e1-9cef-4f9c-8ff1-078c99a0f603	land	play-land	agreed	-	X	scen	1	0	Sunken Citadel/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+508189e1-9cef-4f9c-8ff1-078c99a0f603	land	land	agreed	-	FX	start	2	0	x:xs:XP:sunken-citadel:land:s1,f:xs:XP:sunken-citadel:land:s1	-	-	-	8c0bd19283bb	-	b3dc62cab83e	-	-	2026-11-24	xproof
 508248d1-09a4-4e41-a4c9-286618e5061e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50863075-a30b-4238-8e31-5af32a39d886	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50863075-a30b-4238-8e31-5af32a39d886	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,7 +145,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50ab0194-c7dc-4f11-abc0-1a82393cc42e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pawpatch Recruit/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ab0194-c7dc-4f11-abc0-1a82393cc42e	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Pawpatch Recruit/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ab0194-c7dc-4f11-abc0-1a82393cc42e	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50ace222-57f1-477f-9e06-155d7b403512	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:realm-scorcher-hellkite:f0t0:s1,f:xs:XP:realm-scorcher-hellkite:f0t0:s1	-	-	-	23b491658465	-	7910b3692eb6	-	-	2026-11-24	xproof
+50ace222-57f1-477f-9e06-155d7b403512	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:realm-scorcher-hellkite:f0t0:s1,f:xs:XP:realm-scorcher-hellkite:f0t0:s1	-	-	-	8c0bd19283bb	-	7910b3692eb6	-	-	2026-11-24	xproof
 50ace222-57f1-477f-9e06-155d7b403512	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Realm-Scorcher Hellkite/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ace222-57f1-477f-9e06-155d7b403512	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Realm-Scorcher Hellkite/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ace222-57f1-477f-9e06-155d7b403512	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:realm-scorcher-hellkite:f0a0:s1,f:xs:XP:realm-scorcher-hellkite:f0a0:s1	-	-	-	23b491658465	-	7910b3692eb6	-	-	2026-11-24	xproof

@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a179d68-c9e6-4f46-99bf-11b2a2708990	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8a1a5862-c027-4c15-99a7-1795d0da96da	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:tough-cookie:f0t0:s2,f:xs:XP:tough-cookie:f0t0:s2	-	-	-	e07cf3a05ba5	-	807a3ff05f3f	-	-	2026-11-24	xproof
 8a1a5862-c027-4c15-99a7-1795d0da96da	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tough Cookie/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8a1a5862-c027-4c15-99a7-1795d0da96da	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:tough-cookie:f0a0:s1,f:xs:XP:tough-cookie:f0a0:s1	-	-	-	23b491658465	-	807a3ff05f3f	-	-	2026-11-24	xproof
+8a1a5862-c027-4c15-99a7-1795d0da96da	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:tough-cookie:f0a0:s1,f:xs:XP:tough-cookie:f0a0:s1	-	-	-	8c0bd19283bb	-	807a3ff05f3f	-	-	2026-11-24	xproof
 8a1a5862-c027-4c15-99a7-1795d0da96da	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:tough-cookie:f0t0:s2,f:xs:XP:tough-cookie:f0t0:s2	-	-	-	e07cf3a05ba5	-	807a3ff05f3f	-	-	2026-11-24	xproof
 8a1d14c2-ca31-4711-b385-f4af0c1c0b04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a1d14c2-ca31-4711-b385-f4af0c1c0b04	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a70ddc5-bb51-45eb-96f2-8ecaecac0cc2	f0/a1	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:ajani-unyielding:cast:s1,f:xs:XP:ajani-unyielding:cast:s1	-	-	-	d864b561c9cb	-	62fbb28b69a7	-	-	2026-11-24	xproof
 8a70ddc5-bb51-45eb-96f2-8ecaecac0cc2	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8a7183cc-161c-444d-a889-a17519c8061b	cast	cast-resolve	agreed	-	X	scen	1	0	Arcanis the Omnipotent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8a7183cc-161c-444d-a889-a17519c8061b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Arcanis the Omnipotent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8a7183cc-161c-444d-a889-a17519c8061b	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:arcanis-the-omnipotent:f0a0:s1,f:xs:XP:arcanis-the-omnipotent:f0a0:s1	-	-	-	8c0bd19283bb	-	7b1770ba93b8	-	-	2026-11-24	xproof
 8a7183cc-161c-444d-a889-a17519c8061b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Arcanis the Omnipotent/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a7643e4-b824-441a-bbe6-349fc7a3e11e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:starlit-mantle:f0t0:s1,f:xs:XP:starlit-mantle:f0t0:s1	-	-	-	ae86f6029288	-	c6ebdd7b690e	-	-	2026-11-24	xproof
 8a7643e4-b824-441a-bbe6-349fc7a3e11e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:starlit-mantle:f0t0:s1,f:xs:XP:starlit-mantle:f0t0:s1	-	-	-	ae86f6029288	-	c6ebdd7b690e	-	-	2026-11-24	xproof
@@ -192,7 +192,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ad91f64-ccab-4edc-bd54-b2ee9267d614	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ad91f64-ccab-4edc-bd54-b2ee9267d614	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8ada7388-fd8b-434c-a17a-bce19cf3e615	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ada7388-fd8b-434c-a17a-bce19cf3e615	f0/a1	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:elephant-graveyard:f0a0:s1,f:xs:XP:elephant-graveyard:f0a0:s1	-	-	-	23b491658465	-	67206cc88b12	-	-	2026-11-24	xproof
+8ada7388-fd8b-434c-a17a-bce19cf3e615	f0/a1	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:elephant-graveyard:f0a0:s1,f:xs:XP:elephant-graveyard:f0a0:s1	-	-	-	8c0bd19283bb	-	67206cc88b12	-	-	2026-11-24	xproof
 8ada7388-fd8b-434c-a17a-bce19cf3e615	land	land	agreed	-	FX	start	2	0	x:xs:XP:elephant-graveyard:land:s1,f:xs:XP:elephant-graveyard:land:s1	-	-	-	ae86f6029288	-	67206cc88b12	-	-	2026-11-24	xproof
 8adbba6e-03ef-4278-aec5-8a4496b377a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8add6996-6c5c-4aa2-93d4-a39efcfd22b2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:celestial-force:cast:s1,f:xs:XP:celestial-force:cast:s1	-	-	-	8c0bd19283bb	-	041fc08e1aca	-	-	2026-11-24	xproof

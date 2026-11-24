@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b46800b-711b-4cbb-b296-26115b4f6839	static#0.0	static#0.0	agreed	-	X	scen	1	0	Visions of Villainy/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b4b6af2-f929-4082-a5ae-61a4e074bf14	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silhana-starfletcher:cast:s1,f:xs:XP:silhana-starfletcher:cast:s1	-	-	-	77494c1ce129	-	03bc2fc0924b	-	-	2026-11-24	xproof
 3b4b6af2-f929-4082-a5ae-61a4e074bf14	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:littjara-mirrorlake:f0a1:s1,f:xs:XP:littjara-mirrorlake:f0a1:s1	-	-	-	23b491658465	-	327b80782d82	-	-	2026-11-24	xproof
+3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:littjara-mirrorlake:f0a1:s2,f:xs:XP:littjara-mirrorlake:f0a1:s2	-	-	-	8c0bd19283bb	-	327b80782d82	-	-	2026-11-24	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	land	land	agreed	-	FX	start	2	0	x:xs:XP:littjara-mirrorlake:land:s1,f:xs:XP:littjara-mirrorlake:land:s1	-	-	-	d864b561c9cb	-	327b80782d82	-	-	2026-11-24	xproof
 3b583358-d0d5-4f53-b06c-c6439156e684	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,8 +152,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ba809ce-3556-415c-9fcc-291cb10a43cd	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Ajani, Outland Chaperone/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3ba81fbe-2c53-495b-9a2b-f124475bd71b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drove-of-elves:cast:s1,f:xs:XP:drove-of-elves:cast:s1	-	-	-	8a1b1a193ec0	-	0c0dde70cc3c	-	-	2026-11-24	xproof
 3baa8e38-ef93-435d-b63e-f781d5bfcc68	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Temple of Abandon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3baa8e38-ef93-435d-b63e-f781d5bfcc68	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Temple of Abandon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3baa8e38-ef93-435d-b63e-f781d5bfcc68	land	play-land	agreed	-	X	scen	1	0	Temple of Abandon/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3baa8e38-ef93-435d-b63e-f781d5bfcc68	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:temple-of-abandon:f0t0:s1,f:xs:XP:temple-of-abandon:f0t0:s1	-	-	-	8c0bd19283bb	-	e56c7bde1c73	-	-	2026-11-24	xproof
+3baa8e38-ef93-435d-b63e-f781d5bfcc68	land	land	agreed	-	FX	start	2	0	x:xs:XP:temple-of-abandon:f0t0:s1,f:xs:XP:temple-of-abandon:f0t0:s1	-	-	-	8c0bd19283bb	-	e56c7bde1c73	-	-	2026-11-24	xproof
 3baee36b-d64f-448c-ae45-c1ec124c92ec	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	b725b6b5cf50	-	-	2026-11-24	xproof
 3bafc004-1c90-4939-9dcb-72667c170e39	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bafc004-1c90-4939-9dcb-72667c170e39	f0/a0	NULL	owed	refused:steps-needed:cost:UP	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

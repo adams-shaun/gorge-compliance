@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 975b4e0f-1133-4ffa-a6b1-d319d248dcde	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 975ec9a3-6f20-4177-8211-82526e092538	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Overgrown Tomb/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 975ec9a3-6f20-4177-8211-82526e092538	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Overgrown Tomb/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-975ec9a3-6f20-4177-8211-82526e092538	land	play-land	agreed	-	X	scen	1	0	Overgrown Tomb/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+975ec9a3-6f20-4177-8211-82526e092538	land	land	agreed	-	FX	start	2	0	x:xs:XP:overgrown-tomb:land:s1,f:xs:XP:overgrown-tomb:land:s1	-	-	-	8c0bd19283bb	-	60c7aa27a402	-	-	2026-11-24	xproof
 97607bf5-ca7b-4b1b-963e-390faf6e413e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enterprising-scallywag:cast:s1,f:xs:XP:enterprising-scallywag:cast:s1	-	-	-	23b491658465	-	190a11f404c7	-	-	2026-11-24	xproof
 97607bf5-ca7b-4b1b-963e-390faf6e413e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Enterprising Scallywag/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9760c396-fc7d-41bc-8f03-5ee359eaec00	cast	cast-resolve	agreed	-	FX	scen	2	0	Welcome to Sweettooth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -88,8 +88,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 977c2f33-b622-4172-9efb-7f523becd32b	land	play-land	agreed	-	X	scen	1	0	Blazemire Verge/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 977f9390-e01d-4e9d-8e9c-e543b1266972	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zimone-infinite-analyst:cast:s1,f:xs:XP:zimone-infinite-analyst:cast:s1	-	-	-	8c0bd19283bb	-	76aa60ec7b95	-	-	2026-11-24	xproof
 977f9390-e01d-4e9d-8e9c-e543b1266972	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-9780d975-acbe-40c6-b444-1e1e6b772788	cast	cast-resolve	agreed	-	X	scen	1	0	Poetic Ingenuity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9780d975-acbe-40c6-b444-1e1e6b772788	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Poetic Ingenuity/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9780d975-acbe-40c6-b444-1e1e6b772788	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:poetic-ingenuity:cast:s1,f:xs:XP:poetic-ingenuity:cast:s1	-	-	-	8c0bd19283bb	-	fa5accca791b	-	-	2026-11-24	xproof
+9780d975-acbe-40c6-b444-1e1e6b772788	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:poetic-ingenuity:cast:s1,f:xs:XP:poetic-ingenuity:cast:s1	-	-	-	8c0bd19283bb	-	fa5accca791b	-	-	2026-11-24	xproof
 9780d975-acbe-40c6-b444-1e1e6b772788	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Poetic Ingenuity/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97818ed4-3590-4a3b-92ce-716f9cfdc78e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sylvok-replica:cast:s1,f:xs:XP:sylvok-replica:cast:s1	-	-	-	d864b561c9cb	-	3586a3944183	-	-	2026-11-24	xproof
 97818ed4-3590-4a3b-92ce-716f9cfdc78e	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:sylvok-replica:f0a0:s1,f:xs:XP:sylvok-replica:f0a0:s1	-	-	-	d864b561c9cb	-	3586a3944183	-	-	2026-11-24	xproof

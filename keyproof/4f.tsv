@@ -44,7 +44,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f4358cb-59df-46d9-be27-69929f5a615c	land	play-land	agreed	-	X	scen	1	0	Ishgard, the Holy See/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f437f42-1ac5-4681-9b16-4eae9f49bb22	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skyshroud-sentinel:f0t0:s1,f:xs:XP:skyshroud-sentinel:f0t0:s1	-	-	-	5f2128bf97e4	-	7eb55bbfd122	-	-	2026-11-24	xproof
 4f437f42-1ac5-4681-9b16-4eae9f49bb22	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skyshroud-sentinel:f0t0:s1,f:xs:XP:skyshroud-sentinel:f0t0:s1	-	-	-	5f2128bf97e4	-	7eb55bbfd122	-	-	2026-11-24	xproof
-4f452ce7-1166-4810-afed-ea5e156a6f52	cast	cast-resolve	agreed	-	X	scen	1	0	Aurelia's Vindicator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4f452ce7-1166-4810-afed-ea5e156a6f52	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aurelia-s-vindicator:cast:s1,f:xs:XP:aurelia-s-vindicator:cast:s1	-	-	-	8c0bd19283bb	-	bd7c4976d0c9	-	-	2026-11-24	xproof
 4f452ce7-1166-4810-afed-ea5e156a6f52	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aurelia's Vindicator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f452ce7-1166-4810-afed-ea5e156a6f52	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aurelia's Vindicator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f452ce7-1166-4810-afed-ea5e156a6f52	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aurelia's Vindicator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f819ba4-52ef-4fdd-8e4c-5ae3b2f44db5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f868b9b-42f4-4f74-bce2-3f9c063a572c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sight-of-the-scalelords:cast:s1,f:xs:XP:sight-of-the-scalelords:cast:s1	-	-	-	d864b561c9cb	-	70be2a478475	-	-	2026-11-24	xproof
 4f868b9b-42f4-4f74-bce2-3f9c063a572c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sight-of-the-scalelords:cast:s1,f:xs:XP:sight-of-the-scalelords:cast:s1	-	-	-	d864b561c9cb	-	70be2a478475	-	-	2026-11-24	xproof
-4f890d42-e4f1-4eed-aa6c-718865de8927	cast	cast-resolve	agreed	-	X	scen	1	0	Vizier of the Menagerie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4f890d42-e4f1-4eed-aa6c-718865de8927	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vizier-of-the-menagerie:cast:s1,f:xs:XP:vizier-of-the-menagerie:cast:s1	-	-	-	8c0bd19283bb	-	691d498fe988	-	-	2026-11-24	xproof
 4f890d42-e4f1-4eed-aa6c-718865de8927	static#0.0	static#0.0	agreed	-	X	scen	1	0	Vizier of the Menagerie/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f890d42-e4f1-4eed-aa6c-718865de8927	static#0.1	static#0.1	agreed	-	X	scen	1	0	Vizier of the Menagerie/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f890d42-e4f1-4eed-aa6c-718865de8927	static#0.2	static#0.2	agreed	-	X	scen	1	0	Vizier of the Menagerie/static#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fad3816-41af-4fa4-85b4-ba37614ec848	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Hollow Scavenger/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4faf62c3-3ba7-4540-be26-777305ef184e	cast	cast-resolve	agreed	-	FX	scen	2	0	Ambush Gigapede/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4faf62c3-3ba7-4540-be26-777305ef184e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fb00dbe-1f82-4ba6-b18c-97e816d10d3a	cast	cast-resolve	agreed	-	X	scen	1	0	Patchwork Banner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4fb00dbe-1f82-4ba6-b18c-97e816d10d3a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Patchwork Banner/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4fb00dbe-1f82-4ba6-b18c-97e816d10d3a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:patchwork-banner:cast:s1,f:xs:XP:patchwork-banner:cast:s1	-	-	-	8c0bd19283bb	-	f99d4fc06a01	-	-	2026-11-24	xproof
+4fb00dbe-1f82-4ba6-b18c-97e816d10d3a	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:patchwork-banner:cast:s2,f:xs:XP:patchwork-banner:cast:s2	-	-	-	8c0bd19283bb	-	f99d4fc06a01	-	-	2026-11-24	xproof
 4fb00dbe-1f82-4ba6-b18c-97e816d10d3a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Patchwork Banner/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fb0ff70-eba1-4485-b68d-444eb512a2a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:furious-bellow:cast:s1,f:xs:XP:furious-bellow:cast:s1	-	-	-	d864b561c9cb	-	cf5d162d7680	-	-	2026-11-24	xproof
 4fb1d33f-a87d-46cf-a73e-882c3dbcb26f	cast	cast-resolve	agreed	-	X	scen	1	0	Furious Forebear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

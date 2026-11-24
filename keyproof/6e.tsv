@@ -70,8 +70,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e64f1e0-ddd6-4ee7-8797-086e234b02e8	cast	cast-resolve	agreed	-	X	scen	1	0	Steel Hellkite/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6e64f1e0-ddd6-4ee7-8797-086e234b02e8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Steel Hellkite/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6e64f1e0-ddd6-4ee7-8797-086e234b02e8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Steel Hellkite/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6e64f1e0-ddd6-4ee7-8797-086e234b02e8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Steel Hellkite/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6e64f1e0-ddd6-4ee7-8797-086e234b02e8	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Steel Hellkite/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6e64f1e0-ddd6-4ee7-8797-086e234b02e8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:steel-hellkite:f0a0:s1,f:xs:XP:steel-hellkite:f0a0:s1	-	-	-	8c0bd19283bb	-	7847c536d169	-	-	2026-11-24	xproof
+6e64f1e0-ddd6-4ee7-8797-086e234b02e8	f0/a1	DestroyAll	agreed	-	FX	start	2	0	x:xs:XP:steel-hellkite:f0a0:s1,f:xs:XP:steel-hellkite:f0a0:s1	-	-	-	8c0bd19283bb	-	7847c536d169	-	-	2026-11-24	xproof
 6e66e983-6349-428b-b511-8738c03ef8fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e67551b-1f6e-4ef4-9baf-520607b8cb61	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dream-stalker:cast:s1,f:xs:XP:dream-stalker:cast:s1	-	-	-	9ee19e8250ce	-	1730e2ba5897	-	-	2026-11-24	xproof
 6e67551b-1f6e-4ef4-9baf-520607b8cb61	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dream-stalker:cast:s1,f:xs:XP:dream-stalker:cast:s1	-	-	-	9ee19e8250ce	-	1730e2ba5897	-	-	2026-11-24	xproof
@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6ec9a14a-0a62-4f8a-9147-3cab01411a65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ec9f9a9-9e66-4d81-ae22-dc0de596acd5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6eca2ac9-16ba-4a11-b6ee-3caf2d7d8254	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6eca2ac9-16ba-4a11-b6ee-3caf2d7d8254	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:tablet-of-compleation:f0a2:s1,f:xs:XP:tablet-of-compleation:f0a2:s1	-	-	-	23b491658465	-	6469bdc8882b	-	-	2026-11-24	xproof
+6eca2ac9-16ba-4a11-b6ee-3caf2d7d8254	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:tablet-of-compleation:f0a2:s1,f:xs:XP:tablet-of-compleation:f0a2:s1	-	-	-	8c0bd19283bb	-	6469bdc8882b	-	-	2026-11-24	xproof
 6eca2ac9-16ba-4a11-b6ee-3caf2d7d8254	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6eca2ac9-16ba-4a11-b6ee-3caf2d7d8254	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ecc61ff-719a-405d-b02a-01607729d05c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:horned-troll:cast:s1,f:xs:XP:horned-troll:cast:s1	-	-	-	25696bf19d5b	-	e477a340c774	-	-	2026-11-24	xproof

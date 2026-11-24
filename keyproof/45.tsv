@@ -61,7 +61,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 453b2b3c-7df5-4515-9565-82f603cf451b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ruric Thar, Magecrusher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 453b2b3c-7df5-4515-9565-82f603cf451b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ruric Thar, Magecrusher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 453b2b3c-7df5-4515-9565-82f603cf451b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ruric Thar, Magecrusher/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-45429b2c-be3b-4b2e-9bab-a059ccbda8cd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Blossoming Sands/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+45429b2c-be3b-4b2e-9bab-a059ccbda8cd	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:blossoming-sands:f0a0:s2,f:xs:XP:blossoming-sands:f0a0:s2	-	-	-	8c0bd19283bb	-	9ca81039ef38	-	-	2026-11-24	xproof
 45429b2c-be3b-4b2e-9bab-a059ccbda8cd	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Blossoming Sands/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45429b2c-be3b-4b2e-9bab-a059ccbda8cd	land	play-land	agreed	-	X	scen	1	0	Blossoming Sands/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4543a99d-eefa-470d-976d-11250524ae28	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 458ca9f4-4622-48e1-9ca1-6a8117188973	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 458d2b12-f578-4392-98d3-c3bc83f316c4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 458d2b12-f578-4392-98d3-c3bc83f316c4	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-45900b2f-f6a9-4c42-9642-008f3c1cf6dd	cast	cast-resolve	agreed	-	X	scen	1	0	Tarmogoyf/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+45900b2f-f6a9-4c42-9642-008f3c1cf6dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tarmogoyf:cast:s1,f:xs:XP:tarmogoyf:cast:s1	-	-	-	8c0bd19283bb	-	ad2498e9218d	-	-	2026-11-24	xproof
 45900b2f-f6a9-4c42-9642-008f3c1cf6dd	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tarmogoyf/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4591e1e5-5cac-4812-80e0-67c1237862d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4591e1e5-5cac-4812-80e0-67c1237862d3	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof

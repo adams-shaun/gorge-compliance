@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4228dd75-1fdd-48dc-9259-b841b2e46c64	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 422aca0b-8e8f-4774-9a20-6f7a1cae967e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scout-the-wilderness:cast:s1,f:xs:XP:scout-the-wilderness:cast:s1	-	-	-	ae86f6029288	-	50cb90853c51	-	-	2026-11-24	xproof
 422e1869-134f-463d-9fa1-86b66a998b3e	cast	cast-resolve	agreed	-	FX	scen	2	0	Fabricate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-422ef4ec-863a-450e-9577-a0707bc16532	cast	cast-resolve	agreed	-	X	scen	1	0	Brazen Scourge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+422ef4ec-863a-450e-9577-a0707bc16532	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brazen-scourge:cast:s1,f:xs:XP:brazen-scourge:cast:s1	-	-	-	8c0bd19283bb	-	1dcd817e4642	-	-	2026-11-24	xproof
 4230c7a3-4591-411e-afab-d2bfb58446de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4230c7a3-4591-411e-afab-d2bfb58446de	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4230c7a3-4591-411e-afab-d2bfb58446de	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -86,7 +86,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4280191f-e2cb-4cee-a3b4-660b3efd62e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4281a153-665b-44cf-bcff-9cf88c14c2b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4284ff9f-4085-4874-abc7-95467cb759a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4284ff9f-4085-4874-abc7-95467cb759a5	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:artificer-s-dragon:f0a1:s1,f:xs:XP:artificer-s-dragon:f0a1:s1	-	-	-	23b491658465	-	ec3d2b80d933	-	-	2026-11-24	xproof
+4284ff9f-4085-4874-abc7-95467cb759a5	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:artificer-s-dragon:f0a1:s1,f:xs:XP:artificer-s-dragon:f0a1:s1	-	-	-	8c0bd19283bb	-	ec3d2b80d933	-	-	2026-11-24	xproof
 4284ff9f-4085-4874-abc7-95467cb759a5	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4288ba56-ddd0-4bd9-ba61-daf03e9f2d7f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:shore-lurker:f0t0:s2,f:xs:XP:shore-lurker:f0t0:s2	-	-	-	267e485f6204	-	8c1c7038c684	-	-	2026-11-24	xproof
 4288ba56-ddd0-4bd9-ba61-daf03e9f2d7f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Shore Lurker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

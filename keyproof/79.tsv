@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79d290ea-c095-4135-9711-f3ce089dae43	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:architects-of-will:cast:s1,f:xs:XP:architects-of-will:cast:s1	-	-	-	8a1b1a193ec0	-	6def49daadc9	-	-	2026-11-24	xproof
 79d290ea-c095-4135-9711-f3ce089dae43	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79d290ea-c095-4135-9711-f3ce089dae43	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:architects-of-will:cast:s1,f:xs:XP:architects-of-will:cast:s1	-	-	-	8a1b1a193ec0	-	6def49daadc9	-	-	2026-11-24	xproof
-79d2efb2-145d-4377-a4e2-832ff2cb5677	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:exit-specialist:cast:s1,f:xs:XP:exit-specialist:cast:s1	-	-	-	23b491658465	-	0f8ecf36e27d	-	-	2026-11-24	xproof
+79d2efb2-145d-4377-a4e2-832ff2cb5677	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:exit-specialist:cast:s1,f:xs:XP:exit-specialist:cast:s1	-	-	-	8c0bd19283bb	-	0f8ecf36e27d	-	-	2026-11-24	xproof
 79d2efb2-145d-4377-a4e2-832ff2cb5677	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Exit Specialist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 79d2efb2-145d-4377-a4e2-832ff2cb5677	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Exit Specialist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 79d2efb2-145d-4377-a4e2-832ff2cb5677	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Exit Specialist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -190,6 +190,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79f575b3-ebd7-4d6a-acb9-27c16bcc7a39	f0/t2	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 79f8378a-fb50-4178-be53-b6926bc1cba5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:merrow-witsniper:f0t0:s1,f:xs:XP:merrow-witsniper:f0t0:s1	-	-	-	d864b561c9cb	-	535550e84dc1	-	-	2026-11-24	xproof
 79f8378a-fb50-4178-be53-b6926bc1cba5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:merrow-witsniper:f0t0:s1,f:xs:XP:merrow-witsniper:f0t0:s1	-	-	-	d864b561c9cb	-	535550e84dc1	-	-	2026-11-24	xproof
-79f94050-d850-41ca-b1db-5ae0cf743f0a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Temple of Epiphany/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-79f94050-d850-41ca-b1db-5ae0cf743f0a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Temple of Epiphany/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-79f94050-d850-41ca-b1db-5ae0cf743f0a	land	play-land	agreed	-	X	scen	1	0	Temple of Epiphany/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+79f94050-d850-41ca-b1db-5ae0cf743f0a	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:temple-of-epiphany:f0a0:s2,f:xs:XP:temple-of-epiphany:f0a0:s2	-	-	-	8c0bd19283bb	-	8941fb376f2c	-	-	2026-11-24	xproof
+79f94050-d850-41ca-b1db-5ae0cf743f0a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:temple-of-epiphany:f0t0:s1,f:xs:XP:temple-of-epiphany:f0t0:s1	-	-	-	8c0bd19283bb	-	8941fb376f2c	-	-	2026-11-24	xproof
+79f94050-d850-41ca-b1db-5ae0cf743f0a	land	land	agreed	-	FX	start	4	0	x:xs:XP:temple-of-epiphany:f0t0:s1,f:xs:XP:temple-of-epiphany:f0t0:s1	-	-	-	8c0bd19283bb	-	8941fb376f2c	-	-	2026-11-24	xproof

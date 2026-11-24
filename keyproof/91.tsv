@@ -37,9 +37,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91320afd-1d42-4cb5-ae40-4eed2fa91dfe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kavu-climber:f0t0:s1,f:xs:XP:kavu-climber:f0t0:s1	-	-	-	25696bf19d5b	-	890583936839	-	-	2026-11-24	xproof
 91320afd-1d42-4cb5-ae40-4eed2fa91dfe	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kavu-climber:f0t0:s1,f:xs:XP:kavu-climber:f0t0:s1	-	-	-	25696bf19d5b	-	890583936839	-	-	2026-11-24	xproof
 91320daf-f69c-4350-b0fc-4bb37a6904b1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Restless Anchorage/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-91320daf-f69c-4350-b0fc-4bb37a6904b1	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Restless Anchorage/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-91320daf-f69c-4350-b0fc-4bb37a6904b1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Restless Anchorage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-91320daf-f69c-4350-b0fc-4bb37a6904b1	land	play-land	agreed	-	X	scen	1	0	Restless Anchorage/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+91320daf-f69c-4350-b0fc-4bb37a6904b1	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:restless-anchorage:f0a1:s1,f:xs:XP:restless-anchorage:f0a1:s1	-	-	-	8c0bd19283bb	-	504753a29880	-	-	2026-11-24	xproof
+91320daf-f69c-4350-b0fc-4bb37a6904b1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:restless-anchorage:f0a1:s1,f:xs:XP:restless-anchorage:f0a1:s1	-	-	-	8c0bd19283bb	-	504753a29880	-	-	2026-11-24	xproof
+91320daf-f69c-4350-b0fc-4bb37a6904b1	land	land	agreed	-	FX	start	2	0	x:xs:XP:restless-anchorage:land:s1,f:xs:XP:restless-anchorage:land:s1	-	-	-	8c0bd19283bb	-	504753a29880	-	-	2026-11-24	xproof
 9132d7e6-7190-45e1-9c57-8fe2e5d0f2f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venom-eddie-brock:cast:s1,f:xs:XP:venom-eddie-brock:cast:s1	-	-	-	8c0bd19283bb	-	625c64a1a918	-	-	2026-11-24	xproof
 9132d7e6-7190-45e1-9c57-8fe2e5d0f2f2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 91363d71-eef0-48e8-9a68-8f363ff2790e	cast	cast-resolve	agreed	-	X	scen	1	0	Tend the Sprigs/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 917652c7-ac12-4cd7-ab2d-f2260a620d02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91770dc7-3de3-458f-a240-6540455fe05f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91770dc7-3de3-458f-a240-6540455fe05f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91770dc7-3de3-458f-a240-6540455fe05f	f0/a1	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:d-avenant-healer:f0a0:s1,f:xs:XP:d-avenant-healer:f0a0:s1	-	-	-	23b491658465	-	9ad6fedef5b2	-	-	2026-11-24	xproof
+91770dc7-3de3-458f-a240-6540455fe05f	f0/a1	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:d-avenant-healer:f0a0:s1,f:xs:XP:d-avenant-healer:f0a0:s1	-	-	-	8c0bd19283bb	-	9ad6fedef5b2	-	-	2026-11-24	xproof
 9178253e-0d89-450d-a93b-ed4765e945db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 917aef2b-0e6d-460e-8745-8da8423d1592	cast	cast-resolve	agreed	-	X	scen	1	0	Riverwheel Sweep/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9180f77f-c288-4a24-a35d-a16270b3d737	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:niambi-esteemed-speaker:f0t0:s1,f:xs:XP:niambi-esteemed-speaker:f0t0:s1	-	-	-	ae86f6029288	-	2519df10a46f	-	-	2026-11-24	xproof
 91cac048-90ca-41bc-9177-56c78453c4a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91d01119-9b3e-4629-8cf0-bbca2c19a7cc	cast	cast-resolve	agreed	-	X	scen	1	0	Rampaging Ceratops/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+91d01119-9b3e-4629-8cf0-bbca2c19a7cc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rampaging-ceratops:cast:s1,f:xs:XP:rampaging-ceratops:cast:s1	-	-	-	8c0bd19283bb	-	1d31f208628c	-	-	2026-11-24	xproof
 91d01119-9b3e-4629-8cf0-bbca2c19a7cc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rampaging Ceratops/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91d01119-9b3e-4629-8cf0-bbca2c19a7cc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rampaging Ceratops/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91d01119-9b3e-4629-8cf0-bbca2c19a7cc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rampaging Ceratops/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 339bddf5-a8fb-46d3-877e-b0441ca8a597	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 339bddf5-a8fb-46d3-877e-b0441ca8a597	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 339c39d9-7e10-458e-b602-4f0550840436	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-339c39d9-7e10-458e-b602-4f0550840436	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:platoon-dispenser:f0a1:s1,f:xs:XP:platoon-dispenser:f0a1:s1	-	-	-	23b491658465	-	e52b8eeaccfb	-	-	2026-11-24	xproof
+339c39d9-7e10-458e-b602-4f0550840436	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:platoon-dispenser:f0a1:s1,f:xs:XP:platoon-dispenser:f0a1:s1	-	-	-	8c0bd19283bb	-	e52b8eeaccfb	-	-	2026-11-24	xproof
 339c39d9-7e10-458e-b602-4f0550840436	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 339c39d9-7e10-458e-b602-4f0550840436	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 339f5334-b65a-445a-a016-20e997e0b4bb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mistrise Village/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -142,9 +142,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33b6555e-035d-4241-a341-a9b9139ca6f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thornplate-intimidator:f0t1:s1,f:xs:XP:thornplate-intimidator:f0t1:s1	-	-	-	23b491658465	-	d4ff25ff11bb	-	-	2026-11-24	xproof
 33b6555e-035d-4241-a341-a9b9139ca6f0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thornplate-intimidator:f0t1:s1,f:xs:XP:thornplate-intimidator:f0t1:s1	-	-	-	23b491658465	-	d4ff25ff11bb	-	-	2026-11-24	xproof
 33b6555e-035d-4241-a341-a9b9139ca6f0	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-33b9b3bd-33ca-46f3-b8bb-a978bc3d1085	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Temple of Deceit/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-33b9b3bd-33ca-46f3-b8bb-a978bc3d1085	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Temple of Deceit/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-33b9b3bd-33ca-46f3-b8bb-a978bc3d1085	land	play-land	agreed	-	X	scen	1	0	Temple of Deceit/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+33b9b3bd-33ca-46f3-b8bb-a978bc3d1085	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:temple-of-deceit:f0a0:s2,f:xs:XP:temple-of-deceit:f0a0:s2	-	-	-	8c0bd19283bb	-	b5629c303221	-	-	2026-11-24	xproof
+33b9b3bd-33ca-46f3-b8bb-a978bc3d1085	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:temple-of-deceit:f0t0:s1,f:xs:XP:temple-of-deceit:f0t0:s1	-	-	-	8c0bd19283bb	-	b5629c303221	-	-	2026-11-24	xproof
+33b9b3bd-33ca-46f3-b8bb-a978bc3d1085	land	land	agreed	-	FX	start	4	0	x:xs:XP:temple-of-deceit:f0t0:s1,f:xs:XP:temple-of-deceit:f0t0:s1	-	-	-	8c0bd19283bb	-	b5629c303221	-	-	2026-11-24	xproof
 33bb4aff-6476-4787-b3fe-028b1b1bd1bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:geomancer-s-gambit:cast:s1,f:xs:XP:geomancer-s-gambit:cast:s1	-	-	-	d864b561c9cb	-	5dba6f149777	-	-	2026-11-24	xproof
 33be346b-a232-4680-9b1b-a5eee57d2e75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33bea2f0-c5aa-44b5-8714-5f50f7f2bb05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

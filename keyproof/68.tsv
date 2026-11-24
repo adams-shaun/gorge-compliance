@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 680f5eca-b98e-4f73-a852-ab629d94297e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	961e7e67c2cd	-	-	2026-11-24	xproof
 6812e4d3-0034-4fc8-9ee9-520f76a0ea94	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Innovative Commons/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6812e4d3-0034-4fc8-9ee9-520f76a0ea94	land	play-land	agreed	-	X	scen	1	0	Innovative Commons/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-68175b49-f1e6-4b34-aad9-20d61a43d427	cast	cast-resolve	agreed	-	X	scen	1	0	Drogskol Reaver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+68175b49-f1e6-4b34-aad9-20d61a43d427	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:drogskol-reaver:cast:s2,f:xs:XP:drogskol-reaver:cast:s2	-	-	-	8c0bd19283bb	-	79c6cf2e18ce	-	-	2026-11-24	xproof
 68175b49-f1e6-4b34-aad9-20d61a43d427	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Drogskol Reaver/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68175b49-f1e6-4b34-aad9-20d61a43d427	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Drogskol Reaver/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68175b49-f1e6-4b34-aad9-20d61a43d427	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Drogskol Reaver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -39,7 +39,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 682eb224-cab4-4829-810b-72e63a9ceb5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6832f9e2-294a-44a2-8af9-eb16ccfdfc36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:empowered-autogenerator:cast:s1,f:xs:XP:empowered-autogenerator:cast:s1	-	-	-	8c0bd19283bb	-	993989ef2040	-	-	2026-11-24	xproof
 6832f9e2-294a-44a2-8af9-eb16ccfdfc36	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:empowered-autogenerator:f0a0:s1,f:xs:XP:empowered-autogenerator:f0a0:s1	-	-	-	23b491658465	-	993989ef2040	-	-	2026-11-24	xproof
-683775ac-481e-4c26-ab2f-5d2813af0268	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sentinel-of-lost-lore:f0t0:s1,f:xs:XP:sentinel-of-lost-lore:f0t0:s1	-	-	-	23b491658465	-	9e6721ef2361	-	-	2026-11-24	xproof
+683775ac-481e-4c26-ab2f-5d2813af0268	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sentinel-of-lost-lore:f0t0:s1,f:xs:XP:sentinel-of-lost-lore:f0t0:s1	-	-	-	8c0bd19283bb	-	9e6721ef2361	-	-	2026-11-24	xproof
 683775ac-481e-4c26-ab2f-5d2813af0268	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683a06b6-af77-440f-81b9-8958597a7324	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683a06b6-af77-440f-81b9-8958597a7324	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -50,8 +50,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 683ec6d2-4ea7-46a7-911e-12c83e4c4a06	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 6840a63d-d627-4a18-afa9-018406767642	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68413337-ddb9-46f8-8c8e-f3d2d672c652	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68418069-f615-40ef-ae0d-764192acae00	cast	cast-resolve	agreed	-	X	scen	1	0	Krenko, Mob Boss/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-68418069-f615-40ef-ae0d-764192acae00	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Krenko, Mob Boss/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+68418069-f615-40ef-ae0d-764192acae00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:krenko-mob-boss:cast:s1,f:xs:XP:krenko-mob-boss:cast:s1	-	-	-	8c0bd19283bb	-	ec1449546913	-	-	2026-11-24	xproof
+68418069-f615-40ef-ae0d-764192acae00	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:krenko-mob-boss:f0a0:s1,f:xs:XP:krenko-mob-boss:f0a0:s1	-	-	-	8c0bd19283bb	-	ec1449546913	-	-	2026-11-24	xproof
 6845a62f-e0f1-448c-beeb-abac2dabd975	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vile-rebirth:cast:s1,f:xs:XP:vile-rebirth:cast:s1	-	-	-	d864b561c9cb	-	59ce7f153c64	-	-	2026-11-24	xproof
 6846448b-d5a0-4ae0-bb11-ea7fa6ed2558	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haliya-ascendant-cadet:f0t0:s1,f:xs:XP:haliya-ascendant-cadet:f0t0:s1	-	-	-	25696bf19d5b	-	9965144713ee	-	-	2026-11-24	xproof
 6846448b-d5a0-4ae0-bb11-ea7fa6ed2558	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:haliya-ascendant-cadet:f0t0:s1,f:xs:XP:haliya-ascendant-cadet:f0t0:s1	-	-	-	25696bf19d5b	-	9965144713ee	-	-	2026-11-24	xproof

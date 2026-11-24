@@ -69,8 +69,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 544acde0-850d-4c4f-8389-e22930d87345	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 544c4cb3-cd43-4670-9883-e9545dad9cd6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dauntless-river-marshal:cast:s1,f:xs:XP:dauntless-river-marshal:cast:s1	-	-	-	d864b561c9cb	-	cabd96768dfb	-	-	2026-11-24	xproof
 544c4cb3-cd43-4670-9883-e9545dad9cd6	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:dauntless-river-marshal:f0a0:s1,f:xs:XP:dauntless-river-marshal:f0a0:s1	-	-	-	d864b561c9cb	-	cabd96768dfb	-	-	2026-11-24	xproof
-544dbabd-cbfc-40da-a5ba-2fea9cddb453	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sandsteppe Citadel/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-544dbabd-cbfc-40da-a5ba-2fea9cddb453	land	play-land	agreed	-	X	scen	1	0	Sandsteppe Citadel/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+544dbabd-cbfc-40da-a5ba-2fea9cddb453	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:sandsteppe-citadel:f0a0:s2,f:xs:XP:sandsteppe-citadel:f0a0:s2	-	-	-	8c0bd19283bb	-	40ce32f529bd	-	-	2026-11-24	xproof
+544dbabd-cbfc-40da-a5ba-2fea9cddb453	land	land	agreed	-	FX	start	2	0	x:xs:XP:sandsteppe-citadel:land:s1,f:xs:XP:sandsteppe-citadel:land:s1	-	-	-	8c0bd19283bb	-	40ce32f529bd	-	-	2026-11-24	xproof
 544eca0d-63cd-4cc5-9318-c2006cdec170	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 544eca0d-63cd-4cc5-9318-c2006cdec170	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 54530a84-8278-4c93-a2cb-f5c86619a053	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -120,7 +120,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54831951-2cd3-41bb-8326-6cfce48feb34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54831951-2cd3-41bb-8326-6cfce48feb34	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5483f787-7aca-4efe-a39a-ea29f8c07f0d	cast	cast-resolve	agreed	-	X	scen	1	0	Treacherous Greed/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-54866c25-b332-46c8-a2c5-1a71b702ddc0	cast	cast-resolve	agreed	-	X	scen	1	0	Mindsparker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+54866c25-b332-46c8-a2c5-1a71b702ddc0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mindsparker:cast:s1,f:xs:XP:mindsparker:cast:s1	-	-	-	8c0bd19283bb	-	22f0c5b6e78d	-	-	2026-11-24	xproof
 54866c25-b332-46c8-a2c5-1a71b702ddc0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mindsparker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 54866c25-b332-46c8-a2c5-1a71b702ddc0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mindsparker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 54866c25-b332-46c8-a2c5-1a71b702ddc0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mindsparker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

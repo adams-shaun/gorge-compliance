@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9e3f5d0b-103f-40e2-beb5-26b1fcb136f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e3f5d0b-103f-40e2-beb5-26b1fcb136f3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e3fd1e9-7db6-40de-b1de-cd8cc9f60590	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9e43805d-3576-47d4-9331-524869ab99d0	cast	cast-resolve	agreed	-	X	scen	1	0	Flamewake Phoenix/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9e43805d-3576-47d4-9331-524869ab99d0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flamewake-phoenix:cast:s1,f:xs:XP:flamewake-phoenix:cast:s1	-	-	-	8c0bd19283bb	-	6b8c696a2cdc	-	-	2026-11-24	xproof
 9e43805d-3576-47d4-9331-524869ab99d0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Flamewake Phoenix/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9e43805d-3576-47d4-9331-524869ab99d0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Flamewake Phoenix/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9e43805d-3576-47d4-9331-524869ab99d0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Flamewake Phoenix/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -136,8 +136,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ea58a77-9b2e-4ae2-8a31-a51804900a3b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Gravestone Strider/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ea747cf-5d04-4aa7-bdc3-8145860cd1ba	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Elegant Parlor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ea747cf-5d04-4aa7-bdc3-8145860cd1ba	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Elegant Parlor/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9ea747cf-5d04-4aa7-bdc3-8145860cd1ba	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:elegant-parlor:f0t0:s1,f:xs:XP:elegant-parlor:f0t0:s1	-	-	-	23b491658465	-	5b62f9958dc1	-	-	2026-11-24	xproof
-9ea747cf-5d04-4aa7-bdc3-8145860cd1ba	land	land	agreed	-	FX	start	4	0	x:xs:XP:elegant-parlor:f0t0:s1,f:xs:XP:elegant-parlor:f0t0:s1	-	-	-	23b491658465	-	5b62f9958dc1	-	-	2026-11-24	xproof
+9ea747cf-5d04-4aa7-bdc3-8145860cd1ba	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elegant-parlor:land:s1,f:xs:XP:elegant-parlor:land:s1	-	-	-	8c0bd19283bb	-	5b62f9958dc1	-	-	2026-11-24	xproof
+9ea747cf-5d04-4aa7-bdc3-8145860cd1ba	land	land	agreed	-	FX	start	2	0	x:xs:XP:elegant-parlor:land:s1,f:xs:XP:elegant-parlor:land:s1	-	-	-	8c0bd19283bb	-	5b62f9958dc1	-	-	2026-11-24	xproof
 9ea87566-43da-4ebd-a904-ae8b8830c3a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ea87566-43da-4ebd-a904-ae8b8830c3a2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ea87566-43da-4ebd-a904-ae8b8830c3a2	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ashnod-s-harvester:f0t0:s1,f:xs:XP:ashnod-s-harvester:f0t0:s1	-	-	-	ae86f6029288	-	93288a69ecef	-	-	2026-11-24	xproof

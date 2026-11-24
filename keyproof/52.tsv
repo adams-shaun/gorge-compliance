@@ -171,8 +171,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 52c96b5a-ce47-4bde-b530-0033b9bfd808	cast	cast-resolve	agreed	-	FX	scen	2	0	Cosmium Blast/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 52d04c36-9d38-42b2-9e47-905ab06cb708	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52d04c36-9d38-42b2-9e47-905ab06cb708	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-52d14717-0cbc-4d7e-b546-54ea91580338	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dimir Guildgate/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-52d14717-0cbc-4d7e-b546-54ea91580338	land	play-land	agreed	-	X	scen	1	0	Dimir Guildgate/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+52d14717-0cbc-4d7e-b546-54ea91580338	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:dimir-guildgate:f0a0:s2,f:xs:XP:dimir-guildgate:f0a0:s2	-	-	-	8c0bd19283bb	-	13102055399f	-	-	2026-11-24	xproof
+52d14717-0cbc-4d7e-b546-54ea91580338	land	land	agreed	-	FX	start	2	0	x:xs:XP:dimir-guildgate:land:s1,f:xs:XP:dimir-guildgate:land:s1	-	-	-	8c0bd19283bb	-	13102055399f	-	-	2026-11-24	xproof
 52d1d575-3e7f-4df1-8c89-aee0cac03aca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-s-return:cast:s1,f:xs:XP:rakdos-s-return:cast:s1	-	-	-	d864b561c9cb	-	885ea22cc060	-	-	2026-11-24	xproof
 52d34007-38c0-4858-8ec8-c622da916277	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52d34007-38c0-4858-8ec8-c622da916277	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

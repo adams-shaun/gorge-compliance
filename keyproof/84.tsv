@@ -38,7 +38,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8422f1e0-00ca-4ffb-a6b2-e2c9f96d7f23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8422f1e0-00ca-4ffb-a6b2-e2c9f96d7f23	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84244aa6-11be-4940-b102-e029f955fc9a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viridian-joiner:cast:s1,f:xs:XP:viridian-joiner:cast:s1	-	-	-	25696bf19d5b	-	5d5eda2ad01e	-	-	2026-11-24	xproof
-84244aa6-11be-4940-b102-e029f955fc9a	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:viridian-joiner:f0a0:s1,f:xs:XP:viridian-joiner:f0a0:s1	-	-	-	8c0bd19283bb	-	5d5eda2ad01e	-	-	2026-11-24	xproof
+84244aa6-11be-4940-b102-e029f955fc9a	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:viridian-joiner:f0a0:s2,f:xs:XP:viridian-joiner:f0a0:s2	-	-	-	8c0bd19283bb	-	5d5eda2ad01e	-	-	2026-11-24	xproof
 842578ca-0a86-4e96-bfd5-45931488f7c1	cast	cast	owed	harness	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	f8a9221eda95	-	-	2026-11-24	xproof
 8426bdb6-b002-4d27-9eaf-d7f8353aa7e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84275aab-f718-4896-b61c-63bf49fb483b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8443b8c2-d0ab-4fb1-ad35-7e5e4cb345b6	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 8445094f-008b-491a-977c-e8582d5ab72c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84469042-d48d-409f-a2c9-047058f13bc5	cast	cast-resolve	agreed	-	X	scen	1	0	Bewildering Blizzard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-84487586-4f71-457a-b983-4f1f7a71deef	cast	cast-resolve	agreed	-	X	scen	1	0	Bishop's Soldier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+84487586-4f71-457a-b983-4f1f7a71deef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bishop-s-soldier:cast:s1,f:xs:XP:bishop-s-soldier:cast:s1	-	-	-	8c0bd19283bb	-	c49172f2dfde	-	-	2026-11-24	xproof
 84487586-4f71-457a-b983-4f1f7a71deef	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bishop's Soldier/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84487586-4f71-457a-b983-4f1f7a71deef	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bishop's Soldier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84528204-faf2-45cb-bce0-365b8adf5339	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -173,7 +173,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 84d648c7-655e-4590-a3e0-366a8a4a4cb3	static#0.1	static#0.1	agreed	-	X	scen	1	0	Radagast of Rhosgobel/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84dc0aae-029b-48dc-b8d0-e93c227e32e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lotus-path-djinn:cast:s1,f:xs:XP:lotus-path-djinn:cast:s1	-	-	-	d864b561c9cb	-	d31175286a69	-	-	2026-11-24	xproof
 84dc0aae-029b-48dc-b8d0-e93c227e32e5	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-84dc18f0-8225-4b40-a165-b10321e41769	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:nykthos-shrine-to-nyx:f0a1:s1,f:xs:XP:nykthos-shrine-to-nyx:f0a1:s1	-	-	-	23b491658465	-	bf691be9abdc	-	-	2026-11-24	xproof
+84dc18f0-8225-4b40-a165-b10321e41769	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:nykthos-shrine-to-nyx:f0a1:s2,f:xs:XP:nykthos-shrine-to-nyx:f0a1:s2	-	-	-	8c0bd19283bb	-	bf691be9abdc	-	-	2026-11-24	xproof
 84dc18f0-8225-4b40-a165-b10321e41769	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84dc18f0-8225-4b40-a165-b10321e41769	land	land	agreed	-	FX	start	2	0	x:xs:XP:nykthos-shrine-to-nyx:land:s1,f:xs:XP:nykthos-shrine-to-nyx:land:s1	-	-	-	d864b561c9cb	-	bf691be9abdc	-	-	2026-11-24	xproof
 84dc94b2-95fb-4d53-aaa2-191cb645639f	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

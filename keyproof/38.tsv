@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38684c31-e8c6-4825-8740-1a3d34b58b39	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wraith, Vicious Vigilante/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 38684c31-e8c6-4825-8740-1a3d34b58b39	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wraith, Vicious Vigilante/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 38684c31-e8c6-4825-8740-1a3d34b58b39	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wraith, Vicious Vigilante/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-386c5895-9713-4c28-9ba8-8ca0caa06c13	cast	cast-resolve	agreed	-	X	scen	1	0	Gate Colossus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+386c5895-9713-4c28-9ba8-8ca0caa06c13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gate-colossus:cast:s1,f:xs:XP:gate-colossus:cast:s1	-	-	-	8c0bd19283bb	-	e37497feec00	-	-	2026-11-24	xproof
 386c5895-9713-4c28-9ba8-8ca0caa06c13	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gate Colossus/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 386c5895-9713-4c28-9ba8-8ca0caa06c13	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gate Colossus/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 386c5895-9713-4c28-9ba8-8ca0caa06c13	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gate Colossus/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3891a914-e597-4126-846f-39bf8534eb92	cast	cast-resolve	agreed	-	X	scen	1	0	Museum Nightwatch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3891a914-e597-4126-846f-39bf8534eb92	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Museum Nightwatch/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 389a9d46-d3fb-47f0-91cd-f6d487636916	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sisters-of-the-flame:cast:s1,f:xs:XP:sisters-of-the-flame:cast:s1	-	-	-	fc71ca68c5ac	-	896674b3fe31	-	-	2026-11-24	xproof
-389a9d46-d3fb-47f0-91cd-f6d487636916	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:sisters-of-the-flame:f0a0:s1,f:xs:XP:sisters-of-the-flame:f0a0:s1	-	-	-	8c0bd19283bb	-	896674b3fe31	-	-	2026-11-24	xproof
+389a9d46-d3fb-47f0-91cd-f6d487636916	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:sisters-of-the-flame:f0a0:s2,f:xs:XP:sisters-of-the-flame:f0a0:s2	-	-	-	8c0bd19283bb	-	896674b3fe31	-	-	2026-11-24	xproof
 389ad507-8a14-4856-8d19-c90e3104aca8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:midnight-ritual:cast:s1	-	-	-	25696bf19d5b	-	14e1dc3bff63	-	-	2026-11-24	xproof
 389b6d77-47ab-43a3-99d1-dcc762939cc4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 389b6d77-47ab-43a3-99d1-dcc762939cc4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

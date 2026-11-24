@@ -22,7 +22,7 @@ f20ec8e2-d6e4-4707-9b86-107dbc09ac63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f20ec8e2-d6e4-4707-9b86-107dbc09ac63	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f20f27d1-2c50-41d5-b1af-44a0e7ca2e00	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f20f27d1-2c50-41d5-b1af-44a0e7ca2e00	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-f20f6da9-d678-486b-99f9-7121669fef81	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bat-whisperer:f0t0:s1,f:xs:XP:bat-whisperer:f0t0:s1	-	-	-	23b491658465	-	f83064006184	-	-	2026-11-24	xproof
+f20f6da9-d678-486b-99f9-7121669fef81	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bat-whisperer:f0t0:s1,f:xs:XP:bat-whisperer:f0t0:s1	-	-	-	8c0bd19283bb	-	f83064006184	-	-	2026-11-24	xproof
 f20f6da9-d678-486b-99f9-7121669fef81	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2103ab8-a183-4db8-98dd-4146217b5125	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2103ab8-a183-4db8-98dd-4146217b5125	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,16 +105,16 @@ f293da27-e42d-4e87-8b61-d3c27e4c6d71	combat#0.block	combat#0.block	agreed	-	X	sc
 f293da27-e42d-4e87-8b61-d3c27e4c6d71	static#0.0	static#0.0	agreed	-	X	scen	1	0	Burrowguard Mentor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f297648b-0dda-4c58-a3eb-fdabdfb42177	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f297648b-0dda-4c58-a3eb-fdabdfb42177	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f29dc596-2121-4421-8463-15f6c2e8b9b3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rogue's Passage/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f29dc596-2121-4421-8463-15f6c2e8b9b3	f0/a0	Mana	agreed	-	FX	start	3	0	x:xs:XP:rogue-s-passage:f0a0:s2,f:xs:XP:rogue-s-passage:f0a0:s2	-	-	-	8c0bd19283bb	-	18039c877797	-	-	2026-11-24	xproof
 f29dc596-2121-4421-8463-15f6c2e8b9b3	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Rogue's Passage/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f29dc596-2121-4421-8463-15f6c2e8b9b3	land	play-land	agreed	-	X	scen	1	0	Rogue's Passage/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f29dc596-2121-4421-8463-15f6c2e8b9b3	land	land	agreed	-	FX	start	2	0	x:xs:XP:rogue-s-passage:land:s1,f:xs:XP:rogue-s-passage:land:s1	-	-	-	8c0bd19283bb	-	18039c877797	-	-	2026-11-24	xproof
 f29f4c73-5e5c-4341-8582-2873fbe5c5a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ral-izzet-viceroy:cast:s1,f:xs:XP:ral-izzet-viceroy:cast:s1	-	-	-	d864b561c9cb	-	a52dba54cc11	-	-	2026-11-24	xproof
 f29f4c73-5e5c-4341-8582-2873fbe5c5a3	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:ral-izzet-viceroy:cast:s1,f:xs:XP:ral-izzet-viceroy:cast:s1	-	-	-	d864b561c9cb	-	a52dba54cc11	-	-	2026-11-24	xproof
 f29f4c73-5e5c-4341-8582-2873fbe5c5a3	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f29f4c73-5e5c-4341-8582-2873fbe5c5a3	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f2a54e85-dd8b-462c-a811-c9553dc349a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodline-necromancer:f0t0:s1,f:xs:XP:bloodline-necromancer:f0t0:s1	-	-	-	8c0bd19283bb	-	bd41b0958d50	-	-	2026-11-24	xproof
 f2a54e85-dd8b-462c-a811-c9553dc349a5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bloodline-necromancer:f0t0:s1,f:xs:XP:bloodline-necromancer:f0t0:s1	-	-	-	8c0bd19283bb	-	bd41b0958d50	-	-	2026-11-24	xproof
-f2a6dc8d-3c98-44ae-aff0-b838d7aee0b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sandstalker-moloch:f0t0:s1,f:xs:XP:sandstalker-moloch:f0t0:s1	-	-	-	23b491658465	-	aae6d7158c31	-	-	2026-11-24	xproof
+f2a6dc8d-3c98-44ae-aff0-b838d7aee0b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sandstalker-moloch:f0t0:s1,f:xs:XP:sandstalker-moloch:f0t0:s1	-	-	-	8c0bd19283bb	-	aae6d7158c31	-	-	2026-11-24	xproof
 f2a6dc8d-3c98-44ae-aff0-b838d7aee0b7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2b284cd-fa12-4ba1-b297-80105bb48fde	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2b284cd-fa12-4ba1-b297-80105bb48fde	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,8 +142,8 @@ f2ccc9e8-8e92-4f8c-8728-8c748630e0dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f2ccc9e8-8e92-4f8c-8728-8c748630e0dd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2ccc9e8-8e92-4f8c-8728-8c748630e0dd	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2ce9e55-07c0-4f36-a59e-127693fc0f62	cast	cast-resolve	agreed	-	X	scen	1	0	Magnifying Glass/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f2ce9e55-07c0-4f36-a59e-127693fc0f62	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Magnifying Glass/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f2ce9e55-07c0-4f36-a59e-127693fc0f62	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Magnifying Glass/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f2ce9e55-07c0-4f36-a59e-127693fc0f62	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:magnifying-glass:f0a0:s2,f:xs:XP:magnifying-glass:f0a0:s2	-	-	-	8c0bd19283bb	-	b1d42c844999	-	-	2026-11-24	xproof
+f2ce9e55-07c0-4f36-a59e-127693fc0f62	f0/a1	Investigate	agreed	-	FX	start	2	0	x:xs:XP:magnifying-glass:f0a1:s1,f:xs:XP:magnifying-glass:f0a1:s1	-	-	-	8c0bd19283bb	-	b1d42c844999	-	-	2026-11-24	xproof
 f2cedb38-12b0-4489-a62b-9b6a3776d695	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2cedb38-12b0-4489-a62b-9b6a3776d695	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2cedb38-12b0-4489-a62b-9b6a3776d695	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

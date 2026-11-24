@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66093486-c9c3-42c5-97d1-ec0fe54f65b0	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 660d44a2-391a-416c-b46c-ddcc3739f527	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Valgavoth's Lair/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 660d44a2-391a-416c-b46c-ddcc3739f527	land	play-land	agreed	-	X	scen	1	0	Valgavoth's Lair/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-660de988-b6fb-4f36-8006-42af3e7f908d	cast	cast-resolve	agreed	-	X	scen	1	0	Vampiric Rites/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+660de988-b6fb-4f36-8006-42af3e7f908d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampiric-rites:cast:s1,f:xs:XP:vampiric-rites:cast:s1	-	-	-	8c0bd19283bb	-	5d5918adc555	-	-	2026-11-24	xproof
 660de988-b6fb-4f36-8006-42af3e7f908d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Vampiric Rites/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 660ef596-8a2d-4c66-a9d5-264401980244	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	23a07bff4095	-	-	2026-11-24	xproof
 660ef596-8a2d-4c66-a9d5-264401980244	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
@@ -188,7 +188,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66e37011-f3d2-41ed-8e09-7bba9464e8c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66e37011-f3d2-41ed-8e09-7bba9464e8c3	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:coretapper:f0a0:s1,f:xs:XP:coretapper:f0a0:s1	-	-	-	d864b561c9cb	-	aa6f595cd8fd	-	-	2026-11-24	xproof
 66e37011-f3d2-41ed-8e09-7bba9464e8c3	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:coretapper:f0a0:s1,f:xs:XP:coretapper:f0a0:s1	-	-	-	d864b561c9cb	-	aa6f595cd8fd	-	-	2026-11-24	xproof
-66e74e8f-036e-4b26-a4a8-2365891765bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flourishing-bloom-kin:cast:s1,f:xs:XP:flourishing-bloom-kin:cast:s1	-	-	-	23b491658465	-	3538b0e8db28	-	-	2026-11-24	xproof
+66e74e8f-036e-4b26-a4a8-2365891765bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flourishing-bloom-kin:cast:s1,f:xs:XP:flourishing-bloom-kin:cast:s1	-	-	-	8c0bd19283bb	-	3538b0e8db28	-	-	2026-11-24	xproof
 66e74e8f-036e-4b26-a4a8-2365891765bc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Flourishing Bloom-Kin/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66e74e8f-036e-4b26-a4a8-2365891765bc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Flourishing Bloom-Kin/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66e7a760-2b2f-4af9-983c-300c657beaaf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -199,7 +199,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66ee56b9-aca8-4efa-b9b5-50717e0784a7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Honorbound Page/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66efb37f-9eab-4ff4-a1d4-65fe9ca7332b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourgemark:f0t0:s1,f:xs:XP:scourgemark:f0t0:s1	-	-	-	d864b561c9cb	-	c9d7d014ba27	-	-	2026-11-24	xproof
 66efb37f-9eab-4ff4-a1d4-65fe9ca7332b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scourgemark:f0t0:s1,f:xs:XP:scourgemark:f0t0:s1	-	-	-	d864b561c9cb	-	c9d7d014ba27	-	-	2026-11-24	xproof
-66fa2326-1b5d-41fb-b919-83bf9f383577	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Blooming Marsh/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+66fa2326-1b5d-41fb-b919-83bf9f383577	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:blooming-marsh:f0a0:s2,f:xs:XP:blooming-marsh:f0a0:s2	-	-	-	8c0bd19283bb	-	15ef00561c64	-	-	2026-11-24	xproof
 66fa2326-1b5d-41fb-b919-83bf9f383577	land	play-land	agreed	-	X	scen	1	0	Blooming Marsh/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66fa528f-0e3a-450f-9035-1ba5a8a921e6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66fb4764-d309-4c30-a2a4-474f9030dc87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

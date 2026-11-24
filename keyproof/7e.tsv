@@ -35,8 +35,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e23a2e7-b8b3-424f-8922-a1adb1db3f4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e24b4da-9728-43a0-8af4-f513a3e1104b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e26f0b7-20e6-46d5-8130-d98c14d6aa29	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Temple of Mystery/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7e26f0b7-20e6-46d5-8130-d98c14d6aa29	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Temple of Mystery/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7e26f0b7-20e6-46d5-8130-d98c14d6aa29	land	play-land	agreed	-	X	scen	1	0	Temple of Mystery/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7e26f0b7-20e6-46d5-8130-d98c14d6aa29	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:temple-of-mystery:f0t0:s1,f:xs:XP:temple-of-mystery:f0t0:s1	-	-	-	8c0bd19283bb	-	139689672cef	-	-	2026-11-24	xproof
+7e26f0b7-20e6-46d5-8130-d98c14d6aa29	land	land	agreed	-	FX	start	2	0	x:xs:XP:temple-of-mystery:f0t0:s1,f:xs:XP:temple-of-mystery:f0t0:s1	-	-	-	8c0bd19283bb	-	139689672cef	-	-	2026-11-24	xproof
 7e280770-9a8f-4445-84d2-3b9cac659136	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e29aae9-815a-4999-ace6-7bc860acde32	cast	cast-resolve	agreed	-	FX	scen	2	0	Engine Rat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e29aae9-815a-4999-ace6-7bc860acde32	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Engine Rat/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e6fcbc0-691a-4bd7-b063-debc86f4506a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hold-the-gates:cast:s1,f:xs:XP:hold-the-gates:cast:s1	-	-	-	d864b561c9cb	-	7db2fd36b7d9	-	-	2026-11-24	xproof
 7e6fd429-f925-4ff7-9c6e-34c2c9d15d04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e6fd429-f925-4ff7-9c6e-34c2c9d15d04	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-7e770c08-910e-4394-88c5-79c874750b6a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kami-of-restless-shadows:f0t0:s1,f:xs:XP:kami-of-restless-shadows:f0t0:s1	-	-	-	23b491658465	-	6ec0bbb6ab61	-	-	2026-11-24	xproof
+7e770c08-910e-4394-88c5-79c874750b6a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kami-of-restless-shadows:f0t0:s1,f:xs:XP:kami-of-restless-shadows:f0t0:s1	-	-	-	8c0bd19283bb	-	6ec0bbb6ab61	-	-	2026-11-24	xproof
 7e770c08-910e-4394-88c5-79c874750b6a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e7abb44-47b0-4d80-b8a1-36f0c1032aa3	cast	cast-resolve	agreed	-	FX	scen	2	0	Obsessive Pursuit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e7abb44-47b0-4d80-b8a1-36f0c1032aa3	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

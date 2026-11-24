@@ -34,7 +34,7 @@ d32cf19d-a974-4161-851d-dcbf37069e26	f0/t0	NULL	owed	refused:no-generator:trigge
 d32f570a-3738-4a9d-845f-6c7892b69991	cast	cast-resolve	agreed	-	X	scen	1	0	Screaming Phantom/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d32f570a-3738-4a9d-845f-6c7892b69991	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Screaming Phantom/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d32f570a-3738-4a9d-845f-6c7892b69991	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Screaming Phantom/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d32f570a-3738-4a9d-845f-6c7892b69991	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Screaming Phantom/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d32f570a-3738-4a9d-845f-6c7892b69991	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:screaming-phantom:f0t0:s1,f:xs:XP:screaming-phantom:f0t0:s1	-	-	-	8c0bd19283bb	-	4053d7d08b9f	-	-	2026-11-24	xproof
 d32f973e-38db-4f74-aec6-258d25c1fb7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keldon-arsonist:cast:s1,f:xs:XP:keldon-arsonist:cast:s1	-	-	-	5f2128bf97e4	-	81b0b9378073	-	-	2026-11-24	xproof
 d32f973e-38db-4f74-aec6-258d25c1fb7d	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 d331db6a-21ff-4dec-aa6a-e30bf925ca32	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Moth Herb Elixir"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
@@ -72,7 +72,7 @@ d36075c2-de66-4202-9217-b1102a2bc14b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:pel
 d36075c2-de66-4202-9217-b1102a2bc14b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Pelakka Wurm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d36075c2-de66-4202-9217-b1102a2bc14b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pelakka Wurm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d36075c2-de66-4202-9217-b1102a2bc14b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:pelakka-wurm:f0t0:s2,f:xs:XP:pelakka-wurm:f0t0:s2	-	-	-	e07cf3a05ba5	-	17d0cd752287	-	-	2026-11-24	xproof
-d36075c2-de66-4202-9217-b1102a2bc14b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Pelakka Wurm/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d36075c2-de66-4202-9217-b1102a2bc14b	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pelakka-wurm:f0t1:s1,f:xs:XP:pelakka-wurm:f0t1:s1	-	-	-	8c0bd19283bb	-	17d0cd752287	-	-	2026-11-24	xproof
 d360ce89-d80d-4be6-be8c-7e7758cd5840	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d360ce89-d80d-4be6-be8c-7e7758cd5840	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d363e135-0a76-4d0e-b3b7-3293944f392c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -83,11 +83,11 @@ d36d3c93-ed24-4447-9d15-3071f5c0989b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hoa
 d36d3c93-ed24-4447-9d15-3071f5c0989b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hoarding Dragon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d36d3c93-ed24-4447-9d15-3071f5c0989b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hoarding Dragon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d36d3c93-ed24-4447-9d15-3071f5c0989b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hoarding-dragon:f0t0:s2,f:xs:XP:hoarding-dragon:f0t0:s2	-	-	-	e07cf3a05ba5	-	3d98b58f5b8f	-	-	2026-11-24	xproof
-d36d3c93-ed24-4447-9d15-3071f5c0989b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Hoarding Dragon/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d36d3c93-ed24-4447-9d15-3071f5c0989b	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hoarding-dragon:f0t1:s1,f:xs:XP:hoarding-dragon:f0t1:s1	-	-	-	8c0bd19283bb	-	3d98b58f5b8f	-	-	2026-11-24	xproof
 d36e0c9f-c025-4dfe-9644-9cad2461ce38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d36e0c9f-c025-4dfe-9644-9cad2461ce38	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-d36e11f1-6ab3-4273-8114-a8fbbe21c1c3	cast	cast-resolve	agreed	-	X	scen	1	0	Fanatical Firebrand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d36e11f1-6ab3-4273-8114-a8fbbe21c1c3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fanatical Firebrand/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d36e11f1-6ab3-4273-8114-a8fbbe21c1c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fanatical-firebrand:cast:s1,f:xs:XP:fanatical-firebrand:cast:s1	-	-	-	8c0bd19283bb	-	9ad9b6d9576a	-	-	2026-11-24	xproof
+d36e11f1-6ab3-4273-8114-a8fbbe21c1c3	f0/a0	DealDamage	agreed	-	FX	start	4	0	x:xs:XP:fanatical-firebrand:cast:s1,f:xs:XP:fanatical-firebrand:cast:s1	-	-	-	8c0bd19283bb	-	9ad9b6d9576a	-	-	2026-11-24	xproof
 d36f64a0-53f7-4c56-9f40-a7927a5c2608	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d36f64a0-53f7-4c56-9f40-a7927a5c2608	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:daring-saboteur:f0a0:s1,f:xs:XP:daring-saboteur:f0a0:s1	-	-	-	d864b561c9cb	-	b6cc19ed705b	-	-	2026-11-24	xproof
 d36f64a0-53f7-4c56-9f40-a7927a5c2608	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:daring-saboteur:f0a0:s1,f:xs:XP:daring-saboteur:f0a0:s1	-	-	-	d864b561c9cb	-	b6cc19ed705b	-	-	2026-11-24	xproof
