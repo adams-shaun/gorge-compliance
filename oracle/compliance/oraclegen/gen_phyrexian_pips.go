@@ -39,6 +39,8 @@ type xanswersExtra struct {
 	// forage maps a forage election's decision index to the graveyard
 	// cards its exile arm took (forageExiles).
 	forage map[int][]string
+	// ownBounce marks the steps that pose an own-bounce hidden pick.
+	ownBounce map[int]bool
 }
 
 // isPipDecision reports whether d is one of gorge's ManaAsk pip decisions

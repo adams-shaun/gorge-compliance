@@ -135,7 +135,7 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 		return it, refuse(it.ID, ReasonRetarget, "%s", why)
 	}
 	it.Scenario = sc
-	g.Decisions = oraclegen.RetimeEntryTargets(sc.Steps, g.Snapshots, playStepUnlessPays(sc.Steps, g.Decisions))
+	g.Decisions = oraclegen.RetimeEntryTargets(sc.Steps, g.Snapshots, keepTokenLooks(playStepUnlessPays(sc.Steps, g.Decisions)))
 	it.XAnswers = oraclegen.XAnswersForScenario(reg, g, sc, modes, castSteps)
 	if len(it.XAnswers) == 0 {
 		// Nothing to script: still one (empty) entry per step, as the
@@ -560,6 +560,60 @@ func playStepUnlessPays(steps []oraclegen.Step, ds []rules.OracleDecision) []rul
 		}
 		// xanswersSetup's yesno branch emits choice "yes" for a "Pay ..." pick.
 		d.Kind = "yesno"
+	}
+	return out
+}
+
+// TokenLook reports whether d is a surveil/scry arrange (graveyard or bottom,
+// Min 0) whose offered cards are all tokens, whatever it answered. A token that left the battlefield cannot move to another zone
+// (CR 111.8), so gorge's pick over it moves nothing: binning the token is the
+// same final state as keeping it. The followers do not share that state.
+// Vanish from Sight's "owner puts it on top, then surveil 1" leaves gorge
+// looking at the token with the card under it still in the library, while a
+// follower that drops the token on arrival looks at that card instead, so a
+// scripted bin (the token's name, found nowhere in the look) is unmatched, or
+// an empty pick bins the card under the token. Selecting by "every option is a
+// token" instead of by card keeps the next token-on-top card covered. Every
+// engine's lowering of such a look goes through this one predicate: xprep's
+// keep-all skip for XMage and forge-export's naming of the cards under the
+// token for Forge.
+//
+// A look of N>=2 that mixes tokens and real cards is not matched: the
+// follower's look shifts by the tokens it dropped, and no single keep-all
+// answer is the gorge outcome there.
+func TokenLook(d rules.OracleDecision) bool {
+	if d.GorgeKind != "arrange" || d.Min != 0 || d.Options < 1 ||
+		(d.ArrangeKind != "graveyard" && d.ArrangeKind != "bottom") ||
+		len(d.OptionRefs) != d.Options || len(d.ArrangeLabels) != d.Options {
+		return false
+	}
+	for _, ref := range d.OptionRefs {
+		if !strings.Contains(ref, ":token:") {
+			return false
+		}
+	}
+	return true
+}
+
+// keepTokenLooks rewrites every TokenLook to the keep-all answer, which lowers
+// to XMage's choice-queue skip. Keep-all is the one answer that is the gorge
+// outcome whether or not the follower still holds the token. The input is not
+// mutated.
+func keepTokenLooks(ds []rules.OracleDecision) []rules.OracleDecision {
+	out := append([]rules.OracleDecision(nil), ds...)
+	for i := range out {
+		d := &out[i]
+		// A pick that already keeps every card lowers to the skip as it is.
+		if !TokenLook(*d) || len(d.PickIdx) == d.Options {
+			continue
+		}
+		d.Picks = slices.Clone(d.ArrangeLabels)
+		d.PickRefs = slices.Clone(d.OptionRefs)
+		d.ObjectPicks = slices.Clone(d.OptionRefs)
+		d.PickIdx = make([]int, d.Options)
+		for k := range d.PickIdx {
+			d.PickIdx[k] = k
+		}
 	}
 	return out
 }

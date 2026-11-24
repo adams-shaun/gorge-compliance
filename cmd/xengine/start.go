@@ -17,6 +17,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
@@ -222,6 +223,13 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 			c, ok := reg.Lookup(n)
 			if !ok || len(c.Faces) == 0 {
 				return fmt.Errorf("start %s: card %q not found", name, n)
+			}
+			if bfZone {
+				// gorge and Forge place such a card differently (scen.FieldBlock),
+				// so the setup could never agree: refuse the file.
+				if why := scen.FieldBlock(c.Faces[0]); why != "" {
+					return fmt.Errorf("start %s: %q cannot be listed on the battlefield (%s): list it in hand", name, n, why)
+				}
 			}
 			*into = append(*into, len(d.Cards))
 			if bfZone {

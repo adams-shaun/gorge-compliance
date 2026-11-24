@@ -477,11 +477,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 return false;
             }
             String[] pick = tapPaymentPick(getChoices().get(0));
-            if (pick == null) {
-                return false;
-            }
             Map<UUID, mage.abilities.SpecialAction> actions =
                     game.getState().getSpecialActions().getControlledBy(getId(), true);
+            if (pick == null) {
+                // Not a tap: the bare card name of a recorded Delve exile
+                // pick (CR 702.66a), or nothing this hook translates.
+                return queueDelveAction(game, actions.values());
+            }
             for (mage.abilities.SpecialAction action : actions.values()) {
                 String rule = action.getRule(true);
                 String key = rule.startsWith("Improvise") ? "Improvise"
@@ -514,6 +516,83 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     getTargets().add(1, TestPlayer.TARGET_SKIP);
                 }
                 convokeColour = "Convoke".equals(key) ? tapPaymentColourName(pick[1]) : null;
+                return true;
+            }
+            return false;
+        }
+
+        /** Translate gorge's recorded Delve exile picks (CR 702.66a: one
+         * choose_n pick per exiled card, the bare card name; the ask's
+         * trailing [choice_skip] is the Done option) at the front of the
+         * choice queue into XMage's Delve special mana action: the choice
+         * becomes that action's own rule text (TestPlayer's manual branch
+         * takes the action whose rule starts with the choice, and the Delve
+         * rule leads with its cost, "Exile a card from your graveyard: Delve
+         * (...)", so no short "Delve" key matches) and the exiled graveyard
+         * cards follow it on the choice queue: the exile cost's target is a
+         * Cost target, which TestPlayer asks through its choice queue (the
+         * target queue only feeds an ability's own targets). The action takes at most
+         * the cost target's maximum cards per activation (one in manual
+         * payment); further recorded picks stay queued for the next payment
+         * cycle, where XMage re-adds the action, as gorge re-poses its ask
+         * per pick. Taken only when the Delve special action lists a card of
+         * the front answer's name among its legal (graveyard) targets; false
+         * (nothing queued) otherwise. */
+        private boolean queueDelveAction(Game game,
+                java.util.Collection<mage.abilities.SpecialAction> actions) {
+            for (mage.abilities.SpecialAction action : actions) {
+                // The class is the stable identity: the rule text leads with
+                // the exile cost, so it never starts with "Delve".
+                if (!"DelveSpecialAction".equals(action.getClass().getSimpleName())
+                        || !action.canActivate(getId(), game).canActivate()) {
+                    continue;
+                }
+                // The exile target sits on the action or on its exile cost.
+                mage.target.Targets targets = action.getTargets().isEmpty()
+                        ? action.getCosts().getTargets() : action.getTargets();
+                if (targets.isEmpty()) {
+                    continue;
+                }
+                mage.target.Target target = targets.get(0);
+                Set<UUID> legal = target.possibleTargets(getId(), action, game);
+                List<String> picked = new ArrayList<>();
+                Set<UUID> used = new java.util.HashSet<>();
+                while (picked.size() < getChoices().size() && used.size() < legal.size()
+                        && picked.size() < target.getMaxNumberOfTargets()) {
+                    String name = getChoices().get(picked.size());
+                    UUID found = null;
+                    for (UUID id : legal) {
+                        if (!used.contains(id)
+                                && hasObjectTargetNameOrAlias(game.getCard(id), name)) {
+                            found = id;
+                            break;
+                        }
+                    }
+                    if (found == null) {
+                        break;
+                    }
+                    used.add(found);
+                    picked.add(name);
+                }
+                if (picked.isEmpty()) {
+                    continue;
+                }
+                for (int i = 0; i < picked.size(); i++) {
+                    getChoices().remove(0);
+                }
+                if (!getChoices().isEmpty() && TestPlayer.CHOICE_SKIP.equals(getChoices().get(0))) {
+                    getChoices().remove(0);
+                }
+                getChoices().add(0, action.getRule(true));
+                for (int i = 0; i < picked.size(); i++) {
+                    getChoices().add(1 + i, picked.get(i));
+                }
+                if (target.getMaxNumberOfTargets() > picked.size() && legal.size() > picked.size()) {
+                    // The cost target takes up to one card per generic mana
+                    // and asks again while more can be chosen: close the ask.
+                    getChoices().add(1 + picked.size(), TestPlayer.CHOICE_SKIP);
+                }
+                convokeColour = null;
                 return true;
             }
             return false;
