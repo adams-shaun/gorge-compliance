@@ -186,7 +186,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # ClashPlacementTest (2 tests: bottom/bottom, and top for one seat with bottom for the other) pins it; the full driver
 # suite (142 tests, including ForcedDieRollTest) is green. Driver-only change; cardsfolder/tokenscripts unchanged
 # (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-clash-placement.
-FORGE_ORACLE_REF ?= ed6016bfebb61254701707134c1416901a2ba7af
+# 1bb3cb16bb9 = ed6016bfebb6 plus Dredge's replacement confirm (xproof decision_shape: Grave-Shell Scarab). CR 702.52a:
+# gorge asks once per draw as a mode decision (resume dredge) over every graveyard dredger plus the ordinary draw; Forge
+# builds Dredge as an Optional$ replacement and asks chooseSingleReplacementEffect (several dredgers) then
+# confirmReplacementEffect, which the scripted controller now answers from that pick instead of missing. A dredge pick
+# naming another host is declined without consuming it, and the ordinary draw is consumed only on the last dredger, so
+# several dredgers all get the same no. DredgeReplacementTest (4 tests) pins it. Driver-only change;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-dredge-replacement.
+FORGE_ORACLE_REF ?= 1bb3cb16bb9ec70eaa63aa036daed7ada60c789c
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
