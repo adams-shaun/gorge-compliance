@@ -693,6 +693,24 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		return as, true
 	}
 	switch {
+	case d.Resume == "search_zones":
+		// gorge's CR 701.23 "and/or" election over the zones a search may
+		// use. XMage's SearchLibraryGraveyardPutInHandEffect asks one
+		// chooseUse per zone ("Search your library ...?", "Search your
+		// graveyard ...?"), so the election is one boolean per prompt, in
+		// XMage's library-then-graveyard order, never a zone label. Only the
+		// exact library/graveyard pair is translated: a wider origin set
+		// (hand, exile) has a different XMage dialog whose ask sequence is
+		// unproven, so it stays unscripted rather than guessed at.
+		return searchZoneAnswers(d), true
+	case d.Resume == "etb" && len(d.Picks) == 1 && pickKind(d, 0) == "clone":
+		// An as-enters copy election. XMage's optional EntersBattlefieldEffect
+		// asks chooseUse "Use effect of <name>?" first: the decline ("Enter
+		// as itself") is "no", a copy pick is "yes" then the CopyPermanent
+		// target (CR 707.9). The old generic route scripted the pick's label,
+		// which no chooseUse reads (Clone, Sakashima the Impostor, Sculpting
+		// Steel).
+		return cloneAnswers(d), true
 	case r.playBool[i]:
 		// The redundant trigger-level half of a single "may cast": the Play
 		// decision that follows carries the one boolean XMage asks.
@@ -837,14 +855,61 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 	return nil, false
 }
 
+// searchZoneAnswers translates gorge's two-zone library/graveyard election
+// into XMage's per-zone chooseUse prompts, in the effect's own order (library
+// then graveyard). nil means the decision is not that exact shape: a wider
+// origin set keeps the historical unscripted handling.
+func searchZoneAnswers(d rules.OracleDecision) []XAnswer {
+	if d.Options != 2 || len(d.Picks) == 0 {
+		return nil
+	}
+	library, graveyard := false, false
+	for k, label := range d.Picks {
+		if pickKind(d, k) != "zone" {
+			return nil
+		}
+		switch label {
+		case "Search the library":
+			library = true
+		case "Search the graveyard":
+			graveyard = true
+		default:
+			return nil
+		}
+	}
+	yes := func(b bool) string {
+		if b {
+			return "yes"
+		}
+		return "no"
+	}
+	return []XAnswer{{d.Seat, "choice", yes(library)}, {d.Seat, "choice", yes(graveyard)}}
+}
+
+// cloneAnswers answers an as-enters copy election: XMage's optional
+// EntersBattlefieldEffect chooseUse takes "no" for gorge's "Enter as itself",
+// and "yes" for a copy pick, followed by the CopyPermanent target. The target
+// reuses singleTargetAnswer so the same-name and alias spellings stay in one
+// place.
+func cloneAnswers(d rules.OracleDecision) []XAnswer {
+	if strings.EqualFold(strings.TrimSpace(d.Picks[0]), "Enter as itself") {
+		return []XAnswer{{d.Seat, "choice", "no"}}
+	}
+	as := []XAnswer{{d.Seat, "choice", "yes"}}
+	if len(d.PickRefs) > 0 {
+		as = append(as, singleTargetAnswer(d, 0))
+	}
+	return as
+}
+
 // triggerCostAnswer is XMage's chooseUse answer to the pay/decline ask of a
 // triggered MANA cost ("you may pay {W}. If you do, ..."): "yes" for the pay
 // pick, "no" for the decline, "" for any other decision. XMage's
 // DoIfCostPaid poses that chooseUse for a mana cost even when it cannot be
-// paid (gorge then offers only the decline). A non-mana cost keeps the
-// generic routing: XMage checks canPay first (an unpayable forage is never
-// asked) and a blight goes straight to its creature target (measured:
-// Scuzzback Scrounger's "yes" met "Select a creature you control").
+// paid (gorge then offers only the decline). A non-mana cost (a discard, a
+// sacrifice, a blight, life or energy) is classified by
+// nonManaTriggerCostPay instead: DoIfCostPaid asks the same chooseUse whenever
+// its cost's canPay holds, and a blight's own creature pick follows the yes.
 func triggerCostAnswer(d rules.OracleDecision) string {
 	if d.Kind != "choose_n" || len(d.Picks) != 1 || !(d.TriggerCostMana || xOnlyCostPay(d)) {
 		return ""
@@ -861,22 +926,23 @@ func triggerCostAnswer(d rules.OracleDecision) string {
 // nonManaTriggerCostPay reports the pay side of a triggered optional cost that
 // is not a PURE mana payment ("you may discard a card. If you do, ...", "you
 // may pay 1 life. If you do, ...", "you may pay 2 energy. If you do, ...",
-// "you may pay 2 B and pay 1 life. If you do, ..."): XMage's DoIfCostPaid
-// poses its chooseUse whenever the cost can be paid, and gorge offers the pay
-// side only then. A pure mana pay is answered by triggerCostAnswer in the
-// routing pass. TriggerCostMana alone is not enough: the engine leaves it
-// false for an X cost ("Pay X", Wildborn Preserver), so the phrase itself is
-// also classified by manaPaymentLabel. A blight goes straight to its creature
-// target (Scuzzback Scrounger: a scripted "yes" met "Select a creature you
-// control") and is excluded. Only the engine's own pay pick scripts: a pick
-// with another kind never reaches this.
+// "you may pay 2 B and pay 1 life. If you do, ...", "you may blight 1. If you
+// do, ..."): XMage's DoIfCostPaid poses its chooseUse whenever the cost can be
+// paid, and gorge offers the pay side only then. BlightCost is one of those
+// costs (Boggart Mischief, Dream Seizer, Blighted Blackthorn, Sourbread Auntie):
+// its cost target is asked only after the chooseUse is accepted, so the yes
+// must lead the blight pick. A pure mana pay is answered by triggerCostAnswer
+// in the routing pass. TriggerCostMana alone is not enough: the engine leaves
+// it false for an X cost ("Pay X", Wildborn Preserver), so the phrase itself is
+// also classified by manaPaymentLabel. Only the engine's own pay pick scripts:
+// a pick with another kind never reaches this.
 func nonManaTriggerCostPay(d rules.OracleDecision) bool {
 	if d.Kind != "choose_n" || len(d.Picks) != 1 || d.TriggerCostMana || pickKind(d, 0) != "trigger_cost_pay" {
 		return false
 	}
 	l := strings.ToLower(strings.TrimSpace(d.Picks[0]))
 	switch {
-	case l == "", strings.HasPrefix(l, "blight"):
+	case l == "":
 		return false
 	case manaPaymentLabel(l):
 		return false

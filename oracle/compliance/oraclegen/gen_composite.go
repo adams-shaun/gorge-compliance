@@ -128,7 +128,7 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			orderAsks[i] = true
 		}
 	}
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, snaps: res.Snapshots, orderAsks: orderAsks})
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationManaXSteps(reg, sc, res), forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that
@@ -385,6 +385,37 @@ func addedNames(old, next []string) []string {
 // sameNames reports whether a and b hold the same names, ignoring order.
 func sameNames(a, b []string) bool {
 	return len(a) == len(b) && len(addedNames(a, b)) == 0
+}
+
+// activationManaXSteps marks the scenario's activation steps whose ability
+// cost is a real mana {X} (Talon of Pain, Chimeric Staff, Crypt Rats), the
+// steps where XMage's announceX is posed. The cost is read through the same
+// forgeCostSymbols walk the ability rule text uses, so a Craft/XMin count
+// (Saheeli's Lattice, The Enigma Jewel) is not a VariableManaCost and stays
+// out: XMage announces those itself. A step with no resolvable face or
+// ability is left out rather than guessed at.
+func activationManaXSteps(reg *cards.Registry, sc Scenario, g rules.OracleResult) map[int]bool {
+	if reg == nil {
+		return nil
+	}
+	it := Item{Scenario: Scenario{Setup: sc.Setup}}
+	out := map[int]bool{}
+	for i, st := range sc.Steps {
+		if st.Op != "activate" || st.AbilityIndex == nil {
+			continue
+		}
+		face, ok := printedStepFace(reg, it, i, st, g)
+		if !ok {
+			continue
+		}
+		for _, sym := range forgeCostSymbols(face.Abilities[*st.AbilityIndex].Params["Cost"]) {
+			if sym == "{X}" {
+				out[i] = true
+				break
+			}
+		}
+	}
+	return out
 }
 
 // castXSizesCost reports a spell whose X also sizes a non-mana part of its

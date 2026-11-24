@@ -1053,6 +1053,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return !head.equals("Yes") && !head.equals("No");
         }
 
+        /** An unscripted wish chooseUse ("... a card you own from outside the
+         * game ...") is declined when the sideboard holds no card. A queued
+         * Yes/No is the generator's own answer and stays for TestPlayer; a
+         * non-empty sideboard still asks because the card may be chosen. */
+        static boolean unanswerableWishAsk(String message, boolean sideboardEmpty, List<String> choices) {
+            if (message == null || !message.contains("from outside the game") || !sideboardEmpty) {
+                return false;
+            }
+            if (!choices.isEmpty()) {
+                String head = choices.get(0);
+                if (head.equals("Yes") || head.equals("No")) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         /**
          * The yes/no asks a plain cast step implies. gorge's cast-resolve
          * scenario casts for the mana cost only, so each of these is answered
@@ -1069,6 +1086,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
          */
         @Override
         public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
+            if (unanswerableWishAsk(message, getSideboard().isEmpty(), getChoices())) {
+                // WishEffect asks before it checks the sideboard. With no card
+                // outside the game (North Wind Avatar's "you may put a card you
+                // own from outside the game into your hand") the prompt has no
+                // candidate and gorge records no decision, so decline it rather
+                // than let strict mode stop at "Missing CHOICE def".
+                return false;
+            }
             if (phyrexianStarved(message, getChoices())) {
                 return false;
             }

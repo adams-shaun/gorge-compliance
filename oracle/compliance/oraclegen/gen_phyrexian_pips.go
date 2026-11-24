@@ -36,6 +36,10 @@ type xanswersExtra struct {
 	// casts is the set of the scenario's cast step indices: a forced X
 	// announcement on one is still posed by XMage (castAnnouncesX).
 	casts map[int]bool
+	// activates is the set of the scenario's activation steps whose own cost
+	// names {X}: a forced X announcement on one is still posed by XMage's
+	// announceX (activationAnnouncesX), unlike a Craft/XMin count.
+	activates map[int]bool
 	// forage maps a forage election's decision index to the graveyard
 	// cards its exile arm took (forageExiles).
 	forage map[int][]string

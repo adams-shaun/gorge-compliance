@@ -52,9 +52,10 @@ public final class ScenarioReplayDriverAsksTest {
         promisedGift();
         replacementOrder();
         phyrexianLife();
+        wishDeclined();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
                 + " face-down attacker, manifested face-down target, declined dig, alternative cast, promised gift, replacement order,"
-                + " phyrexian life");
+                + " phyrexian life, wish decline");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
@@ -89,6 +90,24 @@ public final class ScenarioReplayDriverAsksTest {
                 "a head naming an effect's text is a scripted order");
         check((Boolean) adapter("replacementScripted", types, new ArrayList<>(Arrays.asList("Edgewall Inn*choose a color")), texts),
                 "TestPlayer's object*ability form is a scripted order");
+    }
+
+    /** North Wind Avatar: WishEffect asks "Put a card you own from outside the
+     * game into your hand?" before it checks the sideboard. With none outside
+     * the game it has no candidate, so the driver declines an unscripted ask
+     * instead of strict-missing; a queued boolean or a non-empty sideboard is
+     * left to TestPlayer. */
+    private static void wishDeclined() throws Exception {
+        String wish = "Put a card you own from outside the game into your hand?";
+        Class<?>[] types = {String.class, boolean.class, List.class};
+        check((Boolean) adapter("unanswerableWishAsk", types, wish, true, new ArrayList<String>()),
+                "an empty sideboard's unscripted wish must be declined");
+        check(!(Boolean) adapter("unanswerableWishAsk", types, wish, false, new ArrayList<String>()),
+                "a non-empty sideboard still asks");
+        check(!(Boolean) adapter("unanswerableWishAsk", types, wish, true, new ArrayList<>(Arrays.asList("Yes"))),
+                "a queued yes is the generator's answer");
+        check(!(Boolean) adapter("unanswerableWishAsk", types, "Draw a card?", true, new ArrayList<String>()),
+                "another chooseUse is untouched");
     }
 
     private static void activeSeatOnePair() {
