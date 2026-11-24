@@ -70,8 +70,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a4f6e85-df16-49a4-8fc6-149a28c2cb42	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4a574140-0657-4f49-b497-331447f17b29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a574140-0657-4f49-b497-331447f17b29	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a58954a-1d20-48b8-847c-3615de67e122	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a58954a-1d20-48b8-847c-3615de67e122	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a58954a-1d20-48b8-847c-3615de67e122	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:warbriar-blessing:cast:s1,f:xs:XP:warbriar-blessing:cast:s1	-	-	-	ae86f6029288	-	663174100080	-	-	2026-11-24	xproof
+4a58954a-1d20-48b8-847c-3615de67e122	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:warbriar-blessing:cast:s1,f:xs:XP:warbriar-blessing:cast:s1	-	-	-	ae86f6029288	-	663174100080	-	-	2026-11-24	xproof
 4a59d86e-405d-4c70-b2a5-c64f5cecfd9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:electrodominance:cast:s1,f:xs:XP:electrodominance:cast:s1	-	-	-	d864b561c9cb	-	b163af19ddb6	-	-	2026-11-24	xproof
 4a5f76e7-40be-4b06-9935-4a3b2672e1c2	cast	cast-resolve	agreed	-	FX	scen	2	0	Thranduil, the Elvenking/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a5f76e7-40be-4b06-9935-4a3b2672e1c2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thranduil, the Elvenking/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -102,14 +102,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a7a5ea9-b633-459f-bcd4-40de53afce0e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4a7c7ecc-df72-4da0-af35-dd0af58ec02c	cast	cast-resolve	agreed	-	X	scen	1	0	Mister Hyde, Monster Within/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a7c7ecc-df72-4da0-af35-dd0af58ec02c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mister Hyde, Monster Within/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4a7fef1e-3f11-4350-86da-6f1315fedc53	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a7fef1e-3f11-4350-86da-6f1315fedc53	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ferocious-tigorilla:cast:s1,f:xs:XP:ferocious-tigorilla:cast:s1	-	-	-	ae86f6029288	-	87d276525d74	-	-	2026-11-24	xproof
 4a83c2fa-f2d2-4b86-8407-4269f127936d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:depopulate:cast:s1,f:xs:XP:depopulate:cast:s1	-	-	-	d864b561c9cb	-	3c37f27003f8	-	-	2026-11-24	xproof
 4a85cd7e-625b-4043-b7f1-999def26eb36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a85cd7e-625b-4043-b7f1-999def26eb36	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a8b3316-a01a-4206-bbed-d7aac6c834bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a8b3316-a01a-4206-bbed-d7aac6c834bd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4a8d41fe-e04d-484b-a7d1-19be311e6ca7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a8d41fe-e04d-484b-a7d1-19be311e6ca7	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a8d41fe-e04d-484b-a7d1-19be311e6ca7	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 4a8e1f8e-3740-4ff3-b7fa-390ea278fb95	cast	cast	agreed	-	X	start	2	0	x:xs:XP:hostage-taker:f0t0:s1	-	-	-	d864b561c9cb	-	9f33c905e38a	-	-	2026-11-24	xproof
 4a8e1f8e-3740-4ff3-b7fa-390ea278fb95	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:herbal-poultice:f0a0:s1,f:xs:XP:herbal-poultice:f0a0:s1	-	-	-	d864b561c9cb	-	9f33c905e38a	-	-	2026-11-24	xproof
 4a8f2104-57ec-4b23-9857-f26afa5cbcfe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -197,7 +197,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4af03564-1d1c-4582-9248-cfe9551bad30	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4af23012-16eb-47be-b666-3e536d8f6c1b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flame-kin-zealot:f0t0:s1,f:xs:XP:flame-kin-zealot:f0t0:s1	-	-	-	64a08ba7d913	-	7e737460d2e6	-	-	2026-11-24	xproof
 4af23012-16eb-47be-b666-3e536d8f6c1b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:flame-kin-zealot:f0t0:s1,f:xs:XP:flame-kin-zealot:f0t0:s1	-	-	-	64a08ba7d913	-	7e737460d2e6	-	-	2026-11-24	xproof
-4afd88fa-f8bb-46d4-9ba7-09419e6f858c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4afd88fa-f8bb-46d4-9ba7-09419e6f858c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grimdancer:cast:s1,f:xs:XP:grimdancer:cast:s1	-	-	-	ae86f6029288	-	858de1a8be3e	-	-	2026-11-24	xproof
 4aff0f09-0607-41b7-8f60-4ef35ff6183e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aff0f09-0607-41b7-8f60-4ef35ff6183e	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aff2f31-619f-406e-b2c9-a2c733c04bc4	cast	cast-resolve	agreed	-	FX	scen	2	0	Venerated Stormsinger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

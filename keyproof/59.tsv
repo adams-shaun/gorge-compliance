@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 595f0eb5-f521-4174-9c48-b89e85ea907c	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Titan's Grave/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 595f0eb5-f521-4174-9c48-b89e85ea907c	land	play-land	agreed	-	X	scen	1	0	Titan's Grave/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 595f1dee-8c3b-44a6-9e71-a4bb4334b309	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-595f1dee-8c3b-44a6-9e71-a4bb4334b309	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+595f1dee-8c3b-44a6-9e71-a4bb4334b309	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5960dd01-6797-4c73-b48a-f637b9c288cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 596237da-3d51-4052-a8ca-2218efc1afb3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dovin-grand-arbiter:cast:s1,f:xs:XP:dovin-grand-arbiter:cast:s1	-	-	-	d864b561c9cb	-	97a5d40a9d85	-	-	2026-11-24	xproof
 596237da-3d51-4052-a8ca-2218efc1afb3	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:dovin-grand-arbiter:cast:s1,f:xs:XP:dovin-grand-arbiter:cast:s1	-	-	-	d864b561c9cb	-	97a5d40a9d85	-	-	2026-11-24	xproof
@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59d22de5-e310-44d7-89cf-ef3529e40cef	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59d22de5-e310-44d7-89cf-ef3529e40cef	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+59d22de5-e310-44d7-89cf-ef3529e40cef	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 59d22de5-e310-44d7-89cf-ef3529e40cef	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59d9070c-dc60-420e-aa0e-32cfb97dfe88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59d96fc0-6580-43c2-8c6a-dcf983644561	cast	cast-resolve	agreed	-	FX	scen	2	0	Shredder, Unrelenting/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0413e0e4-c8f8-44c3-a749-c799766bc8cd	cast	cast-resolve	agreed	-	FX	scen	2	0	Drill Too Deep/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04152e7a-969c-4858-841b-0a569a9fc1bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04152e7a-969c-4858-841b-0a569a9fc1bf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04152e7a-969c-4858-841b-0a569a9fc1bf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04152e7a-969c-4858-841b-0a569a9fc1bf	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 041738f9-7465-4a6c-8046-a897d88cbcdd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:executioner-s-hood:cast:s1,f:xs:XP:executioner-s-hood:cast:s1	-	-	-	d864b561c9cb	-	2e7e4a0817ab	-	-	2026-11-24	xproof
 041738f9-7465-4a6c-8046-a897d88cbcdd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 041cc2d0-eb67-484e-8da1-e91ddb2b3f70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 043dd2e5-21e4-49b9-90b2-831e587b2238	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 043ded41-2506-4dab-91c4-142d9287e7d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 043ded41-2506-4dab-91c4-142d9287e7d7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-043ded41-2506-4dab-91c4-142d9287e7d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+043ded41-2506-4dab-91c4-142d9287e7d7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 043f869d-b11c-4c0d-9591-2bf0df7bde55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 043fa53c-8a46-4fbd-836f-2403c62e0121	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oran-rief-recluse:f0t0:s1,f:xs:XP:oran-rief-recluse:f0t0:s1	-	-	-	8a1b1a193ec0	-	2dc7816d24db	-	-	2026-11-24	xproof
 043fa53c-8a46-4fbd-836f-2403c62e0121	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oran-rief-recluse:f0t0:s1,f:xs:XP:oran-rief-recluse:f0t0:s1	-	-	-	8a1b1a193ec0	-	2dc7816d24db	-	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04cc9d99-69a9-499b-91bc-f2f30d217bdd	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04cf02dc-f053-414e-87d8-1537f25bcbf4	cast	cast	owed	harness	-	start	0	0	-	-	-	-	9ee19e8250ce	-	912b158c5ac0	-	-	2026-11-24	xproof
 04cf02dc-f053-414e-87d8-1537f25bcbf4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04cffc41-05da-45fb-82da-2c4d4108c7e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04cffc41-05da-45fb-82da-2c4d4108c7e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nightsquad-commando:f0t0:s1,f:xs:XP:nightsquad-commando:f0t0:s1	-	-	-	ae86f6029288	-	12bf6fe6ec82	-	-	2026-11-24	xproof
 04cffc41-05da-45fb-82da-2c4d4108c7e1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04d02394-e17f-43cd-932f-f58e8cc56629	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04d0d20f-720e-4cb6-a3ad-ea2b57bb7efa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

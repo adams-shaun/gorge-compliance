@@ -4,8 +4,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1300dc30-a089-41f5-b1a7-e4779ebb73ef	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13044ca1-76a3-43b2-a8e4-3bbc692c30c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1306c72f-fc6b-470b-a95e-0364e0e30ac7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1306c72f-fc6b-470b-a95e-0364e0e30ac7	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1306c72f-fc6b-470b-a95e-0364e0e30ac7	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1306c72f-fc6b-470b-a95e-0364e0e30ac7	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:sparkhunter-masticore:f0a1:s1,f:xs:XP:sparkhunter-masticore:f0a1:s1	-	-	-	ae86f6029288	-	dd06b3ad646d	-	-	2026-11-24	xproof
+1306c72f-fc6b-470b-a95e-0364e0e30ac7	f0/a2	Pump	agreed	-	FX	start	2	0	x:xs:XP:sparkhunter-masticore:f0a2:s1,f:xs:XP:sparkhunter-masticore:f0a2:s1	-	-	-	ae86f6029288	-	dd06b3ad646d	-	-	2026-11-24	xproof
 1313da2f-92bb-4862-9153-373972cc1520	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1313da2f-92bb-4862-9153-373972cc1520	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 131a7475-0b9e-46eb-9ade-fef1b9820184	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormtide-leviathan:cast:s1,f:xs:XP:stormtide-leviathan:cast:s1	-	-	-	d864b561c9cb	-	3b5b680d1c4b	-	-	2026-11-24	xproof
@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13279222-422d-4447-9451-2463b0c714c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13279222-422d-4447-9451-2463b0c714c6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 132859dd-de66-45c6-8af4-ab5e202a17b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-132859dd-de66-45c6-8af4-ab5e202a17b0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+132859dd-de66-45c6-8af4-ab5e202a17b0	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 132c8a62-00bc-4b89-b775-099d8909f200	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 132ca99a-a3c7-4ed6-b4d0-0edcd7140ca2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 132de6c2-4ca2-41da-9c78-caa59838b641	cast	cast-resolve	agreed	-	X	scen	1	0	Sunstar Lightsmith/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1397e7d5-4aa4-4c8d-8957-845579b775f7	cast	cast-resolve	agreed	-	X	scen	1	0	Tactical Officer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1397e7d5-4aa4-4c8d-8957-845579b775f7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 139a5f0b-6f76-4918-96e6-cdcf27253230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-139a5f0b-6f76-4918-96e6-cdcf27253230	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+139a5f0b-6f76-4918-96e6-cdcf27253230	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 139af10d-a3e5-4ade-b876-87324e6c8017	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twisted-abomination:cast:s1,f:xs:XP:twisted-abomination:cast:s1	-	-	-	d864b561c9cb	-	7759de1ebf52	-	-	2026-11-24	xproof
 139af10d-a3e5-4ade-b876-87324e6c8017	f0/a0	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:twisted-abomination:cast:s1,f:xs:XP:twisted-abomination:cast:s1	-	-	-	d864b561c9cb	-	7759de1ebf52	-	-	2026-11-24	xproof
 139af10d-a3e5-4ade-b876-87324e6c8017	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:twisted-abomination:cast:s2,f:xs:XP:twisted-abomination:cast:s2	-	-	-	9ee19e8250ce	-	7759de1ebf52	-	-	2026-11-24	xproof

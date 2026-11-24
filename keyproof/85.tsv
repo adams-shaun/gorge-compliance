@@ -28,8 +28,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8520ee67-439b-4f15-838b-420bacbb8b13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8520ee67-439b-4f15-838b-420bacbb8b13	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8520ee67-439b-4f15-838b-420bacbb8b13	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-852621bf-9ab7-4027-89fb-b438e4080684	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-852621bf-9ab7-4027-89fb-b438e4080684	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+852621bf-9ab7-4027-89fb-b438e4080684	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sage-of-the-falls:cast:s1,f:xs:XP:sage-of-the-falls:cast:s1	-	-	-	ae86f6029288	-	81a7057ec04a	-	-	2026-11-24	xproof
+852621bf-9ab7-4027-89fb-b438e4080684	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sage-of-the-falls:cast:s1,f:xs:XP:sage-of-the-falls:cast:s1	-	-	-	ae86f6029288	-	81a7057ec04a	-	-	2026-11-24	xproof
 852657c0-18a4-4b28-b9ae-7728acdb5044	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirari-s-wake:cast:s1,f:xs:XP:mirari-s-wake:cast:s1	-	-	-	25696bf19d5b	-	c7d4d75ce64a	-	-	2026-11-24	xproof
 852657c0-18a4-4b28-b9ae-7728acdb5044	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 85292bfb-32d7-449e-9ebb-5be828e8ecf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85e797de-da27-4cd5-8fa4-4aef948988b2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 85e797de-da27-4cd5-8fa4-4aef948988b2	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 85eafa00-51df-4070-9b2d-247457ba3364	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85eafa00-51df-4070-9b2d-247457ba3364	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+85eafa00-51df-4070-9b2d-247457ba3364	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 85eb890e-a5e1-48f8-b813-e8424d18b28a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85eb890e-a5e1-48f8-b813-e8424d18b28a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85eb890e-a5e1-48f8-b813-e8424d18b28a	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

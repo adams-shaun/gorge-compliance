@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3402aa73-5e63-4158-b114-6f1d42ec8992	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3402aa73-5e63-4158-b114-6f1d42ec8992	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:master-of-diversion:f0t0:s1,f:xs:XP:master-of-diversion:f0t0:s1	-	-	-	d864b561c9cb	-	885ec0ab4111	-	-	2026-11-24	xproof
 3405c8a9-a8d6-4b45-9b64-94141076603b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3405c8a9-a8d6-4b45-9b64-94141076603b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3405c8a9-a8d6-4b45-9b64-94141076603b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 34062d79-457f-4af3-b9c6-cab2e4d17581	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34062d79-457f-4af3-b9c6-cab2e4d17581	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3406db41-6b95-48fc-b58e-4476220fd34d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sidisi-undead-vizier:cast:s1,f:xs:XP:sidisi-undead-vizier:cast:s1	-	-	-	d864b561c9cb	-	4ab607283aef	-	-	2026-11-24	xproof
@@ -57,13 +57,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 342df67f-44d8-4b0a-b1d7-4241966d0598	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kingpin's Enforcers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 342df67f-44d8-4b0a-b1d7-4241966d0598	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Kingpin's Enforcers/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 342e08f9-d4d0-4408-8621-66e087058616	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-342e08f9-d4d0-4408-8621-66e087058616	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+342e08f9-d4d0-4408-8621-66e087058616	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 34312179-f3f9-47ca-bdf4-5abbd493876e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34312179-f3f9-47ca-bdf4-5abbd493876e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3431338b-928a-47f2-bc2f-f3c5d8eda8d0	cast	cast-resolve	agreed	-	X	scen	1	0	Host of the Hereafter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3431338b-928a-47f2-bc2f-f3c5d8eda8d0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Host of the Hereafter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34320ebf-da97-44a4-bbeb-a9da06548289	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34320ebf-da97-44a4-bbeb-a9da06548289	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34320ebf-da97-44a4-bbeb-a9da06548289	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 343460ea-7999-4d9e-b425-97fa1621f9d6	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 343460ea-7999-4d9e-b425-97fa1621f9d6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 343833c1-19fd-4e8f-b82e-0f20903caaff	cast	cast-resolve	agreed	-	X	scen	1	0	Winter, Cursed Rider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

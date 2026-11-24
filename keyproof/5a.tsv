@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a210b32-6e1f-4578-bd8b-4e481b761159	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:izoni-thousand-eyed:cast:s1,f:xs:XP:izoni-thousand-eyed:cast:s1	-	-	-	d864b561c9cb	-	75d2e62a3353	-	-	2026-11-24	xproof
 5a210b32-6e1f-4578-bd8b-4e481b761159	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5a210b32-6e1f-4578-bd8b-4e481b761159	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:izoni-thousand-eyed:cast:s1,f:xs:XP:izoni-thousand-eyed:cast:s1	-	-	-	d864b561c9cb	-	75d2e62a3353	-	-	2026-11-24	xproof
-5a23c734-cbfb-419a-9bf1-126cb07fe427	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a23c734-cbfb-419a-9bf1-126cb07fe427	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:of-one-mind:cast:s1,f:xs:XP:of-one-mind:cast:s1	-	-	-	ae86f6029288	-	2ffbe37550cf	-	-	2026-11-24	xproof
 5a242eab-204c-4411-860f-c0f3582a8f38	cast	cast-resolve	agreed	-	FX	scen	2	0	Tyvar, the Pummeler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a242eab-204c-4411-860f-c0f3582a8f38	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Tyvar, the Pummeler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a242eab-204c-4411-860f-c0f3582a8f38	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Tyvar, the Pummeler/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -86,7 +86,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a651557-ce08-46ba-aecd-0e4fbfdef3c0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bile-Vial Boggart/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5a66802a-76f9-4a31-a776-24110dcfca64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a66802a-76f9-4a31-a776-24110dcfca64	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-5a680186-a84d-400f-9452-76f19bdfafa3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a680186-a84d-400f-9452-76f19bdfafa3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:molten-blast:cast:s1,f:xs:XP:molten-blast:cast:s1	-	-	-	ae86f6029288	-	04d14b0d9c67	-	-	2026-11-24	xproof
 5a682ec5-78e6-4238-b5c2-e94b7a8f8066	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a682ec5-78e6-4238-b5c2-e94b7a8f8066	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5a682ec5-78e6-4238-b5c2-e94b7a8f8066	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a6d01c8-47b6-43e5-a6e9-c48088286007	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Strix Lookout/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a6d01c8-47b6-43e5-a6e9-c48088286007	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Strix Lookout/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a73d439-bd78-42e1-90ae-eedd30536881	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a73d439-bd78-42e1-90ae-eedd30536881	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a73d439-bd78-42e1-90ae-eedd30536881	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5a747256-4215-4334-98ab-0c2e4ed92e47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a747256-4215-4334-98ab-0c2e4ed92e47	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a775f50-20f8-4a8f-868c-8907305bfad6	cast	cast	agreed	-	F	start	2	0	f:xs:XP:zoraline-cosmos-caller:cast:s2	-	-	-	5437c1394672	-	381cfa7b02c8	-	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ab91144-5eb3-491b-a8be-7e1139d0d6c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ab91144-5eb3-491b-a8be-7e1139d0d6c8	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5abcc262-fbe1-4e81-897c-da5a8fb1f1f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5abcc262-fbe1-4e81-897c-da5a8fb1f1f4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5abcc262-fbe1-4e81-897c-da5a8fb1f1f4	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5ac44e0a-782f-49ee-b263-2fb65359faaa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ac44e0a-782f-49ee-b263-2fb65359faaa	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ac65688-0a74-4dc4-b6cb-12bdf8aed01e	cast	cast-resolve	agreed	-	X	scen	1	0	Myojin of Night's Reach/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

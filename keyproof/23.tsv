@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2343ebff-edf4-4132-ad9e-7800f8014072	cast	cast-resolve	agreed	-	X	scen	1	0	Skycrash/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2343ebff-edf4-4132-ad9e-7800f8014072	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Skycrash/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2345b243-ed0d-4556-8017-d533db1fbc74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2345b243-ed0d-4556-8017-d533db1fbc74	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2345b243-ed0d-4556-8017-d533db1fbc74	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 23467047-6dba-4498-b783-1ebc4f74b8c2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23467047-6dba-4498-b783-1ebc4f74b8c2	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2346be19-7344-4f11-be2c-a22750cb7e1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 234fb291-0b62-4092-9071-81311c71bd53	f0/a0	AnimateAll	diverged	-	-	start	0	2	-	3959f9b0a069	-	-	9ee19e8250ce	-	97c5a01afd7f	-	-	2026-11-24	xproof
 234fb291-0b62-4092-9071-81311c71bd53	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	f0/a0	Attach/Reconfigure	agreed	-	F	start	2	0	f:xs:XP:acquisition-octopus:f0a1:s1	-	-	-	ae86f6029288	-	d0708bc185ae	-	-	2026-11-24	xproof
 234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2351a9fa-17b5-41fc-93d0-34731d54f915	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2392a41a-59d3-4749-be94-4d9df0af9c4c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2396299a-c031-4020-b13e-1f9bf9d64511	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2396299a-c031-4020-b13e-1f9bf9d64511	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2396299a-c031-4020-b13e-1f9bf9d64511	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2396299a-c031-4020-b13e-1f9bf9d64511	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 23985249-c54e-4bfa-b69a-512422a46a77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23b11fdc-61b5-4f5e-ad80-f81b729fc91d	cast	cast-resolve	agreed	-	X	scen	1	0	Sear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 23b2de61-a29c-4a32-b38c-408c723727ce	cast	cast-resolve	agreed	-	FX	scen	2	0	Agency Outfitter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23cf22fe-483f-4841-882e-e1513bb1d495	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23d349a0-e441-40b8-b634-13e61440a7c8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23d349a0-e441-40b8-b634-13e61440a7c8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23d349a0-e441-40b8-b634-13e61440a7c8	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+23d349a0-e441-40b8-b634-13e61440a7c8	land	land	agreed	-	FX	start	2	0	x:xs:XP:idyllic-grange:f0t0:s1,f:xs:XP:idyllic-grange:f0t0:s1	-	-	-	ae86f6029288	-	9761faa005d7	-	-	2026-11-24	xproof
 23d3e5fe-3f82-44cf-91a1-6646a12a0255	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:echo-of-eons:cast:s1,f:xs:XP:echo-of-eons:cast:s1	-	-	-	d864b561c9cb	-	1e5f34106145	-	-	2026-11-24	xproof
 23d3ff11-bf19-4315-b53b-3e4f20c6a89b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23d3ff11-bf19-4315-b53b-3e4f20c6a89b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

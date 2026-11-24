@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1961dd92-db0b-4f02-b9c8-08f760f4051b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1962d9b3-f057-4d2c-9c5b-386d9a66148a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1962d9b3-f057-4d2c-9c5b-386d9a66148a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1965ca0e-1357-4437-82d3-1a78353ab5f1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1965ca0e-1357-4437-82d3-1a78353ab5f1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vantress-paladin:cast:s1,f:xs:XP:vantress-paladin:cast:s1	-	-	-	ae86f6029288	-	f472bc33ab4c	-	-	2026-11-24	xproof
 196d6ef6-80d9-4bfd-a5ed-d9e8b00faad0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1972e0db-e595-4ec2-b97c-902561bb275b	cast	cast-resolve	agreed	-	X	scen	1	0	Kavaron Harrier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1972e0db-e595-4ec2-b97c-902561bb275b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kavaron Harrier/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -149,9 +149,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19becb14-3774-4732-b792-d2d0e5a94b35	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19c22e08-29b6-4b3d-bf6e-28a5add620bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19cab267-3c51-4322-b1af-22941bbbdadf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19cede61-1982-47d1-9e0e-49ac6de00798	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19cede61-1982-47d1-9e0e-49ac6de00798	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19cede61-1982-47d1-9e0e-49ac6de00798	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19cede61-1982-47d1-9e0e-49ac6de00798	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wicked-wolf:cast:s1,f:xs:XP:wicked-wolf:cast:s1	-	-	-	ae86f6029288	-	74da0907bb20	-	-	2026-11-24	xproof
+19cede61-1982-47d1-9e0e-49ac6de00798	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+19cede61-1982-47d1-9e0e-49ac6de00798	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wicked-wolf:cast:s1,f:xs:XP:wicked-wolf:cast:s1	-	-	-	ae86f6029288	-	74da0907bb20	-	-	2026-11-24	xproof
 19cf5798-4600-4a66-b1c7-de77bde157d0	cast	cast	agreed	-	X	start	1	0	x:xs:XP:tablet-of-discovery:f0t0:s2	-	-	-	5437c1394672	-	5c4f71686ce9	-	-	2026-11-24	xproof
 19cf5798-4600-4a66-b1c7-de77bde157d0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tablet of Discovery/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19cf5798-4600-4a66-b1c7-de77bde157d0	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Tablet of Discovery/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -169,9 +169,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19dc29a7-8ccc-4e54-829b-86cc102b082d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tin Street Gossip/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19dc29a7-8ccc-4e54-829b-86cc102b082d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tin Street Gossip/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19e09405-3294-4f98-a18f-60cf0a8a2e4e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19e483e7-a0a5-4164-a5ea-dab51c07a3d7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19e483e7-a0a5-4164-a5ea-dab51c07a3d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19e483e7-a0a5-4164-a5ea-dab51c07a3d7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19e483e7-a0a5-4164-a5ea-dab51c07a3d7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:hero-of-the-nyxborn:cast:s1,f:xs:XP:hero-of-the-nyxborn:cast:s1	-	-	-	ae86f6029288	-	ac75632a0909	-	-	2026-11-24	xproof
+19e483e7-a0a5-4164-a5ea-dab51c07a3d7	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:hero-of-the-nyxborn:cast:s1,f:xs:XP:hero-of-the-nyxborn:cast:s1	-	-	-	ae86f6029288	-	ac75632a0909	-	-	2026-11-24	xproof
+19e483e7-a0a5-4164-a5ea-dab51c07a3d7	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 19e60344-57a8-41e0-8eca-87dbedf5a81a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19e60344-57a8-41e0-8eca-87dbedf5a81a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19e60344-57a8-41e0-8eca-87dbedf5a81a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -110,8 +110,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42a9aeac-5b9c-4675-8c96-7c8ce7e9098c	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:case-of-the-gateway-express:f0t0:s2,f:xs:XP:case-of-the-gateway-express:f0t0:s2	-	-	-	e07cf3a05ba5	-	df59f3395e92	-	-	2026-11-24	xproof
 42a9aeac-5b9c-4675-8c96-7c8ce7e9098c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Case of the Gateway Express/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 42a9aeac-5b9c-4675-8c96-7c8ce7e9098c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Case of the Gateway Express/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-42aa599f-de2f-411a-8cf3-f5cfb40568b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42aa599f-de2f-411a-8cf3-f5cfb40568b3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+42aa599f-de2f-411a-8cf3-f5cfb40568b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angelheart-protector:f0t0:s1,f:xs:XP:angelheart-protector:f0t0:s1	-	-	-	ae86f6029288	-	a3dc2d859a77	-	-	2026-11-24	xproof
+42aa599f-de2f-411a-8cf3-f5cfb40568b3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:angelheart-protector:f0t0:s1,f:xs:XP:angelheart-protector:f0t0:s1	-	-	-	ae86f6029288	-	a3dc2d859a77	-	-	2026-11-24	xproof
 42adcc63-cfb0-4b62-b8e1-dda01189652a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42adcc63-cfb0-4b62-b8e1-dda01189652a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:cenn-s-heir:f0t0:s1,f:xs:XP:cenn-s-heir:f0t0:s1	-	-	-	d864b561c9cb	-	ca2cbe8bc7fd	-	-	2026-11-24	xproof
 42b01697-8663-4b53-86d5-699063bd0778	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -159,12 +159,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42d121a2-5266-483a-ab16-e0a8073cd6a3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:halimar-depths:f0t0:s1,f:xs:XP:halimar-depths:f0t0:s1	-	-	-	8a1b1a193ec0	-	62fe9f20a42f	-	-	2026-11-24	xproof
 42d121a2-5266-483a-ab16-e0a8073cd6a3	land	land	agreed	-	FX	start	2	0	x:xs:XP:halimar-depths:f0t0:s1,f:xs:XP:halimar-depths:f0t0:s1	-	-	-	8a1b1a193ec0	-	62fe9f20a42f	-	-	2026-11-24	xproof
 42d7ec93-0943-43e2-9b65-b7edc3349410	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42d7ec93-0943-43e2-9b65-b7edc3349410	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+42d7ec93-0943-43e2-9b65-b7edc3349410	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 42d86827-6459-42fc-86b6-6eb055604c36	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:edge-of-autumn:cast:s2,f:xs:XP:edge-of-autumn:cast:s2	-	-	-	d864b561c9cb	-	43f8f5ce3dff	-	-	2026-11-24	xproof
 42d86827-6459-42fc-86b6-6eb055604c36	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:edge-of-autumn:cast:s1,f:xs:XP:edge-of-autumn:cast:s1	-	-	-	d864b561c9cb	-	43f8f5ce3dff	-	-	2026-11-24	xproof
 42d8ab49-703a-4fd3-84d0-0a3ac1eafca8	cast	counter-spell	agreed	-	FX	scen	2	0	Louisoix's Sacrifice/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-42de2d46-c98d-4ae5-a53d-97531592529b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42de2d46-c98d-4ae5-a53d-97531592529b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+42de2d46-c98d-4ae5-a53d-97531592529b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:daysquad-marshal:f0t0:s1,f:xs:XP:daysquad-marshal:f0t0:s1	-	-	-	ae86f6029288	-	2b30329acfd5	-	-	2026-11-24	xproof
+42de2d46-c98d-4ae5-a53d-97531592529b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:daysquad-marshal:f0t0:s1,f:xs:XP:daysquad-marshal:f0t0:s1	-	-	-	ae86f6029288	-	2b30329acfd5	-	-	2026-11-24	xproof
 42e041c0-ffbc-4bf8-a5aa-f0d14aad7112	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42e041c0-ffbc-4bf8-a5aa-f0d14aad7112	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42e041c0-ffbc-4bf8-a5aa-f0d14aad7112	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

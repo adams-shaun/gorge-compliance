@@ -8,8 +8,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73089a39-a2f6-4aa2-a058-e6551475153d	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 73094bde-5466-41a4-88f9-a98e67f5ed2e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 730be0d6-2612-44d6-9d36-e1fc6510c6bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-730be0d6-2612-44d6-9d36-e1fc6510c6bd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-730be0d6-2612-44d6-9d36-e1fc6510c6bd	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+730be0d6-2612-44d6-9d36-e1fc6510c6bd	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+730be0d6-2612-44d6-9d36-e1fc6510c6bd	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 730d02c7-2f8a-47d3-99f0-e4ada7f6255c	cast	cast-resolve	agreed	-	X	scen	1	0	Wickerfolk Indomitable/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 730d02c7-2f8a-47d3-99f0-e4ada7f6255c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wickerfolk Indomitable/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 730e39e6-c61d-48b5-8827-bfd952bf1be7	cast	cast-resolve	agreed	-	X	scen	1	0	Omniscience/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -29,8 +29,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7319eec8-48ba-4238-bce1-450abcae73a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7319eec8-48ba-4238-bce1-450abcae73a6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 731a70e8-40d6-47b9-b2b3-b16c818e1935	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:call-the-scions:cast:s1,f:xs:XP:call-the-scions:cast:s1	-	-	-	d864b561c9cb	-	01caa99fe374	-	-	2026-11-24	xproof
-7324abaa-48da-439d-9339-b0ea5eea612e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7324abaa-48da-439d-9339-b0ea5eea612e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7324abaa-48da-439d-9339-b0ea5eea612e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unnatural-growth:cast:s1,f:xs:XP:unnatural-growth:cast:s1	-	-	-	ae86f6029288	-	08355aaf3cbd	-	-	2026-11-24	xproof
+7324abaa-48da-439d-9339-b0ea5eea612e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:unnatural-growth:cast:s1,f:xs:XP:unnatural-growth:cast:s1	-	-	-	ae86f6029288	-	08355aaf3cbd	-	-	2026-11-24	xproof
 732b1314-68bb-4d3d-9f3f-7e66e763caf5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:followed-footsteps:cast:s1,f:xs:XP:followed-footsteps:cast:s1	-	-	-	64a08ba7d913	-	198cde78e23b	-	-	2026-11-24	xproof
 732b1314-68bb-4d3d-9f3f-7e66e763caf5	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7330201a-41ff-44bf-a623-2ed062878c58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -39,7 +39,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73346137-3117-4dc3-b5a4-1aca1da54548	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Large Bear/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7336a541-3ae9-4ab2-acb8-f574c0a5b3a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7336a541-3ae9-4ab2-acb8-f574c0a5b3a9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7336a541-3ae9-4ab2-acb8-f574c0a5b3a9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7336a541-3ae9-4ab2-acb8-f574c0a5b3a9	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 7338f964-b7d8-4491-b933-7d8b7d1b56ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 733c6e30-3c0c-41f0-b1e9-4c2eb76f7b82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 733cfc16-9a16-41e2-b36e-3d7a546c67f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guul-draz-specter:cast:s1,f:xs:XP:guul-draz-specter:cast:s1	-	-	-	8a1b1a193ec0	-	7e971d330a5f	-	-	2026-11-24	xproof
@@ -189,7 +189,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73f44500-fe83-40fa-b6f2-ed5673d0edcc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Karlov Watchdog/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73f44500-fe83-40fa-b6f2-ed5673d0edcc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Karlov Watchdog/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73f6619c-9d92-434e-9f06-52e0ff15cb5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73f6619c-9d92-434e-9f06-52e0ff15cb5e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+73f6619c-9d92-434e-9f06-52e0ff15cb5e	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 73f6da1e-b8ce-4b5a-9da0-84ca67adaf1c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sygg-river-guide:cast:s1	-	-	-	d864b561c9cb	-	5874c37a4391	-	-	2026-11-24	xproof
 73f6da1e-b8ce-4b5a-9da0-84ca67adaf1c	f0/a0	Protection	agreed	-	FX	start	2	0	x:xs:XP:sygg-river-guide:f0a0:s1,f:xs:XP:sygg-river-guide:f0a0:s1	-	-	-	d864b561c9cb	-	5874c37a4391	-	-	2026-11-24	xproof
 73f808f0-3d56-46c9-967b-d452bb3611af	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gargadon:cast:s1,f:xs:XP:gargadon:cast:s1	-	-	-	d864b561c9cb	-	df277fa941a9	-	-	2026-11-24	xproof

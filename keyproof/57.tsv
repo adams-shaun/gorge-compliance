@@ -23,8 +23,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 571cb06d-55b5-46e4-9678-1f74aca73068	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Tenured Tethermage/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 571cb06d-55b5-46e4-9678-1f74aca73068	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tenured-tethermage:f0t0:s1,f:xs:XP:tenured-tethermage:f0t0:s1	-	-	-	25696bf19d5b	-	69643f1ff203	-	-	2026-11-24	xproof
 571cb4b6-b4e5-40a2-a970-42c1ab65c8a9	cast	cast-resolve	agreed	-	X	scen	1	0	Overkill/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-571f9d80-9c37-474e-9524-400e7a238e2c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-571f9d80-9c37-474e-9524-400e7a238e2c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+571f9d80-9c37-474e-9524-400e7a238e2c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shatterskull-charger:cast:s1,f:xs:XP:shatterskull-charger:cast:s1	-	-	-	ae86f6029288	-	bea590767529	-	-	2026-11-24	xproof
+571f9d80-9c37-474e-9524-400e7a238e2c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:shatterskull-charger:cast:s1,f:xs:XP:shatterskull-charger:cast:s1	-	-	-	ae86f6029288	-	bea590767529	-	-	2026-11-24	xproof
 5722a13f-7d70-438c-94ba-97a3f53fbc5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:generous-stray:f0t0:s1,f:xs:XP:generous-stray:f0t0:s1	-	-	-	d864b561c9cb	-	405b7ca60efe	-	-	2026-11-24	xproof
 5722a13f-7d70-438c-94ba-97a3f53fbc5c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:generous-stray:f0t0:s1,f:xs:XP:generous-stray:f0t0:s1	-	-	-	d864b561c9cb	-	405b7ca60efe	-	-	2026-11-24	xproof
 5726c4b1-0613-4724-b1fc-2e7f398bf1af	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:instill-furor:cast:s1,f:xs:XP:instill-furor:cast:s1	-	-	-	64a08ba7d913	-	0ce4b1cc594a	-	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57947037-91b2-4058-be22-158d3257317e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57994ace-3dd6-407f-b465-c70b552bd466	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57994ace-3dd6-407f-b465-c70b552bd466	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5799baed-3457-4bf2-adf3-239a41dcc1c8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5799baed-3457-4bf2-adf3-239a41dcc1c8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thwart-the-enemy:cast:s1,f:xs:XP:thwart-the-enemy:cast:s1	-	-	-	ae86f6029288	-	580f50861c45	-	-	2026-11-24	xproof
 579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	cast	cast-resolve	agreed	-	X	scen	1	0	Black Widow, Super Spy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Black Widow, Super Spy/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Black Widow, Super Spy/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

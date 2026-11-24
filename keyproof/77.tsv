@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 770b2097-5178-42d2-be6c-393b4bfe3727	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Steelswarm Operator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 770b2097-5178-42d2-be6c-393b4bfe3727	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Steelswarm Operator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 770b2097-5178-42d2-be6c-393b4bfe3727	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Steelswarm Operator/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-771210f7-0f00-4438-a886-a1f716e3d80e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+771210f7-0f00-4438-a886-a1f716e3d80e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:funeral-rites:cast:s1,f:xs:XP:funeral-rites:cast:s1	-	-	-	ae86f6029288	-	e10902db9505	-	-	2026-11-24	xproof
 7714af0e-41d9-4609-967f-27233b46055f	cast	cast-resolve	agreed	-	FX	scen	2	0	Lord of the Undead/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 7714af0e-41d9-4609-967f-27233b46055f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lord of the Undead/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 7714af0e-41d9-4609-967f-27233b46055f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lord of the Undead/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -82,8 +82,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7776b2dd-5795-458d-81da-54fed22d5ee2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7776b2dd-5795-458d-81da-54fed22d5ee2	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7777fab1-df3f-467f-b9e2-46dd2bd2166e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7777fab1-df3f-467f-b9e2-46dd2bd2166e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7777fab1-df3f-467f-b9e2-46dd2bd2166e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7777fab1-df3f-467f-b9e2-46dd2bd2166e	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+7777fab1-df3f-467f-b9e2-46dd2bd2166e	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 7779525d-080d-4669-bb65-af532bf0983e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7779525d-080d-4669-bb65-af532bf0983e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7779e3be-5c3d-454f-88c1-9c0a97ebff09	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -114,7 +114,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7799413d-e313-4a05-ad28-f4c926c26d28	cast	cast-resolve	agreed	-	X	scen	1	0	Vraska's Final Mercy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 779d3e58-de06-44be-98f8-f05f7711ecb2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 779fa24d-e9d2-475d-b3aa-dc0388b18307	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-779fa24d-e9d2-475d-b3aa-dc0388b18307	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+779fa24d-e9d2-475d-b3aa-dc0388b18307	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 77a000de-76d9-44f8-9789-875aa9f576e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77a000de-76d9-44f8-9789-875aa9f576e7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77a000de-76d9-44f8-9789-875aa9f576e7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77cf536e-246e-4c18-8e04-c904fcad3f40	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77d016e3-f652-4827-b49a-8044f6d2d45b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77d5d435-d794-46c0-b630-a460973cf75a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77d5d435-d794-46c0-b630-a460973cf75a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77d5d435-d794-46c0-b630-a460973cf75a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 77d5f298-06b4-49d1-9b33-f1f176665ba2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77db8db4-9fe4-478e-b919-5348b0b87b0d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77dd6ce0-91fc-4e71-99ff-47cdf3359067	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

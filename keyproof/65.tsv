@@ -47,8 +47,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 652f049d-770e-4bd7-b65f-fe56e618366a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 652f049d-770e-4bd7-b65f-fe56e618366a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 653010bc-45af-427e-a294-e0cc28d31821	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nissa-s-expedition:cast:s1,f:xs:XP:nissa-s-expedition:cast:s1	-	-	-	d864b561c9cb	-	a5b8abf89235	-	-	2026-11-24	xproof
-6536f72e-ff4e-4cda-bc7d-909145adf829	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6536f72e-ff4e-4cda-bc7d-909145adf829	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6536f72e-ff4e-4cda-bc7d-909145adf829	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elite-instructor:f0t0:s1,f:xs:XP:elite-instructor:f0t0:s1	-	-	-	ae86f6029288	-	19eac450de3d	-	-	2026-11-24	xproof
+6536f72e-ff4e-4cda-bc7d-909145adf829	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elite-instructor:f0t0:s1,f:xs:XP:elite-instructor:f0t0:s1	-	-	-	ae86f6029288	-	19eac450de3d	-	-	2026-11-24	xproof
 65385311-1158-4e94-892a-683997706ca8	cast	cast-resolve	agreed	-	X	scen	1	0	Sabotender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 65385311-1158-4e94-892a-683997706ca8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sabotender/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 65385311-1158-4e94-892a-683997706ca8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sabotender/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -120,8 +120,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6588ea9a-658f-40d9-a64b-3a418ab81183	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6588ea9a-658f-40d9-a64b-3a418ab81183	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 658bccf8-fe73-4d6a-b37b-7a58034e5e5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-658d54d4-e967-490c-b958-3743b3b1ef45	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-658d54d4-e967-490c-b958-3743b3b1ef45	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+658d54d4-e967-490c-b958-3743b3b1ef45	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rage-scarred-berserker:cast:s1,f:xs:XP:rage-scarred-berserker:cast:s1	-	-	-	ae86f6029288	-	d3073f315915	-	-	2026-11-24	xproof
+658d54d4-e967-490c-b958-3743b3b1ef45	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rage-scarred-berserker:cast:s1,f:xs:XP:rage-scarred-berserker:cast:s1	-	-	-	ae86f6029288	-	d3073f315915	-	-	2026-11-24	xproof
 658f5cfb-326d-4da9-a39b-2ecd393a1f54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 658f5cfb-326d-4da9-a39b-2ecd393a1f54	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6591a589-deb4-462f-a4f1-f6261f3433c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -171,9 +171,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65c1cac7-87d1-4687-86ba-f7c63c4f8549	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65c1cac7-87d1-4687-86ba-f7c63c4f8549	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65d63518-3261-40b5-87b8-19c152b29ee3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65d6eae4-4318-4dbe-af7a-9f57bb587605	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+65d6eae4-4318-4dbe-af7a-9f57bb587605	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-carver:f0t0:s1,f:xs:XP:mind-carver:f0t0:s1	-	-	-	ae86f6029288	-	03aa6bee1394	-	-	2026-11-24	xproof
 65d6eae4-4318-4dbe-af7a-9f57bb587605	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65d6eae4-4318-4dbe-af7a-9f57bb587605	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+65d6eae4-4318-4dbe-af7a-9f57bb587605	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mind-carver:f0t0:s1,f:xs:XP:mind-carver:f0t0:s1	-	-	-	ae86f6029288	-	03aa6bee1394	-	-	2026-11-24	xproof
 65d8b481-ebe9-4029-98a8-dd4693340bff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cloudspire-coordinator:cast:s2,f:xs:XP:cloudspire-coordinator:cast:s2	-	-	-	5437c1394672	-	349ef080b9b5	-	-	2026-11-24	xproof
 65d8b481-ebe9-4029-98a8-dd4693340bff	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cloudspire Coordinator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 65d8b481-ebe9-4029-98a8-dd4693340bff	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cloudspire-coordinator:cast:s2,f:xs:XP:cloudspire-coordinator:cast:s2	-	-	-	5437c1394672	-	349ef080b9b5	-	-	2026-11-24	xproof

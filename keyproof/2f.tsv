@@ -146,8 +146,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f889671-a1d6-4034-881b-58c93897d707	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f8b07ef-9d00-4eb6-a395-b5033aa3f80e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f8b2bca-991c-4dee-829b-c1cc7deaadfb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f8b2bca-991c-4dee-829b-c1cc7deaadfb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f8b2bca-991c-4dee-829b-c1cc7deaadfb	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f8b2bca-991c-4dee-829b-c1cc7deaadfb	f0/a0	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+2f8b2bca-991c-4dee-829b-c1cc7deaadfb	f0/a1	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 2f8c4805-694d-4408-8eb5-9fb7ce278ded	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f91818f-a6fe-4472-b52b-ab574f790905	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f91818f-a6fe-4472-b52b-ab574f790905	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -257,6 +257,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ffb38ec-5852-4e91-85a5-cfccd1f23556	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tarrian's Soulcleaver/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ffb38ec-5852-4e91-85a5-cfccd1f23556	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tarrian's Soulcleaver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ffb38ec-5852-4e91-85a5-cfccd1f23556	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tarrian's Soulcleaver/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2ffc7509-c7ce-44c4-a8cf-90ed161b5d10	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2ffc7509-c7ce-44c4-a8cf-90ed161b5d10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shatter-the-sky:cast:s1,f:xs:XP:shatter-the-sky:cast:s1	-	-	-	ae86f6029288	-	a06fc012e0eb	-	-	2026-11-24	xproof
 2fff8441-1f5a-423b-ab98-93016266f5c5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fff8441-1f5a-423b-ab98-93016266f5c5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

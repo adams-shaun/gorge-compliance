@@ -38,7 +38,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e400e13-6cae-45e6-b5cc-5b5f9d74dec5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:salvager-of-secrets:f0t0:s1,f:xs:XP:salvager-of-secrets:f0t0:s1	-	-	-	d864b561c9cb	-	2899aa3dabbb	-	-	2026-11-24	xproof
 3e41648f-c5a9-4b26-b97e-8176fe5e9c85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e41648f-c5a9-4b26-b97e-8176fe5e9c85	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e41648f-c5a9-4b26-b97e-8176fe5e9c85	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3e41648f-c5a9-4b26-b97e-8176fe5e9c85	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3e44226b-51a2-4099-aff8-a5befab720cb	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:bristlebud-farmer:f0t0:s2,f:xs:XP:bristlebud-farmer:f0t0:s2	-	-	-	267e485f6204	-	b0896b129968	-	-	2026-11-24	xproof
 3e44226b-51a2-4099-aff8-a5befab720cb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bristlebud Farmer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3e44226b-51a2-4099-aff8-a5befab720cb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bristlebud Farmer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -88,10 +88,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e7f67d6-db12-4034-b8e3-9c9d401c8f57	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e81c22e-52ec-4142-9a98-88681d04ce60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e81c22e-52ec-4142-9a98-88681d04ce60	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e83dec6-e1a0-4137-aaab-308dfd3122e1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e83dec6-e1a0-4137-aaab-308dfd3122e1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e83dec6-e1a0-4137-aaab-308dfd3122e1	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e83dec6-e1a0-4137-aaab-308dfd3122e1	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3e83dec6-e1a0-4137-aaab-308dfd3122e1	cast	cast	agreed	-	F	start	2	0	f:xs:XP:vivien-arkbow-ranger:cast:s1	-	-	-	ae86f6029288	-	620c79a524c3	-	-	2026-11-24	xproof
+3e83dec6-e1a0-4137-aaab-308dfd3122e1	f0/a0	PutCounter	agreed	-	F	start	2	0	f:xs:XP:vivien-arkbow-ranger:cast:s1	-	-	-	ae86f6029288	-	620c79a524c3	-	-	2026-11-24	xproof
+3e83dec6-e1a0-4137-aaab-308dfd3122e1	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+3e83dec6-e1a0-4137-aaab-308dfd3122e1	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3e84d719-bb76-43a4-b61a-fee30c3aac68	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e8abec7-1e18-460a-9d88-30969755ebd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e8abec7-1e18-460a-9d88-30969755ebd2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

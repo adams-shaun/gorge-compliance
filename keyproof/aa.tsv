@@ -14,7 +14,7 @@ aa149597-087a-4e1f-953c-2cd04e90a93b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tus
 aa149597-087a-4e1f-953c-2cd04e90a93b	f0/a0	PutCounter/Outlast	agreed	-	FX	start	2	0	x:xs:XP:tuskguard-captain:f0a0:s1,f:xs:XP:tuskguard-captain:f0a0:s1	-	-	-	d864b561c9cb	-	e9d0654004b8	-	-	2026-11-24	xproof
 aa16307a-9c1f-4538-872c-95206e2b7a6e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:join-the-ranks:cast:s1,f:xs:XP:join-the-ranks:cast:s1	-	-	-	8a1b1a193ec0	-	6d2f0c41d743	-	-	2026-11-24	xproof
 aa17782b-d8e7-423b-9f03-01ccb600f69a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aa1a63dd-acb1-465f-8970-667b8d7c57c9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+aa1a63dd-acb1-465f-8970-667b8d7c57c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inspiring-veteran:cast:s1,f:xs:XP:inspiring-veteran:cast:s1	-	-	-	ae86f6029288	-	e8431836ba4d	-	-	2026-11-24	xproof
 aa1a6646-c1e6-4bff-9092-43ee3e137914	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:archon-of-cruelty:cast:s1,f:xs:XP:archon-of-cruelty:cast:s1	-	-	-	d864b561c9cb	-	979d4df2c16c	-	-	2026-11-24	xproof
 aa1a6646-c1e6-4bff-9092-43ee3e137914	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:archon-of-cruelty:cast:s1,f:xs:XP:archon-of-cruelty:cast:s1	-	-	-	d864b561c9cb	-	979d4df2c16c	-	-	2026-11-24	xproof
 aa1a6646-c1e6-4bff-9092-43ee3e137914	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:archon-of-cruelty:f0t1:s1,f:xs:XP:archon-of-cruelty:f0t1:s1	-	-	-	d864b561c9cb	-	979d4df2c16c	-	-	2026-11-24	xproof
@@ -105,8 +105,8 @@ aa7b41ba-08eb-40b8-a8d5-e67dc09c88ba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:you
 aa7cd6e6-35a6-4c18-9d66-dc2a95206401	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aa7f0f15-bcbb-4af5-ad31-ff215dd81e71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aa7f0f15-bcbb-4af5-ad31-ff215dd81e71	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aa854d50-444c-49d9-bfb1-5476b33c1c0b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aa854d50-444c-49d9-bfb1-5476b33c1c0b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+aa854d50-444c-49d9-bfb1-5476b33c1c0b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scute-swarm:cast:s1,f:xs:XP:scute-swarm:cast:s1	-	-	-	ae86f6029288	-	1cc5b5e09345	-	-	2026-11-24	xproof
+aa854d50-444c-49d9-bfb1-5476b33c1c0b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 aa86bce1-9cde-44d8-9455-24502221f31d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aa8b60b6-cf55-4aaa-9caa-2b17942d8269	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aa8c5467-190a-4c6a-872c-56b8f8d01a2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ aa9bde06-098c-41b3-b816-49daacc02c50	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 aaa14260-2537-4668-8517-c825118777cc	cast	cast-resolve	agreed	-	X	scen	1	0	Tune Up/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 aaa8377e-21de-4c63-a26a-c25d986a272d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aaa8377e-21de-4c63-a26a-c25d986a272d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aaa8377e-21de-4c63-a26a-c25d986a272d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+aaa8377e-21de-4c63-a26a-c25d986a272d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 aaaaf370-6486-4e17-9a93-92e05ebcf29f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aaaaf370-6486-4e17-9a93-92e05ebcf29f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aaadfe41-b2be-4183-b45e-a70e53a59d2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

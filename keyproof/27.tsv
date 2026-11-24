@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 273bf1a8-42a9-4db5-bd83-06db4cb5e5df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 273f0353-4936-491b-82da-6d4d7f3259a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 273f0353-4936-491b-82da-6d4d7f3259a6	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-273f5483-b67e-4dd6-bba8-c0a047fa34d7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+273f5483-b67e-4dd6-bba8-c0a047fa34d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crackle-with-power:cast:s1,f:xs:XP:crackle-with-power:cast:s1	-	-	-	ae86f6029288	-	76d36c21317d	-	-	2026-11-24	xproof
 27400927-9aba-4fb3-90c4-490d01969e60	cast	cast-resolve	agreed	-	X	scen	1	0	Valkyrie's Call/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 27400927-9aba-4fb3-90c4-490d01969e60	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Valkyrie's Call/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2742d506-897f-4d30-ba43-ce0374984849	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -113,8 +113,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27a3faa1-4f1a-4581-9e19-9265faa9c10b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27a4b633-5a62-4d8c-8cc6-44959c311de9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27a4b633-5a62-4d8c-8cc6-44959c311de9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-27a66362-f2f5-4d46-9faf-a73752753304	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-27a66362-f2f5-4d46-9faf-a73752753304	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27a66362-f2f5-4d46-9faf-a73752753304	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nimana-skydancer:f0t0:s1,f:xs:XP:nimana-skydancer:f0t0:s1	-	-	-	ae86f6029288	-	fdd925d5a846	-	-	2026-11-24	xproof
+27a66362-f2f5-4d46-9faf-a73752753304	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nimana-skydancer:f0t0:s1,f:xs:XP:nimana-skydancer:f0t0:s1	-	-	-	ae86f6029288	-	fdd925d5a846	-	-	2026-11-24	xproof
 27a7610e-acbe-4a2b-9f61-81b383eb20a5	cast	cast-resolve	agreed	-	X	scen	1	0	The Regalia/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 27a7610e-acbe-4a2b-9f61-81b383eb20a5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Regalia/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 27a7610e-acbe-4a2b-9f61-81b383eb20a5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Regalia/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

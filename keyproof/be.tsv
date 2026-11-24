@@ -50,8 +50,8 @@ be2b9c6d-4ecb-49ec-b276-4aa93c5dfc00	combat#0.attack	combat#0.attack	agreed	-	X	
 be2b9c6d-4ecb-49ec-b276-4aa93c5dfc00	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spider-Woman, Stunning Savior/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be3038ff-b39e-4d2e-97ee-85de074ccfd3	cast	cast-resolve	agreed	-	FX	scen	2	0	Sinister Cryologist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be3038ff-b39e-4d2e-97ee-85de074ccfd3	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be315fa6-afb5-4ab6-a143-7bbf37046d15	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be315fa6-afb5-4ab6-a143-7bbf37046d15	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be315fa6-afb5-4ab6-a143-7bbf37046d15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bubble-snare:f0t0:s1,f:xs:XP:bubble-snare:f0t0:s1	-	-	-	ae86f6029288	-	385059b95b7c	-	-	2026-11-24	xproof
+be315fa6-afb5-4ab6-a143-7bbf37046d15	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bubble-snare:f0t0:s1,f:xs:XP:bubble-snare:f0t0:s1	-	-	-	ae86f6029288	-	385059b95b7c	-	-	2026-11-24	xproof
 be31fa46-d5ac-4c85-9c19-3f0e2b1f223b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:annex-sentry:f0t0:s1,f:xs:XP:annex-sentry:f0t0:s1	-	-	-	d864b561c9cb	-	0af0b64dd088	-	-	2026-11-24	xproof
 be31fa46-d5ac-4c85-9c19-3f0e2b1f223b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:annex-sentry:f0t0:s1,f:xs:XP:annex-sentry:f0t0:s1	-	-	-	d864b561c9cb	-	0af0b64dd088	-	-	2026-11-24	xproof
 be37ef9d-955a-417e-bde8-bb9e0bdf3612	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -62,7 +62,7 @@ be3c7e4c-81fd-49e7-8fb5-5eb83994dafd	cast	cast-resolve	agreed	-	FX	scen	2	0	Bone
 be3c7e4c-81fd-49e7-8fb5-5eb83994dafd	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Bonecache Overseer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be3dd0c8-32c2-4a56-9290-1fc9e366bae2	cast	cast-resolve	agreed	-	X	scen	1	0	Primary Unimatrix Adjunct/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be3dd4f6-794d-4bce-b71e-4b3477d5d388	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be3dd4f6-794d-4bce-b71e-4b3477d5d388	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be3dd4f6-794d-4bce-b71e-4b3477d5d388	f0/t0	NULL	owed	refused:no-generator:trigger:LifeLost	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 be4499e6-616a-4c11-b37e-9201d2492682	cast	cast-resolve	agreed	-	FX	scen	2	0	Offer Immortality/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be455184-c57d-4504-8c34-3be42bc3f04b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be48c721-bdc6-4f2c-96d6-82d934b31615	cast	cast-resolve	agreed	-	FX	scen	2	0	Miles Morales/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ be6cab52-b3ae-46a2-a581-2468a49bff25	f0/t0	NULL	owed	refused:no-generator:trigge
 be6cb3e6-7492-4e30-83a9-9bc413e50cdc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chaotic-backlash:cast:s1,f:xs:XP:chaotic-backlash:cast:s1	-	-	-	8a1b1a193ec0	-	91a82df20d39	-	-	2026-11-24	xproof
 be6e835c-822e-45ff-a992-249d4d9781dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be700da5-123e-461e-8192-88f9d86925b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be700da5-123e-461e-8192-88f9d86925b9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be700da5-123e-461e-8192-88f9d86925b9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 be70c6e8-6f9f-49fb-ab40-c6ce0ec2077c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oboro-envoy:cast:s1,f:xs:XP:oboro-envoy:cast:s1	-	-	-	64a08ba7d913	-	7f18db08ec78	-	-	2026-11-24	xproof
 be70c6e8-6f9f-49fb-ab40-c6ce0ec2077c	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 be738992-77fe-498d-b219-e5da4ce5bf07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -114,7 +114,7 @@ be7b16ef-32aa-40d5-b287-c5e79d52d6b9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 be7b16ef-32aa-40d5-b287-c5e79d52d6b9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be7e220e-272e-45ca-8265-8d78da2cd2a7	cast	cast-resolve	agreed	-	X	scen	1	0	Unforgiving Aim/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 be811e70-aaaa-41f3-bf9e-5d3f9f719b49	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be811e70-aaaa-41f3-bf9e-5d3f9f719b49	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be811e70-aaaa-41f3-bf9e-5d3f9f719b49	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:castle-locthwain:f0a1:s1,f:xs:XP:castle-locthwain:f0a1:s1	-	-	-	ae86f6029288	-	5b89e7eeb8dc	-	-	2026-11-24	xproof
 be811e70-aaaa-41f3-bf9e-5d3f9f719b49	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be838f57-4e74-44ad-aee1-506e63b0ff37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be838f57-4e74-44ad-aee1-506e63b0ff37	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ be89a032-8ade-4048-b95d-76e958dca330	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP
 be8ad29c-2232-426d-bda9-a289dcc6c265	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be8b9bef-a98d-40a8-bedd-d78f1f08f93b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be8b9bef-a98d-40a8-bedd-d78f1f08f93b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be8b9bef-a98d-40a8-bedd-d78f1f08f93b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be8b9bef-a98d-40a8-bedd-d78f1f08f93b	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:merfolk-windrobber:f0a0:s1,f:xs:XP:merfolk-windrobber:f0a0:s1	-	-	-	ae86f6029288	-	78eb2f0bc3b6	-	-	2026-11-24	xproof
 be8d3788-709b-4d10-861c-a6f27d4b63a6	cast	cast-resolve	agreed	-	X	scen	1	0	Perimeter Enforcer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be8d3788-709b-4d10-861c-a6f27d4b63a6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Perimeter Enforcer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be8d3788-709b-4d10-861c-a6f27d4b63a6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Perimeter Enforcer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

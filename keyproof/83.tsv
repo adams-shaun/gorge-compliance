@@ -89,8 +89,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83705258-1f42-41db-a32e-de99ffd759eb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Saheeli, Jewel of Avishkar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83705258-1f42-41db-a32e-de99ffd759eb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Saheeli, Jewel of Avishkar/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 837182db-1bf3-4a2c-bd01-1af9d9873561	cast	cast-resolve	agreed	-	FX	scen	2	0	Unsummon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8371dee1-5f4a-410a-8b7c-e4110cdbe9bd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8371dee1-5f4a-410a-8b7c-e4110cdbe9bd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8371dee1-5f4a-410a-8b7c-e4110cdbe9bd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dauntless-survivor:cast:s1,f:xs:XP:dauntless-survivor:cast:s1	-	-	-	ae86f6029288	-	c0ef7bd5d11b	-	-	2026-11-24	xproof
+8371dee1-5f4a-410a-8b7c-e4110cdbe9bd	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dauntless-survivor:cast:s1,f:xs:XP:dauntless-survivor:cast:s1	-	-	-	ae86f6029288	-	c0ef7bd5d11b	-	-	2026-11-24	xproof
 83734824-1cad-4649-87ae-a5c338771c4c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 837417d8-8260-486d-a3ed-3b5711eaf34a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83798eb8-b14f-4620-bce2-1a6804a24dc7	cast	cast-resolve	agreed	-	X	scen	1	0	Hawkeye's Bow/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83860749-1603-46e9-9065-e98001244193	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83860749-1603-46e9-9065-e98001244193	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83860749-1603-46e9-9065-e98001244193	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83865eee-709a-4a34-94f1-9b818f31323f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83865eee-709a-4a34-94f1-9b818f31323f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:springmantle-cleric:cast:s1,f:xs:XP:springmantle-cleric:cast:s1	-	-	-	ae86f6029288	-	a5911e94a12a	-	-	2026-11-24	xproof
 8386f43f-8106-415c-a9a6-7fd3f5b060f3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83874e60-291b-47a7-ba9f-69437fa7e3c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83874e60-291b-47a7-ba9f-69437fa7e3c7	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

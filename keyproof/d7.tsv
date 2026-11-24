@@ -42,8 +42,8 @@ d73191d8-6f94-4fba-acd2-2d0490e3ac00	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 d73191d8-6f94-4fba-acd2-2d0490e3ac00	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d73191d8-6f94-4fba-acd2-2d0490e3ac00	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d732d9b8-dea0-41c4-8cff-67b2b3d36ecb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d7337b13-5459-434a-aa56-e1547b875594	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d7337b13-5459-434a-aa56-e1547b875594	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d7337b13-5459-434a-aa56-e1547b875594	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thorn-mammoth:f0t0:s1,f:xs:XP:thorn-mammoth:f0t0:s1	-	-	-	ae86f6029288	-	8bf534f34901	-	-	2026-11-24	xproof
+d7337b13-5459-434a-aa56-e1547b875594	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thorn-mammoth:f0t0:s1,f:xs:XP:thorn-mammoth:f0t0:s1	-	-	-	ae86f6029288	-	8bf534f34901	-	-	2026-11-24	xproof
 d73913ea-44d0-408f-9f8b-8e91843f2826	cast	cast-resolve	agreed	-	X	scen	1	0	Stillness in Motion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d73913ea-44d0-408f-9f8b-8e91843f2826	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Stillness in Motion/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d73adc2e-c458-40a9-b10b-7d2133778717	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -87,8 +87,8 @@ d767463b-0fc9-43fc-a85f-e60f030f9b96	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Fla
 d767463b-0fc9-43fc-a85f-e60f030f9b96	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 d76fc3aa-3962-4d64-a082-765e09bcdf25	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d7721c5e-b3c5-45c8-b757-935603dfe44b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d7721c5e-b3c5-45c8-b757-935603dfe44b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d7721c5e-b3c5-45c8-b757-935603dfe44b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d7721c5e-b3c5-45c8-b757-935603dfe44b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+d7721c5e-b3c5-45c8-b757-935603dfe44b	f0/t1	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d772b16b-31db-48aa-8bb6-da32f45eebe4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d777e428-cc50-40b1-a241-41576d2575d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quirion-beastcaller:cast:s1,f:xs:XP:quirion-beastcaller:cast:s1	-	-	-	d864b561c9cb	-	cc3165674ca5	-	-	2026-11-24	xproof
 d777e428-cc50-40b1-a241-41576d2575d1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

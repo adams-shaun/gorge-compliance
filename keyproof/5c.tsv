@@ -95,8 +95,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c924f9f-84e2-4051-ae18-0c2cc57cf464	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c924f9f-84e2-4051-ae18-0c2cc57cf464	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c93ec85-f87f-4121-9fbf-61fd598d1e65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5c946cc0-5d90-4970-acf8-b14eff177cbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5c946cc0-5d90-4970-acf8-b14eff177cbc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5c946cc0-5d90-4970-acf8-b14eff177cbc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-caller:f0t0:s1,f:xs:XP:storm-caller:f0t0:s1	-	-	-	ae86f6029288	-	3fb894f2da4b	-	-	2026-11-24	xproof
+5c946cc0-5d90-4970-acf8-b14eff177cbc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:storm-caller:f0t0:s1,f:xs:XP:storm-caller:f0t0:s1	-	-	-	ae86f6029288	-	3fb894f2da4b	-	-	2026-11-24	xproof
 5c94b616-8edf-465c-b316-4599df95c52a	cast	cast-resolve	agreed	-	X	scen	1	0	Stegron the Dinosaur Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5c94b616-8edf-465c-b316-4599df95c52a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stegron the Dinosaur Man/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5c94b616-8edf-465c-b316-4599df95c52a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stegron the Dinosaur Man/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -121,8 +121,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cbbb3f3-63a4-4983-81ea-8c405b10e63f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5cbbb3f3-63a4-4983-81ea-8c405b10e63f	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:voice-of-resurgence:f0t1:s1,f:xs:XP:voice-of-resurgence:f0t1:s1	-	-	-	d864b561c9cb	-	d76a5cee2a3f	-	-	2026-11-24	xproof
 5cbe6066-07f8-45de-b3b4-b8590d111b0d	cast	cast-resolve	agreed	-	X	scen	1	0	Ravenous Cosmozoan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5cc57770-1070-45f6-9d76-d402c55a0d06	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5cc57770-1070-45f6-9d76-d402c55a0d06	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5cc57770-1070-45f6-9d76-d402c55a0d06	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mischievous-chimera:cast:s1,f:xs:XP:mischievous-chimera:cast:s1	-	-	-	ae86f6029288	-	df34a4acc481	-	-	2026-11-24	xproof
+5cc57770-1070-45f6-9d76-d402c55a0d06	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5cc5be7a-cbe6-4853-bb95-0390e25b4f2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cc5be7a-cbe6-4853-bb95-0390e25b4f2b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73	cast	cast-resolve	agreed	-	X	scen	1	0	Stingerback Terror/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -144,15 +144,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cdc4654-b8c5-4599-a1d2-9e9d5f6509cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cdc4654-b8c5-4599-a1d2-9e9d5f6509cb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cdeb1fe-9ce3-4088-a35c-dcfb762f76d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ce273f2-a865-4934-afd4-cf6d5c4f1a4f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ce273f2-a865-4934-afd4-cf6d5c4f1a4f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5ce273f2-a865-4934-afd4-cf6d5c4f1a4f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:nylea-s-huntmaster:cast:s1,f:xs:XP:nylea-s-huntmaster:cast:s1	-	-	-	ae86f6029288	-	a39329d0de14	-	-	2026-11-24	xproof
+5ce273f2-a865-4934-afd4-cf6d5c4f1a4f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:nylea-s-huntmaster:cast:s1,f:xs:XP:nylea-s-huntmaster:cast:s1	-	-	-	ae86f6029288	-	a39329d0de14	-	-	2026-11-24	xproof
 5ce47fb9-4e4f-4419-af75-309d2743f5f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ce58279-7f1e-4ef7-a352-ecbaee31b6ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ce58279-7f1e-4ef7-a352-ecbaee31b6ff	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ce58279-7f1e-4ef7-a352-ecbaee31b6ff	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ce7780d-8a32-44c2-b779-aae732f5b05d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cee3505-0291-4f1b-9e5f-2909a31acd8e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	63d8190eee8b	-	-	2026-11-24	xproof
-5cf069cf-3a10-4427-a02b-5405429b5652	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5cf069cf-3a10-4427-a02b-5405429b5652	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frostveil-ambush:cast:s1,f:xs:XP:frostveil-ambush:cast:s1	-	-	-	ae86f6029288	-	d65c39543dc8	-	-	2026-11-24	xproof
 5cf069cf-3a10-4427-a02b-5405429b5652	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cf18398-9552-415e-a61f-2c149e35ec3d	cast	cast-resolve	agreed	-	X	scen	1	0	Zuko's Exile/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5cf1d7c3-6ebe-440b-88c8-33b7f6aa0d7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cf92fd4-7c0b-4d8e-92f1-53dc2e0476fc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cf92fd4-7c0b-4d8e-92f1-53dc2e0476fc	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cf92fd4-7c0b-4d8e-92f1-53dc2e0476fc	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5cfd73ab-8509-4e4b-9704-68d8dad3b301	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5cfd73ab-8509-4e4b-9704-68d8dad3b301	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:discontinuity:cast:s1,f:xs:XP:discontinuity:cast:s1	-	-	-	ae86f6029288	-	0f111bdf5277	-	-	2026-11-24	xproof
 5cfdfcac-57fb-4507-a97a-cccbac2d1327	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flayer-husk:f0t0:s1,f:xs:XP:flayer-husk:f0t0:s1	-	-	-	d864b561c9cb	-	78910b35ef9f	-	-	2026-11-24	xproof
 5cfdfcac-57fb-4507-a97a-cccbac2d1327	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cfdfcac-57fb-4507-a97a-cccbac2d1327	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:flayer-husk:f0t0:s1,f:xs:XP:flayer-husk:f0t0:s1	-	-	-	d864b561c9cb	-	78910b35ef9f	-	-	2026-11-24	xproof

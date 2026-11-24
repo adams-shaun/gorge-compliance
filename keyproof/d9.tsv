@@ -14,8 +14,8 @@ d90882ae-6572-4214-8d9c-0bdfb75f9be2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d90a5213-3363-4cd1-97d6-4fc057f78b2a	cast	cast-resolve	agreed	-	FX	scen	2	0	Thunderbolts Conspiracy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d90a5213-3363-4cd1-97d6-4fc057f78b2a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thunderbolts Conspiracy/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d90af00a-d322-4265-9954-7b1e80702e18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d90af00a-d322-4265-9954-7b1e80702e18	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d90af00a-d322-4265-9954-7b1e80702e18	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d90af00a-d322-4265-9954-7b1e80702e18	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+d90af00a-d322-4265-9954-7b1e80702e18	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d911cf65-7273-4162-a766-7d4107699dc2	cast	cast-resolve	agreed	-	FX	scen	2	0	Avengers: Under Siege/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d9167046-7908-4d16-8cc1-3eb02d1ba547	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:glass-casket:f0t0:s2,f:xs:XP:glass-casket:f0t0:s2	-	-	-	e07cf3a05ba5	-	a6627196ab21	-	-	2026-11-24	xproof
 d9167046-7908-4d16-8cc1-3eb02d1ba547	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:glass-casket:f0t0:s2,f:xs:XP:glass-casket:f0t0:s2	-	-	-	e07cf3a05ba5	-	a6627196ab21	-	-	2026-11-24	xproof
@@ -200,12 +200,12 @@ d9ed7252-11d1-432b-9101-ac08cd28826d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Beor
 d9ed7252-11d1-432b-9101-ac08cd28826d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Beorn's Hospitality/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d9ee7916-2c9d-4489-8dd8-86929b09c6ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d9ee7916-2c9d-4489-8dd8-86929b09c6ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d9f01177-2237-475e-ad91-114bfae077ce	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d9f01177-2237-475e-ad91-114bfae077ce	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d9f01177-2237-475e-ad91-114bfae077ce	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d9f01177-2237-475e-ad91-114bfae077ce	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d9f01177-2237-475e-ad91-114bfae077ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:calix-destiny-s-hand:cast:s1,f:xs:XP:calix-destiny-s-hand:cast:s1	-	-	-	ae86f6029288	-	729c61db5795	-	-	2026-11-24	xproof
+d9f01177-2237-475e-ad91-114bfae077ce	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:calix-destiny-s-hand:cast:s1,f:xs:XP:calix-destiny-s-hand:cast:s1	-	-	-	ae86f6029288	-	729c61db5795	-	-	2026-11-24	xproof
+d9f01177-2237-475e-ad91-114bfae077ce	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+d9f01177-2237-475e-ad91-114bfae077ce	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d9f11985-e460-425d-b083-9cb0edf1983a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d9f11985-e460-425d-b083-9cb0edf1983a	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d9f11985-e460-425d-b083-9cb0edf1983a	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d9f11aa1-9219-42a8-85a9-a8f204160706	cast	cast-resolve	agreed	-	FX	scen	2	0	Meteor Golem/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d9f11aa1-9219-42a8-85a9-a8f204160706	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d9f1dc61-831e-4244-a2da-aa9da6fd5b50	cast	cast-resolve	agreed	-	X	scen	1	0	Niv-Mizzet, Visionary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

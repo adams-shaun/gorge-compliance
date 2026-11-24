@@ -9,9 +9,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09070db6-01f6-4a8a-b167-a7825e6959f4	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09071f5f-c9cb-43a9-b41d-faf6caf3beff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0909cbce-b4a0-42bb-8a97-47eeb99606c0	cast	cast-resolve	agreed	-	X	scen	1	0	Rumbling Rockslide/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-090a5f76-206e-4b3b-bc1d-9c9706d9955d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+090a5f76-206e-4b3b-bc1d-9c9706d9955d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shining-armor:f0t0:s1,f:xs:XP:shining-armor:f0t0:s1	-	-	-	ae86f6029288	-	c1471ac5ac7c	-	-	2026-11-24	xproof
 090a5f76-206e-4b3b-bc1d-9c9706d9955d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-090a5f76-206e-4b3b-bc1d-9c9706d9955d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+090a5f76-206e-4b3b-bc1d-9c9706d9955d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shining-armor:f0t0:s1,f:xs:XP:shining-armor:f0t0:s1	-	-	-	ae86f6029288	-	c1471ac5ac7c	-	-	2026-11-24	xproof
 090d815b-b2c8-48cd-a0b3-dc662d5352ac	cast	cast-resolve	agreed	-	X	scen	1	0	Thanos, the Mad Titan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 090d815b-b2c8-48cd-a0b3-dc662d5352ac	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Thanos, the Mad Titan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 090d815b-b2c8-48cd-a0b3-dc662d5352ac	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Thanos, the Mad Titan/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -86,7 +86,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0956c0f5-ff1d-43d5-88de-4c2d603cf798	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 095f8dac-15b8-4c28-ae33-6dc71152bcc7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 095f8dac-15b8-4c28-ae33-6dc71152bcc7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09618da4-6e2d-4047-96d7-0576c0754e7d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09618da4-6e2d-4047-96d7-0576c0754e7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:end-the-festivities:cast:s1,f:xs:XP:end-the-festivities:cast:s1	-	-	-	ae86f6029288	-	f5d92a3bdf62	-	-	2026-11-24	xproof
 0961b68d-bb0c-4bfb-ad78-01f90b3b97c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0964288c-0397-428a-9a84-784aaea4e040	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0964288c-0397-428a-9a84-784aaea4e040	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

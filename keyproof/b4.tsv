@@ -11,8 +11,8 @@ b40138c3-48bc-4825-ae48-5fea95304088	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b40138c3-48bc-4825-ae48-5fea95304088	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b40138c3-48bc-4825-ae48-5fea95304088	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b4014b7c-aa1d-4feb-ab7a-4921ad150f9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b4014b7c-aa1d-4feb-ab7a-4921ad150f9a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b4014b7c-aa1d-4feb-ab7a-4921ad150f9a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b4014b7c-aa1d-4feb-ab7a-4921ad150f9a	f0/a0	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:knights-charge:f0a0:s1,f:xs:XP:knights-charge:f0a0:s1	-	-	-	ae86f6029288	-	99f8c42a1cac	-	-	2026-11-24	xproof
+b4014b7c-aa1d-4feb-ab7a-4921ad150f9a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:knights-charge:f0t0:s1,f:xs:XP:knights-charge:f0t0:s1	-	-	-	ae86f6029288	-	99f8c42a1cac	-	-	2026-11-24	xproof
 b4025136-3146-499a-8c17-ed9de548ab8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b408c345-b308-4920-8494-4f204d856aa3	cast	cast	agreed	-	F	start	2	0	f:xs:XP:north-wind-avatar:f0t0:s1	-	-	-	25696bf19d5b	-	ac4b88522bb3	-	-	2026-11-24	xproof
 b408c345-b308-4920-8494-4f204d856aa3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	North Wind Avatar/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -28,8 +28,8 @@ b4177445-46d8-4427-a345-d786c820c3af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b420d983-4edf-4cc1-b442-af2b67e49c76	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kinsbaile-borderguard:cast:s1,f:xs:XP:kinsbaile-borderguard:cast:s1	-	-	-	d864b561c9cb	-	da7d5728799a	-	-	2026-11-24	xproof
 b420d983-4edf-4cc1-b442-af2b67e49c76	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b420e429-9dec-4993-a45f-3458795e5cbe	cast	cast	agreed	-	F	start	2	0	f:xs:XP:release-the-ants:cast:s1	-	-	-	d864b561c9cb	-	67e60c0de358	-	-	2026-11-24	xproof
-b42147e1-cf90-4c12-8abe-7f2931d0607c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b42147e1-cf90-4c12-8abe-7f2931d0607c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b42147e1-cf90-4c12-8abe-7f2931d0607c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cavern-whisperer:cast:s1,f:xs:XP:cavern-whisperer:cast:s1	-	-	-	ae86f6029288	-	3a4a089ad5b7	-	-	2026-11-24	xproof
+b42147e1-cf90-4c12-8abe-7f2931d0607c	f0/t0	NULL	owed	refused:no-generator:trigger:Mutates	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 b4219836-c802-49e2-9a66-f03ca8f13895	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b4219836-c802-49e2-9a66-f03ca8f13895	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b42bdf54-9055-405c-87e6-0912dbe2bd68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -69,7 +69,7 @@ b46526af-6b88-42c4-b317-4b499f151ff0	f0/a0	NULL	owed	refused:scen failed: xengin
 b46647a1-0c91-451b-8c0b-be8fe02faee2	cast	cast-resolve	agreed	-	FX	scen	2	0	Elektra, Daughter of the Hand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b46647a1-0c91-451b-8c0b-be8fe02faee2	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b46adfcd-fd7a-40c5-85f4-1cfee43a4c48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b46adfcd-fd7a-40c5-85f4-1cfee43a4c48	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b46adfcd-fd7a-40c5-85f4-1cfee43a4c48	f0/a0	Scry	agreed	-	FX	start	2	0	x:xs:XP:witness-of-tomorrows:f0a0:s1,f:xs:XP:witness-of-tomorrows:f0a0:s1	-	-	-	ae86f6029288	-	01e4f4e411f1	-	-	2026-11-24	xproof
 b46bac37-5b45-4be5-93d0-76e48dbd9f74	cast	cast-resolve	agreed	-	X	scen	1	0	Camera Launcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b46bac37-5b45-4be5-93d0-76e48dbd9f74	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Camera Launcher/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b46ddf4b-7ed8-49c4-8828-f0fbbc023c1f	cast	cast-resolve	agreed	-	FX	scen	2	0	Scream Puff/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -121,9 +121,9 @@ b4c27c89-fa50-4cf0-bf37-039732d16fef	static#0.0	static#0.0	agreed	-	X	scen	1	0	T
 b4c404d8-9f2d-4429-ac36-449ae319abb7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b4c4fdb9-e034-49c0-9f7f-07e8cae19eb2	cast	cast-resolve	agreed	-	FX	scen	2	0	Casey Jones, Jury-Rig Justiciar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b4c4fdb9-e034-49c0-9f7f-07e8cae19eb2	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b4ca6a20-b1ba-4dee-ae8a-83f8edf360c4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b4ca6a20-b1ba-4dee-ae8a-83f8edf360c4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b4ca6a20-b1ba-4dee-ae8a-83f8edf360c4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b4ca6a20-b1ba-4dee-ae8a-83f8edf360c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:improbable-alliance:cast:s1,f:xs:XP:improbable-alliance:cast:s1	-	-	-	ae86f6029288	-	06335b4a5e7c	-	-	2026-11-24	xproof
+b4ca6a20-b1ba-4dee-ae8a-83f8edf360c4	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:improbable-alliance:f0a0:s1,f:xs:XP:improbable-alliance:f0a0:s1	-	-	-	ae86f6029288	-	06335b4a5e7c	-	-	2026-11-24	xproof
+b4ca6a20-b1ba-4dee-ae8a-83f8edf360c4	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 b4cd7e4e-4b63-41a1-bfad-2840a96f84bb	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b4ce2c8f-a19c-461e-8a2e-0ec2bd3ebca3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b4ce2c8f-a19c-461e-8a2e-0ec2bd3ebca3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

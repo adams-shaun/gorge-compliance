@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 025f8db8-11d1-4c59-8e1f-004c9c843fd8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:spearbreaker-behemoth:f0a0:s1,f:xs:XP:spearbreaker-behemoth:f0a0:s1	-	-	-	8a1b1a193ec0	-	e8cb93963560	-	-	2026-11-24	xproof
 02628058-c9d8-4265-afd1-3fb697ec89f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 026318be-e3dd-4d5c-bd77-53ce23a2e7cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0264b059-75cb-41e6-9e51-262ac22b4c60	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0264b059-75cb-41e6-9e51-262ac22b4c60	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flycatcher-giraffid:cast:s1,f:xs:XP:flycatcher-giraffid:cast:s1	-	-	-	ae86f6029288	-	2a0c44e45ba3	-	-	2026-11-24	xproof
 02679a2e-303d-412f-87d8-0a37a8ca259c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02679a2e-303d-412f-87d8-0a37a8ca259c	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:blighted-woodland:f0a1:s1,f:xs:XP:blighted-woodland:f0a1:s1	-	-	-	d864b561c9cb	-	00fe2787d150	-	-	2026-11-24	xproof
 02679a2e-303d-412f-87d8-0a37a8ca259c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -202,7 +202,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02f3b9c3-f611-4f05-ab3e-b296916efdad	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 02f46271-c90d-4318-9004-74e7bee64a89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02f46271-c90d-4318-9004-74e7bee64a89	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02f46271-c90d-4318-9004-74e7bee64a89	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02f46271-c90d-4318-9004-74e7bee64a89	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 02f5ceb4-8b9c-4107-972b-6eec365c4a6c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02f8ec49-f490-408b-a76e-58e160a5a5a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marsh-flitter:f0t0:s1,f:xs:XP:marsh-flitter:f0t0:s1	-	-	-	d864b561c9cb	-	575f09ccf7c6	-	-	2026-11-24	xproof
 02f8ec49-f490-408b-a76e-58e160a5a5a7	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:marsh-flitter:f0t0:s1,f:xs:XP:marsh-flitter:f0t0:s1	-	-	-	d864b561c9cb	-	575f09ccf7c6	-	-	2026-11-24	xproof

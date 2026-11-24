@@ -4,8 +4,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 840119bf-e60f-4ff7-9c9b-d420d09df545	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Underground Mortuary/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 840119bf-e60f-4ff7-9c9b-d420d09df545	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Underground Mortuary/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 840119bf-e60f-4ff7-9c9b-d420d09df545	land	play-land	agreed	-	X	scen	1	0	Underground Mortuary/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8403ea46-e6ac-458c-9c17-4c8a81f21659	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8403ea46-e6ac-458c-9c17-4c8a81f21659	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8403ea46-e6ac-458c-9c17-4c8a81f21659	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moonlit-scavengers:f0t0:s1,f:xs:XP:moonlit-scavengers:f0t0:s1	-	-	-	ae86f6029288	-	f9dbbabdf5f5	-	-	2026-11-24	xproof
+8403ea46-e6ac-458c-9c17-4c8a81f21659	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:moonlit-scavengers:f0t0:s1,f:xs:XP:moonlit-scavengers:f0t0:s1	-	-	-	ae86f6029288	-	f9dbbabdf5f5	-	-	2026-11-24	xproof
 8406b724-a824-4905-83e0-a6c02d7f72e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8406b724-a824-4905-83e0-a6c02d7f72e3	f0/a0	PeekAndReveal	agreed	-	FX	start	2	0	x:xs:XP:aven-windreader:f0a0:s1,f:xs:XP:aven-windreader:f0a0:s1	-	-	-	d864b561c9cb	-	4a56b1bebc74	-	-	2026-11-24	xproof
 8408f2a1-e321-43f5-a7d1-1911eba9d706	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8462a2fa-944b-4fff-a161-10345690b56f	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 84681f12-2978-4f62-ab89-b579033c5192	cast	cast-resolve	agreed	-	X	scen	1	0	Divergent Equation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 846887e4-744f-44ce-9110-d09680b11e95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-846887e4-744f-44ce-9110-d09680b11e95	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+846887e4-744f-44ce-9110-d09680b11e95	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 846a4f9c-d955-403f-8a08-5c7c3d32e180	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 846ba66c-a4eb-4d00-a0f1-d9f9524b9695	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 846bedc3-a1e0-4f11-a095-85b60ad482da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -129,8 +129,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 84a56740-8563-4ce5-8560-d44998d7f80d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	High-Flying Ace/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84a56740-8563-4ce5-8560-d44998d7f80d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	High-Flying Ace/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84a56740-8563-4ce5-8560-d44998d7f80d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	High-Flying Ace/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-84adce5c-39c7-425e-b163-4a1a3977364b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-84adce5c-39c7-425e-b163-4a1a3977364b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+84adce5c-39c7-425e-b163-4a1a3977364b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skycat-sovereign:cast:s1,f:xs:XP:skycat-sovereign:cast:s1	-	-	-	ae86f6029288	-	48aa3da5210f	-	-	2026-11-24	xproof
+84adce5c-39c7-425e-b163-4a1a3977364b	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:skycat-sovereign:f0a0:s1,f:xs:XP:skycat-sovereign:f0a0:s1	-	-	-	ae86f6029288	-	48aa3da5210f	-	-	2026-11-24	xproof
 84b08b55-0623-4202-98c6-1756d3c1bb8f	cast	cast-resolve	agreed	-	X	scen	1	0	Bandit's Haul/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84b08b55-0623-4202-98c6-1756d3c1bb8f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bandit's Haul/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84b08b55-0623-4202-98c6-1756d3c1bb8f	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Bandit's Haul/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -145,8 +145,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 84bb960c-c34e-4979-8c0f-893c85cee27d	cast	cast-resolve	agreed	-	FX	scen	2	0	Leech Collector/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84bb960c-c34e-4979-8c0f-893c85cee27d	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Leech Collector/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84c00644-d0e2-418b-b931-4e972ecb3366	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-84c0db59-255d-41af-a3d4-3f3548f1195f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-84c0db59-255d-41af-a3d4-3f3548f1195f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+84c0db59-255d-41af-a3d4-3f3548f1195f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thieves-guild-enforcer:f0t0:s1,f:xs:XP:thieves-guild-enforcer:f0t0:s1	-	-	-	ae86f6029288	-	156b71c5521a	-	-	2026-11-24	xproof
+84c0db59-255d-41af-a3d4-3f3548f1195f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thieves-guild-enforcer:f0t0:s1,f:xs:XP:thieves-guild-enforcer:f0t0:s1	-	-	-	ae86f6029288	-	156b71c5521a	-	-	2026-11-24	xproof
 84c24e62-26bd-4ca4-b6b9-d31e2065f13b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84c24e62-26bd-4ca4-b6b9-d31e2065f13b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84c24e62-26bd-4ca4-b6b9-d31e2065f13b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -10,8 +10,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c02c8e3-943a-4c20-9dad-1408793a825e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c04371a-af69-4e42-8cda-096cf8312b5e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c04371a-af69-4e42-8cda-096cf8312b5e	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-2c0816bd-8ce2-4ddf-845a-bcdaf929fe28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c0816bd-8ce2-4ddf-845a-bcdaf929fe28	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c0816bd-8ce2-4ddf-845a-bcdaf929fe28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:threnody-singer:f0t0:s1,f:xs:XP:threnody-singer:f0t0:s1	-	-	-	ae86f6029288	-	44a3c69ad9d4	-	-	2026-11-24	xproof
+2c0816bd-8ce2-4ddf-845a-bcdaf929fe28	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:threnody-singer:f0t0:s1,f:xs:XP:threnody-singer:f0t0:s1	-	-	-	ae86f6029288	-	44a3c69ad9d4	-	-	2026-11-24	xproof
 2c09ca09-8e62-4fe3-9b3d-61573dd2ffbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c09d296-5d15-449a-9b98-cf5056a17b91	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c0b8cc3-b1c1-498d-b34c-f317c2c9468f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -133,10 +133,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cabf7a4-17af-45c7-b314-a84f5dc0d070	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Dawnhand Dissident/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 2cabf7a4-17af-45c7-b314-a84f5dc0d070	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Dawnhand Dissident/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 2cabf7a4-17af-45c7-b314-a84f5dc0d070	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dawnhand Dissident/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	cast	cast	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	a9e1ff31a01f	-	-	2026-11-24	xproof
+2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	a9e1ff31a01f	-	-	2026-11-24	xproof
+2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t1	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	a9e1ff31a01f	-	-	2026-11-24	xproof
+2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t2	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kroxa-titan-of-death-s-hunger:f0t2:s1,f:xs:XP:kroxa-titan-of-death-s-hunger:f0t2:s1	-	-	-	ae86f6029288	-	a9e1ff31a01f	-	-	2026-11-24	xproof
 2cb37c66-bba4-4f90-9134-6b738462457e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

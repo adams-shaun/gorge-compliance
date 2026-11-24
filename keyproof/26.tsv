@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 26396b80-e5b7-44f5-916c-56a9215a7a49	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:silent-sentinel:f0t0:s1,f:xs:XP:silent-sentinel:f0t0:s1	-	-	-	d864b561c9cb	-	b6c8887049a3	-	-	2026-11-24	xproof
 263b3472-b437-4889-af5e-c7537abb6cb6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 263b526c-8b81-44ee-a7c4-5c24bf9b42a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-263b526c-8b81-44ee-a7c4-5c24bf9b42a4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+263b526c-8b81-44ee-a7c4-5c24bf9b42a4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 263df914-aea1-48dc-b517-7d515307789e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2648559d-1d96-47d2-a769-cfa2cbca2be5	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Gwen, Free Spirit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2648559d-1d96-47d2-a769-cfa2cbca2be5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spider-Gwen, Free Spirit/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 26c09127-8225-4ba2-9f97-f5558b1c41b5	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:gastal-raider:f0t0:s2,f:xs:XP:gastal-raider:f0t0:s2	-	-	-	267e485f6204	-	f5d3e3ce63e9	-	-	2026-11-24	xproof
 26c09127-8225-4ba2-9f97-f5558b1c41b5	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:gastal-raider:f0t0:s2,f:xs:XP:gastal-raider:f0t0:s2	-	-	-	267e485f6204	-	f5d3e3ce63e9	-	-	2026-11-24	xproof
 26c09127-8225-4ba2-9f97-f5558b1c41b5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gastal Raider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-26c17025-1123-46d9-a8bd-edbad01c4b6e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+26c17025-1123-46d9-a8bd-edbad01c4b6e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:searing-barrage:cast:s1,f:xs:XP:searing-barrage:cast:s1	-	-	-	ae86f6029288	-	58b464ecbf81	-	-	2026-11-24	xproof
 26c22894-10e5-48f1-a32a-a7f1f3f7e12e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26c22894-10e5-48f1-a32a-a7f1f3f7e12e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26c22894-10e5-48f1-a32a-a7f1f3f7e12e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -34,9 +34,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5326381e-e5e7-4c3e-9565-4837b3ffaec0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5326381e-e5e7-4c3e-9565-4837b3ffaec0	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 5326381e-e5e7-4c3e-9565-4837b3ffaec0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-53295b03-717d-481d-9d5c-212c5f30bbbf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53295b03-717d-481d-9d5c-212c5f30bbbf	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53295b03-717d-481d-9d5c-212c5f30bbbf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+53295b03-717d-481d-9d5c-212c5f30bbbf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-hunt:f0t0:s1,f:xs:XP:omen-of-the-hunt:f0t0:s1	-	-	-	ae86f6029288	-	82202abad8d2	-	-	2026-11-24	xproof
+53295b03-717d-481d-9d5c-212c5f30bbbf	f0/a0	Scry	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-hunt:f0a0:s1,f:xs:XP:omen-of-the-hunt:f0a0:s1	-	-	-	ae86f6029288	-	82202abad8d2	-	-	2026-11-24	xproof
+53295b03-717d-481d-9d5c-212c5f30bbbf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-hunt:f0t0:s1,f:xs:XP:omen-of-the-hunt:f0t0:s1	-	-	-	ae86f6029288	-	82202abad8d2	-	-	2026-11-24	xproof
 532ab335-4873-405b-84b3-c447207172b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 532ab335-4873-405b-84b3-c447207172b5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 532cac99-e3cf-4869-a19f-cba67a2a6fd0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:ogre-chitterlord:f0t0:s2,f:xs:XP:ogre-chitterlord:f0t0:s2	-	-	-	e07cf3a05ba5	-	7bb4dc57bdd3	-	-	2026-11-24	xproof
@@ -154,8 +154,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53aaa919-d08f-4b76-8583-bc2d4635f991	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:saavik-stoic-student:f0t0:s1,f:xs:XP:saavik-stoic-student:f0t0:s1	-	-	-	25696bf19d5b	-	1a605cd5a348	-	-	2026-11-24	xproof
 53ae0359-aa3c-464b-bdbd-139ae17ebd76	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53b121df-3040-4ad0-a25d-587a299b4f8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53b17c51-a216-484f-80df-3904284df0ea	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53b17c51-a216-484f-80df-3904284df0ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+53b17c51-a216-484f-80df-3904284df0ea	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:chandra-s-firemaw:cast:s1,f:xs:XP:chandra-s-firemaw:cast:s1	-	-	-	ae86f6029288	-	8b1c8f01f55d	-	-	2026-11-24	xproof
+53b17c51-a216-484f-80df-3904284df0ea	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:chandra-s-firemaw:cast:s1,f:xs:XP:chandra-s-firemaw:cast:s1	-	-	-	ae86f6029288	-	8b1c8f01f55d	-	-	2026-11-24	xproof
 53b2c8f2-db9a-4ab0-a4e8-17385b2fa3bd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:aethertide-whale:cast:s1,f:xs:XP:aethertide-whale:cast:s1	-	-	-	d864b561c9cb	-	2ca98c0e1733	-	-	2026-11-24	xproof
 53b2c8f2-db9a-4ab0-a4e8-17385b2fa3bd	f0/a0	ChangeZone	agreed	-	FX	start	4	0	x:xs:XP:aethertide-whale:cast:s1,f:xs:XP:aethertide-whale:cast:s1	-	-	-	d864b561c9cb	-	2ca98c0e1733	-	-	2026-11-24	xproof
 53b2c8f2-db9a-4ab0-a4e8-17385b2fa3bd	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:aethertide-whale:cast:s1,f:xs:XP:aethertide-whale:cast:s1	-	-	-	d864b561c9cb	-	2ca98c0e1733	-	-	2026-11-24	xproof

@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d02ee2f-b7bd-40b0-b9be-2420991b2be0	cast	cast-resolve	agreed	-	FX	scen	2	0	Abzan Devotee/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d02ee2f-b7bd-40b0-b9be-2420991b2be0	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Abzan Devotee/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d02ee2f-b7bd-40b0-b9be-2420991b2be0	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Abzan Devotee/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3d038f7c-95fa-4b71-8f74-b9b4dd45cde0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d038f7c-95fa-4b71-8f74-b9b4dd45cde0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ertai-resurrected:cast:s1,f:xs:XP:ertai-resurrected:cast:s1	-	-	-	ae86f6029288	-	29a57db910e9	-	-	2026-11-24	xproof
 3d038f7c-95fa-4b71-8f74-b9b4dd45cde0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d04aa8c-7bff-42c6-bed3-0b18d2cb1529	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d04aa8c-7bff-42c6-bed3-0b18d2cb1529	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -30,8 +30,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d240726-5214-4493-8537-29bf65db1e4b	cast	cast-resolve	agreed	-	X	scen	1	0	Unable to Scream/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d240726-5214-4493-8537-29bf65db1e4b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Unable to Scream/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d268e48-3004-4384-bf52-e63243fb5e02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d268e48-3004-4384-bf52-e63243fb5e02	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d268e48-3004-4384-bf52-e63243fb5e02	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d268e48-3004-4384-bf52-e63243fb5e02	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+3d268e48-3004-4384-bf52-e63243fb5e02	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3d28886c-46bf-4d2e-a257-cb9016cc3573	cast	cast-resolve	agreed	-	FX	scen	2	0	Waterbending Lesson/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d2b5201-c2bf-4753-89ad-543795740216	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d2bd4f6-174d-411a-b930-9161aeefd33a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:tinybones-joins-up:f0t0:s2,f:xs:XP:tinybones-joins-up:f0t0:s2	-	-	-	267e485f6204	-	22042ee75d6b	-	-	2026-11-24	xproof
@@ -98,9 +98,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d783beb-9ca6-4681-9276-fc3ad13b993f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3d794629-9014-460a-8d3b-785eadc1cdb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d794629-9014-460a-8d3b-785eadc1cdb5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d79cbe2-cf1b-4313-ab47-0118fcdbfc6c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d79cbe2-cf1b-4313-ab47-0118fcdbfc6c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d79cbe2-cf1b-4313-ab47-0118fcdbfc6c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d79cbe2-cf1b-4313-ab47-0118fcdbfc6c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:phylath-world-sculptor:cast:s1,f:xs:XP:phylath-world-sculptor:cast:s1	-	-	-	ae86f6029288	-	ad52a30a86d7	-	-	2026-11-24	xproof
+3d79cbe2-cf1b-4313-ab47-0118fcdbfc6c	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:phylath-world-sculptor:cast:s1,f:xs:XP:phylath-world-sculptor:cast:s1	-	-	-	ae86f6029288	-	ad52a30a86d7	-	-	2026-11-24	xproof
+3d79cbe2-cf1b-4313-ab47-0118fcdbfc6c	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3d867016-2601-4a37-a73d-308898d3bd37	cast	cast-resolve	agreed	-	X	scen	1	0	Thrasios, Triton Hero/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3d867016-2601-4a37-a73d-308898d3bd37	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thrasios, Triton Hero/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3d873e1d-4fac-42c4-bb31-77e76099e1ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-rack:cast:s1,f:xs:XP:the-rack:cast:s1	-	-	-	25696bf19d5b	-	bb2037dcdd7f	-	-	2026-11-24	xproof

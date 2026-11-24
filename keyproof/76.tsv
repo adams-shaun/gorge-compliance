@@ -114,8 +114,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76771cd1-6b74-49bb-9421-8845fe344567	cast	cast-resolve	agreed	-	FX	scen	2	0	Way of the Paradox/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76771cd1-6b74-49bb-9421-8845fe344567	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76771cd1-6b74-49bb-9421-8845fe344567	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Way of the Paradox/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7679942f-fcbc-4750-8e8c-fe0ad8103c11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7679942f-fcbc-4750-8e8c-fe0ad8103c11	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7679942f-fcbc-4750-8e8c-fe0ad8103c11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blitz-leech:f0t0:s1,f:xs:XP:blitz-leech:f0t0:s1	-	-	-	ae86f6029288	-	4feef304507f	-	-	2026-11-24	xproof
+7679942f-fcbc-4750-8e8c-fe0ad8103c11	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blitz-leech:f0t0:s1,f:xs:XP:blitz-leech:f0t0:s1	-	-	-	ae86f6029288	-	4feef304507f	-	-	2026-11-24	xproof
 767c1f97-03de-474d-9112-e7521ba3b3f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 767e4aa9-527f-425f-bffb-6d842e1fbb74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 767e4aa9-527f-425f-bffb-6d842e1fbb74	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -204,4 +204,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76fdbc2c-d2b1-466f-9230-06e187bcc9e6	cast	counter-spell	agreed	-	X	scen	1	0	Divert Disaster/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76fe7cfa-c3db-4122-b262-f7c5c90fcdd7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76ff6653-f9b9-4bfe-92a9-52bda275b340	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76ff6653-f9b9-4bfe-92a9-52bda275b340	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76ff6653-f9b9-4bfe-92a9-52bda275b340	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

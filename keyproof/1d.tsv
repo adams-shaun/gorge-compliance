@@ -7,7 +7,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d078108-f88c-4a32-a28f-bae5182b2f53	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1d07856b-d9ef-418c-bd06-3888dbcaddf4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d07856b-d9ef-418c-bd06-3888dbcaddf4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d09ebb7-c4c9-4bb7-b6bf-3c8330b954e8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d09ebb7-c4c9-4bb7-b6bf-3c8330b954e8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:tymaret-calls-the-dead:cast:s1	-	-	-	ae86f6029288	-	bba754225a5e	-	-	2026-11-24	xproof
 1d0f1186-be6c-45c3-9703-f0c1e13892fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d15a06f-5471-48f2-8c4a-9b0886bef5af	cast	cast-resolve	agreed	-	FX	scen	2	0	Obeka, Splitter of Seconds/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d15a06f-5471-48f2-8c4a-9b0886bef5af	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Obeka, Splitter of Seconds/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1dbe4eb4-8313-459a-89ce-982442cd0cd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dbe4eb4-8313-459a-89ce-982442cd0cd0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dc2c213-72f6-4112-96a8-bf6ad553c707	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1dc2c213-72f6-4112-96a8-bf6ad553c707	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1dc2c213-72f6-4112-96a8-bf6ad553c707	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:icingdeath-frost-tyrant:f0t0:s1,f:xs:XP:icingdeath-frost-tyrant:f0t0:s1	-	-	-	ae86f6029288	-	18b418f83a64	-	-	2026-11-24	xproof
 1dc73412-c91c-48c9-bde6-b169add79b37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dc73412-c91c-48c9-bde6-b169add79b37	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dc816b5-8918-4a0c-bb10-74abe579a98c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,8 +176,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1de17747-27e8-40bb-b6f7-6d5402d4705c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Earth Rumble Wrestlers/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1de17747-27e8-40bb-b6f7-6d5402d4705c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Earth Rumble Wrestlers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1de17747-27e8-40bb-b6f7-6d5402d4705c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Earth Rumble Wrestlers/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1de1b591-a73f-4974-b507-8c63e07a0868	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1de1b591-a73f-4974-b507-8c63e07a0868	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1de1b591-a73f-4974-b507-8c63e07a0868	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thassa-s-oracle:f0t0:s1,f:xs:XP:thassa-s-oracle:f0t0:s1	-	-	-	ae86f6029288	-	060856a7325f	-	-	2026-11-24	xproof
+1de1b591-a73f-4974-b507-8c63e07a0868	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thassa-s-oracle:f0t0:s1,f:xs:XP:thassa-s-oracle:f0t0:s1	-	-	-	ae86f6029288	-	060856a7325f	-	-	2026-11-24	xproof
 1de2c216-0921-45eb-9613-a68d18fbee77	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1de561c7-4ff4-4eb9-8cbe-a29f568e786a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1de561c7-4ff4-4eb9-8cbe-a29f568e786a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bazaar-krovod:f0t0:s1,f:xs:XP:bazaar-krovod:f0t0:s1	-	-	-	d864b561c9cb	-	9fb72b99b966	-	-	2026-11-24	xproof

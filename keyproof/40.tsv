@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4034bec6-e3c7-4d3f-81df-7c903977a606	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4034bec6-e3c7-4d3f-81df-7c903977a606	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 403b59f3-7ade-4bc2-a3e6-de0c3c700f18	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-403b59f3-7ade-4bc2-a3e6-de0c3c700f18	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+403b59f3-7ade-4bc2-a3e6-de0c3c700f18	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 403cf6ae-48a9-4ea9-894e-7135cfca4e1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 403e554b-72a5-48b3-acea-0b4062ffb913	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4042ab14-c579-4d82-a642-576b88508ec7	cast	cast-resolve	agreed	-	X	scen	1	0	Collation Trimatrix/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -117,8 +117,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4097fea2-ae34-4b99-ab7e-a276d608b489	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Weather Maker/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4097fea2-ae34-4b99-ab7e-a276d608b489	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Weather Maker/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4097fea2-ae34-4b99-ab7e-a276d608b489	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Weather Maker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4098ab29-bf90-4ec9-b547-05d304fc7798	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4098ab29-bf90-4ec9-b547-05d304fc7798	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4098ab29-bf90-4ec9-b547-05d304fc7798	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blight-breath-catoblepas:f0t0:s1,f:xs:XP:blight-breath-catoblepas:f0t0:s1	-	-	-	ae86f6029288	-	4444c1dad2ed	-	-	2026-11-24	xproof
+4098ab29-bf90-4ec9-b547-05d304fc7798	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blight-breath-catoblepas:f0t0:s1,f:xs:XP:blight-breath-catoblepas:f0t0:s1	-	-	-	ae86f6029288	-	4444c1dad2ed	-	-	2026-11-24	xproof
 40999aa6-6424-42e4-9d47-33bee6bbb886	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40999aa6-6424-42e4-9d47-33bee6bbb886	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 409b44fc-fae2-4804-83a7-78cf95038f58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40ee79dd-cf53-415c-8e3c-d1a125a735db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40eee955-bec6-455a-addf-68cdb84c76b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40f5f8b9-5c2c-41d4-8b83-55a2e51ced64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40f5f8b9-5c2c-41d4-8b83-55a2e51ced64	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+40f5f8b9-5c2c-41d4-8b83-55a2e51ced64	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:exuberant-wolfbear:f0t0:s1,f:xs:XP:exuberant-wolfbear:f0t0:s1	-	-	-	ae86f6029288	-	06456f71c422	-	-	2026-11-24	xproof
 40f664d8-4c73-44aa-8fb1-d38771a42520	cast	cast-resolve	agreed	-	X	scen	1	0	Mysterio, Master of Illusion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 40f664d8-4c73-44aa-8fb1-d38771a42520	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40f66e21-5b60-4e42-927d-65397e7ad544	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:citadel-siege:cast:s1,f:xs:XP:citadel-siege:cast:s1	-	-	-	d864b561c9cb	-	f87e45560de1	-	-	2026-11-24	xproof

@@ -103,7 +103,7 @@ df82b67f-f685-4278-a108-f3689a3a121b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 df8a0737-5841-4c17-b567-e9296541c3c9	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 df8a0737-5841-4c17-b567-e9296541c3c9	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 df8fe368-00eb-42fa-89d6-794fc61f8f8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-df8fe368-00eb-42fa-89d6-794fc61f8f8c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+df8fe368-00eb-42fa-89d6-794fc61f8f8c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 df9409e6-bd6d-4b5b-b807-fcf347ee940a	cast	cast-resolve	agreed	-	X	scen	1	0	Glarb, Calamity's Augur/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 df9409e6-bd6d-4b5b-b807-fcf347ee940a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Glarb, Calamity's Augur/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 df9409e6-bd6d-4b5b-b807-fcf347ee940a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Glarb, Calamity's Augur/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -208,8 +208,8 @@ dff11626-ad4d-443a-b7db-f508790b5fd2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Namor
 dff11626-ad4d-443a-b7db-f508790b5fd2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Namor the Sub-Mariner/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dff3cfff-69f9-4afd-af28-b75504d30ffa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ulvenwald-observer:cast:s1,f:xs:XP:ulvenwald-observer:cast:s1	-	-	-	d864b561c9cb	-	9aaa7db03a91	-	-	2026-11-24	xproof
 dff3cfff-69f9-4afd-af28-b75504d30ffa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-dff3f4c7-f792-4ca3-9b0a-0738e70664d9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dff3f4c7-f792-4ca3-9b0a-0738e70664d9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dff3f4c7-f792-4ca3-9b0a-0738e70664d9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:old-gnawbone:cast:s1,f:xs:XP:old-gnawbone:cast:s1	-	-	-	ae86f6029288	-	917a43a0c4d5	-	-	2026-11-24	xproof
+dff3f4c7-f792-4ca3-9b0a-0738e70664d9	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 dff72513-b67a-4732-a8fc-269cbf21ae99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dff72513-b67a-4732-a8fc-269cbf21ae99	f0/t0	Attacks/Battle cry	agreed	-	FX	start	2	0	x:xs:XP:kuldotha-ringleader:f0t0:s1,f:xs:XP:kuldotha-ringleader:f0t0:s1	-	-	-	d864b561c9cb	-	d9c38b29d105	-	-	2026-11-24	xproof
 dffd5f0f-3a7b-47ed-864e-06c752bdcefc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

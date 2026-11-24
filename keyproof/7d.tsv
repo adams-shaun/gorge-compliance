@@ -28,8 +28,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d27c583-469c-42d7-a547-8c65654e9d95	static#0.0	static#0.0	agreed	-	X	scen	1	0	Biorganic Carapace/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7d2a7741-1dff-4fac-92d8-abea24f23f97	cast	cast-resolve	agreed	-	X	scen	1	0	Three Tree Scribe/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7d2a7741-1dff-4fac-92d8-abea24f23f97	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Three Tree Scribe/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7d306de8-a93b-429b-9436-0501be97dc8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7d306de8-a93b-429b-9436-0501be97dc8d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7d306de8-a93b-429b-9436-0501be97dc8d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:farfinder:f0t0:s1,f:xs:XP:farfinder:f0t0:s1	-	-	-	ae86f6029288	-	31f06a050d8c	-	-	2026-11-24	xproof
+7d306de8-a93b-429b-9436-0501be97dc8d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:farfinder:f0t0:s1,f:xs:XP:farfinder:f0t0:s1	-	-	-	ae86f6029288	-	31f06a050d8c	-	-	2026-11-24	xproof
 7d313958-49ca-4592-97c7-20f12c8468a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d313958-49ca-4592-97c7-20f12c8468a8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d32c63d-aa9e-4f5d-a3e6-51377a786009	cast	cast-resolve	agreed	-	FX	scen	2	0	Way of the Cryomancer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -142,8 +142,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7dbb540f-ee96-4115-b6ef-28ffc73da8b7	cast	cast-resolve	agreed	-	X	scen	1	0	Djinn of Fool's Fall/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7dbb540f-ee96-4115-b6ef-28ffc73da8b7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Djinn of Fool's Fall/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7dbb540f-ee96-4115-b6ef-28ffc73da8b7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Djinn of Fool's Fall/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7dbf9e96-e61f-43db-8767-63a351cf4ef8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7dbf9e96-e61f-43db-8767-63a351cf4ef8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7dbf9e96-e61f-43db-8767-63a351cf4ef8	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:alirios-enraptured:cast:s1,f:xs:XP:alirios-enraptured:cast:s1	-	-	-	ae86f6029288	-	2ee0c295b575	-	-	2026-11-24	xproof
+7dbf9e96-e61f-43db-8767-63a351cf4ef8	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:alirios-enraptured:cast:s1,f:xs:XP:alirios-enraptured:cast:s1	-	-	-	ae86f6029288	-	2ee0c295b575	-	-	2026-11-24	xproof
 7dc5d729-0553-46fb-aff7-2f0d9573837b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7dc7d90d-5979-4c4a-9183-392e0e0b878a	cast	cast-resolve	agreed	-	FX	scen	2	0	Hell to Pay/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7dcb95a9-c114-4333-8b45-4380f92d9695	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

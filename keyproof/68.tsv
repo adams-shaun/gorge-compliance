@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6824a6ed-37d0-4db5-b2d4-9c737d0c49f9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6824a6ed-37d0-4db5-b2d4-9c737d0c49f9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68273453-1059-4eab-8c27-5d96f998f3b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68281e06-64e3-490b-8691-8f4169614ec0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68281e06-64e3-490b-8691-8f4169614ec0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:basri-s-solidarity:cast:s1,f:xs:XP:basri-s-solidarity:cast:s1	-	-	-	ae86f6029288	-	ecfad22dbf44	-	-	2026-11-24	xproof
 682a0770-8fe0-4142-aa0c-b60af3628a33	cast	cast-resolve	agreed	-	X	scen	1	0	A Tale for the Ages/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 682a0770-8fe0-4142-aa0c-b60af3628a33	static#0.0	static#0.0	agreed	-	X	scen	1	0	A Tale for the Ages/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 682a6d77-e8cd-4bf2-b777-7793101e0fd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 683775ac-481e-4c26-ab2f-5d2813af0268	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sentinel-of-lost-lore:f0t0:s1,f:xs:XP:sentinel-of-lost-lore:f0t0:s1	-	-	-	ae86f6029288	-	9e6721ef2361	-	-	2026-11-24	xproof
 683775ac-481e-4c26-ab2f-5d2813af0268	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683a06b6-af77-440f-81b9-8958597a7324	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-683a06b6-af77-440f-81b9-8958597a7324	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+683a06b6-af77-440f-81b9-8958597a7324	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 683d8deb-2ab4-4c65-9a23-f4e733f06ba2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683e7135-de54-49c8-a978-4f84628a6a91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683e7135-de54-49c8-a978-4f84628a6a91	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -187,8 +187,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68d7fafd-15f4-46fe-8233-09c3c873d1a1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68d84ffa-5bd0-4ed9-a987-6cef13095438	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:avatar-of-might:cast:s1,f:xs:XP:avatar-of-might:cast:s1	-	-	-	25696bf19d5b	-	0b5ed2bc0599	-	-	2026-11-24	xproof
 68df4c46-513a-4d75-9d4b-ac95d45be255	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68e0b691-f332-4b0a-8173-bb8a48b463a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68e0b691-f332-4b0a-8173-bb8a48b463a1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68e0b691-f332-4b0a-8173-bb8a48b463a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:excavation-mole:f0t0:s1,f:xs:XP:excavation-mole:f0t0:s1	-	-	-	ae86f6029288	-	0402a628d6c7	-	-	2026-11-24	xproof
+68e0b691-f332-4b0a-8173-bb8a48b463a1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:excavation-mole:f0t0:s1,f:xs:XP:excavation-mole:f0t0:s1	-	-	-	ae86f6029288	-	0402a628d6c7	-	-	2026-11-24	xproof
 68e1f7e0-a9b3-437f-8086-0c0cb85f2880	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68e1f7e0-a9b3-437f-8086-0c0cb85f2880	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68e87559-7cae-4dcf-b7cd-a61f19bcd840	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mass-manipulation:cast:s1,f:xs:XP:mass-manipulation:cast:s1	-	-	-	d864b561c9cb	-	53e9932f07a1	-	-	2026-11-24	xproof
@@ -212,9 +212,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68f84643-c0f9-4d31-ba2e-38b65ab45d04	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tiger-Seal/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68f84643-c0f9-4d31-ba2e-38b65ab45d04	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Tiger-Seal/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68f8ed23-024e-414f-bbb2-ab73fbe21b69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68fb8f21-4403-4829-8826-f2418664197e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68fb8f21-4403-4829-8826-f2418664197e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68fb8f21-4403-4829-8826-f2418664197e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68fb8f21-4403-4829-8826-f2418664197e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cliffhaven-kitesail:f0t0:s1,f:xs:XP:cliffhaven-kitesail:f0t0:s1	-	-	-	ae86f6029288	-	c7f2794e42fb	-	-	2026-11-24	xproof
+68fb8f21-4403-4829-8826-f2418664197e	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:cliffhaven-kitesail:f0a0:s1,f:xs:XP:cliffhaven-kitesail:f0a0:s1	-	-	-	ae86f6029288	-	c7f2794e42fb	-	-	2026-11-24	xproof
+68fb8f21-4403-4829-8826-f2418664197e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cliffhaven-kitesail:f0t0:s1,f:xs:XP:cliffhaven-kitesail:f0t0:s1	-	-	-	ae86f6029288	-	c7f2794e42fb	-	-	2026-11-24	xproof
 68fbc13c-00b3-49bb-b343-4f2f1e8f5a7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68fbc13c-00b3-49bb-b343-4f2f1e8f5a7c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 68fc3611-8d82-4f87-ab50-603790a27455	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gruul-nodorog:cast:s1,f:xs:XP:gruul-nodorog:cast:s1	-	-	-	64a08ba7d913	-	9b93a58ae2ec	-	-	2026-11-24	xproof

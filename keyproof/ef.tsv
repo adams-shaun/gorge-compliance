@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-ef027846-be81-4959-a6b5-56bd01b1e68a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ef027846-be81-4959-a6b5-56bd01b1e68a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venerable-knight:cast:s1,f:xs:XP:venerable-knight:cast:s1	-	-	-	ae86f6029288	-	9704a7820465	-	-	2026-11-24	xproof
 ef027846-be81-4959-a6b5-56bd01b1e68a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ef06e10c-553b-45b8-abf0-1d2e87c22128	cast	cast-resolve	agreed	-	FX	scen	2	0	Gigastorm Titan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ef06e10c-553b-45b8-abf0-1d2e87c22128	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gigastorm Titan/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -13,7 +13,7 @@ ef100544-3e6d-4661-a1d1-8b02e58c059c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ef1a83f2-6707-41a2-b5ed-861c8e45ae07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:languish:cast:s1,f:xs:XP:languish:cast:s1	-	-	-	d864b561c9cb	-	e7587c7d600c	-	-	2026-11-24	xproof
 ef220824-fab4-4d8e-9ba4-65ff5ba1db66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ef220824-fab4-4d8e-9ba4-65ff5ba1db66	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ef238ba8-acf0-4e62-9abd-5291886a32e8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ef238ba8-acf0-4e62-9abd-5291886a32e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:triskaidekaphile:cast:s1,f:xs:XP:triskaidekaphile:cast:s1	-	-	-	ae86f6029288	-	01c1ee1fffac	-	-	2026-11-24	xproof
 ef238ba8-acf0-4e62-9abd-5291886a32e8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ef238ba8-acf0-4e62-9abd-5291886a32e8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ef29f979-1a6d-47bb-83f5-4679389471da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -188,7 +188,7 @@ efea2342-bb24-472a-acfb-1b9e012af91b	f0/t0	NULL	owed	refused:scen failed: xengin
 efea2342-bb24-472a-acfb-1b9e012af91b	f0/t1	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/MIR.json:	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 efee0ca0-0897-4972-99c4-432561b6e9f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 efee89a6-b730-45b6-bb84-33de0f25ad47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-efee89a6-b730-45b6-bb84-33de0f25ad47	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+efee89a6-b730-45b6-bb84-33de0f25ad47	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 efef2d33-5354-4fce-880e-cb91fa60f730	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 efef2d33-5354-4fce-880e-cb91fa60f730	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 efefb339-bb7c-4b26-abed-8434f955122b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

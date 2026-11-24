@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 81036c9f-fe0a-45a7-bcd5-0d344f31055a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81036c9f-fe0a-45a7-bcd5-0d344f31055a	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+81036c9f-fe0a-45a7-bcd5-0d344f31055a	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 810592fe-65f5-4c95-9d75-d6806e004903	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 810592fe-65f5-4c95-9d75-d6806e004903	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 810592fe-65f5-4c95-9d75-d6806e004903	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,11 +67,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8162730e-2573-4bc0-827f-5b7b3dbf3bff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8162730e-2573-4bc0-827f-5b7b3dbf3bff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81641cf1-2dcf-4cd3-ab92-7f5e8e20cb84	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8165acd4-ac62-47f1-97dd-01860aee29ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8165acd4-ac62-47f1-97dd-01860aee29ee	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8165acd4-ac62-47f1-97dd-01860aee29ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scorch-rider:f0t0:s1,f:xs:XP:scorch-rider:f0t0:s1	-	-	-	ae86f6029288	-	65537c44400f	-	-	2026-11-24	xproof
+8165acd4-ac62-47f1-97dd-01860aee29ee	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scorch-rider:f0t0:s1,f:xs:XP:scorch-rider:f0t0:s1	-	-	-	ae86f6029288	-	65537c44400f	-	-	2026-11-24	xproof
 81674138-08d0-4126-9e6d-27f6e7dd2403	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81674138-08d0-4126-9e6d-27f6e7dd2403	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-816e13c6-79d8-431f-a04e-15c423baf7b3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+816e13c6-79d8-431f-a04e-15c423baf7b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ichthyomorphosis:cast:s1,f:xs:XP:ichthyomorphosis:cast:s1	-	-	-	ae86f6029288	-	936333775a2b	-	-	2026-11-24	xproof
 81704164-bad9-4e52-9b69-3d49e92fe284	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8170dcbb-9879-414c-819d-ea2658ff770c	cast	cast-resolve	agreed	-	FX	scen	2	0	Emergency Medical Hologram/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8170dcbb-9879-414c-819d-ea2658ff770c	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81b50d34-d778-4606-80de-0e0780610d1f	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 81b51bb1-89b9-46a0-ad7a-a43c0d214f11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81b61770-2ed5-4a50-84d0-97790002fc5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81b61770-2ed5-4a50-84d0-97790002fc5a	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+81b61770-2ed5-4a50-84d0-97790002fc5a	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 81b67745-0b1f-4433-963d-9b9653fb4d95	cast	cast-resolve	agreed	-	X	scen	1	0	Ride the Shoopuf/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 81b67745-0b1f-4433-963d-9b9653fb4d95	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ride the Shoopuf/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 81b67745-0b1f-4433-963d-9b9653fb4d95	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ride the Shoopuf/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

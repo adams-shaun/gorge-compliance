@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 301d1d8e-d3fc-4010-8b29-4724fa0b31cd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 301d1d8e-d3fc-4010-8b29-4724fa0b31cd	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 301d36e7-06ff-48ed-a7e8-c7d3c72e1e2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-301d36e7-06ff-48ed-a7e8-c7d3c72e1e2f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+301d36e7-06ff-48ed-a7e8-c7d3c72e1e2f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 30236ff8-f6d5-462d-9a2f-846b2d8a1ca6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30236ff8-f6d5-462d-9a2f-846b2d8a1ca6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 302407c8-0842-4f8e-a5aa-5c11a69851c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -97,8 +97,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3084377f-73fb-4b00-9dd9-3844b1ecafc2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Illvoi Infiltrator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3084377f-73fb-4b00-9dd9-3844b1ecafc2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Illvoi Infiltrator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3084377f-73fb-4b00-9dd9-3844b1ecafc2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Illvoi Infiltrator/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-30868d69-2ba3-4373-9d47-4bc8978f35d1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-30868d69-2ba3-4373-9d47-4bc8978f35d1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+30868d69-2ba3-4373-9d47-4bc8978f35d1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:yarok-s-wavecrasher:cast:s1,f:xs:XP:yarok-s-wavecrasher:cast:s1	-	-	-	ae86f6029288	-	f88561bc2de5	-	-	2026-11-24	xproof
+30868d69-2ba3-4373-9d47-4bc8978f35d1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:yarok-s-wavecrasher:cast:s1,f:xs:XP:yarok-s-wavecrasher:cast:s1	-	-	-	ae86f6029288	-	f88561bc2de5	-	-	2026-11-24	xproof
 30870ee5-6ad7-48a9-983e-d3b018f2344f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sacred-nectar:cast:s1,f:xs:XP:sacred-nectar:cast:s1	-	-	-	25696bf19d5b	-	fe52fa049c81	-	-	2026-11-24	xproof
 3088b09b-1dce-4fc9-99de-2ca9c752eb12	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3088ee75-3b51-4cbc-8987-76cb93f416b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

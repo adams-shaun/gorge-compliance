@@ -143,9 +143,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6bb42689-b169-43cb-b787-f0e348063cd6	cast	cast-resolve	agreed	-	X	scen	1	0	D'Vana Tendi, Optimistic Ensign/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6bb42689-b169-43cb-b787-f0e348063cd6	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 6bb42689-b169-43cb-b787-f0e348063cd6	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-6bb60f1f-9295-41ce-bdcd-3fe67f8e175c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6bb60f1f-9295-41ce-bdcd-3fe67f8e175c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yarok-s-fenlurker:f0t0:s1,f:xs:XP:yarok-s-fenlurker:f0t0:s1	-	-	-	ae86f6029288	-	5637c2c45878	-	-	2026-11-24	xproof
 6bb60f1f-9295-41ce-bdcd-3fe67f8e175c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6bb60f1f-9295-41ce-bdcd-3fe67f8e175c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6bb60f1f-9295-41ce-bdcd-3fe67f8e175c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:yarok-s-fenlurker:f0t0:s1,f:xs:XP:yarok-s-fenlurker:f0t0:s1	-	-	-	ae86f6029288	-	5637c2c45878	-	-	2026-11-24	xproof
 6bb7419b-e085-4616-8e5c-4ed08cb2b4c1	cast	cast-resolve	agreed	-	X	scen	1	0	Skystinger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6bb7419b-e085-4616-8e5c-4ed08cb2b4c1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Skystinger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6bb7419b-e085-4616-8e5c-4ed08cb2b4c1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Skystinger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -165,11 +165,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6bc14f1e-1df8-4e72-b05a-a848faa3b080	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6bc3c7fd-e371-467f-973c-4c9f0d1ba0bc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6bc4a078-4d30-452d-9e33-ff09f943903e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6bc4a078-4d30-452d-9e33-ff09f943903e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6bc4a078-4d30-452d-9e33-ff09f943903e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:belle-of-the-brawl:f0t0:s1,f:xs:XP:belle-of-the-brawl:f0t0:s1	-	-	-	ae86f6029288	-	865e99ed0198	-	-	2026-11-24	xproof
 6bc5dfbb-98ec-4ff1-8ba2-e2594c53e6d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6bc668f4-8fc7-4aaf-891b-277d8328b376	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6bc668f4-8fc7-4aaf-891b-277d8328b376	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6bc668f4-8fc7-4aaf-891b-277d8328b376	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6bc668f4-8fc7-4aaf-891b-277d8328b376	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+6bc668f4-8fc7-4aaf-891b-277d8328b376	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 6bc82093-0246-4c60-bf30-0b605bef01cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6bc82093-0246-4c60-bf30-0b605bef01cd	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:prophet-of-distortion:f0a0:s1,f:xs:XP:prophet-of-distortion:f0a0:s1	-	-	-	d864b561c9cb	-	2493dcb4b349	-	-	2026-11-24	xproof
 6bc8fd7e-7616-484a-ac23-04d37c93733b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

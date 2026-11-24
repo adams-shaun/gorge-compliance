@@ -54,8 +54,8 @@ e3431dae-969c-4896-9f9e-a80e7bec4bdf	cast	cast-resolve	agreed	-	X	scen	1	0	Avata
 e3444fcf-70ed-4d6e-aea9-030af15cad56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:throes-of-chaos:cast:s1,f:xs:XP:throes-of-chaos:cast:s1	-	-	-	d864b561c9cb	-	d02f0fb483a3	-	-	2026-11-24	xproof
 e3473ed5-f2b2-4a41-aed9-ee37caa9d7be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dramatist-s-puppet:f0t0:s1,f:xs:XP:dramatist-s-puppet:f0t0:s1	-	-	-	d864b561c9cb	-	32a3aa321931	-	-	2026-11-24	xproof
 e3473ed5-f2b2-4a41-aed9-ee37caa9d7be	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dramatist-s-puppet:f0t0:s1,f:xs:XP:dramatist-s-puppet:f0t0:s1	-	-	-	d864b561c9cb	-	32a3aa321931	-	-	2026-11-24	xproof
-e3474632-6d81-43a8-9329-4c7e0c631755	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e3474632-6d81-43a8-9329-4c7e0c631755	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e3474632-6d81-43a8-9329-4c7e0c631755	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fissure-wizard:f0t0:s1,f:xs:XP:fissure-wizard:f0t0:s1	-	-	-	ae86f6029288	-	1bae8676abc3	-	-	2026-11-24	xproof
+e3474632-6d81-43a8-9329-4c7e0c631755	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fissure-wizard:f0t0:s1,f:xs:XP:fissure-wizard:f0t0:s1	-	-	-	ae86f6029288	-	1bae8676abc3	-	-	2026-11-24	xproof
 e3480c8f-15ad-451b-bb34-b129805569e1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3483dd4-0118-4143-9b55-51078a6f274a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:epitaph-golem:cast:s1,f:xs:XP:epitaph-golem:cast:s1	-	-	-	d864b561c9cb	-	0af22aa4f4f3	-	-	2026-11-24	xproof
 e3483dd4-0118-4143-9b55-51078a6f274a	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:epitaph-golem:f0a0:s1,f:xs:XP:epitaph-golem:f0a0:s1	-	-	-	d864b561c9cb	-	0af22aa4f4f3	-	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ e380e37d-926b-4a4b-a275-7844bf4956d5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Titan
 e3886fe8-9b76-4613-8891-4ec74657c087	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e38b8ecb-e7ae-474d-b6a4-29cc1aa8ccd9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e38e3723-05f5-4a51-8364-1cda19f9cc49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e38e3723-05f5-4a51-8364-1cda19f9cc49	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e38e3723-05f5-4a51-8364-1cda19f9cc49	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e3955573-3db5-490e-903e-65e0172a9202	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3955573-3db5-490e-903e-65e0172a9202	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3955573-3db5-490e-903e-65e0172a9202	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -161,7 +161,7 @@ e3d4dd61-d646-449c-84f4-0ff927ca6b0a	f0/t0	NULL	owed	refused:no-generator:trigge
 e3d6d146-47f4-46f9-9a15-2ea649093668	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grunn-the-lonely-king:cast:s1,f:xs:XP:grunn-the-lonely-king:cast:s1	-	-	-	d864b561c9cb	-	b2dda5a928f0	-	-	2026-11-24	xproof
 e3d6d146-47f4-46f9-9a15-2ea649093668	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3d7cea4-0d4c-4320-966d-17ef69b5e433	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e3d7cea4-0d4c-4320-966d-17ef69b5e433	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e3d7cea4-0d4c-4320-966d-17ef69b5e433	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e3d82066-d8b9-47bf-8821-1370c506970b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:barbed-servitor:f0t0:s2,f:xs:XP:barbed-servitor:f0t0:s2	-	-	-	e07cf3a05ba5	-	2f18f7453235	-	-	2026-11-24	xproof
 e3d82066-d8b9-47bf-8821-1370c506970b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Barbed Servitor/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e3d82066-d8b9-47bf-8821-1370c506970b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Barbed Servitor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

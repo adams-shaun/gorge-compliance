@@ -77,7 +77,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c587200-02cc-4c5f-86fe-d13cc7bdad8b	f0/a0	Mana	agreed	-	FX	start	5	0	x:xs:XP:dromoka-monument:cast:s1,f:xs:XP:dromoka-monument:cast:s1	-	-	-	d864b561c9cb	-	c5990c0fea6e	-	-	2026-11-24	xproof
 1c587200-02cc-4c5f-86fe-d13cc7bdad8b	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:dromoka-monument:f0a1:s1,f:xs:XP:dromoka-monument:f0a1:s1	-	-	-	d864b561c9cb	-	c5990c0fea6e	-	-	2026-11-24	xproof
 1c633e02-95ef-445e-b4e0-fbfbc5ed9cc9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c633e02-95ef-445e-b4e0-fbfbc5ed9cc9	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c633e02-95ef-445e-b4e0-fbfbc5ed9cc9	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1c633e02-95ef-445e-b4e0-fbfbc5ed9cc9	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c63c4ca-5d5a-4ab9-af0d-ed1254b581cc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wanted-scoundrels:cast:s1,f:xs:XP:wanted-scoundrels:cast:s1	-	-	-	d864b561c9cb	-	758b97941ec0	-	-	2026-11-24	xproof
 1c63c4ca-5d5a-4ab9-af0d-ed1254b581cc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wanted-scoundrels:f0t0:s1,f:xs:XP:wanted-scoundrels:f0t0:s1	-	-	-	d864b561c9cb	-	758b97941ec0	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c99c9d9-3ea8-43bc-96d7-4dea12770b5c	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 1c9cf20c-51e4-4a87-b9f8-231b6baf5d6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c9cf20c-51e4-4a87-b9f8-231b6baf5d6b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c9e1f75-73f0-4846-b53f-458a0984b1bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c9e1f75-73f0-4846-b53f-458a0984b1bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:teferi-s-ageless-insight:cast:s1,f:xs:XP:teferi-s-ageless-insight:cast:s1	-	-	-	ae86f6029288	-	1b225e3e820d	-	-	2026-11-24	xproof
 1ca22ca0-eca3-4578-9746-47d443d5fb73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ca25379-d194-4670-a7bf-525ad11cf436	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ca8d2cb-58ba-476b-a4f2-1bf273a54cf3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1cad92ce-55c8-4b78-8d8c-56645ef8e6ee	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Firespitter Whelp/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1cad92ce-55c8-4b78-8d8c-56645ef8e6ee	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Firespitter Whelp/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1cadb1e1-19b6-4ce5-8eb5-7851cec7dfa3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1cadb1e1-19b6-4ce5-8eb5-7851cec7dfa3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1cadb1e1-19b6-4ce5-8eb5-7851cec7dfa3	f0/t0	NULL	owed	refused:no-generator:trigger:Mutates	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1cae5752-b4af-4a8f-8c8c-2493e163083b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cae5752-b4af-4a8f-8c8c-2493e163083b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cae5752-b4af-4a8f-8c8c-2493e163083b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

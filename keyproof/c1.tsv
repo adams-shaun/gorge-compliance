@@ -33,8 +33,8 @@ c11e84a1-dbda-429b-8cd6-fd0deaefc689	cast	cast-resolve	agreed	-	X	scen	1	0	Deman
 c11fef0f-972d-4756-9902-fd3e3af00707	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:culvert-ambusher:f0t0:s2,f:xs:XP:culvert-ambusher:f0t0:s2	-	-	-	e07cf3a05ba5	-	cdce4e67833a	-	-	2026-11-24	xproof
 c11fef0f-972d-4756-9902-fd3e3af00707	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:culvert-ambusher:f0t0:s2,f:xs:XP:culvert-ambusher:f0t0:s2	-	-	-	e07cf3a05ba5	-	cdce4e67833a	-	-	2026-11-24	xproof
 c11fef0f-972d-4756-9902-fd3e3af00707	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Culvert Ambusher/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c1261a72-ccbd-4be9-bc3b-c1bcb807eb85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c1261a72-ccbd-4be9-bc3b-c1bcb807eb85	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c1261a72-ccbd-4be9-bc3b-c1bcb807eb85	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hyrax-tower-scout:f0t0:s1,f:xs:XP:hyrax-tower-scout:f0t0:s1	-	-	-	ae86f6029288	-	361b883f5878	-	-	2026-11-24	xproof
+c1261a72-ccbd-4be9-bc3b-c1bcb807eb85	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hyrax-tower-scout:f0t0:s1,f:xs:XP:hyrax-tower-scout:f0t0:s1	-	-	-	ae86f6029288	-	361b883f5878	-	-	2026-11-24	xproof
 c12b4b1a-fab0-4e9f-8e04-d8a409a965bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c12b4b1a-fab0-4e9f-8e04-d8a409a965bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c12b5b9a-a46e-4635-8603-62c2ca5ee58e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -100,7 +100,7 @@ c16d79d9-c159-421f-90a2-13313a1de5f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c16d79d9-c159-421f-90a2-13313a1de5f6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c174dcbb-03a0-439c-b3d8-ed61bd46dc67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:artful-dodge:cast:s1,f:xs:XP:artful-dodge:cast:s1	-	-	-	d864b561c9cb	-	a37c6d6ad33c	-	-	2026-11-24	xproof
 c178953c-3888-4edd-9d0c-265bd82b1d24	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c178953c-3888-4edd-9d0c-265bd82b1d24	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c178953c-3888-4edd-9d0c-265bd82b1d24	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c1795e9c-31c9-4892-a796-7656e09257b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1795e9c-31c9-4892-a796-7656e09257b3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c17b9e5b-58b6-4ccf-8283-945ba77429e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -210,4 +210,4 @@ c1f7d451-ca70-403d-81bf-8822876d1a54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c1f7d451-ca70-403d-81bf-8822876d1a54	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c1fafe93-8fd2-44c1-a4a0-5c9ecee550cc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ojutai-s-command:cast:s1,f:xs:XP:ojutai-s-command:cast:s1	-	-	-	d864b561c9cb	-	99fd00832afd	-	-	2026-11-24	xproof
 c1fc5923-c3cd-448a-98d1-c154661c2812	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c1fc5923-c3cd-448a-98d1-c154661c2812	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c1fc5923-c3cd-448a-98d1-c154661c2812	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

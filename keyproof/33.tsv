@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 339f5334-b65a-445a-a016-20e997e0b4bb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mistrise Village/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 339f5334-b65a-445a-a016-20e997e0b4bb	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Mistrise Village/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 339f5334-b65a-445a-a016-20e997e0b4bb	land	play-land	agreed	-	X	scen	1	0	Mistrise Village/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-33a162f3-e781-494f-ab8f-12a84801a694	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+33a162f3-e781-494f-ab8f-12a84801a694	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foreboding-fruit:cast:s1,f:xs:XP:foreboding-fruit:cast:s1	-	-	-	ae86f6029288	-	3bcf29f28b97	-	-	2026-11-24	xproof
 33a45c4a-1481-4c7e-b823-435cb84231e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33a4e73d-d93a-4b6f-88ff-cd53f20d178c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Spectacle Summit/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33a4e73d-d93a-4b6f-88ff-cd53f20d178c	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Spectacle Summit/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -171,8 +171,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33d2584b-bf29-4c22-bd45-14ba2fb98c0e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cloud, Midgar Mercenary/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33d405ea-7a9a-4970-b70f-9c05d90dd6f0	cast	cast-resolve	agreed	-	X	scen	1	0	Duress/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33d42811-686d-4aca-bb3b-086de453ddaf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33d42811-686d-4aca-bb3b-086de453ddaf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33d42811-686d-4aca-bb3b-086de453ddaf	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+33d42811-686d-4aca-bb3b-086de453ddaf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bartered-cow:f0t0:s1,f:xs:XP:bartered-cow:f0t0:s1	-	-	-	ae86f6029288	-	712dbdb7af97	-	-	2026-11-24	xproof
+33d42811-686d-4aca-bb3b-086de453ddaf	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 33d556c5-1bb4-49bb-88c2-627311eb8c9b	cast	cast-resolve	agreed	-	X	scen	1	0	Web of Life and Destiny/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33d556c5-1bb4-49bb-88c2-627311eb8c9b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Web of Life and Destiny/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33d6a17a-0112-4d4f-a24a-0769360408a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -218,7 +218,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33fcb05b-246d-4b82-8b0f-44d5f891b612	cast	cast-resolve	agreed	-	X	scen	1	0	Warren Elder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33fcb05b-246d-4b82-8b0f-44d5f891b612	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Warren Elder/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33fd9192-3e9b-4d3a-92aa-06de29d449df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33fdbff6-0e89-4f02-b429-9b17869134cd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+33fdbff6-0e89-4f02-b429-9b17869134cd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:garenbrig-paladin:cast:s1,f:xs:XP:garenbrig-paladin:cast:s1	-	-	-	ae86f6029288	-	55859dc9dad4	-	-	2026-11-24	xproof
 33fe5484-7cc7-45c7-a349-b15c0454ab08	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cartouche-of-ambition:cast:s1,f:xs:XP:cartouche-of-ambition:cast:s1	-	-	-	d864b561c9cb	-	578120a148bf	-	-	2026-11-24	xproof
 33fe5484-7cc7-45c7-a349-b15c0454ab08	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cartouche-of-ambition:cast:s1,f:xs:XP:cartouche-of-ambition:cast:s1	-	-	-	d864b561c9cb	-	578120a148bf	-	-	2026-11-24	xproof
 33fff722-5cc5-4d0e-b788-166b3edb1223	cast	cast-resolve	agreed	-	FX	scen	2	0	Hopeful Vigil/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

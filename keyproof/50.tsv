@@ -15,9 +15,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 500663c1-390c-4598-b614-4168c4f7debe	f0/a0	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:hedge-troll:cast:s1,f:xs:XP:hedge-troll:cast:s1	-	-	-	d864b561c9cb	-	d62bd7f1d5d1	-	-	2026-11-24	xproof
 50090188-651d-4402-968f-3f6bf9276029	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50090188-651d-4402-968f-3f6bf9276029	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-500a17a0-8332-414c-9c3a-7157a7800887	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+500a17a0-8332-414c-9c3a-7157a7800887	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keensight-mentor:f0t0:s1,f:xs:XP:keensight-mentor:f0t0:s1	-	-	-	ae86f6029288	-	c1834bf17587	-	-	2026-11-24	xproof
 500a17a0-8332-414c-9c3a-7157a7800887	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-500a17a0-8332-414c-9c3a-7157a7800887	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+500a17a0-8332-414c-9c3a-7157a7800887	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keensight-mentor:f0t0:s1,f:xs:XP:keensight-mentor:f0t0:s1	-	-	-	ae86f6029288	-	c1834bf17587	-	-	2026-11-24	xproof
 500ccb61-83b0-4b1f-ada6-65850ed5a825	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:qutrub-forayer:f0t0:s1,f:xs:XP:qutrub-forayer:f0t0:s1	-	-	-	9ee19e8250ce	-	dbfb1e0dd088	-	-	2026-11-24	xproof
 500ccb61-83b0-4b1f-ada6-65850ed5a825	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 501109bb-3406-41d8-9433-a100e494f938	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5017c07d-8ad5-4ee2-91d3-974811cdff75	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5020628c-5e47-4a83-89c3-7bf5726e69ad	cast	cast-resolve	agreed	-	X	scen	1	0	Ruinous Rampage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 502230fb-3a7a-439c-adfa-f7820deacf87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-502230fb-3a7a-439c-adfa-f7820deacf87	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+502230fb-3a7a-439c-adfa-f7820deacf87	f0/t0	Attacks	agreed	-	X	start	4	0	x:xs:XP:momentum-rumbler:f0t0:s1	-	-	-	ae86f6029288	-	df07b40545e6	-	-	2026-11-24	xproof
 502230fb-3a7a-439c-adfa-f7820deacf87	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 502575f4-7c56-44bc-a77f-ae28d66c8e1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50261b9d-48f2-4bad-a35b-14f13b3cdd32	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:salt-road-packbeast:f0t0:s2,f:xs:XP:salt-road-packbeast:f0t0:s2	-	-	-	267e485f6204	-	5a6a01122d10	-	-	2026-11-24	xproof
@@ -110,7 +110,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 508248d1-09a4-4e41-a4c9-286618e5061e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50863075-a30b-4238-8e31-5af32a39d886	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50863075-a30b-4238-8e31-5af32a39d886	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50863075-a30b-4238-8e31-5af32a39d886	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+50863075-a30b-4238-8e31-5af32a39d886	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5089cd0f-1338-4ecd-bb1b-664d7e72f8fc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5089cd0f-1338-4ecd-bb1b-664d7e72f8fc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5089ec1a-f881-4d55-af14-5d996171203b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

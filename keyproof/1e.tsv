@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1e2ee630-9d37-4396-ae18-697c1a3a4e62	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e2ee630-9d37-4396-ae18-697c1a3a4e62	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e3c1920-7bf5-44f9-b1ff-b17d6420e69b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1e3c1920-7bf5-44f9-b1ff-b17d6420e69b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1e3c1920-7bf5-44f9-b1ff-b17d6420e69b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:taranika-akroan-veteran:f0t0:s1,f:xs:XP:taranika-akroan-veteran:f0t0:s1	-	-	-	ae86f6029288	-	312becd4880b	-	-	2026-11-24	xproof
 1e3e1916-bb82-481e-9b10-225504ef06b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e3f31cc-a295-4688-abd1-c7d543fe6f7a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e4032f6-9741-4845-9325-781c9e489172	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:asmodeus-the-archfiend:cast:s1,f:xs:XP:asmodeus-the-archfiend:cast:s1	-	-	-	d864b561c9cb	-	9ce751675fb1	-	-	2026-11-24	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ec95969-4a6f-49f3-af23-1680276e7da2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ec95969-4a6f-49f3-af23-1680276e7da2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ecb3349-ccb8-4b54-bd81-8d649d6f96f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ecb3349-ccb8-4b54-bd81-8d649d6f96f0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ecb3349-ccb8-4b54-bd81-8d649d6f96f0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1ecd7248-ff28-4e12-b72a-0cb279ec7561	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ecde43f-e418-437b-8b8f-efe120f96cb3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ed24fc6-b1d5-47f8-a1d1-3243372e0c9f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -187,7 +187,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ef49064-eb2a-49ae-917e-3d441ba14bf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tel-jilad-lifebreather:cast:s1,f:xs:XP:tel-jilad-lifebreather:cast:s1	-	-	-	25696bf19d5b	-	5ad1aad9cfde	-	-	2026-11-24	xproof
 1ef49064-eb2a-49ae-917e-3d441ba14bf9	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1ef5003c-f540-4cdc-913f-7d5280ad9f62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ef73b3b-ab4a-494b-b969-dcde995cee34	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ef73b3b-ab4a-494b-b969-dcde995cee34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:soul-sear:cast:s1,f:xs:XP:soul-sear:cast:s1	-	-	-	ae86f6029288	-	d72fa03618dc	-	-	2026-11-24	xproof
 1efd6082-15a8-4322-892d-02d01e381e2a	cast	cast-resolve	agreed	-	X	scen	1	0	Growth Curve/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1efe485e-6874-4f4c-b981-e10f41670865	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1efe485e-6874-4f4c-b981-e10f41670865	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

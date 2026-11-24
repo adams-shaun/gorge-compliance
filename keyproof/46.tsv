@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4619de7e-3d6e-4c6b-8e6e-e24db324839d	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Nomad Outpost/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4619de7e-3d6e-4c6b-8e6e-e24db324839d	land	play-land	agreed	-	FX	scen	2	0	Nomad Outpost/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 461b3f2f-fcee-4160-abfa-061f8b6a784f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-461b3f2f-fcee-4160-abfa-061f8b6a784f	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+461b3f2f-fcee-4160-abfa-061f8b6a784f	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 461b3f2f-fcee-4160-abfa-061f8b6a784f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 461c0c37-7213-4ece-91f7-934e6a1a8d64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 461c0c37-7213-4ece-91f7-934e6a1a8d64	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46762944-8364-45c4-8008-e693e97ddc46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46779609-4fa7-4fd2-b5b4-7d4d749339e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46779609-4fa7-4fd2-b5b4-7d4d749339e6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-467c526a-02a7-405d-98de-c632ea83519b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+467c526a-02a7-405d-98de-c632ea83519b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:you-find-some-prisoners:cast:s1,f:xs:XP:you-find-some-prisoners:cast:s1	-	-	-	ae86f6029288	-	1ce1e92c934f	-	-	2026-11-24	xproof
 467c9fe6-d1d3-4242-bc0c-e522b4f21d56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 467c9fe6-d1d3-4242-bc0c-e522b4f21d56	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 467d6acb-9a3c-433f-836d-54e0e670b7d0	cast	cast-resolve	agreed	-	X	scen	1	0	Head of the Homestead/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -206,8 +206,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46eefc72-2d9e-4389-8ae1-26d9ee472b5c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46f01d1c-7ab6-4a58-97ce-57a4eb99843c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wary-okapi:cast:s1,f:xs:XP:wary-okapi:cast:s1	-	-	-	d864b561c9cb	-	28d33c1612be	-	-	2026-11-24	xproof
 46f1618d-9c95-4a4b-9a20-7c378b811849	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46f46bdd-52b8-436f-9a39-f5360a84b2cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46f46bdd-52b8-436f-9a39-f5360a84b2cd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+46f46bdd-52b8-436f-9a39-f5360a84b2cd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:opportunistic-dragon:f0t0:s1,f:xs:XP:opportunistic-dragon:f0t0:s1	-	-	-	ae86f6029288	-	0664ce582509	-	-	2026-11-24	xproof
+46f46bdd-52b8-436f-9a39-f5360a84b2cd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:opportunistic-dragon:f0t0:s1,f:xs:XP:opportunistic-dragon:f0t0:s1	-	-	-	ae86f6029288	-	0664ce582509	-	-	2026-11-24	xproof
 46f77c8c-6817-4aea-a80a-d91f508ccbd0	cast	cast-resolve	agreed	-	FX	scen	2	0	Go Ninja Go/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46f78ae1-fa51-4ef9-9ffa-8a3ed71a39e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46f78ae1-fa51-4ef9-9ffa-8a3ed71a39e4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -134,8 +134,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 927fa223-69a3-4563-80b1-b578f3d031f1	cast	cast-resolve	agreed	-	X	scen	1	0	Central Elevator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 927fa223-69a3-4563-80b1-b578f3d031f1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Central Elevator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 927fa223-69a3-4563-80b1-b578f3d031f1	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Central Elevator/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-927fb139-0493-48be-8cc4-2c7d854d6a55	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-927fb139-0493-48be-8cc4-2c7d854d6a55	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+927fb139-0493-48be-8cc4-2c7d854d6a55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:radha-heart-of-keld:cast:s1,f:xs:XP:radha-heart-of-keld:cast:s1	-	-	-	ae86f6029288	-	c53aabd89598	-	-	2026-11-24	xproof
+927fb139-0493-48be-8cc4-2c7d854d6a55	f0/a0	Pump	agreed	-	X	start	2	0	x:xs:XP:radha-heart-of-keld:f0a0:s1	-	-	-	ae86f6029288	-	c53aabd89598	-	-	2026-11-24	xproof
 9285cdf1-ad25-4aee-a865-1bf0cc905183	cast	cast-resolve	agreed	-	X	scen	1	0	Fear of the Dark/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9285cdf1-ad25-4aee-a865-1bf0cc905183	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fear of the Dark/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9286ddc5-8151-4129-aaf6-2a2abe7047e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -181,8 +181,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92c470c9-1373-4f3a-9805-5e9613874793	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prognostic-sphinx:cast:s1,f:xs:XP:prognostic-sphinx:cast:s1	-	-	-	d864b561c9cb	-	5d056afc0a9f	-	-	2026-11-24	xproof
 92c470c9-1373-4f3a-9805-5e9613874793	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 92c470c9-1373-4f3a-9805-5e9613874793	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:prognostic-sphinx:f0t0:s1,f:xs:XP:prognostic-sphinx:f0t0:s1	-	-	-	d864b561c9cb	-	5d056afc0a9f	-	-	2026-11-24	xproof
-92c824da-2351-43bd-9fa0-d09709ad8205	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92c824da-2351-43bd-9fa0-d09709ad8205	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92c824da-2351-43bd-9fa0-d09709ad8205	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:basri-s-acolyte:cast:s1,f:xs:XP:basri-s-acolyte:cast:s1	-	-	-	ae86f6029288	-	258110308247	-	-	2026-11-24	xproof
+92c824da-2351-43bd-9fa0-d09709ad8205	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:basri-s-acolyte:cast:s1,f:xs:XP:basri-s-acolyte:cast:s1	-	-	-	ae86f6029288	-	258110308247	-	-	2026-11-24	xproof
 92c9aad6-35ec-425d-be7d-393328992820	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92c9aad6-35ec-425d-be7d-393328992820	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:glimmerpost:f0t0:s1,f:xs:XP:glimmerpost:f0t0:s1	-	-	-	d864b561c9cb	-	a5c4841c52ee	-	-	2026-11-24	xproof
 92c9aad6-35ec-425d-be7d-393328992820	land	land	agreed	-	FX	start	2	0	x:xs:XP:glimmerpost:f0t0:s1,f:xs:XP:glimmerpost:f0t0:s1	-	-	-	d864b561c9cb	-	a5c4841c52ee	-	-	2026-11-24	xproof

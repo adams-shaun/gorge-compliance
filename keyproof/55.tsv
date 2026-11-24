@@ -12,10 +12,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 550abd9b-9aae-4812-9bc0-7f131d6dcde8	static#0.0	static#0.0	agreed	-	X	scen	1	0	Untamed Hunger/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 551023a7-9db3-4204-ac64-5847adbafe79	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 551023a7-9db3-4204-ac64-5847adbafe79	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5513b150-c08f-4f3e-8e41-fd7b43d00b78	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5513b150-c08f-4f3e-8e41-fd7b43d00b78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vivien-nature-s-avenger:cast:s1,f:xs:XP:vivien-nature-s-avenger:cast:s1	-	-	-	ae86f6029288	-	5eea77078287	-	-	2026-11-24	xproof
+5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:vivien-nature-s-avenger:cast:s1,f:xs:XP:vivien-nature-s-avenger:cast:s1	-	-	-	ae86f6029288	-	5eea77078287	-	-	2026-11-24	xproof
+5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 55159adc-36f0-4088-8930-5d9b45f76365	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55159adc-36f0-4088-8930-5d9b45f76365	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55187899-c445-48e9-80b9-235eaf42f803	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -44,8 +44,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5539d78c-1acc-46dd-ba6d-cc0cdad6ff44	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:benthic-criminologists:f0t0:s2,f:xs:XP:benthic-criminologists:f0t0:s2	-	-	-	e07cf3a05ba5	-	ec40ec1b2b08	-	-	2026-11-24	xproof
 5539d78c-1acc-46dd-ba6d-cc0cdad6ff44	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Benthic Criminologists/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 553b9606-0519-4b85-b6ae-acc126e537e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-553c2006-e123-406e-ab4a-1d1f67c7468c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-553c2006-e123-406e-ab4a-1d1f67c7468c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+553c2006-e123-406e-ab4a-1d1f67c7468c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eye-collector:cast:s1,f:xs:XP:eye-collector:cast:s1	-	-	-	ae86f6029288	-	cc23df58d4c3	-	-	2026-11-24	xproof
+553c2006-e123-406e-ab4a-1d1f67c7468c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5542afeb-285f-4889-9d09-46ce20d0d189	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5542afeb-285f-4889-9d09-46ce20d0d189	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5542ea4d-34ab-4f89-8894-793a7038f501	cast	cast-resolve	agreed	-	X	scen	1	0	Monstrous Emergence/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 556f127f-6131-4171-b1ed-11420c21d345	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Serpent Specialist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 556f127f-6131-4171-b1ed-11420c21d345	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Serpent Specialist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55722e42-a729-4289-895f-be913398c434	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-55746bf4-86e0-489b-b9dc-eba5f5b401dd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+55746bf4-86e0-489b-b9dc-eba5f5b401dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trapped-in-the-tower:cast:s1,f:xs:XP:trapped-in-the-tower:cast:s1	-	-	-	ae86f6029288	-	a8548aad0430	-	-	2026-11-24	xproof
 557485d9-7537-4297-a589-c29d0f1ecd98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55765934-07be-4f03-a2e8-8292c0b601ae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fatestitcher:cast:s1,f:xs:XP:fatestitcher:cast:s1	-	-	-	8a1b1a193ec0	-	4c36854284cc	-	-	2026-11-24	xproof
 55765934-07be-4f03-a2e8-8292c0b601ae	f0/a0	TapOrUntap	agreed	-	FX	start	2	0	x:xs:XP:fatestitcher:f0a1:s1,f:xs:XP:fatestitcher:f0a1:s1	-	-	-	ae86f6029288	-	4c36854284cc	-	-	2026-11-24	xproof
@@ -97,17 +97,17 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5591efbc-1b2c-489a-b4f3-935c9b6bd71a	cast	cast-resolve	agreed	-	X	scen	1	0	Dai Li Indoctrination/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 559463f8-396f-40e0-9515-a1be6397ca31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 559463f8-396f-40e0-9515-a1be6397ca31	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-559903cd-5cba-47a5-8b5b-7067e393e76a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-559903cd-5cba-47a5-8b5b-7067e393e76a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-559903cd-5cba-47a5-8b5b-7067e393e76a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+559903cd-5cba-47a5-8b5b-7067e393e76a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hydra-s-growth:f0t0:s1,f:xs:XP:hydra-s-growth:f0t0:s1	-	-	-	ae86f6029288	-	14809210a6fb	-	-	2026-11-24	xproof
+559903cd-5cba-47a5-8b5b-7067e393e76a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hydra-s-growth:f0t0:s1,f:xs:XP:hydra-s-growth:f0t0:s1	-	-	-	ae86f6029288	-	14809210a6fb	-	-	2026-11-24	xproof
+559903cd-5cba-47a5-8b5b-7067e393e76a	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5599ddb6-1404-4884-b6ca-c1852a521079	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mark-of-mutiny:cast:s1,f:xs:XP:mark-of-mutiny:cast:s1	-	-	-	8a1b1a193ec0	-	b7156d69c858	-	-	2026-11-24	xproof
 559c9949-faaf-41bc-9349-b6738b4763a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 559c9949-faaf-41bc-9349-b6738b4763a2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55a0a40c-cb40-469d-9bf3-9c33b378f4f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:baloth-null:f0t0:s1,f:xs:XP:baloth-null:f0t0:s1	-	-	-	d864b561c9cb	-	2418ef8e1adf	-	-	2026-11-24	xproof
 55a0a40c-cb40-469d-9bf3-9c33b378f4f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:baloth-null:f0t0:s1,f:xs:XP:baloth-null:f0t0:s1	-	-	-	d864b561c9cb	-	2418ef8e1adf	-	-	2026-11-24	xproof
 55a253f9-f44d-4898-af83-fea68b7b279d	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-55a277b4-575f-463b-913c-7857acad20be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-55a277b4-575f-463b-913c-7857acad20be	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+55a277b4-575f-463b-913c-7857acad20be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tazeem-roilmage:f0t0:s1,f:xs:XP:tazeem-roilmage:f0t0:s1	-	-	-	ae86f6029288	-	4ca3f53a87a2	-	-	2026-11-24	xproof
+55a277b4-575f-463b-913c-7857acad20be	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tazeem-roilmage:f0t0:s1,f:xs:XP:tazeem-roilmage:f0t0:s1	-	-	-	ae86f6029288	-	4ca3f53a87a2	-	-	2026-11-24	xproof
 55a4b186-c6d4-4b08-bf45-481429693948	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:strandwalker:f0t0:s1,f:xs:XP:strandwalker:f0t0:s1	-	-	-	d864b561c9cb	-	b911781ff593	-	-	2026-11-24	xproof
 55a4b186-c6d4-4b08-bf45-481429693948	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55a4b186-c6d4-4b08-bf45-481429693948	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:strandwalker:f0t0:s1,f:xs:XP:strandwalker:f0t0:s1	-	-	-	d864b561c9cb	-	b911781ff593	-	-	2026-11-24	xproof

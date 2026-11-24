@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c04663a-1023-49a5-a0b9-78f24a72fb1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c0520fa-276b-4d21-b4a9-dce1fce59f6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c0520fa-276b-4d21-b4a9-dce1fce59f6b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8c0520fa-276b-4d21-b4a9-dce1fce59f6b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8c0520fa-276b-4d21-b4a9-dce1fce59f6b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8c0520fa-276b-4d21-b4a9-dce1fce59f6b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+8c0520fa-276b-4d21-b4a9-dce1fce59f6b	f0/t1	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8c05e716-b6eb-4f95-866b-7e43a898ebe2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dai-li-agents:f0t0:s1,f:xs:XP:dai-li-agents:f0t0:s1	-	-	-	25696bf19d5b	-	4f2ada59bfdc	-	-	2026-11-24	xproof
 8c05e716-b6eb-4f95-866b-7e43a898ebe2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dai-li-agents:f0t0:s1,f:xs:XP:dai-li-agents:f0t0:s1	-	-	-	25696bf19d5b	-	4f2ada59bfdc	-	-	2026-11-24	xproof
 8c05e716-b6eb-4f95-866b-7e43a898ebe2	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Dai Li Agents/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -73,8 +73,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Professor Dellian Fel/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Professor Dellian Fel/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a3	activate#0.3	agreed	-	X	scen	1	0	Professor Dellian Fel/activate#0.3/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8c601628-b1ed-467b-ba92-8572343147f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8c601628-b1ed-467b-ba92-8572343147f8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8c601628-b1ed-467b-ba92-8572343147f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-gagglemaster:f0t0:s1,f:xs:XP:aven-gagglemaster:f0t0:s1	-	-	-	ae86f6029288	-	edd61b8e3b3b	-	-	2026-11-24	xproof
+8c601628-b1ed-467b-ba92-8572343147f8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aven-gagglemaster:f0t0:s1,f:xs:XP:aven-gagglemaster:f0t0:s1	-	-	-	ae86f6029288	-	edd61b8e3b3b	-	-	2026-11-24	xproof
 8c612741-2b30-43b3-bd3f-7df19662d298	cast	cast-resolve	agreed	-	X	scen	1	0	Case File Auditor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c612741-2b30-43b3-bd3f-7df19662d298	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Case File Auditor/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c612741-2b30-43b3-bd3f-7df19662d298	static#0.0	static#0.0	agreed	-	X	scen	1	0	Case File Auditor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -134,8 +134,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8cadf9c0-9a63-4cde-a6be-0ae86890c831	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Keen Buccaneer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cb36a67-9206-4665-a03f-64f52ba559c4	cast	cast-resolve	agreed	-	X	scen	1	0	Into the Flood Maw/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cb3f047-bd8b-4a34-8a2b-ced2cc0487eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8cb6dbb5-9ea2-4c19-8173-148080fb898e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8cb6dbb5-9ea2-4c19-8173-148080fb898e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8cb6dbb5-9ea2-4c19-8173-148080fb898e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:reverent-hoplite:cast:s1,f:xs:XP:reverent-hoplite:cast:s1	-	-	-	ae86f6029288	-	a9fdd077a57d	-	-	2026-11-24	xproof
+8cb6dbb5-9ea2-4c19-8173-148080fb898e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:reverent-hoplite:cast:s1,f:xs:XP:reverent-hoplite:cast:s1	-	-	-	ae86f6029288	-	a9fdd077a57d	-	-	2026-11-24	xproof
 8cb700bb-daa5-4a26-bb84-e22bc11bdaff	cast	cast-resolve	agreed	-	X	scen	1	0	Test of Identity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cbac2e8-5755-433b-9f42-7fd5c214aab3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8cbac2e8-5755-433b-9f42-7fd5c214aab3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

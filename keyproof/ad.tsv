@@ -77,7 +77,7 @@ ad5e2cb0-00d7-4dad-b20e-23bd41ada398	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 ad5f9a18-89a5-4bcb-9cd7-5399ffd252d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad5f9a18-89a5-4bcb-9cd7-5399ffd252d3	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ad62cd58-fe6f-4844-b3dc-5ba21327fc43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ad62cd58-fe6f-4844-b3dc-5ba21327fc43	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ad62cd58-fe6f-4844-b3dc-5ba21327fc43	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:guul-draz-mucklord:f0t0:s1,f:xs:XP:guul-draz-mucklord:f0t0:s1	-	-	-	ae86f6029288	-	1b80b5604e4f	-	-	2026-11-24	xproof
 ad62e9d6-61bc-485f-a9b8-2ef9ba98a4b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad62e9d6-61bc-485f-a9b8-2ef9ba98a4b0	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 ad643992-eb9f-4a4a-9b74-a5aee2337f30	cast	cast-resolve	agreed	-	FX	scen	2	0	Lo and Li, Twin Tutors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -90,13 +90,13 @@ ad65bb8e-57de-49f3-ba7c-be62cf3fe3df	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 ad65bb8e-57de-49f3-ba7c-be62cf3fe3df	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad65bb8e-57de-49f3-ba7c-be62cf3fe3df	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad66a99b-c7e7-4b2c-8525-299d3609d1df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ad69f48e-c387-4376-a04f-37d3992c7946	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ad69f48e-c387-4376-a04f-37d3992c7946	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ad69f48e-c387-4376-a04f-37d3992c7946	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fierce-witchstalker:f0t0:s1,f:xs:XP:fierce-witchstalker:f0t0:s1	-	-	-	ae86f6029288	-	6de338abd25f	-	-	2026-11-24	xproof
+ad69f48e-c387-4376-a04f-37d3992c7946	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fierce-witchstalker:f0t0:s1,f:xs:XP:fierce-witchstalker:f0t0:s1	-	-	-	ae86f6029288	-	6de338abd25f	-	-	2026-11-24	xproof
 ad6a2776-801f-4743-8268-6d654122171e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad6a2776-801f-4743-8268-6d654122171e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad6bdd24-5a32-4046-83ee-2fe51bf8bb7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad70144e-16e4-4604-9e6d-cb287f67ddb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ad70144e-16e4-4604-9e6d-cb287f67ddb5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ad70144e-16e4-4604-9e6d-cb287f67ddb5	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ad73e5eb-197c-45a3-9d20-a406ba126c79	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad75efdb-3e36-4253-be47-1df5a3cf8204	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad75efdb-3e36-4253-be47-1df5a3cf8204	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

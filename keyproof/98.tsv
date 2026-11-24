@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9809d975-7ef8-4946-9041-607c4e954b13	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9809d975-7ef8-4946-9041-607c4e954b13	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 980a0d4d-b070-46c1-be8d-31bdda0d1c33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-980a0d4d-b070-46c1-be8d-31bdda0d1c33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+980a0d4d-b070-46c1-be8d-31bdda0d1c33	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 980a9957-6b52-45c6-b847-f84974d5a653	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 980affa7-6308-4acd-af64-f804e574a89b	cast	cast-resolve	agreed	-	FX	scen	2	0	Moonglove Extractor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 980affa7-6308-4acd-af64-f804e574a89b	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Moonglove Extractor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -35,7 +35,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9811d1fa-1398-49a2-bcbe-0e40d9779ef1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9812bdf9-98b6-4b4d-8381-a7bbb25069d8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 981b0e21-e5e6-4a1e-bfde-679d56623f7f	cast	cast	agreed	-	F	start	2	0	f:xs:XP:ad-nauseam:cast:s1	-	-	-	8a1b1a193ec0	-	70a552353f82	-	-	2026-11-24	xproof
-9825dab8-ca1a-44ea-b1d7-77c66f00351f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9825dab8-ca1a-44ea-b1d7-77c66f00351f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:basri-s-aegis:cast:s1,f:xs:XP:basri-s-aegis:cast:s1	-	-	-	ae86f6029288	-	4623f5decf89	-	-	2026-11-24	xproof
 98266582-12fd-4a7b-a9bb-e9cc4370ed28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98273b0d-2b41-486b-9498-30a692c03982	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9827d01d-c822-4f1b-9042-a2092c72c914	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -192,8 +192,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98deac9e-28ea-4d11-8d75-833bf6d66e6e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98e042de-05f4-4e2e-b12f-375b905e6600	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98e042de-05f4-4e2e-b12f-375b905e6600	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98e0b1a8-902d-4285-b13c-e63f2e1692f1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98e0b1a8-902d-4285-b13c-e63f2e1692f1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+98e0b1a8-902d-4285-b13c-e63f2e1692f1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:kinetic-augur:cast:s1,f:xs:XP:kinetic-augur:cast:s1	-	-	-	ae86f6029288	-	f29fd974fbed	-	-	2026-11-24	xproof
+98e0b1a8-902d-4285-b13c-e63f2e1692f1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:kinetic-augur:cast:s1,f:xs:XP:kinetic-augur:cast:s1	-	-	-	ae86f6029288	-	f29fd974fbed	-	-	2026-11-24	xproof
 98e36c6e-a868-4679-a5b5-6f02097f560b	cast	cast-resolve	agreed	-	X	scen	1	0	Serpent of the Pass/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98e36c6e-a868-4679-a5b5-6f02097f560b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Serpent of the Pass/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98e36c6e-a868-4679-a5b5-6f02097f560b	static#0.1	static#0.1	agreed	-	X	scen	1	0	Serpent of the Pass/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

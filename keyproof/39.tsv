@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 397964db-465a-407d-9dc7-d0a4944473ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enhanced-awareness:cast:s1,f:xs:XP:enhanced-awareness:cast:s1	-	-	-	d864b561c9cb	-	554af2f9d78f	-	-	2026-11-24	xproof
 397b9dcf-690a-4a58-8637-bb9baab7cc2f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 397b9dcf-690a-4a58-8637-bb9baab7cc2f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-397b9dcf-690a-4a58-8637-bb9baab7cc2f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+397b9dcf-690a-4a58-8637-bb9baab7cc2f	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 397df813-c759-4246-8def-122c7ff82d88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 397e0d30-a3bf-4b33-98b6-b880f8de5cbb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 397e0d30-a3bf-4b33-98b6-b880f8de5cbb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -161,7 +161,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39b4a47a-df51-4bd9-9a20-43ac80a5d352	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:balustrade-spy:f0t0:s1,f:xs:XP:balustrade-spy:f0t0:s1	-	-	-	d864b561c9cb	-	32c8c332b3e8	-	-	2026-11-24	xproof
 39b51f62-8421-42d1-86d3-74fd6e6f31a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39b51f62-8421-42d1-86d3-74fd6e6f31a2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39b51f62-8421-42d1-86d3-74fd6e6f31a2	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+39b51f62-8421-42d1-86d3-74fd6e6f31a2	f0/a1	Mill	agreed	-	FX	start	2	0	x:xs:XP:skull-prophet:f0a0:s1,f:xs:XP:skull-prophet:f0a0:s1	-	-	-	ae86f6029288	-	f99ff86d573e	-	-	2026-11-24	xproof
 39b7f3cc-e229-4cdf-9d85-db0b17203d7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39bb051f-1ca7-4d9b-b33b-7f559f816e3e	cast	cast-resolve	agreed	-	X	scen	1	0	Serra Redeemer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 39bb051f-1ca7-4d9b-b33b-7f559f816e3e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Serra Redeemer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

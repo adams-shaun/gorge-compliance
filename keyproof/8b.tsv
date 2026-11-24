@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b0ae835-df89-4b02-9fe6-0ae2f66405bd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b119579-38e1-4509-9dcb-019d5a160ac2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b119b69-4794-443e-aa13-747c125b5b1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b119b69-4794-443e-aa13-747c125b5b1b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8b119b69-4794-443e-aa13-747c125b5b1b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:treeshaker-chimera:f0t0:s1,f:xs:XP:treeshaker-chimera:f0t0:s1	-	-	-	ae86f6029288	-	5725ba71f031	-	-	2026-11-24	xproof
 8b1351e6-165e-4ca3-96d5-4774b3176362	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b1351e6-165e-4ca3-96d5-4774b3176362	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:leonin-warleader:f0t0:s1,f:xs:XP:leonin-warleader:f0t0:s1	-	-	-	d864b561c9cb	-	c87ca2f2f73c	-	-	2026-11-24	xproof
 8b13ec4d-812a-48b0-8a64-6847a694a03a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:exosuit-savior:f0t0:s2,f:xs:XP:exosuit-savior:f0t0:s2	-	-	-	267e485f6204	-	d8f5cdbe4c1c	-	-	2026-11-24	xproof
@@ -24,9 +24,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b153452-b4f2-4310-99e2-c729f28be6b9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Nimble Brigand/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b153452-b4f2-4310-99e2-c729f28be6b9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nimble Brigand/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b153452-b4f2-4310-99e2-c729f28be6b9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Nimble Brigand/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8b1aa532-4f19-407e-83a5-13b3160ad8c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8b1aa532-4f19-407e-83a5-13b3160ad8c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chittering-witch:f0t0:s1,f:xs:XP:chittering-witch:f0t0:s1	-	-	-	ae86f6029288	-	c8dfc474ca91	-	-	2026-11-24	xproof
 8b1aa532-4f19-407e-83a5-13b3160ad8c2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b1aa532-4f19-407e-83a5-13b3160ad8c2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8b1aa532-4f19-407e-83a5-13b3160ad8c2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chittering-witch:f0t0:s1,f:xs:XP:chittering-witch:f0t0:s1	-	-	-	ae86f6029288	-	c8dfc474ca91	-	-	2026-11-24	xproof
 8b1e6b7c-892d-4058-b183-9121cdd623f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b1e6b7c-892d-4058-b183-9121cdd623f0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b1fc306-0d8f-4edb-b197-2e99f10c599e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -40,10 +40,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b205480-b1fb-490c-b1c9-cf5cc3c5acdb	static#0.1	static#0.1	agreed	-	X	scen	1	0	Sandman, Shifting Scoundrel/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b20d6f4-6322-4435-92d5-acaae74774f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b20d6f4-6322-4435-92d5-acaae74774f4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b21062e-97b0-4967-96df-30e8309f4fba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b21062e-97b0-4967-96df-30e8309f4fba	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b21062e-97b0-4967-96df-30e8309f4fba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b21062e-97b0-4967-96df-30e8309f4fba	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8b21062e-97b0-4967-96df-30e8309f4fba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kogla-the-titan-ape:f0t0:s1,f:xs:XP:kogla-the-titan-ape:f0t0:s1	-	-	-	ae86f6029288	-	3d5a092615bf	-	-	2026-11-24	xproof
+8b21062e-97b0-4967-96df-30e8309f4fba	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:kogla-the-titan-ape:f0a0:s1,f:xs:XP:kogla-the-titan-ape:f0a0:s1	-	-	-	ae86f6029288	-	3d5a092615bf	-	-	2026-11-24	xproof
+8b21062e-97b0-4967-96df-30e8309f4fba	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kogla-the-titan-ape:f0t0:s1,f:xs:XP:kogla-the-titan-ape:f0t0:s1	-	-	-	ae86f6029288	-	3d5a092615bf	-	-	2026-11-24	xproof
+8b21062e-97b0-4967-96df-30e8309f4fba	f0/t1	Attacks	agreed	-	FX	start	4	0	x:xs:XP:kogla-the-titan-ape:f0a0:s1,f:xs:XP:kogla-the-titan-ape:f0a0:s1	-	-	-	ae86f6029288	-	3d5a092615bf	-	-	2026-11-24	xproof
 8b21146d-3e92-46e7-b5d9-8240fba5088e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b21146d-3e92-46e7-b5d9-8240fba5088e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b21146d-3e92-46e7-b5d9-8240fba5088e	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b25f353-0798-4a03-a928-6a701a919468	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8b27326f-e7b8-4a4d-b589-df459246d19a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b27326f-e7b8-4a4d-b589-df459246d19a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b27326f-e7b8-4a4d-b589-df459246d19a	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8b27326f-e7b8-4a4d-b589-df459246d19a	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:shadowspear:f0a1:s1,f:xs:XP:shadowspear:f0a1:s1	-	-	-	ae86f6029288	-	e6b4e648fff4	-	-	2026-11-24	xproof
 8b2ba6f8-1060-4167-9941-3ab7bd4e0ca8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b2ba6f8-1060-4167-9941-3ab7bd4e0ca8	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 8b34d1df-4024-497d-bd28-a7caa8c3fa24	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sunblast-angel:cast:s1,f:xs:XP:sunblast-angel:cast:s1	-	-	-	d864b561c9cb	-	eb12e5fb142a	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8bcbae66-1854-480e-a449-33e5389610ab	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sapling Nursery/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 8bcbae66-1854-480e-a449-33e5389610ab	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sapling Nursery/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 8bcbae66-1854-480e-a449-33e5389610ab	static#0.0	static#0.0	agreed	-	X	scen	1	0	Sapling Nursery/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-8bcdb107-3827-4280-9e5e-7f1e771ef0c5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8bcdb107-3827-4280-9e5e-7f1e771ef0c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:helica-glider:cast:s1,f:xs:XP:helica-glider:cast:s1	-	-	-	ae86f6029288	-	4cb064729210	-	-	2026-11-24	xproof
 8bd2af55-5a48-4300-a893-ae6cd548db24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bd2af55-5a48-4300-a893-ae6cd548db24	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bd301ea-32f0-4c3a-a215-c04b31fbdc7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

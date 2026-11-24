@@ -102,8 +102,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 185c70c1-8403-4ae5-b45d-3679d4ee092a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rockfall Vale/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 185c70c1-8403-4ae5-b45d-3679d4ee092a	land	play-land	agreed	-	X	scen	1	0	Rockfall Vale/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 185d6356-8f8d-4b32-8259-b4eb0a95866c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-185d6356-8f8d-4b32-8259-b4eb0a95866c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-185d6356-8f8d-4b32-8259-b4eb0a95866c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+185d6356-8f8d-4b32-8259-b4eb0a95866c	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+185d6356-8f8d-4b32-8259-b4eb0a95866c	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 185db9c7-3936-473c-9220-ae255527aaf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 185db9c7-3936-473c-9220-ae255527aaf9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 185e0892-194f-43ac-853f-1e142bf8476e	cast	cast-resolve	agreed	-	FX	scen	2	0	Effortless Master/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 188e1516-5766-406b-aacb-468f2d9a530a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 188e1516-5766-406b-aacb-468f2d9a530a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 189131b7-ed59-4750-a4ed-453e4497a5c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-189131b7-ed59-4750-a4ed-453e4497a5c8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+189131b7-ed59-4750-a4ed-453e4497a5c8	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 18932bb9-e054-4ad6-80c8-d2f177312da0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18932bb9-e054-4ad6-80c8-d2f177312da0	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 18932bb9-e054-4ad6-80c8-d2f177312da0	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18a45b81-1946-4be6-8f2c-8c21d11c86f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flowstone-embrace:cast:s1,f:xs:XP:flowstone-embrace:cast:s1	-	-	-	d864b561c9cb	-	bd8c65cf7632	-	-	2026-11-24	xproof
 18a45b81-1946-4be6-8f2c-8c21d11c86f8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flowstone-embrace:cast:s1,f:xs:XP:flowstone-embrace:cast:s1	-	-	-	d864b561c9cb	-	bd8c65cf7632	-	-	2026-11-24	xproof
 18a5e71e-eb75-4ac7-bedd-2220aaa24f78	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18a5e71e-eb75-4ac7-bedd-2220aaa24f78	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18a5e71e-eb75-4ac7-bedd-2220aaa24f78	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 18a5fe34-0c97-486c-b09a-80535a99e982	cast	cast-resolve	agreed	-	X	scen	1	0	Cactarantula/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18a5fe34-0c97-486c-b09a-80535a99e982	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cactarantula/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18a5fe34-0c97-486c-b09a-80535a99e982	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cactarantula/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

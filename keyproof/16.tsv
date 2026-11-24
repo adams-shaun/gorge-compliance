@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1601e553-31c2-4e04-9f0c-bc17e49eeff7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1601e553-31c2-4e04-9f0c-bc17e49eeff7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1601e553-31c2-4e04-9f0c-bc17e49eeff7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1601e553-31c2-4e04-9f0c-bc17e49eeff7	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1601e553-31c2-4e04-9f0c-bc17e49eeff7	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1602f8c7-fe00-4bc9-b4fc-b26b7223ac75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stomping Ground/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Stomping Ground/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16069935-4aeb-481f-98f2-46387775540f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16128b90-9b81-476e-8999-3ef498728c39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16128b90-9b81-476e-8999-3ef498728c39	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-1612a08f-fc1f-45cf-ae03-5f021a46869d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1612a08f-fc1f-45cf-ae03-5f021a46869d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:in-the-trenches:cast:s1,f:xs:XP:in-the-trenches:cast:s1	-	-	-	ae86f6029288	-	d41cd191bc54	-	-	2026-11-24	xproof
 1612a08f-fc1f-45cf-ae03-5f021a46869d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16156274-8dc0-439c-94c4-e8c89bbb5687	cast	cast-resolve	agreed	-	FX	scen	2	0	Loading Zone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16182e01-22ff-4786-985d-919b47c4aa4d	cast	cast-resolve	agreed	-	X	scen	1	0	Matzalantli, the Great Door/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -4,7 +4,7 @@ ee00a42d-6ee4-4e46-92d6-62e8e5910880	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ee00a42d-6ee4-4e46-92d6-62e8e5910880	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee05fc58-1356-4b2f-b9ce-bda8cc716aee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee08435b-a2c1-491a-87cb-e60789b09c25	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee08435b-a2c1-491a-87cb-e60789b09c25	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ee08435b-a2c1-491a-87cb-e60789b09c25	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ee0a59ba-8d34-43d5-b9a5-42015588e3d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee0f883f-d7c9-4acf-a78f-f733b6f268d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee0f883f-d7c9-4acf-a78f-f733b6f268d3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -182,7 +182,7 @@ eebe3fd6-afd0-4bb3-9e8f-c737497dae33	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:gli
 eebe3fd6-afd0-4bb3-9e8f-c737497dae33	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Glint Weaver/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eebe3fd6-afd0-4bb3-9e8f-c737497dae33	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Glint Weaver/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eebe3fd6-afd0-4bb3-9e8f-c737497dae33	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:glint-weaver:f0t0:s2,f:xs:XP:glint-weaver:f0t0:s2	-	-	-	e07cf3a05ba5	-	568819e98d77	-	-	2026-11-24	xproof
-eec31fe0-a633-4424-84d2-90fe88016310	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+eec31fe0-a633-4424-84d2-90fe88016310	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:embereth-paladin:cast:s1,f:xs:XP:embereth-paladin:cast:s1	-	-	-	ae86f6029288	-	278a5d015ef1	-	-	2026-11-24	xproof
 eec55307-8525-4dae-a030-d210f3895138	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eec55307-8525-4dae-a030-d210f3895138	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eec72bcf-ccbc-43fc-8bdd-7bf4faa1fad7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -226,8 +226,8 @@ eef63cb4-96de-4c9d-84aa-62a3b52a3c7f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:inv
 eef63cb4-96de-4c9d-84aa-62a3b52a3c7f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:invasion-tactics:f0t0:s2,f:xs:XP:invasion-tactics:f0t0:s2	-	-	-	267e485f6204	-	13965631688f	-	-	2026-11-24	xproof
 eef63cb4-96de-4c9d-84aa-62a3b52a3c7f	f0/t1	DamageDoneOnce	agreed	-	FX	start	1	0	x:xs:XP:invasion-tactics:f0t0:s2,f:xs:XP:invasion-tactics:f0t0:s2	-	-	-	267e485f6204	-	13965631688f	-	-	2026-11-24	xproof
 eef75645-1aa5-4085-8cbd-8b6fec2cbdc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eef75645-1aa5-4085-8cbd-8b6fec2cbdc2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eef75645-1aa5-4085-8cbd-8b6fec2cbdc2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+eef75645-1aa5-4085-8cbd-8b6fec2cbdc2	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:underworld-sentinel:f0t0:s1,f:xs:XP:underworld-sentinel:f0t0:s1	-	-	-	ae86f6029288	-	7205db24e0cf	-	-	2026-11-24	xproof
+eef75645-1aa5-4085-8cbd-8b6fec2cbdc2	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:underworld-sentinel:f0t1:s1,f:xs:XP:underworld-sentinel:f0t1:s1	-	-	-	ae86f6029288	-	7205db24e0cf	-	-	2026-11-24	xproof
 eef931d8-4048-4c33-bd8c-0f67d1083ee6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eef931d8-4048-4c33-bd8c-0f67d1083ee6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eefa9a94-9915-4dcd-b5dc-7f8e9aa621a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

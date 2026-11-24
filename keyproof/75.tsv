@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7579e1a2-2747-4e37-9a7a-c13b62190195	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7579f57d-c76e-4703-a030-34fb7160cb23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7579f57d-c76e-4703-a030-34fb7160cb23	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7579f57d-c76e-4703-a030-34fb7160cb23	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7579f57d-c76e-4703-a030-34fb7160cb23	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 757eadac-dd29-4a7f-8683-5bc823168326	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75810ce7-328c-4512-8e36-fd3badbd3997	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75810ce7-328c-4512-8e36-fd3badbd3997	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75a7fdd4-046a-433b-b16f-a0424a05c904	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75a7fdd4-046a-433b-b16f-a0424a05c904	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75ae9b87-7137-47a0-b3e1-8915ccd0edf1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75ae9b87-7137-47a0-b3e1-8915ccd0edf1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+75ae9b87-7137-47a0-b3e1-8915ccd0edf1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 75af4154-d873-45d0-9ff2-c977169012a3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75b235d3-595a-4859-be45-9559d8445db5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Selesnya Guildgate/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 75b235d3-595a-4859-be45-9559d8445db5	land	play-land	agreed	-	X	scen	1	0	Selesnya Guildgate/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75c81ce4-ca1d-464a-bb39-e568f8ebf71f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75c81ce4-ca1d-464a-bb39-e568f8ebf71f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 75d38954-6148-4d95-bf4b-cb82efcbe8df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75d38954-6148-4d95-bf4b-cb82efcbe8df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+75d38954-6148-4d95-bf4b-cb82efcbe8df	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 75d4f61a-8276-43ad-99e6-0d756a597e4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75d667ec-86f4-4850-a3b6-e7a9fc7053b0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:army-of-the-damned:cast:s1,f:xs:XP:army-of-the-damned:cast:s1	-	-	-	d864b561c9cb	-	8b2492e6f178	-	-	2026-11-24	xproof
 75d7f864-1240-43f5-8dd5-a5f7577bfa5b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

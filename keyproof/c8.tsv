@@ -66,10 +66,10 @@ c857de66-f4e0-4e97-ad01-fac623af8225	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 c857de66-f4e0-4e97-ad01-fac623af8225	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c85987b4-090e-472e-b9af-1114cce56ffb	cast	cast-resolve	agreed	-	X	scen	1	0	Stromkirk Bloodthief/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c85987b4-090e-472e-b9af-1114cce56ffb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Stromkirk Bloodthief/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c85d824b-c190-4d04-ab99-918ad0e6516c	cast	cast-resolve	agreed	-	X	scen	1	0	Endurance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+c85d824b-c190-4d04-ab99-918ad0e6516c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:endurance:f0t0:s1	-	-	-	ae86f6029288	-	5ff7744b0874	-	-	2026-11-24	xproof
 c85d824b-c190-4d04-ab99-918ad0e6516c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Endurance/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 c85d824b-c190-4d04-ab99-918ad0e6516c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Endurance/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-c85d824b-c190-4d04-ab99-918ad0e6516c	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c85d824b-c190-4d04-ab99-918ad0e6516c	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:endurance:f0t0:s1	-	-	-	ae86f6029288	-	5ff7744b0874	-	-	2026-11-24	xproof
 c8625113-0ce4-4454-83a1-25c31b8bfb9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c8625113-0ce4-4454-83a1-25c31b8bfb9a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c867a778-97ef-4872-b890-b088b96a1281	cast	cast-resolve	agreed	-	FX	scen	2	0	Jennifer Walters/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -156,13 +156,13 @@ c8c5cd28-4f27-424d-92bc-e7d6f15a5f9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c8c5cd28-4f27-424d-92bc-e7d6f15a5f9f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c8c632ab-14ec-44e1-ac00-81d48336320d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Neglected Manor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c8c632ab-14ec-44e1-ac00-81d48336320d	land	play-land	agreed	-	X	scen	1	0	Neglected Manor/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c8c6924e-9af8-4212-be28-b0b4eaa4c7d8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c8c6924e-9af8-4212-be28-b0b4eaa4c7d8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c8c6924e-9af8-4212-be28-b0b4eaa4c7d8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warden-of-the-woods:cast:s1,f:xs:XP:warden-of-the-woods:cast:s1	-	-	-	ae86f6029288	-	c7deb2b1a936	-	-	2026-11-24	xproof
+c8c6924e-9af8-4212-be28-b0b4eaa4c7d8	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c8c88c33-b8df-4b19-b12c-79c9709af8f1	cast	cast-resolve	agreed	-	X	scen	1	0	Mintstrosity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c8c88c33-b8df-4b19-b12c-79c9709af8f1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mintstrosity/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c8ca2523-0511-4415-b85e-7834d3cb1d0c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:part-the-veil:cast:s1,f:xs:XP:part-the-veil:cast:s1	-	-	-	64a08ba7d913	-	ab130cf67ab7	-	-	2026-11-24	xproof
 c8ca3116-e0f0-4e27-aa0f-99ed85927040	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c8ca3116-e0f0-4e27-aa0f-99ed85927040	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c8ca3116-e0f0-4e27-aa0f-99ed85927040	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c8cdabc4-e147-491b-9c44-96e57f6ec3b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:waking-the-trolls:cast:s1,f:xs:XP:waking-the-trolls:cast:s1	-	-	-	d864b561c9cb	-	768f6d0bf38d	-	-	2026-11-24	xproof
 c8cdc08a-975b-475f-8e30-85d61f6f3a9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c8cdc08a-975b-475f-8e30-85d61f6f3a9b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -74,8 +74,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91508175-fa1d-4c51-99d4-036a2de6abb0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thalia-s-lieutenant:f0t0:s1,f:xs:XP:thalia-s-lieutenant:f0t0:s1	-	-	-	d864b561c9cb	-	09aabf68fbd5	-	-	2026-11-24	xproof
 91508175-fa1d-4c51-99d4-036a2de6abb0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thalia-s-lieutenant:f0t0:s1,f:xs:XP:thalia-s-lieutenant:f0t0:s1	-	-	-	d864b561c9cb	-	09aabf68fbd5	-	-	2026-11-24	xproof
 91508175-fa1d-4c51-99d4-036a2de6abb0	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-915091d5-3f58-4429-8f3a-0fd7aef87afe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-915091d5-3f58-4429-8f3a-0fd7aef87afe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+915091d5-3f58-4429-8f3a-0fd7aef87afe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enigmatic-incarnation:cast:s1,f:xs:XP:enigmatic-incarnation:cast:s1	-	-	-	ae86f6029288	-	41df77cedff2	-	-	2026-11-24	xproof
+915091d5-3f58-4429-8f3a-0fd7aef87afe	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:enigmatic-incarnation:cast:s1,f:xs:XP:enigmatic-incarnation:cast:s1	-	-	-	ae86f6029288	-	41df77cedff2	-	-	2026-11-24	xproof
 91585b64-f10d-47c6-a563-384ceb944710	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91596da5-5b1a-430c-a878-7757ae366b6b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 915aa871-4c5e-4799-9a07-d7b855df4e7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -98,8 +98,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 916cb70f-3b06-48ed-972d-75f805aa0892	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Brineborn Cutthroat/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 916d2a0d-1c3e-4102-958d-524b6b4df509	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 916db499-7f0a-45f7-8abe-94818a53e494	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9171248e-045e-4ed4-aa06-eea3ae3d8df0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9171248e-045e-4ed4-aa06-eea3ae3d8df0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9171248e-045e-4ed4-aa06-eea3ae3d8df0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rowan-s-stalwarts:cast:s1,f:xs:XP:rowan-s-stalwarts:cast:s1	-	-	-	ae86f6029288	-	f07275f6ee1c	-	-	2026-11-24	xproof
+9171248e-045e-4ed4-aa06-eea3ae3d8df0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rowan-s-stalwarts:cast:s1,f:xs:XP:rowan-s-stalwarts:cast:s1	-	-	-	ae86f6029288	-	f07275f6ee1c	-	-	2026-11-24	xproof
 91740570-1a97-4513-8af9-b32c363daf15	cast	cast-resolve	agreed	-	FX	scen	2	0	Pillage the Bog/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91760bdf-a82a-4f3d-b925-3bc81ffbd41f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 917652c7-ac12-4cd7-ab2d-f2260a620d02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,9 +160,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Generous Plunderer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 91c83b1e-32d9-4bb4-9a71-05fbb0cb8134	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91c83b1e-32d9-4bb4-9a71-05fbb0cb8134	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:niambi-esteemed-speaker:f0t0:s1,f:xs:XP:niambi-esteemed-speaker:f0t0:s1	-	-	-	ae86f6029288	-	2519df10a46f	-	-	2026-11-24	xproof
+91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:niambi-esteemed-speaker:f0t0:s1,f:xs:XP:niambi-esteemed-speaker:f0t0:s1	-	-	-	ae86f6029288	-	2519df10a46f	-	-	2026-11-24	xproof
 91cac048-90ca-41bc-9177-56c78453c4a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91d01119-9b3e-4629-8cf0-bbca2c19a7cc	cast	cast-resolve	agreed	-	X	scen	1	0	Rampaging Ceratops/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91d01119-9b3e-4629-8cf0-bbca2c19a7cc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rampaging Ceratops/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -197,7 +197,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91f7672c-3090-48f4-8586-0426341c3159	static#0.0	static#0.0	agreed	-	X	scen	1	0	Suspicious Detonation/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91f95d83-3637-4cf8-af6c-56bc4e4b2591	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91fbb25b-8521-483f-88b0-77778d25f7fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91fbb25b-8521-483f-88b0-77778d25f7fd	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91fbb25b-8521-483f-88b0-77778d25f7fd	f0/a1	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:castle-embereth:f0a1:s1,f:xs:XP:castle-embereth:f0a1:s1	-	-	-	ae86f6029288	-	ba02079653fc	-	-	2026-11-24	xproof
 91fbb25b-8521-483f-88b0-77778d25f7fd	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91fbffd1-0886-45fa-bf3e-4c9864458431	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91fbffd1-0886-45fa-bf3e-4c9864458431	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

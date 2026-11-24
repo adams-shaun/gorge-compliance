@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9924c189-3c82-431a-b570-7805b2a406f0	cast	cast-resolve	agreed	-	X	scen	1	0	Dáin Ironfoot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9924c189-3c82-431a-b570-7805b2a406f0	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Dáin Ironfoot/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99262e50-94c1-4796-a7bf-11d7b6164839	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-99262e50-94c1-4796-a7bf-11d7b6164839	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+99262e50-94c1-4796-a7bf-11d7b6164839	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:paired-tactician:f0t0:s1,f:xs:XP:paired-tactician:f0t0:s1	-	-	-	ae86f6029288	-	b617a635a1f4	-	-	2026-11-24	xproof
 9928773d-3f35-4b0e-965d-4233e04398fb	cast	cast-resolve	agreed	-	FX	scen	2	0	Hermitic Herbalist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9928773d-3f35-4b0e-965d-4233e04398fb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hermitic Herbalist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9928773d-3f35-4b0e-965d-4233e04398fb	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hermitic Herbalist/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -60,16 +60,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 993b7b94-ed06-422d-9c7e-52a74ce9d045	cast	cast-resolve	agreed	-	X	scen	1	0	Derelict Attic/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 993b7b94-ed06-422d-9c7e-52a74ce9d045	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Derelict Attic/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 993b7b94-ed06-422d-9c7e-52a74ce9d045	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Derelict Attic/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-993b92f4-4160-4171-9e67-90dc935030fe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+993b92f4-4160-4171-9e67-90dc935030fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cleansing-wildfire:cast:s1,f:xs:XP:cleansing-wildfire:cast:s1	-	-	-	ae86f6029288	-	686ecc4932c4	-	-	2026-11-24	xproof
 993e41e6-0643-4a1f-8ada-b7a4aae486d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 993e41e6-0643-4a1f-8ada-b7a4aae486d9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99419378-8a23-44f3-aebe-e62d6e20e877	cast	cast-resolve	agreed	-	X	scen	1	0	Mysterio's Phantasm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99419378-8a23-44f3-aebe-e62d6e20e877	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mysterio's Phantasm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99419378-8a23-44f3-aebe-e62d6e20e877	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mysterio's Phantasm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99419378-8a23-44f3-aebe-e62d6e20e877	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mysterio's Phantasm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-99422efb-3b44-4025-ad1b-388fc48a669a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-99422efb-3b44-4025-ad1b-388fc48a669a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-99422efb-3b44-4025-ad1b-388fc48a669a	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+99422efb-3b44-4025-ad1b-388fc48a669a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lochmere-serpent:cast:s1,f:xs:XP:lochmere-serpent:cast:s1	-	-	-	ae86f6029288	-	f163e96b8cb9	-	-	2026-11-24	xproof
+99422efb-3b44-4025-ad1b-388fc48a669a	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+99422efb-3b44-4025-ad1b-388fc48a669a	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:lochmere-serpent:f0a2:s1,f:xs:XP:lochmere-serpent:f0a2:s1	-	-	-	ae86f6029288	-	f163e96b8cb9	-	-	2026-11-24	xproof
 99422efb-3b44-4025-ad1b-388fc48a669a	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99427ebe-c00d-4206-84ca-9764f6e952c6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99473461-3c6f-4f7f-8ba2-d6c090ddb567	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99bba323-b5a4-4ff3-8ad1-2a19ed119069	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 99bc739e-c745-47d8-8401-2f34b6becd85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99c13f8d-7f18-48ce-86da-c74ddb6c1205	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-99c13f8d-7f18-48ce-86da-c74ddb6c1205	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+99c13f8d-7f18-48ce-86da-c74ddb6c1205	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 99c3a315-db53-4292-9d31-1efd791d3a13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99c3a315-db53-4292-9d31-1efd791d3a13	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99c5630e-cc04-4203-9006-3bc6a6807762	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:malamet-scythe:f0t0:s2,f:xs:XP:malamet-scythe:f0t0:s2	-	-	-	e07cf3a05ba5	-	ed8bcac0f0a4	-	-	2026-11-24	xproof
@@ -179,7 +179,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99e96711-90ea-4f6b-a92d-d8ddd06e8750	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 99eaac39-28d4-4af7-984b-f75fd37902ed	cast	cast-resolve	agreed	-	X	scen	1	0	Break Out/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99eb5cda-684d-4f6c-bc34-1f03c8797150	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-99ed6e18-7f14-4ea8-baee-ad6c081388ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+99ed6e18-7f14-4ea8-baee-ad6c081388ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:predatory-wurm:cast:s1,f:xs:XP:predatory-wurm:cast:s1	-	-	-	ae86f6029288	-	687322b619ae	-	-	2026-11-24	xproof
 99eff6e9-5911-4f89-bad1-0888067a7783	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99eff6e9-5911-4f89-bad1-0888067a7783	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99f2e195-5da5-4239-87e0-ed552643e7b5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 d6005e47-d545-4c16-b54a-bfe1dde61a98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6005e47-d545-4c16-b54a-bfe1dde61a98	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d601a28d-a02f-45eb-9dab-a3cf50a87ca4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d601a28d-a02f-45eb-9dab-a3cf50a87ca4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d601a28d-a02f-45eb-9dab-a3cf50a87ca4	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d6026309-aae9-43e7-938b-69db7af7139c	cast	cast-resolve	agreed	-	X	scen	1	0	Intrepid Paleontologist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6026309-aae9-43e7-938b-69db7af7139c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Intrepid Paleontologist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6026309-aae9-43e7-938b-69db7af7139c	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Intrepid Paleontologist/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ d69f3aaf-8462-432d-afaf-4176ac04962b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d69f3aaf-8462-432d-afaf-4176ac04962b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6a03a52-7e85-46de-920c-93a3f6479c4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6a03a52-7e85-46de-920c-93a3f6479c4c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d6a03a52-7e85-46de-920c-93a3f6479c4c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d6a03a52-7e85-46de-920c-93a3f6479c4c	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d6a767c2-8bc8-4686-899a-0ba3a525977a	cast	cast-resolve	agreed	-	X	scen	1	0	Tanglespan Lookout/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6a767c2-8bc8-4686-899a-0ba3a525977a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tanglespan Lookout/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6a837d0-d4f9-45ed-bbd7-5e37a9ca3b56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruin-raider:cast:s1,f:xs:XP:ruin-raider:cast:s1	-	-	-	d864b561c9cb	-	47dd9e2054f8	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ d6cba688-faff-4d9f-8148-37d389fa5fb3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d6cba688-faff-4d9f-8148-37d389fa5fb3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6cd8c51-dd5b-4037-b6ae-1776e3743338	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rootgrapple:cast:s1,f:xs:XP:rootgrapple:cast:s1	-	-	-	d864b561c9cb	-	07d1a2bd6367	-	-	2026-11-24	xproof
 d6d72f5f-8f5d-4180-b514-f22ff5482902	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d6d72f5f-8f5d-4180-b514-f22ff5482902	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d6d72f5f-8f5d-4180-b514-f22ff5482902	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d6d7faa8-ecc9-408b-9c46-a0f62c74f567	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6d83a51-9d57-44a7-aae3-a96d43ec5ac8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:guac-marshmallow-pizza:f0t0:s2,f:xs:XP:guac-marshmallow-pizza:f0t0:s2	-	-	-	267e485f6204	-	c60d5c510371	-	-	2026-11-24	xproof
 d6d83a51-9d57-44a7-aae3-a96d43ec5ac8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Guac & Marshmallow Pizza/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

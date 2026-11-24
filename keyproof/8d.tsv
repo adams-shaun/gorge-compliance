@@ -48,7 +48,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d579f04-b494-41a1-ba7c-b9779f75b818	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8d5a8513-0728-46ff-be72-3aefa07c7658	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d5a8513-0728-46ff-be72-3aefa07c7658	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-8d6ad0a0-3b71-4fab-8874-470285c39299	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8d6ad0a0-3b71-4fab-8874-470285c39299	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fruit-of-tizerus:cast:s1,f:xs:XP:fruit-of-tizerus:cast:s1	-	-	-	ae86f6029288	-	f93859e348af	-	-	2026-11-24	xproof
 8d6e39b0-a190-40a0-a8e1-ee82f477376f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d708573-10b8-44fb-b61b-9ad65e3eb465	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d708573-10b8-44fb-b61b-9ad65e3eb465	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d7cf56c-94fd-47d8-9e0f-cd3163688983	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d7cf56c-94fd-47d8-9e0f-cd3163688983	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d83dfb3-5662-4109-b465-bf5f257e58a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d83dfb3-5662-4109-b465-bf5f257e58a5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8d83dfb3-5662-4109-b465-bf5f257e58a5	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8d84a706-080c-4fb2-b1b9-3dbb3294fb7b	cast	cast-resolve	agreed	-	X	scen	1	0	Osseous Exhale/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d84a706-080c-4fb2-b1b9-3dbb3294fb7b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Osseous Exhale/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d857d79-bdb2-4ca3-abd6-7db8f6b3bcfa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8de2ce5a-9345-4d2b-a248-868268f36836	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8de3eabe-9a8f-4865-beef-a4888c081d39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8de50bda-1ef6-4ccf-9efc-fab10b7eb2e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8de50bda-1ef6-4ccf-9efc-fab10b7eb2e5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8de50bda-1ef6-4ccf-9efc-fab10b7eb2e5	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fervent-champion:f0t0:s1,f:xs:XP:fervent-champion:f0t0:s1	-	-	-	ae86f6029288	-	65e676695270	-	-	2026-11-24	xproof
 8de8027b-072a-474b-b76b-dc49c417cc55	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8dec6fcf-1254-4b1b-ba23-7a3e492a7241	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:secluded-steppe:f0a0:s1,f:xs:XP:secluded-steppe:f0a0:s1	-	-	-	d864b561c9cb	-	95387c97d7a8	-	-	2026-11-24	xproof
 8dec6fcf-1254-4b1b-ba23-7a3e492a7241	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

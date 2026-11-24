@@ -7,8 +7,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 310c1280-dee8-426f-8440-6132a634a1e0	cast	cast-resolve	agreed	-	X	scen	1	0	Solstice Revelations/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 310f141c-7f37-4729-aed6-dd9c09db448d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 310f141c-7f37-4729-aed6-dd9c09db448d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blood-artist:f0t0:s1,f:xs:XP:blood-artist:f0t0:s1	-	-	-	d864b561c9cb	-	010f5d73f931	-	-	2026-11-24	xproof
-3111f8b7-36af-4390-af99-5b8976b2f241	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3111f8b7-36af-4390-af99-5b8976b2f241	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3111f8b7-36af-4390-af99-5b8976b2f241	cast	cast	agreed	-	F	start	2	0	f:xs:XP:tazeem-raptor:f0t0:s1	-	-	-	ae86f6029288	-	a4dec155e1e5	-	-	2026-11-24	xproof
+3111f8b7-36af-4390-af99-5b8976b2f241	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:tazeem-raptor:f0t0:s1	-	-	-	ae86f6029288	-	a4dec155e1e5	-	-	2026-11-24	xproof
 31123cb5-2dd5-4f2b-a2fd-8f87095972c6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31136103-535a-4d11-819a-1cbd57ad48a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31136103-535a-4d11-819a-1cbd57ad48a4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3196e1f4-7f94-4eb6-ae2b-ed11ba392552	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 319b4715-c3eb-49bf-b8d2-4d41e601ebe4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 319b4715-c3eb-49bf-b8d2-4d41e601ebe4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-319d5cf8-ab72-401e-b04e-c13a7a6c1aac	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+319d5cf8-ab72-401e-b04e-c13a7a6c1aac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stern-dismissal:cast:s1,f:xs:XP:stern-dismissal:cast:s1	-	-	-	ae86f6029288	-	4ae2d4672be9	-	-	2026-11-24	xproof
 319ee221-bace-41e9-b386-6b528bd780c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 319ee221-bace-41e9-b386-6b528bd780c1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:workshop-assistant:f0t0:s1,f:xs:XP:workshop-assistant:f0t0:s1	-	-	-	d864b561c9cb	-	d2af44b561ca	-	-	2026-11-24	xproof
 31a0c9a2-c9bd-47f7-872b-a43fb64d873c	cast	cast-resolve	agreed	-	X	scen	1	0	Brightspear Zealot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -168,8 +168,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31e3f39f-8b18-4316-984f-4d57d2d480ca	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 31e3f39f-8b18-4316-984f-4d57d2d480ca	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 31e3f39f-8b18-4316-984f-4d57d2d480ca	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-31e8c1e1-520a-4e64-a221-203afc819fcf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31e8c1e1-520a-4e64-a221-203afc819fcf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+31e8c1e1-520a-4e64-a221-203afc819fcf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:journey-to-oblivion:f0t0:s1,f:xs:XP:journey-to-oblivion:f0t0:s1	-	-	-	ae86f6029288	-	b13abf07e8b5	-	-	2026-11-24	xproof
+31e8c1e1-520a-4e64-a221-203afc819fcf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:journey-to-oblivion:f0t0:s1,f:xs:XP:journey-to-oblivion:f0t0:s1	-	-	-	ae86f6029288	-	b13abf07e8b5	-	-	2026-11-24	xproof
 31e99241-592d-4be4-9ef3-6dde522b1885	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	fd8dc6c8e3ef	-	-	2026-11-24	xproof
 31ea4f3f-392a-4319-a95b-eb28790a80e6	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Konstrari Annex/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31ea4f3f-392a-4319-a95b-eb28790a80e6	land	play-land	agreed	-	FX	scen	2	0	Konstrari Annex/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -52,9 +52,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f452ce7-1166-4810-afed-ea5e156a6f52	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Aurelia's Vindicator/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f484927-0e8e-493d-93bc-ed190965dad9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f484927-0e8e-493d-93bc-ed190965dad9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f4a3c9e-80c4-4fa1-940d-2c57065901a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f4a3c9e-80c4-4fa1-940d-2c57065901a3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f4a3c9e-80c4-4fa1-940d-2c57065901a3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4f4a3c9e-80c4-4fa1-940d-2c57065901a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enchanted-carriage:f0t0:s1,f:xs:XP:enchanted-carriage:f0t0:s1	-	-	-	ae86f6029288	-	443fcf4215d1	-	-	2026-11-24	xproof
+4f4a3c9e-80c4-4fa1-940d-2c57065901a3	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:enchanted-carriage:f0t0:s1,f:xs:XP:enchanted-carriage:f0t0:s1	-	-	-	ae86f6029288	-	443fcf4215d1	-	-	2026-11-24	xproof
+4f4a3c9e-80c4-4fa1-940d-2c57065901a3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:enchanted-carriage:f0t0:s1,f:xs:XP:enchanted-carriage:f0t0:s1	-	-	-	ae86f6029288	-	443fcf4215d1	-	-	2026-11-24	xproof
 4f4a5966-3713-45c7-acc2-9ddb4ff73eab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f5096d4-bbb5-4a48-9dd0-9dabdd2ac125	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f57a320-b6b5-49de-af0a-f2e2649758a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -200,8 +200,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fdfa41a-75a5-4b36-8c9e-083e26d137e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fe38c9e-6fa0-4e05-9d3f-8fd635c457fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fe38c9e-6fa0-4e05-9d3f-8fd635c457fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fe6f784-0290-4d4a-85ae-0b66522d31e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fe6f784-0290-4d4a-85ae-0b66522d31e9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4fe6f784-0290-4d4a-85ae-0b66522d31e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mire-triton:f0t0:s1,f:xs:XP:mire-triton:f0t0:s1	-	-	-	ae86f6029288	-	6a6105bed098	-	-	2026-11-24	xproof
+4fe6f784-0290-4d4a-85ae-0b66522d31e9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mire-triton:f0t0:s1,f:xs:XP:mire-triton:f0t0:s1	-	-	-	ae86f6029288	-	6a6105bed098	-	-	2026-11-24	xproof
 4fe8316a-9cff-43e9-a1d5-993a0c9daf3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fe8af73-c84a-44bd-9739-ee5c8b027874	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:crypt-of-agadeem:f0a1:s1,f:xs:XP:crypt-of-agadeem:f0a1:s1	-	-	-	ae86f6029288	-	ac2fbba83d4e	-	-	2026-11-24	xproof
 4fe8af73-c84a-44bd-9739-ee5c8b027874	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -43,7 +43,7 @@ f825c98f-a327-440b-8c0d-ebe02e23bfb7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 f825c98f-a327-440b-8c0d-ebe02e23bfb7	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:field-of-ruin:f0a1:s1,f:xs:XP:field-of-ruin:f0a1:s1	-	-	-	d864b561c9cb	-	2dff55a3b2b0	-	-	2026-11-24	xproof
 f825c98f-a327-440b-8c0d-ebe02e23bfb7	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f826ac35-7dde-414c-94ec-0bdfe04327b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f826ac35-7dde-414c-94ec-0bdfe04327b4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f826ac35-7dde-414c-94ec-0bdfe04327b4	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 f8273146-f2e5-40ec-ba96-c0a4192caec8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8273146-f2e5-40ec-ba96-c0a4192caec8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f82a4e85-526d-4456-b700-7760043a31be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -58,7 +58,7 @@ f83a768c-162d-46f0-8ebd-d9c6b2c69322	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Vein
 f83a768c-162d-46f0-8ebd-d9c6b2c69322	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Vein Ripper/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f83f6ba0-bb23-4c62-8a16-b17f5fbc0740	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8410804-632b-4f18-9a73-6dccc7e4582d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f8410804-632b-4f18-9a73-6dccc7e4582d	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f8410804-632b-4f18-9a73-6dccc7e4582d	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 f84637f0-1a04-4fd1-85d9-8e8f5d444800	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f84637f0-1a04-4fd1-85d9-8e8f5d444800	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f84850bc-6348-449e-bd82-bb39e2119bec	cast	cast-resolve	agreed	-	FX	scen	2	0	Donatello, Turtle Techie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -88,9 +88,9 @@ f85eea8f-5887-4921-a943-d15e0ad1e028	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Case 
 f85eea8f-5887-4921-a943-d15e0ad1e028	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Case of the Ransacked Lab/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f85eea8f-5887-4921-a943-d15e0ad1e028	static#0.0	static#0.0	agreed	-	X	scen	1	0	Case of the Ransacked Lab/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f8601f5f-0f7c-4689-9d15-137f1e82c49c	cast	cast-resolve	agreed	-	X	scen	1	0	Generous Revival/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f8640899-2458-40f2-98a3-35c402ee9a7a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f8640899-2458-40f2-98a3-35c402ee9a7a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f8640899-2458-40f2-98a3-35c402ee9a7a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f8640899-2458-40f2-98a3-35c402ee9a7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jolrael-mwonvuli-recluse:cast:s1,f:xs:XP:jolrael-mwonvuli-recluse:cast:s1	-	-	-	ae86f6029288	-	cf4076482558	-	-	2026-11-24	xproof
+f8640899-2458-40f2-98a3-35c402ee9a7a	f0/a0	AnimateAll	agreed	-	FX	start	2	0	x:xs:XP:jolrael-mwonvuli-recluse:f0a0:s1,f:xs:XP:jolrael-mwonvuli-recluse:f0a0:s1	-	-	-	ae86f6029288	-	cf4076482558	-	-	2026-11-24	xproof
+f8640899-2458-40f2-98a3-35c402ee9a7a	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 f86bcdde-8b1f-4efa-a01d-39e09dc826d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f86bcdde-8b1f-4efa-a01d-39e09dc826d0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f87aaed9-7f78-4f8b-8af5-44d4be1d6f30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -204,7 +204,7 @@ f8f3fc11-25b4-4a23-9d79-f380a14f0420	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f8f450c1-f405-4ccc-aef3-f0186d1f5056	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8f450c1-f405-4ccc-aef3-f0186d1f5056	f0/a0	NULL	owed	refused:steps-needed:cost:GW	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 f8f4fc60-725d-46d8-8e8f-e68e00d20589	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f8f4fc60-725d-46d8-8e8f-e68e00d20589	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f8f4fc60-725d-46d8-8e8f-e68e00d20589	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:castle-ardenvale:f0a1:s1,f:xs:XP:castle-ardenvale:f0a1:s1	-	-	-	ae86f6029288	-	3b1557578015	-	-	2026-11-24	xproof
 f8f4fc60-725d-46d8-8e8f-e68e00d20589	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8fac28d-adf4-47e9-bdd3-8402cbf0f228	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8fac28d-adf4-47e9-bdd3-8402cbf0f228	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:boggart-loggers:f0a0:s1,f:xs:XP:boggart-loggers:f0a0:s1	-	-	-	d864b561c9cb	-	cef64566d932	-	-	2026-11-24	xproof

@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d2bbce0-8c27-4b82-ab62-51a0c3cfc9b0	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0d2bbce0-8c27-4b82-ab62-51a0c3cfc9b0	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d2bbce0-8c27-4b82-ab62-51a0c3cfc9b0	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-0d2cdcc6-da65-4f66-ba38-111efad44919	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0d2cdcc6-da65-4f66-ba38-111efad44919	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deadly-alliance:cast:s1,f:xs:XP:deadly-alliance:cast:s1	-	-	-	ae86f6029288	-	653bf28ddde6	-	-	2026-11-24	xproof
 0d3617c3-1526-40e6-bc90-6139b5d3e1f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d3617c3-1526-40e6-bc90-6139b5d3e1f1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d3a38ff-4b75-4e97-9d8f-c54f441f8208	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -75,8 +75,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d5bbde7-6f33-4708-b3ab-34d4528af649	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Magitek Scythe/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0d5bbde7-6f33-4708-b3ab-34d4528af649	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d5bbde7-6f33-4708-b3ab-34d4528af649	static#0.0	static#0.0	agreed	-	X	scen	1	0	Magitek Scythe/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0d5eb0b9-9b08-4d26-b141-a9d612a680a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d5eb0b9-9b08-4d26-b141-a9d612a680a6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0d5eb0b9-9b08-4d26-b141-a9d612a680a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roaming-ghostlight:f0t0:s1,f:xs:XP:roaming-ghostlight:f0t0:s1	-	-	-	ae86f6029288	-	9efb6bc345b6	-	-	2026-11-24	xproof
+0d5eb0b9-9b08-4d26-b141-a9d612a680a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:roaming-ghostlight:f0t0:s1,f:xs:XP:roaming-ghostlight:f0t0:s1	-	-	-	ae86f6029288	-	9efb6bc345b6	-	-	2026-11-24	xproof
 0d5fe27f-db51-4323-aa74-b6fdb4309425	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d5fe27f-db51-4323-aa74-b6fdb4309425	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d603aef-2b92-43fb-81ba-f89953a198df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
