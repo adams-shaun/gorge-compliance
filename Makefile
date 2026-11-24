@@ -25,7 +25,11 @@ GO_TEST_FLAGS ?= -p=2
 # with an empty pool, Waterbend {X}, X = 1, tapping Katara herself. Only WaterbendXCost with a minimum X above 0 is
 # credited (the three spells with a Waterbend {X} cost have minimum X 0 and are unchanged; a fixed WaterbendCost
 # already offers a {0} option). Fork branch fix/waterbend-playable, WaterbendTest.testXFromEmptyPool.
-XMAGE_REF  ?= b964ce92f0274faef1c3b2395b74a8f91c5bcf61
+# 3481be1d2b = b964ce92f0 + fork #19 (Gruul Scrapper's "if {R} was spent to cast it" is an intervening-if, CR 603.4:
+# with no red spent the ETB haste trigger does not go on the stack at all, where the plain trigger plus a
+# ConditionalContinuousEffect put it there and read the condition only at resolution). Gorge now also carries
+# the b964ce92f0 ancestry, so the pin is a commit on the gorge branch itself.
+XMAGE_REF  ?= 3481be1d2b4641a072c61a50aae461f4f03c4340
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
