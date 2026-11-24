@@ -200,7 +200,8 @@ func bookkeepingEffect(f *cards.Face, execute string) (writes, clears []string, 
 					return nil, nil, false
 				}
 			}
-		case p["DB"] == "Pump":
+		// Forge ff076d4432 respells the remember/imprint step as its own DB$ Bookkeeping api (Oblivious Bookworm).
+		case p["DB"] == "Pump" || p["DB"] == "Bookkeeping":
 			for k := range p {
 				switch k {
 				case "DB", "SubAbility", "Defined":

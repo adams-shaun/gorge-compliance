@@ -20,6 +20,9 @@ import (
 // the one carrier at FORGE_REF today; both are pure ASCII, so it predates the
 // diacritic fold.
 var foldedCollisions = []string{
+	// Forge ff076d4432 names an Alchemy rebalance "A-Symmetry Sage"; the fold drops the hyphen, so it meets the
+	// paper Asymmetry Sage. An exact name still resolves first; the digital card is out of scope.
+	"A-Symmetry Sage|Asymmetry Sage",
 	"Waste Land|Wasteland",
 }
 
