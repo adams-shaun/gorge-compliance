@@ -688,6 +688,18 @@ func TestLowerDropsRefusedCast(t *testing.T) {
 	if got := ops(cast, pass); !reflect.DeepEqual(got, []string{"pass"}) {
 		t.Fatalf("no-op cast: steps %v, want [pass]", got)
 	}
+	// A refused action after a pass still reset the pass count, which the
+	// digest does not carry. Dropping it at a non-zero count makes the next
+	// pass look like the second of the chain and advances the step early
+	// (Hypnotic Sprite step 10): cut at the action instead.
+	var chain Lowered
+	chain.lowerEntries(nil, seatMap{}, []game.Entry{pass, cast, pass}, 0, false)
+	if want := unsupported("pass_chain").reason; chain.Truncated != want || chain.TruncatedAt != 1 {
+		t.Fatalf("no-op cast after a pass: truncated %q at %d, want %q at 1", chain.Truncated, chain.TruncatedAt, want)
+	}
+	if len(chain.Item.Steps) != 1 || chain.Item.Steps[0].Op != "pass" {
+		t.Fatalf("no-op cast after a pass: steps %+v, want only the pass before the cut", chain.Item.Steps)
+	}
 	// A real cast that leaves the visible state unchanged but pushes an object
 	// on the stack (a {X}=0 ability that destroys nothing) must stay: the stack
 	// top changed from before the group to after it.
