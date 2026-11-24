@@ -46,13 +46,14 @@ public final class ScenarioReplayDriverAsksTest {
         gameOverLeftovers();
         mixedMustAttack();
         faceDownAttacker();
+        manifestedFaceDownTarget();
         declinedDig();
         alternativeCast();
         promisedGift();
         replacementOrder();
         phyrexianLife();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
-                + " face-down attacker, declined dig, alternative cast, promised gift, replacement order,"
+                + " face-down attacker, manifested face-down target, declined dig, alternative cast, promised gift, replacement order,"
                 + " phyrexian life");
     }
 
@@ -182,6 +183,51 @@ public final class ScenarioReplayDriverAsksTest {
                 "precondition: TestPlayer maps the command back to the empty face-down name");
         check(ScenarioReplay.turnsFaceUp("Turn face up") && ScenarioReplay.turnsFaceUp("Megamorph {1}{G}: turn this face up")
                 && !ScenarioReplay.turnsFaceUp("{T}: Add {G}."), "only a turn-face-up activation clears the face-down name");
+    }
+
+    /** DSK Conductive Machete / Dissection Tools: a manifest-dread creature
+     * (CR 708.2a: no name) is made mid-window, so its ref, "Mountain", cannot
+     * be queued as the face-down test command. TestPlayer's name search
+     * (equip target, sacrifice-cost pick) compares the queued value to the
+     * empty face-down name and never matches, so the driver's override matches
+     * the face-down permanent by the card that sits under it. */
+    private static void manifestedFaceDownTarget() throws Exception {
+        Class<?>[] types = {boolean.class, String.class, String.class, boolean.class};
+        check((Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "Mountain", false),
+                "the face-down Mountain is the ref's permanent");
+        check(!(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "Forest", false),
+                "another card's name does not match the face-down permanent");
+        check(!(Boolean) adapter("namesFaceDownCard", types, false, "Mountain", "Mountain", false),
+                "a face-up permanent is answered by the base name comparison, not here");
+        check(!(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "@p0:Mountain#2", false)
+                        && !(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", ScenarioReplay.faceDownCombatName(), false)
+                        && !(Boolean) adapter("namesFaceDownCard", types, true, null, "Mountain", false),
+                "an alias, a test command and an unknown card are left to the base");
+        check(!(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "Mountain", true),
+                "a face-up Mountain keeps the ref, so the candidate order never decides");
+        // The twin scan is scoped to the ask's legal candidates: a face-up
+        // Mountain LAND is no candidate of an equip / "sacrifice a creature"
+        // ask, so it must not stop the face-down Mountain from matching.
+        java.util.UUID faceDown = java.util.UUID.randomUUID();
+        java.util.UUID land = java.util.UUID.randomUUID();
+        java.util.UUID creatureTwin = java.util.UUID.randomUUID();
+        java.util.Map<java.util.UUID, String> names = new java.util.HashMap<>();
+        names.put(land, "Mountain");
+        names.put(creatureTwin, "Mountain");
+        Class<?>[] twinTypes = {java.util.Set.class, java.util.UUID.class, java.util.function.Function.class,
+                Iterable.class, String.class};
+        java.util.function.Function<java.util.UUID, String> nameOf = names::get;
+        java.util.Set<java.util.UUID> creaturesOnly = new java.util.HashSet<>(Arrays.asList(faceDown));
+        check(!(Boolean) adapter("faceUpTwinAmong", twinTypes, creaturesOnly, faceDown, nameOf,
+                        new ArrayList<Object>(), "Mountain"),
+                "a face-up Mountain land outside the ask's candidates is no twin");
+        java.util.Set<java.util.UUID> withTwin = new java.util.HashSet<>(Arrays.asList(faceDown, creatureTwin));
+        check((Boolean) adapter("faceUpTwinAmong", twinTypes, withTwin, faceDown, nameOf,
+                        new ArrayList<Object>(), "Mountain"),
+                "a face-up candidate of the same name is a twin");
+        check(!(Boolean) adapter("faceUpTwinAmong", twinTypes, withTwin, creatureTwin, nameOf,
+                        new ArrayList<Object>(), "Forest"),
+                "another name is no twin");
     }
 
     /** (f) FIN Choco trigger#0.0: the generator's decline pair ("No" +

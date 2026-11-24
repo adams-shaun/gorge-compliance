@@ -1039,6 +1039,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
         // token ref against the LIVE choice game, not a prematurely bound or
         // stale alias. Other choice values and the target path stay unchanged.
         private Game choiceGame;
+        // The target ask in progress (choose / chooseTarget), so the face-down
+        // match can tell which face-up permanents are legal candidates of it.
+        private mage.target.Target askTarget;
+        private Ability askSource;
 
         /** Also: the paid additional cost's sacrifice is posed as a target-group
          * `choose`, which reads XMage's CHOICE queue, not the target queue
@@ -1049,7 +1053,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
         @Override
         public boolean choose(Outcome outcome, mage.target.Target target, Ability source, Game game) {
             Game previous = choiceGame;
+            mage.target.Target previousTarget = askTarget;
+            Ability previousSource = askSource;
             choiceGame = game;
+            askTarget = target;
+            askSource = source;
             try {
                 if (owner.giftPromisedCast && target.getOriginalTarget() instanceof mage.target.common.TargetOpponent) {
                     List<String> opponents = new ArrayList<>();
@@ -1100,6 +1108,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 return super.choose(outcome, target, source, game);
             } finally {
                 choiceGame = previous;
+                askTarget = previousTarget;
+                askSource = previousSource;
             }
         }
 
@@ -1154,7 +1164,73 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
                 return object != null && chosen != null && chosen.getId().equals(object.getId());
             }
-            return super.hasObjectTargetNameOrAlias(object, value);
+            if (super.hasObjectTargetNameOrAlias(object, value)) {
+                return true;
+            }
+            // A face-down permanent (CR 708.2a: a manifested or cloaked
+            // creature has no name) never matches the card name the scenario
+            // ref carries. The face-down state arises mid-window (manifest
+            // dread, cloak), after the steps are queued, so it is matched
+            // here against the LIVE game: the ref names the card that became
+            // the face-down creature (equip target, sacrifice-cost pick).
+            if (choiceGame != null && object instanceof Permanent
+                    && ((Permanent) object).isFaceDown(choiceGame)) {
+                mage.cards.Card underlying = choiceGame.getCard(object.getId());
+                String underlyingName = underlying == null ? null : underlying.getName();
+                // A face-up permanent of the same name keeps the ref only when
+                // the ask in progress could legally pick it: a Mountain LAND
+                // is no candidate of an equip or "sacrifice a creature" ask.
+                // Outside an ask (no target known) only a face-up creature
+                // counts, as the face-down permanent is itself a creature.
+                java.util.Set<UUID> legal = null;
+                if (askTarget != null && askSource != null) {
+                    legal = askTarget.possibleTargets(askTarget.getAffectedAbilityControllerId(getId()), askSource, choiceGame);
+                }
+                final java.util.Set<UUID> candidates = legal;
+                boolean faceUpTwin = faceUpTwinAmong(candidates, object.getId(), id -> {
+                    Permanent other = choiceGame.getPermanent(id);
+                    return other == null || other.isFaceDown(choiceGame)
+                            || (candidates == null && !other.isCreature(choiceGame)) ? null : other.getName();
+                }, choiceGame.getBattlefield().getAllPermanents(), value);
+                return namesFaceDownCard(true, underlyingName, value, faceUpTwin);
+            }
+            return false;
+        }
+
+        /** Whether a face-up permanent other than {@code self} that the ask
+         * may legally pick ({@code legal}; null = ask unknown, every
+         * permanent in {@code field} is looked at) carries {@code value} as
+         * its name. {@code faceUpName} yields a permanent's name, or null
+         * when it is face-down or not a possible twin. */
+        static boolean faceUpTwinAmong(java.util.Set<UUID> legal, UUID self,
+                java.util.function.Function<UUID, String> faceUpName, Iterable<Permanent> field, String value) {
+            java.util.List<UUID> ids = new ArrayList<>();
+            if (legal != null) {
+                ids.addAll(legal);
+            } else {
+                for (Permanent p : field) {
+                    ids.add(p.getId());
+                }
+            }
+            for (UUID id : ids) {
+                if (!id.equals(self) && value != null && value.equals(faceUpName.apply(id))) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /** True when a face-down permanent is the one a scenario ref names:
+         * the queued value is the card's plain XMage-spelled name, never an
+         * "@" alias or a bracketed test command, and equals the name of the
+         * card that sits face down. A face-up permanent is never matched
+         * here (its own name already answered the base's comparison), and a
+         * face-up permanent of the same name keeps the ref: the candidate
+         * Set's order must not decide between a card and its face-down twin. */
+        static boolean namesFaceDownCard(boolean faceDown, String underlyingName, String value, boolean faceUpTwin) {
+            return faceDown && !faceUpTwin && underlyingName != null && value != null
+                    && !value.startsWith("@") && !value.startsWith("[")
+                    && underlyingName.equals(value);
         }
 
         @Override
@@ -1401,7 +1477,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // creation-order resolution applies here too; the outer finally
             // keeps the previous game for the nested ask.
             Game previous = choiceGame;
+            mage.target.Target previousTarget = askTarget;
+            Ability previousSource = askSource;
             choiceGame = game;
+            askTarget = target;
+            askSource = source;
             try {
                 // XMage poses every optional target ask even when no candidate is
                 // legal (Targets.canChooseFromPossibleTargets returns true for a
@@ -1450,6 +1530,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             } finally {
                 choiceGame = previous;
+                askTarget = previousTarget;
+                askSource = previousSource;
             }
         }
 
@@ -2932,12 +3014,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
         List<Permanent> candidates = new ArrayList<>();
         for (Permanent permanent : battlefield) {
             if (permanent.isToken() && controller.equals(permanent.getControllerId())
-                    && permanent.getName().toLowerCase(java.util.Locale.ROOT).contains(wantedName)) {
+                    && tokenNamed(permanent, wantedName)) {
                 candidates.add(permanent);
             }
         }
         candidates.sort(java.util.Comparator.comparingInt(Permanent::getCreateOrder));
         return wanted > 0 && wanted <= candidates.size() ? candidates.get(wanted - 1) : null;
+    }
+
+    /** Whether a token answers to the lower-cased name: its live name or the
+     * name it was created with. A ref names a token by its creation name, and
+     * a layer-3 name change (Witness Protection: "named Legitimate
+     * Businessperson", CR 613.1c) moves only the live name, so matching the
+     * live name alone loses the token to every ref lookup. Every token ref
+     * resolves through tokenChoice, so this one test covers targets, setup
+     * attachments, combat and answer aliases alike. */
+    private static boolean tokenNamed(Permanent token, String wantedName) {
+        if (token.getName().toLowerCase(java.util.Locale.ROOT).contains(wantedName)) {
+            return true;
+        }
+        return token instanceof mage.game.permanent.PermanentToken
+                && ((mage.game.permanent.PermanentToken) token).getToken().getName()
+                        .toLowerCase(java.util.Locale.ROOT).contains(wantedName);
     }
 
     /** The controller's battlefield permanents in setup/creation order.

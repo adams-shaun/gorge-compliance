@@ -129,6 +129,8 @@ Every finding gets a directory under `<diff out>/finds/<class>/<id>/`:
 | `<engine>.json` | Your row |
 | `verdict.json` | The class, checkpoint, field and both values |
 
+A farm pull must carry `input.jsonl` and the cut engine rows (`gorge.json`, `<engine>.json`) for `diverge` finds, or the find cannot be replayed once the box's scratch is pruned; `scripts/xengine-random.sh` keeps those files in every `diverge` find, and the pull's rsync include list (operator-side, `finds/diverge/*/input.jsonl` and the matching `gorge.json` / `<engine>.json` names) must name them.
+
 `REPRO.md` ends with an `xengine diff … -only <id>` command, which classifies one re-run row without
 re-running the whole chunk. To see why gorge did something, read the `transcript` in `gorge.json`.
 

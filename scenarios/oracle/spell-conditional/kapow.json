@@ -1,0 +1,63 @@
+{
+ "card": "Kapow!",
+ "family": "spell-conditional",
+ "author": "Oracle + CR only",
+ "scenarios": [
+  {
+   "name": "counter-then-fight-lifelink-gains-full-power",
+   "cr": [
+    "120.3",
+    "701.14a",
+    "702.15b"
+   ],
+   "why": "Put a +1/+1 counter on target creature you control, then it fights target creature an opponent controls: Baneslayer Angel becomes 6/6 and deals its whole 6 power to a 1/1, not just the 1 that is lethal, and lifelink gains its controller that much damage dealt (6).",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Kapow!"
+     ],
+     "battlefield": [
+      "Baneslayer Angel"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Llanowar Elves"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Kapow!",
+     "mana": "GGG",
+     "targets": [
+      "p0:Baneslayer Angel",
+      "p1:Llanowar Elves"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Llanowar Elves",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Baneslayer Angel",
+     "zone": "battlefield",
+     "damage": 1
+    },
+    {
+     "life": {
+      "p0": 26,
+      "p1": 20
+     }
+    }
+   ]
+  }
+ ]
+}

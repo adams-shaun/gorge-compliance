@@ -181,6 +181,7 @@ smoke:
 	bash ops/scripts/tests/make_cards_smoke.sh
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
+	bash ops/scripts/tests/forge_sbv2_smoke.sh
 	bash ops/scripts/tests/phase_oracle_pin_smoke.sh
 	bash ops/scripts/tests/manabrew_oracle_pin_smoke.sh
 	bash ops/scripts/tests/manabrew_oracle_run_smoke.sh
