@@ -198,7 +198,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # several dredgers all get the same no. DredgeReplacementTest (4 tests) pins it. Driver-only change;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-dredge-replacement.
-FORGE_ORACLE_REF ?= 1bb3cb16bb9ec70eaa63aa036daed7ada60c789c
+# c873c2c9399 = 1bb3cb16bb9 plus Unleash's optional ETB replacement confirm (xproof decision_shape: Dead Reveler and the other
+# Unleash cards). CR 702.98a: gorge asks the controller once as a choose_n (resume etb) whose two options both have pick
+# kind unleash, "Enter with a +1/+1 counter" and "Enter without a counter"; Forge builds Unleash as an Optional$ ETB
+# replacement and asks confirmReplacementEffect, which the scripted controller now answers from that pick (the counter is
+# yes, the other label or an empty pick is no) instead of missing and leaving the pick unconsumed. UnleashReplacementTest
+# (2 tests: both answers) pins it; the full driver suite (148 tests, including ForcedDieRollTest) is green. Driver-only
+# change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-unleash-replacement.
+FORGE_ORACLE_REF ?= c873c2c939970b0c06542b197ef8e06383729c01
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
