@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+# phase-sbv2.sh [--compile | --selftest] [-decks DIR] [-source-revision REV]
+#
+# Runs phase.rs as a SpellBench v2 *engine*: an NDJSON server on this process's stdin and stdout
+# (docs/site/api/spellbench-v2.md, "Engine role", in gorge), so four-yay's
+# `cmd/xclient -engine sbv2 -engine-cmd scripts/phase-sbv2.sh` plays phase with any policy.
+# Diagnostics and the end-of-run census go to stderr; stdout carries protocol lines only.
+#
+# The engine is followers/phase/phase-seat (Apache-2.0) over phase.rs at followers/phase/PHASE_PIN.
+# This script owns what gorge-compliance owns: the pin check, the build of that one binary, and the
+# memory-capped scope. It is scripts/phase-oracle-run.sh's recipe: same pin check, same out-of-tree
+# build tree and card data (make phase-oracle-setup fetches them).
+#
+#   scripts/phase-sbv2.sh              # serve one engine session on stdio
+#   scripts/phase-sbv2.sh --compile    # build only; prints "phase-seat=<path> ref=<sha12>+<hash16>"
+#   scripts/phase-sbv2.sh --selftest   # build, then a hello / malformed-line exchange
+#
+# -decks DIR is the catalog (gorge deck JSON, catalog_id = file stem), the flag xclient appends when
+# the hello lists no catalog deck; PHASE_SBV2_DECKS is the default. With neither the catalog is
+# empty. -source-revision REV is reported as engine.source_revision.
+#
+# Environment (defaults as in scripts/phase-oracle-run.sh; these override):
+#   FOLLOWERS_CACHE, PHASE_ORACLE_DIR, PHASE_FOLLOWER_DIR, CARGO
+#   PHASE_SBV2_MEM    serving scope MemoryMax (default 8G); the build's is 12G
+#   XENGINE_SCOPE=none  no systemd scope
+#
+# Exit: the engine's own status when serving (0 on clean end of input), 2 for a precondition (pin,
+# build, usage), 1 for a failed selftest.
+set -euo pipefail
+
+here=$(cd "$(dirname "$0")/.." && pwd)
+die() { echo "phase-sbv2: $*" >&2; exit 2; }
+usage="usage: phase-sbv2.sh [--compile | --selftest] [-decks DIR] [-source-revision REV]"
+
+mode=serve
+decks=${PHASE_SBV2_DECKS:-}
+rev=
+while [ $# -gt 0 ]; do
+	case "$1" in
+		--compile) mode=compile ;;
+		--selftest) mode=selftest ;;
+		-decks | --decks) [ $# -ge 2 ] || die "$usage"; decks=$2; shift ;;
+		-source-revision | --source-revision) [ $# -ge 2 ] || die "$usage"; rev=$2; shift ;;
+		*) die "$usage" ;;
+	esac
+	shift
+done
+
+fcache=${FOLLOWERS_CACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/gorge-compliance}
+follower=$(realpath -m "${PHASE_FOLLOWER_DIR:-$here/followers/phase}")
+root=$(realpath -m "${PHASE_ORACLE_DIR:-$fcache/phase}")
+cargo=${CARGO:-$HOME/.cargo/bin/cargo}
+
+# The pin check prints its verdict on stdout; the protocol owns ours.
+"$here/scripts/phase-oracle-setup.sh" --check-pin >&2 || exit 2
+
+read -r sha hash16 _ < "$follower/PHASE_PIN" || true
+data=$root/card-data-$hash16.json
+bin=$root/target/follower/phase-seat
+ref=${sha:0:12}+$hash16
+
+echo "phase-sbv2: bringing the phase-seat build up to date (a no-op when fresh; a stale build is minutes)" >&2
+build=(env CARGO_HOME="$fcache/cargo-home" CARGO_TARGET_DIR="$root/target" RUSTC="$(dirname "$cargo")/rustc" "$cargo" build --locked --profile follower -p phase-seat)
+bscope=()
+[ "${XENGINE_SCOPE:-systemd}" = none ] || bscope=(systemd-run --user --scope -q -p MemoryMax=12G -p CPUQuota=400%)
+(cd "$follower" && "${bscope[@]}" "${build[@]}") >&2 || die "cargo build failed"
+[ -x "$bin" ] || die "build produced no $bin"
+
+if [ "$mode" = compile ]; then
+	echo "phase-seat=$bin ref=$ref"
+	exit 0
+fi
+
+export RUST_MIN_STACK=16777216
+export PHASE_REF=$ref
+args=(--card-data "$data")
+[ -z "$decks" ] || args+=(--decks "$decks")
+[ -z "$rev" ] || args+=(--source-revision "$rev")
+scope=()
+[ "${XENGINE_SCOPE:-systemd}" = none ] || scope=(systemd-run --user --scope -q -p MemoryMax="${PHASE_SBV2_MEM:-8G}" -p CPUQuota=400%)
+
+if [ "$mode" = selftest ]; then
+	req='{"request_type":"hello","protocol":"spellbench/v2","request_id":"selftest-1","protocol_minor":0}'
+	out=$(printf '%s\nnot json\n' "$req" | "${scope[@]}" "$bin" "${args[@]}") || { echo "phase-sbv2: selftest: the engine exited non-zero" >&2; exit 1; }
+	first=$(printf '%s\n' "$out" | sed -n 1p)
+	second=$(printf '%s\n' "$out" | sed -n 2p)
+	# Canonical JSON sorts keys, so the engine block comes before response_type: test each on its own.
+	case "$first" in *'"response_type":"hello_ok"'*) ;; *) echo "phase-sbv2: selftest: no hello_ok: $first" >&2; exit 1 ;; esac
+	case "$first" in *'"name":"phase"'*) ;; *) echo "phase-sbv2: selftest: the engine is not phase: $first" >&2; exit 1 ;; esac
+	case "$second" in *'"code":"malformed_json"'*) ;; *) echo "phase-sbv2: selftest: no malformed_json for a bad line: $second" >&2; exit 1 ;; esac
+	echo "phase-sbv2: selftest ok ($ref)" >&2
+	exit 0
+fi
+
+exec "${scope[@]}" "$bin" "${args[@]}"
