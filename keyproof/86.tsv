@@ -91,9 +91,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 865a2194-fca0-446e-aae3-ca475cd66e00	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Dismal Backwater/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 865a2194-fca0-446e-aae3-ca475cd66e00	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Dismal Backwater/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 865a2194-fca0-446e-aae3-ca475cd66e00	land	play-land	agreed	-	FX	scen	2	0	Dismal Backwater/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-865e569b-6999-4a03-ad02-4bfd595d5820	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iname-as-one:cast:s1,f:xs:XP:iname-as-one:cast:s1	-	-	-	64a08ba7d913	-	2e50936b8e80	-	-	2026-11-24	xproof
-865e569b-6999-4a03-ad02-4bfd595d5820	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:iname-as-one:cast:s1,f:xs:XP:iname-as-one:cast:s1	-	-	-	64a08ba7d913	-	2e50936b8e80	-	-	2026-11-24	xproof
-865e569b-6999-4a03-ad02-4bfd595d5820	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+865e569b-6999-4a03-ad02-4bfd595d5820	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+865e569b-6999-4a03-ad02-4bfd595d5820	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+865e569b-6999-4a03-ad02-4bfd595d5820	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 8661d773-3b92-4fcf-8ffc-aced1ff7be8a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8661d773-3b92-4fcf-8ffc-aced1ff7be8a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8662c9be-2244-4ea3-bf80-31a117f40a59	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -121,8 +121,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 878e4e3b-c546-4174-906e-6fe8e64d9d41	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 878e5e0d-beb9-4f8d-a640-62140c907e52	cast	cast-resolve	agreed	-	FX	scen	2	0	Fanatic of the Harrowing/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 878e5e0d-beb9-4f8d-a640-62140c907e52	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-878e8980-a2cc-4335-aafe-f5166ef48f79	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-878e8980-a2cc-4335-aafe-f5166ef48f79	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+878e8980-a2cc-4335-aafe-f5166ef48f79	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+878e8980-a2cc-4335-aafe-f5166ef48f79	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 8790c7be-c14a-4293-bc4a-3d0efe42ed79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8790c7be-c14a-4293-bc4a-3d0efe42ed79	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8790f842-e842-4bed-adf4-5b3cc5fd68a9	cast	cast-resolve	agreed	-	FX	scen	2	0	Old Fat Spider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

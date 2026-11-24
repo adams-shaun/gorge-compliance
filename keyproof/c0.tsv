@@ -21,7 +21,7 @@ c00a0be5-d9a9-4263-a87e-7bf2d128ab3a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Yosh
 c00a13cc-3c2b-473f-801c-3cfcca642ac0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c00a13cc-3c2b-473f-801c-3cfcca642ac0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c00a13cc-3c2b-473f-801c-3cfcca642ac0	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c00f082b-787f-4f96-8356-c10d35713bc4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c00f082b-787f-4f96-8356-c10d35713bc4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coalhauler-swine:cast:s1,f:xs:XP:coalhauler-swine:cast:s1	-	-	-	64a08ba7d913	-	4abaf279e025	-	-	2026-11-24	xproof
 c00f082b-787f-4f96-8356-c10d35713bc4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c010d833-1873-4132-b4ff-8d78b3d7c2d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c01411e0-77b2-4e65-a369-5dbe13745769	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -95,8 +95,8 @@ c062bd12-34cf-4177-92d4-8ce91206989d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c0636d16-671c-4e80-af8c-67d80d2cd979	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c0636d16-671c-4e80-af8c-67d80d2cd979	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c065a7c0-272b-4b7e-a41c-7164352cd189	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c065a7c0-272b-4b7e-a41c-7164352cd189	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c065a7c0-272b-4b7e-a41c-7164352cd189	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c065a7c0-272b-4b7e-a41c-7164352cd189	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+c065a7c0-272b-4b7e-a41c-7164352cd189	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 c066f921-e349-45d1-8ec3-0955d10bbf19	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c06b993b-a36a-412a-a732-d678a4179791	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c06c17c2-203c-4b4a-8564-f29bc41c9eb5	cast	cast-resolve	agreed	-	FX	scen	2	0	Eject the Warp Core/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ c0d2bdd9-1e68-4d3a-83f8-ec2ba440a494	f0/a1	activate#0.1	agreed	-	X	scen	1	0	The 
 c0d2bdd9-1e68-4d3a-83f8-ec2ba440a494	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	The Enigma Jewel/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c0d2bdd9-1e68-4d3a-83f8-ec2ba440a494	static#1.0	static#1.0	agreed	-	X	scen	1	0	The Enigma Jewel/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c0d3dfc0-1ff2-4ac3-98eb-32eaa5b84c05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c0d51f49-383b-40f1-9192-5925db1cdd1b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c0d51f49-383b-40f1-9192-5925db1cdd1b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greater-forgeling:cast:s1,f:xs:XP:greater-forgeling:cast:s1	-	-	-	64a08ba7d913	-	617905d2b45b	-	-	2026-11-24	xproof
 c0d51f49-383b-40f1-9192-5925db1cdd1b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c0d8fef4-65f4-4769-982d-b397d2b7e977	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c0d8fef4-65f4-4769-982d-b397d2b7e977	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

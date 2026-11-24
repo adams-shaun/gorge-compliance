@@ -68,7 +68,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f4ad578-f2c4-47f6-8080-8fbc17383f6f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f4d0c87-7d59-41d5-9910-86765a0c144b	cast	cast-resolve	agreed	-	X	scen	1	0	Song of Totentanz/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f4e45c1-2bd2-4741-bb97-b6a324c574ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f4ff27f-ebc1-4a86-8b0b-eeea470a25fb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f4ff27f-ebc1-4a86-8b0b-eeea470a25fb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stalking-vengeance:cast:s1,f:xs:XP:stalking-vengeance:cast:s1	-	-	-	64a08ba7d913	-	69dd1042f76a	-	-	2026-11-24	xproof
 5f4ff27f-ebc1-4a86-8b0b-eeea470a25fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f532b7f-cb76-4be7-b361-0106c561dcb2	cast	cast-resolve	agreed	-	X	scen	1	0	Sami's Curiosity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f554df8-c70f-4212-aec7-597fe8a88553	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5fa4607a-6731-4599-80f3-19d6097b4b28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fa4607a-6731-4599-80f3-19d6097b4b28	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fa4607a-6731-4599-80f3-19d6097b4b28	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-5fa542e5-d3a7-45d3-ac1d-32546fbfe784	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5fa542e5-d3a7-45d3-ac1d-32546fbfe784	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 5fa542e5-d3a7-45d3-ac1d-32546fbfe784	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fa7cf3a-2a4d-4dd7-890b-49c497570b16	cast	cast-resolve	agreed	-	X	scen	1	0	District Mascot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5fa7cf3a-2a4d-4dd7-890b-49c497570b16	f0/a0	activate#0.0	agreed	-	X	scen	1	0	District Mascot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

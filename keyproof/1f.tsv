@@ -106,9 +106,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f6fd5d9-d123-4986-a18b-206cc2dfb3f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f6fd5d9-d123-4986-a18b-206cc2dfb3f1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f74d046-e695-4ad9-a27c-8ff1f30d4c23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f789fcf-3df6-45a6-a732-9f43e33718d6	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f789fcf-3df6-45a6-a732-9f43e33718d6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hunted-troll:f0t0:s1,f:xs:XP:hunted-troll:f0t0:s1	-	-	-	64a08ba7d913	-	bdb1b5e74feb	-	-	2026-11-24	xproof
 1f789fcf-3df6-45a6-a732-9f43e33718d6	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f789fcf-3df6-45a6-a732-9f43e33718d6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f789fcf-3df6-45a6-a732-9f43e33718d6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hunted-troll:f0t0:s1,f:xs:XP:hunted-troll:f0t0:s1	-	-	-	64a08ba7d913	-	bdb1b5e74feb	-	-	2026-11-24	xproof
 1f79de2a-6cef-4285-b008-5b5527c406ab	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f79de2a-6cef-4285-b008-5b5527c406ab	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f7e85cf-afee-4041-9436-1fb69b4ec292	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fa272bf-8759-4750-b40b-8e2f6972d570	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fa94925-04e5-4073-91af-1857dbc09991	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fb1afc0-a3bf-4368-9ca0-47dd8c4c3c60	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maga-traitor-to-mortals:f0t0:s1,f:xs:XP:maga-traitor-to-mortals:f0t0:s1	-	-	-	64a08ba7d913	-	0f2c72c5743c	-	-	2026-11-24	xproof
-1fb1afc0-a3bf-4368-9ca0-47dd8c4c3c60	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:maga-traitor-to-mortals:f0t0:s1,f:xs:XP:maga-traitor-to-mortals:f0t0:s1	-	-	-	64a08ba7d913	-	0f2c72c5743c	-	-	2026-11-24	xproof
+1fb1afc0-a3bf-4368-9ca0-47dd8c4c3c60	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 1fb5c014-9366-4f9e-9728-303ff766002b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fb5c014-9366-4f9e-9728-303ff766002b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fb5c014-9366-4f9e-9728-303ff766002b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

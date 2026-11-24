@@ -79,8 +79,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82563a5f-cae4-4ece-876c-0df245d2dc58	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Raph & Mikey, Troublemakers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 826274fd-9831-4122-a5d9-0d1caa3d3a85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 826274fd-9831-4122-a5d9-0d1caa3d3a85	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8262dbb3-7abb-4de8-9a1d-edee71906a10	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8262dbb3-7abb-4de8-9a1d-edee71906a10	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8262dbb3-7abb-4de8-9a1d-edee71906a10	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+8262dbb3-7abb-4de8-9a1d-edee71906a10	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 82657b8b-de2d-46ab-ab56-e2790e326d95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8267561e-bc25-4aaa-8242-f6d7ec88143e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82679258-345c-4062-ac62-e94a1e5ace78	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82a6fa6f-13c2-4ea3-bec2-c51b56b2783b	cast	cast-resolve	agreed	-	X	scen	1	0	The Ooze/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82a6fa6f-13c2-4ea3-bec2-c51b56b2783b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Ooze/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82a6fa6f-13c2-4ea3-bec2-c51b56b2783b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Ooze/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-82a70e4c-01ed-4280-80e4-86cb2bf6e63d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+82a70e4c-01ed-4280-80e4-86cb2bf6e63d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blazing-archon:cast:s1,f:xs:XP:blazing-archon:cast:s1	-	-	-	64a08ba7d913	-	fccd202e7cb7	-	-	2026-11-24	xproof
 82aa1402-4b1c-4343-aba5-dd3271cc1ac5	cast	cast-resolve	agreed	-	X	scen	1	0	Molten Exhale/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82b13601-d460-45c5-94a1-07e146d463a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dancing-scimitar:cast:s1,f:xs:XP:dancing-scimitar:cast:s1	-	-	-	25696bf19d5b	-	936722717aff	-	-	2026-11-24	xproof
 82b6a283-9897-4ce1-8de3-e7579cc9b75b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:ruthless-lawbringer:f0t0:s2,f:xs:XP:ruthless-lawbringer:f0t0:s2	-	-	-	267e485f6204	-	e444c4eb9faa	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82d643ef-8380-4fdc-a88d-ed205324dbd9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82d643ef-8380-4fdc-a88d-ed205324dbd9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82d8732b-8246-4fbf-96aa-e192daf527f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82d8732b-8246-4fbf-96aa-e192daf527f1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+82d8732b-8246-4fbf-96aa-e192daf527f1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 82db3a7e-ec3f-4f25-996e-9e1c23c86003	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82debe1c-31cb-411f-a353-98a952180666	cast	cast-resolve	agreed	-	X	scen	1	0	Rodeo Pyromancers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82debe1c-31cb-411f-a353-98a952180666	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rodeo Pyromancers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 671db0d7-b103-4c13-9914-a444f2ecf9d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67247945-17b7-4cb8-ba65-d0dfec367b77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67247945-17b7-4cb8-ba65-d0dfec367b77	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6728064e-1d4e-4d4f-a0ab-127c23478f3b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:presence-of-the-wise:cast:s1,f:xs:XP:presence-of-the-wise:cast:s1	-	-	-	64a08ba7d913	-	f56e3f969804	-	-	2026-11-24	xproof
+6728064e-1d4e-4d4f-a0ab-127c23478f3b	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 672e190d-8ea0-4a2e-b74f-5d35304631e4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 672e190d-8ea0-4a2e-b74f-5d35304631e4	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6731d861-cc52-4a2e-8c33-154681fd50e4	cast	cast-resolve	agreed	-	X	scen	1	0	Venom, Evil Unleashed/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 67821712-e58f-4fee-81af-021059ac72ea	cast	cast-resolve	agreed	-	FX	scen	2	0	Gravblade Heavy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 67821712-e58f-4fee-81af-021059ac72ea	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gravblade Heavy/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 67876214-3777-41b1-935e-75dd5075fa53	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6789a170-f2c5-4fc0-8a45-2b2361e67410	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6789a170-f2c5-4fc0-8a45-2b2361e67410	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chord-of-calling:cast:s1,f:xs:XP:chord-of-calling:cast:s1	-	-	-	64a08ba7d913	-	904f8fc95cea	-	-	2026-11-24	xproof
 678b3fb5-aa9f-4268-9433-2a89dd37b927	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 678b3fb5-aa9f-4268-9433-2a89dd37b927	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 678b3fb5-aa9f-4268-9433-2a89dd37b927	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -141,9 +141,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 67ab82de-1167-42f5-90bd-21c63edcc712	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67af9477-82b2-459e-8c09-b9a93a1d1c94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67afcfef-3f0c-4823-b690-01732f28a005	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-67b2cd0c-ecc8-4129-b1ac-820c9924190c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+67b2cd0c-ecc8-4129-b1ac-820c9924190c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:duskmantle-house-of-shadow:land:s1,f:xs:XP:duskmantle-house-of-shadow:land:s1	-	-	-	64a08ba7d913	-	3db38776f7fc	-	-	2026-11-24	xproof
 67b2cd0c-ecc8-4129-b1ac-820c9924190c	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-67b2cd0c-ecc8-4129-b1ac-820c9924190c	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+67b2cd0c-ecc8-4129-b1ac-820c9924190c	land	land	agreed	-	FX	start	2	0	x:xs:XP:duskmantle-house-of-shadow:land:s1,f:xs:XP:duskmantle-house-of-shadow:land:s1	-	-	-	64a08ba7d913	-	3db38776f7fc	-	-	2026-11-24	xproof
 67b4a4bc-0b02-4cef-b5c8-41c839eaf0cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67b87332-44e1-4948-9269-5fc8f6107d0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67b87332-44e1-4948-9269-5fc8f6107d0e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

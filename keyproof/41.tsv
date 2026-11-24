@@ -15,7 +15,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 410acdbc-3a00-49db-a712-ad970d24b363	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 410ce48e-d907-4bc5-ad90-2067161a0e04	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 411137a5-7054-42bc-a731-88a15e5e6b9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-411137a5-7054-42bc-a731-88a15e5e6b9d	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+411137a5-7054-42bc-a731-88a15e5e6b9d	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 41129dc1-be88-4198-94f9-032817a79bc7	cast	cast-resolve	agreed	-	FX	scen	2	0	Karakyk Guardian/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 41129dc1-be88-4198-94f9-032817a79bc7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Karakyk Guardian/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 41129dc1-be88-4198-94f9-032817a79bc7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Karakyk Guardian/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 41820f91-27cf-41c0-bb5e-9adf6845a6a4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4187fd6d-5660-4ea7-a9dd-402487ec8721	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4187fd6d-5660-4ea7-a9dd-402487ec8721	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-418be12f-b40a-4018-86c1-98c9000a999a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+418be12f-b40a-4018-86c1-98c9000a999a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moroii:cast:s1,f:xs:XP:moroii:cast:s1	-	-	-	64a08ba7d913	-	aff2cce337f0	-	-	2026-11-24	xproof
 418be12f-b40a-4018-86c1-98c9000a999a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 41960d32-ddb5-42be-94b2-3a2e77ca148d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 41960d32-ddb5-42be-94b2-3a2e77ca148d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

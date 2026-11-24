@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49479778-c4c0-43ba-a7b7-45f00d067462	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Maze's End/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49479778-c4c0-43ba-a7b7-45f00d067462	land	play-land	agreed	-	X	scen	1	0	Maze's End/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 494895db-3da1-4a19-b7a5-ea47817f4e4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-494895db-3da1-4a19-b7a5-ea47817f4e4f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+494895db-3da1-4a19-b7a5-ea47817f4e4f	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PRM.json:	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 49491601-e272-4603-9348-185a2953bd4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49491601-e272-4603-9348-185a2953bd4b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 494b31b2-27ef-4ca1-ac72-c2fcfc8a23a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -188,7 +188,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49dc3434-2501-4788-84f2-93e55730f67c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49dc3434-2501-4788-84f2-93e55730f67c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49dddec0-d958-4810-8c6e-225fc8118c8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49e0af9d-eb76-4ad6-b60a-430ae353728c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+49e0af9d-eb76-4ad6-b60a-430ae353728c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:empty-the-catacombs:cast:s1,f:xs:XP:empty-the-catacombs:cast:s1	-	-	-	64a08ba7d913	-	52266d040c47	-	-	2026-11-24	xproof
 49e1e202-37bf-46ed-93d1-1adb13726039	cast	cast-resolve	agreed	-	X	scen	1	0	Heartfire Hero/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49e1e202-37bf-46ed-93d1-1adb13726039	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Heartfire Hero/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49e1e202-37bf-46ed-93d1-1adb13726039	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Heartfire Hero/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

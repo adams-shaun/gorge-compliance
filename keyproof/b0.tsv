@@ -33,7 +33,7 @@ b026a2da-59e9-4b26-9094-a1cc2a5b95ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 b027302f-80c2-441d-a9fd-bbe64bf5cf8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b027302f-80c2-441d-a9fd-bbe64bf5cf8a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b027302f-80c2-441d-a9fd-bbe64bf5cf8a	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b027a80b-30cf-4e7b-8902-efd584e0edf7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b027a80b-30cf-4e7b-8902-efd584e0edf7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drooling-groodion:cast:s1,f:xs:XP:drooling-groodion:cast:s1	-	-	-	64a08ba7d913	-	2a8f27e327af	-	-	2026-11-24	xproof
 b027a80b-30cf-4e7b-8902-efd584e0edf7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b02ab3c7-fe4a-443c-b860-ba971d3301b0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b02ab3c7-fe4a-443c-b860-ba971d3301b0	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -190,9 +190,9 @@ b0d0c534-8bd2-4801-aadd-dcc9c92d6ec3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 b0d3fd57-1420-4dd1-8410-9d659655287f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b0d3fd57-1420-4dd1-8410-9d659655287f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b0d3fd57-1420-4dd1-8410-9d659655287f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b0d60856-80f9-4c64-9768-28a0a690ecb1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b0d60856-80f9-4c64-9768-28a0a690ecb1	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 b0d60856-80f9-4c64-9768-28a0a690ecb1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b0d60856-80f9-4c64-9768-28a0a690ecb1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b0d60856-80f9-4c64-9768-28a0a690ecb1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 b0d639cb-71d4-454f-9dd6-89cd7a59b702	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b0d639cb-71d4-454f-9dd6-89cd7a59b702	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b0d639cb-71d4-454f-9dd6-89cd7a59b702	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b139231-dcd2-4b03-bcf2-fcb040617b69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b1519b1-665c-47b8-8f96-0027410ed81c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b1519b1-665c-47b8-8f96-0027410ed81c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b175a33-a05c-49fa-802a-36f7013c892a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b175a33-a05c-49fa-802a-36f7013c892a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	64a08ba7d913	-	da27cbfd70de	-	-	2026-11-24	xproof
 7b175a33-a05c-49fa-802a-36f7013c892a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b18cfad-a1cf-46c2-bcdd-7762c13d50e5	cast	cast-resolve	agreed	-	FX	scen	2	0	Thornvault Forager/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b18cfad-a1cf-46c2-bcdd-7762c13d50e5	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Thornvault Forager/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b9a574f-6d56-421b-8fbd-94da1e6e3ce1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Traxos, Academy Guardian/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b9a574f-6d56-421b-8fbd-94da1e6e3ce1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Traxos, Academy Guardian/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b9b3347-a374-40fd-a12a-73187225194e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b9b3347-a374-40fd-a12a-73187225194e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b9b3347-a374-40fd-a12a-73187225194e	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 7b9ddff4-82f5-4068-8105-116b8a6180d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b9ddff4-82f5-4068-8105-116b8a6180d5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b9ddff4-82f5-4068-8105-116b8a6180d5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

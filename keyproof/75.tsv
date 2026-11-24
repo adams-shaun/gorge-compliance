@@ -144,8 +144,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75b235d3-595a-4859-be45-9559d8445db5	land	play-land	agreed	-	X	scen	1	0	Selesnya Guildgate/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 75b2da25-e551-4add-a252-6d4789366b5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75b2dd64-a2f5-4032-a19f-5b485dc44b16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75b39a67-6720-482f-935a-c142ca0f7891	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seed-the-land:cast:s1,f:xs:XP:seed-the-land:cast:s1	-	-	-	64a08ba7d913	-	73a5675b135b	-	-	2026-11-24	xproof
-75b39a67-6720-482f-935a-c142ca0f7891	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+75b39a67-6720-482f-935a-c142ca0f7891	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+75b39a67-6720-482f-935a-c142ca0f7891	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 75bf0f27-9df1-4ab4-97a8-94bb3223bdf9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75bf0f27-9df1-4ab4-97a8-94bb3223bdf9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75c626fb-9dfc-4a94-b59f-f0e45c7b2f56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75da657e-0e36-4f2a-9b81-b7eba7d8e050	cast	cast-resolve	agreed	-	X	scen	1	0	Unburied Earthcarver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 75da657e-0e36-4f2a-9b81-b7eba7d8e050	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Unburied Earthcarver/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 75dcdf05-b392-4a96-98ae-5ec4cd425eee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75df9e6a-a17c-4311-a4e7-ff0d75728337	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+75df9e6a-a17c-4311-a4e7-ff0d75728337	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:golgari-rotwurm:cast:s1,f:xs:XP:golgari-rotwurm:cast:s1	-	-	-	64a08ba7d913	-	cb7d5875f899	-	-	2026-11-24	xproof
 75df9e6a-a17c-4311-a4e7-ff0d75728337	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75e09ac6-d789-4c4d-9aca-845d68f3899f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75e4448b-5bd7-4ed4-8db8-820cd6d04c12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
