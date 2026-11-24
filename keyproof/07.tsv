@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 073f12d1-eaa1-4d08-bc1d-b216a3dc0c67	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gargantuan Leech/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 073f12d1-eaa1-4d08-bc1d-b216a3dc0c67	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gargantuan Leech/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07462467-e4a3-409e-bcef-9cc92ca4c299	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-07462467-e4a3-409e-bcef-9cc92ca4c299	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+07462467-e4a3-409e-bcef-9cc92ca4c299	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0749e79f-e61d-4037-bb39-75f1ebf46c5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0749e79f-e61d-4037-bb39-75f1ebf46c5d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 074e467e-f574-4b44-b5a3-798b592a5a87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -123,12 +123,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 07c3e91c-3593-4797-b7be-ef4fb2913cef	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dream Spoilers/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07c3e91c-3593-4797-b7be-ef4fb2913cef	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dream Spoilers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07c3e91c-3593-4797-b7be-ef4fb2913cef	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dream Spoilers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-07c7193e-f591-4aee-a3cc-3a2c52a38f9b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	78d0801f2bf1	-	01f20403a929	-	-	2026-11-24	xproof
-07c7193e-f591-4aee-a3cc-3a2c52a38f9b	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	78d0801f2bf1	-	01f20403a929	-	-	2026-11-24	xproof
+07c7193e-f591-4aee-a3cc-3a2c52a38f9b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	01f20403a929	-	-	2026-11-24	xproof
+07c7193e-f591-4aee-a3cc-3a2c52a38f9b	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	01f20403a929	-	-	2026-11-24	xproof
 07c7e4d4-6452-437b-9f17-b0ec1fd9f702	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-07c82cde-f00d-4454-9df4-9286e344c9bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:muxus-goblin-grandee:f0t0:s1,f:xs:XP:muxus-goblin-grandee:f0t0:s1	-	-	-	78d0801f2bf1	-	b6e37c1884cb	-	-	2026-11-24	xproof
-07c82cde-f00d-4454-9df4-9286e344c9bb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:muxus-goblin-grandee:f0t0:s1,f:xs:XP:muxus-goblin-grandee:f0t0:s1	-	-	-	78d0801f2bf1	-	b6e37c1884cb	-	-	2026-11-24	xproof
-07c82cde-f00d-4454-9df4-9286e344c9bb	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:muxus-goblin-grandee:f0t1:s1,f:xs:XP:muxus-goblin-grandee:f0t1:s1	-	-	-	78d0801f2bf1	-	b6e37c1884cb	-	-	2026-11-24	xproof
+07c82cde-f00d-4454-9df4-9286e344c9bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:muxus-goblin-grandee:f0t0:s1,f:xs:XP:muxus-goblin-grandee:f0t0:s1	-	-	-	8c0bd19283bb	-	b6e37c1884cb	-	-	2026-11-24	xproof
+07c82cde-f00d-4454-9df4-9286e344c9bb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:muxus-goblin-grandee:f0t0:s1,f:xs:XP:muxus-goblin-grandee:f0t0:s1	-	-	-	8c0bd19283bb	-	b6e37c1884cb	-	-	2026-11-24	xproof
+07c82cde-f00d-4454-9df4-9286e344c9bb	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:muxus-goblin-grandee:f0t1:s1,f:xs:XP:muxus-goblin-grandee:f0t1:s1	-	-	-	8c0bd19283bb	-	b6e37c1884cb	-	-	2026-11-24	xproof
 07d0bd24-7731-4abb-9dc6-912aa17943f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mercurial-pretender:cast:s1,f:xs:XP:mercurial-pretender:cast:s1	-	-	-	d864b561c9cb	-	3647980b7f37	-	-	2026-11-24	xproof
 07d40173-53e7-4328-a3b0-6214d93855b6	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:master-of-waves:cast:s1,f:xs:XP:master-of-waves:cast:s1	-	-	-	d864b561c9cb	-	7e988343a9d9	-	-	2026-11-24	xproof
 07d40173-53e7-4328-a3b0-6214d93855b6	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:master-of-waves:cast:s1,f:xs:XP:master-of-waves:cast:s1	-	-	-	d864b561c9cb	-	7e988343a9d9	-	-	2026-11-24	xproof
@@ -137,8 +137,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 07d830a7-f0a2-4d46-9a53-101dca681603	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Nightdrinker Moroii/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07d830a7-f0a2-4d46-9a53-101dca681603	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Nightdrinker Moroii/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07d830a7-f0a2-4d46-9a53-101dca681603	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:nightdrinker-moroii:f0t0:s2,f:xs:XP:nightdrinker-moroii:f0t0:s2	-	-	-	e07cf3a05ba5	-	2dbc750167dc	-	-	2026-11-24	xproof
-07db0374-3297-49c3-886d-a6bb42f7bb18	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:avatar-of-growth:cast:s1,f:xs:XP:avatar-of-growth:cast:s1	-	-	-	78d0801f2bf1	-	ca29993b2714	-	-	2026-11-24	xproof
-07db0374-3297-49c3-886d-a6bb42f7bb18	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:avatar-of-growth:cast:s1,f:xs:XP:avatar-of-growth:cast:s1	-	-	-	78d0801f2bf1	-	ca29993b2714	-	-	2026-11-24	xproof
+07db0374-3297-49c3-886d-a6bb42f7bb18	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:avatar-of-growth:cast:s1,f:xs:XP:avatar-of-growth:cast:s1	-	-	-	8c0bd19283bb	-	ca29993b2714	-	-	2026-11-24	xproof
+07db0374-3297-49c3-886d-a6bb42f7bb18	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:avatar-of-growth:cast:s1,f:xs:XP:avatar-of-growth:cast:s1	-	-	-	8c0bd19283bb	-	ca29993b2714	-	-	2026-11-24	xproof
 07e15387-f346-4fa0-b556-d1c52d4acc07	cast	cast-resolve	agreed	-	X	scen	1	0	Sab-Sunen, Luxa Embodied/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07e15387-f346-4fa0-b556-d1c52d4acc07	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sab-Sunen, Luxa Embodied/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07e15387-f346-4fa0-b556-d1c52d4acc07	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sab-Sunen, Luxa Embodied/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 040cbd08-7c8c-46c4-9ab6-d7ec0c43f9d2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 040cbd08-7c8c-46c4-9ab6-d7ec0c43f9d2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 040f6f11-7fbe-4635-b935-442e41f1e704	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:lore-weaver:cast:s1,f:xs:XP:lore-weaver:cast:s1	-	-	-	78d0801f2bf1	-	9fe6512fd35e	-	-	2026-11-24	xproof
-040f6f11-7fbe-4635-b935-442e41f1e704	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:lore-weaver:f0a0:s1,f:xs:XP:lore-weaver:f0a0:s1	-	-	-	78d0801f2bf1	-	9fe6512fd35e	-	-	2026-11-24	xproof
+040f6f11-7fbe-4635-b935-442e41f1e704	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:lore-weaver:f0a0:s1,f:xs:XP:lore-weaver:f0a0:s1	-	-	-	8c0bd19283bb	-	9fe6512fd35e	-	-	2026-11-24	xproof
 040f6f11-7fbe-4635-b935-442e41f1e704	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0411aead-9f77-435d-a343-635f23221cf7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0413e0e4-c8f8-44c3-a749-c799766bc8cd	cast	cast-resolve	agreed	-	FX	scen	2	0	Drill Too Deep/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 043fa53c-8a46-4fbd-836f-2403c62e0121	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oran-rief-recluse:f0t0:s1,f:xs:XP:oran-rief-recluse:f0t0:s1	-	-	-	8a1b1a193ec0	-	2dc7816d24db	-	-	2026-11-24	xproof
 0441a901-31ce-419f-a898-e9a9ad4ab351	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04472c4f-0df3-4de8-9cc2-882d95b822be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04472c4f-0df3-4de8-9cc2-882d95b822be	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+04472c4f-0df3-4de8-9cc2-882d95b822be	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 04477339-7ed5-4770-9e5c-6e481ffcc858	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 044a169e-32ae-464a-a642-8d3409e82d9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 044a169e-32ae-464a-a642-8d3409e82d9f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,8 +164,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04b7362d-0490-4cb0-b5d7-2a7732f659ce	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:bojuka-bog:f0a0:s1,f:xs:XP:bojuka-bog:f0a0:s1	-	-	-	8a1b1a193ec0	-	45c4d72e1076	-	-	2026-11-24	xproof
 04b7362d-0490-4cb0-b5d7-2a7732f659ce	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:bojuka-bog:f0t0:s1,f:xs:XP:bojuka-bog:f0t0:s1	-	-	-	8a1b1a193ec0	-	45c4d72e1076	-	-	2026-11-24	xproof
 04b7362d-0490-4cb0-b5d7-2a7732f659ce	land	land	agreed	-	FX	start	4	0	x:xs:XP:bojuka-bog:f0t0:s1,f:xs:XP:bojuka-bog:f0t0:s1	-	-	-	8a1b1a193ec0	-	45c4d72e1076	-	-	2026-11-24	xproof
-04bb6731-5662-48d5-9e48-99d378c4adaf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ranger-en-vec:cast:s1,f:xs:XP:ranger-en-vec:cast:s1	-	-	-	ea3140b6974b	-	3bd436082457	-	-	2026-11-24	xproof
-04bb6731-5662-48d5-9e48-99d378c4adaf	f0/a0	Regenerate	agreed	-	X	start	2	0	x:xs:XP:ranger-en-vec:f0a0:s1	-	-	-	ea3140b6974b	-	3bd436082457	-	-	2026-11-24	xproof
+04bb6731-5662-48d5-9e48-99d378c4adaf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ranger-en-vec:cast:s1,f:xs:XP:ranger-en-vec:cast:s1	-	-	-	8c0bd19283bb	-	3bd436082457	-	-	2026-11-24	xproof
+04bb6731-5662-48d5-9e48-99d378c4adaf	f0/a0	Regenerate	agreed	-	X	start	2	0	x:xs:XP:ranger-en-vec:f0a0:s1	-	-	-	8c0bd19283bb	-	3bd436082457	-	-	2026-11-24	xproof
 04be1e69-2d5c-4931-8906-a6807b5b08ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04c4250e-014a-4067-80e8-4134069354f7	cast	cast-resolve	agreed	-	X	scen	1	0	Flesh Burrower/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04c4250e-014a-4067-80e8-4134069354f7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Flesh Burrower/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04d02394-e17f-43cd-932f-f58e8cc56629	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04d0d20f-720e-4cb6-a3ad-ea2b57bb7efa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04d0d20f-720e-4cb6-a3ad-ea2b57bb7efa	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-04d8615c-3883-4251-9790-1d8a4a40e142	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eternal-dragon:cast:s1,f:xs:XP:eternal-dragon:cast:s1	-	-	-	78d0801f2bf1	-	b7d8c9ba5eef	-	-	2026-11-24	xproof
+04d8615c-3883-4251-9790-1d8a4a40e142	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eternal-dragon:cast:s1,f:xs:XP:eternal-dragon:cast:s1	-	-	-	8c0bd19283bb	-	b7d8c9ba5eef	-	-	2026-11-24	xproof
 04d8615c-3883-4251-9790-1d8a4a40e142	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04d8615c-3883-4251-9790-1d8a4a40e142	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 04da8c46-9703-47f2-974b-c144464ec380	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

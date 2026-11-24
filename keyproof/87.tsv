@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87050537-99c9-4993-a770-4329b2e749e4	cast	cast-resolve	agreed	-	X	scen	1	0	Cid, Timeless Artificer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87050537-99c9-4993-a770-4329b2e749e4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cid, Timeless Artificer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87050537-99c9-4993-a770-4329b2e749e4	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cid, Timeless Artificer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8709b5b1-ef9e-45b2-bf4f-ef4c4d613dcd	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:rocky-tar-pit:f0a0:s1,f:xs:XP:rocky-tar-pit:f0a0:s1	-	-	-	ea3140b6974b	-	6b5ee5bba9a5	-	-	2026-11-24	xproof
+8709b5b1-ef9e-45b2-bf4f-ef4c4d613dcd	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:rocky-tar-pit:f0a0:s1,f:xs:XP:rocky-tar-pit:f0a0:s1	-	-	-	8c0bd19283bb	-	6b5ee5bba9a5	-	-	2026-11-24	xproof
 8709b5b1-ef9e-45b2-bf4f-ef4c4d613dcd	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 870ca989-0e72-4e74-9570-57e129298f2e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:drunau-corpse-trawler:cast:s1,f:xs:XP:drunau-corpse-trawler:cast:s1	-	-	-	d864b561c9cb	-	b2ddb9b459fe	-	-	2026-11-24	xproof
 870ca989-0e72-4e74-9570-57e129298f2e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:drunau-corpse-trawler:f0a0:s1,f:xs:XP:drunau-corpse-trawler:f0a0:s1	-	-	-	d864b561c9cb	-	b2ddb9b459fe	-	-	2026-11-24	xproof
@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87105cdf-c28e-4fd9-83d0-0fef1704b174	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 8711b732-8dab-41d4-a85b-b10edcd25e97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8711b732-8dab-41d4-a85b-b10edcd25e97	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-871549e6-24c0-4fbd-8b71-ba8639b0ee47	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:karoo-meerkat:cast:s1,f:xs:XP:karoo-meerkat:cast:s1	-	-	-	ea3140b6974b	-	f76b3f44be63	-	-	2026-11-24	xproof
+871549e6-24c0-4fbd-8b71-ba8639b0ee47	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:karoo-meerkat:cast:s1,f:xs:XP:karoo-meerkat:cast:s1	-	-	-	8c0bd19283bb	-	f76b3f44be63	-	-	2026-11-24	xproof
 871e4c4e-8105-4cb9-b1cd-53c5f8e64494	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:colossal-skyturtle:cast:s1,f:xs:XP:colossal-skyturtle:cast:s1	-	-	-	ae86f6029288	-	85386f525c02	-	-	2026-11-24	xproof
 871e4c4e-8105-4cb9-b1cd-53c5f8e64494	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:colossal-skyturtle:cast:s1,f:xs:XP:colossal-skyturtle:cast:s1	-	-	-	d864b561c9cb	-	85386f525c02	-	-	2026-11-24	xproof
 871e4c4e-8105-4cb9-b1cd-53c5f8e64494	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8733a4fc-4068-4af4-9598-dc3d895e8556	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87354a7b-01be-419e-b383-4c28e12a2f2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87354a7b-01be-419e-b383-4c28e12a2f2b	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	78d0801f2bf1	-	d3c816d4556f	-	-	2026-11-24	xproof
-87354a7b-01be-419e-b383-4c28e12a2f2b	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+87354a7b-01be-419e-b383-4c28e12a2f2b	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8735c62d-1508-4bdc-a5d0-f7c68d892a5e	cast	cast-resolve	agreed	-	FX	scen	2	0	Germinating Wurm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8735c62d-1508-4bdc-a5d0-f7c68d892a5e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 873694c0-c100-4d24-a74f-1ab26442dd18	cast	counter-spell	agreed	-	FX	scen	2	0	Brush Off/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

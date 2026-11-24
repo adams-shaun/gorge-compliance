@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d1c3ec1-00a4-4890-93a3-e3cf137ca7e4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hobbling-zombie:f0t0:s1,f:xs:XP:hobbling-zombie:f0t0:s1	-	-	-	d864b561c9cb	-	b7e1fd60cf12	-	-	2026-11-24	xproof
 9d1f232c-e904-46f6-a4b7-24ca2ede711c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loran-disciple-of-history:f0t0:s1,f:xs:XP:loran-disciple-of-history:f0t0:s1	-	-	-	ae86f6029288	-	3e7a3fab24ad	-	-	2026-11-24	xproof
 9d1f232c-e904-46f6-a4b7-24ca2ede711c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loran-disciple-of-history:f0t0:s1,f:xs:XP:loran-disciple-of-history:f0t0:s1	-	-	-	ae86f6029288	-	3e7a3fab24ad	-	-	2026-11-24	xproof
-9d1f9036-a466-46b6-ab7c-2de487876978	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:countless-gears-renegade:f0t0:s1,f:xs:XP:countless-gears-renegade:f0t0:s1	-	-	-	ea3140b6974b	-	90cca20714df	-	-	2026-11-24	xproof
+9d1f9036-a466-46b6-ab7c-2de487876978	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:countless-gears-renegade:f0t0:s1,f:xs:XP:countless-gears-renegade:f0t0:s1	-	-	-	8c0bd19283bb	-	90cca20714df	-	-	2026-11-24	xproof
 9d1f9036-a466-46b6-ab7c-2de487876978	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d2460c3-8eeb-4f35-b6f6-748c478664c7	cast	cast-resolve	agreed	-	X	scen	1	0	Enduring Curiosity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9d2460c3-8eeb-4f35-b6f6-748c478664c7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Enduring Curiosity/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d3136da-3efa-4103-9d35-8da87d318544	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glarewielder:f0t0:s1,f:xs:XP:glarewielder:f0t0:s1	-	-	-	d864b561c9cb	-	6b6f1e5c419b	-	-	2026-11-24	xproof
 9d3136da-3efa-4103-9d35-8da87d318544	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:glarewielder:f0t0:s1,f:xs:XP:glarewielder:f0t0:s1	-	-	-	d864b561c9cb	-	6b6f1e5c419b	-	-	2026-11-24	xproof
 9d32da71-60e5-4eb3-97ca-ae76e2f5df57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wand-of-denial:cast:s1,f:xs:XP:wand-of-denial:cast:s1	-	-	-	ea3140b6974b	-	d13296a7c097	-	-	2026-11-24	xproof
-9d32da71-60e5-4eb3-97ca-ae76e2f5df57	f0/a0	PeekAndReveal	agreed	-	FX	start	4	0	x:xs:XP:wand-of-denial:cast:s1,f:xs:XP:wand-of-denial:cast:s1	-	-	-	ea3140b6974b	-	d13296a7c097	-	-	2026-11-24	xproof
+9d32da71-60e5-4eb3-97ca-ae76e2f5df57	f0/a0	PeekAndReveal	agreed	-	FX	start	2	0	x:xs:XP:wand-of-denial:f0a0:s1,f:xs:XP:wand-of-denial:f0a0:s1	-	-	-	8c0bd19283bb	-	d13296a7c097	-	-	2026-11-24	xproof
 9d341ed4-4f9b-40df-9bd9-3bfeaf0fe595	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:abominable-treefolk:cast:s1,f:xs:XP:abominable-treefolk:cast:s1	-	-	-	d864b561c9cb	-	8a09d1634f64	-	-	2026-11-24	xproof
 9d341ed4-4f9b-40df-9bd9-3bfeaf0fe595	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:abominable-treefolk:cast:s1,f:xs:XP:abominable-treefolk:cast:s1	-	-	-	d864b561c9cb	-	8a09d1634f64	-	-	2026-11-24	xproof
 9d3931a2-baba-4e6e-b923-44df00900e51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -127,7 +127,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9da50130-3f83-4968-983c-7dcba257cf1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9da50130-3f83-4968-983c-7dcba257cf1b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9da65d66-71f0-4e17-a1f9-6da6cd1cfa8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9da65d66-71f0-4e17-a1f9-6da6cd1cfa8a	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+9da65d66-71f0-4e17-a1f9-6da6cd1cfa8a	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9da74f0f-143d-4db2-81eb-c7873744a2d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9da74f0f-143d-4db2-81eb-c7873744a2d0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9da7e8b5-887d-4174-b7aa-982fd052fcd1	cast	cast-resolve	agreed	-	X	scen	1	0	Burning Sun Cavalry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -154,9 +154,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9dbc2fc8-ed42-4534-9676-bf0695cd518c	cast	cast-resolve	agreed	-	FX	scen	2	0	You're Not Alone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9dbc3530-b278-4c8d-b2cc-a09dfac9d5e5	cast	cast-resolve	agreed	-	X	scen	1	0	Reassembling Skeleton/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9dbc3530-b278-4c8d-b2cc-a09dfac9d5e5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Reassembling Skeleton/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9dbfa01b-ce7e-4dd1-9257-0c89b831f477	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:knights-of-the-black-rose:cast:s1,f:xs:XP:knights-of-the-black-rose:cast:s1	-	-	-	78d0801f2bf1	-	03acd4f9ca2f	-	-	2026-11-24	xproof
-9dbfa01b-ce7e-4dd1-9257-0c89b831f477	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:knights-of-the-black-rose:cast:s1,f:xs:XP:knights-of-the-black-rose:cast:s1	-	-	-	78d0801f2bf1	-	03acd4f9ca2f	-	-	2026-11-24	xproof
-9dbfa01b-ce7e-4dd1-9257-0c89b831f477	f0/t1	NULL	owed	refused:no-generator:trigger:BecomeMonarch	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+9dbfa01b-ce7e-4dd1-9257-0c89b831f477	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knights-of-the-black-rose:cast:s1,f:xs:XP:knights-of-the-black-rose:cast:s1	-	-	-	8c0bd19283bb	-	03acd4f9ca2f	-	-	2026-11-24	xproof
+9dbfa01b-ce7e-4dd1-9257-0c89b831f477	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:knights-of-the-black-rose:cast:s1,f:xs:XP:knights-of-the-black-rose:cast:s1	-	-	-	8c0bd19283bb	-	03acd4f9ca2f	-	-	2026-11-24	xproof
+9dbfa01b-ce7e-4dd1-9257-0c89b831f477	f0/t1	NULL	owed	refused:no-generator:trigger:BecomeMonarch	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9dbfa026-e364-4111-a03a-e9b1693bc7b7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9dc4b172-da33-40c0-ab29-d68807dbe93f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:castaway-s-despair:f0t0:s1,f:xs:XP:castaway-s-despair:f0t0:s1	-	-	-	d864b561c9cb	-	fd4c230768c3	-	-	2026-11-24	xproof
 9dc4b172-da33-40c0-ab29-d68807dbe93f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:castaway-s-despair:f0t0:s1,f:xs:XP:castaway-s-despair:f0t0:s1	-	-	-	d864b561c9cb	-	fd4c230768c3	-	-	2026-11-24	xproof

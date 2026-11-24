@@ -135,8 +135,8 @@ e1a13723-a6b1-4160-8eb5-f7a4860898a3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 e1a13723-a6b1-4160-8eb5-f7a4860898a3	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e1a22f41-0543-4e85-8fb8-93c018b461aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1a22f41-0543-4e85-8fb8-93c018b461aa	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-e1a2bd31-b800-47cd-8866-1b849a601b09	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:agate-instigator:cast:s1,f:xs:XP:agate-instigator:cast:s1	-	-	-	78d0801f2bf1	-	5ffcfba3619f	-	-	2026-11-24	xproof
-e1a2bd31-b800-47cd-8866-1b849a601b09	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+e1a2bd31-b800-47cd-8866-1b849a601b09	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:agate-instigator:f0t1:s1,f:xs:XP:agate-instigator:f0t1:s1	-	-	-	8c0bd19283bb	-	5ffcfba3619f	-	-	2026-11-24	xproof
+e1a2bd31-b800-47cd-8866-1b849a601b09	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e1a2bd31-b800-47cd-8866-1b849a601b09	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1a41091-6ff1-42bb-b248-90040107efe1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1a41091-6ff1-42bb-b248-90040107efe1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kuldotha-cackler:f0t0:s1,f:xs:XP:kuldotha-cackler:f0t0:s1	-	-	-	ae86f6029288	-	1ab1b5619933	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ e1c458ca-10f6-4da8-a93d-3adfb86fe97d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pre
 e1c458ca-10f6-4da8-a93d-3adfb86fe97d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:preening-champion:f0t0:s1,f:xs:XP:preening-champion:f0t0:s1	-	-	-	ae86f6029288	-	3d6f9cef255a	-	-	2026-11-24	xproof
 e1c49bdb-cfd1-4ebf-90f7-73bd5009f75e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:looming-hoverguard:f0t0:s1,f:xs:XP:looming-hoverguard:f0t0:s1	-	-	-	25696bf19d5b	-	f38cbe0de1a3	-	-	2026-11-24	xproof
 e1c49bdb-cfd1-4ebf-90f7-73bd5009f75e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:looming-hoverguard:f0t0:s1,f:xs:XP:looming-hoverguard:f0t0:s1	-	-	-	25696bf19d5b	-	f38cbe0de1a3	-	-	2026-11-24	xproof
-e1c5bfae-07cb-4194-8a86-201503e17085	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pit-keeper:f0t0:s1,f:xs:XP:pit-keeper:f0t0:s1	-	-	-	78d0801f2bf1	-	7045bb67161d	-	-	2026-11-24	xproof
+e1c5bfae-07cb-4194-8a86-201503e17085	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pit-keeper:f0t0:s1,f:xs:XP:pit-keeper:f0t0:s1	-	-	-	8c0bd19283bb	-	7045bb67161d	-	-	2026-11-24	xproof
 e1c5bfae-07cb-4194-8a86-201503e17085	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1c6e606-c4e4-4067-8cb9-46753785dfeb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:riptide-chronologist:cast:s1,f:xs:XP:riptide-chronologist:cast:s1	-	-	-	fc71ca68c5ac	-	c0a26f731978	-	-	2026-11-24	xproof
 e1c6e606-c4e4-4067-8cb9-46753785dfeb	f0/a0	ChooseType	agreed	-	FX	start	2	0	x:xs:XP:riptide-chronologist:f0a0:s1,f:xs:XP:riptide-chronologist:f0a0:s1	-	-	-	fc71ca68c5ac	-	c0a26f731978	-	-	2026-11-24	xproof

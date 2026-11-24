@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 3c02d725-a05e-4086-9caa-ddb005d7ae18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c02d725-a05e-4086-9caa-ddb005d7ae18	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+3c02d725-a05e-4086-9caa-ddb005d7ae18	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3c032e74-69c6-48ca-95d4-51aa3d894c14	cast	cast-resolve	agreed	-	X	scen	1	0	Trusty Boomerang/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3c032e74-69c6-48ca-95d4-51aa3d894c14	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Trusty Boomerang/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3c032e74-69c6-48ca-95d4-51aa3d894c14	static#0.0	static#0.0	agreed	-	X	scen	1	0	Trusty Boomerang/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -104,8 +104,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c7dd86d-25eb-4b24-9358-98b951248e04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c7dd86d-25eb-4b24-9358-98b951248e04	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c7dd86d-25eb-4b24-9358-98b951248e04	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-3c7ea603-c985-4107-806b-a467b5fcca36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scholar-of-new-horizons:cast:s1,f:xs:XP:scholar-of-new-horizons:cast:s1	-	-	-	78d0801f2bf1	-	c641dbf4a68d	-	-	2026-11-24	xproof
-3c7ea603-c985-4107-806b-a467b5fcca36	f0/a0	NULL	owed	refused:steps-needed:cost:RemoveAnyCounter	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+3c7ea603-c985-4107-806b-a467b5fcca36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scholar-of-new-horizons:cast:s1,f:xs:XP:scholar-of-new-horizons:cast:s1	-	-	-	8c0bd19283bb	-	c641dbf4a68d	-	-	2026-11-24	xproof
+3c7ea603-c985-4107-806b-a467b5fcca36	f0/a0	NULL	owed	refused:steps-needed:cost:RemoveAnyCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3c7ea8d0-d866-4c02-bdfc-13bbc87c094a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c7f7a67-6a71-4f40-8554-2e724e6916a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c7f7a67-6a71-4f40-8554-2e724e6916a6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -147,7 +147,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c9d217e-d7f8-43df-9bb6-58d29f93e2c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frillscare-mentor:f0t0:s1,f:xs:XP:frillscare-mentor:f0t0:s1	-	-	-	ae86f6029288	-	7fb98e36f86b	-	-	2026-11-24	xproof
 3c9d217e-d7f8-43df-9bb6-58d29f93e2c4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c9d217e-d7f8-43df-9bb6-58d29f93e2c4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:frillscare-mentor:f0t0:s1,f:xs:XP:frillscare-mentor:f0t0:s1	-	-	-	ae86f6029288	-	7fb98e36f86b	-	-	2026-11-24	xproof
-3c9faba7-f2d3-4978-be94-020dc8003dc0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:intuition:cast:s1,f:xs:XP:intuition:cast:s1	-	-	-	ea3140b6974b	-	3824ec894eb0	-	-	2026-11-24	xproof
+3c9faba7-f2d3-4978-be94-020dc8003dc0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:intuition:cast:s1,f:xs:XP:intuition:cast:s1	-	-	-	8c0bd19283bb	-	3824ec894eb0	-	-	2026-11-24	xproof
 3c9fcda6-3ebc-4f9d-9f73-2bb4252d9420	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:amaranthine-wall:cast:s1,f:xs:XP:amaranthine-wall:cast:s1	-	-	-	d864b561c9cb	-	ce3827eaf72a	-	-	2026-11-24	xproof
 3c9fcda6-3ebc-4f9d-9f73-2bb4252d9420	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ca07da2-29a1-40ce-a7f3-4838e95ca1d9	cast	cast-resolve	agreed	-	FX	scen	2	0	Heartflame Duelist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -46,7 +46,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f299e69-d82b-48c9-b7f5-cf07cd9dced2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f299e69-d82b-48c9-b7f5-cf07cd9dced2	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:jungle-delver:f0a0:s1,f:xs:XP:jungle-delver:f0a0:s1	-	-	-	d864b561c9cb	-	4dfeb21eb98c	-	-	2026-11-24	xproof
 2f2a3588-b9a6-4c1a-89f8-b11339851b8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f2a3588-b9a6-4c1a-89f8-b11339851b8f	f0/a0	DestroyAll	agreed	-	FX	start	2	0	x:xs:XP:tranquil-grove:f0a0:s1,f:xs:XP:tranquil-grove:f0a0:s1	-	-	-	ea3140b6974b	-	ee8cb3db1161	-	-	2026-11-24	xproof
+2f2a3588-b9a6-4c1a-89f8-b11339851b8f	f0/a0	DestroyAll	agreed	-	FX	start	2	0	x:xs:XP:tranquil-grove:f0a0:s1,f:xs:XP:tranquil-grove:f0a0:s1	-	-	-	8c0bd19283bb	-	ee8cb3db1161	-	-	2026-11-24	xproof
 2f2d75a0-d751-4c74-b357-8f92a992447f	cast	cast-resolve	agreed	-	FX	scen	2	0	Kellan, Inquisitive Prodigy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f2d75a0-d751-4c74-b357-8f92a992447f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kellan, Inquisitive Prodigy/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f2d75a0-d751-4c74-b357-8f92a992447f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kellan, Inquisitive Prodigy/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f8b2bca-991c-4dee-829b-c1cc7deaadfb	f0/a0	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 2f8b2bca-991c-4dee-829b-c1cc7deaadfb	f0/a1	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 2f8c4805-694d-4408-8eb5-9fb7ce278ded	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:springing-tiger:cast:s1,f:xs:XP:springing-tiger:cast:s1	-	-	-	fc71ca68c5ac	-	1a9c8883bc1b	-	-	2026-11-24	xproof
-2f91818f-a6fe-4472-b52b-ab574f790905	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zebra-unicorn:cast:s1,f:xs:XP:zebra-unicorn:cast:s1	-	-	-	ea3140b6974b	-	e86033fe00ff	-	-	2026-11-24	xproof
+2f91818f-a6fe-4472-b52b-ab574f790905	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zebra-unicorn:cast:s1,f:xs:XP:zebra-unicorn:cast:s1	-	-	-	8c0bd19283bb	-	e86033fe00ff	-	-	2026-11-24	xproof
 2f91818f-a6fe-4472-b52b-ab574f790905	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 2f920bf2-6a49-47c2-be3c-9787c377673b	cast	cast-resolve	agreed	-	X	scen	1	0	Skystreak Engineer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f920bf2-6a49-47c2-be3c-9787c377673b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Skystreak Engineer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -237,7 +237,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2fdc0d15-ecb4-4a6d-be77-7a3fca188c9c	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Adaptive Gemguard/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2fdc0d17-b683-4263-949e-4f74ec76badf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:temur-battle-rage:cast:s1,f:xs:XP:temur-battle-rage:cast:s1	-	-	-	d864b561c9cb	-	feeeef506f7e	-	-	2026-11-24	xproof
 2fdc484e-b3c3-4f4e-99a1-26a1134aa1cd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:noxious-toad:cast:s1,f:xs:XP:noxious-toad:cast:s1	-	-	-	ea3140b6974b	-	026f87ed5f46	-	-	2026-11-24	xproof
-2fdc484e-b3c3-4f4e-99a1-26a1134aa1cd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:noxious-toad:f0t0:s1,f:xs:XP:noxious-toad:f0t0:s1	-	-	-	ea3140b6974b	-	026f87ed5f46	-	-	2026-11-24	xproof
+2fdc484e-b3c3-4f4e-99a1-26a1134aa1cd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:noxious-toad:f0t0:s1,f:xs:XP:noxious-toad:f0t0:s1	-	-	-	8c0bd19283bb	-	026f87ed5f46	-	-	2026-11-24	xproof
 2fdde5f7-a235-43a4-88a5-2faaf5900bd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fdeb920-2e48-4308-9517-743eec219c04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fe0ebf5-52ed-4e92-9b93-81e9ae564439	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9636073e-e361-4d2a-92f6-5fe049e5eb23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9636073e-e361-4d2a-92f6-5fe049e5eb23	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 963834c8-42df-4ee6-9b45-b9de88ce2eac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-963834c8-42df-4ee6-9b45-b9de88ce2eac	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+963834c8-42df-4ee6-9b45-b9de88ce2eac	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 963947d5-5fe4-49cd-be0c-0bdb5f7bcbb6	cast	cast-resolve	agreed	-	FX	scen	2	0	Bearer of Glory/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 963947d5-5fe4-49cd-be0c-0bdb5f7bcbb6	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Bearer of Glory/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 963947d5-5fe4-49cd-be0c-0bdb5f7bcbb6	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bearer of Glory/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 967cf377-ae26-464d-85ac-8448b5a911f7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 967e8b3f-8266-4d9a-a38b-d0e10184e1e4	cast	cast-resolve	agreed	-	X	scen	1	0	Akroma's Memorial/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 967e8b3f-8266-4d9a-a38b-d0e10184e1e4	static#0.0	static#0.0	agreed	-	X	scen	1	0	Akroma's Memorial/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-967eca77-d273-4fc6-97d1-df7d8cc6ff59	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mystic-might:cast:s1,f:xs:XP:mystic-might:cast:s1	-	-	-	ea3140b6974b	-	67a20802d734	-	-	2026-11-24	xproof
+967eca77-d273-4fc6-97d1-df7d8cc6ff59	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mystic-might:cast:s1,f:xs:XP:mystic-might:cast:s1	-	-	-	8c0bd19283bb	-	67a20802d734	-	-	2026-11-24	xproof
 967eca77-d273-4fc6-97d1-df7d8cc6ff59	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 967f0c23-7af2-4e86-9ebc-dc2f8856c7c5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96818698-c104-48f4-b73f-c8722d1d1be4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:darling-of-the-masses:cast:s1,f:xs:XP:darling-of-the-masses:cast:s1	-	-	-	d864b561c9cb	-	9cd4e3cc8559	-	-	2026-11-24	xproof
@@ -120,9 +120,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 969fa9b9-161f-461e-8878-9ebcff5a2669	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96a57ce0-f1ab-4af7-8c18-8e35aad11780	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:revered-dead:cast:s1,f:xs:XP:revered-dead:cast:s1	-	-	-	d864b561c9cb	-	5daa8d5bf3fd	-	-	2026-11-24	xproof
 96a57ce0-f1ab-4af7-8c18-8e35aad11780	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:revered-dead:f0a0:s1,f:xs:XP:revered-dead:f0a0:s1	-	-	-	d864b561c9cb	-	5daa8d5bf3fd	-	-	2026-11-24	xproof
-96a6a8d4-6077-470f-984e-b576a24557a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:decree-of-savagery:cast:s1,f:xs:XP:decree-of-savagery:cast:s1	-	-	-	78d0801f2bf1	-	7a1d210ec970	-	-	2026-11-24	xproof
+96a6a8d4-6077-470f-984e-b576a24557a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:decree-of-savagery:cast:s1,f:xs:XP:decree-of-savagery:cast:s1	-	-	-	8c0bd19283bb	-	7a1d210ec970	-	-	2026-11-24	xproof
 96a6a8d4-6077-470f-984e-b576a24557a2	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
-96a6a8d4-6077-470f-984e-b576a24557a2	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+96a6a8d4-6077-470f-984e-b576a24557a2	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 96aab05a-49bc-418a-9980-f3322955de1e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96aab05a-49bc-418a-9980-f3322955de1e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96b3c4ff-b5f7-4315-9b39-2e2146ef10d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodland-druid:cast:s1,f:xs:XP:woodland-druid:cast:s1	-	-	-	fc71ca68c5ac	-	d1383c20104a	-	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96b909ab-55f1-4cde-a675-2504de3da772	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cavalier-of-thorns:cast:s1,f:xs:XP:cavalier-of-thorns:cast:s1	-	-	-	d864b561c9cb	-	f5cb6973a316	-	-	2026-11-24	xproof
 96b909ab-55f1-4cde-a675-2504de3da772	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cavalier-of-thorns:cast:s1,f:xs:XP:cavalier-of-thorns:cast:s1	-	-	-	d864b561c9cb	-	f5cb6973a316	-	-	2026-11-24	xproof
 96b909ab-55f1-4cde-a675-2504de3da772	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-thorns:f0t1:s1,f:xs:XP:cavalier-of-thorns:f0t1:s1	-	-	-	d864b561c9cb	-	f5cb6973a316	-	-	2026-11-24	xproof
-96c12c12-140a-462d-bff0-0554d192b1f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:callous-bloodmage:f0t0:s1,f:xs:XP:callous-bloodmage:f0t0:s1	-	-	-	ea3140b6974b	-	16049655f2af	-	-	2026-11-24	xproof
+96c12c12-140a-462d-bff0-0554d192b1f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:callous-bloodmage:f0t0:s1,f:xs:XP:callous-bloodmage:f0t0:s1	-	-	-	8c0bd19283bb	-	16049655f2af	-	-	2026-11-24	xproof
 96c12c12-140a-462d-bff0-0554d192b1f4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96c2d71e-0fc9-42aa-bc6b-6d0ae3f66f8b	cast	cast-resolve	agreed	-	X	scen	1	0	Hexing Squelcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 96c2d71e-0fc9-42aa-bc6b-6d0ae3f66f8b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hexing Squelcher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
