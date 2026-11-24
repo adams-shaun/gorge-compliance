@@ -51,3 +51,21 @@ func TestDigestCountersLiveMatchSnapshot(t *testing.T) {
 		}
 	}
 }
+
+// TestDigestCountersSkipInternalCounterMarkers: gorge stores a regeneration
+// shield as the internal marker "Shield" (CR 701.19a: a replacement effect, not
+// a counter) and its oracle snapshot omits it. The live digest must too, while
+// a real shield counter (kind "SHIELD", CR 122.1c) stays visible.
+func TestDigestCountersSkipInternalCounterMarkers(t *testing.T) {
+	live := []state.Counter{
+		{Kind: "Shield", N: 1}, {Kind: "Deathtouched", N: 1}, {Kind: state.CumulativeUpkeepPaidCounter, N: 2},
+	}
+	if got := counterMap(live); got != nil {
+		t.Fatalf("internal markers leaked into the digest: %v", got)
+	}
+	live = append(live, state.Counter{Kind: "SHIELD", N: 1}, state.Counter{Kind: "P1P1", N: 2})
+	want := map[string]int32{"SHIELD": 1, "P1P1": 2}
+	if got := counterMap(live); !reflect.DeepEqual(got, want) {
+		t.Fatalf("counterMap = %v, want %v", got, want)
+	}
+}
