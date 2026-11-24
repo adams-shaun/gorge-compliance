@@ -207,6 +207,7 @@ func Tape(reg *cards.Registry, t *game.Tape) (Lowered, error) {
 
 	l.lowerEntries(reg, m, t.Entries, first, t.Outcome.Stall != "")
 	l.markDieRolls(m, t.Entries)
+	l.markCoinFlips(m, t.Entries)
 	l.compactPayment()
 	return l, nil
 }
@@ -674,13 +675,7 @@ func (l *Lowered) markDieRolls(m seatMap, entries []game.Entry) {
 		if len(e.Rolls) == 0 || i < l.FirstEntry {
 			continue
 		}
-		step := -1
-		for k := l.Prelude; k < len(l.StepEntry); k++ {
-			if l.StepEntry[k] >= i {
-				step = k
-				break
-			}
-		}
+		step := l.stepOfEntry(i)
 		if step < 0 {
 			continue
 		}
@@ -690,6 +685,45 @@ func (l *Lowered) markDieRolls(m seatMap, entries []game.Entry) {
 			})
 		}
 	}
+}
+
+// markCoinFlips lowers every recorded coin flip to the step it belongs to,
+// the same way markDieRolls does (one shared stepOfEntry, so the two cannot
+// place a result on different steps). Forge's FlipCoinEffect draws its result
+// from its own seeded stream, so a follower only agrees with gorge when the
+// driver forces the tape's result before the step. Forced and Draws ride
+// along: a flip a FlipCoinMod static forced heads takes no result from the
+// driver, and a doubler flip (Krark's Thumb) takes two.
+func (l *Lowered) markCoinFlips(m seatMap, entries []game.Entry) {
+	if len(l.Item.CoinFlips) > 0 || len(l.StepEntry) == 0 {
+		return
+	}
+	for i, e := range entries {
+		if len(e.Flips) == 0 || i < l.FirstEntry {
+			continue
+		}
+		step := l.stepOfEntry(i)
+		if step < 0 {
+			continue
+		}
+		for _, f := range e.Flips {
+			l.Item.CoinFlips = append(l.Item.CoinFlips, oraclegen.CoinFlip{
+				Step: step, Seat: m.seat(f.Seat), Win: f.Win, Forced: f.Forced, Draws: f.Draws,
+			})
+		}
+	}
+}
+
+// stepOfEntry is the first step (past the prelude) whose StepEntry reaches
+// tape entry i, or -1 when the lowering stopped before it. A group's mana
+// taps have StepEntry -1, so they can never claim an entry's results.
+func (l *Lowered) stepOfEntry(i int) int {
+	for k := l.Prelude; k < len(l.StepEntry); k++ {
+		if l.StepEntry[k] >= i {
+			return k
+		}
+	}
+	return -1
 }
 
 // attach puts a step's asks on it. A cast or activation whose every target
