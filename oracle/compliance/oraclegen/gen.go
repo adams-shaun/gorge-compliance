@@ -1647,6 +1647,12 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					as = append(as, XAnswer{d.Seat, "choice", xmageKeywordRuleText(d.Picks[k])})
 					continue
 				}
+				if m, ok := modeNumberFor(d, k, modes); ok && m == ModeKWBespokeChoiceQueue {
+					// A Pump KWChoice$ on a bespoke-dialog face (Angelic
+					// Skirmisher): the CHOICE queue by XMage's own label.
+					as = append(as, XAnswer{d.Seat, "choice", xmageBespokeChoiceLabel(d.Picks[k])})
+					continue
+				}
 				if m, ok := modeNumberFor(d, k, modes); ok && (m == ModeYesQueue || m == ModeNoQueue) {
 					// A two-way GenericChoice XMage asks as chooseUse: a
 					// Timetwister-style per-player "may shuffle" (Turtles in
@@ -2696,6 +2702,13 @@ const (
 // sentinels, so it never collides with a real 1-based charm position.
 const ModeKWChoiceQueue = -3
 
+// ModeKWBespokeChoiceQueue is the sentinel for a Pump KWChoice$ pick on a face
+// whose XMage class builds its own Choice dialog with its own labels
+// (xmageKWChoiceBespokeFaces: Angelic Skirmisher's "Choose ability for your
+// creatures" over "First strike", "Vigilance", "Lifelink"). Still the CHOICE
+// queue, but the answer is the XMage label, not the keyword rule text.
+const ModeKWBespokeChoiceQueue = -4
+
 // modeNumbers maps each charm mode's label (as gorge's mode decision
 // shows it) to its 1-based position in its Choices$ list, for every Charm
 // on the face -- the spell's own and any modal trigger's. It ALSO carries
@@ -2871,6 +2884,12 @@ func modeNumbers(f *cards.Face) map[string]int {
 	for _, label := range kwChoiceDialogLabels(f) {
 		if _, taken := out[label]; !taken {
 			out[label] = ModeKWChoiceQueue
+		}
+	}
+	// The bespoke-dialog KWChoice$ faces: same queue, XMage's own labels.
+	for _, label := range kwChoiceBespokeLabels(f) {
+		if _, taken := out[label]; !taken {
+			out[label] = ModeKWBespokeChoiceQueue
 		}
 	}
 	for _, sa := range f.Abilities {

@@ -178,6 +178,9 @@ func setupModeAnswers(d rules.OracleDecision, modes map[string]int) []XAnswer {
 			// falls through to setup_mode "-3", which answers nothing and
 			// leaves an invalid -3 on the mode queue.
 			out = append(out, XAnswer{d.Seat, "setup_choice", xmageKeywordRuleText(d.Picks[k])})
+		case ModeKWBespokeChoiceQueue:
+			// A Pump KWChoice$ on a bespoke-dialog face: XMage's own label.
+			out = append(out, XAnswer{d.Seat, "setup_choice", xmageBespokeChoiceLabel(d.Picks[k])})
 		case ModeYesQueue, ModeNoQueue:
 			// A two-way GenericChoice XMage asks as chooseUse (a per-player
 			// "may shuffle" or an xmageChooseUseFaces face).
