@@ -18,7 +18,9 @@ GO_TEST_FLAGS ?= -p=2
 # 7a68b79c92 = 4142596fb7 + fork PRs #11 (enters-tapped sets tapped without a TappedEvent: Attentive Sunscribe) and #12 (a
 # static ability's conditional Custom/WhileControlled effect is not discarded on a false condition, CR 611.3a: Undercover Skrull).
 # 33704ee4fe = 7a68b79c92 + fork PR #13 (Hellfire deals 3 when no creature died, X = 0, CR 608.2c).
-XMAGE_REF  ?= 33704ee4fef60b9d2729fe24975832b9eee66a10
+# fdde07931f = b34a6018 (fork gorge) + fork PR #18 (the imprinted mana value X cost adjuster reads X = 0, not
+# Integer.MAX_VALUE, when nothing is imprinted, CR 107.3c: Soul Foundry, Elite Arcanist, Prototype Portal).
+XMAGE_REF  ?= fdde07931f5255721711a9f1ccfd991edcc269b8
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -91,8 +93,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # consumes gorge's waterbend_generic tap picks (Forge asks for waterbend taps through chooseCardsForConvokeOrImprovise, which took
 # only convoke*/improvise* kinds: Katara's Waterbend {X} paid from an empty pool and was refused). Driver-only change; same trees
 # as FORGE_REF ff076d4432. Fork branch fix/waterbend-tap-pick-driver.
-# ff2049dc97 = 963576e5d2 + MayPlay: a land played from outside the hand is played through its MayPlay copy
-# (PR #438). Driver-only change; same trees as FORGE_REF ff076d4432.
+# ff2049dc97 = 963576e5d2 + landFor plays a land from outside the hand through the copy a MayPlay static grants (Ka-Zar's
+# library top, the card Irascible Wolverine / Kulrath Zealot / Crimson Operative exile, Tablet of Discovery's milled card):
+# the card's own land ability plays only from the hand, so the play did nothing ("step N (play) p0:<land> was not played").
+# Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch fix/land-play-mayplay.
 # f09aac4a4f = ff2049dc97 + the scripted controller answers gorge's OriginAlternative$ zone election: one choose_n over zones
 # becomes Forge's initial "search the library?" confirm plus one confirm per alternative zone, and the Optional$ search_confirm is
 # left for Forge's later ChangeZoneGeneral gate; Endure's endure_counters/endure_spirit map to yes/no; and a same-name library

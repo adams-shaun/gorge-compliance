@@ -1,0 +1,62 @@
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/mrd/SoulFoundryTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/mrd/SoulFoundryTest.java
+index 7de63f3e88..d189495a8f 100644
+--- a/Mage.Tests/src/test/java/org/mage/test/cards/single/mrd/SoulFoundryTest.java
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/mrd/SoulFoundryTest.java
+@@ -37,4 +37,29 @@ public class SoulFoundryTest extends CardTestPlayerBase {
+         assertExileCount("Bloodline Keeper", 1);
+         assertPermanentCount(playerA, "Bloodline Keeper", 1);
+     }
++
++    /**
++     * With nothing imprinted, "X is the mana value of that card" has no card to
++     * read, so X is 0 (CR 107.3c). The ability is still activatable for {0},
++     * taps as part of its cost, and its effect creates no token (CR 609.3).
++     */
++    @Test
++    public void testNothingImprintedActivatesForZero() {
++        setStrictChooseMode(true);
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
++        addCard(Zone.HAND, playerA, "Soul Foundry"); // {4}
++        addCard(Zone.HAND, playerA, "Bloodline Keeper");
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Foundry");
++        setChoice(playerA, false); // decline the optional imprint
++        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X}, {T}: Create a token");
++
++        setStopAt(1, PhaseStep.END_TURN);
++        execute();
++
++        assertPermanentCount(playerA, "Soul Foundry", 1);
++        assertTapped("Soul Foundry", true);
++        assertHandCount(playerA, "Bloodline Keeper", 1);
++        assertPermanentCount(playerA, "Bloodline Keeper", 0);
++    }
+ }
+diff --git a/Mage/src/main/java/mage/abilities/costs/costadjusters/ImprintedManaValueXCostAdjuster.java b/Mage/src/main/java/mage/abilities/costs/costadjusters/ImprintedManaValueXCostAdjuster.java
+index 76ac9ca2a0..5cfd729fbe 100644
+--- a/Mage/src/main/java/mage/abilities/costs/costadjusters/ImprintedManaValueXCostAdjuster.java
++++ b/Mage/src/main/java/mage/abilities/costs/costadjusters/ImprintedManaValueXCostAdjuster.java
+@@ -20,15 +20,19 @@ public enum ImprintedManaValueXCostAdjuster implements CostAdjuster {
+ 
+     @Override
+     public void prepareX(Ability ability, Game game) {
+-        int manaValue = Integer.MAX_VALUE;
++        // CR 107.3c: X is defined by the ability's text. With no imprinted card
++        // (nothing was exiled, or the card is gone) there is no card whose mana
++        // value the text can read, so X is 0; the ability is still activatable
++        // (CR 609.3, the effect does as much as it can) and creates no token.
++        int manaValue = 0;
+ 
+         Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
+         if (sourcePermanent != null
+                 && sourcePermanent.getImprinted() != null
+                 && !sourcePermanent.getImprinted().isEmpty()) {
+-            Card imprintedInstant = game.getCard(sourcePermanent.getImprinted().get(0));
+-            if (imprintedInstant != null) {
+-                manaValue = imprintedInstant.getManaValue();
++            Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
++            if (imprintedCard != null) {
++                manaValue = imprintedCard.getManaValue();
+             }
+         }
+ 

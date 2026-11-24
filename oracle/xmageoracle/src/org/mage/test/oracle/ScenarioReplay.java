@@ -47,6 +47,7 @@ import mage.counters.Counters;
 import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
+import mage.game.turn.Step;
 import mage.game.PutToBattlefieldInfo;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -74,7 +75,10 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -118,6 +122,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // cast in the declare-attackers (attacking-only) or declare-blockers
     // (blocking) step, so the driver must too.
     private PhaseStep phase = MAIN;
+
+    // Phase occurrences: an additional phase (CR 500.8) runs a new Step with
+    // the same PhaseStep name in the same turn, so (turn, PhaseStep) alone
+    // cannot key the actions queued at it. actionOccurrences carries the
+    // occurrence each queued command belongs to; the player hides the other
+    // occurrences at every priority, attack and block declaration.
+    // queuedOccurrences is built from xmage_pos while the scenario is queued;
+    // runtimeStepOccurrence counts the Step instances XMage actually starts.
+    private final Map<Integer, EnumMap<PhaseStep, Integer>> queuedOccurrences = new HashMap<>();
+    private int queuedOccTurn;
+    private PhaseStep queuedOccStep;
+    // The occurrence each queued PlayerAction belongs to. Identity-keyed so
+    // tagging never replaces the action objects: the exact attack/block
+    // batches hold the same instances and remove them by identity.
+    private final Map<PlayerAction, Integer> actionOccurrences = new IdentityHashMap<>();
+    private int runtimeOccTurn;
+    private final Map<PhaseStep, Integer> runtimeStepCounts = new EnumMap<>(PhaseStep.class);
+    private final Map<Step, Integer> runtimeStepOccurrence = new IdentityHashMap<>();
 
     // The stack object names seen at the last checkpoint, for the empty-stack
     // diagnostic: what a pass pair expected to resolve and no longer can.
@@ -369,6 +391,54 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 getManaPool().setAutoPayment(autoPaymentBefore);
                 autoPaymentBefore = null;
             }
+        }
+
+        /** Run only the queued commands of the current phase occurrence.
+         * TestPlayer matches an action by (turn, PhaseStep), which an
+         * additional phase reuses; the hidden actions are put back after the
+         * call so their own occurrence can still reach them. */
+        @Override
+        public boolean priority(Game game) {
+            int occurrence = currentOccurrence(game);
+            List<PlayerAction> hidden = hideOtherOccurrences(occurrence);
+            try {
+                return super.priority(game);
+            } finally {
+                getActions().addAll(hidden);
+            }
+        }
+
+        /** The occurrence to keep visible, or 0 when this player holds no
+         * positioned action (a helper test double). Asking the game for its
+         * Step is only needed when some action can actually be filtered. */
+        private int currentOccurrence(Game game) {
+            if (owner.actionOccurrences == null) {
+                return 0;
+            }
+            for (PlayerAction action : getActions()) {
+                if (owner.actionOccurrences.containsKey(action)) {
+                    return owner.runtimeOccurrence(game);
+                }
+            }
+            return 0;
+        }
+
+        /** Remove the actions of every other occurrence of the current step,
+         * in queue order, so TestPlayer cannot run them here. */
+        private List<PlayerAction> hideOtherOccurrences(int occurrence) {
+            List<PlayerAction> hidden = new ArrayList<>();
+            if (owner.actionOccurrences == null) {
+                return hidden;
+            }
+            for (Iterator<PlayerAction> it = getActions().iterator(); it.hasNext(); ) {
+                PlayerAction action = it.next();
+                Integer at = owner.actionOccurrences.get(action);
+                if (at != null && at != occurrence) {
+                    it.remove();
+                    hidden.add(action);
+                }
+            }
+            return hidden;
         }
 
         /** Spend one unit of the step's recorded payment. Pool.pay consumes
@@ -1129,14 +1199,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
         // from the live battlefield and declared exactly instead of by name.
         @Override
         public void selectAttackers(Game game, UUID attackingPlayerId) {
-            owner.applyExactAttackers(this, game);
-            super.selectAttackers(game, attackingPlayerId);
+            int occurrence = currentOccurrence(game);
+            List<PlayerAction> hidden = hideOtherOccurrences(occurrence);
+            try {
+                owner.applyExactAttackers(this, game);
+                super.selectAttackers(game, attackingPlayerId);
+            } finally {
+                getActions().addAll(hidden);
+            }
         }
 
         @Override
         public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
-            owner.applyExactBlockers(this, game);
-            super.selectBlockers(source, game, defendingPlayerId);
+            int occurrence = currentOccurrence(game);
+            List<PlayerAction> hidden = hideOtherOccurrences(occurrence);
+            try {
+                owner.applyExactBlockers(this, game);
+                super.selectBlockers(source, game, defendingPlayerId);
+            } finally {
+                getActions().addAll(hidden);
+            }
         }
 
         // Tokens may be created after scripted() queues an answer. Resolve a
@@ -2344,6 +2426,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
             turn = TURN;
             activeSeat = (TURN - 1) % 2;
             attackAdvancedTurn = false;
+            resetOccurrences();
+            enterQueuedStep(TURN, MAIN, false);
             queueSetupChoices(sc);
             build(sc);
             if (TURN == 1) {
@@ -2359,6 +2443,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 registerAliases(g);
                 snaps.add(snapshot(info, g));
             });
+            tagQueuedActions(0, 0);
             mergePassPositions(sc);
             JsonArray steps = steps(sc);
             JsonArray xans = sc.has("xmage_answers") && sc.get("xmage_answers").isJsonArray()
@@ -2383,6 +2468,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 int beforeA = playerA.getActions().size();
                 int beforeB = playerB.getActions().size();
                 queuePassCommands(i);
+                tagQueuedActions(beforeA, beforeB);
                 String payment = paymentAt(sc, i);
                 stepPayment = payment;
                 step(st, op, i);
@@ -2410,6 +2496,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     TestPlayer payer = seat(st.has("seat") ? st.get("seat").getAsInt() : 0);
                     queuePaymentEnd(payer);
                 }
+                tagQueuedActions(beforeA, beforeB);
                 queuedA.add(new ArrayList<>(playerA.getActions().subList(beforeA, playerA.getActions().size())));
                 queuedB.add(new ArrayList<>(playerB.getActions().subList(beforeB, playerB.getActions().size())));
                 choicesA.add(new ArrayList<>(playerA.getChoices().subList(beforeChoicesA, playerA.getChoices().size())));
@@ -2427,7 +2514,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // target creatures") asks a target nobody scripted: "Missing
             // TARGET def". So stop at that step instead.
             if (!endTurnScenario && followedPassPosition) {
-                setStopAt(turn, phase);
+                // setStopAt names a PhaseStep, which XMage matches in the
+                // first occurrence of that step in the turn. A window that
+                // ends in a later occurrence (the extra combat/main of CR
+                // 500.8, an additional end step) would stop before the
+                // checkpoints it was cut at, so stop from that occurrence's
+                // own priority and keep the next turn's untap as the
+                // fallback boundary.
+                int stopOccurrence = queuedOccurrence(turn, phase);
+                if (stopOccurrence > 1) {
+                    runCode("stop at " + phase + " occurrence " + stopOccurrence, turn, phase, playerA,
+                            (info, p, g) -> g.pause());
+                    tagQueuedActions(0, 0);
+                    setStopAt(turn + 1, PhaseStep.UNTAP);
+                } else {
+                    setStopAt(turn, phase);
+                }
             } else {
                 setStopAt(endTurnScenario ? turn + 1 : turn,
                         endTurnScenario ? PhaseStep.UPKEEP : PhaseStep.END_TURN);
@@ -4644,10 +4746,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // had among them, which no permanent has, and its alias can still
             // name a copy left in hand: any untapped one of the name makes the
             // same mana.
-            for (ManaSource s : battlefield) {
-                if (s.card instanceof Permanent && !((Permanent) s.card).isTapped()) {
+            // Never one a later step names by its own ordinal: that step
+            // taps it, and taking it here leaves the later tap nothing.
+            java.util.Set<Integer> reserved = laterNamedOrdinals(ref, stepIdx);
+            for (int i = 0; i < battlefield.size(); i++) {
+                ManaSource s = battlefield.get(i);
+                if (s.card instanceof Permanent && !((Permanent) s.card).isTapped()
+                        && !reserved.contains(i + 1)) {
                     onBattlefield = s;
                     break;
+                }
+            }
+            for (ManaSource s : battlefield) {
+                if (onBattlefield == null && s.card instanceof Permanent && !((Permanent) s.card).isTapped()) {
+                    onBattlefield = s;
                 }
             }
         }
@@ -4687,6 +4799,99 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     + " hand, graveyard, exile or library");
         }
         return sources;
+    }
+
+    /**
+     * A land play whose ref has no setup alias: the card entered the hand
+     * mid-window (drawn, returned, searched), so registerAliases never saw it.
+     * Playing it by name still enters XMage's first same-named card.
+     */
+    private void playUnaliasedLand(TestPlayer p, String playRef, String landName) {
+        java.util.Set<UUID> before = noteBattlefield(p, playRef);
+        playLand(turn, phase, p, landName);
+        refAlias.put(playRef, "@" + playRef);
+        bindEnteredLand(p, playRef, before);
+    }
+
+    /** Queue a snapshot of the battlefield's permanent ids; the returned set
+     * fills when the command runs, just ahead of the play it precedes. */
+    private java.util.Set<UUID> noteBattlefield(TestPlayer p, String playRef) {
+        java.util.Set<UUID> before = new java.util.HashSet<>();
+        runCode("note battlefield " + playRef, turn, phase, p, (info, pl, g) -> {
+            before.clear();
+            for (Permanent perm : g.getBattlefield().getAllPermanents()) {
+                before.add(perm.getId());
+            }
+        });
+        return before;
+    }
+
+    /**
+     * Queue, right after a land play, the binding of its ref to the permanent
+     * the play created. A ref whose alias names no battlefield permanent --
+     * none at all (a card that entered the hand after setup) or a setup
+     * object that is not the card the by-name play entered (a library card
+     * the ref ranked before it was drawn) -- is moved onto the new permanent,
+     * so a later tap, target or pick of the ref resolves through
+     * scenarioObjectId instead of the by-name fallback, which would take a
+     * setup land of the same name (CR 305.1, 605.3a). A ref already bound to
+     * a live permanent is left alone.
+     */
+    private void bindEnteredLand(TestPlayer p, String playRef, java.util.Set<UUID> before) {
+        String front = xmageSpelling(refName(playRef));
+        String live = battlefieldName(playRef);
+        runCode("bind entered " + playRef, turn, phase, p, (info, pl, g) -> {
+            UUID current = scenarioObjectId(g, p, playRef);
+            if (current != null && g.getPermanent(current) != null) {
+                return;
+            }
+            Permanent entered = null;
+            Permanent anyEntered = null;
+            int newCount = 0;
+            for (Permanent perm : g.getBattlefield().getAllPermanents()) {
+                if (before.contains(perm.getId()) || !perm.getControllerId().equals(p.getId())) {
+                    continue;
+                }
+                newCount++;
+                anyEntered = perm;
+                if (entered == null && matchesRef(perm, front, live)) {
+                    entered = perm;
+                }
+            }
+            if (entered == null && newCount == 1) {
+                entered = anyEntered;
+            }
+            if (entered == null) {
+                return;
+            }
+            for (int j = 0; j < seats; j++) {
+                seat(j).getAliases().put(playRef, entered.getId());
+            }
+        });
+    }
+
+    /** The 1-based ordinals of the ref's same-named permanents that a step
+     * AFTER stepIdx activates explicitly (same seat, same name). A name
+     * fallback that must pick some untapped land of the name leaves those
+     * for the later step that names them. */
+    private java.util.Set<Integer> laterNamedOrdinals(String ref, int stepIdx) {
+        java.util.Set<Integer> out = new java.util.HashSet<>();
+        JsonArray all = steps(sc0);
+        String seatPrefix = ref.substring(0, ref.indexOf(':') + 1);
+        String name = refName(ref);
+        for (int i = stepIdx + 1; i < all.size(); i++) {
+            JsonObject later = all.get(i).getAsJsonObject();
+            if (!later.has("op") || !"activate".equals(str(later, "op")) || !later.has("card")
+                    || !later.get("card").isJsonPrimitive()) {
+                continue;
+            }
+            String other = str(later, "card");
+            if (other.startsWith(seatPrefix) && !other.contains(":token:") && refName(other).equals(name)
+                    && other.lastIndexOf('#') >= 0) {
+                out.add(refOrdinal(other));
+            }
+        }
+        return out;
     }
 
     /** The only source in list, or its wanted-th (1-based); null when the
@@ -5183,8 +5388,89 @@ public class ScenarioReplay extends CardTestPlayerBase {
         turn = pos.get("turn").getAsInt();
         phase = phaseOfGorgeStep(pos.get("step").getAsString());
         activeSeat = pos.get("active").getAsInt();
+        enterQueuedStep(turn, phase, posFlag(pos, "moved"));
         attackAdvancedTurn = false;
         followedPassPosition = true;
+    }
+
+    /** Start a replay's occurrence bookkeeping: the queued side from the
+     * scenario's positions, the runtime side from the Step instances XMage
+     * starts. They are counted with the same rule, so occurrence N of a step
+     * in xmage_pos is occurrence N in the game. */
+    private void resetOccurrences() {
+        queuedOccurrences.clear();
+        queuedOccTurn = 0;
+        queuedOccStep = null;
+        actionOccurrences.clear();
+        runtimeOccTurn = 0;
+        runtimeStepCounts.clear();
+        runtimeStepOccurrence.clear();
+    }
+
+    /** Record a position the queued replay enters. A pass that moved within
+     * the same step name begins an additional step (CR 500.9), so Moved alone
+     * makes it a new occurrence, not just a different turn or step. */
+    private void enterQueuedStep(int turnNum, PhaseStep step, boolean moved) {
+        EnumMap<PhaseStep, Integer> counts = queuedOccurrences.computeIfAbsent(
+                turnNum, key -> new EnumMap<>(PhaseStep.class));
+        if (turnNum != queuedOccTurn || step != queuedOccStep || moved) {
+            counts.merge(step, 1, Integer::sum);
+        }
+        queuedOccTurn = turnNum;
+        queuedOccStep = step;
+    }
+
+    /** The queued occurrence of a step; 1 for a step no position has entered
+     * (hand-authored scenarios, and a step before its first pass). */
+    private int queuedOccurrence(int turnNum, PhaseStep step) {
+        EnumMap<PhaseStep, Integer> counts = queuedOccurrences.get(turnNum);
+        Integer occurrence = counts == null ? null : counts.get(step);
+        return occurrence == null ? 1 : occurrence;
+    }
+
+    /** The occurrence of the current step in the running game. XMage builds a
+     * new Step for every occurrence (the regular phase's steps and an
+     * additional phase's), so a distinct Step instance of the same (turn,
+     * PhaseStep) is the next occurrence, including an additional same-named
+     * step such as CR 500.9's extra end step. */
+    private int runtimeOccurrence(Game game) {
+        Step step = game.getStep();
+        if (step == null) {
+            return 1;
+        }
+        int turnNum = game.getTurnNum();
+        if (turnNum != runtimeOccTurn) {
+            runtimeOccTurn = turnNum;
+            runtimeStepCounts.clear();
+            runtimeStepOccurrence.clear();
+        }
+        Integer occurrence = runtimeStepOccurrence.get(step);
+        if (occurrence != null) {
+            return occurrence;
+        }
+        occurrence = runtimeStepCounts.merge(game.getTurnStepType(), 1, Integer::sum);
+        runtimeStepOccurrence.put(step, occurrence);
+        return occurrence;
+    }
+
+    /** Tag the actions a step queued (from the two indices) with the
+     * occurrence of the step each one names. Called once before and once
+     * after the step's own queueing, because queuePassCommands registers at
+     * the pre-pass position and the checkpoint at the post-pass one. */
+    private void tagQueuedActions(int fromA, int fromB) {
+        tagQueuedActions(playerA, fromA);
+        tagQueuedActions(playerB, fromB);
+    }
+
+    private void tagQueuedActions(TestPlayer player, int from) {
+        List<PlayerAction> actions = player.getActions();
+        for (int i = from; i < actions.size(); i++) {
+            PlayerAction action = actions.get(i);
+            if (actionOccurrences.containsKey(action)) {
+                continue;
+            }
+            actionOccurrences.put(action, queuedOccurrence(action.getTurnNum(), action.getStep()));
+        }
     }
 
     /** The commands step {@code index} queues before its own actions and
@@ -5553,6 +5839,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         }
                     }
                 }
+                PhaseStep beforeStep = phase;
                 if (decision.equals("blockers") || stepName.equals("declare-blockers")) {
                     phase = PhaseStep.DECLARE_BLOCKERS;
                 } else if (stepName.equals("declare-attackers")) {
@@ -5572,8 +5859,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 } else if (stepName.equals("main1")) {
                     phase = MAIN;
                 }
-                // An empty step is a checkpoint wherever the scenario already
-                // is: phase is left as the preceding ops set it.
+                // A pass_to that moves the phase is the queued replay's own
+                // step entry; an empty one stays where the scenario already
+                // is (phase is left as the preceding ops set it).
+                enterQueuedStep(turn, phase, phase != beforeStep);
                 return;
             }
             case "block": {
@@ -5913,7 +6202,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String landName = xmageSpelling(refName(playRef));
                 String playAlias = refAlias.get(playRef);
                 if (playAlias == null) {
-                    playLand(turn, phase, p, landName);
+                    playUnaliasedLand(p, playRef, landName);
                     return;
                 }
                 // playLand names the land: XMage enters the FIRST same-named
@@ -5925,6 +6214,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // just ahead of the play and prefix the command with it
                 // ("@key Play <name>").
                 String playKey = "play" + stepIdx;
+                java.util.Set<UUID> before = noteBattlefield(p, playRef);
                 runCode("bind " + playRef, turn, phase, p, (info, pl, g) -> {
                     UUID id = playableLandId(p, g, p.getAliasByName(playAlias), landName);
                     if (id == null) {
@@ -5936,6 +6226,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                 });
                 activateAbility(turn, phase, p, "@" + playKey + " Play " + landName);
+                bindEnteredLand(p, playRef, before);
                 return;
             }
             case "pass":

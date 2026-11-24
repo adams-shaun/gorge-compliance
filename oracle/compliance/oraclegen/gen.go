@@ -1390,6 +1390,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	if ownBounce != nil {
 		routing.ownBounce = ownBounce
 	}
+	// RemoveCounter's CounterType$ Any/All election is one per-counter run of
+	// KChoose picks in gorge but one multi-amount dialog in XMage: fold the
+	// run into one "X=<n>" amount per kind message before the generic choice
+	// route scripts the raw kind labels (remove_counter_answers.go).
+	counterAnswers, counterOwned := foldRemoveCounterKindAnswers(ds, snaps)
 	// Trigger-order name answers are demoted back to the inert text form when
 	// the step also scripts other asks (see the trigger_order case).
 	var trigSpans []*trigSpan
@@ -1481,6 +1486,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			// if it shares the step, so it is scripted below regardless.
 			continue
 		}
+		if counterOwned[i] {
+			if as := counterAnswers[i]; len(as) > 0 {
+				out[d.Step] = append(out[d.Step], as...)
+				any = true
+			}
+			continue
+		}
 		if as, ok := bandAnswers(d); ok {
 			// A band declaration (CR 702.22c) is the pair of asks XMage's
 			// Combat.handleBanding poses: a chooseUse "Form a band ...?" for
@@ -1535,18 +1547,40 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[yes]})
 				break
 			}
-			if (d.Resume == "unless_pay" || d.Resume == "unless_decline") && unlessPolarity(d) == "no" {
+			if d.Resume == "unless_pay" || d.Resume == "unless_decline" {
 				// An unless-pay (UnlessCost$) is XMage's boolean chooseUse,
 				// not a mode ask; the engine models it as a one-option mode
 				// decision whose label is the decline ("Don't pay"). The
 				// driver routes only the literals "yes"/"no" to setChoice
 				// (boolean), so the raw label reaches setChoice(String) and
 				// never answers the ask (std3: Dispelling Exhale, Spectral
-				// Denial). Only the DECLINE is answered this way: a paid unless
-				// cost (Lithobraking, Rottenmouth Viper, Meathook Massacre II)
-				// agrees with XMage only as the ordinary mode pick below.
-				as = append(as, XAnswer{d.Seat, "choice", "no"})
-				break
+				// Denial).
+				if unlessPolarity(d) == "no" {
+					as = append(as, XAnswer{d.Seat, "choice", "no"})
+					break
+				}
+				if unlessPaidObjects(ds, i) {
+					// A paid unless cost whose components are OBJECT picks
+					// (Sac<, Discard<, Exile<, tapXType<, ...) is two asks in
+					// XMage: the boolean chooseUse "Pay the cost?", then the
+					// cost's own target group, which XMage poses as a
+					// Player.choose -> makeChoose over the CHOICE queue (not
+					// the target queue: SacrificeTargetCost.pay ->
+					// TargetImpl.choose). The engine records the boolean as
+					// the mode here and the picks as the following
+					// "unless_cost" choose_n, which the ordinary choose_n
+					// route below already joins into one aliased choice.
+					// Answer the boolean yes here so chooseUse consumes
+					// it; leaving the paid pick as the mode answer queued the
+					// alias choice at chooseUse's head, which
+					// assertAliasSupportInChoices rejects (Primeval Force,
+					// Rathi Dragon).
+					as = append(as, XAnswer{d.Seat, "choice", "yes"})
+					break
+				}
+				// A paid mana/life unless cost (Lithobraking, Rottenmouth
+				// Viper, Meathook Massacre II) has no component pick and agrees
+				// with XMage only as the ordinary mode pick below.
 			}
 			if pickKind(d, 0) == "discard" || d.Resume == "discard" {
 				// Gorge's discard card picker is KModes; XMage uses
@@ -2222,6 +2256,24 @@ func unlessPolarity(d rules.OracleDecision) string {
 	// Any other label names the cost being paid ("Pay {2}", "Sacrifice an
 	// artifact").
 	return "yes"
+}
+
+// unlessPaidObjects reports whether the paid unless-pay decision ds[i] opens
+// an object-pick component, the decision gorge's unless walk asks right after
+// the boolean (ResumeKind "unless_cost"). It is a structural lookahead, not a
+// cost-kind list: askUnlessPicks is the only producer of that resume kind, so
+// every Sac/Discard/Exile/tap/return/... unless cost is covered without the
+// caller enumerating them.
+func unlessPaidObjects(ds []rules.OracleDecision, i int) bool {
+	d := ds[i]
+	for j := i + 1; j < len(ds); j++ {
+		n := ds[j]
+		if n.Step != d.Step || n.Seat != d.Seat {
+			continue
+		}
+		return n.Resume == "unless_cost" && len(n.Picks) > 0
+	}
+	return false
 }
 
 // modeNumberFor resolves the k-th pick's 1-based XMage mode number from its
