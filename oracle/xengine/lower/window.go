@@ -276,6 +276,7 @@ func lowerFrom(reg *cards.Registry, t *game.Tape, c *cut, id string, end int, sp
 	stalled := end == len(t.Entries) && t.Outcome.Stall != ""
 	l.lowerEntries(reg, m, wt.Entries[:n], 0, stalled)
 	l.markDieRolls(m, wt.Entries[:n])
+	l.markCoinFlips(m, wt.Entries[:n])
 	l.compactPayment()
 	for k, e := range wt.Entries[:n] {
 		if e.RNG > 0 && !rngAccounted(e) {

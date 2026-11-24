@@ -1,0 +1,61 @@
+{
+ "card": "Cleansing Beam",
+ "family": "spell-conditional",
+ "author": "Oracle text",
+ "oracle_sha": "059a007475fd",
+ "scenarios": [
+  {
+   "name": "radiance-damages-every-creature-sharing-a-color",
+   "cr": [
+    "207.2c",
+    "120.3e"
+   ],
+   "why": "Radiance: Cleansing Beam deals 2 damage to the target red creature and to each other creature that shares a color with it. The other red creature takes 2 and dies; the green creature shares no color and is unharmed.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Goblin Piker",
+      "Fire Drake",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Cleansing Beam"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Cleansing Beam",
+     "mana": "CCCCR",
+     "targets": [
+      "p0:Goblin Piker"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Goblin Piker",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Fire Drake",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "card": "p0:Cleansing Beam",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}
