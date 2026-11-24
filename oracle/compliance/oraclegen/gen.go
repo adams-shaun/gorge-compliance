@@ -1316,11 +1316,15 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var casts map[int]bool
 	var forage map[int][]string
 	var ownBounce map[int]bool
+	var tapThenUntap map[int]bool
 	var snaps []rules.OracleSnapshot
 	var orderAsks map[int]bool
 	for _, ex := range extras {
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
+		}
+		if tapThenUntap == nil {
+			tapThenUntap = ex.tapThenUntap
 		}
 		if forage == nil {
 			forage = ex.forage
@@ -1390,6 +1394,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	if ownBounce != nil {
 		routing.ownBounce = ownBounce
 	}
+	routing.tapThenUntap = tapThenUntap
 	// RemoveCounter's CounterType$ Any/All election is one per-counter run of
 	// KChoose picks in gorge but one multi-amount dialog in XMage: fold the
 	// run into one "X=<n>" amount per kind message before the generic choice
