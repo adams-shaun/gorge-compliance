@@ -1,7 +1,11 @@
 package scen
 
 import (
+	"slices"
+	"sort"
+	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge/engine/cards"
@@ -161,3 +165,168 @@ func upkeepOrDraw(face *cards.Face) bool {
 }
 
 func seatPtr(n int) *int { return &n }
+
+// zoneStart is a ChangesZone trigger on another card, the card on the
+// battlefield (TriggerZones Battlefield):
+//
+//   - an enters trigger ("whenever another creature you control enters",
+//     landfall) is the carrier entering: a basic land played from hand when
+//     the filter takes a land, else a carrier permanent (carrierPool) cast
+//     from hand with exactly the basics its cost takes, by the seat the
+//     filter names, on that seat's turn;
+//   - a dies trigger ("whenever another creature you control dies") is a
+//     sacrifice carrier (sacCarrier) on the named seat's battlefield
+//     sacrificing itself, on that seat's turn.
+func zoneStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile) string {
+	const none = "no-generator:trigger:ChangesZone"
+	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" || selfCard(trig) {
+		return none
+	}
+	filter := trig.Params["ValidCard"]
+	origin, dest := trig.Params["Origin"], trig.Params["Destination"]
+	f.Setup.P0.Battlefield = []string{card}
+	seats := [2]*StartSeat{&f.Setup.P0, &f.Setup.P1}
+	switch {
+	case dest == "Battlefield" && (origin == "" || origin == "Any" || origin == "Hand"):
+		if land, s := landCarrier(reg, filter, basicFor(face.ManaCost)); land != "" {
+			seats[s].Hand = append(seats[s].Hand, land)
+			f.Active = s
+			f.Focus = &StartFocus{Seat: seatPtr(s), Card: land, Kind: "land"}
+			return ""
+		}
+		name, s := filterCarrier(reg, b, card, filter, (*cards.Face).IsPermanent)
+		if name == "" {
+			return none + ":filter"
+		}
+		castCarrier(reg, seats[s], name)
+		f.Active = s
+		f.Focus = &StartFocus{Seat: seatPtr(s), Card: name, Kind: "cast"}
+	case origin == "Battlefield" && (dest == "Graveyard" || dest == "Any"):
+		name, s := sacCarrier(reg, b, card, filter)
+		if name == "" {
+			return none + ":filter"
+		}
+		seats[s].Battlefield = append(seats[s].Battlefield, name)
+		seats[s].Battlefield = append(seats[s].Battlefield, sacLands(reg, name)...)
+		f.Active = s
+		f.Focus = &StartFocus{Seat: seatPtr(s), Card: name, Kind: "ability"}
+	default:
+		return none
+	}
+	return ""
+}
+
+// preferredSacCarriers are tried first by sacCarrier: {W} and {G} creatures
+// whose one ability is "Sacrifice this: prevent all combat damage this
+// turn", free to activate and with no target or choice.
+var preferredSacCarriers = []string{"Kami of False Hope", "Spore Frog"}
+
+// sacCarriers holds each registry's ranked sacrifice carriers, built once.
+var sacCarriers sync.Map // *cards.Registry -> []*cards.Face
+
+// sacPool is every permanent whose one ability sacrifices it (Sac<1/CARDNAME>,
+// with mana and {T} at most) for an effect with no target or choice: prevent
+// combat damage, gain or draw a fixed amount. Ranked: the preferred ones,
+// then by the ability's mana, then name.
+func sacPool(reg *cards.Registry, b *certdeck.Builder) []*cards.Face {
+	if v, ok := sacCarriers.Load(reg); ok {
+		return v.([]*cards.Face)
+	}
+	type ranked struct {
+		f    *cards.Face
+		mana int
+	}
+	var rs []ranked
+	for _, c := range reg.AllCards() {
+		if len(c.Faces) != 1 || !b.Playable(c) {
+			continue
+		}
+		f := c.Faces[0]
+		if !f.IsPermanent() || f.IsLand() || len(f.Abilities) != 1 || len(f.Triggers)+len(f.Statics)+len(f.Repls) > 0 || !evergreenOnly(f) {
+			continue
+		}
+		sa := f.Abilities[0]
+		if sa.Sub != nil || sa.Params["ValidTgts"] != "" || sa.Params["Defined"] != "" && sa.Params["Defined"] != "You" {
+			continue
+		}
+		switch sa.API {
+		case "Fog":
+		case "GainLife", "Draw":
+			n := sa.Params["LifeAmount"] + sa.Params["NumCards"]
+			if _, err := strconv.Atoi(n); n != "" && err != nil {
+				continue
+			}
+		default:
+			continue
+		}
+		sac, mana, ok := false, 0, true
+		for _, tok := range splitCost(sa.Params["Cost"]) {
+			switch {
+			case tok == "Sac<1/CARDNAME>":
+				sac = true
+			case tok == "T":
+				if f.IsCreature() {
+					ok = false // a creature's {T} would wait out summoning sickness on a cast carrier
+				}
+			case manaTokenRE.MatchString(tok) && tok != "X" && tok != "S" && tok != "C":
+				mana += len(landsFor([]string{tok}, "Wastes"))
+			default:
+				ok = false
+			}
+		}
+		if sac && ok {
+			rs = append(rs, ranked{f, mana})
+		}
+	}
+	pref := func(f *cards.Face) int {
+		if i := slices.Index(preferredSacCarriers, f.Name); i >= 0 {
+			return i
+		}
+		return len(preferredSacCarriers)
+	}
+	sort.SliceStable(rs, func(i, j int) bool {
+		a, c := rs[i], rs[j]
+		if pa, pc := pref(a.f), pref(c.f); pa != pc {
+			return pa < pc
+		}
+		if a.mana != c.mana {
+			return a.mana < c.mana
+		}
+		return a.f.Name < c.f.Name
+	})
+	out := make([]*cards.Face, len(rs))
+	for i, r := range rs {
+		out[i] = r.f
+	}
+	sacCarriers.Store(reg, out)
+	return out
+}
+
+// sacCarrier is the first sacrifice carrier (sacPool) the filter takes, a
+// carrier for "dies" or "is put into a graveyard from the battlefield", and
+// the seat the filter's controller names.
+func sacCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string) (string, int) {
+	for _, a := range parseFilter(filter) {
+		if !a.known || a.self {
+			continue
+		}
+		for _, f := range sacPool(reg, b) {
+			if f.Name == card || !a.test(f) {
+				continue
+			}
+			if a.ctrl == ctrlOpp {
+				return f.Name, 1
+			}
+			return f.Name, 0
+		}
+	}
+	return "", 0
+}
+
+// sacLands is the basics a sacrifice carrier's ability takes.
+func sacLands(reg *cards.Registry, name string) []string {
+	c, _ := reg.Lookup(name)
+	f := c.Faces[0]
+	mana, _ := costTokens(f.Abilities[0].Params["Cost"])
+	return landsFor(mana, basicFor(f.ManaCost))
+}

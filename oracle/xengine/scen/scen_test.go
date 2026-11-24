@@ -497,3 +497,35 @@ func TestStartPhaseTriggers(t *testing.T) {
 		{card: "Bandit's Talent", key: "f0/t2", reason: "steps-needed:class-level"},
 	})
 }
+
+// TestStartZoneTriggers: a ChangesZone trigger on another card. An enters
+// trigger is the carrier entering: a basic played for landfall (Icetill
+// Explorer; the lands need adds two tapped Forests), Memnite ({0} vanilla
+// artifact creature) cast for a creature, Nyxborn Courser (vanilla
+// enchantment creature) for an enchantment, and on the opponent's turn for
+// an OppCtrl filter (Authority of the Consuls). A dies trigger is Kami of
+// False Hope sacrificing itself (Garna). An unplaceable filter is refused.
+func TestStartZoneTriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Dazzling Angel", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Memnite"}, p0BF: []string{"Dazzling Angel"},
+			focusCard: "Memnite", focusKind: "cast"},
+		{card: "Icetill Explorer", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Forest"},
+			p0BF:      cat([]string{"Icetill Explorer"}, rep("Forest", 2)),
+			focusCard: "Forest", focusKind: "land"},
+		{card: "Authority of the Consuls", key: "f0/t0", active: 1, maxTurns: 1, p0BF: []string{"Authority of the Consuls"},
+			p1Hand: []string{"Memnite"}, focusSeat: 1, focusCard: "Memnite", focusKind: "cast"},
+		{card: "Garna, Bloodfist of Keld", key: "f0/t0", maxTurns: 1, p0BF: []string{"Garna, Bloodfist of Keld", "Kami of False Hope"},
+			focusCard: "Kami of False Hope", focusKind: "ability"},
+		{card: "Cryptid Inspector", key: "f0/t0", reason: "no-generator:trigger:ChangesZone:filter"},
+	})
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Entity Tracker", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("Entity Tracker: %+v %v", res, err)
+	}
+	if f := res.Start; !slices.Equal(f.Setup.P0.Hand, []string{"Nyxborn Courser"}) || f.Focus.Card != "Nyxborn Courser" ||
+		!slices.Equal(f.Setup.P0.Battlefield[:4], cat([]string{"Entity Tracker"}, rep("Plains", 3))) {
+		t.Errorf("Entity Tracker: hand %v battlefield %v focus %+v, want Nyxborn Courser and its three Plains",
+			f.Setup.P0.Hand, f.Setup.P0.Battlefield, f.Focus)
+	}
+}
