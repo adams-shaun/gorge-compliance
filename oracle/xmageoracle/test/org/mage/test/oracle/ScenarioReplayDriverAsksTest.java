@@ -2,17 +2,26 @@ package org.mage.test.oracle;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+import mage.abilities.Ability;
 import mage.constants.EmptyNames;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import org.mage.test.player.TestPlayer;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /** No database or game: pins the driver asks. Each block names the Level B row it clears. Run
  * scripts/xmage-oracle-test-driver-asks.sh; the replay itself is a real replay. */
@@ -55,13 +64,16 @@ public final class ScenarioReplayDriverAsksTest {
         promisedGift();
         replacementOrder();
         loneForcedTarget();
+        dividedAmountUnscripted();
         multiCandidateSearch();
         phyrexianLife();
         wishDeclined();
         optionalMultiCandidateTarget();
+        mandatoryChoosePickOnTargetQueue();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
                 + " face-down attacker, manifested face-down target, declined dig, alternative cast, promised gift, replacement order,"
-                + " lone forced target, multi-candidate search, phyrexian life, wish decline, optional multi-candidate target");
+                + " lone forced target, divided amount, multi-candidate search, phyrexian life, wish decline, optional multi-candidate target,"
+                + " mandatory choose pick on the target queue");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
@@ -127,6 +139,53 @@ public final class ScenarioReplayDriverAsksTest {
                 "a skip queued for a later target object is hidden from this ask");
         check(laterSkip.equals(Collections.singletonList("Seal of Removal")),
                 "the explicit pick remains this ask's head answer");
+    }
+
+    /** Wayward Guide-Beast: a mandatory non-targeting choose of a controlled land whose pick the
+     * generator scripted on the TARGET queue moves to the CHOICE queue. */
+    private static void mandatoryChoosePickOnTargetQueue() throws Exception {
+        Class<?>[] types = {List.class, List.class, boolean.class, java.util.function.Predicate.class};
+        java.util.function.Predicate<String> lands = a -> a.equals("@p0:Mountain") || a.equals("@p0:Forest");
+        List<String> choices = new ArrayList<>();
+        List<String> targets = new ArrayList<>(Arrays.asList("@p0:Mountain", "Other"));
+        check((Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a target-queue pick naming a candidate moves");
+        check(choices.equals(Collections.singletonList("@p0:Mountain")) && targets.equals(Collections.singletonList("Other")),
+                "the pick leads the choice queue and leaves the target queue: " + choices + " " + targets);
+        choices = new ArrayList<>(Arrays.asList("@p0:Forest"));
+        targets = new ArrayList<>(Arrays.asList("@p0:Mountain"));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a choice head that names a candidate is this ask's own answer");
+        choices = new ArrayList<>();
+        targets = new ArrayList<>(Arrays.asList("Other"));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a target head naming no candidate stays");
+        targets = new ArrayList<>(Arrays.asList("@p0:Mountain"));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, false, lands),
+                "an ask with no candidates takes nothing");
+        choices = new ArrayList<>(Arrays.asList(TestPlayer.CHOICE_SKIP));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a choice skip is this ask's own answer");
+        // The helper alone is not the fix: pin that the choose(Outcome, Target...)
+        // override calls it, after the min-0 may handling and before forcedChoose,
+        // behind the role guards (a TargetPermanent ask that is not one of the
+        // source's own targets). Dropping the call or a guard would leave every
+        // check above passing while the strict replay fails again.
+        String src = System.getProperty("scenarioReplay.source");
+        check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
+        String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
+        int override = text.indexOf("public boolean choose(Outcome outcome, mage.target.Target target, Ability source, Game game)");
+        check(override >= 0, "ScriptedChoicePlayer must override choose(Outcome, Target, Ability, Game)");
+        int forced = text.indexOf("forcedChoose(target, source, game)", override);
+        int call = text.indexOf("movePickToChoices(", override);
+        check(call >= 0 && forced >= 0 && call < forced,
+                "ScriptedChoicePlayer.choose must call movePickToChoices before forcedChoose");
+        String guard = text.substring(Math.max(override, call - 1200), call);
+        check(guard.contains("getMinNumberOfTargets() > 0")
+                        && guard.contains("instanceof mage.target.TargetPermanent")
+                        && guard.contains("source.getTargets().contains(target)")
+                        && guard.contains("source.getTargets().contains(target.getOriginalTarget())"),
+                "the move must stay behind the mandatory / TargetPermanent / not-the-source's-own-target guards");
     }
 
     /** North Wind Avatar: WishEffect asks "Put a card you own from outside the
@@ -568,5 +627,230 @@ public final class ScenarioReplayDriverAsksTest {
         check("Yes".equals(rest.get(0)), "the second ask still sees the life pip's Yes");
         check(pair.size() == 2 && rest.size() == 1,
                 "the starvation check never consumes or reorders the queue");
+    }
+
+    /** (l) Ureni, the Song Unending's ETB: X damage divided among any number
+     * of target creatures and/or planeswalkers with two legal candidates and
+     * no scripted "^X=" answer. gorge settles that without a decision, so the
+     * driver deals the points evenly over every recipient the ask allows
+     * (the lone-candidate rule would stop at one) instead of stopping at
+     * "Missing TARGET def". The production chooseTargetAmount is driven over a
+     * synthetic TargetAmount so a merge that drops or reorders the shares
+     * fails here. A queued "name^X=n" answer at the head and a front skip that
+     * closes the ask stay the base's; a later ask's skip stays queued; a
+     * one-recipient ask with several candidates is a real target choice and
+     * is not guessed. */
+    private static void dividedAmountUnscripted() throws Exception {
+        Class<?>[] sharesTypes = {int.class, int.class};
+        check(Arrays.equals(new int[]{4, 4}, (int[]) adapter("evenShares", sharesTypes, 8, 2)),
+                "8 points over two candidates is not the even 4+4 split");
+        check(Arrays.equals(new int[]{4, 3}, (int[]) adapter("evenShares", sharesTypes, 7, 2)),
+                "the remainder must go to the earlier candidate");
+        check(Arrays.equals(new int[]{1, 1, 1}, (int[]) adapter("evenShares", sharesTypes, 3, 3)),
+                "3 points over three candidates is not one each");
+        check(Arrays.equals(new int[]{1, 1}, (int[]) adapter("evenShares", sharesTypes, 2, 5)),
+                "a 2-point ask cannot give five recipients one each");
+        check(((int[]) adapter("evenShares", sharesTypes, 0, 2)).length == 0,
+                "a zero amount must not ask for a recipient");
+        UUID a = UUID.randomUUID();
+        UUID b = UUID.randomUUID();
+        java.util.function.BiPredicate<UUID, String> amountName = (id, answer) -> {
+            int at = answer == null ? -1 : answer.indexOf("^X=");
+            return (id.equals(a) ? "Ajani Resolute" : "Ornithopter").equals(at >= 0 ? answer.substring(0, at) : answer);
+        };
+        Class<?>[] choiceTypes = {List.class, List.class, boolean.class, java.util.function.BiPredicate.class};
+        List<UUID> two = new ArrayList<>(Arrays.asList(a, b));
+        check((Boolean) adapter("unscriptedChoice", choiceTypes, new ArrayList<String>(), two, true, amountName),
+                "two candidates with no scripted amount must be answered");
+        check(!(Boolean) adapter("unscriptedChoice", choiceTypes,
+                        new ArrayList<>(Collections.singletonList("Ajani Resolute^X=2")), two, true, amountName),
+                "a scripted ^X= answer must be left for the base");
+        List<String> skip = new ArrayList<>(Collections.singletonList(TestPlayer.TARGET_SKIP));
+        check(!(Boolean) adapter("unscriptedChoice", choiceTypes, skip, two, true, amountName),
+                "a front skip that can close the ask must be left for the base");
+        check((Boolean) adapter("unscriptedChoice", choiceTypes, skip, two, false, amountName),
+                "a later ask's skip must not stop the inferred split");
+
+        // Production path. Two legal permanents (passed in reverse creation
+        // order), eight points, two slots.
+        Class<?> scripted = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
+        ScenarioReplay owner = (ScenarioReplay) unsafe().allocateInstance(ScenarioReplay.class);
+        Constructor<?> ctor = scripted.getDeclaredConstructor(
+                org.mage.test.player.TestComputerPlayer.class, ScenarioReplay.class);
+        ctor.setAccessible(true);
+        TestPlayer player = (TestPlayer) ctor.newInstance(
+                new org.mage.test.player.TestComputerPlayer("PlayerA", mage.constants.RangeOfInfluence.ALL), owner);
+        seat(owner, "playerA", player);
+        UUID own = player.getId();
+        Permanent earlier = amountPermanent(own, 1, "Ajani Resolute");
+        Permanent later = amountPermanent(own, 2, "Ornithopter");
+        Game game = amountGame(earlier, later);
+        List<UUID> reversed = Arrays.asList(later.getId(), earlier.getId());
+
+        // (1) Nothing scripted: 4+4, earlier-created first, queue untouched.
+        AmountTarget amount = new AmountTarget(8, 0, 2, reversed);
+        check(player.chooseTargetAmount(mage.constants.Outcome.Benefit, amount, null, game),
+                "chooseTargetAmount declined an unscripted multi-candidate divided ask");
+        check(amount.getTargets().size() == 2,
+                "the divided ask chose " + amount.getTargets().size() + " recipients, not 2");
+        check(amount.getTargets().get(0).equals(earlier.getId()),
+                "the earlier-created permanent must take the first share (stable order)");
+        check(amount.getTargetAmount(earlier.getId()) == 4 && amount.getTargetAmount(later.getId()) == 4,
+                "8 points must be dealt 4+4, got " + amount.getTargetAmount(earlier.getId())
+                        + "+" + amount.getTargetAmount(later.getId()));
+        check(player.getTargets().isEmpty(), "the inferred split left an answer queued");
+
+        // (2) A scripted "name^X=n" answer at the head is the base's: it
+        // takes the whole amount for the named candidate and consumes the entry.
+        player.getTargets().clear();
+        player.getTargets().add("Ornithopter^X=8");
+        amount = new AmountTarget(8, 0, 2, reversed);
+        check(player.chooseTargetAmount(mage.constants.Outcome.Benefit, amount, null, game),
+                "a scripted amount answer did not finish the ask");
+        check(amount.getTargets().size() == 1 && amount.getTargetAmount(later.getId()) == 8,
+                "the scripted 'Ornithopter^X=8' was overridden by an inferred split");
+        check(player.getTargets().isEmpty(), "the scripted amount answer was not consumed");
+
+        // (3) A front skip on an "up to" ask is the base's: it closes the ask
+        // with nothing chosen and is consumed.
+        player.getTargets().clear();
+        player.getTargets().add(TestPlayer.TARGET_SKIP);
+        amount = new AmountTarget(8, 0, 2, reversed);
+        check(!player.chooseTargetAmount(mage.constants.Outcome.Benefit, amount, null, game),
+                "a front skip on an up-to ask did not close it");
+        check(amount.getTargets().isEmpty() && player.getTargets().isEmpty(),
+                "the closing skip was overridden or left queued");
+
+        // (4) On a mandatory ask (min 1) a front skip belongs to a LATER ask:
+        // the split is inferred and the skip stays queued.
+        player.getTargets().clear();
+        player.getTargets().add(TestPlayer.TARGET_SKIP);
+        amount = new AmountTarget(8, 1, 2, reversed);
+        check(player.chooseTargetAmount(mage.constants.Outcome.Benefit, amount, null, game),
+                "a mandatory divided ask declined");
+        check(amount.getTargets().size() == 2 && player.getTargets().equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
+                "a later ask's skip was consumed or the split not inferred");
+
+        // (5) A ONE-recipient ask (max 1) with several candidates is a target
+        // choice, not a division: it must not silently take the first.
+        player.getTargets().clear();
+        amount = new AmountTarget(8, 1, 1, reversed);
+        boolean guessed;
+        try {
+            guessed = player.chooseTargetAmount(mage.constants.Outcome.Benefit, amount, null, game)
+                    || !amount.getTargets().isEmpty();
+        } catch (AssertionError strict) {
+            guessed = false;
+        }
+        check(!guessed && amount.getTargets().isEmpty(),
+                "a max-1 ask with two candidates and no answer silently took a target");
+    }
+
+    /** A divided-amount target with the Ureni shape: an amount, a
+     * minimum and maximum, and a fixed legal set. */
+    private static final class AmountTarget extends mage.target.TargetAmount {
+        private final Set<UUID> possible;
+
+        AmountTarget(int amount, int minTargets, int maxTargets, List<UUID> candidates) {
+            super(mage.abilities.dynamicvalue.common.StaticValue.get(amount), minTargets, maxTargets);
+            possible = new LinkedHashSet<>(candidates);
+            this.targetName = "creature";
+        }
+
+        @Override
+        public AmountTarget copy() {
+            return this;
+        }
+
+        @Override
+        public mage.filter.Filter getFilter() {
+            return mage.filter.StaticFilters.FILTER_PERMANENT;
+        }
+
+        @Override
+        public String getTargetedName(Game game) {
+            return "";
+        }
+
+        @Override
+        public boolean canChoose(UUID playerId, Ability source, Game game) {
+            return true;
+        }
+
+        @Override
+        public Set<UUID> possibleTargets(UUID controllerId, Ability source, Game game) {
+            return possible;
+        }
+
+        @Override
+        public boolean canTarget(UUID id, Ability source, Game game) {
+            return true;
+        }
+
+        @Override
+        public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+            return true;
+        }
+    }
+
+    private static Permanent amountPermanent(UUID controller, int order, String name) {
+        UUID id = UUID.randomUUID();
+        return (Permanent) Proxy.newProxyInstance(Permanent.class.getClassLoader(),
+                new Class<?>[]{Permanent.class}, (proxy, method, args) -> {
+                    switch (method.getName()) {
+                        case "getId": return id;
+                        case "getControllerId": return controller;
+                        case "getName": return name;
+                        case "getCreateOrder": return order;
+                        case "isToken": return false;
+                        case "isPhasedIn": return true;
+                        case "isCopy": return false;
+                        case "isFaceDown": return false;
+                        case "isControlledBy": return controller.equals(args[0]);
+                        case "getCardType": return List.of(mage.constants.CardType.CREATURE);
+                        case "isCreature": return true;
+                        case "isTapped": return false;
+                        case "getExpansionSetCode": return "TST";
+                        default: throw new AssertionError("unexpected permanent call " + method);
+                    }
+                });
+    }
+
+    private static Game amountGame(Permanent first, Permanent second) {
+        return (Game) Proxy.newProxyInstance(Game.class.getClassLoader(),
+                new Class<?>[]{Game.class}, (proxy, method, args) -> {
+                    switch (method.getName()) {
+                        case "getPermanent":
+                            return first.getId().equals(args[0]) ? first
+                                    : second.getId().equals(args[0]) ? second : null;
+                        case "getObject":
+                            return first.getId().equals(args[0]) ? first
+                                    : second.getId().equals(args[0]) ? second : null;
+                        case "getPlayer": return null;
+                        case "getCard": return null;
+                        case "getPlayers": return new LinkedHashMap<UUID, mage.players.Player>();
+                        case "isSimulation": return true;
+                        case "getRangeOfInfluence": return mage.constants.RangeOfInfluence.ALL;
+                        default: throw new AssertionError("unexpected game call " + method);
+                    }
+                });
+    }
+
+    private static void seat(ScenarioReplay owner, String field, TestPlayer player) throws Exception {
+        for (Class<?> c = ScenarioReplay.class; c != null; c = c.getSuperclass()) {
+            try {
+                java.lang.reflect.Field f = c.getDeclaredField(field);
+                f.setAccessible(true);
+                f.set(owner, player);
+                return;
+            } catch (NoSuchFieldException absent) { }
+        }
+        throw new AssertionError("no " + field + " field");
+    }
+
+    private static sun.misc.Unsafe unsafe() throws Exception {
+        java.lang.reflect.Field f = sun.misc.Unsafe.class.getDeclaredField("theUnsafe");
+        f.setAccessible(true);
+        return (sun.misc.Unsafe) f.get(null);
     }
 }

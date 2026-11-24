@@ -29,6 +29,15 @@
 //   - A cost part separator the Oracle prints without its space ("{1}{W},{T},
 //     Exile this artifact", Phoenix Down) is ", " in XMage: Costs.getText
 //     joins every cost's text with ", ".
+//   - "Remove X time counters from this artifact and exile it" -> "Remove X
+//     time counters from {this}, Exile it" for the cards in
+//     xmageSeparateExileItCards: they add the exile as its own cost with
+//     ExileSourceCost.setText("exile it") (HourglassOfTheLost.java:47), which
+//     CostsImpl.getText joins with ", " and capitalises, since the text does
+//     not start with "and". A cost that setText("and exile it") (Trenzalore
+//     Clocktower) or sits in a CompositeCost keeps the Oracle's " and ..."
+//     spelling, because CostsImpl drops the comma before an "and" text, so the
+//     rewrite is per card, never a general " and exile it" rule.
 //   - "another card named {this}" / "other cards named {this}" keeps the
 //     card's printed name: the cost's text is the target filter's message,
 //     built from a literal name (GrandeurAbility's "another card named " +
@@ -51,6 +60,12 @@ var keywordDashWords = map[string]bool{
 	"Forecast": true,
 }
 
+// xmageSeparateExileItCards are the cards whose printed "... and exile it" cost
+// XMage renders as two comma-joined costs, "..., Exile it" (see the header).
+var xmageSeparateExileItCards = map[string]bool{
+	"Hourglass of the Lost": true,
+}
+
 var (
 	sacrificeThisRE   = regexp.MustCompile(`^Sacrifice this [A-Za-z]+$`)
 	exileThisRE       = regexp.MustCompile(`^Exile this ([A-Za-z]+)$`)
@@ -70,6 +85,9 @@ func xmageCostText(cost, sourceName string) string {
 	header, rest, keywordHeader := splitDashHeader(cost)
 	rest = shortSelfRef(rest, sourceName)
 	rest = tightCommaRE.ReplaceAllString(rest, "$1, $2")
+	if xmageSeparateExileItCards[sourceName] {
+		rest = strings.Replace(rest, " and exile it", ", Exile it", 1)
+	}
 	parts := strings.Split(rest, ", ")
 	for i, part := range parts {
 		parts[i] = xmageCostPart(part)
