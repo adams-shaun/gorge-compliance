@@ -1039,6 +1039,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
         // token ref against the LIVE choice game, not a prematurely bound or
         // stale alias. Other choice values and the target path stay unchanged.
         private Game choiceGame;
+        // The target ask in progress (choose / chooseTarget), so the face-down
+        // match can tell which face-up permanents are legal candidates of it.
+        private mage.target.Target askTarget;
+        private Ability askSource;
 
         /** Also: the paid additional cost's sacrifice is posed as a target-group
          * `choose`, which reads XMage's CHOICE queue, not the target queue
@@ -1049,7 +1053,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
         @Override
         public boolean choose(Outcome outcome, mage.target.Target target, Ability source, Game game) {
             Game previous = choiceGame;
+            mage.target.Target previousTarget = askTarget;
+            Ability previousSource = askSource;
             choiceGame = game;
+            askTarget = target;
+            askSource = source;
             try {
                 if (owner.giftPromisedCast && target.getOriginalTarget() instanceof mage.target.common.TargetOpponent) {
                     List<String> opponents = new ArrayList<>();
@@ -1100,6 +1108,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 return super.choose(outcome, target, source, game);
             } finally {
                 choiceGame = previous;
+                askTarget = previousTarget;
+                askSource = previousSource;
             }
         }
 
@@ -1167,14 +1177,45 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     && ((Permanent) object).isFaceDown(choiceGame)) {
                 mage.cards.Card underlying = choiceGame.getCard(object.getId());
                 String underlyingName = underlying == null ? null : underlying.getName();
-                boolean faceUpTwin = false;
-                for (Permanent other : choiceGame.getBattlefield().getAllPermanents()) {
-                    if (!other.isFaceDown(choiceGame) && other.getName().equals(value)) {
-                        faceUpTwin = true;
-                        break;
-                    }
+                // A face-up permanent of the same name keeps the ref only when
+                // the ask in progress could legally pick it: a Mountain LAND
+                // is no candidate of an equip or "sacrifice a creature" ask.
+                // Outside an ask (no target known) only a face-up creature
+                // counts, as the face-down permanent is itself a creature.
+                java.util.Set<UUID> legal = null;
+                if (askTarget != null && askSource != null) {
+                    legal = askTarget.possibleTargets(askTarget.getAffectedAbilityControllerId(getId()), askSource, choiceGame);
                 }
+                final java.util.Set<UUID> candidates = legal;
+                boolean faceUpTwin = faceUpTwinAmong(candidates, object.getId(), id -> {
+                    Permanent other = choiceGame.getPermanent(id);
+                    return other == null || other.isFaceDown(choiceGame)
+                            || (candidates == null && !other.isCreature(choiceGame)) ? null : other.getName();
+                }, choiceGame.getBattlefield().getAllPermanents(), value);
                 return namesFaceDownCard(true, underlyingName, value, faceUpTwin);
+            }
+            return false;
+        }
+
+        /** Whether a face-up permanent other than {@code self} that the ask
+         * may legally pick ({@code legal}; null = ask unknown, every
+         * permanent in {@code field} is looked at) carries {@code value} as
+         * its name. {@code faceUpName} yields a permanent's name, or null
+         * when it is face-down or not a possible twin. */
+        static boolean faceUpTwinAmong(java.util.Set<UUID> legal, UUID self,
+                java.util.function.Function<UUID, String> faceUpName, Iterable<Permanent> field, String value) {
+            java.util.List<UUID> ids = new ArrayList<>();
+            if (legal != null) {
+                ids.addAll(legal);
+            } else {
+                for (Permanent p : field) {
+                    ids.add(p.getId());
+                }
+            }
+            for (UUID id : ids) {
+                if (!id.equals(self) && value != null && value.equals(faceUpName.apply(id))) {
+                    return true;
+                }
             }
             return false;
         }
@@ -1436,7 +1477,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // creation-order resolution applies here too; the outer finally
             // keeps the previous game for the nested ask.
             Game previous = choiceGame;
+            mage.target.Target previousTarget = askTarget;
+            Ability previousSource = askSource;
             choiceGame = game;
+            askTarget = target;
+            askSource = source;
             try {
                 // XMage poses every optional target ask even when no candidate is
                 // legal (Targets.canChooseFromPossibleTargets returns true for a
@@ -1485,6 +1530,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             } finally {
                 choiceGame = previous;
+                askTarget = previousTarget;
+                askSource = previousSource;
             }
         }
 

@@ -205,6 +205,29 @@ public final class ScenarioReplayDriverAsksTest {
                 "an alias, a test command and an unknown card are left to the base");
         check(!(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "Mountain", true),
                 "a face-up Mountain keeps the ref, so the candidate order never decides");
+        // The twin scan is scoped to the ask's legal candidates: a face-up
+        // Mountain LAND is no candidate of an equip / "sacrifice a creature"
+        // ask, so it must not stop the face-down Mountain from matching.
+        java.util.UUID faceDown = java.util.UUID.randomUUID();
+        java.util.UUID land = java.util.UUID.randomUUID();
+        java.util.UUID creatureTwin = java.util.UUID.randomUUID();
+        java.util.Map<java.util.UUID, String> names = new java.util.HashMap<>();
+        names.put(land, "Mountain");
+        names.put(creatureTwin, "Mountain");
+        Class<?>[] twinTypes = {java.util.Set.class, java.util.UUID.class, java.util.function.Function.class,
+                Iterable.class, String.class};
+        java.util.function.Function<java.util.UUID, String> nameOf = names::get;
+        java.util.Set<java.util.UUID> creaturesOnly = new java.util.HashSet<>(Arrays.asList(faceDown));
+        check(!(Boolean) adapter("faceUpTwinAmong", twinTypes, creaturesOnly, faceDown, nameOf,
+                        new ArrayList<Object>(), "Mountain"),
+                "a face-up Mountain land outside the ask's candidates is no twin");
+        java.util.Set<java.util.UUID> withTwin = new java.util.HashSet<>(Arrays.asList(faceDown, creatureTwin));
+        check((Boolean) adapter("faceUpTwinAmong", twinTypes, withTwin, faceDown, nameOf,
+                        new ArrayList<Object>(), "Mountain"),
+                "a face-up candidate of the same name is a twin");
+        check(!(Boolean) adapter("faceUpTwinAmong", twinTypes, withTwin, creatureTwin, nameOf,
+                        new ArrayList<Object>(), "Forest"),
+                "another name is no twin");
     }
 
     /** (f) FIN Choco trigger#0.0: the generator's decline pair ("No" +
