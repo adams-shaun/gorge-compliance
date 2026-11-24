@@ -64,19 +64,19 @@ func TestUnlessPaidObjectCostUsesYesThenTargets(t *testing.T) {
 	}
 }
 
-// A paid mana/life cost has no unless_cost component decision and keeps the
-// ordinary mode answer; a decline stays "no"; a paid sacrifice answers the
-// boolean yes. The component picks themselves ride the ordinary choose_n
-// route (pinned by the find-backed test above), so the synthetic table here
-// covers only the boolean's routing.
+// Every paid unless cost is XMage's boolean chooseUse yes, mana, life, energy
+// or object components alike; a decline stays "no". The component picks
+// themselves ride the ordinary choose_n route (pinned by the find-backed test
+// above), so the synthetic table here covers only the boolean's routing.
 func TestUnlessCostBooleanRouting(t *testing.T) {
 	paid := rules.OracleDecision{Step: 0, Seat: 0, Kind: "mode", GorgeKind: "modes",
 		Options: 2, Min: 1, Max: 1, Picks: []string{"Pay the cost"}, PickIdx: []int{0},
 		PickRefs: []string{"p0:Primeval Force"}, PickKinds: []string{"mode"}, Resume: "unless_pay"}
 	sc := Scenario{Steps: []Step{{Op: "pass"}}}
-	// A mana/life payment records no unless_cost component: keep the mode pick.
+	// A manaless cost (energy, life) records no unless_cost component, but it
+	// is still the one chooseUse boolean: yes, never a numeric mode.
 	got := XAnswersForScenario(nil, rules.OracleResult{Decisions: []rules.OracleDecision{paid}}, sc, nil, nil)
-	if want := [][]XAnswer{{{Seat: 0, Kind: "mode", Value: "1"}}}; !reflect.DeepEqual(got, want) {
+	if want := [][]XAnswer{{{Seat: 0, Kind: "choice", Value: "yes"}}}; !reflect.DeepEqual(got, want) {
 		t.Fatalf("mana/life payment = %+v, want %+v", got, want)
 	}
 	// A decline is still the boolean no; no component decision follows it.
