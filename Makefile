@@ -213,12 +213,20 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # 14070cbbac4 = c873c2c9399 plus the zero-candidate Optional$ hidden ChangeZone decline (xproof decision_shape: Bruna, Light of
 # Alabaster, 4 items). ZoneAuras ("any number of Aura cards that could enchant it from your hand and/or graveyard", ChangeNum$
 # CountAuras) asks "Search your hand and graveyard?" with no Aura card there; gorge, a choice of zero cards, logs no ask, so the
-# confirm was an unanswered strict miss. ScriptedController.confirmAction now answers no when no yes/no is queued for the seat and
-# ChangeNum$ is 0 or no card in any player's Origin$ zones matches ChangeType$; a candidate anywhere keeps the strict miss.
-# ZeroCandidateConfirmTest (2 tests: the empty hand, and a Pacifism in the hand that stays a miss) pins it; the full driver
-# suite (150 tests, including ForcedDieRollTest) is green. Driver-only change; cardsfolder/tokenscripts unchanged (same as
-# FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-zero-candidate-confirm.
-FORGE_ORACLE_REF ?= 14070cbbac414ca38e759a41e7925598069c5835
+# confirm was an unanswered strict miss. ScriptedController.confirmAction answers no when no yes/no is queued for the seat and
+# nothing can move. ZeroCandidateConfirmTest (2 tests) pinned it; efdbea5198 below fixes its candidate filter and cancel handling.
+# The full driver suite (150 tests, including ForcedDieRollTest) was green on it. Driver-only change; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-zero-candidate-confirm.
+# efdbea5198 = 14070cbbac4 plus the two findings on that decline: the candidate scan now uses ChangeZoneEffect's own filter
+# (AbilityUtils.filterListByType, with an EACH ... & ... type split per part) instead of Card.isValid on the raw ChangeType$,
+# so EACH (Michelangelo, Improviser; Yuna's Decision) and Triggered.sameName (Verdant Succession) keep their strict miss when
+# a candidate is present; and Forge's "Cancel Search" ChangeZoneGeneral prompt (the effect's post-pick cancel loop, not the
+# Optional$ gate) is excluded, so with no search carry in flight -- including after a recorded empty pick -- it stays a
+# strict miss instead of answering no and making the effect loop. The origin check now precedes the ChangeNum$ shortcut, so
+# Battlefield/Stack origins are never declined. ZeroCandidateConfirmTest (4 tests) pins it; the full driver suite (152 tests,
+# including ForcedDieRollTest) is green. Driver-only change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# Fork branch fix/xp-forge-driver-zero-candidate-confirm.
+FORGE_ORACLE_REF ?= efdbea519875c6c7c9c35894eb97731e99e0f6d1
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
