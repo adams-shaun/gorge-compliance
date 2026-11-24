@@ -87,11 +87,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 277bd0c7-2400-4c94-ba82-4c9472badb60	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 277bd0c7-2400-4c94-ba82-4c9472badb60	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 277c8ee9-0157-4e45-96ad-1b67716955ee	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-277c8ee9-0157-4e45-96ad-1b67716955ee	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+277c8ee9-0157-4e45-96ad-1b67716955ee	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vengeful-dead:f0t0:s1,f:xs:XP:vengeful-dead:f0t0:s1	-	-	-	78d0801f2bf1	-	8a6c193e5ec5	-	-	2026-11-24	xproof
 277ff122-2d6e-441e-9ec1-980cdb393982	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 277ff122-2d6e-441e-9ec1-980cdb393982	f0/t0	Attacks/Exalted	agreed	-	FX	start	2	0	x:xs:XP:sigiled-behemoth:f0t0:s1,f:xs:XP:sigiled-behemoth:f0t0:s1	-	-	-	8a1b1a193ec0	-	c13911bc9cd0	-	-	2026-11-24	xproof
 278574f6-e083-461b-8bac-52ed51f0cf63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-278574f6-e083-461b-8bac-52ed51f0cf63	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+278574f6-e083-461b-8bac-52ed51f0cf63	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 2786f210-ec64-46ea-9a7f-b03759fb1dae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2786f210-ec64-46ea-9a7f-b03759fb1dae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2786f210-ec64-46ea-9a7f-b03759fb1dae	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27882623-b5ad-49f2-b5ab-f0bdb93268a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 278b237e-9699-43eb-a03e-0b68eccc08b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 278b237e-9699-43eb-a03e-0b68eccc08b3	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-278e51fe-3cd9-4c82-bd81-2164771f8611	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+278e51fe-3cd9-4c82-bd81-2164771f8611	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alms-collector:cast:s1,f:xs:XP:alms-collector:cast:s1	-	-	-	78d0801f2bf1	-	f876e9c86e44	-	-	2026-11-24	xproof
 278ea996-3094-4a76-b6e1-db1d002e5502	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 278ea996-3094-4a76-b6e1-db1d002e5502	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27905301-333e-4cdd-90cf-188159fcf8e9	cast	cast-resolve	agreed	-	FX	scen	2	0	Wear Down/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27b5d9d8-cc19-46be-9862-405cf7ef5408	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 27b690f2-d7ce-43b6-8e8b-98a8ffe487bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27b690f2-d7ce-43b6-8e8b-98a8ffe487bb	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-27b945ad-92a9-4615-87ec-790682e8c3e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angel-of-salvation:f0t0:s1,f:xs:XP:angel-of-salvation:f0t0:s1	-	-	-	5f2128bf97e4	-	fdd46cacde5c	-	-	2026-11-24	xproof
+27b945ad-92a9-4615-87ec-790682e8c3e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angel-of-salvation:f0t0:s1,f:xs:XP:angel-of-salvation:f0t0:s1	-	-	-	78d0801f2bf1	-	fdd46cacde5c	-	-	2026-11-24	xproof
 27b945ad-92a9-4615-87ec-790682e8c3e7	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27c21086-8d19-4379-af37-f251b2ec2502	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27c2b8ce-17b9-4f6c-8444-3bdc636dd413	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-night:f0t0:s1,f:xs:XP:cavalier-of-night:f0t0:s1	-	-	-	d864b561c9cb	-	12e6692f382f	-	-	2026-11-24	xproof

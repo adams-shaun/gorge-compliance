@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 a7036d08-6ee4-49b1-bbbf-c96a937afa15	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7036d08-6ee4-49b1-bbbf-c96a937afa15	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:blood-chin-rager:f0t0:s1,f:xs:XP:blood-chin-rager:f0t0:s1	-	-	-	d864b561c9cb	-	78be7f9f48c1	-	-	2026-11-24	xproof
 a7043fbd-1dfd-42cf-be4b-cc343d0949e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a7043fbd-1dfd-42cf-be4b-cc343d0949e5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a7043fbd-1dfd-42cf-be4b-cc343d0949e5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a7043fbd-1dfd-42cf-be4b-cc343d0949e5	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+a7043fbd-1dfd-42cf-be4b-cc343d0949e5	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 a70d9645-7c25-4fcb-9d16-fb73ce8b55e2	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sanguine-evangelist:f0t0:s2,f:xs:XP:sanguine-evangelist:f0t0:s2	-	-	-	e07cf3a05ba5	-	e427fcd2e86d	-	-	2026-11-24	xproof
 a70d9645-7c25-4fcb-9d16-fb73ce8b55e2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sanguine Evangelist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a70d9645-7c25-4fcb-9d16-fb73ce8b55e2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sanguine Evangelist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -78,10 +78,10 @@ a75b02ba-b0c8-47e3-a05c-e9ba221a7578	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Tarr
 a75b02ba-b0c8-47e3-a05c-e9ba221a7578	f1/a1	activate#1.1	agreed	-	X	scen	1	0	Tarrian's Journal/activate#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a75dbe70-7e3e-446f-9a76-9fbb414f2e7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a75dbe70-7e3e-446f-9a76-9fbb414f2e7c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a75ddd9c-2574-46e9-ac85-58082789ff3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a75ddd9c-2574-46e9-ac85-58082789ff3e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scytheclaw:f0t1:s1,f:xs:XP:scytheclaw:f0t1:s1	-	-	-	78d0801f2bf1	-	8b5f677e2db6	-	-	2026-11-24	xproof
 a75ddd9c-2574-46e9-ac85-58082789ff3e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a75ddd9c-2574-46e9-ac85-58082789ff3e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a75ddd9c-2574-46e9-ac85-58082789ff3e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a75ddd9c-2574-46e9-ac85-58082789ff3e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+a75ddd9c-2574-46e9-ac85-58082789ff3e	f0/t1	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:scytheclaw:f0t1:s1,f:xs:XP:scytheclaw:f0t1:s1	-	-	-	78d0801f2bf1	-	8b5f677e2db6	-	-	2026-11-24	xproof
 a762e8cb-9d33-41fc-b2e8-0c5ad4d7268e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a762e8cb-9d33-41fc-b2e8-0c5ad4d7268e	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 a7641ee0-9c0d-4201-9827-a775ed03797c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -109,8 +109,8 @@ a7865331-4c53-46db-b2d7-7e5cb21b6b9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a786e495-ae3a-4e15-ab32-661d524e2b2d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thundering-sparkmage:f0t0:s1,f:xs:XP:thundering-sparkmage:f0t0:s1	-	-	-	ae86f6029288	-	9e1ef87336fa	-	-	2026-11-24	xproof
 a786e495-ae3a-4e15-ab32-661d524e2b2d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thundering-sparkmage:f0t0:s1,f:xs:XP:thundering-sparkmage:f0t0:s1	-	-	-	ae86f6029288	-	9e1ef87336fa	-	-	2026-11-24	xproof
 a787b18d-d33f-41ea-a0f8-f05e272d06eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a7894a81-8c0a-4015-8bc1-2698cf5306d1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a7894a81-8c0a-4015-8bc1-2698cf5306d1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a7894a81-8c0a-4015-8bc1-2698cf5306d1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:thorn-of-the-black-rose:cast:s1,f:xs:XP:thorn-of-the-black-rose:cast:s1	-	-	-	78d0801f2bf1	-	bd25a6c8719e	-	-	2026-11-24	xproof
+a7894a81-8c0a-4015-8bc1-2698cf5306d1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:thorn-of-the-black-rose:cast:s1,f:xs:XP:thorn-of-the-black-rose:cast:s1	-	-	-	78d0801f2bf1	-	bd25a6c8719e	-	-	2026-11-24	xproof
 a78ab15e-72e7-4d2b-bc42-b2960147ea7b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a78ab15e-72e7-4d2b-bc42-b2960147ea7b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a78b063a-7f74-465a-9670-34f927f4bfe9	cast	cast-resolve	agreed	-	FX	scen	2	0	Aquatic Alchemist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -185,8 +185,8 @@ a7d88510-d2ce-4dd6-938c-964cc74ff7d7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 a7d8c99c-cd44-4bad-82e6-7c7cff9bd89f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wrenn-s-resolve:cast:s1,f:xs:XP:wrenn-s-resolve:cast:s1	-	-	-	d864b561c9cb	-	b09c6d38384a	-	-	2026-11-24	xproof
 a7dad8fe-b0b8-4c6d-ad11-76b402952799	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7df9a4e-d556-4345-9884-0724a3f9d5f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a7dff624-1f6b-4e00-b13b-0b0d69a48ec2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a7dff624-1f6b-4e00-b13b-0b0d69a48ec2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a7dff624-1f6b-4e00-b13b-0b0d69a48ec2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tana-the-bloodsower:cast:s1,f:xs:XP:tana-the-bloodsower:cast:s1	-	-	-	78d0801f2bf1	-	eb9f8031a28e	-	-	2026-11-24	xproof
+a7dff624-1f6b-4e00-b13b-0b0d69a48ec2	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 a7e7059e-83f8-4124-9cc0-64ba150b5d96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warren-warleader:f0t1:s1,f:xs:XP:warren-warleader:f0t1:s1	-	-	-	9ee19e8250ce	-	50d70a57c718	-	-	2026-11-24	xproof
 a7e7059e-83f8-4124-9cc0-64ba150b5d96	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Warren Warleader/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a7e7059e-83f8-4124-9cc0-64ba150b5d96	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
@@ -205,4 +205,4 @@ a7fe5473-fae5-490e-8600-b7e497b9989e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a7fe5473-fae5-490e-8600-b7e497b9989e	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a7fe7621-9bb1-4d0d-8b50-c179c685d79d	cast	cast-resolve	agreed	-	X	scen	1	0	Proctor's Gaze/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a7fea839-d7d7-48b4-aeaf-133767532e32	cast	cast-resolve	agreed	-	FX	scen	2	0	Rite of the Moth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a7ff1b64-8eab-4309-892c-17a619cd302e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a7ff1b64-8eab-4309-892c-17a619cd302e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stunt-double:cast:s1,f:xs:XP:stunt-double:cast:s1	-	-	-	78d0801f2bf1	-	1188dd24cd9b	-	-	2026-11-24	xproof

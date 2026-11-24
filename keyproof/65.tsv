@@ -12,8 +12,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 650949ca-609b-46c5-bc6b-6f782cdcb6d2	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 650949ca-609b-46c5-bc6b-6f782cdcb6d2	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 650bf82e-7f83-470c-bf4a-34281bfe9341	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6511f317-bd38-46d0-b800-7125a3f420da	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6511f317-bd38-46d0-b800-7125a3f420da	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6511f317-bd38-46d0-b800-7125a3f420da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aesi-tyrant-of-gyre-strait:cast:s1,f:xs:XP:aesi-tyrant-of-gyre-strait:cast:s1	-	-	-	78d0801f2bf1	-	f9b2b72b50f5	-	-	2026-11-24	xproof
+6511f317-bd38-46d0-b800-7125a3f420da	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 651220f7-223a-49b3-995d-32f08eb3a16a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6512ddb8-0868-4d32-ab32-8a5250fc571b	cast	cast-resolve	agreed	-	X	scen	1	0	Rite of Renewal/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 65164450-b477-4096-8146-ebb80a709787	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 658d54d4-e967-490c-b958-3743b3b1ef45	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rage-scarred-berserker:cast:s1,f:xs:XP:rage-scarred-berserker:cast:s1	-	-	-	ae86f6029288	-	d3073f315915	-	-	2026-11-24	xproof
 658d54d4-e967-490c-b958-3743b3b1ef45	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rage-scarred-berserker:cast:s1,f:xs:XP:rage-scarred-berserker:cast:s1	-	-	-	ae86f6029288	-	d3073f315915	-	-	2026-11-24	xproof
 658f5cfb-326d-4da9-a39b-2ecd393a1f54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-658f5cfb-326d-4da9-a39b-2ecd393a1f54	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+658f5cfb-326d-4da9-a39b-2ecd393a1f54	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:sinuous-vermin:f0a0:s1,f:xs:XP:sinuous-vermin:f0a0:s1	-	-	-	78d0801f2bf1	-	d3eb5b016da4	-	-	2026-11-24	xproof
 6591a589-deb4-462f-a4f1-f6261f3433c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6591a589-deb4-462f-a4f1-f6261f3433c3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6591a589-deb4-462f-a4f1-f6261f3433c3	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6593a7c1-fb48-4e53-8e6a-339ad2cc4489	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 65986c1b-8e51-4604-b685-d82fa7d1263a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65986c1b-8e51-4604-b685-d82fa7d1263a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65986c1b-8e51-4604-b685-d82fa7d1263a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+65986c1b-8e51-4604-b685-d82fa7d1263a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 659a259d-f75e-4af3-b568-c63225e647de	cast	cast-resolve	agreed	-	FX	scen	2	0	Sporogenic Infection/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 659a259d-f75e-4af3-b568-c63225e647de	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 659a259d-f75e-4af3-b568-c63225e647de	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Sporogenic Infection/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -146,8 +146,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 659bc01c-fa60-4d00-bdad-5bca1d2a978f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Anafenza, Unyielding Lineage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 659dfdbf-5e9d-4828-a967-348cb3bcf05a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 659dfdbf-5e9d-4828-a967-348cb3bcf05a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-659dfdbf-5e9d-4828-a967-348cb3bcf05a	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-659dfdbf-5e9d-4828-a967-348cb3bcf05a	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+659dfdbf-5e9d-4828-a967-348cb3bcf05a	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+659dfdbf-5e9d-4828-a967-348cb3bcf05a	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 65a7fb13-77b9-44ea-9e0e-34daef82eb69	cast	cast-resolve	agreed	-	FX	scen	2	0	Krumar Initiate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 65a7fb13-77b9-44ea-9e0e-34daef82eb69	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Krumar Initiate/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 65acea17-c900-4574-b22f-910285552aa2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

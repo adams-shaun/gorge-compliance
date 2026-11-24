@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b577179-10d0-43f1-ac17-9dd2d12c965d	land	land	agreed	-	FX	start	2	0	x:xs:XP:littjara-mirrorlake:land:s1,f:xs:XP:littjara-mirrorlake:land:s1	-	-	-	d864b561c9cb	-	327b80782d82	-	-	2026-11-24	xproof
 3b583358-d0d5-4f53-b06c-c6439156e684	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b5b87da-5a00-449a-97ef-fa1e2c1c4b4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b5b87da-5a00-449a-97ef-fa1e2c1c4b4b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b5b87da-5a00-449a-97ef-fa1e2c1c4b4b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	cast	cast-resolve	agreed	-	X	scen	1	0	Outcaster Trailblazer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Outcaster Trailblazer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -95,8 +95,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b66d2c2-be7a-4296-9888-f0cfb2975e89	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Seismic Monstrosaur/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b66d2c2-be7a-4296-9888-f0cfb2975e89	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Seismic Monstrosaur/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b66d2c2-be7a-4296-9888-f0cfb2975e89	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Seismic Monstrosaur/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b6cbd2a-02ba-4afb-a081-0f25d830a8ee	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b6cbd2a-02ba-4afb-a081-0f25d830a8ee	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b6cbd2a-02ba-4afb-a081-0f25d830a8ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:caller-of-the-pack:cast:s1,f:xs:XP:caller-of-the-pack:cast:s1	-	-	-	78d0801f2bf1	-	ecc1a65d29c4	-	-	2026-11-24	xproof
+3b6cbd2a-02ba-4afb-a081-0f25d830a8ee	f0/t0	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:caller-of-the-pack:f0t0:s1,f:xs:XP:caller-of-the-pack:f0t0:s1	-	-	-	78d0801f2bf1	-	ecc1a65d29c4	-	-	2026-11-24	xproof
 3b6d773b-e2f7-4e74-9e77-f2e0d369a31e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b6ef144-bb98-4686-9718-204f1c3cf020	cast	cast-resolve	agreed	-	X	scen	1	0	Worldsoul's Rage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b6f608d-f27d-44cd-b0a1-0e1e1aa1c98a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

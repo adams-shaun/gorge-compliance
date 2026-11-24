@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a242eab-204c-4411-860f-c0f3582a8f38	cast	cast-resolve	agreed	-	FX	scen	2	0	Tyvar, the Pummeler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a242eab-204c-4411-860f-c0f3582a8f38	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Tyvar, the Pummeler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a242eab-204c-4411-860f-c0f3582a8f38	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Tyvar, the Pummeler/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5a2568fd-4c22-413e-87e2-a384002ded38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a2568fd-4c22-413e-87e2-a384002ded38	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chakram-slinger:f0t0:s1,f:xs:XP:chakram-slinger:f0t0:s1	-	-	-	78d0801f2bf1	-	e2843d884cd5	-	-	2026-11-24	xproof
 5a2568fd-4c22-413e-87e2-a384002ded38	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a2568fd-4c22-413e-87e2-a384002ded38	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a295dc1-7f60-4581-b0f9-61e8b14339bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -61,8 +61,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a43b164-61a4-4dcb-9397-45356ad4260e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a44062b-f1db-4122-8570-1241a16cb895	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sumala-woodshaper:cast:s1,f:xs:XP:sumala-woodshaper:cast:s1	-	-	-	d864b561c9cb	-	9080eb37754b	-	-	2026-11-24	xproof
 5a44062b-f1db-4122-8570-1241a16cb895	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sumala-woodshaper:cast:s1,f:xs:XP:sumala-woodshaper:cast:s1	-	-	-	d864b561c9cb	-	9080eb37754b	-	-	2026-11-24	xproof
-5a4553fc-f945-4094-b231-2d378ed6609e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a4553fc-f945-4094-b231-2d378ed6609e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a4553fc-f945-4094-b231-2d378ed6609e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archaeomender:f0t0:s1,f:xs:XP:archaeomender:f0t0:s1	-	-	-	78d0801f2bf1	-	9237c6e3a044	-	-	2026-11-24	xproof
+5a4553fc-f945-4094-b231-2d378ed6609e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:archaeomender:f0t0:s1,f:xs:XP:archaeomender:f0t0:s1	-	-	-	78d0801f2bf1	-	9237c6e3a044	-	-	2026-11-24	xproof
 5a46ad2a-35b1-4dd5-b7c3-fec36b7c67ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a47b99d-19dd-4830-89ee-35f4a74aa656	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a499546-eab4-40e7-8f7b-4d318aa25810	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:strange-augmentation:cast:s1,f:xs:XP:strange-augmentation:cast:s1	-	-	-	d864b561c9cb	-	084fb11f0bff	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a8ae1c0-1935-4d03-aa94-9e9088650821	f0/a1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 5a8bd4a4-8b10-4eef-8341-28be2afa2c00	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sleep-paralysis:cast:s1,f:xs:XP:sleep-paralysis:cast:s1	-	-	-	d864b561c9cb	-	db0f77152e21	-	-	2026-11-24	xproof
 5a8bd4a4-8b10-4eef-8341-28be2afa2c00	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sleep-paralysis:cast:s1,f:xs:XP:sleep-paralysis:cast:s1	-	-	-	d864b561c9cb	-	db0f77152e21	-	-	2026-11-24	xproof
-5a8dd1b7-b63e-4997-9fe8-5e8816bc051b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a8dd1b7-b63e-4997-9fe8-5e8816bc051b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tempt-with-glory:cast:s1,f:xs:XP:tempt-with-glory:cast:s1	-	-	-	78d0801f2bf1	-	90e344e9644d	-	-	2026-11-24	xproof
 5a8e7e35-e9ea-4808-8aa7-7580a23b9d9d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:ultimecia-temporal-threat:f0t0:s2,f:xs:XP:ultimecia-temporal-threat:f0t0:s2	-	-	-	e07cf3a05ba5	-	db9dc02307e2	-	-	2026-11-24	xproof
 5a8e7e35-e9ea-4808-8aa7-7580a23b9d9d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:ultimecia-temporal-threat:f0t0:s2,f:xs:XP:ultimecia-temporal-threat:f0t0:s2	-	-	-	e07cf3a05ba5	-	db9dc02307e2	-	-	2026-11-24	xproof
 5a8e7e35-e9ea-4808-8aa7-7580a23b9d9d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ultimecia, Temporal Threat/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -117,9 +117,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7596fe49-c9cf-4415-ac1b-156cbbf9604e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 759774d2-abcf-4fc6-8433-5f251e80c70e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 759774d2-abcf-4fc6-8433-5f251e80c70e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7599fe9a-b6a5-491b-a308-aef3bf1e9daf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7599fe9a-b6a5-491b-a308-aef3bf1e9daf	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7599fe9a-b6a5-491b-a308-aef3bf1e9daf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7599fe9a-b6a5-491b-a308-aef3bf1e9daf	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:shabraz-the-skyshark:cast:s1,f:xs:XP:shabraz-the-skyshark:cast:s1	-	-	-	78d0801f2bf1	-	3aa2c23ebaaf	-	-	2026-11-24	xproof
+7599fe9a-b6a5-491b-a308-aef3bf1e9daf	f0/a0	NULL	owed	refused:steps-needed:cost:WU	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+7599fe9a-b6a5-491b-a308-aef3bf1e9daf	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 7599fe9a-b6a5-491b-a308-aef3bf1e9daf	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 759af941-f6a3-4726-91f2-9b1e4e55ea71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 759af941-f6a3-4726-91f2-9b1e4e55ea71	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -189,7 +189,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75f28e54-17ce-49f9-85b2-9f9a04e1d86f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75f381a6-49f9-4caf-a96a-91c75640b9b0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raking-canopy:cast:s1,f:xs:XP:raking-canopy:cast:s1	-	-	-	8a1b1a193ec0	-	b49991363625	-	-	2026-11-24	xproof
 75f381a6-49f9-4caf-a96a-91c75640b9b0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75f5d372-4ff9-430c-8302-72472439e0d2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+75f5d372-4ff9-430c-8302-72472439e0d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-money:cast:s1,f:xs:XP:blood-money:cast:s1	-	-	-	78d0801f2bf1	-	50e1b99cbc7b	-	-	2026-11-24	xproof
 75f7d9c7-5d52-4bfe-a730-62fef187b8b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hoarder-s-overflow:f0t0:s1,f:xs:XP:hoarder-s-overflow:f0t0:s1	-	-	-	25696bf19d5b	-	83fc86ac1290	-	-	2026-11-24	xproof
 75f7d9c7-5d52-4bfe-a730-62fef187b8b8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hoarder's Overflow/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 75f7d9c7-5d52-4bfe-a730-62fef187b8b8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hoarder-s-overflow:f0t0:s1,f:xs:XP:hoarder-s-overflow:f0t0:s1	-	-	-	25696bf19d5b	-	83fc86ac1290	-	-	2026-11-24	xproof

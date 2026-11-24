@@ -39,8 +39,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f2e8083-29af-4cdb-a2cb-216b2f3f5616	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 6f2e8083-29af-4cdb-a2cb-216b2f3f5616	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tea-earl-grey-hot:f0t0:s1,f:xs:XP:tea-earl-grey-hot:f0t0:s1	-	-	-	25696bf19d5b	-	a7eb629e4cda	-	-	2026-11-24	xproof
 6f2f4c31-74dc-4a52-96ad-94c3d51398d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f34d70e-7a3a-43f7-b2c9-f89519804d3c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f34d70e-7a3a-43f7-b2c9-f89519804d3c	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6f34d70e-7a3a-43f7-b2c9-f89519804d3c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skull-storm:cast:s1,f:xs:XP:skull-storm:cast:s1	-	-	-	78d0801f2bf1	-	7c6eef0f2a29	-	-	2026-11-24	xproof
+6f34d70e-7a3a-43f7-b2c9-f89519804d3c	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:skull-storm:cast:s1,f:xs:XP:skull-storm:cast:s1	-	-	-	78d0801f2bf1	-	7c6eef0f2a29	-	-	2026-11-24	xproof
 6f377da9-7d7b-4407-8846-75a12b4dd72d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f377da9-7d7b-4407-8846-75a12b4dd72d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f377da9-7d7b-4407-8846-75a12b4dd72d	f0/a1	NULL	owed	refused:steps-needed:cost:Exert	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -141,8 +141,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6fa07b6c-f01a-4416-b0fc-986b0fc4e412	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:renegade-rallier:f0t0:s1,f:xs:XP:renegade-rallier:f0t0:s1	-	-	-	fc71ca68c5ac	-	26af999ddbd1	-	-	2026-11-24	xproof
 6fa07b6c-f01a-4416-b0fc-986b0fc4e412	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fa27f8a-bade-460f-853a-abc1c05c946a	cast	cast-resolve	agreed	-	X	scen	1	0	Behold the Sinister Six!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6fa7229d-18b6-43d8-aa57-a56cdb815767	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6fa7229d-18b6-43d8-aa57-a56cdb815767	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6fa7229d-18b6-43d8-aa57-a56cdb815767	cast	cast	owed	harness	-	start	0	0	-	-	-	-	78d0801f2bf1	-	458d740558de	-	-	2026-11-24	xproof
+6fa7229d-18b6-43d8-aa57-a56cdb815767	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	78d0801f2bf1	-	458d740558de	-	-	2026-11-24	xproof
 6fa78914-85b3-46fd-977a-0e5b4d29eca4	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:bioengineered-future:f0t0:s2,f:xs:XP:bioengineered-future:f0t0:s2	-	-	-	267e485f6204	-	707ae8b4564d	-	-	2026-11-24	xproof
 6fa78914-85b3-46fd-977a-0e5b4d29eca4	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:bioengineered-future:f0t0:s2,f:xs:XP:bioengineered-future:f0t0:s2	-	-	-	267e485f6204	-	707ae8b4564d	-	-	2026-11-24	xproof
 6fa90258-3c9f-4723-880f-31871c0772e0	cast	cast	agreed	-	F	start	2	0	f:xs:XP:disembowel:cast:s1	-	-	-	64a08ba7d913	-	2e0266efdbf5	-	-	2026-11-24	xproof

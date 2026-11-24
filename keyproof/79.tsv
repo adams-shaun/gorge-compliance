@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7904dd02-f231-4538-b1bb-81bce69309b1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:rubblebelt-raiders:f0t0:s1,f:xs:XP:rubblebelt-raiders:f0t0:s1	-	-	-	d864b561c9cb	-	f1019f1a6839	-	-	2026-11-24	xproof
 7907bbf0-f6d9-4e5b-b5de-73cd94979f98	cast	cast-resolve	agreed	-	FX	scen	2	0	Stone by Sunlight/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 79085dea-8daa-41c0-a975-61e3e6da2e26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79085dea-8daa-41c0-a975-61e3e6da2e26	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+79085dea-8daa-41c0-a975-61e3e6da2e26	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 79090b00-d920-4134-a838-fb434cf3ee4d	cast	cast-resolve	agreed	-	X	scen	1	0	Swat Away/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 79090b00-d920-4134-a838-fb434cf3ee4d	static#0.0	static#0.0	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 790d3ee2-8b93-464c-9b16-afe62db0048c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -61,8 +61,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7947a210-32d0-4c99-82b4-4b5969447832	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 794aaf8a-6d8e-41fb-acbe-a2b73d65d9d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 794aaf8a-6d8e-41fb-acbe-a2b73d65d9d9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:martyr-of-dusk:f0t0:s1,f:xs:XP:martyr-of-dusk:f0t0:s1	-	-	-	d864b561c9cb	-	551f3a48d8f2	-	-	2026-11-24	xproof
-794ad296-4718-45b7-ab85-6ae45903ada7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-794ad296-4718-45b7-ab85-6ae45903ada7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+794ad296-4718-45b7-ab85-6ae45903ada7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jungle-wayfinder:f0t0:s1,f:xs:XP:jungle-wayfinder:f0t0:s1	-	-	-	78d0801f2bf1	-	02eb3f21e8cb	-	-	2026-11-24	xproof
+794ad296-4718-45b7-ab85-6ae45903ada7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jungle-wayfinder:f0t0:s1,f:xs:XP:jungle-wayfinder:f0t0:s1	-	-	-	78d0801f2bf1	-	02eb3f21e8cb	-	-	2026-11-24	xproof
 794b9ddf-1660-441f-9cc2-a0f5d4d0cf22	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 7950a7ff-7c2e-40fe-b64a-324f4fbcf528	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7950a7ff-7c2e-40fe-b64a-324f4fbcf528	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79a1783f-ea7e-4cdf-95f5-53b383d38c66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79a1783f-ea7e-4cdf-95f5-53b383d38c66	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79a1783f-ea7e-4cdf-95f5-53b383d38c66	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79a1783f-ea7e-4cdf-95f5-53b383d38c66	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+79a1783f-ea7e-4cdf-95f5-53b383d38c66	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 79a63064-f25b-4c34-867e-a9d32da97b14	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:krenko-s-buzzcrusher:f0t0:s2,f:xs:XP:krenko-s-buzzcrusher:f0t0:s2	-	-	-	e07cf3a05ba5	-	a23cdcfc7dec	-	-	2026-11-24	xproof
 79a63064-f25b-4c34-867e-a9d32da97b14	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Krenko's Buzzcrusher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 79a63064-f25b-4c34-867e-a9d32da97b14	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Krenko's Buzzcrusher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b1f68a2-b606-4c64-bd44-a9714808316d	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b1f68a2-b606-4c64-bd44-a9714808316d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b1fee86-360d-41d8-9238-eff216376732	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b1fee86-360d-41d8-9238-eff216376732	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:expunge:cast:s1,f:xs:XP:expunge:cast:s1	-	-	-	5f2128bf97e4	-	8e0274795401	-	-	2026-11-24	xproof
+4b1fee86-360d-41d8-9238-eff216376732	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:expunge:cast:s1,f:xs:XP:expunge:cast:s1	-	-	-	78d0801f2bf1	-	8e0274795401	-	-	2026-11-24	xproof
 4b22be3a-8ce1-47d1-b82e-6c3ccfb0548b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b22be3a-8ce1-47d1-b82e-6c3ccfb0548b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b22be3a-8ce1-47d1-b82e-6c3ccfb0548b	land	land	agreed	-	FX	start	2	0	x:xs:XP:underground-sea:land:s1,f:xs:XP:underground-sea:land:s1	-	-	-	ae86f6029288	-	721bbec86101	-	-	2026-11-24	xproof
@@ -159,9 +159,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4baf3db8-6f35-4101-9b21-15f4384c249a	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4bb0596f-df1d-4977-bb8b-4d2e6648dcb3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4bb0596f-df1d-4977-bb8b-4d2e6648dcb3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4bb1863e-50f3-4e08-884e-1f58ee55817f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4bb1863e-50f3-4e08-884e-1f58ee55817f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4bb1863e-50f3-4e08-884e-1f58ee55817f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4bb1863e-50f3-4e08-884e-1f58ee55817f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:component-pouch:cast:s2,f:xs:XP:component-pouch:cast:s2	-	-	-	78d0801f2bf1	-	e897bd3393e9	-	-	2026-11-24	xproof
+4bb1863e-50f3-4e08-884e-1f58ee55817f	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+4bb1863e-50f3-4e08-884e-1f58ee55817f	f0/a1	RollDice	agreed	-	FX	start	1	0	x:xs:XP:component-pouch:cast:s2,f:xs:XP:component-pouch:cast:s2	-	-	-	78d0801f2bf1	-	e897bd3393e9	-	-	2026-11-24	xproof
 4bb4844c-2678-45c7-8f5e-9cf185fd484b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swamp-mosquito:cast:s1,f:xs:XP:swamp-mosquito:cast:s1	-	-	-	25696bf19d5b	-	92b163dc2cbc	-	-	2026-11-24	xproof
 4bb4844c-2678-45c7-8f5e-9cf185fd484b	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 4bb75182-6dd4-42f7-9541-d484d0b57897	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

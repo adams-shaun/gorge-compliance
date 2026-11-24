@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 397b9dcf-690a-4a58-8637-bb9baab7cc2f	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 397df813-c759-4246-8def-122c7ff82d88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 397e0d30-a3bf-4b33-98b6-b880f8de5cbb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-397e0d30-a3bf-4b33-98b6-b880f8de5cbb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+397e0d30-a3bf-4b33-98b6-b880f8de5cbb	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 3981970f-b332-49b7-9698-3296830ac399	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3981970f-b332-49b7-9698-3296830ac399	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3981970f-b332-49b7-9698-3296830ac399	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -117,8 +117,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3984478b-debb-4a65-ab5b-4bc134e03d82	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3984e5f6-8643-4104-aa9c-18d474e07801	cast	cast-resolve	agreed	-	X	scen	1	0	Bone Miser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3984e5f6-8643-4104-aa9c-18d474e07801	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bone Miser/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-3984e5f6-8643-4104-aa9c-18d474e07801	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3984e5f6-8643-4104-aa9c-18d474e07801	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3984e5f6-8643-4104-aa9c-18d474e07801	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+3984e5f6-8643-4104-aa9c-18d474e07801	f0/t2	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 3986b284-f943-4570-ba26-3419910feeef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-keyrune:cast:s1,f:xs:XP:rakdos-keyrune:cast:s1	-	-	-	d864b561c9cb	-	a205146dc0dc	-	-	2026-11-24	xproof
 3986b284-f943-4570-ba26-3419910feeef	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:rakdos-keyrune:cast:s1,f:xs:XP:rakdos-keyrune:cast:s1	-	-	-	d864b561c9cb	-	a205146dc0dc	-	-	2026-11-24	xproof
 3986b284-f943-4570-ba26-3419910feeef	f0/a1	Animate	agreed	-	X	start	2	0	x:xs:XP:rakdos-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	a205146dc0dc	-	-	2026-11-24	xproof

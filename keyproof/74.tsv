@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7423b3b9-56eb-4cf2-8ada-135918219c4b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tempest Hawk/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7424560f-557f-4bc9-a3e7-eb890c73aaa3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7424560f-557f-4bc9-a3e7-eb890c73aaa3	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74250f3e-ad88-486f-a10a-90d9a2f0097f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+74250f3e-ad88-486f-a10a-90d9a2f0097f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lammastide-weave:cast:s1,f:xs:XP:lammastide-weave:cast:s1	-	-	-	78d0801f2bf1	-	e5fd183152b9	-	-	2026-11-24	xproof
 74255add-2894-4c31-81c1-d38873fa325f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74284bbc-b011-4e16-b8d5-7ddacc77f9d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lady-caleria:cast:s1,f:xs:XP:lady-caleria:cast:s1	-	-	-	fc71ca68c5ac	-	0a9edd827a71	-	-	2026-11-24	xproof
 74284bbc-b011-4e16-b8d5-7ddacc77f9d7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -78,8 +78,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 745d37dd-d18e-47cc-81d0-8e61a07342f2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 746768bc-9abc-495f-ad00-4b58497dce0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cunning-geysermage:f0t0:s1,f:xs:XP:cunning-geysermage:f0t0:s1	-	-	-	ae86f6029288	-	bf7e9250d30f	-	-	2026-11-24	xproof
 746768bc-9abc-495f-ad00-4b58497dce0d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cunning-geysermage:f0t0:s1,f:xs:XP:cunning-geysermage:f0t0:s1	-	-	-	ae86f6029288	-	bf7e9250d30f	-	-	2026-11-24	xproof
-746d4445-f28d-41af-827a-2b613b9b84ee	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-746d4445-f28d-41af-827a-2b613b9b84ee	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+746d4445-f28d-41af-827a-2b613b9b84ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warmonger-hellkite:cast:s1,f:xs:XP:warmonger-hellkite:cast:s1	-	-	-	78d0801f2bf1	-	fee8f477bf5a	-	-	2026-11-24	xproof
+746d4445-f28d-41af-827a-2b613b9b84ee	f0/a0	PumpAll	agreed	-	F	start	2	0	f:xs:XP:warmonger-hellkite:f0a0:s1	-	-	-	78d0801f2bf1	-	fee8f477bf5a	-	-	2026-11-24	xproof
 746dc1d8-f245-47be-abd5-50ca6ac0d1af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 746e494e-fdc4-415e-8a82-d35e11ebeccb	cast	cast-resolve	agreed	-	X	scen	1	0	Zero, Incorporeal Sensate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 746e494e-fdc4-415e-8a82-d35e11ebeccb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -173,7 +173,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74b8182e-54be-444a-97b1-84fc5fd3c290	cast	cast-resolve	agreed	-	X	scen	1	0	End of the Hunt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 74b8976a-15cb-4604-a65d-ca9735cd6000	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74c0164c-130f-4572-9066-626c77f6e2ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74c0164c-130f-4572-9066-626c77f6e2ff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+74c0164c-130f-4572-9066-626c77f6e2ff	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 74c4c1e2-c50d-4c8f-889a-0d5674dc6d67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74c5bfb0-1375-46e9-9a6c-1b9fada2913b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viashino-grappler:cast:s1,f:xs:XP:viashino-grappler:cast:s1	-	-	-	fc71ca68c5ac	-	c945ce393281	-	-	2026-11-24	xproof
 74c5bfb0-1375-46e9-9a6c-1b9fada2913b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:viashino-grappler:f0a0:s1,f:xs:XP:viashino-grappler:f0a0:s1	-	-	-	fc71ca68c5ac	-	c945ce393281	-	-	2026-11-24	xproof

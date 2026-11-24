@@ -90,8 +90,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 697b8045-0edb-4f7b-a933-4d41ec2b53d5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dubious Delicacy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 697b8045-0edb-4f7b-a933-4d41ec2b53d5	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Dubious Delicacy/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 697b8045-0edb-4f7b-a933-4d41ec2b53d5	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:dubious-delicacy:f0t0:s2,f:xs:XP:dubious-delicacy:f0t0:s2	-	-	-	267e485f6204	-	9ddfc6bc3e1f	-	-	2026-11-24	xproof
-697bcfe1-ecbf-42a1-bfc7-0766d48ca56b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-697bcfe1-ecbf-42a1-bfc7-0766d48ca56b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+697bcfe1-ecbf-42a1-bfc7-0766d48ca56b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dockside-extortionist:f0t0:s1,f:xs:XP:dockside-extortionist:f0t0:s1	-	-	-	78d0801f2bf1	-	967c4a8d4277	-	-	2026-11-24	xproof
+697bcfe1-ecbf-42a1-bfc7-0766d48ca56b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dockside-extortionist:f0t0:s1,f:xs:XP:dockside-extortionist:f0t0:s1	-	-	-	78d0801f2bf1	-	967c4a8d4277	-	-	2026-11-24	xproof
 697c851d-8475-479e-8783-cebdbe9a892d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 697c851d-8475-479e-8783-cebdbe9a892d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 697f3fd9-1577-4f69-bdf8-db1f673d3505	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-bears-of-littjara:cast:s1,f:xs:XP:the-bears-of-littjara:cast:s1	-	-	-	d864b561c9cb	-	b5e7a51f72ea	-	-	2026-11-24	xproof
@@ -209,7 +209,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69e92c4f-df05-4297-a453-8e4644c31a90	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:blossom-prancer:cast:s1,f:xs:XP:blossom-prancer:cast:s1	-	-	-	d864b561c9cb	-	35e22a7740d5	-	-	2026-11-24	xproof
 69e92c4f-df05-4297-a453-8e4644c31a90	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:blossom-prancer:cast:s1,f:xs:XP:blossom-prancer:cast:s1	-	-	-	d864b561c9cb	-	35e22a7740d5	-	-	2026-11-24	xproof
 69ea4ce2-f749-4d5b-a392-efcfdce14a30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69ea4ce2-f749-4d5b-a392-efcfdce14a30	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+69ea4ce2-f749-4d5b-a392-efcfdce14a30	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 69ea4ef2-794d-4c76-904f-0435b0efd6a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69ea4ef2-794d-4c76-904f-0435b0efd6a0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69ec0b59-a0aa-4878-a3b3-130cea18fee0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7c3982c5-6af3-4937-8d1f-e006f4e89342	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kill-zone-acrobat:f0t0:s1,f:xs:XP:kill-zone-acrobat:f0t0:s1	-	-	-	ae86f6029288	-	7218bedf1eb6	-	-	2026-11-24	xproof
 7c3a8766-e440-48c5-a561-197490efdba5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c3a8766-e440-48c5-a561-197490efdba5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7c3a8766-e440-48c5-a561-197490efdba5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7c3a8766-e440-48c5-a561-197490efdba5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 7c3dcfea-f42c-4515-9b7d-6e9d8cb4d7f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c3f2b3d-1517-4818-9675-189949175623	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c3f2b3d-1517-4818-9675-189949175623	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7cc809ed-5ce1-40d1-896d-014ca8e2b5a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stomp-and-howl:cast:s1,f:xs:XP:stomp-and-howl:cast:s1	-	-	-	16ec2936189a	-	08ba9c11081f	-	-	2026-11-24	xproof
 7cc81fb3-495c-47cd-8c56-96197d87e9e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7cc945ed-d0aa-4b1a-a94d-656e03b6b5d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ccc2740-e659-452d-95e8-5dee958322fa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7ccc2740-e659-452d-95e8-5dee958322fa	cast	cast	agreed	-	FX	start	6	0	x:xs:XP:soulblade-renewer:cast:s1,f:xs:XP:soulblade-renewer:cast:s1	-	-	-	78d0801f2bf1	-	68545824dd6b	-	-	2026-11-24	xproof
 7ccc2740-e659-452d-95e8-5dee958322fa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ccc2740-e659-452d-95e8-5dee958322fa	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ccd666a-0d56-4fe3-b16b-d035bf2ad420	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

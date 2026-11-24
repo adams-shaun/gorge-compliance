@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9636073e-e361-4d2a-92f6-5fe049e5eb23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9636073e-e361-4d2a-92f6-5fe049e5eb23	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 963834c8-42df-4ee6-9b45-b9de88ce2eac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-963834c8-42df-4ee6-9b45-b9de88ce2eac	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+963834c8-42df-4ee6-9b45-b9de88ce2eac	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 963947d5-5fe4-49cd-be0c-0bdb5f7bcbb6	cast	cast-resolve	agreed	-	FX	scen	2	0	Bearer of Glory/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 963947d5-5fe4-49cd-be0c-0bdb5f7bcbb6	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Bearer of Glory/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 963947d5-5fe4-49cd-be0c-0bdb5f7bcbb6	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bearer of Glory/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -120,9 +120,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 969fa9b9-161f-461e-8878-9ebcff5a2669	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96a57ce0-f1ab-4af7-8c18-8e35aad11780	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:revered-dead:cast:s1,f:xs:XP:revered-dead:cast:s1	-	-	-	d864b561c9cb	-	5daa8d5bf3fd	-	-	2026-11-24	xproof
 96a57ce0-f1ab-4af7-8c18-8e35aad11780	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:revered-dead:f0a0:s1,f:xs:XP:revered-dead:f0a0:s1	-	-	-	d864b561c9cb	-	5daa8d5bf3fd	-	-	2026-11-24	xproof
-96a6a8d4-6077-470f-984e-b576a24557a2	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96a6a8d4-6077-470f-984e-b576a24557a2	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96a6a8d4-6077-470f-984e-b576a24557a2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96a6a8d4-6077-470f-984e-b576a24557a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:decree-of-savagery:cast:s1,f:xs:XP:decree-of-savagery:cast:s1	-	-	-	78d0801f2bf1	-	7a1d210ec970	-	-	2026-11-24	xproof
+96a6a8d4-6077-470f-984e-b576a24557a2	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+96a6a8d4-6077-470f-984e-b576a24557a2	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 96aab05a-49bc-418a-9980-f3322955de1e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96aab05a-49bc-418a-9980-f3322955de1e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96b3c4ff-b5f7-4315-9b39-2e2146ef10d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodland-druid:cast:s1,f:xs:XP:woodland-druid:cast:s1	-	-	-	fc71ca68c5ac	-	d1383c20104a	-	-	2026-11-24	xproof

@@ -158,8 +158,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01ab7724-1967-4da6-aebd-3729983d6a0e	cast	cast-resolve	agreed	-	X	scen	1	0	Bloodthorn Flail/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 01ab7724-1967-4da6-aebd-3729983d6a0e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bloodthorn Flail/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 01ab7724-1967-4da6-aebd-3729983d6a0e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bloodthorn Flail/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-01afb7a1-6427-4bb6-935a-613e9bda9de3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-01afb7a1-6427-4bb6-935a-613e9bda9de3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+01afb7a1-6427-4bb6-935a-613e9bda9de3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:etherium-horn-sorcerer:cast:s1,f:xs:XP:etherium-horn-sorcerer:cast:s1	-	-	-	78d0801f2bf1	-	8bb06dbef8f6	-	-	2026-11-24	xproof
+01afb7a1-6427-4bb6-935a-613e9bda9de3	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:etherium-horn-sorcerer:f0a0:s1,f:xs:XP:etherium-horn-sorcerer:f0a0:s1	-	-	-	78d0801f2bf1	-	8bb06dbef8f6	-	-	2026-11-24	xproof
 01b3af6d-ab7d-4137-a94a-1cf2cbfd9d44	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01b778d7-0965-48ab-a81f-e29f8a233d07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01bba3b8-6372-437e-ab34-ae2c8105cd28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:summoning-station:cast:s1,f:xs:XP:summoning-station:cast:s1	-	-	-	25696bf19d5b	-	14a6385eb4f9	-	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01d70534-7c26-4a54-9eca-d0ebbefc2159	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01da67a5-e3dc-44f4-8a93-513bfa4d8fbc	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01dbf1bc-ca62-4fb6-959c-ef7c0dc03bb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-01dbf1bc-ca62-4fb6-959c-ef7c0dc03bb0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+01dbf1bc-ca62-4fb6-959c-ef7c0dc03bb0	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 01dc15ee-83de-49d5-aa37-e0bdd419887e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01dc15ee-83de-49d5-aa37-e0bdd419887e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01dc86f3-5ebb-4b10-bf68-8fc9f232c724	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -216,7 +216,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01ee70d4-6527-45ae-9600-bd3d16b3037d	land	play-land	agreed	-	FX	scen	2	0	Illegitimate Business/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 01f06642-015f-40b4-a940-af576ad9e82c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01f07ab9-3c3e-4fea-9cd6-543a5b7056b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-01f29158-2dc9-4b9d-b726-add5d3fd5782	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+01f29158-2dc9-4b9d-b726-add5d3fd5782	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:comeuppance:cast:s1,f:xs:XP:comeuppance:cast:s1	-	-	-	78d0801f2bf1	-	b4839e6d1d86	-	-	2026-11-24	xproof
 01f675c3-d1c4-45c8-8a2e-75f535db3025	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01f9cfd9-47da-4dbe-a21e-53eccad3864a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01f9cfd9-47da-4dbe-a21e-53eccad3864a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -119,7 +119,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4573f044-7011-412e-81bd-ae8d0c21283b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:voyager-staff:cast:s1,f:xs:XP:voyager-staff:cast:s1	-	-	-	77494c1ce129	-	5a6473e7e343	-	-	2026-11-24	xproof
 4573f044-7011-412e-81bd-ae8d0c21283b	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 457470db-e664-4ca3-84ec-6cec2d4ae906	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-457470db-e664-4ca3-84ec-6cec2d4ae906	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+457470db-e664-4ca3-84ec-6cec2d4ae906	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 4576cc5b-7b3a-41a7-9b84-acadf2d4adf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4576cc5b-7b3a-41a7-9b84-acadf2d4adf5	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 4576cc5b-7b3a-41a7-9b84-acadf2d4adf5	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -227,5 +227,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45fa04ee-3b5c-45b3-8c09-bda08cca3630	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:excavation-elephant:f0t0:s1,f:xs:XP:excavation-elephant:f0t0:s1	-	-	-	d864b561c9cb	-	91d98768c74d	-	-	2026-11-24	xproof
 45fd14b9-d66a-452d-add4-36f512fff9c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45fd14b9-d66a-452d-add4-36f512fff9c2	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-45fe016e-1a09-410c-bbe3-4663ba06c5b7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-45fe016e-1a09-410c-bbe3-4663ba06c5b7	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+45fe016e-1a09-410c-bbe3-4663ba06c5b7	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:spire-garden:f0a0:s1,f:xs:XP:spire-garden:f0a0:s1	-	-	-	78d0801f2bf1	-	eb2b9b5c4fbf	-	-	2026-11-24	xproof
+45fe016e-1a09-410c-bbe3-4663ba06c5b7	land	land	agreed	-	FX	start	2	0	x:xs:XP:spire-garden:land:s1,f:xs:XP:spire-garden:land:s1	-	-	-	78d0801f2bf1	-	eb2b9b5c4fbf	-	-	2026-11-24	xproof

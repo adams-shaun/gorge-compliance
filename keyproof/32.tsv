@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-32025108-0dba-40bd-88db-5fcc48e3d054	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32025108-0dba-40bd-88db-5fcc48e3d054	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32025108-0dba-40bd-88db-5fcc48e3d054	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brightmare:f0t0:s1,f:xs:XP:brightmare:f0t0:s1	-	-	-	78d0801f2bf1	-	e584567ca303	-	-	2026-11-24	xproof
+32025108-0dba-40bd-88db-5fcc48e3d054	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:brightmare:f0t0:s1,f:xs:XP:brightmare:f0t0:s1	-	-	-	78d0801f2bf1	-	e584567ca303	-	-	2026-11-24	xproof
 320820e4-3c7e-4e4d-b23c-63bf13a68e73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 320820e4-3c7e-4e4d-b23c-63bf13a68e73	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32083c9f-04c6-4b6f-9e24-cc8f3cae3e3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -120,7 +120,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3292d795-4fdc-4e42-959a-dd5e8591c5cc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3292d795-4fdc-4e42-959a-dd5e8591c5cc	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3292d795-4fdc-4e42-959a-dd5e8591c5cc	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32972d7a-c7c6-437c-8e7c-6c7d56b130e4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32972d7a-c7c6-437c-8e7c-6c7d56b130e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-nel-toth:cast:s1,f:xs:XP:scourge-of-nel-toth:cast:s1	-	-	-	78d0801f2bf1	-	ec5547f39962	-	-	2026-11-24	xproof
 329f6434-8f1b-4a10-8feb-2a9dc5f2712b	cast	cast-resolve	agreed	-	X	scen	1	0	Heated Argument/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 329f6e2e-6c37-4e98-bd45-bd252f1a2bd9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-ickspitter:cast:s1,f:xs:XP:rakdos-ickspitter:cast:s1	-	-	-	16ec2936189a	-	f404b88708ed	-	-	2026-11-24	xproof
 329f6e2e-6c37-4e98-bd45-bd252f1a2bd9	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof

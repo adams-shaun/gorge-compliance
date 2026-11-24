@@ -67,9 +67,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 464bfcdb-a82b-4573-92a4-c5e463724fbe	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 464c0150-3dbc-403b-9ada-fef25ab1f29d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 464c0150-3dbc-403b-9ada-fef25ab1f29d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-464df46a-079b-47c1-95e7-930160abef2f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-464df46a-079b-47c1-95e7-930160abef2f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-464df46a-079b-47c1-95e7-930160abef2f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+464df46a-079b-47c1-95e7-930160abef2f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:brallin-skyshark-rider:cast:s1,f:xs:XP:brallin-skyshark-rider:cast:s1	-	-	-	78d0801f2bf1	-	4aa10a587369	-	-	2026-11-24	xproof
+464df46a-079b-47c1-95e7-930160abef2f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:brallin-skyshark-rider:f0a0:s1,f:xs:XP:brallin-skyshark-rider:f0a0:s1	-	-	-	78d0801f2bf1	-	4aa10a587369	-	-	2026-11-24	xproof
+464df46a-079b-47c1-95e7-930160abef2f	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 464df46a-079b-47c1-95e7-930160abef2f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46515251-2172-4b0a-81ac-4c0120b73360	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fanged-flames:cast:s1,f:xs:XP:fanged-flames:cast:s1	-	-	-	ae86f6029288	-	e1bc4518019e	-	-	2026-11-24	xproof
 46537bac-b1eb-4c02-ba43-6c6b16c7729c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -192,7 +192,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46dad873-11f5-4269-8ec2-f126419fbd7d	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 46dad873-11f5-4269-8ec2-f126419fbd7d	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 46dad873-11f5-4269-8ec2-f126419fbd7d	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-46db3dc2-9eb1-4be3-96f9-0013119fcd97	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+46db3dc2-9eb1-4be3-96f9-0013119fcd97	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancient-excavation:cast:s1,f:xs:XP:ancient-excavation:cast:s1	-	-	-	78d0801f2bf1	-	b7d584bdbb00	-	-	2026-11-24	xproof
 46db3dc2-9eb1-4be3-96f9-0013119fcd97	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46ddc2e1-386f-4aaf-b37b-37b1708e0d9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46e311ef-c86e-4aad-8b42-ef0d68a90c2e	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d2d250b-cdce-4075-8724-b52ad31664fb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Highspire Bell-Ringer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d2d250b-cdce-4075-8724-b52ad31664fb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Highspire Bell-Ringer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d2eb412-e09b-4ab3-8653-b458e9f38eff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6d2eb412-e09b-4ab3-8653-b458e9f38eff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6d2eb412-e09b-4ab3-8653-b458e9f38eff	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 6d32139f-839f-441b-930f-151816143142	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d329bd2-8825-4de9-b3de-749625085015	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gluttonous-zombie:cast:s1,f:xs:XP:gluttonous-zombie:cast:s1	-	-	-	25696bf19d5b	-	bb395697573a	-	-	2026-11-24	xproof
 6d3469dd-d39e-463b-9b41-2f6215a41feb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,8 +125,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6da2b7c2-e04d-43c4-9cbb-0bc17feb060d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6da2b7c2-e04d-43c4-9cbb-0bc17feb060d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6da2b7c2-e04d-43c4-9cbb-0bc17feb060d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6da4f16c-f187-479e-b19b-78a137b1abe5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6da4f16c-f187-479e-b19b-78a137b1abe5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6da4f16c-f187-479e-b19b-78a137b1abe5	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:virtus-the-veiled:cast:s1,f:xs:XP:virtus-the-veiled:cast:s1	-	-	-	78d0801f2bf1	-	ef9d92ad6ce4	-	-	2026-11-24	xproof
+6da4f16c-f187-479e-b19b-78a137b1abe5	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 6da4f16c-f187-479e-b19b-78a137b1abe5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6daf3c59-7636-4d44-872b-67722b4868cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6daf3c59-7636-4d44-872b-67722b4868cb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6dbeeb49-55c6-4ceb-94dd-3e4110dff8c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6dbef43d-40d3-4894-86a5-d31a5026604e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6dc0150d-7145-41e2-bd3d-2564d9d32301	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6dc0150d-7145-41e2-bd3d-2564d9d32301	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6dc0150d-7145-41e2-bd3d-2564d9d32301	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 6dc1305a-d6ca-4280-ba5d-5ed91f78ced0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6dc1305a-d6ca-4280-ba5d-5ed91f78ced0	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 6dc534e8-e22b-4e3c-aa30-c6e4c84f698c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frilled-sea-serpent:cast:s1,f:xs:XP:frilled-sea-serpent:cast:s1	-	-	-	d864b561c9cb	-	767970820faa	-	-	2026-11-24	xproof

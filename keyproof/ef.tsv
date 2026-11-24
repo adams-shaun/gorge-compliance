@@ -72,7 +72,7 @@ ef67c170-68aa-4ada-8cee-261a4dbb1b5d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Surl
 ef693b9f-11e3-49bf-8387-b8f480b9007a	cast	cast-resolve	agreed	-	FX	scen	2	0	Leaf-Crowned Visionary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ef693b9f-11e3-49bf-8387-b8f480b9007a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Leaf-Crowned Visionary/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ef693b9f-11e3-49bf-8387-b8f480b9007a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Leaf-Crowned Visionary/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-ef69ce86-48ae-4d90-8e29-051583671321	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ef69ce86-48ae-4d90-8e29-051583671321	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boarding-party:cast:s1,f:xs:XP:boarding-party:cast:s1	-	-	-	78d0801f2bf1	-	dcc3ae1a953a	-	-	2026-11-24	xproof
 ef6c0054-3a89-4fac-b822-37c7d2514489	cast	cast-resolve	agreed	-	X	scen	1	0	Matoya, Archon Elder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ef6c0054-3a89-4fac-b822-37c7d2514489	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Matoya, Archon Elder/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ef6c0054-3a89-4fac-b822-37c7d2514489	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Matoya, Archon Elder/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -102,9 +102,9 @@ ef80e174-78e8-412d-a6fe-89c7af746669	f0/t0	NULL	owed	refused:scen failed: xengin
 ef827c62-a5c5-4a7a-92a8-edefb081fae8	cast	cast-resolve	agreed	-	FX	scen	2	0	Tidus, Blitzball Star/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ef827c62-a5c5-4a7a-92a8-edefb081fae8	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Tidus, Blitzball Star/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ef827c62-a5c5-4a7a-92a8-edefb081fae8	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Tidus, Blitzball Star/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ef833546-f755-4ac5-867a-3926984e68a0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ef833546-f755-4ac5-867a-3926984e68a0	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ef833546-f755-4ac5-867a-3926984e68a0	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ef833546-f755-4ac5-867a-3926984e68a0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:archaeomancer-s-map:cast:s1,f:xs:XP:archaeomancer-s-map:cast:s1	-	-	-	78d0801f2bf1	-	1623fc177ae8	-	-	2026-11-24	xproof
+ef833546-f755-4ac5-867a-3926984e68a0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:archaeomancer-s-map:cast:s1,f:xs:XP:archaeomancer-s-map:cast:s1	-	-	-	78d0801f2bf1	-	1623fc177ae8	-	-	2026-11-24	xproof
+ef833546-f755-4ac5-867a-3926984e68a0	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 ef842299-8a31-4793-9142-2bcd7a8b2fab	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ef842299-8a31-4793-9142-2bcd7a8b2fab	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ef842299-8a31-4793-9142-2bcd7a8b2fab	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ ef987ddb-25f6-4895-8f83-045254745ea4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blo
 ef987ddb-25f6-4895-8f83-045254745ea4	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:blood-clock:cast:s1,f:xs:XP:blood-clock:cast:s1	-	-	-	64a08ba7d913	-	d08f6d7ca1da	-	-	2026-11-24	xproof
 ef9a5bd1-6ce2-4570-9d42-89d997e2fc6f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:meneldor-swift-savior:cast:s1,f:xs:XP:meneldor-swift-savior:cast:s1	-	-	-	ae86f6029288	-	6559bd3dff42	-	-	2026-11-24	xproof
 ef9a5bd1-6ce2-4570-9d42-89d997e2fc6f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-ef9b7588-9bf0-4632-ae5d-1dfebc4d88eb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ef9b7588-9bf0-4632-ae5d-1dfebc4d88eb	cast	cast	owed	harness	-	start	0	0	-	-	-	-	78d0801f2bf1	-	2e8d2efc6fc9	-	-	2026-11-24	xproof
 efab5a30-74ee-4959-b7cd-2a5d25d18327	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 efab5a30-74ee-4959-b7cd-2a5d25d18327	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 efae637f-3232-46f2-9839-f3386e2f447d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

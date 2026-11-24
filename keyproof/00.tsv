@@ -70,8 +70,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00573e77-8ff6-4acb-8683-8827d965288f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00573e77-8ff6-4acb-8683-8827d965288f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 005ee549-1bf5-478f-bc3f-3e791bd7eecf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-005ee549-1bf5-478f-bc3f-3e791bd7eecf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-005ee549-1bf5-478f-bc3f-3e791bd7eecf	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+005ee549-1bf5-478f-bc3f-3e791bd7eecf	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+005ee549-1bf5-478f-bc3f-3e791bd7eecf	f0/t1	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 00602959-e9a1-4706-a1cb-70156a6fc713	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00602959-e9a1-4706-a1cb-70156a6fc713	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00605b83-faf6-4779-be9d-6a2c8f0ea722	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -212,7 +212,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00f4cab8-b135-4118-8e3a-92097178abb6	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 00f579f4-2d18-4c7c-91b2-34726b384535	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00f579f4-2d18-4c7c-91b2-34726b384535	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00f82f84-81a5-45e5-9c35-9d627a180950	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+00f82f84-81a5-45e5-9c35-9d627a180950	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:collective-voyage:cast:s1,f:xs:XP:collective-voyage:cast:s1	-	-	-	78d0801f2bf1	-	2c9acd71271b	-	-	2026-11-24	xproof
 00fc773a-72aa-4b58-a17c-8ac0f17c4c85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00fc773a-72aa-4b58-a17c-8ac0f17c4c85	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00fdcc19-88ed-46c3-91f0-095806228105	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

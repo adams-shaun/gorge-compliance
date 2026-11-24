@@ -94,8 +94,8 @@ cb8f5ee4-285a-4c37-adcb-514b3e4bdad3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 cb91e842-9f06-4863-a328-2cabe1bcfe27	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cb91e842-9f06-4863-a328-2cabe1bcfe27	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cb91e842-9f06-4863-a328-2cabe1bcfe27	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cb923c4d-1d2e-4039-90bb-72d1981b9738	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cb923c4d-1d2e-4039-90bb-72d1981b9738	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cb923c4d-1d2e-4039-90bb-72d1981b9738	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:endless-atlas:cast:s1,f:xs:XP:endless-atlas:cast:s1	-	-	-	78d0801f2bf1	-	22c56db62f79	-	-	2026-11-24	xproof
+cb923c4d-1d2e-4039-90bb-72d1981b9738	f0/a0	Draw	agreed	-	FX	start	4	0	x:xs:XP:endless-atlas:cast:s1,f:xs:XP:endless-atlas:cast:s1	-	-	-	78d0801f2bf1	-	22c56db62f79	-	-	2026-11-24	xproof
 cb952c81-c7bb-4670-938d-296d35551986	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cb952c81-c7bb-4670-938d-296d35551986	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cb952c81-c7bb-4670-938d-296d35551986	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -183,7 +183,7 @@ cbdbf18f-0180-4ade-a79e-1e644dd42d6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 cbde4b9d-1549-4892-b8ca-38256a6ac1ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cbde4b9d-1549-4892-b8ca-38256a6ac1ba	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cbe1c80a-db82-460a-b6e9-d0e429628aa1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cbe1c80a-db82-460a-b6e9-d0e429628aa1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cbe1c80a-db82-460a-b6e9-d0e429628aa1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:heavenly-qilin:f0t0:s1,f:xs:XP:heavenly-qilin:f0t0:s1	-	-	-	78d0801f2bf1	-	66e9c7938fe7	-	-	2026-11-24	xproof
 cbe3a4e7-5dbe-4f58-8ee6-a1762b65acfd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:k-rrik-son-of-yawgmoth:cast:s1,f:xs:XP:k-rrik-son-of-yawgmoth:cast:s1	-	-	-	ae86f6029288	-	89de49cca1dd	-	-	2026-11-24	xproof
 cbe3a4e7-5dbe-4f58-8ee6-a1762b65acfd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 cbe5c74b-1006-4c63-8b46-e06b61e6fe02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -200,7 +200,7 @@ cbf2b19e-32a3-489f-9979-ba2748c52845	f0/t0	NULL	owed	refused:no-generator:trigge
 cbf5bd0a-20ef-4dce-9f70-13339d438ff7	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:eerie-gravestone:f0t0:s2,f:xs:XP:eerie-gravestone:f0t0:s2	-	-	-	267e485f6204	-	b188e46d53b6	-	-	2026-11-24	xproof
 cbf5bd0a-20ef-4dce-9f70-13339d438ff7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Eerie Gravestone/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cbf5bd0a-20ef-4dce-9f70-13339d438ff7	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:eerie-gravestone:f0t0:s2,f:xs:XP:eerie-gravestone:f0t0:s2	-	-	-	267e485f6204	-	b188e46d53b6	-	-	2026-11-24	xproof
-cbf68ddd-596f-4b2d-b93c-3b7976ba4d37	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cbf68ddd-596f-4b2d-b93c-3b7976ba4d37	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fumble:cast:s1,f:xs:XP:fumble:cast:s1	-	-	-	78d0801f2bf1	-	3e5b0eeac8eb	-	-	2026-11-24	xproof
 cbf743a5-123f-4747-826d-7f8bb929a52c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cbf767d4-9be4-417a-bbf7-0c72ede727b4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cbfccfc0-3117-4ca0-b7ce-8e2d67ec49ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

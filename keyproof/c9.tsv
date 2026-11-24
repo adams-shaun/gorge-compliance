@@ -53,9 +53,9 @@ c93bb65a-a74a-499b-a538-65272079aab8	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Gia
 c93bb65a-a74a-499b-a538-65272079aab8	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Giant Koi/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c93bce5a-48cc-4dc5-930b-1e084c2bae7d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c93bce5a-48cc-4dc5-930b-1e084c2bae7d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:viridian-emissary:f0t0:s1,f:xs:XP:viridian-emissary:f0t0:s1	-	-	-	d864b561c9cb	-	e9733d551e67	-	-	2026-11-24	xproof
-c93bef6e-b676-43df-9f0f-026aaff25604	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c93bef6e-b676-43df-9f0f-026aaff25604	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c93bef6e-b676-43df-9f0f-026aaff25604	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c93bef6e-b676-43df-9f0f-026aaff25604	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coastline-marauders:cast:s1,f:xs:XP:coastline-marauders:cast:s1	-	-	-	78d0801f2bf1	-	7bb128ade61a	-	-	2026-11-24	xproof
+c93bef6e-b676-43df-9f0f-026aaff25604	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+c93bef6e-b676-43df-9f0f-026aaff25604	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:coastline-marauders:f0t0:s1	-	-	-	78d0801f2bf1	-	7bb128ade61a	-	-	2026-11-24	xproof
 c93c647e-0b9e-4a50-a519-42862d21a0f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c9432e87-38f6-4889-8f07-ae7cd045e532	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:gilgamesh-master-at-arms:f0t0:s2,f:xs:XP:gilgamesh-master-at-arms:f0t0:s2	-	-	-	267e485f6204	-	597e40a90f49	-	-	2026-11-24	xproof
 c9432e87-38f6-4889-8f07-ae7cd045e532	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:gilgamesh-master-at-arms:f0t0:s2,f:xs:XP:gilgamesh-master-at-arms:f0t0:s2	-	-	-	267e485f6204	-	597e40a90f49	-	-	2026-11-24	xproof
@@ -129,8 +129,8 @@ c9a45c28-826e-4e6e-8adc-1368ea1af11a	cast	cast-resolve	agreed	-	FX	scen	2	0	Ulti
 c9abbb90-e3ae-4e7c-87ca-06ebebf65edb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c9b7ea9c-3bcb-4538-aa25-cdb82a52037e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c9b7ea9c-3bcb-4538-aa25-cdb82a52037e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c9b82110-7dfd-4617-9399-9510be449043	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c9b82110-7dfd-4617-9399-9510be449043	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c9b82110-7dfd-4617-9399-9510be449043	f0/a0	RemoveCounter	agreed	-	FX	start	2	0	x:xs:XP:dark-depths:f0a0:s1,f:xs:XP:dark-depths:f0a0:s1	-	-	-	78d0801f2bf1	-	eff377c0fd2e	-	-	2026-11-24	xproof
+c9b82110-7dfd-4617-9399-9510be449043	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
 c9b82110-7dfd-4617-9399-9510be449043	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c9bbebbd-9f2d-499c-adb1-8d3170c3fd0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deafening-clarion:cast:s1,f:xs:XP:deafening-clarion:cast:s1	-	-	-	d864b561c9cb	-	7e27413d50bd	-	-	2026-11-24	xproof
 c9bc1a28-8d3c-4d9f-a67d-b044cfe9d6c1	cast	cast-resolve	agreed	-	FX	scen	2	0	Dahar Master/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
