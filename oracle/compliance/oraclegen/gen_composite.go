@@ -435,7 +435,10 @@ func activationXAnnounces(reg *cards.Registry, sc Scenario, g rules.OracleResult
 // counter-removal family reuses the mana announce (XMage's
 // TalonOfPainRemoveVariableCountersSourceCost overrides announceXValue), so it
 // is not counted again; XMin<N> is the VariableManaCost bound marker, not a
-// cost of its own.
+// cost of its own. Waterbend<X> is the same kind of reuse from the other
+// direction: forgeCostSymbols renders it as a {X} for the rule text, and
+// XMage's WaterbendCost announces that X once, so the token is not a second
+// announce beside the symbol it produced.
 func activationXAnnounceCount(cost string) int {
 	n := 0
 	for _, sym := range forgeCostSymbols(cost) {
@@ -461,6 +464,10 @@ func activationXAnnounceCount(cost string) int {
 		}
 		if strings.HasPrefix(strings.ToLower(head), "subcounter") {
 			// Source-counter removal reuses the mana X.
+			continue
+		}
+		if strings.HasPrefix(strings.ToLower(head), "waterbend") {
+			// forgeCostSymbols already rendered this token as {X} above.
 			continue
 		}
 		n++
