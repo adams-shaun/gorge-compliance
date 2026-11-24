@@ -451,6 +451,29 @@ func TestXMQueueCensus(t *testing.T) {
 	}
 }
 
+// TestGraveExileCostChoiceFaces pins the per-face override of the exilecost
+// default: an ExileFromGraveCost is withNotTarget, so XMage reads its pick
+// through player.choose (TestPlayer.makeChoose, the CHOICE queue), while the
+// group-exile and craft costs that share the option kind keep the target
+// routing their templates script. Psychic Frog's find strict-missed "Missing
+// CHOICE def ... TargetCardInYourGraveyard" with the target answer left over.
+func TestGraveExileCostChoiceFaces(t *testing.T) {
+	d := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+		Options: 7, Min: 3, Max: 3,
+		Picks:     []string{"Island", "Island", "Island"},
+		PickIdx:   []int{0, 1, 2},
+		PickRefs:  []string{"p0:Island#2", "p0:Island#3", "p0:Island#4"},
+		PickKinds: []string{"exilecost", "exilecost", "exilecost"}}
+	choice := []XAnswer{{0, "choice", "Island"}, {0, "choice", "Island"}, {0, "choice", "Island"}}
+	if got := answersWithSources([]rules.OracleDecision{d}, "psychic frog"); !reflect.DeepEqual(got, choice) {
+		t.Errorf("Psychic Frog exile cost = %#v, want the CHOICE queue %#v", got, choice)
+	}
+	target := []XAnswer{{0, "target", "Island"}, {0, "target", "Island"}, {0, "target", "Island"}}
+	if got := answersWithSources([]rules.OracleDecision{d}, "some other card"); !reflect.DeepEqual(got, target) {
+		t.Errorf("unlisted exile cost = %#v, want the default TARGET queue %#v", got, target)
+	}
+}
+
 // TestPickKindSeparatesPlayerTargetFromOpponentChoice: a player target and the
 // controller's which-opponent ask share the option kind "player"; only the
 // latter (ResumeKind "opp_pick") reaches XMage's choice queue.

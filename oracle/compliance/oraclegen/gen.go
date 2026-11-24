@@ -1906,7 +1906,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = append(as, XAnswer{d.Seat, "choice", JoinedChoice(d)})
 			} else {
 				for k, label := range d.Picks {
-					switch pickQueue(d, k, label, bolster[i]) {
+					switch routing.pickQueue(i, k, label, bolster[i]) {
 					case "skip":
 						// XMage resolves this pick inside its computer player (a
 						// library search) or pays it from the pool (a mana-tapping
@@ -3110,12 +3110,19 @@ func pickKind(d rules.OracleDecision, k int) string {
 // label text, is the authority -- the mechanism the census test pins.
 func xmQueue(kind, label string) string {
 	switch kind {
-	case "search", "exilecost":
-		// A library search (TargetCardInLibrary) and an exile-from-graveyard
-		// cost (TargetCardInYourGraveyard) are answered from the target
-		// queue: measured on the std pass, 47 search carriers (Shared Roots,
-		// Nature's Rhythm, Solemn Simulacrum, ...) and Feed the Cycle /
-		// Soaring Stoneglider agree only with a target answer.
+	case "search":
+		// A library search is TargetCardInLibrary, a real target: measured on
+		// the std pass, 47 carriers (Shared Roots, Nature's Rhythm, Solemn
+		// Simulacrum, ...) agree only with a target answer.
+		return "target"
+	case "exilecost":
+		// The DEFAULT for an exile-from-graveyard cost is the target queue,
+		// for the group-exile and craft costs whose generators script their
+		// own answers (activate group exile drops this generic pick and adds
+		// the catalogue's choice answers; craft scripts a target). A plain
+		// ExileFromGraveCost is withNotTarget and reaches player.choose (the
+		// CHOICE queue) instead; the proven faces override in
+		// xmageGraveExileChoiceFaces (xmage_boolean_dialogs.go).
 		return "target"
 	case "trigger_cost_pay", "trigger_cost_pay_manual":
 		return "skip"
@@ -3918,13 +3925,19 @@ func twoPilesPileAnswer(d rules.OracleDecision) string {
 	return "yes"
 }
 
-// pickQueue is xmQueue for the k-th pick, except that a search of ANOTHER
-// player's library (Ancient Vendetta's "search target opponent's ... library")
-// reaches XMage's choice queue: only a search of your own library is the
-// TargetCardInLibrary target ask (measured on the std pass). bolster marks
-// the decision as a Bolster tie election, whose counter_pick XMage asks
-// through chooseTarget (bolster_pick.go).
-func pickQueue(d rules.OracleDecision, k int, label string, bolster bool) string {
+// pickQueue is xmQueue for the k-th pick of decision i, except that:
+//
+//   - a search of ANOTHER player's library (Ancient Vendetta's "search target
+//     opponent's ... library") reaches XMage's choice queue: only a search of
+//     your own library is the TargetCardInLibrary target ask (measured on the
+//     std pass);
+//   - an exile-from-graveyard cost on a xmageGraveExileChoiceFaces face
+//     reaches it through player.choose (graveExileChoice).
+//
+// bolster marks the decision as a Bolster tie election, whose counter_pick
+// XMage asks through chooseTarget (bolster_pick.go).
+func (r *answerRouting) pickQueue(i, k int, label string, bolster bool) string {
+	d := r.ds[i]
 	if bolster && pickKind(d, k) == "counter_pick" {
 		return "target"
 	}
@@ -3934,6 +3947,9 @@ func pickQueue(d rules.OracleDecision, k int, label string, bolster bool) string
 		// as a choose ask, so a "choice" answer is never consumed and the
 		// original target survives.
 		return "target"
+	}
+	if pickKind(d, k) == "exilecost" && r.graveExileChoice(i) {
+		return "choice"
 	}
 	q := xmQueue(pickKind(d, k), label)
 	if q == "target" && pickKind(d, k) == "search" && k < len(d.PickRefs) {

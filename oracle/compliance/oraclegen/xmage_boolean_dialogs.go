@@ -235,6 +235,46 @@ func (r *answerRouting) digChoiceOwned(i int) bool {
 	return ok
 }
 
+// xmageGraveExileChoiceFaces names the faces whose exile-from-graveyard COST
+// XMage asks through player.choose (TestPlayer.makeChoose: the CHOICE queue),
+// not through a TargetCardInYourGraveyard target. ExileFromGraveCost marks
+// its target withNotTarget(true), so its Targets.choose call reaches
+// Target.choose -> Player.choose, never the chooseTarget path the default
+// xmQueue mapping scripts ("Missing CHOICE def ... TargetCardInYourGraveyard",
+// the target answer left over). Measured on the xproof find at XMAGE_REF
+// 7aeb547a86 and replayed through the driver at the current pin:
+//
+//	PsychicFrog  SimpleActivatedAbility: Exile three cards from your graveyard
+//	             Targets.choose over TargetCardInYourGraveyard(3)
+//
+// The table is a face table (like xmageDigChoiceFaces) because the generator
+// sees only the option kind, and the same kind also covers the group-exile
+// and craft costs that other routings script deliberately (the activate
+// group-exile catalogue's choice answers, craft's target). Membership is
+// proven per face by a replay; a newly found carrier needs its own entry.
+var xmageGraveExileChoiceFaces = map[string]bool{
+	"psychic frog": true,
+}
+
+// graveExileChoice reports whether decision i is an exilecost ask on a
+// xmageGraveExileChoiceFaces face resolving or acting at its step.
+func (r *answerRouting) graveExileChoice(i int) bool {
+	d := r.ds[i]
+	listed := false
+	for _, name := range r.sources[d.Step] {
+		listed = listed || xmageGraveExileChoiceFaces[name]
+	}
+	if !listed {
+		return false
+	}
+	for k := range d.Picks {
+		if pickKind(d, k) == "exilecost" {
+			return true
+		}
+	}
+	return false
+}
+
 // dredgeDecision is gorge's draw-replacement election of a dredge card
 // (CR 702.52a). XMage's DredgeAbility asks chooseUse "Dredge <card>? (n cards
 // are milled)": the dredge pick is yes, the plain draw no. The numeric mode
