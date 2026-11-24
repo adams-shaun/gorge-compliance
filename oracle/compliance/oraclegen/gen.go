@@ -1336,6 +1336,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var ownBounce map[int]bool
 	var tapThenUntap map[int]bool
 	var bolster map[int]bool
+	var craft map[int]bool
 	var supports map[int]supportAnswers
 	var snaps []rules.OracleSnapshot
 	var orderAsks map[int]bool
@@ -1352,6 +1353,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 		if bolster == nil {
 			bolster = ex.bolster
+		}
+		if craft == nil {
+			craft = ex.craft
 		}
 		if supports == nil {
 			supports = ex.supports
@@ -1897,7 +1901,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// answer instead of a false divergence (CR 608.2d).
 				break
 			}
-			if len(d.Picks) > 1 && allChoiceQueue(d) {
+			if len(d.Picks) > 1 && allChoiceQueue(d, craft[i]) {
 				// One makeChoose dialog consumes ONE definition, whose own
 				// parser splits on '^' into the multi-card selection (Dig's
 				// "put two of them into your hand", a discard-two). Emitting
@@ -1906,7 +1910,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = append(as, XAnswer{d.Seat, "choice", JoinedChoice(d)})
 			} else {
 				for k, label := range d.Picks {
-					switch pickQueue(d, k, label, bolster[i]) {
+					switch pickQueue(d, k, label, bolster[i], craft[i]) {
 					case "skip":
 						// XMage resolves this pick inside its computer player (a
 						// library search) or pays it from the pool (a mana-tapping
@@ -2404,13 +2408,24 @@ func modeNumberFor(d rules.OracleDecision, k int, modes map[string]int) (int, bo
 
 // allChoiceQueue reports whether every pick in a decision reaches XMage's
 // choice queue (makeChoose). A decision with a target or skipped pick is not
-// one makeChoose dialog and must not be joined with '^'.
-func allChoiceQueue(d rules.OracleDecision) bool {
+// one makeChoose dialog and must not be joined with '^'. It asks pickQueue,
+// the same per-pick route the answer emission uses, so every shape-gated route
+// (a fixed-size exile cost, a Craft material cost) is joined or kept separate
+// exactly as its answers are.
+func allChoiceQueue(d rules.OracleDecision, craft bool) bool {
 	if d.Retarget {
 		return false
 	}
+	if hasExileCostPick(d) && !(d.Min > 0 && d.Min == d.Max) {
+		// An open-ended exile cost (a group exile's "one or more") settles one
+		// card per TargetImpl.choose iteration, so each pick is its own
+		// makeChoose record; joining them would leave all but the first card
+		// unexiled. A fixed-size selection (min == max) is the one joined
+		// record.
+		return false
+	}
 	for k, label := range d.Picks {
-		if xmQueue(pickKind(d, k), label) != "choice" {
+		if pickQueue(d, k, label, false, craft) != "choice" {
 			return false
 		}
 	}
@@ -3110,13 +3125,24 @@ func pickKind(d rules.OracleDecision, k int) string {
 // label text, is the authority -- the mechanism the census test pins.
 func xmQueue(kind, label string) string {
 	switch kind {
-	case "search", "exilecost":
-		// A library search (TargetCardInLibrary) and an exile-from-graveyard
-		// cost (TargetCardInYourGraveyard) are answered from the target
+	case "search":
+		// A library search (TargetCardInLibrary) is answered from the target
 		// queue: measured on the std pass, 47 search carriers (Shared Roots,
-		// Nature's Rhythm, Solemn Simulacrum, ...) and Feed the Cycle /
-		// Soaring Stoneglider agree only with a target answer.
+		// Nature's Rhythm, Solemn Simulacrum, ...) agree only with a target
+		// answer.
 		return "target"
+	case "exilecost":
+		// An exile COST is not a TargetXxx target selection:
+		// ExileFromGraveCost/ExileTargetCost/ExileFromHandCost (and
+		// ExileXFromYourGraveCost's generated ExileFromGraveCost) all pay with
+		// getTargets().choose() -> TargetImpl.choose -> player.choose, which
+		// TestPlayer serves from makeChoose, the CHOICE queue (Ludevic's
+		// ExileXFromYourGraveCost left a target answer unused). A fixed-size
+		// selection is one joined makeChoose record; an open-ended group exile
+		// is one record per card (allChoiceQueue keeps it unjoined). Craft's
+		// material is the sole target-queue exception, marked by craft in
+		// pickQueue (craft_cost_pick.go). The census pins this kind mapping.
+		return "choice"
 	case "trigger_cost_pay", "trigger_cost_pay_manual":
 		return "skip"
 	case "mana":
@@ -3923,9 +3949,18 @@ func twoPilesPileAnswer(d rules.OracleDecision) string {
 // reaches XMage's choice queue: only a search of your own library is the
 // TargetCardInLibrary target ask (measured on the std pass). bolster marks
 // the decision as a Bolster tie election, whose counter_pick XMage asks
-// through chooseTarget (bolster_pick.go).
-func pickQueue(d rules.OracleDecision, k int, label string, bolster bool) string {
+// through chooseTarget (bolster_pick.go). craft marks a Craft keyword's
+// material exile, which CraftAbility pays through chooseTarget rather than the
+// choice queue every other exile cost uses (craft_cost_pick.go).
+func pickQueue(d rules.OracleDecision, k int, label string, bolster, craft bool) string {
 	if bolster && pickKind(d, k) == "counter_pick" {
+		return "target"
+	}
+	if craft && pickKind(d, k) == "exilecost" {
+		// Craft material is a TargetCardInGraveyardBattlefieldOrStack chosen
+		// by CraftAbility.CraftCost.pay -> player.chooseTarget: the TARGET
+		// queue, one answer per material. The kind-level choice mapping must
+		// not capture it just because a Craft cost also has min == max.
 		return "target"
 	}
 	if d.Retarget {

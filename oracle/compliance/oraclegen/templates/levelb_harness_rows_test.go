@@ -52,15 +52,26 @@ func TestLevelBHarnessRows(t *testing.T) {
 		{"Sunstar Chaplain", "activate#0.0", func(t *testing.T, it oraclegen.Item) {
 			wantXAnswer(t, it, "choice", "Grizzly Bears")
 		}},
-		// H1 self-named grave exile: no catalogue choice ahead of the named
-		// target (it was consumed by TargetCardInYourGraveyard and rejected).
+		// H1 self-named grave exile: "exile this card and two other cards named
+		// Say Its Name" is ExileSourceFromGraveCost + ExileFromGraveCost over a
+		// fixed TargetCardInYourGraveyard(2, ...), which pays through
+		// TargetImpl.choose -> makeChoose: ONE '^'-joined choice record for the
+		// two other cards. A target answer is never consumed (replayed at the
+		// repo XMAGE_REF: "Targets of PlayerA ... found [Say Its Name, Say Its
+		// Name]" left over), and no catalogue single precedes the joined record.
 		{"Say Its Name", "activate#0.1", func(t *testing.T, it oraclegen.Item) {
+			var choices []string
 			for _, a := range it.XAnswers[activateStepIndex(it.Steps)] {
-				if a.Kind == "choice" {
-					t.Errorf("activate bucket scripts choice %q; want only the named targets", a.Value)
+				switch a.Kind {
+				case "choice":
+					choices = append(choices, a.Value)
+				case "target":
+					t.Errorf("activate bucket scripts target %q; the exile cost rides the choice queue", a.Value)
 				}
 			}
-			wantXAnswer(t, it, "target", "Say Its Name")
+			if len(choices) != 1 || choices[0] != "Say Its Name^Say Its Name" {
+				t.Errorf("activate bucket choices %q; want the one joined pick of the two other copies", choices)
+			}
 		}},
 		// H4 tapXType<X/...>: the tap election is answered (X = 1 tapped
 		// artifact) and XMage's TapVariableTargetCost announce precedes it.
