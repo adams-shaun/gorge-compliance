@@ -1432,11 +1432,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // "deals 3 damage to any target" then "target player draws
                 // three"). Withhold the later objects' player answers from this
                 // ask and restore them, in order, afterwards.
+                List<Integer> laterPlayerSlots = laterPlayerIndices(target, getTargets());
                 List<String> laterPlayers = hideLaterPlayerTargets(target, getTargets());
+                int visibleBefore = getTargets().size();
                 try {
                     return chooseTargetInSegment(outcome, target, source, game);
                 } finally {
-                    getTargets().addAll(laterPlayers);
+                    // Each withheld answer goes back where it stood among the
+                    // answers still queued, not behind them: appending put a
+                    // later step's answer in front of the player answer a
+                    // multi-target cast's next ask owns (Boulder Dash). The
+                    // skip suffix was the queue's tail, so appending it is
+                    // already its original position.
+                    restoreLaterPlayerTargets(getTargets(), laterPlayers, laterPlayerSlots,
+                            visibleBefore);
                     getTargets().addAll(later);
                 }
             } finally {
@@ -1492,8 +1501,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * entry at the queue front is this ask's own answer and stays; only
          * entries after the first non-player answer are withheld. */
         static List<String> hideLaterPlayerTargets(mage.target.Target target, List<String> queue) {
+            List<Integer> slots = laterPlayerIndices(target, queue);
+            List<String> hidden = new ArrayList<>();
+            for (int i = slots.size() - 1; i >= 0; i--) {
+                hidden.add(0, queue.remove((int) slots.get(i)));
+            }
+            return hidden;
+        }
+
+        /** The queue indices (ascending) hideLaterPlayerTargets withholds. */
+        static List<Integer> laterPlayerIndices(mage.target.Target target, List<String> queue) {
+            List<Integer> slots = new ArrayList<>();
             if (!(target.getOriginalTarget() instanceof mage.target.common.TargetPermanentOrPlayer)) {
-                return new ArrayList<>();
+                return slots;
             }
             int first = -1;
             for (int i = 0; i < queue.size(); i++) {
@@ -1503,15 +1523,33 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             }
             if (first < 0) {
-                return new ArrayList<>();
+                return slots;
             }
-            List<String> hidden = new ArrayList<>();
-            for (int i = queue.size() - 1; i > first; i--) {
+            for (int i = first + 1; i < queue.size(); i++) {
                 if (queue.get(i).startsWith("targetPlayer=")) {
-                    hidden.add(0, queue.remove(i));
+                    slots.add(i);
                 }
             }
-            return hidden;
+            return slots;
+        }
+
+        /** Puts the withheld player answers back into {@code queue} at their
+         * original place relative to the answers that remain. {@code slots}
+         * are their indices in the queue as it stood before hiding;
+         * {@code visibleBefore} is the queue's
+         * length once they were hidden, so the ask consumed
+         * {@code visibleBefore - queue.size()} answers from the front. A
+         * withheld answer that stood behind {@code k} visible answers now
+         * stands behind {@code k - consumed} of them (none when the ask ate
+         * past it). */
+        static void restoreLaterPlayerTargets(List<String> queue, List<String> hidden, List<Integer> slots,
+                int visibleBefore) {
+            int consumed = Math.max(0, visibleBefore - queue.size());
+            for (int j = 0; j < hidden.size(); j++) {
+                int visibleAhead = slots.get(j) - j;
+                int at = Math.min(queue.size(), Math.max(0, visibleAhead - consumed) + j);
+                queue.add(at, hidden.get(j));
+            }
         }
 
         /** XMage represents attach prompts either with a "to attach" hint or,
