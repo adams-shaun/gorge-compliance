@@ -20,15 +20,20 @@ The protocol is gorge's `docs/site/api/spellbench-v2.md`; the phase-server WebSo
 
 ## What is posed
 
-Sixteen families over 27 `WaitingFor` variants (and `GameOver` as the terminal), one `Family` each in
+Twenty-one families over 40 `WaitingFor` variants (and `GameOver` as the terminal), one `Family` each in
 `waiting.rs`: priority (pass, play land, cast, activate); mulligan (keep / mulligan, and the London bottom
 as `order_pick` `mulligan_bottom`); attackers and blockers (one substep per creature); targets
 (`TargetSelection`, `TriggerTargetSelection`); optional effect (`OptionalEffectChoice`,
 `OpponentMayChoice`); optional cost; X; mana payment (`ManaPayment`, `ManaSourceSelection`: finish a
 payment the pool covers, else `activate_mana_ability` per source, or cancel); modes (`ModeChoice`,
 `AbilityModeChoice`); trigger order (`OrderTriggers`); scry and surveil (`arrange_card` then
-`order_pick`); top or bottom; and pool picks of `min..=max` cards (`DiscardToHandSize`, `DiscardChoice`,
-`RevealChoice`, `SearchChoice`, `EffectZoneChoice`, `DigChoice`, the simple `PayCost` kinds, `ChooseLegend`).
+`order_pick`); top or bottom; equip attachment (`EquipTarget`); a mana colour or combination
+(`ChooseManaColor`); an unless payment (`UnlessPayment`); a resolution-time branch (`ChooseOneOfBranch`);
+a replacement-effect pick (`ReplacementChoice`); and pool picks of `min..=max` cards
+(`DiscardToHandSize`, `DiscardChoice`, `RevealChoice`, `SearchChoice`, `EffectZoneChoice`, `DigChoice`,
+the simple `PayCost` kinds, `ChooseLegend`, `ChooseFromZoneChoice`, `MultiTargetSelection`,
+`BeholdChoice`, `EmpowerJaceChoice`, `SpellCopyOrderChoice`, `WardDiscardChoice`,
+`WardSacrificeChoice`, `UnlessBounceChoice`).
 
 `AssignCombatDamage` is host-answered, not posed (`combat_damage_assignment: "engine_order"`): lethal to each
 blocker in phase's order, the rest to the last blocker, or to the defender under trample. Damage modes other

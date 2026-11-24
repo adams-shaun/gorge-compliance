@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"reflect"
+	"slices"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
@@ -347,6 +348,50 @@ func TestStartHistoryAndCounters(t *testing.T) {
 			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, r.bf)
 			if !reflect.DeepEqual(f.Setup.P0.Counters, r.counters) {
 				t.Errorf("p0 counters %+v, want %+v", f.Setup.P0.Counters, r.counters)
+			}
+		})
+	}
+}
+
+// TestStartPlayerCounters: a counters need whose removal reads a player
+// (Final Act's "each opponent loses all counters", Survivor's Med Kit's
+// RadAway on a player) cannot be seeded by a start file, which places counters
+// only on battlefield cards (rules.StartSeat has no player-counter field). The
+// key is refused by name instead of putting the counter on a permanent the
+// removal never reads. Two permanent-counter cards still get a placed
+// permanent on the seat their removal reads.
+func TestStartPlayerCounters(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, tc := range []struct{ card, key string }{
+		{"Final Act", "cast"},
+		{"Survivor's Med Kit", "f0/a0"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Reason != reasonPlayerCounters {
+				t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, reasonPlayerCounters)
+			}
+		})
+	}
+	for _, tc := range []struct{ card, key string }{
+		{"Honest Work", "f0/t0"},
+		{"Mabel, Bitter Recluse", "f0/t0"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			cs := res.Start.Setup.P1.Counters
+			if len(cs) != 1 || cs[0].Kind != "P1P1" || !slices.Contains(res.Start.Setup.P1.Battlefield, cs[0].Card) {
+				t.Errorf("p1 counters %+v on battlefield %v, want one P1P1 on a placed permanent",
+					cs, res.Start.Setup.P1.Battlefield)
 			}
 		})
 	}
