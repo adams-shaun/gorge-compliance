@@ -761,11 +761,16 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 // A mana ability that is not a land tap (a Treasure, a creature that taps for mana): the same
                 // `activate_mana_ability`, with no colour to name (the source's own ability makes it).
                 if let GameAction::ActivateAbility { source_id, ability_index, .. } = &c.action {
-                    if let Some(src) = shown_ref(&live.state, &live.ids, who, *source_id) {
-                        let semantic = sem::activate_mana_ability(src, *ability_index as u32, None, None);
-                        if seen.insert(canonical(&semantic)) {
-                            cands.push(Cand { semantic, effect: Effect::Act(c.action.clone()) });
+                    match shown_ref(&live.state, &live.ids, who, *source_id) {
+                        Some(src) => {
+                            let semantic = sem::activate_mana_ability(src, *ability_index as u32, None, None);
+                            if seen.insert(canonical(&semantic)) {
+                                cands.push(Cand { semantic, effect: Effect::Act(c.action.clone()) });
+                            }
                         }
+                        // A legal mana ability whose source the viewer cannot name is never silently
+                        // dropped: it is counted like any other unmapped action.
+                        None => *census.unmapped_actions.entry("ActivateAbility:unresolvable_source".to_string()).or_insert(0) += 1,
                     }
                     continue;
                 }
@@ -777,7 +782,10 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                     }
                     continue;
                 };
-                let Some(src) = shown_ref(&live.state, &live.ids, who, selection.source.object_id) else { continue };
+                let Some(src) = shown_ref(&live.state, &live.ids, who, selection.source.object_id) else {
+                    *census.unmapped_actions.entry("TapLandForMana:unresolvable_source".to_string()).or_insert(0) += 1;
+                    continue;
+                };
                 let semantic = sem::activate_mana_ability(src, selection.ability_index.unwrap_or(0) as u32, Some(mana_letter(selection.mana_type)), None);
                 if seen.insert(canonical(&semantic)) {
                     cands.push(Cand { semantic, effect: Effect::Act(c.action.clone()) });
