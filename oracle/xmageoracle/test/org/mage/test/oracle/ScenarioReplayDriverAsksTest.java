@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import mage.abilities.Ability;
 import mage.constants.EmptyNames;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import org.mage.test.player.TestPlayer;
@@ -60,6 +61,7 @@ public final class ScenarioReplayDriverAsksTest {
         faceDownAttacker();
         manifestedFaceDownTarget();
         declinedDig();
+        blackCatLookExileChoice();
         alternativeCast();
         promisedGift();
         replacementOrder();
@@ -71,9 +73,10 @@ public final class ScenarioReplayDriverAsksTest {
         optionalMultiCandidateTarget();
         mandatoryChoosePickOnTargetQueue();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
-                + " face-down attacker, manifested face-down target, declined dig, alternative cast, promised gift, replacement order,"
-                + " lone forced target, divided amount, multi-candidate search, phyrexian life, wish decline, optional multi-candidate target,"
-                + " mandatory choose pick on the target queue");
+                + " face-down attacker, manifested face-down target, declined dig, look-at/exile same-name choice,"
+                + " alternative cast, promised gift, replacement order,"
+                + " lone forced target, divided amount, multi-candidate search, phyrexian life, wish decline,"
+                + " optional multi-candidate target, mandatory choose pick on the target queue");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
@@ -396,6 +399,106 @@ public final class ScenarioReplayDriverAsksTest {
         List<String> loneNo = new ArrayList<>(Collections.singletonList("No"));
         check(!(Boolean) adapter("declinePairToChoiceSkip", types, 0, loneNo, new ArrayList<String>()),
                 "a lone No (Oko's chooseUse) is kept");
+    }
+
+    /** (f2) SPM Black Cat, Cunning Thief trigger#0.0: XMage's look-at-the-top
+     * choose(Cards, TargetCard) asks for TWO cards from nine, and the item cut
+     * ends before gorge's decision, so the choice queue is empty. Every
+     * offered card is a Plains (gorge's decision moves two same-named objects,
+     * so any subset is the same named game state): the driver takes the first
+     * two the dialog offers. The shape gates keep it from becoming a default
+     * pick: distinct names, an open count, a non-library zone, a non-required
+     * ask and an ask inside the compared window (before the last checkpoint)
+     * all decline. A caret-joined multi-pick choice answer ("Plains^Plains")
+     * names its candidates through its segments and stays for the base player,
+     * never the fall-through. The same shape reaches the chooseTarget(Cards)
+     * funnel (Dimir Charm's "put one back"), so both funnels must call the
+     * helper. */
+    private static void blackCatLookExileChoice() throws Exception {
+        Class<?>[] types = {boolean.class, boolean.class, int.class, int.class, Zone.class, int.class, List.class,
+                List.class, java.util.function.Function.class};
+        java.util.UUID a = java.util.UUID.randomUUID();
+        java.util.UUID b = java.util.UUID.randomUUID();
+        java.util.UUID c = java.util.UUID.randomUUID();
+        java.util.UUID later = java.util.UUID.randomUUID();
+        List<java.util.UUID> offer = Arrays.asList(a, b, c);
+        List<java.util.UUID> candidates = Arrays.asList(a, b, c);
+        java.util.function.Function<java.util.UUID, String> plains = id -> "Plains";
+        List<?> picked = (List<?>) adapter("interchangeableLibraryPick", types,
+                true, true, 2, 2, Zone.LIBRARY, 2, offer, candidates, plains);
+        check(picked != null && picked.equals(Arrays.asList(a, b)),
+                "two of nine same-named looked-at cards are the first two offered: " + picked);
+        // The offered order, not the candidate order, decides which ids are
+        // taken: the same library window listed another way picks those ids.
+        check(((List<?>) adapter("interchangeableLibraryPick", types,
+                true, true, 2, 2, Zone.LIBRARY, 2, Arrays.asList(later, b, a), candidates, plains))
+                .equals(Arrays.asList(b, a)), "the offered order names the taken cards");
+        java.util.Map<java.util.UUID, String> mixed = new java.util.HashMap<>();
+        mixed.put(a, "Plains");
+        mixed.put(b, "Plains");
+        mixed.put(c, "Island");
+        java.util.function.Function<java.util.UUID, String> nameOf = mixed::get;
+        check(adapter("interchangeableLibraryPick", types,
+                true, true, 2, 2, Zone.LIBRARY, 2, offer, candidates, nameOf) == null,
+                "a distinct card is gorge's real choice and stays unscripted");
+        check(adapter("interchangeableLibraryPick", types,
+                true, true, 0, 2, Zone.LIBRARY, 1, offer, candidates, plains) == null,
+                "an open count is never a default pick");
+        check(adapter("interchangeableLibraryPick", types,
+                true, true, 2, 2, Zone.BATTLEFIELD, 2, offer, candidates, plains) == null,
+                "a same-named permanent can differ by attached state, so only a library window is safe");
+        check(adapter("interchangeableLibraryPick", types,
+                true, true, 2, 2, Zone.LIBRARY, 2, offer, Arrays.asList(a, b), plains) == null,
+                "every candidate needed is the forced-pick path, not this rule");
+        check(adapter("interchangeableLibraryPick", types,
+                true, true, 2, 2, Zone.LIBRARY, 2, Collections.singletonList(a), candidates, plains) == null,
+                "the offer must actually hold the picks");
+        check(adapter("interchangeableLibraryPick", types,
+                true, false, 2, 2, Zone.LIBRARY, 2, offer, candidates, plains) == null,
+                "a non-required ask may take none, so it stays a decision");
+        check(adapter("interchangeableLibraryPick", types,
+                false, true, 2, 2, Zone.LIBRARY, 2, offer, candidates, plains) == null,
+                "a pick inside the compared window is gorge's real decision, not a substitute");
+        // A caret-joined multi-pick choice answer ("Plains^Plains", the
+        // generator's spelling for a multi-card pick) names its candidates
+        // through its segments. The whole-string check missed it in
+        // forcedChooseCards, left the scripted answer at the queue front and
+        // took the cards, so the replay ended with a leftover choice.
+        Class<?>[] headTypes = {String.class, java.util.UUID.class, java.util.function.BiPredicate.class};
+        java.util.function.BiPredicate<java.util.UUID, String> names =
+                (id, part) -> id.equals(a) ? "Plains".equals(part) : "Island".equals(part);
+        check((Boolean) adapter("answerNamesCandidate", headTypes, "Plains^Plains", a, names),
+                "a caret-joined answer naming a candidate is this ask's own and stays for the base");
+        check(!(Boolean) adapter("answerNamesCandidate", headTypes, "Island^Island", a, names),
+                "a caret-joined answer naming no candidate is not this ask's own");
+        // The helper alone is not the fix: pin that BOTH Cards funnels call
+        // it. Dropping either call would leave the checks above passing while
+        // the strict replay fails again on that card's effect API.
+        String src = System.getProperty("scenarioReplay.source");
+        check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
+        String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
+        int choiceFunnel = text.indexOf("public boolean choose(Outcome outcome, Cards cards");
+        check(choiceFunnel >= 0, "ScriptedChoicePlayer must override choose(Cards)");
+        int forced = text.indexOf("forcedChooseCards(cards, target, source, game)", choiceFunnel);
+        check(forced >= 0 && forced < choiceFunnel + 500,
+                "choose(Cards) must call forcedChooseCards");
+        // The head check must split a multi-pick answer. A whole-string
+        // comparison leaves the scripted caret answer queued (leftover).
+        int headCheck = text.indexOf("boolean headNamesCandidate", forced);
+        int headMatch = text.indexOf("answerNamesCandidate(game, id, head)", headCheck);
+        check(headCheck >= 0 && headMatch >= 0 && headMatch < headCheck + 800,
+                "forcedChooseCards head detection must use the segment-aware answerNamesCandidate");
+        check(text.indexOf("hasObjectTargetNameOrAlias(o, head)", choiceFunnel) < 0,
+                "forcedChooseCards must not compare the whole caret-joined choice head string");
+        int choiceCall = text.indexOf("interchangeableLibraryPick(", forced);
+        check(choiceCall >= 0 && choiceCall < forced + 4000,
+                "forcedChooseCards must call interchangeableLibraryPick");
+        int targetFunnel = text.indexOf("public boolean chooseTarget(Outcome outcome, Cards cards");
+        check(targetFunnel >= 0, "ScriptedChoicePlayer must override chooseTarget(Cards)");
+        int targetCall = text.indexOf("interchangeableLibraryPick(", targetFunnel);
+        int targetSuper = text.indexOf("return super.chooseTarget(outcome, cards", targetFunnel);
+        check(targetCall >= 0 && (targetSuper < 0 || targetCall < targetSuper),
+                "chooseTarget(Cards) must call interchangeableLibraryPick before the base");
     }
 
     /** (g) DSK Leyline of Mutation static#0.0, Land Grant's own cost and Mine
