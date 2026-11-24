@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9263287d-f782-4318-9ab8-e2e5f8107f5e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Resonating Lute/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9263287d-f782-4318-9ab8-e2e5f8107f5e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Resonating Lute/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92680de3-6ee2-4b73-b0f5-38383482dcca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92680de3-6ee2-4b73-b0f5-38383482dcca	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92680de3-6ee2-4b73-b0f5-38383482dcca	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9268d369-173e-4325-98f6-348beeb8ba62	cast	cast-resolve	agreed	-	FX	scen	2	0	Galuf's Final Act/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 926d52a5-4db1-46ce-9567-17c28bf56ae7	cast	cast-resolve	agreed	-	X	scen	1	0	Weftstalker Ardent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 926d52a5-4db1-46ce-9567-17c28bf56ae7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Weftstalker Ardent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -178,9 +178,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92c43ee1-0f7d-4993-8d3a-689cc87d7480	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92c43ee1-0f7d-4993-8d3a-689cc87d7480	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92c43ee1-0f7d-4993-8d3a-689cc87d7480	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92c470c9-1373-4f3a-9805-5e9613874793	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92c470c9-1373-4f3a-9805-5e9613874793	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92c470c9-1373-4f3a-9805-5e9613874793	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92c470c9-1373-4f3a-9805-5e9613874793	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prognostic-sphinx:cast:s1,f:xs:XP:prognostic-sphinx:cast:s1	-	-	-	d864b561c9cb	-	5d056afc0a9f	-	-	2026-11-24	xproof
+92c470c9-1373-4f3a-9805-5e9613874793	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+92c470c9-1373-4f3a-9805-5e9613874793	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:prognostic-sphinx:f0t0:s1,f:xs:XP:prognostic-sphinx:f0t0:s1	-	-	-	d864b561c9cb	-	5d056afc0a9f	-	-	2026-11-24	xproof
 92c824da-2351-43bd-9fa0-d09709ad8205	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92c824da-2351-43bd-9fa0-d09709ad8205	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92c9aad6-35ec-425d-be7d-393328992820	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -219,7 +219,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92e222c2-28e6-4d43-8b48-480ebcd88495	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Falcon, Winged Wonder/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92e222c2-28e6-4d43-8b48-480ebcd88495	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:falcon-winged-wonder:f0t0:s2,f:xs:XP:falcon-winged-wonder:f0t0:s2	-	-	-	5437c1394672	-	66b3bdc63637	-	-	2026-11-24	xproof
 92e2f982-f8b9-4c3b-ab50-14c025370e5c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92e2f982-f8b9-4c3b-ab50-14c025370e5c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92e2f982-f8b9-4c3b-ab50-14c025370e5c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 92e45a8f-c582-45e1-9b7f-def219023ebf	cast	cast-resolve	agreed	-	FX	scen	2	0	West Wind Avatar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92e45a8f-c582-45e1-9b7f-def219023ebf	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	West Wind Avatar/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92e45a8f-c582-45e1-9b7f-def219023ebf	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	West Wind Avatar/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 115dabbd-1a09-4641-a428-92fcbfd82ae9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 115f1397-fa24-4412-80b7-e2a6ddedcd4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 115f1397-fa24-4412-80b7-e2a6ddedcd4c	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-115fd5ac-460b-49a3-83ed-9d56a7aecb14	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+115fd5ac-460b-49a3-83ed-9d56a7aecb14	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:artisan-s-sorrow:cast:s1,f:xs:XP:artisan-s-sorrow:cast:s1	-	-	-	d864b561c9cb	-	fa4810e4e9f2	-	-	2026-11-24	xproof
 1162c7ff-c0cb-469a-ad3c-322b0981ae1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1162c7ff-c0cb-469a-ad3c-322b0981ae1d	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 11656b2a-b459-4b1c-b505-8547c3507856	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:devouring-swarm:cast:s1,f:xs:XP:devouring-swarm:cast:s1	-	-	-	d864b561c9cb	-	dfdc56e414b4	-	-	2026-11-24	xproof
@@ -194,4 +194,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11fb3fee-ae84-4bf3-b834-63d3b8987df3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11fb3fee-ae84-4bf3-b834-63d3b8987df3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11fd2650-2150-4e62-8b64-e820d734a231	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11fd2650-2150-4e62-8b64-e820d734a231	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11fd2650-2150-4e62-8b64-e820d734a231	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:borderland-marauder:f0t0:s1,f:xs:XP:borderland-marauder:f0t0:s1	-	-	-	d864b561c9cb	-	ca11f0df57cd	-	-	2026-11-24	xproof

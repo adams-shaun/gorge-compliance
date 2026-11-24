@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e09aaba-5c32-4a45-8a07-b69e873510ef	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e0bef57-d977-48d1-be78-9a4f0aacd9c0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e0d40a6-e0a4-4fb2-be72-314f7d66b7eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0e0d40a6-e0a4-4fb2-be72-314f7d66b7eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0e0d40a6-e0a4-4fb2-be72-314f7d66b7eb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:highland-game:f0t0:s1,f:xs:XP:highland-game:f0t0:s1	-	-	-	d864b561c9cb	-	75970a551e4e	-	-	2026-11-24	xproof
 0e0e15d9-bd29-495a-9975-d1bd2ebb4bff	cast	cast-resolve	agreed	-	X	scen	1	0	Battle-Scarred Survivalist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e0e15d9-bd29-495a-9975-d1bd2ebb4bff	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 0e11792b-7fe5-4208-aa0b-e5d09b2b65fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e14940b-87e1-4139-8f30-3629b3ad3a59	cast	cast-resolve	agreed	-	X	scen	1	0	Shields Up!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e20afd2-507b-4878-a78c-f23b51ec071f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e235b96-9507-4f4b-9578-4fb8ed854cc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0e235b96-9507-4f4b-9578-4fb8ed854cc2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0e235b96-9507-4f4b-9578-4fb8ed854cc2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0e2418f8-2f32-4f79-8ce7-44eae8e764cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e2418f8-2f32-4f79-8ce7-44eae8e764cb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e24c0d2-2333-425c-952e-9a13e6519cd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e412b68-9179-4094-960a-95692428855b	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 0e471b6d-4ba4-46aa-a802-81e401cbfa56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e49ec18-f979-4168-b7df-7728f3fe442e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0e49ec18-f979-4168-b7df-7728f3fe442e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0e49ec18-f979-4168-b7df-7728f3fe442e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0e4d2fbc-1b34-4501-9022-8ea800cb2d24	cast	cast	agreed	-	F	start	2	0	f:xs:XP:talon-of-pain:cast:s1	-	-	-	25696bf19d5b	-	d5a37abf2d96	-	-	2026-11-24	xproof
 0e4d2fbc-1b34-4501-9022-8ea800cb2d24	f0/a0	DealDamage	agreed	-	F	start	2	0	f:xs:XP:talon-of-pain:cast:s1	-	-	-	25696bf19d5b	-	d5a37abf2d96	-	-	2026-11-24	xproof
 0e4d2fbc-1b34-4501-9022-8ea800cb2d24	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -75,7 +75,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e6fe04f-b20d-4df9-a7ac-edebc3bcc9be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e71fc56-0332-4e5e-8658-9257cc0d8a1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steel-sabotage:cast:s1,f:xs:XP:steel-sabotage:cast:s1	-	-	-	d864b561c9cb	-	9b3d591d9538	-	-	2026-11-24	xproof
 0e7405e3-e9e6-4213-a73f-e0c01a7d6721	cast	cast-resolve	agreed	-	X	scen	1	0	Callous Sell-Sword/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0e741c79-5ea4-457d-a7d3-b11154459246	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0e741c79-5ea4-457d-a7d3-b11154459246	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:species-gorger:cast:s1,f:xs:XP:species-gorger:cast:s1	-	-	-	d864b561c9cb	-	66d572b93738	-	-	2026-11-24	xproof
 0e741c79-5ea4-457d-a7d3-b11154459246	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e768d03-b2a3-4783-9cf5-7470f0203349	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e7b9caf-8285-4386-98bc-9a809827f447	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -170,8 +170,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0edaf433-4ded-4841-bc86-136780c0767f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Unliving Legionnaire/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0edc8ad3-2920-4b25-8a86-98ce216111d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0edc8ad3-2920-4b25-8a86-98ce216111d1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0edd4894-0df0-4a4e-8a96-d20360ea81c7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0edd4894-0df0-4a4e-8a96-d20360ea81c7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0edd4894-0df0-4a4e-8a96-d20360ea81c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akroan-phalanx:cast:s1,f:xs:XP:akroan-phalanx:cast:s1	-	-	-	d864b561c9cb	-	b4a0b5399ded	-	-	2026-11-24	xproof
+0edd4894-0df0-4a4e-8a96-d20360ea81c7	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:akroan-phalanx:f0a0:s1,f:xs:XP:akroan-phalanx:f0a0:s1	-	-	-	d864b561c9cb	-	b4a0b5399ded	-	-	2026-11-24	xproof
 0ee042ce-7cb2-47a8-9a48-6ffc07ba07b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ee042ce-7cb2-47a8-9a48-6ffc07ba07b3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ee088dc-c7c7-4f7f-9d1f-be3d79550d95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ee28549-5909-4372-8376-34010b7b6654	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fear of Isolation/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ee41ef9-0b39-4d00-a68e-7914839a7175	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ee41ef9-0b39-4d00-a68e-7914839a7175	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0eeab568-9186-4813-87e7-9c1e6a7c76e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0eeab568-9186-4813-87e7-9c1e6a7c76e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fated-return:cast:s1,f:xs:XP:fated-return:cast:s1	-	-	-	d864b561c9cb	-	7585306642bd	-	-	2026-11-24	xproof
 0eec9984-cd11-4a52-9234-469c6a5fb9aa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Abandoned Campground/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0eec9984-cd11-4a52-9234-469c6a5fb9aa	land	play-land	agreed	-	X	scen	1	0	Abandoned Campground/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0eecdfb3-3b05-4051-a660-060ff6df80ef	cast	cast-resolve	agreed	-	X	scen	1	0	Emergent Ultimatum/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

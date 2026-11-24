@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 ab050d55-a47d-4880-b65a-29f562773d7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab050d55-a47d-4880-b65a-29f562773d7a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab0707fb-b404-433d-b845-0d50d01cd72e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ab0707fb-b404-433d-b845-0d50d01cd72e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ab0707fb-b404-433d-b845-0d50d01cd72e	f0/t0	NULL	owed	refused:no-generator:trigger:Scry	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ab097f46-a7bf-4cf1-a96c-36b681fe79da	cast	cast-resolve	agreed	-	X	scen	1	0	Nessian Hornbeetle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ab097f46-a7bf-4cf1-a96c-36b681fe79da	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nessian Hornbeetle/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ab0aea13-1dbc-424a-ab7e-cdb303036a56	cast	cast-resolve	agreed	-	X	scen	1	0	High Stride/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -138,8 +138,8 @@ abaddcce-9039-4b4e-baf8-fdab304b5c52	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 abaddcce-9039-4b4e-baf8-fdab304b5c52	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 abaddcce-9039-4b4e-baf8-fdab304b5c52	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 abb39d0e-bf11-4982-b06a-ca7be16bce2c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-abb9a164-34cd-41d7-8e89-5700fff336dd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-abb9a164-34cd-41d7-8e89-5700fff336dd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+abb9a164-34cd-41d7-8e89-5700fff336dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:siren-of-the-silent-song:cast:s1,f:xs:XP:siren-of-the-silent-song:cast:s1	-	-	-	d864b561c9cb	-	ac8edbe1122d	-	-	2026-11-24	xproof
+abb9a164-34cd-41d7-8e89-5700fff336dd	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 abbbfc22-18cc-4799-b02c-190173936872	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bogardan-rager:f0t0:s1,f:xs:XP:bogardan-rager:f0t0:s1	-	-	-	0984227a67dd	-	73f29f95c48e	-	-	2026-11-24	xproof
 abbbfc22-18cc-4799-b02c-190173936872	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bogardan-rager:f0t0:s1,f:xs:XP:bogardan-rager:f0t0:s1	-	-	-	0984227a67dd	-	73f29f95c48e	-	-	2026-11-24	xproof
 abbdc656-02e9-43a0-8e2c-263d6c37c273	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -161,7 +161,7 @@ abc5ac3e-f196-49df-8a9d-16df3114ffad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 abcb5321-c295-4abf-8622-7de79679d27a	cast	cast-resolve	agreed	-	X	scen	1	0	Depressurize/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 abccb19f-098b-4453-b7bc-838ad5914ebe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 abccb19f-098b-4453-b7bc-838ad5914ebe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-abcf5e77-88fc-4b76-a1e8-907a5b27d612	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+abcf5e77-88fc-4b76-a1e8-907a5b27d612	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clan-defiance:cast:s1,f:xs:XP:clan-defiance:cast:s1	-	-	-	d864b561c9cb	-	ef56da9733aa	-	-	2026-11-24	xproof
 abd12238-ea9d-4124-8229-3a479b8464d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 abd1c415-8fd3-4852-92c6-4557453dfc41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 abd1c415-8fd3-4852-92c6-4557453dfc41	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

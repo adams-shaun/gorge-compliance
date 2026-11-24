@@ -73,8 +73,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 776341cb-d2ec-423f-9250-92dc8bd8d503	cast	cast-resolve	agreed	-	FX	scen	2	0	Bitter Triumph/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 77636154-962f-4ca8-85e7-c0c9c0c3cd2d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77637eff-2963-4402-88f3-ca346f762fc8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77661282-1c98-4f70-b617-c75633ab04c8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77661282-1c98-4f70-b617-c75633ab04c8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77661282-1c98-4f70-b617-c75633ab04c8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crystalline-nautilus:cast:s1,f:xs:XP:crystalline-nautilus:cast:s1	-	-	-	d864b561c9cb	-	863dbb6fd7cc	-	-	2026-11-24	xproof
+77661282-1c98-4f70-b617-c75633ab04c8	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:crystalline-nautilus:cast:s1,f:xs:XP:crystalline-nautilus:cast:s1	-	-	-	d864b561c9cb	-	863dbb6fd7cc	-	-	2026-11-24	xproof
 776aa036-08aa-4fa0-82bd-c09e6e3e2c5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 776aa036-08aa-4fa0-82bd-c09e6e3e2c5e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 776aa036-08aa-4fa0-82bd-c09e6e3e2c5e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -104,8 +104,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 778fb830-2d2b-4f81-a193-e6b652981695	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 778fb830-2d2b-4f81-a193-e6b652981695	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7790bd6c-75e2-4abd-87ab-e1c15f1d53ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7790bd6c-75e2-4abd-87ab-e1c15f1d53ab	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7790bd6c-75e2-4abd-87ab-e1c15f1d53ab	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7790bd6c-75e2-4abd-87ab-e1c15f1d53ab	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fortress-cyclops:f0t0:s1,f:xs:XP:fortress-cyclops:f0t0:s1	-	-	-	d864b561c9cb	-	1943caf7283a	-	-	2026-11-24	xproof
+7790bd6c-75e2-4abd-87ab-e1c15f1d53ab	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 779269f9-78c1-4e65-bafe-b6dea40a2b24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 779269f9-78c1-4e65-bafe-b6dea40a2b24	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7792d3af-5c64-4d0a-a2b3-b903d787b0ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -166,8 +166,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77c97dad-17cc-4a28-a48b-907c044d9034	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cantankerous-keepers:f0t0:s1,f:xs:XP:cantankerous-keepers:f0t0:s1	-	-	-	25696bf19d5b	-	0fdda7a20d40	-	-	2026-11-24	xproof
 77c97dad-17cc-4a28-a48b-907c044d9034	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cantankerous-keepers:f0t0:s1,f:xs:XP:cantankerous-keepers:f0t0:s1	-	-	-	25696bf19d5b	-	0fdda7a20d40	-	-	2026-11-24	xproof
 77c97dad-17cc-4a28-a48b-907c044d9034	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cantankerous Keepers/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-77ccbea1-70af-4194-adad-39a904221c75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77ccbea1-70af-4194-adad-39a904221c75	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77ccbea1-70af-4194-adad-39a904221c75	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eidolon-of-blossoms:f0t0:s1,f:xs:XP:eidolon-of-blossoms:f0t0:s1	-	-	-	d864b561c9cb	-	4da99622fae1	-	-	2026-11-24	xproof
+77ccbea1-70af-4194-adad-39a904221c75	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eidolon-of-blossoms:f0t0:s1,f:xs:XP:eidolon-of-blossoms:f0t0:s1	-	-	-	d864b561c9cb	-	4da99622fae1	-	-	2026-11-24	xproof
 77cd2246-6906-4dce-8580-4c9d2e68c477	cast	cast-resolve	agreed	-	X	scen	1	0	Jet, Freedom Fighter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 77cd2246-6906-4dce-8580-4c9d2e68c477	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 77cd2246-6906-4dce-8580-4c9d2e68c477	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Jet, Freedom Fighter/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

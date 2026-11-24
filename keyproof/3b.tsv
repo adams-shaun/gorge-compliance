@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b10ab39-3050-475c-af8b-f293794d498c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mind Drill Assailant/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b10ab39-3050-475c-af8b-f293794d498c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mind Drill Assailant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b14e7ea-e01c-421d-acd2-0b70436ca6aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b14e7ea-e01c-421d-acd2-0b70436ca6aa	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b14e7ea-e01c-421d-acd2-0b70436ca6aa	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:deathbellow-raider:f0a0:s1,f:xs:XP:deathbellow-raider:f0a0:s1	-	-	-	d864b561c9cb	-	78e27b666406	-	-	2026-11-24	xproof
 3b1647d1-9aec-454f-a215-e28633cb7a2d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b1647d1-9aec-454f-a215-e28633cb7a2d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b172be8-1bac-441e-98cc-f5af8da6005b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3baa8e38-ef93-435d-b63e-f781d5bfcc68	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Temple of Abandon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3baa8e38-ef93-435d-b63e-f781d5bfcc68	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Temple of Abandon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3baa8e38-ef93-435d-b63e-f781d5bfcc68	land	play-land	agreed	-	X	scen	1	0	Temple of Abandon/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3baee36b-d64f-448c-ae45-c1ec124c92ec	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3baee36b-d64f-448c-ae45-c1ec124c92ec	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	b725b6b5cf50	-	-	2026-11-24	xproof
 3bafc004-1c90-4939-9dcb-72667c170e39	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bafc004-1c90-4939-9dcb-72667c170e39	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bafc004-1c90-4939-9dcb-72667c170e39	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

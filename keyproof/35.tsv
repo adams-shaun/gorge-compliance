@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 350b3c1c-b37e-4279-9b49-0fb93c5e7e33	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 350f5c0a-563f-41c5-8f7b-10f409bb4d3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35101c6c-0bcc-4b1f-9cb5-a82e4d2f8220	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35101c6c-0bcc-4b1f-9cb5-a82e4d2f8220	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35101c6c-0bcc-4b1f-9cb5-a82e4d2f8220	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:gluttonous-cyclops:f0a0:s1,f:xs:XP:gluttonous-cyclops:f0a0:s1	-	-	-	d864b561c9cb	-	ea5a138b7595	-	-	2026-11-24	xproof
 351091cb-1263-4202-9447-021c6019cff1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 351091cb-1263-4202-9447-021c6019cff1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35137378-6754-4bb1-a38e-5940890ccab1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -31,14 +31,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3513d862-ef0d-4949-b33a-3fa9437cc444	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35142b01-4b8d-4335-a943-a3172fa04573	cast	cast-resolve	agreed	-	X	scen	1	0	Mindspring Merfolk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 35142b01-4b8d-4335-a943-a3172fa04573	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mindspring Merfolk/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3517abe3-eb18-49af-9f1c-b372d2039d99	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3517abe3-eb18-49af-9f1c-b372d2039d99	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3517abe3-eb18-49af-9f1c-b372d2039d99	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aquus-steed:cast:s1,f:xs:XP:aquus-steed:cast:s1	-	-	-	d864b561c9cb	-	02eee6320bf8	-	-	2026-11-24	xproof
+3517abe3-eb18-49af-9f1c-b372d2039d99	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:aquus-steed:f0a0:s1,f:xs:XP:aquus-steed:f0a0:s1	-	-	-	d864b561c9cb	-	02eee6320bf8	-	-	2026-11-24	xproof
 3518e273-bd92-46bc-b361-da52c670dfe1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3518e273-bd92-46bc-b361-da52c670dfe1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3518e273-bd92-46bc-b361-da52c670dfe1	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 351c4f85-8792-4710-8cc9-d3e36657f6db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 351c4f85-8792-4710-8cc9-d3e36657f6db	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-351c4f85-8792-4710-8cc9-d3e36657f6db	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+351c4f85-8792-4710-8cc9-d3e36657f6db	f0/t0	NULL	owed	refused:no-generator:trigger:BecomeMonstrous	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3525e263-e29a-49bf-a29f-fb3ce43bbd33	cast	cast-resolve	agreed	-	X	scen	1	0	Heraldic Banner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3525e263-e29a-49bf-a29f-fb3ce43bbd33	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Heraldic Banner/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 352844c5-2160-4787-97f1-9cd0fed060eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -75,7 +75,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 355c2840-2cb8-431a-bcdc-f4b8824a1f5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 355c2840-2cb8-431a-bcdc-f4b8824a1f5d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 355ed7ef-bfa6-4538-99fb-a2d203eb7005	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3567c3c8-b3c7-45b7-935b-b1fdbc973720	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3567c3c8-b3c7-45b7-935b-b1fdbc973720	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vandalblast:cast:s1,f:xs:XP:vandalblast:cast:s1	-	-	-	d864b561c9cb	-	557adf8d5df3	-	-	2026-11-24	xproof
 356a85d9-2570-448c-a455-f4ce915a604f	cast	cast-resolve	agreed	-	FX	scen	2	0	Lady of Laughter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 356a85d9-2570-448c-a455-f4ce915a604f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lady of Laughter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 356a85d9-2570-448c-a455-f4ce915a604f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lady of Laughter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35dfe1c7-48ab-436f-9a6e-44835ea01cf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35dfe1c7-48ab-436f-9a6e-44835ea01cf9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35e2f82e-7ca3-4a92-9134-b7999eef5337	cast	counter-spell	agreed	-	X	scen	1	0	Mana Sculpt/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-35e684fd-69e3-4137-bf15-94f705191f5e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35e684fd-69e3-4137-bf15-94f705191f5e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:murmuring-phantasm:cast:s1,f:xs:XP:murmuring-phantasm:cast:s1	-	-	-	d864b561c9cb	-	f26de2e2727d	-	-	2026-11-24	xproof
 35efb1e6-6be2-4a38-969a-199524d48e02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35f09a11-1d9b-4dfd-9695-b809c871f10d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35f63c60-b0a1-459d-bf51-a8549fb06930	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

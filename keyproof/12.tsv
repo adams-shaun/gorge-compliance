@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12080ea9-0800-4601-b553-6711dd9f9806	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12080ea9-0800-4601-b553-6711dd9f9806	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1208cb6e-34b4-4a23-9a5b-a01229113e38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1208cb6e-34b4-4a23-9a5b-a01229113e38	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1208cb6e-34b4-4a23-9a5b-a01229113e38	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 120a0bcd-eca2-44eb-ad8d-5e4077f7e21c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 120a0bcd-eca2-44eb-ad8d-5e4077f7e21c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 120b565a-e22b-4d5d-9841-b11750b4ee49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 123bfa86-4265-448f-97cd-2c0614212862	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 123bfa86-4265-448f-97cd-2c0614212862	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 123d2b6e-114e-4767-860d-50790382ca4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-123d2b6e-114e-4767-860d-50790382ca4a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+123d2b6e-114e-4767-860d-50790382ca4a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 12401ad1-b5c9-43dc-9389-04aaf5db8b26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12401ad1-b5c9-43dc-9389-04aaf5db8b26	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1244902e-1a4e-4d3c-9a55-9be4602e3d2d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -225,8 +225,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12db6263-75c2-442f-a1a5-7af7915f8f9f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Umbral Collar Zealot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12e0321b-1cd7-4519-8929-3261cf11a1a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12e0321b-1cd7-4519-8929-3261cf11a1a9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12e091d0-3fd0-4058-84a9-529023b74c74	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12e091d0-3fd0-4058-84a9-529023b74c74	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+12e091d0-3fd0-4058-84a9-529023b74c74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jorubai-murk-lurker:cast:s1,f:xs:XP:jorubai-murk-lurker:cast:s1	-	-	-	d864b561c9cb	-	707d453a628d	-	-	2026-11-24	xproof
+12e091d0-3fd0-4058-84a9-529023b74c74	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:jorubai-murk-lurker:f0a0:s1,f:xs:XP:jorubai-murk-lurker:f0a0:s1	-	-	-	d864b561c9cb	-	707d453a628d	-	-	2026-11-24	xproof
 12e4d2bd-83e9-4120-a2e8-0645c0ed2387	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12e4d2bd-83e9-4120-a2e8-0645c0ed2387	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12e4e6b6-e684-49df-9373-d1e057664272	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

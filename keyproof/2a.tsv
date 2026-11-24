@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a14670b-2ab6-4e1d-9b33-610a87bdb7ce	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a14670b-2ab6-4e1d-9b33-610a87bdb7ce	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a174adc-0536-4e12-a6fe-c44305822714	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2a174adc-0536-4e12-a6fe-c44305822714	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2a174adc-0536-4e12-a6fe-c44305822714	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:haazda-snare-squad:f0t0:s1,f:xs:XP:haazda-snare-squad:f0t0:s1	-	-	-	d864b561c9cb	-	3d84d81b4784	-	-	2026-11-24	xproof
 2a18b3f0-8a78-46d8-b60f-3cd634062f1b	cast	cast-resolve	agreed	-	X	scen	1	0	Refute Destiny/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2a1ca3e2-e1d1-4525-a07e-13d5ba1ac431	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a1ca3e2-e1d1-4525-a07e-13d5ba1ac431	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -77,7 +77,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a79c29c-e539-49c5-b10c-1d5fd77842c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ulvenwald-bear:f0t0:s1,f:xs:XP:ulvenwald-bear:f0t0:s1	-	-	-	d864b561c9cb	-	f6c9b4b992f3	-	-	2026-11-24	xproof
 2a79c29c-e539-49c5-b10c-1d5fd77842c9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a7e68ed-156c-4680-851b-ae8de4a808a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2a7e68ed-156c-4680-851b-ae8de4a808a5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2a7e68ed-156c-4680-851b-ae8de4a808a5	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2a800427-ff8c-4b3c-baee-85211b70656d	cast	cast-resolve	agreed	-	X	scen	1	0	Aurelia, the Law Above/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2a800427-ff8c-4b3c-baee-85211b70656d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aurelia, the Law Above/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2a800427-ff8c-4b3c-baee-85211b70656d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aurelia, the Law Above/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a89feeb-9e66-4539-bd75-7d9d53f52d49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a8a239c-7cc7-48d5-b34b-60b0da4e4b20	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a8a239c-7cc7-48d5-b34b-60b0da4e4b20	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2a8a239c-7cc7-48d5-b34b-60b0da4e4b20	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2a8a239c-7cc7-48d5-b34b-60b0da4e4b20	f0/a1	Pump	agreed	-	X	start	2	0	x:xs:XP:truefire-paladin:f0a1:s1	-	-	-	d864b561c9cb	-	f2c28e6aaecf	-	-	2026-11-24	xproof
 2a8c9ef7-8171-4f6f-bf39-4a08d127e729	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a8c9ef7-8171-4f6f-bf39-4a08d127e729	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a8e14be-6f93-428d-a204-e2399dc93797	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shrieking-drake:f0t0:s1,f:xs:XP:shrieking-drake:f0t0:s1	-	-	-	25696bf19d5b	-	58c9f024fc19	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ad9f28c-94a9-4884-9e3b-42341adfaa5d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ad9f28c-94a9-4884-9e3b-42341adfaa5d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ad9f28c-94a9-4884-9e3b-42341adfaa5d	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2adbb56a-45e9-4fbe-b586-3488ef8014a3	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2adbb56a-45e9-4fbe-b586-3488ef8014a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enter-the-infinite:cast:s1,f:xs:XP:enter-the-infinite:cast:s1	-	-	-	d864b561c9cb	-	c25e3aaf8cb9	-	-	2026-11-24	xproof
 2ae36d31-08b7-481a-bfa1-a5c65921dee0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ae36d31-08b7-481a-bfa1-a5c65921dee0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ae71e86-4400-4a30-9077-4d57a43e7395	cast	cast-resolve	agreed	-	X	scen	1	0	Risen Reef/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -172,6 +172,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2afefaab-c614-4fca-afba-d8d206d9a8b9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2afefaab-c614-4fca-afba-d8d206d9a8b9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2afefaab-c614-4fca-afba-d8d206d9a8b9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2aff9be5-f6d4-4cdd-ab59-20202bc2f144	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2aff9be5-f6d4-4cdd-ab59-20202bc2f144	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:peregrination:cast:s1,f:xs:XP:peregrination:cast:s1	-	-	-	d864b561c9cb	-	41873aa4d02b	-	-	2026-11-24	xproof
 2affbe3f-5292-43d9-a08c-23bf44629cc9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2affbe3f-5292-43d9-a08c-23bf44629cc9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

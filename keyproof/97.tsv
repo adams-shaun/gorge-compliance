@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97326cad-b13c-4e52-82ce-850a39e5ff08	cast	cast-resolve	agreed	-	FX	scen	2	0	Torpor Orb/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 97326cad-b13c-4e52-82ce-850a39e5ff08	static#0.0	static#0.0	agreed	-	X	scen	1	0	Torpor Orb/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 97332d4e-a55c-4e4f-9040-bf426a7c8e39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97332d4e-a55c-4e4f-9040-bf426a7c8e39	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+97332d4e-a55c-4e4f-9040-bf426a7c8e39	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 973504d6-e2e4-49c4-86cb-69f31d66388b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:village-cannibals:cast:s1,f:xs:XP:village-cannibals:cast:s1	-	-	-	d864b561c9cb	-	26b7c18a14b9	-	-	2026-11-24	xproof
 973504d6-e2e4-49c4-86cb-69f31d66388b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 97369152-3b85-4cf1-aeb9-b3a8f1c37611	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:invasion-submersible:f0t0:s2,f:xs:XP:invasion-submersible:f0t0:s2	-	-	-	267e485f6204	-	e0037d3751fd	-	-	2026-11-24	xproof

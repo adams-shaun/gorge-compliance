@@ -6,9 +6,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d08af23-9f4a-4097-9abc-3b17475ab744	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d08cc9b-2b26-49de-80aa-962a358bfc1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d08cc9b-2b26-49de-80aa-962a358bfc1a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d09697f-8c5c-4bf9-811f-2f847ee374f0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d09697f-8c5c-4bf9-811f-2f847ee374f0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d09697f-8c5c-4bf9-811f-2f847ee374f0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d09697f-8c5c-4bf9-811f-2f847ee374f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swarmborn-giant:cast:s1,f:xs:XP:swarmborn-giant:cast:s1	-	-	-	d864b561c9cb	-	271c08cdae04	-	-	2026-11-24	xproof
+9d09697f-8c5c-4bf9-811f-2f847ee374f0	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:swarmborn-giant:f0a0:s1,f:xs:XP:swarmborn-giant:f0a0:s1	-	-	-	d864b561c9cb	-	271c08cdae04	-	-	2026-11-24	xproof
+9d09697f-8c5c-4bf9-811f-2f847ee374f0	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9d0d19e4-34f9-4bfa-9c8b-74356d223a18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d0d19e4-34f9-4bfa-9c8b-74356d223a18	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 9d0d19e4-34f9-4bfa-9c8b-74356d223a18	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9dee8c0b-71e0-4a94-b411-78b29b599847	cast	cast-resolve	agreed	-	X	scen	1	0	Thoughtweft Imbuer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9dee8c0b-71e0-4a94-b411-78b29b599847	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thoughtweft Imbuer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9df1c48b-52a8-47d7-8315-272fecf1a8a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9df1c48b-52a8-47d7-8315-272fecf1a8a0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9df1c48b-52a8-47d7-8315-272fecf1a8a0	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:archers-parapet:f0a0:s1,f:xs:XP:archers-parapet:f0a0:s1	-	-	-	d864b561c9cb	-	4151e4f1e86b	-	-	2026-11-24	xproof
 9df318b9-16c6-42f1-9f81-6f73ca01e5c1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9df318b9-16c6-42f1-9f81-6f73ca01e5c1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9df318b9-16c6-42f1-9f81-6f73ca01e5c1	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

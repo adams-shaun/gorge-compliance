@@ -188,8 +188,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6bda307b-1508-4582-952b-c690db85e045	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hermitic Nautilus/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6bda307b-1508-4582-952b-c690db85e045	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hermitic Nautilus/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6bdff38d-0a52-42e5-86ea-edd7029b44f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6bdff38d-0a52-42e5-86ea-edd7029b44f6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6bdff38d-0a52-42e5-86ea-edd7029b44f6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6bdff38d-0a52-42e5-86ea-edd7029b44f6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+6bdff38d-0a52-42e5-86ea-edd7029b44f6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6be0bf15-fdcb-4425-9bd8-3c39039cab7d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6be0bf15-fdcb-4425-9bd8-3c39039cab7d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6be0bf15-fdcb-4425-9bd8-3c39039cab7d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -200,8 +200,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6be663a5-70e2-435a-91ae-16168402787b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6be663a5-70e2-435a-91ae-16168402787b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6be78177-aef0-408c-9769-a1be0775f06d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6bef2904-1ebe-4e7e-879a-79f4968174fb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6bef2904-1ebe-4e7e-879a-79f4968174fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6bef2904-1ebe-4e7e-879a-79f4968174fb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sin-collector:cast:s1,f:xs:XP:sin-collector:cast:s1	-	-	-	d864b561c9cb	-	f1ed31cf733c	-	-	2026-11-24	xproof
+6bef2904-1ebe-4e7e-879a-79f4968174fb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sin-collector:cast:s1,f:xs:XP:sin-collector:cast:s1	-	-	-	d864b561c9cb	-	f1ed31cf733c	-	-	2026-11-24	xproof
 6bf5dcf1-5c93-42f4-adaf-a6f2e5807596	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6bf5dcf1-5c93-42f4-adaf-a6f2e5807596	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6bf9c91f-f278-4b97-8517-d062118c4e56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

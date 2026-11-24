@@ -76,8 +76,8 @@ c3731735-2b78-4a15-bff4-4d8559401f68	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sunse
 c3775748-ff62-469f-916b-8e551ccce23c	cast	cast-resolve	agreed	-	X	scen	1	0	Careening Mine Cart/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c3775748-ff62-469f-916b-8e551ccce23c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Careening Mine Cart/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c3775748-ff62-469f-916b-8e551ccce23c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Careening Mine Cart/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c3779271-1186-4754-8b8d-0ee18e585bb6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c3779271-1186-4754-8b8d-0ee18e585bb6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c3779271-1186-4754-8b8d-0ee18e585bb6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chronicler-of-heroes:f0t0:s1,f:xs:XP:chronicler-of-heroes:f0t0:s1	-	-	-	d864b561c9cb	-	215e3b5305a9	-	-	2026-11-24	xproof
+c3779271-1186-4754-8b8d-0ee18e585bb6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chronicler-of-heroes:f0t0:s1,f:xs:XP:chronicler-of-heroes:f0t0:s1	-	-	-	d864b561c9cb	-	215e3b5305a9	-	-	2026-11-24	xproof
 c377c3e0-2b91-43c6-9f49-5dd6fbf94308	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c37eae65-1afe-4242-b677-24dd40e6f401	cast	cast-resolve	agreed	-	X	scen	1	0	Eaten by Piranhas/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c37eae65-1afe-4242-b677-24dd40e6f401	static#0.0	static#0.0	agreed	-	X	scen	1	0	Eaten by Piranhas/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -129,7 +129,7 @@ c3a8cc79-3771-484d-84dd-1a97f8bd12c2	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Her
 c3aa2554-1cea-45e7-8fc7-1c09bd82fadb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:novablast-wurm:cast:s1,f:xs:XP:novablast-wurm:cast:s1	-	-	-	8a1b1a193ec0	-	dcdd1583c31f	-	-	2026-11-24	xproof
 c3aa2554-1cea-45e7-8fc7-1c09bd82fadb	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:novablast-wurm:f0t0:s1,f:xs:XP:novablast-wurm:f0t0:s1	-	-	-	8a1b1a193ec0	-	dcdd1583c31f	-	-	2026-11-24	xproof
 c3aafcdd-c890-4971-b8a9-5bfcad794c0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c3aafcdd-c890-4971-b8a9-5bfcad794c0b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c3aafcdd-c890-4971-b8a9-5bfcad794c0b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c3adc698-a0c5-4c82-8347-536745c9e928	cast	cast-resolve	agreed	-	X	scen	1	0	Boneyard Desecrator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c3adc698-a0c5-4c82-8347-536745c9e928	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Boneyard Desecrator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c3adc698-a0c5-4c82-8347-536745c9e928	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Boneyard Desecrator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -145,7 +145,7 @@ c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fer
 c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 c3bd1d38-e73f-4e30-b22a-dca0a0e4d701	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c3bd1d38-e73f-4e30-b22a-dca0a0e4d701	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c3bd1d38-e73f-4e30-b22a-dca0a0e4d701	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c3c25a2c-f71c-4cb7-9117-0bcda9248bfd	cast	cast-resolve	agreed	-	X	scen	1	0	Prismari Charm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c3c40f93-7e10-4139-b9e0-b6dfff8b8038	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c3c40f93-7e10-4139-b9e0-b6dfff8b8038	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -186,7 +186,7 @@ c3fb2829-64f2-4795-b815-edcc5bbbc360	combat#0.attack	combat#0.attack	agreed	-	X	
 c3fb2829-64f2-4795-b815-edcc5bbbc360	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Guardian of the Halls/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c3fb2829-64f2-4795-b815-edcc5bbbc360	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Guardian of the Halls/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c3fda16e-fd56-434e-91ac-561ae0482f43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c3fda16e-fd56-434e-91ac-561ae0482f43	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c3fda16e-fd56-434e-91ac-561ae0482f43	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c3fda16e-fd56-434e-91ac-561ae0482f43	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+c3fda16e-fd56-434e-91ac-561ae0482f43	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c3fdfb94-2d10-4743-864c-a59fdd57d8b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c3fdfb94-2d10-4743-864c-a59fdd57d8b7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -65,7 +65,7 @@ ec6ccd8f-cc75-4a50-8639-f4ec31a280aa	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07
 ec6d52f9-1c8f-48da-951c-be8d7813c7be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec714e79-10ec-43ea-a0ff-f8c9083fe015	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec73863f-417b-45d7-a6b7-97a69ce0196a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ec73863f-417b-45d7-a6b7-97a69ce0196a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ec73863f-417b-45d7-a6b7-97a69ce0196a	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ec744a2d-4a33-4807-bce0-d95cd5277b1f	cast	cast-resolve	agreed	-	X	scen	1	0	Joined Researchers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ec744a2d-4a33-4807-bce0-d95cd5277b1f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Joined Researchers/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ec744a2d-4a33-4807-bce0-d95cd5277b1f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Joined Researchers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -80,8 +80,8 @@ ec77d23b-0165-450d-9aae-73b755163753	cast	cast-resolve	agreed	-	FX	scen	2	0	Rat 
 ec77d23b-0165-450d-9aae-73b755163753	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rat Colony/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ec79255f-4b4d-4a0a-89d8-c59ba640275b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec79255f-4b4d-4a0a-89d8-c59ba640275b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ec7a9e7f-742b-4344-983e-73372c6a1760	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ec7a9e7f-742b-4344-983e-73372c6a1760	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ec7a9e7f-742b-4344-983e-73372c6a1760	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghor-clan-rampager:cast:s1,f:xs:XP:ghor-clan-rampager:cast:s1	-	-	-	d864b561c9cb	-	ee5f3f277bb7	-	-	2026-11-24	xproof
+ec7a9e7f-742b-4344-983e-73372c6a1760	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ec7ae9ed-dc5b-47ed-a4ad-086f3c7c377c	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 ec7d550b-9e13-4249-89c7-6ad43f71ea11	cast	cast-resolve	agreed	-	FX	scen	2	0	Analyze the Pollen/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ec7d550b-9e13-4249-89c7-6ad43f71ea11	static#0.0	static#0.0	agreed	-	X	scen	1	0	Analyze the Pollen/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -107,9 +107,9 @@ ec8e310f-e871-498f-8d80-c3617c5e1433	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Absor
 ec96cde2-f1e6-495c-94e2-3e8ae79e556c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thornwood Falls/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ec96cde2-f1e6-495c-94e2-3e8ae79e556c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thornwood Falls/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ec96cde2-f1e6-495c-94e2-3e8ae79e556c	land	play-land	agreed	-	X	scen	1	0	Thornwood Falls/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ec970eba-230a-4c41-874a-4a74abf3214e	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ec970eba-230a-4c41-874a-4a74abf3214e	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ec970eba-230a-4c41-874a-4a74abf3214e	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ec970eba-230a-4c41-874a-4a74abf3214e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:golgari-keyrune:cast:s1,f:xs:XP:golgari-keyrune:cast:s1	-	-	-	d864b561c9cb	-	bdd3878936c1	-	-	2026-11-24	xproof
+ec970eba-230a-4c41-874a-4a74abf3214e	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:golgari-keyrune:cast:s1,f:xs:XP:golgari-keyrune:cast:s1	-	-	-	d864b561c9cb	-	bdd3878936c1	-	-	2026-11-24	xproof
+ec970eba-230a-4c41-874a-4a74abf3214e	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:golgari-keyrune:f0a1:s1,f:xs:XP:golgari-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	bdd3878936c1	-	-	2026-11-24	xproof
 ec9975f4-dfff-4b72-9da8-8f2025f0524a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec9b74d0-e4fe-4764-b628-992a62f2a1cf	cast	cast-resolve	agreed	-	X	scen	1	0	Thor Odinson/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ec9b74d0-e4fe-4764-b628-992a62f2a1cf	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Thor Odinson/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ ecbb660a-4013-410a-b683-82c3ef1690cd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 ecbc234d-e1d3-4bcc-81d4-fffc2c7ea16a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ecbf5560-853a-43a9-bf70-ac8d403b0ce8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ecbf5560-853a-43a9-bf70-ac8d403b0ce8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ecbf5560-853a-43a9-bf70-ac8d403b0ce8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ecbf5560-853a-43a9-bf70-ac8d403b0ce8	f0/t0	NULL	owed	refused:no-generator:trigger:BecomeMonstrous	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ecc42076-5cce-4e00-a21b-34846ea41df2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ecc435e2-deb1-420a-a79f-01dd08747314	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ecc4e230-a546-4cb4-987c-87300060bbe2	cast	cast-resolve	agreed	-	X	scen	1	0	Trystan's Command/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

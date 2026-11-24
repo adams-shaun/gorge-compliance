@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3269f589-00fc-4f0b-8693-656f2ab0670d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3269f589-00fc-4f0b-8693-656f2ab0670d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3269f589-00fc-4f0b-8693-656f2ab0670d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-326adf88-3f6d-4bc2-aafa-dd55c6c95784	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+326adf88-3f6d-4bc2-aafa-dd55c6c95784	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-baron-of-vizkopa:cast:s1,f:xs:XP:blood-baron-of-vizkopa:cast:s1	-	-	-	d864b561c9cb	-	e542ed23ab1d	-	-	2026-11-24	xproof
 326ba371-124c-4949-a048-3a0c8962e567	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 326ba371-124c-4949-a048-3a0c8962e567	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 326ba371-124c-4949-a048-3a0c8962e567	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gruff Triplets/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Gruff Triplets/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-32e4de02-8437-4ffc-acc9-a3736652d282	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32e4de02-8437-4ffc-acc9-a3736652d282	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chief-of-the-scale:cast:s1,f:xs:XP:chief-of-the-scale:cast:s1	-	-	-	d864b561c9cb	-	de0e3d34ab2a	-	-	2026-11-24	xproof
 32e5339e-9e4f-46f8-b305-f9d6d3ba8bb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32e5339e-9e4f-46f8-b305-f9d6d3ba8bb5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32e5a4ac-69c7-4de0-8b9f-dd86682f2ffd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -193,8 +193,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32eb5d30-f4e7-48ef-b5f6-051ddddd4175	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32ebc862-3bf6-4754-b7b8-8bb73f1651cf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32ebc862-3bf6-4754-b7b8-8bb73f1651cf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32f5f67b-bba3-427c-ab24-13a50acdc611	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32f5f67b-bba3-427c-ab24-13a50acdc611	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32f5f67b-bba3-427c-ab24-13a50acdc611	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:carnivorous-moss-beast:cast:s1,f:xs:XP:carnivorous-moss-beast:cast:s1	-	-	-	d864b561c9cb	-	fa61654925ac	-	-	2026-11-24	xproof
+32f5f67b-bba3-427c-ab24-13a50acdc611	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:carnivorous-moss-beast:f0a0:s1,f:xs:XP:carnivorous-moss-beast:f0a0:s1	-	-	-	d864b561c9cb	-	fa61654925ac	-	-	2026-11-24	xproof
 32fad8d3-5351-49ce-a453-53dee403b5ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32fad8d3-5351-49ce-a453-53dee403b5ff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32fb0096-546c-4633-b6e3-ba3f2d9fa49c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

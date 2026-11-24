@@ -112,7 +112,7 @@ ee7b3fc0-6128-4bf6-b3e7-7371e6f93c4b	combat#0.attack	combat#0.attack	agreed	-	X	
 ee7b3fc0-6128-4bf6-b3e7-7371e6f93c4b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sultai Devotee/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee7b3fc0-6128-4bf6-b3e7-7371e6f93c4b	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sultai Devotee/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee7dc820-10ee-429a-a1ef-ecd6a11f5608	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee7dc820-10ee-429a-a1ef-ecd6a11f5608	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ee7dc820-10ee-429a-a1ef-ecd6a11f5608	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ee7ebbc1-2f9e-4867-a522-424869b6d772	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee7ebbc1-2f9e-4867-a522-424869b6d772	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee811356-ef6a-4972-b827-32c2d329b3c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ ee9b606a-a1fe-43c8-84d0-9bf7b012cc75	combat#0.attack	combat#0.attack	agreed	-	X	
 ee9b606a-a1fe-43c8-84d0-9bf7b012cc75	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Leatherhead, Swamp Stalker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee9b606a-a1fe-43c8-84d0-9bf7b012cc75	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Leatherhead, Swamp Stalker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee9c57c6-41ef-4328-8417-e5a433eadf17	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee9c57c6-41ef-4328-8417-e5a433eadf17	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ee9c57c6-41ef-4328-8417-e5a433eadf17	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:scuttling-doom-engine:f0t0:s1,f:xs:XP:scuttling-doom-engine:f0t0:s1	-	-	-	d864b561c9cb	-	2d1d7fc3a853	-	-	2026-11-24	xproof
 ee9c57c6-41ef-4328-8417-e5a433eadf17	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee9c57c6-41ef-4328-8417-e5a433eadf17	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ee9f0b29-8a54-4cb8-8e2c-7bd67c2184ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

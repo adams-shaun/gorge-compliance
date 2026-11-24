@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 3402aa73-5e63-4158-b114-6f1d42ec8992	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3402aa73-5e63-4158-b114-6f1d42ec8992	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3402aa73-5e63-4158-b114-6f1d42ec8992	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:master-of-diversion:f0t0:s1,f:xs:XP:master-of-diversion:f0t0:s1	-	-	-	d864b561c9cb	-	885ec0ab4111	-	-	2026-11-24	xproof
 3405c8a9-a8d6-4b45-9b64-94141076603b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3405c8a9-a8d6-4b45-9b64-94141076603b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34062d79-457f-4af3-b9c6-cab2e4d17581	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -24,9 +24,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34143cfa-aa48-481c-af42-1240af174b80	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3415a199-05ac-4627-be97-f842eb1415a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3415a199-05ac-4627-be97-f842eb1415a3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34161ec4-5d99-45e6-b43c-c8d28958660a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34161ec4-5d99-45e6-b43c-c8d28958660a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34161ec4-5d99-45e6-b43c-c8d28958660a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34161ec4-5d99-45e6-b43c-c8d28958660a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treasury-thrull:cast:s1,f:xs:XP:treasury-thrull:cast:s1	-	-	-	d864b561c9cb	-	3c652934d957	-	-	2026-11-24	xproof
+34161ec4-5d99-45e6-b43c-c8d28958660a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:treasury-thrull:f0t0:s1,f:xs:XP:treasury-thrull:f0t0:s1	-	-	-	d864b561c9cb	-	3c652934d957	-	-	2026-11-24	xproof
+34161ec4-5d99-45e6-b43c-c8d28958660a	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 341680e2-12a8-484f-be09-24dae9dbfaea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3416ac84-c5ef-44be-894f-ab3b89e592ce	cast	cast-resolve	agreed	-	X	scen	1	0	Undead Sprinter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3416ac84-c5ef-44be-894f-ab3b89e592ce	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Undead Sprinter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -36,8 +36,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 341803d9-fd29-4721-81bf-ae9b7f1c01d2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34187c71-6033-4058-aadc-2bc266f762be	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34187c71-6033-4058-aadc-2bc266f762be	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-341cf654-faf7-4db9-bd9a-70783f1ccff0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-341cf654-faf7-4db9-bd9a-70783f1ccff0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+341cf654-faf7-4db9-bd9a-70783f1ccff0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodfire-expert:cast:s1,f:xs:XP:bloodfire-expert:cast:s1	-	-	-	d864b561c9cb	-	316d7f9913c3	-	-	2026-11-24	xproof
+341cf654-faf7-4db9-bd9a-70783f1ccff0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 341cf69a-246c-4eb5-910c-18c13a4c3dce	cast	cast-resolve	agreed	-	FX	scen	2	0	Twinflame Travelers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 341cf69a-246c-4eb5-910c-18c13a4c3dce	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Twinflame Travelers/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 341cf69a-246c-4eb5-910c-18c13a4c3dce	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Twinflame Travelers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 342e08f9-d4d0-4408-8621-66e087058616	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 342e08f9-d4d0-4408-8621-66e087058616	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34312179-f3f9-47ca-bdf4-5abbd493876e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34312179-f3f9-47ca-bdf4-5abbd493876e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34312179-f3f9-47ca-bdf4-5abbd493876e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3431338b-928a-47f2-bc2f-f3c5d8eda8d0	cast	cast-resolve	agreed	-	X	scen	1	0	Host of the Hereafter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3431338b-928a-47f2-bc2f-f3c5d8eda8d0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Host of the Hereafter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34320ebf-da97-44a4-bbeb-a9da06548289	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -147,7 +147,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34a85d7f-d4ea-4a0f-aa4c-bf0b0f4987bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34a85d7f-d4ea-4a0f-aa4c-bf0b0f4987bf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34a8a658-a5f6-406f-99d8-c32ea2e26202	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34ae5b49-f8bf-4aa8-bb62-92d6d3118b26	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34ae5b49-f8bf-4aa8-bb62-92d6d3118b26	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	f63e95aad464	-	-	2026-11-24	xproof
 34b2f465-0b15-428a-a1c2-bcd41af07d01	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34b2f465-0b15-428a-a1c2-bcd41af07d01	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34b36022-0d93-48cc-a2cc-90ca4d65dc31	cast	cast-resolve	agreed	-	FX	scen	2	0	Ghired, Mirror of the Wilds/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

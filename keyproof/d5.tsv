@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-d5006683-f1c4-4a18-bf64-2d075372534c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d5006683-f1c4-4a18-bf64-2d075372534c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d5006683-f1c4-4a18-bf64-2d075372534c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fleetfeather-cockatrice:cast:s1,f:xs:XP:fleetfeather-cockatrice:cast:s1	-	-	-	d864b561c9cb	-	0c2dc61335ba	-	-	2026-11-24	xproof
+d5006683-f1c4-4a18-bf64-2d075372534c	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:fleetfeather-cockatrice:f0a0:s1,f:xs:XP:fleetfeather-cockatrice:f0a0:s1	-	-	-	d864b561c9cb	-	0c2dc61335ba	-	-	2026-11-24	xproof
 d5021db4-64d3-4a0f-9167-499ccbe16e1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d50b1d2e-1825-432a-ab73-068fdc356f50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d50f1ff7-d2bc-4e36-876d-77648f447f5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -92,9 +92,9 @@ d5726b60-60f6-4481-bc76-759fbb55bb49	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 d5770b0f-4493-42e9-a2d7-0e74a28da4ba	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:the-earth-king:f0t0:s2,f:xs:XP:the-earth-king:f0t0:s2	-	-	-	267e485f6204	-	e6025971fb6b	-	-	2026-11-24	xproof
 d5770b0f-4493-42e9-a2d7-0e74a28da4ba	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:the-earth-king:f0t0:s2,f:xs:XP:the-earth-king:f0t0:s2	-	-	-	267e485f6204	-	e6025971fb6b	-	-	2026-11-24	xproof
 d5770b0f-4493-42e9-a2d7-0e74a28da4ba	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Earth King/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d578ef54-6a6b-4839-a059-261728fdaef1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d578ef54-6a6b-4839-a059-261728fdaef1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d578ef54-6a6b-4839-a059-261728fdaef1	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d578ef54-6a6b-4839-a059-261728fdaef1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:fate-foretold:cast:s1,f:xs:XP:fate-foretold:cast:s1	-	-	-	d864b561c9cb	-	b5a4c087a546	-	-	2026-11-24	xproof
+d578ef54-6a6b-4839-a059-261728fdaef1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:fate-foretold:cast:s1,f:xs:XP:fate-foretold:cast:s1	-	-	-	d864b561c9cb	-	b5a4c087a546	-	-	2026-11-24	xproof
+d578ef54-6a6b-4839-a059-261728fdaef1	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d57a8f0b-7989-4db5-8756-6f2690097252	cast	cast-resolve	agreed	-	FX	scen	2	0	Damnation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d57adf99-972a-43fe-9ba2-2b01e673252f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d57adf99-972a-43fe-9ba2-2b01e673252f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

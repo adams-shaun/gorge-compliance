@@ -52,7 +52,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68413337-ddb9-46f8-8c8e-f3d2d672c652	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68418069-f615-40ef-ae0d-764192acae00	cast	cast-resolve	agreed	-	X	scen	1	0	Krenko, Mob Boss/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68418069-f615-40ef-ae0d-764192acae00	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Krenko, Mob Boss/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6845a62f-e0f1-448c-beeb-abac2dabd975	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6845a62f-e0f1-448c-beeb-abac2dabd975	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vile-rebirth:cast:s1,f:xs:XP:vile-rebirth:cast:s1	-	-	-	d864b561c9cb	-	59ce7f153c64	-	-	2026-11-24	xproof
 6846448b-d5a0-4ae0-bb11-ea7fa6ed2558	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haliya-ascendant-cadet:f0t0:s1,f:xs:XP:haliya-ascendant-cadet:f0t0:s1	-	-	-	25696bf19d5b	-	9965144713ee	-	-	2026-11-24	xproof
 6846448b-d5a0-4ae0-bb11-ea7fa6ed2558	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:haliya-ascendant-cadet:f0t0:s1,f:xs:XP:haliya-ascendant-cadet:f0t0:s1	-	-	-	25696bf19d5b	-	9965144713ee	-	-	2026-11-24	xproof
 6846448b-d5a0-4ae0-bb11-ea7fa6ed2558	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Haliya, Ascendant Cadet/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -141,10 +141,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68a99e50-0e98-480b-ad25-aa2c226d24ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68af451d-82f9-4c78-8bb1-36503e3f2e34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68af451d-82f9-4c78-8bb1-36503e3f2e34	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68af451d-82f9-4c78-8bb1-36503e3f2e34	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68af451d-82f9-4c78-8bb1-36503e3f2e34	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 68b26aeb-4952-4ca1-9b4a-82bdca16461b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68b8bfac-63f7-4dbd-bb2e-4ad394c77335	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68b8bfac-63f7-4dbd-bb2e-4ad394c77335	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68b8bfac-63f7-4dbd-bb2e-4ad394c77335	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nivix-cyclops:cast:s1,f:xs:XP:nivix-cyclops:cast:s1	-	-	-	d864b561c9cb	-	cda7a4c48446	-	-	2026-11-24	xproof
+68b8bfac-63f7-4dbd-bb2e-4ad394c77335	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 68bb76af-f933-430a-a66a-fe4a7d6be4e0	cast	cast-resolve	agreed	-	X	scen	1	0	Surgical Suite/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68bb76af-f933-430a-a66a-fe4a7d6be4e0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Surgical Suite/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68bb76af-f933-430a-a66a-fe4a7d6be4e0	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Surgical Suite/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

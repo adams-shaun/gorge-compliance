@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8215f4a2-7131-426b-ad9c-6427caabd715	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8215f4a2-7131-426b-ad9c-6427caabd715	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82184f0a-54a1-4ae0-9b99-2b3450c6e544	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82184f0a-54a1-4ae0-9b99-2b3450c6e544	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+82184f0a-54a1-4ae0-9b99-2b3450c6e544	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 82185e99-903d-4b18-8ff9-fb4f95ff17fc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 821ce349-5379-4415-89e2-224e21dda24b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 821ce349-5379-4415-89e2-224e21dda24b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82bdf9cb-61fe-4eaf-8762-c32002403d96	static#0.0	static#0.0	agreed	-	X	scen	1	0	Magnificent End/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82c583ab-8158-4074-a3ff-b7a05ecc8ab1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82c583ab-8158-4074-a3ff-b7a05ecc8ab1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82c5ec8e-27be-475a-9921-ad61209fd022	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+82c5ec8e-27be-475a-9921-ad61209fd022	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:unknown-shores:f0a1:s1,f:xs:XP:unknown-shores:f0a1:s1	-	-	-	d864b561c9cb	-	43c6ada91fbe	-	-	2026-11-24	xproof
 82c5ec8e-27be-475a-9921-ad61209fd022	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82c5ec8e-27be-475a-9921-ad61209fd022	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82c8f5dd-563d-4fd0-bd43-7ee2001d3777	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

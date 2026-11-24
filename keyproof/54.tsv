@@ -26,7 +26,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 541c6564-ec39-4b14-8c02-dd6a5d122ed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 541f13aa-a1ed-453a-b719-82daef1be607	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54216953-c575-4e08-9bee-384721c0bc4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54216953-c575-4e08-9bee-384721c0bc4d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+54216953-c575-4e08-9bee-384721c0bc4d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 542423cb-fbfb-4a2f-9f6d-87b273a95e96	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 542423cb-fbfb-4a2f-9f6d-87b273a95e96	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 542423cb-fbfb-4a2f-9f6d-87b273a95e96	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,8 +67,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54452df0-560c-4561-9dd2-3903ae49c91b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:pathfinding-axejaw:f0t0:s2,f:xs:XP:pathfinding-axejaw:f0t0:s2	-	-	-	e07cf3a05ba5	-	b75dace7068b	-	-	2026-11-24	xproof
 5446c92f-ff22-4e9b-a2f6-e64c8560c1e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 544acde0-850d-4c4f-8389-e22930d87345	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-544c4cb3-cd43-4670-9883-e9545dad9cd6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-544c4cb3-cd43-4670-9883-e9545dad9cd6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+544c4cb3-cd43-4670-9883-e9545dad9cd6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dauntless-river-marshal:cast:s1,f:xs:XP:dauntless-river-marshal:cast:s1	-	-	-	d864b561c9cb	-	cabd96768dfb	-	-	2026-11-24	xproof
+544c4cb3-cd43-4670-9883-e9545dad9cd6	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:dauntless-river-marshal:f0a0:s1,f:xs:XP:dauntless-river-marshal:f0a0:s1	-	-	-	d864b561c9cb	-	cabd96768dfb	-	-	2026-11-24	xproof
 544dbabd-cbfc-40da-a5ba-2fea9cddb453	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sandsteppe Citadel/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 544dbabd-cbfc-40da-a5ba-2fea9cddb453	land	play-land	agreed	-	X	scen	1	0	Sandsteppe Citadel/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 544eca0d-63cd-4cc5-9318-c2006cdec170	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -92,7 +92,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 546201d0-3fa5-44e4-a526-ab0945711e49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5462cb38-7cd7-46e8-a273-35d0d1af45b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54634ef2-cb7a-4203-8e48-2733f8c3911b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54634ef2-cb7a-4203-8e48-2733f8c3911b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+54634ef2-cb7a-4203-8e48-2733f8c3911b	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:temur-monument:f0t0:s2,f:xs:XP:temur-monument:f0t0:s2	-	-	-	267e485f6204	-	1e8a1ad31d3a	-	-	2026-11-24	xproof
 5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Temur Monument/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:temur-monument:f0t0:s2,f:xs:XP:temur-monument:f0t0:s2	-	-	-	267e485f6204	-	1e8a1ad31d3a	-	-	2026-11-24	xproof
@@ -181,7 +181,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54e7a6d4-d405-4627-93ab-8d8bd945fe02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54e7a6d4-d405-4627-93ab-8d8bd945fe02	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54e86bc8-ff48-49be-902c-4923d59901a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54e86bc8-ff48-49be-902c-4923d59901a7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+54e86bc8-ff48-49be-902c-4923d59901a7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bearer-of-the-heavens:f0t0:s1,f:xs:XP:bearer-of-the-heavens:f0t0:s1	-	-	-	d864b561c9cb	-	82eabaa8d20a	-	-	2026-11-24	xproof
 54ea46ea-7c83-44a9-85b0-eff9745c6ffa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54f8acb1-58f3-49d1-bff8-c1b578245936	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54f8acb1-58f3-49d1-bff8-c1b578245936	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

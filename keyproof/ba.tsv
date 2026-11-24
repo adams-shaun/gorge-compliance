@@ -5,8 +5,8 @@ ba0291ad-09ea-4fee-baa9-7778fbbb6ba7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ba0291ad-09ea-4fee-baa9-7778fbbb6ba7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba047b0b-d451-4566-8656-00b00611de8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba047b0b-d451-4566-8656-00b00611de8c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba069664-9f92-47c7-b556-9e5143a22579	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba069664-9f92-47c7-b556-9e5143a22579	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ba069664-9f92-47c7-b556-9e5143a22579	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doomwake-giant:f0t0:s1,f:xs:XP:doomwake-giant:f0t0:s1	-	-	-	d864b561c9cb	-	ff1b95c9b4ce	-	-	2026-11-24	xproof
+ba069664-9f92-47c7-b556-9e5143a22579	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:doomwake-giant:f0t0:s1,f:xs:XP:doomwake-giant:f0t0:s1	-	-	-	d864b561c9cb	-	ff1b95c9b4ce	-	-	2026-11-24	xproof
 ba08b4cf-9a13-40fd-8522-9504d2ff1a19	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Suit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ba08b4cf-9a13-40fd-8522-9504d2ff1a19	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Spider-Suit/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ba08b4cf-9a13-40fd-8522-9504d2ff1a19	static#0.0	static#0.0	agreed	-	X	scen	1	0	Spider-Suit/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -47,8 +47,8 @@ ba3bfe0c-2bd6-469c-802c-440b7caf7fb5	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07
 ba477a45-84cc-4a85-98e4-50dca3e58788	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba477a45-84cc-4a85-98e4-50dca3e58788	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba47a07e-890c-411a-9fd0-947c2f738da2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba47a07e-890c-411a-9fd0-947c2f738da2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba47a07e-890c-411a-9fd0-947c2f738da2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ba47a07e-890c-411a-9fd0-947c2f738da2	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ba47a07e-890c-411a-9fd0-947c2f738da2	f0/t1	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:volatile-rig:f0t1:s1,f:xs:XP:volatile-rig:f0t1:s1	-	-	-	d864b561c9cb	-	4ff89bafc9bc	-	-	2026-11-24	xproof
 ba48a1a6-a53f-4e7e-881a-472637a3a007	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba48a1a6-a53f-4e7e-881a-472637a3a007	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba48a1a6-a53f-4e7e-881a-472637a3a007	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

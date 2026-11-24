@@ -74,7 +74,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5843bf12-27db-4e7d-81ee-98874bea72c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5843bf12-27db-4e7d-81ee-98874bea72c7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5843bf12-27db-4e7d-81ee-98874bea72c7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5843bf12-27db-4e7d-81ee-98874bea72c7	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5843bf12-27db-4e7d-81ee-98874bea72c7	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5846718c-7d31-4d2c-80a2-b1534e2aebc1	cast	cast-resolve	agreed	-	FX	scen	2	0	Summon: Shiva/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 584b15f2-6ae9-413a-8b8d-9244dbea4878	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 584b15f2-6ae9-413a-8b8d-9244dbea4878	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -130,9 +130,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58838588-13d5-4948-babf-d09cc59d76a1	cast	cast	owed	harness	-	start	0	0	-	-	-	-	77494c1ce129	-	25319433617b	-	-	2026-11-24	xproof
 58838588-13d5-4948-babf-d09cc59d76a1	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 58838588-13d5-4948-babf-d09cc59d76a1	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	77494c1ce129	-	25319433617b	-	-	2026-11-24	xproof
-58853200-efbe-41cc-87f1-720841308f4d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+58853200-efbe-41cc-87f1-720841308f4d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tower-defense:cast:s1,f:xs:XP:tower-defense:cast:s1	-	-	-	d864b561c9cb	-	4ec160adcfb1	-	-	2026-11-24	xproof
 5887922e-d1fb-44e2-9498-2065ce8ac870	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5887922e-d1fb-44e2-9498-2065ce8ac870	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5887922e-d1fb-44e2-9498-2065ce8ac870	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:festering-newt:f0t0:s1,f:xs:XP:festering-newt:f0t0:s1	-	-	-	d864b561c9cb	-	235531559427	-	-	2026-11-24	xproof
 588a5bac-dcad-410e-8878-0230500c2e3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 588eecbf-dcfc-4b97-b81c-8b9f3d39e08f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 588eecbf-dcfc-4b97-b81c-8b9f3d39e08f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

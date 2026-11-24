@@ -15,7 +15,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d081701-514b-4611-b5a1-239b8f335fb6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Insectoid Exterminator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d081701-514b-4611-b5a1-239b8f335fb6	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Insectoid Exterminator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d0c1301-4fa7-4245-a13f-f613188eb638	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d0c1301-4fa7-4245-a13f-f613188eb638	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d0c1301-4fa7-4245-a13f-f613188eb638	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3d0d4ba4-d5aa-4d9f-89ab-46687637fecf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d0d4ba4-d5aa-4d9f-89ab-46687637fecf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d0eb524-15e7-46f2-8f53-db08a07944d7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d917331-9f49-4d0c-bb2d-4853e3ff6ca1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d92f2e6-27df-4329-b552-cf905f7616ba	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d937cd9-b1e1-406d-9e29-3b9d3ceea3be	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d95e8b1-0ddb-4bd3-b4cc-de55b6f8c403	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d95e8b1-0ddb-4bd3-b4cc-de55b6f8c403	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primal-visitation:cast:s1,f:xs:XP:primal-visitation:cast:s1	-	-	-	d864b561c9cb	-	7949bf0b3a12	-	-	2026-11-24	xproof
 3d98a656-1737-486f-9b25-449b7c871d1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d98a656-1737-486f-9b25-449b7c871d1f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d98a656-1737-486f-9b25-449b7c871d1f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3dce6c6c-599f-4e35-ae15-728c5e78dee1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dd196b6-a85a-4e3e-bb57-ec34241f8117	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:terminus:cast:s1,f:xs:XP:terminus:cast:s1	-	-	-	d864b561c9cb	-	0af994292b2c	-	-	2026-11-24	xproof
 3dd2f3de-98cc-4263-bd16-b5803e48e892	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3dd2f3de-98cc-4263-bd16-b5803e48e892	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3dd2f3de-98cc-4263-bd16-b5803e48e892	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3dd81e3e-e57a-4b6f-9043-bba0cebb3e90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dd81e3e-e57a-4b6f-9043-bba0cebb3e90	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dd92eea-02ca-4e55-8f69-8c8059dd7ee6	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:professional-wrestler:f0t0:s2,f:xs:XP:professional-wrestler:f0t0:s2	-	-	-	267e485f6204	-	83f370f11486	-	-	2026-11-24	xproof

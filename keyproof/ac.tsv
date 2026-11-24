@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 ac00d3db-d9e4-4fc3-a4ea-dd1187f406bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac00d3db-d9e4-4fc3-a4ea-dd1187f406bb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac0a110a-0721-4aa6-a891-95e3fcc847df	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ac0a110a-0721-4aa6-a891-95e3fcc847df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fated-conflagration:cast:s1,f:xs:XP:fated-conflagration:cast:s1	-	-	-	d864b561c9cb	-	487188def11d	-	-	2026-11-24	xproof
 ac0f161a-e5ec-4a95-9f37-305bdf1ac900	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hapatra-the-desert-frost:f0t0:s1,f:xs:XP:hapatra-the-desert-frost:f0t0:s1	-	-	-	25696bf19d5b	-	061ab927c718	-	-	2026-11-24	xproof
 ac0f161a-e5ec-4a95-9f37-305bdf1ac900	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Hapatra, the Desert Frost/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ac0f161a-e5ec-4a95-9f37-305bdf1ac900	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hapatra-the-desert-frost:f0t0:s1,f:xs:XP:hapatra-the-desert-frost:f0t0:s1	-	-	-	25696bf19d5b	-	061ab927c718	-	-	2026-11-24	xproof
@@ -17,8 +17,8 @@ ac143b8e-f993-4989-8833-e26dc9faffa4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 ac161100-46b7-4f0f-a72b-84aaa45980ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac161100-46b7-4f0f-a72b-84aaa45980ad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac161100-46b7-4f0f-a72b-84aaa45980ad	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac193909-7e81-4082-ad02-2a60d142a0ab	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac193909-7e81-4082-ad02-2a60d142a0ab	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ac193909-7e81-4082-ad02-2a60d142a0ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-host:cast:s1,f:xs:XP:blood-host:cast:s1	-	-	-	d864b561c9cb	-	2b04841f79be	-	-	2026-11-24	xproof
+ac193909-7e81-4082-ad02-2a60d142a0ab	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	cast	cast-resolve	agreed	-	X	scen	1	0	Captain America, Super-Soldier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Captain America, Super-Soldier/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Captain America, Super-Soldier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ ac950d10-e373-42d3-907b-ee56e45a2084	combat#0.attack	combat#0.attack	agreed	-	X	
 ac950d10-e373-42d3-907b-ee56e45a2084	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Crossbones, Malicious Mercenary/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ac950d10-e373-42d3-907b-ee56e45a2084	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Crossbones, Malicious Mercenary/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ac96d27c-dbae-4094-9209-3ef143f64713	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac96d27c-dbae-4094-9209-3ef143f64713	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac96d27c-dbae-4094-9209-3ef143f64713	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ac96d27c-dbae-4094-9209-3ef143f64713	f0/a0	DealDamage	agreed	-	X	start	2	0	x:xs:XP:soul-of-shandalar:f0a0:s1	-	-	-	d864b561c9cb	-	0004438016b9	-	-	2026-11-24	xproof
+ac96d27c-dbae-4094-9209-3ef143f64713	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ac9ec838-fbad-4f01-846b-3084e1d37a44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac9ec838-fbad-4f01-846b-3084e1d37a44	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aca7c0a7-b365-421e-aeb0-49d3a9873e4f	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

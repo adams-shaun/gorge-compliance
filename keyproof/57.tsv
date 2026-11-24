@@ -41,8 +41,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 572b1aeb-d2a0-433d-b167-86e683c2127d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57303267-7e69-4bd3-8e1f-a528d41121a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57303267-7e69-4bd3-8e1f-a528d41121a1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57308fc8-8915-4211-a5fd-9363caea9ab9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57308fc8-8915-4211-a5fd-9363caea9ab9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57308fc8-8915-4211-a5fd-9363caea9ab9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-fleets:f0t0:s1,f:xs:XP:scourge-of-fleets:f0t0:s1	-	-	-	d864b561c9cb	-	d49a8670e757	-	-	2026-11-24	xproof
+57308fc8-8915-4211-a5fd-9363caea9ab9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-fleets:f0t0:s1,f:xs:XP:scourge-of-fleets:f0t0:s1	-	-	-	d864b561c9cb	-	d49a8670e757	-	-	2026-11-24	xproof
 573151f0-00d4-4a8a-8a09-745c5f376532	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 573151f0-00d4-4a8a-8a09-745c5f376532	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 573151f0-00d4-4a8a-8a09-745c5f376532	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 577d027a-96c3-46fe-880b-f8b5dd3f3a3d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 577eb51d-7979-4f97-a8b1-e31242720611	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 577eb51d-7979-4f97-a8b1-e31242720611	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-577eb51d-7979-4f97-a8b1-e31242720611	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+577eb51d-7979-4f97-a8b1-e31242720611	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 57828973-df3d-4288-988d-147a3016120e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57831c07-6915-4579-b3e1-de93a3664444	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57831c07-6915-4579-b3e1-de93a3664444	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

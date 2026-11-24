@@ -11,8 +11,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e0d39e2-d99f-4729-899b-c7bcd2b53615	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e0d39e2-d99f-4729-899b-c7bcd2b53615	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e0f8ab3-75a6-49a2-a228-fa720cbde3d8	cast	cast-resolve	agreed	-	FX	scen	2	0	Kitsune's Technique/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3e150025-51c2-4b92-970c-a89e83210e68	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e150025-51c2-4b92-970c-a89e83210e68	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3e150025-51c2-4b92-970c-a89e83210e68	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:riot-gear:cast:s1,f:xs:XP:riot-gear:cast:s1	-	-	-	d864b561c9cb	-	09a00bbcb202	-	-	2026-11-24	xproof
+3e150025-51c2-4b92-970c-a89e83210e68	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:riot-gear:f0a0:s1,f:xs:XP:riot-gear:f0a0:s1	-	-	-	d864b561c9cb	-	09a00bbcb202	-	-	2026-11-24	xproof
 3e159175-78e5-40df-8fe9-e694938e7222	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e159175-78e5-40df-8fe9-e694938e7222	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e211792-2656-4bee-80ac-60eac0c45c2d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e61d7c4-263f-4077-bdbc-d79020f2a479	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cactuar/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3e61d7c4-263f-4077-bdbc-d79020f2a479	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cactuar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3e6dad31-6192-4675-81df-09689906c12b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e6dad31-6192-4675-81df-09689906c12b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3e6dad31-6192-4675-81df-09689906c12b	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3e6e70eb-6638-4aa6-997b-90f5810e12a0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e6e70eb-6638-4aa6-997b-90f5810e12a0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e715032-0d21-441b-b2d4-c91084728718	cast	cast-resolve	agreed	-	X	scen	1	0	Iron Lad, Diverging Destiny/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e83dec6-e1a0-4137-aaab-308dfd3122e1	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e84d719-bb76-43a4-b61a-fee30c3aac68	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e8abec7-1e18-460a-9d88-30969755ebd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e8abec7-1e18-460a-9d88-30969755ebd2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3e8abec7-1e18-460a-9d88-30969755ebd2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3e8bcb44-b875-4fe4-b96f-97a20cbfec93	cast	cast-resolve	agreed	-	X	scen	1	0	Cooped Up/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3e8bcb44-b875-4fe4-b96f-97a20cbfec93	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cooped Up/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3e8bcb44-b875-4fe4-b96f-97a20cbfec93	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cooped Up/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

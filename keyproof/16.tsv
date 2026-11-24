@@ -113,14 +113,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 169cf74a-07bf-4841-83f3-904df8a0a39b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169d24f3-a308-4a2e-ae25-85dae448994e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169d24f3-a308-4a2e-ae25-85dae448994e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-169e415a-9ff6-43bb-bb68-fc49e69f95a8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+169e415a-9ff6-43bb-bb68-fc49e69f95a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vaporkin:cast:s1,f:xs:XP:vaporkin:cast:s1	-	-	-	d864b561c9cb	-	fd570a8ead52	-	-	2026-11-24	xproof
 16a44586-ea1d-45f1-b9de-da1c11f729df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16a44586-ea1d-45f1-b9de-da1c11f729df	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16a44586-ea1d-45f1-b9de-da1c11f729df	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16a5ed42-ee86-4dcb-b8ea-239ac2b13d67	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 16a5ed42-ee86-4dcb-b8ea-239ac2b13d67	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-16a66bbe-90f6-4c29-a69d-6ff254082956	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16a66bbe-90f6-4c29-a69d-6ff254082956	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16a66bbe-90f6-4c29-a69d-6ff254082956	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormcaller-of-keranos:cast:s1,f:xs:XP:stormcaller-of-keranos:cast:s1	-	-	-	d864b561c9cb	-	558d605c12d9	-	-	2026-11-24	xproof
+16a66bbe-90f6-4c29-a69d-6ff254082956	f0/a0	Scry	agreed	-	FX	start	2	0	x:xs:XP:stormcaller-of-keranos:f0a0:s1,f:xs:XP:stormcaller-of-keranos:f0a0:s1	-	-	-	d864b561c9cb	-	558d605c12d9	-	-	2026-11-24	xproof
 16a7895a-ca23-4112-a91f-4b1528e75cea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16a7895a-ca23-4112-a91f-4b1528e75cea	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16a96727-c53a-4563-8151-f8b7abb7e534	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16e9c452-6288-4da8-813d-2eb6b7a538c3	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Valley Mightcaller/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16ef24ea-4d84-43e5-bd4f-b6efadc87616	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16f03175-9c57-4058-9c9d-9c4936e4c324	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16f03175-9c57-4058-9c9d-9c4936e4c324	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16f03175-9c57-4058-9c9d-9c4936e4c324	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 16f3a09f-e29b-4fb5-95ed-d76ad550c2ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16f61f69-cdde-4b6c-b855-c74db9038ceb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16f61f69-cdde-4b6c-b855-c74db9038ceb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

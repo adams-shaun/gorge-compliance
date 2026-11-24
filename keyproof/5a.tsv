@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a1dfc60-645d-4bc0-8883-e06ed9c80706	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a1dfc60-645d-4bc0-8883-e06ed9c80706	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a1dfc60-645d-4bc0-8883-e06ed9c80706	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a20113c-7ea8-4edf-af9f-148ccd326a88	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a20113c-7ea8-4edf-af9f-148ccd326a88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nyx-fleece-ram:cast:s1,f:xs:XP:nyx-fleece-ram:cast:s1	-	-	-	d864b561c9cb	-	89d93e665e97	-	-	2026-11-24	xproof
 5a20113c-7ea8-4edf-af9f-148ccd326a88	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a210b32-6e1f-4578-bd8b-4e481b761159	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a210b32-6e1f-4578-bd8b-4e481b761159	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -188,7 +188,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ace3817-5a98-4eee-b6b9-8c105cea302f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ace3817-5a98-4eee-b6b9-8c105cea302f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5acf1424-6886-4777-be9c-a845502e08bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5acf1424-6886-4777-be9c-a845502e08bd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5acf1424-6886-4777-be9c-a845502e08bd	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5acff7a3-bc84-4251-bd37-80231396ac38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5acff7a3-bc84-4251-bd37-80231396ac38	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ad0b405-cca4-475e-985c-4d7e3599d87e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sundown Pass/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

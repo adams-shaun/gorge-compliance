@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 871e4c4e-8105-4cb9-b1cd-53c5f8e64494	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87217160-0687-4482-b9a3-91bad8527675	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87217160-0687-4482-b9a3-91bad8527675	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-87217160-0687-4482-b9a3-91bad8527675	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+87217160-0687-4482-b9a3-91bad8527675	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8721b0a6-52ff-4749-92db-82bb36f5a73e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8721b0a6-52ff-4749-92db-82bb36f5a73e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8727284f-e9a6-49ea-9fb8-1076883ceecf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -70,8 +70,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8747ca90-ac1d-45fd-89fe-aac385cd66b4	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 874b944a-8d08-4143-b477-685087396a88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 874bbeb2-aa15-41e8-afad-122ab9b555fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-874e0b54-bc24-4887-abe1-1ecfd3a3abae	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-874e0b54-bc24-4887-abe1-1ecfd3a3abae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+874e0b54-bc24-4887-abe1-1ecfd3a3abae	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:trostani-s-summoner:cast:s1,f:xs:XP:trostani-s-summoner:cast:s1	-	-	-	d864b561c9cb	-	bd6fd8d43953	-	-	2026-11-24	xproof
+874e0b54-bc24-4887-abe1-1ecfd3a3abae	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:trostani-s-summoner:cast:s1,f:xs:XP:trostani-s-summoner:cast:s1	-	-	-	d864b561c9cb	-	bd6fd8d43953	-	-	2026-11-24	xproof
 87547bf0-02cf-4d83-9a1f-c82d2f1a22f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 875c3db1-2752-48e7-9664-bbb12120c032	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 875c3db1-2752-48e7-9664-bbb12120c032	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -202,8 +202,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87d734bc-4e4d-4013-91ed-c6bf1dde824e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87e148a0-4299-4771-b68a-6652a4c1c535	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87e44296-6c79-4065-aa54-33e508293a79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-87e4c6ff-f83f-412b-9d23-aac7a57ef6db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-87e4c6ff-f83f-412b-9d23-aac7a57ef6db	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+87e4c6ff-f83f-412b-9d23-aac7a57ef6db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seller-of-songbirds:f0t0:s1,f:xs:XP:seller-of-songbirds:f0t0:s1	-	-	-	d864b561c9cb	-	638d4b802266	-	-	2026-11-24	xproof
+87e4c6ff-f83f-412b-9d23-aac7a57ef6db	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:seller-of-songbirds:f0t0:s1,f:xs:XP:seller-of-songbirds:f0t0:s1	-	-	-	d864b561c9cb	-	638d4b802266	-	-	2026-11-24	xproof
 87e6aabb-41f5-41d2-b662-cd09ad61a1c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87e88311-dbd2-42f7-a166-138f1d271686	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87e88311-dbd2-42f7-a166-138f1d271686	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

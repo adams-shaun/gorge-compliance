@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 55259de3-561d-4a9e-bb28-63c6a7ac5c68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55259de3-561d-4a9e-bb28-63c6a7ac5c68	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55259de3-561d-4a9e-bb28-63c6a7ac5c68	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-55259de3-561d-4a9e-bb28-63c6a7ac5c68	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+55259de3-561d-4a9e-bb28-63c6a7ac5c68	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 552867ec-5741-4e34-813f-4aaf185661f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 552867ec-5741-4e34-813f-4aaf185661f7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 552867ec-5741-4e34-813f-4aaf185661f7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -88,7 +88,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 557d2af0-04c5-461d-826b-7208c4535dc2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-fury:cast:s1,f:xs:XP:elvish-fury:cast:s1	-	-	-	25696bf19d5b	-	75694e3da4bb	-	-	2026-11-24	xproof
 557dda97-c9e6-4d3d-95d8-8180ab9d87b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 558135b3-babc-40b6-9d9d-57ab0965ee3d	cast	cast-resolve	agreed	-	X	scen	1	0	Calamitous Cave-In/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-55821968-baf2-4fa6-8376-9ec305e27b3b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+55821968-baf2-4fa6-8376-9ec305e27b3b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boon-of-erebos:cast:s1,f:xs:XP:boon-of-erebos:cast:s1	-	-	-	d864b561c9cb	-	89da1b25c191	-	-	2026-11-24	xproof
 558513bb-a76d-434a-98fc-3707a5d8886a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 558513bb-a76d-434a-98fc-3707a5d8886a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 558568a6-5e22-482f-9096-e76682965c21	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

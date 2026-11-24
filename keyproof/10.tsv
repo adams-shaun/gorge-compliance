@@ -59,10 +59,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 104565b1-2db8-4c01-ae3d-14087768be45	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Concealed Weapon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 104565b1-2db8-4c01-ae3d-14087768be45	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Concealed Weapon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 104565b1-2db8-4c01-ae3d-14087768be45	static#0.0	static#0.0	agreed	-	X	scen	1	0	Concealed Weapon/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-10494ce1-7a38-44ae-9881-a83e44daaf7b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-10494ce1-7a38-44ae-9881-a83e44daaf7b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-10494ce1-7a38-44ae-9881-a83e44daaf7b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-10494ce1-7a38-44ae-9881-a83e44daaf7b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+10494ce1-7a38-44ae-9881-a83e44daaf7b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reaper-of-the-wilds:cast:s1,f:xs:XP:reaper-of-the-wilds:cast:s1	-	-	-	d864b561c9cb	-	b084b615016a	-	-	2026-11-24	xproof
+10494ce1-7a38-44ae-9881-a83e44daaf7b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:reaper-of-the-wilds:f0a0:s1,f:xs:XP:reaper-of-the-wilds:f0a0:s1	-	-	-	d864b561c9cb	-	b084b615016a	-	-	2026-11-24	xproof
+10494ce1-7a38-44ae-9881-a83e44daaf7b	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:reaper-of-the-wilds:f0a1:s1,f:xs:XP:reaper-of-the-wilds:f0a1:s1	-	-	-	d864b561c9cb	-	b084b615016a	-	-	2026-11-24	xproof
+10494ce1-7a38-44ae-9881-a83e44daaf7b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1049bc06-83de-4ed6-ae38-f259e5038a95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1049bc06-83de-4ed6-ae38-f259e5038a95	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 104a8f76-d178-4a33-bb59-e8767da3d982	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tidal-kraken:cast:s1,f:xs:XP:tidal-kraken:cast:s1	-	-	-	25696bf19d5b	-	8e94046b423b	-	-	2026-11-24	xproof
@@ -86,7 +86,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 106ca7bd-6dad-43fe-af58-8667ebddb2eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 106ca7bd-6dad-43fe-af58-8667ebddb2eb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 106ca7bd-6dad-43fe-af58-8667ebddb2eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-106e343f-c6f4-4155-ad01-63e482d4d38e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+106e343f-c6f4-4155-ad01-63e482d4d38e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:groundshaker-sliver:cast:s1,f:xs:XP:groundshaker-sliver:cast:s1	-	-	-	d864b561c9cb	-	0667a8d221a4	-	-	2026-11-24	xproof
 106e9c0d-67a2-4db7-97d9-03e1ea1b40b5	cast	cast-resolve	agreed	-	FX	scen	2	0	Cryogen Relic/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 106e9c0d-67a2-4db7-97d9-03e1ea1b40b5	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Cryogen Relic/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 106e9c0d-67a2-4db7-97d9-03e1ea1b40b5	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,8 +135,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1093fdb6-bd4f-46a8-92e3-5aa46b52bb4f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1095fcd9-8127-4345-9052-fccb350296d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1095fcd9-8127-4345-9052-fccb350296d3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-109899e1-abd7-4582-8b67-b0852755bf75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-109899e1-abd7-4582-8b67-b0852755bf75	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+109899e1-abd7-4582-8b67-b0852755bf75	cast	cast	agreed	-	F	start	2	0	f:xs:XP:quickling:f0t0:s1	-	-	-	d864b561c9cb	-	728f1a5dda31	-	-	2026-11-24	xproof
+109899e1-abd7-4582-8b67-b0852755bf75	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:quickling:f0t0:s1	-	-	-	d864b561c9cb	-	728f1a5dda31	-	-	2026-11-24	xproof
 1098ff82-8cad-4283-8493-5492f12ea200	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10991b1a-7dd3-4fbf-a4c8-200dc62fc605	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 109cdefd-e8cc-4ac7-b6ba-2cfdef8d780f	cast	cast-resolve	agreed	-	X	scen	1	0	Icetill Explorer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

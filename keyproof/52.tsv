@@ -2,8 +2,8 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 5202c00a-5e47-43fe-9ed7-52c276120df3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5202c00a-5e47-43fe-9ed7-52c276120df3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-52058c39-4edf-40f5-af18-e6de93f302a3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-52058c39-4edf-40f5-af18-e6de93f302a3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+52058c39-4edf-40f5-af18-e6de93f302a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wild-beastmaster:cast:s1,f:xs:XP:wild-beastmaster:cast:s1	-	-	-	d864b561c9cb	-	83f72beddfaf	-	-	2026-11-24	xproof
+52058c39-4edf-40f5-af18-e6de93f302a3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:wild-beastmaster:f0t0:s1,f:xs:XP:wild-beastmaster:f0t0:s1	-	-	-	d864b561c9cb	-	83f72beddfaf	-	-	2026-11-24	xproof
 5208a5f2-eebe-4adc-8f29-543b60116817	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5208a5f2-eebe-4adc-8f29-543b60116817	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5209e1da-aeed-45b3-9640-c2db121d6612	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -33,8 +33,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 52244c23-7680-4bed-8ef8-8d10e289d3f7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Shimmercreep/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 52244c23-7680-4bed-8ef8-8d10e289d3f7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shimmercreep/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 52244c23-7680-4bed-8ef8-8d10e289d3f7	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:shimmercreep:f0t0:s2,f:xs:XP:shimmercreep:f0t0:s2	-	-	-	e07cf3a05ba5	-	e53af4288d11	-	-	2026-11-24	xproof
-52289774-d292-4028-91fb-8826fa004dc8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-52289774-d292-4028-91fb-8826fa004dc8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+52289774-d292-4028-91fb-8826fa004dc8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spawn-of-thraxes:f0t0:s1,f:xs:XP:spawn-of-thraxes:f0t0:s1	-	-	-	d864b561c9cb	-	13cdeafeaf92	-	-	2026-11-24	xproof
+52289774-d292-4028-91fb-8826fa004dc8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spawn-of-thraxes:f0t0:s1,f:xs:XP:spawn-of-thraxes:f0t0:s1	-	-	-	d864b561c9cb	-	13cdeafeaf92	-	-	2026-11-24	xproof
 522a04ff-cbfe-47b0-bd29-ef6fc27a6905	cast	cast-resolve	agreed	-	X	scen	1	0	Combustion Technique/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 522a4b02-24c7-45d2-9097-2803cc9fffad	cast	cast-resolve	agreed	-	X	scen	1	0	Grasping Shadows/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 522a4b02-24c7-45d2-9097-2803cc9fffad	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Grasping Shadows/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 52401cb4-1bce-4191-9220-0d93ea4108b8	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Stark Industries/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 52401cb4-1bce-4191-9220-0d93ea4108b8	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Stark Industries/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 52401cb4-1bce-4191-9220-0d93ea4108b8	land	play-land	agreed	-	FX	scen	2	0	Stark Industries/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-524249cd-68d9-472a-89cd-5872641ca6de	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+524249cd-68d9-472a-89cd-5872641ca6de	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	2ffa45b396e5	-	-	2026-11-24	xproof
 52478437-bb6c-48bb-855d-54a8a4d42d18	cast	cast-resolve	agreed	-	X	scen	1	0	Fear of Surveillance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 52478437-bb6c-48bb-855d-54a8a4d42d18	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fear of Surveillance/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 52478437-bb6c-48bb-855d-54a8a4d42d18	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fear of Surveillance/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -173,7 +173,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 52d04c36-9d38-42b2-9e47-905ab06cb708	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52d14717-0cbc-4d7e-b546-54ea91580338	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dimir Guildgate/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 52d14717-0cbc-4d7e-b546-54ea91580338	land	play-land	agreed	-	X	scen	1	0	Dimir Guildgate/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-52d1d575-3e7f-4df1-8c89-aee0cac03aca	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+52d1d575-3e7f-4df1-8c89-aee0cac03aca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-s-return:cast:s1,f:xs:XP:rakdos-s-return:cast:s1	-	-	-	d864b561c9cb	-	885ea22cc060	-	-	2026-11-24	xproof
 52d34007-38c0-4858-8ec8-c622da916277	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52d34007-38c0-4858-8ec8-c622da916277	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 52d349e7-4bd2-468a-ab26-df8cd262f6f6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

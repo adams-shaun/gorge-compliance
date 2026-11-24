@@ -9,7 +9,7 @@ d8067f42-68c0-42da-a1d6-859953939555	combat#0.attack	combat#0.attack	agreed	-	X	
 d8067f42-68c0-42da-a1d6-859953939555	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Moonrise Cleric/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d8067f42-68c0-42da-a1d6-859953939555	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Moonrise Cleric/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d8070ee7-dbd1-4d38-9715-ba14e103e379	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d8070ee7-dbd1-4d38-9715-ba14e103e379	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d8070ee7-dbd1-4d38-9715-ba14e103e379	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d80d87f5-af9e-404b-88e3-7a4b419dc32c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d80d87f5-af9e-404b-88e3-7a4b419dc32c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d81285b7-a718-411a-8be3-ecc0cfe0bcb0	cast	cast-resolve	agreed	-	X	scen	1	0	Goblin Sharpshooter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -30,8 +30,8 @@ d81d5749-ab4d-42c5-8903-0b400f10fe33	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Rauba
 d81fc181-ecb0-43a5-88e8-c61aca3428d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d81fc181-ecb0-43a5-88e8-c61aca3428d8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d820b920-191c-43e3-ba6a-4cdceab1c06d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d820b920-191c-43e3-ba6a-4cdceab1c06d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d820b920-191c-43e3-ba6a-4cdceab1c06d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d820b920-191c-43e3-ba6a-4cdceab1c06d	f0/a0	PumpAll	agreed	-	X	start	2	0	x:xs:XP:soul-of-theros:f0a0:s1	-	-	-	d864b561c9cb	-	2faed06f2a01	-	-	2026-11-24	xproof
+d820b920-191c-43e3-ba6a-4cdceab1c06d	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d820ddf4-315d-470a-8d66-663a76a240c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d824a319-fa74-42e4-9cbe-dba1576d6bad	cast	cast-resolve	agreed	-	X	scen	1	0	Perfected Theory/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d827575f-e364-4a20-887e-3091e5501a4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ d8b5de6d-8654-4550-bccb-79de6cbef4d5	cast	cast-resolve	agreed	-	X	scen	1	0	Retro
 d8b5de6d-8654-4550-bccb-79de6cbef4d5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Retro-Mutation/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d8b5de6d-8654-4550-bccb-79de6cbef4d5	static#0.1	static#0.1	agreed	-	X	scen	1	0	Retro-Mutation/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d8b6d9be-11a6-402c-a847-ec6cababe560	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d8b6ea82-da4e-4763-84b1-4caa214ed945	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d8b6ea82-da4e-4763-84b1-4caa214ed945	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hydroform:cast:s1,f:xs:XP:hydroform:cast:s1	-	-	-	d864b561c9cb	-	e3f5a15d3e68	-	-	2026-11-24	xproof
 d8b770c2-0406-4a2d-95d9-e14bb5d3bdc6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d8b770c2-0406-4a2d-95d9-e14bb5d3bdc6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d8b770c2-0406-4a2d-95d9-e14bb5d3bdc6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -42,8 +42,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 392a71c7-8f6d-46b8-bcc3-613e086d86ed	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Wingnut, Bat on the Belfry/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 39322103-c40e-4d05-8e87-a92d1cbc7b68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39322103-c40e-4d05-8e87-a92d1cbc7b68	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-393586d3-1f1a-4f3a-96b8-ed1a8fdf00c6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-393586d3-1f1a-4f3a-96b8-ed1a8fdf00c6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+393586d3-1f1a-4f3a-96b8-ed1a8fdf00c6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampire-warlord:cast:s1,f:xs:XP:vampire-warlord:cast:s1	-	-	-	d864b561c9cb	-	b47169e718bc	-	-	2026-11-24	xproof
+393586d3-1f1a-4f3a-96b8-ed1a8fdf00c6	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 39375b5d-f509-4482-8d34-797dae17d38b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39375b5d-f509-4482-8d34-797dae17d38b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3937a96c-3be1-465d-98b6-1db67d2215e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -119,9 +119,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3984e5f6-8643-4104-aa9c-18d474e07801	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bone Miser/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3984e5f6-8643-4104-aa9c-18d474e07801	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3984e5f6-8643-4104-aa9c-18d474e07801	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3986b284-f943-4570-ba26-3419910feeef	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3986b284-f943-4570-ba26-3419910feeef	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3986b284-f943-4570-ba26-3419910feeef	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3986b284-f943-4570-ba26-3419910feeef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-keyrune:cast:s1,f:xs:XP:rakdos-keyrune:cast:s1	-	-	-	d864b561c9cb	-	a205146dc0dc	-	-	2026-11-24	xproof
+3986b284-f943-4570-ba26-3419910feeef	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:rakdos-keyrune:cast:s1,f:xs:XP:rakdos-keyrune:cast:s1	-	-	-	d864b561c9cb	-	a205146dc0dc	-	-	2026-11-24	xproof
+3986b284-f943-4570-ba26-3419910feeef	f0/a1	Animate	agreed	-	X	start	2	0	x:xs:XP:rakdos-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	a205146dc0dc	-	-	2026-11-24	xproof
 39882df0-c20f-469d-94ba-1617224e71a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 398afdf2-4a12-430e-85c9-c68847230939	cast	cast-resolve	agreed	-	FX	scen	2	0	Sylvan Scavenging/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 398afdf2-4a12-430e-85c9-c68847230939	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sylvan Scavenging/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -157,8 +157,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39acc3d0-85fc-4814-93f2-e709c3b2c86b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39b359c1-48b8-43a7-b972-54764eadd2c7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39b359c1-48b8-43a7-b972-54764eadd2c7	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39b4a47a-df51-4bd9-9a20-43ac80a5d352	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39b4a47a-df51-4bd9-9a20-43ac80a5d352	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+39b4a47a-df51-4bd9-9a20-43ac80a5d352	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:balustrade-spy:f0t0:s1,f:xs:XP:balustrade-spy:f0t0:s1	-	-	-	d864b561c9cb	-	32c8c332b3e8	-	-	2026-11-24	xproof
+39b4a47a-df51-4bd9-9a20-43ac80a5d352	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:balustrade-spy:f0t0:s1,f:xs:XP:balustrade-spy:f0t0:s1	-	-	-	d864b561c9cb	-	32c8c332b3e8	-	-	2026-11-24	xproof
 39b51f62-8421-42d1-86d3-74fd6e6f31a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39b51f62-8421-42d1-86d3-74fd6e6f31a2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39b51f62-8421-42d1-86d3-74fd6e6f31a2	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39cae244-96e1-4ea3-899a-3aa871cca31c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Slumbering Cerberus/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 39d283e0-9d9b-4c04-aa6a-66a9883af9a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39d283e0-9d9b-4c04-aa6a-66a9883af9a2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39d4373b-35b4-4ceb-b4d5-9ca474365eb0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+39d4373b-35b4-4ceb-b4d5-9ca474365eb0	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	240c2bc7596e	-	-	2026-11-24	xproof
 39d60cd8-bebc-407d-b361-8e49e70e339a	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39d60cd8-bebc-407d-b361-8e49e70e339a	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39d993be-30ad-4756-a494-fd8808d474c9	cast	cast-resolve	agreed	-	X	scen	1	0	Tigra, Feline Fury/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

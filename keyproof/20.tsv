@@ -76,9 +76,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 20602d11-c0ae-47ce-a7fd-998b12480e18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20602d11-c0ae-47ce-a7fd-998b12480e18	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2061fe08-0c7c-4d79-a144-996c3012952c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-206539a6-0e60-4986-bc57-c2b89e08b9f2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-206539a6-0e60-4986-bc57-c2b89e08b9f2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-206539a6-0e60-4986-bc57-c2b89e08b9f2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+206539a6-0e60-4986-bc57-c2b89e08b9f2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:siege-dragon:cast:s1,f:xs:XP:siege-dragon:cast:s1	-	-	-	d864b561c9cb	-	308a0df65631	-	-	2026-11-24	xproof
+206539a6-0e60-4986-bc57-c2b89e08b9f2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:siege-dragon:cast:s1,f:xs:XP:siege-dragon:cast:s1	-	-	-	d864b561c9cb	-	308a0df65631	-	-	2026-11-24	xproof
+206539a6-0e60-4986-bc57-c2b89e08b9f2	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:siege-dragon:f0t1:s1,f:xs:XP:siege-dragon:f0t1:s1	-	-	-	d864b561c9cb	-	308a0df65631	-	-	2026-11-24	xproof
 2065cada-4078-41c4-9e06-2460d2a2e8ee	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2065cada-4078-41c4-9e06-2460d2a2e8ee	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2065e9d0-c6e9-4270-898e-9822b532d467	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2071b712-2539-4797-8359-f9adb31889ae	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2071b712-2539-4797-8359-f9adb31889ae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2071f278-77ba-46f8-85a0-ccd761199f29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2071f278-77ba-46f8-85a0-ccd761199f29	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2071f278-77ba-46f8-85a0-ccd761199f29	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 20750317-061b-4b65-9fc8-43477fcd7a21	cast	cast-resolve	agreed	-	X	scen	1	0	Private Eye/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20750317-061b-4b65-9fc8-43477fcd7a21	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Private Eye/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20750317-061b-4b65-9fc8-43477fcd7a21	static#0.0	static#0.0	agreed	-	X	scen	1	0	Private Eye/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

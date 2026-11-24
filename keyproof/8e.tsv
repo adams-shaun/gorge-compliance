@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e11d1f7-fa98-4cd2-9912-081e9c9e37ee	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:neurok-familiar:f0t0:s1,f:xs:XP:neurok-familiar:f0t0:s1	-	-	-	25696bf19d5b	-	19f6b122a285	-	-	2026-11-24	xproof
 8e121178-e9e3-43a5-a174-ecbe47d759f9	cast	cast-resolve	agreed	-	X	scen	1	0	Under the Skin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8e1d261d-b8d3-4fb1-922d-47789854b5b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e1d261d-b8d3-4fb1-922d-47789854b5b3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8e1d261d-b8d3-4fb1-922d-47789854b5b3	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8e1d3722-9bd1-4ab7-b4a5-9265fca3aba9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e1d3722-9bd1-4ab7-b4a5-9265fca3aba9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e1d3722-9bd1-4ab7-b4a5-9265fca3aba9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -36,10 +36,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e2b5f90-e405-4b24-a71a-0988c37cf67a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e2b5f90-e405-4b24-a71a-0988c37cf67a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e2b5f90-e405-4b24-a71a-0988c37cf67a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e2fbc26-5373-4fd7-8e9e-41af5bb9ff18	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e2fbc26-5373-4fd7-8e9e-41af5bb9ff18	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e2fbc26-5373-4fd7-8e9e-41af5bb9ff18	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e2fbc26-5373-4fd7-8e9e-41af5bb9ff18	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8e2fbc26-5373-4fd7-8e9e-41af5bb9ff18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:garruk-caller-of-beasts:cast:s1,f:xs:XP:garruk-caller-of-beasts:cast:s1	-	-	-	d864b561c9cb	-	a11eca9c7f47	-	-	2026-11-24	xproof
+8e2fbc26-5373-4fd7-8e9e-41af5bb9ff18	f0/a0	Dig	agreed	-	FX	start	1	0	x:xs:XP:garruk-caller-of-beasts:cast:s2,f:xs:XP:garruk-caller-of-beasts:cast:s2	-	-	-	d864b561c9cb	-	a11eca9c7f47	-	-	2026-11-24	xproof
+8e2fbc26-5373-4fd7-8e9e-41af5bb9ff18	f0/a1	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:garruk-caller-of-beasts:cast:s1,f:xs:XP:garruk-caller-of-beasts:cast:s1	-	-	-	d864b561c9cb	-	a11eca9c7f47	-	-	2026-11-24	xproof
+8e2fbc26-5373-4fd7-8e9e-41af5bb9ff18	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8e34f487-aa75-4afb-af75-3349de456c79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e353b5f-0692-430e-9558-59818275b13b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e353b5f-0692-430e-9558-59818275b13b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -184,5 +184,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ee98d6a-6a7e-411d-818c-816d84cfb7cd	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kinscaer-harpoonist:f0t0:s1,f:xs:XP:kinscaer-harpoonist:f0t0:s1	-	-	-	8a1b1a193ec0	-	da430c71db35	-	-	2026-11-24	xproof
 8eeb83b4-dca1-497e-a6b7-0485807aeef3	cast	cast-resolve	agreed	-	FX	scen	2	0	Rise from the Wreck/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8ef3dd68-f6a1-43b9-8837-40b326019b1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8efa0026-c3f8-44e0-8f55-729f9c30ac93	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8efa0026-c3f8-44e0-8f55-729f9c30ac93	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8efa0026-c3f8-44e0-8f55-729f9c30ac93	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:hammerhand:cast:s1,f:xs:XP:hammerhand:cast:s1	-	-	-	d864b561c9cb	-	83d3e30c927c	-	-	2026-11-24	xproof
+8efa0026-c3f8-44e0-8f55-729f9c30ac93	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:hammerhand:cast:s1,f:xs:XP:hammerhand:cast:s1	-	-	-	d864b561c9cb	-	83d3e30c927c	-	-	2026-11-24	xproof

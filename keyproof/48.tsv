@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-480454a0-fb10-432b-a963-8b0c0ffc6680	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-480454a0-fb10-432b-a963-8b0c0ffc6680	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+480454a0-fb10-432b-a963-8b0c0ffc6680	cast	cast	agreed	-	F	start	4	0	f:xs:XP:sepulchral-primordial:cast:s1	-	-	-	d864b561c9cb	-	b057e4ea6bfb	-	-	2026-11-24	xproof
+480454a0-fb10-432b-a963-8b0c0ffc6680	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:sepulchral-primordial:cast:s1	-	-	-	d864b561c9cb	-	b057e4ea6bfb	-	-	2026-11-24	xproof
 4804fc42-588c-487a-8ff7-bcc16749fc1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4804fc42-588c-487a-8ff7-bcc16749fc1f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48060406-dd5a-4df5-84e9-3e797f0248cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -86,15 +86,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4879c8f0-8832-4290-bc71-9838940f75cd	cast	cast-resolve	agreed	-	FX	scen	2	0	Valley Floodcaller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4879c8f0-8832-4290-bc71-9838940f75cd	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Valley Floodcaller/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4879c8f0-8832-4290-bc71-9838940f75cd	static#0.0	static#0.0	agreed	-	X	scen	1	0	Valley Floodcaller/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-487de0df-0496-4b5d-8050-27b8e617582b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-487de0df-0496-4b5d-8050-27b8e617582b	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+487de0df-0496-4b5d-8050-27b8e617582b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firehoof-cavalry:cast:s1,f:xs:XP:firehoof-cavalry:cast:s1	-	-	-	d864b561c9cb	-	f37f89d6ea24	-	-	2026-11-24	xproof
+487de0df-0496-4b5d-8050-27b8e617582b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:firehoof-cavalry:f0a0:s1,f:xs:XP:firehoof-cavalry:f0a0:s1	-	-	-	d864b561c9cb	-	f37f89d6ea24	-	-	2026-11-24	xproof
 4880c976-b417-48e4-98a2-9e5a8da0d758	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4880c976-b417-48e4-98a2-9e5a8da0d758	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48848570-00c4-4a89-a84c-e3df47a8b0d2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48848570-00c4-4a89-a84c-e3df47a8b0d2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48848570-00c4-4a89-a84c-e3df47a8b0d2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4885354f-0b77-47b6-b8f7-00753804436f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4885354f-0b77-47b6-b8f7-00753804436f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4885354f-0b77-47b6-b8f7-00753804436f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 488591d4-3dfb-4e1e-b0c4-1950ff92b848	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 488696c2-b0c7-49be-a5a1-e833b6fd8751	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 488696c2-b0c7-49be-a5a1-e833b6fd8751	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 488ca652-653b-4bb3-891c-874efdd418ff	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 4891923b-9c8c-4816-9623-d9362e4eb503	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48925016-8a55-4efb-84c7-dc5001baa58e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48925016-8a55-4efb-84c7-dc5001baa58e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48925016-8a55-4efb-84c7-dc5001baa58e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 48936751-429b-4c40-88f5-72acde6278cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48936751-429b-4c40-88f5-72acde6278cc	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4893a301-29a8-4a0e-845c-8ddb5cb8db25	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -181,9 +181,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48dc8f34-8c73-4155-8a3d-b26a35260e6b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 48ddba1e-2ad7-463f-9307-d2379a800e51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48e2f2c3-9d99-4535-915f-551fbb59ade5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48e3d832-2fe9-4ffd-8258-75451100dcfc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48e3d832-2fe9-4ffd-8258-75451100dcfc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48e3d832-2fe9-4ffd-8258-75451100dcfc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48e3d832-2fe9-4ffd-8258-75451100dcfc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hythonia-the-cruel:cast:s1,f:xs:XP:hythonia-the-cruel:cast:s1	-	-	-	d864b561c9cb	-	560f583865f1	-	-	2026-11-24	xproof
+48e3d832-2fe9-4ffd-8258-75451100dcfc	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:hythonia-the-cruel:f0a0:s1,f:xs:XP:hythonia-the-cruel:f0a0:s1	-	-	-	d864b561c9cb	-	560f583865f1	-	-	2026-11-24	xproof
+48e3d832-2fe9-4ffd-8258-75451100dcfc	f0/t0	BecomeMonstrous	agreed	-	FX	start	2	0	x:xs:XP:hythonia-the-cruel:f0a0:s1,f:xs:XP:hythonia-the-cruel:f0a0:s1	-	-	-	d864b561c9cb	-	560f583865f1	-	-	2026-11-24	xproof
 48e3f6dd-68ab-420a-ad4d-fe7ee39486d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48e3f6dd-68ab-420a-ad4d-fe7ee39486d3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48e3f6dd-68ab-420a-ad4d-fe7ee39486d3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42258216-fe2b-42d0-a6ce-76ecf8104c10	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 42258216-fe2b-42d0-a6ce-76ecf8104c10	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 422876dd-2801-4d0e-93ad-d9d48178f0d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-422876dd-2801-4d0e-93ad-d9d48178f0d0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+422876dd-2801-4d0e-93ad-d9d48178f0d0	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:font-of-vigor:f0a0:s1,f:xs:XP:font-of-vigor:f0a0:s1	-	-	-	d864b561c9cb	-	af71e20be4f8	-	-	2026-11-24	xproof
 4228dd75-1fdd-48dc-9259-b841b2e46c64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4228dd75-1fdd-48dc-9259-b841b2e46c64	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4228dd75-1fdd-48dc-9259-b841b2e46c64	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42c7e933-f169-444b-917d-b4dca918d989	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42c7e933-f169-444b-917d-b4dca918d989	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42ca56c5-a9c4-4a2c-ae05-bce47aa6e16c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42ca56c5-a9c4-4a2c-ae05-bce47aa6e16c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+42ca56c5-a9c4-4a2c-ae05-bce47aa6e16c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 42d121a2-5266-483a-ab16-e0a8073cd6a3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42d121a2-5266-483a-ab16-e0a8073cd6a3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:halimar-depths:f0t0:s1,f:xs:XP:halimar-depths:f0t0:s1	-	-	-	8a1b1a193ec0	-	62fe9f20a42f	-	-	2026-11-24	xproof
 42d121a2-5266-483a-ab16-e0a8073cd6a3	land	land	agreed	-	FX	start	2	0	x:xs:XP:halimar-depths:f0t0:s1,f:xs:XP:halimar-depths:f0t0:s1	-	-	-	8a1b1a193ec0	-	62fe9f20a42f	-	-	2026-11-24	xproof

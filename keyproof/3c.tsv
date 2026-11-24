@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c322d99-2bc4-4618-aeb3-5583fce54f1b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spider-Mobile/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3c322d99-2bc4-4618-aeb3-5583fce54f1b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Spider-Mobile/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3c334eb3-e3fd-45b0-a36d-4681c9e72ac5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c334eb3-e3fd-45b0-a36d-4681c9e72ac5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c334eb3-e3fd-45b0-a36d-4681c9e72ac5	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3c345e24-1726-45ac-91ca-e348d1e7acfe	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:eddymurk-crab:f0t0:s2,f:xs:XP:eddymurk-crab:f0t0:s2	-	-	-	e07cf3a05ba5	-	a9169017d596	-	-	2026-11-24	xproof
 3c345e24-1726-45ac-91ca-e348d1e7acfe	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:eddymurk-crab:f0t0:s2,f:xs:XP:eddymurk-crab:f0t0:s2	-	-	-	e07cf3a05ba5	-	a9169017d596	-	-	2026-11-24	xproof
 3c345e24-1726-45ac-91ca-e348d1e7acfe	static#0.0	static#0.0	agreed	-	X	scen	1	0	Eddymurk Crab/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -92,13 +92,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c6a8ad8-9b40-4136-9cfd-2b4cf9a9d900	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c6a8ad8-9b40-4136-9cfd-2b4cf9a9d900	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c741801-bfa5-4ff6-bf06-8d5edc06388d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c75234b-e367-46da-8454-be4315f9b9de	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c75234b-e367-46da-8454-be4315f9b9de	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c75234b-e367-46da-8454-be4315f9b9de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:precinct-captain:cast:s1,f:xs:XP:precinct-captain:cast:s1	-	-	-	d864b561c9cb	-	8ca897043d05	-	-	2026-11-24	xproof
+3c75234b-e367-46da-8454-be4315f9b9de	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3c756eda-4fc1-4766-99be-32d8c9f35262	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c756eda-4fc1-4766-99be-32d8c9f35262	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c76bb90-92fb-428b-8e94-def4cf4b6f2d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c76bb90-92fb-428b-8e94-def4cf4b6f2d	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c76bb90-92fb-428b-8e94-def4cf4b6f2d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c76bb90-92fb-428b-8e94-def4cf4b6f2d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:izzet-cluestone:cast:s1,f:xs:XP:izzet-cluestone:cast:s1	-	-	-	d864b561c9cb	-	5b11434e1683	-	-	2026-11-24	xproof
+3c76bb90-92fb-428b-8e94-def4cf4b6f2d	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:izzet-cluestone:cast:s1,f:xs:XP:izzet-cluestone:cast:s1	-	-	-	d864b561c9cb	-	5b11434e1683	-	-	2026-11-24	xproof
+3c76bb90-92fb-428b-8e94-def4cf4b6f2d	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:izzet-cluestone:f0a1:s1,f:xs:XP:izzet-cluestone:f0a1:s1	-	-	-	d864b561c9cb	-	5b11434e1683	-	-	2026-11-24	xproof
 3c7bafe9-80cd-48d0-bcae-e7910c9fb83b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anti-venom-horrifying-healer:f0t0:s1,f:xs:XP:anti-venom-horrifying-healer:f0t0:s1	-	-	-	25696bf19d5b	-	97e1d2c3a346	-	-	2026-11-24	xproof
 3c7bafe9-80cd-48d0-bcae-e7910c9fb83b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:anti-venom-horrifying-healer:f0t0:s1,f:xs:XP:anti-venom-horrifying-healer:f0t0:s1	-	-	-	25696bf19d5b	-	97e1d2c3a346	-	-	2026-11-24	xproof
 3c7dd86d-25eb-4b24-9358-98b951248e04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c8044b7-3999-4825-8448-0a1a325f1b48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c8044b7-3999-4825-8448-0a1a325f1b48	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c82389c-7442-4599-89a0-fb2482e727a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c82389c-7442-4599-89a0-fb2482e727a3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c82389c-7442-4599-89a0-fb2482e727a3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3c83ea11-7141-41a2-ba77-1ed2722dfe74	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c86541c-3601-4a38-8872-39705e41303a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c87ea85-ca29-45a7-b5b2-758c62898b0a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,8 +165,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3cb91e96-285d-4191-97cd-ee7ce5d86eb2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cb91e96-285d-4191-97cd-ee7ce5d86eb2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cb91e96-285d-4191-97cd-ee7ce5d86eb2	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3cbb5045-8566-4279-b7d3-3e599b11ccc5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3cbb5045-8566-4279-b7d3-3e599b11ccc5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3cbb5045-8566-4279-b7d3-3e599b11ccc5	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:deputy-of-acquittals:cast:s1,f:xs:XP:deputy-of-acquittals:cast:s1	-	-	-	d864b561c9cb	-	acd2a90d8c46	-	-	2026-11-24	xproof
+3cbb5045-8566-4279-b7d3-3e599b11ccc5	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:deputy-of-acquittals:cast:s1,f:xs:XP:deputy-of-acquittals:cast:s1	-	-	-	d864b561c9cb	-	acd2a90d8c46	-	-	2026-11-24	xproof
 3cbd4c8e-fe3f-4a7c-90a5-7bc656d7bb10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cbd4c8e-fe3f-4a7c-90a5-7bc656d7bb10	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cbdf37b-7fe3-4791-b33c-8591158b0ce5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

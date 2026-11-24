@@ -128,8 +128,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05a1e1ee-67f0-4158-a012-01612bc9cc70	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05a4acfd-3bf3-4ec2-a28a-bc43ba7c6fbf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05a4f8ff-49da-42af-add5-6248c4b0644b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05a6a571-643e-429e-8e5c-1c3f8b0dc746	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05a6a571-643e-429e-8e5c-1c3f8b0dc746	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05a6a571-643e-429e-8e5c-1c3f8b0dc746	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:utvara-hellkite:cast:s1,f:xs:XP:utvara-hellkite:cast:s1	-	-	-	d864b561c9cb	-	fa52dbfc2202	-	-	2026-11-24	xproof
+05a6a571-643e-429e-8e5c-1c3f8b0dc746	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:utvara-hellkite:f0t0:s1,f:xs:XP:utvara-hellkite:f0t0:s1	-	-	-	d864b561c9cb	-	fa52dbfc2202	-	-	2026-11-24	xproof
 05a7ca83-e820-433f-b9e9-151e817d3708	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05a7ca83-e820-433f-b9e9-151e817d3708	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05abc57a-839d-4376-986c-8e3855e34239	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05e6b243-48a6-4a42-bc5f-413441de9c33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05e6b243-48a6-4a42-bc5f-413441de9c33	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05e6b243-48a6-4a42-bc5f-413441de9c33	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05e6b243-48a6-4a42-bc5f-413441de9c33	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05e6b243-48a6-4a42-bc5f-413441de9c33	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 05e73886-8311-4a0d-9c8d-4a03c7f20ea2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05e73886-8311-4a0d-9c8d-4a03c7f20ea2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05e73886-8311-4a0d-9c8d-4a03c7f20ea2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

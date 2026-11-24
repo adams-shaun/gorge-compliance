@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a31c49f-5b3f-4f84-a08e-58b30a6bff7c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stormkeld Vanguard/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a31c49f-5b3f-4f84-a08e-58b30a6bff7c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Stormkeld Vanguard/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a327626-ce42-4ef8-8869-3468960c671e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a327626-ce42-4ef8-8869-3468960c671e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a327626-ce42-4ef8-8869-3468960c671e	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:crackling-triton:f0a0:s1,f:xs:XP:crackling-triton:f0a0:s1	-	-	-	d864b561c9cb	-	b817767ffaca	-	-	2026-11-24	xproof
 8a397a64-542f-43fb-bf54-27ac651e1819	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a397a64-542f-43fb-bf54-27ac651e1819	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a39809e-219e-4f59-a233-ea28d05c30ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a922366-ee2a-4ddb-a904-683dcf4f191a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a9525f4-74a6-44f0-a1b1-d57937d7783b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a9525f4-74a6-44f0-a1b1-d57937d7783b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a960cc2-3802-42bc-ba28-941bfe9743be	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a960cc2-3802-42bc-ba28-941bfe9743be	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a960cc2-3802-42bc-ba28-941bfe9743be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doorkeeper:cast:s1,f:xs:XP:doorkeeper:cast:s1	-	-	-	d864b561c9cb	-	bcbb84b38659	-	-	2026-11-24	xproof
+8a960cc2-3802-42bc-ba28-941bfe9743be	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:doorkeeper:f0a0:s1,f:xs:XP:doorkeeper:f0a0:s1	-	-	-	d864b561c9cb	-	bcbb84b38659	-	-	2026-11-24	xproof
 8a98ddac-7341-4118-b188-51d8d03afd1d	cast	cast-resolve	agreed	-	X	scen	1	0	Uncle Iroh/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a98ddac-7341-4118-b188-51d8d03afd1d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Uncle Iroh/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a98ddac-7341-4118-b188-51d8d03afd1d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Uncle Iroh/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8aae3a28-dcf3-460e-89f9-4b0c96d6f55e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8aae6f84-02ac-4f8f-9721-b12138588b6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8aae6f84-02ac-4f8f-9721-b12138588b6b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8aae6f84-02ac-4f8f-9721-b12138588b6b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8aae6f84-02ac-4f8f-9721-b12138588b6b	f0/a1	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:shipwreck-singer:f0a1:s1,f:xs:XP:shipwreck-singer:f0a1:s1	-	-	-	d864b561c9cb	-	4f985985c62d	-	-	2026-11-24	xproof
 8aaf248e-66cf-447b-b062-9aa2ab1ec864	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8aaf248e-66cf-447b-b062-9aa2ab1ec864	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8aaf248e-66cf-447b-b062-9aa2ab1ec864	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

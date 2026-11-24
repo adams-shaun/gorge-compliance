@@ -60,8 +60,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9f5277e8-1cbe-478c-a8bc-ac028f13305e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:harbinger-of-the-tides:f0t0:s2,f:xs:XP:harbinger-of-the-tides:f0t0:s2	-	-	-	e07cf3a05ba5	-	dd2ba145c4a1	-	-	2026-11-24	xproof
 9f53b691-da24-4264-a2a0-d0b95a385963	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gorilla-shaman:cast:s1,f:xs:XP:gorilla-shaman:cast:s1	-	-	-	25696bf19d5b	-	e2659410f47d	-	-	2026-11-24	xproof
 9f53b691-da24-4264-a2a0-d0b95a385963	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-9f560b83-32d4-4bb4-a956-8f5db18599db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9f560b83-32d4-4bb4-a956-8f5db18599db	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9f560b83-32d4-4bb4-a956-8f5db18599db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:banisher-priest:f0t0:s1,f:xs:XP:banisher-priest:f0t0:s1	-	-	-	d864b561c9cb	-	2cff2b5c6055	-	-	2026-11-24	xproof
+9f560b83-32d4-4bb4-a956-8f5db18599db	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:banisher-priest:f0t0:s1,f:xs:XP:banisher-priest:f0t0:s1	-	-	-	d864b561c9cb	-	2cff2b5c6055	-	-	2026-11-24	xproof
 9f5b9547-a1e7-4348-a3e8-860c2db264cc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9f63ab29-b86e-4337-b9dd-2b35c8415f90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9f679093-86a0-4211-8491-de1f6d81c483	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9fa38462-57b6-4f2f-a73c-f14a66f56946	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9fb4aa2d-6414-4176-9070-e5230e100c6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9fb5ea12-5b87-462b-b9c0-904cd0f55a9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9fb5ea12-5b87-462b-b9c0-904cd0f55a9c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9fb5ea12-5b87-462b-b9c0-904cd0f55a9c	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9fb80575-9c8e-4745-9a8f-d48cdcbbb868	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9fb8cd81-403a-4988-8f1c-b8eccf8abd9c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9fb8cd81-403a-4988-8f1c-b8eccf8abd9c	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

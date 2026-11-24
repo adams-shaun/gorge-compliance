@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a024389-91a1-460c-b4e8-3f212d2b8400	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:lost-in-the-maze:cast:s2	-	-	-	5437c1394672	-	262c1420dd12	-	-	2026-11-24	xproof
 3a024389-91a1-460c-b4e8-3f212d2b8400	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lost in the Maze/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a067b98-e775-4b44-addf-9d31716c2191	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a067b98-e775-4b44-addf-9d31716c2191	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a067b98-e775-4b44-addf-9d31716c2191	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3a07e22c-71cd-4723-b07e-0ff02009a878	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:steel-wrecking-ball:f0t0:s2,f:xs:XP:steel-wrecking-ball:f0t0:s2	-	-	-	267e485f6204	-	ce5bedf55ff2	-	-	2026-11-24	xproof
 3a07e22c-71cd-4723-b07e-0ff02009a878	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Steel Wrecking Ball/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a07e22c-71cd-4723-b07e-0ff02009a878	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:steel-wrecking-ball:f0t0:s2,f:xs:XP:steel-wrecking-ball:f0t0:s2	-	-	-	267e485f6204	-	ce5bedf55ff2	-	-	2026-11-24	xproof
@@ -119,8 +119,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a799843-1304-4abf-b8d7-db616628ee3f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:feral-ridgewolf:f0a0:s1,f:xs:XP:feral-ridgewolf:f0a0:s1	-	-	-	d864b561c9cb	-	24937b20b995	-	-	2026-11-24	xproof
 3a7a27fe-60f0-4a21-a1c1-5fef8a528391	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a7c2e32-8585-4f7f-8635-199e3c6cd8a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a7cca31-ccca-459b-9ac6-c8f384136ba5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a7cca31-ccca-459b-9ac6-c8f384136ba5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a7cca31-ccca-459b-9ac6-c8f384136ba5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kird-chieftain:cast:s1,f:xs:XP:kird-chieftain:cast:s1	-	-	-	d864b561c9cb	-	49cba5a384f6	-	-	2026-11-24	xproof
+3a7cca31-ccca-459b-9ac6-c8f384136ba5	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:kird-chieftain:f0a0:s1,f:xs:XP:kird-chieftain:f0a0:s1	-	-	-	d864b561c9cb	-	49cba5a384f6	-	-	2026-11-24	xproof
 3a7e3423-4df3-4e10-9861-ac2f403bc49d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a7e3423-4df3-4e10-9861-ac2f403bc49d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a81a3a6-4940-4d69-94c1-d431023b275c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -161,8 +161,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3aa4c374-b146-4890-a8e1-717f214d9741	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aa4c374-b146-4890-a8e1-717f214d9741	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aa58e5a-1b5e-4fb3-bf2d-9bad8126b6e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3aa58e5a-1b5e-4fb3-bf2d-9bad8126b6e6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3aa58e5a-1b5e-4fb3-bf2d-9bad8126b6e6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3aa58e5a-1b5e-4fb3-bf2d-9bad8126b6e6	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:keepsake-gorgon:f0a0:s1,f:xs:XP:keepsake-gorgon:f0a0:s1	-	-	-	d864b561c9cb	-	d71e2581acf7	-	-	2026-11-24	xproof
+3aa58e5a-1b5e-4fb3-bf2d-9bad8126b6e6	f0/t0	BecomeMonstrous	agreed	-	FX	start	2	0	x:xs:XP:keepsake-gorgon:f0a0:s1,f:xs:XP:keepsake-gorgon:f0a0:s1	-	-	-	d864b561c9cb	-	d71e2581acf7	-	-	2026-11-24	xproof
 3aa64915-8b1b-4414-b11e-d2078c1732a5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aa64915-8b1b-4414-b11e-d2078c1732a5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aa654cb-c0a0-48e7-901a-c690120b1510	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,7 +183,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ab3996f-aa3f-4041-8634-8e197d51f108	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mass-calcify:cast:s1,f:xs:XP:mass-calcify:cast:s1	-	-	-	8a1b1a193ec0	-	cf9b1f0098f7	-	-	2026-11-24	xproof
 3ab5c3a7-12e7-4394-a495-0bc7c310bf9c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3abc09a9-3baa-45ff-b048-53e42d4fa9f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3abc09a9-3baa-45ff-b048-53e42d4fa9f2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3abc09a9-3baa-45ff-b048-53e42d4fa9f2	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3abd2342-f783-4871-ac78-1a54b35722c2	cast	cast-resolve	agreed	-	X	scen	1	0	Biosynthic Burst/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ac01298-e45b-4ea0-8379-2074279716a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ac276ca-91d5-4c7d-a355-e56c67ac3ba9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -202,7 +202,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ad6e495-d0e6-4b07-8f91-fe057e173975	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ad6e495-d0e6-4b07-8f91-fe057e173975	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ad9d55d-02f7-412e-8756-6a026f8e68d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ad9d55d-02f7-412e-8756-6a026f8e68d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ad9d55d-02f7-412e-8756-6a026f8e68d7	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3adb7681-977f-4a32-9ec8-51481b958268	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3adb7681-977f-4a32-9ec8-51481b958268	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3adbd963-e85d-4569-963a-4472594f06f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

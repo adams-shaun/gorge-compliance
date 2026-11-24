@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1e474772-3fe4-46be-8c5f-6e477b9fd74e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e474772-3fe4-46be-8c5f-6e477b9fd74e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e49f33b-84c0-4b68-abd4-e8c00b3ce98f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1e49f33b-84c0-4b68-abd4-e8c00b3ce98f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1e49f33b-84c0-4b68-abd4-e8c00b3ce98f	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1e4cf4a4-50a4-4856-bf7e-20899e8affd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e4cf4a4-50a4-4856-bf7e-20899e8affd1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e4de77b-27cb-4afd-8d4b-1cc89f2a6986	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -110,9 +110,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ea20ecb-1919-4be7-b0bb-d79d2dec98fd	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 1ea4f882-6872-4d9e-9532-5ba2bf848d00	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ea4f882-6872-4d9e-9532-5ba2bf848d00	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ea5a8c2-d8c4-4028-b1fe-9951514ea882	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ea5a8c2-d8c4-4028-b1fe-9951514ea882	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ea5a8c2-d8c4-4028-b1fe-9951514ea882	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ea5a8c2-d8c4-4028-b1fe-9951514ea882	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:servant-of-tymaret:cast:s1,f:xs:XP:servant-of-tymaret:cast:s1	-	-	-	d864b561c9cb	-	940a2e7eb1bc	-	-	2026-11-24	xproof
+1ea5a8c2-d8c4-4028-b1fe-9951514ea882	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:servant-of-tymaret:f0a0:s1,f:xs:XP:servant-of-tymaret:f0a0:s1	-	-	-	d864b561c9cb	-	940a2e7eb1bc	-	-	2026-11-24	xproof
+1ea5a8c2-d8c4-4028-b1fe-9951514ea882	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1ea71ea2-65ca-4907-b857-dbd1ba8efacd	cast	cast-resolve	agreed	-	X	scen	1	0	Cerebral Confiscation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ea7b298-be87-4032-9f45-37f9b39ce3fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ea7b298-be87-4032-9f45-37f9b39ce3fa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1eb9e401-8975-447b-839d-f7cd23897465	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gleaming Barrier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1eb9e401-8975-447b-839d-f7cd23897465	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gleaming Barrier/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ebafd78-269a-4974-88d2-e75b44b744c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ebafd78-269a-4974-88d2-e75b44b744c2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ebafd78-269a-4974-88d2-e75b44b744c2	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1ebdc091-16d5-4803-821a-ac8c4696b5bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ebdc091-16d5-4803-821a-ac8c4696b5bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ebf2142-f171-40cd-8143-15f50084b707	cast	cast-resolve	agreed	-	X	scen	1	0	Koma, World-Eater/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

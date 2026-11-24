@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6267ad33-34a6-47c8-ae09-f8d1499a761a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 626882c5-15a8-43ea-ab08-33a7e949c88c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 626b85f8-8889-46e6-9659-460bac79ae9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-626b85f8-8889-46e6-9659-460bac79ae9b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+626b85f8-8889-46e6-9659-460bac79ae9b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 626e8acc-20da-496c-9a79-bfbf7529c01d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 626e8acc-20da-496c-9a79-bfbf7529c01d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 626e8acc-20da-496c-9a79-bfbf7529c01d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 62934aab-b6fa-41b2-ac05-d3fa0e3c5a79	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:turntimber-grove:f0t0:s1,f:xs:XP:turntimber-grove:f0t0:s1	-	-	-	8a1b1a193ec0	-	74a11350e00e	-	-	2026-11-24	xproof
 62934aab-b6fa-41b2-ac05-d3fa0e3c5a79	land	land	agreed	-	FX	start	2	0	x:xs:XP:turntimber-grove:f0t0:s1,f:xs:XP:turntimber-grove:f0t0:s1	-	-	-	8a1b1a193ec0	-	74a11350e00e	-	-	2026-11-24	xproof
 6299d18e-a6a7-414c-85c0-d57a8e7d2627	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-629b3aee-b8fd-495a-a988-815a0aaf3e82	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+629b3aee-b8fd-495a-a988-815a0aaf3e82	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragonscale-boon:cast:s1,f:xs:XP:dragonscale-boon:cast:s1	-	-	-	d864b561c9cb	-	352f4a2a744a	-	-	2026-11-24	xproof
 629f247c-1e64-4c32-8892-0716ed469d1c	cast	cast-resolve	agreed	-	X	scen	1	0	Bumi Bash/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 629fe1be-272d-465f-b9b1-2ce177410f13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 629fe1be-272d-465f-b9b1-2ce177410f13	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -132,8 +132,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 62a3f892-11cf-4064-8186-381ae0f9aa23	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:serum-tank:f0t0:s1,f:xs:XP:serum-tank:f0t0:s1	-	-	-	25696bf19d5b	-	90e495bb7914	-	-	2026-11-24	xproof
 62a6dbdb-70fc-43ab-8e63-367a609ecdeb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 62a6dbdb-70fc-43ab-8e63-367a609ecdeb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-62ad15f1-ee51-4991-8e52-06a3cbd8f395	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-62ad15f1-ee51-4991-8e52-06a3cbd8f395	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+62ad15f1-ee51-4991-8e52-06a3cbd8f395	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jalira-master-polymorphist:cast:s1,f:xs:XP:jalira-master-polymorphist:cast:s1	-	-	-	d864b561c9cb	-	1f2c8fb0bc4a	-	-	2026-11-24	xproof
+62ad15f1-ee51-4991-8e52-06a3cbd8f395	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 62c15af0-40e1-407d-b056-7a3d909e3fdb	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 62c15af0-40e1-407d-b056-7a3d909e3fdb	land	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 62c4d349-a18e-40a2-8cc3-244c219dec7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -169,5 +169,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 62f6baba-da3b-45b8-a3c1-efb75763cca8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 62f6baba-da3b-45b8-a3c1-efb75763cca8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 62f834c7-4765-4b6f-812c-7ce14e13ea0d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-62f834c7-4765-4b6f-812c-7ce14e13ea0d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-62f834c7-4765-4b6f-812c-7ce14e13ea0d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+62f834c7-4765-4b6f-812c-7ce14e13ea0d	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:dimir-cluestone:f0a0:s1,f:xs:XP:dimir-cluestone:f0a0:s1	-	-	-	d864b561c9cb	-	4bde9806ece2	-	-	2026-11-24	xproof
+62f834c7-4765-4b6f-812c-7ce14e13ea0d	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:dimir-cluestone:f0a1:s1,f:xs:XP:dimir-cluestone:f0a1:s1	-	-	-	d864b561c9cb	-	4bde9806ece2	-	-	2026-11-24	xproof

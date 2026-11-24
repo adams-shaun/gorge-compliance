@@ -122,9 +122,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1aa6b31b-cd30-4741-abc6-2ef72e445630	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aa6b31b-cd30-4741-abc6-2ef72e445630	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aaa85e1-4770-457f-a9af-3eeb56c71447	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1aabb6bd-8061-42a5-9a71-f9eac718bd22	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1aabb6bd-8061-42a5-9a71-f9eac718bd22	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1aabb6bd-8061-42a5-9a71-f9eac718bd22	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1aabb6bd-8061-42a5-9a71-f9eac718bd22	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-limbs:cast:s1,f:xs:XP:wall-of-limbs:cast:s1	-	-	-	d864b561c9cb	-	cd0c9f3e408c	-	-	2026-11-24	xproof
+1aabb6bd-8061-42a5-9a71-f9eac718bd22	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:wall-of-limbs:f0a0:s1,f:xs:XP:wall-of-limbs:f0a0:s1	-	-	-	d864b561c9cb	-	cd0c9f3e408c	-	-	2026-11-24	xproof
+1aabb6bd-8061-42a5-9a71-f9eac718bd22	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1aaddaeb-baab-42b6-a442-d97339da54db	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aaddaeb-baab-42b6-a442-d97339da54db	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aaddaeb-baab-42b6-a442-d97339da54db	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -167,7 +167,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1adb733c-d18a-4019-9229-0ad701a15b1a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kor-aeronaut:f0t0:s1,f:xs:XP:kor-aeronaut:f0t0:s1	-	-	-	8a1b1a193ec0	-	67a2736ae4ae	-	-	2026-11-24	xproof
 1adb733c-d18a-4019-9229-0ad701a15b1a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kor-aeronaut:f0t0:s1,f:xs:XP:kor-aeronaut:f0t0:s1	-	-	-	8a1b1a193ec0	-	67a2736ae4ae	-	-	2026-11-24	xproof
 1adc4691-20cf-4f55-af85-3132fe1ff2a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1adcc4a8-b2dd-4d9a-bded-188b81c84a10	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1adcc4a8-b2dd-4d9a-bded-188b81c84a10	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	a68f54faa63b	-	-	2026-11-24	xproof
 1adcc4a8-b2dd-4d9a-bded-188b81c84a10	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1adcf587-9035-4299-a2bd-62f805fdd897	cast	cast-resolve	agreed	-	X	scen	1	0	Highborn Vampire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ae339fd-8e64-4e3a-8e27-e4993932ba62	cast	cast-resolve	agreed	-	X	scen	1	0	Gnarlback Rhino/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

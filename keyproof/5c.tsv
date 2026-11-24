@@ -118,8 +118,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cb6ebf7-6a75-4464-9e39-e171fcb52de3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Great Forest Druid/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5cbb70e7-a52c-4b35-bc31-d9a0a7df893c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cbbb3f3-63a4-4983-81ea-8c405b10e63f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5cbbb3f3-63a4-4983-81ea-8c405b10e63f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5cbbb3f3-63a4-4983-81ea-8c405b10e63f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5cbbb3f3-63a4-4983-81ea-8c405b10e63f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+5cbbb3f3-63a4-4983-81ea-8c405b10e63f	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:voice-of-resurgence:f0t1:s1,f:xs:XP:voice-of-resurgence:f0t1:s1	-	-	-	d864b561c9cb	-	d76a5cee2a3f	-	-	2026-11-24	xproof
 5cbe6066-07f8-45de-b3b4-b8590d111b0d	cast	cast-resolve	agreed	-	X	scen	1	0	Ravenous Cosmozoan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5cc57770-1070-45f6-9d76-d402c55a0d06	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cc57770-1070-45f6-9d76-d402c55a0d06	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ce58279-7f1e-4ef7-a352-ecbaee31b6ff	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ce58279-7f1e-4ef7-a352-ecbaee31b6ff	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ce7780d-8a32-44c2-b779-aae732f5b05d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5cee3505-0291-4f1b-9e5f-2909a31acd8e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5cee3505-0291-4f1b-9e5f-2909a31acd8e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	63d8190eee8b	-	-	2026-11-24	xproof
 5cf069cf-3a10-4427-a02b-5405429b5652	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cf069cf-3a10-4427-a02b-5405429b5652	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cf18398-9552-415e-a61f-2c149e35ec3d	cast	cast-resolve	agreed	-	X	scen	1	0	Zuko's Exile/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

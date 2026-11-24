@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c06c093-18ab-49e6-a82d-38e826d25016	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c0940d6-9f0d-4d84-ab28-ff6595254675	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c0a53fc-8037-46e3-90ea-cb8b73631a83	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c0a72dc-4756-4d60-b6b4-4c2c69699efd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c0a72dc-4756-4d60-b6b4-4c2c69699efd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pull-from-the-deep:cast:s1,f:xs:XP:pull-from-the-deep:cast:s1	-	-	-	d864b561c9cb	-	eec76cb2a4a5	-	-	2026-11-24	xproof
 1c0d4f28-2494-45b0-acb8-921fee602c01	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pentavus:cast:s1,f:xs:XP:pentavus:cast:s1	-	-	-	25696bf19d5b	-	21d00a3a5e96	-	-	2026-11-24	xproof
 1c0d4f28-2494-45b0-acb8-921fee602c01	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c0d4f28-2494-45b0-acb8-921fee602c01	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -53,7 +53,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c3ba54a-a8ef-4838-b3aa-cb6df827a619	static#0.0	static#0.0	agreed	-	X	scen	1	0	Killmonger, Scourge of Wakanda/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1c3c23b5-b771-4117-83b5-febf7e96281a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c4561d1-377c-4a6a-b7a2-8ce81efa39c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c4561d1-377c-4a6a-b7a2-8ce81efa39c6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c4561d1-377c-4a6a-b7a2-8ce81efa39c6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1c45e872-3af8-47a4-9dc7-a99c293338f8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stadium-tidalmage:f0t0:s2,f:xs:XP:stadium-tidalmage:f0t0:s2	-	-	-	5437c1394672	-	81f30fcc3415	-	-	2026-11-24	xproof
 1c45e872-3af8-47a4-9dc7-a99c293338f8	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stadium-tidalmage:f0t0:s2,f:xs:XP:stadium-tidalmage:f0t0:s2	-	-	-	5437c1394672	-	81f30fcc3415	-	-	2026-11-24	xproof
 1c45e872-3af8-47a4-9dc7-a99c293338f8	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Stadium Tidalmage/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c857fa4-e823-494d-9ea4-7eb9e719c9b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c857fa4-e823-494d-9ea4-7eb9e719c9b6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c859c97-74df-4360-baf8-0f79eae97c45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c859c97-74df-4360-baf8-0f79eae97c45	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c859c97-74df-4360-baf8-0f79eae97c45	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1c8ef715-3c3c-4d04-9f30-941b870b11d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c8ef715-3c3c-4d04-9f30-941b870b11d3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c95b7cf-be4d-4961-9073-3e39487492c8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c995c80-3301-409b-822b-9297aa260823	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ureni, the Song Unending/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1c995c80-3301-409b-822b-9297aa260823	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 1c99a5cc-d974-4a4b-a03b-a78bfe738ed7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c99a5cc-d974-4a4b-a03b-a78bfe738ed7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c99a5cc-d974-4a4b-a03b-a78bfe738ed7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:charging-griffin:f0t0:s1,f:xs:XP:charging-griffin:f0t0:s1	-	-	-	d864b561c9cb	-	a096ed154d93	-	-	2026-11-24	xproof
 1c99c9d9-3ea8-43bc-96d7-4dea12770b5c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c99c9d9-3ea8-43bc-96d7-4dea12770b5c	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 1c9cf20c-51e4-4a87-b9f8-231b6baf5d6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

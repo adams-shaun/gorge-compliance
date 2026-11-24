@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 f10039ae-2695-4b0a-82b2-82ee79a992c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f10039ae-2695-4b0a-82b2-82ee79a992c7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f104b361-8000-4eda-b530-1502528e09f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f104b361-8000-4eda-b530-1502528e09f9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f104b361-8000-4eda-b530-1502528e09f9	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:leeching-sliver:f0t0:s1,f:xs:XP:leeching-sliver:f0t0:s1	-	-	-	d864b561c9cb	-	9b12414485de	-	-	2026-11-24	xproof
 f1052b21-ba96-499f-b9e6-9dba4ed82e1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1052b21-ba96-499f-b9e6-9dba4ed82e1e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f105ccdd-65bc-4880-bbfe-f57fc0e060ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:corrupted-harvester:cast:s1,f:xs:XP:corrupted-harvester:cast:s1	-	-	-	d864b561c9cb	-	e33e33ffbf94	-	-	2026-11-24	xproof
@@ -39,7 +39,7 @@ f1352a81-6fd5-4c4d-ada4-b81d3a9f74c0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 f13a8621-4d88-4c1f-8b6e-80f8ef383cd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f13a8621-4d88-4c1f-8b6e-80f8ef383cd2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f13baf38-27fc-4c5d-8fee-459eefdb32da	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f13f5705-e3e0-4e1e-a5b3-61e04e23a374	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f13f5705-e3e0-4e1e-a5b3-61e04e23a374	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	9d4ae01173a3	-	-	2026-11-24	xproof
 f1409c9e-f0d9-49e1-b02e-d0f04a658331	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1409c9e-f0d9-49e1-b02e-d0f04a658331	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1416577-97d0-4d6c-afd2-455798556d4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,8 +105,8 @@ f1882cc8-c81a-4131-b639-1bd6e083f8ba	cast	cast-resolve	agreed	-	X	scen	1	0	Frant
 f18a1a99-8363-4edf-9807-2e23fa007ce8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1929f1f-6aa3-4308-bbff-cab03883ac68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1993767-1d07-49c8-b8dc-04ec9840a999	cast	counter-spell	agreed	-	X	scen	1	0	Long River's Pull/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f19d06af-6caf-41d8-8d0a-d5d50bd67900	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f19d06af-6caf-41d8-8d0a-d5d50bd67900	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f19d06af-6caf-41d8-8d0a-d5d50bd67900	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fanatic-of-mogis:f0t0:s1,f:xs:XP:fanatic-of-mogis:f0t0:s1	-	-	-	d864b561c9cb	-	db26caf64258	-	-	2026-11-24	xproof
+f19d06af-6caf-41d8-8d0a-d5d50bd67900	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fanatic-of-mogis:f0t0:s1,f:xs:XP:fanatic-of-mogis:f0t0:s1	-	-	-	d864b561c9cb	-	db26caf64258	-	-	2026-11-24	xproof
 f19e7c5c-67fa-4ae4-89b8-afa0e08a6c48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f19e7c5c-67fa-4ae4-89b8-afa0e08a6c48	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f19e7c5c-67fa-4ae4-89b8-afa0e08a6c48	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -181,8 +181,8 @@ f1f3df1c-5c51-445a-b66d-eee4aab23691	cast	cast-resolve	agreed	-	X	scen	1	0	Despe
 f1f45310-d665-400d-934f-e48e7858ce8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1f45310-d665-400d-934f-e48e7858ce8c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1f77fb4-2c83-4cbf-894e-624abe6cd95f	cast	cast-resolve	agreed	-	X	scen	1	0	Perils of the Past/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f1fca987-3484-4a76-86b6-d61ef0a2cf0f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f1fca987-3484-4a76-86b6-d61ef0a2cf0f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f1fca987-3484-4a76-86b6-d61ef0a2cf0f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slaughterhorn:cast:s1,f:xs:XP:slaughterhorn:cast:s1	-	-	-	d864b561c9cb	-	d3e8d2fc34ac	-	-	2026-11-24	xproof
+f1fca987-3484-4a76-86b6-d61ef0a2cf0f	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f1feac23-8ba3-440c-828c-590f88008c31	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:necrogen-censer:cast:s1,f:xs:XP:necrogen-censer:cast:s1	-	-	-	d864b561c9cb	-	4a567a37e91b	-	-	2026-11-24	xproof
 f1feac23-8ba3-440c-828c-590f88008c31	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:necrogen-censer:cast:s1,f:xs:XP:necrogen-censer:cast:s1	-	-	-	d864b561c9cb	-	4a567a37e91b	-	-	2026-11-24	xproof
 f1ff7a67-1add-4de1-bc25-62f63626c43a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

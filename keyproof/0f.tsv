@@ -47,8 +47,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f513242-b175-4b4d-a05f-78b1b457a020	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f513242-b175-4b4d-a05f-78b1b457a020	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f51ab3d-aae9-4d8d-a881-e8835dcd7866	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f539127-535f-4e0d-abaa-e884521098d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f539127-535f-4e0d-abaa-e884521098d2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f539127-535f-4e0d-abaa-e884521098d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gatecreeper-vine:f0t0:s1,f:xs:XP:gatecreeper-vine:f0t0:s1	-	-	-	d864b561c9cb	-	49855b376e46	-	-	2026-11-24	xproof
+0f539127-535f-4e0d-abaa-e884521098d2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gatecreeper-vine:f0t0:s1,f:xs:XP:gatecreeper-vine:f0t0:s1	-	-	-	d864b561c9cb	-	49855b376e46	-	-	2026-11-24	xproof
 0f5401c2-0189-4a07-8e7b-a765ccd7c954	cast	cast-resolve	agreed	-	X	scen	1	0	Daring Thunder-Thief/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f575f18-4606-4b85-9a90-07f8d8d46d06	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f58f791-469a-4a22-996e-4906c0914858	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0fcfef04-a954-4423-82b0-c70dc64a8fbc	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fd114c4-092b-4e28-b0dc-ef529f3bc73e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fd11de4-2dfd-4345-b3cb-d7d65e11c6d9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fd11de4-2dfd-4345-b3cb-d7d65e11c6d9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0fd11de4-2dfd-4345-b3cb-d7d65e11c6d9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0fd18a9b-c112-4e48-8fd7-e53fe4500943	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fd27f59-36ec-4235-8e1f-4a4a14972f4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fd57894-b917-41c8-a394-360d1d31b236	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0fe16212-66c3-4e45-a641-7391e9b2e304	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fe602b7-9f88-4d3d-af24-7790df867ed5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fe602b7-9f88-4d3d-af24-7790df867ed5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fe66bc0-8eda-4625-a068-6a5de826466f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0fe66bc0-8eda-4625-a068-6a5de826466f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:first-response:cast:s1,f:xs:XP:first-response:cast:s1	-	-	-	d864b561c9cb	-	2f755e17a8a9	-	-	2026-11-24	xproof
 0fe66bc0-8eda-4625-a068-6a5de826466f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fe6c042-1182-4392-8938-fee36149d74f	cast	cast-resolve	agreed	-	X	scen	1	0	Baron Helmut Zemo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0fe6c042-1182-4392-8938-fee36149d74f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Baron Helmut Zemo/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -23,7 +23,7 @@ e80be353-8b19-42d2-9141-5353a8409c8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e81035b5-d922-48f8-af20-0025da4721c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e81035b5-d922-48f8-af20-0025da4721c6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e8148616-9f0b-4d4e-8d6d-18251a84e5e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e8148616-9f0b-4d4e-8d6d-18251a84e5e8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e8148616-9f0b-4d4e-8d6d-18251a84e5e8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e8180024-1979-4677-9a0d-e08d4b7c825a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e8180024-1979-4677-9a0d-e08d4b7c825a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e8180024-1979-4677-9a0d-e08d4b7c825a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ e861bc08-4f0b-4d22-9b85-9d20227fd5b4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thor
 e861bc08-4f0b-4d22-9b85-9d20227fd5b4	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Thornspire Verge/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e861bc08-4f0b-4d22-9b85-9d20227fd5b4	land	play-land	agreed	-	X	scen	1	0	Thornspire Verge/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e861ddd5-64f7-4c59-ab96-0c69ef74febe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e861ddd5-64f7-4c59-ab96-0c69ef74febe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e861ddd5-64f7-4c59-ab96-0c69ef74febe	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e86279ba-cb22-4754-90f4-38354657b8fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e86279ba-cb22-4754-90f4-38354657b8fa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e868028f-4c6f-43d1-9cc6-6f3ce2df2ec3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ e8a548e8-057e-4023-ac20-bac973dbce09	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 e8a9350a-07c1-47ed-8c4f-88e4b3b17545	cast	cast-resolve	agreed	-	FX	scen	2	0	Hop to It/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e8aa0d7d-e5f6-4d66-bdc1-315483e1b256	cast	cast-resolve	agreed	-	FX	scen	2	0	Vannifar, Evolved Enigma/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e8aa0d7d-e5f6-4d66-bdc1-315483e1b256	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vannifar, Evolved Enigma/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e8aa12f8-8922-41ed-8cdb-219c9e4b9e36	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e8aa12f8-8922-41ed-8cdb-219c9e4b9e36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:martial-glory:cast:s1,f:xs:XP:martial-glory:cast:s1	-	-	-	d864b561c9cb	-	b46567cc3e5a	-	-	2026-11-24	xproof
 e8ac0742-15f5-4cf0-888f-f1c2c97fc144	cast	cast-resolve	agreed	-	X	scen	1	0	Horta/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e8ac0742-15f5-4cf0-888f-f1c2c97fc144	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 e8b0edb8-6a69-4760-9bcd-969c6c898a16	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c41b4ad-a73f-4274-9b71-9c9834910e05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c41b4ad-a73f-4274-9b71-9c9834910e05	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c4219db-1a7a-4d61-bb8b-7998cfed1faf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c4219db-1a7a-4d61-bb8b-7998cfed1faf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9c4219db-1a7a-4d61-bb8b-7998cfed1faf	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9c430b5a-83b6-4f4f-b1d3-5737e1f61947	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c430b5a-83b6-4f4f-b1d3-5737e1f61947	f0/a0	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 9c430b5a-83b6-4f4f-b1d3-5737e1f61947	f0/a1	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -59,10 +59,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c462cd8-36f9-4e39-adf3-310ad4d76051	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c462cd8-36f9-4e39-adf3-310ad4d76051	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c46adaa-ab39-4c0a-99bd-935b6c4f732f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c46adaa-ab39-4c0a-99bd-935b6c4f732f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9c46adaa-ab39-4c0a-99bd-935b6c4f732f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9c47888b-28a5-4c43-9ee4-a9059e3c367d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rolling-thunder:cast:s1,f:xs:XP:rolling-thunder:cast:s1	-	-	-	25696bf19d5b	-	d87a30c79ecc	-	-	2026-11-24	xproof
-9c4c478c-6f0c-430a-91eb-4125a73d03a7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c4c478c-6f0c-430a-91eb-4125a73d03a7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9c4c478c-6f0c-430a-91eb-4125a73d03a7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:invasive-species:cast:s1,f:xs:XP:invasive-species:cast:s1	-	-	-	d864b561c9cb	-	764c5a9ce59b	-	-	2026-11-24	xproof
+9c4c478c-6f0c-430a-91eb-4125a73d03a7	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:invasive-species:cast:s1,f:xs:XP:invasive-species:cast:s1	-	-	-	d864b561c9cb	-	764c5a9ce59b	-	-	2026-11-24	xproof
 9c4fdd20-0396-40b7-8687-43b1035b6956	cast	cast-resolve	agreed	-	FX	scen	2	0	Rosa, Resolute White Mage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9c4fdd20-0396-40b7-8687-43b1035b6956	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rosa, Resolute White Mage/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9c4fdd20-0396-40b7-8687-43b1035b6956	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rosa, Resolute White Mage/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -95,8 +95,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c7073e9-c676-4629-814c-a96e7af905cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c7073e9-c676-4629-814c-a96e7af905cf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c724912-5afd-4813-affb-4dbda64fd4ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c77eb0a-543a-41db-ba1f-aa0163837ae0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c77eb0a-543a-41db-ba1f-aa0163837ae0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9c77eb0a-543a-41db-ba1f-aa0163837ae0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-chosen:cast:s1,f:xs:XP:ajani-s-chosen:cast:s1	-	-	-	d864b561c9cb	-	7b8d71408b4c	-	-	2026-11-24	xproof
+9c77eb0a-543a-41db-ba1f-aa0163837ae0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9c78778a-6335-4949-8ade-11d0f085cb2b	cast	cast-resolve	agreed	-	X	scen	1	0	Loki Laufeyson/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9c78778a-6335-4949-8ade-11d0f085cb2b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Loki Laufeyson/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9c78778a-6335-4949-8ade-11d0f085cb2b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Loki Laufeyson/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

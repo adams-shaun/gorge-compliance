@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c3be36d-2461-4e38-9ab4-4394cd4996e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c3be36d-2461-4e38-9ab4-4394cd4996e7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c3faf4f-83c1-4098-98b8-bae15d59b0de	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6c40f825-836e-4b76-8e43-267b4abf013b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6c40f825-836e-4b76-8e43-267b4abf013b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:devour-flesh:cast:s1,f:xs:XP:devour-flesh:cast:s1	-	-	-	d864b561c9cb	-	b5394d878753	-	-	2026-11-24	xproof
 6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:deathcap-marionette:f0t0:s2,f:xs:XP:deathcap-marionette:f0t0:s2	-	-	-	e07cf3a05ba5	-	4d838754766c	-	-	2026-11-24	xproof
 6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Deathcap Marionette/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Deathcap Marionette/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -72,8 +72,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c5ed756-b999-49f7-9a52-fb8196202f0f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Theoretical Necromancer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c728edd-ab67-44ce-b19d-aa98dfce68bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c728edd-ab67-44ce-b19d-aa98dfce68bb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6c73e533-9ed1-4df0-af12-c0174c0b52b9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6c73e533-9ed1-4df0-af12-c0174c0b52b9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6c73e533-9ed1-4df0-af12-c0174c0b52b9	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:whitewater-naiads:cast:s1,f:xs:XP:whitewater-naiads:cast:s1	-	-	-	d864b561c9cb	-	a3228106b257	-	-	2026-11-24	xproof
+6c73e533-9ed1-4df0-af12-c0174c0b52b9	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:whitewater-naiads:cast:s1,f:xs:XP:whitewater-naiads:cast:s1	-	-	-	d864b561c9cb	-	a3228106b257	-	-	2026-11-24	xproof
 6c754808-86a6-43d3-8aeb-96ec19f7396c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:renet-temporal-apprentice:f0t0:s2,f:xs:XP:renet-temporal-apprentice:f0t0:s2	-	-	-	5437c1394672	-	c50fd15d05c3	-	-	2026-11-24	xproof
 6c754808-86a6-43d3-8aeb-96ec19f7396c	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:renet-temporal-apprentice:f0t0:s2,f:xs:XP:renet-temporal-apprentice:f0t0:s2	-	-	-	5437c1394672	-	c50fd15d05c3	-	-	2026-11-24	xproof
 6c75b92a-4fc1-4f26-95be-1b92f462c111	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -79,11 +79,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 235e3231-c5e5-4696-a867-705b2c4158fe	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 2361ca87-6352-4ba3-8d91-b3d71242914d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23625877-b6db-480c-8885-a62b7d0457df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23643af9-00b7-45e1-8471-7031d08bbe30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23643af9-00b7-45e1-8471-7031d08bbe30	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+23643af9-00b7-45e1-8471-7031d08bbe30	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:strength-from-the-fallen:f0t0:s1,f:xs:XP:strength-from-the-fallen:f0t0:s1	-	-	-	d864b561c9cb	-	5055612c2814	-	-	2026-11-24	xproof
+23643af9-00b7-45e1-8471-7031d08bbe30	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:strength-from-the-fallen:f0t0:s1,f:xs:XP:strength-from-the-fallen:f0t0:s1	-	-	-	d864b561c9cb	-	5055612c2814	-	-	2026-11-24	xproof
 23669721-fe9e-49d7-9504-ae6164de723a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23669721-fe9e-49d7-9504-ae6164de723a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23674648-d1a0-437d-8a0b-4173c75b4507	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+23674648-d1a0-437d-8a0b-4173c75b4507	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coursers-accord:cast:s1,f:xs:XP:coursers-accord:cast:s1	-	-	-	d864b561c9cb	-	0c93a87cb14e	-	-	2026-11-24	xproof
 236c4ff1-8c3f-4763-8df9-925021e65726	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 236c4ff1-8c3f-4763-8df9-925021e65726	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 236c4ff1-8c3f-4763-8df9-925021e65726	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23878990-dcbd-4a2a-b4f7-ee7edb396c71	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rust-Shield Rampager/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23878990-dcbd-4a2a-b4f7-ee7edb396c71	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 23878990-dcbd-4a2a-b4f7-ee7edb396c71	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rust-Shield Rampager/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2388a064-ae84-4eac-b1d9-819a40052d12	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2388a064-ae84-4eac-b1d9-819a40052d12	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maze-glider:cast:s1,f:xs:XP:maze-glider:cast:s1	-	-	-	d864b561c9cb	-	110f5a7054a0	-	-	2026-11-24	xproof
 238b270c-152a-48e5-a955-65f5cb80c174	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 238b270c-152a-48e5-a955-65f5cb80c174	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 238f2c86-4376-48f2-ae71-c10d3d785163	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

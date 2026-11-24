@@ -23,8 +23,8 @@ af1553eb-4f9f-4335-9078-56649bd8d8fc	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Bras
 af1553eb-4f9f-4335-9078-56649bd8d8fc	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Brass's Tunnel-Grinder/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af18e496-fef9-4869-867b-bdac653cafd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af18e496-fef9-4869-867b-bdac653cafd0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af199b80-d5d8-417a-97d5-459a5bd48b22	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af199b80-d5d8-417a-97d5-459a5bd48b22	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af199b80-d5d8-417a-97d5-459a5bd48b22	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prescient-chimera:cast:s1,f:xs:XP:prescient-chimera:cast:s1	-	-	-	d864b561c9cb	-	5c05ed31f705	-	-	2026-11-24	xproof
+af199b80-d5d8-417a-97d5-459a5bd48b22	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 af1acf07-39e2-441e-a1e0-1db535535e2e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:white-mage-s-staff:f0t0:s2,f:xs:XP:white-mage-s-staff:f0t0:s2	-	-	-	267e485f6204	-	74d975fbaf2e	-	-	2026-11-24	xproof
 af1acf07-39e2-441e-a1e0-1db535535e2e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	White Mage's Staff/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af1acf07-39e2-441e-a1e0-1db535535e2e	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:white-mage-s-staff:f0t0:s2,f:xs:XP:white-mage-s-staff:f0t0:s2	-	-	-	267e485f6204	-	74d975fbaf2e	-	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ af6124cf-e8c5-44f3-964a-4ac0caa6f22b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 af6351a9-ac01-4fed-9ea9-a352d21a8312	cast	cast-resolve	agreed	-	X	scen	1	0	Tenacious Drone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af6351a9-ac01-4fed-9ea9-a352d21a8312	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 af642b8d-a085-4a07-8a1d-ca385d4700f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af642b8d-a085-4a07-8a1d-ca385d4700f7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af642b8d-a085-4a07-8a1d-ca385d4700f7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 af6438b9-3fde-45c9-af69-dff686c1e0de	cast	cast-resolve	agreed	-	X	scen	1	0	Virtue of Courage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af6438b9-3fde-45c9-af69-dff686c1e0de	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Virtue of Courage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af698bd5-5f56-4d2a-9f02-8c3e781210cd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,9 +128,9 @@ afacc200-16ff-40f3-9d43-268438131d24	combat#0.block	combat#0.block	agreed	-	X	sc
 afacc200-16ff-40f3-9d43-268438131d24	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kellan, the Kid/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 afacd2b1-1733-4b28-b834-71a31149fa00	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afacd2b1-1733-4b28-b834-71a31149fa00	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-afaef788-34d1-460b-b884-9d7ae6ddeb18	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-afb0c14c-41ac-4536-bfce-f1c36066b278	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-afb0c14c-41ac-4536-bfce-f1c36066b278	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+afaef788-34d1-460b-b884-9d7ae6ddeb18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toxic-deluge:cast:s1,f:xs:XP:toxic-deluge:cast:s1	-	-	-	d864b561c9cb	-	bad3021bf2b7	-	-	2026-11-24	xproof
+afb0c14c-41ac-4536-bfce-f1c36066b278	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chained-to-the-rocks:f0t0:s1,f:xs:XP:chained-to-the-rocks:f0t0:s1	-	-	-	d864b561c9cb	-	a290929b1abf	-	-	2026-11-24	xproof
+afb0c14c-41ac-4536-bfce-f1c36066b278	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chained-to-the-rocks:f0t0:s1,f:xs:XP:chained-to-the-rocks:f0t0:s1	-	-	-	d864b561c9cb	-	a290929b1abf	-	-	2026-11-24	xproof
 afb278f1-0e21-4f6d-96bb-c34aa3ef96b0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afb71560-0fc9-4ea5-9d52-d93c17d72519	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afb71560-0fc9-4ea5-9d52-d93c17d72519	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

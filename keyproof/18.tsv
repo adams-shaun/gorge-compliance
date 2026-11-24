@@ -61,8 +61,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1829f1dc-1fa9-4361-b318-d4dee280e6fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1829f1dc-1fa9-4361-b318-d4dee280e6fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1829f1dc-1fa9-4361-b318-d4dee280e6fd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-182c9af9-d867-4848-ab36-ac7b1914f41a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-182c9af9-d867-4848-ab36-ac7b1914f41a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+182c9af9-d867-4848-ab36-ac7b1914f41a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heliod-s-emissary:cast:s1,f:xs:XP:heliod-s-emissary:cast:s1	-	-	-	d864b561c9cb	-	458c52057b4e	-	-	2026-11-24	xproof
+182c9af9-d867-4848-ab36-ac7b1914f41a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:heliod-s-emissary:f0t0:s1,f:xs:XP:heliod-s-emissary:f0t0:s1	-	-	-	d864b561c9cb	-	458c52057b4e	-	-	2026-11-24	xproof
 182d38b4-48bb-4050-a19a-c0a6bb241bbd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 182d38b4-48bb-4050-a19a-c0a6bb241bbd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18379907-ddba-479e-8953-3adc1ed40458	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:autochthon-wurm:cast:s1,f:xs:XP:autochthon-wurm:cast:s1	-	-	-	64a08ba7d913	-	cd801f9d3b80	-	-	2026-11-24	xproof
@@ -173,8 +173,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18ae6be7-cfb6-42e3-a04e-99e9c1471ecd	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ae6be7-cfb6-42e3-a04e-99e9c1471ecd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18aee20d-ab73-4fdb-a65c-101beae5fcf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18b09c2d-20cb-40e9-8209-8a1ec2edde97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18b09c2d-20cb-40e9-8209-8a1ec2edde97	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18b09c2d-20cb-40e9-8209-8a1ec2edde97	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viashino-racketeer:f0t0:s1,f:xs:XP:viashino-racketeer:f0t0:s1	-	-	-	d864b561c9cb	-	be0427be2c2e	-	-	2026-11-24	xproof
+18b09c2d-20cb-40e9-8209-8a1ec2edde97	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:viashino-racketeer:f0t0:s1,f:xs:XP:viashino-racketeer:f0t0:s1	-	-	-	d864b561c9cb	-	be0427be2c2e	-	-	2026-11-24	xproof
 18b0b583-d17b-4c67-bc67-c4d9aad155c7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18b0b583-d17b-4c67-bc67-c4d9aad155c7	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18b0b583-d17b-4c67-bc67-c4d9aad155c7	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -185,8 +185,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18bb35a8-01ac-414f-9a45-e550060ff905	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18bcf4c5-7abc-4ca5-b805-4bbebf4e433c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crypt-ripper:cast:s1,f:xs:XP:crypt-ripper:cast:s1	-	-	-	8a1b1a193ec0	-	971d92cd78da	-	-	2026-11-24	xproof
 18bcf4c5-7abc-4ca5-b805-4bbebf4e433c	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:crypt-ripper:f0a0:s1,f:xs:XP:crypt-ripper:f0a0:s1	-	-	-	8a1b1a193ec0	-	971d92cd78da	-	-	2026-11-24	xproof
-18c5e7a0-4397-48bb-b993-1c3e3b08be2c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18c5e7a0-4397-48bb-b993-1c3e3b08be2c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18c5e7a0-4397-48bb-b993-1c3e3b08be2c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scholar-of-athreos:cast:s1,f:xs:XP:scholar-of-athreos:cast:s1	-	-	-	d864b561c9cb	-	4f3764e82733	-	-	2026-11-24	xproof
+18c5e7a0-4397-48bb-b993-1c3e3b08be2c	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:scholar-of-athreos:f0a0:s1,f:xs:XP:scholar-of-athreos:f0a0:s1	-	-	-	d864b561c9cb	-	4f3764e82733	-	-	2026-11-24	xproof
 18c65823-01ae-4314-a254-d89a1a362633	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18c65823-01ae-4314-a254-d89a1a362633	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:harbor-bandit:f0a0:s1,f:xs:XP:harbor-bandit:f0a0:s1	-	-	-	d864b561c9cb	-	b92b793b5765	-	-	2026-11-24	xproof
 18ca77c9-e7d2-4afc-a72b-98772578fad7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
