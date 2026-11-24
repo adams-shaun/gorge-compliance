@@ -19,6 +19,8 @@ echo "$c $XENGINE_RANDOM_SETS $XENGINE_DIRAC $XENGINE_SCOPE ${XENGINE_DIRAC_EVER
 if [ "$c" = "${FAIL_CHUNK:-}" ]; then exit 1; fi
 if [ "$c" = "${HANG_CHUNK:-}" ]; then exec sleep 60; fi
 mkdir -p "$d/tapes" "$d/diff-forge/finds/diverge/x" "$d/diff-forge/finds/harness/y" "$d/adjudicate"
+for f in input.jsonl gorge.json forge.json REPRO.md verdict.json; do echo x >"$d/diff-forge/finds/diverge/x/$f"; done
+echo x >"$d/diff-forge/finds/harness/y/input.jsonl"
 echo row >"$d/lower.jsonl"
 echo row >"$d/gorge.jsonl"
 echo row >"$d/dirac.jsonl"
@@ -35,6 +37,7 @@ check "the sets, dirac and no scopes reach the sweep" '[ "$(head -1 "$r/calls")"
 check "rows stay" '[ -e "$r/RAND/0/lower.jsonl" ] && [ -e "$r/RAND/0/dirac.jsonl" ]'
 check "tapes and follower rows go" '[ ! -e "$r/RAND/0/tapes" ] && [ ! -e "$r/RAND/0/gorge.jsonl" ]'
 check "repros of diverged items stay, others go" '[ -e "$r/RAND/0/diff-forge/finds/diverge/x" ] && [ ! -e "$r/RAND/0/diff-forge/finds/harness" ]'
+check "a diverged find keeps its play inputs and cut rows" 'for f in input.jsonl gorge.json forge.json REPRO.md verdict.json; do [ -e "$r/RAND/0/diff-forge/finds/diverge/x/$f" ] || exit 1; done'
 XENGINE_ROOT=$r bash "$ROOT/scripts/xengine-random.sh" --run p --sets 'FDN BLB' --max-chunks 4 >/dev/null
 check "a rerun resumes after the done chunks" '[ "$(cut -d" " -f1 "$r/calls" | tr -d "\n")" = 0123 ]'
 
