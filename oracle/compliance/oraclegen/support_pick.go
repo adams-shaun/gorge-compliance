@@ -38,17 +38,28 @@ type supportAnswers struct {
 // stack object is present, minus one, is the step that announced it. That is
 // structural, not card- or timing-table-based, so a spell, an ETB trigger, an
 // attack trigger and an activated support all land on the step their own
-// object first reached the stack.
+// object first reached the stack. A trigger announced AND
+// resolved inside the decision's own step never shows in a checkpoint (the
+// generated cast-resolve shape): only its permanent spell does, and the answers
+// stay on that step (supportSpellTrigger).
 func supportPick(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapshot, d rules.OracleDecision) (supportAnswers, bool) {
 	if reg == nil || d.Step < 0 || d.Resume != "counter_pick" {
 		return supportAnswers{}, false
 	}
 	obj, matched, onStack := counterPickSource(reg, sc, snaps, d, supportMatch)
-	if !matched {
-		return supportAnswers{}, false
-	}
 	step := d.Step
-	if onStack {
+	switch {
+	case !matched:
+		// A permanent spell resolving inside the decision's own step puts its
+		// enters trigger on the stack and resolves it within that same step
+		// (the generated cast-resolve shape is one "resolve" step): no
+		// checkpoint ever holds the trigger, only the spell, and the spell's
+		// own abilities carry no Support$. The trigger was announced during
+		// this very step, so the answers stay on it.
+		if !supportSpellTrigger(reg, snaps, d) {
+			return supportAnswers{}, false
+		}
+	case onStack:
 		var ok bool
 		step, ok = supportAnnounceStep(snaps, d.Step, obj)
 		if !ok {
@@ -56,17 +67,56 @@ func supportPick(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapshot,
 			// than move the answer to a step the replay may not consume at.
 			return supportAnswers{}, false
 		}
-	} else if d.Step >= len(sc.Steps) ||
-		(sc.Steps[d.Step].Op != "cast" && sc.Steps[d.Step].Op != "activate") {
-		// The fallback source came from the decision's own step; only a
-		// cast/activate step announces a target there.
-		return supportAnswers{}, false
+	default:
+		if d.Step >= len(sc.Steps) ||
+			(sc.Steps[d.Step].Op != "cast" && sc.Steps[d.Step].Op != "activate") {
+			// The fallback source came from the decision's own step; only a
+			// cast/activate step announces a target there.
+			return supportAnswers{}, false
+		}
 	}
 	as := supportTargetAnswers(d)
 	if len(as) == 0 || step < 0 || step > d.Step {
 		return supportAnswers{}, false
 	}
 	return supportAnswers{step: step, answers: as}, true
+}
+
+// supportSpellTrigger reports whether the object resolving at the decision's
+// own step is a spell whose printed ENTERS trigger (not its spell ability)
+// carries PutCounter's Support$ parameter. The stack snapshot at the step is
+// the authority, read as counterPickSource reads it: the first object whose
+// source card resolves.
+func supportSpellTrigger(reg *cards.Registry, snaps []rules.OracleSnapshot, d rules.OracleDecision) bool {
+	if d.Step < 0 || d.Step >= len(snaps) {
+		return false
+	}
+	snap := snaps[d.Step]
+	for _, o := range snap.Stack {
+		if o.Source == "" {
+			continue
+		}
+		src := counterPickSourceRef(reg, snap, o.Source)
+		c, ok := reg.Lookup(oraclediffRefName(src))
+		if !ok {
+			continue
+		}
+		if o.Kind != "spell" {
+			return false
+		}
+		for _, f := range digFaces(c, src) {
+			if f == nil {
+				continue
+			}
+			for _, tr := range f.Triggers {
+				if counterPickInChain(tr.Effect, supportMatch) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+	return false
 }
 
 // supportAnnounceStep returns the scenario step during which want was put on

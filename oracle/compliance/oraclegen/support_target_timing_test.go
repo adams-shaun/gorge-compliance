@@ -153,6 +153,13 @@ func TestSupportTargetTiming(t *testing.T) {
 		if got := out[5]; !reflect.DeepEqual(got, want) {
 			t.Fatalf("cast step answers = %+v, want %+v (all: %+v)", got, want, out)
 		}
+		for _, d := range res.Decisions {
+			if d.Resume == "counter_pick" {
+				if got := out[d.Step]; len(got) != 0 {
+					t.Fatalf("resolution step %d still scripts answers: %+v", d.Step, got)
+				}
+			}
+		}
 		if got := sc.Steps[5].Targets; len(got) != 0 {
 			t.Fatalf("cast step still carries inline targets %v; XMage would pre-fill the support slot", got)
 		}
