@@ -35,6 +35,18 @@ func targetCarriers(t *testing.T, reg *cards.Registry) []string {
 	}
 	sort.Strings(got)
 	got = uniqueSorted(got)
+	if !reflect.DeepEqual(got, want) && os.Getenv("TARGET_CARRIERS_REPIN") == "1" {
+		// A FORGE_REF move re-pins here: TARGET_CARRIERS_REPIN=1 make test-one ... RUN='^TestTargetCarrierCensus$'.
+		b, err := json.Marshal(got)
+		if err == nil {
+			err = os.WriteFile(filepath.Join("testdata", "target-carriers.json"), append(b, '\n'), 0o644)
+		}
+		if err != nil {
+			t.Fatalf("re-pin target carrier census: %v", err)
+		}
+		t.Logf("re-pinned target carrier census: %d -> %d", len(want), len(got))
+		return got
+	}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("target carrier census changed: got %d carriers, want %d; update the pinned identities only for an intentional corpus change\nfirst got: %v\nfirst want: %v", len(got), len(want), got[:min(10, len(got))], want[:min(10, len(want))])
 	}
