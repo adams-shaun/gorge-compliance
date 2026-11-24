@@ -27,7 +27,8 @@ use engine::game::{apply, start_game_skip_mulligan, start_game_with_starting_pla
 use engine::types::ability::TargetRef;
 use engine::types::actions::{GameAction, MulliganChoice};
 use engine::types::game_state::{
-    GameState, ManaChoice, ManaChoiceContext, ManaChoicePrompt, MulliganDecisionPhase, WaitingFor,
+    GameState, ManaChoice, ManaChoiceContext, ManaChoicePrompt, MulliganDecisionPhase,
+    ReplacementChoiceKind, WaitingFor,
 };
 use engine::types::mana::ManaType;
 use engine::types::identifiers::ObjectId;
@@ -40,7 +41,7 @@ use crate::json::canonical;
 use crate::semantic as sem;
 use crate::server::{Backend, CatalogDeck, Outcome, Reset};
 use crate::view::{looked_ref, mana_letter, object_ref, observation, seat, spell_entry, Ids};
-use crate::waiting::{classify, Family, Pose};
+use crate::waiting::{classify, unenforceable_pool_rule, Family, Pose};
 
 /// Counts of what the host could not pose. Printed to stderr when the process ends.
 #[derive(Default, Debug)]
@@ -764,7 +765,7 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
         // Every pool prompt is one `pool_spec` arm: a variant that classifies as `Pool` and is
         // missing there is a `followup_mismatch`, never a silent fall-through.
         (_, Family::Pool) => {
-            let spec = pool_spec(&w)?;
+            let spec = pool_spec(live, &w)?;
             live.acting = spec.who;
             return select_group(live, spec);
         }
@@ -790,6 +791,7 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 max: modal.max_choices,
                 kind: SelKind::Modes(modal.mode_count as u32),
                 source: Some(source),
+                offer_all: false,
             };
             return select_group(live, spec);
         }
@@ -1027,7 +1029,9 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 return Err(Stop::Halt("unresolvable_source", "unless payment source".into()));
             };
             for pay in [false, true] {
-                // Paying is only a legal candidate when phase accepts it; declining always is.
+                // `applies` only asks whether phase accepts the action; it is not an affordability
+                // probe. An unaffordable `UnlessPayment` pay is phase's ordinary "effect happens"
+                // path and returns `Ok`, so both pay and decline stay offered, matching phase's AI.
                 if pay && !applies(&live.state, *player, GameAction::PayUnlessCost { pay }) {
                     continue;
                 }
@@ -1048,16 +1052,27 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 });
             }
         }
-        (WaitingFor::ReplacementChoice { player, candidate_count, candidates, .. }, Family::Replacement) => {
+        (WaitingFor::ReplacementChoice { player, candidate_count, candidates, kind, .. }, Family::Replacement) => {
             live.acting = *player;
             let count = (*candidate_count as u32).max(2);
             for i in 0..*candidate_count {
                 let source = candidates.get(i).and_then(|c| viewer(live, *player, c.source_id));
-                let affected = source.clone().map(sem::target_object).unwrap_or_else(|| sem::target_player(seat(*player)));
-                cands.push(Cand {
-                    semantic: sem::choose_replacement(affected, "other", source, i as u32, count),
-                    effect: Effect::Act(GameAction::ChooseReplacement { index: i }),
-                });
+                let label = candidates.get(i).map(|c| c.description.as_str());
+                let semantic = match kind {
+                    // CR 616.1e: ordering two or more distinct replacements.
+                    ReplacementChoiceKind::Order => {
+                        let affected = source.clone().map(sem::target_object).unwrap_or_else(|| sem::target_player(seat(*player)));
+                        sem::choose_replacement(affected, "other", source, i as u32, count)
+                    }
+                    // A single optional ("you may") replacement: index 0 accepts, index 1 declines.
+                    // It is a yes/no, not an ordering (`types/game_state.rs` at the pin).
+                    ReplacementChoiceKind::OptionalBranch => sem::choose_boolean(source, "optional_replacement", i == 0),
+                    // A found card's destination: mutually exclusive options, not an ordering.
+                    ReplacementChoiceKind::SearchFoundDestination => {
+                        sem::choose_option(source, "search_found_destination", i as u32, count, label)
+                    }
+                };
+                cands.push(Cand { semantic, effect: Effect::Act(GameAction::ChooseReplacement { index: i }) });
             }
         }
         _ => return Err(Stop::Halt("followup_mismatch", format!("{:?} for {family:?}", classify(&w).0))),
@@ -1079,17 +1094,26 @@ struct PoolSpec {
     max: usize,
     kind: SelKind,
     source: Option<ObjectId>,
+    /// Present the items even when every one of them must be picked. The default auto-applies an
+    /// all-items selection; an aggregate ward sacrifice instead shows its witness set as picks so
+    /// the host sees the whole `SelectCards` action it is about to submit.
+    offer_all: bool,
 }
 
 impl PoolSpec {
     fn cards(who: PlayerId, pool: Vec<ObjectId>, min: usize, max: usize, kind: SelKind, source: Option<ObjectId>) -> Self {
-        PoolSpec { who, items: pool.into_iter().map(|c| c.0 as usize).collect(), min, max, kind, source }
+        PoolSpec { who, items: pool.into_iter().map(|c| c.0 as usize).collect(), min, max, kind, source, offer_all: false }
     }
 }
 
 /// The selection a `WaitingFor` of the pool family asks.
-fn pool_spec(w: &WaitingFor) -> Result<PoolSpec, Stop> {
+fn pool_spec(live: &Live, w: &WaitingFor) -> Result<PoolSpec, Stop> {
     use engine::types::game_state::PayCostKind;
+    if let Some(name) = unenforceable_pool_rule(w) {
+        // `classify` already turns this into `Unposed`; this is the second gate for any path that
+        // reaches a pool directly. A hard error is better than a `submit_rejected` halt.
+        return Err(Stop::Halt("unenforceable_pool_rule", format!("{name} whole-set constraint")));
+    }
     let cards = |who: &PlayerId, pool: &[ObjectId], min: usize, max: usize, purpose: &'static str, src: Option<ObjectId>| {
         Ok(PoolSpec::cards(*who, pool.to_vec(), min, max, SelKind::Cards(purpose), src))
     };
@@ -1139,11 +1163,56 @@ fn pool_spec(w: &WaitingFor) -> Result<PoolSpec, Stop> {
         WaitingFor::EmpowerJaceChoice { player, source_id, choices, .. } => cards(player, choices, 1, 1, "other", Some(*source_id)),
         WaitingFor::SpellCopyOrderChoice { player, source_id, choices } => cards(player, choices, 1, 1, "other", Some(*source_id)),
         WaitingFor::WardDiscardChoice { player, cards: pool, .. } => cards(player, pool, 1, 1, "discard", None),
-        WaitingFor::WardSacrificeChoice { player, permanents, .. } => cards(player, permanents, 1, 1, "sacrifice", None),
+        WaitingFor::WardSacrificeChoice { player, permanents, min_total_power, .. } => {
+            // CR 118.12a + CR 702.21a: the aggregate form validates the whole set's total power, so
+            // offer the engine's own deterministic threshold witness as the one aggregate set rather
+            // than each single permanent (which phase would reject below the threshold).
+            let Some(threshold) = min_total_power else {
+                return cards(player, permanents, 1, 1, "sacrifice", None);
+            };
+            let powers: Vec<(ObjectId, i32)> = permanents
+                .iter()
+                .filter_map(|id| live.state.objects.get(id).map(|o| (*id, o.power.unwrap_or(0))))
+                .collect();
+            let witness = ward_witness(&powers, *threshold).ok_or_else(|| {
+                Stop::Halt("dead_end", format!("no ward sacrifice set reaches total power {threshold}"))
+            })?;
+            let n = witness.len();
+            Ok(PoolSpec {
+                who: *player,
+                items: witness.into_iter().map(|id| id.0 as usize).collect(),
+                min: n,
+                max: n,
+                kind: SelKind::Cards("sacrifice"),
+                source: None,
+                offer_all: true,
+            })
+        }
         WaitingFor::UnlessBounceChoice { player, permanents, .. } => cards(player, permanents, 1, 1, "return_to_hand", None),
         WaitingFor::ChooseLegend { player, candidates, .. } => Ok(PoolSpec::cards(*player, candidates.clone(), 1, 1, SelKind::Legend, None)),
         other => Err(Stop::Halt("followup_mismatch", format!("{} is not a pool", classify(other).0))),
     }
+}
+
+/// Deterministic aggregate ward witness: highest power first, objects of equal power by id. A ward
+/// prompt is only raised when the pool can meet `threshold`, so `None` means genuinely unpayable.
+/// Mirrors phase's `ai_support::power_threshold_witness` without importing its `pub(crate)` helper.
+fn ward_witness(powers: &[(ObjectId, i32)], threshold: i32) -> Option<Vec<ObjectId>> {
+    let mut objects: Vec<(ObjectId, i32)> = powers.iter().copied().collect::<BTreeMap<_, _>>().into_iter().collect();
+    objects.sort_by(|a, b| b.1.cmp(&a.1).then(a.0 .0.cmp(&b.0 .0)));
+    let mut total = 0;
+    let mut chosen = Vec::new();
+    for (id, power) in objects {
+        if power <= 0 && !chosen.is_empty() {
+            break;
+        }
+        chosen.push(id);
+        total += power;
+        if total >= threshold {
+            return Some(chosen);
+        }
+    }
+    None
 }
 
 /// A ref the observation lists as a record, or `None` (V4: every referenced id is a record).
@@ -1176,7 +1245,9 @@ fn selection_action(kind: &SelKind, picks: &[usize]) -> GameAction {
 fn select_group(live: &mut Live, spec: PoolSpec) -> Result<Built, Stop> {
     let max = spec.max.min(spec.items.len());
     let min = spec.min.min(max);
-    if max == 0 || spec.items.len() <= min {
+    // A `min..=max` selection with every item required is normally auto-applied: there is nothing
+    // to choose. `offer_all` keeps the witness set visible as picks for an aggregate ward cost.
+    if !spec.offer_all && (max == 0 || spec.items.len() <= min) {
         // Nothing to choose: no pick can be made, or every item must be picked.
         let all = if max == 0 { vec![] } else { spec.items.clone() };
         if matches!(spec.kind, SelKind::Legend) && all.is_empty() {
@@ -1505,5 +1576,36 @@ mod tests {
             "stack": [{"object_id": "s"}], "known": []});
         let ids: Vec<String> = observed_ids(&obs).into_keys().collect();
         assert_eq!(ids, vec!["a".to_string(), "s".to_string()]);
+    }
+
+    /// An aggregate ward pool gets a witness set whose total power meets the threshold: highest power
+    /// first, ties by id, and no zero/negative-power padding once a positive pick is in. The same
+    /// input always gives the same set, and every witness satisfies the handler's own checks
+    /// (non-empty, unique, all eligible, total power at the threshold).
+    #[test]
+    fn ward_witness_reaches_the_aggregate_threshold_deterministically() {
+        let powers = [(ObjectId(3), 2), (ObjectId(1), 5), (ObjectId(2), 2), (ObjectId(4), -1)];
+        let accepted = |threshold: i32| {
+            let witness = ward_witness(&powers, threshold).expect("threshold is reachable");
+            assert!(!witness.is_empty());
+            assert_eq!(
+                witness.len(),
+                witness.iter().copied().collect::<std::collections::BTreeSet<_>>().len(),
+                "the handler rejects duplicate selections",
+            );
+            let total: i32 = witness
+                .iter()
+                .map(|id| powers.iter().find(|(power_id, _)| power_id == id).expect("eligible").1)
+                .sum();
+            assert!(total >= threshold, "the handler rejects a set below the aggregate threshold");
+            witness
+        };
+        assert_eq!(accepted(4), vec![ObjectId(1)]);
+        assert_eq!(accepted(7), vec![ObjectId(1), ObjectId(2)]);
+        assert_eq!(accepted(9), vec![ObjectId(1), ObjectId(2), ObjectId(3)]);
+        // 5 + 2 + 2 = 9: the negative-power permanent is only usable when nothing else is.
+        assert_eq!(ward_witness(&powers, 10), None);
+        assert_eq!(ward_witness(&[(ObjectId(1), 0)], 0), Some(vec![ObjectId(1)]));
+        assert_eq!(ward_witness(&[(ObjectId(1), 0), (ObjectId(2), -1)], 1), None);
     }
 }

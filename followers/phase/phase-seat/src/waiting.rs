@@ -5,8 +5,27 @@
 //! into a default. An [`Pose::Unposed`] variant is never answered by a heuristic. The game halts with
 //! `engine_contract_failure:unmapped_decision`, the variant name goes to stderr and into the
 //! per-variant census (`game::Census`), and the run counts it as an `engine_error`.
+//!
+//! A posed pool prompt must not carry a whole-set rule the pool machinery cannot enforce: phase
+//! validates the completed `SelectCards` set, so an incremental picker could submit a set phase
+//! rejects (`submit_rejected`). [`unenforceable_pool_rule`] is the one gate for that class; a
+//! constrained prompt is `Unposed` (a named halt) rather than passed to `game::build`.
 
+use engine::types::ability::SearchSelectionConstraint;
 use engine::types::game_state::WaitingFor;
+
+/// The whole-set rules `game::select_group` cannot enforce today. A prompt carrying one is
+/// `Unposed`, never posed with a candidate phase would reject. Every constraint-bearing pool
+/// variant belongs here: `SearchSelectionConstraint` and `ChooseFromZoneConstraint` are checked on
+/// the completed set, not on each incremental pick. `game::pool_spec` re-checks this gate, so a
+/// caller that bypasses `classify` still cannot submit a rejected set.
+pub(crate) fn unenforceable_pool_rule(w: &WaitingFor) -> Option<&'static str> {
+    match w {
+        WaitingFor::SearchChoice { constraint, .. } if !matches!(constraint, SearchSelectionConstraint::None) => Some("SearchChoice"),
+        WaitingFor::ChooseFromZoneChoice { constraint: Some(_), .. } => Some("ChooseFromZoneChoice"),
+        _ => None,
+    }
+}
 
 /// How a posed prompt becomes candidates (one family per `game` mapper).
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -72,6 +91,9 @@ pub enum Pose {
 
 /// The variant's name and how it is posed.
 pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
+    if let Some(name) = unenforceable_pool_rule(w) {
+        return (name, Pose::Unposed);
+    }
     match w {
         WaitingFor::Priority { .. } => ("Priority", Pose::Posed(Family::Priority)),
         WaitingFor::ResolveAllConsent { .. } => ("ResolveAllConsent", Pose::Unposed),
@@ -227,6 +249,12 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+    use engine::types::ability::{ChooseFromZoneConstraint, Comparator, Effect, ResolvedAbility};
+    use engine::types::card_type::CoreType;
+    use engine::types::identifiers::ObjectId;
+    use engine::types::player::PlayerId;
+
     /// The arms above are the whole enum: the compiler holds the match exhaustive, and this holds the
     /// count and the no-`_` rule.
     #[test]
@@ -246,5 +274,93 @@ mod tests {
         assert_eq!(posed, 40);
         let terminal = body.lines().filter(|l| l.trim_start().starts_with("WaitingFor::") && l.contains("Pose::Terminal")).count();
         assert_eq!(terminal, 1);
+    }
+
+    /// Every variant `classify` poses is named by an actual seat arm: `game::build` for a family arm,
+    /// `game::pool_spec` for a pool. Without this, a deleted arm would fall into `build`'s catch-all
+    /// and pose a `followup_mismatch` instead of failing at test time.
+    #[test]
+    fn every_posed_variant_has_a_seat_arm() {
+        let waiting = include_str!("waiting.rs");
+        let game = include_str!("game.rs");
+        let classify = waiting.split("pub fn classify").nth(1).unwrap().split("#[cfg(test)]").next().unwrap();
+        let build = game.split("fn build(").nth(1).unwrap().split("/// What a pool selection asks").next().unwrap();
+        let pool = game.split("fn pool_spec(").nth(1).unwrap().split("/// A ref the observation lists").next().unwrap();
+        let mut posed = 0;
+        for line in classify.lines().filter(|l| l.trim_start().starts_with("WaitingFor::") && l.contains("Pose::Posed(")) {
+            for part in line.split("WaitingFor::").skip(1) {
+                let variant: String = part.chars().take_while(|c| c.is_alphanumeric() || *c == '_').collect();
+                if variant.is_empty() {
+                    continue;
+                }
+                posed += 1;
+                let arm = format!("WaitingFor::{variant}");
+                assert!(build.contains(&arm) || pool.contains(&arm), "{variant} is posed but has no build/pool_spec arm");
+            }
+            let family: String = line.split("Family::").nth(1).unwrap_or("").chars().take_while(|c| c.is_alphanumeric()).collect();
+            if !family.is_empty() && family != "Pool" {
+                assert!(build.contains(&format!("Family::{family}")), "posed family {family} has no build arm");
+            }
+        }
+        assert_eq!(posed, 40, "the scan must see every posed variant");
+    }
+
+    /// A whole-set constraint is validated on the completed `SelectCards`, which the incremental
+    /// pool machinery cannot enforce. `classify` must fail closed (Unposed) instead of offering a
+    /// set phase rejects. Ward's aggregate form is excepted: `game::pool_spec` substitutes the
+    /// engine's threshold witness, so every offered pick belongs to an accepted set.
+    #[test]
+    fn whole_set_constraints_are_posed_only_where_enforced() {
+        let search = |constraint| WaitingFor::SearchChoice {
+            player: PlayerId(0),
+            library_owner: None,
+            cards: vec![ObjectId(1)],
+            count: 1,
+            reveal: false,
+            up_to: false,
+            allows_partial_find: false,
+            constraint,
+            ordering_hint: Default::default(),
+            split: None,
+        };
+        assert_eq!(
+            classify(&search(SearchSelectionConstraint::None)),
+            ("SearchChoice", Pose::Posed(Family::Pool)),
+        );
+        assert_eq!(
+            classify(&search(SearchSelectionConstraint::TotalManaValue { comparator: Comparator::LE, value: 3 })),
+            ("SearchChoice", Pose::Unposed),
+            "a search constraint the incremental picker cannot enforce must fail closed",
+        );
+
+        let zone = |constraint| WaitingFor::ChooseFromZoneChoice {
+            player: PlayerId(0),
+            cards: vec![ObjectId(1)],
+            count: 1,
+            up_to: false,
+            constraint,
+            source_id: ObjectId(1),
+            reciprocal_role: None,
+        };
+        assert_eq!(classify(&zone(None)), ("ChooseFromZoneChoice", Pose::Posed(Family::Pool)));
+        assert_eq!(
+            classify(&zone(Some(ChooseFromZoneConstraint::DistinctCardTypes { categories: vec![CoreType::Creature] }))),
+            ("ChooseFromZoneChoice", Pose::Unposed),
+            "a zone-choice constraint the incremental picker cannot enforce must fail closed",
+        );
+
+        let ward = |min_total_power| WaitingFor::WardSacrificeChoice {
+            player: PlayerId(0),
+            permanents: vec![ObjectId(1)],
+            pending_effect: Box::new(ResolvedAbility::new(Effect::NoOp, vec![], ObjectId(1), PlayerId(0))),
+            remaining: 1,
+            min_total_power,
+        };
+        assert_eq!(classify(&ward(None)), ("WardSacrificeChoice", Pose::Posed(Family::Pool)));
+        assert_eq!(
+            classify(&ward(Some(2))),
+            ("WardSacrificeChoice", Pose::Posed(Family::Pool)),
+            "the aggregate form is posed through the threshold witness",
+        );
     }
 }
