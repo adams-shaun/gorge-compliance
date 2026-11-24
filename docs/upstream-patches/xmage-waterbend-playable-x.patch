@@ -32,14 +32,13 @@ index 2724a3a7f79..5e940394dfa 100644
  
      @Test
 diff --git a/Mage/src/main/java/mage/players/PlayerImpl.java b/Mage/src/main/java/mage/players/PlayerImpl.java
-index 55465a29d39..83740c1b2b8 100644
+index 55465a29d39..0c97291756b 100644
 --- a/Mage/src/main/java/mage/players/PlayerImpl.java
 +++ b/Mage/src/main/java/mage/players/PlayerImpl.java
-@@ -16,10 +16,13 @@ import mage.abilities.common.PassAbility;
+@@ -16,10 +16,12 @@ import mage.abilities.common.PassAbility;
  import mage.abilities.common.PlayLandAsCommanderAbility;
  import mage.abilities.common.WhileSearchingPlayFromLibraryAbility;
  import mage.abilities.costs.*;
-+import mage.abilities.costs.common.WaterbendCost;
 +import mage.abilities.costs.common.WaterbendXCost;
  import mage.abilities.costs.mana.AlternateManaPaymentAbility;
  import mage.abilities.costs.mana.ManaCost;
@@ -49,7 +48,7 @@ index 55465a29d39..83740c1b2b8 100644
  import mage.abilities.effects.AuraReplacementEffect;
  import mage.abilities.effects.RestrictionEffect;
  import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
-@@ -3900,12 +3903,28 @@ public abstract class PlayerImpl implements Player, Serializable {
+@@ -3900,12 +3902,28 @@ public abstract class PlayerImpl implements Player, Serializable {
              // Get the ability, if any, which allows for spending many as if it were another color.
              Set<ApprovingObject> approvingObjects = game.getContinuousEffects().asThough(ability.getSourceId(),
                      AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
@@ -79,16 +78,7 @@ index 55465a29d39..83740c1b2b8 100644
                      // TODO: SPEND_OTHER_MANA effects with getAsThoughManaType can change mana type to pay,
                      //  but that code processing it as any color, need to test and fix another use cases
                      //  (example: Sunglasses of Urza - may spend white mana as though it were red mana)
-@@ -3914,7 +3933,7 @@ public abstract class PlayerImpl implements Player, Serializable {
-                     // TODO: Describe this
-                     // Abilities that let us spend mana as if it were any (or other colors/types) must be handled separately
-                     // and can't be incorporated into calculating availableMana since the number of combinations would explode.
--                    if (!approvingObjects.isEmpty() && mana.count() <= avail.count()) {
-+                    if (!approvingObjects.isEmpty() && mana.count() <= payableMana.count()) {
-                         // TODO: I think this is wrong for spell that require colorless
-                         return true;
-                     }
-@@ -3922,7 +3941,7 @@ public abstract class PlayerImpl implements Player, Serializable {
+@@ -3922,7 +3940,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                      if (avail instanceof ConditionalMana && !((ConditionalMana) avail).apply(ability, game, getId(), ability.getManaCosts())) {
                          continue;
                      }
@@ -97,21 +87,20 @@ index 55465a29d39..83740c1b2b8 100644
                          return true;
                      }
                  }
-@@ -3931,6 +3950,30 @@ public abstract class PlayerImpl implements Player, Serializable {
+@@ -3931,6 +3949,29 @@ public abstract class PlayerImpl implements Player, Serializable {
          return false;
      }
  
 +    /**
-+     * How many generic mana of this ability's waterbend cost the player can cover by tapping
-+     * untapped artifacts and creatures they control (CR 701.67a). Capped at the waterbend part
-+     * of the minimum cost so the helpers never pay a non-waterbend mana symbol (CR 701.67b).
++     * How many generic mana of this ability's Waterbend {X} cost the player can cover by tapping
++     * untapped artifacts and creatures they control (CR 701.67a). Capped at the minimum X part
++     * so the helpers never pay a non-waterbend mana symbol (CR 701.67b). A fixed WaterbendCost
++     * needs no credit: it already offers a {0} option for its own waterbend part.
 +     */
 +    private int getWaterbendHelpers(ActivatedAbility ability, Game game) {
 +        int waterbendGeneric = 0;
 +        for (ManaCost cost : ability.getManaCostsToPay()) {
-+            if (cost instanceof WaterbendCost) {
-+                waterbendGeneric = CardUtil.overflowInc(waterbendGeneric, ((WaterbendCost) cost).manaValue());
-+            } else if (cost instanceof WaterbendXCost) {
++            if (cost instanceof WaterbendXCost) {
 +                VariableManaCost variableCost = (VariableManaCost) cost;
 +                waterbendGeneric = CardUtil.overflowInc(waterbendGeneric,
 +                        CardUtil.overflowMultiply(variableCost.getMinX(), variableCost.getXInstancesCount()));

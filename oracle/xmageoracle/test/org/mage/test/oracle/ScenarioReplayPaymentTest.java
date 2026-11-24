@@ -399,6 +399,14 @@ public final class ScenarioReplayPaymentTest {
         amount.addProperty("value", "4");
         explicit.add(amount);
         equal(0, ScenarioReplay.waterbendXFromAnswers(explicit, ""));
+        com.google.gson.JsonArray explicitX = new com.google.gson.JsonArray();
+        com.google.gson.JsonObject xChoice = new com.google.gson.JsonObject();
+        xChoice.addProperty("seat", 0);
+        xChoice.addProperty("kind", "choice");
+        xChoice.addProperty("value", "X=1");
+        explicitX.add(xChoice);
+        explicitX.add(tap);
+        equal(0, ScenarioReplay.waterbendXFromAnswers(explicitX, ""));
         System.out.println("PASS a waterbend X comes from its tap picks and pool spend, not an explicit amount");
     }
 

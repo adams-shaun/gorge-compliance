@@ -4543,7 +4543,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * The X of a Waterbend {X} activation as the transcript records it: every
      * waterbend tap label pays one generic (its "for N"), and the step's
      * recorded pool spend is the rest of the waterbend cost. An explicit
-     * amount answer is XMage's own X and is left to TestPlayer.announceX.
+     * amount answer or "X=<n>" choice is XMage's own X and is left to
+     * TestPlayer.announceX: nothing is inferred beside it, so the step never
+     * queues two X answers.
      */
     static int waterbendXFromAnswers(JsonArray as, String payment) {
         int x = payment == null ? 0 : payment.length();
@@ -4557,6 +4559,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 continue;
             }
             String v = str(a, "value");
+            if (v.startsWith("X=")) {
+                return 0;
+            }
             if (ScriptedChoicePlayer.waterbendTapName(v) == null) {
                 continue;
             }
