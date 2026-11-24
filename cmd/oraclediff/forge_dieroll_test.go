@@ -65,7 +65,15 @@ func TestForgeRolledDie(t *testing.T) {
 // is reverted to 0958a1aca2, where Forge rolls its own d6 again; this pin check
 // is the repo-side half. A bump must re-run the pinned driver's
 // ForcedDieRollTest and update the constant deliberately.
-const forgeOracleDieRollRef = "c674c0977f6186a249ea18fba17d1af7f90345c3"
+//
+// 2bf0a1cb36 = 3494ec7d2b plus the one-card order pin, die-roll code unchanged, ForcedDieRollTest re-run green in the full driver suite (166 tests, LoneCardOrderTest included).
+// c3b04cf264b = the clean merge of 2bf0a1cb36 and c674c0977f (the SBA graveyard batch order pinned above), both branched
+// from 3494ec7d2b; the two touch disjoint files (forge-oracle ScriptedController/StepMachine vs forge-game GameAction),
+// so the pin keeps both fixes, die-roll code unchanged.
+// This check only compares the Makefile pin to this constant; it cannot tell whether the
+// hash holds a fix. The behavioural evidence is the fork's LoneCardOrderTest (2bf0) and SbaGraveyardOrderTest (c674),
+// and that the pin resolves on origin is checked by scripts/forge-oracle-setup.sh (git ls-remote / --check-pin).
+const forgeOracleDieRollRef = "c3b04cf264b992134477ae759417b4faf28baef3"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

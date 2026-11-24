@@ -279,6 +279,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # pinned driver keeps both. The merge adds no file of its own; driver suite 162 tests green (UnlessEnergyConfirmTest,
 # ZeroCandidateConfirmTest, ForcedDieRollTest). cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432).
 # Fork branch fix/xp-forge-driver-unless-energy-confirm.
+# 2bf0a1cb36 = 3494ec7d2b plus the one-card order pin: gorge logs a one-pick "order" decision for a look-at-the-top-card
+# put-back (DB$ RearrangeTopOfLibrary | NumCards$ 1: Dewdrop Spy, Merfolk Observer, Saheeli's Silverwing) while Forge calls
+# orderMoveToZoneList with one card, which ScriptedController returned at once, leaving the pin as a leftover (xproof
+# decision_shape strict_miss "unconsumed gorge decision(s): ... order[bottom] [Plains]"). A lone card now goes through
+# StepMachine.orderCards, which takes the order pin only when its pick names that card and otherwise leaves the queue
+# alone. LoneCardOrderTest pins it (driver suite 166 tests). Driver-only change; cardsfolder/tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-lone-card-order.
 # 37726abafb = 3494ec7d2b plus the state-based-action graveyard batch order: one SBA pass that moves cards from more than one of
 # noRegCreats / desCreats / sacrificeList now puts their union to the owners once (CR 704.3, 404.3) and dispatches each card down
 # its own path in that order; a single list keeps its existing path. `SbaGraveyardOrderTest` (forge-oracle) fails before with no
@@ -287,7 +294,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # c674c0977f = 37726abafb plus the later-pass fix: the union branch no longer sets the per-list ordered flags (a later pass in the same
 # checkStateEffects call with one multi-card list, e.g. two creatures at 0 toughness after a lord died in pass 0, still asks as before);
 # it remembers the ordered cards instead. The two-pass test laterPassWithOneMultiCardListStillAsks fails on 37726abafb and passes here.
-FORGE_ORACLE_REF ?= c674c0977f6186a249ea18fba17d1af7f90345c3
+# c3b04cf264 = the clean merge of 2bf0a1cb36 (the one-card order pin) and c674c0977f (the SBA batch order), both branched from
+# 3494ec7d2b; the two touch disjoint files (forge-oracle's ScriptedController and StepMachine vs forge-game's GameAction), so the
+# pinned driver keeps both fixes. cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/forge-sba-graveyard-order.
+FORGE_ORACLE_REF ?= c3b04cf264b992134477ae759417b4faf28baef3
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

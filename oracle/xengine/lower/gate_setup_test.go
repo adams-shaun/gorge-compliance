@@ -147,6 +147,19 @@ func TestGateRefusesSetupTapTrigger(t *testing.T) {
 	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:taps") {
 		t.Fatalf("reasons %v, want setup_trigger:taps", r)
 	}
+
+	// The same trigger granted by a static (Dionus, Elvish Archdruid's
+	// AddTrigger$): the body is an SVar on the granting permanent, not a
+	// printed trigger of the permanent that becomes tapped, so the gate must
+	// follow the grant to the Elf it affects.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	dionus := plantBattlefieldCard(t, reg, e, "Dionus, Elvish Archdruid", func(o *state.Object) bool {
+		return o.Owner != e.G.Active && o.Owner == o.Controller
+	})
+	dionus.Tapped = true
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:taps") {
+		t.Fatalf("static-granted tap trigger: reasons %v, want setup_trigger:taps", r)
+	}
 }
 
 // TestGateRefusesSetupCounterTrigger: the counters field is placed as a
@@ -154,6 +167,8 @@ func TestGateRefusesSetupTapTrigger(t *testing.T) {
 // trigger would resolve it.
 func TestGateRefusesSetupCounterTrigger(t *testing.T) {
 	reg, pairs := fdnPairs(t, 1)
+
+	// A printed "whenever counters are put on" trigger.
 	e, at := expressibleCut(t, reg, pairs[0], 100)
 	sta := plantBattlefieldCard(t, reg, e, "Stalwart Successor", func(*state.Object) bool { return true })
 	var counters bool
@@ -175,6 +190,20 @@ func TestGateRefusesSetupCounterTrigger(t *testing.T) {
 	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:counter_added") {
 		t.Fatalf("reasons %v, want setup_trigger:counter_added", r)
 	}
+
+	// A trigger the static grants (Cursed Wombat's AddTrigger$): its counter
+	// trigger is an SVar on the Wombat, not a printed trigger on the permanent
+	// that receives the setup counter, so the gate must follow the
+	// Affected$ grant to that permanent.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	wombat := plantBattlefieldCard(t, reg, e, "Cursed Wombat", func(*state.Object) bool { return true })
+	wombat.Counters = []state.Counter{{Kind: "P1P1", N: 1}}
+	if net, ok := setupCounters(wombat); !ok || net["P1P1"] != 1 {
+		t.Fatalf("setup counters on Cursed Wombat = %v (restatable %v), want P1P1=1", net, ok)
+	}
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:counter_added") {
+		t.Fatalf("static-granted counter trigger: reasons %v, want setup_trigger:counter_added", r)
+	}
 }
 
 // TestGateRefusesSetupLifeTrigger: the setup life field is a LifeChange, so a
@@ -186,6 +215,22 @@ func TestGateRefusesSetupLifeTrigger(t *testing.T) {
 	e.G.Players[0].Life = 22
 	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:life_gained") {
 		t.Fatalf("reasons %v, want setup_trigger:life_gained", r)
+	}
+
+	// A trigger the static grants (Field-Tested Frying Pan's AddTrigger$):
+	// the body lives on the Equipment, granted to the creature its
+	// Affected$ names, so the gate must follow the grant to that creature.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	bearer := plantBattlefieldCard(t, reg, e, "Hemosymbic Mite", func(o *state.Object) bool {
+		return o.Owner == e.G.Active && o.Owner == o.Controller
+	})
+	pan := plantBattlefieldCard(t, reg, e, "Field-Tested Frying Pan", func(o *state.Object) bool {
+		return o.ID != bearer.ID && o.Owner == e.G.Active && o.Owner == o.Controller
+	})
+	pan.AttachedTo = bearer.ID
+	e.G.Players[0].Life = 22
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:life_gained") {
+		t.Fatalf("static-granted life trigger: reasons %v, want setup_trigger:life_gained", r)
 	}
 }
 
@@ -437,6 +482,68 @@ func TestPlaceRefusesEntryCounterSelf(t *testing.T) {
 		if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonCountersEntry) {
 			t.Errorf("%s: reasons %v, want %s", counters.name, r, reasonCountersEntry)
 		}
+	}
+}
+
+// TestGateRefusesSetupRegenerationShield: gorge records a regeneration shield
+// as the internal "Shield" counter marker, not a counter (CR 701.19a: the
+// shield is a replacement effect). The live digest drops the marker
+// (game.counterMap), while setupCounters would copy it into the scenario as a
+// real counter; a live shield is also state setup cannot restate. The gate
+// must refuse the window, and the token path that copies Object.Counters must
+// refuse a marker too.
+func TestGateRefusesSetupRegenerationShield(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	o := plantBattlefieldCard(t, reg, e, "Mox Tantalite", func(o *state.Object) bool {
+		return o.Owner == e.G.Active
+	})
+	if r := capture(e, at, true).Reasons; len(r) != 0 {
+		t.Fatalf("planted cut already refused: %v", r)
+	}
+
+	o.Counters = []state.Counter{{Kind: "Shield", N: 1}}
+	if net, ok := setupCounters(o); ok || net["Shield"] != 0 {
+		t.Fatalf("setupCounters = %v, %v; want refused without the marker", net, ok)
+	}
+	c := capture(e, at, true)
+	if !slices.Contains(c.Reasons, reasonCountersEntry) {
+		t.Fatalf("reasons %v, want %s", c.Reasons, reasonCountersEntry)
+	}
+	for s := range c.Setup {
+		for name, cs := range c.Setup[s].Counters {
+			if n := cs["Shield"]; n != 0 {
+				t.Errorf("setup counter %s Shield = %d, want no marker counter", name, n)
+			}
+		}
+		for _, tk := range c.Setup[s].Tokens {
+			if n := tk.Counters["Shield"]; n != 0 {
+				t.Errorf("setup token counter Shield = %d, want no marker counter", n)
+			}
+		}
+	}
+
+	// A zero amount is not state (a spent marker leaves the entry behind): it
+	// must neither refuse the window nor be placed.
+	o.Counters = []state.Counter{{Kind: "Shield", N: 0}}
+	if net, ok := setupCounters(o); !ok || net["Shield"] != 0 {
+		t.Fatalf("zero-amount marker: setupCounters = %v, %v; want placed with no marker", net, ok)
+	}
+	if c := capture(e, at, true); len(c.Reasons) != 0 {
+		t.Fatalf("zero-amount marker refused: %v", c.Reasons)
+	}
+
+	// The token counter path is the sibling that also copies Object.Counters
+	// into setup; a marker on a token must take the same refusal.
+	tokCard := &cards.Card{}
+	g := &state.Game{Tokens: map[string]*cards.Card{"zz_tok": tokCard}}
+	w := &walker{g: g, why: map[string]bool{}, xmage: false}
+	w.checkToken(&state.Object{
+		Card: tokCard, Zone: state.ZBattlefield, IsToken: true,
+		Counters: []state.Counter{{Kind: "Shield", N: 1}},
+	})
+	if !w.why[reasonCountersEntry] {
+		t.Fatalf("token with a regeneration marker: reasons %v, want %s", sortedKeys(w.why), reasonCountersEntry)
 	}
 }
 
