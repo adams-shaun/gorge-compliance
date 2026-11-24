@@ -230,6 +230,11 @@ type ManaRec struct {
 	// index Ability counts in. Absent for a front face (see Pick.Card).
 	Card string `json:"card,omitempty"`
 	Face int    `json:"face,omitempty"`
+	// Triggered marks a triggered mana ability (CR 605.1b: "Whenever you tap a
+	// Swamp for mana, add an additional {B}"): no player activated it, it
+	// resolved with the tap that triggered it, and Ability is -1 because its
+	// effect is no entry of the face's Abilities. Absent for an activation.
+	Triggered bool `json:"triggered,omitempty"`
 	// Produced is the mana the activation added, as WUBRGC letters in the
 	// order they were added (best effort: read from the ManaAdd events logged
 	// before the next activation or decision).
