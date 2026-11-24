@@ -1708,7 +1708,10 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			if d.Resume == "twopiles_pick" && len(d.Picks) == 1 {
 				// The pile pick (Curator of Destinies, Fact or Fiction) is
 				// XMage's opponent.chooseUse("Face-down", "Face-up"), a
-				// boolean choice, never gorge's "First pile"/"Second pile"
+				// boolean choice (RevealAndSeparatePilesEffect's Steam
+				// Augury asks Player.choosePile instead; the driver's
+				// ScriptedChoicePlayer.choosePile reads the same Yes/No),
+				// never gorge's "First pile"/"Second pile"
 				// label (measured 2026-10-14: the label is "Found wrong
 				// choice command"). Taking pile A -- the separator's pile,
 				// the face-down pile XMage's TargetCard selected -- is the

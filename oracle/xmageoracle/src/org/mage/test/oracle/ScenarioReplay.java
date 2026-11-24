@@ -1281,6 +1281,38 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return true;
         }
 
+        /**
+         * RevealAndSeparatePilesEffect (Steam Augury, Fact or Fiction) asks the
+         * chooser Player.choosePile, not chooseUse, and TestPlayer.choosePile
+         * hands that to the AI without reading the choice queue, so the
+         * generator's scripted pile answer was left over. A leading Yes/No is
+         * the answer: Yes puts pile1 (the separator's chosen cards) in hand.
+         * With nothing scripted the AI still chooses.
+         */
+        @Override
+        public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1,
+                List<? extends Card> pile2, Game game) {
+            Boolean scripted = scriptedPileAnswer(getChoices());
+            if (scripted != null) {
+                return scripted;
+            }
+            return super.choosePile(outcome, message, pile1, pile2, game);
+        }
+
+        /** Consumes a leading Yes/No from the choice queue as a pile pick;
+         * null (queue untouched) when the head is anything else. */
+        static Boolean scriptedPileAnswer(List<String> choices) {
+            if (choices.isEmpty()) {
+                return null;
+            }
+            String head = choices.get(0);
+            if (!head.equals("Yes") && !head.equals("No")) {
+                return null;
+            }
+            choices.remove(0);
+            return head.equals("Yes");
+        }
+
         @Override
         public ScriptedChoicePlayer copy() {
             return new ScriptedChoicePlayer(this);
