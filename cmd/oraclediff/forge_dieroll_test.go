@@ -19,7 +19,8 @@ import (
 // natural roll instead of rolling its own. The roll is not a gorge decision
 // (Forge poses no decision for a die), so it must not be exported as one: a
 // decision the driver never consumes would be an unconsumed leftover. The
-// side field is also absent from Raw(), which is all gorge's runner reads.
+// side field is also in Raw(), which is all gorge's runner reads, so the runner
+// forces the same roll instead of drawing its own.
 // The driver-side half of the behaviour -- that MyRandom.setRandom's wrapper
 // forwards the bounded draw to the installed generator -- is pinned by
 // forge-oracle's ForcedDieRollTest.productionSetRandomForwardsTheBound.
@@ -76,7 +77,9 @@ func TestForgeRolledDie(t *testing.T) {
 // This check only compares the Makefile pin to this constant; it cannot tell whether the
 // hash holds a fix. The behavioural evidence is the fork's LoneCardOrderTest (2bf0), SbaGraveyardOrderTest (c674)
 // and ModalLandPlayTest (ba5d), and that the pin resolves on origin is checked by scripts/forge-oracle-setup.sh (git ls-remote / --check-pin).
-const forgeOracleDieRollRef = "147dd2f00fc5dd087d88490bb6afde5b34bc8cb1"
+// 9e368ca172 = 147dd2f00f plus the lone forced entity pick (ScriptedController/StepMachine only), die-roll code unchanged,
+// the full driver suite (172 tests, including ForcedDieRollTest) re-run green on it.
+const forgeOracleDieRollRef = "9e368ca1724ffc266f8dd55cd34775c58d817fed"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

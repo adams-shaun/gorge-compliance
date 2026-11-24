@@ -166,6 +166,49 @@ func TestForgeLibraryTopOrder(t *testing.T) {
 		}
 	})
 
+	t.Run("full top reorder reversed", func(t *testing.T) {
+		// Sensei's Divining Top look-at-three after the response draw put Top
+		// back on top: gorge answers [Top, Plains#3, Plains#4] top-first.
+		d := rules.OracleDecision{
+			Step: 1, Seat: 0, Kind: "order", Options: 3,
+			Picks:         []string{"Sensei's Divining Top", "Plains", "Plains"},
+			PickIdx:       []int{0, 1, 2},
+			PickRefs:      []string{"p0:Sensei's Divining Top", "p0:Plains#3", "p0:Plains#4"},
+			OptionRefs:    []string{"p0:Sensei's Divining Top", "p0:Plains#3", "p0:Plains#4"},
+			ArrangeLabels: []string{"Sensei's Divining Top", "Plains", "Plains"},
+			ArrangeKind:   "bottom",
+			PickKinds:     []string{"bottom", "bottom", "bottom"},
+			Resume:        "arrange", Via: "answer", GorgeKind: "arrange",
+			First: "Sensei's Divining Top", Min: 3, Max: 3,
+		}
+		ds := []rules.OracleDecision{d}
+		before := libraryDecisionCopy(t, ds)
+		got := forgeLibraryTopOrder(ds, nil)
+		if want := []string{"Plains", "Plains", "Sensei's Divining Top"}; !reflect.DeepEqual(got[0].Picks, want) {
+			t.Errorf("picks = %v, want %v", got[0].Picks, want)
+		}
+		if want := []string{"p0:Plains#4", "p0:Plains#3", "p0:Sensei's Divining Top"}; !reflect.DeepEqual(got[0].PickRefs, want) {
+			t.Errorf("pick_refs = %v, want %v", got[0].PickRefs, want)
+		}
+		if want := []int{2, 1, 0}; !reflect.DeepEqual(got[0].PickIdx, want) {
+			t.Errorf("pick_idx = %v, want %v", got[0].PickIdx, want)
+		}
+		if !reflect.DeepEqual(ds, before) {
+			t.Errorf("input mutated: %+v", ds)
+		}
+		// A one-card order and a Dig remainder are not reversed.
+		one := d
+		one.Picks, one.PickIdx, one.PickRefs, one.PickKinds = d.Picks[:1], d.PickIdx[:1], d.PickRefs[:1], d.PickKinds[:1]
+		one.Options, one.Min, one.Max = 1, 1, 1
+		dig := d
+		dig.ArrangeKind = "dig_arrange"
+		for name, x := range map[string]rules.OracleDecision{"one": one, "dig_arrange": dig} {
+			if xs := []rules.OracleDecision{x}; !reflect.DeepEqual(forgeLibraryTopOrder(xs, nil), xs) {
+				t.Errorf("%s reversed", name)
+			}
+		}
+	})
+
 	t.Run("library_placement bottom unchanged", func(t *testing.T) {
 		// A bottom arrange leaves the picks below the old top. The explicit
 		// bottom ask is not represented on a library_placement arrange, so

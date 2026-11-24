@@ -326,7 +326,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-mdfc-land-face.
 # Its ancestry also carries cd13258c4b7 (the folded optional-trigger confirm: a non-Mandatory Cost$ body answers yes from
 # gorge's unconsumed X/object pick, else no; FoldedOptionalConfirmTest), so the pinned driver keeps that fix too.
-FORGE_ORACLE_REF ?= 147dd2f00fc5dd087d88490bb6afde5b34bc8cb1
+# 9e368ca172 = 147dd2f00f plus the lone forced entity pick: ScriptedController.chooseSingleEntityForEffect's lone-option shortcut
+# (made for TwoPiles/ChangeZone Chooser$ asks gorge never logs) now consumes gorge's one-option pick when its single ref IS that
+# entity (StepMachine.takeLonePick). xproof cluster xpt-83c211ae: Benevolent Offering / Intellectual Offering / Akroan Horse
+# (ChoosePlayer over the one opponent, `choose_n[player]` x2 left over) and Cataclysmic Gearhulk (ChooseEach$ categories with the
+# Gearhulk as the lone artifact and creature, `choose_n[card]` x2 left over). LoneOpponentChoiceTest and EmptyCategoryChoiceTest
+# fail before with exactly those leftovers and pass after; UnmappedAskTest's two lone-Chooser tests (Curator of Destinies) still
+# pass; full driver suite 172 tests. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-lone-entity-consume.
+FORGE_ORACLE_REF ?= 9e368ca1724ffc266f8dd55cd34775c58d817fed
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

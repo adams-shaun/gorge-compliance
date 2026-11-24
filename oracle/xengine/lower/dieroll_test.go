@@ -179,7 +179,8 @@ func TestLowerDieRollOnResolvingPass(t *testing.T) {
 // a 10-19 roll gains the controller 2 life and a 1-9 roll does not. The test
 // plays the ability at game seeds until the live game rolls 17, and requires
 // the runner's own unforced roll to land in a different row, so the check
-// fails when Item.Raw() leaves die_rolls out.
+// fails when Item.Raw() leaves die_rolls out. It fails rather than skips when
+// no seed discriminates: a silently green test would not check the fix.
 func TestSelfCheckForcesDieRolls(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	pair := []decks.Deck{
@@ -190,11 +191,13 @@ func TestSelfCheckForcesDieRolls(t *testing.T) {
 		{Battlefield: []int{0, 1, 2, 3, 4, 5, 6}},
 		{},
 	}}
-	// natural-17 seeds only: the runner's seeded d20 is then in another row
-	// when its own life differs from the forced run's.
+	last := func(r rules.OracleResult) int32 {
+		return r.Snapshots[len(r.Snapshots)-1].Players[0].Life
+	}
+	const maxSeed = 80
 	var l Lowered
 	found := false
-	for n := 1; n <= 40 && !found; n++ {
+	for n := 1; n <= maxSeed && !found; n++ {
 		cand, why, _, err := Span(reg, pair, startGameSeed(0, n), game.Options{
 			Set: "XP", MaxTurns: 2, Start: start,
 			Focus: &game.Focus{Seat: 0, Card: "Herald of Hadar", Kind: "ability"},
@@ -203,38 +206,48 @@ func TestSelfCheckForcesDieRolls(t *testing.T) {
 			t.Fatal(err)
 		}
 		if len(why) > 0 {
-			t.Fatalf("span refused: %v", why)
+			t.Fatalf("seed %d: span refused: %v", n, why)
 		}
+		natural17 := false
 		for _, r := range cand.Item.DieRolls {
 			if r.Sides == 20 && r.Natural == 17 {
-				l, found = cand, true
+				natural17 = true
 			}
 		}
+		if !natural17 {
+			continue
+		}
+		// natural-17 seeds only: the runner's seeded d20 must then be in
+		// another row, or the forced and unforced runs agree and the case
+		// proves nothing.
+		unforced, err := json.Marshal(cand.Item.Scenario)
+		if err != nil {
+			t.Fatal(err)
+		}
+		own, err := rules.RunOracleScenarioJSON(reg, unforced)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(own.Snapshots) == 0 {
+			t.Fatalf("seed %d: the runner produced no snapshots", n)
+		}
+		if last(own) == 22 {
+			continue
+		}
+		l, found = cand, true
 	}
 	if !found {
-		t.Skip("no game seed in 1..40 rolls a natural 17")
-	}
-	// The runner's own roll (Seed 42) without the tape.
-	unforced, err := json.Marshal(l.Item.Scenario)
-	if err != nil {
-		t.Fatal(err)
-	}
-	own, err := rules.RunOracleScenarioJSON(reg, unforced)
-	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("no game seed in 1..%d rolls a natural 17 with the runner's own d20 outside the 10-19 row", maxSeed)
 	}
 	forced, err := rules.RunOracleScenarioJSON(reg, l.Item.Raw())
 	if err != nil {
 		t.Fatal(err)
 	}
-	last := func(r rules.OracleResult) int32 {
-		return r.Snapshots[len(r.Snapshots)-1].Players[0].Life
+	if len(forced.Snapshots) == 0 {
+		t.Fatal("the forced run produced no snapshots")
 	}
 	if last(forced) != 22 {
 		t.Fatalf("forced run p0 life %d, want 22 (natural 17 is the 10-19 row)", last(forced))
-	}
-	if last(own) == 22 {
-		t.Skipf("the runner's own d20 also lands in the 10-19 row; the case does not discriminate")
 	}
 	if c := CheckWindow(reg, l); c.Status != StatusOK {
 		t.Fatalf("%s at step %d, %s: gorge %s, tape %s %v", c.Status, c.Step, c.Field, c.Gorge, c.Tape, c.Fails)
