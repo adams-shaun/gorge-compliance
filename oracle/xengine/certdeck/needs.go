@@ -273,8 +273,10 @@ func enchantsOpponent(f *cards.Face) bool {
 
 // opponentFilter reports whether a card filter names another player's
 // permanent. A filter with no controller restriction targets any player's
-// permanent, which certdeck places on the opponent's side; YouCtrl, YouOwn and
-// Self name the card's own.
+// permanent, which certdeck deliberately places on the opponent's side even
+// when the card could target its own (a self-targeting "target creature" still
+// removes from a real permanent there); YouCtrl, YouOwn and Self name the
+// card's own.
 func opponentFilter(v string) bool {
 	l := strings.ToLower(v)
 	if l == "" || strings.Contains(l, "youctrl") || strings.Contains(l, "youown") ||
@@ -512,9 +514,11 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 				}
 			}
 			if k == "CounterNum" && u.api != "PutCounter" && u.api != "PutCounterAll" &&
-				strings.EqualFold(strings.TrimSpace(v), "All") {
+				strings.EqualFold(strings.TrimSpace(v), "All") && counterTypeKind(u) == "" {
 				// "remove all counters" names the amount, not the kind: it is
-				// still a counter need (Honest Work).
+				// still a counter need (Honest Work). The unit's own
+				// CounterType$/ValidCounterType$ wins; read as a set, because
+				// CounterNum sorts before CounterType in sortedKeys.
 				counterArg = firstNonEmpty(counterArg, "P1P1")
 			}
 			if k == "Cost" {
@@ -690,6 +694,23 @@ func counterKindArg(v string) (string, bool) {
 func normalizeCounterKind(v string) string {
 	kind, _ := counterKindArg(v)
 	return kind
+}
+
+// counterTypeKind is the kind a unit names itself: its CounterType$ (unless it
+// puts counters) or the first field of its ValidCounterType$, or "" when it
+// names none. It reads the parameters as a set, so map order cannot choose
+// between them; a remove-all-counters unit with a named kind keeps that kind
+// instead of taking the CounterNum$ All stand-in (Witherscale Wurm's M1M1).
+func counterTypeKind(u unit) string {
+	if u.api != "PutCounter" && u.api != "PutCounterAll" {
+		if kind, ok := counterKindArg(u.p["CounterType"]); ok {
+			return kind
+		}
+	}
+	if kind, ok := counterKindArg(firstField(u.p["ValidCounterType"])); ok {
+		return kind
+	}
+	return ""
 }
 
 // firstField is the first of a comma-separated list ("P1P1,M1M1").

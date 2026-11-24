@@ -9,14 +9,21 @@ import (
 
 // TestCounterNeedWildcards: a Forge CounterType$ All (Honest Work) or Any
 // (Mabel) names every kind, not a kind, so the need is the commonest kind
-// P1P1 (CR 122.1) rather than the literal wildcard the followers refuse.
+// P1P1 (CR 122.1) rather than the literal wildcard the followers refuse. A
+// named kind next to CounterNum$ All keeps its kind (Witherscale Wurm,
+// Cyclopean Tomb): "remove all counters" names the amount, not the kind.
 func TestCounterNeedWildcards(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	types := CreatureTypes(reg)
-	for _, name := range []string{"Honest Work", "Mabel, Bitter Recluse"} {
-		c, ok := reg.Lookup(name)
+	for _, tc := range []struct{ name, want string }{
+		{"Honest Work", "P1P1"},
+		{"Mabel, Bitter Recluse", "P1P1"},
+		{"Witherscale Wurm", "M1M1"},
+		{"Cyclopean Tomb", "MIRE"},
+	} {
+		c, ok := reg.Lookup(tc.name)
 		if !ok {
-			t.Fatalf("%s is not in the corpus", name)
+			t.Fatalf("%s is not in the corpus", tc.name)
 		}
 		var got []string
 		for _, n := range Derive(c, types) {
@@ -24,8 +31,8 @@ func TestCounterNeedWildcards(t *testing.T) {
 				got = append(got, n.Arg)
 			}
 		}
-		if len(got) != 1 || got[0] != "P1P1" {
-			t.Errorf("%s counter needs = %v, want one P1P1", name, got)
+		if len(got) != 1 || got[0] != tc.want {
+			t.Errorf("%s counter needs = %v, want one %s", tc.name, got, tc.want)
 		}
 	}
 	// The whole corpus, not just the two cards: no other CounterType$ value
@@ -39,6 +46,25 @@ func TestCounterNeedWildcards(t *testing.T) {
 			case "", "all", "any", "eachfromsource", "existingcounter":
 				t.Errorf("%s: counter need %q is not a kind", c.Faces[0].Name, n.Arg)
 			}
+		}
+	}
+}
+
+// TestCounterTypeKind: a unit's own kind is read from its parameters as a set,
+// so the alphabetical key order (CounterNum before CounterType) cannot make
+// "remove all counters" stand in for the kind the unit names.
+func TestCounterTypeKind(t *testing.T) {
+	for _, tc := range []struct{ line, want string }{
+		{"DB$ RemoveCounter | CounterType$ M1M1 | CounterNum$ All", "M1M1"},
+		{"DB$ RemoveCounter | CounterNum$ All | CounterType$ M1M1", "M1M1"},
+		{"DB$ RemoveCounter | CounterType$ All | CounterNum$ All", "P1P1"},
+		{"DB$ RemoveCounter | ValidCounterType$ CHARGE | CounterNum$ All", "CHARGE"},
+		{"DB$ RemoveCounter | CounterNum$ All", ""},
+		{"DB$ RemoveCounter | CounterNum$ 1", ""},
+		{"DB$ PutCounter | CounterType$ M1M1 | CounterNum$ All", ""},
+	} {
+		if got := counterTypeKind(parseLine(tc.line)); got != tc.want {
+			t.Errorf("counterTypeKind(%q) = %q, want %q", tc.line, got, tc.want)
 		}
 	}
 }
