@@ -18,7 +18,11 @@
 #                         given -xmage so no deck holds a card XMage spells
 #                         differently
 #        forge-export     (forge) `oraclediff forge-export` writes
-#                         <chunk>/<f>-req.jsonl (log <chunk>/<f>-export.log)
+#                         <chunk>/<f>-req.jsonl and its refusals to
+#                         <chunk>/<f>-prep.jsonl, which xengine diff reads as
+#                         not_sent (log <chunk>/<f>-export.log); its
+#                         --preflight goes to the same runner as the replay
+#                         (XENGINE_FORGE_RUNNER when set), not the registry's
 #        follower-export  `oraclediff follower-export -engine <f>` writes
 #                         <chunk>/<f>-req.jsonl and its refusals to
 #                         <chunk>/<f>-prep.jsonl (log <chunk>/<f>-export.log)
@@ -265,7 +269,11 @@ follower_rows() {
 		in=$d/xitems.jsonl
 		;;
 	forge-export)
-		oracledif forge-export -scenarios "$d/items.jsonl" -out "$d/$f-req.jsonl" >"$d/$f-export.log" 2>&1 || return 1
+		# H3: oraclediff forge-export also writes Forge's refusals to
+		# <dir>/<f>-prep.jsonl, which xengine diff reads as not_sent. Its
+		# --preflight goes to the same runner as the replay (XENGINE_FORGE_RUNNER
+		# when set), not the registry's.
+		oracledif forge-export -scenarios "$d/items.jsonl" -out "$d/$f-req.jsonl" -runner "$runner" >"$d/$f-export.log" 2>&1 || return 1
 		in=$d/$f-req.jsonl
 		;;
 	follower-export)

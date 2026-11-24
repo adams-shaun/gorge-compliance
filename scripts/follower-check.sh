@@ -129,7 +129,7 @@ rm -f "$out/pooled.jsonl" "$pool_names"
 # 5. prep
 case "$prep" in
 follower-export) run_od follower-export -engine "$engine" -scenarios "$out/items.jsonl" -out "$out/req.jsonl" -runner "$runner" >"$out/export.log" 2>&1 || { cat "$out/export.log" >&2; echo "follower-check: follower-export failed" >&2; exit 1; } ;;
-forge-export) run_od forge-export -scenarios "$out/items.jsonl" -out "$out/req.jsonl" >"$out/export.log" 2>&1 || { cat "$out/export.log" >&2; echo "follower-check: forge-export failed" >&2; exit 1; } ;;
+forge-export) run_od forge-export -scenarios "$out/items.jsonl" -out "$out/req.jsonl" -runner "$runner" >"$out/export.log" 2>&1 || { cat "$out/export.log" >&2; echo "follower-check: forge-export failed" >&2; exit 1; } ;;
 esac
 [ -e "$out/req.jsonl" ] || : >"$out/req.jsonl"
 

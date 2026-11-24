@@ -586,7 +586,6 @@ Once and Future	T4	effects	move:graveyard>hand	-	equivalent	two hand returns of 
 Ood Sphere	T4	effects	effect	rule:cantbecometappedunlessitisbeingdeclaredasanattacker	equivalent	goaded creatures' tapping restriction is an Effect
 Opal-Eye, Konda's Yojimbo	T4	effects	effect	prevent	equivalent	redirect damage: an Effect vs a prevention action
 Opposition Agent	T4	effects	effect	mayplay	equivalent	the searched cards' exile-and-play permission: an Effect vs mtgish's play permission
-Opulent Clomper	T4	effects	-	unmapped:Action.ChooseARandomColor	equivalent	FORGE_REF ff076d4432 new card: script ChooseColor Random$ True, which the normalizer does not compare; mtgish ChooseARandomColor
 Oracle's Vault	T4	effects	mayplay	player:onceeachturnmayaction	equivalent	once-each-turn free cast: MayPlay vs mtgish's once-each-turn rule
 Osgood, Operation Double	T4	effects	copyspell	tokencopy:1	equivalent	the cast spell's token copy: a spell copy in the script (a permanent spell copy becomes a token)
 Osseous Exhale	T4	effects	gainlife:2	gainlife:5	mtgish-bug	life gain of 2 encoded as GainLife(5), the damage amount (mtgish#1, GainLife capture)
@@ -796,7 +795,7 @@ Sundering Stroke	T4	effects	damage:7	-	equivalent	script one DealDamage per bran
 Sungold Sentinel	T4	effects	grant:hexprooffrom	grant:hexproof	mtgish-bug	printed 'hexproof from that color'; mtgish grants protection / plain hexproof
 Suntail Squadron	T4	effects	conjure	-	equivalent	script repeats conjure body as a copy
 Super-Adaptoid	T4	effects	counters:doublestrike:1 counters:doublestrike:1 counters:firststrike:1 counters:firststrike:1 counters:flying:1 counters:flying:1 counters:haste:1 counters:haste:1 counters:indestructible:1 counters:indestructible:1 counters:lifelink:1 counters:lifelink:1 counters:menace:1 counters:menace:1 counters:reach:1 counters:reach:1 counters:trample:1 counters:trample:1 counters:vigilance:1 counters:vigilance:1	-	equivalent	script one PutCounter per keyword in each of two triggers (etb, attacks) vs one trigger with one per-ability PutCounters
-Surgical Extraction	T4	effects	move:graveyard>exile	-	forge-bug	FORGE_REF ff076d4432 respell exiles the target and every same-name graveyard card (ChangeZoneAll); Oracle says any number, mtgish keeps the search
+Surgical Extraction	T4	effects	move:graveyard>exile	-	equivalent	the target card's exile plus the same-name sweep: script a ChangeZone over the target then ChangeZoneAll/ChangeZone by name, mtgish one SearchPlayersLibraryAndGraveyardAndHand whose exile is not compared
 Surtland Flinger	T4	effects	damage:*	-	equivalent	script one DealDamage per branch (Giant or not, summed) vs IfElse (merged)
 Suspend Aggression	T4	effects	-	move:library>exile	equivalent	script one ChangeZone over the target and the top card (any origin) vs mtgish one exile per exilable
 Suspicious Detonation	T4	effects	spell:cantbecountered	costreduction	mtgish-bug	'This spell can't be countered.' missing; the cost-reduction rule is written twice
