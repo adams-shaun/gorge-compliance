@@ -286,7 +286,19 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # StepMachine.orderCards, which takes the order pin only when its pick names that card and otherwise leaves the queue
 # alone. LoneCardOrderTest pins it (driver suite 166 tests). Driver-only change; cardsfolder/tokenscripts unchanged
 # (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-lone-card-order.
-FORGE_ORACLE_REF ?= 2bf0a1cb3641001a77e3303bf3c067640a9f799d
+# 37726abafb = 3494ec7d2b plus the state-based-action graveyard batch order: one SBA pass that moves cards from more than one of
+# noRegCreats / desCreats / sacrificeList now puts their union to the owners once (CR 704.3, 404.3) and dispatches each card down
+# its own path in that order; a single list keeps its existing path. `SbaGraveyardOrderTest` (forge-oracle) fails before with no
+# ask at all and passes after (Volcanic Salvo's 0/3 + 0-loyalty planeswalker). Production driver source unchanged (the commit adds
+# SbaGraveyardOrderTest); cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/forge-sba-graveyard-order.
+# c674c0977f = 37726abafb plus the later-pass fix: the union branch no longer sets the per-list ordered flags (a later pass in the same
+# checkStateEffects call with one multi-card list, e.g. two creatures at 0 toughness after a lord died in pass 0, still asks as before);
+# it remembers the ordered cards instead. The two-pass test laterPassWithOneMultiCardListStillAsks fails on 37726abafb and passes here.
+# c3b04cf264 = the clean merge of 2bf0a1cb36 (the one-card order pin) and c674c0977f (the SBA batch order), both branched from
+# 3494ec7d2b; the two touch disjoint files (forge-oracle's ScriptedController and StepMachine vs forge-game's GameAction), so the
+# pinned driver keeps both fixes. cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/forge-sba-graveyard-order.
+FORGE_ORACLE_REF ?= c3b04cf264b992134477ae759417b4faf28baef3
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
