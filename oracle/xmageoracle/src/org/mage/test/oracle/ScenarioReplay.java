@@ -35,6 +35,7 @@ import mage.cards.CardWithSpellOption;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.DoubleFacedCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -4443,6 +4444,30 @@ public class ScenarioReplay extends CardTestPlayerBase {
         super.addCard(gameZone, player, setCode.isEmpty() ? cardName : setCode + "-" + cardName, count, tapped);
     }
 
+    /** The name XMage gives a land play of the named card: "Play <name>".
+     * A modal DFC played as a land enters with a land face up (CR 712.12),
+     * and XMage puts its PlayLandAbility on that half under the half's own
+     * name, so a nonland front (Glasspool Mimic) plays by its land back
+     * (Glasspool Shore). Any other card keeps its name. */
+    private static String landPlayName(String name) {
+        CardInfo info = CardRepository.instance.findCard(name, true);
+        return landFaceName(info == null ? null : info.createCard(), name);
+    }
+
+    /** landPlayName's rule on a created card: the right half's name when c
+     * is a modal DFC whose left half is not a land and whose right half is;
+     * otherwise name. */
+    static String landFaceName(Card c, String name) {
+        if (c instanceof ModalDoubleFacedCard) {
+            Card left = ((ModalDoubleFacedCard) c).getLeftHalfCard();
+            Card right = ((ModalDoubleFacedCard) c).getRightHalfCard();
+            if (!left.isLand() && right.isLand()) {
+                return right.getName();
+            }
+        }
+        return name;
+    }
+
     /** The front half of a split/Room card's "A // B" name, or the name
      * unchanged when it is not a split name. */
     static String frontHalf(String n) {
@@ -6629,7 +6654,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             case "play": {
                 String playRef = str(st, "card");
-                String landName = xmageSpelling(refName(playRef));
+                String landName = landPlayName(xmageSpelling(refName(playRef)));
                 String playAlias = refAlias.get(playRef);
                 if (playAlias == null) {
                     playUnaliasedLand(p, playRef, landName);

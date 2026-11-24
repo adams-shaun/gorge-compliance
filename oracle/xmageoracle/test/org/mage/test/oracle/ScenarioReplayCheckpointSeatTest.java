@@ -245,6 +245,19 @@ public final class ScenarioReplayCheckpointSeatTest {
                 new ScenarioReplay.PlayLandCandidate("Brightclimb Pathway", half, mainCard));
         equal(half, d.choosePlayLandSource(dfc, "Brightclimb Pathway", mainCard));
         equal(null, d.choosePlayLandSource(dfc, "Island", null));
+
+        // A modal DFC played as a land enters with a land face up (CR 712.12),
+        // and XMage's PlayLandAbility sits on that half, named for it: the
+        // play command must name Glasspool Shore, not the creature front
+        // Glasspool Mimic. A land front (Pathway) keeps its front name; a
+        // single-faced land is unchanged.
+        mage.cards.Card mimic = new mage.cards.g.GlasspoolMimic(UUID.randomUUID(),
+                new mage.cards.CardSetInfo("Glasspool Mimic", "ZNR", "60", mage.constants.Rarity.RARE));
+        equal("Glasspool Shore", ScenarioReplay.landFaceName(mimic, "Glasspool Mimic"));
+        mage.cards.Card pathway = new mage.cards.b.BrightclimbPathway(UUID.randomUUID(),
+                new mage.cards.CardSetInfo("Brightclimb Pathway", "ZNR", "259", mage.constants.Rarity.RARE));
+        equal("Brightclimb Pathway", ScenarioReplay.landFaceName(pathway, "Brightclimb Pathway"));
+        equal("Swamp", ScenarioReplay.landFaceName(null, "Swamp"));
         System.out.println("PASS checkpoint seat and bound activation text");
     }
 }
