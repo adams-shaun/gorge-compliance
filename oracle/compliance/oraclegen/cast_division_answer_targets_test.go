@@ -6,6 +6,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
@@ -71,5 +72,58 @@ func TestDividedCastTwoTargetsFromAnswersScriptsShares(t *testing.T) {
 	want := []string{"target p1:Grizzly Bears^X=2", "target p1:Serra Angel^X=1"}
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("two answer targets: got %v want %v", got, want)
+	}
+}
+
+// Throw a Line is an Adventure spell face: put two +1/+1 counters distributed
+// among one or two target creatures. A lone target takes both counters and
+// gorge asks no division (CR 601.2d), but XMage's TargetAmount still scripts
+// the share as "<ref>^X=2"; a plain target fails "Must be target amount".
+func TestDividedCastLoneTargetPutCounterFromAnswersScriptsShare(t *testing.T) {
+	got := dividedAnswerTargets(t, `{
+  "name": "ondu-knotmaster-throw-a-line-lone", "cr": ["601.2d"], "why": "lone divided PutCounter target from answers",
+  "setup": {"p0": {"hand": ["Ondu Knotmaster"]}, "p1": {"battlefield": ["Phyrexian Walker"]}},
+  "steps": [
+    {"op": "cast", "seat": 0, "card": "p0:Ondu Knotmaster", "cast_mode": "adventure_alt", "mana": "WB", "answers": [{"kind": "target", "pick": ["p1:Phyrexian Walker"]}]},
+    {"op": "resolve"}
+  ]
+}`, false)
+	want := []string{"target p1:Phyrexian Walker^X=2"}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("lone answer PutCounter target: got %v want %v", got, want)
+	}
+}
+
+// TestDividedSpellFaceFollowsCastMode pins that spellDivision reads the face
+// the cast selects, not whichever face carries a divided spell ability: an
+// alternate-face cast mode flips to the second face, an explicit ref may name
+// it, and every other cast reads the main face.
+func TestDividedSpellFaceFollowsCastMode(t *testing.T) {
+	reg := cards.NewRegistry()
+	reg.Add(&cards.Card{AlternateMode: "Adventure", Faces: []*cards.Face{
+		{Name: "Front", Abilities: []*cards.SA{{Kind: "SP", API: "DealDamage", Params: map[string]string{
+			"ValidTgts": "Any", "DividedAsYouChoose": "3"}}}},
+		{Name: "Back", Types: []string{"Sorcery", "Adventure"}, Abilities: []*cards.SA{{Kind: "SP", API: "PutCounter", Params: map[string]string{
+			"ValidTgts": "Creature", "DividedAsYouChoose": "2"}}}},
+	}})
+	for _, tc := range []struct {
+		name  string
+		st    Step
+		api   string
+		total int
+	}{
+		{"front by ref", Step{Card: "p0:Front"}, "DealDamage", 3},
+		{"adventure_alt flips to the back", Step{Card: "p0:Front", CastMode: "adventure_alt"}, "PutCounter", 2},
+		{"disturb flips to the back", Step{Card: "p0:Front", CastMode: "disturb"}, "PutCounter", 2},
+		{"converted flips to the back", Step{Card: "p0:Front", CastMode: "converted"}, "PutCounter", 2},
+		{"back named by ref", Step{Card: "p0:Back"}, "PutCounter", 2},
+		{"prepared copy names its spell face", Step{Card: "p0:Back", CastMode: "prepared_copy"}, "PutCounter", 2},
+		{"non-flip mode reads the front", Step{Card: "p0:Front", CastMode: "kicked"}, "DealDamage", 3},
+		{"adventure_recast returns to the front", Step{Card: "p0:Back", CastMode: "adventure_recast"}, "DealDamage", 3},
+	} {
+		api, total, ok := spellDivision(reg, tc.st)
+		if !ok || api != tc.api || total != tc.total {
+			t.Errorf("%s: spellDivision = (%q, %d, %v), want (%q, %d, true)", tc.name, api, total, ok, tc.api, tc.total)
+		}
 	}
 }
