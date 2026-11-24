@@ -1593,8 +1593,34 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * and every other candidate is matched by name or setup alias. Shared
          * by the choose and chooseTarget forced-pick paths so a player
          * candidate cannot be missed by one of them. */
+        /** The picks of one queued answer: TestPlayer's "^" join splits into
+         * its segments, in order; any other answer is its own one segment. */
+        static List<String> answerSegments(String answer) {
+            List<String> parts = new ArrayList<>();
+            for (String part : answer.split("\\^")) {
+                if (!part.isEmpty()) {
+                    parts.add(part);
+                }
+            }
+            return parts;
+        }
+
         private boolean answerNamesCandidate(Game game, UUID id, String answer) {
             if (answer == null) {
+                return false;
+            }
+            if (answer.contains("^")) {
+                // A multi-pick answer ("Ornithopter^Sol Ring", TestPlayer's
+                // "^" join) names a candidate when any segment does. Missing
+                // it made a forced ask take every candidate in XMage's
+                // possibleTargets (HashSet) order, so Rottenmouth Viper's two
+                // sacrificed permanents reached the graveyard in a random
+                // order and the scripted pick was left unused.
+                for (String part : answerSegments(answer)) {
+                    if (answerNamesCandidate(game, id, part)) {
+                        return true;
+                    }
+                }
                 return false;
             }
             if (answer.startsWith("targetPlayer=")) {
