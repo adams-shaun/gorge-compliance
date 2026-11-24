@@ -1740,6 +1740,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         return false;
                     }
                 }
+                if (target.getMinNumberOfTargets() > 0 && !getTargets().isEmpty()
+                        && target.getOriginalTarget() instanceof mage.target.TargetPermanent
+                        && (source == null || !source.getTargets().contains(target))
+                        && (source == null || !source.getTargets().contains(target.getOriginalTarget()))) {
+                    // A bespoke non-targeting pick (Wayward Guide-Beast's "return
+                    // a land you control to its owner's hand") is posed through
+                    // choose, which reads the CHOICE queue, while the generator
+                    // scripted it for the chooseTarget twin on the TARGET queue.
+                    UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+                    List<UUID> candidates = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
+                    candidates.removeIf(target::contains);
+                    movePickToChoices(getChoices(), getTargets(), !candidates.isEmpty(), answer -> {
+                        for (UUID id : candidates) {
+                            if (answerNamesCandidate(game, id, answer)) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    });
+                }
                 if (forcedChoose(target, source, game)) {
                     return true;
                 }
@@ -1788,6 +1808,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 choices.add(0, targets.remove(0));
             }
             return Boolean.TRUE;
+        }
+
+        /**
+         * A mandatory choose ask whose answer sits on the TARGET queue: when the
+         * choice queue's head names no candidate (and is no skip) and the target
+         * queue's head names one, that answer moves to the front of the choice
+         * queue, where makeChoose reads it. Returns whether it moved. Matched by
+         * the candidates, never by card name.
+         */
+        static boolean movePickToChoices(List<String> choices, List<String> targets, boolean hasCandidates,
+                java.util.function.Predicate<String> namesCandidate) {
+            if (!hasCandidates || targets.isEmpty() || TestPlayer.TARGET_SKIP.equals(targets.get(0))
+                    || !namesCandidate.test(targets.get(0))) {
+                return false;
+            }
+            if (!choices.isEmpty() && (TestPlayer.CHOICE_SKIP.equals(choices.get(0)) || namesCandidate.test(choices.get(0)))) {
+                return false;
+            }
+            choices.add(0, targets.remove(0));
+            return true;
         }
 
         /** Takes every candidate of a choose ask that has no choice in it:

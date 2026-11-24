@@ -58,9 +58,10 @@ public final class ScenarioReplayDriverAsksTest {
         phyrexianLife();
         wishDeclined();
         optionalMultiCandidateTarget();
+        mandatoryChoosePickOnTargetQueue();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
                 + " face-down attacker, manifested face-down target, declined dig, alternative cast, promised gift, replacement order,"
-                + " lone forced target, phyrexian life, wish decline, optional multi-candidate target");
+                + " lone forced target, phyrexian life, wish decline, optional multi-candidate target, mandatory choose pick on the target queue");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
@@ -105,6 +106,33 @@ public final class ScenarioReplayDriverAsksTest {
      * for TestPlayer, an unscripted ask is not declared unscriptable (it stays
      * the base's strict miss), and a skip queued for a LATER target object is
      * hidden from this ask. */
+    /** Wayward Guide-Beast: a mandatory non-targeting choose of a controlled land whose pick the
+     * generator scripted on the TARGET queue moves to the CHOICE queue. */
+    private static void mandatoryChoosePickOnTargetQueue() throws Exception {
+        Class<?>[] types = {List.class, List.class, boolean.class, java.util.function.Predicate.class};
+        java.util.function.Predicate<String> lands = a -> a.equals("@p0:Mountain") || a.equals("@p0:Forest");
+        List<String> choices = new ArrayList<>();
+        List<String> targets = new ArrayList<>(Arrays.asList("@p0:Mountain", "Other"));
+        check((Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a target-queue pick naming a candidate moves");
+        check(choices.equals(Collections.singletonList("@p0:Mountain")) && targets.equals(Collections.singletonList("Other")),
+                "the pick leads the choice queue and leaves the target queue: " + choices + " " + targets);
+        choices = new ArrayList<>(Arrays.asList("@p0:Forest"));
+        targets = new ArrayList<>(Arrays.asList("@p0:Mountain"));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a choice head that names a candidate is this ask's own answer");
+        choices = new ArrayList<>();
+        targets = new ArrayList<>(Arrays.asList("Other"));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a target head naming no candidate stays");
+        targets = new ArrayList<>(Arrays.asList("@p0:Mountain"));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, false, lands),
+                "an ask with no candidates takes nothing");
+        choices = new ArrayList<>(Arrays.asList(TestPlayer.CHOICE_SKIP));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a choice skip is this ask's own answer");
+    }
+
     private static void optionalMultiCandidateTarget() throws Exception {
         Class<?>[] empty = {int.class, int.class, boolean.class};
         check(!(Boolean) adapter("unscriptableEmptyAsk", empty, 0, 2, false),
