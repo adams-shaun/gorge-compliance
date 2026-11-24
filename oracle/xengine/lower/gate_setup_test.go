@@ -440,6 +440,68 @@ func TestPlaceRefusesEntryCounterSelf(t *testing.T) {
 	}
 }
 
+// TestGateRefusesSetupRegenerationShield: gorge records a regeneration shield
+// as the internal "Shield" counter marker, not a counter (CR 701.19a: the
+// shield is a replacement effect). The live digest drops the marker
+// (game.counterMap), while setupCounters would copy it into the scenario as a
+// real counter; a live shield is also state setup cannot restate. The gate
+// must refuse the window, and the token path that copies Object.Counters must
+// refuse a marker too.
+func TestGateRefusesSetupRegenerationShield(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	o := plantBattlefieldCard(t, reg, e, "Mox Tantalite", func(o *state.Object) bool {
+		return o.Owner == e.G.Active
+	})
+	if r := capture(e, at, true).Reasons; len(r) != 0 {
+		t.Fatalf("planted cut already refused: %v", r)
+	}
+
+	o.Counters = []state.Counter{{Kind: "Shield", N: 1}}
+	if net, ok := setupCounters(o); ok || net["Shield"] != 0 {
+		t.Fatalf("setupCounters = %v, %v; want refused without the marker", net, ok)
+	}
+	c := capture(e, at, true)
+	if !slices.Contains(c.Reasons, reasonCountersEntry) {
+		t.Fatalf("reasons %v, want %s", c.Reasons, reasonCountersEntry)
+	}
+	for s := range c.Setup {
+		for name, cs := range c.Setup[s].Counters {
+			if n := cs["Shield"]; n != 0 {
+				t.Errorf("setup counter %s Shield = %d, want no marker counter", name, n)
+			}
+		}
+		for _, tk := range c.Setup[s].Tokens {
+			if n := tk.Counters["Shield"]; n != 0 {
+				t.Errorf("setup token counter Shield = %d, want no marker counter", n)
+			}
+		}
+	}
+
+	// A zero amount is not state (a spent marker leaves the entry behind): it
+	// must neither refuse the window nor be placed.
+	o.Counters = []state.Counter{{Kind: "Shield", N: 0}}
+	if net, ok := setupCounters(o); !ok || net["Shield"] != 0 {
+		t.Fatalf("zero-amount marker: setupCounters = %v, %v; want placed with no marker", net, ok)
+	}
+	if c := capture(e, at, true); len(c.Reasons) != 0 {
+		t.Fatalf("zero-amount marker refused: %v", c.Reasons)
+	}
+
+	// The token counter path is the sibling that also copies Object.Counters
+	// into setup; a marker on a token must take the same refusal.
+	tokCard := &cards.Card{}
+	g := &state.Game{Tokens: map[string]*cards.Card{"zz_tok": tokCard}}
+	w := &walker{g: g, why: map[string]bool{}, xmage: false}
+	w.checkToken(&state.Object{
+		Card: tokCard, Zone: state.ZBattlefield, IsToken: true,
+		Counters: []state.Counter{{Kind: "Shield", N: 1}},
+	})
+	if !w.why[reasonCountersEntry] {
+		t.Fatalf("token with a regeneration marker: reasons %v, want %s", sortedKeys(w.why), reasonCountersEntry)
+	}
+}
+
 // TestPlaceRefusesPTTurnHistory: Duelist of the Mind's power is the cards its
 // controller drew this turn. The live game at a window start has drawn the
 // turn's card (1/3), the placed one has drawn none (0/3), so the gate refuses
