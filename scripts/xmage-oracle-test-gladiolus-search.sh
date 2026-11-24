@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Replay Gladiolus Amicitia's stored item: a mandatory 1..1 library search
+# with 32 legal lands and no scripted pick must gather the first eligible
+# card instead of stopping the play with "Missing TARGET def" (strict and
+# trailing). Requires the read-only XMage build, like the driver's other
+# javac checks.
+set -euo pipefail
+root=$(realpath -m "${XMAGE_ORACLE_DIR:-$(dirname "$0")/../.oracle-build/xmage}")
+out=$(realpath -m "${1:-.coverage/xmage-driver/gladiolus-search-driverout}")
+here=$(cd "$(dirname "$0")/.." && pwd)
+fixture="$here/oracle/xmageoracle/test/fixtures/gladiolus-amicitia-search.jsonl"
+export JAVA_HOME="$root/jdk"
+export PATH="$JAVA_HOME/bin:$PATH"
+tests="$root/mage/Mage.Tests"
+cp="$tests/target/test-classes:$tests/target/classes:$(< "$root/tests.cp")"
+mkdir -p "$out"
+javac -J-Xmx512m -nowarn -d "$out" -cp "$cp" \
+  "$here/oracle/xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java" \
+  "$here/oracle/xmageoracle/test/org/mage/test/oracle/ScenarioReplayGladiolusSearchTest.java"
+# The game's H2 card database resolves from its working directory, and the
+# XMage build tree is read-only: run from a scratch cwd with a private copy of
+# the DB, as scripts/xmage-oracle-run.sh does.
+run="$out.cwd"
+rm -rf "$run"
+mkdir -p "$run/db"
+for e in "$tests"/*; do
+  [ "$(basename "$e")" = db ] || ln -s "$e" "$run/"
+done
+cp --reflink=auto "$tests/db/cards.h2.mv.db" "$run/db/"
+cd "$run"
+systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% -- \
+  "$JAVA_HOME/bin/java" -Xmx1g -XX:ActiveProcessorCount=2 \
+  -Dlog4j.configuration=file:/dev/null -cp "$out:$cp" \
+  org.mage.test.oracle.ScenarioReplayGladiolusSearchTest "$fixture"

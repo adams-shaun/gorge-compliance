@@ -2196,11 +2196,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
 
         /** The cards-list overload TargetCardInLibrary.choose (every library
-         * search) reaches. The same two unscripted-ask rules as the plain
-         * Target funnel apply here: an ask with no legal candidate is
-         * declined at any minimum rather than failing "Missing TARGET def",
-         * and a lone legal candidate is taken because gorge settles it without
-         * a decision. Every other ask is the base's. */
+         * search) reaches. The unscripted-ask rules of the plain Target funnel
+         * apply here: an ask with no legal candidate is declined at any
+         * minimum rather than failing "Missing TARGET def", and a lone legal
+         * candidate is taken because gorge settles it without a decision. A
+         * short search closes on its skip, and a single-pick search with many
+         * legal cards gathers the first one ({@link #searchPickChoice}).
+         * Every other ask is the base's. */
         @Override
         public boolean chooseTarget(Outcome outcome, Cards cards, mage.target.TargetCard target, Ability source, Game game) {
             if (target instanceof mage.target.common.TargetCardInLibrary) {
@@ -2217,20 +2219,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         return true;
                     }
                 }
-            }
-            if (target instanceof mage.target.common.TargetCardInLibrary
-                    && shortSearchStop(getTargets(), target.isRequired(),
-                            target.getMinNumberOfTargets(), target.getMaxNumberOfTargets())) {
-                // A search for cards with a stated quality need not find them
-                // all (CR 701.23b): XMage leaves the target not required, but
-                // TestPlayer rejects a skip on a fixed-count ask. Close the
-                // selection with what is chosen. isChosen stays false below
-                // the stated count, so the result is the pick count itself:
-                // TargetCardInLibrary stops on a true result with nothing new
-                // selected and the effect then takes the short selection.
-                getTargets().remove(0);
-                target.setSkipChoice(true);
-                return target.getSize() > 0;
+                if (shortSearchStop(getTargets(), target.isRequired(),
+                        target.getMinNumberOfTargets(), target.getMaxNumberOfTargets())) {
+                    // A search for cards with a stated quality need not find them
+                    // all (CR 701.23b): XMage leaves the target not required, but
+                    // TestPlayer rejects a skip on a fixed-count ask. Close the
+                    // selection with what is chosen. isChosen stays false below
+                    // the stated count, so the result is the pick count itself:
+                    // TargetCardInLibrary stops on a true result with nothing new
+                    // selected and the effect then takes the short selection.
+                    getTargets().remove(0);
+                    target.setSkipChoice(true);
+                    return target.getSize() > 0;
+                }
+                UUID searchPick = searchPickChoice(getTargets(),
+                        libraryCandidates(cards, possible, target),
+                        target.getMaxNumberOfTargets() == 1,
+                        skipCanCloseAsk(target),
+                        (id, answer) -> hasObjectTargetNameOrAlias(game.getObject(id), answer));
+                if (searchPick != null) {
+                    target.addTarget(searchPick, source, game);
+                    return true;
+                }
             }
             return super.chooseTarget(outcome, cards, target, source, game);
         }
@@ -2242,6 +2252,57 @@ public class ScenarioReplay extends CardTestPlayerBase {
         static boolean shortSearchStop(List<String> targets, boolean required, int min, int max) {
             return !targets.isEmpty() && TestPlayer.TARGET_SKIP.equals(targets.get(0))
                     && !required && min == max;
+        }
+
+        /** The card an unscripted library search gathers, or null to leave
+         * the ask to the base player. A search is not a decision gorge
+         * always records: an item whose cut ends before the search (Gladiolus
+         * Amicitia's ETB, 32 legal lands) scripts no card name, yet XMage
+         * poses the mandatory TargetCardInLibrary ask and strict mode stops
+         * with "Missing TARGET def". {@link #libraryCandidates} supplies the
+         * legal cards in the order XMage presents them, so its first entry is
+         * a deterministic pick rather than a set iteration order. Only a
+         * single-pick ask is answered here: a multi-pick search's count is a
+         * decision of its own and must stay scripted. A queued answer of this
+         * ask's own -- a front skip that can close it, or any entry naming a
+         * candidate (the base scans the whole visible queue) -- goes to the
+         * base; an answer for a later ask does not stop the pick. This is the
+         * role-based rule for the whole TargetCardInLibrary family, not a
+         * list of search cards. */
+        static UUID searchPickChoice(List<String> targetQueue, List<UUID> candidates,
+                boolean singlePick, boolean skipClosesAsk, BiPredicate<UUID, String> namesCandidate) {
+            if (!singlePick || candidates.isEmpty()) {
+                return null;
+            }
+            if (!targetQueue.isEmpty() && TestPlayer.TARGET_SKIP.equals(targetQueue.get(0)) && skipClosesAsk) {
+                return null;
+            }
+            for (String answer : targetQueue) {
+                for (UUID id : candidates) {
+                    if (namesCandidate.test(id, answer)) {
+                        return null;
+                    }
+                }
+            }
+            return candidates.get(0);
+        }
+
+        /** The target's unchosen legal cards in the order the search ask
+         * presents them. TargetCardInLibrary.choose sorts the searchable
+         * library by card name into the Cards it passes here, and CardsImpl
+         * is a LinkedHashSet, so this iteration is that presentation order. */
+        static List<UUID> libraryCandidates(Cards cards, java.util.Collection<UUID> possible,
+                mage.target.Target target) {
+            List<UUID> out = new ArrayList<>();
+            if (cards == null) {
+                return out;
+            }
+            for (UUID id : cards) {
+                if (possible.contains(id) && !target.contains(id)) {
+                    out.add(id);
+                }
+            }
+            return out;
         }
 
         /**
