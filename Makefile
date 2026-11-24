@@ -33,7 +33,11 @@ GO_TEST_FLAGS ?= -p=2
 # its blueprint target, CR 601.2b/601.2c: Death Denied with no creature card in its controller's graveyard, X = 0;
 # the same gap covered every TargetsCountAdjuster user with a min-1 blueprint). Fork branch fix/xtargets-x-zero,
 # DeathDeniedTest.
-XMAGE_REF  ?= 7aeb547a86c8f783684b6565d7e60172f828d941
+# 3a3f088f75 = 7aeb547a86 + fork #21 (declare blockers and combat damage are skipped only when no creature was
+# declared as an attacker or put onto the battlefield attacking; a declared attacker that later leaves combat does not
+# un-declare the attack, CR 508.8: Daemogoth Titan's own attack trigger sacrifices it, Duergar Assailant sacrifices
+# itself to its damage ability). Fork branch fix/attacker-removed-combat-steps, AttackerRemovedCombatStepsTest.
+XMAGE_REF  ?= 3a3f088f75af3707eb212914da4c0d93151d2f77
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
