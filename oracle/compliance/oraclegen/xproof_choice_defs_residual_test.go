@@ -45,6 +45,22 @@ func TestActivationForcedXAnnounceIsScripted(t *testing.T) {
 	if got := xanswersForScenario(reg, rules.OracleResult{Decisions: []rules.OracleDecision{x0}}, craft, nil, nil); got != nil {
 		t.Fatalf("Craft XMin activation = %#v, want unscripted", got)
 	}
+	// Ludevic, Necrogenius's {X} mana cost and ExileXFromYourGraveCost each
+	// announce X, so the one recorded X = 1 scripts two answers.
+	reg.Add(&cards.Card{Faces: []*cards.Face{{
+		Name: "Ludevic, Necrogenius",
+		Abilities: []*cards.SA{{
+			Kind: "AB", API: "SetState",
+			Params: map[string]string{"Cost": "XMin1 X U U B B ExileFromGrave<X/Creature/creature cards>"},
+		}},
+	}}})
+	x1 := x0
+	x1.Picks, x1.PickRefs = []string{"X = 1"}, []string{"X = 1"}
+	ludevic := Scenario{Steps: []Step{{Op: "activate", Seat: 0, Card: "p0:Ludevic, Necrogenius", AbilityIndex: &idx}}}
+	wantTwo := [][]XAnswer{{{Seat: 0, Kind: "choice", Value: "X=1"}, {Seat: 0, Kind: "choice", Value: "X=1"}}}
+	if got := xanswersForScenario(reg, rules.OracleResult{Decisions: []rules.OracleDecision{x1}}, ludevic, nil, nil); !reflect.DeepEqual(got, wantTwo) {
+		t.Fatalf("Ludevic X = 1 activation = %#v, want %#v", got, wantTwo)
+	}
 }
 
 // TestCopyEnterAsItselfScriptsNoChooseUse: XMage's optional
@@ -60,9 +76,18 @@ func TestCopyEnterAsItselfScriptsNoChooseUse(t *testing.T) {
 	}
 	copyPick := decline
 	copyPick.Options, copyPick.Picks, copyPick.PickRefs = 2, []string{"Grizzly Bears"}, []string{"p1:Grizzly Bears"}
-	want = [][]XAnswer{nil, {{Seat: 0, Kind: "choice", Value: "yes"}, {Seat: 0, Kind: "target", Value: "Grizzly Bears"}}}
+	want = [][]XAnswer{nil, {{Seat: 0, Kind: "choice", Value: "yes"}, {Seat: 0, Kind: "choice", Value: "Grizzly Bears"}}}
 	if got := xanswers([]rules.OracleDecision{copyPick}, 2, nil, nil); !reflect.DeepEqual(got, want) {
 		t.Fatalf("copy pick = %#v, want %#v", got, want)
+	}
+	// Two copy candidates: CopyPermanentEffect's controller.choose reaches
+	// makeChoose, so the pick is a CHOICE-queue object name, not a target.
+	two := decline
+	two.Options, two.Picks, two.PickRefs = 3, []string{"Grizzly Bears"}, []string{"p0:Grizzly Bears"}
+	two.OptionRefs = []string{"p0:Grizzly Bears", "p0:Forest"}
+	want = [][]XAnswer{nil, {{Seat: 0, Kind: "choice", Value: "yes"}, {Seat: 0, Kind: "choice", Value: "Grizzly Bears"}}}
+	if got := xanswers([]rules.OracleDecision{two}, 2, nil, nil); !reflect.DeepEqual(got, want) {
+		t.Fatalf("two-candidate copy pick = %#v, want %#v", got, want)
 	}
 }
 
@@ -88,9 +113,10 @@ func TestBlightTriggerCostPayLeadsTriggerOrder(t *testing.T) {
 	}
 }
 
-// TestSearchZoneElectionScriptsPerZone: SearchLibraryGraveyardPutInHandEffect
-// asks the library then the graveyard chooseUse; gorge's zone election is one
-// boolean per prompt. A wider origin set keeps the old unscripted handling.
+// TestSearchZoneElectionScriptsPerZone pins the ask sequence. A library hit
+// scripts only the library yes (XMage asks the graveyard chooseUse only when
+// cardFound == null); a library miss or a graveyard-only election scripts the
+// graveyard boolean too.
 func TestSearchZoneElectionScriptsPerZone(t *testing.T) {
 	zone := func(options int, picks ...string) rules.OracleDecision {
 		kinds := make([]string, len(picks))
@@ -101,25 +127,29 @@ func TestSearchZoneElectionScriptsPerZone(t *testing.T) {
 			Resume: "search_zones", Options: options, Min: 1, Max: options,
 			Picks: picks, PickRefs: append([]string(nil), picks...), PickKinds: kinds}
 	}
+	libraryFirst := searchZoneAsk{libraryFirst: true}
 	for _, c := range []struct {
 		name string
 		d    rules.OracleDecision
+		ask  searchZoneAsk
 		want []XAnswer
 	}{
-		{"library", zone(2, "Search the library"),
+		{"library hit", zone(2, "Search the library"), searchZoneAsk{libraryFirst: true, libraryFound: true},
+			[]XAnswer{{0, "choice", "yes"}}},
+		{"library miss", zone(2, "Search the library"), libraryFirst,
 			[]XAnswer{{0, "choice", "yes"}, {0, "choice", "no"}}},
-		{"graveyard", zone(2, "Search the graveyard"),
+		{"graveyard", zone(2, "Search the graveyard"), libraryFirst,
 			[]XAnswer{{0, "choice", "no"}, {0, "choice", "yes"}}},
-		{"both", zone(2, "Search the library", "Search the graveyard"),
+		{"both hit", zone(2, "Search the library", "Search the graveyard"), searchZoneAsk{libraryFirst: true, libraryFound: true},
+			[]XAnswer{{0, "choice", "yes"}}},
+		{"both miss", zone(2, "Search the library", "Search the graveyard"), libraryFirst,
 			[]XAnswer{{0, "choice", "yes"}, {0, "choice", "yes"}}},
-		{"wider origin", zone(3, "Search the library", "Search the graveyard", "Search the hand"), nil},
+		{"graveyard-first unproven", zone(2, "Search the library"), searchZoneAsk{},
+			nil},
+		{"wider origin", zone(3, "Search the library", "Search the graveyard", "Search the hand"), libraryFirst,
+			nil},
 	} {
-		all := xanswers([]rules.OracleDecision{c.d}, 9, nil, nil)
-		var got []XAnswer
-		if len(all) > 8 {
-			got = all[8]
-		}
-		if !reflect.DeepEqual(got, c.want) {
+		if got := searchZoneAnswers(c.d, c.ask); !reflect.DeepEqual(got, c.want) {
 			t.Errorf("%s = %#v, want %#v", c.name, got, c.want)
 		}
 	}

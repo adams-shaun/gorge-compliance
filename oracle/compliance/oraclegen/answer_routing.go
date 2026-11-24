@@ -71,6 +71,10 @@ type answerRouting struct {
 	// ownBounce marks the steps whose hidden pick is an own-bounce effect
 	// (own_bounce_source.go): XMage reads that pick from the TARGET queue.
 	ownBounce map[int]bool
+	// searchZones maps a search_zones decision index to the XMage ask shape it
+	// answers (search_zone_source.go). An absent index is an unknown effect
+	// shape and stays unscripted rather than answering the wrong prompt.
+	searchZones map[int]searchZoneAsk
 }
 
 func newAnswerRouting(ds []rules.OracleDecision, digSources ...map[int]digSource) *answerRouting {
@@ -695,14 +699,17 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 	switch {
 	case d.Resume == "search_zones":
 		// gorge's CR 701.23 "and/or" election over the zones a search may
-		// use. XMage's SearchLibraryGraveyardPutInHandEffect asks one
-		// chooseUse per zone ("Search your library ...?", "Search your
-		// graveyard ...?"), so the election is one boolean per prompt, in
-		// XMage's library-then-graveyard order, never a zone label. Only the
-		// exact library/graveyard pair is translated: a wider origin set
-		// (hand, exile) has a different XMage dialog whose ask sequence is
-		// unproven, so it stays unscripted rather than guessed at.
-		return searchZoneAnswers(d), true
+		// use. XMage's SearchLibraryGraveyard* effects ask a chooseUse per
+		// zone, but the ask sequence depends on the card's XMage
+		// implementation (library then graveyard, the graveyard only on a
+		// library miss; some cards ask the graveyard first). searchZoneAsks
+		// resolves the source and only a proven library-first effect is
+		// mapped; an unproven or graveyard-first shape stays unscripted
+		// rather than answering the wrong prompt.
+		if ask, ok := r.searchZones[i]; ok {
+			return searchZoneAnswers(d, ask), true
+		}
+		return nil, true
 	case d.Resume == "etb" && len(d.Picks) == 1 && pickKind(d, 0) == "clone":
 		// An as-enters copy election. XMage's optional EntersBattlefieldEffect
 		// asks chooseUse "Use effect of <name>?" first: the decline ("Enter
@@ -855,12 +862,14 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 	return nil, false
 }
 
-// searchZoneAnswers translates gorge's two-zone library/graveyard election
-// into XMage's per-zone chooseUse prompts, in the effect's own order (library
-// then graveyard). nil means the decision is not that exact shape: a wider
-// origin set keeps the historical unscripted handling.
-func searchZoneAnswers(d rules.OracleDecision) []XAnswer {
-	if d.Options != 2 || len(d.Picks) == 0 {
+// searchZoneAnswers translates a proven library-first search_zones election
+// into XMage's SearchLibraryGraveyard* chooseUse sequence. XMage asks the
+// library first; it asks the graveyard only when the library search found no
+// card (cardFound == null), so a library hit scripts no graveyard boolean and
+// a library miss/decline scripts the graveyard election. nil means the
+// decision is not the exact two-zone pair.
+func searchZoneAnswers(d rules.OracleDecision, ask searchZoneAsk) []XAnswer {
+	if !ask.libraryFirst || d.Options != 2 || len(d.Picks) == 0 {
 		return nil
 	}
 	library, graveyard := false, false
@@ -883,21 +892,34 @@ func searchZoneAnswers(d rules.OracleDecision) []XAnswer {
 		}
 		return "no"
 	}
-	return []XAnswer{{d.Seat, "choice", yes(library)}, {d.Seat, "choice", yes(graveyard)}}
+	// The library chooseUse is always posed (a graveyard-only election
+	// answers no). The graveyard chooseUse is posed only when cardFound is
+	// still null, so a library hit consumes no graveyard answer.
+	as := []XAnswer{{d.Seat, "choice", yes(library)}}
+	if library && ask.libraryFound {
+		return as
+	}
+	return append(as, XAnswer{d.Seat, "choice", yes(graveyard)})
 }
 
 // cloneAnswers answers an as-enters copy election: XMage's optional
 // EntersBattlefieldEffect chooseUse takes "no" for gorge's "Enter as itself",
-// and "yes" for a copy pick, followed by the CopyPermanent target. The target
-// reuses singleTargetAnswer so the same-name and alias spellings stay in one
-// place.
+// and "yes" for a copy pick, followed by the copied object. CopyPermanentEffect
+// selects that object through controller.choose(Outcome.Copy, target, source,
+// game), which TestPlayer serves from the CHOICE queue (makeChoose), not the
+// target queue, so the pick uses the same choice spelling as any other object
+// pick -- including the same-name alias discriminator.
 func cloneAnswers(d rules.OracleDecision) []XAnswer {
 	if strings.EqualFold(strings.TrimSpace(d.Picks[0]), "Enter as itself") {
 		return []XAnswer{{d.Seat, "choice", "no"}}
 	}
 	as := []XAnswer{{d.Seat, "choice", "yes"}}
 	if len(d.PickRefs) > 0 {
-		as = append(as, singleTargetAnswer(d, 0))
+		label := d.Picks[0]
+		if label == "" {
+			label = oraclediffRefName(d.PickRefs[0])
+		}
+		as = append(as, XAnswer{d.Seat, "choice", disambiguatedObjectChoice(d, 0, label)})
 	}
 	return as
 }

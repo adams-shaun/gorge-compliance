@@ -1314,7 +1314,8 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var digSources map[int]digSource
 	var pipPlans map[int][]pipAsk
 	var casts map[int]bool
-	var activates map[int]bool
+	var activates map[int]int
+	var searchZones map[int]searchZoneAsk
 	var forage map[int][]string
 	var ownBounce map[int]bool
 	var snaps []rules.OracleSnapshot
@@ -1343,6 +1344,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 		if activates == nil {
 			activates = ex.activates
+		}
+		if searchZones == nil {
+			searchZones = ex.searchZones
 		}
 	}
 	// A hand_move/library_placement goes top-first (reverse the answers for
@@ -1394,6 +1398,10 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	if ownBounce != nil {
 		routing.ownBounce = ownBounce
 	}
+	if searchZones != nil {
+		routing.searchZones = searchZones
+	}
+	searchZoneSuppress := searchZoneRedundantBooleans(ds, searchZones)
 	// RemoveCounter's CounterType$ Any/All election is one per-counter run of
 	// KChoose picks in gorge but one multi-amount dialog in XMage: fold the
 	// run into one "X=<n>" amount per kind message before the generic choice
@@ -1478,6 +1486,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					any = true
 				}
 			}
+			continue
+		}
+		if searchZoneSuppress[i] {
+			// The mapped SearchLibraryGraveyard* effect folds the optional
+			// search choices into its own library chooseUse.
 			continue
 		}
 		folded := d.Via == "target" || (d.Kind == "target" && modal[d.Step])
@@ -1789,7 +1802,14 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				continue
 			}
 			if len(d.Picks) == 1 && strings.HasPrefix(d.Picks[0], "X = ") {
-				as = append(as, XAnswer{d.Seat, "choice", "X=" + strings.TrimPrefix(d.Picks[0], "X = ")})
+				answer := XAnswer{d.Seat, "choice", "X=" + strings.TrimPrefix(d.Picks[0], "X = ")}
+				as = append(as, answer)
+				for n := 1; activationAnnouncesX(d, activates) && n < activates[d.Step]; n++ {
+					// XMage's VariableManaCost and a separate VariableCostImpl
+					// announce X independently (Ludevic, Necrogenius's mana
+					// {X} then ExileXFromYourGraveCost).
+					as = append(as, answer)
+				}
 				break
 			}
 			if len(d.Picks) == 1 && pickKind(d, 0) == "number" {
@@ -2157,9 +2177,9 @@ func hasCostPick(d rules.OracleDecision) bool {
 // XMage's unscripted announce does not pay the repeated X when the pool leaves
 // one legal value (Gogo's unspent CC), so it is scripted. A forced single-X
 // announce is owned by castAnnouncesX/activationAnnouncesX (a real
-// VariableManaCost step) or left to XMage's own default (a Craft/XMin count:
-// Saheeli's Lattice, The Enigma Jewel). A forced announce that sizes a
-// sacrifice cost is the exception (announcesSacrificeX).
+// VariableManaCost step) or left to XMage's own default (a Craft keyword's
+// XMin count: Saheeli's Lattice, The Enigma Jewel). A forced announce that
+// sizes a sacrifice cost is the exception (announcesSacrificeX).
 func announcesX(d rules.OracleDecision) bool {
 	if !d.XMulti || len(d.Picks) != 1 || pickKind(d, 0) != "x" {
 		return false
@@ -2185,18 +2205,25 @@ func castAnnouncesX(d rules.OracleDecision, casts map[int]bool) bool {
 // ACTIVATION whose own cost names {X} (Talon of Pain's "{X}, {T}, Remove X
 // charge counters": gorge offered only X = 0 with no charge counters, and
 // XMage's announceX still strict-missed "Announce the value for {X} (any
-// value)"). The step set excludes Craft's XMin count (Saheeli's Lattice, The
-// Enigma Jewel): those are not VariableManaCosts and XMage announces their X
-// itself, so scripting one would leave an unused answer.
-func activationAnnouncesX(d rules.OracleDecision, activates map[int]bool) bool {
-	return announcesXAtStep(d, activates)
+// value)"). The mapped count is one per announcing cost: a VariableManaCost
+// and a separate VariableCostImpl each ask (Ludevic, Necrogenius's {X} plus
+// ExileXFromYourGraveCost), while a counter-removal cost that reuses the mana
+// X (Talon) counts once. Craft/XMin is a keyword, not an activation cost, and
+// stays out.
+func activationAnnouncesX(d rules.OracleDecision, activates map[int]int) bool {
+	return activates[d.Step] > 0 && announcesXShape(d)
 }
 
 // announcesXAtStep is the shared shape of a forced single-pick X announcement
-// on an owned step: the "X = <n>" pick kind, never the forced one-option label
-// asks these predicates exist to protect.
+// on an owned step.
 func announcesXAtStep(d rules.OracleDecision, steps map[int]bool) bool {
-	return steps[d.Step] && d.Kind == "choose_n" && len(d.Picks) == 1 && pickKind(d, 0) == "x" &&
+	return steps[d.Step] && announcesXShape(d)
+}
+
+// announcesXShape is the forced single-pick X announcement, never the forced
+// one-option label asks these predicates exist to protect.
+func announcesXShape(d rules.OracleDecision) bool {
+	return d.Kind == "choose_n" && len(d.Picks) == 1 && pickKind(d, 0) == "x" &&
 		strings.HasPrefix(d.Picks[0], "X = ")
 }
 

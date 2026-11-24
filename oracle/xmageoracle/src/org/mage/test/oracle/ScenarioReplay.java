@@ -1053,12 +1053,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return !head.equals("Yes") && !head.equals("No");
         }
 
-        /** An unscripted wish chooseUse ("... a card you own from outside the
-         * game ...") is declined when the sideboard holds no card. A queued
-         * Yes/No is the generator's own answer and stays for TestPlayer; a
-         * non-empty sideboard still asks because the card may be chosen. */
+        /** An unscripted plain wish chooseUse ("Put a card you own from outside
+         * the game ...") is declined when the sideboard holds no card.
+         * WishEffect's filter form (Coax from the Blind Eternities,
+         * alsoFromExile=true) instead says "Reveal ... from outside the game or
+         * choose ... in exile"; exile can still hold a candidate, so that
+         * wording is never declined here. A queued Yes/No is the generator's
+         * own answer and stays for TestPlayer; a non-empty sideboard still asks
+         * because the card may be chosen. */
         static boolean unanswerableWishAsk(String message, boolean sideboardEmpty, List<String> choices) {
-            if (message == null || !message.contains("from outside the game") || !sideboardEmpty) {
+            if (message == null || !sideboardEmpty
+                    || !message.startsWith("Put a card you own from outside the game")) {
                 return false;
             }
             if (!choices.isEmpty()) {

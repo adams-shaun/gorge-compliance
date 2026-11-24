@@ -6,6 +6,9 @@ import mage.constants.EmptyNames;
 import org.mage.test.player.TestPlayer;
 
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -96,9 +99,12 @@ public final class ScenarioReplayDriverAsksTest {
      * game into your hand?" before it checks the sideboard. With none outside
      * the game it has no candidate, so the driver declines an unscripted ask
      * instead of strict-missing; a queued boolean or a non-empty sideboard is
-     * left to TestPlayer. */
+     * left to TestPlayer. The filter form with alsoFromExile can still have an
+     * exile candidate, so its wording is never declined. */
     private static void wishDeclined() throws Exception {
         String wish = "Put a card you own from outside the game into your hand?";
+        String coax = "Reveal an Eldrazi card you own from outside the game or choose a face-up Eldrazi card"
+                + " you own in exile. Put that card into your hand?";
         Class<?>[] types = {String.class, boolean.class, List.class};
         check((Boolean) adapter("unanswerableWishAsk", types, wish, true, new ArrayList<String>()),
                 "an empty sideboard's unscripted wish must be declined");
@@ -106,8 +112,21 @@ public final class ScenarioReplayDriverAsksTest {
                 "a non-empty sideboard still asks");
         check(!(Boolean) adapter("unanswerableWishAsk", types, wish, true, new ArrayList<>(Arrays.asList("Yes"))),
                 "a queued yes is the generator's answer");
+        check(!(Boolean) adapter("unanswerableWishAsk", types, coax, true, new ArrayList<String>()),
+                "the alsoFromExile wording can still have an exile candidate and must ask");
         check(!(Boolean) adapter("unanswerableWishAsk", types, "Draw a card?", true, new ArrayList<String>()),
                 "another chooseUse is untouched");
+        // The helper alone is not the fix: pin that the chooseUse override
+        // actually calls it. Dropping the call would leave every check above
+        // passing while the strict replay fails again.
+        String src = System.getProperty("scenarioReplay.source");
+        check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
+        String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
+        int override = text.indexOf("public boolean chooseUse(Outcome outcome");
+        check(override >= 0, "ScriptedChoicePlayer must override chooseUse");
+        int call = text.indexOf("unanswerableWishAsk(", override);
+        check(call >= 0 && call < override + 600,
+                "ScriptedChoicePlayer.chooseUse must call unanswerableWishAsk");
     }
 
     private static void activeSeatOnePair() {
