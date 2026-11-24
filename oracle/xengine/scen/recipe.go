@@ -313,12 +313,20 @@ const burnedLife int32 = 17
 // first the corpus holds and certdeck accepts: no ability, defender.
 var bearers = []string{"Wall of Stone", "Wall of Wood"}
 
+// reasonPlayerCounters refuses a counters need whose removal reads a player's
+// counters (poison, rad, experience, energy): rules.StartSeat seeds battlefield
+// cards only, so no start position can exercise it and a placed permanent would
+// silently stand in for the player (Final Act, Survivor's Med Kit). A target
+// that also offers a permanent (Permanent,Opponent) keeps its permanent branch.
+const reasonPlayerCounters = "steps-needed:counters:player"
+
 // placeNeeds adds what certdeck.Derive says the card reads (see the forced
 // start above): graveyard fodder; for a lands need, certdeck's two extra
 // lands, tapped, so they add no mana; for opp-burn, the target seat's life
 // lowered; for a counters need, the counters themselves (placeCounters); for
 // every other need, one of certdeck's picks (pickEnabler). A need StartSpec
-// cannot place is a refusal: tokens (rules.StartSeat has no tokens yet).
+// cannot place is a refusal: tokens (rules.StartSeat has no tokens yet) and
+// counters a removal reads from a player, not a permanent (reasonPlayerCounters).
 func placeNeeds(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, generic string, f *StartFile) (string, error) {
 	needs := certdeck.Derive(c, b.Types())
 	if len(needs) == 0 {
@@ -347,6 +355,9 @@ func placeNeeds(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, g
 				f.Setup.P0.Tapped = append(f.Setup.P0.Tapped, generic)
 			}
 		case n.Class == certdeck.Counters:
+			if certdeck.CounterPlayer(c) {
+				return reasonPlayerCounters, nil
+			}
 			counterNeeds = append(counterNeeds, n)
 		case n.Class == certdeck.OppBurn:
 			if f.Setup.P0.Life == nil {
