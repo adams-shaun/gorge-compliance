@@ -330,3 +330,82 @@ func sacLands(reg *cards.Registry, name string) []string {
 	mana, _ := costTokens(f.Abilities[0].Params["Cost"])
 	return landsFor(mana, basicFor(f.ManaCost))
 }
+
+// spellStart is a SpellCast (or SpellCastOrCopy) trigger. "When you cast
+// this spell" (Card.Self, TriggerZones Stack or none) is the card cast from
+// hand. Otherwise the card is on the battlefield and the seat that
+// ValidActivatingPlayer names casts a carrier (carrierPool) that ValidCard
+// takes, with exactly its mana: on its own turn, or, for a NonActive caster,
+// an instant on the other seat's turn.
+func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
+	none := "no-generator:trigger:" + trig.Mode
+	p0 := &f.Setup.P0
+	if selfCard(trig) {
+		p0.Hand = []string{card}
+		p0.Battlefield = landsFor(splitCost(face.ManaCost), generic)
+		f.Focus = &StartFocus{Seat: seatPtr(0), Card: card, Kind: "cast"}
+		return ""
+	}
+	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
+		return none
+	}
+	caster, offTurn := 0, false
+	vap := trig.Params["ValidActivatingPlayer"]
+	who, prop, _ := strings.Cut(vap, ".")
+	switch who {
+	case "", "You", "Player":
+	case "Opponent":
+		caster = 1
+	default:
+		return none + ":caster"
+	}
+	switch prop {
+	case "":
+	case "NonActive":
+		offTurn = true
+	case "Opponent":
+		caster = 1
+	default:
+		return none + ":caster"
+	}
+	if trig.Params["OpponentTurn"] == "True" {
+		offTurn = true
+	}
+	// "your second spell each turn" (ActivatorThisTurnCast EQ2, GT1, GE2):
+	// that many casts of the carrier.
+	times := 1
+	if n := trig.Params["ActivatorThisTurnCast"]; n != "" {
+		_, cmp, ok := compare("cmc" + n)
+		if !ok {
+			return none + ":history"
+		}
+		for times = 1; times <= 3 && !cmp(times); times++ {
+		}
+		if times > 3 {
+			return none + ":history"
+		}
+	}
+	keep := func(cf *cards.Face) bool { return !offTurn || cf.IsInstant() }
+	if times > 1 {
+		// every cast takes its own lands: a free carrier keeps them few
+		keep = func(cf *cards.Face) bool { return (!offTurn || cf.IsInstant()) && cf.Cmc() == 0 }
+	}
+	name, _ := filterCarrier(reg, b, card, trig.Params["ValidCard"], keep)
+	if name == "" {
+		return none + ":filter"
+	}
+	p0.Battlefield = []string{card}
+	seats := [2]*StartSeat{p0, &f.Setup.P1}
+	for range times {
+		castCarrier(reg, seats[caster], name)
+	}
+	f.Active = caster
+	if offTurn {
+		f.Active = 1 - caster
+	}
+	f.Focus = &StartFocus{Seat: seatPtr(caster), Card: name, Kind: "cast"}
+	if times > 1 {
+		f.Focus.Times = times
+	}
+	return ""
+}

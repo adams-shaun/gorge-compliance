@@ -424,13 +424,13 @@ func TestScenUnlistedByXMageIsGenerated(t *testing.T) {
 // startRow is one forced-line start: the placements it must make and the
 // focus that makes the key's event happen.
 type startRow struct {
-	card, key, reason    string
-	active, maxTurns     int
-	p0Hand, p0BF, p1Hand []string
-	p1BF                 []string
-	focusSeat            int
-	focusCard, focusKind string
-	focusAbility         int
+	card, key, reason       string
+	active, maxTurns        int
+	p0Hand, p0BF, p1Hand    []string
+	p1BF                    []string
+	focusSeat               int
+	focusCard, focusKind    string
+	focusAbility, focusTime int
 }
 
 func checkStartRows(t *testing.T, rows []startRow) {
@@ -466,6 +466,9 @@ func checkStartRows(t *testing.T, rows []startRow) {
 				return
 			}
 			focusIs(t, f, r.focusSeat, r.focusCard, r.focusKind, r.focusAbility)
+			if f.Focus.Times != r.focusTime {
+				t.Errorf("focus times %d, want %d", f.Focus.Times, r.focusTime)
+			}
 			raw, err := f.Marshal()
 			if err != nil {
 				t.Fatal(err)
@@ -527,5 +530,31 @@ func TestStartZoneTriggers(t *testing.T) {
 		!slices.Equal(f.Setup.P0.Battlefield[:4], cat([]string{"Entity Tracker"}, rep("Plains", 3))) {
 		t.Errorf("Entity Tracker: hand %v battlefield %v focus %+v, want Nyxborn Courser and its three Plains",
 			f.Setup.P0.Hand, f.Setup.P0.Battlefield, f.Focus)
+	}
+}
+
+// TestStartSpellCastTriggers: a cast trigger is a carrier spell the filter
+// takes, cast by the seat ValidActivatingPlayer names: Reach Through Mists
+// ({U} instant, draw a card) for a noncreature spell, on the opponent's turn
+// for "whenever you cast a spell during an opponent's turn" (Brineborn
+// Cutthroat); "your second spell each turn" is two casts of Memnite (focus
+// times 2).
+func TestStartSpellCastTriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Brineborn Cutthroat", key: "f0/t0", active: 1, maxTurns: 1, p0Hand: []string{"Reach Through Mists"},
+			p0BF: []string{"Brineborn Cutthroat", "Island"}, focusCard: "Reach Through Mists", focusKind: "cast"},
+	})
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Cori-Steel Cutter", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("Cori-Steel Cutter: %+v %v", res, err)
+	}
+	f := res.Start
+	if !slices.Equal(f.Setup.P0.Hand, rep("Memnite", 2)) || f.Focus.Card != "Memnite" || f.Focus.Times != 2 || f.Setup.P0.Battlefield[0] != "Cori-Steel Cutter" {
+		t.Errorf("Cori-Steel Cutter: hand %v battlefield %v focus %+v, want two Memnite cast twice", f.Setup.P0.Hand, f.Setup.P0.Battlefield, f.Focus)
+	}
+	res, err = Generate(reg, b, "Case of the Ransacked Lab", "f0/t1", Options{Prefer: "start"})
+	if err != nil || res.Start == nil || !slices.Equal(res.Start.Setup.P0.Hand, []string{"Reach Through Mists"}) {
+		t.Errorf("Case of the Ransacked Lab (Instant,Sorcery): %+v %v", res.Start, err)
 	}
 }
