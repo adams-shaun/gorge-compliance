@@ -1,0 +1,145 @@
+{
+ "name": "xproof start Clement, the Worrywort f0/t0 seed 2",
+ "turn": 1,
+ "setup": {
+  "p0": {
+   "battlefield": [
+    "Forest",
+    "Forest",
+    "Island",
+    "Valley Mightcaller"
+   ],
+   "hand": [
+    "Clement, the Worrywort"
+   ],
+   "library_top": [
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Island",
+    "Forest",
+    "Island",
+    "Island",
+    "Island",
+    "Island",
+    "Forest",
+    "Island"
+   ],
+   "life": 20
+  },
+  "p1": {
+   "library_top": [
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains"
+   ],
+   "life": 20
+  }
+ },
+ "steps": [
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest#2",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Island",
+   "ability_index": 0
+  },
+  {
+   "op": "cast",
+   "seat": 0,
+   "card": "p0:Clement, the Worrywort"
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "resolve",
+   "seat": 0,
+   "answers": [
+    {
+     "kind": "trigger_order",
+     "pick": [
+      "p0:Clement, the Worrywort",
+      "p0:Valley Mightcaller"
+     ]
+    },
+    {
+     "kind": "target",
+     "pick": [
+      "p0:Valley Mightcaller"
+     ]
+    }
+   ]
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  }
+ ]
+}

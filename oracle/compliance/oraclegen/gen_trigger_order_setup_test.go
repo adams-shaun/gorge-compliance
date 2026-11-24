@@ -130,10 +130,10 @@ func TestTriggerOrderSetupQueueFollowsAsEntersChoice(t *testing.T) {
 
 // TestTriggerOrderGameplaySharedStepStaysDemoted pins that the setup retiming
 // does not leak into a gameplay step: a shared-step order at step 1 -- even
-// when its sources are setup permanents -- keeps the inert text form, because
-// XMage poses that ask at its own step and a leftover name would be consumed
-// by the step's other dialogs (measured: Baron Strucker/static#0.0 HARNESSes
-// under the name form; the demoted text form agrees).
+// when its sources are setup permanents -- keeps the demoted rule-text keys,
+// because XMage poses that ask at its own step and a leftover name would be
+// consumed by the step's other dialogs (measured: Baron Strucker/static#0.0
+// HARNESSes under the name form).
 func TestTriggerOrderGameplaySharedStepStaysDemoted(t *testing.T) {
 	order := triggerOrderDecision(1, "p0:Adrenaline Jockey", "p0:Rangers' Refueler")
 	order.Picks[1] = "Source: When this enters, do another thing."
@@ -152,9 +152,9 @@ func TestTriggerOrderGameplaySharedStepStaysDemoted(t *testing.T) {
 	got := xanswersSetup([]rules.OracleDecision{target, order}, 2, nil, nil, setup, nil)
 	want := [][]XAnswer{
 		nil,
-		{{0, "target", "Wastes"}, {0, "choice", "When this enters, do a thing."}, {0, "choice", "When this enters, do another thing."}},
+		{{0, "target", "Wastes"}, {0, "choice", "When this enters, do a thing."}},
 	}
 	if !reflect.DeepEqual(got, want) {
-		t.Fatalf("xanswersSetup = %#v, want %#v (a gameplay shared step keeps the inert text form)", got, want)
+		t.Fatalf("xanswersSetup = %#v, want %#v (a gameplay shared step keeps the demoted keys)", got, want)
 	}
 }
