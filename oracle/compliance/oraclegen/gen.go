@@ -1340,9 +1340,21 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var snaps []rules.OracleSnapshot
 	var orderAsks map[int]bool
 	var sources map[int][]string
+	var allPlayerUnless map[int]bool
+	var seats int
+	var chooseUseOrders map[int][]XAnswer
 	for _, ex := range extras {
 		if sources == nil {
 			sources = ex.sources
+		}
+		if allPlayerUnless == nil {
+			allPlayerUnless = ex.allPlayerUnless
+		}
+		if seats == 0 {
+			seats = ex.seats
+		}
+		if chooseUseOrders == nil {
+			chooseUseOrders = ex.chooseUseOrders
 		}
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
@@ -1428,6 +1440,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		routing.searchZones = searchZones
 	}
 	routing.sources = sources
+	routing.allPlayerUnless = allPlayerUnless
+	routing.seats = seats
+	routing.chooseUseOrders = chooseUseOrders
 	searchZoneSuppress := searchZoneRedundantBooleans(ds, searchZones)
 	// RemoveCounter's CounterType$ Any/All election is one per-counter run of
 	// KChoose picks in gorge but one multi-amount dialog in XMage: fold the
@@ -1634,6 +1649,16 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// which the ordinary choose_n route below already joins into
 				// one aliased choice; leaving the paid pick as a numeric mode
 				// answer sends chooseUse to TestPlayer's AI instead.
+				if routing.allPlayerUnless[i] {
+					// The "any player may have <source> deal N damage to
+					// them" punisher: XMage offers its chooseUse to every
+					// player in range, even after one accepts, while gorge
+					// stops at the first payer. Script one boolean per payer
+					// seat, not one per recorded decision, or the payer
+					// XMage still asks is left to its AI (Browbeat).
+					as = append(as, routing.allPlayerUnlessAnswers(i)...)
+					break
+				}
 				as = append(as, XAnswer{d.Seat, "choice", unlessPolarity(d)})
 				break
 			}
@@ -1692,8 +1717,14 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					// Timetwister-style per-player "may shuffle" (Turtles in
 					// Time) or a source-proven xmageChooseUseFaces punisher
 					// (Terrapact Intimidator's targeted opponent). The answer
-					// is yes/no for whichever seat chose.
+					// is yes/no for whichever seat chose. A yes branch that
+					// moves the looked-at window to the library bottom in any
+					// order carries XMage's follow-up card-order asks
+					// (chooseUseBottomOrders, Petals of Insight).
 					as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[m == ModeYesQueue]})
+					if m == ModeYesQueue {
+						as = append(as, routing.chooseUseOrders[d.Step]...)
+					}
 					continue
 				}
 				n := i + 1
