@@ -403,6 +403,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
             int occurrence = currentOccurrence(game);
             List<PlayerAction> hidden = hideOtherOccurrences(occurrence);
             try {
+                if (game.getStep() != null && game.getStep().getType() == PhaseStep.DECLARE_ATTACKERS) {
+                    // Every attacker was forced, so selectAttackers never
+                    // ran: the declaration satisfied the queued commands.
+                    dropAutoDeclaredAttacks(game);
+                }
                 return super.priority(game);
             } finally {
                 getActions().addAll(hidden);
@@ -1328,6 +1333,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             List<PlayerAction> hidden = hideOtherOccurrences(occurrence);
             try {
                 owner.applyExactAttackers(this, game);
+                dropAutoDeclaredAttacks(game);
                 super.selectAttackers(game, attackingPlayerId);
             } finally {
                 getActions().addAll(hidden);
@@ -1344,6 +1350,48 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 super.selectBlockers(source, game, defendingPlayerId);
             } finally {
                 getActions().addAll(hidden);
+            }
+        }
+
+        /** The attacker twin of dropAutoDeclaredBlocks. XMage's
+         * Combat.selectAttackers runs checkAttackRequirements before it asks
+         * this player (CR 508.1d), so a creature forced to attack -- by its
+         * own static or by another permanent's, such as Goblin Rabblemaster's
+         * "Other Goblin creatures you control attack each combat if able" --
+         * is already declared and tapped, and TestPlayer cannot consume its
+         * queued attack command. gorge records the same attacker, so drop, per
+         * name, as many of this turn's queued attack commands as this player
+         * has attacking permanents of that name. When every attacker is
+         * forced, getAvailableAttackers is empty and selectAttackers never
+         * runs; priority in the declare-attackers step calls this then. A
+         * command for a creature XMage did not declare stays queued. */
+        private void dropAutoDeclaredAttacks(Game game) {
+            if (!getId().equals(game.getCombat().getAttackingPlayerId())
+                    || game.getCombat().getAttackers().isEmpty()) {
+                return;
+            }
+            Map<String, Integer> attacking = new HashMap<>();
+            for (UUID id : game.getCombat().getAttackers()) {
+                Permanent p = game.getBattlefield().getPermanent(id);
+                if (p != null && getId().equals(p.getControllerId())) {
+                    attacking.merge(p.getName(), 1, Integer::sum);
+                }
+            }
+            for (PlayerAction action : new ArrayList<>(getActions())) {
+                if (action.getTurnNum() != game.getTurnNum() || !action.getAction().startsWith("attack:")) {
+                    continue;
+                }
+                String command = action.getAction().substring("attack:".length());
+                if (command.startsWith(TestPlayer.ATTACK_SKIP)) {
+                    continue;
+                }
+                String name = combatBaseName(command.split("\\$")[0]);
+                Integer left = attacking.get(name);
+                if (left == null || left == 0) {
+                    continue;
+                }
+                attacking.put(name, left - 1);
+                getActions().remove(action);
             }
         }
 
