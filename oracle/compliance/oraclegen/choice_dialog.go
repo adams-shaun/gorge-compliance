@@ -159,3 +159,111 @@ func chooseUseLabels(f *cards.Face) (pairs [][2]string, ok bool) {
 	}
 	return pairs, len(pairs) == 1
 }
+
+// xmageKWChoiceDialogFaces names the faces whose Pump KWChoice$ XMage poses as
+// ONE Choice dialog over the candidate abilities' RULE TEXTS
+// (GainsChoiceOfAbilitiesEffect: new ChoiceImpl(true) with the message
+// "Choose an ability to gain" and the choices abilityMap.keySet(), where each
+// key is CardUtil.stripReminderText(ability.getRule())). TestPlayer reads that
+// ask from the CHOICE queue by label; scripted on the numeric mode queue the
+// answer is never consumed and XMage's own choice wins (Lunar Avenger
+// measured: "Missing CHOICE def ... Choose an ability to gain / Possible
+// choices: flying, haste, first strike", with mode 1 left unused).
+//
+// Membership is proven against the XMage source, not guessed: at XMAGE_REF
+// fdde07931f exactly these 26 Mage.Sets card classes pass keyword abilities to
+// GainsChoiceOfAbilitiesEffect, and each class's ability list is the same
+// keyword set as the face's Forge KWChoice$ line (one Pump per face):
+//
+//	AlchemistsGift, ArgivianAvenger, AssassinInitiate, AtraxasSkitterfang,
+//	BallroomBrawlers, ButcherOfTheHorde, EzrimAgencyChief, GabrielAngelfire,
+//	GideonBlackblade, GolemArtisan, HungeringPuppetbeast, HuntersAxe,
+//	JodahsAvenger, LunarAvenger, ManifoldMouse, MultiformWonder,
+//	OrcishMedicine, PracticedOffense, RattlebackApothecary, ShiftingCeratops,
+//	SilverquillPledgemage, SteelSeraph, UrzasAvenger, VeteranWarleader,
+//	ViperCruelConspirator, WingnutBatOnTheBelfry.
+//
+// The corpus's other six KWChoice$ faces (Angelic Skirmisher, Éowyn Lady of
+// Rohan, Linvala Shield of Sea Gate, Mardu Thunderkite, Smogbelcher Chariot,
+// Swiftspear's Teachings) have no GainsChoiceOfAbilitiesEffect implementation
+// at the pin, so they are NOT listed: their XMage ask is a different dialog
+// and a Choice answer would be another unread stray.
+// TestKWChoiceDialogFacesCensus counts the table and pins each label against an
+// independently written XMage-label table.
+var xmageKWChoiceDialogFaces = map[string]bool{
+	"alchemist's gift":           true,
+	"argivian avenger":           true,
+	"assassin initiate":          true,
+	"atraxa's skitterfang":       true,
+	"ballroom brawlers":          true,
+	"butcher of the horde":       true,
+	"ezrim, agency chief":        true,
+	"gabriel angelfire":          true,
+	"gideon blackblade":          true,
+	"golem artisan":              true,
+	"hungering puppetbeast":      true,
+	"hunter's axe":               true,
+	"jodah's avenger":            true,
+	"lunar avenger":              true,
+	"manifold mouse":             true,
+	"multiform wonder":           true,
+	"orcish medicine":            true,
+	"practiced offense":          true,
+	"rattleback apothecary":      true,
+	"shifting ceratops":          true,
+	"silverquill pledgemage":     true,
+	"steel seraph":               true,
+	"urza's avenger":             true,
+	"veteran warleader":          true,
+	"viper, cruel conspirator":   true,
+	"wingnut, bat on the belfry": true,
+}
+
+// kwChoiceDialogLabels lists every KWChoice$ candidate label of the Pumps on a
+// face in xmageKWChoiceDialogFaces, exactly as gorge's pump decision shows them
+// (the raw KWChoice$ entry: "Flying", "First Strike", "Rampage:3"). nil for any
+// other face.
+func kwChoiceDialogLabels(f *cards.Face) []string {
+	if f == nil || !xmageKWChoiceDialogFaces[strings.ToLower(f.Name)] {
+		return nil
+	}
+	var out []string
+	add := func(params map[string]string) {
+		for _, name := range strings.Split(params["KWChoice"], ",") {
+			if name = strings.TrimSpace(name); name != "" {
+				out = append(out, name)
+			}
+		}
+	}
+	for _, sa := range f.Abilities {
+		if sa.API == "Pump" {
+			add(sa.Params)
+		}
+	}
+	// Sorted SVar order: more than one Pump body must not let map order decide
+	// the answer order.
+	keys := make([]string, 0, len(f.SVars))
+	for k := range f.SVars {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	for _, k := range keys {
+		if p := svarParams(f.SVars[k]); p["DB"] == "Pump" {
+			add(p)
+		}
+	}
+	return out
+}
+
+// xmageKeywordRuleText is the label XMage's GainsChoiceOfAbilitiesEffect shows
+// for a KWChoice$ candidate: the keyword ability's rule text. XMage's keyword
+// abilities spell their rule text in lower case (FlyingAbility.getRule() ==
+// "flying"), and a parameterised keyword writes the parameter after a space
+// (RampageAbility(3).getRule() == "rampage 3"), so the Forge "Rampage:3"
+// spelling maps across. The set of corpus KWChoice$ labels is closed
+// (Banding, Deathtouch, Double Strike, First Strike, Flying, Haste, Hexproof,
+// Indestructible, Lifelink, Menace, Protection from red, Prowess, Rampage:3,
+// Reach, Shadow, Trample, Vigilance), and the census pins every routed one.
+func xmageKeywordRuleText(label string) string {
+	return strings.ToLower(strings.ReplaceAll(strings.TrimSpace(label), ":", " "))
+}
