@@ -5,6 +5,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -137,6 +138,48 @@ func TestRNGShuffleDraw(t *testing.T) {
 	for _, c := range cases {
 		if got := rngShuffle(c.e, c.after); got != c.want {
 			t.Errorf("%s: rngShuffle = %v, want %v", c.name, got, c.want)
+		}
+	}
+}
+
+// TestRNGPickCutStopsAtGroupStart: a step's StepEntry is the last entry of its
+// group (a pass with its asks, or a resolve span), so an unaccounted draw on a
+// later entry of a group cuts the whole group. TruncatedAt is the first tape
+// entry no step carries out, so it must name the group's first entry, not the
+// entry that made the draw: classify.LoweredRange credits entries up to
+// TruncatedAt-1, and the follower tapes keep entries before it.
+func TestRNGPickCutStopsAtGroupStart(t *testing.T) {
+	cases := []struct {
+		name    string
+		prelude int
+		entries []int // StepEntry of the hand-built lowering
+		pick    int
+		want    int // the first entry no kept step carries out
+		steps   int
+	}{
+		{"pick on the second entry of the first group", 0, []int{1, 3}, 1, 0, 0},
+		{"pick later in a middle group", 0, []int{0, 2, 5}, 4, 3, 2},
+		{"pick on a group's first entry", 0, []int{0, 2, 5}, 3, 3, 2},
+		{"taps before the group go with it", 0, []int{0, 2, -1, -1, 4}, 3, 3, 2},
+		{"no kept gameplay step", 1, []int{-1, 2}, 1, 0, 1},
+	}
+	for _, c := range cases {
+		l := Lowered{
+			Item:      oraclegen.Item{Scenario: oraclegen.Scenario{Steps: make([]oraclegen.Step, len(c.entries))}},
+			StepEntry: append([]int(nil), c.entries...),
+			Prelude:   c.prelude,
+		}
+		l.cutEntry(c.pick, &truncation{ReasonRNG})
+		if l.Truncated != ReasonRNG || l.TruncatedAt != c.want {
+			t.Errorf("%s: truncated %q at %d, want %q at %d", c.name, l.Truncated, l.TruncatedAt, ReasonRNG, c.want)
+		}
+		if len(l.StepEntry) != c.steps {
+			t.Errorf("%s: kept %d steps %v, want %d", c.name, len(l.StepEntry), l.StepEntry, c.steps)
+		}
+		for i, se := range l.StepEntry {
+			if se >= c.want {
+				t.Errorf("%s: kept step %d carries entry %d, at or after the cut %d", c.name, i, se, c.want)
+			}
 		}
 	}
 }

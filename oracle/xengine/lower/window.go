@@ -286,6 +286,10 @@ func lowerFrom(reg *cards.Registry, t *game.Tape, c *cut, id string, end int, sp
 		if e.RNG == 0 || rngAccounted(e) {
 			continue
 		}
+		// A window's last entry (and a span's final tape entry) has no after
+		// digest, so a draw there cannot be told from a shuffle: cut it. That
+		// fails safe (the item never carries the unpinned draw), where HasRNG
+		// would have carried it.
 		after, afterOK := game.Digest{}, k+1 < len(wt.Entries)
 		if afterOK {
 			after = wt.Entries[k+1].Digest
@@ -333,7 +337,23 @@ func (l *Lowered) cutEntry(k int, why *truncation) {
 		at--
 	}
 	l.drop(at)
-	l.stop(k, why)
+	l.stop(l.firstUnlowered(at), why)
+}
+
+// firstUnlowered is the first tape entry no kept step carries out once the
+// steps from at onward are dropped: the entry after the last kept step's last
+// entry, or the window's first lowered entry when no kept gameplay step
+// remains. A step's StepEntry is the last entry of its group (a pass with its
+// asks, or a resolve span), so a draw inside a group stops at the group's
+// first entry: entries from there on are not lowered, and TruncatedAt must
+// name that first entry rather than the draw's own.
+func (l *Lowered) firstUnlowered(at int) int {
+	for i := at - 1; i >= l.Prelude; i-- {
+		if l.StepEntry[i] >= 0 {
+			return l.StepEntry[i] + 1
+		}
+	}
+	return 0
 }
 
 // setupAnswerReasons is why the window's setup drive cannot place the cut: it
