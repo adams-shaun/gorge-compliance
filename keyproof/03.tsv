@@ -135,9 +135,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03af4b10-900e-4013-bd5d-dd8d132d50fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03af4b10-900e-4013-bd5d-dd8d132d50fb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03af4b10-900e-4013-bd5d-dd8d132d50fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03af9d24-2df6-4318-82f2-8abdd22206f1	cast	cast-resolve	agreed	-	X	scen	1	0	Mindful Biomancer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+03af9d24-2df6-4318-82f2-8abdd22206f1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mindful-biomancer:f0t0:s2,f:xs:XP:mindful-biomancer:f0t0:s2	-	-	-	5437c1394672	-	99dea4f3bf0e	-	-	2026-11-24	xproof
 03af9d24-2df6-4318-82f2-8abdd22206f1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mindful Biomancer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-03af9d24-2df6-4318-82f2-8abdd22206f1	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+03af9d24-2df6-4318-82f2-8abdd22206f1	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mindful-biomancer:f0t0:s2,f:xs:XP:mindful-biomancer:f0t0:s2	-	-	-	5437c1394672	-	99dea4f3bf0e	-	-	2026-11-24	xproof
 03bf7a90-78c1-4e83-8553-e22d85e49876	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Punk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03bf7a90-78c1-4e83-8553-e22d85e49876	static#0.0	static#0.0	agreed	-	X	scen	1	0	Spider-Punk/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03bf7a90-78c1-4e83-8553-e22d85e49876	static#0.1	static#0.1	diverged	-	-	scen	0	1	-	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
