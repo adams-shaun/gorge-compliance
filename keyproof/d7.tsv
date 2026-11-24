@@ -7,7 +7,7 @@ d7081ec5-0070-4bc1-97c4-544ac08581ee	cast	NULL	owed	refused:scen failed: xengine
 d709f396-021f-49eb-adb5-374aa790eaae	cast	cast-resolve	agreed	-	FX	scen	2	0	Merrow Skyswimmer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d709f396-021f-49eb-adb5-374aa790eaae	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Merrow Skyswimmer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d709f396-021f-49eb-adb5-374aa790eaae	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Merrow Skyswimmer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-d709f396-021f-49eb-adb5-374aa790eaae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d709f396-021f-49eb-adb5-374aa790eaae	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 d70ad04a-b940-4bb1-bcdc-408166e91723	cast	cast-resolve	agreed	-	FX	scen	2	0	Rescue Leopard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d70ad04a-b940-4bb1-bcdc-408166e91723	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Rescue Leopard/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d70d4686-2c35-4149-aed1-7e3b9e022702	cast	cast-resolve	agreed	-	X	scen	1	0	Imodane, the Pyrohammer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -84,7 +84,7 @@ d760f2f0-6653-47c4-bd7b-aab2f398ddf2	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07
 d7644325-8a0f-4f40-bab6-518df7ac1d14	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d767463b-0fc9-43fc-a85f-e60f030f9b96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flamecache-gecko:f0t0:s1,f:xs:XP:flamecache-gecko:f0t0:s1	-	-	-	82dba84688fb	-	d12e33f22d44	-	-	2026-11-24	xproof
 d767463b-0fc9-43fc-a85f-e60f030f9b96	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Flamecache Gecko/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d767463b-0fc9-43fc-a85f-e60f030f9b96	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d767463b-0fc9-43fc-a85f-e60f030f9b96	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 d76fc3aa-3962-4d64-a082-765e09bcdf25	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d7721c5e-b3c5-45c8-b757-935603dfe44b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d7721c5e-b3c5-45c8-b757-935603dfe44b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ d7d59fef-1401-464b-b1bb-ee5da92cde51	cast	cast-resolve	agreed	-	X	scen	1	0	Hunte
 d7d59fef-1401-464b-b1bb-ee5da92cde51	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hunter's Axe/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d7d59fef-1401-464b-b1bb-ee5da92cde51	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hunter's Axe/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d7dddeac-c6ed-4111-ba40-e2830c08d480	cast	cast-resolve	agreed	-	X	scen	1	0	Deceit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-d7dddeac-c6ed-4111-ba40-e2830c08d480	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d7dddeac-c6ed-4111-ba40-e2830c08d480	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d7dddeac-c6ed-4111-ba40-e2830c08d480	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+d7dddeac-c6ed-4111-ba40-e2830c08d480	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 d7dfb4d5-8510-4904-abb7-834ec65d9bf3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:treeguard-duo:f0t0:s2,f:xs:XP:treeguard-duo:f0t0:s2	-	-	-	e07cf3a05ba5	-	18adee9295a6	-	-	2026-11-24	xproof
 d7dfb4d5-8510-4904-abb7-834ec65d9bf3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:treeguard-duo:f0t0:s2,f:xs:XP:treeguard-duo:f0t0:s2	-	-	-	e07cf3a05ba5	-	18adee9295a6	-	-	2026-11-24	xproof
 d7e127e4-56fd-4116-9c1a-421beab58e5c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

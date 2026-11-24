@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31265357-5ecb-4d83-80ff-1795b1dfdecb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gutless-plunderer:f0t0:s1,f:xs:XP:gutless-plunderer:f0t0:s1	-	-	-	82dba84688fb	-	6ed8d1b476d6	-	-	2026-11-24	xproof
 31265357-5ecb-4d83-80ff-1795b1dfdecb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gutless Plunderer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31265357-5ecb-4d83-80ff-1795b1dfdecb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gutless Plunderer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-31265357-5ecb-4d83-80ff-1795b1dfdecb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
+31265357-5ecb-4d83-80ff-1795b1dfdecb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 31279757-499a-4d52-aa81-76b6f1983b53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:garruk-s-uprising:f0t0:s1,f:xs:XP:garruk-s-uprising:f0t0:s1	-	-	-	82dba84688fb	-	c4ae9db808ee	-	-	2026-11-24	xproof
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31f54f88-85a6-43f4-a6de-fb6ef5f0c38d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31f8dd0d-2495-4c37-a103-96f21164bda8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	cast	cast-resolve	agreed	-	X	scen	1	0	Ashling, Rekindled/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

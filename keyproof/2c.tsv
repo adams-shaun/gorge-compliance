@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cdbfda3-98fc-4108-b551-c7049168924e	land	play-land	agreed	-	X	scen	1	0	White Lotus Hideout/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cdc1d82-30dc-4f0a-af20-33dde90269b1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:starforged-sword:f0t0:s1,f:xs:XP:starforged-sword:f0t0:s1	-	-	-	82dba84688fb	-	95f0fa42370f	-	-	2026-11-24	xproof
 2cdc1d82-30dc-4f0a-af20-33dde90269b1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Starforged Sword/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2cdc1d82-30dc-4f0a-af20-33dde90269b1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2cdc1d82-30dc-4f0a-af20-33dde90269b1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 2cdc1d82-30dc-4f0a-af20-33dde90269b1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Starforged Sword/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cdcf65c-03d2-416f-8a3f-0322f75e8595	cast	cast-resolve	agreed	-	FX	scen	2	0	Heartstring Puller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cdcf65c-03d2-416f-8a3f-0322f75e8595	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Heartstring Puller/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

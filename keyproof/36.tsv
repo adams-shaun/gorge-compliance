@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36652a44-f5bd-4bc0-abfd-fa3688853dfd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 366a218e-84d3-4cf9-bbc8-f2f8ecce92a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 367282d6-956b-470d-a131-d22beff610b0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-367379f2-e1e4-48e7-b2c0-1003de55adbe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+367379f2-e1e4-48e7-b2c0-1003de55adbe	cast	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 367420cb-e77b-4d0c-9a83-0deee28f6d36	cast	cast-resolve	agreed	-	X	scen	1	0	Reckless Velocitaur/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 367420cb-e77b-4d0c-9a83-0deee28f6d36	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Reckless Velocitaur/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 367420cb-e77b-4d0c-9a83-0deee28f6d36	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Reckless Velocitaur/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36cb3d18-019c-464d-b591-8c87e1b81f31	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archive-arbiter:f0t0:s1,f:xs:XP:archive-arbiter:f0t0:s1	-	-	-	82dba84688fb	-	1f156f3bc192	-	-	2026-11-24	xproof
 36cb3d18-019c-464d-b591-8c87e1b81f31	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Archive Arbiter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 36cb3d18-019c-464d-b591-8c87e1b81f31	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Archive Arbiter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-36cb3d18-019c-464d-b591-8c87e1b81f31	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+36cb3d18-019c-464d-b591-8c87e1b81f31	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 36cd2364-d113-47d1-b2c4-b088d9eb88dd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36cfdbd6-f971-4ee5-aa1b-fa3ddad5b4b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36d04190-7ce3-431a-b18e-3a1895ec6fc7	cast	cast-resolve	agreed	-	FX	scen	2	0	Nightblade Brigade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

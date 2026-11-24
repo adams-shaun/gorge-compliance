@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Starscape Cleric/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Starscape Cleric/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Starscape Cleric/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	static#0.0	static#0.0	agreed	-	X	scen	1	0	Starscape Cleric/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d7ce7b5-2e56-4060-9406-f700ce1fbb7d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d7cf56c-94fd-47d8-9e0f-cd3163688983	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

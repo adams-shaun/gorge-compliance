@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 321c4586-d27e-45ae-ba1f-3efea334a697	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 321e101c-a426-4d18-be0b-c26c5348b70d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 321e101c-a426-4d18-be0b-c26c5348b70d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-321fd970-a259-448d-bd98-e85e386174f9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+321fd970-a259-448d-bd98-e85e386174f9	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 32249228-e300-4865-b977-5e1f285d02f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32263baa-d3f0-463f-92b3-4e9938476add	cast	cast-resolve	agreed	-	X	scen	1	0	Hedron Archive/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32263baa-d3f0-463f-92b3-4e9938476add	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hedron Archive/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -70,14 +70,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3256029f-6558-4fcc-9fa1-74ceba3e5c92	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3256029f-6558-4fcc-9fa1-74ceba3e5c92	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32599d7c-243b-447b-9d5d-e8e29830ac61	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32599d7c-243b-447b-9d5d-e8e29830ac61	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32599d7c-243b-447b-9d5d-e8e29830ac61	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 325b4288-fe1b-4e29-ae13-72924b4db3dd	cast	cast-resolve	agreed	-	X	scen	1	0	Iron Giant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b4288-fe1b-4e29-ae13-72924b4db3dd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Iron Giant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b4288-fe1b-4e29-ae13-72924b4db3dd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Iron Giant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	cast	cast-resolve	agreed	-	X	scen	1	0	Monastery Messenger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Monastery Messenger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Monastery Messenger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-325b88e1-ec7f-4d22-887c-a7f18a868bb0	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+325b88e1-ec7f-4d22-887c-a7f18a868bb0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 3260bede-d78d-41a6-8fe1-95ce14a2ba8c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32638d03-c101-42f0-8a4b-8c6290257a28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32638d03-c101-42f0-8a4b-8c6290257a28	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

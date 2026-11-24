@@ -25,7 +25,7 @@ e614f97b-da8e-4569-9bdd-f76371c66836	f0/t0	NULL	owed	refused:scen failed: xengin
 e619cb66-8c0d-408a-829c-6f02bf25fd0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e619cb66-8c0d-408a-829c-6f02bf25fd0f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6227840-6e3e-48c7-b4a4-42cfd8f14b68	cast	cast-resolve	agreed	-	X	scen	1	0	Eclipsed Kithkin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-e6227840-6e3e-48c7-b4a4-42cfd8f14b68	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e6227840-6e3e-48c7-b4a4-42cfd8f14b68	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 e6284fb3-7cf8-4730-b156-10085b70b0e8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6284fb3-7cf8-4730-b156-10085b70b0e8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e62c943e-03ac-4a8a-ad3d-faa76b79824c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -66,7 +66,7 @@ e665acb1-a839-46c6-b5ae-ad189213bee4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 e666bae7-dd51-4921-8b89-7e8d423caba0	cast	cast-resolve	agreed	-	X	scen	1	0	Gigantosaurus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e6681d22-821a-47c8-9c0d-042a7d44f843	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e66b12ff-45da-46dc-9148-bd8ea9b7fde0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e66b12ff-45da-46dc-9148-bd8ea9b7fde0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e66b12ff-45da-46dc-9148-bd8ea9b7fde0	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 e66e3450-bddb-46ac-bc7e-c7732e258374	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e67434e6-5408-416a-be19-64291fca8e3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6762a65-5c88-4652-ac3d-b9de220634c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -166,12 +166,12 @@ e6c181f1-f4f7-4a96-b50c-717cf2a02098	combat#0.attack	combat#0.attack	agreed	-	X	
 e6c181f1-f4f7-4a96-b50c-717cf2a02098	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Black Widow, Double Agent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e6c181f1-f4f7-4a96-b50c-717cf2a02098	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Black Widow, Double Agent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e6c41473-2398-4888-9f0c-467dce7c39a4	cast	cast-resolve	agreed	-	X	scen	1	0	Emeritus of Truce/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e6c41473-2398-4888-9f0c-467dce7c39a4	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e6c41473-2398-4888-9f0c-467dce7c39a4	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 e6c9a699-0468-42f8-aad5-b9d45a3c1d37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6c9a699-0468-42f8-aad5-b9d45a3c1d37	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6c9a699-0468-42f8-aad5-b9d45a3c1d37	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6ccebf4-f4f0-404f-a634-4d751ef9c8aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e6ccebf4-f4f0-404f-a634-4d751ef9c8aa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e6ccebf4-f4f0-404f-a634-4d751ef9c8aa	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 e6cd9203-e4d3-4d9f-b59f-4e454fc5a477	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6d13c0d-23ed-41f5-a726-f18d4bb44c9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6ddea98-b23f-44de-a63d-5d5dfad60e71	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -77,7 +77,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53599f89-1598-4d3d-8aa7-75b397b258eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53599f89-1598-4d3d-8aa7-75b397b258eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 535c0280-fdb5-4ff8-8608-c2f98b8a7ffc	cast	cast-resolve	agreed	-	X	scen	1	0	Anthropological Mission/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-535c0280-fdb5-4ff8-8608-c2f98b8a7ffc	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+535c0280-fdb5-4ff8-8608-c2f98b8a7ffc	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 535e2af0-7b08-4026-b1bf-87626407dd42	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 535e2af0-7b08-4026-b1bf-87626407dd42	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 535e2af0-7b08-4026-b1bf-87626407dd42	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53a40369-0e62-4ad2-a6bd-65a5ff0da65e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53a4d9ee-6dfa-4a8b-a1e4-7f671a666188	cast	cast-resolve	agreed	-	X	scen	1	0	Auron's Inspiration/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 53a59ba9-f4e9-460b-928a-ce6d7ae883f7	cast	cast-resolve	agreed	-	X	scen	1	0	Silken Strength/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-53a59ba9-f4e9-460b-928a-ce6d7ae883f7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
+53a59ba9-f4e9-460b-928a-ce6d7ae883f7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 53a59ba9-f4e9-460b-928a-ce6d7ae883f7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Silken Strength/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 53aaa919-d08f-4b76-8583-bc2d4635f991	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saavik-stoic-student:f0t0:s1,f:xs:XP:saavik-stoic-student:f0t0:s1	-	-	-	25696bf19d5b	-	1a605cd5a348	-	-	2026-11-24	xproof
 53aaa919-d08f-4b76-8583-bc2d4635f991	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:saavik-stoic-student:f0t0:s1,f:xs:XP:saavik-stoic-student:f0t0:s1	-	-	-	25696bf19d5b	-	1a605cd5a348	-	-	2026-11-24	xproof
