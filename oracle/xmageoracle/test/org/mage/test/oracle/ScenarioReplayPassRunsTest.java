@@ -81,6 +81,61 @@ public final class ScenarioReplayPassRunsTest {
         check(ScenarioReplay.requireStackIsStrict(pair, 2), "a legacy pair demands the stack object it resolves");
     }
 
+    /** The Rebuff the Wicked s2 shape: the active seat passes, the other
+     * seat taps a land for mana and passes, then the active seat passes. The
+     * mana ability is an action between the two passes, so they are not in
+     * succession (CR 117.4): the other seat's pass only hands priority back
+     * and the game is still in main1. Its position must not count as a new
+     * occurrence of main1 (which hides the checkpoint at a Step XMage never
+     * starts); the active seat's next pass is the one that ends main1 and
+     * begins combat. Both the corrected xmage_pos (no moved on the split
+     * pass) and an older item's (moved=true) are pinned. */
+    private static void passPairSplitByOpponentManaAbilityAdvancesStep() {
+        String steps = "{steps:[{op:'pass',seat:0},{op:'activate',seat:1,card:'p1:Plains'},"
+                + "{op:'pass',seat:1},{op:'pass',seat:0}],";
+        JsonObject stale = item(steps + "xmage_pos:[{turn:1,step:'main1',active:0},"
+                + "{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0,moved:true},"
+                + "{turn:1,step:'begin-combat',active:0,moved:true}]}");
+        JsonArray staleSteps = ScenarioReplay.steps(stale);
+        check(!ScenarioReplay.passEntersNewStep(staleSteps, 2),
+                "a split pass after the opponent's mana ability stays in the same main1 instance");
+        check(ScenarioReplay.passEntersNewStep(staleSteps, 3),
+                "the active seat's next pass ends main1 and begins combat");
+        check(ScenarioReplay.declarationAhead(staleSteps, 2) == null,
+                "the split pass enters no declaration step");
+        for (int i = 0; i < staleSteps.size(); i++) {
+            if ("pass".equals(staleSteps.get(i).getAsJsonObject().get("op").getAsString())) {
+                check(ScenarioReplay.passAction(staleSteps, i) == ScenarioReplay.PASS_RUN,
+                        "pass " + i + " of the split pair is PASS_RUN");
+                check(ScenarioReplay.passCommands(staleSteps, i, 0).isEmpty(),
+                        "pass " + i + " of the split pair queues nothing: "
+                                + ScenarioReplay.passCommands(staleSteps, i, 0));
+            }
+        }
+
+        JsonObject fixed = item(steps + "xmage_pos:[{turn:1,step:'main1',active:0},"
+                + "{turn:1,step:'main1',active:0},{turn:1,step:'main1',active:0},"
+                + "{turn:1,step:'begin-combat',active:0,moved:true}]}");
+        JsonArray fixedSteps = ScenarioReplay.steps(fixed);
+        check(!ScenarioReplay.passEntersNewStep(fixedSteps, 2),
+                "the corrected position also stays in main1");
+        check(ScenarioReplay.passEntersNewStep(fixedSteps, 3),
+                "the corrected position advances to begin-combat at the active seat's pass");
+
+        // A plain pair and an additional same-named step still advance: their
+        // two passes are in succession, with no action in between.
+        JsonObject plain = item("{steps:[{op:'pass',seat:0},{op:'pass',seat:1},{op:'pass',seat:0}],"
+                + "xmage_pos:[{turn:1,step:'main1',active:0},{turn:1,step:'begin-combat',active:0,moved:true},"
+                + "{turn:1,step:'begin-combat',active:0}]}");
+        check(ScenarioReplay.passEntersNewStep(ScenarioReplay.steps(plain), 1),
+                "a plain pair still begins combat");
+        JsonObject extra = item("{steps:[{op:'pass',seat:0},{op:'pass',seat:1},{op:'pass',seat:0}],"
+                + "xmage_pos:[{turn:1,step:'end',active:0},{turn:1,step:'end',active:0,moved:true},"
+                + "{turn:1,step:'end',active:0}]}");
+        check(ScenarioReplay.passEntersNewStep(ScenarioReplay.steps(extra), 1),
+                "an additional same-named step still begins at a round of passes");
+    }
+
     /** A declaration-ahead checkpoint stands after a step end, which empties
      * every mana pool through XMage's own emptyManaPools; an ordinary
      * checkpoint keeps the pool XMage shows. */
@@ -184,6 +239,7 @@ public final class ScenarioReplayPassRunsTest {
         JsonArray pair = JsonParser.parseString("[{op:'pass',seat:0},{op:'pass',seat:1}]").getAsJsonArray();
         check(ScenarioReplay.passAction(pair, 0) == ScenarioReplay.PASS_PAIR_FIRST, "legacy pair first");
         check(ScenarioReplay.passAction(pair, 1) == ScenarioReplay.PASS_PAIR_SECOND, "legacy pair second");
+        passPairSplitByOpponentManaAbilityAdvancesStep();
         declTiming();
         emptyStackPair();
         declarationStepEnd();

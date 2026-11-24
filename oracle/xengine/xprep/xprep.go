@@ -666,14 +666,17 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 	// run is the passes in succession on the current stack: every seat passing
 	// one after another resolves its top object (CR 117.4), which no snapshot
 	// diff can show when the resolution's own trigger stands in its place.
-	run := 0
+	// consecutive is every pass in a row, whatever the stack, since the last
+	// action: only a full round of those passes can end a step (CR 117.4).
+	run, consecutive := 0, 0
 	for i, st := range steps {
 		if st.Op != "pass" {
 			out = append(out, nil)
-			run = 0
+			run, consecutive = 0, 0
 			continue
 		}
 		any = true
+		consecutive++
 		before, after := snaps[i], snaps[i+1]
 		moved := before.Turn != after.Turn || before.Step != after.Step
 		resolves := stackLost(before.Stack, after.Stack)
@@ -691,14 +694,17 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 			inFirst = after.Step == stepCombatDamage && firstStrikerInCombat(before)
 		case inFirst:
 			// The non-active seat's pass on an empty stack ends the first
-			// damage step. Priority is not read here: the regular damage step
-			// can pause on a damage-division ask, an as-unblocked election or
-			// a state-based-action decision before priority is given, so the
+			// damage step, once it is the round's last pass (CR 117.4): a mana
+			// ability between the passes only hands priority back. Priority is
+			// not read here: the regular damage step can pause on a
+			// damage-division ask, an as-unblocked election or a
+			// state-based-action decision before priority is given, so the
 			// checkpoint still shows the passer holding it.
-			if len(before.Stack) == 0 && st.Seat != before.Active {
+			if len(before.Stack) == 0 && st.Seat != before.Active &&
+				consecutive >= max(len(before.Players), 2) {
 				inFirst, moved = false, true
 			}
-		case newStepInstance(st, before, after):
+		case newStepInstance(st, before, after, consecutive):
 			// The step name did not change, but the pass ended one step and
 			// began an additional one of the same name (CR 500.9), such as an
 			// extra end step.
@@ -721,14 +727,18 @@ func passPositions(steps []oraclegen.Step, snaps []rules.OracleSnapshot) []*orac
 }
 
 // newStepInstance is whether pass st, which left the turn and step name alone,
-// still ended the step (both seats passed in succession with an empty stack,
-// CR 500.2) and began a new step of the same name. The seat passing was not the
-// active one, so it was the last to pass, and priority is back with the active
-// seat as a fresh step gives it (CR 117.3a). A pass that merely hands priority
-// on leaves it with another seat, and a pass over a non-empty stack resolves
-// the top object (CR 117.4) and is the stack's business, not the step's.
-func newStepInstance(st oraclegen.Step, before, after rules.OracleSnapshot) bool {
-	return len(before.Stack) == 0 && !after.Over &&
+// still ended the step and began a new step of the same name. Ending a step
+// needs a full round of passes with no action in between (CR 117.4), so
+// consecutive counts the passes since the last action; a pass that follows
+// another player's action -- a mana ability while holding priority, say -- only
+// hands priority on and leaves the game in the same step instance. A pass over
+// a non-empty stack resolves the top object (CR 117.4) and is the stack's
+// business, not the step's; the seat passing must be the round's last, so it is
+// not the active one, and priority is back with the active seat as a fresh step
+// gives it (CR 117.3a).
+func newStepInstance(st oraclegen.Step, before, after rules.OracleSnapshot, consecutive int) bool {
+	return consecutive >= max(len(before.Players), 2) &&
+		len(before.Stack) == 0 && !after.Over &&
 		before.Turn == after.Turn && before.Step == after.Step &&
 		st.Seat != before.Active && after.Priority == after.Active
 }

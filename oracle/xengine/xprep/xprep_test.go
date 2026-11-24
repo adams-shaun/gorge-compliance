@@ -595,6 +595,67 @@ func TestPassPositionsExtraStepSameName(t *testing.T) {
 	}
 }
 
+// TestPreparePassPositionsManaSplitPair: the Rebuff the Wicked s2 shape, where
+// the active seat passes, the other seat taps a land for mana and passes, and
+// the active seat passes again. The mana ability is an action between the two
+// passes, so they are not in succession (CR 117.4): the other seat's pass only
+// hands priority back to the active seat and the game is still in main1. The
+// active seat's next pass is the one that ends main1 and begins combat. The
+// split pass must therefore stay at main1 and not claim a new step instance,
+// or the driver hides its checkpoint at an occurrence XMage never starts; the
+// pass that closes the pair names begin-combat.
+func TestPreparePassPositionsManaSplitPair(t *testing.T) {
+	at := func(step string, prio int) rules.OracleSnapshot {
+		return rules.OracleSnapshot{
+			Turn: 1, Step: step, Active: 0, Priority: prio,
+			Players: make([]rules.OracleSnapPlayer, 2),
+		}
+	}
+	pass := func(seat int) oraclegen.Step { return oraclegen.Step{Op: "pass", Seat: seat} }
+	steps := []oraclegen.Step{
+		pass(0),
+		{Op: "activate", Seat: 1},
+		pass(1),
+		pass(0),
+	}
+	snaps := []rules.OracleSnapshot{
+		at("main1", 0),        // setup
+		at("main1", 1),        // p0 passes, p1 has priority
+		at("main1", 1),        // p1 taps a Plains for mana, keeping priority
+		at("main1", 0),        // p1 passes: p0 gets priority back, still main1
+		at("begin-combat", 0), // p0 passes: the pair ends main1
+	}
+	got := passPositions(steps, snaps)
+	want := []struct {
+		step  string
+		moved bool
+	}{
+		{"main1", false},
+		{"", false},
+		{"main1", false},
+		{"begin-combat", true},
+	}
+	if len(got) != len(want) {
+		t.Fatalf("%d positions, want %d", len(got), len(want))
+	}
+	for i, w := range want {
+		if w.step == "" {
+			if got[i] != nil {
+				t.Errorf("step %d (%s): position %+v, want none", i, steps[i].Op, *got[i])
+			}
+			continue
+		}
+		if got[i] == nil {
+			t.Errorf("step %d (%s): no position, want %s moved=%v", i, steps[i].Op, w.step, w.moved)
+			continue
+		}
+		if got[i].Step != w.step || got[i].Moved != w.moved {
+			t.Errorf("step %d (%s): %s moved=%v, want %s moved=%v",
+				i, steps[i].Op, got[i].Step, got[i].Moved, w.step, w.moved)
+		}
+	}
+}
+
 func TestPreparePassPositions(t *testing.T) {
 	_, _, ws, items := prepared(t, 2)
 	var moved, resolves int
