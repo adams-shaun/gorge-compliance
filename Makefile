@@ -198,7 +198,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # several dredgers all get the same no. DredgeReplacementTest (4 tests) pins it. Driver-only change;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-dredge-replacement.
-FORGE_ORACLE_REF ?= 1bb3cb16bb9ec70eaa63aa036daed7ada60c789c
+# 08b8a9ba5d9 = 1bb3cb16bb9 plus Delve's exile picks (CR 702.66a; xproof harness: Dig Through Time, Empty the Pits,
+# Dead Drop). gorge poses the picks as one choose whose every pick kind is "exile"; Forge's CostAdjustment asks
+# chooseCardsToDelve, which returned an empty collection, so the generic mana stayed unpaid and the cast was refused.
+# The driver consumes the ask, maps each pick to a distinct offered graveyard card (same-named copies one per pick) and
+# caps at the unpaid generic. DelvePicksTest (4 tests) pins it. Driver-only change; cardsfolder/tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-delve-picks.
+FORGE_ORACLE_REF ?= 08b8a9ba5d9874110e755d2c80be73ba26172390
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
