@@ -803,7 +803,11 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
             let Some(spell) = spell else { return Err(Stop::Halt("unresolvable_source", "the spell being paid for".into())) };
             let mut seen = std::collections::BTreeSet::new();
             for o in options {
-                let Some(src) = shown_ref(&live.state, &live.ids, *player, o.source.object_id) else { continue };
+                let Some(src) = shown_ref(&live.state, &live.ids, *player, o.source.object_id) else {
+                    // Never silently dropped: counted like the two sibling branches above.
+                    *census.unmapped_actions.entry("ManaSourceSelection:unresolvable_source".to_string()).or_insert(0) += 1;
+                    continue;
+                };
                 let semantic = sem::activate_mana_ability(src, o.ability_index.unwrap_or(0) as u32, Some(mana_letter(o.mana_type)), None);
                 if seen.insert(canonical(&semantic)) {
                     cands.push(Cand { semantic, effect: Effect::Act(GameAction::ActivateManaSource { selection: o.clone() }) });
