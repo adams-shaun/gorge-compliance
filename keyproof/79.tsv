@@ -38,8 +38,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 792f8235-f23b-4858-bdd4-c7a186b7a470	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 792f8235-f23b-4858-bdd4-c7a186b7a470	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79301ae1-8c9c-4723-be21-dc27e1646f35	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79301ae1-8c9c-4723-be21-dc27e1646f35	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79301ae1-8c9c-4723-be21-dc27e1646f35	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+79301ae1-8c9c-4723-be21-dc27e1646f35	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skyline-cascade:f0t0:s1,f:xs:XP:skyline-cascade:f0t0:s1	-	-	-	d864b561c9cb	-	c4e8e338b124	-	-	2026-11-24	xproof
+79301ae1-8c9c-4723-be21-dc27e1646f35	land	land	agreed	-	FX	start	2	0	x:xs:XP:skyline-cascade:f0t0:s1,f:xs:XP:skyline-cascade:f0t0:s1	-	-	-	d864b561c9cb	-	c4e8e338b124	-	-	2026-11-24	xproof
 7932ab35-39dc-4500-aa44-2ad7228f0d2a	cast	cast-resolve	agreed	-	FX	scen	2	0	Malcolm, the Eyes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7932ab35-39dc-4500-aa44-2ad7228f0d2a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Malcolm, the Eyes/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7932ab35-39dc-4500-aa44-2ad7228f0d2a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Malcolm, the Eyes/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -55,9 +55,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 793f29ac-8a5d-49bf-91e8-a32f771268f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 793f29ac-8a5d-49bf-91e8-a32f771268f3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 793fe31a-2b11-49f8-9851-719469ad1726	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-794255b1-d94d-4de4-ac0a-87ef743f9102	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-794255b1-d94d-4de4-ac0a-87ef743f9102	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-794255b1-d94d-4de4-ac0a-87ef743f9102	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+794255b1-d94d-4de4-ac0a-87ef743f9102	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mistfire-adept:cast:s1,f:xs:XP:mistfire-adept:cast:s1	-	-	-	d864b561c9cb	-	da95c3f967e8	-	-	2026-11-24	xproof
+794255b1-d94d-4de4-ac0a-87ef743f9102	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+794255b1-d94d-4de4-ac0a-87ef743f9102	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7947a210-32d0-4c99-82b4-4b5969447832	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 794aaf8a-6d8e-41fb-acbe-a2b73d65d9d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 794aaf8a-6d8e-41fb-acbe-a2b73d65d9d9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 795a9f45-e4ee-457c-b260-17b9f09c3ba6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 795a9f45-e4ee-457c-b260-17b9f09c3ba6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 795b096a-2bce-4588-a2c9-abc5ea40dc0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-795b096a-2bce-4588-a2c9-abc5ea40dc0c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+795b096a-2bce-4588-a2c9-abc5ea40dc0c	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 795b903b-5260-4c06-b26f-a89cecdfa1f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 795b903b-5260-4c06-b26f-a89cecdfa1f8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 795e0ffb-fcd9-4cb9-ad18-8a0217229bfe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

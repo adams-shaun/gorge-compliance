@@ -12,10 +12,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 131d55d1-7429-4940-b7d2-d759aabff47b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 131dc114-cd48-43d9-93b3-88df85640e09	cast	cast	agreed	-	F	start	2	0	f:xs:XP:arrow-volley-trap:cast:s1	-	-	-	8a1b1a193ec0	-	57ae13b2d23b	-	-	2026-11-24	xproof
 1322734c-3c3e-4885-a6d2-d6460a16fca2	cast	cast-resolve	agreed	-	FX	scen	2	0	Stonesplitter Bolt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-13228a22-d63a-4952-a482-4f84da696e88	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13228a22-d63a-4952-a482-4f84da696e88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:demon-s-grasp:cast:s1,f:xs:XP:demon-s-grasp:cast:s1	-	-	-	d864b561c9cb	-	6a84aaba4abb	-	-	2026-11-24	xproof
 132401fb-6754-4190-9c85-1e57e7f63ed6	cast	cast	agreed	-	F	start	2	0	f:xs:XP:strength-of-the-tajuru:cast:s1	-	-	-	8a1b1a193ec0	-	fe93f30828fe	-	-	2026-11-24	xproof
 132786bb-157c-4e2c-8f82-13df6a667448	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-132786bb-157c-4e2c-8f82-13df6a667448	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+132786bb-157c-4e2c-8f82-13df6a667448	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dross-scorpion:f0t0:s1,f:xs:XP:dross-scorpion:f0t0:s1	-	-	-	d864b561c9cb	-	5709e7175b67	-	-	2026-11-24	xproof
 13279222-422d-4447-9451-2463b0c714c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13279222-422d-4447-9451-2463b0c714c6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 132859dd-de66-45c6-8af4-ab5e202a17b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13613f6e-a6e4-4493-b029-8ec11610c29f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 136596a0-b179-40be-b42d-c0b992621c95	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 136596a0-b179-40be-b42d-c0b992621c95	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-136596a0-b179-40be-b42d-c0b992621c95	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+136596a0-b179-40be-b42d-c0b992621c95	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 136596a0-b179-40be-b42d-c0b992621c95	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 136c9ecb-59b4-4ef6-bcb2-7b8d3df3ee75	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 136c9ecb-59b4-4ef6-bcb2-7b8d3df3ee75	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -112,8 +112,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1397e7d5-4aa4-4c8d-8957-845579b775f7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 139a5f0b-6f76-4918-96e6-cdcf27253230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 139a5f0b-6f76-4918-96e6-cdcf27253230	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-139af10d-a3e5-4ade-b876-87324e6c8017	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-139af10d-a3e5-4ade-b876-87324e6c8017	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+139af10d-a3e5-4ade-b876-87324e6c8017	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twisted-abomination:cast:s1,f:xs:XP:twisted-abomination:cast:s1	-	-	-	d864b561c9cb	-	7759de1ebf52	-	-	2026-11-24	xproof
+139af10d-a3e5-4ade-b876-87324e6c8017	f0/a0	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:twisted-abomination:cast:s1,f:xs:XP:twisted-abomination:cast:s1	-	-	-	d864b561c9cb	-	7759de1ebf52	-	-	2026-11-24	xproof
 139af10d-a3e5-4ade-b876-87324e6c8017	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:twisted-abomination:cast:s2,f:xs:XP:twisted-abomination:cast:s2	-	-	-	9ee19e8250ce	-	7759de1ebf52	-	-	2026-11-24	xproof
 139b098c-d4be-4dca-9bde-9eb8ea97c7bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 139b0fd5-8aa7-4b36-ab5d-cbf398381c6d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

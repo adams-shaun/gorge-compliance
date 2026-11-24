@@ -63,7 +63,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01499544-6850-49f0-a66e-113df19c4340	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 014c94d8-2c39-4d33-902b-fa2398406fd5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 014c94d8-2c39-4d33-902b-fa2398406fd5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-014c94d8-2c39-4d33-902b-fa2398406fd5	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+014c94d8-2c39-4d33-902b-fa2398406fd5	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:sunbeam-spellbomb:f0a1:s1,f:xs:XP:sunbeam-spellbomb:f0a1:s1	-	-	-	d864b561c9cb	-	5c1c7986d58c	-	-	2026-11-24	xproof
 014d00fc-434a-4b06-84b2-afd930677d61	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 014d0bcd-b80f-4c43-8f00-f4c31e8f3370	cast	cast-resolve	agreed	-	X	scen	1	0	Yargle, Goliath of Otaria/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 015004d7-989b-4549-9ffa-b062126d04d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0192ba05-6144-4fec-a803-462ecdf64195	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0192ba05-6144-4fec-a803-462ecdf64195	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 019461d9-63ae-43d3-a9d4-bd745d0cf46c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-019461d9-63ae-43d3-a9d4-bd745d0cf46c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+019461d9-63ae-43d3-a9d4-bd745d0cf46c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 01990628-12b4-49c9-af3d-03120891efc4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01990628-12b4-49c9-af3d-03120891efc4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 019a3229-dd1c-4f70-a8fb-e33dbc54df39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

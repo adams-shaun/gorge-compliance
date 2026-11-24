@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 487382ea-0050-4a3f-bcf6-0ce41d6f4ebf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thundering-tanadon:cast:s1,f:xs:XP:thundering-tanadon:cast:s1	-	-	-	d864b561c9cb	-	2fb93c76ee61	-	-	2026-11-24	xproof
 487485a6-cf79-48c0-bea9-0ec6b3ee253c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 487485a6-cf79-48c0-bea9-0ec6b3ee253c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-487485a6-cf79-48c0-bea9-0ec6b3ee253c	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+487485a6-cf79-48c0-bea9-0ec6b3ee253c	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 48792146-e20c-4d93-83af-f746069fc6f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48792146-e20c-4d93-83af-f746069fc6f1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48792146-e20c-4d93-83af-f746069fc6f1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -88,8 +88,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4879c8f0-8832-4290-bc71-9838940f75cd	static#0.0	static#0.0	agreed	-	X	scen	1	0	Valley Floodcaller/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 487de0df-0496-4b5d-8050-27b8e617582b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firehoof-cavalry:cast:s1,f:xs:XP:firehoof-cavalry:cast:s1	-	-	-	d864b561c9cb	-	f37f89d6ea24	-	-	2026-11-24	xproof
 487de0df-0496-4b5d-8050-27b8e617582b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:firehoof-cavalry:f0a0:s1,f:xs:XP:firehoof-cavalry:f0a0:s1	-	-	-	d864b561c9cb	-	f37f89d6ea24	-	-	2026-11-24	xproof
-4880c976-b417-48e4-98a2-9e5a8da0d758	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4880c976-b417-48e4-98a2-9e5a8da0d758	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4880c976-b417-48e4-98a2-9e5a8da0d758	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sibsig-icebreakers:cast:s1,f:xs:XP:sibsig-icebreakers:cast:s1	-	-	-	d864b561c9cb	-	44fdcf229ad3	-	-	2026-11-24	xproof
+4880c976-b417-48e4-98a2-9e5a8da0d758	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sibsig-icebreakers:cast:s1,f:xs:XP:sibsig-icebreakers:cast:s1	-	-	-	d864b561c9cb	-	44fdcf229ad3	-	-	2026-11-24	xproof
 48848570-00c4-4a89-a84c-e3df47a8b0d2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48848570-00c4-4a89-a84c-e3df47a8b0d2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48848570-00c4-4a89-a84c-e3df47a8b0d2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -130,8 +130,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48a830f1-8965-4f97-b3d8-ca98eab1ba33	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48a830f1-8965-4f97-b3d8-ca98eab1ba33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48a830f1-8965-4f97-b3d8-ca98eab1ba33	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48a909b6-e6ee-4148-8b50-b35f11bc065f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48a909b6-e6ee-4148-8b50-b35f11bc065f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48a909b6-e6ee-4148-8b50-b35f11bc065f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mizzium-meddler:f0t0:s1,f:xs:XP:mizzium-meddler:f0t0:s1	-	-	-	d864b561c9cb	-	ff7a88e18315	-	-	2026-11-24	xproof
+48a909b6-e6ee-4148-8b50-b35f11bc065f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mizzium-meddler:f0t0:s1,f:xs:XP:mizzium-meddler:f0t0:s1	-	-	-	d864b561c9cb	-	ff7a88e18315	-	-	2026-11-24	xproof
 48a99dce-0aa9-4aac-81df-cec5f94c639d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48a99dce-0aa9-4aac-81df-cec5f94c639d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48ab8ba0-0e85-4656-a798-ceb961fb02ce	cast	cast-resolve	agreed	-	X	scen	1	0	Galvanic Giant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

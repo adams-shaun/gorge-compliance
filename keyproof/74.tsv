@@ -52,7 +52,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7432fbe1-dce6-4b3c-a6b4-764f4612a6b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7432fbe1-dce6-4b3c-a6b4-764f4612a6b6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74333718-2a05-4643-9a37-013df39b32e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74333718-2a05-4643-9a37-013df39b32e0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+74333718-2a05-4643-9a37-013df39b32e0	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:dromoka-captain:f0t0:s1	-	-	-	d864b561c9cb	-	f5f7726b2132	-	-	2026-11-24	xproof
 743f4488-fef1-4f4d-b745-d2de92423e00	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 743f4488-fef1-4f4d-b745-d2de92423e00	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 743f4488-fef1-4f4d-b745-d2de92423e00	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -101,8 +101,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 747dfffd-880c-48fe-9380-eb56071f5910	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:death-hood-cobra:cast:s1,f:xs:XP:death-hood-cobra:cast:s1	-	-	-	d864b561c9cb	-	65968aaf8a0b	-	-	2026-11-24	xproof
 747dfffd-880c-48fe-9380-eb56071f5910	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:death-hood-cobra:f0a0:s1,f:xs:XP:death-hood-cobra:f0a0:s1	-	-	-	d864b561c9cb	-	65968aaf8a0b	-	-	2026-11-24	xproof
 747dfffd-880c-48fe-9380-eb56071f5910	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:death-hood-cobra:f0a1:s1,f:xs:XP:death-hood-cobra:f0a1:s1	-	-	-	d864b561c9cb	-	65968aaf8a0b	-	-	2026-11-24	xproof
-747ee321-f2dc-4d27-90cd-c4e610086958	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-747ee321-f2dc-4d27-90cd-c4e610086958	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+747ee321-f2dc-4d27-90cd-c4e610086958	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sandsteppe-scavenger:f0t0:s1,f:xs:XP:sandsteppe-scavenger:f0t0:s1	-	-	-	d864b561c9cb	-	93004d6ed7ca	-	-	2026-11-24	xproof
+747ee321-f2dc-4d27-90cd-c4e610086958	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sandsteppe-scavenger:f0t0:s1,f:xs:XP:sandsteppe-scavenger:f0t0:s1	-	-	-	d864b561c9cb	-	93004d6ed7ca	-	-	2026-11-24	xproof
 748003fd-84c5-4c99-b146-d7d382eef64d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:holy-cow:f0t0:s2,f:xs:XP:holy-cow:f0t0:s2	-	-	-	267e485f6204	-	cb90345c05f0	-	-	2026-11-24	xproof
 748003fd-84c5-4c99-b146-d7d382eef64d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Holy Cow/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 748003fd-84c5-4c99-b146-d7d382eef64d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Holy Cow/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

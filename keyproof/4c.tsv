@@ -48,9 +48,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c27ba61-6812-4dd7-8efc-65435a8df7b5	cast	cast-resolve	agreed	-	X	scen	1	0	Hellcat, Undying Vigilante/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c27ba61-6812-4dd7-8efc-65435a8df7b5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hellcat, Undying Vigilante/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c297085-5ec1-4d29-9a8e-1785c016ce09	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c2c5f3b-61f3-4772-9ade-f5be80719e9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c2c5f3b-61f3-4772-9ade-f5be80719e9f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c2c5f3b-61f3-4772-9ade-f5be80719e9f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c2c5f3b-61f3-4772-9ade-f5be80719e9f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:catacomb-sifter:f0t0:s1,f:xs:XP:catacomb-sifter:f0t0:s1	-	-	-	d864b561c9cb	-	db0351d7ec57	-	-	2026-11-24	xproof
+4c2c5f3b-61f3-4772-9ade-f5be80719e9f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:catacomb-sifter:f0t0:s1,f:xs:XP:catacomb-sifter:f0t0:s1	-	-	-	d864b561c9cb	-	db0351d7ec57	-	-	2026-11-24	xproof
+4c2c5f3b-61f3-4772-9ade-f5be80719e9f	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4c2c8cc6-bb90-468a-867b-db56f4eb7e59	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c2c8cc6-bb90-468a-867b-db56f4eb7e59	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c2e84dc-b4f5-4eca-af07-1c53a1caae7c	cast	cast-resolve	agreed	-	X	scen	1	0	Ravine Raider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c912e9a-21f9-4058-b28c-43f319e35d09	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c912e9a-21f9-4058-b28c-43f319e35d09	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c92b862-34c7-4195-bee3-bcc0cafad140	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c92b862-34c7-4195-bee3-bcc0cafad140	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c92b862-34c7-4195-bee3-bcc0cafad140	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4c9a38f8-8fcb-45f9-8b70-e54298c7b485	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c9b8b82-7f61-4dc0-aeac-fba5dc115e91	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c9b8b82-7f61-4dc0-aeac-fba5dc115e91	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -156,8 +156,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4cd4c6da-a84e-4cba-893b-799a7cb5c411	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4cd6ad78-7441-4dd7-b486-d9575e8e0947	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4cd6ad78-7441-4dd7-b486-d9575e8e0947	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4cd9b48e-5774-4a1c-857f-9f4a92db9b41	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4cd9b48e-5774-4a1c-857f-9f4a92db9b41	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4cd9b48e-5774-4a1c-857f-9f4a92db9b41	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jori-en-ruin-diver:cast:s1,f:xs:XP:jori-en-ruin-diver:cast:s1	-	-	-	d864b561c9cb	-	d5357d897daa	-	-	2026-11-24	xproof
+4cd9b48e-5774-4a1c-857f-9f4a92db9b41	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4cdb9f80-d08f-4986-99c8-573166d66082	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Night Market/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4cdb9f80-d08f-4986-99c8-573166d66082	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Night Market/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4cdb9f80-d08f-4986-99c8-573166d66082	land	play-land	agreed	-	X	scen	1	0	Night Market/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

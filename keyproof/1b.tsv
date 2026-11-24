@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b05e355-38a5-4307-9d8b-e99ec30f8ed3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Brightfield Mustang/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1b05e355-38a5-4307-9d8b-e99ec30f8ed3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Brightfield Mustang/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1b065a17-14a4-433f-a6c8-2c8212f505c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b065a17-14a4-433f-a6c8-2c8212f505c7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1b065a17-14a4-433f-a6c8-2c8212f505c7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1b09d0cf-403c-4a15-aeee-602a1bdaf0c1	cast	cast-resolve	agreed	-	X	scen	1	0	Darksteel Colossus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1b09d0cf-403c-4a15-aeee-602a1bdaf0c1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Darksteel Colossus/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1b09d0cf-403c-4a15-aeee-602a1bdaf0c1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Darksteel Colossus/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -66,13 +66,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b553ed4-12eb-4a53-8e1f-d47ec92b1d65	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b57c480-e2c5-44cd-820f-e208041bfd18	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b57c480-e2c5-44cd-820f-e208041bfd18	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b57e9f8-68af-4f83-9062-6d715857dcef	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b57e9f8-68af-4f83-9062-6d715857dcef	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b57e9f8-68af-4f83-9062-6d715857dcef	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1b57e9f8-68af-4f83-9062-6d715857dcef	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rakshasa-gravecaller:cast:s1,f:xs:XP:rakshasa-gravecaller:cast:s1	-	-	-	d864b561c9cb	-	74178cdbc6d9	-	-	2026-11-24	xproof
+1b57e9f8-68af-4f83-9062-6d715857dcef	f0/t0	Exploited	agreed	-	FX	start	4	0	x:xs:XP:rakshasa-gravecaller:cast:s1,f:xs:XP:rakshasa-gravecaller:cast:s1	-	-	-	d864b561c9cb	-	74178cdbc6d9	-	-	2026-11-24	xproof
+1b57e9f8-68af-4f83-9062-6d715857dcef	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:rakshasa-gravecaller:cast:s1,f:xs:XP:rakshasa-gravecaller:cast:s1	-	-	-	d864b561c9cb	-	74178cdbc6d9	-	-	2026-11-24	xproof
 1b59665f-23c7-4df9-8e71-f9b1a419063b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b59665f-23c7-4df9-8e71-f9b1a419063b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b5c2ba0-3df7-4394-a3f1-8e8330d7ac81	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b5c2ba0-3df7-4394-a3f1-8e8330d7ac81	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1b5c2ba0-3df7-4394-a3f1-8e8330d7ac81	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leaping-master:cast:s1,f:xs:XP:leaping-master:cast:s1	-	-	-	d864b561c9cb	-	2b28f5026fc5	-	-	2026-11-24	xproof
+1b5c2ba0-3df7-4394-a3f1-8e8330d7ac81	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:leaping-master:f0a0:s1,f:xs:XP:leaping-master:f0a0:s1	-	-	-	d864b561c9cb	-	2b28f5026fc5	-	-	2026-11-24	xproof
 1b5e6560-ff2e-4475-96cb-63f64c8a86db	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:soul-guide-lantern:f0t0:s2,f:xs:XP:soul-guide-lantern:f0t0:s2	-	-	-	e07cf3a05ba5	-	6f20b1046c2c	-	-	2026-11-24	xproof
 1b5e6560-ff2e-4475-96cb-63f64c8a86db	f0/a0	ChangeZoneAll	agreed	-	FX	start	1	0	x:xs:XP:soul-guide-lantern:f0t0:s2,f:xs:XP:soul-guide-lantern:f0t0:s2	-	-	-	e07cf3a05ba5	-	6f20b1046c2c	-	-	2026-11-24	xproof
 1b5e6560-ff2e-4475-96cb-63f64c8a86db	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Soul-Guide Lantern/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b9f9f5b-8712-4f00-90cb-1b7b9970eccc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ba36042-8902-4abb-a4ae-a8d26d81a0de	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ba45691-417b-4e6a-be45-6027e4f04599	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ba45691-417b-4e6a-be45-6027e4f04599	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ba45691-417b-4e6a-be45-6027e4f04599	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1ba59349-a162-4444-b3e0-cddfc01ef03b	cast	cast-resolve	agreed	-	FX	scen	2	0	Rubblebelt Maverick/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ba59349-a162-4444-b3e0-cddfc01ef03b	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Rubblebelt Maverick/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ba59349-a162-4444-b3e0-cddfc01ef03b	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

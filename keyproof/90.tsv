@@ -100,13 +100,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9097243a-39fa-4e18-8316-c0e57699c783	cast	cast-resolve	agreed	-	X	scen	1	0	Tectonic Hazard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 90980841-4994-453c-a076-6cdf8d85c809	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90980841-4994-453c-a076-6cdf8d85c809	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-909a10f5-a607-474f-8b8b-0176fd840650	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+909a10f5-a607-474f-8b8b-0176fd840650	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-the-way:cast:s1,f:xs:XP:master-the-way:cast:s1	-	-	-	d864b561c9cb	-	64ef604ae506	-	-	2026-11-24	xproof
 909b3d90-5762-461b-b49a-004a9e72733d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:black-mage-s-rod:f0t0:s2,f:xs:XP:black-mage-s-rod:f0t0:s2	-	-	-	267e485f6204	-	8c197d4efb81	-	-	2026-11-24	xproof
 909b3d90-5762-461b-b49a-004a9e72733d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Black Mage's Rod/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 909b3d90-5762-461b-b49a-004a9e72733d	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:black-mage-s-rod:f0t0:s2,f:xs:XP:black-mage-s-rod:f0t0:s2	-	-	-	267e485f6204	-	8c197d4efb81	-	-	2026-11-24	xproof
 909b3d90-5762-461b-b49a-004a9e72733d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Black Mage's Rod/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-909becbc-1d84-4e94-b589-e58438569403	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-909becbc-1d84-4e94-b589-e58438569403	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+909becbc-1d84-4e94-b589-e58438569403	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silkwrap:f0t0:s1,f:xs:XP:silkwrap:f0t0:s1	-	-	-	d864b561c9cb	-	87d9293f06a3	-	-	2026-11-24	xproof
+909becbc-1d84-4e94-b589-e58438569403	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:silkwrap:f0t0:s1,f:xs:XP:silkwrap:f0t0:s1	-	-	-	d864b561c9cb	-	87d9293f06a3	-	-	2026-11-24	xproof
 909d7e77-ad7c-4af2-88db-f22442cfa531	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 909e1bff-237a-4259-9c0f-419185681782	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 909e1bff-237a-4259-9c0f-419185681782	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 90ec956f-b6de-4214-9b5a-895280e542c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90ec956f-b6de-4214-9b5a-895280e542c1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90ec956f-b6de-4214-9b5a-895280e542c1	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90ecd452-333a-43b0-be08-a61f3779b3bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:high-fae-negotiator:f0t0:s1,f:xs:XP:high-fae-negotiator:f0t0:s1	-	-	-	9ee19e8250ce	-	0efd6a71c06d	-	-	2026-11-24	xproof
+90ecd452-333a-43b0-be08-a61f3779b3bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:high-fae-negotiator:f0t0:s1,f:xs:XP:high-fae-negotiator:f0t0:s1	-	-	-	d864b561c9cb	-	0efd6a71c06d	-	-	2026-11-24	xproof
 90ecd452-333a-43b0-be08-a61f3779b3bd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	High Fae Negotiator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 90ecd452-333a-43b0-be08-a61f3779b3bd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	High Fae Negotiator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 90ecd452-333a-43b0-be08-a61f3779b3bd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

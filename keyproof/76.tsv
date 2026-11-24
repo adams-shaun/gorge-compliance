@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 765017e5-b43d-4c77-a9a9-0fcf0c0cd098	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 765017e5-b43d-4c77-a9a9-0fcf0c0cd098	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76558381-c4ae-4bc3-8c7b-fa0b717f0282	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slash-panther:cast:s1,f:xs:XP:slash-panther:cast:s1	-	-	-	d864b561c9cb	-	378c092c6049	-	-	2026-11-24	xproof
-765863c8-1be0-4bb1-9e9c-db7701cffde3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+765863c8-1be0-4bb1-9e9c-db7701cffde3	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:lonely-sandbar:f0a0:s1,f:xs:XP:lonely-sandbar:f0a0:s1	-	-	-	d864b561c9cb	-	84fc937d1c19	-	-	2026-11-24	xproof
 765863c8-1be0-4bb1-9e9c-db7701cffde3	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 765863c8-1be0-4bb1-9e9c-db7701cffde3	land	land	agreed	-	FX	start	2	0	x:xs:XP:lonely-sandbar:land:s1,f:xs:XP:lonely-sandbar:land:s1	-	-	-	25696bf19d5b	-	84fc937d1c19	-	-	2026-11-24	xproof
 76587fa5-29eb-480f-a865-480cd39b1da7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7679942f-fcbc-4750-8e8c-fe0ad8103c11	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 767c1f97-03de-474d-9112-e7521ba3b3f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 767e4aa9-527f-425f-bffb-6d842e1fbb74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-767e4aa9-527f-425f-bffb-6d842e1fbb74	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+767e4aa9-527f-425f-bffb-6d842e1fbb74	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7681ea90-be9d-4a43-845e-ba051b438429	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7683c2b2-a06f-4691-9cc5-1968dc032885	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7683c2b2-a06f-4691-9cc5-1968dc032885	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7694887a-2f3b-4ef1-b598-f3323f018ef4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7694887a-2f3b-4ef1-b598-f3323f018ef4	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7695b61a-8d44-44b1-9783-ea3114111c3e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-healer:cast:s1,f:xs:XP:master-healer:cast:s1	-	-	-	25696bf19d5b	-	d7c4c9868427	-	-	2026-11-24	xproof
-7695b61a-8d44-44b1-9783-ea3114111c3e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7695b61a-8d44-44b1-9783-ea3114111c3e	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:master-healer:f0a0:s1,f:xs:XP:master-healer:f0a0:s1	-	-	-	d864b561c9cb	-	d7c4c9868427	-	-	2026-11-24	xproof
 7695ef41-fa58-4890-b3fe-de5751831d8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7695ef41-fa58-4890-b3fe-de5751831d8e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 769774f9-1d8d-406f-8b0c-2d6713e7ab3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -141,8 +141,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76a6ddc2-f894-4331-89a9-87ca16efd0c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76ae07ce-ca0c-4308-b8bd-d999eea0a65f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76aea8c6-3bab-45e9-afb4-65e5597bb2fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76b003e0-15af-4f22-bdf2-1ade5430964a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76b003e0-15af-4f22-bdf2-1ade5430964a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76b003e0-15af-4f22-bdf2-1ade5430964a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zulaport-cutthroat:cast:s1,f:xs:XP:zulaport-cutthroat:cast:s1	-	-	-	d864b561c9cb	-	336c8ee32a68	-	-	2026-11-24	xproof
+76b003e0-15af-4f22-bdf2-1ade5430964a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:zulaport-cutthroat:f0t0:s1,f:xs:XP:zulaport-cutthroat:f0t0:s1	-	-	-	d864b561c9cb	-	336c8ee32a68	-	-	2026-11-24	xproof
 76b65b2a-9905-4857-806a-6dbcf195fc81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76b709ae-5765-4b7a-99c9-89eade7c8cb8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76b7e1ee-43f0-4b56-822a-71b064c9201b	cast	cast-resolve	agreed	-	X	scen	1	0	Dathon and Picard at El-Adrel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76c06de7-39ff-4b80-8e54-20910372cffd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76c142ef-0f07-4215-8d11-d25f7114c70d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76c229d2-4bdd-4520-97dd-afb40f8c65ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76c229d2-4bdd-4520-97dd-afb40f8c65ec	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76c229d2-4bdd-4520-97dd-afb40f8c65ec	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mindslicer:f0t0:s1,f:xs:XP:mindslicer:f0t0:s1	-	-	-	d864b561c9cb	-	d3d41329a285	-	-	2026-11-24	xproof
 76c2571d-7d45-4c7a-99d1-302e2b26f8f6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76c2e0b4-d4fa-4e98-b363-0a76eb481304	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:finch-formation:f0t1:s1,f:xs:XP:finch-formation:f0t1:s1	-	-	-	9ee19e8250ce	-	889eff3ba2a5	-	-	2026-11-24	xproof
 76c2e0b4-d4fa-4e98-b363-0a76eb481304	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Finch Formation/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -2,8 +2,8 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 e203a201-2567-4684-ae9f-fd4e91c6dc37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e206842f-139b-490d-bc10-d365705ac720	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e206842f-139b-490d-bc10-d365705ac720	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e206842f-139b-490d-bc10-d365705ac720	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e206842f-139b-490d-bc10-d365705ac720	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+e206842f-139b-490d-bc10-d365705ac720	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e2084d73-5a4c-4b17-942a-93c1a1f7ac2a	cast	cast-resolve	agreed	-	X	scen	1	0	White Tiger, Ava Ayala/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e2084d73-5a4c-4b17-942a-93c1a1f7ac2a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	White Tiger, Ava Ayala/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e20ad2f7-cb41-4e6e-8f3b-bd260f4a2ecf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -37,7 +37,7 @@ e2348e0e-eeca-47b5-9417-bf4470ec29bb	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Squal
 e235d1ca-3099-46c1-8f33-798286292d71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e235d1ca-3099-46c1-8f33-798286292d71	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e235f988-55d2-421b-9cfd-0d30d2727aed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leonin-sun-standard:cast:s1,f:xs:XP:leonin-sun-standard:cast:s1	-	-	-	25696bf19d5b	-	7d786fd8dc1c	-	-	2026-11-24	xproof
-e235f988-55d2-421b-9cfd-0d30d2727aed	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e235f988-55d2-421b-9cfd-0d30d2727aed	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:leonin-sun-standard:f0a0:s1,f:xs:XP:leonin-sun-standard:f0a0:s1	-	-	-	d864b561c9cb	-	7d786fd8dc1c	-	-	2026-11-24	xproof
 e2375f13-fd45-4087-abd1-c884acc6c736	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:creeping-renaissance:cast:s1,f:xs:XP:creeping-renaissance:cast:s1	-	-	-	d864b561c9cb	-	b7f7278607eb	-	-	2026-11-24	xproof
 e2376660-20f2-4474-b6fd-d270e0e6a31e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:filigree-fracture:cast:s1,f:xs:XP:filigree-fracture:cast:s1	-	-	-	8a1b1a193ec0	-	aec9fa62b1dc	-	-	2026-11-24	xproof
 e23bf5fe-e494-473e-8502-606106ee1820	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shared-fate:cast:s1,f:xs:XP:shared-fate:cast:s1	-	-	-	25696bf19d5b	-	4057877458ab	-	-	2026-11-24	xproof
@@ -151,14 +151,14 @@ e2ab0f84-8402-472d-be66-9661b85e08fc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 e2ab0f84-8402-472d-be66-9661b85e08fc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e2ab0f84-8402-472d-be66-9661b85e08fc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e2ac369a-f6d4-4b58-8695-a7c5b906e999	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e2aeac0b-af74-4c47-9ac1-51fbf869c95f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e2aeac0b-af74-4c47-9ac1-51fbf869c95f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:corpse-churn:cast:s1,f:xs:XP:corpse-churn:cast:s1	-	-	-	d864b561c9cb	-	eeb58e339e52	-	-	2026-11-24	xproof
 e2baf24c-7055-431d-8e96-ba5ff2ef91e1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e2baf24c-7055-431d-8e96-ba5ff2ef91e1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e2bbf963-794d-4600-bb92-cb9d1d00205a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pierce-strider:f0t0:s1,f:xs:XP:pierce-strider:f0t0:s1	-	-	-	d864b561c9cb	-	1b825f482464	-	-	2026-11-24	xproof
 e2bbf963-794d-4600-bb92-cb9d1d00205a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pierce-strider:f0t0:s1,f:xs:XP:pierce-strider:f0t0:s1	-	-	-	d864b561c9cb	-	1b825f482464	-	-	2026-11-24	xproof
 e2bc064e-4739-4eb1-ba44-1fd92b2829d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e2bc064e-4739-4eb1-ba44-1fd92b2829d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e2bc1600-eeec-443b-99e4-dd61497edd5b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e2bc1600-eeec-443b-99e4-dd61497edd5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shatterskull-recruit:cast:s1,f:xs:XP:shatterskull-recruit:cast:s1	-	-	-	d864b561c9cb	-	cb593c87c9fc	-	-	2026-11-24	xproof
 e2bfac84-0e2f-4f3e-8d87-a555c26093a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e2bfac84-0e2f-4f3e-8d87-a555c26093a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:undead-executioner:f0t0:s1,f:xs:XP:undead-executioner:f0t0:s1	-	-	-	d864b561c9cb	-	c7e476db820a	-	-	2026-11-24	xproof
 e2c00aff-696c-4b20-acd4-95b71b5f8b10	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

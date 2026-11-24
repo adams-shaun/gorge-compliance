@@ -125,13 +125,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ea10a5a-b698-4f7d-a9c8-520f8d835f34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ea10a5a-b698-4f7d-a9c8-520f8d835f34	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ea35158-1c1a-46da-b466-0eafb376e464	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ea46945-d5ab-4209-b473-4769e7b8b962	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ea46945-d5ab-4209-b473-4769e7b8b962	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:shrine-of-the-forsaken-gods:f0a0:s1,f:xs:XP:shrine-of-the-forsaken-gods:f0a0:s1	-	-	-	d864b561c9cb	-	0170cf05b0b5	-	-	2026-11-24	xproof
 8ea46945-d5ab-4209-b473-4769e7b8b962	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ea46945-d5ab-4209-b473-4769e7b8b962	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ea46945-d5ab-4209-b473-4769e7b8b962	land	land	agreed	-	FX	start	2	0	x:xs:XP:shrine-of-the-forsaken-gods:land:s1,f:xs:XP:shrine-of-the-forsaken-gods:land:s1	-	-	-	d864b561c9cb	-	0170cf05b0b5	-	-	2026-11-24	xproof
 8ea50101-8392-471e-8523-b12045a7b95b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ea50101-8392-471e-8523-b12045a7b95b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ea607cd-c14b-4bb1-aba1-c5cdc397a825	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ea607cd-c14b-4bb1-aba1-c5cdc397a825	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ea607cd-c14b-4bb1-aba1-c5cdc397a825	f0/a0	DealDamage	agreed	-	FX	start	4	0	x:xs:XP:crater-elemental:f0a0:s1,f:xs:XP:crater-elemental:f0a0:s1	-	-	-	d864b561c9cb	-	9cf6c82b1129	-	-	2026-11-24	xproof
 8ea607cd-c14b-4bb1-aba1-c5cdc397a825	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ea8ee52-30e1-415c-af52-66b209f05f0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ea8ee52-30e1-415c-af52-66b209f05f0a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8eb7c0a5-6190-40de-b473-2d1daa3bbe28	cast	cast-resolve	agreed	-	FX	scen	2	0	Dualcaster Mage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 8eb7c0a5-6190-40de-b473-2d1daa3bbe28	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ebc4198-7317-4ffb-b8b8-14733c2077ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ebc4198-7317-4ffb-b8b8-14733c2077ff	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ebc4198-7317-4ffb-b8b8-14733c2077ff	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8ec03b88-8d3a-4a32-8b7c-7da59b0c03d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ec03b88-8d3a-4a32-8b7c-7da59b0c03d0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ec3c334-8a53-46d8-8cfb-c647c3a1ef74	cast	cast-resolve	agreed	-	X	scen	1	0	Stalked Researcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ec6b0f1-8928-457c-adf0-c74a28edc86f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blister-beetle:f0t0:s1,f:xs:XP:blister-beetle:f0t0:s1	-	-	-	8a1b1a193ec0	-	dbbdceb6d970	-	-	2026-11-24	xproof
 8ec7c7ce-23a5-4ba7-8cfd-4caf8601a9c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ec7c7ce-23a5-4ba7-8cfd-4caf8601a9c8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ec7c7ce-23a5-4ba7-8cfd-4caf8601a9c8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ec7c7ce-23a5-4ba7-8cfd-4caf8601a9c8	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8eca999e-f7f8-4354-b419-2df4249c4361	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8eca999e-f7f8-4354-b419-2df4249c4361	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ecbbf14-68c3-4378-9fce-383f9d901bfa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

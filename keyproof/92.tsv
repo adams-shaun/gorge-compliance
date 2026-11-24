@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9218b56d-aaec-482f-99e9-d95d227bfe25	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9218b56d-aaec-482f-99e9-d95d227bfe25	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:sheoldred-whispering-one:cast:s1,f:xs:XP:sheoldred-whispering-one:cast:s1	-	-	-	d864b561c9cb	-	f567061d7837	-	-	2026-11-24	xproof
 92198967-e89b-4213-a0fa-71361c8420dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92198967-e89b-4213-a0fa-71361c8420dc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92198967-e89b-4213-a0fa-71361c8420dc	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:silent-skimmer:f0t0:s1	-	-	-	d864b561c9cb	-	be0ce17d6d33	-	-	2026-11-24	xproof
 9219b7d5-642d-4470-a7c4-f3e56bfae8c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 922176b8-7174-4248-92fb-b196ceb802c7	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:treetop-freedom-fighters:f0t0:s2,f:xs:XP:treetop-freedom-fighters:f0t0:s2	-	-	-	267e485f6204	-	3b8fee49069e	-	-	2026-11-24	xproof
 922176b8-7174-4248-92fb-b196ceb802c7	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:treetop-freedom-fighters:f0t0:s2,f:xs:XP:treetop-freedom-fighters:f0t0:s2	-	-	-	267e485f6204	-	3b8fee49069e	-	-	2026-11-24	xproof
@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 922c6e1b-abcf-40e0-847e-9ebb7d0b6fd4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 922c6e1b-abcf-40e0-847e-9ebb7d0b6fd4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 922c6e1b-abcf-40e0-847e-9ebb7d0b6fd4	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-922d603e-6623-4455-b91f-fad76f94045a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+922d603e-6623-4455-b91f-fad76f94045a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:starfield-of-nyx:cast:s1,f:xs:XP:starfield-of-nyx:cast:s1	-	-	-	d864b561c9cb	-	fa4131eb414b	-	-	2026-11-24	xproof
 922d603e-6623-4455-b91f-fad76f94045a	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 922d9d79-8038-4185-9dfb-2d2d52fd8460	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 922d9d79-8038-4185-9dfb-2d2d52fd8460	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -159,7 +159,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92a5e50d-8477-4654-9c1b-219e4fe3c5ab	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92a5e50d-8477-4654-9c1b-219e4fe3c5ab	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92abb79d-3c60-48f7-87a0-13c25a5e1128	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92abb79d-3c60-48f7-87a0-13c25a5e1128	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92abb79d-3c60-48f7-87a0-13c25a5e1128	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 92acb789-0e42-465c-ac16-40fefec48805	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92acb789-0e42-465c-ac16-40fefec48805	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92acb789-0e42-465c-ac16-40fefec48805	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 170ab932-9d50-4ce7-9a42-08e1edce7e7c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:michelangelo-weirdness-to-11:f0t0:s1,f:xs:XP:michelangelo-weirdness-to-11:f0t0:s1	-	-	-	25696bf19d5b	-	11645e4c74bb	-	-	2026-11-24	xproof
 170ab932-9d50-4ce7-9a42-08e1edce7e7c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:michelangelo-weirdness-to-11:f0t0:s1,f:xs:XP:michelangelo-weirdness-to-11:f0t0:s1	-	-	-	25696bf19d5b	-	11645e4c74bb	-	-	2026-11-24	xproof
 170adfe9-ffbe-40b1-b665-e756e7eb0302	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-170adfe9-ffbe-40b1-b665-e756e7eb0302	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+170adfe9-ffbe-40b1-b665-e756e7eb0302	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 170ee399-d3cd-40ef-a340-193c0f0f6002	cast	cast-resolve	agreed	-	X	scen	1	0	Trickster's Stratagem/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 171150fb-dbe1-4a07-a7ac-5f45762a26b0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stockpiling-celebrant:f0t0:s2,f:xs:XP:stockpiling-celebrant:f0t0:s2	-	-	-	e07cf3a05ba5	-	477c4539b285	-	-	2026-11-24	xproof
 171150fb-dbe1-4a07-a7ac-5f45762a26b0	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stockpiling-celebrant:f0t0:s2,f:xs:XP:stockpiling-celebrant:f0t0:s2	-	-	-	e07cf3a05ba5	-	477c4539b285	-	-	2026-11-24	xproof
@@ -120,7 +120,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 177b7fe4-8565-4631-b4d9-8b2b4282f3ac	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Oakhollow Village/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 177b7fe4-8565-4631-b4d9-8b2b4282f3ac	land	play-land	agreed	-	X	scen	1	0	Oakhollow Village/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 177c1f2d-abb9-40ea-afe4-141b08fdeabb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-177c1f2d-abb9-40ea-afe4-141b08fdeabb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+177c1f2d-abb9-40ea-afe4-141b08fdeabb	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1782bfd7-7d8f-4ed2-9d45-ba9adb41e996	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1782bfd7-7d8f-4ed2-9d45-ba9adb41e996	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17841133-c526-42a3-a1d2-a874e9bb7138	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17dbbca3-ac1c-4d4e-9618-3e66ac3ccd24	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17df0fda-d726-4c9d-bf44-6f2e3a347117	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17df95b2-49ef-43ca-b3c8-66a270f457a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17df95b2-49ef-43ca-b3c8-66a270f457a7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17df95b2-49ef-43ca-b3c8-66a270f457a7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:rogue-kavu:f0t0:s1,f:xs:XP:rogue-kavu:f0t0:s1	-	-	-	d864b561c9cb	-	66670f7c6ede	-	-	2026-11-24	xproof
 17e00d6e-c57d-48ea-a1a1-0c1097083851	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17e00d6e-c57d-48ea-a1a1-0c1097083851	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 17e11f0c-4ac7-4060-9e0b-27cd5c151e50	cast	cast-resolve	agreed	-	X	scen	1	0	Zoyowa's Justice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -209,7 +209,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17e905ca-c0bd-473d-95a7-e180ba5fea43	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17e905ca-c0bd-473d-95a7-e180ba5fea43	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17ed18cf-33e5-4861-8a36-8f7bb91971f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17ed18cf-33e5-4861-8a36-8f7bb91971f9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17ed18cf-33e5-4861-8a36-8f7bb91971f9	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:valakut-invoker:f0a0:s1,f:xs:XP:valakut-invoker:f0a0:s1	-	-	-	d864b561c9cb	-	72e995fec39d	-	-	2026-11-24	xproof
 17f573c4-3ed4-453e-bfbe-4e42d54633e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17f573c4-3ed4-453e-bfbe-4e42d54633e5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17f573c4-3ed4-453e-bfbe-4e42d54633e5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

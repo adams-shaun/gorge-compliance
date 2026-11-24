@@ -26,9 +26,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5818b31e-2e86-4230-937e-478e14534f91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5818b31e-2e86-4230-937e-478e14534f91	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5818b31e-2e86-4230-937e-478e14534f91	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-581c2fb6-fcce-42c1-b198-1f8d62e862b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-581c2fb6-fcce-42c1-b198-1f8d62e862b1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-581c2fb6-fcce-42c1-b198-1f8d62e862b1	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+581c2fb6-fcce-42c1-b198-1f8d62e862b1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arashin-foremost:f0t0:s1,f:xs:XP:arashin-foremost:f0t0:s1	-	-	-	d864b561c9cb	-	35ca3506d674	-	-	2026-11-24	xproof
+581c2fb6-fcce-42c1-b198-1f8d62e862b1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arashin-foremost:f0t0:s1,f:xs:XP:arashin-foremost:f0t0:s1	-	-	-	d864b561c9cb	-	35ca3506d674	-	-	2026-11-24	xproof
+581c2fb6-fcce-42c1-b198-1f8d62e862b1	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:arashin-foremost:f0t1:s1,f:xs:XP:arashin-foremost:f0t1:s1	-	-	-	d864b561c9cb	-	35ca3506d674	-	-	2026-11-24	xproof
 5820d760-8ed7-4abf-a959-c06ed86a3730	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58214e60-3258-4159-bf5a-b4069d80186d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58214e60-3258-4159-bf5a-b4069d80186d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -93,8 +93,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58582fac-4c42-4a1c-9ab1-4a892b500da4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Quantum Riddler/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58582fac-4c42-4a1c-9ab1-4a892b500da4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Quantum Riddler/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58582fac-4c42-4a1c-9ab1-4a892b500da4	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:quantum-riddler:f0t0:s2,f:xs:XP:quantum-riddler:f0t0:s2	-	-	-	267e485f6204	-	7e1392cb255b	-	-	2026-11-24	xproof
-5859fd59-8732-414a-8932-007980af495d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5859fd59-8732-414a-8932-007980af495d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5859fd59-8732-414a-8932-007980af495d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodland-bellower:f0t0:s1,f:xs:XP:woodland-bellower:f0t0:s1	-	-	-	d864b561c9cb	-	53bcee7a053a	-	-	2026-11-24	xproof
+5859fd59-8732-414a-8932-007980af495d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:woodland-bellower:f0t0:s1,f:xs:XP:woodland-bellower:f0t0:s1	-	-	-	d864b561c9cb	-	53bcee7a053a	-	-	2026-11-24	xproof
 585a1c82-8a6c-4770-be9c-3a4916b74a9f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 585a1c82-8a6c-4770-be9c-3a4916b74a9f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 585a1c82-8a6c-4770-be9c-3a4916b74a9f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

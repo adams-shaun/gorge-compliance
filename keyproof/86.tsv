@@ -6,9 +6,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8603bf74-faab-4910-8e45-0f2e3b318efb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8603e2d4-93f3-491a-91e7-a187fc6db599	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8603e2d4-93f3-491a-91e7-a187fc6db599	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86084ed9-b8bb-4289-9579-6056194787bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86084ed9-b8bb-4289-9579-6056194787bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pia-and-kiran-nalaar:f0t0:s1,f:xs:XP:pia-and-kiran-nalaar:f0t0:s1	-	-	-	d864b561c9cb	-	aac218b1a570	-	-	2026-11-24	xproof
 86084ed9-b8bb-4289-9579-6056194787bc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86084ed9-b8bb-4289-9579-6056194787bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86084ed9-b8bb-4289-9579-6056194787bc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pia-and-kiran-nalaar:f0t0:s1,f:xs:XP:pia-and-kiran-nalaar:f0t0:s1	-	-	-	d864b561c9cb	-	aac218b1a570	-	-	2026-11-24	xproof
 8609ed1a-f202-483e-9299-408ef6e84ad6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8609ed1a-f202-483e-9299-408ef6e84ad6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 860a0e32-135b-4972-a1af-ebac60cae08f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8629fdef-dbbe-4a97-a7e1-6b1646f4ca0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8629fdef-dbbe-4a97-a7e1-6b1646f4ca0b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 862af5c4-cb34-4bfa-a7ff-209e103defd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-862af5c4-cb34-4bfa-a7ff-209e103defd6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+862af5c4-cb34-4bfa-a7ff-209e103defd6	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 862b777a-4816-4a3e-be8d-ddfcb72268e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 862ecb4e-7030-48d5-bbdf-655662059430	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boreal-griffin:cast:s1,f:xs:XP:boreal-griffin:cast:s1	-	-	-	16ec2936189a	-	a70505e63b2c	-	-	2026-11-24	xproof
 862ecb4e-7030-48d5-bbdf-655662059430	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86692047-813f-47b1-9f4e-c8b9d5b17b1c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8669f2e1-3e98-4fa5-ba4f-a0860b92c609	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 866fc4b9-f661-444b-b7fd-929814dbc69d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-866fc4b9-f661-444b-b7fd-929814dbc69d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+866fc4b9-f661-444b-b7fd-929814dbc69d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:abzan-skycaptain:f0t0:s1,f:xs:XP:abzan-skycaptain:f0t0:s1	-	-	-	d864b561c9cb	-	6b1dadd89eee	-	-	2026-11-24	xproof
 867379cb-a084-4c84-97ee-557fb60814cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 867379cb-a084-4c84-97ee-557fb60814cd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86746a84-3e8a-44b4-8494-60cbee9816b5	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:galactic-wayfarer:f0t0:s2,f:xs:XP:galactic-wayfarer:f0t0:s2	-	-	-	267e485f6204	-	ee1dce67414b	-	-	2026-11-24	xproof
@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86a7f685-05d0-4167-b5bb-8f6943c23087	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86ab4400-fbdd-4c18-a893-441286a9d7d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86ae05d6-f1ba-456d-bbc0-f35cd0d0537d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86ae05d6-f1ba-456d-bbc0-f35cd0d0537d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86ae05d6-f1ba-456d-bbc0-f35cd0d0537d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 86b0e978-5b4e-4bb7-bfda-be899c632d8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86b2879b-6c54-4d96-ab81-a3f2c87d42d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86b2879b-6c54-4d96-ab81-a3f2c87d42d9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -30,9 +30,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 180efbd4-0f77-41cc-8ae2-2e6ccf853d10	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Archon of the Wild Rose/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 180efbd4-0f77-41cc-8ae2-2e6ccf853d10	static#0.0	static#0.0	agreed	-	X	scen	1	0	Archon of the Wild Rose/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1816b87c-73ba-4bfc-a51e-c982381c067d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1816eede-c5bd-49df-958f-a3af64cb2932	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1816eede-c5bd-49df-958f-a3af64cb2932	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1816eede-c5bd-49df-958f-a3af64cb2932	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1816eede-c5bd-49df-958f-a3af64cb2932	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omnath-locus-of-rage:cast:s1,f:xs:XP:omnath-locus-of-rage:cast:s1	-	-	-	d864b561c9cb	-	8fcee017a642	-	-	2026-11-24	xproof
+1816eede-c5bd-49df-958f-a3af64cb2932	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1816eede-c5bd-49df-958f-a3af64cb2932	f0/t1	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:omnath-locus-of-rage:cast:s1,f:xs:XP:omnath-locus-of-rage:cast:s1	-	-	-	d864b561c9cb	-	8fcee017a642	-	-	2026-11-24	xproof
 1817acd5-5ed0-47b8-8e56-4715a488867e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1817acd5-5ed0-47b8-8e56-4715a488867e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1818b0b1-0104-4673-9be8-acfc773ef87d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18563bc9-6090-4629-b304-89a67d93f635	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18563bc9-6090-4629-b304-89a67d93f635	f1/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 185b3b9f-f798-4ca4-af99-b17a24fcc1c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-185b3b9f-f798-4ca4-af99-b17a24fcc1c6	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+185b3b9f-f798-4ca4-af99-b17a24fcc1c6	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 185c70c1-8403-4ae5-b45d-3679d4ee092a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rockfall Vale/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 185c70c1-8403-4ae5-b45d-3679d4ee092a	land	play-land	agreed	-	X	scen	1	0	Rockfall Vale/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 185d6356-8f8d-4b32-8259-b4eb0a95866c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 185e34f0-60ae-4b07-94ac-96cef11b1604	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 185e34f0-60ae-4b07-94ac-96cef11b1604	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1861e642-21d5-4232-89f3-b5557f2946c1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1861e642-21d5-4232-89f3-b5557f2946c1	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1861e642-21d5-4232-89f3-b5557f2946c1	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1861e642-21d5-4232-89f3-b5557f2946c1	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1863ba60-f786-4e52-90fc-f3135ca0257f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1869a326-8b48-4331-b969-5ce83cf4ff8a	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -212,7 +212,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18ec721f-c1ac-4581-a61d-2f0b09d6bf92	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plague-wind:cast:s1,f:xs:XP:plague-wind:cast:s1	-	-	-	25696bf19d5b	-	b2656da432f1	-	-	2026-11-24	xproof
 18ed0c8a-db8f-4247-87c4-544b833f01bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ed0c8a-db8f-4247-87c4-544b833f01bd	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:claim-jumper:f0t0:s1,f:xs:XP:claim-jumper:f0t0:s1	-	-	-	9ee19e8250ce	-	4ee96b570d60	-	-	2026-11-24	xproof
+18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:claim-jumper:f0t0:s1,f:xs:XP:claim-jumper:f0t0:s1	-	-	-	d864b561c9cb	-	4ee96b570d60	-	-	2026-11-24	xproof
 18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Claim Jumper/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Claim Jumper/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -20,8 +20,8 @@ b628a39b-c923-473d-900a-1617f47ecb76	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b628a39b-c923-473d-900a-1617f47ecb76	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6294891-79e6-4f2a-a82d-6cffce968356	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6294891-79e6-4f2a-a82d-6cffce968356	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b638407b-4749-41fa-8054-f9db57b849ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b638407b-4749-41fa-8054-f9db57b849ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b638407b-4749-41fa-8054-f9db57b849ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ondu-champion:f0t0:s1,f:xs:XP:ondu-champion:f0t0:s1	-	-	-	d864b561c9cb	-	f5fab4d1edfb	-	-	2026-11-24	xproof
+b638407b-4749-41fa-8054-f9db57b849ea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ondu-champion:f0t0:s1,f:xs:XP:ondu-champion:f0t0:s1	-	-	-	d864b561c9cb	-	f5fab4d1edfb	-	-	2026-11-24	xproof
 b638c475-778c-4251-8dac-6a18c3394ae5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b63dad39-4dd5-4340-953e-b05df1a3c776	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:congregation-at-dawn:cast:s1,f:xs:XP:congregation-at-dawn:cast:s1	-	-	-	64a08ba7d913	-	7fe0be7003e8	-	-	2026-11-24	xproof
 b63e5518-61f3-4cde-a799-5f3ee6aba70b	cast	cast-resolve	agreed	-	X	scen	1	0	Mudbutton Cursetosser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -46,7 +46,7 @@ b657b3df-9287-44cf-a1cd-a80ead71a553	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b657b3df-9287-44cf-a1cd-a80ead71a553	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b657b3df-9287-44cf-a1cd-a80ead71a553	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6597ae6-ae32-4409-8ba9-1015b6ffe2d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6597ae6-ae32-4409-8ba9-1015b6ffe2d2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b6597ae6-ae32-4409-8ba9-1015b6ffe2d2	f0/a0	TapOrUntap	agreed	-	FX	start	2	0	x:xs:XP:puppeteer:f0a0:s1,f:xs:XP:puppeteer:f0a0:s1	-	-	-	d864b561c9cb	-	13b501840ebb	-	-	2026-11-24	xproof
 b65f20de-52fa-4904-bbfe-7ba53ccd8ae5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b665a64b-4772-42dd-9fd2-fd8598e689ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6689782-08d8-48e1-a05d-cd040dfe85bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ b6e82d4f-4fbf-495c-bebd-982d2a855ad0	static#0.0	static#0.0	agreed	-	X	scen	1	0	T
 b6e82d4f-4fbf-495c-bebd-982d2a855ad0	static#0.1	static#0.1	agreed	-	X	scen	1	0	Tiger-Dillo/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b6e87f78-d4dd-44b2-bf70-92436ce583c9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6e972ae-cc2d-4c7e-9f49-c0616dc82064	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6e972ae-cc2d-4c7e-9f49-c0616dc82064	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b6e972ae-cc2d-4c7e-9f49-c0616dc82064	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:mardu-shadowspear:f0t0:s1,f:xs:XP:mardu-shadowspear:f0t0:s1	-	-	-	d864b561c9cb	-	92048ab161cf	-	-	2026-11-24	xproof
 b6ea0c70-022a-43e4-aa40-3dc6a8b3b21e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6ea0c70-022a-43e4-aa40-3dc6a8b3b21e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6eb56a7-4dfe-4d51-a1df-55f892c1b014	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

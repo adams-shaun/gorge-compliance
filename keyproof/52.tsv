@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 520abf49-7631-4e7f-889e-547ccc8c3b95	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 520b2799-66bd-40bf-9bc0-9cd3aed321f5	cast	cast-resolve	agreed	-	FX	scen	2	0	Watery Grasp/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 520b2799-66bd-40bf-9bc0-9cd3aed321f5	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Watery Grasp/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-520b6637-0a9f-4dc4-846e-f1cd2b868263	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+520b6637-0a9f-4dc4-846e-f1cd2b868263	cast	cast	diverged	-	-	start	0	2	-	0a520ded0ebd	-	-	d864b561c9cb	-	d94a1debef0d	-	-	2026-11-24	xproof
 52124954-b0b6-492c-8d03-fe54c220facc	cast	cast-resolve	agreed	-	FX	scen	2	0	Stress Dream/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5212e707-b487-46b6-aa51-cea3be8cbe00	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5212f0a8-7341-4960-835b-2f4600ca1b2d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -50,10 +50,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5236a6b5-0a96-4470-ba03-37b6d7a889bb	cast	cast-resolve	agreed	-	FX	scen	2	0	Midnight Mayhem/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5237a105-60c4-4597-b24e-84c12ce7b01f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:faceless-butcher:f0t0:s1,f:xs:XP:faceless-butcher:f0t0:s1	-	-	-	25696bf19d5b	-	a37e8f873f5a	-	-	2026-11-24	xproof
 5237a105-60c4-4597-b24e-84c12ce7b01f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:faceless-butcher:f0t0:s1,f:xs:XP:faceless-butcher:f0t0:s1	-	-	-	25696bf19d5b	-	a37e8f873f5a	-	-	2026-11-24	xproof
-5237a105-60c4-4597-b24e-84c12ce7b01f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5237a105-60c4-4597-b24e-84c12ce7b01f	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 523c244b-7292-40c7-8b12-27106fffe63f	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 523cca7d-7d21-45de-b82d-58e777bf7f72	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-523d075d-b577-4f24-8c14-9a76761a2eaf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flowerfoot-swordmaster:f0t1:s1,f:xs:XP:flowerfoot-swordmaster:f0t1:s1	-	-	-	9ee19e8250ce	-	79ece825e89b	-	-	2026-11-24	xproof
+523d075d-b577-4f24-8c14-9a76761a2eaf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flowerfoot-swordmaster:f0t1:s1,f:xs:XP:flowerfoot-swordmaster:f0t1:s1	-	-	-	d864b561c9cb	-	79ece825e89b	-	-	2026-11-24	xproof
 523d075d-b577-4f24-8c14-9a76761a2eaf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Flowerfoot Swordmaster/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 523d075d-b577-4f24-8c14-9a76761a2eaf	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52401cb4-1bce-4191-9220-0d93ea4108b8	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Stark Industries/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -119,8 +119,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 52867cdd-8bf2-4cae-bb8d-0f16a18a455b	cast	cast-resolve	agreed	-	X	scen	1	0	Vibrance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 52867cdd-8bf2-4cae-bb8d-0f16a18a455b	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 52867cdd-8bf2-4cae-bb8d-0f16a18a455b	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-528a19d7-ee79-45a5-b27f-e0bff4213193	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-528a19d7-ee79-45a5-b27f-e0bff4213193	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+528a19d7-ee79-45a5-b27f-e0bff4213193	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loam-larva:f0t0:s1,f:xs:XP:loam-larva:f0t0:s1	-	-	-	d864b561c9cb	-	7137fb89baa1	-	-	2026-11-24	xproof
+528a19d7-ee79-45a5-b27f-e0bff4213193	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loam-larva:f0t0:s1,f:xs:XP:loam-larva:f0t0:s1	-	-	-	d864b561c9cb	-	7137fb89baa1	-	-	2026-11-24	xproof
 528fe479-dab9-4cf8-bda0-1d226a644366	cast	cast-resolve	agreed	-	X	scen	1	0	Kav Landseeker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 528fe479-dab9-4cf8-bda0-1d226a644366	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kav Landseeker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 528fe479-dab9-4cf8-bda0-1d226a644366	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kav Landseeker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

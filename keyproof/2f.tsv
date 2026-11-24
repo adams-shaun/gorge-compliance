@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f05f3ed-e3b7-4225-b3f2-c12eda335237	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flesh-to-dust:cast:s1,f:xs:XP:flesh-to-dust:cast:s1	-	-	-	d864b561c9cb	-	a52763bbc9ff	-	-	2026-11-24	xproof
 2f0741f9-802b-4761-8094-7b1f3ea1a424	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f074636-6a36-46a3-b872-add79e19aa8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thieving-magpie:cast:s1,f:xs:XP:thieving-magpie:cast:s1	-	-	-	25696bf19d5b	-	40d73a9cb951	-	-	2026-11-24	xproof
-2f074636-6a36-46a3-b872-add79e19aa8b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f074636-6a36-46a3-b872-add79e19aa8b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2f092562-9e17-43cd-aeb8-d0567f99363e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f0bad22-a3f5-4b2b-96bf-ff1473e2262d	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f0bad22-a3f5-4b2b-96bf-ff1473e2262d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,9 +180,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2fac62be-dcbe-409f-a362-f0e519ec14a9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Venomsac Lagac/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2fac62be-dcbe-409f-a362-f0e519ec14a9	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Venomsac Lagac/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2fac62be-dcbe-409f-a362-f0e519ec14a9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Venomsac Lagac/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2facb1b3-4522-4610-a0ab-29ac53ca7fcd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2facb1b3-4522-4610-a0ab-29ac53ca7fcd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2facb1b3-4522-4610-a0ab-29ac53ca7fcd	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2facb1b3-4522-4610-a0ab-29ac53ca7fcd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greenwarden-of-murasa:f0t0:s1,f:xs:XP:greenwarden-of-murasa:f0t0:s1	-	-	-	d864b561c9cb	-	1bdc4c503cce	-	-	2026-11-24	xproof
+2facb1b3-4522-4610-a0ab-29ac53ca7fcd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:greenwarden-of-murasa:f0t0:s1,f:xs:XP:greenwarden-of-murasa:f0t0:s1	-	-	-	d864b561c9cb	-	1bdc4c503cce	-	-	2026-11-24	xproof
+2facb1b3-4522-4610-a0ab-29ac53ca7fcd	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:greenwarden-of-murasa:f0t1:s1,f:xs:XP:greenwarden-of-murasa:f0t1:s1	-	-	-	d864b561c9cb	-	1bdc4c503cce	-	-	2026-11-24	xproof
 2fadf4aa-1b7e-4e72-ad20-809a59ddccf8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fb0f2d2-ed1f-4181-91f2-684a71c34998	cast	cast-resolve	agreed	-	X	scen	1	0	Speed, Young Avenger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2fb0f2d2-ed1f-4181-91f2-684a71c34998	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Speed, Young Avenger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -192,7 +192,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2fb54c18-f69b-4712-af36-14d8a6d4df2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fb54c18-f69b-4712-af36-14d8a6d4df2b	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2fb6f65f-a0fb-4d45-be1b-d6405e61d47a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2fb6f65f-a0fb-4d45-be1b-d6405e61d47a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2fb6f65f-a0fb-4d45-be1b-d6405e61d47a	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2fb8e100-58a1-4dc6-bc38-ad7f115e3e46	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fb8e100-58a1-4dc6-bc38-ad7f115e3e46	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fb8e100-58a1-4dc6-bc38-ad7f115e3e46	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -235,7 +235,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2fdbbca7-d1d0-4834-84df-2c2d9953f83a	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fdc0d15-ecb4-4a6d-be77-7a3fca188c9c	cast	cast-resolve	agreed	-	FX	scen	2	0	Adaptive Gemguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2fdc0d15-ecb4-4a6d-be77-7a3fca188c9c	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Adaptive Gemguard/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2fdc0d17-b683-4263-949e-4f74ec76badf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2fdc0d17-b683-4263-949e-4f74ec76badf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:temur-battle-rage:cast:s1,f:xs:XP:temur-battle-rage:cast:s1	-	-	-	d864b561c9cb	-	feeeef506f7e	-	-	2026-11-24	xproof
 2fdc484e-b3c3-4f4e-99a1-26a1134aa1cd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fdc484e-b3c3-4f4e-99a1-26a1134aa1cd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fdde5f7-a235-43a4-88a5-2faaf5900bd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

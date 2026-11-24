@@ -23,8 +23,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 551e4356-5b1f-475c-a64b-9c50ea9b0368	cast	cast-resolve	agreed	-	X	scen	1	0	Boar-q-pine/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 551e4356-5b1f-475c-a64b-9c50ea9b0368	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Boar-q-pine/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 55259de3-561d-4a9e-bb28-63c6a7ac5c68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55259de3-561d-4a9e-bb28-63c6a7ac5c68	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55259de3-561d-4a9e-bb28-63c6a7ac5c68	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -96,15 +96,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 558fe476-edbd-4f18-86ee-6d7f61331789	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5591efbc-1b2c-489a-b4f3-935c9b6bd71a	cast	cast-resolve	agreed	-	X	scen	1	0	Dai Li Indoctrination/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 559463f8-396f-40e0-9515-a1be6397ca31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-559463f8-396f-40e0-9515-a1be6397ca31	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+559463f8-396f-40e0-9515-a1be6397ca31	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 559903cd-5cba-47a5-8b5b-7067e393e76a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 559903cd-5cba-47a5-8b5b-7067e393e76a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 559903cd-5cba-47a5-8b5b-7067e393e76a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5599ddb6-1404-4884-b6ca-c1852a521079	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mark-of-mutiny:cast:s1,f:xs:XP:mark-of-mutiny:cast:s1	-	-	-	8a1b1a193ec0	-	b7156d69c858	-	-	2026-11-24	xproof
 559c9949-faaf-41bc-9349-b6738b4763a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 559c9949-faaf-41bc-9349-b6738b4763a2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-55a0a40c-cb40-469d-9bf3-9c33b378f4f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-55a0a40c-cb40-469d-9bf3-9c33b378f4f7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+55a0a40c-cb40-469d-9bf3-9c33b378f4f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:baloth-null:f0t0:s1,f:xs:XP:baloth-null:f0t0:s1	-	-	-	d864b561c9cb	-	2418ef8e1adf	-	-	2026-11-24	xproof
+55a0a40c-cb40-469d-9bf3-9c33b378f4f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:baloth-null:f0t0:s1,f:xs:XP:baloth-null:f0t0:s1	-	-	-	d864b561c9cb	-	2418ef8e1adf	-	-	2026-11-24	xproof
 55a253f9-f44d-4898-af83-fea68b7b279d	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55a277b4-575f-463b-913c-7857acad20be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55a277b4-575f-463b-913c-7857acad20be	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

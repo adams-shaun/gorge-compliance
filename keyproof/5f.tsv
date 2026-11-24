@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f0fa785-37ab-46a8-9ec0-6f8b29576d93	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f0fa785-37ab-46a8-9ec0-6f8b29576d93	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f12134c-d626-4a5e-8653-700681a491fc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancient-silverback:cast:s1,f:xs:XP:ancient-silverback:cast:s1	-	-	-	25696bf19d5b	-	8c4b896fd387	-	-	2026-11-24	xproof
-5f12134c-d626-4a5e-8653-700681a491fc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f12134c-d626-4a5e-8653-700681a491fc	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:ancient-silverback:f0a0:s1,f:xs:XP:ancient-silverback:f0a0:s1	-	-	-	d864b561c9cb	-	8c4b896fd387	-	-	2026-11-24	xproof
 5f12f665-f083-48ae-b61a-541051c996ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f143d87-35fb-40e3-94ae-f85cfff9adb5	cast	cast-resolve	agreed	-	FX	scen	2	0	Gwen Stacy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f143d87-35fb-40e3-94ae-f85cfff9adb5	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Gwen Stacy/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5facb256-b993-43f8-b971-b3a59a7434bf	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fae52ed-1b84-406e-951d-b0d329dc48a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fb899c1-3a2f-4b5e-a82d-fece51bdf786	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5fb899c1-3a2f-4b5e-a82d-fece51bdf786	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5fb899c1-3a2f-4b5e-a82d-fece51bdf786	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5fb8be5a-3666-4680-84e2-341cb269df07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:survival-cache:cast:s1,f:xs:XP:survival-cache:cast:s1	-	-	-	d864b561c9cb	-	15f8fcb26fce	-	-	2026-11-24	xproof
 5fba553e-81b9-419b-aa20-b2a7cfcd042b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fba553e-81b9-419b-aa20-b2a7cfcd042b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

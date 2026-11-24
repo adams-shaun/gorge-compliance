@@ -61,7 +61,7 @@ b860f64c-e830-49ea-a478-5dc87e8a3be1	f0/a0	NULL	owed	refused:scen failed: xengin
 b8619990-9dc2-4fcc-bc7e-457b77cd2a8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b8619990-9dc2-4fcc-bc7e-457b77cd2a8e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b86a5d90-0820-46cb-b43c-c03a423a3a9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b86a5d90-0820-46cb-b43c-c03a423a3a9f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b86a5d90-0820-46cb-b43c-c03a423a3a9f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b86c0c23-bb29-4af0-bbd4-50b3ae634375	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b86c0c23-bb29-4af0-bbd4-50b3ae634375	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b86ccfc1-a26b-4942-9d77-fef7676c77be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -157,8 +157,8 @@ b8f16311-be5a-4648-b024-849a61dff0bc	combat#0.block	combat#0.block	agreed	-	X	sc
 b8f16311-be5a-4648-b024-849a61dff0bc	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:ghalta-stampede-tyrant:f0t0:s2,f:xs:XP:ghalta-stampede-tyrant:f0t0:s2	-	-	-	e07cf3a05ba5	-	79df5b4c9c19	-	-	2026-11-24	xproof
 b8f3b5b5-8835-400f-a626-94ff0a007e56	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b8f3b5b5-8835-400f-a626-94ff0a007e56	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b8f3da11-7c8f-4846-98a6-204bfd8d572b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b8f3da11-7c8f-4846-98a6-204bfd8d572b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b8f3da11-7c8f-4846-98a6-204bfd8d572b	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b8f3da11-7c8f-4846-98a6-204bfd8d572b	f0/a0	Mana	agreed	-	FX	start	3	0	x:xs:XP:blighted-fen:f0a0:s1,f:xs:XP:blighted-fen:f0a0:s1	-	-	-	d864b561c9cb	-	5ca930ac36be	-	-	2026-11-24	xproof
+b8f3da11-7c8f-4846-98a6-204bfd8d572b	f0/a1	Sacrifice	agreed	-	FX	start	2	0	x:xs:XP:blighted-fen:f0a1:s1,f:xs:XP:blighted-fen:f0a1:s1	-	-	-	d864b561c9cb	-	5ca930ac36be	-	-	2026-11-24	xproof
+b8f3da11-7c8f-4846-98a6-204bfd8d572b	land	land	agreed	-	FX	start	2	0	x:xs:XP:blighted-fen:land:s1,f:xs:XP:blighted-fen:land:s1	-	-	-	d864b561c9cb	-	5ca930ac36be	-	-	2026-11-24	xproof
 b8f566ea-8283-4afa-9ac8-737e26419283	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:explore:cast:s1,f:xs:XP:explore:cast:s1	-	-	-	8a1b1a193ec0	-	6052de3fe581	-	-	2026-11-24	xproof
 b8ffd53b-5b10-4866-83fe-630eee58c514	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

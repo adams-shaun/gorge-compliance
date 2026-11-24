@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 070aa6c7-4741-47de-b68a-629aa4201ac0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:eager-glyphmage:f0t0:s2,f:xs:XP:eager-glyphmage:f0t0:s2	-	-	-	5437c1394672	-	672b984c40c6	-	-	2026-11-24	xproof
 070aa6c7-4741-47de-b68a-629aa4201ac0	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:eager-glyphmage:f0t0:s2,f:xs:XP:eager-glyphmage:f0t0:s2	-	-	-	5437c1394672	-	672b984c40c6	-	-	2026-11-24	xproof
 070bd1e8-6c61-4b0e-b179-e375b843410f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-070bd1e8-6c61-4b0e-b179-e375b843410f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+070bd1e8-6c61-4b0e-b179-e375b843410f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:youthful-scholar:f0t0:s1,f:xs:XP:youthful-scholar:f0t0:s1	-	-	-	d864b561c9cb	-	0e6a9da93d4d	-	-	2026-11-24	xproof
 070d22cf-2eed-4d04-b932-4b8339ea9b7a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 070d82db-0851-4f6d-8bf7-1a79c4c2cfee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 070e3224-0f89-4716-b91b-0131eff6146f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -80,7 +80,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 078def07-ae5d-4591-8db6-d156834aab97	cast	cast-resolve	agreed	-	X	scen	1	0	Etali, Primal Storm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 078def07-ae5d-4591-8db6-d156834aab97	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Etali, Primal Storm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0790c8bd-a094-49b5-8843-e8b02cba145b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0790c8bd-a094-49b5-8843-e8b02cba145b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0790c8bd-a094-49b5-8843-e8b02cba145b	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 07947d01-ebb1-46b7-9bdd-ea00e034805b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-elemental:f0t0:s1,f:xs:XP:war-elemental:f0t0:s1	-	-	-	25696bf19d5b	-	04d069420c7d	-	-	2026-11-24	xproof
 07947d01-ebb1-46b7-9bdd-ea00e034805b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:war-elemental:f0t0:s1,f:xs:XP:war-elemental:f0t0:s1	-	-	-	25696bf19d5b	-	04d069420c7d	-	-	2026-11-24	xproof
 07947d01-ebb1-46b7-9bdd-ea00e034805b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

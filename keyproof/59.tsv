@@ -46,7 +46,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59322432-591a-4e8d-aff5-12ca1feb1028	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:magmatic-galleon:f0t0:s2,f:xs:XP:magmatic-galleon:f0t0:s2	-	-	-	e07cf3a05ba5	-	d3111a638556	-	-	2026-11-24	xproof
 59322432-591a-4e8d-aff5-12ca1feb1028	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Magmatic Galleon/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 59324efc-65b7-4b31-89c5-17aed5c7eeb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59324efc-65b7-4b31-89c5-17aed5c7eeb1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+59324efc-65b7-4b31-89c5-17aed5c7eeb1	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5935e9b3-b9b9-413c-ba17-103f5792131a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59384481-3ca0-49dd-b94f-d3680b336f1e	cast	cast-resolve	agreed	-	FX	scen	2	0	Bre of Clan Stoutarm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 59384481-3ca0-49dd-b94f-d3680b336f1e	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Bre of Clan Stoutarm/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -145,11 +145,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59b2edf0-00e4-4cd4-88ac-6dd74e9b1b14	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59b2edf0-00e4-4cd4-88ac-6dd74e9b1b14	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59b6bf51-d15d-4032-85ac-29b234b59fc9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59b869b9-cb48-4152-ad91-52f582e2df5b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+59b869b9-cb48-4152-ad91-52f582e2df5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:comparative-analysis:cast:s1,f:xs:XP:comparative-analysis:cast:s1	-	-	-	d864b561c9cb	-	50df5f85d3e8	-	-	2026-11-24	xproof
 59bfeacc-f80b-49fc-8a35-f7e1ad905161	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59c620fb-a58d-4038-a7e2-0185324b5123	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59c898d8-14f0-4645-84e7-aeedb2ee6c5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59c898d8-14f0-4645-84e7-aeedb2ee6c5e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+59c898d8-14f0-4645-84e7-aeedb2ee6c5e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 59cbed39-a07e-491e-a95a-adafe19eb652	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

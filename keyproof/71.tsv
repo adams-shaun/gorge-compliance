@@ -6,8 +6,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 710a3499-64f8-4d2c-8c9c-d58950e47ea7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Eriette, the Beguiler/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 710a3499-64f8-4d2c-8c9c-d58950e47ea7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Eriette, the Beguiler/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 710a3499-64f8-4d2c-8c9c-d58950e47ea7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Eriette, the Beguiler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-710dc9b1-7d32-4330-95a8-3e91a668202a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-710dc9b1-7d32-4330-95a8-3e91a668202a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+710dc9b1-7d32-4330-95a8-3e91a668202a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghirapur-gearcrafter:f0t0:s1,f:xs:XP:ghirapur-gearcrafter:f0t0:s1	-	-	-	d864b561c9cb	-	fc15e671c1de	-	-	2026-11-24	xproof
+710dc9b1-7d32-4330-95a8-3e91a668202a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ghirapur-gearcrafter:f0t0:s1,f:xs:XP:ghirapur-gearcrafter:f0t0:s1	-	-	-	d864b561c9cb	-	fc15e671c1de	-	-	2026-11-24	xproof
 710e6d6a-caaa-4b76-82c8-e363e9438bec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 710e6d6a-caaa-4b76-82c8-e363e9438bec	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7116db6d-82ea-4675-a0cd-73aaf94be43f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -53,16 +53,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 713eba2e-d19d-4056-b224-f93857dbdafe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mana-skimmer:cast:s1,f:xs:XP:mana-skimmer:cast:s1	-	-	-	9ee19e8250ce	-	383a3fa051f7	-	-	2026-11-24	xproof
 713eba2e-d19d-4056-b224-f93857dbdafe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7140d726-0136-43af-84b5-85005a66a186	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7140f396-1bfa-4b28-ba28-fa15eba74652	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7140f396-1bfa-4b28-ba28-fa15eba74652	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7140f396-1bfa-4b28-ba28-fa15eba74652	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7140f396-1bfa-4b28-ba28-fa15eba74652	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:ruins-of-oran-rief:f0a0:s1,f:xs:XP:ruins-of-oran-rief:f0a0:s1	-	-	-	d864b561c9cb	-	199d07c49619	-	-	2026-11-24	xproof
+7140f396-1bfa-4b28-ba28-fa15eba74652	f0/a1	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7140f396-1bfa-4b28-ba28-fa15eba74652	land	land	agreed	-	FX	start	2	0	x:xs:XP:ruins-of-oran-rief:land:s1,f:xs:XP:ruins-of-oran-rief:land:s1	-	-	-	d864b561c9cb	-	199d07c49619	-	-	2026-11-24	xproof
 7143d82a-931a-4918-bb14-37bc5b9a4d99	cast	cast-resolve	agreed	-	X	scen	1	0	Bedhead Beastie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7143d82a-931a-4918-bb14-37bc5b9a4d99	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bedhead Beastie/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7143d82a-931a-4918-bb14-37bc5b9a4d99	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bedhead Beastie/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7143d82a-931a-4918-bb14-37bc5b9a4d99	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bedhead Beastie/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7145e1b7-b991-4651-b21d-0620cb017090	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 7145e1b7-b991-4651-b21d-0620cb017090	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-7146eecb-8a79-467c-936e-f577e481cf59	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7146eecb-8a79-467c-936e-f577e481cf59	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-flare:cast:s1,f:xs:XP:war-flare:cast:s1	-	-	-	d864b561c9cb	-	af18376aea82	-	-	2026-11-24	xproof
 7149de06-d676-47bc-a50f-e1058d89c890	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7149de06-d676-47bc-a50f-e1058d89c890	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 714dcaf0-442b-4849-917a-7e6af2ea0210	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 71af7e54-e22d-4354-a35c-80e4e5f4031c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71b178bd-3b37-4de9-97a3-96e23d5444a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71b5fdf2-4475-4102-85eb-9be164a9ae29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-71b5fdf2-4475-4102-85eb-9be164a9ae29	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+71b5fdf2-4475-4102-85eb-9be164a9ae29	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 71b7d5c4-c16c-4c6b-8e2e-e9b5cc128e1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71b81f3f-6092-4819-8529-e27bccfcf088	cast	cast-resolve	agreed	-	X	scen	1	0	Ragamuffin Raptor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 71b81f3f-6092-4819-8529-e27bccfcf088	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 71d09e00-e526-4899-beb3-0ee6d9b87f44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71d14755-b81d-4aec-b94d-1637884a5844	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71d14755-b81d-4aec-b94d-1637884a5844	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-71d178b3-e5ca-4576-83f7-8dce74758acd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+71d178b3-e5ca-4576-83f7-8dce74758acd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brutal-expulsion:cast:s1,f:xs:XP:brutal-expulsion:cast:s1	-	-	-	d864b561c9cb	-	71397192b78b	-	-	2026-11-24	xproof
 71d284ee-5b29-4db3-b355-a6bdc142a05b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71d284ee-5b29-4db3-b355-a6bdc142a05b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71d54ba3-91fe-4a14-8b99-c284b4c75013	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -43,7 +43,7 @@ a833fdf1-db0c-4846-8452-d3b2059c2355	combat#0.attack	combat#0.attack	agreed	-	X	
 a833fdf1-db0c-4846-8452-d3b2059c2355	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Long Lake Nuisance/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a833fdf1-db0c-4846-8452-d3b2059c2355	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:long-lake-nuisance:f0t0:s1,f:xs:XP:long-lake-nuisance:f0t0:s1	-	-	-	25696bf19d5b	-	6caeba0e115c	-	-	2026-11-24	xproof
 a842cc2b-52eb-4dc5-86c6-6575c2ed913d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a842cc2b-52eb-4dc5-86c6-6575c2ed913d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a842cc2b-52eb-4dc5-86c6-6575c2ed913d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a8432372-672b-4bf7-9000-17e43356f149	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8455828-9c61-4ef9-a5f1-1f0cc6fbf446	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8455828-9c61-4ef9-a5f1-1f0cc6fbf446	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -204,4 +204,4 @@ a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	combat#0.block	combat#0.block	agreed	-	X	sc
 a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Spectral Sailor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a8fe6204-9f55-45e5-99b3-43f2761ce8a3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8ffbf6d-44e9-44e4-846c-4f894078130e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8ffbf6d-44e9-44e4-846c-4f894078130e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a8ffbf6d-44e9-44e4-846c-4f894078130e	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

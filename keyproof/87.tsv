@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 870185fc-7b05-47d3-95ff-97fbf12796d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 870185fc-7b05-47d3-95ff-97fbf12796d4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 870185fc-7b05-47d3-95ff-97fbf12796d4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-87038d1b-0fa9-4604-b119-1de56db30144	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-87038d1b-0fa9-4604-b119-1de56db30144	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+87038d1b-0fa9-4604-b119-1de56db30144	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyromancer-s-assault:cast:s1,f:xs:XP:pyromancer-s-assault:cast:s1	-	-	-	d864b561c9cb	-	09493a05f7ce	-	-	2026-11-24	xproof
+87038d1b-0fa9-4604-b119-1de56db30144	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 87050537-99c9-4993-a770-4329b2e749e4	cast	cast-resolve	agreed	-	X	scen	1	0	Cid, Timeless Artificer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87050537-99c9-4993-a770-4329b2e749e4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cid, Timeless Artificer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87050537-99c9-4993-a770-4329b2e749e4	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cid, Timeless Artificer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87105cdf-c28e-4fd9-83d0-0fef1704b174	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87105cdf-c28e-4fd9-83d0-0fef1704b174	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8711b732-8dab-41d4-a85b-b10edcd25e97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8711b732-8dab-41d4-a85b-b10edcd25e97	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8711b732-8dab-41d4-a85b-b10edcd25e97	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 871549e6-24c0-4fbd-8b71-ba8639b0ee47	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 871e4c4e-8105-4cb9-b1cd-53c5f8e64494	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 871e4c4e-8105-4cb9-b1cd-53c5f8e64494	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 872bebff-720d-459b-8f86-fb9129a8d1fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 872bebff-720d-459b-8f86-fb9129a8d1fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 872ef617-7cdb-4a7a-85f5-efc9e12bece5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-872ef617-7cdb-4a7a-85f5-efc9e12bece5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+872ef617-7cdb-4a7a-85f5-efc9e12bece5	f0/a0	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:elvish-piper:f0a0:s1	-	-	-	d864b561c9cb	-	acee391bf7a7	-	-	2026-11-24	xproof
 87300967-1a59-4dce-8876-f008ff3bfb0b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:song-of-stupefaction:f0t0:s2,f:xs:XP:song-of-stupefaction:f0t0:s2	-	-	-	e07cf3a05ba5	-	71a7f1efc75c	-	-	2026-11-24	xproof
 87300967-1a59-4dce-8876-f008ff3bfb0b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:song-of-stupefaction:f0t0:s2,f:xs:XP:song-of-stupefaction:f0t0:s2	-	-	-	e07cf3a05ba5	-	71a7f1efc75c	-	-	2026-11-24	xproof
 87300967-1a59-4dce-8876-f008ff3bfb0b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Song of Stupefaction/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

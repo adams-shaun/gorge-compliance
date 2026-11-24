@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f2ab0a8-9d60-493b-a284-9ed7fa07e5ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f2c8498-5b10-4ec7-8678-598c90987556	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:disciple-of-bolas:f0t0:s1,f:xs:XP:disciple-of-bolas:f0t0:s1	-	-	-	d864b561c9cb	-	75a198daa16a	-	-	2026-11-24	xproof
 8f2c8498-5b10-4ec7-8678-598c90987556	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:disciple-of-bolas:f0t0:s1,f:xs:XP:disciple-of-bolas:f0t0:s1	-	-	-	d864b561c9cb	-	75a198daa16a	-	-	2026-11-24	xproof
-8f31d870-872d-4671-80d1-8d2ecd2c38d2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8f31d870-872d-4671-80d1-8d2ecd2c38d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gather-the-pack:cast:s1,f:xs:XP:gather-the-pack:cast:s1	-	-	-	d864b561c9cb	-	1271ca194f11	-	-	2026-11-24	xproof
 8f32ceb2-92c2-4dde-bf73-40bb79c3fcef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inspiration:cast:s1,f:xs:XP:inspiration:cast:s1	-	-	-	25696bf19d5b	-	150073d9d160	-	-	2026-11-24	xproof
 8f36e058-e5fa-48f9-9996-09b77fc193b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f36e058-e5fa-48f9-9996-09b77fc193b3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f69bd3a-244e-42d8-bfac-5a426f4b54b4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Razortrap Gorge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8f69bd3a-244e-42d8-bfac-5a426f4b54b4	land	play-land	agreed	-	X	scen	1	0	Razortrap Gorge/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8f6a2fce-719e-4745-80d3-aabce5c9bafa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f6a2fce-719e-4745-80d3-aabce5c9bafa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8f6a2fce-719e-4745-80d3-aabce5c9bafa	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8f6a3dcf-32e0-48c7-9265-0e298df4a5e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f6a3dcf-32e0-48c7-9265-0e298df4a5e4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f6af612-a4a1-4165-ae4d-ff6353cbaf8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,8 +183,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8fda6c20-04dc-4b60-9313-896a032ee5cb	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:havengul-skaab:f0t0:s1,f:xs:XP:havengul-skaab:f0t0:s1	-	-	-	d864b561c9cb	-	7b7b2fcc3266	-	-	2026-11-24	xproof
 8fe1e619-f827-43f5-acaf-3b79aa671d1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fe1e619-f827-43f5-acaf-3b79aa671d1d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8fe257e5-b54a-4e56-8040-d2eaa0bb0a6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8fe257e5-b54a-4e56-8040-d2eaa0bb0a6a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8fe257e5-b54a-4e56-8040-d2eaa0bb0a6a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enlightened-ascetic:f0t0:s1,f:xs:XP:enlightened-ascetic:f0t0:s1	-	-	-	d864b561c9cb	-	44cefb78d62c	-	-	2026-11-24	xproof
+8fe257e5-b54a-4e56-8040-d2eaa0bb0a6a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:enlightened-ascetic:f0t0:s1,f:xs:XP:enlightened-ascetic:f0t0:s1	-	-	-	d864b561c9cb	-	44cefb78d62c	-	-	2026-11-24	xproof
 8fe6e954-f19b-4d11-83d3-74c634d51bad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fe6e954-f19b-4d11-83d3-74c634d51bad	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fea91ee-5849-4c46-8198-fd383d9a55e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arachnus-spinner:cast:s1,f:xs:XP:arachnus-spinner:cast:s1	-	-	-	d864b561c9cb	-	f27ab823ec42	-	-	2026-11-24	xproof

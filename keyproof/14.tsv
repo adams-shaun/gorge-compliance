@@ -23,7 +23,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1423b8e6-9165-4a89-a6ed-18085f460bca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1423b8e6-9165-4a89-a6ed-18085f460bca	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 142409ce-1187-4554-bc07-6432c4d22dbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-14247820-5ecb-40bd-8dee-0625cc745ec2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+14247820-5ecb-40bd-8dee-0625cc745ec2	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	4c42d55f9560	-	-	2026-11-24	xproof
 14291205-1ac2-4804-b365-4f65377d5803	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14291205-1ac2-4804-b365-4f65377d5803	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 142a960c-4d8e-4b3b-a0db-435c22df8f92	cast	cast-resolve	agreed	-	X	scen	1	0	In the Presence of Ages/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14d71432-c2e6-4c81-92ef-cf98e1fcf5f8	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d85a83-323b-4e42-88bf-71167a8174e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d85a83-323b-4e42-88bf-71167a8174e3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-14d85a83-323b-4e42-88bf-71167a8174e3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+14d85a83-323b-4e42-88bf-71167a8174e3	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 14d9bb24-df7b-4f41-aeca-aad639b280db	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d9bb24-df7b-4f41-aeca-aad639b280db	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14df239a-c7cc-492a-94f5-2971f6efe17b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

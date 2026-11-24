@@ -55,7 +55,7 @@ c44f1a81-269b-4f05-8ff2-e7ce19a93937	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 c44f40da-867e-4237-b4b1-ed6feb1f37b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dark-heart-of-the-wood:cast:s1,f:xs:XP:dark-heart-of-the-wood:cast:s1	-	-	-	25696bf19d5b	-	513b3e5b51d0	-	-	2026-11-24	xproof
 c44f40da-867e-4237-b4b1-ed6feb1f37b7	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:dark-heart-of-the-wood:cast:s1,f:xs:XP:dark-heart-of-the-wood:cast:s1	-	-	-	25696bf19d5b	-	513b3e5b51d0	-	-	2026-11-24	xproof
 c450f6b7-bb2a-4b8c-aec7-d27555137b63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c450f6b7-bb2a-4b8c-aec7-d27555137b63	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c450f6b7-bb2a-4b8c-aec7-d27555137b63	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c4525b1c-5c3d-494e-b660-ba5a5a28f621	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4525b1c-5c3d-494e-b660-ba5a5a28f621	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c452e748-8a2a-4f68-8869-e294925a8b0b	cast	cast-resolve	agreed	-	FX	scen	2	0	Unexpected Assistance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ c48cf135-b280-4e9f-a9d9-225104870741	cast	cast-resolve	agreed	-	X	scen	1	0	Gweno
 c48cf135-b280-4e9f-a9d9-225104870741	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gwenom, Remorseless/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c48cf135-b280-4e9f-a9d9-225104870741	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gwenom, Remorseless/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c48cf135-b280-4e9f-a9d9-225104870741	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gwenom, Remorseless/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c48d844c-3976-4fa5-8e0d-3f0e535e7619	cast	cast	agreed	-	F	start	2	0	f:xs:XP:charming-prince:f0t0:s1	-	-	-	9ee19e8250ce	-	266239b34f0b	-	-	2026-11-24	xproof
+c48d844c-3976-4fa5-8e0d-3f0e535e7619	cast	cast	agreed	-	F	start	2	0	f:xs:XP:charming-prince:f0t0:s1	-	-	-	d864b561c9cb	-	266239b34f0b	-	-	2026-11-24	xproof
 c48d844c-3976-4fa5-8e0d-3f0e535e7619	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c48df45c-3513-4d56-aed6-30c2f3a759cd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c48df45c-3513-4d56-aed6-30c2f3a759cd	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -170,8 +170,8 @@ c4ec45e9-1a4d-42a0-beca-e4dcdfc88fa3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c4ecfc13-a335-42bb-92db-133998b2af5d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4efae03-99de-4439-925b-504602623bfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4efae03-99de-4439-925b-504602623bfd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c4efdbab-711d-4269-9b24-b05d36f7e5c7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c4efdbab-711d-4269-9b24-b05d36f7e5c7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c4efdbab-711d-4269-9b24-b05d36f7e5c7	cast	cast	agreed	-	F	start	4	0	f:xs:XP:oath-of-nissa:cast:s1	-	-	-	d864b561c9cb	-	893fd8c40c34	-	-	2026-11-24	xproof
+c4efdbab-711d-4269-9b24-b05d36f7e5c7	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:oath-of-nissa:cast:s1	-	-	-	d864b561c9cb	-	893fd8c40c34	-	-	2026-11-24	xproof
 c4f1d8c8-29e5-43fe-8281-7d42d0173dc5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4f1d8c8-29e5-43fe-8281-7d42d0173dc5	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 c4f3a6c6-a123-43ad-9513-d65fbff10d02	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

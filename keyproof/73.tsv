@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 731898d3-465b-4ecb-a346-b91881714ebc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7319eec8-48ba-4238-bce1-450abcae73a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7319eec8-48ba-4238-bce1-450abcae73a6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-731a70e8-40d6-47b9-b2b3-b16c818e1935	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+731a70e8-40d6-47b9-b2b3-b16c818e1935	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:call-the-scions:cast:s1,f:xs:XP:call-the-scions:cast:s1	-	-	-	d864b561c9cb	-	01caa99fe374	-	-	2026-11-24	xproof
 7324abaa-48da-439d-9339-b0ea5eea612e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7324abaa-48da-439d-9339-b0ea5eea612e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 732b1314-68bb-4d3d-9f3f-7e66e763caf5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:followed-footsteps:cast:s1,f:xs:XP:followed-footsteps:cast:s1	-	-	-	64a08ba7d913	-	198cde78e23b	-	-	2026-11-24	xproof
@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 734fc893-b736-448a-b851-826976031754	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7351fca5-8672-4ba3-a015-bd4b6b289efc	cast	cast-resolve	agreed	-	X	scen	1	0	Maximum Carnage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73520b5a-3d55-40c9-af60-90fdd811934f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73520b5a-3d55-40c9-af60-90fdd811934f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+73520b5a-3d55-40c9-af60-90fdd811934f	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	e2920db46517	-	-	2026-11-24	xproof
 73535033-2875-4a82-98d5-84548e349f13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7356319d-1485-426b-80a7-9700d6684ac9	cast	cast	agreed	-	F	start	2	0	f:xs:XP:lethargy-trap:cast:s1	-	-	-	8a1b1a193ec0	-	bc1cfdaf12ed	-	-	2026-11-24	xproof
 7358e164-5704-4e78-9b21-6a9bf2a968ce	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73a63c92-6dce-4804-bcd4-3fcc942cf270	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73a63c92-6dce-4804-bcd4-3fcc942cf270	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73a9122c-60d2-4fdc-bc7b-3576bcbca241	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:utopia-tree:cast:s1,f:xs:XP:utopia-tree:cast:s1	-	-	-	25696bf19d5b	-	d6677f73d5c5	-	-	2026-11-24	xproof
-73a9122c-60d2-4fdc-bc7b-3576bcbca241	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+73a9122c-60d2-4fdc-bc7b-3576bcbca241	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:utopia-tree:f0a0:s1,f:xs:XP:utopia-tree:f0a0:s1	-	-	-	d864b561c9cb	-	d6677f73d5c5	-	-	2026-11-24	xproof
 73ad7bcd-4ffc-442c-b6b5-d935b9ccaaaf	cast	cast-resolve	agreed	-	X	scen	1	0	Count on Luck/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73ad7bcd-4ffc-442c-b6b5-d935b9ccaaaf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Count on Luck/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73af8406-4447-41b2-9cec-1b471759f09c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gutwrencher-oni:cast:s1,f:xs:XP:gutwrencher-oni:cast:s1	-	-	-	25696bf19d5b	-	6002676362a6	-	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73ca3132-d849-4cf9-beba-75ba09789332	cast	cast-resolve	agreed	-	X	scen	1	0	Deserter's Disciple/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73ca3132-d849-4cf9-beba-75ba09789332	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Deserter's Disciple/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73cbb4f0-90d6-4228-9341-791e3e9c4b48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73cbb4f0-90d6-4228-9341-791e3e9c4b48	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+73cbb4f0-90d6-4228-9341-791e3e9c4b48	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 73cd8461-7930-4e2d-9a14-4d10db91e93e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73d0b29a-5b7a-4835-9bd4-5d00e685b851	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73d0b29a-5b7a-4835-9bd4-5d00e685b851	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -182,7 +182,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73ea2949-5812-478d-8f09-00743ce4d40f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73ea32e4-72c5-42ee-8ed5-21dee83d7eec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73eacb1f-3d35-4ead-bead-f85e6cfc17ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hail-storm:cast:s1,f:xs:XP:hail-storm:cast:s1	-	-	-	25696bf19d5b	-	e30956c160a2	-	-	2026-11-24	xproof
-73eaf40a-abc6-486a-958d-374ed6111173	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+73eaf40a-abc6-486a-958d-374ed6111173	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roilmage-s-trick:cast:s1,f:xs:XP:roilmage-s-trick:cast:s1	-	-	-	d864b561c9cb	-	4f9a94ec1ae6	-	-	2026-11-24	xproof
 73ec7a0b-274a-4a10-a173-ff1625d62fce	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73f44500-fe83-40fa-b6f2-ed5673d0edcc	cast	cast-resolve	agreed	-	X	scen	1	0	Karlov Watchdog/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73f44500-fe83-40fa-b6f2-ed5673d0edcc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Karlov Watchdog/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

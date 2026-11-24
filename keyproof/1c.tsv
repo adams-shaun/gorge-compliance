@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c0a53fc-8037-46e3-90ea-cb8b73631a83	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c0a72dc-4756-4d60-b6b4-4c2c69699efd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pull-from-the-deep:cast:s1,f:xs:XP:pull-from-the-deep:cast:s1	-	-	-	d864b561c9cb	-	eec76cb2a4a5	-	-	2026-11-24	xproof
 1c0d4f28-2494-45b0-acb8-921fee602c01	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pentavus:cast:s1,f:xs:XP:pentavus:cast:s1	-	-	-	25696bf19d5b	-	21d00a3a5e96	-	-	2026-11-24	xproof
-1c0d4f28-2494-45b0-acb8-921fee602c01	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c0d4f28-2494-45b0-acb8-921fee602c01	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1c0d4f28-2494-45b0-acb8-921fee602c01	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1c0fc9b4-177e-4529-827f-a1e17ff7a752	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c0fc9b4-177e-4529-827f-a1e17ff7a752	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -46,8 +46,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c371003-e4f0-4d7c-b021-273176772f97	cast	cast-resolve	agreed	-	X	scen	1	0	April, Reporter of the Weird/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1c371003-e4f0-4d7c-b021-273176772f97	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	April, Reporter of the Weird/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1c385880-3eea-45c8-8e89-330ad8ad92b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c3b5d50-6b5c-49a3-b64b-5bee51d22725	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c3b5d50-6b5c-49a3-b64b-5bee51d22725	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c3b5d50-6b5c-49a3-b64b-5bee51d22725	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forerunner-of-slaughter:cast:s1,f:xs:XP:forerunner-of-slaughter:cast:s1	-	-	-	d864b561c9cb	-	e557ae71f525	-	-	2026-11-24	xproof
+1c3b5d50-6b5c-49a3-b64b-5bee51d22725	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:forerunner-of-slaughter:f0a0:s1,f:xs:XP:forerunner-of-slaughter:f0a0:s1	-	-	-	d864b561c9cb	-	e557ae71f525	-	-	2026-11-24	xproof
 1c3ba54a-a8ef-4838-b3aa-cb6df827a619	cast	cast-resolve	agreed	-	FX	scen	2	0	Killmonger, Scourge of Wakanda/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1c3ba54a-a8ef-4838-b3aa-cb6df827a619	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c3ba54a-a8ef-4838-b3aa-cb6df827a619	static#0.0	static#0.0	agreed	-	X	scen	1	0	Killmonger, Scourge of Wakanda/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -73,9 +73,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c586aa7-7a61-464f-abba-b33f9a525f0e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c586aa7-7a61-464f-abba-b33f9a525f0e	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c586d8a-9d1a-48a7-bb3e-9b2c0c329f8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c587200-02cc-4c5f-86fe-d13cc7bdad8b	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c587200-02cc-4c5f-86fe-d13cc7bdad8b	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c587200-02cc-4c5f-86fe-d13cc7bdad8b	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c587200-02cc-4c5f-86fe-d13cc7bdad8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dromoka-monument:cast:s1,f:xs:XP:dromoka-monument:cast:s1	-	-	-	d864b561c9cb	-	c5990c0fea6e	-	-	2026-11-24	xproof
+1c587200-02cc-4c5f-86fe-d13cc7bdad8b	f0/a0	Mana	agreed	-	FX	start	5	0	x:xs:XP:dromoka-monument:cast:s1,f:xs:XP:dromoka-monument:cast:s1	-	-	-	d864b561c9cb	-	c5990c0fea6e	-	-	2026-11-24	xproof
+1c587200-02cc-4c5f-86fe-d13cc7bdad8b	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:dromoka-monument:f0a1:s1,f:xs:XP:dromoka-monument:f0a1:s1	-	-	-	d864b561c9cb	-	c5990c0fea6e	-	-	2026-11-24	xproof
 1c633e02-95ef-445e-b4e0-fbfbc5ed9cc9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c633e02-95ef-445e-b4e0-fbfbc5ed9cc9	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c633e02-95ef-445e-b4e0-fbfbc5ed9cc9	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c859c97-74df-4360-baf8-0f79eae97c45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c859c97-74df-4360-baf8-0f79eae97c45	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1c8ef715-3c3c-4d04-9f30-941b870b11d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c8ef715-3c3c-4d04-9f30-941b870b11d3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c8ef715-3c3c-4d04-9f30-941b870b11d3	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1c95b7cf-be4d-4961-9073-3e39487492c8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c95b7cf-be4d-4961-9073-3e39487492c8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c95b7cf-be4d-4961-9073-3e39487492c8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

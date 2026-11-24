@@ -120,7 +120,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4098ab29-bf90-4ec9-b547-05d304fc7798	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4098ab29-bf90-4ec9-b547-05d304fc7798	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40999aa6-6424-42e4-9d47-33bee6bbb886	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40999aa6-6424-42e4-9d47-33bee6bbb886	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+40999aa6-6424-42e4-9d47-33bee6bbb886	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 409b44fc-fae2-4804-83a7-78cf95038f58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 409b44fc-fae2-4804-83a7-78cf95038f58	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40abba38-533b-4f51-99e9-a2b337d65171	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -187,7 +187,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40f5f8b9-5c2c-41d4-8b83-55a2e51ced64	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40f664d8-4c73-44aa-8fb1-d38771a42520	cast	cast-resolve	agreed	-	X	scen	1	0	Mysterio, Master of Illusion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 40f664d8-4c73-44aa-8fb1-d38771a42520	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40f66e21-5b60-4e42-927d-65397e7ad544	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+40f66e21-5b60-4e42-927d-65397e7ad544	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:citadel-siege:cast:s1,f:xs:XP:citadel-siege:cast:s1	-	-	-	d864b561c9cb	-	f87e45560de1	-	-	2026-11-24	xproof
 40f6ea6f-71e1-46bd-8d9a-ccb5f437892c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40fa5656-354f-47f9-ba8d-40291ee5b40e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40fa5656-354f-47f9-ba8d-40291ee5b40e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

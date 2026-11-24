@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f5f2792-0cc4-4caa-b798-2ee9597f2524	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f5f2792-0cc4-4caa-b798-2ee9597f2524	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f5fee21-bf29-4873-baf4-04911c309d81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f5fee21-bf29-4873-baf4-04911c309d81	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4f5fee21-bf29-4873-baf4-04911c309d81	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4f63d306-cc14-405c-8424-d8990c670c74	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f63d306-cc14-405c-8424-d8990c670c74	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f65e6a9-0d90-44b9-9b76-00814db2dbd8	cast	cast-resolve	agreed	-	FX	scen	2	0	Laughing Mad/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -111,8 +111,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f815ca4-0197-48c7-bfa2-5eb937c615e6	cast	cast-resolve	agreed	-	X	scen	1	0	Take for a Ride/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f815ca4-0197-48c7-bfa2-5eb937c615e6	static#0.0	static#0.0	agreed	-	X	scen	1	0	Take for a Ride/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f819ba4-52ef-4fdd-8e4c-5ae3b2f44db5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f868b9b-42f4-4f74-bce2-3f9c063a572c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f868b9b-42f4-4f74-bce2-3f9c063a572c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4f868b9b-42f4-4f74-bce2-3f9c063a572c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sight-of-the-scalelords:cast:s1,f:xs:XP:sight-of-the-scalelords:cast:s1	-	-	-	d864b561c9cb	-	70be2a478475	-	-	2026-11-24	xproof
+4f868b9b-42f4-4f74-bce2-3f9c063a572c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sight-of-the-scalelords:cast:s1,f:xs:XP:sight-of-the-scalelords:cast:s1	-	-	-	d864b561c9cb	-	70be2a478475	-	-	2026-11-24	xproof
 4f890d42-e4f1-4eed-aa6c-718865de8927	cast	cast-resolve	agreed	-	X	scen	1	0	Vizier of the Menagerie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f890d42-e4f1-4eed-aa6c-718865de8927	static#0.0	static#0.0	agreed	-	X	scen	1	0	Vizier of the Menagerie/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f890d42-e4f1-4eed-aa6c-718865de8927	static#0.1	static#0.1	agreed	-	X	scen	1	0	Vizier of the Menagerie/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -159,8 +159,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fb8312c-058a-415c-93ab-59d37ebad270	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fb8312c-058a-415c-93ab-59d37ebad270	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fb9c040-c684-4ba8-970e-58313af5584a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fbaf052-a8c3-4395-8f40-0cb3a10d5ccd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fbaf052-a8c3-4395-8f40-0cb3a10d5ccd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4fbaf052-a8c3-4395-8f40-0cb3a10d5ccd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malakir-cullblade:cast:s1,f:xs:XP:malakir-cullblade:cast:s1	-	-	-	d864b561c9cb	-	e8d48470f919	-	-	2026-11-24	xproof
+4fbaf052-a8c3-4395-8f40-0cb3a10d5ccd	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4fbb8e03-22f1-4171-88e9-877244e25613	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fbb8e03-22f1-4171-88e9-877244e25613	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fbe1c02-f5bf-47c7-80de-09a32d01e5db	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:evangel-of-heliod:cast:s1,f:xs:XP:evangel-of-heliod:cast:s1	-	-	-	d864b561c9cb	-	18163c09bf21	-	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fc5f871-a809-4a4a-adfb-eb4cd52837c8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fc5f871-a809-4a4a-adfb-eb4cd52837c8	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fc5f871-a809-4a4a-adfb-eb4cd52837c8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fc69345-4c1f-4113-8e1c-15b8e2e597fc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4fc69345-4c1f-4113-8e1c-15b8e2e597fc	cast	cast	agreed	-	F	start	2	0	f:xs:XP:write-into-being:cast:s1	-	-	-	d864b561c9cb	-	28599f77981b	-	-	2026-11-24	xproof
 4fc7c7a0-bfff-4833-a0d0-a38dc29e9dfb	cast	cast-resolve	agreed	-	FX	scen	2	0	Skilled Battlecarver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fc7c7a0-bfff-4833-a0d0-a38dc29e9dfb	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Skilled Battlecarver/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fc7c7a0-bfff-4833-a0d0-a38dc29e9dfb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Skilled Battlecarver/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -214,5 +214,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ff8c359-430f-434e-ac1e-822abdc28360	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ff8c359-430f-434e-ac1e-822abdc28360	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ff8c359-430f-434e-ac1e-822abdc28360	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4ffa7cc8-4774-430d-b898-5bd26366e124	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4ffa7cc8-4774-430d-b898-5bd26366e124	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shoulder-to-shoulder:cast:s1,f:xs:XP:shoulder-to-shoulder:cast:s1	-	-	-	d864b561c9cb	-	0e124ad664b3	-	-	2026-11-24	xproof
 4ffc16e0-1778-4aba-ade3-58146c800f5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

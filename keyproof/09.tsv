@@ -115,8 +115,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 097bce84-22b1-4d7b-b566-e7c23eb626b9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 098cc111-493b-470b-929c-67deb981240c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 098cc111-493b-470b-929c-67deb981240c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-098e6926-4a6a-4bbb-96bc-1f35cc7982ae	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-098e6926-4a6a-4bbb-96bc-1f35cc7982ae	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+098e6926-4a6a-4bbb-96bc-1f35cc7982ae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:havoc-sower:cast:s1,f:xs:XP:havoc-sower:cast:s1	-	-	-	d864b561c9cb	-	e0e4d981efc0	-	-	2026-11-24	xproof
+098e6926-4a6a-4bbb-96bc-1f35cc7982ae	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:havoc-sower:f0a0:s1,f:xs:XP:havoc-sower:f0a0:s1	-	-	-	d864b561c9cb	-	e0e4d981efc0	-	-	2026-11-24	xproof
 0990e57f-279e-4348-a049-e06187cc38d4	cast	cast-resolve	agreed	-	X	scen	1	0	Summon: Anima/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0990e57f-279e-4348-a049-e06187cc38d4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Summon: Anima/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0990e57f-279e-4348-a049-e06187cc38d4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Summon: Anima/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -157,9 +157,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09b7ea91-2620-4c45-af3c-60bbeab89966	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09bd4e1c-9861-481f-80dc-4de955c8d3af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09bd4e1c-9861-481f-80dc-4de955c8d3af	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09be0f69-9c7f-491f-964d-bfbbc2d4251f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09be0f69-9c7f-491f-964d-bfbbc2d4251f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09be0f69-9c7f-491f-964d-bfbbc2d4251f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09be0f69-9c7f-491f-964d-bfbbc2d4251f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:abbot-of-keral-keep:f0t0:s1,f:xs:XP:abbot-of-keral-keep:f0t0:s1	-	-	-	d864b561c9cb	-	b802c4ceed16	-	-	2026-11-24	xproof
+09be0f69-9c7f-491f-964d-bfbbc2d4251f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:abbot-of-keral-keep:f0t0:s1,f:xs:XP:abbot-of-keral-keep:f0t0:s1	-	-	-	d864b561c9cb	-	b802c4ceed16	-	-	2026-11-24	xproof
+09be0f69-9c7f-491f-964d-bfbbc2d4251f	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 09bf80cc-1112-4f4c-9431-92d741bf2230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09bf80cc-1112-4f4c-9431-92d741bf2230	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09bf80cc-1112-4f4c-9431-92d741bf2230	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -172,12 +172,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09c68fb5-2000-4bb8-b03b-94b093e50bca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09c68fb5-2000-4bb8-b03b-94b093e50bca	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09c96077-3804-4f12-a613-5bebc5e0413f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09cacd93-5c20-4993-9ee2-a756204796f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09cacd93-5c20-4993-9ee2-a756204796f7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09cacd93-5c20-4993-9ee2-a756204796f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eyeblight-assassin:f0t0:s1,f:xs:XP:eyeblight-assassin:f0t0:s1	-	-	-	d864b561c9cb	-	2215aeb79f89	-	-	2026-11-24	xproof
+09cacd93-5c20-4993-9ee2-a756204796f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eyeblight-assassin:f0t0:s1,f:xs:XP:eyeblight-assassin:f0t0:s1	-	-	-	d864b561c9cb	-	2215aeb79f89	-	-	2026-11-24	xproof
 09cc0faa-71d7-428b-9fc4-5ba09e244e89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09cc0faa-71d7-428b-9fc4-5ba09e244e89	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 09cc2cda-14d1-424e-a688-1b49b1b4c392	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09cc2cda-14d1-424e-a688-1b49b1b4c392	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09cc2cda-14d1-424e-a688-1b49b1b4c392	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 09cc8709-fe10-472a-b05c-e89f3523018d	cast	cast-resolve	agreed	-	FX	scen	2	0	Austere Command/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 09dd85aa-47bc-4713-a9b9-8b52ff2285ed	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Misty Rainforest/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 09dd85aa-47bc-4713-a9b9-8b52ff2285ed	land	play-land	agreed	-	FX	scen	2	0	Misty Rainforest/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

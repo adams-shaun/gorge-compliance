@@ -140,8 +140,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05b020fd-21be-495d-ae45-7de3b1224e6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05b020fd-21be-495d-ae45-7de3b1224e6d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05b5c0fb-84b2-4a32-bf66-179c4dccb3df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05b6f9e3-9acd-43a6-acff-caa811aaf0a1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05b6f9e3-9acd-43a6-acff-caa811aaf0a1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05b6f9e3-9acd-43a6-acff-caa811aaf0a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akoum-hellkite:cast:s1,f:xs:XP:akoum-hellkite:cast:s1	-	-	-	d864b561c9cb	-	96e538e99211	-	-	2026-11-24	xproof
+05b6f9e3-9acd-43a6-acff-caa811aaf0a1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 05b9dccb-2364-4bca-a12e-8cb54a3f3a0b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05b9dccb-2364-4bca-a12e-8cb54a3f3a0b	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05baf38c-677a-42e3-bb8c-a52a0a478984	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05d7222b-cc08-4f1f-8e35-6058599572ba	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:twilight-diviner:f0t0:s2,f:xs:XP:twilight-diviner:f0t0:s2	-	-	-	267e485f6204	-	5326d69258e9	-	-	2026-11-24	xproof
 05d7222b-cc08-4f1f-8e35-6058599572ba	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Twilight Diviner/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 05d75b10-4f20-4083-af27-f85c6e207fd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05d75b10-4f20-4083-af27-f85c6e207fd0	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05d75b10-4f20-4083-af27-f85c6e207fd0	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 05da6b06-fb5f-41e8-b0a2-d949646e36d9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mephitic-draught:f0t0:s2,f:xs:XP:mephitic-draught:f0t0:s2	-	-	-	e07cf3a05ba5	-	bafe83524188	-	-	2026-11-24	xproof
 05da6b06-fb5f-41e8-b0a2-d949646e36d9	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mephitic-draught:f0t0:s2,f:xs:XP:mephitic-draught:f0t0:s2	-	-	-	e07cf3a05ba5	-	bafe83524188	-	-	2026-11-24	xproof
 05da6b06-fb5f-41e8-b0a2-d949646e36d9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Mephitic Draught/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

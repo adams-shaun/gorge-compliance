@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a011d0d-da29-4287-b50c-12746abfa38c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tilling-treefolk:f0t0:s1,f:xs:XP:tilling-treefolk:f0t0:s1	-	-	-	8a1b1a193ec0	-	a42252b96095	-	-	2026-11-24	xproof
 8a04fd45-6526-4c73-8b38-5e40a2380451	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a05ec32-7b0c-4f23-a4f7-413301c2a70a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a05ec32-7b0c-4f23-a4f7-413301c2a70a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a05ec32-7b0c-4f23-a4f7-413301c2a70a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8a09d4a2-4796-4a15-ab75-a3a0b717f62d	cast	cast-resolve	agreed	-	FX	scen	2	0	Ares, God of War/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a09d4a2-4796-4a15-ab75-a3a0b717f62d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ares, God of War/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a09d4a2-4796-4a15-ab75-a3a0b717f62d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ares, God of War/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a1fd464-760c-43d9-829a-424945d91eb9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a1fd464-760c-43d9-829a-424945d91eb9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a206c6f-4f6f-4c31-9dab-d73a57db989c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a206c6f-4f6f-4c31-9dab-d73a57db989c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a206c6f-4f6f-4c31-9dab-d73a57db989c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8a20707f-9764-4236-9aa9-858a2419f012	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a20707f-9764-4236-9aa9-858a2419f012	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a20707f-9764-4236-9aa9-858a2419f012	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

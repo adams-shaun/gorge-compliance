@@ -24,9 +24,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 771f5e29-b4d1-4466-8510-ce3f89ad7173	f0/a0	Animate	agreed	-	F	start	2	0	f:xs:XP:chimeric-staff:cast:s1	-	-	-	25696bf19d5b	-	c28957a69add	-	-	2026-11-24	xproof
 77216636-f76d-4c5e-b1ac-ab1844753f05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77216636-f76d-4c5e-b1ac-ab1844753f05	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77216efa-4f34-4534-9df3-918f0b888ce1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77216efa-4f34-4534-9df3-918f0b888ce1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77216efa-4f34-4534-9df3-918f0b888ce1	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77216efa-4f34-4534-9df3-918f0b888ce1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:silumgar-butcher:cast:s1,f:xs:XP:silumgar-butcher:cast:s1	-	-	-	d864b561c9cb	-	666c783a1860	-	-	2026-11-24	xproof
+77216efa-4f34-4534-9df3-918f0b888ce1	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+77216efa-4f34-4534-9df3-918f0b888ce1	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:silumgar-butcher:cast:s1,f:xs:XP:silumgar-butcher:cast:s1	-	-	-	d864b561c9cb	-	666c783a1860	-	-	2026-11-24	xproof
 77217a66-4ba8-443f-b915-178cfcc233e1	cast	cast-resolve	agreed	-	X	scen	1	0	Chaos Spewer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 77217a66-4ba8-443f-b915-178cfcc233e1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 77248a76-373c-48fc-939f-aa378ab57f7c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -210,4 +210,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77f257b9-2047-40a3-85c2-00ad17deeb08	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77f53f6a-36ab-43d1-b547-4578fd724864	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:virulent-swipe:cast:s1,f:xs:XP:virulent-swipe:cast:s1	-	-	-	d864b561c9cb	-	66d8445a83f2	-	-	2026-11-24	xproof
 77fa18fa-5dba-4e4c-9b24-9bfa9b68779f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77fef82d-e8d0-444b-8d76-68e9b533f38b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77fef82d-e8d0-444b-8d76-68e9b533f38b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:roiling-waters:cast:s1	-	-	-	d864b561c9cb	-	0e57a66d735d	-	-	2026-11-24	xproof

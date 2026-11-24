@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83798eb8-b14f-4620-bce2-1a6804a24dc7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hawkeye's Bow/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 837c5d0e-0a33-4f9d-ae25-68a687bdf640	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 837c5d0e-0a33-4f9d-ae25-68a687bdf640	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-837f72a9-9522-46e9-a48c-c6ff6d0bbe67	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+837f72a9-9522-46e9-a48c-c6ff6d0bbe67	cast	cast	diverged	-	-	start	0	2	-	0a520ded0ebd	-	-	d864b561c9cb	-	c9fe5f5589d3	-	-	2026-11-24	xproof
 8381b04a-666b-4e33-b277-6db39fdfe905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8381b04a-666b-4e33-b277-6db39fdfe905	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 83837ceb-7aae-4257-8545-a6cf34656e3b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:votary-of-the-conclave:cast:s1,f:xs:XP:votary-of-the-conclave:cast:s1	-	-	-	77494c1ce129	-	2c2c748b6fb4	-	-	2026-11-24	xproof
@@ -156,9 +156,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83b9a734-ee92-44c8-bf47-ca69b6d6405e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83b9a734-ee92-44c8-bf47-ca69b6d6405e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83bf5610-a798-4508-88d2-c60d96f60d23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83c0c648-f000-470d-bcc3-9ec81257d0cd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83c0c648-f000-470d-bcc3-9ec81257d0cd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83c0c648-f000-470d-bcc3-9ec81257d0cd	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83c0c648-f000-470d-bcc3-9ec81257d0cd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:vulturous-aven:cast:s1,f:xs:XP:vulturous-aven:cast:s1	-	-	-	d864b561c9cb	-	ce8c12828149	-	-	2026-11-24	xproof
+83c0c648-f000-470d-bcc3-9ec81257d0cd	f0/t0	Exploited	agreed	-	FX	start	4	0	x:xs:XP:vulturous-aven:cast:s1,f:xs:XP:vulturous-aven:cast:s1	-	-	-	d864b561c9cb	-	ce8c12828149	-	-	2026-11-24	xproof
+83c0c648-f000-470d-bcc3-9ec81257d0cd	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:vulturous-aven:cast:s1,f:xs:XP:vulturous-aven:cast:s1	-	-	-	d864b561c9cb	-	ce8c12828149	-	-	2026-11-24	xproof
 83c12f50-e5a1-479d-afab-edb0b40412f2	cast	cast-resolve	agreed	-	X	scen	1	0	Desperate Futurescribe/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83c12f50-e5a1-479d-afab-edb0b40412f2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Desperate Futurescribe/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83c12f50-e5a1-479d-afab-edb0b40412f2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Desperate Futurescribe/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -218,4 +218,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83f776d9-f3b6-40c2-8008-1ace4d110825	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83f776d9-f3b6-40c2-8008-1ace4d110825	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83f7e8e5-d485-4571-9fa6-47b5e962d221	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83f7e8e5-d485-4571-9fa6-47b5e962d221	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83f7e8e5-d485-4571-9fa6-47b5e962d221	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

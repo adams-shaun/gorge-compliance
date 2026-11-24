@@ -32,11 +32,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7a23915f-8bce-4aad-8395-0c736450a62d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a2484a9-04fd-41a0-8224-610c1c07ed10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blasphemous-act:cast:s1,f:xs:XP:blasphemous-act:cast:s1	-	-	-	d864b561c9cb	-	1eaa0e236047	-	-	2026-11-24	xproof
 7a2722c6-04a0-4790-be45-dafb7832bb41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a2722c6-04a0-4790-be45-dafb7832bb41	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7a2722c6-04a0-4790-be45-dafb7832bb41	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:primeval-shambler:f0a0:s1,f:xs:XP:primeval-shambler:f0a0:s1	-	-	-	d864b561c9cb	-	39f430c53f69	-	-	2026-11-24	xproof
 7a2b134d-9d7e-4d43-98fc-c776fc4bad45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a2e866b-9642-495e-b47f-5b13a24373cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a2fa0a6-1324-4714-8896-6bb97640578a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a2fa0a6-1324-4714-8896-6bb97640578a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7a2fa0a6-1324-4714-8896-6bb97640578a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jeskai-barricade:f0t0:s1,f:xs:XP:jeskai-barricade:f0t0:s1	-	-	-	d864b561c9cb	-	c3e9487436fb	-	-	2026-11-24	xproof
+7a2fa0a6-1324-4714-8896-6bb97640578a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jeskai-barricade:f0t0:s1,f:xs:XP:jeskai-barricade:f0t0:s1	-	-	-	d864b561c9cb	-	c3e9487436fb	-	-	2026-11-24	xproof
 7a30316b-dcd5-4a4b-b959-eecde7ca92e7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Branch of Vitu-Ghazi/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7a30316b-dcd5-4a4b-b959-eecde7ca92e7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Branch of Vitu-Ghazi/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7a30316b-dcd5-4a4b-b959-eecde7ca92e7	land	play-land	agreed	-	X	scen	1	0	Branch of Vitu-Ghazi/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -70,7 +70,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7a5a8414-4da4-4dd0-93ae-210d50f4d6f6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a5a8414-4da4-4dd0-93ae-210d50f4d6f6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a5dae5f-29ab-4996-b236-c754de8769bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a5dae5f-29ab-4996-b236-c754de8769bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7a5dae5f-29ab-4996-b236-c754de8769bc	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7a5ff4d4-27b7-47d4-ba88-970c63c4e3fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a67cb39-6b53-4f2b-a52c-3861119eba12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a67cb39-6b53-4f2b-a52c-3861119eba12	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

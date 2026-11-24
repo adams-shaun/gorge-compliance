@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 ba0082fb-2d4c-489e-8140-93a6fa693fd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba0291ad-09ea-4fee-baa9-7778fbbb6ba7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba0291ad-09ea-4fee-baa9-7778fbbb6ba7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba047b0b-d451-4566-8656-00b00611de8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba047b0b-d451-4566-8656-00b00611de8c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ba047b0b-d451-4566-8656-00b00611de8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eyeless-watcher:f0t0:s1,f:xs:XP:eyeless-watcher:f0t0:s1	-	-	-	d864b561c9cb	-	d7c143eb314b	-	-	2026-11-24	xproof
+ba047b0b-d451-4566-8656-00b00611de8c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eyeless-watcher:f0t0:s1,f:xs:XP:eyeless-watcher:f0t0:s1	-	-	-	d864b561c9cb	-	d7c143eb314b	-	-	2026-11-24	xproof
 ba069664-9f92-47c7-b556-9e5143a22579	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doomwake-giant:f0t0:s1,f:xs:XP:doomwake-giant:f0t0:s1	-	-	-	d864b561c9cb	-	ff1b95c9b4ce	-	-	2026-11-24	xproof
 ba069664-9f92-47c7-b556-9e5143a22579	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:doomwake-giant:f0t0:s1,f:xs:XP:doomwake-giant:f0t0:s1	-	-	-	d864b561c9cb	-	ff1b95c9b4ce	-	-	2026-11-24	xproof
 ba08b4cf-9a13-40fd-8522-9504d2ff1a19	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Suit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -60,7 +60,7 @@ ba48e067-f4d9-45b2-ade1-71cf8cda418c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 ba4d644f-1931-4fc4-aed5-681a476a5a58	cast	cast-resolve	agreed	-	X	scen	1	0	Cease/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ba5055ce-6809-47a4-bee6-fb97a5b60f8a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba5055ce-6809-47a4-bee6-fb97a5b60f8a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba557e19-a409-4c02-a9ac-a8fb77762e43	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kutzil-s-flanker:f0t0:s1,f:xs:XP:kutzil-s-flanker:f0t0:s1	-	-	-	9ee19e8250ce	-	6006bddaf1df	-	-	2026-11-24	xproof
+ba557e19-a409-4c02-a9ac-a8fb77762e43	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kutzil-s-flanker:f0t0:s1,f:xs:XP:kutzil-s-flanker:f0t0:s1	-	-	-	d864b561c9cb	-	6006bddaf1df	-	-	2026-11-24	xproof
 ba557e19-a409-4c02-a9ac-a8fb77762e43	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba5895e1-f12b-43c7-b47c-376588d9d2d2	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:neva-stalked-by-nightmares:f0t0:s2,f:xs:XP:neva-stalked-by-nightmares:f0t0:s2	-	-	-	e07cf3a05ba5	-	7d8f6fcece13	-	-	2026-11-24	xproof
 ba5895e1-f12b-43c7-b47c-376588d9d2d2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Neva, Stalked by Nightmares/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -119,7 +119,7 @@ ba968a1e-c946-4cbe-9727-160c73cde3f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ba968a1e-c946-4cbe-9727-160c73cde3f4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba995901-bb32-45ed-8af8-f98784b5a9b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba997e44-fc80-4463-ad3f-6497be26df0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba997e44-fc80-4463-ad3f-6497be26df0f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ba997e44-fc80-4463-ad3f-6497be26df0f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ba9ac0a9-735d-4bca-9d24-586aca963872	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba9ac0a9-735d-4bca-9d24-586aca963872	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elder-cathar:f0t0:s1,f:xs:XP:elder-cathar:f0t0:s1	-	-	-	d864b561c9cb	-	512d118d37b2	-	-	2026-11-24	xproof
 baa337ce-edc6-4ee5-a898-68e9dbb4ab93	cast	cast-resolve	agreed	-	X	scen	1	0	Ultima, Origin of Oblivion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -137,8 +137,8 @@ baab3245-6616-4a4a-a168-3215a7878073	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 baadfc17-42fd-4771-aabe-027ef7b3bf69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 baadfc17-42fd-4771-aabe-027ef7b3bf69	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 baadfc17-42fd-4771-aabe-027ef7b3bf69	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bab0ab8d-74d2-49a3-b258-b93d19925d99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bab0ab8d-74d2-49a3-b258-b93d19925d99	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bab0ab8d-74d2-49a3-b258-b93d19925d99	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-dark-dwellers:f0t0:s1,f:xs:XP:goblin-dark-dwellers:f0t0:s1	-	-	-	d864b561c9cb	-	3fcf5698b802	-	-	2026-11-24	xproof
+bab0ab8d-74d2-49a3-b258-b93d19925d99	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-dark-dwellers:f0t0:s1,f:xs:XP:goblin-dark-dwellers:f0t0:s1	-	-	-	d864b561c9cb	-	3fcf5698b802	-	-	2026-11-24	xproof
 bab28608-b388-4c48-92a4-689943bbbf4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bab5e9ce-6d55-4d1e-a9ac-c2b954191be9	cast	cast-resolve	agreed	-	X	scen	1	0	Summon: Brynhildr/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 babab2f5-fd1f-4e0a-a692-6c2ce35df708	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:murder-of-crows:cast:s1,f:xs:XP:murder-of-crows:cast:s1	-	-	-	d864b561c9cb	-	2ac5664ca2be	-	-	2026-11-24	xproof
@@ -187,8 +187,8 @@ baea7cc5-15ec-4229-ad8b-d4b34c2e21e8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 baea7cc5-15ec-4229-ad8b-d4b34c2e21e8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 baec04a1-3bc9-4618-afab-e42013e36648	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 baec04a1-3bc9-4618-afab-e42013e36648	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-baf8310f-5baf-459e-95ae-6b43a1d47e24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-baf8310f-5baf-459e-95ae-6b43a1d47e24	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+baf8310f-5baf-459e-95ae-6b43a1d47e24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:suspension-field:f0t0:s1,f:xs:XP:suspension-field:f0t0:s1	-	-	-	d864b561c9cb	-	1ccf12b88223	-	-	2026-11-24	xproof
+baf8310f-5baf-459e-95ae-6b43a1d47e24	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:suspension-field:f0t0:s1,f:xs:XP:suspension-field:f0t0:s1	-	-	-	d864b561c9cb	-	1ccf12b88223	-	-	2026-11-24	xproof
 baf93873-35e6-4bf2-bdcc-78a5206422fb	cast	cast-resolve	agreed	-	X	scen	1	0	Painter's Servant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 baf93873-35e6-4bf2-bdcc-78a5206422fb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Painter's Servant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 bafad165-c2aa-45d1-8f99-05e752450dfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

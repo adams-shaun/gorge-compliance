@@ -83,8 +83,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 636b44dc-f7e4-42d2-abf6-ae49432b6052	cast	cast-resolve	agreed	-	FX	scen	2	0	Pym Particles/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 636cc915-9d1b-4ffe-9e74-795b78663911	cast	cast-resolve	agreed	-	X	scen	1	0	Superior Spider-Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 636e9863-29ac-476a-86db-d8f73b4adbf4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-636ed3e3-c31d-403a-a3e7-03e01350ce4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-636ed3e3-c31d-403a-a3e7-03e01350ce4f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+636ed3e3-c31d-403a-a3e7-03e01350ce4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mardu-woe-reaper:f0t0:s1,f:xs:XP:mardu-woe-reaper:f0t0:s1	-	-	-	d864b561c9cb	-	71242f06444b	-	-	2026-11-24	xproof
+636ed3e3-c31d-403a-a3e7-03e01350ce4f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mardu-woe-reaper:f0t0:s1,f:xs:XP:mardu-woe-reaper:f0t0:s1	-	-	-	d864b561c9cb	-	71242f06444b	-	-	2026-11-24	xproof
 63701aa6-d3b8-4af2-96a4-2dec27d6a661	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6373c66d-edfc-44cb-af2a-2273e0ba53e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6373c66d-edfc-44cb-af2a-2273e0ba53e0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -193,4 +193,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63f67baa-3f37-41b8-9ee6-3c37f828917d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Prudent Fateseer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63f67baa-3f37-41b8-9ee6-3c37f828917d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Prudent Fateseer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63fd2a57-7a47-4e07-947c-f4e9da7ee538	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63fd2a57-7a47-4e07-947c-f4e9da7ee538	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+63fd2a57-7a47-4e07-947c-f4e9da7ee538	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

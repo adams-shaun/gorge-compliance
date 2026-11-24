@@ -99,15 +99,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a646245-b8b7-4f91-a312-d5eea9a9e49a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Extravagant Replication/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a68915d-3e8b-4ede-bdd9-6c138ca63220	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a6f886b-2043-47e9-9c0f-f7913a6fa67d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a6f886b-2043-47e9-9c0f-f7913a6fa67d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a6f886b-2043-47e9-9c0f-f7913a6fa67d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3a721a4c-696b-44d1-858d-20040bd01909	cast	cast-resolve	agreed	-	FX	scen	2	0	Talion's Messenger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a721a4c-696b-44d1-858d-20040bd01909	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Talion's Messenger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a721a4c-696b-44d1-858d-20040bd01909	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Talion's Messenger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a721a4c-696b-44d1-858d-20040bd01909	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Talion's Messenger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a726e40-829c-47ec-81a7-58a04164fc3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a726e40-829c-47ec-81a7-58a04164fc3f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a726e40-829c-47ec-81a7-58a04164fc3f	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:myth-realized:f0a0:s1,f:xs:XP:myth-realized:f0a0:s1	-	-	-	d864b561c9cb	-	7147a9799b90	-	-	2026-11-24	xproof
 3a726e40-829c-47ec-81a7-58a04164fc3f	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a726e40-829c-47ec-81a7-58a04164fc3f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a726e40-829c-47ec-81a7-58a04164fc3f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3a747893-a514-4689-8486-ecccf654fecb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a7478d7-b33e-4227-8cc3-b30643624d56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a75c56a-bdf7-490d-aa41-51d5eb8be46c	cast	cast-resolve	agreed	-	X	scen	1	0	Aegis Sculptor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -139,8 +139,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a92b235-196b-4f46-9d20-06f4d3653d36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a940dfa-a026-4969-8981-ef90cdfbe9ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a940dfa-a026-4969-8981-ef90cdfbe9ef	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a96782b-e9c8-4bc5-845d-45f6bf7b8dc4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a96782b-e9c8-4bc5-845d-45f6bf7b8dc4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a96782b-e9c8-4bc5-845d-45f6bf7b8dc4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lavastep-raider:cast:s1,f:xs:XP:lavastep-raider:cast:s1	-	-	-	d864b561c9cb	-	36c205c953c5	-	-	2026-11-24	xproof
+3a96782b-e9c8-4bc5-845d-45f6bf7b8dc4	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:lavastep-raider:f0a0:s1,f:xs:XP:lavastep-raider:f0a0:s1	-	-	-	d864b561c9cb	-	36c205c953c5	-	-	2026-11-24	xproof
 3a97bc8d-bd81-468e-9277-eba4fac11ee0	cast	cast-resolve	agreed	-	X	scen	1	0	Vastlands Scavenger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a97bc8d-bd81-468e-9277-eba4fac11ee0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Vastlands Scavenger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a97bc8d-bd81-468e-9277-eba4fac11ee0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Vastlands Scavenger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

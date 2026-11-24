@@ -74,7 +74,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38530399-d2c9-4445-92ba-14c5cd438055	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 38530399-d2c9-4445-92ba-14c5cd438055	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 38538aff-b6f9-4c30-992e-7fd78da3c44a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38538aff-b6f9-4c30-992e-7fd78da3c44a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38538aff-b6f9-4c30-992e-7fd78da3c44a	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:matter-reshaper:f0t0:s1	-	-	-	d864b561c9cb	-	25fd38f32e72	-	-	2026-11-24	xproof
 38561191-ecd1-4028-a0fd-4bca6a7eab58	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38561191-ecd1-4028-a0fd-4bca6a7eab58	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3859873f-2a0f-463b-8ed9-7f2ab5ed393a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 385c1208-bfea-44e2-b236-4f38bc90db9f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gladecover-scout:cast:s1,f:xs:XP:gladecover-scout:cast:s1	-	-	-	d864b561c9cb	-	54948ebb65f2	-	-	2026-11-24	xproof
 385d70ed-07ab-4e01-a473-4408f4bcf6d0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:oath-of-the-ancient-wood:cast:s1,f:xs:XP:oath-of-the-ancient-wood:cast:s1	-	-	-	d864b561c9cb	-	1b7a4a42057f	-	-	2026-11-24	xproof
 385d70ed-07ab-4e01-a473-4408f4bcf6d0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:oath-of-the-ancient-wood:cast:s1,f:xs:XP:oath-of-the-ancient-wood:cast:s1	-	-	-	d864b561c9cb	-	1b7a4a42057f	-	-	2026-11-24	xproof
-3865d219-44b7-49ce-ab26-b833acb39765	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3865d219-44b7-49ce-ab26-b833acb39765	cast	cast	agreed	-	F	start	2	0	f:xs:XP:seek-the-wilds:cast:s1	-	-	-	d864b561c9cb	-	87979c01d4bb	-	-	2026-11-24	xproof
 38684c31-e8c6-4825-8740-1a3d34b58b39	cast	cast-resolve	agreed	-	X	scen	1	0	Wraith, Vicious Vigilante/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 38684c31-e8c6-4825-8740-1a3d34b58b39	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wraith, Vicious Vigilante/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 38684c31-e8c6-4825-8740-1a3d34b58b39	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wraith, Vicious Vigilante/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -163,7 +163,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38e274e2-bd04-48de-a1df-44f0ee987ba8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38e36eb0-f3a9-42d7-9223-417d23e434fa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38e36eb0-f3a9-42d7-9223-417d23e434fa	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38e43d06-33f1-4672-b0be-b0ea8bf36291	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38e43d06-33f1-4672-b0be-b0ea8bf36291	cast	cast	agreed	-	F	start	2	0	f:xs:XP:roil-s-retribution:cast:s1	-	-	-	d864b561c9cb	-	f9fa7407fce1	-	-	2026-11-24	xproof
 38e64b15-47c0-4453-a51e-a53c1aebc8d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38e64b15-47c0-4453-a51e-a53c1aebc8d0	f0/a0	MustBlock	agreed	-	F	start	2	0	f:xs:XP:sisters-of-stone-death:f0a1:s1	-	-	-	9ee19e8250ce	-	905c1edfaaea	-	-	2026-11-24	xproof
 38e64b15-47c0-4453-a51e-a53c1aebc8d0	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof

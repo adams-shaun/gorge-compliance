@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f67b8e0-fbbd-48ef-989d-690d44b70304	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f67b8e0-fbbd-48ef-989d-690d44b70304	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f691e0d-dac5-4d7e-8727-dd2cab9a7863	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f691e0d-dac5-4d7e-8727-dd2cab9a7863	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7f691e0d-dac5-4d7e-8727-dd2cab9a7863	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7f6ddfa2-31ba-4cb7-83e7-1f099e3e8dc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f6ddfa2-31ba-4cb7-83e7-1f099e3e8dc3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f7049e8-49ed-46da-89f7-1e40aefb3b0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -149,8 +149,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fd2cac5-cd29-4a47-9e89-9c6be39a0b67	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:plan-for-all-outcomes:f0t0:s1,f:xs:XP:plan-for-all-outcomes:f0t0:s1	-	-	-	25696bf19d5b	-	e980fbc20b72	-	-	2026-11-24	xproof
 7fd2cac5-cd29-4a47-9e89-9c6be39a0b67	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Plan for All Outcomes/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7fd4c452-07f2-492c-9c78-d1c6362d9eec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fd4c452-07f2-492c-9c78-d1c6362d9eec	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fd4c452-07f2-492c-9c78-d1c6362d9eec	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7fd4c452-07f2-492c-9c78-d1c6362d9eec	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-elder:f0a0:s1,f:xs:XP:yavimaya-elder:f0a0:s1	-	-	-	d864b561c9cb	-	a196b2a5a448	-	-	2026-11-24	xproof
+7fd4c452-07f2-492c-9c78-d1c6362d9eec	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:yavimaya-elder:f0a0:s1,f:xs:XP:yavimaya-elder:f0a0:s1	-	-	-	d864b561c9cb	-	a196b2a5a448	-	-	2026-11-24	xproof
 7fd61a18-6e4f-40c5-aa00-3d101ec1ec82	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fd61a18-6e4f-40c5-aa00-3d101ec1ec82	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fd61a18-6e4f-40c5-aa00-3d101ec1ec82	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,9 +180,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ffb8c2e-1737-4df3-b310-384a5000bfa5	cast	cast-resolve	agreed	-	FX	scen	2	0	Nesting Bot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ffb8c2e-1737-4df3-b310-384a5000bfa5	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Nesting Bot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ffb8c2e-1737-4df3-b310-384a5000bfa5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Nesting Bot/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7fff5224-c002-4a32-86fe-9a4b18d78b50	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fff5224-c002-4a32-86fe-9a4b18d78b50	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fff5224-c002-4a32-86fe-9a4b18d78b50	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7fff5224-c002-4a32-86fe-9a4b18d78b50	f0/a0	Mana	agreed	-	FX	start	3	0	x:xs:XP:hissing-quagmire:f0a0:s1,f:xs:XP:hissing-quagmire:f0a0:s1	-	-	-	d864b561c9cb	-	56828bcb6116	-	-	2026-11-24	xproof
+7fff5224-c002-4a32-86fe-9a4b18d78b50	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:hissing-quagmire:f0a1:s1,f:xs:XP:hissing-quagmire:f0a1:s1	-	-	-	d864b561c9cb	-	56828bcb6116	-	-	2026-11-24	xproof
+7fff5224-c002-4a32-86fe-9a4b18d78b50	land	land	agreed	-	FX	start	2	0	x:xs:XP:hissing-quagmire:land:s1,f:xs:XP:hissing-quagmire:land:s1	-	-	-	d864b561c9cb	-	56828bcb6116	-	-	2026-11-24	xproof
 7fffbe7f-ad78-4bb6-a611-c37e495c6ee0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fffbe7f-ad78-4bb6-a611-c37e495c6ee0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fffbe7f-ad78-4bb6-a611-c37e495c6ee0	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

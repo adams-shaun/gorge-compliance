@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ebd9c8d-c840-4c2e-ace6-352a68d1c20f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ec1b67a-5ff8-4ce7-8388-d11a23f76f0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ec1b67a-5ff8-4ce7-8388-d11a23f76f0e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ec3d99d-2c49-469a-81d5-f1609b6e49ca	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ec3d99d-2c49-469a-81d5-f1609b6e49ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reclaiming-vines:cast:s1,f:xs:XP:reclaiming-vines:cast:s1	-	-	-	d864b561c9cb	-	3325b952a0b9	-	-	2026-11-24	xproof
 3ec7ae18-b203-49bd-95f9-ad5482459a23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ec7ae18-b203-49bd-95f9-ad5482459a23	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ecaefc8-ead2-47a3-a7ea-b030faab65a7	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	5706bcc90bfc	-	-	2026-11-24	xproof
@@ -183,5 +183,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3efe6ac8-f92e-4108-913b-077e41c0a841	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3eff03f1-2c5f-4c59-b465-a8c4cd05e1ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3eff8f21-9a1b-4afc-8a7b-75a740d0a4ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3eff8f21-9a1b-4afc-8a7b-75a740d0a4ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3eff8f21-9a1b-4afc-8a7b-75a740d0a4ea	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3eff8f21-9a1b-4afc-8a7b-75a740d0a4ea	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:clockwork-condor:f0t0:s1,f:xs:XP:clockwork-condor:f0t0:s1	-	-	-	d864b561c9cb	-	a141f0edec7e	-	-	2026-11-24	xproof
+3eff8f21-9a1b-4afc-8a7b-75a740d0a4ea	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

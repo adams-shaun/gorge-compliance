@@ -4,14 +4,14 @@ a202276b-1f1b-4277-95ee-26877a204f5e	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sun
 a202276b-1f1b-4277-95ee-26877a204f5e	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Sunbillow Verge/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a202276b-1f1b-4277-95ee-26877a204f5e	land	play-land	agreed	-	FX	scen	2	0	Sunbillow Verge/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a2057118-9fd1-431d-9441-fef198d67ff2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a2057118-9fd1-431d-9441-fef198d67ff2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a2057118-9fd1-431d-9441-fef198d67ff2	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a20bb8b3-b724-4fec-b179-ca9e6adc4718	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a20bb8b3-b724-4fec-b179-ca9e6adc4718	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a20e2e1a-90d8-4073-96e9-efce86f0178e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a20e2e1a-90d8-4073-96e9-efce86f0178e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a20edb8d-219d-4d0f-8346-0c31064eb49f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a20edb8d-219d-4d0f-8346-0c31064eb49f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brood-butcher:f0t0:s1,f:xs:XP:brood-butcher:f0t0:s1	-	-	-	d864b561c9cb	-	036a19ef9365	-	-	2026-11-24	xproof
 a20edb8d-219d-4d0f-8346-0c31064eb49f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a20edb8d-219d-4d0f-8346-0c31064eb49f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a20edb8d-219d-4d0f-8346-0c31064eb49f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:brood-butcher:f0t0:s1,f:xs:XP:brood-butcher:f0t0:s1	-	-	-	d864b561c9cb	-	036a19ef9365	-	-	2026-11-24	xproof
 a213c650-06cc-4ea8-86f8-78ccfe103b38	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a213c650-06cc-4ea8-86f8-78ccfe103b38	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a213c650-06cc-4ea8-86f8-78ccfe103b38	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -36,7 +36,7 @@ a22b8220-b41d-4b58-aa68-2c65ce37c517	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 a231319d-5d72-4aa6-8868-5987694791cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a231319d-5d72-4aa6-8868-5987694791cd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a23293cf-4352-4ce6-8a68-3b30f908e137	cast	cast-resolve	agreed	-	X	scen	1	0	Fear of Being Hunted/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a232daf3-db54-4711-88b0-e5072c05f58e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a232daf3-db54-4711-88b0-e5072c05f58e	cast	cast	diverged	-	-	start	0	2	-	0a520ded0ebd	-	-	d864b561c9cb	-	6d17733c8a30	-	-	2026-11-24	xproof
 a2335149-d2db-48c1-9699-0df8ce12d4dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a2373025-20c1-4416-91f7-e51f68dbd146	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a23c4378-9242-46a0-9f62-ca91f0baa428	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

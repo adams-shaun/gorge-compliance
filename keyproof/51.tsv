@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 511d3de9-076b-4811-bddf-00623f98993f	cast	cast-resolve	agreed	-	X	scen	1	0	Auroral Procession/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 511e35cd-2e19-4803-a404-b790af0cea60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 511e35cd-2e19-4803-a404-b790af0cea60	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-511e35cd-2e19-4803-a404-b790af0cea60	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+511e35cd-2e19-4803-a404-b790af0cea60	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 511fa8a3-0a65-47fc-9f3b-57eaef2698cd	cast	cast-resolve	agreed	-	X	scen	1	0	Undergrowth Leopard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 511fa8a3-0a65-47fc-9f3b-57eaef2698cd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Undergrowth Leopard/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 511fa8a3-0a65-47fc-9f3b-57eaef2698cd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Undergrowth Leopard/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -147,9 +147,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51c0b46c-c379-420a-a4a4-d18724c759aa	static#0.1	static#0.1	agreed	-	X	scen	1	0	Technodrome/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51c1f21d-1512-4885-bfdc-58790cf77d51	cast	cast-resolve	agreed	-	X	scen	1	0	Ultron Drone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51c1f21d-1512-4885-bfdc-58790cf77d51	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ultron Drone/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-51c7beca-ca19-4a4d-9512-0255146a9cd0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51c7beca-ca19-4a4d-9512-0255146a9cd0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51c7beca-ca19-4a4d-9512-0255146a9cd0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+51c7beca-ca19-4a4d-9512-0255146a9cd0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormrider-rig:cast:s1,f:xs:XP:stormrider-rig:cast:s1	-	-	-	d864b561c9cb	-	b06f43104ebe	-	-	2026-11-24	xproof
+51c7beca-ca19-4a4d-9512-0255146a9cd0	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:stormrider-rig:f0a0:s1,f:xs:XP:stormrider-rig:f0a0:s1	-	-	-	d864b561c9cb	-	b06f43104ebe	-	-	2026-11-24	xproof
+51c7beca-ca19-4a4d-9512-0255146a9cd0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 51cc270d-55c8-4b6b-a6d7-f98d7b8e5185	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51cc270d-55c8-4b6b-a6d7-f98d7b8e5185	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51cc270d-55c8-4b6b-a6d7-f98d7b8e5185	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

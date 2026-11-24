@@ -2,11 +2,11 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 2701b912-b672-4764-97f7-51c444f754f2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2701b912-b672-4764-97f7-51c444f754f2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-270508aa-b2e7-4066-be2f-4308cffe2b94	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+270508aa-b2e7-4066-be2f-4308cffe2b94	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:consecrated-by-blood:cast:s1,f:xs:XP:consecrated-by-blood:cast:s1	-	-	-	d864b561c9cb	-	58569efc05f4	-	-	2026-11-24	xproof
 27083627-a5d0-4fc6-9e66-fa44803ef080	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27083627-a5d0-4fc6-9e66-fa44803ef080	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 270a21c1-4c44-46ef-8c4f-e08484f360e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-270a21c1-4c44-46ef-8c4f-e08484f360e1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+270a21c1-4c44-46ef-8c4f-e08484f360e1	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 270d14b2-07bc-46bc-918f-658102265ccf	cast	cast-resolve	agreed	-	FX	scen	2	0	Empyrean Eagle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 270d14b2-07bc-46bc-918f-658102265ccf	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Empyrean Eagle/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 270d14b2-07bc-46bc-918f-658102265ccf	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Empyrean Eagle/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -53,8 +53,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 275257ea-3c72-4ca9-b2fc-e50efa071bdb	cast	cast-resolve	agreed	-	X	scen	1	0	Energize/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 27547519-9474-49fa-80e7-e604d61cb3ca	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27547519-9474-49fa-80e7-e604d61cb3ca	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-27599eff-19df-48e2-9a1e-0c087f42a075	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-27599eff-19df-48e2-9a1e-0c087f42a075	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27599eff-19df-48e2-9a1e-0c087f42a075	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:firemantle-mage:cast:s1,f:xs:XP:firemantle-mage:cast:s1	-	-	-	d864b561c9cb	-	e41418657a70	-	-	2026-11-24	xproof
+27599eff-19df-48e2-9a1e-0c087f42a075	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:firemantle-mage:cast:s1,f:xs:XP:firemantle-mage:cast:s1	-	-	-	d864b561c9cb	-	e41418657a70	-	-	2026-11-24	xproof
 275d0b90-a8d6-4388-b7db-34615287f532	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 275f70e9-a5b8-4eeb-935d-8f4cffc3293b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pristine-angel:cast:s1,f:xs:XP:pristine-angel:cast:s1	-	-	-	25696bf19d5b	-	ee3f7d261a1d	-	-	2026-11-24	xproof
 275f70e9-a5b8-4eeb-935d-8f4cffc3293b	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27c37a8d-777a-400d-b096-bde195228ea8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27c3d7cd-f92e-4203-9fb5-f6b4776f6ffd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27c3d7cd-f92e-4203-9fb5-f6b4776f6ffd	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-27c84ad1-1491-459b-bf8a-0146062084dc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27c84ad1-1491-459b-bf8a-0146062084dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fiery-impulse:cast:s1,f:xs:XP:fiery-impulse:cast:s1	-	-	-	d864b561c9cb	-	f12b288f8a19	-	-	2026-11-24	xproof
 27c84b2e-fc66-45a6-a5ad-d3ef204d5077	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27c87371-697e-4ca6-a7f4-d99215d908bc	cast	cast-resolve	agreed	-	X	scen	1	0	Sun-Dappled Celebrant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 27c87371-697e-4ca6-a7f4-d99215d908bc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sun-Dappled Celebrant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

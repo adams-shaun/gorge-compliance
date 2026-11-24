@@ -68,9 +68,9 @@ fb5e8b8c-bad2-45bb-abb4-2ed454525749	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 fb5fea4a-1b04-45c6-a207-e2e8493ea968	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fb5fea4a-1b04-45c6-a207-e2e8493ea968	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fb60739e-1dc3-481d-a056-ad72e665c680	cast	cast-resolve	agreed	-	X	scen	1	0	Rite of Replication/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fb683e18-50b8-4821-9a1a-86c6dea63ac9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fb683e18-50b8-4821-9a1a-86c6dea63ac9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fb683e18-50b8-4821-9a1a-86c6dea63ac9	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fb683e18-50b8-4821-9a1a-86c6dea63ac9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:temur-war-shaman:f0t0:s1,f:xs:XP:temur-war-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	505e521988b5	-	-	2026-11-24	xproof
+fb683e18-50b8-4821-9a1a-86c6dea63ac9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:temur-war-shaman:f0t0:s1,f:xs:XP:temur-war-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	505e521988b5	-	-	2026-11-24	xproof
+fb683e18-50b8-4821-9a1a-86c6dea63ac9	f0/t1	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 fb694e7e-f66e-4958-b6ed-aa74bc9ac43e	cast	cast-resolve	agreed	-	X	scen	1	0	Sure Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fb69bc57-f05a-41c2-9b7b-9a9761ef0cd3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fb69bc57-f05a-41c2-9b7b-9a9761ef0cd3	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -129,8 +129,8 @@ fbaa6819-3372-4f0b-abb8-773805135153	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 fbab033e-3a8f-4c08-a445-46ae34c283eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:setessan-griffin:cast:s1,f:xs:XP:setessan-griffin:cast:s1	-	-	-	d864b561c9cb	-	b506a67e2354	-	-	2026-11-24	xproof
 fbab033e-3a8f-4c08-a445-46ae34c283eb	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:setessan-griffin:f0a0:s1,f:xs:XP:setessan-griffin:f0a0:s1	-	-	-	d864b561c9cb	-	b506a67e2354	-	-	2026-11-24	xproof
 fbad6038-93ed-4a28-b1f0-ada54608758b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slith-bloodletter:cast:s1,f:xs:XP:slith-bloodletter:cast:s1	-	-	-	25696bf19d5b	-	14b005a1c5b9	-	-	2026-11-24	xproof
-fbad6038-93ed-4a28-b1f0-ada54608758b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fbad6038-93ed-4a28-b1f0-ada54608758b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fbad6038-93ed-4a28-b1f0-ada54608758b	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:slith-bloodletter:f0a0:s1,f:xs:XP:slith-bloodletter:f0a0:s1	-	-	-	d864b561c9cb	-	14b005a1c5b9	-	-	2026-11-24	xproof
+fbad6038-93ed-4a28-b1f0-ada54608758b	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:slith-bloodletter:f0a0:s1,f:xs:XP:slith-bloodletter:f0a0:s1	-	-	-	d864b561c9cb	-	14b005a1c5b9	-	-	2026-11-24	xproof
 fbadf7a3-0d54-40fe-a763-f641dd448e56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbafbe3a-3980-4457-a77b-3f72df7b3329	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbafe993-8118-40cc-9cb7-ee3f62a2c888	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ fbe190eb-fd4b-40e7-9a17-48c96b60f653	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fbe190eb-fd4b-40e7-9a17-48c96b60f653	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 fbe25c32-db20-464c-a0ed-d90e75b111a9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbe61f74-1b3c-4e12-8758-7029872c9ff1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fbed6f1a-e224-413c-b13e-3555caaef02a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fbed6f1a-e224-413c-b13e-3555caaef02a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:orator-of-ojutai:cast:s1,f:xs:XP:orator-of-ojutai:cast:s1	-	-	-	d864b561c9cb	-	e23d7c27e5e7	-	-	2026-11-24	xproof
 fbed6f1a-e224-413c-b13e-3555caaef02a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbf074b2-d650-43b2-b8b8-d7a778dfd27e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jokulmorder:f0t0:s1,f:xs:XP:jokulmorder:f0t0:s1	-	-	-	0984227a67dd	-	38d37488016d	-	-	2026-11-24	xproof
 fbf074b2-d650-43b2-b8b8-d7a778dfd27e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jokulmorder:f0t0:s1,f:xs:XP:jokulmorder:f0t0:s1	-	-	-	0984227a67dd	-	38d37488016d	-	-	2026-11-24	xproof

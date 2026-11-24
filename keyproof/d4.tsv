@@ -123,7 +123,7 @@ d4a9d63a-5a8a-4f51-9e49-43d6dc3234b1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Greed
 d4ab7848-5c37-4c6b-be29-0bb703333e5b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4b0a6e6-937d-428a-a469-bc09c30ac276	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4b10505-2b7a-4099-aacb-ff2359b24310	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:planar-portal:cast:s1,f:xs:XP:planar-portal:cast:s1	-	-	-	25696bf19d5b	-	5f49c3eb0f3b	-	-	2026-11-24	xproof
-d4b10505-2b7a-4099-aacb-ff2359b24310	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d4b10505-2b7a-4099-aacb-ff2359b24310	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:planar-portal:f0a0:s1,f:xs:XP:planar-portal:f0a0:s1	-	-	-	d864b561c9cb	-	5f49c3eb0f3b	-	-	2026-11-24	xproof
 d4b50749-a016-4aff-8d70-a1707cabf57b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4bbdd0c-e578-49ed-b2f7-b1decb04ee87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4bcbce9-9739-4828-9980-e21490b44346	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,8 +183,8 @@ d4f5748f-bb0e-4c48-8802-45a7ad5a80a4	combat#0.block	combat#0.block	agreed	-	X	sc
 d4f5748f-bb0e-4c48-8802-45a7ad5a80a4	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Teysa, Opulent Oligarch/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d4f5748f-bb0e-4c48-8802-45a7ad5a80a4	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Teysa, Opulent Oligarch/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d4f659ba-c277-47a2-8b95-ce81ddac34fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d4f659ba-c277-47a2-8b95-ce81ddac34fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d4f659ba-c277-47a2-8b95-ce81ddac34fb	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d4f659ba-c277-47a2-8b95-ce81ddac34fb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+d4f659ba-c277-47a2-8b95-ce81ddac34fb	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d4f72eac-2161-4fe8-8590-436e241c3b22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4f72eac-2161-4fe8-8590-436e241c3b22	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4f72eac-2161-4fe8-8590-436e241c3b22	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
