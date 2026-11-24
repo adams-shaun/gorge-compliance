@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b0ba5a5-649a-4d7a-8136-6bcf692337f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b0ba5a5-649a-4d7a-8136-6bcf692337f5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b0c08fb-7c46-484a-a446-b26a94db7172	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b143ef1-afbb-499c-9189-1009105b406b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2b143ef1-afbb-499c-9189-1009105b406b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drake-umbra:cast:s1,f:xs:XP:drake-umbra:cast:s1	-	-	-	d864b561c9cb	-	39dba93f15da	-	-	2026-11-24	xproof
 2b154d55-37dd-4e5f-aa99-d4bc547cdec0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b154d55-37dd-4e5f-aa99-d4bc547cdec0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b15d571-2f90-44f7-9153-20ed51253045	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:debris-beetle:f0t0:s2,f:xs:XP:debris-beetle:f0t0:s2	-	-	-	e07cf3a05ba5	-	8a640d5f669a	-	-	2026-11-24	xproof
@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b1bec38-5aaf-4ca0-9a04-fb4367c59c1e	cast	cast-resolve	agreed	-	FX	scen	2	0	Run Over/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2b1bec38-5aaf-4ca0-9a04-fb4367c59c1e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Run Over/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2b211adb-de44-4468-b65d-907a09aa7e9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b211adb-de44-4468-b65d-907a09aa7e9d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2b211adb-de44-4468-b65d-907a09aa7e9d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2b22cf44-7b03-4919-9812-6796bf193484	cast	cast-resolve	agreed	-	X	scen	1	0	Abuelo's Awakening/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2b2b3b16-389c-4581-b889-b8a2e76f83a2	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:meticulous-artisan:f0t0:s2,f:xs:XP:meticulous-artisan:f0t0:s2	-	-	-	267e485f6204	-	1ccf5081069f	-	-	2026-11-24	xproof
 2b2b3b16-389c-4581-b889-b8a2e76f83a2	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:meticulous-artisan:f0t0:s2,f:xs:XP:meticulous-artisan:f0t0:s2	-	-	-	267e485f6204	-	1ccf5081069f	-	-	2026-11-24	xproof
@@ -30,8 +30,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b2f2abd-6c0f-49a5-a44b-f366614c944d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b2f2abd-6c0f-49a5-a44b-f366614c944d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b34b361-7b0e-4464-874c-ceb501bc5ecc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b34f341-42bc-408a-85cc-b2d8797612b8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b34f341-42bc-408a-85cc-b2d8797612b8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2b34f341-42bc-408a-85cc-b2d8797612b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crimson-muckwader:cast:s1,f:xs:XP:crimson-muckwader:cast:s1	-	-	-	d864b561c9cb	-	258d40044b11	-	-	2026-11-24	xproof
+2b34f341-42bc-408a-85cc-b2d8797612b8	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:crimson-muckwader:f0a0:s1,f:xs:XP:crimson-muckwader:f0a0:s1	-	-	-	d864b561c9cb	-	258d40044b11	-	-	2026-11-24	xproof
 2b3b0e56-0b83-403b-bdfd-b5b7c0accf1b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b3b0e56-0b83-403b-bdfd-b5b7c0accf1b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b3b0e56-0b83-403b-bdfd-b5b7c0accf1b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -75,7 +75,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b719057-1bc0-4c3a-97c3-8377844570dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b719057-1bc0-4c3a-97c3-8377844570dd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b732c6a-f09c-4ac0-ae3a-1d8820b69aba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b732c6a-f09c-4ac0-ae3a-1d8820b69aba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2b732c6a-f09c-4ac0-ae3a-1d8820b69aba	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2b7362a9-3518-4071-ab1b-40689a50e12a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:old-growth-educator:f0t0:s2,f:xs:XP:old-growth-educator:f0t0:s2	-	-	-	5437c1394672	-	6c6ad3194691	-	-	2026-11-24	xproof
 2b7362a9-3518-4071-ab1b-40689a50e12a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Old-Growth Educator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2b7362a9-3518-4071-ab1b-40689a50e12a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Old-Growth Educator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2bf84938-6049-4d03-b09e-85bd0763a187	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2bf84938-6049-4d03-b09e-85bd0763a187	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2bfc7467-1316-43d3-9ca6-ff36cc2de607	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2bfc7467-1316-43d3-9ca6-ff36cc2de607	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2bfc7467-1316-43d3-9ca6-ff36cc2de607	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2bfec482-be0d-4768-84e7-1c2c74ea1373	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:journey-to-nowhere:f0t0:s1,f:xs:XP:journey-to-nowhere:f0t0:s1	-	-	-	8a1b1a193ec0	-	b9ab01314d70	-	-	2026-11-24	xproof
 2bfec482-be0d-4768-84e7-1c2c74ea1373	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:journey-to-nowhere:f0t0:s1,f:xs:XP:journey-to-nowhere:f0t0:s1	-	-	-	8a1b1a193ec0	-	b9ab01314d70	-	-	2026-11-24	xproof
 2bfec482-be0d-4768-84e7-1c2c74ea1373	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof

@@ -47,9 +47,9 @@ c53b7602-5e36-4900-896c-844bf6eac22e	combat#0.attack	combat#0.attack	agreed	-	X	
 c53b7602-5e36-4900-896c-844bf6eac22e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Smaug the Magnificent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c53b7602-5e36-4900-896c-844bf6eac22e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Smaug the Magnificent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c53b7602-5e36-4900-896c-844bf6eac22e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Smaug the Magnificent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c53ba31a-ba27-4e17-9a92-311acb1cab29	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c53ba31a-ba27-4e17-9a92-311acb1cab29	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c53ba31a-ba27-4e17-9a92-311acb1cab29	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c53ba31a-ba27-4e17-9a92-311acb1cab29	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:myr-battlesphere:cast:s1,f:xs:XP:myr-battlesphere:cast:s1	-	-	-	d864b561c9cb	-	6235d73a8ba2	-	-	2026-11-24	xproof
+c53ba31a-ba27-4e17-9a92-311acb1cab29	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:myr-battlesphere:cast:s1,f:xs:XP:myr-battlesphere:cast:s1	-	-	-	d864b561c9cb	-	6235d73a8ba2	-	-	2026-11-24	xproof
+c53ba31a-ba27-4e17-9a92-311acb1cab29	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:myr-battlesphere:f0t1:s1,f:xs:XP:myr-battlesphere:f0t1:s1	-	-	-	d864b561c9cb	-	6235d73a8ba2	-	-	2026-11-24	xproof
 c53c75a0-c248-4e76-8d28-f7e53b2dcc49	cast	cast-resolve	agreed	-	X	scen	1	0	Deadly Complication/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c53d6d3e-64e3-48b9-afab-3bde3164888f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c53d958a-f660-4d2e-87cd-87702f973b3a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghostly-dancers:f0t0:s1,f:xs:XP:ghostly-dancers:f0t0:s1	-	-	-	9ee19e8250ce	-	d66fc14f9e4b	-	-	2026-11-24	xproof
@@ -66,7 +66,7 @@ c546747a-1935-4c59-a45f-cad7da41fe38	f0/t0	NULL	owed	refused:no-generator:trigge
 c54879da-0f1d-4ad0-b082-95f0e4d35685	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c54879da-0f1d-4ad0-b082-95f0e4d35685	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c549b0fd-1e08-4873-952e-a14dc45a0fd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c549b0fd-1e08-4873-952e-a14dc45a0fd2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c549b0fd-1e08-4873-952e-a14dc45a0fd2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c54b375d-a456-4886-96f2-8dc7a0024a5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c54b375d-a456-4886-96f2-8dc7a0024a5b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c551ba63-2a74-439d-8996-d566e2efbd5f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

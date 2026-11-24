@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 764f6412-c4ff-4eec-9a9d-870661f97f8b	static#0.2	static#0.2	agreed	-	X	scen	1	0	Fblthp, Lost on the Range/static#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 765017e5-b43d-4c77-a9a9-0fcf0c0cd098	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 765017e5-b43d-4c77-a9a9-0fcf0c0cd098	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76558381-c4ae-4bc3-8c7b-fa0b717f0282	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76558381-c4ae-4bc3-8c7b-fa0b717f0282	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slash-panther:cast:s1,f:xs:XP:slash-panther:cast:s1	-	-	-	d864b561c9cb	-	378c092c6049	-	-	2026-11-24	xproof
 765863c8-1be0-4bb1-9e9c-db7701cffde3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 765863c8-1be0-4bb1-9e9c-db7701cffde3	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 765863c8-1be0-4bb1-9e9c-db7701cffde3	land	land	agreed	-	FX	start	2	0	x:xs:XP:lonely-sandbar:land:s1,f:xs:XP:lonely-sandbar:land:s1	-	-	-	25696bf19d5b	-	84fc937d1c19	-	-	2026-11-24	xproof
@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 766e277c-983e-488c-a885-c03c3c0d3357	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 766e277c-983e-488c-a885-c03c3c0d3357	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76703951-f42f-4e1d-af51-e1e06a89bd5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76703951-f42f-4e1d-af51-e1e06a89bd5e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76703951-f42f-4e1d-af51-e1e06a89bd5e	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7673d0db-07d6-4b40-a32e-f2c98d7ea7c1	cast	cast-resolve	agreed	-	X	scen	1	0	Intruding Soulrager/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7673d0db-07d6-4b40-a32e-f2c98d7ea7c1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Intruding Soulrager/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7673d0db-07d6-4b40-a32e-f2c98d7ea7c1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Intruding Soulrager/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 585eb5bc-5a3d-44d8-b593-1ff0d67f96a7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lightning, Army of One/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 585eb5bc-5a3d-44d8-b593-1ff0d67f96a7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lightning, Army of One/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 585eb5bc-5a3d-44d8-b593-1ff0d67f96a7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lightning, Army of One/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-585f62dc-4461-42f1-a3a4-b19a1e550d2d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+585f62dc-4461-42f1-a3a4-b19a1e550d2d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:overgrown-battlement:cast:s1,f:xs:XP:overgrown-battlement:cast:s1	-	-	-	d864b561c9cb	-	139fff52f961	-	-	2026-11-24	xproof
 585f62dc-4461-42f1-a3a4-b19a1e550d2d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58616e15-531f-4680-8294-35ab7e962c96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58616e15-531f-4680-8294-35ab7e962c96	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 589186e0-3ebe-46a3-a9e7-798b1712fa93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 589186e0-3ebe-46a3-a9e7-798b1712fa93	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 589186e0-3ebe-46a3-a9e7-798b1712fa93	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-589186e0-3ebe-46a3-a9e7-798b1712fa93	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+589186e0-3ebe-46a3-a9e7-798b1712fa93	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 58934f6d-1aa2-414c-85c6-955a1e26d675	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58987ca8-ee9b-412e-b08f-440588234e00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tel-jilad-exile:cast:s1,f:xs:XP:tel-jilad-exile:cast:s1	-	-	-	25696bf19d5b	-	16e31ba82ede	-	-	2026-11-24	xproof
 58987ca8-ee9b-412e-b08f-440588234e00	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

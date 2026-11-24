@@ -15,7 +15,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f04c38b-d6bd-405f-b69c-009df87801dd	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f04c38b-d6bd-405f-b69c-009df87801dd	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3f086b72-6e7c-40d4-b995-d5f94c494462	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f0a0a15-613a-4864-9309-a340dc4cf94d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f0a0a15-613a-4864-9309-a340dc4cf94d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rally-the-peasants:cast:s1,f:xs:XP:rally-the-peasants:cast:s1	-	-	-	d864b561c9cb	-	515dee882328	-	-	2026-11-24	xproof
 3f0c9466-5ab9-4205-a84f-b4b27b5a678e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodbraid-elf:cast:s1,f:xs:XP:bloodbraid-elf:cast:s1	-	-	-	8a1b1a193ec0	-	b4e70f0df248	-	-	2026-11-24	xproof
 3f0dc347-adac-428b-8f04-858799e91243	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f0dc347-adac-428b-8f04-858799e91243	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -64,8 +64,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f453aca-e14f-4460-9334-f0c3f4256a0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f487c8e-a923-4031-b0a7-04f778544fe0	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f487c8e-a923-4031-b0a7-04f778544fe0	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f48f6a7-906d-4287-8440-06bfabc93b89	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f48f6a7-906d-4287-8440-06bfabc93b89	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f48f6a7-906d-4287-8440-06bfabc93b89	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragon-hatchling:cast:s1,f:xs:XP:dragon-hatchling:cast:s1	-	-	-	d864b561c9cb	-	9c078db54d83	-	-	2026-11-24	xproof
+3f48f6a7-906d-4287-8440-06bfabc93b89	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:dragon-hatchling:f0a0:s1,f:xs:XP:dragon-hatchling:f0a0:s1	-	-	-	d864b561c9cb	-	9c078db54d83	-	-	2026-11-24	xproof
 3f49dfa6-d0d4-4b58-8417-ed11c062e220	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f49dfa6-d0d4-4b58-8417-ed11c062e220	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f4d6f91-95ad-4687-8899-5a21a0abb49e	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

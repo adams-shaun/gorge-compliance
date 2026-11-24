@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a1e0dfd-2dd1-4372-966e-e28b48ae0115	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a1e0dfd-2dd1-4372-966e-e28b48ae0115	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a207599-188f-49fc-8932-1974fc716f0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6a207599-188f-49fc-8932-1974fc716f0b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6a207599-188f-49fc-8932-1974fc716f0b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6a23963c-21dc-4d21-8d28-5abad7f859a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a23963c-21dc-4d21-8d28-5abad7f859a1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a262f53-2eea-45d0-8189-9222d66f1b52	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a9c3401-570c-41cb-a605-75dfa57d6ab7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a9c3401-570c-41cb-a605-75dfa57d6ab7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a9d6f32-c4a6-41ea-8188-235ea064dc53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6a9d6f32-c4a6-41ea-8188-235ea064dc53	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6a9d6f32-c4a6-41ea-8188-235ea064dc53	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6aa5aa3d-fb46-47e5-bcf1-51a28e0f9974	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6aabead3-3c81-40b8-8a8d-8f817094d84d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6aabead3-3c81-40b8-8a8d-8f817094d84d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,8 +162,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6aea681e-88d2-48df-a717-3ce0bc95205b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Silent Hallcreeper/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6aec5b1f-cea6-4ec3-9759-e4544da8c52b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6af2b898-7ba0-4641-8234-5171397cf602	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6af2b898-7ba0-4641-8234-5171397cf602	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6af2b898-7ba0-4641-8234-5171397cf602	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6af2b898-7ba0-4641-8234-5171397cf602	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:trigon-of-infestation:f0a0:s1,f:xs:XP:trigon-of-infestation:f0a0:s1	-	-	-	d864b561c9cb	-	9f0300410ecd	-	-	2026-11-24	xproof
+6af2b898-7ba0-4641-8234-5171397cf602	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6af53351-ad10-4774-9b5c-7b58bea65bbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6af53351-ad10-4774-9b5c-7b58bea65bbc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6af71c5a-2c1b-4120-b3c9-c3c70d94a5c9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sephiroth-planet-s-heir:f0t0:s2,f:xs:XP:sephiroth-planet-s-heir:f0t0:s2	-	-	-	e07cf3a05ba5	-	f254e6a58883	-	-	2026-11-24	xproof

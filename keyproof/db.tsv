@@ -109,7 +109,7 @@ db951ec2-d751-479d-af1f-885d3cf50027	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 db961314-fe78-4362-902f-aa0dbf6c487d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db961314-fe78-4362-902f-aa0dbf6c487d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db98ee99-d4e5-4623-8446-5cce5d11dca0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-db98ee99-d4e5-4623-8446-5cce5d11dca0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+db98ee99-d4e5-4623-8446-5cce5d11dca0	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 db99d52b-bbe6-4a48-8f2c-bf77912dc0a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db99d52b-bbe6-4a48-8f2c-bf77912dc0a9	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db9c155f-b342-41bb-9e1a-50358fb9f40e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ dbdf076c-18ce-45e3-8f70-0a32391ea4b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 dbdf076c-18ce-45e3-8f70-0a32391ea4b6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dbdf3c82-b0fc-479c-acce-f7e60be3a2b1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dbdf3c82-b0fc-479c-acce-f7e60be3a2b1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dbe28518-d795-4bc5-afa6-63c696c86fca	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dbe28518-d795-4bc5-afa6-63c696c86fca	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sudden-disappearance:cast:s1	-	-	-	d864b561c9cb	-	eb151fd68365	-	-	2026-11-24	xproof
 dbe3e317-3c39-4b38-ae06-eae02a910c37	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dbe8ad46-d862-4ff6-bf17-238fb8341075	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dbe8ad46-d862-4ff6-bf17-238fb8341075	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -186,9 +186,9 @@ dbedd45e-f76c-4be7-ad89-ff57bed6626f	combat#0.attack	combat#0.attack	agreed	-	X	
 dbedd45e-f76c-4be7-ad89-ff57bed6626f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Absolving Lammasu/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dbedd45e-f76c-4be7-ad89-ff57bed6626f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:absolving-lammasu:f0t0:s2,f:xs:XP:absolving-lammasu:f0t0:s2	-	-	-	e07cf3a05ba5	-	e5ede867132b	-	-	2026-11-24	xproof
 dbedd45e-f76c-4be7-ad89-ff57bed6626f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Absolving Lammasu/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dbf0ad03-ab31-49d2-89b1-05b45948a61f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dbf0ad03-ab31-49d2-89b1-05b45948a61f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dbf0ad03-ab31-49d2-89b1-05b45948a61f	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dbf0ad03-ab31-49d2-89b1-05b45948a61f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vorinclex-voice-of-hunger:cast:s1,f:xs:XP:vorinclex-voice-of-hunger:cast:s1	-	-	-	d864b561c9cb	-	8d7e7dfa02cb	-	-	2026-11-24	xproof
+dbf0ad03-ab31-49d2-89b1-05b45948a61f	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+dbf0ad03-ab31-49d2-89b1-05b45948a61f	f0/t1	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 dbf4e56e-57dd-4f41-95a9-8b9b096274ec	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dbf64afa-ace6-44b9-b47f-750c7e52cc29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dbf7b3ef-1ca4-4b0d-bec2-f5e60b150013	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

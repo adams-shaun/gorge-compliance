@@ -80,7 +80,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d5fe27f-db51-4323-aa74-b6fdb4309425	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d5fe27f-db51-4323-aa74-b6fdb4309425	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d603aef-2b92-43fb-81ba-f89953a198df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d603aef-2b92-43fb-81ba-f89953a198df	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0d603aef-2b92-43fb-81ba-f89953a198df	f0/a0	TapAll	agreed	-	FX	start	2	0	x:xs:XP:dawnglare-invoker:f0a0:s1,f:xs:XP:dawnglare-invoker:f0a0:s1	-	-	-	d864b561c9cb	-	e8da5f49fb35	-	-	2026-11-24	xproof
 0d60c095-4c6c-4618-8ef3-508f3d454efa	cast	cast-resolve	agreed	-	X	scen	1	0	Ajani Resolute/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0d60c095-4c6c-4618-8ef3-508f3d454efa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ajani Resolute/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0d60c095-4c6c-4618-8ef3-508f3d454efa	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ajani Resolute/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d7d8f4f-abf3-408b-a289-1dd6a3ebdbf6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d7d8f4f-abf3-408b-a289-1dd6a3ebdbf6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d80841e-7a33-4b7f-b061-fa2f87f596de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d80841e-7a33-4b7f-b061-fa2f87f596de	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0d80841e-7a33-4b7f-b061-fa2f87f596de	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0d80caeb-d2c2-4d0a-b903-dea170fee2cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d80caeb-d2c2-4d0a-b903-dea170fee2cf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d80d0f7-a436-431c-a54e-e7dd7dbba8de	cast	cast-resolve	agreed	-	X	scen	1	0	Mind Transfer Protocol/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -143,15 +143,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d977dc5-807b-4fab-b44b-ccad5e3d63e3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d977dc5-807b-4fab-b44b-ccad5e3d63e3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d9787e3-f482-4a98-95af-0438ed09c96c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d996788-7193-45cd-bc6d-0f470521d1ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d996788-7193-45cd-bc6d-0f470521d1ca	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0d996788-7193-45cd-bc6d-0f470521d1ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vulshok-heartstoker:f0t0:s1,f:xs:XP:vulshok-heartstoker:f0t0:s1	-	-	-	d864b561c9cb	-	53aa35bbc5f6	-	-	2026-11-24	xproof
+0d996788-7193-45cd-bc6d-0f470521d1ca	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vulshok-heartstoker:f0t0:s1,f:xs:XP:vulshok-heartstoker:f0t0:s1	-	-	-	d864b561c9cb	-	53aa35bbc5f6	-	-	2026-11-24	xproof
 0d9ac5e0-2b4e-4e7b-937e-9e9bfce7e96b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d9ac5e0-2b4e-4e7b-937e-9e9bfce7e96b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d9d7f04-6319-4596-8b74-de5a794936e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d9df234-520c-40aa-a37d-070181cf695c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0da104ae-c46c-4106-919f-d975721d42d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0da19cd4-7b3f-47bb-bb35-cbcc88ab53cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0da19cd4-7b3f-47bb-bb35-cbcc88ab53cd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0da19cd4-7b3f-47bb-bb35-cbcc88ab53cd	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:trigon-of-corruption:f0a0:s1,f:xs:XP:trigon-of-corruption:f0a0:s1	-	-	-	d864b561c9cb	-	c4d14f57b237	-	-	2026-11-24	xproof
 0da19cd4-7b3f-47bb-bb35-cbcc88ab53cd	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0da4988f-47ca-4786-ac33-edbc9cfd6785	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0da4988f-47ca-4786-ac33-edbc9cfd6785	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -190,9 +190,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0dcee3a3-6cb1-45ce-958c-1f57ced80be4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0dcefc00-9425-43e3-bd47-1e34fff8b0e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0dcefc00-9425-43e3-bd47-1e34fff8b0e2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0dd0e91a-d16b-4718-8d11-1a3fcf8e0753	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0dd0e91a-d16b-4718-8d11-1a3fcf8e0753	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0dd0e91a-d16b-4718-8d11-1a3fcf8e0753	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0dd0e91a-d16b-4718-8d11-1a3fcf8e0753	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:thragtusk:cast:s1,f:xs:XP:thragtusk:cast:s1	-	-	-	d864b561c9cb	-	6997eff8b9b6	-	-	2026-11-24	xproof
+0dd0e91a-d16b-4718-8d11-1a3fcf8e0753	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:thragtusk:cast:s1,f:xs:XP:thragtusk:cast:s1	-	-	-	d864b561c9cb	-	6997eff8b9b6	-	-	2026-11-24	xproof
+0dd0e91a-d16b-4718-8d11-1a3fcf8e0753	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0dd73855-6a7a-4eb4-80e0-1509f9397e5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0dd73855-6a7a-4eb4-80e0-1509f9397e5a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0dd894cb-1968-471c-af08-ea7ec5ce8428	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -95,13 +95,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63788566-e25a-44bb-bb55-197e1b93b3e8	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63788566-e25a-44bb-bb55-197e1b93b3e8	f0/a3	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 637a10e8-4384-49a0-ad78-03da8930811e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-637b1a19-2925-422e-b867-f87537803071	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+637b1a19-2925-422e-b867-f87537803071	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gloomhunter:cast:s1,f:xs:XP:gloomhunter:cast:s1	-	-	-	d864b561c9cb	-	b4625ef845e2	-	-	2026-11-24	xproof
 637be5f7-ab39-4e3a-a5eb-c6e48fca00a9	cast	cast-resolve	agreed	-	X	scen	1	0	Outlaw Medic/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 637be5f7-ab39-4e3a-a5eb-c6e48fca00a9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Outlaw Medic/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 637be5f7-ab39-4e3a-a5eb-c6e48fca00a9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Outlaw Medic/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 637be5f7-ab39-4e3a-a5eb-c6e48fca00a9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Outlaw Medic/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 637c5583-4683-4ae4-8b4e-f5da42a772c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-637c5583-4683-4ae4-8b4e-f5da42a772c7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+637c5583-4683-4ae4-8b4e-f5da42a772c7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 637ddd65-112d-40f7-9bab-a61724d9165c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 637ddd65-112d-40f7-9bab-a61724d9165c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6385fd0d-256d-4400-9319-afa8170024db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

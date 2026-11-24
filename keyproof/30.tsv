@@ -79,9 +79,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 306fd9d2-5ded-4857-90f4-e62d73c6aed2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3070f997-24f2-471d-af96-a2f3b588198e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 307421ed-aa59-4518-a0eb-689c60d7b709	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3075dadd-240f-4455-9286-9f1d48f53a3f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3075dadd-240f-4455-9286-9f1d48f53a3f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3075dadd-240f-4455-9286-9f1d48f53a3f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3075dadd-240f-4455-9286-9f1d48f53a3f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jar-of-eyeballs:cast:s1,f:xs:XP:jar-of-eyeballs:cast:s1	-	-	-	d864b561c9cb	-	6ff1b2e3602a	-	-	2026-11-24	xproof
+3075dadd-240f-4455-9286-9f1d48f53a3f	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+3075dadd-240f-4455-9286-9f1d48f53a3f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 307be184-176a-40a8-944c-48aa00cfdd29	cast	cast-resolve	agreed	-	X	scen	1	0	Radiant Lotus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 307be184-176a-40a8-944c-48aa00cfdd29	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Radiant Lotus/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 307d20fd-a9c9-4da9-b990-26c653054640	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 30c3f88f-11d3-4b5f-8936-bab1c65bd693	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30c4914e-4d9f-453d-bf5b-48ab8e0f2ba3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30c7e304-ecfe-44c1-88d1-f507df63c080	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-30c7e304-ecfe-44c1-88d1-f507df63c080	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+30c7e304-ecfe-44c1-88d1-f507df63c080	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 30ca8e92-5955-46a1-86c1-094a873f518f	cast	cast-resolve	agreed	-	FX	scen	2	0	Beorn the Fierce/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 30ca8e92-5955-46a1-86c1-094a873f518f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Beorn the Fierce/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 30ca8e92-5955-46a1-86c1-094a873f518f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Beorn the Fierce/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

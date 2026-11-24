@@ -76,13 +76,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88777fc0-286d-47fc-8e94-1e289b4964c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88777fc0-286d-47fc-8e94-1e289b4964c4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88777fc0-286d-47fc-8e94-1e289b4964c4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-887a9f2f-17b4-4a20-a464-9665cde6f293	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-887a9f2f-17b4-4a20-a464-9665cde6f293	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+887a9f2f-17b4-4a20-a464-9665cde6f293	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tangle-angler:cast:s1,f:xs:XP:tangle-angler:cast:s1	-	-	-	d864b561c9cb	-	7ecebae4d931	-	-	2026-11-24	xproof
+887a9f2f-17b4-4a20-a464-9665cde6f293	f0/a0	MustBlock	agreed	-	FX	start	2	0	x:xs:XP:tangle-angler:f0a0:s1,f:xs:XP:tangle-angler:f0a0:s1	-	-	-	d864b561c9cb	-	7ecebae4d931	-	-	2026-11-24	xproof
 887de1fc-8fbd-472a-bcf2-4f36ea9376d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 887de1fc-8fbd-472a-bcf2-4f36ea9376d1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 887de1fc-8fbd-472a-bcf2-4f36ea9376d1	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 888a5071-24b1-48ce-a97b-39f108976c6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-888ccda6-896f-40f3-93a1-efc48254af34	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+888ccda6-896f-40f3-93a1-efc48254af34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:make-a-wish:cast:s1,f:xs:XP:make-a-wish:cast:s1	-	-	-	d864b561c9cb	-	dfc62ed0c055	-	-	2026-11-24	xproof
 888d12d4-aaa5-406f-9dc8-8c4e856eb2fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 888d12d4-aaa5-406f-9dc8-8c4e856eb2fe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 888f58c0-1860-4df4-ad75-53e634150680	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:tragic-banshee:f0t0:s2,f:xs:XP:tragic-banshee:f0t0:s2	-	-	-	5437c1394672	-	793121a8bf63	-	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88bb91b5-2ccd-4ce9-8cd4-e54d63c12abf	cast	cast-resolve	agreed	-	FX	scen	2	0	Coruscation Mage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88bb91b5-2ccd-4ce9-8cd4-e54d63c12abf	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Coruscation Mage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88bb91b5-2ccd-4ce9-8cd4-e54d63c12abf	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-88bbbc00-0704-4dc0-897f-93184b2e1eed	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+88bbbc00-0704-4dc0-897f-93184b2e1eed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruthless-invasion:cast:s1,f:xs:XP:ruthless-invasion:cast:s1	-	-	-	d864b561c9cb	-	0cdf3d7aad44	-	-	2026-11-24	xproof
 88c187fd-b3d3-4218-8e63-380a9ca9f1b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88c187fd-b3d3-4218-8e63-380a9ca9f1b4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88cadf97-4b24-481a-9136-96c017fd96e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vermiculos:cast:s1,f:xs:XP:vermiculos:cast:s1	-	-	-	25696bf19d5b	-	59153853539f	-	-	2026-11-24	xproof

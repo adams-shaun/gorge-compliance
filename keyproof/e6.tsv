@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-e600afe3-8d5b-46ab-b98c-f0bacb58ab2a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e600afe3-8d5b-46ab-b98c-f0bacb58ab2a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rotted-hystrix:cast:s1,f:xs:XP:rotted-hystrix:cast:s1	-	-	-	d864b561c9cb	-	609912ce42bf	-	-	2026-11-24	xproof
 e602f06e-64ff-4d1b-813c-6612ee514ea6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kashi-tribe-reaver:cast:s1,f:xs:XP:kashi-tribe-reaver:cast:s1	-	-	-	25696bf19d5b	-	3aec4b09ecf8	-	-	2026-11-24	xproof
 e602f06e-64ff-4d1b-813c-6612ee514ea6	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 e602f06e-64ff-4d1b-813c-6612ee514ea6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -13,7 +13,7 @@ e60a9e8d-0be4-4d08-a03a-af9f9e2be65b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 e60b23ba-2258-4da1-b873-452ee215846b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e60b23ba-2258-4da1-b873-452ee215846b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e60b6b71-eea8-42b3-81e2-c8fb1af5e218	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e60b6b71-eea8-42b3-81e2-c8fb1af5e218	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e60b6b71-eea8-42b3-81e2-c8fb1af5e218	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e6108735-8370-4611-ad59-d7da7fd0323f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6108735-8370-4611-ad59-d7da7fd0323f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6108735-8370-4611-ad59-d7da7fd0323f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -117,7 +117,7 @@ e69a8970-3ead-479d-860a-26ed65f9c846	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 e69a8970-3ead-479d-860a-26ed65f9c846	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e69b8388-1311-427f-9300-42badd5338ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e69b8388-1311-427f-9300-42badd5338ff	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e69b8388-1311-427f-9300-42badd5338ff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e69b8388-1311-427f-9300-42badd5338ff	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e69db5f0-beed-48e8-bc25-768b1e8be5ea	cast	cast-resolve	agreed	-	X	scen	1	0	Falcon's Wing Harness/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e69db5f0-beed-48e8-bc25-768b1e8be5ea	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Falcon's Wing Harness/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e69db5f0-beed-48e8-bc25-768b1e8be5ea	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ e6a93240-8578-479e-b5e7-73f51b141cc8	combat#0.block	combat#0.block	agreed	-	X	sc
 e6a93240-8578-479e-b5e7-73f51b141cc8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6ab8a04-e225-4ff0-bb8b-c80d0e6ce50c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6ab8a04-e225-4ff0-bb8b-c80d0e6ce50c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e6acafb7-856f-4125-a908-a620635b8ba3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e6acafb7-856f-4125-a908-a620635b8ba3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boundless-realms:cast:s1,f:xs:XP:boundless-realms:cast:s1	-	-	-	d864b561c9cb	-	a1e6151666d0	-	-	2026-11-24	xproof
 e6acafdf-e3ad-4ac2-bb26-cec37c7ca115	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6acafdf-e3ad-4ac2-bb26-cec37c7ca115	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6ad1be9-f13d-4590-b3db-e2d0fff46f03	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

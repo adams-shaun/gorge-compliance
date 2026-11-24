@@ -15,8 +15,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7714af0e-41d9-4609-967f-27233b46055f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lord of the Undead/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 7716ad72-9e96-4915-bc1e-e12b4d0f6f9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7716ad72-9e96-4915-bc1e-e12b4d0f6f9c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7719fd5d-c9dc-49b8-87b4-24f7d42af62f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7719fd5d-c9dc-49b8-87b4-24f7d42af62f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7719fd5d-c9dc-49b8-87b4-24f7d42af62f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vedalken-anatomist:cast:s1,f:xs:XP:vedalken-anatomist:cast:s1	-	-	-	d864b561c9cb	-	d6d664afdf25	-	-	2026-11-24	xproof
+7719fd5d-c9dc-49b8-87b4-24f7d42af62f	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:vedalken-anatomist:f0a0:s1,f:xs:XP:vedalken-anatomist:f0a0:s1	-	-	-	d864b561c9cb	-	d6d664afdf25	-	-	2026-11-24	xproof
 771be8ad-5ab5-40b1-ad9b-e5e834949d32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 771be8ad-5ab5-40b1-ad9b-e5e834949d32	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 771bf51d-cb32-4240-936c-f9d1e0c90cf0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 774dce79-67e0-4820-8013-c7a7347993ce	cast	cast-resolve	agreed	-	X	scen	1	0	Cathar Commando/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 774dce79-67e0-4820-8013-c7a7347993ce	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cathar Commando/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 774e474a-f2a1-4b62-8cfe-40ad509f9062	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-774e474a-f2a1-4b62-8cfe-40ad509f9062	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+774e474a-f2a1-4b62-8cfe-40ad509f9062	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 774e53b2-5aec-43e1-b4fe-8812b8430401	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 775617cd-7264-4365-94c4-ffae4eb9ec8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 775617cd-7264-4365-94c4-ffae4eb9ec8b	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -208,6 +208,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77f1734d-ea0b-4344-8a9e-9d1a34eb6164	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fresh Start/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 77f257b9-2047-40a3-85c2-00ad17deeb08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77f257b9-2047-40a3-85c2-00ad17deeb08	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77f53f6a-36ab-43d1-b547-4578fd724864	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77f53f6a-36ab-43d1-b547-4578fd724864	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:virulent-swipe:cast:s1,f:xs:XP:virulent-swipe:cast:s1	-	-	-	d864b561c9cb	-	66d8445a83f2	-	-	2026-11-24	xproof
 77fa18fa-5dba-4e4c-9b24-9bfa9b68779f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77fef82d-e8d0-444b-8d76-68e9b533f38b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

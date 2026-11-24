@@ -145,8 +145,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 189131b7-ed59-4750-a4ed-453e4497a5c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 189131b7-ed59-4750-a4ed-453e4497a5c8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18932bb9-e054-4ad6-80c8-d2f177312da0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18932bb9-e054-4ad6-80c8-d2f177312da0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18932bb9-e054-4ad6-80c8-d2f177312da0	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18932bb9-e054-4ad6-80c8-d2f177312da0	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+18932bb9-e054-4ad6-80c8-d2f177312da0	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 18961e25-3feb-4dba-a77f-240a4d664ecb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 189fc8f4-17ac-4f1d-82c8-8401445bdaf4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 189fc8f4-17ac-4f1d-82c8-8401445bdaf4	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -188,7 +188,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18c5e7a0-4397-48bb-b993-1c3e3b08be2c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18c5e7a0-4397-48bb-b993-1c3e3b08be2c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18c65823-01ae-4314-a254-d89a1a362633	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18c65823-01ae-4314-a254-d89a1a362633	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18c65823-01ae-4314-a254-d89a1a362633	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:harbor-bandit:f0a0:s1,f:xs:XP:harbor-bandit:f0a0:s1	-	-	-	d864b561c9cb	-	b92b793b5765	-	-	2026-11-24	xproof
 18ca77c9-e7d2-4afc-a72b-98772578fad7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ca77c9-e7d2-4afc-a72b-98772578fad7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18cced8b-9836-4e11-bb4e-69a971a33a50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

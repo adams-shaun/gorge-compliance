@@ -32,7 +32,7 @@ de3a469a-e38b-456b-994d-abec1b010e42	static#0.1	static#0.1	agreed	-	X	scen	1	0	H
 de3dcb5d-775a-479f-99f5-d1883ed9b1b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 de3dcb5d-775a-479f-99f5-d1883ed9b1b5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 de3ed52e-7cc2-49ea-96d9-4254aac46168	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-de3ed52e-7cc2-49ea-96d9-4254aac46168	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+de3ed52e-7cc2-49ea-96d9-4254aac46168	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 de403543-e61a-44fc-85e1-1e621d90ca8b	cast	cast-resolve	agreed	-	X	scen	1	0	Steal the Show/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 de417a82-8f03-4d7e-aee7-48f7d7eba61a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sandstorm Verge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 de417a82-8f03-4d7e-aee7-48f7d7eba61a	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Sandstorm Verge/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -145,9 +145,9 @@ decfde5e-ea53-4b15-8f69-51da7ef39d15	cast	cast-resolve	agreed	-	X	scen	1	0	Skate
 decfde5e-ea53-4b15-8f69-51da7ef39d15	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Skateboard/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 decfde5e-ea53-4b15-8f69-51da7ef39d15	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 decfde5e-ea53-4b15-8f69-51da7ef39d15	static#0.0	static#0.0	agreed	-	X	scen	1	0	Skateboard/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ded0316f-5eed-4a80-91ad-ca236fd16f01	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ded0316f-5eed-4a80-91ad-ca236fd16f01	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ded0316f-5eed-4a80-91ad-ca236fd16f01	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ded0316f-5eed-4a80-91ad-ca236fd16f01	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silverblade-paladin:cast:s1,f:xs:XP:silverblade-paladin:cast:s1	-	-	-	d864b561c9cb	-	3b52ac818185	-	-	2026-11-24	xproof
+ded0316f-5eed-4a80-91ad-ca236fd16f01	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ded0316f-5eed-4a80-91ad-ca236fd16f01	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ded2b1b7-8c12-4f6f-a3be-a8f7b62b0819	cast	cast-resolve	agreed	-	X	scen	1	0	Interceptor Mechan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ded2b1b7-8c12-4f6f-a3be-a8f7b62b0819	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Interceptor Mechan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ded2b1b7-8c12-4f6f-a3be-a8f7b62b0819	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Interceptor Mechan/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

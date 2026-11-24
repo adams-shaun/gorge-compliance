@@ -5,8 +5,8 @@ d403d1f3-5a92-4f4c-aff2-cff6a0b3b1ec	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 d40adf5d-5edf-48a0-98f3-fcdbf1b5f25c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nekrataal:f0t0:s1,f:xs:XP:nekrataal:f0t0:s1	-	-	-	25696bf19d5b	-	8ff9d8752089	-	-	2026-11-24	xproof
 d40adf5d-5edf-48a0-98f3-fcdbf1b5f25c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nekrataal:f0t0:s1,f:xs:XP:nekrataal:f0t0:s1	-	-	-	25696bf19d5b	-	8ff9d8752089	-	-	2026-11-24	xproof
 d40fd63b-f55d-49f6-b4e5-a8d00f22e8e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d40fd63b-f55d-49f6-b4e5-a8d00f22e8e1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d40fd63b-f55d-49f6-b4e5-a8d00f22e8e1	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d40fd63b-f55d-49f6-b4e5-a8d00f22e8e1	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+d40fd63b-f55d-49f6-b4e5-a8d00f22e8e1	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d412150d-3c70-44cf-97cd-965c438e7303	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:due-diligence:f0t0:s2,f:xs:XP:due-diligence:f0t0:s2	-	-	-	5437c1394672	-	235dc152b469	-	-	2026-11-24	xproof
 d412150d-3c70-44cf-97cd-965c438e7303	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:due-diligence:f0t0:s2,f:xs:XP:due-diligence:f0t0:s2	-	-	-	5437c1394672	-	235dc152b469	-	-	2026-11-24	xproof
 d412150d-3c70-44cf-97cd-965c438e7303	static#0.0	static#0.0	agreed	-	X	scen	1	0	Due Diligence/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -39,7 +39,7 @@ d42ecab7-f6ce-4e50-97de-7aa1ced64ebe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d42ecab7-f6ce-4e50-97de-7aa1ced64ebe	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4327e06-ee89-459c-a43a-dc064e198fef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d432857f-cff6-421e-949b-ce2f65854e1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d4344e5e-148b-4df9-88e4-ca91afcc32e0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d4344e5e-148b-4df9-88e4-ca91afcc32e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ring-of-kalonia:cast:s1,f:xs:XP:ring-of-kalonia:cast:s1	-	-	-	d864b561c9cb	-	d2fffc7b6c92	-	-	2026-11-24	xproof
 d4344e5e-148b-4df9-88e4-ca91afcc32e0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4344e5e-148b-4df9-88e4-ca91afcc32e0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d43463d2-4395-4616-acc3-c4f80ebe3242	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -73,7 +73,7 @@ d4607026-80b2-4fa6-99d5-694cd3b43868	cast	cast-resolve	agreed	-	X	scen	1	0	Great
 d4607026-80b2-4fa6-99d5-694cd3b43868	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Great Gilded Boat/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d4607026-80b2-4fa6-99d5-694cd3b43868	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Great Gilded Boat/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d463de75-8d3c-4077-a2cc-c304a63acc69	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d4647f16-b287-46a2-9c38-93881c290f76	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d4647f16-b287-46a2-9c38-93881c290f76	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nether-horror:cast:s1,f:xs:XP:nether-horror:cast:s1	-	-	-	d864b561c9cb	-	84e33226107c	-	-	2026-11-24	xproof
 d464b54c-3b02-4c4e-99ef-1ad75f336c65	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d464b54c-3b02-4c4e-99ef-1ad75f336c65	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d465a3d6-5830-456c-8e7a-908b464db846	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

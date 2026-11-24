@@ -15,7 +15,7 @@ dc10544f-dd30-4d4a-b6e6-bbed7d1ed4a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 dc11d9dc-7d18-45dc-955b-d0ba71fc0db8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc11d9dc-7d18-45dc-955b-d0ba71fc0db8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc1711cf-c62b-436b-ba35-56bef8ef14d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dc1711cf-c62b-436b-ba35-56bef8ef14d0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dc1711cf-c62b-436b-ba35-56bef8ef14d0	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 dc17836d-8edf-44bd-a9ee-346d6af25dbf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc1c0e8c-d0c1-445c-968f-7dec91e5d5fc	cast	cast	agreed	-	F	start	2	0	f:xs:XP:relentless-assault:cast:s1	-	-	-	25696bf19d5b	-	fa9a71abea1d	-	-	2026-11-24	xproof
 dc206e6a-e447-48d4-a91a-7c746320e2b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -27,8 +27,8 @@ dc25033c-4863-4619-886f-7b9976ae1c7c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 dc261758-0982-4b7d-9986-042c03cc8366	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc261758-0982-4b7d-9986-042c03cc8366	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc29cb25-57f5-4cac-9764-efa644b41296	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dc2d67bb-29b3-43d7-8ebf-2100c5287bbf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dc2d67bb-29b3-43d7-8ebf-2100c5287bbf	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dc2d67bb-29b3-43d7-8ebf-2100c5287bbf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moltensteel-dragon:cast:s1,f:xs:XP:moltensteel-dragon:cast:s1	-	-	-	d864b561c9cb	-	714d4d9fd133	-	-	2026-11-24	xproof
+dc2d67bb-29b3-43d7-8ebf-2100c5287bbf	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:moltensteel-dragon:cast:s1,f:xs:XP:moltensteel-dragon:cast:s1	-	-	-	d864b561c9cb	-	714d4d9fd133	-	-	2026-11-24	xproof
 dc3073fc-dc23-426e-b867-fee5dd99fe25	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:shipwreck-dowser:f0t0:s2,f:xs:XP:shipwreck-dowser:f0t0:s2	-	-	-	e07cf3a05ba5	-	c75dfba23ef3	-	-	2026-11-24	xproof
 dc3073fc-dc23-426e-b867-fee5dd99fe25	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:shipwreck-dowser:f0t0:s2,f:xs:XP:shipwreck-dowser:f0t0:s2	-	-	-	e07cf3a05ba5	-	c75dfba23ef3	-	-	2026-11-24	xproof
 dc3073fc-dc23-426e-b867-fee5dd99fe25	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Shipwreck Dowser/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -57,7 +57,7 @@ dc55421f-dee8-4263-9df0-2365df5f14bb	land	play-land	agreed	-	X	scen	1	0	Temple o
 dc55e69e-e1b8-4129-902c-c71bcb952418	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc5a501c-e16c-4d4b-a510-70a14272473e	cast	cast-resolve	agreed	-	FX	scen	2	0	Tribute to Hunger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dc5c4a38-a415-466a-a7ea-dc04eee7f691	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dc5c4a38-a415-466a-a7ea-dc04eee7f691	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dc5c4a38-a415-466a-a7ea-dc04eee7f691	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 dc5cb189-9eff-4b4e-a46d-7a8e62529c89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc5cb189-9eff-4b4e-a46d-7a8e62529c89	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc5cb229-82c9-4a87-9a10-490350cbdfc0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

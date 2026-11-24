@@ -17,9 +17,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a0f4e8e-b541-4327-80fe-4fecc23e0df3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a15841a-dcb6-454a-b865-43a067f42b4e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a15841a-dcb6-454a-b865-43a067f42b4e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a179d68-c9e6-4f46-99bf-11b2a2708990	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a179d68-c9e6-4f46-99bf-11b2a2708990	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a179d68-c9e6-4f46-99bf-11b2a2708990	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a179d68-c9e6-4f46-99bf-11b2a2708990	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trigon-of-thought:cast:s1,f:xs:XP:trigon-of-thought:cast:s1	-	-	-	d864b561c9cb	-	896e0a5d1954	-	-	2026-11-24	xproof
+8a179d68-c9e6-4f46-99bf-11b2a2708990	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:trigon-of-thought:f0a0:s1,f:xs:XP:trigon-of-thought:f0a0:s1	-	-	-	d864b561c9cb	-	896e0a5d1954	-	-	2026-11-24	xproof
+8a179d68-c9e6-4f46-99bf-11b2a2708990	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8a1a5862-c027-4c15-99a7-1795d0da96da	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:tough-cookie:f0t0:s2,f:xs:XP:tough-cookie:f0t0:s2	-	-	-	e07cf3a05ba5	-	807a3ff05f3f	-	-	2026-11-24	xproof
 8a1a5862-c027-4c15-99a7-1795d0da96da	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tough Cookie/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a1a5862-c027-4c15-99a7-1795d0da96da	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Tough Cookie/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -61,7 +61,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a4028cd-6004-4fb0-a044-0bee662a78e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a4028cd-6004-4fb0-a044-0bee662a78e1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a44e4e7-dfa2-427b-bbff-11c398fa60bb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a44e4e7-dfa2-427b-bbff-11c398fa60bb	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a44e4e7-dfa2-427b-bbff-11c398fa60bb	f0/a1	PutCounterAll	agreed	-	FX	start	2	0	x:xs:XP:gavony-township:f0a1:s1,f:xs:XP:gavony-township:f0a1:s1	-	-	-	d864b561c9cb	-	a87385b75a08	-	-	2026-11-24	xproof
 8a44e4e7-dfa2-427b-bbff-11c398fa60bb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a4d505e-b884-4b8b-93d5-495992f3858e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a4d505e-b884-4b8b-93d5-495992f3858e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

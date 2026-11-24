@@ -69,12 +69,12 @@ e13d7600-0924-42eb-9d65-aa18548624a7	cast	cast-resolve	agreed	-	X	scen	1	0	Promp
 e13d7600-0924-42eb-9d65-aa18548624a7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Prompto Argentum/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e14532e9-ecc2-4028-b99e-3629533962bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e14532e9-ecc2-4028-b99e-3629533962bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e14ac0f3-00d5-4a95-990c-b7ea157bb87e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e14ac0f3-00d5-4a95-990c-b7ea157bb87e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:paraselene:cast:s1,f:xs:XP:paraselene:cast:s1	-	-	-	d864b561c9cb	-	247728770105	-	-	2026-11-24	xproof
 e15060c3-3773-4548-8747-ff59dcf2b519	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e153174a-8b71-4fb4-8dc8-2495cf2624be	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e153174a-8b71-4fb4-8dc8-2495cf2624be	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e154e612-4041-4fb7-903f-917588dbe58e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e154e612-4041-4fb7-903f-917588dbe58e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e154e612-4041-4fb7-903f-917588dbe58e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e157ad1e-be35-47f3-92db-01799f8fb6a5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e157ad1e-be35-47f3-92db-01799f8fb6a5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e157ad1e-be35-47f3-92db-01799f8fb6a5	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -90,7 +90,7 @@ e1626880-0fa3-441a-9978-b293fc87c418	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Light
 e1635acd-ed1e-4038-a11a-6518df285253	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e16cbcbd-b03a-404c-8d1e-0a05848181d9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e16cec8b-e0ac-44ee-91cf-658e204ca120	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e16cec8b-e0ac-44ee-91cf-658e204ca120	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e16cec8b-e0ac-44ee-91cf-658e204ca120	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e16e2199-d821-49fd-94a0-30ecebd8bd4c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:flood-the-engine:f0t0:s2,f:xs:XP:flood-the-engine:f0t0:s2	-	-	-	267e485f6204	-	168c3b242b9c	-	-	2026-11-24	xproof
 e16e2199-d821-49fd-94a0-30ecebd8bd4c	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:flood-the-engine:f0t0:s2,f:xs:XP:flood-the-engine:f0t0:s2	-	-	-	267e485f6204	-	168c3b242b9c	-	-	2026-11-24	xproof
 e16e2199-d821-49fd-94a0-30ecebd8bd4c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Flood the Engine/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -114,9 +114,9 @@ e186cc6f-8c11-4475-a704-0b4c3a9eade9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 e186cc6f-8c11-4475-a704-0b4c3a9eade9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1890cbc-b15b-44bc-b1c0-ca3d9fd6028a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1894a57-0faa-4e0d-8ab9-e4785f0457a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e1899133-635d-46ff-b90d-6f8d46a1ffe1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e1899133-635d-46ff-b90d-6f8d46a1ffe1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e1899133-635d-46ff-b90d-6f8d46a1ffe1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e1899133-635d-46ff-b90d-6f8d46a1ffe1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vital-splicer:f0t0:s1,f:xs:XP:vital-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	fa64409262d6	-	-	2026-11-24	xproof
+e1899133-635d-46ff-b90d-6f8d46a1ffe1	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:vital-splicer:f0a0:s1,f:xs:XP:vital-splicer:f0a0:s1	-	-	-	d864b561c9cb	-	fa64409262d6	-	-	2026-11-24	xproof
+e1899133-635d-46ff-b90d-6f8d46a1ffe1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vital-splicer:f0t0:s1,f:xs:XP:vital-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	fa64409262d6	-	-	2026-11-24	xproof
 e18c93bc-2073-4bb6-83b4-c5c70f2d8a82	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e18c93bc-2073-4bb6-83b4-c5c70f2d8a82	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e18d8326-c3c3-43c2-ac13-6861c0ef3888	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

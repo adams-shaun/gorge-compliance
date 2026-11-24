@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 291c7abf-9d64-4ba0-ae21-e3459edc9a95	cast	cast-resolve	agreed	-	X	scen	1	0	Crystal Barricade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 291c7abf-9d64-4ba0-ae21-e3459edc9a95	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Crystal Barricade/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 291c7abf-9d64-4ba0-ae21-e3459edc9a95	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Crystal Barricade/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-291e4b91-17c7-4b7b-8057-f0d361424016	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+291e4b91-17c7-4b7b-8057-f0d361424016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gelatinous-genesis:cast:s1,f:xs:XP:gelatinous-genesis:cast:s1	-	-	-	d864b561c9cb	-	3ec2b80d9ce1	-	-	2026-11-24	xproof
 29233aa4-3fa0-4074-ad0f-c8e7101052f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29263d48-cb28-478b-a99e-5a18dbc924f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29263d48-cb28-478b-a99e-5a18dbc924f0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 29326487-6d95-40a8-9bcc-f94ada4e27c3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Slavering Branchsnapper/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 29326487-6d95-40a8-9bcc-f94ada4e27c3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Slavering Branchsnapper/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 29328bcb-e991-4095-9439-f493c8fa3f82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29328bcb-e991-4095-9439-f493c8fa3f82	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+29328bcb-e991-4095-9439-f493c8fa3f82	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2932baae-bdf1-455a-9ac4-23ba1f83e7e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:adarkar-valkyrie:cast:s1,f:xs:XP:adarkar-valkyrie:cast:s1	-	-	-	16ec2936189a	-	ab5522d8d625	-	-	2026-11-24	xproof
 2932baae-bdf1-455a-9ac4-23ba1f83e7e1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2934233a-b90c-45df-b604-ce462480bbb7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 298a7e1a-b254-442e-bc1d-2a3e5296d849	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 298a7e1a-b254-442e-bc1d-2a3e5296d849	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 298a7e1a-b254-442e-bc1d-2a3e5296d849	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-298a7e1a-b254-442e-bc1d-2a3e5296d849	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+298a7e1a-b254-442e-bc1d-2a3e5296d849	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 29925297-b6d4-4fc8-a585-1425c1482ec6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29925297-b6d4-4fc8-a585-1425c1482ec6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29925297-b6d4-4fc8-a585-1425c1482ec6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

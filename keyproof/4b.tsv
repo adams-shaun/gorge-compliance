@@ -22,8 +22,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b1614fd-2810-4d4d-a0d6-934f27adbe65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b1614fd-2810-4d4d-a0d6-934f27adbe65	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b1614fd-2810-4d4d-a0d6-934f27adbe65	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b1674b1-2176-493f-a463-936e715d51a2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b1674b1-2176-493f-a463-936e715d51a2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b1674b1-2176-493f-a463-936e715d51a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prized-elephant:cast:s1,f:xs:XP:prized-elephant:cast:s1	-	-	-	d864b561c9cb	-	07e976877e47	-	-	2026-11-24	xproof
+4b1674b1-2176-493f-a463-936e715d51a2	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:prized-elephant:cast:s1,f:xs:XP:prized-elephant:cast:s1	-	-	-	d864b561c9cb	-	07e976877e47	-	-	2026-11-24	xproof
 4b17048f-8c7f-4e29-8f56-16db4c2106e6	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Los Diablos Missile Base/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b17048f-8c7f-4e29-8f56-16db4c2106e6	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Los Diablos Missile Base/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b17048f-8c7f-4e29-8f56-16db4c2106e6	land	play-land	agreed	-	FX	scen	2	0	Los Diablos Missile Base/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -62,8 +62,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b4c76e1-c480-4d10-93d4-483ef2debc4b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b4dcdb1-0017-494f-8d83-6706b188e575	cast	cast-resolve	agreed	-	FX	scen	2	0	Wanderbrine Preacher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 4b4dcdb1-0017-494f-8d83-6706b188e575	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wanderbrine Preacher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-4b4f268d-34ae-416d-a412-66f4fe37659c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b4f268d-34ae-416d-a412-66f4fe37659c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b4f268d-34ae-416d-a412-66f4fe37659c	cast	cast	agreed	-	F	start	4	0	f:xs:XP:sphinx-of-uthuun:cast:s1	-	-	-	d864b561c9cb	-	5b3b193a967a	-	-	2026-11-24	xproof
+4b4f268d-34ae-416d-a412-66f4fe37659c	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:sphinx-of-uthuun:cast:s1	-	-	-	d864b561c9cb	-	5b3b193a967a	-	-	2026-11-24	xproof
 4b505a4c-ccc3-4461-bbc4-ad5d39f9b879	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b508087-99da-4eb1-8b12-29162f2ec85d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b508087-99da-4eb1-8b12-29162f2ec85d	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b62f9fe-e3f4-4a21-aa6b-4dbd411d0c44	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Elvish Refueler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b62f9fe-e3f4-4a21-aa6b-4dbd411d0c44	static#0.0	static#0.0	agreed	-	X	scen	1	0	Elvish Refueler/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b6377da-83e7-4519-9582-16a9c16b8faa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b63bf36-cd0e-41d8-b0ca-aac459d91f3f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b63bf36-cd0e-41d8-b0ca-aac459d91f3f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flensermite:cast:s1,f:xs:XP:flensermite:cast:s1	-	-	-	d864b561c9cb	-	b453a2d733cd	-	-	2026-11-24	xproof
 4b6512aa-535e-4edf-8797-43df2b8463de	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b6512aa-535e-4edf-8797-43df2b8463de	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b65276e-7d03-4700-834c-48178fe98353	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,14 +124,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b8d7d30-a97f-4169-a860-02783ca622ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b8d7d30-a97f-4169-a860-02783ca622ea	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 4b8d82fe-571d-4fd6-8d0c-77b7e5ef3e23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b8fb8dc-f1c5-4994-8a58-4849e7e85539	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b8fb8dc-f1c5-4994-8a58-4849e7e85539	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b8fb8dc-f1c5-4994-8a58-4849e7e85539	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heckling-fiends:cast:s1,f:xs:XP:heckling-fiends:cast:s1	-	-	-	d864b561c9cb	-	e01903af920b	-	-	2026-11-24	xproof
+4b8fb8dc-f1c5-4994-8a58-4849e7e85539	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:heckling-fiends:f0a0:s1,f:xs:XP:heckling-fiends:f0a0:s1	-	-	-	d864b561c9cb	-	e01903af920b	-	-	2026-11-24	xproof
 4b96d003-d3b4-4181-9f50-06a3e6eb1916	cast	cast-resolve	agreed	-	X	scen	1	0	Full Bore/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b977117-741c-4157-8fcf-719e475a8a4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b9abe7f-050f-4d0a-bc01-f442164f95de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b9abe7f-050f-4d0a-bc01-f442164f95de	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b9e529c-4fbd-4944-828d-7fbc8f26c991	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b9e529c-4fbd-4944-828d-7fbc8f26c991	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b9e529c-4fbd-4944-828d-7fbc8f26c991	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sphinx-bone-wand:cast:s1,f:xs:XP:sphinx-bone-wand:cast:s1	-	-	-	d864b561c9cb	-	f6819b4c3f88	-	-	2026-11-24	xproof
+4b9e529c-4fbd-4944-828d-7fbc8f26c991	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4b9f6a6e-c168-4732-b454-2272d56636da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b9f6a6e-c168-4732-b454-2272d56636da	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ba1f2c5-6456-4809-a563-fd5bd311869a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

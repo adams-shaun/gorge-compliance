@@ -28,8 +28,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d2016ed-3ea0-4938-b95e-ee582307e475	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:suurok-class-science-vessel:f0t0:s1,f:xs:XP:suurok-class-science-vessel:f0t0:s1	-	-	-	25696bf19d5b	-	6f9d79f8bd0e	-	-	2026-11-24	xproof
 5d22ab00-b454-4407-93d7-65b47f56cbaa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d22ab00-b454-4407-93d7-65b47f56cbaa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d24525f-dbac-434b-bda7-ff8af55245ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d24525f-dbac-434b-bda7-ff8af55245ff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d24525f-dbac-434b-bda7-ff8af55245ff	cast	cast	agreed	-	F	start	4	0	f:xs:XP:glint-hawk:cast:s1	-	-	-	d864b561c9cb	-	a11bf227abcc	-	-	2026-11-24	xproof
+5d24525f-dbac-434b-bda7-ff8af55245ff	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:glint-hawk:cast:s1	-	-	-	d864b561c9cb	-	a11bf227abcc	-	-	2026-11-24	xproof
 5d24fb6b-7176-407c-b917-6c88a6da40df	cast	cast-resolve	agreed	-	X	scen	1	0	Nezumi Linkbreaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d24fb6b-7176-407c-b917-6c88a6da40df	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nezumi Linkbreaker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d258409-28d3-4eac-9f1a-3e494db818bf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d641bf6-0f93-4189-8dc1-ec7ea446dade	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Tranquil Cove/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d641bf6-0f93-4189-8dc1-ec7ea446dade	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Tranquil Cove/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d641bf6-0f93-4189-8dc1-ec7ea446dade	land	play-land	agreed	-	FX	scen	2	0	Tranquil Cove/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d66c2b9-6011-4168-b468-0bde50bac37e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d66c2b9-6011-4168-b468-0bde50bac37e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warden-of-the-wall:cast:s1,f:xs:XP:warden-of-the-wall:cast:s1	-	-	-	d864b561c9cb	-	8027aa905d68	-	-	2026-11-24	xproof
 5d66c2b9-6011-4168-b468-0bde50bac37e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d6f75f1-dd9c-4d94-aea8-3bdec41eaa29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d748bce-dff8-46fa-a3d1-633863b7bbff	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:kiora-the-rising-tide:f0t0:s2,f:xs:XP:kiora-the-rising-tide:f0t0:s2	-	-	-	e07cf3a05ba5	-	bb6aa76d83aa	-	-	2026-11-24	xproof
@@ -101,8 +101,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d808e64-a648-4f1b-a3a9-fd09568db281	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Garrison Excavator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d808e64-a648-4f1b-a3a9-fd09568db281	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Garrison Excavator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d808e64-a648-4f1b-a3a9-fd09568db281	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Garrison Excavator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d814b0b-82e8-4145-87e1-4fed44d16465	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d814b0b-82e8-4145-87e1-4fed44d16465	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d814b0b-82e8-4145-87e1-4fed44d16465	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lone-revenant:cast:s1,f:xs:XP:lone-revenant:cast:s1	-	-	-	d864b561c9cb	-	c7cc6566acf9	-	-	2026-11-24	xproof
+5d814b0b-82e8-4145-87e1-4fed44d16465	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5d840e49-3ca5-4e4f-9152-a365ad2b1773	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:soaring-sandwing:f0t0:s1,f:xs:XP:soaring-sandwing:f0t0:s1	-	-	-	e07cf3a05ba5	-	16f4d3a971c8	-	-	2026-11-24	xproof
 5d840e49-3ca5-4e4f-9152-a365ad2b1773	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Soaring Sandwing/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d840e49-3ca5-4e4f-9152-a365ad2b1773	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Soaring Sandwing/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5da1f1af-d2e5-4e14-914b-d93f15626636	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5da1f1af-d2e5-4e14-914b-d93f15626636	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5da2e5c7-ec04-4f1f-bb2f-7572f877393c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5da2e5c7-ec04-4f1f-bb2f-7572f877393c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5da2e5c7-ec04-4f1f-bb2f-7572f877393c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:benalish-veteran:f0t0:s1,f:xs:XP:benalish-veteran:f0t0:s1	-	-	-	d864b561c9cb	-	0855d3c81a2d	-	-	2026-11-24	xproof
 5da7eea8-bb9e-47ce-a554-8a1ee058bd7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5da7eea8-bb9e-47ce-a554-8a1ee058bd7a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5da8b86a-a7be-4fb5-9a45-a47d5cb4b372	cast	cast-resolve	agreed	-	X	scen	1	0	Skyserpent Seeker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

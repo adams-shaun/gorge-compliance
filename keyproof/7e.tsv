@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e3085d8-9d46-41e0-ad9d-54c44d9ef267	cast	cast-resolve	agreed	-	FX	scen	2	0	Freya Crescent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e3085d8-9d46-41e0-ad9d-54c44d9ef267	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Freya Crescent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e3085d8-9d46-41e0-ad9d-54c44d9ef267	static#0.0	static#0.0	agreed	-	X	scen	1	0	Freya Crescent/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7e3e09a2-b45c-4897-ba10-02628cca3f4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e3e09a2-b45c-4897-ba10-02628cca3f4c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7e3e09a2-b45c-4897-ba10-02628cca3f4c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodhunter-bat:f0t0:s1,f:xs:XP:bloodhunter-bat:f0t0:s1	-	-	-	d864b561c9cb	-	061553baf8de	-	-	2026-11-24	xproof
+7e3e09a2-b45c-4897-ba10-02628cca3f4c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bloodhunter-bat:f0t0:s1,f:xs:XP:bloodhunter-bat:f0t0:s1	-	-	-	d864b561c9cb	-	061553baf8de	-	-	2026-11-24	xproof
 7e3fe8e4-e56a-4109-a314-96c44bbe7d22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e40f37c-9a0c-40e0-b195-7ea94b12f798	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e4504c1-4349-408d-8fdf-0c44efdd3f56	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e6e2c37-3a06-456a-ae0f-37b7dc1a3e2b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e6fcbc0-691a-4bd7-b063-debc86f4506a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e6fd429-f925-4ff7-9c6e-34c2c9d15d04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e6fd429-f925-4ff7-9c6e-34c2c9d15d04	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7e6fd429-f925-4ff7-9c6e-34c2c9d15d04	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7e770c08-910e-4394-88c5-79c874750b6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e770c08-910e-4394-88c5-79c874750b6a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e7abb44-47b0-4d80-b8a1-36f0c1032aa3	cast	cast-resolve	agreed	-	FX	scen	2	0	Obsessive Pursuit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ed4afc9-959a-4868-8f4a-2221bea1ba32	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:intrepid-rabbit:f0t1:s1,f:xs:XP:intrepid-rabbit:f0t1:s1	-	-	-	9ee19e8250ce	-	5103cd45c297	-	-	2026-11-24	xproof
 7ed4afc9-959a-4868-8f4a-2221bea1ba32	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 7ed52301-81ea-4e7f-b985-cfab0593cae4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ed52301-81ea-4e7f-b985-cfab0593cae4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7ed52301-81ea-4e7f-b985-cfab0593cae4	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7ed73cff-137c-4ad1-b11d-c62aa746655e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ed73cff-137c-4ad1-b11d-c62aa746655e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ed8a69b-fba0-4d4d-98b2-311a92373669	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

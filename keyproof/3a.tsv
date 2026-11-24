@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a2bb47d-228d-499e-a34b-9e10d99e9b2c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fog Bank/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a2bb47d-228d-499e-a34b-9e10d99e9b2c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fog Bank/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a336b30-335a-49d0-b192-c20f3670452b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a336b30-335a-49d0-b192-c20f3670452b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a336b30-335a-49d0-b192-c20f3670452b	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3a35e772-2547-41a3-a2a2-125b48c23aa5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a38bf69-511f-4851-870f-8a65641d832e	cast	cast	agreed	-	F	start	2	0	f:xs:XP:severance-priest:cast:s2	-	-	-	5437c1394672	-	845171c74659	-	-	2026-11-24	xproof
 3a38bf69-511f-4851-870f-8a65641d832e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Severance Priest/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -115,8 +115,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a75c56a-bdf7-490d-aa41-51d5eb8be46c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aegis Sculptor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a75c56a-bdf7-490d-aa41-51d5eb8be46c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aegis Sculptor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a75c56a-bdf7-490d-aa41-51d5eb8be46c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Aegis Sculptor/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3a799843-1304-4abf-b8d7-db616628ee3f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a799843-1304-4abf-b8d7-db616628ee3f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a799843-1304-4abf-b8d7-db616628ee3f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:feral-ridgewolf:cast:s1,f:xs:XP:feral-ridgewolf:cast:s1	-	-	-	d864b561c9cb	-	24937b20b995	-	-	2026-11-24	xproof
+3a799843-1304-4abf-b8d7-db616628ee3f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:feral-ridgewolf:f0a0:s1,f:xs:XP:feral-ridgewolf:f0a0:s1	-	-	-	d864b561c9cb	-	24937b20b995	-	-	2026-11-24	xproof
 3a7a27fe-60f0-4a21-a1c1-5fef8a528391	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a7c2e32-8585-4f7f-8635-199e3c6cd8a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a7cca31-ccca-459b-9ac6-c8f384136ba5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -191,7 +191,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ac94b28-4b0a-4121-99b9-9cd7dff7948c	cast	cast-resolve	agreed	-	FX	scen	2	0	Rough Rhino Cavalry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ac94b28-4b0a-4121-99b9-9cd7dff7948c	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Rough Rhino Cavalry/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ac94b28-4b0a-4121-99b9-9cd7dff7948c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rough Rhino Cavalry/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3aca5718-9151-4a5b-b8a3-bfac7abf65ef	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3aca5718-9151-4a5b-b8a3-bfac7abf65ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:champion-s-drake:cast:s1,f:xs:XP:champion-s-drake:cast:s1	-	-	-	d864b561c9cb	-	230727611327	-	-	2026-11-24	xproof
 3ace4689-c822-4434-bb6f-64e56b167a44	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ad5af12-1741-427d-92c4-6a730cd4faa2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ad5af12-1741-427d-92c4-6a730cd4faa2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -215,8 +215,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3aeb28ac-8ed2-4a90-a631-d84361ac6acc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aeb28ac-8ed2-4a90-a631-d84361ac6acc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aeba3c2-5517-4870-8802-29b0fa70ffae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3af03c99-d215-477b-ba49-51f4e87907ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3af03c99-d215-477b-ba49-51f4e87907ff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3af03c99-d215-477b-ba49-51f4e87907ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rapacious-one:cast:s1,f:xs:XP:rapacious-one:cast:s1	-	-	-	d864b561c9cb	-	48925bed856b	-	-	2026-11-24	xproof
+3af03c99-d215-477b-ba49-51f4e87907ff	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3af07cd3-36c3-4792-bc93-3ec82e1606bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3afdc98e-aeeb-43e9-bdcd-0c51da44d2f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3afdc98e-aeeb-43e9-bdcd-0c51da44d2f8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

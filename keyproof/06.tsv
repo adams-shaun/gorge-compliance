@@ -40,8 +40,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 062c8e40-dea7-4df7-bcaa-f1d696fe61c3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aetherjacket/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 062c8e40-dea7-4df7-bcaa-f1d696fe61c3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Aetherjacket/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0632f0f9-8d4f-4e94-8b53-1275b7f21a57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0632f0f9-8d4f-4e94-8b53-1275b7f21a57	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0632f0f9-8d4f-4e94-8b53-1275b7f21a57	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0632f0f9-8d4f-4e94-8b53-1275b7f21a57	f0/t0	Attacks	agreed	-	F	start	4	0	f:xs:XP:nefarox-overlord-of-grixis:f0t0:s1	-	-	-	d864b561c9cb	-	f3ebca6368fc	-	-	2026-11-24	xproof
+0632f0f9-8d4f-4e94-8b53-1275b7f21a57	f0/t1	Attacks/Exalted	agreed	-	F	start	4	0	f:xs:XP:nefarox-overlord-of-grixis:f0t0:s1	-	-	-	d864b561c9cb	-	f3ebca6368fc	-	-	2026-11-24	xproof
 0634091a-a74c-4cea-b6d1-7324a725554a	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06343800-b555-4a13-ad4d-19e37d200138	cast	cast-resolve	agreed	-	FX	scen	2	0	Fangkeeper's Familiar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 06343800-b555-4a13-ad4d-19e37d200138	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
@@ -98,9 +98,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06600efe-1718-4cc1-b1c0-59c82e2efd73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06600efe-1718-4cc1-b1c0-59c82e2efd73	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06692cd9-ac2f-4a32-8fd1-043ba3c0fe71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-066ba81e-b32d-4808-97ab-0b5f52d557e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-066ba81e-b32d-4808-97ab-0b5f52d557e4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-066ba81e-b32d-4808-97ab-0b5f52d557e4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+066ba81e-b32d-4808-97ab-0b5f52d557e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lashwrithe:f0t0:s1,f:xs:XP:lashwrithe:f0t0:s1	-	-	-	d864b561c9cb	-	1a4b339470b9	-	-	2026-11-24	xproof
+066ba81e-b32d-4808-97ab-0b5f52d557e4	f0/a0	NULL	owed	refused:steps-needed:cost:BP	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+066ba81e-b32d-4808-97ab-0b5f52d557e4	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:lashwrithe:f0t0:s1,f:xs:XP:lashwrithe:f0t0:s1	-	-	-	d864b561c9cb	-	1a4b339470b9	-	-	2026-11-24	xproof
 066dfefd-eef5-4c81-8e8a-310bac01674f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 066dfefd-eef5-4c81-8e8a-310bac01674f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 066e7379-d439-41cb-a8c9-60964040b110	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

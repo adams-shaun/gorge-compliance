@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04152e7a-969c-4858-841b-0a569a9fc1bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04152e7a-969c-4858-841b-0a569a9fc1bf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04152e7a-969c-4858-841b-0a569a9fc1bf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-041738f9-7465-4a6c-8046-a897d88cbcdd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+041738f9-7465-4a6c-8046-a897d88cbcdd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:executioner-s-hood:cast:s1,f:xs:XP:executioner-s-hood:cast:s1	-	-	-	d864b561c9cb	-	2e7e4a0817ab	-	-	2026-11-24	xproof
 041738f9-7465-4a6c-8046-a897d88cbcdd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 041cc2d0-eb67-484e-8da1-e91ddb2b3f70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 041e2a01-3652-46c1-a9d1-d38ae7ee0551	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 043192d8-6077-46c3-b43f-b7caf6762869	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 043192d8-6077-46c3-b43f-b7caf6762869	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0431b67e-ce09-4009-ba5b-9fd41e6f1df4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0431b67e-ce09-4009-ba5b-9fd41e6f1df4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0431b67e-ce09-4009-ba5b-9fd41e6f1df4	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:elder-of-laurels:f0a0:s1,f:xs:XP:elder-of-laurels:f0a0:s1	-	-	-	d864b561c9cb	-	cec03dfabfd5	-	-	2026-11-24	xproof
 0432e07d-baf6-4c20-8646-08338c7dc950	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0439df39-0324-4110-b3f4-4a32393021de	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0439df39-0324-4110-b3f4-4a32393021de	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0456ec64-2c81-4763-a352-8ff64a4c3d6b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04576b4d-2977-4cdf-b4a5-b0b47995e962	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 045a9d3d-c20d-427f-a77b-0bffc6f55526	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-045a9d3d-c20d-427f-a77b-0bffc6f55526	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+045a9d3d-c20d-427f-a77b-0bffc6f55526	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 045b2b84-96bd-46fb-8aae-a33968e741c7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 045b2b84-96bd-46fb-8aae-a33968e741c7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 045ece1e-23aa-4122-8726-86b2af4345ba	cast	cast-resolve	agreed	-	FX	scen	2	0	Thirst for Identity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -132,8 +132,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04936918-7ef3-42fa-b0cd-87d18cb69d2c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04936cc9-c915-4182-b84a-3491d26be548	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04936cc9-c915-4182-b84a-3491d26be548	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-049777d0-910d-46d2-9ca1-10277b2fb845	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-049777d0-910d-46d2-9ca1-10277b2fb845	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+049777d0-910d-46d2-9ca1-10277b2fb845	cast	cast	agreed	-	F	start	2	0	f:xs:XP:demonlord-of-ashmouth:f0t0:s1	-	-	-	d864b561c9cb	-	2dbd587ace73	-	-	2026-11-24	xproof
+049777d0-910d-46d2-9ca1-10277b2fb845	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:demonlord-of-ashmouth:f0t0:s1	-	-	-	d864b561c9cb	-	2dbd587ace73	-	-	2026-11-24	xproof
 049777d0-910d-46d2-9ca1-10277b2fb845	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04979f18-1ba8-47a3-a078-ab6b84bfac72	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spidersilk-net:cast:s1,f:xs:XP:spidersilk-net:cast:s1	-	-	-	8a1b1a193ec0	-	4f80c9ed17db	-	-	2026-11-24	xproof
 04979f18-1ba8-47a3-a078-ab6b84bfac72	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:spidersilk-net:f0a0:s1,f:xs:XP:spidersilk-net:f0a0:s1	-	-	-	8a1b1a193ec0	-	4f80c9ed17db	-	-	2026-11-24	xproof

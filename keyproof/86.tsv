@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8661d773-3b92-4fcf-8ffc-aced1ff7be8a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8662c9be-2244-4ea3-bf80-31a117f40a59	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8662c9be-2244-4ea3-bf80-31a117f40a59	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8662c9be-2244-4ea3-bf80-31a117f40a59	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8662c9be-2244-4ea3-bf80-31a117f40a59	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8664a004-d786-4357-8856-2f8f5a9ae24d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8664a004-d786-4357-8856-2f8f5a9ae24d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 866586f4-ad97-44fa-a110-6a7a3cb3591b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -134,8 +134,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8685ebfd-d04d-47f5-a919-e118db1e2276	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 868b1a2a-7f6a-4f2c-9d1c-0b632c1ab324	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 868b1a2a-7f6a-4f2c-9d1c-0b632c1ab324	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-868b5315-da38-4918-b8e4-70762811605b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-868b5315-da38-4918-b8e4-70762811605b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+868b5315-da38-4918-b8e4-70762811605b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:graveyard-shovel:cast:s1,f:xs:XP:graveyard-shovel:cast:s1	-	-	-	d864b561c9cb	-	98a66047d245	-	-	2026-11-24	xproof
+868b5315-da38-4918-b8e4-70762811605b	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:graveyard-shovel:f0a0:s1,f:xs:XP:graveyard-shovel:f0a0:s1	-	-	-	d864b561c9cb	-	98a66047d245	-	-	2026-11-24	xproof
 868b758c-e21c-4079-a1fc-4c89af106f4b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:howl-of-the-night-pack:cast:s1,f:xs:XP:howl-of-the-night-pack:cast:s1	-	-	-	8a1b1a193ec0	-	6b0eafa5a777	-	-	2026-11-24	xproof
 868e6e68-4367-4073-a864-235d5961ae56	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 868e6e68-4367-4073-a864-235d5961ae56	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86bd332f-ba61-49a4-ad31-de4d7e3638c6	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Shadow Urchin/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 86be501c-6f05-4ce0-adb0-7adb135bfb93	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86bf58f2-7f25-4e10-b797-25e0e8e67769	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86bf58f2-7f25-4e10-b797-25e0e8e67769	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86bf58f2-7f25-4e10-b797-25e0e8e67769	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 86c0dc85-d146-4dfa-819e-f78835bfffff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lava-hounds:f0t0:s1,f:xs:XP:lava-hounds:f0t0:s1	-	-	-	25696bf19d5b	-	db40f1ad7bff	-	-	2026-11-24	xproof
 86c0dc85-d146-4dfa-819e-f78835bfffff	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lava-hounds:f0t0:s1,f:xs:XP:lava-hounds:f0t0:s1	-	-	-	25696bf19d5b	-	db40f1ad7bff	-	-	2026-11-24	xproof
 86c0ddaa-6926-450d-949a-6c89f43c71c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -203,7 +203,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86d76078-9af3-45a7-90d6-72946afdc78b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86d76078-9af3-45a7-90d6-72946afdc78b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86da33ac-f8ac-48c8-a50b-22fd761dff8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86da33ac-f8ac-48c8-a50b-22fd761dff8f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86da33ac-f8ac-48c8-a50b-22fd761dff8f	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 86dc3a41-4fb9-4b1f-8279-2b5edbc7e170	cast	cast-resolve	agreed	-	X	scen	1	0	Binding Negotiation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86ddbc56-3318-49cf-be95-78772ef87637	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86ddbc56-3318-49cf-be95-78772ef87637	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -214,7 +214,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86e0e718-82b5-4c99-9837-1b4d8729a27e	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Melded Moxite/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86e0e718-82b5-4c99-9837-1b4d8729a27e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86e2bbdd-a788-4f76-9ebb-ef48d9bc9dcf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86e2bbdd-a788-4f76-9ebb-ef48d9bc9dcf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86e2bbdd-a788-4f76-9ebb-ef48d9bc9dcf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pitchburn-devils:f0t0:s1,f:xs:XP:pitchburn-devils:f0t0:s1	-	-	-	d864b561c9cb	-	98a7fb7e5a4b	-	-	2026-11-24	xproof
 86e3c86c-d50e-4aa9-b080-f68b6afee87c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86e64a29-6ed1-451b-a114-f74341322eeb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86e88219-0f8e-405d-8439-c3b4acf11330	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

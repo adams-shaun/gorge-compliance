@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6426e73a-7e11-48ab-ac5c-15647c6cf9ba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64296644-70f3-4698-923f-0794fe5d0d2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6429b4ed-1845-4643-9a3d-85f7c12f2bba	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6429b4ed-1845-4643-9a3d-85f7c12f2bba	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6429b4ed-1845-4643-9a3d-85f7c12f2bba	f0/a1	Mill	agreed	-	FX	start	2	0	x:xs:XP:nephalia-drownyard:f0a1:s1,f:xs:XP:nephalia-drownyard:f0a1:s1	-	-	-	d864b561c9cb	-	43b7b3c97c36	-	-	2026-11-24	xproof
 6429b4ed-1845-4643-9a3d-85f7c12f2bba	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 642d3494-7a6a-4aec-ba64-7c0c467ada99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 642fa01d-025e-44dd-8360-5325e5a28282	cast	cast-resolve	agreed	-	FX	scen	2	0	Dread Summons/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -63,8 +63,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64553181-9852-459f-a6e0-54ce188dd937	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 645571f1-a775-4834-8b79-8852d38c9587	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 645a4dee-a4e0-4850-a781-522aa718827f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-645a4dee-a4e0-4850-a781-522aa718827f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-645a4dee-a4e0-4850-a781-522aa718827f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+645a4dee-a4e0-4850-a781-522aa718827f	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+645a4dee-a4e0-4850-a781-522aa718827f	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 645a5619-d0b2-4153-aae0-ca2adc6f5e3d	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 645a5619-d0b2-4153-aae0-ca2adc6f5e3d	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 645ab3c7-ee1d-4dd0-811f-2dc7f7c7e792	cast	cast-resolve	agreed	-	FX	scen	2	0	Grow from the Ashes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -186,7 +186,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64ee02f1-afdb-474b-a893-31538ad7219a	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Jagged Barrens/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64ee02f1-afdb-474b-a893-31538ad7219a	land	play-land	agreed	-	FX	scen	2	0	Jagged Barrens/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64f3af46-f8ab-4ba4-9dff-7412cefb4eea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64f3af46-f8ab-4ba4-9dff-7412cefb4eea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+64f3af46-f8ab-4ba4-9dff-7412cefb4eea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mausoleum-guard:f0t0:s1,f:xs:XP:mausoleum-guard:f0t0:s1	-	-	-	d864b561c9cb	-	f9e1ede4bb13	-	-	2026-11-24	xproof
 64f56228-7874-4465-ba58-1049083ea02f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64f56228-7874-4465-ba58-1049083ea02f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64f5689d-504d-40e9-bdb5-36dcefd257e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

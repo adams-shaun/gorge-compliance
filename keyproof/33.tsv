@@ -27,7 +27,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3315aa42-d3ae-425e-9c12-191d26e67a0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3315aa42-d3ae-425e-9c12-191d26e67a0a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3318c391-7aa1-4550-88a0-b29d8dca28b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3318c391-7aa1-4550-88a0-b29d8dca28b7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3318c391-7aa1-4550-88a0-b29d8dca28b7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 331b44e4-cf08-44f4-8afd-a7374e5dc5ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tidespout-tyrant:cast:s1,f:xs:XP:tidespout-tyrant:cast:s1	-	-	-	16ec2936189a	-	fe9b7d5e8a0c	-	-	2026-11-24	xproof
 331b44e4-cf08-44f4-8afd-a7374e5dc5ed	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 331b6834-6bb4-40fa-b80b-22d67b34734f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -118,8 +118,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33a4e73d-d93a-4b6f-88ff-cd53f20d178c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Spectacle Summit/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33a4e73d-d93a-4b6f-88ff-cd53f20d178c	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Spectacle Summit/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33a4e73d-d93a-4b6f-88ff-cd53f20d178c	land	play-land	agreed	-	X	scen	1	0	Spectacle Summit/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-33a5ad42-cd81-4724-9f68-7f32a1c8a047	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33a5ad42-cd81-4724-9f68-7f32a1c8a047	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+33a5ad42-cd81-4724-9f68-7f32a1c8a047	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:midvast-protector:cast:s1,f:xs:XP:midvast-protector:cast:s1	-	-	-	d864b561c9cb	-	da2ee68d0adc	-	-	2026-11-24	xproof
+33a5ad42-cd81-4724-9f68-7f32a1c8a047	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:midvast-protector:cast:s1,f:xs:XP:midvast-protector:cast:s1	-	-	-	d864b561c9cb	-	da2ee68d0adc	-	-	2026-11-24	xproof
 33a64de1-dc78-43d3-b89e-b4b13049e174	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33a7a1e9-23b4-4cde-baf1-b1c0165c6729	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33a7a1e9-23b4-4cde-baf1-b1c0165c6729	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

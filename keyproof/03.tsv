@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 032b8a0d-491a-4a12-ab9f-689010054d5b	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Prismatic Vista/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 032b8a0d-491a-4a12-ab9f-689010054d5b	land	play-land	agreed	-	FX	scen	2	0	Prismatic Vista/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 032cc574-f7e7-4753-9a30-76cbd45d9563	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-032cc574-f7e7-4753-9a30-76cbd45d9563	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+032cc574-f7e7-4753-9a30-76cbd45d9563	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:caustic-hound:f0t0:s1,f:xs:XP:caustic-hound:f0t0:s1	-	-	-	d864b561c9cb	-	a0b8d5105458	-	-	2026-11-24	xproof
 032ec6e2-6cc3-4a97-9cc7-3233f5e11904	cast	cast-resolve	agreed	-	FX	scen	2	0	Reclamation Sage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 032ec6e2-6cc3-4a97-9cc7-3233f5e11904	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 032f59c3-9f47-4db3-a43c-065a99ed7efe	cast	cast-resolve	agreed	-	X	scen	1	0	Summon: Primal Odin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -52,8 +52,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03332772-18b0-446a-a7e2-a4bdf38c4f0c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:kazandu-refuge:f0a0:s1,f:xs:XP:kazandu-refuge:f0a0:s1	-	-	-	8a1b1a193ec0	-	71a7bb711c70	-	-	2026-11-24	xproof
 03332772-18b0-446a-a7e2-a4bdf38c4f0c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kazandu-refuge:f0t0:s1,f:xs:XP:kazandu-refuge:f0t0:s1	-	-	-	8a1b1a193ec0	-	71a7bb711c70	-	-	2026-11-24	xproof
 03332772-18b0-446a-a7e2-a4bdf38c4f0c	land	land	agreed	-	FX	start	2	0	x:xs:XP:kazandu-refuge:f0t0:s1,f:xs:XP:kazandu-refuge:f0t0:s1	-	-	-	8a1b1a193ec0	-	71a7bb711c70	-	-	2026-11-24	xproof
-0333cb81-5f44-4f31-9ee7-725e4f6af7b3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0333cb81-5f44-4f31-9ee7-725e4f6af7b3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0333cb81-5f44-4f31-9ee7-725e4f6af7b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yew-spirit:cast:s1,f:xs:XP:yew-spirit:cast:s1	-	-	-	d864b561c9cb	-	4b5af79f19ca	-	-	2026-11-24	xproof
+0333cb81-5f44-4f31-9ee7-725e4f6af7b3	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:yew-spirit:f0a0:s1,f:xs:XP:yew-spirit:f0a0:s1	-	-	-	d864b561c9cb	-	4b5af79f19ca	-	-	2026-11-24	xproof
 0334a2f8-a74a-44c9-ba64-d9b7fabe160c	cast	cast-resolve	agreed	-	X	scen	1	0	Cosmic Spider-Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0334a2f8-a74a-44c9-ba64-d9b7fabe160c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cosmic Spider-Man/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0334a2f8-a74a-44c9-ba64-d9b7fabe160c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cosmic Spider-Man/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -186,7 +186,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03f04c2c-1036-497e-8b13-06c61b0b0ba6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Territorial Bruntar/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03f04c2c-1036-497e-8b13-06c61b0b0ba6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Territorial Bruntar/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03f04c2c-1036-497e-8b13-06c61b0b0ba6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Territorial Bruntar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-03f5946b-e000-4b39-a49f-1c31668b51bd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+03f5946b-e000-4b39-a49f-1c31668b51bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:autumn-s-veil:cast:s1,f:xs:XP:autumn-s-veil:cast:s1	-	-	-	d864b561c9cb	-	2c0c7bc58127	-	-	2026-11-24	xproof
 03f5c566-825c-4c46-9c01-a2f9b1e70a13	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03f5c566-825c-4c46-9c01-a2f9b1e70a13	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03f5c566-825c-4c46-9c01-a2f9b1e70a13	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

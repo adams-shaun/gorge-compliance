@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 353db389-b829-4e66-85d5-6018bc87c3e0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mirrormind Crown/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 353dd446-2ea6-41c9-a10f-5a03e4de19b4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35426427-4268-4c8f-9fe1-270f2ce43d97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35426427-4268-4c8f-9fe1-270f2ce43d97	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35426427-4268-4c8f-9fe1-270f2ce43d97	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 35453c9e-e1ae-4fe9-926d-75724deb0555	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35453c9e-e1ae-4fe9-926d-75724deb0555	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3548489b-053e-4f81-a0be-07422cbe357d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -99,8 +99,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3579e40c-6ec5-4927-8252-5a188db400ab	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3579e40c-6ec5-4927-8252-5a188db400ab	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 357ed28b-899f-404b-94ff-6fb2ef81d87b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-357ed28b-899f-404b-94ff-6fb2ef81d87b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-357ed28b-899f-404b-94ff-6fb2ef81d87b	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+357ed28b-899f-404b-94ff-6fb2ef81d87b	f0/a1	Effect	agreed	-	FX	start	2	0	x:xs:XP:alchemist-s-refuge:f0a1:s1,f:xs:XP:alchemist-s-refuge:f0a1:s1	-	-	-	d864b561c9cb	-	f73ba1d13442	-	-	2026-11-24	xproof
+357ed28b-899f-404b-94ff-6fb2ef81d87b	land	land	agreed	-	FX	start	2	0	x:xs:XP:alchemist-s-refuge:land:s1,f:xs:XP:alchemist-s-refuge:land:s1	-	-	-	d864b561c9cb	-	f73ba1d13442	-	-	2026-11-24	xproof
 35826db0-b6ff-47b5-be16-c5b878d9e842	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35826db0-b6ff-47b5-be16-c5b878d9e842	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 358297cd-4a9f-48e2-aaa5-131b0849f8dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -47,8 +47,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f4ceca9-0f55-4fa6-8e64-befbc4303d4e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f51aede-fb86-4b7e-9027-2ba8be62b567	cast	cast-resolve	agreed	-	X	scen	1	0	Uthros Psionicist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f51aede-fb86-4b7e-9027-2ba8be62b567	static#0.0	static#0.0	agreed	-	X	scen	1	0	Uthros Psionicist/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7f52993c-a20a-48fe-b463-2a33873b489a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f52993c-a20a-48fe-b463-2a33873b489a	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7f52993c-a20a-48fe-b463-2a33873b489a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gnathosaur:cast:s1,f:xs:XP:gnathosaur:cast:s1	-	-	-	d864b561c9cb	-	de07ceb8fa3c	-	-	2026-11-24	xproof
+7f52993c-a20a-48fe-b463-2a33873b489a	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7f577b46-c69d-4c75-9db5-7e10206b6b59	cast	cast-resolve	agreed	-	X	scen	1	0	Geometer's Arthropod/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f577b46-c69d-4c75-9db5-7e10206b6b59	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Geometer's Arthropod/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f591bfb-a241-4980-9cb3-fb5af3355f6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -121,10 +121,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fbd5f69-f6b4-4ad7-8e9e-47a798324f6c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fbd5f69-f6b4-4ad7-8e9e-47a798324f6c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fbe9056-190f-40a1-bee9-59ebd6f981f5	cast	cast-resolve	agreed	-	X	scen	1	0	Origin of Spider-Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7fbf6afc-8a16-447b-bdef-b7d0b640f76c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fbf6afc-8a16-447b-bdef-b7d0b640f76c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7fbf6afc-8a16-447b-bdef-b7d0b640f76c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wing-splicer:f0t0:s1,f:xs:XP:wing-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	a8f8276282cc	-	-	2026-11-24	xproof
+7fbf6afc-8a16-447b-bdef-b7d0b640f76c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wing-splicer:f0t0:s1,f:xs:XP:wing-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	a8f8276282cc	-	-	2026-11-24	xproof
 7fc3798a-3907-4f50-98a1-25b8e1977197	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fc3798a-3907-4f50-98a1-25b8e1977197	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7fc3798a-3907-4f50-98a1-25b8e1977197	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7fc3c2a5-2754-4237-8a37-cb3166c20c3c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fc3c2a5-2754-4237-8a37-cb3166c20c3c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fc6a5c1-f0da-42f6-93d0-6d94467e2ac0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

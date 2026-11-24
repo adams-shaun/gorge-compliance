@@ -22,8 +22,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 821f4ff3-ebc7-4f47-ac35-d00093b6d35b	cast	cast-resolve	agreed	-	X	scen	1	0	Possessed Goat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 821f4ff3-ebc7-4f47-ac35-d00093b6d35b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Possessed Goat/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8220c5fa-28dc-40d0-a38a-d8eefc2795d6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8220c5fa-28dc-40d0-a38a-d8eefc2795d6	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8220c5fa-28dc-40d0-a38a-d8eefc2795d6	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8220c5fa-28dc-40d0-a38a-d8eefc2795d6	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:stensia-bloodhall:f0a1:s1,f:xs:XP:stensia-bloodhall:f0a1:s1	-	-	-	d864b561c9cb	-	46a59d644329	-	-	2026-11-24	xproof
+8220c5fa-28dc-40d0-a38a-d8eefc2795d6	land	land	agreed	-	FX	start	2	0	x:xs:XP:stensia-bloodhall:land:s1,f:xs:XP:stensia-bloodhall:land:s1	-	-	-	d864b561c9cb	-	46a59d644329	-	-	2026-11-24	xproof
 82246ef2-4267-4daf-9463-908c2e142e7d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82246ef2-4267-4daf-9463-908c2e142e7d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82259c84-773d-4670-9b09-d73f5a3be7ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -182,11 +182,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82ebd4fa-9db1-4723-8305-8b8a9ce958e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82ebd4fa-9db1-4723-8305-8b8a9ce958e2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82ebd4fa-9db1-4723-8305-8b8a9ce958e2	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82f18e7d-5c42-47c4-8e74-3fccc9b7b1f0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+82f18e7d-5c42-47c4-8e74-3fccc9b7b1f0	cast	cast	agreed	-	F	start	2	0	f:xs:XP:ancient-stirrings:cast:s1	-	-	-	d864b561c9cb	-	30af090f1896	-	-	2026-11-24	xproof
 82f1e02b-7a1a-4771-b435-e00214a73e07	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82f3faa8-39fa-450b-843f-d60a4c36d8f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82f3faa8-39fa-450b-843f-d60a4c36d8f7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82f3faa8-39fa-450b-843f-d60a4c36d8f7	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+82f3faa8-39fa-450b-843f-d60a4c36d8f7	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 82f59ac4-bf94-4fa2-9457-f0bec8360bd9	cast	cast-resolve	agreed	-	FX	scen	2	0	Formation Breaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82f59ac4-bf94-4fa2-9457-f0bec8360bd9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Formation Breaker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82f59ac4-bf94-4fa2-9457-f0bec8360bd9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Formation Breaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

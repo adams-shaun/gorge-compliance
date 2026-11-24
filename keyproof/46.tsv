@@ -5,8 +5,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4601e4c7-74bc-44ce-9274-68ba79f8aae1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4601ed7b-716e-4c89-b733-1eeabe8bf5a2	cast	cast-resolve	agreed	-	X	scen	1	0	Joo Dee, One of Many/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4601ed7b-716e-4c89-b733-1eeabe8bf5a2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Joo Dee, One of Many/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-46027ca0-9d06-42b3-8012-124861c6b558	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46027ca0-9d06-42b3-8012-124861c6b558	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+46027ca0-9d06-42b3-8012-124861c6b558	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:farbog-boneflinger:f0t0:s1,f:xs:XP:farbog-boneflinger:f0t0:s1	-	-	-	d864b561c9cb	-	78b25bf663a0	-	-	2026-11-24	xproof
+46027ca0-9d06-42b3-8012-124861c6b558	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:farbog-boneflinger:f0t0:s1,f:xs:XP:farbog-boneflinger:f0t0:s1	-	-	-	d864b561c9cb	-	78b25bf663a0	-	-	2026-11-24	xproof
 4604c729-8d2d-4b2b-a95c-5245563637e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4604c8fb-d38f-42aa-935a-eada20f6aafa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4604c8fb-d38f-42aa-935a-eada20f6aafa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46abaabe-7015-4d82-a5aa-2706b1f51bed	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 46af64c9-2ab5-4e63-98db-cfb885a96109	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46af64c9-2ab5-4e63-98db-cfb885a96109	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46af64c9-2ab5-4e63-98db-cfb885a96109	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+46af64c9-2ab5-4e63-98db-cfb885a96109	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 46b01055-4839-4b95-aa53-b954e9669e03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46b01055-4839-4b95-aa53-b954e9669e03	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46b1a169-bc32-47bf-b379-fa0c3d13878f	cast	cast-resolve	agreed	-	X	scen	1	0	Cori-Steel Cutter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

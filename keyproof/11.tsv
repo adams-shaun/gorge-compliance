@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11284767-7095-4e0e-bc60-c69d58098348	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11284767-7095-4e0e-bc60-c69d58098348	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1128d2ab-0b6e-4912-8735-15521bc314e6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11293f96-3263-45e5-89fc-850df6b25a63	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11293f96-3263-45e5-89fc-850df6b25a63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:increasing-confusion:cast:s1,f:xs:XP:increasing-confusion:cast:s1	-	-	-	d864b561c9cb	-	c273a4315001	-	-	2026-11-24	xproof
 112aaaf0-3301-4f79-9640-d36c75a0fb30	cast	cast-resolve	agreed	-	FX	scen	2	0	Rescue Skiff/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 112aaaf0-3301-4f79-9640-d36c75a0fb30	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 112aaaf0-3301-4f79-9640-d36c75a0fb30	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rescue Skiff/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -42,8 +42,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1141a12a-2ebd-4e7b-8c8c-c7a1f160244c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 114725ef-ac81-4d13-9153-0a303c3ce9c4	cast	cast-resolve	agreed	-	X	scen	1	0	Innocuous Rat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 114725ef-ac81-4d13-9153-0a303c3ce9c4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Innocuous Rat/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1149e5ac-554a-41b1-84ae-bac42579c1aa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1149e5ac-554a-41b1-84ae-bac42579c1aa	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1149e5ac-554a-41b1-84ae-bac42579c1aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrun-the-last-troll:cast:s1,f:xs:XP:thrun-the-last-troll:cast:s1	-	-	-	d864b561c9cb	-	7bc048569bbd	-	-	2026-11-24	xproof
+1149e5ac-554a-41b1-84ae-bac42579c1aa	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:thrun-the-last-troll:f0a0:s1,f:xs:XP:thrun-the-last-troll:f0a0:s1	-	-	-	d864b561c9cb	-	7bc048569bbd	-	-	2026-11-24	xproof
 114dd40d-5ad8-4913-a08f-572b9521eb5b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 114dd40d-5ad8-4913-a08f-572b9521eb5b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 114dd40d-5ad8-4913-a08f-572b9521eb5b	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -57,12 +57,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 115dabbd-1a09-4641-a428-92fcbfd82ae9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 115dabbd-1a09-4641-a428-92fcbfd82ae9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 115f1397-fa24-4412-80b7-e2a6ddedcd4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-115f1397-fa24-4412-80b7-e2a6ddedcd4c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+115f1397-fa24-4412-80b7-e2a6ddedcd4c	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 115fd5ac-460b-49a3-83ed-9d56a7aecb14	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1162c7ff-c0cb-469a-ad3c-322b0981ae1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1162c7ff-c0cb-469a-ad3c-322b0981ae1d	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-11656b2a-b459-4b1c-b505-8547c3507856	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11656b2a-b459-4b1c-b505-8547c3507856	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11656b2a-b459-4b1c-b505-8547c3507856	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:devouring-swarm:cast:s1,f:xs:XP:devouring-swarm:cast:s1	-	-	-	d864b561c9cb	-	dfdc56e414b4	-	-	2026-11-24	xproof
+11656b2a-b459-4b1c-b505-8547c3507856	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:devouring-swarm:cast:s1,f:xs:XP:devouring-swarm:cast:s1	-	-	-	d864b561c9cb	-	dfdc56e414b4	-	-	2026-11-24	xproof
 11669fe5-9298-4e1a-a4f7-6a4598dbc8dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1167fe30-32b8-4381-8067-a05cd345977b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 116ee88e-9e13-4f21-bc6a-efa994b5bf75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

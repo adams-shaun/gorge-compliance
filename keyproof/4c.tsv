@@ -110,8 +110,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c7f54be-70f6-4fc4-b1e0-e46766c37d01	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c80112a-8ff5-4ca4-8737-b8d499d78982	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c80112a-8ff5-4ca4-8737-b8d499d78982	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c8167af-2eb0-4f0a-a1b9-b61b65bac261	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c8167af-2eb0-4f0a-a1b9-b61b65bac261	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c8167af-2eb0-4f0a-a1b9-b61b65bac261	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kemba-s-skyguard:f0t0:s1,f:xs:XP:kemba-s-skyguard:f0t0:s1	-	-	-	d864b561c9cb	-	cdbe7d5b6b1b	-	-	2026-11-24	xproof
+4c8167af-2eb0-4f0a-a1b9-b61b65bac261	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kemba-s-skyguard:f0t0:s1,f:xs:XP:kemba-s-skyguard:f0t0:s1	-	-	-	d864b561c9cb	-	cdbe7d5b6b1b	-	-	2026-11-24	xproof
 4c90ca5c-551c-4da5-9482-62521b1ae17c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:matsu-tribe-birdstalker:cast:s1,f:xs:XP:matsu-tribe-birdstalker:cast:s1	-	-	-	64a08ba7d913	-	18de18603ab7	-	-	2026-11-24	xproof
 4c90ca5c-551c-4da5-9482-62521b1ae17c	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 4c90ca5c-551c-4da5-9482-62521b1ae17c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof

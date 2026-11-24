@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1306c72f-fc6b-470b-a95e-0364e0e30ac7	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1313da2f-92bb-4862-9153-373972cc1520	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1313da2f-92bb-4862-9153-373972cc1520	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-131a7475-0b9e-46eb-9ade-fef1b9820184	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+131a7475-0b9e-46eb-9ade-fef1b9820184	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormtide-leviathan:cast:s1,f:xs:XP:stormtide-leviathan:cast:s1	-	-	-	d864b561c9cb	-	3b5b680d1c4b	-	-	2026-11-24	xproof
 131d55d1-7429-4940-b7d2-d759aabff47b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 131dc114-cd48-43d9-93b3-88df85640e09	cast	cast	agreed	-	F	start	2	0	f:xs:XP:arrow-volley-trap:cast:s1	-	-	-	8a1b1a193ec0	-	57ae13b2d23b	-	-	2026-11-24	xproof
 1322734c-3c3e-4885-a6d2-d6460a16fca2	cast	cast-resolve	agreed	-	FX	scen	2	0	Stonesplitter Bolt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 132786bb-157c-4e2c-8f82-13df6a667448	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 132786bb-157c-4e2c-8f82-13df6a667448	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13279222-422d-4447-9451-2463b0c714c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13279222-422d-4447-9451-2463b0c714c6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13279222-422d-4447-9451-2463b0c714c6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 132859dd-de66-45c6-8af4-ab5e202a17b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 132859dd-de66-45c6-8af4-ab5e202a17b0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 132c8a62-00bc-4b89-b775-099d8909f200	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13ca49a2-8a78-4be4-976a-b684086864bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13ca49a2-8a78-4be4-976a-b684086864bb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 13cb7d87-ff12-4742-8f54-f3175536db40	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13cb958f-1e66-4219-901a-ff58275c8475	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13cb958f-1e66-4219-901a-ff58275c8475	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

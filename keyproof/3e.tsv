@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e254cae-6e14-4a40-bc02-7ca23750bb26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e254cae-6e14-4a40-bc02-7ca23750bb26	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e261fa8-1256-4525-8115-5880758338fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e261fa8-1256-4525-8115-5880758338fe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3e261fa8-1256-4525-8115-5880758338fe	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3e2ae59a-40a1-46ca-8f24-3231ebd4e4eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e2ae59a-40a1-46ca-8f24-3231ebd4e4eb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e2bfa3a-ae83-453a-8e3f-ca6205a9af12	cast	cast-resolve	agreed	-	X	scen	1	0	Kraven the Hunter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ea41848-7a11-4608-88c1-7a6e76e812ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ea41848-7a11-4608-88c1-7a6e76e812ca	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ea7a555-d6fa-4cc9-9348-784e6f9a8cfc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ea7a555-d6fa-4cc9-9348-784e6f9a8cfc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ea7a555-d6fa-4cc9-9348-784e6f9a8cfc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:niblis-of-the-urn:f0t0:s1,f:xs:XP:niblis-of-the-urn:f0t0:s1	-	-	-	d864b561c9cb	-	e9860326fa5c	-	-	2026-11-24	xproof
 3eab4c00-a8ae-4912-bee1-68376de700a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vigean-hydropon:cast:s1,f:xs:XP:vigean-hydropon:cast:s1	-	-	-	16ec2936189a	-	9b45abba2344	-	-	2026-11-24	xproof
 3eab4c00-a8ae-4912-bee1-68376de700a3	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 3eabd27c-bd65-479a-9743-e90e4273c016	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
