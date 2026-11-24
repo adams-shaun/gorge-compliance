@@ -2352,11 +2352,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
 
         private boolean chooseTargetInSegment(Outcome outcome, mage.target.Target target, Ability source, Game game) {
-            // An adjusted spell's open slot is closed only when XMage asks
-            // again after the scenario's answers: a slot whose candidates are
-            // exhausted never asks, so a skip queued up front would be left
-            // unused and fail assertAllCommandsUsed.
-            closeAskedAgain(getTargets(), owner.isAdjustedSpellAsk(source, game));
+            // An adjusted spell's target objects are rebuilt after cast setup,
+            // so close an open slot before the ordinary automatic choices: a
+            // slot whose candidates are exhausted never asks, so a skip
+            // queued up front would be left unused and fail
+            // assertAllCommandsUsed.
+            boolean adjustedAsk = owner.isAdjustedSpellAsk(source, game);
+            if (adjustedAsk) {
+                closeAskedAgain(getTargets(), true,
+                        target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(), target.getSize());
+            }
             mage.target.Target orig = target.getOriginalTarget();
             if (isAttachmentChoice(target)) {
                 UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
@@ -2414,6 +2419,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                 }
                 return chosen;
+            }
+            if (!adjustedAsk) {
+                // No automatic choice above claimed this ask, and the scenario
+                // has no answer left: close an "up to" slot XMage actually
+                // posed (max > min, minimum already selected). This is the
+                // only skip the ordinary multi-target cast path gets, since
+                // its cast step queues just the recorded targets (Hunters'
+                // Feast, Rabid Bite).
+                closeAskedAgain(getTargets(), false,
+                        target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(), target.getSize());
             }
             return super.chooseTarget(outcome, target, source, game);
         }
@@ -3756,12 +3771,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return object != null && adjustedCasts.contains(object.getName());
     }
 
-    /** An ask for an adjusted spell's target with no scenario answer left skips
-     * the slot (an "up to" slot with candidates remaining). */
-    static void closeAskedAgain(List<String> queue, boolean adjustedSpellAsk) {
-        if (adjustedSpellAsk && queue.isEmpty()) {
-            queue.add(TestPlayer.TARGET_SKIP);
+    /** An ask XMage actually poses with no scenario answer left closes the
+     * slot when it is an "up to" target (max > min) whose minimum is already
+     * selected. A required slot still short of its minimum is a scenario
+     * error and gets no skip. An adjusted spell's target objects are rebuilt
+     * after cast setup, so the ask itself is authoritative there: a skip is
+     * always legal once its minimum is met. */
+    static void closeAskedAgain(List<String> queue, boolean adjustedSpellAsk,
+            int minTargets, int maxTargets, int selected) {
+        if (!queue.isEmpty() || selected < minTargets) {
+            return;
         }
+        if (!adjustedSpellAsk && maxTargets <= minTargets) {
+            return;
+        }
+        queue.add(TestPlayer.TARGET_SKIP);
     }
 
     /** An adjusted spell must receive targets through the cast-time chooser. */
@@ -3982,33 +4006,33 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return targetsDivided(spellAbility(name));
     }
 
-    /** Whether n answers already reach the combined maximum of the card's
-     * spell-ability target objects, so no slot is left to skip. */
-    private static boolean targetSlotsFilled(String name, int n) {
+    /** Whether a cast's recorded targets live on a cast trigger: the spell
+     * ability declares no target, but a Zone.STACK triggered ability of the
+     * card does (Ulamog, the Ceaseless Hunger's "When you cast this spell,
+     * exile two target permanents"). Those targets belong to the trigger's
+     * own chooser after the cast, not to the spell, so they are queued and
+     * the spell has no slot of its own to fill or skip. */
+    private static boolean spellTargetsOnCastTrigger(String name) {
         CardInfo info = CardRepository.instance.findCard(name);
         Card c = info == null ? null : info.createCard();
-        if (c == null) {
-            return false;
-        }
-        return !targetSlotNeedsSkip(c.getSpellAbility().getAllSelectedTargets(), n);
+        return c != null && spellTargetsOnCastTrigger(c.getSpellAbility(), c.getAbilities());
     }
 
-    /** An unfilled or open target slot needs an explicit skip to finish casting.
-     * XMage poses each slot in order and a slot closes at its maximum, so the
-     * supplied answers leave an ask open only when they total less than every
-     * slot's maximum (Rabid Bite's two required slots, both filled, ask nothing
-     * more: a trailing skip there is left unused). A spell with no declared
-     * slot gets its targets from an adjuster after cast setup, so it keeps the
-     * skip. */
-    static boolean targetSlotNeedsSkip(List<mage.target.Target> targets, int supplied) {
-        if (targets.isEmpty()) {
-            return true;
+    /** As above, from the card's spell ability and abilities (so the test can
+     * drive it without the card repository). An adjuster's targets are
+     * handled before this predicate is consulted. */
+    static boolean spellTargetsOnCastTrigger(Ability spell, List<? extends Ability> abilities) {
+        if (spell == null || !spell.getAllSelectedTargets().isEmpty()) {
+            return false;
         }
-        long capacity = 0;
-        for (mage.target.Target t : targets) {
-            capacity += t.getMaxNumberOfTargets();
+        for (Ability a : abilities) {
+            if (a instanceof mage.abilities.TriggeredAbility
+                    && a.getZone() == Zone.STACK
+                    && !a.getAllSelectedTargets().isEmpty()) {
+                return true;
+            }
         }
-        return supplied < capacity;
+        return false;
     }
 
     /** Normalises a cost label so gorge's pick ("Sacrifice artifact or
@@ -4887,6 +4911,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return value.getAsBigDecimal().intValueExact();
         } catch (ArithmeticException ex) {
             throw new IllegalArgumentException("target skip requires integer " + key, ex);
+        }
+    }
+
+    /** Queue a cast's recorded targets in order, and nothing else. Shared by
+     * the ordinary multi-target cast and a cast whose targets live on a cast
+     * trigger. No trailing skip is appended: an "up to" slot is closed only
+     * when XMage actually asks for it again with no answer left
+     * (closeAskedAgain). */
+    void queueCastTargets(TestPlayer p, List<String> tg) {
+        for (String t : tg) {
+            queueCastTarget(p, t);
         }
     }
 
@@ -6395,6 +6430,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     castObjectSpell(turn, phase, p, castObject);
                 } else if (!tg.isEmpty() && castQueuedTargets(turn, phase, p, cardName, castObject, tg, castAbility)) {
                     // Cast with its targets queued: see castQueuedTargets.
+                } else if (!tg.isEmpty() && spellTargetsOnCastTrigger(cardName)) {
+                    // The spell declares no target: its recorded targets
+                    // belong to a cast trigger (Zone.STACK), whose own chooser
+                    // runs after the cast. Queue them for that ask; any "up
+                    // to" slot it leaves open is closed at ask time. One
+                    // target takes this path too, so it is never set inline
+                    // on a spell ability that has no targets ("Ability has no
+                    // targets").
+                    queueCastTargets(p, tg);
+                    castObjectSpell(turn, phase, p, castObject);
                 } else if (tg.size() == 1 && isSeatRef(tg.get(0)) && !hasGift(cardName)) {
                     castObjectSpell(turn, phase, p, castObject, seat(seatOf(tg.get(0))));
                 } else if (tg.size() == 1 && isSeatRef(tg.get(0))) {
@@ -6452,15 +6497,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         cast.add(cardName);
                         return;
                     }
-                    for (String t : tg) {
-                        queueCastTarget(p, t);
-                    }
-                    if (!targetSlotsFilled(cardName, tg.size())) {
-                        // Close an "up to N" slot the scenario left short.
-                        // A skip once every slot is filled is rejected (Pull
-                        // Through the Weft, Rabid Bite).
-                        addTarget(p, TestPlayer.TARGET_SKIP);
-                    }
+                    // No speculative trailing skip: XMage itself stops asking
+                    // once a slot's candidates are exhausted (Hunters'
+                    // Feast's "any number of target players" with every
+                    // player chosen), so a skip queued from the card's
+                    // target maximums is left unused ("Targets ... Count are
+                    // not equal (found [[target_skip]])"). A slot XMage does
+                    // pose again with no scripted answer is closed at ask
+                    // time by closeAskedAgain.
+                    queueCastTargets(p, tg);
                     castObjectSpell(turn, phase, p, castObject);
                 }
                 cast.add(cardName);

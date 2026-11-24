@@ -11,10 +11,10 @@ import java.util.UUID;
 import mage.cards.CardSetInfo;
 import mage.cards.t.TheEaglesAreComing;
 import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.target.TargetPermanent;
+import org.mage.test.player.TestComputerPlayer;
 import org.mage.test.player.TestPlayer;
 import sun.misc.Unsafe;
 
@@ -44,6 +44,11 @@ public final class ScenarioReplaySplitRoomTest {
         }
 
         @Override
+        public void addTarget(TestPlayer player, TestPlayer targetPlayer) {
+            queued.add(targetPlayer == null ? null : targetPlayer.getName());
+        }
+
+        @Override
         public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName) {
             casts.add(cardName);
         }
@@ -60,6 +65,22 @@ public final class ScenarioReplaySplitRoomTest {
         Field f = ScenarioReplay.class.getDeclaredField(name);
         f.setAccessible(true);
         f.set(driver, value);
+    }
+
+    /** Set a field declared on a superclass (playerA/playerB on
+     * MageTestPlayerBase): ScenarioReplay does not declare them. */
+    private static void setInherited(ScenarioReplay driver, String name, Object value) throws Exception {
+        for (Class<?> c = ScenarioReplay.class; c != null; c = c.getSuperclass()) {
+            try {
+                Field f = c.getDeclaredField(name);
+                f.setAccessible(true);
+                f.set(driver, value);
+                return;
+            } catch (NoSuchFieldException ignored) {
+                // keep walking up
+            }
+        }
+        throw new NoSuchFieldException(name);
     }
 
     private static Object call(ScenarioReplay driver, String name, Class<?>[] types, Object... args) throws Exception {
@@ -278,28 +299,71 @@ public final class ScenarioReplaySplitRoomTest {
             equal(java.util.List.of(), other.queued);
             equal(java.util.List.of(), other.casts);
         }
-        equal(true, ScenarioReplay.targetSlotNeedsSkip(
-                java.util.List.of(new TargetPermanent(0, Integer.MAX_VALUE, new FilterPermanent())), 1));
-        equal(false, ScenarioReplay.targetSlotNeedsSkip(java.util.List.of(new TargetPermanent()), 1));
-        // Two required slots both filled (Rabid Bite): nothing is left to ask,
-        // so no trailing skip; one answer short of the total still needs it.
-        equal(false, ScenarioReplay.targetSlotNeedsSkip(
-                java.util.List.of(new TargetPermanent(), new TargetPermanent()), 2));
-        equal(true, ScenarioReplay.targetSlotNeedsSkip(
-                java.util.List.of(new TargetPermanent(), new TargetPermanent(0, 1, new FilterPermanent())), 1));
-        // The skip is added only when XMage asks again with no answer left, so
-        // a pool the supplied target exhausted never asks, so nothing calls
-        // this and no skip is left behind; an ask with candidates left gets it.
+        // A cast step queues only the recorded targets: a speculative
+        // trailing skip computed from the card's target maximums is exactly
+        // the leftover strict mode reports. XMage stops asking once a slot's
+        // candidates are exhausted, and closeAskedAgain closes an "up to"
+        // slot only when XMage actually poses that ask again.
+        mage.cards.h.HuntersFeast hunters = new mage.cards.h.HuntersFeast(UUID.randomUUID(),
+                new CardSetInfo("Hunters' Feast", "M11", "1", Rarity.COMMON));
+        // Precondition of the old failure: one "any number of target players"
+        // object whose MAX_VALUE maximum two answers can never reach, so the
+        // old capacity sum always queued a skip.
+        equal(1, hunters.getSpellAbility().getAllSelectedTargets().size());
+        equal(0, hunters.getSpellAbility().getAllSelectedTargets().get(0).getMinNumberOfTargets());
+        equal(Integer.MAX_VALUE,
+                hunters.getSpellAbility().getAllSelectedTargets().get(0).getMaxNumberOfTargets());
+        equal(false, ScenarioReplay.spellTargetsOnCastTrigger(hunters.getSpellAbility(),
+                hunters.getAbilities()));
+        RecordingDriver hunt = routeDriver();
+        TestPlayer huntA = new TestPlayer(new TestComputerPlayer("PlayerA", RangeOfInfluence.ALL));
+        TestPlayer huntB = new TestPlayer(new TestComputerPlayer("PlayerB", RangeOfInfluence.ALL));
+        setInherited(hunt, "playerA", huntA);
+        setInherited(hunt, "playerB", huntB);
+        call(hunt, "queueCastTargets", new Class<?>[]{TestPlayer.class, java.util.List.class},
+                huntA, java.util.List.of("p1", "p0"));
+        // Every player in the 2-seat game, and no skip after them.
+        equal(java.util.List.of("PlayerB", "PlayerA"), hunt.queued);
+
+        // Ulamog's spell ability declares no target; the two targets belong to
+        // its Zone.STACK cast trigger. They are queued for the trigger's own
+        // chooser, with no skip for the targetless spell.
+        mage.cards.u.UlamogTheCeaselessHunger ulamog = new mage.cards.u.UlamogTheCeaselessHunger(
+                UUID.randomUUID(), new CardSetInfo("Ulamog, the Ceaseless Hunger", "BFZ", "3", Rarity.MYTHIC));
+        equal(true, ulamog.getSpellAbility().getAllSelectedTargets().isEmpty());
+        equal(true, ScenarioReplay.spellTargetsOnCastTrigger(ulamog.getSpellAbility(),
+                ulamog.getAbilities()));
+        RecordingDriver ul = routeDriver();
+        TestPlayer ulA = new TestPlayer(new TestComputerPlayer("PlayerA", RangeOfInfluence.ALL));
+        TestPlayer ulB = new TestPlayer(new TestComputerPlayer("PlayerB", RangeOfInfluence.ALL));
+        setInherited(ul, "playerA", ulA);
+        setInherited(ul, "playerB", ulB);
+        call(ul, "queueCastTargets", new Class<?>[]{TestPlayer.class, java.util.List.class},
+                ulA, java.util.List.of("p1:Phyrexian Walker", "p0:Plains"));
+        equal(java.util.List.of("Phyrexian Walker", "Plains"), ul.queued);
+
+        // The skip is added only when XMage asks again with no answer left and
+        // the target is an "up to" slot whose minimum is already met: a slot
+        // whose candidates are exhausted never asks, so no skip is left
+        // behind. A required slot still short is a scenario error, and a skip
+        // on a filled fixed-count slot would be illegal.
         java.util.List<String> askedAgain = new java.util.ArrayList<>();
-        ScenarioReplay.closeAskedAgain(askedAgain, true);
+        ScenarioReplay.closeAskedAgain(askedAgain, false, 0, Integer.MAX_VALUE, 2);
         equal(java.util.List.of(TestPlayer.TARGET_SKIP), askedAgain);
         java.util.List<String> answered = new java.util.ArrayList<>(java.util.List.of("Grizzly Bears"));
-        ScenarioReplay.closeAskedAgain(answered, true);
+        ScenarioReplay.closeAskedAgain(answered, false, 0, Integer.MAX_VALUE, 2);
         equal(java.util.List.of("Grizzly Bears"), answered);
-        java.util.List<String> otherSpell = new java.util.ArrayList<>();
-        ScenarioReplay.closeAskedAgain(otherSpell, false);
-        equal(java.util.List.of(), otherSpell);
+        java.util.List<String> requiredShort = new java.util.ArrayList<>();
+        ScenarioReplay.closeAskedAgain(requiredShort, false, 2, 2, 1);
+        equal(java.util.List.of(), requiredShort);
+        java.util.List<String> filledRequired = new java.util.ArrayList<>();
+        ScenarioReplay.closeAskedAgain(filledRequired, false, 2, 2, 2);
+        equal(java.util.List.of(), filledRequired);
+        java.util.List<String> adjustedOpen = new java.util.ArrayList<>();
+        ScenarioReplay.closeAskedAgain(adjustedOpen, true, 1, 1, 1);
+        equal(java.util.List.of(TestPlayer.TARGET_SKIP), adjustedOpen);
         System.out.println("PASS target-adjuster detection and closing an unfilled adjusted target slot");
+        System.out.println("PASS Hunters' Feast and Ulamog queue their targets without a speculative trailing skip");
         System.out.println("PASS adjusted spell targets are queued without changing divided, ordinary, or targetless casts");
         System.out.println("PASS ordinary alias and unchanged spelling");
         checkFrontHalfAliasBinding();
