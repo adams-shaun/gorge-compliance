@@ -8,9 +8,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82076865-7917-4d3b-8fe8-c21bfcd64d29	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 820dab0f-3b6b-437c-ba4b-2311437709c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 820dab0f-3b6b-437c-ba4b-2311437709c3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-8215f4a2-7131-426b-ad9c-6427caabd715	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8215f4a2-7131-426b-ad9c-6427caabd715	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8215f4a2-7131-426b-ad9c-6427caabd715	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8215f4a2-7131-426b-ad9c-6427caabd715	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+8215f4a2-7131-426b-ad9c-6427caabd715	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+8215f4a2-7131-426b-ad9c-6427caabd715	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 82184f0a-54a1-4ae0-9b99-2b3450c6e544	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82184f0a-54a1-4ae0-9b99-2b3450c6e544	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 82185e99-903d-4b18-8ff9-fb4f95ff17fc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -172,9 +172,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82debe1c-31cb-411f-a353-98a952180666	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rodeo Pyromancers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82df38bc-f29b-49f8-b734-e4df6d0f645a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82df38bc-f29b-49f8-b734-e4df6d0f645a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82e03151-3990-451c-99cc-c7d386872df2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82e03151-3990-451c-99cc-c7d386872df2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82e03151-3990-451c-99cc-c7d386872df2	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+82e03151-3990-451c-99cc-c7d386872df2	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+82e03151-3990-451c-99cc-c7d386872df2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+82e03151-3990-451c-99cc-c7d386872df2	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 82e36ba9-9652-4594-8660-86c766b47709	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:morality-shift:cast:s1,f:xs:XP:morality-shift:cast:s1	-	-	-	fc71ca68c5ac	-	948338335616	-	-	2026-11-24	xproof
 82e52a09-ce6f-417d-8460-8806df63f0bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82ea519f-0e14-43d3-bf46-a1c5352e9600	cast	cast-resolve	agreed	-	X	scen	1	0	The Jolly Balloon Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

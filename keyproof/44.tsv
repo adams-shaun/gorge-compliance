@@ -46,10 +46,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 443f2272-6475-4966-8ca2-717d4cf208ee	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dinotomaton/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 443f2272-6475-4966-8ca2-717d4cf208ee	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 443f8dd1-333d-42c4-a286-302a9496209a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4443345d-a292-4394-97dd-0e6f4d9aedf7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4443345d-a292-4394-97dd-0e6f4d9aedf7	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/a1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 44443716-8356-40cd-a879-35264b29108c	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 44443716-8356-40cd-a879-35264b29108c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Scheming Silvertongue/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44443716-8356-40cd-a879-35264b29108c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Scheming Silvertongue/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 44c5f8e1-d9b8-4067-a60a-1ecc8bd11145	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:augury-owl:cast:s1,f:xs:XP:augury-owl:cast:s1	-	-	-	d864b561c9cb	-	a755b5904e03	-	-	2026-11-24	xproof
 44c5f8e1-d9b8-4067-a60a-1ecc8bd11145	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:augury-owl:cast:s1,f:xs:XP:augury-owl:cast:s1	-	-	-	d864b561c9cb	-	a755b5904e03	-	-	2026-11-24	xproof
 44cb725a-72fc-4e0d-b966-f0b6d33f6b79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-44cb725a-72fc-4e0d-b966-f0b6d33f6b79	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+44cb725a-72fc-4e0d-b966-f0b6d33f6b79	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 44cbf70c-61cf-473e-901d-039956ced642	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44cbf70c-61cf-473e-901d-039956ced642	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44cbf70c-61cf-473e-901d-039956ced642	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

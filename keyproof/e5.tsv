@@ -46,8 +46,8 @@ e554646f-27c0-49b3-a92c-2191e87d87b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e554646f-27c0-49b3-a92c-2191e87d87b7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e554646f-27c0-49b3-a92c-2191e87d87b7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 e5557c9f-e4c2-41af-9fcc-371409e1dec6	cast	cast-resolve	agreed	-	FX	scen	2	0	Taken by Nightmares/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e55d9377-f89a-41e5-a094-730d6f24caf0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e55d9377-f89a-41e5-a094-730d6f24caf0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e55d9377-f89a-41e5-a094-730d6f24caf0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:court-of-bounty:f0t0:s1,f:xs:XP:court-of-bounty:f0t0:s1	-	-	-	8c0bd19283bb	-	d4ca03e27fa5	-	-	2026-11-24	xproof
+e55d9377-f89a-41e5-a094-730d6f24caf0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:court-of-bounty:f0t0:s1,f:xs:XP:court-of-bounty:f0t0:s1	-	-	-	8c0bd19283bb	-	d4ca03e27fa5	-	-	2026-11-24	xproof
 e55d9377-f89a-41e5-a094-730d6f24caf0	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e56056dc-637e-4229-ae2c-dfd06d24086b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e56472ec-6ae8-48b2-a4ce-0ed154161c06	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -55,7 +55,7 @@ e56472ec-6ae8-48b2-a4ce-0ed154161c06	f0/a0	NULL	owed	refused:not-sent	-	start	0	
 e5659c45-e064-4690-b90a-24ffe3793d4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e56629ba-82d4-470f-9a6b-40c29d835af2	cast	cast-resolve	agreed	-	X	scen	1	0	Quakestrider Ceratops/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e57025ed-3de6-4b2f-92bd-5481fd33b7f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e57025ed-3de6-4b2f-92bd-5481fd33b7f1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e57025ed-3de6-4b2f-92bd-5481fd33b7f1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e5741c85-cd09-4ccb-ab39-3f3a62f98939	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e574bfdb-505b-4d61-a376-6d26f03cd9b1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reito-sentinel:f0t0:s1,f:xs:XP:reito-sentinel:f0t0:s1	-	-	-	d864b561c9cb	-	48d64d5815b3	-	-	2026-11-24	xproof
 e574bfdb-505b-4d61-a376-6d26f03cd9b1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -116,8 +116,8 @@ e5cea282-9e61-47da-8c5d-f5fca6a508a4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Iron-
 e5d896f0-78ed-4374-bca0-9b1a70cab86c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fatal-attraction:f0t0:s1,f:xs:XP:fatal-attraction:f0t0:s1	-	-	-	d864b561c9cb	-	09aecbc98762	-	-	2026-11-24	xproof
 e5d896f0-78ed-4374-bca0-9b1a70cab86c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fatal-attraction:f0t0:s1,f:xs:XP:fatal-attraction:f0t0:s1	-	-	-	d864b561c9cb	-	09aecbc98762	-	-	2026-11-24	xproof
 e5d896f0-78ed-4374-bca0-9b1a70cab86c	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-e5d928dc-b465-4cf7-ab11-d5bd3328f8e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e5d928dc-b465-4cf7-ab11-d5bd3328f8e7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e5d928dc-b465-4cf7-ab11-d5bd3328f8e7	cast	cast	agreed	-	FX	start	6	0	x:xs:XP:mawloc:cast:s1,f:xs:XP:mawloc:cast:s1	-	-	-	8c0bd19283bb	-	125c1b28e381	-	-	2026-11-24	xproof
+e5d928dc-b465-4cf7-ab11-d5bd3328f8e7	f0/t0	ChangesZone	agreed	-	FX	start	6	0	x:xs:XP:mawloc:cast:s1,f:xs:XP:mawloc:cast:s1	-	-	-	8c0bd19283bb	-	125c1b28e381	-	-	2026-11-24	xproof
 e5d928dc-b465-4cf7-ab11-d5bd3328f8e7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e5deac0b-4417-42cc-b145-db0afe34f6e0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:geist-honored-monk:cast:s1,f:xs:XP:geist-honored-monk:cast:s1	-	-	-	d864b561c9cb	-	d354adafe39d	-	-	2026-11-24	xproof
 e5deac0b-4417-42cc-b145-db0afe34f6e0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:geist-honored-monk:cast:s1,f:xs:XP:geist-honored-monk:cast:s1	-	-	-	d864b561c9cb	-	d354adafe39d	-	-	2026-11-24	xproof
@@ -133,7 +133,7 @@ e5e6229a-3422-4afd-9a87-86daa2d31d3a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 e5e7e7e4-a774-4d68-8767-8ba2bae38250	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e5e7e7e4-a774-4d68-8767-8ba2bae38250	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e5e8e116-10fe-48b0-b3d8-6edb39bd5f90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e5e8e116-10fe-48b0-b3d8-6edb39bd5f90	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e5e8e116-10fe-48b0-b3d8-6edb39bd5f90	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e5e8fce4-c97a-4ae4-9583-003c565e3bd6	cast	cast-resolve	agreed	-	X	scen	1	0	Wistfulness/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e5e8fce4-c97a-4ae4-9583-003c565e3bd6	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 e5e8fce4-c97a-4ae4-9583-003c565e3bd6	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof

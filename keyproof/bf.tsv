@@ -6,7 +6,7 @@ bf061d7e-46eb-4037-968c-3cfc5ca94552	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bf061d7e-46eb-4037-968c-3cfc5ca94552	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bf061d7e-46eb-4037-968c-3cfc5ca94552	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 bf06b2a8-2bb5-4eae-8306-d051c5d9f462	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bf06b2a8-2bb5-4eae-8306-d051c5d9f462	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bf06b2a8-2bb5-4eae-8306-d051c5d9f462	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 bf06d873-08be-4a45-b8fb-fe1dfadc3a39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bf06d873-08be-4a45-b8fb-fe1dfadc3a39	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bf0948b7-f7af-4d99-a8aa-ea7e6a69232d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -60,8 +60,8 @@ bf5482b6-dd3e-4fb7-bc62-29e23b417a5f	land	land	agreed	-	FX	start	2	0	x:xs:XP:woo
 bf5765e0-def0-4ddf-9cd7-083feae71660	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firemind-s-foresight:cast:s1,f:xs:XP:firemind-s-foresight:cast:s1	-	-	-	d864b561c9cb	-	16b171d221a6	-	-	2026-11-24	xproof
 bf5ceba2-9def-4ff4-9291-740ca90c1c4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bf5ceba2-9def-4ff4-9291-740ca90c1c4d	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-bf5d44e7-9ff1-4c9a-a62e-628aa5be720d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bf5d44e7-9ff1-4c9a-a62e-628aa5be720d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bf5d44e7-9ff1-4c9a-a62e-628aa5be720d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:oceanus-dragon:cast:s1,f:xs:XP:oceanus-dragon:cast:s1	-	-	-	8c0bd19283bb	-	c2183a1d2584	-	-	2026-11-24	xproof
+bf5d44e7-9ff1-4c9a-a62e-628aa5be720d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:oceanus-dragon:cast:s1,f:xs:XP:oceanus-dragon:cast:s1	-	-	-	8c0bd19283bb	-	c2183a1d2584	-	-	2026-11-24	xproof
 bf5f348e-d748-48e2-b483-740109e71176	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eat-to-extinction:cast:s1,f:xs:XP:eat-to-extinction:cast:s1	-	-	-	ae86f6029288	-	fe280273e686	-	-	2026-11-24	xproof
 bf5f68b8-8ae2-4d08-b86c-4e6d3b653fec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bf614953-bd62-4000-a960-e2c26e1f7bb0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trial-of-ambition:f0t0:s1,f:xs:XP:trial-of-ambition:f0t0:s1	-	-	-	d864b561c9cb	-	8882b5feac5e	-	-	2026-11-24	xproof
@@ -126,8 +126,8 @@ bfb6651c-e0b3-4dbd-b26a-3eeb690985fc	cast	cast-resolve	agreed	-	X	scen	1	0	Excal
 bfb6651c-e0b3-4dbd-b26a-3eeb690985fc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Excalibur II/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bfb6651c-e0b3-4dbd-b26a-3eeb690985fc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Excalibur II/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bfb6651c-e0b3-4dbd-b26a-3eeb690985fc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Excalibur II/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-bfb75b28-0e51-4829-b104-f1679e63c126	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bfb75b28-0e51-4829-b104-f1679e63c126	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bfb75b28-0e51-4829-b104-f1679e63c126	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:myojin-of-blooming-dawn:cast:s1,f:xs:XP:myojin-of-blooming-dawn:cast:s1	-	-	-	8c0bd19283bb	-	06293842e59c	-	-	2026-11-24	xproof
+bfb75b28-0e51-4829-b104-f1679e63c126	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:myojin-of-blooming-dawn:cast:s1,f:xs:XP:myojin-of-blooming-dawn:cast:s1	-	-	-	8c0bd19283bb	-	06293842e59c	-	-	2026-11-24	xproof
 bfb799d2-b2fa-4efb-91d7-a457230b370f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:noble-panther:cast:s1,f:xs:XP:noble-panther:cast:s1	-	-	-	5f2128bf97e4	-	75b3c558ebb9	-	-	2026-11-24	xproof
 bfb799d2-b2fa-4efb-91d7-a457230b370f	f0/a0	Pump	agreed	-	X	start	2	0	x:xs:XP:noble-panther:f0a0:s1	-	-	-	5f2128bf97e4	-	75b3c558ebb9	-	-	2026-11-24	xproof
 bfbc12ec-ecc0-4e23-a9d1-d13babd99a46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

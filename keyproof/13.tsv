@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13b4aeac-4530-4e09-a547-548b4884bb2f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Lunar Whale/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13b4aeac-4530-4e09-a547-548b4884bb2f	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Lunar Whale/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13b4aeac-4530-4e09-a547-548b4884bb2f	static#0.1	static#0.1	agreed	-	X	scen	1	0	The Lunar Whale/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-13bad22a-6ba3-4197-8658-e47049a1cf1f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13bad22a-6ba3-4197-8658-e47049a1cf1f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:explore-the-underdark:cast:s1,f:xs:XP:explore-the-underdark:cast:s1	-	-	-	8c0bd19283bb	-	49ce6fcf3499	-	-	2026-11-24	xproof
 13be47e4-9da2-4f9e-baf0-db96f7777ccb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13bf8103-3db3-4ee6-a6bb-441aabfd9e41	cast	cast-resolve	agreed	-	FX	scen	2	0	Warden of the Grove/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13bf8103-3db3-4ee6-a6bb-441aabfd9e41	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Warden of the Grove/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -150,8 +150,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13c4437e-48a9-4c51-9b76-9e83e3ec362f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13c4437e-48a9-4c51-9b76-9e83e3ec362f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 13c81fc5-dd35-481d-8e32-4d404fb0e4ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13c81fc5-dd35-481d-8e32-4d404fb0e4ac	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13c81fc5-dd35-481d-8e32-4d404fb0e4ac	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13c81fc5-dd35-481d-8e32-4d404fb0e4ac	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:conclave-evangelist:f0t1:s1,f:xs:XP:conclave-evangelist:f0t1:s1	-	-	-	8c0bd19283bb	-	9e14924620a3	-	-	2026-11-24	xproof
+13c81fc5-dd35-481d-8e32-4d404fb0e4ac	f0/t1	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:conclave-evangelist:f0t1:s1,f:xs:XP:conclave-evangelist:f0t1:s1	-	-	-	8c0bd19283bb	-	9e14924620a3	-	-	2026-11-24	xproof
 13ca3ede-a4c8-463d-b160-99b4071034b0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13ca49a2-8a78-4be4-976a-b684086864bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13ca49a2-8a78-4be4-976a-b684086864bb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -190,8 +190,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13f0863f-ae54-4bea-8f01-7f3891797577	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:songcrafter-mage:f0t0:s2,f:xs:XP:songcrafter-mage:f0t0:s2	-	-	-	267e485f6204	-	cfe437c85e3e	-	-	2026-11-24	xproof
 13f41253-364f-40a5-a7cd-84d8785b2460	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13f41253-364f-40a5-a7cd-84d8785b2460	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13f58292-9b78-4cd1-a16e-b1779a170d33	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13f58292-9b78-4cd1-a16e-b1779a170d33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13f58292-9b78-4cd1-a16e-b1779a170d33	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:court-of-ire:cast:s1,f:xs:XP:court-of-ire:cast:s1	-	-	-	8c0bd19283bb	-	9e79c9866465	-	-	2026-11-24	xproof
+13f58292-9b78-4cd1-a16e-b1779a170d33	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:court-of-ire:cast:s1,f:xs:XP:court-of-ire:cast:s1	-	-	-	8c0bd19283bb	-	9e79c9866465	-	-	2026-11-24	xproof
 13f58292-9b78-4cd1-a16e-b1779a170d33	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13f63240-a6bb-4333-a3dd-818725c6fb73	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:abhorrent-overlord:f0t0:s1,f:xs:XP:abhorrent-overlord:f0t0:s1	-	-	-	d864b561c9cb	-	94a35dd9c94e	-	-	2026-11-24	xproof
 13f63240-a6bb-4333-a3dd-818725c6fb73	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:abhorrent-overlord:f0t0:s1,f:xs:XP:abhorrent-overlord:f0t0:s1	-	-	-	d864b561c9cb	-	94a35dd9c94e	-	-	2026-11-24	xproof

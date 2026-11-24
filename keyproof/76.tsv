@@ -55,8 +55,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76407853-7103-4010-b198-33a04ece7b23	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7644148f-3b26-447d-9f52-28c94c111b69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7644148f-3b26-447d-9f52-28c94c111b69	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7647682d-d491-4cb1-add7-b4d745994e62	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7647682d-d491-4cb1-add7-b4d745994e62	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7647682d-d491-4cb1-add7-b4d745994e62	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:underdark-explorer:cast:s1,f:xs:XP:underdark-explorer:cast:s1	-	-	-	8c0bd19283bb	-	f4a491261c17	-	-	2026-11-24	xproof
+7647682d-d491-4cb1-add7-b4d745994e62	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:underdark-explorer:cast:s1,f:xs:XP:underdark-explorer:cast:s1	-	-	-	8c0bd19283bb	-	f4a491261c17	-	-	2026-11-24	xproof
 764e8e6e-0ace-4fc8-8ca5-468a10ae3b73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 764e8e6e-0ace-4fc8-8ca5-468a10ae3b73	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 764f6412-c4ff-4eec-9a9d-870661f97f8b	cast	cast-resolve	agreed	-	X	scen	1	0	Fblthp, Lost on the Range/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -77,9 +77,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7661484b-1faa-4ed7-b77b-fc1e625d23e3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7661dda6-4e7b-42d0-8374-0a1fe65b83e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7661dda6-4e7b-42d0-8374-0a1fe65b83e4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7662af07-1ebc-4545-bffd-7a2e0c513b71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7662af07-1ebc-4545-bffd-7a2e0c513b71	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7662af07-1ebc-4545-bffd-7a2e0c513b71	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7662af07-1ebc-4545-bffd-7a2e0c513b71	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:defenders-of-humanity:f0t0:s1,f:xs:XP:defenders-of-humanity:f0t0:s1	-	-	-	8c0bd19283bb	-	c9545afcdd99	-	-	2026-11-24	xproof
+7662af07-1ebc-4545-bffd-7a2e0c513b71	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+7662af07-1ebc-4545-bffd-7a2e0c513b71	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:defenders-of-humanity:f0t0:s1,f:xs:XP:defenders-of-humanity:f0t0:s1	-	-	-	8c0bd19283bb	-	c9545afcdd99	-	-	2026-11-24	xproof
 7663ac7c-1de3-4250-b96a-fae9dbd66a27	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76642e7a-3c8f-45b8-9cd7-dac8086bea87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 766787ef-654a-4544-b5d7-d2f96949edf1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -71,8 +71,8 @@ f84d1291-1f82-4b67-a26e-b79624b4ce1d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 f8506acb-3fc5-4fdf-8304-586843db6cfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8506acb-3fc5-4fdf-8304-586843db6cfd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8526a36-eb8f-457d-b532-e12b47622cfa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f8526a36-eb8f-457d-b532-e12b47622cfa	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f8526a36-eb8f-457d-b532-e12b47622cfa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f8526a36-eb8f-457d-b532-e12b47622cfa	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+f8526a36-eb8f-457d-b532-e12b47622cfa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-triniform:f0t0:s1,f:xs:XP:phyrexian-triniform:f0t0:s1	-	-	-	8c0bd19283bb	-	82220a3fae57	-	-	2026-11-24	xproof
 f852bc33-e2f8-43be-9e6e-7badd1f894ef	cast	cast-resolve	agreed	-	FX	scen	2	0	Dose of Dawnglow/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 f8536726-993b-4100-918c-e3c7177d4c65	cast	counter-spell	agreed	-	X	scen	1	0	Spectral Denial/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f8536726-993b-4100-918c-e3c7177d4c65	static#0.0	static#0.0	agreed	-	X	scen	1	0	Spectral Denial/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -156,10 +156,10 @@ f8beeb0a-750f-4afa-a244-10011342bbeb	f0/t0	NULL	owed	refused:no-generator:trigge
 f8bf5df2-b783-4796-b2c6-eb4dd4167d62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8bf5df2-b783-4796-b2c6-eb4dd4167d62	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8c0c555-c750-4842-8924-d634206bbb81	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:exuberant-firestoker:cast:s1,f:xs:XP:exuberant-firestoker:cast:s1	-	-	-	8a1b1a193ec0	-	9abed726edea	-	-	2026-11-24	xproof
-f8c0c555-c750-4842-8924-d634206bbb81	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f8c0c555-c750-4842-8924-d634206bbb81	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:exuberant-firestoker:f0a0:s1,f:xs:XP:exuberant-firestoker:f0a0:s1	-	-	-	8c0bd19283bb	-	9abed726edea	-	-	2026-11-24	xproof
 f8c0c555-c750-4842-8924-d634206bbb81	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 f8c2a972-e38f-47e5-a355-6f30ad09b1ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f8c2a972-e38f-47e5-a355-6f30ad09b1ae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f8c2a972-e38f-47e5-a355-6f30ad09b1ae	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f8c2d9c5-6fe6-4698-9972-83cdd625d94b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8c32c80-9693-4ae4-a387-21ec8a3cdd40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8c32c80-9693-4ae4-a387-21ec8a3cdd40	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

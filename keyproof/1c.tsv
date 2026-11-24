@@ -86,7 +86,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c69fdcf-ba87-480a-88df-70aa4ec9fff0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c69fdcf-ba87-480a-88df-70aa4ec9fff0	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:amber-prison:f0a0:s1,f:xs:XP:amber-prison:f0a0:s1	-	-	-	8c0bd19283bb	-	acd140dab36a	-	-	2026-11-24	xproof
 1c6a0d19-c7dd-4353-95ad-dfdef2d5d2d9	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c6a0d19-c7dd-4353-95ad-dfdef2d5d2d9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c6a0d19-c7dd-4353-95ad-dfdef2d5d2d9	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1c6da9a9-6395-460b-8150-ea46d7299dc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c6f95fd-f8d0-4d22-aa21-29e5c70b2f85	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c747fe2-289e-492a-a846-aa77707e2dc3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,9 +105,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c859c97-74df-4360-baf8-0f79eae97c45	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1c8ef715-3c3c-4d04-9f30-941b870b11d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c8ef715-3c3c-4d04-9f30-941b870b11d3	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-1c95b7cf-be4d-4961-9073-3e39487492c8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c95b7cf-be4d-4961-9073-3e39487492c8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c95b7cf-be4d-4961-9073-3e39487492c8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c95b7cf-be4d-4961-9073-3e39487492c8	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:plagon-lord-of-the-beach:cast:s1,f:xs:XP:plagon-lord-of-the-beach:cast:s1	-	-	-	8c0bd19283bb	-	2d9f8ffd4aa3	-	-	2026-11-24	xproof
+1c95b7cf-be4d-4961-9073-3e39487492c8	f0/a0	Effect	agreed	-	FX	start	4	0	x:xs:XP:plagon-lord-of-the-beach:cast:s1,f:xs:XP:plagon-lord-of-the-beach:cast:s1	-	-	-	8c0bd19283bb	-	2d9f8ffd4aa3	-	-	2026-11-24	xproof
+1c95b7cf-be4d-4961-9073-3e39487492c8	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:plagon-lord-of-the-beach:cast:s1,f:xs:XP:plagon-lord-of-the-beach:cast:s1	-	-	-	8c0bd19283bb	-	2d9f8ffd4aa3	-	-	2026-11-24	xproof
 1c995c80-3301-409b-822b-9297aa260823	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ureni-the-song-unending:f0t0:s1,f:xs:XP:ureni-the-song-unending:f0t0:s1	-	-	-	9ee19e8250ce	-	508042ff7e60	-	-	2026-11-24	xproof
 1c995c80-3301-409b-822b-9297aa260823	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ureni, the Song Unending/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1c995c80-3301-409b-822b-9297aa260823	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ureni, the Song Unending/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -139,8 +139,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1cb3f27c-2670-43b8-9305-8adf2e7bd3ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cb3f27c-2670-43b8-9305-8adf2e7bd3ae	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:enatu-golem:f0t0:s1,f:xs:XP:enatu-golem:f0t0:s1	-	-	-	d864b561c9cb	-	40250a1a3345	-	-	2026-11-24	xproof
 1cb419cc-d8e4-4676-987f-089cebccc374	cast	cast-resolve	agreed	-	X	scen	1	0	Masterful Flourish/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1cb42cf5-ae69-46c5-b2ff-d2c1cd60099b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1cb42cf5-ae69-46c5-b2ff-d2c1cd60099b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1cb42cf5-ae69-46c5-b2ff-d2c1cd60099b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:myojin-of-towering-might:cast:s1,f:xs:XP:myojin-of-towering-might:cast:s1	-	-	-	8c0bd19283bb	-	5602a5326904	-	-	2026-11-24	xproof
+1cb42cf5-ae69-46c5-b2ff-d2c1cd60099b	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:myojin-of-towering-might:cast:s1,f:xs:XP:myojin-of-towering-might:cast:s1	-	-	-	8c0bd19283bb	-	5602a5326904	-	-	2026-11-24	xproof
 1cb71772-592d-4dd1-91af-816933af760c	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cb71772-592d-4dd1-91af-816933af760c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cb71772-592d-4dd1-91af-816933af760c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -167,7 +167,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1cea9b82-d2e9-4758-8ec8-729fcf4bb7d7	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cea9b82-d2e9-4758-8ec8-729fcf4bb7d7	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cf27d78-d6ae-4fa2-9c8d-c277913f821c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1cf27d78-d6ae-4fa2-9c8d-c277913f821c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1cf27d78-d6ae-4fa2-9c8d-c277913f821c	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:baru-wurmspeaker:f0a0:s1,f:xs:XP:baru-wurmspeaker:f0a0:s1	-	-	-	8c0bd19283bb	-	815de5a87685	-	-	2026-11-24	xproof
 1cf4e16b-2273-41c7-9bcd-0cdc78e12198	cast	cast-resolve	agreed	-	FX	scen	2	0	Unassuming Sage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1cf4e16b-2273-41c7-9bcd-0cdc78e12198	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cf51f50-24e4-48d0-95b3-1dad3ffa4bf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

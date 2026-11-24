@@ -7,7 +7,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 26112ba7-2859-4af3-93c3-e62c31177216	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26184baf-5d48-4919-8df2-c98ac460b78f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deadeye-tracker:cast:s1,f:xs:XP:deadeye-tracker:cast:s1	-	-	-	d864b561c9cb	-	d6aabce1639f	-	-	2026-11-24	xproof
 26184baf-5d48-4919-8df2-c98ac460b78f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-261f371f-bcda-4761-810f-3216608b31d8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+261f371f-bcda-4761-810f-3216608b31d8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venture-forth:cast:s1,f:xs:XP:venture-forth:cast:s1	-	-	-	8c0bd19283bb	-	e8bed8610a6f	-	-	2026-11-24	xproof
 2620dcfe-8738-4f81-b23d-0c1c60cf9047	cast	cast-resolve	agreed	-	X	scen	1	0	Splatter Technique/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2624b5c5-ba59-4e20-8e66-e463268366e4	cast	cast-resolve	agreed	-	X	scen	1	0	The Death of Gwen Stacy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 26259c65-8f4e-42a6-b8a7-f65c36d35c4d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -92,8 +92,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2699005b-a471-429f-a9d8-fbf2077ee2fd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2699005b-a471-429f-a9d8-fbf2077ee2fd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2699005b-a471-429f-a9d8-fbf2077ee2fd	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-269a02ca-1425-4b32-81f3-440e1caadb17	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-269a02ca-1425-4b32-81f3-440e1caadb17	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+269a02ca-1425-4b32-81f3-440e1caadb17	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:goliath-paladin:cast:s1,f:xs:XP:goliath-paladin:cast:s1	-	-	-	8c0bd19283bb	-	c593dc6bfed9	-	-	2026-11-24	xproof
+269a02ca-1425-4b32-81f3-440e1caadb17	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:goliath-paladin:cast:s1,f:xs:XP:goliath-paladin:cast:s1	-	-	-	8c0bd19283bb	-	c593dc6bfed9	-	-	2026-11-24	xproof
 269a2b53-52d7-4032-ba62-7b7742e7a159	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 269a2b53-52d7-4032-ba62-7b7742e7a159	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 26a1b36c-3c27-4eb4-b85f-63459653b773	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -117,12 +117,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 26c09127-8225-4ba2-9f97-f5558b1c41b5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gastal Raider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 26c17025-1123-46d9-a8bd-edbad01c4b6e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:searing-barrage:cast:s1,f:xs:XP:searing-barrage:cast:s1	-	-	-	ae86f6029288	-	58b464ecbf81	-	-	2026-11-24	xproof
 26c22894-10e5-48f1-a32a-a7f1f3f7e12e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26c22894-10e5-48f1-a32a-a7f1f3f7e12e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26c22894-10e5-48f1-a32a-a7f1f3f7e12e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+26c22894-10e5-48f1-a32a-a7f1f3f7e12e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+26c22894-10e5-48f1-a32a-a7f1f3f7e12e	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 26c2dd96-07e7-4294-9431-96d5aeff3761	cast	cast-resolve	agreed	-	FX	scen	2	0	True Ancestry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 26d2762b-4346-40d0-b93d-b0dbfeb6e2bc	cast	cast-resolve	agreed	-	FX	scen	2	0	Reroute Systems/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 26d28b68-e03b-4367-ae4b-5e54f42f8a88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26d28b68-e03b-4367-ae4b-5e54f42f8a88	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+26d28b68-e03b-4367-ae4b-5e54f42f8a88	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 26d3a818-7faf-443a-a6bd-9773edaedf17	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26d6a089-b867-4b89-be8e-2ad11bff0d64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:meldweb-curator:f0t0:s1,f:xs:XP:meldweb-curator:f0t0:s1	-	-	-	ae86f6029288	-	7aeb22403727	-	-	2026-11-24	xproof
 26d6a089-b867-4b89-be8e-2ad11bff0d64	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:meldweb-curator:f0t0:s1,f:xs:XP:meldweb-curator:f0t0:s1	-	-	-	ae86f6029288	-	7aeb22403727	-	-	2026-11-24	xproof

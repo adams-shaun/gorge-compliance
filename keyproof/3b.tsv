@@ -44,9 +44,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b17dc39-a564-4c61-b483-98ed3da4361b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b19054c-ba33-44b4-b328-bb8ea3f52dab	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 3b19054c-ba33-44b4-b328-bb8ea3f52dab	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	77494c1ce129	-	-	-	-	2026-11-24	xproof
-3b1c6c1e-e298-4f45-8ab7-e0bb5358e11f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b1c6c1e-e298-4f45-8ab7-e0bb5358e11f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b1c6c1e-e298-4f45-8ab7-e0bb5358e11f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b1c6c1e-e298-4f45-8ab7-e0bb5358e11f	cast	cast	agreed	-	F	start	4	0	f:xs:XP:torsten-founder-of-benalia:cast:s1	-	-	-	8c0bd19283bb	-	42f91d16c4fd	-	-	2026-11-24	xproof
+3b1c6c1e-e298-4f45-8ab7-e0bb5358e11f	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:torsten-founder-of-benalia:cast:s1	-	-	-	8c0bd19283bb	-	42f91d16c4fd	-	-	2026-11-24	xproof
+3b1c6c1e-e298-4f45-8ab7-e0bb5358e11f	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:torsten-founder-of-benalia:f0t1:s1,f:xs:XP:torsten-founder-of-benalia:f0t1:s1	-	-	-	8c0bd19283bb	-	42f91d16c4fd	-	-	2026-11-24	xproof
 3b1f1a57-d83a-443f-b190-03df63d2bfe6	cast	cast-resolve	agreed	-	X	scen	1	0	Seismic Rupture/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b1f8108-6911-49e9-8f78-f950bb58cb6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hornet-queen:f0t0:s1,f:xs:XP:hornet-queen:f0t0:s1	-	-	-	d864b561c9cb	-	bf597f749b0c	-	-	2026-11-24	xproof
 3b1f8108-6911-49e9-8f78-f950bb58cb6c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hornet-queen:f0t0:s1,f:xs:XP:hornet-queen:f0t0:s1	-	-	-	d864b561c9cb	-	bf597f749b0c	-	-	2026-11-24	xproof
@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b9bc41a-a43f-4be7-9452-f61f5ad5b482	cast	cast-resolve	agreed	-	X	scen	1	0	Sita Varma, Masked Racer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b9bc41a-a43f-4be7-9452-f61f5ad5b482	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sita Varma, Masked Racer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ba19659-461f-482c-b882-b4fca7d5d1f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ba19659-461f-482c-b882-b4fca7d5d1f8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ba19659-461f-482c-b882-b4fca7d5d1f8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3ba223b7-743f-4f99-836e-869778fb2e99	cast	cast-resolve	agreed	-	FX	scen	2	0	Undercover Crocodelf/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ba223b7-743f-4f99-836e-869778fb2e99	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Undercover Crocodelf/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ba3405d-8c9a-4a80-811d-529cd3cb657f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -229,9 +229,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bed0b60-5944-44bb-9ddd-c82f323e6d20	cast	cast-resolve	agreed	-	FX	scen	2	0	Wilt in the Heat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bed0b60-5944-44bb-9ddd-c82f323e6d20	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wilt in the Heat/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3beed054-a099-4887-b1bd-39cf9e514e94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3beed054-a099-4887-b1bd-39cf9e514e94	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3beed054-a099-4887-b1bd-39cf9e514e94	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3beed054-a099-4887-b1bd-39cf9e514e94	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3beed054-a099-4887-b1bd-39cf9e514e94	f0/t0	DamageDone	agreed	-	F	start	4	0	f:xs:XP:scurry-of-squirrels:f0t1:s1	-	-	-	8c0bd19283bb	-	4db3846875f9	-	-	2026-11-24	xproof
+3beed054-a099-4887-b1bd-39cf9e514e94	f0/t1	Attacks/Myriad	agreed	-	F	start	4	0	f:xs:XP:scurry-of-squirrels:f0t1:s1	-	-	-	8c0bd19283bb	-	4db3846875f9	-	-	2026-11-24	xproof
+3beed054-a099-4887-b1bd-39cf9e514e94	f0/t2	Attacks/Myriad	agreed	-	F	start	4	0	f:xs:XP:scurry-of-squirrels:f0t1:s1	-	-	-	8c0bd19283bb	-	4db3846875f9	-	-	2026-11-24	xproof
 3bf20e68-0e19-4242-bfba-a8a1bb244685	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghastly-conscription:cast:s1,f:xs:XP:ghastly-conscription:cast:s1	-	-	-	d864b561c9cb	-	3f6ffa2b0724	-	-	2026-11-24	xproof
 3bfa51dd-daed-473a-8377-7bb34a2c3371	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bfb3913-808d-444b-97c3-a90af3bc585b	cast	cast-resolve	agreed	-	X	scen	1	0	Earth Kingdom Protectors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

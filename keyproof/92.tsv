@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 92017087-18f4-46ee-8808-5959d31d0011	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92017087-18f4-46ee-8808-5959d31d0011	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:sigil-of-the-nayan-gods:cast:s2,f:xs:XP:sigil-of-the-nayan-gods:cast:s2	-	-	-	5f2128bf97e4	-	4c60bf1726ae	-	-	2026-11-24	xproof
+92017087-18f4-46ee-8808-5959d31d0011	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:sigil-of-the-nayan-gods:cast:s1,f:xs:XP:sigil-of-the-nayan-gods:cast:s1	-	-	-	8c0bd19283bb	-	4c60bf1726ae	-	-	2026-11-24	xproof
 92019547-f6db-4ea6-8356-d0a90ace5662	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92019547-f6db-4ea6-8356-d0a90ace5662	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92019547-f6db-4ea6-8356-d0a90ace5662	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9228f04c-506f-4453-a335-e66876b8ce8d	cast	cast-resolve	agreed	-	X	scen	1	0	Smile at Death/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9228f04c-506f-4453-a335-e66876b8ce8d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Smile at Death/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 922a030c-857b-4c61-93df-b70ebb32abd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-922a030c-857b-4c61-93df-b70ebb32abd3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+922a030c-857b-4c61-93df-b70ebb32abd3	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 922a8e27-a367-40c6-84df-86ed32f71c7c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:oltec-cloud-guard:f0t0:s2,f:xs:XP:oltec-cloud-guard:f0t0:s2	-	-	-	e07cf3a05ba5	-	f5e427eb138e	-	-	2026-11-24	xproof
 922a8e27-a367-40c6-84df-86ed32f71c7c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Oltec Cloud Guard/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 922a8e27-a367-40c6-84df-86ed32f71c7c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Oltec Cloud Guard/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -172,9 +172,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92bf8f05-cbfd-42d8-8bc1-d7f2e46f9872	cast	cast-resolve	agreed	-	X	scen	1	0	Victor, Valgavoth's Seneschal/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92bf8f05-cbfd-42d8-8bc1-d7f2e46f9872	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Victor, Valgavoth's Seneschal/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92bf8f05-cbfd-42d8-8bc1-d7f2e46f9872	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Victor, Valgavoth's Seneschal/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-92c0346d-c375-4851-9806-5d3b9b83425f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92c0346d-c375-4851-9806-5d3b9b83425f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92c0346d-c375-4851-9806-5d3b9b83425f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92c0346d-c375-4851-9806-5d3b9b83425f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kinsbaile-courier:f0t0:s1,f:xs:XP:kinsbaile-courier:f0t0:s1	-	-	-	8c0bd19283bb	-	b514fd7cbf25	-	-	2026-11-24	xproof
+92c0346d-c375-4851-9806-5d3b9b83425f	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+92c0346d-c375-4851-9806-5d3b9b83425f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kinsbaile-courier:f0t0:s1,f:xs:XP:kinsbaile-courier:f0t0:s1	-	-	-	8c0bd19283bb	-	b514fd7cbf25	-	-	2026-11-24	xproof
 92c43ee1-0f7d-4993-8d3a-689cc87d7480	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92c43ee1-0f7d-4993-8d3a-689cc87d7480	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92c43ee1-0f7d-4993-8d3a-689cc87d7480	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -186,8 +186,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92c9aad6-35ec-425d-be7d-393328992820	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92c9aad6-35ec-425d-be7d-393328992820	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:glimmerpost:f0t0:s1,f:xs:XP:glimmerpost:f0t0:s1	-	-	-	d864b561c9cb	-	a5c4841c52ee	-	-	2026-11-24	xproof
 92c9aad6-35ec-425d-be7d-393328992820	land	land	agreed	-	FX	start	2	0	x:xs:XP:glimmerpost:f0t0:s1,f:xs:XP:glimmerpost:f0t0:s1	-	-	-	d864b561c9cb	-	a5c4841c52ee	-	-	2026-11-24	xproof
-92c9b2fd-95d6-4937-aee2-67b4bb8ca29d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92c9b2fd-95d6-4937-aee2-67b4bb8ca29d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92c9b2fd-95d6-4937-aee2-67b4bb8ca29d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aerial-surveyor:cast:s1,f:xs:XP:aerial-surveyor:cast:s1	-	-	-	8c0bd19283bb	-	b98b0f01a256	-	-	2026-11-24	xproof
+92c9b2fd-95d6-4937-aee2-67b4bb8ca29d	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 92c9b2fd-95d6-4937-aee2-67b4bb8ca29d	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92cdcafc-ffeb-436d-b2bd-d6ad895d0e08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92cdcafc-ffeb-436d-b2bd-d6ad895d0e08	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -18,8 +18,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4d19b4d1-49d1-44e9-a453-dcb08b5fa6e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trespassing-souleater:cast:s1,f:xs:XP:trespassing-souleater:cast:s1	-	-	-	d864b561c9cb	-	a6be5e6a731d	-	-	2026-11-24	xproof
 4d19b4d1-49d1-44e9-a453-dcb08b5fa6e4	f0/a0	NULL	owed	refused:steps-needed:cost:UP	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4d1b655f-05b8-4b82-9cb9-67660f570a9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4d211447-9f18-4d23-8f19-cdf6ad3c68ba	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4d211447-9f18-4d23-8f19-cdf6ad3c68ba	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4d211447-9f18-4d23-8f19-cdf6ad3c68ba	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:soul-of-eternity:cast:s2,f:xs:XP:soul-of-eternity:cast:s2	-	-	-	8c0bd19283bb	-	e4f38e54a1d5	-	-	2026-11-24	xproof
+4d211447-9f18-4d23-8f19-cdf6ad3c68ba	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4d2377fb-ac3b-453b-b632-abe918d72529	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d244787-66d2-4a32-914d-a3e97d393370	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d244787-66d2-4a32-914d-a3e97d393370	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:ursine-fylgja:f0a1:s1,f:xs:XP:ursine-fylgja:f0a1:s1	-	-	-	d864b561c9cb	-	cf50bab7d57b	-	-	2026-11-24	xproof
@@ -92,8 +92,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4d7ff9d5-dc06-4a70-a9c8-d6f88f02fd67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d80bac5-ce62-4c5c-873a-ce81d2697842	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d819d35-5cd3-48f1-a77a-b7c3ff82c62e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:palace-siege:cast:s1,f:xs:XP:palace-siege:cast:s1	-	-	-	d864b561c9cb	-	337bf41cb267	-	-	2026-11-24	xproof
-4d81db0d-2f56-42ac-92ce-249a34d262d4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4d81db0d-2f56-42ac-92ce-249a34d262d4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4d81db0d-2f56-42ac-92ce-249a34d262d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shadow-in-the-warp:cast:s1,f:xs:XP:shadow-in-the-warp:cast:s1	-	-	-	8c0bd19283bb	-	22946e490c03	-	-	2026-11-24	xproof
+4d81db0d-2f56-42ac-92ce-249a34d262d4	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4d83ad77-dbac-4a03-8034-43d950d0a18c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d83ad77-dbac-4a03-8034-43d950d0a18c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fireblade-charger:f0t0:s1,f:xs:XP:fireblade-charger:f0t0:s1	-	-	-	ae86f6029288	-	01c63d69ac7f	-	-	2026-11-24	xproof
 4d8505d3-c8a1-4850-95d4-5ddb8ad49770	cast	cast	agreed	-	F	start	4	0	f:xs:XP:cultivator-colossus:cast:s1	-	-	-	d864b561c9cb	-	ab211588a9b8	-	-	2026-11-24	xproof

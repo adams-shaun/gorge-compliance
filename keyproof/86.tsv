@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8696eae4-3dc9-4572-aab9-aa4f7e8f53af	cast	cast-resolve	agreed	-	X	scen	1	0	Syphon Fuel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 869bde03-8813-43a9-9df5-a21c62511b4b	cast	cast-resolve	agreed	-	X	scen	1	0	Mr. Spock, Science Officer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86a7f685-05d0-4167-b5bb-8f6943c23087	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86a7f685-05d0-4167-b5bb-8f6943c23087	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86a7f685-05d0-4167-b5bb-8f6943c23087	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:zhentarim-bandit:f0t0:s1,f:xs:XP:zhentarim-bandit:f0t0:s1	-	-	-	8c0bd19283bb	-	2bfd58f4aa79	-	-	2026-11-24	xproof
 86ab4400-fbdd-4c18-a893-441286a9d7d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86ae05d6-f1ba-456d-bbc0-f35cd0d0537d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86ae05d6-f1ba-456d-bbc0-f35cd0d0537d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -180,8 +180,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86c0dc85-d146-4dfa-819e-f78835bfffff	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lava-hounds:f0t0:s1,f:xs:XP:lava-hounds:f0t0:s1	-	-	-	25696bf19d5b	-	db40f1ad7bff	-	-	2026-11-24	xproof
 86c0ddaa-6926-450d-949a-6c89f43c71c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crested-herdcaller:f0t0:s1,f:xs:XP:crested-herdcaller:f0t0:s1	-	-	-	d864b561c9cb	-	a04c657c39f5	-	-	2026-11-24	xproof
 86c0ddaa-6926-450d-949a-6c89f43c71c2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:crested-herdcaller:f0t0:s1,f:xs:XP:crested-herdcaller:f0t0:s1	-	-	-	d864b561c9cb	-	a04c657c39f5	-	-	2026-11-24	xproof
-86c9b01e-18a2-4616-8e04-5343f97d2efe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86c9b01e-18a2-4616-8e04-5343f97d2efe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86c9b01e-18a2-4616-8e04-5343f97d2efe	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+86c9b01e-18a2-4616-8e04-5343f97d2efe	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 86c9e08a-397a-4c24-8f4c-48a648889399	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86cb340f-ef06-4be9-b457-703784387dbe	cast	cast-resolve	agreed	-	X	scen	1	0	Dragon's Prey/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86cb340f-ef06-4be9-b457-703784387dbe	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dragon's Prey/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -199,17 +199,17 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86d67952-19b8-4bb8-b7d7-b2751e86591c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gastal Thrillroller/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86d67952-19b8-4bb8-b7d7-b2751e86591c	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Gastal Thrillroller/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86d67952-19b8-4bb8-b7d7-b2751e86591c	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:gastal-thrillroller:f0t0:s2,f:xs:XP:gastal-thrillroller:f0t0:s2	-	-	-	267e485f6204	-	049c967307c9	-	-	2026-11-24	xproof
-86d76078-9af3-45a7-90d6-72946afdc78b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86d76078-9af3-45a7-90d6-72946afdc78b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86d76078-9af3-45a7-90d6-72946afdc78b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86d76078-9af3-45a7-90d6-72946afdc78b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goldlust-triad:cast:s1,f:xs:XP:goldlust-triad:cast:s1	-	-	-	8c0bd19283bb	-	723e4f1a5538	-	-	2026-11-24	xproof
+86d76078-9af3-45a7-90d6-72946afdc78b	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:goldlust-triad:f0t1:s1,f:xs:XP:goldlust-triad:f0t1:s1	-	-	-	8c0bd19283bb	-	723e4f1a5538	-	-	2026-11-24	xproof
+86d76078-9af3-45a7-90d6-72946afdc78b	f0/t1	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:goldlust-triad:f0t1:s1,f:xs:XP:goldlust-triad:f0t1:s1	-	-	-	8c0bd19283bb	-	723e4f1a5538	-	-	2026-11-24	xproof
 86da33ac-f8ac-48c8-a50b-22fd761dff8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86da33ac-f8ac-48c8-a50b-22fd761dff8f	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 86dc3a41-4fb9-4b1f-8279-2b5edbc7e170	cast	cast-resolve	agreed	-	X	scen	1	0	Binding Negotiation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86ddbc56-3318-49cf-be95-78772ef87637	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86ddbc56-3318-49cf-be95-78772ef87637	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86df1de7-967a-4420-847f-7a77d0217a15	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86df1de7-967a-4420-847f-7a77d0217a15	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86df1de7-967a-4420-847f-7a77d0217a15	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86df1de7-967a-4420-847f-7a77d0217a15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:holy-avenger:cast:s1,f:xs:XP:holy-avenger:cast:s1	-	-	-	8c0bd19283bb	-	5671c823bf22	-	-	2026-11-24	xproof
+86df1de7-967a-4420-847f-7a77d0217a15	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:holy-avenger:f0a0:s1,f:xs:XP:holy-avenger:f0a0:s1	-	-	-	8c0bd19283bb	-	5671c823bf22	-	-	2026-11-24	xproof
+86df1de7-967a-4420-847f-7a77d0217a15	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 86e0e718-82b5-4c99-9837-1b4d8729a27e	cast	cast-resolve	agreed	-	FX	scen	2	0	Melded Moxite/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86e0e718-82b5-4c99-9837-1b4d8729a27e	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Melded Moxite/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86e0e718-82b5-4c99-9837-1b4d8729a27e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -230,9 +230,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86ef06b3-2049-494d-9ecb-ca14766d3b68	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Braided Net/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86ef06b3-2049-494d-9ecb-ca14766d3b68	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Braided Net/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86ef06b3-2049-494d-9ecb-ca14766d3b68	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Braided Net/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-86ef2ceb-b7e6-4451-92ec-8528ea191d3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86ef2ceb-b7e6-4451-92ec-8528ea191d3a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86ef2ceb-b7e6-4451-92ec-8528ea191d3a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86ef2ceb-b7e6-4451-92ec-8528ea191d3a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:old-one-eye:f0t0:s1,f:xs:XP:old-one-eye:f0t0:s1	-	-	-	8c0bd19283bb	-	5185326b6e48	-	-	2026-11-24	xproof
+86ef2ceb-b7e6-4451-92ec-8528ea191d3a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:old-one-eye:f0t0:s1,f:xs:XP:old-one-eye:f0t0:s1	-	-	-	8c0bd19283bb	-	5185326b6e48	-	-	2026-11-24	xproof
+86ef2ceb-b7e6-4451-92ec-8528ea191d3a	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 86ef6474-613f-41fb-931c-d4279b03ed99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86ef86de-104f-4eae-a2db-893b50e95ad7	cast	cast-resolve	agreed	-	FX	scen	2	0	Tokka & Rahzar, Terrible Twos/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86ef86de-104f-4eae-a2db-893b50e95ad7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tokka & Rahzar, Terrible Twos/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -242,8 +242,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86f2890d-3e5a-48db-bb22-a6cb8cbd39ce	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86f725f6-b48b-4dcc-9a02-e258a226e31c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86f7d513-1f5f-4551-83e6-56d24da5ab39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86f7d513-1f5f-4551-83e6-56d24da5ab39	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86f7d513-1f5f-4551-83e6-56d24da5ab39	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86f7d513-1f5f-4551-83e6-56d24da5ab39	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+86f7d513-1f5f-4551-83e6-56d24da5ab39	f0/t1	Attacks/Battle cry	agreed	-	X	start	2	0	x:xs:XP:rosnakht-heir-of-rohgahh:f0t1:s1	-	-	-	8c0bd19283bb	-	8f16c3678ab4	-	-	2026-11-24	xproof
 86f9897f-84aa-4c8d-8335-cfdb2f565311	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rescue-retriever:cast:s1,f:xs:XP:rescue-retriever:cast:s1	-	-	-	ae86f6029288	-	50aac5912d58	-	-	2026-11-24	xproof
 86f9897f-84aa-4c8d-8335-cfdb2f565311	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rescue-retriever:cast:s1,f:xs:XP:rescue-retriever:cast:s1	-	-	-	ae86f6029288	-	50aac5912d58	-	-	2026-11-24	xproof
 86fb1fc1-7784-4c94-a80c-21ad87e50fc4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viashivan-dragon:cast:s1,f:xs:XP:viashivan-dragon:cast:s1	-	-	-	ea3140b6974b	-	e7db7c6d43b5	-	-	2026-11-24	xproof

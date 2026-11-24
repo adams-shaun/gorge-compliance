@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4620bfa8-7198-44ae-a162-51a19ca0f555	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ray-of-revelation:cast:s1,f:xs:XP:ray-of-revelation:cast:s1	-	-	-	25696bf19d5b	-	a32ecca76fa5	-	-	2026-11-24	xproof
 462269c7-ca16-4aa7-bf52-f7fcda25a05b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 462269c7-ca16-4aa7-bf52-f7fcda25a05b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-462269c7-ca16-4aa7-bf52-f7fcda25a05b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+462269c7-ca16-4aa7-bf52-f7fcda25a05b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kitesail-skirmisher:f0t0:s1,f:xs:XP:kitesail-skirmisher:f0t0:s1	-	-	-	8c0bd19283bb	-	744a8b47ee10	-	-	2026-11-24	xproof
 46334ae3-e496-4f15-8033-0f42ee0ae375	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46334ae3-e496-4f15-8033-0f42ee0ae375	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bottle-golems:f0t0:s1,f:xs:XP:bottle-golems:f0t0:s1	-	-	-	d864b561c9cb	-	b5a174576baa	-	-	2026-11-24	xproof
 4636afb5-453a-4f27-8916-1cbc32459ba6	cast	cast-resolve	agreed	-	X	scen	1	0	Red Alert!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -161,8 +161,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46b36d25-25bd-48c5-9a53-75230bb27dee	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Swiftwing Assailant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46b36d25-25bd-48c5-9a53-75230bb27dee	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Swiftwing Assailant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46b36d25-25bd-48c5-9a53-75230bb27dee	static#0.0	static#0.0	agreed	-	X	scen	1	0	Swiftwing Assailant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-46b5f12e-9fe5-44f6-b895-ee8c33205521	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46b5f12e-9fe5-44f6-b895-ee8c33205521	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+46b5f12e-9fe5-44f6-b895-ee8c33205521	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aberrant:f0t1:s1,f:xs:XP:aberrant:f0t1:s1	-	-	-	8c0bd19283bb	-	6a929ca8a986	-	-	2026-11-24	xproof
+46b5f12e-9fe5-44f6-b895-ee8c33205521	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 46b5f12e-9fe5-44f6-b895-ee8c33205521	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46ba09a7-42e4-42cd-911c-71d0ade01180	cast	cast-resolve	agreed	-	X	scen	1	0	Locutus, the One Who Speaks/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46ba09a7-42e4-42cd-911c-71d0ade01180	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -172,9 +172,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46c404c3-636a-4945-a61c-62f013a9c50f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46c404c3-636a-4945-a61c-62f013a9c50f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:towering-viewpoint:f0a0:s1,f:xs:XP:towering-viewpoint:f0a0:s1	-	-	-	ae86f6029288	-	85e2343f83ae	-	-	2026-11-24	xproof
 46c727cb-1f47-4775-8af4-0230ef53966b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:brainsurge:cast:s1	-	-	-	ae86f6029288	-	a17defc7e310	-	-	2026-11-24	xproof
-46c77100-ab2e-43eb-b1cb-c22ed114213e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46c77100-ab2e-43eb-b1cb-c22ed114213e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46c77100-ab2e-43eb-b1cb-c22ed114213e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+46c77100-ab2e-43eb-b1cb-c22ed114213e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blazing-sunsteel:cast:s1,f:xs:XP:blazing-sunsteel:cast:s1	-	-	-	8c0bd19283bb	-	4065e3ef6552	-	-	2026-11-24	xproof
+46c77100-ab2e-43eb-b1cb-c22ed114213e	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:blazing-sunsteel:f0a0:s1,f:xs:XP:blazing-sunsteel:f0a0:s1	-	-	-	8c0bd19283bb	-	4065e3ef6552	-	-	2026-11-24	xproof
+46c77100-ab2e-43eb-b1cb-c22ed114213e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 46c7a552-4a98-4e1a-8651-8fb0e7153aec	cast	cast-resolve	agreed	-	X	scen	1	0	Ravenous Giant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46c7a552-4a98-4e1a-8651-8fb0e7153aec	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ravenous Giant/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46c7f465-304c-4c4b-a1f6-9707706dbf94	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:iname-death-aspect:cast:s1,f:xs:XP:iname-death-aspect:cast:s1	-	-	-	25696bf19d5b	-	01b65f71fc57	-	-	2026-11-24	xproof

@@ -84,9 +84,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2e5adbcf-6b5c-4ded-a339-8757040ef878	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Venat, Heart of Hydaelyn/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2e5adbcf-6b5c-4ded-a339-8757040ef878	f1/t0	trigger#1.0	agreed	-	FX	scen	2	0	Venat, Heart of Hydaelyn/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2e5b8973-4f6e-4abe-bbbe-81fdca784997	cast	cast-resolve	agreed	-	X	scen	1	0	Blooming Blast/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2e5e0abd-38a6-46ca-b922-556db52f1332	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e5e0abd-38a6-46ca-b922-556db52f1332	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e5e0abd-38a6-46ca-b922-556db52f1332	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2e5e0abd-38a6-46ca-b922-556db52f1332	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:undermountain-adventurer:cast:s1,f:xs:XP:undermountain-adventurer:cast:s1	-	-	-	8c0bd19283bb	-	d9f97c6873f9	-	-	2026-11-24	xproof
+2e5e0abd-38a6-46ca-b922-556db52f1332	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:undermountain-adventurer:f0a0:s1,f:xs:XP:undermountain-adventurer:f0a0:s1	-	-	-	8c0bd19283bb	-	d9f97c6873f9	-	-	2026-11-24	xproof
+2e5e0abd-38a6-46ca-b922-556db52f1332	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:undermountain-adventurer:cast:s1,f:xs:XP:undermountain-adventurer:cast:s1	-	-	-	8c0bd19283bb	-	d9f97c6873f9	-	-	2026-11-24	xproof
 2e61e9c0-a2b9-4a24-8cb0-5160accce183	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e61e9c0-a2b9-4a24-8cb0-5160accce183	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e665a03-bece-43df-bd15-b4496e233f2e	cast	cast-resolve	agreed	-	X	scen	1	0	Captain Marvel, Earth's Protector/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ea95e03-b95d-4ccf-afc6-1a26ac6cf354	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sergeant-at-arms:f0t0:s1,f:xs:XP:sergeant-at-arms:f0t0:s1	-	-	-	d864b561c9cb	-	506f3370bbd9	-	-	2026-11-24	xproof
 2ea95e03-b95d-4ccf-afc6-1a26ac6cf354	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sergeant-at-arms:f0t0:s1,f:xs:XP:sergeant-at-arms:f0t0:s1	-	-	-	d864b561c9cb	-	506f3370bbd9	-	-	2026-11-24	xproof
 2eac0c6a-b289-4b75-9571-59869e62d180	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2eaee808-b72a-4950-ab4f-ab8e8d12f838	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2eaee808-b72a-4950-ab4f-ab8e8d12f838	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:profane-transfusion:cast:s1,f:xs:XP:profane-transfusion:cast:s1	-	-	-	8c0bd19283bb	-	3fe174244ebd	-	-	2026-11-24	xproof
 2eb16535-718f-4b88-92bc-96429d796327	cast	cast-resolve	agreed	-	X	scen	1	0	Syr Ginger, the Meal Ender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2eb16535-718f-4b88-92bc-96429d796327	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Syr Ginger, the Meal Ender/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2eb16535-718f-4b88-92bc-96429d796327	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Syr Ginger, the Meal Ender/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

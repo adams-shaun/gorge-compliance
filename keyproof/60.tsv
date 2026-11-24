@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 604aded2-64c2-4474-b5b7-8c83e0e3fe76	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 604aded2-64c2-4474-b5b7-8c83e0e3fe76	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 604c581e-c1ba-417c-b9de-182192cc85cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-604c581e-c1ba-417c-b9de-182192cc85cb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+604c581e-c1ba-417c-b9de-182192cc85cb	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:taunting-kobold:f0t0:s1	-	-	-	8c0bd19283bb	-	38161b27415d	-	-	2026-11-24	xproof
 604d2a0e-224c-4a7b-aabf-033e7dcee3f2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:chillbringer:cast:s1,f:xs:XP:chillbringer:cast:s1	-	-	-	d864b561c9cb	-	8530f9232502	-	-	2026-11-24	xproof
 604d2a0e-224c-4a7b-aabf-033e7dcee3f2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:chillbringer:cast:s1,f:xs:XP:chillbringer:cast:s1	-	-	-	d864b561c9cb	-	8530f9232502	-	-	2026-11-24	xproof
 604ef241-df8f-48f8-8680-f9ed77ff30ae	cast	cast-resolve	agreed	-	FX	scen	2	0	Quick-Draw Katana/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -182,8 +182,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60e3ccf2-63f5-4435-a752-1d82fefb55d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lagonna-band-elder:f0t0:s1,f:xs:XP:lagonna-band-elder:f0t0:s1	-	-	-	d864b561c9cb	-	266db7c56eb1	-	-	2026-11-24	xproof
 60e3ccf2-63f5-4435-a752-1d82fefb55d7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lagonna-band-elder:f0t0:s1,f:xs:XP:lagonna-band-elder:f0t0:s1	-	-	-	d864b561c9cb	-	266db7c56eb1	-	-	2026-11-24	xproof
 60e6a140-c7fb-4fbe-bd74-6bbb925080e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-60e7130a-d321-4e50-93a4-999013c76054	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-60e7130a-d321-4e50-93a4-999013c76054	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+60e7130a-d321-4e50-93a4-999013c76054	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gut-true-soul-zealot:cast:s1,f:xs:XP:gut-true-soul-zealot:cast:s1	-	-	-	8c0bd19283bb	-	2fbd045c0585	-	-	2026-11-24	xproof
+60e7130a-d321-4e50-93a4-999013c76054	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 60e7517f-7cc5-4073-9f2c-3e6acb891128	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60ead8a5-11fb-4eeb-99bf-0caaf1de1731	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:psychic-pickpocket:cast:s1,f:xs:XP:psychic-pickpocket:cast:s1	-	-	-	d864b561c9cb	-	039519fe6a2a	-	-	2026-11-24	xproof
 60ead8a5-11fb-4eeb-99bf-0caaf1de1731	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:psychic-pickpocket:cast:s1,f:xs:XP:psychic-pickpocket:cast:s1	-	-	-	d864b561c9cb	-	039519fe6a2a	-	-	2026-11-24	xproof

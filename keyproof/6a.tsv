@@ -29,7 +29,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a1ad848-6fda-46dd-aad8-2f6a5c71a696	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bridled Bighorn/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6a1e0dfd-2dd1-4372-966e-e28b48ae0115	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a1e0dfd-2dd1-4372-966e-e28b48ae0115	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6a1e0dfd-2dd1-4372-966e-e28b48ae0115	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6a1e0dfd-2dd1-4372-966e-e28b48ae0115	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6a207599-188f-49fc-8932-1974fc716f0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a207599-188f-49fc-8932-1974fc716f0b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6a23963c-21dc-4d21-8d28-5abad7f859a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -41,9 +41,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a2df97a-341d-4bc4-9f5c-661b6ca78fd0	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 6a2df97a-341d-4bc4-9f5c-661b6ca78fd0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:warp-core:f0t0:s1,f:xs:XP:warp-core:f0t0:s1	-	-	-	25696bf19d5b	-	e622fc44f0ba	-	-	2026-11-24	xproof
 6a3052a1-7a0b-4364-883d-cd2abca39c06	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6a344d2e-fbd7-4ff9-9e2a-97ae69d60c66	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6a344d2e-fbd7-4ff9-9e2a-97ae69d60c66	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6a344d2e-fbd7-4ff9-9e2a-97ae69d60c66	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6a344d2e-fbd7-4ff9-9e2a-97ae69d60c66	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kangee-sky-warden:cast:s1,f:xs:XP:kangee-sky-warden:cast:s1	-	-	-	8c0bd19283bb	-	ccd20a470ad2	-	-	2026-11-24	xproof
+6a344d2e-fbd7-4ff9-9e2a-97ae69d60c66	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kangee-sky-warden:f0t0:s1,f:xs:XP:kangee-sky-warden:f0t0:s1	-	-	-	8c0bd19283bb	-	ccd20a470ad2	-	-	2026-11-24	xproof
+6a344d2e-fbd7-4ff9-9e2a-97ae69d60c66	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6a381121-9134-489c-8c7e-44be1936b0e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:apothecary-stomper:f0t0:s1,f:xs:XP:apothecary-stomper:f0t0:s1	-	-	-	9ee19e8250ce	-	aecdb149cc55	-	-	2026-11-24	xproof
 6a381121-9134-489c-8c7e-44be1936b0e2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Apothecary Stomper/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6a381121-9134-489c-8c7e-44be1936b0e2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Apothecary Stomper/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

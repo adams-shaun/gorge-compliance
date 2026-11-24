@@ -53,7 +53,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f577b46-c69d-4c75-9db5-7e10206b6b59	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Geometer's Arthropod/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f591bfb-a241-4980-9cb3-fb5af3355f6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f5bebfd-faf3-485f-b906-aa96d621d499	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f5bebfd-faf3-485f-b906-aa96d621d499	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7f5bebfd-faf3-485f-b906-aa96d621d499	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 7f5e5aa8-3f15-45c9-bfc8-1f4b98d2be38	cast	cast-resolve	agreed	-	X	scen	1	0	Scorpion's Sting/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f60549f-7a0a-4009-a51a-d3f51214be11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f60549f-7a0a-4009-a51a-d3f51214be11	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,7 +128,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fc3c2a5-2754-4237-8a37-cb3166c20c3c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trumpeting-armodon:cast:s1,f:xs:XP:trumpeting-armodon:cast:s1	-	-	-	5f2128bf97e4	-	96c495b7dfb0	-	-	2026-11-24	xproof
 7fc3c2a5-2754-4237-8a37-cb3166c20c3c	f0/a0	MustBlock	agreed	-	FX	start	2	0	x:xs:XP:trumpeting-armodon:f0a0:s1,f:xs:XP:trumpeting-armodon:f0a0:s1	-	-	-	5f2128bf97e4	-	96c495b7dfb0	-	-	2026-11-24	xproof
 7fc6a5c1-f0da-42f6-93d0-6d94467e2ac0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fc6a5c1-f0da-42f6-93d0-6d94467e2ac0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7fc6a5c1-f0da-42f6-93d0-6d94467e2ac0	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 7fc7ceb0-5846-491b-8e6e-8f9f655250f1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fc7ceb0-5846-491b-8e6e-8f9f655250f1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fc904aa-377b-4671-8308-275205f56d81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

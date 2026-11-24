@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 340e1078-5158-4199-ab43-976741780b2b	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 340ec369-1761-4134-a96d-5537b4e08703	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 340ec369-1761-4134-a96d-5537b4e08703	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-34143cfa-aa48-481c-af42-1240af174b80	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34143cfa-aa48-481c-af42-1240af174b80	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wake-the-past:cast:s1,f:xs:XP:wake-the-past:cast:s1	-	-	-	8c0bd19283bb	-	fe9438b52f4a	-	-	2026-11-24	xproof
 3415a199-05ac-4627-be97-f842eb1415a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3415a199-05ac-4627-be97-f842eb1415a3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:avenging-angel:f0t0:s1,f:xs:XP:avenging-angel:f0t0:s1	-	-	-	8c0bd19283bb	-	b35437309155	-	-	2026-11-24	xproof
 34161ec4-5d99-45e6-b43c-c8d28958660a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treasury-thrull:cast:s1,f:xs:XP:treasury-thrull:cast:s1	-	-	-	d864b561c9cb	-	3c652934d957	-	-	2026-11-24	xproof
@@ -71,9 +71,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 343833c1-19fd-4e8f-b82e-0f20903caaff	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Winter, Cursed Rider/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 343833c1-19fd-4e8f-b82e-0f20903caaff	static#0.0	static#0.0	agreed	-	X	scen	1	0	Winter, Cursed Rider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 343ecf2f-0bbc-4840-8fb3-f5f61b26e76f	cast	cast-resolve	agreed	-	X	scen	1	0	Swab Goblin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-343fd080-c2c2-4dcd-84dd-c065addbaebe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-343fd080-c2c2-4dcd-84dd-c065addbaebe	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-343fd080-c2c2-4dcd-84dd-c065addbaebe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+343fd080-c2c2-4dcd-84dd-c065addbaebe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kamahl-heart-of-krosa:cast:s1,f:xs:XP:kamahl-heart-of-krosa:cast:s1	-	-	-	8c0bd19283bb	-	a973db5659cd	-	-	2026-11-24	xproof
+343fd080-c2c2-4dcd-84dd-c065addbaebe	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:kamahl-heart-of-krosa:f0a0:s1,f:xs:XP:kamahl-heart-of-krosa:f0a0:s1	-	-	-	8c0bd19283bb	-	a973db5659cd	-	-	2026-11-24	xproof
+343fd080-c2c2-4dcd-84dd-c065addbaebe	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:kamahl-heart-of-krosa:cast:s1,f:xs:XP:kamahl-heart-of-krosa:cast:s1	-	-	-	8c0bd19283bb	-	a973db5659cd	-	-	2026-11-24	xproof
 34424168-1353-46a9-9e60-d09a344c3573	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34428f42-03ac-4795-8286-6cbea796df2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34428f42-03ac-4795-8286-6cbea796df2b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -187,7 +187,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34d5f249-df46-49d1-a692-da2348fbc51e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34d5f249-df46-49d1-a692-da2348fbc51e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hunter-of-eyeblights:f0t0:s1,f:xs:XP:hunter-of-eyeblights:f0t0:s1	-	-	-	d864b561c9cb	-	bf364c57ec62	-	-	2026-11-24	xproof
 34da0b06-565f-4964-b8bc-dd106278e086	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34da0b06-565f-4964-b8bc-dd106278e086	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34da0b06-565f-4964-b8bc-dd106278e086	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 34dd789c-4d80-4ccc-a4f7-2e5388a9689d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angelic-arbiter:cast:s1,f:xs:XP:angelic-arbiter:cast:s1	-	-	-	d864b561c9cb	-	fdebc6dd26ea	-	-	2026-11-24	xproof
 34e05dc1-35af-402d-96ae-e249b3738493	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34e05dc1-35af-402d-96ae-e249b3738493	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

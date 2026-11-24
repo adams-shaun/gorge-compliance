@@ -6,8 +6,8 @@ bd0031c3-ff88-4bc5-82a0-2187c60a7d33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bd004c9d-771e-4e63-a97d-a2259c096af8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd004c9d-771e-4e63-a97d-a2259c096af8	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd024849-3005-4509-ad83-65a9bcf956ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd024849-3005-4509-ad83-65a9bcf956ac	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd024849-3005-4509-ad83-65a9bcf956ac	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd024849-3005-4509-ad83-65a9bcf956ac	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:primaris-chaplain:f0t0:s1,f:xs:XP:primaris-chaplain:f0t0:s1	-	-	-	8c0bd19283bb	-	c9a606999d7b	-	-	2026-11-24	xproof
+bd024849-3005-4509-ad83-65a9bcf956ac	f0/t1	Attacks/Battle cry	agreed	-	FX	start	4	0	x:xs:XP:primaris-chaplain:f0t0:s1,f:xs:XP:primaris-chaplain:f0t0:s1	-	-	-	8c0bd19283bb	-	c9a606999d7b	-	-	2026-11-24	xproof
 bd0a7a86-a567-4145-b1d8-e0b72091db84	cast	cast-resolve	agreed	-	FX	scen	2	0	Weapons Vendor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd0a7a86-a567-4145-b1d8-e0b72091db84	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd0a7a86-a567-4145-b1d8-e0b72091db84	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Weapons Vendor/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -25,9 +25,9 @@ bd13392e-e72a-4dbb-ba9d-68f68e47e30e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:law
 bd13392e-e72a-4dbb-ba9d-68f68e47e30e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd16434d-55ea-4c5a-a9ef-752971a4af16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd1c9b5f-3b70-457c-8dd8-2420ce1c0d7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd1ccc6f-d281-413e-889e-1e022c3f2a99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd1ccc6f-d281-413e-889e-1e022c3f2a99	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd1ccc6f-d281-413e-889e-1e022c3f2a99	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd1ccc6f-d281-413e-889e-1e022c3f2a99	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:misfortune-teller:f0t0:s1,f:xs:XP:misfortune-teller:f0t0:s1	-	-	-	8c0bd19283bb	-	adca42a7e5d9	-	-	2026-11-24	xproof
+bd1ccc6f-d281-413e-889e-1e022c3f2a99	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:misfortune-teller:f0t0:s1,f:xs:XP:misfortune-teller:f0t0:s1	-	-	-	8c0bd19283bb	-	adca42a7e5d9	-	-	2026-11-24	xproof
+bd1ccc6f-d281-413e-889e-1e022c3f2a99	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 bd1e93da-7524-4bdd-9738-accd76bda7f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sarcomancy:f0t0:s1,f:xs:XP:sarcomancy:f0t0:s1	-	-	-	8c0bd19283bb	-	0762bb9a97b0	-	-	2026-11-24	xproof
 bd1e93da-7524-4bdd-9738-accd76bda7f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sarcomancy:f0t0:s1,f:xs:XP:sarcomancy:f0t0:s1	-	-	-	8c0bd19283bb	-	0762bb9a97b0	-	-	2026-11-24	xproof
 bd1e93da-7524-4bdd-9738-accd76bda7f7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

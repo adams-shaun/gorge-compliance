@@ -55,7 +55,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a364879-31bd-4760-833d-165cde1e96c6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Yellowjacket, Heartless Marauder/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a364879-31bd-4760-833d-165cde1e96c6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Yellowjacket, Heartless Marauder/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a364b66-95df-480b-a733-e90f6d5c4d2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a364b66-95df-480b-a733-e90f6d5c4d2b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0a364b66-95df-480b-a733-e90f6d5c4d2b	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0a41221a-0cce-4aae-989a-24b70acca8db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a41221a-0cce-4aae-989a-24b70acca8db	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a427652-9745-4802-8c8f-5ae29a29b496	cast	cast-resolve	agreed	-	FX	scen	2	0	Champion of Dusan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -105,8 +105,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a7d0d1f-a5ac-4db9-860c-9fcbe3fd9e71	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a7d0d1f-a5ac-4db9-860c-9fcbe3fd9e71	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a7d6489-b239-4ce8-aea3-7b5d0e436f70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a836332-5905-4afa-a442-47d0bcf8acea	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a836332-5905-4afa-a442-47d0bcf8acea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0a836332-5905-4afa-a442-47d0bcf8acea	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:timin-youthful-geist:cast:s1,f:xs:XP:timin-youthful-geist:cast:s1	-	-	-	8c0bd19283bb	-	4640626fcddb	-	-	2026-11-24	xproof
+0a836332-5905-4afa-a442-47d0bcf8acea	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0a836332-5905-4afa-a442-47d0bcf8acea	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a8511b9-ed7d-4e33-9c2f-96b9a4c535e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a85402a-e3be-4ebb-8001-9d9a20dde7e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

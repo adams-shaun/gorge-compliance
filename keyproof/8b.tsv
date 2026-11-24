@@ -67,8 +67,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b3726f1-20b8-42ec-8f9b-b361515c3f05	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Restless Fortress/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b3726f1-20b8-42ec-8f9b-b361515c3f05	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Restless Fortress/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b3726f1-20b8-42ec-8f9b-b361515c3f05	land	play-land	agreed	-	X	scen	1	0	Restless Fortress/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8b388331-eaa7-41aa-99de-4451e51cb221	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b388331-eaa7-41aa-99de-4451e51cb221	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8b388331-eaa7-41aa-99de-4451e51cb221	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:merchant-raiders:f0t0:s1,f:xs:XP:merchant-raiders:f0t0:s1	-	-	-	8c0bd19283bb	-	8d592f8ca497	-	-	2026-11-24	xproof
+8b388331-eaa7-41aa-99de-4451e51cb221	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:merchant-raiders:f0t0:s1,f:xs:XP:merchant-raiders:f0t0:s1	-	-	-	8c0bd19283bb	-	8d592f8ca497	-	-	2026-11-24	xproof
 8b391f24-992f-4cc0-ac4d-31456983fc03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b3c4a6c-44ac-4718-ac1e-9d503523e89d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shinewend:cast:s1,f:xs:XP:shinewend:cast:s1	-	-	-	d864b561c9cb	-	ac47acf7cd30	-	-	2026-11-24	xproof
 8b3c4a6c-44ac-4718-ac1e-9d503523e89d	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -195,7 +195,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8bd6dea2-2fdd-482f-9fe8-6f3eeed13872	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bd6dea2-2fdd-482f-9fe8-6f3eeed13872	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8be11473-6edf-4f45-b541-11858655fb5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8be11473-6edf-4f45-b541-11858655fb5f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8be11473-6edf-4f45-b541-11858655fb5f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8be46af9-1b70-4da9-b16d-869c3831dc99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8be62f5c-0ab2-4869-97a2-d8a69a3fde95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8be62f5c-0ab2-4869-97a2-d8a69a3fde95	f0/a0	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

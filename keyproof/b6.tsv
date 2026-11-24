@@ -44,7 +44,7 @@ b6565da9-773c-49b1-85f5-e34f07ba84cb	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 b6578a36-c43c-4474-81bd-5711cc4f626e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b657b3df-9287-44cf-a1cd-a80ead71a553	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b657b3df-9287-44cf-a1cd-a80ead71a553	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b657b3df-9287-44cf-a1cd-a80ead71a553	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b657b3df-9287-44cf-a1cd-a80ead71a553	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:dire-mimic:f0a1:s1,f:xs:XP:dire-mimic:f0a1:s1	-	-	-	8c0bd19283bb	-	1391bc2603d3	-	-	2026-11-24	xproof
 b6597ae6-ae32-4409-8ba9-1015b6ffe2d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6597ae6-ae32-4409-8ba9-1015b6ffe2d2	f0/a0	TapOrUntap	agreed	-	FX	start	2	0	x:xs:XP:puppeteer:f0a0:s1,f:xs:XP:puppeteer:f0a0:s1	-	-	-	d864b561c9cb	-	13b501840ebb	-	-	2026-11-24	xproof
 b65f20de-52fa-4904-bbfe-7ba53ccd8ae5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,9 +139,9 @@ b6c8f2fe-b097-49af-ab59-16590dedaf32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b6cc062c-eb39-46ee-bd6d-17f1db0ac50d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6cc062c-eb39-46ee-bd6d-17f1db0ac50d	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b6cc062c-eb39-46ee-bd6d-17f1db0ac50d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6cc351e-6afd-4427-998d-e06e430cd0e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6cc351e-6afd-4427-998d-e06e430cd0e6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6cc351e-6afd-4427-998d-e06e430cd0e6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b6cc351e-6afd-4427-998d-e06e430cd0e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:circle-of-the-land-druid:f0t0:s1,f:xs:XP:circle-of-the-land-druid:f0t0:s1	-	-	-	8c0bd19283bb	-	14bf53a6190b	-	-	2026-11-24	xproof
+b6cc351e-6afd-4427-998d-e06e430cd0e6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:circle-of-the-land-druid:f0t0:s1,f:xs:XP:circle-of-the-land-druid:f0t0:s1	-	-	-	8c0bd19283bb	-	14bf53a6190b	-	-	2026-11-24	xproof
+b6cc351e-6afd-4427-998d-e06e430cd0e6	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:circle-of-the-land-druid:f0t1:s1,f:xs:XP:circle-of-the-land-druid:f0t1:s1	-	-	-	8c0bd19283bb	-	14bf53a6190b	-	-	2026-11-24	xproof
 b6cebf8d-37e1-42de-b3f1-1c174ab17ac8	cast	cast-resolve	agreed	-	X	scen	1	0	Jecht, Reluctant Guardian/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b6cebf8d-37e1-42de-b3f1-1c174ab17ac8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Jecht, Reluctant Guardian/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b6cebf8d-37e1-42de-b3f1-1c174ab17ac8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Jecht, Reluctant Guardian/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

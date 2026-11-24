@@ -50,8 +50,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1820af5c-9cc2-4b77-b4ca-86084442f087	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1820b6e9-83fd-40b9-953e-ba1a8ae69614	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sunken-hope:cast:s1,f:xs:XP:sunken-hope:cast:s1	-	-	-	25696bf19d5b	-	e5045bc0f143	-	-	2026-11-24	xproof
 1820b6e9-83fd-40b9-953e-ba1a8ae69614	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sunken-hope:cast:s1,f:xs:XP:sunken-hope:cast:s1	-	-	-	25696bf19d5b	-	e5045bc0f143	-	-	2026-11-24	xproof
-1822f924-51ba-4f81-92cc-6c5d741a33f9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1822f924-51ba-4f81-92cc-6c5d741a33f9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1822f924-51ba-4f81-92cc-6c5d741a33f9	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ravenloft-adventurer:cast:s1,f:xs:XP:ravenloft-adventurer:cast:s1	-	-	-	8c0bd19283bb	-	50fe6b0e231f	-	-	2026-11-24	xproof
+1822f924-51ba-4f81-92cc-6c5d741a33f9	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:ravenloft-adventurer:cast:s1,f:xs:XP:ravenloft-adventurer:cast:s1	-	-	-	8c0bd19283bb	-	50fe6b0e231f	-	-	2026-11-24	xproof
 1822f924-51ba-4f81-92cc-6c5d741a33f9	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18279733-5568-427c-b0a2-044bca28f688	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18279733-5568-427c-b0a2-044bca28f688	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -192,8 +192,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18ca77c9-e7d2-4afc-a72b-98772578fad7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ca77c9-e7d2-4afc-a72b-98772578fad7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 18cced8b-9836-4e11-bb4e-69a971a33a50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18cced8b-9836-4e11-bb4e-69a971a33a50	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18cced8b-9836-4e11-bb4e-69a971a33a50	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18cced8b-9836-4e11-bb4e-69a971a33a50	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fey-steed:f0t0:s1,f:xs:XP:fey-steed:f0t0:s1	-	-	-	8c0bd19283bb	-	c2785d31020f	-	-	2026-11-24	xproof
+18cced8b-9836-4e11-bb4e-69a971a33a50	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 18d16129-da25-4120-a343-64ce962abba2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18d1765b-3b60-4dda-93a6-d02a4e53f185	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-meanderer:f0t0:s1,f:xs:XP:mind-meanderer:f0t0:s1	-	-	-	25696bf19d5b	-	f19e8898c40a	-	-	2026-11-24	xproof
 18d1765b-3b60-4dda-93a6-d02a4e53f185	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mind Meanderer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

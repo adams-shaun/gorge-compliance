@@ -39,9 +39,9 @@ ca3cda24-0ecd-4edf-b1b3-54311ad58a51	cast	cast-resolve	agreed	-	FX	scen	2	0	Heli
 ca4936cf-48d4-4469-9243-8dbf8ec4cdca	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:roalesk-apex-hybrid:cast:s1,f:xs:XP:roalesk-apex-hybrid:cast:s1	-	-	-	d864b561c9cb	-	267e16600120	-	-	2026-11-24	xproof
 ca4936cf-48d4-4469-9243-8dbf8ec4cdca	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:roalesk-apex-hybrid:cast:s1,f:xs:XP:roalesk-apex-hybrid:cast:s1	-	-	-	d864b561c9cb	-	267e16600120	-	-	2026-11-24	xproof
 ca4936cf-48d4-4469-9243-8dbf8ec4cdca	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:roalesk-apex-hybrid:f0t1:s1,f:xs:XP:roalesk-apex-hybrid:f0t1:s1	-	-	-	d864b561c9cb	-	267e16600120	-	-	2026-11-24	xproof
-ca4b4bf2-ed34-444c-9088-dd1ea488ec4e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ca4b4bf2-ed34-444c-9088-dd1ea488ec4e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ca4b4bf2-ed34-444c-9088-dd1ea488ec4e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ca4b4bf2-ed34-444c-9088-dd1ea488ec4e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:curse-of-obsession:cast:s1,f:xs:XP:curse-of-obsession:cast:s1	-	-	-	8c0bd19283bb	-	821e74512ef1	-	-	2026-11-24	xproof
+ca4b4bf2-ed34-444c-9088-dd1ea488ec4e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+ca4b4bf2-ed34-444c-9088-dd1ea488ec4e	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ca4b6689-04ee-4227-9bdc-cb5a9590c745	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hedge Maze/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ca4b6689-04ee-4227-9bdc-cb5a9590c745	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hedge Maze/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ca4b6689-04ee-4227-9bdc-cb5a9590c745	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hedge Maze/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ ca868ac4-6144-402e-ae23-629628d02883	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ca868ac4-6144-402e-ae23-629628d02883	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kiln-walker:f0t0:s1,f:xs:XP:kiln-walker:f0t0:s1	-	-	-	d864b561c9cb	-	95c2dfae2f01	-	-	2026-11-24	xproof
 ca8a0e81-f885-47ee-82bb-fb25ec61bb1c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ca905672-50c2-4e19-9d08-2d3f8e3debfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ca905672-50c2-4e19-9d08-2d3f8e3debfd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ca905672-50c2-4e19-9d08-2d3f8e3debfd	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ca9d1d85-1b29-4779-9036-e4db6d330e71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ca9d1d85-1b29-4779-9036-e4db6d330e71	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 ca9dde44-fdee-4bc1-a2ea-ef171737b9e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -105,9 +105,9 @@ b574c540-9f8a-4fd4-8809-d02c9b099ddc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 b574c540-9f8a-4fd4-8809-d02c9b099ddc	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b575449b-591d-4357-92b7-55137fc7966a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b575449b-591d-4357-92b7-55137fc7966a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b575fb16-c3c3-4cad-857f-122257a4b32f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b575fb16-c3c3-4cad-857f-122257a4b32f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b575fb16-c3c3-4cad-857f-122257a4b32f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b575fb16-c3c3-4cad-857f-122257a4b32f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lord-of-change:f0t0:s1,f:xs:XP:lord-of-change:f0t0:s1	-	-	-	8c0bd19283bb	-	17dcb066f63f	-	-	2026-11-24	xproof
+b575fb16-c3c3-4cad-857f-122257a4b32f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lord-of-change:f0t0:s1,f:xs:XP:lord-of-change:f0t0:s1	-	-	-	8c0bd19283bb	-	17dcb066f63f	-	-	2026-11-24	xproof
+b575fb16-c3c3-4cad-857f-122257a4b32f	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 b57f06e4-da97-4473-9fbf-f66e9129502a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b57f06e4-da97-4473-9fbf-f66e9129502a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b580c6d8-f501-4623-843a-5bb2b638a339	cast	cast-resolve	agreed	-	X	scen	1	0	Graceful Takedown/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -206,7 +206,7 @@ b5f20a6d-8c3e-452f-9d98-4886f0fa052a	f0/a2	activate#0.2	agreed	-	FX	scen	2	0	Viv
 b5f35577-3d94-4835-bfca-3090cb0c63ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glint-sleeve-artisan:f0t0:s1,f:xs:XP:glint-sleeve-artisan:f0t0:s1	-	-	-	ea3140b6974b	-	00264252ce62	-	-	2026-11-24	xproof
 b5f35577-3d94-4835-bfca-3090cb0c63ff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5f5d6e3-e72e-40a5-a5c7-410617b6f933	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b5f5d6e3-e72e-40a5-a5c7-410617b6f933	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b5f5d6e3-e72e-40a5-a5c7-410617b6f933	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rampant-rejuvenator:f0t0:s1,f:xs:XP:rampant-rejuvenator:f0t0:s1	-	-	-	8c0bd19283bb	-	48b163b9ee04	-	-	2026-11-24	xproof
 b5f9920d-7af5-4876-8823-6efbf2b4d9b9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5fa5651-d714-44d6-867b-be0e3224b7ed	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Muraganda Raceway/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b5fa5651-d714-44d6-867b-be0e3224b7ed	land	play-land	agreed	-	X	scen	1	0	Muraganda Raceway/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

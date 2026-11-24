@@ -44,8 +44,8 @@ ba3aa1eb-722a-47d3-83be-96daddb50265	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ba3bfe0c-2bd6-469c-802c-440b7caf7fb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba3bfe0c-2bd6-469c-802c-440b7caf7fb5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba3bfe0c-2bd6-469c-802c-440b7caf7fb5	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-ba477a45-84cc-4a85-98e4-50dca3e58788	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba477a45-84cc-4a85-98e4-50dca3e58788	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ba477a45-84cc-4a85-98e4-50dca3e58788	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+ba477a45-84cc-4a85-98e4-50dca3e58788	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ba47a07e-890c-411a-9fd0-947c2f738da2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba47a07e-890c-411a-9fd0-947c2f738da2	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ba47a07e-890c-411a-9fd0-947c2f738da2	f0/t1	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:volatile-rig:f0t1:s1,f:xs:XP:volatile-rig:f0t1:s1	-	-	-	d864b561c9cb	-	4ff89bafc9bc	-	-	2026-11-24	xproof
@@ -58,8 +58,8 @@ ba48e067-f4d9-45b2-ade1-71cf8cda418c	f0/a1	NULL	owed	refused:steps-needed:cost:S
 ba48e067-f4d9-45b2-ade1-71cf8cda418c	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ba48e067-f4d9-45b2-ade1-71cf8cda418c	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:kaito-shizuki:cast:s1	-	-	-	ea3140b6974b	-	e7b8ea8c4067	-	-	2026-11-24	xproof
 ba4d644f-1931-4fc4-aed5-681a476a5a58	cast	cast-resolve	agreed	-	X	scen	1	0	Cease/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ba5055ce-6809-47a4-bee6-fb97a5b60f8a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba5055ce-6809-47a4-bee6-fb97a5b60f8a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ba5055ce-6809-47a4-bee6-fb97a5b60f8a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:research-thief:cast:s1,f:xs:XP:research-thief:cast:s1	-	-	-	8c0bd19283bb	-	1b4ef58ab2d1	-	-	2026-11-24	xproof
+ba5055ce-6809-47a4-bee6-fb97a5b60f8a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ba557e19-a409-4c02-a9ac-a8fb77762e43	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kutzil-s-flanker:f0t0:s1,f:xs:XP:kutzil-s-flanker:f0t0:s1	-	-	-	ea3140b6974b	-	6006bddaf1df	-	-	2026-11-24	xproof
 ba557e19-a409-4c02-a9ac-a8fb77762e43	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba5895e1-f12b-43c7-b47c-376588d9d2d2	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:neva-stalked-by-nightmares:f0t0:s2,f:xs:XP:neva-stalked-by-nightmares:f0t0:s2	-	-	-	e07cf3a05ba5	-	7d8f6fcece13	-	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ ba7aad10-6897-4e85-a976-1bf9282de5de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ave
 ba7aad10-6897-4e85-a976-1bf9282de5de	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aven-eternal:f0t0:s1,f:xs:XP:aven-eternal:f0t0:s1	-	-	-	d864b561c9cb	-	6d61446d1628	-	-	2026-11-24	xproof
 ba7c1062-f777-4ba9-84df-ec340a9ec514	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:patient-naturalist:f0t0:s2,f:xs:XP:patient-naturalist:f0t0:s2	-	-	-	267e485f6204	-	29d73cb730a7	-	-	2026-11-24	xproof
 ba7c1062-f777-4ba9-84df-ec340a9ec514	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:patient-naturalist:f0t0:s2,f:xs:XP:patient-naturalist:f0t0:s2	-	-	-	267e485f6204	-	29d73cb730a7	-	-	2026-11-24	xproof
-ba7f1b09-5727-484d-a502-3dcf4d618c56	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ba7f1b09-5727-484d-a502-3dcf4d618c56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slash-the-ranks:cast:s1,f:xs:XP:slash-the-ranks:cast:s1	-	-	-	8c0bd19283bb	-	60c0bd0c44d1	-	-	2026-11-24	xproof
 ba8156cd-2e78-4763-b61d-8bc85b2f3657	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mimic:cast:s1,f:xs:XP:mimic:cast:s1	-	-	-	d864b561c9cb	-	34951b9ecc31	-	-	2026-11-24	xproof
 ba8156cd-2e78-4763-b61d-8bc85b2f3657	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba8156cd-2e78-4763-b61d-8bc85b2f3657	f0/a1	Animate	agreed	-	F	start	2	0	f:xs:XP:mimic:f0a1:s1	-	-	-	d864b561c9cb	-	34951b9ecc31	-	-	2026-11-24	xproof

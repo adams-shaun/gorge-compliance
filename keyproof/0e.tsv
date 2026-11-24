@@ -147,8 +147,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ec54683-a65c-461d-862e-585b6499d6a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:burn-down-the-house:cast:s1,f:xs:XP:burn-down-the-house:cast:s1	-	-	-	d864b561c9cb	-	d1aaae21ef3e	-	-	2026-11-24	xproof
 0ec58835-de2d-4064-89a9-f92db80bc276	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ec58835-de2d-4064-89a9-f92db80bc276	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ec5a688-a884-410c-adee-ab784789d6e8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ec5a688-a884-410c-adee-ab784789d6e8	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0ec5a688-a884-410c-adee-ab784789d6e8	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:green-slime:cast:s1,f:xs:XP:green-slime:cast:s1	-	-	-	8c0bd19283bb	-	69dd7d0874e8	-	-	2026-11-24	xproof
+0ec5a688-a884-410c-adee-ab784789d6e8	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:green-slime:cast:s1,f:xs:XP:green-slime:cast:s1	-	-	-	8c0bd19283bb	-	69dd7d0874e8	-	-	2026-11-24	xproof
 0ec88e35-191b-411b-9eb0-2dfef7ae4174	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ec88e35-191b-411b-9eb0-2dfef7ae4174	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ec88e35-191b-411b-9eb0-2dfef7ae4174	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ee042ce-7cb2-47a8-9a48-6ffc07ba07b3	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 0ee088dc-c7c7-4f7f-9d1f-be3d79550d95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ee0b090-3f1e-49d6-bcad-91e0cf1d12ae	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ee0b090-3f1e-49d6-bcad-91e0cf1d12ae	f0/a1	Mana	agreed	-	FX	start	1	0	x:xs:XP:madblind-mountain:f0a0:s2,f:xs:XP:madblind-mountain:f0a0:s2	-	-	-	5f2128bf97e4	-	5bd13c3d4de3	-	-	2026-11-24	xproof
+0ee0b090-3f1e-49d6-bcad-91e0cf1d12ae	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:madblind-mountain:f0a0:s1,f:xs:XP:madblind-mountain:f0a0:s1	-	-	-	8c0bd19283bb	-	5bd13c3d4de3	-	-	2026-11-24	xproof
 0ee0b090-3f1e-49d6-bcad-91e0cf1d12ae	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ee14128-3bec-4b65-8ee4-619337d4ed45	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leatherback-baloth:cast:s1,f:xs:XP:leatherback-baloth:cast:s1	-	-	-	77494c1ce129	-	0a23c3e3b67f	-	-	2026-11-24	xproof
 0ee28549-5909-4372-8376-34010b7b6654	cast	cast-resolve	agreed	-	X	scen	1	0	Fear of Isolation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

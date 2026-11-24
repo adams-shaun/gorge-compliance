@@ -58,7 +58,7 @@ cd45a29f-73bc-435c-9d50-09a4ecaa77be	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Howls
 cd45a29f-73bc-435c-9d50-09a4ecaa77be	static#0.0	static#0.0	agreed	-	X	scen	1	0	Howlsquad Heavy/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cd45a29f-73bc-435c-9d50-09a4ecaa77be	static#0.1	static#0.1	agreed	-	X	scen	1	0	Howlsquad Heavy/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cd47eedd-57cb-460d-b339-4785f63a5475	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cd47eedd-57cb-460d-b339-4785f63a5475	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cd47eedd-57cb-460d-b339-4785f63a5475	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 cd49aa99-bf84-4edd-aecc-6dae78b73412	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mirkwood/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cd49aa99-bf84-4edd-aecc-6dae78b73412	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Mirkwood/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cd49aa99-bf84-4edd-aecc-6dae78b73412	land	play-land	agreed	-	X	scen	1	0	Mirkwood/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -125,8 +125,8 @@ cda1ac77-3986-4600-9835-b0c0063ecc2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dro
 cda1ac77-3986-4600-9835-b0c0063ecc2f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cda1ac77-3986-4600-9835-b0c0063ecc2f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cda1ac77-3986-4600-9835-b0c0063ecc2f	f0/t1	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:drossclaw:f0t1:s1,f:xs:XP:drossclaw:f0t1:s1	-	-	-	ae86f6029288	-	3d6b745e5532	-	-	2026-11-24	xproof
-cda1e3b5-ea80-4e83-b305-88993d307170	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cda1e3b5-ea80-4e83-b305-88993d307170	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cda1e3b5-ea80-4e83-b305-88993d307170	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wizards-of-thay:cast:s1,f:xs:XP:wizards-of-thay:cast:s1	-	-	-	8c0bd19283bb	-	e8241b369c51	-	-	2026-11-24	xproof
+cda1e3b5-ea80-4e83-b305-88993d307170	f0/t0	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:wizards-of-thay:f0t0:s1,f:xs:XP:wizards-of-thay:f0t0:s1	-	-	-	8c0bd19283bb	-	e8241b369c51	-	-	2026-11-24	xproof
 cda39514-86c9-483e-8d95-fd08138ce33a	cast	cast-resolve	agreed	-	X	scen	1	0	Infinite Guideline Station/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cda39514-86c9-483e-8d95-fd08138ce33a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Infinite Guideline Station/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cda786aa-1259-45e8-a834-21c7ad0259a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:picard-steadfast-captain:cast:s1,f:xs:XP:picard-steadfast-captain:cast:s1	-	-	-	8c0bd19283bb	-	804baa7d0553	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ cddbd819-4895-4712-b44b-d6b51f3d8646	combat#0.attack	combat#0.attack	agreed	-	X	
 cddbd819-4895-4712-b44b-d6b51f3d8646	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Archive Dragon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cddbd819-4895-4712-b44b-d6b51f3d8646	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:archive-dragon:cast:s2,f:xs:XP:archive-dragon:cast:s2	-	-	-	5437c1394672	-	764ec4b007bf	-	-	2026-11-24	xproof
 cddbd819-4895-4712-b44b-d6b51f3d8646	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Archive Dragon/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cddccc2a-a76e-48b3-b4dd-dfeab89e1619	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cddccc2a-a76e-48b3-b4dd-dfeab89e1619	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cosmic-intervention:cast:s1,f:xs:XP:cosmic-intervention:cast:s1	-	-	-	8c0bd19283bb	-	720aa94a5ef8	-	-	2026-11-24	xproof
 cde26d69-f3e7-4dd0-a53b-cd0ec812d717	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cde26d69-f3e7-4dd0-a53b-cd0ec812d717	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cde3e29c-31fd-4dce-a008-283bbe90bfc6	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ramses-overdark:cast:s1,f:xs:XP:ramses-overdark:cast:s1	-	-	-	fc71ca68c5ac	-	697bd4acb6c5	-	-	2026-11-24	xproof
@@ -184,8 +184,8 @@ cdea4344-24b6-4659-a830-c51d4b348af5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rad
 cdea4344-24b6-4659-a830-c51d4b348af5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:radiant-epicure:f0t0:s1,f:xs:XP:radiant-epicure:f0t0:s1	-	-	-	d864b561c9cb	-	88c5c703f0f9	-	-	2026-11-24	xproof
 cdef800d-033e-4095-964d-9b6066f9fd36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-archivist:cast:s1,f:xs:XP:phyrexian-archivist:cast:s1	-	-	-	ae86f6029288	-	fc3084cbc647	-	-	2026-11-24	xproof
 cdef800d-033e-4095-964d-9b6066f9fd36	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cdf34da6-d952-43ca-855d-fcd9d49efae6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cdf34da6-d952-43ca-855d-fcd9d49efae6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cdf34da6-d952-43ca-855d-fcd9d49efae6	cast	cast	agreed	-	FX	start	6	0	x:xs:XP:exocrine:cast:s1,f:xs:XP:exocrine:cast:s1	-	-	-	8c0bd19283bb	-	e83c4fb2f591	-	-	2026-11-24	xproof
+cdf34da6-d952-43ca-855d-fcd9d49efae6	f0/t0	ChangesZone	agreed	-	FX	start	6	0	x:xs:XP:exocrine:cast:s1,f:xs:XP:exocrine:cast:s1	-	-	-	8c0bd19283bb	-	e83c4fb2f591	-	-	2026-11-24	xproof
 cdf34da6-d952-43ca-855d-fcd9d49efae6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cdf41cf4-4e77-453d-be5b-0abbbd358934	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cdf41cf4-4e77-453d-be5b-0abbbd358934	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

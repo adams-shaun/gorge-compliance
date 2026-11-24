@@ -75,7 +75,7 @@ ee4c29c3-f790-4e5e-a0d1-d47af7b62753	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ee4c29c3-f790-4e5e-a0d1-d47af7b62753	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee51365b-9f36-44a7-8706-ae5b2f86bd29	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:possessed-barbarian:cast:s1,f:xs:XP:possessed-barbarian:cast:s1	-	-	-	fc71ca68c5ac	-	7d1d47084c20	-	-	2026-11-24	xproof
 ee565d5c-7a3a-481c-91aa-b982cf384220	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee565d5c-7a3a-481c-91aa-b982cf384220	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ee565d5c-7a3a-481c-91aa-b982cf384220	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ee579a32-a048-4335-b966-231ba731cdea	cast	cast-resolve	agreed	-	X	scen	1	0	Phyrexian Arena/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee579a32-a048-4335-b966-231ba731cdea	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Phyrexian Arena/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee57fba8-e68b-4c52-8de7-9b9873d84506	cast	cast-resolve	agreed	-	X	scen	1	0	Homesickness/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -103,8 +103,8 @@ ee712451-01de-4486-9048-fafb5aa5a584	cast	cast-resolve	agreed	-	FX	scen	2	0	Lore
 ee712451-01de-4486-9048-fafb5aa5a584	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 ee7150d1-8b38-4387-9b9c-a40180430170	cast	cast-resolve	agreed	-	FX	scen	2	0	He's Dead, Jim/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee723c7c-ec9f-4ffb-8f36-cd7637eb1fae	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee723c7c-ec9f-4ffb-8f36-cd7637eb1fae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee723c7c-ec9f-4ffb-8f36-cd7637eb1fae	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ee723c7c-ec9f-4ffb-8f36-cd7637eb1fae	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:guildless-commons:f0t0:s1,f:xs:XP:guildless-commons:f0t0:s1	-	-	-	8c0bd19283bb	-	8bb697c8e352	-	-	2026-11-24	xproof
+ee723c7c-ec9f-4ffb-8f36-cd7637eb1fae	land	land	agreed	-	FX	start	2	0	x:xs:XP:guildless-commons:f0t0:s1,f:xs:XP:guildless-commons:f0t0:s1	-	-	-	8c0bd19283bb	-	8bb697c8e352	-	-	2026-11-24	xproof
 ee771e66-72f8-480f-9920-92c68ab93c3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee771e66-72f8-480f-9920-92c68ab93c3b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee7b3fc0-6128-4bf6-b3e7-7371e6f93c4b	cast	cast-resolve	agreed	-	FX	scen	2	0	Sultai Devotee/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -213,8 +213,8 @@ eedb1527-548a-435a-a3e1-8ad7d9d6d8a9	cast	cast-resolve	agreed	-	X	scen	1	0	Intru
 eedbc164-032c-420f-ac59-bd2675ff1b69	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:stitched-assistant:cast:s1,f:xs:XP:stitched-assistant:cast:s1	-	-	-	d864b561c9cb	-	2ab03c4d1d17	-	-	2026-11-24	xproof
 eedbc164-032c-420f-ac59-bd2675ff1b69	f0/t0	Exploited	agreed	-	FX	start	4	0	x:xs:XP:stitched-assistant:cast:s1,f:xs:XP:stitched-assistant:cast:s1	-	-	-	d864b561c9cb	-	2ab03c4d1d17	-	-	2026-11-24	xproof
 eedbc164-032c-420f-ac59-bd2675ff1b69	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:stitched-assistant:cast:s1,f:xs:XP:stitched-assistant:cast:s1	-	-	-	d864b561c9cb	-	2ab03c4d1d17	-	-	2026-11-24	xproof
-eedd5a17-d0fe-4a13-8f2c-f343bfa43f92	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eedd5a17-d0fe-4a13-8f2c-f343bfa43f92	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+eedd5a17-d0fe-4a13-8f2c-f343bfa43f92	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shard-of-the-nightbringer:cast:s1,f:xs:XP:shard-of-the-nightbringer:cast:s1	-	-	-	8c0bd19283bb	-	f1b93de8ff9d	-	-	2026-11-24	xproof
+eedd5a17-d0fe-4a13-8f2c-f343bfa43f92	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shard-of-the-nightbringer:cast:s1,f:xs:XP:shard-of-the-nightbringer:cast:s1	-	-	-	8c0bd19283bb	-	f1b93de8ff9d	-	-	2026-11-24	xproof
 eee6c02b-7d6a-4445-ad27-8b03176147d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eee6c02b-7d6a-4445-ad27-8b03176147d4	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 eee6c02b-7d6a-4445-ad27-8b03176147d4	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

@@ -88,8 +88,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 256cea34-4691-4367-a789-17d15460f664	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25712827-626a-484d-bc52-f3bd6087857f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25712827-626a-484d-bc52-f3bd6087857f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25712827-626a-484d-bc52-f3bd6087857f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25712827-626a-484d-bc52-f3bd6087857f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+25712827-626a-484d-bc52-f3bd6087857f	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:crowded-crypt:f0a1:s1,f:xs:XP:crowded-crypt:f0a1:s1	-	-	-	8c0bd19283bb	-	bb3694428424	-	-	2026-11-24	xproof
+25712827-626a-484d-bc52-f3bd6087857f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2572add6-c0b1-44bd-8713-1e94e3fe69d6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pestilence-demon:cast:s1,f:xs:XP:pestilence-demon:cast:s1	-	-	-	d864b561c9cb	-	0da8d154cf69	-	-	2026-11-24	xproof
 2572add6-c0b1-44bd-8713-1e94e3fe69d6	f0/a0	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:pestilence-demon:f0a0:s1,f:xs:XP:pestilence-demon:f0a0:s1	-	-	-	d864b561c9cb	-	0da8d154cf69	-	-	2026-11-24	xproof
 25756e33-25e5-4976-8cce-a39fa2c4b007	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25794033-bd17-4056-b116-68d3acf52569	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25794033-bd17-4056-b116-68d3acf52569	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:myr-sire:f0t0:s1,f:xs:XP:myr-sire:f0t0:s1	-	-	-	d864b561c9cb	-	7d856d29eeca	-	-	2026-11-24	xproof
 2579e9e0-b00f-4a1b-8fce-15d06bb7fe5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2579e9e0-b00f-4a1b-8fce-15d06bb7fe5a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2579e9e0-b00f-4a1b-8fce-15d06bb7fe5a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 257cc8e9-55b4-4510-9d1f-5df8c1ae2061	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 257cc8e9-55b4-4510-9d1f-5df8c1ae2061	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:house-guildmage:f0a0:s1,f:xs:XP:house-guildmage:f0a0:s1	-	-	-	d864b561c9cb	-	f124f974d8e6	-	-	2026-11-24	xproof
 257cc8e9-55b4-4510-9d1f-5df8c1ae2061	f0/a1	Surveil	agreed	-	FX	start	2	0	x:xs:XP:house-guildmage:f0a1:s1,f:xs:XP:house-guildmage:f0a1:s1	-	-	-	d864b561c9cb	-	f124f974d8e6	-	-	2026-11-24	xproof
@@ -114,9 +114,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 257f81fb-b3c9-4ebe-9889-dd0ef960bba3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 258073aa-6500-46a2-a5e5-22378b14260b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 258073aa-6500-46a2-a5e5-22378b14260b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2583836d-7fd3-47b3-9b69-6814efe54a90	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2583836d-7fd3-47b3-9b69-6814efe54a90	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2583836d-7fd3-47b3-9b69-6814efe54a90	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2583836d-7fd3-47b3-9b69-6814efe54a90	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:stirring-bard:cast:s1,f:xs:XP:stirring-bard:cast:s1	-	-	-	8c0bd19283bb	-	eeb860011750	-	-	2026-11-24	xproof
+2583836d-7fd3-47b3-9b69-6814efe54a90	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:stirring-bard:f0a0:s1,f:xs:XP:stirring-bard:f0a0:s1	-	-	-	8c0bd19283bb	-	eeb860011750	-	-	2026-11-24	xproof
+2583836d-7fd3-47b3-9b69-6814efe54a90	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:stirring-bard:cast:s1,f:xs:XP:stirring-bard:cast:s1	-	-	-	8c0bd19283bb	-	eeb860011750	-	-	2026-11-24	xproof
 25855177-a416-4083-a6e4-8c9e00361d41	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25855177-a416-4083-a6e4-8c9e00361d41	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2586a59d-8501-4c22-9d69-f4bf91de7024	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

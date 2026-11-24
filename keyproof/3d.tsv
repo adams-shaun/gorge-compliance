@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Virulent Emissary/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Virulent Emissary/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3d4c7f1a-deca-4bae-90c7-68d623da400e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d4c7f1a-deca-4bae-90c7-68d623da400e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d4c7f1a-deca-4bae-90c7-68d623da400e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:purestrain-genestealer:f0t0:s1,f:xs:XP:purestrain-genestealer:f0t0:s1	-	-	-	8c0bd19283bb	-	2ef801a34a52	-	-	2026-11-24	xproof
 3d4ec57a-8541-42ed-9790-7933f96c8adf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d50266f-5a2f-4a48-ab15-87e733624fd4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d50266f-5a2f-4a48-ab15-87e733624fd4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -207,7 +207,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3df0a392-bcc1-4456-bd6e-d044bcc83a16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-3df11e5c-19aa-441c-a889-6b40eb3fdabf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3df11e5c-19aa-441c-a889-6b40eb3fdabf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:xander-s-pact:cast:s1,f:xs:XP:xander-s-pact:cast:s1	-	-	-	8c0bd19283bb	-	9d7205bc0a9c	-	-	2026-11-24	xproof
 3df49c4d-a285-4826-824e-b742b0deed3a	cast	cast-resolve	agreed	-	X	scen	1	0	Confounding Riddle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3df4eb80-e8dd-4a9e-bd8a-b4b23fb9de6c	cast	cast-resolve	agreed	-	X	scen	1	0	Psychic Whorl/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3df676fe-c4f8-41c0-9743-781090bdc547	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof

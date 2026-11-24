@@ -97,8 +97,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 126844f5-3a95-48cb-80f2-d7e4b0005350	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1269f7dc-a5d6-48e9-8887-b581ce38c204	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deal-broker:cast:s1,f:xs:XP:deal-broker:cast:s1	-	-	-	8c0bd19283bb	-	5c666f5e637c	-	-	2026-11-24	xproof
 1269f7dc-a5d6-48e9-8887-b581ce38c204	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:deal-broker:f0a0:s1,f:xs:XP:deal-broker:f0a0:s1	-	-	-	8c0bd19283bb	-	5c666f5e637c	-	-	2026-11-24	xproof
-126a5d0b-e7d6-458e-87af-47d845678014	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-126a5d0b-e7d6-458e-87af-47d845678014	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+126a5d0b-e7d6-458e-87af-47d845678014	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cyberdrive-awakener:f0t0:s1,f:xs:XP:cyberdrive-awakener:f0t0:s1	-	-	-	8c0bd19283bb	-	ce918ed3e7d2	-	-	2026-11-24	xproof
+126a5d0b-e7d6-458e-87af-47d845678014	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cyberdrive-awakener:f0t0:s1,f:xs:XP:cyberdrive-awakener:f0t0:s1	-	-	-	8c0bd19283bb	-	ce918ed3e7d2	-	-	2026-11-24	xproof
 126aab4d-df6e-4840-8cdc-49e890b1557f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 126aab4d-df6e-4840-8cdc-49e890b1557f	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 126bf98a-64d0-4de2-9bf4-f59d36ef6e25	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valakut-fireboar:cast:s1,f:xs:XP:valakut-fireboar:cast:s1	-	-	-	d864b561c9cb	-	0d9f9e208a6e	-	-	2026-11-24	xproof
@@ -127,10 +127,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 127de52b-df75-4342-95a0-20d84c5bf916	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:the-meathook-massacre:cast:s1,f:xs:XP:the-meathook-massacre:cast:s1	-	-	-	d864b561c9cb	-	e0664e64db47	-	-	2026-11-24	xproof
 127de52b-df75-4342-95a0-20d84c5bf916	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 127de52b-df75-4342-95a0-20d84c5bf916	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undercellar-myconid:f0t0:s1,f:xs:XP:undercellar-myconid:f0t0:s1	-	-	-	8c0bd19283bb	-	c3dc62873597	-	-	2026-11-24	xproof
 127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:undercellar-myconid:f0t0:s1,f:xs:XP:undercellar-myconid:f0t0:s1	-	-	-	8c0bd19283bb	-	c3dc62873597	-	-	2026-11-24	xproof
+127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:undercellar-myconid:f0t1:s1,f:xs:XP:undercellar-myconid:f0t1:s1	-	-	-	8c0bd19283bb	-	c3dc62873597	-	-	2026-11-24	xproof
 127f6985-c1f4-487f-b5ee-c84524cd6c55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 127f6985-c1f4-487f-b5ee-c84524cd6c55	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 127f6985-c1f4-487f-b5ee-c84524cd6c55	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -204,8 +204,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12cc800c-c7be-4811-8207-fd01a99cc892	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Chandra, Torch of Defiance/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12cc800c-c7be-4811-8207-fd01a99cc892	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Chandra, Torch of Defiance/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12cc800c-c7be-4811-8207-fd01a99cc892	f0/a3	activate#0.3	agreed	-	X	scen	1	0	Chandra, Torch of Defiance/activate#0.3/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-12cc97ec-5d03-4434-a31b-51e77d208466	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12cc97ec-5d03-4434-a31b-51e77d208466	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+12cc97ec-5d03-4434-a31b-51e77d208466	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grey-knight-paragon:f0t0:s1,f:xs:XP:grey-knight-paragon:f0t0:s1	-	-	-	8c0bd19283bb	-	042fe480e5f4	-	-	2026-11-24	xproof
+12cc97ec-5d03-4434-a31b-51e77d208466	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:grey-knight-paragon:f0t0:s1,f:xs:XP:grey-knight-paragon:f0t0:s1	-	-	-	8c0bd19283bb	-	042fe480e5f4	-	-	2026-11-24	xproof
 12d51534-a98d-487b-9ba9-c10861dff992	cast	cast-resolve	agreed	-	X	scen	1	0	S.H.I.E.L.D. Flying Car/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12d51534-a98d-487b-9ba9-c10861dff992	f0/a0	activate#0.0	agreed	-	X	scen	1	0	S.H.I.E.L.D. Flying Car/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12d51534-a98d-487b-9ba9-c10861dff992	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

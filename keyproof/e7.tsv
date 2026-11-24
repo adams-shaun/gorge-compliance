@@ -23,10 +23,10 @@ e71479c9-bb38-4112-bf8a-41b39a3ade51	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Pizza
 e714bcfb-b451-4b7b-ab60-4cb845c75647	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e715d33e-3d60-4623-b843-db0b906ae98b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e71863a7-0de1-4ab5-95e8-c39e6810d899	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e71863a7-0de1-4ab5-95e8-c39e6810d899	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e71863a7-0de1-4ab5-95e8-c39e6810d899	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e7194bca-0cf4-4a86-8b84-d2f9219a08b3	cast	cast-resolve	agreed	-	X	scen	1	0	Flow State/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e71e7a68-d96e-4ebb-8d4f-9c45ff8b8b66	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e71e7a68-d96e-4ebb-8d4f-9c45ff8b8b66	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e71e7a68-d96e-4ebb-8d4f-9c45ff8b8b66	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e71eca6f-388c-4750-b70e-3ee1832931f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:timberland-ancient:cast:s1,f:xs:XP:timberland-ancient:cast:s1	-	-	-	ae86f6029288	-	6a1cf6f4d0b0	-	-	2026-11-24	xproof
 e71eca6f-388c-4750-b70e-3ee1832931f0	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	2	0	x:xs:XP:timberland-ancient:cast:s1,f:xs:XP:timberland-ancient:cast:s1	-	-	-	d864b561c9cb	-	6a1cf6f4d0b0	-	-	2026-11-24	xproof
 e71f4fe8-2ecd-450b-8c41-5e38d749f59d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -65,9 +65,9 @@ e74c4001-d958-4d2b-b57d-c3601f01580c	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP
 e74c4001-d958-4d2b-b57d-c3601f01580c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e74c70be-2b70-4b04-9909-161d6f41a156	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e74efcf2-d77f-4fb5-9027-77e462ec829e	cast	cast-resolve	agreed	-	X	scen	1	0	Kraven's Last Hunt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e7504407-bb72-4baf-be4a-8152e4198e2b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e7504407-bb72-4baf-be4a-8152e4198e2b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e7504407-bb72-4baf-be4a-8152e4198e2b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e7504407-bb72-4baf-be4a-8152e4198e2b	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+e7504407-bb72-4baf-be4a-8152e4198e2b	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+e7504407-bb72-4baf-be4a-8152e4198e2b	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e753f50d-64ed-4822-a301-57659ee378b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakshasa-s-secret:cast:s1,f:xs:XP:rakshasa-s-secret:cast:s1	-	-	-	d864b561c9cb	-	d14427367c96	-	-	2026-11-24	xproof
 e7564d66-767c-4cd9-a5f0-0f2488a4a74b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heliod-s-intervention:cast:s1,f:xs:XP:heliod-s-intervention:cast:s1	-	-	-	ae86f6029288	-	8683497e4d58	-	-	2026-11-24	xproof
 e7572317-6bec-4fb0-81ac-76aec04f14ad	cast	cast-resolve	agreed	-	X	scen	1	0	Shopkeeper's Bane/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ e77e8768-3ea8-44f9-aba6-1e023e006946	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 e7819a6d-a518-4400-8e30-2a528878fd8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e7871b4d-a408-4377-beee-6b1d3c7dd57d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:winds-of-qal-sisma:cast:s1,f:xs:XP:winds-of-qal-sisma:cast:s1	-	-	-	d864b561c9cb	-	c3fbf23f7770	-	-	2026-11-24	xproof
 e787ec12-ba0f-4a85-af6b-422423c90155	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e787ec12-ba0f-4a85-af6b-422423c90155	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e787ec12-ba0f-4a85-af6b-422423c90155	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e788e9dd-449d-495b-adad-6d49e408b003	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e78fd8f6-eca9-4107-aee7-a65689cee2f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e78fd8f6-eca9-4107-aee7-a65689cee2f4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -212,8 +212,8 @@ e7e69583-8326-417e-8a9a-6b917c8ba4b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e7e69583-8326-417e-8a9a-6b917c8ba4b6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e7eaffd5-bdaf-4f72-9c88-8196b3411894	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e7eaffd5-bdaf-4f72-9c88-8196b3411894	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e7eb7ac8-08ab-419b-8508-987afd0bb93b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e7eb7ac8-08ab-419b-8508-987afd0bb93b	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e7eb7ac8-08ab-419b-8508-987afd0bb93b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cunning-rhetoric:cast:s1,f:xs:XP:cunning-rhetoric:cast:s1	-	-	-	8c0bd19283bb	-	c3bae5f7b4c0	-	-	2026-11-24	xproof
+e7eb7ac8-08ab-419b-8508-987afd0bb93b	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e7ed9c56-c388-4188-98e2-307d35ca3088	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e7ed9c56-c388-4188-98e2-307d35ca3088	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:steel-plume-marshal:f0t0:s1,f:xs:XP:steel-plume-marshal:f0t0:s1	-	-	-	8c0bd19283bb	-	99648570610e	-	-	2026-11-24	xproof
 e7f038af-977a-42ff-bebb-718b7490188a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

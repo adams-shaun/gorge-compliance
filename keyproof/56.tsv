@@ -139,8 +139,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56d13879-2dc5-4d84-918b-4bd1a5fc2a33	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56d71eda-4037-45fb-9e98-1725147af6fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56d71eda-4037-45fb-9e98-1725147af6fc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-56e05b17-aa1d-483d-857c-4cab4f12aa8a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-56e05b17-aa1d-483d-857c-4cab4f12aa8a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+56e05b17-aa1d-483d-857c-4cab4f12aa8a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:triplicate-titan:cast:s1,f:xs:XP:triplicate-titan:cast:s1	-	-	-	8c0bd19283bb	-	ac9cc2c784a8	-	-	2026-11-24	xproof
+56e05b17-aa1d-483d-857c-4cab4f12aa8a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:triplicate-titan:f0t0:s1,f:xs:XP:triplicate-titan:f0t0:s1	-	-	-	8c0bd19283bb	-	ac9cc2c784a8	-	-	2026-11-24	xproof
 56e2bdcf-d1d8-4c56-af3a-388cd42353e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forerunner-of-the-heralds:f0t0:s1,f:xs:XP:forerunner-of-the-heralds:f0t0:s1	-	-	-	d864b561c9cb	-	91cfdecc2ec3	-	-	2026-11-24	xproof
 56e2bdcf-d1d8-4c56-af3a-388cd42353e6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:forerunner-of-the-heralds:f0t0:s1,f:xs:XP:forerunner-of-the-heralds:f0t0:s1	-	-	-	d864b561c9cb	-	91cfdecc2ec3	-	-	2026-11-24	xproof
 56e2bdcf-d1d8-4c56-af3a-388cd42353e6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56edd306-8676-49c4-b3c3-5ff840536c3a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56f1a16a-9f41-41fb-b580-c200bca27cd6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56f1a16a-9f41-41fb-b580-c200bca27cd6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-56f3f1b4-c36a-41f3-95a1-45e9d7e74cf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sedraxis-alchemist:f0t0:s1,f:xs:XP:sedraxis-alchemist:f0t0:s1	-	-	-	ea3140b6974b	-	25f9505706c5	-	-	2026-11-24	xproof
+56f3f1b4-c36a-41f3-95a1-45e9d7e74cf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sedraxis-alchemist:f0t0:s1,f:xs:XP:sedraxis-alchemist:f0t0:s1	-	-	-	8c0bd19283bb	-	25f9505706c5	-	-	2026-11-24	xproof
 56f3f1b4-c36a-41f3-95a1-45e9d7e74cf9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56f5ed8d-ef53-4766-9ef3-1e24a10e267b	cast	cast-resolve	agreed	-	X	scen	1	0	Buried Treasure/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 56f5ed8d-ef53-4766-9ef3-1e24a10e267b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Buried Treasure/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

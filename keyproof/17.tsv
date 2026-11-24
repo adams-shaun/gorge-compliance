@@ -83,9 +83,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1759547a-52b3-4bae-817a-658a6fd047e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vhati-il-dal:cast:s1,f:xs:XP:vhati-il-dal:cast:s1	-	-	-	25696bf19d5b	-	96ee8acca929	-	-	2026-11-24	xproof
 1759547a-52b3-4bae-817a-658a6fd047e3	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 175c76c8-f36c-4948-aaa8-0208eac5f0d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-175db9f1-0188-4640-9b54-6b461c5440aa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-175db9f1-0188-4640-9b54-6b461c5440aa	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-175db9f1-0188-4640-9b54-6b461c5440aa	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+175db9f1-0188-4640-9b54-6b461c5440aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prowling-geistcatcher:cast:s1,f:xs:XP:prowling-geistcatcher:cast:s1	-	-	-	8c0bd19283bb	-	01969418c7d7	-	-	2026-11-24	xproof
+175db9f1-0188-4640-9b54-6b461c5440aa	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+175db9f1-0188-4640-9b54-6b461c5440aa	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 17661062-928c-4e33-a4f3-92ddc9d8c817	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17661062-928c-4e33-a4f3-92ddc9d8c817	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:barrenton-medic:f0a0:s1,f:xs:XP:barrenton-medic:f0a0:s1	-	-	-	8a1b1a193ec0	-	3154975c0132	-	-	2026-11-24	xproof
 17661062-928c-4e33-a4f3-92ddc9d8c817	f0/a1	Untap	agreed	-	FX	start	2	0	x:xs:XP:barrenton-medic:f0a0:s1,f:xs:XP:barrenton-medic:f0a0:s1	-	-	-	8a1b1a193ec0	-	3154975c0132	-	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17739f55-486b-46ea-8785-70cc2bd2d872	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17739f55-486b-46ea-8785-70cc2bd2d872	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 17739f55-486b-46ea-8785-70cc2bd2d872	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-1773c4e8-dc08-482a-9f26-30ef96c5b200	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1773c4e8-dc08-482a-9f26-30ef96c5b200	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inspiring-refrain:cast:s1,f:xs:XP:inspiring-refrain:cast:s1	-	-	-	8c0bd19283bb	-	5087909bf2c9	-	-	2026-11-24	xproof
 17770eeb-ecbf-4510-af2d-acececfbe146	land	play-land	agreed	-	FX	scen	2	0	Multiversal Passage/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17770eeb-ecbf-4510-af2d-acececfbe146	static#0.0	static#0.0	agreed	-	X	scen	1	0	Multiversal Passage/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17784f90-89a1-47a5-83ef-ae60dfc30bd1	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:minamo-school-at-water-s-edge:f0a1:s1,f:xs:XP:minamo-school-at-water-s-edge:f0a1:s1	-	-	-	64a08ba7d913	-	d22f30536153	-	-	2026-11-24	xproof
@@ -160,8 +160,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17b7b7e4-4ae8-495d-bf0c-d18697f250ea	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17b7b7e4-4ae8-495d-bf0c-d18697f250ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17bcd92b-1826-4a36-9048-49e5e65a12fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17bd7ef7-8b4b-4a2d-a667-c751e10e2a47	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17bd7ef7-8b4b-4a2d-a667-c751e10e2a47	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17bd7ef7-8b4b-4a2d-a667-c751e10e2a47	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bennie-bracks-zoologist:cast:s1,f:xs:XP:bennie-bracks-zoologist:cast:s1	-	-	-	8c0bd19283bb	-	832b9362525f	-	-	2026-11-24	xproof
+17bd7ef7-8b4b-4a2d-a667-c751e10e2a47	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 17bdd827-2e89-4559-939a-fc5c153189ed	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17bdd827-2e89-4559-939a-fc5c153189ed	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17be934e-1e33-4b95-a984-242fa018e280	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

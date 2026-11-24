@@ -83,8 +83,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c7e4e51-099a-4398-a4b7-e2f0ddd36429	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Astonishing Ant-Man/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c85271c-c711-49b0-a72e-9e576c33714d	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sculpting-steel:cast:s1	-	-	-	25696bf19d5b	-	a270d34d5e81	-	-	2026-11-24	xproof
 6c853b95-3d98-44fd-b05a-02d05d5eb0b8	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-6c87c261-00a8-46f2-92c8-42009a0a2faf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6c87c261-00a8-46f2-92c8-42009a0a2faf	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6c87c261-00a8-46f2-92c8-42009a0a2faf	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+6c87c261-00a8-46f2-92c8-42009a0a2faf	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6c8a8a7a-ee4f-4005-b6a2-fc418e396748	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c8bba8b-44de-4bbf-bf6a-3045e7313995	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c8bba8b-44de-4bbf-bf6a-3045e7313995	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c8f276e-4e7b-4974-ab02-9356cc0ffb2b	land	land	agreed	-	FX	start	2	0	x:xs:XP:witch-s-cottage:f0t0:s1,f:xs:XP:witch-s-cottage:f0t0:s1	-	-	-	ea3140b6974b	-	cb220bcf74d3	-	-	2026-11-24	xproof
 6c8f4d50-c8a6-4ee7-bef2-d91fb595c384	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c901ff4-15c3-468f-9a1b-4c69a7bbc31a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6c901ff4-15c3-468f-9a1b-4c69a7bbc31a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6c901ff4-15c3-468f-9a1b-4c69a7bbc31a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6c922206-6e68-4dcd-9559-88da1074f2c4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rugged Highlands/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c922206-6e68-4dcd-9559-88da1074f2c4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rugged Highlands/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c922206-6e68-4dcd-9559-88da1074f2c4	land	play-land	agreed	-	X	scen	1	0	Rugged Highlands/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

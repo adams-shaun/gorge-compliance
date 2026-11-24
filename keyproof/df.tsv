@@ -32,7 +32,7 @@ df2cc4ba-70b8-4875-8f84-9c268ab8d5f6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 df317532-7d36-40fd-938f-e972749c8792	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df317532-7d36-40fd-938f-e972749c8792	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df35bf19-4cbf-4624-925d-ceca6bff596e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-df35bf19-4cbf-4624-925d-ceca6bff596e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+df35bf19-4cbf-4624-925d-ceca6bff596e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 df366871-8ed7-4183-8b0c-414ca361a711	cast	cast-resolve	agreed	-	X	scen	1	0	Kargan Dragonrider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 df366871-8ed7-4183-8b0c-414ca361a711	static#0.0	static#0.0	agreed	-	X	scen	1	0	Kargan Dragonrider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 df3d5b86-7b75-4df9-8985-7159cde12261	cast	cast-resolve	agreed	-	X	scen	1	0	Ironheart, Clever Champion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -84,9 +84,9 @@ df6fc0b4-333b-4f6c-804c-ba6c8e29c88e	combat#0.block	combat#0.block	agreed	-	X	sc
 df6fc0b4-333b-4f6c-804c-ba6c8e29c88e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rescue Girl, First Responder/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 df702285-3577-47cc-aa1e-868921cdf6f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df702b0c-e011-497f-ae29-9876efac4a4c	cast	cast-resolve	agreed	-	FX	scen	2	0	Moonlit Meditation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-df72b5d6-6f9e-4d6b-acf6-7dec4ff35468	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-df72b5d6-6f9e-4d6b-acf6-7dec4ff35468	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-df72b5d6-6f9e-4d6b-acf6-7dec4ff35468	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+df72b5d6-6f9e-4d6b-acf6-7dec4ff35468	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bess-soul-nourisher:cast:s1,f:xs:XP:bess-soul-nourisher:cast:s1	-	-	-	8c0bd19283bb	-	2324c78b75b9	-	-	2026-11-24	xproof
+df72b5d6-6f9e-4d6b-acf6-7dec4ff35468	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+df72b5d6-6f9e-4d6b-acf6-7dec4ff35468	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bess-soul-nourisher:f0t1:s1,f:xs:XP:bess-soul-nourisher:f0t1:s1	-	-	-	8c0bd19283bb	-	2324c78b75b9	-	-	2026-11-24	xproof
 df7397b6-9a37-4012-8677-ae8e3b7c4bc3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sawblade-slinger:f0t0:s1,f:xs:XP:sawblade-slinger:f0t0:s1	-	-	-	ea3140b6974b	-	2042b61a7403	-	-	2026-11-24	xproof
 df7397b6-9a37-4012-8677-ae8e3b7c4bc3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df7500e8-76b4-49b3-a427-9a28ffa14637	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:faller-s-faithful:f0t0:s2,f:xs:XP:faller-s-faithful:f0t0:s2	-	-	-	267e485f6204	-	45fc3c321381	-	-	2026-11-24	xproof
@@ -213,8 +213,8 @@ dff3f4c7-f792-4ca3-9b0a-0738e70664d9	f0/t0	NULL	owed	refused:no-generator:trigge
 dff72513-b67a-4732-a8fc-269cbf21ae99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dff72513-b67a-4732-a8fc-269cbf21ae99	f0/t0	Attacks/Battle cry	agreed	-	FX	start	2	0	x:xs:XP:kuldotha-ringleader:f0t0:s1,f:xs:XP:kuldotha-ringleader:f0t0:s1	-	-	-	d864b561c9cb	-	d9c38b29d105	-	-	2026-11-24	xproof
 dffd5f0f-3a7b-47ed-864e-06c752bdcefc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dffd5f0f-3a7b-47ed-864e-06c752bdcefc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dffd5f0f-3a7b-47ed-864e-06c752bdcefc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dffd5f0f-3a7b-47ed-864e-06c752bdcefc	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+dffd5f0f-3a7b-47ed-864e-06c752bdcefc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:spellbinding-soprano:f0t0:s1,f:xs:XP:spellbinding-soprano:f0t0:s1	-	-	-	8c0bd19283bb	-	d2b1d482e6ef	-	-	2026-11-24	xproof
 dffde884-15bc-4985-90e2-a0888ef4cb48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dfff6f8f-b038-4619-8190-7a6918afab1e	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 dfff6f8f-b038-4619-8190-7a6918afab1e	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

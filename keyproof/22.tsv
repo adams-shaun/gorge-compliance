@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 22d82f4c-2896-477e-8d20-8fe43acd4ba2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Picklock Prankster/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 22da0659-7cd0-4277-b6d2-7d954dcd7729	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skalla-wolf:f0t0:s1,f:xs:XP:skalla-wolf:f0t0:s1	-	-	-	d864b561c9cb	-	1937af3c1a1c	-	-	2026-11-24	xproof
 22da0659-7cd0-4277-b6d2-7d954dcd7729	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skalla-wolf:f0t0:s1,f:xs:XP:skalla-wolf:f0t0:s1	-	-	-	d864b561c9cb	-	1937af3c1a1c	-	-	2026-11-24	xproof
-22e36922-a81a-4a0c-b698-51b48bd91ce6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+22e36922-a81a-4a0c-b698-51b48bd91ce6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viconia-drow-apostate:cast:s1,f:xs:XP:viconia-drow-apostate:cast:s1	-	-	-	8c0bd19283bb	-	6b1b02cb3b46	-	-	2026-11-24	xproof
 22e36922-a81a-4a0c-b698-51b48bd91ce6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22e3cf1d-3559-4ce1-954c-8dc815342979	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22e3cf1d-3559-4ce1-954c-8dc815342979	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 22f0dbbb-9d8d-42bc-8903-fc0b65e00952	static#0.0	static#0.0	agreed	-	X	scen	1	0	Marvin, Murderous Mimic/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 22f259b3-9de1-44a1-a89d-f2f1b1249d4d	cast	cast-resolve	agreed	-	X	scen	1	0	Opera Love Song/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 22f5f39d-0898-4c47-8fa8-7d97102d3229	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-22f5f39d-0898-4c47-8fa8-7d97102d3229	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+22f5f39d-0898-4c47-8fa8-7d97102d3229	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 22f6391e-2634-440f-af1b-9581d1bff818	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22f6391e-2634-440f-af1b-9581d1bff818	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22f6391e-2634-440f-af1b-9581d1bff818	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
