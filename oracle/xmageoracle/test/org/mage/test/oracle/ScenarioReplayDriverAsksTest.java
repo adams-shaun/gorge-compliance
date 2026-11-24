@@ -106,6 +106,29 @@ public final class ScenarioReplayDriverAsksTest {
      * for TestPlayer, an unscripted ask is not declared unscriptable (it stays
      * the base's strict miss), and a skip queued for a LATER target object is
      * hidden from this ask. */
+    private static void optionalMultiCandidateTarget() throws Exception {
+        Class<?>[] empty = {int.class, int.class, boolean.class};
+        check(!(Boolean) adapter("unscriptableEmptyAsk", empty, 0, 2, false),
+                "an optional ask with two candidates and no answer must not be auto-declined");
+        check(!(Boolean) adapter("unscriptableEmptyAsk", empty, 0, 2, true),
+                "an optional ask with two candidates and its own skip is the base's");
+        Class<?>[] hide = {List.class};
+        List<String> skip = new ArrayList<>(Collections.singletonList(TestPlayer.TARGET_SKIP));
+        check(((List<?>) adapter("hideAfterNextSkip", hide, skip)).isEmpty()
+                        && skip.equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
+                "an explicit skip stays at the front for this ask");
+        List<String> pick = new ArrayList<>(Collections.singletonList("Seal of Removal"));
+        check(((List<?>) adapter("hideAfterNextSkip", hide, pick)).isEmpty()
+                        && pick.equals(Collections.singletonList("Seal of Removal")),
+                "an explicit pick stays at the front for this ask");
+        List<String> laterSkip = new ArrayList<>(Arrays.asList("Seal of Removal", TestPlayer.TARGET_SKIP));
+        check(((List<?>) adapter("hideAfterNextSkip", hide, laterSkip))
+                        .equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
+                "a skip queued for a later target object is hidden from this ask");
+        check(laterSkip.equals(Collections.singletonList("Seal of Removal")),
+                "the explicit pick remains this ask's head answer");
+    }
+
     /** Wayward Guide-Beast: a mandatory non-targeting choose of a controlled land whose pick the
      * generator scripted on the TARGET queue moves to the CHOICE queue. */
     private static void mandatoryChoosePickOnTargetQueue() throws Exception {
@@ -131,29 +154,26 @@ public final class ScenarioReplayDriverAsksTest {
         choices = new ArrayList<>(Arrays.asList(TestPlayer.CHOICE_SKIP));
         check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
                 "a choice skip is this ask's own answer");
-    }
-
-    private static void optionalMultiCandidateTarget() throws Exception {
-        Class<?>[] empty = {int.class, int.class, boolean.class};
-        check(!(Boolean) adapter("unscriptableEmptyAsk", empty, 0, 2, false),
-                "an optional ask with two candidates and no answer must not be auto-declined");
-        check(!(Boolean) adapter("unscriptableEmptyAsk", empty, 0, 2, true),
-                "an optional ask with two candidates and its own skip is the base's");
-        Class<?>[] hide = {List.class};
-        List<String> skip = new ArrayList<>(Collections.singletonList(TestPlayer.TARGET_SKIP));
-        check(((List<?>) adapter("hideAfterNextSkip", hide, skip)).isEmpty()
-                        && skip.equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
-                "an explicit skip stays at the front for this ask");
-        List<String> pick = new ArrayList<>(Collections.singletonList("Seal of Removal"));
-        check(((List<?>) adapter("hideAfterNextSkip", hide, pick)).isEmpty()
-                        && pick.equals(Collections.singletonList("Seal of Removal")),
-                "an explicit pick stays at the front for this ask");
-        List<String> laterSkip = new ArrayList<>(Arrays.asList("Seal of Removal", TestPlayer.TARGET_SKIP));
-        check(((List<?>) adapter("hideAfterNextSkip", hide, laterSkip))
-                        .equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
-                "a skip queued for a later target object is hidden from this ask");
-        check(laterSkip.equals(Collections.singletonList("Seal of Removal")),
-                "the explicit pick remains this ask's head answer");
+        // The helper alone is not the fix: pin that the choose(Outcome, Target...)
+        // override calls it, after the min-0 may handling and before forcedChoose,
+        // behind the role guards (a TargetPermanent ask that is not one of the
+        // source's own targets). Dropping the call or a guard would leave every
+        // check above passing while the strict replay fails again.
+        String src = System.getProperty("scenarioReplay.source");
+        check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
+        String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
+        int override = text.indexOf("public boolean choose(Outcome outcome, mage.target.Target target, Ability source, Game game)");
+        check(override >= 0, "ScriptedChoicePlayer must override choose(Outcome, Target, Ability, Game)");
+        int forced = text.indexOf("forcedChoose(target, source, game)", override);
+        int call = text.indexOf("movePickToChoices(", override);
+        check(call >= 0 && forced >= 0 && call < forced,
+                "ScriptedChoicePlayer.choose must call movePickToChoices before forcedChoose");
+        String guard = text.substring(Math.max(override, call - 1200), call);
+        check(guard.contains("getMinNumberOfTargets() > 0")
+                        && guard.contains("instanceof mage.target.TargetPermanent")
+                        && guard.contains("source.getTargets().contains(target)")
+                        && guard.contains("source.getTargets().contains(target.getOriginalTarget())"),
+                "the move must stay behind the mandatory / TargetPermanent / not-the-source's-own-target guards");
     }
 
     /** North Wind Avatar: WishEffect asks "Put a card you own from outside the
