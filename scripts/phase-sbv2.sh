@@ -17,7 +17,7 @@
 #
 # -decks DIR is the catalog (gorge deck JSON, catalog_id = file stem); PHASE_SBV2_DECKS is the
 # default. With neither, ten decks are generated from the committed FDN-commons pool and the pinned
-# card data under the out-of-tree root (decks-<hash16>), so a host that would otherwise inject its
+# card data under the out-of-tree root (decks-<hash16>-<catalog16>), so a host that would otherwise inject its
 # own bundled decks gets only cards phase replays. PHASE_SBV2_DECKS=none serves no catalog.
 # -source-revision REV is reported as engine.source_revision.
 #
@@ -76,15 +76,19 @@ fi
 # The catalog a host that injects its own decks would otherwise be given: xclient writes four-yay's
 # bundled FDN lists and relaunches with -decks when the hello lists none, and those lists carry cards
 # phase does not replay (Tinybones, Bauble Burglar). A generated catalog from the committed pool keeps
-# every served card replayable; the generation is deterministic and cached per pin.
+# every served card replayable; the generation is deterministic and cached per pin AND per catalog
+# recipe (a pool or generator edit must not be served from a stale cache).
 if [ "$decks" = none ]; then
 	decks=
 elif [ -z "$decks" ]; then
-	decks=$root/decks-$hash16
+	catalog_key=$( { cat "$here/oracle/xengine/pools/fdn-commons.txt" "$here/scripts/phase-sbv2-decks.py"; } 2>/dev/null | sha256sum | cut -c1-16 )
+	decks=$root/decks-$hash16-$catalog_key
 	if [ ! -d "$decks" ]; then
 		pool=$here/oracle/xengine/pools/fdn-commons.txt
 		if [ -f "$pool" ] && [ -f "$data" ] && command -v python3 >/dev/null 2>&1; then
 			tmp=$decks.tmp.$$
+			# A SIGTERM/interrupt must not leave a partial `.tmp.<pid>` under the out-of-tree root.
+			trap 'rm -rf "$tmp"' EXIT INT TERM
 			if python3 "$here/scripts/phase-sbv2-decks.py" "$pool" "$data" "$tmp" 10 1>&2; then
 				# mv -T: a concurrent generator that loses the race leaves the winner's directory alone.
 				mv -T "$tmp" "$decks" 2>/dev/null || rm -rf "$tmp"
@@ -92,6 +96,7 @@ elif [ -z "$decks" ]; then
 				rm -rf "$tmp"
 				echo "phase-sbv2: no default catalog (phase-sbv2-decks.py failed); serving none" >&2
 			fi
+			trap - EXIT INT TERM
 		fi
 		[ -d "$decks" ] || decks=
 	fi

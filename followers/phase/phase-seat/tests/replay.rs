@@ -7,7 +7,7 @@
 use engine::database::card_db::CardDatabase;
 use phase_seat::game::{load_decks, PhaseBackend};
 use phase_seat::json::canonical;
-use phase_seat::server::{Backend, Outcome, Reset};
+use phase_seat::server::{Backend, CatalogDeck, Outcome, Reset};
 
 /// A fixed pseudo-random pick (xorshift) so the policy itself adds no nondeterminism.
 struct Pick(u64);
@@ -102,4 +102,77 @@ fn run() {
 fn the_same_seed_and_answers_replay_byte_for_byte() {
     // The engine's stack needs are above a test thread's default.
     std::thread::Builder::new().stack_size(64 << 20).spawn(run).expect("thread").join().expect("replay thread");
+}
+
+/// A Mascot's any-colour mana ability must not halt the game at `ChooseManaColor`, and the payment
+/// path must not loop to the decision cap. The policy prefers casting and activating the Mascot, then
+/// plays on. The assertion is the terminal outcome, which the old two-run replay test could not make:
+/// a halted or capped game replays byte-for-byte and still passes.
+#[test]
+fn a_mascot_game_reaches_a_natural_terminal() {
+    let Some(data) = std::env::var("PHASE_CARD_DATA").ok().filter(|v| !v.is_empty()) else {
+        eprintln!("replay: PHASE_CARD_DATA unset: skipped the Mascot game");
+        return;
+    };
+    std::thread::Builder::new().stack_size(64 << 20).spawn(move || {
+        let db = CardDatabase::from_export(std::path::Path::new(&data)).expect("card data");
+        let deck = |id: &str| CatalogDeck {
+            catalog_id: id.to_string(),
+            name: id.to_string(),
+            rows: vec![("Three Tree Mascot".to_string(), 4), ("Plains".to_string(), 56)],
+        };
+        let catalog = vec![deck("mascot-a"), deck("mascot-b")];
+        let mut backend = PhaseBackend::new(db, catalog, "test+test", None);
+        let r = Reset {
+            game_id: "mascot".into(),
+            decks: ["mascot-a".into(), "mascot-b".into()],
+            mulligan: "london".into(),
+            starting_seat: 0,
+            names: vec![],
+            opponent_decklist_visible: true,
+            game_secret: [7; 32],
+            max_decisions: 100_000,
+            max_steps: 100_000,
+        };
+        let mut pick = Pick(0x9e37_79b9_7f4a_7c15);
+        let mut activated = false;
+        let mut o = backend.reset(&r).expect("reset");
+        let mut last = String::new();
+        for _ in 0..100_000 {
+            last = line(&o);
+            match &o {
+                Outcome::Terminal(_) => break,
+                Outcome::Decision(sd) => {
+                    let cands = sd["candidates"].as_array().expect("candidates");
+                    let mascot_activation = cands.iter().position(|c| {
+                        let sem = &c["semantic"];
+                        sem["source"]["card_name"].as_str() == Some("Three Tree Mascot")
+                            && (sem["kind"] == "activate_ability" || sem["kind"] == "activate_mana_ability")
+                    });
+                    let mascot_cast = cands.iter().position(|c| {
+                        let sem = &c["semantic"];
+                        sem["kind"] == "cast_spell" && sem["source"]["card_name"].as_str() == Some("Three Tree Mascot")
+                    });
+                    let land = cands.iter().position(|c| c["semantic"]["kind"] == "play_land");
+                    let choice = match (activated, mascot_activation, mascot_cast, land) {
+                        (false, Some(i), _, _) => {
+                            activated = true;
+                            i
+                        }
+                        (_, _, Some(i), _) => i,
+                        (_, _, None, Some(i)) => i,
+                        _ => pick.next(cands.len()) as usize,
+                    };
+                    o = backend.choose(choice as u32);
+                }
+            }
+        }
+        eprintln!("replay: Mascot game ended after {} lines (ability offered: {activated}): {last}", last.len());
+        assert!(last.contains("\"outcome\""), "no terminal outcome: {last}");
+        assert!(!last.contains("\"outcome\":\"truncated\"") && !last.contains("max_decisions"), "the Mascot game hit the cap: {last}");
+        assert!(!last.contains("unmapped_decision"), "the game halted on an unposed mana follow-up: {last}");
+    })
+    .expect("thread")
+    .join()
+    .expect("mascot thread");
 }

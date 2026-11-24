@@ -20,21 +20,26 @@ The protocol is gorge's `docs/site/api/spellbench-v2.md`; the phase-server WebSo
 
 ## What is posed
 
-Sixteen families over 27 `WaitingFor` variants (and `GameOver` as the terminal), one `Family` each in
+Eighteen families over 30 `WaitingFor` variants (and `GameOver` as the terminal), one `Family` each in
 `waiting.rs`: priority (pass, play land, cast, activate); mulligan (keep / mulligan, and the London bottom
 as `order_pick` `mulligan_bottom`); attackers and blockers (one substep per creature); targets
 (`TargetSelection`, `TriggerTargetSelection`); optional effect (`OptionalEffectChoice`,
-`OpponentMayChoice`); optional cost; X; mana payment (`ManaPayment`, `ManaSourceSelection`: finish a
-payment the pool covers, else `activate_mana_ability` per source, or cancel); modes (`ModeChoice`,
-`AbilityModeChoice`); trigger order (`OrderTriggers`); scry and surveil (`arrange_card` then
-`order_pick`); top or bottom; and pool picks of `min..=max` cards (`DiscardToHandSize`, `DiscardChoice`,
-`RevealChoice`, `SearchChoice`, `EffectZoneChoice`, `DigChoice`, the simple `PayCost` kinds, `ChooseLegend`).
+`OpponentMayChoice`); optional cost; X; mana payment (`ManaPayment`, `ManaSourceSelection`); the
+mana-ability follow-ups (`ChooseManaColor`, `ManaAbilityManaPayment`, `PayManaAbilityMana`); modes
+(`ModeChoice`, `AbilityModeChoice`); trigger order (`OrderTriggers`); scry and surveil (`arrange_card`
+then `order_pick`); top or bottom; and pool picks of `min..=max` cards (`DiscardToHandSize`,
+`DiscardChoice`, `RevealChoice`, `SearchChoice`, `EffectZoneChoice`, `DigChoice`, the simple `PayCost`
+kinds, `ChooseLegend`).
 
 The seat declares the **manual** mana surface (no `engine_autopay`) and rewrites every contract
-cast/activation to `CastPaymentMode::Manual`, so phase never auto-taps. phase computes an auto-payment's
-cost before the target is final, so a target-dependent cost (Luminous Rebuke's {1} discount for a tapped
-target) used to fail a legal target choice as `Cannot pay mana cost`; the payment is now asked after the
-cost is final.
+cast/activation to `CastPaymentMode::Manual`, so phase never auto-taps before the target is final. The
+seat then settles the payment itself: it taps the best contract candidate (land taps first, a wanted
+colour preferred), answers a mana ability's `ChooseManaColor`/own-mana prompt, and finishes with phase's
+own confirm. This is the same choice phase's autopayer makes, just after the target is final, so a
+target-dependent cost (Luminous Rebuke's {1} discount for a tapped target) no longer fails a legal target
+choice as `Cannot pay mana cost`. The prompt is not sent to the host: a host on the native seat does not
+lower an autopay plan onto a manual wire, and its unmatched-payment fallback is V9's `optional_cost
+pay:false`, which would cancel and re-cast the spell forever.
 
 `AssignCombatDamage` is host-answered, not posed (`combat_damage_assignment: "engine_order"`): lethal to each
 blocker in phase's order, the rest to the last blocker, or to the defender under trample. Damage modes other
